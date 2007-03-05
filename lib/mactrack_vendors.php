@@ -19,5 +19,6 @@ include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_cabletron.ph
 include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_cisco.php");
 include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_norbay.php");
 include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_hp.php");
+include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_foundry.php");
 
 ?>
