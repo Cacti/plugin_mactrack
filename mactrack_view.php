@@ -107,11 +107,13 @@ function form_actions() {
 
 				if ($mac_found) {
 					api_mactrack_revoke_mac_addresses($selected_items[$i], $i, $_POST["title_format"]);
-				}else{					$errors .= ", $selected_items[$i]";
+				}else{
+					$errors .= ", $selected_items[$i]";
 				}
 			}
 
-			if ($errors) {				$_SESSION["sess_messages"] = "The following MAC Addresses Could not be revoked because they are members of Group Authorizations" . $errors;
+			if ($errors) {
+				$_SESSION["sess_messages"] = "The following MAC Addresses Could not be revoked because they are members of Group Authorizations" . $errors;
 			}
 		}
 
@@ -166,7 +168,8 @@ function form_actions() {
 	if (!isset($mac_address_array)) {
 		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You must select at least one MAC Address.</span></td></tr>\n";
 		$save_html = "";
-	}else if (!mactrack_check_user_realm(22)) {		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You are not permitted to change Mac Authorizations.</span></td></tr>\n";
+	}else if (!mactrack_check_user_realm(22)) {
+		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You are not permitted to change Mac Authorizations.</span></td></tr>\n";
 		$save_html = "";
 	}else{
 		$save_html = "<input type='image' src='" . $config['url_path'] . "images/button_yes.gif' alt='Save' align='absmiddle'>";
@@ -188,7 +191,8 @@ function form_actions() {
 	include_once("./include/bottom_footer.php");
 }
 
-function api_mactrack_authorize_mac_addresses($mac_address){	db_execute("UPDATE mac_track_ports SET authorized='1' WHERE mac_address='$mac_address'");
+function api_mactrack_authorize_mac_addresses($mac_address){
+	db_execute("UPDATE mac_track_ports SET authorized='1' WHERE mac_address='$mac_address'");
 	db_execute("REPLACE INTO mac_track_macauth SET mac_address='$mac_address', description='Added from MacView', added_by='" . $_SESSION["sess_user_id"] . "'");
 }
 
@@ -1559,17 +1563,18 @@ function mactrack_view_macs() {
 	}else{
 		/* if any of the settings changed, reset the page number */
 		$changed = 0;
-		$changed += mactrack_check_changed("m_rowstoshow", "sess_mactrack_view_mac_rowstoshow");
-		$changed += mactrack_check_changed("m_filter", "sess_mactrack_view_mac_filter");
-		$changed += mactrack_check_changed("m_mac_filter_type_id", "sess_mactrack_view_mac_mac_filter_type_id");
-		$changed += mactrack_check_changed("m_mac_filter", "sess_mactrack_view_mac_mac_filter");
-		$changed += mactrack_check_changed("m_ip_filter_type_id", "sess_mactrack_view_mac_ip_filter_type_id");
-		$changed += mactrack_check_changed("m_ip_filter", "sess_mactrack_view_mac_ip_filter");
-		$changed += mactrack_check_changed("m_rows_selector", "sess_mactrack_view_mac_rows_selector");
-		$changed += mactrack_check_changed("m_site_id", "sess_mactrack_view_mac_site_id");
-		$changed += mactrack_check_changed("m_vlan_id", "sess_mactrack_view_mac_vlan_id");
-		$changed += mactrack_check_changed("m_authorized", "sess_mactrack_view_mac_authorized");
-		$changed += mactrack_check_changed("m_device_id", "sess_mactrack_view_mac_device_id");
+		$changed += mactrack_check_changed("m_rowstoshow",         "sess_mactrack_view_macs_rowstoshow");
+		$changed += mactrack_check_changed("m_filter",             "sess_mactrack_view_macs_filter");
+		$changed += mactrack_check_changed("m_mac_filter_type_id", "sess_mactrack_view_macs_mac_filter_type_id");
+		$changed += mactrack_check_changed("m_mac_filter",         "sess_mactrack_view_macs_mac_filter");
+		$changed += mactrack_check_changed("m_ip_filter_type_id",  "sess_mactrack_view_macs_ip_filter_type_id");
+		$changed += mactrack_check_changed("m_ip_filter",          "sess_mactrack_view_macs_ip_filter");
+		$changed += mactrack_check_changed("m_rows_selector",      "sess_mactrack_view_macs_rows_selector");
+		$changed += mactrack_check_changed("m_site_id",            "sess_mactrack_view_macs_site_id");
+		$changed += mactrack_check_changed("m_vlan_id",            "sess_mactrack_view_macs_vlan_id");
+		$changed += mactrack_check_changed("m_authorized",         "sess_mactrack_view_macs_authorized");
+		$changed += mactrack_check_changed("m_device_id",          "sess_mactrack_view_macs_device_id");
+
 		if ($changed) {
 			$_REQUEST["page"] = "1";
 			$_REQUEST["m_page"] = $_REQUEST["page"];
