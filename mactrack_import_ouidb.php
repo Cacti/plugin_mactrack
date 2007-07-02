@@ -31,6 +31,55 @@ $no_http_headers = true;
 include(dirname(__FILE__) . "/../../include/config.php");
 include(dirname(__FILE__) . "/lib/mactrack_functions.php");
 
-import_oui_database();
+/* process calling arguments */
+$parms = $_SERVER["argv"];
+array_shift($parms);
+
+$debug          = FALSE;
+$forcerun       = FALSE;
+$forcerun_maint = FALSE;
+
+foreach($parms as $parameter) {
+	@list($arg, $value) = @explode("=", $parameter);
+
+	switch ($arg) {
+	case "-f":
+		$oui_file = strtotime($value);
+		break;
+	case "-h":
+		display_help();
+		exit;
+	case "-v":
+	case "-V":
+		display_help();
+		exit;
+	case "--version":
+		display_help();
+		exit;
+	case "--help":
+		display_help();
+		exit;
+	default:
+		print "ERROR: Invalid Parameter " . $parameter . "\n\n";
+		display_help();
+		exit;
+	}
+}
+
+if (strlen($oui_file)) {
+	import_oui_database("ui", $oui_file);
+}else{	import_oui_database();
+}
+
+/*	display_help - displays the usage of the function */
+function display_help () {
+	print "Import OUI Database 1.0, Copyright 2006-2007 - Larry Adams\n\n";
+	print "usage: mactrack_import_ouidb.php [-f=ouifile] [-h] [--help] [-v] [-V] [--version]\n\n";
+	print "-f='outdbfile'   - Specify the location of the OUI dataabase file.  If your system\n";
+	print "                   does not allow native access to the IEEE via http, you can manually\n";
+	print "                   download the file, and then import it using this option.\n";
+	print "-v -V --version  - Display this help message\n";
+	print "-h --help        - display this help message\n";
+}
 
 ?>

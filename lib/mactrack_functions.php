@@ -1555,7 +1555,7 @@ function perform_mactrack_db_maint() {
 	mactrack_debug("Finished deleting old records from the main database.");
 }
 
-function import_oui_database($type = "ui") {
+function import_oui_database($type = "ui", $oui_file = "http://standards.ieee.org/regauth/oui/oui.txt") {
 	global $colors;
 
 	if ($type != "ui") {
@@ -1565,7 +1565,7 @@ function import_oui_database($type = "ui") {
 		echo "Getting OUI Database from the IEEE\n";
 	}
 
-	$oui_database = file("http://standards.ieee.org/regauth/oui/oui.txt");
+	$oui_database = file($oui_file);
 
 	if ($type != "ui") print "<tr><td>";
 
