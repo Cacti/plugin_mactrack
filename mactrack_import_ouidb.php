@@ -36,15 +36,13 @@ $parms = $_SERVER["argv"];
 array_shift($parms);
 
 $debug          = FALSE;
-$forcerun       = FALSE;
-$forcerun_maint = FALSE;
 
 foreach($parms as $parameter) {
 	@list($arg, $value) = @explode("=", $parameter);
 
 	switch ($arg) {
 	case "-f":
-		$oui_file = strtotime($value);
+		$oui_file = trim($value);
 		break;
 	case "-h":
 		display_help();
@@ -67,7 +65,10 @@ foreach($parms as $parameter) {
 }
 
 if (strlen($oui_file)) {
-	import_oui_database("ui", $oui_file);
+	if (!file_exists($oui_file)) {		echo "ERROR: OUI Database file does not exist\n";
+	}else{
+		import_oui_database("ui", $oui_file);
+	}
 }else{	import_oui_database();
 }
 
