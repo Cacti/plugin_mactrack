@@ -116,7 +116,7 @@ while (1) {
 			$dns_hostname = $unresolved_ip["ip_address"];
 			$success = TRUE;
 			if (!$primary_down) {
-				$dns_hostname = get_dns_from_ip($unresolved_ip["ip_address"], $dns_primary, $timeout);
+				$dns_hostname = mactrack_get_dns_from_ip($unresolved_ip["ip_address"], $dns_primary, $timeout);
 				if ($dns_hostname == "timed_out") {
 					$dns_hostname == $unresolved_ip["ip_address"];
 					$primary_down = TRUE;
@@ -125,7 +125,7 @@ while (1) {
 			}
 
 			if ((!$success) && (!$secondary_down)) {
-				$dns_hostname = get_dns_from_ip($unresolved_ip["ip_address"], $dns_secondary, $timeout);
+				$dns_hostname = mactrack_get_dns_from_ip($unresolved_ip["ip_address"], $dns_secondary, $timeout);
 				if ($dns_hostname == "timed_out") {
 					$dns_hostname == $unresolved_ip["ip_address"];
 					$secondary_down = TRUE;
