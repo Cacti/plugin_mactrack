@@ -462,6 +462,9 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		/* see if error's or discards have been increating */
 		if (!isset($db_interface[$ifIndex]["ifInErrors"])) {
 			$int_errors_present = FALSE;
+		}else if (!isset($ifInErrors[$ifIndex])) {			$int_errors_present = FALSE;
+		}else if (!isset($ifOutErrors[$ifIndex])) {
+			$int_errors_present = FALSE;
 		}else if (($ifInErrors[$ifIndex] <> $db_interface[$ifIndex]["ifInErrors"]) ||
 			($ifOutErrors[$ifIndex] <> $db_interface[$ifIndex]["ifOutErrors"])) {
 			$int_errors_present = TRUE;
@@ -471,6 +474,10 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 
 		if (!isset($db_interface[$ifIndex]["ifInDiscards"])) {
 			$int_errors_present = FALSE;
+		}else if (!isset($ifInDiscards[$ifIndex])) {
+			$int_discards_present = FALSE;
+		}else if (!isset($ifOutDiscards[$ifIndex])) {
+			$int_discards_present = FALSE;
 		}else if (($ifInDiscards[$ifIndex] <> $db_interface[$ifIndex]["ifInDiscards"]) ||
 			($ifOutDiscards[$ifIndex] <> $db_interface[$ifIndex]["ifOutDiscards"])) {
 			$int_discards_present = TRUE;
