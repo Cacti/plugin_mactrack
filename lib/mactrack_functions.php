@@ -410,7 +410,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["ifIndex"] = $ifIndex;
 		$ifInterfaces[$ifIndex]["ifName"] = @$ifNames[$ifIndex];
-		$ifInterfaces[$ifIndex]["ifType"] = $ifTypes[$ifIndex];
+		$ifInterfaces[$ifIndex]["ifType"] = @$ifTypes[$ifIndex];
 
 		if ($getLinkPorts) {
 			$ifInterfaces[$ifIndex]["linkPort"] = @$link_ports[$ifIndex];
