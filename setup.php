@@ -2,7 +2,7 @@
 
 function mactrack_version () {
 	return array( 	'name' 		=> 'mactrack',
-			'version' 	=> '1.0',
+			'version' 	=> '1.1',
 			'longname'	=> 'Device Tracking',
 			'author'	=> 'Larry Adams (TheWitness)',
 			'homepage'	=> 'http://cacti.net',
