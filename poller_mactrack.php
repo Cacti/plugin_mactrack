@@ -32,7 +32,11 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 }
 
 /* Start Initialization Section */
-include("./include/config.php");
+if (file_exists("./include/global.php")) {
+	include("./include/global.php");
+} else {
+	include("./include/config.php");
+}
 include_once($config["base_path"] . "/lib/poller.php");
 include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_functions.php");
 

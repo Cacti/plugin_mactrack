@@ -19,7 +19,11 @@ $guest_account = true;
 
 chdir('../../');
 include("./include/auth.php");
-include_once($config['base_path'] . "/include/config_arrays.php");
+if (file_exists($config['base_path'] . "/include/global_arrays.php")) {
+	include($config['base_path'] . "/include/global_arrays.php");
+} else {
+	include($config['base_path'] . "/include/config_arrays.php");
+}
 include_once($config['base_path'] . "/plugins/mactrack/lib/mactrack_functions.php");
 
 define("MAX_DISPLAY_PAGES", 21);

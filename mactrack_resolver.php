@@ -29,7 +29,11 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 	chdir('../../');
 }
 
-include("./include/config.php");
+if (file_exists("./include/global.php")) {
+	include("./include/global.php");
+} else {
+	include("./include/config.php");
+}
 include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_functions.php");
 
 /* Let the scanner run for no more that 25 minutes */

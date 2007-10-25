@@ -27,8 +27,11 @@ if (!isset($_SERVER["argv"][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($
 }
 
 $no_http_headers = true;
-
-include(dirname(__FILE__) . "/../../include/config.php");
+if (file_exists(dirname(__FILE__) . "/../../include/global.php")) {
+	include(dirname(__FILE__) . "/../../include/global.php");
+} else {
+	include(dirname(__FILE__) . "/../../include/config.php");
+}
 include(dirname(__FILE__) . "/lib/mactrack_functions.php");
 
 /* process calling arguments */
