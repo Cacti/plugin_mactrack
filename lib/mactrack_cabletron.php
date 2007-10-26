@@ -37,7 +37,7 @@ function get_cabletron_switch_ports($site, &$device, $lowPort, $highPort) {
 
 	$securefast_marker = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 							".1.3.6.1.4.1.52.4.2.4.2.1.1.1.1.1.1.1", $device["snmp_version"],
-							"", "", $device["snmp_port"], $device["snmp_timeout"]);
+							"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 	mactrack_debug("Cabletron securefast marker obtained");
 
 	if (empty($securefast_marker)) {
@@ -145,7 +145,7 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 function get_repeater_snmp_readstring(&$device) {
 	$active_ports = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 							".1.3.6.1.4.1.52.4.1.1.1.4.1.1.4.0", $device["snmp_version"],
-							"", "", $device["snmp_port"], $device["snmp_timeout"]);
+							"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 	if (strlen($active_ports) > 0) {
 		mactrack_debug("Repeater readstring is: " . $device["snmp_readstring"]);
@@ -157,7 +157,7 @@ function get_repeater_snmp_readstring(&$device) {
 		foreach($read_strings as $snmp_readstring) {
 			$active_ports = @cacti_snmp_get($device["hostname"], $snmp_readstring,
 								".1.3.6.1.4.1.52.4.1.1.1.4.1.1.4.0", $device["snmp_version"],
-								"", "", $device["snmp_port"], $device["snmp_timeout"]);
+								"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 			if (strlen($active_ports) > 0) {
 				mactrack_debug("Repeater readstring is: " . $snmp_readstring);
@@ -177,11 +177,11 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 	if (strlen($snmp_readstring) > 0) {
 		$ports_active = @cacti_snmp_get($device["hostname"], $snmp_readstring,
 								".1.3.6.1.4.1.52.4.1.1.1.4.1.1.5.0", $device["snmp_version"],
-								"", "", $device["snmp_port"], $device["snmp_timeout"]) - 1;
+								"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]) - 1;
 
 		$ports_total = @cacti_snmp_get($device["hostname"], $snmp_readstring,
 								".1.3.6.1.4.1.52.4.1.1.1.4.1.1.4.0", $device["snmp_version"],
-								"", "", $device["snmp_port"], $device["snmp_timeout"]) - 1;
+								"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]) - 1;
 
 		/* get the ignore ports list */
 		$ignore_ports = port_list_to_array($device["ignorePorts"]);
@@ -261,7 +261,7 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 				$OID = ".1.3.6.1.4.1.52.4.1.1.1.4.1.5.2.1.1." . $port_key["key"];
 
 				$mac_address = @cacti_snmp_get($device["hostname"], $snmp_readstring,
-								$OID, $device["snmp_version"], "", "", $device["snmp_port"], $device["snmp_timeout"]);
+								$OID, $device["snmp_version"], "", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 				$new_port_key_array[$i]["mac_address"] = xform_mac_address($mac_address);
 

@@ -804,14 +804,14 @@ function mactrack_device_edit() {
 						snmp_set_oid_numeric_print(TRUE);
 					}
 
-					$snmp_system = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.1.0", $device["snmp_version"], "", "", $device["snmp_port"], $device["snmp_timeout"], SNMP_WEBUI);
+					$snmp_system = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.1.0", $device["snmp_version"], "", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"], SNMP_WEBUI);
 
 					if ($snmp_system == "") {
 						print "<span style='color: #ff0000; font-weight: bold;'>SNMP error</span>\n";
 					}else{
-						$snmp_uptime = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.3.0", $device["snmp_version"], "", "", $device["snmp_port"], $device["snmp_timeout"], SNMP_WEBUI);
-						$snmp_hostname = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.5.0", $device["snmp_version"], "", "", $device["snmp_port"], $device["snmp_timeout"], SNMP_WEBUI);
-						$snmp_objid = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.2.0", $device["snmp_version"], "", "", $device["snmp_port"], $device["snmp_timeout"], SNMP_WEBUI);
+						$snmp_uptime = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.3.0", $device["snmp_version"], "", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"], SNMP_WEBUI);
+						$snmp_hostname = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.5.0", $device["snmp_version"], "", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"], SNMP_WEBUI);
+						$snmp_objid = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.2.0", $device["snmp_version"], "", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"], SNMP_WEBUI);
 
 						$snmp_objid = str_replace("enterprises", ".1.3.6.1.4.1", $snmp_objid);
 						$snmp_objid = str_replace("OID: ", "", $snmp_objid);

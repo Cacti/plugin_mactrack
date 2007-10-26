@@ -113,7 +113,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 				$snmp_readstring = $device["snmp_readstring"] . "@" . $vlan_number;
 				$active_vlan_ports = cacti_snmp_get($device["hostname"], $snmp_readstring,
 										".1.3.6.1.2.1.17.1.2.0", $device["snmp_version"],
-										"", "", $device["snmp_port"], $device["snmp_timeout"]);
+										"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 				if ((!is_numeric($active_vlan_ports)) || ($active_vlan_ports) < 0) {
 					$active_vlan_ports = 0;
@@ -299,7 +299,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 				$snmp_readstring = $device["snmp_readstring"] . "@" . $vlan_number;
 				$active_vlan_ports = cacti_snmp_get($device["hostname"], $snmp_readstring,
 										".1.3.6.1.2.1.17.1.2.0", $device["snmp_version"],
-										"", "", $device["snmp_port"], $device["snmp_timeout"]);
+										"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 				if ((!is_numeric($active_vlan_ports)) || ($active_vlan_ports) < 0) {
 					$active_vlan_ports = 0;

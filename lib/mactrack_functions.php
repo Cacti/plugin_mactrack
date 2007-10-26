@@ -70,7 +70,7 @@ function valid_snmp_device(&$device) {
 	/* if the first read did not work, loop until found */
 	$snmp_sysObjectID = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 					".1.3.6.1.2.1.1.2.0", $device["snmp_version"],
-					"", "", $device["snmp_port"], $device["snmp_timeout"]);
+					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 	$snmp_sysObjectID = str_replace("enterprises", ".1.3.6.1.4.1", $snmp_sysObjectID);
 	$snmp_sysObjectID = str_replace("OID: ", "", $snmp_sysObjectID);
@@ -90,7 +90,7 @@ function valid_snmp_device(&$device) {
 			if ($snmp_readstring != $device["snmp_readstring"]) {
 				$snmp_sysObjectID = @cacti_snmp_get($device["hostname"], $snmp_readstring,
 						".1.3.6.1.2.1.1.2.0", $device["snmp_version"],
-						"", "", $device["snmp_port"], $device["snmp_timeout"]);
+						"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 				$snmp_sysObjectID = str_replace("enterprises", ".1.3.6.1.4.1", $snmp_sysObjectID);
 				$snmp_sysObjectID = str_replace("OID: ", "", $snmp_sysObjectID);
@@ -118,7 +118,7 @@ function valid_snmp_device(&$device) {
 		/* get system name */
 		$snmp_sysName = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 					".1.3.6.1.2.1.1.5.0", $device["snmp_version"],
-					"", "", $device["snmp_port"], $device["snmp_timeout"]);
+					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 		if (strlen($snmp_sysName) > 0) {
 			$snmp_sysName = trim(strtr($snmp_sysName,"\""," "));
@@ -128,7 +128,7 @@ function valid_snmp_device(&$device) {
 		/* get system location */
 		$snmp_sysLocation = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 					".1.3.6.1.2.1.1.6.0", $device["snmp_version"],
-					"", "", $device["snmp_port"], $device["snmp_timeout"]);
+					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 		if (strlen($snmp_sysLocation) > 0) {
 			$snmp_sysLocation = trim(strtr($snmp_sysLocation,"\""," "));
@@ -138,7 +138,7 @@ function valid_snmp_device(&$device) {
 		/* get system contact */
 		$snmp_sysContact = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 					".1.3.6.1.2.1.1.4.0", $device["snmp_version"],
-					"", "", $device["snmp_port"], $device["snmp_timeout"]);
+					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 		if (strlen($snmp_sysContact) > 0) {
 			$snmp_sysContact = trim(strtr($snmp_sysContact,"\""," "));
@@ -148,7 +148,7 @@ function valid_snmp_device(&$device) {
 		/* get system description */
 		$snmp_sysDescr = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 					".1.3.6.1.2.1.1.1.0", $device["snmp_version"],
-					"", "", $device["snmp_port"], $device["snmp_timeout"]);
+					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 		if (strlen($snmp_sysDescr) > 0) {
 			$snmp_sysDescr = trim(strtr($snmp_sysDescr,"\""," "));
@@ -158,7 +158,7 @@ function valid_snmp_device(&$device) {
 		/* get system uptime */
 		$snmp_sysUptime = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 					".1.3.6.1.2.1.1.3.0", $device["snmp_version"],
-					"", "", $device["snmp_port"], $device["snmp_timeout"]);
+					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 		if (strlen($snmp_sysUptime) > 0) {
 			$snmp_sysUptime = trim(strtr($snmp_sysUptime,"\""," "));
@@ -462,7 +462,8 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		/* see if error's or discards have been increating */
 		if (!isset($db_interface[$ifIndex]["ifInErrors"])) {
 			$int_errors_present = FALSE;
-		}else if (!isset($ifInErrors[$ifIndex])) {			$int_errors_present = FALSE;
+		}else if (!isset($ifInErrors[$ifIndex])) {
+			$int_errors_present = FALSE;
 		}else if (!isset($ifOutErrors[$ifIndex])) {
 			$int_errors_present = FALSE;
 		}else if (($ifInErrors[$ifIndex] <> $db_interface[$ifIndex]["ifInErrors"]) ||
@@ -820,7 +821,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 		/* get the bridge root port so we don't capture active ports on it */
 		$bridge_root_port = @cacti_snmp_get($device["hostname"], $snmp_readstring,
 					".1.3.6.1.2.1.17.2.7.0", $device["snmp_version"],
-					"", "", $device["snmp_port"], $device["snmp_timeout"]);
+					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 		/* determine user ports for this device and transfer user ports to
 		   a new array.
@@ -982,7 +983,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 		/* get the bridge root port so we don't capture active ports on it */
 		$bridge_root_port = @cacti_snmp_get($device["hostname"], $snmp_readstring,
 					".1.3.6.1.2.1.17.2.7.0", $device["snmp_version"],
-					"", "", $device["snmp_port"], $device["snmp_timeout"]);
+					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 		/* determine user ports for this device and transfer user ports to
 		   a new array.
@@ -1191,7 +1192,7 @@ function get_link_port_status(&$device) {
 
 	$walk_array = cacti_snmp_walk($device["hostname"], $device["snmp_readstring"],
 					".1.3.6.1.2.1.4.20.1.2", $device["snmp_version"], "", "",
-					$device["snmp_port"], $device["snmp_timeout"]);
+					"", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 	foreach ($walk_array as $walk_item) {
 		$return_array[$walk_item["value"]] = TRUE;
@@ -1213,7 +1214,7 @@ function xform_stripped_oid($OID, &$device, $snmp_readstring = "") {
 
 	$walk_array = cacti_snmp_walk($device["hostname"], $snmp_readstring,
 					$OID, $device["snmp_version"], "", "",
-					$device["snmp_port"], $device["snmp_timeout"]);
+					"", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 	$OID = ereg_replace("^\.", "", $OID);
 
@@ -1303,7 +1304,7 @@ function xform_standard_indexed_data($xformOID, &$device, $snmp_readstring = "")
 
 	$xformArray = cacti_snmp_walk($device["hostname"], $snmp_readstring,
 					$xformOID, $device["snmp_version"], "", "",
-					$device["snmp_port"], $device["snmp_timeout"]);
+					"", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 	$i = 0;
 	foreach($xformArray as $xformItem) {
@@ -1332,7 +1333,7 @@ function xform_dot1q_vlan_associations(&$device, $snmp_readstring = "") {
 	/* obtain vlan associations */
 	$xformArray = cacti_snmp_walk($device["hostname"], $snmp_readstring,
 					".1.3.6.1.2.1.17.7.1.2.2.1.2", $device["snmp_version"],
-					"", "", $device["snmp_port"], $device["snmp_timeout"]);
+					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 	$i = 0;
 	foreach($xformArray as $xformItem) {
@@ -1360,7 +1361,7 @@ function xform_cisco_workgroup_port_data($xformOID, &$device) {
 	/* get raw index data */
 	$xformArray = cacti_snmp_walk($device["hostname"], $device["snmp_readstring"],
 							$xformOID, $device["snmp_version"], "", "",
-							$device["snmp_port"], $device["snmp_timeout"]);
+							"", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 	$i = 0;
 	foreach($xformArray as $xformItem) {
@@ -1385,7 +1386,7 @@ function xform_indexed_data($xformOID, &$device, $xformLevel = 1) {
 	/* get raw index data */
 	$xformArray = cacti_snmp_walk($device["hostname"], $device["snmp_readstring"],
 						$xformOID, $device["snmp_version"], "", "",
-						$device["snmp_port"], $device["snmp_timeout"]);
+						"", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 	$i = 0;
 	$output_array = array();
