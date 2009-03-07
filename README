@@ -1,0 +1,61 @@
+/*******************************************************************************
+
+    Author ......... Larry Adams
+    Contact ........ larryjadams@comcast.net
+    Home Site ...... http://www.cacti.net
+    Program ........ MacTrack
+    Version ........ 2.0
+    Purpose ........ A Nice Plugin that Tracks Your Users
+
+*******************************************************************************/
+
+
+----[ Purpose
+
+    This plugin scan's network devices and locates where a specific device is
+    located.  It's a good tool for finding virus' and stolen equipment.
+
+----[ Features
+
+    Scans Devices
+    Finds Macs
+    Associates Macs with their IP's
+    Keeps a Nice Inventory of Port Counts
+    Finds Stolen/Lost PC's
+    Tells You When Someone is Connected Who Shouldn't be
+
+----[ Prerequisites
+
+    Cacti PIA 2.x
+
+----[ Installation
+
+    Simply place in the plugins directory and install like any other PIA 2.x
+    plugin.
+
+----[ Additional Help?
+
+    If you need additional help, please goto forums.cacti.net.
+
+----[ Possible Bugs?
+
+    If you figure out this problem, let me know!!!
+
+----[ Special Thanks
+
+    Jimmy Conner (cigamit) - For bringing the plugin architecture to
+    the world of Cacti and provding continual support of my development
+    efforts.
+
+----[ Future Changes
+
+    Got any ideas or complaints, please e-mail me!
+
+----[ Changelog
+    --- SVN ---
+
+    --- 1.1 ---
+    First Official Release
+
+    --- 0.1 ---
+    Initial Release!  Oh, so long ago
