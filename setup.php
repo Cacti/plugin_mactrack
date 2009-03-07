@@ -343,10 +343,10 @@ function mactrack_config_arrays () {
 	global $user_auth_realms, $user_auth_realm_filenames, $menu, $config, $rows_selector;
 	global $mactrack_poller_frequencies, $mactrack_data_retention, $refresh_interval;
 
-	$user_auth_realms[20]='View MacTrack Data';
+	$user_auth_realms[20]='Plugin -> MacTrack View Data';
 	$user_auth_realm_filenames['mactrack_view.php'] = 20;
 
-	$user_auth_realms[21]='Administate MacTrack';
+	$user_auth_realms[21]='Plugin -> MacTrack Administrate';
 	$user_auth_realm_filenames['mactrack_devices.php'] = 21;
 	$user_auth_realm_filenames['mactrack_sites.php'] = 21;
 	$user_auth_realm_filenames['mactrack_device_types.php'] = 21;
@@ -355,7 +355,7 @@ function mactrack_config_arrays () {
 	$user_auth_realm_filenames['mactrack_macauth.php'] = 21;
 	$user_auth_realm_filenames['mactrack_vendormacs.php'] = 21;
 
-	$user_auth_realms[22]='Manage Mac Authorizations';
+	$user_auth_realms[22]='Plugin -> MacTrack Manage Mac Authorizations';
 
 	$refresh_interval = array(
 		5 => "5 Seconds",
