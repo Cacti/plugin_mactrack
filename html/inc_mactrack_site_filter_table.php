@@ -30,13 +30,13 @@
 						&nbsp;<input type="checkbox" name="detail" <?php if (($_REQUEST["detail"] == "true") || ($_REQUEST["detail"] == "on")) print ' checked="true"';?> onClick="applySiteFilterChange(document.form_mactrack_sites)" alt="Device Details" border="0" align="absmiddle">Show Device Details&nbsp;
 					</td>
 					<td>
-						&nbsp;<input type="image" src="<?php echo $config['url_path']; ?>images/button_go.gif" alt="Go" border="0" align="absmiddle">
+						&nbsp;<input type="submit" name="go_x" value="Go">
 					</td>
 					<td>
-						&nbsp;<input type="image" src="<?php echo $config['url_path']; ?>images/button_clear.gif" name="clear_sites" alt="Clear" border="0" align="absmiddle">
+						&nbsp;<input type="submit" name="clear_x" value="Clear">
 					</td>
 					<td>
-						&nbsp<input type="image" src="<?php echo $config['url_path']; ?>images/button_export.gif" name="export_sites" alt="Export" border="0" align="absmiddle">
+						&nbsp<input type="submit" name="export_x" value="Export">
 					</td>
 				</tr>
 			<?php

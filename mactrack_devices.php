@@ -329,7 +329,7 @@ function form_actions() {
 		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You must select at least one device.</span></td></tr>\n";
 		$save_html = "";
 	}else{
-		$save_html = "<input type='image' src='" . $config['url_path'] . "images/button_yes.gif' alt='Save' align='absmiddle'>";
+		$save_html = "<input type='submit' value='Yes' name='save_x'>";
 	}
 
 	print "	<tr>
@@ -337,7 +337,7 @@ function form_actions() {
 				<input type='hidden' name='action' value='actions'>
 				<input type='hidden' name='selected_items' value='" . (isset($device_array) ? serialize($device_array) : '') . "'>
 				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>
-				<a href='mactrack_devices.php'><img src='" . $config['url_path'] . "images/button_no.gif' alt='Cancel' align='absmiddle' border='0'></a>
+				<input type='submit' value='No' name='cancel_x'>
 				$save_html
 			</td>
 		</tr>
@@ -426,7 +426,7 @@ function mactrack_device_import() {
 	?><form method="post" action="mactrack_devices.php?action=import" enctype="multipart/form-data"><?php
 
 	if ((isset($_SESSION["import_debug_info"])) && (is_array($_SESSION["import_debug_info"]))) {
-		html_start_box("<strong>Import Results</strong>", "98%", "aaaaaa", "3", "center", "");
+		html_start_box("<strong>Import Results</strong>", "100%", "aaaaaa", "3", "center", "");
 
 		print "<tr bgcolor='#" . $colors["form_alternate1"] . "'><td><p class='textArea'>Cacti has imported the following items:</p>";
 		foreach($_SESSION["import_debug_info"] as $import_result) {
@@ -439,7 +439,7 @@ function mactrack_device_import() {
 		kill_session_var("import_debug_info");
 	}
 
-	html_start_box("<strong>Import MacTrack Devices</strong>", "98%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Import MacTrack Devices</strong>", "100%", $colors["header"], "3", "center", "");
 
 	form_alternate_row_color($colors["form_alternate1"],$colors["form_alternate2"],0);?>
 		<td width='50%'><font class='textEditTitle'>Import Devices from Local File</font><br>
@@ -459,7 +459,7 @@ function mactrack_device_import() {
 
 	html_end_box(FALSE);
 
-	html_start_box("<strong>Required File Format Notes</strong>", "98%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Required File Format Notes</strong>", "100%", $colors["header"], "3", "center", "");
 
 	form_alternate_row_color($colors["form_alternate1"],$colors["form_alternate2"],0);?>
 		<td><strong>The file must contain a header row with the following column headings.</strong>
@@ -787,7 +787,7 @@ function mactrack_device_edit() {
 
 	if (!empty($device["device_id"])) {
 		?>
-		<table width="98%" align="center">
+		<table width="100%" align="center">
 			<tr>
 				<td class="textInfo" colspan="2">
 					<?php print $device["device_name"];?> (<?php print $device["hostname"];?>)
@@ -831,7 +831,7 @@ function mactrack_device_edit() {
 		<?php
 	}
 
-	html_start_box("<strong>Mac Track Devices</strong> $header_label", "98%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Mac Track Devices</strong> $header_label", "100%", $colors["header"], "3", "center", "");
 
 	/* preserve the devices site id between refreshes via a GET variable */
 	if (!empty($_GET["site_id"])) {
@@ -977,7 +977,7 @@ function mactrack_device() {
 	load_current_session_value("sort_column", "sess_mactrack_device_sort_column", "site_name");
 	load_current_session_value("sort_direction", "sess_mactrack_device_sort_direction", "ASC");
 
-	html_start_box("<strong>Mac Track Device Filters</strong>", "98%", $colors["header"], "3", "center", "mactrack_devices.php?action=edit&status=" . $_REQUEST["status"]);
+	html_start_box("<strong>Mac Track Device Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_devices.php?action=edit&status=" . $_REQUEST["status"]);
 
 	include("plugins/mactrack/html/inc_mactrack_device_filter_table.php");
 
@@ -993,7 +993,7 @@ function mactrack_device() {
 		RIGHT JOIN mac_track_devices ON mac_track_devices.site_id = mac_track_sites.site_id
 		$sql_where");
 
-	html_start_box("", "98%", $colors["header"], "3", "center", "");
+	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	/* generate page list */
 	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, read_config_option("num_rows_mactrack"), $total_rows, "mactrack_devices.php?filter=" . $_REQUEST["filter"] . "&site_id=" . $_REQUEST["site_id"] . "&status=" . $_REQUEST["status"]);

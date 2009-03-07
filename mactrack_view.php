@@ -176,7 +176,7 @@ function form_actions() {
 		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You are not permitted to change Mac Authorizations.</span></td></tr>\n";
 		$save_html = "";
 	}else{
-		$save_html = "<input type='image' src='" . $config['url_path'] . "images/button_yes.gif' alt='Save' align='absmiddle'>";
+		$save_html = "<input type='submit' name='save_x' value='Yes'>";
 	}
 
 	print "	<tr>
@@ -184,7 +184,7 @@ function form_actions() {
 				<input type='hidden' name='action' value='actions'>
 				<input type='hidden' name='selected_items' value='" . (isset($mac_address_array) ? serialize($mac_address_array) : '') . "'>
 				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>
-				<a href='mactrack_view.php'><img src='" . $config['url_path'] . "images/button_no.gif' alt='Cancel' align='absmiddle' border='0'></a>
+				<input type='submit' name='cancel_x' value='No'>
 				$save_html
 			</td>
 		</tr>
@@ -940,7 +940,7 @@ function applyMacFilterChange(objForm) {
 }
 -->
 </script>
-<table align="center" width="98%" cellpadding=1 cellspacing=0 border=0 bgcolor="#<?php print $colors["header"];?>">
+<table align="center" width="100%" cellpadding=1 cellspacing=0 border=0 bgcolor="#<?php print $colors["header"];?>">
 	<tr>
 		<td>
 			<table cellpadding=1 cellspacing=0 border=0 bgcolor="#<?php print $colors["form_background_dark"];?>" width="100%">
@@ -1024,7 +1024,7 @@ function mactrack_view_ip_ranges() {
 
 	mactrack_view_footer();
 
-	html_start_box("<strong>Site View IP Ranges Report</strong>", "98%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Site View IP Ranges Report</strong>", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";
 
@@ -1173,7 +1173,7 @@ function mactrack_view_sites() {
 
 	mactrack_view_footer();
 
-	html_start_box("<strong>Site View Report</strong>", "98%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Site View Report</strong>", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";
 
@@ -1387,7 +1387,7 @@ function mactrack_view_devices() {
 		RIGHT JOIN mac_track_devices ON mac_track_devices.site_id = mac_track_sites.site_id
 		$sql_where");
 
-	html_start_box("", "98%", $colors["header"], "3", "center", "");
+	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	/* generate page list */
 	$url_page_select = get_page_list($_REQUEST["d_page"], MAX_DISPLAY_PAGES, read_config_option("num_rows_mactrack"), $total_rows, "mactrack_view.php?report=devices&d_filter=" . $_REQUEST["d_filter"] . "&d_site_id=" . $_REQUEST["d_site_id"] . "&d_status=" . $_REQUEST["d_status"]);
@@ -1635,7 +1635,7 @@ function mactrack_view_macs() {
 
 	$port_results = mactrack_view_get_mac_records($sql_where, TRUE, $row_limit);
 
-	html_start_box("", "98%", $colors["header"], "3", "center", "");
+	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	if ($_REQUEST["m_rowstoshow"] == 1) {
 		$rows_query_string = "SELECT

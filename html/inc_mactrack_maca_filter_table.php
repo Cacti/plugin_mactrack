@@ -18,10 +18,10 @@
 						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
 					</td>
 					<td>
-						&nbsp;<input type="image" src="<?php echo $config['url_path']; ?>images/button_go.gif" alt="Go" border="0" align="absmiddle">
+						&nbsp;<input type="submit" name="go_x" value="Go">
 					</td>
 					<td>
-						&nbsp;<input type="image" src="<?php echo $config['url_path']; ?>images/button_clear.gif" name="clear_maca" alt="Clear" border="0" align="absmiddle">
+						&nbsp;<input type="submit" name="clear_x" value="Clear">
 					</td>
 				</tr>
 			</table>

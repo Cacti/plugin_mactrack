@@ -40,13 +40,13 @@
 						</select>
 					</td>
 					<td>
-						&nbsp;<input type="image" src="<?php echo $config['url_path']; ?>images/button_go.gif" alt="Go" border="0" align="absmiddle">
+						&nbsp;<input type="submit" name="go_x" value="Go">
 					</td>
 					<td>
-						&nbsp;<input type="image" src="<?php echo $config['url_path']; ?>images/button_clear.gif" name="clear_macs" alt="Clear" border="0" align="absmiddle">
+						&nbsp;<input type="submit" name="clear_macs_x" value="Clear">
 					</td>
 					<td>
-						&nbsp;<input type="image" src="<?php echo $config['url_path']; ?>images/button_export.gif" name="export_macs" alt="Export" border="0" align="absmiddle">
+						&nbsp;<input type="submit" name="export_macs_x" value="Export">
 					</td>
 				</tr>
 			</table>

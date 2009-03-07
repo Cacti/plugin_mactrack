@@ -141,7 +141,7 @@ function mactrack_display_run_status() {
 		$time_till_next_db_maint = $next_db_maint_time - $current_time;
 	}
 
-	html_start_box("<strong>MacTrack Process Status</strong>", "98%", $colors["header"], "1", "center", "");
+	html_start_box("<strong>MacTrack Process Status</strong>", "100%", $colors["header"], "1", "center", "");
 	?>
 	<script type="text/javascript">
 	<!--
@@ -168,7 +168,7 @@ function mactrack_display_run_status() {
 						?>
 					</td>
 					<td>
-						&nbsp;<input type="image" src="<?php print $config['url_path']; ?>images/button_refresh.gif" alt="Refresh" border="0" align="absmiddle">&nbsp;
+						&nbsp;<input type="submit" value="Refresh" name="refresh_x">&nbsp;
 					</td>
 				</tr>
 			</table>
@@ -177,7 +177,7 @@ function mactrack_display_run_status() {
 	</tr>
 	<?php
 	html_end_box(TRUE);
-	html_start_box("", "98%", $colors["header"], "1", "center", "");
+	html_start_box("", "100%", $colors["header"], "1", "center", "");
 
 	/* get information on running processes */
 	$running_processes = db_fetch_assoc("SELECT
@@ -242,7 +242,7 @@ function mactrack_display_run_status() {
 	html_end_box(TRUE);
 
 	if ($total_processes > 0) {
-		html_start_box("<strong>Running Process Summary</strong>", "98%", $colors["header"], "3", "center", "");
+		html_start_box("<strong>Running Process Summary</strong>", "100%", $colors["header"], "3", "center", "");
 		?>
 		<td><strong><?php print ($resolver_running ? "The DNS Resolver is Running" : "The DNS Resolver is Not Running");?></strong></td>
 		<?php
@@ -330,7 +330,7 @@ function mactrack_utilities_ports_clear() {
 
 		include($config['base_path'] . "/include/top_header.php");
 		mactrack_utilities();
-		html_start_box("<strong>Device Tracking Database Results</strong>", "98%", $colors["header"], "3", "center", "");
+		html_start_box("<strong>Device Tracking Database Results</strong>", "100%", $colors["header"], "3", "center", "");
 		?>
 		<td>
 			The following number of records have been removed from the database: <?php print $rows;?>
@@ -346,7 +346,7 @@ function mactrack_utilities_db_maint() {
 	$begin_rows = db_fetch_cell("SELECT COUNT(*) FROM mac_track_ports");
 	perform_mactrack_db_maint();
 	$end_rows = db_fetch_cell("SELECT COUNT(*) FROM mac_track_ports");
-	html_start_box("<strong>Device Tracking Database Results</strong>", "98%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Device Tracking Database Results</strong>", "100%", $colors["header"], "3", "center", "");
 	?>
 	<td>
 		The following number of records have been removed from the database: <?php print $begin_rows-$end_rows;?>
@@ -377,7 +377,7 @@ function mactrack_utilities_purge_scanning_funcs() {
 	}
 	}
 
-	html_start_box("<strong>Device Tracking Scanning Function Refresh Results</strong>", "98%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Device Tracking Scanning Function Refresh Results</strong>", "100%", $colors["header"], "3", "center", "");
 	?>
 	<td>
 		The Device Tracking scanning functions have been purged.  They will be recreated once you either edit a device or device type.
@@ -389,7 +389,7 @@ function mactrack_utilities_purge_scanning_funcs() {
 function mactrack_utilities() {
 	global $colors;
 
-	html_start_box("<strong>Cacti MacTrack System Utilities</strong>", "98%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Cacti MacTrack System Utilities</strong>", "100%", $colors["header"], "3", "center", "");
 
 	html_header(array("Process Status Information"), 2);
 

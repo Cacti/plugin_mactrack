@@ -262,7 +262,7 @@ function form_actions() {
 		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You must select at least one device type.</span></td></tr>\n";
 		$save_html = "";
 	}else{
-		$save_html = "<input type='image' src='" . $config['url_path'] . "images/button_yes.gif' alt='Save' align='absmiddle'>";
+		$save_html = "<input type='submit' value='Yes' name='save_x'>";
 	}
 
 	print "	<tr>
@@ -270,7 +270,7 @@ function form_actions() {
 				<input type='hidden' name='action' value='actions'>
 				<input type='hidden' name='selected_items' value='" . (isset($device_types_array) ? serialize($device_types_array) : '') . "'>
 				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>
-				<a href='mactrack_device_types.php'><img src='" . $config['url_path'] . "images/button_no.gif' alt='Cancel' align='absmiddle' border='0'></a>
+				<input type='submit' name='cancel_x' value='No'>
 				$save_html
 			</td>
 		</tr>
@@ -351,7 +351,7 @@ function mactrack_device_type_import() {
 	?><form method="post" action="mactrack_device_types.php?action=import" enctype="multipart/form-data"><?php
 
 	if ((isset($_SESSION["import_debug_info"])) && (is_array($_SESSION["import_debug_info"]))) {
-		html_start_box("<strong>Import Results</strong>", "98%", "aaaaaa", "3", "center", "");
+		html_start_box("<strong>Import Results</strong>", "100%", "aaaaaa", "3", "center", "");
 
 		print "<tr bgcolor='#" . $colors["form_alternate1"] . "'><td><p class='textArea'>Cacti has imported the following items:</p>";
 		foreach($_SESSION["import_debug_info"] as $import_result) {
@@ -364,7 +364,7 @@ function mactrack_device_type_import() {
 		kill_session_var("import_debug_info");
 	}
 
-	html_start_box("<strong>Import MacTrack Device Types</strong>", "98%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Import MacTrack Device Types</strong>", "100%", $colors["header"], "3", "center", "");
 
 	form_alternate_row_color($colors["form_alternate1"],$colors["form_alternate2"],0);?>
 		<td width='50%'><font class='textEditTitle'>Import Device Types from Local File</font><br>
@@ -384,7 +384,7 @@ function mactrack_device_type_import() {
 
 	html_end_box(FALSE);
 
-	html_start_box("<strong>Required File Format Notes</strong>", "98%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Required File Format Notes</strong>", "100%", $colors["header"], "3", "center", "");
 
 	form_alternate_row_color($colors["form_alternate1"],$colors["form_alternate2"],0);?>
 		<td><strong>The file must contain a header row with the following column headings.</strong>
@@ -736,7 +736,7 @@ function mactrack_device_type_edit() {
 		$header_label = "[new]";
 	}
 
-	html_start_box("<strong>Mac Track Device Types</strong> $header_label", "98%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Mac Track Device Types</strong> $header_label", "100%", $colors["header"], "3", "center", "");
 
 	draw_edit_form(array(
 		"config" => array("form_name" => "chk"),
@@ -823,7 +823,7 @@ function mactrack_device_type() {
 	load_current_session_value("sort_column", "sess_mactrack_device_type_sort_column", "description");
 	load_current_session_value("sort_direction", "sess_mactrack_device_type_sort_direction", "ASC");
 
-	html_start_box("<strong>Mac Track Device Type Filters</strong>", "98%", $colors["header"], "3", "center", "mactrack_device_types.php?action=edit");
+	html_start_box("<strong>Mac Track Device Type Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_device_types.php?action=edit");
 
 	include("plugins/mactrack/html/inc_mactrack_device_type_filter_table.php");
 
@@ -833,7 +833,7 @@ function mactrack_device_type() {
 
 	$device_types = mactrack_get_device_types($sql_where);
 
-	html_start_box("", "98%", $colors["header"], "3", "center", "");
+	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$total_rows = db_fetch_cell("SELECT
 		COUNT(mac_track_device_types.device_type_id)

@@ -1567,7 +1567,7 @@ function import_oui_database($type = "ui", $oui_file = "http://standards.ieee.or
 	global $colors;
 
 	if ($type != "ui") {
-		html_start_box("<strong>MacTrack OUI Database Import Results</strong>", "98%", $colors["header"], "1", "center", "");
+		html_start_box("<strong>MacTrack OUI Database Import Results</strong>", "100%", $colors["header"], "1", "center", "");
 		?><tr><td>Getting OUI Database from IEEE</td></tr><?php
 	}else{
 		echo "Getting OUI Database from the IEEE\n";

@@ -159,13 +159,13 @@ function mactrack_vmacs() {
 	load_current_session_value("sort_column", "sess_mactrack_vmacs_sort_column", "vendor_mac");
 	load_current_session_value("sort_direction", "sess_mactrack_vmacs_sort_direction", "ASC");
 
-	html_start_box("<strong>Mac Track Vendor Mac Filter</strong>", "98%", $colors["header"], "3", "center", "mactrack_vendormacs.php?action=edit");
+	html_start_box("<strong>Mac Track Vendor Mac Filter</strong>", "100%", $colors["header"], "3", "center", "mactrack_vendormacs.php?action=edit");
 
 	include($config['base_path'] . "/plugins/mactrack/html/inc_mactrack_vmac_filter_table.php");
 
 	html_end_box();
 
-	html_start_box("", "98%", $colors["header"], "3", "center", "");
+	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";
 

@@ -133,7 +133,7 @@ function form_actions() {
 		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You must select at least one Authorized Mac to delete.</span></td></tr>\n";
 		$save_html = "";
 	}else{
-		$save_html = "<input type='image' src='" . $config['url_path'] . "images/button_yes.gif' alt='Save' align='absmiddle'>";
+		$save_html = "<input type='submit' name='save_x' value='Yes'>";
 	}
 
 	print "	<tr>
@@ -141,7 +141,7 @@ function form_actions() {
 				<input type='hidden' name='action' value='actions'>
 				<input type='hidden' name='selected_items' value='" . (isset($maca_array) ? serialize($maca_array) : '') . "'>
 				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>
-				<a href='mactrack_macauth.php'><img src='" . $config['url_path'] . "images/button_no.gif' alt='Cancel' align='absmiddle' border='0'></a>
+				<input type='submit' name='cancel_x' value='No'>
 				$save_html
 			</td>
 		</tr>
@@ -246,7 +246,7 @@ function mactrack_maca_edit() {
 		$header_label = "[new]";
 	}
 
-	html_start_box("<strong>Mac Track MacAuth</strong> $header_label", "98%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Mac Track MacAuth</strong> $header_label", "100%", $colors["header"], "3", "center", "");
 
 	draw_edit_form(array(
 		"config" => array("form_name" => "chk"),
@@ -308,13 +308,13 @@ function mactrack_maca() {
 	load_current_session_value("sort_column", "sess_mactrack_maca_sort_column", "mac_address");
 	load_current_session_value("sort_direction", "sess_mactrack_maca_sort_direction", "ASC");
 
-	html_start_box("<strong>Mac Track MacAuth Filters</strong>", "98%", $colors["header"], "3", "center", "mactrack_macauth.php?action=edit");
+	html_start_box("<strong>Mac Track MacAuth Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_macauth.php?action=edit");
 
 	include($config['base_path'] . "/plugins/mactrack/html/inc_mactrack_maca_filter_table.php");
 
 	html_end_box();
 
-	html_start_box("", "98%", $colors["header"], "3", "center", "");
+	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";
 

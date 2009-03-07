@@ -1,26 +1,15 @@
 <?php
 
-function mactrack_version () {
-	return array( 	'name' 		=> 'mactrack',
-			'version' 	=> '1.1',
-			'longname'	=> 'Device Tracking',
-			'author'	=> 'Larry Adams (TheWitness)',
-			'homepage'	=> 'http://cacti.net',
-			'email'		=> 'larryjadams@comcast.net',
-			'url'		=> 'http://cactiusers.org/cacti/versions.php'
-			);
-}
-
 function plugin_init_mactrack() {
 	global $plugin_hooks, $no_http_header_files;
 
-	$plugin_hooks['top_header_tabs']['mactrack'] = 'mactrack_show_tab';
+	$plugin_hooks['top_header_tabs']['mactrack']       = 'mactrack_show_tab';
 	$plugin_hooks['top_graph_header_tabs']['mactrack'] = 'mactrack_show_tab';
-	$plugin_hooks['config_arrays']['mactrack'] = 'mactrack_config_arrays';
-	$plugin_hooks['draw_navigation_text']['mactrack'] = 'mactrack_draw_navigation_text';
-	$plugin_hooks['config_form']['mactrack'] = 'mactrack_config_form';
-	$plugin_hooks['config_settings']['mactrack'] = 'mactrack_config_settings';
-	$plugin_hooks['poller_bottom']['mactrack'] = 'mactrack_poller_bottom';
+	$plugin_hooks['config_arrays']['mactrack']         = 'mactrack_config_arrays';
+	$plugin_hooks['draw_navigation_text']['mactrack']  = 'mactrack_draw_navigation_text';
+	$plugin_hooks['config_form']['mactrack']           = 'mactrack_config_form';
+	$plugin_hooks['config_settings']['mactrack']       = 'mactrack_config_settings';
+	$plugin_hooks['poller_bottom']['mactrack']         = 'mactrack_poller_bottom';
 
 	$no_http_header_files[] = "poller_mactrack.php";
 	$no_http_header_files[] = "mactrack_scanner.php";
@@ -28,8 +17,98 @@ function plugin_init_mactrack() {
 	$no_http_header_files[] = "mactrack_import_ouidb.php";
 }
 
+function plugin_mactrack_install() {
+	api_plugin_register_hook('mactrack', 'top_header_tabs',       'mactrack_show_tab',             "setup.php");
+	api_plugin_register_hook('mactrack', 'top_graph_header_tabs', 'mactrack_show_tab',             "setup.php");
+	api_plugin_register_hook('mactrack', 'config_arrays',         'mactrack_config_arrays',        "setup.php");
+	api_plugin_register_hook('mactrack', 'draw_navigation_text',  'mactrack_draw_navigation_text', "setup.php");
+	api_plugin_register_hook('mactrack', 'config_form',           'mactrack_config_form',          "setup.php");
+	api_plugin_register_hook('mactrack', 'config_settings',       'mactrack_config_settings',      "setup.php");
+	api_plugin_register_hook('mactrack', 'poller_bottom',         'mactrack_poller_bottom',        "setup.php");
+
+	mactrack_setup_table_new ();
+}
+
+function plugin_mactrack_uninstall () {
+	/* Do any extra Uninstall stuff here */
+}
+
+function plugin_mactrack_check_config () {
+	/* Here we will check to ensure everything is configured */
+	mactrack_check_upgrade();
+	return true;
+}
+
+function plugin_mactrack_upgrade () {
+	/* Here we will upgrade to the newest version */
+	mactrack_check_upgrade();
+	return false;
+}
+
+function plugin_mactrack_version () {
+	return mactrack_version();
+}
+
+function mactrack_check_upgrade () {
+	global $config;
+
+	$files = array('index.php', 'plugins.php', 'mactrack_devices.php', 'mactrack_view.php');
+	if (isset($_SERVER['PHP_SELF']) && !in_array(basename($_SERVER['PHP_SELF']), $files)) {
+		return;
+	}
+
+	$current = plugin_mactrack_version();
+	$current = $current['version'];
+	$old     = db_fetch_row("SELECT * FROM plugin_config WHERE directory='mactrack'");
+	if (sizeof($old) && $current != $old["version"]) {
+		/* if the plugin is installed and/or active */
+		if ($old["status"] == 1 || $old["status"] == 4) {
+			/* re-register the hooks */
+			plugin_mactrack_install();
+
+			/* perform a database upgrade */
+			mactrack_database_upgrade();
+		}
+
+		/* update the plugin information */
+		$info = plugin_mactrack_version();
+		$id   = db_fetch_cell("SELECT id FROM plugin_config WHERE directory='mactrack'");
+		db_execute("UPDATE plugin_config
+			SET name='" . $info["longname"] . "',
+			author='"   . $info["author"]   . "',
+			webpage='"  . $info["homepage"] . "',
+			version='"  . $info["version"]  . "'
+			WHERE id='$id'");
+	}
+}
+
+function mactrack_database_upgrade () {
+}
+
+function mactrack_check_dependencies() {
+	global $plugins, $config;
+
+	return true;
+}
+
+function mactrack_setup_table_new () {
+}
+
+function mactrack_version () {
+	return array(
+		'name'      => 'mactrack',
+		'version'   => '2.0',
+		'longname'  => 'Device Tracking',
+		'author'    => 'Larry Adams',
+		'homepage'  => 'http://cacti.net',
+		'email'     => 'larryjadams@comcast.net',
+		'url'       => 'http://cactiusers.org/cacti/versions.php'
+	);
+}
+
 function mactrack_poller_bottom () {
 	global $config;
+
 	include_once($config["base_path"] . "/lib/poller.php");
 	include_once($config["base_path"] . "/lib/data_query.php");
 	include_once($config["base_path"] . "/lib/graph_export.php");
@@ -244,13 +323,18 @@ function mactrack_draw_navigation_text ($nav) {
 function mactrack_show_tab () {
 	global $config, $user_auth_realm_filenames;
 	$realm_id = 0;
-	if (isset($user_auth_realm_filenames{basename('mactrack_view.php')})) {
-		$realm_id = $user_auth_realm_filenames{basename('mactrack_view.php')};
+	if (isset($user_auth_realm_filenames[basename('mactrack_view.php')])) {
+		$realm_id = $user_auth_realm_filenames[basename('mactrack_view.php')];
 	}
 	if ((db_fetch_assoc("select user_auth_realm.realm_id
 		from user_auth_realm where user_auth_realm.user_id='" . $_SESSION["sess_user_id"] . "'
 		and user_auth_realm.realm_id='$realm_id'")) || (empty($realm_id))) {
-		print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.gif" alt="Mac Device Tracker" align="absmiddle" border="0"></a>';
+
+		if (substr_count($_SERVER["REQUEST_URI"], "mactrack_view.php")) {
+			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="MacTrack" align="absmiddle" border="0"></a>';
+		}else{
+			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="MacTrack" align="absmiddle" border="0"></a>';
+		}
 	}
 }
 
@@ -338,11 +422,11 @@ function mactrack_config_arrays () {
 	foreach ($menu as $temp => $temp2 ) {
 		$menu2[$temp] = $temp2;
 		if ($temp == 'Management') {
-			$menu2["Device Tracking Management"]["plugins/mactrack/mactrack_sites.php"] = "Sites";
-			$menu2["Device Tracking Management"]["plugins/mactrack/mactrack_devices.php"] = "Devices";
-			$menu2["Device Tracking Management"]["plugins/mactrack/mactrack_device_types.php"] = "Device Types";
-			$menu2["Device Tracking Management"]["plugins/mactrack/mactrack_vendormacs.php"] = "Vendor Macs";
-			$menu2["Device Tracking Management"]["plugins/mactrack/mactrack_utilities.php"] = "Tracking Utilities";
+			$menu2["Device Tracking"]["plugins/mactrack/mactrack_sites.php"] = "Sites";
+			$menu2["Device Tracking"]["plugins/mactrack/mactrack_devices.php"] = "Devices";
+			$menu2["Device Tracking"]["plugins/mactrack/mactrack_device_types.php"] = "Device Types";
+			$menu2["Device Tracking"]["plugins/mactrack/mactrack_vendormacs.php"] = "Vendor Macs";
+			$menu2["Device Tracking"]["plugins/mactrack/mactrack_utilities.php"] = "Tracking Utilities";
 			$menu2["Tracking Tools"]["plugins/mactrack/mactrack_macwatch.php"] = "Mac Watch";
 			$menu2["Tracking Tools"]["plugins/mactrack/mactrack_macauth.php"] = "Mac Authorizations";
 		}

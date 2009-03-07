@@ -19,7 +19,7 @@
 						?>
 					</td>
 					<td>
-						&nbsp<input type="image" src="<?php print $config['url_path']; ?>images/button_export.gif" name="export_ips" alt="Export" border="0" align="absmiddle">
+						&nbsp<input type="submit" name="export_ips_x" value="Export">
 					</td>
 				</tr>
 			</table>

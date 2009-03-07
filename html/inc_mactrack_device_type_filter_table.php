@@ -44,13 +44,13 @@
 						</select>
 					</td>
 					<td>
-						&nbsp;<input type="image" src="<?php echo $config['url_path']; ?>images/button_clear.gif" name="clear" alt="Clear" border="0" align="absmiddle">
+						&nbsp;<input type="submit" name="clear_x" value="Clear">
 					</td>
 					<td>
-						&nbsp<input type="image" src="<?php echo $config['url_path']; ?>images/button_import.gif" name="import" alt="Import" border="0" align="absmiddle">
+						&nbsp<input type="submit" name="import_x" value="Import">
 					</td>
 					<td>
-						&nbsp<input type="image" src="<?php echo $config['url_path']; ?>images/button_export.gif" name="export" alt="Export" border="0" align="absmiddle">
+						&nbsp<input type="submit" name="export_x" value="Export">
 					</td>
 				</tr>
 			</table>

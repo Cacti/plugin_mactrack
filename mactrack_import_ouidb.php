@@ -38,7 +38,8 @@ include(dirname(__FILE__) . "/lib/mactrack_functions.php");
 $parms = $_SERVER["argv"];
 array_shift($parms);
 
-$debug          = FALSE;
+$debug    = FALSE;
+$oui_file = "";
 
 foreach($parms as $parameter) {
 	@list($arg, $value) = @explode("=", $parameter);
