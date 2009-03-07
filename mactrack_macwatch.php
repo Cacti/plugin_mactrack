@@ -279,7 +279,7 @@ function mactrack_macw_edit() {
 }
 
 function mactrack_macw() {
-	global $colors, $macw_actions, $config;
+	global $colors, $macw_actions, $config, $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("page"));

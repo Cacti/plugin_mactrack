@@ -420,7 +420,7 @@ function mactrack_site_edit() {
 }
 
 function mactrack_site() {
-	global $colors, $site_actions, $config;
+	global $colors, $site_actions, $config, $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("site_id"));

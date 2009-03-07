@@ -793,7 +793,7 @@ function mactrack_get_device_types(&$sql_where, $apply_limits = TRUE) {
 }
 
 function mactrack_device_type() {
-	global $colors, $device_types_actions, $mactrack_device_types, $config;
+	global $colors, $device_types_actions, $mactrack_device_types, $config, $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("page"));

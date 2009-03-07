@@ -18,6 +18,21 @@
 						}
 						?>
 					</td>
+					<td nowrap style='white-space: nowrap;' width="50">
+						&nbsp;Records:&nbsp;
+					</td>
+					<td width="1">
+						<select name="rows" onChange="applyIPsFilterChange(document.form_mactrack_view_ips)">
+							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
+							<?php
+							if (sizeof($item_rows) > 0) {
+							foreach ($item_rows as $key => $value) {
+								print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
+							}
+							}
+							?>
+						</select>
+					</td>
 					<td>
 						&nbsp<input type="submit" name="export_ips_x" value="Export">
 					</td>

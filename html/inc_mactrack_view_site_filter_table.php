@@ -9,6 +9,21 @@
 					<td width="1">
 						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
 					</td>
+					<td nowrap style='white-space: nowrap;' width="50">
+						&nbsp;Records:&nbsp;
+					</td>
+					<td width="1">
+						<select name="rows" onChange="applySiteFilterChange(document.form_mactrack_view_sites)">
+							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
+							<?php
+							if (sizeof($item_rows) > 0) {
+							foreach ($item_rows as $key => $value) {
+								print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
+							}
+							}
+							?>
+						</select>
+					</td>
 					<td>
 						&nbsp;<input type="checkbox" name="detail" <?php if (($_REQUEST["detail"] == "true") || ($_REQUEST["detail"] == "on")) print ' checked="true"';?> onClick="applySiteFilterChange(document.form_mactrack_view_sites)" alt="Device Details" border="0" align="absmiddle">Show Device Details&nbsp;
 					</td>

@@ -274,7 +274,7 @@ function mactrack_maca_edit() {
 }
 
 function mactrack_maca() {
-	global $colors, $maca_actions, $config;
+	global $colors, $maca_actions, $config, $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("page"));

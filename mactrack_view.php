@@ -899,7 +899,8 @@ function mactrack_view_header() {
 <script type="text/javascript">
 <!--
 function applyReportFilterChange(objForm) {
-	strURL = '?report=' + objForm.report[objForm.report.selectedIndex].value;
+	strURL = '?report=' + objForm.report.value;
+	strURL = strURL + '&rows=' + objForm.rows.value;
 	document.location = strURL;
 }
 
@@ -914,31 +915,34 @@ function applySiteFilterChange(objForm) {
 	}
 	strURL = strURL + '&detail=' + objForm.detail.checked;
 	strURL = strURL + '&filter=' + objForm.filter.value;
+	strURL = strURL + '&rows=' + objForm.rows.value;
 	document.location = strURL;
 }
 
 function applyIPsFilterChange(objForm) {
 	strURL = '?report=ips';
-	strURL = strURL + '&i_site_id=' + objForm.i_site_id[objForm.i_site_id.selectedIndex].value;
+	strURL = strURL + '&i_site_id=' + objForm.i_site_id.value;
+	strURL = strURL + '&rows=' + objForm.rows.value;
 	document.location = strURL;
 }
 
 function applyDeviceFilterChange(objForm) {
 	strURL = '?report=devices';
-	strURL = strURL + '&d_site_id=' + objForm.d_site_id[objForm.d_site_id.selectedIndex].value;
-	strURL = strURL + '&d_status=' + objForm.d_status[objForm.d_status.selectedIndex].value;
-	strURL = strURL + '&d_type_id=' + objForm.d_type_id[objForm.d_type_id.selectedIndex].value;
-	strURL = strURL + '&d_device_type_id=' + objForm.d_device_type_id[objForm.d_device_type_id.selectedIndex].value;
+	strURL = strURL + '&d_site_id=' + objForm.d_site_id.value;
+	strURL = strURL + '&d_status=' + objForm.d_status.value;
+	strURL = strURL + '&d_type_id=' + objForm.d_type_id.value;
+	strURL = strURL + '&d_device_type_id=' + objForm.d_device_type_id.value;
 	strURL = strURL + '&d_filter=' + objForm.d_filter.value;
+	strURL = strURL + '&rows=' + objForm.rows.value;
 	document.location = strURL;
 }
 
 function applyMacFilterChange(objForm) {
 	strURL = '?report=macs';
-	strURL = strURL + '&m_site_id=' + objForm.m_site_id[objForm.m_site_id.selectedIndex].value;
-	strURL = strURL + '&m_device_id=' + objForm.m_device_id[objForm.m_device_id.selectedIndex].value;
-	strURL = strURL + '&m_rowstoshow=' + objForm.m_rowstoshow[objForm.m_rowstoshow.selectedIndex].value;
-	strURL = strURL + '&m_rows_selector=' + objForm.m_rows_selector[objForm.m_rows_selector.selectedIndex].value;
+	strURL = strURL + '&m_site_id=' + objForm.m_site_id.value;
+	strURL = strURL + '&m_device_id=' + objForm.m_device_id.value;
+	strURL = strURL + '&m_rowstoshow=' + objForm.m_rowstoshow.value;
+	strURL = strURL + '&m_rows_selector=' + objForm.m_rows_selector.value;
 	strURL = strURL + '&m_mac_filter_type_id=' + objForm.m_mac_filter_type_id.value;
 	strURL = strURL + '&m_mac_filter=' + objForm.m_mac_filter.value;
 	strURL = strURL + '&m_authorized=' + objForm.m_authorized.value;
@@ -946,6 +950,7 @@ function applyMacFilterChange(objForm) {
 	strURL = strURL + '&m_vlan_id=' + objForm.m_vlan_id.value;
 	strURL = strURL + '&m_ip_filter_type_id=' + objForm.m_ip_filter_type_id.value;
 	strURL = strURL + '&m_ip_filter=' + objForm.m_ip_filter.value;
+	strURL = strURL + '&rows=' + objForm.rows.value;
 	document.location = strURL;
 }
 -->
@@ -986,7 +991,7 @@ function mactrack_view_footer() {
 }
 
 function mactrack_view_ip_ranges() {
-	global $title, $colors, $config;
+	global $title, $colors, $config, $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("i_site_id"));
@@ -1101,7 +1106,7 @@ function mactrack_view_ip_ranges() {
 }
 
 function mactrack_view_sites() {
-	global $title, $colors, $config;
+	global $title, $colors, $config, $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("s_site_id"));
@@ -1303,7 +1308,7 @@ function mactrack_view_sites() {
 }
 
 function mactrack_view_devices() {
-	global $title, $report, $colors, $mactrack_search_types, $mactrack_device_types, $rows_selector, $config;
+	global $title, $report, $colors, $mactrack_search_types, $mactrack_device_types, $rows_selector, $config, $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("d_site_id"));
@@ -1479,7 +1484,7 @@ function mactrack_get_vendor_name($mac) {
 
 function mactrack_view_macs() {
 	global $title, $report, $colors, $mactrack_search_types, $rows_selector, $config;
-	global $mactrack_view_macs_actions;
+	global $mactrack_view_macs_actions, $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("m_site_id"));

@@ -120,7 +120,7 @@ function mactrack_vmacs_get_vmac_records(&$sql_where, $apply_limits = TRUE) {
 }
 
 function mactrack_vmacs() {
-	global $colors, $site_actions, $config;
+	global $colors, $site_actions, $config, $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("page"));

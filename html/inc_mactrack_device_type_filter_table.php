@@ -1,8 +1,9 @@
 	<script type="text/javascript">
 	<!--
 	function applyDeviceTypeFilterChange(objForm) {
-		strURL = '?vendor=' + objForm.vendor[objForm.vendor.selectedIndex].value;
-		strURL = strURL + '&type_id=' + objForm.type_id[objForm.type_id.selectedIndex].value;
+		strURL = '?vendor=' + objForm.vendor.value;
+		strURL = strURL + '&type_id=' + objForm.type_id.value;
+		strURL = strURL + '&rows=' + objForm.rows.value;
 		document.location = strURL;
 	}
 
@@ -40,6 +41,21 @@
 							<option value="1"<?php print $_REQUEST["vendor"] . '"'; if ($_REQUEST['type_id'] == '1') print ' selected';?>>Hub/Switch</option>
 							<option value="2"<?php print $_REQUEST["vendor"] . '"'; if ($_REQUEST['type_id'] == '2') print ' selected';?>>Switch/Router</option>
 							<option value="3"<?php print $_REQUEST["vendor"] . '"'; if ($_REQUEST['type_id'] == '3') print ' selected';?>>Router</option>
+							?>
+						</select>
+					</td>
+					<td nowrap style='white-space: nowrap;' width="50">
+						&nbsp;Records:&nbsp;
+					</td>
+					<td width="1">
+						<select name="rows" onChange="applyDeviceTypeFilterChange(document.form_mactrack_device_types)">
+							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
+							<?php
+							if (sizeof($item_rows) > 0) {
+							foreach ($item_rows as $key => $value) {
+								print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
+							}
+							}
 							?>
 						</select>
 					</td>
