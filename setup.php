@@ -309,8 +309,8 @@ function mactrack_draw_navigation_text ($nav) {
 	$nav["mactrack_macauth.php:edit"] = array("title" => "(Edit)", "mapping" => "index.php:,mactrack_macauth.php:", "url" => "", "level" => "2");
 	$nav["mactrack_macauth.php:actions"] = array("title" => "Actions", "mapping" => "index.php:,mactrack_macauth.php:", "url" => "", "level" => "2");
 	$nav["mactrack_vendormacs.php:"] = array("title" => "Mac Track Vendor Macs", "mapping" => "index.php:", "url" => "mactrack_vendormacs.php", "level" => "1");
-	$nav["mactrack_view.php:"] = array("title" => "Mac Track Viewer", "mapping" => "index.php:", "url" => "mactrack_view.php", "level" => "1");
-	$nav["mactrack_view.php:actions"] = array("title" => "Actions", "mapping" => "index.php:,mactrack_view.php:", "url" => "", "level" => "2");
+	$nav["mactrack_view.php:"] = array("title" => "Mac Track Viewer", "mapping" => "", "url" => "mactrack_view.php", "level" => "0");
+	$nav["mactrack_view.php:actions"] = array("title" => "Actions", "mapping" => "mactrack_view.php:", "url" => "", "level" => "1");
 	$nav["mactrack_utilities.php:"] = array("title" => "Device Tracking Utilities", "mapping" => "index.php:", "url" => "mactrack_utilities.php", "level" => "1");
 	$nav["mactrack_utilities.php:mactrack_utilities_perform_db_maint"] = array("title" => "Perform Database Maintenance", "mapping" => "index.php:,mactrack_utilities.php:", "url" => "mactrack_utilities.php", "level" => "2");
 	$nav["mactrack_utilities.php:mactrack_utilities_purge_scanning_funcs"] = array("title" => "Refresh Scanning Functions", "mapping" => "index.php:,mactrack_utilities.php:", "url" => "mactrack_utilities.php", "level" => "2");
