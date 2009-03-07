@@ -283,7 +283,7 @@ function mactrack_view_export_sites() {
 		}
 	}
 
-	header("Content-type: application/xml");
+	header("Content-type: application/csv");
 	header("Content-Disposition: attachment; filename=cacti_site_xport.csv");
 	foreach($xport_array as $xport_line) {
 		print $xport_line . "\n";
@@ -332,7 +332,7 @@ function mactrack_view_export_ip_ranges() {
 		}
 	}
 
-	header("Content-type: application/xml");
+	header("Content-type: application/csv");
 	header("Content-Disposition: attachment; filename=cacti_ip_range_xport.csv");
 	foreach($xport_array as $xport_line) {
 		print $xport_line . "\n";
@@ -407,7 +407,7 @@ function mactrack_view_export_devices() {
 		}
 	}
 
-	header("Content-type: application/xml");
+	header("Content-type: application/csv");
 	header("Content-Disposition: attachment; filename=cacti_device_xport.csv");
 	foreach($xport_array as $xport_line) {
 		print $xport_line . "\n";
@@ -514,7 +514,7 @@ function mactrack_view_export_macs() {
 		}
 	}
 
-	header("Content-type: application/xml");
+	header("Content-type: application/csv");
 	header("Content-Disposition: attachment; filename=cacti_port_macs_xport.csv");
 	foreach($xport_array as $xport_line) {
 		print $xport_line . "\n";

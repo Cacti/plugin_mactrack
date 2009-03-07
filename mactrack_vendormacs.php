@@ -74,7 +74,7 @@ function mactrack_vmacs_export() {
 		}
 	}
 
-	header("Content-type: application/xml");
+	header("Content-type: application/csv");
 	header("Content-Disposition: attachment; filename=cacti_site_xport.csv");
 	foreach($xport_array as $xport_line) {
 		print $xport_line . "\n";

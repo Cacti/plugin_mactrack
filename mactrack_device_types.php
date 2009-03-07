@@ -338,7 +338,7 @@ function mactrack_device_type_export() {
 		}
 	}
 
-	header("Content-type: application/xml");
+	header("Content-type: application/csv");
 	header("Content-Disposition: attachment; filename=cacti_device_type_xport.csv");
 	foreach($xport_array as $xport_line) {
 		print $xport_line . "\n";
