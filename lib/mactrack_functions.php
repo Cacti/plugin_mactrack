@@ -1664,4 +1664,79 @@ function import_oui_database($type = "ui", $oui_file = "http://standards.ieee.or
 	}
 }
 
+/* mactrack_draw_actions_dropdown - draws a table the allows the user to select an action to perform
+     on one or more data elements
+   @arg $actions_array - an array that contains a list of possible actions. this array should
+     be compatible with the form_dropdown() function */
+function mactrack_draw_actions_dropdown($actions_array, $include_form_end = true) {
+	global $config;
+	?>
+	<table align='center' width='100%'>
+		<tr>
+			<td width='1' valign='top'>
+				<img src='<?php echo $config['url_path']; ?>images/arrow.gif' alt='' align='absmiddle'>&nbsp;
+			</td>
+			<td align='right'>
+				Choose an action:
+				<?php form_dropdown("drp_action",$actions_array,"","","1","","");?>
+			</td>
+			<td width='1' align='right'>
+				<input type='submit' name='go' value='Go'>
+			</td>
+		</tr>
+	</table>
+
+	<input type='hidden' name='action' value='actions'>
+	<?php
+	if ($include_form_end) {
+		print "</form>";
+	}
+}
+
+/* mactrack_save_button - draws a (save|create) and cancel button at the bottom of
+     an html edit form
+   @arg $force_type - if specified, will force the 'action' button to be either
+     'save' or 'create'. otherwise this field should be properly auto-detected */
+function mactrack_save_button($cancel_action = "", $action = "save", $force_type = "", $key_field = "id") {
+	global $config;
+
+	$calt = "Cancel";
+
+	if ((empty($force_type)) || ($cancel_action == "return")) {
+		if (empty($_GET[$key_field])) {
+			$sname = "create";
+			$salt  = "Create";
+		}else{
+			$sname = "save";
+			$salt  = "Save";
+		}
+
+		if ($cancel_action == "return") {
+			$calt   = "Return";
+			$action = "save";
+		}else{
+			$calt   = "Cancel";
+		}
+	}elseif ($force_type == "save") {
+		$sname = "save";
+		$salt  = "Save";
+	}elseif ($force_type == "create") {
+		$sname = "create";
+		$salt  = "Create";
+	}
+	?>
+	<table align='center' width='100%' style='background-color: #ffffff; border: 1px solid #bbbbbb;'>
+		<tr>
+			<td bgcolor="#f5f5f5" align="right">
+				<input type='hidden' name='action' value='<?php print $action;?>'>
+				<input type='button' value='<?php print $calt;?>' onClick='window.location.assign("<?php print htmlspecialchars($_SERVER['HTTP_REFERER']);?>")' name='cancel'>
+				<input type='submit' value='<?php print $salt;?>' name='<?php print $sname;?>'>
+			</td>
+		</tr>
+	</table>
+	</form>
+	<?php
+}
+
+
 ?>

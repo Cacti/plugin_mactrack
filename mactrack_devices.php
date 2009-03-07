@@ -24,6 +24,7 @@
 chdir('../../');
 include("./include/auth.php");
 include_once("./lib/snmp.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 define("MAX_DISPLAY_PAGES", 21);
 
@@ -37,6 +38,9 @@ $device_actions = array(
 
 /* set default action */
 if (!isset($_REQUEST["action"])) { $_REQUEST["action"] = ""; }
+
+/* correct for a cancel button */
+if (isset($_REQUEST["cancel_x"])) { $_REQUEST["action"] = ""; }
 
 switch ($_REQUEST["action"]) {
 	case 'save':
@@ -503,7 +507,7 @@ function mactrack_device_import() {
 
 	html_end_box();
 
-	form_save_button("mactrack_devices.php", "save");
+	mactrack_save_button("return", "save");
 }
 
 function mactrack_device_import_processor(&$devices) {
@@ -852,7 +856,10 @@ function mactrack_device_edit() {
 
 	html_end_box();
 
-	form_save_button("mactrack_devices.php", "", "device_id");
+	if (isset($device)) {
+		mactrack_save_button("return", "save", "", "device_id");
+	}else{		mactrack_save_button("cancel", "save", "", "device_id");
+	}
 }
 
 function mactrack_get_devices(&$sql_where, $apply_limits = TRUE) {

@@ -25,6 +25,7 @@
 chdir('../../');
 include("./include/auth.php");
 include_once("./lib/snmp.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 define("MAX_DISPLAY_PAGES", 21);
 
@@ -34,6 +35,9 @@ $site_actions = array(
 
 /* set default action */
 if (!isset($_REQUEST["action"])) { $_REQUEST["action"] = ""; }
+
+/* correct for a cancel button */
+if (isset($_REQUEST["cancel_x"])) { $_REQUEST["action"] = ""; }
 
 switch ($_REQUEST["action"]) {
 	case 'save':
@@ -408,7 +412,11 @@ function mactrack_site_edit() {
 
 	html_end_box();
 
-	form_save_button("mactrack_sites.php", "", "site_id");
+	if (isset($site)) {
+		mactrack_save_button("return", "save", "", "site_id");
+	}else{
+		mactrack_save_button("cancel", "save", "", "site_id");
+	}
 }
 
 function mactrack_site() {

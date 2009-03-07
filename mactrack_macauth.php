@@ -24,6 +24,7 @@
 chdir('../../');
 
 include("./include/auth.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 define("MAX_DISPLAY_PAGES", 21);
 
@@ -33,6 +34,9 @@ $maca_actions = array(
 
 /* set default action */
 if (!isset($_REQUEST["action"])) { $_REQUEST["action"] = ""; }
+
+/* correct for a cancel button */
+if (isset($_REQUEST["cancel_x"])) { $_REQUEST["action"] = ""; }
 
 switch ($_REQUEST["action"]) {
 	case 'save':
@@ -262,7 +266,11 @@ function mactrack_maca_edit() {
 
 	html_end_box();
 
-	form_save_button("mactrack_macauth.php", "", "mac_address");
+	if (isset($mac_record)) {
+		mactrack_save_button("return", "save", "", "mac_address");
+	}else{
+		mactrack_save_button("cancel", "save", "", "mac_address");
+	}
 }
 
 function mactrack_maca() {

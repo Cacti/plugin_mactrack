@@ -45,6 +45,9 @@ load_current_session_value("report", "sess_mactrack_view_report", "macs");
 /* set default action */
 if (!isset($_REQUEST["action"])) { $_REQUEST["action"] = ""; }
 
+/* correct for a cancel button */
+if (isset($_REQUEST["cancel_x"])) { $_REQUEST["action"] = ""; }
+
 switch ($_REQUEST["action"]) {
 case 'actions':
 	form_actions();

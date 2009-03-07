@@ -24,6 +24,7 @@
 
 chdir('../../');
 include("./include/auth.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 define("MAX_DISPLAY_PAGES", 21);
 define("VMACROWS", 7);
