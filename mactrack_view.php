@@ -183,9 +183,9 @@ function form_actions() {
 			<td colspan='2' align='right' bgcolor='#eaeaea'>
 				<input type='hidden' name='action' value='actions'>
 				<input type='hidden' name='selected_items' value='" . (isset($mac_address_array) ? serialize($mac_address_array) : '') . "'>
-				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>
+				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>" . (strlen($save_html) ? "
 				<input type='submit' name='cancel_x' value='No'>
-				$save_html
+				$save_html" : "<input type='submit' name='cancel_x' value='Return'>") . "
 			</td>
 		</tr>
 		";
@@ -951,7 +951,7 @@ function applyMacFilterChange(objForm) {
 							<tr>
 								<td bgcolor="#<?php print $colors["header"];?>" class="textHeaderDark"><strong><?php print $title;?></strong></td>
 								<td width="1" align="right">
-									<select name="report" onChange="applyReportFilterChange(document.form_mactrack_view_reports)">
+									<select style='font-size:11px;' name="report" onChange="applyReportFilterChange(document.form_mactrack_view_reports)">
 									<option value="macs"<?php if ($_REQUEST["report"] == "macs") {?> selected<?php }?>>MAC/IP Report</option>
 									<option value="sites"<?php if ($_REQUEST["report"] == "sites") {?> selected<?php }?>>Site Report</option>
 									<option value="ips"<?php if ($_REQUEST["report"] == "ips") {?> selected<?php }?>>Site IP Range Report</option>
@@ -972,10 +972,6 @@ function mactrack_view_footer() {
 						</td>
 					</tr>
 				</table>
-			</td>
-		</tr>
-	</table>
-<br>
 <?php
 }
 
@@ -1024,7 +1020,7 @@ function mactrack_view_ip_ranges() {
 
 	mactrack_view_footer();
 
-	html_start_box("<strong>Site View IP Ranges Report</strong>", "100%", $colors["header"], "3", "center", "");
+	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";
 
@@ -1173,7 +1169,7 @@ function mactrack_view_sites() {
 
 	mactrack_view_footer();
 
-	html_start_box("<strong>Site View Report</strong>", "100%", $colors["header"], "3", "center", "");
+	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";
 
@@ -1795,7 +1791,7 @@ function mactrack_view_macs() {
 
 	if (mactrack_check_user_realm(22)) {
 		/* draw the dropdown containing a list of available actions for this form */
-		draw_actions_dropdown($mactrack_view_macs_actions);
+		mactrack_draw_actions_dropdown($mactrack_view_macs_actions);
 	}
 }
 

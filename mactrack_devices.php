@@ -336,9 +336,9 @@ function form_actions() {
 			<td colspan='2' align='right' bgcolor='#eaeaea'>
 				<input type='hidden' name='action' value='actions'>
 				<input type='hidden' name='selected_items' value='" . (isset($device_array) ? serialize($device_array) : '') . "'>
-				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>
-				<input type='submit' value='No' name='cancel_x'>
-				$save_html
+				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>" . (strlen($save_html) ? "
+				<input type='submit' name='cancel_x' value='No'>
+				$save_html" : "<input type='submit' name='cancel_x' value='Return'>") . "
 			</td>
 		</tr>
 		";
@@ -1066,7 +1066,7 @@ function mactrack_device() {
 	html_end_box(false);
 
 	/* draw the dropdown containing a list of available actions for this form */
-	draw_actions_dropdown($device_actions);
+	mactrack_draw_actions_dropdown($device_actions);
 }
 
 ?>

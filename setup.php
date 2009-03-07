@@ -865,4 +865,32 @@ function mactrack_config_form () {
 
 }
 
+/* mactrack_draw_actions_dropdown - draws a table the allows the user to select an action to perform
+     on one or more data elements
+   @arg $actions_array - an array that contains a list of possible actions. this array should
+     be compatible with the form_dropdown() function */
+function mactrack_draw_actions_dropdown($actions_array, $include_form_end = true) {
+	global $config;
+	?>
+	<table align='center' width='100%'>
+		<tr>
+			<td width='1' valign='top'>
+				<img src='<?php echo $config['url_path']; ?>images/arrow.gif' alt='' align='absmiddle'>&nbsp;
+			</td>
+			<td align='right'>
+				Choose an action:
+				<?php form_dropdown("drp_action",$actions_array,"","","1","","");?>
+			</td>
+			<td width='1' align='right'>
+				<input type='submit' name='go' value='Go'>
+			</td>
+		</tr>
+	</table>
+
+	<input type='hidden' name='action' value='actions'>
+	<?php
+	if ($include_form_end) {		print "</form>";
+	}
+}
+
 ?>

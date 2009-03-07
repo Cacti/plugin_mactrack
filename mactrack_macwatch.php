@@ -142,9 +142,9 @@ function form_actions() {
 			<td colspan='2' align='right' bgcolor='#eaeaea'>
 				<input type='hidden' name='action' value='actions'>
 				<input type='hidden' name='selected_items' value='" . (isset($macw_array) ? serialize($macw_array) : '') . "'>
-				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>
-				<intput type='submit' name='cancel_x' value='No'>
-				$save_html
+				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>" . (strlen($save_html) ? "
+				<input type='submit' name='cancel_x' value='No'>
+				$save_html" : "<input type='submit' name='cancel_x' value='Return'>") . "
 			</td>
 		</tr>
 		";
@@ -391,7 +391,7 @@ function mactrack_macw() {
 	html_end_box(false);
 
 	/* draw the dropdown containing a list of available actions for this form */
-	draw_actions_dropdown($macw_actions);
+	mactrack_draw_actions_dropdown($macw_actions);
 }
 
 ?>
