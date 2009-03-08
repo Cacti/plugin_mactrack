@@ -262,7 +262,7 @@ function mactrack_view_export_sites() {
 
 	$sql_where = "";
 
-	$sites = mactrack_view_get_site_records($sql_where, FALSE);
+	$sites = mactrack_view_get_site_records($sql_where, 0, FALSE);
 
 	$xport_array = array();
 
@@ -318,14 +318,13 @@ function mactrack_view_export_ip_ranges() {
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
 	load_current_session_value("page", "sess_mactrack_view_ips_current_page", "1");
-	load_current_session_value("page", "sess_mactrack_view_ips_current_page", "1");
 	load_current_session_value("site_id", "sess_mactrack_view_ips_site_id", "-1");
 	load_current_session_value("sort_column", "sess_mactrack_device_sort_column", "site_name");
 	load_current_session_value("sort_direction", "sess_mactrack_device_sort_direction", "ASC");
 
 	$sql_where = "";
 
-	$ip_ranges = mactrack_view_get_ip_range_records($sql_where, FALSE);
+	$ip_ranges = mactrack_view_get_ip_range_records($sql_where, 0, FALSE);
 
 	$xport_array = array();
 
@@ -352,7 +351,7 @@ function mactrack_view_export_ip_ranges() {
 function mactrack_view_export_devices() {
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("site_id"));
-	input_validate_input_number(get_request_var_request("d_device_id"));
+	input_validate_input_number(get_request_var_request("device_id"));
 	input_validate_input_number(get_request_var_request("type_id"));
 	input_validate_input_number(get_request_var_request("device_type_id"));
 	input_validate_input_number(get_request_var_request("status"));
@@ -376,7 +375,6 @@ function mactrack_view_export_devices() {
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
 	load_current_session_value("page", "sess_mactrack_view_device_current_page", "1");
-	load_current_session_value("page", "sess_mactrack_view_device_current_page", "1");
 	load_current_session_value("filter", "sess_mactrack_view_device_filter", "");
 	load_current_session_value("site_id", "sess_mactrack_view_device_site_id", "-1");
 	load_current_session_value("type_id", "sess_mactrack_view_device_type_id", "-1");
@@ -387,7 +385,7 @@ function mactrack_view_export_devices() {
 
 	$sql_where = "";
 
-	$devices = mactrack_view_get_device_records($sql_where, FALSE);
+	$devices = mactrack_view_get_device_records($sql_where, 0, FALSE);
 
 	$xport_array = array();
 	array_push($xport_array, '"site_id","site_name","device_id","device_name","notes",' .
@@ -484,7 +482,6 @@ function mactrack_view_export_macs() {
 	/* remember these search fields in session vars so we don't have to keep passing them around */
 	load_current_session_value("report", "sess_mactrack_view_report", "macs");
 	load_current_session_value("page", "sess_mactrack_view_macs_current_page", "1");
-	load_current_session_value("page", "sess_mactrack_view_macs_current_page", "1");
 	load_current_session_value("scan_date", "sess_mactrack_view_macs_scan_date", "2");
 	load_current_session_value("filter", "sess_mactrack_view_macs_filter", "");
 	load_current_session_value("mac_filter_type_id", "sess_mactrack_view_macs_mac_filter_type_id", "1");
@@ -499,7 +496,7 @@ function mactrack_view_export_macs() {
 
 	$sql_where = "";
 
-	$port_results = mactrack_view_get_mac_records($sql_where, FALSE);
+	$port_results = mactrack_view_get_mac_records($sql_where, 0, FALSE);
 
 	$xport_array = array();
 	array_push($xport_array, '"site_name","hostname","device_name",' .
@@ -531,7 +528,7 @@ function mactrack_view_export_macs() {
 	}
 }
 
-function mactrack_view_get_ip_range_records(&$sql_where, $apply_limits = TRUE) {
+function mactrack_view_get_ip_range_records(&$sql_where, $row_limit, $apply_limits = TRUE) {
 	if ($_REQUEST["site_id"] != "-1") {
 		$sql_where = "WHERE mac_track_ip_ranges.site_id='" . $_REQUEST["site_id"] . "'";
 	}else{
@@ -552,13 +549,13 @@ function mactrack_view_get_ip_range_records(&$sql_where, $apply_limits = TRUE) {
 		ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
 
 	if ($apply_limits) {
-		$ip_ranges .= " LIMIT " . ($_REQUEST["rows"]*($_REQUEST["page"]-1)) . "," . $_REQUEST["rows"];
+		$ip_ranges .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
 	}
 
 	return db_fetch_assoc($ip_ranges);
 }
 
-function mactrack_view_get_site_records(&$sql_where, $apply_limits = TRUE) {
+function mactrack_view_get_site_records(&$sql_where, $row_limit, $apply_limits = TRUE) {
 	/* create SQL where clause */
 	$device_type_info = db_fetch_row("SELECT * FROM mac_track_device_types WHERE device_type_id = '" . $_REQUEST["device_type_id"] . "'");
 
@@ -606,7 +603,7 @@ function mactrack_view_get_site_records(&$sql_where, $apply_limits = TRUE) {
 			ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
 
 		if ($apply_limits) {
-			$query_string .= " LIMIT " . ($_REQUEST["rows"]*($_REQUEST["page"]-1)) . "," . $_REQUEST["rows"];
+			$query_string .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
 		}
 	}else{
 		$query_string ="SELECT mac_track_sites.site_name,
@@ -628,7 +625,7 @@ function mactrack_view_get_site_records(&$sql_where, $apply_limits = TRUE) {
 			ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
 
 		if ($apply_limits) {
-			$query_string .= " LIMIT " . ($_REQUEST["rows"]*($_REQUEST["page"]-1)) . "," . $_REQUEST["rows"];
+			$query_string .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
 		}
 	}
 
@@ -802,7 +799,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 	}
 }
 
-function mactrack_view_get_device_records(&$sql_where, $apply_limits = TRUE) {
+function mactrack_view_get_device_records(&$sql_where, $row_limit, $apply_limits = TRUE) {
 	$device_type_info = db_fetch_row("SELECT * FROM mac_track_device_types WHERE device_type_id = '" . $_REQUEST["device_type_id"] . "'");
 
 	/* if the device type is not the same as the type_id, then reset it */
@@ -887,7 +884,7 @@ function mactrack_view_get_device_records(&$sql_where, $apply_limits = TRUE) {
 		ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
 
 	if ($apply_limits) {
-		$sql_query .= " LIMIT " . ($_REQUEST["rows"]*($_REQUEST["page"]-1)) . "," . $_REQUEST["rows"];
+		$sql_query .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
 	}
 
 	return db_fetch_assoc($sql_query);
@@ -1039,7 +1036,7 @@ function mactrack_view_ip_ranges() {
 
 	$sql_where = "";
 
-	$ip_ranges = mactrack_view_get_ip_range_records($sql_where);
+	$ip_ranges = mactrack_view_get_ip_range_records($sql_where, $row_limit);
 
 	$total_rows = db_fetch_cell("SELECT
 		COUNT(mac_track_ip_ranges.ip_range)
@@ -1195,7 +1192,7 @@ function mactrack_view_sites() {
 
 	$sql_where = "";
 
-	$sites = mactrack_view_get_site_records($sql_where);
+	$sites = mactrack_view_get_site_records($sql_where, $row_limit);
 
 	if ($_REQUEST["detail"] == "false") {
 		$total_rows = db_fetch_cell("SELECT
@@ -1315,7 +1312,7 @@ function mactrack_view_devices() {
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("site_id"));
-	input_validate_input_number(get_request_var_request("d_device_id"));
+	input_validate_input_number(get_request_var_request("device_id"));
 	input_validate_input_number(get_request_var_request("type_id"));
 	input_validate_input_number(get_request_var_request("device_type_id"));
 	input_validate_input_number(get_request_var_request("status"));
@@ -1401,7 +1398,7 @@ function mactrack_view_devices() {
 
 	$sql_where = "";
 
-	$devices = mactrack_view_get_device_records($sql_where);
+	$devices = mactrack_view_get_device_records($sql_where, $row_limit);
 
 	$total_rows = db_fetch_cell("SELECT
 		COUNT(mac_track_devices.device_id)
