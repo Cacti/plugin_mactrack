@@ -216,13 +216,14 @@ if (read_config_option("mt_collection_timing") != "disabled") {
 
 /*	display_help - displays the usage of the function */
 function display_help () {
-	print "MacTrack Master Poller v" . mactrack_version["version"] . ", Copyright 2006-2009 - The Cacti Group, Inc.\n\n";
+	$version = mactrack_version();
+	print "MacTrack Master Poller v" . $version["version"] . ", Copyright 2006-2009 - The Cacti Group, Inc.\n\n";
 	print "usage: poller_mactrack.php [-sid=site_id] [-d] [-h] [--help] [-v] [--version]\n\n";
 	print "-sid=site_id  - the mac_track_sites site_id to scan\n";
 	print "-f            - Force the execution of a collection process\n";
 	print "-d            - Display verbose output during execution\n";
 	print "-v --version  - Display this help message\n";
-	print "-h --help     - display this help message\n";
+	print "-h --help     - Display this help message\n";
 }
 
 function collect_mactrack_data($start, $site_id = 0) {

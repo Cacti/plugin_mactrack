@@ -82,13 +82,14 @@ if (strlen($oui_file)) {
 
 /*	display_help - displays the usage of the function */
 function display_help () {
-	print "MacTrack Import OUI Database v" . mactrack_version["version"] . ", Copyright 2006-2009 - The Cacti Group, Inc.\n\n";
+	$version = mactrack_version();
+	print "MacTrack Import OUI Database v" . $version["version"] . ", Copyright 2006-2009 - The Cacti Group, Inc.\n\n";
 	print "usage: mactrack_import_ouidb.php [-f=ouifile] [-h] [--help] [-v] [-V] [--version]\n\n";
 	print "-f='outdbfile'   - Specify the location of the OUI dataabase file.  If your system\n";
 	print "                   does not allow native access to the IEEE via http, you can manually\n";
 	print "                   download the file, and then import it using this option.\n";
 	print "-v -V --version  - Display this help message\n";
-	print "-h --help        - display this help message\n";
+	print "-h --help        - Display this help message\n";
 }
 
 ?>
