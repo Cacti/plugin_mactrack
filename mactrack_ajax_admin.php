@@ -28,21 +28,18 @@ include_once($config["base_path"] . "/plugins/mactrack/mactrack_functions.php");
 
 /* check actions */
 if (isset($_REQUEST["action"])) {
-        switch ($_REQUEST["action"]) {
-        case "enable":
-                mactrack_enable();
-                break;
-        case "disable":
-                mactrack_disable();
-                break;
-        case "unlock":
-                mactrack_unlock();
-                break;
-        case "lock":
-                mactrack_lock();
-                break;
-        case "purge":
-                mactrack_purge();
-                break;
-        }
+	switch ($_REQUEST["action"]) {
+	case "rescan":
+		mactrack_rescan();
+		break;
+	case "enable":
+		mactrack_enable();
+		break;
+	case "disable":
+		mactrack_disable();
+		break;
+	case "purge":
+		mactrack_purge();
+		break;
+	}
 }

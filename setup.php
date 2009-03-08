@@ -116,6 +116,22 @@ function mactrack_database_upgrade () {
 		db_execute("ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)");
 	}
 
+	$fields  = db_fetch_assoc("SHOW COLUMNS FROM mac_track_devices");
+	$found = false;
+	if (sizeof($field)) {
+	foreach($fields as $field) {
+		if ($field["Field"] == "host_id") {
+			$found = true;
+			break;
+		}
+	}
+	}
+	if (!$found) {
+		db_execute("ALTER TABLE `mac_track_devices`
+			ADD COLUMN `host_id` INTEGER UNSIGNED NOT NULL default '0' AFTER `device_id`,
+	 		ADD INDEX `host_id`(`host_id`)");
+	}
+
 }
 
 function mactrack_check_dependencies() {
@@ -376,19 +392,18 @@ function mactrack_config_arrays () {
 	global $user_auth_realms, $user_auth_realm_filenames, $menu, $config, $rows_selector;
 	global $mactrack_poller_frequencies, $mactrack_data_retention, $refresh_interval;
 
-	$user_auth_realms[20]='Plugin -> MacTrack View Data';
-	$user_auth_realm_filenames['mactrack_view.php'] = 20;
+	$user_auth_realms[2120]='Plugin -> MacTrack Viewer';
+	$user_auth_realms[2121]='Plugin -> MacTrack Administrator';
+	$user_auth_realms[2122]='Plugin -> MacTrack Security';
 
-	$user_auth_realms[21]='Plugin -> MacTrack Administrate';
-	$user_auth_realm_filenames['mactrack_devices.php'] = 21;
-	$user_auth_realm_filenames['mactrack_sites.php'] = 21;
-	$user_auth_realm_filenames['mactrack_device_types.php'] = 21;
-	$user_auth_realm_filenames['mactrack_utilities.php'] = 21;
-	$user_auth_realm_filenames['mactrack_macwatch.php'] = 21;
-	$user_auth_realm_filenames['mactrack_macauth.php'] = 21;
-	$user_auth_realm_filenames['mactrack_vendormacs.php'] = 21;
-
-	$user_auth_realms[22]='Plugin -> MacTrack Manage Mac Authorizations';
+	$user_auth_realm_filenames['mactrack_view.php']         = 2120;
+	$user_auth_realm_filenames['mactrack_devices.php']      = 2121;
+	$user_auth_realm_filenames['mactrack_sites.php']        = 2121;
+	$user_auth_realm_filenames['mactrack_device_types.php'] = 2121;
+	$user_auth_realm_filenames['mactrack_utilities.php']    = 2121;
+	$user_auth_realm_filenames['mactrack_macwatch.php']     = 2121;
+	$user_auth_realm_filenames['mactrack_macauth.php']      = 2121;
+	$user_auth_realm_filenames['mactrack_vendormacs.php']   = 2121;
 
 	$refresh_interval = array(
 		5 => "5 Seconds",
