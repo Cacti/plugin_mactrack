@@ -1571,7 +1571,7 @@ function perform_mactrack_db_maint() {
 }
 
 function import_oui_database($type = "ui", $oui_file = "http://standards.ieee.org/regauth/oui/oui.txt") {
-	global $colors;
+	global $colors, $cnn_id;
 
 	if ($type != "ui") {
 		html_start_box("<strong>MacTrack OUI Database Import Results</strong>", "100%", $colors["header"], "1", "center", "");
@@ -1612,9 +1612,9 @@ function import_oui_database($type = "ui", $oui_file = "http://standards.ieee.or
 
 				db_execute("REPLACE INTO mac_track_oui_database
 					(vendor_mac, vendor_name, vendor_address, present)
-					VALUES ('" . $vendor_mac . "','" .
-					str_replace("'", "", str_replace('"', "", ucwords(strtolower($vendor_name)))) . "','" .
-					str_replace("'", "", str_replace('"', "", ucwords(strtolower($vendor_address)))) . "','1')");
+					VALUES ('" . $vendor_mac . "'," .
+					$cnn_id->qstr(ucwords(strtolower($vendor_name))) . "," .
+					$cnn_id->qstr(str_replace("\n", ", ", ucwords(strtolower(trim($vendor_address))))) . ",'1')");
 
 				/* let the user know you are working */
 				if ((($i % 100) == 0) && ($type == "ui")) echo ".";

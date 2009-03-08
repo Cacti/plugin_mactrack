@@ -223,7 +223,7 @@ function mactrack_vmacs() {
 	}
 
 	$display_text = array(
-		"vendor_mac" => array("<br>Vendor MAC", "ASC"),
+		"vendor_mac" => array("Vendor<br>MAC", "ASC"),
 		"vendor_name" => array("<br>Name", "ASC"),
 		"vendor_address" => array("<br>Address", "ASC"));
 
@@ -235,8 +235,8 @@ function mactrack_vmacs() {
 			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 				?>
 				<td class="linkEditMain"><?php print $vmac["vendor_mac"];?></td>
-				<td><?php print $vmac["vendor_name"];?></td>
-				<td><?php print str_replace("\n", "<br>", $vmac["vendor_address"]);?></td>
+				<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $vmac["vendor_name"]) : $vmac["vendor_name"]);?></td>
+				<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $vmac["vendor_address"]) : $vmac["vendor_address"]);?></td>
 			</tr>
 			<?php
 		}
