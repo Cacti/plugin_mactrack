@@ -1067,11 +1067,11 @@ function mactrack_device() {
 			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 				?>
 				<td width=100>
-					<a class="linkEditMain" href="mactrack_devices.php?action=edit&device_id=<?php print $device["device_id"];?>"><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["device_name"]);?></a>
+					<a class="linkEditMain" href="mactrack_devices.php?action=edit&device_id=<?php print $device["device_id"];?>"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["device_name"]) : $device["device_name"]);?></a>
 				</td>
 				<td><?php print $device["site_name"];?></td>
 				<td><?php print get_colored_device_status(($device["disabled"] == "on" ? true : false), $device["snmp_status"]);?></td>
-				<td><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["hostname"]);?></td>
+				<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["hostname"]) : $device["hostname"]);?></td>
 				<td><?php print $mactrack_device_types[$device["scan_type"]];?></td>
 				<td><?php print ($device["scan_type"] == "1" ? "N/A" : $device["ips_total"]);?></td>
 				<td><?php print ($device["scan_type"] == "3" ? "N/A" : $device["ports_total"]);?></td>

@@ -985,6 +985,7 @@ function mactrack_view_footer() {
 						</td>
 					</tr>
 				</table>
+				<br>
 <?php
 }
 
@@ -1067,7 +1068,9 @@ function mactrack_view_ip_ranges() {
 			</td>
 		</tr>\n";
 
-	print $nav;
+	if ($total_rows) {
+		print $nav;
+	}
 
 	$display_text = array(
 		"site_name" => array("<br>Site Name", "ASC"),
@@ -1095,9 +1098,6 @@ function mactrack_view_ip_ranges() {
 			</tr>
 			<?php
 		}
-
-		/* put the nav bar on the bottom as well */
-		print $nav;
 	}else{
 		print "<tr><td><em>No MacTrack Site IP Ranges Found</em></td></tr>";
 	}
@@ -1233,7 +1233,9 @@ function mactrack_view_sites() {
 			</td>
 		</tr>\n";
 
-	print $nav;
+	if ($total_rows) {
+		print $nav;
+	}
 
 	if ($_REQUEST["detail"] == "false") {
 		$display_text = array(
@@ -1253,7 +1255,7 @@ function mactrack_view_sites() {
 				form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 					?>
 					<td width=200>
-						<?php print "<p class='linkEditMain'><strong>" . eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) . "</strong></p>";?>
+						<?php print "<p class='linkEditMain'><strong>" . (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]) . "</strong></p>";?>
 					</td>
 					<td><?php print number_format($site["total_devices"]);?></td>
 					<td><?php print number_format($site["total_ips"]);?></td>
@@ -1264,9 +1266,6 @@ function mactrack_view_sites() {
 				</tr>
 				<?php
 			}
-
-			/* put the nav bar on the bottom as well */
-			print $nav;
 		}else{
 			print "<tr><td><em>No MacTrack Sites</em></td></tr>";
 		}
@@ -1291,10 +1290,10 @@ function mactrack_view_sites() {
 				form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 					?>
 					<td width=200>
-						<?php print "<p class='linkEditMain'><strong>" . eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) . "</strong></p>";?>
+						<?php print "<p class='linkEditMain'><strong>" . (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]) . "</strong></p>";?>
 					</td>
-					<td><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["vendor"]);?></td>
-					<td><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["description"]);?></td>
+					<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["vendor"]) : $site["vendor"]);?></td>
+					<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["description"]) : $site["description"]);?></td>
 					<td><?php print number_format($site["total_devices"]);?></td>
 					<td><?php print ($site["device_type"] == "1" ? "N/A" : number_format($site["sum_ips_total"]));?></td>
 					<td><?php print ($site["device_type"] == "3" ? "N/A" : number_format($site["sum_ports_total"]));?></td>
@@ -1304,9 +1303,6 @@ function mactrack_view_sites() {
 				</tr>
 				<?php
 			}
-
-			/* put the nav bar on the bottom as well */
-			print $nav;
 		}else{
 			print "<tr><td><em>No MacTrack Sites</em></td></tr>";
 		}
@@ -1436,7 +1432,9 @@ function mactrack_view_devices() {
 			</td>
 		</tr>\n";
 
-	print $nav;
+	if ($total_rows) {
+		print $nav;
+	}
 
 	$display_text = array(
 		"device_name" => array("Device<br>Name", "ASC"),
@@ -1460,11 +1458,11 @@ function mactrack_view_devices() {
 			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 				?>
 				<td width=150>
-					<?php print "<p class='linkEditMain'>" . eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["device_name"]) . "</p>";?>
+					<?php print "<p class='linkEditMain'>" . (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["device_name"]) : $device["device_name"]) . "</p>";?>
 				</td>
-				<td><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["site_name"]);?></td>
+				<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["site_name"]) : $deive["site_name"]);?></td>
 				<td><?php print get_colored_device_status(($device["disabled"] == "on" ? true : false), $device["snmp_status"]);?></td>
-				<td><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["hostname"]);?></td>
+				<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["hostname"]) : $device["hostname"]);?></td>
 				<td><?php print $mactrack_device_types[$device["scan_type"]];?></td>
 				<td><?php print ($device["scan_type"] == "1" ? "N/A" : $device["ips_total"]);?></td>
 				<td><?php print ($device["scan_type"] == "3" ? "N/A" : $device["ports_total"]);?></td>
@@ -1476,9 +1474,6 @@ function mactrack_view_devices() {
 			</tr>
 			<?php
 		}
-
-		/* put the nav bar on the bottom as well */
-		print $nav;
 	}else{
 		print "<tr><td><em>No MacTrack Devices</em></td></tr>";
 	}
@@ -1699,7 +1694,9 @@ function mactrack_view_macs() {
 				</td>
 			</tr>\n";
 
-	print $nav;
+	if ($total_rows) {
+		print $nav;
+	}
 
 	if (strlen(read_config_option("mt_reverse_dns")) > 0) {
 		if ($_REQUEST["rows"] == 1) {
@@ -1782,17 +1779,17 @@ function mactrack_view_macs() {
 			?>
 			<td><?php print $port_result["device_name"];?></td>
 			<td><?php print $port_result["hostname"];?></td>
-			<td><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["ip_address"]);?></td>
+			<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["ip_address"]) : $port_result["ip_address"]);?></td>
 			<?php
 			if (strlen(read_config_option("mt_reverse_dns")) > 0) {?>
-			<td><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["dns_hostname"]);?></td>
+			<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["dns_hostname"]) : $port_result["dns_hostname"]);?></td>
 			<?php }?>
-			<td><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["mac_address"]);?></td>
-			<td><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["vendor_name"]);?></td>
+			<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["mac_address"]) : $port_result["mac_address"]);?></td>
+			<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["vendor_name"]) : $port_result["vendor_name"]);?></td>
 			<td><?php print $port_result["port_number"];?></td>
-			<td><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["port_name"]);?></td>
+			<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["port_name"]) : $port_result["port_name"]);?></td>
 			<td><?php print $port_result["vlan_id"];?></td>
-			<td><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["vlan_name"]);?></td>
+			<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["vlan_name"]) : $port_result["vlan_name"]);?></td>
 			<td><?php print $scan_date;?></td>
 			<?php if (mactrack_check_user_realm(22)) { ?>
 			<td style="<?php print get_checkbox_style();?>" width="1%" align="right">
@@ -1802,9 +1799,6 @@ function mactrack_view_macs() {
 			</tr>
 			<?php
 		}
-
-		/* put the nav bar on the bottom as well */
-		print $nav;
 	}else{
 		print "<tr><td><em>No MacTrack Port Results</em></td></tr>";
 	}

@@ -569,7 +569,7 @@ function mactrack_site() {
 				form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 					?>
 					<td width=200>
-						<a class="linkEditMain" href="mactrack_sites.php?action=edit&site_id=<?php print $site["site_id"];?>"><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]);?></a>
+						<a class="linkEditMain" href="mactrack_sites.php?action=edit&site_id=<?php print $site["site_id"];?>"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]);?></a>
 					</td>
 					<td><?php print number_format($site["total_devices"]);?></td>
 					<td><?php print number_format($site["total_ips"]);?></td>
@@ -631,10 +631,10 @@ function mactrack_site() {
 				form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 					?>
 					<td width=200>
-						<p class="linkEditMain"><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]);?></p>
+						<p class="linkEditMain"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]);?></p>
 					</td>
-					<td><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["vendor"]);?></td>
-					<td><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["description"]);?></td>
+					<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["vendor"]) : $site["vendor"]);?></td>
+					<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["description"]) : $site["description"]);?></td>
 					<td><?php print number_format($site["total_devices"]);?></td>
 					<td><?php print number_format($site["sum_ips_total"]);?></td>
 					<td><?php print number_format($site["sum_ports_total"]);?></td>

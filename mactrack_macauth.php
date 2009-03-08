@@ -392,9 +392,9 @@ function mactrack_maca() {
 			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 				?>
 				<td width="20%">
-					<a class="linkEditMain" href="mactrack_macauth.php?action=edit&mac_id=<?php print $mac['mac_id'];?>"><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["mac_address"]);?></a>
+					<a class="linkEditMain" href="mactrack_macauth.php?action=edit&mac_id=<?php print $mac['mac_id'];?>"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["mac_address"]) : $mac["mac_address"]);?></a>
 				</td>
-				<td width="50%"><?php print eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["description"]);?></td>
+				<td width="50%"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["description"]) : $mac["description"]);?></td>
 				<td width="20%"><?php print $mac["added_date"];?></td>
 				<td width="10%"><?php print db_fetch_cell("SELECT full_name FROM user_auth WHERE id='" . $mac["added_by"] . "'");?></td>
 
