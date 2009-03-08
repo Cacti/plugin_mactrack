@@ -216,7 +216,7 @@ if (read_config_option("mt_collection_timing") != "disabled") {
 
 /*	display_help - displays the usage of the function */
 function display_help () {
-	print "Network MacTrack Master Process Control Version 1.0, Copyright 2005 - Larry Adams\n\n";
+	print "MacTrack Master Poller v" . mactrack_version["version"] . ", Copyright 2006-2009 - The Cacti Group, Inc.\n\n";
 	print "usage: poller_mactrack.php [-sid=site_id] [-d] [-h] [--help] [-v] [--version]\n\n";
 	print "-sid=site_id  - the mac_track_sites site_id to scan\n";
 	print "-f            - Force the execution of a collection process\n";
