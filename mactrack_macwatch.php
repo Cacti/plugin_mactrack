@@ -196,14 +196,6 @@ function api_mactrack_macw_remove($mac_id) {
     MacWatch Functions
    --------------------- */
 
-function mactrack_check_changed($request, $session) {
-	if ((isset($_REQUEST[$request])) && (isset($_SESSION[$session]))) {
-		if ($_REQUEST[$request] != $_SESSION[$session]) {
-			return 1;
-		}
-	}
-}
-
 function mactrack_macw_remove() {
 	global $config;
 

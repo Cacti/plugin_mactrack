@@ -88,14 +88,6 @@ function mactrack_vmacs_export() {
 	}
 }
 
-function mactrack_check_changed($request, $session) {
-	if ((isset($_REQUEST[$request])) && (isset($_SESSION[$session]))) {
-		if ($_REQUEST[$request] != $_SESSION[$session]) {
-			return 1;
-		}
-	}
-}
-
 function mactrack_vmacs_get_vmac_records(&$sql_where, $row_limit, $apply_limits = TRUE) {
 	$sql_where = "";
 

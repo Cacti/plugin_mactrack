@@ -1,6 +1,60 @@
 var xmlHttp
 var url
 
+function applyReportFilterChange(objForm) {
+	strURL = '?report=' + objForm.report.value;
+	document.location = strURL;
+}
+
+function applySiteFilterChange(objForm) {
+	strURL = '?report=sites';
+	if (objForm.hidden_device_type_id) {
+		strURL = strURL + '&device_type_id=-1';
+		strURL = strURL + '&site_id=-1';
+	}else{
+		strURL = strURL + '&device_type_id=' + objForm.device_type_id.value;
+		strURL = strURL + '&site_id=' + objForm.site_id.value;
+	}
+	strURL = strURL + '&detail=' + objForm.detail.checked;
+	strURL = strURL + '&filter=' + objForm.filter.value;
+	strURL = strURL + '&rows=' + objForm.rows.value;
+	document.location = strURL;
+}
+
+function applyIPsFilterChange(objForm) {
+	strURL = '?report=ips';
+	strURL = strURL + '&site_id=' + objForm.site_id.value;
+	strURL = strURL + '&rows=' + objForm.rows.value;
+	document.location = strURL;
+}
+
+function applyDeviceFilterChange(objForm) {
+	strURL = '?report=devices';
+	strURL = strURL + '&site_id=' + objForm.site_id.value;
+	strURL = strURL + '&status=' + objForm.status.value;
+	strURL = strURL + '&type_id=' + objForm.type_id.value;
+	strURL = strURL + '&device_type_id=' + objForm.device_type_id.value;
+	strURL = strURL + '&filter=' + objForm.filter.value;
+	strURL = strURL + '&rows=' + objForm.rows.value;
+	document.location = strURL;
+}
+
+function applyMacFilterChange(objForm) {
+	strURL = '?report=macs';
+	strURL = strURL + '&site_id=' + objForm.site_id.value;
+	strURL = strURL + '&device_id=' + objForm.device_id.value;
+	strURL = strURL + '&scan_date=' + objForm.scan_date.value;
+	strURL = strURL + '&rows=' + objForm.rows.value;
+	strURL = strURL + '&mac_filter_type_id=' + objForm.mac_filter_type_id.value;
+	strURL = strURL + '&mac_filter=' + objForm.mac_filter.value;
+	strURL = strURL + '&authorized=' + objForm.authorized.value;
+	strURL = strURL + '&filter=' + objForm.filter.value;
+	strURL = strURL + '&vlan=' + objForm.vlan.value;
+	strURL = strURL + '&ip_filter_type_id=' + objForm.ip_filter_type_id.value;
+	strURL = strURL + '&ip_filter=' + objForm.ip_filter.value;
+	document.location = strURL;
+}
+
 function getfromserver(baseurl) {
 	xmlHttp=GetXmlHttpObject()
 	if (xmlHttp==null) {

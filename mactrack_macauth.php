@@ -193,14 +193,6 @@ function api_mactrack_maca_remove($mac_id) {	$mac_address = db_fetch_cell("SELE
     MacAuth Functions
    --------------------- */
 
-function mactrack_check_changed($request, $session) {
-	if ((isset($_REQUEST[$request])) && (isset($_SESSION[$session]))) {
-		if ($_REQUEST[$request] != $_SESSION[$session]) {
-			return 1;
-		}
-	}
-}
-
 function mactrack_maca_remove() {
 	global $config;
 

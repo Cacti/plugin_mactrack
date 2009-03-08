@@ -1807,4 +1807,94 @@ function mactrack_authorized($realm_id) {
 	}
 }
 
+function mactrack_tabs() {
+	global $config;
+
+	/* present a tabbed interface */
+	$tabs_mactrack = array(
+		"sites" => "Sites",
+		"devices" => "Devices",
+		"ips" => "IP Ranges",
+		"macs" => "MAC Addresses",
+		"interfaces" => "Interfaces");
+
+	/* set the default tab */
+	load_current_session_value("report", "sess_mactrack_tab", "macs");
+	$current_tab = $_REQUEST["report"];
+
+	/* draw the tabs */
+	print "<table class='report' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
+
+	if (sizeof($tabs_mactrack) > 0) {
+	foreach (array_keys($tabs_mactrack) as $tab_short_name) {
+		print "<td style='padding:3px 10px 2px 5px;background-color:" . (($tab_short_name == $current_tab) ? "silver;" : "#DFDFDF;") .
+			"white-space:nowrap;'" .
+			" nowrap width='1%'" .
+			"' align='center' class='tab'>
+			<span class='textHeader'><a href='" . $config['url_path'] .
+			"plugins/mactrack/mactrack_view_" . $tab_short_name . ".php?" .
+			"report=" . $tab_short_name .
+			"'>$tabs_mactrack[$tab_short_name]</a></span>
+		</td>\n
+		<td width='1'></td>\n";
+	}
+	}
+	print "<td></td>\n</tr></table>\n";
+}
+
+function mactrack_view_header() {
+	global $title, $colors;
+?>
+<script type="text/javascript">
+<!--
+-->
+</script>
+<table align="center" width="100%" cellpadding=1 cellspacing=0 border=0 bgcolor="#<?php print $colors["header"];?>">
+	<tr>
+		<td>
+			<table cellpadding=1 cellspacing=0 border=0 bgcolor="#<?php print $colors["form_background_dark"];?>" width="100%">
+				<form name="form_mactrack_view_reports">
+				<tr>
+					<td bgcolor="#<?php print $colors["header"];?>" style="padding: 3px;" colspan="10">
+						<table width="100%" cellpadding="0" cellspacing="0">
+							<tr>
+								<td bgcolor="#<?php print $colors["header"];?>" class="textHeaderDark"><strong><?php print $title;?></strong></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				</form>
+<?php
+}
+
+function mactrack_view_footer() {
+?>
+							</table>
+						</td>
+					</tr>
+				</table>
+				<br>
+<?php
+}
+
+function mactrack_check_changed($request, $session) {
+	if ((isset($_REQUEST[$request])) && (isset($_SESSION[$session]))) {
+		if ($_REQUEST[$request] != $_SESSION[$session]) {
+			return 1;
+		}
+	}
+}
+
+function mactrack_get_vendor_name($mac) {
+	$vendor_mac = substr($mac,0,8);
+
+	$vendor_name = db_fetch_cell("SELECT vendor_name FROM mac_track_oui_database WHERE vendor_mac='$vendor_mac'");
+
+	if (strlen($vendor_name)) {
+		return $vendor_name;
+	}else{
+		return "Unknown";
+	}
+}
+
 ?>

@@ -74,7 +74,7 @@ function plugin_mactrack_version () {
 function mactrack_check_upgrade () {
 	global $config;
 
-	$files = array('index.php', 'plugins.php', 'mactrack_devices.php', 'mactrack_view.php');
+	$files = array('index.php', 'plugins.php', 'mactrack_devices.php');
 	if (isset($_SERVER['PHP_SELF']) && !in_array(basename($_SERVER['PHP_SELF']), $files)) {
 		return;
 	}
@@ -358,8 +358,12 @@ function mactrack_draw_navigation_text ($nav) {
 	$nav["mactrack_macauth.php:edit"] = array("title" => "(Edit)", "mapping" => "index.php:,mactrack_macauth.php:", "url" => "", "level" => "2");
 	$nav["mactrack_macauth.php:actions"] = array("title" => "Actions", "mapping" => "index.php:,mactrack_macauth.php:", "url" => "", "level" => "2");
 	$nav["mactrack_vendormacs.php:"] = array("title" => "MacTrack Vendor Macs", "mapping" => "index.php:", "url" => "mactrack_vendormacs.php", "level" => "1");
-	$nav["mactrack_view.php:"] = array("title" => "MacTrack Viewer", "mapping" => "", "url" => "mactrack_view.php", "level" => "0");
-	$nav["mactrack_view.php:actions"] = array("title" => "Actions", "mapping" => "mactrack_view.php:", "url" => "", "level" => "1");
+	$nav["mactrack_view_macs.php:"] = array("title" => "MacTrack Viewer", "mapping" => "", "url" => "mactrack_view_macs.php", "level" => "0");
+	$nav["mactrack_view_macs.php:actions"] = array("title" => "Actions", "mapping" => "mactrack_view_macs.php:", "url" => "", "level" => "1");
+	$nav["mactrack_view_interfaces.php:"] = array("title" => "MacTrack View Interfaces", "mapping" => "", "url" => "mactrack_view_interfaces.php", "level" => "0");
+	$nav["mactrack_view_sites.php:"] = array("title" => "MacTrack View Sites", "mapping" => "", "url" => "mactrack_view_sites.php", "level" => "0");
+	$nav["mactrack_view_ips.php:"] = array("title" => "MacTrack View IP Ranges", "mapping" => "", "url" => "mactrack_view_ips.php", "level" => "0");
+	$nav["mactrack_view_devices.php:"] = array("title" => "MacTrack View Devices", "mapping" => "", "url" => "mactrack_view_devices.php", "level" => "0");
 	$nav["mactrack_utilities.php:"] = array("title" => "Device Tracking Utilities", "mapping" => "index.php:", "url" => "mactrack_utilities.php", "level" => "1");
 	$nav["mactrack_utilities.php:mactrack_utilities_perform_db_maint"] = array("title" => "Perform Database Maintenance", "mapping" => "index.php:,mactrack_utilities.php:", "url" => "mactrack_utilities.php", "level" => "2");
 	$nav["mactrack_utilities.php:mactrack_utilities_purge_scanning_funcs"] = array("title" => "Refresh Scanning Functions", "mapping" => "index.php:,mactrack_utilities.php:", "url" => "mactrack_utilities.php", "level" => "2");
@@ -371,18 +375,16 @@ function mactrack_draw_navigation_text ($nav) {
 
 function mactrack_show_tab () {
 	global $config, $user_auth_realm_filenames;
-	$realm_id = 0;
-	if (isset($user_auth_realm_filenames[basename('mactrack_view.php')])) {
-		$realm_id = $user_auth_realm_filenames[basename('mactrack_view.php')];
-	}
+
+	$realm_id = 2120;
 	if ((db_fetch_assoc("select user_auth_realm.realm_id
 		from user_auth_realm where user_auth_realm.user_id='" . $_SESSION["sess_user_id"] . "'
 		and user_auth_realm.realm_id='$realm_id'")) || (empty($realm_id))) {
 
-		if (substr_count($_SERVER["REQUEST_URI"], "mactrack_view.php")) {
-			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="MacTrack" align="absmiddle" border="0"></a>';
+		if (substr_count($_SERVER["REQUEST_URI"], "mactrack_view_")) {
+			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_macs.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="MacTrack" align="absmiddle" border="0"></a>';
 		}else{
-			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="MacTrack" align="absmiddle" border="0"></a>';
+			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_macs.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="MacTrack" align="absmiddle" border="0"></a>';
 		}
 	}
 }
@@ -396,14 +398,18 @@ function mactrack_config_arrays () {
 	$user_auth_realms[2121]='Plugin -> MacTrack Administrator';
 	$user_auth_realms[2122]='Plugin -> MacTrack Security';
 
-	$user_auth_realm_filenames['mactrack_view.php']         = 2120;
-	$user_auth_realm_filenames['mactrack_devices.php']      = 2121;
-	$user_auth_realm_filenames['mactrack_sites.php']        = 2121;
-	$user_auth_realm_filenames['mactrack_device_types.php'] = 2121;
-	$user_auth_realm_filenames['mactrack_utilities.php']    = 2121;
-	$user_auth_realm_filenames['mactrack_macwatch.php']     = 2121;
-	$user_auth_realm_filenames['mactrack_macauth.php']      = 2121;
-	$user_auth_realm_filenames['mactrack_vendormacs.php']   = 2121;
+	$user_auth_realm_filenames['mactrack_view_ips.php']        = 2120;
+	$user_auth_realm_filenames['mactrack_view_macs.php']       = 2120;
+	$user_auth_realm_filenames['mactrack_view_sites.php']      = 2120;
+	$user_auth_realm_filenames['mactrack_view_devices.php']    = 2120;
+	$user_auth_realm_filenames['mactrack_view_interfaces.php'] = 2120;
+	$user_auth_realm_filenames['mactrack_devices.php']         = 2121;
+	$user_auth_realm_filenames['mactrack_sites.php']           = 2121;
+	$user_auth_realm_filenames['mactrack_device_types.php']    = 2121;
+	$user_auth_realm_filenames['mactrack_utilities.php']       = 2121;
+	$user_auth_realm_filenames['mactrack_macwatch.php']        = 2121;
+	$user_auth_realm_filenames['mactrack_macauth.php']         = 2121;
+	$user_auth_realm_filenames['mactrack_vendormacs.php']      = 2121;
 
 	$refresh_interval = array(
 		5 => "5 Seconds",

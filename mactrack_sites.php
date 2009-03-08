@@ -284,14 +284,6 @@ function api_mactrack_site_remove($site_id) {
     Site Functions
    --------------------- */
 
-function mactrack_check_changed($request, $session) {
-	if ((isset($_REQUEST[$request])) && (isset($_SESSION[$session]))) {
-		if ($_REQUEST[$request] != $_SESSION[$session]) {
-			return 1;
-		}
-	}
-}
-
 function mactrack_site_remove() {
 	global $config;
 
