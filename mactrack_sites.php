@@ -517,13 +517,12 @@ function mactrack_site() {
 			FROM mac_track_sites
 			$sql_where");
 	}else{
-		$total_rows = sizeof(db_fetch_assoc("SELECT
-			mac_track_device_types.device_type_id, mac_track_sites.site_name
+		$total_rows = db_fetch_cell("SELECT count(*)
 			FROM (mac_track_device_types
 			RIGHT JOIN mac_track_devices ON (mac_track_device_types.device_type_id = mac_track_devices.device_type_id))
 			RIGHT JOIN mac_track_sites ON (mac_track_devices.site_id = mac_track_sites.site_id)
 			$sql_where
-			GROUP BY mac_track_sites.site_name, mac_track_device_types.device_type_id"));
+			GROUP BY mac_track_sites.site_name, mac_track_device_types.device_type_id");
 	}
 
 	/* generate page list */
@@ -566,23 +565,16 @@ function mactrack_site() {
 		$i = 0;
 		if (sizeof($sites) > 0) {
 			foreach ($sites as $site) {
-				form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
-					?>
-					<td width=200>
-						<a class="linkEditMain" href="mactrack_sites.php?action=edit&site_id=<?php print $site["site_id"];?>"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]);?></a>
-					</td>
-					<td><?php print number_format($site["total_devices"]);?></td>
-					<td><?php print number_format($site["total_ips"]);?></td>
-					<td><?php print number_format($site["total_user_ports"]);?></td>
-					<td><?php print number_format($site["total_oper_ports"]);?></td>
-					<td><?php print number_format($site["total_macs"]);?></td>
-					<td><?php print ($site["total_device_errors"]);?></td>
-
-					<td style="<?php print get_checkbox_style();?>" width="1%" align="right">
-						<input type='checkbox' style='margin: 0px;' name='chk_<?php print $site["site_id"];?>' title="<?php print $site["site_name"];?>">
-					</td>
-				</tr>
-				<?php
+				form_alternate_row_color($colors["alternate"],$colors["light"],$i, 'line' . $site["site_id"]); $i++;
+				form_selectable_cell("<a class='linkEditMain' href='mactrack_sites.php?action=edit&site_id=" . $site["site_id"] . "'>". (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]) . "</a>", $site["site_id"]);
+				form_selectable_cell(number_format($site["total_devices"]), $site["site_id"]);
+				form_selectable_cell(number_format($site["total_ips"]), $site["site_id"]);
+				form_selectable_cell(number_format($site["total_user_ports"]), $site["site_id"]);
+				form_selectable_cell(number_format($site["total_oper_ports"]), $site["site_id"]);
+				form_selectable_cell(number_format($site["total_macs"]), $site["site_id"]);
+				form_selectable_cell($site["total_device_errors"], $site["site_id"]);
+				form_checkbox_cell($site["site_name"], $site["site_id"]);
+				form_end_row();
 			}
 
 			/* put the nav bar on the bottom as well */
@@ -623,7 +615,7 @@ function mactrack_site() {
 			"sum_ports_trunk" => array("Total<br>Trunks", "DESC"),
 			"sum_macs_active" => array("MACS<br>Found", "DESC"));
 
-		html_header_sort_checkbox($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
+		html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 
 		$i = 0;
 		if (sizeof($sites) > 0) {
@@ -658,7 +650,9 @@ function mactrack_site() {
 	}
 
 	/* draw the dropdown containing a list of available actions for this form */
-	mactrack_draw_actions_dropdown($site_actions);
+	if ($_REQUEST["detail"] == "false") {
+		mactrack_draw_actions_dropdown($site_actions);
+	}
 }
 
 ?>

@@ -75,10 +75,6 @@
 						}
 						?>
 					</td>
-				</tr>
-			</table>
-			<table cellpadding="1" cellspacing="0">
-				<tr>
 					<td width="70">
 						&nbsp;Sub Type:
 					</td>

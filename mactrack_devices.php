@@ -1025,7 +1025,7 @@ function mactrack_device() {
 	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_devices.php?filter=" . $_REQUEST["filter"]);
 
 	$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-			<td colspan='12'>
+			<td colspan='13'>
 				<table width='100%' cellspacing='0' cellpadding='0' border='0'>
 					<tr>
 						<td align='left' class='textHeaderDark'>
@@ -1047,6 +1047,7 @@ function mactrack_device() {
 	}
 
 	$display_text = array(
+		"nosort" => array("<br>Actions", ""),
 		"device_name" => array("Device<br>Name", "ASC"),
 		"site_name" => array("<br>Site Name", "ASC"),
 		"snmp_status" => array("<br>Status", "ASC"),
@@ -1064,26 +1065,21 @@ function mactrack_device() {
 	$i = 0;
 	if (sizeof($devices) > 0) {
 		foreach ($devices as $device) {
-			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
-				?>
-				<td width=100>
-					<a class="linkEditMain" href="mactrack_devices.php?action=edit&device_id=<?php print $device["device_id"];?>"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["device_name"]) : $device["device_name"]);?></a>
-				</td>
-				<td><?php print $device["site_name"];?></td>
-				<td><?php print get_colored_device_status(($device["disabled"] == "on" ? true : false), $device["snmp_status"]);?></td>
-				<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["hostname"]) : $device["hostname"]);?></td>
-				<td><?php print $mactrack_device_types[$device["scan_type"]];?></td>
-				<td><?php print ($device["scan_type"] == "1" ? "N/A" : $device["ips_total"]);?></td>
-				<td><?php print ($device["scan_type"] == "3" ? "N/A" : $device["ports_total"]);?></td>
-				<td><?php print ($device["scan_type"] == "3" ? "N/A" : $device["ports_active"]);?></td>
-				<td><?php print ($device["scan_type"] == "3" ? "N/A" : $device["ports_trunk"]);?></td>
-				<td><?php print ($device["scan_type"] == "3" ? "N/A" : $device["macs_active"]);?></td>
-				<td><?php print number_format($device["last_runduration"], 1);?></td>
-				<td style="<?php print get_checkbox_style();?>" width="1%" align="right">
-					<input type='checkbox' style='margin: 0px;' name='chk_<?php print $device["device_id"];?>' title="<?php print $device["device_name"];?>">
-				</td>
-			</tr>
-			<?php
+			form_alternate_row_color($colors["alternate"],$colors["light"],$i, 'line' . $device["device_id"]); $i++;
+			form_selectable_cell("", $device["device_id"]);
+			form_selectable_cell("<a class='linkEditMain' href='mactrack_devices.php?action=edit&device_id=" . $device['device_id'] . "'>" . (strlen($_REQUEST['filter']) ? eregi_replace("(" . preg_quote($_REQUEST['filter']) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device['device_name']) : $device['device_name']) . "</a>", $device["device_id"]);
+			form_selectable_cell($device["site_name"], $device["device_id"]);
+			form_selectable_cell(get_colored_device_status(($device["disabled"] == "on" ? true : false), $device["snmp_status"]), $device["device_id"]);
+			form_selectable_cell((strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["hostname"]) : $device["hostname"]), $device["device_id"]);
+			form_selectable_cell($mactrack_device_types[$device["scan_type"]], $device["device_id"]);
+			form_selectable_cell(($device["scan_type"] == "1" ? "N/A" : $device["ips_total"]), $device["device_id"]);
+			form_selectable_cell(($device["scan_type"] == "3" ? "N/A" : $device["ports_total"]), $device["device_id"]);
+			form_selectable_cell(($device["scan_type"] == "3" ? "N/A" : $device["ports_active"]), $device["device_id"]);
+			form_selectable_cell(($device["scan_type"] == "3" ? "N/A" : $device["ports_trunk"]), $device["device_id"]);
+			form_selectable_cell(($device["scan_type"] == "3" ? "N/A" : $device["macs_active"]), $device["device_id"]);
+			form_selectable_cell(number_format($device["last_runduration"], 1), $device["device_id"]);
+			form_checkbox_cell($device["device_name"], $device["device_id"]);
+			form_end_row();
 		}
 
 		/* put the nav bar on the bottom as well */

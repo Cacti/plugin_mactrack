@@ -60,13 +60,16 @@
 						</select>
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="clear_x" value="Clear">
+						&nbsp;<input type="submit" name="clear_x" title="Clear Filtered Results" value="Clear">
 					</td>
 					<td>
-						&nbsp<input type="submit" name="import_x" value="Import">
+						&nbsp<input type="submit" name="scan_x" title="Scan Active Devices for Unknown Device Types" value="Rescan">
 					</td>
 					<td>
-						&nbsp<input type="submit" name="export_x" value="Export">
+						&nbsp<input type="submit" name="import_x" title="Import Device Types from a CSV File" value="Import">
+					</td>
+					<td>
+						&nbsp<input type="submit" name="export_x" title="Export Device Types to Share with Others" value="Export">
 					</td>
 				</tr>
 			</table>

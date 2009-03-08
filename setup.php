@@ -105,6 +105,17 @@ function mactrack_check_upgrade () {
 }
 
 function mactrack_database_upgrade () {
+	$keys  = db_fetch_assoc("SHOW INDEXES FROM mac_track_ports");
+	$found = false;
+	if (sizeof($keys)) {	foreach($keys as $key) {		if ($key["Key_name"] == "scan_date") {			$found = true;
+			break;
+		}
+	}
+	}
+	if (!$found) {
+		db_execute("ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)");
+	}
+
 }
 
 function mactrack_check_dependencies() {
