@@ -26,12 +26,10 @@ $guest_account = true;
 
 chdir('../../');
 include("./include/auth.php");
-include_once($config['base_path'] . "/include/global_arrays.php");
-include_once($config['base_path'] . "/plugins/mactrack/lib/mactrack_functions.php");
+include_once("./include/global_arrays.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 define("MAX_DISPLAY_PAGES", 21);
-
-load_current_session_value("report", "sess_mactrack_view_report", "macs");
 
 /* set default action */
 if (!isset($_REQUEST["action"])) { $_REQUEST["action"] = ""; }
@@ -49,9 +47,9 @@ default:
 		mactrack_view_export_interfaces();
 	}else{
 		$title = "Device Tracking - Interface Report View";
-		include_once($config['base_path'] . "/plugins/mactrack/include/top_mactrack_header.php");
+		include_once("./include/top_graph_header.php");
 		mactrack_view_interfaces();
-		include($config['base_path'] . "/include/bottom_footer.php");
+		include("./include/bottom_footer.php");
 	}
 
 	break;

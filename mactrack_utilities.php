@@ -34,30 +34,30 @@ switch ($_REQUEST["action"]) {
 
 		break;
 	case 'mactrack_utilities_perform_db_maint':
-		include_once($config['base_path'] . "/include/top_header.php");
-		include_once($config['base_path'] . "/plugins/mactrack/lib/mactrack_functions.php");
+		include_once("./include/top_header.php");
+		include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 		mactrack_utilities();
 		mactrack_utilities_db_maint();
 
-		include_once($config['base_path'] . "/include/bottom_footer.php");
+		include_once("./include/bottom_footer.php");
 		break;
 	case 'mactrack_utilities_purge_scanning_funcs':
-		include_once($config['base_path'] . "/include/top_header.php");
-		include_once($config['base_path'] . "/plugins/mactrack/lib/mactrack_functions.php");
+		include_once("./include/top_header.php");
+		include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 		mactrack_utilities();
 		mactrack_utilities_purge_scanning_funcs();
 
-		include_once($config['base_path'] . "/include/bottom_footer.php");
+		include_once("./include/bottom_footer.php");
 		break;
 	case 'mactrack_refresh_oui_database':
-		include_once($config['base_path'] . "/include/top_header.php");
-		include_once($config['base_path'] . "/plugins/mactrack/lib/mactrack_functions.php");
+		include_once("./include/top_header.php");
+		include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 		import_oui_database("web");
 
-		include_once($config['base_path'] . "/include/bottom_footer.php");
+		include_once("./include/bottom_footer.php");
 		break;
 	case 'mactrack_view_proc_status':
 		/* ================= input validation ================= */
@@ -69,18 +69,18 @@ switch ($_REQUEST["action"]) {
 		$refresh["seconds"] = $_REQUEST["refresh"];
 		$refresh["page"] = "mactrack_utilities.php?action=mactrack_view_proc_status";
 
-		include_once($config['base_path'] . "/include/top_header.php");
+		include_once("./include/top_header.php");
 
 		mactrack_display_run_status();
 
-		include_once($config['base_path'] . "/include/bottom_footer.php");
+		include_once("./include/bottom_footer.php");
 		break;
 	default:
-		include_once($config['base_path'] . "/include/top_header.php");
+		include_once("./include/top_header.php");
 
 		mactrack_utilities();
 
-		include_once($config['base_path'] . "/include/bottom_footer.php");
+		include_once("./include/bottom_footer.php");
 		break;
 }
 
@@ -323,9 +323,9 @@ function mactrack_utilities_ports_clear() {
 	global $config, $colors;
 
 	if ((read_config_option("remove_verification") == "on") && (!isset($_GET["confirm"]))) {
-		include($config['base_path'] . "/include/top_header.php");
+		include("./include/top_header.php");
 		form_confirm("Are You Sure?", "Are you sure you want to delete all the Port to MAC to IP results from the system?", "mactrack_utilities.php", "mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table");
-		include($config['base_path'] . "/include/bottom_footer.php");
+		include("./include/bottom_footer.php");
 		exit;
 	}
 
@@ -336,7 +336,7 @@ function mactrack_utilities_ports_clear() {
 		db_execute("UPDATE mac_track_sites SET total_macs=0, total_ips=0, total_user_ports=0, total_oper_ports=0, total_trunk_ports=0");
 		db_execute("UPDATE mac_track_devices SET ips_total=0, ports_total=0, ports_active=0, ports_trunk=0, macs_active=0, vlans_total=0, last_runduration=0.0000");
 
-		include($config['base_path'] . "/include/top_header.php");
+		include("./include/top_header.php");
 		mactrack_utilities();
 		html_start_box("<strong>Device Tracking Database Results</strong>", "100%", $colors["header"], "3", "center", "");
 		?>
@@ -366,7 +366,12 @@ function mactrack_utilities_db_maint() {
 function mactrack_utilities_purge_scanning_funcs() {
 	global $config, $colors;
 
+	if (defined(CACTI_BASE_PATH)) {
+		$config["base_path"] = CACTI_BASE_PATH;
+	}
+
 	db_execute("TRUNCATE TABLE mac_track_scanning_functions");
+
 	include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_functions.php");
 	include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_vendors.php");
 

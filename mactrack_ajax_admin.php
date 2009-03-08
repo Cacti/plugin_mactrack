@@ -24,7 +24,7 @@
 
 chdir('../../');
 include("./include/auth.php");
-include_once($config["base_path"] . "/plugins/mactrack/mactrack_functions.php");
+include_once("./plugins/mactrack/mactrack_functions.php");
 
 /* check actions */
 if (isset($_REQUEST["action"])) {

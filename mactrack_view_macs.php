@@ -26,8 +26,8 @@ $guest_account = true;
 
 chdir('../../');
 include("./include/auth.php");
-include_once($config['base_path'] . "/include/global_arrays.php");
-include_once($config['base_path'] . "/plugins/mactrack/lib/mactrack_functions.php");
+include_once("./include/global_arrays.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 define("MAX_DISPLAY_PAGES", 21);
 
@@ -35,8 +35,6 @@ $mactrack_view_macs_actions = array(
 	1 => "Authorize",
 	2 => "Revoke"
 	);
-
-load_current_session_value("report", "sess_mactrack_view_report", "macs");
 
 /* set default action */
 if (!isset($_REQUEST["action"])) { $_REQUEST["action"] = ""; }
@@ -54,9 +52,9 @@ default:
 		mactrack_view_export_macs();
 	}else{
 		$title = "Device Tracking - MAC to IP Report View";
-		include_once($config['base_path'] . "/plugins/mactrack/include/top_mactrack_header.php");
+		include_once("./include/top_graph_header.php");
 		mactrack_view_macs();
-		include($config['base_path'] . "/include/bottom_footer.php");
+		include("./include/bottom_footer.php");
 	}
 
 	break;
@@ -242,7 +240,6 @@ function mactrack_view_export_macs() {
 	}
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
-	load_current_session_value("report", "sess_mactrack_view_report", "macs");
 	load_current_session_value("page", "sess_mactrack_view_macs_current_page", "1");
 	load_current_session_value("scan_date", "sess_mactrack_view_macs_scan_date", "2");
 	load_current_session_value("filter", "sess_mactrack_view_macs_filter", "");
@@ -598,7 +595,7 @@ function mactrack_view_macs() {
 
 	mactrack_view_header();
 
-	include($config['base_path'] . "/plugins/mactrack/html/inc_mactrack_view_mac_filter_table.php");
+	include("./plugins/mactrack/html/inc_mactrack_view_mac_filter_table.php");
 
 	mactrack_view_footer();
 
@@ -643,57 +640,59 @@ function mactrack_view_macs() {
 	/* generate page list */
 	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_view.php?device_id=" . $_REQUEST["device_id"]);
 
-	$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-				<td colspan='12'>
-					<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-						<tr>
-							<td align='left' class='textHeaderDark'>
-								<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_view.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-							</td>\n
-							<td align='center' class='textHeaderDark'>
-								Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-							</td>\n
-							<td align='right' class='textHeaderDark'>
-								<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_view.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-							</td>\n
-						</tr>
-					</table>
-				</td>
-			</tr>\n";
-
-	if ($total_rows) {
-		print $nav;
+	if (isset($config["base_path"])) {
+		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
+					<td colspan='12'>
+						<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+							<tr>
+								<td align='left' class='textHeaderDark'>
+									<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_view.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
+								</td>\n
+								<td align='center' class='textHeaderDark'>
+									Showing Rows " . ($total_rows == 0 ? "None" : (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]") . "
+								</td>\n
+								<td align='right' class='textHeaderDark'>
+									<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_view.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+								</td>\n
+							</tr>
+						</table>
+					</td>
+				</tr>\n";
+	}else{
+		$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $_REQUEST["rows"], $total_rows, 13, "mactrack_view_sites.php");
 	}
+
+	print $nav;
 
 	if (strlen(read_config_option("mt_reverse_dns")) > 0) {
 		if ($_REQUEST["rows"] == 1) {
 			$display_text = array(
-				"nosort" => array("<br>Actions", ""),
-				"device_name" => array("Switch<br>Name", "ASC"),
-				"hostname" => array("Switch<br>Hostname", "ASC"),
-				"ip_address" => array("End Device<br>IP Address", "ASC"),
-				"dns_hostname" => array("End Device<br>DNS Hostname", "ASC"),
-				"mac_address" => array("End Device<br>MAC Address", "ASC"),
-				"vendor_name" => array("Vendor<br>Name", "ASC"),
-				"port_number" => array("Port<br>Number", "DESC"),
-				"port_name" => array("Port<br>Name", "ASC"),
-				"vlan_id" => array("VLAN<br>ID", "DESC"),
-				"vlan_name" => array("VLAN<br>Name", "ASC"),
-				"max_scan_date" => array("Last<br>Scan Date", "DESC"));
+				"nosort" => array("Actions", ""),
+				"device_name" => array("Switch Name", "ASC"),
+				"hostname" => array("Switch Hostname", "ASC"),
+				"ip_address" => array("ED IP Address", "ASC"),
+				"dns_hostname" => array("ED DNS Hostname", "ASC"),
+				"mac_address" => array("ED MAC Address", "ASC"),
+				"vendor_name" => array("Vendor Name", "ASC"),
+				"port_number" => array("Port Number", "DESC"),
+				"port_name" => array("Port Name", "ASC"),
+				"vlan_id" => array("VLAN ID", "DESC"),
+				"vlan_name" => array("VLAN Name", "ASC"),
+				"max_scan_date" => array("Last Scan Date", "DESC"));
 		}else{
 			$display_text = array(
-				"nosort" => array("<br>Actions", ""),
-				"device_name" => array("Switch<br>Name", "ASC"),
-				"hostname" => array("Switch<br>Hostname", "ASC"),
-				"ip_address" => array("End Device<br>IP Address", "ASC"),
-				"dns_hostname" => array("End Device<br>DNS Hostname", "ASC"),
-				"mac_address" => array("End Device<br>MAC Address", "ASC"),
-				"vendor_name" => array("Vendor<br>Name", "ASC"),
-				"port_number" => array("Port<br>Number", "DESC"),
-				"port_name" => array("Port<br>Name", "ASC"),
-				"vlan_id" => array("VLAN<br>ID", "DESC"),
-				"vlan_name" => array("VLAN<br>Name", "ASC"),
-				"scan_date" => array("Last<br>Scan Date", "DESC"));
+				"nosort" => array("Actions", ""),
+				"device_name" => array("Switch Name", "ASC"),
+				"hostname" => array("Switch Hostname", "ASC"),
+				"ip_address" => array("ED IP Address", "ASC"),
+				"dns_hostname" => array("ED DNS Hostname", "ASC"),
+				"mac_address" => array("ED MAC Address", "ASC"),
+				"vendor_name" => array("Vendor Name", "ASC"),
+				"port_number" => array("Port Number", "DESC"),
+				"port_name" => array("Port Name", "ASC"),
+				"vlan_id" => array("VLAN ID", "DESC"),
+				"vlan_name" => array("VLAN Name", "ASC"),
+				"scan_date" => array("Last Scan Date", "DESC"));
 		}
 
 		if (mactrack_check_user_realm(22)) {
@@ -704,30 +703,30 @@ function mactrack_view_macs() {
 	}else{
 		if ($_REQUEST["rows"] == 1) {
 			$display_text = array(
-				"nosort" => array("<br>Actions", ""),
-				"device_name" => array("Switch<br>Name", "ASC"),
-				"hostname" => array("Switch<br>Hostname", "ASC"),
-				"ip_address" => array("End Device<br>IP Address", "ASC"),
-				"mac_address" => array("End Device<br>MAC Address", "ASC"),
-				"vendor_name" => array("Vendor<br>Name", "ASC"),
-				"port_number" => array("Port<br>Number", "DESC"),
-				"port_name" => array("Port<br>Name", "ASC"),
-				"vlan_id" => array("VLAN<br>ID", "DESC"),
-				"vlan_name" => array("VLAN<br>Name", "ASC"),
-				"max_scan_date" => array("Last<br>Scan Date", "DESC"));
+				"nosort" => array("Actions", ""),
+				"device_name" => array("Switch Name", "ASC"),
+				"hostname" => array("Switch Hostname", "ASC"),
+				"ip_address" => array("ED IP Address", "ASC"),
+				"mac_address" => array("ED MAC Address", "ASC"),
+				"vendor_name" => array("Vendor Name", "ASC"),
+				"port_number" => array("Port Number", "DESC"),
+				"port_name" => array("Port Name", "ASC"),
+				"vlan_id" => array("VLAN ID", "DESC"),
+				"vlan_name" => array("VLAN Name", "ASC"),
+				"max_scan_date" => array("Last Scan Date", "DESC"));
 		}else{
 			$display_text = array(
-				"nosort" => array("<br>Actions", ""),
-				"device_name" => array("Switch<br>Device", "ASC"),
-				"hostname" => array("Switch<br>Hostname", "ASC"),
-				"ip_address" => array("End Device<br>IP Address", "ASC"),
-				"mac_address" => array("End Device<br>MAC Address", "ASC"),
-				"vendor_name" => array("Vendor<br>Name", "ASC"),
-				"port_number" => array("Port<br>Number", "DESC"),
-				"port_name" => array("Port<br>Name", "ASC"),
-				"vlan_id" => array("VLAN<br>ID", "DESC"),
-				"vlan_name" => array("VLAN<br>Name", "ASC"),
-				"scan_date" => array("Last<br>Scan Date", "DESC"));
+				"nosort" => array("Actions", ""),
+				"device_name" => array("Switch Device", "ASC"),
+				"hostname" => array("Switch Hostname", "ASC"),
+				"ip_address" => array("ED IP Address", "ASC"),
+				"mac_address" => array("ED MAC Address", "ASC"),
+				"vendor_name" => array("Vendor Name", "ASC"),
+				"port_number" => array("Port Number", "DESC"),
+				"port_name" => array("Port Name", "ASC"),
+				"vlan_id" => array("VLAN ID", "DESC"),
+				"vlan_name" => array("VLAN Name", "ASC"),
+				"scan_date" => array("Last Scan Date", "DESC"));
 		}
 
 		if (mactrack_check_user_realm(22)) {
@@ -774,6 +773,9 @@ function mactrack_view_macs() {
 	}else{
 		print "<tr><td colspan='10'><em>No MacTrack Port Results</em></td></tr>";
 	}
+
+	print $nav;
+
 	html_end_box(false);
 
 	if (mactrack_check_user_realm(2122)) {

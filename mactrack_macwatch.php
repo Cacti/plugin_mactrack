@@ -336,9 +336,9 @@ function mactrack_macw() {
 
 	html_start_box("<strong>MacTrack MacWatch Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_macwatch.php?action=edit");
 
-	include($config['base_path'] . "/plugins/mactrack/html/inc_mactrack_macw_filter_table.php");
+	include("./plugins/mactrack/html/inc_mactrack_macw_filter_table.php");
 
-	html_end_box();
+	html_end_box(FALSE);
 
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
@@ -376,12 +376,12 @@ function mactrack_macw() {
 	}
 
 	$display_text = array(
-		"name" => array("Watch<br>Name", "ASC"),
-		"mac_address" => array("Mac<br>Address", "ASC"),
-		"ticket_number" => array("Ticket<br>Number", "ASC"),
-		"" => array("Watch<br>Description", "ASC"),
-		"date_first_seen" => array("First<br>Seen", "ASC"),
-		"date_last_seen" => array("Last<br>Seen", "ASC"));
+		"name" => array("Watch Name", "ASC"),
+		"mac_address" => array("Mac Address", "ASC"),
+		"ticket_number" => array("Ticket Number", "ASC"),
+		"" => array("Watch Description", "ASC"),
+		"date_first_seen" => array("First Seen", "ASC"),
+		"date_last_seen" => array("Last Seen", "ASC"));
 
 	html_header_sort_checkbox($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 

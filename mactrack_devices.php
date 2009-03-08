@@ -1007,9 +1007,9 @@ function mactrack_device() {
 
 	html_start_box("<strong>MacTrack Device Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_devices.php?action=edit&status=" . $_REQUEST["status"]);
 
-	include("plugins/mactrack/html/inc_mactrack_device_filter_table.php");
+	include("./plugins/mactrack/html/inc_mactrack_device_filter_table.php");
 
-	html_end_box();
+	html_end_box(FALSE);
 
 	$sql_where = "";
 
@@ -1049,18 +1049,18 @@ function mactrack_device() {
 	}
 
 	$display_text = array(
-		"nosort" => array("<br>Actions", ""),
-		"device_name" => array("Device<br>Name", "ASC"),
-		"site_name" => array("<br>Site Name", "ASC"),
-		"snmp_status" => array("<br>Status", "ASC"),
-		"hostname" => array("<br>Hostname", "ASC"),
-		"scan_type" => array("Device<br>Type", "ASC"),
-		"ips_total" => array("Total<br>IP's", "DESC"),
-		"ports_total" => array("User<br>Ports", "DESC"),
-		"ports_active" => array("User<br>Ports Up", "DESC"),
-		"ports_trunk" => array("Trunk<br>Ports", "DESC"),
-		"macs_active" => array("Active<br>Macs", "DESC"),
-		"last_runduration" => array("Last<br>Duration", "DESC"));
+		"nosort" => array("Actions", ""),
+		"device_name" => array("Device Name", "ASC"),
+		"site_name" => array("Site Name", "ASC"),
+		"snmp_status" => array("Status", "ASC"),
+		"hostname" => array("Hostname", "ASC"),
+		"scan_type" => array("Device Type", "ASC"),
+		"ips_total" => array("Total IP's", "DESC"),
+		"ports_total" => array("User Ports", "DESC"),
+		"ports_active" => array("User Ports Up", "DESC"),
+		"ports_trunk" => array("Trunk Ports", "DESC"),
+		"macs_active" => array("Active Macs", "DESC"),
+		"last_runduration" => array("Last Duration", "DESC"));
 
 	html_header_sort_checkbox($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 
@@ -1074,7 +1074,7 @@ function mactrack_device() {
 		/* put the nav bar on the bottom as well */
 		print $nav;
 	}else{
-		print "<tr><td><em>No MacTrack Devices</em></td></tr>";
+		print "<tr><td colspan='10'><em>No MacTrack Devices</em></td></tr>";
 	}
 	html_end_box(false);
 

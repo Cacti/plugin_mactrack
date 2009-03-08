@@ -39,13 +39,9 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 }
 
 /* Start Initialization Section */
-if (file_exists("./include/global.php")) {
-	include("./include/global.php");
-} else {
-	include("./include/config.php");
-}
-include_once($config["base_path"] . "/lib/poller.php");
-include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_functions.php");
+include("./include/global.php");
+include_once("./lib/poller.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 /* get the mactrack polling cycle */
 $max_run_duration = read_config_option("mt_collection_timing");
@@ -228,6 +224,10 @@ function display_help () {
 
 function collect_mactrack_data($start, $site_id = 0) {
 	global $max_run_duration, $config, $debug;
+
+	if (defined(CACTI_BASE_PATH)) {
+		$config["base_path"] = CACTI_BASE_PATH;
+	}
 
 	/* reset the processes table */
 	db_execute("TRUNCATE TABLE mac_track_processes");

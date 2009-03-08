@@ -41,10 +41,10 @@ if (file_exists("./include/global.php")) {
 } else {
 	include("./include/config.php");
 }
-include_once($config["base_path"] . "/lib/snmp.php");
-include_once($config["base_path"] . "/lib/ping.php");
-include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_functions.php");
-include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_vendors.php");
+include_once("./lib/snmp.php");
+include_once("./lib/ping.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
+include_once("./plugins/mactrack/lib/mactrack_vendors.php");
 
 /* Let the scanner run for no more that 25 minutes */
 ini_set("max_execution_time", 1500);

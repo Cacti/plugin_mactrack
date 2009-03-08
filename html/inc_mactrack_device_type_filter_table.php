@@ -9,7 +9,7 @@
 
 	-->
 	</script>
-	<tr bgcolor="<?php print $colors["panel"];?>">
+	<tr class="rowAlternate2">
 		<form name="form_mactrack_device_types">
 		<td>
 			<table cellpadding="1" cellspacing="0">

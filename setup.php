@@ -47,6 +47,7 @@ function plugin_mactrack_install() {
 	api_plugin_register_hook('mactrack', 'config_form',           'mactrack_config_form',          "setup.php");
 	api_plugin_register_hook('mactrack', 'config_settings',       'mactrack_config_settings',      "setup.php");
 	api_plugin_register_hook('mactrack', 'poller_bottom',         'mactrack_poller_bottom',        "setup.php");
+	api_plugin_register_hook('mactrack', 'page_head',             'mactrack_page_head',            "setup.php");
 
 	mactrack_setup_table_new ();
 }
@@ -155,8 +156,21 @@ function mactrack_version () {
 	);
 }
 
+function mactrack_page_head() {
+	global $config;
+
+	if (!isset($config["base_path"])) {
+		print "<script type='text/javascript' src='" . URL_PATH . "/plugins/mactrack/macktrack.js'></script>";
+	}else{		print "<link type='text/css' href='" . $config["url_path"] . "/plugins/mactrack/mactrack.css' rel='stylesheet'>";
+		print "<script type='text/javascript' src='" . $config["url_path"] . "/plugins/mactrack/macktrack.js'></script>";
+	}
+}
+
 function mactrack_poller_bottom () {
 	global $config;
+
+	if (defined(CACTI_BASE_PATH)) {		$config["base_path"] = CACTI_BASE_PATH;
+	}
 
 	include_once($config["base_path"] . "/lib/poller.php");
 	include_once($config["base_path"] . "/lib/data_query.php");

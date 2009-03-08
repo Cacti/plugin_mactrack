@@ -1,4 +1,4 @@
-	<tr bgcolor="<?php print $colors["panel"];?>">
+	<tr class="rowAlternate2">
 		<form name="form_mactrack_view_macs">
 		<td>
 			<table cellpadding="1" cellspacing="0">

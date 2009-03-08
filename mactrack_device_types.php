@@ -28,8 +28,8 @@ include_once("./lib/snmp.php");
 include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 /* include base and vendor functions to obtain a list of registered scanning functions */
-include_once($config['base_path'] . "/plugins/mactrack/lib/mactrack_functions.php");
-include_once($config['base_path'] . "/plugins/mactrack/lib/mactrack_vendors.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
+include_once("./plugins/mactrack/lib/mactrack_vendors.php");
 
 /* store the list of registered mactrack scanning functions */
 db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function, type) VALUES ('Not Applicable - Router', 1)");
@@ -854,7 +854,7 @@ function mactrack_device_type() {
 
 	include("plugins/mactrack/html/inc_mactrack_device_type_filter_table.php");
 
-	html_end_box();
+	html_end_box(FALSE);
 
 	$sql_where = "";
 
@@ -892,11 +892,11 @@ function mactrack_device_type() {
 	}
 
 	$display_text = array(
-		"description" => array("Device Type<br>Description", "ASC"),
-		"vendor" => array("<br>Devices", "DESC"),
-		"device_type" => array("Device<br>Type", "DESC"),
-		"sysDescr_match" => array("sysDescription<br>Match", "DESC"),
-		"sysObjectID_match" => array("Vendor OID<br>Match", "DESC"));
+		"description" => array("Device Type Description", "ASC"),
+		"vendor" => array("Devices", "DESC"),
+		"device_type" => array("Device Type", "DESC"),
+		"sysDescr_match" => array("sysDescription Match", "DESC"),
+		"sysObjectID_match" => array("Vendor OID Match", "DESC"));
 
 	html_header_sort_checkbox($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 
@@ -922,7 +922,7 @@ function mactrack_device_type() {
 		/* put the nav bar on the bottom as well */
 		print $nav;
 	}else{
-		print "<tr><td><em>No MacTrack Device Types</em></td></tr>";
+		print "<tr><td colspan='10'><em>No MacTrack Device Types</em></td></tr>";
 	}
 	html_end_box(false);
 

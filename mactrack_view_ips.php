@@ -26,20 +26,20 @@ $guest_account = true;
 
 chdir('../../');
 include("./include/auth.php");
-include_once($config['base_path'] . "/include/global_arrays.php");
-include_once($config['base_path'] . "/plugins/mactrack/lib/mactrack_functions.php");
+include_once("./include/global_arrays.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 define("MAX_DISPLAY_PAGES", 21);
 
-load_current_session_value("report", "sess_mactrack_view_report", "macs");
+load_current_session_value("report", "sess_mactrack_view_report", "ips");
 
 if (isset($_REQUEST["export_ips_x"])) {
 	mactrack_view_export_ip_ranges();
 }else{
 	$title = "Device Tracking - Site IP Range Report View";
-	include_once($config['base_path'] . "/plugins/mactrack/include/top_mactrack_header.php");
+	include_once("./include/top_graph_header.php");
 	mactrack_view_ip_ranges();
-	include_once($config['base_path'] . "/include/bottom_footer.php");
+	include_once("./include/bottom_footer.php");
 }
 
 function mactrack_view_export_ip_ranges() {
@@ -47,6 +47,11 @@ function mactrack_view_export_ip_ranges() {
 	input_validate_input_number(get_request_var_request("site_id"));
 	input_validate_input_number(get_request_var_request("page"));
 	/* ==================================================== */
+
+	/* clean up report string */
+	if (isset($_REQUEST["report"])) {
+		$_REQUEST["report"] = sanitize_search_string(get_request_var("report"));
+	}
 
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
@@ -125,6 +130,11 @@ function mactrack_view_ip_ranges() {
 	input_validate_input_number(get_request_var_request("page"));
 	/* ==================================================== */
 
+	/* clean up report string */
+	if (isset($_REQUEST["report"])) {
+		$_REQUEST["report"] = sanitize_search_string(get_request_var("report"));
+	}
+
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
 		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
@@ -143,6 +153,7 @@ function mactrack_view_ip_ranges() {
 	}
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
+	load_current_session_value("report", "sess_mactrack_view_report", "ips");
 	load_current_session_value("page", "sess_mactrack_view_ips_current_page", "1");
 	load_current_session_value("site_id", "sess_mactrack_view_ips_site_id", "-1");
 	load_current_session_value("rows", "sess_mactrack_view_ips_rows", "-1");
@@ -161,7 +172,7 @@ function mactrack_view_ip_ranges() {
 
 	mactrack_view_header();
 
-	include($config['base_path'] . "/plugins/mactrack/html/inc_mactrack_view_ips_filter_table.php");
+	include("./plugins/mactrack/html/inc_mactrack_view_ips_filter_table.php");
 
 	mactrack_view_footer();
 
@@ -180,36 +191,38 @@ function mactrack_view_ip_ranges() {
 	/* generate page list */
 	$url_page_select = str_replace("&page", "?page", get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $_REQUEST["rows"], $total_rows, "mactrack_view.php"));
 
-	$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-			<td colspan='6'>
-				<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-					<tr>
-						<td align='left' class='textHeaderDark'>
-							<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_view.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-						</td>\n
-						<td align='center' class='textHeaderDark'>
-							Showing Rows " . (($_REQUEST["rows"]*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $_REQUEST["rows"]) || ($total_rows < ($_REQUEST["rows"]*$_REQUEST["page"]))) ? $total_rows : ($_REQUEST["rows"]*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-						</td>\n
-						<td align='right' class='textHeaderDark'>
-							<strong>"; if (($_REQUEST["page"] * $_REQUEST["rows"]) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_view.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $_REQUEST["rows"]) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-						</td>\n
-					</tr>
-				</table>
-			</td>
-		</tr>\n";
-
-	if ($total_rows) {
-		print $nav;
+	if (isset($config["base_path"])) {
+		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
+				<td colspan='13'>
+					<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+						<tr>
+							<td align='left' class='textHeaderDark'>
+								<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_view.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
+							</td>\n
+							<td align='center' class='textHeaderDark'>
+								Showing Rows " . ($total_rows == 0 ? "None" : (($_REQUEST["rows"]*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $_REQUEST["rows"]) || ($total_rows < ($_REQUEST["rows"]*$_REQUEST["page"]))) ? $total_rows : ($_REQUEST["rows"]*$_REQUEST["page"])) . " of $total_rows [$url_page_select]") . "
+							</td>\n
+							<td align='right' class='textHeaderDark'>
+								<strong>"; if (($_REQUEST["page"] * $_REQUEST["rows"]) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_view.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $_REQUEST["rows"]) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+							</td>\n
+						</tr>
+					</table>
+				</td>
+			</tr>\n";
+	}else{
+		$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $_REQUEST["rows"], $total_rows, 13, "mactrack_view_sites.php");
 	}
 
+	print $nav;
+
 	$display_text = array(
-		"nosort" => array("<br>Actions", ""),
-		"site_name" => array("<br>Site Name", "ASC"),
-		"ip_range" => array("IP<br>Range", "ASC"),
-		"ips_current" => array("Current<br>IP Addresses", "DESC"),
-		"ips_current_date" => array("Current<br>Date", "DESC"),
-		"ips_max" => array("Maximum<br>IP Addresses", "DESC"),
-		"ips_max_date" => array("Maximum<br>Date", "DESC"));
+		"nosort" => array("Actions", ""),
+		"site_name" => array("Site Name", "ASC"),
+		"ip_range" => array("IP Range", "ASC"),
+		"ips_current" => array("Current IP Addresses", "DESC"),
+		"ips_current_date" => array("Current Date", "DESC"),
+		"ips_max" => array("Maximum IP Addresses", "DESC"),
+		"ips_max_date" => array("Maximum Date", "DESC"));
 
 	html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 
@@ -233,6 +246,9 @@ function mactrack_view_ip_ranges() {
 	}else{
 		print "<tr><td colspan='10'><em>No MacTrack Site IP Ranges Found</em></td></tr>";
 	}
+
+	print $nav;
+
 	html_end_box(false);
 }
 

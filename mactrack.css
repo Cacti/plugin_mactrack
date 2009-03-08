@@ -1,0 +1,56 @@
+.rowAlternate2 {
+	background-color: #E7E9F2;
+	font-size: 10px;
+}
+
+.rowSelected {
+	background-color: #F5F5D2;
+	font-size: 10px;
+}
+
+/* tabs */
+.tabs a.tabSelected {
+	border:0px;
+	border-bottom:0px;
+	color:#FFFFFF;
+	display:block;
+	float:left;
+	margin-right:4px;
+	font-size:13px;
+	font-weight:bold;
+	font-family:Arial,Verdana,Helvetica,sans-serif;
+	height:14px;
+	line-height:16px;
+	text-decoration: none;
+	padding:3px 15px 5px 14px;
+	background: transparent url('../images/tabSelected.png') repeat-x scroll left top;
+}
+
+.tabs a.tabDefault {
+	border:0px;
+	border-bottom:0px;
+	color:#FFFFFF;
+	display:block;
+	float:left;
+	margin-right: 4px;
+	font-size:13px;
+	font-weight:bold;
+	font-family:Arial,Verdana,Helvetica,sans-serif;
+	height:14px;
+	line-height:16px;
+	text-decoration: none;
+	padding:3px 15px 5px 14px;
+	background: transparent url('../images/tabDefault.png') repeat-x scroll left top;
+}
+
+.tabs a.tabDefault:hover {
+	background-position:0px -25px;
+	border-bottom:0px;
+	background-color:#E16769;
+}
+
+.tabs a.tabSelected:hover {
+	background-position:0px -25px;
+	border-bottom:0px;
+	background-color:#E16769;
+}

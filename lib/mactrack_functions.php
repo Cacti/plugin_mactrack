@@ -1819,36 +1819,67 @@ function mactrack_tabs() {
 		"interfaces" => "Interfaces");
 
 	/* set the default tab */
-	load_current_session_value("report", "sess_mactrack_tab", "macs");
 	$current_tab = $_REQUEST["report"];
 
-	/* draw the tabs */
-	print "<table class='report' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
+	if (!isset($config["base_path"])) {
+		/* draw the tabs */
+		print "<div class='tabs'>\n";
 
-	if (sizeof($tabs_mactrack) > 0) {
-	foreach (array_keys($tabs_mactrack) as $tab_short_name) {
-		print "<td style='padding:3px 10px 2px 5px;background-color:" . (($tab_short_name == $current_tab) ? "silver;" : "#DFDFDF;") .
-			"white-space:nowrap;'" .
-			" nowrap width='1%'" .
-			"' align='center' class='tab'>
-			<span class='textHeader'><a href='" . $config['url_path'] .
-			"plugins/mactrack/mactrack_view_" . $tab_short_name . ".php?" .
-			"report=" . $tab_short_name .
-			"'>$tabs_mactrack[$tab_short_name]</a></span>
-		</td>\n
-		<td width='1'></td>\n";
+		if (sizeof($tabs_mactrack) > 0) {
+		foreach (array_keys($tabs_mactrack) as $tab_short_name) {
+			if (!isset($config["base_path"])) {
+				print "<div class='tabDefault'><a " . (($tab_short_name == $current_tab) ? "class='tabSelected'" : "class='tabDefault'") . " href='" . $config['url_path'] .
+					"plugins/mactrack/mactrack_view_" . $tab_short_name . ".php?" .
+					"report=" . $tab_short_name .
+					"'>$tabs_mactrack[$tab_short_name]</a></div>\n";
+			}
+		}
+		}
+		print "</div>\n";
+	}else{		/* draw the tabs */
+		print "<table class='report' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
+
+		if (sizeof($tabs_mactrack) > 0) {
+		foreach (array_keys($tabs_mactrack) as $tab_short_name) {
+			print "<td style='padding:3px 10px 2px 5px;background-color:" . (($tab_short_name == $current_tab) ? "silver;" : "#DFDFDF;") .
+				"white-space:nowrap;'" .
+				" nowrap width='1%'" .
+				"' align='center' class='tab'>
+				<span class='textHeader'><a href='" . $config['url_path'] .
+				"plugins/mactrack/mactrack_view_" . $tab_short_name . ".php?" .
+				"report=" . $tab_short_name .
+				"'>$tabs_mactrack[$tab_short_name]</a></span>
+			</td>\n
+			<td width='1'></td>\n";
+		}
+		}
+		print "<td></td><td></td>\n</tr></table>\n";
 	}
-	}
-	print "<td></td>\n</tr></table>\n";
 }
 
 function mactrack_view_header() {
-	global $title, $colors;
+	global $title, $colors, $config;
+
+if (!isset($config["base_path"])) {
 ?>
-<script type="text/javascript">
-<!--
--->
-</script>
+<table align="center" width="100%" cellpadding=1 cellspacing=0 border=0>
+	<tr class="rowHeader">
+		<td>
+			<table cellpadding=1 cellspacing=0 border=0 width="100%">
+				<form name="form_mactrack_view_reports">
+				<tr>
+					<td style="padding: 3px;" colspan="10">
+						<table width="100%" cellpadding="0" cellspacing="0">
+							<tr>
+								<td class="textHeaderDark"><strong><?php print $title;?></strong></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				</form>
+<?php
+}else{
+?>
 <table align="center" width="100%" cellpadding=1 cellspacing=0 border=0 bgcolor="#<?php print $colors["header"];?>">
 	<tr>
 		<td>
@@ -1866,6 +1897,7 @@ function mactrack_view_header() {
 				</form>
 <?php
 }
+}
 
 function mactrack_view_footer() {
 ?>
@@ -1873,7 +1905,6 @@ function mactrack_view_footer() {
 						</td>
 					</tr>
 				</table>
-				<br>
 <?php
 }
 

@@ -22,10 +22,10 @@
  +-------------------------------------------------------------------------+
 */
 
-include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_cabletron.php");
-include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_cisco.php");
-include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_norbay.php");
-include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_hp.php");
-include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_foundry.php");
+include_once(dirname(__FILE__) . "/mactrack_cabletron.php");
+include_once(dirname(__FILE__) . "/mactrack_cisco.php");
+include_once(dirname(__FILE__) . "/mactrack_norbay.php");
+include_once(dirname(__FILE__) . "/mactrack_hp.php");
+include_once(dirname(__FILE__) . "/mactrack_foundry.php");
 
 ?>

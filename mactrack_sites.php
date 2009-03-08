@@ -493,9 +493,9 @@ function mactrack_site() {
 
 	html_start_box("<strong>MacTrack Site Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_sites.php?action=edit");
 
-	include($config['base_path'] . "/plugins/mactrack/html/inc_mactrack_site_filter_table.php");
+	include("./plugins/mactrack/html/inc_mactrack_site_filter_table.php");
 
-	html_end_box();
+	html_end_box(FALSE);
 
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
@@ -544,13 +544,13 @@ function mactrack_site() {
 		}
 
 		$display_text = array(
-			"site_name" => array("<br>Site Name", "ASC"),
-			"total_devices" => array("<br>Devices", "DESC"),
-			"total_ips" => array("Total<br>IP's", "DESC"),
-			"total_user_ports" => array("User<br>Ports", "DESC"),
-			"total_oper_ports" => array("User<br>Ports Up", "DESC"),
-			"total_macs" => array("MACS<br>Found", "DESC"),
-			"total_device_errors" => array("Device<br>Errors", "DESC"));
+			"site_name" => array("Site Name", "ASC"),
+			"total_devices" => array("Devices", "DESC"),
+			"total_ips" => array("Total IP's", "DESC"),
+			"total_user_ports" => array("User Ports", "DESC"),
+			"total_oper_ports" => array("User orts Up", "DESC"),
+			"total_macs" => array("MACS Found", "DESC"),
+			"total_device_errors" => array("Device Errors", "DESC"));
 
 		html_header_sort_checkbox($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 
@@ -597,15 +597,15 @@ function mactrack_site() {
 		print $nav;
 
 		$display_text = array(
-			"site_name" => array("<br>Site Name", "ASC"),
-			"vendor" => array("<br>Vendor", "ASC"),
-			"description" => array("<br>Device Type", "DESC"),
-			"total_devices" => array("Total<br>Devices", "DESC"),
-			"sum_ips_total" => array("Total<br>IP's", "DESC"),
-			"sum_ports_total" => array("Total<br>User Ports", "DESC"),
-			"sum_ports_active" => array("Total<br>Oper Ports", "DESC"),
-			"sum_ports_trunk" => array("Total<br>Trunks", "DESC"),
-			"sum_macs_active" => array("MACS<br>Found", "DESC"));
+			"site_name" => array("Site Name", "ASC"),
+			"vendor" => array("Vendor", "ASC"),
+			"description" => array("Device Type", "DESC"),
+			"total_devices" => array("Total Devices", "DESC"),
+			"sum_ips_total" => array("Total IP's", "DESC"),
+			"sum_ports_total" => array("Total User Ports", "DESC"),
+			"sum_ports_active" => array("Total Oper Ports", "DESC"),
+			"sum_ports_trunk" => array("Total Trunks", "DESC"),
+			"sum_macs_active" => array("MACS Found", "DESC"));
 
 		html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 

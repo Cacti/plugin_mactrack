@@ -174,9 +174,9 @@ function mactrack_vmacs() {
 
 	html_start_box("<strong>MacTrack Vendor Mac Filter</strong>", "100%", $colors["header"], "3", "center", "mactrack_vendormacs.php?action=edit");
 
-	include($config['base_path'] . "/plugins/mactrack/html/inc_mactrack_vmac_filter_table.php");
+	include("./plugins/mactrack/html/inc_mactrack_vmac_filter_table.php");
 
-	html_end_box();
+	html_end_box(FALSE);
 
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
@@ -215,9 +215,9 @@ function mactrack_vmacs() {
 	}
 
 	$display_text = array(
-		"vendor_mac" => array("Vendor<br>MAC", "ASC"),
-		"vendor_name" => array("<br>Name", "ASC"),
-		"vendor_address" => array("<br>Address", "ASC"));
+		"vendor_mac" => array("Vendor MAC", "ASC"),
+		"vendor_name" => array("Name", "ASC"),
+		"vendor_address" => array("Address", "ASC"));
 
 	html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 
