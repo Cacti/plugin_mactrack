@@ -218,7 +218,9 @@ function mactrack_vmacs() {
 			</td>
 		</tr>\n";
 
-	print $nav;
+	if ($total_rows) {
+		print $nav;
+	}
 
 	$display_text = array(
 		"vendor_mac" => array("<br>Vendor MAC", "ASC"),

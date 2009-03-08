@@ -379,7 +379,9 @@ function mactrack_macw() {
 			</td>
 		</tr>\n";
 
-	print $nav;
+	if ($total_rows) {
+		print $nav;
+	}
 
 	$display_text = array(
 		"name" => array("Watch<br>Name", "ASC"),
