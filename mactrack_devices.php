@@ -1014,7 +1014,7 @@ function mactrack_device() {
 	$devices = mactrack_get_devices($sql_where, $row_limit);
 
 	$total_rows = db_fetch_cell("SELECT
-		COUNT(mac_track_devices.device_id)
+		COUNT(*)
 		FROM mac_track_sites
 		RIGHT JOIN mac_track_devices ON mac_track_devices.site_id = mac_track_sites.site_id
 		$sql_where");

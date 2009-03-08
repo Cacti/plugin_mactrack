@@ -223,7 +223,7 @@ function mactrack_macw_remove() {
 	}
 }
 
-function mactrack_macw_get_macw_records(&$sql_where, $apply_limits = TRUE) {
+function mactrack_macw_get_macw_records(&$sql_where, $row_limit, $apply_limits = TRUE) {
 	$sql_where = "";
 
 	/* form the 'where' clause for our main sql query */
@@ -240,7 +240,7 @@ function mactrack_macw_get_macw_records(&$sql_where, $apply_limits = TRUE) {
 		ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
 
 	if ($apply_limits) {
-		$query_string .= " LIMIT " . (read_config_option("num_rows_mactrack")*($_REQUEST["page"]-1)) . "," . read_config_option("num_rows_mactrack");
+		$query_string .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
 	}
 
 	return db_fetch_assoc($query_string);
@@ -284,6 +284,7 @@ function mactrack_macw() {
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("page"));
 	input_validate_input_number(get_request_var("mac_id"));
+	input_validate_input_number(get_request_var("rows"));
 	/* ==================================================== */
 
 	/* clean up search string */
@@ -305,11 +306,13 @@ function mactrack_macw() {
 	if (isset($_REQUEST["clear_x"])) {
 		kill_session_var("sess_mactrack_macw_current_page");
 		kill_session_var("sess_mactrack_macw_filter");
+		kill_session_var("sess_mactrack_macw_rows");
 		kill_session_var("sess_mactrack_macw_sort_column");
 		kill_session_var("sess_mactrack_macw_sort_direction");
 
 		$_REQUEST["page"] = 1;
 		unset($_REQUEST["filter"]);
+		unset($_REQUEST["rows"]);
 		unset($_REQUEST["sort_column"]);
 		unset($_REQUEST["sort_direction"]);
 	}else{
@@ -317,6 +320,8 @@ function mactrack_macw() {
 		$changed = 0;
 		$changed += mactrack_check_changed("filter", "sess_mactrack_macw_filter");
 		$changed += mactrack_check_changed("detail", "sess_mactrack_macw_detail");
+		$changed += mactrack_check_changed("rows", "sess_mactrack_macw_rows");
+
 		if ($changed) {
 			$_REQUEST["page"] = "1";
 		}
@@ -325,8 +330,17 @@ function mactrack_macw() {
 	/* remember these search fields in session vars so we don't have to keep passing them around */
 	load_current_session_value("page", "sess_mactrack_macw_current_page", "1");
 	load_current_session_value("filter", "sess_mactrack_macw_filter", "");
+	load_current_session_value("rows", "sess_mactrack_macw_rows", "-1");
 	load_current_session_value("sort_column", "sess_mactrack_macw_sort_column", "name");
 	load_current_session_value("sort_direction", "sess_mactrack_macw_sort_direction", "ASC");
+
+	if ($_REQUEST["rows"] == -1) {
+		$row_limit = read_config_option("num_rows_mactrack");
+	}elseif ($_REQUEST["rows"] == -2) {
+		$row_limit = 999999;
+	}else{
+		$row_limit = $_REQUEST["rows"];
+	}
 
 	html_start_box("<strong>MacTrack MacWatch Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_macwatch.php?action=edit");
 
@@ -338,14 +352,14 @@ function mactrack_macw() {
 
 	$sql_where = "";
 
-	$macw = mactrack_macw_get_macw_records($sql_where);
+	$macw = mactrack_macw_get_macw_records($sql_where, $row_limit);
 
-	$total_rows = sizeof(db_fetch_assoc("SELECT count(*)
-		FROM (mac_track_macwatch
-		$sql_where"));
+	$total_rows = db_fetch_cell("SELECT count(*)
+		FROM mac_track_macwatch
+		$sql_where");
 
 	/* generate page list */
-	$url_page_select = str_replace("&page", "?page", get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, read_config_option("num_rows_mactrack"), $total_rows, "mactrack_macwatch.php"));
+	$url_page_select = str_replace("&page", "?page", get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_macwatch.php"));
 
 	$nav = "<tr bgcolor='#" . $colors["header"] . "'>
 			<td colspan='9'>
@@ -355,10 +369,10 @@ function mactrack_macw() {
 							<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_macwatch.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
 						</td>\n
 						<td align='center' class='textHeaderDark'>
-							Showing Rows " . ((read_config_option("num_rows_mactrack")*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < read_config_option("num_rows_mactrack")) || ($total_rows < (read_config_option("num_rows_mactrack")*$_REQUEST["page"]))) ? $total_rows : (read_config_option("num_rows_mactrack")*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
+							Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
 						</td>\n
 						<td align='right' class='textHeaderDark'>
-							<strong>"; if (($_REQUEST["page"] * read_config_option("num_rows_mactrack")) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_macwatch.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * read_config_option("num_rows_mactrack")) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+							<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_macwatch.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
 						</td>\n
 					</tr>
 				</table>
