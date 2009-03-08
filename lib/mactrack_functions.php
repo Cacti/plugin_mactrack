@@ -1703,7 +1703,9 @@ function mactrack_save_button($cancel_action = "", $action = "save", $force_type
 	$calt = "Cancel";
 
 	if ((empty($force_type)) || ($cancel_action == "return")) {
-		if (empty($_GET[$key_field])) {
+		if ($action == "import") {			$sname = "import";
+			$salt  = "Import";
+		}elseif (empty($_GET[$key_field])) {
 			$sname = "create";
 			$salt  = "Create";
 		}else{
@@ -1723,6 +1725,9 @@ function mactrack_save_button($cancel_action = "", $action = "save", $force_type
 	}elseif ($force_type == "create") {
 		$sname = "create";
 		$salt  = "Create";
+	}elseif ($force_type == "import") {
+		$sname = "import";
+		$salt  = "Import";
 	}
 	?>
 	<table align='center' width='100%' style='background-color: #ffffff; border: 1px solid #bbbbbb;'>

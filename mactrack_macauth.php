@@ -220,7 +220,7 @@ function mactrack_maca_remove() {
 	}
 }
 
-function mactrack_maca_get_maca_records(&$sql_where, $apply_limits = TRUE) {
+function mactrack_maca_get_maca_records(&$sql_where, $row_limit, $apply_limits = TRUE) {
 	$sql_where = "";
 
 	/* form the 'where' clause for our main sql query */
@@ -235,7 +235,7 @@ function mactrack_maca_get_maca_records(&$sql_where, $apply_limits = TRUE) {
 		ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
 
 	if ($apply_limits) {
-		$query_string .= " LIMIT " . (read_config_option("num_rows_mactrack")*($_REQUEST["page"]-1)) . "," . read_config_option("num_rows_mactrack");
+		$query_string .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
 	}
 
 	return db_fetch_assoc($query_string);
@@ -257,7 +257,7 @@ function mactrack_maca_edit() {
 		$header_label = "[new]";
 	}
 
-	html_start_box("<strong>Mac Track MacAuth</strong> $header_label", "100%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>MacTrack MacAuth</strong> $header_label", "100%", $colors["header"], "3", "center", "");
 
 	draw_edit_form(array(
 		"config" => array("form_name" => "chk"),
@@ -279,6 +279,7 @@ function mactrack_maca() {
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("page"));
 	input_validate_input_number(get_request_var_request("mac_id"));
+	input_validate_input_number(get_request_var_request("rows"));
 	/* ==================================================== */
 
 	/* clean up search string */
@@ -297,14 +298,16 @@ function mactrack_maca() {
 	}
 
 	/* if the user pushed the 'clear' button */
-	if (isset($_REQUEST["clear_maca_x"])) {
+	if (isset($_REQUEST["clear_x"])) {
 		kill_session_var("sess_mactrack_maca_current_page");
 		kill_session_var("sess_mactrack_maca_filter");
+		kill_session_var("sess_mactrack_maca_rows");
 		kill_session_var("sess_mactrack_maca_sort_column");
 		kill_session_var("sess_mactrack_maca_sort_direction");
 
 		$_REQUEST["page"] = 1;
 		unset($_REQUEST["filter"]);
+		unset($_REQUEST["rows"]);
 		unset($_REQUEST["sort_column"]);
 		unset($_REQUEST["sort_direction"]);
 	}else{
@@ -312,6 +315,8 @@ function mactrack_maca() {
 		$changed = 0;
 		$changed += mactrack_check_changed("filter", "sess_mactrack_maca_filter");
 		$changed += mactrack_check_changed("detail", "sess_mactrack_maca_detail");
+		$changed += mactrack_check_changed("rows", "sess_mactrack_maca_rows");
+
 		if ($changed) {
 			$_REQUEST["page"] = "1";
 		}
@@ -319,11 +324,20 @@ function mactrack_maca() {
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
 	load_current_session_value("page", "sess_mactrack_maca_current_page", "1");
+	load_current_session_value("rows", "sess_mactrack_maca_rows", "-1");
 	load_current_session_value("filter", "sess_mactrack_maca_filter", "");
 	load_current_session_value("sort_column", "sess_mactrack_maca_sort_column", "mac_address");
 	load_current_session_value("sort_direction", "sess_mactrack_maca_sort_direction", "ASC");
 
-	html_start_box("<strong>Mac Track MacAuth Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_macauth.php?action=edit");
+	if ($_REQUEST["rows"] == -1) {
+		$row_limit = read_config_option("num_rows_mactrack");
+	}elseif ($_REQUEST["rows"] == -2) {
+		$row_limit = 999999;
+	}else{
+		$row_limit = $_REQUEST["rows"];
+	}
+
+	html_start_box("<strong>MacTrack MacAuth Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_macauth.php?action=edit");
 
 	include($config['base_path'] . "/plugins/mactrack/html/inc_mactrack_maca_filter_table.php");
 
@@ -333,14 +347,14 @@ function mactrack_maca() {
 
 	$sql_where = "";
 
-	$maca = mactrack_maca_get_maca_records($sql_where);
+	$maca = mactrack_maca_get_maca_records($sql_where, $row_limit);
 
-	$total_rows = sizeof(db_fetch_assoc("SELECT count(*)
+	$total_rows = db_fetch_cell("SELECT count(*)
 		FROM mac_track_macauth
-		$sql_where"));
+		$sql_where");
 
 	/* generate page list */
-	$url_page_select = str_replace("&page", "?page", get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, read_config_option("num_rows_mactrack"), $total_rows, "mactrack_macauth.php"));
+	$url_page_select = str_replace("&page", "?page", get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_macauth.php"));
 
 	$nav = "<tr bgcolor='#" . $colors["header"] . "'>
 			<td colspan='9'>
@@ -350,17 +364,19 @@ function mactrack_maca() {
 							<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_macauth.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
 						</td>\n
 						<td align='center' class='textHeaderDark'>
-							Showing Rows " . ((read_config_option("num_rows_mactrack")*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < read_config_option("num_rows_mactrack")) || ($total_rows < (read_config_option("num_rows_mactrack")*$_REQUEST["page"]))) ? $total_rows : (read_config_option("num_rows_mactrack")*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
+							Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
 						</td>\n
 						<td align='right' class='textHeaderDark'>
-							<strong>"; if (($_REQUEST["page"] * read_config_option("num_rows_mactrack")) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_macauth.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * read_config_option("num_rows_mactrack")) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+							<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_macauth.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
 						</td>\n
 					</tr>
 				</table>
 			</td>
 		</tr>\n";
 
-	print $nav;
+	if ($total_rows) {
+		print $nav;
+	}
 
 	$display_text = array(
 		"mac_address" => array("Mac Address", "ASC"),

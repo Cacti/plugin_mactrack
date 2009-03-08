@@ -218,7 +218,7 @@ exit;
 
 /*	display_help - displays the usage of the function */
 function display_help () {
-	print "Network Mac Tracker Version 1.0, Copyright 2005 - Larry Adams\n\n";
+	print "Network MacTracker Version 1.0, Copyright 2005 - Larry Adams\n\n";
 	print "usage: mactrack_device.php -id=host_id [-d] [-h] [--help] [-v] [--version]\n\n";
 	print "-id=host_id   - the mac_track_devices host_id to scan\n";
 	print "-d            - Display verbose output during execution\n";

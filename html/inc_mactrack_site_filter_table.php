@@ -6,8 +6,8 @@
 			strURL = strURL + '&device_type_id=-1';
 			strURL = strURL + '&site_id=-1';
 		}else{
-			strURL = strURL + '&device_type_id=' + objForm.device_type_id[objForm.device_type_id.selectedIndex].value;
-			strURL = strURL + '&site_id=' + objForm.site_id[objForm.site_id.selectedIndex].value;
+			strURL = strURL + '&device_type_id=' + objForm.device_type_id.value;
+			strURL = strURL + '&site_id=' + objForm.site_id.value;
 		}
 		strURL = strURL + '&detail=' + objForm.detail.checked;
 		strURL = strURL + '&filter=' + objForm.filter.value;

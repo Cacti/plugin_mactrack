@@ -37,10 +37,10 @@
 						&nbsp;<input type="submit" name="go_x" value="Go">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="clear_vmacs_x" value="Clear">
+						&nbsp;<input type="submit" name="clear_x" value="Clear">
 					</td>
 					<td>
-						&nbsp<input type="submit" name="export_vmacs_x" value="Export">
+						&nbsp<input type="submit" name="export_x" value="Export">
 					</td>
 				</tr>
 			</table>

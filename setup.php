@@ -148,7 +148,7 @@ function mactrack_config_settings () {
 
 	$settings["mactrack"] = array(
 		"mactrack_hdr_timing" => array(
-			"friendly_name" => "Mac Track General Settings",
+			"friendly_name" => "MacTrack General Settings",
 			"method" => "spacer",
 			),
 		"mt_processes" => array(
@@ -201,7 +201,7 @@ function mactrack_config_settings () {
 			"array" => array(":" => ":", "-" => "-")
 			),
 		"mactrack_hdr_rdns" => array(
-			"friendly_name" => "Mac Track DNS Settings",
+			"friendly_name" => "MacTrack DNS Settings",
 			"method" => "spacer",
 			),
 		"mt_reverse_dns" => array(
@@ -239,7 +239,7 @@ function mactrack_config_settings () {
 			"max_length" => "10"
 			),
 		"mactrack_hdr_general" => array(
-			"friendly_name" => "Mac Track SNMP Settings",
+			"friendly_name" => "MacTrack SNMP Settings",
 			"method" => "spacer",
 			),
 		"mt_snmp_ver" => array(
@@ -313,15 +313,15 @@ function mactrack_config_settings () {
 }
 
 function mactrack_draw_navigation_text ($nav) {
-	$nav["mactrack_devices.php:"] = array("title" => "Mac Track Devices", "mapping" => "index.php:", "url" => "mactrack_devices.php", "level" => "1");
+	$nav["mactrack_devices.php:"] = array("title" => "MacTrack Devices", "mapping" => "index.php:", "url" => "mactrack_devices.php", "level" => "1");
 	$nav["mactrack_devices.php:edit"] = array("title" => "(Edit)", "mapping" => "index.php:,mactrack_devices.php:", "url" => "", "level" => "2");
 	$nav["mactrack_devices.php:import"] = array("title" => "(Import)", "mapping" => "index.php:,mactrack_devices.php:", "url" => "", "level" => "2");
 	$nav["mactrack_devices.php:actions"] = array("title" => "Actions", "mapping" => "index.php:,mactrack_devices.php:", "url" => "", "level" => "2");
-	$nav["mactrack_device_types.php:"] = array("title" => "Mac Track Device Types", "mapping" => "index.php:", "url" => "mactrack_device_types.php", "level" => "1");
+	$nav["mactrack_device_types.php:"] = array("title" => "MacTrack Device Types", "mapping" => "index.php:", "url" => "mactrack_device_types.php", "level" => "1");
 	$nav["mactrack_device_types.php:edit"] = array("title" => "(Edit)", "mapping" => "index.php:,mactrack_device_types.php:", "url" => "", "level" => "2");
 	$nav["mactrack_device_types.php:import"] = array("title" => "(Import)", "mapping" => "index.php:,mactrack_device_types.php:", "url" => "", "level" => "2");
 	$nav["mactrack_device_types.php:actions"] = array("title" => "Actions", "mapping" => "index.php:,mactrack_device_types.php:", "url" => "", "level" => "2");
-	$nav["mactrack_sites.php:"] = array("title" => "Mac Track Sites", "mapping" => "index.php:", "url" => "mactrack_sites.php", "level" => "1");
+	$nav["mactrack_sites.php:"] = array("title" => "MacTrack Sites", "mapping" => "index.php:", "url" => "mactrack_sites.php", "level" => "1");
 	$nav["mactrack_sites.php:edit"] = array("title" => "(Edit)", "mapping" => "index.php:,mactrack_sites.php:", "url" => "", "level" => "2");
 	$nav["mactrack_sites.php:actions"] = array("title" => "Actions", "mapping" => "index.php:,mactrack_sites.php:", "url" => "", "level" => "2");
 	$nav["mactrack_macwatch.php:"] = array("title" => "Mac Address Tracking Utility", "mapping" => "index.php:", "url" => "mactrack_macwatch.php", "level" => "1");
@@ -330,8 +330,8 @@ function mactrack_draw_navigation_text ($nav) {
 	$nav["mactrack_macauth.php:"] = array("title" => "Mac Address Authorization Utility", "mapping" => "index.php:", "url" => "mactrack_macauth.php", "level" => "1");
 	$nav["mactrack_macauth.php:edit"] = array("title" => "(Edit)", "mapping" => "index.php:,mactrack_macauth.php:", "url" => "", "level" => "2");
 	$nav["mactrack_macauth.php:actions"] = array("title" => "Actions", "mapping" => "index.php:,mactrack_macauth.php:", "url" => "", "level" => "2");
-	$nav["mactrack_vendormacs.php:"] = array("title" => "Mac Track Vendor Macs", "mapping" => "index.php:", "url" => "mactrack_vendormacs.php", "level" => "1");
-	$nav["mactrack_view.php:"] = array("title" => "Mac Track Viewer", "mapping" => "", "url" => "mactrack_view.php", "level" => "0");
+	$nav["mactrack_vendormacs.php:"] = array("title" => "MacTrack Vendor Macs", "mapping" => "index.php:", "url" => "mactrack_vendormacs.php", "level" => "1");
+	$nav["mactrack_view.php:"] = array("title" => "MacTrack Viewer", "mapping" => "", "url" => "mactrack_view.php", "level" => "0");
 	$nav["mactrack_view.php:actions"] = array("title" => "Actions", "mapping" => "mactrack_view.php:", "url" => "", "level" => "1");
 	$nav["mactrack_utilities.php:"] = array("title" => "Device Tracking Utilities", "mapping" => "index.php:", "url" => "mactrack_utilities.php", "level" => "1");
 	$nav["mactrack_utilities.php:mactrack_utilities_perform_db_maint"] = array("title" => "Perform Database Maintenance", "mapping" => "index.php:,mactrack_utilities.php:", "url" => "mactrack_utilities.php", "level" => "2");

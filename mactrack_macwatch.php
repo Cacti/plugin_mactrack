@@ -262,7 +262,7 @@ function mactrack_macw_edit() {
 		$header_label = "[new]";
 	}
 
-	html_start_box("<strong>Mac Track MacWatch</strong> $header_label", "100%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>MacTrack MacWatch</strong> $header_label", "100%", $colors["header"], "3", "center", "");
 
 	draw_edit_form(array(
 		"config" => array("form_name" => "chk"),
@@ -302,7 +302,7 @@ function mactrack_macw() {
 	}
 
 	/* if the user pushed the 'clear' button */
-	if (isset($_REQUEST["clear_macw_x"])) {
+	if (isset($_REQUEST["clear_x"])) {
 		kill_session_var("sess_mactrack_macw_current_page");
 		kill_session_var("sess_mactrack_macw_filter");
 		kill_session_var("sess_mactrack_macw_sort_column");
@@ -328,7 +328,7 @@ function mactrack_macw() {
 	load_current_session_value("sort_column", "sess_mactrack_macw_sort_column", "name");
 	load_current_session_value("sort_direction", "sess_mactrack_macw_sort_direction", "ASC");
 
-	html_start_box("<strong>Mac Track MacWatch Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_macwatch.php?action=edit");
+	html_start_box("<strong>MacTrack MacWatch Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_macwatch.php?action=edit");
 
 	include($config['base_path'] . "/plugins/mactrack/html/inc_mactrack_macw_filter_table.php");
 
@@ -401,7 +401,7 @@ function mactrack_macw() {
 		/* put the nav bar on the bottom as well */
 		print $nav;
 	}else{
-		print "<tr><td colspan='10'><em>No Mac Track Watched Macs</em></td></tr>";
+		print "<tr><td colspan='10'><em>No MacTrack Watched Macs</em></td></tr>";
 	}
 	html_end_box(false);
 

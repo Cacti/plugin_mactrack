@@ -433,7 +433,7 @@ function mactrack_device_type_import() {
 
 	html_end_box();
 
-	mactrack_save_button("return", "save", "mactrack_device_types.php", "site_id");
+	mactrack_save_button("return", "import");
 }
 
 function mactrack_device_type_import_processor(&$device_types) {
@@ -747,7 +747,7 @@ function mactrack_device_type_edit() {
 		$header_label = "[new]";
 	}
 
-	html_start_box("<strong>Mac Track Device Types</strong> $header_label", "100%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>MacTrack Device Types</strong> $header_label", "100%", $colors["header"], "3", "center", "");
 
 	draw_edit_form(array(
 		"config" => array("form_name" => "chk"),
@@ -786,7 +786,7 @@ function mactrack_get_device_types(&$sql_where, $apply_limits = TRUE) {
 		ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
 
 	if ($apply_limits) {
-		$query_string .= " LIMIT " . (read_config_option("num_rows_mactrack")*($_REQUEST["page"]-1)) . "," . read_config_option("num_rows_mactrack");
+		$query_string .= " LIMIT " . ($_REQUEST["rows"]*($_REQUEST["page"]-1)) . "," . $_REQUEST["rows"];
 	}
 
 	return db_fetch_assoc($query_string);
@@ -798,6 +798,7 @@ function mactrack_device_type() {
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("page"));
 	input_validate_input_number(get_request_var_request("type_id"));
+	input_validate_input_number(get_request_var_request("rows"));
 	/* ==================================================== */
 
 	/* clean up the vendor string */
@@ -819,6 +820,7 @@ function mactrack_device_type() {
 	if (isset($_REQUEST["clear_x"])) {
 		kill_session_var("sess_mactrack_device_current_page");
 		kill_session_var("sess_mactrack_device_filter");
+		kill_session_var("sess_mactrack_device_rows");
 		kill_session_var("sess_mactrack_device_type_vendor");
 		kill_session_var("sess_mactrack_device_type_type_id");
 		kill_session_var("sess_mactrack_device_type_sort_column");
@@ -827,6 +829,7 @@ function mactrack_device_type() {
 		unset($_REQUEST["page"]);
 		unset($_REQUEST["vendor"]);
 		unset($_REQUEST["type_id"]);
+		unset($_REQUEST["rows"]);
 		unset($_REQUEST["sort_column"]);
 		unset($_REQUEST["sort_direction"]);
 	}
@@ -835,10 +838,19 @@ function mactrack_device_type() {
 	load_current_session_value("page", "sess_mactrack_device_type_current_page", "1");
 	load_current_session_value("vendor", "sess_mactrack_device_type_vendor", "All");
 	load_current_session_value("type_id", "sess_mactrack_device_type_type_id", "-1");
+	load_current_session_value("rows", "sess_mactrack_device_type_rows", "-1");
 	load_current_session_value("sort_column", "sess_mactrack_device_type_sort_column", "description");
 	load_current_session_value("sort_direction", "sess_mactrack_device_type_sort_direction", "ASC");
 
-	html_start_box("<strong>Mac Track Device Type Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_device_types.php?action=edit");
+	if ($_REQUEST["rows"] == -1) {
+		$row_limit = read_config_option("num_rows_mactrack");
+	}elseif ($_REQUEST["rows"] == -2) {
+		$row_limit = 999999;
+	}else{
+		$row_limit = $_REQUEST["rows"];
+	}
+
+	html_start_box("<strong>MacTrack Device Type Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_device_types.php?action=edit");
 
 	include("plugins/mactrack/html/inc_mactrack_device_type_filter_table.php");
 
@@ -855,7 +867,7 @@ function mactrack_device_type() {
 		FROM mac_track_device_types" . $sql_where);
 
 	/* generate page list */
-	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, read_config_option("num_rows_mactrack"), $total_rows, "mactrack_device_types.php?");
+	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $_REQUEST["rows"], $total_rows, "mactrack_device_types.php?");
 
 	$nav = "<tr bgcolor='#" . $colors["header"] . "'>
 			<td colspan='7'>
@@ -865,17 +877,19 @@ function mactrack_device_type() {
 							<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_device_types.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
 						</td>\n
 						<td align='center' class='textHeaderDark'>
-							Showing Rows " . ((read_config_option("num_rows_mactrack")*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < read_config_option("num_rows_mactrack")) || ($total_rows < (read_config_option("num_rows_mactrack")*$_REQUEST["page"]))) ? $total_rows : (read_config_option("num_rows_mactrack")*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
+							Showing Rows " . (($_REQUEST["rows"]*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $_REQUEST["rows"]) || ($total_rows < ($_REQUEST["rows"]*$_REQUEST["page"]))) ? $total_rows : ($_REQUEST["rows"]*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
 						</td>\n
 						<td align='right' class='textHeaderDark'>
-							<strong>"; if (($_REQUEST["page"] * read_config_option("num_rows_mactrack")) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_device_types.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * read_config_option("num_rows_mactrack")) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+							<strong>"; if (($_REQUEST["page"] * $_REQUEST["rows"]) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_device_types.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $_REQUEST["rows"]) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
 						</td>\n
 					</tr>
 				</table>
 			</td>
 		</tr>\n";
 
-	print $nav;
+	if ($total_rows) {
+		print $nav;
+	}
 
 	$display_text = array(
 		"description" => array("Device Type<br>Description", "ASC"),
@@ -908,7 +922,7 @@ function mactrack_device_type() {
 		/* put the nav bar on the bottom as well */
 		print $nav;
 	}else{
-		print "<tr><td><em>No Mac Track Device Types</em></td></tr>";
+		print "<tr><td><em>No MacTrack Device Types</em></td></tr>";
 	}
 	html_end_box(false);
 

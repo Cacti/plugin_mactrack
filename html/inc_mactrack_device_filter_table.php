@@ -1,11 +1,12 @@
 	<script type="text/javascript">
 	<!--
 	function applyDeviceFilterChange(objForm) {
-		strURL = '?site_id=' + objForm.site_id[objForm.site_id.selectedIndex].value;
-		strURL = strURL + '&status=' + objForm.status[objForm.status.selectedIndex].value;
-		strURL = strURL + '&type_id=' + objForm.type_id[objForm.type_id.selectedIndex].value;
-		strURL = strURL + '&device_type_id=' + objForm.device_type_id[objForm.device_type_id.selectedIndex].value;
+		strURL = '?site_id=' + objForm.site_id.value;
+		strURL = strURL + '&status=' + objForm.status.value;
+		strURL = strURL + '&type_id=' + objForm.type_id.value;
+		strURL = strURL + '&device_type_id=' + objForm.device_type_id.value;
 		strURL = strURL + '&filter=' + objForm.filter.value;
+		strURL = strURL + '&rows=' + objForm.rows.value;
 		document.location = strURL;
 	}
 
