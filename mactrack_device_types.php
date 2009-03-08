@@ -328,7 +328,7 @@ function mactrack_device_type_export() {
 
 	$sql_where = "";
 
-	$device_types = mactrack_get_device_types($sql_where, FALSE);
+	$device_types = mactrack_get_device_types($sql_where, 0, FALSE);
 
 	$xport_array = array();
 	array_push($xport_array, '"vendor","description","device_type",' .
@@ -763,7 +763,7 @@ function mactrack_device_type_edit() {
 	}
 }
 
-function mactrack_get_device_types(&$sql_where, $apply_limits = TRUE) {
+function mactrack_get_device_types(&$sql_where, $row_limit, $apply_limits = TRUE) {
 	if ($_REQUEST["vendor"] == "All") {
 		/* Show all items */
 	}else{
@@ -786,7 +786,7 @@ function mactrack_get_device_types(&$sql_where, $apply_limits = TRUE) {
 		ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
 
 	if ($apply_limits) {
-		$query_string .= " LIMIT " . ($_REQUEST["rows"]*($_REQUEST["page"]-1)) . "," . $_REQUEST["rows"];
+		$query_string .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
 	}
 
 	return db_fetch_assoc($query_string);
@@ -858,7 +858,7 @@ function mactrack_device_type() {
 
 	$sql_where = "";
 
-	$device_types = mactrack_get_device_types($sql_where);
+	$device_types = mactrack_get_device_types($sql_where, $row_limit);
 
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
@@ -867,7 +867,7 @@ function mactrack_device_type() {
 		FROM mac_track_device_types" . $sql_where);
 
 	/* generate page list */
-	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $_REQUEST["rows"], $total_rows, "mactrack_device_types.php?");
+	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_device_types.php?");
 
 	$nav = "<tr bgcolor='#" . $colors["header"] . "'>
 			<td colspan='7'>
@@ -877,10 +877,10 @@ function mactrack_device_type() {
 							<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_device_types.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
 						</td>\n
 						<td align='center' class='textHeaderDark'>
-							Showing Rows " . (($_REQUEST["rows"]*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $_REQUEST["rows"]) || ($total_rows < ($_REQUEST["rows"]*$_REQUEST["page"]))) ? $total_rows : ($_REQUEST["rows"]*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
+							Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
 						</td>\n
 						<td align='right' class='textHeaderDark'>
-							<strong>"; if (($_REQUEST["page"] * $_REQUEST["rows"]) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_device_types.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $_REQUEST["rows"]) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+							<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_device_types.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
 						</td>\n
 					</tr>
 				</table>
