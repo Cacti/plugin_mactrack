@@ -160,9 +160,9 @@ function mactrack_page_head() {
 	global $config;
 
 	if (!isset($config["base_path"])) {
-		print "<script type='text/javascript' src='" . URL_PATH . "/plugins/mactrack/macktrack.js'></script>";
-	}else{		print "<link type='text/css' href='" . $config["url_path"] . "/plugins/mactrack/mactrack.css' rel='stylesheet'>";
-		print "<script type='text/javascript' src='" . $config["url_path"] . "/plugins/mactrack/macktrack.js'></script>";
+		print "<script type='text/javascript' src='" . URL_PATH . "plugins/mactrack/mactrack.js'></script>";
+	}else{		print "<link type='text/css' href='" . $config["url_path"] . "plugins/mactrack/mactrack.css' rel='stylesheet'>";
+		print "<script type='text/javascript' src='" . $config["url_path"] . "plugins/mactrack/mactrack.js'></script>";
 	}
 }
 
