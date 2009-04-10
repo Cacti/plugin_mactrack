@@ -57,11 +57,11 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 
 	/* get the Voice VLAN information if it exists */
 	$portVoiceVLANs = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.87.1.4.1.1.37.0", $device);
-	if (sizeof($portVoiceVLANs) > 0) {
+	if (sizeof($portVoiceVLANs)) {
 		$vvlans = TRUE;
 	}else{
 		$portVoiceVLANs = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.68.1.5.1.1.1", $device);
-		if (sizeof($portVoiceVLANs) > 0) {
+		if (sizeof($portVoiceVLANs)) {
 			$vvlans = TRUE;
 		}else{
 			$vvlans = FALSE;
@@ -74,6 +74,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 		mactrack_debug("Voice VLANs do not exist on this device");
 	}
 
+	if (sizeof($ifIndexes)) {
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["trunkPortState"] = @$vlan_trunkstatus[$ifIndex];
 		if ($vvlans) {
@@ -83,6 +84,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 		if ($ifInterfaces[$ifIndex]["ifType"] == 6) {
 			$device["ports_total"]++;
 		}
+	}
 	}
 	mactrack_debug("ifInterfaces assembly complete.");
 
@@ -95,16 +97,20 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 	mactrack_debug("portTrunking data collected.");
 
 	/* calculate the number of end user ports */
+	if (sizeof($portTrunking)) {
 	foreach ($portTrunking as $portTrunk) {
 		if ($portTrunk == 1) {
 			$device["ports_trunk"]++;
 		}
+	}
 	}
 
 	/* build VLAN array from results */
 	$i = 0;
 	$j = 0;
 	$active_vlans = array();
+
+	if (sizeof($vlan_ids)) {
 	foreach($vlan_ids as $vlan_number => $vlanStatus) {
 		$vlanName = $vlan_names[$vlan_number];
 
@@ -141,8 +147,9 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 
 		$i++;
 	}
+	}
 
-	if (sizeof($active_vlans) > 0) {
+	if (sizeof($active_vlans)) {
 		$i = 0;
 		/* get the port status information */
 		foreach($active_vlans as $active_vlan) {
@@ -173,7 +180,10 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 		$i = 0;
 		$j = 0;
 		$port_array = array();
+
+		if (sizeof($active_vlans)) {
 		foreach($active_vlans as $active_vlan) {
+			if (sizeof($active_vlan["port_results"])) {
 			foreach($active_vlan["port_results"] as $port_result) {
 				$ifIndex = $brPorttoifIndexes[$j][$port_result["port_number"]];
 				$ifType = $ifInterfaces[$ifIndex]["ifType"];
@@ -207,7 +217,10 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 					}
 				}
 			}
+			}
+
 			$j++;
+		}
 		}
 
 		/* display completion message */
@@ -271,6 +284,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		mactrack_debug("Voice VLANs do not exist on this device");
 	}
 
+	if (sizeof($ifIndexes)) {
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["trunkPortState"] = @$vlan_trunkstatus[$ifIndex];
 		if ($vvlans) {
@@ -285,12 +299,15 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 			$device["ports_trunk"]++;
 		}
 	}
+	}
 	mactrack_debug("ifInterfaces assembly complete.");
 
 	/* build VLAN array from results */
 	$i = 0;
 	$j = 0;
 	$active_vlans = array();
+
+	if (sizeof($vlan_ids)) {
 	foreach($vlan_ids as $vlan_number => $vlanStatus) {
 		$vlanName = $vlan_names[$vlan_number];
 
@@ -327,8 +344,9 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 
 		$i++;
 	}
+	}
 
-	if (sizeof($active_vlans) > 0) {
+	if (sizeof($active_vlans)) {
 		$i = 0;
 		/* get the port status information */
 		foreach($active_vlans as $active_vlan) {
@@ -358,7 +376,9 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		$port_array = array();
 
 		mactrack_debug("Final cross check's now being performed.");
+		if (sizeof($active_vlans)) {
 		foreach($active_vlans as $active_vlan) {
+			if (sizeof($active_vlan["port_results"])) {
 			foreach($active_vlan["port_results"] as $port_result) {
 				$ifIndex = $brPorttoifIndexes[$j][$port_result["port_number"]];
 				$ifType = $ifInterfaces[$ifIndex]["ifType"];
@@ -394,7 +414,10 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 					}
 				}
 			}
+			}
+
 			$j++;
+		}
 		}
 
 		/* display completion message */

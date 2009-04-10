@@ -427,8 +427,11 @@ function mactrack_device_export() {
 
 	header("Content-type: application/csv");
 	header("Content-Disposition: attachment; filename=cacti_device_xport.csv");
+
+	if (sizeof($xport_array)) {
 	foreach($xport_array as $xport_line) {
 		print $xport_line . "\n";
+	}
 	}
 }
 
@@ -441,9 +444,11 @@ function mactrack_device_import() {
 		html_start_box("<strong>Import Results</strong>", "100%", "aaaaaa", "3", "center", "");
 
 		print "<tr bgcolor='#" . $colors["form_alternate1"] . "'><td><p class='textArea'>Cacti has imported the following items:</p>";
+		if (sizeof($_SESSION["import_debug_info"])) {
 		foreach($_SESSION["import_debug_info"] as $import_result) {
 			print "<tr bgcolor='#" . $colors["form_alternate1"] . "'><td>" . $import_result . "</td>";
 			print "</tr>";
+		}
 		}
 
 		html_end_box();
@@ -515,6 +520,7 @@ function mactrack_device_import_processor(&$devices) {
 	$i = 0;
 	$return_array = array();
 
+	if (sizeof($devices)) {
 	foreach($devices as $device_line) {
 		/* parse line */
 		$line_array = explode(",", $device_line);
@@ -531,6 +537,7 @@ function mactrack_device_import_processor(&$devices) {
 			$save_device_name_id = -1;
 			$update_suffix = "";
 
+			if (sizeof($line_array)) {
 			foreach($line_array as $line_item) {
 				$line_item = trim(str_replace("'", "", $line_item));
 				$line_item = trim(str_replace('"', '', $line_item));
@@ -643,6 +650,7 @@ function mactrack_device_import_processor(&$devices) {
 				$j++;
 
 			}
+			}
 
 			$save_order .= ")";
 
@@ -658,6 +666,7 @@ function mactrack_device_import_processor(&$devices) {
 			$first_column = TRUE;
 			$sql_where = "";
 
+			if (sizeof($line_array)) {
 			foreach($line_array as $line_item) {
 				if (in_array($j, $insert_columns)) {
 					$line_item = trim(str_replace("'", "", $line_item));
@@ -722,6 +731,7 @@ function mactrack_device_import_processor(&$devices) {
 
 				$j++;
 			}
+			}
 
 			$save_value .= ")";
 
@@ -756,6 +766,7 @@ function mactrack_device_import_processor(&$devices) {
 		}
 
 		$i++;
+	}
 	}
 
 	return $return_array;
@@ -1065,7 +1076,7 @@ function mactrack_device() {
 	html_header_sort_checkbox($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 
 	$i = 0;
-	if (sizeof($devices) > 0) {
+	if (sizeof($devices)) {
 		foreach ($devices as $device) {
 			form_alternate_row_color($colors["alternate"],$colors["light"],$i, 'line' . $device["device_id"]); $i++;
 			mactrack_format_device_row($device);

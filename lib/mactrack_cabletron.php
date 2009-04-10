@@ -72,6 +72,7 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 	$ignore_ports = port_list_to_array($device["ignorePorts"]);
 
 	$i = 0;
+	if (sizeof($active_ports_array)) {
 	foreach($active_ports_array as $port_info) {
 		if (($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
 			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) {
@@ -81,6 +82,7 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 			$ports_total++;
 		}
 		$i++;
+	}
 	}
 
 	if ($store_to_db) {
@@ -161,6 +163,7 @@ function get_repeater_snmp_readstring(&$device) {
 		/* loop through the default and then other common for the correct answer */
 		$read_strings = explode(":",$device["snmp_readstrings"]);
 
+		if (sizeof($read_strings)) {
 		foreach($read_strings as $snmp_readstring) {
 			$active_ports = @cacti_snmp_get($device["hostname"], $snmp_readstring,
 								".1.3.6.1.4.1.52.4.1.1.1.4.1.1.4.0", $device["snmp_version"],
@@ -170,6 +173,7 @@ function get_repeater_snmp_readstring(&$device) {
 				mactrack_debug("Repeater readstring is: " . $snmp_readstring);
 				return $snmp_readstring;
 			}
+		}
 		}
 	}
 

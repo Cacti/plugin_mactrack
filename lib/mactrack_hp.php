@@ -53,6 +53,7 @@ function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 	/* get and store the interfaces table */
 	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, FALSE);
 
+	if (sizeof($ifIndexes)) {
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["trunkPortState"] = @$vlan_trunkstatus[$ifIndex];
 
@@ -64,9 +65,11 @@ function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 			$device["ports_trunk"]++;
 		}
 	}
+	}
 	mactrack_debug("ifInterfaces assembly complete.");
 
 	$i = 0;
+	if (sizeof($vlan_ids)) {
 	foreach($vlan_ids as $vlan_id => $vlan_name) {
 		$active_vlans[$i]["vlan_id"] = $vlan_id;
 		$active_vlans[$i]["vlan_name"] = $vlan_name;
@@ -74,8 +77,9 @@ function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 
 		$i++;
 	}
+	}
 
-	if (sizeof($active_vlans) > 0) {
+	if (sizeof($active_vlans)) {
 		$i = 0;
 		/* get the port status information */
 		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", FALSE);
@@ -84,6 +88,8 @@ function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 		$i = 0;
 		$j = 0;
 		$port_array = array();
+
+		if (sizeof($port_results)) {
 		foreach($port_results as $port_result) {
 			$ifIndex = $port_result["port_number"];
 			$ifType = $ifInterfaces[$ifIndex]["ifType"];
@@ -108,7 +114,9 @@ function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 
 				$i++;
 			}
+
 			$j++;
+		}
 		}
 
 		/* display completion message */

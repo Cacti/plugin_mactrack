@@ -59,6 +59,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 	$link_ports = get_link_port_status($device);
 	mactrack_debug("ipAddrTable scanning for link ports data collection complete.");
 
+	if (sizeof($ifIndexes)) {
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["ifIndex"] = $ifIndex;
 		$ifInterfaces[$ifIndex]["ifName"] = @$ifNames[$ifIndex];
@@ -66,26 +67,32 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 		$ifInterfaces[$ifIndex]["linkPort"] = @$link_ports[$ifIndex];
 		$ifInterfaces[$ifIndex]["trunkPortState"] = @$vlan_trunkstatus[$ifIndex];
 	}
+	}
 	mactrack_debug("ifInterfaces assembly complete.");
 
 	/* calculate the number of end user ports */
+	if (sizeof($ifTypes)) {
 	foreach ($ifTypes as $ifType) {
 		if (($ifType >= 6) && ($ifType <= 9)) {
 			$device["ports_total"]++;
 		}
 	}
+	}
 	mactrack_debug("Total Ports = " . $device["ports_total"]);
 
 	/* calculate the number of trunk ports */
+	if (sizeof($ifIndexes)) {
 	foreach ($ifIndexes as $ifIndex) {
 		if ($ifInterfaces[$ifIndex]["trunkPortState"] == 1) {
 			$device["ports_trunk"]++;
 		}
 	}
+	}
 	mactrack_debug("Total Trunk Ports = " . $device["ports_trunk"]);
 
 	/* get VLAN details */
 	$i = 0;
+	if (sizeof($vlan_ids)) {
 	foreach ($vlan_ids as $vlan_id => $vlan_name) {
 		$active_vlans[$i]["vlan_id"] = $vlan_id;
 		$active_vlans[$i]["vlan_name"] = $vlan_name;
@@ -93,9 +100,9 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 		mactrack_debug("VLAN ID = " . $active_vlans[$i]["vlan_id"] . " VLAN Name = " . $active_vlans[$i]["vlan_name"]);
 		$i++;
 	}
+	}
 
-	if (sizeof($active_vlans) > 0) {
-
+	if (sizeof($active_vlans)) {
 		/* get the port status information */
 		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", FALSE);
 		$port_vlan_data = xform_standard_indexed_data(".1.3.6.1.4.1.1991.1.1.3.2.6.1.1", $device);
@@ -104,6 +111,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 		$j = 0;
 		$port_array = array();
 
+		if (sizeof($port_results)) {
 		foreach ($port_results as $port_result) {
 			$ifIndex = $port_result["port_number"];
 			$ifType = $ifTypes[$ifIndex];
@@ -112,7 +120,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 			$portTrunkStatus = @$ifInterfaces[$ifIndex]["trunkPortState"];
 			mactrack_debug("Port Number = " . $ifIndex . " Type = " . $ifType . " Name = " . $ifName . " Port Name = " . $portName . " Trunk Status = " . $portTrunkStatus);
 
-		/* only output legitimate end user ports */
+			/* only output legitimate end user ports */
 			if (($ifType >= 6) && ($ifType <= 9)) {
 				$port_array[$i]["vlan_id"] = @$port_vlan_data[$port_result["port_number"]];
 				$port_array[$i]["vlan_name"] = @$vlan_ids[$port_array[$i]["vlan_id"]];
@@ -129,7 +137,9 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 
 				$i++;
 			}
+
 			$j++;
+		}
 		}
 
 		/* get IP Addresses */

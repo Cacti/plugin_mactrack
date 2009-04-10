@@ -47,8 +47,8 @@ function mactrack_debug($message) {
 	}
 }
 
-function mactrack_strip_alpha($string) {
-  return trim($string, "abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ()[]{}");
+function mactrack_strip_alpha($string = "") {
+	return trim($string, "abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ()[]{}");
 }
 
 function mactrack_check_user_realm($realm_id) {
@@ -97,6 +97,7 @@ function valid_snmp_device(&$device) {
 		/* loop through the default and then other common for the correct answer */
 		$read_strings = explode(":",$device["snmp_readstrings"]);
 
+		if (sizeof($read_strings)) {
 		foreach($read_strings as $snmp_readstring) {
 			if ($snmp_readstring != $device["snmp_readstring"]) {
 				$snmp_sysObjectID = @cacti_snmp_get($device["hostname"], $snmp_readstring,
@@ -120,6 +121,7 @@ function valid_snmp_device(&$device) {
 					$host_up = FALSE;
 				}
 			}
+		}
 		}
 	}
 
@@ -186,6 +188,7 @@ function valid_snmp_device(&$device) {
 */
 function find_scanning_function(&$device, &$device_types) {
 	/* scan all device_types to determine the function to call */
+	if (sizeof($device_types)) {
 	foreach($device_types as $device_type) {
 		/* by default none match */
 		$sysDescr_match = FALSE;
@@ -195,12 +198,14 @@ function find_scanning_function(&$device, &$device_types) {
 		if (substr_count($device_type["sysDescr_match"], "*") > 0) {
 			/* need to assume mixed string */
 			$parts = explode("*", $device_type["sysDescr_match"]);
+			if (sizeof($parts)) {
 			foreach($parts as $part) {
 				if (substr_count($device["sysDescr_match"],$part) > 0) {
 					$sysDescr_match = TRUE;
 				}else{
 					$sysDescr_match = FALSE;
 				}
+			}
 			}
 		}else{
 			if (strlen($device_type["sysDescr_match"]) == 0) {
@@ -226,6 +231,7 @@ function find_scanning_function(&$device, &$device_types) {
 			return $device_type;
 		}
 	}
+	}
 
 	return array();
 }
@@ -238,8 +244,10 @@ function port_list_to_array($port_list, $delimiter = ":") {
 
 	$ports = explode($delimiter, $port_list);
 
+	if (sizeof($ports)) {
 	foreach ($ports as $port) {
 		array_push($port_array, trim($port));
+	}
 	}
 
 	return $port_array;
@@ -258,7 +266,7 @@ function get_standard_arp_table($site, &$device) {
 	   This mod is put in to handle the nortel accelar arp table
 	   ifIntcount == 0 represents a nortel arp, 1 is the original
 	*/
-	if (sizeof($atifIndexes) > 0) {
+	if (sizeof($atifIndexes)) {
 		$ifIntcount = 1;
 	}else{
 		$ifIntcount = 0;
@@ -279,9 +287,11 @@ function get_standard_arp_table($site, &$device) {
 	/* convert the mac address if necessary */
 	$keys = array_keys($atPhysAddress);
 	$i = 0;
+	if (sizeof($atPhysAddress)) {
 	foreach($atPhysAddress as $atAddress) {
 		$atPhysAddress[$keys[$i]] = xform_mac_address($atAddress);
 		$i++;
+	}
 	}
 	mactrack_debug("atPhysAddress data collection complete");
 
@@ -296,15 +306,18 @@ function get_standard_arp_table($site, &$device) {
 	/* get the ifNames for the device */
 	$keys = array_keys($atifIndexes);
 	$i = 0;
+	if (sizeof($atifIndexes)) {
 	foreach($atifIndexes as $atifIndex) {
 		$atEntries[$i]["atifIndex"] = $atifIndex;
 		$atEntries[$i]["atPhysAddress"] = $atPhysAddress[$keys[$i]];
 		$atEntries[$i]["atNetAddress"] = xform_net_address($atNetAddress[$keys[$i]]);
 		$i++;
 	}
+	}
 	mactrack_debug("atEntries assembly complete.");
 
 	/* output details to database */
+	if (sizeof($atEntries)) {
 	foreach($atEntries as $atEntry) {
 		$insert_string = "REPLACE INTO mac_track_ips " .
 			"(site_id,device_id,hostname,device_name,port_number," .
@@ -322,6 +335,7 @@ function get_standard_arp_table($site, &$device) {
 		mactrack_debug("SQL: " . $insert_string);
 
 		db_execute($insert_string);
+	}
 	}
 
 	/* save ip information for the device */
@@ -419,10 +433,11 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	$vlan_trunk = "";
 
 	$i = 0;
+	if (sizeof($ifIndexes)) {
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["ifIndex"] = $ifIndex;
 		$ifInterfaces[$ifIndex]["ifName"] = @$ifNames[$ifIndex];
-		$ifInterfaces[$ifIndex]["ifType"] = @$ifTypes[$ifIndex];
+		$ifInterfaces[$ifIndex]["ifType"] = mactrack_strip_alpha($ifTypes[$ifIndex]);
 
 		if ($getLinkPorts) {
 			$ifInterfaces[$ifIndex]["linkPort"] = @$link_ports[$ifIndex];
@@ -517,8 +532,9 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			@$ifInErrors[$ifIndex]        . "', '" . @$ifInUnknownProtos[$ifIndex] . "', '" . @$ifOutDiscards[$ifIndex] . "', '" .
 			@$ifOutErrors[$ifIndex]       . "', '" . @$int_discards_present        . "', '" . $int_errors_present       . "', '" .
 			$last_down_time               . "', '" . $last_up_time                 . "', '" . $stateChanges             . "', '" . "1')";
-echo $insert_vals . "\n";
+
 		$i++;
+	}
 	}
 	mactrack_debug("ifInterfaces assembly complete.");
 
@@ -630,18 +646,20 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 	$indexes = array_keys($active_ports_array);
 
 	$i = 0;
+	if (sizeof($active_ports_array)) {
 	foreach($active_ports_array as $port_info) {
 		$port_info =  mactrack_strip_alpha($port_info);
-		$ifInterfaces[$indexes[$i]]["ifType"] = mactrack_strip_alpha($ifInterfaces[$indexes[$i]]["ifType"]);
 		if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
-			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) || 
+			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
 			($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
 			if ($port_info == 1) {
 				$ports_active++;
 			}
 			$ports_total++;
 		}
+
 		$i++;
+	}
 	}
 
 	if ($store_to_db) {
@@ -671,6 +689,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 		   a new array.
 		*/
 		$i = 0;
+		if (sizeof($port_numbers)) {
 		foreach ($port_numbers as $key => $port_number) {
 			if (($highPort == 0) ||
 				(($port_number >= $lowPort) &&
@@ -686,15 +705,17 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 				}
 			}
 		}
+		}
 
 		/* compare the user ports to the brige port data, store additional
 		   relevant data about the port.
 		*/
 		$i = 0;
+		if (sizeof($port_key_array)) {
 		foreach ($port_key_array as $port_key) {
 			/* map bridge port to interface port and check type */
 			if ($port_key["port_number"] > 0) {
-				if (sizeof($bridgePortIfIndexes) != 0) {
+				if (sizeof($bridgePortIfIndexes)) {
 					/* some hubs do not always return a port number in the bridge table.
 					   test for it by isset and substiture the port number from the ifTable
 					   if it isnt in the bridge table
@@ -727,21 +748,26 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 				}
 			}
 		}
+		}
 		mactrack_debug("Port number information collected.");
 
 		/* map mac address */
 		/* only continue if there were user ports defined */
-		if (sizeof($new_port_key_array) > 0) {
+		if (sizeof($new_port_key_array)) {
 			/* get the bridges active MAC addresses */
 			$port_macs = xform_stripped_oid(".1.3.6.1.2.1.17.4.3.1.1", $device, $snmp_readstring);
 
+			if (sizeof($port_macs)) {
 			foreach ($port_macs as $key => $port_mac) {
 				$port_macs[$key] = xform_mac_address($port_mac);
 			}
+			}
 
+			if (sizeof($new_port_key_array)) {
 			foreach ($new_port_key_array as $key => $port_key) {
 				$new_port_key_array[$key]["mac_address"] = @$port_macs[$port_key["key"]];
 				mactrack_debug("INDEX: '". $key . "' MAC ADDRESS: " . $new_port_key_array[$key]["mac_address"]);
+			}
 			}
 
 			mactrack_debug("Port mac address information collected.");
@@ -755,7 +781,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 	if ($store_to_db) {
 		if ($ports_active <= 0) {
 			$device["last_runmessage"] = "Data collection completed ok";
-		}elseif (sizeof($new_port_key_array) > 0) {
+		}elseif (sizeof($new_port_key_array)) {
 			$device["last_runmessage"] = "Data collection completed ok";
 			$device["macs_active"] = sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
@@ -798,9 +824,9 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 	$indexes = array_keys($active_ports_array);
 
 	$i = 0;
+	if (sizeof($active_ports_array)) {
 	foreach($active_ports_array as $port_info) {
 		$port_info =  mactrack_strip_alpha($port_info);
-		$ifInterfaces[$indexes[$i]]["ifType"] = mactrack_strip_alpha($ifInterfaces[$indexes[$i]]["ifType"]);
 		if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
 			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
 			($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
@@ -810,6 +836,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 			$ports_total++;
 		}
 		$i++;
+	}
 	}
 
 	if ($store_to_db) {
@@ -844,6 +871,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 		   a new array.
 		*/
 		$i = 0;
+		if (sizeof($port_numbers)) {
 		foreach ($port_numbers as $key => $port_number) {
 			if (($highPort == 0) ||
 				(($port_number >= $lowPort) &&
@@ -860,15 +888,17 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 				}
 			}
 		}
+		}
 
 		/* compare the user ports to the brige port data, store additional
 		   relevant data about the port.
 		*/
 		$i = 0;
+		if (sizeof($port_key_array)) {
 		foreach ($port_key_array as $port_key) {
 			/* map bridge port to interface port and check type */
 			if ($port_key["port_number"] > 0) {
-				if (sizeof($bridgePortIfIndexes) != 0) {
+				if (sizeof($bridgePortIfIndexes)) {
 					$brPortIfIndex = @$bridgePortIfIndexes[$port_key["port_number"]];
 					$brPortIfType = @$ifInterfaces[$brPortIfIndex]["ifType"];
 				}else{
@@ -891,21 +921,26 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 				}
 			}
 		}
+		}
 		mactrack_debug("Port number information collected.");
 
 		/* map mac address */
 		/* only continue if there were user ports defined */
-		if (sizeof($new_port_key_array) > 0) {
+		if (sizeof($new_port_key_array)) {
 			/* get the bridges active MAC addresses */
 			$port_macs = xform_stripped_oid(".1.3.6.1.2.1.17.4.3.1.1", $device, $snmp_readstring);
 
+			if (sizeof($port_macs)) {
 			foreach ($port_macs as $key => $port_mac) {
 				$port_macs[$key] = xform_mac_address($port_mac);
 			}
+			}
 
+			if (sizeof($new_port_key_array)) {
 			foreach ($new_port_key_array as $key => $port_key) {
 				$new_port_key_array[$key]["mac_address"] = @$port_macs[$port_key["key"]];
 				mactrack_debug("INDEX: '". $key . "' MAC ADDRESS: " . $new_port_key_array[$key]["mac_address"]);
+			}
 			}
 
 			mactrack_debug("Port mac address information collected.");
@@ -919,7 +954,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 	if ($store_to_db) {
 		if ($ports_active <= 0) {
 			$device["last_runmessage"] = "Data collection completed ok";
-		}elseif (sizeof($new_port_key_array) > 0) {
+		}elseif (sizeof($new_port_key_array)) {
 			$device["last_runmessage"] = "Data collection completed ok";
 			$device["macs_active"] = sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
@@ -962,9 +997,9 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 	$indexes = array_keys($active_ports_array);
 
 	$i = 0;
+	if (sizeof($active_ports_array)) {
 	foreach($active_ports_array as $port_info) {
 		$port_info =  mactrack_strip_alpha($port_info);
-		$ifInterfaces[$indexes[$i]]["ifType"] = mactrack_strip_alpha($ifInterfaces[$indexes[$i]]["ifType"]);
 		if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
 			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
 			($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
@@ -974,6 +1009,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 			$ports_total++;
 		}
 		$i++;
+	}
 	}
 
 	if ($store_to_db) {
@@ -1008,6 +1044,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 		   a new array.
 		*/
 		$i = 0;
+		if (sizeof($port_numbers)) {
 		foreach ($port_numbers as $key => $port_number) {
 			if (($highPort == 0) ||
 				(($port_number >= $lowPort) &&
@@ -1024,15 +1061,17 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 				}
 			}
 		}
+		}
 
 		/* compare the user ports to the brige port data, store additional
 		   relevant data about the port.
 		*/
 		$i = 0;
+		if (sizeof($port_key_array)) {
 		foreach ($port_key_array as $port_key) {
 			/* map bridge port to interface port and check type */
 			if ($port_key["port_number"] > 0) {
-				if (sizeof($bridgePortIfIndexes) != 0) {
+				if (sizeof($bridgePortIfIndexes)) {
 					$brPortIfIndex = @$bridgePortIfIndexes[$port_key["port_number"]];
 					$brPortIfType = @$ifInterfaces[$brPortIfIndex]["ifType"];
 				}else{
@@ -1055,21 +1094,26 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 				}
 			}
 		}
+		}
 		mactrack_debug("Port number information collected.");
 
 		/* map mac address */
 		/* only continue if there were user ports defined */
-		if (sizeof($new_port_key_array) > 0) {
+		if (sizeof($new_port_key_array)) {
 			/* get the bridges active MAC addresses */
 			$port_macs = xform_stripped_oid(".1.3.6.1.2.1.17.7.1.2.2.1.1", $device, $snmp_readstring);
 
+			if (sizeof($port_macs)) {
 			foreach ($port_macs as $key => $port_mac) {
 				$port_macs[$key] = xform_mac_address($port_mac);
 			}
+			}
 
+			if (sizeof($new_port_key_array)) {
 			foreach ($new_port_key_array as $key => $port_key) {
 				$new_port_key_array[$key]["mac_address"] = @$port_macs[$port_key["key"]];
 				mactrack_debug("INDEX: '". $key . "' MAC ADDRESS: " . $new_port_key_array[$key]["mac_address"]);
+			}
 			}
 
 			mactrack_debug("Port mac address information collected.");
@@ -1083,7 +1127,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 	if ($store_to_db) {
 		if ($ports_active <= 0) {
 			$device["last_runmessage"] = "Data collection completed ok";
-		}elseif (sizeof($new_port_key_array) > 0) {
+		}elseif (sizeof($new_port_key_array)) {
 			$device["last_runmessage"] = "Data collection completed ok";
 			$device["macs_active"] = sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
@@ -1213,8 +1257,10 @@ function get_link_port_status(&$device) {
 					".1.3.6.1.2.1.4.20.1.2", $device["snmp_version"], "", "",
 					"", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
+	if (sizeof($walk_array)) {
 	foreach ($walk_array as $walk_item) {
 		$return_array[$walk_item["value"]] = TRUE;
+	}
 	}
 
 	return $return_array;
@@ -1238,6 +1284,8 @@ function xform_stripped_oid($OID, &$device, $snmp_readstring = "") {
 	$OID = ereg_replace("^\.", "", $OID);
 
 	$i = 0;
+
+	if (sizeof($walk_array)) {
 	foreach ($walk_array as $walk_item) {
 		$key = $walk_item["oid"];
 		$key = str_replace("iso", "1", $key);
@@ -1246,6 +1294,7 @@ function xform_stripped_oid($OID, &$device, $snmp_readstring = "") {
 		$return_array[$i]["value"] = $walk_item["value"];
 
 		$i++;
+	}
 	}
 
 	return array_rekey($return_array, "key", "value");
@@ -1326,11 +1375,14 @@ function xform_standard_indexed_data($xformOID, &$device, $snmp_readstring = "")
 					"", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 	$i = 0;
+
+	if (sizeof($xformArray)) {
 	foreach($xformArray as $xformItem) {
 		$perPos = strrpos($xformItem["oid"], ".");
 		$xformItemID = substr($xformItem["oid"], $perPos+1);
 		$xformArray[$i]["oid"] = $xformItemID;
 		$i++;
+	}
 	}
 
 	return array_rekey($xformArray, "oid", "value");
@@ -1355,6 +1407,8 @@ function xform_dot1q_vlan_associations(&$device, $snmp_readstring = "") {
 					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 	$i = 0;
+
+	if (sizeof($xformArray)) {
 	foreach($xformArray as $xformItem) {
 		/* peel off the beginning of the OID */
 		$key = $xformItem["oid"];
@@ -1367,6 +1421,7 @@ function xform_dot1q_vlan_associations(&$device, $snmp_readstring = "") {
 		/* save the key for association with the dot1d table */
 		$output_array[$i]["key"] = substr($key, $perPos+1);
 		$i++;
+	}
 	}
 
 	return array_rekey($output_array, "key", "vlan_id");
@@ -1383,6 +1438,8 @@ function xform_cisco_workgroup_port_data($xformOID, &$device) {
 							"", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
 
 	$i = 0;
+
+	if (sizeof($xformArray)) {
 	foreach($xformArray as $xformItem) {
 		$perPos = strrpos($xformItem["oid"], ".");
 		$xformItem_piece1 = substr($xformItem["oid"], $perPos+1);
@@ -1390,7 +1447,9 @@ function xform_cisco_workgroup_port_data($xformOID, &$device) {
 		$perPos = strrpos($xformItem_remainder, ".");
 		$xformItem_piece2 = substr($xformItem_remainder, $perPos+1);
 		$xformArray[$i]["oid"] = $xformItem_piece2 . "/" . $xformItem_piece1;
+
 		$i++;
+	}
 	}
 
 	return array_rekey($xformArray, "oid", "value");
@@ -1409,6 +1468,8 @@ function xform_indexed_data($xformOID, &$device, $xformLevel = 1) {
 
 	$i = 0;
 	$output_array = array();
+
+	if (sizeof($xformArray)) {
 	foreach($xformArray as $xformItem) {
 		/* break down key */
 		$OID = $xformItem["oid"];
@@ -1429,7 +1490,9 @@ function xform_indexed_data($xformOID, &$device, $xformLevel = 1) {
 
 		$output_array[$i]["key"] = $key;
 		$output_array[$i]["value"] = $xformItem["value"];
+
 		$i++;
+	}
 	}
 
 	return array_rekey($output_array, "key", "value");
@@ -1516,6 +1579,7 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 	global $debug;
 
 	/* output details to database */
+	if (sizeof($port_array)) {
 	foreach($port_array as $port_value) {
 		if (($port_value["port_number"] <> "NOT USER") &&
 			(($port_value["mac_address"] <> "NOT USER") && (strlen($port_value["mac_address"]) > 0))){
@@ -1538,6 +1602,7 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 
 			db_execute($insert_string);
 		}
+	}
 	}
 }
 
@@ -1616,6 +1681,7 @@ function import_oui_database($type = "ui", $oui_file = "http://standards.ieee.or
 
 		if ($type != "ui") print "<tr><td>";
 
+		if (sizeof($oui_database)) {
 		foreach ($oui_database as $row) {
 			$row = str_replace("\t", " ", $row);
 			if (($begin_vendor) && (strlen(trim($row)) == 0)) {
@@ -1656,6 +1722,7 @@ function import_oui_database($type = "ui", $oui_file = "http://standards.ieee.or
 				$hex_end = strpos($row, "(hex)") + 5;
 				$vendor_name= trim(substr($row,$hex_end));
 			}
+		}
 		}
 		if ($type != "ui") print "</td></tr>";
 
@@ -1837,7 +1904,7 @@ function mactrack_tabs() {
 		/* draw the tabs */
 		print "<div class='tabs'>\n";
 
-		if (sizeof($tabs_mactrack) > 0) {
+		if (sizeof($tabs_mactrack)) {
 		foreach (array_keys($tabs_mactrack) as $tab_short_name) {
 			if (!isset($config["base_path"])) {
 				print "<div class='tabDefault'><a " . (($tab_short_name == $current_tab) ? "class='tabSelected'" : "class='tabDefault'") . " href='" . $config['url_path'] .
@@ -1851,7 +1918,7 @@ function mactrack_tabs() {
 	}else{		/* draw the tabs */
 		print "<table class='report' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
 
-		if (sizeof($tabs_mactrack) > 0) {
+		if (sizeof($tabs_mactrack)) {
 		foreach (array_keys($tabs_mactrack) as $tab_short_name) {
 			print "<td style='padding:3px 10px 2px 5px;background-color:" . (($tab_short_name == $current_tab) ? "silver;" : "#DFDFDF;") .
 				"white-space:nowrap;'" .
