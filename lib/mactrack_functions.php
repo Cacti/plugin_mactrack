@@ -47,6 +47,10 @@ function mactrack_debug($message) {
 	}
 }
 
+function mactrack_strip_alpha($string) {
+  return trim($string, "abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ()[]{}");
+}
+
 function mactrack_check_user_realm($realm_id) {
 	if (empty($_SESSION["sess_user_id"])) {
 		return FALSE;
@@ -259,6 +263,7 @@ function get_standard_arp_table($site, &$device) {
 	}else{
 		$ifIntcount = 0;
 	}
+
 	if ($ifIntcount == 0) {
 		$atifIndexes = xform_indexed_data(".1.3.6.1.2.1.4.22.1.1", $device, 5);
 	}
@@ -626,8 +631,11 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 	$i = 0;
 	foreach($active_ports_array as $port_info) {
-		if (($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
-			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) {
+		$port_info =  mactrack_strip_alpha($port_info);
+		$ifInterfaces[$indexes[$i]]["ifType"] = mactrack_strip_alpha($ifInterfaces[$indexes[$i]]["ifType"]);
+		if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
+			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) || 
+			($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
 			if ($port_info == 1) {
 				$ports_active++;
 			}
@@ -791,6 +799,8 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 
 	$i = 0;
 	foreach($active_ports_array as $port_info) {
+		$port_info =  mactrack_strip_alpha($port_info);
+		$ifInterfaces[$indexes[$i]]["ifType"] = mactrack_strip_alpha($ifInterfaces[$indexes[$i]]["ifType"]);
 		if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
 			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
 			($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
@@ -953,6 +963,8 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 	$i = 0;
 	foreach($active_ports_array as $port_info) {
+		$port_info =  mactrack_strip_alpha($port_info);
+		$ifInterfaces[$indexes[$i]]["ifType"] = mactrack_strip_alpha($ifInterfaces[$indexes[$i]]["ifType"]);
 		if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
 			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
 			($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
