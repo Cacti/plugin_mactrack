@@ -172,7 +172,7 @@ function mactrack_vmacs() {
 		$row_limit = $_REQUEST["rows"];
 	}
 
-	html_start_box("<strong>MacTrack Vendor Mac Filter</strong>", "100%", $colors["header"], "3", "center", "mactrack_vendormacs.php?action=edit");
+	html_start_box("<strong>MacTrack Vendor Mac Filter</strong>", "100%", $colors["header"], "3", "center");
 
 	include("./plugins/mactrack/html/inc_mactrack_vmac_filter_table.php");
 
