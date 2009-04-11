@@ -74,10 +74,6 @@ function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPor
 	}
 	mactrack_debug("ifInterfaces assembly complete.");
 
-	/* get the portNames */
-	// $portNames = xform_cisco_workgroup_port_data(".1.3.6.1.4.1.9.5.1.4.1.1.4", $device);
-	// mactrack_debug("portNames data collected.");
-
 	$i = 0;
 	if (sizeof($vlan_ids)) {
 	foreach($vlan_ids as $vlan_id => $vlan_name) {
@@ -173,6 +169,9 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 
 	if (sizeof($ifIndexes)) {
 	foreach($ifIndexes as $ifIndex) {
+		$ifInterfaces[$ifIndex]["trunkPortState"] = @$vlan_trunkstatus[$ifIndex];
+		$ifInterfaces[$ifIndex]["vlannum"]        = @$vlan_ids[$ifIndex];
+
 		if ($ifInterfaces[$ifIndex]["ifType"] == 6) {
 			$device["ports_total"]++;
 		}
@@ -183,10 +182,6 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	}
 	}
 	mactrack_debug("ifInterfaces assembly complete.");
-
-	/* get the portNames */
-//	$portNames = xform_cisco_workgroup_port_data(".1.3.6.1.4.1.9.5.1.4.1.1.4", $device);
-//	mactrack_debug("portNames data collected.");
 
 	$i = 0;
 	if (sizeof($vlan_ids)) {
