@@ -262,26 +262,20 @@ function get_standard_arp_table($site, &$device) {
 	/* get the atifIndexes for the device */
 	$atifIndexes = xform_indexed_data(".1.3.6.1.2.1.3.1.1.1", $device, 6);
 
-	/* wcm mod 2006-02-17
-	   This mod is put in to handle the nortel accelar arp table
-	   ifIntcount == 0 represents a nortel arp, 1 is the original
-	*/
 	if (sizeof($atifIndexes)) {
-		$ifIntcount = 1;
-	}else{
-		$ifIntcount = 0;
-	}
-
-	if ($ifIntcount == 0) {
-		$atifIndexes = xform_indexed_data(".1.3.6.1.2.1.4.22.1.1", $device, 5);
-	}
-	mactrack_debug("atifIndexes data collection complete");
-
-	/* get the atPhysAddress for the device */
-	if ($ifIntcount == 0) {
-		$atPhysAddress = xform_indexed_data(".1.3.6.1.2.1.4.22.1.2", $device, 5);
-	} else {
+		mactrack_debug("atifIndexes data collection complete");
 		$atPhysAddress = xform_indexed_data(".1.3.6.1.2.1.3.1.1.2", $device, 6);
+		mactrack_debug("atPhysAddress data collection complete");
+		$atNetAddress  = xform_indexed_data(".1.3.6.1.2.1.3.1.1.3", $device, 6);
+		mactrack_debug("atNetAddress data collection complete");
+	}else{
+		/* second attempt for Force10 Gear */
+		$atifIndexes   = xform_indexed_data(".1.3.6.1.2.1.4.22.1.1", $device, 5);
+		mactrack_debug("atifIndexes data collection complete");
+		$atPhysAddress = xform_indexed_data(".1.3.6.1.2.1.4.22.1.2", $device, 5);
+		mactrack_debug("atPhysAddress data collection complete");
+		$atNetAddress = xform_indexed_data(".1.3.6.1.2.1.4.22.1.3", $device, 5);
+		mactrack_debug("atNetAddress data collection complete");
 	}
 
 	/* convert the mac address if necessary */
@@ -293,15 +287,7 @@ function get_standard_arp_table($site, &$device) {
 		$i++;
 	}
 	}
-	mactrack_debug("atPhysAddress data collection complete");
-
-	/* get the atPhysAddress for the device */
-	if ($ifIntcount == 0) {
-		$atNetAddress = xform_indexed_data(".1.3.6.1.2.1.4.22.1.3", $device, 5);
-	} else {
-		$atNetAddress = xform_indexed_data(".1.3.6.1.2.1.3.1.1.3", $device, 6);
-	}
-	mactrack_debug("atNetAddress data collection complete");
+	mactrack_debug("atPhysAddress MAC Address Conversion Completed");
 
 	/* get the ifNames for the device */
 	$keys = array_keys($atifIndexes);
@@ -1901,7 +1887,7 @@ function import_oui_database($type = "ui", $oui_file = "http://standards.ieee.or
 	}
 }
 
-function get_netscreen_arp_table($site, &$device) { 
+function get_netscreen_arp_table($site, &$device) {
 	global $debug, $scan_date;
 
 	/* get the atifIndexes for the device */
