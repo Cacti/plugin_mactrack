@@ -438,6 +438,8 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		$ifInterfaces[$ifIndex]["ifIndex"] = $ifIndex;
 		$ifInterfaces[$ifIndex]["ifName"] = @$ifNames[$ifIndex];
 		$ifInterfaces[$ifIndex]["ifType"] = mactrack_strip_alpha($ifTypes[$ifIndex]);
+		$ifInterfaces[$ifIndex]["ifDescr"] = @$ifDescr[$ifIndex];
+		$ifInterfaces[$ifIndex]["ifOperStatus"] = @$ifOperStatus[$ifIndex];
 
 		if ($getLinkPorts) {
 			$ifInterfaces[$ifIndex]["linkPort"] = @$link_ports[$ifIndex];
@@ -1344,6 +1346,7 @@ function xform_mac_address($mac_address) {
 	}else{
 		if (strlen($mac_address) > 10) { /* return is in ascii */
 			$mac_address = str_replace("HEX-00:", "", strtoupper($mac_address));
+			$mac_address = str_replace("HEX-:", "", strtoupper($mac_address));	
 			$mac_address = str_replace("HEX-", "", strtoupper($mac_address));
 			$mac_address = trim(str_replace("\"", "", $mac_address));
 			$mac_address = str_replace(" ", read_config_option("mt_mac_delim"), $mac_address);

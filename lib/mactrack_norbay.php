@@ -171,12 +171,18 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["trunkPortState"] = @$vlan_trunkstatus[$ifIndex];
 		$ifInterfaces[$ifIndex]["vlannum"]        = @$vlan_ids[$ifIndex];
+		$ifInterfaces[$ifIndex]["ifOperStatus"]   =  mactrack_strip_alpha($ifInterfaces[$ifIndex]["ifOperStatus"]);
 
 		if ($ifInterfaces[$ifIndex]["ifType"] == 6) {
 			$device["ports_total"]++;
 		}
 
+		if ($ifInterfaces[$ifIndex]["ifOperStatus"] == 1) {
+			$device["ports_active"]++;
+		}
+
 		if ($ifInterfaces[$ifIndex]["trunkPortState"] == 2) {
+			mactrack_debug("Found Port Trunk: " . $ifInterfaces[$ifIndex]["ifDescr"]);
 			$device["ports_trunk"]++;
 		}
 	}
@@ -209,7 +215,14 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 			$ifIndex = $port_result["port_number"];
 			$ifType = $ifInterfaces[$ifIndex]["ifType"];
 			$ifName = $ifInterfaces[$ifIndex]["ifName"];
-			$portName = "";
+			$ifDescr = $ifInterfaces[$ifIndex]["ifDescr"];
+
+			if ( strpos($ifDescr, "BayStack") === false ) {
+				$portName = preg_replace("/ifc[0-9]+ /", "", $ifName);
+			}else{
+				$portName = preg_replace("/BayStack - /", "", $ifDescr);
+			}	
+
 			$portTrunkStatus = @$ifInterfaces[$ifIndex]["trunkPortState"];
 
 			/* only output legitamate end user ports */
@@ -217,13 +230,20 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 				$port_array[$i]["vlan_id"] = @$port_vlan_data[$port_result["key"]];
 				$port_array[$i]["vlan_name"] = @$vlan_ids[$port_array[$i]["vlan_id"]];
 				$port_array[$i]["port_number"] = @$port_result["port_number"];
-				$port_array[$i]["port_name"] = "";
+				$port_array[$i]["port_name"] = $portName;
 				$port_array[$i]["mac_address"] = $port_result["mac_address"];
 				$device["ports_active"]++;
 
+				foreach ($port_array as $test_array) {
+					if (($test_array["port_name"] == $portName) && ($test_array["mac_address"] != $port_result["mac_address"])) {
+						$port_array[$i]["port_number"] = @$port_result["port_number"] . " - *";
+					}
+				}
+				
 				mactrack_debug("VLAN: " . $port_array[$i]["vlan_id"] . ", " .
 					"NAME: " . $port_array[$i]["vlan_name"] . ", " .
 					"PORT: " . $ifInterfaces[$ifIndex]["ifName"] . ", " .
+					"NUMBER: " . $port_array[$i]["port_number"] . ", " .
 					"NAME: " . $port_array[$i]["port_name"] . ", " .
 					"MAC: " . $port_array[$i]["mac_address"]);
 
