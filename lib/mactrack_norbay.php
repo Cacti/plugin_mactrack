@@ -25,6 +25,7 @@
 /* register this functions scanning functions */
 if (!isset($mactrack_scanning_functions)) { $mactrack_scanning_functions = array(); }
 array_push($mactrack_scanning_functions, "get_norbay_switch_ports");
+array_push($mactrack_scanning_functions, "get_norbay_accelar_switch_ports");
 
 /* get_norbay_accelar_switch_ports
  obtains port associations for Bay Network Swtiches.  Designed after the
@@ -221,7 +222,7 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 				$portName = preg_replace("/ifc[0-9]+ /", "", $ifName);
 			}else{
 				$portName = preg_replace("/BayStack - /", "", $ifDescr);
-			}	
+			}
 
 			$portTrunkStatus = @$ifInterfaces[$ifIndex]["trunkPortState"];
 
@@ -239,7 +240,7 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 						$port_array[$i]["port_number"] = @$port_result["port_number"] . " - *";
 					}
 				}
-				
+
 				mactrack_debug("VLAN: " . $port_array[$i]["vlan_id"] . ", " .
 					"NAME: " . $port_array[$i]["vlan_name"] . ", " .
 					"PORT: " . $ifInterfaces[$ifIndex]["ifName"] . ", " .

@@ -24,7 +24,8 @@
 
 /* register this functions scanning functions */
 if (!isset($mactrack_scanning_functions)) { $mactrack_scanning_functions = array(); }
-array_push($mactrack_scanning_functions, "get_catalyst_dot1dTpFdbEntry_ports", "get_IOS_dot1dTpFdbEntry_ports");
+array_push($mactrack_scanning_functions, "get_catalyst_dot1dTpFdbEntry_ports");
+array_push($mactrack_scanning_functions, "get_IOS_dot1dTpFdbEntry_ports");
 
 /* get_catalyst_doet1dTpFdbEntry_ports
 	obtains port associations for Cisco Catalyst Swtiches.  Catalyst

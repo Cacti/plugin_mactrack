@@ -24,7 +24,8 @@
 
 /* register this functions scanning functions */
 if (!isset($mactrack_scanning_functions)) { $mactrack_scanning_functions = array(); }
-array_push($mactrack_scanning_functions, "get_cabletron_switch_ports", "get_repeater_rev4_ports");
+array_push($mactrack_scanning_functions, "get_cabletron_switch_ports");
+array_push($mactrack_scanning_functions, "get_repeater_rev4_ports");
 
 function get_cabletron_switch_ports($site, &$device, $lowPort, $highPort) {
 	global $debug, $scan_date;
