@@ -40,111 +40,111 @@ if (0 == 1) {
 	/* update first beta database to current standard */
 	modify_column("mac_track_devices", "snmp_timeout", "ALTER TABLE `mac_track_devices` MODIFY COLUMN `snmp_timeout` INT(10) UNSIGNED NOT NULL DEFAULT 500;");
 	modify_column("mac_track_devices", "snmp_retries", "ALTER TABLE `mac_track_devices` MODIFY COLUMN `snmp_retries` TINYINT(11) UNSIGNED NOT NULL DEFAULT 3;");
-	
+
 	add_column("mac_track_ports",      "dns_hostname", "ALTER TABLE `mac_track_ports` ADD COLUMN `dns_hostname` VARCHAR(200) DEFAULT '' AFTER `ip_address`;");
 	add_column("mac_track_temp_ports", "dns_hostname", "ALTER TABLE `mac_track_temp_ports` ADD COLUMN `dns_hostname` VARCHAR(200) DEFAULT '' AFTER `ip_address`;");
 	add_column("mac_track_ips",        "dns_hostname", "ALTER TABLE `mac_track_ips` ADD COLUMN `dns_hostname` VARCHAR(200) DEFAULT '' AFTER `ip_address`;");
-	
+
 	add_column("mac_track_devices", "snmp_port",        "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_port` INT(10) UNSIGNED NOT NULL DEFAULT '161' AFTER `snmp_version`;");
 	add_column("mac_track_devices", "macs_active",      "ALTER TABLE `mac_track_devices` ADD COLUMN `macs_active` INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER `ports_trunk`;");
 	add_column("mac_track_devices", "snmp_sysName",     "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_sysName` VARCHAR(100) DEFAULT '' AFTER `snmp_retries`;");
 	add_column("mac_track_devices", "snmp_sysLocation", "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_sysLocation` VARCHAR(100) DEFAULT '' AFTER `snmp_sysName`;");
 	add_column("mac_track_devices", "snmp_sysContact",  "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_sysContact` VARCHAR(100) DEFAULT '' AFTER `snmp_sysLocation`;");
-	
+
 	create_table("mac_track_scanning_functions", "CREATE TABLE `mac_track_scanning_functions` (`scanning_function` VARCHAR(100) NOT NULL DEFAULT '', `description` VARCHAR(200) NOT NULL DEFAULT '', PRIMARY KEY(`scanning_function`));");
-	
+
 	execute_sql("Change Primary Key For 'mac_track_devices'", "ALTER TABLE `mac_track_devices` DROP PRIMARY KEY, ADD PRIMARY KEY(`hostname`, `snmp_port`, `site_id`);");
-	
+
 	add_index("mac_track_devices", "device_id", "ALTER TABLE `mac_track_devices` ADD INDEX `device_id`(`device_id`);");
-	
+
 	add_column("mac_track_sites", "total_oper_ports", "ALTER TABLE `mac_track_sites` ADD COLUMN `total_oper_ports` INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER `total_user_ports`;");
-	
+
 	execute_sql("Change Primary Key For 'mac_track_device_types'", "ALTER TABLE `mac_track_device_types` DROP PRIMARY KEY, ADD PRIMARY KEY(`sysDescr_match`, `sysObjectID_match`, `device_type`);");
-	
+
 	add_index("mac_track_device_types", "device_type_id", "ALTER TABLE `mac_track_device_types` ADD INDEX `device_type_id`(`device_type_id`);");
-	
+
 	modify_column("mac_track_scanning_functions", "scanning_function", "ALTER TABLE `mac_track_scanning_functions` MODIFY COLUMN `scanning_function` VARCHAR(100) NOT NULL DEFAULT '';");
 	modify_column("mac_track_scanning_functions", "description",       "ALTER TABLE `mac_track_scanning_functions` MODIFY COLUMN `description` VARCHAR(200) NOT NULL DEFAULT '';");
-	
+
 	create_table("mac_track_scan_dates",  "CREATE TABLE `mac_track_scan_dates` (`scan_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00', PRIMARY KEY(`scan_date`));");
 	execute_sql("Addition of Scan Dates", "REPLACE INTO `mac_track_scan_dates` (SELECT DISTINCT scan_date from mac_track_ports);");
-	
+
 	add_index("mac_track_devices",  "snmp_sysDescr",    "ALTER TABLE `mac_track_devices` ADD INDEX `snmp_sysDescr`(`snmp_sysDescr`);");
 	add_index("mac_track_devices",  "snmp_sysObjectID", "ALTER TABLE `mac_track_devices` ADD INDEX `snmp_sysObjectID`(`snmp_sysObjectID`);");
 	add_column("mac_track_devices", "device_type_id",   "ALTER TABLE `mac_track_devices` ADD COLUMN `device_type_id` INT(10) UNSIGNED DEFAULT 0 AFTER `device_id`;");
 	add_index("mac_track_devices",  "device_type_id",   "ALTER TABLE `mac_track_devices` ADD INDEX `device_type_id`(`device_type_id`);");
-	
+
 	add_index("mac_track_ports", "port_name",    "ALTER TABLE `mac_track_ports` ADD INDEX `port_name`(`port_name`);");
 	add_index("mac_track_ports", "dns_hostname", "ALTER TABLE `mac_track_ports` ADD INDEX `dns_hostname`(`dns_hostname`);");
-	
+
 	modify_column("mac_track_devices", "ips_total",    "ALTER TABLE `mac_track_devices` MODIFY COLUMN `ips_total` INTEGER UNSIGNED NOT NULL DEFAULT 0");
 	modify_column("mac_track_devices", "vlans_total",  "ALTER TABLE `mac_track_devices` MODIFY COLUMN `vlans_total` INTEGER UNSIGNED NOT NULL DEFAULT 0");
 	modify_column("mac_track_devices", "ports_total",  "ALTER TABLE `mac_track_devices` MODIFY COLUMN `ports_total` INTEGER UNSIGNED NOT NULL DEFAULT 0");
 	modify_column("mac_track_devices", "ports_active", "ALTER TABLE `mac_track_devices` MODIFY COLUMN `ports_active` INTEGER UNSIGNED NOT NULL DEFAULT 0");
 	modify_column("mac_track_devices", "ports_trunk",  "ALTER TABLE `mac_track_devices` MODIFY COLUMN `ports_trunk` INTEGER UNSIGNED NOT NULL DEFAULT 0");
 	modify_column("mac_track_devices", "macs_active",  "ALTER TABLE `mac_track_devices` MODIFY COLUMN `macs_active` INTEGER UNSIGNED NOT NULL DEFAULT 0");
-	
+
 	add_column("mac_track_temp_ports", "updated",    "ALTER TABLE `mac_track_temp_ports` ADD COLUMN `updated` TINYINT UNSIGNED NOT NULL DEFAULT 0 AFTER `scan_date`;");
 	add_index("mac_track_temp_ports",  "updated",    "ALTER TABLE `mac_track_temp_ports` ADD INDEX `updated`(`updated`);");
 	add_index("mac_track_temp_ports",  "ip_address", "ALTER TABLE `mac_track_temp_ports` ADD INDEX `ip_address`(`ip_address`);");
-	
+
 	create_table("mac_track_ip_ranges", "CREATE TABLE `mac_track_ip_ranges` (`ip_range` VARCHAR(20) NOT NULL, `site_id` INTEGER UNSIGNED NOT NULL, `ips_max` INTEGER UNSIGNED NOT NULL, `ips_current` INTEGER UNSIGNED NOT NULL, PRIMARY KEY(`ip_range`, `site_id`), INDEX `site_id`(`site_id`))");
-	
+
 	add_column("mac_track_ip_ranges", "ips_max_date",     "ALTER TABLE `mac_track_ip_ranges` ADD COLUMN `ips_max_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `ips_current`;");
 	add_column("mac_track_ip_ranges", "ips_current_date", "ALTER TABLE `mac_track_ip_ranges` ADD COLUMN `ips_current_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `ips_max_date`;");
-	
+
 	add_column("mac_track_processes", "device_id",        "ALTER TABLE `mac_track_processes` CHANGE COLUMN `process_id` `device_id` INTEGER NOT NULL DEFAULT 0;");
 	add_column("mac_track_processes",    "process_id",       "ALTER TABLE `mac_track_processes` ADD COLUMN `process_id` INTEGER UNSIGNED AFTER `device_id`;");
 	modify_column("mac_track_devices",   "snmp_readstring",  "ALTER TABLE `mac_track_devices` MODIFY COLUMN `snmp_readstring` VARCHAR(30) NOT NULL DEFAULT ''");
 	modify_column("mac_track_devices",   "snmp_readstrings", "ALTER TABLE `mac_track_devices` MODIFY COLUMN `snmp_readstrings` VARCHAR(150) DEFAULT ''");
-	
+
 	execute_sql("Change mac_track_temp_ports to Memory Table", "ALTER TABLE `mac_track_temp_ports` TYPE = HEAP");
 	execute_sql("Change mac_track_ips to Memory Table", "ALTER TABLE `mac_track_ips` TYPE = HEAP");
-	
+
 	/* new for release 1.0 */
 	create_table("mac_track_approved_macs", "CREATE TABLE `mac_track_approved_macs` (`mac_prefix` VARCHAR(20) NOT NULL, `vendor` VARCHAR(50) NOT NULL, `description` VARCHAR(255) NOT NULL, PRIMARY KEY(`mac_prefix`)) TYPE = MyISAM;");
-	
+
 	modify_column("mac_track_devices", "ignorePorts", "ALTER TABLE `mac_track_devices` MODIFY COLUMN `ignorePorts` VARCHAR(255), TYPE = MyISAM;");
 	modify_column("mac_track_devices", "snmp_readstring", "ALTER TABLE `mac_track_devices` MODIFY COLUMN `snmp_readstring` VARCHAR(100) NOT NULL, TYPE = MyISAM;");
 	modify_column("mac_track_devices", "snmp_readstrings", "ALTER TABLE `mac_track_devices` MODIFY COLUMN `snmp_readstrings` VARCHAR(255) DEFAULT NULL, TYPE = MyISAM;");
-	
+
 	create_table("mac_track_oui_database", "CREATE TABLE `mac_track_oui_database` (`vendor_mac` varchar(8) NOT NULL,`vendor_name` varchar(100) NOT NULL,`vendor_address` text NOT NULL,`present` tinyint(3) unsigned NOT NULL default '1', PRIMARY KEY  (`vendor_mac`), KEY `vendor_name` (`vendor_name`)) TYPE=MyISAM");
-	
+
 	add_column("mac_track_ports", "vendor_mac", "ALTER TABLE `mac_track_ports` ADD COLUMN `vendor_mac` VARCHAR(8) NULL AFTER `mac_address`, TYPE = MyISAM;");
 	add_index("mac_track_ports",  "vendor_mac", "ALTER TABLE `mac_track_ports` ADD INDEX `vendor_mac`(`vendor_mac`), TYPE = MyISAM;");
-	
+
 	add_column("mac_track_temp_ports", "vendor_mac", "ALTER TABLE `mac_track_temp_ports` ADD COLUMN `vendor_mac` VARCHAR(8) NULL AFTER `mac_address`, TYPE = HEAP;");
 	add_index("mac_track_temp_ports",  "vendor_mac", "ALTER TABLE `mac_track_temp_ports` ADD INDEX `vendor_mac`(`vendor_mac`), TYPE = HEAP;");
-	
+
 	execute_sql("Add Vendor Macs To 'mac_track_ports'",      "UPDATE mac_track_ports SET vendor_mac=SUBSTRING(mac_address,1,8) WHERE vendor_mac='' OR vendor_mac IS NULL;");
 	execute_sql("Add Vendor Macs To 'mac_track_temp_ports'", "UPDATE mac_track_temp_ports SET vendor_mac=SUBSTRING(mac_address,1,8) WHERE vendor_mac='' OR vendor_mac IS NULL;");
-	
+
 	add_column("mac_track_temp_ports", "authorized", "ALTER TABLE `mac_track_temp_ports` ADD COLUMN `authorized` TINYINT UNSIGNED NOT NULL DEFAULT 0 AFTER `updated`, TYPE = HEAP;");
 	add_index("mac_track_temp_ports",  "authorized", "ALTER TABLE `mac_track_temp_ports` ADD INDEX `authorized`(`authorized`), TYPE = HEAP;");
-	
+
 	add_column("mac_track_ports", "authorized", "ALTER TABLE `mac_track_ports` ADD COLUMN `authorized` TINYINT UNSIGNED NOT NULL DEFAULT 0 AFTER `scan_date`, TYPE = MyISAM;");
 	add_index("mac_track_ports",  "authorized", "ALTER TABLE `mac_track_ports` ADD INDEX `authorized`(`authorized`), TYPE = MyISAM;");
-	
+
 	create_table("mac_track_macwatch", "CREATE TABLE `mac_track_macwatch` ( `mac_address` varchar(20) NOT NULL, `name` varchar(45) NOT NULL, `description` varchar(255) NOT NULL, `ticket_number` varchar(45) NOT NULL, `notify_schedule` tinyint(3) unsigned NOT NULL, `email_addresses` varchar(255) NOT NULL DEFAULT '', `discovered` tinyint(3) unsigned NOT NULL, `date_first_seen` timestamp NOT NULL default '0000-00-00 00:00:00', `data_last_seen` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP, PRIMARY KEY  (`mac_address`)) TYPE=MyISAM;");
 	create_table("mac_track_macauth", "CREATE TABLE `mac_track_macauth` (`mac_address` varchar(20) NOT NULL, `description` varchar(100) NOT NULL, `added_date` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP, `added_by` varchar(20) NOT NULL, PRIMARY KEY  (`mac_address`)) TYPE=MyISAM;");
 	create_table("mac_track_vlans", "CREATE TABLE  `mac_track_vlans` (`vlan_id` int(10) unsigned NOT NULL,`site_id` int(10) unsigned NOT NULL,`device_id` int(10) unsigned NOT NULL,`vlan_name` varchar(128) NOT NULL,`present` tinyint(3) unsigned NOT NULL default '1', PRIMARY KEY  (`vlan_id`,`site_id`,`device_id`), KEY `vlan_name` (`vlan_name`)) TYPE=MyISAM");
-	
+
 	execute_sql("Add VLANS to VLAN Table", "REPLACE INTO `mac_track_vlans` (vlan_id, site_id, device_id, vlan_name) SELECT DISTINCT vlan_id, site_id, device_id, vlan_name FROM mac_track_ports");
-	
+
 	modify_column("mac_track_devices", "description",   "ALTER TABLE `mac_track_devices` MODIFY COLUMN `description` TEXT DEFAULT NULL, TYPE = MyISAM;");
 	add_column("mac_track_devices",    "device_name",   "ALTER TABLE `mac_track_devices` ADD COLUMN `device_name` VARCHAR(100) DEFAULT '' AFTER `device_id`, TYPE = MyISAM;");
 	add_index("mac_track_devices",     "device_name",   "ALTER TABLE `mac_track_devices` ADD INDEX `device_name`(`device_name`), TYPE = MyISAM;");
-	
+
 	add_column("mac_track_sites", "customer_contact",   "ALTER TABLE `mac_track_sites` ADD COLUMN `customer_contact` VARCHAR(150) DEFAULT '' AFTER `site_name`, TYPE = MyISAM;");
 	add_column("mac_track_sites", "netops_contact",     "ALTER TABLE `mac_track_sites` ADD COLUMN `netops_contact` VARCHAR(150) DEFAULT '' AFTER `customer_contact`, TYPE = MyISAM;");
 	add_column("mac_track_sites", "facilities_contact", "ALTER TABLE `mac_track_sites` ADD COLUMN `facilities_contact` VARCHAR(150) DEFAULT '' AFTER `netops_contact`, TYPE = MyISAM;");
 	add_column("mac_track_sites", "site_info",          "ALTER TABLE `mac_track_sites` ADD COLUMN `site_info` TEXT DEFAULT '' AFTER `facilities_contact`, TYPE = MyISAM;");
-	
+
 	add_column("mac_track_device_types", "serial_number_oid", "ALTER TABLE `mac_track_device_types` ADD COLUMN `serial_number_oid` VARCHAR(100) DEFAULT '' AFTER `scanning_function`, TYPE = MyISAM;");
-	
+
 	execute_sql("Move Device Names from the 'description' field to the 'device_name' field.", "UPDATE mac_track_devices SET device_name=description WHERE device_name IS NULL OR device_name=''");
 	execute_sql("Blank out the 'description' field as it will now be used for something else", "UPDATE mac_track_devices SET description=''");
-	
+
 	add_column("mac_track_macwatch",   "email_addresses", "ALTER TABLE mac_track_macwatch CHANGE COLUMN `e-mail_addresses` `email_addresses` varchar(255) NOT NULL DEFAULT ''");
 	add_column("mac_track_macwatch",   "mac_id",          "ALTER TABLE `mac_track_macwatch` ADD COLUMN `mac_id` INTEGER UNSIGNED NOT NULL DEFAULT NULL AUTO_INCREMENT AFTER `mac_address`, ADD INDEX `mac_id`(`mac_id`), TYPE=MyISAM;");
 	add_column("mac_track_macwatch",   "date_last_seen",  "ALTER TABLE `mac_track_macwatch` CHANGE COLUMN `data_last_seen` `date_last_seen` TIMESTAMP DEFAULT '0000-00-00 00:00:00', ENGINE = MyISAM;");
@@ -155,7 +155,7 @@ if (0 == 1) {
 	modify_column("mac_track_ips",     "description",     "ALTER TABLE `mac_track_ips` CHANGE COLUMN `description` `device_name` VARCHAR(100) NOT NULL default '', TYPE=MyISAM;");
 	delete_column("mac_track_devices", "serial_number",   "ALTER TABLE `mac_track_devices` DROP COLUMN `serial_number`, TYPE=MyISAM;");
 	delete_column("mac_track_devices", "asset_id",        "ALTER TABLE `mac_track_devices` DROP COLUMN `asset_id`, TYPE=MyISAM;");
-	
+
 	create_table("mac_track_interfaces", "CREATE TABLE  `mac_track_interfaces` (`site_id` int(10) unsigned NOT NULL default '0',
 		`device_id` int(10) unsigned NOT NULL default '0', `ifIndex` int(10) unsigned NOT NULL default '0', `ifName` varchar(128) NOT NULL,
 		`ifAlias` varchar(255) NOT NULL, `ifDescr` varchar(128) NOT NULL, `ifType` int(10) unsigned NOT NULL default '0',
@@ -169,7 +169,7 @@ if (0 == 1) {
 		PRIMARY KEY  (`site_id`,`device_id`,`ifIndex`), KEY `ifDescr` (`ifDescr`), KEY `ifType` (`ifType`), KEY `ifSpeed` (`ifSpeed`), KEY `ifMTU` (`ifMtu`),
 		KEY `ifAdminStatus` (`ifAdminStatus`), KEY `ifOperStatus` (`ifOperStatus`), KEY `ifInDiscards` USING BTREE (`ifInUnknownProtos`),
 		KEY `ifInErrors` USING BTREE (`ifInUnknownProtos`)) TYPE=MyISAM;");
-	
+
 	add_column("mac_track_scanning_functions", "type", "ALTER TABLE `mac_track_scanning_functions` ADD COLUMN `type` TINYINT UNSIGNED NOT NULL DEFAULT 0 AFTER `scanning_function`, DROP PRIMARY KEY, ADD PRIMARY KEY(`scanning_function`, `type`), TYPE=MyISAM;");
 	add_column("mac_track_device_types", "ip_scanning_function", "ALTER TABLE `mac_track_device_types` ADD COLUMN `ip_scanning_function` VARCHAR(100) NOT NULL AFTER `scanning_function`, TYPE=MyISAM;");
 	execute_sql("Update the Scanning Function Type to 'Mac' for undefined types", "UPDATE mac_track_scanning_functions SET type='1' WHERE type='0'");
@@ -194,13 +194,13 @@ if (0 == 1) {
 		}else{
 			$bad_device_types++;
 		}
-	
+
 		$i++;
 		if (($i % 10) == 0) echo ".";
 	}
-	
+
 	echo "\n\nDevice Types Updated, You have '$good_device_types' Good Device Type Mapping and '$bad_device_types' Bad Device Type Mapping.\nIf the Bad Device type mapping is greater than '0', you should inspect your devices for unmapped device types.\n";
-	
+
 	/* import the vendor mac database */
 	echo "\nImporting the Vendor MAC Address Table from the IEEE\n\n";
 	passthru(read_config_option("path_php_binary") . " -q " . read_config_option("path_webroot") . "/plugins/mactrack/mactrack_import_ouidb.php");
@@ -214,6 +214,7 @@ add_column("mac_track_interfaces", "int_ifInErrors",        "ALTER TABLE `mac_tr
 add_column("mac_track_interfaces", "int_ifInUnknownProtos", "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInUnknownProtos` int(10) unsigned NOT NULL default '0' AFTER `int_ifInErrors`");
 add_column("mac_track_interfaces", "int_ifOutDiscards",     "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutDiscards` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUnknownProtos`");
 add_column("mac_track_interfaces", "int_ifOutErrors",       "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutErrors` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutDiscards`");
+execute_sql("Speed up queries", "ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)");
 
 echo "\nDatabase Upgrade Complete\n";
 

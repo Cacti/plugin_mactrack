@@ -33,7 +33,7 @@ if (!isset($mactrack_scanning_functions)) { $mactrack_scanning_functions = array
 array_push($mactrack_scanning_functions, "get_generic_dot1q_switch_ports", "get_generic_switch_ports", "get_generic_wireless_ports");
 
 if (!isset($mactrack_scanning_functions_ip)) { $mactrack_scanning_functions_ip = array(); }
-array_push($mactrack_scanning_functions_ip, "get_standard_arp_table");
+array_push($mactrack_scanning_functions_ip, "get_standard_arp_table", "get_netscreen_arp_table");
 
 function mactrack_debug($message) {
 	global $debug;
@@ -1900,6 +1900,89 @@ function import_oui_database($type = "ui", $oui_file = "http://standards.ieee.or
 		if ($type != "ui") html_end_box();
 	}
 }
+
+function get_netscreen_arp_table($site, &$device) { 
+	global $debug, $scan_date;
+
+	/* get the atifIndexes for the device */
+	$atifIndexes = xform_indexed_data(".1.3.6.1.2.1.3.1.1.1", $device, 6);
+
+	if (sizeof($atifIndexes)) {
+		$ifIntcount = 1;
+	}else{
+		$ifIntcount = 0;
+	}
+
+	if ($ifIntcount != 0) {
+		$atifIndexes = xform_indexed_data(".1.3.6.1.2.1.4.22.1.1", $device, 5);
+	}
+	mactrack_debug("atifIndexes data collection complete");
+
+	/* get the atPhysAddress for the device */
+	if ($ifIntcount != 0) {
+		$atPhysAddress = xform_indexed_data(".1.3.6.1.2.1.4.22.1.2", $device, 5);
+	} else {
+		$atPhysAddress = xform_indexed_data(".1.3.6.1.2.1.3.1.1.2", $device, 6);
+	}
+
+	/* convert the mac address if necessary */
+	$keys = array_keys($atPhysAddress);
+	$i = 0;
+	if (sizeof($atPhysAddress)) {
+	foreach($atPhysAddress as $atAddress) {
+		$atPhysAddress[$keys[$i]] = xform_mac_address($atAddress);
+		$i++;
+	}
+	}
+	mactrack_debug("atPhysAddress data collection complete");
+
+	/* get the atPhysAddress for the device */
+	if ($ifIntcount != 0) {
+		$atNetAddress = xform_indexed_data(".1.3.6.1.2.1.4.22.1.3", $device, 5);
+	} else {
+		$atNetAddress = xform_indexed_data(".1.3.6.1.2.1.3.1.1.3", $device, 6);
+	}
+	mactrack_debug("atNetAddress data collection complete");
+
+	/* get the ifNames for the device */
+	$keys = array_keys($atifIndexes);
+	$i = 0;
+	if (sizeof($atifIndexes)) {
+	foreach($atifIndexes as $atifIndex) {
+		$atEntries[$i]["atifIndex"] = $atifIndex;
+		$atEntries[$i]["atPhysAddress"] = $atPhysAddress[$keys[$i]];
+		$atEntries[$i]["atNetAddress"] = xform_net_address($atNetAddress[$keys[$i]]);
+		$i++;
+	}
+	}
+	mactrack_debug("atEntries assembly complete.");
+
+	/* output details to database */
+	if (sizeof($atEntries)) {
+	foreach($atEntries as $atEntry) {
+		$insert_string = "REPLACE INTO mac_track_ips " .
+			"(site_id,device_id,hostname,device_name,port_number," .
+			"mac_address,ip_address,scan_date)" .
+			" VALUES ('" .
+			$device["site_id"] . "','" .
+			$device["device_id"] . "','" .
+			$device["hostname"] . "','" .
+			$device["device_name"] . "','" .
+			$atEntry["atifIndex"] . "','" .
+			$atEntry["atPhysAddress"] . "','" .
+			$atEntry["atNetAddress"] . "','" .
+			$scan_date . "')";
+		mactrack_debug("SQL: " . $insert_string);
+		db_execute($insert_string);
+	}
+	}
+
+	/* save ip information for the device */
+	$device["ips_total"] = sizeof($atEntries);
+	db_execute("UPDATE mac_track_devices SET ips_total ='" . $device["ips_total"] . "' WHERE device_id='" . $device["device_id"] . "'");
+	mactrack_debug("HOST: " . $device["hostname"] . ", IP address information collection complete");
+}
+
 
 /* mactrack_draw_actions_dropdown - draws a table the allows the user to select an action to perform
      on one or more data elements
