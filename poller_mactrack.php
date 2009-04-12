@@ -421,10 +421,10 @@ function collect_mactrack_data($start, $site_id = 0) {
 		db_execute("INSERT INTO mac_track_ports
 					(site_id, device_id, hostname, dns_hostname, device_name,
 					vlan_id, vlan_name, mac_address, vendor_mac, ip_address,
-					port_number, port_name, scan_date)
+					port_number, port_name, scan_date, authorized)
 					SELECT site_id, device_id, hostname, dns_hostname, device_name,
 					vlan_id, vlan_name, mac_address, vendor_mac, ip_address,
-					port_number, port_name, scan_date
+					port_number, port_name, scan_date, authorized
 					FROM mac_track_temp_ports");
 		mactrack_debug("Finished transferring scan results to main table.");
 

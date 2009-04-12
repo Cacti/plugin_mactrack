@@ -1727,9 +1727,19 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 	foreach($port_array as $port_value) {
 		if (($port_value["port_number"] <> "NOT USER") &&
 			(($port_value["mac_address"] <> "NOT USER") && (strlen($port_value["mac_address"]) > 0))){
+
+			$mac_authorized = db_check_auth($port_value["mac_address"]);
+			mactrack_debug("Authorized MAC ID: " . $mac_authorized);
+
+			if ($mac_authorized > 0) {
+				$authorized_mac = 1;
+			} else {
+				$authorized_mac = 0;
+			}
+
 			$insert_string = "REPLACE INTO mac_track_temp_ports " .
 				"(site_id,device_id,hostname,device_name,vlan_id,vlan_name," .
-				"mac_address,port_number,port_name,scan_date)" .
+				"mac_address,port_number,port_name,scan_date,authorized)" .
 				" VALUES ('" .
 				$device["site_id"] . "','" .
 				$device["device_id"] . "','" .
@@ -1740,7 +1750,8 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 				$port_value["mac_address"] . "','" .
 				$port_value["port_number"] . "','" .
 				addslashes($port_value["port_name"]) . "','" .
-				$scan_date . "')";
+				$scan_date . "','" .
+				$authorized_mac . "')";
 
 			mactrack_debug("SQL: " . $insert_string);
 
@@ -1748,6 +1759,17 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 		}
 	}
 	}
+}
+
+/* db_check_auth - This function checks whether the mac address exists in the mac_track+macauth table
+*/
+function db_check_auth($mac_address) {
+	$check_string = "SELECT mac_id FROM mac_track_macauth WHERE mac_address LIKE '%%" . $mac_address . "%%'";
+	mactrack_debug("SQL: " . $check_string);
+
+	$query = db_fetch_cell($check_string);
+
+	return $query;
 }
 
 /*	perform_mactrack_db_maint - This utility removes stale records from the database.
