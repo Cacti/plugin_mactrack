@@ -143,9 +143,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 		}
 
 		/* get IP Addresses */
-
 		$gateway = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.4.1.1991.1.1.2.1.10.0", $device["snmp_version"], "", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
-
 		mactrack_debug("INFO: GATEWAY: " . $gateway);
 
 		/* display completion message */
@@ -158,8 +156,6 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 		$device["snmp_status"] = HOST_UP;
 		$device["last_runmessage"] = "Data collection completed ok. No active devices on this network device.";
 	}
-
-/*	get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", TRUE, $lowPort, $highPort); */
 
 	return $device;
 }
