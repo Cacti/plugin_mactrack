@@ -767,7 +767,7 @@ function mactrack_get_device_types(&$sql_where, $row_limit, $apply_limits = TRUE
 	if ($_REQUEST["filter"] != "") {
 		$sql_where = " WHERE (mac_track_device_types.vendor LIKE '%%" . $_REQUEST["filter"] . "%%' OR
 			mac_track_device_types.description LIKE '%%" . $_REQUEST["filter"] . "%%' OR
-			mac_track_device_types.sysDesc_match LIKE '%%" . $_REQUEST["filter"] . "%%' OR
+			mac_track_device_types.sysDescr_match LIKE '%%" . $_REQUEST["filter"] . "%%' OR
 			mac_track_device_types.sysObjectID_match LIKE '%%" . $_REQUEST["filter"] . "%%')";
 	}
 
