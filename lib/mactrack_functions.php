@@ -437,7 +437,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	mactrack_debug("ifOperStatus data collection complete. '" . sizeof($ifOperStatus) . "' rows found!");
 
 	$ifDuplex = xform_standard_indexed_data("	.1.3.6.1.2.1.10.7.2.19", $device);
-	mactrack_debug("ifDuplex data collection complete. '" . sizeof($ifLastChange) . "' rows found!");
+	mactrack_debug("ifDuplex data collection complete. '" . sizeof($ifDuplex) . "' rows found!");
 
 	$ifLastChange = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.9", $device);
 	mactrack_debug("ifLastChange data collection complete. '" . sizeof($ifLastChange) . "' rows found!");
