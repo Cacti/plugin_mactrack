@@ -70,6 +70,9 @@
 						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
 					</td>
 					<td>
+						&nbsp;<input type="submit" name="go_x" title="Submit Query" value="Go">
+					</td>
+					<td>
 						&nbsp;<input type="submit" name="clear_x" title="Clear Filtered Results" value="Clear">
 					</td>
 					<td>
