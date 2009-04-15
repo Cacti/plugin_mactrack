@@ -169,7 +169,7 @@ function mactrack_page_head() {
 function mactrack_poller_bottom () {
 	global $config;
 
-	if (defined(CACTI_BASE_PATH)) {		$config["base_path"] = CACTI_BASE_PATH;
+	if (defined('CACTI_BASE_PATH')) {		$config["base_path"] = CACTI_BASE_PATH;
 	}
 
 	include_once($config["base_path"] . "/lib/poller.php");

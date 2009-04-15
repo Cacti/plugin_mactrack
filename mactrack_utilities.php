@@ -392,7 +392,7 @@ function mactrack_utilities_db_maint() {
 function mactrack_utilities_purge_scanning_funcs() {
 	global $config, $colors;
 
-	if (defined(CACTI_BASE_PATH)) {
+	if (defined('CACTI_BASE_PATH')) {
 		$config["base_path"] = CACTI_BASE_PATH;
 	}
 

@@ -225,7 +225,7 @@ function display_help () {
 function collect_mactrack_data($start, $site_id = 0) {
 	global $max_run_duration, $config, $debug;
 
-	if (defined(CACTI_BASE_PATH)) {
+	if (defined('CACTI_BASE_PATH')) {
 		$config["base_path"] = CACTI_BASE_PATH;
 	}
 
