@@ -63,8 +63,8 @@
 			</table>
 			<table cellpadding="1" cellspacing="0">
 				<tr>
-					<td width="20">
-						Search:&nbsp;
+					<td width="40">
+						&nbsp;Search:&nbsp;
 					</td>
 					<td width="1">
 						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
