@@ -879,7 +879,7 @@ function mactrack_device_type() {
 	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_device_types.php?");
 
 	$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-			<td colspan='7'>
+			<td colspan='9'>
 				<table width='100%' cellspacing='0' cellpadding='0' border='0'>
 					<tr>
 						<td align='left' class='textHeaderDark'>
