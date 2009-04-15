@@ -904,6 +904,8 @@ function mactrack_device_type() {
 		"description" => array("Device Type Description", "ASC"),
 		"vendor" => array("Devices", "DESC"),
 		"device_type" => array("Device Type", "DESC"),
+		"scanning_function" => array("Port Scanner", "ASC"),
+		"ip_scanning_function" => array("IP Scanner", "ASC"),
 		"sysDescr_match" => array("sysDescription Match", "DESC"),
 		"sysObjectID_match" => array("Vendor OID Match", "DESC"));
 
@@ -919,6 +921,8 @@ function mactrack_device_type() {
 				</td>
 				<td><?php print $device_type["vendor"];?></td>
 				<td><?php print $mactrack_device_types[$device_type["device_type"]];?></td>
+				<td><?php print $device_type["scanning_function"];?></td>
+				<td><?php print $device_type["ip_scanning_function"];?></td>
 				<td><?php print $device_type["sysDescr_match"];?></td>
 				<td><?php print $device_type["sysObjectID_match"];?></td>
 				<td style="<?php print get_checkbox_style();?>" width="1%" align="right">
