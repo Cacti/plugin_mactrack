@@ -319,7 +319,7 @@ function mactrack_view_sites() {
 
 	if (isset($config["base_path"])) {
 		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-				<td colspan='9'>
+				<td colspan='11'>
 					<table width='100%' cellspacing='0' cellpadding='0' border='0'>
 						<tr>
 							<td align='left' class='textHeaderDark'>
