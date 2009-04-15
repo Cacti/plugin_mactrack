@@ -665,7 +665,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			@$cnn_id->qstr($ifAlias)      . ", '"  . @$linkPort                    . "', '" .
 			@$vlan_id                     . "', "  . @$cnn_id->qstr(@$vlan_name)   . ", '" .
 			@$vlan_trunk                  . "', '" . @$ifSpeed[$ifIndex]           . "', '" .
-			@$ifHighSpeed[$ifIndex]       . "', "  . @$ifDuplex[$ifIndex]          . "', '" .
+			@$ifHighSpeed[$ifIndex]       . "', "  . @$ifDuplex[$ifIndex]          . "', " .
 			@$cnn_id->qstr(@$ifDescr[$ifIndex]) . ", '" .
 			@$ifMtu[$ifIndex]             . "', '" . $mac_address                  . "', '" .
 			@$ifAdminStatus[$ifIndex]     . "', '" . @$ifOperStatus[$ifIndex]      . "', '" .
