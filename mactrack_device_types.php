@@ -185,6 +185,7 @@ function api_mactrack_duplicate_device_type($device_type_id, $dup_id, $device_ty
 		$save["sysDescr_match"] = "--dup--" . $device_type["sysDescr_match"];
 		$save["sysObjectID_match"] = "--dup--" . $device_type["sysObjectID_match"];
 		$save["scanning_function"] = $device_type["scanning_function"];
+		$save["ip_scanning_function"] = $device_type["ip_scanning_function"];
 		$save["lowPort"] = $device_type["lowPort"];
 		$save["highPort"] = $device_type["highPort"];
 
