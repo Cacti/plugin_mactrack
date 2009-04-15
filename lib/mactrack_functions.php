@@ -1793,7 +1793,7 @@ function perform_mactrack_db_maint() {
 		$retention_date = date("Y-m-d H:i:s", strtotime("-2 Week"));
 		break;
 	case "3weeks":
-		$retention_date = date("Y-m-d H:i:s", strtotime("-3 Weeks"));
+		$retention_date = date("Y-m-d H:i:s", strtotime("-3 Week"));
 		break;
 	case "1month":
 		$retention_date = date("Y-m-d H:i:s", strtotime("-1 Month"));
