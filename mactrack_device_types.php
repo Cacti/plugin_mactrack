@@ -764,20 +764,23 @@ function mactrack_device_type_edit() {
 }
 
 function mactrack_get_device_types(&$sql_where, $row_limit, $apply_limits = TRUE) {
+	if ($_REQUEST["filter"] != "") {
+		$sql_where = "WHERE (mac_track_device_types.vendor LIKE '%%" . $_REQUEST["filter"] . "%%' OR
+			mac_track_device_types.description LIKE '%%" . $_REQUEST["filter"] . "%%' OR
+			mac_track_device_types.sysDesc_match LIKE '%%" . $_REQUEST["filter"] . "%%' OR
+			mac_track_device_types.sysObjectID_match LIKE '%%" . $_REQUEST["filter"] . "%%')";
+	}
+
 	if ($_REQUEST["vendor"] == "All") {
 		/* Show all items */
 	}else{
-		$sql_where = " WHERE (mac_track_device_types.vendor='" . $_REQUEST["vendor"] . "')";
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_device_types.vendor='" . $_REQUEST["vendor"] . "')";
 	}
 
 	if ($_REQUEST["type_id"] == "-1") {
 		/* Show all items */
 	}else{
-		if (strlen($sql_where) > 0) {
-			$sql_where .= " AND (mac_track_device_types.device_type=" . $_REQUEST["type_id"] . ")";
-		}else{
-			$sql_where .= " WHERE (mac_track_device_types.device_type=" . $_REQUEST["type_id"] . ")";
-		}
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_device_types.device_type=" . $_REQUEST["type_id"] . ")";
 	}
 
 	$query_string = "SELECT *
@@ -806,6 +809,10 @@ function mactrack_device_type() {
 		$_REQUEST["vendor"] = sanitize_search_string(get_request_var("vendor"));
 	}
 
+	if (isset($_REQUEST["filter"])) {
+		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
+	}
+
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
 		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
@@ -818,9 +825,9 @@ function mactrack_device_type() {
 
 	/* if the user pushed the 'clear' button */
 	if (isset($_REQUEST["clear_x"])) {
-		kill_session_var("sess_mactrack_device_current_page");
-		kill_session_var("sess_mactrack_device_filter");
-		kill_session_var("sess_mactrack_device_rows");
+		kill_session_var("sess_mactrack_device_type_current_page");
+		kill_session_var("sess_mactrack_device_type_filter");
+		kill_session_var("sess_mactrack_device_type_rows");
 		kill_session_var("sess_mactrack_device_type_vendor");
 		kill_session_var("sess_mactrack_device_type_type_id");
 		kill_session_var("sess_mactrack_device_type_sort_column");
@@ -828,6 +835,7 @@ function mactrack_device_type() {
 
 		unset($_REQUEST["page"]);
 		unset($_REQUEST["vendor"]);
+		unset($_REQUEST["filter"]);
 		unset($_REQUEST["type_id"]);
 		unset($_REQUEST["rows"]);
 		unset($_REQUEST["sort_column"]);
@@ -837,6 +845,7 @@ function mactrack_device_type() {
 	/* remember these search fields in session vars so we don't have to keep passing them around */
 	load_current_session_value("page", "sess_mactrack_device_type_current_page", "1");
 	load_current_session_value("vendor", "sess_mactrack_device_type_vendor", "All");
+	load_current_session_value("vendor", "sess_mactrack_device_type_filter", "");
 	load_current_session_value("type_id", "sess_mactrack_device_type_type_id", "-1");
 	load_current_session_value("rows", "sess_mactrack_device_type_rows", "-1");
 	load_current_session_value("sort_column", "sess_mactrack_device_type_sort_column", "description");

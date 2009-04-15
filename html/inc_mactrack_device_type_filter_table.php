@@ -59,6 +59,16 @@
 							?>
 						</select>
 					</td>
+				</tr>
+			</table>
+			<table cellpadding="1" cellspacing="0">
+				<tr>
+					<td width="20">
+						Search:&nbsp;
+					</td>
+					<td width="1">
+						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
+					</td>
 					<td>
 						&nbsp;<input type="submit" name="clear_x" title="Clear Filtered Results" value="Clear">
 					</td>
