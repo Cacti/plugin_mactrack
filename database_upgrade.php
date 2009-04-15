@@ -173,7 +173,7 @@ if (0 == 1) {
 	add_column("mac_track_scanning_functions", "type", "ALTER TABLE `mac_track_scanning_functions` ADD COLUMN `type` TINYINT UNSIGNED NOT NULL DEFAULT 0 AFTER `scanning_function`, DROP PRIMARY KEY, ADD PRIMARY KEY(`scanning_function`, `type`), TYPE=MyISAM;");
 	add_column("mac_track_device_types", "ip_scanning_function", "ALTER TABLE `mac_track_device_types` ADD COLUMN `ip_scanning_function` VARCHAR(100) NOT NULL AFTER `scanning_function`, TYPE=MyISAM;");
 	execute_sql("Update the Scanning Function Type to 'Mac' for undefined types", "UPDATE mac_track_scanning_functions SET type='1' WHERE type='0'");
-	execute_sql("Set the IP Scanning function to N/A for Device Type 1", "UPDATE mac_track_device_types SET ip_scanning_function='Not Applicable - Hub/Switch' WHERE device_type=1 AND (ip_scanning_function='' OR ip_scanning_function IS NULL)");
+	execute_sql("Set the IP Scanning function to N/A for Device Type 1", "UPDATE mac_track_device_types SET ip_scanning_function='Not Applicable - Switch/Hub' WHERE device_type=1 AND (ip_scanning_function='' OR ip_scanning_function IS NULL)");
 	execute_sql("Set the IP Scanning function to 'get_standard_arp_table' for Routers and L3 Switches", "UPDATE mac_track_device_types SET ip_scanning_function='get_standard_arp_table' WHERE device_type>1 AND (ip_scanning_function='' OR ip_scanning_function IS NULL)");
 	add_column("mac_track_interfaces", "vlan_trunk", "ALTER TABLE `mac_track_interfaces` ADD COLUMN `vlan_trunk` TINYINT UNSIGNED NOT NULL AFTER `vlan_name`, TYPE=MyISAM;");
 	add_column("mac_track_devices", "user_name", "ALTER TABLE `mac_track_devices` ADD COLUMN `user_name` VARCHAR(40) NULL DEFAULT NULL AFTER `scan_type`, TYPE=MyISAM;");
@@ -217,6 +217,7 @@ add_column("mac_track_interfaces", "int_ifOutErrors",       "ALTER TABLE `mac_tr
 add_column("mac_track_devices",    "host_id",               "ALTER TABLE `mac_track_devices` ADD COLUMN `host_id` int(10) unsigned NOT NULL default '0' AFTER `device_id`");
 execute_sql("Speed up queries", "ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)");
 execute_sql("Add length to Device Types Match Fields", "ALTER TABLE `mac_track_device_types` MODIFY COLUMN `sysDescr_match` VARCHAR(`100) NOT NULL default '', MODIFY COLUMN `sysObjectID_match` VARCHAR(100) NOT NULL default ''");
+execute_sql("Correct a Scanning Function Bug", "UPDATE mac_track_scanning_functions SET scanning_function='Not Applicable - Switch/Hub' WHERE scanning_function='Not Applicable - Hub/Switch'");
 
 echo "\nDatabase Upgrade Complete\n";
 

@@ -40,7 +40,7 @@ foreach($mactrack_scanning_functions as $scanning_function) {
 }
 
 /* store the list of registered mactrack scanning functions */
-db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function, type) VALUES ('Not Applicable - Hub/Switch', '2')");
+db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function, type) VALUES ('Not Applicable - Switch/Hub', '2')");
 if (isset($mactrack_scanning_functions_ip)) {
 foreach($mactrack_scanning_functions_ip as $scanning_function) {
 	db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function, type) VALUES ('" . $scanning_function . "', '2')");

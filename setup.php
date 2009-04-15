@@ -665,7 +665,7 @@ function mactrack_config_form () {
 		),
 	"spacer1" => array(
 		"method" => "spacer",
-		"friendly_name" => "Hub/Switch, Switch/Router Settings"
+		"friendly_name" => "Switch/Hub, Switch/Router Settings"
 		),
 	"port_ignorePorts" => array(
 		"method" => "textbox",

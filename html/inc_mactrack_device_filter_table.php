@@ -63,7 +63,7 @@
 					<td width="1">
 						<select name="type_id" onChange="applyDeviceFilterChange(document.form_mactrack_devices)">
 						<option value="-1"<?php if ($_REQUEST["type_id"] == "-1") {?> selected<?php }?>>Any</option>
-						<option value="1"<?php if ($_REQUEST["type_id"] == "1") {?> selected<?php }?>>Hub/Switch</option>
+						<option value="1"<?php if ($_REQUEST["type_id"] == "1") {?> selected<?php }?>>Switch/Hub</option>
 						<option value="2"<?php if ($_REQUEST["type_id"] == "2") {?> selected<?php }?>>Switch/Router</option>
 						<option value="3"<?php if ($_REQUEST["type_id"] == "3") {?> selected<?php }?>>Router</option>
 						</select>
