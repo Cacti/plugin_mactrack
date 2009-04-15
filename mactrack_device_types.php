@@ -765,7 +765,7 @@ function mactrack_device_type_edit() {
 
 function mactrack_get_device_types(&$sql_where, $row_limit, $apply_limits = TRUE) {
 	if ($_REQUEST["filter"] != "") {
-		$sql_where = "WHERE (mac_track_device_types.vendor LIKE '%%" . $_REQUEST["filter"] . "%%' OR
+		$sql_where = " WHERE (mac_track_device_types.vendor LIKE '%%" . $_REQUEST["filter"] . "%%' OR
 			mac_track_device_types.description LIKE '%%" . $_REQUEST["filter"] . "%%' OR
 			mac_track_device_types.sysDesc_match LIKE '%%" . $_REQUEST["filter"] . "%%' OR
 			mac_track_device_types.sysObjectID_match LIKE '%%" . $_REQUEST["filter"] . "%%')";
@@ -774,13 +774,13 @@ function mactrack_get_device_types(&$sql_where, $row_limit, $apply_limits = TRUE
 	if ($_REQUEST["vendor"] == "All") {
 		/* Show all items */
 	}else{
-		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_device_types.vendor='" . $_REQUEST["vendor"] . "')";
+		$sql_where .= (strlen($sql_where) ? " AND ": " WHERE ") . "(mac_track_device_types.vendor='" . $_REQUEST["vendor"] . "')";
 	}
 
 	if ($_REQUEST["type_id"] == "-1") {
 		/* Show all items */
 	}else{
-		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_device_types.device_type=" . $_REQUEST["type_id"] . ")";
+		$sql_where .= (strlen($sql_where) ? " AND ": " WHERE ") . "(mac_track_device_types.device_type=" . $_REQUEST["type_id"] . ")";
 	}
 
 	$query_string = "SELECT *
