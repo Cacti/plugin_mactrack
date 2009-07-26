@@ -174,7 +174,8 @@ function api_mactrack_maca_save($mac_id, $mac_address, $description) {
 	if (!is_error_message()) {
 		$mac_id = sql_save($save, "mac_track_macauth", "mac_address", false);
 
-		if ($mac_id) {			db_execute("UPDATE mac_track_ports SET authorized='1' WHERE mac_address LIKE '$mac_address%'");
+		if ($mac_id) {
+			db_execute("UPDATE mac_track_ports SET authorized='1' WHERE mac_address LIKE '$mac_address%'");
 			raise_message(1);
 		}else{
 			raise_message(2);
@@ -184,7 +185,8 @@ function api_mactrack_maca_save($mac_id, $mac_address, $description) {
 	return $mac_id;
 }
 
-function api_mactrack_maca_remove($mac_id) {	$mac_address = db_fetch_cell("SELECT mac_address WHERE mac_id='$mac_id'");
+function api_mactrack_maca_remove($mac_id) {
+	$mac_address = db_fetch_cell("SELECT mac_address WHERE mac_id='$mac_id'");
 	db_execute("DELETE FROM mac_track_macauth WHERE mac_id='" . $mac_id . "'");
 	db_execute("UPDATE mac_track_ports SET authorized='0' WHERE mac_address LIKE '$mac_address%'");
 }

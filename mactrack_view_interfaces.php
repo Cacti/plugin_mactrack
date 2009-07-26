@@ -55,8 +55,10 @@ default:
 	break;
 }
 
-function mactrack_view_export_interfaces() {}
+function mactrack_view_export_interfaces() {
+}
 
-function mactrack_view_interfaces() {}
+function mactrack_view_interfaces() {
+}
 
 ?>

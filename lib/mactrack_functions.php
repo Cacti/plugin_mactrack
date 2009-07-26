@@ -2031,7 +2031,8 @@ function mactrack_save_button($cancel_action = "", $action = "save", $force_type
 	$calt = "Cancel";
 
 	if ((empty($force_type)) || ($cancel_action == "return")) {
-		if ($action == "import") {			$sname = "import";
+		if ($action == "import") {
+			$sname = "import";
 			$salt  = "Import";
 		}elseif (empty($_GET[$key_field])) {
 			$sname = "create";
@@ -2071,7 +2072,8 @@ function mactrack_save_button($cancel_action = "", $action = "save", $force_type
 	<?php
 }
 
-function mactrack_format_device_row($device) {	global $config, $colors, $mactrack_device_types;
+function mactrack_format_device_row($device) {
+	global $config, $colors, $mactrack_device_types;
 
 	/* viewer level */
 	$row = "<a href='" . htmlspecialchars($config['url_path'] . "plugins/mactrack/mactrack_interfaces.php?device_id=" . $device['device_id'] . "&issues=0&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interfaces.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Interfaces' align='absmiddle' border='0'></a>";
@@ -2164,7 +2166,8 @@ function mactrack_tabs() {
 		}
 		}
 		print "</div>\n";
-	}else{		/* draw the tabs */
+	}else{
+		/* draw the tabs */
 		print "<table class='report' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
 
 		if (sizeof($tabs_mactrack)) {

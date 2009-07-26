@@ -870,7 +870,8 @@ function mactrack_device_edit() {
 
 	if (isset($device)) {
 		mactrack_save_button("return", "save", "", "device_id");
-	}else{		mactrack_save_button("cancel", "save", "", "device_id");
+	}else{
+		mactrack_save_button("cancel", "save", "", "device_id");
 	}
 }
 

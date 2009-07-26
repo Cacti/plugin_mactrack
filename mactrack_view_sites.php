@@ -335,7 +335,8 @@ function mactrack_view_sites() {
 					</table>
 				</td>
 			</tr>\n";
-	}else{		$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $_REQUEST["rows"], $total_rows, 11, "mactrack_view_sites.php");
+	}else{
+		$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $_REQUEST["rows"], $total_rows, 11, "mactrack_view_sites.php");
 	}
 
 	print $nav;

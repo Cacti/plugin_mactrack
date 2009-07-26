@@ -73,11 +73,13 @@ foreach($parms as $parameter) {
 }
 
 if (strlen($oui_file)) {
-	if (!file_exists($oui_file)) {		echo "ERROR: OUI Database file does not exist\n";
+	if (!file_exists($oui_file)) {
+		echo "ERROR: OUI Database file does not exist\n";
 	}else{
 		import_oui_database("ui", $oui_file);
 	}
-}else{	import_oui_database();
+}else{
+	import_oui_database();
 }
 
 /*	display_help - displays the usage of the function */

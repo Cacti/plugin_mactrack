@@ -75,11 +75,15 @@
 						<option value="-1"<?php if ($_REQUEST["vlan"] == "-1") {?> selected<?php }?>>All</option>
 						<?php
 						$sql_where = "";
-						if ($_REQUEST["device_id"] != "-1") {							$sql_where = "WHERE device_id='" . $_REQUEST["device_id"] . "'";
+						if ($_REQUEST["device_id"] != "-1") {
+							$sql_where = "WHERE device_id='" . $_REQUEST["device_id"] . "'";
 						}
 
-						if ($_REQUEST["site_id"] != "-1") {							if (strlen($sql_where)) {								$sql_where .= " AND site_id='" . $_REQUEST["site_id"] . "'";
-							}else{								$sql_where = "WHERE site_id='" . $_REQUEST["site_id"] . "'";
+						if ($_REQUEST["site_id"] != "-1") {
+							if (strlen($sql_where)) {
+								$sql_where .= " AND site_id='" . $_REQUEST["site_id"] . "'";
+							}else{
+								$sql_where = "WHERE site_id='" . $_REQUEST["site_id"] . "'";
 							}
 						}
 

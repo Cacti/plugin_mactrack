@@ -108,7 +108,10 @@ function mactrack_check_upgrade () {
 function mactrack_database_upgrade () {
 	$keys  = db_fetch_assoc("SHOW INDEXES FROM mac_track_ports");
 	$found = false;
-	if (sizeof($keys)) {	foreach($keys as $key) {		if ($key["Key_name"] == "scan_date") {			$found = true;
+	if (sizeof($keys)) {
+	foreach($keys as $key) {
+		if ($key["Key_name"] == "scan_date") {
+			$found = true;
 			break;
 		}
 	}
@@ -161,7 +164,8 @@ function mactrack_page_head() {
 
 	if (!isset($config["base_path"])) {
 		print "<script type='text/javascript' src='" . URL_PATH . "plugins/mactrack/mactrack.js'></script>";
-	}else{		print "<link type='text/css' href='" . $config["url_path"] . "plugins/mactrack/mactrack.css' rel='stylesheet'>";
+	}else{
+		print "<link type='text/css' href='" . $config["url_path"] . "plugins/mactrack/mactrack.css' rel='stylesheet'>";
 		print "<script type='text/javascript' src='" . $config["url_path"] . "plugins/mactrack/mactrack.js'></script>";
 	}
 }
@@ -169,7 +173,8 @@ function mactrack_page_head() {
 function mactrack_poller_bottom () {
 	global $config;
 
-	if (defined('CACTI_BASE_PATH')) {		$config["base_path"] = CACTI_BASE_PATH;
+	if (defined('CACTI_BASE_PATH')) {
+		$config["base_path"] = CACTI_BASE_PATH;
 	}
 
 	include_once($config["base_path"] . "/lib/poller.php");
