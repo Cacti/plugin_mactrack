@@ -105,36 +105,94 @@ function mactrack_check_upgrade () {
 	}
 }
 
-function mactrack_database_upgrade () {
-	$keys  = db_fetch_assoc("SHOW INDEXES FROM mac_track_ports");
+function mactrack_db_table_exists($table) {
+	return sizeof(db_fetch_assoc("SHOW TABLES LIKE '$table'"));
+}
+
+function mactrack_db_key_exists($table, $column) {
 	$found = false;
-	if (sizeof($keys)) {
-	foreach($keys as $key) {
-		if ($key["Key_name"] == "scan_date") {
-			$found = true;
-			break;
+
+	if (mactrack_db_table_exists($table)) {
+		$columns  = db_fetch_assoc("SHOW COLUMNS FROM $table");
+		if (sizeof($columns)) {
+		foreach($columns as $column) {
+			if ($key["Field"] == $column) {
+				$found = true;
+				break;
+			}
 		}
-	}
-	}
-	if (!$found) {
-		db_execute("ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)");
+		}
 	}
 
-	$fields  = db_fetch_assoc("SHOW COLUMNS FROM mac_track_devices");
+	return $found
+}
+
+function mactrack_db_key_exists($table, $index) {
 	$found = false;
-	if (sizeof($field)) {
-	foreach($fields as $field) {
-		if ($field["Field"] == "host_id") {
-			$found = true;
-			break;
+
+	if (mactrack_db_table_exists($table)) {
+		$keys  = db_fetch_assoc("SHOW INDEXES FROM $table");
+		if (sizeof($keys)) {
+		foreach($keys as $key) {
+			if ($key["Key_name"] == $index) {
+				$found = true;
+				break;
+			}
+		}
 		}
 	}
+
+	return $found
+}
+
+function mactrack_execute_sql($message, $syntax) {
+	$result = db_execute($syntax);
+}
+
+function mactrack_create_table($table, $syntax) {
+	if (!mactrack_db_table_exists($table)) {
+		db_execute($syntax);
 	}
-	if (!$found) {
-		db_execute("ALTER TABLE `mac_track_devices`
-			ADD COLUMN `host_id` INTEGER UNSIGNED NOT NULL default '0' AFTER `device_id`,
-	 		ADD INDEX `host_id`(`host_id`)");
+}
+
+function mactrack_add_column($table, $column, $syntax) {
+	if (!mactrack_db_column_exists($table, $column)) {
+		db_execute($syntax);
 	}
+}
+
+function mactrack_add_index($table, $index, $syntax) {
+	if (!mactrack_db_key_exists($table, $index)) {
+		db_execute($syntax);
+	}
+}
+
+function mactrack_modify_column($table, $column, $syntax) {
+	if (mactrack_db_column_exists($table, $column)) {
+		db_execute($syntax);
+	}
+}
+
+function mactrack_delete_column($table, $column, $syntax) {
+	if (mactrack_db_column_exists($table, $column)) {
+		db_execute($syntax);
+	}
+}
+
+function mactrack_database_upgrade () {
+	mactrack_add_column("mac_track_interfaces", "ifHighSpeed",           "ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifHighSpeed` int(10) unsigned NOT NULL default '0' AFTER `ifSpeed`");
+	mactrack_add_column("mac_track_interfaces", "ifDuplex",              "ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifDuplex` int(10) unsigned NOT NULL default '0' AFTER `ifHighSpeed`");
+	mactrack_add_column("mac_track_interfaces", "int_ifInDiscards",      "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInDiscards` int(10) unsigned NOT NULL default '0' AFTER `ifOutErrors`");
+	mactrack_add_column("mac_track_interfaces", "int_ifInErrors",        "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInErrors` int(10) unsigned NOT NULL default '0' AFTER `int_ifInDiscards`");
+	mactrack_add_column("mac_track_interfaces", "int_ifInUnknownProtos", "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInUnknownProtos` int(10) unsigned NOT NULL default '0' AFTER `int_ifInErrors`");
+	mactrack_add_column("mac_track_interfaces", "int_ifOutDiscards",     "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutDiscards` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUnknownProtos`");
+	mactrack_add_column("mac_track_interfaces", "int_ifOutErrors",       "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutErrors` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutDiscards`");
+	mactrack_add_column("mac_track_devices",    "host_id",               "ALTER TABLE `mac_track_devices` ADD COLUMN `host_id` int(10) unsigned NOT NULL default '0' AFTER `device_id`");
+	mactrack_execute_sql("Speed up queries", "ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)");
+	mactrack_execute_sql("Add length to Device Types Match Fields", "ALTER TABLE `mac_track_device_types` MODIFY COLUMN `sysDescr_match` VARCHAR(100) NOT NULL default '', MODIFY COLUMN `sysObjectID_match` VARCHAR(100) NOT NULL default ''");
+	mactrack_execute_sql("Correct a Scanning Function Bug", "DELETE FROM mac_track_scanning_functions WHERE scanning_function='Not Applicable - Hub/Switch'");
+	mactrack_add_index("mac_track_ports", "scan_date", "ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)");
+	mactrack_add_index("mac_track_devices", "host_id", "ALTER TABLE `mac_track_devices` ADD COLUMN `host_id` INTEGER UNSIGNED NOT NULL default '0' AFTER `device_id`, ADD INDEX `host_id`(`host_id`)");
 }
 
 function mactrack_check_dependencies() {
