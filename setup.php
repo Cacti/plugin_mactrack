@@ -53,7 +53,69 @@ function plugin_mactrack_install() {
 }
 
 function plugin_mactrack_uninstall () {
-	/* Do any extra Uninstall stuff here */
+	if (mactrack_db_table_exists("mac_track_approved_macs")) {
+		db_execute("DROP TABLE `mac_track_approved_macs`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_device_types")) {
+		db_execute("DROP TABLE `mac_track_device_types`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_devices")) {
+		db_execute("DROP TABLE `mac_track_devices`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_interfaces")) {
+		db_execute("DROP TABLE `mac_track_interfaces`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_ip_ranges")) {
+		db_execute("DROP TABLE `mac_track_ip_ranges`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_ips")) {
+		db_execute("DROP TABLE `mac_track_ips`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_macauth")) {
+		db_execute("DROP TABLE `mac_track_macauth`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_macwatch")) {
+		db_execute("DROP TABLE `mac_track_macwatch`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_oui_database")) {
+		db_execute("DROP TABLE `mac_track_oui_database`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_ports")) {
+		db_execute("DROP TABLE `mac_track_ports`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_processes")) {
+		db_execute("DROP TABLE `mac_track_processes`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_scan_dates")) {
+		db_execute("DROP TABLE `mac_track_scan_dates`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_scanning_functions")) {
+		db_execute("DROP TABLE `mac_track_scanning_functions`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_sites")) {
+		db_execute("DROP TABLE `mac_track_sites`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_temp_ports")) {
+		db_execute("DROP TABLE `mac_track_temp_ports`");
+	}
+
+	if (mactrack_db_table_exists("mac_track_vlans")) {
+		db_execute("DROP TABLE `mac_track_vlans`");
+	}
 }
 
 function plugin_mactrack_check_config () {
@@ -202,7 +264,7 @@ function mactrack_check_dependencies() {
 }
 
 function mactrack_setup_table_new () {
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_approved_macs`"))) {
+	if (!mactrack_db_table_exists("mac_track_approved_macs")) {
 		db_execute("CREATE TABLE `mac_track_approved_macs` (
 			`mac_prefix` varchar(20) NOT NULL,
 			`vendor` varchar(50) NOT NULL,
@@ -210,7 +272,7 @@ function mactrack_setup_table_new () {
 			PRIMARY KEY  (`mac_prefix`)) ENGINE=MyISAM;");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_device_types`"))) {
+	if (!mactrack_db_table_exists("mac_track_device_types")) {
 		db_execute("CREATE TABLE `mac_track_device_types` (
 			`device_type_id` int(10) unsigned NOT NULL auto_increment,
 			`description` varchar(100) NOT NULL default '',
@@ -229,10 +291,11 @@ function mactrack_setup_table_new () {
 			ENGINE=MyISAM;");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_devices`"))) {
+	if (!mactrack_db_table_exists("mac_track_devices")) {
 		db_execute("CREATE TABLE `mac_track_devices` (
 			`site_id` int(10) unsigned NOT NULL default '0',
 			`device_id` int(10) unsigned NOT NULL auto_increment,
+			`host_id` INTEGER UNSIGNED NOT NULL default '0',
 			`device_name` varchar(100) default '',
 			`device_type_id` int(10) unsigned default '0',
 			`hostname` varchar(40) NOT NULL default '',
@@ -266,6 +329,7 @@ function mactrack_setup_table_new () {
 			`last_runduration` decimal(10,5) NOT NULL default '0.00000',
 			PRIMARY KEY  (`hostname`,`snmp_port`,`site_id`),
 			KEY `site_id` (`site_id`),
+			KEY `host_id`(`host_id`),
 			KEY `device_id` (`device_id`),
 			KEY `snmp_sysDescr` (`snmp_sysDescr`),
 			KEY `snmp_sysObjectID` (`snmp_sysObjectID`),
@@ -274,7 +338,7 @@ function mactrack_setup_table_new () {
 			ENGINE=MyISAM COMMENT='Devices to be scanned for MAC addresses';");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_interfaces`"))) {
+	if (!mactrack_db_table_exists("mac_track_interfaces")) {
 		db_execute("CREATE TABLE `mac_track_interfaces` (
 			`site_id` int(10) unsigned NOT NULL default '0',
 			`device_id` int(10) unsigned NOT NULL default '0',
@@ -317,7 +381,7 @@ function mactrack_setup_table_new () {
 			ENGINE=MyISAM;");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_ip_ranges`"))) {
+	if (!mactrack_db_table_exists("mac_track_ip_ranges")) {
 		db_execute("CREATE TABLE `mac_track_ip_ranges` (
 			`ip_range` varchar(20) NOT NULL default '',
 			`site_id` int(10) unsigned NOT NULL default '0',
@@ -330,7 +394,7 @@ function mactrack_setup_table_new () {
 			ENGINE=MyISAM;");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_ips`"))) {
+	if (!mactrack_db_table_exists("mac_track_ips")) {
 		db_execute("CREATE TABLE `mac_track_ips` (
 			`site_id` int(10) unsigned NOT NULL default '0',
 			`device_id` int(10) unsigned NOT NULL default '0',
@@ -352,7 +416,7 @@ function mactrack_setup_table_new () {
 			ENGINE=MyISAM;");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_macauth`"))) {
+	if (!mactrack_db_table_exists("mac_track_macauth")) {
 		db_execute("CREATE TABLE `mac_track_macauth` (
 			`mac_address` varchar(20) NOT NULL,
 			`mac_id` int(10) unsigned NOT NULL auto_increment,
@@ -364,7 +428,7 @@ function mactrack_setup_table_new () {
 			ENGINE=MyISAM;");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_macwatch`"))) {
+	if (!mactrack_db_table_exists("mac_track_macwatch")) {
 		db_execute("CREATE TABLE `mac_track_macwatch` (
 			`mac_address` varchar(20) NOT NULL,
 			`mac_id` int(10) unsigned NOT NULL auto_increment,
@@ -381,7 +445,7 @@ function mactrack_setup_table_new () {
 			ENGINE=MyISAM;");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_oui_database`"))) {
+	if (!mactrack_db_table_exists("mac_track_oui_database")) {
 		db_execute("CREATE TABLE `mac_track_oui_database` (
 			`vendor_mac` varchar(8) NOT NULL,
 			`vendor_name` varchar(100) NOT NULL,
@@ -392,7 +456,7 @@ function mactrack_setup_table_new () {
 			ENGINE=MyISAM;");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_ports`"))) {
+	if (!mactrack_db_table_exists("mac_track_ports")) {
 		db_execute("CREATE TABLE `mac_track_ports` (
 			`site_id` int(10) unsigned NOT NULL default '0',
 			`device_id` int(10) unsigned NOT NULL default '0',
@@ -410,6 +474,7 @@ function mactrack_setup_table_new () {
 			`authorized` tinyint(3) unsigned NOT NULL default '0',
 			PRIMARY KEY  (`port_number`,`scan_date`,`mac_address`,`device_id`),
 			KEY `site_id` (`site_id`),
+			KEY `scan_date` USING BTREE(`scan_date`),
 			KEY `description` (`device_name`),
 			KEY `mac` (`mac_address`),
 			KEY `hostname` (`hostname`),
@@ -424,7 +489,7 @@ function mactrack_setup_table_new () {
 			ENGINE=MyISAM COMMENT='Database for Tracking Device MACs'");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_processes`"))) {
+	if (!mactrack_db_table_exists("mac_track_processes")) {
 		db_execute("CREATE TABLE `mac_track_processes` (
 			`device_id` int(11) NOT NULL default '0',
 			`process_id` int(10) unsigned default NULL,
@@ -434,14 +499,14 @@ function mactrack_setup_table_new () {
 			ENGINE=MyISAM");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_scan_dates`"))) {
+	if (!mactrack_db_table_exists("mac_track_scan_dates")) {
 		db_execute("CREATE TABLE `mac_track_scan_dates` (
 			`scan_date` datetime NOT NULL default '0000-00-00 00:00:00',
 			PRIMARY KEY  (`scan_date`))
 			ENGINE=MyISAM;");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_scanning_functions`"))) {
+	if (!mactrack_db_table_exists("mac_track_scanning_functions")) {
 		db_execute("CREATE TABLE `mac_track_scanning_functions` (
 			`scanning_function` varchar(100) NOT NULL default '',
 			`type` int(10) unsigned NOT NULL default '0',
@@ -451,7 +516,7 @@ function mactrack_setup_table_new () {
 			COMMENT='Registered Scanning Functions';");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_sites`"))) {
+	if (!mactrack_db_table_exists("mac_track_sites")) {
 		db_execute("CREATE TABLE `mac_track_sites` (
 			`site_id` int(10) unsigned NOT NULL auto_increment,
 			`site_name` varchar(100) NOT NULL default '',
@@ -470,7 +535,7 @@ function mactrack_setup_table_new () {
 			ENGINE=MyISAM;");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_temp_ports`"))) {
+	if (!mactrack_db_table_exists("mac_track_temp_ports")) {
 		db_execute("CREATE TABLE `mac_track_temp_ports` (
 			`site_id` int(10) unsigned NOT NULL default '0',
 			`device_id` int(10) unsigned NOT NULL default '0',
@@ -503,7 +568,7 @@ function mactrack_setup_table_new () {
 			COMMENT='Database for Storing Temporary Results for Tracking Device MACS';");
 	}
 
-	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_vlans`"))) {
+	if (!mactrack_db_table_exists("mac_track_vlans")) {
 		db_execute("CREATE TABLE `mac_track_vlans` (
 			`vlan_id` int(10) unsigned NOT NULL,
 			`site_id` int(10) unsigned NOT NULL,
