@@ -430,6 +430,12 @@ function mactrack_config_arrays () {
 	$user_auth_realm_filenames['mactrack_macauth.php']         = 2121;
 	$user_auth_realm_filenames['mactrack_vendormacs.php']      = 2121;
 
+	if (!function_exists("__")) {
+		function __($text, $domain = "cacti") {
+			return $text;
+		}
+	}
+
 	$refresh_interval = array(
 		5 => "5 Seconds",
 		10 => "10 Seconds",
@@ -494,7 +500,7 @@ function mactrack_config_arrays () {
 	$menu2 = array ();
 	foreach ($menu as $temp => $temp2 ) {
 		$menu2[$temp] = $temp2;
-		if ($temp == 'Management') {
+		if ($temp == __('Management')) {
 			$menu2["Device Tracking"]["plugins/mactrack/mactrack_sites.php"] = "Sites";
 			$menu2["Device Tracking"]["plugins/mactrack/mactrack_devices.php"] = "Devices";
 			$menu2["Device Tracking"]["plugins/mactrack/mactrack_device_types.php"] = "Device Types";
