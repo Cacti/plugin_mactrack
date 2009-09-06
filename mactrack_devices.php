@@ -877,37 +877,39 @@ function mactrack_device_edit() {
 
 function mactrack_get_devices(&$sql_where, $row_limit, $apply_limits = TRUE) {
 	/* form the 'where' clause for our main sql query */
-	$sql_where = "WHERE ((mac_track_devices.hostname like '%%" . $_REQUEST["filter"] . "%%'
-		OR mac_track_devices.device_name like '%%" . $_REQUEST["filter"] . "%%'
-		OR mac_track_devices.notes like '%%" . $_REQUEST["filter"] . "%%')";
+	if (strlen($_REQUEST["filter"])) {
+		$sql_where = (strlen($sql_where) ? " AND ": "WHERE ") . "((mac_track_devices.hostname like '%%" . $_REQUEST["filter"] . "%%'
+			OR mac_track_devices.device_name like '%%" . $_REQUEST["filter"] . "%%'
+			OR mac_track_devices.notes like '%%" . $_REQUEST["filter"] . "%%')";
+	}
 
 	if ($_REQUEST["status"] == "-1") {
 		/* Show all items */
 	}elseif ($_REQUEST["status"] == "-2") {
-		$sql_where .= " AND mac_track_devices.disabled='on'";
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "mac_track_devices.disabled='on'";
 	}else {
-		$sql_where .= " AND (mac_track_devices.snmp_status=" . $_REQUEST["status"] . " AND mac_track_devices.disabled = '')";
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_devices.snmp_status=" . $_REQUEST["status"] . " AND mac_track_devices.disabled = '')";
 	}
 
 	if ($_REQUEST["type_id"] == "-1") {
 		/* Show all items */
 	}else {
-		$sql_where .= " AND mac_track_devices.scan_type=" . $_REQUEST["type_id"];
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "mac_track_devices.scan_type=" . $_REQUEST["type_id"];
 	}
 
 	if ($_REQUEST["device_type_id"] == "-1") {
 		/* Show all items */
 	}else{
-		$sql_where .= " AND (mac_track_devices.device_type_id=" . $_REQUEST["device_type_id"] . ")";
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_devices.device_type_id=" . $_REQUEST["device_type_id"] . ")";
 	}
 
 	if ($_REQUEST["site_id"] == "-1") {
-		$sql_where .= ")";
+		$sql_where .= (strlen($sql_where) ? ")": "");
 		/* Show all items */
 	}elseif ($_REQUEST["site_id"] == "-2") {
-		$sql_where .= " AND (mac_track_sites.site_id IS NULL))";
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_sites.site_id IS NULL))";
 	}elseif (!empty($_REQUEST["site_id"])) {
-		$sql_where .= " AND mac_track_devices.site_id=" . $_REQUEST["site_id"] . ")";
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "mac_track_devices.site_id=" . $_REQUEST["site_id"] . ")";
 	}
 
 	$query_string = "SELECT

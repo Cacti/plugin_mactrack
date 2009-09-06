@@ -846,7 +846,7 @@ function mactrack_device_type() {
 	/* remember these search fields in session vars so we don't have to keep passing them around */
 	load_current_session_value("page", "sess_mactrack_device_type_current_page", "1");
 	load_current_session_value("vendor", "sess_mactrack_device_type_vendor", "All");
-	load_current_session_value("vendor", "sess_mactrack_device_type_filter", "");
+	load_current_session_value("filter", "sess_mactrack_device_type_filter", "");
 	load_current_session_value("type_id", "sess_mactrack_device_type_type_id", "-1");
 	load_current_session_value("rows", "sess_mactrack_device_type_rows", "-1");
 	load_current_session_value("sort_column", "sess_mactrack_device_type_sort_column", "description");
