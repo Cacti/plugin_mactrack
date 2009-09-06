@@ -135,7 +135,6 @@ function mactrack_database_upgrade () {
 			ADD COLUMN `host_id` INTEGER UNSIGNED NOT NULL default '0' AFTER `device_id`,
 	 		ADD INDEX `host_id`(`host_id`)");
 	}
-
 }
 
 function mactrack_check_dependencies() {
@@ -145,6 +144,318 @@ function mactrack_check_dependencies() {
 }
 
 function mactrack_setup_table_new () {
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_approved_macs`"))) {
+		db_execute("CREATE TABLE `mac_track_approved_macs` (
+			`mac_prefix` varchar(20) NOT NULL,
+			`vendor` varchar(50) NOT NULL,
+			`description` varchar(255) NOT NULL,
+			PRIMARY KEY  (`mac_prefix`)) ENGINE=MyISAM;");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_device_types`"))) {
+		db_execute("CREATE TABLE `mac_track_device_types` (
+			`device_type_id` int(10) unsigned NOT NULL auto_increment,
+			`description` varchar(100) NOT NULL default '',
+			`vendor` varchar(40) NOT NULL default '',
+			`device_type` varchar(10) NOT NULL default '0',
+			`sysDescr_match` varchar(20) NOT NULL default '',
+			`sysObjectID_match` varchar(40) NOT NULL default '',
+			`scanning_function` varchar(100) NOT NULL default '',
+			`ip_scanning_function` varchar(100) NOT NULL,
+			`serial_number_oid` varchar(100) default '',
+			`lowPort` int(10) unsigned NOT NULL default '0',
+			`highPort` int(10) unsigned NOT NULL default '0',
+			PRIMARY KEY  (`sysDescr_match`,`sysObjectID_match`,`device_type`),
+			KEY `device_type` (`device_type`),
+			KEY `device_type_id` (`device_type_id`))
+			ENGINE=MyISAM;");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_devices`"))) {
+		db_execute("CREATE TABLE `mac_track_devices` (
+			`site_id` int(10) unsigned NOT NULL default '0',
+			`device_id` int(10) unsigned NOT NULL auto_increment,
+			`device_name` varchar(100) default '',
+			`device_type_id` int(10) unsigned default '0',
+			`hostname` varchar(40) NOT NULL default '',
+			`notes` text,
+			`disabled` char(2) default '',
+			`ignorePorts` varchar(255) default NULL,
+			`ips_total` int(10) unsigned NOT NULL default '0',
+			`vlans_total` int(10) unsigned NOT NULL default '0',
+			`ports_total` int(10) unsigned NOT NULL default '0',
+			`ports_active` int(10) unsigned NOT NULL default '0',
+			`ports_trunk` int(10) unsigned NOT NULL default '0',
+			`macs_active` int(10) unsigned NOT NULL default '0',
+			`scan_type` tinyint(11) NOT NULL default '1',
+			`user_name` varchar(40) default NULL,
+			`user_password` varchar(40) default NULL,
+			`snmp_readstring` varchar(100) NOT NULL,
+			`snmp_readstrings` varchar(255) default NULL,
+			`snmp_version` varchar(100) NOT NULL default '',
+			`snmp_port` int(10) NOT NULL default '161',
+			`snmp_timeout` int(10) unsigned NOT NULL default '500',
+			`snmp_retries` tinyint(11) unsigned NOT NULL default '3',
+			`snmp_sysName` varchar(100) default '',
+			`snmp_sysLocation` varchar(100) default '',
+			`snmp_sysContact` varchar(100) default '',
+			`snmp_sysObjectID` varchar(100) default NULL,
+			`snmp_sysDescr` varchar(100) default NULL,
+			`snmp_sysUptime` varchar(100) default NULL,
+			`snmp_status` int(10) unsigned NOT NULL default '0',
+			`last_runmessage` varchar(100) default '',
+			`last_rundate` datetime NOT NULL default '0000-00-00 00:00:00',
+			`last_runduration` decimal(10,5) NOT NULL default '0.00000',
+			PRIMARY KEY  (`hostname`,`snmp_port`,`site_id`),
+			KEY `site_id` (`site_id`),
+			KEY `device_id` (`device_id`),
+			KEY `snmp_sysDescr` (`snmp_sysDescr`),
+			KEY `snmp_sysObjectID` (`snmp_sysObjectID`),
+			KEY `device_type_id` (`device_type_id`),
+			KEY `device_name` (`device_name`))
+			ENGINE=MyISAM COMMENT='Devices to be scanned for MAC addresses';");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_interfaces`"))) {
+		db_execute("CREATE TABLE `mac_track_interfaces` (
+			`site_id` int(10) unsigned NOT NULL default '0',
+			`device_id` int(10) unsigned NOT NULL default '0',
+			`ifIndex` int(10) unsigned NOT NULL default '0',
+			`ifName` varchar(128) NOT NULL,
+			`ifAlias` varchar(255) NOT NULL,
+			`ifDescr` varchar(128) NOT NULL,
+			`ifType` int(10) unsigned NOT NULL default '0',
+			`ifMtu` int(10) unsigned NOT NULL default '0',
+			`ifSpeed` int(10) unsigned NOT NULL default '0',
+			`ifPhysAddress` varchar(20) NOT NULL,
+			`ifAdminStatus` int(10) unsigned NOT NULL default '0',
+			`ifOperStatus` int(10) unsigned NOT NULL default '0',
+			`ifLastChange` int(10) unsigned NOT NULL default '0',
+			`linkPort` tinyint(3) unsigned NOT NULL default '0',
+			`vlan_id` int(10) unsigned NOT NULL,
+			`vlan_name` varchar(128) NOT NULL,
+			`vlan_trunk` tinyint(3) unsigned NOT NULL,
+			`vlan_trunk_status` int(10) unsigned NOT NULL,
+			`ifInDiscards` int(10) unsigned NOT NULL default '0',
+			`ifInErrors` int(10) unsigned NOT NULL default '0',
+			`ifInUnknownProtos` int(10) unsigned NOT NULL default '0',
+			`ifOutDiscards` int(10) unsigned default '0',
+			`ifOutErrors` int(10) unsigned default '0',
+			`last_up_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+			`last_down_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+			`stateChanges` int(10) unsigned NOT NULL default '0',
+			`int_discards_present` tinyint(3) unsigned NOT NULL default '0',
+			`int_errors_present` tinyint(3) unsigned NOT NULL default '0',
+			`present` tinyint(3) unsigned NOT NULL default '0',
+			PRIMARY KEY  (`site_id`,`device_id`,`ifIndex`),
+			KEY `ifDescr` (`ifDescr`),
+			KEY `ifType` (`ifType`),
+			KEY `ifSpeed` (`ifSpeed`),
+			KEY `ifMTU` (`ifMtu`),
+			KEY `ifAdminStatus` (`ifAdminStatus`),
+			KEY `ifOperStatus` (`ifOperStatus`),
+			KEY `ifInDiscards` USING BTREE (`ifInUnknownProtos`),
+			KEY `ifInErrors` USING BTREE (`ifInUnknownProtos`))
+			ENGINE=MyISAM;");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_ip_ranges`"))) {
+		db_execute("CREATE TABLE `mac_track_ip_ranges` (
+			`ip_range` varchar(20) NOT NULL default '',
+			`site_id` int(10) unsigned NOT NULL default '0',
+			`ips_max` int(10) unsigned NOT NULL default '0',
+			`ips_current` int(10) unsigned NOT NULL default '0',
+			`ips_max_date` datetime NOT NULL default '0000-00-00 00:00:00',
+			`ips_current_date` datetime NOT NULL default '0000-00-00 00:00:00',
+			PRIMARY KEY  (`ip_range`,`site_id`),
+			KEY `site_id` (`site_id`))
+			ENGINE=MyISAM;");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_ips`"))) {
+		db_execute("CREATE TABLE `mac_track_ips` (
+			`site_id` int(10) unsigned NOT NULL default '0',
+			`device_id` int(10) unsigned NOT NULL default '0',
+			`hostname` varchar(40) NOT NULL default '',
+			`device_name` varchar(100) NOT NULL default '',
+			`port_number` varchar(10) NOT NULL default '',
+			`mac_address` varchar(20) NOT NULL default '',
+			`ip_address` varchar(20) NOT NULL default '',
+			`dns_hostname` varchar(200) default '',
+			`scan_date` datetime NOT NULL default '0000-00-00 00:00:00',
+			PRIMARY KEY  (`scan_date`,`ip_address`,`mac_address`,`site_id`),
+			KEY `ip` (`ip_address`),
+			KEY `port_number` (`port_number`),
+			KEY `mac` (`mac_address`),
+			KEY `device_id` (`device_id`),
+			KEY `site_id` (`site_id`),
+			KEY `hostname` (`hostname`),
+			KEY `scan_date` (`scan_date`))
+			ENGINE=MyISAM;");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_macauth`"))) {
+		db_execute("CREATE TABLE `mac_track_macauth` (
+			`mac_address` varchar(20) NOT NULL,
+			`mac_id` int(10) unsigned NOT NULL auto_increment,
+			`description` varchar(100) NOT NULL,
+			`added_date` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+			`added_by` varchar(20) NOT NULL,
+			PRIMARY KEY  (`mac_address`),
+			KEY `mac_id` (`mac_id`))
+			ENGINE=MyISAM;");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_macwatch`"))) {
+		db_execute("CREATE TABLE `mac_track_macwatch` (
+			`mac_address` varchar(20) NOT NULL,
+			`mac_id` int(10) unsigned NOT NULL auto_increment,
+			`name` varchar(45) NOT NULL,
+			`description` varchar(255) NOT NULL,
+			`ticket_number` varchar(45) NOT NULL,
+			`notify_schedule` tinyint(3) unsigned NOT NULL,
+			`email_addresses` varchar(255) NOT NULL default '',
+			`discovered` tinyint(3) unsigned NOT NULL,
+			`date_first_seen` timestamp NOT NULL default '0000-00-00 00:00:00',
+			`date_last_seen` timestamp NOT NULL default '0000-00-00 00:00:00',
+			PRIMARY KEY  (`mac_address`),
+			KEY `mac_id` (`mac_id`))
+			ENGINE=MyISAM;");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_oui_database`"))) {
+		db_execute("CREATE TABLE `mac_track_oui_database` (
+			`vendor_mac` varchar(8) NOT NULL,
+			`vendor_name` varchar(100) NOT NULL,
+			`vendor_address` text NOT NULL,
+			`present` tinyint(3) unsigned NOT NULL default '1',
+			PRIMARY KEY  (`vendor_mac`),
+			KEY `vendor_name` (`vendor_name`))
+			ENGINE=MyISAM;");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_ports`"))) {
+		db_execute("CREATE TABLE `mac_track_ports` (
+			`site_id` int(10) unsigned NOT NULL default '0',
+			`device_id` int(10) unsigned NOT NULL default '0',
+			`hostname` varchar(40) NOT NULL default '',
+			`device_name` varchar(100) NOT NULL default '',
+			`vlan_id` varchar(5) NOT NULL default 'N/A',
+			`vlan_name` varchar(50) NOT NULL default '',
+			`mac_address` varchar(20) NOT NULL default '',
+			`vendor_mac` varchar(8) default NULL,
+			`ip_address` varchar(20) NOT NULL default '',
+			`dns_hostname` varchar(200) default '',
+			`port_number` varchar(10) NOT NULL default '',
+			`port_name` varchar(50) NOT NULL default '',
+			`scan_date` datetime NOT NULL default '0000-00-00 00:00:00',
+			`authorized` tinyint(3) unsigned NOT NULL default '0',
+			PRIMARY KEY  (`port_number`,`scan_date`,`mac_address`,`device_id`),
+			KEY `site_id` (`site_id`),
+			KEY `description` (`device_name`),
+			KEY `mac` (`mac_address`),
+			KEY `hostname` (`hostname`),
+			KEY `vlan_name` (`vlan_name`),
+			KEY `vlan_id` (`vlan_id`),
+			KEY `device_id` (`device_id`),
+			KEY `ip_address` (`ip_address`),
+			KEY `port_name` (`port_name`),
+			KEY `dns_hostname` (`dns_hostname`),
+			KEY `vendor_mac` (`vendor_mac`),
+			KEY `authorized` (`authorized`))
+			ENGINE=MyISAM COMMENT='Database for Tracking Device MACs'");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_processes`"))) {
+		db_execute("CREATE TABLE `mac_track_processes` (
+			`device_id` int(11) NOT NULL default '0',
+			`process_id` int(10) unsigned default NULL,
+			`status` varchar(20) NOT NULL default 'Queued',
+			`start_date` datetime NOT NULL default '0000-00-00 00:00:00',
+			PRIMARY KEY  (`device_id`))
+			ENGINE=MyISAM");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_scan_dates`"))) {
+		db_execute("CREATE TABLE `mac_track_scan_dates` (
+			`scan_date` datetime NOT NULL default '0000-00-00 00:00:00',
+			PRIMARY KEY  (`scan_date`))
+			ENGINE=MyISAM;");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_scanning_functions`"))) {
+		db_execute("CREATE TABLE `mac_track_scanning_functions` (
+			`scanning_function` varchar(100) NOT NULL default '',
+			`type` int(10) unsigned NOT NULL default '0',
+			`description` varchar(200) NOT NULL default '',
+			PRIMARY KEY  (`scanning_function`))
+			ENGINE=MyISAM
+			COMMENT='Registered Scanning Functions';");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_sites`"))) {
+		db_execute("CREATE TABLE `mac_track_sites` (
+			`site_id` int(10) unsigned NOT NULL auto_increment,
+			`site_name` varchar(100) NOT NULL default '',
+			`customer_contact` varchar(150) default '',
+			`netops_contact` varchar(150) default '',
+			`facilities_contact` varchar(150) default '',
+			`site_info` text,
+			`total_devices` int(10) unsigned NOT NULL default '0',
+			`total_device_errors` int(10) unsigned NOT NULL default '0',
+			`total_macs` int(10) unsigned NOT NULL default '0',
+			`total_ips` int(10) unsigned NOT NULL default '0',
+			`total_user_ports` int(11) NOT NULL default '0',
+			`total_oper_ports` int(10) unsigned NOT NULL default '0',
+			`total_trunk_ports` int(10) unsigned NOT NULL default '0',
+			PRIMARY KEY  (`site_id`))
+			ENGINE=MyISAM;");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_temp_ports`"))) {
+		db_execute("CREATE TABLE `mac_track_temp_ports` (
+			`site_id` int(10) unsigned NOT NULL default '0',
+			`device_id` int(10) unsigned NOT NULL default '0',
+			`hostname` varchar(40) NOT NULL default '',
+			`device_name` varchar(100) NOT NULL default '',
+			`vlan_id` varchar(5) NOT NULL default 'N/A',
+			`vlan_name` varchar(50) NOT NULL default '',
+			`mac_address` varchar(20) NOT NULL default '',
+			`vendor_mac` varchar(8) default NULL,
+			`ip_address` varchar(20) NOT NULL default '',
+			`dns_hostname` varchar(200) default '',
+			`port_number` varchar(10) NOT NULL default '',
+			`port_name` varchar(50) NOT NULL default '',
+			`scan_date` datetime NOT NULL default '0000-00-00 00:00:00',
+			`updated` tinyint(3) unsigned NOT NULL default '0',
+			`authorized` tinyint(3) unsigned NOT NULL default '0',
+			PRIMARY KEY  (`port_number`,`scan_date`,`mac_address`,`device_id`),
+			KEY `site_id` (`site_id`),
+			KEY `description` (`device_name`),
+			KEY `ip_address` (`ip_address`),
+			KEY `hostname` (`hostname`),
+			KEY `vlan_name` (`vlan_name`),
+			KEY `vlan_id` (`vlan_id`),
+			KEY `device_id` (`device_id`),
+			KEY `mac` (`mac_address`),
+			KEY `updated` (`updated`),
+			KEY `vendor_mac` (`vendor_mac`),
+			KEY `authorized` (`authorized`))
+			ENGINE=MyISAM
+			COMMENT='Database for Storing Temporary Results for Tracking Device MACS';");
+	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE `mac_track_vlans`"))) {
+		db_execute("CREATE TABLE `mac_track_vlans` (
+			`vlan_id` int(10) unsigned NOT NULL,
+			`site_id` int(10) unsigned NOT NULL,
+			`device_id` int(10) unsigned NOT NULL,
+			`vlan_name` varchar(128) NOT NULL,
+			`present` tinyint(3) unsigned NOT NULL default '1',
+			PRIMARY KEY  (`vlan_id`,`site_id`,`device_id`),
+			KEY `vlan_name` (`vlan_name`))
+			ENGINE=MyISAM;");
+	}
 }
 
 function mactrack_version () {
