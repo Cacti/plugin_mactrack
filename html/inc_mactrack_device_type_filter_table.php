@@ -4,6 +4,7 @@
 		strURL = '?vendor=' + objForm.vendor.value;
 		strURL = strURL + '&type_id=' + objForm.type_id.value;
 		strURL = strURL + '&rows=' + objForm.rows.value;
+		strURL = strURL + '&filter=' + objForm.filter.value;
 		document.location = strURL;
 	}
 
