@@ -58,6 +58,7 @@
     bug: 0001547: mactrack_view_sites does not show page numbers
     bug: 0001548: mactrack_view_macs various issues 
     bug: IEEE Database import runs out of memory
+    bug: Correct uninitialized error in mactrack_hp.php
     feature: Adding support for ArpWatch
     feature: Adding Juniper Support
 

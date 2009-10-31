@@ -34,9 +34,10 @@ function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 	global $debug, $scan_date;
 
 	/* initialize port counters */
-	$device["ports_total"] = 0;
+	$device["ports_total"]  = 0;
 	$device["ports_active"] = 0;
-	$device["ports_trunk"] = 0;
+	$device["ports_trunk"]  = 0;
+	$active_vlans = array();
 
 	/* get VLAN information */
 	$vlan_ids = xform_standard_indexed_data(".1.3.6.1.4.1.11.2.14.11.5.1.3.1.1.4.1.2", $device);
