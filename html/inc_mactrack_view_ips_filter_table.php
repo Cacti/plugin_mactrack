@@ -34,7 +34,7 @@
 						</select>
 					</td>
 					<td>
-						&nbsp<input type="submit" name="export_ips_x" value="Export">
+						&nbsp<input type="submit" name="export_x" value="Export">
 					</td>
 				</tr>
 			</table>

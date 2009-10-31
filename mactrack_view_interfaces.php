@@ -43,7 +43,7 @@ case 'actions':
 
 	break;
 default:
-	if (isset($_REQUEST["export_interfaces_x"])) {
+	if (isset($_REQUEST["export_x"])) {
 		mactrack_view_export_interfaces();
 	}else{
 		$title = "Device Tracking - Interface Report View";

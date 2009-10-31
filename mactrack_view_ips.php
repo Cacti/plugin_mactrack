@@ -33,7 +33,7 @@ define("MAX_DISPLAY_PAGES", 21);
 
 load_current_session_value("report", "sess_mactrack_view_report", "ips");
 
-if (isset($_REQUEST["export_ips_x"])) {
+if (isset($_REQUEST["export_x"])) {
 	mactrack_view_export_ip_ranges();
 }else{
 	$title = "Device Tracking - Site IP Range Report View";

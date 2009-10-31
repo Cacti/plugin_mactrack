@@ -34,7 +34,7 @@
 						&nbsp;<input type="submit" name="clear_x" value="Clear">
 					</td>
 					<td>
-						&nbsp<input type="submit" name="export_devices_x" value="Export">
+						&nbsp<input type="submit" name="export_x" value="Export">
 					</td>
 				</tr>
 			</table>

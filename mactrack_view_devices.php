@@ -31,7 +31,7 @@ include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 define("MAX_DISPLAY_PAGES", 21);
 
-if (isset($_REQUEST["export_devices_x"])) {
+if (isset($_REQUEST["export_x"])) {
 	mactrack_view_export_devices();
 }else{
 	$title = "Device Tracking - Device Report View";

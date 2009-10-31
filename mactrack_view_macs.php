@@ -48,7 +48,7 @@ case 'actions':
 
 	break;
 default:
-	if (isset($_REQUEST["export_macs_x"])) {
+	if (isset($_REQUEST["export_x"])) {
 		mactrack_view_export_macs();
 	}else{
 		$title = "Device Tracking - MAC to IP Report View";
@@ -739,7 +739,7 @@ function mactrack_view_macs() {
 	$i = 0;
 	if (sizeof($port_results) > 0) {
 		foreach ($port_results as $port_result) {
-			if ($_REQUEST["rows"] == 1) {
+			if ($_REQUEST["scan_date"] == 1) {
 				$scan_date = $port_result["scan_date"];
 			}else{
 				$scan_date = $port_result["max_scan_date"];

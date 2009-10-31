@@ -56,7 +56,7 @@ switch ($_REQUEST["action"]) {
 		include_once("./include/bottom_footer.php");
 		break;
 	default:
-		if (isset($_REQUEST["export_sites_x"])) {
+		if (isset($_REQUEST["export_x"])) {
 			mactrack_site_export();
 		}else{
 			include_once("./include/top_header.php");
