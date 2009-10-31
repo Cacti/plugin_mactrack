@@ -45,6 +45,9 @@ array_shift($parms);
 $debug    = FALSE;
 $oui_file = "";
 
+/* add more memory for import */
+ini_set("memory_limit", "256M");
+
 foreach($parms as $parameter) {
 	@list($arg, $value) = @explode("=", $parameter);
 

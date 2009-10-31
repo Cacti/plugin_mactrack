@@ -28,6 +28,9 @@ include("./include/auth.php");
 /* set default action */
 if (!isset($_REQUEST["action"])) { $_REQUEST["action"] = ""; }
 
+/* add more memory for import */
+ini_set("memory_limit", "256M");
+
 switch ($_REQUEST["action"]) {
 	case 'mactrack_utilities_truncate_ports_table':
 		mactrack_utilities_ports_clear();
