@@ -34,6 +34,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 	$device["ports_active"] = 0;
 	$device["ports_trunk"] = 0;
 	$device["vlans_total"] = 0;
+	$device["ports_dual_mode"] = 0;
 
 	/* get VLAN information */
 	$vlan_ids = xform_standard_indexed_data(".1.3.6.1.4.1.1991.1.1.3.2.7.1.21", $device);
@@ -59,6 +60,10 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 	$link_ports = get_link_port_status($device);
 	mactrack_debug("ipAddrTable scanning for link ports data collection complete.");
 
+	/* get ports that have no vlan id (non dual-mode) */
+	$port_dualmode = xform_standard_indexed_data(".1.3.6.1.4.1.1991.1.1.3.3.5.1.24", $device);
+	mactrack_debug("ifVlanId data collection complete.");
+
 	if (sizeof($ifIndexes)) {
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["ifIndex"] = $ifIndex;
@@ -66,6 +71,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 		$ifInterfaces[$ifIndex]["ifType"] = $ifTypes[$ifIndex];
 		$ifInterfaces[$ifIndex]["linkPort"] = @$link_ports[$ifIndex];
 		$ifInterfaces[$ifIndex]["trunkPortState"] = @$vlan_trunkstatus[$ifIndex];
+		$ifInterfaces[$ifIndex]["ifVlanId"] = @$port_dualmode[$ifIndex];
 	}
 	}
 	mactrack_debug("ifInterfaces assembly complete.");
@@ -83,8 +89,9 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 	/* calculate the number of trunk ports */
 	if (sizeof($ifIndexes)) {
 	foreach ($ifIndexes as $ifIndex) {
-		if ($ifInterfaces[$ifIndex]["trunkPortState"] == 1) {
-			$device["ports_trunk"]++;
+		if (($ifInterfaces[$ifIndex]["trunkPortState"] == 1) &&
+			($ifInterfaces[$ifIndex]["ifVlanId"] == 0)) {
+				$device["ports_trunk"]++;
 		}
 	}
 	}
@@ -140,7 +147,29 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 
 			$j++;
 		}
+		
+		$active_ports_array = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.8", $device);
+		$indexes = array_keys($active_ports_array);
+
+		$i = 0;
+		foreach($active_ports_array as $port_info) {
+			$port_info = mactrack_strip_alpha($port_info);
+			$ifInterfaces[$indexes[$i]]["ifType"] = mactrack_strip_alpha($ifInterfaces[$indexes[$i]]["ifType"]);
+			
+			mactrack_debug($ifInterfaces[$indexes[$i]]["ifType"]);
+
+			if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
+				($ifInterfaces[$indexes[$i]]["ifType"] <=9)) ||
+				($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
+				if ($port_info == 1) {		
+					$device["ports_active"]++;
+				}
+			$i++;
+			}
 		}
+
+		$device["ports_active"] = $device["ports_active"] - $device["ports_trunk"];
+
 
 		/* get IP Addresses */
 		$gateway = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.4.1.1991.1.1.2.1.10.0", $device["snmp_version"], "", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);

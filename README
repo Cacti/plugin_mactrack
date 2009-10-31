@@ -61,6 +61,7 @@
     bug: Correct uninitialized error in mactrack_hp.php
     feature: Adding support for ArpWatch
     feature: Adding Juniper Support
+    feature: Support Foundry Dual Mode Ports
 
     --- 1.1 ---
     First Official Release
