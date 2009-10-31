@@ -628,46 +628,50 @@ function mactrack_config_settings () {
 
 	$settings["mactrack"] = array(
 		"mactrack_hdr_timing" => array(
-			"friendly_name" => "MacTrack General Settings",
+			"friendly_name" => "General Settings",
 			"method" => "spacer",
 			),
-		"mt_processes" => array(
-			"friendly_name" => "Number of Concurrent Processes",
-			"description" => "Specify how many devices will be polled simultaneously until all devices have been polled.",
-			"default" => "7",
-			"method" => "textbox",
-			"max_length" => "10"
-			),
 		"mt_collection_timing" => array(
-			"friendly_name" => "Data Collection Timing",
+			"friendly_name" => "Scanning Frequency",
 			"description" => "Choose when collect MAC and IP Address information from your network devices.",
 			"method" => "drop_array",
 			"default" => "disabled",
 			"array" => $mactrack_poller_frequencies,
 			),
+		"mt_processes" => array(
+			"friendly_name" => "Concurrent Processes",
+			"description" => "Specify how many devices will be polled simultaneously until all devices have been polled.",
+			"default" => "7",
+			"method" => "textbox",
+			"max_length" => "10",
+			"size" => "4"
+			),
 		"mt_script_runtime" => array(
-			"friendly_name" => "Device Scanner Max Runtime",
+			"friendly_name" => "Scanner Max Runtime",
 			"description" => "Specify the number of minutes a device scanning function will allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs.",
 			"default" => "20",
 			"method" => "textbox",
-			"max_length" => "10"
+			"max_length" => "10",
+			"size" => "4"
 			),
 		"mt_base_time" => array(
 			"friendly_name" => "Start Time for Data Collection",
 			"description" => "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM.",
 			"default" => "1:00am",
 			"method" => "textbox",
-			"max_length" => "10"
+			"max_length" => "10",
+			"size" => "8"
 			),
 		"mt_maint_time" => array(
 			"friendly_name" => "Database Maintenance Time",
 			"description" => "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place.",
 			"default" => "12:00am",
 			"method" => "textbox",
-			"max_length" => "10"
+			"max_length" => "10",
+			"size" => "8"
 			),
 		"mt_data_retention" => array(
-			"friendly_name" => "Data Retention Duration",
+			"friendly_name" => "Data Retention",
 			"description" => "How long should port MAC details be retained in the database.",
 			"method" => "drop_array",
 			"default" => "2weeks",
@@ -681,7 +685,7 @@ function mactrack_config_settings () {
 			"array" => array(":" => ":", "-" => "-")
 			),
 		"mactrack_hdr_rdns" => array(
-			"friendly_name" => "MacTrack DNS Settings",
+			"friendly_name" => "DNS Settings",
 			"method" => "spacer",
 			),
 		"mt_reverse_dns" => array(
@@ -695,28 +699,32 @@ function mactrack_config_settings () {
 			"description" => "Enter the primary DNS IP Address to utilize for reverse lookups.",
 			"method" => "textbox",
 			"default" => "",
-			"max_length" => "30"
+			"max_length" => "30",
+			"size" => "18"
 			),
 		"mt_dns_secondary" => array(
 			"friendly_name" => "Secondary DNS IP Address",
 			"description" => "Enter the secondary DNS IP Address to utilize for reverse lookups.",
 			"method" => "textbox",
 			"default" => "",
-			"max_length" => "30"
+			"max_length" => "30",
+			"size" => "18"
 			),
 		"mt_dns_timeout" => array(
 			"friendly_name" => "DNS Timeout",
 			"description" => "Please enter the DNS timeout in milliseconds.  MacTrack uses a PHP based DNS resolver.",
 			"method" => "textbox",
 			"default" => "500",
-			"max_length" => "10"
+			"max_length" => "10",
+			"size" => "4"
 			),
 		"mt_dns_prime_interval" => array(
 			"friendly_name" => "DNS Prime Interval",
 			"description" => "How often, in seconds do MacTrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance.",
 			"method" => "textbox",
 			"default" => "120",
-			"max_length" => "10"
+			"max_length" => "10",
+			"size" => "4"
 			),
 		"mactrack_hdr_arpwatch" => array(
 			"friendly_name" => "MacTrack Arpwatch Settings",
@@ -729,15 +737,15 @@ function mactrack_config_settings () {
 			"method" => "checkbox"
 			),
 		"mt_arpwatch_path" => array(
-			"friendly_name" => "Arpwatch File Path",
-			"description" => "The name and location of the Arpwatch file on the Cacti server.",
+			"friendly_name" => "ArpWatch Database Path",
+			"description" => "The location of the ArpWatch Database file on the Cacti server.",
 			"method" => "filepath",
 			"default" => "",
 			"max_length" => "255",
 			"size" => "60"
 			),
 		"mactrack_hdr_general" => array(
-			"friendly_name" => "MacTrack SNMP Settings",
+			"friendly_name" => "SNMP Presets",
 			"method" => "spacer",
 			),
 		"mt_snmp_ver" => array(
@@ -752,7 +760,8 @@ function mactrack_config_settings () {
 			"description" => "Default SNMP read community for all new hosts.",
 			"method" => "textbox",
 			"default" => "public",
-			"max_length" => "100"
+			"max_length" => "100",
+			"size" => "20"
 			),
 		"mt_snmp_communities" => array(
 			"friendly_name" => "SNMP Communities",
@@ -766,21 +775,24 @@ function mactrack_config_settings () {
 			"description" => "The UDP/TCP Port to poll the SNMP agent on.",
 			"method" => "textbox",
 			"default" => "161",
-			"max_length" => "100"
+			"max_length" => "10",
+			"size" => "4"
 			),
 		"mt_snmp_timeout" => array(
 			"friendly_name" => "SNMP Timeout",
 			"description" => "Default SNMP timeout in milli-seconds.",
 			"method" => "textbox",
 			"default" => "500",
-			"max_length" => "100"
+			"max_length" => "10",
+			"size" => "4"
 			),
 		"mt_snmp_retries" => array(
 			"friendly_name" => "SNMP Retries",
 			"description" => "The number times the SNMP poller will attempt to reach the host before failing.",
 			"method" => "textbox",
 			"default" => "3",
-			"max_length" => "100"
+			"max_length" => "10",
+			"size" => "4"
 			)
 		);
 
