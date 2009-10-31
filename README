@@ -54,6 +54,7 @@
 ----[ Changelog
     --- SVN ---
     bug: 0001546: mactrack_view_devices does not display the proper page numbers 
+    bug: 0001545: mactrack_scanner does not complete successfully for some hosts 
 
     --- 1.1 ---
     First Official Release

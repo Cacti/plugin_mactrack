@@ -57,7 +57,7 @@ $start_time = $seconds + $micro;
 /* drop a few environment variables to minimize net-snmp load times */
 putenv("MIBS=RFC-1215");
 ini_set("max_execution_time", "0");
-ini_set("memory_limit", "32M");
+ini_set("memory_limit", "256M");
 
 /* establish constants */
 define("DEVICE_HUB_SWITCH", 1);
