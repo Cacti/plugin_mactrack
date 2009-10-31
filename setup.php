@@ -723,8 +723,8 @@ function mactrack_config_settings () {
 			"method" => "spacer",
 			),
 		"mt_arpwatch" => array(
-			"friendly_name" => "Supplement MacTrack Scanning with Arpwatch Data",
-			"description" => "Should MacTrack also use Arpwatch to supplement it's ARP to Mac resolution?",
+			"friendly_name" => "Enable ArpWatch",
+			"description" => "Should MacTrack also use ArpWatch data to supplement Mac to IP/DNS resolution?",
 			"default" => "",
 			"method" => "checkbox"
 			),
