@@ -2137,6 +2137,117 @@ function mactrack_authorized($realm_id) {
 	}
 }
 
+function mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '') {
+	global $config;
+	include_once($config['base_path'] . '/plugins/settings/include/mailer.php');
+
+	$subject = trim($subject);
+
+	$message = str_replace('<SUBJECT>', $subject, $message);
+
+	$how = read_config_option('settings_how');
+	if ($how < 0 && $how > 2)
+		$how = 0;
+	if ($how == 0) {
+		$Mailer = new Mailer(array(
+			'Type' => 'PHP'));
+	} else if ($how == 1) {
+		$sendmail = read_config_option('settings_sendmail_path');
+		$Mailer = new Mailer(array(
+			'Type' => 'DirectInject',
+			'DirectInject_Path' => $sendmail));
+	} else if ($how == 2) {
+		$smtp_host     = read_config_option('settings_smtp_host');
+		$smtp_port     = read_config_option('settings_smtp_port');
+		$smtp_username = read_config_option('settings_smtp_username');
+		$smtp_password = read_config_option('settings_smtp_password');
+
+		$Mailer = new Mailer(array(
+			'Type' => 'SMTP',
+			'SMTP_Host' => $smtp_host,
+			'SMTP_Port' => $smtp_port,
+			'SMTP_Username' => $smtp_username,
+			'SMTP_Password' => $smtp_password));
+	}
+
+	if ($from == '') {
+		$from     = read_config_option('mt_from_email');
+		$fromname = read_config_option('mt_from_name');
+		if ($from == '') {
+			if (isset($_SERVER['HOSTNAME'])) {
+				$from = 'Cacti@' . $_SERVER['HOSTNAME'];
+			} else {
+				$from = 'thewitness@cacti.net';
+			}
+		}
+		if ($fromname == '') {
+			$fromname = 'Cacti';
+		}
+
+		$from = $Mailer->email_format($fromname, $from);
+		if ($Mailer->header_set('From', $from) === false) {
+			cacti_log('ERROR: ' . $Mailer->error(), true, "MACTRACK");
+			return $Mailer->error();
+		}
+	} else {
+		$from = $Mailer->email_format($fromname, $from);
+		if ($Mailer->header_set('From', $from) === false) {
+			cacti_log('ERROR: ' . $Mailer->error(), true, "MACTRACK");
+			return $Mailer->error();
+		}
+	}
+
+	if ($to == '') {
+		return 'Mailer Error: No <b>TO</b> address set!!<br>If using the <i>Test Mail</i> link, please set the <b>Alert e-mail</b> setting.';
+	}
+	$to = explode(',', $to);
+
+	foreach($to as $t) {
+		if (trim($t) != '' && !$Mailer->header_set('To', $t)) {
+			cacti_log('ERROR: ' . $Mailer->error(), true, "MACTRACK");
+			return $Mailer->error();
+		}
+	}
+
+	$wordwrap = read_config_option('settings_wordwrap');
+	if ($wordwrap == '') {
+		$wordwrap = 76;
+	}else if ($wordwrap > 9999) {
+		$wordwrap = 9999;
+	}else if ($wordwrap < 0) {
+		$wordwrap = 76;
+	}
+
+	$Mailer->Config['Mail']['WordWrap'] = $wordwrap;
+
+	if (! $Mailer->header_set('Subject', $subject)) {
+		cacti_log('ERROR: ' . $Mailer->error(), true, "MACTRACK");
+		return $Mailer->error();
+	}
+
+	$text = array('text' => '', 'html' => '');
+	if ($filename == '') {
+		$message = str_replace('<br>',  "\n", $message);
+		$message = str_replace('<BR>',  "\n", $message);
+		$message = str_replace('</BR>', "\n", $message);
+		$text['text'] = strip_tags($message);
+	} else {
+		$text['html'] = $message . '<br>';
+		$text['text'] = strip_tags(str_replace('<br>', "\n", $message));
+	}
+
+	$v = mactrack_version();
+	$Mailer->header_set('X-Mailer', 'Cacti-MacTrack-v' . $v['version']);
+	$Mailer->header_set('User-Agent', 'Cacti-MacTrack-v' . $v['version']);
+
+	if ($Mailer->send($text) == false) {
+		cacti_log('ERROR: ' . $Mailer->error(), true, "MACTRACK");
+		return $Mailer->error();
+	}
+
+	return '';
+}
+
 function mactrack_tabs() {
 	global $config;
 

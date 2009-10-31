@@ -582,6 +582,58 @@ function collect_mactrack_data($start, $site_id = 0) {
 		}
 		mactrack_debug("Finished updating site table with collection statistics.");
 
+		/* process macwatch data */
+		$macwatches = db_fetch_assoc("SELECT * FROM mac_track_macwatch");
+		if (sizeof($macwatches)) {
+			$from     = read_config_option("mt_from_email");
+			$fromname = read_config_option("mt_from_name");
+
+			foreach($macwatches as $record) {
+				/* determine if we should check this one */
+				$found = db_fetch_assoc("SELECT *
+					FROM mac_track_temp_ports
+					WHERE mac_address='" . $record["mac_address"] . "'");
+
+				if (sizeof($found)) {
+					/* set the subject */
+					$subject = "MACAUTH Notification: Mac Address '" . $record["mac_address"] . "' Found, For: '" . $record["name"] . "'";
+
+					/* set the message with replacements */
+					$message = str_replace("<IP>", $record["ip_address"], $record["description"]);
+					$message = str_replace("<MAC>", $record["mac_address"], $message);
+					$message = str_replace("<TICKET>", $record["ticket_number"], $message);
+					$message = str_replace("<SITENAME>", db_fetch_cell("SELECT site_name FROM mac_track_sites WHERE site_id=" . $record["site_id"]), $message);
+					$message = str_replace("<DEVICEIP>", $record["hostname"]), $message);
+					$message = str_replace("<DEVICENAME>", $record["device_name"]), $message);
+					$message = str_replace("<PORTNUMBER>", $record["port_number"]), $message);
+					$message = str_replace("<PORTNAME>", $record["port_name"]), $message);
+
+					/* send out the email */
+					if (!$record["discovered"] || $record["notify_schedule"] => "2") {
+						$mail = true;
+
+						if ($record["notify_schedule"] > 2) {
+							if (time() < strtotime($record["date_last_notif"]) + record["notify_schedule"]) {
+								$mail = false;
+							}
+						}
+
+						if ($mail) {
+							mactrack_mail($record["email_addresses"], $from, $fromname, $subject, $message, $headers = '');
+						}
+					}
+
+					/* update the the correct information */
+					db_execute("UPDATE mac_track_macwatch
+						SET
+							disconvered=1,
+							last_seen_date=NOW()" .
+							(strtotime($record["first_seen_time"]) == 0 ? ", first_seen_date=NOW()":"") . "
+						WHERE mac_address='" . $record["mac_address"] . "'");
+				}
+			}
+		}
+
 		/* purge the ip address and temp port table */
 		db_execute("TRUNCATE TABLE mac_track_temp_ports");
 		db_execute("TRUNCATE TABLE mac_track_ips");

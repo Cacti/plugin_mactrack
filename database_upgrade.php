@@ -147,7 +147,8 @@ if (0 == 1) {
 
 	add_column("mac_track_macwatch",   "email_addresses", "ALTER TABLE mac_track_macwatch CHANGE COLUMN `e-mail_addresses` `email_addresses` varchar(255) NOT NULL DEFAULT ''");
 	add_column("mac_track_macwatch",   "mac_id",          "ALTER TABLE `mac_track_macwatch` ADD COLUMN `mac_id` INTEGER UNSIGNED NOT NULL DEFAULT NULL AUTO_INCREMENT AFTER `mac_address`, ADD INDEX `mac_id`(`mac_id`), TYPE=MyISAM;");
-	add_column("mac_track_macwatch",   "date_last_seen",  "ALTER TABLE `mac_track_macwatch` CHANGE COLUMN `data_last_seen` `date_last_seen` TIMESTAMP DEFAULT '0000-00-00 00:00:00', ENGINE = MyISAM;");
+	add_column("mac_track_macwatch",   "date_last_seen",  "ALTER TABLE `mac_track_macwatch` CHANGE COLUMN `date_last_seen` `date_last_seen` TIMESTAMP DEFAULT '0000-00-00 00:00:00', ENGINE = MyISAM;");
+	add_column("mac_track_macwatch",   "date_last_notif", "ALTER TABLE `mac_track_macwatch` ADD COLUMN `date_last_notif` TIMESTAMP DEFAULT '0000-00-00 00:00:00' AFTER `date_last_seen` , ENGINE = MyISAM;");
 	add_column("mac_track_macauth",    "mac_id",          "ALTER TABLE `mac_track_macauth` ADD COLUMN `mac_id` INTEGER UNSIGNED NOT NULL DEFAULT NULL AUTO_INCREMENT AFTER `mac_address`, ADD INDEX `mac_id`(`mac_id`), TYPE=MyISAM;");
 	add_column("mac_track_ports",      "device_name",     "ALTER TABLE `mac_track_ports` CHANGE COLUMN `description` `device_name` VARCHAR(100) NOT NULL default '', TYPE=MyISAM;");
 	add_column("mac_track_temp_ports", "device_name",     "ALTER TABLE `mac_track_temp_ports` CHANGE COLUMN `description` `device_name` VARCHAR(100) NOT NULL default '', TYPE=MyISAM;");

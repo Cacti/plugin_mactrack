@@ -250,11 +250,13 @@ function mactrack_database_upgrade () {
 	mactrack_add_column("mac_track_interfaces", "int_ifOutDiscards",     "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutDiscards` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUnknownProtos`");
 	mactrack_add_column("mac_track_interfaces", "int_ifOutErrors",       "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutErrors` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutDiscards`");
 	mactrack_add_column("mac_track_devices",    "host_id",               "ALTER TABLE `mac_track_devices` ADD COLUMN `host_id` int(10) unsigned NOT NULL default '0' AFTER `device_id`");
+	mactrack_add_column("mac_track_macwatch",   "date_last_notif",       "ALTER TABLE `mac_track_macwatch` ADD COLUMN `date_last_notif` TIMESTAMP DEFAULT '0000-00-00 00:00:00' AFTER `date_last_seen`");
 	mactrack_execute_sql("Add length to Device Types Match Fields", "ALTER TABLE `mac_track_device_types` MODIFY COLUMN `sysDescr_match` VARCHAR(100) NOT NULL default '', MODIFY COLUMN `sysObjectID_match` VARCHAR(100) NOT NULL default ''");
 	mactrack_execute_sql("Correct a Scanning Function Bug", "DELETE FROM mac_track_scanning_functions WHERE scanning_function='Not Applicable - Hub/Switch'");
 	mactrack_add_column("mac_track_devices", "host_id", "ALTER TABLE `mac_track_devices` ADD COLUMN `host_id` INTEGER UNSIGNED NOT NULL default '0' AFTER `device_id`");
 	mactrack_add_index("mac_track_devices", "host_id", "ALTER TABLE `mac_track_devices` ADD INDEX `host_id`(`host_id`)");
 	mactrack_add_index("mac_track_ports", "scan_date", "ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)");
+
 }
 
 function mactrack_check_dependencies() {
@@ -440,6 +442,7 @@ function mactrack_setup_table_new () {
 			`discovered` tinyint(3) unsigned NOT NULL,
 			`date_first_seen` timestamp NOT NULL default '0000-00-00 00:00:00',
 			`date_last_seen` timestamp NOT NULL default '0000-00-00 00:00:00',
+			`date_last_notif` timestamp NOT NULL default '0000-00-00 00:00:00',
 			PRIMARY KEY  (`mac_address`),
 			KEY `mac_id` (`mac_id`))
 			ENGINE=MyISAM;");
@@ -584,7 +587,7 @@ function mactrack_setup_table_new () {
 function mactrack_version () {
 	return array(
 		'name'      => 'mactrack',
-		'version'   => '2.0',
+		'version'   => '2.1',
 		'longname'  => 'Device Tracking',
 		'author'    => 'Larry Adams',
 		'homepage'  => 'http://cacti.net',
@@ -725,6 +728,40 @@ function mactrack_config_settings () {
 			"default" => "120",
 			"max_length" => "10",
 			"size" => "4"
+			),
+		"mactrack_hdr_notification" => array(
+			"friendly_name" => "Notification Settings",
+			"method" => "spacer",
+			),
+		"mt_from_email" => array(
+			"friendly_name" => "Source Address",
+			"description" => "The source e-mail address for MacTrack e-mails.",
+			"method" => "textbox",
+			"default" => "thewitness@cacti.net",
+			"max_length" => "100",
+			"size" => "30"
+			),
+		"mt_from_name" => array(
+			"friendly_name" => "Source E-Mail Name",
+			"description" => "The Source E-Mail name for MacTrack e-mails.",
+			"method" => "textbox",
+			"default" => "MACTrack Administrator",
+			"max_length" => "100",
+			"size" => "30"
+			),
+		"mt_macwatch_description" => array(
+			"friendly_name" => "MacWatch Default Body",
+			"description" => htmlspecialchars("The e-mail body preset for MacTrack MacWatch e-mails.  The body can contain " .
+			"any valid html tags.  It also supports replacement tags that will be processed when sending an e-mail.  " .
+			"Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."),
+			"method" => "textarea",
+			"default" => "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>" .
+			"The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, " .
+			"and Port Name <PORTNAME>",
+			"style" => "textArea",
+			"max_length" => "512",
+			"textarea_rows" => "5",
+			"textarea_cols" => "80",
 			),
 		"mactrack_hdr_arpwatch" => array(
 			"friendly_name" => "MacTrack Arpwatch Settings",
@@ -1323,12 +1360,19 @@ function mactrack_config_form () {
 		"max_length" => "250"
 		),
 	"description" => array(
+		"friendly_name" => "MacWatch Default Body",
+		"description" => htmlspecialchars("The e-mail body preset for MacTrack MacWatch e-mails.  The body can contain " .
+			"any valid html tags.  It also supports replacement tags that will be processed when sending an e-mail.  " .
+			"Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."),
 		"method" => "textarea",
-		"friendly_name" => "Description",
-		"description" => "Please add a description for this entry.  This information will be placed in your e-mail.",
 		"value" => "|arg1:description|",
-		"textarea_rows" => "4",
-		"textarea_cols" => "70"
+		"default" => "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>" .
+		"The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, " .
+		"and Port Name <PORTNAME>",
+		"style" => "textArea",
+		"max_length" => "512",
+		"textarea_rows" => "5",
+		"textarea_cols" => "80",
 		),
 	"ticket_number" => array(
 		"method" => "textbox",
@@ -1346,7 +1390,11 @@ function mactrack_config_form () {
 		"default" => "1",
 		"array" => array(
 			1 => "First Occurance Only",
-			2 => "All Occurances")
+			2 => "All Occurances",
+			60 => "Every Hour",
+			240 => "Every 4 Hours",
+			1800 => "Every 12 Hours",
+			3600 => "Every Day")
 		),
 	"email_addresses" => array(
 		"method" => "textbox",

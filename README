@@ -62,6 +62,7 @@
     feature: Adding support for ArpWatch
     feature: Adding Juniper Support
     feature: Support Foundry Dual Mode Ports
+    feature: Implement MacWatch in code.  E-Mailing now.
 
     --- 1.1 ---
     First Official Release
