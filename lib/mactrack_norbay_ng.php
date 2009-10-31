@@ -126,4 +126,3 @@ function get_norbay_ng_switch_ports($site, &$device, $lowPort = 0, $highPort = 0
 
 	return $device;
 }
-?>

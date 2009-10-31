@@ -145,5 +145,3 @@ function get_enterasys_switch_ports($site, &$device, $lowPort = 0, $highPort = 0
 
 	return $device;
 }
-
-?>

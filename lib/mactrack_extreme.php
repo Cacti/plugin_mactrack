@@ -123,4 +123,3 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 
 	return $device;
 }
-?>

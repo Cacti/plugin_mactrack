@@ -126,4 +126,3 @@ function get_procurve_ng_switch_ports($site, &$device, $lowPort = 0, $highPort =
 
 	return $device;
 }
-?>

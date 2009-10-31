@@ -252,5 +252,3 @@ function dell_mac_address_convert($mac_address) {
 
 	return $mac_address;
 }
-
-?>

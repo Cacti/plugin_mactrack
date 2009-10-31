@@ -244,5 +244,3 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 		return $new_port_key_array;
 	}
 }
-
-?>

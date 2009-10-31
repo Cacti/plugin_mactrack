@@ -2258,5 +2258,3 @@ function mactrack_get_vendor_name($mac) {
 		return "Unknown";
 	}
 }
-
-?>

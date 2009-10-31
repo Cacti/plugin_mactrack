@@ -302,5 +302,3 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 
 	return $device;
 }
-
-?>

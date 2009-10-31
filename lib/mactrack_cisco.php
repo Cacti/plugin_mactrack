@@ -434,5 +434,3 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 
 	return $device;
 }
-
-?>

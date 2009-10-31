@@ -197,5 +197,3 @@ function local_xform_indexed_data($xformOID, &$device, $xformLevel = 1) {
 
 	return $output_array;
 }
-
-?>

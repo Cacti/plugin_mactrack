@@ -59,6 +59,7 @@
     bug: 0001548: mactrack_view_macs various issues 
     bug: IEEE Database import runs out of memory
     feature: Adding support for ArpWatch
+    feature: Adding Juniper Support
 
     --- 1.1 ---
     First Official Release
