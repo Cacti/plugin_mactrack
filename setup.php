@@ -718,6 +718,24 @@ function mactrack_config_settings () {
 			"default" => "120",
 			"max_length" => "10"
 			),
+		"mactrack_hdr_arpwatch" => array(
+			"friendly_name" => "MacTrack Arpwatch Settings",
+			"method" => "spacer",
+			),
+		"mt_arpwatch" => array(
+			"friendly_name" => "Supplement MacTrack Scanning with Arpwatch Data",
+			"description" => "Should MacTrack also use Arpwatch to supplement it's ARP to Mac resolution?",
+			"default" => "",
+			"method" => "checkbox"
+			),
+		"mt_arpwatch_path" => array(
+			"friendly_name" => "Arpwatch File Path",
+			"description" => "The name and location of the Arpwatch file on the Cacti server.",
+			"method" => "filepath",
+			"default" => "",
+			"max_length" => "255",
+			"size" => "60"
+			),
 		"mactrack_hdr_general" => array(
 			"friendly_name" => "MacTrack SNMP Settings",
 			"method" => "spacer",

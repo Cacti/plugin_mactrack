@@ -272,6 +272,47 @@ function collect_mactrack_data($start, $site_id = 0) {
 	db_process_add("-1");
 
 	if ($total_devices > 0) {
+		/* grab arpwatch data */
+		if (read_config_option("mt_arpwatch") == "on") {
+			$arp_db     = read_config_option("mt_arpwatch_path");
+			$delim      = read_config_option("mt_mac_delim");
+			$mac_ip_dns = array();
+
+			if (file_exists($arp_db)) {
+				$arp_dat = fopen($arp_db, "r");
+
+				if ($arp_dat) {
+					while (!feof($arp_dat)) {
+						$line = fgets($arp_dat, 4096);
+
+						if ($line != null) {
+							$line = explode ("	", $line);
+
+							$mac_ad = explode(":",$line[0]);
+							for ($k=0;$k<6;$k++) {
+								$mac_ad[$k] = strtoupper($mac_ad[$k]);
+								if (1 == strlen($mac_ad[$k])) {
+									$mac_ad[$k] = "0" . $mac_ad[$k];
+								}
+							}
+
+							/* create the mac address */
+							$mac = $mac_ad[0] . $delim . $mac_ad[1] . $delim . $mac_ad[2] . $delim . $mac_ad[3] . $delim . $mac_ad[4] . $delim . $mac_ad[5];
+
+							/* update the array */
+							$mac_ip_dns[$mac]["ip"]  = $line[1];
+							$mac_ip_dns[$mac]["dns"] = $line[3];
+						}
+					}
+					fclose($arp_dat);
+
+					mactrack_debug("ARPWATCH: IP, DNS & MAC collection complete with ArpWatch");
+				}else{
+					cacti_log("ERROR: cannot open file ArpWatch database '$arp_db'");exit;
+				}
+			}
+		}
+
 		/* scan through all devices */
 		$j = 0;
 		$i = 0;
@@ -375,12 +416,33 @@ function collect_mactrack_data($start, $site_id = 0) {
 			mactrack_debug("Waiting on " . $processes_running . " to complete prior to exiting.");
 		}
 
+		/* if arpwatch is enabled, let's let it pick up the stragglers, based upon IP address first */
+		if ((read_config_option("mt_arpwatch") == "on") && (sizeof($mac_ip_dns))) {
+			$ports = db_fetch_assoc("SELECT site_id, device_id, mac_address
+				FROM mac_track_temp_ports
+				WHERE updated=0");
+
+			if (sizeof($ports)) {
+			foreach($ports as $port) {
+				if (isset($mac_ip_dns[$port["mac_address"]])) {
+					db_execute("UPDATE mac_track_temp_ports
+						SET updated=1, ip_address='" . $mac_ip_dns[$port["mac_address"]]["ip"] . "'" .
+						($mac_ip_dns[$port["mac_address"]]["dns"] != '' ? ", dns_hostname='" . $mac_ip_dns[$port["mac_address"]]["dns"] . "'" : "") . "
+						WHERE site_id=" . $port["site_id"] . "
+						AND device_id=" . $port["device_id"] . "
+						AND mac_address='" . $port["mac_address"] . "'");
+				}
+			}
+			}
+		}
+
 		/* resolve some ip's to mac addresses to let the resolver knock them out */
 		db_execute("UPDATE mac_track_temp_ports
 					INNER JOIN mac_track_ips
 					ON (mac_track_temp_ports.mac_address=mac_track_ips.mac_address
 					AND mac_track_temp_ports.site_id=mac_track_ips.site_id)
-					SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address");
+					SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address
+					WHERE mac_track_temp_ports.updated=0");
 		mactrack_debug("Interum IP addresses to MAC addresses association pass complete.");
 
 		/* populate the vendor_macs for this pass */
@@ -399,7 +461,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 		while (!$exit_mactrack) {
 			/* checking to see if the resolver is running */
-			$resolver_running = db_fetch_row("SELECT * FROM mac_track_processes WHERE device_id = 0");
+			$resolver_running = db_fetch_row("SELECT * FROM mac_track_processes WHERE device_id=0");
 
 			if (sizeof($resolver_running) == 0) {
 				break;
