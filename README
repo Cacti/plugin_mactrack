@@ -64,6 +64,7 @@
     feature: Support Foundry Dual Mode Ports
     feature: Implement MacWatch in code.  E-Mailing now.
     feature: Adding significant content to the mac_track_interfaces table
+    feature: Implement MacAuth functionality and periodic reports
 
     --- 1.1 ---
     First Official Release

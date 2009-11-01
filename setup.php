@@ -674,7 +674,7 @@ function mactrack_poller_bottom () {
 }
 
 function mactrack_config_settings () {
-	global $tabs, $settings, $mactrack_snmp_versions, $mactrack_poller_frequencies, $mactrack_data_retention;
+	global $tabs, $settings, $mactrack_snmp_versions, $mactrack_poller_frequencies, $mactrack_data_retention, $mactrack_macauth_frequencies;
 
 	$tabs["mactrack"] = "Device Tracking";
 
@@ -807,10 +807,27 @@ function mactrack_config_settings () {
 			"default" => "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>" .
 			"The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, " .
 			"and Port Name <PORTNAME>",
-			"style" => "textArea",
+			"class" => "textAreaNotes",
 			"max_length" => "512",
 			"textarea_rows" => "5",
 			"textarea_cols" => "80",
+			),
+		"mt_macauth_emails" => array(
+			"friendly_name" => "MacAuth Report E-Mail Addresses",
+			"description" => "A comma delimited list of users to recieve the MacAuth e-mail notifications.",
+			"method" => "textarea",
+			"default" => "",
+			"class" => "textAreaNotes",
+			"max_length" => "255",
+			"textarea_rows" => "5",
+			"textarea_cols" => "80",
+			),
+		"mt_macauth_email_frequency" => array(
+			"friendly_name" => "MacAuth Report Frequency",
+			"description" => "How often will the MacAuth Reports be e-mailed.",
+			"method" => "drop_array",
+			"default" => "disabled",
+			"array" => $mactrack_macauth_frequencies,
 			),
 		"mactrack_hdr_arpwatch" => array(
 			"friendly_name" => "MacTrack Arpwatch Settings",
@@ -964,6 +981,7 @@ function mactrack_config_arrays () {
 	global $mactrack_snmp_versions, $mactrack_device_types, $mactrack_search_types;
 	global $user_auth_realms, $user_auth_realm_filenames, $menu, $config, $rows_selector;
 	global $mactrack_poller_frequencies, $mactrack_data_retention, $refresh_interval;
+	global $mactrack_macauth_frequencies;
 
 	$user_auth_realms[2120]='Plugin -> MacTrack Viewer';
 	$user_auth_realms[2121]='Plugin -> MacTrack Administrator';
@@ -1048,6 +1066,14 @@ function mactrack_config_arrays () {
 		"3weeks" => "3 Weeks",
 		"1month" => "1 Month",
 		"2months" => "2 Months");
+
+	$mactrack_macauth_frequencies = array(
+		"disabled" => "Disabled",
+		"0" => "On Scan Completion",
+		"720" => "Every 12 Hours",
+		"1440" => "Every Day",
+		"2880" => "Every 2 Days",
+		"10080" => "Every Week");
 
 	$menu2 = array ();
 	foreach ($menu as $temp => $temp2 ) {
@@ -1212,8 +1238,9 @@ function mactrack_config_form () {
 	"notes" => array(
 		"method" => "textarea",
 		"friendly_name" => "Device Notes",
+		"class" => "textAreaNotes",
 		"textarea_rows" => "3",
-		"textarea_cols" => "70",
+		"textarea_cols" => "80",
 		"description" => "This field value is useful to save general information about a specific device.",
 		"value" => "|arg1:notes|",
 		"max_length" => "255"
@@ -1368,8 +1395,9 @@ function mactrack_config_form () {
 	"site_info" => array(
 		"method" => "textarea",
 		"friendly_name" => "Site Information",
+		"class" => "textAreaNotes",
 		"textarea_rows" => "3",
-		"textarea_cols" => "70",
+		"textarea_cols" => "80",
 		"description" => "Provide any site specific information, in free form, that allows you to better manage this location.",
 		"value" => "|arg1:site_info|",
 		"max_length" => "255"
@@ -1416,11 +1444,11 @@ function mactrack_config_form () {
 			"any valid html tags.  It also supports replacement tags that will be processed when sending an e-mail.  " .
 			"Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."),
 		"method" => "textarea",
+		"class" => "textAreaNotes",
 		"value" => "|arg1:description|",
 		"default" => "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>" .
 		"The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, " .
 		"and Port Name <PORTNAME>",
-		"style" => "textArea",
 		"max_length" => "512",
 		"textarea_rows" => "5",
 		"textarea_cols" => "80",
@@ -1478,7 +1506,9 @@ function mactrack_config_form () {
 	"mac_address" => array(
 		"method" => "textbox",
 		"friendly_name" => "MAC Address Match",
-		"description" => "Please enter the MAC Address or Mac Address Match string to be automatically authorized.",
+		"description" => "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  " .
+		"If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '%' anywhere in the " .
+		"MAC Address.",
 		"value" => "|arg1:mac_address|",
 		"default" => "",
 		"max_length" => "40"
@@ -1486,10 +1516,11 @@ function mactrack_config_form () {
 	"description" => array(
 		"method" => "textarea",
 		"friendly_name" => "Reason",
+		"class" => "textAreaNotes",
 		"description" => "Please add a reason for this entry.",
 		"value" => "|arg1:description|",
 		"textarea_rows" => "4",
-		"textarea_cols" => "70"
+		"textarea_cols" => "80"
 		),
 	"mac_id" => array(
 		"method" => "hidden_zero",
@@ -1504,7 +1535,6 @@ function mactrack_config_form () {
 		"value" => "1"
 		)
 	);
-
 }
 
 ?>

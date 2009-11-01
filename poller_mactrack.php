@@ -634,6 +634,18 @@ function collect_mactrack_data($start, $site_id = 0) {
 			}
 		}
 
+		/* process macauth data */
+		$mac_auth_frequency = read_config_option("mt_macauth_email_frequency");
+		if ($mac_auth_frequency != "disabled") {
+			$last_macauth_time = read_config_option("mt_last_macauth_time");
+
+			/* if it's time to e-mail */
+			if (($last_macauth_time + ($mac_auth_frequency*60) > time()) ||
+				($mac_auth_frequency == 0)) {
+				mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_time);
+			}
+		}
+
 		/* purge the ip address and temp port table */
 		db_execute("TRUNCATE TABLE mac_track_temp_ports");
 		db_execute("TRUNCATE TABLE mac_track_ips");
@@ -641,6 +653,34 @@ function collect_mactrack_data($start, $site_id = 0) {
 		db_execute("REPLACE INTO mac_track_scan_dates (SELECT DISTINCT scan_date from mac_track_ports);");
 	}else{
 		cacti_log("NOTE: MACTRACK has no devices to process at this time\n");
+	}
+}
+
+function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_time) {
+	if ($mac_auth_frequency == 0) {
+		$ports = db_fetch_assoc("SELECT mac_track_temp_ports.*, mac_track_sites.site_name
+			FROM mac_track_temp_ports
+			LEFT JOIN mac_track_sites
+			ON mac_track_sites.site_id=mac_track_temp_ports.site_id
+			WHERE authorized=0");
+	}else{
+		$ports = db_fetch_assoc("SELECT mac_track_ports.*, mac_track_sites.site_name
+			FROM mac_track_ports
+			LEFT JOIN mac_track_sites
+			ON mac_track_sites.site_id=mac_track_temp_ports.site_id
+			WHERE authorized=0");
+	}
+
+	if (sizeof($ports)) {
+		foreach($ports as $port) {
+			/* create the report */
+		}
+
+		/* email the report */
+	}else{
+		if ($mac_auth_frequency > 0) {
+			/* send out an empty report */
+		}
 	}
 }
 
