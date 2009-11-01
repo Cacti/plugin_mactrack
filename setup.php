@@ -260,8 +260,6 @@ function mactrack_database_upgrade () {
 	if (!mactrack_db_column_exists("mac_track_interfaces", "sysUptime")) {
 		db_execute("ALTER TABLE mac_track_interfaces
 			ADD COLUMN `sysUptime` int(10) unsigned NOT NULL default '0' AFTER `device_id`,
-			ADD COLUMN `ifHighSpeed` int(10) unsigned NOT NULL default '0' AFTER `ifSpeed`,
-			ADD COLUMN `ifDuplex` int(10) unsigned NOT NULL default '0' AFTER `ifHighSpeed`,
 			ADD COLUMN `ifInOctets` int(10) unsigned NOT NULL default '0' AFTER `vlan_trunk_status`,
 			ADD COLUMN `ifOutOctets` int(10) unsigned NOT NULL default '0' AFTER `ifInOctets`,
 			ADD COLUMN `ifHCInOctets` bigint(20) unsigned NOT NULL default '0' AFTER `ifOutOctets`,
@@ -279,12 +277,7 @@ function mactrack_database_upgrade () {
 			ADD COLUMN `int_ifInNUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifHCOutOctets`,
 			ADD COLUMN `int_ifOutNUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInNUcastPkts`,
 			ADD COLUMN `int_ifInUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutNUcastPkts`,
-			ADD COLUMN `int_ifOutUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUcastPkts`,
-			ADD COLUMN `int_ifInDiscards` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutUcastPkts`,
-			ADD COLUMN `int_ifInErrors` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutDiscards`,
-			ADD COLUMN `int_ifInUnknownProtos` int(10) unsigned NOT NULL default '0' AFTER `int_ifInErrors`,
-			ADD COLUMN `int_ifOutDiscards` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUnknownProtos`,
-			ADD COLUMN `int_ifOutErrors` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutDiscards`");
+			ADD COLUMN `int_ifOutUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUcastPkts`");
 	}
 }
 
@@ -889,30 +882,32 @@ function mactrack_config_settings () {
 			)
 		);
 
-		$settings["visual"]["mactrack_header"] = array(
-			"friendly_name" => "Device Tracking",
-			"method" => "spacer",
-			);
-		$settings["visual"]["num_rows_mactrack"] = array(
-			"friendly_name" => "Rows Per Page",
-			"description" => "The number of rows to display on a single page for Device Tracking sites, devices and reports.",
-			"method" => "textbox",
-			"default" => "30",
-			"max_length" => "10"
-			);
-		$ts = array();
-		foreach ($settings['path'] as $t => $ta) {
-			$ts[$t] = $ta;
-			if ($t == 'path_snmpget') {
-				$ts["path_snmpbulkwalk"] = array(
-					"friendly_name" => "snmpbulkwalk Binary Path",
-					"description" => "The path to your snmpbulkwalk binary.",
-					"method" => "textbox",
-					"max_length" => "255"
-					);
-			}
+	$settings["visual"]["mactrack_header"] = array(
+		"friendly_name" => "Device Tracking",
+		"method" => "spacer",
+		);
+	$settings["visual"]["num_rows_mactrack"] = array(
+		"friendly_name" => "Rows Per Page",
+		"description" => "The number of rows to display on a single page for Device Tracking sites, devices and reports.",
+		"method" => "textbox",
+		"default" => "30",
+		"max_length" => "10"
+		);
+	$ts = array();
+	foreach ($settings['path'] as $t => $ta) {
+		$ts[$t] = $ta;
+		if ($t == 'path_snmpget') {
+			$ts["path_snmpbulkwalk"] = array(
+				"friendly_name" => "snmpbulkwalk Binary Path",
+				"description" => "The path to your snmpbulkwalk binary.",
+				"method" => "textbox",
+				"max_length" => "255"
+				);
 		}
-		$settings['path']=$ts;
+	}
+	$settings['path']=$ts;
+
+	mactrack_check_upgrade();
 }
 
 function mactrack_draw_navigation_text ($nav) {
