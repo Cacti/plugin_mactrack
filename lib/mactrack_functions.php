@@ -341,6 +341,10 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	/* initialize the interfaces array */
 	$ifInterfaces = array();
 
+	/* get the ifIndexes for the device */
+	$ifIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device);
+	mactrack_debug("ifIndexes data collection complete. '" . sizeof($ifIndexes) . "' rows found!");
+
 	$ifTypes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.3", $device);
 	if (sizeof($ifTypes)) {
 	foreach($ifTypes as $key => $value) {
@@ -377,17 +381,28 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		}
 	}
 
-	$insert_prefix = "INSERT INTO mac_track_interfaces (site_id, device_id, ifIndex, ifType, ifName, ifAlias, linkPort, vlan_id," .
-		" vlan_name, vlan_trunk, ifSpeed, ifHighSpeed, ifDuplex, " .
-		" ifDescr, ifMtu, ifPhysAddress, ifAdminStatus, ifOperStatus, ifLastChange, ifInDiscards, ifInErrors, ifInUnknownProtos," .
-		" ifOutDiscards, ifOutErrors, int_ifInDiscards, int_ifInErrors, int_ifInUnknownProtos, int_ifOutDiscards, int_ifOutErrors," .
-		" int_discards_present, int_errors_present, last_down_time, last_up_time, stateChanges, present) VALUES ";
+	/* mark all interfaces as not present */
+	db_execute("UPDATE mac_track_interfaces SET present=0 WHERE device_id=" . $device["device_id"]);
 
-	$insert_suffix = " ON DUPLICATE KEY UPDATE ifType=VALUES(ifType), ifName=VALUES(ifName), ifAlias=VALUES(ifAlias), linkPort=VALUES(linkPort)," .
-		" vlan_id=VALUES(vlan_id), vlan_name=VALUES(vlan_name), vlan_trunk=VALUES(vlan_trunk)," .
+	$insert_prefix = "INSERT INTO scanner_interfaces (site_id, device_id, sysUptime, ifIndex, ifType, ifName, ifAlias, linkPort, vlan_id," .
+		" vlan_name, vlan_trunk_status, ifSpeed, ifHighSpeed, ifDuplex, " .
+		" ifDescr, ifMtu, ifPhysAddress, ifAdminStatus, ifOperStatus, ifLastChange, ".
+		" ifInOctets, ifOutOctets, ifHCInOctets, ifHCOutOctets, ifInNUcastPkts, ifOutNUcastPkts, ifInUcastPkts, ifOutUcastPkts, " .
+		" ifInDiscards, ifInErrors, ifInUnknownProtos, ifOutDiscards, ifOutErrors, " .
+		" int_ifInOctets, int_ifOutOctets, int_ifHCInOctets, int_ifHCOutOctets, int_ifInNUcastPkts, int_ifOutNUcastPkts, int_ifInUcastPkts, int_ifOutUcastPkts, " .
+		" int_ifInDiscards, int_ifInErrors, int_ifInUnknownProtos, int_ifOutDiscards, int_ifOutErrors, int_discards_present, int_errors_present, " .
+		" last_down_time, last_up_time, stateChanges, present) VALUES ";
+
+	$insert_suffix = " ON DUPLICATE KEY UPDATE sysUptime=VALUES(sysUptime), ifType=VALUES(ifType), ifName=VALUES(ifName), ifAlias=VALUES(ifAlias), linkPort=VALUES(linkPort)," .
+		" vlan_id=VALUES(vlan_id), vlan_name=VALUES(vlan_name), vlan_trunk_status=VALUES(vlan_trunk_status)," .
 		" ifSpeed=VALUES(ifSpeed), ifHighSpeed=VALUES(ifHighSpeed), ifDuplex=VALUES(ifDuplex), ifDescr=VALUES(ifDescr), ifMtu=VALUES(ifMtu), ifPhysAddress=VALUES(ifPhysAddress), ifAdminStatus=VALUES(ifAdminStatus)," .
-		" ifOperStatus=VALUES(ifOperStatus), ifLastChange=VALUES(ifLastChange), ifInDiscards=VALUES(ifInDiscards), ifInErrors=VALUES(ifInErrors)," .
+		" ifOperStatus=VALUES(ifOperStatus), ifLastChange=VALUES(ifLastChange), " .
+		" ifInOctets=VALUES(ifInOctets), ifOutOctets=VALUES(ifOutOctets), ifHCInOctets=VALUES(ifHCInOctets), ifHCOutOctets=VALUES(ifHCOutOctets), " .
+		" ifInNUcastPkts=VALUES(ifInNUcastPkts), ifOutNUcastPkts=VALUES(ifOutNUcastPkts), ifInUcastPkts=VALUES(ifInUcastPkts), ifOutUcastPkts=VALUES(ifOutUcastPkts), " .
+		" ifInDiscards=VALUES(ifInDiscards), ifInErrors=VALUES(ifInErrors)," .
 		" ifInUnknownProtos=VALUES(ifInUnknownProtos), ifOutDiscards=VALUES(ifOutDiscards), ifOutErrors=VALUES(ifOutErrors)," .
+		" int_ifInOctets=VALUES(int_ifInOctets), int_ifOutOctets=VALUES(int_ifOutOctets), int_ifHCInOctets=VALUES(int_ifHCInOctets), int_ifHCOutOctets=VALUES(int_ifHCOutOctets), " .
+		" int_ifInNUcastPkts=VALUES(int_ifInNUcastPkts), int_ifOutNUcastPkts=VALUES(int_ifOutNUcastPkts), int_ifInUcastPkts=VALUES(int_ifInUcastPkts), int_ifOutUcastPkts=VALUES(int_ifOutUcastPkts), " .
 		" int_ifInDiscards=VALUES(int_ifInDiscards), int_ifInErrors=VALUES(int_ifInErrors)," .
 		" int_ifInUnknownProtos=VALUES(int_ifInUnknownProtos), int_ifOutDiscards=VALUES(int_ifOutDiscards)," .
 		" int_ifOutErrors=VALUES(int_ifOutErrors), " .
@@ -402,6 +417,9 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 
 	$ifHighSpeed = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.15", $device);
 	mactrack_debug("ifHighSpeed data collection complete. '" . sizeof($ifHighSpeed) . "' rows found!");
+
+	$ifDuplex = xform_standard_indexed_data("	.1.3.6.1.2.1.10.7.2.19", $device);
+	mactrack_debug("ifDuplex data collection complete. '" . sizeof($ifDuplex) . "' rows found!");
 
 	$ifDescr = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.2", $device);
 	mactrack_debug("ifDescr data collection complete. '" . sizeof($ifDescr) . "' rows found!");
@@ -427,7 +445,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	$ifOperStatus = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.8", $device);
 	if (sizeof($ifOperStatus)) {
 	foreach($ifOperStatus as $key=>$value) {
-		if (substr_count($value, "up")) {
+		if (substr_count(strtolower($value), "up")) {
 			$ifOperStatus[$key] = 1;
 		}else{
 			$ifOperStatus[$key] = 0;
@@ -436,12 +454,48 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	}
 	mactrack_debug("ifOperStatus data collection complete. '" . sizeof($ifOperStatus) . "' rows found!");
 
-	$ifDuplex = xform_standard_indexed_data("	.1.3.6.1.2.1.10.7.2.19", $device);
-	mactrack_debug("ifDuplex data collection complete. '" . sizeof($ifDuplex) . "' rows found!");
-
 	$ifLastChange = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.9", $device);
 	mactrack_debug("ifLastChange data collection complete. '" . sizeof($ifLastChange) . "' rows found!");
 
+	/* get timing for rate information */
+	$prev_octets_time = strtotime($device["ifInterfaces_time"]);
+	$cur_octets_time  = time();
+	$device["ifInterfaces_time"] = date("Y-m-d H:i:s", $cur_octets_time);
+
+	if ($prev_octets_time == 0) {
+		$divisor = FALSE;
+	}else{
+		$divisor = $cur_octets_time - $prev_octets_time;
+	}
+
+	/* if the device is snmpv2 use high speed and don't bother with the low speed stuff */
+	if ($device["snmp_version"] == 1) {
+		$ifInOctets = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.10", $device);
+		mactrack_debug("ifInOctets data collection complete. '" . sizeof($ifInOctets) . "' rows found!");
+
+		$ifOutOctets = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.16", $device);
+		mactrack_debug("ifOutOctets data collection complete. '" . sizeof($ifOutOctets) . "' rows found!");
+	}else{
+		$ifHCInOctets = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.6", $device);
+		mactrack_debug("ifHCInOctets data collection complete. '" . sizeof($ifHCInOctets) . "' rows found!");
+
+		$ifHCOutOctets = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.10", $device);
+		mactrack_debug("ifHCOutOctets data collection complete. '" . sizeof($ifHCOutOctets) . "' rows found!");
+	}
+
+	$ifInNUcastPkts = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.12", $device);
+	mactrack_debug("ifInNUcastPkts data collection complete. '" . sizeof($ifInNUcastPkts) . "' rows found!");
+
+	$ifOutNUcastPkts = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.18", $device);
+	mactrack_debug("ifOutNUcastPkts data collection complete. '" . sizeof($ifOutNUcastPkts) . "' rows found!");
+
+	$ifInUcastPkts = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.11", $device);
+	mactrack_debug("ifInUcastPkts data collection complete. '" . sizeof($ifInUcastPkts) . "' rows found!");
+
+	$ifOutUcastPkts = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.17", $device);
+	mactrack_debug("ifOutUcastPkts data collection complete. '" . sizeof($ifOutUcastPkts) . "' rows found!");
+
+	/* get information on error conditions */
 	$ifInDiscards = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.13", $device);
 	mactrack_debug("ifInDiscards data collection complete. '" . sizeof($ifInDiscards) . "' rows found!");
 
@@ -457,18 +511,15 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	$ifOutErrors = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.20", $device);
 	mactrack_debug("ifOutErrors data collection complete. '" . sizeof($ifOutErrors) . "' rows found!");
 
-	$vlan_id = "";
-	$vlan_name = "";
+	$vlan_id    = "";
+	$vlan_name  = "";
 	$vlan_trunk = "";
 
 	$i = 0;
-	if (sizeof($ifIndexes)) {
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["ifIndex"] = $ifIndex;
 		$ifInterfaces[$ifIndex]["ifName"] = @$ifNames[$ifIndex];
 		$ifInterfaces[$ifIndex]["ifType"] = @$ifTypes[$ifIndex];
-		$ifInterfaces[$ifIndex]["ifDescr"] = @$ifDescr[$ifIndex];
-		$ifInterfaces[$ifIndex]["ifOperStatus"] = @$ifOperStatus[$ifIndex];
 
 		if ($getLinkPorts) {
 			$ifInterfaces[$ifIndex]["linkPort"] = @$link_ports[$ifIndex];
@@ -500,73 +551,72 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			$last_down_time = $db_interface[$ifIndex]["last_down_time"];
 			$stateChanges   = $db_interface[$ifIndex]["stateChanges"];
 
-			if ($db_interface[$ifIndex]["ifOperStatus"] > 1) { /* interface not up */
+			if ($db_interface[$ifIndex]["ifOperStatus"] == 0) { /* interface previously not up */
 				if ($ifOperStatus[$ifIndex] == 1) {
+					/* the interface just went up, mark the time */
 					$last_up_time = date("Y-m-d H:i:s");
 					$stateChanges += 1;
+
+					/* if the interface has never been marked down before, make it the current time */
+					if ($db_interface[$ifIndex]["last_down_time"] == '0000-00-00 00:00:00') {
+						$last_down_time = $last_up_time;
+					}
 				}else{
-					$last_up_time = @$db_interface[$ifIndex]["last_up_time"];
+					/* if the interface has never been down, make the current time */
+					$last_down_time = date("Y-m-d H:i:s");
+
+					/* if the interface stayed down, set the last up time if not set before */
+					if ($db_interface[$ifIndex]["last_up_time"] == '0000-00-00 00:00:00') {
+						$last_up_time = date("Y-m-d H:i:s");
+					}
 				}
 			}else{
-				if ($ifOperStatus[$ifIndex] > 1) {
+				if ($ifOperStatus[$ifIndex] == 0) {
+					/* the interface just went down, mark the time */
 					$last_down_time = date("Y-m-d H:i:s");
 					$stateChanges += 1;
+
+					/* if the interface has never been up before, mark it the current time */
+					if ($db_interface[$ifIndex]["last_up_time"] == '0000-00-00 00:00:00') {
+						$last_up_time = date("Y-m-d H:i:s");
+					}
 				}else{
-					$last_down_time = @$db_interface["ifIndex"]["last_up_time"];
+					$last_up_time = date("Y-m-d H:i:s");
+
+					if ($db_interface[$ifIndex]["last_down_time"] == '0000-00-00 00:00:00') {
+						$last_down_time = date("Y-m-d H:i:s");
+					}
 				}
 			}
 		}
 
-		/* 32bit Integer Overflow Value */
-		$overflow = 4294967295;
-		/* fudge factor */
-		$fudge    = 3000000001;
+		if ($device["snmp_version"] == 1) {
+			/* do the in octets */
+			$int_ifInOctets = get_link_int_value("ifInOctets", $ifIndex, $ifInOctets, $db_interface, $divisor, "traffic");
+
+			/* do the out octets */
+			$int_ifOutOctets = get_link_int_value("ifOutOctets", $ifIndex, $ifOutOctets, $db_interface, $divisor, "traffic");
+		}else{
+			/* do the in octets */
+			$int_ifHCInOctets = get_link_int_value("ifHCInOctets", $ifIndex, $ifHCInOctets, $db_interface, $divisor, "traffic", "64");
+
+			/* do the out octets */
+			$int_ifHCOutOctets = get_link_int_value("ifHCOutOctets", $ifIndex, $ifHCOutOctets, $db_interface, $divisor, "traffic", "64");
+		}
+
+		$int_ifInNUcastPkts  = get_link_int_value("ifInNUcastPkts", $ifIndex, $ifInNUcastPkts, $db_interface, $divisor, "traffic");
+
+		$int_ifOutNUcastPkts = get_link_int_value("ifOutNUcastPkts", $ifIndex, $ifOutNUcastPkts, $db_interface, $divisor, "traffic");
+
+		$int_ifInUcastPkts   = get_link_int_value("ifInUcastPkts", $ifIndex, $ifInUcastPkts, $db_interface, $divisor, "traffic");
+
+		$int_ifOutUcastPkts  = get_link_int_value("ifOutUcastPkts", $ifIndex, $ifOutUcastPkts, $db_interface, $divisor, "traffic");
 
 		/* see if in error's have been increasing */
-		$int_ifInErrors = 0;
-		if (!isset($db_interface[$ifIndex]["ifInErrors"])) {
-			$int_ifInErrors = 0;
-		}else if (!isset($ifInErrors[$ifIndex])) {
-			$int_ifInErrors = 0;
-		}else if ($ifInErrors[$ifIndex] <> $db_interface[$ifIndex]["ifInErrors"]) {
-			/* account for 2E32 rollover */
-			/* there are two types of rollovers one rolls to 0 */
-			/* the other counts backwards.  let's make an educated guess */
-			if ($db_interface[$ifIndex]["ifInErrors"] > $ifInErrors[$ifIndex]) {
-				if (($overflow - $db_interface[$ifIndex]["ifInErrors"] + $ifInErrors[$ifIndex]) < $fudge) {
-					$int_ifInErrors = $overflow - $db_interface[$ifIndex]["ifInErrors"] + $ifInErrors[$ifIndex];
-				}else{
-					$int_ifInErrors = $db_interface[$ifIndex]["ifInErrors"] - $ifInErrors[$ifIndex];
-				}
-			}else{
-				$int_ifInErrors = $ifInErrors[$ifIndex] - $db_interface[$ifIndex]["ifInErrors"];
-			}
-		}else{
-			$int_ifInErrors = 0;
-		}
+		$int_ifInErrors      = get_link_int_value("ifInErrors", $ifIndex, $ifInErrors, $db_interface, $divisor, "errors");
 
 		/* see if out error's have been increasing */
-		$int_ifOutErrors = 0;
-		if (!isset($db_interface[$ifIndex]["ifOutErrors"])) {
-			$int_ifOutErrors = 0;
-		}else if (!isset($ifOutErrors[$ifIndex])) {
-			$int_ifOutErrors = 0;
-		}else if ($ifOutErrors[$ifIndex] <> $db_interface[$ifIndex]["ifOutErrors"]) {
-			/* account for 2E32 rollover */
-			/* there are two types of rollovers one rolls to 0 */
-			/* the other counts backwards.  let's make an educated guess */
-			if ($db_interface[$ifIndex]["ifOutErrors"] > $ifOutErrors[$ifIndex]) {
-				if (($overflow - $db_interface[$ifIndex]["ifOutErrors"] + $ifOutErrors[$ifIndex]) < $fudge) {
-					$int_ifOutErrors = $overflow - $db_interface[$ifIndex]["ifOutErrors"] + $ifOutErrors[$ifIndex];
-				}else{
-					$int_ifOutErrors = $db_interface[$ifIndex]["ifOutErrors"] - $ifOutErrors[$ifIndex];
-				}
-			}else{
-				$int_ifOutErrors = $ifOutErrors[$ifIndex] - $db_interface[$ifIndex]["ifOutErrors"];
-			}
-		}else{
-			$int_ifOutErrors = 0;
-		}
+		$int_ifOutErrors     = get_link_int_value("ifOutErrors", $ifIndex, $ifOutErrors, $db_interface, $divisor, "errors");
 
 		if ($int_ifInErrors > 0 || $int_ifOutErrors > 0) {
 			$int_errors_present = TRUE;
@@ -575,50 +625,10 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		}
 
 		/* see if in discards's have been increasing */
-		$int_ifInDiscards = 0;
-		if (!isset($db_interface[$ifIndex]["ifInDiscards"])) {
-			$int_ifInDiscards = 0;
-		}else if (!isset($ifInDiscards[$ifIndex])) {
-			$int_ifInDiscards = 0;
-		}else if ($ifInDiscards[$ifIndex] <> $db_interface[$ifIndex]["ifInDiscards"]) {
-			/* account for 2E32 rollover */
-			/* there are two types of rollovers one rolls to 0 */
-			/* the other counts backwards.  let's make an educated guess */
-			if ($db_interface[$ifIndex]["ifInDiscards"] > $ifInDiscards[$ifIndex]) {
-				if (($overflow - $db_interface[$ifIndex]["ifInDiscards"] + $ifInDiscards[$ifIndex]) < $fudge) {
-					$int_ifInDiscards = $overflow - $db_interface[$ifIndex]["ifInDiscards"] + $ifInDiscards[$ifIndex];
-				}else{
-					$int_ifInDiscards = $db_interface[$ifIndex]["ifInDiscards"] - $ifInDiscards[$ifIndex];
-				}
-			}else{
-				$int_ifInDiscards = $ifInDiscards[$ifIndex] - $db_interface[$ifIndex]["ifInDiscards"];
-			}
-		}else{
-			$int_ifInDiscards = 0;
-		}
+		$int_ifInDiscards    = get_link_int_value("ifInDiscards", $ifIndex, $ifInDiscards, $db_interface, $divisor, "errors");
 
 		/* see if out discards's have been increasing */
-		$int_ifOutDiscards = 0;
-		if (!isset($db_interface[$ifIndex]["ifOutDiscards"])) {
-			$int_ifOutDiscards = 0;
-		}else if (!isset($ifOutDiscards[$ifIndex])) {
-			$int_ifOutDiscards = 0;
-		}else if ($ifOutDiscards[$ifIndex] <> $db_interface[$ifIndex]["ifOutDiscards"]) {
-			/* account for 2E32 rollover */
-			/* there are two types of rollovers one rolls to 0 */
-			/* the other counts backwards.  let's make an educated guess */
-			if ($db_interface[$ifIndex]["ifOutDiscards"] > $ifOutDiscards[$ifIndex]) {
-				if (($overflow - $db_interface[$ifIndex]["ifOutDiscards"] + $ifOutDiscards[$ifIndex]) < $fudge) {
-					$int_ifOutDiscards = $overflow - $db_interface[$ifIndex]["ifOutDiscards"] + $ifOutDiscards[$ifIndex];
-				}else{
-					$int_ifOutDiscards = $db_interface[$ifIndex]["ifOutDiscards"] - $ifOutDiscards[$ifIndex];
-				}
-			}else{
-				$int_ifOutDiscards = $ifOutDiscards[$ifIndex] - $db_interface[$ifIndex]["ifOutDiscards"];
-			}
-		}else{
-			$int_ifOutDiscards = 0;
-		}
+		$int_ifOutDiscards   = get_link_int_value("ifOutDiscards", $ifIndex, $ifOutDiscards, $db_interface, $divisor, "errors");
 
 		if ($int_ifInDiscards > 0 || $int_ifOutDiscards > 0) {
 			$int_discards_present = TRUE;
@@ -627,27 +637,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		}
 
 		/* see if in discards's have been increasing */
-		$int_ifInUnknownProtos = 0;
-		if (!isset($db_interface[$ifIndex]["ifInUnknownProtos"])) {
-			$int_ifInUnknownProtos = 0;
-		}else if (!isset($ifInUnknownProtos[$ifIndex])) {
-			$int_ifInUnknownProtos = 0;
-		}else if ($ifInUnknownProtos[$ifIndex] <> $db_interface[$ifIndex]["ifInUnknownProtos"]) {
-			/* account for 2E32 rollover */
-			/* there are two types of rollovers one rolls to 0 */
-			/* the other counts backwards.  let's make an educated guess */
-			if ($db_interface[$ifIndex]["ifInUnknownProtos"] > $ifInUnknownProtos[$ifIndex]) {
-				if (($overflow - $db_interface[$ifIndex]["ifInUnknownProtos"] + $ifInUnknownProtos[$ifIndex]) < $fudge) {
-					$int_ifInUnknownProtos = $overflow - $db_interface[$ifIndex]["ifInUnknownProtos"] + $ifInUnknownProtos[$ifIndex];
-				}else{
-					$int_ifInUnknownProtos = $db_interface[$ifIndex]["ifInUnknownProtos"] - $ifInUnknownProtos[$ifIndex];
-				}
-			}else{
-				$int_ifInUnknownProtos = $ifInUnknownProtos[$ifIndex] - $db_interface[$ifIndex]["ifInUnknownProtos"];
-			}
-		}else{
-			$int_ifInUnknownProtos = 0;
-		}
+		$int_ifInUnknownProtos = get_link_int_value("ifInUnknownProtos", $ifIndex, $ifInUnknownProtos, $db_interface, $divisor, "errors");
 
 		/* format the update packet */
 		if ($i == 0) {
@@ -659,35 +649,112 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		$mac_address = @xform_mac_address($ifPhysAddress[$ifIndex]);
 
 		$insert_vals .= "('" .
-			$device["site_id"]            . "', '" . $device["device_id"]          . "', '" .
-			@$ifIndex                     . "', '" .
-			@$ifTypes[$ifIndex]           . "', '" . @$ifNames[$ifIndex]           . "', " .
-			@$cnn_id->qstr($ifAlias)      . ", '"  . @$linkPort                    . "', '" .
-			@$vlan_id                     . "', "  . @$cnn_id->qstr(@$vlan_name)   . ", '" .
-			@$vlan_trunk                  . "', '" . @$ifSpeed[$ifIndex]           . "', '" .
-			@$ifHighSpeed[$ifIndex]       . "', '" . @$ifDuplex[$ifIndex]          . "', " .
-			@$cnn_id->qstr(@$ifDescr[$ifIndex]) . ", '" .
-			@$ifMtu[$ifIndex]             . "', '" . $mac_address                  . "', '" .
-			@$ifAdminStatus[$ifIndex]     . "', '" . @$ifOperStatus[$ifIndex]      . "', '" .
-			@$ifLastChange[$ifIndex]      . "', '" . @$ifInDiscards[$ifIndex]      . "', '" .
-			@$ifInErrors[$ifIndex]        . "', '" . @$ifInUnknownProtos[$ifIndex] . "', '" .
-			@$ifOutDiscards[$ifIndex]     . "', '" . @$ifOutErrors[$ifIndex]       . "', '" .
-			@$int_ifInDiscards            . "', '" . @$int_ifInErrors              . "', '" .
-			@$int_ifInUnknownProtos       . "', '" . @$int_ifOutDiscards           . "', '" .
-			@$int_ifInOutErrors           . "', '" . @$int_discards_present        . "', '" .
-			$int_errors_present           . "', '" .  $last_down_time              . "', '" .
-			$last_up_time                 . "', '" .  $stateChanges                . "', '" . "1')";
+			@$device["site_id"]                 . "', '" . @$device["device_id"]         . "', '" .
+			@$device["sysUptime"]               . "', '" . @$ifIndex                     . "', '" .
+			@$ifTypes[$ifIndex]                 . "', '" . @$ifNames[$ifIndex]           . "', " .
+			@$cnn_id->qstr($ifAlias)            . ", '"  . @$linkPort                    . "', '" .
+			@$vlan_id                           . "', "  . @$cnn_id->qstr(@$vlan_name)   . ", '" .
+			@$vlan_trunk                        . "', '" . @$ifSpeed[$ifIndex]           . "', '" .
+			@$ifHighSpeed[$ifIndex]             . "', "  . @$ifDuplex[$ifIndex]          . "', '" .
+			@$cnn_id->qstr(@$ifDescr[$ifIndex]) . ", '"  . @$ifMtu[$ifIndex]        . "', '" .
+			$mac_address                        . "', '" . @$ifAdminStatus[$ifIndex]     . "', '" .
+			@$ifOperStatus[$ifIndex]            . "', '" . @$ifLastChange[$ifIndex]      . "', '" .
+			@$ifInOctets[$ifIndex]              . "', '" . @$ifOutOctets[$ifIndex]       . "', '" .
+			@$ifHCInOctets[$ifIndex]            . "', '" . @$ifHCOutOctets[$ifIndex]     . "', '" .
+			@$ifInNUcastPkts[$ifIndex]          . "', '" . @$ifOutNUcastPkts[$ifIndex]   . "', '" .
+			@$ifInUcastPkts[$ifIndex]           . "', '" . @$ifOutUcastPkts[$ifIndex]    . "', '" .
+			@$ifInDiscards[$ifIndex]            . "', '" . @$ifInErrors[$ifIndex]        . "', '" .
+			@$ifInUnknownProtos[$ifIndex]       . "', '" . @$ifOutDiscards[$ifIndex]     . "', '" .
+			@$ifOutErrors[$ifIndex]             . "', '" .
+			@$int_ifInOctets                    . "', '" . @$int_ifOutOctets             . "', '" .
+			@$int_ifHCInOctets                  . "', '" . @$int_ifHCOutOctets           . "', '" .
+			@$int_ifInNUcastPkts                . "', '" . @$int_ifOutNUcastPkts         . "', '" .
+			@$int_ifInUcastPkts                 . "', '" . @$int_ifOutUcastPkts          . "', '" .
+			@$int_ifInDiscards                  . "', '" . @$int_ifInErrors              . "', '" .
+			@$int_ifInUnknownProtos             . "', '" . @$int_ifOutDiscards           . "', '" .
+			@$int_ifInOutErrors                 . "', '" . @$int_discards_present        . "', '" .
+			$int_errors_present                 . "', '" .  $last_down_time              . "', '" .
+			$last_up_time                       . "', '" .  $stateChanges                . "', '" . "1')";
 
 		$i++;
-	}
 	}
 	mactrack_debug("ifInterfaces assembly complete.");
 
 	if (strlen($insert_vals)) {
+		/* add/update records in the database */
 		db_execute($insert_prefix . $insert_vals . $insert_suffix);
+
+		/* remove all obsolete records from the database */
+		db_execute("DELETE FROM mac_track_interfaces WHERE present=0 AND device_id=" . $device["device_id"]);
+
+		/* set the percent utilized fields, you can't do this for vlans */
+		db_execute("UPDATE mac_track_interfaces
+			SET inBound=(int_ifHCInOctets*8)/(ifHighSpeed*10000), outBound=(int_ifHCOutOctets*8)/(ifHighSpeed*10000)
+			WHERE ifHighSpeed>0 AND ifName NOT LIKE 'Vl%' AND device_id=" . $device["device_id"]);
+
+		mactrack_debug("Adding IfInterfaces Records");
 	}
 
 	return $ifInterfaces;
+}
+
+function get_link_int_value($snmp_oid, $ifIndex, &$snmp_array, &$db_interface, $divisor, $type = "errors", $bits = "32") {
+	/* 32bit and 64bit Integer Overflow Value */
+	if ($bits == "32") {
+		$overflow   = 4294967295;
+		/* fudge factor */
+		$fudge      = 3000000001;
+	}else{
+		$overflow = 18446744065119617025;
+		/* fudge factor */
+		$fudge      = 300000000001;
+	}
+
+	/* see if values have been increasing */
+	$int_value = 0;
+	if (!isset($db_interface[$ifIndex][$snmp_oid])) {
+		$int_value = 0;
+	}else if (!isset($snmp_array[$ifIndex])) {
+		$int_value = 0;
+	}else if ($snmp_array[$ifIndex] <> $db_interface[$ifIndex][$snmp_oid]) {
+		/* account for 2E32 rollover */
+		/* there are two types of rollovers one rolls to 0 */
+		/* the other counts backwards.  let's make an educated guess */
+		if ($db_interface[$ifIndex][$snmp_oid] > $snmp_array[$ifIndex]) {
+			/* errors count backwards from overflow */
+			if ($type == "errors") {
+				if (($overflow - $db_interface[$ifIndex][$snmp_oid] + $snmp_array[$ifIndex]) < $fudge) {
+					$int_value = $overflow - $db_interface[$ifIndex][$snmp_oid] + $snmp_array[$ifIndex];
+				}else{
+					$int_value = $db_interface[$ifIndex][$snmp_oid] - $snmp_array[$ifIndex];
+				}
+			}else{
+				$int_value = $overflow - $db_interface[$ifIndex][$snmp_oid] + $snmp_array[$ifIndex];
+			}
+		}else{
+			$int_value = $snmp_array[$ifIndex] - $db_interface[$ifIndex][$snmp_oid];
+		}
+
+		/* account for counter resets */
+		$frequency = read_config_option("scanner_frequency");
+		if ($db_interface[$ifIndex]["ifHighSpeed"] > 0) {
+			if ($int_value > ($db_interface[$ifIndex]["ifHighSpeed"] * 1000000 * $frequency * 1.1)) {
+				$int_value = $snmp_array[$ifIndex];
+			}
+		}else{
+			if ($int_value > ($db_interface[$ifIndex]["ifSpeed"] * $frequency * 1.1 / 8)) {
+				$int_value = $snmp_array[$ifIndex];
+			}
+		}
+	}else{
+		$int_value = 0;
+	}
+
+	if (!$divisor) {
+		return 0;
+	}else{
+		return $int_value / $divisor;
+	}
 }
 
 /*	get_generic_switch_ports - This is a basic function that will scan the dot1d
