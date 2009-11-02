@@ -603,14 +603,14 @@ function collect_mactrack_data($start, $site_id = 0) {
 					$subject = "MACAUTH Notification: Mac Address '" . $record["mac_address"] . "' Found, For: '" . $record["name"] . "'";
 
 					/* set the message with replacements */
-					$message = str_replace("<IP>", $record["ip_address"], $record["description"]);
-					$message = str_replace("<MAC>", $record["mac_address"], $message);
+					$message = str_replace("<IP>", $found["ip_address"], $record["description"]);
+					$message = str_replace("<MAC>", $found["mac_address"], $message);
 					$message = str_replace("<TICKET>", $record["ticket_number"], $message);
 					$message = str_replace("<SITENAME>", db_fetch_cell("SELECT site_name FROM mac_track_sites WHERE site_id=" . $record["site_id"]), $message);
-					$message = str_replace("<DEVICEIP>", $record["hostname"], $message);
-					$message = str_replace("<DEVICENAME>", $record["device_name"], $message);
-					$message = str_replace("<PORTNUMBER>", $record["port_number"], $message);
-					$message = str_replace("<PORTNAME>", $record["port_name"], $message);
+					$message = str_replace("<DEVICEIP>", $found["hostname"], $message);
+					$message = str_replace("<DEVICENAME>", $found["device_name"], $message);
+					$message = str_replace("<PORTNUMBER>", $found["port_number"], $message);
+					$message = str_replace("<PORTNAME>", $found["port_name"], $message);
 
 					/* send out the email */
 					if (!$record["discovered"] || $record["notify_schedule"] >= "2") {
