@@ -651,12 +651,12 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		$insert_vals .= "('" .
 			@$device["site_id"]                 . "', '" . @$device["device_id"]         . "', '" .
 			@$device["sysUptime"]               . "', '" . @$ifIndex                     . "', '" .
-			@$ifTypes[$ifIndex]                 . "', '" . @$ifNames[$ifIndex]           . "', " .
+			@$ifTypes[$ifIndex]                 . "', '" . @$ifNames[$ifIndex]           . "', "  .
 			@$cnn_id->qstr($ifAlias)            . ", '"  . @$linkPort                    . "', '" .
-			@$vlan_id                           . "', "  . @$cnn_id->qstr(@$vlan_name)   . ", '" .
+			@$vlan_id                           . "', "  . @$cnn_id->qstr(@$vlan_name)   . ", '"  .
 			@$vlan_trunk                        . "', '" . @$ifSpeed[$ifIndex]           . "', '" .
-			@$ifHighSpeed[$ifIndex]             . "', "  . @$ifDuplex[$ifIndex]          . "', '" .
-			@$cnn_id->qstr(@$ifDescr[$ifIndex]) . ", '"  . @$ifMtu[$ifIndex]        . "', '" .
+			@$ifHighSpeed[$ifIndex]             . "', "  . @$ifDuplex[$ifIndex]          . ", "   .
+			@$cnn_id->qstr(@$ifDescr[$ifIndex]) . ", '"  . @$ifMtu[$ifIndex]             . "', '" .
 			$mac_address                        . "', '" . @$ifAdminStatus[$ifIndex]     . "', '" .
 			@$ifOperStatus[$ifIndex]            . "', '" . @$ifLastChange[$ifIndex]      . "', '" .
 			@$ifInOctets[$ifIndex]              . "', '" . @$ifOutOctets[$ifIndex]       . "', '" .
