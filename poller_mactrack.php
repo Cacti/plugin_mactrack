@@ -487,7 +487,11 @@ function collect_mactrack_data($start, $site_id = 0) {
 					SELECT site_id, device_id, hostname, dns_hostname, device_name,
 					vlan_id, vlan_name, mac_address, vendor_mac, ip_address,
 					port_number, port_name, scan_date, authorized
-					FROM mac_track_temp_ports");
+					FROM mac_track_temp_ports
+					ON DUPLICATE KEY UPDATE site_id=VALUES(site_id), hostname=VALUES(hostname),
+					device_name=VALUES(device_name), vlan_id=VALUES(vlan_id), vlan_name=VALUES(vlan_name),
+					vendor_mac=VALUES(vendor_mac), ip_address=VALUES(ip_address), dns_hostname=VALUES(dns_hostname),
+					port_name=VALUES(port_name), authorized=VALUES(authorized)");
 		mactrack_debug("Finished transferring scan results to main table.");
 
 		/* transfer the subnet information, although primative, into the ip_ranges table */
