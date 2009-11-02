@@ -626,7 +626,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 					/* update the the correct information */
 					db_execute("UPDATE mac_track_macwatch
 						SET
-							disconvered=1,
+							discovered=1,
 							last_seen_date=NOW()" .
 							(strtotime($record["first_seen_time"]) == 0 ? ", first_seen_date=NOW()":"") . "
 						WHERE mac_address='" . $record["mac_address"] . "'");

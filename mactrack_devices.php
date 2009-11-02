@@ -72,7 +72,7 @@ switch ($_REQUEST["action"]) {
 			mactrack_device_export();
 		}else{
 			include_once("./include/top_header.php");
-			print "<script type='text/javascript' src='" . $config["url_path"] . "plugins/mactrack/mactrack.js'></script>";
+//			print "<script type='text/javascript' src='" . $config["url_path"] . "plugins/mactrack/mactrack.js'></script>";
 
 			mactrack_device();
 

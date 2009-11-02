@@ -384,7 +384,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	/* mark all interfaces as not present */
 	db_execute("UPDATE mac_track_interfaces SET present=0 WHERE device_id=" . $device["device_id"]);
 
-	$insert_prefix = "INSERT INTO scanner_interfaces (site_id, device_id, sysUptime, ifIndex, ifType, ifName, ifAlias, linkPort, vlan_id," .
+	$insert_prefix = "INSERT INTO mac_track_interfaces (site_id, device_id, sysUptime, ifIndex, ifType, ifName, ifAlias, linkPort, vlan_id," .
 		" vlan_name, vlan_trunk_status, ifSpeed, ifHighSpeed, ifDuplex, " .
 		" ifDescr, ifMtu, ifPhysAddress, ifAdminStatus, ifOperStatus, ifLastChange, ".
 		" ifInOctets, ifOutOctets, ifHCInOctets, ifHCOutOctets, ifInNUcastPkts, ifOutNUcastPkts, ifInUcastPkts, ifOutUcastPkts, " .
@@ -736,7 +736,7 @@ function get_link_int_value($snmp_oid, $ifIndex, &$snmp_array, &$db_interface, $
 		}
 
 		/* account for counter resets */
-		$frequency = read_config_option("scanner_frequency");
+		$frequency = read_config_option("mt_collection_timing") * 60;
 		if ($db_interface[$ifIndex]["ifHighSpeed"] > 0) {
 			if ($int_value > ($db_interface[$ifIndex]["ifHighSpeed"] * 1000000 * $frequency * 1.1)) {
 				$int_value = $snmp_array[$ifIndex];
@@ -2165,7 +2165,7 @@ function mactrack_format_device_row($device) {
 			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
 		}
 
-		$row .= "<a href='" . htmlspecialchars($config['url_path'] . "plugins/mactrack/mactrack_devices.php?action=edit&device_id=" . $device['device_id']) . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_details.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='Edit Scanner Device' align='absmiddle' border='0'></a>";
+		$row .= "<a href='" . htmlspecialchars($config['url_path'] . "plugins/mactrack/mactrack_devices.php?action=edit&device_id=" . $device['device_id']) . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_details.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='Edit MacTrack Device' align='absmiddle' border='0'></a>";
 
 		if ($device["disabled"] == '') {
 			$row .= "<img id='e_" . $device["device_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/disable_collection.png' onClick='disable_device(" . $device["device_id"] . ")' alt='' onMouseOver='style.cursor=\"pointer\"' title='Disable Scanning' align='absmiddle' border='0'>";
