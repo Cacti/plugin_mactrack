@@ -418,7 +418,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	$ifHighSpeed = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.15", $device);
 	mactrack_debug("ifHighSpeed data collection complete. '" . sizeof($ifHighSpeed) . "' rows found!");
 
-	$ifDuplex = xform_standard_indexed_data("	.1.3.6.1.2.1.10.7.2.19", $device);
+	$ifDuplex = xform_standard_indexed_data(".1.3.6.1.2.1.10.7.2.19", $device);
 	mactrack_debug("ifDuplex data collection complete. '" . sizeof($ifDuplex) . "' rows found!");
 
 	$ifDescr = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.2", $device);
@@ -655,7 +655,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			@$cnn_id->qstr($ifAlias)            . ", '"  . @$linkPort                    . "', '" .
 			@$vlan_id                           . "', "  . @$cnn_id->qstr(@$vlan_name)   . ", '"  .
 			@$vlan_trunk                        . "', '" . @$ifSpeed[$ifIndex]           . "', '" .
-			@$ifHighSpeed[$ifIndex]             . "', "  . @$ifDuplex[$ifIndex]          . ", "   .
+			@$ifHighSpeed[$ifIndex]             . "', '" . @$ifDuplex[$ifIndex]          . '", "   .
 			@$cnn_id->qstr(@$ifDescr[$ifIndex]) . ", '"  . @$ifMtu[$ifIndex]             . "', '" .
 			$mac_address                        . "', '" . @$ifAdminStatus[$ifIndex]     . "', '" .
 			@$ifOperStatus[$ifIndex]            . "', '" . @$ifLastChange[$ifIndex]      . "', '" .
