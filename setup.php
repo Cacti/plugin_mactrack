@@ -981,7 +981,7 @@ function mactrack_config_arrays () {
 	global $mactrack_snmp_versions, $mactrack_device_types, $mactrack_search_types;
 	global $user_auth_realms, $user_auth_realm_filenames, $menu, $config, $rows_selector;
 	global $mactrack_poller_frequencies, $mactrack_data_retention, $refresh_interval;
-	global $mactrack_macauth_frequencies;
+	global $mactrack_macauth_frequencies, $mactrack_duplexes;
 
 	$user_auth_realms[2120]='Plugin -> MacTrack Viewer';
 	$user_auth_realms[2121]='Plugin -> MacTrack Administrator';
@@ -1028,6 +1028,11 @@ function mactrack_config_arrays () {
 		6 => "Does Not Begin With",
 		7 => "Is Null",
 		8 => "Is Not Null");
+
+	$mactrack_duplexes = array(
+		1 => "Unknown",
+		2 => "Half",
+		3 => "Full");
 
 	$mactrack_snmp_versions = array(1 =>
 		"Version 1",

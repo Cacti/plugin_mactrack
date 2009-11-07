@@ -156,7 +156,7 @@ while (1) {
 		foreach($unresolved_ips as $unresolved_ip) {
 			$insert_string = "REPLACE INTO mac_track_temp_ports " .
 				"(site_id,device_id,hostname,dns_hostname,device_name,vlan_id,vlan_name," .
-				"mac_address,ip_address,port_number,port_name,scan_date)" .
+				"mac_address,vendor_mac,ip_address,port_number,port_name,scan_date)" .
 				" VALUES ('" .
 				$unresolved_ip["site_id"] . "','" .
 				$unresolved_ip["device_id"] . "','" .
@@ -166,6 +166,7 @@ while (1) {
 				$unresolved_ip["vlan_id"] . "','" .
 				$unresolved_ip["vlan_name"] . "','" .
 				$unresolved_ip["mac_address"] . "','" .
+				$unresolved_ip["vendor_mac"] . "','" .
 				$unresolved_ip["ip_address"] . "','" .
 				$unresolved_ip["port_number"] . "','" .
 				$unresolved_ip["port_name"] . "','" .

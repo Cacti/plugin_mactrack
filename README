@@ -59,6 +59,7 @@
     bug: 0001548: mactrack_view_macs various issues 
     bug: IEEE Database import runs out of memory
     bug: Correct uninitialized error in mactrack_hp.php
+    bug: Resolved issue where Vendor Mac was lost during resolver process
     feature: Adding support for ArpWatch
     feature: Adding Juniper Support
     feature: Support Foundry Dual Mode Ports
