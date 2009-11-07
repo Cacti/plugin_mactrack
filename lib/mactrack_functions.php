@@ -458,9 +458,8 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	mactrack_debug("ifLastChange data collection complete. '" . sizeof($ifLastChange) . "' rows found!");
 
 	/* get timing for rate information */
-	$prev_octets_time = strtotime($device["ifInterfaces_time"]);
+	$prev_octets_time = strtotime($device["last_rundate"]);
 	$cur_octets_time  = time();
-	$device["ifInterfaces_time"] = date("Y-m-d H:i:s", $cur_octets_time);
 
 	if ($prev_octets_time == 0) {
 		$divisor = FALSE;
@@ -859,9 +858,9 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 	if (sizeof($active_ports_array)) {
 	foreach($active_ports_array as $port_info) {
 		$port_info =  mactrack_strip_alpha($port_info);
-		if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
-			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
-			($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
+		if (((@$ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
+			(@$ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
+			(@$ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
 			if ($port_info == 1) {
 				$ports_active++;
 			}
