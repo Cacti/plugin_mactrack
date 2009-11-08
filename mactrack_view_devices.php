@@ -151,10 +151,20 @@ function mactrack_view_get_device_records(&$sql_where, $row_limit, $apply_limits
 		$sql_where .= " AND (mac_track_devices.snmp_status=" . $_REQUEST["status"] . ") AND (mac_track_devices.disabled = '')";
 	}
 
+	/* scan types matching */
 	if ($_REQUEST["type_id"] == "-1") {
 		/* Show all items */
 	}else {
 		$sql_where .= " AND (mac_track_devices.scan_type=" . $_REQUEST["type_id"] . ")";
+	}
+
+	/* device types matching */
+	if ($_REQUEST["device_type_id"] == "-1") {
+		/* Show all items */
+	}elseif ($_REQUEST["device_type_id"] == "-2") {
+		$sql_where .= " AND (mac_track_device_types.description='')";
+	}else {
+		$sql_where .= " AND (mac_track_devices.device_type_id=" . $_REQUEST["device_type_id"] . ")";
 	}
 
 	if ($_REQUEST["site_id"] == "-1") {
@@ -166,6 +176,7 @@ function mactrack_view_get_device_records(&$sql_where, $row_limit, $apply_limits
 	}
 
 	$sql_query = "SELECT
+		mac_track_device_types.description AS device_type,
 		mac_track_devices.site_id,
 		mac_track_sites.site_name,
 		mac_track_devices.device_id,
@@ -200,6 +211,7 @@ function mactrack_view_get_device_records(&$sql_where, $row_limit, $apply_limits
 		mac_track_devices.last_runduration
 		FROM mac_track_sites
 		RIGHT JOIN mac_track_devices ON (mac_track_devices.site_id=mac_track_sites.site_id)
+		LEFT JOIN mac_track_device_types ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
 		$sql_where
 		ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
 
@@ -280,15 +292,15 @@ function mactrack_view_devices() {
 	}
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
-	load_current_session_value("report", "sess_mactrack_view_report", "sites");
-	load_current_session_value("page", "sess_mactrack_view_device_current_page", "1");
-	load_current_session_value("filter", "sess_mactrack_view_device_filter", "");
-	load_current_session_value("site_id", "sess_mactrack_view_device_site_id", "-1");
-	load_current_session_value("type_id", "sess_mactrack_view_device_type_id", "-1");
+	load_current_session_value("report",         "sess_mactrack_view_report", "sites");
+	load_current_session_value("page",           "sess_mactrack_view_device_current_page", "1");
+	load_current_session_value("filter",         "sess_mactrack_view_device_filter", "");
+	load_current_session_value("site_id",        "sess_mactrack_view_device_site_id", "-1");
+	load_current_session_value("type_id",        "sess_mactrack_view_device_type_id", "-1");
 	load_current_session_value("device_type_id", "sess_mactrack_view_device_device_type_id", "-1");
-	load_current_session_value("status", "sess_mactrack_view_device_status", "-1");
-	load_current_session_value("rows", "sess_mactrack_view_device_rows", "-1");
-	load_current_session_value("sort_column", "sess_mactrack_view_device_sort_column", "site_name");
+	load_current_session_value("status",         "sess_mactrack_view_device_status", "-1");
+	load_current_session_value("rows",           "sess_mactrack_view_device_rows", "-1");
+	load_current_session_value("sort_column",    "sess_mactrack_view_device_sort_column", "site_name");
 	load_current_session_value("sort_direction", "sess_mactrack_view_device_sort_direction", "ASC");
 
 	if ($_REQUEST["rows"] == -1) {
@@ -315,6 +327,7 @@ function mactrack_view_devices() {
 		COUNT(mac_track_devices.device_id)
 		FROM mac_track_sites
 		RIGHT JOIN mac_track_devices ON mac_track_devices.site_id = mac_track_sites.site_id
+		LEFT JOIN mac_track_device_types ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
 		$sql_where");
 
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
@@ -352,7 +365,7 @@ function mactrack_view_devices() {
 		"site_name" => array("Site Name", "ASC"),
 		"snmp_status" => array("Status", "ASC"),
 		"hostname" => array("Hostname", "ASC"),
-		"scan_type" => array("Device Type", "ASC"),
+		"device_type" => array("Device Type", "ASC"),
 		"ips_total" => array("Total IP's", "DESC"),
 		"ports_total" => array("User Ports", "DESC"),
 		"ports_active" => array("User Ports Up", "DESC"),
@@ -375,7 +388,7 @@ function mactrack_view_devices() {
 				<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["site_name"]) : $device["site_name"]);?></td>
 				<td><?php print get_colored_device_status(($device["disabled"] == "on" ? true : false), $device["snmp_status"]);?></td>
 				<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["hostname"]) : $device["hostname"]);?></td>
-				<td><?php print $mactrack_device_types[$device["scan_type"]];?></td>
+				<td><?php print $device["device_type"];?></td>
 				<td><?php print ($device["scan_type"] == "1" ? "N/A" : $device["ips_total"]);?></td>
 				<td><?php print ($device["scan_type"] == "3" ? "N/A" : $device["ports_total"]);?></td>
 				<td><?php print ($device["scan_type"] == "3" ? "N/A" : $device["ports_active"]);?></td>

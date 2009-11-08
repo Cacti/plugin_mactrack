@@ -57,7 +57,8 @@
 					</td>
 					<td width="1">
 						<select name="device_type_id" onChange="applyDeviceFilterChange(document.form_mactrack_view_devices)">
-						<option value="-1"<?php if ($_REQUEST["type_id"] == "-1") {?> selected<?php }?>>Any</option>
+						<option value="-1"<?php if ($_REQUEST["device_type_id"] == "-1") {?> selected<?php }?>>Any</option>
+						<option value="-2"<?php if ($_REQUEST["device_type_id"] == "-2") {?> selected<?php }?>>Not Detected</option>
 						<?php
 						if ($_REQUEST["type_id"] != -1) {
 							$device_types = db_fetch_assoc("SELECT DISTINCT
@@ -65,7 +66,7 @@
 								mac_track_device_types.description,
 								mac_track_device_types.sysDescr_match
 								FROM mac_track_device_types
-								RIGHT JOIN mac_track_devices ON (mac_track_device_types.device_type_id = mac_track_devices.device_type_id)
+								INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
 								WHERE device_type='" . $_REQUEST["type_id"] . "'
 								ORDER BY mac_track_device_types.description");
 						}else{
@@ -74,16 +75,12 @@
 								mac_track_device_types.description,
 								mac_track_device_types.sysDescr_match
 								FROM mac_track_device_types
-								RIGHT JOIN mac_track_devices ON (mac_track_device_types.device_type_id = mac_track_devices.device_type_id)
+								INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
 								ORDER BY mac_track_device_types.description;");
 						}
 						if (sizeof($device_types) > 0) {
 						foreach ($device_types as $device_type) {
-							if ($device_type["device_type_id"] == 0) {
-								$display_text = "Unknown Device Type";
-							}else{
-								$display_text = $device_type["description"] . " (" . $device_type["sysDescr_match"] . ")";
-							}
+							$display_text = $device_type["description"] . " (" . $device_type["sysDescr_match"] . ")";
 							print '<option value="' . $device_type["device_type_id"] . '"'; if ($_REQUEST["device_type_id"] == $device_type["device_type_id"]) { print " selected"; } print ">" . $display_text . "</option>";
 						}
 						}

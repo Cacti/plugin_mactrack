@@ -2171,7 +2171,7 @@ function mactrack_format_device_row($device, $actions=false) {
 	form_selectable_cell($device["site_name"], $device["device_id"]);
 	form_selectable_cell(get_colored_device_status(($device["disabled"] == "on" ? true : false), $device["snmp_status"]), $device["device_id"]);
 	form_selectable_cell((strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["hostname"]) : $device["hostname"]), $device["device_id"]);
-	form_selectable_cell($mactrack_device_types[$device["scan_type"]], $device["device_id"]);
+	form_selectable_cell(($device["device_type"] == '' ? 'Not Detected' : $device["device_type"]), $device["device_id"]);
 	form_selectable_cell(($device["scan_type"] == "1" ? "N/A" : $device["ips_total"]), $device["device_id"]);
 	form_selectable_cell(($device["scan_type"] == "3" ? "N/A" : $device["ports_total"]), $device["device_id"]);
 	form_selectable_cell(($device["scan_type"] == "3" ? "N/A" : $device["ports_active"]), $device["device_id"]);

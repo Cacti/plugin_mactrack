@@ -295,7 +295,7 @@ function mactrack_view_export_macs() {
 
 function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_limit = -1) {
 	/* form the 'where' clause for our main sql query */
-	if (strlen($_REQUEST["filter"]) > 0) {
+	if (strlen($_REQUEST["mac_filter"])) {
 		if (strlen($sql_where) > 0) {
 			$sql_where .= " AND ";
 		}else{
@@ -424,7 +424,12 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 		$sql_where .= " mac_track_ports.scan_date='" . $_REQUEST["scan_date"] . "'";
 	}
 
-	if ($_REQUEST["scan_date"] == 1) {
+	/* prevent table scans, either a device or site must be selected */
+	if ($_REQUEST["site_id"] == -1 && $_REQUEST["device_id"] == -1) {
+		return array();
+	}
+
+	if ($_REQUEST["scan_date"] != 2) {
 		$query_string = "SELECT
 			site_name, device_id, device_name, hostname, mac_address, vendor_name, ip_address, dns_hostname, port_number,
 			port_name, vlan_id, vlan_name, scan_date
@@ -619,28 +624,27 @@ function mactrack_view_macs() {
 
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
-	if ($_REQUEST["rows"] == 1) {
+	/* prevent table scans, either a device or site must be selected */
+	if ($_REQUEST["site_id"] == -1 && $_REQUEST["device_id"] == -1) {
+		$total_rows = 0;
+	}elseif ($_REQUEST["rows"] == 1) {
 		$rows_query_string = "SELECT
 			COUNT(mac_track_ports.device_id)
 			FROM mac_track_ports
+			LEFT JOIN mac_track_sites ON (mac_track_ports.site_id = mac_track_sites.site_id)
+			LEFT JOIN mac_track_oui_database ON (mac_track_oui_database.vendor_mac = mac_track_ports.vendor_mac)
 			$sql_where";
 
-		if (strlen($sql_where) == 0) {
-			$total_rows = 0;
-		}else{
-			$total_rows = db_fetch_cell($rows_query_string);
-		}
+		$total_rows = db_fetch_cell($rows_query_string);
 	}else{
 		$rows_query_string = "SELECT
 			COUNT(DISTINCT device_id, mac_address, port_number, ip_address)
 			FROM mac_track_ports
+			LEFT JOIN mac_track_sites ON (mac_track_ports.site_id = mac_track_sites.site_id)
+			LEFT JOIN mac_track_oui_database ON (mac_track_oui_database.vendor_mac = mac_track_ports.vendor_mac)
 			$sql_where";
 
-		if (strlen($sql_where) == 0) {
-			$total_rows = 0;
-		}else{
-			$total_rows = db_fetch_cell($rows_query_string);
-		}
+		$total_rows = db_fetch_cell($rows_query_string);
 	}
 
 	/* generate page list */
@@ -746,7 +750,7 @@ function mactrack_view_macs() {
 	$delim = read_config_option("mt_mac_delim");
 	if (sizeof($port_results) > 0) {
 		foreach ($port_results as $port_result) {
-			if ($_REQUEST["scan_date"] == 1) {
+			if ($_REQUEST["scan_date"] != 2) {
 				$scan_date = $port_result["scan_date"];
 			}else{
 				$scan_date = $port_result["max_scan_date"];
@@ -776,7 +780,11 @@ function mactrack_view_macs() {
 			form_end_row();
 		}
 	}else{
-		print "<tr><td colspan='10'><em>No MacTrack Port Results</em></td></tr>";
+		if ($_REQUEST["site_id"] == -1 && $_REQUEST["device_id"] == -1) {
+			print "<tr><td colspan='10'><em>You Must Select Either a Site or a Device to Search</em></td></tr>";
+		}else{
+			print "<tr><td colspan='10'><em>No MacTrack Port Results</em></td></tr>";
+		}
 	}
 
 	print $nav;

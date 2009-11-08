@@ -878,7 +878,7 @@ function mactrack_device_edit() {
 function mactrack_get_devices(&$sql_where, $row_limit, $apply_limits = TRUE) {
 	/* form the 'where' clause for our main sql query */
 	if (strlen($_REQUEST["filter"])) {
-		$sql_where = (strlen($sql_where) ? " AND ": "WHERE ") . "((mac_track_devices.hostname like '%%" . $_REQUEST["filter"] . "%%'
+		$sql_where = (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_devices.hostname like '%%" . $_REQUEST["filter"] . "%%'
 			OR mac_track_devices.device_name like '%%" . $_REQUEST["filter"] . "%%'
 			OR mac_track_devices.notes like '%%" . $_REQUEST["filter"] . "%%')";
 	}
@@ -886,7 +886,7 @@ function mactrack_get_devices(&$sql_where, $row_limit, $apply_limits = TRUE) {
 	if ($_REQUEST["status"] == "-1") {
 		/* Show all items */
 	}elseif ($_REQUEST["status"] == "-2") {
-		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "mac_track_devices.disabled='on'";
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_devices.disabled='on')";
 	}else {
 		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_devices.snmp_status=" . $_REQUEST["status"] . " AND mac_track_devices.disabled = '')";
 	}
@@ -894,25 +894,27 @@ function mactrack_get_devices(&$sql_where, $row_limit, $apply_limits = TRUE) {
 	if ($_REQUEST["type_id"] == "-1") {
 		/* Show all items */
 	}else {
-		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "mac_track_devices.scan_type=" . $_REQUEST["type_id"];
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_devices.scan_type=" . $_REQUEST["type_id"] . ")";
 	}
 
 	if ($_REQUEST["device_type_id"] == "-1") {
 		/* Show all items */
+	}elseif ($_REQUEST["device_type_id"] == "-2") {
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_device_types.description='')";
 	}else{
 		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_devices.device_type_id=" . $_REQUEST["device_type_id"] . ")";
 	}
 
 	if ($_REQUEST["site_id"] == "-1") {
-		$sql_where .= (strlen($sql_where) ? ")": "");
 		/* Show all items */
 	}elseif ($_REQUEST["site_id"] == "-2") {
-		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_sites.site_id IS NULL))";
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_sites.site_id IS NULL)";
 	}elseif (!empty($_REQUEST["site_id"])) {
-		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "mac_track_devices.site_id=" . $_REQUEST["site_id"] . ")";
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_devices.site_id=" . $_REQUEST["site_id"] . ")";
 	}
 
 	$query_string = "SELECT
+		mac_track_device_types.description as device_type,
 		mac_track_devices.site_id,
 		mac_track_sites.site_name,
 		mac_track_devices.device_id,
@@ -940,6 +942,7 @@ function mactrack_get_devices(&$sql_where, $row_limit, $apply_limits = TRUE) {
 		mac_track_devices.last_runduration
 		FROM mac_track_sites
 		RIGHT JOIN mac_track_devices ON mac_track_devices.site_id = mac_track_sites.site_id
+		LEFT JOIN mac_track_device_types ON mac_track_devices.device_type_id=mac_track_device_types.device_type_id
 		$sql_where
 		ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
 
@@ -1033,6 +1036,7 @@ function mactrack_device() {
 		COUNT(*)
 		FROM mac_track_sites
 		RIGHT JOIN mac_track_devices ON mac_track_devices.site_id = mac_track_sites.site_id
+		LEFT JOIN mac_track_device_types ON mac_track_devices.device_type_id=mac_track_device_types.device_type_id
 		$sql_where");
 
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
@@ -1072,7 +1076,7 @@ function mactrack_device() {
 		"site_name" => array("Site Name", "ASC"),
 		"snmp_status" => array("Status", "ASC"),
 		"hostname" => array("Hostname", "ASC"),
-		"scan_type" => array("Device Type", "ASC"),
+		"device_type" => array("Device Type", "ASC"),
 		"ips_total" => array("Total IP's", "DESC"),
 		"ports_total" => array("User Ports", "DESC"),
 		"ports_active" => array("User Ports Up", "DESC"),

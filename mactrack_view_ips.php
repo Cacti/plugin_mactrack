@@ -249,7 +249,7 @@ function mactrack_view_ip_ranges() {
 				<td width=200>
 					<?php print "<p class='linkEditMain'><strong>" . $ip_range["site_name"] . "</strong></p>";?>
 				</td>
-				<td><?php print $ip_range["ip_range"];?></td>
+				<td><?php print $ip_range["ip_range"] . ".*";?></td>
 				<td><?php print number_format($ip_range["ips_current"]);?></td>
 				<td><?php print $ip_range["ips_current_date"];?></td>
 				<td><?php print number_format($ip_range["ips_max"]);?></td>
