@@ -66,8 +66,8 @@ function mactrack_view_export_ip_ranges() {
 	/* remember these search fields in session vars so we don't have to keep passing them around */
 	load_current_session_value("page", "sess_mactrack_view_ips_current_page", "1");
 	load_current_session_value("site_id", "sess_mactrack_view_ips_site_id", "-1");
-	load_current_session_value("sort_column", "sess_mactrack_device_sort_column", "site_name");
-	load_current_session_value("sort_direction", "sess_mactrack_device_sort_direction", "ASC");
+	load_current_session_value("sort_column", "sess_mactrack_view_ips_sort_column", "site_name");
+	load_current_session_value("sort_direction", "sess_mactrack_view_ips_sort_direction", "ASC");
 
 	$sql_where = "";
 
@@ -146,10 +146,24 @@ function mactrack_view_ip_ranges() {
 	}
 
 	/* if any of the settings changed, reset the page number */
-	$changed = 0;
-	$changed += mactrack_check_changed("site_id", "sess_mactrack_view_ips_site_id");
-	if ($changed) {
-		$_REQUEST["page"] = "1";
+	/* if the user pushed the 'clear' button */
+	if (isset($_REQUEST["clear_x"])) {
+		kill_session_var("sess_mactrack_view_ips_rows_selector");
+		kill_session_var("sess_mactrack_view_ips_current_page");
+		kill_session_var("sess_mactrack_view_ips_sort_column");
+		kill_session_var("sess_mactrack_view_ips_sort_row");
+
+		$_REQUEST["page"] = 1;
+		unset($_REQUEST["rows"]);
+		unset($_REQUEST["sort_column"]);
+		unset($_REQUEST["sort_direction"]);
+	}else{
+		$changed = 0;
+		$changed += mactrack_check_changed("site_id", "sess_mactrack_view_ips_site_id");
+		$changed += mactrack_check_changed("rows", "sess_mactrack_view_ips_rows");
+		if ($changed) {
+			$_REQUEST["page"] = "1";
+		}
 	}
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
@@ -157,8 +171,8 @@ function mactrack_view_ip_ranges() {
 	load_current_session_value("page", "sess_mactrack_view_ips_current_page", "1");
 	load_current_session_value("site_id", "sess_mactrack_view_ips_site_id", "-1");
 	load_current_session_value("rows", "sess_mactrack_view_ips_rows", "-1");
-	load_current_session_value("sort_column", "sess_mactrack_device_sort_column", "site_name");
-	load_current_session_value("sort_direction", "sess_mactrack_device_sort_direction", "ASC");
+	load_current_session_value("sort_column", "sess_mactrack_view_ips_sort_column", "site_name");
+	load_current_session_value("sort_direction", "sess_mactrack_view_ips_sort_direction", "ASC");
 
 	if ($_REQUEST["rows"] == -1) {
 		$row_limit = read_config_option("num_rows_mactrack");
@@ -189,7 +203,7 @@ function mactrack_view_ip_ranges() {
 		$sql_where");
 
 	/* generate page list */
-	$url_page_select = str_replace("&page", "?page", get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $_REQUEST["rows"], $total_rows, "mactrack_view.php"));
+	$url_page_select = str_replace("&page", "?page", get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_view_ips.php"));
 
 	if (isset($config["base_path"])) {
 		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
@@ -197,20 +211,20 @@ function mactrack_view_ip_ranges() {
 					<table width='100%' cellspacing='0' cellpadding='0' border='0'>
 						<tr>
 							<td align='left' class='textHeaderDark'>
-								<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_view.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
+								<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_view_ips.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
 							</td>\n
 							<td align='center' class='textHeaderDark'>
-								Showing Rows " . ($total_rows == 0 ? "None" : (($_REQUEST["rows"]*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $_REQUEST["rows"]) || ($total_rows < ($_REQUEST["rows"]*$_REQUEST["page"]))) ? $total_rows : ($_REQUEST["rows"]*$_REQUEST["page"])) . " of $total_rows [$url_page_select]") . "
+								Showing Rows " . ($total_rows == 0 ? "None" : (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]") . "
 							</td>\n
 							<td align='right' class='textHeaderDark'>
-								<strong>"; if (($_REQUEST["page"] * $_REQUEST["rows"]) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_view.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $_REQUEST["rows"]) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+								<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_view_ips.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
 							</td>\n
 						</tr>
 					</table>
 				</td>
 			</tr>\n";
 	}else{
-		$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $_REQUEST["rows"], $total_rows, 13, "mactrack_view_sites.php");
+		$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, 13, "mactrack_view_sites.php");
 	}
 
 	print $nav;

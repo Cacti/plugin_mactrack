@@ -128,7 +128,7 @@
 						</select>
 					</td>
 					<td width="1">
-						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
+						<input type="text" name="mac_filter" size="20" value="<?php print $_REQUEST["filter"];?>">
 					</td>
 					<td width="80">
 						&nbsp;Authorized:&nbsp;

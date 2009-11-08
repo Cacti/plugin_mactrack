@@ -1180,7 +1180,8 @@ function mactrack_config_form () {
 		"description" => "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it.",
 		"value" => "|arg1:lowPort|",
 		"default" => read_config_option("mt_port_lowPort"),
-		"max_length" => "100"
+		"max_length" => "100",
+		"size" => "10"
 		),
 	"highPort" => array(
 		"method" => "textbox",
@@ -1188,7 +1189,8 @@ function mactrack_config_form () {
 		"description" => "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it.",
 		"value" => "|arg1:highPort|",
 		"default" => read_config_option("mt_port_highPort"),
-		"max_length" => "100"
+		"max_length" => "100",
+		"size" => "10"
 		),
 	"device_type_id" => array(
 		"method" => "hidden_zero",
@@ -1263,11 +1265,14 @@ function mactrack_config_form () {
 		"friendly_name" => "Switch/Hub, Switch/Router Settings"
 		),
 	"port_ignorePorts" => array(
-		"method" => "textbox",
+		"method" => "textarea",
 		"friendly_name" => "Ports to Ignore",
 		"description" => "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon ':'.  For example, 'Fa0/1: Fa1/23' would be acceptable for some manufacturers switch types.",
 		"value" => "|arg1:ignorePorts|",
 		"default" => read_config_option("mt_port_ignorePorts"),
+		"class" => "textAreaNotes",
+		"textarea_rows" => "3",
+		"textarea_cols" => "80",
 		"max_length" => "255"
 		),
 	"spacer2" => array(
@@ -1280,7 +1285,8 @@ function mactrack_config_form () {
 		"description" => "Fill in the SNMP read community for this device.",
 		"value" => "|arg1:snmp_readstring|",
 		"default" => read_config_option("mt_snmp_community"),
-		"max_length" => "100"
+		"max_length" => "100",
+		"size" => "20"
 		),
 	"snmp_readstrings" => array(
 		"method" => "textbox",
@@ -1288,7 +1294,8 @@ function mactrack_config_form () {
 		"description" => "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid.",
 		"value" => "|arg1:snmp_readstrings|",
 		"default" => read_config_option("mt_snmp_communities"),
-		"max_length" => "255"
+		"max_length" => "255",
+		"size" => "80"
 		),
 	"snmp_version" => array(
 		"method" => "drop_array",
@@ -1305,7 +1312,7 @@ function mactrack_config_form () {
 		"value" => "|arg1:snmp_port|",
 		"max_length" => "8",
 		"default" => read_config_option("mt_snmp_port"),
-		"size" => "15"
+		"size" => "10"
 		),
 	"snmp_timeout" => array(
 		"method" => "textbox",
@@ -1314,7 +1321,7 @@ function mactrack_config_form () {
 		"value" => "|arg1:snmp_timeout|",
 		"max_length" => "8",
 		"default" => read_config_option("mt_snmp_timeout"),
-		"size" => "15"
+		"size" => "10"
 		),
 	"snmp_retries" => array(
 		"method" => "textbox",
@@ -1323,7 +1330,7 @@ function mactrack_config_form () {
 		"value" => "|arg1:snmp_retries|",
 		"max_length" => "8",
 		"default" => read_config_option("mt_snmp_retries"),
-		"size" => "15"
+		"size" => "10"
 		),
 	"spacer3" => array(
 		"method" => "spacer",
@@ -1335,7 +1342,8 @@ function mactrack_config_form () {
 		"description" => "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc.",
 		"value" => "|arg1:user_name|",
 		"default" => "",
-		"max_length" => "40"
+		"max_length" => "40",
+		"size" => "20"
 		),
 	"user_password" => array(
 		"method" => "textbox_password",
@@ -1343,7 +1351,8 @@ function mactrack_config_form () {
 		"description" => "The password to be used for your custom authentication.",
 		"value" => "|arg1:user_password|",
 		"default" => "",
-		"max_length" => "40"
+		"max_length" => "40",
+		"size" => "20"
 		),
 	"device_id" => array(
 		"method" => "hidden_zero",

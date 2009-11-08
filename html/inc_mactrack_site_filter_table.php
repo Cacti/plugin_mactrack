@@ -43,7 +43,10 @@
 						</select>
 					</td>
 					<td>
-						&nbsp;<input type="checkbox" name="detail" <?php if (($_REQUEST["detail"] == "true") || ($_REQUEST["detail"] == "on")) print ' checked="true"';?> onClick="applySiteFilterChange(document.form_mactrack_sites)" alt="Device Details" border="0" align="absmiddle">Show Device Details&nbsp;
+						&nbsp;<input type="checkbox" id="detail" name="detail" <?php if (($_REQUEST["detail"] == "true") || ($_REQUEST["detail"] == "on")) print ' checked="true"';?> onClick="applySiteFilterChange(document.form_mactrack_sites)" alt="Device Details" border="0" align="absmiddle">
+					</td>
+					<td>
+						<label for="detail">Show Device Details</label>&nbsp;
 					</td>
 					<td>
 						&nbsp;<input type="submit" name="go_x" value="Go">

@@ -72,7 +72,7 @@ switch ($_REQUEST["action"]) {
 			mactrack_device_export();
 		}else{
 			include_once("./include/top_header.php");
-//			print "<script type='text/javascript' src='" . $config["url_path"] . "plugins/mactrack/mactrack.js'></script>";
+			print "<script type='text/javascript' src='" . $config["url_path"] . "plugins/mactrack/mactrack.js'></script>";
 
 			mactrack_device();
 
@@ -1068,7 +1068,6 @@ function mactrack_device() {
 	}
 
 	$display_text = array(
-		"nosort" => array("Actions", ""),
 		"device_name" => array("Device Name", "ASC"),
 		"site_name" => array("Site Name", "ASC"),
 		"snmp_status" => array("Status", "ASC"),

@@ -89,7 +89,7 @@ function get_procurve_ng_switch_ports($site, &$device, $lowPort = 0, $highPort =
 		foreach($port_results as $port_result) {
 			$ifIndex  = $port_result["port_number"];
 			$ifType   = @$ifInterfaces[$ifIndex]["ifType"];
-			$ifName   = $ifInterfaces["ifAlias"][$ifIndex];
+			$ifName   = @$ifInterfaces["ifAlias"][$ifIndex];
 			$portName = $ifName;
 			$portTrunkStatus = @$ifInterfaces[$ifIndex]["trunkPortState"];
 

@@ -400,7 +400,7 @@ function mactrack_macw() {
 				</td>
 				<td width="10%"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["mac_address"]) : $mac["mac_address"]);?></td>
 				<td width="10%"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["ticket_number"]) : $mac["ticket_number"]);?></td>
-				<td width="40%"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["description"]) : $mac["description"]);?></td>
+				<td style='max-width:80%;'><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", htmlspecialchars($mac["description"])) : htmlspecialchars($mac["description"]));?></td>
 				<td width="10%"><?php print ($mac["date_first_seen"] == "0000-00-00 00:00:00" ? "N/A" : $mac["date_first_seen"]);?></td>
 				<td width="10%"><?php print ($mac["date_last_seen"] == "0000-00-00 00:00:00" ? "N/A" : $mac["date_last_seen"]);?></td>
 

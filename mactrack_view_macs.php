@@ -72,25 +72,28 @@ function form_actions() {
 		$selected_items = unserialize(stripslashes($_POST["selected_items"]));
 
 		if ($_POST["drp_action"] == "1") { /* Authorize */
-			for ($i=0; $i<count($selected_items); $i++) {
-				/* clean up the mac_address */
-				$selected_items[$i] = sanitize_search_string($selected_items[$i]);
+			if (sizeof($selected_items)) {
+			foreach($selected_items as $mac) {
+				$mac = sanitize_search_string($mac);
 
-				api_mactrack_authorize_mac_addresses($selected_items[$i]);
+				api_mactrack_authorize_mac_addresses($mac);
+			}
 			}
 		}elseif ($_POST["drp_action"] == "2") { /* Revoke */
 			$errors = "";
-			for ($i=0;($i<count($selected_items));$i++) {
+			if (sizeof($selected_items)) {
+			foreach($selected_items as $mac) {
 				/* clean up the mac_address */
-				$selected_items[$i] = sanitize_search_string($selected_items[$i]);
+				$mac = sanitize_search_string($mac);
 
-				$mac_found = db_fetch_cell("SELECT mac_address FROM mac_track_macauth WHERE mac_address='$selected_items[$i]'");
+				$mac_found = db_fetch_cell("SELECT mac_address FROM mac_track_macauth WHERE mac_address='$mac'");
 
 				if ($mac_found) {
-					api_mactrack_revoke_mac_addresses($selected_items[$i], $i, $_POST["title_format"]);
+					api_mactrack_revoke_mac_addresses($mac);
 				}else{
-					$errors .= ", $selected_items[$i]";
+					$errors .= ", $mac";
 				}
+			}
 			}
 
 			if ($errors) {
@@ -98,12 +101,13 @@ function form_actions() {
 			}
 		}
 
-		header("Location: mactrack_view.php");
+		header("Location: mactrack_view_macs.php");
 		exit;
 	}
 
 	/* setup some variables */
-	$mac_address_list = ""; $i = 0;
+	$mac_address_list = "";
+	$delim = read_config_option("mt_mac_delim");
 
 	/* loop through each of the device types selected on the previous page and get more info about them */
 	while (list($var,$val) = each($_POST)) {
@@ -113,20 +117,22 @@ function form_actions() {
 			/* clean up the mac_address */
 			if (isset($matches)) {
 				$matches = sanitize_search_string($matches);
+				$parts   = explode("-", $matches);
+				$mac     = str_replace("_", $delim, $parts[0]);
 			}
 
-			$mac_address_list .= "<li>" . $matches . "<br>";
-			$mac_address_array[$i] = $matches;
+			if (!isset($mac_address_array[$mac])) {
+				$mac_address_list .= "<li>" . $mac . "<br>";
+				$mac_address_array[$mac] = $mac;
+			}
 		}
-
-		$i++;
 	}
 
 	include_once("./include/top_header.php");
 
 	html_start_box("<strong>" . $mactrack_view_macs_actions{$_POST["drp_action"]} . "</strong>", "60%", $colors["header_panel"], "3", "center", "");
 
-	print "<form action='mactrack_view.php' method='post'>\n";
+	print "<form action='mactrack_view_macs.php' method='post'>\n";
 
 	if ($_POST["drp_action"] == "1") { /* Authorize Macs */
 		print "	<tr>
@@ -149,7 +155,7 @@ function form_actions() {
 	if (!isset($mac_address_array)) {
 		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You must select at least one MAC Address.</span></td></tr>\n";
 		$save_html = "";
-	}else if (!mactrack_check_user_realm(22)) {
+	}else if (!mactrack_check_user_realm(2122)) {
 		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You are not permitted to change Mac Authorizations.</span></td></tr>\n";
 		$save_html = "";
 	}else{
@@ -198,13 +204,13 @@ function mactrack_view_export_macs() {
 	}
 
 	/* clean up filter string */
-	if (isset($_REQUEST["filter"])) {
-		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
+	if (isset($_REQUEST["ip_filter"])) {
+		$_REQUEST["ip_filter"] = sanitize_search_string(get_request_var("ip_filter"));
 	}
 
 	/* clean up search string */
-	if (isset($_REQUEST["filter"])) {
-		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
+	if (isset($_REQUEST["mac_filter"])) {
+		$_REQUEST["mac_filter"] = sanitize_search_string(get_request_var("mac_filter"));
 	}
 
 	/* clean up sort_column */
@@ -368,7 +374,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 		}
 	}
 
-	if (!($_REQUEST["authorized"] == "-1")) {
+	if ($_REQUEST["authorized"] != "-1") {
 		if (strlen($sql_where) > 0) {
 			$sql_where .= " AND ";
 		}else{
@@ -420,7 +426,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 
 	if ($_REQUEST["scan_date"] == 1) {
 		$query_string = "SELECT
-			site_name, device_name, hostname, mac_address, vendor_name, ip_address, dns_hostname, port_number,
+			site_name, device_id, device_name, hostname, mac_address, vendor_name, ip_address, dns_hostname, port_number,
 			port_name, vlan_id, vlan_name, scan_date
 			FROM mac_track_ports
 			LEFT JOIN mac_track_sites ON (mac_track_ports.site_id = mac_track_sites.site_id)
@@ -433,7 +439,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 		}
 	}else{
 		$query_string = "SELECT
-			site_name, device_name, hostname, mac_address, vendor_name, ip_address, dns_hostname, port_number,
+			site_name, device_id, device_name, hostname, mac_address, vendor_name, ip_address, dns_hostname, port_number,
 			port_name, vlan_id, vlan_name, MAX(scan_date) as max_scan_date
 			FROM mac_track_ports
 			LEFT JOIN mac_track_sites ON (mac_track_ports.site_id = mac_track_sites.site_id)
@@ -642,7 +648,7 @@ function mactrack_view_macs() {
 
 	if (isset($config["base_path"])) {
 		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-					<td colspan='12'>
+					<td colspan='13'>
 						<table width='100%' cellspacing='0' cellpadding='0' border='0'>
 							<tr>
 								<td align='left' class='textHeaderDark'>
@@ -695,7 +701,7 @@ function mactrack_view_macs() {
 				"scan_date" => array("Last Scan Date", "DESC"));
 		}
 
-		if (mactrack_check_user_realm(22)) {
+		if (mactrack_check_user_realm(2122)) {
 			html_header_sort_checkbox($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 		}else{
 			html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
@@ -729,7 +735,7 @@ function mactrack_view_macs() {
 				"scan_date" => array("Last Scan Date", "DESC"));
 		}
 
-		if (mactrack_check_user_realm(22)) {
+		if (mactrack_check_user_realm(2122)) {
 			html_header_sort_checkbox($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 		}else{
 			html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
@@ -737,6 +743,7 @@ function mactrack_view_macs() {
 	}
 
 	$i = 0;
+	$delim = read_config_option("mt_mac_delim");
 	if (sizeof($port_results) > 0) {
 		foreach ($port_results as $port_result) {
 			if ($_REQUEST["scan_date"] == 1) {
@@ -745,30 +752,28 @@ function mactrack_view_macs() {
 				$scan_date = $port_result["max_scan_date"];
 			}
 
-			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
-			?>
-			<td width=60></td>
-			<td><?php print $port_result["device_name"];?></td>
-			<td><?php print $port_result["hostname"];?></td>
-			<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["ip_address"]) : $port_result["ip_address"]);?></td>
-			<?php
-			if (strlen(read_config_option("mt_reverse_dns")) > 0) {?>
-			<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["dns_hostname"]) : $port_result["dns_hostname"]);?></td>
-			<?php }?>
-			<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["mac_address"]) : $port_result["mac_address"]);?></td>
-			<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["vendor_name"]) : $port_result["vendor_name"]);?></td>
-			<td><?php print $port_result["port_number"];?></td>
-			<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["port_name"]) : $port_result["port_name"]);?></td>
-			<td><?php print $port_result["vlan_id"];?></td>
-			<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["vlan_name"]) : $port_result["vlan_name"]);?></td>
-			<td><?php print $scan_date;?></td>
-			<?php if (mactrack_check_user_realm(22)) { ?>
-			<td style="<?php print get_checkbox_style();?>" width="1%" align="right">
-				<input type='checkbox' style='margin: 0px;' name='chk_<?php print $port_result["mac_address"];?>' title="<?php print $port_result["mac_address"];?>">
-			</td>
-			<?php } ?>
-			</tr>
-			<?php
+			$key =  str_replace($delim, "_", $port_result["mac_address"]) . "-" . $port_result["device_id"] .
+					$port_result["port_number"] . "-" . strtotime($scan_date);
+
+			form_alternate_row_color($colors["alternate"], $colors["light"], $i, 'line' . $key); $i++;
+			form_selectable_cell("", $key);
+			form_selectable_cell($port_result["device_name"], $key);
+			form_selectable_cell($port_result["hostname"], $key);
+			form_selectable_cell((strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["ip_address"]) : $port_result["ip_address"]), $key);
+			if (strlen(read_config_option("mt_reverse_dns")) > 0) {
+			form_selectable_cell((strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["dns_hostname"]) : $port_result["dns_hostname"]), $key);
+			}
+			form_selectable_cell((strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["mac_address"]) : $port_result["mac_address"]), $key);
+			form_selectable_cell((strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["vendor_name"]) : $port_result["vendor_name"]), $key);
+			form_selectable_cell($port_result["port_number"], $key);
+			form_selectable_cell((strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["port_name"]) : $port_result["port_name"]), $key);
+			form_selectable_cell($port_result["vlan_id"], $key);
+			form_selectable_cell((strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["vlan_name"]) : $port_result["vlan_name"]), $key);
+			form_selectable_cell($scan_date, $key);
+			if (mactrack_check_user_realm(2122)) {
+			form_checkbox_cell($port_result["mac_address"], $key);
+			}
+			form_end_row();
 		}
 	}else{
 		print "<tr><td colspan='10'><em>No MacTrack Port Results</em></td></tr>";

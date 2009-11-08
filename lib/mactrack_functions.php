@@ -2138,44 +2138,35 @@ function mactrack_save_button($cancel_action = "", $action = "save", $force_type
 	<?php
 }
 
-function mactrack_format_device_row($device) {
+function mactrack_format_device_row($device, $actions=false) {
 	global $config, $colors, $mactrack_device_types;
 
 	/* viewer level */
-	$row = "<a href='" . htmlspecialchars($config['url_path'] . "plugins/mactrack/mactrack_interfaces.php?device_id=" . $device['device_id'] . "&issues=0&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interfaces.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Interfaces' align='absmiddle' border='0'></a>";
-	if ($device["host_id"] != 0) {
-		$row .= "<a href='" . htmlspecialchars($config['url_path'] . "graph_view.php?action=preview&host_id=" . $device['host_id'] . "&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Graphs' align='absmiddle' border='0'></a>";
-	}else{
-		$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='Device Not in Cacti' align='absmiddle' border='0'/>";
-	}
+	if ($actions) {
+		$row = "<a href='" . htmlspecialchars($config['url_path'] . "plugins/mactrack/mactrack_interfaces.php?device_id=" . $device['device_id'] . "&issues=0&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interfaces.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Interfaces' align='absmiddle' border='0'></a>";
+		if ($device["host_id"] != 0) {
+			$row .= "<a href='" . htmlspecialchars($config['url_path'] . "graph_view.php?action=preview&host_id=" . $device['host_id'] . "&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Graphs' align='absmiddle' border='0'></a>";
+		}else{
+			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='Device Not in Cacti' align='absmiddle' border='0'/>";
+		}
 
-	/* admin level */
-	if (mactrack_authorized(2121)) {
-		if ($device["disabled"] == '') {
-			$row .= "<img id='r_" . $device["device_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device(" . $device["device_id"] . ")' title='Rescan Device' align='absmiddle' border='0'>";
-
-			if ($device["host_id"] == 0) {
-				$row .= "<img id='c_" . $device["device_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/create_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='create_cacti(" . $device["device_id"] . ")' title='Create Cacti Device and Graphs' align='absmiddle' border='0'>";
+		/* admin level */
+		if (mactrack_authorized(2121)) {
+			if ($device["disabled"] == '') {
+				$row .= "<img id='r_" . $device["device_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device(" . $device["device_id"] . ")' title='Rescan Device' align='absmiddle' border='0'>";
 			}else{
 				$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
 			}
-		}else{
-			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
-			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
-		}
 
-		$row .= "<a href='" . htmlspecialchars($config['url_path'] . "plugins/mactrack/mactrack_devices.php?action=edit&device_id=" . $device['device_id']) . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_details.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='Edit MacTrack Device' align='absmiddle' border='0'></a>";
-
-		if ($device["disabled"] == '') {
-			$row .= "<img id='e_" . $device["device_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/disable_collection.png' onClick='disable_device(" . $device["device_id"] . ")' alt='' onMouseOver='style.cursor=\"pointer\"' title='Disable Scanning' align='absmiddle' border='0'>";
-			$row .= "<img id='p_" . $device["device_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/purge_device.png' onClick='purge_device(" . $device["device_id"] . ")' alt='' onMouseOver='style.cursor=\"pointer\"' title='Delete Device from Database' align='absmiddle' border='0'>";
-		}else{
-			$row .= "<img id='e_" . $device["device_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/enable_collection.png' onClick='enable_device(" . $device["device_id"] . ")' alt='' onMouseOver='style.cursor=\"pointer\"' title='Disable Scanning' align='absmiddle' border='0'>";
-			$row .= "<img id='p_" . $device["device_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/purge_device.png' onClick='purge_device(" . $device["device_id"] . ")' alt='' onMouseOver='style.cursor=\"pointer\"' title='Delete Device from Database' align='absmiddle' border='0'>";
+			if ($device["host_id"] != 0) {
+				$row .= "<a href='" . htmlspecialchars($config['url_path'] . "plugins/mactrack/mactrack_devices.php?action=edit&device_id=" . $device['device_id']) . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_details.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='Edit Cacti Device' align='absmiddle' border='0'></a>";
+			}else{
+				$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
+			}
 		}
+		print "<td style='width:40px;'>" . $row . "</td>";//, $device["device_id"]);
 	}
 
-	print "<td style='width:120px;'>" . $row . "</td>";//, $device["device_id"]);
 	form_selectable_cell("<a class='linkEditMain' href='mactrack_devices.php?action=edit&device_id=" . $device['device_id'] . "'>" . (strlen($_REQUEST['filter']) ? eregi_replace("(" . preg_quote($_REQUEST['filter']) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device['device_name']) : $device['device_name']) . "</a>", $device["device_id"]);
 	form_selectable_cell($device["site_name"], $device["device_id"]);
 	form_selectable_cell(get_colored_device_status(($device["disabled"] == "on" ? true : false), $device["snmp_status"]), $device["device_id"]);
