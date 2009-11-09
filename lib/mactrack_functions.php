@@ -2057,6 +2057,116 @@ function get_netscreen_arp_table($site, &$device) {
 	mactrack_debug("HOST: " . $device["hostname"] . ", IP address information collection complete");
 }
 
+function mactrack_format_interface_row($stat) {
+	global $colors, $config;
+
+	/* we will make a row string */
+	$row = "";
+
+	/* calculate a human readable uptime */
+	if ($stat["ifLastChange"] == 0) {
+		$upTime = "Since Restart";
+	}else{
+		if ($stat["ifLastChange"] > $stat["sysUptime"]) {
+			$upTime = "Since Restart";
+		}else{
+			$time = $stat["sysUptime"] - $stat["ifLastChange"];
+			$days      = intval($time / (60*60*24*100));
+			$remainder = $time % (60*60*24*100);
+			$hours     = intval($remainder / (60*60*100));
+			$remainder = $remainder % (60*60*100);
+			$minutes   = intval($remainder / (60*100));
+			$upTime    = $days . "d:" . $hours . "h:" . $minutes . "m";
+		}
+	}
+
+	if (mactrack_authorized(2021)) {
+		if ($stat["disabled"] == '') {
+			$rescan = "<img id='r_" . $stat["device_id"] . "_" . $stat["interface_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(\"" . $stat["device_id"] . "_" . $stat["interface_id"] . "\")' title='Rescan Device' align='absmiddle' border='0'>";
+
+		}else{
+			$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
+		}
+	}else{
+		$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
+	}
+
+	$row .= "<td nowrap style='width:1%;white-space:nowrap;'>";
+	$row .= $rescan;
+	$row .= "</td>";
+
+	$row .= "<td><b>" . $stat["device_name"] . "</b></td>";
+	$row .= "<td>" . strtoupper($stat["device_type"])           . "</td>";
+	$row .= "<td><b>" . $stat["ifName"]                         . "</b></td>";
+	$row .= "<td>" . $stat["ifDescr"]                           . "</td>";
+	$row .= "<td>" . $stat["ifAlias"]                           . "</td>";
+	$row .= "<td>" . round($stat["inBound"],1) . " %"           . "</td>";
+	$row .= "<td>" . round($stat["outBound"],1) . " %"          . "</td>";
+	$row .= "<td>" . mactrack_display_Octets($stat["int_ifHCInOctets"])  . "</td>";
+	$row .= "<td>" . mactrack_display_Octets($stat["int_ifHCOutOctets"]) . "</td>";
+	$row .= "<td>" . $stat["int_ifInErrors"]                    . "</td>";
+	$row .= "<td>" . $stat["int_ifInDiscards"]                  . "</td>";
+	$row .= "<td>" . $stat["int_ifInUnknownProtos"]             . "</td>";
+	$row .= "<td>" . $stat["int_ifOutErrors"]                   . "</td>";
+	$row .= "<td>" . $stat["int_ifOutDiscards"]                 . "</td>";
+	$row .= "<td>" . ($stat["ifOperStatus"] == 1 ? "Up":"Down") . "</td>";
+	$row .= "<td style='white-space:nowrap;'>" . $upTime                                    . "</td>";
+	$row .= "<td style='white-space:nowrap;'>" . mactrack_date($stat["last_rundate"])        . "</td>";
+	return $row;
+}
+
+function mactrack_display_Octets($octets) {
+	$suffix = "";
+	while ($octets > 1024) {
+		$octets = $octets / 1024;
+		switch($suffix) {
+		case "":
+			$suffix = "k";
+			break;
+		case "k":
+			$suffix = "m";
+			break;
+		case "m":
+			$suffix = "g";
+			break;
+		case "g":
+			$suffix = "p";
+			break 2;
+		default:
+			$suffix = "";
+			break 2;
+		}
+	}
+
+	$octets = round($octets,4);
+	$octets = substr($octets,0,5);
+
+	return $octets . " " . $suffix;
+}
+
+function mactrack_date($date) {
+	$year = date("Y");
+	return (substr_count($date, $year) ? substr($date,5) : $date);
+}
+
+function mactrack_int_row_color($stat) {
+	global $colors;
+
+	$bgc = 0;
+	if ($stat["int_errors_present"] == "1") {
+		$bgc = db_fetch_cell("SELECT hex FROM colors WHERE id='" . read_config_option("mt_int_errors_bgc") . "'");
+	} elseif ($stat["int_discards_present"] == "1") {
+		$bgc = db_fetch_cell("SELECT hex FROM colors WHERE id='" . read_config_option("mt_int_discards_bgc") . "'");
+	} elseif ($stat["ifOperStatus"] == "1" && $stat["ifAlias"] == "") {
+		$bgc = db_fetch_cell("SELECT hex FROM colors WHERE id='" . read_config_option("mt_int_up_wo_alias_bgc") . "'");
+	} elseif ($stat["ifOperStatus"] == "0") {
+		$bgc = db_fetch_cell("SELECT hex FROM colors WHERE id='" . read_config_option("mt_int_down_bgc") . "'");
+	} else {
+		$bgc = db_fetch_cell("SELECT hex FROM colors WHERE id='" . read_config_option("mt_int_up_bgc") . "'");
+	}
+
+	return $bgc;
+}
 
 /* mactrack_draw_actions_dropdown - draws a table the allows the user to select an action to perform
      on one or more data elements
@@ -2138,28 +2248,132 @@ function mactrack_save_button($cancel_action = "", $action = "save", $force_type
 	<?php
 }
 
+/* mactrack_create_sql_filter - this routine will take a filter string and process it into a
+     sql where clause that will be returned to the caller with a formated SQL where clause
+     that can then be integrated into the overall where clause.
+     The filter takes the following forms.  The default is to find occurance that match "all"
+     Any string prefixed by a "-" will mean "exclude" this search string.  Boolean expressions
+     are currently not supported.
+   @arg $filter - (string) The filter provided by the user
+   @arg $fields - (array) A list of field names to include in the where clause. They can also
+     contain the table name in cases where joins are important.
+   @returns - (string) The formatted SQL syntax */
+function mactrack_create_sql_filter($filter, $fields) {
+	$query = "";
+
+	/* field names are required */
+	if (!sizeof($fields)) return;
+
+	/* the filter must be non-blank */
+	if (!strlen($filter)) return;
+
+	$elements = explode(" ", $filter);
+
+	foreach($elements as $element) {
+		if (substr($element, 0, 1) == "-") {
+			$filter   = substr($element, 1);
+			$type     = "NOT";
+			$operator = "AND";
+		} else {
+			$filter   = $element;
+			$type     = "";
+			$operator = "OR";
+		}
+
+		$field_no = 1;
+		foreach ($fields as $field) {
+			if (($field_no == 1) && (strlen($query) > 0)) {
+				$query .= ") AND (";
+			}elseif ($field_no == 1) {
+				$query .= "(";
+			}
+
+			$query .= ($field_no == 1 ? "":" $operator ") . "($field $type LIKE '%" . $filter . "%')";
+
+			$field_no++;
+		}
+	}
+
+	return $query . ")";
+}
+
+function mactrack_display_hours($value) {
+	if ($value == "") {
+		return "N/A";
+	}else if ($value < 60) {
+		return round($value,0) . " Seconds";
+	}else{
+		$value = $value / 60;
+		if ($value < 60) {
+			return round($value,0) . " Minutes";
+		}else{
+			$value = $value / 60;
+			if ($value < 24) {
+				return round($value,0) . " Hours";
+			}else{
+				$value = $value / 24;
+				if ($value < 7) {
+					return round($value,0) . " Days";
+				}else{
+					$value = $value / 7;
+					return round($value,0) . " Weeks";
+				}
+			}
+		}
+	}
+}
+
+function mactrack_display_stats() {
+	global $colors;
+
+	/* check if scanning is running */
+	$processes = db_fetch_cell("SELECT COUNT(*) FROM mac_track_processes");
+	$mactrack_runtime = read_config_option("mactrack_runtime", TRUE);
+	if ($mactrack_runtime == "") $mactrack_runtime = "Not Recorded";
+
+	if ($processes > 0) {
+		$message = "<strong>Status:</strong> Running, <strong>Processes:</strong> " . $processes . ", <strong>Progress:</strong> " . read_config_option("mactrack_process_status", TRUE) . ", <strong>LastRuntime:</strong> " . $mactrack_runtime;
+	}else{
+		$message = "<strong>Status:</strong> Idle, <strong>LastRuntime:</strong> " . $mactrack_runtime . ", <strong>Next Run Time:</strong> " . substr(read_config_option("mactrack_next_runtime"),0,16);
+	}
+	html_start_box("", "100%", $colors["header"], "3", "center", "");
+
+	print "<tr>";
+	print "<td><strong>Scanning Rate:</strong> Every " . mactrack_display_hours(read_config_option("mactrack_frequency")) . ", " . $message . "</td>";
+	print "</tr>";
+
+	html_end_box();
+}
+
+function mactrack_legend_row($setting, $text) {
+	if (read_config_option($setting) > 0) {
+		print "<td width='10%' style='text-align:center; background-color:#" . db_fetch_cell("SELECT hex FROM colors WHERE id='" . read_config_option($setting) . "'") . ";'><strong>$text</strong></td>";
+	}
+}
+
+function mactrack_redirect() {
+	/* set the default tab */
+	load_current_session_value("report", "sess_mactrack_view_report", "view_devices");
+	$current_tab = $_REQUEST["report"];
+
+	$current_page = str_replace("mactrack_", "", str_replace("view_", "", str_replace(".php", "", basename($_SERVER["PHP_SELF"]))));
+	$current_dir  = dirname($_SERVER["PHP_SELF"]);
+
+	if ($current_page != $current_tab) {
+		header("Location: " . $current_dir . "/mactrack_view_" . $current_tab . ".php");
+	}
+}
+
 function mactrack_format_device_row($device, $actions=false) {
 	global $config, $colors, $mactrack_device_types;
 
 	/* viewer level */
 	if ($actions) {
 		$row = "<a href='" . htmlspecialchars($config['url_path'] . "plugins/mactrack/mactrack_interfaces.php?device_id=" . $device['device_id'] . "&issues=0&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interfaces.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Interfaces' align='absmiddle' border='0'></a>";
-		if ($device["host_id"] != 0) {
-			$row .= "<a href='" . htmlspecialchars($config['url_path'] . "graph_view.php?action=preview&host_id=" . $device['host_id'] . "&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Graphs' align='absmiddle' border='0'></a>";
-		}else{
-			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='Device Not in Cacti' align='absmiddle' border='0'/>";
-		}
-
 		/* admin level */
 		if (mactrack_authorized(2121)) {
 			if ($device["disabled"] == '') {
 				$row .= "<img id='r_" . $device["device_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device(" . $device["device_id"] . ")' title='Rescan Device' align='absmiddle' border='0'>";
-			}else{
-				$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
-			}
-
-			if ($device["host_id"] != 0) {
-				$row .= "<a href='" . htmlspecialchars($config['url_path'] . "plugins/mactrack/mactrack_devices.php?action=edit&device_id=" . $device['device_id']) . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_details.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='Edit Cacti Device' align='absmiddle' border='0'></a>";
 			}else{
 				$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
 			}

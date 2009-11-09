@@ -899,6 +899,64 @@ function mactrack_config_settings () {
 			"default" => "3",
 			"max_length" => "10",
 			"size" => "4"
+			),
+		"mt_interface_exception" => array(
+			"friendly_name" => "MacTrack Interface Exception Background Colors",
+			"method" => "spacer",
+			),
+		"mt_int_up_bgc" => array(
+			"friendly_name" => "Interface Up",
+			"description" => "The background color to use if interface is up.  Select 'None' to hide legend.",
+			"method" => "drop_color",
+			"default" => 0,
+			),
+		"mt_int_up_wo_alias_bgc" => array(
+			"friendly_name" => "Up without ifAlias Background Color",
+			"description" => "The background color to use if interface is up without a ifAlias.  Select 'None' to hide legend.",
+			"method" => "drop_color",
+			"default" => 0,
+			),
+		"mt_int_errors_bgc" => array(
+			"friendly_name" => "Interface with Errors Background Color",
+			"description" => "The background color to use if interface has shown errors since the last scan.  Select 'None' to hide legend.",
+			"method" => "drop_color",
+			"default" => 0,
+			),
+		"mt_int_discards_bgc" => array(
+			"friendly_name" => "Interface with Discards Background Color",
+			"description" => "The background color to use if interface has show discards since the last scan.  Select 'None' to hide legend.",
+			"method" => "drop_color",
+			"default" => 0,
+			),
+		"mt_int_unmapped_bgc" => array(
+			"friendly_name" => "Interface That is not on Tree",
+			"description" => "The background color to use if interface has not been mapped onto a tree.  Select 'None' to hide legend.",
+			"method" => "drop_color",
+			"default" => 0,
+			),
+		"mt_int_no_graph_bgc" => array(
+			"friendly_name" => "Interface Without A Graph",
+			"description" => "The background color to use if interface has no graphs.  Select 'None' to hide legend.",
+			"method" => "drop_color",
+			"default" => 0,
+			),
+		"mt_int_no_device_bgc" => array(
+			"friendly_name" => "Interface That has no Cacti Device",
+			"description" => "The background color to use if device owning this interface is not in Cacti.  Select 'None' to hide legend.",
+			"method" => "drop_color",
+			"default" => 0,
+			),
+		"mt_int_changed_bgc" => array(
+			"friendly_name" => "Interface That Has Changed in Less than 24 Hours",
+			"description" => "The background color to use if device owning this interface is not in Cacti.  Select 'None' to hide legend.",
+			"method" => "drop_color",
+			"default" => 0,
+			),
+		"mt_int_down_bgc" => array(
+			"friendly_name" => "Interface That is Down",
+			"description" => "The background color to use if the Interface was down during the last scan.  Select 'None' to hide legend.",
+			"method" => "drop_color",
+			"default" => 0,
 			)
 		);
 

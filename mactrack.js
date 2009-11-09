@@ -55,6 +55,17 @@ function applyMacFilterChange(objForm) {
 	document.location = strURL;
 }
 
+function applyInterfaceFilterChange(objForm) {
+	strURL = '?site=' + objForm.site.value
+	strURL = strURL + '&rows=' + objForm.rows.value
+	strURL = strURL + '&device=' + objForm.device.value
+	strURL = strURL + '&issues=' + objForm.issues.value
+	strURL = strURL + '&type=' + objForm.type.value
+	strURL = strURL + '&period=' + objForm.period.value
+	strURL = strURL + '&filter=' + objForm.filter.value
+	document.location = strURL
+}
+
 function getfromserver(baseurl) {
 	xmlHttp=GetXmlHttpObject()
 	if (xmlHttp==null) {

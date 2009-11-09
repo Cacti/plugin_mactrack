@@ -66,6 +66,7 @@
     feature: Implement MacWatch in code.  E-Mailing now.
     feature: Adding significant content to the mac_track_interfaces table
     feature: Implement MacAuth functionality and periodic reports
+    feature: Implement Interfaces tab to MacTrack
 
     --- 1.1 ---
     First Official Release
