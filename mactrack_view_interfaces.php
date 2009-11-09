@@ -109,8 +109,6 @@ function mactrack_get_records(&$sql_where, $apply_limits = TRUE, $row_limit = "3
 		$sql_where
 		ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
 
-echo $sql_query;
-
 	if ($apply_limits) {
 		$sql_query .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
 	}

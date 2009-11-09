@@ -34,6 +34,7 @@ define("MAX_DISPLAY_PAGES", 21);
 if (isset($_REQUEST["export_x"])) {
 	mactrack_view_export_devices();
 }else{
+	mactrack_redirect();
 	$title = "Device Tracking - Device Report View";
 	include_once("./include/top_graph_header.php");
 	mactrack_view_devices();
@@ -49,11 +50,6 @@ function mactrack_view_export_devices() {
 	input_validate_input_number(get_request_var_request("status"));
 	input_validate_input_number(get_request_var_request("page"));
 	/* ==================================================== */
-
-	/* clean up report string */
-	if (isset($_REQUEST["report"])) {
-		$_REQUEST["report"] = sanitize_search_string(get_request_var("report"));
-	}
 
 	/* clean up search string */
 	if (isset($_REQUEST["filter"])) {
@@ -235,11 +231,6 @@ function mactrack_view_devices() {
 	input_validate_input_number(get_request_var_request("rows"));
 	/* ==================================================== */
 
-	/* clean up report string */
-	if (isset($_REQUEST["report"])) {
-		$_REQUEST["report"] = sanitize_search_string(get_request_var("report"));
-	}
-
 	/* clean up search string */
 	if (isset($_REQUEST["filter"])) {
 		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
@@ -292,7 +283,6 @@ function mactrack_view_devices() {
 	}
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
-	load_current_session_value("report",         "sess_mactrack_view_report", "sites");
 	load_current_session_value("page",           "sess_mactrack_view_device_current_page", "1");
 	load_current_session_value("filter",         "sess_mactrack_view_device_filter", "");
 	load_current_session_value("site_id",        "sess_mactrack_view_device_site_id", "-1");

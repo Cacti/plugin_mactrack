@@ -31,11 +31,10 @@ include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 define("MAX_DISPLAY_PAGES", 21);
 
-load_current_session_value("report", "sess_mactrack_view_report", "ips");
-
 if (isset($_REQUEST["export_x"])) {
 	mactrack_view_export_ip_ranges();
 }else{
+	mactrack_redirect();
 	$title = "Device Tracking - Site IP Range Report View";
 	include_once("./include/top_graph_header.php");
 	mactrack_view_ip_ranges();
@@ -47,11 +46,6 @@ function mactrack_view_export_ip_ranges() {
 	input_validate_input_number(get_request_var_request("site_id"));
 	input_validate_input_number(get_request_var_request("page"));
 	/* ==================================================== */
-
-	/* clean up report string */
-	if (isset($_REQUEST["report"])) {
-		$_REQUEST["report"] = sanitize_search_string(get_request_var("report"));
-	}
 
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
@@ -130,11 +124,6 @@ function mactrack_view_ip_ranges() {
 	input_validate_input_number(get_request_var_request("page"));
 	/* ==================================================== */
 
-	/* clean up report string */
-	if (isset($_REQUEST["report"])) {
-		$_REQUEST["report"] = sanitize_search_string(get_request_var("report"));
-	}
-
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
 		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
@@ -167,7 +156,6 @@ function mactrack_view_ip_ranges() {
 	}
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
-	load_current_session_value("report", "sess_mactrack_view_report", "ips");
 	load_current_session_value("page", "sess_mactrack_view_ips_current_page", "1");
 	load_current_session_value("site_id", "sess_mactrack_view_ips_site_id", "-1");
 	load_current_session_value("rows", "sess_mactrack_view_ips_rows", "-1");

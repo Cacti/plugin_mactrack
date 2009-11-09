@@ -2353,7 +2353,7 @@ function mactrack_legend_row($setting, $text) {
 
 function mactrack_redirect() {
 	/* set the default tab */
-	load_current_session_value("report", "sess_mactrack_view_report", "view_devices");
+	load_current_session_value("report", "sess_mactrack_view_report", "devices");
 	$current_tab = $_REQUEST["report"];
 
 	$current_page = str_replace("mactrack_", "", str_replace("view_", "", str_replace(".php", "", basename($_SERVER["PHP_SELF"]))));

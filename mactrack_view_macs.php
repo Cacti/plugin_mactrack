@@ -51,6 +51,7 @@ default:
 	if (isset($_REQUEST["export_x"])) {
 		mactrack_view_export_macs();
 	}else{
+		mactrack_redirect();
 		$title = "Device Tracking - MAC to IP Report View";
 		include_once("./include/top_graph_header.php");
 		mactrack_view_macs();
@@ -197,11 +198,6 @@ function mactrack_view_export_macs() {
 	input_validate_input_number(get_request_var_request("rows"));
 	input_validate_input_number(get_request_var_request("page"));
 	/* ==================================================== */
-
-	/* clean up report string */
-	if (isset($_REQUEST["report"])) {
-		$_REQUEST["report"] = sanitize_search_string(get_request_var("report"));
-	}
 
 	/* clean up filter string */
 	if (isset($_REQUEST["ip_filter"])) {
@@ -480,11 +476,6 @@ function mactrack_view_macs() {
 	input_validate_input_number(get_request_var_request("page"));
 	/* ==================================================== */
 
-	/* clean up report string */
-	if (isset($_REQUEST["report"])) {
-		$_REQUEST["report"] = sanitize_search_string(get_request_var("report"));
-	}
-
 	/* clean up filter string */
 	if (isset($_REQUEST["ip_filter"])) {
 		$_REQUEST["ip_filter"] = sanitize_search_string(get_request_var("ip_filter"));
@@ -586,7 +577,6 @@ function mactrack_view_macs() {
 	}
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
-	load_current_session_value("report",             "sess_mactrack_view_report", "macs");
 	load_current_session_value("page",               "sess_mactrack_view_macs_current_page", "1");
 	load_current_session_value("scan_date",          "sess_mactrack_view_macs_rowstoshow", "2");
 	load_current_session_value("mac_filter",         "sess_mactrack_view_macs_mac_filter", "");
