@@ -433,7 +433,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	$ifAdminStatus = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.7", $device);
 	if (sizeof($ifAdminStatus)) {
 	foreach($ifAdminStatus as $key => $value) {
-		if (substr_count($value, "up")) {
+		if ((substr_count(strtolower($value), "up")) || ($value == "1")) {
 			$ifAdminStatus[$key] = 1;
 		}else{
 			$ifAdminStatus[$key] = 0;
@@ -445,7 +445,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	$ifOperStatus = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.8", $device);
 	if (sizeof($ifOperStatus)) {
 	foreach($ifOperStatus as $key=>$value) {
-		if (substr_count(strtolower($value), "up")) {
+		if ((substr_count(strtolower($value), "up")) || ($value == "1")) {
 			$ifOperStatus[$key] = 1;
 		}else{
 			$ifOperStatus[$key] = 0;
