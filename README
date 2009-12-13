@@ -68,6 +68,7 @@
     feature: Implement MacAuth functionality and periodic reports
     feature: Implement Interfaces tab to MacTrack
     feature: Aggregated ports patch from Gthe!
+    feature: Linux and DLink Scanners from Gthe!
 
     --- 1.1 ---
     First Official Release
