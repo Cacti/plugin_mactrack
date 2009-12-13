@@ -472,7 +472,9 @@ function mactrack_filter_table() {
 						<?php
 						if ($_REQUEST["site"] != -1) {
 							$sql_where .= " WHERE (mac_track_devices.site_id='" . $_REQUEST["site"] . "')";
-						}else{							$sql_where  = "";						}
+						}else{
+							$sql_where  = "";
+						}
 						$types = db_fetch_assoc("SELECT DISTINCT mac_track_device_types.device_type_id, mac_track_device_types.description AS device_type
 							FROM mac_track_device_types
 							INNER JOIN mac_track_devices

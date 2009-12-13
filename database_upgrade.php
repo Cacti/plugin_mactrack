@@ -220,6 +220,43 @@ execute_sql("Speed up queries", "ALTER TABLE `mac_track_ports` ADD INDEX `scan_d
 execute_sql("Add length to Device Types Match Fields", "ALTER TABLE `mac_track_device_types` MODIFY COLUMN `sysDescr_match` VARCHAR(100) NOT NULL default '', MODIFY COLUMN `sysObjectID_match` VARCHAR(100) NOT NULL default ''");
 execute_sql("Correct a Scanning Function Bug", "DELETE FROM mac_track_scanning_functions WHERE scanning_function='Not Applicable - Hub/Switch'");
 
+/* start Aggregated Changes */
+create_table("mac_track_aggregated_ports", "CREATE TABLE mac_track_aggregated_ports (
+	`row_id` int(10) unsigned NOT NULL auto_increment,
+	`site_id` int(10) unsigned NOT NULL default '0',
+	`device_id` int(10) unsigned NOT NULL default '0',
+	`hostname` varchar(40) NOT NULL default '',
+	`device_name` varchar(100) NOT NULL default '',
+	`vlan_id` varchar(5) NOT NULL default 'N/A',
+	`vlan_name` varchar(50) NOT NULL default '',
+	`mac_address` varchar(20) NOT NULL default '',
+	`vendor_mac` varchar(8) default NULL,
+	`ip_address` varchar(20) NOT NULL default '',
+	`dns_hostname` varchar(200) default '',
+	`port_number` varchar(10) NOT NULL default '',
+	`port_name` varchar(50) NOT NULL default '',
+	`date_last` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+	`first_scan_date` datetime NOT NULL default '0000-00-00 00:00:00',
+	`count_rec` int(10) unsigned NOT NULL default '0',
+	`active_last` tinyint(1) unsigned NOT NULL default '0',
+	`authorized` tinyint(3) unsigned NOT NULL default '0',
+	PRIMARY KEY  (`row_id`),
+	UNIQUE KEY  (`port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized`) USING BTREE,
+	KEY `site_id` (`site_id`),
+	KEY `description` (`device_name`),
+	KEY `mac` (`mac_address`),
+	KEY `hostname` (`hostname`),
+	KEY `vlan_name` (`vlan_name`),
+	KEY `vlan_id` (`vlan_id`),
+	KEY `device_id` (`device_id`),
+	KEY `ip_address` (`ip_address`),
+	KEY `port_name` (`port_name`),
+	KEY `dns_hostname` (`dns_hostname`),
+	KEY `vendor_mac` (`vendor_mac`),
+	KEY `authorized` (`authorized`),
+	KEY `site_id_device_id` (`site_id`,`device_id`))
+	ENGINE=MyISAM COMMENT='Database for aggregated date for Tracking Device MAC''s';");
+
 echo "\nDatabase Upgrade Complete\n";
 
 function execute_sql($message, $syntax) {

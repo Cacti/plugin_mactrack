@@ -4,7 +4,7 @@
     Contact ........ larryjadams@comcast.net
     Home Site ...... http://www.cacti.net
     Program ........ MacTrack
-    Version ........ 2.0
+    Version ........ 2.1.1
     Purpose ........ A Nice Plugin that Tracks Your Users
 
 *******************************************************************************/
@@ -67,6 +67,7 @@
     feature: Adding significant content to the mac_track_interfaces table
     feature: Implement MacAuth functionality and periodic reports
     feature: Implement Interfaces tab to MacTrack
+    feature: Aggregated ports patch from Gthe!
 
     --- 1.1 ---
     First Official Release

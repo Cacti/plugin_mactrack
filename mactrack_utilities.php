@@ -54,6 +54,14 @@ switch ($_REQUEST["action"]) {
 
 		include_once("./include/bottom_footer.php");
 		break;
+	case 'mactrack_utilities_purge_aggregated_data':
+		mactrack_utilities_purge_aggregated_data();
+
+		break;
+	case 'mactrack_utilities_recreate_aggregated_data':
+		mactrack_utilities_recreate_aggregated_data();
+
+		break;
 	case 'mactrack_refresh_oui_database':
 		include_once("./include/top_header.php");
 		include_once("./plugins/mactrack/lib/mactrack_functions.php");
@@ -377,6 +385,71 @@ function mactrack_utilities_ports_clear() {
 	}
 }
 
+function mactrack_utilities_purge_aggregated_data() {
+	global $config, $colors;
+
+	if ((read_config_option("remove_verification") == "on") && (!isset($_GET["confirm"]))) {
+		include("./include/top_header.php");
+		form_confirm("Are You Sure?", "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?", "mactrack_utilities.php", "mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data");
+		include("./include/bottom_footer.php");
+		exit;
+	}
+
+	if ((read_config_option("remove_verification") == "") || (isset($_GET["confirm"]))) {
+		$rows = db_fetch_cell("SELECT COUNT(*) FROM mac_track_aggregated_ports");
+		db_execute("TRUNCATE TABLE mac_track_aggregated_ports");
+
+		include("./include/top_header.php");
+		mactrack_utilities();
+		html_start_box("<strong>Device Tracking Database Results</strong>", "100%", $colors["header"], "3", "center", "");
+		?>
+		<td>
+			The following number of records have been removed from the aggergated table: <?php print $rows;?>
+		</td>
+		<?php
+		html_end_box();
+	}
+}
+
+function mactrack_utilities_recreate_aggregated_data() {
+	global $config, $colors;
+
+	if ((read_config_option("remove_verification") == "on") && (!isset($_GET["confirm"]))) {
+		include("./include/top_header.php");
+		form_confirm("Are You Sure?", "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?", "mactrack_utilities.php", "mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data");
+		include("./include/bottom_footer.php");
+		exit;
+	}
+
+
+	if ((read_config_option("remove_verification") == "") || (isset($_GET["confirm"]))) {
+		$old_rows = db_fetch_cell("SELECT COUNT(*) FROM mac_track_aggregated_ports");
+		db_execute("TRUNCATE TABLE mac_track_aggregated_ports");
+
+		db_execute("INSERT INTO mac_track_aggregated_ports
+			(site_id, device_id, hostname, device_name,
+			vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
+			port_number, port_name, date_last, first_scan_date, count_rec, authorized)
+			SELECT site_id, device_id, hostname, device_name,
+			vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
+			port_number, port_name, max(scan_date), min(scan_date), count(*), authorized
+			FROM mac_track_ports
+			GROUP BY site_id,device_id, mac_address, port_number, ip_address, vlan_id, authorized");
+
+		$new_rows = db_fetch_cell("SELECT COUNT(*) FROM mac_track_aggregated_ports");
+
+		include("./include/top_header.php");
+		mactrack_utilities();
+		html_start_box("<strong>Device Tracking Database Results</strong>", "100%", $colors["header"], "3", "center", "");
+		?>
+		<td>
+			The following number of records have been removed from the aggergated table: <?php print $old_rows;?>. And <?php print $new_rows;?> number of record will be added.
+		</td>
+		<?php
+		html_end_box();
+	}
+}
+
 function mactrack_utilities_db_maint() {
 	global $colors;
 
@@ -488,6 +561,25 @@ function mactrack_utilities() {
 		</td>
 	</tr>
 
+	<?php html_header(array("Aggregated Table Administration"), 2);?>
+
+	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
+		<td class="textArea" width="150" valign="top">
+			<p><a href='mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data'>Remove All Aggregated Results</a></p>
+		</td>
+		<td class="textArea" valign="top">
+			<p>Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run. </p>
+		</td>
+	</tr>
+
+	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
+		<td class="textArea" width="150" valign="top">
+			<p><a href='mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data'>Perform Aggregate Table Rebuild</a></p>
+		</td>
+		<td class="textArea" valign="top">
+			<p>Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scaned data</strong>  now. </p>
+		</td>
+	</tr>
 	<?php
 
 	html_end_box();

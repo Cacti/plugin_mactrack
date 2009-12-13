@@ -385,7 +385,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 		$processes_running = db_fetch_cell("SELECT count(*) FROM mac_track_processes WHERE device_id > 0");
 		while (($processes_running > 0) && (!$exit_mactrack)) {
 			$processes_running = db_fetch_cell("SELECT count(*) FROM mac_track_processes WHERE device_id > 0");
-
+			$devices_running = db_fetch_cell("SELECT group_concat(CAST(`device_id` as CHAR) SEPARATOR ', ') as t FROM mac_track_processes;");
 			/* wait the correct number of seconds for proccesses prior to
 			   attempting to update records */
 			sleep(2);
@@ -413,7 +413,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 				break;
 			}
 
-			mactrack_debug("Waiting on " . $processes_running . " to complete prior to exiting.");
+			mactrack_debug("Waiting on " . $processes_running . " with id = [" . $devices_running ."] to complete prior to exiting.");
 		}
 
 		/* if arpwatch is enabled, let's let it pick up the stragglers, based upon IP address first */
@@ -649,6 +649,18 @@ function collect_mactrack_data($start, $site_id = 0) {
 				mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_time);
 			}
 		}
+
+		/* process aggregated data */
+		db_execute("UPDATE mac_track_aggregated_ports SET active_last=0;");
+		db_execute("INSERT INTO mac_track_aggregated_ports
+			(site_id, device_id, hostname, device_name,
+			vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
+			port_number, port_name, date_last, first_scan_date, count_rec, active_last, authorized)
+			SELECT site_id, device_id, hostname, device_name,
+			vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
+			port_number, port_name, scan_date, scan_date, 1, 1, authorized
+			FROM mac_track_temp_ports
+			ON DUPLICATE KEY UPDATE count_rec=count_rec+1, active_last=1, date_last=mac_track_temp_ports.scan_date");
 
 		/* purge the ip address and temp port table */
 		db_execute("TRUNCATE TABLE mac_track_temp_ports");

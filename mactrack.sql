@@ -353,3 +353,42 @@ CREATE TABLE `mac_track_vlans` (
   KEY `vlan_name` (`vlan_name`)
 ) ENGINE=MyISAM;
 
+--
+-- Table structure for table `mac_track_aggregated_ports`
+--
+
+CREATE TABLE `mac_track_aggregated_ports` (
+  `row_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `site_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `device_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `hostname` varchar(40) NOT NULL DEFAULT '',
+  `device_name` varchar(100) NOT NULL DEFAULT '',
+  `vlan_id` varchar(5) NOT NULL DEFAULT 'N/A',
+  `vlan_name` varchar(50) NOT NULL DEFAULT '',
+  `mac_address` varchar(20) NOT NULL DEFAULT '',
+  `vendor_mac` varchar(8) DEFAULT NULL,
+  `ip_address` varchar(20) NOT NULL DEFAULT '',
+  `dns_hostname` varchar(200) DEFAULT '',
+  `port_number` varchar(10) NOT NULL DEFAULT '',
+  `port_name` varchar(50) NOT NULL DEFAULT '',
+  `date_last` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `first_scan_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `count_rec` int(10) unsigned NOT NULL DEFAULT '0',
+  `active_last` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `authorized` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`row_id`),
+  UNIQUE KEY `port_number` (`port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized`) USING BTREE,
+  KEY `site_id` (`site_id`),
+  KEY `description` (`device_name`),
+  KEY `mac` (`mac_address`),
+  KEY `hostname` (`hostname`),
+  KEY `vlan_name` (`vlan_name`),
+  KEY `vlan_id` (`vlan_id`),
+  KEY `device_id` (`device_id`),
+  KEY `ip_address` (`ip_address`),
+  KEY `port_name` (`port_name`),
+  KEY `dns_hostname` (`dns_hostname`),
+  KEY `vendor_mac` (`vendor_mac`),
+  KEY `authorized` (`authorized`),
+  KEY `site_id_device_id` (`site_id`,`device_id`)
+) ENGINE=MyISAM COMMENT='Database for aggregated date for Tracking Device MAC''s';

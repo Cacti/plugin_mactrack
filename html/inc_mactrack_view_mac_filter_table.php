@@ -103,7 +103,9 @@
 						<select name="scan_date" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
 						<option value="1"<?php if ($_REQUEST["scan_date"] == "1") {?> selected<?php }?>>All</option>
 						<option value="2"<?php if ($_REQUEST["scan_date"] == "2") {?> selected<?php }?>>Most Recent</option>
+						<option value="3"<?php if ($_REQUEST["scan_date"] == "3") {?> selected<?php }?>>Aggregated</option>
 						<?php
+
 						$scan_dates = db_fetch_assoc("select scan_date from mac_track_scan_dates order by scan_date desc");
 						if (sizeof($scan_dates) > 0) {
 						foreach ($scan_dates as $scan_date) {
