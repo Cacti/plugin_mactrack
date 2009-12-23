@@ -26,7 +26,7 @@ $guest_account = true;
 
 chdir('../../');
 include("./include/auth.php");
-include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_functions.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
 ini_set("memory_limit", "128M");
 
 define("MAX_DISPLAY_PAGES", 21);
@@ -378,7 +378,7 @@ function mactrack_view() {
 	mactrack_display_stats();
 
 	print "<div id='response'></div>";
-	include_once($config['base_path'] . "/include/bottom_footer.php");
+	include_once("./include/bottom_footer.php");
 }
 
 function mactrack_display_array() {
@@ -549,3 +549,4 @@ function mactrack_filter_table() {
 	</tr><?php
 }
 ?>
+

@@ -91,7 +91,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 	$indexes = array_keys($active_ports_array);
 
 	$i = 0;
-	foreach($active_ports_array as $port_info) {
+	foreach($active_ports_array as $port_info) {
 	 //print ("=type--]=[". $ifInterfaces[$indexes[$i]]["ifType"] . "]\n");
 		if (((convert_dlink_data($ifInterfaces[$indexes[$i]]["ifType"]) >= 6) &&
 			(convert_dlink_data($ifInterfaces[$indexes[$i]]["ifType"]) <= 9)) ||
