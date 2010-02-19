@@ -120,7 +120,10 @@ function get_base_dell_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp_rea
 		/* get the bridge root port so we don't capture active ports on it */
 		$bridge_root_port = @cacti_snmp_get($device["hostname"], $snmp_readstring,
 					".1.3.6.1.2.1.17.2.7.0", $device["snmp_version"],
-					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$device["snmp_username"], $device["snmp_password"],
+					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+					$device["snmp_priv_protocol"], $device["snmp_context"],
+					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
 
 		/* determine user ports for this device and transfer user ports to
 		   a new array.

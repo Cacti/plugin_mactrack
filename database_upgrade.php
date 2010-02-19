@@ -241,7 +241,7 @@ create_table("mac_track_aggregated_ports", "CREATE TABLE mac_track_aggregated_po
 	`active_last` tinyint(1) unsigned NOT NULL default '0',
 	`authorized` tinyint(3) unsigned NOT NULL default '0',
 	PRIMARY KEY  (`row_id`),
-	UNIQUE KEY  (`port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized`) USING BTREE,
+	UNIQUE KEY `port_number` USING BTREE (`port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized`),
 	KEY `site_id` (`site_id`),
 	KEY `description` (`device_name`),
 	KEY `mac` (`mac_address`),
@@ -256,6 +256,42 @@ create_table("mac_track_aggregated_ports", "CREATE TABLE mac_track_aggregated_po
 	KEY `authorized` (`authorized`),
 	KEY `site_id_device_id` (`site_id`,`device_id`))
 	ENGINE=MyISAM COMMENT='Database for aggregated date for Tracking Device MAC''s';");
+
+# new for 2.1.2
+# SNMP V3
+add_column("mac_track_devices",    "snmp_options",         "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_options` int(10) unsigned NOT NULL default '0' AFTER `user_password`");
+add_column("mac_track_devices",    "snmp_username",        "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_username` varchar(50) default NULL AFTER `snmp_status`");
+add_column("mac_track_devices",    "snmp_password",        "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_password` varchar(50) default NULL AFTER `snmp_username`");
+add_column("mac_track_devices",    "snmp_auth_protocol",   "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_auth_protocol` char(5) default '' AFTER `snmp_password`");
+add_column("mac_track_devices",    "snmp_priv_passphrase", "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_priv_passphrase` varchar(200) default '' AFTER `snmp_auth_protocol`");
+add_column("mac_track_devices",    "snmp_priv_protocol",   "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_priv_protocol` char(6) default '' AFTER `snmp_priv_passphrase`");
+add_column("mac_track_devices",    "snmp_context",         "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_context` varchar(64) default '' AFTER `snmp_priv_protocol`");
+add_column("mac_track_devices",    "max_oids",             "ALTER TABLE `mac_track_devices` ADD COLUMN `max_oids` int(12) unsigned default '10' AFTER `snmp_context`");
+
+create_table("mac_track_snmp", "CREATE TABLE `mac_track_snmp` (
+			`id` int(10) unsigned NOT NULL auto_increment,
+			`name` varchar(100) NOT NULL default '',
+			PRIMARY KEY  (`id`))
+			ENGINE=MyISAM COMMENT='Group of SNMP Option Sets';");
+
+create_table("mac_track_snmp_items", "CREATE TABLE `mac_track_snmp_items` (
+			`id` int(10) unsigned NOT NULL auto_increment,
+			`snmp_id` int(10) unsigned NOT NULL default '0',
+			`sequence` int(10) unsigned NOT NULL default '0',
+			`snmp_version` varchar(100) NOT NULL default '',
+			`snmp_readstring` varchar(100) NOT NULL,
+			`snmp_port` int(10) NOT NULL default '161',
+			`snmp_timeout` int(10) unsigned NOT NULL default '500',
+			`snmp_retries` tinyint(11) unsigned NOT NULL default '3',
+			`max_oids` int(12) unsigned default '10',
+			`snmp_username` varchar(50) default NULL,
+			`snmp_password` varchar(50) default NULL,
+			`snmp_auth_protocol` char(5) default '',
+			`snmp_priv_passphrase` varchar(200) default '',
+			`snmp_priv_protocol` char(6) default '',
+			`snmp_context` varchar(64) default '',
+			PRIMARY KEY  (`id`,`snmp_id`))
+			ENGINE=MyISAM COMMENT='Set of SNMP Options';");
 
 echo "\nDatabase Upgrade Complete\n";
 

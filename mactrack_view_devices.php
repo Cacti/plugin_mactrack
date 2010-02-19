@@ -34,6 +34,7 @@ define("MAX_DISPLAY_PAGES", 21);
 if (isset($_REQUEST["export_x"])) {
 	mactrack_view_export_devices();
 }else{
+	$_REQUEST["action"] = ""; # avoid index error in top_graph_header.php
 	mactrack_redirect();
 	$title = "Device Tracking - Device Report View";
 	include_once("./include/top_graph_header.php");
@@ -83,28 +84,32 @@ function mactrack_view_export_devices() {
 	$xport_array = array();
 	array_push($xport_array, '"site_id","site_name","device_id","device_name","notes",' .
 		'"hostname","snmp_readstring","snmp_readstrings","snmp_version",' .
-		'"snmp_port","snmp_timeout","snmp_retries","snmp_sysName","snmp_sysLocation",' .
+		'"snmp_username","snmp_password","snmp_auth_protocol","snmp_priv_passphrase","snmp_priv_protocol","snmp_context"' .
+		'"snmp_port","snmp_timeout","snmp_retries","max_oids","snmp_sysName","snmp_sysLocation",' .
 		'"snmp_sysContact","snmp_sysObjectID","snmp_sysDescr","snmp_sysUptime",' .
 		'"ignorePorts","scan_type","disabled","ports_total","ports_active",' .
 		'"ports_trunk","macs_active","last_rundate","last_runduration"');
 
 	if (sizeof($devices)) {
 		foreach($devices as $device) {
-			array_push($xport_array,'"' .
-			$device['site_id']          . '","' . $device['site_name']        . '","' .
-			$device['device_id']        . '","' . $device['device_name']      . '","' .
-			$device['notes']            . '","' . $device['hostname']         . '","' .
-			$device['snmp_readstring']  . '","' . $device['snmp_readstrings'] . '","' .
-			$device['snmp_version']     . '","' . $device['snmp_port']        . '","' .
-			$device['snmp_timeout']     . '","' . $device['snmp_retries']     . '","' .
-			$device['snmp_sysName']     . '","' . $device['snmp_sysLocation'] . '","' .
-			$device['snmp_sysContact']  . '","' . $device['snmp_sysObjectID'] . '","' .
-			$device['snmp_sysDescr']    . '","' . $device['snmp_sysUptime']   . '","' .
-			$device['ignorePorts']      . '","' . $device['scan_type']        . '","' .
-			$device['disabled']         . '","' . $device['ports_total']      . '","' .
-			$device['ports_active']     . '","' . $device['ports_trunk']      . '","' .
-			$device['macs_active']      . '","' . $device['last_rundate']     . '","' .
-			$device['last_runduration'] . '"');
+			array_push($xport_array,'"'     .
+			$device['site_id']              . '","' . $device['site_name']            . '","' .
+			$device['device_id']            . '","' . $device['device_name']          . '","' .
+			$device['notes']                . '","' . $device['hostname']             . '","' .
+			$device['snmp_readstring']      . '","' . $device['snmp_readstrings']     . '","' .
+			$device['snmp_version']         . '","' . $device['snmp_username']        . '","' .
+			$device['snmp_password']        . '","' . $device['snmp_auth_protocol']   . '","' .
+			$device['snmp_priv_passphrase'] . '","' . $device['snmp_priv_protocol']   . '","' .
+			$device['snmp_context']         . '","' . $device['snmp_port']            . '","' .
+			$device['snmp_timeout']         . '","' . $device['snmp_retries']         . '","' .
+			$device['max_oids']             . '","' . $device['snmp_sysName']         . '","' .
+			$device['snmp_sysLocation']     . '","' . $device['snmp_sysContact']      . '","' .
+			$device['snmp_sysObjectID']     . '","' . $device['snmp_sysDescr']        . '","' .
+			$device['snmp_sysUptime']       . '","' . $device['ignorePorts']          . '","' .
+			$device['scan_type']            . '","' . $device['disabled']             . '","' .
+			$device['ports_total']          . '","' . $device['ports_active']         . '","' .
+			$device['ports_trunk']          . '","' . $device['macs_active']          . '","' .
+			$device['last_rundate']         . '","' . $device['last_runduration']     . '"');
 		}
 	}
 
@@ -183,9 +188,16 @@ function mactrack_view_get_device_records(&$sql_where, $row_limit, $apply_limits
 		mac_track_devices.snmp_readstring,
 		mac_track_devices.snmp_readstrings,
 		mac_track_devices.snmp_version,
+		mac_track_devices.snmp_username,
+		mac_track_devices.snmp_password,
+		mac_track_devices.snmp_auth_protocol,
+		mac_track_devices.snmp_priv_passphrase,
+		mac_track_devices.snmp_priv_protocol,
+		mac_track_devices.snmp_context,
 		mac_track_devices.snmp_port,
 		mac_track_devices.snmp_timeout,
 		mac_track_devices.snmp_retries,
+		mac_track_devices.max_oids,
 		mac_track_devices.snmp_status,
 		mac_track_devices.snmp_sysName,
 		mac_track_devices.snmp_sysLocation,
@@ -373,11 +385,11 @@ function mactrack_view_devices() {
 				?>
 				<td width=60></td>
 				<td width=150>
-					<?php print "<p class='linkEditMain'>" . (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["device_name"]) : $device["device_name"]) . "</p>";?>
+					<?php print "<p class='linkEditMain'>" . (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $device["device_name"]) : $device["device_name"]) . "</p>";?>
 				</td>
-				<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["site_name"]) : $device["site_name"]);?></td>
+				<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $device["site_name"]) : $device["site_name"]);?></td>
 				<td><?php print get_colored_device_status(($device["disabled"] == "on" ? true : false), $device["snmp_status"]);?></td>
-				<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["hostname"]) : $device["hostname"]);?></td>
+				<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $device["hostname"]) : $device["hostname"]);?></td>
 				<td><?php print $device["device_type"];?></td>
 				<td><?php print ($device["scan_type"] == "1" ? "N/A" : $device["ips_total"]);?></td>
 				<td><?php print ($device["scan_type"] == "3" ? "N/A" : $device["ports_total"]);?></td>

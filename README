@@ -4,7 +4,7 @@
     Contact ........ larryjadams@comcast.net
     Home Site ...... http://www.cacti.net
     Program ........ MacTrack
-    Version ........ 2.1.1
+    Version ........ 2.2.0
     Purpose ........ A Nice Plugin that Tracks Your Users
 
 *******************************************************************************/
@@ -60,6 +60,7 @@
     bug: IEEE Database import runs out of memory
     bug: Correct uninitialized error in mactrack_hp.php
     bug: Resolved issue where Vendor Mac was lost during resolver process
+    bug: fix syntax of cacti_snmp_* calls
     feature: Adding support for ArpWatch
     feature: Adding Juniper Support
     feature: Support Foundry Dual Mode Ports
@@ -69,6 +70,20 @@
     feature: Implement Interfaces tab to MacTrack
     feature: Aggregated ports patch from Gthe!
     feature: Linux and DLink Scanners from Gthe!
+    feature: add all device SNMP options to mac_track_devices
+    feature: add full SNMP V3 support
+    feature: deprecate readstrings; maintain "SNMP Option Sets" in favour of them
+    feature: some Enterasys scanning functions (N7, C2, C3)
+    feature: import cacti devices into mac_track_devices
+             (new action hook for host.php) 
+    feature: optionally sync SNMP settings of mac_track_devices and cacti device, 
+             governed by a config setting (defaulting to "none") to allow either 
+             - mactrack -> host (when scanning) or
+             - host -> mactrack updates (when manually updating the host)
+    feature: allow for "connecting" existing mactrack devices to cacti devices
+             (via hostname, new action for mactrack_devices.php) 
+    feature: copy snmp settings from cacti devices to mactrack devices
+             (via host_id connection, new action for mactrack_devices.php)
 
     --- 1.1 ---
     First Official Release

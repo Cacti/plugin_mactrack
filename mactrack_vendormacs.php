@@ -232,8 +232,8 @@ function mactrack_vmacs() {
 			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 				?>
 				<td class="linkEditMain"><?php print $vmac["vendor_mac"];?></td>
-				<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $vmac["vendor_name"]) : $vmac["vendor_name"]);?></td>
-				<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $vmac["vendor_address"]) : $vmac["vendor_address"]);?></td>
+				<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $vmac["vendor_name"]) : $vmac["vendor_name"]);?></td>
+				<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $vmac["vendor_address"]) : $vmac["vendor_address"]);?></td>
 			</tr>
 			<?php
 		}

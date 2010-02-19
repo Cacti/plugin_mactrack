@@ -138,7 +138,7 @@ function form_actions() {
 		print "	<tr>
 				<td class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
 					<p>Are you sure you want to delete the following site(s)?</p>
-					<p>$site_list</p>";
+					<p><ul>$site_list</ul></p>";
 					print "</td></tr>
 				</td>
 			</tr>\n
@@ -563,7 +563,7 @@ function mactrack_site() {
 		if (sizeof($sites) > 0) {
 			foreach ($sites as $site) {
 				form_alternate_row_color($colors["alternate"],$colors["light"],$i, 'line' . $site["site_id"]); $i++;
-				form_selectable_cell("<a class='linkEditMain' href='mactrack_sites.php?action=edit&site_id=" . $site["site_id"] . "'>". (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]) . "</a>", $site["site_id"]);
+				form_selectable_cell("<a class='linkEditMain' href='mactrack_sites.php?action=edit&site_id=" . $site["site_id"] . "'>". (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]) . "</a>", $site["site_id"]);
 				form_selectable_cell(number_format($site["total_devices"]), $site["site_id"]);
 				form_selectable_cell(number_format($site["total_ips"]), $site["site_id"]);
 				form_selectable_cell(number_format($site["total_user_ports"]), $site["site_id"]);
@@ -625,10 +625,10 @@ function mactrack_site() {
 				form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 					?>
 					<td width=200>
-						<p class="linkEditMain"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]);?></p>
+						<p class="linkEditMain"><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]);?></p>
 					</td>
-					<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["vendor"]) : $site["vendor"]);?></td>
-					<td><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $site["description"]) : $site["description"]);?></td>
+					<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["vendor"]) : $site["vendor"]);?></td>
+					<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["description"]) : $site["description"]);?></td>
 					<td><?php print number_format($site["total_devices"]);?></td>
 					<td><?php print number_format($site["sum_ips_total"]);?></td>
 					<td><?php print number_format($site["sum_ports_total"]);?></td>

@@ -51,7 +51,7 @@ ini_set("max_execution_time", 1500);
 
 /* obtain some date/times for later use */
 $scan_date = read_config_option("mt_scan_date");
-list($micro,$seconds) = split(" ", microtime());
+list($micro,$seconds) = explode(" ", microtime());
 $start_time = $seconds + $micro;
 
 /* drop a few environment variables to minimize net-snmp load times */
@@ -158,7 +158,7 @@ if (valid_snmp_device($device)) {
 					mactrack_debug("Scanning function is '" . $device_type["scanning_function"] . "'");
 					$device["device_type_id"] = $device_type["device_type_id"];
 					$device["scan_type"] = $device_type["device_type"];
-					$device = call_user_func_array($device_type["scanning_function"], array($site, $device, $device_type["lowPort"], $device_type["highPort"]));
+					$device = call_user_func_array($device_type["scanning_function"], array($site, &$device, $device_type["lowPort"], $device_type["highPort"]));
 				}else{
 					mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", Scanning Function Does Not Exist.");
 					$device["last_runmessage"] = "WARNING: Scanning Function Does Not Exist.";

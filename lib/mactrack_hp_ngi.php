@@ -165,8 +165,11 @@ function local_xform_indexed_data($xformOID, &$device, $xformLevel = 1) {
 
 	/* get raw index data */
 	$xformArray = cacti_snmp_walk($device["hostname"], $device["snmp_readstring"],
-						$xformOID, $device["snmp_version"], "", "",
-						$device["snmp_port"], $device["snmp_timeout"]);
+						$xformOID, $device["snmp_version"], $device["snmp_username"],
+						$device["snmp_password"], $device["snmp_auth_protocol"],
+						$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"], $device["snmp_context"],
+						$device["snmp_port"], $device["snmp_timeout"],
+						$device["snmp_retries"], $device["max_oids"]);
 
 	$i = 0;
 	$output_array = array();

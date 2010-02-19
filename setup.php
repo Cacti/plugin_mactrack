@@ -40,6 +40,7 @@ function plugin_init_mactrack() {
 }
 
 function plugin_mactrack_install() {
+
 	api_plugin_register_hook('mactrack', 'top_header_tabs',       'mactrack_show_tab',             "setup.php");
 	api_plugin_register_hook('mactrack', 'top_graph_header_tabs', 'mactrack_show_tab',             "setup.php");
 	api_plugin_register_hook('mactrack', 'config_arrays',         'mactrack_config_arrays',        "setup.php");
@@ -48,6 +49,15 @@ function plugin_mactrack_install() {
 	api_plugin_register_hook('mactrack', 'config_settings',       'mactrack_config_settings',      "setup.php");
 	api_plugin_register_hook('mactrack', 'poller_bottom',         'mactrack_poller_bottom',        "setup.php");
 	api_plugin_register_hook('mactrack', 'page_head',             'mactrack_page_head',            "setup.php");
+
+	# device hook: intercept on device save
+	api_plugin_register_hook('mactrack', 'api_device_save', 'sync_cacti_to_mactrack', 'mactrack_actions.php');
+	# device hook: Add a new dropdown Action for Device Management
+	api_plugin_register_hook('mactrack', 'device_action_array', 'mactrack_device_action_array', 'mactrack_actions.php');
+	# device hook: Device Management Action dropdown selected: prepare the list of devices for a confirmation request
+	api_plugin_register_hook('mactrack', 'device_action_prepare', 'mactrack_device_action_prepare', 'mactrack_actions.php');
+	# device hook: Device Management Action dropdown selected: execute list of device
+	api_plugin_register_hook('mactrack', 'device_action_execute', 'mactrack_device_action_execute', 'mactrack_actions.php');
 
 	mactrack_setup_table_new ();
 }
@@ -120,6 +130,14 @@ function plugin_mactrack_uninstall () {
 	if (mactrack_db_table_exists("mac_track_aggregated_ports")) {
 		db_execute("DROP TABLE mac_track_aggregated_ports");
 	}
+
+	if (mactrack_db_table_exists("mac_track_snmp")) {
+		db_execute("DROP TABLE mac_track_snmp");
+	}
+
+	if (mactrack_db_table_exists("mac_track_snmp_items")) {
+		db_execute("DROP TABLE mac_track_snmp_items");
+	}
 }
 
 function plugin_mactrack_check_config () {
@@ -148,15 +166,24 @@ function mactrack_check_upgrade () {
 
 	$current = plugin_mactrack_version();
 	$current = $current['version'];
+
 	$old     = db_fetch_row("SELECT * FROM plugin_config WHERE directory='mactrack'");
 	if (sizeof($old) && $current != $old["version"]) {
 		/* if the plugin is installed and/or active */
 		if ($old["status"] == 1 || $old["status"] == 4) {
 			/* re-register the hooks */
 			plugin_mactrack_install();
+			if (api_plugin_is_enabled('mactrack')) {
+				# may sound ridiculous, but enables new hooks
+				api_plugin_enable_hooks('mactrack');
+			}
 
 			/* perform a database upgrade */
 			mactrack_database_upgrade();
+		}
+
+		if (read_config_option("mt_convert_readstrings", true) != "on") {
+			convert_readstrings();
 		}
 
 		/* update the plugin information */
@@ -287,6 +314,46 @@ function mactrack_database_upgrade () {
 	if (!mactrack_db_key_exists("mac_track_ports", "site_id_device_id")) {
 		db_execute("ALTER TABLE `mac_track_ports` ADD INDEX `site_id_device_id`(`site_id`, `device_id`);");
 	}
+
+	# new for 2.1.2
+	# SNMP V3
+	mactrack_add_column("mac_track_devices",    "snmp_options",         "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_options` int(10) unsigned NOT NULL default '0' AFTER `user_password`");
+	mactrack_add_column("mac_track_devices",    "snmp_username",        "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_username` varchar(50) default NULL AFTER `snmp_status`");
+	mactrack_add_column("mac_track_devices",    "snmp_password",        "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_password` varchar(50) default NULL AFTER `snmp_username`");
+	mactrack_add_column("mac_track_devices",    "snmp_auth_protocol",   "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_auth_protocol` char(5) default '' AFTER `snmp_password`");
+	mactrack_add_column("mac_track_devices",    "snmp_priv_passphrase", "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_priv_passphrase` varchar(200) default '' AFTER `snmp_auth_protocol`");
+	mactrack_add_column("mac_track_devices",    "snmp_priv_protocol",   "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_priv_protocol` char(6) default '' AFTER `snmp_priv_passphrase`");
+	mactrack_add_column("mac_track_devices",    "snmp_context",         "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_context` varchar(64) default '' AFTER `snmp_priv_protocol`");
+	mactrack_add_column("mac_track_devices",    "max_oids",             "ALTER TABLE `mac_track_devices` ADD COLUMN `max_oids` int(12) unsigned default '10' AFTER `snmp_context`");
+
+	if (!mactrack_db_table_exists("mac_track_snmp")) {
+		mactrack_create_table("mac_track_snmp", "CREATE TABLE `mac_track_snmp` (
+			`id` int(10) unsigned NOT NULL auto_increment,
+			`name` varchar(100) NOT NULL default '',
+			PRIMARY KEY  (`id`))
+			ENGINE=MyISAM COMMENT='Group of SNMP Option Sets';");
+	}
+
+	if (!mactrack_db_table_exists("mac_track_snmp_items")) {
+		mactrack_create_table("mac_track_snmp_items", "CREATE TABLE `mac_track_snmp_items` (
+			`id` int(10) unsigned NOT NULL auto_increment,
+			`snmp_id` int(10) unsigned NOT NULL default '0',
+			`sequence` int(10) unsigned NOT NULL default '0',
+			`snmp_version` varchar(100) NOT NULL default '',
+			`snmp_readstring` varchar(100) NOT NULL,
+			`snmp_port` int(10) NOT NULL default '161',
+			`snmp_timeout` int(10) unsigned NOT NULL default '500',
+			`snmp_retries` tinyint(11) unsigned NOT NULL default '3',
+			`max_oids` int(12) unsigned default '10',
+			`snmp_username` varchar(50) default NULL,
+			`snmp_password` varchar(50) default NULL,
+			`snmp_auth_protocol` char(5) default '',
+			`snmp_priv_passphrase` varchar(200) default '',
+			`snmp_priv_protocol` char(6) default '',
+			`snmp_context` varchar(64) default '',
+			PRIMARY KEY  (`id`,`snmp_id`))
+			ENGINE=MyISAM COMMENT='Set of SNMP Options';");
+	}
 }
 
 function mactrack_check_dependencies() {
@@ -343,6 +410,7 @@ function mactrack_setup_table_new () {
 			`scan_type` tinyint(11) NOT NULL default '1',
 			`user_name` varchar(40) default NULL,
 			`user_password` varchar(40) default NULL,
+			`snmp_options` int(10) unsigned NOT NULL default '0',
 			`snmp_readstring` varchar(100) NOT NULL,
 			`snmp_readstrings` varchar(255) default NULL,
 			`snmp_version` varchar(100) NOT NULL default '',
@@ -356,6 +424,13 @@ function mactrack_setup_table_new () {
 			`snmp_sysDescr` varchar(100) default NULL,
 			`snmp_sysUptime` varchar(100) default NULL,
 			`snmp_status` int(10) unsigned NOT NULL default '0',
+			`snmp_username` varchar(50) default NULL,
+			`snmp_password` varchar(50) default NULL,
+			`snmp_auth_protocol` char(5) default '',
+			`snmp_priv_passphrase` varchar(200) default '',
+			`snmp_priv_protocol` char(6) default '',
+			`snmp_context` varchar(64) default '',
+			`max_oids` int(12) unsigned default '10',
 			`last_runmessage` varchar(100) default '',
 			`last_rundate` datetime NOT NULL default '0000-00-00 00:00:00',
 			`last_runduration` decimal(10,5) NOT NULL default '0.00000',
@@ -660,7 +735,7 @@ function mactrack_setup_table_new () {
 			`active_last` tinyint(1) unsigned NOT NULL DEFAULT '0',
 			`authorized` tinyint(3) unsigned NOT NULL DEFAULT '0',
 			PRIMARY KEY (`row_id`),
-			UNIQUE KEY `port_number` (`port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized`) USING BTREE,
+			UNIQUE KEY `port_number` USING BTREE (`port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized`),
 			KEY `site_id` (`site_id`),
 			KEY `description` (`device_name`),
 			KEY `mac` (`mac_address`),
@@ -676,12 +751,41 @@ function mactrack_setup_table_new () {
 			KEY `site_id_device_id` (`site_id`,`device_id`)
 			) ENGINE=MyISAM COMMENT='Database for aggregated date for Tracking Device MAC''s';");
 	}
+
+	if (!mactrack_db_table_exists("mac_track_snmp")) {
+		db_execute("CREATE TABLE `mac_track_snmp` (
+			`id` int(10) unsigned NOT NULL auto_increment,
+			`name` varchar(100) NOT NULL default '',
+			PRIMARY KEY  (`id`))
+			ENGINE=MyISAM COMMENT='Group of SNMP Option Sets';");
+	}
+
+	if (!mactrack_db_table_exists("mac_track_snmp_items")) {
+		db_execute("CREATE TABLE `mac_track_snmp_items` (
+			`id` int(10) unsigned NOT NULL auto_increment,
+			`snmp_id` int(10) unsigned NOT NULL default '0',
+			`sequence` int(10) unsigned NOT NULL default '0',
+			`snmp_version` varchar(100) NOT NULL default '',
+			`snmp_readstring` varchar(100) NOT NULL,
+			`snmp_port` int(10) NOT NULL default '161',
+			`snmp_timeout` int(10) unsigned NOT NULL default '500',
+			`snmp_retries` tinyint(11) unsigned NOT NULL default '3',
+			`max_oids` int(12) unsigned default '10',
+			`snmp_username` varchar(50) default NULL,
+			`snmp_password` varchar(50) default NULL,
+			`snmp_auth_protocol` char(5) default '',
+			`snmp_priv_passphrase` varchar(200) default '',
+			`snmp_priv_protocol` char(6) default '',
+			`snmp_context` varchar(64) default '',
+			PRIMARY KEY  (`id`,`snmp_id`))
+			ENGINE=MyISAM COMMENT='Set of SNMP Options';");
+	}
 }
 
 function mactrack_version () {
 	return array(
 		'name'      => 'mactrack',
-		'version'   => '2.1.1',
+		'version'   => '2.2.0',
 		'longname'  => 'Device Tracking',
 		'author'    => 'Larry Adams',
 		'homepage'  => 'http://cacti.net',
@@ -719,7 +823,8 @@ function mactrack_poller_bottom () {
 }
 
 function mactrack_config_settings () {
-	global $tabs, $settings, $mactrack_snmp_versions, $mactrack_poller_frequencies, $mactrack_data_retention, $mactrack_macauth_frequencies;
+	global $tabs, $settings, $snmp_versions, $mactrack_poller_frequencies,
+	$mactrack_data_retention, $mactrack_macauth_frequencies, $mactrack_update_policies;
 
 	$tabs["mactrack"] = "Device Tracking";
 
@@ -892,16 +997,36 @@ function mactrack_config_settings () {
 			"max_length" => "255",
 			"size" => "60"
 			),
+		"mactrack_hdr_ignore" => array(
+			"method" => "spacer",
+			"friendly_name" => "Switch/Hub, Switch/Router Settings"
+			),
+		"mt_ignorePorts" => array(
+			"method" => "textarea",
+			"friendly_name" => "Ports to Ignore",
+			"description" => "Provide a list of ports on a specific switch/hub whose MAC results should be ignored. Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon ':'.  For example, 'Fa0/1: Fa1/23' would be acceptable for some manufacturers switch types.",
+			"class" => "textAreaNotes",
+			"textarea_rows" => "3",
+			"textarea_cols" => "80",
+			"max_length" => "255"
+			),
 		"mactrack_hdr_general" => array(
 			"friendly_name" => "SNMP Presets",
 			"method" => "spacer",
+			),
+		"mt_update_policy" => array(
+			"friendly_name" => "Update Policy for SNMP Options",
+			"description" => "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices.",
+			"method" => "drop_array",
+			"default" => 1,
+			"array" => $mactrack_update_policies,
 			),
 		"mt_snmp_ver" => array(
 			"friendly_name" => "SNMP Version",
 			"description" => "Default SNMP version for all new hosts.",
 			"method" => "drop_array",
 			"default" => "Version 1",
-			"array" => $mactrack_snmp_versions,
+			"array" => $snmp_versions,
 			),
 		"mt_snmp_community" => array(
 			"friendly_name" => "SNMP Community",
@@ -1035,6 +1160,10 @@ function mactrack_draw_navigation_text ($nav) {
 	$nav["mactrack_devices.php:edit"] = array("title" => "(Edit)", "mapping" => "index.php:,mactrack_devices.php:", "url" => "", "level" => "2");
 	$nav["mactrack_devices.php:import"] = array("title" => "(Import)", "mapping" => "index.php:,mactrack_devices.php:", "url" => "", "level" => "2");
 	$nav["mactrack_devices.php:actions"] = array("title" => "Actions", "mapping" => "index.php:,mactrack_devices.php:", "url" => "", "level" => "2");
+	$nav["mactrack_snmp.php:"] = array("title" => "MacTrack SNMP Options", "mapping" => "index.php:", "url" => "mactrack_snmp.php", "level" => "1");
+	$nav["mactrack_snmp.php:actions"] = array("title" => "Actions", "mapping" => "index.php:,mactrack_snmp.php:", "url" => "", "level" => "2");
+	$nav["mactrack_snmp.php:edit"] = array("title" => "(Edit)", "mapping" => "index.php:,mactrack_snmp.php:", "url" => "", "level" => "2");
+	$nav["mactrack_snmp.php:item_edit"] = array("title" => "(Edit)", "mapping" => "index.php:,mactrack_snmp.php:", "url" => "", "level" => "2");
 	$nav["mactrack_device_types.php:"] = array("title" => "MacTrack Device Types", "mapping" => "index.php:", "url" => "mactrack_device_types.php", "level" => "1");
 	$nav["mactrack_device_types.php:edit"] = array("title" => "(Edit)", "mapping" => "index.php:,mactrack_device_types.php:", "url" => "", "level" => "2");
 	$nav["mactrack_device_types.php:import"] = array("title" => "(Import)", "mapping" => "index.php:,mactrack_device_types.php:", "url" => "", "level" => "2");
@@ -1083,10 +1212,10 @@ function mactrack_show_tab () {
 }
 
 function mactrack_config_arrays () {
-	global $mactrack_snmp_versions, $mactrack_device_types, $mactrack_search_types;
+	global $mactrack_device_types, $mactrack_search_types;
 	global $user_auth_realms, $user_auth_realm_filenames, $menu, $config, $rows_selector;
 	global $mactrack_poller_frequencies, $mactrack_data_retention, $refresh_interval;
-	global $mactrack_macauth_frequencies, $mactrack_duplexes;
+	global $mactrack_macauth_frequencies, $mactrack_duplexes, $mactrack_update_policies;
 
 	$user_auth_realms[2120]='Plugin -> MacTrack Viewer';
 	$user_auth_realms[2121]='Plugin -> MacTrack Administrator';
@@ -1098,6 +1227,7 @@ function mactrack_config_arrays () {
 	$user_auth_realm_filenames['mactrack_view_devices.php']    = 2120;
 	$user_auth_realm_filenames['mactrack_view_interfaces.php'] = 2120;
 	$user_auth_realm_filenames['mactrack_devices.php']         = 2121;
+	$user_auth_realm_filenames['mactrack_snmp.php']            = 2121;
 	$user_auth_realm_filenames['mactrack_sites.php']           = 2121;
 	$user_auth_realm_filenames['mactrack_device_types.php']    = 2121;
 	$user_auth_realm_filenames['mactrack_utilities.php']       = 2121;
@@ -1139,9 +1269,10 @@ function mactrack_config_arrays () {
 		2 => "Half",
 		3 => "Full");
 
-	$mactrack_snmp_versions = array(1 =>
-		"Version 1",
-		"Version 2");
+	$mactrack_update_policies = array(
+		1 => "None",
+		2 => "Sync Cacti Device to MacTrack Device",
+		3 => "Sync MacTrack Device to Cacti Device");
 
 	$rows_selector = array(
 		-1 => "Default",
@@ -1191,6 +1322,7 @@ function mactrack_config_arrays () {
 		if ($temp == __('Management')) {
 			$menu2["Device Tracking"]["plugins/mactrack/mactrack_sites.php"] = "Sites";
 			$menu2["Device Tracking"]["plugins/mactrack/mactrack_devices.php"] = "Devices";
+			$menu2["Device Tracking"]["plugins/mactrack/mactrack_snmp.php"] = "SNMP Options";
 			$menu2["Device Tracking"]["plugins/mactrack/mactrack_device_types.php"] = "Device Types";
 			$menu2["Device Tracking"]["plugins/mactrack/mactrack_vendormacs.php"] = "Vendor Macs";
 			$menu2["Device Tracking"]["plugins/mactrack/mactrack_utilities.php"] = "Tracking Utilities";
@@ -1203,7 +1335,9 @@ function mactrack_config_arrays () {
 
 function mactrack_config_form () {
 	global $fields_mactrack_device_type_edit, $fields_mactrack_device_edit, $fields_mactrack_site_edit;
-	global $mactrack_device_types, $mactrack_snmp_versions, $fields_mactrack_macw_edit, $fields_mactrack_maca_edit;
+	global $fields_mactrack_snmp_edit, $fields_mactrack_snmp_item, $fields_mactrack_snmp_item_edit;
+	global $mactrack_device_types, $snmp_versions, $fields_mactrack_macw_edit, $fields_mactrack_maca_edit;
+	global $snmp_priv_protocols, $snmp_auth_protocols;
 
 	/* file: mactrack_device_types.php, action: edit */
 	$fields_mactrack_device_type_edit = array(
@@ -1311,6 +1445,129 @@ function mactrack_config_form () {
 		)
 	);
 
+	/* file: mactrack_snmp.php, action: edit */
+	$fields_mactrack_snmp_edit = array(
+	"name" => array(
+		"method" => "textbox",
+		"friendly_name" => "Name",
+		"description" => "Fill in the name of this SNMP option set.",
+		"value" => "|arg1:name|",
+		"default" => "",
+		"max_length" => "100",
+		"size" => "40"
+		),
+	);
+
+	/* file: mactrack_snmp.php, action: item_edit */
+	$fields_mactrack_snmp_item = array(
+	"snmp_version" => array(
+		"method" => "drop_array",
+		"friendly_name" => "SNMP Version",
+		"description" => "Choose the SNMP version for this host.",
+		"on_change" => "changeSNMPVersion()",
+		"value" => "|arg1:snmp_version|",
+		"default" => read_config_option("mt_snmp_ver"),
+		"array" => $snmp_versions
+		),
+	"snmp_readstring" => array(
+		"method" => "textbox",
+		"friendly_name" => "SNMP Community String",
+		"description" => "Fill in the SNMP read community for this device.",
+		"value" => "|arg1:snmp_readstring|",
+		"default" => read_config_option("mt_snmp_community"),
+		"max_length" => "100",
+		"size" => "20"
+		),
+	"snmp_port" => array(
+		"method" => "textbox",
+		"friendly_name" => "SNMP Port",
+		"description" => "The UDP/TCP Port to poll the SNMP agent on.",
+		"value" => "|arg1:snmp_port|",
+		"max_length" => "8",
+		"default" => read_config_option("mt_snmp_port"),
+		"size" => "10"
+		),
+	"snmp_timeout" => array(
+		"method" => "textbox",
+		"friendly_name" => "SNMP Timeout",
+		"description" => "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support).",
+		"value" => "|arg1:snmp_timeout|",
+		"max_length" => "8",
+		"default" => read_config_option("mt_snmp_timeout"),
+		"size" => "10"
+		),
+	"snmp_retries" => array(
+		"method" => "textbox",
+		"friendly_name" => "SNMP Retries",
+		"description" => "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up.",
+		"value" => "|arg1:snmp_retries|",
+		"max_length" => "8",
+		"default" => read_config_option("mt_snmp_retries"),
+		"size" => "10"
+		),
+	"max_oids" => array(
+		"method" => "textbox",
+		"friendly_name" => "Maximum OID's Per Get Request",
+		"description" => "Specified the number of OID's that can be obtained in a single SNMP Get request.",
+		"value" => "|arg1:max_oids|",
+		"max_length" => "8",
+		"default" => read_config_option("max_get_size"),
+		"size" => "15"
+		),
+	"snmp_username" => array(
+		"method" => "textbox",
+		"friendly_name" => "SNMP Username (v3)",
+		"description" => "SNMP v3 username for this device.",
+		"value" => "|arg1:snmp_username|",
+		"default" => read_config_option("snmp_username"),
+		"max_length" => "50",
+		"size" => "15"
+		),
+	"snmp_password" => array(
+		"method" => "textbox_password",
+		"friendly_name" => "SNMP Password (v3)",
+		"description" => "SNMP v3 password for this device.",
+		"value" => "|arg1:snmp_password|",
+		"default" => read_config_option("snmp_password"),
+		"max_length" => "50",
+		"size" => "15"
+		),
+	"snmp_auth_protocol" => array(
+		"method" => "drop_array",
+		"friendly_name" => "SNMP Auth Protocol (v3)",
+		"description" => "Choose the SNMPv3 Authorization Protocol.",
+		"value" => "|arg1:snmp_auth_protocol|",
+		"default" => read_config_option("snmp_auth_protocol"),
+		"array" => $snmp_auth_protocols,
+		),
+	"snmp_priv_passphrase" => array(
+		"method" => "textbox",
+		"friendly_name" => "SNMP Privacy Passphrase (v3)",
+		"description" => "Choose the SNMPv3 Privacy Passphrase.",
+		"value" => "|arg1:snmp_priv_passphrase|",
+		"default" => read_config_option("snmp_priv_passphrase"),
+		"max_length" => "200",
+		"size" => "40"
+		),
+	"snmp_priv_protocol" => array(
+		"method" => "drop_array",
+		"friendly_name" => "SNMP Privacy Protocol (v3)",
+		"description" => "Choose the SNMPv3 Privacy Protocol.",
+		"value" => "|arg1:snmp_priv_protocol|",
+		"default" => read_config_option("snmp_priv_protocol"),
+		"array" => $snmp_priv_protocols,
+		),
+	"snmp_context" => array(
+		"method" => "textbox",
+		"friendly_name" => "SNMP Context",
+		"description" => "Enter the SNMP Context to use for this device.",
+		"value" => "|arg1:snmp_context|",
+		"default" => "",
+		"max_length" => "64",
+		"size" => "25"
+		),
+	);
+
 	/* file: mactrack_devices.php, action: edit */
 	$fields_mactrack_device_edit = array(
 	"spacer0" => array(
@@ -1330,6 +1587,15 @@ function mactrack_config_form () {
 		"description" => "Fill in the fully qualified hostname for this device.",
 		"value" => "|arg1:hostname|",
 		"max_length" => "250"
+		),
+	"host_id" => array(
+		"friendly_name" => "Related Cacti Host",
+		"description" => "Given MacTrack Host is connected to this Cacti Host.",
+		#"method" => "view",
+		"method" => "drop_sql",
+		"value" => "|arg1:host_id|",
+		"none_value" => "None",
+		"sql" => "select id,CONCAT_WS('',description,' (',hostname,')') as name from host order by description,hostname"
 		),
 	"scan_type" => array(
 		"method" => "drop_array",
@@ -1369,12 +1635,12 @@ function mactrack_config_form () {
 		"method" => "spacer",
 		"friendly_name" => "Switch/Hub, Switch/Router Settings"
 		),
-	"port_ignorePorts" => array(
+	"ignorePorts" => array(
 		"method" => "textarea",
 		"friendly_name" => "Ports to Ignore",
 		"description" => "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon ':'.  For example, 'Fa0/1: Fa1/23' would be acceptable for some manufacturers switch types.",
 		"value" => "|arg1:ignorePorts|",
-		"default" => read_config_option("mt_port_ignorePorts"),
+		"default" => read_config_option("mt_ignorePorts"),
 		"class" => "textAreaNotes",
 		"textarea_rows" => "3",
 		"textarea_cols" => "80",
@@ -1382,62 +1648,35 @@ function mactrack_config_form () {
 		),
 	"spacer2" => array(
 		"method" => "spacer",
-		"friendly_name" => "SNMP Settings"
+		"friendly_name" => "SNMP Options"
 		),
-	"snmp_readstring" => array(
-		"method" => "textbox",
-		"friendly_name" => "SNMP Readstring",
-		"description" => "Fill in the SNMP read community for this device.",
-		"value" => "|arg1:snmp_readstring|",
-		"default" => read_config_option("mt_snmp_community"),
-		"max_length" => "100",
-		"size" => "20"
+	"snmp_options" => array(
+		"method" => "drop_sql",
+		"friendly_name" => "SNMP Options",
+		"description" => "Select a set of SNMP options to try.",
+		"value" => "|arg1:snmp_options|",
+		"none_value" => "None",
+		"sql" => "select * from mac_track_snmp order by name"
 		),
 	"snmp_readstrings" => array(
-		"method" => "textbox",
-		"friendly_name" => "SNMP Rotation Readstrings",
-		"description" => "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid.",
+		"method" => "view",
+		"friendly_name" => "Read Strings",
+		"description" => "<strong>DEPRECATED:</strong> SNMP community strings",
 		"value" => "|arg1:snmp_readstrings|",
-		"default" => read_config_option("mt_snmp_communities"),
-		"max_length" => "255",
-		"size" => "80"
-		),
-	"snmp_version" => array(
-		"method" => "drop_array",
-		"friendly_name" => "SNMP Version",
-		"description" => "Choose the SNMP version for this host.",
-		"value" => "|arg1:snmp_version|",
-		"default" => read_config_option("mt_snmp_ver"),
-		"array" => $mactrack_snmp_versions
-		),
-	"snmp_port" => array(
-		"method" => "textbox",
-		"friendly_name" => "SNMP Port",
-		"description" => "The UDP/TCP Port to poll the SNMP agent on.",
-		"value" => "|arg1:snmp_port|",
-		"max_length" => "8",
-		"default" => read_config_option("mt_snmp_port"),
-		"size" => "10"
-		),
-	"snmp_timeout" => array(
-		"method" => "textbox",
-		"friendly_name" => "SNMP Timeout",
-		"description" => "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support).",
-		"value" => "|arg1:snmp_timeout|",
-		"max_length" => "8",
-		"default" => read_config_option("mt_snmp_timeout"),
-		"size" => "10"
-		),
-	"snmp_retries" => array(
-		"method" => "textbox",
-		"friendly_name" => "SNMP Retries",
-		"description" => "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up.",
-		"value" => "|arg1:snmp_retries|",
-		"max_length" => "8",
-		"default" => read_config_option("mt_snmp_retries"),
-		"size" => "10"
+		#"default" => read_config_option("mt_snmp_readstrings"),
+		#"max_length" => "40",
+		#"size" => "20"
 		),
 	"spacer3" => array(
+		"method" => "spacer",
+		"friendly_name" => "Specific SNMP Settings"
+		),
+	);
+
+	$fields_mactrack_device_edit += $fields_mactrack_snmp_item;
+
+	$fields_mactrack_device_edit += array(
+	"spacer4" => array(
 		"method" => "spacer",
 		"friendly_name" => "Custom Authentication"
 		),
@@ -1471,6 +1710,16 @@ function mactrack_config_form () {
 		"method" => "hidden",
 		"value" => "1"
 		)
+	);
+
+
+	/* file: mactrack_snmp.php, action: item_edit */
+	$fields_mactrack_snmp_item_edit = $fields_mactrack_snmp_item + array(
+	"sequence" => array(
+		'method' => 'view',
+		'friendly_name' => 'Sequence',
+		'description' => 'Sequence of Item.',
+		'value' => '|arg1:sequence|'),
 	);
 
 	/* file: mactrack_sites.php, action: edit */
@@ -1656,4 +1905,76 @@ function mactrack_config_form () {
 	);
 }
 
+function convert_readstrings() {
+	global $config;
+
+	if (defined('CACTI_BASE_PATH')) {
+		$config["base_path"] = CACTI_BASE_PATH;
+	}
+
+	include_once($config["base_path"] . "/lib/functions.php");
+
+	$sql = "SELECT DISTINCT " .
+			"snmp_readstrings, " .
+			"snmp_version, " .
+			"snmp_port, " .
+			"snmp_timeout, " .
+			"snmp_retries " .
+			"FROM mac_track_devices";
+	cacti_log($sql, false, "MACTRACK");
+	$devices = db_fetch_assoc($sql);
+	cacti_log(serialize($devices), false, "MACTRACK");
+
+	if (sizeof($devices)) {
+		$i = 0;
+		foreach($devices as $device) {
+			# create new SNMP Option Set
+			unset($save);
+			$save["id"] = 0;
+			$save["name"] = "Custom_" . $i++;
+			$snmp_id = sql_save($save, "mac_track_snmp");
+			cacti_log("new option entry: " . $snmp_id, false, "MACTRACK");
+
+			# add each single option derived from readstrings
+			$read_strings = explode(":",$device["snmp_readstrings"]);
+			if (sizeof($read_strings)) {
+				foreach($read_strings as $snmp_readstring) {
+					unset($save);
+					$save["id"]						= 0;
+					$save["snmp_id"] 				= $snmp_id;
+					$save["sequence"] 				= get_sequence('', 'sequence', 'mac_track_snmp_items', 'snmp_id=' . $snmp_id);
+
+					$save["snmp_readstring"] 		= $snmp_readstring;
+					$save["snmp_version"] 			= $device["snmp_version"];
+					$save["snmp_port"]				= $device["snmp_port"];
+					$save["snmp_timeout"]			= $device["snmp_timeout"];
+					$save["snmp_retries"]			= $device["snmp_retries"];
+					$save["snmp_username"]			= "";
+					$save["snmp_password"]			= "";
+					$save["snmp_auth_protocol"]		= "";
+					$save["snmp_priv_passphrase"]	= "";
+					$save["snmp_priv_protocol"]		= "";
+					$save["snmp_context"]			= "";
+					$save["max_oids"]				= "";
+
+					$item_id = sql_save($save, "mac_track_snmp_items");
+					cacti_log("new option item entry: " . $item_id, false, "MACTRACK");
+				}
+			} # each readstring added as SNMP Option item
+
+			# now, let's find all devices, that used this snmp_readstrings
+			$sql = "UPDATE mac_track_devices SET snmp_options=" . $snmp_id .
+					" WHERE snmp_readstrings='" . $device["snmp_readstrings"] .
+					"' AND snmp_version=" . $device["snmp_version"] .
+					" AND snmp_port=" . $device["snmp_port"] .
+					" AND snmp_timeout=" . $device["snmp_timeout"] .
+					" AND snmp_retries=" . $device["snmp_retries"];
+			cacti_log($sql, false, "MACTRACK");
+			$ok = db_execute($sql);
+		}
+	}
+	db_execute("replace into settings (name,value) values ('mt_convert_readstrings', 'on')");
+	# we keep the field:snmp_readstrings in mac_track_devices, it should be deprecated first
+	# next mactrack release may delete that field, then
+}
 ?>

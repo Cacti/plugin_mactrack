@@ -254,7 +254,7 @@ function form_actions() {
 		print "	<tr>
 				<td class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
 					<p>Are you sure you want to delete the following device types?</p>
-					<p>$device_types_list</p>
+					<p><ul>$device_types_list</ul></p>
 				</td>
 			</tr>\n
 			";
@@ -263,7 +263,7 @@ function form_actions() {
 				<td class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
 					<p>When you click save, the following device types will be duplicated. You may optionally
 					change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix.</p>
-					<p>$device_types_list</p>
+					<p><ul>$device_types_list</ul></p>
 					<p><strong>Device Type Prefix:</strong><br>"; form_text_box("title_format", "<description> (1)", "", "255", "30", "text"); print "</p>
 				</td>
 			</tr>\n
@@ -333,7 +333,7 @@ function mactrack_device_type_export() {
 
 	$xport_array = array();
 	array_push($xport_array, '"vendor","description","device_type",' .
-		'"sysDescr_match","sysObjectID_match","scanning_function",' .
+		'"sysDescr_match","sysObjectID_match","scanning_function","ip_scanning_function",' .
 		'"serial_number_oid","lowPort","highPort"');
 
 	if (sizeof($device_types)) {
@@ -344,6 +344,7 @@ function mactrack_device_type_export() {
 			$device_type['sysDescr_match'] . '","' .
 			$device_type['sysObjectID_match'] . '","' .
 			$device_type['scanning_function'] . '","' .
+			$device_type['ip_scanning_function'] . '","' .
 			$device_type['serial_number_oid'] . '","' .
 			$device_type['lowPort'] . '","' .
 			$device_type['highPort'] . '"');
@@ -407,6 +408,7 @@ function mactrack_device_type_import() {
 			<strong>sysDescr_match</strong> - A unique set of characters from the snmp sysDescr that uniquely identify this device<br>
 			<strong>sysObjectID_match</strong> - The vendor specific snmp sysObjectID that distinguishes this device from the next<br>
 			<strong>scanning_function</strong> - The scanning function that will be used to scan this device type<br>
+			<strong>ip_scanning_function</strong> - The IP scanning function that will be used to scan this device type<br>
 			<strong>serial_number_oid</strong> - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here<br>
 			<strong>lowPort</strong> - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports<br>
 			<strong>highPort</strong> - Same as the lowPort with the exception that this is the high numbered user port number<br>
@@ -528,6 +530,7 @@ function mactrack_device_type_import_processor(&$device_types) {
 
 						break;
 					case 'scanning_function':
+					case 'ip_scanning_function':
 					case 'serial_number_oid':
 					case 'lowPort':
 					case 'highPort':

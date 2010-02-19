@@ -37,6 +37,7 @@ $title = "MacTrack Plugin -> View Interfaces";
 if (isset($_REQUEST["export_x"])) {
 	mactrack_export_records();
 }else{
+	$_REQUEST["action"] = ""; # avoid index error in top_graph_header.php
 	mactrack_redirect();
 	mactrack_view();
 }

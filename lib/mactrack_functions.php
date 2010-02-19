@@ -22,12 +22,6 @@
  +-------------------------------------------------------------------------+
 */
 
-/*	valid_snmp_device - This function validates that the device is reachable via snmp.
-  It first attempts	to utilize the default snmp readstring.  If it's not valid, it
-  attempts to find the correct read string and then updates several system
-  information variable. it returns the status	of the host (up=true, down=false)
-*/
-
 /* register this functions scanning functions */
 if (!isset($mactrack_scanning_functions)) { $mactrack_scanning_functions = array(); }
 array_push($mactrack_scanning_functions, "get_generic_dot1q_switch_ports", "get_generic_switch_ports", "get_generic_wireless_ports");
@@ -36,7 +30,8 @@ if (!isset($mactrack_scanning_functions_ip)) { $mactrack_scanning_functions_ip =
 array_push($mactrack_scanning_functions_ip, "get_standard_arp_table", "get_netscreen_arp_table");
 
 function mactrack_debug($message) {
-	global $debug;
+	global $debug, $config;
+	include_once($config["base_path"] . "/lib/functions.php");
 
 	if ($debug) {
 		print("DEBUG: " . $message . "\n");
@@ -68,7 +63,15 @@ function mactrack_check_user_realm($realm_id) {
 	}
 }
 
+/* valid_snmp_device - This function validates that the device is reachable via snmp.
+  It first attempts	to utilize the default snmp readstring.  If it's not valid, it
+  attempts to find the correct read string and then updates several system
+  information variable. it returns the status	of the host (up=true, down=false)
+ */
 function valid_snmp_device(&$device) {
+	global $config;
+	include_once($config["base_path"] . "/plugins/mactrack/mactrack_actions.php");
+
 	/* initialize variable */
 	$host_up = FALSE;
 	$device["snmp_status"] = HOST_DOWN;
@@ -81,7 +84,10 @@ function valid_snmp_device(&$device) {
 	/* if the first read did not work, loop until found */
 	$snmp_sysObjectID = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 					".1.3.6.1.2.1.1.2.0", $device["snmp_version"],
-					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$device["snmp_username"], $device["snmp_password"],
+					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+					$device["snmp_priv_protocol"], $device["snmp_context"],
+					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
 
 	$snmp_sysObjectID = str_replace("enterprises", ".1.3.6.1.4.1", $snmp_sysObjectID);
 	$snmp_sysObjectID = str_replace("OID: ", "", $snmp_sysObjectID);
@@ -95,31 +101,52 @@ function valid_snmp_device(&$device) {
 		$device["snmp_status"] = HOST_UP;
 	}else{
 		/* loop through the default and then other common for the correct answer */
-		$read_strings = explode(":",$device["snmp_readstrings"]);
+		$snmp_options = db_fetch_assoc("SELECT * from mac_track_snmp_items WHERE snmp_id=" . $device["snmp_options"] . " ORDER BY sequence");
 
-		if (sizeof($read_strings)) {
-		foreach($read_strings as $snmp_readstring) {
-			if ($snmp_readstring != $device["snmp_readstring"]) {
-				$snmp_sysObjectID = @cacti_snmp_get($device["hostname"], $snmp_readstring,
-						".1.3.6.1.2.1.1.2.0", $device["snmp_version"],
-						"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+		if (sizeof($snmp_options)) {
+		foreach($snmp_options as $snmp_option) {
+			# update $device for later db update via db_update_device_status
+			$device["snmp_readstring"] = $snmp_option["snmp_readstring"];
+			$device["snmp_version"] = $snmp_option["snmp_version"];
+			$device["snmp_username"] = $snmp_option["snmp_username"];
+			$device["snmp_password"] = $snmp_option["snmp_password"];
+			$device["snmp_auth_protocol"] = $snmp_option["snmp_auth_protocol"];
+			$device["snmp_priv_passphrase"] = $snmp_option["snmp_priv_passphrase"];
+			$device["snmp_priv_protocol"] = $snmp_option["snmp_priv_protocol"];
+			$device["snmp_context"] = $snmp_option["snmp_context"];
+			$device["snmp_port"] = $snmp_option["snmp_port"];
+			$device["snmp_timeout"] = $snmp_option["snmp_timeout"];
+			$device["snmp_retries"] = $snmp_option["snmp_retries"];
 
-				$snmp_sysObjectID = str_replace("enterprises", ".1.3.6.1.4.1", $snmp_sysObjectID);
-				$snmp_sysObjectID = str_replace("OID: ", "", $snmp_sysObjectID);
-				$snmp_sysObjectID = str_replace(".iso", ".1", $snmp_sysObjectID);
+			$snmp_sysObjectID = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
+					".1.3.6.1.2.1.1.2.0", $device["snmp_version"],
+					$device["snmp_username"], $device["snmp_password"],
+					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+					$device["snmp_priv_protocol"], $device["snmp_context"],
+					$device["snmp_port"], $device["snmp_timeout"],
+					$device["snmp_retries"]);
 
-				if ((strlen($snmp_sysObjectID) > 0) &&
-					(!substr_count($snmp_sysObjectID, "No Such Object")) &&
-					(!substr_count($snmp_sysObjectID, "Error In"))) {
-					$snmp_sysObjectID = trim(str_replace("\"", "", $snmp_sysObjectID));
-					$device["snmp_readstring"] = $snmp_readstring;
-					$device["snmp_status"] = HOST_UP;
-					$host_up = TRUE;
-					break;
-				}else{
-					$device["snmp_status"] = HOST_DOWN;
-					$host_up = FALSE;
-				}
+			$snmp_sysObjectID = str_replace("enterprises", ".1.3.6.1.4.1", $snmp_sysObjectID);
+			$snmp_sysObjectID = str_replace("OID: ", "", $snmp_sysObjectID);
+			$snmp_sysObjectID = str_replace(".iso", ".1", $snmp_sysObjectID);
+
+			if ((strlen($snmp_sysObjectID) > 0) &&
+				(!substr_count($snmp_sysObjectID, "No Such Object")) &&
+				(!substr_count($snmp_sysObjectID, "Error In"))) {
+				$snmp_sysObjectID = trim(str_replace("\"", "", $snmp_sysObjectID));
+				$device["snmp_readstring"] = $snmp_option["snmp_readstring"];
+				$device["snmp_status"] = HOST_UP;
+				$host_up = TRUE;
+				# update cacti device, if required
+				sync_mactrack_to_cacti($device);
+				# update to mactrack itself is done by db_update_device_status in mactrack_scanner.php
+				# TODO: if db_update_device_status would use api_mactrack_device_save, there would be no need to call sync_mactrack_to_cacti here
+				# but currently the parameter set doesn't match
+				mactrack_debug("Result found on Option Set (" . $snmp_option["snmp_id"] . ") Sequence (" . $snmp_option["sequence"] . "): " . $snmp_sysObjectID);
+				break; # no need to continue if we have a match
+			}else{
+				$device["snmp_status"] = HOST_DOWN;
+				$host_up = FALSE;
 			}
 		}
 		}
@@ -131,7 +158,10 @@ function valid_snmp_device(&$device) {
 		/* get system name */
 		$snmp_sysName = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 					".1.3.6.1.2.1.1.5.0", $device["snmp_version"],
-					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$device["snmp_username"], $device["snmp_password"],
+					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+					$device["snmp_priv_protocol"], $device["snmp_context"],
+					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
 
 		if (strlen($snmp_sysName) > 0) {
 			$snmp_sysName = trim(strtr($snmp_sysName,"\""," "));
@@ -141,7 +171,10 @@ function valid_snmp_device(&$device) {
 		/* get system location */
 		$snmp_sysLocation = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 					".1.3.6.1.2.1.1.6.0", $device["snmp_version"],
-					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$device["snmp_username"], $device["snmp_password"],
+					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+					$device["snmp_priv_protocol"], $device["snmp_context"],
+					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
 
 		if (strlen($snmp_sysLocation) > 0) {
 			$snmp_sysLocation = trim(strtr($snmp_sysLocation,"\""," "));
@@ -151,7 +184,10 @@ function valid_snmp_device(&$device) {
 		/* get system contact */
 		$snmp_sysContact = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 					".1.3.6.1.2.1.1.4.0", $device["snmp_version"],
-					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$device["snmp_username"], $device["snmp_password"],
+					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+					$device["snmp_priv_protocol"], $device["snmp_context"],
+					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
 
 		if (strlen($snmp_sysContact) > 0) {
 			$snmp_sysContact = trim(strtr($snmp_sysContact,"\""," "));
@@ -161,7 +197,10 @@ function valid_snmp_device(&$device) {
 		/* get system description */
 		$snmp_sysDescr = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 					".1.3.6.1.2.1.1.1.0", $device["snmp_version"],
-					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$device["snmp_username"], $device["snmp_password"],
+					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+					$device["snmp_priv_protocol"], $device["snmp_context"],
+					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
 
 		if (strlen($snmp_sysDescr) > 0) {
 			$snmp_sysDescr = trim(strtr($snmp_sysDescr,"\""," "));
@@ -171,7 +210,10 @@ function valid_snmp_device(&$device) {
 		/* get system uptime */
 		$snmp_sysUptime = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
 					".1.3.6.1.2.1.1.3.0", $device["snmp_version"],
-					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$device["snmp_username"], $device["snmp_password"],
+					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+					$device["snmp_priv_protocol"], $device["snmp_context"],
+					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
 
 		if (strlen($snmp_sysUptime) > 0) {
 			$snmp_sysUptime = trim(strtr($snmp_sysUptime,"\""," "));
@@ -677,7 +719,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 
 		$i++;
 	}
-	mactrack_debug("ifInterfaces assembly complete.");
+	mactrack_debug("ifInterfaces assembly complete: " . strlen($insert_prefix . $insert_vals . $insert_suffix));
 
 	if (strlen($insert_vals)) {
 		/* add/update records in the database */
@@ -1074,7 +1116,10 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 		/* get the bridge root port so we don't capture active ports on it */
 		$bridge_root_port = @cacti_snmp_get($device["hostname"], $snmp_readstring,
 					".1.3.6.1.2.1.17.2.7.0", $device["snmp_version"],
-					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$device["snmp_username"], $device["snmp_password"],
+					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+					$device["snmp_priv_protocol"], $device["snmp_context"],
+					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
 
 		/* determine user ports for this device and transfer user ports to
 		   a new array.
@@ -1247,7 +1292,10 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 		/* get the bridge root port so we don't capture active ports on it */
 		$bridge_root_port = @cacti_snmp_get($device["hostname"], $snmp_readstring,
 					".1.3.6.1.2.1.17.2.7.0", $device["snmp_version"],
-					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$device["snmp_username"], $device["snmp_password"],
+					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+					$device["snmp_priv_protocol"], $device["snmp_context"],
+					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
 
 		/* determine user ports for this device and transfer user ports to
 		   a new array.
@@ -1463,8 +1511,11 @@ function get_link_port_status(&$device) {
 	$return_array = array();
 
 	$walk_array = cacti_snmp_walk($device["hostname"], $device["snmp_readstring"],
-					".1.3.6.1.2.1.4.20.1.2", $device["snmp_version"], "", "",
-					"", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+					".1.3.6.1.2.1.4.20.1.2", $device["snmp_version"], $device["snmp_username"],
+					$device["snmp_password"], $device["snmp_auth_protocol"],
+					$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"],
+					$device["snmp_context"], $device["snmp_port"], $device["snmp_timeout"],
+					$device["snmp_retries"], $device["max_oids"]);
 
 	if (sizeof($walk_array)) {
 	foreach ($walk_array as $walk_item) {
@@ -1487,10 +1538,13 @@ function xform_stripped_oid($OID, &$device, $snmp_readstring = "") {
 	}
 
 	$walk_array = cacti_snmp_walk($device["hostname"], $snmp_readstring,
-					$OID, $device["snmp_version"], "", "",
-					"", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$OID, $device["snmp_version"], $device["snmp_username"],
+					$device["snmp_password"], $device["snmp_auth_protocol"],
+					$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"],
+					$device["snmp_context"], $device["snmp_port"], $device["snmp_timeout"],
+					$device["snmp_retries"], $device["max_oids"]);
 
-	$OID = ereg_replace("^\.", "", $OID);
+	$OID = preg_replace("/^\./", "", $OID);
 
 	$i = 0;
 
@@ -1581,8 +1635,11 @@ function xform_standard_indexed_data($xformOID, &$device, $snmp_readstring = "")
 	}
 
 	$xformArray = cacti_snmp_walk($device["hostname"], $snmp_readstring,
-					$xformOID, $device["snmp_version"], "", "",
-					"", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$xformOID, $device["snmp_version"], $device["snmp_username"],
+					$device["snmp_password"], $device["snmp_auth_protocol"],
+					$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"],
+					$device["snmp_context"], $device["snmp_port"], $device["snmp_timeout"],
+					$device["snmp_retries"], $device["max_oids"]);
 
 	$i = 0;
 
@@ -1614,7 +1671,11 @@ function xform_dot1q_vlan_associations(&$device, $snmp_readstring = "") {
 	/* obtain vlan associations */
 	$xformArray = cacti_snmp_walk($device["hostname"], $snmp_readstring,
 					".1.3.6.1.2.1.17.7.1.2.2.1.2", $device["snmp_version"],
-					"", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$device["snmp_username"], $device["snmp_password"],
+					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+					$device["snmp_priv_protocol"], $device["snmp_context"],
+					$device["snmp_port"], $device["snmp_timeout"],
+					$device["snmp_retries"], $device["max_oids"]);
 
 	$i = 0;
 
@@ -1644,8 +1705,11 @@ function xform_dot1q_vlan_associations(&$device, $snmp_readstring = "") {
 function xform_cisco_workgroup_port_data($xformOID, &$device) {
 	/* get raw index data */
 	$xformArray = cacti_snmp_walk($device["hostname"], $device["snmp_readstring"],
-							$xformOID, $device["snmp_version"], "", "",
-							"", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+							$xformOID, $device["snmp_version"], $device["snmp_username"],
+							$device["snmp_password"], $device["snmp_auth_protocol"],
+							$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"],
+							$device["snmp_context"], $device["snmp_port"],
+							$device["snmp_timeout"], $device["snmp_retries"], $device["max_oids"]);
 
 	$i = 0;
 
@@ -1673,8 +1737,11 @@ function xform_cisco_workgroup_port_data($xformOID, &$device) {
 function xform_indexed_data($xformOID, &$device, $xformLevel = 1) {
 	/* get raw index data */
 	$xformArray = cacti_snmp_walk($device["hostname"], $device["snmp_readstring"],
-						$xformOID, $device["snmp_version"], "", "",
-						"", "", "", "", $device["snmp_port"], $device["snmp_timeout"]);
+						$xformOID, $device["snmp_version"], $device["snmp_username"],
+						$device["snmp_password"], $device["snmp_auth_protocol"],
+						$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"],
+						$device["snmp_context"], $device["snmp_port"],
+						$device["snmp_timeout"], $device["snmp_retries"], $device["max_oids"]);
 
 	$i = 0;
 	$output_array = array();
@@ -1736,7 +1803,7 @@ function db_process_remove($device_id) {
 function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
 	global $debug;
 
-	list($micro,$seconds) = split(" ", microtime());
+	list($micro,$seconds) = explode(" ", microtime());
 	$end_time = $seconds + $micro;
 	$runduration = $end_time - $start_time;
 
@@ -1749,7 +1816,18 @@ function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
 			"ports_active='" . $device["ports_active"] . "'," .
 			"ports_trunk='" . $device["ports_trunk"] . "'," .
 			"macs_active='" . $device["macs_active"] . "'," .
+			"snmp_version='" . $device["snmp_version"] . "'," .
 			"snmp_readstring='" . $device["snmp_readstring"] . "'," .
+			"snmp_port='" . $device["snmp_port"] . "'," .
+			"snmp_timeout='" . $device["snmp_timeout"] . "'," .
+			"snmp_retries='" . $device["snmp_retries"] . "'," .
+			"max_oids='" . $device["max_oids"] . "'," .
+			"snmp_username='" . $device["snmp_username"] . "'," .
+			"snmp_password='" . $device["snmp_password"] . "'," .
+			"snmp_auth_protocol='" . $device["snmp_auth_protocol"] . "'," .
+			"snmp_priv_passphrase='" . $device["snmp_priv_passphrase"] . "'," .
+			"snmp_priv_protocol='" . $device["snmp_priv_protocol"] . "'," .
+			"snmp_context='" . $device["snmp_context"] . "'," .
 			"snmp_sysName='" . addslashes($device["snmp_sysName"]) . "'," .
 			"snmp_sysLocation='" . addslashes($device["snmp_sysLocation"]) . "'," .
 			"snmp_sysContact='" . addslashes($device["snmp_sysContact"]) . "'," .
@@ -2082,13 +2160,13 @@ function mactrack_format_interface_row($stat) {
 
 	if (mactrack_authorized(2021)) {
 		if ($stat["disabled"] == '') {
-			$rescan = "<img id='r_" . $stat["device_id"] . "_" . $stat["interface_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(\"" . $stat["device_id"] . "_" . $stat["interface_id"] . "\")' title='Rescan Device' align='absmiddle' border='0'>";
+			$rescan = "<img id='r_" . $stat["device_id"] . "_" . $stat["interface_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(\"" . $stat["device_id"] . "_" . $stat["interface_id"] . "\")' title='Rescan Device' align='middle' border='0'>";
 
 		}else{
-			$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
+			$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='middle' border='0'>";
 		}
 	}else{
-		$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
+		$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='middle' border='0'>";
 	}
 
 	$row .= "<td nowrap style='width:1%;white-space:nowrap;'>";
@@ -2178,7 +2256,7 @@ function mactrack_draw_actions_dropdown($actions_array, $include_form_end = true
 	<table align='center' width='100%'>
 		<tr>
 			<td width='1' valign='top'>
-				<img src='<?php echo $config['url_path']; ?>images/arrow.gif' alt='' align='absmiddle'>&nbsp;
+				<img src='<?php echo $config['url_path']; ?>images/arrow.gif' alt='' align='middle'>&nbsp;
 			</td>
 			<td align='right'>
 				Choose an action:
@@ -2369,22 +2447,22 @@ function mactrack_format_device_row($device, $actions=false) {
 
 	/* viewer level */
 	if ($actions) {
-		$row = "<a href='" . htmlspecialchars($config['url_path'] . "plugins/mactrack/mactrack_interfaces.php?device_id=" . $device['device_id'] . "&issues=0&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interfaces.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Interfaces' align='absmiddle' border='0'></a>";
+		$row = "<a href='" . htmlspecialchars($config['url_path'] . "plugins/mactrack/mactrack_interfaces.php?device_id=" . $device['device_id'] . "&issues=0&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interfaces.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Interfaces' align='middle' border='0'></a>";
 		/* admin level */
 		if (mactrack_authorized(2121)) {
 			if ($device["disabled"] == '') {
-				$row .= "<img id='r_" . $device["device_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device(" . $device["device_id"] . ")' title='Rescan Device' align='absmiddle' border='0'>";
+				$row .= "<img id='r_" . $device["device_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device(" . $device["device_id"] . ")' title='Rescan Device' align='middle' border='0'>";
 			}else{
-				$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
+				$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='middle' border='0'>";
 			}
 		}
 		print "<td style='width:40px;'>" . $row . "</td>";//, $device["device_id"]);
 	}
 
-	form_selectable_cell("<a class='linkEditMain' href='mactrack_devices.php?action=edit&device_id=" . $device['device_id'] . "'>" . (strlen($_REQUEST['filter']) ? eregi_replace("(" . preg_quote($_REQUEST['filter']) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device['device_name']) : $device['device_name']) . "</a>", $device["device_id"]);
+	form_selectable_cell("<a class='linkEditMain' href='mactrack_devices.php?action=edit&device_id=" . $device['device_id'] . "'>" . (strlen($_REQUEST['filter']) ? preg_replace("/(" . preg_quote($_REQUEST['filter']) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $device['device_name']) : $device['device_name']) . "</a>", $device["device_id"]);
 	form_selectable_cell($device["site_name"], $device["device_id"]);
 	form_selectable_cell(get_colored_device_status(($device["disabled"] == "on" ? true : false), $device["snmp_status"]), $device["device_id"]);
-	form_selectable_cell((strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $device["hostname"]) : $device["hostname"]), $device["device_id"]);
+	form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $device["hostname"]) : $device["hostname"]), $device["device_id"]);
 	form_selectable_cell(($device["device_type"] == '' ? 'Not Detected' : $device["device_type"]), $device["device_id"]);
 	form_selectable_cell(($device["scan_type"] == "1" ? "N/A" : $device["ips_total"]), $device["device_id"]);
 	form_selectable_cell(($device["scan_type"] == "3" ? "N/A" : $device["ports_total"]), $device["device_id"]);

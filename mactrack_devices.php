@@ -33,7 +33,9 @@ $device_actions = array(
 	2 => "Enable",
 	3 => "Disable",
 	4 => "Change SNMP Options",
-	5 => "Change Device Port Values"
+	5 => "Change Device Port Values",
+	6 => "Connect to Cacti Host via Hostname",
+	7 => "Copy SNMP Settings from Cacti Host"
 	);
 
 /* set default action */
@@ -44,11 +46,11 @@ if (isset($_REQUEST["cancel_x"])) { $_REQUEST["action"] = ""; }
 
 switch ($_REQUEST["action"]) {
 	case 'save':
-		form_save();
+		form_mactrack_save();
 
 		break;
 	case 'actions':
-		form_actions();
+		form_mactrack_actions();
 
 		break;
 	case 'edit':
@@ -85,13 +87,18 @@ switch ($_REQUEST["action"]) {
     The Save Function
    -------------------------- */
 
-function form_save() {
+function form_mactrack_save() {
+	global $config;
+	include_once($config["base_path"] . "/plugins/mactrack/mactrack_actions.php");
+
 	if ((isset($_POST["save_component_device"])) && (empty($_POST["add_dq_y"]))) {
-		$device_id = api_mactrack_device_save($_POST["device_id"], $_POST["site_id"],
+		$device_id = api_mactrack_device_save($_POST["device_id"], $_POST["host_id"], $_POST["site_id"],
 			$_POST["hostname"], $_POST["device_name"], $_POST["scan_type"],
-			$_POST["snmp_readstring"], $_POST["snmp_readstrings"],
-			$_POST["snmp_version"],	$_POST["snmp_port"], $_POST["snmp_timeout"],
-			$_POST["snmp_retries"], $_POST["port_ignorePorts"],
+			$_POST["snmp_options"], $_POST["snmp_readstring"],
+			$_POST["snmp_version"], $_POST["snmp_username"], $_POST["snmp_password"], $_POST["snmp_auth_protocol"],
+			$_POST["snmp_priv_passphrase"], $_POST["snmp_priv_protocol"], $_POST["snmp_context"],
+			$_POST["snmp_port"], $_POST["snmp_timeout"],
+			$_POST["snmp_retries"], $_POST["max_oids"], $_POST["ignorePorts"],
 			$_POST["notes"], $_POST["user_name"], $_POST["user_password"],
 			(isset($_POST["disabled"]) ? $_POST["disabled"] : ""));
 
@@ -124,51 +131,19 @@ function api_mactrack_device_remove($device_id){
 	db_execute("DELETE FROM mac_track_devices WHERE device_id=" . $device_id);
 }
 
-function api_mactrack_device_save($device_id, $site_id, $hostname,
-			$device_name, $scan_type, $snmp_readstring, $snmp_readstrings,
-			$snmp_version, $snmp_port, $snmp_timeout, $snmp_retries,
-			$ignorePorts, $notes, $user_name, $user_password,
-			$disabled) {
-
-	$save["device_id"] = $device_id;
-	$save["site_id"] = $site_id;
-	$save["hostname"] = form_input_validate($hostname, "hostname", "", false, 3);
-	$save["device_name"] = form_input_validate($device_name, "device_name", "", false, 3);
-	$save["notes"] = form_input_validate($notes, "notes", "", true, 3);
-	$save["scan_type"] = form_input_validate($scan_type, "scan_type", "", false, 3);
-	$save["snmp_readstring"] = form_input_validate($snmp_readstring, "snmp_readstring", "", false, 3);
-	$save["snmp_readstrings"] = form_input_validate($snmp_readstrings, "snmp_readstrings", "", true, 3);
-	$save["snmp_version"] = form_input_validate($snmp_version, "snmp_version", "", false, 3);
-	$save["snmp_port"] = form_input_validate($snmp_port, "snmp_port", "^[0-9]+$", false, 3);
-	$save["snmp_timeout"] = form_input_validate($snmp_timeout, "snmp_timeout", "^[0-9]+$", false, 3);
-	$save["snmp_retries"] = form_input_validate($snmp_retries, "snmp_retries", "^[0-9]+$", false, 3);
-	$save["user_name"] = form_input_validate($user_name, "user_name", "", true, 3);
-	$save["user_password"] = form_input_validate($user_password, "user_password", "", true, 3);
-	$save["ignorePorts"] = form_input_validate($ignorePorts, "port_ignorePorts", "", true, 3);
-	$save["disabled"] = form_input_validate($disabled, "disabled", "", true, 3);
-
-	$device_id = 0;
-	if (!is_error_message()) {
-		$device_id = sql_save($save, "mac_track_devices", "device_id");
-
-		if ($device_id) {
-			raise_message(1);
-		}else{
-			raise_message(2);
-		}
-	}
-
-	return $device_id;
-}
-
-
 /* ------------------------
     The "actions" function
    ------------------------ */
 
-function form_actions() {
-	global $colors, $config, $device_actions, $fields_mactrack_device_edit;
+function form_mactrack_actions() {
+	global $colors, $config, $device_actions, $fields_mactrack_device_edit, $fields_mactrack_snmp_item;
 
+	if (defined('CACTI_BASE_PATH')) {
+		$config["base_path"] = CACTI_BASE_PATH;
+	}
+
+	include_once($config["base_path"] . "/lib/functions.php");
+	
 	/* if we are to save this form, instead of display it */
 	if (isset($_POST["selected_items"])) {
 		$selected_items = unserialize(stripslashes($_POST["selected_items"]));
@@ -202,7 +177,7 @@ function form_actions() {
 					}
 				}
 			}
-		}elseif ($_POST["drp_action"] == "5") { /* change port settngs for multiple devices */
+		}elseif ($_POST["drp_action"] == "5") { /* change port settings for multiple devices */
 			for ($i=0;($i<count($selected_items));$i++) {
 				/* ================= input validation ================= */
 				input_validate_input_number($selected_items[$i]);
@@ -213,6 +188,60 @@ function form_actions() {
 					if (isset($_POST["t_$field_name"])) {
 						db_execute("update mac_track_devices set $field_name = '" . $_POST[$field_name] . "' where id='" . $selected_items[$i] . "'");
 					}
+				}
+			}
+		}elseif ($_POST["drp_action"] == "6") { /* Connect Selected Devices */
+			for ($i=0;($i<count($selected_items));$i++) {
+				/* ================= input validation ================= */
+				input_validate_input_number($selected_items[$i]);
+				/* ==================================================== */
+
+				$cacti_host = db_fetch_row("SELECT host.id, host.description FROM mac_track_devices " . 
+									"LEFT JOIN host ON (mac_track_devices.hostname=host.hostname) " . 
+									"WHERE mac_track_devices.device_id=" . $selected_items[$i]);
+				db_execute("UPDATE mac_track_devices SET " .
+							"host_id=" . $cacti_host["id"] . 
+							", device_name='" . $cacti_host["description"] . 
+							"' WHERE device_id='" . $selected_items[$i] . "'");
+			}
+		}elseif ($_POST["drp_action"] == "7") { /* Copy SNMP Settings */
+			for ($i=0;($i<count($selected_items));$i++) {
+				/* ================= input validation ================= */
+				input_validate_input_number($selected_items[$i]);
+				/* ==================================================== */
+
+				cacti_log("Item: " . $selected_items[$i], false, "MACTRACK");
+				$sql = "SELECT " .
+									"host.id, " .
+									"host.snmp_version, " .
+									"host.snmp_community as snmp_readstring, " .
+									"host.snmp_port, " .
+									"host.snmp_timeout, " .
+									"host.ping_retries as snmp_retries, " .
+									"host.max_oids, " .
+									"host.snmp_username, " .
+									"host.snmp_password, " .
+									"host.snmp_auth_protocol, " .
+									"host.snmp_priv_passphrase, " .
+									"host.snmp_priv_protocol, " .
+									"host.snmp_context " .
+									"FROM mac_track_devices " .
+									"LEFT JOIN host ON (mac_track_devices.hostname=host.hostname) " . 
+									"WHERE mac_track_devices.device_id=" . $selected_items[$i];
+				$cacti_host = db_fetch_row($sql);
+				cacti_log("SQL: " . $sql, false, "MACTRACK");
+				if (isset($cacti_host["id"])) {
+					reset($fields_mactrack_snmp_item);
+					$updates = "";
+					while (list($field_name, $field_array) = each($fields_mactrack_snmp_item)) {
+						$updates .= (strlen($updates) ? ", " : " "). $field_name . "='" . $cacti_host[$field_name] . "'";
+					}
+					if(strlen($updates)) {
+						cacti_log("UPDATE mac_track_devices SET " . $updates .	" WHERE device_id='" . $selected_items[$i] . "'", false, "MACTRACK");
+						db_execute("UPDATE mac_track_devices SET " . $updates .	" WHERE device_id='" . $selected_items[$i] . "'");
+					}
+				} else {
+					# skip silently; possible enhacement: tell the user what we did
 				}
 			}
 		}elseif ($_POST["drp_action"] == "1") { /* delete */
@@ -257,14 +286,14 @@ function form_actions() {
 		print "	<tr>
 				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
 					<p>To enable the following devices, press the \"yes\" button below.</p>
-					<p>$device_list</p>
+					<p><ul>$device_list</ul></p>
 				</td>
 				</tr>";
 	}elseif ($_POST["drp_action"] == "3") { /* Disable Devices */
 		print "	<tr>
 				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
 					<p>To disable the following devices, press the \"yes\" button below.</p>
-					<p>$device_list</p>
+					<p><ul>$device_list</ul></p>
 				</td>
 				</tr>";
 	}elseif ($_POST["drp_action"] == "4") { /* change snmp options */
@@ -272,7 +301,7 @@ function form_actions() {
 				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
 					<p>To change SNMP parameters for the following devices, check the box next to the fields
 					you want to update, fill in the new value, and click Save.</p>
-					<p>$device_list</p>
+					<p><ul>$device_list</ul></p>
 				</td>
 				</tr>";
 				$form_array = array();
@@ -285,7 +314,7 @@ function form_actions() {
 						$form_array[$field_name]["form_id"] = 0;
 						$form_array[$field_name]["sub_checkbox"] = array(
 							"name" => "t_" . $field_name,
-							"friendly_name" => "Update this Field",
+							"friendly_name" => "Update this Field<br/>",
 							"value" => ""
 							);
 					}
@@ -302,7 +331,7 @@ function form_actions() {
 				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
 					<p>To change upper or lower port parameters for the following devices, check the box next to the fields
 					you want to update, fill in the new value, and click Save.</p>
-					<p>$device_list</p>
+					<p><ul>$device_list</ul></p>
 				</td>
 				</tr>";
 				$form_array = array();
@@ -327,11 +356,27 @@ function form_actions() {
 						"fields" => $form_array
 						)
 					);
+	}elseif ($_POST["drp_action"] == "6") { /* Connect Devices */
+		print "	<tr>
+				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
+					<p>To connect the following devices to their respective Cacti Device, press the \"yes\" button below.</p>
+					<p>The relation will be built on equal hostnames. Description will be updated as well.</p>
+					<p><ul>$device_list</ul></p>
+				</td>
+				</tr>";
+	}elseif ($_POST["drp_action"] == "7") { /* Copy SNMP Settings */
+		print "	<tr>
+				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
+					<p>To copy SNMP Settings from connected Cacti Device to MacTrack Device, press the \"yes\" button below.</p>
+					<p>All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries.</p>
+					<p><ul>$device_list</ul></p>
+				</td>
+				</tr>";
 	}elseif ($_POST["drp_action"] == "1") { /* delete */
 		print "	<tr>
 				<td class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
 					<p>Are you sure you want to delete the following devices?</p>
-					<p>$device_list</p>
+					<p><ul>$device_list</ul></p>
 				</td>
 			</tr>\n
 			";
@@ -403,25 +448,34 @@ function mactrack_device_export() {
 	$devices = mactrack_get_devices($sql_where, 0, FALSE);
 
 	$xport_array = array();
-	array_push($xport_array, '"site_id","site_name","device_id","device_name",' .
-		'"hostname","snmp_readstring","snmp_readstrings","snmp_version",' .
-		'"snmp_port","snmp_timeout","snmp_retries","ignorePorts",' .
-		'"notes","scan_type","disabled","ports_total","ports_active","ports_trunk",' .
-		'"macs_active","last_rundate","last_runduration"');
+	array_push($xport_array, '"site_id","site_name","device_id","device_name","notes",' .
+		'"hostname","snmp_options","snmp_readstring","snmp_version",' .
+		'"snmp_username","snmp_password","snmp_auth_protocol","snmp_priv_passphrase","snmp_priv_protocol","snmp_context"' .
+		'"snmp_port","snmp_timeout","snmp_retries","max_oids","snmp_sysName","snmp_sysLocation",' .
+		'"snmp_sysContact","snmp_sysObjectID","snmp_sysDescr","snmp_sysUptime",' .
+		'"ignorePorts","scan_type","disabled","ports_total","ports_active",' .
+		'"ports_trunk","macs_active","last_rundate","last_runduration"');
 
 	if (sizeof($devices)) {
 		foreach($devices as $device) {
-			array_push($xport_array,'"' . $device['site_id'] . '","' .
-			$device['site_name'] . '","' . $device['device_id'] . '","' .
-			$device['device_name'] . '","' . $device['hostname'] . '","' .
-			$device['snmp_readstring'] . '","' . $device['snmp_readstrings'] . '","' .
-			$device['snmp_version'] . '","' . $device['snmp_port'] . '","' .
-			$device['snmp_timeout'] . '","' . $device['snmp_retries'] . '","' .
-			$device['ignorePorts'] . '","' . $device['notes'] . '","' .
-			$device['scan_type'] . '","' . $device['disabled'] . '","' .
-			$device['ports_total'] . '","' . $device['ports_active'] . '","' .
-			$device['ports_trunk'] . '","' . $device['macs_active'] . '","' .
-			$device['last_rundate'] . '","' . $device['last_runduration'] . '"');
+			array_push($xport_array,'"'     .
+			$device['site_id']              . '","' . $device['site_name']            . '","' .
+			$device['device_id']            . '","' . $device['device_name']          . '","' .
+			$device['notes']                . '","' . $device['hostname']             . '","' .
+			$device['snmp_options']         . '","' . $device['snmp_readstring']      . '","' .
+			$device['snmp_version']         . '","' . $device['snmp_username']        . '","' .
+			$device['snmp_password']        . '","' . $device['snmp_auth_protocol']   . '","' .
+			$device['snmp_priv_passphrase'] . '","' . $device['snmp_priv_protocol']   . '","' .
+			$device['snmp_context']         . '","' . $device['snmp_port']            . '","' .
+			$device['snmp_timeout']         . '","' . $device['snmp_retries']         . '","' .
+			$device['max_oids']             . '","' . $device['snmp_sysName']         . '","' .
+			$device['snmp_sysLocation']     . '","' . $device['snmp_sysContact']      . '","' .
+			$device['snmp_sysObjectID']     . '","' . $device['snmp_sysDescr']        . '","' .
+			$device['snmp_sysUptime']       . '","' . $device['ignorePorts']          . '","' .
+			$device['scan_type']            . '","' . $device['disabled']             . '","' .
+			$device['ports_total']          . '","' . $device['ports_active']         . '","' .
+			$device['ports_trunk']          . '","' . $device['macs_active']          . '","' .
+			$device['last_rundate']         . '","' . $device['last_runduration']     . '"');
 		}
 	}
 
@@ -487,12 +541,19 @@ function mactrack_device_import() {
 			<strong>notes</strong> - More detailed information about the device, including location, environmental conditions, etc.<br>
 			<strong>ignorePorts</strong> - A list of ports that should not be scanned for user devices<br>
 			<strong>scan_type</strong> - Redundant information indicating the intended device type.  See below for valid values.<br>
+			<strong>snmp_options</strong> - Id of a set of SNMP options<br>
 			<strong>snmp_readstring</strong> - The current snmp read string for the device<br>
-			<strong>snmp_readstrings</strong> - A list of know good readstrings for your network<br>
-			<strong>snmp_version</strong> - The snmp version you wish to scan this device with.  Valid values are 1 and 2<br>
+			<strong>snmp_version</strong> - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3<br>
 			<strong>snmp_port</strong> - The UDP port that the snmp agent is running on<br>
 			<strong>snmp_timeout</strong> - The timeout in milliseconds to wait for an snmp response before trying again<br>
 			<strong>snmp_retries</strong> - The number of times to retry a snmp request before giving up<br>
+			<strong>max_oids</strong> - Specified the number of OID's that can be obtained in a single SNMP Get request<br>
+			<strong>snmp_username</strong> - SNMP V3: SNMP username<br>
+			<strong>snmp_password</strong> - SNMP V3: SNMP password<br>
+			<strong>snmp_auth_protocol</strong> - SNMP V3: SNMP authentication protocol<br>
+			<strong>snmp_priv_passphrase</strong> - SNMP V3: SNMP privacy passphrase<br>
+			<strong>snmp_priv_protocol</strong> - SNMP V3: SNMP privacy protocol<br>
+			<strong>snmp_context</strong> - SNMP V3: SNMP context<br>
 			<br>
 			<strong>The primary key for this table is a combination of the following three fields:</strong>
 			<br><br>
@@ -543,13 +604,20 @@ function mactrack_device_import_processor(&$devices) {
 				$line_item = trim(str_replace('"', '', $line_item));
 
 				switch ($line_item) {
+					case 'snmp_options':
 					case 'snmp_readstring':
-					case 'snmp_readstrings':
 					case 'snmp_timeout':
 					case 'snmp_retries':
 					case 'ignorePorts':
 					case 'scan_type':
 					case 'snmp_version':
+					case 'snmp_username':
+					case 'snmp_password':
+					case 'snmp_auth_protocol':
+					case 'snmp_priv_passphrase':
+					case 'snmp_priv_protocol':
+					case 'snmp_context':
+					case 'max_oids':
 					case 'notes':
 					case 'disabled':
 						if (!$first_column) {
@@ -827,14 +895,14 @@ function mactrack_device_edit() {
 						snmp_set_oid_numeric_print(TRUE);
 					}
 
-					$snmp_system = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.1.0", $device["snmp_version"], "", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"], SNMP_WEBUI);
+					$snmp_system = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.1.0", $device["snmp_version"], $device["snmp_username"], $device["snmp_password"], $device["snmp_auth_protocol"], $device["snmp_priv_passphrase"], $device["snmp_priv_protocol"], $device["snmp_context"], $device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"], SNMP_WEBUI);
 
 					if ($snmp_system == "") {
 						print "<span style='color: #ff0000; font-weight: bold;'>SNMP error</span>\n";
 					}else{
-						$snmp_uptime = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.3.0", $device["snmp_version"], "", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"], SNMP_WEBUI);
-						$snmp_hostname = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.5.0", $device["snmp_version"], "", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"], SNMP_WEBUI);
-						$snmp_objid = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.2.0", $device["snmp_version"], "", "", "", "", "", "", $device["snmp_port"], $device["snmp_timeout"], SNMP_WEBUI);
+						$snmp_uptime = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.3.0", $device["snmp_version"], $device["snmp_username"], $device["snmp_password"], $device["snmp_auth_protocol"], $device["snmp_priv_passphrase"], $device["snmp_priv_protocol"], $device["snmp_context"], $device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"], SNMP_WEBUI);
+						$snmp_hostname = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.5.0", $device["snmp_version"], $device["snmp_username"], $device["snmp_password"], $device["snmp_auth_protocol"], $device["snmp_priv_passphrase"], $device["snmp_priv_protocol"], $device["snmp_context"], $device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"], SNMP_WEBUI);
+						$snmp_objid = cacti_snmp_get($device["hostname"], $device["snmp_readstring"], ".1.3.6.1.2.1.1.2.0", $device["snmp_version"], $device["snmp_username"], $device["snmp_password"], $device["snmp_auth_protocol"], $device["snmp_priv_passphrase"], $device["snmp_priv_protocol"], $device["snmp_context"], $device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"], SNMP_WEBUI);
 
 						$snmp_objid = str_replace("enterprises", ".1.3.6.1.4.1", $snmp_objid);
 						$snmp_objid = str_replace("OID: ", "", $snmp_objid);
@@ -873,6 +941,8 @@ function mactrack_device_edit() {
 	}else{
 		mactrack_save_button("cancel", "save", "", "device_id");
 	}
+
+	print "<script type='text/javascript' src='" . URL_PATH . "plugins/mactrack/mactrack_snmp.js'></script>";
 }
 
 function mactrack_get_devices(&$sql_where, $row_limit, $apply_limits = TRUE) {
@@ -922,12 +992,19 @@ function mactrack_get_devices(&$sql_where, $row_limit, $apply_limits = TRUE) {
 		mac_track_devices.device_name,
 		mac_track_devices.notes,
 		mac_track_devices.hostname,
+		mac_track_devices.snmp_options,
 		mac_track_devices.snmp_readstring,
-		mac_track_devices.snmp_readstrings,
 		mac_track_devices.snmp_version,
+		mac_track_devices.snmp_username,
+		mac_track_devices.snmp_password,
+		mac_track_devices.snmp_auth_protocol,
+		mac_track_devices.snmp_priv_passphrase,
+		mac_track_devices.snmp_priv_protocol,
+		mac_track_devices.snmp_context,
 		mac_track_devices.snmp_port,
 		mac_track_devices.snmp_timeout,
 		mac_track_devices.snmp_retries,
+		mac_track_devices.max_oids,
 		mac_track_devices.snmp_status,
 		mac_track_devices.ignorePorts,
 		mac_track_devices.disabled,

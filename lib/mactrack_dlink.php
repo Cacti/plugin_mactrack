@@ -118,7 +118,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 	if ($ports_active > 0) {
 		/* get bridge port to ifIndex mapping */
 		$bridgePortIfIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.17.1.4.1.2", $device, $snmp_readstring);
-		
+
 		$vlan_names = xform_standard_indexed_data(".1.3.6.1.2.1.17.7.1.4.3.1.1", $device, $snmp_readstring);
 
 		$port_status = xform_stripped_oid("1.3.6.1.2.1.17.7.1.2.2.1.3", $device, $snmp_readstring);
@@ -155,7 +155,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 				}
 			}
 		}
-    
+
     $i = 0;
 		// foreach ($vlan_ids as $key => $vlan_item) {
 //						$port_key_array[$i]["key"] = $key;
@@ -172,13 +172,13 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 //						print ("---------->>>key(i)=[$i] vlan_name=[" .  $vlan_name[$i]["vlan_name"] . "]\n");
 //						$i++;
 //		}
-		
+
 		/* compare the user ports to the brige port data, store additional
 		   relevant data about the port.
 		*/
-		
+
 		$ifNames = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.18", $device);
-		
+
 		$i = 0;
 		foreach ($port_key_array as $port_key) {
 			/* map bridge port to interface port and check type */
@@ -229,27 +229,27 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 // 		if (sizeof($new_port_key_array) > 0) {
 // 			/* get the bridges active MAC addresses */
 // // 			$port_macs = xform_stripped_oid(".1.3.6.1.2.1.17.4.3.1.1", $device, $snmp_readstring);
-// 			$port_macs = xform_dlink_stripped_oid(".1.3.6.1.2.1.17.7.1.2.2.1.2", $device, $snmp_readstring);			
-// 
+// 			$port_macs = xform_dlink_stripped_oid(".1.3.6.1.2.1.17.7.1.2.2.1.2", $device, $snmp_readstring);
+//
 // 			foreach ($port_macs as $key => $port_mac) {
-// 
+//
 // //print ("===bef key=[". $key . "]\n");
-// //print ("===bef port_macs[key]=[". $port_macs[$key] . "]\n");			
+// //print ("===bef port_macs[key]=[". $port_macs[$key] . "]\n");
 // 				$port_macs[$key] = xform_mac_address($port_mac);
-// //print ("===aft port_macs[key]=[". $port_macs[$key] . "]\n");				
+// //print ("===aft port_macs[key]=[". $port_macs[$key] . "]\n");
 // 			}
-// 
+//
 // 			foreach ($new_port_key_array as $key => $port_key) {
-// 
+//
 // //				print ("===++++++==[key]=[". $port_key["key"] . "]\n");
-// 				
+//
 // 			}
 // 			foreach ($port_macs as $key => $port_mac) {
-// 
+//
 // //				print ("===------==[key]=[". @$port_mac[4] . "]\n");
-// 				
+//
 // 			}
-// 
+//
 // 			foreach ($new_port_key_array as $key => $port_key) {
 // 				$new_port_key_array[$key]["mac_address"] = @$port_macs[$port_key["key"]];
 // 				//print ("==key=[$key] = [". $new_port_key_array[$key]["mac_address"] . "] port=[" . $new_port_key_array[$key]["port_number"] . "]\n");
@@ -257,10 +257,10 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 //         //print ("==2aft port_macs[port_key[key]]=[". @$port_macs[$port_key["key"]] . "]\n");
 //         //$new_port_key_array[$key]["vlan_id"] = @$port_macs[$port_key["key"]]["vlan_id"];
 // //        print ("===check key3[". $new_port_key_array[$key] . "] = [ " . $port_macs[$port_key["key"]] . "]\n");
-//         
+//
 // 				mactrack_debug("INDEX: '". $key . "' MAC ADDRESS: key=" . $port_key["key"] . "=[" . $port_key["key"] . "] vlan_id=[" . $port_key["vlan_id"]);
 // 			}
-// 
+//
 // 			mactrack_debug("Port mac address information collected.");
 // 		}else{
 // 			mactrack_debug("No user ports on this network.");
@@ -296,13 +296,15 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 //   	if (strlen($snmp_readstring) == 0) {
 //   		$snmp_readstring = $device["snmp_readstring"];
 //   	}
-//   
+//
 //   	$walk_array = cacti_snmp_walk($device["hostname"], $snmp_readstring,
-//   					$OID, $device["snmp_version"], "", "",
-//   					$device["snmp_port"], $device["snmp_timeout"]);
-//   
-//   	$OID = ereg_replace("^\.", "", $OID);
-//   
+//   					$OID, $device["snmp_version"], $device["snmp_username"],
+//						$device["snmp_password"], $device["snmp_auth_protocol"],
+//						$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"], $device["snmp_context"]
+//   					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"], $device["max_oids"]);
+//
+//   	$OID = preg_replace("/^\./", "", $OID);
+//
 //   	$i = 0;
 //   	foreach ($walk_array as $walk_item) {
 //   		$key = $walk_item["oid"];
@@ -319,13 +321,15 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 //   		$return_array[$i]["vlan_id"]=substr($key,1,$perPos-1);
 //   		$vlan_name = @cacti_snmp_get($device["hostname"], $snmp_readstring,
 //   					".1.3.6.1.2.1.17.7.1.4.3.1.1." . $return_array[$i]["vlan_id"], $device["snmp_version"],
-//   					"", "", $device["snmp_port"], $device["snmp_timeout"]);
+//   					$device["snmp_username"], $device["snmp_password"], $device["snmp_auth_protocol"],
+//						$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"], $device["snmp_context"],
+//						$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
 //   		$return_array[$i]["vlan_name"] = $vlan_name;
-//   		
+//
 //   		print ("=========key=[$key], i=[$i], [" . $return_array[$i]["value"] . "] vlan_id=[" . $return_array[$i]["vlan_id"] . "] vlan_name=[" . $return_array[$i]["vlan_name"] . "]\n");
 //   		$i++;
 //   	}
-//   
+//
 //   	return array_rekey($return_array, "key", "value");
 //   }
 
@@ -344,14 +348,14 @@ function dlink_convert_macs ($oldmac){
    {
       $newmac = $newmac . dec2hex($piece[$i],2) . ":";
    }
-		
-		
+
+
 		$newmac = substr($newmac,0,strlen($newmac)-1);
 		//print ("=newmac=$newmac\n");
 	return $newmac;
-	
+
 	}
-	
+
 	function dec2hex($number, $length) {
   $hexval="";
   while ($number>0) {
@@ -396,7 +400,11 @@ function xform_dlink_vlan_associations(&$device, $snmp_readstring = "") {
 	/* obtain vlan associations */
 	$xformArray = cacti_snmp_walk($device["hostname"], $snmp_readstring,
 					".1.3.6.1.2.1.17.7.1.2.2.1.2", $device["snmp_version"],
-					"", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$device["snmp_username"], $device["snmp_password"],
+					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+					$device["snmp_priv_protocol"], $device["snmp_context"],
+					$device["snmp_port"], $device["snmp_timeout"],
+					$device["snmp_retries"], $device["max_oids"]);
 
 	$i = 0;
 	foreach($xformArray as $xformItem) {
@@ -414,7 +422,9 @@ function xform_dlink_vlan_associations(&$device, $snmp_readstring = "") {
 		$output_array[$i]["key"] = substr($key, $perPos+1);
 		$vlan_name = @cacti_snmp_get($device["hostname"], $snmp_readstring,
 					".1.3.6.1.2.1.17.7.1.4.3.1.1." . $output_array[$i]["vlan_id"], $device["snmp_version"],
-					"", "", $device["snmp_port"], $device["snmp_timeout"]);
+					$device["snmp_username"], $device["snmp_password"], $device["snmp_auth_protocol"],
+					$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"], $device["snmp_context"],
+					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
 		$output_array[$i]["vlan_name"] = $vlan_name;
 		//print ("========= i=[$i] [" . $output_array[$i]["vlan_id"] . "] name=[" . $output_array[$i]["vlan_name"] . "]\n");
 		$i++;
@@ -431,7 +441,7 @@ function get_dlink_vlan_id($OID) {
 		$perPos = strpos($OID, ".",1);
 		$vlan_id = substr($OID,1,$perPos-1);
 	return $vlan_id;
-} 
+}
 function convert_dlink_data($old_port_type) {
 		if (substr_count($old_port_type, "(") > 0) {
 			$pos1 = strpos($old_port_type, "(");
@@ -440,7 +450,7 @@ function convert_dlink_data($old_port_type) {
 		} else{
 			$rezult=$old_port_type;
 		}
-		
-return $rezult;  
+
+return $rezult;
 }
 ?>

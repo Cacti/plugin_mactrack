@@ -184,14 +184,14 @@ if (read_config_option("mt_collection_timing") != "disabled") {
 		if ($time_till_next_run < 0 || $forcerun == TRUE) {
 			mactrack_debug("Either a scan has been forced, or it's time to check for macs");
 			/* take time and log performance data */
-			list($micro,$seconds) = split(" ", microtime());
+			list($micro,$seconds) = explode(" ", microtime());
 			$start = $seconds + $micro;
 
 			db_execute("REPLACE INTO settings (name, value) VALUES ('mt_last_run_time', '$current_time')");
 			$running_processes = db_fetch_cell("SELECT count(*) FROM mac_track_processes");
 
 			if ($running_processes) {
-				cacti_log("ERROR: Can not start MAC Trackinging process.  There is already one in progress", TRUE);
+				cacti_log("ERROR: Can not start MAC Tracking process.  There is already one in progress", TRUE);
 			}else{
 				collect_mactrack_data($start, $site_id);
 				log_mactrack_statistics("collect");
@@ -200,7 +200,7 @@ if (read_config_option("mt_collection_timing") != "disabled") {
 
 		if ($time_till_next_db_maint < 0) {
 			/* take time and log performance data */
-			list($micro,$seconds) = split(" ", microtime());
+			list($micro,$seconds) = explode(" ", microtime());
 			$start = $seconds + $micro;
 
 			db_execute("REPLACE INTO settings (name, value) VALUES ('mt_last_db_maint_time', '$current_time')");
@@ -369,7 +369,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			}
 
 			/* take time to check for an exit condition */
-			list($micro,$seconds) = split(" ", microtime());
+			list($micro,$seconds) = explode(" ", microtime());
 			$current = $seconds + $micro;
 
 			/* exit if we've run too long */
@@ -403,7 +403,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			}
 
 			/* take time to check for an exit condition */
-			list($micro,$seconds) = split(" ", microtime());
+			list($micro,$seconds) = explode(" ", microtime());
 			$current = $seconds + $micro;
 
 			/* exit if we've run too long */
@@ -468,7 +468,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			}
 
 			/* take time to check for an exit condition */
-			list($micro,$seconds) = split(" ", microtime());
+			list($micro,$seconds) = explode(" ", microtime());
 			$current = $seconds + $micro;
 
 			/* exit if we've run too long */
@@ -713,7 +713,7 @@ function log_mactrack_statistics($type = "collect") {
 	$concurrent_processes = read_config_option("mt_processes");
 
 	/* take time and log performance data */
-	list($micro,$seconds) = split(" ", microtime());
+	list($micro,$seconds) = explode(" ", microtime());
 	$end = $seconds + $micro;
 
 	if ($type == "collect") {

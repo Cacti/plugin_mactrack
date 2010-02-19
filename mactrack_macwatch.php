@@ -135,7 +135,7 @@ function form_actions() {
 		print "	<tr>
 				<td class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
 					<p>Are you sure you want to delete the following watched Mac's?</p>
-					<p>$macw_list</p>";
+					<p><ul>$macw_list</ul></p>";
 					print "</td></tr>
 				</td>
 			</tr>\n
@@ -396,11 +396,11 @@ function mactrack_macw() {
 			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 				?>
 				<td width="20%">
-					<a class="linkEditMain" href="mactrack_macwatch.php?action=edit&mac_id=<?php print $mac['mac_id'];?>"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["name"]) : $mac["name"]);?></a>
+					<a class="linkEditMain" href="mactrack_macwatch.php?action=edit&mac_id=<?php print $mac['mac_id'];?>"><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["name"]) : $mac["name"]);?></a>
 				</td>
-				<td width="10%"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["mac_address"]) : $mac["mac_address"]);?></td>
-				<td width="10%"><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["ticket_number"]) : $mac["ticket_number"]);?></td>
-				<td style='max-width:80%;'><?php print (strlen($_REQUEST["filter"]) ? eregi_replace("(" . preg_quote($_REQUEST["filter"]) . ")", "<span style='background-color: #F8D93D;'>\\1</span>", htmlspecialchars($mac["description"])) : htmlspecialchars($mac["description"]));?></td>
+				<td width="10%"><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["mac_address"]) : $mac["mac_address"]);?></td>
+				<td width="10%"><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["ticket_number"]) : $mac["ticket_number"]);?></td>
+				<td style='max-width:80%;'><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", htmlspecialchars($mac["description"])) : htmlspecialchars($mac["description"]));?></td>
 				<td width="10%"><?php print ($mac["date_first_seen"] == "0000-00-00 00:00:00" ? "N/A" : $mac["date_first_seen"]);?></td>
 				<td width="10%"><?php print ($mac["date_last_seen"] == "0000-00-00 00:00:00" ? "N/A" : $mac["date_last_seen"]);?></td>
 
