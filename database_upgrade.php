@@ -208,6 +208,7 @@ if (0 == 1) {
 }
 
 /* start 2.0 Changes */
+add_column("mac_track_interfaces", "sysUptime",             "ALTER TABLE `mac_track_interfaces` ADD COLUMN `sysUptime` int(10) unsigned NOT NULL default '0' AFTER `device_id`");
 add_column("mac_track_interfaces", "ifHighSpeed",           "ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifHighSpeed` int(10) unsigned NOT NULL default '0' AFTER `ifSpeed`");
 add_column("mac_track_interfaces", "ifDuplex",              "ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifDuplex` int(10) unsigned NOT NULL default '0' AFTER `ifHighSpeed`");
 add_column("mac_track_interfaces", "int_ifInDiscards",      "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInDiscards` int(10) unsigned NOT NULL default '0' AFTER `ifOutErrors`");
