@@ -40,7 +40,6 @@ function plugin_init_mactrack() {
 }
 
 function plugin_mactrack_install() {
-
 	api_plugin_register_hook('mactrack', 'top_header_tabs',       'mactrack_show_tab',             "setup.php");
 	api_plugin_register_hook('mactrack', 'top_graph_header_tabs', 'mactrack_show_tab',             "setup.php");
 	api_plugin_register_hook('mactrack', 'config_arrays',         'mactrack_config_arrays',        "setup.php");
