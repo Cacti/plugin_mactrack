@@ -532,7 +532,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 
 	/* prevent table scans, either a device or site must be selected */
 	if ($_REQUEST["site_id"] == -1 && $_REQUEST["device_id"] == -1) {
-		return array();
+		if (!strlen($sql_where)) return array();
 	}
 
 	if ($_REQUEST["scan_date"] == 3) {
@@ -555,8 +555,10 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 			site_name, device_id, device_name, hostname, mac_address, vendor_name, ip_address, dns_hostname, port_number,
 			port_name, vlan_id, vlan_name, scan_date
 			FROM mac_track_ports
-			LEFT JOIN mac_track_sites ON (mac_track_ports.site_id = mac_track_sites.site_id)
-			LEFT JOIN mac_track_oui_database ON (mac_track_oui_database.vendor_mac = mac_track_ports.vendor_mac)
+			LEFT JOIN mac_track_sites 
+			ON (mac_track_ports.site_id = mac_track_sites.site_id)
+			LEFT JOIN mac_track_oui_database 
+			ON (mac_track_oui_database.vendor_mac = mac_track_ports.vendor_mac)
 			$sql_where
 			ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
 
@@ -568,8 +570,10 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 			site_name, device_id, device_name, hostname, mac_address, vendor_name, ip_address, dns_hostname, port_number,
 			port_name, vlan_id, vlan_name, MAX(scan_date) as max_scan_date
 			FROM mac_track_ports
-			LEFT JOIN mac_track_sites ON (mac_track_ports.site_id = mac_track_sites.site_id)
-			LEFT JOIN mac_track_oui_database ON (mac_track_oui_database.vendor_mac = mac_track_ports.vendor_mac)
+			LEFT JOIN mac_track_sites 
+			ON (mac_track_ports.site_id = mac_track_sites.site_id)
+			LEFT JOIN mac_track_oui_database 
+			ON (mac_track_oui_database.vendor_mac = mac_track_ports.vendor_mac)
 			$sql_where
 			GROUP BY device_id, mac_address, port_number, ip_address
 			ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];

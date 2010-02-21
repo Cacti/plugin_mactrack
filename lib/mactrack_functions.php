@@ -510,13 +510,13 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	}
 
 	/* if the device is snmpv2 use high speed and don't bother with the low speed stuff */
-	if ($device["snmp_version"] == 1) {
-		$ifInOctets = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.10", $device);
-		mactrack_debug("ifInOctets data collection complete. '" . sizeof($ifInOctets) . "' rows found!");
+	$ifInOctets = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.10", $device);
+	mactrack_debug("ifInOctets data collection complete. '" . sizeof($ifInOctets) . "' rows found!");
 
-		$ifOutOctets = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.16", $device);
-		mactrack_debug("ifOutOctets data collection complete. '" . sizeof($ifOutOctets) . "' rows found!");
-	}else{
+	$ifOutOctets = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.16", $device);
+	mactrack_debug("ifOutOctets data collection complete. '" . sizeof($ifOutOctets) . "' rows found!");
+
+	if ($device["snmp_version"] > 1) {
 		$ifHCInOctets = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.6", $device);
 		mactrack_debug("ifHCInOctets data collection complete. '" . sizeof($ifHCInOctets) . "' rows found!");
 
@@ -631,18 +631,37 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			}
 		}
 
-		if ($device["snmp_version"] == 1) {
-			/* do the in octets */
-			$int_ifInOctets = get_link_int_value("ifInOctets", $ifIndex, $ifInOctets, $db_interface, $divisor, "traffic");
+		/* do the in octets */
+		$int_ifInOctets = get_link_int_value("ifInOctets", $ifIndex, $ifInOctets, $db_interface, $divisor, "traffic");
 
-			/* do the out octets */
-			$int_ifOutOctets = get_link_int_value("ifOutOctets", $ifIndex, $ifOutOctets, $db_interface, $divisor, "traffic");
-		}else{
+		/* do the out octets */
+		$int_ifOutOctets = get_link_int_value("ifOutOctets", $ifIndex, $ifOutOctets, $db_interface, $divisor, "traffic");
+
+		if ($device["snmp_version"] > 1) {
 			/* do the in octets */
 			$int_ifHCInOctets = get_link_int_value("ifHCInOctets", $ifIndex, $ifHCInOctets, $db_interface, $divisor, "traffic", "64");
 
 			/* do the out octets */
 			$int_ifHCOutOctets = get_link_int_value("ifHCOutOctets", $ifIndex, $ifHCOutOctets, $db_interface, $divisor, "traffic", "64");
+		}
+
+		/* accomodate values in high speed octets for interfaces that don't support 64 bit */
+		if (sizeof($ifInOctets)) {
+		foreach($ifInOctets as $key => $value) {
+			if (!isset($ifHCInOctets[$key])) {
+				$ifHCInOctets[$key] = $value;
+				$int_ifHCInOctets[$key] = $int_ifInOctets[$key];
+			}
+		}
+		}
+	
+		if (sizeof($ifOutOctets)) {
+		foreach($ifOutOctets as $key => $value) {
+			if (!isset($ifHCOutOctets[$key])) {
+				$ifHCOutOctets[$key] = $value;
+				$int_ifHCOutOctets[$key] = $int_ifOutOctets[$key];
+			}
+		}
 		}
 
 		$int_ifInNUcastPkts  = get_link_int_value("ifInNUcastPkts", $ifIndex, $ifInNUcastPkts, $db_interface, $divisor, "traffic");

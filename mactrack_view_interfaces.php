@@ -484,7 +484,7 @@ function mactrack_filter_table() {
 							ORDER BY device_type");
 						if (sizeof($types) > 0) {
 						foreach ($types as $type) {
-							print '<option value="' . $type["device_type"] .'"'; if ($_REQUEST["type"] == $type["device_type"]) { print " selected"; } print ">" . $type["device_type"] . "</option>";
+							print '<option value="' . $type["device_type_id"] .'"'; if ($_REQUEST["type"] == $type["device_type_id"]) { print " selected"; } print ">" . $type["device_type"] . "</option>";
 						}
 						}
 						?>
