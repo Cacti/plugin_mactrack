@@ -646,22 +646,18 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		}
 
 		/* accomodate values in high speed octets for interfaces that don't support 64 bit */
-		if (sizeof($ifInOctets)) {
-		foreach($ifInOctets as $key => $value) {
-			if (!isset($ifHCInOctets[$key])) {
-				$ifHCInOctets[$key] = $value;
-				$int_ifHCInOctets[$key] = $int_ifInOctets[$key];
+		if (isset($ifInOctets[$ifIndex])) {
+			if (!isset($ifHCInOctets[$ifIndex])) {
+				$ifHCInOctets[$ifIndex] = $ifInOctets[$ifIndex];
+				$int_ifHCInOctets = $int_ifInOctets;
 			}
-		}
 		}
 
-		if (sizeof($ifOutOctets)) {
-		foreach($ifOutOctets as $key => $value) {
-			if (!isset($ifHCOutOctets[$key])) {
-				$ifHCOutOctets[$key] = $value;
-				$int_ifHCOutOctets[$key] = $int_ifOutOctets[$key];
+		if (isset($ifOutOctets[$ifIndex])) {
+			if (!isset($ifHCOutOctets[$ifIndex])) {
+				$ifHCOutOctets[$ifIndex] = $ifOutOctets[$ifIndex];
+				$int_ifHCOutOctets = $int_ifOutOctets;
 			}
-		}
 		}
 
 		$int_ifInNUcastPkts  = get_link_int_value("ifInNUcastPkts", $ifIndex, $ifInNUcastPkts, $db_interface, $divisor, "traffic");

@@ -157,6 +157,13 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 		$i = 0;
 		/* get the port status information */
 		foreach($active_vlans as $active_vlan) {
+			/* ignore empty vlans */
+			if ($active_vlan["active_ports"] <= $device["ports_trunk"]) {
+				$active_vlans[$i]["port_results"] = array();
+				$i++;
+				continue;
+			}
+
 			$snmp_readstring = $device["snmp_readstring"] . "@" . $active_vlan["vlan_id"];
 
 			mactrack_debug("Processing has begun for VLAN: " . $active_vlan["vlan_id"]);
@@ -187,7 +194,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 
 		if (sizeof($active_vlans)) {
 		foreach($active_vlans as $active_vlan) {
-			if (sizeof($active_vlan["port_results"])) {
+			if (sizeof($active_vlan["port_results"]) > $device["ports_trunk"]) {
 			foreach($active_vlan["port_results"] as $port_result) {
 				$ifIndex = $brPorttoifIndexes[$j][$port_result["port_number"]];
 				$ifType = $ifInterfaces[$ifIndex]["ifType"];
@@ -357,6 +364,13 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		$i = 0;
 		/* get the port status information */
 		foreach($active_vlans as $active_vlan) {
+			/* ignore empty vlans */
+			if ($active_vlan["active_ports"] <= $device["ports_trunk"]) {
+				$active_vlans[$i]["port_results"] = array();
+				$i++;
+				continue;
+			}
+
 			$snmp_readstring = $device["snmp_readstring"] . "@" . $active_vlan["vlan_id"];
 
 			mactrack_debug("Processing has begun for VLAN: " . $active_vlan["vlan_id"]);
@@ -385,7 +399,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		mactrack_debug("Final cross check's now being performed.");
 		if (sizeof($active_vlans)) {
 		foreach($active_vlans as $active_vlan) {
-			if (sizeof($active_vlan["port_results"])) {
+			if (sizeof($active_vlan["port_results"]) > $device["ports_trunk"]) {
 			foreach($active_vlan["port_results"] as $port_result) {
 				$ifIndex = $brPorttoifIndexes[$j][$port_result["port_number"]];
 				$ifType = $ifInterfaces[$ifIndex]["ifType"];
