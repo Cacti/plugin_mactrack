@@ -62,11 +62,11 @@ function mactrack_get_records(&$sql_where, $apply_limits = TRUE, $row_limit = "3
 	} elseif ($_REQUEST["issues"] == "7") { // Change < 24 Hours
 		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(mac_track_interfaces.sysUptime-ifLastChange < 8640000) AND ifLastChange > 0 AND (mac_track_interfaces.sysUptime-ifLastChange > 0)";
 	} elseif ($_REQUEST["issues"] == "9") { // In/Out over 70%
-		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(inBound>" . read_config_option("mactrack_interface_high") . " OR outBound>" . read_config_option("mactrack_interface_high") . ")";
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(inBound>" . $_REQUEST["bwusage"] . " OR outBound>" . $_REQUEST["bwusage"] . ")";
 	} elseif ($_REQUEST["issues"] == "10") { // In over 70%
-		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(inBound>" . read_config_option("mactrack_interface_high") .")";
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(inBound>" . $_REQUEST["bwusage"] .")";
 	} elseif ($_REQUEST["issues"] == "11") { // Out over 70%
-		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(outBound>" . read_config_option("mactrack_interface_high") . ")";
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(outBound>" . $_REQUEST["bwusage"] . ")";
 	} else {
 	}
 
@@ -131,6 +131,7 @@ function mactrack_export_records() {
 	load_current_session_value("site", "sess_mactrack_int_site", "-1");
 	load_current_session_value("device", "sess_mactrack_int_device", "-1");
 	load_current_session_value("issues", "sess_mactrack_int_issues", "-2");
+	load_current_session_value("bwusage", "sess_mactrack_int_bwusage", read_config_option("mactrack_interface_high"));
 	load_current_session_value("type", "sess_mactrack_int_type", "-1");
 	load_current_session_value("filter", "sess_mactrack_int_filter", "");
 	load_current_session_value("sort_column", "sess_mactrack_int_sort_column", "device_name");
@@ -192,6 +193,7 @@ function mactrack_view() {
 	input_validate_input_number(get_request_var_request("rows"));
 	input_validate_input_number(get_request_var_request("page"));
 	input_validate_input_number(get_request_var_request("issues"));
+	input_validate_input_number(get_request_var_request("bwusage"));
 	input_validate_input_number(get_request_var_request("device"));
 	input_validate_input_number(get_request_var_request("site"));
 	input_validate_input_number(get_request_var_request("type"));
@@ -221,6 +223,7 @@ function mactrack_view() {
 		kill_session_var("sess_mactrack_int_site");
 		kill_session_var("sess_mactrack_int_device");
 		kill_session_var("sess_mactrack_int_issues");
+		kill_session_var("sess_mactrack_int_bwusage");
 		kill_session_var("sess_mactrack_int_type");
 		kill_session_var("sess_mactrack_int_period");
 		kill_session_var("sess_mactrack_int_filter");
@@ -233,6 +236,7 @@ function mactrack_view() {
 		unset($_REQUEST["site"]);
 		unset($_REQUEST["device"]);
 		unset($_REQUEST["issues"]);
+		unset($_REQUEST["bwusage"]);
 		unset($_REQUEST["type"]);
 		unset($_REQUEST["period"]);
 		unset($_REQUEST["filter"]);
@@ -246,6 +250,7 @@ function mactrack_view() {
 		$changed += mactrack_check_changed("site", "sess_mactrack_int_site");
 		$changed += mactrack_check_changed("device", "sess_mactrack_int_device");
 		$changed += mactrack_check_changed("issues", "sess_mactrack_int_issues");
+		$changed += mactrack_check_changed("bwusage", "sess_mactrack_int_bwusage");
 		$changed += mactrack_check_changed("type", "sess_mactrack_int_type");
 		$changed += mactrack_check_changed("period", "sess_mactrack_int_period");
 		$changed += mactrack_check_changed("filter", "sess_mactrack_int_filter");
@@ -264,6 +269,7 @@ function mactrack_view() {
 	load_current_session_value("device_id", "sess_mactrack_int_device_id", "-1");
 	load_current_session_value("site", "sess_mactrack_int_site", "-1");
 	load_current_session_value("issues", "sess_mactrack_int_issues", "-1");
+	load_current_session_value("bwusage", "sess_mactrack_int_bwusage", read_config_option("mactrack_interface_high"));
 	load_current_session_value("type", "sess_mactrack_int_type", "-1");
 	load_current_session_value("device", "sess_mactrack_int_device", "-1");
 	load_current_session_value("period", "sess_mactrack_int_period", "-2");
@@ -433,20 +439,28 @@ function mactrack_filter_table() {
 						</select>
 					</td>
 					<td width="50">
-						&nbsp;Filters:&nbsp;
+						&nbsp;Filters:&nbsp;<BR><BR>
+						&nbsp;Bandwidth:&nbsp;
 					</td>
 					<td width="1">
 						<select name="issues" onChange="<?php print $filterChange;?>">
 						<option value="-2"<?php if ($_REQUEST["issues"] == "-2") {?> selected<?php }?>>All Non-Ignored Interfaces</option>
-						<option value="9"<?php if ($_REQUEST["issues"] == "9") {?> selected<?php }?>>High In/Out Utilization > <?php print read_config_option("mactrack_interface_high") . "%";?></option>
-						<option value="10"<?php if ($_REQUEST["issues"] == "10") {?> selected<?php }?>>High In Utilization <?php print read_config_option("mactrack_interface_high") . "%";?></option>
-						<option value="11"<?php if ($_REQUEST["issues"] == "11") {?> selected<?php }?>>High Out Utilization <?php print read_config_option("mactrack_interface_high") . "%";?></option>
+						<option value="9"<?php if ($_REQUEST["issues"] == "9") {?> selected<?php }?>>High In/Out Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option>
+						<option value="10"<?php if ($_REQUEST["issues"] == "10") {?> selected<?php }?>>High In Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option>
+						<option value="11"<?php if ($_REQUEST["issues"] == "11") {?> selected<?php }?>>High Out Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option>
 						<option value="-1"<?php if ($_REQUEST["issues"] == "-1") {?> selected<?php }?>>With Issues</option>
 						<option value="0"<?php if ($_REQUEST["issues"] == "0") {?> selected<?php }?>>Up Interfaces</option>
 						<option value="1"<?php if ($_REQUEST["issues"] == "1") {?> selected<?php }?>>Up Interfaces No Alias</option>
 						<option value="2"<?php if ($_REQUEST["issues"] == "2") {?> selected<?php }?>>Errors Accumulating</option>
 						<option value="3"<?php if ($_REQUEST["issues"] == "3") {?> selected<?php }?>>Discards Accumulating</option>
 						<option value="7"<?php if ($_REQUEST["issues"] == "7") {?> selected<?php }?>>Changed in Last Day</option>
+						</select><BR>
+						<select name="bwusage" onChange="<?php print $filterChange;?>">
+						<?php
+						for ($bwpercent = 0;$bwpercent <=100;$bwpercent+=5) {
+							?><option value="<?php print $bwpercent; ?>" <?php if (isset($_REQUEST["bwusage"]) and ($_REQUEST["bwusage"] == $bwpercent)) {?> selected<?php }?>><?php print $bwpercent; ?>%</option><?php
+						}
+						?>
 						</select>
 					</td>
 					<td width="50">
