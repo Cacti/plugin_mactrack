@@ -211,11 +211,11 @@ if (0 == 1) {
 add_column("mac_track_interfaces", "sysUptime",             "ALTER TABLE `mac_track_interfaces` ADD COLUMN `sysUptime` int(10) unsigned NOT NULL default '0' AFTER `device_id`");
 add_column("mac_track_interfaces", "ifHighSpeed",           "ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifHighSpeed` int(10) unsigned NOT NULL default '0' AFTER `ifSpeed`");
 add_column("mac_track_interfaces", "ifDuplex",              "ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifDuplex` int(10) unsigned NOT NULL default '0' AFTER `ifHighSpeed`");
-add_column("mac_track_interfaces", "int_ifInDiscards",      "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInDiscards` int(10) unsigned NOT NULL default '0' AFTER `ifOutErrors`");
-add_column("mac_track_interfaces", "int_ifInErrors",        "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInErrors` int(10) unsigned NOT NULL default '0' AFTER `int_ifInDiscards`");
-add_column("mac_track_interfaces", "int_ifInUnknownProtos", "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInUnknownProtos` int(10) unsigned NOT NULL default '0' AFTER `int_ifInErrors`");
-add_column("mac_track_interfaces", "int_ifOutDiscards",     "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutDiscards` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUnknownProtos`");
-add_column("mac_track_interfaces", "int_ifOutErrors",       "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutErrors` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutDiscards`");
+add_column("mac_track_interfaces", "int_ifInDiscards",      "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInDiscards` float unsigned NOT NULL default '0' AFTER `ifOutErrors`");
+add_column("mac_track_interfaces", "int_ifInErrors",        "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInErrors` float unsigned NOT NULL default '0' AFTER `int_ifInDiscards`");
+add_column("mac_track_interfaces", "int_ifInUnknownProtos", "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInUnknownProtos` float unsigned NOT NULL default '0' AFTER `int_ifInErrors`");
+add_column("mac_track_interfaces", "int_ifOutDiscards",     "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutDiscards` float unsigned NOT NULL default '0' AFTER `int_ifInUnknownProtos`");
+add_column("mac_track_interfaces", "int_ifOutErrors",       "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutErrors` float unsigned NOT NULL default '0' AFTER `int_ifOutDiscards`");
 add_column("mac_track_devices",    "host_id",               "ALTER TABLE `mac_track_devices` ADD COLUMN `host_id` int(10) unsigned NOT NULL default '0' AFTER `device_id`");
 execute_sql("Speed up queries", "ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)");
 execute_sql("Add length to Device Types Match Fields", "ALTER TABLE `mac_track_device_types` MODIFY COLUMN `sysDescr_match` VARCHAR(100) NOT NULL default '', MODIFY COLUMN `sysObjectID_match` VARCHAR(100) NOT NULL default ''");
