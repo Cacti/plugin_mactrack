@@ -654,7 +654,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			}
 		}
 		}
-	
+
 		if (sizeof($ifOutOctets)) {
 		foreach($ifOutOctets as $key => $value) {
 			if (!isset($ifHCOutOctets[$key])) {
@@ -732,7 +732,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			@$int_ifInUcastPkts                 . "', '" . @$int_ifOutUcastPkts          . "', '" .
 			@$int_ifInDiscards                  . "', '" . @$int_ifInErrors              . "', '" .
 			@$int_ifInUnknownProtos             . "', '" . @$int_ifOutDiscards           . "', '" .
-			@$int_ifInOutErrors                 . "', '" . @$int_discards_present        . "', '" .
+			@$int_ifOutErrors                   . "', '" . @$int_discards_present        . "', '" .
 			$int_errors_present                 . "', '" .  $last_down_time              . "', '" .
 			$last_up_time                       . "', '" .  $stateChanges                . "', '" . "1')";
 
