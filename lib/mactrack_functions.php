@@ -302,21 +302,21 @@ function get_standard_arp_table($site, &$device) {
 	global $debug, $scan_date;
 
 	/* get the atifIndexes for the device */
-	$atifIndexes = xform_indexed_data(".1.3.6.1.2.1.3.1.1.1", $device, 6);
+	$atifIndexes = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.1", $device);
 
 	if (sizeof($atifIndexes)) {
 		mactrack_debug("atifIndexes data collection complete");
-		$atPhysAddress = xform_indexed_data(".1.3.6.1.2.1.3.1.1.2", $device, 6);
+		$atPhysAddress = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.2", $device);
 		mactrack_debug("atPhysAddress data collection complete");
-		$atNetAddress  = xform_indexed_data(".1.3.6.1.2.1.3.1.1.3", $device, 6);
+		$atNetAddress  = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.3", $device);
 		mactrack_debug("atNetAddress data collection complete");
 	}else{
 		/* second attempt for Force10 Gear */
-		$atifIndexes   = xform_indexed_data(".1.3.6.1.2.1.4.22.1.1", $device, 5);
+		$atifIndexes   = xform_stripped_oid(".1.3.6.1.2.1.4.22.1.1", $device);
 		mactrack_debug("atifIndexes data collection complete");
-		$atPhysAddress = xform_indexed_data(".1.3.6.1.2.1.4.22.1.2", $device, 5);
+		$atPhysAddress = xform_stripped_oid(".1.3.6.1.2.1.4.22.1.2", $device);
 		mactrack_debug("atPhysAddress data collection complete");
-		$atNetAddress = xform_indexed_data(".1.3.6.1.2.1.4.22.1.3", $device, 5);
+		$atNetAddress = xform_stripped_oid(".1.3.6.1.2.1.4.22.1.3", $device);
 		mactrack_debug("atNetAddress data collection complete");
 	}
 
