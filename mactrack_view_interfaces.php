@@ -61,11 +61,11 @@ function mactrack_get_records(&$sql_where, $apply_limits = TRUE, $row_limit = "3
 		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(int_discards_present=1)";
 	} elseif ($_REQUEST["issues"] == "7") { // Change < 24 Hours
 		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(mac_track_interfaces.sysUptime-ifLastChange < 8640000) AND ifLastChange > 0 AND (mac_track_interfaces.sysUptime-ifLastChange > 0)";
-	} elseif ($_REQUEST["issues"] == "9") { // In/Out over 70%
+	} elseif ($_REQUEST["issues"] == "9" && $_REQUEST["bwusage"] != "-1") { // In/Out over 70%
 		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(inBound>" . $_REQUEST["bwusage"] . " OR outBound>" . $_REQUEST["bwusage"] . ")";
-	} elseif ($_REQUEST["issues"] == "10") { // In over 70%
+	} elseif ($_REQUEST["issues"] == "10" && $_REQUEST["bwusage"] != "-1") { // In over 70%
 		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(inBound>" . $_REQUEST["bwusage"] .")";
-	} elseif ($_REQUEST["issues"] == "11") { // Out over 70%
+	} elseif ($_REQUEST["issues"] == "11" && $_REQUEST["bwusage"] != "-1") { // Out over 70%
 		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(outBound>" . $_REQUEST["bwusage"] . ")";
 	} else {
 	}
@@ -440,14 +440,13 @@ function mactrack_filter_table() {
 					</td>
 					<td width="50">
 						&nbsp;Filters:&nbsp;<BR><BR>
-						&nbsp;Bandwidth:&nbsp;
 					</td>
 					<td width="1">
 						<select name="issues" onChange="<?php print $filterChange;?>">
 						<option value="-2"<?php if ($_REQUEST["issues"] == "-2") {?> selected<?php }?>>All Non-Ignored Interfaces</option>
-						<option value="9"<?php if ($_REQUEST["issues"] == "9") {?> selected<?php }?>>High In/Out Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option>
-						<option value="10"<?php if ($_REQUEST["issues"] == "10") {?> selected<?php }?>>High In Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option>
-						<option value="11"<?php if ($_REQUEST["issues"] == "11") {?> selected<?php }?>>High Out Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option>
+						<option value="9"<?php if ($_REQUEST["issues"] == "9" && $_REQUEST["bwusage"] != "-1") {?> selected<?php }?>>High In/Out Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option>
+						<option value="10"<?php if ($_REQUEST["issues"] == "10" && $_REQUEST["bwusage"] != "-1") {?> selected<?php }?>>High In Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option>
+						<option value="11"<?php if ($_REQUEST["issues"] == "11" && $_REQUEST["bwusage"] != "-1") {?> selected<?php }?>>High Out Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option>
 						<option value="-1"<?php if ($_REQUEST["issues"] == "-1") {?> selected<?php }?>>With Issues</option>
 						<option value="0"<?php if ($_REQUEST["issues"] == "0") {?> selected<?php }?>>Up Interfaces</option>
 						<option value="1"<?php if ($_REQUEST["issues"] == "1") {?> selected<?php }?>>Up Interfaces No Alias</option>
@@ -455,7 +454,12 @@ function mactrack_filter_table() {
 						<option value="3"<?php if ($_REQUEST["issues"] == "3") {?> selected<?php }?>>Discards Accumulating</option>
 						<option value="7"<?php if ($_REQUEST["issues"] == "7") {?> selected<?php }?>>Changed in Last Day</option>
 						</select><BR>
+					<td width="50">
+						&nbsp;Bandwidth:&nbsp;
+					</td>
+					<td width="1">
 						<select name="bwusage" onChange="<?php print $filterChange;?>">
+						<option value="-1"<?php if ($_REQUEST["bwusage"] == "-1") {?> selected<?php }?>>All</option>
 						<?php
 						for ($bwpercent = 0;$bwpercent <=100;$bwpercent+=5) {
 							?><option value="<?php print $bwpercent; ?>" <?php if (isset($_REQUEST["bwusage"]) and ($_REQUEST["bwusage"] == $bwpercent)) {?> selected<?php }?>><?php print $bwpercent; ?>%</option><?php
