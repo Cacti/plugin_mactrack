@@ -2223,11 +2223,11 @@ function mactrack_display_Octets($octets) {
 		case "k":
 			$suffix = "m";
 			break;
-		case "m":
-			$suffix = "g";
+		case "M":
+			$suffix = "G";
 			break;
-		case "g":
-			$suffix = "p";
+		case "G":
+			$suffix = "P";
 			break 2;
 		default:
 			$suffix = "";
