@@ -1013,7 +1013,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 					/* now set the real data */
 					$new_port_key_array[$i]["key"] = $port_key["key"];
-					$new_port_key_array[$i]["port_number"] = $port_key["port_number"];
+					$new_port_key_array[$i]["port_number"] = $brPortIfIndex;
 					$i++;
 				}
 			}
@@ -1189,7 +1189,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 
 					/* now set the real data */
 					$new_port_key_array[$i]["key"] = $port_key["key"];
-					$new_port_key_array[$i]["port_number"] = $port_key["port_number"];
+					$new_port_key_array[$i]["port_number"] = $brPortIfIndex;
 					$i++;
 				}
 			}
@@ -1365,7 +1365,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 					/* now set the real data */
 					$new_port_key_array[$i]["key"] = $port_key["key"];
-					$new_port_key_array[$i]["port_number"] = $port_key["port_number"];
+					$new_port_key_array[$i]["port_number"] = $brPortIfIndex;
 					$i++;
 				}
 			}
