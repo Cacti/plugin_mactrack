@@ -553,7 +553,7 @@ function mactrack_site() {
 			"total_devices" => array("Devices", "DESC"),
 			"total_ips" => array("Total IP's", "DESC"),
 			"total_user_ports" => array("User Ports", "DESC"),
-			"total_oper_ports" => array("User orts Up", "DESC"),
+			"total_oper_ports" => array("User Ports Up", "DESC"),
 			"total_macs" => array("MACS Found", "DESC"),
 			"total_device_errors" => array("Device Errors", "DESC"));
 
