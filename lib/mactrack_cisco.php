@@ -196,11 +196,11 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 		foreach($active_vlans as $active_vlan) {
 			if (sizeof($active_vlan["port_results"]) > $device["ports_trunk"]) {
 			foreach($active_vlan["port_results"] as $port_result) {
-				$ifIndex = $brPorttoifIndexes[$j][$port_result["port_number"]];
-				$ifType = $ifInterfaces[$ifIndex]["ifType"];
-				$ifName = $ifInterfaces[$ifIndex]["ifName"];
-				$portName = @$portNames[$ifName];
-				$portTrunk = @$portTrunking[$ifName];
+				$ifIndex         = @$brPorttoifIndexes[$j][$port_result["port_number"]];
+				$ifType          = @$ifInterfaces[$ifIndex]["ifType"];
+				$ifName          = @$ifInterfaces[$ifIndex]["ifName"];
+				$portName        = @$portNames[$ifName];
+				$portTrunk       = @$portTrunking[$ifName];
 				$portTrunkStatus = @$ifInterfaces[$ifIndex]["trunkPortState"];
 
 				if ($vvlans) {
@@ -212,10 +212,10 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 				/* only output legitamate end user ports */
 				if (($ifType == 6) && ($portTrunk == 2)) {
 					if (($portTrunkStatus == "2")||($portTrunkStatus == "4")||($portTrunkStatus =="")) {
-						$port_array[$i]["vlan_id"] = $active_vlan["vlan_id"];
-						$port_array[$i]["vlan_name"] = $active_vlan["vlan_name"];
+						$port_array[$i]["vlan_id"]     = $active_vlan["vlan_id"];
+						$port_array[$i]["vlan_name"]   = $active_vlan["vlan_name"];
 						$port_array[$i]["port_number"] = $ifInterfaces[$ifIndex]["ifName"];
-						$port_array[$i]["port_name"] = $portName;
+						$port_array[$i]["port_name"]   = $portName;
 						$port_array[$i]["mac_address"] = $port_result["mac_address"];
 						$device["ports_active"]++;
 						$i++;
@@ -257,14 +257,14 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 	global $debug, $scan_date;
 
 	/* initialize port counters */
-	$device["ports_total"] = 0;
+	$device["ports_total"]  = 0;
 	$device["ports_active"] = 0;
-	$device["ports_trunk"] = 0;
-	$device["vlans_total"] = 0;
+	$device["ports_trunk"]  = 0;
+	$device["vlans_total"]  = 0;
 
 	/* Variables to determine VLAN information */
-	$vlan_ids    = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.46.1.3.1.1.2", $device);
-	$vlan_names  = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.46.1.3.1.1.4", $device);
+	$vlan_ids         = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.46.1.3.1.1.2", $device);
+	$vlan_names       = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.46.1.3.1.1.4", $device);
 	$vlan_trunkstatus = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.46.1.6.1.1.14", $device);
 
 	$device["vlans_total"] = sizeof($vlan_ids) - 3;
