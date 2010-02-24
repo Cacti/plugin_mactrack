@@ -25,101 +25,153 @@
 /* register this functions scanning functions */
 if (!isset($mactrack_scanning_functions)) { $mactrack_scanning_functions = array(); }
 array_push($mactrack_scanning_functions, "get_extreme_switch_ports");
+array_push($mactrack_scanning_functions, "get_extreme_extremeware_switch_ports");
 
-/* get_extreme_switch_ports
-   obtains port associations for Extreme Switches.
-*/
-function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_extreme_extremeware_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false) {
+	return get_extreme_switch_ports($site, &$device, $lowPort , $highPort , true);
+}
+
+function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false) {
 	global $debug, $scan_date;
 
 	/* initialize port counters */
 	$device["ports_total"]  = 0;
 	$device["ports_active"] = 0;
 	$device["ports_trunk"]  = 0;
+	$device["vlans_total"]  = 0;
+	$device["macs_active"]  = 0;
 
-	/* get VLAN information */
-	$vlan_ids = xform_standard_indexed_data("[b]OID1[/b]", $device);
-
-	/* get VLAN Trunk status */
-	$vlan_trunkstatus = xform_standard_indexed_data("[b]OID1[/b]", $device);
+	/* get VLAN information 
+	   VLAN index
+	   .1.3.6.1.4.1.1916.1.2.1.2.1.1
+	   EXTREME-VLAN-MIB::extremeVlanIfIndex.<vlanid> = index
+	   VLAN name
+	   .1.3.6.1.4.1.1916.1.2.1.2.1.2
+	   EXTREME-VLAN-MIB::extremeVlanIfDescr.<vlanid> = description
+	   VLAN ID
+	   .1.3.6.1.4.1.1916.1.2.1.2.1.10
+	   EXTREME-VLAN-MIB::extremeVlanIfVlanId.<vlanid> = tag id
+	 */
+	$vlan_ids   = xform_standard_indexed_data(".1.3.6.1.4.1.1916.1.2.1.2.1.10", $device);
+	$vlan_names = xform_standard_indexed_data(".1.3.6.1.4.1.1916.1.2.1.2.1.2", $device);
 	$device["vlans_total"] = sizeof($vlan_ids);
-	mactrack_debug("VLAN data collected. There are " . (sizeof($vlan_ids)) . " VLANS.");
+	mactrack_debug("There are " . (sizeof($vlan_ids)) . " VLANS.");
 
-	/* get the ifIndexes for the device */
-	$ifIndexes = xform_standard_indexed_data("[b]OID1[/b]", $device);
-	mactrack_debug("ifIndexes data collection complete");
+	/* get the ifIndexes for the device 
+	   .1.3.6.1.2.1.2.2.1.1
+	   RFC1213-MIB::ifIndex.<index> = index
+	   .1.3.6.1.2.1.2.2.1.2
+	   RFC1213-MIB::ifDescr.<index> = description
+	   .1.3.6.1.2.1.2.2.1.3
+	   RFC1213-MIB::ifType.<index> = type (6=ether)
+	   .1.3.6.1.2.1.31.1.1.1.1
+	   IF-MIB::ifName.<index> = name
+	   .1.3.6.1.2.1.31.1.1.1.18
+	   IF-MIB::ifAlias.<index> = alias
+	 */
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, TRUE);
 
-	/* get and store the interfaces table */
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, FALSE);
-
-	foreach($ifIndexes as $ifIndex) {
-		$ifInterfaces[$ifIndex]["trunkPortState"] = @$vlan_trunkstatus[$ifIndex];
-
-		if (($ifInterfaces[$ifIndex]["ifType"] >= 6) && ($ifInterfaces[$ifIndex]["ifType"] <= 9)) {
-			$device["ports_total"]++;
-		}
-
-		if ($ifInterfaces[$ifIndex]["trunkPortState"] == 3) {
-			$device["ports_trunk"]++;
-		}
-	}
 	mactrack_debug("ifInterfaces assembly complete.");
 
+	/* get VLAN details */
 	$i = 0;
-	foreach($vlan_ids as $vlan_id => $vlan_name) {
+	foreach ($vlan_ids as $vlan_index => $vlan_id) {
 		$active_vlans[$i]["vlan_id"] = $vlan_id;
-		$active_vlans[$i]["vlan_name"] = $vlan_name;
+		$active_vlans[$i]["vlan_name"] = $vlan_names[$vlan_index];
 		$active_vlans++;
-
+		mactrack_debug("VLAN ID = " . $active_vlans[$i]["vlan_id"] . " VLAN Name = " . $active_vlans[$i]["vlan_name"]);
 		$i++;
 	}
 
 	if (sizeof($active_vlans) > 0) {
-		$i = 0;
+
 		/* get the port status information */
-		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", FALSE);
-		$port_vlan_data = xform_standard_indexed_data("[b]OID1[/b]", $device);
+		/* get port_number and MAC addr */
+		/*extremeXOS
+		  addr mac 
+		  .1.3.6.1.4.1.1916.1.16.4.1.1
+		  EXTREME-BASE-MIB::extremeFdb.4.1.1.<MAC>.<vlanid>= hex MAC
+		  index du vlan ?
+		  .1.3.6.1.4.1.1916.1.16.4.1.2
+		  EXTREME-BASE-MIB::extremeFdb.4.1.2.<MAC>.<vlanid>=vlanid
+		  index du port
+		  .1.3.6.1.4.1.1916.1.16.4.1.3
+		  EXTREME-BASE-MIB::extremeFdb.4.1.3.<MAC>.<vlanid>=port id
+		  status
+		  .1.3.6.1.4.1.1916.1.16.4.1.4
+		  EXTREME-BASE-MIB::extremeFdb.4.1.4.<MAC>.<vlanid>= 3 learned
 
-		$i = 0;
-		$j = 0;
-		$port_array = array();
-		foreach($port_results as $port_result) {
-			$ifIndex = $port_result["port_number"];
-			$ifType = $ifInterfaces[$ifIndex]["ifType"];
-			$ifName = $ifInterfaces[$ifIndex]["ifName"];
-			$portName = $ifName;
-			$portTrunkStatus = @$ifInterfaces[$ifIndex]["trunkPortState"];
-
-			/* only output legitamate end user ports */
-			if (($ifType >= 6) && ($ifType <= 9)) {
-				$port_array[$i]["vlan_id"] = @$port_vlan_data[$port_result["port_number"]];
-				$port_array[$i]["vlan_name"] = @$vlan_ids[$port_array[$i]["vlan_id"]];
-				$port_array[$i]["port_number"] = @$port_result["port_number"];
-				$port_array[$i]["port_name"] = $portName;
-				$port_array[$i]["mac_address"] = $port_result["mac_address"];
-				$device["ports_active"]++;
-
-				mactrack_debug("VLAN: " . $port_array[$i]["vlan_id"] . ", " .
-					"NAME: " . $port_array[$i]["vlan_name"] . ", " .
-					"PORT: " . $ifIndex . ", " .
-					"NAME: " . $port_array[$i]["port_name"] . ", " .
-					"MAC: " . $port_array[$i]["mac_address"]);
-
-				$i++;
-			}
-			$j++;
+		  extremeware
+		  .1.3.6.1.4.1.1916.1.16.1.1.3
+		  EXTREME-FDB-MIB::extremeFdbMacFdbMacAddress.<vlanid>.<id> = mac
+		  .1.3.6.1.4.1.1916.1.16.1.1.4
+		  EXTREME-FDB-MIB::extremeFdbMacFdbPortIfIndex.<vlanid>.<id> = index du port
+		  .1.3.6.1.4.1.1916.1.16.1.1.5
+		  EXTREME-FDB-MIB::extremeFdbMacFdbStatus.<vlanid>.<id> = 3 learned
+		 */
+		if ($extremeware) {
+			$mac_addr_list = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.1.1.3", $device);
+			$mac_port_list = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.1.1.4", $device);
+			$mac_status_list = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.1.1.5", $device);
+		} else {
+			$mac_addr_list = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.4.1.1", $device);
+			$mac_vlan_list = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.4.1.2", $device);
+			$mac_port_list = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.4.1.3", $device);
+			$mac_status_list = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.4.1.4", $device);
 		}
 
+		$port_array = array();
+
+		foreach ($mac_addr_list as $mac_key => $mac_addr) {
+			/* check if mac addr is 'learned'  or 'mgnt' */
+			if (isset($mac_status_list[$mac_key]) and (($mac_status_list[$mac_key] == "3") || ($mac_status_list[$mac_key] == "5"))) {
+				$ifIndex = $mac_port_list[$mac_key];		
+				$ifType = $ifInterfaces[$ifIndex]["ifType"];
+				//$ifType = $ifTypes[$ifIndex];
+				/* only output legitimate end user ports */
+				if (($ifType >= 6) && ($ifType <= 9)) {
+					if ($extremeware) {
+						$vlanid = substr($mac_key,0,strpos($mac_key,"."));
+						$new_port_array["vlan_id"] = $vlan_ids[$vlanid];
+						$new_port_array["vlan_name"] = $vlan_names[$vlanid];
+					} else {
+						$new_port_array["vlan_id"] = $vlan_ids[$mac_vlan_list[$mac_key]];
+						$new_port_array["vlan_name"] = $vlan_names[$mac_vlan_list[$mac_key]];
+					}
+					//$new_port_array["port_number"] = $ifIndex;
+					//$new_port_array["port_name"] = $ifInterfaces[$ifIndex]["ifName"];
+					$new_port_array["port_number"] = $ifInterfaces[$ifIndex]["ifName"];
+					$new_port_array["port_name"] = $ifInterfaces[$ifIndex]["ifAlias"];
+					$new_port_array["mac_address"] = $mac_addr_list[$mac_key];
+					$ifInterfaces[$ifIndex]["Used"] = 1;
+					$port_array[] = $new_port_array;
+					mactrack_debug("VLAN: " . $new_port_array["vlan_id"] . ", " .
+							"NAME: " . $new_port_array["vlan_name"] . ", " .
+							"PORT: " . $ifIndex . ", " .
+							"NAME: " . $new_port_array["port_name"] . ", " .
+							"MAC: " . $new_port_array["mac_address"]);
+				}
+			}
+		}
+		$device["ports_total"] = sizeof($ifInterfaces);
+		$device["ports_active"] = 0;
+		foreach ($ifInterfaces as $interface) {
+			if (isset($interface["Used"])) {
+				$device["ports_active"]++;
+			}
+		}
 		/* display completion message */
 		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $device["ports_total"] . ", ACTIVE PORTS: " . $device["ports_active"]);
 		$device["last_runmessage"] = "Data collection completed ok";
 		$device["macs_active"] = sizeof($port_array);
 		db_store_device_port_results($device, $port_array, $scan_date);
 	}else{
-		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devcies on this network device.");
+		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devices on this network device.");
 		$device["snmp_status"] = HOST_UP;
 		$device["last_runmessage"] = "Data collection completed ok. No active devices on this network device.";
 	}
 
 	return $device;
 }
+
+?>
