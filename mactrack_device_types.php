@@ -864,10 +864,8 @@ function mactrack_device_type() {
 	}
 
 	html_start_box("<strong>MacTrack Device Type Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_device_types.php?action=edit");
-
-	include("plugins/mactrack/html/inc_mactrack_device_type_filter_table.php");
-
-	html_end_box(FALSE);
+	mactrack_device_type_filter();
+	html_end_box();
 
 	$sql_where = "";
 
