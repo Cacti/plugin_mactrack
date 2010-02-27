@@ -143,7 +143,7 @@ function form_mactrack_actions() {
 	}
 
 	include_once($config["base_path"] . "/lib/functions.php");
-	
+
 	/* if we are to save this form, instead of display it */
 	if (isset($_POST["selected_items"])) {
 		$selected_items = unserialize(stripslashes($_POST["selected_items"]));
@@ -196,12 +196,12 @@ function form_mactrack_actions() {
 				input_validate_input_number($selected_items[$i]);
 				/* ==================================================== */
 
-				$cacti_host = db_fetch_row("SELECT host.id, host.description FROM mac_track_devices " . 
-									"LEFT JOIN host ON (mac_track_devices.hostname=host.hostname) " . 
+				$cacti_host = db_fetch_row("SELECT host.id, host.description FROM mac_track_devices " .
+									"LEFT JOIN host ON (mac_track_devices.hostname=host.hostname) " .
 									"WHERE mac_track_devices.device_id=" . $selected_items[$i]);
 				db_execute("UPDATE mac_track_devices SET " .
-							"host_id=" . $cacti_host["id"] . 
-							", device_name='" . $cacti_host["description"] . 
+							"host_id=" . $cacti_host["id"] .
+							", device_name='" . $cacti_host["description"] .
 							"' WHERE device_id='" . $selected_items[$i] . "'");
 			}
 		}elseif ($_POST["drp_action"] == "7") { /* Copy SNMP Settings */
@@ -226,7 +226,7 @@ function form_mactrack_actions() {
 									"host.snmp_priv_protocol, " .
 									"host.snmp_context " .
 									"FROM mac_track_devices " .
-									"LEFT JOIN host ON (mac_track_devices.hostname=host.hostname) " . 
+									"LEFT JOIN host ON (mac_track_devices.hostname=host.hostname) " .
 									"WHERE mac_track_devices.device_id=" . $selected_items[$i];
 				$cacti_host = db_fetch_row($sql);
 				cacti_log("SQL: " . $sql, false, "MACTRACK");
@@ -1100,10 +1100,8 @@ function mactrack_device() {
 	}
 
 	html_start_box("<strong>MacTrack Device Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_devices.php?action=edit&status=" . $_REQUEST["status"]);
-
-	include("./plugins/mactrack/html/inc_mactrack_device_filter_table.php");
-
-	html_end_box(FALSE);
+	mactrack_device_filter();
+	html_end_box();
 
 	$sql_where = "";
 
