@@ -282,13 +282,9 @@ function mactrack_view_sites() {
 	}
 
 	mactrack_tabs();
-
 	mactrack_view_header();
-
-	include("./plugins/mactrack/html/inc_mactrack_view_site_filter_table.php");
-
+	mactrack_site_filter();
 	mactrack_view_footer();
-
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";

@@ -22,23 +22,6 @@
  +-------------------------------------------------------------------------+
 */
 
-function plugin_init_mactrack() {
-	global $plugin_hooks, $no_http_header_files;
-
-	$plugin_hooks['top_header_tabs']['mactrack']       = 'mactrack_show_tab';
-	$plugin_hooks['top_graph_header_tabs']['mactrack'] = 'mactrack_show_tab';
-	$plugin_hooks['config_arrays']['mactrack']         = 'mactrack_config_arrays';
-	$plugin_hooks['draw_navigation_text']['mactrack']  = 'mactrack_draw_navigation_text';
-	$plugin_hooks['config_form']['mactrack']           = 'mactrack_config_form';
-	$plugin_hooks['config_settings']['mactrack']       = 'mactrack_config_settings';
-	$plugin_hooks['poller_bottom']['mactrack']         = 'mactrack_poller_bottom';
-
-	$no_http_header_files[] = "poller_mactrack.php";
-	$no_http_header_files[] = "mactrack_scanner.php";
-	$no_http_header_files[] = "mactrack_resolver.php";
-	$no_http_header_files[] = "mactrack_import_ouidb.php";
-}
-
 function plugin_mactrack_install() {
 	api_plugin_register_hook('mactrack', 'top_header_tabs',       'mactrack_show_tab',             "setup.php");
 	api_plugin_register_hook('mactrack', 'top_graph_header_tabs', 'mactrack_show_tab',             "setup.php");

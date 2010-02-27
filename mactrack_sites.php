@@ -493,9 +493,9 @@ function mactrack_site() {
 
 	html_start_box("<strong>MacTrack Site Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_sites.php?action=edit");
 
-	include("./plugins/mactrack/html/inc_mactrack_site_filter_table.php");
+	mactrack_site_filter();
 
-	html_end_box(FALSE);
+	html_end_box();
 
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
