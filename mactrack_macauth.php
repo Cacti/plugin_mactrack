@@ -332,11 +332,8 @@ function mactrack_maca() {
 	}
 
 	html_start_box("<strong>MacTrack MacAuth Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_macauth.php?action=edit");
-
-	include("./plugins/mactrack/html/inc_mactrack_maca_filter_table.php");
-
-	html_end_box(false);
-
+	mactrack_maca_filter();
+	html_end_box();
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";

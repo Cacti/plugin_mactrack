@@ -2735,6 +2735,8 @@ function mactrack_get_vendor_name($mac) {
 }
 
 function mactrack_site_filter() {
+	global $item_rows;
+
 	?>
 		<tr>
 		<form name="form_mactrack_view_sites">
@@ -2783,8 +2785,8 @@ function mactrack_site_filter() {
 			</table>
 			<table cellpadding="1" cellspacing="0">
 				<tr>
-					<td width="70">
-						&nbsp;Site:
+					<td width="50">
+						&nbsp;Site:&nbsp;
 					</td>
 					<td width="1">
 						<select name="site_id" onChange="applySiteFilterChange(document.form_mactrack_view_sites)">
@@ -2835,6 +2837,8 @@ function mactrack_site_filter() {
 }
 
 function mactrack_device_filter() {
+	global $item_rows;
+
 	?>
 	<script type="text/javascript">
 	<!--
@@ -2988,6 +2992,8 @@ function mactrack_device_filter() {
 }
 
 function mactrack_device_type_filter() {
+	global $item_rows;
+
 	?>
 	<script type="text/javascript">
 	<!--
@@ -3036,8 +3042,8 @@ function mactrack_device_type_filter() {
 							?>
 						</select>
 					</td>
-					<td nowrap style='white-space: nowrap;' width="50">
-						&nbsp;Records:&nbsp;
+					<td nowrap style='white-space: nowrap;' width="40">
+						&nbsp;Rows:&nbsp;
 					</td>
 					<td width="1">
 						<select name="rows" onChange="applyDeviceTypeFilterChange(document.form_mactrack_device_types)">
@@ -3086,6 +3092,8 @@ function mactrack_device_type_filter() {
 }
 
 function mactrack_vmac_filter() {
+	global $item_rows;
+
 	?>
 	<script type="text/javascript">
 	<!--
@@ -3142,6 +3150,8 @@ function mactrack_vmac_filter() {
 }
 
 function mactrack_macw_filter() {
+	global $item_rows;
+
 	?>
 	<script type="text/javascript">
 	<!--
@@ -3168,6 +3178,60 @@ function mactrack_macw_filter() {
 					</td>
 					<td width="1">
 						<select name="rows" onChange="applyMacWFilterChange(document.form_mactrack_macw)">
+							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
+							<?php
+							if (sizeof($item_rows) > 0) {
+							foreach ($item_rows as $key => $value) {
+								print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
+							}
+							}
+							?>
+						</select>
+					</td>
+					<td>
+						&nbsp;<input type="submit" name="go_x" value="Go">
+					</td>
+					<td>
+						&nbsp;<input type="submit" name="clear_x" value="Clear">
+					</td>
+				</tr>
+			</table>
+		</td>
+		<input type='hidden' name='page' value='1'>
+		</form>
+	</tr>
+	<?php
+}
+
+function mactrack_maca_filter() {
+	global $item_rows;
+
+	?>
+	<script type="text/javascript">
+	<!--
+	function applyMacAFilterChange(objForm) {
+		strURL = '?filter=' + objForm.filter.value;
+		strURL = strURL + '&rows=' + objForm.rows.value;
+		document.location = strURL;
+	}
+	-->
+	</script>
+	<tr>
+		<form name="form_mactrack_maca">
+		<td>
+			<table cellpadding="1" cellspacing="0">
+				<tr>
+					<td width="50">
+						&nbsp;Search:&nbsp;
+					</td>
+					<td width="1">
+						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
+					</td>
+					<td nowrap style='white-space: nowrap;' width="40">
+						&nbsp;Rows:&nbsp;
+					</td>
+					<td width="1">
+						<select name="rows" onChange="applyMacAFilterChange(document.form_mactrack_maca)">
 							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
 							<?php
 							if (sizeof($item_rows) > 0) {
