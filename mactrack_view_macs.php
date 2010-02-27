@@ -555,9 +555,9 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 			site_name, device_id, device_name, hostname, mac_address, vendor_name, ip_address, dns_hostname, port_number,
 			port_name, vlan_id, vlan_name, scan_date
 			FROM mac_track_ports
-			LEFT JOIN mac_track_sites 
+			LEFT JOIN mac_track_sites
 			ON (mac_track_ports.site_id = mac_track_sites.site_id)
-			LEFT JOIN mac_track_oui_database 
+			LEFT JOIN mac_track_oui_database
 			ON (mac_track_oui_database.vendor_mac = mac_track_ports.vendor_mac)
 			$sql_where
 			ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
@@ -570,9 +570,9 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 			site_name, device_id, device_name, hostname, mac_address, vendor_name, ip_address, dns_hostname, port_number,
 			port_name, vlan_id, vlan_name, MAX(scan_date) as max_scan_date
 			FROM mac_track_ports
-			LEFT JOIN mac_track_sites 
+			LEFT JOIN mac_track_sites
 			ON (mac_track_ports.site_id = mac_track_sites.site_id)
-			LEFT JOIN mac_track_oui_database 
+			LEFT JOIN mac_track_oui_database
 			ON (mac_track_oui_database.vendor_mac = mac_track_ports.vendor_mac)
 			$sql_where
 			GROUP BY device_id, mac_address, port_number, ip_address
@@ -1048,11 +1048,8 @@ function mactrack_view_aggregated_macs() {
 	load_current_session_value("sort_direction",     "sess_mactrack_view_macs_sort_direction", "ASC");
 
 	mactrack_tabs();
-
 	mactrack_view_header();
-
-	include("./plugins/mactrack/html/inc_mactrack_view_mac_filter_table.php");
-
+	mactrack_mac_filter();
 	mactrack_view_footer();
 
 	$sql_where = "";
