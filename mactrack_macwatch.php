@@ -335,11 +335,8 @@ function mactrack_macw() {
 	}
 
 	html_start_box("<strong>MacTrack MacWatch Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_macwatch.php?action=edit");
-
-	include("./plugins/mactrack/html/inc_mactrack_macw_filter_table.php");
-
-	html_end_box(FALSE);
-
+	mactrack_macw_filter();
+	html_end_box();
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";
