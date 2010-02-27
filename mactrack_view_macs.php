@@ -722,12 +722,10 @@ function mactrack_view_macs() {
 	load_current_session_value("sort_direction",     "sess_mactrack_view_macs_sort_direction", "ASC");
 
 	mactrack_tabs();
-
 	mactrack_view_header();
-
-	include("./plugins/mactrack/html/inc_mactrack_view_mac_filter_table.php");
-
+	mactrack_mac_filter();
 	mactrack_view_footer();
+	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";
 
@@ -740,8 +738,6 @@ function mactrack_view_macs() {
 	}
 
 	$port_results = mactrack_view_get_mac_records($sql_where, TRUE, $row_limit);
-
-	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	/* prevent table scans, either a device or site must be selected */
 	if ($_REQUEST["site_id"] == -1 && $_REQUEST["device_id"] == -1) {
@@ -1051,6 +1047,7 @@ function mactrack_view_aggregated_macs() {
 	mactrack_view_header();
 	mactrack_mac_filter();
 	mactrack_view_footer();
+	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";
 
@@ -1063,8 +1060,6 @@ function mactrack_view_aggregated_macs() {
 	}
 
 	$port_results = mactrack_view_get_mac_records($sql_where, TRUE, $row_limit);
-
-	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	/* prevent table scans, either a device or site must be selected */
 	if ($_REQUEST["site_id"] == -1 && $_REQUEST["device_id"] == -1) {

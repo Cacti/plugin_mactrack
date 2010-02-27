@@ -314,12 +314,10 @@ function mactrack_view_devices() {
 	}
 
 	mactrack_tabs();
-
 	mactrack_view_header();
-
-	include("./plugins/mactrack/html/inc_mactrack_view_device_filter_table.php");
-
+	mactrack_device_filter2();
 	mactrack_view_footer();
+	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";
 
@@ -331,8 +329,6 @@ function mactrack_view_devices() {
 		RIGHT JOIN mac_track_devices ON mac_track_devices.site_id = mac_track_sites.site_id
 		LEFT JOIN mac_track_device_types ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
 		$sql_where");
-
-	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	/* generate page list */
 	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_view_devices.php?report=devices");
