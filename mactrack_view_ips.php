@@ -172,13 +172,9 @@ function mactrack_view_ip_ranges() {
 	}
 
 	mactrack_tabs();
-
 	mactrack_view_header();
-
-	include("./plugins/mactrack/html/inc_mactrack_view_ips_filter_table.php");
-
+	mactrack_ips_filter();
 	mactrack_view_footer();
-
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";
