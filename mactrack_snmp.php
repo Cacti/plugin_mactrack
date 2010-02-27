@@ -512,12 +512,12 @@ function mactrack_snmp() {
 					<table width="100%" cellpadding="0" cellspacing="0">
 						<tr>
 							<td nowrap style="white-space: nowrap;" width="50">
-								Search:&nbsp;
+								&nbsp;Search:&nbsp;
 							</td>
 							<td width="1"><input type="text" name="filter" size="40" value="' . get_request_var_request("filter") . '">
 							</td>
-							<td nowrap style="white-space: nowrap;" width="50">
-								&nbsp;Rows per Page:&nbsp;
+							<td nowrap style="white-space: nowrap;" width="40">
+								&nbsp;Rows:&nbsp;
 							</td>
 							<td width="1">
 								<select name="rows" onChange="applyViewmactrackFilterChange(document.mactrack_snmp)">

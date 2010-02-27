@@ -173,11 +173,8 @@ function mactrack_vmacs() {
 	}
 
 	html_start_box("<strong>MacTrack Vendor Mac Filter</strong>", "100%", $colors["header"], "3", "center", "");
-
-	include("./plugins/mactrack/html/inc_mactrack_vmac_filter_table.php");
-
-	html_end_box(FALSE);
-
+	mactrack_vmac_filter();
+	html_end_box();
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$sql_where = "";
