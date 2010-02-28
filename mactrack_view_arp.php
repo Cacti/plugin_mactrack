@@ -500,11 +500,7 @@ function mactrack_view_ips() {
 				"port_number" => array("Port Number", "DESC"));
 		}
 
-		if (mactrack_check_user_realm(2122)) {
-			html_header_sort_checkbox($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
-		}else{
-			html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
-		}
+		html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 	}else{
 		if ($_REQUEST["rows"] == 1) {
 			$display_text = array(
@@ -524,35 +520,28 @@ function mactrack_view_ips() {
 				"port_number" => array("Port Number", "DESC"));
 		}
 
-		if (mactrack_check_user_realm(2122)) {
-			html_header_sort_checkbox($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
-		}else{
-			html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
-		}
+		html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 	}
 
 	$i = 0;
 	$delim = read_config_option("mt_mac_delim");
 	if (sizeof($port_results) > 0) {
 		foreach ($port_results as $port_result) {
-			$key =  str_replace($delim, "_", $port_result["mac_address"]) . "-" . $port_result["device_id"] .
-					$port_result["port_number"] . "-" . strtotime($scan_date);
-
-			form_alternate_row_color($colors["alternate"], $colors["light"], $i, 'line' . $key); $i++;
-			form_selectable_cell($port_result["device_name"], $key);
-			form_selectable_cell($port_result["hostname"], $key);
-			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["ip_address"]) : $port_result["ip_address"]), $key);
+			form_alternate_row_color($colors["alternate"], $colors["light"], $i); $i++;
+			echo "<td>" . $port_result["device_name"] . "</td>";
+			echo "<td>" . $port_result["hostname"] . "</td>";
+			echo "<td>" . (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["ip_address"]) : $port_result["ip_address"])  . "</td>";
 			if (strlen(read_config_option("mt_reverse_dns")) > 0) {
-			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["dns_hostname"]) : $port_result["dns_hostname"]), $key);
+				echo "<td>" . (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["dns_hostname"]) : $port_result["dns_hostname"]) . "</td>";
 			}
-			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["mac_address"]) : $port_result["mac_address"]), $key);
-			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["vendor_name"]) : $port_result["vendor_name"]), $key);
-			form_selectable_cell($port_result["port_number"], $key);
+			echo "<td>" . (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["mac_address"]) : $port_result["mac_address"]) . "</td>";
+			echo "<td>" . (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["vendor_name"]) : $port_result["vendor_name"]) . "</td>";
+			echo "<td>" . $port_result["port_number"] . "</td>";
 			form_end_row();
 		}
 	}else{
 		if ($_REQUEST["site_id"] == -1 && $_REQUEST["device_id"] == -1) {
-			print "<tr><td colspan='10'><em>You Must Select Either a Site or a Device to Search</em></td></tr>";
+			print "<tr><td colspan='10'><em>You must choose a Site, Device or other search criteria</em></td></tr>";
 		}else{
 			print "<tr><td colspan='10'><em>No MacTrack IP Results</em></td></tr>";
 		}

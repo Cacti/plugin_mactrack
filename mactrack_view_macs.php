@@ -908,7 +908,7 @@ function mactrack_view_macs() {
 		}
 	}else{
 		if ($_REQUEST["site_id"] == -1 && $_REQUEST["device_id"] == -1) {
-			print "<tr><td colspan='10'><em>You Must Select Either a Site or a Device to Search</em></td></tr>";
+			print "<tr><td colspan='10'><em>You must choose a Site, Device or other search criteria</em></td></tr>";
 		}else{
 			print "<tr><td colspan='10'><em>No MacTrack Port Results</em></td></tr>";
 		}
@@ -1216,7 +1216,7 @@ function mactrack_view_aggregated_macs() {
 		}
 	}else{
 		if ($_REQUEST["site_id"] == -1 && $_REQUEST["device_id"] == -1) {
-			print "<tr><td colspan='10'><em>You Must Select Either a Site or a Device to Search</em></td></tr>";
+			print "<tr><td colspan='10'><em>You must choose a Site, Device or other search criteria</em></td></tr>";
 		}else{
 			print "<tr><td colspan='10'><em>No MacTrack Port Results</em></td></tr>";
 		}

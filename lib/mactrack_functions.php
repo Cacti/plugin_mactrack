@@ -3577,7 +3577,7 @@ function mactrack_ipsaddresses_filter() {
 				</tr>
 			</table>
 		</td>
-		<input type='hidden' name='report' value='macs'>
+		<input type='hidden' name='report' value='arp'>
 		</form>
 	</tr>
 	<?php
