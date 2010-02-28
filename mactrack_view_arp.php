@@ -599,10 +599,7 @@ function mactrack_view_ips() {
 
 	html_end_box(false);
 
-	if (mactrack_check_user_realm(2122)) {
-		/* draw the dropdown containing a list of available actions for this form */
-		mactrack_draw_actions_dropdown($mactrack_view_macs_actions);
-	}
+	mactrack_display_stats();
 }
 
 ?>

@@ -413,11 +413,19 @@ function mactrack_display_array() {
 	$display_text += array("outBound" => array("OutBound<br>%", "DESC"));
 	$display_text += array("int_ifHCInOctets" => array("In Bytes<br>Second", "DESC"));
 	$display_text += array("int_ifHCOutOctets" => array("Out Bytes<br>Second", "DESC"));
-	$display_text += array("int_ifInErrors" => array("In Err<br>Second", "DESC"));
-	$display_text += array("int_ifInDiscards" => array("In Disc<br>Second", "DESC"));
-	$display_text += array("int_ifInUnknownProtos" => array("UProto<br>Second", "DESC"));
-	$display_text += array("int_ifOutErrors" => array("Out Err<br>Second", "DESC"));
-	$display_text += array("int_ifOutDiscards" => array("Out Disc<br>Second", "DESC"));
+	if (isset($_REQUEST["totals"])) {
+		$display_text += array("ifInErrors" => array("In Err<br>Total", "DESC"));
+		$display_text += array("ifInDiscards" => array("In Disc<br>Total", "DESC"));
+		$display_text += array("ifInUnknownProtos" => array("UProto<br>Total", "DESC"));
+		$display_text += array("ifOutErrors" => array("Out Err<br>Total", "DESC"));
+		$display_text += array("ifOutDiscards" => array("Out Disc<br>Total", "DESC"));
+	}else{
+		$display_text += array("int_ifInErrors" => array("In Err<br>Second", "DESC"));
+		$display_text += array("int_ifInDiscards" => array("In Disc<br>Second", "DESC"));
+		$display_text += array("int_ifInUnknownProtos" => array("UProto<br>Second", "DESC"));
+		$display_text += array("int_ifOutErrors" => array("Out Err<br>Second", "DESC"));
+		$display_text += array("int_ifOutDiscards" => array("Out Disc<br>Second", "DESC"));
+	}
 	$display_text += array("ifOperStatus" => array("<br>Status", "ASC"));
 	$display_text += array("ifLastChange" => array("Last<br>Change", "ASC"));
 	$display_text += array("last_rundate" => array("Last<br>Scanned", "ASC"));
@@ -532,7 +540,7 @@ function mactrack_filter_table() {
 						if ($_REQUEST["type"] != "-1") {
 							$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(device_type_id='" . $_REQUEST["type"] . "')";
 						}
-						$devices = array_rekey(db_fetch_assoc("SELECT device_id, device_name FROM mac_track_devices $sql_where"), "device_id", "device_name");
+						$devices = array_rekey(db_fetch_assoc("SELECT device_id, device_name FROM mac_track_devices $sql_where ORDER BY device_name"), "device_id", "device_name");
 						if (sizeof($devices) > 0) {
 						foreach ($devices as $device_id => $device_name) {
 							print '<option value="' . $device_id .'"'; if ($_REQUEST["device"] == $device_id) { print " selected"; } print ">" . $device_name . "</option>";
