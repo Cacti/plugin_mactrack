@@ -316,25 +316,39 @@ function mactrack_view() {
 	$total_rows = db_fetch_cell($rows_query_string);
 
 	/* generate page list */
-	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_view_interfaces.php?action=view");
+	if ($total_rows > 0) {
+		$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_view_interfaces.php?action=view");
 
-	$nav = "<tr bgcolor='#" . $colors["header"] . "' class='noprint'>
-				<td colspan='22'>
-					<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-						<tr>
-						<td align='left' class='textHeaderDark'>
-								<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_view_interfaces.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-							</td>\n
-							<td align='center' class='textHeaderDark'>
-								Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-							</td>\n
-							<td align='right' class='textHeaderDark'>
-								<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_view_interfaces.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-							</td>\n
-						</tr>
-					</table>
-				</td>
-			</tr>\n";
+		$nav = "<tr bgcolor='#" . $colors["header"] . "' class='noprint'>
+					<td colspan='22'>
+						<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+							<tr>
+							<td align='left' class='textHeaderDark'>
+									<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_view_interfaces.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
+								</td>\n
+								<td align='center' class='textHeaderDark'>
+									Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
+								</td>\n
+								<td align='right' class='textHeaderDark'>
+									<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_view_interfaces.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+								</td>\n
+							</tr>
+						</table>
+					</td>
+				</tr>\n";
+	}else{
+		$nav = "<tr bgcolor='#" . $colors["header"] . "' class='noprint'>
+					<td colspan='22'>
+						<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+							<tr>
+								<td align='center' class='textHeaderDark'>
+									No Rows Found
+								</td>\n
+							</tr>
+						</table>
+					</td>
+				</tr>\n";
+	}
 
 	print $nav;
 
@@ -360,28 +374,25 @@ function mactrack_view() {
 			print mactrack_format_interface_row($stat);
 		}
 
-		/* put the nav bar on the bottom as well */
-		print $nav;
 	}else{
 		print "<tr><td colspan='7'><em>No Scanner Devices Found</em></td></tr>";
 	}
+
+	/* put the nav bar on the bottom as well */
+	print $nav;
+
 	html_end_box(false);
-
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
-
 	print "<tr>";
-
-	mactrack_legend_row("mactrack_int_up_bgc", "Interface Up");
-	mactrack_legend_row("mactrack_int_up_wo_alias_bgc", "Interface Up w/o Alias");
-	mactrack_legend_row("mactrack_int_errors_bgc", "Errors Present");
-	mactrack_legend_row("mactrack_int_discards_bgc", "Discards Present");
-	mactrack_legend_row("mactrack_int_unmapped_bgc", "Unmapped to Tree");
-	mactrack_legend_row("mactrack_int_no_graph_bgc", "No Graphs");
-	mactrack_legend_row("mactrack_int_no_device_bgc", "Not Integrated");
-	mactrack_legend_row("mactrack_int_down_bgc", "Interface Down");
-
+	mactrack_legend_row("mt_int_up_bgc", "Interface Up");
+	mactrack_legend_row("mt_int_up_wo_alias_bgc", "No Alias");
+	mactrack_legend_row("mt_int_errors_bgc", "Errors Present");
+	mactrack_legend_row("mt_int_discards_bgc", "Discards Present");
+	mactrack_legend_row("mt_int_unmapped_bgc", "Unmapped to Tree");
+	mactrack_legend_row("mt_int_no_graph_bgc", "No Graphs");
+	mactrack_legend_row("mt_int_no_device_bgc", "Not Integrated");
+	mactrack_legend_row("mt_int_down_bgc", "Interface Down");
 	print "</tr>";
-
 	html_end_box(false);
 
 	mactrack_display_stats();
@@ -470,6 +481,15 @@ function mactrack_filter_table() {
 						?>
 						</select>
 					</td>
+					<td>
+						<input type="submit" name="Go" value="Go" alt="Go" border="0" align="absmiddle">
+					</td>
+					<td>
+						<input type="submit" name="clear_x" value="Clear" alt="Clear" border="0" align="absmiddle">
+					</td>
+					<td>
+						<input type="submit" name="export_x" value="Export" alt="Export" border="0" align="absmiddle">
+					</td>
 				</tr>
 				<tr>
 					<td width="50">
@@ -543,12 +563,7 @@ function mactrack_filter_table() {
 						Search:&nbsp;
 					</td>
 					<td width="1">
-						<input type="text" name="filter" size="60" value="<?php print $_REQUEST["filter"];?>">
-					</td>
-					<td nowrap>
-						&nbsp;<input type="submit" name="Go" value="Go" alt="Go" border="0" align="absmiddle">
-						<input type="submit" name="clear_x" value="Clear" alt="Clear" border="0" align="absmiddle">
-						<input type="submit" name="export_x" value="Export" alt="Export" border="0" align="absmiddle">
+						<input type="text" name="filter" size="40" value="<?php print $_REQUEST["filter"];?>">
 					</td>
 				</tr>
 			</table>

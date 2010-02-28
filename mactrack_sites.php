@@ -525,28 +525,40 @@ function mactrack_site() {
 			/* generate page list navigation */
 			$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, 9, "mactrack_sites.php?filter=" . $_REQUEST["filter"]);
 		}else{
-			$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-					<td colspan='9'>
-						<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-							<tr>
-								<td align='left' class='textHeaderDark'>
-									<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_sites.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-								</td>\n
-								<td align='center' class='textHeaderDark'>
-									Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-								</td>\n
-								<td align='right' class='textHeaderDark'>
-									<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_sites.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-								</td>\n
-							</tr>
-						</table>
-					</td>
-				</tr>\n";
+			if ($total_rows > 0) {
+				$nav = "<tr bgcolor='#" . $colors["header"] . "'>
+						<td colspan='9'>
+							<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+								<tr>
+									<td align='left' class='textHeaderDark'>
+										<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_sites.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
+									</td>\n
+									<td align='center' class='textHeaderDark'>
+										Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
+									</td>\n
+									<td align='right' class='textHeaderDark'>
+										<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_sites.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+									</td>\n
+								</tr>
+							</table>
+						</td>
+					</tr>\n";
+			}else{
+				$nav = "<tr bgcolor='#" . $colors["header"] . "' class='noprint'>
+							<td colspan='22'>
+								<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+									<tr>
+										<td align='center' class='textHeaderDark'>
+											No Rows Found
+										</td>\n
+									</tr>
+								</table>
+							</td>
+						</tr>\n";
+			}
 		}
 
-		if ($total_rows) {
-			print $nav;
-		}
+		print $nav;
 
 		$display_text = array(
 			"site_name" => array("Site Name", "ASC"),
@@ -585,23 +597,37 @@ function mactrack_site() {
 			/* generate page list navigation */
 			$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, 10, "mactrack_sites.php?filter=" . $_REQUEST["filter"]);
 		}else{
-			$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-					<td colspan='10'>
-						<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-							<tr>
-								<td align='left' class='textHeaderDark'>
-									<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_sites.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-								</td>\n
-								<td align='center' class='textHeaderDark'>
-									Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-								</td>\n
-								<td align='right' class='textHeaderDark'>
-									<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_sites.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-								</td>\n
-							</tr>
-						</table>
-					</td>
-				</tr>\n";
+			if ($total_rows > 0) {
+				$nav = "<tr bgcolor='#" . $colors["header"] . "'>
+						<td colspan='10'>
+							<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+								<tr>
+									<td align='left' class='textHeaderDark'>
+										<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_sites.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
+									</td>\n
+									<td align='center' class='textHeaderDark'>
+										Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
+									</td>\n
+									<td align='right' class='textHeaderDark'>
+										<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_sites.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+									</td>\n
+								</tr>
+							</table>
+						</td>
+					</tr>\n";
+			}else{
+				$nav = "<tr bgcolor='#" . $colors["header"] . "' class='noprint'>
+							<td colspan='22'>
+								<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+									<tr>
+										<td align='center' class='textHeaderDark'>
+											No Rows Found
+										</td>\n
+									</tr>
+								</table>
+							</td>
+						</tr>\n";
+			}
 		}
 
 		print $nav;

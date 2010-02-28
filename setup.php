@@ -1056,8 +1056,8 @@ function mactrack_config_settings () {
 			"default" => 0,
 			),
 		"mt_int_up_wo_alias_bgc" => array(
-			"friendly_name" => "Up without ifAlias Background Color",
-			"description" => "The background color to use if interface is up without a ifAlias.  Select 'None' to hide legend.",
+			"friendly_name" => "No ifAlias Background Color",
+			"description" => "The background color to use if interface is up without either an ifAlias or PortName.  Select 'None' to hide legend.",
 			"method" => "drop_color",
 			"default" => 0,
 			),
@@ -1070,12 +1070,6 @@ function mactrack_config_settings () {
 		"mt_int_discards_bgc" => array(
 			"friendly_name" => "Interface with Discards Background Color",
 			"description" => "The background color to use if interface has show discards since the last scan.  Select 'None' to hide legend.",
-			"method" => "drop_color",
-			"default" => 0,
-			),
-		"mt_int_unmapped_bgc" => array(
-			"friendly_name" => "Interface That is not on Tree",
-			"description" => "The background color to use if interface has not been mapped onto a tree.  Select 'None' to hide legend.",
 			"method" => "drop_color",
 			"default" => 0,
 			),
