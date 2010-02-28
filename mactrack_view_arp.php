@@ -278,7 +278,7 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = TRUE, $row_li
 		$query_string .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
 	}
 
-	echo $query_string;
+	//echo $query_string;
 
 	return db_fetch_assoc($query_string);
 }
