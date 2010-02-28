@@ -278,7 +278,7 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = TRUE, $row_li
 		$query_string .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
 	}
 
-	//echo $query_string;
+	echo $query_string;
 
 	return db_fetch_assoc($query_string);
 }
@@ -591,7 +591,7 @@ function mactrack_view_ips() {
 		if ($_REQUEST["site_id"] == -1 && $_REQUEST["device_id"] == -1) {
 			print "<tr><td colspan='10'><em>You Must Select Either a Site or a Device to Search</em></td></tr>";
 		}else{
-			print "<tr><td colspan='10'><em>No MacTrack Port Results</em></td></tr>";
+			print "<tr><td colspan='10'><em>No MacTrack IP Results</em></td></tr>";
 		}
 	}
 
