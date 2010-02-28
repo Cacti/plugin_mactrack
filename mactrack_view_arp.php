@@ -496,11 +496,7 @@ function mactrack_view_ips() {
 				"dns_hostname" => array("ED DNS Hostname", "ASC"),
 				"mac_address" => array("ED MAC Address", "ASC"),
 				"vendor_name" => array("Vendor Name", "ASC"),
-				"port_number" => array("Port Number", "DESC"),
-				"port_name" => array("Port Name", "ASC"),
-				"vlan_id" => array("VLAN ID", "DESC"),
-				"vlan_name" => array("VLAN Name", "ASC"),
-				"max_scan_date" => array("Last Scan Date", "DESC"));
+				"port_number" => array("Port Number", "DESC"));
 		}else{
 			$display_text = array(
 				"device_name" => array("Switch Name", "ASC"),
@@ -509,11 +505,7 @@ function mactrack_view_ips() {
 				"dns_hostname" => array("ED DNS Hostname", "ASC"),
 				"mac_address" => array("ED MAC Address", "ASC"),
 				"vendor_name" => array("Vendor Name", "ASC"),
-				"port_number" => array("Port Number", "DESC"),
-				"port_name" => array("Port Name", "ASC"),
-				"vlan_id" => array("VLAN ID", "DESC"),
-				"vlan_name" => array("VLAN Name", "ASC"),
-				"scan_date" => array("Last Scan Date", "DESC"));
+				"port_number" => array("Port Number", "DESC"));
 		}
 
 		if (mactrack_check_user_realm(2122)) {
@@ -529,11 +521,7 @@ function mactrack_view_ips() {
 				"ip_address" => array("ED IP Address", "ASC"),
 				"mac_address" => array("ED MAC Address", "ASC"),
 				"vendor_name" => array("Vendor Name", "ASC"),
-				"port_number" => array("Port Number", "DESC"),
-				"port_name" => array("Port Name", "ASC"),
-				"vlan_id" => array("VLAN ID", "DESC"),
-				"vlan_name" => array("VLAN Name", "ASC"),
-				"max_scan_date" => array("Last Scan Date", "DESC"));
+				"port_number" => array("Port Number", "DESC"));
 		}else{
 			$display_text = array(
 				"device_name" => array("Switch Device", "ASC"),
@@ -541,11 +529,7 @@ function mactrack_view_ips() {
 				"ip_address" => array("ED IP Address", "ASC"),
 				"mac_address" => array("ED MAC Address", "ASC"),
 				"vendor_name" => array("Vendor Name", "ASC"),
-				"port_number" => array("Port Number", "DESC"),
-				"port_name" => array("Port Name", "ASC"),
-				"vlan_id" => array("VLAN ID", "DESC"),
-				"vlan_name" => array("VLAN Name", "ASC"),
-				"scan_date" => array("Last Scan Date", "DESC"));
+				"port_number" => array("Port Number", "DESC"));
 		}
 
 		if (mactrack_check_user_realm(2122)) {
@@ -578,13 +562,6 @@ function mactrack_view_ips() {
 			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["mac_address"]) : $port_result["mac_address"]), $key);
 			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["vendor_name"]) : $port_result["vendor_name"]), $key);
 			form_selectable_cell($port_result["port_number"], $key);
-			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["port_name"]) : $port_result["port_name"]), $key);
-			form_selectable_cell($port_result["vlan_id"], $key);
-			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["vlan_name"]) : $port_result["vlan_name"]), $key);
-			form_selectable_cell($scan_date, $key);
-			if (mactrack_check_user_realm(2122)) {
-			form_checkbox_cell($port_result["mac_address"], $key);
-			}
 			form_end_row();
 		}
 	}else{
