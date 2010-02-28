@@ -535,12 +535,6 @@ function mactrack_view_ips() {
 	$delim = read_config_option("mt_mac_delim");
 	if (sizeof($port_results) > 0) {
 		foreach ($port_results as $port_result) {
-			if ($_REQUEST["scan_date"] != 2) {
-				$scan_date = $port_result["scan_date"];
-			}else{
-				$scan_date = $port_result["max_scan_date"];
-			}
-
 			$key =  str_replace($delim, "_", $port_result["mac_address"]) . "-" . $port_result["device_id"] .
 					$port_result["port_number"] . "-" . strtotime($scan_date);
 
