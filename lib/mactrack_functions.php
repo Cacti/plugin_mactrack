@@ -2197,11 +2197,19 @@ function mactrack_format_interface_row($stat) {
 	$row .= "<td>" . round($stat["outBound"],1) . " %"          . "</td>";
 	$row .= "<td>" . mactrack_display_Octets($stat["int_ifHCInOctets"])  . "</td>";
 	$row .= "<td>" . mactrack_display_Octets($stat["int_ifHCOutOctets"]) . "</td>";
-	$row .= "<td>" . $stat["int_ifInErrors"]                    . "</td>";
-	$row .= "<td>" . $stat["int_ifInDiscards"]                  . "</td>";
-	$row .= "<td>" . $stat["int_ifInUnknownProtos"]             . "</td>";
-	$row .= "<td>" . $stat["int_ifOutErrors"]                   . "</td>";
-	$row .= "<td>" . $stat["int_ifOutDiscards"]                 . "</td>";
+	if (isset($_REQUEST["totals"])) {
+		$row .= "<td>" . $stat["ifInErrors"]                    . "</td>";
+		$row .= "<td>" . $stat["ifInDiscards"]                  . "</td>";
+		$row .= "<td>" . $stat["ifInUnknownProtos"]             . "</td>";
+		$row .= "<td>" . $stat["ifOutErrors"]                   . "</td>";
+		$row .= "<td>" . $stat["ifOutDiscards"]                 . "</td>";
+	}else{
+		$row .= "<td>" . $stat["int_ifInErrors"]                    . "</td>";
+		$row .= "<td>" . $stat["int_ifInDiscards"]                  . "</td>";
+		$row .= "<td>" . $stat["int_ifInUnknownProtos"]             . "</td>";
+		$row .= "<td>" . $stat["int_ifOutErrors"]                   . "</td>";
+		$row .= "<td>" . $stat["int_ifOutDiscards"]                 . "</td>";
+	}
 	$row .= "<td>" . ($stat["ifOperStatus"] == 1 ? "Up":"Down") . "</td>";
 	$row .= "<td style='white-space:nowrap;'>" . $upTime                                    . "</td>";
 	$row .= "<td style='white-space:nowrap;'>" . mactrack_date($stat["last_rundate"])        . "</td>";
