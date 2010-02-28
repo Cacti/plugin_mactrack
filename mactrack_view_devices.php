@@ -177,46 +177,9 @@ function mactrack_view_get_device_records(&$sql_where, $row_limit, $apply_limits
 	}
 
 	$sql_query = "SELECT
+		mac_track_devices.*,
 		mac_track_device_types.description AS device_type,
-		mac_track_devices.site_id,
-		mac_track_sites.site_name,
-		mac_track_devices.device_id,
-		mac_track_devices.device_type_id,
-		mac_track_devices.device_name,
-		mac_track_devices.notes,
-		mac_track_devices.hostname,
-		mac_track_devices.snmp_readstring,
-		mac_track_devices.snmp_readstrings,
-		mac_track_devices.snmp_version,
-		mac_track_devices.snmp_username,
-		mac_track_devices.snmp_password,
-		mac_track_devices.snmp_auth_protocol,
-		mac_track_devices.snmp_priv_passphrase,
-		mac_track_devices.snmp_priv_protocol,
-		mac_track_devices.snmp_context,
-		mac_track_devices.snmp_port,
-		mac_track_devices.snmp_timeout,
-		mac_track_devices.snmp_retries,
-		mac_track_devices.max_oids,
-		mac_track_devices.snmp_status,
-		mac_track_devices.snmp_sysName,
-		mac_track_devices.snmp_sysLocation,
-		mac_track_devices.snmp_sysContact,
-		mac_track_devices.snmp_sysObjectID,
-		mac_track_devices.snmp_sysDescr,
-		mac_track_devices.snmp_sysUptime,
-		mac_track_devices.ignorePorts,
-		mac_track_devices.disabled,
-		mac_track_devices.scan_type,
-		mac_track_devices.ips_total,
-		mac_track_devices.ports_total,
-		mac_track_devices.vlans_total,
-		mac_track_devices.ports_active,
-		mac_track_devices.ports_trunk,
-		mac_track_devices.macs_active,
-		mac_track_devices.last_rundate,
-		mac_track_devices.last_runmessage,
-		mac_track_devices.last_runduration
+		mac_track_sites.site_name
 		FROM mac_track_sites
 		RIGHT JOIN mac_track_devices ON (mac_track_devices.site_id=mac_track_sites.site_id)
 		LEFT JOIN mac_track_device_types ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
@@ -259,7 +222,7 @@ function mactrack_view_devices() {
 	}
 
 	/* if the user pushed the 'clear' button */
-	if (isset($_REQUEST["clear_x"])) {
+	if (isset($_REQUEST["clear_x"]) || isset($_REQUEST["reset"])) {
 		kill_session_var("sess_mactrack_view_device_current_page");
 		kill_session_var("sess_mactrack_view_device_filter");
 		kill_session_var("sess_mactrack_view_device_site_id");
@@ -271,14 +234,17 @@ function mactrack_view_devices() {
 		kill_session_var("sess_mactrack_view_device_sort_direction");
 
 		$_REQUEST["page"] = 1;
-		unset($_REQUEST["filter"]);
-		unset($_REQUEST["site_id"]);
-		unset($_REQUEST["type_id"]);
-		unset($_REQUEST["rows"]);
-		unset($_REQUEST["device_type_id"]);
-		unset($_REQUEST["status"]);
-		unset($_REQUEST["sort_column"]);
-		unset($_REQUEST["sort_direction"]);
+
+		if (isset($_REQUEST["clear_x"])) {
+			unset($_REQUEST["filter"]);
+			unset($_REQUEST["site_id"]);
+			unset($_REQUEST["type_id"]);
+			unset($_REQUEST["rows"]);
+			unset($_REQUEST["device_type_id"]);
+			unset($_REQUEST["status"]);
+			unset($_REQUEST["sort_column"]);
+			unset($_REQUEST["sort_direction"]);
+		}
 	}else{
 		/* if any of the settings changed, reset the page number */
 		$changed = 0;
@@ -311,6 +277,12 @@ function mactrack_view_devices() {
 		$row_limit = 999999;
 	}else{
 		$row_limit = $_REQUEST["rows"];
+	}
+
+	if (defined("URL_PATH")) {
+		$webroot = URL_PATH;
+	}else{
+		$webroot = $config["url_path"];
 	}
 
 	mactrack_tabs();
@@ -379,9 +351,18 @@ function mactrack_view_devices() {
 		foreach ($devices as $device) {
 			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 				?>
-				<td width=60></td>
+				<td width=100>
+					<a href='<?php print $webroot . "plugins/mactrack/mactrack_devices.php?action=edit&device_id=" . $device['device_id'];?>' title='Edit Device'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/edit_object.png'></a>
+					<?php if ($device["host_id"] > 0) {?>
+					<a href='<?php print $webroot . "graph_view.php?action=preview&host_id=" . $device["host_id"] . "&graph_template_id=0&filter=";?>' title='View Graphs'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_graphs.gif'></a>
+					<?php }else{?>
+					<img title='Device Not Mapped to Cacti Device' border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_graphs_disabled.gif'>
+					<?php }?>
+					<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=" . $_REQUEST["site_id"] . "&device_id=" . $device['device_id'];?>' title='View MAC Addresses'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_macs.gif'></a>
+					<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_interfaces.php?report=interfaces&reset&site=" . $_REQUEST["site_id"] . "&device=" . $device['device_id'];?>' title='View Interfaces'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_interfaces.gif'></a>
+				</td>
 				<td width=150>
-					<?php print "<p class='linkEditMain'>" . (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $device["device_name"]) : $device["device_name"]) . "</p>";?>
+					<?php print "<strong>" . (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $device["device_name"]) : $device["device_name"]) . "</strong>";?>
 				</td>
 				<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $device["site_name"]) : $device["site_name"]);?></td>
 				<td><?php print get_colored_device_status(($device["disabled"] == "on" ? true : false), $device["snmp_status"]);?></td>

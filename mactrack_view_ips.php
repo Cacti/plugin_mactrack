@@ -135,18 +135,30 @@ function mactrack_view_ip_ranges() {
 		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var("sort_direction"));
 	}
 
-	/* if any of the settings changed, reset the page number */
-	/* if the user pushed the 'clear' button */
-	if (isset($_REQUEST["clear_x"])) {
+	if (isset($_REQUEST["reset"])) {
 		kill_session_var("sess_mactrack_view_ips_rows_selector");
 		kill_session_var("sess_mactrack_view_ips_current_page");
 		kill_session_var("sess_mactrack_view_ips_sort_column");
 		kill_session_var("sess_mactrack_view_ips_sort_row");
 
 		$_REQUEST["page"] = 1;
-		unset($_REQUEST["rows"]);
-		unset($_REQUEST["sort_column"]);
-		unset($_REQUEST["sort_direction"]);
+	}
+
+	/* if any of the settings changed, reset the page number */
+	/* if the user pushed the 'clear' button */
+	if (isset($_REQUEST["clear_x"]) || isset($_REQUEST["reset"])) {
+		kill_session_var("sess_mactrack_view_ips_rows_selector");
+		kill_session_var("sess_mactrack_view_ips_current_page");
+		kill_session_var("sess_mactrack_view_ips_sort_column");
+		kill_session_var("sess_mactrack_view_ips_sort_row");
+
+		$_REQUEST["page"] = 1;
+
+		if (isset($_REQUEST["clear_x"])) {
+			unset($_REQUEST["rows"]);
+			unset($_REQUEST["sort_column"]);
+			unset($_REQUEST["sort_direction"]);
+		}
 	}else{
 		$changed = 0;
 		$changed += mactrack_check_changed("site_id", "sess_mactrack_view_ips_site_id");
@@ -169,6 +181,12 @@ function mactrack_view_ip_ranges() {
 		$row_limit = 999999;
 	}else{
 		$row_limit = $_REQUEST["rows"];
+	}
+
+	if (defined("URL_PATH")) {
+		$webroot = URL_PATH;
+	}else{
+		$webroot = $config["url_path"];
 	}
 
 	mactrack_tabs();
@@ -230,9 +248,12 @@ function mactrack_view_ip_ranges() {
 		foreach ($ip_ranges as $ip_range) {
 			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 				?>
-				<td width=60></td>
+				<td width=60>
+					<a href='<?php print $webroot . "plugins/mactrack/mactrack_sites.php?action=edit&site_id=" . $ip_range['site_id'];?>' title='Edit Site'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/edit_object.png'></a>
+					<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_macs.php?report=macs&reset&&ip_filter_type_id=3&ip_filter=" . (str_replace(".*", "", $ip_range["ip_range"])) . "&device_id=-1&scan_date=3&site_id=" . $ip_range['site_id'];?>' title='View MAC Addresses'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_macs.gif'></a>
+				</td>
 				<td width=200>
-					<?php print "<p class='linkEditMain'><strong>" . $ip_range["site_name"] . "</strong></p>";?>
+					<?php print "<strong>" . $ip_range["site_name"] . "</strong>";?>
 				</td>
 				<td><?php print $ip_range["ip_range"] . ".*";?></td>
 				<td><?php print number_format($ip_range["ips_current"]);?></td>

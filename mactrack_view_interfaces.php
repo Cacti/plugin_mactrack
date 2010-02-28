@@ -215,7 +215,7 @@ function mactrack_view() {
 	}
 
 	/* if the user pushed the 'clear' button */
-	if (isset($_REQUEST["clear_x"])) {
+	if (isset($_REQUEST["clear_x"]) || isset($_REQUEST["reset"])) {
 		kill_session_var("sess_mactrack_int_current_page");
 		kill_session_var("sess_mactrack_int_rows");
 		kill_session_var("sess_mactrack_int_device_id");
@@ -231,18 +231,21 @@ function mactrack_view() {
 		kill_session_var("sess_mactrack_int_sort_direction");
 
 		$_REQUEST["page"] = 1;
-		unset($_REQUEST["device_id"]);
-		unset($_REQUEST["state"]);
-		unset($_REQUEST["site"]);
-		unset($_REQUEST["device"]);
-		unset($_REQUEST["issues"]);
-		unset($_REQUEST["bwusage"]);
-		unset($_REQUEST["type"]);
-		unset($_REQUEST["period"]);
-		unset($_REQUEST["filter"]);
-		unset($_REQUEST["rows"]);
-		unset($_REQUEST["sort_column"]);
-		unset($_REQUEST["sort_direction"]);
+
+		if (isset($_REQUEST["clear_x"])) {
+			unset($_REQUEST["device_id"]);
+			unset($_REQUEST["state"]);
+			unset($_REQUEST["site"]);
+			unset($_REQUEST["device"]);
+			unset($_REQUEST["issues"]);
+			unset($_REQUEST["bwusage"]);
+			unset($_REQUEST["type"]);
+			unset($_REQUEST["period"]);
+			unset($_REQUEST["filter"]);
+			unset($_REQUEST["rows"]);
+			unset($_REQUEST["sort_column"]);
+			unset($_REQUEST["sort_direction"]);
+		}
 	}else{
 		/* if any of the settings changed, reset the page number */
 		$changed = 0;

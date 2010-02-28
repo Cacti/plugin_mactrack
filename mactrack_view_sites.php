@@ -157,15 +157,7 @@ function mactrack_view_get_site_records(&$sql_where, $row_limit, $apply_limits =
 	}
 
 	if ($_REQUEST["detail"] == "false") {
-		$query_string = "SELECT
-			mac_track_sites.site_id,
-			mac_track_sites.site_name,
-			mac_track_sites.total_devices,
-			mac_track_sites.total_device_errors,
-			mac_track_sites.total_macs,
-			mac_track_sites.total_ips,
-			mac_track_sites.total_oper_ports,
-			mac_track_sites.total_user_ports
+		$query_string = "SELECT *
 			FROM mac_track_sites
 			$sql_where
 			ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
@@ -174,8 +166,9 @@ function mactrack_view_get_site_records(&$sql_where, $row_limit, $apply_limits =
 			$query_string .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
 		}
 	}else{
-		$query_string ="SELECT mac_track_sites.site_name,
+		$query_string ="SELECT mac_track_sites.site_name, mac_track_sites.site_id,
 			Count(mac_track_device_types.device_type_id) AS total_devices,
+			mac_track_device_types.device_type_id,
 			mac_track_device_types.device_type,
 			mac_track_device_types.vendor,
 			mac_track_device_types.description,
@@ -231,7 +224,7 @@ function mactrack_view_sites() {
 	}
 
 	/* if the user pushed the 'clear' button */
-	if (isset($_REQUEST["clear_x"])) {
+	if (isset($_REQUEST["clear_x"]) || isset($_REQUEST["reset"])) {
 		kill_session_var("sess_mactrack_view_sites_current_page");
 		kill_session_var("sess_mactrack_view_sites_detail");
 		kill_session_var("sess_mactrack_view_sites_device_type_id");
@@ -242,13 +235,16 @@ function mactrack_view_sites() {
 		kill_session_var("sess_mactrack_view_sites_sort_direction");
 
 		$_REQUEST["page"] = 1;
-		unset($_REQUEST["filter"]);
-		unset($_REQUEST["rows"]);
-		unset($_REQUEST["device_type_id"]);
-		unset($_REQUEST["site_id"]);
-		unset($_REQUEST["detail"]);
-		unset($_REQUEST["sort_column"]);
-		unset($_REQUEST["sort_direction"]);
+
+		if (isset($_REQUEST["clear_x"])) {
+			unset($_REQUEST["filter"]);
+			unset($_REQUEST["rows"]);
+			unset($_REQUEST["device_type_id"]);
+			unset($_REQUEST["site_id"]);
+			unset($_REQUEST["detail"]);
+			unset($_REQUEST["sort_column"]);
+			unset($_REQUEST["sort_direction"]);
+		}
 	}else{
 		/* if any of the settings changed, reset the page number */
 		$changed = 0;
@@ -279,6 +275,12 @@ function mactrack_view_sites() {
 		$row_limit = 999999;
 	}else{
 		$row_limit = $_REQUEST["rows"];
+	}
+
+	if (defined("URL_PATH")) {
+		$webroot = URL_PATH;
+	}else{
+		$webroot = $config["url_path"];
 	}
 
 	mactrack_tabs();
@@ -351,9 +353,15 @@ function mactrack_view_sites() {
 			foreach ($sites as $site) {
 				form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 					?>
-					<td width=60></td>
+					<td width=100>
+						<a href='<?php print $webroot . "plugins/mactrack/mactrack_sites.php?action=edit&site_id=" . $site['site_id'];?>' title='Edit Site'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/edit_object.png'></a>
+						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_devices.php?report=devices&reset&site_id=" . $site['site_id'];?>' title='View Devices'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_devices.gif'></a>
+						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_ips.php?report=ips&reset&site_id=" . $site['site_id'];?>' title='View IP Ranges'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_networks.gif'></a>
+						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=" . $site['site_id'];?>' title='View MAC Addresses'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_macs.gif'></a>
+						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_interfaces.php?report=interfaces&reset&site=" . $site['site_id'];?>' title='View Interfaces'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_interfaces.gif'></a>
+					</td>
 					<td width=200>
-						<?php print "<p class='linkEditMain'><strong>" . (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]) . "</strong></p>";?>
+						<?php print "<strong>" . (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]) . "</strong>";?>
 					</td>
 					<td><?php print number_format($site["total_devices"]);?></td>
 					<td><?php print number_format($site["total_ips"]);?></td>
@@ -391,7 +399,13 @@ function mactrack_view_sites() {
 			foreach ($sites as $site) {
 				form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 					?>
-					<td width=60></td>
+					<td width=100>
+						<a href='<?php print $webroot . "plugins/mactrack/mactrack_sites.php?action=edit&site_id=" . $site['site_id'];?>' title='Edit Site'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/edit_object.png'></a>
+						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_devices.php?report=devices&site_id=" . $site['site_id'] . "&device_type_id=" . $site['device_type_id'];?>&type_id=-1&status=-1&filter=' title='View Devices'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_devices.gif'></a>
+						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_ips.php?report=ips&reset&site_id=" . $site['site_id'];?>' title='View IP Ranges'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_networks.gif'></a>
+						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=" . $site['site_id'];?>' title='View MAC Addresses'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_macs.gif'></a>
+						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_interfaces.php?report=interfaces&reset&site=" . $site['site_id'];?>' title='View Interfaces'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_interfaces.gif'></a>
+					</td>
 					<td width=200>
 						<?php print "<p class='linkEditMain'><strong>" . (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]) . "</strong></p>";?>
 					</td>
