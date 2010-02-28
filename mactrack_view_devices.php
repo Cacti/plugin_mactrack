@@ -352,7 +352,7 @@ function mactrack_view_devices() {
 			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 				?>
 				<td width=100>
-					<a href='<?php print $webroot . "plugins/mactrack/mactrack_devices.php?action=edit&device_id=" . $device['device_id'];?>' title='Edit Device'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/edit_object.png'></a>
+					<?php if (mactrack_authorized(2121)) {?><a href='<?php print $webroot . "plugins/mactrack/mactrack_devices.php?action=edit&device_id=" . $device['device_id'];?>' title='Edit Device'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/edit_object.png'></a><?php } ?>
 					<?php if ($device["host_id"] > 0) {?>
 					<a href='<?php print $webroot . "graph_view.php?action=preview&host_id=" . $device["host_id"] . "&graph_template_id=0&filter=";?>' title='View Graphs'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_graphs.gif'></a>
 					<?php }else{?>

@@ -354,7 +354,7 @@ function mactrack_view_sites() {
 				form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 					?>
 					<td width=100>
-						<a href='<?php print $webroot . "plugins/mactrack/mactrack_sites.php?action=edit&site_id=" . $site['site_id'];?>' title='Edit Site'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/edit_object.png'></a>
+						<?php if (mactrack_authorized(2121)) {?><a href='<?php print $webroot . "plugins/mactrack/mactrack_sites.php?action=edit&site_id=" . $site['site_id'];?>' title='Edit Site'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/edit_object.png'></a><?php } ?>
 						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_devices.php?report=devices&reset&site_id=" . $site['site_id'];?>' title='View Devices'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_devices.gif'></a>
 						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_ips.php?report=ips&reset&site_id=" . $site['site_id'];?>' title='View IP Ranges'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_networks.gif'></a>
 						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=" . $site['site_id'];?>' title='View MAC Addresses'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_macs.gif'></a>
