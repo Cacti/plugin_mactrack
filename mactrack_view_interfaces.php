@@ -45,30 +45,38 @@ if (isset($_REQUEST["export_x"])) {
 function mactrack_get_records(&$sql_where, $apply_limits = TRUE, $row_limit = "30") {
 	global $timespan, $group_function, $summary_stats;
 
+	$match = read_config_option('mt_ignorePorts', TRUE);
+	if ($match == '') {
+		$match = "(Vlan|Loopback|Null)";
+		db_execute("REPLACE INTO settings SET name='mt_ignorePorts', value='$match'");
+	}
+	$ignore = "(ifName NOT REGEXP '" . $match . "' AND ifDescr NOT REGEXP '" . $match . "')";
+
 	/* issues sql where */
 	if ($_REQUEST["issues"] == "-2") { // All Interfaces
 		/* do nothing all records */
 	} elseif ($_REQUEST["issues"] == "-3") { // Non Ignored Interfaces
-		$match = read_config_option('mt_ignorePorts', TRUE);
-		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(ifName NOT REGEXP '" . $match . "' AND ifDescr NOT REGEXP '" . $match . "')";
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . $ignore;
+	} elseif ($_REQUEST["issues"] == "-4") { // Ignored Interfaces
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . " NOT " . $ignore;
 	} elseif ($_REQUEST["issues"] == "-1") { // With Issues
-		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "((int_errors_present=1) OR (int_discards_present=1))";
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "((int_errors_present=1 OR int_discards_present=1) AND $ignore)";
 	} elseif ($_REQUEST["issues"] == "0") { // Up Interfaces
-		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(ifOperStatus=1)";
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(ifOperStatus=1 AND $ignore)";
 	} elseif ($_REQUEST["issues"] == "1") { // Up w/o Alias
-		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(ifOperStatus=1 AND ifAlias='')";
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(ifOperStatus=1 AND ifAlias='' AND $ignore)";
 	} elseif ($_REQUEST["issues"] == "2") { // Errors Up
-		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(int_errors_present=1)";
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(int_errors_present=1 AND $ignore)";
 	} elseif ($_REQUEST["issues"] == "3") { // Discards Up
-		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(int_discards_present=1)";
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(int_discards_present=1 AND $ignore)";
 	} elseif ($_REQUEST["issues"] == "7") { // Change < 24 Hours
 		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(mac_track_interfaces.sysUptime-ifLastChange < 8640000) AND ifLastChange > 0 AND (mac_track_interfaces.sysUptime-ifLastChange > 0)";
 	} elseif ($_REQUEST["issues"] == "9" && $_REQUEST["bwusage"] != "-1") { // In/Out over 70%
-		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(inBound>" . $_REQUEST["bwusage"] . " OR outBound>" . $_REQUEST["bwusage"] . ")";
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "((inBound>" . $_REQUEST["bwusage"] . " OR outBound>" . $_REQUEST["bwusage"] . ") AND $ignore)";
 	} elseif ($_REQUEST["issues"] == "10" && $_REQUEST["bwusage"] != "-1") { // In over 70%
-		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(inBound>" . $_REQUEST["bwusage"] .")";
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(inBound>" . $_REQUEST["bwusage"] ." AND $ignore)";
 	} elseif ($_REQUEST["issues"] == "11" && $_REQUEST["bwusage"] != "-1") { // Out over 70%
-		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(outBound>" . $_REQUEST["bwusage"] . ")";
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(outBound>" . $_REQUEST["bwusage"] . " AND $ignore)";
 	} else {
 	}
 
@@ -206,6 +214,11 @@ function mactrack_view() {
 		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
 	}
 
+	/* clean up totals */
+	if (isset($_REQUEST["totals"])) {
+		$_REQUEST["totals"] = sanitize_search_string(get_request_var("totals"));
+	}
+
 	/* clean up */
 	if (isset($_REQUEST["sort_column"])) {
 		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
@@ -220,6 +233,7 @@ function mactrack_view() {
 	if (isset($_REQUEST["clear_x"]) || isset($_REQUEST["reset"])) {
 		kill_session_var("sess_mactrack_int_current_page");
 		kill_session_var("sess_mactrack_int_rows");
+		kill_session_var("sess_mactrack_int_totals");
 		kill_session_var("sess_mactrack_int_device_id");
 		kill_session_var("sess_mactrack_int_state");
 		kill_session_var("sess_mactrack_int_site");
@@ -236,8 +250,10 @@ function mactrack_view() {
 
 		if (isset($_REQUEST["clear_x"])) {
 			unset($_REQUEST["device_id"]);
+			unset($_REQUEST["totals"]);
 			unset($_REQUEST["state"]);
 			unset($_REQUEST["site"]);
+			unset($_REQUEST["totals"]);
 			unset($_REQUEST["device"]);
 			unset($_REQUEST["issues"]);
 			unset($_REQUEST["bwusage"]);
@@ -253,6 +269,7 @@ function mactrack_view() {
 		$changed = 0;
 		$changed += mactrack_check_changed("device_id", "sess_mactrack_int_device_id");
 		$changed += mactrack_check_changed("site", "sess_mactrack_int_site");
+		$changed += mactrack_check_changed("totals", "sess_mactrack_int_totals");
 		$changed += mactrack_check_changed("device", "sess_mactrack_int_device");
 		$changed += mactrack_check_changed("issues", "sess_mactrack_int_issues");
 		$changed += mactrack_check_changed("bwusage", "sess_mactrack_int_bwusage");
@@ -270,6 +287,7 @@ function mactrack_view() {
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
 	load_current_session_value("page", "sess_mactrack_int_current_page", "1");
+	load_current_session_value("totals", "sess_mactrack_int_totals", "on");
 	load_current_session_value("rows", "sess_mactrack_int_rows", read_config_option("num_rows_device"));
 	load_current_session_value("device_id", "sess_mactrack_int_device_id", "-1");
 	load_current_session_value("site", "sess_mactrack_int_site", "-1");
@@ -413,7 +431,7 @@ function mactrack_display_array() {
 	$display_text += array("outBound" => array("OutBound<br>%", "DESC"));
 	$display_text += array("int_ifHCInOctets" => array("In Bytes<br>Second", "DESC"));
 	$display_text += array("int_ifHCOutOctets" => array("Out Bytes<br>Second", "DESC"));
-	if (isset($_REQUEST["totals"])) {
+	if ($_REQUEST["totals"] == "true" || $_REQUEST["totals"] == "on") {
 		$display_text += array("ifInErrors" => array("In Err<br>Total", "DESC"));
 		$display_text += array("ifInDiscards" => array("In Disc<br>Total", "DESC"));
 		$display_text += array("ifInUnknownProtos" => array("UProto<br>Total", "DESC"));
@@ -466,6 +484,7 @@ function mactrack_filter_table() {
 						<select name="issues" onChange="<?php print $filterChange;?>">
 						<option value="-2"<?php if ($_REQUEST["issues"] == "-2") {?> selected<?php }?>>All Interfaces</option>
 						<option value="-3"<?php if ($_REQUEST["issues"] == "-3") {?> selected<?php }?>>All Non-Ignored Interfaces</option>
+						<option value="-4"<?php if ($_REQUEST["issues"] == "-4") {?> selected<?php }?>>All Ignored Interfaces</option>
 						<?php if ($_REQUEST["bwusage"] != "-1") {?><option value="9"<?php if ($_REQUEST["issues"] == "9" && $_REQUEST["bwusage"] != "-1") {?> selected<?php }?>>High In/Out Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option><?php }?>
 						<?php if ($_REQUEST["bwusage"] != "-1") {?><option value="10"<?php if ($_REQUEST["issues"] == "10" && $_REQUEST["bwusage"] != "-1") {?> selected<?php }?>>High In Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option><?php }?>
 						<?php if ($_REQUEST["bwusage"] != "-1") {?><option value="11"<?php if ($_REQUEST["issues"] == "11" && $_REQUEST["bwusage"] != "-1") {?> selected<?php }?>>High Out Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option><?php }?>
@@ -551,8 +570,8 @@ function mactrack_filter_table() {
 						?>
 						</select>
 					</td>
-					<td width="50">
-						&nbsp;Records:&nbsp;
+					<td width="40">
+						&nbsp;Rows:&nbsp;
 					</td>
 					<td width="1">
 						<select name="rows" onChange="<?php print $filterChange;?>">
@@ -574,6 +593,12 @@ function mactrack_filter_table() {
 					</td>
 					<td width="1">
 						<input type="text" name="filter" size="40" value="<?php print $_REQUEST["filter"];?>">
+					</td>
+					<td>
+						<input type="checkbox" id="totals" name="totals" onChange="<?php print $filterChange;?>" <?php print ($_REQUEST["totals"] == "on" || $_REQUEST["totals"] == "true" ? "checked":"");?>>
+					</td>
+					<td>
+						<label for="totals">Show Total Errors</label>
 					</td>
 				</tr>
 			</table>

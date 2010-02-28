@@ -2188,30 +2188,30 @@ function mactrack_format_interface_row($stat) {
 	$row .= $rescan;
 	$row .= "</td>";
 
-	$row .= "<td><b>" . $stat["device_name"] . "</b></td>";
-	$row .= "<td>" . strtoupper($stat["device_type"])           . "</td>";
-	$row .= "<td><b>" . $stat["ifName"]                         . "</b></td>";
-	$row .= "<td>" . $stat["ifDescr"]                           . "</td>";
-	$row .= "<td>" . $stat["ifAlias"]                           . "</td>";
-	$row .= "<td>" . round($stat["inBound"],1) . " %"           . "</td>";
-	$row .= "<td>" . round($stat["outBound"],1) . " %"          . "</td>";
+	$row .= "<td><b>" . $stat["device_name"]                     . "</b></td>";
+	$row .= "<td>" . strtoupper($stat["device_type"])            . "</td>";
+	$row .= "<td><b>" . $stat["ifName"]                          . "</b></td>";
+	$row .= "<td>" . $stat["ifDescr"]                            . "</td>";
+	$row .= "<td>" . $stat["ifAlias"]                            . "</td>";
+	$row .= "<td>" . round($stat["inBound"],1) . " %"            . "</td>";
+	$row .= "<td>" . round($stat["outBound"],1) . " %"           . "</td>";
 	$row .= "<td>" . mactrack_display_Octets($stat["int_ifHCInOctets"])  . "</td>";
 	$row .= "<td>" . mactrack_display_Octets($stat["int_ifHCOutOctets"]) . "</td>";
-	if (isset($_REQUEST["totals"])) {
-		$row .= "<td>" . $stat["ifInErrors"]                    . "</td>";
-		$row .= "<td>" . $stat["ifInDiscards"]                  . "</td>";
-		$row .= "<td>" . $stat["ifInUnknownProtos"]             . "</td>";
-		$row .= "<td>" . $stat["ifOutErrors"]                   . "</td>";
-		$row .= "<td>" . $stat["ifOutDiscards"]                 . "</td>";
+	if ($_REQUEST["totals"] == "true" || $_REQUEST["totals"] == "on") {
+		$row .= "<td>" . $stat["ifInErrors"]                     . "</td>";
+		$row .= "<td>" . $stat["ifInDiscards"]                   . "</td>";
+		$row .= "<td>" . $stat["ifInUnknownProtos"]              . "</td>";
+		$row .= "<td>" . $stat["ifOutErrors"]                    . "</td>";
+		$row .= "<td>" . $stat["ifOutDiscards"]                  . "</td>";
 	}else{
-		$row .= "<td>" . $stat["int_ifInErrors"]                    . "</td>";
-		$row .= "<td>" . $stat["int_ifInDiscards"]                  . "</td>";
-		$row .= "<td>" . $stat["int_ifInUnknownProtos"]             . "</td>";
-		$row .= "<td>" . $stat["int_ifOutErrors"]                   . "</td>";
-		$row .= "<td>" . $stat["int_ifOutDiscards"]                 . "</td>";
+		$row .= "<td>" . round($stat["int_ifInErrors"],1)        . "</td>";
+		$row .= "<td>" . round($stat["int_ifInDiscards"],1)      . "</td>";
+		$row .= "<td>" . round($stat["int_ifInUnknownProtos"],1) . "</td>";
+		$row .= "<td>" . round($stat["int_ifOutErrors"],1)       . "</td>";
+		$row .= "<td>" . round($stat["int_ifOutDiscards"],1)     . "</td>";
 	}
 	$row .= "<td>" . ($stat["ifOperStatus"] == 1 ? "Up":"Down") . "</td>";
-	$row .= "<td style='white-space:nowrap;'>" . $upTime                                    . "</td>";
+	$row .= "<td style='white-space:nowrap;'>" . $upTime        . "</td>";
 	$row .= "<td style='white-space:nowrap;'>" . mactrack_date($stat["last_rundate"])        . "</td>";
 	return $row;
 }
@@ -3493,9 +3493,9 @@ function mactrack_ipsaddresses_filter() {
 						<option value="-1"<?php if ($_REQUEST["device_id"] == "-1") {?> selected<?php }?>>All</option>
 						<?php
 						if ($_REQUEST["site_id"] == -1) {
-							$filter_devices = db_fetch_assoc("SELECT device_id, device_name, hostname FROM mac_track_devices ORDER BY device_name");
+							$filter_devices = db_fetch_assoc("SELECT DISTINCT device_id, device_name, hostname FROM mac_track_ips ORDER BY device_name");
 						}else{
-							$filter_devices = db_fetch_assoc("SELECT device_id, device_name, hostname FROM mac_track_devices WHERE site_id='" . $_REQUEST["site_id"] . "' ORDER BY device_name");
+							$filter_devices = db_fetch_assoc("SELECT device_id, device_name, hostname FROM mac_track_ips WHERE site_id='" . $_REQUEST["site_id"] . "' ORDER BY device_name");
 						}
 						if (sizeof($filter_devices) > 0) {
 						foreach ($filter_devices as $filter_device) {
