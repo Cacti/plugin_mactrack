@@ -223,7 +223,7 @@ function display_help () {
 }
 
 function collect_mactrack_data($start, $site_id = 0) {
-	global $max_run_duration, $config, $debug;
+	global $max_run_duration, $config, $debug, $scan_date;
 
 	if (defined('CACTI_BASE_PATH')) {
 		$config["base_path"] = CACTI_BASE_PATH;
@@ -354,7 +354,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 							AND mac_track_temp_ports.site_id=mac_track_ips.site_id)
 							SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address,
 							mac_track_temp_ports.updated=1
-							WHERE mac_track_temp_ports.updated=0");
+							WHERE mac_track_temp_ports.updated=0 AND scan_date='$scan_date'");
 				mactrack_debug("Interum IP addresses to MAC addresses association pass complete.");
 
 				$last_time = $current_time;
@@ -398,7 +398,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 							AND mac_track_temp_ports.site_id=mac_track_ips.site_id)
 							SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address,
 							mac_track_temp_ports.updated=1
-							WHERE mac_track_temp_ports.updated=0");
+							WHERE mac_track_temp_ports.updated=0 AND scan_date='$scan_date'");
 				mactrack_debug("Interum IP addresses to MAC addresses association pass complete.");
 			}
 
@@ -442,7 +442,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 					ON (mac_track_temp_ports.mac_address=mac_track_ips.mac_address
 					AND mac_track_temp_ports.site_id=mac_track_ips.site_id)
 					SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address
-					WHERE mac_track_temp_ports.updated=0");
+					WHERE mac_track_temp_ports.updated=0 AND scan_date='$scan_date'");
 		mactrack_debug("Interum IP addresses to MAC addresses association pass complete.");
 
 		/* populate the vendor_macs for this pass */
@@ -558,6 +558,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 		$ips = array_rekey(db_fetch_assoc("SELECT site_id, count(ip_address) as total_ips
 						FROM mac_track_ips
+						WHERE scan_date='$scan_date'
 						GROUP BY site_id"), "site_id", "total_ips");
 
 		foreach($errors as $error) {
@@ -664,7 +665,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 		/* purge the ip address and temp port table */
 		db_execute("TRUNCATE TABLE mac_track_temp_ports");
-		db_execute("TRUNCATE TABLE mac_track_ips");
+		db_execute("DELETE FROM mac_track_ips WHERE scan_date<'$scan_date'");
 		db_execute("TRUNCATE TABLE mac_track_scan_dates");
 		db_execute("REPLACE INTO mac_track_scan_dates (SELECT DISTINCT scan_date from mac_track_ports);");
 	}else{

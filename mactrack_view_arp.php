@@ -109,11 +109,6 @@ function mactrack_view_export_ips() {
 	}
 
 	/* clean up search string */
-	if (isset($_REQUEST["scan_date"])) {
-		$_REQUEST["scan_date"] = sanitize_search_string(get_request_var("scan_date"));
-	}
-
-	/* clean up search string */
 	if (isset($_REQUEST["filter"])) {
 		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
 	}
@@ -125,18 +120,16 @@ function mactrack_view_export_ips() {
 	}
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
-	load_current_session_value("page", "sess_mactrack_view_macs_current_page", "1");
-	load_current_session_value("scan_date", "sess_mactrack_view_macs_scan_date", "2");
-	load_current_session_value("filter", "sess_mactrack_view_macs_filter", "");
-	load_current_session_value("mac_filter_type_id", "sess_mactrack_view_macs_mac_filter_type_id", "1");
-	load_current_session_value("mac_filter", "sess_mactrack_view_macs_mac_filter", "");
-	load_current_session_value("ip_filter_type_id", "sess_mactrack_view_macs_ip_filter_type_id", "1");
-	load_current_session_value("ip_filter", "sess_mactrack_view_macs_ip_filter", "");
-	load_current_session_value("rows", "sess_mactrack_view_macs_rows_selector", "-1");
-	load_current_session_value("site_id", "sess_mactrack_view_macs_site_id", "-1");
-	load_current_session_value("device_id", "sess_mactrack_view_macs_device_id", "-1");
-	load_current_session_value("sort_column", "sess_mactrack_view_macs_sort_column", "device_name");
-	load_current_session_value("sort_direction", "sess_mactrack_view_macs_sort_direction", "ASC");
+	load_current_session_value("page", "sess_mactrack_view_ipads_current_page", "1");
+	load_current_session_value("filter", "sess_mactrack_view_ipads_filter", "");
+	load_current_session_value("mac_filter_type_id", "sess_mactrack_view_ipads_mac_filter_type_id", "1");
+	load_current_session_value("mac_filter", "sess_mactrack_view_ipads_mac_filter", "");
+	load_current_session_value("ip_filter_type_id", "sess_mactrack_view_ipads_ip_filter_type_id", "1");
+	load_current_session_value("ip_filter", "sess_mactrack_view_ipads_ip_filter", "");
+	load_current_session_value("site_id", "sess_mactrack_view_ipads_site_id", "-1");
+	load_current_session_value("device_id", "sess_mactrack_view_ipads_device_id", "-1");
+	load_current_session_value("sort_column", "sess_mactrack_view_ipads_sort_column", "device_name");
+	load_current_session_value("sort_direction", "sess_mactrack_view_ipads_sort_direction", "ASC");
 
 	$sql_where = "";
 
@@ -144,8 +137,8 @@ function mactrack_view_export_ips() {
 
 	$xport_array = array();
 	array_push($xport_array, '"site_name","hostname","device_name",' .
-		'"vlan_id","vlan_name","mac_address","vendor_name",' .
-		'"ip_address","dns_hostname","port_number","port_name","scan_date"');
+		'"mac_address","vendor_name",' .
+		'"ip_address","dns_hostname","port_number","scan_date"');
 
 	if (sizeof($port_results)) {
 		foreach($port_results as $port_result) {
@@ -157,16 +150,14 @@ function mactrack_view_export_ips() {
 
 			array_push($xport_array,'"' . $port_result['site_name'] . '","' .
 			$port_result['hostname'] . '","' . $port_result['device_name'] . '","' .
-			$port_result['vlan_id'] . '","' . $port_result['vlan_name'] . '","' .
 			$port_result['mac_address'] . '","' . $port_result['vendor_name'] . '","' .
 			$port_result['ip_address'] . '","' . $port_result['dns_hostname'] . '","' .
-			$port_result['port_number'] . '","' . $port_result['port_name'] . '","' .
-			$scan_date . '"');
+			$port_result['port_number'] . '","' . $scan_date . '"');
 		}
 	}
 
 	header("Content-type: application/csv");
-	header("Content-Disposition: attachment; filename=cacti_port_macs_xport.csv");
+	header("Content-Disposition: attachment; filename=cacti_port_ipaddresses_xport.csv");
 	foreach($xport_array as $xport_line) {
 		print $xport_line . "\n";
 	}
@@ -351,25 +342,21 @@ function mactrack_view_ips() {
 
 	/* if the user pushed the 'clear' button */
 	if (isset($_REQUEST["clear_x"]) || isset($_REQUEST["reset"])) {
-		kill_session_var("sess_mactrack_view_macs_current_page");
-		kill_session_var("sess_mactrack_view_macs_rowstoshow");
-		kill_session_var("sess_mactrack_view_macs_filter");
-		kill_session_var("sess_mactrack_view_macs_mac_filter_type_id");
-		kill_session_var("sess_mactrack_view_macs_mac_filter");
-		kill_session_var("sess_mactrack_view_macs_ip_filter_type_id");
-		kill_session_var("sess_mactrack_view_macs_ip_filter");
-		kill_session_var("sess_mactrack_view_macs_rows_selector");
-		kill_session_var("sess_mactrack_view_macs_site_id");
-		kill_session_var("sess_mactrack_view_macs_vlan_id");
-		kill_session_var("sess_mactrack_view_macs_authorized");
-		kill_session_var("sess_mactrack_view_macs_device_id");
-		kill_session_var("sess_mactrack_view_macs_sort_column");
-		kill_session_var("sess_mactrack_view_macs_sort_direction");
+		kill_session_var("sess_mactrack_view_ipads_current_page");
+		kill_session_var("sess_mactrack_view_ipads_filter");
+		kill_session_var("sess_mactrack_view_ipads_mac_filter_type_id");
+		kill_session_var("sess_mactrack_view_ipads_mac_filter");
+		kill_session_var("sess_mactrack_view_ipads_ip_filter_type_id");
+		kill_session_var("sess_mactrack_view_ipads_ip_filter");
+		kill_session_var("sess_mactrack_view_ipads_rows_selector");
+		kill_session_var("sess_mactrack_view_ipads_site_id");
+		kill_session_var("sess_mactrack_view_ipads_device_id");
+		kill_session_var("sess_mactrack_view_ipads_sort_column");
+		kill_session_var("sess_mactrack_view_ipads_sort_direction");
 
 		$_REQUEST["page"] = 1;
 
 		if (isset($_REQUEST["clear_x"])) {
-			unset($_REQUEST["scan_date"]);
 			unset($_REQUEST["mac_filter"]);
 			unset($_REQUEST["mac_filter_type_id"]);
 			unset($_REQUEST["ip_filter"]);
@@ -377,8 +364,6 @@ function mactrack_view_ips() {
 			unset($_REQUEST["rows"]);
 			unset($_REQUEST["filter"]);
 			unset($_REQUEST["site_id"]);
-			unset($_REQUEST["vlan"]);
-			unset($_REQUEST["authorized"]);
 			unset($_REQUEST["device_id"]);
 			unset($_REQUEST["sort_column"]);
 			unset($_REQUEST["sort_direction"]);
@@ -386,17 +371,14 @@ function mactrack_view_ips() {
 	}else{
 		/* if any of the settings changed, reset the page number */
 		$changed = 0;
-		$changed += mactrack_check_changed("scan_date",          "sess_mactrack_view_macs_rowstoshow");
-		$changed += mactrack_check_changed("mac_filter",         "sess_mactrack_view_macs_filter");
-		$changed += mactrack_check_changed("mac_filter_type_id", "sess_mactrack_view_macs_mac_filter_type_id");
-		$changed += mactrack_check_changed("ip_filter",          "sess_mactrack_view_macs_mac_ip_filter");
-		$changed += mactrack_check_changed("ip_filter_type_id",  "sess_mactrack_view_macs_ip_filter_type_id");
-		$changed += mactrack_check_changed("filter",             "sess_mactrack_view_macs_ip_filter");
-		$changed += mactrack_check_changed("rows",               "sess_mactrack_view_macs_rows_selector");
-		$changed += mactrack_check_changed("site_id",            "sess_mactrack_view_macs_site_id");
-		$changed += mactrack_check_changed("vlan",               "sess_mactrack_view_macs_vlan_id");
-		$changed += mactrack_check_changed("authorized",         "sess_mactrack_view_macs_authorized");
-		$changed += mactrack_check_changed("device_id",          "sess_mactrack_view_macs_device_id");
+		$changed += mactrack_check_changed("mac_filter",         "sess_mactrack_view_ipads_filter");
+		$changed += mactrack_check_changed("mac_filter_type_id", "sess_mactrack_view_ipads_mac_filter_type_id");
+		$changed += mactrack_check_changed("ip_filter",          "sess_mactrack_view_ipads_mac_ip_filter");
+		$changed += mactrack_check_changed("ip_filter_type_id",  "sess_mactrack_view_ipads_ip_filter_type_id");
+		$changed += mactrack_check_changed("filter",             "sess_mactrack_view_ipads_ip_filter");
+		$changed += mactrack_check_changed("rows",               "sess_mactrack_view_ipads_rows_selector");
+		$changed += mactrack_check_changed("site_id",            "sess_mactrack_view_ipads_site_id");
+		$changed += mactrack_check_changed("device_id",          "sess_mactrack_view_ipads_device_id");
 
 		if ($changed) {
 			$_REQUEST["page"] = "1";
@@ -404,27 +386,24 @@ function mactrack_view_ips() {
 	}
 
 	/* reset some things if the user has made changes */
-	if ((!empty($_REQUEST["site_id"]))&&(!empty($_SESSION["sess_mactrack_view_macs_site_id"]))) {
-		if ($_REQUEST["site_id"] <> $_SESSION["sess_mactrack_view_macs_site_id"]) {
+	if ((!empty($_REQUEST["site_id"]))&&(!empty($_SESSION["sess_mactrack_view_ipads_site_id"]))) {
+		if ($_REQUEST["site_id"] <> $_SESSION["sess_mactrack_view_ipads_site_id"]) {
 			$_REQUEST["device_id"] = "-1";
 		}
 	}
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
-	load_current_session_value("page",               "sess_mactrack_view_macs_current_page", "1");
-	load_current_session_value("scan_date",          "sess_mactrack_view_macs_rowstoshow", "2");
-	load_current_session_value("mac_filter",         "sess_mactrack_view_macs_mac_filter", "");
-	load_current_session_value("mac_filter_type_id", "sess_mactrack_view_macs_mac_filter_type_id", "1");
-	load_current_session_value("ip_filter",          "sess_mactrack_view_macs_ip_filter", "");
-	load_current_session_value("ip_filter_type_id",  "sess_mactrack_view_macs_ip_filter_type_id", "1");
-	load_current_session_value("filter",             "sess_mactrack_view_macs_filter", "");
-	load_current_session_value("rows",               "sess_mactrack_view_macs_rows_selector", "-1");
-	load_current_session_value("site_id",            "sess_mactrack_view_macs_site_id", "-1");
-	load_current_session_value("vlan",               "sess_mactrack_view_macs_vlan_id", "-1");
-	load_current_session_value("authorized",         "sess_mactrack_view_macs_authorized", "-1");
-	load_current_session_value("device_id",          "sess_mactrack_view_macs_device_id", "-1");
-	load_current_session_value("sort_column",        "sess_mactrack_view_macs_sort_column", "device_name");
-	load_current_session_value("sort_direction",     "sess_mactrack_view_macs_sort_direction", "ASC");
+	load_current_session_value("page",               "sess_mactrack_view_ipads_current_page", "1");
+	load_current_session_value("mac_filter",         "sess_mactrack_view_ipads_mac_filter", "");
+	load_current_session_value("mac_filter_type_id", "sess_mactrack_view_ipads_mac_filter_type_id", "1");
+	load_current_session_value("ip_filter",          "sess_mactrack_view_ipads_ip_filter", "");
+	load_current_session_value("ip_filter_type_id",  "sess_mactrack_view_ipads_ip_filter_type_id", "1");
+	load_current_session_value("filter",             "sess_mactrack_view_ipads_filter", "");
+	load_current_session_value("rows",               "sess_mactrack_view_ipads_rows_selector", "-1");
+	load_current_session_value("site_id",            "sess_mactrack_view_ipads_site_id", "-1");
+	load_current_session_value("device_id",          "sess_mactrack_view_ipads_device_id", "-1");
+	load_current_session_value("sort_column",        "sess_mactrack_view_ipads_sort_column", "device_name");
+	load_current_session_value("sort_direction",     "sess_mactrack_view_ipads_sort_direction", "ASC");
 
 	mactrack_tabs();
 	mactrack_view_header();
