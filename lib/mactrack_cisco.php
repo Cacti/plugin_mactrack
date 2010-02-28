@@ -36,10 +36,10 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 	global $debug, $scan_date;
 
 	/* initialize port counters */
-	$device["ports_total"] = 0;
+	$device["ports_total"]  = 0;
 	$device["ports_active"] = 0;
-	$device["ports_trunk"] = 0;
-	$device["vlans_total"] = 0;
+	$device["ports_trunk"]  = 0;
+	$device["vlans_total"]  = 0;
 
 	/* Variables to determine VLAN information */
 	$vlan_ids         = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.46.1.3.1.1.2", $device);
@@ -364,13 +364,6 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		$i = 0;
 		/* get the port status information */
 		foreach($active_vlans as $active_vlan) {
-			/* ignore empty vlans */
-			if ($active_vlan["active_ports"] <= $device["ports_trunk"]) {
-				$active_vlans[$i]["port_results"] = array();
-				$i++;
-				continue;
-			}
-
 			$snmp_readstring = $device["snmp_readstring"] . "@" . $active_vlan["vlan_id"];
 
 			mactrack_debug("Processing has begun for VLAN: " . $active_vlan["vlan_id"]);
@@ -401,11 +394,11 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		foreach($active_vlans as $active_vlan) {
 			if (sizeof($active_vlan["port_results"])) {
 			foreach($active_vlan["port_results"] as $port_result) {
-				$ifIndex = $brPorttoifIndexes[$j][$port_result["port_number"]];
-				$ifType = $ifInterfaces[$ifIndex]["ifType"];
-				$portNumber = $ifInterfaces[$ifIndex]["ifName"];
-				$portName = @$ifInterfaces[$ifIndex]["ifAlias"];
-				$portTrunk = @$portTrunking[$ifName];
+				$ifIndex    = @$brPorttoifIndexes[$j][$port_result["port_number"]];
+				$ifType     = @$ifInterfaces[$ifIndex]["ifType"];
+				$portNumber = @$ifInterfaces[$ifIndex]["ifName"];
+				$portName   = @$ifInterfaces[$ifIndex]["ifAlias"];
+				$portTrunk  = @$portTrunking[$ifName];
 				if ($vvlans) {
 					$vVlanID = @$portVoiceVLANs[$ifIndex];
 				}else{

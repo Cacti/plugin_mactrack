@@ -376,8 +376,11 @@ function collect_mactrack_data($start, $site_id = 0) {
 			if (($current - $start) > $max_run_duration) {
 				$exit_mactrack = TRUE;
 				cacti_log("ERROR: MacTracking timed out during main script processing.\n");
+				db_execute("DELETE FROM settings WHERE name='mactrack_process_status'");
 				db_process_remove("-1");
 				break;
+			}else{
+				db_execute("REPLACE INTO settings SET name='mactrack_process_status', value='Total:$total_rows Completed:$j'");
 			}
 		}
 
@@ -442,7 +445,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 					ON (mac_track_temp_ports.mac_address=mac_track_ips.mac_address
 					AND mac_track_temp_ports.site_id=mac_track_ips.site_id)
 					SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address
-					WHERE mac_track_temp_ports.updated=0 AND scan_date='$scan_date'");
+					WHERE mac_track_temp_ports.updated=0 AND mac_track_ips.scan_date='$scan_date'");
 		mactrack_debug("Interum IP addresses to MAC addresses association pass complete.");
 
 		/* populate the vendor_macs for this pass */

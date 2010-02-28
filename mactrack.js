@@ -55,6 +55,19 @@ function applyMacFilterChange(objForm) {
 	document.location = strURL;
 }
 
+function applyArpFilterChange(objForm) {
+	strURL = '?report=arp';
+	strURL = strURL + '&site_id=' + objForm.site_id.value;
+	strURL = strURL + '&device_id=' + objForm.device_id.value;
+	strURL = strURL + '&rows=' + objForm.rows.value;
+	strURL = strURL + '&mac_filter_type_id=' + objForm.mac_filter_type_id.value;
+	strURL = strURL + '&mac_filter=' + objForm.mac_filter.value;
+	strURL = strURL + '&filter=' + objForm.filter.value;
+	strURL = strURL + '&ip_filter_type_id=' + objForm.ip_filter_type_id.value;
+	strURL = strURL + '&ip_filter=' + objForm.ip_filter.value;
+	document.location = strURL;
+}
+
 function applyInterfaceFilterChange(objForm) {
 	strURL = '?site=' + objForm.site.value
 	strURL = strURL + '&rows=' + objForm.rows.value

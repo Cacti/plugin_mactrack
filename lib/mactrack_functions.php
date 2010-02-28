@@ -2437,7 +2437,7 @@ function mactrack_display_stats() {
 	}
 
 	if ($processes > 0) {
-		$message = "<strong>Status:</strong> Running, <strong>Processes:</strong> " . $processes . ", <strong>Progress:</strong> " . read_config_option("mactrack_process_status", TRUE) . ", <strong>LastRuntime:</strong> " . $mactrack_runtime;
+		$message = "<strong>Status:</strong> Running, <strong>Processes:</strong> " . $processes . ", <strong>Progress:</strong> " . read_config_option("mactrack_process_status", TRUE) . ", <strong>LastRuntime:</strong> " . round($time,1);
 	}else{
 		$message = "<strong>Status:</strong> Idle, <strong>LastRuntime:</strong> " . round($time,1) . " seconds, <strong>Processes:</strong> " . $proc . " processes, <strong>Devices:</strong> " . $devs . ", <strong>Next Run Time:</strong> " . date("Y-m-d H:i:s", strtotime(read_config_option("mt_scan_date", TRUE)) + $frequency);
 	}
@@ -3457,7 +3457,7 @@ function mactrack_ipsaddresses_filter() {
 
 	?>
 	<tr>
-		<form name="form_mactrack_view_macs">
+		<form name="form_mactrack_view_arp">
 		<td>
 			<table cellpadding="1" cellspacing="0">
 				<tr>
@@ -3465,7 +3465,7 @@ function mactrack_ipsaddresses_filter() {
 						&nbsp;Site:&nbsp;
 					</td>
 					<td width="1">
-						<select name="site_id" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
+						<select name="site_id" onChange="applyArpFilterChange(document.form_mactrack_view_arp)">
 						<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>N/A</option>
 						<?php
 						$sites = db_fetch_assoc("select site_id,site_name from mac_track_sites order by site_name");
@@ -3481,7 +3481,7 @@ function mactrack_ipsaddresses_filter() {
 						&nbsp;Device:&nbsp;
 					</td>
 					<td width="1">
-						<select name="device_id" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
+						<select name="device_id" onChange="applyArpFilterChange(document.form_mactrack_view_arp)">
 						<option value="-1"<?php if ($_REQUEST["device_id"] == "-1") {?> selected<?php }?>>All</option>
 						<?php
 						if ($_REQUEST["site_id"] == -1) {
@@ -3501,7 +3501,7 @@ function mactrack_ipsaddresses_filter() {
 						&nbsp;Rows&nbsp;
 					</td>
 					<td width="1">
-						<select name="rows" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
+						<select name="rows" onChange="applyArpFilterChange(document.form_mactrack_view_arp)">
 						<?php
 						if (sizeof($rows_selector) > 0) {
 						foreach ($rows_selector as $key => $value) {
