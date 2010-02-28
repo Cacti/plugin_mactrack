@@ -380,7 +380,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 				db_process_remove("-1");
 				break;
 			}else{
-				db_execute("REPLACE INTO settings SET name='mactrack_process_status', value='Total:$total_rows Completed:$j'");
+				db_execute("REPLACE INTO settings SET name='mactrack_process_status', value='Total:$total_devices Completed:$j'");
 			}
 		}
 
