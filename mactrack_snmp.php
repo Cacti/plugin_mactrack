@@ -198,7 +198,7 @@ function form_mactrack_snmp_actions() {
 	display_output_messages();
 
 	?>
-<script type="text/javascript">
+	<script type="text/javascript">
 	<!--
 	function goTo(location) {
 		document.location = location;
@@ -325,7 +325,6 @@ function mactrack_snmp_item_edit() {
 
 	print "<script type='text/javascript' src='" . URL_PATH . "plugins/mactrack/mactrack_snmp.js'></script>";
 }
-
 
 /* ---------------------
  mactrack Functions
@@ -514,7 +513,7 @@ function mactrack_snmp() {
 							<td nowrap style="white-space: nowrap;" width="50">
 								&nbsp;Search:&nbsp;
 							</td>
-							<td width="1"><input type="text" name="filter" size="40" value="' . get_request_var_request("filter") . '">
+							<td width="1"><input type="text" name="filter" size="20" value="' . get_request_var_request("filter") . '">
 							</td>
 							<td nowrap style="white-space: nowrap;" width="40">
 								&nbsp;Rows:&nbsp;
@@ -526,6 +525,7 @@ function mactrack_snmp() {
 		$filter_html .= 'selected';
 	}
 	$filter_html .= '>Default</option>';
+
 	if (sizeof($item_rows) > 0) {
 		foreach ($item_rows as $key => $value) {
 			$filter_html .= "<option value='" . $key . "'";
@@ -562,37 +562,51 @@ function mactrack_snmp() {
 
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
-	$total_rows = db_fetch_cell("SELECT " .
-		"COUNT(mac_track_snmp.id) " .
-		"FROM mac_track_snmp " .
-	$sql_where);
+	$total_rows = db_fetch_cell("SELECT
+		COUNT(mac_track_snmp.id)
+		FROM mac_track_snmp
+		$sql_where");
 
-	$snmp_groups = db_fetch_assoc("SELECT * " .
-		"FROM mac_track_snmp " .
-	$sql_where .
-		" ORDER BY " . get_request_var_request("sort_column") . " " . get_request_var_request("sort_direction") .
-		" LIMIT " . (get_request_var_request("rows")*(get_request_var_request("page")-1)) . "," . get_request_var_request("rows"));
+	$snmp_groups = db_fetch_assoc("SELECT *
+		FROM mac_track_snmp
+		$sql_where
+		ORDER BY " . get_request_var_request("sort_column") . " " . get_request_var_request("sort_direction") . "
+		LIMIT " . (get_request_var_request("rows")*(get_request_var_request("page")-1)) . "," . get_request_var_request("rows"));
 
 	/* generate page list */
 	$url_page_select = get_page_list(get_request_var_request("page"), MAX_DISPLAY_PAGES, get_request_var_request("rows"), $total_rows, "mactrack_snmp.php?filter=" . get_request_var_request("filter"));
 
-	$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-		<td colspan='12'>
-			<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-				<tr>
-					<td align='left' class='textHeaderDark'>
-						<strong>&lt;&lt; "; if (get_request_var_request("page") > 1) { $nav .= "<a class='linkOverDark' href='" . htmlspecialchars("mactrack_snmp.php?filter=" . get_request_var_request("filter") . "&status=" . get_request_var_request("status") . "&page=" . (get_request_var_request("page")-1)) . "'>"; } $nav .= "Previous"; if (get_request_var_request("page") > 1) { $nav .= "</a>"; } $nav .= "</strong>
-					</td>\n
-					<td align='center' class='textHeaderDark'>
-						Showing Rows " . ((get_request_var_request("rows")*(get_request_var_request("page")-1))+1) . " to " . ((($total_rows < read_config_option("num_rows_device")) || ($total_rows < (get_request_var_request("rows")*get_request_var_request("page")))) ? $total_rows : (get_request_var_request("rows")*get_request_var_request("page"))) . " of $total_rows [$url_page_select]
-					</td>\n
-					<td align='right' class='textHeaderDark'>
-						<strong>"; if ((get_request_var_request("page") * get_request_var_request("rows")) < $total_rows) { $nav .= "<a class='linkOverDark' href='" . htmlspecialchars("mactrack_snmp.php?filter=" . get_request_var_request("filter") . "&status=" . get_request_var_request("status") . "&page=" . (get_request_var_request("page")+1)) . "'>"; } $nav .= "Next"; if ((get_request_var_request("page") * get_request_var_request("rows")) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-					</td>\n
-				</tr>
-			</table>
-		</td>
-	</tr>\n";
+	if ($total_rows > 0) {
+		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
+			<td colspan='12'>
+				<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+					<tr>
+						<td align='left' class='textHeaderDark'>
+							<strong>&lt;&lt; "; if (get_request_var_request("page") > 1) { $nav .= "<a class='linkOverDark' href='" . htmlspecialchars("mactrack_snmp.php?filter=" . get_request_var_request("filter") . "&status=" . get_request_var_request("status") . "&page=" . (get_request_var_request("page")-1)) . "'>"; } $nav .= "Previous"; if (get_request_var_request("page") > 1) { $nav .= "</a>"; } $nav .= "</strong>
+						</td>\n
+						<td align='center' class='textHeaderDark'>
+							Showing Rows " . ((get_request_var_request("rows")*(get_request_var_request("page")-1))+1) . " to " . ((($total_rows < read_config_option("num_rows_device")) || ($total_rows < (get_request_var_request("rows")*get_request_var_request("page")))) ? $total_rows : (get_request_var_request("rows")*get_request_var_request("page"))) . " of $total_rows [$url_page_select]
+						</td>\n
+						<td align='right' class='textHeaderDark'>
+							<strong>"; if ((get_request_var_request("page") * get_request_var_request("rows")) < $total_rows) { $nav .= "<a class='linkOverDark' href='" . htmlspecialchars("mactrack_snmp.php?filter=" . get_request_var_request("filter") . "&status=" . get_request_var_request("status") . "&page=" . (get_request_var_request("page")+1)) . "'>"; } $nav .= "Next"; if ((get_request_var_request("page") * get_request_var_request("rows")) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+						</td>\n
+					</tr>
+				</table>
+			</td>
+		</tr>\n";
+	}else{
+		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
+			<td colspan='12'>
+				<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+					<tr>
+						<td align='center' class='textHeaderDark'>
+							No Rows Found
+						</td>\n
+					</tr>
+				</table>
+			</td>
+		</tr>\n";
+	}
 
 	print $nav;
 
@@ -604,7 +618,6 @@ function mactrack_snmp() {
 
 	$i = 0;
 	if (sizeof($snmp_groups) > 0) {
-
 		foreach ($snmp_groups as $snmp_group) {
 			form_alternate_row_color($colors["alternate"], $colors["light"], $i, 'line' . $snmp_group["id"]); $i++;
 
@@ -613,10 +626,11 @@ function mactrack_snmp() {
 
 			form_end_row();
 		}
-		print $nav;
 	}else{
 		print "<tr><td><em>No SNMP Option Sets</em></td></tr>\n";
 	}
+	print $nav;
+
 	html_end_box(false);
 
 	/* draw the dropdown containing a list of available actions for this form */
