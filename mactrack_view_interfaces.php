@@ -483,7 +483,7 @@ function mactrack_filter_table() {
 						<select name="bwusage" onChange="<?php print $filterChange;?>">
 						<option value="-1"<?php if ($_REQUEST["bwusage"] == "-1") {?> selected<?php }?>>N/A</option>
 						<?php
-						for ($bwpercent = 10; $bwpercent <=100; $bwpercent+=10) {
+						for ($bwpercent = 10; $bwpercent <100; $bwpercent+=10) {
 							?><option value="<?php print $bwpercent; ?>" <?php if (isset($_REQUEST["bwusage"]) and ($_REQUEST["bwusage"] == $bwpercent)) {?> selected<?php }?>><?php print $bwpercent; ?>%</option><?php
 						}
 						?>
@@ -499,6 +499,8 @@ function mactrack_filter_table() {
 						<input type="submit" name="export_x" value="Export" alt="Export" border="0" align="absmiddle">
 					</td>
 				</tr>
+			</table>
+			<table cellpadding="1" cellspacing="0">
 				<tr>
 					<td width="50">
 						Type:&nbsp;
