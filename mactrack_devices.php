@@ -129,6 +129,14 @@ function form_mactrack_save() {
 
 function api_mactrack_device_remove($device_id){
 	db_execute("DELETE FROM mac_track_devices WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_aggregated_ports WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_interfaces WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_ips WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_ports WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_processes WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_processes WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_temp_ports WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_vlans WHERE device_id=" . $device_id);
 }
 
 /* ------------------------

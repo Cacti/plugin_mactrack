@@ -278,6 +278,14 @@ function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops
 
 function api_mactrack_site_remove($site_id) {
 	db_execute("DELETE FROM mac_track_sites WHERE site_id='" . $site_id . "'");
+	db_execute("DELETE FROM mac_track_devices WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_aggregated_ports WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_interfaces WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_ips WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_ip_ranges WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_ports WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_temp_ports WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_vlans WHERE site_id=" . $site_id);
 }
 
 /* ---------------------
