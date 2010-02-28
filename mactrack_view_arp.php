@@ -31,14 +31,6 @@ include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 define("MAX_DISPLAY_PAGES", 21);
 
-$mactrack_view_macs_actions = array(
-	1 => "Authorize",
-	2 => "Revoke"
-	);
-$mactrack_view_agg_macs_actions = array(
-	"01" => "Delete"
-	);
-/* set default action */
 if (!isset($_REQUEST["action"])) { $_REQUEST["action"] = ""; }
 
 /* correct for a cancel button */
@@ -285,7 +277,7 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = TRUE, $row_li
 
 function mactrack_view_ips() {
 	global $title, $report, $colors, $mactrack_search_types, $rows_selector, $config;
-	global $mactrack_view_macs_actions, $item_rows;
+	global $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("site_id"));
@@ -447,7 +439,7 @@ function mactrack_view_ips() {
 	}
 
 	/* generate page list */
-	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_view_macs.php?report=macs");
+	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_view_arp.php?report=arp");
 
 	if (isset($config["base_path"])) {
 		if ($total_rows > 0) {
@@ -456,13 +448,13 @@ function mactrack_view_ips() {
 							<table width='100%' cellspacing='0' cellpadding='0' border='0'>
 								<tr>
 									<td align='left' class='textHeaderDark'>
-										<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_view_macs.php?report=macs&page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
+										<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_view_arp.php?report=arp&page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
 									</td>\n
 									<td align='center' class='textHeaderDark'>
 										Showing Rows " . ($total_rows == 0 ? "None" : (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]") . "
 									</td>\n
 									<td align='right' class='textHeaderDark'>
-										<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_view_macs.php?report=macs&page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+										<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_view_arp.php?report=arp&page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
 									</td>\n
 								</tr>
 							</table>
@@ -482,7 +474,7 @@ function mactrack_view_ips() {
 					</tr>\n";
 		}
 	}else{
-		$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $_REQUEST["rows"], $total_rows, 13, "mactrack_view_macs.php?report=macs");
+		$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $_REQUEST["rows"], $total_rows, 13, "mactrack_view_arp.php?report=arp");
 	}
 
 	print $nav;
