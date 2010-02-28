@@ -344,6 +344,10 @@ function mactrack_utilities_ports_clear() {
 		$rows = db_fetch_cell("SELECT COUNT(*) FROM mac_track_ports");
 		db_execute("TRUNCATE TABLE mac_track_ports");
 		db_execute("TRUNCATE TABLE mac_track_scan_dates");
+		db_execute("TRUNCATE TABLE mac_track_ips");
+		db_execute("TRUNCATE TABLE mac_track_ip_ranges");
+		db_execute("TRUNCATE TABLE mac_track_vlans");
+		db_execute("TRUNCATE TABLE mac_track_aggregated_ports");
 		db_execute("UPDATE mac_track_sites SET total_macs=0, total_ips=0, total_user_ports=0, total_oper_ports=0, total_trunk_ports=0");
 		db_execute("UPDATE mac_track_devices SET ips_total=0, ports_total=0, ports_active=0, ports_trunk=0, macs_active=0, vlans_total=0, last_runduration=0.0000");
 
@@ -557,7 +561,7 @@ function mactrack_utilities() {
 			<p><a href='mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table'>Remove All Scan Results</a></p>
 		</td>
 		<td class="textArea" valign="top">
-			<p>Deletes <strong>ALL</strong> Port to MAC to IP associations from the database.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong></p>
+			<p>Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong></p>
 		</td>
 	</tr>
 
