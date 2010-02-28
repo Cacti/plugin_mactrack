@@ -354,7 +354,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 							AND mac_track_temp_ports.site_id=mac_track_ips.site_id)
 							SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address,
 							mac_track_temp_ports.updated=1
-							WHERE mac_track_temp_ports.updated=0 AND scan_date='$scan_date'");
+							WHERE mac_track_temp_ports.updated=0 AND mac_track_ips.scan_date='$scan_date'");
 				mactrack_debug("Interum IP addresses to MAC addresses association pass complete.");
 
 				$last_time = $current_time;
@@ -401,7 +401,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 							AND mac_track_temp_ports.site_id=mac_track_ips.site_id)
 							SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address,
 							mac_track_temp_ports.updated=1
-							WHERE mac_track_temp_ports.updated=0 AND scan_date='$scan_date'");
+							WHERE mac_track_temp_ports.updated=0 AND mac_track_ips.scan_date='$scan_date'");
 				mactrack_debug("Interum IP addresses to MAC addresses association pass complete.");
 			}
 
