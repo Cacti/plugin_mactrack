@@ -430,7 +430,7 @@ function mactrack_view_ips() {
 		$rows_query_string = "SELECT
 			COUNT(mac_track_ips.device_id)
 			FROM mac_track_ips
-			LEFT JOIN mac_track_sites ON (mac_track_ports.site_id = mac_track_sites.site_id)
+			LEFT JOIN mac_track_sites ON (mac_track_ips.site_id=mac_track_sites.site_id)
 			LEFT JOIN mac_track_oui_database ON (mac_track_oui_database.vendor_mac=SUBSTRING(mac_track_ips.mac_address,1,8))
 			$sql_where";
 
@@ -438,7 +438,7 @@ function mactrack_view_ips() {
 	}else{
 		$rows_query_string = "SELECT
 			COUNT(DISTINCT device_id, mac_address, port_number, ip_address)
-			FROM mac_track_ports
+			FROM mac_track_ips
 			LEFT JOIN mac_track_sites ON (mac_track_ips.site_id=mac_track_sites.site_id)
 			LEFT JOIN mac_track_oui_database ON (mac_track_oui_database.vendor_mac=SUBSTRING(mac_track_ips.mac_address,1,8))
 			$sql_where";
