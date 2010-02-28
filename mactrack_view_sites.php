@@ -379,6 +379,8 @@ function mactrack_view_sites() {
 		print $nav;
 
 		html_end_box(false);
+
+		mactrack_display_stats();
 	}else{
 		$display_text = array(
 			"nosort" => array("Actions", ""),
@@ -407,7 +409,7 @@ function mactrack_view_sites() {
 						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_interfaces.php?report=interfaces&reset&site=" . $site['site_id'];?>' title='View Interfaces'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_interfaces.gif'></a>
 					</td>
 					<td width=200>
-						<?php print "<p class='linkEditMain'><strong>" . (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]) . "</strong></p>";?>
+						<?php print "<strong>" . (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]) . "</strong>";?>
 					</td>
 					<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["vendor"]) : $site["vendor"]);?></td>
 					<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["description"]) : $site["description"]);?></td>
@@ -427,6 +429,8 @@ function mactrack_view_sites() {
 		print $nav;
 
 		html_end_box(false);
+
+		mactrack_display_stats();
 	}
 }
 

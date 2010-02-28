@@ -62,7 +62,6 @@ function applyInterfaceFilterChange(objForm) {
 	strURL = strURL + '&issues=' + objForm.issues.value
 	strURL = strURL + '&bwusage=' + objForm.bwusage.value
 	strURL = strURL + '&type=' + objForm.type.value
-	strURL = strURL + '&period=' + objForm.period.value
 	strURL = strURL + '&filter=' + objForm.filter.value
 	document.location = strURL
 }

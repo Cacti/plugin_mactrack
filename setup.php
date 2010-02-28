@@ -817,7 +817,7 @@ function mactrack_config_settings () {
 			),
 		"mt_collection_timing" => array(
 			"friendly_name" => "Scanning Frequency",
-			"description" => "Choose when collect MAC and IP Address information from your network devices.",
+			"description" => "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices.",
 			"method" => "drop_array",
 			"default" => "disabled",
 			"array" => $mactrack_poller_frequencies,
@@ -867,6 +867,15 @@ function mactrack_config_settings () {
 			"method" => "drop_array",
 			"default" => ":",
 			"array" => array(":" => ":", "-" => "-")
+			),
+		"mt_ignorePorts" => array(
+			"method" => "textbox",
+			"friendly_name" => "Ports to Ignore",
+			"description" => "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example (Vlan|Loopback|Null).",
+			"class" => "textAreaNotes",
+			"defaults" => "(Vlan|Loopback|Null)",
+			"max_length" => "255",
+			"size" => "80"
 			),
 		"mactrack_hdr_rdns" => array(
 			"friendly_name" => "DNS Settings",
@@ -978,19 +987,6 @@ function mactrack_config_settings () {
 			"default" => "",
 			"max_length" => "255",
 			"size" => "60"
-			),
-		"mactrack_hdr_ignore" => array(
-			"method" => "spacer",
-			"friendly_name" => "Switch/Hub, Switch/Router Settings"
-			),
-		"mt_ignorePorts" => array(
-			"method" => "textarea",
-			"friendly_name" => "Ports to Ignore",
-			"description" => "Provide a list of ports on a specific switch/hub whose MAC results should be ignored. Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon ':'.  For example, 'Fa0/1: Fa1/23' would be acceptable for some manufacturers switch types.",
-			"class" => "textAreaNotes",
-			"textarea_rows" => "3",
-			"textarea_cols" => "80",
-			"max_length" => "255"
 			),
 		"mactrack_hdr_general" => array(
 			"friendly_name" => "SNMP Presets",
@@ -1162,6 +1158,7 @@ function mactrack_draw_navigation_text ($nav) {
 	$nav["mactrack_vendormacs.php:"] = array("title" => "MacTrack Vendor Macs", "mapping" => "index.php:", "url" => "mactrack_vendormacs.php", "level" => "1");
 	$nav["mactrack_view_macs.php:"] = array("title" => "MacTrack Viewer", "mapping" => "", "url" => "mactrack_view_macs.php", "level" => "0");
 	$nav["mactrack_view_macs.php:actions"] = array("title" => "Actions", "mapping" => "mactrack_view_macs.php:", "url" => "", "level" => "1");
+	$nav["mactrack_view_arp.php:"] = array("title" => "MacTrack IP Address Viewer", "mapping" => "", "url" => "mactrack_view_arp.php", "level" => "0");
 	$nav["mactrack_view_interfaces.php:"] = array("title" => "MacTrack View Interfaces", "mapping" => "", "url" => "mactrack_view_interfaces.php", "level" => "0");
 	$nav["mactrack_view_sites.php:"] = array("title" => "MacTrack View Sites", "mapping" => "", "url" => "mactrack_view_sites.php", "level" => "0");
 	$nav["mactrack_view_ips.php:"] = array("title" => "MacTrack View IP Ranges", "mapping" => "", "url" => "mactrack_view_ips.php", "level" => "0");
@@ -1204,6 +1201,7 @@ function mactrack_config_arrays () {
 	$user_auth_realms[2122]='Plugin -> MacTrack Security';
 
 	$user_auth_realm_filenames['mactrack_view_ips.php']        = 2120;
+	$user_auth_realm_filenames['mactrack_view_arp.php']        = 2120;
 	$user_auth_realm_filenames['mactrack_view_macs.php']       = 2120;
 	$user_auth_realm_filenames['mactrack_view_sites.php']      = 2120;
 	$user_auth_realm_filenames['mactrack_view_devices.php']    = 2120;
@@ -1622,7 +1620,7 @@ function mactrack_config_form () {
 		"friendly_name" => "Ports to Ignore",
 		"description" => "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon ':'.  For example, 'Fa0/1: Fa1/23' would be acceptable for some manufacturers switch types.",
 		"value" => "|arg1:ignorePorts|",
-		"default" => read_config_option("mt_ignorePorts"),
+		"default" => "",
 		"class" => "textAreaNotes",
 		"textarea_rows" => "3",
 		"textarea_cols" => "80",

@@ -48,9 +48,11 @@ function mactrack_get_records(&$sql_where, $apply_limits = TRUE, $row_limit = "3
 	/* issues sql where */
 	if ($_REQUEST["issues"] == "-2") { // All Interfaces
 		/* do nothing all records */
+	} elseif ($_REQUEST["issues"] == "-3") { // Non Ignored Interfaces
+		$match = read_config_option('mt_ignorePorts', TRUE);
+		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(ifName NOT REGEXP '" . $match . "' AND ifDescr NOT REGEXP '" . $match . "')";
 	} elseif ($_REQUEST["issues"] == "-1") { // With Issues
 		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "((int_errors_present=1) OR (int_discards_present=1))";
-		/* still thinking */
 	} elseif ($_REQUEST["issues"] == "0") { // Up Interfaces
 		$sql_where .= (strlen($sql_where) ? " AND " : "WHERE ") . "(ifOperStatus=1)";
 	} elseif ($_REQUEST["issues"] == "1") { // Up w/o Alias
@@ -271,7 +273,7 @@ function mactrack_view() {
 	load_current_session_value("rows", "sess_mactrack_int_rows", read_config_option("num_rows_device"));
 	load_current_session_value("device_id", "sess_mactrack_int_device_id", "-1");
 	load_current_session_value("site", "sess_mactrack_int_site", "-1");
-	load_current_session_value("issues", "sess_mactrack_int_issues", "-1");
+	load_current_session_value("issues", "sess_mactrack_int_issues", "-3");
 	load_current_session_value("bwusage", "sess_mactrack_int_bwusage", read_config_option("mactrack_interface_high"));
 	load_current_session_value("type", "sess_mactrack_int_type", "-1");
 	load_current_session_value("device", "sess_mactrack_int_device", "-1");
@@ -295,13 +297,10 @@ function mactrack_view() {
 
 	$stats = mactrack_get_records($sql_where, TRUE, $row_limit);
 
-	/* add the mactrack tabs */
 	mactrack_tabs();
-
 	html_start_box("<strong>Scanned Device Interfaces</strong>", "100%", $colors["header"], "3", "center", "");
 	mactrack_filter_table();
 	html_end_box();
-
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	$rows_query_string = "SELECT COUNT(*)
@@ -383,7 +382,7 @@ function mactrack_view() {
 
 	print "</tr>";
 
-	html_end_box();
+	html_end_box(false);
 
 	mactrack_display_stats();
 
@@ -442,14 +441,15 @@ function mactrack_filter_table() {
 						</select>
 					</td>
 					<td width="50">
-						&nbsp;Filters:&nbsp;<BR><BR>
+						&nbsp;Filters:&nbsp;
 					</td>
 					<td width="1">
 						<select name="issues" onChange="<?php print $filterChange;?>">
-						<option value="-2"<?php if ($_REQUEST["issues"] == "-2") {?> selected<?php }?>>All Non-Ignored Interfaces</option>
-						<option value="9"<?php if ($_REQUEST["issues"] == "9" && $_REQUEST["bwusage"] != "-1") {?> selected<?php }?>>High In/Out Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option>
-						<option value="10"<?php if ($_REQUEST["issues"] == "10" && $_REQUEST["bwusage"] != "-1") {?> selected<?php }?>>High In Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option>
-						<option value="11"<?php if ($_REQUEST["issues"] == "11" && $_REQUEST["bwusage"] != "-1") {?> selected<?php }?>>High Out Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option>
+						<option value="-2"<?php if ($_REQUEST["issues"] == "-2") {?> selected<?php }?>>All Interfaces</option>
+						<option value="-3"<?php if ($_REQUEST["issues"] == "-3") {?> selected<?php }?>>All Non-Ignored Interfaces</option>
+						<?php if ($_REQUEST["bwusage"] != "-1") {?><option value="9"<?php if ($_REQUEST["issues"] == "9" && $_REQUEST["bwusage"] != "-1") {?> selected<?php }?>>High In/Out Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option><?php }?>
+						<?php if ($_REQUEST["bwusage"] != "-1") {?><option value="10"<?php if ($_REQUEST["issues"] == "10" && $_REQUEST["bwusage"] != "-1") {?> selected<?php }?>>High In Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option><?php }?>
+						<?php if ($_REQUEST["bwusage"] != "-1") {?><option value="11"<?php if ($_REQUEST["issues"] == "11" && $_REQUEST["bwusage"] != "-1") {?> selected<?php }?>>High Out Utilization > <?php print $_REQUEST["bwusage"] . "%";?></option><?php }?>
 						<option value="-1"<?php if ($_REQUEST["issues"] == "-1") {?> selected<?php }?>>With Issues</option>
 						<option value="0"<?php if ($_REQUEST["issues"] == "0") {?> selected<?php }?>>Up Interfaces</option>
 						<option value="1"<?php if ($_REQUEST["issues"] == "1") {?> selected<?php }?>>Up Interfaces No Alias</option>
@@ -462,25 +462,12 @@ function mactrack_filter_table() {
 					</td>
 					<td width="1">
 						<select name="bwusage" onChange="<?php print $filterChange;?>">
-						<option value="-1"<?php if ($_REQUEST["bwusage"] == "-1") {?> selected<?php }?>>All</option>
+						<option value="-1"<?php if ($_REQUEST["bwusage"] == "-1") {?> selected<?php }?>>N/A</option>
 						<?php
-						for ($bwpercent = 0;$bwpercent <=100;$bwpercent+=5) {
+						for ($bwpercent = 10; $bwpercent <=100; $bwpercent+=10) {
 							?><option value="<?php print $bwpercent; ?>" <?php if (isset($_REQUEST["bwusage"]) and ($_REQUEST["bwusage"] == $bwpercent)) {?> selected<?php }?>><?php print $bwpercent; ?>%</option><?php
 						}
 						?>
-						</select>
-					</td>
-					<td width="50">
-						&nbsp;Timespan:&nbsp;
-					</td>
-					<td width="1">
-						<select name="period" onChange="<?php print $filterChange;?>">
-						<option value="-2"<?php if ($_REQUEST["period"] == "-2") {?> selected<?php }?>>Last Scan</option>
-						<option value="-1"<?php if ($_REQUEST["period"] == "-1") {?> selected<?php }?>>Hourly</option>
-						<option value="0"<?php if ($_REQUEST["period"] == "0") {?> selected<?php }?>>Daily</option>
-						<option value="1"<?php if ($_REQUEST["period"] == "1") {?> selected<?php }?>>Weekly</option>
-						<option value="2"<?php if ($_REQUEST["period"] == "2") {?> selected<?php }?>>Montly</option>
-						<option value="3"<?php if ($_REQUEST["period"] == "3") {?> selected<?php }?>>Yearly</option>
 						</select>
 					</td>
 				</tr>

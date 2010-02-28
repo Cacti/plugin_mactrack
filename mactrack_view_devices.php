@@ -385,6 +385,8 @@ function mactrack_view_devices() {
 	print $nav;
 
 	html_end_box(false);
+
+	mactrack_display_stats();
 }
 
 ?>

@@ -270,6 +270,8 @@ function mactrack_view_ip_ranges() {
 	print $nav;
 
 	html_end_box(false);
+
+	mactrack_display_stats();
 }
 
 ?>

@@ -2394,23 +2394,18 @@ function mactrack_display_hours($value) {
 	if ($value == "") {
 		return "N/A";
 	}else if ($value < 60) {
-		return round($value,0) . " Seconds";
+		return round($value,0) . " Minutes";
 	}else{
 		$value = $value / 60;
-		if ($value < 60) {
-			return round($value,0) . " Minutes";
+		if ($value < 24) {
+			return round($value,0) . " Hours";
 		}else{
-			$value = $value / 60;
-			if ($value < 24) {
-				return round($value,0) . " Hours";
+			$value = $value / 24;
+			if ($value < 7) {
+				return round($value,0) . " Days";
 			}else{
-				$value = $value / 24;
-				if ($value < 7) {
-					return round($value,0) . " Days";
-				}else{
-					$value = $value / 7;
-					return round($value,0) . " Weeks";
-				}
+				$value = $value / 7;
+				return round($value,0) . " Weeks";
 			}
 		}
 	}
@@ -2421,18 +2416,35 @@ function mactrack_display_stats() {
 
 	/* check if scanning is running */
 	$processes = db_fetch_cell("SELECT COUNT(*) FROM mac_track_processes");
-	$mactrack_runtime = read_config_option("mactrack_runtime", TRUE);
-	if ($mactrack_runtime == "") $mactrack_runtime = "Not Recorded";
+	$frequency = read_config_option("mt_collection_timing", TRUE) * 60;
+	$mactrack_stats = read_config_option("stats_mactrack", TRUE);
+	$time  = 'Not Recorded';
+	$proc  = 'N/A';
+	$devs  = 'N/A';
+	if ($mactrack_stats != '') {
+		$stats = explode(" ", $mactrack_stats);
+
+		if (sizeof($stats == 3)) {
+			$time = explode(":", $stats[0]);
+			$time = $time[1];
+
+			$proc = explode(":", $stats[1]);
+			$proc = $proc[1];
+
+			$devs = explode(":", $stats[2]);
+			$devs = $devs[1];
+		}
+	}
 
 	if ($processes > 0) {
 		$message = "<strong>Status:</strong> Running, <strong>Processes:</strong> " . $processes . ", <strong>Progress:</strong> " . read_config_option("mactrack_process_status", TRUE) . ", <strong>LastRuntime:</strong> " . $mactrack_runtime;
 	}else{
-		$message = "<strong>Status:</strong> Idle, <strong>LastRuntime:</strong> " . $mactrack_runtime . ", <strong>Next Run Time:</strong> " . substr(read_config_option("mactrack_next_runtime"),0,16);
+		$message = "<strong>Status:</strong> Idle, <strong>LastRuntime:</strong> " . round($time,1) . " seconds, <strong>Processes:</strong> " . $proc . " processes, <strong>Devices:</strong> " . $devs . ", <strong>Next Run Time:</strong> " . date("Y-m-d H:i:s", strtotime(read_config_option("mt_scan_date", TRUE)) + $frequency);
 	}
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	print "<tr>";
-	print "<td><strong>Scanning Rate:</strong> Every " . mactrack_display_hours(read_config_option("mactrack_frequency")) . ", " . $message . "</td>";
+	print "<td><strong>Scanning Rate:</strong> Every " . mactrack_display_hours(read_config_option("mt_collection_timing")) . ", " . $message . "</td>";
 	print "</tr>";
 
 	html_end_box();
@@ -2620,6 +2632,7 @@ function mactrack_tabs() {
 		"sites" => "Sites",
 		"devices" => "Devices",
 		"ips" => "IP Ranges",
+		"arp" => "IP Addresses",
 		"macs" => "MAC Addresses",
 		"interfaces" => "Interfaces");
 
@@ -3303,6 +3316,20 @@ function mactrack_mac_filter() {
 						?>
 						</select>
 					</td>
+					<td width="40">
+						&nbsp;Rows&nbsp;
+					</td>
+					<td width="1">
+						<select name="rows" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
+						<?php
+						if (sizeof($rows_selector) > 0) {
+						foreach ($rows_selector as $key => $value) {
+							print '<option value="' . $key . '"'; if ($_REQUEST["rows"] == $key) { print " selected"; } print ">" . $value . "</option>\n";
+						}
+						}
+						?>
+						</select>
+					</td>
 					<td>
 						&nbsp;<input type="submit" name="go_x" value="Go">
 					</td>
@@ -3406,6 +3433,70 @@ function mactrack_mac_filter() {
 						<option value="0"<?php if ($_REQUEST["authorized"] == "0") {?> selected<?php }?>>No</option>
 						</select>
 					</td>
+				</tr>
+			</table>
+			<table cellpadding="1" cellspacing="0">
+				<tr>
+					<td width="80">
+						&nbsp;Search:&nbsp;
+					</td>
+					<td width="1">
+						<input type="text" name="filter" size="45" value="<?php print $_REQUEST["filter"];?>">
+					</td>
+				</tr>
+			</table>
+		</td>
+		<input type='hidden' name='report' value='macs'>
+		</form>
+	</tr>
+	<?php
+}
+
+function mactrack_ipsaddresses_filter() {
+	global $item_rows, $rows_selector, $mactrack_search_types;
+
+	?>
+	<tr>
+		<form name="form_mactrack_view_macs">
+		<td>
+			<table cellpadding="1" cellspacing="0">
+				<tr>
+					<td width="80">
+						&nbsp;Site:&nbsp;
+					</td>
+					<td width="1">
+						<select name="site_id" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
+						<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>N/A</option>
+						<?php
+						$sites = db_fetch_assoc("select site_id,site_name from mac_track_sites order by site_name");
+						if (sizeof($sites) > 0) {
+						foreach ($sites as $site) {
+							print '<option value="' . $site["site_id"] .'"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
+						}
+						}
+						?>
+						</select>
+					</td>
+					<td width="1">
+						&nbsp;Device:&nbsp;
+					</td>
+					<td width="1">
+						<select name="device_id" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
+						<option value="-1"<?php if ($_REQUEST["device_id"] == "-1") {?> selected<?php }?>>All</option>
+						<?php
+						if ($_REQUEST["site_id"] == -1) {
+							$filter_devices = db_fetch_assoc("SELECT device_id, device_name, hostname FROM mac_track_devices ORDER BY device_name");
+						}else{
+							$filter_devices = db_fetch_assoc("SELECT device_id, device_name, hostname FROM mac_track_devices WHERE site_id='" . $_REQUEST["site_id"] . "' ORDER BY device_name");
+						}
+						if (sizeof($filter_devices) > 0) {
+						foreach ($filter_devices as $filter_device) {
+							print '<option value=" ' . $filter_device["device_id"] . '"'; if ($_REQUEST["device_id"] == $filter_device["device_id"]) { print " selected"; } print ">" . $filter_device["device_name"] . "(" . $filter_device["hostname"] . ")" .  "</option>\n";
+						}
+						}
+						?>
+						</select>
+					</td>
 					<td width="40">
 						&nbsp;Rows&nbsp;
 					</td>
@@ -3419,6 +3510,51 @@ function mactrack_mac_filter() {
 						}
 						?>
 						</select>
+					</td>
+					<td>
+						&nbsp;<input type="submit" name="go_x" value="Go">
+					</td>
+					<td>
+						&nbsp;<input type="submit" name="clear_x" value="Clear">
+					</td>
+					<td>
+						&nbsp;<input type="submit" name="export_x" value="Export">
+					</td>
+				</tr>
+			</table>
+			<table cellpadding="1" cellspacing="0">
+				<tr>
+					<td width="80">
+						&nbsp;IP Address:
+					</td>
+					<td width="1">
+						<select name="ip_filter_type_id">
+						<?php
+						for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
+							print "<option value='" . $i . "'"; if ($_REQUEST["ip_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
+						}
+						?>
+						</select>
+					</td>
+					<td width="1">
+						<input type="text" name="ip_filter" size="20" value="<?php print $_REQUEST["ip_filter"];?>">
+					</td>
+				</tr>
+				<tr>
+					<td width="80">
+						&nbsp;Mac Address:
+					</td>
+					<td width="1">
+						<select name="mac_filter_type_id">
+						<?php
+						for($i=1;$i<=sizeof($mactrack_search_types)-2;$i++) {
+							print "<option value='" . $i . "'"; if ($_REQUEST["mac_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
+						}
+						?>
+						</select>
+					</td>
+					<td width="1">
+						<input type="text" name="mac_filter" size="20" value="<?php print $_REQUEST["mac_filter"];?>">
 					</td>
 				</tr>
 			</table>
