@@ -1001,15 +1001,15 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 					($brPortIfType <= 9) &&
 					(!isset($ifInterfaces[$brPortIfIndex]["portLink"]))) {
 					/* set some defaults  */
-					$new_port_key_array[$i]["vlan_id"] = "N/A";
-					$new_port_key_array[$i]["vlan_name"] = "N/A";
+					$new_port_key_array[$i]["vlan_id"]     = "N/A";
+					$new_port_key_array[$i]["vlan_name"]   = "N/A";
 					$new_port_key_array[$i]["mac_address"] = "NOT USER";
 					$new_port_key_array[$i]["port_number"] = "NOT USER";
-					$new_port_key_array[$i]["port_name"] = "N/A";
+					$new_port_key_array[$i]["port_name"]   = "N/A";
 
 					/* now set the real data */
-					$new_port_key_array[$i]["key"] = $port_key["key"];
-					$new_port_key_array[$i]["port_number"] = $brPortIfIndex;
+					$new_port_key_array[$i]["key"]         = $port_key["key"];
+					$new_port_key_array[$i]["port_number"] = $port_key["port_number"];
 					$i++;
 				}
 			}
@@ -1149,7 +1149,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 
 				if (!in_array($port_number, $ignore_ports)) {
 					if ((@$port_status[$key] == "3") || (@$port_status[$key] == "5")) {
-						$port_key_array[$i]["key"] = $key;
+						$port_key_array[$i]["key"]         = $key;
 						$port_key_array[$i]["port_number"] = $port_number;
 
 						$i++;
@@ -1177,15 +1177,15 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 
 				if ((($brPortIfType >= 6) && ($brPortIfType <= 9)) || ($brPortIfType == 71)) {
 					/* set some defaults  */
-					$new_port_key_array[$i]["vlan_id"] = "N/A";
-					$new_port_key_array[$i]["vlan_name"] = "N/A";
+					$new_port_key_array[$i]["vlan_id"]     = "N/A";
+					$new_port_key_array[$i]["vlan_name"]   = "N/A";
 					$new_port_key_array[$i]["mac_address"] = "NOT USER";
 					$new_port_key_array[$i]["port_number"] = "NOT USER";
-					$new_port_key_array[$i]["port_name"] = "N/A";
+					$new_port_key_array[$i]["port_name"]   = "N/A";
 
 					/* now set the real data */
-					$new_port_key_array[$i]["key"] = $port_key["key"];
-					$new_port_key_array[$i]["port_number"] = $brPortIfIndex;
+					$new_port_key_array[$i]["key"]         = $port_key["key"];
+					$new_port_key_array[$i]["port_number"] = $port_key["port_number"];
 					$i++;
 				}
 			}
@@ -1325,7 +1325,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 				if (!in_array($port_number, $ignore_ports)) {
 					if ((@$port_status[$key] == "3") || (@$port_status[$key] == "5")) {
-						$port_key_array[$i]["key"] = $key;
+						$port_key_array[$i]["key"]         = $key;
 						$port_key_array[$i]["port_number"] = $port_number;
 
 						$i++;
@@ -1353,15 +1353,15 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 				if ((($brPortIfType >= 6) && ($brPortIfType <= 9)) || ($brPortIfType == 71)) {
 					/* set some defaults  */
-					$new_port_key_array[$i]["vlan_id"] = "N/A";
-					$new_port_key_array[$i]["vlan_name"] = "N/A";
+					$new_port_key_array[$i]["vlan_id"]     = "N/A";
+					$new_port_key_array[$i]["vlan_name"]   = "N/A";
 					$new_port_key_array[$i]["mac_address"] = "NOT USER";
 					$new_port_key_array[$i]["port_number"] = "NOT USER";
-					$new_port_key_array[$i]["port_name"] = "N/A";
+					$new_port_key_array[$i]["port_name"]   = "N/A";
 
 					/* now set the real data */
-					$new_port_key_array[$i]["key"] = $port_key["key"];
-					$new_port_key_array[$i]["port_number"] = $brPortIfIndex;
+					$new_port_key_array[$i]["key"]         = $port_key["key"];
+					$new_port_key_array[$i]["port_number"] = $port_key["port_number"];
 					$i++;
 				}
 			}
