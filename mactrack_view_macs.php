@@ -470,11 +470,15 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 
 		if (strlen(read_config_option("mt_reverse_dns")) > 0) {
 			$sql_where .= " (mac_track_ports.dns_hostname LIKE '%" . $_REQUEST["filter"] . "%' OR " .
+				"mac_track_ports.device_name LIKE '%" . $_REQUEST["filter"] . "%' OR " .
+				"mac_track_ports.hostname LIKE '%" . $_REQUEST["filter"] . "%' OR " .
 				"mac_track_ports.port_name LIKE '%" . $_REQUEST["filter"] . "%' OR " .
 				"mac_track_oui_database.vendor_name LIKE '%%" . $_REQUEST["filter"] . "%%' OR " .
 				"mac_track_ports.vlan_name LIKE '%" . $_REQUEST["filter"] . "%')";
 		}else{
-			$sql_where .= " (mac_track_ports.port_name LIKE '%" . $_REQUEST["filter"] . "%' OR " .
+			$sql_where .= " (mac_track_ports.device_name LIKE '%" . $_REQUEST["filter"] . "%' OR " .
+				"mac_track_ports.hostname LIKE '%" . $_REQUEST["filter"] . "%' OR " .
+                "mac_track_ports.port_name LIKE '%" . $_REQUEST["filter"] . "%' OR " .
 				"mac_track_oui_database.vendor_name LIKE '%%" . $_REQUEST["filter"] . "%%' OR " .
 				"mac_track_ports.vlan_name LIKE '%" . $_REQUEST["filter"] . "%')";
 		}
@@ -1194,11 +1198,11 @@ function mactrack_view_aggregated_macs() {
 			$key = $port_result["row_id"];
 
 			form_alternate_row_color($colors["alternate"], $colors["light"], $i, 'line' . $key); $i++;
-			form_selectable_cell($port_result["device_name"], $key);
-			form_selectable_cell($port_result["hostname"], $key);
+			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["device_name"]) : $port_result["device_name"]), $key);
+			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["hostname"]) : $port_result["hostname"]), $key);
 			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["ip_address"]) : $port_result["ip_address"]), $key);
 			if (strlen(read_config_option("mt_reverse_dns")) > 0) {
-			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["dns_hostname"]) : $port_result["dns_hostname"]), $key);
+				form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["dns_hostname"]) : $port_result["dns_hostname"]), $key);
 			}
 			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["mac_address"]) : $port_result["mac_address"]), $key);
 			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["vendor_name"]) : $port_result["vendor_name"]), $key);
