@@ -150,9 +150,9 @@ function mactrack_check_upgrade () {
 	$current = $current['version'];
 
 	$old     = db_fetch_row("SELECT * FROM plugin_config WHERE directory='mactrack'");
-	if (sizeof($old) && $current != $old["version"]) {
+	if (!sizeof($old) || $current != $old["version"]) {
 		/* if the plugin is installed and/or active */
-		if ($old["status"] == 1 || $old["status"] == 4) {
+		if (!sizeof($old) || $old["status"] == 1 || $old["status"] == 4) {
 			/* re-register the hooks */
 			plugin_mactrack_install();
 			if (api_plugin_is_enabled('mactrack')) {
