@@ -158,98 +158,84 @@ function mactrack_view_export_ips() {
 function mactrack_view_get_ip_records(&$sql_where, $apply_limits = TRUE, $row_limit = -1) {
 	/* form the 'where' clause for our main sql query */
 	if (strlen($_REQUEST["mac_filter"])) {
-		if (strlen($sql_where) > 0) {
-			$sql_where .= " AND ";
-		}else{
-			$sql_where = " WHERE ";
-		}
-
 		switch ($_REQUEST["mac_filter_type_id"]) {
 			case "1": /* do not filter */
 				break;
 			case "2": /* matches */
-				$sql_where .= " mac_track_ips.mac_address='" . $_REQUEST["mac_filter"] . "'";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+					" mac_track_ips.mac_address='" . $_REQUEST["mac_filter"] . "'";
 				break;
 			case "3": /* contains */
-				$sql_where .= " mac_track_ips.mac_address LIKE '%%" . $_REQUEST["mac_filter"] . "%%'";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+					" mac_track_ips.mac_address LIKE '%%" . $_REQUEST["mac_filter"] . "%%'";
 				break;
 			case "4": /* begins with */
-				$sql_where .= " mac_track_ips.mac_address LIKE '" . $_REQUEST["mac_filter"] . "%%'";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+					" mac_track_ips.mac_address LIKE '" . $_REQUEST["mac_filter"] . "%%'";
 				break;
 			case "5": /* does not contain */
-				$sql_where .= " mac_track_ips.mac_address NOT LIKE '" . $_REQUEST["mac_filter"] . "%%'";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+					" mac_track_ips.mac_address NOT LIKE '" . $_REQUEST["mac_filter"] . "%%'";
 				break;
 			case "6": /* does not begin with */
-				$sql_where .= " mac_track_ips.mac_address NOT LIKE '" . $_REQUEST["mac_filter"] . "%%'";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+					" mac_track_ips.mac_address NOT LIKE '" . $_REQUEST["mac_filter"] . "%%'";
 		}
 	}
 
 	if ((strlen($_REQUEST["ip_filter"]) > 0)||($_REQUEST["ip_filter_type_id"] > 5)) {
-		if (strlen($sql_where) > 0) {
-			$sql_where .= " AND ";
-		}else{
-			$sql_where = " WHERE ";
-		}
-
 		switch ($_REQUEST["ip_filter_type_id"]) {
 			case "1": /* do not filter */
 				break;
 			case "2": /* matches */
-				$sql_where .= " mac_track_ips.ip_address='" . $_REQUEST["ip_filter"] . "'";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+					" mac_track_ips.ip_address='" . $_REQUEST["ip_filter"] . "'";
 				break;
 			case "3": /* contains */
-				$sql_where .= " mac_track_ips.ip_address LIKE '%%" . $_REQUEST["ip_filter"] . "%%'";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+					" mac_track_ips.ip_address LIKE '%%" . $_REQUEST["ip_filter"] . "%%'";
 				break;
 			case "4": /* begins with */
-				$sql_where .= " mac_track_ips.ip_address LIKE '" . $_REQUEST["ip_filter"] . "%%'";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+					" mac_track_ips.ip_address LIKE '" . $_REQUEST["ip_filter"] . "%%'";
 				break;
 			case "5": /* does not contain */
-				$sql_where .= " mac_track_ips.ip_address NOT LIKE '" . $_REQUEST["ip_filter"] . "%%'";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+					" mac_track_ips.ip_address NOT LIKE '" . $_REQUEST["ip_filter"] . "%%'";
 				break;
 			case "6": /* does not begin with */
-				$sql_where .= " mac_track_ips.ip_address NOT LIKE '" . $_REQUEST["ip_filter"] . "%%'";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+					" mac_track_ips.ip_address NOT LIKE '" . $_REQUEST["ip_filter"] . "%%'";
 				break;
 			case "7": /* is null */
-				$sql_where .= " mac_track_ips.ip_address = ''";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+					" mac_track_ips.ip_address = ''";
 				break;
 			case "8": /* is not null */
-				$sql_where .= " mac_track_ips.ip_address != ''";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+					" mac_track_ips.ip_address != ''";
 		}
 	}
 
 	if (strlen($_REQUEST["filter"])) {
-		if (strlen($sql_where) > 0) {
-			$sql_where .= " AND ";
-		}else{
-			$sql_where = " WHERE ";
-		}
-
 		if (strlen(read_config_option("mt_reverse_dns")) > 0) {
-			$sql_where .= " (mac_track_ips.dns_hostname LIKE '%" . $_REQUEST["filter"] . "%' OR " .
+			$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+				" (mac_track_ips.dns_hostname LIKE '%" . $_REQUEST["filter"] . "%' OR " .
 				"mac_track_oui_database.vendor_name LIKE '%%" . $_REQUEST["filter"] . "%%')";
 		}else{
-			$sql_where .= " (mac_track_oui_database.vendor_name LIKE '%%" . $_REQUEST["filter"] . "%%')";
+			$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+				" (mac_track_oui_database.vendor_name LIKE '%%" . $_REQUEST["filter"] . "%%')";
 		}
 	}
 
 	if (!($_REQUEST["site_id"] == "-1")) {
-		if (strlen($sql_where) > 0) {
-			$sql_where .= " AND ";
-		}else{
-			$sql_where = " WHERE ";
-		}
-
-		$sql_where .= " mac_track_ips.site_id=" . $_REQUEST["site_id"];
+		$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+			" mac_track_ips.site_id=" . $_REQUEST["site_id"];
 	}
 
 	if (!($_REQUEST["device_id"] == "-1")) {
-		if (strlen($sql_where) > 0) {
-			$sql_where .= " AND ";
-		}else{
-			$sql_where = " WHERE ";
-		}
-
-		$sql_where .= " mac_track_ips.device_id=" . $_REQUEST["device_id"];
+		$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
+			" mac_track_ips.device_id=" . $_REQUEST["device_id"];
 	}
 
 	/* prevent table scans, either a device or site must be selected */
