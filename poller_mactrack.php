@@ -598,7 +598,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 			foreach($macwatches as $record) {
 				/* determine if we should check this one */
-				$found = db_fetch_assoc("SELECT *
+				$found = db_fetch_row("SELECT *
 					FROM mac_track_temp_ports
 					WHERE mac_address='" . $record["mac_address"] . "'");
 

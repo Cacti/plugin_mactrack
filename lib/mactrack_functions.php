@@ -303,6 +303,7 @@ function get_standard_arp_table($site, &$device) {
 
 	/* get the atifIndexes for the device */
 	$atifIndexes = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.1", $device);
+	$atEntries   = array();
 
 	if (sizeof($atifIndexes)) {
 		mactrack_debug("atifIndexes data collection complete");
