@@ -107,14 +107,14 @@ if (read_config_option("mt_collection_timing") != "disabled") {
 	$seconds_offset = read_config_option("mt_collection_timing");
 	if (($seconds_offset <> "disabled") || $forcerun) {
 		mactrack_debug("Into Processing.  Checking to determine if it's time to run.");
-		$seconds_offset = $seconds_offset * 60;
+		$seconds_offset           = $seconds_offset * 60;
 		/* find out if it's time to collect device information */
-		$base_start_time = read_config_option("mt_base_time");
-		$database_maint_time = read_config_option("mt_maint_time");
-		$last_run_time = read_config_option("mt_last_run_time");
-		$last_db_maint_time = read_config_option("mt_last_db_maint_time");
+		$base_start_time          = read_config_option("mt_base_time");
+		$database_maint_time      = read_config_option("mt_maint_time");
+		$last_run_time            = read_config_option("mt_last_run_time");
+		$last_db_maint_time       = read_config_option("mt_last_db_maint_time");
 		$previous_base_start_time = read_config_option("mt_prev_base_time");
-		$previous_db_maint_time = read_config_option("mt_prev_db_maint_time");
+		$previous_db_maint_time   = read_config_option("mt_prev_db_maint_time");
 
 		/* see if the user desires a new start time */
 		mactrack_debug("Checking if user changed the start time");
