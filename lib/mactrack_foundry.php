@@ -129,11 +129,11 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 
 				/* only output legitimate end user ports */
 				if (($ifType >= 6) && ($ifType <= 9)) {
-					$port_array[$i]["vlan_id"] = @$port_vlan_data[$port_result["port_number"]];
-					$port_array[$i]["vlan_name"] = @$vlan_ids[$port_array[$i]["vlan_id"]];
+					$port_array[$i]["vlan_id"]     = @$port_vlan_data[$port_result["port_number"]];
+					$port_array[$i]["vlan_name"]   = @$vlan_ids[$port_array[$i]["vlan_id"]];
 					$port_array[$i]["port_number"] = @$port_result["port_number"];
-					$port_array[$i]["port_name"] = $portName;
-					$port_array[$i]["mac_address"] = $port_result["mac_address"];
+					$port_array[$i]["port_name"]   = $portName;
+					$port_array[$i]["mac_address"] = xform_mac_address($port_result["mac_address"]);
 					$device["ports_active"]++;
 
 					mactrack_debug("VLAN: " . $port_array[$i]["vlan_id"] . ", " .

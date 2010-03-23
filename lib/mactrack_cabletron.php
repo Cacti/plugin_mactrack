@@ -114,7 +114,7 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 		if (($port_number >= $lowPort) && ($port_number <= $highPort)) {
 			if (!in_array($port_number, $ignore_ports)) {
 				$temp_port_A_array[$i]["port_number"] = $port_number;
-				$temp_port_A_array[$i]["mac_address"] = $mac_address;
+				$temp_port_A_array[$i]["mac_address"] = xform_mac_address($mac_address);
 				$i++;
 			}
 		}

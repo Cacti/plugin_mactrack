@@ -108,7 +108,7 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 					$port_array[$i]["vlan_name"] = $active_vlans[$Xvlanid]["vlan_name"];//@$vlan_names[$Xvlandid];
 					$port_array[$i]["port_number"] = @$port_results[$mac_result];
 					$port_array[$i]["port_name"] = trim ( $ifName );
-					$port_array[$i]["mac_address"] = $Xmac;
+					$port_array[$i]["mac_address"] = xform_mac_address($Xmac);
 					$device["ports_active"]++;
 
 					mactrack_debug("VLAN: " . $port_array[$i]["vlan_id"] . ", " .

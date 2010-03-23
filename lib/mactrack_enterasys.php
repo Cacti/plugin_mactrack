@@ -119,7 +119,7 @@ function get_enterasys_switch_ports($site, &$device, $lowPort = 0, $highPort = 0
 				$port_array[$i]["vlan_name"]   = @$vlan_ids[$port_array[$i]["vlan_id"]];
 				$port_array[$i]["port_number"] = @$port_result["port_number"];
 				$port_array[$i]["port_name"]   = $portName;
-				$port_array[$i]["mac_address"] = $port_result["mac_address"];
+				$port_array[$i]["mac_address"] = xform_mac_address($port_result["mac_address"]);
 				$device["ports_active"]++;
 
 				mactrack_debug("VLAN: " . $port_array[$i]["vlan_id"] . ", " .

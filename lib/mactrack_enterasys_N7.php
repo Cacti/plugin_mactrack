@@ -83,7 +83,7 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
                                 $port_array[$i]["vlan_name"] = @$vlan_names[$port_array[$i]["vlan_id"]];
                                 $port_array[$i]["port_number"] = @$port_result["port_number"];
                                 $port_array[$i]["port_name"] = @$ifInterfaces[$ifIndex]["ifName"];
-                                $port_array[$i]["mac_address"] = $port_result["mac_address"];
+                                $port_array[$i]["mac_address"] = xform_mac_address($port_result["mac_address"]);
                                 $device["ports_active"]++;
 
                                 mactrack_debug("VLAN: " . $port_array[$i]["vlan_id"] . ", " .
@@ -175,8 +175,8 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 		GET NEXT: 1.3.6.1.2.1.17.1.4.1.2.68: 12005
 		GET NEXT: 1.3.6.1.2.1.17.1.4.1.2.69: 12006
 		GET NEXT: 1.3.6.1.2.1.17.1.4.1.2.70: 12007
-		where 
-		table index = bridge port (dot1dBasePort) and 
+		where
+		table index = bridge port (dot1dBasePort) and
 		table value = ifIndex */
 		/* -------------------------------------------- */
 		$bridgePortIfIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.17.1.4.1.2", $device, $snmp_readstring);
@@ -352,12 +352,12 @@ function enterasys_N7_convert_macs ($oldmac){
    {
       $newmac = $newmac . dec2hex($piece[$i],2) . ":";
    }
-		
-		
+
+
 		$newmac = substr($newmac,0,strlen($newmac)-1);
 		//print ("=newmac=$newmac\n");
 	return $newmac;
-	
+
 }
 
 function xform_enterasys_N7_vlan_associations(&$device, $snmp_readstring = "") {
@@ -407,7 +407,7 @@ function get_enterasys_N7_vlan_id($OID) {
 		$perPos = strpos($OID, ".",1);
 		$vlan_id = substr($OID,0,$perPos);
 	return $vlan_id;
-} 
+}
 
 
 /*	get_CTAlias_table - This function reads a devices CTAlias table for a site and stores
@@ -449,7 +449,7 @@ function get_CTAlias_table($site, &$device) {
 		$CTAliasEntries[$i]["ifIndex"] = $ifIndex;
 #		$CTAliasEntries[$i]["timestamp"] = @substr($keys[$i], 0, stripos($keys[$i], '.'));
 		$CTAliasEntries[$i]["timestamp"] = $keys[$i];
-		$CTAliasEntries[$i]["CTAliasProtocol"] = @$CTAliasProtocol[$keys[$i]]; 
+		$CTAliasEntries[$i]["CTAliasProtocol"] = @$CTAliasProtocol[$keys[$i]];
 		$CTAliasEntries[$i]["CTAliasMacAddress"] = @$CTAliasMacAddress[$keys[$i]];
 #		$CTAliasEntries[$i]["CTAliasAddressText"] = @xform_net_address($CTAliasAddressText[$keys[$i]]);
 		$CTAliasEntries[$i]["CTAliasAddressText"] = @$CTAliasAddressText[$keys[$i]];
@@ -476,7 +476,7 @@ function get_CTAlias_table($site, &$device) {
 				$scan_date . "')";
 
 #			mactrack_debug("SQL: " . $insert_string);
-	
+
 			db_execute($insert_string);
 		}
 	}

@@ -216,7 +216,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 						$port_array[$i]["vlan_name"]   = $active_vlan["vlan_name"];
 						$port_array[$i]["port_number"] = $ifInterfaces[$ifIndex]["ifName"];
 						$port_array[$i]["port_name"]   = $portName;
-						$port_array[$i]["mac_address"] = $port_result["mac_address"];
+						$port_array[$i]["mac_address"] = xform_mac_address($port_result["mac_address"]);
 						$device["ports_active"]++;
 						$i++;
 
@@ -412,11 +412,11 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 					if (($portTrunkStatus == "2") ||
 						(empty($portTrunkStatus)) ||
 						(($vVlanID > 0) && ($vVlanID <= 1000))) {
-						$port_array[$i]["vlan_id"] = $active_vlan["vlan_id"];
-						$port_array[$i]["vlan_name"] = $active_vlan["vlan_name"];
+						$port_array[$i]["vlan_id"]     = $active_vlan["vlan_id"];
+						$port_array[$i]["vlan_name"]   = $active_vlan["vlan_name"];
 						$port_array[$i]["port_number"] = $portNumber;
-						$port_array[$i]["port_name"] = $portName;
-						$port_array[$i]["mac_address"] = $port_result["mac_address"];
+						$port_array[$i]["port_name"]   = $portName;
+						$port_array[$i]["mac_address"] = xform_mac_address($port_result["mac_address"]);
 						$device["ports_active"]++;
 						$i++;
 

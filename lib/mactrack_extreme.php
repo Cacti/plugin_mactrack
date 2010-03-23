@@ -41,7 +41,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 	$device["vlans_total"]  = 0;
 	$device["macs_active"]  = 0;
 
-	/* get VLAN information 
+	/* get VLAN information
 	   VLAN index
 	   .1.3.6.1.4.1.1916.1.2.1.2.1.1
 	   EXTREME-VLAN-MIB::extremeVlanIfIndex.<vlanid> = index
@@ -57,7 +57,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 	$device["vlans_total"] = sizeof($vlan_ids);
 	mactrack_debug("There are " . (sizeof($vlan_ids)) . " VLANS.");
 
-	/* get the ifIndexes for the device 
+	/* get the ifIndexes for the device
 	   .1.3.6.1.2.1.2.2.1.1
 	   RFC1213-MIB::ifIndex.<index> = index
 	   .1.3.6.1.2.1.2.2.1.2
@@ -88,7 +88,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 		/* get the port status information */
 		/* get port_number and MAC addr */
 		/*extremeXOS
-		  addr mac 
+		  addr mac
 		  .1.3.6.1.4.1.1916.1.16.4.1.1
 		  EXTREME-BASE-MIB::extremeFdb.4.1.1.<MAC>.<vlanid>= hex MAC
 		  index du vlan ?
@@ -125,24 +125,24 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 		foreach ($mac_addr_list as $mac_key => $mac_addr) {
 			/* check if mac addr is 'learned'  or 'mgnt' */
 			if (isset($mac_status_list[$mac_key]) and (($mac_status_list[$mac_key] == "3") || ($mac_status_list[$mac_key] == "5"))) {
-				$ifIndex = $mac_port_list[$mac_key];		
+				$ifIndex = $mac_port_list[$mac_key];
 				$ifType = $ifInterfaces[$ifIndex]["ifType"];
 				//$ifType = $ifTypes[$ifIndex];
 				/* only output legitimate end user ports */
 				if (($ifType >= 6) && ($ifType <= 9)) {
 					if ($extremeware) {
 						$vlanid = substr($mac_key,0,strpos($mac_key,"."));
-						$new_port_array["vlan_id"] = $vlan_ids[$vlanid];
+						$new_port_array["vlan_id"]   = $vlan_ids[$vlanid];
 						$new_port_array["vlan_name"] = $vlan_names[$vlanid];
 					} else {
-						$new_port_array["vlan_id"] = $vlan_ids[$mac_vlan_list[$mac_key]];
+						$new_port_array["vlan_id"]   = $vlan_ids[$mac_vlan_list[$mac_key]];
 						$new_port_array["vlan_name"] = $vlan_names[$mac_vlan_list[$mac_key]];
 					}
-					//$new_port_array["port_number"] = $ifIndex;
-					//$new_port_array["port_name"] = $ifInterfaces[$ifIndex]["ifName"];
-					$new_port_array["port_number"] = $ifInterfaces[$ifIndex]["ifName"];
-					$new_port_array["port_name"] = $ifInterfaces[$ifIndex]["ifAlias"];
-					$new_port_array["mac_address"] = $mac_addr_list[$mac_key];
+					//$new_port_array["port_number"]  = $ifIndex;
+					//$new_port_array["port_name"]    = $ifInterfaces[$ifIndex]["ifName"];
+					$new_port_array["port_number"]  = $ifInterfaces[$ifIndex]["ifName"];
+					$new_port_array["port_name"]    = $ifInterfaces[$ifIndex]["ifAlias"];
+					$new_port_array["mac_address"]  = xform_mac_address($mac_addr_list[$mac_key]);
 					$ifInterfaces[$ifIndex]["Used"] = 1;
 					$port_array[] = $new_port_array;
 					mactrack_debug("VLAN: " . $new_port_array["vlan_id"] . ", " .
