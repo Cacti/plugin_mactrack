@@ -28,7 +28,7 @@ array_push($mactrack_scanning_functions, "get_extreme_switch_ports");
 array_push($mactrack_scanning_functions, "get_extreme_extremeware_switch_ports");
 
 function get_extreme_extremeware_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false) {
-	return get_extreme_switch_ports($site, &$device, $lowPort , $highPort , true);
+	return get_extreme_switch_ports($site, $device, $lowPort, $highPort , true);
 }
 
 function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false) {
