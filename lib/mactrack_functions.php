@@ -3461,7 +3461,7 @@ function mactrack_mac_filter() {
 	<?php
 }
 
-function mactrack_ipsaddresses_filter() {
+function mactrack_ip_address_filter() {
 	global $item_rows, $rows_selector, $mactrack_search_types;
 
 	?>
@@ -3496,7 +3496,7 @@ function mactrack_ipsaddresses_filter() {
 						if ($_REQUEST["site_id"] == -1) {
 							$filter_devices = db_fetch_assoc("SELECT DISTINCT device_id, device_name, hostname FROM mac_track_ips ORDER BY device_name");
 						}else{
-							$filter_devices = db_fetch_assoc("SELECT device_id, device_name, hostname FROM mac_track_ips WHERE site_id='" . $_REQUEST["site_id"] . "' ORDER BY device_name");
+							$filter_devices = db_fetch_assoc("SELECT DISTINCT device_id, device_name, hostname FROM mac_track_ips WHERE site_id='" . $_REQUEST["site_id"] . "' ORDER BY device_name");
 						}
 						if (sizeof($filter_devices) > 0) {
 						foreach ($filter_devices as $filter_device) {

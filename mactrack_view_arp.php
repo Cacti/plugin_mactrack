@@ -399,7 +399,7 @@ function mactrack_view_ips() {
 
 	mactrack_tabs();
 	mactrack_view_header();
-	mactrack_ipsaddresses_filter();
+	mactrack_ip_address_filter();
 	mactrack_view_footer();
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
