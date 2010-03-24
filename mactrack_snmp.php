@@ -671,44 +671,4 @@ function mactrack_actions_dropdown($actions_array) {
 	<?php
 }
 
-/* mactrack_save_button - draws a (save|create) and cancel button at the bottom of
- an html edit form
- @arg $cancel_url - the url to go to when the user clicks 'cancel'
- @arg $force_type - if specified, will force the 'action' button to be either
- 'save' or 'create'. otherwise this field should be properly auto-detected */
-function mactrack_save_button($cancel_url, $force_type = "", $key_field = "id") {
-	global $config;
-
-	if (empty($force_type)) {
-		if (empty($_GET[$key_field])) {
-			$value = "Create";
-		}else{
-			$value = "Save";
-		}
-	}elseif ($force_type == "save") {
-		$value = "Save";
-	}elseif ($force_type == "create") {
-		$value = "Create";
-	}
-	?>
-<script type="text/javascript">
-	<!--
-	function returnTo(location) {
-		document.location = location;
-	}
-	-->
-	</script>
-<table align='center' width='100%'
-	style='background-color: #ffffff; border: 1px solid #bbbbbb;'>
-	<tr>
-		<td bgcolor="#f5f5f5" align="right"><input type='hidden' name='action'
-			value='save'> <input type='button'
-			onClick='returnTo("<?php print $cancel_url;?>")' value='Cancel'> <input
-			type='submit' value='<?php print $value;?>'></td>
-	</tr>
-</table>
-</form>
-<?php
-}
-
 ?>
