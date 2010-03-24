@@ -125,7 +125,7 @@ function mactrack_view_export_ips() {
 
 	$sql_where = "";
 
-	$port_results = mactrack_view_get_mac_records($sql_where, 0, FALSE);
+	$port_results = mactrack_view_get_ip_records($sql_where, 0, FALSE);
 
 	$xport_array = array();
 	array_push($xport_array, '"site_name","hostname","device_name",' .
@@ -134,11 +134,7 @@ function mactrack_view_export_ips() {
 
 	if (sizeof($port_results)) {
 		foreach($port_results as $port_result) {
-			if ($_REQUEST["scan_date"] == 1) {
-				$scan_date = $port_result["scan_date"];
-			}else{
-				$scan_date = $port_result["max_scan_date"];
-			}
+			$scan_date = $port_result["scan_date"];
 
 			array_push($xport_array,'"' . $port_result['site_name'] . '","' .
 			$port_result['hostname'] . '","' . $port_result['device_name'] . '","' .
