@@ -71,7 +71,7 @@ switch ($_REQUEST["action"]) {
 
 		include_once("./include/bottom_footer.php");
 		break;
-	case 'mactrack_view_proc_status':
+	case 'mactrack_proc_status':
 		/* ================= input validation ================= */
 		input_validate_input_number(get_request_var_request("refresh"));
 		/* ==================================================== */
@@ -79,7 +79,7 @@ switch ($_REQUEST["action"]) {
 		load_current_session_value("refresh", "sess_mactrack_utilities_refresh", "30");
 
 		$refresh["seconds"] = $_REQUEST["refresh"];
-		$refresh["page"] = "mactrack_utilities.php?action=mactrack_view_proc_status";
+		$refresh["page"] = "mactrack_utilities.php?action=mactrack_proc_status";
 
 		include_once("./include/top_header.php");
 
@@ -166,7 +166,7 @@ function mactrack_display_run_status() {
 	<script type="text/javascript">
 	<!--
 	function applyStatsRefresh(objForm) {
-		strURL = '?action=mactrack_view_proc_status&refresh=' + objForm.refresh[objForm.refresh.selectedIndex].value;
+		strURL = '?action=mactrack_proc_status&refresh=' + objForm.refresh[objForm.refresh.selectedIndex].value;
 		document.location = strURL;
 	}
 	-->
@@ -495,7 +495,7 @@ function mactrack_utilities() {
 
 	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
 		<td class="textArea" width="150" valign="top">
-			<p><a href='mactrack_utilities.php?action=mactrack_view_proc_status'>View MacTrack Process Status</a></p>
+			<p><a href='mactrack_utilities.php?action=mactrack_proc_status'>View MacTrack Process Status</a></p>
 		</td>
 		<td class="textArea" valign="top">
 			<p>This option will let you show and set process information associated with the MacTrack polling process.</p>
