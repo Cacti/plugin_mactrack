@@ -30,6 +30,7 @@ if (!isset($_REQUEST["action"])) { $_REQUEST["action"] = ""; }
 
 /* add more memory for import */
 ini_set("memory_limit", "256M");
+ini_set("max_execution_time", "300");
 
 switch ($_REQUEST["action"]) {
 	case 'mactrack_utilities_truncate_ports_table':
