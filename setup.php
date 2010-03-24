@@ -141,6 +141,11 @@ function plugin_mactrack_version () {
 function mactrack_check_upgrade () {
 	global $config;
 
+	if (defined('CACTI_BASE_PATH')) {
+		$config["base_path"] = CACTI_BASE_PATH;
+	}
+	include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_functions.php");
+
 	$files = array('index.php', 'plugins.php', 'mactrack_devices.php');
 	if (isset($_SERVER['PHP_SELF']) && !in_array(basename($_SERVER['PHP_SELF']), $files)) {
 		return;
@@ -167,6 +172,9 @@ function mactrack_check_upgrade () {
 		if (read_config_option("mt_convert_readstrings", true) != "on") {
 			convert_readstrings();
 		}
+
+		/* rebuild the scanning functions */
+		mactrack_rebuild_scanning_funcs();
 
 		/* update the plugin information */
 		$info = plugin_mactrack_version();

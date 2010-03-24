@@ -42,6 +42,34 @@ function mactrack_debug($message) {
 	}
 }
 
+function mactrack_rebuild_scanning_funcs() {
+	global $config;
+
+	if (defined('CACTI_BASE_PATH')) {
+		$config["base_path"] = CACTI_BASE_PATH;
+	}
+
+	db_execute("TRUNCATE TABLE mac_track_scanning_functions");
+
+	include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_functions.php");
+	include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_vendors.php");
+
+	/* store the list of registered mactrack scanning functions */
+	db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('Not Applicable - Router', '1')");
+	if (isset($mactrack_scanning_functions)) {
+	foreach($mactrack_scanning_functions as $scanning_function) {
+		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '1')");
+	}
+	}
+
+	db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('Not Applicable - Switch/Hub', '2')");
+	if (isset($mactrack_scanning_functions_ip)) {
+	foreach($mactrack_scanning_functions_ip as $scanning_function) {
+		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '2')");
+	}
+	}
+}
+
 function mactrack_strip_alpha($string = "") {
 	return trim($string, "abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ()[]{}");
 }

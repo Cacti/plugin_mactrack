@@ -472,29 +472,7 @@ function mactrack_utilities_db_maint() {
 function mactrack_utilities_purge_scanning_funcs() {
 	global $config, $colors;
 
-	if (defined('CACTI_BASE_PATH')) {
-		$config["base_path"] = CACTI_BASE_PATH;
-	}
-
-	db_execute("TRUNCATE TABLE mac_track_scanning_functions");
-
-	include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_functions.php");
-	include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_vendors.php");
-
-	/* store the list of registered mactrack scanning functions */
-	db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('Not Applicable - Router', '1')");
-	if (isset($mactrack_scanning_functions)) {
-	foreach($mactrack_scanning_functions as $scanning_function) {
-		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '1')");
-	}
-	}
-
-	db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('Not Applicable - Switch/Hub', '2')");
-	if (isset($mactrack_scanning_functions_ip)) {
-	foreach($mactrack_scanning_functions_ip as $scanning_function) {
-		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '2')");
-	}
-	}
+	mactrack_rebuild_scanning_funcs();
 
 	html_start_box("<strong>Device Tracking Scanning Function Refresh Results</strong>", "100%", $colors["header"], "3", "center", "");
 	?>
