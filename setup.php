@@ -1185,7 +1185,7 @@ function mactrack_show_tab () {
 }
 
 function mactrack_config_arrays () {
-	global $mactrack_device_types, $mactrack_search_types;
+	global $mactrack_device_types, $mactrack_search_types, $messages;
 	global $user_auth_realms, $user_auth_realm_filenames, $menu, $config, $rows_selector;
 	global $mactrack_poller_frequencies, $mactrack_data_retention, $refresh_interval;
 	global $mactrack_macauth_frequencies, $mactrack_duplexes, $mactrack_update_policies;
@@ -1208,6 +1208,10 @@ function mactrack_config_arrays () {
 	$user_auth_realm_filenames['mactrack_macwatch.php']        = 2121;
 	$user_auth_realm_filenames['mactrack_macauth.php']         = 2121;
 	$user_auth_realm_filenames['mactrack_vendormacs.php']      = 2121;
+
+	if (isset($_SESSION['mactrack_message']) && $_SESSION['mactrack_message'] != '') {
+		$messages['mactrack_message'] = array('message' => $_SESSION['mactrack_message'], 'type' => 'info');
+	}
 
 	if (!function_exists("__")) {
 		function __($text, $domain = "cacti") {

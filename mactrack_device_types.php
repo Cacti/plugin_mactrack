@@ -84,15 +84,19 @@ switch ($_REQUEST["action"]) {
 		include_once("./include/bottom_footer.php");
 		break;
 	default:
-		if (isset($_REQUEST["import_x"])) {
+		if (isset($_REQUEST["scan_x"])) {
+			mactrack_rescan_device_types();
+			header("Location: mactrack_device_types.php");
+			exit;
+		}elseif (isset($_REQUEST["import_x"])) {
 			header("Location: mactrack_device_types.php?action=import");
+			exit;
 		}elseif (isset($_REQUEST["export_x"])) {
 			mactrack_device_type_export();
+			exit;
 		}else{
 			include_once("./include/top_header.php");
-
 			mactrack_device_type();
-
 			include_once("./include/bottom_footer.php");
 		}
 		break;
@@ -355,6 +359,78 @@ function mactrack_device_type_export() {
 	header("Content-Disposition: attachment; filename=cacti_device_type_xport.csv");
 	foreach($xport_array as $xport_line) {
 		print $xport_line . "\n";
+	}
+}
+
+function mactrack_rescan_device_types() {
+	global $cnn_id;
+
+	/* let's allocate an array for results */
+	$insert_array = array();
+
+	/* get all the various device types from the database */
+	$device_types = db_fetch_assoc("SELECT DISTINCT snmp_sysObjectID, snmp_sysDesc, device_type
+		FROM mac_track_devices
+		WHERE snmp_sysObjectID!='' AND snmp_sysDesc!=''");
+
+	/* get all known devices types from the device type database */
+	$known_types = db_fetch_assoc("SELECT sysDescr_match, sysObjectID_match FROM mac_track_device_types");
+
+	/* loop through all device rows and look for a matching type */
+	if (sizeof($device_types)) {
+	foreach($device_types as $type) {
+		$found = FALSE;
+		if (sizeof($known_types)) {
+		foreach($known_types as $known) {
+			if ((substr_count($type["snmp_sysDesc"], $known["sysDescr_match"])) &&
+				(substr_count($type["snmp_sysObjectID"], $known["sysObjectID_match"]))) {
+				$found = TRUE;
+				break;
+			}
+		}
+		}
+
+		if (!$found) {
+			$insert_array[] = $type;
+		}
+	}
+	}
+
+	if (sizeof($insert_array)) {
+		foreach($insert_array as $item) {
+			$desc = trim($item["snmp_sysDesc"]);
+			$name = 'New Type';
+			if (substr_count(strtolower($desc), "cisco")) {
+				$vendor = "Cisco";
+				$temp_name = str_replace("(tm)", "", $desc);
+				$pos = strpos($temp_name, "(");
+				if ($pos > 0) {
+					$pos2 = strpos($temp_name, ")");
+					if ($pos2 > $pos) {
+						$desc = substr($temp_name, $pos+1, $pos2-$pos-1);
+
+						$name = $desc . " (" . $item["device_type"] . ")";
+					}
+				}
+			}else{
+				$vendor = "Unknown";
+			}
+
+			db_execute("REPLACE INTO mac_track_device_types
+				(description, vendor, device_type, sysDescr_match, sysObjectID_match)
+				VALUES ('" .
+					$name                     . "','" .
+					$vendor                   . "','" .
+					$item["device_type"]      . "',"  .
+					$cnn_id->qstr($desc)      . ",'"  .
+					$item["snmp_sysObjectID"] . "')");
+		}
+
+		$_SESSION['mactrack_message'] = "There were " . sizeof($insert_array) . " Device Types Added!";
+		raise_message('mactrack_message');
+	}else{
+		$_SESSION['mactrack_message'] = "No New Device Types Found!";
+		raise_message('mactrack_message');
 	}
 }
 
