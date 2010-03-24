@@ -2639,15 +2639,8 @@ function mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '')
 	}
 
 	$text = array('text' => '', 'html' => '');
-	if ($filename == '') {
-		$message = str_replace('<br>',  "\n", $message);
-		$message = str_replace('<BR>',  "\n", $message);
-		$message = str_replace('</BR>', "\n", $message);
-		$text['text'] = strip_tags($message);
-	} else {
-		$text['html'] = $message . '<br>';
-		$text['text'] = strip_tags(str_replace('<br>', "\n", $message));
-	}
+	$text['html'] = $message . '<br>';
+	$text['text'] = strip_tags(str_replace('<br>', "\n", $message));
 
 	$v = mactrack_version();
 	$Mailer->header_set('X-Mailer', 'Cacti-MacTrack-v' . $v['version']);

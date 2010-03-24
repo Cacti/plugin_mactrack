@@ -610,7 +610,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 					$message = str_replace("<IP>", $found["ip_address"], $record["description"]);
 					$message = str_replace("<MAC>", $found["mac_address"], $message);
 					$message = str_replace("<TICKET>", $record["ticket_number"], $message);
-					$message = str_replace("<SITENAME>", db_fetch_cell("SELECT site_name FROM mac_track_sites WHERE site_id=" . $record["site_id"]), $message);
+					$message = str_replace("<SITENAME>", db_fetch_cell("SELECT site_name FROM mac_track_sites WHERE site_id=" . $found["site_id"]), $message);
 					$message = str_replace("<DEVICEIP>", $found["hostname"], $message);
 					$message = str_replace("<DEVICENAME>", $found["device_name"], $message);
 					$message = str_replace("<PORTNUMBER>", $found["port_number"], $message);
@@ -635,8 +635,8 @@ function collect_mactrack_data($start, $site_id = 0) {
 					db_execute("UPDATE mac_track_macwatch
 						SET
 							discovered=1,
-							last_seen_date=NOW()" .
-							(strtotime($record["first_seen_time"]) == 0 ? ", first_seen_date=NOW()":"") . "
+							date_last_seen=NOW()" .
+							(strtotime($record["date_first_seen"]) == 0 ? ", date_first_seen=NOW()":"") . "
 						WHERE mac_address='" . $record["mac_address"] . "'");
 				}
 			}
