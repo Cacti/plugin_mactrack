@@ -148,6 +148,8 @@ function mactrack_view_get_device_records(&$sql_where, $row_limit, $apply_limits
 		/* Show all items */
 	}elseif ($_REQUEST["status"] == "-2") {
 		$sql_where .= " AND (mac_track_devices.disabled='on')";
+	}elseif ($_REQUEST["status"] == "5") {
+		$sql_where .= (strlen($sql_where) ? " AND ": "WHERE ") . "(mac_track_devices.host_id=0)";
 	}else {
 		$sql_where .= " AND (mac_track_devices.snmp_status=" . $_REQUEST["status"] . ") AND (mac_track_devices.disabled = '')";
 	}

@@ -3009,6 +3009,7 @@ function mactrack_device_filter() {
 							<option value="1"<?php if ($_REQUEST["status"] == "1") {?> selected<?php }?>>Down</option>
 							<option value="0"<?php if ($_REQUEST["status"] == "0") {?> selected<?php }?>>Unknown</option>
 							<option value="4"<?php if ($_REQUEST["status"] == "4") {?> selected<?php }?>>Error</option>
+							<option value="5"<?php if ($_REQUEST["status"] == "5") {?> selected<?php }?>>No Cacti Link</option>
 						</select>
 					</td>
 					<td nowrap style='white-space: nowrap;' width="40">
@@ -3713,6 +3714,7 @@ function mactrack_device_filter2() {
 						<option value="1"<?php if ($_REQUEST["status"] == "1") {?> selected<?php }?>>Down</option>
 						<option value="0"<?php if ($_REQUEST["status"] == "0") {?> selected<?php }?>>Unknown</option>
 						<option value="4"<?php if ($_REQUEST["status"] == "4") {?> selected<?php }?>>Error</option>
+						<option value="5"<?php if ($_REQUEST["status"] == "5") {?> selected<?php }?>>No Cacti Link</option>
 						</select>
 					</td>
 					<td nowrap style='white-space: nowrap;' width="40">
