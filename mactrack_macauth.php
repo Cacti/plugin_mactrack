@@ -72,11 +72,7 @@ function form_save() {
 	if ((isset($_POST["save_component_maca"])) && (empty($_POST["add_dq_y"]))) {
 		$mac_id = api_mactrack_maca_save($_POST["mac_id"], $_POST["mac_address"], $_POST["description"]);
 
-		if ((is_error_message()) || ($_POST["mac_id"] != $_POST["_mac_id"])) {
-			header("Location: mactrack_macauth.php?action=edit&id=" . (empty($mac_id) ? $_POST["mac_id"] : $mac_id));
-		}else{
-			header("Location: mactrack_macauth.php");
-		}
+		header("Location: mactrack_macauth.php?action=edit&id=" . (empty($mac_id) ? $_POST["mac_id"] : $mac_id));
 	}
 }
 
@@ -164,11 +160,11 @@ function form_actions() {
 }
 
 function api_mactrack_maca_save($mac_id, $mac_address, $description) {
-	$save["mac_id"] = $mac_id;
-	$save["mac_address"] = form_input_validate($mac_address, $_POST["mac_address"], "", false, 3);
-	$save["description"] = form_input_validate($description, $_POST["description"], "", false, 3);
-	$save["added_date"] = date("Y-m-d h:i:s");
-	$save["added_by"] = $_SESSION["sess_user_id"];
+	$save["mac_id"]      = $mac_id;
+	$save["mac_address"] = form_input_validate($mac_address, "mac_address", "", false, 3);
+	$save["description"] = form_input_validate($description, "description", "", false, 3);
+	$save["added_date"]  = date("Y-m-d h:i:s");
+	$save["added_by"]    = $_SESSION["sess_user_id"];
 
 	$mac_id = 0;
 	if (!is_error_message()) {
@@ -261,9 +257,9 @@ function mactrack_maca_edit() {
 	html_end_box();
 
 	if (isset($mac_record)) {
-		mactrack_save_button("return", "save", "", "mac_address");
+		mactrack_save_button("mactrack_macauth.php", "save", "", "mac_id");
 	}else{
-		mactrack_save_button("cancel", "save", "", "mac_address");
+		mactrack_save_button("cancel", "save", "", "mac_id");
 	}
 }
 

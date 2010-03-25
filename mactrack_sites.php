@@ -77,11 +77,7 @@ function form_save() {
 		$site_id = api_mactrack_site_save($_POST["site_id"], $_POST["site_name"], $_POST["customer_contact"],
 		$_POST["netops_contact"], $_POST["facilities_contact"], $_POST["site_info"]);
 
-		if ((is_error_message()) || ($_POST["site_id"] != $_POST["_site_id"])) {
-			header("Location: mactrack_sites.php?action=edit&id=" . (empty($site_id) ? $_POST["site_id"] : $site_id));
-		}else{
-			header("Location: mactrack_sites.php");
-		}
+		header("Location: mactrack_sites.php?action=edit&id=" . (empty($site_id) ? $_POST["site_id"] : $site_id));
 	}
 }
 
@@ -255,12 +251,12 @@ function mactrack_site_export() {
 }
 
 function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops_contact, $facilities_contact, $site_info) {
-	$save["site_id"] = $site_id;
-	$save["site_name"] = form_input_validate($site_name, $_POST["site_name"], "", false, 3);
-	$save["site_info"] = form_input_validate($site_info, $_POST["site_info"], "", true, 3);
-	$save["customer_contact"] = form_input_validate($customer_contact, $_POST["customer_contact"], "", true, 3);
-	$save["netops_contact"] = form_input_validate($netops_contact, $_POST["netops_contact"], "", true, 3);
-	$save["facilities_contact"] = form_input_validate($facilities_contact, $_POST["facilities_contact"], "", true, 3);
+	$save["site_id"]            = $site_id;
+	$save["site_name"]          = form_input_validate($site_name, "site_name", "", false, 3);
+	$save["site_info"]          = form_input_validate($site_info, "site_info", "", true, 3);
+	$save["customer_contact"]   = form_input_validate($customer_contact, "customer_contact", "", true, 3);
+	$save["netops_contact"]     = form_input_validate($netops_contact, "netops_contact", "", true, 3);
+	$save["facilities_contact"] = form_input_validate($facilities_contact, "facilities_contact", "", true, 3);
 
 	$site_id = 0;
 	if (!is_error_message()) {
@@ -413,7 +409,7 @@ function mactrack_site_edit() {
 	html_end_box();
 
 	if (isset($site)) {
-		mactrack_save_button("return", "save", "", "site_id");
+		mactrack_save_button("mactrack_site.php", "save", "", "site_id");
 	}else{
 		mactrack_save_button("cancel", "save", "", "site_id");
 	}

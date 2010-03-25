@@ -74,11 +74,7 @@ function form_save() {
 		$mac_id = api_mactrack_macw_save($_POST["mac_id"], $_POST["mac_address"], $_POST["name"], $_POST["ticket_number"], $_POST["description"],
 			$_POST["notify_schedule"], $_POST["email_addresses"]);
 
-		if ((is_error_message()) || ($_POST["mac_id"] != $_POST["_mac_id"])) {
-			header("Location: mactrack_macwatch.php?action=edit&id=" . (empty($mac_id) ? $_POST["mac_id"] : $mac_id));
-		}else{
-			header("Location: mactrack_macwatch.php");
-		}
+		header("Location: mactrack_macwatch.php?action=edit&id=" . (empty($mac_id) ? $_POST["mac_id"] : $mac_id));
 	}
 }
 
@@ -166,13 +162,13 @@ function form_actions() {
 }
 
 function api_mactrack_macw_save($mac_id, $mac_address, $name, $ticket_number, $description, $notify_schedule, $email_addresses) {
-	$save["mac_id"] = $mac_id;
-	$save["mac_address"] = form_input_validate($mac_address, $_POST["mac_address"], "", false, 3);
-	$save["name"] = form_input_validate($name, $_POST["name"], "", false, 3);
-	$save["ticket_number"] = form_input_validate($ticket_number, $_POST["ticket_number"], "", false, 3);
-	$save["description"] = form_input_validate($description, $_POST["description"], "", false, 3);
-	$save["notify_schedule"] = form_input_validate($notify_schedule, $_POST["notify_schedule"], "", false, 3);
-	$save["email_addresses"] = form_input_validate($email_addresses, $_POST["email_addresses"], "", false, 3);
+	$save["mac_id"]          = $mac_id;
+	$save["mac_address"]     = form_input_validate($mac_address, "mac_address", "", false, 3);
+	$save["name"]            = form_input_validate($name, "name", "", false, 3);
+	$save["ticket_number"]   = form_input_validate($ticket_number, "ticket_number", "", false, 3);
+	$save["description"]     = form_input_validate($description, "description", "", false, 3);
+	$save["notify_schedule"] = form_input_validate($notify_schedule, "notify_schedule", "", false, 3);
+	$save["email_addresses"] = form_input_validate($email_addresses, "email_addresses", "", false, 3);
 
 	$mac_id = 0;
 	if (!is_error_message()) {
@@ -264,7 +260,7 @@ function mactrack_macw_edit() {
 	html_end_box();
 
 	if (isset($mac_record)) {
-		mactrack_save_button("return", "save", "", "mac_address");
+		mactrack_save_button("mactrack_macwatch.php", "save", "", "mac_address");
 	}else{
 		mactrack_save_button("cancel", "save", "", "mac_address");
 	}

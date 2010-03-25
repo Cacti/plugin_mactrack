@@ -141,17 +141,17 @@ function api_mactrack_device_type_save($device_type_id, $description,
 			$vendor, $device_type, $sysDescr_match, $sysObjectID_match, $scanning_function,
 			$ip_scanning_function, $serial_number_oid, $lowPort, $highPort) {
 
-	$save["device_type_id"] = $device_type_id;
-	$save["description"] = form_input_validate($description, "description", "", false, 3);
-	$save["vendor"] = $vendor;
-	$save["device_type"] = $device_type;
-	$save["sysDescr_match"] = form_input_validate($sysDescr_match, "sysDescr_match", "", true, 3);
-	$save["sysObjectID_match"] = form_input_validate($sysObjectID_match, "sysObjectID_match", "", true, 3);
-	$save["serial_number_oid"] = form_input_validate($serial_number_oid, "serial_number_oid", "", true, 3);
-	$save["scanning_function"] = form_input_validate($scanning_function, "scanning_function", "", true, 3);
+	$save["device_type_id"]       = $device_type_id;
+	$save["description"]          = form_input_validate($description, "description", "", false, 3);
+	$save["vendor"]               = $vendor;
+	$save["device_type"]          = $device_type;
+	$save["sysDescr_match"]       = form_input_validate($sysDescr_match, "sysDescr_match", "", true, 3);
+	$save["sysObjectID_match"]    = form_input_validate($sysObjectID_match, "sysObjectID_match", "", true, 3);
+	$save["serial_number_oid"]    = form_input_validate($serial_number_oid, "serial_number_oid", "", true, 3);
+	$save["scanning_function"]    = form_input_validate($scanning_function, "scanning_function", "", true, 3);
 	$save["ip_scanning_function"] = form_input_validate($ip_scanning_function, "ip_scanning_function", "", true, 3);
-	$save["lowPort"] = form_input_validate($lowPort, "lowPort", "", true, 3);
-	$save["highPort"] = form_input_validate($highPort, "highPort", "", true, 3);
+	$save["lowPort"]              = form_input_validate($lowPort, "lowPort", "", true, 3);
+	$save["highPort"]             = form_input_validate($highPort, "highPort", "", true, 3);
 
 	$device_type_id = 0;
 	if (!is_error_message()) {
