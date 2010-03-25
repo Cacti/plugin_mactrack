@@ -102,11 +102,7 @@ function form_mactrack_save() {
 			$_POST["notes"], $_POST["user_name"], $_POST["user_password"], $_POST["term_type"], $_POST["private_key_path"],
 			(isset($_POST["disabled"]) ? $_POST["disabled"] : ""));
 
-		if ((is_error_message()) || ($_POST["device_id"] != $_POST["_device_id"])) {
-			header("Location: mactrack_devices.php?action=edit&device_id=" . (empty($device_id) ? $_POST["device_id"] : $device_id));
-		}else{
-			header("Location: mactrack_devices.php");
-		}
+		header("Location: mactrack_devices.php?action=edit&device_id=" . (empty($device_id) ? $_POST["device_id"] : $device_id));
 	}
 
 	if (isset($_POST["save_component_import"])) {
@@ -870,7 +866,7 @@ function mactrack_device_remove() {
 }
 
 function mactrack_device_edit() {
-	global $colors, $fields_mactrack_device_edit;
+	global $colors, $config, $fields_mactrack_device_edit;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var("device_id"));
@@ -946,7 +942,7 @@ function mactrack_device_edit() {
 	html_end_box();
 
 	if (isset($device)) {
-		mactrack_save_button("return", "save", "", "device_id");
+		mactrack_save_button($config["url_path"] . "plugins/mactrack/mactrack_devices.php", "save", "", "device_id");
 	}else{
 		mactrack_save_button("cancel", "save", "", "device_id");
 	}

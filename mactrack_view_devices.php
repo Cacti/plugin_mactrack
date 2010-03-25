@@ -34,10 +34,9 @@ define("MAX_DISPLAY_PAGES", 21);
 if (isset($_REQUEST["export_x"])) {
 	mactrack_view_export_devices();
 }else{
-	$_REQUEST["action"] = ""; # avoid index error in top_graph_header.php
 	mactrack_redirect();
 	$title = "Device Tracking - Device Report View";
-	include_once("./include/top_graph_header.php");
+	include_once("./plugins/mactrack/general_header.php");
 	mactrack_view_devices();
 	include("./include/bottom_footer.php");
 }

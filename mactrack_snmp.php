@@ -193,7 +193,7 @@ function form_mactrack_snmp_actions() {
 		}
 	}
 
-	include_once("./include/top_graph_header.php");
+	include_once("./plugins/mactrack/general_header.php");
 
 	display_output_messages();
 
@@ -335,7 +335,7 @@ function mactrack_snmp_remove() {
 	/* ==================================================== */
 
 	if ((read_config_option("deletion_verification") == "on") && (!isset($_GET["confirm"]))) {
-		include("./include/top_graph_header.php");
+		include_once("./plugins/mactrack/general_header.php");
 		form_confirm("Are You Sure?", "Are you sure you want to delete the SNMP Option Set(s) <strong>'" . db_fetch_cell("select name from mactrack where id=" . $_GET["id"]) . "'</strong>?", "mactrack_snmp.php", "mactrack_snmp.php?action=remove&id=" . $_GET["id"]);
 		include("./include/bottom_footer.php");
 		exit;

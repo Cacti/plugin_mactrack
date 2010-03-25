@@ -112,11 +112,7 @@ function form_save() {
 			$_POST["vendor"], $_POST["device_type"], $_POST["sysDescr_match"], $_POST["sysObjectID_match"],
 			$_POST["scanning_function"], $_POST["ip_scanning_function"], $_POST["serial_number_oid"], $_POST["lowPort"], $_POST["highPort"]);
 
-		if ((is_error_message()) || ($_POST["device_type_id"] != $_POST["_device_type_id"])) {
-			header("Location: mactrack_device_types.php?action=edit&device_type_id=" . (empty($device_type_id) ? $_POST["device_type_id"] : $device_type_id));
-		}else{
-			header("Location: mactrack_device_types.php");
-		}
+		header("Location: mactrack_device_types.php?action=edit&device_type_id=" . (empty($device_type_id) ? $_POST["device_type_id"] : $device_type_id));
 	}
 
 	if (isset($_POST["save_component_import"])) {
@@ -812,7 +808,7 @@ function mactrack_device_type_remove() {
 }
 
 function mactrack_device_type_edit() {
-	global $colors, $fields_mactrack_device_type_edit;
+	global $colors, $config, $fields_mactrack_device_type_edit;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var("device_type_id"));
@@ -837,7 +833,7 @@ function mactrack_device_type_edit() {
 	html_end_box();
 
 	if (isset($device_type)) {
-		mactrack_save_button("return", "save", "", "device_type_id");
+		mactrack_save_button("mactrack_device_types.php", "save", "", "device_type_id");
 	}else{
 		mactrack_save_button("cancel", "save", "", "device_type_id");
 	}

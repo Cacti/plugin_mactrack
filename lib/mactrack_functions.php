@@ -2405,7 +2405,8 @@ function mactrack_rescan() {
 	global $config, $colors;
 
 	$device_id = get_request_var("device_id");
-	$dbinfo    = db_fetch_row("SELECT * FROM mactrack_devices WHERE device_id=" . $device_id);
+	$ifName    = get_request_var("ifName");
+	$dbinfo    = db_fetch_row("SELECT * FROM mac_track_devices WHERE device_id=" . $device_id);
 
 	if (sizeof($dbinfo)) {
 		if ($dbinfo["disabled"] == '') {
@@ -2417,7 +2418,7 @@ function mactrack_rescan() {
 			$extra_args     = " -id=" . $dbinfo["device_id"];
 
 			/* print out the type, and device_id */
-			print "rescan!!!!" . get_request_var("device_id") . "!!!!";
+			print "rescan!!!!" . get_request_var("device_id") . "!!!!" . (strlen($ifName) ? $ifName . "!!!!":"");
 
 			/* add the cacti header */
 			print "<form action='mactrack_devices.php'>";
@@ -2538,42 +2539,48 @@ function mactrack_draw_actions_dropdown($actions_array, $include_form_end = true
 function mactrack_save_button($cancel_action = "", $action = "save", $force_type = "", $key_field = "id") {
 	global $config;
 
-	$calt = "Cancel";
+	if (substr_count($cancel_action, ".php")) {
+		$caction = $cancel_action;
+		$calt = "Return";
+		$salt = "Save";
+	}else{
+		$caction = $_SERVER['HTTP_REFERER'];
+		$calt = "Cancel";
+		if ((empty($force_type)) || ($cancel_action == "return")) {
+			if ($action == "import") {
+				$sname = "import";
+				$salt  = "Import";
+			}elseif (empty($_GET[$key_field])) {
+				$sname = "create";
+				$salt  = "Create";
+			}else{
+				$sname = "save";
+				$salt  = "Save";
+			}
 
-	if ((empty($force_type)) || ($cancel_action == "return")) {
-		if ($action == "import") {
-			$sname = "import";
-			$salt  = "Import";
-		}elseif (empty($_GET[$key_field])) {
-			$sname = "create";
-			$salt  = "Create";
-		}else{
+			if ($cancel_action == "return") {
+				$calt   = "Return";
+				$action = "save";
+			}else{
+				$calt   = "Cancel";
+			}
+		}elseif ($force_type == "save") {
 			$sname = "save";
 			$salt  = "Save";
+		}elseif ($force_type == "create") {
+			$sname = "create";
+			$salt  = "Create";
+		}elseif ($force_type == "import") {
+			$sname = "import";
+			$salt  = "Import";
 		}
-
-		if ($cancel_action == "return") {
-			$calt   = "Return";
-			$action = "save";
-		}else{
-			$calt   = "Cancel";
-		}
-	}elseif ($force_type == "save") {
-		$sname = "save";
-		$salt  = "Save";
-	}elseif ($force_type == "create") {
-		$sname = "create";
-		$salt  = "Create";
-	}elseif ($force_type == "import") {
-		$sname = "import";
-		$salt  = "Import";
 	}
 	?>
 	<table align='center' width='100%' style='background-color: #ffffff; border: 1px solid #bbbbbb;'>
 		<tr>
 			<td bgcolor="#f5f5f5" align="right">
 				<input type='hidden' name='action' value='<?php print $action;?>'>
-				<input type='button' value='<?php print $calt;?>' onClick='window.location.assign("<?php print htmlspecialchars($_SERVER['HTTP_REFERER']);?>")' name='cancel'>
+				<input type='button' value='<?php print $calt;?>' onClick='window.location.assign("<?php print htmlspecialchars($caction);?>")' name='cancel'>
 				<input type='submit' value='<?php print $salt;?>' name='<?php print $sname;?>'>
 			</td>
 		</tr>

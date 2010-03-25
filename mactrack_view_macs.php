@@ -57,10 +57,9 @@ default:
 	if (isset($_REQUEST["export_x"])) {
 		mactrack_view_export_macs();
 	}else{
-		$_REQUEST["action"] = ""; # avoid index error in top_graph_header.php
 		mactrack_redirect();
 		$title = "Device Tracking - MAC to IP Report View";
-		include_once("./include/top_graph_header.php");
+		include_once("./plugins/mactrack/general_header.php");
 
 		if (isset($_REQUEST["scan_date"]) && $_REQUEST["scan_date"] == 3) {
 			mactrack_view_aggregated_macs();

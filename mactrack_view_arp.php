@@ -49,10 +49,9 @@ default:
 	if (isset($_REQUEST["export_x"])) {
 		mactrack_view_export_ips();
 	}else{
-		$_REQUEST["action"] = ""; # avoid index error in top_graph_header.php
 		mactrack_redirect();
 		$title = "Device Tracking - ARP/IP View";
-		include_once("./include/top_graph_header.php");
+		include_once("./plugins/mactrack/general_header.php");
 		mactrack_view_ips();
 		include("./include/bottom_footer.php");
 	}

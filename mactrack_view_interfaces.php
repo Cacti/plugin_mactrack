@@ -37,7 +37,6 @@ $title = "MacTrack Plugin -> View Interfaces";
 if (isset($_REQUEST["export_x"])) {
 	mactrack_export_records();
 }else{
-	$_REQUEST["action"] = ""; # avoid index error in top_graph_header.php
 	mactrack_redirect();
 	mactrack_view();
 }
@@ -300,7 +299,7 @@ function mactrack_view() {
 	load_current_session_value("sort_column", "sess_mactrack_int_sort_column", "device_name");
 	load_current_session_value("sort_direction", "sess_mactrack_int_sort_direction", "DESC");
 
-	include_once("./include/top_graph_header.php");
+	include_once("./plugins/mactrack/general_header.php");
 	print "<script type='text/javascript' src='" . $config["url_path"] . "plugins/mactrack/mactrack.js'></script>";
 
 	$sql_where  = "";

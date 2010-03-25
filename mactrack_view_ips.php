@@ -34,10 +34,9 @@ define("MAX_DISPLAY_PAGES", 21);
 if (isset($_REQUEST["export_x"])) {
 	mactrack_view_export_ip_ranges();
 }else{
-	$_REQUEST["action"] = ""; # avoid index error in top_graph_header.php
 	mactrack_redirect();
 	$title = "Device Tracking - Site IP Range Report View";
-	include_once("./include/top_graph_header.php");
+	include_once("./plugins/mactrack/general_header.php");
 	mactrack_view_ip_ranges();
 	include_once("./include/bottom_footer.php");
 }
