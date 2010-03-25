@@ -359,7 +359,7 @@ function mactrack_database_upgrade () {
 			`present` tinyint(4) default '1',
 			PRIMARY KEY  (`local_graph_id`,`device_id`,`ifIndex`, `host_id`),
 			KEY `host_id` (`host_id`),
-			KEY `host_id` (`device_id`)
+			KEY `device_id` (`device_id`)
 			) ENGINE=MyISAM;"
 		);
 	}
