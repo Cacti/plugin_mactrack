@@ -98,6 +98,12 @@ function scan_device(device_id) {
 	getfromserver(url)
 }
 
+function scan_device_interface(device_id, ifName) {
+	url="mactrack_ajax_admin.php?action=rescan&device_id="+device_id
+	document.getElementById("r_"+device_id+"_"+ifName).src="images/view_busy.gif"
+	getfromserver(url)
+}
+
 function clearScanResults() {
 	document.getElementById("response").innerHTML="<span/>";
 }
@@ -109,21 +115,6 @@ function disable_device(device_id) {
 
 function enable_device(device_id) {
 	url="mactrack_ajax_admin.php?action=enable&device_id="+device_id
-	getfromserver(url)
-}
-
-function lock_device(device_id) {
-	url="mactrack_ajax_admin.php?action=lock&device_id="+device_id
-	getfromserver(url)
-}
-
-function unlock_device(device_id) {
-	url="mactrack_ajax_admin.php?action=unlock&device_id="+device_id
-	getfromserver(url)
-}
-
-function purge_device(device_id) {
-	url="mactrack_ajax_admin.php?action=purge&device_id="+device_id
 	getfromserver(url)
 }
 

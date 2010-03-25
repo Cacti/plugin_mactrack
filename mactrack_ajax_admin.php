@@ -24,7 +24,7 @@
 
 chdir('../../');
 include("./include/auth.php");
-include_once("./plugins/mactrack/mactrack_functions.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 /* check actions */
 if (isset($_REQUEST["action"])) {
@@ -37,9 +37,6 @@ if (isset($_REQUEST["action"])) {
 		break;
 	case "disable":
 		mactrack_disable();
-		break;
-	case "purge":
-		mactrack_purge();
 		break;
 	}
 }

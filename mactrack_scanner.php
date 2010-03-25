@@ -75,7 +75,7 @@ if (sizeof($parms) == 0) {
 	exit;
 }
 
-$debug = FALSE;
+$debug     = FALSE;
 $test_mode = FALSE;
 
 foreach($parms as $parameter) {

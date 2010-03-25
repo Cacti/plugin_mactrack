@@ -780,6 +780,10 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		mactrack_debug("Adding IfInterfaces Records");
 	}
 
+	if ($device["host_id"] > 0) {
+		mactrack_find_host_graphs($device["device_id"], $device["host_id"]);
+	}
+
 	return $ifInterfaces;
 }
 
@@ -2179,6 +2183,64 @@ function get_netscreen_arp_table($site, &$device) {
 	mactrack_debug("HOST: " . $device["hostname"] . ", IP address information collection complete");
 }
 
+function mactrack_interface_actions($device_id, $ifName) {
+	global $config, $colors;
+
+	$row = "";
+
+	$device = db_fetch_row("SELECT host_id, disabled FROM mac_track_devices WHERE device_id=" . $device_id);
+
+	if (mactrack_authorized(2121)) {
+		if ($device["disabled"] == '') {
+			$rescan = "<img id='r_" . $device_id . "_" . $ifName . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(" . $device_id . ",\"" . $ifName . "\")' title='Rescan Device' align='absmiddle' border='0'>";
+		}else{
+			$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
+		}
+	}else{
+		$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
+	}
+
+	if ($device["host_id"] != 0) {
+		/* get non-interface graphs */
+		$graphs = db_fetch_assoc("SELECT DISTINCT graph_local.id AS local_graph_id
+			FROM mac_track_interface_graphs
+			RIGHT JOIN graph_local
+			ON graph_local.host_id=mac_track_interface_graphs.host_id
+			AND graph_local.id=mac_track_interface_graphs.local_graph_id
+			WHERE graph_local.host_id=" . $device["host_id"] . " AND mac_track_interface_graphs.device_id IS NULL");
+		if (sizeof($graphs)) {
+			$url  = $config["url_path"] . "graph_view.php?action=preview&style=selective&graph_list=";
+			$list = "";
+			foreach($graphs as $graph) {
+				$list .= (strlen($list) ? ",": "") . $graph["local_graph_id"];
+			}
+			$row .= "<a href='" . htmlspecialchars($url . $list . "&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Non Interface Graphs' align='absmiddle' border='0'></a>";
+		}else{
+			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='No Non Interface Graphs in Cacti' align='absmiddle' border='0'/>";
+		}
+
+		/* get interface graphs */
+		$graphs = db_fetch_assoc("SELECT local_graph_id
+			FROM mac_track_interface_graphs
+			WHERE host_id=" . $device["host_id"] . " AND ifName=" . $ifName);
+		if (sizeof($graphs)) {
+			$url  = $config["url_path"] . "graph_view.php?action=preview&style=selective&graph_list=";
+			$list = "";
+			foreach($graphs as $graph) {
+				$list .= (strlen($list) ? ",": "") . $graph["local_graph_id"];
+			}
+			$row .= "<a href='" . htmlspecialchars($url . $list . "&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interface_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Interface Graphs' align='absmiddle' border='0'></a>";
+		}else{
+			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
+		}
+	}else{
+		$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='Device Not in Cacti' align='absmiddle' border='0'/>";
+	}
+	$row .= $rescan;
+
+	return $row;
+}
+
 function mactrack_format_interface_row($stat) {
 	global $colors, $config;
 
@@ -2202,21 +2264,7 @@ function mactrack_format_interface_row($stat) {
 		}
 	}
 
-	if (mactrack_authorized(2021)) {
-		if ($stat["disabled"] == '') {
-			$rescan = "<img id='r_" . $stat["device_id"] . "_" . $stat["interface_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(\"" . $stat["device_id"] . "_" . $stat["interface_id"] . "\")' title='Rescan Device' align='middle' border='0'>";
-
-		}else{
-			$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='middle' border='0'>";
-		}
-	}else{
-		$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='middle' border='0'>";
-	}
-
-	$row .= "<td nowrap style='width:1%;white-space:nowrap;'>";
-	$row .= $rescan;
-	$row .= "</td>";
-
+	$row .= "<td nowrap style='width:1%;white-space:nowrap;'>" . mactrack_interface_actions($stat["device_id"], $stat["ifName"]) . "</td>";
 	$row .= "<td><b>" . $stat["device_name"]                     . "</b></td>";
 	$row .= "<td>" . strtoupper($stat["device_type"])            . "</td>";
 	$row .= "<td><b>" . $stat["ifName"]                          . "</b></td>";
@@ -2272,6 +2320,83 @@ function mactrack_display_Octets($octets) {
 	$octets = substr($octets,0,5);
 
 	return $octets . " " . $suffix;
+}
+
+function mactrack_rescan() {
+	global $config, $colors;
+
+	$device_id = get_request_var("device_id");
+	$dbinfo    = db_fetch_row("SELECT * FROM mactrack_devices WHERE device_id=" . $device_id);
+
+	if (sizeof($dbinfo)) {
+		if ($dbinfo["disabled"] == '') {
+			/* log the trasaction to the database */
+			mactrack_log_action("Device Rescan '" . $dbinfo["hostname"] . "'");
+
+			/* create the command script */
+			$command_string = $config["base_path"] . "/plugins/mactrack/mactrack_scanner.php";
+			$extra_args     = " -id=" . $dbinfo["device_id"];
+
+			/* print out the type, and device_id */
+			print "rescan!!!!" . get_request_var("device_id") . "!!!!";
+
+			/* add the cacti header */
+			print "<form action='mactrack_devices.php'>";
+			html_start_box("", "100%", $colors["header"], "3", "center", "");
+			print "<input type='button' onClick='clearScanResults()' value='Clear Results'>";
+
+			/* exeucte the command, and show the results */
+			echo shell_exec($command_string . $extra_args);
+
+			/* close the box */
+			html_end_box();
+			print "</form>";
+		}
+	}
+}
+
+function mactrack_enable() {
+	/* ================= input validation ================= */
+	input_validate_input_number(get_request_var("device_id"));
+	/* ==================================================== */
+
+	$dbinfo = db_fetch_row("SELECT * FROM mac_track_devices WHERE device_id=" . $_REQUEST["device_id"]);
+
+	/* log the trasaction to the database */
+	mactrack_log_action("Device Enable '" . $dbinfo["hostname"] . "'");
+
+	db_execute("UPDATE mac_track_devices SET disabled='' WHERE device_id=" . $_REQUEST["device_id"]);
+
+	/* get the new html */
+	$html = mactrack_format_device_row($dbinfo);
+
+	/* send the response back to the browser */
+	print "enable!!!!" . $dbinfo["device_id"] . "!!!!" . $html;
+}
+
+function mactrack_disable() {
+	/* ================= input validation ================= */
+	input_validate_input_number(get_request_var("device_id"));
+	/* ==================================================== */
+
+	$dbinfo = db_fetch_row("SELECT * FROM mactrack_devices WHERE device_id=" . $_REQUEST["device_id"]);
+
+	/* log the trasaction to the database */
+	mactrack_log_action("Device Disable '" . $dbinfo["hostname"] . "'");
+
+	db_execute("UPDATE mactack_devices SET disabled='on' WHERE device_id=" . $_REQUEST["device_id"]);
+
+	/* get the new html */
+	$html = mactrack_format_device_row($stat);
+
+	/* send the response back to the browser */
+	print "disable!!!!" . $stat["device_id"] . "!!!!" . $html;
+}
+
+function mactrack_log_action($message) {
+	$user = db_fetch_row("SELECT username, full_name FROM user_auth WHERE id=" . $_SESSION["sess_user_id"]);
+
+	cacti_log("MACTRACK: " . $message . ", by '" . $user["full_name"] . "(" . $user["username"] . ")'", false, "SYSTEM");
 }
 
 function mactrack_date($date) {

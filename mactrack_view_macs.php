@@ -767,6 +767,7 @@ function mactrack_view_macs() {
 	if (strlen(read_config_option("mt_reverse_dns")) > 0) {
 		if ($_REQUEST["rows"] == 1) {
 			$display_text = array(
+				"nosort" => array("Actions", ""),
 				"device_name" => array("Switch Name", "ASC"),
 				"hostname" => array("Switch Hostname", "ASC"),
 				"ip_address" => array("ED IP Address", "ASC"),
@@ -780,6 +781,7 @@ function mactrack_view_macs() {
 				"max_scan_date" => array("Last Scan Date", "DESC"));
 		}else{
 			$display_text = array(
+				"nosort" => array("Actions", ""),
 				"device_name" => array("Switch Name", "ASC"),
 				"hostname" => array("Switch Hostname", "ASC"),
 				"ip_address" => array("ED IP Address", "ASC"),
@@ -801,6 +803,7 @@ function mactrack_view_macs() {
 	}else{
 		if ($_REQUEST["rows"] == 1) {
 			$display_text = array(
+				"nosort" => array("Actions", ""),
 				"device_name" => array("Switch Name", "ASC"),
 				"hostname" => array("Switch Hostname", "ASC"),
 				"ip_address" => array("ED IP Address", "ASC"),
@@ -813,6 +816,7 @@ function mactrack_view_macs() {
 				"max_scan_date" => array("Last Scan Date", "DESC"));
 		}else{
 			$display_text = array(
+				"nosort" => array("Actions", ""),
 				"device_name" => array("Switch Device", "ASC"),
 				"hostname" => array("Switch Hostname", "ASC"),
 				"ip_address" => array("ED IP Address", "ASC"),
@@ -846,6 +850,7 @@ function mactrack_view_macs() {
 					$port_result["port_number"] . "-" . strtotime($scan_date);
 
 			form_alternate_row_color($colors["alternate"], $colors["light"], $i, 'line' . $key); $i++;
+			form_selectable_cell(mactrack_interface_actions($port_result["device_id"], $port_result["port_number"]), $key);
 			form_selectable_cell($port_result["device_name"], $key);
 			form_selectable_cell($port_result["hostname"], $key);
 			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["ip_address"]) : $port_result["ip_address"]), $key);

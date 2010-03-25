@@ -137,6 +137,7 @@ function api_mactrack_device_remove($device_id){
 	db_execute("DELETE FROM mac_track_processes WHERE device_id=" . $device_id);
 	db_execute("DELETE FROM mac_track_temp_ports WHERE device_id=" . $device_id);
 	db_execute("DELETE FROM mac_track_vlans WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_interface_graphs WHERE device_id=" . $device_id);
 }
 
 /* ------------------------

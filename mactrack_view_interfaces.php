@@ -111,6 +111,8 @@ function mactrack_get_records(&$sql_where, $apply_limits = TRUE, $row_limit = "3
 	$sql_query = "SELECT mac_track_interfaces.*,
 		mac_track_device_types.description AS device_type,
 		mac_track_devices.device_name,
+		mac_track_devices.host_id,
+		mac_track_devices.disabled,
 		mac_track_devices.last_rundate
 		FROM mac_track_interfaces
 		INNER JOIN mac_track_devices
@@ -378,7 +380,7 @@ function mactrack_view() {
 			/* find the background color and enclose it */
 			$bgc = mactrack_int_row_color($stat);
 			if ($bgc) {
-				print "<tr id='row_" . $stat["device_id"] . "' style='background-color:#$bgc;'>\n"; $i++;
+				print "<tr id='row_" . $stat["device_id"] . "_" . $stat["ifName"] . "' style='background-color:#$bgc;'>\n"; $i++;
 			}else{
 				if (($i % 2) == 1) {
 					$current_color = $colors["alternate"];

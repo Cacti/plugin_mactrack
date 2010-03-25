@@ -344,6 +344,25 @@ function mactrack_database_upgrade () {
 			PRIMARY KEY  (`id`,`snmp_id`))
 			ENGINE=MyISAM COMMENT='Set of SNMP Options';");
 	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE 'mac_track_interface_graphs'"))) {
+		db_execute("CREATE TABLE `mac_track_interface_graphs` (
+			`device_id` int(10) unsigned NOT NULL default '0',
+			`ifIndex` int(10) unsigned NOT NULL,
+			`ifName` varchar(20) NOT NULL default '',
+			`host_id` int(11) NOT NULL default '0',
+			`local_graph_id` int(10) unsigned NOT NULL,
+			`snmp_query_id` int(11) NOT NULL default '0',
+			`graph_template_id` int(11) NOT NULL default '0',
+			`field_name` varchar(20) NOT NULL default '',
+			`field_value` varchar(25) NOT NULL default '',
+			`present` tinyint(4) default '1',
+			PRIMARY KEY  (`local_graph_id`,`device_id`,`ifIndex`, `host_id`),
+			KEY `host_id` (`host_id`),
+			KEY `host_id` (`device_id`)
+			) ENGINE=MyISAM;"
+		);
+	}
 }
 
 function mactrack_check_dependencies() {
@@ -770,12 +789,31 @@ function mactrack_setup_table_new () {
 			PRIMARY KEY  (`id`,`snmp_id`))
 			ENGINE=MyISAM COMMENT='Set of SNMP Options';");
 	}
+
+	if (!sizeof(db_fetch_row("SHOW TABLES LIKE 'mac_track_interface_graphs'"))) {
+		db_execute("CREATE TABLE `mac_track_interface_graphs` (
+			`device_id` int(10) unsigned NOT NULL default '0',
+			`ifIndex` int(10) unsigned NOT NULL,
+			`ifName` varchar(20) NOT NULL default '',
+			`host_id` int(11) NOT NULL default '0',
+			`local_graph_id` int(10) unsigned NOT NULL,
+			`snmp_query_id` int(11) NOT NULL default '0',
+			`graph_template_id` int(11) NOT NULL default '0',
+			`field_name` varchar(20) NOT NULL default '',
+			`field_value` varchar(25) NOT NULL default '',
+			`present` tinyint(4) default '1',
+			PRIMARY KEY  (`local_graph_id`,`device_id`,`ifIndex`, `host_id`),
+			KEY `host_id` (`host_id`),
+			KEY `host_id` (`device_id`)
+			) ENGINE=MyISAM;"
+		);
+	}
 }
 
 function mactrack_version () {
 	return array(
 		'name'      => 'mactrack',
-		'version'   => '2.2.0',
+		'version'   => '2.3',
 		'longname'  => 'Device Tracking',
 		'author'    => 'Larry Adams',
 		'homepage'  => 'http://cacti.net',
@@ -1208,6 +1246,7 @@ function mactrack_config_arrays () {
 	$user_auth_realm_filenames['mactrack_view_sites.php']      = 2120;
 	$user_auth_realm_filenames['mactrack_view_devices.php']    = 2120;
 	$user_auth_realm_filenames['mactrack_view_interfaces.php'] = 2120;
+	$user_auth_realm_filenames['mactrack_ajax_admin.php']      = 2121;
 	$user_auth_realm_filenames['mactrack_devices.php']         = 2121;
 	$user_auth_realm_filenames['mactrack_snmp.php']            = 2121;
 	$user_auth_realm_filenames['mactrack_sites.php']           = 2121;
