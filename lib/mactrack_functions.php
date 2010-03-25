@@ -2301,7 +2301,7 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 		/* get interface graphs */
 		$graphs = db_fetch_assoc("SELECT local_graph_id
 			FROM mac_track_interface_graphs
-			WHERE host_id=" . $device["host_id"] . " AND ifName=" . $ifName);
+			WHERE host_id=" . $device["host_id"] . " AND ifName='" . $ifName . "'");
 		if (sizeof($graphs)) {
 			$url  = $config["url_path"] . "graph_view.php?action=preview&style=selective&graph_list=";
 			$list = "";
