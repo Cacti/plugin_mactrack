@@ -409,7 +409,7 @@ function mactrack_site_edit() {
 	html_end_box();
 
 	if (isset($site)) {
-		mactrack_save_button("mactrack_site.php", "save", "", "site_id");
+		mactrack_save_button("mactrack_sites.php", "save", "", "site_id");
 	}else{
 		mactrack_save_button("cancel", "save", "", "site_id");
 	}
