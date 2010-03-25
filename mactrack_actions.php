@@ -23,15 +23,15 @@
  */
 
 function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
-$device_name, $scan_type, $snmp_options, $snmp_readstring,
-$snmp_version, $snmp_username, $snmp_password, $snmp_auth_protocol,
-$snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context,
-$snmp_port, $snmp_timeout, $snmp_retries, $max_oids,
-$ignorePorts, $notes, $user_name, $user_password,
-$disabled) {
+	$device_name, $scan_type, $snmp_options, $snmp_readstring,
+	$snmp_version, $snmp_username, $snmp_password, $snmp_auth_protocol,
+	$snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context,
+	$snmp_port, $snmp_timeout, $snmp_retries, $max_oids,
+	$ignorePorts, $notes, $user_name, $user_password, $term_type,
+	$private_key_path, $disabled) {
 	global $config;
 	include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_functions.php");
-	
+
 	$save["device_id"] = $device_id;
 	$save["host_id"] = $host_id;
 	$save["site_id"] = $site_id;
@@ -55,6 +55,8 @@ $disabled) {
 	$save["user_name"] = form_input_validate($user_name, "user_name", "", true, 3);
 	$save["user_password"] = form_input_validate($user_password, "user_password", "", true, 3);
 	$save["ignorePorts"] = form_input_validate($ignorePorts, "ignorePorts", "", true, 3);
+	$save["term_type"] = form_input_validate($term_type, "term_type", "", true, 3);
+	$save["private_key_path"] = form_input_validate($private_key_path, "private_key_path", "", true, 3);
 	$save["disabled"] = form_input_validate($disabled, "disabled", "", true, 3);
 
 	$device_id = 0;
@@ -71,7 +73,7 @@ $disabled) {
 	} else {
 		mactrack_debug("ERROR: Cacti Device: ($device_id/$host_id): $hostname, error on verify: " . serialize($save));
 	}
-	
+
 	return $device_id;
 }
 
@@ -140,6 +142,8 @@ function sync_cacti_to_mactrack($device) {
 			$device["notes"],
 			$mt_device["user_name"], 			# not a host column
 			$mt_device["user_password"],		# not a host column
+			$mt_device["term_type"],
+			$mt_device["private_key_path"],
 			(isset($mt_device["disabled"]) ? $mt_device["disabled"] : "")); # not a host column
 
 			mactrack_debug("MacTrack device: (" . $mt_device["device_id"] . ") successfully updated");
@@ -253,6 +257,8 @@ function mactrack_device_action_execute($action) {
 					$device["notes"],
 					$_POST["user_name"], 			# not a host column
 					$_POST["user_password"],		# not a host column
+					$_POST["term_type"],
+					$_POST["private_key_path"],
 					(isset($_POST["disabled"]) ? $_POST["disabled"] : "")); # not a host column
 
 				}

@@ -850,7 +850,7 @@ function mactrack_view_macs() {
 					$port_result["port_number"] . "-" . strtotime($scan_date);
 
 			form_alternate_row_color($colors["alternate"], $colors["light"], $i, 'line' . $key); $i++;
-			form_selectable_cell(mactrack_interface_actions($port_result["device_id"], $port_result["port_number"]), $key);
+			form_selectable_cell(mactrack_interface_actions($port_result["device_id"], $port_result["port_number"], FALSE), $key);
 			form_selectable_cell($port_result["device_name"], $key);
 			form_selectable_cell($port_result["hostname"], $key);
 			form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $port_result["ip_address"]) : $port_result["ip_address"]), $key);

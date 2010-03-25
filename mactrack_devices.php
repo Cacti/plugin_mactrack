@@ -99,7 +99,7 @@ function form_mactrack_save() {
 			$_POST["snmp_priv_passphrase"], $_POST["snmp_priv_protocol"], $_POST["snmp_context"],
 			$_POST["snmp_port"], $_POST["snmp_timeout"],
 			$_POST["snmp_retries"], $_POST["max_oids"], $_POST["ignorePorts"],
-			$_POST["notes"], $_POST["user_name"], $_POST["user_password"],
+			$_POST["notes"], $_POST["user_name"], $_POST["user_password"], $_POST["term_type"], $_POST["private_key_path"],
 			(isset($_POST["disabled"]) ? $_POST["disabled"] : ""));
 
 		if ((is_error_message()) || ($_POST["device_id"] != $_POST["_device_id"])) {

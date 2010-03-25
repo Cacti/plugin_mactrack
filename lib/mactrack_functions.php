@@ -2183,21 +2183,24 @@ function get_netscreen_arp_table($site, &$device) {
 	mactrack_debug("HOST: " . $device["hostname"] . ", IP address information collection complete");
 }
 
-function mactrack_interface_actions($device_id, $ifName) {
+function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 	global $config, $colors;
 
-	$row = "";
+	$row    = "";
+	$rescan = "";
 
 	$device = db_fetch_row("SELECT host_id, disabled FROM mac_track_devices WHERE device_id=" . $device_id);
 
-	if (mactrack_authorized(2121)) {
-		if ($device["disabled"] == '') {
-			$rescan = "<img id='r_" . $device_id . "_" . $ifName . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(" . $device_id . ",\"" . $ifName . "\")' title='Rescan Device' align='absmiddle' border='0'>";
+	if ($show_rescan) {
+		if (mactrack_authorized(2121)) {
+			if ($device["disabled"] == '') {
+				$rescan = "<img id='r_" . $device_id . "_" . $ifName . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(" . $device_id . ",\"" . $ifName . "\")' title='Rescan Device' align='absmiddle' border='0'>";
+			}else{
+				$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
+			}
 		}else{
 			$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
 		}
-	}else{
-		$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
 	}
 
 	if ($device["host_id"] != 0) {

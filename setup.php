@@ -363,6 +363,9 @@ function mactrack_database_upgrade () {
 			) ENGINE=MyISAM;"
 		);
 	}
+
+	mactrack_add_column("mac_track_devices", "term_type",        "ALTER TABLE `mac_track_devices` ADD COLUMN `term_type` tinyint(11) NOT NULL default '1' AFTER `scan_type`");
+	mactrack_add_column("mac_track_devices", "private_key_path", "ALTER TABLE `mac_track_devices` ADD COLUMN `private_key_path` varchar(128) default '' AFTER `user_password`");
 }
 
 function mactrack_check_dependencies() {
@@ -417,8 +420,10 @@ function mactrack_setup_table_new () {
 			`ports_trunk` int(10) unsigned NOT NULL default '0',
 			`macs_active` int(10) unsigned NOT NULL default '0',
 			`scan_type` tinyint(11) NOT NULL default '1',
+			`term_type` tinyint(11) NOT NULL default '1',
 			`user_name` varchar(40) default NULL,
 			`user_password` varchar(40) default NULL,
+			`private_key_path` varchar(128) default '',
 			`snmp_options` int(10) unsigned NOT NULL default '0',
 			`snmp_readstring` varchar(100) NOT NULL,
 			`snmp_readstrings` varchar(255) default NULL,
@@ -1703,7 +1708,15 @@ function mactrack_config_form () {
 	$fields_mactrack_device_edit += array(
 	"spacer4" => array(
 		"method" => "spacer",
-		"friendly_name" => "Custom Authentication"
+		"friendly_name" => "Connectivity Options"
+		),
+	"term_type" => array(
+		"method" => "drop_array",
+		"friendly_name" => "Terminal Type",
+		"description" => "Choose the terminal type that you use to connect to this device.",
+		"value" => "|arg1:term_type|",
+		"default" => 1,
+		"array" => array(0 => "None", 1 => "Telnet", 2 => "SSH", 3 => "HTTP", 4 => "HTTPS")
 		),
 	"user_name" => array(
 		"method" => "textbox",
@@ -1722,6 +1735,15 @@ function mactrack_config_form () {
 		"default" => "",
 		"max_length" => "40",
 		"size" => "20"
+		),
+	"private_key_path" => array(
+		"method" => "filepath",
+		"friendly_name" => "Private Key Path",
+		"description" => "The path to the private key used for SSH authentication.",
+		"value" => "|arg1:private_key_path|",
+		"default" => "",
+		"max_length" => "128",
+		"size" => "40"
 		),
 	"device_id" => array(
 		"method" => "hidden_zero",
