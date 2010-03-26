@@ -181,6 +181,7 @@ function mactrack_view_graphs() {
 
 	/* include graph view filter selector */
 	display_output_messages();
+	mactrack_tabs();
 	html_start_box("<strong>Network Device Graphs</strong>", "100%", $colors["header"], "1", "center", "");
 	mactrack_graph_view_filter();
 
