@@ -831,10 +831,10 @@ function mactrack_page_head() {
 	global $config;
 
 	if (!isset($config["base_path"])) {
-		print "<script type='text/javascript' src='" . URL_PATH . "plugins/mactrack/mactrack.js'></script>";
+		print "<script type='text/javascript' src='" . URL_PATH . "plugins/mactrack/mactrack.js'></script>\n";
 	}else{
-		print "<link type='text/css' href='" . $config["url_path"] . "plugins/mactrack/mactrack.css' rel='stylesheet'>";
-		print "<script type='text/javascript' src='" . $config["url_path"] . "plugins/mactrack/mactrack.js'></script>";
+		print "<link type='text/css' href='" . $config["url_path"] . "plugins/mactrack/mactrack.css' rel='stylesheet'>\n";
+		print "<script type='text/javascript' src='" . $config["url_path"] . "plugins/mactrack/mactrack.js'></script>\n";
 	}
 }
 
@@ -1216,6 +1216,7 @@ function mactrack_draw_navigation_text ($nav) {
 	$nav["mactrack_utilities.php:mactrack_utilities_recreate_aggregated_data"] = array("title" => "Truncate and ReCreate Aggregated Port Results Table", "mapping" => "index.php:,mactrack_utilities.php:", "url" => "mactrack_utilities.php", "level" => "2");
 	$nav["mactrack_utilities.php:mactrack_proc_status"] = array("title" => "View MacTrack Process Status", "mapping" => "index.php:,mactrack_utilities.php:", "url" => "mactrack_utilities.php", "level" => "2");
 	$nav["mactrack_utilities.php:mactrack_refresh_oui_database"] = array("title" => "Refresh/Update Vendor MAC Database from IEEE", "mapping" => "index.php:,mactrack_utilities.php:", "url" => "mactrack_utilities.php", "level" => "2");
+	$nav["mactrack_view_graphs.php:"] = array("title" => "MacTrack Graph Viewer", "mapping" => "mactrack_view_macs.php:", "url" => "mactrack_view_graphs.php", "level" => "1");
 	return $nav;
 }
 
@@ -1251,6 +1252,7 @@ function mactrack_config_arrays () {
 	$user_auth_realm_filenames['mactrack_view_sites.php']      = 2120;
 	$user_auth_realm_filenames['mactrack_view_devices.php']    = 2120;
 	$user_auth_realm_filenames['mactrack_view_interfaces.php'] = 2120;
+	$user_auth_realm_filenames['mactrack_view_graphs.php']     = 2120;
 	$user_auth_realm_filenames['mactrack_ajax_admin.php']      = 2121;
 	$user_auth_realm_filenames['mactrack_devices.php']         = 2121;
 	$user_auth_realm_filenames['mactrack_snmp.php']            = 2121;

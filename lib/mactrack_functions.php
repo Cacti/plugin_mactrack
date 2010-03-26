@@ -2288,7 +2288,7 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 			AND graph_local.id=mac_track_interface_graphs.local_graph_id
 			WHERE graph_local.host_id=" . $device["host_id"] . " AND mac_track_interface_graphs.device_id IS NULL");
 		if (sizeof($graphs)) {
-			$url  = $config["url_path"] . "graph_view.php?action=preview&style=selective&graph_list=";
+			$url  = $config["url_path"] . "plugins/mactrack/mactrack_view_graphs.php?style=selective&graph_list=";
 			$list = "";
 			foreach($graphs as $graph) {
 				$list .= (strlen($list) ? ",": "") . $graph["local_graph_id"];
@@ -2303,7 +2303,7 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 			FROM mac_track_interface_graphs
 			WHERE host_id=" . $device["host_id"] . " AND ifName='" . $ifName . "'");
 		if (sizeof($graphs)) {
-			$url  = $config["url_path"] . "graph_view.php?action=preview&style=selective&graph_list=";
+			$url  = $config["url_path"] . "plugins/mactrack/mactrack_view_graphs.php?style=selective&graph_list=";
 			$list = "";
 			foreach($graphs as $graph) {
 				$list .= (strlen($list) ? ",": "") . $graph["local_graph_id"];

@@ -60,8 +60,12 @@ $page_title = api_plugin_hook_function('page_title', 'Cacti');
 		print "<meta http-equiv=refresh content='" . $refresh . "'>\r\n";
 	}
 	?>
-	<link href="<?php echo $config['url_path']; ?>include/main.css" rel="stylesheet">
-	<link href="<?php echo $config['url_path']; ?>images/favicon.ico" rel="shortcut icon"/>
+	<link href='<?php echo $config["url_path"]; ?>include/main.css' rel='stylesheet'>
+	<link href='<?php echo $config["url_path"]; ?>images/favicon.ico' rel='shortcut icon'>
+	<script type='text/javascript' src='<?php echo $config["url_path"]; ?>plugins/mactrack/jquery.js'></script>
+	<script type='text/javascript' src='<?php echo $config["url_path"]; ?>include/jscalendar/calendar.js'></script>
+	<script type='text/javascript' src='<?php echo $config["url_path"]; ?>include/jscalendar/lang/calendar-en.js'></script>
+	<script type='text/javascript' src='<?php echo $config["url_path"]; ?>include/jscalendar/calendar-setup.js'></script>
 	<?php api_plugin_hook('page_head'); ?>
 </head>
 <?php if ($oper_mode == OPER_MODE_NATIVE) {?>
