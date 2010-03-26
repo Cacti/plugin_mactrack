@@ -1217,6 +1217,7 @@ function mactrack_draw_navigation_text ($nav) {
 	$nav["mactrack_utilities.php:mactrack_proc_status"] = array("title" => "View MacTrack Process Status", "mapping" => "index.php:,mactrack_utilities.php:", "url" => "mactrack_utilities.php", "level" => "2");
 	$nav["mactrack_utilities.php:mactrack_refresh_oui_database"] = array("title" => "Refresh/Update Vendor MAC Database from IEEE", "mapping" => "index.php:,mactrack_utilities.php:", "url" => "mactrack_utilities.php", "level" => "2");
 	$nav["mactrack_view_graphs.php:"] = array("title" => "MacTrack Graph Viewer", "mapping" => "mactrack_view_macs.php:", "url" => "mactrack_view_graphs.php", "level" => "1");
+	$nav["mactrack_view_graphs.php:preview"] = array("title" => "MacTrack Graph Viewer", "mapping" => "mactrack_view_macs.php:", "url" => "mactrack_view_graphs.php", "level" => "1");
 	return $nav;
 }
 

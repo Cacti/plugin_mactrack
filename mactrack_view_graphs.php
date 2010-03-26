@@ -27,6 +27,9 @@ chdir("../../");
 include("./include/auth.php");
 include("./lib/html_tree.php");
 include("./include/html/inc_timespan_settings.php");
+
+if (!isset($_REQUEST["action"])) $_REQUEST["action"] = "";
+
 include("./plugins/mactrack/general_header.php");
 mactrack_view_graphs();
 include_once("./include/bottom_footer.php");
@@ -82,7 +85,8 @@ function mactrack_view_graphs() {
 	if (read_config_option("auth_method") != 0) {
 		$sql_where = "WHERE " . get_graph_permissions_sql($current_user["policy_graphs"], $current_user["policy_hosts"], $current_user["policy_graph_templates"]);
 
-		$sql_join = "LEFT JOIN graph_templates
+		$sql_join = "LEFT JOIN host ON (host.id=graph_local.host_id)
+			LEFT JOIN graph_templates
 			ON (graph_templates.id=graph_local.graph_template_id)
 			LEFT JOIN user_auth_perms
 			ON ((graph_templates_graph.local_graph_id=user_auth_perms.item_id
@@ -142,7 +146,7 @@ function mactrack_view_graphs() {
 		$sql_where
 		" . (empty($sql_where) ? "WHERE" : "AND") . "   graph_templates_graph.local_graph_id > 0
 		AND graph_templates_graph.local_graph_id=graph_local.id
-		AND graph_templates_graph.title_cache like '%%" . $_REQUEST["filter"] . "%%'
+		" . (strlen($_REQUEST["filter"]) ? "AND graph_templates_graph.title_cache like '%%" . $_REQUEST["filter"] . "%%'":"") . "
 		" . (empty($_REQUEST["graph_template_id"]) ? "" : " and graph_local.graph_template_id=" . $_REQUEST["graph_template_id"]) . "
 		$sql_or";
 
