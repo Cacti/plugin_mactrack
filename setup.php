@@ -1254,6 +1254,7 @@ function mactrack_config_arrays () {
 	$user_auth_realm_filenames['mactrack_view_devices.php']    = 2120;
 	$user_auth_realm_filenames['mactrack_view_interfaces.php'] = 2120;
 	$user_auth_realm_filenames['mactrack_view_graphs.php']     = 2120;
+	$user_auth_realm_filenames['mactrack_ajax.php']            = 2120;
 	$user_auth_realm_filenames['mactrack_ajax_admin.php']      = 2121;
 	$user_auth_realm_filenames['mactrack_devices.php']         = 2121;
 	$user_auth_realm_filenames['mactrack_snmp.php']            = 2121;

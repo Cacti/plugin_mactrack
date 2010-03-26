@@ -24,31 +24,17 @@
 
 chdir('../../');
 include("./include/auth.php");
-include_once("./plugins/mactrack/mactrack_functions.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 /* check actions */
 if (isset($_REQUEST["action"])) {
-        switch ($_REQUEST["action"]) {
-        case "enable":
-                mactrack_enable();
-                break;
-        case "disable":
-                mactrack_disable();
-                break;
-        case "createcacti":
-                mactrack_createcacti();
-                break;
-        case "rescan":
-                mactrack_rescan();
-                break;
-        case "unlock":
-                mactrack_unlock();
-                break;
-        case "lock":
-                mactrack_lock();
-                break;
-        case "purge":
-                mactrack_purge();
-                break;
-        }
+	switch ($_REQUEST["action"]) {
+	case "save_graph_settings":
+		mactrack_save_graph_settings();
+		break;
+	}
+}
+
+function mactrack_save_graph_settings() {
+	echo "Hello";
 }

@@ -311,6 +311,8 @@ function mactrack_graph_view_filter() {
 					<td>
 						&nbsp;<input type="submit" name="go" value="Go">
 						<input type="submit" name="clear_x" value="Clear">
+						<input type="button" name="save" value="Save" onclick='saveGraphSettings()'>
+						<input type="submit" name="defaults" value="Defaults">
 					</td>
 				</tr>
 			</table>

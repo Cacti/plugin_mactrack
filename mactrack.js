@@ -118,6 +118,27 @@ function enable_device(device_id) {
 	getfromserver(url)
 }
 
+function saveGraphSettings() {
+	filter=document.form_graph_view.filter.value;
+	graph_template_id=document.form_graph_view.filter.value;
+//	image_size=document.form_graph_view.image_size.value;
+//	rows=document.form_graph_view.rows.value;
+//	preview=document.form_graph_view.preview.checked;
+	timespan=document.form_timespan_selector.predefined_timespan.value;
+	timeshift=document.form_timespan_selector.predefined_timeshift.value;
+
+	url="mactrack_ajax.php?action=save_graph_settings" +
+		"&filter=" + filter +
+		"graph_template_id=" + graph_template_id +
+//		"image_size=" + image_size +
+//		"rows=" + rows +
+//		"preview=" + preview +
+		"predefined_timespan=" + timespan +
+		"predefined_timeshift=" + timeshift;
+
+	getfromserver(url)
+}
+
 function stateChanged() {
 	if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete") {
 		reply     = xmlHttp.responseText
