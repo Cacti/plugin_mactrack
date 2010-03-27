@@ -22,10 +22,12 @@
  +-------------------------------------------------------------------------+
 */
 
-/* register this functions scanning functions */
+/* register these scanning functions */
+global $mactrack_scanning_functions;
 if (!isset($mactrack_scanning_functions)) { $mactrack_scanning_functions = array(); }
 array_push($mactrack_scanning_functions, "get_generic_dot1q_switch_ports", "get_generic_switch_ports", "get_generic_wireless_ports");
 
+global $mactrack_scanning_functions_ip;
 if (!isset($mactrack_scanning_functions_ip)) { $mactrack_scanning_functions_ip = array(); }
 array_push($mactrack_scanning_functions_ip, "get_standard_arp_table", "get_netscreen_arp_table");
 
@@ -43,7 +45,7 @@ function mactrack_debug($message) {
 }
 
 function mactrack_rebuild_scanning_funcs() {
-	global $config;
+	global $config, $mactrack_scanning_functions_ip, $mactrack_scanning_functions;
 
 	if (defined('CACTI_BASE_PATH')) {
 		$config["base_path"] = CACTI_BASE_PATH;
