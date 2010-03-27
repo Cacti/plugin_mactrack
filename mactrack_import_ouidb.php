@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2009 The Cacti Group                                 |
+ | Copyright (C) 2004-2010 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -88,7 +88,7 @@ if (strlen($oui_file)) {
 /*	display_help - displays the usage of the function */
 function display_help () {
 	$version = mactrack_version();
-	print "MacTrack Import OUI Database v" . $version["version"] . ", Copyright 2006-2009 - The Cacti Group, Inc.\n\n";
+	print "MacTrack Import OUI Database v" . $version["version"] . ", Copyright 2004-2010 - The Cacti Group\n\n";
 	print "usage: mactrack_import_ouidb.php [-f=ouifile] [-h] [--help] [-v] [-V] [--version]\n\n";
 	print "-f='outdbfile'   - Specify the location of the OUI dataabase file.  If your system\n";
 	print "                   does not allow native access to the IEEE via http, you can manually\n";

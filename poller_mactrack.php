@@ -2,7 +2,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2009 The Cacti Group                                 |
+ | Copyright (C) 2004-2010 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -213,7 +213,7 @@ if (read_config_option("mt_collection_timing") != "disabled") {
 /*	display_help - displays the usage of the function */
 function display_help () {
 	$version = mactrack_version();
-	print "MacTrack Master Poller v" . $version["version"] . ", Copyright 2006-2009 - The Cacti Group, Inc.\n\n";
+	print "MacTrack Master Poller v" . $version["version"] . ", Copyright 2004-2010 - The Cacti Group\n\n";
 	print "usage: poller_mactrack.php [-sid=site_id] [-d] [-h] [--help] [-v] [--version]\n\n";
 	print "-sid=site_id  - the mac_track_sites site_id to scan\n";
 	print "-f            - Force the execution of a collection process\n";
