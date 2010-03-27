@@ -364,10 +364,32 @@ function mactrack_view_devices() {
 	$i = 0;
 	if (sizeof($devices) > 0) {
 		foreach ($devices as $device) {
+			$hostinfo["hostname"] = $device["hostname"];
+			$hostinfo["user"]     = $device["user_name"];
+			switch($device["term_type"]) {
+			case 0:
+				$hostinfo["transport"] = "none";
+				break;
+			case 1:
+				$hostinfo["transport"] = "telnet";
+				break;
+			case 2:
+				$hostinfo["transport"] = "ssh";
+				break;
+			case 3:
+				$hostinfo["transport"] = "http";
+				break;
+			case 4:
+				$hostinfo["transport"] = "https";
+				break;
+			}
+
 			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 				?>
 				<td width=100>
-					<?php if (mactrack_authorized(2121)) {?><a href='<?php print $webroot . "plugins/mactrack/mactrack_devices.php?action=edit&device_id=" . $device['device_id'];?>' title='Edit Device'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/edit_object.png'></a><?php } ?>
+					<?php if (mactrack_authorized(2121)) {?>
+					<a href='<?php print $webroot . "plugins/mactrack/mactrack_devices.php?action=edit&device_id=" . $device['device_id'];?>' title='Edit Device'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/edit_object.png'></a>
+					<?php api_plugin_hook_function('remote_link', $hostinfo); } ?>
 					<?php if ($device["host_id"] > 0) {?>
 					<a href='<?php print $webroot . "graph_view.php?action=preview&host_id=" . $device["host_id"] . "&graph_template_id=0&filter=";?>' title='View Graphs'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_graphs.gif'></a>
 					<?php }else{?>
