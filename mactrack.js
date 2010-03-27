@@ -98,6 +98,12 @@ function scan_device(device_id) {
 	getfromserver(url)
 }
 
+function site_scan(site_id) {
+	url="mactrack_ajax_admin.php?action=site_scan&site_id="+site_id
+	document.getElementById("r_"+site_id).src="images/view_busy.gif"
+	getfromserver(url)
+}
+
 function scan_device_interface(device_id, ifName) {
 	url="mactrack_ajax_admin.php?action=rescan&device_id="+device_id+"&ifName="+ifName
 	document.getElementById("r_"+device_id+"_"+ifName).src="images/view_busy.gif"
@@ -144,15 +150,18 @@ function stateChanged() {
 		reply     = xmlHttp.responseText
 		reply     = reply.split("!!!!")
 		type      = reply[0]
-		device_id = reply[1]
-		ifName    = reply[2]
-		content   = reply[3]
 
-		if ((type == "enable") || (type == "disable") || (type == "lock") || (type == "unlock")) {
+		if ((type == "enable") || (type == "disable")) {
 			document.getElementById("row_"+device_id).innerHTML=content
-		} else if (type == "purge") {
-			document.view_mactrack.submit();
+		} else if (type == "sitescan") {
+			site_id=reply[1]
+			content=reply[2]
+			document.getElementById("r_"+site_id).src="images/rescan_site.gif"
+			document.getElementById("response").innerHTML=content
 		} else if (type == "rescan") {
+			device_id=reply[1]
+			ifName=reply[2]
+			content=reply[3]
 			document.getElementById("r_"+device_id+"_"+ifName).src="images/rescan_device.gif"
 			document.getElementById("response").innerHTML=content
 		}

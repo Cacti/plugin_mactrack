@@ -51,24 +51,23 @@ define("DEVICE_ROUTER", 3);
 $parms = $_SERVER["argv"];
 array_shift($parms);
 
-$debug = FALSE;
+$debug   = FALSE;
+$site_id = '';
 
 foreach($parms as $parameter) {
 	@list($arg, $value) = @explode("=", $parameter);
 
 	switch ($arg) {
+	case "-sid":
+		$site_id = $value;
+		break;
 	case "-d":
+	case "--debug":
 		$debug = TRUE;
 		break;
 	case "-h":
-		display_help();
-		exit;
 	case "-v":
-		display_help();
-		exit;
 	case "--version":
-		display_help();
-		exit;
 	case "--help":
 		display_help();
 		exit;
@@ -81,10 +80,10 @@ foreach($parms as $parameter) {
 
 /* check if you need to run or not */
 if (read_config_option("mt_reverse_dns") == "on") {
-	$timeout = read_config_option("mt_dns_timeout");
-	$dns_primary = read_config_option("mt_dns_primary");
-	$dns_secondary = read_config_option("mt_dns_secondary");
-	$primary_down = FALSE;
+	$timeout        = read_config_option("mt_dns_timeout");
+	$dns_primary    = read_config_option("mt_dns_primary");
+	$dns_secondary  = read_config_option("mt_dns_secondary");
+	$primary_down   = FALSE;
 	$secondary_down = FALSE;
 }else{
 	exit;
@@ -92,6 +91,12 @@ if (read_config_option("mt_reverse_dns") == "on") {
 
 /* place a process marker in the database for the ip resolver */
 db_process_add(0, TRUE);
+
+if ($site_id != '') {
+	$sql_where = "AND site_id=$site_id";
+}else{
+	$sql_where = "";
+}
 
 /* loop until you are it */
 while (1) {
@@ -103,6 +108,7 @@ while (1) {
 		COUNT(last_rundate) AS devices
 		FROM mac_track_devices
 		WHERE disabled = ''
+		$sql_where
 		GROUP BY last_rundate
 		ORDER BY last_rundate DESC;");
 
@@ -187,8 +193,9 @@ exit;
 /*	display_help - displays the usage of the function */
 function display_help () {
 	print "Network MacTracker IP Resolver Version 1.0, Copyright 2004-2010 - The Cacti Group\n\n";
-	print "usage: mactrack_resolver.php [-d] [-h] [--help] [-v] [--version]\n\n";
-	print "-d            - Display verbose output during execution\n";
+	print "usage: mactrack_resolver.php [-sid=ID] [-d] [-h] [--help] [-v] [--version]\n\n";
+	print "-sid=ID       - The site id to resolve for\n";
+	print "-d | --debug  - Display verbose output during execution\n";
 	print "-v --version  - Display this help message\n";
 	print "-h --help     - display this help message\n";
 }

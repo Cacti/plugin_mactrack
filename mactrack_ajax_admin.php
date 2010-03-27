@@ -29,6 +29,9 @@ include_once("./plugins/mactrack/lib/mactrack_functions.php");
 /* check actions */
 if (isset($_REQUEST["action"])) {
 	switch ($_REQUEST["action"]) {
+	case "site_scan":
+		mactrack_site_scan();
+		break;
 	case "rescan":
 		mactrack_rescan();
 		break;

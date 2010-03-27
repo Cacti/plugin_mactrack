@@ -61,15 +61,17 @@ db_execute("delete from mac_track_processes where start_date < '" . $delete_time
 putenv("MIBS=RFC-1215");
 
 if (read_config_option("mt_collection_timing") != "disabled") {
+	global $debug, $web;
+
 	/* initialize variables */
-	$site_id = "";
+	$site_id  = "";
+	$debug    = FALSE;
+	$forcerun = FALSE;
+	$web      = FALSE;
 
 	/* process calling arguments */
 	$parms = $_SERVER["argv"];
 	array_shift($parms);
-
-	$debug = FALSE;
-	$forcerun = FALSE;
 
 	foreach($parms as $parameter) {
 		@list($arg, $value) = @explode("=", $parameter);
@@ -79,20 +81,20 @@ if (read_config_option("mt_collection_timing") != "disabled") {
 			$site_id = $value;
 			break;
 		case "-d":
+		case "--debug":
 			$debug = TRUE;
 			break;
-		case "-h":
-			display_help();
-			exit;
 		case "-f":
+		case "--force":
 			$forcerun = TRUE;
 			break;
+		case "-w":
+		case "--web":
+			$web = TRUE;
+			break;
+		case "-h":
 		case "-v":
-			display_help();
-			exit;
 		case "--version":
-			display_help();
-			exit;
 		case "--help":
 			display_help();
 			exit;
@@ -103,109 +105,129 @@ if (read_config_option("mt_collection_timing") != "disabled") {
 		}
 	}
 
-	mactrack_debug("About to enter MacTrack poller processing");
-	$seconds_offset = read_config_option("mt_collection_timing");
-	if (($seconds_offset <> "disabled") || $forcerun) {
-		mactrack_debug("Into Processing.  Checking to determine if it's time to run.");
-		$seconds_offset           = $seconds_offset * 60;
-		/* find out if it's time to collect device information */
-		$base_start_time          = read_config_option("mt_base_time");
-		$database_maint_time      = read_config_option("mt_maint_time");
-		$last_run_time            = read_config_option("mt_last_run_time");
-		$last_db_maint_time       = read_config_option("mt_last_db_maint_time");
-		$previous_base_start_time = read_config_option("mt_prev_base_time");
-		$previous_db_maint_time   = read_config_option("mt_prev_db_maint_time");
+	/* for manual scans, verify if we should run or not */
+	$running_processes = db_fetch_cell("SELECT count(*) FROM mac_track_processes");
+	if ($running_processes) {
+		$start_date = db_fetch_cell("SELECT MIN(start_date) FROM mac_track_processes");
 
-		/* see if the user desires a new start time */
-		mactrack_debug("Checking if user changed the start time");
-		if (!empty($previous_base_start_time)) {
-			if ($base_start_time <> $previous_base_start_time) {
-				mactrack_debug("Detected that user changed the start time\n");
-				unset($last_run_time);
-				db_execute("DELETE FROM settings WHERE name='mt_last_run_time'");
-			}
+		if (strtotime($start_date) > (time() - 900) && !$forcerun) {
+			mactrack_debug("ERROR: Can not start MAC Tracking process.  There is already one in progress");
+			exit;
+		}else if ($forcerun) {
+			mactrack_debug("WARNING: Forcing Collection although Collection Appears in Process", TRUE, "MACTRACK");
+			db_execute("TRUNCATE mac_track_processes");
+		}else{
+			mactrack_debug("WARNING: Stale data found in MacTrack process table", TRUE, "MACTRACK");
+			db_execute("TRUNCATE mac_track_processes");
 		}
+	}
 
-		/* see if the user desires a new db maintenance time */
-		mactrack_debug("Checking if user changed the maintenance time");
-		if (!empty($previous_db_maint_time)) {
-			if ($database_maint_time <> $previous_db_maint_time) {
-				mactrack_debug("Detected that user changed the db maintenance time\n");
-				unset($last_db_maint_time);
-				db_execute("DELETE FROM settings WHERE name='mt_last_db_maint_time'");
+	if ($site_id != '') {
+		mactrack_debug("About to enter MacTrack Site Scan Processing");
+		/* take time and log performance data */
+		list($micro,$seconds) = explode(" ", microtime());
+		$start = $seconds + $micro;
+		collect_mactrack_data($start, $site_id);
+	}else{
+		mactrack_debug("About to enter MacTrack poller processing");
+		$seconds_offset = read_config_option("mt_collection_timing");
+		if (($seconds_offset <> "disabled") || $forcerun) {
+			mactrack_debug("Into Processing.  Checking to determine if it's time to run.");
+			$seconds_offset           = $seconds_offset * 60;
+			/* find out if it's time to collect device information */
+			$base_start_time          = read_config_option("mt_base_time");
+			$database_maint_time      = read_config_option("mt_maint_time");
+			$last_run_time            = read_config_option("mt_last_run_time");
+			$last_db_maint_time       = read_config_option("mt_last_db_maint_time");
+			$previous_base_start_time = read_config_option("mt_prev_base_time");
+			$previous_db_maint_time   = read_config_option("mt_prev_db_maint_time");
+
+			/* see if the user desires a new start time */
+			mactrack_debug("Checking if user changed the start time");
+			if (!empty($previous_base_start_time)) {
+				if ($base_start_time <> $previous_base_start_time) {
+					mactrack_debug("Detected that user changed the start time\n");
+					unset($last_run_time);
+					db_execute("DELETE FROM settings WHERE name='mt_last_run_time'");
+				}
 			}
-		}
 
-		/* set to detect if the user cleared the time between polling cycles */
-		db_execute("REPLACE INTO settings (name, value) VALUES ('mt_prev_base_time', '$base_start_time')");
-		db_execute("REPLACE INTO settings (name, value) VALUES ('mt_prev_db_maint_time', '$database_maint_time')");
+			/* see if the user desires a new db maintenance time */
+			mactrack_debug("Checking if user changed the maintenance time");
+			if (!empty($previous_db_maint_time)) {
+				if ($database_maint_time <> $previous_db_maint_time) {
+					mactrack_debug("Detected that user changed the db maintenance time\n");
+					unset($last_db_maint_time);
+					db_execute("DELETE FROM settings WHERE name='mt_last_db_maint_time'");
+				}
+			}
 
-		/* determine the next start time */
-		$current_time = strtotime("now");
-		if (empty($last_run_time)) {
-			if ($current_time > strtotime($base_start_time)) {
-				/* if timer expired within a polling interval, then poll */
-				if (($current_time - 300) < strtotime($base_start_time)) {
+			/* set to detect if the user cleared the time between polling cycles */
+			db_execute("REPLACE INTO settings (name, value) VALUES ('mt_prev_base_time', '$base_start_time')");
+			db_execute("REPLACE INTO settings (name, value) VALUES ('mt_prev_db_maint_time', '$database_maint_time')");
+
+			/* determine the next start time */
+			$current_time = strtotime("now");
+			if (empty($last_run_time)) {
+				if ($current_time > strtotime($base_start_time)) {
+					/* if timer expired within a polling interval, then poll */
+					if (($current_time - 300) < strtotime($base_start_time)) {
+						$next_run_time = strtotime(date("Y-m-d") . " " . $base_start_time);
+					}else{
+						$next_run_time = strtotime(date("Y-m-d") . " " . $base_start_time) + 3600*24;
+					}
+				}else{
 					$next_run_time = strtotime(date("Y-m-d") . " " . $base_start_time);
-    			}else{
-					$next_run_time = strtotime(date("Y-m-d") . " " . $base_start_time) + 3600*24;
 				}
 			}else{
-				$next_run_time = strtotime(date("Y-m-d") . " " . $base_start_time);
+				$next_run_time = $last_run_time + $seconds_offset;
 			}
-		}else{
-			$next_run_time = $last_run_time + $seconds_offset;
-		}
-		$time_till_next_run = $next_run_time - $current_time;
+			$time_till_next_run = $next_run_time - $current_time;
 
-		if ($time_till_next_run < 0) {
-			mactrack_debug("The next run time has been determined to be NOW");
-		}else{
-			mactrack_debug("The next run time has been determined to be at '" . date("Y-m-d G:i:s", $next_run_time) . "'");
-		}
-
-		if (empty($last_db_maint_time)) {
-			if (strtotime($database_maint_time) < $current_time) {
-				$next_db_maint_time = strtotime(date("Y-m-d") . " " . $database_maint_time) + 3600*24;
+			if ($time_till_next_run < 0) {
+				mactrack_debug("The next run time has been determined to be NOW");
 			}else{
-				$next_db_maint_time = strtotime(date("Y-m-d") . " " . $database_maint_time);
+				mactrack_debug("The next run time has been determined to be at '" . date("Y-m-d G:i:s", $next_run_time) . "'");
 			}
-		}else{
-			$next_db_maint_time = $last_db_maint_time + 24*3600;
-		}
 
-		$time_till_next_db_maint = $next_db_maint_time - $current_time;
-		if ($time_till_next_db_maint < 0) {
-			mactrack_debug("The next database maintenance run time has been determined to be NOW");
-		}else{
-			mactrack_debug("The next database maintenance run time has been determined to be at '" . date("Y-m-d G:i:s", $next_db_maint_time) . "'");
-		}
-
-		if ($time_till_next_run < 0 || $forcerun == TRUE) {
-			mactrack_debug("Either a scan has been forced, or it's time to check for macs");
-			/* take time and log performance data */
-			list($micro,$seconds) = explode(" ", microtime());
-			$start = $seconds + $micro;
-
-			db_execute("REPLACE INTO settings (name, value) VALUES ('mt_last_run_time', '$current_time')");
-			$running_processes = db_fetch_cell("SELECT count(*) FROM mac_track_processes");
-
-			if ($running_processes) {
-				cacti_log("ERROR: Can not start MAC Tracking process.  There is already one in progress", TRUE);
+			if (empty($last_db_maint_time)) {
+				if (strtotime($database_maint_time) < $current_time) {
+					$next_db_maint_time = strtotime(date("Y-m-d") . " " . $database_maint_time) + 3600*24;
+				}else{
+					$next_db_maint_time = strtotime(date("Y-m-d") . " " . $database_maint_time);
+				}
 			}else{
+				$next_db_maint_time = $last_db_maint_time + 24*3600;
+			}
+
+			$time_till_next_db_maint = $next_db_maint_time - $current_time;
+			if ($time_till_next_db_maint < 0) {
+				mactrack_debug("The next database maintenance run time has been determined to be NOW");
+			}else{
+				mactrack_debug("The next database maintenance run time has been determined to be at '" . date("Y-m-d G:i:s", $next_db_maint_time) . "'");
+			}
+
+			if ($time_till_next_run < 0 || $forcerun == TRUE) {
+				mactrack_debug("Either a scan has been forced, or it's time to check for macs");
+				/* take time and log performance data */
+				list($micro,$seconds) = explode(" ", microtime());
+				$start = $seconds + $micro;
+
+				db_execute("REPLACE INTO settings (name, value) VALUES ('mt_last_run_time', '$current_time')");
+
 				collect_mactrack_data($start, $site_id);
 				log_mactrack_statistics("collect");
 			}
-		}
 
-		if ($time_till_next_db_maint < 0) {
-			/* take time and log performance data */
-			list($micro,$seconds) = explode(" ", microtime());
-			$start = $seconds + $micro;
+			if ($time_till_next_db_maint < 0) {
+				/* take time and log performance data */
+				list($micro,$seconds) = explode(" ", microtime());
+				$start = $seconds + $micro;
 
-			db_execute("REPLACE INTO settings (name, value) VALUES ('mt_last_db_maint_time', '$current_time')");
-			perform_mactrack_db_maint();
-			log_mactrack_statistics("maint");
+				db_execute("REPLACE INTO settings (name, value) VALUES ('mt_last_db_maint_time', '$current_time')");
+				perform_mactrack_db_maint();
+				log_mactrack_statistics("maint");
+			}
 		}
 	}
 }
@@ -215,9 +237,10 @@ function display_help () {
 	$version = mactrack_version();
 	print "MacTrack Master Poller v" . $version["version"] . ", Copyright 2004-2010 - The Cacti Group\n\n";
 	print "usage: poller_mactrack.php [-sid=site_id] [-d] [-h] [--help] [-v] [--version]\n\n";
-	print "-sid=site_id  - the mac_track_sites site_id to scan\n";
-	print "-f            - Force the execution of a collection process\n";
-	print "-d            - Display verbose output during execution\n";
+	print "-sid=site_id  - The mac_track_sites site_id to scan\n";
+	print "-w | --web    - Display output suitable for the web\n";
+	print "-f | --force  - Force the execution of a collection process\n";
+	print "-d | --debug  - Display verbose output during execution\n";
 	print "-v --version  - Display this help message\n";
 	print "-h --help     - Display this help message\n";
 }
@@ -245,8 +268,10 @@ function collect_mactrack_data($start, $site_id = 0) {
 	$command_string = read_config_option("path_php_binary");
 
 	/* save the scan date information */
-	$scan_date = date("Y-m-d H:i:s");
-	db_execute("REPLACE INTO settings (name, value) VALUES ('mt_scan_date', '$scan_date')");
+	if ($site_id == '') {
+		$scan_date = date("Y-m-d H:i:s");
+		db_execute("REPLACE INTO settings (name, value) VALUES ('mt_scan_date', '$scan_date')");
+	}
 
 	/* just in case we've run too long */
 	$exit_mactrack = FALSE;
@@ -266,6 +291,12 @@ function collect_mactrack_data($start, $site_id = 0) {
 		$e_debug = " -d";
 	}else{
 		$e_debug = "";
+	}
+
+	if ($site_id) {
+		$e_site = " -sid=$site_id";
+	}else{
+		$e_site = "";
 	}
 
 	/* add the parent process to the process list */
@@ -335,7 +366,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			/* launch the dns resolver if it hasn't been yet */
 			if (($dns_resolver_required) && (!$resolver_launched)) {
 				sleep(2);
-				exec_background($command_string, " -q " . $config["base_path"] . "/plugins/mactrack/mactrack_resolver.php" . $e_debug);
+				exec_background($command_string, " -q " . $config["base_path"] . "/plugins/mactrack/mactrack_resolver.php" . $e_debug . $e_site);
 				$resolver_launched = TRUE;
 				mactrack_debug("DNS Resolver process launched");
 			}

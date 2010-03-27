@@ -32,10 +32,12 @@ if (!isset($mactrack_scanning_functions_ip)) { $mactrack_scanning_functions_ip =
 array_push($mactrack_scanning_functions_ip, "get_standard_arp_table", "get_netscreen_arp_table");
 
 function mactrack_debug($message) {
-	global $debug, $config;
+	global $debug, $web, $config;
 	include_once($config["base_path"] . "/lib/functions.php");
 
-	if ($debug) {
+	if (isset($web) && $web) {
+		print("<p>" . $message . "</p>");
+	}elseif ($debug) {
 		print("DEBUG: " . $message . "\n");
 	}
 
@@ -2423,17 +2425,50 @@ function mactrack_rescan() {
 			print "rescan!!!!" . get_request_var("device_id") . "!!!!" . (strlen($ifName) ? $ifName . "!!!!":"");
 
 			/* add the cacti header */
-			print "<form action='mactrack_devices.php'>";
+			print "\n<form action='mactrack_devices.php'>\n";
 			html_start_box("", "100%", $colors["header"], "3", "center", "");
-			print "<input type='button' onClick='clearScanResults()' value='Clear Results'>";
+			print "\t\t\t\t\t<input type='button' onClick='clearScanResults()' value='Clear Results'>\n";
 
 			/* exeucte the command, and show the results */
-			echo shell_exec($command_string . $extra_args);
+			print shell_exec(read_config_option("path_php_binary") . " -q " . $command_string . $extra_args);
 
 			/* close the box */
 			html_end_box();
-			print "</form>";
+			print "\n</form>\n";
 		}
+	}
+}
+
+function mactrack_site_scan() {
+	global $config, $colors, $web;
+
+	$site_id = get_request_var("site_id");
+	$dbinfo  = db_fetch_row("SELECT * FROM mac_track_sites WHERE site_id=" . $site_id);
+	$web     = true;
+
+	if (sizeof($dbinfo)) {
+		/* log the trasaction to the database */
+		mactrack_log_action("Site scan '" . $dbinfo["site_name"] . "'");
+
+		/* create the command script */
+		$command_string = $config["base_path"] . "/plugins/mactrack/poller_mactrack.php";
+		$extra_args     = " --web -sid=" . $dbinfo["site_id"];
+
+		/* print out the type, and device_id */
+		print "sitescan!!!!" . get_request_var("site_id") . "!!!!";
+
+		/* add the cacti header */
+		print "\n<form action='mactrack_sites.php'>\n";
+		html_start_box("", "100%", $colors["header"], "3", "center", "");
+		print "\t\t\t\t\t<input type='button' onClick='clearScanResults()' value='Clear Results'>\n";
+
+		/* exeucte the command, and show the results */
+		$command = read_config_option("path_php_binary") . " -q " . $command_string . $extra_args;
+		passthru($command);
+
+		/* close the box */
+		html_end_box();
+		print "\n</form>\n";
 	}
 }
 

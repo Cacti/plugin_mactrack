@@ -370,7 +370,7 @@ function mactrack_view_sites() {
 						<?php
 						if (mactrack_authorized(2121)) {
 							echo "<a href='" . $webroot . "plugins/mactrack/mactrack_sites.php?action=edit&site_id=" . $site['site_id'] . "' title='Edit Site'><img border='0' src='" . $webroot . "plugins/mactrack/images/edit_object.png'></a>";
-							echo "<a href='#'><img id='r_" . $site["site_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_site.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_site(" . $site["site_id"] . ")' title='Rescan Site' border='0'></a>";
+							echo "<a href='#'><img id='r_" . $site["site_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_site.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='site_scan(" . $site["site_id"] . ")' title='Rescan Site' border='0'></a>";
 						}
 						?>
 						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_devices.php?report=devices&reset&site_id=" . $site['site_id'];?>' title='View Devices'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_devices.gif'></a>
@@ -456,6 +456,8 @@ function mactrack_view_sites() {
 
 		mactrack_display_stats();
 	}
+
+	print "<div id='response'></div>";
 }
 
 ?>
