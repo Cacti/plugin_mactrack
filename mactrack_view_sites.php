@@ -364,7 +364,7 @@ function mactrack_view_sites() {
 		$i = 0;
 		if (sizeof($sites) > 0) {
 			foreach ($sites as $site) {
-				form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+				form_alternate_row_color($colors["alternate"],$colors["light"],$i,'row_' . $site["site_id"]); $i++;
 					?>
 					<td width=140>
 						<?php
@@ -420,11 +420,10 @@ function mactrack_view_sites() {
 			foreach ($sites as $site) {
 				form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 					?>
-					<td width=120>
+					<td width=100>
 						<?php
 						if (mactrack_authorized(2121)) {
 							echo "<a href='" . $webroot . "plugins/mactrack/mactrack_sites.php?action=edit&site_id=" . $site['site_id'] . "' title='Edit Site'><img border='0' src='" . $webroot . "plugins/mactrack/images/edit_object.png'></a>";
-							echo "<a href='#'><img id='r_" . $site["site_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_site.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_site(" . $site["site_id"] . ")' title='Rescan Site' border='0'></a>";
 						}
 						?>
 						<a href='<?php print $webroot . "plugins/mactrack/mactrack_view_devices.php?report=devices&site_id=" . $site['site_id'] . "&device_type_id=" . $site['device_type_id'];?>&type_id=-1&status=-1&filter=' title='View Devices'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_devices.gif'></a>

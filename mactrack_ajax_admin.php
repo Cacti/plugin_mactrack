@@ -30,10 +30,10 @@ include_once("./plugins/mactrack/lib/mactrack_functions.php");
 if (isset($_REQUEST["action"])) {
 	switch ($_REQUEST["action"]) {
 	case "site_scan":
-		mactrack_site_scan();
+		mactrack_site_scan(TRUE);
 		break;
 	case "rescan":
-		mactrack_rescan();
+		mactrack_rescan(TRUE);
 		break;
 	case "enable":
 		mactrack_enable();

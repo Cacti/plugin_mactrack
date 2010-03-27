@@ -35,7 +35,7 @@ function mactrack_debug($message) {
 	global $debug, $web, $config;
 	include_once($config["base_path"] . "/lib/functions.php");
 
-	if (isset($web) && $web) {
+	if (isset($web) && $web && !substr_count($message, "SQL")) {
 		print("<p>" . $message . "</p>");
 	}elseif ($debug) {
 		print("DEBUG: " . $message . "\n");
@@ -393,7 +393,7 @@ function get_standard_arp_table($site, &$device) {
 			$atEntry["atNetAddress"] . "','" .
 			$scan_date . "')";
 
-		mactrack_debug("SQL: " . $insert_string);
+		//mactrack_debug("SQL: " . $insert_string);
 
 		db_execute($insert_string);
 	}
@@ -1982,7 +1982,7 @@ function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
 			"WHERE device_id ='" . $device["device_id"] . "'";
 	}
 
-	mactrack_debug("SQL: " . $update_string);
+	//mactrack_debug("SQL: " . $update_string);
 
 	db_execute($update_string);
 }
@@ -2025,7 +2025,7 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 				$scan_date . "','" .
 				$authorized_mac . "')";
 
-			mactrack_debug("SQL: " . $insert_string);
+			//mactrack_debug("SQL: " . $insert_string);
 
 			db_execute($insert_string);
 		}
@@ -2037,7 +2037,7 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 */
 function db_check_auth($mac_address) {
 	$check_string = "SELECT mac_id FROM mac_track_macauth WHERE mac_address LIKE '%%" . $mac_address . "%%'";
-	mactrack_debug("SQL: " . $check_string);
+	//mactrack_debug("SQL: " . $check_string);
 
 	$query = db_fetch_cell($check_string);
 
@@ -2252,7 +2252,7 @@ function get_netscreen_arp_table($site, &$device) {
 			$atEntry["atPhysAddress"] . "','" .
 			$atEntry["atNetAddress"] . "','" .
 			$scan_date . "')";
-		mactrack_debug("SQL: " . $insert_string);
+//		mactrack_debug("SQL: " . $insert_string);
 		db_execute($insert_string);
 	}
 	}
@@ -2405,7 +2405,7 @@ function mactrack_display_Octets($octets) {
 	return $octets . " " . $suffix;
 }
 
-function mactrack_rescan() {
+function mactrack_rescan($web = FALSE) {
 	global $config, $colors;
 
 	$device_id = get_request_var("device_id");
@@ -2419,7 +2419,7 @@ function mactrack_rescan() {
 
 			/* create the command script */
 			$command_string = $config["base_path"] . "/plugins/mactrack/mactrack_scanner.php";
-			$extra_args     = " -id=" . $dbinfo["device_id"];
+			$extra_args     = " -id=" . $dbinfo["device_id"] . ($web ? " --web":"");
 
 			/* print out the type, and device_id */
 			print "rescan!!!!" . get_request_var("device_id") . "!!!!" . (strlen($ifName) ? $ifName . "!!!!":"");
@@ -2430,7 +2430,8 @@ function mactrack_rescan() {
 			print "\t\t\t\t\t<input type='button' onClick='clearScanResults()' value='Clear Results'>\n";
 
 			/* exeucte the command, and show the results */
-			print shell_exec(read_config_option("path_php_binary") . " -q " . $command_string . $extra_args);
+			$command = read_config_option("path_php_binary") . " -q " . $command_string . $extra_args;
+			passthru($command);
 
 			/* close the box */
 			html_end_box();
@@ -2439,12 +2440,11 @@ function mactrack_rescan() {
 	}
 }
 
-function mactrack_site_scan() {
+function mactrack_site_scan($web = FALSE) {
 	global $config, $colors, $web;
 
 	$site_id = get_request_var("site_id");
 	$dbinfo  = db_fetch_row("SELECT * FROM mac_track_sites WHERE site_id=" . $site_id);
-	$web     = true;
 
 	if (sizeof($dbinfo)) {
 		/* log the trasaction to the database */

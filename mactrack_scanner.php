@@ -75,7 +75,10 @@ if (sizeof($parms) == 0) {
 	exit;
 }
 
+global $web, $debug;
+
 $debug     = FALSE;
+$web       = FALSE;
 $test_mode = FALSE;
 
 foreach($parms as $parameter) {
@@ -86,20 +89,19 @@ foreach($parms as $parameter) {
 		$device_id = $value;
 		break;
 	case "-d":
+	case "--debug":
 		$debug = TRUE;
 		break;
-	case "-h":
-		display_help();
-		exit;
-	case "-v":
-		display_help();
-		exit;
+	case "-w":
+	case "--web":
+		$web = TRUE;
+		break;
 	case "-t":
 		$test_mode = TRUE;
 		exit;
+	case "-h":
+	case "-v":
 	case "--version":
-		display_help();
-		exit;
 	case "--help":
 		display_help();
 		exit;
@@ -160,17 +162,17 @@ if (valid_snmp_device($device)) {
 					$device["scan_type"] = $device_type["device_type"];
 					$device = call_user_func_array($device_type["scanning_function"], array($site, &$device, $device_type["lowPort"], $device_type["highPort"]));
 				}else{
-					mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", Scanning Function Does Not Exist.");
+					mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", ERROR: Scanning Function Does Not Exist.");
 					$device["last_runmessage"] = "WARNING: Scanning Function Does Not Exist.";
 					$device["snmp_status"] = HOST_ERROR;
 				}
 			}else{
-				mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", Scanning Function in Device Type Table Is Null.");
+				mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", ERROR: Scanning Function in Device Type Table Is Null.");
 				$device["last_runmessage"] = "WARNING: Scanning Function in Device Type Table Is Null.";
 				$device["snmp_status"] = HOST_ERROR;
 			}
 		}else{
-			mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", Device Type Not Found in Device Type Table.");
+			mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", ERROR: Device Type Not Found in Device Type Table.");
 			$device["last_runmessage"] = "WARNING: Device Type Not Found in Device Type Table.";
 			$device["snmp_status"] = HOST_ERROR;
 		}
@@ -189,23 +191,23 @@ if (valid_snmp_device($device)) {
 					$device["scan_type"] = $device_type["device_type"];
 					call_user_func_array($device_type["ip_scanning_function"], array($site, $device));
 				}else{
-					mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", IP Address Scanning Function Does Not Exist.");
+					mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", ERROR: IP Address Scanning Function Does Not Exist.");
 					$device["last_runmessage"] = "WARNING: Scanning Function Does Not Exist.";
 					$device["snmp_status"] = HOST_ERROR;
 				}
 			}else{
-				mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", IP Scanning Function in Device Type Table Is Null.");
+				mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", ERROR: IP Scanning Function in Device Type Table Is Null.");
 				$device["last_runmessage"] = "WARNING: Scanning Function in Device Type Table Is Null.";
 				$device["snmp_status"] = HOST_ERROR;
 			}
 		}else{
-			mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", Device Type Not Found in Device Type Table.");
+			mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", ERROR: Device Type Not Found in Device Type Table.");
 			$device["last_runmessage"] = "WARNING: Device Type Not Found in Device Type Table.";
 			$device["snmp_status"] = HOST_ERROR;
 		}
 	}
 }else{
-	mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", Device unreachable.");
+	mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", ERROR: Device unreachable.");
 	$device["last_runmessage"] = "Device unreachable.";
 
 	$host_up = FALSE;
@@ -219,9 +221,10 @@ exit;
 /*	display_help - displays the usage of the function */
 function display_help () {
 	print "Network MacTracker Version 1.0, Copyright 2004-2010 - The Cacti Group\n\n";
-	print "usage: mactrack_device.php -id=host_id [-d] [-h] [--help] [-v] [--version]\n\n";
+	print "usage: mactrack_device.php -id=host_id [-w] [-d] [-h] [--help] [-v] [--version]\n\n";
 	print "-id=host_id   - the mac_track_devices host_id to scan\n";
-	print "-d            - Display verbose output during execution\n";
+	print "-d | --debug  - Display verbose output during execution\n";
+	print "-w | --web    - Display web compatible output during execution\n";
 	print "-t            - Test mode, don't log a process id and interfere with system\n";
 	print "-v --version  - Display this help message\n";
 	print "-h --help     - display this help message\n";

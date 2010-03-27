@@ -39,8 +39,14 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 include("./include/global.php");
 include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
-/* Let the scanner run for no more that 25 minutes */
-ini_set("max_execution_time", 1500);
+/* get the mactrack polling cycle */
+$max_run_duration = read_config_option("mt_collection_timing");
+
+if (is_numeric($max_run_duration)) {
+	/* let PHP a 5 minutes less than the rerun frequency */
+	$max_run_duration = ($max_run_duration * 60) - 300;
+	ini_set("max_execution_time", $max_run_duration);
+}
 
 /* establish constants */
 define("DEVICE_HUB_SWITCH", 1);
