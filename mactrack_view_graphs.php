@@ -26,7 +26,12 @@ $guest_account = true;
 chdir("../../");
 include("./include/auth.php");
 include("./lib/html_tree.php");
-include("./include/html/inc_timespan_settings.php");
+
+if (file_exists("./lib/timespan_settings.php")) {
+	include("./lib/timespan_settings.php");
+}else{
+	include("./include/html/inc_timespan_settings.php");
+}
 
 if (!isset($_REQUEST["action"])) $_REQUEST["action"] = "";
 
