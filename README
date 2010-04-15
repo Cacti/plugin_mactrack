@@ -4,7 +4,7 @@
     Contact ........ larryjadams@comcast.net
     Home Site ...... http://www.cacti.net
     Program ........ MacTrack
-    Version ........ 2.3
+    Version ........ 2.4
     Purpose ........ A Nice Plugin that Tracks Your Users
 
 *******************************************************************************/
@@ -58,7 +58,7 @@
     Got any ideas or complaints, please e-mail me!
 
 ----[ Changelog
-    --- 2.3 ---
+    --- 2.4 ---
     bug: 0001546: mactrack_view_devices does not display the proper page numbers 
     bug: 0001545: mactrack_scanner does not complete successfully for some hosts 
     bug: 0001547: mactrack_view_sites does not show page numbers
@@ -93,6 +93,7 @@
     feature: copy snmp settings from cacti devices to mactrack devices
              (via host_id connection, new action for mactrack_devices.php)
 	feature: Allow mapping of Cacti graphs to MacTrack
+	feature: Add columns for AutoNegotiation - Implementation TBD
 
     --- 1.1 ---
     First Official Release

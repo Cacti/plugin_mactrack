@@ -364,8 +364,18 @@ function mactrack_database_upgrade () {
 		);
 	}
 
-	mactrack_add_column("mac_track_devices", "term_type",        "ALTER TABLE `mac_track_devices` ADD COLUMN `term_type` tinyint(11) NOT NULL default '1' AFTER `scan_type`");
-	mactrack_add_column("mac_track_devices", "private_key_path", "ALTER TABLE `mac_track_devices` ADD COLUMN `private_key_path` varchar(128) default '' AFTER `user_password`");
+	mactrack_add_column("mac_track_devices",
+		"term_type",
+		"ALTER TABLE `mac_track_devices` ADD COLUMN `term_type` tinyint(11) NOT NULL default '1' AFTER `scan_type`");
+	mactrack_add_column("mac_track_devices",
+		"private_key_path",
+		"ALTER TABLE `mac_track_devices` ADD COLUMN `private_key_path` varchar(128) default '' AFTER `user_password`");
+	mactrack_add_column("mac_track_interfaces",
+		"ifMauAutoNegAdminStatus",
+		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifMauAutoNegAdminStatus` integer UNSIGNED NOT NULL default '0' AFTER `ifDuplex`");
+	mactrack_add_column("mac_track_interfaces",
+		"ifMauAutoNegRemoteSignaling",
+		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifMauAutoNegRemoteSignaling` integer UNSIGNED NOT NULL default '0' AFTER `ifMauAutoNegAdminStatus`");
 }
 
 function mactrack_check_dependencies() {
@@ -473,6 +483,8 @@ function mactrack_setup_table_new () {
 			`ifSpeed` int(10) unsigned NOT NULL default '0',
 			`ifHighSpeed` int(10) unsigned NOT NULL default '0',
 			`ifDuplex` int(10) unsigned NOT NULL default '0',
+			`ifMauAutoNegAdminStatus` integer UNSIGNED NOT NULL default '0'
+			`ifMauAutoNegRemoteSignaling` integer UNSIGNED NOT NULL default '0'
 			`ifPhysAddress` varchar(20) NOT NULL,
 			`ifAdminStatus` int(10) unsigned NOT NULL default '0',
 			`ifOperStatus` int(10) unsigned NOT NULL default '0',
@@ -818,7 +830,7 @@ function mactrack_setup_table_new () {
 function mactrack_version () {
 	return array(
 		'name'      => 'mactrack',
-		'version'   => '2.3',
+		'version'   => '2.4',
 		'longname'  => 'Device Tracking',
 		'author'    => 'Larry Adams',
 		'homepage'  => 'http://cacti.net',
