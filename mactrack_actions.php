@@ -108,7 +108,7 @@ function sync_mactrack_to_cacti($mt_device) {
 }
 
 function sync_cacti_to_mactrack($device) {
-
+	
 	# is "Sync Cacti Device to MacTrack Device" required?
 	if (read_config_option("mt_update_policy", true) == 2) {
 
@@ -182,7 +182,8 @@ function mactrack_device_action_prepare($save) {
 
 			$form_array = array();
 			while (list($field_name, $field_array) = each($fields_mactrack_device_edit)) {
-				if (preg_match("(site_id|scan_type|snmp_options|snmp_retries|ignorePorts|user_name|user_password|disabled)", $field_name)) {
+				/* show only those fields to the user, that cannot been taken from the device field */
+				if (preg_match("(site_id|scan_type|snmp_options|snmp_retries|ignorePorts|user_name|user_password|disabled|term_type|private_key_path)", $field_name)) {
 					$form_array += array($field_name => $fields_mactrack_device_edit[$field_name]);
 
 					$form_array[$field_name]["value"] = "";
@@ -213,7 +214,7 @@ function mactrack_device_action_prepare($save) {
  *  */
 function mactrack_device_action_execute($action) {
 	global $config;
-
+	
 	# it's our turn
 	if ($action == "plugin_mactrack_device") { /* mactrack */
 		/* find out which (if any) hosts have been checked, so we can tell the user */
