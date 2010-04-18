@@ -665,10 +665,6 @@ function mactrack_site() {
 					<td><?php print number_format($site["sum_ports_active"]);?></td>
 					<td><?php print number_format($site["sum_ports_trunk"]);?></td>
 					<td><?php print number_format($site["sum_macs_active"]);?></td>
-
-					<td style="<?php print get_checkbox_style();?>" width="1%" align="right">
-						<input type='checkbox' style='margin: 0px;' name='chk_<?php print $site["site_id"];?>' title="<?php print $site["site_name"];?>">
-					</td>
 				</tr>
 				<?php
 			}
