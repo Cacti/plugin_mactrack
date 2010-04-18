@@ -176,7 +176,7 @@ function mactrack_view_graphs() {
 	<script type="text/javascript">
 	<!--
 	function applyGraphPreviewFilterChange(objForm) {
-		strURL = '?graph_template_id=' + objForm.graph_template_id.value;
+		strURL = '?report=graphs&graph_template_id=' + objForm.graph_template_id.value;
 		strURL = strURL + '&filter=' + objForm.filter.value;
 		document.location = strURL;
 	}
