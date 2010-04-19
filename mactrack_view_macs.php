@@ -303,6 +303,7 @@ function mactrack_view_export_macs() {
 	input_validate_input_number(get_request_var_request("site_id"));
 	input_validate_input_number(get_request_var_request("device_id"));
 	input_validate_input_number(get_request_var_request("mac_filter_type_id"));
+	input_validate_input_number(get_request_var_request("port_name_filter_type_id"));
 	input_validate_input_number(get_request_var_request("ip_filter_type_id"));
 	input_validate_input_number(get_request_var_request("rows"));
 	input_validate_input_number(get_request_var_request("page"));
@@ -318,6 +319,11 @@ function mactrack_view_export_macs() {
 		$_REQUEST["mac_filter"] = sanitize_search_string(get_request_var("mac_filter"));
 	}
 
+	/* clean up search string */
+	if (isset($_REQUEST["port_name_filter"])) {
+		$_REQUEST["port_name_filter"] = sanitize_search_string(get_request_var("port_name_filter"));
+	}
+
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
 		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
@@ -331,6 +337,12 @@ function mactrack_view_export_macs() {
 	if (isset($_REQUEST["mac_filter_type_id"])) {
 		if ($_REQUEST["mac_filter_type_id"] == 1) {
 			unset($_REQUEST["mac_filter"]);
+		}
+	}
+
+	if (isset($_REQUEST["port_name_filter_type_id"])) {
+		if ($_REQUEST["port_name_filter_type_id"] == 1) {
+			unset($_REQUEST["port_name_filter"]);
 		}
 	}
 
@@ -356,6 +368,8 @@ function mactrack_view_export_macs() {
 	load_current_session_value("filter", "sess_mactrack_view_macs_filter", "");
 	load_current_session_value("mac_filter_type_id", "sess_mactrack_view_macs_mac_filter_type_id", "1");
 	load_current_session_value("mac_filter", "sess_mactrack_view_macs_mac_filter", "");
+	load_current_session_value("port_name_filter_type_id", "sess_mactrack_view_macs_port_name_filter_type_id", "1");
+	load_current_session_value("port_name_filter", "sess_mactrack_view_macs_port_name_filter", "");
 	load_current_session_value("ip_filter_type_id", "sess_mactrack_view_macs_ip_filter_type_id", "1");
 	load_current_session_value("ip_filter", "sess_mactrack_view_macs_ip_filter", "");
 	load_current_session_value("rows", "sess_mactrack_view_macs_rows_selector", "-1");
@@ -414,7 +428,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.mac_address LIKE '" . $_REQUEST["mac_filter"] . "%%'";
 				break;
 			case "5": /* does not contain */
-				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.mac_address NOT LIKE '" . $_REQUEST["mac_filter"] . "%%'";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.mac_address NOT LIKE '%%" . $_REQUEST["mac_filter"] . "%%'";
 				break;
 			case "6": /* does not begin with */
 				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.mac_address NOT LIKE '" . $_REQUEST["mac_filter"] . "%%'";
@@ -435,7 +449,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.ip_address LIKE '" . $_REQUEST["ip_filter"] . "%%'";
 				break;
 			case "5": /* does not contain */
-				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.ip_address NOT LIKE '" . $_REQUEST["ip_filter"] . "%%'";
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.ip_address NOT LIKE '%%" . $_REQUEST["ip_filter"] . "%%'";
 				break;
 			case "6": /* does not begin with */
 				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.ip_address NOT LIKE '" . $_REQUEST["ip_filter"] . "%%'";
@@ -448,20 +462,45 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 		}
 	}
 
+	if ((strlen($_REQUEST["port_name_filter"]) > 0)||($_REQUEST["port_name_filter_type_id"] > 5)) {
+		switch ($_REQUEST["port_name_filter_type_id"]) {
+			case "1": /* do not filter */
+				break;
+			case "2": /* matches */
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.port_name='" . $_REQUEST["port_name_filter"] . "'";
+				break;
+			case "3": /* contains */
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.port_name LIKE '%%" . $_REQUEST["port_name_filter"] . "%%'";
+				break;
+			case "4": /* begins with */
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.port_name LIKE '" . $_REQUEST["port_name_filter"] . "%%'";
+				break;
+			case "5": /* does not contain */
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.port_name NOT LIKE '%%" . $_REQUEST["port_name_filter"] . "%%'";
+				break;
+			case "6": /* does not begin with */
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.port_name NOT LIKE '" . $_REQUEST["port_name_filter"] . "%%'";
+				break;
+			case "7": /* is null */
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.port_name = ''";
+				break;
+			case "8": /* is not null */
+				$sql_where .= (strlen($sql_where) ? " AND":"WHERE") . " mac_track_ports.port_name != ''";
+		}
+	}
+
 	if (strlen($_REQUEST["filter"])) {
 		if (strlen(read_config_option("mt_reverse_dns")) > 0) {
 			$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
 				" (mac_track_ports.dns_hostname LIKE '%" . $_REQUEST["filter"] . "%' OR " .
 				"mac_track_ports.device_name LIKE '%" . $_REQUEST["filter"] . "%' OR " .
 				"mac_track_ports.hostname LIKE '%" . $_REQUEST["filter"] . "%' OR " .
-				"mac_track_ports.port_name LIKE '%" . $_REQUEST["filter"] . "%' OR " .
 				"mac_track_oui_database.vendor_name LIKE '%%" . $_REQUEST["filter"] . "%%' OR " .
 				"mac_track_ports.vlan_name LIKE '%" . $_REQUEST["filter"] . "%')";
 		}else{
 			$sql_where .= (strlen($sql_where) ? " AND":"WHERE") .
 				" (mac_track_ports.device_name LIKE '%" . $_REQUEST["filter"] . "%' OR " .
 				"mac_track_ports.hostname LIKE '%" . $_REQUEST["filter"] . "%' OR " .
-				"mac_track_ports.port_name LIKE '%" . $_REQUEST["filter"] . "%' OR " .
 				"mac_track_oui_database.vendor_name LIKE '%%" . $_REQUEST["filter"] . "%%' OR " .
 				"mac_track_ports.vlan_name LIKE '%" . $_REQUEST["filter"] . "%')";
 		}
@@ -555,6 +594,7 @@ function mactrack_view_macs() {
 	input_validate_input_number(get_request_var_request("site_id"));
 	input_validate_input_number(get_request_var_request("device_id"));
 	input_validate_input_number(get_request_var_request("mac_filter_type_id"));
+	input_validate_input_number(get_request_var_request("port_name_filter_type_id"));
 	input_validate_input_number(get_request_var_request("ip_filter_type_id"));
 	input_validate_input_number(get_request_var_request("rows"));
 	input_validate_input_number(get_request_var_request("authorized"));
@@ -572,6 +612,11 @@ function mactrack_view_macs() {
 		$_REQUEST["mac_filter"] = sanitize_search_string(get_request_var("mac_filter"));
 	}
 
+	/* clean up search string */
+	if (isset($_REQUEST["port_name_filter"])) {
+		$_REQUEST["port_name_filter"] = sanitize_search_string(get_request_var("port_name_filter"));
+	}
+
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
 		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
@@ -585,6 +630,12 @@ function mactrack_view_macs() {
 	if (isset($_REQUEST["mac_filter_type_id"])) {
 		if ($_REQUEST["mac_filter_type_id"] == 1) {
 			unset($_REQUEST["mac_filter"]);
+		}
+	}
+
+	if (isset($_REQUEST["port_name_filter_type_id"])) {
+		if ($_REQUEST["port_name_filter_type_id"] == 1) {
+			unset($_REQUEST["port_name_filter"]);
 		}
 	}
 
@@ -611,6 +662,8 @@ function mactrack_view_macs() {
 		kill_session_var("sess_mactrack_view_macs_filter");
 		kill_session_var("sess_mactrack_view_macs_mac_filter_type_id");
 		kill_session_var("sess_mactrack_view_macs_mac_filter");
+		kill_session_var("sess_mactrack_view_macs_port_name_filter_type_id");
+		kill_session_var("sess_mactrack_view_macs_port_name_filter");
 		kill_session_var("sess_mactrack_view_macs_ip_filter_type_id");
 		kill_session_var("sess_mactrack_view_macs_ip_filter");
 		kill_session_var("sess_mactrack_view_macs_rows_selector");
@@ -627,6 +680,8 @@ function mactrack_view_macs() {
 			unset($_REQUEST["scan_date"]);
 			unset($_REQUEST["mac_filter"]);
 			unset($_REQUEST["mac_filter_type_id"]);
+			unset($_REQUEST["port_name_filter"]);
+			unset($_REQUEST["port_name_filter_type_id"]);
 			unset($_REQUEST["ip_filter"]);
 			unset($_REQUEST["ip_filter_type_id"]);
 			unset($_REQUEST["rows"]);
@@ -642,11 +697,13 @@ function mactrack_view_macs() {
 		/* if any of the settings changed, reset the page number */
 		$changed = 0;
 		$changed += mactrack_check_changed("scan_date",          "sess_mactrack_view_macs_rowstoshow");
-		$changed += mactrack_check_changed("mac_filter",         "sess_mactrack_view_macs_filter");
+		$changed += mactrack_check_changed("mac_filter",         "sess_mactrack_view_macs_mac_filter");
 		$changed += mactrack_check_changed("mac_filter_type_id", "sess_mactrack_view_macs_mac_filter_type_id");
-		$changed += mactrack_check_changed("ip_filter",          "sess_mactrack_view_macs_mac_ip_filter");
+		$changed += mactrack_check_changed("port_name_filter",         "sess_mactrack_view_macs_port_name_filter");
+		$changed += mactrack_check_changed("port_name_filter_type_id", "sess_mactrack_view_macs_port_name_filter_type_id");
+		$changed += mactrack_check_changed("ip_filter",          "sess_mactrack_view_macs_ip_filter");
 		$changed += mactrack_check_changed("ip_filter_type_id",  "sess_mactrack_view_macs_ip_filter_type_id");
-		$changed += mactrack_check_changed("filter",             "sess_mactrack_view_macs_ip_filter");
+		$changed += mactrack_check_changed("filter",             "sess_mactrack_view_macs_filter");
 		$changed += mactrack_check_changed("rows",               "sess_mactrack_view_macs_rows_selector");
 		$changed += mactrack_check_changed("site_id",            "sess_mactrack_view_macs_site_id");
 		$changed += mactrack_check_changed("vlan",               "sess_mactrack_view_macs_vlan_id");
@@ -670,6 +727,8 @@ function mactrack_view_macs() {
 	load_current_session_value("scan_date",          "sess_mactrack_view_macs_rowstoshow", "2");
 	load_current_session_value("mac_filter",         "sess_mactrack_view_macs_mac_filter", "");
 	load_current_session_value("mac_filter_type_id", "sess_mactrack_view_macs_mac_filter_type_id", "1");
+	load_current_session_value("port_name_filter",         "sess_mactrack_view_macs_port_name_filter", "");
+	load_current_session_value("port_name_filter_type_id", "sess_mactrack_view_macs_port_name_filter_type_id", "1");
 	load_current_session_value("ip_filter",          "sess_mactrack_view_macs_ip_filter", "");
 	load_current_session_value("ip_filter_type_id",  "sess_mactrack_view_macs_ip_filter_type_id", "1");
 	load_current_session_value("filter",             "sess_mactrack_view_macs_filter", "");
@@ -894,6 +953,7 @@ function mactrack_view_aggregated_macs() {
 	input_validate_input_number(get_request_var_request("site_id"));
 	input_validate_input_number(get_request_var_request("device_id"));
 	input_validate_input_number(get_request_var_request("mac_filter_type_id"));
+	input_validate_input_number(get_request_var_request("port_name_filter_type_id"));
 	input_validate_input_number(get_request_var_request("ip_filter_type_id"));
 	input_validate_input_number(get_request_var_request("rows"));
 	input_validate_input_number(get_request_var_request("authorized"));
@@ -911,6 +971,11 @@ function mactrack_view_aggregated_macs() {
 		$_REQUEST["mac_filter"] = sanitize_search_string(get_request_var("mac_filter"));
 	}
 
+	/* clean up search string */
+	if (isset($_REQUEST["port_name_filter"])) {
+		$_REQUEST["port_name_filter"] = sanitize_search_string(get_request_var("port_name_filter"));
+	}
+
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
 		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
@@ -924,6 +989,12 @@ function mactrack_view_aggregated_macs() {
 	if (isset($_REQUEST["mac_filter_type_id"])) {
 		if ($_REQUEST["mac_filter_type_id"] == 1) {
 			unset($_REQUEST["mac_filter"]);
+		}
+	}
+
+	if (isset($_REQUEST["port_name_filter_type_id"])) {
+		if ($_REQUEST["port_name_filter_type_id"] == 1) {
+			unset($_REQUEST["port_name_filter"]);
 		}
 	}
 
@@ -949,6 +1020,8 @@ function mactrack_view_aggregated_macs() {
 		kill_session_var("sess_mactrack_view_macs_filter");
 		kill_session_var("sess_mactrack_view_macs_mac_filter_type_id");
 		kill_session_var("sess_mactrack_view_macs_mac_filter");
+		kill_session_var("sess_mactrack_view_macs_port_name_filter_type_id");
+		kill_session_var("sess_mactrack_view_macs_port_name_filter");
 		kill_session_var("sess_mactrack_view_macs_ip_filter_type_id");
 		kill_session_var("sess_mactrack_view_macs_ip_filter");
 		kill_session_var("sess_mactrack_view_macs_rows_selector");
@@ -969,6 +1042,8 @@ function mactrack_view_aggregated_macs() {
 		kill_session_var("sess_mactrack_view_macs_filter");
 		kill_session_var("sess_mactrack_view_macs_mac_filter_type_id");
 		kill_session_var("sess_mactrack_view_macs_mac_filter");
+		kill_session_var("sess_mactrack_view_macs_port_name_filter_type_id");
+		kill_session_var("sess_mactrack_view_macs_port_name_filter");
 		kill_session_var("sess_mactrack_view_macs_ip_filter_type_id");
 		kill_session_var("sess_mactrack_view_macs_ip_filter");
 		kill_session_var("sess_mactrack_view_macs_rows_selector");
@@ -983,6 +1058,8 @@ function mactrack_view_aggregated_macs() {
 		unset($_REQUEST["scan_date"]);
 		unset($_REQUEST["mac_filter"]);
 		unset($_REQUEST["mac_filter_type_id"]);
+		unset($_REQUEST["port_name_filter"]);
+		unset($_REQUEST["port_name_filter_type_id"]);
 		unset($_REQUEST["ip_filter"]);
 		unset($_REQUEST["ip_filter_type_id"]);
 		unset($_REQUEST["rows"]);
@@ -997,11 +1074,13 @@ function mactrack_view_aggregated_macs() {
 		/* if any of the settings changed, reset the page number */
 		$changed = 0;
 		$changed += mactrack_check_changed("scan_date",          "sess_mactrack_view_macs_rowstoshow");
-		$changed += mactrack_check_changed("mac_filter",         "sess_mactrack_view_macs_filter");
+		$changed += mactrack_check_changed("mac_filter",         "sess_mactrack_view_macs_mac_filter");
 		$changed += mactrack_check_changed("mac_filter_type_id", "sess_mactrack_view_macs_mac_filter_type_id");
-		$changed += mactrack_check_changed("ip_filter",          "sess_mactrack_view_macs_mac_ip_filter");
+		$changed += mactrack_check_changed("port_name_filter",         "sess_mactrack_view_macs_port_name_filter");
+		$changed += mactrack_check_changed("port_name_filter_type_id", "sess_mactrack_view_macs_port_name_filter_type_id");
+		$changed += mactrack_check_changed("ip_filter",          "sess_mactrack_view_macs_ip_filter");
 		$changed += mactrack_check_changed("ip_filter_type_id",  "sess_mactrack_view_macs_ip_filter_type_id");
-		$changed += mactrack_check_changed("filter",             "sess_mactrack_view_macs_ip_filter");
+		$changed += mactrack_check_changed("filter",             "sess_mactrack_view_macs_filter");
 		$changed += mactrack_check_changed("rows",               "sess_mactrack_view_macs_rows_selector");
 		$changed += mactrack_check_changed("site_id",            "sess_mactrack_view_macs_site_id");
 		$changed += mactrack_check_changed("vlan",               "sess_mactrack_view_macs_vlan_id");
@@ -1025,6 +1104,8 @@ function mactrack_view_aggregated_macs() {
 	load_current_session_value("scan_date",          "sess_mactrack_view_macs_rowstoshow", "2");
 	load_current_session_value("mac_filter",         "sess_mactrack_view_macs_mac_filter", "");
 	load_current_session_value("mac_filter_type_id", "sess_mactrack_view_macs_mac_filter_type_id", "1");
+	load_current_session_value("port_name_filter",         "sess_mactrack_view_macs_port_name_filter", "");
+	load_current_session_value("port_name_filter_type_id", "sess_mactrack_view_macs_port_name_filter_type_id", "1");
 	load_current_session_value("ip_filter",          "sess_mactrack_view_macs_ip_filter", "");
 	load_current_session_value("ip_filter_type_id",  "sess_mactrack_view_macs_ip_filter_type_id", "1");
 	load_current_session_value("filter",             "sess_mactrack_view_macs_filter", "");

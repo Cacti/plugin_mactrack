@@ -3714,6 +3714,25 @@ function mactrack_mac_filter() {
 						</select>
 					</td>
 				</tr>
+				<tr>
+					<td width="80">
+						&nbsp;Port Name:
+					</td>
+					<td width="1">
+						<select name="port_name_filter_type_id">
+						<?php
+						for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
+							print "<option value='" . $i . "'"; if ($_REQUEST["port_name_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
+						}
+						?>
+						</select>
+					</td>
+					<td width="1">
+						<input type="text" name="port_name_filter" size="20" value="<?php print $_REQUEST["port_name_filter"];?>">
+					</td>
+					<td colspan="2">
+					</td>
+				</tr>
 			</table>
 			<table cellpadding="1" cellspacing="0">
 				<tr>
