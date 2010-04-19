@@ -62,6 +62,7 @@
     bug#0001677: Undefined indexes
     bug: Undefined index reports in mactrak_view_graphs.php
     bug: Small visual issue with Site Details	
+    bug: Interfaces table not being created during upgrade
     
     --- 2.4 ---
     bug: 0001546: mactrack_view_devices does not display the proper page numbers 

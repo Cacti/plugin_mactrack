@@ -483,8 +483,8 @@ function mactrack_setup_table_new () {
 			`ifSpeed` int(10) unsigned NOT NULL default '0',
 			`ifHighSpeed` int(10) unsigned NOT NULL default '0',
 			`ifDuplex` int(10) unsigned NOT NULL default '0',
-			`ifMauAutoNegAdminStatus` integer UNSIGNED NOT NULL default '0'
-			`ifMauAutoNegRemoteSignaling` integer UNSIGNED NOT NULL default '0'
+			`ifMauAutoNegAdminStatus` integer UNSIGNED NOT NULL default '0',
+			`ifMauAutoNegRemoteSignaling` integer UNSIGNED NOT NULL default '0',
 			`ifPhysAddress` varchar(20) NOT NULL,
 			`ifAdminStatus` int(10) unsigned NOT NULL default '0',
 			`ifOperStatus` int(10) unsigned NOT NULL default '0',
