@@ -531,7 +531,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 		/* transfer the subnet information, although primative, into the ip_ranges table */
 		$ip_ranges = db_fetch_assoc("SELECT SUBSTRING_INDEX(`ip_address`,'.',3) AS ip_range,
 					site_id,
-					count(ip_address) AS ips_current,
+					COUNT(DISTINCT ip_address) AS ips_current,
 					scan_date AS ips_current_date
 					FROM mac_track_temp_ports
 					WHERE ip_address != ''

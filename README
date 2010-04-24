@@ -64,6 +64,7 @@
 
     --- 2.5 ---
     bug#0001677: Undefined indexes
+    bug#0001717: Ip addresses range report a false value 
     bug: Undefined index reports in mactrak_view_graphs.php
     bug: Small visual issue with Site Details	
     bug: Interfaces table not being created during upgrade
@@ -78,8 +79,8 @@
     bug: Correct uninitialized error in mactrack_hp.php
     bug: Resolved issue where Vendor Mac was lost during resolver process
     bug: fix syntax of cacti_snmp_* calls
-	feature: 0001638: Allow Interface Data to Be "Scaned" on Demand from the WebUI Similar to Scanner 
-	feature: 0001637: Enable Site Level Scanning Through the UI and Using Ajax 
+    feature: 0001638: Allow Interface Data to Be "Scaned" on Demand from the WebUI Similar to Scanner 
+    feature: 0001637: Enable Site Level Scanning Through the UI and Using Ajax 
     feature: Adding support for ArpWatch
     feature: Adding Juniper Support
     feature: Support Foundry Dual Mode Ports
@@ -103,8 +104,8 @@
              (via hostname, new action for mactrack_devices.php) 
     feature: copy snmp settings from cacti devices to mactrack devices
              (via host_id connection, new action for mactrack_devices.php)
-	feature: Allow mapping of Cacti graphs to MacTrack
-	feature: Add columns for AutoNegotiation - Implementation TBD
+    feature: Allow mapping of Cacti graphs to MacTrack
+    feature: Add columns for AutoNegotiation - Implementation TBD
 
     --- 1.1 ---
     First Official Release
