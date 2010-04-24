@@ -61,9 +61,11 @@
     --- SVN ---
     feature:#0001718: New get_arp_table function for Extreme Networks devices 
     bug#0001717: Ip addresses range report a false value 
+    bug#0001677: index initialization errors (courtesy toe_cutter)
+    bug#0001677: unintended overwrite of non-synced devices (courtesy toe_cutter)
     bug: Undefined index when paging through interfaces
     bug: Graph View still being called for one class of graphs incorrectly
-
+ 
     --- 2.5 ---
     bug#0001677: Undefined indexes
     bug: Undefined index reports in mactrak_view_graphs.php

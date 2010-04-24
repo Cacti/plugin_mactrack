@@ -83,8 +83,11 @@ function sync_mactrack_to_cacti($mt_device) {
 	include_once($config["base_path"] . "/lib/api_device.php");
 	include_once($config["base_path"] . "/lib/utility.php"); # required due to missing include in lib/api_device.php
 
-	# do we want to "Sync MacTrack Device to Cacti Device"
-	if (read_config_option("mt_update_policy", true) == 3) {
+	/* do we want to "Sync MacTrack Device to Cacti Device"
+	 * AND has the device already been assigned a "valid" host_id 
+	 * (aka: has the device been saved successfully) */
+	if ((read_config_option("mt_update_policy", true) == 3) &&
+		($mt_device["host_id"] > 0)) {
 
 		# fetch current data for cacti device
 		$cacti_device = db_fetch_row("SELECT * FROM host WHERE id=" . $mt_device["host_id"]);
@@ -109,8 +112,11 @@ function sync_mactrack_to_cacti($mt_device) {
 
 function sync_cacti_to_mactrack($device) {
 	
-	# is "Sync Cacti Device to MacTrack Device" required?
-	if (read_config_option("mt_update_policy", true) == 2) {
+	/* do we want to "Sync Cacti Device to MacTrack Device"
+	 * AND has the device already been assigned a "valid" MacTrack device id 
+	 * (aka: has the device been saved successfully) */
+	if ((read_config_option("mt_update_policy", true) == 2) &&
+		($device["id"] > 0)) {
 
 		# $devices holds the whole row from host table
 		# now fetch the related device from mac_track_devices, if any
