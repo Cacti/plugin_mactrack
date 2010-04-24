@@ -2579,6 +2579,7 @@ function mactrack_save_button($cancel_action = "", $action = "save", $force_type
 	if (substr_count($cancel_action, ".php")) {
 		$caction = $cancel_action;
 		$calt = "Return";
+		$sname = "save";
 		$salt = "Save";
 	}else{
 		$caction = $_SERVER['HTTP_REFERER'];
