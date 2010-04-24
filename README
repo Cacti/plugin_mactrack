@@ -58,6 +58,9 @@
     Got any ideas or complaints, please e-mail me!
 
 ----[ Changelog
+    --- SVN ---
+    bug: Undefined index when paging through interfaces
+
     --- 2.5 ---
     bug#0001677: Undefined indexes
     bug: Undefined index reports in mactrak_view_graphs.php

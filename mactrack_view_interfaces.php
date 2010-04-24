@@ -334,7 +334,7 @@ function mactrack_view() {
 
 	/* generate page list */
 	if ($total_rows > 0) {
-		$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_view_interfaces.php?action=view");
+		$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_view_interfaces.php?report=interfaces");
 
 		$nav = "<tr bgcolor='#" . $colors["header"] . "' class='noprint'>
 					<td colspan='22'>
