@@ -59,12 +59,13 @@
 
 ----[ Changelog
     --- SVN ---
+    feature:#0001718: New get_arp_table function for Extreme Networks devices 
+    bug#0001717: Ip addresses range report a false value 
     bug: Undefined index when paging through interfaces
     bug: Graph View still being called for one class of graphs incorrectly
 
     --- 2.5 ---
     bug#0001677: Undefined indexes
-    bug#0001717: Ip addresses range report a false value 
     bug: Undefined index reports in mactrak_view_graphs.php
     bug: Small visual issue with Site Details	
     bug: Interfaces table not being created during upgrade

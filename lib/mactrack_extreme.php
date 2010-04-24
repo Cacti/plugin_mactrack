@@ -27,8 +27,15 @@ if (!isset($mactrack_scanning_functions)) { $mactrack_scanning_functions = array
 array_push($mactrack_scanning_functions, "get_extreme_switch_ports");
 array_push($mactrack_scanning_functions, "get_extreme_extremeware_switch_ports");
 
+if (!isset($mactrack_scanning_functions_ip)) { $mactrack_scanning_functions_ip = array(); }
+array_push($mactrack_scanning_functions_ip, "get_extreme_arp_table");
+array_push($mactrack_scanning_functions_ip, "get_extreme_extremeware_arp_table");
+
 function get_extreme_extremeware_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false) {
 	return get_extreme_switch_ports($site, $device, $lowPort, $highPort , true);
+}
+function get_extreme_extremeware_arp_table($site, &$device, $extremeware = false) {
+	get_extreme_arp_table($site, &$device, true); 
 }
 
 function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false) {
@@ -174,4 +181,114 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 	return $device;
 }
 
+
+/*	get_extreme_arp_table - This function reads a devices ARP table for a site and stores
+  the IP address and MAC address combinations in the mac_track_ips table.
+*/
+function get_extreme_arp_table($site, &$device, $extremeware = false) {
+	global $debug, $scan_date;
+/*
+EXTREME-FDB-MIB::extremeFdbIpFdbIPAddress : The IP Address of the IP FDB entry.
+.1.3.6.1.4.1.1916.1.16.2.1.2
+EXTREME-FDB-MIB::extremeFdbIpFdbMacAddress : The MAC address corresponding to the IP Address.
+.1.3.6.1.4.1.1916.1.16.2.1.3
+EXTREME-FDB-MIB::extremeFdbIpFdbVlanIfIndex : The ifIndex of the Vlan on which this ip is learned.
+.1.3.6.1.4.1.1916.1.16.2.1.4
+EXTREME-FDB-MIB::extremeFdbIpFdbPortIfIndex : The IfIndex of the port on which this entry was learned.
+.1.3.6.1.4.1.1916.1.16.2.1.5
+EXTREME-VLAN-MIB::extremeVlanIfIndex.<vlanid> = index
+.1.3.6.1.4.1.1916.1.2.1.2.1.1
+EXTREME-VLAN-MIB::extremeVlanIfDescr.<vlanid> = description
+.1.3.6.1.4.1.1916.1.2.1.2.1.2
+EXTREME-VLAN-MIB::extremeVlanIfVlanId.<vlanid> = tag id
+.1.3.6.1.4.1.1916.1.2.1.2.1.10
+BRIDGE-MIB::dot1dBasePortIfIndex : get Ifindex from extremeFdbIpFdbPortIfIndex
+.1.3.6.1.2.1.17.1.4.1.2
+IF-MIB::ifName : get name of port from IfIndex
+.1.3.6.1.2.1.31.1.1.1.1
+*/
+	if ($extremeware) { // for extremeware use standard apr table + ifDescr for interface name
+		/* get the atifIndexes for the device */
+		$atifIndexes = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.1", $device);
+		$atEntries   = array();
+
+		if (sizeof($atifIndexes)) {
+			mactrack_debug("atifIndexes data collection complete");
+			$atPhysAddress = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.2", $device);
+			mactrack_debug("atPhysAddress data collection complete");
+			$atNetAddress  = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.3", $device);
+			mactrack_debug("atNetAddress data collection complete");
+			$ifDescr  = xform_stripped_oid(".1.3.6.1.2.1.2.2.1.2", $device);
+			mactrack_debug("ifDescr data collection complete");
+		}
+		$i = 0;
+		if (sizeof($atifIndexes)) {
+			foreach($atifIndexes as $key => $atifIndex) {
+				$atEntries[$i]["atifIndex"] = $ifDescr[$atifIndex];
+				$atEntries[$i]["atPhysAddress"] = xform_mac_address($atPhysAddress[$key]);
+				$atEntries[$i]["atNetAddress"] = xform_net_address($atNetAddress[$key]);
+				$i++;
+			}
+		}
+	} else {
+		/* get the atifIndexes for the device */
+		$FdbPortIfIndex = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.2.1.5", $device);
+		$atEntries   = array();
+
+		if (sizeof($FdbPortIfIndex)) {
+			mactrack_debug("FdbPortIfIndex data collection complete");
+			$FdbMacAddress = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.2.1.3", $device);
+			mactrack_debug("FdbMacAddress data collection complete");
+			$FdbIPAddress  = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.2.1.2", $device);
+			mactrack_debug("FdbIPAddress data collection complete");
+			$FdbVlanIfIndex  = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.2.1.4", $device);
+			mactrack_debug("FdbVlanIfIndex data collection complete");
+			$VlanIfVlanId  = xform_stripped_oid(".1.3.6.1.4.1.1916.1.2.1.2.1.10", $device);
+			mactrack_debug("VlanIfVlanId data collection complete");
+			$BasePortIfIndex  = xform_stripped_oid(".1.3.6.1.2.1.17.1.4.1.2", $device);
+			mactrack_debug("BasePortIfIndex data collection complete");
+			$ifName  = xform_stripped_oid(".1.3.6.1.2.1.31.1.1.1.1", $device);
+			mactrack_debug("ifName data collection complete");
+		}
+
+		$i = 0;
+		if (sizeof($FdbPortIfIndex)) {
+			foreach($FdbPortIfIndex as $key => $PortIndex) {
+				$atEntries[$i]["atifIndex"] = $ifName[$BasePortIfIndex[$PortIndex]] . ", vlan:" . $VlanIfVlanId[$FdbVlanIfIndex[$key]];
+				$atEntries[$i]["atPhysAddress"] = xform_mac_address($FdbMacAddress[$key]);
+				$atEntries[$i]["atNetAddress"] = xform_net_address($FdbIPAddress[$key]);
+				$i++;
+			}
+		}
+		mactrack_debug("atEntries assembly complete.");
+	}
+
+	/* output details to database */
+	if (sizeof($atEntries)) {
+		foreach($atEntries as $atEntry) {
+			$insert_string = "REPLACE INTO mac_track_ips " .
+				"(site_id,device_id,hostname,device_name,port_number," .
+				"mac_address,ip_address,scan_date)" .
+				" VALUES ('" .
+				$device["site_id"] . "','" .
+				$device["device_id"] . "','" .
+				$device["hostname"] . "','" .
+				$device["device_name"] . "','" .
+				$atEntry["atifIndex"] . "','" .
+				$atEntry["atPhysAddress"] . "','" .
+				$atEntry["atNetAddress"] . "','" .
+				$scan_date . "')";
+
+			//mactrack_debug("SQL: " . $insert_string);
+
+			db_execute($insert_string);
+		}
+	}
+
+	/* save ip information for the device */
+	$device["ips_total"] = sizeof($atEntries);
+	db_execute("UPDATE mac_track_devices SET ips_total ='" . $device["ips_total"] . "' WHERE device_id='" . $device["device_id"] . "'");
+
+	mactrack_debug("HOST: " . $device["hostname"] . ", IP address information collection complete: nb IP=".sizeof($atEntries) .".");
+}
 ?>
