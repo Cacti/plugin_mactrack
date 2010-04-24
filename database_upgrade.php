@@ -33,7 +33,10 @@ if (file_exists(dirname(__FILE__) . "/../../include/global.php")) {
 } else {
 	include(dirname(__FILE__) . "/../../include/config.php");
 }
-include(dirname(__FILE__) . "/lib/mactrack_functions.php");
+include_once(dirname(__FILE__) . "/lib/mactrack_functions.php");
+
+echo "This function is depricated.  Please goto Plugin Management from the WebUI to Upgrade\n";
+exit 1;
 
 /* this is only for old users.  We are not thinking about this now... */
 if (0 == 1) {
