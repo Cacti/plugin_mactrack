@@ -60,6 +60,7 @@
 ----[ Changelog
     --- SVN ---
     bug: Undefined index when paging through interfaces
+    bug: Graph View still being called for one class of graphs incorrectly
 
     --- 2.5 ---
     bug#0001677: Undefined indexes

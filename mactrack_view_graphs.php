@@ -140,7 +140,6 @@ function mactrack_view_graphs() {
 				/* clear the filter vars so they don't affect our results */
 				$_REQUEST["filter"]  = "";
 
-				/* Fix to avoid error in 'preview' after selection in 'list' : Notice: Undefined index: rra_id in C:\apache2\htdocs\cacti\graph_view.php on line 142 */
 				$set_rra_id = empty($rra_id) ? read_graph_config_option("default_rra_id") : $_REQUEST["rra_id"];
 			}
 		}
