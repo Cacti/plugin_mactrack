@@ -80,14 +80,14 @@ function applyInterfaceFilterChange(objForm) {
 	document.location = strURL
 }
 
-function getfromserver(baseurl) {
+function getfromserverMacTrack(baseurl) {
 	xmlHttp=GetXmlHttpObject()
 	if (xmlHttp==null) {
 		alert ("Get Firefox!")
 		return
 	}
 
-	xmlHttp.onreadystatechange=stateChanged
+	xmlHttp.onreadystatechange=stateChangedMacTrack
 	xmlHttp.open("GET",baseurl,true)
 	xmlHttp.send(null)
 }
@@ -95,19 +95,19 @@ function getfromserver(baseurl) {
 function scan_device(device_id) {
 	url="mactrack_ajax_admin.php?action=rescan&device_id="+device_id
 	document.getElementById("r_"+device_id).src="images/view_busy.gif"
-	getfromserver(url)
+	getfromserverMacTrack(url)
 }
 
 function site_scan(site_id) {
 	url="mactrack_ajax_admin.php?action=site_scan&site_id="+site_id
 	document.getElementById("r_"+site_id).src="images/view_busy.gif"
-	getfromserver(url)
+	getfromserverMacTrack(url)
 }
 
 function scan_device_interface(device_id, ifName) {
 	url="mactrack_ajax_admin.php?action=rescan&device_id="+device_id+"&ifName="+ifName
 	document.getElementById("r_"+device_id+"_"+ifName).src="images/view_busy.gif"
-	getfromserver(url)
+	getfromserverMacTrack(url)
 }
 
 function clearScanResults() {
@@ -116,36 +116,30 @@ function clearScanResults() {
 
 function disable_device(device_id) {
 	url="mactrack_ajax_admin.php?action=disable&device_id="+device_id
-	getfromserver(url)
+	getfromserverMacTrack(url)
 }
 
 function enable_device(device_id) {
 	url="mactrack_ajax_admin.php?action=enable&device_id="+device_id
-	getfromserver(url)
+	getfromserverMacTrack(url)
 }
 
 function saveGraphSettings() {
 	filter=document.form_graph_view.filter.value;
 	graph_template_id=document.form_graph_view.filter.value;
-//	image_size=document.form_graph_view.image_size.value;
-//	rows=document.form_graph_view.rows.value;
-//	preview=document.form_graph_view.preview.checked;
 	timespan=document.form_timespan_selector.predefined_timespan.value;
 	timeshift=document.form_timespan_selector.predefined_timeshift.value;
 
 	url="mactrack_ajax.php?action=save_graph_settings" +
 		"&filter=" + filter +
 		"graph_template_id=" + graph_template_id +
-//		"image_size=" + image_size +
-//		"rows=" + rows +
-//		"preview=" + preview +
 		"predefined_timespan=" + timespan +
 		"predefined_timeshift=" + timeshift;
 
-	getfromserver(url)
+	getfromserverMacTrack(url)
 }
 
-function stateChanged() {
+function stateChangedMacTrack() {
 	if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete") {
 		reply     = xmlHttp.responseText
 		reply     = reply.split("!!!!")

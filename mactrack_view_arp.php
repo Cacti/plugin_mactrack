@@ -397,7 +397,7 @@ function mactrack_view_ips() {
 	$port_results = mactrack_view_get_ip_records($sql_where, TRUE, $row_limit);
 
 	/* prevent table scans, either a device or site must be selected */
-	if ($_REQUEST["site_id"] == -1 && $_REQUEST["device_id"] == -1) {
+	if (!strlen($sql_where)) {
 		$total_rows = 0;
 	}elseif ($_REQUEST["rows"] == 1) {
 		$rows_query_string = "SELECT

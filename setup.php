@@ -179,6 +179,7 @@ function mactrack_check_upgrade () {
 		/* update the plugin information */
 		$info = plugin_mactrack_version();
 		$id   = db_fetch_cell("SELECT id FROM plugin_config WHERE directory='mactrack'");
+
 		db_execute("UPDATE plugin_config
 			SET name='" . $info["longname"] . "',
 			author='"   . $info["author"]   . "',
@@ -830,7 +831,7 @@ function mactrack_setup_table_new () {
 function mactrack_version () {
 	return array(
 		'name'      => 'mactrack',
-		'version'   => '2.5',
+		'version'   => '2.6',
 		'longname'  => 'Device Tracking',
 		'author'    => 'Larry Adams',
 		'homepage'  => 'http://cacti.net',

@@ -4,7 +4,7 @@
     Contact ........ larryjadams@comcast.net
     Home Site ...... http://www.cacti.net
     Program ........ MacTrack
-    Version ........ 2.5
+    Version ........ 2.6
     Purpose ........ A Nice Plugin that Tracks Your Users
 
 *******************************************************************************/
@@ -58,13 +58,17 @@
     Got any ideas or complaints, please e-mail me!
 
 ----[ Changelog
-    --- SVN ---
+    --- 2.6 ---
     feature:#0001718: New get_arp_table function for Extreme Networks devices 
-    bug#0001717: Ip addresses range report a false value 
+    bug#0001668: Mactrack sometimes shows "No results found" when results are shown 
+    bug#0001670: spikekill and mactrack JS functions clash stateChanged and getfromserver 
     bug#0001677: index initialization errors (courtesy toe_cutter)
     bug#0001677: unintended overwrite of non-synced devices (courtesy toe_cutter)
+    bug#0001717: Ip addresses range report a false value 
     bug: Undefined index when paging through interfaces
     bug: Graph View still being called for one class of graphs incorrectly
+    bug: With Scan Date set to 'All' rows counter was not correct for matches
+    bug: When viewing IP's, device filter not operable
  
     --- 2.5 ---
     bug#0001677: Undefined indexes
