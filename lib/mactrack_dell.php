@@ -87,7 +87,7 @@ function get_base_dell_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp_rea
 	}
 
 	if ($store_to_db) {
-		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $ports_total . ", OPER PORTS: " . $ports_active);
+		print("\nINFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $ports_total . ", OPER PORTS: " . $ports_active);
 		if ($debug) {
 			print("\n");
 		}

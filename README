@@ -60,6 +60,7 @@
 ----[ Changelog
     --- 2.6 ---
     feature:#0001718: New get_arp_table function for Extreme Networks devices 
+    bug#0001665: New line missing when printing Cisco device stats 
     bug#0001668: Mactrack sometimes shows "No results found" when results are shown 
     bug#0001670: spikekill and mactrack JS functions clash stateChanged and getfromserver 
     bug#0001677: index initialization errors (courtesy toe_cutter)
