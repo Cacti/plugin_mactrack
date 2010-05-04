@@ -993,22 +993,16 @@ function mactrack_device_type() {
 	$i = 0;
 	if (sizeof($device_types) > 0) {
 		foreach ($device_types as $device_type) {
-			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
-				?>
-				<td width=170>
-					<a class="linkEditMain" href="mactrack_device_types.php?action=edit&device_type_id=<?php print $device_type["device_type_id"];?>"><?php print $device_type["description"];?></a>
-				</td>
-				<td><?php print $device_type["vendor"];?></td>
-				<td><?php print $mactrack_device_types[$device_type["device_type"]];?></td>
-				<td><?php print $device_type["scanning_function"];?></td>
-				<td><?php print $device_type["ip_scanning_function"];?></td>
-				<td><?php print $device_type["sysDescr_match"];?></td>
-				<td><?php print $device_type["sysObjectID_match"];?></td>
-				<td style="<?php print get_checkbox_style();?>" width="1%" align="right">
-					<input type='checkbox' style='margin: 0px;' name='chk_<?php print $device_type["device_type_id"];?>' title="<?php print $device_type["description"];?>">
-				</td>
-			</tr>
-			<?php
+			form_alternate_row_color($colors["alternate"],$colors["light"],$i, 'line' . $device_type["device_type_id"]); $i++;
+			form_selectable_cell('<a class="linkEditMain" href="mactrack_device_types.php?action=edit&device_type_id=' . $device_type["device_type_id"] . '">' . $device_type["description"] . '</a>', $device_type["device_type_id"]);
+			form_selectable_cell($device_type["vendor"], $device_type["device_type_id"]);
+			form_selectable_cell($mactrack_device_types[$device_type["device_type"]], $device_type["device_type_id"]);
+			form_selectable_cell($device_type["scanning_function"], $device_type["device_type_id"]);
+			form_selectable_cell($device_type["ip_scanning_function"], $device_type["device_type_id"]);
+			form_selectable_cell($device_type["sysDescr_match"], $device_type["device_type_id"]);
+			form_selectable_cell($device_type["sysObjectID_match"], $device_type["device_type_id"]);
+			form_checkbox_cell($device_type["description"], $device_type["device_type_id"]);
+			form_end_row();
 		}
 
 		/* put the nav bar on the bottom as well */
