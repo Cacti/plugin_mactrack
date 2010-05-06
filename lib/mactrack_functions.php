@@ -1661,15 +1661,21 @@ function get_link_port_status(&$device) {
 function xform_stripped_oid($OID, &$device, $snmp_readstring = "") {
 	$return_array = array();
 
-	if (strlen($snmp_readstring) == 0) {
+	if (!strlen($snmp_readstring)) {
 		$snmp_readstring = $device["snmp_readstring"];
+	}
+
+	if ($device["snmp_version"] == "3" && substr_count($snmp_readstring,"cisco@")) {
+		$snmp_context = str_replace("cisco@", "", $snmp_readstring);
+	}else{
+		$snmp_context = $device["snmp_context"];;
 	}
 
 	$walk_array = cacti_snmp_walk($device["hostname"], $snmp_readstring,
 					$OID, $device["snmp_version"], $device["snmp_username"],
 					$device["snmp_password"], $device["snmp_auth_protocol"],
 					$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"],
-					$device["snmp_context"], $device["snmp_port"], $device["snmp_timeout"],
+					$snmp_context, $device["snmp_port"], $device["snmp_timeout"],
 					$device["snmp_retries"], $device["max_oids"]);
 
 	$OID = preg_replace("/^\./", "", $OID);
@@ -1762,11 +1768,17 @@ function xform_standard_indexed_data($xformOID, &$device, $snmp_readstring = "")
 		$snmp_readstring = $device["snmp_readstring"];
 	}
 
+	if ($device["snmp_version"] == "3" && substr_count($snmp_readstring,"cisco@")) {
+		$snmp_context = str_replace("cisco@", "", $snmp_readstring);
+	}else{
+		$snmp_context = $device["snmp_context"];;
+	}
+
 	$xformArray = cacti_snmp_walk($device["hostname"], $snmp_readstring,
 					$xformOID, $device["snmp_version"], $device["snmp_username"],
 					$device["snmp_password"], $device["snmp_auth_protocol"],
 					$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"],
-					$device["snmp_context"], $device["snmp_port"], $device["snmp_timeout"],
+					$snmp_context, $device["snmp_port"], $device["snmp_timeout"],
 					$device["snmp_retries"], $device["max_oids"]);
 
 	$i = 0;

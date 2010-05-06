@@ -124,13 +124,23 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 				$active_vlan_ports = 0;
 				break;
 			default:
-				$snmp_readstring = $device["snmp_readstring"] . "@" . $vlan_number;
-				$active_vlan_ports = cacti_snmp_get($device["hostname"], $snmp_readstring,
-					".1.3.6.1.2.1.17.1.2.0", $device["snmp_version"],
-					$device["snmp_username"], $device["snmp_password"],
-					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
-					$device["snmp_priv_protocol"], $device["snmp_context"],
-					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+				if ($device["snmp_version"] < 3) {
+					$snmp_readstring = $device["snmp_readstring"] . "@" . $vlan_number;
+					$active_vlan_ports = cacti_snmp_get($device["hostname"], $snmp_readstring,
+						".1.3.6.1.2.1.17.1.2.0", $device["snmp_version"],
+						$device["snmp_username"], $device["snmp_password"],
+						$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+						$device["snmp_priv_protocol"], $device["snmp_context"],
+						$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+				}else{
+					$snmp_readstring = "cisco@" . $vlan_number;
+					$active_vlan_ports = cacti_snmp_get($device["hostname"], $snmp_readstring,
+						".1.3.6.1.2.1.17.1.2.0", $device["snmp_version"],
+						$device["snmp_username"], $device["snmp_password"],
+						$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+						$device["snmp_priv_protocol"], $vlan_number,
+						$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+				}
 
 				if ((!is_numeric($active_vlan_ports)) || ($active_vlan_ports) < 0) {
 					$active_vlan_ports = 0;
@@ -164,7 +174,11 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 				continue;
 			}
 
-			$snmp_readstring = $device["snmp_readstring"] . "@" . $active_vlan["vlan_id"];
+			if ($device["snmp_version"] < "3") {
+				$snmp_readstring = $device["snmp_readstring"] . "@" . $active_vlan["vlan_id"];
+			}else{
+				$snmp_readstring = "cisco@" . $active_vlan["vlan_id"];
+			}
 
 			mactrack_debug("Processing has begun for VLAN: " . $active_vlan["vlan_id"]);
 
@@ -331,13 +345,23 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 				$active_vlan_ports = 0;
 				break;
 			default:
-				$snmp_readstring = $device["snmp_readstring"] . "@" . $vlan_number;
-				$active_vlan_ports = cacti_snmp_get($device["hostname"], $snmp_readstring,
-					".1.3.6.1.2.1.17.1.2.0", $device["snmp_version"],
-					$device["snmp_username"], $device["snmp_password"],
-					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
-					$device["snmp_priv_protocol"], $device["snmp_context"],
-					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+				if ($device["snmp_version"] < "3") {
+					$snmp_readstring = $device["snmp_readstring"] . "@" . $vlan_number;
+					$active_vlan_ports = cacti_snmp_get($device["hostname"], $snmp_readstring,
+						".1.3.6.1.2.1.17.1.2.0", $device["snmp_version"],
+						$device["snmp_username"], $device["snmp_password"],
+						$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+						$device["snmp_priv_protocol"], $device["snmp_context"],
+						$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+				}else{
+					$snmp_readstring = "cisco@" . $vlan_number;
+					$active_vlan_ports = cacti_snmp_get($device["hostname"], $snmp_readstring,
+						".1.3.6.1.2.1.17.1.2.0", $device["snmp_version"],
+						$device["snmp_username"], $device["snmp_password"],
+						$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+						$device["snmp_priv_protocol"], $vlan_number,
+						$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+				}
 
 				if ((!is_numeric($active_vlan_ports)) || ($active_vlan_ports) < 0) {
 					$active_vlan_ports = 0;
@@ -364,7 +388,11 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		$i = 0;
 		/* get the port status information */
 		foreach($active_vlans as $active_vlan) {
-			$snmp_readstring = $device["snmp_readstring"] . "@" . $active_vlan["vlan_id"];
+			if ($device["snmp_version"] < "3") {
+				$snmp_readstring = $device["snmp_readstring"] . "@" . $active_vlan["vlan_id"];
+			}else{
+				$snmp_readstring = "cisco@" . $active_vlan["vlan_id"];
+			}
 
 			mactrack_debug("Processing has begun for VLAN: " . $active_vlan["vlan_id"]);
 			if ($highPort == 0) {

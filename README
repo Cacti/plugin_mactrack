@@ -58,6 +58,9 @@
     Got any ideas or complaints, please e-mail me!
 
 ----[ Changelog
+    --- SVN ---
+    bug: Correcting SNMPv3 and Cisco support
+
     --- 2.6 ---
     feature:#0001718: New get_arp_table function for Extreme Networks devices 
     bug#0001665: New line missing when printing Cisco device stats 
