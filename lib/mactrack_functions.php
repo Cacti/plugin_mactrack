@@ -2013,7 +2013,7 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 			(($port_value["mac_address"] <> "NOT USER") && (strlen($port_value["mac_address"]) > 0))){
 
 			$mac_authorized = db_check_auth($port_value["mac_address"]);
-			mactrack_debug("Authorized MAC ID: " . $mac_authorized);
+			mactrack_debug("MAC Address '" . $port_value["mac_address"] . "' on device '" . $device["device_name"] . "' is " . (strlen($mac_authorized) ? "":"NOT") . " Authorized");
 
 			if ($mac_authorized > 0) {
 				$authorized_mac = 1;
