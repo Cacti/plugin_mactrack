@@ -35,7 +35,7 @@ function get_extreme_extremeware_switch_ports($site, &$device, $lowPort = 0, $hi
 	return get_extreme_switch_ports($site, $device, $lowPort, $highPort , true);
 }
 function get_extreme_extremeware_arp_table($site, &$device, $extremeware = false) {
-	get_extreme_arp_table($site, &$device, true); 
+	get_extreme_arp_table($site, $device, true);
 }
 
 function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false) {

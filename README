@@ -59,6 +59,7 @@
 
 ----[ Changelog
     --- SVN ---
+    bug#0001742: PHP error () in lib/mactrack_extreme.php
     bug: Correcting SNMPv3 and Cisco support
 
     --- 2.6 ---
