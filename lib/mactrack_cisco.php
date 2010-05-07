@@ -133,7 +133,6 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 						$device["snmp_priv_protocol"], $device["snmp_context"],
 						$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
 				}else{
-					$snmp_readstring = "cisco@" . $vlan_number;
 					$active_vlan_ports = cacti_snmp_get($device["hostname"], $snmp_readstring,
 						".1.3.6.1.2.1.17.1.2.0", $device["snmp_version"],
 						$device["snmp_username"], $device["snmp_password"],
@@ -354,7 +353,6 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 						$device["snmp_priv_protocol"], $device["snmp_context"],
 						$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
 				}else{
-					$snmp_readstring = "cisco@" . $vlan_number;
 					$active_vlan_ports = cacti_snmp_get($device["hostname"], $snmp_readstring,
 						".1.3.6.1.2.1.17.1.2.0", $device["snmp_version"],
 						$device["snmp_username"], $device["snmp_password"],
