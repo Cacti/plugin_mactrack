@@ -992,38 +992,8 @@ function mactrack_get_devices(&$sql_where, $row_limit, $apply_limits = TRUE) {
 
 	$query_string = "SELECT
 		mac_track_device_types.description as device_type,
-		mac_track_devices.site_id,
-		mac_track_sites.site_name,
-		mac_track_devices.device_id,
-		mac_track_devices.host_id,
-		mac_track_devices.device_name,
-		mac_track_devices.notes,
-		mac_track_devices.hostname,
-		mac_track_devices.snmp_options,
-		mac_track_devices.snmp_readstring,
-		mac_track_devices.snmp_version,
-		mac_track_devices.snmp_username,
-		mac_track_devices.snmp_password,
-		mac_track_devices.snmp_auth_protocol,
-		mac_track_devices.snmp_priv_passphrase,
-		mac_track_devices.snmp_priv_protocol,
-		mac_track_devices.snmp_context,
-		mac_track_devices.snmp_port,
-		mac_track_devices.snmp_timeout,
-		mac_track_devices.snmp_retries,
-		mac_track_devices.max_oids,
-		mac_track_devices.snmp_status,
-		mac_track_devices.ignorePorts,
-		mac_track_devices.disabled,
-		mac_track_devices.scan_type,
-		mac_track_devices.ips_total,
-		mac_track_devices.ports_total,
-		mac_track_devices.ports_active,
-		mac_track_devices.ports_trunk,
-		mac_track_devices.macs_active,
-		mac_track_devices.last_rundate,
-		mac_track_devices.last_runmessage,
-		mac_track_devices.last_runduration
+		mac_track_devices.*,
+		mac_track_sites.site_name
 		FROM mac_track_sites
 		RIGHT JOIN mac_track_devices ON mac_track_devices.site_id = mac_track_sites.site_id
 		LEFT JOIN mac_track_device_types ON mac_track_devices.device_type_id=mac_track_device_types.device_type_id
