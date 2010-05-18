@@ -62,6 +62,7 @@
     bug#0001742: PHP error () in lib/mactrack_extreme.php
     bug#0001743: DEBUG: Authorized MAC ID: empty
     bug: Correcting SNMPv3 and Cisco support
+    bug: Importing OUIDB broken with redefine function error
     bug: Exporting Devices from the Console did not work
 
     --- 2.6 ---
