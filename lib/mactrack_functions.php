@@ -739,7 +739,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 
 		$insert_vals .= "('" .
 			@$device["site_id"]                 . "', '" . @$device["device_id"]         . "', '" .
-			@$device["sysUptime"]               . "', '" . @$ifIndex                     . "', '" .
+			@$device["snmp_sysUptime"]          . "', '" . @$ifIndex                     . "', '" .
 			@$ifTypes[$ifIndex]                 . "', "  . @$cnn_id->qstr(@$ifNames[$ifIndex]) . ", "  .
 			@$cnn_id->qstr($ifAlias)            . ", '"  . @$linkPort                    . "', '" .
 			@$vlan_id                           . "', "  . @$cnn_id->qstr(@$vlan_name)   . ", '"  .

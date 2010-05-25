@@ -4,7 +4,7 @@
     Contact ........ larryjadams@comcast.net
     Home Site ...... http://www.cacti.net
     Program ........ MacTrack
-    Version ........ 2.6
+    Version ........ 2.7
     Purpose ........ A Nice Plugin that Tracks Your Users
 
 *******************************************************************************/
@@ -64,6 +64,7 @@
     bug: Correcting SNMPv3 and Cisco support
     bug: Importing OUIDB broken with redefine function error
     bug: Exporting Devices from the Console did not work
+    bug: Lastchange was not displaying correctly
 
     --- 2.6 ---
     feature:#0001718: New get_arp_table function for Extreme Networks devices 
