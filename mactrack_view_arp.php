@@ -23,7 +23,6 @@
 */
 
 $guest_account = true;
-
 chdir('../../');
 include("./include/auth.php");
 include_once("./include/global_arrays.php");

@@ -23,7 +23,6 @@
 */
 
 $guest_account = true;
-
 chdir('../../');
 include("./include/auth.php");
 include_once("./plugins/mactrack/lib/mactrack_functions.php");

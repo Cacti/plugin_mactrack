@@ -4,7 +4,7 @@
     Contact ........ larryjadams@comcast.net
     Home Site ...... http://www.cacti.net
     Program ........ MacTrack
-    Version ........ 2.7
+    Version ........ 2.8
     Purpose ........ A Nice Plugin that Tracks Your Users
 
 *******************************************************************************/
@@ -58,7 +58,11 @@
     Got any ideas or complaints, please e-mail me!
 
 ----[ Changelog
-    --- SVN ---
+    --- 2.8 ---
+    compat: Allow proper navigation text generation
+    bug: Guest user could not access site
+
+    --- 2.7 ---
     bug#0001742: PHP error () in lib/mactrack_extreme.php
     bug#0001743: DEBUG: Authorized MAC ID: empty
     bug: Correcting SNMPv3 and Cisco support
