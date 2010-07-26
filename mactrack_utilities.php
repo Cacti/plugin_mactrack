@@ -495,10 +495,10 @@ function mactrack_utilities() {
 
 	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
 		<td class="textArea" width="150" valign="top">
-			<p><a href='mactrack_utilities.php?action=mactrack_proc_status'>View MacTrack Process Status</a></p>
+			<a href='mactrack_utilities.php?action=mactrack_proc_status'>View MacTrack Process Status</a>
 		</td>
 		<td class="textArea" valign="top">
-			<p>This option will let you show and set process information associated with the MacTrack polling process.</p>
+			This option will let you show and set process information associated with the MacTrack polling process.
 		</td>
 	</tr>
 
@@ -506,41 +506,41 @@ function mactrack_utilities() {
 
 	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
 		<td class="textArea" width="150" valign="top">
-			<p><a href='mactrack_utilities.php?action=mactrack_utilities_perform_db_maint'>Perform Database Maintenance</a></p>
+			<a href='mactrack_utilities.php?action=mactrack_utilities_perform_db_maint'>Perform Database Maintenance</a>
 		</td>
 		<td class="textArea" valign="top">
-			<p>Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed.</p>
+			Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed.
 		</td>
 	</tr>
 
 	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
 		<td class="textArea" width="150" valign="top">
-			<p><a href='mactrack_utilities.php?action=mactrack_refresh_oui_database'>Refresh IEEE Vendor MAC/OUI Database</a></p>
+			<a href='mactrack_utilities.php?action=mactrack_refresh_oui_database'>Refresh IEEE Vendor MAC/OUI Database</a>
 		</td>
 		<td class="textArea" valign="top">
-			<p>This function will download and install the latest OIU database from the IEEE Website.
+			This function will download and install the latest OIU database from the IEEE Website.
 			Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two
 			parts.  The first part of the MAC Addess contains the Vendor MAC.  The Vendor MAC identifies who
-			manufactured the part.  This will be helpful in spot checking for rogue devices on your network.</p>
+			manufactured the part.  This will be helpful in spot checking for rogue devices on your network.
 		</td>
 	</tr>
 
 	<tr bgcolor="#<?php print $colors["form_alternate2"];?>">
 		<td class="textArea" width="150" valign="top">
-			<p><a href='mactrack_utilities.php?action=mactrack_utilities_purge_scanning_funcs'>Refresh Scanning Functions</a></p>
+			<a href='mactrack_utilities.php?action=mactrack_utilities_purge_scanning_funcs'>Refresh Scanning Functions</a>
 		</td>
 		<td class="textArea" valign="top">
-			<p>Deletes old and potentially stale Device Tracking scanning functions from the drop-down
-				you receive when you edit a device type.</p>
+			Deletes old and potentially stale Device Tracking scanning functions from the drop-down
+				you receive when you edit a device type.
 		</td>
 	</tr>
 
 	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
 		<td class="textArea" width="150" valign="top">
-			<p><a href='mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table'>Remove All Scan Results</a></p>
+			<a href='mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table'>Remove All Scan Results</a>
 		</td>
 		<td class="textArea" valign="top">
-			<p>Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong></p>
+			Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>
 		</td>
 	</tr>
 
@@ -548,19 +548,19 @@ function mactrack_utilities() {
 
 	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
 		<td class="textArea" width="150" valign="top">
-			<p><a href='mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data'>Remove All Aggregated Results</a></p>
+			<a href='mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data'>Remove All Aggregated Results</a>
 		</td>
 		<td class="textArea" valign="top">
-			<p>Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run. </p>
+			Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run.
 		</td>
 	</tr>
 
 	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
 		<td class="textArea" width="150" valign="top">
-			<p><a href='mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data'>Perform Aggregate Table Rebuild</a></p>
+			<a href='mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data'>Perform Aggregate Table Rebuild</a>
 		</td>
 		<td class="textArea" valign="top">
-			<p>Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scaned data</strong>  now. </p>
+			Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scaned data</strong>  now.
 		</td>
 	</tr>
 	<?php

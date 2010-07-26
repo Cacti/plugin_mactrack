@@ -358,7 +358,9 @@ function mactrack_site_get_site_records(&$sql_where, $row_limit, $apply_limits =
 			$query_string .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
 		}
 	}else{
-		$query_string ="SELECT mac_track_sites.site_name,
+		$query_string ="SELECT
+			mac_track_sites.site_id,
+			mac_track_sites.site_name,
 			Count(mac_track_device_types.device_type_id) AS total_devices,
 			mac_track_device_types.vendor,
 			mac_track_device_types.description,
@@ -655,7 +657,7 @@ function mactrack_site() {
 				form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 					?>
 					<td width=200>
-						<p class="linkEditMain"><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]);?></p>
+						<a class='linkEditMain' href='mactrack_sites.php?action=edit&site_id=<?php print $site["site_id"];?>'><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]);?></a>
 					</td>
 					<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["vendor"]) : $site["vendor"]);?></td>
 					<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["description"]) : $site["description"]);?></td>
