@@ -4,7 +4,7 @@
     Contact ........ larryjadams@comcast.net
     Home Site ...... http://www.cacti.net
     Program ........ MacTrack
-    Version ........ 2.8
+    Version ........ 2.9
     Purpose ........ A Nice Plugin that Tracks Your Users
 
 *******************************************************************************/
@@ -58,6 +58,9 @@
     Got any ideas or complaints, please e-mail me!
 
 ----[ Changelog
+    --- 2.9 ---
+    bug#0001799: Select all checkbox on Mac Addresses tab not working
+
     --- 2.8 ---
     compat: Allow proper navigation text generation
     bug: Guest user could not access site
