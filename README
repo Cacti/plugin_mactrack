@@ -60,6 +60,7 @@
 ----[ Changelog
     --- 2.9 ---
     bug#0001799: Select all checkbox on Mac Addresses tab not working
+    bug#0001723: Can't import devices
 
     --- 2.8 ---
     compat: Allow proper navigation text generation

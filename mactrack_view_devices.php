@@ -80,13 +80,14 @@ function mactrack_view_export_devices() {
 	$devices = mactrack_view_get_device_records($sql_where, 0, FALSE);
 
 	$xport_array = array();
-	array_push($xport_array, '"site_id","site_name","device_id","device_name","notes",' .
-		'"hostname","snmp_readstring","snmp_readstrings","snmp_version",' .
-		'"snmp_username","snmp_password","snmp_auth_protocol","snmp_priv_passphrase","snmp_priv_protocol","snmp_context"' .
-		'"snmp_port","snmp_timeout","snmp_retries","max_oids","snmp_sysName","snmp_sysLocation",' .
-		'"snmp_sysContact","snmp_sysObjectID","snmp_sysDescr","snmp_sysUptime",' .
-		'"ignorePorts","scan_type","disabled","ports_total","ports_active",' .
-		'"ports_trunk","macs_active","last_rundate","last_runduration"');
+	array_push($xport_array, 'site_id, site_name, device_id, device_name, notes, ' .
+		'hostname, snmp_readstring, snmp_readstrings, snmp_version, ' .
+		'snmp_username, snmp_password, snmp_auth_protocol, snmp_priv_passphrase, ' .
+		'snmp_priv_protocol, snmp_context, ' .
+		'snmp_port, snmp_timeout, snmp_retries, max_oids, snmp_sysName, snmp_sysLocation, ' .
+		'snmp_sysContact, snmp_sysObjectID, snmp_sysDescr, snmp_sysUptime, ' .
+		'ignorePorts, scan_type, disabled, ports_total, ports_active, ' .
+		'ports_trunk, macs_active, last_rundate, last_runduration');
 
 	if (sizeof($devices)) {
 		foreach($devices as $device) {
