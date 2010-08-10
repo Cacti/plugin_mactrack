@@ -925,12 +925,19 @@ function mactrack_config_settings () {
 			"default" => "2weeks",
 			"array" => $mactrack_data_retention,
 			),
+		"mt_ignorePorts_delim" => array(
+			"friendly_name" => "Switch Level Ignore Ports Delimiter",
+			"description" => "What delimiter should MacTrack use when parsing the Ignore Ports string for each switch.",
+			"method" => "drop_array",
+			"default" => "-1",
+			"array" => array("-1" => "Auto Detect", ":" => "Colon [:]", "|" => "Pipe [|]", " " => "Space [ ]")
+			),
 		"mt_mac_delim" => array(
 			"friendly_name" => "Mac Address Delimiter",
 			"description" => "How should each octet of the MAC address be delimited.",
 			"method" => "drop_array",
 			"default" => ":",
-			"array" => array(":" => ":", "-" => "-")
+			"array" => array(":" => "Colon [:]", "-" => "Dash [-]")
 			),
 		"mt_ignorePorts" => array(
 			"method" => "textbox",
@@ -1685,7 +1692,10 @@ function mactrack_config_form () {
 	"ignorePorts" => array(
 		"method" => "textarea",
 		"friendly_name" => "Ports to Ignore",
-		"description" => "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon ':'.  For example, 'Fa0/1: Fa1/23' would be acceptable for some manufacturers switch types.",
+		"description" => "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such
+		as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be
+		separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be
+		acceptable for some manufacturers switch types.",
 		"value" => "|arg1:ignorePorts|",
 		"default" => "",
 		"class" => "textAreaNotes",

@@ -316,6 +316,23 @@ function find_scanning_function(&$device, &$device_types) {
 function port_list_to_array($port_list, $delimiter = ":") {
 	$port_array = array();
 
+	if (read_config_option("mt_ignorePorts_delim") == "-1") {
+		/* find the delimiter */
+		$t1 = sizeof(explode(":", $port_list));
+		$t2 = sizeof(explode("|", $port_list));
+		$t3 = sizeof(explode(" ", $port_list));
+
+		if ($t1 > $t2 && $t1 > $t3) {
+			$delimiter = ":";
+		}elseif ($t2 > $t1 && $t2 > $t3) {
+			$delimiter = "|";
+		}elseif ($t3 > $t1 && $t3 > $t2) {
+			$delimiter = " ";
+		}
+	}else{
+		$delimiter = read_config_option("mt_ignorePorts_delim");
+	}
+
 	$ports = explode($delimiter, $port_list);
 
 	if (sizeof($ports)) {
