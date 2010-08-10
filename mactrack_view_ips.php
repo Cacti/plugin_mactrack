@@ -262,8 +262,8 @@ function mactrack_view_ip_ranges() {
 				?>
 				<td width=80>
 					<a href='<?php print htmlspecialchars($webroot . "plugins/mactrack/mactrack_sites.php?action=edit&site_id=" . $ip_range['site_id']);?>' title='Edit Site'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/edit_object.png'></a>
-					<a href='<?php print htmlspecialchars($webroot . "plugins/mactrack/mactrack_view_macs.php?report=macs&reset&ip_filter_type_id=3&ip_filter=" . (str_replace("*", "", $ip_range["ip_range"])) . "&device_id=-1&scan_date=3&site_id=" . $ip_range['site_id']);?>' title='View MAC Addresses'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_macs.gif'></a>
-					<a href='<?php print htmlspecialchars($webroot . "plugins/mactrack/mactrack_view_arp.php?report=arp&reset&ip_filter_type_id=3&ip_filter=" . (str_replace("*", "", $ip_range["ip_range"])) . "&device_id=-1&scan_date=3&site_id=" . $ip_range['site_id']);?>' title='View IP Addresses'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_ipaddresses.gif'></a>
+					<a href='<?php print htmlspecialchars($webroot . "plugins/mactrack/mactrack_view_macs.php?report=macs&reset&ip_filter_type_id=3&ip_filter=" . $ip_range["ip_range"] . "." . "&device_id=-1&scan_date=3&site_id=" . $ip_range['site_id']);?>' title='View MAC Addresses'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_macs.gif'></a>
+					<a href='<?php print htmlspecialchars($webroot . "plugins/mactrack/mactrack_view_arp.php?report=arp&reset&ip_filter_type_id=3&ip_filter=" . $ip_range["ip_range"] . "." . "&device_id=-1&scan_date=3&site_id=" . $ip_range['site_id']);?>' title='View IP Addresses'><img border='0' src='<?php print $webroot;?>plugins/mactrack/images/view_ipaddresses.gif'></a>
 				</td>
 				<td width=200>
 					<?php print "<strong>" . $ip_range["site_name"] . "</strong>";?>
