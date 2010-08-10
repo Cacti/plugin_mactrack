@@ -198,9 +198,9 @@ function get_base_dell_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp_rea
 			/* map pvid's to ports with vlan names*/
 			if (sizeof($new_port_key_array)) {
 			foreach ($new_port_key_array as $key => $port){
-				$temp_array = explode(".",$port["key"]);
-				$new_port_key_array[$key]["vlan_id"]=$temp_array[0];
-				$new_port_key_array[$key]["vlan_name"] = $vlan_names[$new_port_key_array[$key]["vlan_id"]];
+				$temp_array = explode(".", $port["key"]);
+				$new_port_key_array[$key]["vlan_id"] = $temp_array[0];
+				$new_port_key_array[$key]["vlan_name"] = @$vlan_names[$new_port_key_array[$key]["vlan_id"]];
 			}
 			}
 			mactrack_debug("Port mac address information collected.");

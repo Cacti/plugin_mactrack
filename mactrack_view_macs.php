@@ -289,6 +289,7 @@ function form_aggregated_actions() {
 
 function api_mactrack_authorize_mac_addresses($mac_address){
 	db_execute("UPDATE mac_track_ports SET authorized='1' WHERE mac_address='$mac_address'");
+	db_execute("UPDATE mac_track_temp_ports SET authorized='1' WHERE mac_address='$mac_address'");
 	db_execute("REPLACE INTO mac_track_macauth SET mac_address='$mac_address', description='Added from MacView', added_by='" . $_SESSION["sess_user_id"] . "'");
 }
 

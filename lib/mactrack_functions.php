@@ -2032,7 +2032,7 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 			$mac_authorized = db_check_auth($port_value["mac_address"]);
 			mactrack_debug("MAC Address '" . $port_value["mac_address"] . "' on device '" . $device["device_name"] . "' is " . (strlen($mac_authorized) ? "":"NOT") . " Authorized");
 
-			if ($mac_authorized > 0) {
+			if (strlen($mac_authorized)) {
 				$authorized_mac = 1;
 			} else {
 				$authorized_mac = 0;
