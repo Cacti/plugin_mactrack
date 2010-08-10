@@ -77,7 +77,7 @@ function form_save() {
 		$site_id = api_mactrack_site_save($_POST["site_id"], $_POST["site_name"], $_POST["customer_contact"],
 		$_POST["netops_contact"], $_POST["facilities_contact"], $_POST["site_info"]);
 
-		header("Location: mactrack_sites.php?action=edit&id=" . (empty($site_id) ? $_POST["site_id"] : $site_id));
+		header("Location: mactrack_sites.php?action=edit&site_id=" . (empty($site_id) ? $_POST["site_id"] : $site_id));
 	}
 }
 

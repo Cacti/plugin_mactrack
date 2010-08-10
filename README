@@ -61,6 +61,7 @@
     --- 2.9 ---
     bug#0001799: Select all checkbox on Mac Addresses tab not working
     bug#0001723: Can't import devices
+	bug: Saving an edited site redirects to blank page
 
     --- 2.8 ---
     compat: Allow proper navigation text generation
