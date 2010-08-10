@@ -62,7 +62,8 @@
     bug#0001799: Select all checkbox on Mac Addresses tab not working
     bug#0001723: Can't import devices
     bug#0001751: Multiple ignore ports for Extreme Network switch
-    bug#0001777: MacTrack MacAuth Filters not working. 
+    bug#0001777: MacTrack MacAuth Filters not working
+    bug#0001779: Site IP Range Report View  
     bug: Saving an edited site redirects to blank page
 
     --- 2.8 ---
