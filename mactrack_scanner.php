@@ -36,11 +36,7 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 	chdir('../../');
 }
 
-if (file_exists("./include/global.php")) {
-	include("./include/global.php");
-} else {
-	include("./include/config.php");
-}
+include("./include/global.php");
 include_once("./lib/snmp.php");
 include_once("./lib/ping.php");
 include_once("./plugins/mactrack/lib/mactrack_functions.php");
@@ -189,7 +185,7 @@ if (valid_snmp_device($device)) {
 					mactrack_debug("Scanning function is '" . $device_type["ip_scanning_function"] . "'");
 					$device["device_type_id"] = $device_type["device_type_id"];
 					$device["scan_type"] = $device_type["device_type"];
-					call_user_func_array($device_type["ip_scanning_function"], array($site, $device));
+					call_user_func_array($device_type["ip_scanning_function"], array($site, &$device));
 				}else{
 					mactrack_debug("WARNING: SITE: " . $site . ", IP: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", ERROR: IP Address Scanning Function Does Not Exist.");
 					$device["last_runmessage"] = "WARNING: Scanning Function Does Not Exist.";

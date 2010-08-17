@@ -64,6 +64,7 @@
     bug#0001751: Multiple ignore ports for Extreme Network switch
     bug#0001777: MacTrack MacAuth Filters not working
     bug#0001779: Site IP Range Report View  
+    bug#0001841: Mactrack ARP table unreadable
     bug: Saving an edited site redirects to blank page
 
     --- 2.8 ---
