@@ -831,7 +831,7 @@ function mactrack_setup_table_new () {
 function mactrack_version () {
 	return array(
 		'name'      => 'mactrack',
-		'version'   => '2.8',
+		'version'   => '2.9',
 		'longname'  => 'Device Tracking',
 		'author'    => 'Larry Adams',
 		'homepage'  => 'http://cacti.net',
@@ -1989,12 +1989,12 @@ function convert_readstrings() {
 	include_once($config["base_path"] . "/lib/functions.php");
 
 	$sql = "SELECT DISTINCT " .
-			"snmp_readstrings, " .
-			"snmp_version, " .
-			"snmp_port, " .
-			"snmp_timeout, " .
-			"snmp_retries " .
-			"FROM mac_track_devices";
+		"snmp_readstrings, " .
+		"snmp_version, " .
+		"snmp_port, " .
+		"snmp_timeout, " .
+		"snmp_retries " .
+		"FROM mac_track_devices";
 	cacti_log($sql, false, "MACTRACK");
 	$devices = db_fetch_assoc($sql);
 	cacti_log(serialize($devices), false, "MACTRACK");
