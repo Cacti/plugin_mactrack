@@ -1682,10 +1682,10 @@ function xform_stripped_oid($OID, &$device, $snmp_readstring = "") {
 		$snmp_readstring = $device["snmp_readstring"];
 	}
 
-	if ($device["snmp_version"] == "3" && substr_count($snmp_readstring,"cisco@")) {
-		$snmp_context = str_replace("cisco@", "", $snmp_readstring);
-	}else{
-		$snmp_context = $device["snmp_context"];;
+	if ($device["snmp_version"] == "3" && substr_count($snmp_readstring,"vlan-")) {
+		$snmp_context = $snmp_readstring;
+	} else {
+		$snmp_context = $device["snmp_context"];
 	}
 
 	$walk_array = cacti_snmp_walk($device["hostname"], $snmp_readstring,
@@ -1785,10 +1785,10 @@ function xform_standard_indexed_data($xformOID, &$device, $snmp_readstring = "")
 		$snmp_readstring = $device["snmp_readstring"];
 	}
 
-	if ($device["snmp_version"] == "3" && substr_count($snmp_readstring,"cisco@")) {
-		$snmp_context = str_replace("cisco@", "", $snmp_readstring);
-	}else{
-		$snmp_context = $device["snmp_context"];;
+	if ($device["snmp_version"] == "3" && substr_count($snmp_readstring,"vlan-")) {
+		$snmp_context = $snmp_readstring;
+	} else {
+		$snmp_context = $device["snmp_context"];
 	}
 
 	$xformArray = cacti_snmp_walk($device["hostname"], $snmp_readstring,
@@ -4094,4 +4094,3 @@ function mactrack_ips_filter() {
 	</tr>
 	<?php
 }
-
