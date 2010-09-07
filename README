@@ -58,6 +58,9 @@
     Got any ideas or complaints, please e-mail me!
 
 ----[ Changelog
+    --- SVN ---
+    bug#0001858: No device filter on Graphs tab
+
     --- 2.9 ---
     bug#0001799: Select all checkbox on Mac Addresses tab not working
     bug#0001723: Can't import devices

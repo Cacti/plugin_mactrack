@@ -44,6 +44,7 @@ function mactrack_view_graphs() {
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var("rra_id"));
+	input_validate_input_number(get_request_var("host"));
 	input_validate_input_regex(get_request_var_request('graph_list'), "^([\,0-9]+)$");
 	input_validate_input_regex(get_request_var_request('graph_add'), "^([\,0-9]+)$");
 	input_validate_input_regex(get_request_var_request('graph_remove'), "^([\,0-9]+)$");
@@ -65,12 +66,14 @@ function mactrack_view_graphs() {
 
 	/* if the user pushed the 'clear' button */
 	if (isset($_REQUEST["clear_x"])) {
-		kill_session_var("sess_graph_view_current_page");
-		kill_session_var("sess_graph_view_filter");
-		kill_session_var("sess_graph_view_graph_template");
+		kill_session_var("sess_mactrack_graph_current_page");
+		kill_session_var("sess_mactrack_graph_filter");
+		kill_session_var("sess_mactrack_graph_host");
+		kill_session_var("sess_mactrack_graph_graph_template");
 
 		unset($_REQUEST["page"]);
 		unset($_REQUEST["filter"]);
+		unset($_REQUEST["host"]);
 		unset($_REQUEST["graph_template_id"]);
 		unset($_REQUEST["graph_list"]);
 		unset($_REQUEST["graph_add"]);
@@ -82,9 +85,10 @@ function mactrack_view_graphs() {
 		$_REQUEST["page"] = "1";
 	}
 
-	load_current_session_value("graph_template_id", "sess_graph_view_graph_template", "0");
-	load_current_session_value("filter", "sess_graph_view_filter", "");
-	load_current_session_value("page", "sess_graph_view_current_page", "1");
+	load_current_session_value("graph_template_id", "sess_mactrack_graph_graph_template", "0");
+	load_current_session_value("host", "sess_mactrack_graph_host", "0");
+	load_current_session_value("filter", "sess_mactrack_graph_filter", "");
+	load_current_session_value("page", "sess_mactrack_graph_current_page", "1");
 
 	/* graph permissions */
 	if (read_config_option("auth_method") != 0) {
@@ -103,6 +107,7 @@ function mactrack_view_graphs() {
 		$sql_where = "";
 		$sql_join = "";
 	}
+
 	/* the user select a bunch of graphs of the 'list' view and wants them dsplayed here */
 	if (isset($_REQUEST["style"])) {
 		if ($_REQUEST["style"] == "selective") {
@@ -152,6 +157,7 @@ function mactrack_view_graphs() {
 		AND graph_templates_graph.local_graph_id=graph_local.id
 		" . (strlen($_REQUEST["filter"]) ? "AND graph_templates_graph.title_cache like '%%" . $_REQUEST["filter"] . "%%'":"") . "
 		" . (empty($_REQUEST["graph_template_id"]) ? "" : " and graph_local.graph_template_id=" . $_REQUEST["graph_template_id"]) . "
+		" . (empty($_REQUEST["host"]) ? "" : " and graph_local.host_id=" . $_REQUEST["host"]) . "
 		$sql_or";
 
 	$total_rows = count(db_fetch_assoc("SELECT
@@ -176,6 +182,7 @@ function mactrack_view_graphs() {
 	<!--
 	function applyGraphPreviewFilterChange(objForm) {
 		strURL = '?report=graphs&graph_template_id=' + objForm.graph_template_id.value;
+		strURL = strURL + '&host=' + objForm.host.value;
 		strURL = strURL + '&filter=' + objForm.filter.value;
 		document.location = strURL;
 	}
@@ -275,6 +282,27 @@ function mactrack_graph_view_filter() {
 		<td class="noprint">
 			<table width="100%" cellpadding="0" cellspacing="0">
 				<tr class="noprint">
+					<td nowrap style='white-space: nowrap;' width="70">
+						&nbsp;Host:&nbsp;
+					</td>
+					<td width="1">
+						<select name="host" onChange="applyGraphPreviewFilterChange(document.form_graph_view)">
+							<option value="0"<?php if ($_REQUEST["host"] == "0") {?> selected<?php }?>>Any</option>
+
+							<?php
+							$hosts = db_fetch_assoc("SELECT host_id, device_name
+								FROM mac_track_devices
+								WHERE host_id>0
+								ORDER BY device_name");
+
+							if (sizeof($hosts)) {
+							foreach ($hosts as $host) {
+								print "<option value='" . $host["host_id"] . "'"; if ($_REQUEST["host"] == $host["host_id"]) { print " selected"; } print ">" . $host["device_name"] . "</option>\n";
+							}
+							}
+							?>
+						</select>
+					</td>
 					<td nowrap style='white-space: nowrap;' width="70">
 						&nbsp;Template:&nbsp;
 					</td>
