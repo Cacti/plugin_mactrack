@@ -282,7 +282,7 @@ function mactrack_graph_view_filter() {
 		<td class="noprint">
 			<table width="100%" cellpadding="0" cellspacing="0">
 				<tr class="noprint">
-					<td nowrap style='white-space: nowrap;' width="70">
+					<td nowrap style='white-space: nowrap;' width="55">
 						&nbsp;Host:&nbsp;
 					</td>
 					<td width="1">
