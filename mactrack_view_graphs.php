@@ -157,7 +157,7 @@ function mactrack_view_graphs() {
 		AND graph_templates_graph.local_graph_id=graph_local.id
 		" . (strlen($_REQUEST["filter"]) ? "AND graph_templates_graph.title_cache like '%%" . $_REQUEST["filter"] . "%%'":"") . "
 		" . (empty($_REQUEST["graph_template_id"]) ? "" : " and graph_local.graph_template_id=" . $_REQUEST["graph_template_id"]) . "
-		" . (empty($_REQUEST["host"]) ? "" : " and graph_local.host_id=" . $_REQUEST["host"]) . "
+		" . (empty($_REQUEST["host"]) ? " and graph_local.host_id IN(SELECT host_id FROM mac_track_devices WHERE host_id>0)" : " and graph_local.host_id=" . $_REQUEST["host"]) . "
 		$sql_or";
 
 	$total_rows = count(db_fetch_assoc("SELECT
