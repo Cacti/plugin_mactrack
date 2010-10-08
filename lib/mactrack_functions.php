@@ -2054,8 +2054,6 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 				$scan_date . "','" .
 				$authorized_mac . "')";
 
-			//mactrack_debug("SQL: " . $insert_string);
-
 			db_execute($insert_string);
 		}
 	}
@@ -2066,7 +2064,6 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 */
 function db_check_auth($mac_address) {
 	$check_string = "SELECT mac_id FROM mac_track_macauth WHERE mac_address LIKE '%%" . $mac_address . "%%'";
-	//mactrack_debug("SQL: " . $check_string);
 
 	$query = db_fetch_cell($check_string);
 
@@ -2076,41 +2073,113 @@ function db_check_auth($mac_address) {
 /*	perform_mactrack_db_maint - This utility removes stale records from the database.
 */
 function perform_mactrack_db_maint() {
-	global $colors;
+	global $colors, $database_default;
 
 	/* remove stale records from the poller database */
 	$retention = read_config_option("mt_data_retention");
-	switch ($retention) {
-	case "2days":
-		$retention_date = date("Y-m-d H:i:s", strtotime("-2 Days"));
-		break;
-	case "5days":
-		$retention_date = date("Y-m-d H:i:s", strtotime("-5 Days"));
-		break;
-	case "1week":
-		$retention_date = date("Y-m-d H:i:s", strtotime("-1 Week"));
-		break;
-	case "2weeks":
-		$retention_date = date("Y-m-d H:i:s", strtotime("-2 Week"));
-		break;
-	case "3weeks":
-		$retention_date = date("Y-m-d H:i:s", strtotime("-3 Week"));
-		break;
-	case "1month":
-		$retention_date = date("Y-m-d H:i:s", strtotime("-1 Month"));
-		break;
-	case "2months":
-		$retention_date = date("Y-m-d H:i:s", strtotime("-2 Months"));
-		break;
-	default:
-		$retention_date = date("Y-m-d H:i:s", strtotime("-2 Days"));
+	if (is_numeric($retention)) {
+		$retention_date = date("Y-m-d H:i:s", time() - ($retention *  86400));
+		$days           = $retention;
+	}else{
+		switch ($retention) {
+		case "2days":
+			$retention_date = date("Y-m-d H:i:s", strtotime("-2 Days"));
+			break;
+		case "5days":
+			$retention_date = date("Y-m-d H:i:s", strtotime("-5 Days"));
+			break;
+		case "1week":
+			$retention_date = date("Y-m-d H:i:s", strtotime("-1 Week"));
+			break;
+		case "2weeks":
+			$retention_date = date("Y-m-d H:i:s", strtotime("-2 Week"));
+			break;
+		case "3weeks":
+			$retention_date = date("Y-m-d H:i:s", strtotime("-3 Week"));
+			break;
+		case "1month":
+			$retention_date = date("Y-m-d H:i:s", strtotime("-1 Month"));
+			break;
+		case "2months":
+			$retention_date = date("Y-m-d H:i:s", strtotime("-2 Months"));
+			break;
+		default:
+			$retention_date = date("Y-m-d H:i:s", strtotime("-2 Days"));
+		}
+
+		$days = ceil((time() - strtotime($retention_date)) / 86400);
 	}
 
+	db_execute("REPLACE INTO `settings` SET name='mt_data_retention', value='$days'");
+
 	mactrack_debug("Started deleting old records from the main database.");
-	db_execute("DELETE QUICK FROM mac_track_ports WHERE scan_date < '$retention_date'");
-	db_execute("OPTIMIZE TABLE mac_track_ports");
-	db_execute("TRUNCATE TABLE mac_track_scan_dates");
-	db_execute("REPLACE INTO mac_track_scan_dates (SELECT DISTINCT scan_date from mac_track_ports);");
+
+	$syntax = db_fetch_row("SHOW CREATE TABLE mac_track_ports");
+	if (substr_count($syntax["Create Table"], "PARTITION")) {
+		$partitioned = true;
+	}else{
+		$partitioned = false;
+	}
+
+	/* delete old syslog and syslog soft messages */
+	if ($retention > 0 || $partitioned) {
+		if (!$partitioned) {
+			db_execute("DELETE QUICK FROM mac_track_ports WHERE scan_date < '$retention_date'");
+			db_execute("OPTIMIZE TABLE mac_track_ports");
+		}else{
+			$syslog_deleted = 0;
+			$number_of_partitions = db_fetch_assoc("SELECT *
+				FROM `information_schema`.`partitions`
+				WHERE table_schema='" . $database_default . "' AND table_name='mac_track_ports'
+				ORDER BY partition_ordinal_position");
+
+			$time     = time();
+			$now      = date('Y-m-d', $time);
+			$format   = date('Ymd', $time);
+			$cur_day  = db_fetch_row("SELECT TO_DAYS('$now') AS today");
+			$cur_day  = $cur_day["today"];
+
+			$lday_ts  = read_config_option("mactrack_lastday_timestamp");
+			$lnow     = date('Y-m-d', $lday_ts);
+			$lformat  = date('Ymd', $lday_ts);
+			$last_day = db_fetch_row("SELECT TO_DAYS('$lnow') AS today");
+			$last_day = $last_day["today"];
+
+			mactrack_debug("There are currently '" . sizeof($number_of_partitions) . "' MacTrack Partitions, We will keep '$days' of them.");
+			mactrack_debug("The current day is '$cur_day', the last day is '$last_day'");
+
+			if ($cur_day != $last_day) {
+				db_execute("REPLACE INTO `settings` SET name='mactrack_lastday_timestamp', value='$time'");
+
+				if ($lday_ts != '') {
+					cacti_log("MACTRACK: Creating new partition 'd" . $lformat . "'", false, "SYSTEM");
+					mactrack_debug("Creating new partition 'd" . $lformat . "'");
+					db_execute("ALTER TABLE mac_track_ports REORGANIZE PARTITION dMaxValue INTO (
+						PARTITION d" . $lformat . " VALUES LESS THAN (TO_DAYS('$lnow')),
+						PARTITION dMaxValue VALUES LESS THAN MAXVALUE)");
+
+					if ($days > 0) {
+						$user_partitions = sizeof($number_of_partitions) - 1;
+						if ($user_partitions >= $days) {
+							$i = 0;
+							while ($user_partitions > $days) {
+								$oldest = $number_of_partitions[$i];
+								cacti_log("MACTRACK: Removing old partition 'd" . $oldest["PARTITION_NAME"] . "'", false, "SYSTEM");
+								mactrack_debug("Removing partition '" . $oldest["PARTITION_NAME"] . "'");
+								db_execute("ALTER TABLE mac_track_ports DROP PARTITION " . $oldest["PARTITION_NAME"]);
+								$i++;
+								$user_partitions--;
+								$mactrack_deleted++;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	db_execute("REPLACE INTO mac_track_scan_dates (SELECT DISTINCT scan_date FROM mac_track_ports);");
+	db_execute("DELETE FROM mac_track_scan_dates WHERE scan_date NOT IN (SELECT DISTINCT scan_date FROM mac_track_ports)");
 	mactrack_debug("Finished deleting old records from the main database.");
 }
 

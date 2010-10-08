@@ -1356,13 +1356,16 @@ function mactrack_config_arrays () {
 		"1440" => "Every Day");
 
 	$mactrack_data_retention = array(
-		"2days" => "2 Days",
-		"5days" => "5 Days",
-		"1week" => "1 Week",
-		"2weeks" => "2 Weeks",
-		"3weeks" => "3 Weeks",
-		"1month" => "1 Month",
-		"2months" => "2 Months");
+		"3" => "3 Days",
+		"7" => "7 Days",
+		"10" => "10 Days",
+		"14" => "14 Days",
+		"20" => "20 Days",
+		"30" => "1 Month",
+		"60" => "2 Months",
+		"120" => "4 Months",
+		"240" => "8 Months",
+		"365" => "1 Year");
 
 	$mactrack_macauth_frequencies = array(
 		"disabled" => "Disabled",
