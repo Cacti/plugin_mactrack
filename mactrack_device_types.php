@@ -365,9 +365,9 @@ function mactrack_rescan_device_types() {
 	$insert_array = array();
 
 	/* get all the various device types from the database */
-	$device_types = db_fetch_assoc("SELECT DISTINCT snmp_sysObjectID, snmp_sysDesc, device_type
+	$device_types = db_fetch_assoc("SELECT DISTINCT snmp_sysObjectID, snmp_sysDescr, device_type_id
 		FROM mac_track_devices
-		WHERE snmp_sysObjectID!='' AND snmp_sysDesc!=''");
+		WHERE snmp_sysObjectID!='' AND snmp_sysDescr!=''");
 
 	/* get all known devices types from the device type database */
 	$known_types = db_fetch_assoc("SELECT sysDescr_match, sysObjectID_match FROM mac_track_device_types");
@@ -378,7 +378,7 @@ function mactrack_rescan_device_types() {
 		$found = FALSE;
 		if (sizeof($known_types)) {
 		foreach($known_types as $known) {
-			if ((substr_count($type["snmp_sysDesc"], $known["sysDescr_match"])) &&
+			if ((substr_count($type["snmp_sysDescr"], $known["sysDescr_match"])) &&
 				(substr_count($type["snmp_sysObjectID"], $known["sysObjectID_match"]))) {
 				$found = TRUE;
 				break;
@@ -394,7 +394,7 @@ function mactrack_rescan_device_types() {
 
 	if (sizeof($insert_array)) {
 		foreach($insert_array as $item) {
-			$desc = trim($item["snmp_sysDesc"]);
+			$desc = trim($item["snmp_sysDescr"]);
 			$name = 'New Type';
 			if (substr_count(strtolower($desc), "cisco")) {
 				$vendor = "Cisco";
@@ -405,7 +405,7 @@ function mactrack_rescan_device_types() {
 					if ($pos2 > $pos) {
 						$desc = substr($temp_name, $pos+1, $pos2-$pos-1);
 
-						$name = $desc . " (" . $item["device_type"] . ")";
+						$name = $desc . " (" . $item["device_type_id"] . ")";
 					}
 				}
 			}else{
