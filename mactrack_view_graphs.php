@@ -311,20 +311,13 @@ function mactrack_graph_view_filter() {
 							<option value="0"<?php if ($_REQUEST["graph_template_id"] == "0") {?> selected<?php }?>>Any</option>
 
 							<?php
-							if (read_config_option("auth_method") != 0) {
-								$graph_templates = db_fetch_assoc("SELECT DISTINCT graph_templates.*
-									FROM (graph_templates_graph,graph_local)
-									LEFT JOIN host ON (host.id=graph_local.host_id)
-									LEFT JOIN graph_templates ON (graph_templates.id=graph_local.graph_template_id)
-									LEFT JOIN user_auth_perms ON ((graph_templates_graph.local_graph_id=user_auth_perms.item_id and user_auth_perms.type=1 and user_auth_perms.user_id=" . $_SESSION["sess_user_id"] . ") OR (host.id=user_auth_perms.item_id and user_auth_perms.type=3 and user_auth_perms.user_id=" . $_SESSION["sess_user_id"] . ") OR (graph_templates.id=user_auth_perms.item_id and user_auth_perms.type=4 and user_auth_perms.user_id=" . $_SESSION["sess_user_id"] . "))
-									WHERE graph_templates_graph.local_graph_id=graph_local.id
-									" . (empty($sql_where) ? "" : "and $sql_where") . "
-									ORDER BY name");
-							}else{
-								$graph_templates = db_fetch_assoc("SELECT DISTINCT graph_templates.*
-									FROM graph_templates
-									ORDER BY name");
-							}
+							$graph_templates = db_fetch_assoc("SELECT DISTINCT gt.*
+								FROM graph_templates AS gt
+								INNER JOIN graph_local AS gl
+								ON gl.graph_template_id=gt.id
+								INNER JOIN mac_track_devices AS mtd
+								ON mtd.host_id=graph_local.host_id
+								ORDER BY gt.name");
 
 							if (sizeof($graph_templates) > 0) {
 							foreach ($graph_templates as $template) {
