@@ -843,11 +843,13 @@ function mactrack_version () {
 function mactrack_page_head() {
 	global $config;
 
-	if (!isset($config["base_path"])) {
-		print "<script type='text/javascript' src='" . URL_PATH . "plugins/mactrack/mactrack.js'></script>\n";
-	}else{
-		print "<link type='text/css' href='" . $config["url_path"] . "plugins/mactrack/mactrack.css' rel='stylesheet'>\n";
-		print "<script type='text/javascript' src='" . $config["url_path"] . "plugins/mactrack/mactrack.js'></script>\n";
+	if (isset($_SERVER['PHP_SELF']) && substr_count($_SERVER['PHP_SELF'], "mactrack_")) {
+		if (!isset($config["base_path"])) {
+			print "<script type='text/javascript' src='" . URL_PATH . "plugins/mactrack/mactrack.js'></script>\n";
+		}else{
+			print "<link type='text/css' href='" . $config["url_path"] . "plugins/mactrack/mactrack.css' rel='stylesheet'>\n";
+			print "<script type='text/javascript' src='" . $config["url_path"] . "plugins/mactrack/mactrack.js'></script>\n";
+		}
 	}
 }
 

@@ -60,6 +60,7 @@
 ----[ Changelog
     --- SVN ---
     bug#0001858: No device filter on Graphs tab
+	bug#0001873: hook 'mactrack', 'page_head'
 
     --- 2.9 ---
     bug#0001799: Select all checkbox on Mac Addresses tab not working
