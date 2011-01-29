@@ -405,6 +405,25 @@ function mactrack_database_upgrade () {
 	mactrack_add_column("mac_track_scanning_functions",
 		"type",
 		"ALTER TABLE `mac_track_scanning_functions` ADD COLUMN `type` int(10) unsigned NOT NULL default '0' AFTER `scanning_function`");
+	mactrack_add_column("mac_track_temp_ports",
+		"device_name",
+		"ALTER TABLE `mac_track_temp_ports` ADD COLUMN `device_name` varchar(100) NOT NULL default '' AFTER `hostname`");
+	mactrack_add_column("mac_track_temp_ports",
+		"vendor_mac",
+		"ALTER TABLE `mac_track_temp_ports` ADD COLUMN `vendor_mac` varchar(8) default NULL AFTER `mac_address`");
+	mactrack_add_column("mac_track_temp_ports",
+		"authorized",
+		"ALTER TABLE `mac_track_temp_ports` ADD COLUMN `authorized` tinyint(3) unsigned NOT NULL default '0' AFTER `updated`");
+	mactrack_add_column("mac_track_ports",
+		"device_name",
+		"ALTER TABLE `mac_track_ports` ADD COLUMN `device_name` varchar(100) NOT NULL default '' AFTER `hostname`");
+	mactrack_add_column("mac_track_ports",
+		"vendor_mac",
+		"ALTER TABLE `mac_track_ports` ADD COLUMN `vendor_mac` varchar(8) default NULL AFTER `mac_address`");
+	mactrack_add_column("mac_track_ports",
+		"authorized",
+		"ALTER TABLE `mac_track_ports` ADD COLUMN `authorized` tinyint(3) unsigned NOT NULL default '0' AFTER `scan_date`");
+		
 }
 
 function mactrack_check_dependencies() {
@@ -743,7 +762,7 @@ function mactrack_setup_table_new () {
 			`authorized` tinyint(3) unsigned NOT NULL default '0',
 			PRIMARY KEY  (`port_number`,`scan_date`,`mac_address`,`device_id`),
 			KEY `site_id` (`site_id`),
-			KEY `description` (`device_name`),
+			KEY `device_name` (`device_name`),
 			KEY `ip_address` (`ip_address`),
 			KEY `hostname` (`hostname`),
 			KEY `vlan_name` (`vlan_name`),
@@ -792,7 +811,7 @@ function mactrack_setup_table_new () {
 			PRIMARY KEY (`row_id`),
 			UNIQUE KEY `port_number` USING BTREE (`port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized`),
 			KEY `site_id` (`site_id`),
-			KEY `description` (`device_name`),
+			KEY `device_name` (`device_name`),
 			KEY `mac` (`mac_address`),
 			KEY `hostname` (`hostname`),
 			KEY `vlan_name` (`vlan_name`),
