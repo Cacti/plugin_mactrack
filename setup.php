@@ -308,7 +308,11 @@ function mactrack_database_upgrade () {
 
 	# new for 2.1.2
 	# SNMP V3
-	mactrack_add_column("mac_track_devices",    "snmp_options",         "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_options` int(10) unsigned NOT NULL default '0' AFTER `user_password`");
+	mactrack_add_column("mac_track_devices",    "term_type",            "ALTER TABLE `mac_track_devices` ADD COLUMN `term_type` tinyint(11) NOT NULL default '1' AFTER `scan_type`");
+	mactrack_add_column("mac_track_devices",    "user_name",            "ALTER TABLE `mac_track_devices` ADD COLUMN `user_name` varchar(40) default NULL AFTER `term_type`");
+	mactrack_add_column("mac_track_devices",    "user_password",        "ALTER TABLE `mac_track_devices` ADD COLUMN `user_password` varchar(40) default NULL AFTER `user_name`");
+	mactrack_add_column("mac_track_devices",    "private_key_path",     "ALTER TABLE `mac_track_devices` ADD COLUMN `private_key_path` varchar(128) default '' AFTER `user_password`");
+	mactrack_add_column("mac_track_devices",    "snmp_options",         "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_options` int(10) unsigned NOT NULL default '0' AFTER `private_key_path`");
 	mactrack_add_column("mac_track_devices",    "snmp_username",        "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_username` varchar(50) default NULL AFTER `snmp_status`");
 	mactrack_add_column("mac_track_devices",    "snmp_password",        "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_password` varchar(50) default NULL AFTER `snmp_username`");
 	mactrack_add_column("mac_track_devices",    "snmp_auth_protocol",   "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_auth_protocol` char(5) default '' AFTER `snmp_password`");
@@ -392,6 +396,12 @@ function mactrack_database_upgrade () {
 	mactrack_add_column("mac_track_sites",
 		"site_info",
 		"ALTER TABLE `mac_track_sites` ADD COLUMN `site_info` text AFTER `facilities_contact`");
+	mactrack_add_column("mac_track_devices",
+		"device_name",
+		"ALTER TABLE `mac_track_devices` ADD COLUMN `device_name` varchar(100) default '' AFTER `host_id`");
+	mactrack_add_column("mac_track_devices",
+		"notes",
+		"ALTER TABLE `mac_track_devices` ADD COLUMN `notes` text AFTER `hostname`");
 		
 }
 
