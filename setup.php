@@ -423,6 +423,9 @@ function mactrack_database_upgrade () {
 	mactrack_add_column("mac_track_ports",
 		"authorized",
 		"ALTER TABLE `mac_track_ports` ADD COLUMN `authorized` tinyint(3) unsigned NOT NULL default '0' AFTER `scan_date`");
+	mactrack_add_column("mac_track_ips",
+		"mac_track_ips",
+		"ALTER TABLE `mac_track_ips` ADD COLUMN `device_name` varchar(100) NOT NULL default '' AFTER `hostname`");
 		
 }
 
