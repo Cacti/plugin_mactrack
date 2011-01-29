@@ -380,6 +380,19 @@ function mactrack_database_upgrade () {
 	mactrack_add_column("mac_track_device_types",
 		"ip_scanning_function",
 		"ALTER TABLE `mac_track_device_types` ADD COLUMN `ip_scanning_function` varchar(100) NOT NULL AFTER `scanning_function`");
+	mactrack_add_column("mac_track_sites",
+		"customer_contact",
+		"ALTER TABLE `mac_track_sites` ADD COLUMN `customer_contact` varchar(150) default '' AFTER `site_name`");
+	mactrack_add_column("mac_track_sites",
+		"netops_contact",
+		"ALTER TABLE `mac_track_sites` ADD COLUMN `netops_contact` varchar(150) default '' AFTER `customer_contact`");
+	mactrack_add_column("mac_track_sites",
+		"facilities_contact",
+		"ALTER TABLE `mac_track_sites` ADD COLUMN `facilities_contact` varchar(150) default '' AFTER `netops_contact`");
+	mactrack_add_column("mac_track_sites",
+		"site_info",
+		"ALTER TABLE `mac_track_sites` ADD COLUMN `site_info` text AFTER `facilities_contact`");
+		
 }
 
 function mactrack_check_dependencies() {
