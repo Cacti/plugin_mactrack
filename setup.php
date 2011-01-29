@@ -377,6 +377,9 @@ function mactrack_database_upgrade () {
 	mactrack_add_column("mac_track_interfaces",
 		"ifMauAutoNegRemoteSignaling",
 		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifMauAutoNegRemoteSignaling` integer UNSIGNED NOT NULL default '0' AFTER `ifMauAutoNegAdminStatus`");
+	mactrack_add_column("mac_track_device_types",
+		"ip_scanning_function",
+		"ALTER TABLE `mac_track_device_types` ADD COLUMN `ip_scanning_function` varchar(100) NOT NULL AFTER `scanning_function`");
 }
 
 function mactrack_check_dependencies() {
