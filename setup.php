@@ -382,8 +382,8 @@ function mactrack_database_upgrade () {
 		"ifMauAutoNegRemoteSignaling",
 		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifMauAutoNegRemoteSignaling` integer UNSIGNED NOT NULL default '0' AFTER `ifMauAutoNegAdminStatus`");
 	mactrack_add_column("mac_track_device_types",
-		"ip_scanning_function",
-		"ALTER TABLE `mac_track_device_types` ADD COLUMN `ip_scanning_function` varchar(100) NOT NULL AFTER `scanning_function`");
+		"serial_number_oid",
+		"ALTER TABLE `mac_track_device_types` ADD COLUMN `serial_number_oid` varchar(100) default '' AFTER `ip_scanning_function`");
 	mactrack_add_column("mac_track_sites",
 		"customer_contact",
 		"ALTER TABLE `mac_track_sites` ADD COLUMN `customer_contact` varchar(150) default '' AFTER `site_name`");
@@ -402,7 +402,9 @@ function mactrack_database_upgrade () {
 	mactrack_add_column("mac_track_devices",
 		"notes",
 		"ALTER TABLE `mac_track_devices` ADD COLUMN `notes` text AFTER `hostname`");
-		
+	mactrack_add_column("mac_track_scanning_functions",
+		"type",
+		"ALTER TABLE `mac_track_scanning_functions` ADD COLUMN `type` int(10) unsigned NOT NULL default '0' AFTER `scanning_function`");
 }
 
 function mactrack_check_dependencies() {
