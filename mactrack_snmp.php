@@ -114,7 +114,7 @@ function form_mactrack_snmp_save() {
 		input_validate_input_number(get_request_var_post("id"));
 		/* ==================================================== */
 
-		unset($save);
+		$save = array();
 		$save["id"]						= form_input_validate($_POST["item_id"], "", "^[0-9]+$", false, 3);
 		$save["snmp_id"] 				= form_input_validate($_POST["id"], "snmp_id", "^[0-9]+$", false, 3);
 		$save["sequence"] 				= form_input_validate($_POST["sequence"], "sequence", "^[0-9]+$", false, 3);
@@ -142,7 +142,7 @@ function form_mactrack_snmp_save() {
 		}
 
 		if (is_error_message()) {
-			header("Location: mactrack_snmp.php?action=item_edit&id=" . $_POST["snmp_id"] . "&item_id=" . (empty($item_id) ? $_POST["id"] : $item_id));
+			header("Location: mactrack_snmp.php?action=item_edit&id=" . $_POST["id"] . "&item_id=" . (empty($item_id) ? $_POST["id"] : $item_id));
 		}else{
 			header("Location: mactrack_snmp.php?action=edit&id=" . $_POST["id"]);
 		}
