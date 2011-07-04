@@ -25,7 +25,7 @@
 $using_guest_account = false;
 $show_console_tab = true;
 
-$oper_mode = api_plugin_hook_function('top_header', OPER_MODE_NATIVE);
+$oper_mode = api_plugin_hook_function('general_header', OPER_MODE_NATIVE);
 if ($oper_mode != OPER_MODE_RESKIN) {
 
 if (read_config_option("auth_method") != 0) {
