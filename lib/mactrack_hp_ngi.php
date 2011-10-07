@@ -99,6 +99,7 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", FALSE, $lowPort, $highPort);
 
 		$port_vlan_data = xform_standard_indexed_data(".1.3.6.1.2.1.17.7.1.4.5.1.1", $device);
+		$port_alias = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.18", $device);
 
 		$i = 0;
 		$j = 0;
@@ -122,7 +123,11 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 				$port_array[$i]["vlan_id"]     = @$port_vlan_data[$port_result["port_number"]];
 				$port_array[$i]["vlan_name"]   = @$vlan_ids[$port_array[$i]["vlan_id"]];
 				$port_array[$i]["port_number"] = $ifName;
-				$port_array[$i]["port_name"]   = @$ifNames[$port_result["port_number"]];
+				if (isset($port_alias[$port_result["port_number"]])) {
+					$port_array[$i]["port_name"]   = @$port_alias[$port_result["port_number"]];
+				}else{
+					$port_array[$i]["port_name"]   = @$ifNames[$port_result["port_number"]];
+				}
 				$port_array[$i]["mac_address"] = xform_mac_address($port_result["mac_address"]);
 				$device["ports_active"]++;
 
