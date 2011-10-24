@@ -394,7 +394,7 @@ function mactrack_snmp_edit() {
 		"WHERE snmp_id=" . $_GET["id"] .
 		" ORDER BY sequence");
 
-		html_start_box("<strong>Mactrack SNMP Options</strong>", "100%", $colors["header"], "3", "center", htmlspecialchars("mactrack_snmp.php?action=item_edit&id=" . $_GET["id"]));
+		html_start_box("<strong>Mactrack SNMP Options</strong>", "100%", $colors["header"], "3", "center", "mactrack_snmp.php?action=item_edit&id=" . $_GET["id"]);
 
 		print "<tr bgcolor='#" . $colors["header_panel"] . "'>";
 		DrawMatrixHeaderItem("Item",$colors["header_text"],1);
@@ -504,7 +504,7 @@ function mactrack_snmp() {
 
 	print ('<form name="mactrack_snmp" action="mactrack_snmp.php" method="get">');
 
-	html_start_box("<strong>Mactrack SNMP Options</strong>", "100%", $colors["header"], "3", "center", htmlspecialchars("mactrack_snmp.php?action=edit"));
+	html_start_box("<strong>Mactrack SNMP Options</strong>", "100%", $colors["header"], "3", "center", "mactrack_snmp.php?action=edit");
 
 	$filter_html = '<tr bgcolor=' . $colors["panel"] . '>
 					<td>
