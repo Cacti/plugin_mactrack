@@ -77,6 +77,19 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 	return $device_id;
 }
 
+function api_mactrack_device_remove($device_id){
+	db_execute("DELETE FROM mac_track_devices WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_aggregated_ports WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_interfaces WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_ips WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_ports WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_processes WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_processes WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_temp_ports WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_vlans WHERE device_id=" . $device_id);
+	db_execute("DELETE FROM mac_track_interface_graphs WHERE device_id=" . $device_id);
+}
+
 function sync_mactrack_to_cacti($mt_device) {
 	global $config;
 	include_once($config["base_path"] . "/lib/functions.php");

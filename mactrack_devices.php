@@ -25,6 +25,7 @@ chdir('../../');
 include("./include/auth.php");
 include_once("./lib/snmp.php");
 include_once("./plugins/mactrack/lib/mactrack_functions.php");
+include_once("./plugins/mactrack/mactrack_actions.php");
 
 define("MAX_DISPLAY_PAGES", 21);
 
@@ -89,7 +90,6 @@ switch ($_REQUEST["action"]) {
 
 function form_mactrack_save() {
 	global $config;
-	include_once($config["base_path"] . "/plugins/mactrack/mactrack_actions.php");
 
 	if ((isset($_POST["save_component_device"])) && (empty($_POST["add_dq_y"]))) {
 		$device_id = api_mactrack_device_save($_POST["device_id"], $_POST["host_id"], $_POST["site_id"],
@@ -121,19 +121,6 @@ function form_mactrack_save() {
 
 		header("Location: mactrack_devices.php?action=import");
 	}
-}
-
-function api_mactrack_device_remove($device_id){
-	db_execute("DELETE FROM mac_track_devices WHERE device_id=" . $device_id);
-	db_execute("DELETE FROM mac_track_aggregated_ports WHERE device_id=" . $device_id);
-	db_execute("DELETE FROM mac_track_interfaces WHERE device_id=" . $device_id);
-	db_execute("DELETE FROM mac_track_ips WHERE device_id=" . $device_id);
-	db_execute("DELETE FROM mac_track_ports WHERE device_id=" . $device_id);
-	db_execute("DELETE FROM mac_track_processes WHERE device_id=" . $device_id);
-	db_execute("DELETE FROM mac_track_processes WHERE device_id=" . $device_id);
-	db_execute("DELETE FROM mac_track_temp_ports WHERE device_id=" . $device_id);
-	db_execute("DELETE FROM mac_track_vlans WHERE device_id=" . $device_id);
-	db_execute("DELETE FROM mac_track_interface_graphs WHERE device_id=" . $device_id);
 }
 
 /* ------------------------
