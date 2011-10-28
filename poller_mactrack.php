@@ -55,7 +55,24 @@ if (is_numeric($max_run_duration)) {
 /* get the max script runtime and kill old scripts */
 $max_script_runtime = read_config_option("mt_script_runtime");
 $delete_time = date("Y-m-d H:i:s", strtotime("-" . $max_script_runtime . " Minutes"));
-db_execute("delete from mac_track_processes where start_date < '" . $delete_time . "'");
+
+/* remove old processes from the system if they exist */
+$old_procs = db_fetch_assoc("SELECT * FROM mac_track_processes WHERE start_date<'" . $delete_time . "'");
+if (sizeof($old_procs)) {
+	foreach($old_procs as $p) {
+		if ($p["process_id"] > 0) {
+			if (strstr(PHP_OS, "WIN")) {
+				exec("taskkill /pid " . $p["process_id"]);
+			}else{
+				exec("kill " . $p["process_id"]);
+			}
+			cacti_log("WARNING: Removing Hung MacTrack Process for Device '" . $p["device_id"] . "' With Status '" . $p["status"] . "'");
+		}else{
+			cacti_log("WARNING: Removing Hung MacTrack Process Entry for Device '" . $p["device_id"] . "' With Status '" . $p["status"] . "'");
+		}
+		db_execute("DELETE FROM mac_track_processes WHERE process_id=$p");
+	}
+}
 
 /* Disable Mib File Loading */
 putenv("MIBS=RFC-1215");

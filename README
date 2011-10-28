@@ -65,6 +65,7 @@
     bug#0001865: rescan doesn't work 
     bug: don't use htmlspecialchars recursively in forms
     bug: make the device removal a global function
+    feature: Attempt to kill processes if they have run over their allotted time
 
     --- 2.9 ---
     bug#0001799: Select all checkbox on Mac Addresses tab not working
