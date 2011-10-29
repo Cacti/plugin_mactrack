@@ -414,7 +414,7 @@ function get_enterasys_N7_vlan_id($OID) {
   the IP address and MAC address combinations in the mac_track_ips table.
 */
 function get_CTAlias_table($site, &$device) {
-	global $debug, $scan_date;
+	global $debug, $scan_date, $cnn_id;
 	mactrack_debug("FUNCTION: get_CTAlias_table started");
 
 	/* get the CTAlias Table for the device */
@@ -468,8 +468,8 @@ function get_CTAlias_table($site, &$device) {
 				" VALUES ('" .
 				$device["site_id"] . "','" .
 				$device["device_id"] . "','" .
-				$device["hostname"] . "','" .
-				$device["device_name"] . "','" .
+				$device["hostname"] . "'," .
+				$cnn_id->qstr($device["device_name"]) . ",'" .
 				$CTAliasEntry["ifIndex"] . "','" .
 				$CTAliasEntry["CTAliasMacAddress"] . "','" .
 				$CTAliasEntry["CTAliasAddressText"] . "','" .

@@ -348,7 +348,7 @@ function port_list_to_array($port_list, $delimiter = ":") {
   the IP address and MAC address combinations in the mac_track_ips table.
 */
 function get_standard_arp_table($site, &$device) {
-	global $debug, $scan_date;
+	global $debug, $scan_date, $cnn_id;
 
 	/* get the atifIndexes for the device */
 	$atifIndexes = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.1", $device);
@@ -401,10 +401,10 @@ function get_standard_arp_table($site, &$device) {
 			"(site_id,device_id,hostname,device_name,port_number," .
 			"mac_address,ip_address,scan_date)" .
 			" VALUES ('" .
-			$device["site_id"] . "','" .
+			$device["site_id"]) . "','" .
 			$device["device_id"] . "','" .
-			$device["hostname"] . "','" .
-			$device["device_name"] . "','" .
+			$device["hostname"] . "'," .
+			$cnn_id->qstr($device["device_name"]) . ",'" .
 			$atEntry["atifIndex"] . "','" .
 			$atEntry["atPhysAddress"] . "','" .
 			$atEntry["atNetAddress"] . "','" .
@@ -2021,7 +2021,7 @@ function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
   scanned.
 */
 function db_store_device_port_results(&$device, $port_array, $scan_date) {
-	global $debug;
+	global $debug, $cnn_id;
 
 	/* output details to database */
 	if (sizeof($port_array)) {
@@ -2280,7 +2280,7 @@ function import_oui_database($type = "ui", $oui_file = "http://standards.ieee.or
 }
 
 function get_netscreen_arp_table($site, &$device) {
-	global $debug, $scan_date;
+	global $debug, $scan_date, $cnn_id;
 
 	/* get the atifIndexes for the device */
 	$atifIndexes = xform_indexed_data(".1.3.6.1.2.1.3.1.1.1", $device, 6);
@@ -2344,8 +2344,8 @@ function get_netscreen_arp_table($site, &$device) {
 			" VALUES ('" .
 			$device["site_id"] . "','" .
 			$device["device_id"] . "','" .
-			$device["hostname"] . "','" .
-			$device["device_name"] . "','" .
+			$device["hostname"] . "'," .
+			$cnn_id->qstr($device["device_name"]) . ",'" .
 			$atEntry["atifIndex"] . "','" .
 			$atEntry["atPhysAddress"] . "','" .
 			$atEntry["atNetAddress"] . "','" .
