@@ -401,7 +401,7 @@ function get_standard_arp_table($site, &$device) {
 			"(site_id,device_id,hostname,device_name,port_number," .
 			"mac_address,ip_address,scan_date)" .
 			" VALUES ('" .
-			$device["site_id"]) . "','" .
+			$device["site_id"] . "','" .
 			$device["device_id"] . "','" .
 			$device["hostname"] . "'," .
 			$cnn_id->qstr($device["device_name"]) . ",'" .
