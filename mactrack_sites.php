@@ -26,6 +26,7 @@ chdir('../../');
 include("./include/auth.php");
 include_once("./lib/snmp.php");
 include_once("./plugins/mactrack/lib/mactrack_functions.php");
+include_once("./plugins/mactrack/mactrack_actions.php");
 
 define("MAX_DISPLAY_PAGES", 21);
 
@@ -248,40 +249,6 @@ function mactrack_site_export() {
 	foreach($xport_array as $xport_line) {
 		print $xport_line . "\n";
 	}
-}
-
-function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops_contact, $facilities_contact, $site_info) {
-	$save["site_id"]            = $site_id;
-	$save["site_name"]          = form_input_validate($site_name, "site_name", "", false, 3);
-	$save["site_info"]          = form_input_validate($site_info, "site_info", "", true, 3);
-	$save["customer_contact"]   = form_input_validate($customer_contact, "customer_contact", "", true, 3);
-	$save["netops_contact"]     = form_input_validate($netops_contact, "netops_contact", "", true, 3);
-	$save["facilities_contact"] = form_input_validate($facilities_contact, "facilities_contact", "", true, 3);
-
-	$site_id = 0;
-	if (!is_error_message()) {
-		$site_id = sql_save($save, "mac_track_sites", "site_id");
-
-		if ($site_id) {
-			raise_message(1);
-		}else{
-			raise_message(2);
-		}
-	}
-
-	return $site_id;
-}
-
-function api_mactrack_site_remove($site_id) {
-	db_execute("DELETE FROM mac_track_sites WHERE site_id='" . $site_id . "'");
-	db_execute("DELETE FROM mac_track_devices WHERE site_id=" . $site_id);
-	db_execute("DELETE FROM mac_track_aggregated_ports WHERE site_id=" . $site_id);
-	db_execute("DELETE FROM mac_track_interfaces WHERE site_id=" . $site_id);
-	db_execute("DELETE FROM mac_track_ips WHERE site_id=" . $site_id);
-	db_execute("DELETE FROM mac_track_ip_ranges WHERE site_id=" . $site_id);
-	db_execute("DELETE FROM mac_track_ports WHERE site_id=" . $site_id);
-	db_execute("DELETE FROM mac_track_temp_ports WHERE site_id=" . $site_id);
-	db_execute("DELETE FROM mac_track_vlans WHERE site_id=" . $site_id);
 }
 
 /* ---------------------

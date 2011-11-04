@@ -90,6 +90,40 @@ function api_mactrack_device_remove($device_id){
 	db_execute("DELETE FROM mac_track_interface_graphs WHERE device_id=" . $device_id);
 }
 
+function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops_contact, $facilities_contact, $site_info) {
+	$save["site_id"]            = $site_id;
+	$save["site_name"]          = form_input_validate($site_name, "site_name", "", false, 3);
+	$save["site_info"]          = form_input_validate($site_info, "site_info", "", true, 3);
+	$save["customer_contact"]   = form_input_validate($customer_contact, "customer_contact", "", true, 3);
+	$save["netops_contact"]     = form_input_validate($netops_contact, "netops_contact", "", true, 3);
+	$save["facilities_contact"] = form_input_validate($facilities_contact, "facilities_contact", "", true, 3);
+
+	$site_id = 0;
+	if (!is_error_message()) {
+		$site_id = sql_save($save, "mac_track_sites", "site_id");
+
+		if ($site_id) {
+			raise_message(1);
+		}else{
+			raise_message(2);
+		}
+	}
+
+	return $site_id;
+}
+
+function api_mactrack_site_remove($site_id) {
+	db_execute("DELETE FROM mac_track_sites WHERE site_id='" . $site_id . "'");
+	db_execute("DELETE FROM mac_track_devices WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_aggregated_ports WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_interfaces WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_ips WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_ip_ranges WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_ports WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_temp_ports WHERE site_id=" . $site_id);
+	db_execute("DELETE FROM mac_track_vlans WHERE site_id=" . $site_id);
+}
+
 function sync_mactrack_to_cacti($mt_device) {
 	global $config;
 	include_once($config["base_path"] . "/lib/functions.php");
@@ -97,7 +131,7 @@ function sync_mactrack_to_cacti($mt_device) {
 	include_once($config["base_path"] . "/lib/utility.php"); # required due to missing include in lib/api_device.php
 
 	/* do we want to "Sync MacTrack Device to Cacti Device"
-	 * AND has the device already been assigned a "valid" host_id 
+	 * AND has the device already been assigned a "valid" host_id
 	 * (aka: has the device been saved successfully) */
 	if ((read_config_option("mt_update_policy", true) == 3) &&
 		($mt_device["host_id"] > 0)) {
@@ -124,9 +158,9 @@ function sync_mactrack_to_cacti($mt_device) {
 }
 
 function sync_cacti_to_mactrack($device) {
-	
+
 	/* do we want to "Sync Cacti Device to MacTrack Device"
-	 * AND has the device already been assigned a "valid" MacTrack device id 
+	 * AND has the device already been assigned a "valid" MacTrack device id
 	 * (aka: has the device been saved successfully) */
 	if ((read_config_option("mt_update_policy", true) == 2) &&
 		($device["id"] > 0)) {
@@ -233,7 +267,7 @@ function mactrack_device_action_prepare($save) {
  *  */
 function mactrack_device_action_execute($action) {
 	global $config;
-	
+
 	# it's our turn
 	if ($action == "plugin_mactrack_device") { /* mactrack */
 		/* find out which (if any) hosts have been checked, so we can tell the user */
