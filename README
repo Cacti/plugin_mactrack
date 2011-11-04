@@ -66,6 +66,7 @@
     bug: don't use htmlspecialchars recursively in forms
     bug: make the device removal a global function
     bug: don't generate replace errors if device has an apostrophe
+    bug: reorganize API functions to assist third party integrations
     feature: Attempt to kill processes if they have run over their allotted time
 
     --- 2.9 ---
