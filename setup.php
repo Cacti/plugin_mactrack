@@ -881,7 +881,7 @@ function mactrack_setup_table_new () {
 function mactrack_version () {
 	return array(
 		'name'      => 'mactrack',
-		'version'   => '2.9',
+		'version'   => '3.0',
 		'longname'  => 'Device Tracking',
 		'author'    => 'Larry Adams',
 		'homepage'  => 'http://cacti.net',

@@ -1958,7 +1958,7 @@ function db_process_remove($device_id) {
   of the current device including the number of ports, it's readstring, etc.
 */
 function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
-	global $debug;
+	global $debug, $cnn_id;
 
 	list($micro,$seconds) = explode(" ", microtime());
 	$end_time = $seconds + $micro;
@@ -1985,11 +1985,11 @@ function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
 			"snmp_priv_passphrase='" . $device["snmp_priv_passphrase"] . "'," .
 			"snmp_priv_protocol='" . $device["snmp_priv_protocol"] . "'," .
 			"snmp_context='" . $device["snmp_context"] . "'," .
-			"snmp_sysName='" . addslashes($device["snmp_sysName"]) . "'," .
-			"snmp_sysLocation='" . addslashes($device["snmp_sysLocation"]) . "'," .
-			"snmp_sysContact='" . addslashes($device["snmp_sysContact"]) . "'," .
+			"snmp_sysName=" . $cnn_id->qstr($device["snmp_sysName"]) . "," .
+			"snmp_sysLocation=" . $cnn_id->qstr($device["snmp_sysLocation"]) . "," .
+			"snmp_sysContact=" . $cnn_id->qstr($device["snmp_sysContact"]) . "," .
 			"snmp_sysObjectID='" . $device["snmp_sysObjectID"] . "'," .
-			"snmp_sysDescr='" . addslashes($device["snmp_sysDescr"]) . "'," .
+			"snmp_sysDescr=" . $cnn_id->qstr($device["snmp_sysDescr"]) . "," .
 			"snmp_sysUptime='" . $device["snmp_sysUptime"] . "'," .
 			"snmp_status='" . $device["snmp_status"] . "'," .
 			"last_runmessage='" . $device["last_runmessage"] . "'," .
@@ -2043,14 +2043,14 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 				"mac_address,port_number,port_name,scan_date,authorized)" .
 				" VALUES ('" .
 				$device["site_id"] . "','" .
-				$device["device_id"] . "','" .
-				addslashes($device["hostname"]) . "','" .
-				addslashes($device["device_name"]) . "','" .
-				$port_value["vlan_id"] . "','" .
-				addslashes($port_value["vlan_name"]) . "','" .
+				$device["device_id"] . "'," .
+				$cnn_id->qstr($device["hostname"]) . "," .
+				$cnn_id->qstr($device["device_name"]) . ",'" .
+				$port_value["vlan_id"] . "'," .
+				$cnn_id->qstr($port_value["vlan_name"]) . ",'" .
 				$port_value["mac_address"] . "','" .
-				$port_value["port_number"] . "','" .
-				addslashes($port_value["port_name"]) . "','" .
+				$port_value["port_number"] . "'," .
+				$cnn_id->qstr($port_value["port_name"]) . ",'" .
 				$scan_date . "','" .
 				$authorized_mac . "')";
 
