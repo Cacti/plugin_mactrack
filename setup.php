@@ -144,13 +144,14 @@ function mactrack_check_upgrade () {
 	if (defined('CACTI_BASE_PATH')) {
 		$config["base_path"] = CACTI_BASE_PATH;
 	}
-	include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_functions.php");
 
 	$files = array('index.php', 'plugins.php', 'mactrack_devices.php');
 	if (isset($_SERVER['PHP_SELF']) && !in_array(basename($_SERVER['PHP_SELF']), $files)) {
 		return;
 	}
 
+	include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_functions.php");
+	
 	$current = plugin_mactrack_version();
 	$current = $current['version'];
 
