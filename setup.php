@@ -41,6 +41,10 @@ function plugin_mactrack_install() {
 	# device hook: Device Management Action dropdown selected: execute list of device
 	api_plugin_register_hook('mactrack', 'device_action_execute', 'mactrack_device_action_execute', 'mactrack_actions.php');
 
+	# Register our realms
+	api_plugin_register_realm('mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_graphs.php,mactrack_ajax.php', 'MacTrack Viewer', 1);
+	api_plugin_register_realm('mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'Plugin -> MacTrack Administrator', 1);
+
 	mactrack_setup_table_new ();
 }
 
@@ -172,6 +176,12 @@ function mactrack_check_upgrade () {
 
 		if (read_config_option("mt_convert_readstrings", true) != "on") {
 			convert_readstrings();
+		}
+
+		// If are realms are not present in plugin_realms recreate them with the old realm ids (minus 100) so that upgraded installs are not broken
+		if (!db_fetch_cell("SELECT id FROM plugin_realms WHERE plugin = 'mactrack'")) {
+			db_execute("INSERT INTO plugin_realms (id, plugin, file, display) VALUES (2020, 'mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_graphs.php,mactrack_ajax.php', 'Plugin -> MacTrack Viewer')");
+			db_execute("INSERT INTO plugin_realms (id, plugin, file, display) VALUES (2021, 'mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'Plugin -> MacTrack Administrator')");
 		}
 
 		/* rebuild the scanning functions */
@@ -1312,31 +1322,9 @@ function mactrack_show_tab () {
 
 function mactrack_config_arrays () {
 	global $mactrack_device_types, $mactrack_search_types, $messages;
-	global $user_auth_realms, $user_auth_realm_filenames, $menu, $config, $rows_selector;
+	global $menu, $config, $rows_selector;
 	global $mactrack_poller_frequencies, $mactrack_data_retention, $refresh_interval;
 	global $mactrack_macauth_frequencies, $mactrack_duplexes, $mactrack_update_policies;
-
-	$user_auth_realms[2120]='Plugin -> MacTrack Viewer';
-	$user_auth_realms[2121]='Plugin -> MacTrack Administrator';
-	$user_auth_realms[2122]='Plugin -> MacTrack Security';
-
-	$user_auth_realm_filenames['mactrack_view_ips.php']        = 2120;
-	$user_auth_realm_filenames['mactrack_view_arp.php']        = 2120;
-	$user_auth_realm_filenames['mactrack_view_macs.php']       = 2120;
-	$user_auth_realm_filenames['mactrack_view_sites.php']      = 2120;
-	$user_auth_realm_filenames['mactrack_view_devices.php']    = 2120;
-	$user_auth_realm_filenames['mactrack_view_interfaces.php'] = 2120;
-	$user_auth_realm_filenames['mactrack_view_graphs.php']     = 2120;
-	$user_auth_realm_filenames['mactrack_ajax.php']            = 2120;
-	$user_auth_realm_filenames['mactrack_ajax_admin.php']      = 2121;
-	$user_auth_realm_filenames['mactrack_devices.php']         = 2121;
-	$user_auth_realm_filenames['mactrack_snmp.php']            = 2121;
-	$user_auth_realm_filenames['mactrack_sites.php']           = 2121;
-	$user_auth_realm_filenames['mactrack_device_types.php']    = 2121;
-	$user_auth_realm_filenames['mactrack_utilities.php']       = 2121;
-	$user_auth_realm_filenames['mactrack_macwatch.php']        = 2121;
-	$user_auth_realm_filenames['mactrack_macauth.php']         = 2121;
-	$user_auth_realm_filenames['mactrack_vendormacs.php']      = 2121;
 
 	if (isset($_SESSION['mactrack_message']) && $_SESSION['mactrack_message'] != '') {
 		$messages['mactrack_message'] = array('message' => $_SESSION['mactrack_message'], 'type' => 'info');
