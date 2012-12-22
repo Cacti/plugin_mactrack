@@ -1,5 +1,8 @@
 Cacti - MacTrack CHANGELOG
 
+3.0
+-bug#0002310: SNMP Option Set Call to undefined function mactrack_save_button()
+
 1.0
 -feature: Make mac_track_temp_ports and mac_track_ips memory tables for faster performance
 -bug: Fix all export functions.  Only allow upto 10k records to be exported at any time.

@@ -282,6 +282,7 @@ function mactrack_snmp_item_remove() {
 function mactrack_snmp_item_edit() {
 	global $config, $colors;
 	global $fields_mactrack_snmp_item_edit;
+	include_once($config["base_path"]."/plugins/mactrack/lib/mactrack_functions.php");
 	#print "<pre>Post: "; print_r($_POST); print "Get: "; print_r($_GET); print "Request: ";  print_r($_REQUEST);  /*print "Session: ";  print_r($_SESSION);*/ print "</pre>";
 
 	/* ================= input validation ================= */
@@ -323,7 +324,7 @@ function mactrack_snmp_item_edit() {
 
 	mactrack_save_button(htmlspecialchars("mactrack_snmp.php?action=edit&id=" . get_request_var_request("id")));
 
-	print "<script type='text/javascript' src='" . URL_PATH . "plugins/mactrack/mactrack_snmp.js'></script>";
+	print "<script type='text/javascript' src='" . CACTI_URL_PATH . "plugins/mactrack/mactrack_snmp.js'></script>";
 }
 
 /* ---------------------
@@ -350,7 +351,7 @@ function mactrack_snmp_remove() {
 function mactrack_snmp_edit() {
 	global $colors, $config, $fields_mactrack_snmp_edit;
 	#print "<pre>Post: "; print_r($_POST); print "Get: "; print_r($_GET); print "Request: ";  print_r($_REQUEST);  print "Session: ";  print_r($_SESSION); print "</pre>";
-	#include_once($config["base_path"]."/plugins/mactrack/mactrack_functions.php");
+	include_once($config["base_path"]."/plugins/mactrack/lib/mactrack_functions.php");
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("id"));
