@@ -130,6 +130,10 @@ function form_mactrack_save() {
 function form_mactrack_actions() {
 	global $colors, $config, $device_actions, $fields_mactrack_device_edit, $fields_mactrack_snmp_item;
 
+	/* ================= input validation ================= */
+	input_validate_input_number(get_request_var_post('drp_action'));
+	/* ==================================================== */
+
 	if (defined('CACTI_BASE_PATH')) {
 		$config["base_path"] = CACTI_BASE_PATH;
 	}

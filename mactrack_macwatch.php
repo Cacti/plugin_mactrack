@@ -85,6 +85,10 @@ function form_save() {
 function form_actions() {
 	global $colors, $config, $macw_actions, $fields_mactrack_macw_edit;
 
+	/* ================= input validation ================= */
+	input_validate_input_number(get_request_var_post('drp_action'));
+	/* ==================================================== */
+
 	/* if we are to save this form, instead of display it */
 	if (isset($_POST["selected_items"])) {
 		$selected_items = unserialize(stripslashes($_POST["selected_items"]));

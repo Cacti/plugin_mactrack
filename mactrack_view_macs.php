@@ -84,6 +84,10 @@ default:
 function form_actions() {
 	global $colors, $config, $mactrack_view_macs_actions;
 
+	/* ================= input validation ================= */
+	input_validate_input_number(get_request_var_post('drp_action'));
+	/* ==================================================== */
+
 	/* if we are to save this form, instead of display it */
 	if (isset($_POST["selected_items"])) {
 		$selected_items = unserialize(stripslashes($_POST["selected_items"]));
@@ -197,6 +201,10 @@ function form_actions() {
 
 function form_aggregated_actions() {
 	global $colors, $config, $mactrack_view_agg_macs_actions;
+
+	/* ================= input validation ================= */
+	input_validate_input_number(get_request_var_post('drp_action'));
+	/* ==================================================== */
 
 	/* if we are to save this form, instead of display it */
 	if (isset($_POST["selected_items"])) {

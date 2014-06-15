@@ -200,6 +200,10 @@ function api_mactrack_duplicate_device_type($device_type_id, $dup_id, $device_ty
 function form_actions() {
 	global $colors, $config, $device_types_actions, $fields_mactrack_device_types_edit;
 
+	/* ================= input validation ================= */
+	input_validate_input_number(get_request_var_post('drp_action'));
+	/* ==================================================== */
+
 	/* if we are to save this form, instead of display it */
 	if (isset($_POST["selected_items"])) {
 		$selected_items = unserialize(stripslashes($_POST["selected_items"]));
