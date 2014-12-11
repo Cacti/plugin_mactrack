@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2010 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -101,7 +101,7 @@ switch ($_REQUEST["action"]) {
    ----------------------- */
 
 function mactrack_display_run_status() {
-	global $colors, $config, $refresh_interval, $mactrack_poller_frequencies;
+	global $config, $refresh_interval, $mactrack_poller_frequencies;
 
 	$seconds_offset = read_config_option("mt_collection_timing", TRUE);
 	if ($seconds_offset <> "disabled") {
@@ -161,7 +161,7 @@ function mactrack_display_run_status() {
 		$time_till_next_db_maint = $next_db_maint_time - $current_time;
 	}
 
-	html_start_box("<strong>MacTrack Process Status</strong>", "100%", $colors["header"], "1", "center", "");
+	html_start_box("<strong>MacTrack Process Status</strong>", "100%", "", "1", "center", "");
 	?>
 	<script type="text/javascript">
 	<!--
@@ -171,7 +171,7 @@ function mactrack_display_run_status() {
 	}
 	-->
 	</script>
-	<tr bgcolor="<?php print $colors["panel"];?>">
+	<tr class='even'>
 		<form name="form_mactrack_utilities_stats" method="post">
 		<td>
 			<table cellpadding="1" cellspacing="0">
@@ -197,7 +197,7 @@ function mactrack_display_run_status() {
 	</tr>
 	<?php
 	html_end_box(TRUE);
-	html_start_box("", "100%", $colors["header"], "1", "center", "");
+	html_start_box("", "100%", "", "1", "center", "");
 
 	/* get information on running processes */
 	$running_processes = db_fetch_assoc("SELECT
@@ -224,45 +224,44 @@ function mactrack_display_run_status() {
 	$disabled_devices = db_fetch_cell("SELECT count(*) FROM mac_track_devices");
 
 	html_header(array("Current Process Status"), 2);
-	$i = 0;
-	form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+	form_alternate_row();
 	print "<td><strong>The MacTrack Poller is:</td><td>" . ($total_processes > 0 ? "RUNNING" : ($seconds_offset == "disabled" ? "DISABLED" : "IDLE")) . "</strong></td>";
 	if ($total_processes > 0) {
-		form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+		form_alternate_row();
 		print "<td><strong>Running Processes:</strong></td><td>" . $total_processes . "</td>";
 	}
-	form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+	form_alternate_row();
 	print "<td width=200><strong>Last Time Poller Started:</strong></td><td>" . read_config_option("mt_scan_date", TRUE) . "</td>";
-	form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+	form_alternate_row();
 	print "<td width=200><strong>Poller Frequency:</strong></td><td>" . ($seconds_offset == "disabled" ? "N/A" : $mactrack_poller_frequencies[$seconds_offset/60]) . "</td>";
-	form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+	form_alternate_row();
 	print "<td width=200><strong>Approx. Next Runtime:</strong></td><td>" . (empty($next_run_time) ? "N/A" : date("Y-m-d G:i:s", $next_run_time)) . "</td>";
-	form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+	form_alternate_row();
 	print "<td width=200><strong>Approx. Next DB Maintenance:</strong></td><td>" . (empty($next_db_maint_time) ? "N/A" : date("Y-m-d G:i:s", $next_db_maint_time)) . "</td>";
 
 	html_header(array("Run Time Details"), 2);
-	form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+	form_alternate_row();
 	print "<td width=200><strong>Last Poller Runtime:</strong></td><td>" . read_config_option("stats_mactrack", TRUE) . "</td>";
-	form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+	form_alternate_row();
 	print "<td width=200><strong>Last Poller Maintenence Runtime:</strong></td><td>" . read_config_option("stats_mactrack_maint", TRUE) . "</td>";
-	form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+	form_alternate_row();
 	print "<td width=200><strong>Maximum Concurrent Processes:</strong></td><td>" . read_config_option("mt_processes", TRUE) . " processes</td>";
-	form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+	form_alternate_row();
 	print "<td width=200><strong>Maximum Per Device Scan Time:</strong></td><td>" . read_config_option("mt_script_runtime", TRUE) . " minutes</td>";
 
 	html_header(array("DNS Configuration Information"), 2);
-	form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+	form_alternate_row();
 	print "<td width=200><strong>Reverse DNS Resolution is</strong></td><td>" . (read_config_option("mt_reverse_dns", TRUE) == "on" ? "ENABLED" : "DISABLED") . "</td>";
-	form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+	form_alternate_row();
 	print "<td width=200><strong>Primary DNS Server:</strong></td><td>" . read_config_option("mt_dns_primary", TRUE) . "</td>";
-	form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+	form_alternate_row();
 	print "<td width=200><strong>Secondary DNS Server:</strong></td><td>" . read_config_option("mt_dns_secondary", TRUE) . "</td>";
-	form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+	form_alternate_row();
 	print "<td width=200><strong>DNS Resoution Timeout:</strong></td><td>" . read_config_option("mt_dns_timeout", TRUE) . " milliseconds</td>";
 	html_end_box(TRUE);
 
 	if ($total_processes > 0) {
-		html_start_box("<strong>Running Process Summary</strong>", "100%", $colors["header"], "3", "center", "");
+		html_start_box("<strong>Running Process Summary</strong>", "100%", "", "3", "center", "");
 		?>
 		<td><strong><?php print ($resolver_running ? "The DNS Resolver is Running" : "The DNS Resolver is Not Running");?></strong></td>
 		<?php
@@ -298,26 +297,25 @@ function mactrack_display_run_status() {
 			}
 		}
 
-		$i = 0;
-		form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+		form_alternate_row();
 		?>
 		<td><?php print "Completed";?></td>
 		<td><?php print $completed_processes;?></td>
 		<td><?php print $completed_date;?></td>
 		<?php
-		form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+		form_alternate_row();
 		?>
 		<td><?php print "Running";?></td>
 		<td><?php print $running_processes;?></td>
 		<td><?php print $running_date;?></td>
 		<?php
-		form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+		form_alternate_row();
 		?>
 		<td><?php print "Waiting";?></td>
 		<td><?php print $waiting_processes;?></td>
 		<td><?php print $waiting_date;?></td>
 		<?php
-		form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+		form_alternate_row();
 		if ($other_processes > 0) {
 			?>
 			<td><?php print "Other";?></td>
@@ -332,16 +330,16 @@ function mactrack_display_run_status() {
 }
 
 function mactrack_utilities_ports_clear() {
-	global $config, $colors;
+	global $config;
 
-	if ((read_config_option("remove_verification") == "on") && (!isset($_GET["confirm"]))) {
+	if ((read_config_option("remove_verification") == "on") && (!isset($_REQUEST["confirm"]))) {
 		include("./include/top_header.php");
 		form_confirm("Are You Sure?", "Are you sure you want to delete all the Port to MAC to IP results from the system?", "mactrack_utilities.php", "mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table");
 		include("./include/bottom_footer.php");
 		exit;
 	}
 
-	if ((read_config_option("remove_verification") == "") || (isset($_GET["confirm"]))) {
+	if ((read_config_option("remove_verification") == "") || (isset($_REQUEST["confirm"]))) {
 		$rows = db_fetch_cell("SELECT COUNT(*) FROM mac_track_ports");
 		db_execute("TRUNCATE TABLE mac_track_ports");
 		db_execute("TRUNCATE TABLE mac_track_scan_dates");
@@ -380,7 +378,7 @@ function mactrack_utilities_ports_clear() {
 
 		include("./include/top_header.php");
 		mactrack_utilities();
-		html_start_box("<strong>Device Tracking Database Results</strong>", "100%", $colors["header"], "3", "center", "");
+		html_start_box("<strong>Device Tracking Database Results</strong>", "100%", "", "3", "center", "");
 		?>
 		<td>
 			The following number of records have been removed from the database: <?php print $rows;?>
@@ -391,22 +389,22 @@ function mactrack_utilities_ports_clear() {
 }
 
 function mactrack_utilities_purge_aggregated_data() {
-	global $config, $colors;
+	global $config;
 
-	if ((read_config_option("remove_verification") == "on") && (!isset($_GET["confirm"]))) {
+	if ((read_config_option("remove_verification") == "on") && (!isset($_REQUEST["confirm"]))) {
 		include("./include/top_header.php");
 		form_confirm("Are You Sure?", "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?", "mactrack_utilities.php", "mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data");
 		include("./include/bottom_footer.php");
 		exit;
 	}
 
-	if ((read_config_option("remove_verification") == "") || (isset($_GET["confirm"]))) {
+	if ((read_config_option("remove_verification") == "") || (isset($_REQUEST["confirm"]))) {
 		$rows = db_fetch_cell("SELECT COUNT(*) FROM mac_track_aggregated_ports");
 		db_execute("TRUNCATE TABLE mac_track_aggregated_ports");
 
 		include("./include/top_header.php");
 		mactrack_utilities();
-		html_start_box("<strong>Device Tracking Database Results</strong>", "100%", $colors["header"], "3", "center", "");
+		html_start_box("<strong>Device Tracking Database Results</strong>", "100%", "", "3", "center", "");
 		?>
 		<td>
 			The following number of records have been removed from the aggergated table: <?php print $rows;?>
@@ -417,9 +415,9 @@ function mactrack_utilities_purge_aggregated_data() {
 }
 
 function mactrack_utilities_recreate_aggregated_data() {
-	global $config, $colors;
+	global $config;
 
-	if ((read_config_option("remove_verification") == "on") && (!isset($_GET["confirm"]))) {
+	if ((read_config_option("remove_verification") == "on") && (!isset($_REQUEST["confirm"]))) {
 		include("./include/top_header.php");
 		form_confirm("Are You Sure?", "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?", "mactrack_utilities.php", "mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data");
 		include("./include/bottom_footer.php");
@@ -427,7 +425,7 @@ function mactrack_utilities_recreate_aggregated_data() {
 	}
 
 
-	if ((read_config_option("remove_verification") == "") || (isset($_GET["confirm"]))) {
+	if ((read_config_option("remove_verification") == "") || (isset($_REQUEST["confirm"]))) {
 		$old_rows = db_fetch_cell("SELECT COUNT(*) FROM mac_track_aggregated_ports");
 		db_execute("TRUNCATE TABLE mac_track_aggregated_ports");
 
@@ -445,7 +443,7 @@ function mactrack_utilities_recreate_aggregated_data() {
 
 		include("./include/top_header.php");
 		mactrack_utilities();
-		html_start_box("<strong>Device Tracking Database Results</strong>", "100%", $colors["header"], "3", "center", "");
+		html_start_box("<strong>Device Tracking Database Results</strong>", "100%", "", "3", "center", "");
 		?>
 		<td>
 			The following number of records have been removed from the aggergated table: <?php print $old_rows;?>. And <?php print $new_rows;?> number of record will be added.
@@ -456,12 +454,10 @@ function mactrack_utilities_recreate_aggregated_data() {
 }
 
 function mactrack_utilities_db_maint() {
-	global $colors;
-
 	$begin_rows = db_fetch_cell("SELECT COUNT(*) FROM mac_track_ports");
 	perform_mactrack_db_maint();
 	$end_rows = db_fetch_cell("SELECT COUNT(*) FROM mac_track_ports");
-	html_start_box("<strong>Device Tracking Database Results</strong>", "100%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Device Tracking Database Results</strong>", "100%", "", "3", "center", "");
 	?>
 	<td>
 		The following number of records have been removed from the database: <?php print $begin_rows-$end_rows;?>
@@ -471,11 +467,11 @@ function mactrack_utilities_db_maint() {
 }
 
 function mactrack_utilities_purge_scanning_funcs() {
-	global $config, $colors;
+	global $config;
 
 	mactrack_rebuild_scanning_funcs();
 
-	html_start_box("<strong>Device Tracking Scanning Function Refresh Results</strong>", "100%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Device Tracking Scanning Function Refresh Results</strong>", "100%", "", "3", "center", "");
 	?>
 	<td>
 		The Device Tracking scanning functions have been purged.  They will be recreated once you either edit a device or device type.
@@ -485,15 +481,13 @@ function mactrack_utilities_purge_scanning_funcs() {
 }
 
 function mactrack_utilities() {
-	global $colors;
-
-	html_start_box("<strong>Cacti MacTrack System Utilities</strong>", "100%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Cacti MacTrack System Utilities</strong>", "100%", "", "3", "center", "");
 
 	html_header(array("Process Status Information"), 2);
 
 	?>
 
-	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
+	<tr class="even">
 		<td class="textArea" width="150" valign="top">
 			<a href='mactrack_utilities.php?action=mactrack_proc_status'>View MacTrack Process Status</a>
 		</td>
@@ -504,7 +498,7 @@ function mactrack_utilities() {
 
 	<?php html_header(array("Database Administration"), 2);?>
 
-	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
+	<tr class="odd">
 		<td class="textArea" width="150" valign="top">
 			<a href='mactrack_utilities.php?action=mactrack_utilities_perform_db_maint'>Perform Database Maintenance</a>
 		</td>
@@ -513,7 +507,7 @@ function mactrack_utilities() {
 		</td>
 	</tr>
 
-	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
+	<tr class="even">
 		<td class="textArea" width="150" valign="top">
 			<a href='mactrack_utilities.php?action=mactrack_refresh_oui_database'>Refresh IEEE Vendor MAC/OUI Database</a>
 		</td>
@@ -525,7 +519,7 @@ function mactrack_utilities() {
 		</td>
 	</tr>
 
-	<tr bgcolor="#<?php print $colors["form_alternate2"];?>">
+	<tr class="odd">
 		<td class="textArea" width="150" valign="top">
 			<a href='mactrack_utilities.php?action=mactrack_utilities_purge_scanning_funcs'>Refresh Scanning Functions</a>
 		</td>
@@ -535,7 +529,7 @@ function mactrack_utilities() {
 		</td>
 	</tr>
 
-	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
+	<tr class="even">
 		<td class="textArea" width="150" valign="top">
 			<a href='mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table'>Remove All Scan Results</a>
 		</td>
@@ -546,7 +540,7 @@ function mactrack_utilities() {
 
 	<?php html_header(array("Aggregated Table Administration"), 2);?>
 
-	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
+	<tr class="even">
 		<td class="textArea" width="150" valign="top">
 			<a href='mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data'>Remove All Aggregated Results</a>
 		</td>
@@ -555,7 +549,7 @@ function mactrack_utilities() {
 		</td>
 	</tr>
 
-	<tr bgcolor="#<?php print $colors["form_alternate1"];?>">
+	<tr class="odd">
 		<td class="textArea" width="150" valign="top">
 			<a href='mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data'>Perform Aggregate Table Rebuild</a>
 		</td>

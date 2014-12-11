@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2010 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -39,7 +39,7 @@ if (isset($_REQUEST["export_x"])) {
 }
 
 function mactrack_vmacs_export() {
-	global $colors, $site_actions, $config;
+	global $site_actions, $config;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("page"));
@@ -47,17 +47,17 @@ function mactrack_vmacs_export() {
 
 	/* clean up search string */
 	if (isset($_REQUEST["filter"])) {
-		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
+		$_REQUEST["filter"] = sanitize_search_string(get_request_var_request("filter"));
 	}
 
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
-		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
+		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var_request("sort_column"));
 	}
 
 	/* clean up search string */
 	if (isset($_REQUEST["sort_direction"])) {
-		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var("sort_direction"));
+		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var_request("sort_direction"));
 	}
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
@@ -111,7 +111,7 @@ function mactrack_vmacs_get_vmac_records(&$sql_where, $row_limit, $apply_limits 
 }
 
 function mactrack_vmacs() {
-	global $colors, $site_actions, $config, $item_rows;
+	global $site_actions, $config, $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("page"));
@@ -120,24 +120,24 @@ function mactrack_vmacs() {
 
 	/* clean up search string */
 	if (isset($_REQUEST["filter"])) {
-		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
+		$_REQUEST["filter"] = sanitize_search_string(get_request_var_request("filter"));
 	}
 
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
-		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
+		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var_request("sort_column"));
 	}
 
 	/* clean up search string */
 	if (isset($_REQUEST["sort_direction"])) {
-		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var("sort_direction"));
+		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var_request("sort_direction"));
 	}
 
 	/* if the user pushed the 'clear' button */
 	if (isset($_REQUEST["clear_x"])) {
 		kill_session_var("sess_mactrack_vmacs_current_page");
 		kill_session_var("sess_mactrack_vmacs_filter");
-		kill_session_var("sess_mactrack_vmacs_rows");
+		kill_session_var("sess_default_rows");
 		kill_session_var("sess_mactrack_vmacs_sort_column");
 		kill_session_var("sess_mactrack_vmacs_sort_direction");
 
@@ -150,7 +150,7 @@ function mactrack_vmacs() {
 		/* if any of the settings changed, reset the page number */
 		$changed = 0;
 		$changed += mactrack_check_changed("filter", "sess_mactrack_vmacs_filter");
-		$changed += mactrack_check_changed("rows", "sess_mactrack_vmacs_rows");
+		$changed += mactrack_check_changed("rows", "sess_default_rows");
 
 		if ($changed) {
 			$_REQUEST["page"] = "1";
@@ -160,22 +160,22 @@ function mactrack_vmacs() {
 	/* remember these search fields in session vars so we don't have to keep passing them around */
 	load_current_session_value("page", "sess_mactrack_vmacs_current_page", "1");
 	load_current_session_value("filter", "sess_mactrack_vmacs_filter", "");
-	load_current_session_value("rows", "sess_mactrack_vmacs_rows", "-1");
+	load_current_session_value('rows', 'sess_default_rows', read_config_option('num_rows_table'));
 	load_current_session_value("sort_column", "sess_mactrack_vmacs_sort_column", "vendor_mac");
 	load_current_session_value("sort_direction", "sess_mactrack_vmacs_sort_direction", "ASC");
 
 	if ($_REQUEST["rows"] == -1) {
-		$row_limit = read_config_option("num_rows_mactrack");
+		$row_limit = read_config_option("num_rows_table");
 	}elseif ($_REQUEST["rows"] == -2) {
 		$row_limit = 999999;
 	}else{
 		$row_limit = $_REQUEST["rows"];
 	}
 
-	html_start_box("<strong>MacTrack Vendor Mac Filter</strong>", "100%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>MacTrack Vendor Mac Filter</strong>", "100%", "", "3", "center", "");
 	mactrack_vmac_filter();
 	html_end_box();
-	html_start_box("", "100%", $colors["header"], "3", "center", "");
+	html_start_box("", "100%", "", "3", "center", "");
 
 	$sql_where = "";
 
@@ -186,49 +186,9 @@ function mactrack_vmacs() {
 			FROM mac_track_oui_database
 			$sql_where");
 
-	/* generate page list */
-	$url_page_select = str_replace("&page", "?page", get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_vendormacs.php"));
+	$nav = html_nav_bar("mactrack_vendormacs.php", MAX_DISPLAY_PAGES, get_request_var_request("page"), $row_limit, $total_rows, 9, 'Vendor Macs');
 
-	if (defined("CACTI_VERSION")) {
-		/* generate page list navigation */
-		$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, 11, "mactrack_vendormacs.php?filter=" . $_REQUEST["filter"]);
-	}else{
-		if ($total_rows > 0) {
-			$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-					<td colspan='9'>
-						<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-							<tr>
-								<td align='left' class='textHeaderDark'>
-									<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_vendormacs.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-								</td>\n
-								<td align='center' class='textHeaderDark'>
-									Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-								</td>\n
-								<td align='right' class='textHeaderDark'>
-									<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_vendormacs.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-								</td>\n
-							</tr>
-						</table>
-					</td>
-				</tr>\n";
-		}else{
-			$nav = "<tr bgcolor='#" . $colors["header"] . "' class='noprint'>
-						<td colspan='22'>
-							<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-								<tr>
-									<td align='center' class='textHeaderDark'>
-										No Rows Found
-									</td>\n
-								</tr>
-							</table>
-						</td>
-					</tr>\n";
-		}
-	}
-
-	if ($total_rows) {
-		print $nav;
-	}
+	print $nav;
 
 	$display_text = array(
 		"vendor_mac" => array("Vendor MAC", "ASC"),
@@ -237,14 +197,13 @@ function mactrack_vmacs() {
 
 	html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 
-	$i = 0;
 	if (sizeof($vmacs) > 0) {
 		foreach ($vmacs as $vmac) {
-			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+			form_alternate_row();
 				?>
 				<td class="linkEditMain"><?php print $vmac["vendor_mac"];?></td>
-				<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $vmac["vendor_name"]) : $vmac["vendor_name"]);?></td>
-				<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $vmac["vendor_address"]) : $vmac["vendor_address"]);?></td>
+				<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $vmac["vendor_name"]) : $vmac["vendor_name"]);?></td>
+				<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $vmac["vendor_address"]) : $vmac["vendor_address"]);?></td>
 			</tr>
 			<?php
 		}

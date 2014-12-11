@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2010 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -87,7 +87,7 @@ function form_save() {
    ------------------------ */
 
 function form_actions() {
-	global $colors, $config, $site_actions, $fields_mactrack_site_edit;
+	global $config, $site_actions, $fields_mactrack_site_edit;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_post('drp_action'));
@@ -131,13 +131,13 @@ function form_actions() {
 
 	include_once("./include/top_header.php");
 
-	html_start_box("<strong>" . $site_actions{$_POST["drp_action"]} . "</strong>", "60%", $colors["header_panel"], "3", "center", "");
+	html_start_box("<strong>" . $site_actions{$_POST["drp_action"]} . "</strong>", "60%", "", "3", "center", "");
 
 	print "<form action='mactrack_sites.php' method='post'>\n";
 
 	if ($_POST["drp_action"] == "1") { /* delete */
 		print "	<tr>
-				<td class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
+				<td class='textArea'>
 					<p>Are you sure you want to delete the following site(s)?</p>
 					<p><ul>$site_list</ul></p>";
 					print "</td></tr>
@@ -147,14 +147,14 @@ function form_actions() {
 	}
 
 	if (!isset($site_array)) {
-		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You must select at least one site.</span></td></tr>\n";
+		print "<tr><td class='even'><span class='textError'>You must select at least one site.</span></td></tr>\n";
 		$save_html = "";
 	}else{
 		$save_html = "<input type='submit' name='save_x' value='Yes'>";
 	}
 
 	print "	<tr>
-			<td colspan='2' align='right' bgcolor='#eaeaea'>
+			<td colspan='2' align='right' class='saveRow'>
 				<input type='hidden' name='action' value='actions'>
 				<input type='hidden' name='selected_items' value='" . (isset($site_array) ? serialize($site_array) : '') . "'>
 				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>" . (strlen($save_html) ? "
@@ -170,7 +170,7 @@ function form_actions() {
 }
 
 function mactrack_site_export() {
-	global $colors, $site_actions, $config;
+	global $site_actions, $config;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("site_id"));
@@ -179,22 +179,22 @@ function mactrack_site_export() {
 
 	/* clean up search string */
 	if (isset($_REQUEST["detail"])) {
-		$_REQUEST["detail"] = sanitize_search_string(get_request_var("detail"));
+		$_REQUEST["detail"] = sanitize_search_string(get_request_var_request("detail"));
 	}
 
 	/* clean up search string */
 	if (isset($_REQUEST["filter"])) {
-		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
+		$_REQUEST["filter"] = sanitize_search_string(get_request_var_request("filter"));
 	}
 
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
-		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
+		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var_request("sort_column"));
 	}
 
 	/* clean up search string */
 	if (isset($_REQUEST["sort_direction"])) {
-		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var("sort_direction"));
+		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var_request("sort_direction"));
 	}
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
@@ -263,18 +263,18 @@ function mactrack_site_remove() {
 	global $config;
 
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var("site_id"));
+	input_validate_input_number(get_request_var_request("site_id"));
 	/* ==================================================== */
 
-	if ((read_config_option("remove_verification") == "on") && (!isset($_GET["confirm"]))) {
+	if ((read_config_option("remove_verification") == "on") && (!isset($_REQUEST["confirm"]))) {
 		include("./include/top_header.php");
-		form_confirm("Are You Sure?", "Are you sure you want to delete the site <strong>'" . db_fetch_cell("select description from host where id=" . $_GET["device_id"]) . "'</strong>?", "mactrack_sites.php", "mactrack_sites.php?action=remove&site_id=" . $_GET["site_id"]);
+		form_confirm("Are You Sure?", "Are you sure you want to delete the site <strong>'" . db_fetch_cell("select description from host where id=" . $_REQUEST["device_id"]) . "'</strong>?", "mactrack_sites.php", "mactrack_sites.php?action=remove&site_id=" . $_REQUEST["site_id"]);
 		include("./include/bottom_footer.php");
 		exit;
 	}
 
-	if ((read_config_option("remove_verification") == "") || (isset($_GET["confirm"]))) {
-		api_mactrack_site_remove($_GET["site_id"]);
+	if ((read_config_option("remove_verification") == "") || (isset($_REQUEST["confirm"]))) {
+		api_mactrack_site_remove($_REQUEST["site_id"]);
 	}
 }
 
@@ -357,22 +357,22 @@ function mactrack_site_get_site_records(&$sql_where, $row_limit, $apply_limits =
 }
 
 function mactrack_site_edit() {
-	global $colors, $fields_mactrack_site_edit;
+	global $fields_mactrack_site_edit;
 
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var("site_id"));
+	input_validate_input_number(get_request_var_request("site_id"));
 	/* ==================================================== */
 
 	display_output_messages();
 
-	if (!empty($_GET["site_id"])) {
-		$site = db_fetch_row("select * from mac_track_sites where site_id=" . $_GET["site_id"]);
+	if (!empty($_REQUEST["site_id"])) {
+		$site = db_fetch_row("select * from mac_track_sites where site_id=" . $_REQUEST["site_id"]);
 		$header_label = "[edit: " . $site["site_name"] . "]";
 	}else{
 		$header_label = "[new]";
 	}
 
-	html_start_box("<strong>MacTrack Site</strong> $header_label", "100%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>MacTrack Site</strong> $header_label", "100%", "", "3", "center", "");
 
 	draw_edit_form(array(
 		"config" => array("form_name" => "chk"),
@@ -389,7 +389,7 @@ function mactrack_site_edit() {
 }
 
 function mactrack_site() {
-	global $colors, $site_actions, $config, $item_rows;
+	global $site_actions, $config, $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("site_id"));
@@ -399,22 +399,22 @@ function mactrack_site() {
 
 	/* clean up search string */
 	if (isset($_REQUEST["detail"])) {
-		$_REQUEST["detail"] = sanitize_search_string(get_request_var("detail"));
+		$_REQUEST["detail"] = sanitize_search_string(get_request_var_request("detail"));
 	}
 
 	/* clean up search string */
 	if (isset($_REQUEST["filter"])) {
-		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
+		$_REQUEST["filter"] = sanitize_search_string(get_request_var_request("filter"));
 	}
 
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
-		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
+		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var_request("sort_column"));
 	}
 
 	/* clean up search string */
 	if (isset($_REQUEST["sort_direction"])) {
-		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var("sort_direction"));
+		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var_request("sort_direction"));
 	}
 
 	/* if the user pushed the 'clear' button */
@@ -423,7 +423,7 @@ function mactrack_site() {
 		kill_session_var("sess_mactrack_sites_detail");
 		kill_session_var("sess_mactrack_sites_device_type_id");
 		kill_session_var("sess_mactrack_sites_site_id");
-		kill_session_var("sess_mactrack_sites_rows");
+		kill_session_var("sess_default_rows");
 		kill_session_var("sess_mactrack_sites_filter");
 		kill_session_var("sess_mactrack_sites_sort_column");
 		kill_session_var("sess_mactrack_sites_sort_direction");
@@ -441,7 +441,7 @@ function mactrack_site() {
 		$changed = 0;
 		$changed += mactrack_check_changed("device_type_id", "sess_mactrack_sites_device_type_id");
 		$changed += mactrack_check_changed("site_id", "sess_mactrack_sites_site_id");
-		$changed += mactrack_check_changed("rows", "sess_mactrack_sites_rows");
+		$changed += mactrack_check_changed("rows", "sess_default_rows");
 		$changed += mactrack_check_changed("filter", "sess_mactrack_sites_filter");
 		$changed += mactrack_check_changed("detail", "sess_mactrack_sites_detail");
 
@@ -455,26 +455,26 @@ function mactrack_site() {
 	load_current_session_value("detail", "sess_mactrack_sites_detail", "false");
 	load_current_session_value("device_type_id", "sess_mactrack_sites_device_type_id", "-1");
 	load_current_session_value("site_id", "sess_mactrack_sites_site_id", "-1");
-	load_current_session_value("rows", "sess_mactrack_sites_rows", "-1");
+	load_current_session_value('rows', 'sess_default_rows', read_config_option('num_rows_table'));
 	load_current_session_value("filter", "sess_mactrack_sites_filter", "");
 	load_current_session_value("sort_column", "sess_mactrack_sites_sort_column", "site_name");
 	load_current_session_value("sort_direction", "sess_mactrack_sites_sort_direction", "ASC");
 
 	if ($_REQUEST["rows"] == -1) {
-		$row_limit = read_config_option("num_rows_mactrack");
+		$row_limit = read_config_option("num_rows_table");
 	}elseif ($_REQUEST["rows"] == -2) {
 		$row_limit = 999999;
 	}else{
 		$row_limit = $_REQUEST["rows"];
 	}
 
-	html_start_box("<strong>MacTrack Site Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_sites.php?action=edit");
+	html_start_box("<strong>MacTrack Site Filters</strong>", "100%", "", "3", "center", "mactrack_sites.php?action=edit");
 
 	mactrack_site_filter();
 
 	html_end_box();
 
-	html_start_box("", "100%", $colors["header"], "3", "center", "");
+	html_start_box("", "100%", "", "3", "center", "");
 
 	$sql_where = "";
 
@@ -494,46 +494,8 @@ function mactrack_site() {
 			GROUP BY mac_track_sites.site_name, mac_track_device_types.device_type_id");
 	}
 
-	/* generate page list */
-	$url_page_select = str_replace("&page", "?page", get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_sites.php"));
-
 	if ($_REQUEST["detail"] == "false") {
-		if (defined("CACTI_VERSION")) {
-			/* generate page list navigation */
-			$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, 9, "mactrack_sites.php?filter=" . $_REQUEST["filter"]);
-		}else{
-			if ($total_rows > 0) {
-				$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-						<td colspan='9'>
-							<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-								<tr>
-									<td align='left' class='textHeaderDark'>
-										<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_sites.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-									</td>\n
-									<td align='center' class='textHeaderDark'>
-										Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-									</td>\n
-									<td align='right' class='textHeaderDark'>
-										<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_sites.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-									</td>\n
-								</tr>
-							</table>
-						</td>
-					</tr>\n";
-			}else{
-				$nav = "<tr bgcolor='#" . $colors["header"] . "' class='noprint'>
-							<td colspan='22'>
-								<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-									<tr>
-										<td align='center' class='textHeaderDark'>
-											No Rows Found
-										</td>\n
-									</tr>
-								</table>
-							</td>
-						</tr>\n";
-			}
-		}
+		$nav = html_nav_bar("mactrack_sites.php?filter=" . $_REQUEST["filter"], MAX_DISPLAY_PAGES, get_request_var_request("page"), $row_limit, $total_rows, 9, 'Sites');
 
 		print $nav;
 
@@ -551,8 +513,8 @@ function mactrack_site() {
 		$i = 0;
 		if (sizeof($sites) > 0) {
 			foreach ($sites as $site) {
-				form_alternate_row_color($colors["alternate"],$colors["light"],$i, 'line' . $site["site_id"]); $i++;
-				form_selectable_cell("<a class='linkEditMain' href='mactrack_sites.php?action=edit&site_id=" . $site["site_id"] . "'>". (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]) . "</a>", $site["site_id"]);
+				form_alternate_row('line' . $site['site_id'], true);
+				form_selectable_cell("<a class='linkEditMain' href='mactrack_sites.php?action=edit&site_id=" . $site["site_id"] . "'>". (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $site["site_name"]) : $site["site_name"]) . "</a>", $site["site_id"]);
 				form_selectable_cell(number_format($site["total_devices"]), $site["site_id"]);
 				form_selectable_cell(number_format($site["total_ips"]), $site["site_id"]);
 				form_selectable_cell(number_format($site["total_user_ports"]), $site["site_id"]);
@@ -570,42 +532,7 @@ function mactrack_site() {
 		}
 		html_end_box(false);
 	}else{
-		if (defined("CACTI_VERSION")) {
-			/* generate page list navigation */
-			$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, 10, "mactrack_sites.php?filter=" . $_REQUEST["filter"]);
-		}else{
-			if ($total_rows > 0) {
-				$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-						<td colspan='10'>
-							<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-								<tr>
-									<td align='left' class='textHeaderDark'>
-										<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_sites.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-									</td>\n
-									<td align='center' class='textHeaderDark'>
-										Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-									</td>\n
-									<td align='right' class='textHeaderDark'>
-										<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_sites.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-									</td>\n
-								</tr>
-							</table>
-						</td>
-					</tr>\n";
-			}else{
-				$nav = "<tr bgcolor='#" . $colors["header"] . "' class='noprint'>
-							<td colspan='22'>
-								<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-									<tr>
-										<td align='center' class='textHeaderDark'>
-											No Rows Found
-										</td>\n
-									</tr>
-								</table>
-							</td>
-						</tr>\n";
-			}
-		}
+		$nav = html_nav_bar("mactrack_sites.php?filter=" . $_REQUEST["filter"], MAX_DISPLAY_PAGES, get_request_var_request("page"), $row_limit, $total_rows, 10, 'Sites');
 
 		print $nav;
 
@@ -622,16 +549,15 @@ function mactrack_site() {
 
 		html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 
-		$i = 0;
 		if (sizeof($sites) > 0) {
 			foreach ($sites as $site) {
-				form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+				form_alternate_row();
 					?>
 					<td width=200>
-						<a class='linkEditMain' href='mactrack_sites.php?action=edit&site_id=<?php print $site["site_id"];?>'><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["site_name"]) : $site["site_name"]);?></a>
+						<a class='linkEditMain' href='mactrack_sites.php?action=edit&site_id=<?php print $site["site_id"];?>'><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $site["site_name"]) : $site["site_name"]);?></a>
 					</td>
-					<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["vendor"]) : $site["vendor"]);?></td>
-					<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $site["description"]) : $site["description"]);?></td>
+					<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $site["vendor"]) : $site["vendor"]);?></td>
+					<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $site["description"]) : $site["description"]);?></td>
 					<td><?php print number_format($site["total_devices"]);?></td>
 					<td><?php print number_format($site["sum_ips_total"]);?></td>
 					<td><?php print number_format($site["sum_ports_total"]);?></td>

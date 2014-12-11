@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2010 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -2073,7 +2073,7 @@ function db_check_auth($mac_address) {
 /*	perform_mactrack_db_maint - This utility removes stale records from the database.
 */
 function perform_mactrack_db_maint() {
-	global $colors, $database_default;
+	global $database_default;
 
 	/* remove stale records from the poller database */
 	$retention = read_config_option("mt_data_retention");
@@ -2184,10 +2184,10 @@ function perform_mactrack_db_maint() {
 }
 
 function import_oui_database($type = "ui", $oui_file = "http://standards.ieee.org/regauth/oui/oui.txt") {
-	global $colors, $cnn_id;
+	global $cnn_id;
 
 	if ($type != "ui") {
-		html_start_box("<strong>MacTrack OUI Database Import Results</strong>", "100%", $colors["header"], "1", "center", "");
+		html_start_box("<strong>MacTrack OUI Database Import Results</strong>", "100%", "", "1", "center", "");
 		?><tr><td>Getting OUI Database from IEEE</td></tr><?php
 	}else{
 		echo "Getting OUI Database from the IEEE\n";
@@ -2362,7 +2362,7 @@ function get_netscreen_arp_table($site, &$device) {
 }
 
 function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
-	global $config, $colors;
+	global $config;
 
 	$row    = "";
 	$rescan = "";
@@ -2370,7 +2370,7 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 	$device = db_fetch_row("SELECT host_id, disabled FROM mac_track_devices WHERE device_id=" . $device_id);
 
 	if ($show_rescan) {
-		if (mactrack_authorized(2121)) {
+		if (api_user_realm_auth('mactrack_sites.php')) {
 			if ($device["disabled"] == '') {
 				$rescan = "<img id='r_" . $device_id . "_" . $ifName . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(" . $device_id . ",\"" . $ifName . "\")' title='Rescan Device' align='absmiddle' border='0'>";
 			}else{
@@ -2423,7 +2423,7 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 }
 
 function mactrack_format_interface_row($stat) {
-	global $colors, $config;
+	global $config;
 
 	/* we will make a row string */
 	$row = "";
@@ -2504,10 +2504,10 @@ function mactrack_display_Octets($octets) {
 }
 
 function mactrack_rescan($web = FALSE) {
-	global $config, $colors;
+	global $config;
 
-	$device_id = get_request_var("device_id");
-	$ifName    = get_request_var("ifName");
+	$device_id = get_request_var_request("device_id");
+	$ifName    = get_request_var_request("ifName");
 	$dbinfo    = db_fetch_row("SELECT * FROM mac_track_devices WHERE device_id=" . $device_id);
 
 	if (sizeof($dbinfo)) {
@@ -2520,11 +2520,11 @@ function mactrack_rescan($web = FALSE) {
 			$extra_args     = " -id=" . $dbinfo["device_id"] . ($web ? " --web":"");
 
 			/* print out the type, and device_id */
-			print "rescan!!!!" . get_request_var("device_id") . "!!!!" . (strlen($ifName) ? $ifName . "!!!!":"");
+			print "rescan!!!!" . get_request_var_request("device_id") . "!!!!" . (strlen($ifName) ? $ifName . "!!!!":"");
 
 			/* add the cacti header */
 			print "\n<form action='mactrack_devices.php'>\n";
-			html_start_box("", "100%", $colors["header"], "3", "center", "");
+			html_start_box("", "100%", "", "3", "center", "");
 			print "\t\t\t\t\t<input type='button' onClick='clearScanResults()' value='Clear Results'>\n";
 
 			/* exeucte the command, and show the results */
@@ -2539,9 +2539,9 @@ function mactrack_rescan($web = FALSE) {
 }
 
 function mactrack_site_scan($web = FALSE) {
-	global $config, $colors, $web;
+	global $config, $web;
 
-	$site_id = get_request_var("site_id");
+	$site_id = get_request_var_request("site_id");
 	$dbinfo  = db_fetch_row("SELECT * FROM mac_track_sites WHERE site_id=" . $site_id);
 
 	if (sizeof($dbinfo)) {
@@ -2553,11 +2553,11 @@ function mactrack_site_scan($web = FALSE) {
 		$extra_args     = " --web -sid=" . $dbinfo["site_id"];
 
 		/* print out the type, and device_id */
-		print "sitescan!!!!" . get_request_var("site_id") . "!!!!";
+		print "sitescan!!!!" . get_request_var_request("site_id") . "!!!!";
 
 		/* add the cacti header */
 		print "\n<form action='mactrack_sites.php'>\n";
-		html_start_box("", "100%", $colors["header"], "3", "center", "");
+		html_start_box("", "100%", "", "3", "center", "");
 		print "\t\t\t\t\t<input type='button' onClick='clearScanResults()' value='Clear Results'>\n";
 
 		/* exeucte the command, and show the results */
@@ -2572,7 +2572,7 @@ function mactrack_site_scan($web = FALSE) {
 
 function mactrack_enable() {
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var("device_id"));
+	input_validate_input_number(get_request_var_request("device_id"));
 	/* ==================================================== */
 
 	$dbinfo = db_fetch_row("SELECT * FROM mac_track_devices WHERE device_id=" . $_REQUEST["device_id"]);
@@ -2591,7 +2591,7 @@ function mactrack_enable() {
 
 function mactrack_disable() {
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var("device_id"));
+	input_validate_input_number(get_request_var_request("device_id"));
 	/* ==================================================== */
 
 	$dbinfo = db_fetch_row("SELECT * FROM mactrack_devices WHERE device_id=" . $_REQUEST["device_id"]);
@@ -2620,8 +2620,6 @@ function mactrack_date($date) {
 }
 
 function mactrack_int_row_color($stat) {
-	global $colors;
-
 	$bgc = 0;
 	if ($stat["int_errors_present"] == "1") {
 		$bgc = db_fetch_cell("SELECT hex FROM colors WHERE id='" . read_config_option("mt_int_errors_bgc") . "'");
@@ -2686,7 +2684,7 @@ function mactrack_save_button($cancel_action = "", $action = "save", $force_type
 			if ($action == "import") {
 				$sname = "import";
 				$salt  = "Import";
-			}elseif (empty($_GET[$key_field])) {
+			}elseif (empty($_REQUEST[$key_field])) {
 				$sname = "create";
 				$salt  = "Create";
 			}else{
@@ -2796,8 +2794,6 @@ function mactrack_display_hours($value) {
 }
 
 function mactrack_display_stats() {
-	global $colors;
-
 	/* check if scanning is running */
 	$processes = db_fetch_cell("SELECT COUNT(*) FROM mac_track_processes");
 	$frequency = read_config_option("mt_collection_timing", TRUE) * 60;
@@ -2825,7 +2821,7 @@ function mactrack_display_stats() {
 	}else{
 		$message = "<strong>Status:</strong> Idle, <strong>LastRuntime:</strong> " . round($time,1) . " seconds, <strong>Processes:</strong> " . $proc . " processes, <strong>Devices:</strong> " . $devs . ", <strong>Next Run Time:</strong> " . date("Y-m-d H:i:s", strtotime(read_config_option("mt_scan_date", TRUE)) + $frequency);
 	}
-	html_start_box("", "100%", $colors["header"], "3", "center", "");
+	html_start_box("", "100%", "", "3", "center", "");
 
 	print "<tr>";
 	print "<td><strong>Scanning Rate:</strong> Every " . mactrack_display_hours(read_config_option("mt_collection_timing")) . ", " . $message . "</td>";
@@ -2854,13 +2850,13 @@ function mactrack_redirect() {
 }
 
 function mactrack_format_device_row($device, $actions=false) {
-	global $config, $colors, $mactrack_device_types;
+	global $config, $mactrack_device_types;
 
 	/* viewer level */
 	if ($actions) {
 		$row = "<a href='" . htmlspecialchars($config['url_path'] . "plugins/mactrack/mactrack_interfaces.php?device_id=" . $device['device_id'] . "&issues=0&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interfaces.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Interfaces' align='middle' border='0'></a>";
 		/* admin level */
-		if (mactrack_authorized(2121)) {
+		if (api_user_realm_auth('mactrack_sites.php')) {
 			if ($device["disabled"] == '') {
 				$row .= "<img id='r_" . $device["device_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device(" . $device["device_id"] . ")' title='Rescan Device' align='middle' border='0'>";
 			}else{
@@ -2884,17 +2880,6 @@ function mactrack_format_device_row($device, $actions=false) {
 	form_checkbox_cell($device["device_name"], $device["device_id"]);
 	form_end_row();
 
-}
-
-function mactrack_authorized($realm_id) {
-	if ((db_fetch_assoc("SELECT user_auth_realm.realm_id
-		FROM user_auth_realm
-		WHERE user_auth_realm.user_id='" . $_SESSION["sess_user_id"] . "'
-		AND user_auth_realm.realm_id='$realm_id'")) || (empty($realm_id))) {
-		return TRUE;
-	}else{
-		return FALSE;
-	}
 }
 
 function mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '') {
@@ -3017,93 +3002,18 @@ function mactrack_tabs() {
 	/* set the default tab */
 	$current_tab = $_REQUEST["report"];
 
-	if (!isset($config["base_path"])) {
-		/* draw the tabs */
-		print "<div class='tabs'>\n";
+	/* draw the tabs */
+	print "<div class='tabs'><nav><ul>\n";
 
-		if (sizeof($tabs_mactrack)) {
-		foreach (array_keys($tabs_mactrack) as $tab_short_name) {
-			if (!isset($config["base_path"])) {
-				print "<div class='tabDefault'><a " . (($tab_short_name == $current_tab) ? "class='tabSelected'" : "class='tabDefault'") . " href='" . $config['url_path'] .
-					"plugins/mactrack/mactrack_view_" . $tab_short_name . ".php?" .
-					"report=" . $tab_short_name .
-					"'>$tabs_mactrack[$tab_short_name]</a></div>\n";
-			}
-		}
-		}
-		print "</div>\n";
-	}else{
-		/* draw the tabs */
-		print "<table class='report' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
-
-		if (sizeof($tabs_mactrack)) {
-		foreach (array_keys($tabs_mactrack) as $tab_short_name) {
-			print "<td style='padding:3px 10px 2px 5px;background-color:" . (($tab_short_name == $current_tab) ? "silver;" : "#DFDFDF;") .
-				"white-space:nowrap;'" .
-				" nowrap width='1%'" .
-				"' align='center' class='tab'>
-				<span class='textHeader'><a href='" . $config['url_path'] .
-				"plugins/mactrack/mactrack_view_" . $tab_short_name . ".php?" .
-				"report=" . $tab_short_name .
-				"'>$tabs_mactrack[$tab_short_name]</a></span>
-			</td>\n
-			<td width='1'></td>\n";
-		}
-		}
-		print "<td></td><td></td>\n</tr></table>\n";
+	if (sizeof($tabs_mactrack)) {
+	foreach ($tabs_mactrack as $tab_short_name => $tab_name) {
+		print "<li><a " . (($tab_short_name == $current_tab) ? "class='selected'" : "") . " href='" . htmlspecialchars($config['url_path'] .
+			"plugins/mactrack/mactrack_view_" . $tab_short_name . ".php?" .
+			"report=" . $tab_short_name) .
+			"'>$tab_name</a></li>\n";
 	}
-}
-
-function mactrack_view_header() {
-	global $title, $colors, $config;
-
-if (!isset($config["base_path"])) {
-?>
-<table align="center" width="100%" cellpadding=1 cellspacing=0 border=0>
-	<tr class="rowHeader">
-		<td>
-			<table cellpadding=1 cellspacing=0 border=0 width="100%">
-				<form name="form_mactrack_view_reports">
-				<tr>
-					<td style="padding: 3px;" colspan="10">
-						<table width="100%" cellpadding="0" cellspacing="0">
-							<tr>
-								<td class="textHeaderDark"><strong><?php print $title;?></strong></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				</form>
-<?php
-}else{
-?>
-<table align="center" width="100%" cellpadding=1 cellspacing=0 border=0 bgcolor="#<?php print $colors["header"];?>">
-	<tr>
-		<td>
-			<table cellpadding=1 cellspacing=0 border=0 bgcolor="#<?php print $colors["form_background_dark"];?>" width="100%">
-				<form name="form_mactrack_view_reports">
-				<tr>
-					<td bgcolor="#<?php print $colors["header"];?>" style="padding: 3px;" colspan="10">
-						<table width="100%" cellpadding="0" cellspacing="0">
-							<tr>
-								<td bgcolor="#<?php print $colors["header"];?>" class="textHeaderDark"><strong><?php print $title;?></strong></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				</form>
-<?php
-}
-}
-
-function mactrack_view_footer() {
-?>
-							</table>
-						</td>
-					</tr>
-				</table>
-				<br>
-<?php
+	}
+	print "</ul></nav></div>\n";
 }
 
 function mactrack_check_changed($request, $session) {
@@ -3130,100 +3040,102 @@ function mactrack_site_filter() {
 	global $item_rows;
 
 	?>
-		<tr>
-		<form name="form_mactrack_view_sites">
+	<tr class='even'>
 		<td>
-			<table cellpadding="1" cellspacing="0">
+			<form name="form_mactrack_view_sites">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="50">
-						&nbsp;Search:&nbsp;
+					<td width="70">
+						Search:
 					</td>
-					<td width="1">
+					<td>
 						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
 					</td>
-					<td nowrap style='white-space: nowrap;' width="40">
-						&nbsp;Rows:&nbsp;
+					<td>
+						Rows:
 					</td>
-					<td width="1">
+					<td>
 						<select name="rows" onChange="applySiteFilterChange(document.form_mactrack_view_sites)">
 							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
 							<?php
-							if (sizeof($item_rows) > 0) {
-							foreach ($item_rows as $key => $value) {
-								print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
-							}
-							}
+								if (sizeof($item_rows) > 0) {
+								foreach ($item_rows as $key => $value) {
+									print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
+								}
+								}
 							?>
 						</select>
 					</td>
 					<td>
-						&nbsp;<input type="checkbox" id="detail" name="detail" <?php if (($_REQUEST["detail"] == "true") || ($_REQUEST["detail"] == "on")) print ' checked="true"';?> onClick="applySiteFilterChange(document.form_mactrack_view_sites)" alt="Device Details" border="0" align="absmiddle">
+						<input type="checkbox" id="detail" name="detail" <?php if (($_REQUEST["detail"] == "true") || ($_REQUEST["detail"] == "on")) print ' checked="true"';?> onClick="applySiteFilterChange(document.form_mactrack_view_sites)" alt="Device Details" border="0" align="absmiddle">
 					</td>
 					<td>
 						<label for="detail">Show Device Details</label>&nbsp;
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="go_x" value="Go">
+						<input type="submit" name="go_x" value="Go">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="clear_x" value="Clear">
+						<input type="submit" name="clear_x" value="Clear">
 					</td>
 					<td>
-						&nbsp<input type="submit" name="export_x" value="Export">
+						<input type="submit" name="export_x" value="Export">
 					</td>
 				</tr>
 			<?php
 			if (!($_REQUEST["detail"] == "false")) { ?>
 			</table>
-			<table cellpadding="1" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="50">
-						&nbsp;Site:&nbsp;
-					</td>
-					<td width="1">
-						<select name="site_id" onChange="applySiteFilterChange(document.form_mactrack_view_sites)">
-						<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>Any</option>
-						<?php
-						$sites = db_fetch_assoc("SELECT * FROM mac_track_sites ORDER BY mac_track_sites.site_name");
-						if (sizeof($sites) > 0) {
-						foreach ($sites as $site) {
-							print '<option value="' . $site["site_id"] . '"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
-						}
-						}
-						?>
-					</td>
 					<td width="70">
-						&nbsp;Sub Type:
+						Site:
 					</td>
-					<td width="1">
+					<td>
+						<select name="site_id" onChange="applySiteFilterChange(document.form_mactrack_view_sites)">
+							<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>Any</option>
+							<?php
+							$sites = db_fetch_assoc("SELECT * FROM mac_track_sites ORDER BY mac_track_sites.site_name");
+							if (sizeof($sites) > 0) {
+							foreach ($sites as $site) {
+								print '<option value="' . $site["site_id"] . '"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
+							}
+							}
+							?>
+						</select>
+					</td>
+					<td style='white-space:nowrap;'>
+						Sub Type:
+					</td>
+					<td>
 						<select name="device_type_id" onChange="applySiteFilterChange(document.form_mactrack_view_sites)">
-						<option value="-1"<?php if ($_REQUEST["device_type_id"] == "-1") {?> selected<?php }?>>Any</option>
-						<?php
-						$device_types = db_fetch_assoc("SELECT DISTINCT mac_track_device_types.device_type_id,
+							<option value="-1"<?php if ($_REQUEST["device_type_id"] == "-1") {?> selected<?php }?>>Any</option>
+							<?php
+							$device_types = db_fetch_assoc("SELECT DISTINCT mac_track_device_types.device_type_id,
 								mac_track_device_types.description, mac_track_device_types.sysDescr_match
 								FROM mac_track_device_types
 								INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id = mac_track_devices.device_type_id)
 								ORDER BY mac_track_device_types.description");
 
-						if (sizeof($device_types) > 0) {
-						foreach ($device_types as $device_type) {
-							print '<option value="' . $device_type["device_type_id"] . '"'; if ($_REQUEST["device_type_id"] == $device_type["device_type_id"]) { print " selected"; } print ">" . $device_type["description"] . " (" . $device_type["sysDescr_match"] . ")</option>";
-						}
-						}
-						?>
+							if (sizeof($device_types) > 0) {
+							foreach ($device_types as $device_type) {
+								print '<option value="' . $device_type["device_type_id"] . '"'; if ($_REQUEST["device_type_id"] == $device_type["device_type_id"]) { print " selected"; } print ">" . $device_type["description"] . " (" . $device_type["sysDescr_match"] . ")</option>";
+							}
+							}
+							?>
+						</select>
 					</td>
 				</tr>
 			<?php }?>
 			</table>
+			<input type='hidden' name='page' value='1'>
+			<input type='hidden' name='report' value='sites'>
+			<?php
+			if ($_REQUEST["detail"] == "false") { ?>
+			<input type='hidden' name='hidden_device_type_id' value='-1'>
+			<input type='hidden' name='hidden_site_id' value='-1'>
+			<?php }?>
+			</form>
 		</td>
-		<input type='hidden' name='page' value='1'>
-		<input type='hidden' name='report' value='sites'>
-		<?php
-		if ($_REQUEST["detail"] == "false") { ?>
-		<input type='hidden' name='hidden_device_type_id' value='-1'>
-		<input type='hidden' name='hidden_site_id' value='-1'>
-		<?php }?>
-		</form>
 	</tr>
 	<?php
 }
@@ -3246,15 +3158,15 @@ function mactrack_device_filter() {
 
 	-->
 	</script>
-	<tr>
+	<tr class='even'>
 		<form name="form_mactrack_devices">
 		<td>
-			<table cellpadding="1" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="50">
-						&nbsp;Site:&nbsp;
+					<td width="75">
+						Site:
 					</td>
-					<td width="1">
+					<td>
 						<select name="site_id" onChange="applyDeviceFilterChange(document.form_mactrack_devices)">
 						<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>All</option>
 						<option value="-2"<?php if ($_REQUEST["site_id"] == "-2") {?> selected<?php }?>>None</option>
@@ -3268,88 +3180,86 @@ function mactrack_device_filter() {
 						?>
 						</select>
 					</td>
-					<td width="5"></td>
-					<td width="20">
-						Search:&nbsp;
+					<td>
+						Search:
 					</td>
-					<td width="1">
+					<td
 						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="go_x" value="Go">
+						<input type="submit" name="go_x" value="Go">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="clear_x" value="Clear">
+						<input type="submit" name="clear_x" value="Clear">
 					</td>
 					<td>
-						&nbsp<input type="submit" name="import_x" value="Import">
+						<input type="submit" name="import_x" value="Import">
 					</td>
 					<td>
-						&nbsp<input type="submit" name="export_x" value="Export">
+						<input type="submit" name="export_x" value="Export">
 					</td>
 				</tr>
 			</table>
-			<table cellpadding="1" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="50">
-						&nbsp;Type:&nbsp;
+					<td width="75">
+						Type:
 					</td>
-					<td width="1">
+					<td>
 						<select name="type_id" onChange="applyDeviceFilterChange(document.form_mactrack_devices)">
-						<option value="-1"<?php if ($_REQUEST["type_id"] == "-1") {?> selected<?php }?>>Any</option>
-						<option value="1"<?php if ($_REQUEST["type_id"] == "1") {?> selected<?php }?>>Switch/Hub</option>
-						<option value="2"<?php if ($_REQUEST["type_id"] == "2") {?> selected<?php }?>>Switch/Router</option>
-						<option value="3"<?php if ($_REQUEST["type_id"] == "3") {?> selected<?php }?>>Router</option>
+							<option value="-1"<?php if ($_REQUEST["type_id"] == "-1") {?> selected<?php }?>>Any</option>
+							<option value="1"<?php if ($_REQUEST["type_id"] == "1") {?> selected<?php }?>>Switch/Hub</option>
+							<option value="2"<?php if ($_REQUEST["type_id"] == "2") {?> selected<?php }?>>Switch/Router</option>
+							<option value="3"<?php if ($_REQUEST["type_id"] == "3") {?> selected<?php }?>>Router</option>
 						</select>
 					</td>
-					<td width="5"></td>
-					<td width="70">
-						&nbsp;Sub Type:
+					<td>
+						SubType:
 					</td>
-					<td width="1">
+					<td>
 						<select name="device_type_id" onChange="applyDeviceFilterChange(document.form_mactrack_devices)">
-						<option value="-1"<?php if ($_REQUEST["device_type_id"] == "-1") {?> selected<?php }?>>Any</option>
-						<option value="-2"<?php if ($_REQUEST["device_type_id"] == "-2") {?> selected<?php }?>>Not Detected</option>
-						<?php
-						if ($_REQUEST["type_id"] != -1) {
-							$device_types = db_fetch_assoc("SELECT DISTINCT
-								mac_track_devices.device_type_id,
-								mac_track_device_types.description,
-								mac_track_device_types.sysDescr_match
-								FROM mac_track_device_types
-								INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id = mac_track_devices.device_type_id)
-								WHERE device_type='" . $_REQUEST["type_id"] . "'
-								ORDER BY mac_track_device_types.description");
-						}else{
-							$device_types = db_fetch_assoc("SELECT DISTINCT
-								mac_track_devices.device_type_id,
-								mac_track_device_types.description,
-								mac_track_device_types.sysDescr_match
-								FROM mac_track_device_types
-								INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
-								ORDER BY mac_track_device_types.description;");
-						}
-						if (sizeof($device_types) > 0) {
-						foreach ($device_types as $device_type) {
-							if ($device_type["device_type_id"] == 0) {
-								$display_text = "Unknown Device Type";
+							<option value="-1"<?php if ($_REQUEST["device_type_id"] == "-1") {?> selected<?php }?>>Any</option>
+							<option value="-2"<?php if ($_REQUEST["device_type_id"] == "-2") {?> selected<?php }?>>Not Detected</option>
+							<?php
+							if ($_REQUEST["type_id"] != -1) {
+								$device_types = db_fetch_assoc("SELECT DISTINCT
+									mac_track_devices.device_type_id,
+									mac_track_device_types.description,
+									mac_track_device_types.sysDescr_match
+									FROM mac_track_device_types
+									INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id = mac_track_devices.device_type_id)
+									WHERE device_type='" . $_REQUEST["type_id"] . "'
+									ORDER BY mac_track_device_types.description");
 							}else{
-								$display_text = $device_type["description"] . " (" . $device_type["sysDescr_match"] . ")";
+								$device_types = db_fetch_assoc("SELECT DISTINCT
+									mac_track_devices.device_type_id,
+									mac_track_device_types.description,
+									mac_track_device_types.sysDescr_match
+									FROM mac_track_device_types
+									INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
+									ORDER BY mac_track_device_types.description;");
 							}
-							print '<option value="' . $device_type["device_type_id"] . '"'; if ($_REQUEST["device_type_id"] == $device_type["device_type_id"]) { print " selected"; } print ">" . $display_text . "</option>";
-						}
-						}
-						?>
+							if (sizeof($device_types) > 0) {
+							foreach ($device_types as $device_type) {
+								if ($device_type["device_type_id"] == 0) {
+									$display_text = "Unknown Device Type";
+								}else{
+									$display_text = $device_type["description"] . " (" . $device_type["sysDescr_match"] . ")";
+								}
+								print '<option value="' . $device_type["device_type_id"] . '"'; if ($_REQUEST["device_type_id"] == $device_type["device_type_id"]) { print " selected"; } print ">" . $display_text . "</option>";
+							}
+							}
+							?>
 						</select>
 					</td>
 				</tr>
 			</table>
-			<table cellpadding="1" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="50">
-						&nbsp;Status:&nbsp;
+					<td width="75">
+						Status:
 					</td>
-					<td width="1">
+					<td>
 						<select name="status" onChange="applyDeviceFilterChange(document.form_mactrack_devices)">
 							<option value="-1"<?php if ($_REQUEST["status"] == "-1") {?> selected<?php }?>>Any</option>
 							<option value="3"<?php if ($_REQUEST["status"] == "3") {?> selected<?php }?>>Up</option>
@@ -3360,10 +3270,10 @@ function mactrack_device_filter() {
 							<option value="5"<?php if ($_REQUEST["status"] == "5") {?> selected<?php }?>>No Cacti Link</option>
 						</select>
 					</td>
-					<td nowrap style='white-space: nowrap;' width="40">
-						&nbsp;Rows:&nbsp;
+					<td>
+						Rows:
 					</td>
-					<td width="1">
+					<td>
 						<select name="rows" onChange="applyDeviceFilterChange(document.form_mactrack_devices)">
 							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
 							<?php
@@ -3400,15 +3310,15 @@ function mactrack_device_type_filter() {
 
 	-->
 	</script>
-	<tr>
+	<tr class='even'>
 		<form name="form_mactrack_device_types">
 		<td>
-			<table cellpadding="1" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="40">
-						&nbsp;Vendor:&nbsp;
+					<td width="75">
+						Vendor:
 					</td>
-					<td width="1">
+					<td>
 						<select name="vendor" onChange="applyDeviceTypeFilterChange(document.form_mactrack_device_types)">
 							<option value='All'<?php print $_REQUEST['type_id']; if ($_REQUEST['vendor'] == 'All') print ' selected';?>'>All</option>
 							<?php
@@ -3422,11 +3332,10 @@ function mactrack_device_type_filter() {
 							?>
 						</select>
 					</td>
-					<td width="5"></td>
-					<td width="40">
-						&nbsp;Type:&nbsp;
+					<td>
+						Type:
 					</td>
-					<td width="1">
+					<td>
 						<select name="type_id" onChange="applyDeviceTypeFilterChange(document.form_mactrack_device_types)">
 							<option value="-1"<?php print $_REQUEST["vendor"] . '"'; if ($_REQUEST['type_id'] == '-1') print ' selected';?>>All</option>
 							<option value="1"<?php print $_REQUEST["vendor"] . '"'; if ($_REQUEST['type_id'] == '1') print ' selected';?>>Switch/Hub</option>
@@ -3435,10 +3344,10 @@ function mactrack_device_type_filter() {
 							?>
 						</select>
 					</td>
-					<td nowrap style='white-space: nowrap;' width="40">
-						&nbsp;Rows:&nbsp;
+					<td>
+						Rows:
 					</td>
-					<td width="1">
+					<td>
 						<select name="rows" onChange="applyDeviceTypeFilterChange(document.form_mactrack_device_types)">
 							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
 							<?php
@@ -3452,28 +3361,28 @@ function mactrack_device_type_filter() {
 					</td>
 				</tr>
 			</table>
-			<table cellpadding="1" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="40">
-						&nbsp;Search:&nbsp;
+					<td width="75">
+						Search:
 					</td>
-					<td width="1">
+					<td>
 						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="go_x" title="Submit Query" value="Go">
+						<input type="submit" name="go_x" title="Submit Query" value="Go">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="clear_x" title="Clear Filtered Results" value="Clear">
+						<input type="submit" name="clear_x" title="Clear Filtered Results" value="Clear">
 					</td>
 					<td>
-						&nbsp<input type="submit" name="scan_x" title="Scan Active Devices for Unknown Device Types" value="Rescan">
+						<input type="submit" name="scan_x" title="Scan Active Devices for Unknown Device Types" value="Rescan">
 					</td>
 					<td>
-						&nbsp<input type="submit" name="import_x" title="Import Device Types from a CSV File" value="Import">
+						<input type="submit" name="import_x" title="Import Device Types from a CSV File" value="Import">
 					</td>
 					<td>
-						&nbsp<input type="submit" name="export_x" title="Export Device Types to Share with Others" value="Export">
+						<input type="submit" name="export_x" title="Export Device Types to Share with Others" value="Export">
 					</td>
 				</tr>
 			</table>
@@ -3497,21 +3406,21 @@ function mactrack_vmac_filter() {
 	}
 	-->
 	</script>
-	<tr>
-		<form name="form_mactrack_vmacs">
+	<tr class='even'>
 		<td>
-			<table cellpadding="1" cellspacing="0">
+			<form name="form_mactrack_vmacs">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="50">
-						&nbsp;Search:&nbsp;
+					<td width="75">
+						Search:
 					</td>
-					<td width="1">
+					<td>
 						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
 					</td>
-					<td nowrap style='white-space: nowrap;' width="40">
-						&nbsp;Rows:&nbsp;
+					<td>
+						Rows:
 					</td>
-					<td width="1">
+					<td>
 						<select name="rows" onChange="applyVMACFilterChange(document.form_mactrack_vmacs)">
 							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
 							<?php
@@ -3524,20 +3433,20 @@ function mactrack_vmac_filter() {
 						</select>
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="go_x" value="Go">
+						<input type="submit" name="go_x" value="Go">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="clear_x" value="Clear">
+						<input type="submit" name="clear_x" value="Clear">
 					</td>
 					<td>
-						&nbsp<input type="submit" name="export_x" value="Export">
+						<input type="submit" name="export_x" value="Export">
 					</td>
 				</tr>
 			</table>
+			<input type='hidden' name='page' value='1'>
+			<input type='hidden' name='report' value='sites'>
+			</form>
 		</td>
-		<input type='hidden' name='page' value='1'>
-		<input type='hidden' name='report' value='sites'>
-		</form>
 	</tr>
 	<?php
 }
@@ -3555,21 +3464,21 @@ function mactrack_macw_filter() {
 	}
 	-->
 	</script>
-	<tr>
-		<form name="form_mactrack_macw">
+	<tr class='even'>
 		<td>
-			<table cellpadding="1" cellspacing="0">
+			<form name="form_mactrack_macw">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="50">
-						&nbsp;Search:&nbsp;
+					<td width="75">
+						Search:
 					</td>
-					<td width="1">
+					<td>
 						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
 					</td>
-					<td nowrap style='white-space: nowrap;' width="40">
-						&nbsp;Rows:&nbsp;
+					<td>
+						Rows:
 					</td>
-					<td width="1">
+					<td>
 						<select name="rows" onChange="applyMacWFilterChange(document.form_mactrack_macw)">
 							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
 							<?php
@@ -3582,16 +3491,16 @@ function mactrack_macw_filter() {
 						</select>
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="go_x" value="Go">
+						<input type="submit" name="go_x" value="Go">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="clear_x" value="Clear">
+						<input type="submit" name="clear_x" value="Clear">
 					</td>
 				</tr>
 			</table>
+			<input type='hidden' name='page' value='1'>
+			</form>
 		</td>
-		<input type='hidden' name='page' value='1'>
-		</form>
 	</tr>
 	<?php
 }
@@ -3609,21 +3518,21 @@ function mactrack_maca_filter() {
 	}
 	-->
 	</script>
-	<tr>
-		<form name="form_mactrack_maca">
+	<tr class='even'>
 		<td>
-			<table cellpadding="1" cellspacing="0">
+			<form name="form_mactrack_maca">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="50">
-						&nbsp;Search:&nbsp;
+					<td width="75">
+						Search:
 					</td>
-					<td width="1">
+					<td>
 						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
 					</td>
-					<td nowrap style='white-space: nowrap;' width="40">
-						&nbsp;Rows:&nbsp;
+					<td>
+						Rows:
 					</td>
-					<td width="1">
+					<td>
 						<select name="rows" onChange="applyMacAFilterChange(document.form_mactrack_maca)">
 							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
 							<?php
@@ -3636,16 +3545,16 @@ function mactrack_maca_filter() {
 						</select>
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="go_x" value="Go">
+						<input type="submit" name="go_x" value="Go">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="clear_x" value="Clear">
+						<input type="submit" name="clear_x" value="Clear">
 					</td>
 				</tr>
 			</table>
+			<input type='hidden' name='page' value='1'>
+			</form>
 		</td>
-		<input type='hidden' name='page' value='1'>
-		</form>
 	</tr>
 	<?php
 }
@@ -3654,198 +3563,198 @@ function mactrack_mac_filter() {
 	global $item_rows, $rows_selector, $mactrack_search_types;
 
 	?>
-	<tr>
-		<form name="form_mactrack_view_macs">
+	<tr class='even'>
 		<td>
-			<table cellpadding="1" cellspacing="0">
+			<form name="form_mactrack_view_macs">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="80">
-						&nbsp;Site:&nbsp;
+					<td width="75">
+						Site:
 					</td>
-					<td width="1">
+					<td>
 						<select name="site_id" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
-						<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>N/A</option>
-						<?php
-						$sites = db_fetch_assoc("select site_id,site_name from mac_track_sites order by site_name");
-						if (sizeof($sites) > 0) {
-						foreach ($sites as $site) {
-							print '<option value="' . $site["site_id"] .'"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
-						}
-						}
-						?>
+							<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>N/A</option>
+							<?php
+							$sites = db_fetch_assoc("select site_id,site_name from mac_track_sites order by site_name");
+							if (sizeof($sites) > 0) {
+							foreach ($sites as $site) {
+								print '<option value="' . $site["site_id"] .'"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
+							}
+							}
+							?>
 						</select>
 					</td>
-					<td width="1">
-						&nbsp;Device:&nbsp;
+					<td>
+						Device:
 					</td>
-					<td width="1">
+					<td>
 						<select name="device_id" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
-						<option value="-1"<?php if ($_REQUEST["device_id"] == "-1") {?> selected<?php }?>>All</option>
-						<?php
-						if ($_REQUEST["site_id"] == -1) {
-							$filter_devices = db_fetch_assoc("SELECT device_id, device_name, hostname FROM mac_track_devices ORDER BY device_name");
-						}else{
-							$filter_devices = db_fetch_assoc("SELECT device_id, device_name, hostname FROM mac_track_devices WHERE site_id='" . $_REQUEST["site_id"] . "' ORDER BY device_name");
-						}
-						if (sizeof($filter_devices) > 0) {
-						foreach ($filter_devices as $filter_device) {
-							print '<option value=" ' . $filter_device["device_id"] . '"'; if ($_REQUEST["device_id"] == $filter_device["device_id"]) { print " selected"; } print ">" . $filter_device["device_name"] . "(" . $filter_device["hostname"] . ")" .  "</option>\n";
-						}
-						}
-						?>
+							<option value="-1"<?php if ($_REQUEST["device_id"] == "-1") {?> selected<?php }?>>All</option>
+							<?php
+							if ($_REQUEST["site_id"] == -1) {
+								$filter_devices = db_fetch_assoc("SELECT device_id, device_name, hostname FROM mac_track_devices ORDER BY device_name");
+							}else{
+								$filter_devices = db_fetch_assoc("SELECT device_id, device_name, hostname FROM mac_track_devices WHERE site_id='" . $_REQUEST["site_id"] . "' ORDER BY device_name");
+							}
+								if (sizeof($filter_devices) > 0) {
+							foreach ($filter_devices as $filter_device) {
+								print '<option value=" ' . $filter_device["device_id"] . '"'; if ($_REQUEST["device_id"] == $filter_device["device_id"]) { print " selected"; } print ">" . $filter_device["device_name"] . "(" . $filter_device["hostname"] . ")" .  "</option>\n";
+							}
+							}
+							?>
 						</select>
 					</td>
-					<td width="40">
-						&nbsp;Rows&nbsp;
+					<td>
+						Rows:
 					</td>
-					<td width="1">
+					<td>
 						<select name="rows" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
-						<?php
-						if (sizeof($rows_selector) > 0) {
-						foreach ($rows_selector as $key => $value) {
-							print '<option value="' . $key . '"'; if ($_REQUEST["rows"] == $key) { print " selected"; } print ">" . $value . "</option>\n";
-						}
-						}
-						?>
+							<?php
+							if (sizeof($rows_selector) > 0) {
+							foreach ($rows_selector as $key => $value) {
+								print '<option value="' . $key . '"'; if ($_REQUEST["rows"] == $key) { print " selected"; } print ">" . $value . "</option>\n";
+							}
+							}
+							?>
 						</select>
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="go_x" value="Go">
+						<input type="submit" name="go_x" value="Go">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="clear_x" value="Clear">
+						<input type="submit" name="clear_x" value="Clear">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="export_x" value="Export">
+						<input type="submit" name="export_x" value="Export">
 					</td>
 				</tr>
 			</table>
-			<table cellpadding="1" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="80">
-						&nbsp;IP Address:
+					<td style='white-space:nowrap;' width="75">
+						IP Address:
 					</td>
-					<td width="1">
+					<td>
 						<select name="ip_filter_type_id">
-						<?php
-						for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
-							print "<option value='" . $i . "'"; if ($_REQUEST["ip_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
-						}
-						?>
+							<?php
+							for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
+								print "<option value='" . $i . "'"; if ($_REQUEST["ip_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
+							}
+							?>
 						</select>
 					</td>
-					<td width="1">
+					<td>
 						<input type="text" name="ip_filter" size="20" value="<?php print $_REQUEST["ip_filter"];?>">
 					</td>
-					<td width="80">
-						&nbsp;VLAN Name:&nbsp;
+					<td style='white-space:nowrap;'>
+						VLAN Name:
 					</td>
-					<td width="1">
+					<td>
 						<select name="vlan" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
-						<option value="-1"<?php if ($_REQUEST["vlan"] == "-1") {?> selected<?php }?>>All</option>
-						<?php
-						$sql_where = "";
-						if ($_REQUEST["device_id"] != "-1") {
-							$sql_where = "WHERE device_id='" . $_REQUEST["device_id"] . "'";
-						}
-
-						if ($_REQUEST["site_id"] != "-1") {
-							if (strlen($sql_where)) {
-								$sql_where .= " AND site_id='" . $_REQUEST["site_id"] . "'";
-							}else{
-								$sql_where = "WHERE site_id='" . $_REQUEST["site_id"] . "'";
+							<option value="-1"<?php if ($_REQUEST["vlan"] == "-1") {?> selected<?php }?>>All</option>
+							<?php
+							$sql_where = "";
+							if ($_REQUEST["device_id"] != "-1") {
+								$sql_where = "WHERE device_id='" . $_REQUEST["device_id"] . "'";
 							}
-						}
+	
+							if ($_REQUEST["site_id"] != "-1") {
+								if (strlen($sql_where)) {
+									$sql_where .= " AND site_id='" . $_REQUEST["site_id"] . "'";
+								}else{
+									$sql_where = "WHERE site_id='" . $_REQUEST["site_id"] . "'";
+								}
+							}
 
-						$vlans = db_fetch_assoc("SELECT DISTINCT vlan_id, vlan_name FROM mac_track_vlans $sql_where ORDER BY vlan_name ASC");
-						if (sizeof($vlans) > 0) {
-						foreach ($vlans as $vlan) {
-							print '<option value="' . $vlan["vlan_id"] . '"'; if ($_REQUEST["vlan"] == $vlan["vlan_id"]) { print " selected"; } print ">" . $vlan["vlan_name"] . "</option>\n";
-						}
-						}
-						?>
+							$vlans = db_fetch_assoc("SELECT DISTINCT vlan_id, vlan_name FROM mac_track_vlans $sql_where ORDER BY vlan_name ASC");
+							if (sizeof($vlans) > 0) {
+							foreach ($vlans as $vlan) {
+								print '<option value="' . $vlan["vlan_id"] . '"'; if ($_REQUEST["vlan"] == $vlan["vlan_id"]) { print " selected"; } print ">" . $vlan["vlan_name"] . "</option>\n";
+							}
+							}
+							?>
 						</select>
 					</td>
-					<td width="40">
-						&nbsp;Show:&nbsp;
+					<td>
+						Show:
 					</td>
-					<td width="1">
+					<td>
 						<select name="scan_date" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
-						<option value="1"<?php if ($_REQUEST["scan_date"] == "1") {?> selected<?php }?>>All</option>
-						<option value="2"<?php if ($_REQUEST["scan_date"] == "2") {?> selected<?php }?>>Most Recent</option>
-						<option value="3"<?php if ($_REQUEST["scan_date"] == "3") {?> selected<?php }?>>Aggregated</option>
-						<?php
+							<option value="1"<?php if ($_REQUEST["scan_date"] == "1") {?> selected<?php }?>>All</option>
+							<option value="2"<?php if ($_REQUEST["scan_date"] == "2") {?> selected<?php }?>>Most Recent</option>
+							<option value="3"<?php if ($_REQUEST["scan_date"] == "3") {?> selected<?php }?>>Aggregated</option>
+							<?php
 
-						$scan_dates = db_fetch_assoc("select scan_date from mac_track_scan_dates order by scan_date desc");
-						if (sizeof($scan_dates) > 0) {
-						foreach ($scan_dates as $scan_date) {
-							print '<option value="' . $scan_date["scan_date"] . '"'; if ($_REQUEST["scan_date"] == $scan_date["scan_date"]) { print " selected"; } print ">" . $scan_date["scan_date"] . "</option>\n";
-						}
-						}
-						?>
+							$scan_dates = db_fetch_assoc("select scan_date from mac_track_scan_dates order by scan_date desc");
+							if (sizeof($scan_dates) > 0) {
+							foreach ($scan_dates as $scan_date) {
+								print '<option value="' . $scan_date["scan_date"] . '"'; if ($_REQUEST["scan_date"] == $scan_date["scan_date"]) { print " selected"; } print ">" . $scan_date["scan_date"] . "</option>\n";
+							}
+							}
+							?>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td width="80">
-						&nbsp;Mac Address:
+					<td style='white-space:nowrap;' width="75">
+						Mac Address:
 					</td>
-					<td width="1">
+					<td>
 						<select name="mac_filter_type_id">
-						<?php
-						for($i=1;$i<=sizeof($mactrack_search_types)-2;$i++) {
-							print "<option value='" . $i . "'"; if ($_REQUEST["mac_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
-						}
-						?>
+							<?php
+							for($i=1;$i<=sizeof($mactrack_search_types)-2;$i++) {
+								print "<option value='" . $i . "'"; if ($_REQUEST["mac_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
+							}
+							?>
 						</select>
 					</td>
-					<td width="1">
+					<td>
 						<input type="text" name="mac_filter" size="20" value="<?php print $_REQUEST["mac_filter"];?>">
 					</td>
-					<td width="80">
-						&nbsp;Authorized:&nbsp;
+					<td>
+						Authorized:
 					</td>
-					<td width="1">
+					<td>
 						<select name="authorized" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
-						<option value="-1"<?php if ($_REQUEST["authorized"] == "-1") {?> selected<?php }?>>All</option>
-						<option value="1"<?php if ($_REQUEST["authorized"] == "1") {?> selected<?php }?>>Yes</option>
-						<option value="0"<?php if ($_REQUEST["authorized"] == "0") {?> selected<?php }?>>No</option>
+							<option value="-1"<?php if ($_REQUEST["authorized"] == "-1") {?> selected<?php }?>>All</option>
+							<option value="1"<?php if ($_REQUEST["authorized"] == "1") {?> selected<?php }?>>Yes</option>
+							<option value="0"<?php if ($_REQUEST["authorized"] == "0") {?> selected<?php }?>>No</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td width="80">
-						&nbsp;Port Name:
+					<td style='white-space:nowrap;' width="75">
+						Port Name:
 					</td>
-					<td width="1">
+					<td>
 						<select name="port_name_filter_type_id">
-						<?php
-						for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
-							print "<option value='" . $i . "'"; if ($_REQUEST["port_name_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
-						}
-						?>
+							<?php
+							for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
+								print "<option value='" . $i . "'"; if ($_REQUEST["port_name_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
+							}
+							?>
 						</select>
 					</td>
-					<td width="1">
+					<td>
 						<input type="text" name="port_name_filter" size="20" value="<?php print $_REQUEST["port_name_filter"];?>">
 					</td>
 					<td colspan="2">
 					</td>
 				</tr>
 			</table>
-			<table cellpadding="1" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="80">
-						&nbsp;Search:&nbsp;
+					<td width="75">
+						Search:
 					</td>
-					<td width="1">
-						<input type="text" name="filter" size="45" value="<?php print $_REQUEST["filter"];?>">
+					<td>
+						<input type="text" name="filter" size="40" value="<?php print $_REQUEST["filter"];?>">
 					</td>
 				</tr>
 			</table>
+			<input type='hidden' name='report' value='macs'>
+			</form>
 		</td>
-		<input type='hidden' name='report' value='macs'>
-		</form>
 	</tr>
 	<?php
 }
@@ -3854,121 +3763,121 @@ function mactrack_ip_address_filter() {
 	global $item_rows, $rows_selector, $mactrack_search_types;
 
 	?>
-	<tr>
-		<form name="form_mactrack_view_arp">
+	<tr class='even'>
 		<td>
-			<table cellpadding="1" cellspacing="0">
+			<form name="form_mactrack_view_arp">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="80">
-						&nbsp;Site:&nbsp;
+					<td width="75">
+						Site:
 					</td>
-					<td width="1">
+					<td>
 						<select name="site_id" onChange="applyArpFilterChange(document.form_mactrack_view_arp)">
-						<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>N/A</option>
-						<?php
-						$sites = db_fetch_assoc("select site_id,site_name from mac_track_sites order by site_name");
-						if (sizeof($sites) > 0) {
-						foreach ($sites as $site) {
-							print '<option value="' . $site["site_id"] .'"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
-						}
-						}
-						?>
+							<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>N/A</option>
+							<?php
+							$sites = db_fetch_assoc("select site_id,site_name from mac_track_sites order by site_name");
+							if (sizeof($sites) > 0) {
+								foreach ($sites as $site) {
+									print '<option value="' . $site["site_id"] .'"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
+								}
+							}
+							?>
 						</select>
 					</td>
-					<td width="1">
-						&nbsp;Device:&nbsp;
+					<td>
+						Device:
 					</td>
-					<td width="1">
+					<td>
 						<select name="device_id" onChange="applyArpFilterChange(document.form_mactrack_view_arp)">
-						<option value="-1"<?php if ($_REQUEST["device_id"] == "-1") {?> selected<?php }?>>All</option>
-						<?php
-						if ($_REQUEST["site_id"] == -1) {
-							$filter_devices = db_fetch_assoc("SELECT DISTINCT device_id, device_name, hostname FROM mac_track_devices ORDER BY device_name");
-						}else{
-							$filter_devices = db_fetch_assoc("SELECT DISTINCT device_id, device_name, hostname FROM mac_track_devices WHERE site_id='" . $_REQUEST["site_id"] . "' ORDER BY device_name");
-						}
-						if (sizeof($filter_devices) > 0) {
-						foreach ($filter_devices as $filter_device) {
-							print '<option value=" ' . $filter_device["device_id"] . '"'; if ($_REQUEST["device_id"] == $filter_device["device_id"]) { print " selected"; } print ">" . $filter_device["device_name"] . "(" . $filter_device["hostname"] . ")" .  "</option>\n";
-						}
-						}
-						?>
+							<option value="-1"<?php if ($_REQUEST["device_id"] == "-1") {?> selected<?php }?>>All</option>
+							<?php
+							if ($_REQUEST["site_id"] == -1) {
+								$filter_devices = db_fetch_assoc("SELECT DISTINCT device_id, device_name, hostname FROM mac_track_devices ORDER BY device_name");
+							}else{
+								$filter_devices = db_fetch_assoc("SELECT DISTINCT device_id, device_name, hostname FROM mac_track_devices WHERE site_id='" . $_REQUEST["site_id"] . "' ORDER BY device_name");
+							}
+							if (sizeof($filter_devices) > 0) {
+							foreach ($filter_devices as $filter_device) {
+								print '<option value=" ' . $filter_device["device_id"] . '"'; if ($_REQUEST["device_id"] == $filter_device["device_id"]) { print " selected"; } print ">" . $filter_device["device_name"] . "(" . $filter_device["hostname"] . ")" .  "</option>\n";
+							}
+							}
+							?>
 						</select>
 					</td>
-					<td width="40">
-						&nbsp;Rows&nbsp;
+					<td>
+						Rows:
 					</td>
-					<td width="1">
+					<td>
 						<select name="rows" onChange="applyArpFilterChange(document.form_mactrack_view_arp)">
-						<?php
-						if (sizeof($rows_selector) > 0) {
-						foreach ($rows_selector as $key => $value) {
-							print '<option value="' . $key . '"'; if ($_REQUEST["rows"] == $key) { print " selected"; } print ">" . $value . "</option>\n";
-						}
-						}
-						?>
+							<?php
+							if (sizeof($rows_selector) > 0) {
+							foreach ($rows_selector as $key => $value) {
+								print '<option value="' . $key . '"'; if ($_REQUEST["rows"] == $key) { print " selected"; } print ">" . $value . "</option>\n";
+							}
+							}
+							?>
 						</select>
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="go_x" value="Go">
+						<input type="submit" name="go_x" value="Go">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="clear_x" value="Clear">
+						<input type="submit" name="clear_x" value="Clear">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="export_x" value="Export">
+						<input type="submit" name="export_x" value="Export">
 					</td>
 				</tr>
 			</table>
-			<table cellpadding="1" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="80">
-						&nbsp;IP Address:
+					<td style='white-space:nowrap;' width="75">
+						IP Address:
 					</td>
-					<td width="1">
+					<td>
 						<select name="ip_filter_type_id">
-						<?php
-						for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
-							print "<option value='" . $i . "'"; if ($_REQUEST["ip_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
-						}
-						?>
+							<?php
+							for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
+								print "<option value='" . $i . "'"; if ($_REQUEST["ip_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
+							}
+							?>
 						</select>
 					</td>
-					<td width="1">
+					<td>
 						<input type="text" name="ip_filter" size="20" value="<?php print $_REQUEST["ip_filter"];?>">
 					</td>
 				</tr>
 				<tr>
-					<td width="80">
-						&nbsp;Mac Address:
+					<td style='white-space:nowrap;' width="75">
+						Mac Address:
 					</td>
-					<td width="1">
+					<td>
 						<select name="mac_filter_type_id">
-						<?php
-						for($i=1;$i<=sizeof($mactrack_search_types)-2;$i++) {
-							print "<option value='" . $i . "'"; if ($_REQUEST["mac_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
-						}
-						?>
+							<?php
+							for($i=1;$i<=sizeof($mactrack_search_types)-2;$i++) {
+								print "<option value='" . $i . "'"; if ($_REQUEST["mac_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
+							}
+							?>
 						</select>
 					</td>
-					<td width="1">
+					<td>
 						<input type="text" name="mac_filter" size="20" value="<?php print $_REQUEST["mac_filter"];?>">
 					</td>
 				</tr>
 			</table>
-			<table cellpadding="1" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="80">
-						&nbsp;Search:&nbsp;
+					<td width="75">
+						Search:
 					</td>
-					<td width="1">
-						<input type="text" name="filter" size="45" value="<?php print $_REQUEST["filter"];?>">
+					<td>
+						<input type="text" name="filter" size="40" value="<?php print $_REQUEST["filter"];?>">
 					</td>
 				</tr>
 			</table>
+			<input type='hidden' name='report' value='arp'>
+			</form>
 		</td>
-		<input type='hidden' name='report' value='arp'>
-		</form>
 	</tr>
 	<?php
 }
@@ -3977,117 +3886,115 @@ function mactrack_device_filter2() {
 	global $item_rows;
 
 	?>
-	<tr>
-		<form name="form_mactrack_view_devices">
+	<tr class='even'>
 		<td>
-			<table cellpadding="1" cellspacing="0">
+			<form name="form_mactrack_view_devices">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="50">
-						&nbsp;Site:&nbsp;
+					<td width="75">
+						Site:
 					</td>
-					<td width="1">
+					<td>
 						<select name="site_id" onChange="applyDeviceFilterChange(document.form_mactrack_view_devices)">
-						<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>All</option>
-						<option value="-2"<?php if ($_REQUEST["site_id"] == "-2") {?> selected<?php }?>>None</option>
-						<?php
-						$sites = db_fetch_assoc("select site_id,site_name from mac_track_sites order by site_name");
-						if (sizeof($sites) > 0) {
-						foreach ($sites as $site) {
-							print '<option value="' . $site["site_id"] . '"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
-						}
-						}
-						?>
+							<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>All</option>
+							<option value="-2"<?php if ($_REQUEST["site_id"] == "-2") {?> selected<?php }?>>None</option>
+							<?php
+							$sites = db_fetch_assoc("select site_id,site_name from mac_track_sites order by site_name");
+							if (sizeof($sites) > 0) {
+							foreach ($sites as $site) {
+								print '<option value="' . $site["site_id"] . '"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
+							}
+							}
+							?>
 						</select>
 					</td>
-					<td width="5"></td>
-					<td width="20">
-						&nbsp;Search:&nbsp;
+					<td>
+						Search:
 					</td>
-					<td width="1">
+					<td>
 						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="go_x" value="Go">
+						<input type="submit" name="go_x" value="Go">
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="clear_x" value="Clear">
+						<input type="submit" name="clear_x" value="Clear">
 					</td>
 					<td>
-						&nbsp<input type="submit" name="export_x" value="Export">
+						<input type="submit" name="export_x" value="Export">
 					</td>
 				</tr>
 			</table>
-			<table cellpadding="1" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="50">
-						&nbsp;Type:&nbsp;
+					<td width="75">
+						Type:
 					</td>
-					<td width="1">
+					<td>
 						<select name="type_id" onChange="applyDeviceFilterChange(document.form_mactrack_view_devices)">
-						<option value="-1"<?php if ($_REQUEST["type_id"] == "-1") {?> selected<?php }?>>Any</option>
-						<option value="1"<?php if ($_REQUEST["type_id"] == "1") {?> selected<?php }?>>Hub/Switch</option>
-						<option value="2"<?php if ($_REQUEST["type_id"] == "2") {?> selected<?php }?>>Switch/Router</option>
-						<option value="3"<?php if ($_REQUEST["type_id"] == "3") {?> selected<?php }?>>Router</option>
+							<option value="-1"<?php if ($_REQUEST["type_id"] == "-1") {?> selected<?php }?>>Any</option>
+							<option value="1"<?php if ($_REQUEST["type_id"] == "1") {?> selected<?php }?>>Hub/Switch</option>
+							<option value="2"<?php if ($_REQUEST["type_id"] == "2") {?> selected<?php }?>>Switch/Router</option>
+							<option value="3"<?php if ($_REQUEST["type_id"] == "3") {?> selected<?php }?>>Router</option>
 						</select>
 					</td>
-					<td width="5"></td>
-					<td width="70">
-						&nbsp;Sub Type:
+					<td>
+						Sub Type:
 					</td>
 					<td width="1">
 						<select name="device_type_id" onChange="applyDeviceFilterChange(document.form_mactrack_view_devices)">
-						<option value="-1"<?php if ($_REQUEST["device_type_id"] == "-1") {?> selected<?php }?>>Any</option>
-						<option value="-2"<?php if ($_REQUEST["device_type_id"] == "-2") {?> selected<?php }?>>Not Detected</option>
-						<?php
-						if ($_REQUEST["type_id"] != -1) {
-							$device_types = db_fetch_assoc("SELECT DISTINCT
-								mac_track_devices.device_type_id,
-								mac_track_device_types.description,
-								mac_track_device_types.sysDescr_match
-								FROM mac_track_device_types
-								INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
-								WHERE device_type='" . $_REQUEST["type_id"] . "'
-								ORDER BY mac_track_device_types.description");
-						}else{
-							$device_types = db_fetch_assoc("SELECT DISTINCT
-								mac_track_devices.device_type_id,
-								mac_track_device_types.description,
-								mac_track_device_types.sysDescr_match
-								FROM mac_track_device_types
-								INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
-								ORDER BY mac_track_device_types.description;");
-						}
-						if (sizeof($device_types) > 0) {
-						foreach ($device_types as $device_type) {
-							$display_text = $device_type["description"] . " (" . $device_type["sysDescr_match"] . ")";
-							print '<option value="' . $device_type["device_type_id"] . '"'; if ($_REQUEST["device_type_id"] == $device_type["device_type_id"]) { print " selected"; } print ">" . $display_text . "</option>";
-						}
-						}
-						?>
+							<option value="-1"<?php if ($_REQUEST["device_type_id"] == "-1") {?> selected<?php }?>>Any</option>
+							<option value="-2"<?php if ($_REQUEST["device_type_id"] == "-2") {?> selected<?php }?>>Not Detected</option>
+							<?php
+							if ($_REQUEST["type_id"] != -1) {
+								$device_types = db_fetch_assoc("SELECT DISTINCT
+									mac_track_devices.device_type_id,
+									mac_track_device_types.description,
+									mac_track_device_types.sysDescr_match
+									FROM mac_track_device_types
+									INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
+									WHERE device_type='" . $_REQUEST["type_id"] . "'
+									ORDER BY mac_track_device_types.description");
+							}else{
+								$device_types = db_fetch_assoc("SELECT DISTINCT
+									mac_track_devices.device_type_id,
+									mac_track_device_types.description,
+									mac_track_device_types.sysDescr_match
+									FROM mac_track_device_types
+									INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
+									ORDER BY mac_track_device_types.description;");
+							}
+							if (sizeof($device_types) > 0) {
+							foreach ($device_types as $device_type) {
+								$display_text = $device_type["description"] . " (" . $device_type["sysDescr_match"] . ")";
+								print '<option value="' . $device_type["device_type_id"] . '"'; if ($_REQUEST["device_type_id"] == $device_type["device_type_id"]) { print " selected"; } print ">" . $display_text . "</option>";
+							}
+							}
+							?>
 						</select>
 					</td>
 				</tr>
 			</table>
-			<table cellpadding="1" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="50">
-						&nbsp;Status:&nbsp;
+					<td width="75">
+						Status:
 					</td>
-					<td width="1">
+					<td>
 						<select name="status" onChange="applyDeviceFilterChange(document.form_mactrack_view_devices)">
-						<option value="-1"<?php if ($_REQUEST["status"] == "-1") {?> selected<?php }?>>Any</option>
-						<option value="3"<?php if ($_REQUEST["status"] == "3") {?> selected<?php }?>>Up</option>
-						<option value="-2"<?php if ($_REQUEST["status"] == "-2") {?> selected<?php }?>>Disabled</option>
-						<option value="1"<?php if ($_REQUEST["status"] == "1") {?> selected<?php }?>>Down</option>
-						<option value="0"<?php if ($_REQUEST["status"] == "0") {?> selected<?php }?>>Unknown</option>
-						<option value="4"<?php if ($_REQUEST["status"] == "4") {?> selected<?php }?>>Error</option>
-						<option value="5"<?php if ($_REQUEST["status"] == "5") {?> selected<?php }?>>No Cacti Link</option>
+							<option value="-1"<?php if ($_REQUEST["status"] == "-1") {?> selected<?php }?>>Any</option>
+							<option value="3"<?php if ($_REQUEST["status"] == "3") {?> selected<?php }?>>Up</option>
+							<option value="-2"<?php if ($_REQUEST["status"] == "-2") {?> selected<?php }?>>Disabled</option>
+							<option value="1"<?php if ($_REQUEST["status"] == "1") {?> selected<?php }?>>Down</option>
+							<option value="0"<?php if ($_REQUEST["status"] == "0") {?> selected<?php }?>>Unknown</option>
+							<option value="4"<?php if ($_REQUEST["status"] == "4") {?> selected<?php }?>>Error</option>
+							<option value="5"<?php if ($_REQUEST["status"] == "5") {?> selected<?php }?>>No Cacti Link</option>
 						</select>
 					</td>
-					<td nowrap style='white-space: nowrap;' width="40">
-						&nbsp;Rows:&nbsp;
+					<td>
+						Rows:
 					</td>
-					<td width="1">
+					<td>
 						<select name="rows" onChange="applyDeviceFilterChange(document.form_mactrack_view_devices)">
 							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
 							<?php
@@ -4101,10 +4008,10 @@ function mactrack_device_filter2() {
 					</td>
 				</tr>
 			</table>
+			<input type='hidden' name='d_page' value='1'>
+			<input type='hidden' name='report' value='devices'>
+			</form>
 		</td>
-		<input type='hidden' name='d_page' value='1'>
-		<input type='hidden' name='report' value='devices'>
-		</form>
 	</tr>
 	<?php
 }
@@ -4113,30 +4020,31 @@ function mactrack_ips_filter() {
 	global $item_rows;
 
 	?>
-	<tr>
-		<form name="form_mactrack_view_ips">
+	<tr class='even'>
 		<td>
-			<table cellpadding="1" cellspacing="0">
+			<form name="form_mactrack_view_ips">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td width="40">
-						&nbsp;Site:&nbsp;
+					<td width="75">
+						Site:
 					</td>
-					<td width="1">
+					<td>
 						<select name="site_id" onChange="applyIPsFilterChange(document.form_mactrack_view_ips)">
-						<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>Any</option>
-						<?php
-						$sites = db_fetch_assoc("SELECT * FROM mac_track_sites ORDER BY mac_track_sites.site_name");
-						if (sizeof($sites) > 0) {
-						foreach ($sites as $site) {
-							print '<option value="' . $site["site_id"] . '"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
-						}
-						}
-						?>
+							<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>Any</option>
+							<?php
+							$sites = db_fetch_assoc("SELECT * FROM mac_track_sites ORDER BY mac_track_sites.site_name");
+							if (sizeof($sites) > 0) {
+							foreach ($sites as $site) {
+								print '<option value="' . $site["site_id"] . '"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
+							}
+							}
+							?>
+						</select>
 					</td>
-					<td nowrap style='white-space: nowrap;' width="40">
-						&nbsp;Rows:&nbsp;
+					<td>
+						Rows:
 					</td>
-					<td width="1">
+					<td>
 						<select name="rows" onChange="applyIPsFilterChange(document.form_mactrack_view_ips)">
 							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
 							<?php
@@ -4149,17 +4057,17 @@ function mactrack_ips_filter() {
 						</select>
 					</td>
 					<td>
-						&nbsp<input type="submit" name="export_x" value="Export">
+						<input type="submit" name="export_x" value="Export">
 					</td>
 					<td>
-						&nbsp<input type="submit" name="clear_x" value="Clear">
+						<input type="submit" name="clear_x" value="Clear">
 					</td>
 				</tr>
 			</table>
+			<input type='hidden' name='page' value='1'>
+			<input type='hidden' name='report' value='ips'>
+			</form>
 		</td>
-		<input type='hidden' name='page' value='1'>
-		<input type='hidden' name='report' value='ips'>
-		</form>
 	</tr>
 	<?php
 }

@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2010 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -26,6 +26,7 @@ $guest_account = true;
 chdir("../../");
 include("./include/auth.php");
 include("./lib/html_tree.php");
+include("./plugins/mactrack/lib/mactrack_functions.php");
 
 if (file_exists("./lib/timespan_settings.php")) {
 	include("./lib/timespan_settings.php");
@@ -33,24 +34,25 @@ if (file_exists("./lib/timespan_settings.php")) {
 	include("./include/html/inc_timespan_settings.php");
 }
 
+define("MAX_DISPLAY_PAGES", "21");
+
 if (!isset($_REQUEST["action"])) $_REQUEST["action"] = "";
 
-include("./plugins/mactrack/general_header.php");
+general_header();
 mactrack_view_graphs();
-include_once("./include/bottom_footer.php");
+bottom_footer();
 
 function mactrack_view_graphs() {
-	global $current_user, $colors, $config;
+	global $current_user, $config;
 
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var("rra_id"));
-	input_validate_input_number(get_request_var("host"));
+	input_validate_input_number(get_request_var_request("rra_id"));
+	input_validate_input_number(get_request_var_request("host"));
+	input_validate_input_number(get_request_var_request("rows"));
 	input_validate_input_regex(get_request_var_request('graph_list'), "^([\,0-9]+)$");
 	input_validate_input_regex(get_request_var_request('graph_add'), "^([\,0-9]+)$");
 	input_validate_input_regex(get_request_var_request('graph_remove'), "^([\,0-9]+)$");
 	/* ==================================================== */
-
-	define("ROWS_PER_PAGE", read_graph_config_option("preview_graphs_per_page"));
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("graph_template_id"));
@@ -89,6 +91,7 @@ function mactrack_view_graphs() {
 	load_current_session_value("host", "sess_mactrack_graph_host", "0");
 	load_current_session_value("filter", "sess_mactrack_graph_filter", "");
 	load_current_session_value("page", "sess_mactrack_graph_current_page", "1");
+	load_current_session_value("rows", "sess_default_rows", read_config_option('num_rows_table'));
 
 	/* graph permissions */
 	if (read_config_option("auth_method") != 0) {
@@ -165,7 +168,7 @@ function mactrack_view_graphs() {
 		$sql_base"));
 
 	/* reset the page if you have changed some settings */
-	if (ROWS_PER_PAGE * ($_REQUEST["page"]-1) >= $total_rows) {
+	if (get_request_var_request('rows') * ($_REQUEST["page"]-1) >= $total_rows) {
 		$_REQUEST["page"] = "1";
 	}
 
@@ -175,7 +178,7 @@ function mactrack_view_graphs() {
 		$sql_base
 		GROUP BY graph_templates_graph.local_graph_id
 		ORDER BY graph_templates_graph.title_cache
-		LIMIT " . (ROWS_PER_PAGE*($_REQUEST["page"]-1)) . "," . ROWS_PER_PAGE);
+		LIMIT " . (get_request_var_request('rows')*($_REQUEST["page"]-1)) . "," . get_request_var_request('rows'));
 
 	?>
 	<script type="text/javascript">
@@ -183,6 +186,7 @@ function mactrack_view_graphs() {
 	function applyGraphPreviewFilterChange(objForm) {
 		strURL = '?report=graphs&graph_template_id=' + objForm.graph_template_id.value;
 		strURL = strURL + '&host=' + objForm.host.value;
+		strURL = strURL + '&rows=' + objForm.rows.value;
 		strURL = strURL + '&filter=' + objForm.filter.value;
 		document.location = strURL;
 	}
@@ -193,7 +197,7 @@ function mactrack_view_graphs() {
 	/* include graph view filter selector */
 	display_output_messages();
 	mactrack_tabs();
-	html_start_box("<strong>Network Device Graphs</strong>", "100%", $colors["header"], "1", "center", "");
+	html_start_box("<strong>Network Device Graphs</strong>", "100%", "", "3", "center", "");
 	mactrack_graph_view_filter();
 
 	/* include time span selector */
@@ -211,8 +215,11 @@ function mactrack_view_graphs() {
 
 	$nav_url = ereg_replace("((\?|&)filter=[a-zA-Z0-9]*)", "", $nav_url);
 
-	html_start_box("", "100%", $colors["header"], "3", "center", "");
-	mactrack_nav_bar($_REQUEST["page"], ROWS_PER_PAGE, $total_rows, $nav_url);
+	html_start_box("", "100%", "", "3", "center", "");
+	$nav = html_nav_bar($nav_url, MAX_DISPLAY_PAGES, get_request_var_request("page"), get_request_var_request('rows'), $total_rows,  read_graph_config_option("num_columns"), 'Graphs');
+
+	print $nav;
+
 	if (read_graph_config_option("thumbnail_section_preview") == "on") {
 		html_graph_thumbnail_area($graphs, "","graph_start=" . get_current_graph_start() . "&graph_end=" . get_current_graph_end());
 	}else{
@@ -220,8 +227,9 @@ function mactrack_view_graphs() {
 	}
 
 	if ($total_rows) {
-		mactrack_nav_bar($_REQUEST["page"], ROWS_PER_PAGE, $total_rows, $nav_url);
+		print $nav;
 	}
+
 	html_end_box();
 }
 
@@ -233,59 +241,19 @@ function mactrack_graph_end_box() {
 	print "</table>";
 }
 
-function mactrack_nav_bar($current_page, $rows_per_page, $total_rows, $nav_url) {
-	global $config, $colors;
-
-	if ($total_rows) {
-		?>
-		<tr bgcolor='#<?php print $colors["header"];?>' class='noprint'>
-			<td colspan='<?php print read_graph_config_option("num_columns");?>'>
-				<table width='100%' cellspacing='0' cellpadding='3' border='0'>
-					<tr>
-						<td align='left' class='textHeaderDark'>
-							<strong>&lt;&lt; <?php if ($current_page > 1) { print "<a class='linkOverDark' href='" . str_replace("<PAGE>", ($current_page-1), $nav_url) . "'>"; } print "Previous"; if ($current_page > 1) { print "</a>"; } ?></strong>
-						</td>
-						<td align='center' class='textHeaderDark'>
-							Showing Graphs <?php print (($rows_per_page*($current_page-1))+1);?> to <?php print ((($total_rows < $rows_per_page) || ($total_rows < ($rows_per_page*$current_page))) ? $total_rows : ($rows_per_page*$current_page));?> of <?php print $total_rows;?>
-						</td>
-						<td align='right' class='textHeaderDark'>
-							<strong><?php if (($current_page * $rows_per_page) < $total_rows) { print "<a class='linkOverDark' href='" . str_replace("<PAGE>", ($current_page+1), $nav_url) . "'>"; } print "Next"; if (($current_page * $rows_per_page) < $total_rows) { print "</a>"; } ?> &gt;&gt;</strong>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<?php
-	}else{
-		?>
-		<tr bgcolor='#<?php print $colors["header"];?>' class='noprint'>
-			<td colspan='<?php print read_graph_config_option("num_columns");?>'>
-				<table width='100%' cellspacing='0' cellpadding='3' border='0'>
-					<tr>
-						<td align='center' class='textHeaderDark'>
-							No Graphs Found
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<?php
-	}
-}
-
 function mactrack_graph_view_filter() {
-	global $config, $colors;
+	global $config;
 
 	?>
-	<tr bgcolor="<?php print $colors["panel"];?>" class="noprint">
+	<tr class="even noprint">
 		<form name="form_graph_view" method="post">
 		<td class="noprint">
-			<table width="100%" cellpadding="0" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr class="noprint">
-					<td nowrap style='white-space: nowrap;' width="55">
-						&nbsp;Host:&nbsp;
+					<td width="55">
+						Host:
 					</td>
-					<td width="1">
+					<td>
 						<select name="host" onChange="applyGraphPreviewFilterChange(document.form_graph_view)">
 							<option value="0"<?php if ($_REQUEST["host"] == "0") {?> selected<?php }?>>Any</option>
 
@@ -303,10 +271,10 @@ function mactrack_graph_view_filter() {
 							?>
 						</select>
 					</td>
-					<td nowrap style='white-space: nowrap;' width="70">
-						&nbsp;Template:&nbsp;
+					<td>
+						Template:
 					</td>
-					<td width="1">
+					<td>
 						<select name="graph_template_id" onChange="applyGraphPreviewFilterChange(document.form_graph_view)">
 							<option value="0"<?php if ($_REQUEST["graph_template_id"] == "0") {?> selected<?php }?>>Any</option>
 
@@ -327,16 +295,37 @@ function mactrack_graph_view_filter() {
 							?>
 						</select>
 					</td>
-					<td nowrap style='white-space: nowrap;' width="50">
-						&nbsp;Search:&nbsp;
-					</td>
-					<td width="1">
-						<input type="text" name="filter" size="40" value="<?php print $_REQUEST["filter"];?>">
+					<td>
+						Search:
 					</td>
 					<td>
-						&nbsp;<input type="submit" name="go" value="Go">
+						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
+					</td>
+					<td>
+						Graphs:
+					</td>
+					<td>
+						<select name="rows" onChange="applyGraphPreviewFilterChange(document.form_graph_view)">
+							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
+							<?php
+								if (sizeof($item_rows) > 0) {
+								foreach ($item_rows as $key => $value) {
+									print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
+								}
+								}
+							?>
+						</select>
+					</td>
+					<td>
+						<input type="submit" name="go" value="Go">
+					</td>
+					<td>
 						<input type="submit" name="clear_x" value="Clear">
+					</td>
+					<td>
 						<input type="button" name="save" value="Save" onclick='saveGraphSettings()'>
+					</td>
+					<td>
 						<input type="submit" name="defaults" value="Defaults">
 					</td>
 				</tr>
@@ -348,7 +337,7 @@ function mactrack_graph_view_filter() {
 }
 
 function mactrack_timespan_selector() {
-	global $config, $colors, $graph_timespans, $graph_timeshifts;
+	global $config, $graph_timespans, $graph_timeshifts;
 
 	?>
 	<script type='text/javascript'>
@@ -385,10 +374,7 @@ function mactrack_timespan_selector() {
 		cal.hide();
 		calendar = null;
 	}
-	-->
-	</script>
-	<script type="text/javascript">
-	<!--
+
 	function applyTimespanFilterChange(objForm) {
 		strURL = '?predefined_timespan=' + objForm.predefined_timespan.value;
 		strURL = strURL + '&predefined_timeshift=' + objForm.predefined_timeshift.value;
@@ -396,15 +382,15 @@ function mactrack_timespan_selector() {
 	}
 	-->
 	</script>
-	<tr bgcolor="<?php print $colors["panel"];?>" class="noprint">
+	<tr class="even noprint">
 		<form name="form_timespan_selector" method="post">
 		<td class="noprint">
-			<table width="100%" cellpadding="0" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td nowrap style='white-space: nowrap;' width='55'>
-						&nbsp;Presets:&nbsp;
+					<td width='55'>
+						Presets:
 					</td>
-					<td nowrap style='white-space: nowrap;' width='130'>
+					<td>
 						<select name='predefined_timespan' onChange="applyTimespanFilterChange(document.form_timespan_selector)">
 							<?php
 							if ($_SESSION["custom"]) {
@@ -428,22 +414,28 @@ function mactrack_timespan_selector() {
 							?>
 						</select>
 					</td>
-					<td nowrap style='white-space: nowrap;' width='30'>
-						&nbsp;From:&nbsp;
+					<td>
+						From:
 					</td>
-					<td width='155' nowrap style='white-space: nowrap;'>
+					<td>
 						<input type='text' name='date1' id='date1' title='Graph Begin Timestamp' size='14' value='<?php print (isset($_SESSION["sess_current_date1"]) ? $_SESSION["sess_current_date1"] : "");?>'>
-						&nbsp;<input style='padding-bottom: 4px;' type='image' src='<?php print $config["url_path"];?>images/calendar.gif' alt='Start date selector' title='Start date selector' border='0' align='absmiddle' onclick="return showCalendar('date1');">&nbsp;
 					</td>
-					<td nowrap style='white-space: nowrap;' width='20'>
-						&nbsp;To:&nbsp;
+					<td>
+						<input style='padding-bottom: 4px;' type='image' src='<?php print $config["url_path"];?>images/calendar.gif' alt='Start date selector' title='Start date selector' border='0' align='absmiddle' onclick="return showCalendar('date1');">&nbsp;
 					</td>
-					<td width='155' nowrap style='white-space: nowrap;'>
+					<td>
+						To:
+					</td>
+					<td>
 						<input type='text' name='date2' id='date2' title='Graph End Timestamp' size='14' value='<?php print (isset($_SESSION["sess_current_date2"]) ? $_SESSION["sess_current_date2"] : "");?>'>
-						&nbsp;<input style='padding-bottom: 4px;' type='image' src='<?php print $config["url_path"];?>images/calendar.gif' alt='End date selector' title='End date selector' border='0' align='absmiddle' onclick="return showCalendar('date2');">
 					</td>
-					<td width='130' nowrap style='white-space: nowrap;'>
-						&nbsp;&nbsp;<input style='padding-bottom: 4px;' type='image' name='move_left' src='<?php print $config['url_path'];?>images/move_left.gif' alt='Left' border='0' align='absmiddle' title='Shift Left'>
+					<td>
+						<input style='padding-bottom: 4px;' type='image' src='<?php print $config["url_path"];?>images/calendar.gif' alt='End date selector' title='End date selector' border='0' align='absmiddle' onclick="return showCalendar('date2');">
+					</td>
+					<td>
+						<input style='padding-bottom: 4px;' type='image' name='move_left' src='<?php print $config['url_path'];?>images/move_left.gif' alt='Left' border='0' align='absmiddle' title='Shift Left'>
+					</td>
+					<td>
 						<select name='predefined_timeshift' title='Define Shifting Interval' onChange="applyTimespanFilterChange(document.form_timespan_selector)">
 							<?php
 							$start_val = 1;
@@ -457,8 +449,10 @@ function mactrack_timespan_selector() {
 						</select>
 						<input style='padding-bottom: 4px;' type='image' name='move_right' src='<?php print $config['url_path'];?>images/move_right.gif' alt='Right' border='0' align='absmiddle' title='Shift Right'>
 					</td>
-					<td nowrap style='white-space: nowrap;'>
-						&nbsp;&nbsp;<input type='submit' name='button_refresh' value='Refresh'>
+					<td>
+						<input type='submit' name='button_refresh' value='Refresh'>
+					</td>
+					<td>
 						<input type='submit' name='button_clear_x' value='Clear'>
 					</td>
 				</tr>

@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2010 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -219,7 +219,7 @@ function mactrack_device_action_array($action) {
 
 function mactrack_device_action_prepare($save) {
 	# globals used
-	global $config, $colors, $fields_mactrack_device_edit;
+	global $config, $fields_mactrack_device_edit;
 
 	# it's our turn
 	if ($save["drp_action"] == "plugin_mactrack_device") { /* mactrack */
@@ -228,7 +228,7 @@ function mactrack_device_action_prepare($save) {
 
 			/* list affected hosts */
 			print "<tr>";
-			print "<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"] . "'>" .
+			print "<td colspan='2' class='textArea'>" .
 				"<p>Are you sure you want to import the following hosts to Mactrack?</p>" .
 				"<p>Please specify additional MacTrack device options as given below.</p>";
 			print "</tr>";
@@ -250,7 +250,7 @@ function mactrack_device_action_prepare($save) {
 					"fields" => $form_array	));
 
 			print "<tr>";
-			print "<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate2"] . "'>" .
+			print "<td colspan='2' class='textArea'>" .
 				"<p>We will use these devices' SNMP options for the MacTrack device as well.</p>" .
 				"<ul>" . $save["host_list"] . "</ul></td>";
 			print "</tr>";

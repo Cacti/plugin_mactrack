@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2010 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -1233,17 +1233,6 @@ function mactrack_config_settings () {
 			)
 		);
 
-	$settings["visual"]["mactrack_header"] = array(
-		"friendly_name" => "Device Tracking",
-		"method" => "spacer",
-		);
-	$settings["visual"]["num_rows_mactrack"] = array(
-		"friendly_name" => "Rows Per Page",
-		"description" => "The number of rows to display on a single page for Device Tracking sites, devices and reports.",
-		"method" => "textbox",
-		"default" => "30",
-		"max_length" => "10"
-		);
 	$ts = array();
 	foreach ($settings['path'] as $t => $ta) {
 		$ts[$t] = $ta;
@@ -1307,11 +1296,7 @@ function mactrack_draw_navigation_text ($nav) {
 function mactrack_show_tab () {
 	global $config, $user_auth_realm_filenames;
 
-	$realm_id = 2120;
-	if ((db_fetch_assoc("select user_auth_realm.realm_id
-		from user_auth_realm where user_auth_realm.user_id='" . $_SESSION["sess_user_id"] . "'
-		and user_auth_realm.realm_id='$realm_id'")) || (empty($realm_id))) {
-
+	if (api_user_realm_auth('mactrack_view_macs.php')) {
 		if (substr_count($_SERVER["REQUEST_URI"], "mactrack_view_")) {
 			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_macs.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="MacTrack" align="absmiddle" border="0"></a>';
 		}else{

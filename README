@@ -70,6 +70,7 @@
     bug: reorganize API functions to assist third party integrations
     bug: use qstr instead of addslashes as it's not reliable
     feature: Attempt to kill processes if they have run over their allotted time
+	feature: Support new Theme engine
 
     --- 2.9 ---
     bug#0001799: Select all checkbox on Mac Addresses tab not working

@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2010 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -198,7 +198,7 @@ function api_mactrack_duplicate_device_type($device_type_id, $dup_id, $device_ty
    ------------------------ */
 
 function form_actions() {
-	global $colors, $config, $device_types_actions, $fields_mactrack_device_types_edit;
+	global $config, $device_types_actions, $fields_mactrack_device_types_edit;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_post('drp_action'));
@@ -250,13 +250,13 @@ function form_actions() {
 
 	include_once("./include/top_header.php");
 
-	html_start_box("<strong>" . $device_types_actions{$_POST["drp_action"]} . "</strong>", "60%", $colors["header_panel"], "3", "center", "");
+	html_start_box("<strong>" . $device_types_actions{$_POST["drp_action"]} . "</strong>", "60%", "", "3", "center", "");
 
 	print "<form action='mactrack_device_types.php' method='post'>\n";
 
 	if ($_POST["drp_action"] == "1") { /* delete */
 		print "	<tr>
-				<td class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
+				<td class='textArea'>
 					<p>Are you sure you want to delete the following device types?</p>
 					<p><ul>$device_types_list</ul></p>
 				</td>
@@ -264,7 +264,7 @@ function form_actions() {
 			";
 	}elseif ($_POST["drp_action"] == "2") { /* duplicate */
 		print "	<tr>
-				<td class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
+				<td class='textArea'>
 					<p>When you click save, the following device types will be duplicated. You may optionally
 					change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix.</p>
 					<p><ul>$device_types_list</ul></p>
@@ -275,14 +275,14 @@ function form_actions() {
 	}
 
 	if (!isset($device_types_array)) {
-		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You must select at least one device type.</span></td></tr>\n";
+		print "<tr><td class='even'><span class='textError'>You must select at least one device type.</span></td></tr>\n";
 		$save_html = "";
 	}else{
 		$save_html = "<input type='submit' value='Yes' name='save_x'>";
 	}
 
 	print "	<tr>
-			<td colspan='2' align='right' bgcolor='#eaeaea'>
+			<td colspan='2' align='right' class='saveRow'>
 				<input type='hidden' name='action' value='actions'>
 				<input type='hidden' name='selected_items' value='" . (isset($device_types_array) ? serialize($device_types_array) : '') . "'>
 				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>" . (strlen($save_html) ? "
@@ -302,7 +302,7 @@ function form_actions() {
    --------------------- */
 
 function mactrack_device_type_export() {
-	global $colors, $device_actions, $mactrack_device_types, $config;
+	global $device_actions, $mactrack_device_types, $config;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("page"));
@@ -311,17 +311,17 @@ function mactrack_device_type_export() {
 
 	/* clean up the vendor string */
 	if (isset($_REQUEST["vendor"])) {
-		$_REQUEST["vendor"] = sanitize_search_string(get_request_var("vendor"));
+		$_REQUEST["vendor"] = sanitize_search_string(get_request_var_request("vendor"));
 	}
 
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
-		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
+		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var_request("sort_column"));
 	}
 
 	/* clean up search string */
 	if (isset($_REQUEST["sort_direction"])) {
-		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var("sort_direction"));
+		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var_request("sort_direction"));
 	}
 
 	/* remember these search fields in session vars so we don't have to keep passing them around */
@@ -435,16 +435,16 @@ function mactrack_rescan_device_types() {
 }
 
 function mactrack_device_type_import() {
-	global $colors, $config;
+	global $config;
 
 	?><form method="post" action="mactrack_device_types.php?action=import" enctype="multipart/form-data"><?php
 
 	if ((isset($_SESSION["import_debug_info"])) && (is_array($_SESSION["import_debug_info"]))) {
 		html_start_box("<strong>Import Results</strong>", "100%", "aaaaaa", "3", "center", "");
 
-		print "<tr bgcolor='#" . $colors["form_alternate1"] . "'><td><p class='textArea'>Cacti has imported the following items:</p>";
+		print "<tr class='even'><td><p class='textArea'>Cacti has imported the following items:</p>";
 		foreach($_SESSION["import_debug_info"] as $import_result) {
-			print "<tr bgcolor='#" . $colors["form_alternate1"] . "'><td>" . $import_result . "</td>";
+			print "<tr class='even'><td>" . $import_result . "</td>";
 			print "</tr>";
 		}
 
@@ -453,9 +453,9 @@ function mactrack_device_type_import() {
 		kill_session_var("import_debug_info");
 	}
 
-	html_start_box("<strong>Import MacTrack Device Types</strong>", "100%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Import MacTrack Device Types</strong>", "100%", "", "3", "center", "");
 
-	form_alternate_row_color($colors["form_alternate1"],$colors["form_alternate2"],0);?>
+	form_alternate_row();?>
 		<td width='50%'><font class='textEditTitle'>Import Device Types from Local File</font><br>
 			Please specify the location of the CSV file containing your device type information.
 		</td>
@@ -463,7 +463,7 @@ function mactrack_device_type_import() {
 			<input type='file' name='import_file'>
 		</td>
 	</tr><?php
-	form_alternate_row_color($colors["form_alternate1"],$colors["form_alternate2"],0);?>
+	form_alternate_row();?>
 		<td width='50%'><font class='textEditTitle'>Overwrite Existing Data?</font><br>
 			Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows.
 		</td>
@@ -473,9 +473,9 @@ function mactrack_device_type_import() {
 
 	html_end_box(FALSE);
 
-	html_start_box("<strong>Required File Format Notes</strong>", "100%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Required File Format Notes</strong>", "100%", "", "3", "center", "");
 
-	form_alternate_row_color($colors["form_alternate1"],$colors["form_alternate2"],0);?>
+	form_alternate_row();?>
 		<td><strong>The file must contain a header row with the following column headings.</strong>
 			<br><br>
 			<strong>description</strong> - A common name for the device.  For example Cisco 6509 Switch<br>
@@ -796,38 +796,38 @@ function mactrack_device_type_remove() {
 	global $config;
 
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var("device_type_id"));
+	input_validate_input_number(get_request_var_request("device_type_id"));
 	/* ==================================================== */
 
-	if ((read_config_option("remove_verification") == "on") && (!isset($_GET["confirm"]))) {
+	if ((read_config_option("remove_verification") == "on") && (!isset($_REQUEST["confirm"]))) {
 		include("./include/top_header.php");
-		form_confirm("Are You Sure?", "Are you sure you want to delete the device type<strong>'" . db_fetch_cell("select description from host where id=" . $_GET["device_id"]) . "'</strong>?", "mactrack_device_types.php", "mactrack_device_types.php?action=remove&id=" . $_GET["device_type_id"]);
+		form_confirm("Are You Sure?", "Are you sure you want to delete the device type<strong>'" . db_fetch_cell("select description from host where id=" . $_REQUEST["device_id"]) . "'</strong>?", "mactrack_device_types.php", "mactrack_device_types.php?action=remove&id=" . $_REQUEST["device_type_id"]);
 		include("./include/bottom_footer.php");
 		exit;
 	}
 
-	if ((read_config_option("remove_verification") == "") || (isset($_GET["confirm"]))) {
-		api_mactrack_device_type_remove($_GET["device_type_id"]);
+	if ((read_config_option("remove_verification") == "") || (isset($_REQUEST["confirm"]))) {
+		api_mactrack_device_type_remove($_REQUEST["device_type_id"]);
 	}
 }
 
 function mactrack_device_type_edit() {
-	global $colors, $config, $fields_mactrack_device_type_edit;
+	global $config, $fields_mactrack_device_type_edit;
 
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var("device_type_id"));
+	input_validate_input_number(get_request_var_request("device_type_id"));
 	/* ==================================================== */
 
 	display_output_messages();
 
-	if (!empty($_GET["device_type_id"])) {
-		$device_type = db_fetch_row("select * from mac_track_device_types where device_type_id=" . $_GET["device_type_id"]);
+	if (!empty($_REQUEST["device_type_id"])) {
+		$device_type = db_fetch_row("select * from mac_track_device_types where device_type_id=" . $_REQUEST["device_type_id"]);
 		$header_label = "[edit: " . $device_type["description"] . "]";
 	}else{
 		$header_label = "[new]";
 	}
 
-	html_start_box("<strong>MacTrack Device Types</strong> $header_label", "100%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>MacTrack Device Types</strong> $header_label", "100%", "", "3", "center", "");
 
 	draw_edit_form(array(
 		"config" => array("form_name" => "chk"),
@@ -876,7 +876,7 @@ function mactrack_get_device_types(&$sql_where, $row_limit, $apply_limits = TRUE
 }
 
 function mactrack_device_type() {
-	global $colors, $device_types_actions, $mactrack_device_types, $config, $item_rows;
+	global $device_types_actions, $mactrack_device_types, $config, $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("page"));
@@ -886,28 +886,28 @@ function mactrack_device_type() {
 
 	/* clean up the vendor string */
 	if (isset($_REQUEST["vendor"])) {
-		$_REQUEST["vendor"] = sanitize_search_string(get_request_var("vendor"));
+		$_REQUEST["vendor"] = sanitize_search_string(get_request_var_request("vendor"));
 	}
 
 	if (isset($_REQUEST["filter"])) {
-		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
+		$_REQUEST["filter"] = sanitize_search_string(get_request_var_request("filter"));
 	}
 
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
-		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
+		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var_request("sort_column"));
 	}
 
 	/* clean up search string */
 	if (isset($_REQUEST["sort_direction"])) {
-		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var("sort_direction"));
+		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var_request("sort_direction"));
 	}
 
 	/* if the user pushed the 'clear' button */
 	if (isset($_REQUEST["clear_x"])) {
 		kill_session_var("sess_mactrack_device_type_current_page");
 		kill_session_var("sess_mactrack_device_type_filter");
-		kill_session_var("sess_mactrack_device_type_rows");
+		kill_session_var("sess_default_rows");
 		kill_session_var("sess_mactrack_device_type_vendor");
 		kill_session_var("sess_mactrack_device_type_type_id");
 		kill_session_var("sess_mactrack_device_type_sort_column");
@@ -927,19 +927,19 @@ function mactrack_device_type() {
 	load_current_session_value("vendor", "sess_mactrack_device_type_vendor", "All");
 	load_current_session_value("filter", "sess_mactrack_device_type_filter", "");
 	load_current_session_value("type_id", "sess_mactrack_device_type_type_id", "-1");
-	load_current_session_value("rows", "sess_mactrack_device_type_rows", "-1");
+	load_current_session_value('rows', 'sess_default_rows', read_config_option('num_rows_table'));
 	load_current_session_value("sort_column", "sess_mactrack_device_type_sort_column", "description");
 	load_current_session_value("sort_direction", "sess_mactrack_device_type_sort_direction", "ASC");
 
 	if ($_REQUEST["rows"] == -1) {
-		$row_limit = read_config_option("num_rows_mactrack");
+		$row_limit = read_config_option("num_rows_table");
 	}elseif ($_REQUEST["rows"] == -2) {
 		$row_limit = 999999;
 	}else{
 		$row_limit = $_REQUEST["rows"];
 	}
 
-	html_start_box("<strong>MacTrack Device Type Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_device_types.php?action=edit");
+	html_start_box("<strong>MacTrack Device Type Filters</strong>", "100%", "", "3", "center", "mactrack_device_types.php?action=edit");
 	mactrack_device_type_filter();
 	html_end_box();
 
@@ -947,41 +947,15 @@ function mactrack_device_type() {
 
 	$device_types = mactrack_get_device_types($sql_where, $row_limit);
 
-	html_start_box("", "100%", $colors["header"], "3", "center", "");
+	html_start_box("", "100%", "", "3", "center", "");
 
 	$total_rows = db_fetch_cell("SELECT
 		COUNT(mac_track_device_types.device_type_id)
 		FROM mac_track_device_types" . $sql_where);
 
-	/* generate page list */
-	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_device_types.php?");
+	$nav = html_nav_bar("mactrack_device_types.php?filter=" . $_REQUEST["filter"], MAX_DISPLAY_PAGES, get_request_var_request("page"), $row_limit, $total_rows, 9, 'Device Types');
 
-	if (defined("CACTI_VERSION")) {
-		/* generate page list navigation */
-		$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, 9, "mactrack_device_types.php?filter=" . $_REQUEST["filter"]);
-	}else{
-		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-				<td colspan='9'>
-					<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-						<tr>
-							<td align='left' class='textHeaderDark'>
-								<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_device_types.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-							</td>\n
-							<td align='center' class='textHeaderDark'>
-								Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-							</td>\n
-							<td align='right' class='textHeaderDark'>
-								<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_device_types.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-							</td>\n
-						</tr>
-					</table>
-				</td>
-			</tr>\n";
-	}
-
-	if ($total_rows) {
-		print $nav;
-	}
+	print $nav;
 
 	$display_text = array(
 		"description" => array("Device Type Description", "ASC"),
@@ -994,10 +968,9 @@ function mactrack_device_type() {
 
 	html_header_sort_checkbox($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 
-	$i = 0;
 	if (sizeof($device_types) > 0) {
 		foreach ($device_types as $device_type) {
-			form_alternate_row_color($colors["alternate"],$colors["light"],$i, 'line' . $device_type["device_type_id"]); $i++;
+			form_alternate_row('line' . $device_type['device_type_id'], true);
 			form_selectable_cell('<a class="linkEditMain" href="mactrack_device_types.php?action=edit&device_type_id=' . $device_type["device_type_id"] . '">' . $device_type["description"] . '</a>', $device_type["device_type_id"]);
 			form_selectable_cell($device_type["vendor"], $device_type["device_type_id"]);
 			form_selectable_cell($mactrack_device_types[$device_type["device_type"]], $device_type["device_type_id"]);

@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2010 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -83,7 +83,7 @@ function form_save() {
    ------------------------ */
 
 function form_actions() {
-	global $colors, $config, $macw_actions, $fields_mactrack_macw_edit;
+	global $config, $macw_actions, $fields_mactrack_macw_edit;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_post('drp_action'));
@@ -127,13 +127,13 @@ function form_actions() {
 
 	include_once("./include/top_header.php");
 
-	html_start_box("<strong>" . $macw_actions{$_POST["drp_action"]} . "</strong>", "60%", $colors["header_panel"], "3", "center", "");
+	html_start_box("<strong>" . $macw_actions{$_POST["drp_action"]} . "</strong>", "60%", "", "3", "center", "");
 
 	print "<form action='mactrack_macwatch.php' method='post'>\n";
 
 	if ($_POST["drp_action"] == "1") { /* delete */
 		print "	<tr>
-				<td class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
+				<td class='textArea'>
 					<p>Are you sure you want to delete the following watched Mac's?</p>
 					<p><ul>$macw_list</ul></p>";
 					print "</td></tr>
@@ -143,14 +143,14 @@ function form_actions() {
 	}
 
 	if (!isset($macw_array)) {
-		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You must select at least one watched Mac to delete.</span></td></tr>\n";
+		print "<tr><td class='even'><span class='textError'>You must select at least one watched Mac to delete.</span></td></tr>\n";
 		$save_html = "";
 	}else{
 		$save_html = "<input type='submit' name='save_x' value='Yes'>";
 	}
 
 	print "	<tr>
-			<td colspan='2' align='right' bgcolor='#eaeaea'>
+			<td colspan='2' align='right' class='saveRow'>
 				<input type='hidden' name='action' value='actions'>
 				<input type='hidden' name='selected_items' value='" . (isset($macw_array) ? serialize($macw_array) : '') . "'>
 				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>" . (strlen($save_html) ? "
@@ -200,18 +200,18 @@ function mactrack_macw_remove() {
 	global $config;
 
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var("mac_address"));
+	input_validate_input_number(get_request_var_request("mac_address"));
 	/* ==================================================== */
 
-	if ((read_config_option("remove_verification") == "on") && (!isset($_GET["confirm"]))) {
+	if ((read_config_option("remove_verification") == "on") && (!isset($_REQUEST["confirm"]))) {
 		include("./include/top_header.php");
-		form_confirm("Are You Sure?", "Are you sure you want to delete the watched Mac Address <strong>'" . db_fetch_cell("SELECT name FROM mac_track_macwatch WHERE mac_id" . $_GET["mac_id"]) . "'</strong>?", "mactrack_macwatch.php", "mactrack_macwatch.php?action=remove&mac_id=" . $_GET["mac_id"]);
+		form_confirm("Are You Sure?", "Are you sure you want to delete the watched Mac Address <strong>'" . db_fetch_cell("SELECT name FROM mac_track_macwatch WHERE mac_id" . $_REQUEST["mac_id"]) . "'</strong>?", "mactrack_macwatch.php", "mactrack_macwatch.php?action=remove&mac_id=" . $_REQUEST["mac_id"]);
 		include("./include/bottom_footer.php");
 		exit;
 	}
 
-	if ((read_config_option("remove_verification") == "") || (isset($_GET["confirm"]))) {
-		api_mactrack_macw_remove($_GET["mac_id"]);
+	if ((read_config_option("remove_verification") == "") || (isset($_REQUEST["confirm"]))) {
+		api_mactrack_macw_remove($_REQUEST["mac_id"]);
 	}
 }
 
@@ -239,22 +239,22 @@ function mactrack_macw_get_macw_records(&$sql_where, $row_limit, $apply_limits =
 }
 
 function mactrack_macw_edit() {
-	global $colors, $fields_mactrack_macw_edit;
+	global $fields_mactrack_macw_edit;
 
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var("mac_id"));
+	input_validate_input_number(get_request_var_request("mac_id"));
 	/* ==================================================== */
 
 	display_output_messages();
 
-	if (!empty($_GET["mac_id"])) {
-		$mac_record = db_fetch_row("SELECT * FROM mac_track_macwatch WHERE mac_id=" . $_GET["mac_id"]);
+	if (!empty($_REQUEST["mac_id"])) {
+		$mac_record = db_fetch_row("SELECT * FROM mac_track_macwatch WHERE mac_id=" . $_REQUEST["mac_id"]);
 		$header_label = "[edit: " . $mac_record["name"] . "]";
 	}else{
 		$header_label = "[new]";
 	}
 
-	html_start_box("<strong>MacTrack MacWatch</strong> $header_label", "100%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>MacTrack MacWatch</strong> $header_label", "100%", "", "3", "center", "");
 
 	draw_edit_form(array(
 		"config" => array("form_name" => "chk"),
@@ -271,34 +271,34 @@ function mactrack_macw_edit() {
 }
 
 function mactrack_macw() {
-	global $colors, $macw_actions, $config, $item_rows;
+	global $macw_actions, $config, $item_rows;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("page"));
-	input_validate_input_number(get_request_var("mac_id"));
-	input_validate_input_number(get_request_var("rows"));
+	input_validate_input_number(get_request_var_request("mac_id"));
+	input_validate_input_number(get_request_var_request("rows"));
 	/* ==================================================== */
 
 	/* clean up search string */
 	if (isset($_REQUEST["filter"])) {
-		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
+		$_REQUEST["filter"] = sanitize_search_string(get_request_var_request("filter"));
 	}
 
 	/* clean up sort_column */
 	if (isset($_REQUEST["sort_column"])) {
-		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
+		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var_request("sort_column"));
 	}
 
 	/* clean up search string */
 	if (isset($_REQUEST["sort_direction"])) {
-		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var("sort_direction"));
+		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var_request("sort_direction"));
 	}
 
 	/* if the user pushed the 'clear' button */
 	if (isset($_REQUEST["clear_x"])) {
 		kill_session_var("sess_mactrack_macw_current_page");
 		kill_session_var("sess_mactrack_macw_filter");
-		kill_session_var("sess_mactrack_macw_rows");
+		kill_session_var("sess_default_rows");
 		kill_session_var("sess_mactrack_macw_sort_column");
 		kill_session_var("sess_mactrack_macw_sort_direction");
 
@@ -312,7 +312,7 @@ function mactrack_macw() {
 		$changed = 0;
 		$changed += mactrack_check_changed("filter", "sess_mactrack_macw_filter");
 		$changed += mactrack_check_changed("detail", "sess_mactrack_macw_detail");
-		$changed += mactrack_check_changed("rows", "sess_mactrack_macw_rows");
+		$changed += mactrack_check_changed("rows", "sess_default_rows");
 
 		if ($changed) {
 			$_REQUEST["page"] = "1";
@@ -322,22 +322,22 @@ function mactrack_macw() {
 	/* remember these search fields in session vars so we don't have to keep passing them around */
 	load_current_session_value("page", "sess_mactrack_macw_current_page", "1");
 	load_current_session_value("filter", "sess_mactrack_macw_filter", "");
-	load_current_session_value("rows", "sess_mactrack_macw_rows", "-1");
+	load_current_session_value('rows', 'sess_default_rows', read_config_option('num_rows_table'));
 	load_current_session_value("sort_column", "sess_mactrack_macw_sort_column", "name");
 	load_current_session_value("sort_direction", "sess_mactrack_macw_sort_direction", "ASC");
 
 	if ($_REQUEST["rows"] == -1) {
-		$row_limit = read_config_option("num_rows_mactrack");
+		$row_limit = read_config_option("num_rows_table");
 	}elseif ($_REQUEST["rows"] == -2) {
 		$row_limit = 999999;
 	}else{
 		$row_limit = $_REQUEST["rows"];
 	}
 
-	html_start_box("<strong>MacTrack MacWatch Filters</strong>", "100%", $colors["header"], "3", "center", "mactrack_macwatch.php?action=edit");
+	html_start_box("<strong>MacTrack MacWatch Filters</strong>", "100%", "", "3", "center", "mactrack_macwatch.php?action=edit");
 	mactrack_macw_filter();
 	html_end_box();
-	html_start_box("", "100%", $colors["header"], "3", "center", "");
+	html_start_box("", "100%", "", "3", "center", "");
 
 	$sql_where = "";
 
@@ -347,35 +347,9 @@ function mactrack_macw() {
 		FROM mac_track_macwatch
 		$sql_where");
 
-	/* generate page list */
-	$url_page_select = str_replace("&page", "?page", get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, "mactrack_macwatch.php"));
+	$nav = html_nav_bar("mactrack_macwatch.php?filter=" . $_REQUEST["filter"], MAX_DISPLAY_PAGES, get_request_var_request("page"), $row_limit, $total_rows, 9, 'Watches');
 
-	if (defined("CACTI_VERSION")) {
-		/* generate page list navigation */
-		$nav = html_create_nav($_REQUEST["page"], MAX_DISPLAY_PAGES, $row_limit, $total_rows, 9, "mactrack_macwatch.php?filter=" . $_REQUEST["filter"]);
-	}else{
-		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-				<td colspan='9'>
-					<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-						<tr>
-							<td align='left' class='textHeaderDark'>
-								<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='mactrack_macwatch.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-							</td>\n
-							<td align='center' class='textHeaderDark'>
-								Showing Rows " . (($row_limit*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $row_limit) || ($total_rows < ($row_limit*$_REQUEST["page"]))) ? $total_rows : ($row_limit*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-							</td>\n
-							<td align='right' class='textHeaderDark'>
-								<strong>"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "<a class='linkOverDark' href='mactrack_macwatch.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $row_limit) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-							</td>\n
-						</tr>
-					</table>
-				</td>
-			</tr>\n";
-	}
-
-	if ($total_rows) {
-		print $nav;
-	}
+	print $nav;
 
 	$display_text = array(
 		"name" => array("Watch Name", "ASC"),
@@ -390,14 +364,14 @@ function mactrack_macw() {
 	$i = 0;
 	if (sizeof($macw) > 0) {
 		foreach ($macw as $mac) {
-			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+			form_alternate_row();
 				?>
 				<td width="20%">
-					<a class="linkEditMain" href="mactrack_macwatch.php?action=edit&mac_id=<?php print $mac['mac_id'];?>"><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["name"]) : $mac["name"]);?></a>
+					<a class="linkEditMain" href="mactrack_macwatch.php?action=edit&mac_id=<?php print $mac['mac_id'];?>"><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $mac["name"]) : $mac["name"]);?></a>
 				</td>
-				<td width="10%"><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["mac_address"]) : $mac["mac_address"]);?></td>
-				<td width="10%"><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $mac["ticket_number"]) : $mac["ticket_number"]);?></td>
-				<td style='max-width:80%;'><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", htmlspecialchars($mac["description"])) : htmlspecialchars($mac["description"]));?></td>
+				<td width="10%"><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $mac["mac_address"]) : $mac["mac_address"]);?></td>
+				<td width="10%"><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $mac["ticket_number"]) : $mac["ticket_number"]);?></td>
+				<td style='max-width:80%;'><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", htmlspecialchars($mac["description"])) : htmlspecialchars($mac["description"]));?></td>
 				<td width="10%"><?php print ($mac["date_first_seen"] == "0000-00-00 00:00:00" ? "N/A" : $mac["date_first_seen"]);?></td>
 				<td width="10%"><?php print ($mac["date_last_seen"] == "0000-00-00 00:00:00" ? "N/A" : $mac["date_last_seen"]);?></td>
 
