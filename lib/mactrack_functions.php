@@ -2183,7 +2183,7 @@ function perform_mactrack_db_maint() {
 	mactrack_debug("Finished deleting old records from the main database.");
 }
 
-function import_oui_database($type = "ui", $oui_file = "http://standards.ieee.org/regauth/oui/oui.txt") {
+function import_oui_database($type = "ui", $oui_file = "https://services13.ieee.org/RST/standards-ra-web/rest/assignments/download/?registry=MA-L&format=txt") {
 	global $cnn_id;
 
 	if ($type != "ui") {
