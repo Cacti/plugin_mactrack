@@ -1,75 +1,54 @@
-function changeSNMPVersion() {
-	snmp_version = document.getElementById('snmp_version').value;
-	switch (snmp_version) {
-	case "0":
-		setSNMP("None");
-		break;
-	case "1":
-	case "2":
-		setSNMP("v1v2");
-		break;
-	case "3":
-		setSNMP("v3");
-		break;
-	}
-}
+$(function() {
+	$('#snmp_version').change(function() {
+		setSNMP();
+	}).change();
+});
 
-function setSNMP(snmp_type) {
-	switch (snmp_type) {
-	case "None":
-		document.getElementById('row_snmp_username').style.display = "none";
-		document.getElementById('row_snmp_password').style.display = "none";
-		document.getElementById('row_snmp_readstring').style.display = "none";
-		document.getElementById('row_snmp_auth_protocol').style.display = "none";
-		document.getElementById('row_snmp_priv_passphrase').style.display = "none";
-		document.getElementById('row_snmp_priv_protocol').style.display = "none";
-		document.getElementById('row_snmp_context').style.display = "none";
-		document.getElementById('row_snmp_port').style.display = "none";
-		document.getElementById('row_snmp_timeout').style.display = "none";
-		document.getElementById('row_max_oids').style.display = "none";
-
+function setSNMP() {
+	snmp_version = $('#snmp_version').val();
+	switch(snmp_version) {
+	case '0': // No SNMP
+		$('#row_snmp_username').hide();
+		$('#row_snmp_password').hide();
+		$('#row_snmp_readstring').hide();
+		$('#row_snmp_readstrings').hide();
+		$('#row_snmp_auth_protocol').hide();
+		$('#row_snmp_priv_passphrase').hide();
+		$('#row_snmp_priv_protocol').hide();
+		$('#row_snmp_context').hide();
+		$('#row_snmp_port').hide();
+		$('#row_snmp_timeout').hide();
+		$('#row_snmp_retries').hide();
+		$('#row_max_oids').hide();
 		break;
-	case "v1v2":
-		document.getElementById('row_snmp_username').style.display = "none";
-		document.getElementById('row_snmp_password').style.display = "none";
-		document.getElementById('row_snmp_readstring').style.display = "";
-		document.getElementById('row_snmp_auth_protocol').style.display = "none";
-		document.getElementById('row_snmp_priv_passphrase').style.display = "none";
-		document.getElementById('row_snmp_priv_protocol').style.display = "none";
-		document.getElementById('row_snmp_context').style.display = "none";
-		document.getElementById('row_snmp_port').style.display = "";
-		document.getElementById('row_snmp_timeout').style.display = "";
-		document.getElementById('row_max_oids').style.display = "";
-
+	case '1': // SNMP v1
+	case '2': // SNMP v2c
+		$('#row_snmp_username').hide();
+		$('#row_snmp_password').hide();
+		$('#row_snmp_readstring').show();
+		$('#row_snmp_readstrings').show();
+		$('#row_snmp_auth_protocol').hide();
+		$('#row_snmp_priv_passphrase').hide();
+		$('#row_snmp_priv_protocol').hide();
+		$('#row_snmp_context').hide();
+		$('#row_snmp_port').show();
+		$('#row_snmp_timeout').show();
+		$('#row_snmp_retries').show();
+		$('#row_max_oids').show();
 		break;
-	case "v3":
-		document.getElementById('row_snmp_username').style.display = "";
-		document.getElementById('row_snmp_password').style.display = "";
-		document.getElementById('row_snmp_readstring').style.display = "none";
-		document.getElementById('row_snmp_auth_protocol').style.display = "";
-		document.getElementById('row_snmp_priv_passphrase').style.display = "";
-		document.getElementById('row_snmp_priv_protocol').style.display = "";
-		document.getElementById('row_snmp_context').style.display = "";
-		document.getElementById('row_snmp_port').style.display = "";
-		document.getElementById('row_snmp_timeout').style.display = "";
-		document.getElementById('row_max_oids').style.display = "";
-
+	case '3': // SNMP v3
+		$('#row_snmp_username').show();
+		$('#row_snmp_password').show();
+		$('#row_snmp_readstring').hide();
+		$('#row_snmp_readstrings').hide();
+		$('#row_snmp_auth_protocol').show();
+		$('#row_snmp_priv_passphrase').show();
+		$('#row_snmp_priv_protocol').show();
+		$('#row_snmp_context').show();
+		$('#row_snmp_port').show();
+		$('#row_snmp_timeout').show();
+		$('#row_snmp_retries').show();
+		$('#row_max_oids').show();
 		break;
 	}
 }
-
-function addLoadEvent(func) {
-	var oldonload = window.onload;
-	if (typeof window.onload != 'function') {
-		window.onload = func;
-	} else {
-		window.onload = function() {
-			if (oldonload) {
-				oldonload();
-			}
-			func();
-		}
-	}
-}
-
-addLoadEvent(changeSNMPVersion);
