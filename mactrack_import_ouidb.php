@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2016 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -21,51 +21,51 @@
  | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
  | Updates to the oui database can be obtained from the following web site |
- | http://standards-oui.ieee.org/oui/oui.txt                               |
+ | http://standards.ieee.org/regauth/oui/oui.txt                           |
  +-------------------------------------------------------------------------+
 */
 
 /* do NOT run this script through a web browser */
-if (!isset($_SERVER['argv'][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($_SERVER['REMOTE_ADDR'])) {
-	die('<br><strong>This script is only meant to run at the command line.</strong>');
+if (!isset($_SERVER["argv"][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($_SERVER['REMOTE_ADDR'])) {
+	die("<br><strong>This script is only meant to run at the command line.</strong>");
 }
 
 $no_http_headers = true;
-include(dirname(__FILE__) . '/../../include/global.php');
-include_once(dirname(__FILE__) . '/lib/mactrack_functions.php');
+include(dirname(__FILE__) . "/../../include/global.php");
+include_once(dirname(__FILE__) . "/lib/mactrack_functions.php");
 
 /* process calling arguments */
-$parms = $_SERVER['argv'];
+$parms = $_SERVER["argv"];
 array_shift($parms);
 
 $debug    = FALSE;
-$oui_file = '';
+$oui_file = "";
 
 /* add more memory for import */
-ini_set('memory_limit', '256M');
+ini_set("memory_limit", "256M");
 
 foreach($parms as $parameter) {
-	@list($arg, $value) = @explode('=', $parameter);
+	@list($arg, $value) = @explode("=", $parameter);
 
 	switch ($arg) {
-	case '-f':
+	case "-f":
 		$oui_file = trim($value);
 		break;
-	case '-h':
+	case "-h":
 		display_help();
 		exit;
-	case '-v':
-	case '-V':
+	case "-v":
+	case "-V":
 		display_help();
 		exit;
-	case '--version':
+	case "--version":
 		display_help();
 		exit;
-	case '--help':
+	case "--help":
 		display_help();
 		exit;
 	default:
-		print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
+		print "ERROR: Invalid Parameter " . $parameter . "\n\n";
 		display_help();
 		exit;
 	}
@@ -75,7 +75,7 @@ if (strlen($oui_file)) {
 	if (!file_exists($oui_file)) {
 		echo "ERROR: OUI Database file does not exist\n";
 	}else{
-		import_oui_database('ui', $oui_file);
+		import_oui_database("ui", $oui_file);
 	}
 }else{
 	import_oui_database();
@@ -83,8 +83,8 @@ if (strlen($oui_file)) {
 
 /*	display_help - displays the usage of the function */
 function display_help () {
-	$info = plugin_mactrack_version();
-	print "MacTrack Import OUI Database v" . $info["version"] . ", " . COPYRIGHT_YEARS . "\n\n";
+	$version = mactrack_version();
+	print "MacTrack Import OUI Database v" . $version["version"] . ", Copyright 2004-2010 - The Cacti Group\n\n";
 	print "usage: mactrack_import_ouidb.php [-f=ouifile] [-h] [--help] [-v] [-V] [--version]\n\n";
 	print "-f='outdbfile'   - Specify the location of the OUI dataabase file.  If your system\n";
 	print "                   does not allow native access to the IEEE via http, you can manually\n";
@@ -92,3 +92,5 @@ function display_help () {
 	print "-v -V --version  - Display this help message\n";
 	print "-h --help        - Display this help message\n";
 }
+
+?>

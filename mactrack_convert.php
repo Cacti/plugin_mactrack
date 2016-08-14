@@ -2,7 +2,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2016 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -24,8 +24,8 @@
 */
 
 /* do NOT run this script through a web browser */
-if (!isset($_SERVER['argv'][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($_SERVER['REMOTE_ADDR'])) {
-die('<br><strong>This script is only meant to run at the command line.</strong>');
+if (!isset($_SERVER["argv"][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($_SERVER['REMOTE_ADDR'])) {
+die("<br><strong>This script is only meant to run at the command line.</strong>");
 }
 
 /* We are not talking to the browser */
@@ -39,43 +39,43 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 }
 
 /* Start Initialization Section */
-include('./include/global.php');
+include("./include/global.php");
 
-if (read_config_option('mt_collection_timing') != 'disabled') {
+if (read_config_option("mt_collection_timing") != "disabled") {
 	global $debug;
 
 	/* initialize variables */
 	$debug    = FALSE;
-	$engine   = 'InnoDB';
+	$engine   = "MyISAM";
 	$days     = 30;
 
 	/* process calling arguments */
-	$parms = $_SERVER['argv'];
+	$parms = $_SERVER["argv"];
 	array_shift($parms);
 
 	foreach($parms as $parameter) {
-		@list($arg, $value) = @explode('=', $parameter);
+		@list($arg, $value) = @explode("=", $parameter);
 
 		switch ($arg) {
-		case '-d':
-		case '--debug':
+		case "-d":
+		case "--debug":
 			$debug = TRUE;
 			break;
-		case '--days':
+		case "--days":
 			$days = $value;
 			break;
-		case '-e':
-		case '--engine':
+		case "-e":
+		case "--engine":
 			$engine = $value;
 			break;
-		case '-h':
-		case '-v':
-		case '--version':
-		case '--help':
+		case "-h":
+		case "-v":
+		case "--version":
+		case "--help":
 			display_help();
 			exit;
 		default:
-			print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
+			print "ERROR: Invalid Parameter " . $parameter . "\n\n";
 			display_help();
 			exit;
 		}
@@ -83,7 +83,7 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 
 	$engine = strtoupper($engine);
 
-	if ($engine != 'MYISAM' && $engine != 'INNODB') {
+	if ($engine != "MYISAM" && $engine != "INNODB") {
 		print "FATAL: Only MyISAM and InnoDB Available '$engine' not recognized\n";
 		exit -1;
 	}
@@ -95,18 +95,18 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 
 	$partitioning = db_fetch_cell("SHOW GLOBAL VARIABLES LIKE 'have_partitioning'");
 
-	if ($partioning == 'YES') {
+	if ($partioning == "YES") {
 		mactrack_create_partitioned_table($engine, $days, true);
 	}else{
 		echo "FATAL: Partitioning Not Available, Exiting!\n";
 	}
 }
 
-function mactrack_create_partitioned_table($engine = 'MyISAM', $days = 30, $migrate = false) {
+function mactrack_create_partitioned_table($engine = "MyISAM", $days = 30, $migrate = false) {
 	global $config;
 
 	/* rename the original table */
-	db_execute('RENAME TABLE `mac_track_ports` TO `mac_track_ports_backup`');
+	db_execute("RENAME TABLE `mac_track_ports` TO `mac_track_ports_backup`");
 
 	$sql = "CREATE TABLE `mac_track_ports` (
 		`site_id` int(10) unsigned NOT NULL default '0',
@@ -144,12 +144,12 @@ function mactrack_create_partitioned_table($engine = 'MyISAM', $days = 30, $migr
 
 	$now = time();
 
-	$parts = '';
+	$parts = "";
 	for($i = $days; $i > 0; $i--) {
 		$timestamp = $now - ($i * 86400);
 		$date     = date('Y-m-d', $timestamp);
-		$format   = date('Ymd', $timestamp);
-		$parts .= ($parts != '' ? ",\n":'(') . ' PARTITION d' . $format . " VALUES LESS THAN (TO_DAYS('" . $date . "'))";
+		$format   = date("Ymd", $timestamp);
+		$parts .= ($parts != "" ? ",\n":"(") . " PARTITION d" . $format . " VALUES LESS THAN (TO_DAYS('" . $date . "'))";
 	}
 	$parts .= ",\nPARTITION dMaxValue VALUES LESS THAN MAXVALUE);";
 
@@ -158,31 +158,31 @@ function mactrack_create_partitioned_table($engine = 'MyISAM', $days = 30, $migr
 	if ($return_value) {
 		if ($migrate) {
 			print "NOTE: Migrating Old Data to Partitioned Tables\n";
-			$scan_dates = db_fetch_assoc('SELECT DISTINCT scan_date FROM mac_track_ports_backup');
+			$scan_dates = db_fetch_assoc("SELECT DISTINCT scan_date FROM mac_track_ports_backup");
 
 			if (sizeof($scan_dates)) {
 			foreach($scan_dates as $sd) {
-				db_execute("INSERT INTO mac_track_ports SELECT * FROM mac_track_ports_backups WHERE scan_date='" . $sd['scan_date'] . "'");
-				db_execute("DELETE FROM mac_track_ports_backup WHERE scan_date='" . $sd['scan_date'] . "'");
+				db_execute("INSERT INTO mac_track_ports SELECT * FROM mac_track_ports_backups WHERE scan_date='" . $sd["scan_date"] . "'");
+				db_execute("DELETE FROM mac_track_ports_backup WHERE scan_date='" . $sd["scan_date"] . "'");
 			}
 			}
 		}
 
-		db_execute('DROP TABLE mac_track_ports_backup');
+		db_execute("DROP TABLE mac_track_ports_backup");
 
 		db_execute("REPLACE INTO `settings` SET name='mt_data_retention', value='$days'");
 	}else{
 		print "FATAL: Conversion to Partitioned Table Failed\n";
 
 		/* rename the original table */
-		db_execute('RENAME TABLE `mac_track_ports_backup` TO `mac_track_ports`');
+		db_execute("RENAME TABLE `mac_track_ports_backup` TO `mac_track_ports`");
 	}
 }
 
 /*	display_help - displays the usage of the function */
 function display_help () {
 	$version = mactrack_version();
-	print 'MacTrack Convert Partitioned v' . $version['version'] . ", Copyright 2004-2016 - The Cacti Group\n\n";
+	print "MacTrack Convert Partitioned v" . $version["version"] . ", Copyright 2004-2010 - The Cacti Group\n\n";
 	print "usage: mactrack_convert.php [-d] [-h] [--help] [-v] [--version]\n\n";
 	print "--engine=N    - Database Engine.  Value are 'MyISAM' or 'InnoDB'\n";
 	print "--days=30     - Days to Retain.  Valid Range is 10-360\n";

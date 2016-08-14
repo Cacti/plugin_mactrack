@@ -1,56 +1,56 @@
-.int_up {
-	background-color: rgba(148, 179, 107);
-	text-align: center;
-	width: 12.5%;
-	color: #eeeeee;
+.rowAlternate2 {
+	background-color: #E7E9F2;
+	font-size: 10px;
 }
 
-.int_up_wo_alias {
-	background-color: rgba(255, 122, 48);
-	text-align: center;
-	width: 12.5%;
-	color: #eeeeee;
+.rowSelected {
+	background-color: #F5F5D2;
+	font-size: 10px;
 }
 
-.int_errors {
-	background-color: rgba(251, 74, 20);
-	text-align: center;
-	width: 12.5%;
-	color: #eeeeee;
+/* tabs */
+.tabs a.tabSelected {
+	border:0px;
+	border-bottom:0px;
+	color:#FFFFFF;
+	display:block;
+	float:left;
+	margin-right:4px;
+	font-size:13px;
+	font-weight:bold;
+	font-family:Arial,Verdana,Helvetica,sans-serif;
+	height:14px;
+	line-height:16px;
+	text-decoration: none;
+	padding:3px 15px 5px 14px;
+	background: transparent url('../images/tabSelected.png') repeat-x scroll left top;
 }
 
-.int_discards {
-	background-color: rgba(250, 253, 158);
-	text-align: center;
-	width: 12.5%;
-	color: #eeeeee;
+.tabs a.tabDefault {
+	border:0px;
+	border-bottom:0px;
+	color:#FFFFFF;
+	display:block;
+	float:left;
+	margin-right: 4px;
+	font-size:13px;
+	font-weight:bold;
+	font-family:Arial,Verdana,Helvetica,sans-serif;
+	height:14px;
+	line-height:16px;
+	text-decoration: none;
+	padding:3px 15px 5px 14px;
+	background: transparent url('../images/tabDefault.png') repeat-x scroll left top;
 }
 
-.int_no_graph {
-	background-color: rgba(205, 207, 196);
-	text-align: center;
-	width: 12.5%;
-	color: #eeeeee;
+.tabs a.tabDefault:hover {
+	background-position:0px -25px;
+	border-bottom:0px;
+	background-color:#E16769;
 }
 
-.int_no_device {
-	background-color: color: rgba(250, 253, 158);
-	text-align: center;
-	width: 12.5%;
-	color: #eeeeee;
+.tabs a.tabSelected:hover {
+	background-position:0px -25px;
+	border-bottom:0px;
+	background-color:#E16769;
 }
-
-.int_changed {
-	background-color: rgba(242, 25, 36);
-	text-align: center;
-	width: 12.5%;
-	color: #eeeeee;
-}
-
-.int_down {
-	background-color: rgba(242, 23, 33);
-	text-align: center;
-	width: 12.5%;
-	color: #eeeeee;
-}
-

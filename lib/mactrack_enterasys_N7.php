@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2016 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -414,8 +414,7 @@ function get_enterasys_N7_vlan_id($OID) {
   the IP address and MAC address combinations in the mac_track_ips table.
 */
 function get_CTAlias_table($site, &$device) {
-	global $debug, $scan_date;
-
+	global $debug, $scan_date, $cnn_id;
 	mactrack_debug("FUNCTION: get_CTAlias_table started");
 
 	/* get the CTAlias Table for the device */
@@ -470,7 +469,7 @@ function get_CTAlias_table($site, &$device) {
 				$device["site_id"] . "','" .
 				$device["device_id"] . "','" .
 				$device["hostname"] . "'," .
-				db_qstr($device["device_name"]) . ",'" .
+				$cnn_id->qstr($device["device_name"]) . ",'" .
 				$CTAliasEntry["ifIndex"] . "','" .
 				$CTAliasEntry["CTAliasMacAddress"] . "','" .
 				$CTAliasEntry["CTAliasAddressText"] . "','" .

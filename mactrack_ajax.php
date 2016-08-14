@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2016 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -23,14 +23,18 @@
 */
 
 chdir('../../');
-include('./include/auth.php');
-include_once('./plugins/mactrack/lib/mactrack_functions.php');
+include("./include/auth.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
 /* check actions */
-set_default_action();
-switch (get_request_var('action')) {
-case 'save_graph_settings':
-	mactrack_save_graph_settings();
-	break;
+if (isset($_REQUEST["action"])) {
+	switch ($_REQUEST["action"]) {
+	case "save_graph_settings":
+		mactrack_save_graph_settings();
+		break;
+	}
 }
 
+function mactrack_save_graph_settings() {
+	echo "Hello";
+}

@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2016 The Cacti Group                                 |
+ | Copyright (C) 2004-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -23,59 +23,50 @@
 */
 
 chdir('../../');
-include('./include/auth.php');
-include_once('./plugins/mactrack/lib/mactrack_functions.php');
+include("./include/auth.php");
+include_once("./plugins/mactrack/lib/mactrack_functions.php");
 
-set_default_action();
+define("MAX_DISPLAY_PAGES", 21);
 
-if (isset_request_var('export')) {
+if (isset($_REQUEST["export_x"])) {
 	mactrack_vmacs_export();
 }else{
-	top_header();
+	include_once("./include/top_header.php");
+
 	mactrack_vmacs();
-	bottom_footer();
-}
 
-function mactrack_vmacs_validate_request_vars() {
-	/* ================= input validation and session storage ================= */
-	$filters = array(
-		'rows' => array(
-			'filter' => FILTER_VALIDATE_INT,
-			'pageset' => true,
-			'default' => '-1'
-			),
-		'page' => array(
-			'filter' => FILTER_VALIDATE_INT,
-			'default' => '1'
-			),
-		'filter' => array(
-			'filter' => FILTER_CALLBACK,
-			'pageset' => true,
-			'default' => '',
-			'options' => array('options' => 'sanitize_search_string')
-			),
-		'sort_column' => array(
-			'filter' => FILTER_CALLBACK,
-			'default' => 'vendor_mac',
-			'options' => array('options' => 'sanitize_search_string')
-			),
-		'sort_direction' => array(
-			'filter' => FILTER_CALLBACK,
-			'default' => 'ASC',
-			'options' => array('options' => 'sanitize_search_string')
-			)
-	);
-
-	validate_store_request_vars($filters, 'sess_mactrack_vmacs');
-	/* ================= input validation ================= */
+	include_once("./include/bottom_footer.php");
 }
 
 function mactrack_vmacs_export() {
 	global $site_actions, $config;
 
-	mactrack_vmacs_validate_request_vars();
+	/* ================= input validation ================= */
+	input_validate_input_number(get_request_var_request("page"));
+	/* ==================================================== */
 
-	$sql_where = '';
+	/* clean up search string */
+	if (isset($_REQUEST["filter"])) {
+		$_REQUEST["filter"] = sanitize_search_string(get_request_var_request("filter"));
+	}
+
+	/* clean up sort_column */
+	if (isset($_REQUEST["sort_column"])) {
+		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var_request("sort_column"));
+	}
+
+	/* clean up search string */
+	if (isset($_REQUEST["sort_direction"])) {
+		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var_request("sort_direction"));
+	}
+
+	/* remember these search fields in session vars so we don't have to keep passing them around */
+	load_current_session_value("page", "sess_mactrack_vmacs_current_page", "1");
+	load_current_session_value("filter", "sess_mactrack_vmacs_filter", "");
+	load_current_session_value("sort_column", "sess_mactrack_vmacs_sort_column", "vendor_mac");
+	load_current_session_value("sort_direction", "sess_mactrack_vmacs_sort_direction", "ASC");
+
+	$sql_where = "";
 
 	$vmacs = mactrack_vmacs_get_vmac_records($sql_where, 0, FALSE);
 
@@ -90,30 +81,30 @@ function mactrack_vmacs_export() {
 		}
 	}
 
-	header('Content-type: application/csv');
-	header('Content-Disposition: attachment; filename=cacti_site_xport.csv');
+	header("Content-type: application/csv");
+	header("Content-Disposition: attachment; filename=cacti_site_xport.csv");
 	foreach($xport_array as $xport_line) {
 		print $xport_line . "\n";
 	}
 }
 
 function mactrack_vmacs_get_vmac_records(&$sql_where, $row_limit, $apply_limits = TRUE) {
-	$sql_where = '';
+	$sql_where = "";
 
 	/* form the 'where' clause for our main sql query */
-	if (get_request_var('filter') != '') {
-		$sql_where = "WHERE (mac_track_oui_database.vendor_name LIKE '%" . get_request_var('filter') . "%' OR " .
-			"mac_track_oui_database.vendor_mac LIKE '%" . get_request_var('filter') . "%' OR " .
-			"mac_track_oui_database.vendor_address LIKE '%" . get_request_var('filter') . "%')";
+	if (strlen($_REQUEST["filter"])) {
+		$sql_where = "WHERE (mac_track_oui_database.vendor_name LIKE '%%" . $_REQUEST["filter"] . "%%' OR " .
+			"mac_track_oui_database.vendor_mac LIKE '%%" . $_REQUEST["filter"] . "%%' OR " .
+			"mac_track_oui_database.vendor_address LIKE '%%" . $_REQUEST["filter"] . "%%')";
 	}
 
 	$query_string = "SELECT *
 		FROM mac_track_oui_database
 		$sql_where
-		ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction');
+		ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
 
 	if ($apply_limits) {
-		$query_string .= ' LIMIT ' . ($row_limit*(get_request_var('page')-1)) . ',' . $row_limit;
+		$query_string .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
 	}
 
 	return db_fetch_assoc($query_string);
@@ -122,141 +113,107 @@ function mactrack_vmacs_get_vmac_records(&$sql_where, $row_limit, $apply_limits 
 function mactrack_vmacs() {
 	global $site_actions, $config, $item_rows;
 
-	mactrack_vmacs_validate_request_vars();
+	/* ================= input validation ================= */
+	input_validate_input_number(get_request_var_request("page"));
+	input_validate_input_number(get_request_var_request("rows"));
+	/* ==================================================== */
 
-	if (get_request_var('rows') == -1) {
-		$row_limit = read_config_option('num_rows_table');
-	}elseif (get_request_var('rows') == -2) {
-		$row_limit = 999999;
-	}else{
-		$row_limit = get_request_var('rows');
+	/* clean up search string */
+	if (isset($_REQUEST["filter"])) {
+		$_REQUEST["filter"] = sanitize_search_string(get_request_var_request("filter"));
 	}
 
-	html_start_box(__('MacTrack Vendor Mac Filter'), '100%', '', '3', 'center', '');
+	/* clean up sort_column */
+	if (isset($_REQUEST["sort_column"])) {
+		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var_request("sort_column"));
+	}
+
+	/* clean up search string */
+	if (isset($_REQUEST["sort_direction"])) {
+		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var_request("sort_direction"));
+	}
+
+	/* if the user pushed the 'clear' button */
+	if (isset($_REQUEST["clear_x"])) {
+		kill_session_var("sess_mactrack_vmacs_current_page");
+		kill_session_var("sess_mactrack_vmacs_filter");
+		kill_session_var("sess_default_rows");
+		kill_session_var("sess_mactrack_vmacs_sort_column");
+		kill_session_var("sess_mactrack_vmacs_sort_direction");
+
+		$_REQUEST["page"] = 1;
+		unset($_REQUEST["filter"]);
+		unset($_REQUEST["rows"]);
+		unset($_REQUEST["sort_column"]);
+		unset($_REQUEST["sort_direction"]);
+	}else{
+		/* if any of the settings changed, reset the page number */
+		$changed = 0;
+		$changed += mactrack_check_changed("filter", "sess_mactrack_vmacs_filter");
+		$changed += mactrack_check_changed("rows", "sess_default_rows");
+
+		if ($changed) {
+			$_REQUEST["page"] = "1";
+		}
+	}
+
+	/* remember these search fields in session vars so we don't have to keep passing them around */
+	load_current_session_value("page", "sess_mactrack_vmacs_current_page", "1");
+	load_current_session_value("filter", "sess_mactrack_vmacs_filter", "");
+	load_current_session_value('rows', 'sess_default_rows', read_config_option('num_rows_table'));
+	load_current_session_value("sort_column", "sess_mactrack_vmacs_sort_column", "vendor_mac");
+	load_current_session_value("sort_direction", "sess_mactrack_vmacs_sort_direction", "ASC");
+
+	if ($_REQUEST["rows"] == -1) {
+		$row_limit = read_config_option("num_rows_table");
+	}elseif ($_REQUEST["rows"] == -2) {
+		$row_limit = 999999;
+	}else{
+		$row_limit = $_REQUEST["rows"];
+	}
+
+	html_start_box("<strong>MacTrack Vendor Mac Filter</strong>", "100%", "", "3", "center", "");
 	mactrack_vmac_filter();
 	html_end_box();
+	html_start_box("", "100%", "", "3", "center", "");
 
-	$sql_where = '';
+	$sql_where = "";
 
 	$vmacs = mactrack_vmacs_get_vmac_records($sql_where, $row_limit);
 
 	$total_rows = db_fetch_cell("SELECT
-		COUNT(*)
-		FROM mac_track_oui_database
-		$sql_where");
+			COUNT(*)
+			FROM mac_track_oui_database
+			$sql_where");
 
-	$nav = html_nav_bar('mactrack_vendormacs.php', MAX_DISPLAY_PAGES, get_request_var('page'), $row_limit, $total_rows, 9, __('Vendor Macs'));
+	$nav = html_nav_bar("mactrack_vendormacs.php", MAX_DISPLAY_PAGES, get_request_var_request("page"), $row_limit, $total_rows, 9, 'Vendor Macs');
 
 	print $nav;
 
-	html_start_box('', '100%', '', '3', 'center', '');
-
 	$display_text = array(
-		'vendor_mac'     => array(__('Vendor MAC'), 'ASC'),
-		'vendor_name'    => array(__('Corporation'), 'ASC'),
-		'vendor_address' => array(__('Address'), 'ASC'));
+		"vendor_mac" => array("Vendor MAC", "ASC"),
+		"vendor_name" => array("Name", "ASC"),
+		"vendor_address" => array("Address", "ASC"));
 
-	html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
+	html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
 
-	if (sizeof($vmacs)) {
+	if (sizeof($vmacs) > 0) {
 		foreach ($vmacs as $vmac) {
 			form_alternate_row();
 				?>
-				<td class='linkEditMain'><?php print $vmac['vendor_mac'];?></td>
-				<td><?php print (get_request_var('filter') != '' ? preg_replace('/(' . preg_quote(get_request_var('filter')) . ')/i', "<span class='filteredValue'>\\1</span>", $vmac['vendor_name']) : $vmac['vendor_name']);?></td>
-				<td><?php print (get_request_var('filter') != '' ? preg_replace('/(' . preg_quote(get_request_var('filter')) . ')/i', "<span class='filteredValue'>\\1</span>", $vmac['vendor_address']) : $vmac['vendor_address']);?></td>
+				<td class="linkEditMain"><?php print $vmac["vendor_mac"];?></td>
+				<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $vmac["vendor_name"]) : $vmac["vendor_name"]);?></td>
+				<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $vmac["vendor_address"]) : $vmac["vendor_address"]);?></td>
 			</tr>
 			<?php
 		}
-	}else{
-		print '<tr><td><em>' . __('No MacTrack Vendor MACS') . '</em></td></tr>';
-	}
 
-	html_end_box(false);
-
-	if (sizeof($vmacs)) {
+		/* put the nav bar on the bottom as well */
 		print $nav;
+	}else{
+		print "<tr><td><em>No MacTrack Vendor MACS</em></td></tr>";
 	}
+	html_end_box(false);
 }
 
-function mactrack_vmac_filter() {
-	global $item_rows;
-
-	?>
-	<tr class='even'>
-		<td>
-			<form id='mactrack'>
-			<table class='filterTable'>
-				<tr>
-					<td>
-						<?php print __('Search');?>
-					</td>
-					<td>
-						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter');?>'>
-					</td>
-					<td>
-						<?php print __('MAC\'s');?>
-					</td>
-					<td>
-						<select id='rows' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default');?></option>
-							<?php
-							if (sizeof($item_rows) > 0) {
-							foreach ($item_rows as $key => $value) {
-								print "<option value='" . $key . "'"; if (get_request_var('rows') == $key) { print ' selected'; } print '>' . $value . '</option>';
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						<input type='submit' id='go' value='<?php print __('Go');?>'>
-					</td>
-					<td>
-						<input type='button' id='clear' value='<?php print __('Clear');?>'>
-					</td>
-					<td>
-						<input type='button' id='export' value='<?php print __('Export');?>'>
-					</td>
-				</tr>
-			</table>
-			</form>
-			<script type='text/javascript'>
-
-			function applyFilter() {
-				strURL  = urlPath+'plugins/mactrack/mactrack_vendormacs.php?header=false';
-				strURL += '&filter=' + $('#filter').val();
-				strURL += '&rows=' + $('#rows').val();
-				loadPageNoHeader(strURL);
-			}
-
-			function clearFilter() {
-				strURL  = urlPath+'plugins/mactrack/mactrack_vendormacs.php?header=false&clear=true';
-				loadPageNoHeader(strURL);
-			}
-
-			function exportRows() {
-				strURL  = urlPath+'plugins/mactrack/mactrack_vendormacs.php?export=true';
-				document.location = strURL;
-			}
-
-			$(function() {
-				$('#mactrack').submit(function(event) {
-					event.preventDefault();
-					applyFilter();
-				});
-
-				$('#clear').click(function() {
-					clearFilter();
-				});
-
-				$('#export').click(function() {
-					exportRows();
-				});
-			});
-
-			</script>
-		</td>
-	</tr>
-	<?php
-}
+?>
