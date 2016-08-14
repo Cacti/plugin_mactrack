@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2014 The Cacti Group                                 |
+ | Copyright (C) 2004-2016 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -23,24 +23,19 @@
 */
 
 chdir('../../');
-include("./include/auth.php");
-include_once("./lib/snmp.php");
-include_once("./plugins/mactrack/lib/mactrack_functions.php");
-include_once("./plugins/mactrack/mactrack_actions.php");
-
-define("MAX_DISPLAY_PAGES", 21);
+include('./include/auth.php');
+include_once('./lib/snmp.php');
+include_once('./plugins/mactrack/lib/mactrack_functions.php');
+include_once('./plugins/mactrack/mactrack_actions.php');
 
 $site_actions = array(
-	1 => "Delete"
-	);
+	1 => __('Delete')
+);
 
 /* set default action */
-if (!isset($_REQUEST["action"])) { $_REQUEST["action"] = ""; }
+set_default_action();
 
-/* correct for a cancel button */
-if (isset($_REQUEST["cancel_x"])) { $_REQUEST["action"] = ""; }
-
-switch ($_REQUEST["action"]) {
+switch (get_request_var('action')) {
 	case 'save':
 		form_save();
 
@@ -50,21 +45,17 @@ switch ($_REQUEST["action"]) {
 
 		break;
 	case 'edit':
-		include_once("./include/top_header.php");
-
+		top_header();
 		mactrack_site_edit();
-
-		include_once("./include/bottom_footer.php");
+		bottom_footer();
 		break;
 	default:
-		if (isset($_REQUEST["export_x"])) {
+		if (isset_request_var('export')) {
 			mactrack_site_export();
 		}else{
-			include_once("./include/top_header.php");
-
+			top_header();
 			mactrack_site();
-
-			include_once("./include/bottom_footer.php");
+			bottom_footer();
 		}
 		break;
 }
@@ -74,143 +65,158 @@ switch ($_REQUEST["action"]) {
    -------------------------- */
 
 function form_save() {
-	if ((isset($_POST["save_component_site"])) && (empty($_POST["add_dq_y"]))) {
-		$site_id = api_mactrack_site_save($_POST["site_id"], $_POST["site_name"], $_POST["customer_contact"],
-		$_POST["netops_contact"], $_POST["facilities_contact"], $_POST["site_info"]);
+	if ((isset_request_var('save_component_site')) && (isempty_request_var('add_dq_y'))) {
+		$site_id = api_mactrack_site_save(get_filter_request_var('site_id'), get_nfilter_request_var('site_name'), 
+			get_nfilter_request_var('customer_contact'), get_nfilter_request_var('netops_contact'), 
+			get_nfilter_request_var('facilities_contact'), get_nfilter_request_var('site_info'));
 
-		header("Location: mactrack_sites.php?action=edit&site_id=" . (empty($site_id) ? $_POST["site_id"] : $site_id));
+		header('Location: mactrack_sites.php?action=edit&site_id=' . (empty($site_id) ? get_filter_request_var('site_id') : $site_id));
 	}
 }
 
 /* ------------------------
-    The "actions" function
+    The 'actions' function
    ------------------------ */
 
 function form_actions() {
 	global $config, $site_actions, $fields_mactrack_site_edit;
 
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_post('drp_action'));
+	get_filter_request_var('drp_action');
 	/* ==================================================== */
 
 	/* if we are to save this form, instead of display it */
-	if (isset($_POST["selected_items"])) {
-		$selected_items = unserialize(stripslashes($_POST["selected_items"]));
+	if (isset_request_var('selected_items')) {
+		$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
 
-		if ($_POST["drp_action"] == "1") { /* delete */
-			for ($i=0; $i<count($selected_items); $i++) {
-				/* ================= input validation ================= */
-				input_validate_input_number($selected_items[$i]);
-				/* ==================================================== */
-
-				api_mactrack_site_remove($selected_items[$i]);
+		if ($selected_items != false) {
+			if (get_request_var('drp_action') == '1') { /* delete */
+				for ($i=0; $i<count($selected_items); $i++) {
+					api_mactrack_site_remove($selected_items[$i]);
+				}
 			}
-		}
 
-		header("Location: mactrack_sites.php");
-		exit;
+			header('Location: mactrack_sites.php');
+			exit;
+		}
 	}
 
 	/* setup some variables */
-	$site_list = ""; $i = 0;
+	$site_list = ''; $i = 0;
 
 	/* loop through each of the host templates selected on the previous page and get more info about them */
 	while (list($var,$val) = each($_POST)) {
-		if (ereg("^chk_([0-9]+)$", $var, $matches)) {
+		if (ereg('^chk_([0-9]+)$', $var, $matches)) {
 			/* ================= input validation ================= */
 			input_validate_input_number($matches[1]);
 			/* ==================================================== */
 
-			$site_info = db_fetch_cell("SELECT site_name FROM mac_track_sites WHERE site_id=" . $matches[1]);
-			$site_list .= "<li>" . $site_info . "<br>";
+			$site_info = db_fetch_cell('SELECT site_name FROM mac_track_sites WHERE site_id=' . $matches[1]);
+			$site_list .= '<li>' . $site_info . '</li>';
 			$site_array[$i] = $matches[1];
 		}
 
 		$i++;
 	}
 
-	include_once("./include/top_header.php");
+	top_header();
 
-	html_start_box("<strong>" . $site_actions{$_POST["drp_action"]} . "</strong>", "60%", "", "3", "center", "");
+	html_start_box($site_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
 
-	print "<form action='mactrack_sites.php' method='post'>\n";
+	form_start('mactrack_sites.php');
 
-	if ($_POST["drp_action"] == "1") { /* delete */
-		print "	<tr>
-				<td class='textArea'>
-					<p>Are you sure you want to delete the following site(s)?</p>
-					<p><ul>$site_list</ul></p>";
-					print "</td></tr>
-				</td>
-			</tr>\n
-			";
+	if (get_request_var('drp_action') == '1') { /* delete */
+		print "<tr>
+			<td class='textArea'>
+				<p>" . __('Are you sure you want to delete the following site(s)?') . "</p>
+				<p><ul>$site_list</ul></p>
+			</td>
+		</tr>\n";
 	}
 
 	if (!isset($site_array)) {
-		print "<tr><td class='even'><span class='textError'>You must select at least one site.</span></td></tr>\n";
-		$save_html = "";
+		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one site.') . "</span></td></tr>\n";
+		$save_html = '';
 	}else{
 		$save_html = "<input type='submit' name='save_x' value='Yes'>";
 	}
 
-	print "	<tr>
-			<td colspan='2' align='right' class='saveRow'>
-				<input type='hidden' name='action' value='actions'>
-				<input type='hidden' name='selected_items' value='" . (isset($site_array) ? serialize($site_array) : '') . "'>
-				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>" . (strlen($save_html) ? "
-				<input type='submit' name='cancel_x' value='No'>
-				$save_html" : "<input type='submit' name='cancel_x' value='Return'>") . "
-			</td>
-		</tr>
-		";
+	print "<tr>
+		<td colspan='2' class='saveRow'>
+			<input type='hidden' name='action' value='actions'>
+			<input type='hidden' name='selected_items' value='" . (isset($site_array) ? serialize($site_array) : '') . "'>
+			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . (strlen($save_html) ? "
+			<input type='submit' name='cancel_x' value='No'>
+			$save_html" : "<input type='submit' name='cancel_x' value='" . __('Return') . "'>") . "
+		</td>
+	</tr>";
 
 	html_end_box();
 
-	include_once("./include/bottom_footer.php");
+	bottom_footer();
+}
+
+function mactrack_site_validate_req_vars() {
+	/* ================= input validation and session storage ================= */
+	$filters = array(
+		'rows' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'pageset' => true,
+			'default' => '-1'
+			),
+		'page' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '1'
+			),
+		'site_id' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '-1',
+			'pageset' => true,
+			),
+		'device_type_id' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '-1',
+			'pageset' => true,
+			),
+		'filter' => array(
+			'filter' => FILTER_CALLBACK,
+			'pageset' => true,
+			'default' => '',
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'sort_column' => array(
+			'filter' => FILTER_CALLBACK,
+			'default' => 'site_name',
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'sort_direction' => array(
+			'filter' => FILTER_CALLBACK,
+			'default' => 'ASC',
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'detail' => array(
+			'filter' => FILTER_VALIDATE_REGEXP,
+			'options' => array('options' => array('regexp' => '(true|false)')),
+			'pageset' => true,
+			'default' => 'false'
+			)
+	);
+
+	validate_store_request_vars($filters, 'sess_mactrack_sites');
+	/* ================= input validation ================= */
+
 }
 
 function mactrack_site_export() {
 	global $site_actions, $config;
 
-	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_request("site_id"));
-	input_validate_input_number(get_request_var_request("page"));
-	/* ==================================================== */
+	mactrack_site_validate_req_vars();
 
-	/* clean up search string */
-	if (isset($_REQUEST["detail"])) {
-		$_REQUEST["detail"] = sanitize_search_string(get_request_var_request("detail"));
-	}
-
-	/* clean up search string */
-	if (isset($_REQUEST["filter"])) {
-		$_REQUEST["filter"] = sanitize_search_string(get_request_var_request("filter"));
-	}
-
-	/* clean up sort_column */
-	if (isset($_REQUEST["sort_column"])) {
-		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var_request("sort_column"));
-	}
-
-	/* clean up search string */
-	if (isset($_REQUEST["sort_direction"])) {
-		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var_request("sort_direction"));
-	}
-
-	/* remember these search fields in session vars so we don't have to keep passing them around */
-	load_current_session_value("page", "sess_mactrack_sites_current_page", "1");
-	load_current_session_value("detail", "sess_mactrack_sites_detail", "false");
-	load_current_session_value("device_type_id", "sess_mactrack_sites_device_type_id", "-1");
-	load_current_session_value("site_id", "sess_mactrack_sites_site_id", "-1");
-	load_current_session_value("filter", "sess_mactrack_sites_filter", "");
-	load_current_session_value("sort_column", "sess_mactrack_sites_sort_column", "site_name");
-	load_current_session_value("sort_direction", "sess_mactrack_sites_sort_direction", "ASC");
-
-	$sql_where = "";
+	$sql_where = '';
 
 	$sites = mactrack_site_get_site_records($sql_where, 0, FALSE);
 
-	if ($_REQUEST["detail"] == "false") {
+	if (get_request_var('detail') == 'false') {
 		$xport_array = array();
 		array_push($xport_array, '"site_name","total_devices","total_device_errors",' .
 			'"total_macs","total_ips","total_oper_ports",' .
@@ -248,8 +254,8 @@ function mactrack_site_export() {
 		}
 	}
 
-	header("Content-type: application/csv");
-	header("Content-Disposition: attachment; filename=cacti_site_xport.csv");
+	header('Content-type: application/csv');
+	header('Content-Disposition: attachment; filename=cacti_site_xport.csv');
 	foreach($xport_array as $xport_line) {
 		print $xport_line . "\n";
 	}
@@ -263,55 +269,55 @@ function mactrack_site_remove() {
 	global $config;
 
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_request("site_id"));
+	get_filter_request_var('site_id');
 	/* ==================================================== */
 
-	if ((read_config_option("remove_verification") == "on") && (!isset($_REQUEST["confirm"]))) {
-		include("./include/top_header.php");
-		form_confirm("Are You Sure?", "Are you sure you want to delete the site <strong>'" . db_fetch_cell("select description from host where id=" . $_REQUEST["device_id"]) . "'</strong>?", "mactrack_sites.php", "mactrack_sites.php?action=remove&site_id=" . $_REQUEST["site_id"]);
-		include("./include/bottom_footer.php");
+	if ((read_config_option('remove_verification') == 'on') && (!isset_request_var('confirm'))) {
+		top_header();
+		form_confirm(__('Are You Sure?'), __("Are you sure you want to delete the site <strong>'%s'</strong>?", db_fetch_cell('SELECT description FROM host WHERE id=' . get_request_var('device_id'))), 'mactrack_sites.php', 'mactrack_sites.php?action=remove&site_id=' . get_request_var('site_id'));
+		bottom_footer();
 		exit;
 	}
 
-	if ((read_config_option("remove_verification") == "") || (isset($_REQUEST["confirm"]))) {
-		api_mactrack_site_remove($_REQUEST["site_id"]);
+	if ((read_config_option('remove_verification') == '') || (isset_request_var('confirm'))) {
+		api_mactrack_site_remove(get_request_var('site_id'));
 	}
 }
 
 function mactrack_site_get_site_records(&$sql_where, $row_limit, $apply_limits = TRUE) {
 	/* create SQL where clause */
-	$device_type_info = db_fetch_row("SELECT * FROM mac_track_device_types WHERE device_type_id = '" . $_REQUEST["device_type_id"] . "'");
+	$device_type_info = db_fetch_row_prepared('SELECT * FROM mac_track_device_types WHERE device_type_id = ?', array(get_request_var('device_type_id')));
 
-	$sql_where = "";
+	$sql_where = '';
 
 	/* form the 'where' clause for our main sql query */
-	if (strlen($_REQUEST["filter"])) {
-		if ($_REQUEST["detail"] == "false") {
-			$sql_where = "WHERE (mac_track_sites.site_name LIKE '%%" . $_REQUEST["filter"] . "%%')";
+	if (get_request_var('filter') != '') {
+		if (get_request_var('detail') == 'false') {
+			$sql_where = "WHERE (mac_track_sites.site_name LIKE '%" . get_request_var('filter') . "%')";
 		}else{
-			$sql_where = "WHERE (mac_track_device_types.vendor LIKE '%%" . $_REQUEST["filter"] . "%%' OR " .
-				"mac_track_device_types.description LIKE '%%" . $_REQUEST["filter"] . "%%' OR " .
-				"mac_track_sites.site_name LIKE '%%" . $_REQUEST["filter"] . "%%')";
+			$sql_where = "WHERE (mac_track_device_types.vendor LIKE '%" . get_request_var('filter') . "%' OR " .
+				"mac_track_device_types.description LIKE '%" . get_request_var('filter') . "%' OR " .
+				"mac_track_sites.site_name LIKE '%" . get_request_var('filter') . "%')";
 		}
 	}
 
 	if (sizeof($device_type_info)) {
 		if (!strlen($sql_where)) {
-			$sql_where = "WHERE (mac_track_devices.device_type_id=" . $device_type_info["device_type_id"] . ")";
+			$sql_where = 'WHERE (mac_track_devices.device_type_id=' . $device_type_info['device_type_id'] . ')';
 		}else{
-			$sql_where .= " AND (mac_track_devices.device_type_id=" . $device_type_info["device_type_id"] . ")";
+			$sql_where .= ' AND (mac_track_devices.device_type_id=' . $device_type_info['device_type_id'] . ')';
 		}
 	}
 
-	if (($_REQUEST["site_id"] != "-1") && ($_REQUEST["detail"])){
+	if ((get_request_var('site_id') != '-1') && (get_request_var('detail'))) {
 		if (!strlen($sql_where)) {
-			$sql_where = "WHERE (mac_track_devices.site_id='" . $_REQUEST["site_id"] . "')";
+			$sql_where = 'WHERE (mac_track_devices.site_id=' . get_request_var('site_id') . ')';
 		}else{
-			$sql_where .= " AND (mac_track_devices.site_id='" . $_REQUEST["site_id"] . "')";
+			$sql_where .= ' AND (mac_track_devices.site_id=' . get_request_var('site_id') . ')';
 		}
 	}
 
-	if ($_REQUEST["detail"] == "false") {
+	if (get_request_var('detail') == 'false') {
 		$query_string = "SELECT
 			mac_track_sites.site_id,
 			mac_track_sites.site_name,
@@ -323,10 +329,10 @@ function mactrack_site_get_site_records(&$sql_where, $row_limit, $apply_limits =
 			mac_track_sites.total_user_ports
 			FROM mac_track_sites
 			$sql_where
-			ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
+			ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction');
 
 		if ($apply_limits) {
-			$query_string .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
+			$query_string .= ' LIMIT ' . ($row_limit*(get_request_var('page')-1)) . ',' . $row_limit;
 		}
 	}else{
 		$query_string ="SELECT
@@ -346,10 +352,10 @@ function mactrack_site_get_site_records(&$sql_where, $row_limit, $apply_limits =
 			$sql_where
 			GROUP BY mac_track_sites.site_name, mac_track_device_types.vendor, mac_track_device_types.description
 			HAVING (((Count(mac_track_device_types.device_type_id))>0))
-			ORDER BY " . $_REQUEST["sort_column"] . " " . $_REQUEST["sort_direction"];
+			ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction');
 
 		if ($apply_limits) {
-			$query_string .= " LIMIT " . ($row_limit*($_REQUEST["page"]-1)) . "," . $row_limit;
+			$query_string .= ' LIMIT ' . ($row_limit*(get_request_var('page')-1)) . ',' . $row_limit;
 		}
 	}
 
@@ -360,127 +366,58 @@ function mactrack_site_edit() {
 	global $fields_mactrack_site_edit;
 
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_request("site_id"));
+	get_filter_request_var('site_id');
 	/* ==================================================== */
 
 	display_output_messages();
 
-	if (!empty($_REQUEST["site_id"])) {
-		$site = db_fetch_row("select * from mac_track_sites where site_id=" . $_REQUEST["site_id"]);
-		$header_label = "[edit: " . $site["site_name"] . "]";
+	if (!isempty_request_var('site_id')) {
+		$site = db_fetch_row('SELECT * FROM mac_track_sites WHERE site_id=' . get_request_var('site_id'));
+		$header_label = __('MacTrack Site [edit: %s]', $site['site_name']);
 	}else{
-		$header_label = "[new]";
+		$header_label = __('MacTrack Site [new]');
 	}
 
-	html_start_box("<strong>MacTrack Site</strong> $header_label", "100%", "", "3", "center", "");
+	form_start('mactrack_sites.php');
 
-	draw_edit_form(array(
-		"config" => array("form_name" => "chk"),
-		"fields" => inject_form_variables($fields_mactrack_site_edit, (isset($site) ? $site : array()))
-		));
+	html_start_box($header_label, '100%', '', '3', 'center', '');
+
+	draw_edit_form(
+		array(
+			'config' => array('no_form_tag' => true),
+			'fields' => inject_form_variables($fields_mactrack_site_edit, (isset($site) ? $site : array()))
+		)
+	);
 
 	html_end_box();
 
-	if (isset($site)) {
-		mactrack_save_button("mactrack_sites.php", "save", "", "site_id");
-	}else{
-		mactrack_save_button("cancel", "save", "", "site_id");
-	}
+	form_save_button('mactrack_sites.php', 'return', 'site_id');
 }
 
 function mactrack_site() {
 	global $site_actions, $config, $item_rows;
 
-	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_request("site_id"));
-	input_validate_input_number(get_request_var_request("page"));
-	input_validate_input_number(get_request_var_request("rows"));
-	/* ==================================================== */
+	mactrack_site_validate_req_vars();
 
-	/* clean up search string */
-	if (isset($_REQUEST["detail"])) {
-		$_REQUEST["detail"] = sanitize_search_string(get_request_var_request("detail"));
-	}
-
-	/* clean up search string */
-	if (isset($_REQUEST["filter"])) {
-		$_REQUEST["filter"] = sanitize_search_string(get_request_var_request("filter"));
-	}
-
-	/* clean up sort_column */
-	if (isset($_REQUEST["sort_column"])) {
-		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var_request("sort_column"));
-	}
-
-	/* clean up search string */
-	if (isset($_REQUEST["sort_direction"])) {
-		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var_request("sort_direction"));
-	}
-
-	/* if the user pushed the 'clear' button */
-	if (isset($_REQUEST["clear_x"])) {
-		kill_session_var("sess_mactrack_sites_current_page");
-		kill_session_var("sess_mactrack_sites_detail");
-		kill_session_var("sess_mactrack_sites_device_type_id");
-		kill_session_var("sess_mactrack_sites_site_id");
-		kill_session_var("sess_default_rows");
-		kill_session_var("sess_mactrack_sites_filter");
-		kill_session_var("sess_mactrack_sites_sort_column");
-		kill_session_var("sess_mactrack_sites_sort_direction");
-
-		$_REQUEST["page"] = 1;
-		unset($_REQUEST["filter"]);
-		unset($_REQUEST["device_type_id"]);
-		unset($_REQUEST["site_id"]);
-		unset($_REQUEST["rows"]);
-		unset($_REQUEST["detail"]);
-		unset($_REQUEST["sort_column"]);
-		unset($_REQUEST["sort_direction"]);
-	}else{
-		/* if any of the settings changed, reset the page number */
-		$changed = 0;
-		$changed += mactrack_check_changed("device_type_id", "sess_mactrack_sites_device_type_id");
-		$changed += mactrack_check_changed("site_id", "sess_mactrack_sites_site_id");
-		$changed += mactrack_check_changed("rows", "sess_default_rows");
-		$changed += mactrack_check_changed("filter", "sess_mactrack_sites_filter");
-		$changed += mactrack_check_changed("detail", "sess_mactrack_sites_detail");
-
-		if ($changed) {
-			$_REQUEST["page"] = "1";
-		}
-	}
-
-	/* remember these search fields in session vars so we don't have to keep passing them around */
-	load_current_session_value("page", "sess_mactrack_sites_current_page", "1");
-	load_current_session_value("detail", "sess_mactrack_sites_detail", "false");
-	load_current_session_value("device_type_id", "sess_mactrack_sites_device_type_id", "-1");
-	load_current_session_value("site_id", "sess_mactrack_sites_site_id", "-1");
-	load_current_session_value('rows', 'sess_default_rows', read_config_option('num_rows_table'));
-	load_current_session_value("filter", "sess_mactrack_sites_filter", "");
-	load_current_session_value("sort_column", "sess_mactrack_sites_sort_column", "site_name");
-	load_current_session_value("sort_direction", "sess_mactrack_sites_sort_direction", "ASC");
-
-	if ($_REQUEST["rows"] == -1) {
-		$row_limit = read_config_option("num_rows_table");
-	}elseif ($_REQUEST["rows"] == -2) {
+	if (get_request_var('rows') == -1) {
+		$row_limit = read_config_option('num_rows_table');
+	}elseif (get_request_var('rows') == -2) {
 		$row_limit = 999999;
 	}else{
-		$row_limit = $_REQUEST["rows"];
+		$row_limit = get_request_var('rows');
 	}
 
-	html_start_box("<strong>MacTrack Site Filters</strong>", "100%", "", "3", "center", "mactrack_sites.php?action=edit");
+	html_start_box(__('MacTrack Site Filters'), '100%', '', '3', 'center', 'mactrack_sites.php?action=edit');
 
 	mactrack_site_filter();
 
 	html_end_box();
 
-	html_start_box("", "100%", "", "3", "center", "");
-
-	$sql_where = "";
+	$sql_where = '';
 
 	$sites = mactrack_site_get_site_records($sql_where, $row_limit);
 
-	if ($_REQUEST["detail"] == "false") {
+	if (get_request_var('detail') == 'false') {
 		$total_rows = db_fetch_cell("SELECT
 			COUNT(mac_track_sites.site_id)
 			FROM mac_track_sites
@@ -494,92 +431,100 @@ function mactrack_site() {
 			GROUP BY mac_track_sites.site_name, mac_track_device_types.device_type_id");
 	}
 
-	if ($_REQUEST["detail"] == "false") {
-		$nav = html_nav_bar("mactrack_sites.php?filter=" . $_REQUEST["filter"], MAX_DISPLAY_PAGES, get_request_var_request("page"), $row_limit, $total_rows, 9, 'Sites');
+	if (get_request_var('detail') == 'false') {
+		$nav = html_nav_bar('mactrack_sites.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_filter_request_var('page'), $row_limit, $total_rows, 9, __('Sites'));
 
 		print $nav;
 
-		$display_text = array(
-			"site_name" => array("Site Name", "ASC"),
-			"total_devices" => array("Devices", "DESC"),
-			"total_ips" => array("Total IP's", "DESC"),
-			"total_user_ports" => array("User Ports", "DESC"),
-			"total_oper_ports" => array("User Ports Up", "DESC"),
-			"total_macs" => array("MACS Found", "DESC"),
-			"total_device_errors" => array("Device Errors", "DESC"));
+		html_start_box('', '100%', '', '3', 'center', '');
 
-		html_header_sort_checkbox($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
+		$display_text = array(
+			'site_name'           => array(__('Site Name'), 'ASC'),
+			'total_devices'       => array(__('Devices'), 'DESC'),
+			'total_ips'           => array(__('Total IP\'s'), 'DESC'),
+			'total_user_ports'    => array(__('User Ports'), 'DESC'),
+			'total_oper_ports'    => array(__('User Ports Up'), 'DESC'),
+			'total_macs'          => array(__('MACS Found'), 'DESC'),
+			'total_device_errors' => array(__('Device Errors'), 'DESC')
+		);
+
+		html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
 		$i = 0;
-		if (sizeof($sites) > 0) {
+		if (sizeof($sites)) {
 			foreach ($sites as $site) {
 				form_alternate_row('line' . $site['site_id'], true);
-				form_selectable_cell("<a class='linkEditMain' href='mactrack_sites.php?action=edit&site_id=" . $site["site_id"] . "'>". (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $site["site_name"]) : $site["site_name"]) . "</a>", $site["site_id"]);
-				form_selectable_cell(number_format($site["total_devices"]), $site["site_id"]);
-				form_selectable_cell(number_format($site["total_ips"]), $site["site_id"]);
-				form_selectable_cell(number_format($site["total_user_ports"]), $site["site_id"]);
-				form_selectable_cell(number_format($site["total_oper_ports"]), $site["site_id"]);
-				form_selectable_cell(number_format($site["total_macs"]), $site["site_id"]);
-				form_selectable_cell($site["total_device_errors"], $site["site_id"]);
-				form_checkbox_cell($site["site_name"], $site["site_id"]);
+				form_selectable_cell("<a class='linkEditMain' href='mactrack_sites.php?action=edit&site_id=" . $site['site_id'] . "'>". (get_request_var('filter') != '' ? preg_replace('/(' . preg_quote(get_request_var('filter')) . ')/i', "<span class='filteredValue'>\\1</span>", $site['site_name']) : $site['site_name']) . '</a>', $site['site_id']);
+				form_selectable_cell(number_format_i18n($site['total_devices']), $site['site_id']);
+				form_selectable_cell(number_format_i18n($site['total_ips']), $site['site_id']);
+				form_selectable_cell(number_format_i18n($site['total_user_ports']), $site['site_id']);
+				form_selectable_cell(number_format_i18n($site['total_oper_ports']), $site['site_id']);
+				form_selectable_cell(number_format_i18n($site['total_macs']), $site['site_id']);
+				form_selectable_cell($site['total_device_errors'], $site['site_id']);
+				form_checkbox_cell($site['site_name'], $site['site_id']);
 				form_end_row();
 			}
-
-			/* put the nav bar on the bottom as well */
-			print $nav;
 		}else{
-			print "<tr><td><em>No MacTrack Sites</em></td></tr>";
+			print '<tr><td><em>' . __('No MacTrack Sites') . '</em></td></tr>';
 		}
+
 		html_end_box(false);
+
+		if (sizeof($sites)) {
+			print $nav;
+		}
 	}else{
-		$nav = html_nav_bar("mactrack_sites.php?filter=" . $_REQUEST["filter"], MAX_DISPLAY_PAGES, get_request_var_request("page"), $row_limit, $total_rows, 10, 'Sites');
+		$nav = html_nav_bar('mactrack_sites.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_filter_request_var('page'), $row_limit, $total_rows, 10, __('Sites'));
 
 		print $nav;
 
+		html_start_box('', '100%', '', '3', 'center', '');
+
 		$display_text = array(
-			"site_name" => array("Site Name", "ASC"),
-			"vendor" => array("Vendor", "ASC"),
-			"description" => array("Device Type", "DESC"),
-			"total_devices" => array("Total Devices", "DESC"),
-			"sum_ips_total" => array("Total IP's", "DESC"),
-			"sum_ports_total" => array("Total User Ports", "DESC"),
-			"sum_ports_active" => array("Total Oper Ports", "DESC"),
-			"sum_ports_trunk" => array("Total Trunks", "DESC"),
-			"sum_macs_active" => array("MACS Found", "DESC"));
+			'site_name'        => array(__('Site Name'), 'ASC'),
+			'vendor'           => array(__('Vendor'), 'ASC'),
+			'description'      => array(__('Device Type'), 'DESC'),
+			'total_devices'    => array(__('Total Devices'), 'DESC'),
+			'sum_ips_total'    => array(__('Total IP\'s'), 'DESC'),
+			'sum_ports_total'  => array(__('Total User Ports'), 'DESC'),
+			'sum_ports_active' => array(__('Total Oper Ports'), 'DESC'),
+			'sum_ports_trunk'  => array(__('Total Trunks'), 'DESC'),
+			'sum_macs_active'  => array(__('MACS Found'), 'DESC'));
 
-		html_header_sort($display_text, $_REQUEST["sort_column"], $_REQUEST["sort_direction"]);
+		html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
-		if (sizeof($sites) > 0) {
+		if (sizeof($sites)) {
 			foreach ($sites as $site) {
 				form_alternate_row();
 					?>
 					<td width=200>
-						<a class='linkEditMain' href='mactrack_sites.php?action=edit&site_id=<?php print $site["site_id"];?>'><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $site["site_name"]) : $site["site_name"]);?></a>
+						<a class='linkEditMain' href='mactrack_sites.php?action=edit&site_id=<?php print $site['site_id'];?>'><?php print (get_request_var('filter') != '' ? preg_replace('/(' . preg_quote(get_request_var('filter')) . ')/i', "<span class='filteredValue'>\\1</span>", $site['site_name']) : $site['site_name']);?></a>
 					</td>
-					<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $site["vendor"]) : $site["vendor"]);?></td>
-					<td><?php print (strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span class='filteredValue'>\\1</span>", $site["description"]) : $site["description"]);?></td>
-					<td><?php print number_format($site["total_devices"]);?></td>
-					<td><?php print number_format($site["sum_ips_total"]);?></td>
-					<td><?php print number_format($site["sum_ports_total"]);?></td>
-					<td><?php print number_format($site["sum_ports_active"]);?></td>
-					<td><?php print number_format($site["sum_ports_trunk"]);?></td>
-					<td><?php print number_format($site["sum_macs_active"]);?></td>
+					<td><?php print (get_request_var('filter') != '' ? preg_replace('/(' . preg_quote(get_request_var('filter')) . ')/i', "<span class='filteredValue'>\\1</span>", $site['vendor']) : $site['vendor']);?></td>
+					<td><?php print (get_request_var('filter') != '' ? preg_replace('/(' . preg_quote(get_request_var('filter')) . ')/i', "<span class='filteredValue'>\\1</span>", $site['description']) : $site['description']);?></td>
+					<td><?php print number_format_i18n($site['total_devices']);?></td>
+					<td><?php print number_format_i18n($site['sum_ips_total']);?></td>
+					<td><?php print number_format_i18n($site['sum_ports_total']);?></td>
+					<td><?php print number_format_i18n($site['sum_ports_active']);?></td>
+					<td><?php print number_format_i18n($site['sum_ports_trunk']);?></td>
+					<td><?php print number_format_i18n($site['sum_macs_active']);?></td>
 				</tr>
 				<?php
 			}
-
-			/* put the nav bar on the bottom as well */
-			print $nav;
 		}else{
-			print "<tr><td><em>No MacTrack Sites</em></td></tr>";
+			print '<tr><td><em>' . __('No MacTrack Sites') . '</em></td></tr>';
 		}
+
 		html_end_box(false);
+
+		if (sizeof($sites)) {
+			print $nav;
+		}
 	}
 
 	/* draw the dropdown containing a list of available actions for this form */
-	if ($_REQUEST["detail"] == "false") {
-		mactrack_draw_actions_dropdown($site_actions);
+	if (get_request_var('detail') == 'false') {
+		draw_actions_dropdown($site_actions);
 	}
 }
 
-?>

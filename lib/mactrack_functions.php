@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2014 The Cacti Group                                 |
+ | Copyright (C) 2004-2016 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -25,24 +25,24 @@
 /* register these scanning functions */
 global $mactrack_scanning_functions;
 if (!isset($mactrack_scanning_functions)) { $mactrack_scanning_functions = array(); }
-array_push($mactrack_scanning_functions, "get_generic_dot1q_switch_ports", "get_generic_switch_ports", "get_generic_wireless_ports");
+array_push($mactrack_scanning_functions, 'get_generic_dot1q_switch_ports', 'get_generic_switch_ports', 'get_generic_wireless_ports');
 
 global $mactrack_scanning_functions_ip;
 if (!isset($mactrack_scanning_functions_ip)) { $mactrack_scanning_functions_ip = array(); }
-array_push($mactrack_scanning_functions_ip, "get_standard_arp_table", "get_netscreen_arp_table");
+array_push($mactrack_scanning_functions_ip, 'get_standard_arp_table', 'get_netscreen_arp_table');
 
 function mactrack_debug($message) {
 	global $debug, $web, $config;
-	include_once($config["base_path"] . "/lib/functions.php");
+	include_once($config['base_path'] . '/lib/functions.php');
 
-	if (isset($web) && $web && !substr_count($message, "SQL")) {
-		print("<p>" . $message . "</p>");
+	if (isset($web) && $web && !substr_count($message, 'SQL')) {
+		print('<p>' . $message . '</p>');
 	}elseif ($debug) {
-		print("DEBUG: " . $message . "\n");
+		print('DEBUG: ' . $message . "\n");
 	}
 
-	if (substr_count($message, "ERROR:")) {
-		cacti_log($message, false, "MACTRACK");
+	if (substr_count($message, 'ERROR:')) {
+		cacti_log($message, false, 'MACTRACK');
 	}
 }
 
@@ -50,13 +50,13 @@ function mactrack_rebuild_scanning_funcs() {
 	global $config, $mactrack_scanning_functions_ip, $mactrack_scanning_functions;
 
 	if (defined('CACTI_BASE_PATH')) {
-		$config["base_path"] = CACTI_BASE_PATH;
+		$config['base_path'] = CACTI_BASE_PATH;
 	}
 
-	db_execute("TRUNCATE TABLE mac_track_scanning_functions");
+	db_execute('TRUNCATE TABLE mac_track_scanning_functions');
 
-	include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_functions.php");
-	include_once($config["base_path"] . "/plugins/mactrack/lib/mactrack_vendors.php");
+	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_vendors.php');
 
 	/* store the list of registered mactrack scanning functions */
 	db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('Not Applicable - Router', '1')");
@@ -74,19 +74,19 @@ function mactrack_rebuild_scanning_funcs() {
 	}
 }
 
-function mactrack_strip_alpha($string = "") {
-	return trim($string, "abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ()[]{}");
+function mactrack_strip_alpha($string = '') {
+	return trim($string, 'abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ()[]{}');
 }
 
 function mactrack_check_user_realm($realm_id) {
-	if (empty($_SESSION["sess_user_id"])) {
+	if (empty($_SESSION['sess_user_id'])) {
 		return FALSE;
-	}elseif (!empty($_SESSION["sess_user_id"])) {
+	}elseif (!empty($_SESSION['sess_user_id'])) {
 		if ((!db_fetch_assoc("select
 			user_auth_realm.realm_id
 			from
 			user_auth_realm
-			where user_auth_realm.user_id='" . $_SESSION["sess_user_id"] . "'
+			where user_auth_realm.user_id='" . $_SESSION['sess_user_id'] . "'
 			and user_auth_realm.realm_id='$realm_id'")) || (empty($realm_id))) {
 			return FALSE;
 		}else{
@@ -102,82 +102,82 @@ function mactrack_check_user_realm($realm_id) {
  */
 function valid_snmp_device(&$device) {
 	global $config;
-	include_once($config["base_path"] . "/plugins/mactrack/mactrack_actions.php");
+	include_once($config['base_path'] . '/plugins/mactrack/mactrack_actions.php');
 
 	/* initialize variable */
 	$host_up = FALSE;
-	$device["snmp_status"] = HOST_DOWN;
+	$device['snmp_status'] = HOST_DOWN;
 
 	/* force php to return numeric oid's */
-	if (function_exists("snmp_set_oid_numeric_print")) {
+	if (function_exists('snmp_set_oid_numeric_print')) {
 		snmp_set_oid_numeric_print(TRUE);
 	}
 
 	/* if the first read did not work, loop until found */
-	$snmp_sysObjectID = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
-					".1.3.6.1.2.1.1.2.0", $device["snmp_version"],
-					$device["snmp_username"], $device["snmp_password"],
-					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
-					$device["snmp_priv_protocol"], $device["snmp_context"],
-					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+	$snmp_sysObjectID = @cacti_snmp_get($device['hostname'], $device['snmp_readstring'],
+		'.1.3.6.1.2.1.1.2.0', $device['snmp_version'],
+		$device['snmp_username'], $device['snmp_password'],
+		$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
+		$device['snmp_priv_protocol'], $device['snmp_context'],
+		$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
 
-	$snmp_sysObjectID = str_replace("enterprises", ".1.3.6.1.4.1", $snmp_sysObjectID);
-	$snmp_sysObjectID = str_replace("OID: ", "", $snmp_sysObjectID);
-	$snmp_sysObjectID = str_replace(".iso", ".1", $snmp_sysObjectID);
+	$snmp_sysObjectID = str_replace('enterprises', '.1.3.6.1.4.1', $snmp_sysObjectID);
+	$snmp_sysObjectID = str_replace('OID: ', '', $snmp_sysObjectID);
+	$snmp_sysObjectID = str_replace('.iso', '.1', $snmp_sysObjectID);
 
 	if ((strlen($snmp_sysObjectID) > 0) &&
-		(!substr_count($snmp_sysObjectID, "No Such Object")) &&
-		(!substr_count($snmp_sysObjectID, "Error In"))) {
-		$snmp_sysObjectID = trim(str_replace("\"","", $snmp_sysObjectID));
+		(!substr_count($snmp_sysObjectID, 'No Such Object')) &&
+		(!substr_count($snmp_sysObjectID, 'Error In'))) {
+		$snmp_sysObjectID = trim(str_replace('"','', $snmp_sysObjectID));
 		$host_up = TRUE;
-		$device["snmp_status"] = HOST_UP;
+		$device['snmp_status'] = HOST_UP;
 	}else{
 		/* loop through the default and then other common for the correct answer */
-		$snmp_options = db_fetch_assoc("SELECT * from mac_track_snmp_items WHERE snmp_id=" . $device["snmp_options"] . " ORDER BY sequence");
+		$snmp_options = db_fetch_assoc_prepared('SELECT * from mac_track_snmp_items WHERE snmp_id = ? ORDER BY sequence', array($device['snmp_options']));
 
 		if (sizeof($snmp_options)) {
 		foreach($snmp_options as $snmp_option) {
 			# update $device for later db update via db_update_device_status
-			$device["snmp_readstring"] = $snmp_option["snmp_readstring"];
-			$device["snmp_version"] = $snmp_option["snmp_version"];
-			$device["snmp_username"] = $snmp_option["snmp_username"];
-			$device["snmp_password"] = $snmp_option["snmp_password"];
-			$device["snmp_auth_protocol"] = $snmp_option["snmp_auth_protocol"];
-			$device["snmp_priv_passphrase"] = $snmp_option["snmp_priv_passphrase"];
-			$device["snmp_priv_protocol"] = $snmp_option["snmp_priv_protocol"];
-			$device["snmp_context"] = $snmp_option["snmp_context"];
-			$device["snmp_port"] = $snmp_option["snmp_port"];
-			$device["snmp_timeout"] = $snmp_option["snmp_timeout"];
-			$device["snmp_retries"] = $snmp_option["snmp_retries"];
+			$device['snmp_readstring'] = $snmp_option['snmp_readstring'];
+			$device['snmp_version'] = $snmp_option['snmp_version'];
+			$device['snmp_username'] = $snmp_option['snmp_username'];
+			$device['snmp_password'] = $snmp_option['snmp_password'];
+			$device['snmp_auth_protocol'] = $snmp_option['snmp_auth_protocol'];
+			$device['snmp_priv_passphrase'] = $snmp_option['snmp_priv_passphrase'];
+			$device['snmp_priv_protocol'] = $snmp_option['snmp_priv_protocol'];
+			$device['snmp_context'] = $snmp_option['snmp_context'];
+			$device['snmp_port'] = $snmp_option['snmp_port'];
+			$device['snmp_timeout'] = $snmp_option['snmp_timeout'];
+			$device['snmp_retries'] = $snmp_option['snmp_retries'];
 
-			$snmp_sysObjectID = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
-					".1.3.6.1.2.1.1.2.0", $device["snmp_version"],
-					$device["snmp_username"], $device["snmp_password"],
-					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
-					$device["snmp_priv_protocol"], $device["snmp_context"],
-					$device["snmp_port"], $device["snmp_timeout"],
-					$device["snmp_retries"]);
+			$snmp_sysObjectID = @cacti_snmp_get($device['hostname'], $device['snmp_readstring'],
+					'.1.3.6.1.2.1.1.2.0', $device['snmp_version'],
+					$device['snmp_username'], $device['snmp_password'],
+					$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
+					$device['snmp_priv_protocol'], $device['snmp_context'],
+					$device['snmp_port'], $device['snmp_timeout'],
+					$device['snmp_retries']);
 
-			$snmp_sysObjectID = str_replace("enterprises", ".1.3.6.1.4.1", $snmp_sysObjectID);
-			$snmp_sysObjectID = str_replace("OID: ", "", $snmp_sysObjectID);
-			$snmp_sysObjectID = str_replace(".iso", ".1", $snmp_sysObjectID);
+			$snmp_sysObjectID = str_replace('enterprises', '.1.3.6.1.4.1', $snmp_sysObjectID);
+			$snmp_sysObjectID = str_replace('OID: ', '', $snmp_sysObjectID);
+			$snmp_sysObjectID = str_replace('.iso', '.1', $snmp_sysObjectID);
 
 			if ((strlen($snmp_sysObjectID) > 0) &&
-				(!substr_count($snmp_sysObjectID, "No Such Object")) &&
-				(!substr_count($snmp_sysObjectID, "Error In"))) {
-				$snmp_sysObjectID = trim(str_replace("\"", "", $snmp_sysObjectID));
-				$device["snmp_readstring"] = $snmp_option["snmp_readstring"];
-				$device["snmp_status"] = HOST_UP;
+				(!substr_count($snmp_sysObjectID, 'No Such Object')) &&
+				(!substr_count($snmp_sysObjectID, 'Error In'))) {
+				$snmp_sysObjectID = trim(str_replace("'", '', $snmp_sysObjectID));
+				$device['snmp_readstring'] = $snmp_option['snmp_readstring'];
+				$device['snmp_status'] = HOST_UP;
 				$host_up = TRUE;
 				# update cacti device, if required
 				sync_mactrack_to_cacti($device);
 				# update to mactrack itself is done by db_update_device_status in mactrack_scanner.php
 				# TODO: if db_update_device_status would use api_mactrack_device_save, there would be no need to call sync_mactrack_to_cacti here
 				# but currently the parameter set doesn't match
-				mactrack_debug("Result found on Option Set (" . $snmp_option["snmp_id"] . ") Sequence (" . $snmp_option["sequence"] . "): " . $snmp_sysObjectID);
+				mactrack_debug('Result found on Option Set (' . $snmp_option['snmp_id'] . ') Sequence (' . $snmp_option['sequence'] . '): ' . $snmp_sysObjectID);
 				break; # no need to continue if we have a match
 			}else{
-				$device["snmp_status"] = HOST_DOWN;
+				$device['snmp_status'] = HOST_DOWN;
 				$host_up = FALSE;
 			}
 		}
@@ -185,71 +185,71 @@ function valid_snmp_device(&$device) {
 	}
 
 	if ($host_up) {
-		$device["snmp_sysObjectID"] = $snmp_sysObjectID;
+		$device['snmp_sysObjectID'] = $snmp_sysObjectID;
 
 		/* get system name */
-		$snmp_sysName = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
-					".1.3.6.1.2.1.1.5.0", $device["snmp_version"],
-					$device["snmp_username"], $device["snmp_password"],
-					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
-					$device["snmp_priv_protocol"], $device["snmp_context"],
-					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+		$snmp_sysName = @cacti_snmp_get($device['hostname'], $device['snmp_readstring'],
+			'.1.3.6.1.2.1.1.5.0', $device['snmp_version'],
+			$device['snmp_username'], $device['snmp_password'],
+			$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
+			$device['snmp_priv_protocol'], $device['snmp_context'],
+			$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
 
 		if (strlen($snmp_sysName) > 0) {
-			$snmp_sysName = trim(strtr($snmp_sysName,"\""," "));
-			$device["snmp_sysName"] = $snmp_sysName;
+			$snmp_sysName = trim(strtr($snmp_sysName,'"',' '));
+			$device['snmp_sysName'] = $snmp_sysName;
 		}
 
 		/* get system location */
-		$snmp_sysLocation = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
-					".1.3.6.1.2.1.1.6.0", $device["snmp_version"],
-					$device["snmp_username"], $device["snmp_password"],
-					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
-					$device["snmp_priv_protocol"], $device["snmp_context"],
-					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+		$snmp_sysLocation = @cacti_snmp_get($device['hostname'], $device['snmp_readstring'],
+			'.1.3.6.1.2.1.1.6.0', $device['snmp_version'],
+			$device['snmp_username'], $device['snmp_password'],
+			$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
+			$device['snmp_priv_protocol'], $device['snmp_context'],
+			$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
 
 		if (strlen($snmp_sysLocation) > 0) {
-			$snmp_sysLocation = trim(strtr($snmp_sysLocation,"\""," "));
-			$device["snmp_sysLocation"] = $snmp_sysLocation;
+			$snmp_sysLocation = trim(strtr($snmp_sysLocation,'"',' '));
+			$device['snmp_sysLocation'] = $snmp_sysLocation;
 		}
 
 		/* get system contact */
-		$snmp_sysContact = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
-					".1.3.6.1.2.1.1.4.0", $device["snmp_version"],
-					$device["snmp_username"], $device["snmp_password"],
-					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
-					$device["snmp_priv_protocol"], $device["snmp_context"],
-					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+		$snmp_sysContact = @cacti_snmp_get($device['hostname'], $device['snmp_readstring'],
+			'.1.3.6.1.2.1.1.4.0', $device['snmp_version'],
+			$device['snmp_username'], $device['snmp_password'],
+			$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
+			$device['snmp_priv_protocol'], $device['snmp_context'],
+			$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
 
 		if (strlen($snmp_sysContact) > 0) {
-			$snmp_sysContact = trim(strtr($snmp_sysContact,"\""," "));
-			$device["snmp_sysContact"] = $snmp_sysContact;
+			$snmp_sysContact = trim(strtr($snmp_sysContact,'"',' '));
+			$device['snmp_sysContact'] = $snmp_sysContact;
 		}
 
 		/* get system description */
-		$snmp_sysDescr = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
-					".1.3.6.1.2.1.1.1.0", $device["snmp_version"],
-					$device["snmp_username"], $device["snmp_password"],
-					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
-					$device["snmp_priv_protocol"], $device["snmp_context"],
-					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+		$snmp_sysDescr = @cacti_snmp_get($device['hostname'], $device['snmp_readstring'],
+			'.1.3.6.1.2.1.1.1.0', $device['snmp_version'],
+			$device['snmp_username'], $device['snmp_password'],
+			$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
+			$device['snmp_priv_protocol'], $device['snmp_context'],
+			$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
 
 		if (strlen($snmp_sysDescr) > 0) {
-			$snmp_sysDescr = trim(strtr($snmp_sysDescr,"\""," "));
-			$device["snmp_sysDescr"] = $snmp_sysDescr;
+			$snmp_sysDescr = trim(strtr($snmp_sysDescr,'"',' '));
+			$device['snmp_sysDescr'] = $snmp_sysDescr;
 		}
 
 		/* get system uptime */
-		$snmp_sysUptime = @cacti_snmp_get($device["hostname"], $device["snmp_readstring"],
-					".1.3.6.1.2.1.1.3.0", $device["snmp_version"],
-					$device["snmp_username"], $device["snmp_password"],
-					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
-					$device["snmp_priv_protocol"], $device["snmp_context"],
-					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+		$snmp_sysUptime = @cacti_snmp_get($device['hostname'], $device['snmp_readstring'],
+			'.1.3.6.1.2.1.1.3.0', $device['snmp_version'],
+			$device['snmp_username'], $device['snmp_password'],
+			$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
+			$device['snmp_priv_protocol'], $device['snmp_context'],
+			$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
 
 		if (strlen($snmp_sysUptime) > 0) {
-			$snmp_sysUptime = trim(strtr($snmp_sysUptime,"\""," "));
-			$device["snmp_sysUptime"] = $snmp_sysUptime;
+			$snmp_sysUptime = trim(strtr($snmp_sysUptime,'"',' '));
+			$device['snmp_sysUptime'] = $snmp_sysUptime;
 		}
 	}
 
@@ -269,12 +269,12 @@ function find_scanning_function(&$device, &$device_types) {
 		$sysObjectID_match = FALSE;
 
 		/* search for a matching snmp_sysDescr */
-		if (substr_count($device_type["sysDescr_match"], "*") > 0) {
+		if (substr_count($device_type['sysDescr_match'], '*') > 0) {
 			/* need to assume mixed string */
-			$parts = explode("*", $device_type["sysDescr_match"]);
+			$parts = explode('*', $device_type['sysDescr_match']);
 			if (sizeof($parts)) {
 			foreach($parts as $part) {
-				if (substr_count($device["sysDescr_match"],$part) > 0) {
+				if (substr_count($device['sysDescr_match'],$part) > 0) {
 					$sysDescr_match = TRUE;
 				}else{
 					$sysDescr_match = FALSE;
@@ -282,10 +282,10 @@ function find_scanning_function(&$device, &$device_types) {
 			}
 			}
 		}else{
-			if (strlen($device_type["sysDescr_match"]) == 0) {
+			if (strlen($device_type['sysDescr_match']) == 0) {
 				$sysDescr_match = TRUE;
 			}else{
-				if (substr_count($device["snmp_sysDescr"], $device_type["sysDescr_match"])) {
+				if (substr_count($device['snmp_sysDescr'], $device_type['sysDescr_match'])) {
 					$sysDescr_match = TRUE;
 				}else{
 					$sysDescr_match = FALSE;
@@ -294,14 +294,14 @@ function find_scanning_function(&$device, &$device_types) {
 		}
 
 		/* search for a matching snmp_sysObjectID */
-		$len = strlen($device_type["sysObjectID_match"]);
-		if (substr($device["snmp_sysObjectID"],0,$len) == $device_type["sysObjectID_match"]) {
+		$len = strlen($device_type['sysObjectID_match']);
+		if (substr($device['snmp_sysObjectID'],0,$len) == $device_type['sysObjectID_match']) {
 			$sysObjectID_match = TRUE;
 		}
 
 		if (($sysObjectID_match == TRUE) && ($sysDescr_match == TRUE)) {
-			$device["device_type_id"] = $device_type["device_type_id"];
-			$device["scan_type"] = $device_type["device_type"];
+			$device['device_type_id'] = $device_type['device_type_id'];
+			$device['scan_type'] = $device_type['device_type'];
 			return $device_type;
 		}
 	}
@@ -313,24 +313,24 @@ function find_scanning_function(&$device, &$device_types) {
 /*	port_list_to_array - Takes a text list of ports and builds a trimmed array of
   the resulting array.  Returns the array
 */
-function port_list_to_array($port_list, $delimiter = ":") {
+function port_list_to_array($port_list, $delimiter = ':') {
 	$port_array = array();
 
-	if (read_config_option("mt_ignorePorts_delim") == "-1") {
+	if (read_config_option('mt_ignorePorts_delim') == '-1') {
 		/* find the delimiter */
-		$t1 = sizeof(explode(":", $port_list));
-		$t2 = sizeof(explode("|", $port_list));
-		$t3 = sizeof(explode(" ", $port_list));
+		$t1 = sizeof(explode(':', $port_list));
+		$t2 = sizeof(explode('|', $port_list));
+		$t3 = sizeof(explode(' ', $port_list));
 
 		if ($t1 > $t2 && $t1 > $t3) {
-			$delimiter = ":";
+			$delimiter = ':';
 		}elseif ($t2 > $t1 && $t2 > $t3) {
-			$delimiter = "|";
+			$delimiter = '|';
 		}elseif ($t3 > $t1 && $t3 > $t2) {
-			$delimiter = " ";
+			$delimiter = ' ';
 		}
 	}else{
-		$delimiter = read_config_option("mt_ignorePorts_delim");
+		$delimiter = read_config_option('mt_ignorePorts_delim');
 	}
 
 	$ports = explode($delimiter, $port_list);
@@ -348,26 +348,26 @@ function port_list_to_array($port_list, $delimiter = ":") {
   the IP address and MAC address combinations in the mac_track_ips table.
 */
 function get_standard_arp_table($site, &$device) {
-	global $debug, $scan_date, $cnn_id;
+	global $debug, $scan_date;
 
 	/* get the atifIndexes for the device */
-	$atifIndexes = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.1", $device);
+	$atifIndexes = xform_stripped_oid('.1.3.6.1.2.1.3.1.1.1', $device);
 	$atEntries   = array();
 
 	if (sizeof($atifIndexes)) {
-		mactrack_debug("atifIndexes data collection complete");
-		$atPhysAddress = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.2", $device);
-		mactrack_debug("atPhysAddress data collection complete");
-		$atNetAddress  = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.3", $device);
-		mactrack_debug("atNetAddress data collection complete");
+		mactrack_debug('atifIndexes data collection complete');
+		$atPhysAddress = xform_stripped_oid('.1.3.6.1.2.1.3.1.1.2', $device);
+		mactrack_debug('atPhysAddress data collection complete');
+		$atNetAddress  = xform_stripped_oid('.1.3.6.1.2.1.3.1.1.3', $device);
+		mactrack_debug('atNetAddress data collection complete');
 	}else{
 		/* second attempt for Force10 Gear */
-		$atifIndexes   = xform_stripped_oid(".1.3.6.1.2.1.4.22.1.1", $device);
-		mactrack_debug("atifIndexes data collection complete");
-		$atPhysAddress = xform_stripped_oid(".1.3.6.1.2.1.4.22.1.2", $device);
-		mactrack_debug("atPhysAddress data collection complete");
-		$atNetAddress = xform_stripped_oid(".1.3.6.1.2.1.4.22.1.3", $device);
-		mactrack_debug("atNetAddress data collection complete");
+		$atifIndexes   = xform_stripped_oid('.1.3.6.1.2.1.4.22.1.1', $device);
+		mactrack_debug('atifIndexes data collection complete');
+		$atPhysAddress = xform_stripped_oid('.1.3.6.1.2.1.4.22.1.2', $device);
+		mactrack_debug('atPhysAddress data collection complete');
+		$atNetAddress = xform_stripped_oid('.1.3.6.1.2.1.4.22.1.3', $device);
+		mactrack_debug('atNetAddress data collection complete');
 	}
 
 	/* convert the mac address if necessary */
@@ -379,36 +379,36 @@ function get_standard_arp_table($site, &$device) {
 		$i++;
 	}
 	}
-	mactrack_debug("atPhysAddress MAC Address Conversion Completed");
+	mactrack_debug('atPhysAddress MAC Address Conversion Completed');
 
 	/* get the ifNames for the device */
 	$keys = array_keys($atifIndexes);
 	$i = 0;
 	if (sizeof($atifIndexes)) {
 	foreach($atifIndexes as $atifIndex) {
-		$atEntries[$i]["atifIndex"] = $atifIndex;
-		$atEntries[$i]["atPhysAddress"] = $atPhysAddress[$keys[$i]];
-		$atEntries[$i]["atNetAddress"] = xform_net_address($atNetAddress[$keys[$i]]);
+		$atEntries[$i]['atifIndex'] = $atifIndex;
+		$atEntries[$i]['atPhysAddress'] = $atPhysAddress[$keys[$i]];
+		$atEntries[$i]['atNetAddress'] = xform_net_address($atNetAddress[$keys[$i]]);
 		$i++;
 	}
 	}
-	mactrack_debug("atEntries assembly complete.");
+	mactrack_debug('atEntries assembly complete.');
 
 	/* output details to database */
 	if (sizeof($atEntries)) {
 	foreach($atEntries as $atEntry) {
-		$insert_string = "REPLACE INTO mac_track_ips " .
-			"(site_id,device_id,hostname,device_name,port_number," .
-			"mac_address,ip_address,scan_date)" .
-			" VALUES ('" .
-			$device["site_id"] . "','" .
-			$device["device_id"] . "','" .
-			$device["hostname"] . "'," .
-			$cnn_id->qstr($device["device_name"]) . ",'" .
-			$atEntry["atifIndex"] . "','" .
-			$atEntry["atPhysAddress"] . "','" .
-			$atEntry["atNetAddress"] . "','" .
-			$scan_date . "')";
+		$insert_string = 'REPLACE INTO mac_track_ips 
+			(site_id,device_id,hostname,device_name,port_number,
+			mac_address,ip_address,scan_date)
+			VALUES (' .
+			$device['site_id'] . ',' .
+			$device['device_id'] . ',' .
+			db_qstr($device['hostname']) . ',' .
+			db_qstr($device['device_name']) . ',' .
+			db_qstr($atEntry['atifIndex']) . ',' .
+			db_qstr($atEntry['atPhysAddress']) . ',' .
+			db_qstr($atEntry['atNetAddress']) . ',' .
+			db_qstr($scan_date) . ')';
 
 		//mactrack_debug("SQL: " . $insert_string);
 
@@ -417,10 +417,10 @@ function get_standard_arp_table($site, &$device) {
 	}
 
 	/* save ip information for the device */
-	$device["ips_total"] = sizeof($atEntries);
-	db_execute("UPDATE mac_track_devices SET ips_total ='" . $device["ips_total"] . "' WHERE device_id='" . $device["device_id"] . "'");
+	$device['ips_total'] = sizeof($atEntries);
+	db_execute('UPDATE mac_track_devices SET ips_total =' . $device['ips_total'] . ' WHERE device_id=' . $device['device_id']);
 
-	mactrack_debug("HOST: " . $device["hostname"] . ", IP address information collection complete");
+	mactrack_debug('HOST: ' . $device['hostname'] . ', IP address information collection complete');
 }
 
 /*	build_InterfacesTable - This is a basic function that will scan Interfaces table
@@ -428,34 +428,32 @@ function get_standard_arp_table($site, &$device) {
   data is also used for scanning purposes.
 */
 function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $getAlias = FALSE) {
-	global $cnn_id;
-
 	/* initialize the interfaces array */
 	$ifInterfaces = array();
 
 	/* get the ifIndexes for the device */
-	$ifIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device);
-	mactrack_debug("ifIndexes data collection complete. '" . sizeof($ifIndexes) . "' rows found!");
+	$ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);
+	mactrack_debug('ifIndexes data collection complete. \'' . sizeof($ifIndexes) . '\' rows found!');
 
-	$ifTypes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.3", $device);
+	$ifTypes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.3', $device);
 	if (sizeof($ifTypes)) {
 	foreach($ifTypes as $key => $value) {
 		if (!is_numeric($value)) {
-			$parts = explode("(", $value);
+			$parts = explode('(', $value);
 			$piece = $parts[1];
-			$ifTypes[$key] = str_replace(")", "", trim($piece));
+			$ifTypes[$key] = str_replace(')', '', trim($piece));
 		}
 	}
 	}
-	mactrack_debug("ifTypes data collection complete. '" . sizeof($ifTypes) . "' rows found!");
+	mactrack_debug('ifTypes data collection complete. \'' . sizeof($ifTypes) . '\' rows found!');
 
-	$ifNames = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.1", $device);
-	mactrack_debug("ifNames data collection complete. '" . sizeof($ifNames) . "' rows found!");
+	$ifNames = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.1', $device);
+	mactrack_debug('ifNames data collection complete. \'' . sizeof($ifNames) . '\' rows found!');
 
 	/* get ports names through use of ifAlias */
 	if ($getAlias) {
-		$ifAliases = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.18", $device);
-		mactrack_debug("ifAlias data collection complete. '" . sizeof($ifAliases) . "' rows found!");
+		$ifAliases = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.18', $device);
+		mactrack_debug('ifAlias data collection complete. \'' . sizeof($ifAliases) . '\' rows found!');
 	}
 
 	/* get ports that happen to be link ports */
@@ -757,12 +755,12 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		$insert_vals .= "('" .
 			@$device["site_id"]                 . "', '" . @$device["device_id"]         . "', '" .
 			@$device["snmp_sysUptime"]          . "', '" . @$ifIndex                     . "', '" .
-			@$ifTypes[$ifIndex]                 . "', "  . @$cnn_id->qstr(@$ifNames[$ifIndex]) . ", "  .
-			@$cnn_id->qstr($ifAlias)            . ", '"  . @$linkPort                    . "', '" .
-			@$vlan_id                           . "', "  . @$cnn_id->qstr(@$vlan_name)   . ", '"  .
+			@$ifTypes[$ifIndex]                 . "', "  . @db_qstr(@$ifNames[$ifIndex]) . ", "  .
+			@db_qstr($ifAlias)                  . ", '"  . @$linkPort                    . "', '" .
+			@$vlan_id                           . "', "  . @db_qstr(@$vlan_name)         . ", '"  .
 			@$vlan_trunk                        . "', '" . @$ifSpeed[$ifIndex]           . "', '" .
 			@$ifHighSpeed[$ifIndex]             . "', '" . @$ifDuplex[$ifIndex]          . "', "   .
-			@$cnn_id->qstr(@$ifDescr[$ifIndex]) . ", '"  . @$ifMtu[$ifIndex]             . "', '" .
+			@db_qstr(@$ifDescr[$ifIndex])       . ", '"  . @$ifMtu[$ifIndex]             . "', '" .
 			$mac_address                        . "', '" . @$ifAdminStatus[$ifIndex]     . "', '" .
 			@$ifOperStatus[$ifIndex]            . "', '" . @$ifLastChange[$ifIndex]      . "', '" .
 			@$ifInOctets[$ifIndex]              . "', '" . @$ifOutOctets[$ifIndex]       . "', '" .
@@ -1958,7 +1956,7 @@ function db_process_remove($device_id) {
   of the current device including the number of ports, it's readstring, etc.
 */
 function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
-	global $debug, $cnn_id;
+	global $debug;
 
 	list($micro,$seconds) = explode(" ", microtime());
 	$end_time = $seconds + $micro;
@@ -1985,11 +1983,11 @@ function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
 			"snmp_priv_passphrase='" . $device["snmp_priv_passphrase"] . "'," .
 			"snmp_priv_protocol='" . $device["snmp_priv_protocol"] . "'," .
 			"snmp_context='" . $device["snmp_context"] . "'," .
-			"snmp_sysName=" . $cnn_id->qstr($device["snmp_sysName"]) . "," .
-			"snmp_sysLocation=" . $cnn_id->qstr($device["snmp_sysLocation"]) . "," .
-			"snmp_sysContact=" . $cnn_id->qstr($device["snmp_sysContact"]) . "," .
+			"snmp_sysName=" . db_qstr($device["snmp_sysName"]) . "," .
+			"snmp_sysLocation=" . db_qstr($device["snmp_sysLocation"]) . "," .
+			"snmp_sysContact=" . db_qstr($device["snmp_sysContact"]) . "," .
 			"snmp_sysObjectID='" . $device["snmp_sysObjectID"] . "'," .
-			"snmp_sysDescr=" . $cnn_id->qstr($device["snmp_sysDescr"]) . "," .
+			"snmp_sysDescr=" . db_qstr($device["snmp_sysDescr"]) . "," .
 			"snmp_sysUptime='" . $device["snmp_sysUptime"] . "'," .
 			"snmp_status='" . $device["snmp_status"] . "'," .
 			"last_runmessage='" . $device["last_runmessage"] . "'," .
@@ -2021,7 +2019,7 @@ function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
   scanned.
 */
 function db_store_device_port_results(&$device, $port_array, $scan_date) {
-	global $debug, $cnn_id;
+	global $debug;
 
 	/* output details to database */
 	if (sizeof($port_array)) {
@@ -2044,13 +2042,13 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 				" VALUES ('" .
 				$device["site_id"] . "','" .
 				$device["device_id"] . "'," .
-				$cnn_id->qstr($device["hostname"]) . "," .
-				$cnn_id->qstr($device["device_name"]) . ",'" .
+				db_qstr($device["hostname"]) . "," .
+				db_qstr($device["device_name"]) . ",'" .
 				$port_value["vlan_id"] . "'," .
-				$cnn_id->qstr($port_value["vlan_name"]) . ",'" .
+				db_qstr($port_value["vlan_name"]) . ",'" .
 				$port_value["mac_address"] . "','" .
 				$port_value["port_number"] . "'," .
-				$cnn_id->qstr($port_value["port_name"]) . ",'" .
+				db_qstr($port_value["port_name"]) . ",'" .
 				$scan_date . "','" .
 				$authorized_mac . "')";
 
@@ -2183,107 +2181,105 @@ function perform_mactrack_db_maint() {
 	mactrack_debug("Finished deleting old records from the main database.");
 }
 
-function import_oui_database($type = "ui", $oui_file = "http://standards.ieee.org/regauth/oui/oui.txt") {
-	global $cnn_id;
-
-	if ($type != "ui") {
-		html_start_box("<strong>MacTrack OUI Database Import Results</strong>", "100%", "", "1", "center", "");
-		?><tr><td>Getting OUI Database from IEEE</td></tr><?php
+function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.ieee.org/oui/oui.txt') {
+	if ($type != 'ui') {
+		html_start_box(__('MacTrack OUI Database Import Results'), '100%', '', '1', 'center', '');
+		echo '<tr><td>' . __('Getting OUI Database from IEEE') . '</td></tr>';
 	}else{
-		echo "Getting OUI Database from the IEEE\n";
+		echo __('Getting OUI Database from the IEEE') . "\n";
 	}
 
 	$oui_database = file($oui_file);
 
-	if ($type != "ui") print "<tr><td>";
+	if ($type != 'ui') print '<tr><td>';
 
 	if (sizeof($oui_database)) {
-		echo "OUI Database Download from IEEE Complete\n";
+		echo __('OUI Database Download from IEEE Complete') . "\n";
 	}else{
-		echo "OUI Database Download from IEEE FAILED\n";
+		echo __('OUI Database Download from IEEE FAILED') . "\n";
 	}
 
-	if ($type != "ui") print "</td></tr>";
+	if ($type != 'ui') print '</td></tr>';
 
 	if (sizeof($oui_database)) {
-		db_execute("UPDATE mac_track_oui_database SET present=0");
+		db_execute('UPDATE mac_track_oui_database SET present=0');
 
 		/* initialize some variables */
 		$begin_vendor = FALSE;
-		$vendor_mac     = "";
-		$vendor_name    = "";
-		$vendor_address = "";
+		$vendor_mac     = '';
+		$vendor_name    = '';
+		$vendor_address = '';
 		$i = 0;
 
-		if ($type != "ui") print "<tr><td>";
+		if ($type != 'ui') echo '<tr><td>';
 
 		if (sizeof($oui_database)) {
 		foreach ($oui_database as $row) {
-			$row = str_replace("\t", " ", $row);
+			$row = str_replace("\t", ' ', $row);
 			if (($begin_vendor) && (strlen(trim($row)) == 0)) {
-				if (substr($vendor_address,0,1) == ",") $vendor_address = substr($vendor_address,1);
-				if (substr($vendor_name,0,1) == ",")    $vendor_name    = substr($vendor_name,1);
+				if (substr($vendor_address,0,1) == ',') $vendor_address = substr($vendor_address,1);
+				if (substr($vendor_name,0,1) == ',')    $vendor_name    = substr($vendor_name,1);
 
 				db_execute("REPLACE INTO mac_track_oui_database
 					(vendor_mac, vendor_name, vendor_address, present)
 					VALUES ('" . $vendor_mac . "'," .
-					$cnn_id->qstr(ucwords(strtolower($vendor_name))) . "," .
-					$cnn_id->qstr(str_replace("\n", ", ", ucwords(strtolower(trim($vendor_address))))) . ",'1')");
+					db_qstr(ucwords(strtolower($vendor_name))) . ',' .
+					db_qstr(str_replace("\n", ', ', ucwords(strtolower(trim($vendor_address))))) . ",'1')");
 
 				/* let the user know you are working */
-				if ((($i % 100) == 0) && ($type == "ui")) echo ".";
+				if ((($i % 100) == 0) && ($type == 'ui')) echo '.';
 				$i++;
 
 				/* reinitialize variables */
 				$begin_vendor   = FALSE;
-				$vendor_mac     = "";
-				$vendor_name    = "";
-				$vendor_address = "";
+				$vendor_mac     = '';
+				$vendor_name    = '';
+				$vendor_address = '';
 			}else{
 				if ($begin_vendor) {
-					if (strpos($row, "(base 16)")) {
-						$address_start = strpos($row, "(base 16)") + 10;
+					if (strpos($row, '(base 16)')) {
+						$address_start = strpos($row, '(base 16)') + 10;
 						$vendor_address .= trim(substr($row,$address_start)) . "\n";
 					}else{
 						$vendor_address .= trim($row) . "\n";
 					}
 				}else{
-					$vendor_address = "";
+					$vendor_address = '';
 				}
 			}
 
-			if (substr_count($row, "(hex)")) {
+			if (substr_count($row, '(hex)')) {
 				$begin_vendor = TRUE;
-				$vendor_mac = str_replace("-", ":", substr(trim($row), 0, 8));
-				$hex_end = strpos($row, "(hex)") + 5;
+				$vendor_mac = str_replace('-', ':', substr(trim($row), 0, 8));
+				$hex_end = strpos($row, '(hex)') + 5;
 				$vendor_name= trim(substr($row,$hex_end));
 			}
 		}
 		}
-		if ($type != "ui") print "</td></tr>";
+		if ($type != 'ui') print '</td></tr>';
 
 		/* count bogus records */
-		$j = db_fetch_cell("SELECT count(*) FROM mac_track_oui_database WHERE present=0");
+		$j = db_fetch_cell('SELECT count(*) FROM mac_track_oui_database WHERE present=0');
 
 		/* get rid of old records */
-		db_execute("DELETE FROM mac_track_oui_database WHERE present=0");
+		db_execute('DELETE FROM mac_track_oui_database WHERE present=0');
 
 		/* report some information */
-		if ($type != "ui") print "<tr><td>";
-		echo "\nThere were '" . $i . "' Entries Added/Updated in the database.";
+		if ($type != 'ui') print '<tr><td>';
+		echo "\n" . __('There were \'%d\' Entries Added/Updated in the database.', $i);
 		if ($type != "ui") print "</td></td><tr><td>";
-		echo "\nThere were '" . $j . "' Records Removed from the database.\n";
-		if ($type != "ui") print "</td></tr>";
+		echo "\n" . __('There were \'%d\' Records Removed from the database.', $j) . "\n";
+		if ($type != 'ui') print '</td></tr>';
 
-		if ($type != "ui") html_end_box();
+		if ($type != 'ui') html_end_box();
 	}
 }
 
 function get_netscreen_arp_table($site, &$device) {
-	global $debug, $scan_date, $cnn_id;
+	global $debug, $scan_date;
 
 	/* get the atifIndexes for the device */
-	$atifIndexes = xform_indexed_data(".1.3.6.1.2.1.3.1.1.1", $device, 6);
+	$atifIndexes = xform_indexed_data('.1.3.6.1.2.1.3.1.1.1', $device, 6);
 
 	if (sizeof($atifIndexes)) {
 		$ifIntcount = 1;
@@ -2292,15 +2288,15 @@ function get_netscreen_arp_table($site, &$device) {
 	}
 
 	if ($ifIntcount != 0) {
-		$atifIndexes = xform_indexed_data(".1.3.6.1.2.1.4.22.1.1", $device, 5);
+		$atifIndexes = xform_indexed_data('.1.3.6.1.2.1.4.22.1.1', $device, 5);
 	}
-	mactrack_debug("atifIndexes data collection complete");
+	mactrack_debug(__('atifIndexes data collection complete'));
 
 	/* get the atPhysAddress for the device */
 	if ($ifIntcount != 0) {
-		$atPhysAddress = xform_indexed_data(".1.3.6.1.2.1.4.22.1.2", $device, 5);
+		$atPhysAddress = xform_indexed_data('.1.3.6.1.2.1.4.22.1.2', $device, 5);
 	} else {
-		$atPhysAddress = xform_indexed_data(".1.3.6.1.2.1.3.1.1.2", $device, 6);
+		$atPhysAddress = xform_indexed_data('.1.3.6.1.2.1.3.1.1.2', $device, 6);
 	}
 
 	/* convert the mac address if necessary */
@@ -2312,67 +2308,68 @@ function get_netscreen_arp_table($site, &$device) {
 		$i++;
 	}
 	}
-	mactrack_debug("atPhysAddress data collection complete");
+	mactrack_debug(__('atPhysAddress data collection complete'));
 
 	/* get the atPhysAddress for the device */
 	if ($ifIntcount != 0) {
-		$atNetAddress = xform_indexed_data(".1.3.6.1.2.1.4.22.1.3", $device, 5);
+		$atNetAddress = xform_indexed_data('.1.3.6.1.2.1.4.22.1.3', $device, 5);
 	} else {
-		$atNetAddress = xform_indexed_data(".1.3.6.1.2.1.3.1.1.3", $device, 6);
+		$atNetAddress = xform_indexed_data('.1.3.6.1.2.1.3.1.1.3', $device, 6);
 	}
-	mactrack_debug("atNetAddress data collection complete");
+	mactrack_debug(__('atNetAddress data collection complete'));
 
 	/* get the ifNames for the device */
 	$keys = array_keys($atifIndexes);
 	$i = 0;
 	if (sizeof($atifIndexes)) {
 	foreach($atifIndexes as $atifIndex) {
-		$atEntries[$i]["atifIndex"] = $atifIndex;
-		$atEntries[$i]["atPhysAddress"] = $atPhysAddress[$keys[$i]];
-		$atEntries[$i]["atNetAddress"] = xform_net_address($atNetAddress[$keys[$i]]);
+		$atEntries[$i]['atifIndex']     = $atifIndex;
+		$atEntries[$i]['atPhysAddress'] = $atPhysAddress[$keys[$i]];
+		$atEntries[$i]['atNetAddress']  = xform_net_address($atNetAddress[$keys[$i]]);
 		$i++;
 	}
 	}
-	mactrack_debug("atEntries assembly complete.");
+	mactrack_debug(__('atEntries assembly complete.'));
 
 	/* output details to database */
 	if (sizeof($atEntries)) {
-	foreach($atEntries as $atEntry) {
-		$insert_string = "REPLACE INTO mac_track_ips " .
-			"(site_id,device_id,hostname,device_name,port_number," .
-			"mac_address,ip_address,scan_date)" .
-			" VALUES ('" .
-			$device["site_id"] . "','" .
-			$device["device_id"] . "','" .
-			$device["hostname"] . "'," .
-			$cnn_id->qstr($device["device_name"]) . ",'" .
-			$atEntry["atifIndex"] . "','" .
-			$atEntry["atPhysAddress"] . "','" .
-			$atEntry["atNetAddress"] . "','" .
-			$scan_date . "')";
-//		mactrack_debug("SQL: " . $insert_string);
-		db_execute($insert_string);
-	}
+		foreach($atEntries as $atEntry) {
+			$insert_string = 'REPLACE INTO mac_track_ips 
+				(site_id,device_id,hostname,device_name,port_number,
+				mac_address,ip_address,scan_date)
+				 VALUES (' .
+				$device['site_id']                 . ',' .
+				$device['device_id']               . ',' .
+				db_qstr($device['hostname'])       . ',' .
+				db_qstr($device['device_name'])    . ',' .
+				db_qstr($atEntry['atifIndex'])     . ',' .
+				db_qstr($atEntry['atPhysAddress']) . ',' .
+				db_qstr($atEntry['atNetAddress'])  . ',' .
+				db_qstr($scan_date)                . ')';
+			db_execute($insert_string);
+		}
 	}
 
 	/* save ip information for the device */
-	$device["ips_total"] = sizeof($atEntries);
-	db_execute("UPDATE mac_track_devices SET ips_total ='" . $device["ips_total"] . "' WHERE device_id='" . $device["device_id"] . "'");
-	mactrack_debug("HOST: " . $device["hostname"] . ", IP address information collection complete");
+	$device['ips_total'] = sizeof($atEntries);
+
+	db_execute('UPDATE mac_track_devices SET ips_total =' . $device['ips_total'] . ' WHERE device_id=' . $device['device_id']);
+
+	mactrack_debug(__('HOST: %s, IP address information collection complete', $device['hostname']));
 }
 
 function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 	global $config;
 
-	$row    = "";
-	$rescan = "";
+	$row    = '';
+	$rescan = '';
 
-	$device = db_fetch_row("SELECT host_id, disabled FROM mac_track_devices WHERE device_id=" . $device_id);
+	$device = db_fetch_row_prepared('SELECT host_id, disabled FROM mac_track_devices WHERE device_id = ?', array($device_id));
 
 	if ($show_rescan) {
 		if (api_user_realm_auth('mactrack_sites.php')) {
-			if ($device["disabled"] == '') {
-				$rescan = "<img id='r_" . $device_id . "_" . $ifName . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(" . $device_id . ",\"" . $ifName . "\")' title='Rescan Device' align='absmiddle' border='0'>";
+			if ($device['disabled'] == '') {
+				$rescan = "<img id='r_" . $device_id . '_' . $ifName . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(" . $device_id . ",\"" . $ifName . "\")' title='Rescan Device' align='absmiddle' border='0'>";
 			}else{
 				$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
 			}
@@ -2381,41 +2378,44 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 		}
 	}
 
-	if ($device["host_id"] != 0) {
+	if ($device['host_id'] != 0) {
 		/* get non-interface graphs */
-		$graphs = db_fetch_assoc("SELECT DISTINCT graph_local.id AS local_graph_id
+		$graphs = db_fetch_assoc_prepared('SELECT DISTINCT graph_local.id AS local_graph_id
 			FROM mac_track_interface_graphs
 			RIGHT JOIN graph_local
 			ON graph_local.host_id=mac_track_interface_graphs.host_id
 			AND graph_local.id=mac_track_interface_graphs.local_graph_id
-			WHERE graph_local.host_id=" . $device["host_id"] . " AND mac_track_interface_graphs.device_id IS NULL");
+			WHERE graph_local.host_id = ? 
+			AND mac_track_interface_graphs.device_id IS NULL', array($device['host_id']));
+
 		if (sizeof($graphs)) {
-			$url  = $config["url_path"] . "plugins/mactrack/mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=";
-			$list = "";
+			$url  = $config['url_path'] . 'plugins/mactrack/mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=';
+			$list = '';
 			foreach($graphs as $graph) {
-				$list .= (strlen($list) ? ",": "") . $graph["local_graph_id"];
+				$list .= (strlen($list) ? ',': '') . $graph['local_graph_id'];
 			}
-			$row .= "<a href='" . htmlspecialchars($url . $list . "&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Non Interface Graphs' align='absmiddle' border='0'></a>";
+			$row .= "<a href='" . htmlspecialchars($url . $list . '&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='" . __('View Non Interface Graphs') . "' align='absmiddle' border='0'></a>";
 		}else{
-			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='No Non Interface Graphs in Cacti' align='absmiddle' border='0'/>";
+			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='" . __('No Non Interface Graphs in Cacti') . "' align='absmiddle' border='0'/>";
 		}
 
 		/* get interface graphs */
-		$graphs = db_fetch_assoc("SELECT local_graph_id
+		$graphs = db_fetch_assoc_prepared('SELECT local_graph_id
 			FROM mac_track_interface_graphs
-			WHERE host_id=" . $device["host_id"] . " AND ifName='" . $ifName . "'");
+			WHERE host_id = ? AND ifName = ?', array($device['host_id'], $ifName));
+
 		if (sizeof($graphs)) {
-			$url  = $config["url_path"] . "plugins/mactrack/mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=";
-			$list = "";
+			$url  = $config['url_path'] . 'plugins/mactrack/mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=';
+			$list = '';
 			foreach($graphs as $graph) {
-				$list .= (strlen($list) ? ",": "") . $graph["local_graph_id"];
+				$list .= (strlen($list) ? ',': '') . $graph['local_graph_id'];
 			}
-			$row .= "<a href='" . htmlspecialchars($url . $list . "&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interface_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Interface Graphs' align='absmiddle' border='0'></a>";
+			$row .= "<a href='" . htmlspecialchars($url . $list . '&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interface_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='" . __('View Interface Graphs') . "' align='absmiddle' border='0'></a>";
 		}else{
 			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
 		}
 	}else{
-		$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='Device Not in Cacti' align='absmiddle' border='0'/>";
+		$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='" . __('Device Not in Cacti') . "' align='absmiddle' border='0'/>";
 	}
 	$row .= $rescan;
 
@@ -2426,73 +2426,73 @@ function mactrack_format_interface_row($stat) {
 	global $config;
 
 	/* we will make a row string */
-	$row = "";
+	$row = '';
 
 	/* calculate a human readable uptime */
-	if ($stat["ifLastChange"] == 0) {
-		$upTime = "Since Restart";
+	if ($stat['ifLastChange'] == 0) {
+		$upTime = __('Since Restart');
 	}else{
-		if ($stat["ifLastChange"] > $stat["sysUptime"]) {
-			$upTime = "Since Restart";
+		if ($stat['ifLastChange'] > $stat['sysUptime']) {
+			$upTime = __('Since Restart');
 		}else{
-			$time = $stat["sysUptime"] - $stat["ifLastChange"];
+			$time = $stat['sysUptime'] - $stat['ifLastChange'];
 			$days      = intval($time / (60*60*24*100));
 			$remainder = $time % (60*60*24*100);
 			$hours     = intval($remainder / (60*60*100));
 			$remainder = $remainder % (60*60*100);
 			$minutes   = intval($remainder / (60*100));
-			$upTime    = $days . "d:" . $hours . "h:" . $minutes . "m";
+			$upTime    = $days . 'd:' . $hours . 'h:' . $minutes . 'm';
 		}
 	}
 
-	$row .= "<td nowrap style='width:1%;white-space:nowrap;'>" . mactrack_interface_actions($stat["device_id"], $stat["ifName"]) . "</td>";
-	$row .= "<td><b>" . $stat["device_name"]                     . "</b></td>";
-	$row .= "<td>" . strtoupper($stat["device_type"])            . "</td>";
-	$row .= "<td><b>" . $stat["ifName"]                          . "</b></td>";
-	$row .= "<td>" . $stat["ifDescr"]                            . "</td>";
-	$row .= "<td>" . $stat["ifAlias"]                            . "</td>";
-	$row .= "<td>" . round($stat["inBound"],1) . " %"            . "</td>";
-	$row .= "<td>" . round($stat["outBound"],1) . " %"           . "</td>";
-	$row .= "<td>" . mactrack_display_Octets($stat["int_ifHCInOctets"])  . "</td>";
-	$row .= "<td>" . mactrack_display_Octets($stat["int_ifHCOutOctets"]) . "</td>";
-	if ($_REQUEST["totals"] == "true" || $_REQUEST["totals"] == "on") {
-		$row .= "<td>" . $stat["ifInErrors"]                     . "</td>";
-		$row .= "<td>" . $stat["ifInDiscards"]                   . "</td>";
-		$row .= "<td>" . $stat["ifInUnknownProtos"]              . "</td>";
-		$row .= "<td>" . $stat["ifOutErrors"]                    . "</td>";
-		$row .= "<td>" . $stat["ifOutDiscards"]                  . "</td>";
+	$row .= "<td nowrap style='width:1%;white-space:nowrap;'>" . mactrack_interface_actions($stat['device_id'], $stat['ifName']) . '</td>';
+	$row .= '<td><b>' . $stat['device_name']                     . '</b></td>';
+	$row .= '<td>' . strtoupper($stat['device_type'])            . '</td>';
+	$row .= '<td><b>' . $stat['ifName']                          . '</b></td>';
+	$row .= '<td>' . $stat['ifDescr']                            . '</td>';
+	$row .= '<td>' . $stat['ifAlias']                            . '</td>';
+	$row .= '<td>' . round($stat['inBound'],1) . ' %'            . '</td>';
+	$row .= '<td>' . round($stat['outBound'],1) . ' %'           . '</td>';
+	$row .= '<td>' . mactrack_display_Octets($stat['int_ifHCInOctets'])  . '</td>';
+	$row .= '<td>' . mactrack_display_Octets($stat['int_ifHCOutOctets']) . '</td>';
+	if (get_request_var('totals') == 'true' || get_request_var('totals') == 'on') {
+		$row .= '<td>' . $stat['ifInErrors']                     . '</td>';
+		$row .= '<td>' . $stat['ifInDiscards']                   . '</td>';
+		$row .= '<td>' . $stat['ifInUnknownProtos']              . '</td>';
+		$row .= '<td>' . $stat['ifOutErrors']                    . '</td>';
+		$row .= '<td>' . $stat['ifOutDiscards']                  . '</td>';
 	}else{
-		$row .= "<td>" . round($stat["int_ifInErrors"],1)        . "</td>";
-		$row .= "<td>" . round($stat["int_ifInDiscards"],1)      . "</td>";
-		$row .= "<td>" . round($stat["int_ifInUnknownProtos"],1) . "</td>";
-		$row .= "<td>" . round($stat["int_ifOutErrors"],1)       . "</td>";
-		$row .= "<td>" . round($stat["int_ifOutDiscards"],1)     . "</td>";
+		$row .= '<td>' . round($stat['int_ifInErrors'],1)        . '</td>';
+		$row .= '<td>' . round($stat['int_ifInDiscards'],1)      . '</td>';
+		$row .= '<td>' . round($stat['int_ifInUnknownProtos'],1) . '</td>';
+		$row .= '<td>' . round($stat['int_ifOutErrors'],1)       . '</td>';
+		$row .= '<td>' . round($stat['int_ifOutDiscards'],1)     . '</td>';
 	}
-	$row .= "<td>" . ($stat["ifOperStatus"] == 1 ? "Up":"Down") . "</td>";
-	$row .= "<td style='white-space:nowrap;'>" . $upTime        . "</td>";
-	$row .= "<td style='white-space:nowrap;'>" . mactrack_date($stat["last_rundate"])        . "</td>";
+	$row .= '<td>' . ($stat['ifOperStatus'] == 1 ? 'Up':'Down') . '</td>';
+	$row .= "<td style='white-space:nowrap;'>" . $upTime        . '</td>';
+	$row .= "<td style='white-space:nowrap;'>" . mactrack_date($stat['last_rundate'])        . '</td>';
 	return $row;
 }
 
 function mactrack_display_Octets($octets) {
-	$suffix = "";
+	$suffix = '';
 	while ($octets > 1024) {
 		$octets = $octets / 1024;
 		switch($suffix) {
-		case "":
-			$suffix = "k";
+		case '':
+			$suffix = 'k';
 			break;
-		case "k":
-			$suffix = "m";
+		case 'k':
+			$suffix = 'm';
 			break;
-		case "M":
-			$suffix = "G";
+		case 'M':
+			$suffix = 'G';
 			break;
-		case "G":
-			$suffix = "P";
+		case 'G':
+			$suffix = 'P';
 			break 2;
 		default:
-			$suffix = "";
+			$suffix = '';
 			break 2;
 		}
 	}
@@ -2500,35 +2500,37 @@ function mactrack_display_Octets($octets) {
 	$octets = round($octets,4);
 	$octets = substr($octets,0,5);
 
-	return $octets . " " . $suffix;
+	return $octets . ' ' . $suffix;
 }
 
 function mactrack_rescan($web = FALSE) {
 	global $config;
 
-	$device_id = get_request_var_request("device_id");
-	$ifName    = get_request_var_request("ifName");
-	$dbinfo    = db_fetch_row("SELECT * FROM mac_track_devices WHERE device_id=" . $device_id);
+	$device_id = get_request_var('device_id');
+	$ifName    = get_request_var('ifName');
+	$dbinfo    = db_fetch_row_prepared('SELECT * FROM mac_track_devices WHERE device_id = ?', array($device_id));
 
 	if (sizeof($dbinfo)) {
-		if ($dbinfo["disabled"] == '') {
+		if ($dbinfo['disabled'] == '') {
 			/* log the trasaction to the database */
-			mactrack_log_action("Device Rescan '" . $dbinfo["hostname"] . "'");
+			mactrack_log_action(__('Device Rescan \'%s\'', $dbinfo['hostname']));
 
 			/* create the command script */
-			$command_string = $config["base_path"] . "/plugins/mactrack/mactrack_scanner.php";
-			$extra_args     = " -id=" . $dbinfo["device_id"] . ($web ? " --web":"");
+			$command_string = $config['base_path'] . '/plugins/mactrack/mactrack_scanner.php';
+			$extra_args     = ' -id=' . $dbinfo['device_id'] . ($web ? ' --web':'');
 
 			/* print out the type, and device_id */
-			print "rescan!!!!" . get_request_var_request("device_id") . "!!!!" . (strlen($ifName) ? $ifName . "!!!!":"");
+			print 'rescan!!!!' . get_request_var('device_id') . '!!!!' . (strlen($ifName) ? $ifName . '!!!!':'');
 
 			/* add the cacti header */
 			print "\n<form action='mactrack_devices.php'>\n";
-			html_start_box("", "100%", "", "3", "center", "");
-			print "\t\t\t\t\t<input type='button' onClick='clearScanResults()' value='Clear Results'>\n";
+
+			html_start_box('', '100%', '', '3', 'center', '');
+
+			print "\t\t\t\t\t<input type='button' onClick='clearScanResults()' value='" . __('Clear Results') . "'>\n";
 
 			/* exeucte the command, and show the results */
-			$command = read_config_option("path_php_binary") . " -q " . $command_string . $extra_args;
+			$command = read_config_option('path_php_binary') . ' -q ' . $command_string . $extra_args;
 			passthru($command);
 
 			/* close the box */
@@ -2541,27 +2543,28 @@ function mactrack_rescan($web = FALSE) {
 function mactrack_site_scan($web = FALSE) {
 	global $config, $web;
 
-	$site_id = get_request_var_request("site_id");
-	$dbinfo  = db_fetch_row("SELECT * FROM mac_track_sites WHERE site_id=" . $site_id);
+	$site_id = get_request_var('site_id');
+	$dbinfo  = db_fetch_row_prepared('SELECT * FROM mac_track_sites WHERE site_id = ?', array($site_id));
 
 	if (sizeof($dbinfo)) {
 		/* log the trasaction to the database */
-		mactrack_log_action("Site scan '" . $dbinfo["site_name"] . "'");
+		mactrack_log_action(__('Site scan \'%s\'', $dbinfo['site_name']));
 
 		/* create the command script */
-		$command_string = $config["base_path"] . "/plugins/mactrack/poller_mactrack.php";
-		$extra_args     = " --web -sid=" . $dbinfo["site_id"];
+		$command_string = $config['base_path'] . '/plugins/mactrack/poller_mactrack.php';
+		$extra_args     = ' --web -sid=' . $dbinfo['site_id'];
 
 		/* print out the type, and device_id */
-		print "sitescan!!!!" . get_request_var_request("site_id") . "!!!!";
+		print 'sitescan!!!!' . get_request_var('site_id') . '!!!!';
 
 		/* add the cacti header */
 		print "\n<form action='mactrack_sites.php'>\n";
-		html_start_box("", "100%", "", "3", "center", "");
-		print "\t\t\t\t\t<input type='button' onClick='clearScanResults()' value='Clear Results'>\n";
+		html_start_box('', '100%', '', '3', 'center', '');
+
+		print "\t\t\t\t\t<input type='button' onClick='clearScanResults()' value='" . __('Clear Results') . "'>\n";
 
 		/* exeucte the command, and show the results */
-		$command = read_config_option("path_php_binary") . " -q " . $command_string . $extra_args;
+		$command = read_config_option('path_php_binary') . ' -q ' . $command_string . $extra_args;
 		passthru($command);
 
 		/* close the box */
@@ -2572,155 +2575,65 @@ function mactrack_site_scan($web = FALSE) {
 
 function mactrack_enable() {
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_request("device_id"));
+	get_filter_request_var('device_id');
 	/* ==================================================== */
 
-	$dbinfo = db_fetch_row("SELECT * FROM mac_track_devices WHERE device_id=" . $_REQUEST["device_id"]);
+	$dbinfo = db_fetch_row_prepared('SELECT * FROM mac_track_devices WHERE device_id = ?', array(get_request_var('device_id')));
 
 	/* log the trasaction to the database */
-	mactrack_log_action("Device Enable '" . $dbinfo["hostname"] . "'");
+	mactrack_log_action(__('Device Enable \'%s\'', $dbinfo['hostname']));
 
-	db_execute("UPDATE mac_track_devices SET disabled='' WHERE device_id=" . $_REQUEST["device_id"]);
+	db_execute_prepared("UPDATE mac_track_devices SET disabled='' WHERE device_id = ?", array(get_request_var('device_id')));
 
 	/* get the new html */
 	$html = mactrack_format_device_row($dbinfo);
 
 	/* send the response back to the browser */
-	print "enable!!!!" . $dbinfo["device_id"] . "!!!!" . $html;
+	print 'enable!!!!' . $dbinfo['device_id'] . '!!!!' . $html;
 }
 
 function mactrack_disable() {
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_request("device_id"));
+	get_filter_request_var('device_id');
 	/* ==================================================== */
 
-	$dbinfo = db_fetch_row("SELECT * FROM mactrack_devices WHERE device_id=" . $_REQUEST["device_id"]);
+	$dbinfo = db_fetch_row_prepared('SELECT * FROM mactrack_devices WHERE device_id = ?', array(get_request_var('device_id')));
 
 	/* log the trasaction to the database */
-	mactrack_log_action("Device Disable '" . $dbinfo["hostname"] . "'");
+	mactrack_log_action(__('Device Disable \'%d\'', $dbinfo['hostname']));
 
-	db_execute("UPDATE mactack_devices SET disabled='on' WHERE device_id=" . $_REQUEST["device_id"]);
+	db_execute_prepared("UPDATE mactack_devices SET disabled='on' WHERE device_id = ?", array(get_request_var('device_id')));
 
 	/* get the new html */
 	$html = mactrack_format_device_row($stat);
 
 	/* send the response back to the browser */
-	print "disable!!!!" . $stat["device_id"] . "!!!!" . $html;
+	print 'disable!!!!' . $stat['device_id'] . '!!!!' . $html;
 }
 
 function mactrack_log_action($message) {
-	$user = db_fetch_row("SELECT username, full_name FROM user_auth WHERE id=" . $_SESSION["sess_user_id"]);
+	$user = db_fetch_row_prepared('SELECT username, full_name FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
 
-	cacti_log("MACTRACK: " . $message . ", by '" . $user["full_name"] . "(" . $user["username"] . ")'", false, "SYSTEM");
+	cacti_log('MACTRACK: ' . $message . ", by '" . $user['full_name'] . '(' . $user['username'] . ")'", false, 'SYSTEM');
 }
 
 function mactrack_date($date) {
-	$year = date("Y");
+	$year = date('Y');
 	return (substr_count($date, $year) ? substr($date,5) : $date);
 }
 
-function mactrack_int_row_color($stat) {
-	$bgc = 0;
-	if ($stat["int_errors_present"] == "1") {
-		$bgc = db_fetch_cell("SELECT hex FROM colors WHERE id='" . read_config_option("mt_int_errors_bgc") . "'");
-	} elseif ($stat["int_discards_present"] == "1") {
-		$bgc = db_fetch_cell("SELECT hex FROM colors WHERE id='" . read_config_option("mt_int_discards_bgc") . "'");
-	} elseif ($stat["ifOperStatus"] == "1" && $stat["ifAlias"] == "") {
-		$bgc = db_fetch_cell("SELECT hex FROM colors WHERE id='" . read_config_option("mt_int_up_wo_alias_bgc") . "'");
-	} elseif ($stat["ifOperStatus"] == "0") {
-		$bgc = db_fetch_cell("SELECT hex FROM colors WHERE id='" . read_config_option("mt_int_down_bgc") . "'");
+function mactrack_int_row_class($stat) {
+	if ($stat['int_errors_present'] == '1') {
+		return 'int_errors';
+	} elseif ($stat['int_discards_present'] == '1') {
+		return 'int_discards';
+	} elseif ($stat['ifOperStatus'] == '1' && $stat['ifAlias'] == '') {
+		return 'int_up_wo_alias';
+	} elseif ($stat['ifOperStatus'] == '0') {
+		return 'int_down';
 	} else {
-		$bgc = db_fetch_cell("SELECT hex FROM colors WHERE id='" . read_config_option("mt_int_up_bgc") . "'");
+		return 'int_up_bgc';
 	}
-
-	return $bgc;
-}
-
-/* mactrack_draw_actions_dropdown - draws a table the allows the user to select an action to perform
-     on one or more data elements
-   @arg $actions_array - an array that contains a list of possible actions. this array should
-     be compatible with the form_dropdown() function */
-function mactrack_draw_actions_dropdown($actions_array, $include_form_end = true) {
-	global $config;
-	?>
-	<table align='center' width='100%'>
-		<tr>
-			<td width='1' valign='top'>
-				<img src='<?php echo $config['url_path']; ?>images/arrow.gif' alt='' align='middle'>&nbsp;
-			</td>
-			<td align='right'>
-				Choose an action:
-				<?php form_dropdown("drp_action",$actions_array,"","","1","","");?>
-			</td>
-			<td width='1' align='right'>
-				<input type='submit' name='go' value='Go'>
-			</td>
-		</tr>
-	</table>
-
-	<input type='hidden' name='action' value='actions'>
-	<?php
-	if ($include_form_end) {
-		print "</form>";
-	}
-}
-
-/* mactrack_save_button - draws a (save|create) and cancel button at the bottom of
-     an html edit form
-   @arg $force_type - if specified, will force the 'action' button to be either
-     'save' or 'create'. otherwise this field should be properly auto-detected */
-function mactrack_save_button($cancel_action = "", $action = "save", $force_type = "", $key_field = "id") {
-	global $config;
-
-	if (substr_count($cancel_action, ".php")) {
-		$caction = $cancel_action;
-		$calt = "Return";
-		$sname = "save";
-		$salt = "Save";
-	}else{
-		$caction = $_SERVER['HTTP_REFERER'];
-		$calt = "Cancel";
-		if ((empty($force_type)) || ($cancel_action == "return")) {
-			if ($action == "import") {
-				$sname = "import";
-				$salt  = "Import";
-			}elseif (empty($_REQUEST[$key_field])) {
-				$sname = "create";
-				$salt  = "Create";
-			}else{
-				$sname = "save";
-				$salt  = "Save";
-			}
-
-			if ($cancel_action == "return") {
-				$calt   = "Return";
-				$action = "save";
-			}else{
-				$calt   = "Cancel";
-			}
-		}elseif ($force_type == "save") {
-			$sname = "save";
-			$salt  = "Save";
-		}elseif ($force_type == "create") {
-			$sname = "create";
-			$salt  = "Create";
-		}elseif ($force_type == "import") {
-			$sname = "import";
-			$salt  = "Import";
-		}
-	}
-	?>
-	<table align='center' width='100%' style='background-color: #ffffff; border: 1px solid #bbbbbb;'>
-		<tr>
-			<td bgcolor="#f5f5f5" align="right">
-				<input type='hidden' name='action' value='<?php print $action;?>'>
-				<input type='button' value='<?php print $calt;?>' onClick='window.location.assign("<?php print htmlspecialchars($caction);?>")' name='cancel'>
-				<input type='submit' value='<?php print $salt;?>' name='<?php print $sname;?>'>
-			</td>
-		</tr>
-	</table>
-	</form>
-	<?php
 }
 
 /* mactrack_create_sql_filter - this routine will take a filter string and process it into a
@@ -2734,7 +2647,7 @@ function mactrack_save_button($cancel_action = "", $action = "save", $force_type
      contain the table name in cases where joins are important.
    @returns - (string) The formatted SQL syntax */
 function mactrack_create_sql_filter($filter, $fields) {
-	$query = "";
+	$query = '';
 
 	/* field names are required */
 	if (!sizeof($fields)) return;
@@ -2742,52 +2655,52 @@ function mactrack_create_sql_filter($filter, $fields) {
 	/* the filter must be non-blank */
 	if (!strlen($filter)) return;
 
-	$elements = explode(" ", $filter);
+	$elements = explode(' ', $filter);
 
 	foreach($elements as $element) {
-		if (substr($element, 0, 1) == "-") {
+		if (substr($element, 0, 1) == '-') {
 			$filter   = substr($element, 1);
-			$type     = "NOT";
-			$operator = "AND";
+			$type     = 'NOT';
+			$operator = 'AND';
 		} else {
 			$filter   = $element;
-			$type     = "";
-			$operator = "OR";
+			$type     = '';
+			$operator = 'OR';
 		}
 
 		$field_no = 1;
 		foreach ($fields as $field) {
 			if (($field_no == 1) && (strlen($query) > 0)) {
-				$query .= ") AND (";
+				$query .= ') AND (';
 			}elseif ($field_no == 1) {
-				$query .= "(";
+				$query .= '(';
 			}
 
-			$query .= ($field_no == 1 ? "":" $operator ") . "($field $type LIKE '%" . $filter . "%')";
+			$query .= ($field_no == 1 ? '':" $operator ") . "($field $type LIKE '%" . $filter . "%')";
 
 			$field_no++;
 		}
 	}
 
-	return $query . ")";
+	return $query . ')';
 }
 
 function mactrack_display_hours($value) {
-	if ($value == "") {
-		return "N/A";
+	if ($value == '') {
+		return __('N/A');
 	}else if ($value < 60) {
-		return round($value,0) . " Minutes";
+		return __('%d Minutes', round($value,0));
 	}else{
 		$value = $value / 60;
 		if ($value < 24) {
-			return round($value,0) . " Hours";
+			return __('%d Hours', round($value,0));
 		}else{
 			$value = $value / 24;
 			if ($value < 7) {
-				return round($value,0) . " Days";
+				return __('%d Days', round($value,0));
 			}else{
 				$value = $value / 7;
-				return round($value,0) . " Weeks";
+				return __('%d Weeks', round($value,0));
 			}
 		}
 	}
@@ -2795,57 +2708,60 @@ function mactrack_display_hours($value) {
 
 function mactrack_display_stats() {
 	/* check if scanning is running */
-	$processes = db_fetch_cell("SELECT COUNT(*) FROM mac_track_processes");
-	$frequency = read_config_option("mt_collection_timing", TRUE) * 60;
-	$mactrack_stats = read_config_option("stats_mactrack", TRUE);
-	$time  = 'Not Recorded';
-	$proc  = 'N/A';
-	$devs  = 'N/A';
+	$processes = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes');
+	$frequency = read_config_option('mt_collection_timing', TRUE) * 60;
+	$mactrack_stats = read_config_option('stats_mactrack', TRUE);
+	$time  = __('Not Recorded');
+	$proc  = __('N/A');
+	$devs  = __('N/A');
 	if ($mactrack_stats != '') {
-		$stats = explode(" ", $mactrack_stats);
+		$stats = explode(' ', $mactrack_stats);
 
 		if (sizeof($stats == 3)) {
-			$time = explode(":", $stats[0]);
+			$time = explode(':', $stats[0]);
 			$time = $time[1];
 
-			$proc = explode(":", $stats[1]);
+			$proc = explode(':', $stats[1]);
 			$proc = $proc[1];
 
-			$devs = explode(":", $stats[2]);
+			$devs = explode(':', $stats[2]);
 			$devs = $devs[1];
 		}
 	}
 
 	if ($processes > 0) {
-		$message = "<strong>Status:</strong> Running, <strong>Processes:</strong> " . $processes . ", <strong>Progress:</strong> " . read_config_option("mactrack_process_status", TRUE) . ", <strong>LastRuntime:</strong> " . round($time,1);
+		$message = __('Status: Running, Processes: %d, Progress: %s, LastRuntime: %f', $processes, read_config_option('mactrack_process_status', TRUE), round($time,1));
 	}else{
-		$message = "<strong>Status:</strong> Idle, <strong>LastRuntime:</strong> " . round($time,1) . " seconds, <strong>Processes:</strong> " . $proc . " processes, <strong>Devices:</strong> " . $devs . ", <strong>Next Run Time:</strong> " . date("Y-m-d H:i:s", strtotime(read_config_option("mt_scan_date", TRUE)) + $frequency);
+		$message = __('Status: Idle, LastRuntime: %f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s', 
+			round($time,1), $proc , $devs, 
+			date('Y-m-d H:i:s', strtotime(read_config_option('mt_scan_date', TRUE)) + $frequency));
 	}
-	html_start_box("", "100%", "", "3", "center", "");
 
-	print "<tr>";
-	print "<td><strong>Scanning Rate:</strong> Every " . mactrack_display_hours(read_config_option("mt_collection_timing")) . ", " . $message . "</td>";
-	print "</tr>";
+	html_start_box('', '100%', '', '3', 'center', '');
+
+	print '<tr>';
+	print '<td>' . __('Scanning Rate: Every %s', mactrack_display_hours(read_config_option('mt_collection_timing'))) . ', ' . $message . '</td>';
+	print '</tr>';
 
 	html_end_box();
 }
 
-function mactrack_legend_row($setting, $text) {
-	if (read_config_option($setting) > 0) {
-		print "<td width='10%' style='text-align:center; background-color:#" . db_fetch_cell("SELECT hex FROM colors WHERE id='" . read_config_option($setting) . "'") . ";'><strong>$text</strong></td>";
-	}
+function mactrack_legend_row($class, $text) {
+	print "<td width='16.67%' class='$class' style='text-align:center;;'>$text</td>";
 }
 
 function mactrack_redirect() {
 	/* set the default tab */
-	load_current_session_value("report", "sess_mactrack_view_report", "devices");
-	$current_tab = $_REQUEST["report"];
+    get_filter_request_var('report', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-zA-Z]+)$/')));
 
-	$current_page = str_replace("mactrack_", "", str_replace("view_", "", str_replace(".php", "", basename($_SERVER["PHP_SELF"]))));
-	$current_dir  = dirname($_SERVER["PHP_SELF"]);
+	load_current_session_value('report', 'sess_mactrack_view_report', 'devices');
+	$current_tab = get_nfilter_request_var('report');
+
+	$current_page = str_replace('mactrack_', '', str_replace('view_', '', str_replace('.php', '', basename($_SERVER['PHP_SELF']))));
+	$current_dir  = dirname($_SERVER['PHP_SELF']);
 
 	if ($current_page != $current_tab) {
-		header("Location: " . $current_dir . "/mactrack_view_" . $current_tab . ".php");
+		header('Location: ' . $current_dir . '/mactrack_view_' . $current_tab . '.php');
 	}
 }
 
@@ -2854,30 +2770,32 @@ function mactrack_format_device_row($device, $actions=false) {
 
 	/* viewer level */
 	if ($actions) {
-		$row = "<a href='" . htmlspecialchars($config['url_path'] . "plugins/mactrack/mactrack_interfaces.php?device_id=" . $device['device_id'] . "&issues=0&page=1") . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interfaces.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='View Interfaces' align='middle' border='0'></a>";
+		$row = "<a href='" . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_interfaces.php?device_id=' . $device['device_id'] . '&issues=0&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interfaces.gif' alt='' title='" . __('View Interfaces') . "' align='middle' border='0'></a>";
+
 		/* admin level */
 		if (api_user_realm_auth('mactrack_sites.php')) {
-			if ($device["disabled"] == '') {
-				$row .= "<img id='r_" . $device["device_id"] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device(" . $device["device_id"] . ")' title='Rescan Device' align='middle' border='0'>";
+			if ($device['disabled'] == '') {
+				$row .= "<img id='r_" . $device['device_id'] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onClick='scan_device(" . $device['device_id'] . ")' title='" . __('Rescan Device') . "' align='middle' border='0'>";
 			}else{
 				$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='middle' border='0'>";
 			}
 		}
-		print "<td style='width:40px;'>" . $row . "</td>";//, $device["device_id"]);
+
+		print "<td style='width:40px;'>" . $row . "</td>";
 	}
 
-	form_selectable_cell("<a class='linkEditMain' href='mactrack_devices.php?action=edit&device_id=" . $device['device_id'] . "'>" . (strlen($_REQUEST['filter']) ? preg_replace("/(" . preg_quote($_REQUEST['filter']) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $device['device_name']) : $device['device_name']) . "</a>", $device["device_id"]);
-	form_selectable_cell($device["site_name"], $device["device_id"]);
-	form_selectable_cell(get_colored_device_status(($device["disabled"] == "on" ? true : false), $device["snmp_status"]), $device["device_id"]);
-	form_selectable_cell((strlen($_REQUEST["filter"]) ? preg_replace("/(" . preg_quote($_REQUEST["filter"]) . ")/i", "<span style='background-color: #F8D93D;'>\\1</span>", $device["hostname"]) : $device["hostname"]), $device["device_id"]);
-	form_selectable_cell(($device["device_type"] == '' ? 'Not Detected' : $device["device_type"]), $device["device_id"]);
-	form_selectable_cell(($device["scan_type"] == "1" ? "N/A" : $device["ips_total"]), $device["device_id"]);
-	form_selectable_cell(($device["scan_type"] == "3" ? "N/A" : $device["ports_total"]), $device["device_id"]);
-	form_selectable_cell(($device["scan_type"] == "3" ? "N/A" : $device["ports_active"]), $device["device_id"]);
-	form_selectable_cell(($device["scan_type"] == "3" ? "N/A" : $device["ports_trunk"]), $device["device_id"]);
-	form_selectable_cell(($device["scan_type"] == "3" ? "N/A" : $device["macs_active"]), $device["device_id"]);
-	form_selectable_cell(number_format($device["last_runduration"], 1), $device["device_id"]);
-	form_checkbox_cell($device["device_name"], $device["device_id"]);
+	form_selectable_cell(filter_value($device['device_name'], get_request_var('filter'), "mactrack_devices.php?action=edit&device_id=" . $device['device_id']), $device['device_id']);
+	form_selectable_cell($device['site_name'], $device['device_id']);
+	form_selectable_cell(get_colored_device_status(($device['disabled'] == 'on' ? true : false), $device['snmp_status']), $device['device_id']);
+	form_selectable_cell(filter_value($device['hostname'], get_request_var('filter')), $device['device_id']);
+	form_selectable_cell(($device['device_type'] == '' ? __('Not Detected') : $device['device_type']), $device['device_id']);
+	form_selectable_cell(($device['scan_type'] == '1' ? __('N/A') : $device['ips_total']), $device['device_id']);
+	form_selectable_cell(($device['scan_type'] == '3' ? __('N/A') : $device['ports_total']), $device['device_id']);
+	form_selectable_cell(($device['scan_type'] == '3' ? __('N/A') : $device['ports_active']), $device['device_id']);
+	form_selectable_cell(($device['scan_type'] == '3' ? __('N/A') : $device['ports_trunk']), $device['device_id']);
+	form_selectable_cell(($device['scan_type'] == '3' ? __('N/A') : $device['macs_active']), $device['device_id']);
+	form_selectable_cell(number_format($device['last_runduration'], 1), $device['device_id']);
+	form_checkbox_cell($device['device_name'], $device['device_id']);
 	form_end_row();
 
 }
@@ -2931,13 +2849,13 @@ function mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '')
 
 		$from = $Mailer->email_format($fromname, $from);
 		if ($Mailer->header_set('From', $from) === false) {
-			cacti_log('ERROR: ' . $Mailer->error(), true, "MACTRACK");
+			cacti_log('ERROR: ' . $Mailer->error(), true, 'MACTRACK');
 			return $Mailer->error();
 		}
 	} else {
 		$from = $Mailer->email_format($fromname, $from);
 		if ($Mailer->header_set('From', $from) === false) {
-			cacti_log('ERROR: ' . $Mailer->error(), true, "MACTRACK");
+			cacti_log('ERROR: ' . $Mailer->error(), true, 'MACTRACK');
 			return $Mailer->error();
 		}
 	}
@@ -2949,7 +2867,7 @@ function mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '')
 
 	foreach($to as $t) {
 		if (trim($t) != '' && !$Mailer->header_set('To', $t)) {
-			cacti_log('ERROR: ' . $Mailer->error(), true, "MACTRACK");
+			cacti_log('ERROR: ' . $Mailer->error(), true, 'MACTRACK');
 			return $Mailer->error();
 		}
 	}
@@ -2966,7 +2884,7 @@ function mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '')
 	$Mailer->Config['Mail']['WordWrap'] = $wordwrap;
 
 	if (! $Mailer->header_set('Subject', $subject)) {
-		cacti_log('ERROR: ' . $Mailer->error(), true, "MACTRACK");
+		cacti_log('ERROR: ' . $Mailer->error(), true, 'MACTRACK');
 		return $Mailer->error();
 	}
 
@@ -2979,7 +2897,7 @@ function mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '')
 	$Mailer->header_set('User-Agent', 'Cacti-MacTrack-v' . $v['version']);
 
 	if ($Mailer->send($text) == false) {
-		cacti_log('ERROR: ' . $Mailer->error(), true, "MACTRACK");
+		cacti_log('ERROR: ' . $Mailer->error(), true, 'MACTRACK');
 		return $Mailer->error();
 	}
 
@@ -2991,134 +2909,129 @@ function mactrack_tabs() {
 
 	/* present a tabbed interface */
 	$tabs_mactrack = array(
-		"sites" => "Sites",
-		"devices" => "Devices",
-		"ips" => "IP Ranges",
-		"arp" => "IP Addresses",
-		"macs" => "MAC Addresses",
-		"interfaces" => "Interfaces",
-		"graphs" => "Graphs");
+		'sites'      => __('Sites'),
+		'devices'    => __('Devices'),
+		'ips'        => __('IP Ranges'),
+		'arp'        => __('IP Address'),
+		'macs'       => __('MAC Address'),
+		'interfaces' => __('Interfaces'),
+		'graphs'     => __('Graphs')
+	);
 
 	/* set the default tab */
-	$current_tab = $_REQUEST["report"];
+	$current_tab = get_request_var('report');
 
 	/* draw the tabs */
 	print "<div class='tabs'><nav><ul>\n";
 
 	if (sizeof($tabs_mactrack)) {
-	foreach ($tabs_mactrack as $tab_short_name => $tab_name) {
-		print "<li><a " . (($tab_short_name == $current_tab) ? "class='selected'" : "") . " href='" . htmlspecialchars($config['url_path'] .
-			"plugins/mactrack/mactrack_view_" . $tab_short_name . ".php?" .
-			"report=" . $tab_short_name) .
-			"'>$tab_name</a></li>\n";
-	}
-	}
-	print "</ul></nav></div>\n";
-}
-
-function mactrack_check_changed($request, $session) {
-	if ((isset($_REQUEST[$request])) && (isset($_SESSION[$session]))) {
-		if ($_REQUEST[$request] != $_SESSION[$session]) {
-			return 1;
+		foreach ($tabs_mactrack as $tab_short_name => $tab_name) {
+			print '<li><a class="tab' . (($tab_short_name == $current_tab) ? ' selected"' : '"') . " href='" . htmlspecialchars($config['url_path'] .
+				'plugins/mactrack/mactrack_view_' . $tab_short_name . '.php?' .
+				'report=' . $tab_short_name) .
+				"'>$tab_name</a></li>\n";
 		}
 	}
+
+	print "</ul></nav></div>\n";
 }
 
 function mactrack_get_vendor_name($mac) {
 	$vendor_mac = substr($mac,0,8);
 
-	$vendor_name = db_fetch_cell("SELECT vendor_name FROM mac_track_oui_database WHERE vendor_mac='$vendor_mac'");
+	$vendor_name = db_fetch_cell_prepared('SELECT vendor_name FROM mac_track_oui_database WHERE vendor_mac = ?', array($vendor_mac));
 
 	if (strlen($vendor_name)) {
 		return $vendor_name;
 	}else{
-		return "Unknown";
+		return __('Unknown');
 	}
 }
 
-function mactrack_site_filter() {
+function mactrack_site_filter($page = 'mactrack_sites.php') {
 	global $item_rows;
 
 	?>
 	<tr class='even'>
 		<td>
-			<form name="form_mactrack_view_sites">
-			<table cellpadding="2" cellspacing="0">
+		<form id='mactrack'>
+			<table class='filterTable'>
 				<tr>
-					<td width="70">
-						Search:
+					<td>
+						<?php print __('Search');?>
 					</td>
 					<td>
-						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
+						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter');?>'>
 					</td>
 					<td>
-						Rows:
+						<?php print __('Sites');?>
 					</td>
 					<td>
-						<select name="rows" onChange="applySiteFilterChange(document.form_mactrack_view_sites)">
-							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
+						<select id='rows' onChange='applyFilter()'>
+							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default');?></option>
 							<?php
 								if (sizeof($item_rows) > 0) {
 								foreach ($item_rows as $key => $value) {
-									print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
+									print '<option value="' . $key . '"'; if (get_request_var('rows') == $key) { print ' selected'; } print '>' . $value . "</option>\n";
 								}
 								}
 							?>
 						</select>
 					</td>
 					<td>
-						<input type="checkbox" id="detail" name="detail" <?php if (($_REQUEST["detail"] == "true") || ($_REQUEST["detail"] == "on")) print ' checked="true"';?> onClick="applySiteFilterChange(document.form_mactrack_view_sites)" alt="Device Details" border="0" align="absmiddle">
+						<input type='checkbox' id='detail' <?php if (get_request_var('detail') == 'true') print ' checked="true"';?> onClick='applyFilter()'>
 					</td>
 					<td>
-						<label for="detail">Show Device Details</label>&nbsp;
+						<label for='detail'><?php print __('Show Device Details');?></label>
 					</td>
 					<td>
-						<input type="submit" name="go_x" value="Go">
+						<input type='submit' id='go' value='<?php print __('Go');?>'>
 					</td>
 					<td>
-						<input type="submit" name="clear_x" value="Clear">
+						<input type='button' id='clear' value='<?php print __('Clear');?>'>
 					</td>
 					<td>
-						<input type="submit" name="export_x" value="Export">
+						<input type='button' id='export' value='<?php print __('Export');?>'>
 					</td>
 				</tr>
 			<?php
-			if (!($_REQUEST["detail"] == "false")) { ?>
+			if (!(get_request_var('detail') == 'false')) { ?>
 			</table>
-			<table cellpadding="2" cellspacing="0">
+			<table class='filterTable'>
 				<tr>
-					<td width="70">
-						Site:
+					<td>
+						<?php print __('Site');?>
 					</td>
 					<td>
-						<select name="site_id" onChange="applySiteFilterChange(document.form_mactrack_view_sites)">
-							<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>Any</option>
+						<select id='site_id' onChange='applyFilter()'>
+							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('Any');?></option>
 							<?php
-							$sites = db_fetch_assoc("SELECT * FROM mac_track_sites ORDER BY mac_track_sites.site_name");
+							$sites = db_fetch_assoc('SELECT * FROM mac_track_sites ORDER BY site_name');
 							if (sizeof($sites) > 0) {
 							foreach ($sites as $site) {
-								print '<option value="' . $site["site_id"] . '"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
+								print '<option value="' . $site['site_id'] . '"'; if (get_request_var('site_id') == $site['site_id']) { print ' selected'; } print '>' . $site['site_name'] . '</option>';
 							}
 							}
 							?>
 						</select>
 					</td>
-					<td style='white-space:nowrap;'>
-						Sub Type:
+					<td>
+						<?php print __('SubType');?>
 					</td>
 					<td>
-						<select name="device_type_id" onChange="applySiteFilterChange(document.form_mactrack_view_sites)">
-							<option value="-1"<?php if ($_REQUEST["device_type_id"] == "-1") {?> selected<?php }?>>Any</option>
+						<select id='device_type_id' onChange='applyFilter()'>
+							<option value='-1'<?php if (get_request_var('device_type_id') == '-1') {?> selected<?php }?>><?php print __('Any');?></option>
 							<?php
-							$device_types = db_fetch_assoc("SELECT DISTINCT mac_track_device_types.device_type_id,
+							$device_types = db_fetch_assoc('SELECT DISTINCT mac_track_device_types.device_type_id,
 								mac_track_device_types.description, mac_track_device_types.sysDescr_match
 								FROM mac_track_device_types
-								INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id = mac_track_devices.device_type_id)
-								ORDER BY mac_track_device_types.description");
+								INNER JOIN mac_track_devices 
+								ON mac_track_device_types.device_type_id = mac_track_devices.device_type_id
+								ORDER BY mac_track_device_types.description');
 
-							if (sizeof($device_types) > 0) {
+							if (sizeof($device_types)) {
 							foreach ($device_types as $device_type) {
-								print '<option value="' . $device_type["device_type_id"] . '"'; if ($_REQUEST["device_type_id"] == $device_type["device_type_id"]) { print " selected"; } print ">" . $device_type["description"] . " (" . $device_type["sysDescr_match"] . ")</option>";
+								print '<option value="' . $device_type['device_type_id'] . '"'; if (get_request_var('device_type_id') == $device_type['device_type_id']) { print ' selected'; } print '>' . $device_type['description'] . ' (' . $device_type['sysDescr_match'] . ')</option>';
 							}
 							}
 							?>
@@ -3127,946 +3040,50 @@ function mactrack_site_filter() {
 				</tr>
 			<?php }?>
 			</table>
-			<input type='hidden' name='page' value='1'>
-			<input type='hidden' name='report' value='sites'>
 			<?php
-			if ($_REQUEST["detail"] == "false") { ?>
-			<input type='hidden' name='hidden_device_type_id' value='-1'>
-			<input type='hidden' name='hidden_site_id' value='-1'>
+			if (get_request_var('detail') == 'false') { ?>
+			<input type='hidden' id='device_type_id' value='-1'>
+			<input type='hidden' id='site_id' value='-1'>
 			<?php }?>
 			</form>
-		</td>
-	</tr>
-	<?php
-}
+			<script type='text/javascript'>
 
-function mactrack_device_filter() {
-	global $item_rows;
+			function applyFilter() {
+				strURL  = urlPath+'plugins/mactrack/<?php print $page;?>?header=false';
+				strURL += '&report=sites';
+				strURL += '&device_type_id=' + $('#device_type_id').val();
+				strURL += '&site_id=' + $('#site_id').val();
+				strURL += '&detail=' + $('#detail').is(':checked');
+				strURL += '&filter=' + $('#filter').val();
+				strURL += '&rows=' + $('#rows').val();
+				loadPageNoHeader(strURL);
+			}
 
-	?>
-	<script type="text/javascript">
-	<!--
-	function applyDeviceFilterChange(objForm) {
-		strURL = '?site_id=' + objForm.site_id.value;
-		strURL = strURL + '&status=' + objForm.status.value;
-		strURL = strURL + '&type_id=' + objForm.type_id.value;
-		strURL = strURL + '&device_type_id=' + objForm.device_type_id.value;
-		strURL = strURL + '&filter=' + objForm.filter.value;
-		strURL = strURL + '&rows=' + objForm.rows.value;
-		document.location = strURL;
-	}
+			function clearFilter() {
+				strURL  = urlPath+'plugins/mactrack/<?php print $page;?>?header=false&clear=true';
+				loadPageNoHeader(strURL);
+			}
 
-	-->
-	</script>
-	<tr class='even'>
-		<form name="form_mactrack_devices">
-		<td>
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Site:
-					</td>
-					<td>
-						<select name="site_id" onChange="applyDeviceFilterChange(document.form_mactrack_devices)">
-						<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>All</option>
-						<option value="-2"<?php if ($_REQUEST["site_id"] == "-2") {?> selected<?php }?>>None</option>
-						<?php
-						$sites = db_fetch_assoc("select site_id,site_name from mac_track_sites order by site_name");
-						if (sizeof($sites) > 0) {
-						foreach ($sites as $site) {
-							print '<option value="'. $site["site_id"] . '"';if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>\n";
-						}
-						}
-						?>
-						</select>
-					</td>
-					<td>
-						Search:
-					</td>
-					<td
-						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
-					</td>
-					<td>
-						<input type="submit" name="go_x" value="Go">
-					</td>
-					<td>
-						<input type="submit" name="clear_x" value="Clear">
-					</td>
-					<td>
-						<input type="submit" name="import_x" value="Import">
-					</td>
-					<td>
-						<input type="submit" name="export_x" value="Export">
-					</td>
-				</tr>
-			</table>
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Type:
-					</td>
-					<td>
-						<select name="type_id" onChange="applyDeviceFilterChange(document.form_mactrack_devices)">
-							<option value="-1"<?php if ($_REQUEST["type_id"] == "-1") {?> selected<?php }?>>Any</option>
-							<option value="1"<?php if ($_REQUEST["type_id"] == "1") {?> selected<?php }?>>Switch/Hub</option>
-							<option value="2"<?php if ($_REQUEST["type_id"] == "2") {?> selected<?php }?>>Switch/Router</option>
-							<option value="3"<?php if ($_REQUEST["type_id"] == "3") {?> selected<?php }?>>Router</option>
-						</select>
-					</td>
-					<td>
-						SubType:
-					</td>
-					<td>
-						<select name="device_type_id" onChange="applyDeviceFilterChange(document.form_mactrack_devices)">
-							<option value="-1"<?php if ($_REQUEST["device_type_id"] == "-1") {?> selected<?php }?>>Any</option>
-							<option value="-2"<?php if ($_REQUEST["device_type_id"] == "-2") {?> selected<?php }?>>Not Detected</option>
-							<?php
-							if ($_REQUEST["type_id"] != -1) {
-								$device_types = db_fetch_assoc("SELECT DISTINCT
-									mac_track_devices.device_type_id,
-									mac_track_device_types.description,
-									mac_track_device_types.sysDescr_match
-									FROM mac_track_device_types
-									INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id = mac_track_devices.device_type_id)
-									WHERE device_type='" . $_REQUEST["type_id"] . "'
-									ORDER BY mac_track_device_types.description");
-							}else{
-								$device_types = db_fetch_assoc("SELECT DISTINCT
-									mac_track_devices.device_type_id,
-									mac_track_device_types.description,
-									mac_track_device_types.sysDescr_match
-									FROM mac_track_device_types
-									INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
-									ORDER BY mac_track_device_types.description;");
-							}
-							if (sizeof($device_types) > 0) {
-							foreach ($device_types as $device_type) {
-								if ($device_type["device_type_id"] == 0) {
-									$display_text = "Unknown Device Type";
-								}else{
-									$display_text = $device_type["description"] . " (" . $device_type["sysDescr_match"] . ")";
-								}
-								print '<option value="' . $device_type["device_type_id"] . '"'; if ($_REQUEST["device_type_id"] == $device_type["device_type_id"]) { print " selected"; } print ">" . $display_text . "</option>";
-							}
-							}
-							?>
-						</select>
-					</td>
-				</tr>
-			</table>
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Status:
-					</td>
-					<td>
-						<select name="status" onChange="applyDeviceFilterChange(document.form_mactrack_devices)">
-							<option value="-1"<?php if ($_REQUEST["status"] == "-1") {?> selected<?php }?>>Any</option>
-							<option value="3"<?php if ($_REQUEST["status"] == "3") {?> selected<?php }?>>Up</option>
-							<option value="-2"<?php if ($_REQUEST["status"] == "-2") {?> selected<?php }?>>Disabled</option>
-							<option value="1"<?php if ($_REQUEST["status"] == "1") {?> selected<?php }?>>Down</option>
-							<option value="0"<?php if ($_REQUEST["status"] == "0") {?> selected<?php }?>>Unknown</option>
-							<option value="4"<?php if ($_REQUEST["status"] == "4") {?> selected<?php }?>>Error</option>
-							<option value="5"<?php if ($_REQUEST["status"] == "5") {?> selected<?php }?>>No Cacti Link</option>
-						</select>
-					</td>
-					<td>
-						Rows:
-					</td>
-					<td>
-						<select name="rows" onChange="applyDeviceFilterChange(document.form_mactrack_devices)">
-							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
-							<?php
-							if (sizeof($item_rows) > 0) {
-							foreach ($item_rows as $key => $value) {
-								print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-				</tr>
-			</table>
-		</td>
-		<input type='hidden' name='page' value='1'>
-		</form>
-	</tr>
-	<?php
-}
+			function exportRows() {
+				strURL  = urlPath+'plugins/mactrack/<?php print $page;?>?export=true';
+				document.location = strURL;
+			}
 
-function mactrack_device_type_filter() {
-	global $item_rows;
+			$(function() {
+				$('#mactrack').submit(function(event) {
+					event.preventDefault();
+					applyFilter();
+				});
 
-	?>
-	<script type="text/javascript">
-	<!--
-	function applyDeviceTypeFilterChange(objForm) {
-		strURL = '?vendor=' + objForm.vendor.value;
-		strURL = strURL + '&type_id=' + objForm.type_id.value;
-		strURL = strURL + '&rows=' + objForm.rows.value;
-		strURL = strURL + '&filter=' + objForm.filter.value;
-		document.location = strURL;
-	}
+				$('#clear').click(function() {
+					clearFilter();
+				});
 
-	-->
-	</script>
-	<tr class='even'>
-		<form name="form_mactrack_device_types">
-		<td>
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Vendor:
-					</td>
-					<td>
-						<select name="vendor" onChange="applyDeviceTypeFilterChange(document.form_mactrack_device_types)">
-							<option value='All'<?php print $_REQUEST['type_id']; if ($_REQUEST['vendor'] == 'All') print ' selected';?>'>All</option>
-							<?php
-							$types = db_fetch_assoc("SELECT DISTINCT vendor from mac_track_device_types ORDER BY vendor");
-
-							if (sizeof($types) > 0) {
-							foreach ($types as $type) {
-								print '<option value="' . $type["vendor"] . '"';if ($_REQUEST["vendor"] == $type["vendor"]) { print " selected"; } print ">" . $type["vendor"] . "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						Type:
-					</td>
-					<td>
-						<select name="type_id" onChange="applyDeviceTypeFilterChange(document.form_mactrack_device_types)">
-							<option value="-1"<?php print $_REQUEST["vendor"] . '"'; if ($_REQUEST['type_id'] == '-1') print ' selected';?>>All</option>
-							<option value="1"<?php print $_REQUEST["vendor"] . '"'; if ($_REQUEST['type_id'] == '1') print ' selected';?>>Switch/Hub</option>
-							<option value="2"<?php print $_REQUEST["vendor"] . '"'; if ($_REQUEST['type_id'] == '2') print ' selected';?>>Switch/Router</option>
-							<option value="3"<?php print $_REQUEST["vendor"] . '"'; if ($_REQUEST['type_id'] == '3') print ' selected';?>>Router</option>
-							?>
-						</select>
-					</td>
-					<td>
-						Rows:
-					</td>
-					<td>
-						<select name="rows" onChange="applyDeviceTypeFilterChange(document.form_mactrack_device_types)">
-							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
-							<?php
-							if (sizeof($item_rows) > 0) {
-							foreach ($item_rows as $key => $value) {
-								print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-				</tr>
-			</table>
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Search:
-					</td>
-					<td>
-						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
-					</td>
-					<td>
-						<input type="submit" name="go_x" title="Submit Query" value="Go">
-					</td>
-					<td>
-						<input type="submit" name="clear_x" title="Clear Filtered Results" value="Clear">
-					</td>
-					<td>
-						<input type="submit" name="scan_x" title="Scan Active Devices for Unknown Device Types" value="Rescan">
-					</td>
-					<td>
-						<input type="submit" name="import_x" title="Import Device Types from a CSV File" value="Import">
-					</td>
-					<td>
-						<input type="submit" name="export_x" title="Export Device Types to Share with Others" value="Export">
-					</td>
-				</tr>
-			</table>
-		</td>
-		<input type='hidden' name='page' value='1'>
-		</form>
-	</tr>
-	<?php
-}
-
-function mactrack_vmac_filter() {
-	global $item_rows;
-
-	?>
-	<script type="text/javascript">
-	<!--
-	function applyVMACFilterChange(objForm) {
-		strURL = '?filter=' + objForm.filter.value;
-		strURL = strURL + '&rows=' + objForm.rows.value;
-		document.location = strURL;
-	}
-	-->
-	</script>
-	<tr class='even'>
-		<td>
-			<form name="form_mactrack_vmacs">
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Search:
-					</td>
-					<td>
-						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
-					</td>
-					<td>
-						Rows:
-					</td>
-					<td>
-						<select name="rows" onChange="applyVMACFilterChange(document.form_mactrack_vmacs)">
-							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
-							<?php
-							if (sizeof($item_rows) > 0) {
-							foreach ($item_rows as $key => $value) {
-								print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						<input type="submit" name="go_x" value="Go">
-					</td>
-					<td>
-						<input type="submit" name="clear_x" value="Clear">
-					</td>
-					<td>
-						<input type="submit" name="export_x" value="Export">
-					</td>
-				</tr>
-			</table>
-			<input type='hidden' name='page' value='1'>
-			<input type='hidden' name='report' value='sites'>
-			</form>
-		</td>
-	</tr>
-	<?php
-}
-
-function mactrack_macw_filter() {
-	global $item_rows;
-
-	?>
-	<script type="text/javascript">
-	<!--
-	function applyMacWFilterChange(objForm) {
-		strURL = '?filter=' + objForm.filter.value;
-		strURL = strURL + '&rows=' + objForm.rows.value;
-		document.location = strURL;
-	}
-	-->
-	</script>
-	<tr class='even'>
-		<td>
-			<form name="form_mactrack_macw">
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Search:
-					</td>
-					<td>
-						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
-					</td>
-					<td>
-						Rows:
-					</td>
-					<td>
-						<select name="rows" onChange="applyMacWFilterChange(document.form_mactrack_macw)">
-							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
-							<?php
-							if (sizeof($item_rows) > 0) {
-							foreach ($item_rows as $key => $value) {
-								print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						<input type="submit" name="go_x" value="Go">
-					</td>
-					<td>
-						<input type="submit" name="clear_x" value="Clear">
-					</td>
-				</tr>
-			</table>
-			<input type='hidden' name='page' value='1'>
-			</form>
-		</td>
-	</tr>
-	<?php
-}
-
-function mactrack_maca_filter() {
-	global $item_rows;
-
-	?>
-	<script type="text/javascript">
-	<!--
-	function applyMacAFilterChange(objForm) {
-		strURL = '?filter=' + objForm.filter.value;
-		strURL = strURL + '&rows=' + objForm.rows.value;
-		document.location = strURL;
-	}
-	-->
-	</script>
-	<tr class='even'>
-		<td>
-			<form name="form_mactrack_maca">
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Search:
-					</td>
-					<td>
-						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
-					</td>
-					<td>
-						Rows:
-					</td>
-					<td>
-						<select name="rows" onChange="applyMacAFilterChange(document.form_mactrack_maca)">
-							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
-							<?php
-							if (sizeof($item_rows) > 0) {
-							foreach ($item_rows as $key => $value) {
-								print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						<input type="submit" name="go_x" value="Go">
-					</td>
-					<td>
-						<input type="submit" name="clear_x" value="Clear">
-					</td>
-				</tr>
-			</table>
-			<input type='hidden' name='page' value='1'>
-			</form>
-		</td>
-	</tr>
-	<?php
-}
-
-function mactrack_mac_filter() {
-	global $item_rows, $rows_selector, $mactrack_search_types;
-
-	?>
-	<tr class='even'>
-		<td>
-			<form name="form_mactrack_view_macs">
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Site:
-					</td>
-					<td>
-						<select name="site_id" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
-							<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>N/A</option>
-							<?php
-							$sites = db_fetch_assoc("select site_id,site_name from mac_track_sites order by site_name");
-							if (sizeof($sites) > 0) {
-							foreach ($sites as $site) {
-								print '<option value="' . $site["site_id"] .'"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						Device:
-					</td>
-					<td>
-						<select name="device_id" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
-							<option value="-1"<?php if ($_REQUEST["device_id"] == "-1") {?> selected<?php }?>>All</option>
-							<?php
-							if ($_REQUEST["site_id"] == -1) {
-								$filter_devices = db_fetch_assoc("SELECT device_id, device_name, hostname FROM mac_track_devices ORDER BY device_name");
-							}else{
-								$filter_devices = db_fetch_assoc("SELECT device_id, device_name, hostname FROM mac_track_devices WHERE site_id='" . $_REQUEST["site_id"] . "' ORDER BY device_name");
-							}
-								if (sizeof($filter_devices) > 0) {
-							foreach ($filter_devices as $filter_device) {
-								print '<option value=" ' . $filter_device["device_id"] . '"'; if ($_REQUEST["device_id"] == $filter_device["device_id"]) { print " selected"; } print ">" . $filter_device["device_name"] . "(" . $filter_device["hostname"] . ")" .  "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						Rows:
-					</td>
-					<td>
-						<select name="rows" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
-							<?php
-							if (sizeof($rows_selector) > 0) {
-							foreach ($rows_selector as $key => $value) {
-								print '<option value="' . $key . '"'; if ($_REQUEST["rows"] == $key) { print " selected"; } print ">" . $value . "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						<input type="submit" name="go_x" value="Go">
-					</td>
-					<td>
-						<input type="submit" name="clear_x" value="Clear">
-					</td>
-					<td>
-						<input type="submit" name="export_x" value="Export">
-					</td>
-				</tr>
-			</table>
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td style='white-space:nowrap;' width="75">
-						IP Address:
-					</td>
-					<td>
-						<select name="ip_filter_type_id">
-							<?php
-							for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
-								print "<option value='" . $i . "'"; if ($_REQUEST["ip_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						<input type="text" name="ip_filter" size="20" value="<?php print $_REQUEST["ip_filter"];?>">
-					</td>
-					<td style='white-space:nowrap;'>
-						VLAN Name:
-					</td>
-					<td>
-						<select name="vlan" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
-							<option value="-1"<?php if ($_REQUEST["vlan"] == "-1") {?> selected<?php }?>>All</option>
-							<?php
-							$sql_where = "";
-							if ($_REQUEST["device_id"] != "-1") {
-								$sql_where = "WHERE device_id='" . $_REQUEST["device_id"] . "'";
-							}
-	
-							if ($_REQUEST["site_id"] != "-1") {
-								if (strlen($sql_where)) {
-									$sql_where .= " AND site_id='" . $_REQUEST["site_id"] . "'";
-								}else{
-									$sql_where = "WHERE site_id='" . $_REQUEST["site_id"] . "'";
-								}
-							}
-
-							$vlans = db_fetch_assoc("SELECT DISTINCT vlan_id, vlan_name FROM mac_track_vlans $sql_where ORDER BY vlan_name ASC");
-							if (sizeof($vlans) > 0) {
-							foreach ($vlans as $vlan) {
-								print '<option value="' . $vlan["vlan_id"] . '"'; if ($_REQUEST["vlan"] == $vlan["vlan_id"]) { print " selected"; } print ">" . $vlan["vlan_name"] . "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						Show:
-					</td>
-					<td>
-						<select name="scan_date" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
-							<option value="1"<?php if ($_REQUEST["scan_date"] == "1") {?> selected<?php }?>>All</option>
-							<option value="2"<?php if ($_REQUEST["scan_date"] == "2") {?> selected<?php }?>>Most Recent</option>
-							<option value="3"<?php if ($_REQUEST["scan_date"] == "3") {?> selected<?php }?>>Aggregated</option>
-							<?php
-
-							$scan_dates = db_fetch_assoc("select scan_date from mac_track_scan_dates order by scan_date desc");
-							if (sizeof($scan_dates) > 0) {
-							foreach ($scan_dates as $scan_date) {
-								print '<option value="' . $scan_date["scan_date"] . '"'; if ($_REQUEST["scan_date"] == $scan_date["scan_date"]) { print " selected"; } print ">" . $scan_date["scan_date"] . "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td style='white-space:nowrap;' width="75">
-						Mac Address:
-					</td>
-					<td>
-						<select name="mac_filter_type_id">
-							<?php
-							for($i=1;$i<=sizeof($mactrack_search_types)-2;$i++) {
-								print "<option value='" . $i . "'"; if ($_REQUEST["mac_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						<input type="text" name="mac_filter" size="20" value="<?php print $_REQUEST["mac_filter"];?>">
-					</td>
-					<td>
-						Authorized:
-					</td>
-					<td>
-						<select name="authorized" onChange="applyMacFilterChange(document.form_mactrack_view_macs)">
-							<option value="-1"<?php if ($_REQUEST["authorized"] == "-1") {?> selected<?php }?>>All</option>
-							<option value="1"<?php if ($_REQUEST["authorized"] == "1") {?> selected<?php }?>>Yes</option>
-							<option value="0"<?php if ($_REQUEST["authorized"] == "0") {?> selected<?php }?>>No</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td style='white-space:nowrap;' width="75">
-						Port Name:
-					</td>
-					<td>
-						<select name="port_name_filter_type_id">
-							<?php
-							for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
-								print "<option value='" . $i . "'"; if ($_REQUEST["port_name_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						<input type="text" name="port_name_filter" size="20" value="<?php print $_REQUEST["port_name_filter"];?>">
-					</td>
-					<td colspan="2">
-					</td>
-				</tr>
-			</table>
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Search:
-					</td>
-					<td>
-						<input type="text" name="filter" size="40" value="<?php print $_REQUEST["filter"];?>">
-					</td>
-				</tr>
-			</table>
-			<input type='hidden' name='report' value='macs'>
-			</form>
-		</td>
-	</tr>
-	<?php
-}
-
-function mactrack_ip_address_filter() {
-	global $item_rows, $rows_selector, $mactrack_search_types;
-
-	?>
-	<tr class='even'>
-		<td>
-			<form name="form_mactrack_view_arp">
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Site:
-					</td>
-					<td>
-						<select name="site_id" onChange="applyArpFilterChange(document.form_mactrack_view_arp)">
-							<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>N/A</option>
-							<?php
-							$sites = db_fetch_assoc("select site_id,site_name from mac_track_sites order by site_name");
-							if (sizeof($sites) > 0) {
-								foreach ($sites as $site) {
-									print '<option value="' . $site["site_id"] .'"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
-								}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						Device:
-					</td>
-					<td>
-						<select name="device_id" onChange="applyArpFilterChange(document.form_mactrack_view_arp)">
-							<option value="-1"<?php if ($_REQUEST["device_id"] == "-1") {?> selected<?php }?>>All</option>
-							<?php
-							if ($_REQUEST["site_id"] == -1) {
-								$filter_devices = db_fetch_assoc("SELECT DISTINCT device_id, device_name, hostname FROM mac_track_devices ORDER BY device_name");
-							}else{
-								$filter_devices = db_fetch_assoc("SELECT DISTINCT device_id, device_name, hostname FROM mac_track_devices WHERE site_id='" . $_REQUEST["site_id"] . "' ORDER BY device_name");
-							}
-							if (sizeof($filter_devices) > 0) {
-							foreach ($filter_devices as $filter_device) {
-								print '<option value=" ' . $filter_device["device_id"] . '"'; if ($_REQUEST["device_id"] == $filter_device["device_id"]) { print " selected"; } print ">" . $filter_device["device_name"] . "(" . $filter_device["hostname"] . ")" .  "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						Rows:
-					</td>
-					<td>
-						<select name="rows" onChange="applyArpFilterChange(document.form_mactrack_view_arp)">
-							<?php
-							if (sizeof($rows_selector) > 0) {
-							foreach ($rows_selector as $key => $value) {
-								print '<option value="' . $key . '"'; if ($_REQUEST["rows"] == $key) { print " selected"; } print ">" . $value . "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						<input type="submit" name="go_x" value="Go">
-					</td>
-					<td>
-						<input type="submit" name="clear_x" value="Clear">
-					</td>
-					<td>
-						<input type="submit" name="export_x" value="Export">
-					</td>
-				</tr>
-			</table>
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td style='white-space:nowrap;' width="75">
-						IP Address:
-					</td>
-					<td>
-						<select name="ip_filter_type_id">
-							<?php
-							for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
-								print "<option value='" . $i . "'"; if ($_REQUEST["ip_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						<input type="text" name="ip_filter" size="20" value="<?php print $_REQUEST["ip_filter"];?>">
-					</td>
-				</tr>
-				<tr>
-					<td style='white-space:nowrap;' width="75">
-						Mac Address:
-					</td>
-					<td>
-						<select name="mac_filter_type_id">
-							<?php
-							for($i=1;$i<=sizeof($mactrack_search_types)-2;$i++) {
-								print "<option value='" . $i . "'"; if ($_REQUEST["mac_filter_type_id"] == $i) { print " selected"; } print ">" . $mactrack_search_types[$i] . "</option>\n";
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						<input type="text" name="mac_filter" size="20" value="<?php print $_REQUEST["mac_filter"];?>">
-					</td>
-				</tr>
-			</table>
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Search:
-					</td>
-					<td>
-						<input type="text" name="filter" size="40" value="<?php print $_REQUEST["filter"];?>">
-					</td>
-				</tr>
-			</table>
-			<input type='hidden' name='report' value='arp'>
-			</form>
-		</td>
-	</tr>
-	<?php
-}
-
-function mactrack_device_filter2() {
-	global $item_rows;
-
-	?>
-	<tr class='even'>
-		<td>
-			<form name="form_mactrack_view_devices">
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Site:
-					</td>
-					<td>
-						<select name="site_id" onChange="applyDeviceFilterChange(document.form_mactrack_view_devices)">
-							<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>All</option>
-							<option value="-2"<?php if ($_REQUEST["site_id"] == "-2") {?> selected<?php }?>>None</option>
-							<?php
-							$sites = db_fetch_assoc("select site_id,site_name from mac_track_sites order by site_name");
-							if (sizeof($sites) > 0) {
-							foreach ($sites as $site) {
-								print '<option value="' . $site["site_id"] . '"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						Search:
-					</td>
-					<td>
-						<input type="text" name="filter" size="20" value="<?php print $_REQUEST["filter"];?>">
-					</td>
-					<td>
-						<input type="submit" name="go_x" value="Go">
-					</td>
-					<td>
-						<input type="submit" name="clear_x" value="Clear">
-					</td>
-					<td>
-						<input type="submit" name="export_x" value="Export">
-					</td>
-				</tr>
-			</table>
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Type:
-					</td>
-					<td>
-						<select name="type_id" onChange="applyDeviceFilterChange(document.form_mactrack_view_devices)">
-							<option value="-1"<?php if ($_REQUEST["type_id"] == "-1") {?> selected<?php }?>>Any</option>
-							<option value="1"<?php if ($_REQUEST["type_id"] == "1") {?> selected<?php }?>>Hub/Switch</option>
-							<option value="2"<?php if ($_REQUEST["type_id"] == "2") {?> selected<?php }?>>Switch/Router</option>
-							<option value="3"<?php if ($_REQUEST["type_id"] == "3") {?> selected<?php }?>>Router</option>
-						</select>
-					</td>
-					<td>
-						Sub Type:
-					</td>
-					<td width="1">
-						<select name="device_type_id" onChange="applyDeviceFilterChange(document.form_mactrack_view_devices)">
-							<option value="-1"<?php if ($_REQUEST["device_type_id"] == "-1") {?> selected<?php }?>>Any</option>
-							<option value="-2"<?php if ($_REQUEST["device_type_id"] == "-2") {?> selected<?php }?>>Not Detected</option>
-							<?php
-							if ($_REQUEST["type_id"] != -1) {
-								$device_types = db_fetch_assoc("SELECT DISTINCT
-									mac_track_devices.device_type_id,
-									mac_track_device_types.description,
-									mac_track_device_types.sysDescr_match
-									FROM mac_track_device_types
-									INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
-									WHERE device_type='" . $_REQUEST["type_id"] . "'
-									ORDER BY mac_track_device_types.description");
-							}else{
-								$device_types = db_fetch_assoc("SELECT DISTINCT
-									mac_track_devices.device_type_id,
-									mac_track_device_types.description,
-									mac_track_device_types.sysDescr_match
-									FROM mac_track_device_types
-									INNER JOIN mac_track_devices ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
-									ORDER BY mac_track_device_types.description;");
-							}
-							if (sizeof($device_types) > 0) {
-							foreach ($device_types as $device_type) {
-								$display_text = $device_type["description"] . " (" . $device_type["sysDescr_match"] . ")";
-								print '<option value="' . $device_type["device_type_id"] . '"'; if ($_REQUEST["device_type_id"] == $device_type["device_type_id"]) { print " selected"; } print ">" . $display_text . "</option>";
-							}
-							}
-							?>
-						</select>
-					</td>
-				</tr>
-			</table>
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Status:
-					</td>
-					<td>
-						<select name="status" onChange="applyDeviceFilterChange(document.form_mactrack_view_devices)">
-							<option value="-1"<?php if ($_REQUEST["status"] == "-1") {?> selected<?php }?>>Any</option>
-							<option value="3"<?php if ($_REQUEST["status"] == "3") {?> selected<?php }?>>Up</option>
-							<option value="-2"<?php if ($_REQUEST["status"] == "-2") {?> selected<?php }?>>Disabled</option>
-							<option value="1"<?php if ($_REQUEST["status"] == "1") {?> selected<?php }?>>Down</option>
-							<option value="0"<?php if ($_REQUEST["status"] == "0") {?> selected<?php }?>>Unknown</option>
-							<option value="4"<?php if ($_REQUEST["status"] == "4") {?> selected<?php }?>>Error</option>
-							<option value="5"<?php if ($_REQUEST["status"] == "5") {?> selected<?php }?>>No Cacti Link</option>
-						</select>
-					</td>
-					<td>
-						Rows:
-					</td>
-					<td>
-						<select name="rows" onChange="applyDeviceFilterChange(document.form_mactrack_view_devices)">
-							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
-							<?php
-							if (sizeof($item_rows) > 0) {
-							foreach ($item_rows as $key => $value) {
-								print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-				</tr>
-			</table>
-			<input type='hidden' name='d_page' value='1'>
-			<input type='hidden' name='report' value='devices'>
-			</form>
-		</td>
-	</tr>
-	<?php
-}
-
-function mactrack_ips_filter() {
-	global $item_rows;
-
-	?>
-	<tr class='even'>
-		<td>
-			<form name="form_mactrack_view_ips">
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td width="75">
-						Site:
-					</td>
-					<td>
-						<select name="site_id" onChange="applyIPsFilterChange(document.form_mactrack_view_ips)">
-							<option value="-1"<?php if ($_REQUEST["site_id"] == "-1") {?> selected<?php }?>>Any</option>
-							<?php
-							$sites = db_fetch_assoc("SELECT * FROM mac_track_sites ORDER BY mac_track_sites.site_name");
-							if (sizeof($sites) > 0) {
-							foreach ($sites as $site) {
-								print '<option value="' . $site["site_id"] . '"'; if ($_REQUEST["site_id"] == $site["site_id"]) { print " selected"; } print ">" . $site["site_name"] . "</option>";
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						Rows:
-					</td>
-					<td>
-						<select name="rows" onChange="applyIPsFilterChange(document.form_mactrack_view_ips)">
-							<option value="-1"<?php if (get_request_var_request("rows") == "-1") {?> selected<?php }?>>Default</option>
-							<?php
-							if (sizeof($item_rows) > 0) {
-							foreach ($item_rows as $key => $value) {
-								print "<option value='" . $key . "'"; if (get_request_var_request("rows") == $key) { print " selected"; } print ">" . $value . "</option>\n";
-							}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						<input type="submit" name="export_x" value="Export">
-					</td>
-					<td>
-						<input type="submit" name="clear_x" value="Clear">
-					</td>
-				</tr>
-			</table>
-			<input type='hidden' name='page' value='1'>
-			<input type='hidden' name='report' value='ips'>
-			</form>
+				$('#export').click(function() {
+					exportRows();
+				});
+			});
+			</script>
 		</td>
 	</tr>
 	<?php
