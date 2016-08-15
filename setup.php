@@ -437,7 +437,11 @@ function mactrack_database_upgrade () {
 	mactrack_add_column('mac_track_ips',
 		'mac_track_ips',
 		"ALTER TABLE `mac_track_ips` ADD COLUMN `device_name` varchar(100) NOT NULL default '' AFTER `hostname`");
-		
+
+	db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
+	db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
+	db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
+	db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
 }
 
 function mactrack_check_dependencies() {
@@ -622,7 +626,7 @@ function mactrack_setup_table_new () {
 			`device_id` int(10) unsigned NOT NULL default '0',
 			`hostname` varchar(40) NOT NULL default '',
 			`device_name` varchar(100) NOT NULL default '',
-			`port_number` varchar(10) NOT NULL default '',
+			`port_number` varchar(20) NOT NULL default '',
 			`mac_address` varchar(20) NOT NULL default '',
 			`ip_address` varchar(20) NOT NULL default '',
 			`dns_hostname` varchar(200) default '',
@@ -691,7 +695,7 @@ function mactrack_setup_table_new () {
 			`vendor_mac` varchar(8) default NULL,
 			`ip_address` varchar(20) NOT NULL default '',
 			`dns_hostname` varchar(200) default '',
-			`port_number` varchar(10) NOT NULL default '',
+			`port_number` varchar(20) NOT NULL default '',
 			`port_name` varchar(50) NOT NULL default '',
 			`scan_date` datetime NOT NULL default '0000-00-00 00:00:00',
 			`authorized` tinyint(3) unsigned NOT NULL default '0',
@@ -770,7 +774,7 @@ function mactrack_setup_table_new () {
 			`vendor_mac` varchar(8) default NULL,
 			`ip_address` varchar(20) NOT NULL default '',
 			`dns_hostname` varchar(200) default '',
-			`port_number` varchar(10) NOT NULL default '',
+			`port_number` varchar(20) NOT NULL default '',
 			`port_name` varchar(50) NOT NULL default '',
 			`scan_date` datetime NOT NULL default '0000-00-00 00:00:00',
 			`updated` tinyint(3) unsigned NOT NULL default '0',
@@ -816,7 +820,7 @@ function mactrack_setup_table_new () {
 			`vendor_mac` varchar(8) DEFAULT NULL,
 			`ip_address` varchar(20) NOT NULL DEFAULT '',
 			`dns_hostname` varchar(200) DEFAULT '',
-			`port_number` varchar(10) NOT NULL DEFAULT '',
+			`port_number` varchar(20) NOT NULL DEFAULT '',
 			`port_name` varchar(50) NOT NULL DEFAULT '',
 			`date_last` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 			`first_scan_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
