@@ -248,9 +248,9 @@ function form_actions() {
 
 	top_header();
 
-	html_start_box($device_types_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
-
 	form_start('mactrack_device_types.php');
+
+	html_start_box($device_types_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
 
 	if (!isset($device_types_array)) {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one device type.') . "</span></td></tr>\n";
