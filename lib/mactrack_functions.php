@@ -2181,7 +2181,7 @@ function perform_mactrack_db_maint() {
 	mactrack_debug("Finished deleting old records from the main database.");
 }
 
-function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.ieee.org/oui/oui.txt') {
+function import_oui_database($type = 'ui', $oui_file = 'https://services13.ieee.org/RST/standards-ra-web/rest/assignments/download/?registry=MA-L&format=txt') {
 	if ($type != 'ui') {
 		html_start_box(__('MacTrack OUI Database Import Results'), '100%', '', '1', 'center', '');
 		echo '<tr><td>' . __('Getting OUI Database from IEEE') . '</td></tr>';
@@ -2210,52 +2210,75 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 		$vendor_name    = '';
 		$vendor_address = '';
 		$i = 0;
+		$sql = '';
 
 		if ($type != 'ui') echo '<tr><td>';
 
 		if (sizeof($oui_database)) {
-		foreach ($oui_database as $row) {
-			$row = str_replace("\t", ' ', $row);
-			if (($begin_vendor) && (strlen(trim($row)) == 0)) {
-				if (substr($vendor_address,0,1) == ',') $vendor_address = substr($vendor_address,1);
-				if (substr($vendor_name,0,1) == ',')    $vendor_name    = substr($vendor_name,1);
+			foreach ($oui_database as $row) {
+				$row = str_replace("\t", ' ', $row);
+				if (($begin_vendor) && (strlen(trim($row)) == 0)) {
+					if (substr($vendor_address,0,1) == ',') $vendor_address = substr($vendor_address,1);
+					if (substr($vendor_name,0,1) == ',')    $vendor_name    = substr($vendor_name,1);
 
-				db_execute("REPLACE INTO mac_track_oui_database
-					(vendor_mac, vendor_name, vendor_address, present)
-					VALUES ('" . $vendor_mac . "'," .
-					db_qstr(ucwords(strtolower($vendor_name))) . ',' .
-					db_qstr(str_replace("\n", ', ', ucwords(strtolower(trim($vendor_address))))) . ",'1')");
+					$sql .= ($sql != '' ? ',':'') . 
+						'(' . 
+						db_qstr($vendor_mac) . ', ' . 
+						db_qstr(ucwords(strtolower($vendor_name))) . ', ' . 
+						db_qstr(str_replace("\n", ', ', ucwords(strtolower(trim($vendor_address))))) . ', 1)';
 
-				/* let the user know you are working */
-				if ((($i % 100) == 0) && ($type == 'ui')) echo '.';
-				$i++;
+//					db_execute("REPLACE INTO mac_track_oui_database
+//						(vendor_mac, vendor_name, vendor_address, present)
+//						VALUES ('" . $vendor_mac . "'," .
+//						db_qstr(ucwords(strtolower($vendor_name))) . ',' .
+//						db_qstr(str_replace("\n", ', ', ucwords(strtolower(trim($vendor_address))))) . ",'1')");
 
-				/* reinitialize variables */
-				$begin_vendor   = FALSE;
-				$vendor_mac     = '';
-				$vendor_name    = '';
-				$vendor_address = '';
-			}else{
-				if ($begin_vendor) {
-					if (strpos($row, '(base 16)')) {
-						$address_start = strpos($row, '(base 16)') + 10;
-						$vendor_address .= trim(substr($row,$address_start)) . "\n";
-					}else{
-						$vendor_address .= trim($row) . "\n";
+					/* let the user know you are working */
+					if ((($i % 1000) == 0) && ($type == 'ui')) {
+						echo '.';
+
+						db_execute('REPLACE INTO mac_track_oui_database
+							(vendor_mac, vendor_name, vendor_address, present)
+							VALUES ' . $sql);
+
+						$sql = '';
 					}
-				}else{
+
+					$i++;
+
+					/* reinitialize variables */
+					$begin_vendor   = FALSE;
+					$vendor_mac     = '';
+					$vendor_name    = '';
 					$vendor_address = '';
+				}else{
+					if ($begin_vendor) {
+						if (strpos($row, '(base 16)')) {
+							$address_start = strpos($row, '(base 16)') + 10;
+							$vendor_address .= trim(substr($row,$address_start)) . "\n";
+						}else{
+							$vendor_address .= trim($row) . "\n";
+						}
+					}else{
+						$vendor_address = '';
+					}
+				}
+
+				if (substr_count($row, '(hex)')) {
+					$begin_vendor = TRUE;
+					$vendor_mac = str_replace('-', ':', substr(trim($row), 0, 8));
+					$hex_end = strpos($row, '(hex)') + 5;
+					$vendor_name= trim(substr($row,$hex_end));
 				}
 			}
+		}
 
-			if (substr_count($row, '(hex)')) {
-				$begin_vendor = TRUE;
-				$vendor_mac = str_replace('-', ':', substr(trim($row), 0, 8));
-				$hex_end = strpos($row, '(hex)') + 5;
-				$vendor_name= trim(substr($row,$hex_end));
-			}
+		if ($sql != '') {
+			db_execute('REPLACE INTO mac_track_oui_database
+				(vendor_mac, vendor_name, vendor_address, present)
+				VALUES ' . $sql);
 		}
-		}
+
 		if ($type != 'ui') print '</td></tr>';
 
 		/* count bogus records */
