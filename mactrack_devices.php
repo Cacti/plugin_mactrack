@@ -88,7 +88,8 @@ function form_mactrack_save() {
 			get_nfilter_request_var('snmp_version'), get_nfilter_request_var('snmp_username'), get_nfilter_request_var('snmp_password'), 
 			get_nfilter_request_var('snmp_auth_protocol'), get_nfilter_request_var('snmp_priv_passphrase'), 
 			get_nfilter_request_var('snmp_priv_protocol'), get_nfilter_request_var('snmp_context'),
-			get_nfilter_request_var('snmp_port'), get_nfilter_request_var('snmp_timeout'), get_nfilter_request_var('snmp_retries'), 
+			get_nfilter_request_var('snmp_engine_id'), get_nfilter_request_var('snmp_port'), 
+			get_nfilter_request_var('snmp_timeout'), get_nfilter_request_var('snmp_retries'), 
 			get_nfilter_request_var('max_oids'), get_nfilter_request_var('ignorePorts'), get_nfilter_request_var('notes'), 
 			get_nfilter_request_var('user_name'), get_nfilter_request_var('user_password'), get_nfilter_request_var('term_type'), 
 			get_nfilter_request_var('private_key_path'), (isset_request_var('disabled') ? get_nfilter_request_var('disabled') : ''));
@@ -427,7 +428,7 @@ function mactrack_device_export() {
 	array_push($xport_array, 'site_id, site_name, device_id, device_name, notes, ' .
 		'hostname, snmp_options, snmp_readstring, snmp_version, ' .
 		'snmp_username, snmp_password, snmp_auth_protocol, snmp_priv_passphrase, ' .
-		'snmp_priv_protocol, snmp_context, ' .
+		'snmp_priv_protocol, snmp_context, snmp_engine_id, ' .
 		'snmp_port, snmp_timeout, snmp_retries, max_oids, snmp_sysName, snmp_sysLocation, ' .
 		'snmp_sysContact, snmp_sysObjectID, snmp_sysDescr, snmp_sysUptime, ' .
 		'ignorePorts, scan_type, disabled, ports_total, ports_active, ' .
@@ -443,16 +444,17 @@ function mactrack_device_export() {
 			$device['snmp_version']         . '","' . $device['snmp_username']        . '","' .
 			$device['snmp_password']        . '","' . $device['snmp_auth_protocol']   . '","' .
 			$device['snmp_priv_passphrase'] . '","' . $device['snmp_priv_protocol']   . '","' .
-			$device['snmp_context']         . '","' . $device['snmp_port']            . '","' .
-			$device['snmp_timeout']         . '","' . $device['snmp_retries']         . '","' .
-			$device['max_oids']             . '","' . $device['snmp_sysName']         . '","' .
-			$device['snmp_sysLocation']     . '","' . $device['snmp_sysContact']      . '","' .
-			$device['snmp_sysObjectID']     . '","' . $device['snmp_sysDescr']        . '","' .
-			$device['snmp_sysUptime']       . '","' . $device['ignorePorts']          . '","' .
-			$device['scan_type']            . '","' . $device['disabled']             . '","' .
-			$device['ports_total']          . '","' . $device['ports_active']         . '","' .
-			$device['ports_trunk']          . '","' . $device['macs_active']          . '","' .
-			$device['last_rundate']         . '","' . $device['last_runduration']     . '"');
+			$device['snmp_context']         . '","' . $device['snmp_engine_id']       . '","' .
+			$device['snmp_port']            . '","' . $device['snmp_timeout']         . '","' . 
+			$device['snmp_retries']         . '","' . $device['max_oids']             . '","' . 
+			$device['snmp_sysName']         . '","' . $device['snmp_sysLocation']     . '","' . 
+			$device['snmp_sysContact']      . '","' . $device['snmp_sysObjectID']     . '","' . 
+			$device['snmp_sysDescr']        . '","' . $device['snmp_sysUptime']       . '","' .
+			$device['ignorePorts']          . '","' . $device['scan_type']            . '","' . 
+			$device['disabled']             . '","' . $device['ports_total']          . '","' . 
+			$device['ports_active']         . '","' . $device['ports_trunk']          . '","' . 
+			$device['macs_active']          . '","' . $device['last_rundate']         . '","' . 
+			$device['last_runduration']     . '"');
 		}
 	}
 
@@ -531,6 +533,7 @@ function mactrack_device_import() {
 			<strong>snmp_priv_passphrase</strong> - SNMP V3: SNMP privacy passphrase<br>
 			<strong>snmp_priv_protocol</strong> - SNMP V3: SNMP privacy protocol<br>
 			<strong>snmp_context</strong> - SNMP V3: SNMP context<br>
+			<strong>snmp_engine_id</strong> - SNMP V3: SNMP engine id<br>
 			<br>
 			<strong>The primary key for this table is a combination of the following three fields:</strong>
 			<br><br>
@@ -594,6 +597,7 @@ function mactrack_device_import_processor(&$devices) {
 					case 'snmp_priv_passphrase':
 					case 'snmp_priv_protocol':
 					case 'snmp_context':
+					case 'snmp_engine_id':
 					case 'max_oids':
 					case 'notes':
 					case 'disabled':
@@ -916,9 +920,7 @@ function mactrack_device_edit() {
 
 	html_end_box();
 
-	form_save_button('macktrack_devices.php', 'return');
-
-	print "<script type='text/javascript' src='" . URL_PATH . "plugins/mactrack/mactrack_snmp.js'></script>";
+	form_save_button('mactrack_devices.php', 'return');
 }
 
 function mactrack_get_devices(&$sql_where, $row_limit, $apply_limits = TRUE) {

@@ -327,6 +327,9 @@ function mactrack_database_upgrade () {
 	mactrack_add_column('mac_track_devices',    'snmp_priv_protocol',   "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_priv_protocol` char(6) default '' AFTER `snmp_priv_passphrase`");
 	mactrack_add_column('mac_track_devices',    'snmp_context',         "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_context` varchar(64) default '' AFTER `snmp_priv_protocol`");
 	mactrack_add_column('mac_track_devices',    'max_oids',             "ALTER TABLE `mac_track_devices` ADD COLUMN `max_oids` int(12) unsigned default '10' AFTER `snmp_context`");
+	mactrack_add_column('mac_track_devices',    'snmp_engine_id',       "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_engine_id` varchar(30) default '' AFTER `snmp_context`");
+
+	mactrack_add_column('mac_track_snmp_items', 'snmp_engine_id',       "ALTER TABLE `mac_track_snmp_items` ADD COLUMN `snmp_engine_id` varchar(30) default '' AFTER `snmp_context`");
 
 	if (!mactrack_db_table_exists('mac_track_snmp')) {
 		mactrack_create_table('mac_track_snmp', "CREATE TABLE `mac_track_snmp` (
@@ -353,6 +356,7 @@ function mactrack_database_upgrade () {
 			`snmp_priv_passphrase` varchar(200) default '',
 			`snmp_priv_protocol` char(6) default '',
 			`snmp_context` varchar(64) default '',
+			`snmp_engine_id` varchar(30) default '',
 			PRIMARY KEY  (`id`,`snmp_id`))
 			ENGINE=InnoDB COMMENT='Set of SNMP Options';");
 	}
@@ -512,6 +516,7 @@ function mactrack_setup_table_new () {
 			`snmp_priv_passphrase` varchar(200) default '',
 			`snmp_priv_protocol` char(6) default '',
 			`snmp_context` varchar(64) default '',
+			`snmp_engine_id` varchar(30) default '',
 			`max_oids` int(12) unsigned default '10',
 			`last_runmessage` varchar(100) default '',
 			`last_rundate` datetime NOT NULL default '0000-00-00 00:00:00',
@@ -861,6 +866,7 @@ function mactrack_setup_table_new () {
 			`snmp_priv_passphrase` varchar(200) default '',
 			`snmp_priv_protocol` char(6) default '',
 			`snmp_context` varchar(64) default '',
+			`snmp_engine_id` varchar(30) default '',
 			PRIMARY KEY  (`id`,`snmp_id`))
 			ENGINE=InnoDB COMMENT='Set of SNMP Options';");
 	}
@@ -909,8 +915,9 @@ function mactrack_page_head() {
 			}else{
 				print "<link type='text/css' href='" . $config['url_path'] . "plugins/mactrack/mactrack.css' rel='stylesheet'>\n";
 			}
-			print "<script type='text/javascript' src='" . $config['url_path'] . "plugins/mactrack/mactrack.js'></script>\n";
 		}
+		print "<script type='text/javascript' src='" . $config['url_path'] . "plugins/mactrack/mactrack.js'></script>\n";
+		print "<script type='text/javascript' src='" . $config['url_path'] . "plugins/mactrack/mactrack_snmp.js'></script>\n";
 	}
 }
 
@@ -1511,7 +1518,6 @@ function mactrack_config_form () {
 		'method' => 'drop_array',
 		'friendly_name' => __('SNMP Version'),
 		'description' => __('Choose the SNMP version for this host.'),
-		'on_change' => 'changeSNMPVersion()',
 		'value' => '|arg1:snmp_version|',
 		'default' => read_config_option('mt_snmp_ver'),
 		'array' => $snmp_versions
@@ -1606,12 +1612,21 @@ function mactrack_config_form () {
 		),
 	'snmp_context' => array(
 		'method' => 'textbox',
-		'friendly_name' => __('SNMP Context'),
-		'description' => __('Enter the SNMP Context to use for this device.'),
+		'friendly_name' => __('SNMP Context (v3)'),
+		'description' => __('Enter the SNMP v3 Context to use for this device.'),
 		'value' => '|arg1:snmp_context|',
 		'default' => '',
 		'max_length' => '64',
-		'size' => '25'
+		'size' => '30'
+		),
+	'snmp_engine_id' => array(
+		'method' => 'textbox',
+		'friendly_name' => __('SNMP Engine ID (v3)'),
+		'description' => __('Enter the SNMP v3 Engine ID to use for this device.'),
+		'value' => '|arg1:snmp_engine_id|',
+		'default' => '',
+		'max_length' => '30',
+		'size' => '30'
 		),
 	);
 
@@ -2012,6 +2027,7 @@ function convert_readstrings() {
 					$save['snmp_priv_passphrase']	= '';
 					$save['snmp_priv_protocol']		= '';
 					$save['snmp_context']			= '';
+					$save['snmp_engine_id']         = '';
 					$save['max_oids']				= '';
 
 					$item_id = sql_save($save, 'mac_track_snmp_items');

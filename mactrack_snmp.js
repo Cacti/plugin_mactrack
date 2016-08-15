@@ -16,6 +16,7 @@ function setSNMP() {
 		$('#row_snmp_priv_passphrase').hide();
 		$('#row_snmp_priv_protocol').hide();
 		$('#row_snmp_context').hide();
+		$('#row_snmp_engine_id').hide();
 		$('#row_snmp_port').hide();
 		$('#row_snmp_timeout').hide();
 		$('#row_snmp_retries').hide();
@@ -31,6 +32,7 @@ function setSNMP() {
 		$('#row_snmp_priv_passphrase').hide();
 		$('#row_snmp_priv_protocol').hide();
 		$('#row_snmp_context').hide();
+		$('#row_snmp_engine_id').hide();
 		$('#row_snmp_port').show();
 		$('#row_snmp_timeout').show();
 		$('#row_snmp_retries').show();
@@ -45,6 +47,7 @@ function setSNMP() {
 		$('#row_snmp_priv_passphrase').show();
 		$('#row_snmp_priv_protocol').show();
 		$('#row_snmp_context').show();
+		$('#row_snmp_engine_id').show();
 		$('#row_snmp_port').show();
 		$('#row_snmp_timeout').show();
 		$('#row_snmp_retries').show();

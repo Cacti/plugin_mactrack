@@ -26,38 +26,39 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 	$device_name, $scan_type, $snmp_options, $snmp_readstring,
 	$snmp_version, $snmp_username, $snmp_password, $snmp_auth_protocol,
 	$snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context,
-	$snmp_port, $snmp_timeout, $snmp_retries, $max_oids,
+	$snmp_engine_id, $snmp_port, $snmp_timeout, $snmp_retries, $max_oids,
 	$ignorePorts, $notes, $user_name, $user_password, $term_type,
 	$private_key_path, $disabled) {
 	global $config;
 	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 	$save['device_id'] = $device_id;
-	$save['host_id'] = $host_id;
-	$save['site_id'] = $site_id;
-	$save['hostname'] = form_input_validate($hostname, 'hostname', '', false, 3);
-	$save['device_name'] = form_input_validate($device_name, 'device_name', '', false, 3);
-	$save['notes'] = form_input_validate($notes, 'notes', '', true, 3);
-	$save['scan_type'] = form_input_validate($scan_type, 'scan_type', '', false, 3);
-	$save['snmp_options'] = form_input_validate($snmp_options, 'snmp_options', '^[0-9]+$', true, 3);
-	$save['snmp_readstring'] = form_input_validate($snmp_readstring, 'snmp_readstring', '', true, 3); # for SNMP V3, this is optional
-	$save['snmp_version'] = form_input_validate($snmp_version, 'snmp_version', '', false, 3);
+	$save['host_id']   = $host_id;
+	$save['site_id']   = $site_id;
+	$save['hostname']             = form_input_validate($hostname, 'hostname', '', false, 3);
+	$save['device_name']          = form_input_validate($device_name, 'device_name', '', false, 3);
+	$save['notes']                = form_input_validate($notes, 'notes', '', true, 3);
+	$save['scan_type']            = form_input_validate($scan_type, 'scan_type', '', false, 3);
+	$save['snmp_options']         = form_input_validate($snmp_options, 'snmp_options', '^[0-9]+$', true, 3);
+	$save['snmp_readstring']      = form_input_validate($snmp_readstring, 'snmp_readstring', '', true, 3); # for SNMP V3, this is optional
+	$save['snmp_version']         = form_input_validate($snmp_version, 'snmp_version', '', false, 3);
 	$save['snmp_username']        = form_input_validate($snmp_username, 'snmp_username', '', true, 3);
 	$save['snmp_password']        = form_input_validate($snmp_password, 'snmp_password', '', true, 3);
 	$save['snmp_auth_protocol']   = form_input_validate($snmp_auth_protocol, 'snmp_auth_protocol', '', true, 3);
 	$save['snmp_priv_passphrase'] = form_input_validate($snmp_priv_passphrase, 'snmp_priv_passphrase', '', true, 3);
 	$save['snmp_priv_protocol']   = form_input_validate($snmp_priv_protocol, 'snmp_priv_protocol', '', true, 3);
 	$save['snmp_context']         = form_input_validate($snmp_context, 'snmp_context', '', true, 3);
-	$save['snmp_port'] = form_input_validate($snmp_port, 'snmp_port', '^[0-9]+$', false, 3);
-	$save['snmp_timeout'] = form_input_validate($snmp_timeout, 'snmp_timeout', '^[0-9]+$', false, 3);
-	$save['snmp_retries'] = form_input_validate($snmp_retries, 'snmp_retries', '^[0-9]+$', false, 3);
-	$save['max_oids'] = form_input_validate($max_oids, 'max_oids', '^[0-9]+$', false, 3);
-	$save['user_name'] = form_input_validate($user_name, 'user_name', '', true, 3);
-	$save['user_password'] = form_input_validate($user_password, 'user_password', '', true, 3);
-	$save['ignorePorts'] = form_input_validate($ignorePorts, 'ignorePorts', '', true, 3);
-	$save['term_type'] = form_input_validate($term_type, 'term_type', '', true, 3);
-	$save['private_key_path'] = form_input_validate($private_key_path, 'private_key_path', '', true, 3);
-	$save['disabled'] = form_input_validate($disabled, 'disabled', '', true, 3);
+	$save['snmp_engine_id']       = form_input_validate($snmp_engine_id, 'snmp_engine_id', '', true, 3);
+	$save['snmp_port']            = form_input_validate($snmp_port, 'snmp_port', '^[0-9]+$', false, 3);
+	$save['snmp_timeout']         = form_input_validate($snmp_timeout, 'snmp_timeout', '^[0-9]+$', false, 3);
+	$save['snmp_retries']         = form_input_validate($snmp_retries, 'snmp_retries', '^[0-9]+$', false, 3);
+	$save['max_oids']             = form_input_validate($max_oids, 'max_oids', '^[0-9]+$', false, 3);
+	$save['user_name']            = form_input_validate($user_name, 'user_name', '', true, 3);
+	$save['user_password']        = form_input_validate($user_password, 'user_password', '', true, 3);
+	$save['ignorePorts']          = form_input_validate($ignorePorts, 'ignorePorts', '', true, 3);
+	$save['term_type']            = form_input_validate($term_type, 'term_type', '', true, 3);
+	$save['private_key_path']     = form_input_validate($private_key_path, 'private_key_path', '', true, 3);
+	$save['disabled']             = form_input_validate($disabled, 'disabled', '', true, 3);
 
 	$device_id = 0;
 	if (!is_error_message()) {
@@ -137,6 +138,10 @@ function sync_mactrack_to_cacti($mt_device) {
 	if ((read_config_option('mt_update_policy', true) == 3) &&
 		($mt_device['host_id'] > 0)) {
 
+		if (!isset($mt_device['snmp_engine_id'])) {
+			$mt_device['snmp_engine_id'] = '';
+		}
+
 		# fetch current data for cacti device
 		$cacti_device = db_fetch_row('SELECT * FROM host WHERE id=' . $mt_device['host_id']);
 
@@ -144,13 +149,13 @@ function sync_mactrack_to_cacti($mt_device) {
 
 			# update cacti device
 			api_device_save($cacti_device['id'], $cacti_device['host_template_id'],
-			$cacti_device['description'], $cacti_device['hostname'],
-			$mt_device['snmp_readstring'], $mt_device['snmp_version'], $mt_device['snmp_username'],
-			$mt_device['snmp_password'], $mt_device['snmp_port'], $mt_device['snmp_timeout'],
-			$cacti_device['disabled'], $cacti_device['availability_method'], $cacti_device['ping_method'], $cacti_device['ping_port'],
-			$cacti_device['ping_timeout'], $cacti_device['ping_retries'], $cacti_device['notes'],
-			$mt_device['snmp_auth_protocol'], $mt_device['snmp_priv_passphrase'], $mt_device['snmp_priv_protocol'],
-			$mt_device['snmp_context'], $mt_device['max_oids']);
+				$cacti_device['description'], $cacti_device['hostname'],
+				$mt_device['snmp_readstring'], $mt_device['snmp_version'], $mt_device['snmp_username'],
+				$mt_device['snmp_password'], $mt_device['snmp_port'], $mt_device['snmp_timeout'],
+				$cacti_device['disabled'], $cacti_device['availability_method'], $cacti_device['ping_method'], $cacti_device['ping_port'],
+				$cacti_device['ping_timeout'], $cacti_device['ping_retries'], $cacti_device['notes'],
+				$mt_device['snmp_auth_protocol'], $mt_device['snmp_priv_passphrase'], $mt_device['snmp_priv_protocol'],
+				$mt_device['snmp_context'], $mt_device['snmp_engine_id'], $mt_device['max_oids']);
 
 			mactrack_debug('Cacti Device: (' . $cacti_device['id'] . ') successfully updated');
 		}
@@ -166,6 +171,10 @@ function sync_cacti_to_mactrack($device) {
 		# $devices holds the whole row from host table
 		# now fetch the related device from mac_track_devices, if any
 		$mt_device = db_fetch_row('SELECT * from mac_track_devices WHERE host_id=' . $device['id']);
+
+		if (!isset($mt_device['snmp_engine_id'])) {
+			$mt_device['snmp_engine_id'] = '';
+		}
 
 		if (is_array($mt_device)) {
 			# update mac_track_device
@@ -185,6 +194,7 @@ function sync_cacti_to_mactrack($device) {
 				$device['snmp_priv_passphrase'],
 				$device['snmp_priv_protocol'],
 				$device['snmp_context'],
+				$device['snmp_engine_id'],
 				$device['snmp_port'],
 				$device['snmp_timeout'],
 				$mt_device['snmp_retries'],
@@ -300,6 +310,7 @@ function mactrack_device_action_execute($action) {
 							$device['snmp_priv_passphrase'],
 							$device['snmp_priv_protocol'],
 							$device['snmp_context'],
+							$device['snmp_engine_id'],
 							$device['snmp_port'],
 							$device['snmp_timeout'],
 							get_request_var('snmp_retries'),

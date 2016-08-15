@@ -56,7 +56,7 @@ case 'item_moveup':
 case 'item_remove':
 	mactrack_snmp_item_remove();
 
-	header('Location: mactrack_snmp.php?action=edit&id=' . get_filter_request_var('id'));
+	header('Location: mactrack_snmp.php?header=false&action=edit&id=' . get_filter_request_var('id'));
 	break;
 case 'item_edit':
 	top_header();
@@ -96,8 +96,7 @@ function form_mactrack_snmp_save() {
 			}
 		}
 
-		header('Location: mactrack_snmp.php?action=edit&id=' . (empty($id) ? get_filter_request_var('id') : $id));
-
+		header('Location: mactrack_snmp.php?header=false&action=edit&id=' . (empty($id) ? get_filter_request_var('id') : $id));
 	}elseif (isset_request_var('save_component_mactrack_snmp_item')) {
 		/* ================= input validation ================= */
 		get_filter_request_var('item_id');
@@ -132,13 +131,13 @@ function form_mactrack_snmp_save() {
 		}
 
 		if (is_error_message()) {
-			header('Location: mactrack_snmp.php?action=item_edit&id=' . get_nfilter_request_var('id') . '&item_id=' . (empty($item_id) ? get_nfilter_request_var('id') : $item_id));
+			header('Location: mactrack_snmp.php?header=false&action=item_edit&id=' . get_nfilter_request_var('id') . '&item_id=' . (empty($item_id) ? get_nfilter_request_var('id') : $item_id));
 		}else{
-			header('Location: mactrack_snmp.php?action=edit&id=' . get_nfilter_request_var('id'));
+			header('Location: mactrack_snmp.php?header=false&action=edit&id=' . get_nfilter_request_var('id'));
 		}
 	} else {
 		raise_message(2);
-		header('Location: mactrack_snmp.php');
+		header('Location: mactrack_snmp.php?header=false');
 	}
 }
 
@@ -167,7 +166,7 @@ function form_mactrack_snmp_actions() {
 				}
 			}
 
-			header('Location: mactrack_snmp.php');
+			header('Location: mactrack_snmp.php?header=false');
 			exit;
 		}
 	}
@@ -198,7 +197,7 @@ function form_mactrack_snmp_actions() {
 	</script>
 	<?php
 
-	form_start('mactrack_snmp', 'mactrack');
+	form_start('mactrack_snmp.php', 'mactrack');
 
 	html_start_box($mactrack_snmp_actions[get_nfilter_request_var('drp_action')], '60%', '', '3', 'center', '');
 
@@ -311,7 +310,16 @@ function mactrack_snmp_item_edit() {
 
 	form_save_button(htmlspecialchars('mactrack_snmp.php?action=edit&id=' . get_request_var('id')));
 
-	print "<script type='text/javascript' src='" . $config['url_path'] . "plugins/mactrack/mactrack_snmp.js'></script>";
+	?>
+	<script type='text/javascript'>
+	$(function() {
+		setSNMP();
+		$('#snmp_version').change(function() {
+			setSNMP();
+		});
+	});
+	</script>
+	<?php
 }
 
 /* ---------------------
@@ -379,7 +387,7 @@ function mactrack_snmp_edit() {
 	form_hidden_box('save_component_mactrack_snmp', '1', '');
 
 	if (!isempty_request_var('id')) {
-		$items = db_fetch_assoc_prepared('SELECT * FROM mac_track_snmp_items WHERE snmp_id= ? ORDER BY sequence', array(get_reqest_var('id')));
+		$items = db_fetch_assoc_prepared('SELECT * FROM mac_track_snmp_items WHERE snmp_id= ? ORDER BY sequence', array(get_request_var('id')));
 
 		html_start_box(__('Mactrack SNMP Options'), '100%', '', '3', 'center', 'mactrack_snmp.php?action=item_edit&id=' . get_request_var('id'));
 
@@ -392,14 +400,12 @@ function mactrack_snmp_edit() {
 		DrawMatrixHeaderItem(__('Retries'),'',1);
 		DrawMatrixHeaderItem(__('Max OIDs'),'',1);
 		DrawMatrixHeaderItem(__('Username'),'',1);
-		DrawMatrixHeaderItem(__('Password'),'',1);
 		DrawMatrixHeaderItem(__('Auth Proto'),'',1);
-		DrawMatrixHeaderItem(__('Priv Passphrase'),'',1);
 		DrawMatrixHeaderItem(__('Priv Proto'),'',1);
-		DrawMatrixHeaderItem(__('Context'),'',1);
-		DrawMatrixHeaderItem('&nbsp;','',2);
+		DrawMatrixHeaderItem(__('Actions'),'',1);
 		print '</tr>';
 
+		$i = 1;
 		if (sizeof($items)) {
 			foreach ($items as $item) {
 				form_alternate_row();
@@ -411,21 +417,17 @@ function mactrack_snmp_edit() {
 				$form_data .= '<td>' . 	$item['snmp_retries'] . '</td>';
 				$form_data .= '<td>' . 	$item['max_oids'] . '</td>';
 				$form_data .= '<td>' . 	($item['snmp_version'] == 3 ? $item['snmp_username'] : __('N/A')) . '</td>';
-				$form_data .= '<td>' . 	($item['snmp_version'] == 3 ? $item['snmp_password'] : __('N/A')) . '</td>';
 				$form_data .= '<td>' . 	($item['snmp_version'] == 3 ? $item['snmp_auth_protocol'] : __('N/A')) . '</td>';
-				$form_data .= '<td>' . 	($item['snmp_version'] == 3 ? $item['snmp_priv_passphrase'] : __('N/A')) . '</td>';
 				$form_data .= '<td>' . 	($item['snmp_version'] == 3 ? $item['snmp_priv_protocol'] : __('N/A')) . '</td>';
-				$form_data .= '<td>' . 	($item['snmp_version'] == 3 ? $item['snmp_context'] : __('N/A')) . '</td>';
-				$form_data .= '<td>' .
-					'<a href="' . htmlspecialchars('mactrack_snmp.php?action=item_movedown&item_id=' . $item["id"] . '&id=' . $item["snmp_id"]) .
-					'"><img src="../../images/move_down.gif" border="0" alt="Move Down"></a>' .
-					'<a	href="' . htmlspecialchars('mactrack_snmp.php?action=item_moveup&item_id=' . $item["id"] .	'&id=' . $item["snmp_id"]) .
-					'"><img src="../../images/move_up.gif" border="0" alt="Move Up"></a>' . '</td>';
+				$form_data .= '<td class="right">' .
+					($i < sizeof($items) ? '<a class="remover fa fa-caret-down moveArrow" href="' . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_snmp.php?action=item_movedown&item_id=' . $item["id"] . '&id=' . $item["snmp_id"]) . '"></a>':'<span class="moveArrowNone"></span>') .
+					($i > 1 ? '<a class="remover fa fa-caret-up moveArrow" href="' . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_snmp.php?action=item_moveup&item_id=' . $item["id"] .	'&id=' . $item["snmp_id"]) .'"></a>':'<span class="moveArrowNone"></span>');
 
-				$form_data .= '<td align="right"><a href="' . htmlspecialchars('mactrack_snmp.php?action=item_remove&item_id=' . $item["id"] .	'&id=' . $item["snmp_id"]) .
-					'"><img src="../../images/delete_icon.gif" border="0" width="10" height="10" alt="Delete"></a>' . '</td></tr>';
+				$form_data .= '<a class="delete deleteMarker fa fa-remove" href="' . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_snmp.php?action=item_remove&item_id=' . $item["id"] .	'&id=' . $item["snmp_id"]) . '"></a>' . '</td></tr>';
 
 				print $form_data;
+
+				$i++;
 			}
 		} else {
 			print '<tr><td colspan="5"><em>' . __('No SNMP Items') . '</em></td></tr>';
