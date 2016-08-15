@@ -399,12 +399,12 @@ function xform_dlink_vlan_associations(&$device, $snmp_readstring = "") {
 
 	/* obtain vlan associations */
 	$xformArray = cacti_snmp_walk($device["hostname"], $snmp_readstring,
-					".1.3.6.1.2.1.17.7.1.2.2.1.2", $device["snmp_version"],
-					$device["snmp_username"], $device["snmp_password"],
-					$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
-					$device["snmp_priv_protocol"], $device["snmp_context"],
-					$device["snmp_port"], $device["snmp_timeout"],
-					$device["snmp_retries"], $device["max_oids"]);
+		".1.3.6.1.2.1.17.7.1.2.2.1.2", $device["snmp_version"],
+		$device["snmp_username"], $device["snmp_password"],
+		$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
+		$device["snmp_priv_protocol"], $device["snmp_context"],
+		$device["snmp_port"], $device["snmp_timeout"],
+		$device["snmp_retries"], $device["max_oids"]);
 
 	$i = 0;
 	foreach($xformArray as $xformItem) {
@@ -421,10 +421,11 @@ function xform_dlink_vlan_associations(&$device, $snmp_readstring = "") {
 		/* save the key for association with the dot1d table */
 		$output_array[$i]["key"] = substr($key, $perPos+1);
 		$vlan_name = @cacti_snmp_get($device["hostname"], $snmp_readstring,
-					".1.3.6.1.2.1.17.7.1.4.3.1.1." . $output_array[$i]["vlan_id"], $device["snmp_version"],
-					$device["snmp_username"], $device["snmp_password"], $device["snmp_auth_protocol"],
-					$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"], $device["snmp_context"],
-					$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+			".1.3.6.1.2.1.17.7.1.4.3.1.1." . $output_array[$i]["vlan_id"], $device["snmp_version"],
+			$device["snmp_username"], $device["snmp_password"], $device["snmp_auth_protocol"],
+			$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"], $device["snmp_context"],
+			$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
+
 		$output_array[$i]["vlan_name"] = $vlan_name;
 		//print ("========= i=[$i] [" . $output_array[$i]["vlan_id"] . "] name=[" . $output_array[$i]["vlan_name"] . "]\n");
 		$i++;
