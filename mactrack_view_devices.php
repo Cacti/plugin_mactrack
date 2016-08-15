@@ -109,7 +109,7 @@ function mactrack_view_export_devices() {
 	array_push($xport_array, 'site_id, site_name, device_id, device_name, notes, ' .
 		'hostname, snmp_readstring, snmp_readstrings, snmp_version, ' .
 		'snmp_username, snmp_password, snmp_auth_protocol, snmp_priv_passphrase, ' .
-		'snmp_priv_protocol, snmp_context, ' .
+		'snmp_priv_protocol, snmp_context, snmp_engine_id, ' .
 		'snmp_port, snmp_timeout, snmp_retries, max_oids, snmp_sysName, snmp_sysLocation, ' .
 		'snmp_sysContact, snmp_sysObjectID, snmp_sysDescr, snmp_sysUptime, ' .
 		'ignorePorts, scan_type, disabled, ports_total, ports_active, ' .
@@ -125,16 +125,17 @@ function mactrack_view_export_devices() {
 			$device['snmp_version']         . '","' . $device['snmp_username']        . '","' .
 			$device['snmp_password']        . '","' . $device['snmp_auth_protocol']   . '","' .
 			$device['snmp_priv_passphrase'] . '","' . $device['snmp_priv_protocol']   . '","' .
-			$device['snmp_context']         . '","' . $device['snmp_port']            . '","' .
-			$device['snmp_timeout']         . '","' . $device['snmp_retries']         . '","' .
-			$device['max_oids']             . '","' . $device['snmp_sysName']         . '","' .
-			$device['snmp_sysLocation']     . '","' . $device['snmp_sysContact']      . '","' .
-			$device['snmp_sysObjectID']     . '","' . $device['snmp_sysDescr']        . '","' .
-			$device['snmp_sysUptime']       . '","' . $device['ignorePorts']          . '","' .
-			$device['scan_type']            . '","' . $device['disabled']             . '","' .
-			$device['ports_total']          . '","' . $device['ports_active']         . '","' .
-			$device['ports_trunk']          . '","' . $device['macs_active']          . '","' .
-			$device['last_rundate']         . '","' . $device['last_runduration']     . '"');
+			$device['snmp_context']         . '","' . $device['snmp_engine_id']       . '","' .
+			$device['snmp_port']            . '","' . $device['snmp_timeout']         . '","' . 
+			$device['snmp_retries']         . '","' . $device['max_oids']             . '","' . 
+			$device['snmp_sysName']         . '","' . $device['snmp_sysLocation']     . '","' . 
+			$device['snmp_sysContact']      . '","' . $device['snmp_sysObjectID']     . '","' . 
+			$device['snmp_sysDescr']        . '","' . $device['snmp_sysUptime']       . '","' . 
+			$device['ignorePorts']          . '","' . $device['scan_type']            . '","' . 
+			$device['disabled']             . '","' . $device['ports_total']          . '","' . 
+			$device['ports_active']         . '","' . $device['ports_trunk']          . '","' . 
+			$device['macs_active']          . '","' . $device['last_rundate']         . '","' . 
+			$device['last_runduration']     . '"');
 		}
 	}
 
