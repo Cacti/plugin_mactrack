@@ -77,51 +77,54 @@ if (sizeof($old_procs)) {
 /* Disable Mib File Loading */
 putenv('MIBS=RFC-1215');
 
-if (read_config_option('mt_collection_timing') != 'disabled') {
-	global $debug, $web;
+global $debug, $web;
 
-	/* initialize variables */
-	$site_id  = '';
-	$debug    = FALSE;
-	$forcerun = FALSE;
-	$web      = FALSE;
+/* initialize variables */
+$site_id  = '';
+$debug    = FALSE;
+$forcerun = FALSE;
+$web      = FALSE;
 
-	/* process calling arguments */
-	$parms = $_SERVER['argv'];
-	array_shift($parms);
+/* process calling arguments */
+$parms = $_SERVER['argv'];
+array_shift($parms);
 
-	foreach($parms as $parameter) {
-		@list($arg, $value) = @explode('=', $parameter);
+foreach($parms as $parameter) {
+	@list($arg, $value) = @explode('=', $parameter);
 
-		switch ($arg) {
-		case '-sid':
-			$site_id = $value;
-			break;
-		case '-d':
-		case '--debug':
-			$debug = TRUE;
-			break;
-		case '-f':
-		case '--force':
-			$forcerun = TRUE;
-			break;
-		case '-w':
-		case '--web':
-			$web = TRUE;
-			break;
-		case '-h':
-		case '-v':
-		case '--version':
-		case '--help':
-			display_help();
-			exit;
-		default:
-			print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
-			display_help();
-			exit;
-		}
+	switch ($arg) {
+	case '-sid':
+		$site_id = $value;
+		break;
+	case '-d':
+	case '--debug':
+		$debug = TRUE;
+		break;
+	case '-f':
+	case '--force':
+		$forcerun = TRUE;
+		break;
+	case '-w':
+	case '--web':
+		$web = TRUE;
+		break;
+	case '-h':
+	case '-v':
+	case '--version':
+	case '--help':
+		display_help();
+		exit;
+	default:
+		print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
+		display_help();
+		exit;
 	}
+}
 
+if (read_config_option('mt_collection_timing') == 'disabled') {
+	echo "WARNING: MacTrack is disabled, exiting\n";
+	exit(1);
+}else{
 	/* for manual scans, verify if we should run or not */
 	$running_processes = db_fetch_cell('SELECT count(*) FROM mac_track_processes');
 	if ($running_processes) {
