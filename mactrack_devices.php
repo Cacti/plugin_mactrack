@@ -871,9 +871,7 @@ function mactrack_device_edit() {
 					<span style='font-size: 10px; font-weight: normal; font-family: monospace;'>
 					<?php
 					/* force php to return numeric oid's */
-					if (function_exists('snmp_set_oid_numeric_print')) {
-						snmp_set_oid_numeric_print(TRUE);
-					}
+					cacti_oid_numeric_format();
 
 					$snmp_system = cacti_snmp_get($device['hostname'], $device['snmp_readstring'], '.1.3.6.1.2.1.1.1.0', $device['snmp_version'], $device['snmp_username'], $device['snmp_password'], $device['snmp_auth_protocol'], $device['snmp_priv_passphrase'], $device['snmp_priv_protocol'], $device['snmp_context'], $device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'], SNMP_WEBUI);
 

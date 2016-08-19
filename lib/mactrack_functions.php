@@ -109,9 +109,7 @@ function valid_snmp_device(&$device) {
 	$device['snmp_status'] = HOST_DOWN;
 
 	/* force php to return numeric oid's */
-	if (function_exists('snmp_set_oid_numeric_print')) {
-		snmp_set_oid_numeric_print(TRUE);
-	}
+	cacti_oid_numeric_format();
 
 	/* if the first read did not work, loop until found */
 	$snmp_sysObjectID = @cacti_snmp_get($device['hostname'], $device['snmp_readstring'],
