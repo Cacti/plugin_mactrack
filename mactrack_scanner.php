@@ -64,48 +64,52 @@ define('DEVICE_ROUTER', 3);
 $parms = $_SERVER['argv'];
 array_shift($parms);
 
-/* utility requires input parameters */
-if (sizeof($parms) == 0) {
-	print "ERROR: You must supply input parameters\n\n";
-	display_help();
-	exit;
-}
-
 global $web, $debug;
 
 $debug     = FALSE;
 $web       = FALSE;
 $test_mode = FALSE;
 
-foreach($parms as $parameter) {
-	@list($arg, $value) = @explode('=', $parameter);
+if (sizeof($parms)) {
+	foreach($parms as $parameter) {
+		if (strpos($parameter, '=')) {
+			list($arg, $value) = explode('=', $parameter);
+		} else {
+			$arg = $parameter;
+			$value = '';
+		}
 
-	switch ($arg) {
-	case '-id':
-		$device_id = $value;
-		break;
-	case '-d':
-	case '--debug':
-		$debug = TRUE;
-		break;
-	case '-w':
-	case '--web':
-		$web = TRUE;
-		break;
-	case '-t':
-		$test_mode = TRUE;
-		exit;
-	case '-h':
-	case '-v':
-	case '--version':
-	case '--help':
-		display_help();
-		exit;
-	default:
-		print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
-		display_help();
-		exit;
+		switch ($arg) {
+			case '-id':
+				$device_id = $value;
+				break;
+			case '-d':
+			case '--debug':
+				$debug = TRUE;
+				break;
+			case '-w':
+			case '--web':
+				$web = TRUE;
+				break;
+			case '-t':
+				$test_mode = TRUE;
+				exit;
+			case '-h':
+			case '-v':
+			case '--version':
+			case '--help':
+				display_help();
+				exit;
+			default:
+				print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
+				display_help();
+				exit;
+		}
 	}
+}else{
+	print "ERROR: You must supply input parameters\n\n";
+	display_help();
+	exit;
 }
 
 /* place a process marker in the database */

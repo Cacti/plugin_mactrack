@@ -89,35 +89,42 @@ $web      = FALSE;
 $parms = $_SERVER['argv'];
 array_shift($parms);
 
-foreach($parms as $parameter) {
-	@list($arg, $value) = @explode('=', $parameter);
+if (sizeof($parms)) {
+	foreach($parms as $parameter) {
+		if (strpos($parameter, '=')) {
+			list($arg, $value) = explode('=', $parameter);
+		} else {
+			$arg = $parameter;
+			$value = '';
+		}
 
-	switch ($arg) {
-	case '-sid':
-		$site_id = $value;
-		break;
-	case '-d':
-	case '--debug':
-		$debug = TRUE;
-		break;
-	case '-f':
-	case '--force':
-		$forcerun = TRUE;
-		break;
-	case '-w':
-	case '--web':
-		$web = TRUE;
-		break;
-	case '-h':
-	case '-v':
-	case '--version':
-	case '--help':
-		display_help();
-		exit;
-	default:
-		print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
-		display_help();
-		exit;
+		switch ($arg) {
+			case '-sid':
+				$site_id = $value;
+				break;
+			case '-d':
+			case '--debug':
+				$debug = TRUE;
+				break;
+			case '-f':
+			case '--force':
+				$forcerun = TRUE;
+				break;
+			case '-w':
+			case '--web':
+				$web = TRUE;
+				break;
+			case '-h':
+			case '-v':
+			case '--version':
+			case '--help':
+				display_help();
+				exit;
+			default:
+				print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
+				display_help();
+				exit;
+		}
 	}
 }
 

@@ -53,31 +53,38 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 	$parms = $_SERVER['argv'];
 	array_shift($parms);
 
-	foreach($parms as $parameter) {
-		@list($arg, $value) = @explode('=', $parameter);
+	if (sizeof($parms)) {
+		foreach($parms as $parameter) {
+			if (strpos($parameter, '=')) {
+				list($arg, $value) = explode('=', $parameter);
+			} else {
+				$arg = $parameter;
+				$value = '';
+			}
 
-		switch ($arg) {
-		case '-d':
-		case '--debug':
-			$debug = TRUE;
-			break;
-		case '--days':
-			$days = $value;
-			break;
-		case '-e':
-		case '--engine':
-			$engine = $value;
-			break;
-		case '-h':
-		case '-v':
-		case '--version':
-		case '--help':
-			display_help();
-			exit;
-		default:
-			print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
-			display_help();
-			exit;
+			switch ($arg) {
+				case '-d':
+				case '--debug':
+					$debug = TRUE;
+					break;
+				case '--days':
+					$days = $value;
+					break;
+				case '-e':
+				case '--engine':
+					$engine = $value;
+					break;
+				case '-h':
+				case '-v':
+				case '--version':
+				case '--help':
+					display_help();
+					exit;
+				default:
+					print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
+					display_help();
+					exit;
+			}
 		}
 	}
 

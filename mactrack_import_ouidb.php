@@ -44,30 +44,37 @@ $oui_file = '';
 /* add more memory for import */
 ini_set('memory_limit', '256M');
 
-foreach($parms as $parameter) {
-	@list($arg, $value) = @explode('=', $parameter);
+if (sizeof($parms)) {
+	foreach($parms as $parameter) {
+		if (strpos($parameter, '=')) {
+			list($arg, $value) = explode('=', $parameter);
+		} else {
+			$arg = $parameter;
+			$value = '';
+		}
 
-	switch ($arg) {
-	case '-f':
-		$oui_file = trim($value);
-		break;
-	case '-h':
-		display_help();
-		exit;
-	case '-v':
-	case '-V':
-		display_help();
-		exit;
-	case '--version':
-		display_help();
-		exit;
-	case '--help':
-		display_help();
-		exit;
-	default:
-		print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
-		display_help();
-		exit;
+		switch ($arg) {
+			case '-f':
+				$oui_file = trim($value);
+				break;
+			case '-h':
+				display_help();
+				exit;
+			case '-v':
+			case '-V':
+				display_help();
+				exit;
+			case '--version':
+				display_help();
+				exit;
+			case '--help':
+				display_help();
+				exit;
+			default:
+				print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
+				display_help();
+				exit;
+		}
 	}
 }
 
