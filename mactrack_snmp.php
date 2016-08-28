@@ -85,7 +85,7 @@ function form_mactrack_snmp_save() {
 		/* ==================================================== */
 
 		$save['id']     = get_filter_request_var('id');
-		$save['name']   = sql_sanitize(form_input_validate(get_nfilter_request_var('name'), 'name', '', false, 3));
+		$save['name']   = form_input_validate(get_nfilter_request_var('name'), 'name', '', false, 3);
 
 		if (!is_error_message()) {
 			$id = sql_save($save, 'mac_track_snmp');
