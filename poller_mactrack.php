@@ -25,7 +25,7 @@
 
 /* do NOT run this script through a web browser */
 if (!isset($_SERVER['argv'][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($_SERVER['REMOTE_ADDR'])) {
-die('<br><strong>This script is only meant to run at the command line.</strong>');
+	die('<br><strong>This script is only meant to run at the command line.</strong>');
 }
 
 /* We are not talking to the browser */
@@ -77,13 +77,15 @@ if (sizeof($old_procs)) {
 /* Disable Mib File Loading */
 putenv('MIBS=RFC-1215');
 
-global $debug, $web;
+global $debug, $web, $track_errors;
 
 /* initialize variables */
 $site_id  = '';
 $debug    = FALSE;
 $forcerun = FALSE;
 $web      = FALSE;
+
+$track_errors = 0;
 
 /* process calling arguments */
 $parms = $_SERVER['argv'];
@@ -148,6 +150,9 @@ if (read_config_option('mt_collection_timing') == 'disabled') {
 			db_execute('TRUNCATE mac_track_processes');
 		}
 	}
+
+	/* we don't want to see errors in the cacti log */
+	errors_disable();
 
 	if ($site_id != '') {
 		mactrack_debug('About to enter MacTrack Site Scan Processing');
@@ -257,6 +262,20 @@ if (read_config_option('mt_collection_timing') == 'disabled') {
 			}
 		}
 	}
+
+	/* show errors now */
+	errors_restore();
+}
+
+function errors_disable() {
+	global $track_errors;
+	$track_errors = ini_get('track_errors');
+	ini_set('track_errors', 0); 
+}
+
+function errors_restore() {
+	global $track_errors;
+	ini_set('track_errors', $track_errors); 
 }
 
 /*	display_help - displays the usage of the function */
