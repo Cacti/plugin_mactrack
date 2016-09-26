@@ -1,0 +1,8 @@
+[info]
+name = mactrack
+version = 4.0
+longname = Device Tracking
+author = The Cacti Group
+email = 
+homepage = http://www.cacti.net
+compat = 1.0.0

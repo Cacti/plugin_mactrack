@@ -126,6 +126,12 @@ function plugin_mactrack_uninstall () {
 	}
 }
 
+function plugin_mactrack_version () {
+	global $config;
+	$info = parse_ini_file($config['base_path'] . '/plugins/mactrack/INFO', true);
+	return $info['info'];
+}
+
 function plugin_mactrack_check_config () {
 	/* Here we will check to ensure everything is configured */
 	mactrack_check_upgrade();
@@ -136,10 +142,6 @@ function plugin_mactrack_upgrade () {
 	/* Here we will upgrade to the newest version */
 	mactrack_check_upgrade();
 	return false;
-}
-
-function plugin_mactrack_version () {
-	return mactrack_version();
 }
 
 function mactrack_check_upgrade () {
@@ -893,18 +895,6 @@ function mactrack_setup_table_new () {
 			) ENGINE=InnoDB;"
 		);
 	}
-}
-
-function mactrack_version () {
-	return array(
-		'name'      => 'mactrack',
-		'version'   => '4.0',
-		'longname'  => 'Device Tracking',
-		'author'    => 'Larry Adams',
-		'homepage'  => 'http://cacti.net',
-		'email'     => 'larryjadams@comcast.net',
-		'url'       => 'http://cactiusers.org/cacti/versions.php'
-	);
 }
 
 function mactrack_page_head() {
