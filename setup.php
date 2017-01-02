@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2016 The Cacti Group                                 |
+ | Copyright (C) 2004-2017 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -920,7 +920,6 @@ function mactrack_poller_bottom () {
 
 	include_once($config['base_path'] . '/lib/poller.php');
 	include_once($config['base_path'] . '/lib/data_query.php');
-	include_once($config['base_path'] . '/lib/graph_export.php');
 	include_once($config['base_path'] . '/lib/rrd.php');
 
 	$command_string = read_config_option('path_php_binary');
