@@ -385,8 +385,8 @@ function get_standard_arp_table($site, &$device) {
 	if (sizeof($atifIndexes)) {
 	foreach($atifIndexes as $atifIndex) {
 		$atEntries[$i]['atifIndex'] = $atifIndex;
-		$atEntries[$i]['atPhysAddress'] = $atPhysAddress[$keys[$i]];
-		$atEntries[$i]['atNetAddress'] = xform_net_address($atNetAddress[$keys[$i]]);
+		$atEntries[$i]['atPhysAddress'] = isset($atPhysAddress[$keys[$i]]) ? $atPhysAddress[$keys[$i]]:'';
+		$atEntries[$i]['atNetAddress'] = isset($atNetAddress[$keys[$i]]) ? xform_net_address($atNetAddress[$keys[$i]]):'';
 		$i++;
 	}
 	}
