@@ -389,7 +389,7 @@ function mactrack_snmp_edit() {
 	if (!isempty_request_var('id')) {
 		$items = db_fetch_assoc_prepared('SELECT * FROM mac_track_snmp_items WHERE snmp_id= ? ORDER BY sequence', array(get_request_var('id')));
 
-		html_start_box(__('Mactrack SNMP Options'), '100%', '', '3', 'center', 'mactrack_snmp.php?action=item_edit&id=' . get_request_var('id'));
+		html_start_box(__('MacTrack SNMP Options'), '100%', '', '3', 'center', 'mactrack_snmp.php?action=item_edit&id=' . get_request_var('id'));
 
 		print "<tr class='tableHeader'>";
 		DrawMatrixHeaderItem(__('Item'),'',1);
@@ -481,7 +481,7 @@ function mactrack_snmp() {
 		$rows = get_request_var('rows');
 	}
 
-	html_start_box(__('Mactrack SNMP Options'), '100%', '', '3', 'center', 'mactrack_snmp.php?action=edit');
+	html_start_box(__('MacTrack SNMP Options'), '100%', '', '3', 'center', 'mactrack_snmp.php?action=edit');
 	snmp_options_filter();
 	html_end_box();
 

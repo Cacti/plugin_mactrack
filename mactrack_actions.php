@@ -236,7 +236,7 @@ function mactrack_device_action_prepare($save) {
 			/* list affected hosts */
 			print '<tr>';
 			print "<td colspan='2' class='textArea'>" .
-				"<p>" . __('Are you sure you want to import the following hosts to Mactrack?  Please specify additional MacTrack device options as given below.') . "</p>";
+				"<p>" . __('Are you sure you want to import the following hosts to MacTrack?  Please specify additional MacTrack device options as given below.') . "</p>";
 			print "</tr>";
 
 			$form_array = array();

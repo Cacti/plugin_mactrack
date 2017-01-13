@@ -250,7 +250,7 @@ function mactrack_display_run_status() {
 	form_alternate_row();
 	print '<td width=200>' . __('Last Poller Runtime:') . '</td><td>' . read_config_option('stats_mactrack', TRUE) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Last Poller Maintenence Runtime:') . '</td><td>' . read_config_option('stats_mactrack_maint', TRUE) . '</td>';
+	print '<td width=200>' . __('Last Poller Maintenance Runtime:') . '</td><td>' . read_config_option('stats_mactrack_maint', TRUE) . '</td>';
 	form_alternate_row();
 	print '<td width=200>' . __('Maximum Concurrent Processes:') . '</td><td> ' . read_config_option('mt_processes', TRUE) . __('processes') . '</td>';
 	form_alternate_row();
@@ -264,7 +264,7 @@ function mactrack_display_run_status() {
 	form_alternate_row();
 	print '<td width=200>' . __('Secondary DNS Server:') . '</td><td>' . read_config_option('mt_dns_secondary', TRUE) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('DNS Resoution Timeout:') . '</td><td> ' . read_config_option('mt_dns_timeout', TRUE) . __('milliseconds') . '</td>';
+	print '<td width=200>' . __('DNS Resolution Timeout:') . '</td><td> ' . read_config_option('mt_dns_timeout', TRUE) . __('milliseconds') . '</td>';
 	html_end_box(TRUE);
 
 	if ($total_processes > 0) {

@@ -740,7 +740,7 @@ function mactrack_device_type_import_processor(&$device_types) {
 						if (isset($device_type_array[$line_item])) {
 							$device_type = $device_type_array[$line_item];
 						}else{
-							$device_type = __('Uknown Assume "Switch/Hub"');
+							$device_type = __('Unknown Assume "Switch/Hub"');
 							$line_item = 1;
 						}
 					}

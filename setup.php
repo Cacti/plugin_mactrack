@@ -1001,7 +1001,7 @@ function mactrack_config_settings () {
 		'mt_ignorePorts' => array(
 			'method' => 'textbox',
 			'friendly_name' => __('Ports to Ignore'),
-			'description' => __('Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example (Vlan|Loopback|Null).'),
+			'description' => __('Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null).'),
 			'class' => 'textAreaNotes',
 			'defaults' => '(Vlan|Loopback|Null)',
 			'max_length' => '255',
@@ -1073,7 +1073,7 @@ function mactrack_config_settings () {
 			),
 		'mt_from_email' => array(
 			'friendly_name' => __('Source Address'),
-			'description' => __('The source e-mail address for MacTrack e-mails.'),
+			'description' => __('The source Email address for MacTrack Emails.'),
 			'method' => 'textbox',
 			'default' => 'thewitness@cacti.net',
 			'max_length' => '100',
@@ -1081,7 +1081,7 @@ function mactrack_config_settings () {
 			),
 		'mt_from_name' => array(
 			'friendly_name' => __('Source E-Mail Name'),
-			'description' => __('The Source E-Mail name for MacTrack e-mails.'),
+			'description' => __('The Source E-Mail name for MacTrack Emails.'),
 			'method' => 'textbox',
 			'default' => 'MACTrack Administrator',
 			'max_length' => '100',
@@ -1089,8 +1089,8 @@ function mactrack_config_settings () {
 			),
 		'mt_macwatch_description' => array(
 			'friendly_name' => __('MacWatch Default Body'),
-			'description' => htmlspecialchars(__('The e-mail body preset for MacTrack MacWatch e-mails.  The body can contain ' .
-			'any valid html tags.  It also supports replacement tags that will be processed when sending an e-mail.  ' .
+			'description' => htmlspecialchars(__('The Email body preset for MacTrack MacWatch Emails.  The body can contain ' .
+			'any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  ' .
 			'Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>.')),
 			'method' => 'textarea',
 			'default' => __('Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>'),
@@ -1101,7 +1101,7 @@ function mactrack_config_settings () {
 			),
 		'mt_macauth_emails' => array(
 			'friendly_name' => __('MacAuth Report E-Mail Addresses'),
-			'description' => __('A comma delimited list of users to recieve the MacAuth e-mail notifications.'),
+			'description' => __('A comma delimited list of users to recieve the MacAuth Email notifications.'),
 			'method' => 'textarea',
 			'default' => '',
 			'class' => 'textAreaNotes',
@@ -1111,13 +1111,13 @@ function mactrack_config_settings () {
 			),
 		'mt_macauth_email_frequency' => array(
 			'friendly_name' => __('MacAuth Report Frequency'),
-			'description' => __('How often will the MacAuth Reports be e-mailed.'),
+			'description' => __('How often will the MacAuth Reports be Emailed.'),
 			'method' => 'drop_array',
 			'default' => 'disabled',
 			'array' => $mactrack_macauth_frequencies,
 			),
 		'mactrack_hdr_arpwatch' => array(
-			'friendly_name' => __('MacTrack Arpwatch Settings'),
+			'friendly_name' => __('MacTrack ArpWatch Settings'),
 			'method' => 'spacer',
 			),
 		'mt_arpwatch' => array(
@@ -1140,7 +1140,7 @@ function mactrack_config_settings () {
 			),
 		'mt_update_policy' => array(
 			'friendly_name' => __('Update Policy for SNMP Options'),
-			'description' => __('Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices.'),
+			'description' => __('Policy for synchronization of SNMP Options between Cacti devices and MacTrack Devices.'),
 			'method' => 'drop_array',
 			'default' => 1,
 			'array' => $mactrack_update_policies,
@@ -1245,7 +1245,7 @@ function mactrack_draw_navigation_text ($nav) {
 	$nav['mactrack_utilities.php:mactrack_utilities_purge_scanning_funcs'] = array('title' => __('Refresh Scanning Functions'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
 	$nav['mactrack_utilities.php:mactrack_utilities_truncate_ports_table'] = array('title' => __('Truncate Port Results Table'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
 	$nav['mactrack_utilities.php:mactrack_utilities_purge_aggregated_data'] = array('title' => __('Truncate Aggregated Port Results Table'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
-	$nav['mactrack_utilities.php:mactrack_utilities_recreate_aggregated_data'] = array('title' => __('Truncate and ReCreate Aggregated Port Results Table'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
+	$nav['mactrack_utilities.php:mactrack_utilities_recreate_aggregated_data'] = array('title' => __('Truncate and Re-create Aggregated Port Results Table'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
 	$nav['mactrack_utilities.php:mactrack_proc_status'] = array('title' => __('View MacTrack Process Status'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
 	$nav['mactrack_utilities.php:mactrack_refresh_oui_database'] = array('title' => __('Refresh/Update Vendor MAC Database from IEEE'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
 	$nav['mactrack_view_graphs.php:'] = array('title' => __('MacTrack Graph Viewer'), 'mapping' => '', 'url' => 'mactrack_view_graphs.php', 'level' => '0');
@@ -1423,7 +1423,7 @@ function mactrack_config_form () {
 		),
 	'sysObjectID_match' => array(
 		'method' => 'textbox',
-		'friendly_name' => __('Vendor snmp Object ID Match'),
+		'friendly_name' => __('Vendor SNMP Object ID Match'),
 		'description' => __('Provide key information to help MacTrack detect the type of device.  The wildcard character is the \'%\' sign.'),
 		'value' => '|arg1:sysObjectID_match|',
 		'max_length' => '250'
@@ -1824,7 +1824,7 @@ function mactrack_config_form () {
 	'netops_contact' => array(
 		'method' => 'textbox',
 		'friendly_name' => __('NetOps Contact'),
-		'description' => __('Please principal network support contact  name and number for this site.'),
+		'description' => __('Please principal network support contact name and number for this site.'),
 		'value' => '|arg1:netops_contact|',
 		'size' => '70',
 		'max_length' => '150'
@@ -1843,7 +1843,7 @@ function mactrack_config_form () {
 		'class' => 'textAreaNotes',
 		'textarea_rows' => '3',
 		'textarea_cols' => '80',
-		'description' => __('Provide any site specific information, in free form, that allows you to better manage this location.'),
+		'description' => __('Provide any site-specific information, in free form, that allows you to better manage this location.'),
 		'value' => '|arg1:site_info|',
 		'max_length' => '255'
 		),
@@ -1877,15 +1877,15 @@ function mactrack_config_form () {
 		),
 	'name' => array(
 		'method' => 'textbox',
-		'friendly_name' => __('MAC Tracking Name/E-mail Subject'),
-		'description' => __('Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your e-mail'),
+		'friendly_name' => __('MAC Tracking Name/Email Subject'),
+		'description' => __('Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email'),
 		'value' => '|arg1:name|',
 		'size' => '70',
 		'max_length' => '250'
 		),
 	'description' => array(
 		'friendly_name' => __('MacWatch Default Body'),
-		'description' => htmlspecialchars(__('The e-mail body preset for MacTrack MacWatch e-mails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an e-mail.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>.')),
+		'description' => htmlspecialchars(__('The Email body preset for MacTrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>.')),
 		'method' => 'textarea',
 		'class' => 'textAreaNotes',
 		'value' => '|arg1:description|',
@@ -1905,12 +1905,12 @@ function mactrack_config_form () {
 	'notify_schedule' => array(
 		'method' => 'drop_array',
 		'friendly_name' => __('Notification Schedule'),
-		'description' => __('Choose how often an e-mail address should be generated for this Mac Watch item.'),
+		'description' => __('Choose how often an Email address should be generated for this Mac Watch item.'),
 		'value' => '|arg1:notify_schedule|',
 		'default' => '1',
 		'array' => array(
-			1    => __('First Occurance Only'),
-			2    => __('All Occurances'),
+			1    => __('First Occurrence Only'),
+			2    => __('All Occurrences'),
 			60   => __('Every Hour'),
 			240  => __('Every %d Hours', 4),
 			1800 => __('Every %d Hours', 12),
@@ -1918,8 +1918,8 @@ function mactrack_config_form () {
 		),
 	'email_addresses' => array(
 		'method' => 'textbox',
-		'friendly_name' => __('E-mail Addresses'),
-		'description' => __('Enter a semicolon separated of e-mail addresses who will be notified where this MAC address is.'),
+		'friendly_name' => __('Email Addresses'),
+		'description' => __('Enter a semicolon separated of Email addresses who will be notified where this MAC address is.'),
 		'value' => '|arg1:email_addresses|',
 		'size' => '90',
 		'max_length' => '255'

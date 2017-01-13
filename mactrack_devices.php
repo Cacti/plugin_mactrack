@@ -242,14 +242,14 @@ function form_mactrack_actions() {
 		if (get_request_var('drp_action') == '2') { /* Enable Devices */
 			print "<tr>
 				<td colspan='2' class='textArea'>
-					<p>" . __('To enable the following devices, press the "yes" button below.') . "</p>
+					<p>" . __('To enable the following devices, press the \'Yes\' button below.') . "</p>
 					<p><ul>$device_list</ul></p>
 				</td>
 			</tr>";
 		}elseif (get_request_var('drp_action') == '3') { /* Disable Devices */
 			print "<tr>
 				<td colspan='2' class='textArea'>
-					<p>" . __('To disable the following devices, press the "yes" button below.') . "</p>
+					<p>" . __('To disable the following devices, press the \'Yes\' button below.') . "</p>
 					<p><ul>$device_list</ul></p>
 				</td>
 			</tr>";
@@ -316,14 +316,14 @@ function form_mactrack_actions() {
 		}elseif (get_request_var('drp_action') == '6') { /* Connect Devices */
 			print "<tr>
 				<td colspan='2' class='textArea'>
-					<p>" . __('To connect the following devices to their respective Cacti Device, press the "yes" button below.  The relation will be built on equal hostnames. Description will be updated as well.') . "</p>
+					<p>" . __('To connect the following devices to their respective Cacti Device, press the \'Yes\' button below.  The relation will be built on equal hostnames. Description will be updated as well.') . "</p>
 					<p><ul>$device_list</ul></p>
 				</td>
 			</tr>";
 		}elseif (get_request_var('drp_action') == '7') { /* Copy SNMP Settings */
 			print "<tr>
 				<td colspan='2' class='textArea'>
-					<p>" . __('To copy SNMP Settings from connected Cacti Device to MacTrack Device, press the "yes" button below.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries.') . "</p>
+					<p>" . __('To copy SNMP Settings from connected Cacti Device to MacTrack Device, press the \'Yes\' button below.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries.') . "</p>
 					<p><ul>$device_list</ul></p>
 				</td>
 			</tr>";
