@@ -605,19 +605,19 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	$i = 0;
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["ifIndex"] = $ifIndex;
-		$ifInterfaces[$ifIndex]["ifName"] = @$ifNames[$ifIndex];
-		$ifInterfaces[$ifIndex]["ifType"] = @$ifTypes[$ifIndex];
+		$ifInterfaces[$ifIndex]["ifName"] = (isset($ifNames[$ifIndex]) ? @$ifNames[$ifIndex] : '');
+		$ifInterfaces[$ifIndex]["ifType"] = (isset($ifTypes[$ifIndex]) ? @$ifTypes[$ifIndex] : '');
 
 		if ($getLinkPorts) {
-			$ifInterfaces[$ifIndex]["linkPort"] = @$link_ports[$ifIndex];
-			$linkPort = @$link_ports[$ifIndex];
+			$ifInterfaces[$ifIndex]["linkPort"] = (isset($link_ports[$ifIndex]) ? @$link_ports[$ifIndex] : '');
+			$linkPort = (isset($link_ports[$ifIndex]) ? @$link_ports[$ifIndex] : '');
 		}else{
 			$linkPort = 0;
 		}
 
 		if (($getAlias) && (sizeof($ifAliases))) {
-			$ifInterfaces[$ifIndex]["ifAlias"] = @$ifAliases[$ifIndex];
-			$ifAlias = @$ifAliases[$ifIndex];
+			$ifInterfaces[$ifIndex]["ifAlias"] = (isset($ifAliases[$ifIndex]) ? @$ifAliases[$ifIndex] : '');
+			$ifAlias = (isset($ifAliases[$ifIndex]) ? @$ifAliases[$ifIndex] : '');
 		}else{
 			$ifAlias = "";
 		}
