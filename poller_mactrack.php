@@ -116,10 +116,14 @@ if (sizeof($parms)) {
 			case '--web':
 				$web = TRUE;
 				break;
-			case '-h':
-			case '-v':
 			case '--version':
+			case '-V':
+			case '-v':
+				display_version();
+				exit;
 			case '--help':
+			case '-H':
+			case '-h':
 				display_help();
 				exit;
 			default:
@@ -278,17 +282,26 @@ function errors_restore() {
 	ini_set('track_errors', $track_errors); 
 }
 
+function display_version() {
+	global $config;
+
+	if (!function_exists('plugin_macktrack_version')) {
+		include_once($config['base_path'] . '/plugins/mactrack/setup.php');
+	}
+
+	$info = plugin_mactrack_version();
+	print 'MacTrack Master Poller, Version ' . $info['version'] . ', ' .  COPYRIGHT_YEARS . "\n";
+}
+
 /*	display_help - displays the usage of the function */
 function display_help () {
-	$info = plugin_mactrack_version();
-	print 'MacTrack Master Poller v' . $info['version'] . ', ' .  COPYRIGHT_YEARS . "\n\n";
-	print "usage: poller_mactrack.php [-sid=site_id] [-d] [-h] [--help] [-v] [--version]\n\n";
+	display_version();
+
+	print "\nusage: poller_mactrack.php [-sid=site_id] [--web] [--force] [--debug]\n\n";
 	print "-sid=site_id  - The mac_track_sites site_id to scan\n";
 	print "-w | --web    - Display output suitable for the web\n";
 	print "-f | --force  - Force the execution of a collection process\n";
 	print "-d | --debug  - Display verbose output during execution\n";
-	print "-v --version  - Display this help message\n";
-	print "-h --help     - Display this help message\n";
 }
 
 function collect_mactrack_data($start, $site_id = 0) {
@@ -824,4 +837,3 @@ function log_mactrack_statistics($type = "collect") {
 	}
 }
 
-?>

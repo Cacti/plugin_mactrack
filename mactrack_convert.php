@@ -23,13 +23,13 @@
  +-------------------------------------------------------------------------+
 */
 
+/* We are not talking to the browser */
+$no_http_headers = true;
+
 /* do NOT run this script through a web browser */
 if (!isset($_SERVER['argv'][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($_SERVER['REMOTE_ADDR'])) {
 die('<br><strong>This script is only meant to run at the command line.</strong>');
 }
-
-/* We are not talking to the browser */
-$no_http_headers = true;
 
 $dir = dirname(__FILE__);
 chdir($dir);
@@ -74,10 +74,14 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 				case '--engine':
 					$engine = $value;
 					break;
-				case '-h':
-				case '-v':
 				case '--version':
+				case '-V':
+				case '-v':
+					display_version();
+					exit;
 				case '--help':
+				case '-H':
+				case '-h':
 					display_help();
 					exit;
 				default:
@@ -186,11 +190,22 @@ function mactrack_create_partitioned_table($engine = 'MyISAM', $days = 30, $migr
 	}
 }
 
+function display_version() {
+	global $config;
+
+	if (!function_exists('plugin_mactrack_version')) {
+		include_once($config['base_path'] . '/plugins/mactrack/setup.php');
+	}
+
+	$info = plugin_mactrack_version();
+	print 'MacTrack Convert Partitioned, Version ' . $info['version'] . ", " . COPYRIGHT_YEARS . "\n";
+}
+
 /*	display_help - displays the usage of the function */
 function display_help () {
-	$version = mactrack_version();
-	print 'MacTrack Convert Partitioned v' . $version['version'] . ", Copyright 2004-2016 - The Cacti Group\n\n";
-	print "usage: mactrack_convert.php [-d] [-h] [--help] [-v] [--version]\n\n";
+	display_version();
+
+	print "\nusage: mactrack_convert.php [-d] [-h] [--help] [-v] [--version]\n\n";
 	print "--engine=N    - Database Engine.  Value are 'MyISAM' or 'InnoDB'\n";
 	print "--days=30     - Days to Retain.  Valid Range is 10-360\n";
 	print "-d | --debug  - Display verbose output during execution\n";

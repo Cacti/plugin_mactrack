@@ -57,17 +57,14 @@ if (sizeof($parms)) {
 			case '-f':
 				$oui_file = trim($value);
 				break;
-			case '-h':
-				display_help();
-				exit;
-			case '-v':
-			case '-V':
-				display_help();
-				exit;
 			case '--version':
-				display_help();
+			case '-V':
+			case '-v':
+				display_version();
 				exit;
 			case '--help':
+			case '-H':
+			case '-h':
 				display_help();
 				exit;
 			default:
@@ -88,11 +85,22 @@ if (strlen($oui_file)) {
 	import_oui_database();
 }
 
+function display_version() {
+	global $config;
+
+	if (!function_exists('plugin_mactrack_version')) {
+		include_once($config['base_path'] . '/plugins/mactrack/setup.php');
+	}
+
+	$info = plugin_mactrack_version();
+	print "MacTrack Import OUI Database, Version " . $info["version"] . ", " . COPYRIGHT_YEARS . "\n";
+}
+
 /*	display_help - displays the usage of the function */
 function display_help () {
-	$info = plugin_mactrack_version();
-	print "MacTrack Import OUI Database v" . $info["version"] . ", " . COPYRIGHT_YEARS . "\n\n";
-	print "usage: mactrack_import_ouidb.php [-f=ouifile] [-h] [--help] [-v] [-V] [--version]\n\n";
+	display_version();
+
+	print "\nusage: mactrack_import_ouidb.php [-f=ouifile] [-h] [--help] [-v] [-V] [--version]\n\n";
 	print "-f='outdbfile'   - Specify the location of the OUI dataabase file.  If your system\n";
 	print "                   does not allow native access to the IEEE via http, you can manually\n";
 	print "                   download the file, and then import it using this option.\n";

@@ -22,12 +22,12 @@
  +-------------------------------------------------------------------------+
 */
 
+$no_http_headers = true;
+
 /* do NOT run this script through a web browser */
 if (!isset($_SERVER['argv'][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($_SERVER['REMOTE_ADDR'])) {
 	die('<br><strong>This script is only meant to run at the command line.</strong>');
 }
-
-$no_http_headers = true;
 
 $dir = dirname(__FILE__);
 chdir($dir);
@@ -77,10 +77,14 @@ if (sizeof($parms)) {
 			case '--debug':
 				$debug = TRUE;
 				break;
-			case '-h':
-			case '-v':
 			case '--version':
+			case '-V':
+			case '-v':
+				display_version();
+				exit;
 			case '--help':
+			case '-H':
+			case '-h':
 				display_help();
 				exit;
 			default:
@@ -207,11 +211,22 @@ while (1) {
 db_process_remove(0);
 exit;
 
+function display_version() {
+	global $config;
+
+	if (!function_exists('plugin_mactrack_version')) {
+		include_once($config['base_path'] . '/plugins/mactrack/setup.php');
+	}
+
+	$info = plugin_mactrack_version();
+	print "Network MacTracker IP Resolver, Version " . $info['version'] . ", " . COPYRIGHT_YEARS . "\n";
+}
+
 /*	display_help - displays the usage of the function */
 function display_help () {
-	$info = plugin_mactrack_version();
-	print "Network MacTracker IP Resolver Version " . $info['version'] . ", " . COPYRIGHT_YEARS . "\n";
-	print "usage: mactrack_resolver.php [-sid=ID] [-d] [-h] [--help] [-v] [--version]\n\n";
+	display_version();
+
+	print "\nusage: mactrack_resolver.php [-sid=ID] [-d] [-h] [--help] [-v] [--version]\n\n";
 	print "-sid=ID       - The site id to resolve for\n";
 	print "-d | --debug  - Display verbose output during execution\n";
 	print "-v --version  - Display this help message\n";

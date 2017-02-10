@@ -94,10 +94,14 @@ if (sizeof($parms)) {
 			case '-t':
 				$test_mode = TRUE;
 				exit;
-			case '-h':
-			case '-v':
 			case '--version':
+			case '-V':
+			case '-v':
+				display_version();
+				exit;
 			case '--help':
+			case '-H':
+			case '-h':
 				display_help();
 				exit;
 			default:
@@ -218,11 +222,22 @@ db_update_device_status($device, $host_up, $scan_date, $start_time);
 db_process_remove($device_id);
 exit;
 
+function display_version() {
+	global $config;
+
+	if (!function_exists('plugin_mactrack_version')) {
+		include_once($config['base_path'] . '/plugins/mactrack/setup.php');
+	}
+
+	$info = plugin_mactrack_version();
+	print "Network MacTracker, Version " . $info['version'] .", " . COPYRIGHT_YEARS . "\n";
+}
+
 /*	display_help - displays the usage of the function */
 function display_help () {
-	$info = plugin_mactrack_version();
-	print "Network MacTracker Version " . $info['version'] .", " . COPYRIGHT_YEARS . "\n\n";
-	print "usage: mactrack_device.php -id=host_id [-w] [-d] [-h] [--help] [-v] [--version]\n\n";
+	display_version();
+
+	print "\nusage: mactrack_device.php -id=host_id [-w] [-d] [-h] [--help] [-v] [--version]\n\n";
 	print "-id=host_id   - the mac_track_devices host_id to scan\n";
 	print "-d | --debug  - Display verbose output during execution\n";
 	print "-w | --web    - Display web compatible output during execution\n";
