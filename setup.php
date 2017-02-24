@@ -43,87 +43,32 @@ function plugin_mactrack_install() {
 
 	# Register our realms
 	api_plugin_register_realm('mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_graphs.php,mactrack_ajax.php', 'MacTrack Viewer', 1);
-	api_plugin_register_realm('mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'Plugin -> MacTrack Administrator', 1);
+	api_plugin_register_realm('mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'MacTrack Administrator', 1);
 
 	mactrack_setup_table_new ();
 }
 
 function plugin_mactrack_uninstall () {
-	if (mactrack_db_table_exists('mac_track_approved_macs')) {
-		db_execute('DROP TABLE `mac_track_approved_macs`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_device_types')) {
-		db_execute('DROP TABLE `mac_track_device_types`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_devices')) {
-		db_execute('DROP TABLE `mac_track_devices`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_interfaces')) {
-		db_execute('DROP TABLE `mac_track_interfaces`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_ip_ranges')) {
-		db_execute('DROP TABLE `mac_track_ip_ranges`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_ips')) {
-		db_execute('DROP TABLE `mac_track_ips`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_macauth')) {
-		db_execute('DROP TABLE `mac_track_macauth`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_macwatch')) {
-		db_execute('DROP TABLE `mac_track_macwatch`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_oui_database')) {
-		db_execute('DROP TABLE `mac_track_oui_database`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_ports')) {
-		db_execute('DROP TABLE `mac_track_ports`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_processes')) {
-		db_execute('DROP TABLE `mac_track_processes`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_scan_dates')) {
-		db_execute('DROP TABLE `mac_track_scan_dates`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_scanning_functions')) {
-		db_execute('DROP TABLE `mac_track_scanning_functions`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_sites')) {
-		db_execute('DROP TABLE `mac_track_sites`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_temp_ports')) {
-		db_execute('DROP TABLE `mac_track_temp_ports`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_vlans')) {
-		db_execute('DROP TABLE `mac_track_vlans`');
-	}
-
-	if (mactrack_db_table_exists('mac_track_aggregated_ports')) {
-		db_execute('DROP TABLE mac_track_aggregated_ports');
-	}
-
-	if (mactrack_db_table_exists('mac_track_snmp')) {
-		db_execute('DROP TABLE mac_track_snmp');
-	}
-
-	if (mactrack_db_table_exists('mac_track_snmp_items')) {
-		db_execute('DROP TABLE mac_track_snmp_items');
-	}
+	db_execute('DROP TABLE IF EXISTS `mac_track_approved_macs`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_device_types`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_devices`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_interfaces`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_interface_graphs`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_ip_ranges`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_ips`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_macauth`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_macwatch`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_oui_database`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_ports`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_processes`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_scan_dates`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_scanning_functions`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_sites`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_temp_ports`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_vlans`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_aggregated_ports`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_snmp`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_snmp_items`');
 }
 
 function plugin_mactrack_version () {
@@ -178,8 +123,8 @@ function mactrack_check_upgrade () {
 
 		// If are realms are not present in plugin_realms recreate them with the old realm ids (minus 100) so that upgraded installs are not broken
 		if (!db_fetch_cell("SELECT id FROM plugin_realms WHERE plugin = 'mactrack'")) {
-			db_execute("INSERT INTO plugin_realms (id, plugin, file, display) VALUES (2020, 'mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_graphs.php,mactrack_ajax.php', 'Plugin -> MacTrack Viewer')");
-			db_execute("INSERT INTO plugin_realms (id, plugin, file, display) VALUES (2021, 'mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'Plugin -> MacTrack Administrator')");
+			db_execute("INSERT INTO plugin_realms (id, plugin, file, display) VALUES (2020, 'mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_graphs.php,mactrack_ajax.php', 'MacTrack Viewer')");
+			db_execute("INSERT INTO plugin_realms (id, plugin, file, display) VALUES (2021, 'mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'MacTrack Administrator')");
 		}
 
 		/* rebuild the scanning functions */
@@ -1080,8 +1025,8 @@ function mactrack_config_settings () {
 			'size' => '30'
 			),
 		'mt_from_name' => array(
-			'friendly_name' => __('Source E-Mail Name'),
-			'description' => __('The Source E-Mail name for MacTrack Emails.'),
+			'friendly_name' => __('Source Email Name'),
+			'description' => __('The Source Email name for MacTrack Emails.'),
 			'method' => 'textbox',
 			'default' => 'MACTrack Administrator',
 			'max_length' => '100',
@@ -1100,7 +1045,7 @@ function mactrack_config_settings () {
 			'textarea_cols' => '80',
 			),
 		'mt_macauth_emails' => array(
-			'friendly_name' => __('MacAuth Report E-Mail Addresses'),
+			'friendly_name' => __('MacAuth Report Email Addresses'),
 			'description' => __('A comma delimited list of users to recieve the MacAuth Email notifications.'),
 			'method' => 'textarea',
 			'default' => '',
