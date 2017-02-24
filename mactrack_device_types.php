@@ -916,6 +916,8 @@ function mactrack_device_type() {
 		COUNT(mac_track_device_types.device_type_id)
 		FROM mac_track_device_types" . $sql_where);
 
+	form_start('mactrack_device_types.php', 'chk');
+
 	$nav = html_nav_bar('mactrack_device_types.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $row_limit, $total_rows, 9, __('Device Types'));
 
 	print $nav;
@@ -957,6 +959,8 @@ function mactrack_device_type() {
 	}
 
 	draw_actions_dropdown($device_types_actions);
+
+	form_end();
 }
 
 function mactrack_device_type_filter() {
