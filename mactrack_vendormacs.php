@@ -97,7 +97,7 @@ function mactrack_vmacs_export() {
 	}
 }
 
-function mactrack_vmacs_get_vmac_records(&$sql_where, $row_limit, $apply_limits = TRUE) {
+function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = TRUE) {
 	$sql_where = '';
 
 	/* form the 'where' clause for our main sql query */
@@ -107,14 +107,18 @@ function mactrack_vmacs_get_vmac_records(&$sql_where, $row_limit, $apply_limits 
 			"mac_track_oui_database.vendor_address LIKE '%" . get_request_var('filter') . "%')";
 	}
 
+	$sql_order = get_order_string();
+	if ($apply_limits) {
+		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
+	}else{
+		$sql_limit = '';
+	}
+
 	$query_string = "SELECT *
 		FROM mac_track_oui_database
 		$sql_where
-		ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction');
-
-	if ($apply_limits) {
-		$query_string .= ' LIMIT ' . ($row_limit*(get_request_var('page')-1)) . ',' . $row_limit;
-	}
+		$sql_order
+		$sql_limit";
 
 	return db_fetch_assoc($query_string);
 }
@@ -125,11 +129,11 @@ function mactrack_vmacs() {
 	mactrack_vmacs_validate_request_vars();
 
 	if (get_request_var('rows') == -1) {
-		$row_limit = read_config_option('num_rows_table');
+		$rows = read_config_option('num_rows_table');
 	}elseif (get_request_var('rows') == -2) {
-		$row_limit = 999999;
+		$rows = 999999;
 	}else{
-		$row_limit = get_request_var('rows');
+		$rows = get_request_var('rows');
 	}
 
 	html_start_box(__('MacTrack Vendor Mac Filter'), '100%', '', '3', 'center', '');
@@ -138,14 +142,14 @@ function mactrack_vmacs() {
 
 	$sql_where = '';
 
-	$vmacs = mactrack_vmacs_get_vmac_records($sql_where, $row_limit);
+	$vmacs = mactrack_vmacs_get_vmac_records($sql_where, $rows);
 
 	$total_rows = db_fetch_cell("SELECT
 		COUNT(*)
 		FROM mac_track_oui_database
 		$sql_where");
 
-	$nav = html_nav_bar('mactrack_vendormacs.php', MAX_DISPLAY_PAGES, get_request_var('page'), $row_limit, $total_rows, 9, __('Vendor Macs'));
+	$nav = html_nav_bar('mactrack_vendormacs.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 9, __('Vendor Macs'), 'page', 'main');
 
 	print $nav;
 

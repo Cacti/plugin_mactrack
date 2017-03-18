@@ -38,7 +38,7 @@ if (isset_request_var('export')) {
 	mactrack_view();
 }
 
-function mactrack_get_records(&$sql_where, $apply_limits = TRUE, $row_limit = '30') {
+function mactrack_get_records(&$sql_where, $apply_limits = TRUE, $rows = '30') {
 	global $timespan, $group_function, $summary_stats;
 
 	$match = read_config_option('mt_ignorePorts', TRUE);
@@ -105,6 +105,13 @@ function mactrack_get_records(&$sql_where, $apply_limits = TRUE, $row_limit = '3
 		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . '(mac_track_devices.device_type_id=' . get_request_var('device_type_id');
 	}
 
+	$sql_order = get_order_string();
+	if ($apply_limits) {
+		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
+	}else{
+		$sql_limit = '';
+	}
+
 	$sql_query = "SELECT mac_track_interfaces.*,
 		mac_track_device_types.description AS device_type,
 		mac_track_devices.device_name,
@@ -117,11 +124,8 @@ function mactrack_get_records(&$sql_where, $apply_limits = TRUE, $row_limit = '3
 		INNER JOIN mac_track_device_types
 		ON mac_track_device_types.device_type_id=mac_track_devices.device_type_id
 		$sql_where
-		ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction');
-
-	if ($apply_limits) {
-		$sql_query .= ' LIMIT ' . ($row_limit*(get_request_var('page')-1)) . ',' . $row_limit;
-	}
+		$sql_order
+		$sql_limit";
 
 	//echo $sql_query;
 
@@ -257,14 +261,14 @@ function mactrack_view() {
 	$sql_where  = '';
 
 	if (get_request_var('rows') == -1) {
-		$row_limit = read_config_option('num_rows_table');
+		$rows = read_config_option('num_rows_table');
 	}elseif (get_request_var('rows') == -2) {
-		$row_limit = 99999999;
+		$rows = 99999999;
 	}else{
-		$row_limit = get_request_var('rows');
+		$rows = get_request_var('rows');
 	}
 
-	$stats = mactrack_get_records($sql_where, TRUE, $row_limit);
+	$stats = mactrack_get_records($sql_where, TRUE, $rows);
 
 	mactrack_tabs();
 
@@ -282,7 +286,7 @@ function mactrack_view() {
 
 	$total_rows = db_fetch_cell($rows_query_string);
 
-	$nav = html_nav_bar('mactrack_view_interfaces.php?report=interfaces', MAX_DISPLAY_PAGES, get_request_var('page'), $row_limit, $total_rows, 22, __('Interfaces'));
+	$nav = html_nav_bar('mactrack_view_interfaces.php?report=interfaces', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 22, __('Interfaces'), 'page', 'main');
 
 	print $nav;
 

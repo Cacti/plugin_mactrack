@@ -859,7 +859,7 @@ function mactrack_device_type_edit() {
 	form_save_button('mactrack_device_types.php', 'return', 'device_type_id');
 }
 
-function mactrack_get_device_types(&$sql_where, $row_limit, $apply_limits = TRUE) {
+function mactrack_get_device_types(&$sql_where, $rows, $apply_limits = TRUE) {
 	if (get_request_var('filter') != '') {
 		$sql_where = " WHERE (mac_track_device_types.vendor LIKE '%" . get_request_var('filter') . "%' OR
 			mac_track_device_types.description LIKE '%" . get_request_var('filter') . "%' OR
@@ -879,14 +879,18 @@ function mactrack_get_device_types(&$sql_where, $row_limit, $apply_limits = TRUE
 		$sql_where .= (strlen($sql_where) ? ' AND ': ' WHERE ') . "(mac_track_device_types.device_type=" . get_request_var('type_id') . ")";
 	}
 
+	$sql_order = get_order_string();
+	if ($apply_limits) {
+		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
+	}else{
+		$sql_limit = '';
+	}
+
 	$query_string = "SELECT *
 		FROM mac_track_device_types
 		$sql_where
-		ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction');
-
-	if ($apply_limits) {
-		$query_string .= ' LIMIT ' . ($row_limit*(get_request_var('page')-1)) . ',' . $row_limit;
-	}
+		$sql_order
+		$sql_limit";
 
 	return db_fetch_assoc($query_string);
 }
@@ -897,11 +901,11 @@ function mactrack_device_type() {
 	mactrack_device_type_request_validation();
 
 	if (get_request_var('rows') == -1) {
-		$row_limit = read_config_option('num_rows_table');
+		$rows = read_config_option('num_rows_table');
 	}elseif (get_request_var('rows') == -2) {
-		$row_limit = 999999;
+		$rows = 999999;
 	}else{
-		$row_limit = get_request_var('rows');
+		$rows = get_request_var('rows');
 	}
 
 	html_start_box(__('MacTrack Device Type Filters'), '100%', '', '3', 'center', 'mactrack_device_types.php?action=edit');
@@ -910,7 +914,7 @@ function mactrack_device_type() {
 
 	$sql_where = '';
 
-	$device_types = mactrack_get_device_types($sql_where, $row_limit);
+	$device_types = mactrack_get_device_types($sql_where, $rows);
 
 	$total_rows = db_fetch_cell("SELECT
 		COUNT(mac_track_device_types.device_type_id)
@@ -918,7 +922,7 @@ function mactrack_device_type() {
 
 	form_start('mactrack_device_types.php', 'chk');
 
-	$nav = html_nav_bar('mactrack_device_types.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $row_limit, $total_rows, 9, __('Device Types'));
+	$nav = html_nav_bar('mactrack_device_types.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 9, __('Device Types'), 'page', 'main');
 
 	print $nav;
 

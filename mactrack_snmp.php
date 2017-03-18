@@ -496,13 +496,16 @@ function mactrack_snmp() {
 		FROM mac_track_snmp
 		$sql_where");
 
+	$sql_order = get_order_string();
+	$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
+
 	$snmp_groups = db_fetch_assoc("SELECT *
 		FROM mac_track_snmp
 		$sql_where
-		ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction') . '
-		LIMIT ' . ($rows*(get_request_var('page')-1)) . ',' . $rows);
+		$sql_order
+		$sql_limmit");
 
-	$nav = html_nav_bar('mactrack_snmp.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 12, __('SNMP Settings'));
+	$nav = html_nav_bar('mactrack_snmp.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 12, __('SNMP Settings'), 'page', 'main');
 
 	print $nav;
 

@@ -204,7 +204,7 @@ function mactrack_macw_remove() {
 	}
 }
 
-function mactrack_macw_get_macw_records(&$sql_where, $row_limit, $apply_limits = TRUE) {
+function mactrack_macw_get_macw_records(&$sql_where, $rows, $apply_limits = TRUE) {
 	$sql_where = '';
 
 	/* form the 'where' clause for our main sql query */
@@ -215,14 +215,18 @@ function mactrack_macw_get_macw_records(&$sql_where, $row_limit, $apply_limits =
 			"description LIKE '%" . get_request_var('filter') . "%')";
 	}
 
+	$sql_order = get_order_string();
+	if ($apply_limits) {
+		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ',' . $rows;
+	}else{
+		$sql_limit = '';
+	}
+
 	$query_string = "SELECT *
 		FROM mac_track_macwatch
 		$sql_where
-		ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction');
-
-	if ($apply_limits) {
-		$query_string .= ' LIMIT ' . ($row_limit*(get_request_var('page')-1)) . ',' . $row_limit;
-	}
+		$sql_order
+		$sql_limit";
 
 	return db_fetch_assoc($query_string);
 }
@@ -295,11 +299,11 @@ function mactrack_macw() {
 	/* ================= input validation ================= */
 
 	if (get_request_var('rows') == -1) {
-		$row_limit = read_config_option('num_rows_table');
+		$rows = read_config_option('num_rows_table');
 	}elseif (get_request_var('rows') == -2) {
-		$row_limit = 999999;
+		$rows = 999999;
 	}else{
-		$row_limit = get_request_var('rows');
+		$rows = get_request_var('rows');
 	}
 
 	html_start_box(__('MacTrack MacWatch Filters'), '100%', '', '3', 'center', 'mactrack_macwatch.php?action=edit');
@@ -308,11 +312,11 @@ function mactrack_macw() {
 
 	$sql_where = '';
 
-	$macw = mactrack_macw_get_macw_records($sql_where, $row_limit);
+	$macw = mactrack_macw_get_macw_records($sql_where, $rows);
 
 	$total_rows = db_fetch_cell("SELECT count(*) FROM mac_track_macwatch $sql_where");
 
-	$nav = html_nav_bar('mactrack_macwatch.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $row_limit, $total_rows, 9, __('Watches'));
+	$nav = html_nav_bar('mactrack_macwatch.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 9, __('Watches'), 'page', 'main');
 
 	form_start('mactrack_macwatch.php', 'chk');
 

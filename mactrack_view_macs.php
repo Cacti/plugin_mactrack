@@ -423,7 +423,7 @@ function mactrack_view_export_macs() {
 	}
 }
 
-function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_limit = -1) {
+function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $rows) {
 	/* form the 'where' clause for our main sql query */
 	if (get_request_var('mac_filter') != '') {
 		switch (get_request_var('mac_filter_type_id')) {
@@ -542,6 +542,13 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 		if (!strlen($sql_where)) return array();
 	}
 
+	$sql_order = get_order_string();
+	if ($apply_limits  && $rows != 999999) {
+		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ',' . $rows;
+	}else{
+		$sql_limit = '';
+	}
+
 	if (get_request_var('scan_date') == 3) {
 		$query_string = "SELECT
 			row_id, site_name, device_id, device_name, hostname, mac_address, 
@@ -552,12 +559,9 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 			ON (mac_track_aggregated_ports.site_id=mac_track_sites.site_id)
 			LEFT JOIN mac_track_oui_database
 			ON (mac_track_oui_database.vendor_mac=mac_track_aggregated_ports.vendor_mac) " .
-			str_replace('mac_track_ports', 'mac_track_aggregated_ports', $sql_where) .
-			' ORDER BY ' . get_request_var('sort_column') . ' ' . get_request_var('sort_direction');
-
-		if (($apply_limits) && ($row_limit != 999999)) {
-			$query_string .= ' LIMIT ' . ($row_limit*(get_request_var('page')-1)) . ',' . $row_limit;
-		}
+			str_replace('mac_track_ports', 'mac_track_aggregated_ports', $sql_where) . "
+			$sql_order
+			$sql_limit";
 	}elseif ((get_request_var('scan_date') != 2)) {
 		$query_string = "SELECT
 			site_name, device_id, device_name, hostname, mac_address, 
@@ -569,11 +573,8 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 			LEFT JOIN mac_track_oui_database
 			ON (mac_track_oui_database.vendor_mac = mac_track_ports.vendor_mac)
 			$sql_where
-			ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction');
-
-		if (($apply_limits) && ($row_limit != 999999)) {
-			$query_string .= ' LIMIT ' . ($row_limit*(get_request_var('page')-1)) . ',' . $row_limit;
-		}
+			$sql_order
+			$sql_limit";
 	}else{
 		$query_string = "SELECT
 			site_name, device_id, device_name, hostname, mac_address, 
@@ -586,11 +587,8 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $row_l
 			ON (mac_track_oui_database.vendor_mac = mac_track_ports.vendor_mac)
 			$sql_where
 			GROUP BY device_id, mac_address, port_number, ip_address
-			ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction');
-
-		if (($apply_limits) && ($row_limit != 999999)) {
-			$query_string .= ' LIMIT ' . ($row_limit*(get_request_var('page')-1)) . ',' . $row_limit;
-		}
+			$sql_order
+			$sql_limit";
 	}
 
 	if (strlen($sql_where) == 0) {
@@ -613,14 +611,14 @@ function mactrack_view_macs() {
 	$sql_where = '';
 
 	if (get_request_var('rows') == -1) {
-		$row_limit = read_config_option('num_rows_table');
+		$rows = read_config_option('num_rows_table');
 	}elseif (get_request_var('rows') == -2) {
-		$row_limit = 999999;
+		$rows = 999999;
 	}else{
-		$row_limit = get_request_var('rows');
+		$rows = get_request_var('rows');
 	}
 
-	$port_results = mactrack_view_get_mac_records($sql_where, TRUE, $row_limit);
+	$port_results = mactrack_view_get_mac_records($sql_where, TRUE, $rows);
 
 	/* prevent table scans, either a device or site must be selected */
 	if (!strlen($sql_where)) {
@@ -645,7 +643,7 @@ function mactrack_view_macs() {
 		$total_rows = db_fetch_cell($rows_query_string);
 	}
 
-	$nav = html_nav_bar('mactrack_view_macs.php?report=macs', MAX_DISPLAY_PAGES, get_request_var('page'), $row_limit, $total_rows, 12, __('MAC Addresses'));
+	$nav = html_nav_bar('mactrack_view_macs.php?report=macs', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 12, __('MAC Addresses'), 'page', 'main');
 
 	print $nav;
 
@@ -762,14 +760,14 @@ function mactrack_view_aggregated_macs() {
 	$sql_where = '';
 
 	if (get_request_var('rows') == -1) {
-		$row_limit = read_config_option('num_rows_table');
+		$rows = read_config_option('num_rows_table');
 	}elseif (get_request_var('rows') == -2) {
-		$row_limit = 999999;
+		$rows = 999999;
 	}else{
-		$row_limit = get_request_var('rows');
+		$rows = get_request_var('rows');
 	}
 
-	$port_results = mactrack_view_get_mac_records($sql_where, TRUE, $row_limit);
+	$port_results = mactrack_view_get_mac_records($sql_where, TRUE, $rows);
 
 	/* prevent table scans, either a device or site must be selected */
 	if (get_request_var('site_id') == -1 && get_request_var('device_id') == -1) {
@@ -787,7 +785,7 @@ function mactrack_view_aggregated_macs() {
 		$total_rows = db_fetch_cell($rows_query_string);
 	}
 
-	$nav = html_nav_bar('mactrack_view_macs.php?report=macs&scan_date=3', MAX_DISPLAY_PAGES, get_request_var('page'), $row_limit, $total_rows, 12, 'MAC Addresses');
+	$nav = html_nav_bar('mactrack_view_macs.php?report=macs&scan_date=3', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 12, __('MAC Addresses'), 'page', 'main');
 
 	print $nav;
 

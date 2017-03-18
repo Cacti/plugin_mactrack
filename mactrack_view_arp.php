@@ -137,7 +137,7 @@ function mactrack_view_export_ips() {
 	}
 }
 
-function mactrack_view_get_ip_records(&$sql_where, $apply_limits = TRUE, $row_limit = -1) {
+function mactrack_view_get_ip_records(&$sql_where, $apply_limits = TRUE, $rows) {
 	/* form the 'where' clause for our main sql query */
 	if (get_request_var('mac_filter') != '') {
 		switch (get_request_var('mac_filter_type_id')) {
@@ -225,6 +225,13 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = TRUE, $row_li
 		if (!strlen($sql_where)) return array();
 	}
 
+	$sql_order = get_order_string();
+	if ($apply_limits && $rows != 999999) {
+		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
+	}else{
+		$sql_limit = '';
+	}
+
 	$query_string = "SELECT mac_track_ips.*, mac_track_sites.site_name, mac_track_oui_database.*
 		FROM mac_track_ips
 		LEFT JOIN mac_track_sites
@@ -232,11 +239,8 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = TRUE, $row_li
 		LEFT JOIN mac_track_oui_database
 		ON (mac_track_oui_database.vendor_mac=SUBSTRING(mac_track_ips.mac_address, 1, 8))
 		$sql_where
-		ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction');
-
-	if (($apply_limits) && ($row_limit != 999999)) {
-		$query_string .= ' LIMIT ' . ($row_limit*(get_request_var('page')-1)) . ',' . $row_limit;
-	}
+		$sql_order
+		$sql_limit";
 
 	//echo $query_string;
 
@@ -258,14 +262,14 @@ function mactrack_view_ips() {
 	$sql_where = '';
 
 	if (get_request_var('rows') == -1) {
-		$row_limit = read_config_option('num_rows_table');
+		$rows = read_config_option('num_rows_table');
 	}elseif (get_request_var('rows') == -2) {
-		$row_limit = 999999;
+		$rows = 999999;
 	}else{
-		$row_limit = get_request_var('rows');
+		$rows = get_request_var('rows');
 	}
 
-	$port_results = mactrack_view_get_ip_records($sql_where, TRUE, $row_limit);
+	$port_results = mactrack_view_get_ip_records($sql_where, TRUE, $rows);
 
 	/* prevent table scans, either a device or site must be selected */
 	if (!strlen($sql_where)) {
@@ -290,7 +294,7 @@ function mactrack_view_ips() {
 		$total_rows = db_fetch_cell($rows_query_string);
 	}
 
-	$nav = html_nav_bar('mactrack_view_arp.php', MAX_DISPLAY_PAGES, get_request_var('page'), $row_limit, $total_rows, 13, __('ARP Cache'));
+	$nav = html_nav_bar('mactrack_view_arp.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 13, __('ARP Cache'), 'page', 'main');
 
 	print $nav;
 

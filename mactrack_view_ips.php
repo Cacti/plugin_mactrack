@@ -129,11 +129,18 @@ function mactrack_view_export_ip_ranges() {
 	}
 }
 
-function mactrack_view_get_ip_range_records(&$sql_where, $row_limit, $apply_limits = TRUE) {
+function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = TRUE) {
 	if (get_request_var('site_id') != '-1') {
 		$sql_where = 'WHERE mac_track_ip_ranges.site_id=' . get_request_var('site_id');
 	}else{
 		$sql_where = '';
+	}
+
+	$sql_order = get_order_string();
+	if ($apply_limits) {
+		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
+	}else{
+		$sql_limit = '';
 	}
 
 	$ip_ranges = "SELECT
@@ -148,11 +155,8 @@ function mactrack_view_get_ip_range_records(&$sql_where, $row_limit, $apply_limi
 		INNER JOIN mac_track_sites 
 		ON (mac_track_ip_ranges.site_id=mac_track_sites.site_id)
 		$sql_where
-		ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction');
-
-	if ($apply_limits) {
-		$ip_ranges .= ' LIMIT ' . ($row_limit*(get_request_var('page')-1)) . ',' . $row_limit;
-	}
+		$sql_order
+		$sql_limit";
 
 	return db_fetch_assoc($ip_ranges);
 }
@@ -163,11 +167,11 @@ function mactrack_view_ip_ranges() {
 	mactrack_view_ips_validate_request_vars();
 
 	if (get_request_var('rows') == -1) {
-		$row_limit = read_config_option('num_rows_table');
+		$rows = read_config_option('num_rows_table');
 	}elseif (get_request_var('rows') == -2) {
-		$row_limit = 999999;
+		$rows = 999999;
 	}else{
-		$row_limit = get_request_var('rows');
+		$rows = get_request_var('rows');
 	}
 
 	$webroot = $config['url_path'] . 'plugins/mactrack/';
@@ -180,7 +184,7 @@ function mactrack_view_ip_ranges() {
 
 	$sql_where = '';
 
-	$ip_ranges = mactrack_view_get_ip_range_records($sql_where, $row_limit);
+	$ip_ranges = mactrack_view_get_ip_range_records($sql_where, $rows);
 
 	$total_rows = db_fetch_cell("SELECT
 		COUNT(mac_track_ip_ranges.ip_range)
@@ -188,7 +192,7 @@ function mactrack_view_ip_ranges() {
 		INNER JOIN mac_track_sites ON (mac_track_ip_ranges.site_id=mac_track_sites.site_id)
 		$sql_where");
 
-	$nav = html_nav_bar('mactrack_view_ips.php', MAX_DISPLAY_PAGES, get_request_var('page'), $row_limit, $total_rows, 7, __('IP Address Ranges'));
+	$nav = html_nav_bar('mactrack_view_ips.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 7, __('IP Address Ranges'), 'page', 'main');
 
 	print $nav;
 

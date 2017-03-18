@@ -921,7 +921,7 @@ function mactrack_device_edit() {
 	form_save_button('mactrack_devices.php', 'return');
 }
 
-function mactrack_get_devices(&$sql_where, $row_limit, $apply_limits = TRUE) {
+function mactrack_get_devices(&$sql_where, $rows, $apply_limits = TRUE) {
 	/* form the 'where' clause for our main sql query */
 	if (get_request_var('filter') != '') {
 		$sql_where = (strlen($sql_where) ? ' AND ': 'WHERE ') . "(mac_track_devices.hostname like '%%" . get_request_var('filter') . "%%'
@@ -961,6 +961,13 @@ function mactrack_get_devices(&$sql_where, $row_limit, $apply_limits = TRUE) {
 		$sql_where .= (strlen($sql_where) ? ' AND ': 'WHERE ') . '(mac_track_devices.site_id=' . get_request_var('site_id') . ')';
 	}
 
+	$sql_order = get_order_string();
+	if ($apply_limits) {
+		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
+	}else{
+		$sql_limit = '';
+	}
+
 	$query_string = "SELECT
 		mac_track_device_types.description as device_type,
 		mac_track_devices.*,
@@ -969,11 +976,8 @@ function mactrack_get_devices(&$sql_where, $row_limit, $apply_limits = TRUE) {
 		RIGHT JOIN mac_track_devices ON mac_track_devices.site_id = mac_track_sites.site_id
 		LEFT JOIN mac_track_device_types ON mac_track_devices.device_type_id=mac_track_device_types.device_type_id
 		$sql_where
-		ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction');
-
-	if ($apply_limits) {
-		$query_string .= ' LIMIT ' . ($row_limit*(get_request_var('page')-1)) . ',' . $row_limit;
-	}
+		$sql_order
+		$sql_limit";
 
 	return db_fetch_assoc($query_string);
 }
@@ -984,11 +988,11 @@ function mactrack_device() {
 	mactrack_device_request_validation();
 
 	if (get_request_var('rows') == -1) {
-		$row_limit = read_config_option('num_rows_table');
+		$rows = read_config_option('num_rows_table');
 	}elseif (get_request_var('rows') == -2) {
-		$row_limit = 999999;
+		$rows = 999999;
 	}else{
-		$row_limit = get_request_var('rows');
+		$rows = get_request_var('rows');
 	}
 
 	html_start_box('MacTrack Device Filters', '100%', '', '3', 'center', 'mactrack_devices.php?action=edit&status=' . get_request_var('status'));
@@ -997,7 +1001,7 @@ function mactrack_device() {
 
 	$sql_where = '';
 
-	$devices = mactrack_get_devices($sql_where, $row_limit);
+	$devices = mactrack_get_devices($sql_where, $rows);
 
 	$total_rows = db_fetch_cell("SELECT
 		COUNT(*)
@@ -1006,7 +1010,7 @@ function mactrack_device() {
 		LEFT JOIN mac_track_device_types ON mac_track_devices.device_type_id=mac_track_device_types.device_type_id
 		$sql_where");
 
-	$nav = html_nav_bar('mactrack_devices.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $row_limit, $total_rows, 13, __('Devices'));
+	$nav = html_nav_bar('mactrack_devices.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 13, __('Devices'), 'page', 'main');
 
 	form_start('mactrack_devices.php', 'chk');
 
