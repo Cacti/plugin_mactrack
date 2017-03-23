@@ -275,11 +275,66 @@ function errors_disable() {
 	global $track_errors;
 	$track_errors = ini_get('track_errors');
 	ini_set('track_errors', 0); 
+
+	set_error_handler('mactrack_error_handler');
 }
 
 function errors_restore() {
 	global $track_errors;
 	ini_set('track_errors', $track_errors); 
+
+	restore_error_handler();
+}
+
+function mactrack_error_handler($level, $message, $file, $line, $context) {
+	global $phperrors;
+
+	if (IgnoreErrorHandler($message)) {
+		return true;
+	}
+
+	preg_match("/.*\/plugins\/([\w-]*)\/.*/", $file, $output_array);
+
+	$plugin = (isset($output_array[1]) ? $output_array[1] : '');
+	$error  = 'PHP ' . $phperrors[$level] . ($plugin != '' ? " in  Plugin '$plugin'" : '') . ": $message in file: $file  on line: $line";
+
+	switch ($level) {
+		case E_COMPILE_ERROR:
+		case E_CORE_ERROR:
+		case E_ERROR:
+		case E_PARSE:
+			if ($plugin != '') {
+				api_plugin_disable_all($plugin);
+				cacti_log("ERRORS DETECTED - DISABLING PLUGIN '$plugin'");
+			}
+			cacti_log($error, false, 'ERROR');
+			cacti_debug_backtrace('PHP ERROR PARSE');
+			break;
+		case E_RECOVERABLE_ERROR:
+		case E_USER_ERROR:
+			cacti_log($error, false, 'ERROR');
+			cacti_debug_backtrace('PHP ERROR');
+			break;
+		case E_COMPILE_WARNING:
+		case E_CORE_WARNING:
+		case E_USER_WARNING:
+		case E_WARNING:
+			cacti_log($error, false, 'ERROR');
+			cacti_debug_backtrace('PHP ERROR WARNING');
+			break;
+		case E_NOTICE:
+		case E_USER_NOTICE:
+			break;
+		case E_STRICT:
+			cacti_log($error, false, 'ERROR');
+			cacti_debug_backtrace('PHP ERROR STRICT');
+			break;
+		default:
+       		cacti_log($error, false, 'ERROR');
+			cacti_debug_backtrace('PHP ERROR');
+	}
+
+	return false;
 }
 
 function display_version() {
