@@ -261,15 +261,15 @@ function mactrack_view_sites() {
 					<td width=140>
 						<?php
 						if (api_user_realm_auth('mactrack_sites.php')) {
-							echo "<a href='" . htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']) . "' title='" . __('Edit Site') . "'><img border='0' src='" . $webroot . "images/edit_object.png'></a>";
-							echo "<a href='#'><img id='r_" . $site['site_id'] . "' src='" . $webroot . "images/rescan_site.gif' alt='' onClick='site_scan(" . $site['site_id'] . ")' title='" . __('Rescan Site') . "' border='0'></a>";
+							echo "<a href='" . htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']) . "' title='" . __('Edit Site') . "'><img src='" . $webroot . "images/edit_object.png'></a>";
+							echo "<a href='#'><img id='r_" . $site['site_id'] . "' src='" . $webroot . "images/rescan_site.gif' alt='' onClick='site_scan(" . $site['site_id'] . ")' title='" . __('Rescan Site') . "'></a>";
 						}
 						?>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_devices.php?report=devices&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View Devices');?>'><img border='0' src='<?php print $webroot;?>images/view_devices.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_ips.php?report=ips&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View IP Ranges');?>'><img border='0' src='<?php print $webroot;?>images/view_networks.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'plugins/mactrack/mactrack_view_arp.php?report=arp&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View IP Addresses');?>'><img border='0' src='<?php print $webroot;?>images/view_ipaddresses.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'plugins/mactrack/mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']);?>' title='<?php print __('View MAC Addresses');?>'><img border='0' src='<?php print $webroot;?>images/view_macs.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']);?>' title='<?php print __('View Interfaces');?>'><img border='0' src='<?php print $webroot;?>images/view_interfaces.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_devices.php?report=devices&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View Devices');?>'><img src='<?php print $webroot;?>images/view_devices.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_ips.php?report=ips&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View IP Ranges');?>'><img src='<?php print $webroot;?>images/view_networks.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'plugins/mactrack/mactrack_view_arp.php?report=arp&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View IP Addresses');?>'><img src='<?php print $webroot;?>images/view_ipaddresses.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'plugins/mactrack/mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']);?>' title='<?php print __('View MAC Addresses');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']);?>' title='<?php print __('View Interfaces');?>'><img src='<?php print $webroot;?>images/view_interfaces.gif'></a>
 					</td>
 					<td class='hyperLink'>
 						<?php print filter_value($site['site_name'], get_request_var('filter'));?>
@@ -317,13 +317,13 @@ function mactrack_view_sites() {
 					<td width=100>
 						<?php
 						if (api_user_realm_auth('mactrack_sites.php')) {
-							echo "<a href='" . htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']) . "' title='" . __('Edit Site') . "'><img border='0' src='" . $webroot . "images/edit_object.png'></a>";
+							echo "<a href='" . htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']) . "' title='" . __('Edit Site') . "'><img src='" . $webroot . "images/edit_object.png'></a>";
 						}
 						?>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_devices.php?report=devices&site_id=' . $site['site_id'] . '&device_type_id=' . $site['device_type_id'] . '&type_id=-1&status=-1&filter=');?>' title='<?php print __('View Devices');?>'><img border='0' src='<?php print $webroot;?>images/view_devices.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_ips.php?report=ips&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View IP Ranges');?>'><img border='0' src='<?php print $webroot;?>images/view_networks.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']);?>' title='<?php print __('View MAC Addresses');?>'><img border='0' src='<?php print $webroot;?>images/view_macs.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']);?>' title='<?php print __('View Interfaces');?>'><img border='0' src='<?php print $webroot;?>images/view_interfaces.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_devices.php?report=devices&site_id=' . $site['site_id'] . '&device_type_id=' . $site['device_type_id'] . '&type_id=-1&status=-1&filter=');?>' title='<?php print __('View Devices');?>'><img src='<?php print $webroot;?>images/view_devices.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_ips.php?report=ips&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View IP Ranges');?>'><img src='<?php print $webroot;?>images/view_networks.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']);?>' title='<?php print __('View MAC Addresses');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']);?>' title='<?php print __('View Interfaces');?>'><img src='<?php print $webroot;?>images/view_interfaces.gif'></a>
 					</td>
 					<td class='hyperLink'>
 						<?php print filter_value($site['site_name'], get_request_var('filter'));?>

@@ -93,7 +93,7 @@ function mactrack_check_upgrade () {
 	global $config;
 
 	$files = array('index.php', 'plugins.php', 'mactrack_devices.php');
-	if (isset($_SERVER['PHP_SELF']) && !in_array(basename($_SERVER['PHP_SELF']), $files)) {
+	if (!in_array(get_current_page(), $files)) {
 		return;
 	}
 
@@ -845,7 +845,7 @@ function mactrack_setup_table_new () {
 function mactrack_page_head() {
 	global $config;
 
-	if (isset($_SERVER['PHP_SELF']) && substr_count($_SERVER['PHP_SELF'], 'mactrack_')) {
+	if (substr_count(get_current_page(), 'mactrack_')) {
 		if (!isset($config['base_path'])) {
 			print "<script type='text/javascript' src='" . URL_PATH . "plugins/mactrack/mactrack.js'></script>\n";
 		}else{
@@ -1203,9 +1203,9 @@ function mactrack_show_tab () {
 
 	if (api_user_realm_auth('mactrack_view_macs.php')) {
 		if (substr_count($_SERVER['REQUEST_URI'], 'mactrack_view_')) {
-			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_macs.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="' . __('MacTrack') . '" align="absmiddle" border="0"></a>';
+			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_macs.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="' . __('MacTrack') . '"></a>';
 		}else{
-			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_macs.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="' . __('MacTrack') . '" align="absmiddle" border="0"></a>';
+			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_macs.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="' . __('MacTrack') . '"></a>';
 		}
 	}
 }

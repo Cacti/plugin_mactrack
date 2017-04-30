@@ -309,15 +309,15 @@ function mactrack_view_devices() {
 				?>
 				<td width=100>
 					<?php if (api_user_realm_auth('mactrack_sites.php')) {?>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_devices.php?action=edit&device_id=' . $device['device_id']);?>' title='<?php print __('Edit Device');?>'><img border='0' src='<?php print $webroot;?>images/edit_object.png'></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_devices.php?action=edit&device_id=' . $device['device_id']);?>' title='<?php print __('Edit Device');?>'><img src='<?php print $webroot;?>images/edit_object.png'></a>
 					<?php api_plugin_hook_function('remote_link', $hostinfo); } ?>
 					<?php if ($device['host_id'] > 0) {?>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=&host=' . $device['host_id'] . '&graph_template_id=0&filter=');?>' title='<?php print __('View Graphs');?>'><img border='0' src='<?php print $webroot;?>images/view_graphs.gif'></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=&host=' . $device['host_id'] . '&graph_template_id=0&filter=');?>' title='<?php print __('View Graphs');?>'><img src='<?php print $webroot;?>images/view_graphs.gif'></a>
 					<?php }else{?>
-					<img title='<?php print __('Device Not Mapped to Cacti Device');?>' border='0' src='<?php print $webroot;?>images/view_graphs_disabled.gif'>
+					<img title='<?php print __('Device Not Mapped to Cacti Device');?>' src='<?php print $webroot;?>images/view_graphs_disabled.gif'>
 					<?php }?>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . get_request_var('site_id') . '&device_id=' . $device['device_id']);?>' title='<?php print __('View MAC Addresses');?>'><img border='0' src='<?php print $webroot;?>images/view_macs.gif'></a>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . get_request_var('site_id') . '&device=' . $device['device_id']);?>' title='<?php print __('View Interfaces');?>'><img border='0' src='<?php print $webroot;?>images/view_interfaces.gif'></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . get_request_var('site_id') . '&device_id=' . $device['device_id']);?>' title='<?php print __('View MAC Addresses');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . get_request_var('site_id') . '&device=' . $device['device_id']);?>' title='<?php print __('View Interfaces');?>'><img src='<?php print $webroot;?>images/view_interfaces.gif'></a>
 				</td>
 				<td class='hyperLink'>
 					<?php print filter_value($device['device_name'], get_request_var('filter'));?>
