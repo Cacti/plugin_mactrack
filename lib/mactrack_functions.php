@@ -2390,12 +2390,12 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 	if ($show_rescan) {
 		if (api_user_realm_auth('mactrack_sites.php')) {
 			if ($device['disabled'] == '') {
-				$rescan = "<img id='r_" . $device_id . '_' . $ifName . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(" . $device_id . ",\"" . $ifName . "\")' title='Rescan Device' align='absmiddle' border='0'>";
+				$rescan = "<img id='r_" . $device_id . '_' . $ifName . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(" . $device_id . ",\"" . $ifName . "\")' title='" . __('Rescan Device') . "'>";
 			}else{
-				$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
+				$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt=''>";
 			}
 		}else{
-			$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
+			$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt=''>";
 		}
 	}
 
@@ -2415,9 +2415,9 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 			foreach($graphs as $graph) {
 				$list .= (strlen($list) ? ',': '') . $graph['local_graph_id'];
 			}
-			$row .= "<a href='" . htmlspecialchars($url . $list . '&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='" . __('View Non Interface Graphs') . "' align='absmiddle' border='0'></a>";
+			$row .= "<a href='" . htmlspecialchars($url . $list . '&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='" . __('View Non Interface Graphs') . "'></a>";
 		}else{
-			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='" . __('No Non Interface Graphs in Cacti') . "' align='absmiddle' border='0'/>";
+			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='" . __('No Non Interface Graphs in Cacti') . "'/>";
 		}
 
 		/* get interface graphs */
@@ -2431,12 +2431,12 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 			foreach($graphs as $graph) {
 				$list .= (strlen($list) ? ',': '') . $graph['local_graph_id'];
 			}
-			$row .= "<a href='" . htmlspecialchars($url . $list . '&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interface_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='" . __('View Interface Graphs') . "' align='absmiddle' border='0'></a>";
+			$row .= "<a href='" . htmlspecialchars($url . $list . '&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interface_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='" . __('View Interface Graphs') . "'></a>";
 		}else{
-			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='absmiddle' border='0'>";
+			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt=''>";
 		}
 	}else{
-		$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='" . __('Device Not in Cacti') . "' align='absmiddle' border='0'/>";
+		$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='" . __('Device Not in Cacti') . "'/>";
 	}
 	$row .= $rescan;
 
@@ -2778,8 +2778,8 @@ function mactrack_redirect() {
 	load_current_session_value('report', 'sess_mactrack_view_report', 'devices');
 	$current_tab = get_nfilter_request_var('report');
 
-	$current_page = str_replace('mactrack_', '', str_replace('view_', '', str_replace('.php', '', basename($_SERVER['PHP_SELF']))));
-	$current_dir  = dirname($_SERVER['PHP_SELF']);
+	$current_page = str_replace('mactrack_', '', str_replace('view_', '', str_replace('.php', '', get_current_page())));
+	$current_dir  = dirname(get_current_page(false));
 
 	if ($current_page != $current_tab) {
 		header('Location: ' . $current_dir . '/mactrack_view_' . $current_tab . '.php');
@@ -2791,14 +2791,14 @@ function mactrack_format_device_row($device, $actions=false) {
 
 	/* viewer level */
 	if ($actions) {
-		$row = "<a href='" . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_interfaces.php?device_id=' . $device['device_id'] . '&issues=0&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interfaces.gif' alt='' title='" . __('View Interfaces') . "' align='middle' border='0'></a>";
+		$row = "<a href='" . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_interfaces.php?device_id=' . $device['device_id'] . '&issues=0&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interfaces.gif' alt='' title='" . __('View Interfaces') . "'></a>";
 
 		/* admin level */
 		if (api_user_realm_auth('mactrack_sites.php')) {
 			if ($device['disabled'] == '') {
-				$row .= "<img id='r_" . $device['device_id'] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onClick='scan_device(" . $device['device_id'] . ")' title='" . __('Rescan Device') . "' align='middle' border='0'>";
+				$row .= "<img id='r_" . $device['device_id'] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onClick='scan_device(" . $device['device_id'] . ")' title='" . __('Rescan Device') . "'>";
 			}else{
-				$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt='' align='middle' border='0'>";
+				$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt=''>";
 			}
 		}
 
@@ -2882,7 +2882,7 @@ function mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '')
 	}
 
 	if ($to == '') {
-		return 'Mailer Error: No <b>TO</b> address set!!<br>If using the <i>Test Mail</i> link, please set the <b>Alert e-mail</b> setting.';
+		return 'Mailer Error: No <b>TO</b> address set!!<br>If using the <i>Test Mail</i> link, please set the <b>Alert Email</b> setting.';
 	}
 	$to = explode(',', $to);
 
