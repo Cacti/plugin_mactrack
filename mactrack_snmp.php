@@ -291,7 +291,7 @@ function mactrack_snmp_item_edit() {
 		$mactrack_snmp_item['sequence'] = get_sequence('', 'sequence', 'mac_track_snmp_items', 'snmp_id=' . get_request_var('id'));
 	}
 
-	form_start(basename($_SERVER['PHP_SELF']), 'mactrack_item_edit');
+	form_start(get_current_page(), 'mactrack_item_edit');
 
 	html_start_box($header_label, '100%', '', '3', 'center', '');
 
@@ -503,7 +503,7 @@ function mactrack_snmp() {
 		FROM mac_track_snmp
 		$sql_where
 		$sql_order
-		$sql_limmit");
+		$sql_limit");
 
 	$nav = html_nav_bar('mactrack_snmp.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 12, __('SNMP Settings'), 'page', 'main');
 
