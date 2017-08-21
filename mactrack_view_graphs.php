@@ -42,7 +42,6 @@ bottom_footer();
 function mactrack_view_graphs() {
 	global $title, $current_user, $colors, $config, $host_template_hashes, $graph_template_hashes;
 
-	include('./lib/timespan_settings.php');
 	include('./lib/html_graph.php');
 
 	html_graph_validate_preview_request_vars();

@@ -267,8 +267,8 @@ function mactrack_view_sites() {
 						?>
 						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_devices.php?report=devices&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View Devices');?>'><img src='<?php print $webroot;?>images/view_devices.gif'></a>
 						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_ips.php?report=ips&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View IP Ranges');?>'><img src='<?php print $webroot;?>images/view_networks.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'plugins/mactrack/mactrack_view_arp.php?report=arp&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View IP Addresses');?>'><img src='<?php print $webroot;?>images/view_ipaddresses.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'plugins/mactrack/mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']);?>' title='<?php print __('View MAC Addresses');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_arp.php?report=arp&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View IP Addresses');?>'><img src='<?php print $webroot;?>images/view_ipaddresses.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']);?>' title='<?php print __('View MAC Addresses');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
 						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']);?>' title='<?php print __('View Interfaces');?>'><img src='<?php print $webroot;?>images/view_interfaces.gif'></a>
 					</td>
 					<td class='hyperLink'>
