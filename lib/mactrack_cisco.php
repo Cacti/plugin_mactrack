@@ -210,14 +210,14 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 			if (sizeof($active_vlan["port_results"])) {
 			foreach($active_vlan["port_results"] as $port_result) {
 				$ifIndex         = @$brPorttoifIndexes[$j][$port_result["port_number"]];
-				$ifType          = @$ifInterfaces[$ifIndex]["ifType"];
-				$ifName          = @$ifInterfaces[$ifIndex]["ifName"];
-				$portName        = @$portNames[$ifName];
-				$portTrunk       = @$portTrunking[$ifName];
-				$portTrunkStatus = @$ifInterfaces[$ifIndex]["trunkPortState"];
+				$ifType          = (isset($ifInterfaces[$ifIndex]["ifType"]) ? @$ifInterfaces[$ifIndex]["ifType"] : '');
+				$ifName          = (isset($ifInterfaces[$ifIndex]["ifName"]) ? @$ifInterfaces[$ifIndex]["ifName"] : '');
+				$portName        = (isset($portNames[$ifName]) ? @$portNames[$ifName] : '');
+				$portTrunk       = (isset($portTrunking[$ifName]) ? @$portTrunking[$ifName] : '');
+				$portTrunkStatus = (isset($ifInterfaces[$ifIndex]["trunkPortState"]) ? @$ifInterfaces[$ifIndex]["trunkPortState"] : '');
 
 				if ($vvlans) {
-					$vVlanID = @$portVoiceVLANs[$ifIndex];
+					$vVlanID = (isset($portVoiceVLANs[$ifIndex]) ? @$portVoiceVLANs[$ifIndex] : '');
 				}else{
 					$vVlanID = -1;
 				}
@@ -421,10 +421,11 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 			if (sizeof($active_vlan["port_results"])) {
 			foreach($active_vlan["port_results"] as $port_result) {
 				$ifIndex    = @$brPorttoifIndexes[$j][$port_result["port_number"]];
-				$ifType     = @$ifInterfaces[$ifIndex]["ifType"];
-				$portNumber = @$ifInterfaces[$ifIndex]["ifName"];
-				$portName   = @$ifInterfaces[$ifIndex]["ifAlias"];
-				$portTrunk  = @$portTrunking[$ifName];
+				$ifType     = (isset($ifInterfaces[$ifIndex]["ifType"]) ? @$ifInterfaces[$ifIndex]["ifType"] : '');
+				$ifName     = (isset($ifInterfaces[$ifIndex]["ifName"]) ? @$ifInterfaces[$ifIndex]["ifName"] : '');
+				$portNumber = (isset($ifInterfaces[$ifIndex]["ifName"]) ? @$ifInterfaces[$ifIndex]["ifName"] : '');
+				$portName   = (isset($ifInterfaces[$ifIndex]["ifAlias"]) ? @$ifInterfaces[$ifIndex]["ifAlias"] : '');
+				$portTrunk  = (isset($portTrunking[$ifName]) ? @$portTrunking[$ifName] : '');
 				if ($vvlans) {
 					$vVlanID = @$portVoiceVLANs[$ifIndex];
 				}else{
