@@ -302,7 +302,7 @@ function mactrack_view() {
 			/* find the background color and enclose it */
 			$class = mactrack_int_row_class($stat);
 
-			if ($bgc) {
+			if ($class) {
 				print "<tr id='row_" . $stat['device_id'] . '_' . $stat['ifName'] . "' class='$class'>\n"; $i++;
 			}else{
 				if (($i % 2) == 1) {
