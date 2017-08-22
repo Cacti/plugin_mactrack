@@ -918,7 +918,7 @@ function mactrack_device_edit() {
 
 	html_end_box();
 
-	form_save_button('mactrack_devices.php', 'return');
+	form_save_button('mactrack_devices.php', 'return', 'device_id');
 }
 
 function mactrack_get_devices(&$sql_where, $rows, $apply_limits = TRUE) {
