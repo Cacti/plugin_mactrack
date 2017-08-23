@@ -427,7 +427,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 				$portName   = (isset($ifInterfaces[$ifIndex]["ifAlias"]) ? @$ifInterfaces[$ifIndex]["ifAlias"] : '');
 				$portTrunk  = (isset($portTrunking[$ifName]) ? @$portTrunking[$ifName] : '');
 				if ($vvlans) {
-					$vVlanID = @$portVoiceVLANs[$ifIndex];
+					$vVlanID = (isset($portVoiceVLANs[$ifIndex]) ? @$portVoiceVLANs[$ifIndex] : '');
 				}else{
 					$vVlanID = -1;
 				}
