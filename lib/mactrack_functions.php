@@ -774,7 +774,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			@$vlan_id                           . "', "  . @db_qstr(@$vlan_name)         . ", '"  .
 			@$vlan_trunk                        . "', '" . @$ifSpeed[$ifIndex]           . "', '" .
 			(isset($ifHighSpeed[$ifIndex]) ? @$ifHighSpeed[$ifIndex] : '')               . "', '" .
-                        (isset($ifDuplex[$ifIndex]) ? @$ifDuplex[$ifIndex] : '')                     . "', '" .
+                        (isset($ifDuplex[$ifIndex]) ? @$ifDuplex[$ifIndex] : '')                     . "', " .
 			@db_qstr(@$ifDescr[$ifIndex])       . ", '"  . @$ifMtu[$ifIndex]             . "', '" .
 			$mac_address                        . "', '" . @$ifAdminStatus[$ifIndex]     . "', '" .
 			@$ifOperStatus[$ifIndex]            . "', '" . @$ifLastChange[$ifIndex]      . "', '" .
