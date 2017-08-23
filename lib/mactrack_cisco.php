@@ -310,9 +310,9 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 
 	if (sizeof($ifIndexes)) {
 	foreach($ifIndexes as $ifIndex) {
-		$ifInterfaces[$ifIndex]["trunkPortState"] = @$vlan_trunkstatus[$ifIndex];
+		$ifInterfaces[$ifIndex]["trunkPortState"] = (isset($vlan_trunkstatus[$ifIndex]) ? @$vlan_trunkstatus[$ifIndex] : '');
 		if ($vvlans) {
-			$ifInterfaces[$ifIndex]["vVlanID"] = @$portVoiceVLANs[$ifIndex];
+			$ifInterfaces[$ifIndex]["vVlanID"] = (isset($portVoiceVLANs[$ifIndex]) ? @$portVoiceVLANs[$ifIndex] : '');
 		}
 
 		if ($ifInterfaces[$ifIndex]["ifType"] == 6) {
@@ -427,7 +427,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 				$portName   = (isset($ifInterfaces[$ifIndex]["ifAlias"]) ? @$ifInterfaces[$ifIndex]["ifAlias"] : '');
 				$portTrunk  = (isset($portTrunking[$ifName]) ? @$portTrunking[$ifName] : '');
 				if ($vvlans) {
-					$vVlanID = @$portVoiceVLANs[$ifIndex];
+					$vVlanID = (isset($portVoiceVLANs[$ifIndex]) ? @$portVoiceVLANs[$ifIndex] : '');
 				}else{
 					$vVlanID = -1;
 				}
