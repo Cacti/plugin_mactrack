@@ -773,7 +773,8 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			@db_qstr($ifAlias)                  . ", '"  . @$linkPort                    . "', '" .
 			@$vlan_id                           . "', "  . @db_qstr(@$vlan_name)         . ", '"  .
 			@$vlan_trunk                        . "', '" . @$ifSpeed[$ifIndex]           . "', '" .
-			@$ifHighSpeed[$ifIndex]             . "', '" . @$ifDuplex[$ifIndex]          . "', "   .
+			(isset($ifHighSpeed[$ifIndex]) ? @$ifHighSpeed[$ifIndex] : '')               . "', '" .
+                        (isset($ifDuplex[$ifIndex]) ? @$ifDuplex[$ifIndex] : '')                     . "', '" .
 			@db_qstr(@$ifDescr[$ifIndex])       . ", '"  . @$ifMtu[$ifIndex]             . "', '" .
 			$mac_address                        . "', '" . @$ifAdminStatus[$ifIndex]     . "', '" .
 			@$ifOperStatus[$ifIndex]            . "', '" . @$ifLastChange[$ifIndex]      . "', '" .
@@ -782,9 +783,11 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			@$ifInUcastPkts[$ifIndex]           . "', '" . @$ifOutUcastPkts[$ifIndex]    . "', '" .
 			@$ifInDiscards[$ifIndex]            . "', '" . @$ifInErrors[$ifIndex]        . "', '" .
 			@$ifInUnknownProtos[$ifIndex]       . "', '" . @$ifOutDiscards[$ifIndex]     . "', '" .
-			@$ifOutErrors[$ifIndex]             . "', '" . @$ifInMulticastPkts[$ifIndex] . "', '" .
-			@$ifOutMulticastPkts[$ifIndex]      . "', '" . @$ifInBroadcastPkts[$ifIndex] . "', '" .
-			@$ifOutBroadcastPkts[$ifIndex]      . "', '" .
+			(isset($ifOutErrors[$ifIndex]) ? @$ifOutErrors[$ifIndex] : '')               . "', '" .
+                        (isset($ifInMulticastPkts[$ifIndex]) ? @$ifInMulticastPkts[$ifIndex] : '')   . "', '" .
+                        (isset($ifOutMulticastPkts[$ifIndex]) ? @$ifOutMulticastPkts[$ifIndex] : '') . "', '" .
+                        (isset($ifInBroadcastPkts[$ifIndex]) ? @$ifInBroadcastPkts[$ifIndex] : '')   . "', '" .
+                        (isset($ifOutBroadcastPkts[$ifIndex]) ? @$ifOutBroadcastPkts[$ifIndex] : '') . "', '" .
 			@$int_ifInOctets                    . "', '" . @$int_ifOutOctets             . "', '" .
 			@$int_ifHCInOctets                  . "', '" . @$int_ifHCOutOctets           . "', '" .
 			@$int_ifInNUcastPkts                . "', '" . @$int_ifOutNUcastPkts         . "', '" .
