@@ -477,8 +477,10 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		" ifDescr, ifMtu, ifPhysAddress, ifAdminStatus, ifOperStatus, ifLastChange, ".
 		" ifInOctets, ifOutOctets, ifHCInOctets, ifHCOutOctets, ifInNUcastPkts, ifOutNUcastPkts, ifInUcastPkts, ifOutUcastPkts, " .
 		" ifInDiscards, ifInErrors, ifInUnknownProtos, ifOutDiscards, ifOutErrors, " .
+		" ifInMulticastPkts, ifOutMulticastPkts, ifInBroadcastPkts, ifOutBroadcastPkts, " .
 		" int_ifInOctets, int_ifOutOctets, int_ifHCInOctets, int_ifHCOutOctets, int_ifInNUcastPkts, int_ifOutNUcastPkts, int_ifInUcastPkts, int_ifOutUcastPkts, " .
-		" int_ifInDiscards, int_ifInErrors, int_ifInUnknownProtos, int_ifOutDiscards, int_ifOutErrors, int_discards_present, int_errors_present, " .
+		" int_ifInDiscards, int_ifInErrors, int_ifInUnknownProtos, int_ifOutDiscards, int_ifOutErrors, int_ifInMulticastPkts, int_ifOutMulticastPkts, " .
+		"  int_ifInBroadcastPkts, int_ifOutBroadcastPkts, int_discards_present, int_errors_present, " .
 		" last_down_time, last_up_time, stateChanges, present) VALUES ";
 
 	$insert_suffix = " ON DUPLICATE KEY UPDATE sysUptime=VALUES(sysUptime), ifType=VALUES(ifType), ifName=VALUES(ifName), ifAlias=VALUES(ifAlias), linkPort=VALUES(linkPort)," .
@@ -489,11 +491,13 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		" ifInNUcastPkts=VALUES(ifInNUcastPkts), ifOutNUcastPkts=VALUES(ifOutNUcastPkts), ifInUcastPkts=VALUES(ifInUcastPkts), ifOutUcastPkts=VALUES(ifOutUcastPkts), " .
 		" ifInDiscards=VALUES(ifInDiscards), ifInErrors=VALUES(ifInErrors)," .
 		" ifInUnknownProtos=VALUES(ifInUnknownProtos), ifOutDiscards=VALUES(ifOutDiscards), ifOutErrors=VALUES(ifOutErrors)," .
+		" ifInMulticastPkts=VALUES (ifInMulticastPkts), ifOutMulticastPkts=VALUES (ifOutMulticastPkts), ifInBroadcastPkts=VALUES (ifInBroadcastPkts),  ifOutBroadcastPkts=VALUES (ifOutBroadcastPkts)" .
 		" int_ifInOctets=VALUES(int_ifInOctets), int_ifOutOctets=VALUES(int_ifOutOctets), int_ifHCInOctets=VALUES(int_ifHCInOctets), int_ifHCOutOctets=VALUES(int_ifHCOutOctets), " .
 		" int_ifInNUcastPkts=VALUES(int_ifInNUcastPkts), int_ifOutNUcastPkts=VALUES(int_ifOutNUcastPkts), int_ifInUcastPkts=VALUES(int_ifInUcastPkts), int_ifOutUcastPkts=VALUES(int_ifOutUcastPkts), " .
 		" int_ifInDiscards=VALUES(int_ifInDiscards), int_ifInErrors=VALUES(int_ifInErrors)," .
 		" int_ifInUnknownProtos=VALUES(int_ifInUnknownProtos), int_ifOutDiscards=VALUES(int_ifOutDiscards)," .
-		" int_ifOutErrors=VALUES(int_ifOutErrors), " .
+		" int_ifOutErrors=VALUES(int_ifOutErrors), int_ifInMulticastPkts=VALUES(int_ifInMulticastPkts), int_ifOutMulticastPkts=VALUES (int_ifOutMulticastPkts), int_ifInBroadcastPkts=VALUES (int_ifInBroadcastPkts),  " .
+		" int_ifOutBroadcastPkts=VALUES (int_ifOutBroadcastPkts)" .
 		" int_discards_present=VALUES(int_discards_present), int_errors_present=VALUES(int_errors_present)," .
 		" last_down_time=VALUES(last_down_time), last_up_time=VALUES(last_up_time)," .
 		" stateChanges=VALUES(stateChanges), present='1'";
@@ -576,6 +580,18 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	$ifOutNUcastPkts = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.18", $device);
 	mactrack_debug("ifOutNUcastPkts data collection complete. '" . sizeof($ifOutNUcastPkts) . "' rows found!");
 
+	$ifInMulticastPkts = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.2", $device);
+	mactrack_debug("ifInMulticastPkts data collection complete. '" . sizeof($ifInMulticastPkts) . "' rows found!");
+
+	$ifOutMulticastPkts = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.4", $device);
+	mactrack_debug("ifOutMulticastPkts data collection complete. '" . sizeof($ifOutMulticastPkts) . "' rows found!");
+
+	$ifInBroadcastPkts = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.3", $device);
+	mactrack_debug("ifInBroadcastPkts data collection complete. '" . sizeof($ifInBroadcastPkts) . "' rows found!");
+
+	$ifOutBroadcastPkts = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.5", $device);
+	mactrack_debug("ifOutBroadcastPkts data collection complete. '" . sizeof($ifOutBroadcastPkts) . "' rows found!");
+	
 	$ifInUcastPkts = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.11", $device);
 	mactrack_debug("ifInUcastPkts data collection complete. '" . sizeof($ifInUcastPkts) . "' rows found!");
 
@@ -710,6 +726,14 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 
 		$int_ifOutNUcastPkts = get_link_int_value("ifOutNUcastPkts", $ifIndex, $ifOutNUcastPkts, $db_interface, $divisor, "traffic");
 
+		$int_ifInMulticastPkts  = get_link_int_value("ifInMulticastPkts", $ifIndex, $ifInMulticastPkts, $db_interface, $divisor, "traffic");
+
+		$int_ifOutMulticastPkts = get_link_int_value("ifOutMulticastPkts", $ifIndex, $ifOutMulticastPkts, $db_interface, $divisor, "traffic");
+
+		$int_ifInBroadcastPkts  = get_link_int_value("ifInBroadcastPkts", $ifIndex, $ifInBroadcastPkts, $db_interface, $divisor, "traffic");
+
+		$int_ifOutBroadcastPkts = get_link_int_value("ifOutBroadcastPkts", $ifIndex, $ifOutBroadcastPkts, $db_interface, $divisor, "traffic");
+		
 		$int_ifInUcastPkts   = get_link_int_value("ifInUcastPkts", $ifIndex, $ifInUcastPkts, $db_interface, $divisor, "traffic");
 
 		$int_ifOutUcastPkts  = get_link_int_value("ifOutUcastPkts", $ifIndex, $ifOutUcastPkts, $db_interface, $divisor, "traffic");
@@ -767,10 +791,14 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			@$ifInUcastPkts[$ifIndex]           . "', '" . @$ifOutUcastPkts[$ifIndex]    . "', '" .
 			@$ifInDiscards[$ifIndex]            . "', '" . @$ifInErrors[$ifIndex]        . "', '" .
 			@$ifInUnknownProtos[$ifIndex]       . "', '" . @$ifOutDiscards[$ifIndex]     . "', '" .
-			@$ifOutErrors[$ifIndex]             . "', '" .
+			@$ifOutErrors[$ifIndex]             . "', '" . @$ifInMulticastPkts[$ifIndex] . "', '" .
+			@$ifOutMulticastPkts[$ifIndex]      . "', '" . @$ifInBroadcastPkts[$ifIndex] . "', '" .
+			@$ifOutBroadcastPkts[$ifIndex]      . "', '" .
 			@$int_ifInOctets                    . "', '" . @$int_ifOutOctets             . "', '" .
 			@$int_ifHCInOctets                  . "', '" . @$int_ifHCOutOctets           . "', '" .
 			@$int_ifInNUcastPkts                . "', '" . @$int_ifOutNUcastPkts         . "', '" .
+			@$int_ifInMulticastPkts		    . "', '" . @$int_ifOutMulticastPkts      . "', '" .
+			@$int_ifInBroadcastPkts		    . "', '" . @$int_ifOutBroadcastPkts      . "', '" .
 			@$int_ifInUcastPkts                 . "', '" . @$int_ifOutUcastPkts          . "', '" .
 			@$int_ifInDiscards                  . "', '" . @$int_ifInErrors              . "', '" .
 			@$int_ifInUnknownProtos             . "', '" . @$int_ifOutDiscards           . "', '" .
