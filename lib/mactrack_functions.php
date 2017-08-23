@@ -491,13 +491,13 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		" ifInNUcastPkts=VALUES(ifInNUcastPkts), ifOutNUcastPkts=VALUES(ifOutNUcastPkts), ifInUcastPkts=VALUES(ifInUcastPkts), ifOutUcastPkts=VALUES(ifOutUcastPkts), " .
 		" ifInDiscards=VALUES(ifInDiscards), ifInErrors=VALUES(ifInErrors)," .
 		" ifInUnknownProtos=VALUES(ifInUnknownProtos), ifOutDiscards=VALUES(ifOutDiscards), ifOutErrors=VALUES(ifOutErrors)," .
-		" ifInMulticastPkts=VALUES (ifInMulticastPkts), ifOutMulticastPkts=VALUES (ifOutMulticastPkts), ifInBroadcastPkts=VALUES (ifInBroadcastPkts),  ifOutBroadcastPkts=VALUES (ifOutBroadcastPkts)" .
-		" int_ifInOctets=VALUES(int_ifInOctets), int_ifOutOctets=VALUES(int_ifOutOctets), int_ifHCInOctets=VALUES(int_ifHCInOctets), int_ifHCOutOctets=VALUES(int_ifHCOutOctets), " .
+		" ifInMulticastPkts=VALUES(ifInMulticastPkts), ifOutMulticastPkts=VALUES(ifOutMulticastPkts), ifInBroadcastPkts=VALUES(ifInBroadcastPkts),  ifOutBroadcastPkts=VALUES(ifOutBroadcastPkts),  " .
+		" int_ifInOctets=VALUES(int_ifInOctets), int_ifOutOctets=VALUES(int_ifOutOctets), int_ifHCInOctets=VALUES(int_ifHCInOctets), int_ifHCOutOctets=VALUES(int_ifHCOutOctets),  " .
 		" int_ifInNUcastPkts=VALUES(int_ifInNUcastPkts), int_ifOutNUcastPkts=VALUES(int_ifOutNUcastPkts), int_ifInUcastPkts=VALUES(int_ifInUcastPkts), int_ifOutUcastPkts=VALUES(int_ifOutUcastPkts), " .
-		" int_ifInDiscards=VALUES(int_ifInDiscards), int_ifInErrors=VALUES(int_ifInErrors)," .
-		" int_ifInUnknownProtos=VALUES(int_ifInUnknownProtos), int_ifOutDiscards=VALUES(int_ifOutDiscards)," .
-		" int_ifOutErrors=VALUES(int_ifOutErrors), int_ifInMulticastPkts=VALUES(int_ifInMulticastPkts), int_ifOutMulticastPkts=VALUES (int_ifOutMulticastPkts), int_ifInBroadcastPkts=VALUES (int_ifInBroadcastPkts),  " .
-		" int_ifOutBroadcastPkts=VALUES (int_ifOutBroadcastPkts)" .
+		" int_ifInDiscards=VALUES(int_ifInDiscards), int_ifInErrors=VALUES(int_ifInErrors),  " .
+		" int_ifInUnknownProtos=VALUES(int_ifInUnknownProtos), int_ifOutDiscards=VALUES(int_ifOutDiscards), " .
+		" int_ifOutErrors=VALUES(int_ifOutErrors), int_ifInMulticastPkts=VALUES(int_ifInMulticastPkts), int_ifOutMulticastPkts=VALUES(int_ifOutMulticastPkts), int_ifInBroadcastPkts=VALUES(int_ifInBroadcastPkts),  " .
+		" int_ifOutBroadcastPkts=VALUES(int_ifOutBroadcastPkts), " .
 		" int_discards_present=VALUES(int_discards_present), int_errors_present=VALUES(int_errors_present)," .
 		" last_down_time=VALUES(last_down_time), last_up_time=VALUES(last_up_time)," .
 		" stateChanges=VALUES(stateChanges), present='1'";
