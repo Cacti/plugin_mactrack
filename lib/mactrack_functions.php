@@ -475,10 +475,10 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	$insert_prefix = "INSERT INTO mac_track_interfaces (site_id, device_id, sysUptime, ifIndex, ifType, ifName, ifAlias, linkPort, vlan_id," .
 		" vlan_name, vlan_trunk_status, ifSpeed, ifHighSpeed, ifDuplex, " .
 		" ifDescr, ifMtu, ifPhysAddress, ifAdminStatus, ifOperStatus, ifLastChange, ".
-		" ifInOctets, ifOutOctets, ifHCInOctets, ifHCOutOctets, ifInNUcastPkts, ifOutNUcastPkts, ifInUcastPkts, ifOutUcastPkts, " .
+		" ifInOctets, ifOutOctets, ifHCInOctets, ifHCOutOctets, ifInUcastPkts, ifOutUcastPkts, " .
 		" ifInDiscards, ifInErrors, ifInUnknownProtos, ifOutDiscards, ifOutErrors, " .
 		" ifInMulticastPkts, ifOutMulticastPkts, ifInBroadcastPkts, ifOutBroadcastPkts, " .
-		" int_ifInOctets, int_ifOutOctets, int_ifHCInOctets, int_ifHCOutOctets, int_ifInNUcastPkts, int_ifOutNUcastPkts, int_ifInUcastPkts, int_ifOutUcastPkts, " .
+		" int_ifInOctets, int_ifOutOctets, int_ifHCInOctets, int_ifHCOutOctets, int_ifInUcastPkts, int_ifOutUcastPkts, " .
 		" int_ifInDiscards, int_ifInErrors, int_ifInUnknownProtos, int_ifOutDiscards, int_ifOutErrors, int_ifInMulticastPkts, int_ifOutMulticastPkts, " .
 		"  int_ifInBroadcastPkts, int_ifOutBroadcastPkts, int_discards_present, int_errors_present, " .
 		" last_down_time, last_up_time, stateChanges, present) VALUES ";
@@ -488,16 +488,16 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		" ifSpeed=VALUES(ifSpeed), ifHighSpeed=VALUES(ifHighSpeed), ifDuplex=VALUES(ifDuplex), ifDescr=VALUES(ifDescr), ifMtu=VALUES(ifMtu), ifPhysAddress=VALUES(ifPhysAddress), ifAdminStatus=VALUES(ifAdminStatus)," .
 		" ifOperStatus=VALUES(ifOperStatus), ifLastChange=VALUES(ifLastChange), " .
 		" ifInOctets=VALUES(ifInOctets), ifOutOctets=VALUES(ifOutOctets), ifHCInOctets=VALUES(ifHCInOctets), ifHCOutOctets=VALUES(ifHCOutOctets), " .
-		" ifInNUcastPkts=VALUES(ifInNUcastPkts), ifOutNUcastPkts=VALUES(ifOutNUcastPkts), ifInUcastPkts=VALUES(ifInUcastPkts), ifOutUcastPkts=VALUES(ifOutUcastPkts), " .
+		" ifInUcastPkts=VALUES(ifInUcastPkts), ifOutUcastPkts=VALUES(ifOutUcastPkts), " .
 		" ifInDiscards=VALUES(ifInDiscards), ifInErrors=VALUES(ifInErrors)," .
 		" ifInUnknownProtos=VALUES(ifInUnknownProtos), ifOutDiscards=VALUES(ifOutDiscards), ifOutErrors=VALUES(ifOutErrors)," .
-		" ifInMulticastPkts=VALUES(ifInMulticastPkts), ifOutMulticastPkts=VALUES(ifOutMulticastPkts), ifInBroadcastPkts=VALUES(ifInBroadcastPkts),  ifOutBroadcastPkts=VALUES(ifOutBroadcastPkts),  " .
-		" int_ifInOctets=VALUES(int_ifInOctets), int_ifOutOctets=VALUES(int_ifOutOctets), int_ifHCInOctets=VALUES(int_ifHCInOctets), int_ifHCOutOctets=VALUES(int_ifHCOutOctets),  " .
-		" int_ifInNUcastPkts=VALUES(int_ifInNUcastPkts), int_ifOutNUcastPkts=VALUES(int_ifOutNUcastPkts), int_ifInUcastPkts=VALUES(int_ifInUcastPkts), int_ifOutUcastPkts=VALUES(int_ifOutUcastPkts), " .
-		" int_ifInDiscards=VALUES(int_ifInDiscards), int_ifInErrors=VALUES(int_ifInErrors),  " .
-		" int_ifInUnknownProtos=VALUES(int_ifInUnknownProtos), int_ifOutDiscards=VALUES(int_ifOutDiscards), " .
+		" ifInMulticastPkts=VALUES(ifInMulticastPkts), ifOutMulticastPkts=VALUES(ifOutMulticastPkts), ifInBroadcastPkts=VALUES(ifInBroadcastPkts),  ifOutBroadcastPkts=VALUES(ifOutBroadcastPkts)," .
+		" int_ifInOctets=VALUES(int_ifInOctets), int_ifOutOctets=VALUES(int_ifOutOctets), int_ifHCInOctets=VALUES(int_ifHCInOctets), int_ifHCOutOctets=VALUES(int_ifHCOutOctets), " .
+		" int_ifInUcastPkts=VALUES(int_ifInUcastPkts), int_ifOutUcastPkts=VALUES(int_ifOutUcastPkts), " .
+		" int_ifInDiscards=VALUES(int_ifInDiscards), int_ifInErrors=VALUES(int_ifInErrors)," .
+		" int_ifInUnknownProtos=VALUES(int_ifInUnknownProtos), int_ifOutDiscards=VALUES(int_ifOutDiscards)," .
 		" int_ifOutErrors=VALUES(int_ifOutErrors), int_ifInMulticastPkts=VALUES(int_ifInMulticastPkts), int_ifOutMulticastPkts=VALUES(int_ifOutMulticastPkts), int_ifInBroadcastPkts=VALUES(int_ifInBroadcastPkts),  " .
-		" int_ifOutBroadcastPkts=VALUES(int_ifOutBroadcastPkts), " .
+		" int_ifOutBroadcastPkts=VALUES(int_ifOutBroadcastPkts)," .
 		" int_discards_present=VALUES(int_discards_present), int_errors_present=VALUES(int_errors_present)," .
 		" last_down_time=VALUES(last_down_time), last_up_time=VALUES(last_up_time)," .
 		" stateChanges=VALUES(stateChanges), present='1'";
@@ -574,11 +574,6 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		mactrack_debug("ifHCOutOctets data collection complete. '" . sizeof($ifHCOutOctets) . "' rows found!");
 	}
 
-	$ifInNUcastPkts = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.12", $device);
-	mactrack_debug("ifInNUcastPkts data collection complete. '" . sizeof($ifInNUcastPkts) . "' rows found!");
-
-	$ifOutNUcastPkts = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.18", $device);
-	mactrack_debug("ifOutNUcastPkts data collection complete. '" . sizeof($ifOutNUcastPkts) . "' rows found!");
 
 	$ifInMulticastPkts = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.2", $device);
 	mactrack_debug("ifInMulticastPkts data collection complete. '" . sizeof($ifInMulticastPkts) . "' rows found!");
@@ -722,10 +717,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			}
 		}
 
-		$int_ifInNUcastPkts  = get_link_int_value("ifInNUcastPkts", $ifIndex, $ifInNUcastPkts, $db_interface, $divisor, "traffic");
-
-		$int_ifOutNUcastPkts = get_link_int_value("ifOutNUcastPkts", $ifIndex, $ifOutNUcastPkts, $db_interface, $divisor, "traffic");
-
+		
 		$int_ifInMulticastPkts  = get_link_int_value("ifInMulticastPkts", $ifIndex, $ifInMulticastPkts, $db_interface, $divisor, "traffic");
 
 		$int_ifOutMulticastPkts = get_link_int_value("ifOutMulticastPkts", $ifIndex, $ifOutMulticastPkts, $db_interface, $divisor, "traffic");
@@ -787,7 +779,6 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			@$ifOperStatus[$ifIndex]            . "', '" . @$ifLastChange[$ifIndex]      . "', '" .
 			@$ifInOctets[$ifIndex]              . "', '" . @$ifOutOctets[$ifIndex]       . "', '" .
 			@$ifHCInOctets[$ifIndex]            . "', '" . @$ifHCOutOctets[$ifIndex]     . "', '" .
-			@$ifInNUcastPkts[$ifIndex]          . "', '" . @$ifOutNUcastPkts[$ifIndex]   . "', '" .
 			@$ifInUcastPkts[$ifIndex]           . "', '" . @$ifOutUcastPkts[$ifIndex]    . "', '" .
 			@$ifInDiscards[$ifIndex]            . "', '" . @$ifInErrors[$ifIndex]        . "', '" .
 			@$ifInUnknownProtos[$ifIndex]       . "', '" . @$ifOutDiscards[$ifIndex]     . "', '" .
