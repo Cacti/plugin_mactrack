@@ -775,14 +775,20 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			@$vlan_trunk                        . "', '" . @$ifSpeed[$ifIndex]           . "', '" .
 			(isset($ifHighSpeed[$ifIndex]) ? @$ifHighSpeed[$ifIndex] : '')               . "', '" .
                         (isset($ifDuplex[$ifIndex]) ? @$ifDuplex[$ifIndex] : '')                     . "', " .
-			@db_qstr(@$ifDescr[$ifIndex])       . ", '"  . @$ifMtu[$ifIndex]             . "', '" .
+			@db_qstr(@$ifDescr[$ifIndex])       . ", '"  . 
+			(isset($ifMtu[$ifIndex]) ? @$ifMtu[$ifIndex] : '')             		     . "', '" .
 			$mac_address                        . "', '" . @$ifAdminStatus[$ifIndex]     . "', '" .
 			@$ifOperStatus[$ifIndex]            . "', '" . @$ifLastChange[$ifIndex]      . "', '" .
-			@$ifInOctets[$ifIndex]              . "', '" . @$ifOutOctets[$ifIndex]       . "', '" .
-			@$ifHCInOctets[$ifIndex]            . "', '" . @$ifHCOutOctets[$ifIndex]     . "', '" .
-			@$ifInUcastPkts[$ifIndex]           . "', '" . @$ifOutUcastPkts[$ifIndex]    . "', '" .
-			@$ifInDiscards[$ifIndex]            . "', '" . @$ifInErrors[$ifIndex]        . "', '" .
-			@$ifInUnknownProtos[$ifIndex]       . "', '" . @$ifOutDiscards[$ifIndex]     . "', '" .
+			(isset($ifInOctets[$ifIndex]) ? @$ifInOctets[$ifIndex] : '')                 . "', '" . 
+			(isset($ifOutOctets[$ifIndex]) ? @$ifOutOctets[$ifIndex] : '')      	     . "', '" .
+			(isset($ifHCInOctets[$ifIndex]) ? @$ifHCInOctets[$ifIndex] : '')             . "', '" . 
+			(isset($ifHCOutOctets[$ifIndex]) ? @$ifHCOutOctets[$ifIndex] : '')     	     . "', '" .
+			(isset($ifInUcastPkts[$ifIndex]) ? @$ifInUcastPkts[$ifIndex] : '')           . "', '" . 
+			(isset($ifOutUcastPkts[$ifIndex]) ? @$ifOutUcastPkts[$ifIndex] : '')         . "', '" .
+			(isset($ifInDiscards[$ifIndex]) ? @$ifInDiscards[$ifIndex] : '')             . "', '" . 
+			(isset($ifInErrors[$ifIndex]) ? @$ifInErrors[$ifIndex] : '')        	     . "', '" .
+			(isset($ifInUnknownProtos[$ifIndex]) ? @$ifInUnknownProtos[$ifIndex] : '')   . "', '" . 
+			(isset($ifOutDiscards[$ifIndex]) ? @$ifOutDiscards[$ifIndex] : '')	     . "', '" .
 			(isset($ifOutErrors[$ifIndex]) ? @$ifOutErrors[$ifIndex] : '')               . "', '" .
                         (isset($ifInMulticastPkts[$ifIndex]) ? @$ifInMulticastPkts[$ifIndex] : '')   . "', '" .
                         (isset($ifOutMulticastPkts[$ifIndex]) ? @$ifOutMulticastPkts[$ifIndex] : '') . "', '" .
