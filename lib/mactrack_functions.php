@@ -796,7 +796,6 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
                         (isset($ifOutBroadcastPkts[$ifIndex]) ? @$ifOutBroadcastPkts[$ifIndex] : '') . "', '" .
 			@$int_ifInOctets                    . "', '" . @$int_ifOutOctets             . "', '" .
 			@$int_ifHCInOctets                  . "', '" . @$int_ifHCOutOctets           . "', '" .
-			@$int_ifInNUcastPkts                . "', '" . @$int_ifOutNUcastPkts         . "', '" .
 			@$int_ifInMulticastPkts		    . "', '" . @$int_ifOutMulticastPkts      . "', '" .
 			@$int_ifInBroadcastPkts		    . "', '" . @$int_ifOutBroadcastPkts      . "', '" .
 			@$int_ifInUcastPkts                 . "', '" . @$int_ifOutUcastPkts          . "', '" .
