@@ -616,19 +616,19 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	$i = 0;
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["ifIndex"] = $ifIndex;
-		$ifInterfaces[$ifIndex]["ifName"] = (isset($ifNames[$ifIndex]) ? @$ifNames[$ifIndex] : '');
-		$ifInterfaces[$ifIndex]["ifType"] = (isset($ifTypes[$ifIndex]) ? @$ifTypes[$ifIndex] : '');
+		$ifInterfaces[$ifIndex]["ifName"] = (isset($ifNames[$ifIndex]) ? $ifNames[$ifIndex] : '');
+		$ifInterfaces[$ifIndex]["ifType"] = (isset($ifTypes[$ifIndex]) ? $ifTypes[$ifIndex] : '');
 
 		if ($getLinkPorts) {
-			$ifInterfaces[$ifIndex]["linkPort"] = (isset($link_ports[$ifIndex]) ? @$link_ports[$ifIndex] : '');
-			$linkPort = (isset($link_ports[$ifIndex]) ? @$link_ports[$ifIndex] : '');
+			$ifInterfaces[$ifIndex]["linkPort"] = (isset($link_ports[$ifIndex]) ? $link_ports[$ifIndex] : '');
+			$linkPort = (isset($link_ports[$ifIndex]) ? $link_ports[$ifIndex] : '');
 		}else{
 			$linkPort = 0;
 		}
 
 		if (($getAlias) && (sizeof($ifAliases))) {
-			$ifInterfaces[$ifIndex]["ifAlias"] = (isset($ifAliases[$ifIndex]) ? @$ifAliases[$ifIndex] : '');
-			$ifAlias = (isset($ifAliases[$ifIndex]) ? @$ifAliases[$ifIndex] : '');
+			$ifInterfaces[$ifIndex]["ifAlias"] = (isset($ifAliases[$ifIndex]) ? $ifAliases[$ifIndex] : '');
+			$ifAlias = (isset($ifAliases[$ifIndex]) ? $ifAliases[$ifIndex] : '');
 		}else{
 			$ifAlias = "";
 		}
@@ -773,27 +773,27 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			@db_qstr($ifAlias)                  . ", '"  . @$linkPort                    . "', '" .
 			@$vlan_id                           . "', "  . @db_qstr(@$vlan_name)         . ", '"  .
 			@$vlan_trunk                        . "', '" . @$ifSpeed[$ifIndex]           . "', '" .
-			(isset($ifHighSpeed[$ifIndex]) ? @$ifHighSpeed[$ifIndex] : '')               . "', '" .
-                        (isset($ifDuplex[$ifIndex]) ? @$ifDuplex[$ifIndex] : '')                     . "', " .
+			(isset($ifHighSpeed[$ifIndex]) ? $ifHighSpeed[$ifIndex] : '')               . "', '" .
+                        (isset($ifDuplex[$ifIndex]) ? $ifDuplex[$ifIndex] : '')                     . "', " .
 			@db_qstr(@$ifDescr[$ifIndex])       . ", '"  . 
-			(isset($ifMtu[$ifIndex]) ? @$ifMtu[$ifIndex] : '')             		     . "', '" .
+			(isset($ifMtu[$ifIndex]) ? $ifMtu[$ifIndex] : '')             		     . "', '" .
 			$mac_address                        . "', '" . @$ifAdminStatus[$ifIndex]     . "', '" .
 			@$ifOperStatus[$ifIndex]            . "', '" . @$ifLastChange[$ifIndex]      . "', '" .
-			(isset($ifInOctets[$ifIndex]) ? @$ifInOctets[$ifIndex] : '')                 . "', '" . 
-			(isset($ifOutOctets[$ifIndex]) ? @$ifOutOctets[$ifIndex] : '')      	     . "', '" .
-			(isset($ifHCInOctets[$ifIndex]) ? @$ifHCInOctets[$ifIndex] : '')             . "', '" . 
-			(isset($ifHCOutOctets[$ifIndex]) ? @$ifHCOutOctets[$ifIndex] : '')     	     . "', '" .
-			(isset($ifInUcastPkts[$ifIndex]) ? @$ifInUcastPkts[$ifIndex] : '')           . "', '" . 
-			(isset($ifOutUcastPkts[$ifIndex]) ? @$ifOutUcastPkts[$ifIndex] : '')         . "', '" .
-			(isset($ifInDiscards[$ifIndex]) ? @$ifInDiscards[$ifIndex] : '')             . "', '" . 
-			(isset($ifInErrors[$ifIndex]) ? @$ifInErrors[$ifIndex] : '')        	     . "', '" .
-			(isset($ifInUnknownProtos[$ifIndex]) ? @$ifInUnknownProtos[$ifIndex] : '')   . "', '" . 
-			(isset($ifOutDiscards[$ifIndex]) ? @$ifOutDiscards[$ifIndex] : '')	     . "', '" .
-			(isset($ifOutErrors[$ifIndex]) ? @$ifOutErrors[$ifIndex] : '')               . "', '" .
-                        (isset($ifInMulticastPkts[$ifIndex]) ? @$ifInMulticastPkts[$ifIndex] : '')   . "', '" .
-                        (isset($ifOutMulticastPkts[$ifIndex]) ? @$ifOutMulticastPkts[$ifIndex] : '') . "', '" .
-                        (isset($ifInBroadcastPkts[$ifIndex]) ? @$ifInBroadcastPkts[$ifIndex] : '')   . "', '" .
-                        (isset($ifOutBroadcastPkts[$ifIndex]) ? @$ifOutBroadcastPkts[$ifIndex] : '') . "', '" .
+			(isset($ifInOctets[$ifIndex]) ? $ifInOctets[$ifIndex] : '')                 . "', '" . 
+			(isset($ifOutOctets[$ifIndex]) ? $ifOutOctets[$ifIndex] : '')      	     . "', '" .
+			(isset($ifHCInOctets[$ifIndex]) ? $ifHCInOctets[$ifIndex] : '')             . "', '" . 
+			(isset($ifHCOutOctets[$ifIndex]) ? $ifHCOutOctets[$ifIndex] : '')     	     . "', '" .
+			(isset($ifInUcastPkts[$ifIndex]) ? $ifInUcastPkts[$ifIndex] : '')           . "', '" . 
+			(isset($ifOutUcastPkts[$ifIndex]) ? $ifOutUcastPkts[$ifIndex] : '')         . "', '" .
+			(isset($ifInDiscards[$ifIndex]) ? $ifInDiscards[$ifIndex] : '')             . "', '" . 
+			(isset($ifInErrors[$ifIndex]) ? $ifInErrors[$ifIndex] : '')        	     . "', '" .
+			(isset($ifInUnknownProtos[$ifIndex]) ? $ifInUnknownProtos[$ifIndex] : '')   . "', '" . 
+			(isset($ifOutDiscards[$ifIndex]) ? $ifOutDiscards[$ifIndex] : '')	     . "', '" .
+			(isset($ifOutErrors[$ifIndex]) ? $ifOutErrors[$ifIndex] : '')               . "', '" .
+                        (isset($ifInMulticastPkts[$ifIndex]) ? $ifInMulticastPkts[$ifIndex] : '')   . "', '" .
+                        (isset($ifOutMulticastPkts[$ifIndex]) ? $ifOutMulticastPkts[$ifIndex] : '') . "', '" .
+                        (isset($ifInBroadcastPkts[$ifIndex]) ? $ifInBroadcastPkts[$ifIndex] : '')   . "', '" .
+                        (isset($ifOutBroadcastPkts[$ifIndex]) ? $ifOutBroadcastPkts[$ifIndex] : '') . "', '" .
 			@$int_ifInOctets                    . "', '" . @$int_ifOutOctets             . "', '" .
 			@$int_ifHCInOctets                  . "', '" . @$int_ifHCOutOctets           . "', '" .
 			@$int_ifInMulticastPkts		    . "', '" . @$int_ifOutMulticastPkts      . "', '" .
