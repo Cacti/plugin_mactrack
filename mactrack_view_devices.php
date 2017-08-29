@@ -312,7 +312,7 @@ function mactrack_view_devices() {
 					<a href='<?php print htmlspecialchars($webroot . 'mactrack_devices.php?action=edit&device_id=' . $device['device_id']);?>' title='<?php print __('Edit Device');?>'><img src='<?php print $webroot;?>images/edit_object.png'></a>
 					<?php api_plugin_hook_function('remote_link', $hostinfo); } ?>
 					<?php if ($device['host_id'] > 0) {?>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=&host=' . $device['host_id'] . '&graph_template_id=0&filter=');?>' title='<?php print __('View Graphs');?>'><img src='<?php print $webroot;?>images/view_graphs.gif'></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=&host_id=' . $device['host_id'] . '&graph_template_id=0&filter=');?>' title='<?php print __('View Graphs');?>'><img src='<?php print $webroot;?>images/view_graphs.gif'></a>
 					<?php }else{?>
 					<img title='<?php print __('Device Not Mapped to Cacti Device');?>' src='<?php print $webroot;?>images/view_graphs_disabled.gif'>
 					<?php }?>
