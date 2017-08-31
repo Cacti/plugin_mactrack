@@ -2680,7 +2680,7 @@ function mactrack_int_row_class($stat) {
 	} elseif ($stat['ifOperStatus'] == '0') {
 		return 'int_down';
 	} else {
-		return 'int_up_bgc';
+		return 'int_up';
 	}
 }
 
