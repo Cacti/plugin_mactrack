@@ -43,7 +43,7 @@ Bug and feature enhancements for the webseer plugin are handled in GitHub. If yo
 * issue#16: MacTrack Undefined indexes and offsets
 * issue: MacTrack view Interfaces showed wrong color for interfaces UP.
 * issue: MacTrack view MACs 'portname' filter option missing.
-* feature: Removed deprecated ifInNUcastPkts and IfOutNUcastPkts and replaced by If*MulticastPkt and If*BroadcastPkt.
+* feature: Removed deprecated ifInNUcastPkts and IfOutNUcastPkts and replaced by Ifin/OutMulticastPkt and Ifin/OutBroadcastPkt.
 * feature: Updated spanish translations
 
 
