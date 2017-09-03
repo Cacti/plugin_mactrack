@@ -911,7 +911,7 @@ function mactrack_config_settings () {
 			),
 		'mt_script_runtime' => array(
 			'friendly_name' => __('Scanner Max Runtime'),
-			'description' => __('Specify the number of minutes a device scanning function will allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs.'),
+			'description' => __('Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs.'),
 			'default' => '20',
 			'method' => 'textbox',
 			'max_length' => '10',
@@ -1861,7 +1861,7 @@ function mactrack_config_form () {
 	'notify_schedule' => array(
 		'method' => 'drop_array',
 		'friendly_name' => __('Notification Schedule'),
-		'description' => __('Choose how often an Email address should be generated for this Mac Watch item.'),
+		'description' => __('Choose how often an Email should be generated for this Mac Watch item.'),
 		'value' => '|arg1:notify_schedule|',
 		'default' => '1',
 		'array' => array(
@@ -1875,7 +1875,7 @@ function mactrack_config_form () {
 	'email_addresses' => array(
 		'method' => 'textbox',
 		'friendly_name' => __('Email Addresses'),
-		'description' => __('Enter a semicolon separated of Email addresses who will be notified where this MAC address is.'),
+		'description' => __('Enter a semicolon separated of Email addresses that will be notified where this MAC address is.'),
 		'value' => '|arg1:email_addresses|',
 		'size' => '90',
 		'max_length' => '255'
