@@ -38,6 +38,14 @@ Bug and feature enhancements for the webseer plugin are handled in GitHub. If yo
 * feature: i18n MacTrack
 * feature: interface backgrounds in CSS
 * feature: use jQuery exclusively for dom manipulation
+* issue#22: Mactrack devices, 'Save' option missing.
+* issue#17: MacTrack Show Site SQL Syntax
+* issue#16: MacTrack Undefined indexes and offsets
+* issue: MacTrack view Interfaces showed wrong color for interfaces UP.
+* issue: MacTrack view MACs 'portname' filter option missing.
+* feature: Removed deprecated ifInNUcastPkts and IfOutNUcastPkts and replaced by Ifin/OutMulticastPkt and Ifin/OutBroadcastPkt.
+* feature: Updated spanish translations
+
 
 --- 3.0 ---
 * bug#0001838: support partitioned tables mac_track_ports
