@@ -76,7 +76,7 @@ switch (get_request_var('action')) {
 		get_filter_request_var('refresh');
 		/* ==================================================== */
 
-		load_current_session_value('refresh', 'sess_mactrack_utilities_refresh', '30');
+		load_current_session_value('refresh', 'sess_mt_refresh', '30');
 
 		$refresh['seconds'] = get_request_var('refresh');
 		$refresh['page'] = 'mactrack_utilities.php?action=mactrack_proc_status';
@@ -161,7 +161,7 @@ function mactrack_display_run_status() {
 		$time_till_next_db_maint = $next_db_maint_time - $current_time;
 	}
 
-	html_start_box(__('MacTrack Process Status'), '100%', '', '1', 'center', '');
+	html_start_box(__('Device Tracking Process Status', 'mactrack'), '100%', '', '1', 'center', '');
 	?>
 	<script type='text/javascript'>
 	function applyFilter() {
@@ -181,7 +181,7 @@ function mactrack_display_run_status() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Refresh');?>
+						<?php print __('Refresh', 'mactrack');?>
 					</td>
 					<td>
 						<select id='refresh' onChange='applyFilter()'>
@@ -192,7 +192,7 @@ function mactrack_display_run_status() {
 						?>
 					</td>
 					<td>
-						<input type='button' value='<?php print __('Refresh');?>' id='refresh'>
+						<input type='button' value='<?php print __esc('Refresh', 'mactrack');?>' id='refresh'>
 					</td>
 				</tr>
 			</table>
@@ -230,49 +230,49 @@ function mactrack_display_run_status() {
 
 	$disabled_devices = db_fetch_cell('SELECT count(*) FROM mac_track_devices');
 
-	html_header(array(__('Current Process Status')), 2);
+	html_header(array(__('Current Process Status', 'mactrack')), 2);
 	form_alternate_row();
-	print '<td>' . __('The MacTrack Poller is:') . '</td><td>' . ($total_processes > 0 ? __('RUNNING') : ($seconds_offset == 'disabled' ? __('DISABLED') : __('IDLE'))) . '</td>';
+	print '<td>' . __('The Device Tracking Poller is:', 'mactrack') . '</td><td>' . ($total_processes > 0 ? __('RUNNING', 'mactrack') : ($seconds_offset == 'disabled' ? __('DISABLED', 'mactrack') : __('IDLE', 'mactrack'))) . '</td>';
 	if ($total_processes > 0) {
 		form_alternate_row();
-		print '<td>' . __('Running Processes:') . '</td><td>' . $total_processes . '</td>';
+		print '<td>' . __('Running Processes:', 'mactrack') . '</td><td>' . $total_processes . '</td>';
 	}
 	form_alternate_row();
-	print '<td width=200>' . __('Last Time Poller Started:') . '</td><td>' . read_config_option('mt_scan_date', TRUE) . '</td>';
+	print '<td width=200>' . __('Last Time Poller Started:', 'mactrack') . '</td><td>' . read_config_option('mt_scan_date', TRUE) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Poller Frequency:') . '</td><td>' . ($seconds_offset == 'disabled' ? __('N/A') : $mactrack_poller_frequencies[$seconds_offset/60]) . '</td>';
+	print '<td width=200>' . __('Poller Frequency:', 'mactrack') . '</td><td>' . ($seconds_offset == 'disabled' ? __('N/A', 'mactrack') : $mactrack_poller_frequencies[$seconds_offset/60]) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Approx. Next Runtime:') . '</td><td>' . (empty($next_run_time) ? __('N/A') : date('Y-m-d G:i:s', $next_run_time)) . '</td>';
+	print '<td width=200>' . __('Approx. Next Runtime:', 'mactrack') . '</td><td>' . (empty($next_run_time) ? __('N/A', 'mactrack') : date('Y-m-d G:i:s', $next_run_time)) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Approx. Next DB Maintenance:') . '</td><td>' . (empty($next_db_maint_time) ? __('N/A') : date('Y-m-d G:i:s', $next_db_maint_time)) . '</td>';
+	print '<td width=200>' . __('Approx. Next DB Maintenance:', 'mactrack') . '</td><td>' . (empty($next_db_maint_time) ? __('N/A', 'mactrack') : date('Y-m-d G:i:s', $next_db_maint_time)) . '</td>';
 
-	html_header(array(__('Run Time Details')), 2);
+	html_header(array(__('Run Time Details', 'mactrack')), 2);
 	form_alternate_row();
-	print '<td width=200>' . __('Last Poller Runtime:') . '</td><td>' . read_config_option('stats_mactrack', TRUE) . '</td>';
+	print '<td width=200>' . __('Last Poller Runtime:', 'mactrack') . '</td><td>' . read_config_option('stats_mactrack', TRUE) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Last Poller Maintenance Runtime:') . '</td><td>' . read_config_option('stats_mactrack_maint', TRUE) . '</td>';
+	print '<td width=200>' . __('Last Poller Maintenance Runtime:', 'mactrack') . '</td><td>' . read_config_option('stats_mactrack_maint', TRUE) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Maximum Concurrent Processes:') . '</td><td> ' . read_config_option('mt_processes', TRUE) . __('processes') . '</td>';
+	print '<td width=200>' . __('Maximum Concurrent Processes:', 'mactrack') . '</td><td> ' . read_config_option('mt_processes', TRUE) . __('processes', 'mactrack') . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Maximum Per Device Scan Time:') . '</td><td> ' . read_config_option('mt_script_runtime', TRUE) . __('minutes') . '</td>';
+	print '<td width=200>' . __('Maximum Per Device Scan Time:', 'mactrack') . '</td><td> ' . read_config_option('mt_script_runtime', TRUE) . __('minutes', 'mactrack') . '</td>';
 
-	html_header(array(__('DNS Configuration Information')), 2);
+	html_header(array(__('DNS Configuration Information', 'mactrack')), 2);
 	form_alternate_row();
-	print '<td width=200>' . __('Reverse DNS Resolution is') . '</td><td>' . (read_config_option('mt_reverse_dns', TRUE) == 'on' ? __('ENABLED') : __('DISABLED')) . '</td>';
+	print '<td width=200>' . __('Reverse DNS Resolution is', 'mactrack') . '</td><td>' . (read_config_option('mt_reverse_dns', TRUE) == 'on' ? __('ENABLED', 'mactrack') : __('DISABLED', 'mactrack')) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Primary DNS Server:') . '</td><td>' . read_config_option('mt_dns_primary', TRUE) . '</td>';
+	print '<td width=200>' . __('Primary DNS Server:', 'mactrack') . '</td><td>' . read_config_option('mt_dns_primary', TRUE) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Secondary DNS Server:') . '</td><td>' . read_config_option('mt_dns_secondary', TRUE) . '</td>';
+	print '<td width=200>' . __('Secondary DNS Server:', 'mactrack') . '</td><td>' . read_config_option('mt_dns_secondary', TRUE) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('DNS Resolution Timeout:') . '</td><td> ' . read_config_option('mt_dns_timeout', TRUE) . __('milliseconds') . '</td>';
+	print '<td width=200>' . __('DNS Resolution Timeout:', 'mactrack') . '</td><td> ' . read_config_option('mt_dns_timeout', TRUE) . __('milliseconds', 'mactrack') . '</td>';
 	html_end_box(TRUE);
 
 	if ($total_processes > 0) {
-		html_start_box(__('Running Process Summary'), '100%', '', '3', 'center', '');
+		html_start_box(__('Running Process Summary', 'mactrack'), '100%', '', '3', 'center', '');
 		?>
-		<td><?php print ($resolver_running ? __('The DNS Resolver is Running') : __('The DNS Resolver is Not Running'));?></td>
+		<td><?php print ($resolver_running ? __('The DNS Resolver is Running', 'mactrack') : __('The DNS Resolver is Not Running', 'mactrack'));?></td>
 		<?php
-		html_header(array(__('Status'), __('Devices'), __('Date Started')), 3);
+		html_header(array(__('Status', 'mactrack'), __('Devices', 'mactrack'), __('Date Started', 'mactrack')), 3);
 
 		$other_processes = 0;
 		$other_date = 0;
@@ -306,26 +306,26 @@ function mactrack_display_run_status() {
 
 		form_alternate_row();
 		?>
-		<td><?php print __('Completed');?></td>
+		<td><?php print __('Completed', 'mactrack');?></td>
 		<td><?php print $completed_processes;?></td>
 		<td><?php print $completed_date;?></td>
 		<?php
 		form_alternate_row();
 		?>
-		<td><?php print __('Running');?></td>
+		<td><?php print __('Running', 'mactrack');?></td>
 		<td><?php print $running_processes;?></td>
 		<td><?php print $running_date;?></td>
 		<?php
 		form_alternate_row();
 		?>
-		<td><?php print __('Waiting');?></td>
+		<td><?php print __('Waiting', 'mactrack');?></td>
 		<td><?php print $waiting_processes;?></td>
 		<td><?php print $waiting_date;?></td>
 		<?php
 		form_alternate_row();
 		if ($other_processes > 0) {
 			?>
-			<td><?php print __('Other');?></td>
+			<td><?php print __('Other', 'mactrack');?></td>
 			<td><?php print $other_processes;?></td>
 			<td><?php print $other_date;?></td>
 			<?php
@@ -341,7 +341,7 @@ function mactrack_utilities_ports_clear() {
 
 	if ((read_config_option('remove_verification') == 'on') && (!isset_request_var('confirm'))) {
 		top_header();
-		form_confirm(__('Are You Sure?'), __('Are you sure you want to delete all the Port to MAC to IP results from the system?'), 'mactrack_utilities.php', 'mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table');
+		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete all the Port to MAC to IP results from the system?', 'mactrack'), 'mactrack_utilities.php', 'mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table');
 		bottom_footer();
 		exit;
 	}
@@ -374,24 +374,21 @@ function mactrack_utilities_ports_clear() {
 		$site_rows = db_fetch_assoc('SELECT site_id FROM mac_track_sites');
 
 		if (sizeof($site_rows)) {
-		foreach ($site_rows as $site_row) {
-			db_execute('UPDATE mac_track_sites SET total_devices=0 WHERE site_id = ?',     array($site_row['site_id']));
-			db_execute('UPDATE mac_track_sites SET total_macs=0 WHERE site_id = ?',        array($site_row['site_id']));
-			db_execute('UPDATE mac_track_sites SET total_ips=0 WHERE site_id = ?',         array($site_row['site_id']));
-			db_execute('UPDATE mac_track_sites SET total_user_ports=0 WHERE site_id = ?',  array($site_row['site_id']));
-			db_execute('UPDATE mac_track_sites SET total_oper_ports=0 WHERE site_id = ?',  array($site_row['site_id']));
-			db_execute('UPDATE mac_track_sites SET total_trunk_ports=0 WHERE site_id = ?', array($site_row['site_id']));
-		}
+			foreach ($site_rows as $site_row) {
+				db_execute_prepared('UPDATE mac_track_sites SET total_devices=0 WHERE site_id = ?',     array($site_row['site_id']));
+				db_execute_prepared('UPDATE mac_track_sites SET total_macs=0 WHERE site_id = ?',        array($site_row['site_id']));
+				db_execute_prepared('UPDATE mac_track_sites SET total_ips=0 WHERE site_id = ?',         array($site_row['site_id']));
+				db_execute_prepared('UPDATE mac_track_sites SET total_user_ports=0 WHERE site_id = ?',  array($site_row['site_id']));
+				db_execute_prepared('UPDATE mac_track_sites SET total_oper_ports=0 WHERE site_id = ?',  array($site_row['site_id']));
+				db_execute_prepared('UPDATE mac_track_sites SET total_trunk_ports=0 WHERE site_id = ?', array($site_row['site_id']));
+			}
 		}
 
 		top_header();
 		mactrack_utilities();
-		html_start_box(__('Device Tracking Database Results'), '100%', '', '3', 'center', '');
-		?>
-		<td>
-			The following number of records have been removed from the database: <?php print $rows;?>
-		</td>
-		<?php
+
+		html_start_box(__('Device Tracking Database Results', 'mactrack'), '100%', '', '3', 'center', '');
+		print '<td>' . __('The following number of records have been removed from the database: %s', $rows, 'mactrack') . '</td>';
 		html_end_box();
 	}
 }
@@ -401,7 +398,7 @@ function mactrack_utilities_purge_aggregated_data() {
 
 	if ((read_config_option('remove_verification') == 'on') && (!isset_request_var('confirm'))) {
 		top_header();
-		form_confirm(__('Are You Sure?'), __('Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?'), 'mactrack_utilities.php', 'mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data');
+		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?', 'mactrack'), 'mactrack_utilities.php', 'mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data');
 		bottom_footer();
 		exit;
 	}
@@ -412,12 +409,9 @@ function mactrack_utilities_purge_aggregated_data() {
 
 		top_header();
 		mactrack_utilities();
-		html_start_box(__('Device Tracking Database Results'), '100%', '', '3', 'center', '');
-		?>
-		<td>
-			The following number of records have been removed from the aggergated table: <?php print $rows;?>
-		</td>
-		<?php
+
+		html_start_box(__('Device Tracking Database Results', 'mactrack'), '100%', '', '3', 'center', '');
+		print '<td>' . __('The following number of records have been removed from the aggergated table: %s', $rows, 'mactrack') . '</td>';
 		html_end_box();
 	}
 }
@@ -427,7 +421,7 @@ function mactrack_utilities_recreate_aggregated_data() {
 
 	if ((read_config_option('remove_verification') == 'on') && (!isset_request_var('confirm'))) {
 		top_header();
-		form_confirm(__('Are You Sure?'), __('Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?'), 'mactrack_utilities.php', 'mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data');
+		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?', 'mactrack'), 'mactrack_utilities.php', 'mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data');
 		bottom_footer();
 		exit;
 	}
@@ -451,12 +445,9 @@ function mactrack_utilities_recreate_aggregated_data() {
 
 		top_header();
 		mactrack_utilities();
+
 		html_start_box('Device Tracking Database Results', '100%', '', '3', 'center', '');
-		?>
-		<td>
-			The following number of records have been removed from the aggergated table: <?php print $old_rows;?>. And <?php print $new_rows;?> number of record will be added.
-		</td>
-		<?php
+		print '<td>' . __('The following number of records have been removed from the aggergated table: %s.  And %s records will be added.', $old_rows, $new_rows, 'mactrack') . '</td>';
 		html_end_box();
 	}
 }
@@ -465,12 +456,9 @@ function mactrack_utilities_db_maint() {
 	$begin_rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_ports');
 	perform_mactrack_db_maint();
 	$end_rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_ports');
+
 	html_start_box('Device Tracking Database Results', '100%', '', '3', 'center', '');
-	?>
-	<td>
-		The following number of records have been removed from the database: <?php print $begin_rows-$end_rows;?>
-	</td>
-	<?php
+	print '<td>' . __('The following number of records have been removed from the database: %s', $begin_rows-$end_rows, 'mactrack') . '</td>';
 	html_end_box();
 }
 
@@ -480,92 +468,84 @@ function mactrack_utilities_purge_scanning_funcs() {
 	mactrack_rebuild_scanning_funcs();
 
 	html_start_box('Device Tracking Scanning Function Refresh Results', '100%', '', '3', 'center', '');
-	?>
-	<td>
-		The Device Tracking scanning functions have been purged.  They will be recreated once you either edit a device or device type.
-	</td>
-	<?php
+	print '<td>' . __('The Device Tracking scanning functions have been purged.  They will be recreated once you either edit a device or device type.', 'mactrack') . '</td>';
 	html_end_box();
 }
 
 function mactrack_utilities() {
-	html_start_box('Cacti MacTrack System Utilities', '100%', '', '3', 'center', '');
+	html_start_box(__('Cacti Device Tracking System Utilities', 'mactrack'), '100%', '', '3', 'center', '');
 
-	html_header(array('Process Status Information'), 2);
+	html_header(array(__('Process Status Information', 'mactrack')), 2);
 
 	?>
-	<colgroup span="3">
-		<col class="nowrap" style="vertical-align:top;width:20%;">
-		<col style="vertical-align:top;width:80%;">
+	<colgroup span='3'>
+		<col class='nowrap' style='vertical-align:top;width:20%;'>
+		<col style='vertical-align:top;width:80%;'>
 	</colgroup>
 	<tr class='even'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_proc_status'>View MacTrack Process Status</a>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_proc_status'><?php print __('View Device Tracking Process Status', 'mactrack');?></a>
 		</td>
 		<td class='textArea'>
-			This option will let you show and set process information associated with the MacTrack polling process.
+			<?php print __('This option will let you show and set process information associated with the Device Tracking polling process.');?>
 		</td>
 	</tr>
 
-	<?php html_header(array('Database Administration'), 2);?>
+	<?php html_header(array(__('Database Administration', 'mactrack')), 2);?>
 
 	<tr class='odd'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_perform_db_maint'>Perform Database Maintenance</a>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_perform_db_maint'><?php print __('Perform Database Maintenance', 'mactrack');?></a>
 		</td>
 		<td class='textArea'>
-			Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed.
+			<?php print __('Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed.', 'mactrack');?>
 		</td>
 	</tr>
 
 	<tr class='even'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_refresh_oui_database'>Refresh IEEE Vendor MAC/OUI Database</a>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_refresh_oui_database'><?php print __('Refresh IEEE Vendor MAC/OUI Database', 'mactrack');?></a>
 		</td>
 		<td class='textArea'>
-			This function will download and install the latest OIU database from the IEEE Website.
-			Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two
-			parts.  The first part of the MAC Addess contains the Vendor MAC.  The Vendor MAC identifies who
-			manufactured the part.  This will be helpful in spot checking for rogue devices on your network.
+			<?php print __('This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Addess contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network.', 'mactrack');?>
 		</td>
 	</tr>
 
 	<tr class='odd'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_purge_scanning_funcs'>Refresh Scanning Functions</a>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_purge_scanning_funcs'><?php print __('Refresh Scanning Functions');?></a>
 		</td>
 		<td class='textArea'>
-			Deletes old and potentially stale Device Tracking scanning functions from the drop-down
-				you receive when you edit a device type.
+			<?php print __('Deletes old and potentially stale Device Tracking scanning functions from the drop-down you receive when you edit a device type.', 'mactrack');?>
 		</td>
 	</tr>
 
 	<tr class='even'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table'>Remove All Scan Results</a>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table'><?php print __('Remove All Scan Results', 'mactrack');?></a>
 		</td>
 		<td class='textArea'>
-			Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>
+			<?php print __('Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>', 'mactrack');?>
 		</td>
 	</tr>
 
-	<?php html_header(array('Aggregated Table Administration'), 2);?>
+	<?php html_header(array(__('Aggregated Table Administration', 'mactrack')), 2);?>
 
 	<tr class='even'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data'>Remove All Aggregated Results</a>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data'><?php print __('Remove All Aggregated Results', 'mactrack');?></a>
 		</td>
 		<td class='textArea'>
-			Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run.
+			<?php print __('Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run.', 'mactrack');?>
 		</td>
 	</tr>
 
 	<tr class='odd'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data'>Perform Aggregate Table Rebuild</a>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data'><?php print __('Perform Aggregate Table Rebuild');?></a>
 		</td>
 		<td class='textArea'>
-			Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scaned data</strong>  now.
+			<?php print __('Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scaned data</strong> now.', 'mactrack');?>
 		</td>
 	</tr>
 	<?php
@@ -573,4 +553,3 @@ function mactrack_utilities() {
 	html_end_box();
 }
 
-?>

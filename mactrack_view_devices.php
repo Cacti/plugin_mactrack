@@ -28,7 +28,7 @@ include('./include/auth.php');
 include_once('./include/global_arrays.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
-$title = __("Device Tracking - Device Report View");
+$title = __('Device Tracking - Device Report View', 'macktrack');
 
 if (isset_request_var('export')) {
 	mactrack_view_export_devices();
@@ -94,7 +94,7 @@ function mactrack_device_request_validation() {
 			),
 	);
 
-	validate_store_request_vars($filters, 'sess_mactrack_device');
+	validate_store_request_vars($filters, 'sess_mtv_devices');
 	/* ================= input validation ================= */
 }
 
@@ -156,7 +156,7 @@ function mactrack_view_get_device_records(&$sql_where, $rows, $apply_limits = TR
 		}
 	}else{
 		if (get_request_var('device_type_id') == 0) {
-			$device_type_info = array('device_type_id' => 0, 'description' => __('Unknown Device Type'));
+			$device_type_info = array('device_type_id' => 0, 'description' => __('Unknown Device Type', 'mactrack'));
 		}
 	}
 
@@ -255,30 +255,35 @@ function mactrack_view_devices() {
 	$total_rows = db_fetch_cell("SELECT
 		COUNT(mac_track_devices.device_id)
 		FROM mac_track_sites
-		RIGHT JOIN mac_track_devices ON mac_track_devices.site_id = mac_track_sites.site_id
-		LEFT JOIN mac_track_device_types ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
+		RIGHT JOIN mac_track_devices 
+		ON mac_track_devices.site_id = mac_track_sites.site_id
+		LEFT JOIN mac_track_device_types 
+		ON mac_track_device_types.device_type_id=mac_track_devices.device_type_id
 		$sql_where");
 
-	$nav = html_nav_bar('mactrack_view_devices.php?report=devices', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 13, __('Devices'), 'page', 'main');
+	$display_text = array(
+		'nosort'           => array(__('Actions', 'mactrack'), ''),
+		'device_name'      => array(__('Device Name', 'mactrack'), 'ASC'),
+		'site_name'        => array(__('Site Name', 'mactrack'), 'ASC'),
+		'snmp_status'      => array(__('Status', 'mactrack'), 'ASC'),
+		'hostname'         => array(__('Hostname', 'mactrack'), 'ASC'),
+		'device_type'      => array(__('Device Type', 'mactrack'), 'ASC'),
+		'ips_total'        => array(__('Total IP\'s', 'mactrack'), 'DESC'),
+		'ports_total'      => array(__('User Ports', 'mactrack'), 'DESC'),
+		'ports_active'     => array(__('User Ports Up', 'mactrack'), 'DESC'),
+		'ports_trunk'      => array(__('Trunk Ports', 'mactrack'), 'DESC'),
+		'macs_active'      => array(__('Active Macs', 'mactrack'), 'DESC'),
+		'vlans_total'      => array(__('Total VLAN\'s', 'mactrack'), 'DESC'),
+		'last_runduration' => array(__('Last Duration', 'mactrack'), 'DESC')
+	);
+
+	$columns = sizeof($display_text);
+
+	$nav = html_nav_bar('mactrack_view_devices.php?report=devices', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Devices', 'mactrack'), 'page', 'main');
 
 	print $nav;
 
 	html_start_box('', '100%', '', '3', 'center', '');
-
-	$display_text = array(
-		'nosort'           => array(__('Actions'), ''),
-		'device_name'      => array(__('Device Name'), 'ASC'),
-		'site_name'        => array(__('Site Name'), 'ASC'),
-		'snmp_status'      => array(__('Status'), 'ASC'),
-		'hostname'         => array(__('Hostname'), 'ASC'),
-		'device_type'      => array(__('Device Type'), 'ASC'),
-		'ips_total'        => array(__('Total IP\'s'), 'DESC'),
-		'ports_total'      => array(__('User Ports'), 'DESC'),
-		'ports_active'     => array(__('User Ports Up'), 'DESC'),
-		'ports_trunk'      => array(__('Trunk Ports'), 'DESC'),
-		'macs_active'      => array(__('Active Macs'), 'DESC'),
-		'vlans_total'      => array(__('Total VLAN\'s'), 'DESC'),
-		'last_runduration' => array(__('Last Duration'), 'DESC'));
 
 	html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
@@ -307,17 +312,17 @@ function mactrack_view_devices() {
 
 			form_alternate_row();
 				?>
-				<td width=100>
+				<td style='width:1px;'>
 					<?php if (api_user_realm_auth('mactrack_sites.php')) {?>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_devices.php?action=edit&device_id=' . $device['device_id']);?>' title='<?php print __('Edit Device');?>'><img src='<?php print $webroot;?>images/edit_object.png'></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_devices.php?action=edit&device_id=' . $device['device_id']);?>' title='<?php print __esc('Edit Device', 'mactrack');?>'><img src='<?php print $webroot;?>images/edit_object.png'></a>
 					<?php api_plugin_hook_function('remote_link', $hostinfo); } ?>
 					<?php if ($device['host_id'] > 0) {?>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=&host_id=' . $device['host_id'] . '&graph_template_id=0&filter=');?>' title='<?php print __('View Graphs');?>'><img src='<?php print $webroot;?>images/view_graphs.gif'></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=&host_id=' . $device['host_id'] . '&graph_template_id=0&filter=');?>' title='<?php print __esc('View Graphs', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_graphs.gif'></a>
 					<?php }else{?>
-					<img title='<?php print __('Device Not Mapped to Cacti Device');?>' src='<?php print $webroot;?>images/view_graphs_disabled.gif'>
+					<img title='<?php print __esc('Device Not Mapped to Cacti Device', 'mactrack');?>' src='<?php print $webroot;?>images/view_graphs_disabled.gif'>
 					<?php }?>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . get_request_var('site_id') . '&device_id=' . $device['device_id']);?>' title='<?php print __('View MAC Addresses');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . get_request_var('site_id') . '&device=' . $device['device_id']);?>' title='<?php print __('View Interfaces');?>'><img src='<?php print $webroot;?>images/view_interfaces.gif'></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . get_request_var('site_id') . '&device_id=' . $device['device_id']);?>' title='<?php print __esc('View MAC Addresses', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . get_request_var('site_id') . '&device=' . $device['device_id']);?>' title='<?php print __esc('View Interfaces', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_interfaces.gif'></a>
 				</td>
 				<td class='hyperLink'>
 					<?php print filter_value($device['device_name'], get_request_var('filter'));?>
@@ -326,18 +331,18 @@ function mactrack_view_devices() {
 				<td><?php print get_colored_device_status(($device['disabled'] == 'on' ? true : false), $device['snmp_status']);?></td>
 				<td><?php print filter_value($device['hostname'], get_request_var('filter'));?>
 				<td><?php print $device['device_type'];?></td)>
-				<td><?php print ($device['scan_type'] == '1' ? __('N/A') : number_format_i18n($device['ips_total']));?></td>
-				<td><?php print ($device['scan_type'] == '3' ? __('N/A') : number_format_i18n($device['ports_total']));?></td>
-				<td><?php print ($device['scan_type'] == '3' ? __('N/A') : number_format_i18n($device['ports_active']));?></td>
-				<td><?php print ($device['scan_type'] == '3' ? __('N/A') : number_format_i18n($device['ports_trunk']));?></td>
-				<td><?php print ($device['scan_type'] == '3' ? __('N/A') : number_format_i18n($device['macs_active']));?></td>
-				<td><?php print ($device['scan_type'] == '3' ? __('N/A') : number_format_i18n($device['vlans_total']));?></td>
+				<td><?php print ($device['scan_type'] == '1' ? __('N/A', 'mactrack') : number_format_i18n($device['ips_total']));?></td>
+				<td><?php print ($device['scan_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($device['ports_total']));?></td>
+				<td><?php print ($device['scan_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($device['ports_active']));?></td>
+				<td><?php print ($device['scan_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($device['ports_trunk']));?></td>
+				<td><?php print ($device['scan_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($device['macs_active']));?></td>
+				<td><?php print ($device['scan_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($device['vlans_total']));?></td>
 				<td><?php print number_format($device['last_runduration'], 1);?></td>
 			</tr>
 			<?php
 		}
 	}else{
-		print '<tr><td colspan="10"><em>' . __('No MacTrack Devices') . '</em></td></tr>';
+		print '<tr><td colspan="10"><em>' . __('No Device Tracking Devices Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);
@@ -358,18 +363,18 @@ function mactrack_device_filter2() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Search');?>
+						<?php print __('Search', 'mactrack');?>
 					</td>
 					<td>
 						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter');?>'>
 					</td>
 					<td>
-						<?php print __('Site');?>
+						<?php print __('Site', 'mactrack');?>
 					</td>
 					<td>
 						<select id='site_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('All');?></option>
-							<option value='-2'<?php if (get_request_var('site_id') == '-2') {?> selected<?php }?>><?php print __('None');?></option>
+							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack');?></option>
+							<option value='-2'<?php if (get_request_var('site_id') == '-2') {?> selected<?php }?>><?php print __('None', 'mactrack');?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT site_id, site_name FROM mac_track_sites ORDER BY site_name');
 							if (sizeof($sites)) {
@@ -381,36 +386,34 @@ function mactrack_device_filter2() {
 						</select>
 					</td>
 					<td>
-						<input type='submit' id='go' value='<?php print __('Go');?>'>
-					</td>
-					<td>
-						<input type='button' id='clear' value='<?php print __('Clear');?>'>
-					</td>
-					<td>
-						<input type='button' id='export' value='<?php print __('Export');?>'>
+						<span class='nowrap'>
+							<input type='submit' id='go' value='<?php print __esc('Go', 'mactrack');?>'>
+							<input type='button' id='clear' value='<?php print __esc('Clear', 'mactrack');?>'>
+							<input type='button' id='export' value='<?php print __esc('Export', 'mactrack');?>'>
+						</span>
 					</td>
 				</tr>
 			</table>
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Type');?>
+						<?php print __('Type', 'mactrack');?>
 					</td>
 					<td>
 						<select id='type_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('type_id') == '-1') {?> selected<?php }?>><?php print __('Any');?></option>
-							<option value='1'<?php if (get_request_var('type_id') == '1') {?> selected<?php }?>><?php print __('Hub/Switch');?></option>
-							<option value='2'<?php if (get_request_var('type_id') == '2') {?> selected<?php }?>><?php print __('Switch/Router');?></option>
-							<option value='3'<?php if (get_request_var('type_id') == '3') {?> selected<?php }?>><?php print __('Router');?></option>
+							<option value='-1'<?php if (get_request_var('type_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack');?></option>
+							<option value='1'<?php if (get_request_var('type_id') == '1') {?> selected<?php }?>><?php print __('Hub/Switch', 'mactrack');?></option>
+							<option value='2'<?php if (get_request_var('type_id') == '2') {?> selected<?php }?>><?php print __('Switch/Router', 'mactrack');?></option>
+							<option value='3'<?php if (get_request_var('type_id') == '3') {?> selected<?php }?>><?php print __('Router', 'mactrack');?></option>
 						</select>
 					</td>
 					<td>
-						<?php print __('SubType');?>
+						<?php print __('SubType', 'mactrack');?>
 					</td>
 					<td>
 						<select id='device_type_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('device_type_id') == '-1') {?> selected<?php }?>><?php print __('Any');?></option>
-							<option value='-2'<?php if (get_request_var('device_type_id') == '-2') {?> selected<?php }?>><?php print __('Not Detected');?></option>
+							<option value='-1'<?php if (get_request_var('device_type_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack');?></option>
+							<option value='-2'<?php if (get_request_var('device_type_id') == '-2') {?> selected<?php }?>><?php print __('Not Detected', 'mactrack');?></option>
 							<?php
 							if (get_request_var('type_id') != -1) {
 								$device_types = db_fetch_assoc_prepared('SELECT DISTINCT
@@ -447,25 +450,25 @@ function mactrack_device_filter2() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Status');?>
+						<?php print __('Status', 'mactrack');?>
 					</td>
 					<td>
 						<select id='status' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('status') == '-1') {?> selected<?php }?>><?php print __('Any');?></option>
-							<option value='3'<?php if (get_request_var('status') == '3') {?> selected<?php }?>><?php print __('Up');?></option>
-							<option value='-2'<?php if (get_request_var('status') == '-2') {?> selected<?php }?>><?php print __('Disabled');?></option>
-							<option value='1'<?php if (get_request_var('status') == '1') {?> selected<?php }?>><?php print __('Down');?></option>
-							<option value='0'<?php if (get_request_var('status') == '0') {?> selected<?php }?>><?php print __('Unknown');?></option>
-							<option value='4'<?php if (get_request_var('status') == '4') {?> selected<?php }?>><?php print __('Error');?></option>
-							<option value='5'<?php if (get_request_var('status') == '5') {?> selected<?php }?>><?php print __('No Cacti Link');?></option>
+							<option value='-1'<?php if (get_request_var('status') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack');?></option>
+							<option value='3'<?php if (get_request_var('status') == '3') {?> selected<?php }?>><?php print __('Up', 'mactrack');?></option>
+							<option value='-2'<?php if (get_request_var('status') == '-2') {?> selected<?php }?>><?php print __('Disabled', 'mactrack');?></option>
+							<option value='1'<?php if (get_request_var('status') == '1') {?> selected<?php }?>><?php print __('Down', 'mactrack');?></option>
+							<option value='0'<?php if (get_request_var('status') == '0') {?> selected<?php }?>><?php print __('Unknown', 'mactrack');?></option>
+							<option value='4'<?php if (get_request_var('status') == '4') {?> selected<?php }?>><?php print __('Error', 'mactrack');?></option>
+							<option value='5'<?php if (get_request_var('status') == '5') {?> selected<?php }?>><?php print __('No Cacti Link', 'mactrack');?></option>
 						</select>
 					</td>
 					<td>
-						<?php print __('Devices');?>
+						<?php print __('Devices', 'mactrack');?>
 					</td>
 					<td>
 						<select id='rows' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default');?></option>
+							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack');?></option>
 							<?php
 							if (sizeof($item_rows)) {
 								foreach ($item_rows as $key => $value) {

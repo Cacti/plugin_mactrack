@@ -132,7 +132,7 @@ function sync_mactrack_to_cacti($mt_device) {
 	include_once($config['base_path'] . '/lib/api_device.php');
 	include_once($config['base_path'] . '/lib/utility.php'); # required due to missing include in lib/api_device.php
 
-	/* do we want to 'Sync MacTrack Device to Cacti Device'
+	/* do we want to 'Sync Device Tracking Device to Cacti Device'
 	 * AND has the device already been assigned a 'valid' host_id
 	 * (aka: has the device been saved successfully) */
 	if ((read_config_option('mt_update_policy', true) == 3) &&
@@ -164,8 +164,8 @@ function sync_mactrack_to_cacti($mt_device) {
 }
 
 function sync_cacti_to_mactrack($device) {
-	/* do we want to 'Sync Cacti Device to MacTrack Device'
-	 * AND has the device already been assigned a 'valid' MacTrack device id
+	/* do we want to 'Sync Cacti Device to Device Tracking Device'
+	 * AND has the device already been assigned a 'valid' Device Tracking device id
 	 * (aka: has the device been saved successfully) */
 	if ((read_config_option('mt_update_policy', true) == 2) && ($device['id'] > 0)) {
 		# $devices holds the whole row from host table
@@ -208,7 +208,7 @@ function sync_cacti_to_mactrack($device) {
 				(isset($mt_device['disabled']) ? $mt_device['disabled'] : '') # not a host column
 			);
 
-			mactrack_debug('MacTrack device: (' . $mt_device['device_id'] . ') successfully updated');
+			mactrack_debug(__('Device Tracking Device: (%s) successfully updated', $mt_device['device_id'], 'mactrack'));
 		}
 	}
 
@@ -221,7 +221,7 @@ function sync_cacti_to_mactrack($device) {
  * @arg $action		actions to be performed from dropdown
  */
 function mactrack_device_action_array($action) {
-	$action['plugin_mactrack_device'] = __('Import into MacTrack');
+	$action['plugin_mactrack_device'] = __('Import into Device Tracking Database', 'mactrack');
 	return $action;
 }
 
@@ -236,8 +236,8 @@ function mactrack_device_action_prepare($save) {
 			/* list affected hosts */
 			print '<tr>';
 			print "<td colspan='2' class='textArea'>" .
-				"<p>" . __('Are you sure you want to import the following hosts to MacTrack?  Please specify additional MacTrack device options as given below.') . "</p>";
-			print "</tr>";
+				'<p>' . __('Click \'Continue\' to import the following Device to Device Tracking?  Please specify additional Device Tracking device options as given below.', 'mactrack') . '</p>';
+			print '</tr>';
 
 			$form_array = array();
 			while (list($field_name, $field_array) = each($fields_mactrack_device_edit)) {
@@ -245,9 +245,9 @@ function mactrack_device_action_prepare($save) {
 				if (preg_match('(site_id|scan_type|snmp_options|snmp_retries|ignorePorts|user_name|user_password|disabled|term_type|private_key_path)', $field_name)) {
 					$form_array += array($field_name => $fields_mactrack_device_edit[$field_name]);
 
-					$form_array[$field_name]['value'] = '';
+					$form_array[$field_name]['value']       = '';
 					$form_array[$field_name]['description'] = '';
-					$form_array[$field_name]['form_id'] = 0;
+					$form_array[$field_name]['form_id']     = 0;
 				}
 			}
 
@@ -260,13 +260,13 @@ function mactrack_device_action_prepare($save) {
 
 			print '<tr>';
 			print "<td colspan='2' class='textArea'>" .
-				"<p>" . __('We will use these devices SNMP options for the MacTrack device as well.') . "</p>" .
-				'<p><ul>' . $save['host_list'] . '</ul></p></td>';
+				'<p>' . __('We will use these devices SNMP options for the Device Tracking device as well.', 'mactrack') . '</p>' .
+				'<ul>' . $save['host_list'] . '</ul></td>';
 			print '</tr>';
 		}
 	}
 
-	return $save;			# required for next hook in chain
+	return $save; # required for next hook in chain
 }
 
 /**
@@ -332,4 +332,3 @@ function mactrack_device_action_execute($action) {
 	return $action;
 }
 
-?>

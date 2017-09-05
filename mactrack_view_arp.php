@@ -28,7 +28,7 @@ include('./include/auth.php');
 include_once('./include/global_arrays.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
-$title = __('Device Tracking - ARP/IP View');
+$title = __('Device Tracking - ARP/IP View', 'mactrack');
 
 set_default_action();
 
@@ -102,7 +102,7 @@ function mactrack_view_ips_validate_request_vars() {
             )
     );
 
-    validate_store_request_vars($filters, 'sess_mactrack_view_arp');
+    validate_store_request_vars($filters, 'sess_mtv_arp');
     /* ================= input validation ================= */
 }
 
@@ -235,9 +235,9 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = TRUE, $rows) 
 	$query_string = "SELECT mac_track_ips.*, mac_track_sites.site_name, mac_track_oui_database.*
 		FROM mac_track_ips
 		LEFT JOIN mac_track_sites
-		ON (mac_track_ips.site_id = mac_track_sites.site_id)
+		ON mac_track_ips.site_id = mac_track_sites.site_id
 		LEFT JOIN mac_track_oui_database
-		ON (mac_track_oui_database.vendor_mac=SUBSTRING(mac_track_ips.mac_address, 1, 8))
+		ON mac_track_oui_database.vendor_mac=SUBSTRING(mac_track_ips.mac_address, 1, 8)
 		$sql_where
 		$sql_order
 		$sql_limit";
@@ -278,8 +278,10 @@ function mactrack_view_ips() {
 		$rows_query_string = "SELECT
 			COUNT(mac_track_ips.device_id)
 			FROM mac_track_ips
-			LEFT JOIN mac_track_sites ON (mac_track_ips.site_id=mac_track_sites.site_id)
-			LEFT JOIN mac_track_oui_database ON (mac_track_oui_database.vendor_mac=SUBSTRING(mac_track_ips.mac_address,1,8))
+			LEFT JOIN mac_track_sites 
+			ON mac_track_ips.site_id=mac_track_sites.site_id
+			LEFT JOIN mac_track_oui_database 
+			ON mac_track_oui_database.vendor_mac=SUBSTRING(mac_track_ips.mac_address,1,8)
 			$sql_where";
 
 		$total_rows = db_fetch_cell($rows_query_string);
@@ -287,70 +289,72 @@ function mactrack_view_ips() {
 		$rows_query_string = "SELECT
 			COUNT(DISTINCT device_id, mac_address, port_number, ip_address)
 			FROM mac_track_ips
-			LEFT JOIN mac_track_sites ON (mac_track_ips.site_id=mac_track_sites.site_id)
-			LEFT JOIN mac_track_oui_database ON (mac_track_oui_database.vendor_mac=SUBSTRING(mac_track_ips.mac_address,1,8))
+			LEFT JOIN mac_track_sites 
+			ON mac_track_ips.site_id=mac_track_sites.site_id
+			LEFT JOIN mac_track_oui_database 
+			ON mac_track_oui_database.vendor_mac=SUBSTRING(mac_track_ips.mac_address,1,8)
 			$sql_where";
 
 		$total_rows = db_fetch_cell($rows_query_string);
 	}
 
-	$nav = html_nav_bar('mactrack_view_arp.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 13, __('ARP Cache'), 'page', 'main');
+	if (strlen(read_config_option('mt_reverse_dns')) > 0) {
+		if (get_request_var('rows') == 1) {
+			$display_text = array(
+				'device_name'  => array(__('Switch Name', 'mactrack'), 'ASC'),
+				'hostname'     => array(__('Switch Hostname', 'mactrack'), 'ASC'),
+				'ip_address'   => array(__('ED IP Address', 'mactrack'), 'ASC'),
+				'dns_hostname' => array(__('ED DNS Hostname', 'mactrack'), 'ASC'),
+				'mac_address'  => array(__('ED MAC Address', 'mactrack'), 'ASC'),
+				'vendor_name'  => array(__('Vendor Name', 'mactrack'), 'ASC'),
+				'port_number'  => array(__('Port Number', 'mactrack'), 'DESC')
+			);
+		}else{
+			$display_text = array(
+				'device_name'  => array(__('Switch Name', 'mactrack'), 'ASC'),
+				'hostname'     => array(__('Switch Hostname', 'mactrack'), 'ASC'),
+				'ip_address'   => array(__('ED IP Address', 'mactrack'), 'ASC'),
+				'dns_hostname' => array(__('ED DNS Hostname', 'mactrack'), 'ASC'),
+				'mac_address'  => array(__('ED MAC Address', 'mactrack'), 'ASC'),
+				'vendor_name'  => array(__('Vendor Name', 'mactrack'), 'ASC'),
+				'port_number'  => array(__('Port Number', 'mactrack'), 'DESC')
+			);
+		}
+	}else{
+		if (get_request_var('rows') == 1) {
+			$display_text = array(
+				'device_name' => array(__('Switch Name', 'mactrack'), 'ASC'),
+				'hostname'    => array(__('Switch Hostname', 'mactrack'), 'ASC'),
+				'ip_address'  => array(__('ED IP Address', 'mactrack'), 'ASC'),
+				'mac_address' => array(__('ED MAC Address', 'mactrack'), 'ASC'),
+				'vendor_name' => array(__('Vendor Name', 'mactrack'), 'ASC'),
+				'port_number' => array(__('Port Number', 'mactrack'), 'DESC')
+			);
+		}else{
+			$display_text = array(
+				'device_name' => array(__('Switch Device', 'mactrack'), 'ASC'),
+				'hostname'    => array(__('Switch Hostname', 'mactrack'), 'ASC'),
+				'ip_address'  => array(__('ED IP Address', 'mactrack'), 'ASC'),
+				'mac_address' => array(__('ED MAC Address', 'mactrack'), 'ASC'),
+				'vendor_name' => array(__('Vendor Name', 'mactrack'), 'ASC'),
+				'port_number' => array(__('Port Number', 'mactrack'), 'DESC')
+			);
+		}
+	}
+
+	$columns = sizeof($display_text);
+
+	$nav = html_nav_bar('mactrack_view_arp.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('ARP Cache', 'mactrack'), 'page', 'main');
 
 	print $nav;
 
 	html_start_box('', '100%', '', '3', 'center', '');
 
-	if (strlen(read_config_option('mt_reverse_dns')) > 0) {
-		if (get_request_var('rows') == 1) {
-			$display_text = array(
-				'device_name'  => array(__('Switch Name'), 'ASC'),
-				'hostname'     => array(__('Switch Hostname'), 'ASC'),
-				'ip_address'   => array(__('ED IP Address'), 'ASC'),
-				'dns_hostname' => array(__('ED DNS Hostname'), 'ASC'),
-				'mac_address'  => array(__('ED MAC Address'), 'ASC'),
-				'vendor_name'  => array(__('Vendor Name'), 'ASC'),
-				'port_number'  => array(__('Port Number'), 'DESC')
-			);
-		}else{
-			$display_text = array(
-				'device_name'  => array(__('Switch Name'), 'ASC'),
-				'hostname'     => array(__('Switch Hostname'), 'ASC'),
-				'ip_address'   => array(__('ED IP Address'), 'ASC'),
-				'dns_hostname' => array(__('ED DNS Hostname'), 'ASC'),
-				'mac_address'  => array(__('ED MAC Address'), 'ASC'),
-				'vendor_name'  => array(__('Vendor Name'), 'ASC'),
-				'port_number'  => array(__('Port Number'), 'DESC')
-			);
-		}
-
-		html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
-	}else{
-		if (get_request_var('rows') == 1) {
-			$display_text = array(
-				'device_name' => array(__('Switch Name'), 'ASC'),
-				'hostname'    => array(__('Switch Hostname'), 'ASC'),
-				'ip_address'  => array(__('ED IP Address'), 'ASC'),
-				'mac_address' => array(__('ED MAC Address'), 'ASC'),
-				'vendor_name' => array(__('Vendor Name'), 'ASC'),
-				'port_number' => array(__('Port Number'), 'DESC')
-			);
-		}else{
-			$display_text = array(
-				'device_name' => array(__('Switch Device'), 'ASC'),
-				'hostname'    => array(__('Switch Hostname'), 'ASC'),
-				'ip_address'  => array(__('ED IP Address'), 'ASC'),
-				'mac_address' => array(__('ED MAC Address'), 'ASC'),
-				'vendor_name' => array(__('Vendor Name'), 'ASC'),
-				'port_number' => array(__('Port Number'), 'DESC')
-			);
-		}
-
-		html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
-	}
+	html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
 	$i = 0;
 	$delim = read_config_option('mt_mac_delim');
-	if (sizeof($port_results) > 0) {
+	if (sizeof($port_results)) {
 		foreach ($port_results as $port_result) {
 			form_alternate_row();
 			echo '<td>' . $port_result['device_name'] . '</td>';
@@ -366,9 +370,9 @@ function mactrack_view_ips() {
 		}
 	}else{
 		if (get_request_var('site_id') == -1 && get_request_var('device_id') == -1) {
-			print '<tr><td colspan="10"><em>' . __('You must first choose a Site, Device or other search criteria.') . '</em></td></tr>';
+			print '<tr><td colspan="10"><em>' . __('You must first choose a Site, Device or other search criteria.', 'mactrack') . '</em></td></tr>';
 		}else{
-			print '<tr><td colspan="10"><em>' . __('No MacTrack IP Results Found') . '</em></td></tr>';
+			print '<tr><td colspan="10"><em>' . __('No Device Tracking IP Results Found', 'mactrack') . '</em></td></tr>';
 		}
 	}
 
@@ -390,20 +394,20 @@ function mactrack_ip_address_filter() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Search');?>
+						<?php print __('Search', 'mactrack');?>
 					</td>
 					<td>
 						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter');?>'>
 					</td>
 					<td>
-						<?php print __('Site');?>
+						<?php print __('Site', 'mactrack');?>
 					</td>
 					<td>
 						<select id='site_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('N/A');?></option>
+							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('N/A', 'mactrack');?></option>
 							<?php
 							$sites = db_fetch_assoc('select site_id,site_name from mac_track_sites order by site_name');
-							if (sizeof($sites) > 0) {
+							if (sizeof($sites)) {
 								foreach ($sites as $site) {
 									print '<option value="' . $site['site_id'] .'"'; if (get_request_var('site_id') == $site['site_id']) { print ' selected'; } print '>' . $site['site_name'] . '</option>';
 								}
@@ -412,11 +416,11 @@ function mactrack_ip_address_filter() {
 						</select>
 					</td>
 					<td>
-						<?php print __('Device');?>
+						<?php print __('Device', 'mactrack');?>
 					</td>
 					<td>
 						<select id='device_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('device_id') == '-1') {?> selected<?php }?>><?php print __('All');?></option>
+							<option value='-1'<?php if (get_request_var('device_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack');?></option>
 							<?php
 							if (get_request_var('site_id') == -1) {
 								$filter_devices = db_fetch_assoc('SELECT DISTINCT device_id, device_name, hostname 
@@ -439,7 +443,7 @@ function mactrack_ip_address_filter() {
 						</select>
 					</td>
 					<td>
-						<?php print __('IP\'s');?>
+						<?php print __('IP\'s', 'mactrack');?>
 					</td>
 					<td>
 						<select id='rows' onChange='applyFilter()'>
@@ -453,20 +457,18 @@ function mactrack_ip_address_filter() {
 						</select>
 					</td>
 					<td>
-						<input type='submit' id='go' value='<?php print __('Go');?>'>
-					</td>
-					<td>
-						<input type='button' id='clear' value='<?php print __('Clear');?>'>
-					</td>
-					<td>
-						<input type='button' id='export' value='<?php print __('Export');?>'>
+						<span class='nowrap'>
+							<input type='submit' id='go' value='<?php print __esc('Go', 'mactrack');?>'>
+							<input type='button' id='clear' value='<?php print __esc('Clear', 'mactrack');?>'>
+							<input type='button' id='export' value='<?php print __esc('Export', 'mactrack');?>'>
+						</span>
 					</td>
 				</tr>
 			</table>
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('IP');?>
+						<?php print __('IP', 'mactrack');?>
 					</td>
 					<td>
 						<select id='ip_filter_type_id'>
@@ -483,7 +485,7 @@ function mactrack_ip_address_filter() {
 				</tr>
 				<tr>
 					<td>
-						<?php print __('MAC');?>
+						<?php print __('MAC', 'mactrack');?>
 					</td>
 					<td>
 						<select id='mac_filter_type_id'>

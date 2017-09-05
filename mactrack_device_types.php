@@ -34,7 +34,7 @@ include_once('./plugins/mactrack/lib/mactrack_vendors.php');
 /* store the list of registered mactrack scanning functions */
 db_execute('REPLACE INTO mac_track_scanning_functions 
 	(scanning_function, type) 
-	VALUES ("Not Applicable - Router", 1)');
+	VALUES (' . db_qstr(__('Not Applicable - Router', 'mactrack')) . ', 1)');
 
 if (isset($mactrack_scanning_functions)) {
 	foreach($mactrack_scanning_functions as $scanning_function) {
@@ -47,7 +47,7 @@ if (isset($mactrack_scanning_functions)) {
 /* store the list of registered mactrack scanning functions */
 db_execute('REPLACE INTO mac_track_scanning_functions 
 	(scanning_function, type) 
-	VALUES ("Not Applicable - Switch/Hub", 2)');
+	VALUES (' . db_qstr(__('Not Applicable - Switch/Hub', 'mactrack')) . ', 2)');
 
 if (isset($mactrack_scanning_functions_ip)) {
 	foreach($mactrack_scanning_functions_ip as $scanning_function) {
@@ -58,8 +58,8 @@ if (isset($mactrack_scanning_functions_ip)) {
 }
 
 $device_types_actions = array(
-	1 => __('Delete'),
-	2 => __('Duplicate')
+	1 => __('Delete', 'mactrack'),
+	2 => __('Duplicate', 'mactrack')
 );
 
 /* set default action */
@@ -140,7 +140,9 @@ function form_save() {
 }
 
 function api_mactrack_device_type_remove($device_type_id){
-	db_execute_prepared('DELETE FROM mac_track_device_types WHERE device_type_id = ?', array($device_type_id));
+	db_execute_prepared('DELETE FROM mac_track_device_types 
+		WHERE device_type_id = ?', 
+		array($device_type_id));
 }
 
 function api_mactrack_device_type_save($device_type_id, $description,
@@ -175,7 +177,10 @@ function api_mactrack_device_type_save($device_type_id, $description,
 
 function api_mactrack_duplicate_device_type($device_type_id, $dup_id, $device_type_title) {
 	if (!empty($device_type_id)) {
-		$device_type = db_fetch_row_prepared('SELECT * FROM mac_track_device_types WHERE device_type_id = ?', array($device_type_id));
+		$device_type = db_fetch_row_prepared('SELECT * 
+			FROM mac_track_device_types 
+			WHERE device_type_id = ?', 
+			array($device_type_id));
 
 		/* create new entry: graph_local */
 		$save['device_type_id'] = 0;
@@ -188,8 +193,8 @@ function api_mactrack_duplicate_device_type($device_type_id, $dup_id, $device_ty
 
 		$save['vendor'] = $device_type['vendor'];
 		$save['device_type'] = $device_type['device_type'];
-		$save['sysDescr_match'] = '--dup--' . $device_type['sysDescr_match'];
-		$save['sysObjectID_match'] = '--dup--' . $device_type['sysObjectID_match'];
+		$save['sysDescr_match'] = __('--dup--', 'mactrack') . $device_type['sysDescr_match'];
+		$save['sysObjectID_match'] = __('--dup--', 'mactrack') . $device_type['sysObjectID_match'];
 		$save['scanning_function'] = $device_type['scanning_function'];
 		$save['ip_scanning_function'] = $device_type['ip_scanning_function'];
 		$save['lowPort'] = $device_type['lowPort'];
@@ -240,7 +245,11 @@ function form_actions() {
 			input_validate_input_number($matches[1]);
 			/* ==================================================== */
 
-			$device_types_info = db_fetch_row_prepared('SELECT description FROM mac_track_device_types WHERE device_type_id = ?', array($matches[1]));
+			$device_types_info = db_fetch_row_prepared('SELECT description 
+				FROM mac_track_device_types 
+				WHERE device_type_id = ?', 
+				array($matches[1]));
+
 			$device_types_list .= '<li>' . $device_types_info['description'] . '</li>';
 			$device_types_array[] = $matches[1];
 		}
@@ -253,24 +262,24 @@ function form_actions() {
 	html_start_box($device_types_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
 
 	if (!isset($device_types_array)) {
-		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one device type.') . "</span></td></tr>\n";
+		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one device type.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = '';
 	}else{
-		$save_html = "<input type='submit' value='" . __('Yes') . "' name='save'>";
+		$save_html = "<input type='submit' value='" . __esc('Continue', 'mactrack') . "' name='save'>";
 
 		if (get_request_var('drp_action') == '1') { /* delete */
 			print "<tr>
 				<td class='textArea'>
-					<p>" . __('Are you sure you want to delete the following device types?') . "</p>
-					<p><ul>$device_types_list</ul></p>
+					<p>" . __('Click \'Continue\' to delete the following Device Type(s).', 'mactrack') . "</p>
+					<ul>$device_types_list</ul>
 				</td>
 			</tr>";
 		}elseif (get_request_var('drp_action') == '2') { /* duplicate */
 			print "<tr>
 				<td class='textArea'>
-					<p>" . __('When you click save, the following device types will be duplicated. You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix.') . "</p>
-					<p><ul>$device_types_list</ul></p>
-					<p>" . __('Device Type Prefix:') . '<br>'; form_text_box('title_format', '<description> (1)', '', '255', '30', 'text'); print "</p>
+					<p>" . __('Click \'Continue\' to duplciate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix.', 'mactrack') . "</p>
+					<ul>$device_types_list</ul>
+					<p>" . __('Device Type Prefix:', 'mactrack') . '<br>'; form_text_box('title_format', __('<description> (1)', 'mactrack'), '', '255', '30', 'text'); print "</p>
 				</td>
 			</tr>";
 		}
@@ -281,8 +290,8 @@ function form_actions() {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($device_types_array) ? serialize($device_types_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_nfilter_request_var('drp_action') . "'>" . (strlen($save_html) ? "
-			<input type='button' onClick='cactiReturnTo()' name='cancel' value='" . __('No') . "'>
-			$save_html" : "<input type='submit' onClick='cactiReturnTo()' name='cancel' value='" . __('Return') . "'>") . "
+			<input type='button' onClick='cactiReturnTo()' name='cancel' value='" . __esc('Cancel', 'mactrack') . "'>
+			$save_html" : "<input type='submit' onClick='cactiReturnTo()' name='cancel' value='" . __esc('Return') . "'>") . "
 		</td>
 	</tr>";
 
@@ -338,7 +347,7 @@ function mactrack_device_type_request_validation() {
 			)
 	);
 
-	validate_store_request_vars($filters, 'sess_mactrack_dt');
+	validate_store_request_vars($filters, 'sess_mt_devicet');
 }
 
 function mactrack_device_type_export() {
@@ -393,30 +402,31 @@ function mactrack_rescan_device_types() {
 
 	/* loop through all device rows and look for a matching type */
 	if (sizeof($device_types)) {
-	foreach($device_types as $type) {
-		$found = FALSE;
-		if (sizeof($known_types)) {
-		foreach($known_types as $known) {
-			if ((substr_count($type['snmp_sysDescr'], $known['sysDescr_match'])) &&
-				(substr_count($type['snmp_sysObjectID'], $known['sysObjectID_match']))) {
-				$found = TRUE;
-				break;
+		foreach($device_types as $type) {
+			$found = FALSE;
+
+			if (sizeof($known_types)) {
+				foreach($known_types as $known) {
+					if ((substr_count($type['snmp_sysDescr'], $known['sysDescr_match'])) &&
+						(substr_count($type['snmp_sysObjectID'], $known['sysObjectID_match']))) {
+						$found = TRUE;
+						break;
+					}
+				}
+			}
+
+			if (!$found) {
+				$insert_array[] = $type;
 			}
 		}
-		}
-
-		if (!$found) {
-			$insert_array[] = $type;
-		}
-	}
 	}
 
 	if (sizeof($insert_array)) {
 		foreach($insert_array as $item) {
 			$desc = trim($item['snmp_sysDescr']);
-			$name = __('New Type');
+			$name = __('New Type', 'mactrack');
 			if (substr_count(strtolower($desc), 'cisco')) {
-				$vendor = __('Cisco');
+				$vendor = __('Cisco', 'mactrack');
 				$temp_name = str_replace('(tm)', '', $desc);
 				$pos = strpos($temp_name, '(');
 				if ($pos > 0) {
@@ -428,7 +438,7 @@ function mactrack_rescan_device_types() {
 					}
 				}
 			}else{
-				$vendor = __('Unknown');
+				$vendor = __('Unknown', 'mactrack');
 			}
 
 			db_execute("REPLACE INTO mac_track_device_types
@@ -441,9 +451,9 @@ function mactrack_rescan_device_types() {
 					db_qstr($item['snmp_sysObjectID']) . ")");
 		}
 
-		print __('There were %d Device Types Added!', sizeof($insert_array));
+		print __('There were %d Device Types Added!', sizeof($insert_array), 'mactrack');
 	}else{
-		print __('No New Device Types Found!');
+		print __('No New Device Types Found!', 'mactrack');
 	}
 }
 
@@ -453,9 +463,9 @@ function mactrack_device_type_import() {
 	?><form method='post' action='mactrack_device_types.php?action=import' enctype='multipart/form-data'><?php
 
 	if ((isset($_SESSION['import_debug_info'])) && (is_array($_SESSION['import_debug_info']))) {
-		html_start_box(__('Import Results'), '100%', '', '3', 'center', '');
+		html_start_box(__('Import Results', 'mactrack'), '100%', '', '3', 'center', '');
 
-		print "<tr class='even'><td><p class='textArea'>" . __('Cacti has imported the following items:') . '</p>';
+		print "<tr class='even'><td><p class='textArea'>" . __('Cacti has imported the following items:', 'mactrack') . '</p>';
 		foreach($_SESSION['import_debug_info'] as $import_result) {
 			print "<tr class='even'><td>" . $import_result . '</td>';
 			print '</tr>';
@@ -466,57 +476,55 @@ function mactrack_device_type_import() {
 		kill_session_var('import_debug_info');
 	}
 
-	html_start_box(__('Import MacTrack Device Types'), '100%', '', '3', 'center', '');
+	html_start_box(__('Import Device Tracking Device Types', 'mactrack'), '100%', '', '3', 'center', '');
 
 	form_alternate_row();?>
-		<td width='50%'><font class='textEditTitle'>Import Device Types from Local File</font><br>
-			Please specify the location of the CSV file containing your device type information.
+		<td width='50%'><font class='textEditTitle'><?php print __('Import Device Types from Local File', 'mactrack');?></font><br>
+			<?php print __('Please specify the location of the CSV file containing your device type information.', 'mactrack');?>
 		</td>
 		<td align='left'>
 			<input type='file' name='import_file'>
 		</td>
 	</tr><?php
 	form_alternate_row();?>
-		<td width='50%'><font class='textEditTitle'>Overwrite Existing Data?</font><br>
-			Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows.
+		<td width='50%'><font class='textEditTitle'><?php print __('Overwrite Existing Data?', 'mactrack');?></font><br>
+			<?php print __('Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows.', 'mactrack');?>
 		</td>
 		<td align='left'>
-			<input type='checkbox' name='allow_update' id='allow_update'>Allow Existing Rows to be Updated?
+			<input type='checkbox' name='allow_update' id='allow_update'><?php print __('Allow Existing Rows to be Updated?', 'mactrack');?>
 		</td><?php
 
 	html_end_box(FALSE);
 
-	html_start_box(__('Required File Format Notes'), '100%', '', '3', 'center', '');
+	html_start_box(__('Required File Format Notes', 'mactrack'), '100%', '', '3', 'center', '');
 
 	form_alternate_row();?>
-		<td><strong>The file must contain a header row with the following column headings.</strong>
+		<td><strong><?php print __('The file must contain a header row with the following column headings.', 'mactrack');?></strong>
 			<br><br>
-			<strong>description</strong> - A common name for the device.  For example Cisco 6509 Switch<br>
-			<strong>vendor</strong> - The vendor who produces this device<br>
-			<strong>device_type</strong> - The type of device this is.  See the notes below for this integer value<br>
-			<strong>sysDescr_match</strong> - A unique set of characters from the snmp sysDescr that uniquely identify this device<br>
-			<strong>sysObjectID_match</strong> - The vendor specific snmp sysObjectID that distinguishes this device from the next<br>
-			<strong>scanning_function</strong> - The scanning function that will be used to scan this device type<br>
-			<strong>ip_scanning_function</strong> - The IP scanning function that will be used to scan this device type<br>
-			<strong>serial_number_oid</strong> - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here<br>
-			<strong>lowPort</strong> - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports<br>
-			<strong>highPort</strong> - Same as the lowPort with the exception that this is the high numbered user port number<br>
+			<strong>description</strong><?php print __(' - A common name for the device.  For example Cisco 6509 Switch', 'mactrack');?><br>
+			<strong>vendor</strong><?php print __(' - The vendor who produces this device', 'mactrack');?><br>
+			<strong>device_type</strong><?php print __(' - The type of device this is.  See the notes below for this integer value', 'mactrack');?><br>
+			<strong>sysDescr_match</strong><?php print __(' - A unique set of characters from the snmp sysDescr that uniquely identify this device', 'mactrack');?><br>
+			<strong>sysObjectID_match</strong><?php print __(' - The vendor specific snmp sysObjectID that distinguishes this device from the next', 'mactrack');?><br>
+			<strong>scanning_function</strong><?php print __(' - The scanning function that will be used to scan this device type', 'mactrack');?><br>
+			<strong>ip_scanning_function</strong><?php print __(' - The IP scanning function that will be used to scan this device type', 'mactrack');?><br>
+			<strong>serial_number_oid</strong><?php print __(' - If the Serial Number for this device type can be obtained via an SNMP Query, add it\'s OID here', 'mactrack');?><br>
+			<strong>lowPort</strong><?php print __(' - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports', 'mactrack');?><br>
+			<strong>highPort</strong><?php print __(' - Same as the lowPort with the exception that this is the high numbered user port number', 'mactrack');?><br>
 			<br>
-			<strong>The primary key for this table is a combination of the following three fields:</strong>
+			<strong><?php print __('The primary key for this table is a combination of the following three fields:', 'mactrack');?></strong>
 			<br><br>
 			device_type, sysDescr_match, sysObjectID_match
 			<br><br>
-			<strong>Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information.</strong>
+			<strong><?php print __('Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information.', 'mactrack');?></strong>
 			<br><br>
-			<strong>device_type</strong> is an integer field and must be one of the following:
+			<strong>device_type</strong><?php print __(' is an integer field and must be one of the following:', 'mactrack');?>
 			<br><br>
-			1 - Switch/Hub<br>
-			2 - Switch/Router<br>
-			3 - Router<br>
+			<?php print __('1 - Switch/Hub', 'mactrack');?><br>
+			<?php print __('2 - Switch/Router', 'mactrack');?><br>
+			<?php print __('3 - Router', 'mactrack');?><br>
 			<br>
-			<strong>The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against
-			values in the device types database.  The first match that is found in the database is used direct MacTrack as to how to scan it.  Therefore,
-			it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices.</strong>
+			<strong><?php print __('The devices device type is determined by scanning it\'s snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used direct Device Tracking as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices.', 'mactrack');?></strong>
 			<br>
 		</td>
 	</tr><?php
@@ -533,9 +541,9 @@ function mactrack_device_type_import_processor(&$device_types) {
 	$return_array = array();
 	$insert_columns = array();
 
-	$device_type_array[1] = __('Switch/Hub');
-	$device_type_array[2] = __('Switch/Router');
-	$device_type_array[3] = __('Router');
+	$device_type_array[1] = __('Switch/Hub', 'mactrack');
+	$device_type_array[2] = __('Switch/Router', 'mactrack');
+	$device_type_array[3] = __('Router', 'mactrack');
 
 	foreach($device_types as $device_type) {
 		/* parse line */
@@ -682,9 +690,9 @@ function mactrack_device_type_import_processor(&$device_types) {
 			$save_order .= ')';
 
 			if ($required >= 3) {
-				array_push($return_array, '<strong>HEADER LINE PROCESSED OK</strong>:  <br>Columns found where: ' . $save_order . '<br>');
+				array_push($return_array, __('HEADER LINE PROCESSED OK:  <br>Columns found where: %s', $save_order, 'mactrack') . '<br>');
 			}else{
-				array_push($return_array, '<strong>HEADER LINE PROCESSING ERROR</strong>: Missing required field <br>Columns found where:' . $save_order . '<br>');
+				array_push($return_array, __('HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s', $save_order, 'mactrack') . '<br>');
 				break;
 			}
 		}else{
@@ -740,7 +748,7 @@ function mactrack_device_type_import_processor(&$device_types) {
 						if (isset($device_type_array[$line_item])) {
 							$device_type = $device_type_array[$line_item];
 						}else{
-							$device_type = __('Unknown Assume "Switch/Hub"');
+							$device_type = __('Unknown Assume "Switch/Hub"', 'mactrack');
 							$line_item = 1;
 						}
 					}
@@ -775,24 +783,24 @@ function mactrack_device_type_import_processor(&$device_types) {
 						' VALUES' . $save_value . $update_suffix;
 
 					if (db_execute($sql_execute)) {
-						array_push($return_array,"INSERT SUCCEEDED: Vendor: $vendor, Description: $description, Type: $device_type, sysDescr: $sysDescr_match, sysObjectID: $sysObjectID_match");
+						array_push($return_array, __('INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', $vendor, $description, $device_type, $sysDescr_match, $sysObjectID_match, 'mactrack'));
 					}else{
-						array_push($return_array,"<strong>INSERT FAILED:</strong> Vendor: $vendor, Description: $description, Type: $device_type, sysDescr: $sysDescr_match, sysObjectID: $sysObjectID_match");
+						array_push($return_array, __('INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', $vendor, $description, $device_type, $sysDescr_match, $sysObjectID_match, 'mactrack'));
 					}
 				}else{
 					/* perform check to see if the row exists */
 					$existing_row = db_fetch_row("SELECT * FROM mac_track_device_types $sql_where");
 
 					if (sizeof($existing_row)) {
-						array_push($return_array,"<strong>INSERT SKIPPED, EXISTING:</strong> Vendor: $vendor, Description: $description, Type: $device_type, sysDescr: $sysDescr_match, sysObjectID: $sysObjectID_match");
+						array_push($return_array, __('INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', $vendor, $description, $device_type, $sysDescr_match, $sysObjectID_match, 'mactrack'));
 					}else{
 						$sql_execute = 'INSERT INTO mac_track_device_types ' . $save_order .
 							' VALUES' . $save_value;
 
 						if (db_execute($sql_execute)) {
-							array_push($return_array,"INSERT SUCCEEDED: Vendor: $vendor, Description: $description, Type: $device_type, sysDescr: $sysDescr_match, sysObjectID: $sysObjectID_match");
+							array_push($return_array, __('INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', $vendor, $description, $device_type, $sysDescr_match, $sysObjectID_match, 'mactrack'));
 						}else{
-							array_push($return_array,"<strong>INSERT FAILED:</strong> Vendor: $vendor, Description: $description, Type: $device_type, sysDescr: $sysDescr_match, sysObjectID: $sysObjectID_match");
+							array_push($return_array, __('INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', $vendor, $description, $device_type, $sysDescr_match, $sysObjectID_match, 'mactrack'));
 						}
 					}
 				}
@@ -803,25 +811,6 @@ function mactrack_device_type_import_processor(&$device_types) {
 	}
 
 	return $return_array;
-}
-
-function mactrack_device_type_remove() {
-	global $config;
-
-	/* ================= input validation ================= */
-	get_filter_request_var('device_type_id');
-	/* ==================================================== */
-
-	if ((read_config_option('remove_verification') == 'on') && (!isset_request_var('confirm'))) {
-		top_header();
-		form_confirm(__('Are You Sure?'), __('Are you sure you want to delete the device type %s?', db_fetch_cell_prepared('SELECT description FROM host WHERE id = ?', array(get_request_var('device_id')))), 'mactrack_device_types.php', 'mactrack_device_types.php?action=remove&id=' . get_request_var('device_type_id'));
-		bottom_footer();
-		exit;
-	}
-
-	if ((read_config_option('remove_verification') == '') || (isset_request_var('confirm'))) {
-		api_mactrack_device_type_remove(get_request_var('device_type_id'));
-	}
 }
 
 function mactrack_device_type_edit() {
@@ -836,11 +825,12 @@ function mactrack_device_type_edit() {
 	if (!isempty_request_var('device_type_id')) {
 		$device_type = db_fetch_row_prepared('SELECT * 
 			FROM mac_track_device_types 
-			WHERE device_type_id = ?', array(get_request_var('device_type_id')));
+			WHERE device_type_id = ?', 
+			array(get_request_var('device_type_id')));
 
-		$header_label = __('MacTrack Device Types [edit: %s]', $device_type['description']);
+		$header_label = __('Device Tracking Device Types [edit: %s]', $device_type['description'], 'mactrack');
 	}else{
-		$header_label = __('MacTrack Device Types [new]');
+		$header_label = __('Device Tracking Device Types [new]', 'mactrack');
 	}
 
 	form_start('mactrack_device_types.php', 'chk');
@@ -861,22 +851,22 @@ function mactrack_device_type_edit() {
 
 function mactrack_get_device_types(&$sql_where, $rows, $apply_limits = TRUE) {
 	if (get_request_var('filter') != '') {
-		$sql_where = " WHERE (mac_track_device_types.vendor LIKE '%" . get_request_var('filter') . "%' OR
-			mac_track_device_types.description LIKE '%" . get_request_var('filter') . "%' OR
-			mac_track_device_types.sysDescr_match LIKE '%" . get_request_var('filter') . "%' OR
-			mac_track_device_types.sysObjectID_match LIKE '%" . get_request_var('filter') . "%')";
+		$sql_where = " WHERE (mtdt.vendor LIKE '%" . get_request_var('filter') . "%' OR
+			mtdt.description LIKE '%" . get_request_var('filter') . "%' OR
+			mtdt.sysDescr_match LIKE '%" . get_request_var('filter') . "%' OR
+			mtdt.sysObjectID_match LIKE '%" . get_request_var('filter') . "%')";
 	}
 
 	if (get_request_var('vendor') == 'All') {
 		/* Show all items */
 	}else{
-		$sql_where .= (strlen($sql_where) ? ' AND ': ' WHERE ') . "(mac_track_device_types.vendor='" . get_request_var('vendor') . "')";
+		$sql_where .= (strlen($sql_where) ? ' AND ': ' WHERE ') . "(mtdt.vendor='" . get_request_var('vendor') . "')";
 	}
 
 	if (get_request_var('type_id') == '-1') {
 		/* Show all items */
 	}else{
-		$sql_where .= (strlen($sql_where) ? ' AND ': ' WHERE ') . "(mac_track_device_types.device_type=" . get_request_var('type_id') . ")";
+		$sql_where .= (strlen($sql_where) ? ' AND ': ' WHERE ') . "(mtdt.device_type=" . get_request_var('type_id') . ")";
 	}
 
 	$sql_order = get_order_string();
@@ -887,7 +877,7 @@ function mactrack_get_device_types(&$sql_where, $rows, $apply_limits = TRUE) {
 	}
 
 	$query_string = "SELECT *
-		FROM mac_track_device_types
+		FROM mac_track_device_types AS mtdt
 		$sql_where
 		$sql_order
 		$sql_limit";
@@ -908,7 +898,7 @@ function mactrack_device_type() {
 		$rows = get_request_var('rows');
 	}
 
-	html_start_box(__('MacTrack Device Type Filters'), '100%', '', '3', 'center', 'mactrack_device_types.php?action=edit');
+	html_start_box(__('Device Tracking Device Type Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_device_types.php?action=edit');
 	mactrack_device_type_filter();
 	html_end_box();
 
@@ -922,24 +912,27 @@ function mactrack_device_type() {
 
 	form_start('mactrack_device_types.php', 'chk');
 
-	$nav = html_nav_bar('mactrack_device_types.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 9, __('Device Types'), 'page', 'main');
+	$display_text = array(
+		'description'          => array(__('Device Type Description', 'mactrack'), 'ASC'),
+		'vendor'               => array(__('Devices', 'mactrack'), 'DESC'),
+		'device_type'          => array(__('Device Type', 'mactrack'), 'DESC'),
+		'scanning_function'    => array(__('Port Scanner', 'mactrack'), 'ASC'),
+		'ip_scanning_function' => array(__('IP Scanner', 'mactrack'), 'ASC'),
+		'sysDescr_match'       => array(__('sysDescription Match', 'mactrack'), 'DESC'),
+		'sysObjectID_match'    => array(__('Vendor OID Match', 'mactrack'), 'DESC')
+	);
+
+	$columns = sizeof($display_text) + 1;
+
+	$nav = html_nav_bar('mactrack_device_types.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Device Types', 'mactrack'), 'page', 'main');
 
 	print $nav;
 
 	html_start_box('', '100%', '', '3', 'center', '');
 
-	$display_text = array(
-		'description'          => array(__('Device Type Description'), 'ASC'),
-		'vendor'               => array(__('Devices'), 'DESC'),
-		'device_type'          => array(__('Device Type'), 'DESC'),
-		'scanning_function'    => array(__('Port Scanner'), 'ASC'),
-		'ip_scanning_function' => array(__('IP Scanner'), 'ASC'),
-		'sysDescr_match'       => array(__('sysDescription Match'), 'DESC'),
-		'sysObjectID_match'    => array(__('Vendor OID Match'), 'DESC'));
-
 	html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
-	if (sizeof($device_types) > 0) {
+	if (sizeof($device_types)) {
 		foreach ($device_types as $device_type) {
 			form_alternate_row('line' . $device_type['device_type_id'], true);
 			form_selectable_cell('<a class="linkEditMain" href="mactrack_device_types.php?action=edit&device_type_id=' . $device_type['device_type_id'] . '">' . $device_type['description'] . '</a>', $device_type['device_type_id']);
@@ -953,7 +946,7 @@ function mactrack_device_type() {
 			form_end_row();
 		}
 	}else{
-		print '<tr><td colspan="10"><em>' . __('No MacTrack Device Types') . '</em></td></tr>';
+		print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Device Types Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);
@@ -977,17 +970,17 @@ function mactrack_device_type_filter() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Search');?>
+						<?php print __('Search', 'mactrack');?>
 					</td>
 					<td>
 						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter');?>'>
 					</td>
 					<td>
-						<?php print __('Device Types');?>
+						<?php print __('Device Types', 'mactrack');?>
 					</td>
 					<td>
 						<select id='rows' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default');?></option>
+							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack');?></option>
 							<?php
 							if (sizeof($item_rows)) {
 								foreach ($item_rows as $key => $value) {
@@ -998,19 +991,13 @@ function mactrack_device_type_filter() {
 						</select>
 					</td>
 					<td>
-						<input type='submit' id='go' title='<?php print __('Submit Query');?>' value='<?php print __('Go');?>'>
-					</td>
-					<td>
-						<input type='button' id='clear' title='<?php print __('Clear Filtered Results');?>' value='<?php print __('Clear');?>'>
-					</td>
-					<td>
-						<input type='button' id='scan' title='<?php print __('Scan Active Devices for Unknown Device Types');?>' value='<?php print __('Rescan');?>'>
-					</td>
-					<td>
-						<input type='button' id='import' title='<?php print __('Import Device Types from a CSV File');?>' value='<?php print __('Import');?>'>
-					</td>
-					<td>
-						<input type='button' id='export' title='<?php print __('Export Device Types to Share with Others');?>' value='<?php print __('Export');?>'>
+						<span class='nowrap'>
+							<input type='submit' id='go' title='<?php print __esc('Submit Query');?>' value='<?php print __esc('Go');?>'>
+							<input type='button' id='clear' title='<?php print __esc('Clear Filtered Results');?>' value='<?php print __esc('Clear');?>'>
+							<input type='button' id='scan' title='<?php print __esc('Scan Active Devices for Unknown Device Types');?>' value='<?php print __esc('Rescan');?>'>
+							<input type='button' id='import' title='<?php print __esc('Import Device Types from a CSV File');?>' value='<?php print __esc('Import');?>'>
+							<input type='button' id='export' title='<?php print __esc('Export Device Types to Share with Others');?>' value='<?php print __esc('Export');?>'>
+						</span>
 					</td>
 					<td>
 						<span id="text" style="display:none;"></span>
@@ -1020,11 +1007,11 @@ function mactrack_device_type_filter() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Vendor');?>
+						<?php print __('Vendor', 'mactrack');?>
 					</td>
 					<td>
 						<select id='vendor' onChange='applyFilter()'>
-							<option value='All'<?php if (get_request_var('vendor') == 'All') print ' selected';?>><?php print __('All');?></option>
+							<option value='All'<?php if (get_request_var('vendor') == 'All') print ' selected';?>><?php print __('All', 'mactrack');?></option>
 							<?php
 							$types = db_fetch_assoc('SELECT DISTINCT vendor from mac_track_device_types ORDER BY vendor');
 
@@ -1037,14 +1024,14 @@ function mactrack_device_type_filter() {
 						</select>
 					</td>
 					<td>
-						<?php print __('Type');?>
+						<?php print __('Type', 'mactrack');?>
 					</td>
 					<td>
 						<select id='type_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('type_id') == '-1') print ' selected';?>><?php print __('All');?></option>
-							<option value='1'<?php if (get_request_var('type_id') == '1') print ' selected';?>><?php print __('Switch/Hub');?></option>
-							<option value='2'<?php if (get_request_var('type_id') == '2') print ' selected';?>><?php print __('Switch/Router');?></option>
-							<option value='3'<?php if (get_request_var('type_id') == '3') print ' selected';?>><?php print __('Router');?></option>
+							<option value='-1'<?php if (get_request_var('type_id') == '-1') print ' selected';?>><?php print __('All', 'mactrack');?></option>
+							<option value='1'<?php if (get_request_var('type_id') == '1') print ' selected';?>><?php print __('Switch/Hub', 'mactrack');?></option>
+							<option value='2'<?php if (get_request_var('type_id') == '2') print ' selected';?>><?php print __('Switch/Router', 'mactrack');?></option>
+							<option value='3'<?php if (get_request_var('type_id') == '3') print ' selected';?>><?php print __('Router', 'mactrack');?></option>
 						</select>
 					</td>
 				</tr>
@@ -1110,3 +1097,4 @@ function mactrack_device_type_filter() {
 	</tr>
 	<?php
 }
+

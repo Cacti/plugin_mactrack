@@ -33,6 +33,9 @@ Bug and feature enhancements for the webseer plugin are handled in GitHub. If yo
 
 ## ChangeLog
 
+--- 4.1 ---
+* feature: Updates to facilitate i18n by contributors
+
 --- 4.0 ---
 * feature: Cacti 1.0 compatibility 
 * feature: i18n MacTrack

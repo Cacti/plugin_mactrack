@@ -29,7 +29,7 @@ include('./lib/html_tree.php');
 include('./plugins/mactrack/lib/mactrack_functions.php');
 include('./lib/timespan_settings.php');
 
-$title = __('Device Tracking - Monitored Device Graph View');
+$title = __('Device Tracking - Monitored Device Graph View', 'mactrack');
 
 set_default_action();
 
@@ -68,7 +68,7 @@ function mactrack_view_graphs() {
 	$hosts = $_SESSION['sess_mt_hosts'];
 
 	/* include graph view filter selector */
-	html_start_box($title . (isset_request_var('style') && strlen(get_request_var('style')) ? ' [ ' . __('Custom Graph List Applied - Filtering from List') . ' ]':''), '100%', '', '3', 'center', '');
+	html_start_box($title . (isset_request_var('style') && strlen(get_request_var('style')) ? ' [ ' . __('Custom Graph List Applied - Filtering from List', 'mactrack') . ' ]':''), '100%', '', '3', 'center', '');
 
 	if ($hosts != '') {
 		$hq = 'h.id IN (' . $hosts . ')';
@@ -90,7 +90,6 @@ function mactrack_view_graphs() {
 	$sql_or = '';
 	if (isset_request_var('style')) {
 		if (get_request_var('style') == 'selective') {
-
 			/* process selected graphs */
 			if (!isempty_request_var('graph_list')) {
 				foreach (explode(',',get_request_var('graph_list')) as $item) {
@@ -99,11 +98,13 @@ function mactrack_view_graphs() {
 			}else{
 				$graph_list = array();
 			}
+
 			if (!isempty_request_var('graph_add')) {
 				foreach (explode(',',get_request_var('graph_add')) as $item) {
 					$graph_list[$item] = 1;
 				}
 			}
+
 			/* remove items */
 			if (!isempty_request_var('graph_remove')) {
 				foreach (explode(',',get_request_var('graph_remove')) as $item) {
@@ -150,7 +151,7 @@ function mactrack_view_graphs() {
 
 	$nav_url = preg_replace('/((\?|&)host_id=[0-9]+|(\?|&)filter=[a-zA-Z0-9]*)/', '', $nav_url);
 
-	$nav = html_nav_bar($nav_url, MAX_DISPLAY_PAGES, get_request_var('page'), get_request_var('graphs'), $total_graphs, get_request_var('columns'), 'Graphs', 'page', 'main');
+	$nav = html_nav_bar($nav_url, MAX_DISPLAY_PAGES, get_request_var('page'), get_request_var('graphs'), $total_graphs, get_request_var('columns'), __('Graphs', 'mactrack'), 'page', 'main');
 
 	print $nav;
 

@@ -66,7 +66,7 @@ function mactrack_vmacs_validate_request_vars() {
 			)
 	);
 
-	validate_store_request_vars($filters, 'sess_mactrack_vmacs');
+	validate_store_request_vars($filters, 'sess_mt_vmacs');
 	/* ================= input validation ================= */
 }
 
@@ -136,7 +136,7 @@ function mactrack_vmacs() {
 		$rows = get_request_var('rows');
 	}
 
-	html_start_box(__('MacTrack Vendor Mac Filter'), '100%', '', '3', 'center', '');
+	html_start_box(__('Device Tracking Vendor Mac Filter', 'mactrack'), '100%', '', '3', 'center', '');
 	mactrack_vmac_filter();
 	html_end_box();
 
@@ -149,16 +149,19 @@ function mactrack_vmacs() {
 		FROM mac_track_oui_database
 		$sql_where");
 
-	$nav = html_nav_bar('mactrack_vendormacs.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 9, __('Vendor Macs'), 'page', 'main');
+	$display_text = array(
+		'vendor_mac'     => array(__('Vendor MAC', 'mactrack'), 'ASC'),
+		'vendor_name'    => array(__('Corporation', 'mactrack'), 'ASC'),
+		'vendor_address' => array(__('Address', 'mactrack'), 'ASC')
+	);
+
+	$columns = sizeof($display_text);
+
+	$nav = html_nav_bar('mactrack_vendormacs.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Vendor Macs', 'mactrack'), 'page', 'main');
 
 	print $nav;
 
 	html_start_box('', '100%', '', '3', 'center', '');
-
-	$display_text = array(
-		'vendor_mac'     => array(__('Vendor MAC'), 'ASC'),
-		'vendor_name'    => array(__('Corporation'), 'ASC'),
-		'vendor_address' => array(__('Address'), 'ASC'));
 
 	html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
@@ -167,13 +170,13 @@ function mactrack_vmacs() {
 			form_alternate_row();
 				?>
 				<td class='linkEditMain'><?php print $vmac['vendor_mac'];?></td>
-				<td><?php print (get_request_var('filter') != '' ? preg_replace('/(' . preg_quote(get_request_var('filter')) . ')/i', "<span class='filteredValue'>\\1</span>", $vmac['vendor_name']) : $vmac['vendor_name']);?></td>
-				<td><?php print (get_request_var('filter') != '' ? preg_replace('/(' . preg_quote(get_request_var('filter')) . ')/i', "<span class='filteredValue'>\\1</span>", $vmac['vendor_address']) : $vmac['vendor_address']);?></td>
+				<td><?php print filter_value($vmac['vendor_name'], get_request_var('filter'));?></td>
+				<td><?php print filter_value($vmac['vendor_address'], get_request_var('filter'));?></td>
 			</tr>
 			<?php
 		}
 	}else{
-		print '<tr><td><em>' . __('No MacTrack Vendor MACS') . '</em></td></tr>';
+		print '<tr><td colspen="' . $columns . '"><em>' . __('No Device Tracking Vendor MACS Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);
@@ -193,17 +196,17 @@ function mactrack_vmac_filter() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Search');?>
+						<?php print __('Search', 'mactrack');?>
 					</td>
 					<td>
 						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter');?>'>
 					</td>
 					<td>
-						<?php print __('MAC\'s');?>
+						<?php print __('MAC\'s', 'mactrack');?>
 					</td>
 					<td>
 						<select id='rows' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default');?></option>
+							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack');?></option>
 							<?php
 							if (sizeof($item_rows) > 0) {
 							foreach ($item_rows as $key => $value) {
@@ -214,13 +217,11 @@ function mactrack_vmac_filter() {
 						</select>
 					</td>
 					<td>
-						<input type='submit' id='go' value='<?php print __('Go');?>'>
-					</td>
-					<td>
-						<input type='button' id='clear' value='<?php print __('Clear');?>'>
-					</td>
-					<td>
-						<input type='button' id='export' value='<?php print __('Export');?>'>
+						<span class='nowrap'>
+							<input type='submit' id='go' value='<?php print __esc('Go', 'mactrack');?>'>
+							<input type='button' id='clear' value='<?php print __esc('Clear', 'mactrack');?>'>
+							<input type='button' id='export' value='<?php print __esc('Export', 'mactrack');?>'>
+						</span>
 					</td>
 				</tr>
 			</table>
@@ -264,3 +265,4 @@ function mactrack_vmac_filter() {
 	</tr>
 	<?php
 }
+

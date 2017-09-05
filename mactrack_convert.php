@@ -113,7 +113,7 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 	}
 }
 
-function mactrack_create_partitioned_table($engine = 'MyISAM', $days = 30, $migrate = false) {
+function mactrack_create_partitioned_table($engine = 'InnoDB', $days = 30, $migrate = false) {
 	global $config;
 
 	/* rename the original table */
@@ -156,12 +156,14 @@ function mactrack_create_partitioned_table($engine = 'MyISAM', $days = 30, $migr
 	$now = time();
 
 	$parts = '';
+
 	for($i = $days; $i > 0; $i--) {
 		$timestamp = $now - ($i * 86400);
 		$date     = date('Y-m-d', $timestamp);
 		$format   = date('Ymd', $timestamp);
 		$parts .= ($parts != '' ? ",\n":'(') . ' PARTITION d' . $format . " VALUES LESS THAN (TO_DAYS('" . $date . "'))";
 	}
+
 	$parts .= ",\nPARTITION dMaxValue VALUES LESS THAN MAXVALUE);";
 
 	$return_value = db_execute($sql . $parts);
@@ -169,19 +171,30 @@ function mactrack_create_partitioned_table($engine = 'MyISAM', $days = 30, $migr
 	if ($return_value) {
 		if ($migrate) {
 			print "NOTE: Migrating Old Data to Partitioned Tables\n";
-			$scan_dates = db_fetch_assoc('SELECT DISTINCT scan_date FROM mac_track_ports_backup');
+
+			$scan_dates = db_fetch_assoc('SELECT DISTINCT scan_date 
+				FROM mac_track_ports_backup');
 
 			if (sizeof($scan_dates)) {
-			foreach($scan_dates as $sd) {
-				db_execute("INSERT INTO mac_track_ports SELECT * FROM mac_track_ports_backups WHERE scan_date='" . $sd['scan_date'] . "'");
-				db_execute("DELETE FROM mac_track_ports_backup WHERE scan_date='" . $sd['scan_date'] . "'");
-			}
+				foreach($scan_dates as $sd) {
+					db_execute_prepared('INSERT INTO mac_track_ports 
+						SELECT * 
+						FROM mac_track_ports_backups 
+						WHERE scan_date = ?', 
+						array($sd['scan_date']));
+
+					db_execute_prepared('DELETE FROM mac_track_ports_backup 
+						WHERE scan_date = ?',
+						array($sd['scan_date']));
+				}
 			}
 		}
 
 		db_execute('DROP TABLE mac_track_ports_backup');
 
-		db_execute("REPLACE INTO `settings` SET name='mt_data_retention', value='$days'");
+		db_execute('REPLACE INTO `settings` 
+			SET name = "mt_data_retention", value = ?',
+			array($days));
 	}else{
 		print "FATAL: Conversion to Partitioned Table Failed\n";
 
@@ -198,7 +211,8 @@ function display_version() {
 	}
 
 	$info = plugin_mactrack_version();
-	print 'MacTrack Convert Partitioned, Version ' . $info['version'] . ", " . COPYRIGHT_YEARS . "\n";
+
+	print 'Device Tracking Convert Partitioned, Version ' . $info['version'] . ", " . COPYRIGHT_YEARS . "\n";
 }
 
 /*	display_help - displays the usage of the function */
@@ -213,4 +227,3 @@ function display_help () {
 	print "-h --help     - Display this help message\n";
 }
 
-?>

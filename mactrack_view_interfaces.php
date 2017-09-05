@@ -28,7 +28,7 @@ include('./include/auth.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 ini_set('memory_limit', '256M');
 
-$title = __('Device Tracking - Network Interfaces View');
+$title = __('Device Tracking - Network Interfaces View', 'mactrack');
 
 /* check actions */
 if (isset_request_var('export')) {
@@ -197,7 +197,7 @@ function mactrack_interfaces_request_validation() {
 			),
 	);
 
-	validate_store_request_vars($filters, 'sess_mactrack_int');
+	validate_store_request_vars($filters, 'sess_mtv_int');
 	/* ================= input validation ================= */
 }
 
@@ -286,13 +286,15 @@ function mactrack_view() {
 
 	$total_rows = db_fetch_cell($rows_query_string);
 
-	$nav = html_nav_bar('mactrack_view_interfaces.php?report=interfaces', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 22, __('Interfaces'), 'page', 'main');
+	$display_text = mactrack_display_array();
+
+	$columns = sizeof($display_text);
+
+	$nav = html_nav_bar('mactrack_view_interfaces.php?report=interfaces', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Interfaces', 'mactrack'), 'page', 'main');
 
 	print $nav;
 
 	html_start_box('', '100%', '', '3', 'center', '');
-
-	$display_text = mactrack_display_array();
 
 	html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
@@ -317,7 +319,7 @@ function mactrack_view() {
 			print mactrack_format_interface_row($stat);
 		}
 	}else{
-		print '<tr><td colspan="7"><em>' . __('No MacTrack Interfaces Found') . '</em></td></tr>';
+		print '<tr><td colspan="7"><em>' . __('No Device Tracking Interfaces Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);
@@ -330,12 +332,12 @@ function mactrack_view() {
 
 	html_start_box('', '100%', '', '3', 'center', '');
 	print '<tr>';
-	mactrack_legend_row('int_up', 'Interface Up');
-	mactrack_legend_row('int_up_wo_alias', 'No Alias');
-	mactrack_legend_row('int_errors', 'Errors Present');
-	mactrack_legend_row('int_discards', 'Discards Present');
-	mactrack_legend_row('int_no_graph', 'No Graphs');
-	mactrack_legend_row('int_down', 'Interface Down');
+	mactrack_legend_row('int_up', __('Interface Up', 'mactrack'));
+	mactrack_legend_row('int_up_wo_alias', __('No Alias', 'mactrack'));
+	mactrack_legend_row('int_errors', __('Errors Present', 'mactrack'));
+	mactrack_legend_row('int_discards', __('Discards Present', 'mactrack'));
+	mactrack_legend_row('int_no_graph', __('No Graphs', 'mactrack'));
+	mactrack_legend_row('int_down', __('Interface Down', 'mactrack'));
 	print '</tr>';
 	html_end_box(false);
 
@@ -352,34 +354,34 @@ function mactrack_view() {
 
 function mactrack_display_array() {
 	$display_text = array();
-	$display_text += array('nosort'            => array('Actions', 'ASC'));
-	$display_text += array('hostname'          => array('Hostname', 'ASC'));
-	$display_text += array('device_type'       => array('Type', 'ASC'));
-	$display_text += array('ifName'            => array('Name', 'ASC'));
-	$display_text += array('ifDescr'           => array('Description', 'ASC'));
-	$display_text += array('ifAlias'           => array('Alias', 'ASC'));
-	$display_text += array('inBound'           => array('InBound %', 'DESC'));
-	$display_text += array('outBound'          => array('OutBound %', 'DESC'));
-	$display_text += array('int_ifHCInOctets'  => array('In (B/S)', 'DESC'));
-	$display_text += array('int_ifHCOutOctets' => array('Out (B/S)', 'DESC'));
+	$display_text += array('nosort'            => array(__('Actions', 'mactrack'), 'ASC'));
+	$display_text += array('hostname'          => array(__('Hostname', 'mactrack'), 'ASC'));
+	$display_text += array('device_type'       => array(__('Type', 'mactrack'), 'ASC'));
+	$display_text += array('ifName'            => array(__('Name', 'mactrack'), 'ASC'));
+	$display_text += array('ifDescr'           => array(__('Description', 'mactrack'), 'ASC'));
+	$display_text += array('ifAlias'           => array(__('Alias', 'mactrack'), 'ASC'));
+	$display_text += array('inBound'           => array(__('InBound %', 'mactrack'), 'DESC'));
+	$display_text += array('outBound'          => array(__('OutBound %', 'mactrack'), 'DESC'));
+	$display_text += array('int_ifHCInOctets'  => array(__('In (B/S)', 'mactrack'), 'DESC'));
+	$display_text += array('int_ifHCOutOctets' => array(__('Out (B/S)', 'mactrack'), 'DESC'));
 
 	if (get_request_var('totals') == 'true') {
-		$display_text += array('ifInErrors'            => array('In Err Total', 'DESC'));
-		$display_text += array('ifInDiscards'          => array('In Disc Total', 'DESC'));
-		$display_text += array('ifInUnknownProtos'     => array('UProto Total', 'DESC'));
-		$display_text += array('ifOutErrors'           => array('Out Err Total', 'DESC'));
-		$display_text += array('ifOutDiscards'         => array('Out Disc Total', 'DESC'));
+		$display_text += array('ifInErrors'            => array(__('In Err Total', 'mactrack'), 'DESC'));
+		$display_text += array('ifInDiscards'          => array(__('In Disc Total', 'mactrack'), 'DESC'));
+		$display_text += array('ifInUnknownProtos'     => array(__('UProto Total', 'mactrack'), 'DESC'));
+		$display_text += array('ifOutErrors'           => array(__('Out Err Total', 'mactrack'), 'DESC'));
+		$display_text += array('ifOutDiscards'         => array(__('Out Disc Total', 'mactrack'), 'DESC'));
 	}else{
-		$display_text += array('int_ifInErrors'        => array('In Err (E/S)', 'DESC'));
-		$display_text += array('int_ifInDiscards'      => array('In Disc (D/S)', 'DESC'));
-		$display_text += array('int_ifInUnknownProtos' => array('UProto (UP/S)', 'DESC'));
-		$display_text += array('int_ifOutErrors'       => array('Out Err (OE/S)', 'DESC'));
-		$display_text += array('int_ifOutDiscards'     => array('Out Disc (OD/S)', 'DESC'));
+		$display_text += array('int_ifInErrors'        => array(__('In Err (E/S)', 'mactrack'), 'DESC'));
+		$display_text += array('int_ifInDiscards'      => array(__('In Disc (D/S)', 'mactrack'), 'DESC'));
+		$display_text += array('int_ifInUnknownProtos' => array(__('UProto (UP/S)', 'mactrack'), 'DESC'));
+		$display_text += array('int_ifOutErrors'       => array(__('Out Err (OE/S)', 'mactrack'), 'DESC'));
+		$display_text += array('int_ifOutDiscards'     => array(__('Out Disc (OD/S)', 'mactrack'), 'DESC'));
 	}
 
-	$display_text += array('ifOperStatus' => array('Status', 'ASC'));
-	$display_text += array('ifLastChange' => array('Last Change', 'ASC'));
-	$display_text += array('last_rundate' => array('Last Scanned', 'ASC'));
+	$display_text += array('ifOperStatus' => array(__('Status', 'mactrack'), 'ASC'));
+	$display_text += array('ifLastChange' => array(__('Last Change', 'mactrack'), 'ASC'));
+	$display_text += array('last_rundate' => array(__('Last Scanned', 'mactrack'), 'ASC'));
 
 	return $display_text;
 }
@@ -394,45 +396,45 @@ function mactrack_filter_table() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Site');?>
+						<?php print __('Site', 'mactrack');?>
 					</td>
 					<td>
 						<select id='site_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('All');?></option>
+							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack');?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT site_id, site_name FROM mac_track_sites ORDER BY site_name');
-							if (sizeof($sites) > 0) {
-							foreach ($sites as $site) {
-								print '<option value="' . $site['site_id'] .'"'; if (get_request_var('site_id') == $site['site_id']) { print ' selected'; } print '>' . $site['site_name'] . '</option>';
-							}
+							if (sizeof($sites)) {
+								foreach ($sites as $site) {
+									print '<option value="' . $site['site_id'] .'"'; if (get_request_var('site_id') == $site['site_id']) { print ' selected'; } print '>' . $site['site_name'] . '</option>';
+								}
 							}
 							?>
 						</select>
 					</td>
 					<td>
-						<?php print __('Filters');?>
+						<?php print __('Filters', 'mactrack');?>
 					</td>
 					<td>
 						<select id='issues' onChange='applyFilter()'>
-							<option value='-2'<?php if (get_request_var('issues') == '-2') {?> selected<?php }?>><?php print __('All Interfaces');?></option>
-							<option value='-3'<?php if (get_request_var('issues') == '-3') {?> selected<?php }?>><?php print __('All Non-Ignored Interfaces');?></option>
-							<option value='-4'<?php if (get_request_var('issues') == '-4') {?> selected<?php }?>><?php print __('All Ignored Interfaces');?></option>
-							<?php if (get_request_var('bwusage') != '-1') {?><option value='9'<?php if (get_request_var('issues') == '9' && get_request_var('bwusage') != '-1') {?> selected<?php }?>><?php print __('High In/Out Utilization > %d &#37;', get_request_var('bwusage'));?></option><?php }?>
-							<?php if (get_request_var('bwusage') != '-1') {?><option value='10'<?php if (get_request_var('issues') == '10' && get_request_var('bwusage') != '-1') {?> selected<?php }?>><?php print __('High In Utilization > %d &#37;', get_request_var('bwusage'));?></option><?php }?>
-							<?php if (get_request_var('bwusage') != '-1') {?><option value='11'<?php if (get_request_var('issues') == '11' && get_request_var('bwusage') != '-1') {?> selected<?php }?>><?php print __('High Out Utilization > %d &#37;', get_request_var('bwusage'));?></option><?php }?>
-							<option value='-1'<?php if (get_request_var('issues') == '-1') {?> selected<?php }?>><?php print __('With Issues');?></option>
-							<option value='0'<?php if (get_request_var('issues') == '0') {?> selected<?php }?>><?php print __('Up Interfaces');?></option>
-							<option value='1'<?php if (get_request_var('issues') == '1') {?> selected<?php }?>><?php print __('Up Interfaces No Alias');?></option>
-							<option value='2'<?php if (get_request_var('issues') == '2') {?> selected<?php }?>><?php print __('Errors Accumulating');?></option>
-							<option value='3'<?php if (get_request_var('issues') == '3') {?> selected<?php }?>><?php print __('Discards Accumulating');?></option>
-							<option value='7'<?php if (get_request_var('issues') == '7') {?> selected<?php }?>><?php print __('Changed in Last Day');?></option>
+							<option value='-2'<?php if (get_request_var('issues') == '-2') {?> selected<?php }?>><?php print __('All Interfaces', 'mactrack');?></option>
+							<option value='-3'<?php if (get_request_var('issues') == '-3') {?> selected<?php }?>><?php print __('All Non-Ignored Interfaces', 'mactrack');?></option>
+							<option value='-4'<?php if (get_request_var('issues') == '-4') {?> selected<?php }?>><?php print __('All Ignored Interfaces', 'mactrack');?></option>
+							<?php if (get_request_var('bwusage') != '-1') {?><option value='9'<?php if (get_request_var('issues') == '9' && get_request_var('bwusage') != '-1') {?> selected<?php }?>><?php print __('High In/Out Utilization > %d &#37;', get_request_var('bwusage'), 'mactrack');?></option><?php }?>
+							<?php if (get_request_var('bwusage') != '-1') {?><option value='10'<?php if (get_request_var('issues') == '10' && get_request_var('bwusage') != '-1') {?> selected<?php }?>><?php print __('High In Utilization > %d &#37;', get_request_var('bwusage'), 'mactrack');?></option><?php }?>
+							<?php if (get_request_var('bwusage') != '-1') {?><option value='11'<?php if (get_request_var('issues') == '11' && get_request_var('bwusage') != '-1') {?> selected<?php }?>><?php print __('High Out Utilization > %d &#37;', get_request_var('bwusage'), 'mactrack');?></option><?php }?>
+							<option value='-1'<?php if (get_request_var('issues') == '-1') {?> selected<?php }?>><?php print __('With Issues', 'mactrack');?></option>
+							<option value='0'<?php if (get_request_var('issues') == '0') {?> selected<?php }?>><?php print __('Up Interfaces', 'mactrack');?></option>
+							<option value='1'<?php if (get_request_var('issues') == '1') {?> selected<?php }?>><?php print __('Up Interfaces No Alias', 'mactrack');?></option>
+							<option value='2'<?php if (get_request_var('issues') == '2') {?> selected<?php }?>><?php print __('Errors Accumulating', 'mactrack');?></option>
+							<option value='3'<?php if (get_request_var('issues') == '3') {?> selected<?php }?>><?php print __('Discards Accumulating', 'mactrack');?></option>
+							<option value='7'<?php if (get_request_var('issues') == '7') {?> selected<?php }?>><?php print __('Changed in Last Day', 'mactrack');?></option>
 						</select><BR>
 					<td>
-						<?php print __('Bandwidth');?>
+						<?php print __('Bandwidth', 'mactrack');?>
 					</td>
 					<td>
 						<select id='bwusage' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('bwusage') == '-1') {?> selected<?php }?>><?php print __('N/A');?></option>
+							<option value='-1'<?php if (get_request_var('bwusage') == '-1') {?> selected<?php }?>><?php print __('N/A', 'mactrack');?></option>
 							<?php
 							for ($bwpercent = 10; $bwpercent <100; $bwpercent+=10) {
 								?><option value='<?php print $bwpercent; ?>' <?php if (isset_request_var('bwusage') and (get_request_var('bwusage') == $bwpercent)) {?> selected<?php }?>> >=<?php print $bwpercent; ?>%</option><?php
@@ -441,24 +443,22 @@ function mactrack_filter_table() {
 						</select>
 					</td>
 					<td>
-						<input type='submit' id='go' value='<?php print __('Go');?>'>
-					</td>
-					<td>
-						<input type='button' id='clear' value='<?php print __('Clear');?>'>
-					</td>
-					<td>
-						<input type='button' id='export' value='<?php print __('Export');?>'>
+						<span class='nowrap'>
+							<input type='submit' id='go' value='<?php print __esc('Go', 'mactrack');?>'>
+							<input type='button' id='clear' value='<?php print __esc('Clear', 'mactrack');?>'>
+							<input type='button' id='export' value='<?php print __esc('Export', 'mactrack');?>'>
+						</span>
 					</td>
 				</tr>
 			</table>
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Type');?>
+						<?php print __('Type', 'mactrack');?>
 					</td>
 					<td>
 						<select id='device_type_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('device_type_id') == '-1') {?> selected<?php }?>><?php print __('All');?></option>
+							<option value='-1'<?php if (get_request_var('device_type_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack');?></option>
 							<?php
 							$sql_where = '';
 							if (get_request_var('site_id') != -1) {
@@ -476,19 +476,19 @@ function mactrack_filter_table() {
 								ORDER BY device_type");
 
 							if (sizeof($types)) {
-							foreach ($types as $type) {
-								print '<option value="' . $type['device_type_id'] .'"'; if (get_request_var('device_type_id') == $type['device_type_id']) { print ' selected'; } print '>' . $type['device_type'] . '</option>';
-							}
+								foreach ($types as $type) {
+									print '<option value="' . $type['device_type_id'] .'"'; if (get_request_var('device_type_id') == $type['device_type_id']) { print ' selected'; } print '>' . $type['device_type'] . '</option>';
+								}
 							}
 							?>
 						</select>
 					</td>
 					<td>
-						<?php print __('Device');?>
+						<?php print __('Device', 'mactrack');?>
 					</td>
 					<td>
 						<select id='device_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('device_id') == '-1') {?> selected<?php }?>><?php print __('All');?></option>
+							<option value='-1'<?php if (get_request_var('device_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack');?></option>
 							<?php
 							$sql_where = '';
 							if (get_request_var('site_id') != -1) {
@@ -509,15 +509,15 @@ function mactrack_filter_table() {
 						</select>
 					</td>
 					<td>
-						<?php print __('Interfaces');?>
+						<?php print __('Interfaces', 'mactrack');?>
 					</td>
 					<td>
 						<select id='rows' onChange='applyFilter()'>
 							<?php
 							if (sizeof($rows_selector)) {
-							foreach ($rows_selector as $key => $value) {
-								print '<option value="' . $key . '"'; if (get_request_var('rows') == $key) { print 'selected'; } print '>' . $value . '</option>';
-							}
+								foreach ($rows_selector as $key => $value) {
+									print '<option value="' . $key . '"'; if (get_request_var('rows') == $key) { print 'selected'; } print '>' . $value . '</option>';
+								}
 							}
 							?>
 						</select>
@@ -527,7 +527,7 @@ function mactrack_filter_table() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Search');?>
+						<?php print __('Search', 'mactrack');?>
 					</td>
 					<td>
 						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter');?>'>
@@ -536,7 +536,7 @@ function mactrack_filter_table() {
 						<input type='checkbox' id='totals' onChange='applyFilter()' <?php print (get_request_var('totals') == 'true' ? 'checked':'');?>>
 					</td>
 					<td>
-						<label for='totals'><?php print __('Show Totals');?></label>
+						<label for='totals'><?php print __('Show Totals', 'mactrack');?></label>
 					</td>
 				</tr>
 			</table>
@@ -585,3 +585,4 @@ function mactrack_filter_table() {
 		</td>
 	</tr><?php
 }
+

@@ -42,3 +42,4 @@ case 'disable':
 	mactrack_disable();
 	break;
 }
+

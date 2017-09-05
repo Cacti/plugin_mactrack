@@ -93,7 +93,7 @@ function display_version() {
 	}
 
 	$info = plugin_mactrack_version();
-	print "MacTrack Import OUI Database, Version " . $info["version"] . ", " . COPYRIGHT_YEARS . "\n";
+	print "Device Tracking Import OUI Database, Version " . $info["version"] . ", " . COPYRIGHT_YEARS . "\n";
 }
 
 /*	display_help - displays the usage of the function */
@@ -107,3 +107,4 @@ function display_help () {
 	print "-v -V --version  - Display this help message\n";
 	print "-h --help        - Display this help message\n";
 }
+

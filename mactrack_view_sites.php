@@ -28,7 +28,7 @@ include('./include/auth.php');
 include_once('./include/global_arrays.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
-$title = __('Device Tracking - Site Report View');
+$title = __('Device Tracking - Site Report View', 'mactrack');
 
 if (isset_request_var('export')) {
 	mactrack_view_export_sites();
@@ -85,7 +85,10 @@ function mactrack_view_export_sites() {
 
 function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = TRUE) {
 	/* create SQL where clause */
-	$device_type_info = db_fetch_row_prepared('SELECT * FROM mac_track_device_types WHERE device_type_id = ?', array(get_request_var('device_type_id')));
+	$device_type_info = db_fetch_row_prepared('SELECT * 
+		FROM mac_track_device_types 
+		WHERE device_type_id = ?', 
+		array(get_request_var('device_type_id')));
 
 	$sql_where = '';
 
@@ -123,19 +126,21 @@ function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = TRUE
 			$sql_limit";
 	}else{
 		$query_string ="SELECT mac_track_sites.site_name, mac_track_sites.site_id,
-			Count(mac_track_device_types.device_type_id) AS total_devices,
+			COUNT(mac_track_device_types.device_type_id) AS total_devices,
 			mac_track_device_types.device_type_id,
 			mac_track_device_types.device_type,
 			mac_track_device_types.vendor,
 			mac_track_device_types.description,
-			Sum(mac_track_devices.ips_total) AS sum_ips_total,
-			Sum(mac_track_devices.ports_total) AS sum_ports_total,
-			Sum(mac_track_devices.ports_active) AS sum_ports_active,
-			Sum(mac_track_devices.ports_trunk) AS sum_ports_trunk,
-			Sum(mac_track_devices.macs_active) AS sum_macs_active
+			SUM(mac_track_devices.ips_total) AS sum_ips_total,
+			SUM(mac_track_devices.ports_total) AS sum_ports_total,
+			SUM(mac_track_devices.ports_active) AS sum_ports_active,
+			SUM(mac_track_devices.ports_trunk) AS sum_ports_trunk,
+			SUM(mac_track_devices.macs_active) AS sum_macs_active
 			FROM (mac_track_device_types
-			RIGHT JOIN mac_track_devices ON (mac_track_device_types.device_type_id = mac_track_devices.device_type_id))
-			RIGHT JOIN mac_track_sites ON (mac_track_devices.site_id = mac_track_sites.site_id)
+			RIGHT JOIN mac_track_devices 
+			ON mac_track_device_types.device_type_id = mac_track_devices.device_type_id)
+			RIGHT JOIN mac_track_sites 
+			ON mac_track_devices.site_id = mac_track_sites.site_id
 			$sql_where
 			GROUP BY mac_track_sites.site_name, mac_track_device_types.vendor, mac_track_device_types.description
 			HAVING (((Count(mac_track_device_types.device_type_id))>0))
@@ -191,7 +196,7 @@ function mactrack_sites_request_validation() {
 			),
 	);
 
-	validate_store_request_vars($filters, 'sess_mactrack_macw');
+	validate_store_request_vars($filters, 'sess_mtv_sites');
 	/* ================= input validation ================= */
 }
 
@@ -229,47 +234,51 @@ function mactrack_view_sites() {
 		$total_rows = sizeof(db_fetch_assoc("SELECT
 			mac_track_device_types.device_type_id, mac_track_sites.site_name
 			FROM (mac_track_device_types
-			RIGHT JOIN mac_track_devices ON (mac_track_device_types.device_type_id = mac_track_devices.device_type_id))
-			RIGHT JOIN mac_track_sites ON (mac_track_devices.site_id = mac_track_sites.site_id)
+			RIGHT JOIN mac_track_devices 
+			ON mac_track_device_types.device_type_id = mac_track_devices.device_type_id)
+			RIGHT JOIN mac_track_sites 
+			ON mac_track_devices.site_id = mac_track_sites.site_id
 			$sql_where
 			GROUP BY mac_track_sites.site_name, mac_track_device_types.device_type_id"));
 	}
 
-	$nav = html_nav_bar('mactrack_view_sites.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 11, __('Sites'), 'page', 'main');
-
-	print $nav;
-
-	html_start_box('', '100%', '', '3', 'center', '');
-
 	if (get_request_var('detail') == 'false') {
 		$display_text = array(
-			'nosort'              => array(__('Actions'), ''),
-			'site_name'           => array(__('Site Name'), 'ASC'),
-			'total_devices'       => array(__('Devices'), 'DESC'),
-			'total_ips'           => array(__('Total IP\'s'), 'DESC'),
-			'total_user_ports'    => array(__('User Ports'), 'DESC'),
-			'total_oper_ports'    => array(__('User Ports Up'), 'DESC'),
-			'total_macs'          => array(__('MACS Found'), 'DESC'),
-			'total_device_errors' => array(__('Device Errors'), 'DESC'));
+			'nosort'              => array(__('Actions', 'mactrack'), ''),
+			'site_name'           => array(__('Site Name', 'mactrack'), 'ASC'),
+			'total_devices'       => array(__('Devices', 'mactrack'), 'DESC'),
+			'total_ips'           => array(__('Total IP\'s', 'mactrack'), 'DESC'),
+			'total_user_ports'    => array(__('User Ports', 'mactrack'), 'DESC'),
+			'total_oper_ports'    => array(__('User Ports Up', 'mactrack'), 'DESC'),
+			'total_macs'          => array(__('MACS Found', 'mactrack'), 'DESC'),
+			'total_device_errors' => array(__('Device Errors', 'mactrack'), 'DESC'));
+
+		$columns = sizeof($display_text);
+
+		$nav = html_nav_bar('mactrack_view_sites.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Sites', 'mactrack'), 'page', 'main');
+
+		print $nav;
+
+		html_start_box('', '100%', '', '3', 'center', '');
 
 		html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
-		if (sizeof($sites) > 0) {
+		if (sizeof($sites)) {
 			foreach ($sites as $site) {
 				form_alternate_row('row_' . $site['site_id'], true);
 					?>
-					<td width=140>
+					<td class='nowrap' style='width:1px;'>
 						<?php
 						if (api_user_realm_auth('mactrack_sites.php')) {
-							echo "<a href='" . htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']) . "' title='" . __('Edit Site') . "'><img src='" . $webroot . "images/edit_object.png'></a>";
-							echo "<a href='#'><img id='r_" . $site['site_id'] . "' src='" . $webroot . "images/rescan_site.gif' alt='' onClick='site_scan(" . $site['site_id'] . ")' title='" . __('Rescan Site') . "'></a>";
+							echo "<a href='" . htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']) . "' title='" . __esc('Edit Site', 'mactrack') . "'><img src='" . $webroot . "images/edit_object.png'></a>";
+							echo "<a href='#'><img id='r_" . $site['site_id'] . "' src='" . $webroot . "images/rescan_site.gif' alt='' onClick='site_scan(" . $site['site_id'] . ")' title='" . __esc('Rescan Site', 'mactrack') . "'></a>";
 						}
 						?>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_devices.php?report=devices&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View Devices');?>'><img src='<?php print $webroot;?>images/view_devices.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_ips.php?report=ips&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View IP Ranges');?>'><img src='<?php print $webroot;?>images/view_networks.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_arp.php?report=arp&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View IP Addresses');?>'><img src='<?php print $webroot;?>images/view_ipaddresses.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']);?>' title='<?php print __('View MAC Addresses');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']);?>' title='<?php print __('View Interfaces');?>'><img src='<?php print $webroot;?>images/view_interfaces.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_devices.php?report=devices&reset&site_id=' . $site['site_id']);?>' title='<?php print __esc('View Devices', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_devices.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_ips.php?report=ips&reset&site_id=' . $site['site_id']);?>' title='<?php print __esc('View IP Ranges', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_networks.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_arp.php?report=arp&reset&site_id=' . $site['site_id']);?>' title='<?php print __esc('View IP Addresses', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_ipaddresses.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']);?>' title='<?php print __esc('View MAC Addresses', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']);?>' title='<?php print __esc('View Interfaces', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_interfaces.gif'></a>
 					</td>
 					<td class='hyperLink'>
 						<?php print filter_value($site['site_name'], get_request_var('filter'));?>
@@ -284,7 +293,7 @@ function mactrack_view_sites() {
 				<?php
 			}
 		}else{
-			print '<tr><td colspan="10"><em>' . __('No MacTrack Sites') . '</em></td></tr>';
+			print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Sites Found', 'mactrack') . '</em></td></tr>';
 		}
 
 		html_end_box(false);
@@ -296,17 +305,25 @@ function mactrack_view_sites() {
 		}
 	}else{
 		$display_text = array(
-			'nosort'           => array(__('Actions'), ''),
-			'site_name'        => array(__('Site Name'), 'ASC'),
-			'vendor'           => array(__('Vendor'), 'ASC'),
-			'description'      => array(__('Device Type'), 'DESC'),
-			'total_devices'    => array(__('Total Devices'), 'DESC'),
-			'sum_ips_total'    => array(__('Total IP\'s'), 'DESC'),
-			'sum_ports_total'  => array(__('Total User Ports'), 'DESC'),
-			'sum_ports_active' => array(__('Total Oper Ports'), 'DESC'),
-			'sum_ports_trunk'  => array(__('Total Trunks'), 'DESC'),
-			'sum_macs_active'  => array(__('MACS Found'), 'DESC')
+			'nosort'           => array(__('Actions', 'mactrack'), ''),
+			'site_name'        => array(__('Site Name', 'mactrack'), 'ASC'),
+			'vendor'           => array(__('Vendor', 'mactrack'), 'ASC'),
+			'description'      => array(__('Device Type', 'mactrack'), 'DESC'),
+			'total_devices'    => array(__('Total Devices', 'mactrack'), 'DESC'),
+			'sum_ips_total'    => array(__('Total IP\'s', 'mactrack'), 'DESC'),
+			'sum_ports_total'  => array(__('Total User Ports', 'mactrack'), 'DESC'),
+			'sum_ports_active' => array(__('Total Oper Ports', 'mactrack'), 'DESC'),
+			'sum_ports_trunk'  => array(__('Total Trunks', 'mactrack'), 'DESC'),
+			'sum_macs_active'  => array(__('MACS Found', 'mactrack'), 'DESC')
 		);
+
+		$columns = sizeof($display_text);
+
+		$nav = html_nav_bar('mactrack_view_sites.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Sites', 'mactrack'), 'page', 'main');
+
+		print $nav;
+
+		html_start_box('', '100%', '', '3', 'center', '');
 
 		html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
@@ -314,16 +331,16 @@ function mactrack_view_sites() {
 			foreach ($sites as $site) {
 				form_alternate_row();
 					?>
-					<td width=100>
+					<td class='nowrap' style='width:1px;'>
 						<?php
 						if (api_user_realm_auth('mactrack_sites.php')) {
-							echo "<a href='" . htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']) . "' title='" . __('Edit Site') . "'><img src='" . $webroot . "images/edit_object.png'></a>";
+							echo "<a href='" . htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']) . "' title='" . __esc('Edit Site', 'mactrack') . "'><img src='" . $webroot . "images/edit_object.png'></a>";
 						}
 						?>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_devices.php?report=devices&site_id=' . $site['site_id'] . '&device_type_id=' . $site['device_type_id'] . '&type_id=-1&status=-1&filter=');?>' title='<?php print __('View Devices');?>'><img src='<?php print $webroot;?>images/view_devices.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_ips.php?report=ips&reset&site_id=' . $site['site_id']);?>' title='<?php print __('View IP Ranges');?>'><img src='<?php print $webroot;?>images/view_networks.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']);?>' title='<?php print __('View MAC Addresses');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
-						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']);?>' title='<?php print __('View Interfaces');?>'><img src='<?php print $webroot;?>images/view_interfaces.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_devices.php?report=devices&site_id=' . $site['site_id'] . '&device_type_id=' . $site['device_type_id'] . '&type_id=-1&status=-1&filter=');?>' title='<?php print __esc('View Devices', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_devices.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_ips.php?report=ips&reset&site_id=' . $site['site_id']);?>' title='<?php print __esc('View IP Ranges', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_networks.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']);?>' title='<?php print __esc('View MAC Addresses', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
+						<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']);?>' title='<?php print __esc('View Interfaces', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_interfaces.gif'></a>
 					</td>
 					<td class='hyperLink'>
 						<?php print filter_value($site['site_name'], get_request_var('filter'));?>
@@ -331,16 +348,16 @@ function mactrack_view_sites() {
 					<td><?php print filter_value($site['vendor'], get_request_var('filter'));?>
 					<td><?php print filter_value($site['description'], get_request_var('filter'));?>
 					<td><?php print number_format_i18n($site['total_devices']);?></td>
-					<td><?php print ($site['device_type'] == '1' ? __('N/A') : number_format_i18n($site['sum_ips_total']));?></td>
-					<td><?php print ($site['device_type'] == '3' ? __('N/A') : number_format_i18n($site['sum_ports_total']));?></td>
-					<td><?php print ($site['device_type'] == '3' ? __('N/A') : number_format_i18n($site['sum_ports_active']));?></td>
-					<td><?php print ($site['device_type'] == '3' ? __('N/A') : number_format_i18n($site['sum_ports_trunk']));?></td>
-					<td><?php print ($site['device_type'] == '3' ? __('N/A') : number_format_i18n($site['sum_macs_active']));?></td>
+					<td><?php print ($site['device_type'] == '1' ? __('N/A', 'mactrack') : number_format_i18n($site['sum_ips_total']));?></td>
+					<td><?php print ($site['device_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($site['sum_ports_total']));?></td>
+					<td><?php print ($site['device_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($site['sum_ports_active']));?></td>
+					<td><?php print ($site['device_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($site['sum_ports_trunk']));?></td>
+					<td><?php print ($site['device_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($site['sum_macs_active']));?></td>
 				</tr>
 				<?php
 			}
 		}else{
-			print '<tr><td colspan="10"><em>' . __('No MacTrack Sites') . '</em></td></tr>';
+			print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Sites Found', 'mactrack') . '</em></td></tr>';
 		}
 
 		html_end_box(false);
@@ -354,3 +371,4 @@ function mactrack_view_sites() {
 
 	print '<div id="response"></div>';
 }
+

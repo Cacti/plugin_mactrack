@@ -24,11 +24,11 @@
 
 $guest_account = true;
 chdir('../../');
-include("./include/auth.php");
-include_once("./include/global_arrays.php");
-include_once("./plugins/mactrack/lib/mactrack_functions.php");
+include('./include/auth.php');
+include_once('./include/global_arrays.php');
+include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
-$title = "Device Tracking - Site IP Range Report View";
+$title = __('Device Tracking - Site IP Range Report View', 'mactrack');
 
 if (isset_request_var('export')) {
 	mactrack_view_export_ip_ranges();
@@ -96,7 +96,7 @@ function mactrack_view_ips_validate_request_vars() {
             )
     );
 
-    validate_store_request_vars($filters, 'sess_mactrack_view_ips');
+    validate_store_request_vars($filters, 'sess_mtv_ips');
     /* ================= input validation ================= */
 }
 
@@ -192,21 +192,23 @@ function mactrack_view_ip_ranges() {
 		INNER JOIN mac_track_sites ON (mac_track_ip_ranges.site_id=mac_track_sites.site_id)
 		$sql_where");
 
-	$nav = html_nav_bar('mactrack_view_ips.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 7, __('IP Address Ranges'), 'page', 'main');
+	$display_text = array(
+		'nosort'           => array(__('Actions', 'mactrack'), ''),
+		'site_name'        => array(__('Site Name', 'mactrack'), 'ASC'),
+		'ip_range'         => array(__('IP Range', 'mactrack'), 'ASC'),
+		'ips_current'      => array(__('Current IP Addresses', 'mactrack'), 'DESC'),
+		'ips_current_date' => array(__('Current Date', 'mactrack'), 'DESC'),
+		'ips_max'          => array(__('Maximum IP Addresses', 'mactrack'), 'DESC'),
+		'ips_max_date'     => array(__('Maximum Date', 'mactrack'), 'DESC')
+	);
+
+	$columns = sizeof($display_text);
+
+	$nav = html_nav_bar('mactrack_view_ips.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('IP Address Ranges', 'mactrack'), 'page', 'main');
 
 	print $nav;
 
 	html_start_box('', '100%', '', '3', 'center', '');
-
-	$display_text = array(
-		'nosort'           => array(__('Actions'), ''),
-		'site_name'        => array(__('Site Name'), 'ASC'),
-		'ip_range'         => array(__('IP Range'), 'ASC'),
-		'ips_current'      => array(__('Current IP Addresses'), 'DESC'),
-		'ips_current_date' => array(__('Current Date'), 'DESC'),
-		'ips_max'          => array(__('Maximum IP Addresses'), 'DESC'),
-		'ips_max_date'     => array(__('Maximum Date'), 'DESC')
-	);
 
 	html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
@@ -214,10 +216,10 @@ function mactrack_view_ip_ranges() {
 		foreach ($ip_ranges as $ip_range) {
 			form_alternate_row();
 				?>
-				<td width=80>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $ip_range['site_id']);?>' title='Edit Site'><img src='<?php print $webroot;?>images/edit_object.png'></a>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&ip_filter_type_id=3&ip_filter=' . $ip_range['ip_range'] . '&device_id=-1&scan_date=3&site_id=' . $ip_range['site_id']);?>' title='View MAC Addresses'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_arp.php?report=arp&reset&ip_filter_type_id=3&ip_filter=' . $ip_range['ip_range'] . '.' . '&device_id=-1&scan_date=3&site_id=' . $ip_range['site_id']);?>' title='View IP Addresses'><img src='<?php print $webroot;?>images/view_ipaddresses.gif'></a>
+				<td class='nowrap' style='width:1px;'>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $ip_range['site_id']);?>' title='<?php print __esc('Edit Site', 'mactrack');?>'><img src='<?php print $webroot;?>images/edit_object.png'></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&ip_filter_type_id=3&ip_filter=' . $ip_range['ip_range'] . '&device_id=-1&scan_date=3&site_id=' . $ip_range['site_id']);?>' title='<?php print __esc('View MAC Addresses', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_arp.php?report=arp&reset&ip_filter_type_id=3&ip_filter=' . $ip_range['ip_range'] . '.' . '&device_id=-1&scan_date=3&site_id=' . $ip_range['site_id']);?>' title='<?php print __esc('View IP Addresses', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_ipaddresses.gif'></a>
 				</td>
 				<td class='hyperLink'>
 					<?php print $ip_range['site_name'];?>
@@ -231,7 +233,7 @@ function mactrack_view_ip_ranges() {
 			<?php
 		}
 	}else{
-		print '<tr><td colspan="10"><em>' . __('No MacTrack Site IP Ranges Found') . '</em></td></tr>';
+		print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Site IP Ranges Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);
@@ -252,11 +254,11 @@ function mactrack_ips_filter() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Site');?>
+						<?php print __('Site', 'mactrack');?>
 					</td>
 					<td>
 						<select id='site_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('Any');?></option>
+							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack');?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT * FROM mac_track_sites ORDER BY mac_track_sites.site_name');
 							if (sizeof($sites)) {
@@ -268,11 +270,11 @@ function mactrack_ips_filter() {
 						</select>
 					</td>
 					<td>
-						<?php print __('IP\'s');?>
+						<?php print __('IP\'s', 'mactrack');?>
 					</td>
 					<td>
 						<select id='rows' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default');?></option>
+							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack');?></option>
 							<?php
 							if (sizeof($item_rows)) {
 								foreach ($item_rows as $key => $value) {
@@ -283,10 +285,10 @@ function mactrack_ips_filter() {
 						</select>
 					</td>
 					<td>
-						<input type='button' id='export' value='<?php print __('Export');?>'>
-					</td>
-					<td>
-						<input type='button' id='clear' value='<?php print __('Clear');?>'>
+						<span class='nowrap'>
+							<input type='button' id='export' value='<?php print __esc('Export', 'mactrack');?>'>
+							<input type='button' id='clear' value='<?php print __esc('Clear', 'mactrack');?>'>
+						</span>
 					</td>
 				</tr>
 			</table>
@@ -327,3 +329,4 @@ function mactrack_ips_filter() {
 	</tr>
 	<?php
 }
+

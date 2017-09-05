@@ -66,9 +66,9 @@ if (sizeof($old_procs)) {
 			}else{
 				exec('kill ' . $p['process_id']);
 			}
-			cacti_log("WARNING: Removing Hung MacTrack Process for Device '" . $p['device_id'] . "' With Status '" . $p['status'] . "'");
+			cacti_log("WARNING: Removing Hung Device Tracking Process for Device '" . $p['device_id'] . "' With Status '" . $p['status'] . "'");
 		}else{
-			cacti_log("WARNING: Removing Hung MacTrack Process Entry for Device '" . $p['device_id'] . "' With Status '" . $p['status'] . "'");
+			cacti_log("WARNING: Removing Hung Device Tracking Process Entry for Device '" . $p['device_id'] . "' With Status '" . $p['status'] . "'");
 		}
 		db_execute("DELETE FROM mac_track_processes WHERE process_id=$p");
 	}
@@ -135,7 +135,7 @@ if (sizeof($parms)) {
 }
 
 if (read_config_option('mt_collection_timing') == 'disabled') {
-	echo "WARNING: MacTrack is disabled, exiting\n";
+	echo "WARNING: Device Tracking is disabled, exiting\n";
 	exit(1);
 }else{
 	/* for manual scans, verify if we should run or not */
@@ -150,7 +150,7 @@ if (read_config_option('mt_collection_timing') == 'disabled') {
 			mactrack_debug('WARNING: Forcing Collection although Collection Appears in Process', TRUE, 'MACTRACK');
 			db_execute('TRUNCATE mac_track_processes');
 		}else{
-			mactrack_debug('WARNING: Stale data found in MacTrack process table', TRUE, 'MACTRACK');
+			mactrack_debug('WARNING: Stale data found in Device Tracking process table', TRUE, 'MACTRACK');
 			db_execute('TRUNCATE mac_track_processes');
 		}
 	}
@@ -159,13 +159,13 @@ if (read_config_option('mt_collection_timing') == 'disabled') {
 	errors_disable();
 
 	if ($site_id != '') {
-		mactrack_debug('About to enter MacTrack Site Scan Processing');
+		mactrack_debug('About to enter Device Tracking Site Scan Processing');
 		/* take time and log performance data */
 		list($micro,$seconds) = explode(' ', microtime());
 		$start = $seconds + $micro;
 		collect_mactrack_data($start, $site_id);
 	}else{
-		mactrack_debug('About to enter MacTrack poller processing');
+		mactrack_debug('About to enter Device Tracking poller processing');
 		$seconds_offset = read_config_option('mt_collection_timing');
 		if (($seconds_offset <> 'disabled') || $forcerun) {
 			mactrack_debug('Into Processing.  Checking to determine if it\'s time to run.');
@@ -345,7 +345,7 @@ function display_version() {
 	}
 
 	$info = plugin_mactrack_version();
-	print 'MacTrack Master Poller, Version ' . $info['version'] . ', ' .  COPYRIGHT_YEARS . "\n";
+	print 'Device Tracking Master Poller, Version ' . $info['version'] . ', ' .  COPYRIGHT_YEARS . "\n";
 }
 
 /*	display_help - displays the usage of the function */
@@ -494,12 +494,13 @@ function collect_mactrack_data($start, $site_id = 0) {
 			if (($current_time - $last_time) > read_config_option('mt_dns_prime_interval')) {
 				/* resolve some ip's to mac addresses to let the resolver knock them out */
 				db_execute("UPDATE mac_track_temp_ports
-							INNER JOIN mac_track_ips
-							ON (mac_track_temp_ports.mac_address=mac_track_ips.mac_address
-							AND mac_track_temp_ports.site_id=mac_track_ips.site_id)
-							SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address,
-							mac_track_temp_ports.updated=1
-							WHERE mac_track_temp_ports.updated=0 AND mac_track_ips.scan_date='$scan_date'");
+					INNER JOIN mac_track_ips
+					ON (mac_track_temp_ports.mac_address=mac_track_ips.mac_address
+					AND mac_track_temp_ports.site_id=mac_track_ips.site_id)
+					SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address,
+					mac_track_temp_ports.updated=1
+					WHERE mac_track_temp_ports.updated=0 AND mac_track_ips.scan_date='$scan_date'");
+
 				mactrack_debug('Interum IP addresses to MAC addresses association pass complete.');
 
 				$last_time = $current_time;
@@ -520,7 +521,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			/* exit if we've run too long */
 			if (($current - $start) > $max_run_duration) {
 				$exit_mactrack = TRUE;
-				cacti_log('ERROR: MacTracking timed out during main script processing.');
+				cacti_log('ERROR: Device Trackin timed out during main script processing.');
 				db_execute("DELETE FROM settings WHERE name='mactrack_process_status'");
 				db_process_remove('-1');
 				break;
@@ -538,15 +539,17 @@ function collect_mactrack_data($start, $site_id = 0) {
 			   attempting to update records */
 			sleep(2);
 			$current_time = strtotime('now');
+
 			if (($current_time - $last_time) > read_config_option('mt_dns_prime_interval')) {
 				/* resolve some ip's to mac addresses to let the resolver knock them out */
 				db_execute("UPDATE mac_track_temp_ports
-							INNER JOIN mac_track_ips
-							ON (mac_track_temp_ports.mac_address=mac_track_ips.mac_address
-							AND mac_track_temp_ports.site_id=mac_track_ips.site_id)
-							SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address,
-							mac_track_temp_ports.updated=1
-							WHERE mac_track_temp_ports.updated=0 AND mac_track_ips.scan_date='$scan_date'");
+					INNER JOIN mac_track_ips
+					ON (mac_track_temp_ports.mac_address=mac_track_ips.mac_address
+					AND mac_track_temp_ports.site_id=mac_track_ips.site_id)
+					SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address,
+					mac_track_temp_ports.updated=1
+					WHERE mac_track_temp_ports.updated=0 AND mac_track_ips.scan_date='$scan_date'");
+
 				mactrack_debug('Interum IP addresses to MAC addresses association pass complete.');
 			}
 
@@ -557,7 +560,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			/* exit if we've run too long */
 			if (($current - $start) > $max_run_duration) {
 				$exit_mactrack = TRUE;
-				cacti_log('ERROR: MacTracking timed out during main script processing.');
+				cacti_log('ERROR: Device Tracking timed out during main script processing.');
 				break;
 			}
 
@@ -571,26 +574,27 @@ function collect_mactrack_data($start, $site_id = 0) {
 				WHERE updated=0');
 
 			if (sizeof($ports)) {
-			foreach($ports as $port) {
-				if (isset($mac_ip_dns[$port['mac_address']])) {
-					db_execute("UPDATE mac_track_temp_ports
-						SET updated=1, ip_address='" . $mac_ip_dns[$port['mac_address']]['ip'] . "'" .
-						($mac_ip_dns[$port['mac_address']]['dns'] != '' ? ", dns_hostname='" . $mac_ip_dns[$port['mac_address']]['dns'] . "'" : '') . '
-						WHERE site_id=' . $port['site_id'] . '
-						AND device_id=' . $port['device_id'] . "
-						AND mac_address='" . $port['mac_address'] . "'");
+				foreach($ports as $port) {
+					if (isset($mac_ip_dns[$port['mac_address']])) {
+						db_execute("UPDATE mac_track_temp_ports
+							SET updated=1, ip_address='" . $mac_ip_dns[$port['mac_address']]['ip'] . "'" .
+							($mac_ip_dns[$port['mac_address']]['dns'] != '' ? ", dns_hostname='" . $mac_ip_dns[$port['mac_address']]['dns'] . "'" : '') . '
+							WHERE site_id=' . $port['site_id'] . '
+							AND device_id=' . $port['device_id'] . "
+							AND mac_address='" . $port['mac_address'] . "'");
+					}
 				}
-			}
 			}
 		}
 
 		/* resolve some ip's to mac addresses to let the resolver knock them out */
 		db_execute("UPDATE mac_track_temp_ports
-					INNER JOIN mac_track_ips
-					ON (mac_track_temp_ports.mac_address=mac_track_ips.mac_address
-					AND mac_track_temp_ports.site_id=mac_track_ips.site_id)
-					SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address
-					WHERE mac_track_temp_ports.updated=0 AND mac_track_ips.scan_date='$scan_date'");
+			INNER JOIN mac_track_ips
+			ON (mac_track_temp_ports.mac_address=mac_track_ips.mac_address
+			AND mac_track_temp_ports.site_id=mac_track_ips.site_id)
+			SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address
+			WHERE mac_track_temp_ports.updated=0 AND mac_track_ips.scan_date='$scan_date'");
+
 		mactrack_debug('Interum IP addresses to MAC addresses association pass complete.');
 
 		/* populate the vendor_macs for this pass */
@@ -622,34 +626,35 @@ function collect_mactrack_data($start, $site_id = 0) {
 			/* exit if we've run too long */
 			if (($current - $start) > $max_run_duration) {
 				$exit_mactrack = TRUE;
-				cacti_log('ERROR: MacTracking timed out during main script processing.');
+				cacti_log('ERROR: Device Tracking timed out during main script processing.');
 				break;
 			}
 		}
 
 		/* transfer temp port results into permanent table */
 		db_execute('INSERT INTO mac_track_ports
-					(site_id, device_id, hostname, dns_hostname, device_name,
-					vlan_id, vlan_name, mac_address, vendor_mac, ip_address,
-					port_number, port_name, scan_date, authorized)
-					SELECT site_id, device_id, hostname, dns_hostname, device_name,
-					vlan_id, vlan_name, mac_address, vendor_mac, ip_address,
-					port_number, port_name, scan_date, authorized
-					FROM mac_track_temp_ports
-					ON DUPLICATE KEY UPDATE site_id=VALUES(site_id), hostname=VALUES(hostname),
-					device_name=VALUES(device_name), vlan_id=VALUES(vlan_id), vlan_name=VALUES(vlan_name),
-					vendor_mac=VALUES(vendor_mac), ip_address=VALUES(ip_address), dns_hostname=VALUES(dns_hostname),
-					port_name=VALUES(port_name), authorized=VALUES(authorized)');
+			(site_id, device_id, hostname, dns_hostname, device_name,
+			vlan_id, vlan_name, mac_address, vendor_mac, ip_address,
+			port_number, port_name, scan_date, authorized)
+			SELECT site_id, device_id, hostname, dns_hostname, device_name,
+			vlan_id, vlan_name, mac_address, vendor_mac, ip_address,
+			port_number, port_name, scan_date, authorized
+			FROM mac_track_temp_ports
+			ON DUPLICATE KEY UPDATE site_id=VALUES(site_id), hostname=VALUES(hostname),
+			device_name=VALUES(device_name), vlan_id=VALUES(vlan_id), vlan_name=VALUES(vlan_name),
+			vendor_mac=VALUES(vendor_mac), ip_address=VALUES(ip_address), dns_hostname=VALUES(dns_hostname),
+			port_name=VALUES(port_name), authorized=VALUES(authorized)');
+
 		mactrack_debug('Finished transferring scan results to main table.');
 
 		/* transfer the subnet information, although primative, into the ip_ranges table */
 		$ip_ranges = db_fetch_assoc("SELECT SUBSTRING_INDEX(`ip_address`,'.',3) AS ip_range,
-					site_id,
-					COUNT(DISTINCT ip_address) AS ips_current,
-					scan_date AS ips_current_date
-					FROM mac_track_temp_ports
-					WHERE ip_address != ''
-					GROUP BY ip_range, site_id");
+			site_id,
+			COUNT(DISTINCT ip_address) AS ips_current,
+			scan_date AS ips_current_date
+			FROM mac_track_temp_ports
+			WHERE ip_address != ''
+			GROUP BY ip_range, site_id");
 
 		if (is_array($ip_ranges)) {
 			foreach($ip_ranges as $ip_range) {
@@ -676,8 +681,8 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 		/* update the max values if required */
 		db_execute('UPDATE `mac_track_ip_ranges`
-					SET ips_max=ips_current, ips_max_date=ips_current_date
-					WHERE ips_current > ips_max');
+			SET ips_max=ips_current, ips_max_date=ips_current_date
+			WHERE ips_current > ips_max');
 
 		/* collect statistics */
 		if ($site_id == 0) {

@@ -219,7 +219,7 @@ function display_version() {
 	}
 
 	$info = plugin_mactrack_version();
-	print "Network MacTracker IP Resolver, Version " . $info['version'] . ", " . COPYRIGHT_YEARS . "\n";
+	print "Network Device Tracking IP Resolver, Version " . $info['version'] . ", " . COPYRIGHT_YEARS . "\n";
 }
 
 /*	display_help - displays the usage of the function */
@@ -233,4 +233,3 @@ function display_help () {
 	print "-h --help     - display this help message\n";
 }
 
-?>

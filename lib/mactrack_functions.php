@@ -2168,7 +2168,7 @@ function perform_mactrack_db_maint() {
 			$last_day = db_fetch_row("SELECT TO_DAYS('$lnow') AS today");
 			$last_day = $last_day["today"];
 
-			mactrack_debug("There are currently '" . sizeof($number_of_partitions) . "' MacTrack Partitions, We will keep '$days' of them.");
+			mactrack_debug("There are currently '" . sizeof($number_of_partitions) . "' Davice Tracking Partitions, We will keep '$days' of them.");
 			mactrack_debug("The current day is '$cur_day', the last day is '$last_day'");
 
 			if ($cur_day != $last_day) {
@@ -2206,12 +2206,13 @@ function perform_mactrack_db_maint() {
 	mactrack_debug("Finished deleting old records from the main database.");
 }
 
-function import_oui_database($type = 'ui', $oui_file = 'https://services13.ieee.org/RST/standards-ra-web/rest/assignments/download/?registry=MA-L&format=txt') {
+function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.ieee.org/oui.txt') {
+	$oui_alternate = 'https://services13.ieee.org/RST/standards-ra-web/rest/assignments/download/?registry=MA-L&format=txt';
 	if ($type != 'ui') {
-		html_start_box(__('MacTrack OUI Database Import Results'), '100%', '', '1', 'center', '');
-		echo '<tr><td>' . __('Getting OUI Database from IEEE') . '</td></tr>';
+		html_start_box(__('Davice Tracking OUI Database Import Results', 'mactrack'), '100%', '', '1', 'center', '');
+		echo '<tr><td>' . __('Getting OUI Database from IEEE', 'mactrack') . '</td></tr>';
 	}else{
-		echo __('Getting OUI Database from the IEEE') . "\n";
+		echo __('Getting OUI Database from the IEEE', 'mactrack') . "\n";
 	}
 
 	$oui_database = file($oui_file);
@@ -2219,9 +2220,9 @@ function import_oui_database($type = 'ui', $oui_file = 'https://services13.ieee.
 	if ($type != 'ui') print '<tr><td>';
 
 	if (sizeof($oui_database)) {
-		echo __('OUI Database Download from IEEE Complete') . "\n";
+		echo __('OUI Database Download from IEEE Complete', 'mactrack') . "\n";
 	}else{
-		echo __('OUI Database Download from IEEE FAILED') . "\n";
+		echo __('OUI Database Download from IEEE FAILED', 'mactrack') . "\n";
 	}
 
 	if ($type != 'ui') print '</td></tr>';
@@ -2314,9 +2315,9 @@ function import_oui_database($type = 'ui', $oui_file = 'https://services13.ieee.
 
 		/* report some information */
 		if ($type != 'ui') print '<tr><td>';
-		echo "\n" . __('There were \'%d\' Entries Added/Updated in the database.', $i);
+		echo "\n" . __('There were \'%d\' Entries Added/Updated in the database.', $i, 'mactrack');
 		if ($type != "ui") print "</td></td><tr><td>";
-		echo "\n" . __('There were \'%d\' Records Removed from the database.', $j) . "\n";
+		echo "\n" . __('There were \'%d\' Records Removed from the database.', $j, 'mactrack') . "\n";
 		if ($type != 'ui') print '</td></tr>';
 
 		if ($type != 'ui') html_end_box();
@@ -2338,7 +2339,7 @@ function get_netscreen_arp_table($site, &$device) {
 	if ($ifIntcount != 0) {
 		$atifIndexes = xform_indexed_data('.1.3.6.1.2.1.4.22.1.1', $device, 5);
 	}
-	mactrack_debug(__('atifIndexes data collection complete'));
+	mactrack_debug(__('atifIndexes data collection complete', 'mactrack'));
 
 	/* get the atPhysAddress for the device */
 	if ($ifIntcount != 0) {
@@ -2356,7 +2357,7 @@ function get_netscreen_arp_table($site, &$device) {
 		$i++;
 	}
 	}
-	mactrack_debug(__('atPhysAddress data collection complete'));
+	mactrack_debug(__('atPhysAddress data collection complete', 'mactrack'));
 
 	/* get the atPhysAddress for the device */
 	if ($ifIntcount != 0) {
@@ -2364,7 +2365,7 @@ function get_netscreen_arp_table($site, &$device) {
 	} else {
 		$atNetAddress = xform_indexed_data('.1.3.6.1.2.1.3.1.1.3', $device, 6);
 	}
-	mactrack_debug(__('atNetAddress data collection complete'));
+	mactrack_debug(__('atNetAddress data collection complete', 'mactrack'));
 
 	/* get the ifNames for the device */
 	$keys = array_keys($atifIndexes);
@@ -2377,7 +2378,7 @@ function get_netscreen_arp_table($site, &$device) {
 		$i++;
 	}
 	}
-	mactrack_debug(__('atEntries assembly complete.'));
+	mactrack_debug(__('atEntries assembly complete.', 'mactrack'));
 
 	/* output details to database */
 	if (sizeof($atEntries)) {
@@ -2403,7 +2404,7 @@ function get_netscreen_arp_table($site, &$device) {
 
 	db_execute('UPDATE mac_track_devices SET ips_total =' . $device['ips_total'] . ' WHERE device_id=' . $device['device_id']);
 
-	mactrack_debug(__('HOST: %s, IP address information collection complete', $device['hostname']));
+	mactrack_debug(__('HOST: %s, IP address information collection complete', $device['hostname'], 'mactrack'));
 }
 
 function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
@@ -2417,7 +2418,7 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 	if ($show_rescan) {
 		if (api_user_realm_auth('mactrack_sites.php')) {
 			if ($device['disabled'] == '') {
-				$rescan = "<img id='r_" . $device_id . '_' . $ifName . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(" . $device_id . ",\"" . $ifName . "\")' title='" . __('Rescan Device') . "'>";
+				$rescan = "<img id='r_" . $device_id . '_' . $ifName . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onMouseOver='style.cursor=\"pointer\"' onClick='scan_device_interface(" . $device_id . ",\"" . $ifName . "\")' title='" . __esc('Rescan Device', 'mactrack') . "'>";
 			}else{
 				$rescan = "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt=''>";
 			}
@@ -2442,9 +2443,9 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 			foreach($graphs as $graph) {
 				$list .= (strlen($list) ? ',': '') . $graph['local_graph_id'];
 			}
-			$row .= "<a href='" . htmlspecialchars($url . $list . '&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='" . __('View Non Interface Graphs') . "'></a>";
+			$row .= "<a href='" . htmlspecialchars($url . $list . '&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='" . __esc('View Non Interface Graphs', 'mactrack') . "'></a>";
 		}else{
-			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='" . __('No Non Interface Graphs in Cacti') . "'/>";
+			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='" . __esc('No Non Interface Graphs in Cacti', 'mactrack') . "'/>";
 		}
 
 		/* get interface graphs */
@@ -2458,12 +2459,12 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 			foreach($graphs as $graph) {
 				$list .= (strlen($list) ? ',': '') . $graph['local_graph_id'];
 			}
-			$row .= "<a href='" . htmlspecialchars($url . $list . '&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interface_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='" . __('View Interface Graphs') . "'></a>";
+			$row .= "<a href='" . htmlspecialchars($url . $list . '&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interface_graphs.gif' alt='' onMouseOver='style.cursor=\"pointer\"' title='" . __esc('View Interface Graphs', 'mactrack') . "'></a>";
 		}else{
 			$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt=''>";
 		}
 	}else{
-		$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='" . __('Device Not in Cacti') . "'/>";
+		$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_graphs_disabled.gif' alt='' title='" . __esc('Device Not in Cacti', 'mactrack') . "'/>";
 	}
 	$row .= $rescan;
 
@@ -2478,10 +2479,10 @@ function mactrack_format_interface_row($stat) {
 
 	/* calculate a human readable uptime */
 	if ($stat['ifLastChange'] == 0) {
-		$upTime = __('Since Restart');
+		$upTime = __('Since Restart', 'mactrack');
 	}else{
 		if ($stat['ifLastChange'] > $stat['sysUptime']) {
-			$upTime = __('Since Restart');
+			$upTime = __('Since Restart', 'mactrack');
 		}else{
 			$time = $stat['sysUptime'] - $stat['ifLastChange'];
 			$days      = intval($time / (60*60*24*100));
@@ -2561,7 +2562,7 @@ function mactrack_rescan($web = FALSE) {
 	if (sizeof($dbinfo)) {
 		if ($dbinfo['disabled'] == '') {
 			/* log the trasaction to the database */
-			mactrack_log_action(__('Device Rescan \'%s\'', $dbinfo['hostname']));
+			mactrack_log_action(__('Device Rescan \'%s\'', $dbinfo['hostname'], 'mactrack'));
 
 			/* create the command script */
 			$command_string = $config['base_path'] . '/plugins/mactrack/mactrack_scanner.php';
@@ -2575,7 +2576,7 @@ function mactrack_rescan($web = FALSE) {
 
 			html_start_box('', '100%', '', '3', 'center', '');
 
-			print "\t\t\t\t\t<input type='button' onClick='clearScanResults()' value='" . __('Clear Results') . "'>\n";
+			print "\t\t\t\t\t<input type='button' onClick='clearScanResults()' value='" . __esc('Clear Results', 'mactrack') . "'>\n";
 
 			/* exeucte the command, and show the results */
 			$command = read_config_option('path_php_binary') . ' -q ' . $command_string . $extra_args;
@@ -2596,7 +2597,7 @@ function mactrack_site_scan($web = FALSE) {
 
 	if (sizeof($dbinfo)) {
 		/* log the trasaction to the database */
-		mactrack_log_action(__('Site scan \'%s\'', $dbinfo['site_name']));
+		mactrack_log_action(__('Site scan \'%s\'', $dbinfo['site_name'], 'mactrack'));
 
 		/* create the command script */
 		$command_string = $config['base_path'] . '/plugins/mactrack/poller_mactrack.php';
@@ -2609,7 +2610,7 @@ function mactrack_site_scan($web = FALSE) {
 		print "\n<form action='mactrack_sites.php'>\n";
 		html_start_box('', '100%', '', '3', 'center', '');
 
-		print "\t\t\t\t\t<input type='button' onClick='clearScanResults()' value='" . __('Clear Results') . "'>\n";
+		print "\t\t\t\t\t<input type='button' onClick='clearScanResults()' value='" . __esc('Clear Results', 'mactrack') . "'>\n";
 
 		/* exeucte the command, and show the results */
 		$command = read_config_option('path_php_binary') . ' -q ' . $command_string . $extra_args;
@@ -2629,7 +2630,7 @@ function mactrack_enable() {
 	$dbinfo = db_fetch_row_prepared('SELECT * FROM mac_track_devices WHERE device_id = ?', array(get_request_var('device_id')));
 
 	/* log the trasaction to the database */
-	mactrack_log_action(__('Device Enable \'%s\'', $dbinfo['hostname']));
+	mactrack_log_action(__('Device Enable \'%s\'', $dbinfo['hostname'], 'mactrack'));
 
 	db_execute_prepared("UPDATE mac_track_devices SET disabled='' WHERE device_id = ?", array(get_request_var('device_id')));
 
@@ -2648,7 +2649,7 @@ function mactrack_disable() {
 	$dbinfo = db_fetch_row_prepared('SELECT * FROM mactrack_devices WHERE device_id = ?', array(get_request_var('device_id')));
 
 	/* log the trasaction to the database */
-	mactrack_log_action(__('Device Disable \'%d\'', $dbinfo['hostname']));
+	mactrack_log_action(__('Device Disable \'%d\'', $dbinfo['hostname'], 'mactrack'));
 
 	db_execute_prepared("UPDATE mactack_devices SET disabled='on' WHERE device_id = ?", array(get_request_var('device_id')));
 
@@ -2735,20 +2736,20 @@ function mactrack_create_sql_filter($filter, $fields) {
 
 function mactrack_display_hours($value) {
 	if ($value == '') {
-		return __('N/A');
+		return __('N/A', 'mactrack');
 	}else if ($value < 60) {
-		return __('%d Minutes', round($value,0));
+		return __('%d Minutes', round($value,0), 'mactrack');
 	}else{
 		$value = $value / 60;
 		if ($value < 24) {
-			return __('%d Hours', round($value,0));
+			return __('%d Hours', round($value,0), 'mactrack');
 		}else{
 			$value = $value / 24;
 			if ($value < 7) {
-				return __('%d Days', round($value,0));
+				return __('%d Days', round($value,0), 'mactrack');
 			}else{
 				$value = $value / 7;
-				return __('%d Weeks', round($value,0));
+				return __('%d Weeks', round($value,0), 'mactrack');
 			}
 		}
 	}
@@ -2759,9 +2760,9 @@ function mactrack_display_stats() {
 	$processes = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes');
 	$frequency = read_config_option('mt_collection_timing', TRUE) * 60;
 	$mactrack_stats = read_config_option('stats_mactrack', TRUE);
-	$time  = __('Not Recorded');
-	$proc  = __('N/A');
-	$devs  = __('N/A');
+	$time  = __('Not Recorded', 'mactrack');
+	$proc  = __('N/A', 'mactrack');
+	$devs  = __('N/A', 'mactrack');
 	if ($mactrack_stats != '') {
 		$stats = explode(' ', $mactrack_stats);
 
@@ -2778,17 +2779,17 @@ function mactrack_display_stats() {
 	}
 
 	if ($processes > 0) {
-		$message = __('Status: Running, Processes: %d, Progress: %s, LastRuntime: %f', $processes, read_config_option('mactrack_process_status', TRUE), round($time,1));
+		$message = __('Status: Running, Processes: %d, Progress: %s, LastRuntime: %f', $processes, read_config_option('mactrack_process_status', TRUE), round($time,1), 'mactrack');
 	}else{
 		$message = __('Status: Idle, LastRuntime: %f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s', 
 			round($time,1), $proc , $devs, 
-			date('Y-m-d H:i:s', strtotime(read_config_option('mt_scan_date', TRUE)) + $frequency));
+			date('Y-m-d H:i:s', strtotime(read_config_option('mt_scan_date', TRUE)) + $frequency), 'mactrack');
 	}
 
 	html_start_box('', '100%', '', '3', 'center', '');
 
 	print '<tr>';
-	print '<td>' . __('Scanning Rate: Every %s', mactrack_display_hours(read_config_option('mt_collection_timing'))) . ', ' . $message . '</td>';
+	print '<td>' . __('Scanning Rate: Every %s', mactrack_display_hours(read_config_option('mt_collection_timing')), 'mactrack') . ', ' . $message . '</td>';
 	print '</tr>';
 
 	html_end_box();
@@ -2802,7 +2803,7 @@ function mactrack_redirect() {
 	/* set the default tab */
     get_filter_request_var('report', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-zA-Z]+)$/')));
 
-	load_current_session_value('report', 'sess_mactrack_view_report', 'devices');
+	load_current_session_value('report', 'sess_mt_report', 'devices');
 	$current_tab = get_nfilter_request_var('report');
 
 	$current_page = str_replace('mactrack_', '', str_replace('view_', '', str_replace('.php', '', get_current_page())));
@@ -2818,12 +2819,12 @@ function mactrack_format_device_row($device, $actions=false) {
 
 	/* viewer level */
 	if ($actions) {
-		$row = "<a href='" . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_interfaces.php?device_id=' . $device['device_id'] . '&issues=0&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interfaces.gif' alt='' title='" . __('View Interfaces') . "'></a>";
+		$row = "<a href='" . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_interfaces.php?device_id=' . $device['device_id'] . '&issues=0&page=1') . "'><img src='" . $config['url_path'] . "plugins/mactrack/images/view_interfaces.gif' alt='' title='" . __('View Interfaces', 'mactrack') . "'></a>";
 
 		/* admin level */
 		if (api_user_realm_auth('mactrack_sites.php')) {
 			if ($device['disabled'] == '') {
-				$row .= "<img id='r_" . $device['device_id'] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onClick='scan_device(" . $device['device_id'] . ")' title='" . __('Rescan Device') . "'>";
+				$row .= "<img id='r_" . $device['device_id'] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onClick='scan_device(" . $device['device_id'] . ")' title='" . __('Rescan Device', 'mactrack') . "'>";
 			}else{
 				$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt=''>";
 			}
@@ -2836,12 +2837,12 @@ function mactrack_format_device_row($device, $actions=false) {
 	form_selectable_cell($device['site_name'], $device['device_id']);
 	form_selectable_cell(get_colored_device_status(($device['disabled'] == 'on' ? true : false), $device['snmp_status']), $device['device_id']);
 	form_selectable_cell(filter_value($device['hostname'], get_request_var('filter')), $device['device_id']);
-	form_selectable_cell(($device['device_type'] == '' ? __('Not Detected') : $device['device_type']), $device['device_id']);
-	form_selectable_cell(($device['scan_type'] == '1' ? __('N/A') : $device['ips_total']), $device['device_id']);
-	form_selectable_cell(($device['scan_type'] == '3' ? __('N/A') : $device['ports_total']), $device['device_id']);
-	form_selectable_cell(($device['scan_type'] == '3' ? __('N/A') : $device['ports_active']), $device['device_id']);
-	form_selectable_cell(($device['scan_type'] == '3' ? __('N/A') : $device['ports_trunk']), $device['device_id']);
-	form_selectable_cell(($device['scan_type'] == '3' ? __('N/A') : $device['macs_active']), $device['device_id']);
+	form_selectable_cell(($device['device_type'] == '' ? __('Not Detected', 'mactrack') : $device['device_type']), $device['device_id']);
+	form_selectable_cell(($device['scan_type'] == '1' ? __('N/A', 'mactrack') : $device['ips_total']), $device['device_id']);
+	form_selectable_cell(($device['scan_type'] == '3' ? __('N/A', 'mactrack') : $device['ports_total']), $device['device_id']);
+	form_selectable_cell(($device['scan_type'] == '3' ? __('N/A', 'mactrack') : $device['ports_active']), $device['device_id']);
+	form_selectable_cell(($device['scan_type'] == '3' ? __('N/A', 'mactrack') : $device['ports_trunk']), $device['device_id']);
+	form_selectable_cell(($device['scan_type'] == '3' ? __('N/A', 'mactrack') : $device['macs_active']), $device['device_id']);
 	form_selectable_cell(number_format($device['last_runduration'], 1), $device['device_id']);
 	form_checkbox_cell($device['device_name'], $device['device_id']);
 	form_end_row();
@@ -2957,13 +2958,13 @@ function mactrack_tabs() {
 
 	/* present a tabbed interface */
 	$tabs_mactrack = array(
-		'sites'      => __('Sites'),
-		'devices'    => __('Devices'),
-		'ips'        => __('IP Ranges'),
-		'arp'        => __('IP Address'),
-		'macs'       => __('MAC Address'),
-		'interfaces' => __('Interfaces'),
-		'graphs'     => __('Graphs')
+		'sites'      => __('Sites', 'mactrack'),
+		'devices'    => __('Devices', 'mactrack'),
+		'ips'        => __('IP Ranges', 'mactrack'),
+		'arp'        => __('IP Address', 'mactrack'),
+		'macs'       => __('MAC Address', 'mactrack'),
+		'interfaces' => __('Interfaces', 'mactrack'),
+		'graphs'     => __('Graphs', 'mactrack')
 	);
 
 	/* set the default tab */
@@ -2992,7 +2993,7 @@ function mactrack_get_vendor_name($mac) {
 	if (strlen($vendor_name)) {
 		return $vendor_name;
 	}else{
-		return __('Unknown');
+		return __('Unknown', 'mactrack');
 	}
 }
 
@@ -3006,17 +3007,17 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Search');?>
+						<?php print __('Search', 'mactrack');?>
 					</td>
 					<td>
 						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter');?>'>
 					</td>
 					<td>
-						<?php print __('Sites');?>
+						<?php print __('Sites', 'mactrack');?>
 					</td>
 					<td>
 						<select id='rows' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default');?></option>
+							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack');?></option>
 							<?php
 								if (sizeof($item_rows) > 0) {
 								foreach ($item_rows as $key => $value) {
@@ -3030,16 +3031,16 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 						<input type='checkbox' id='detail' <?php if (get_request_var('detail') == 'true') print ' checked="true"';?> onClick='applyFilter()'>
 					</td>
 					<td>
-						<label for='detail'><?php print __('Show Device Details');?></label>
+						<label for='detail'><?php print __('Show Device Details', 'mactrack');?></label>
 					</td>
 					<td>
-						<input type='submit' id='go' value='<?php print __('Go');?>'>
+						<input type='submit' id='go' value='<?php print __('Go', 'mactrack');?>'>
 					</td>
 					<td>
-						<input type='button' id='clear' value='<?php print __('Clear');?>'>
+						<input type='button' id='clear' value='<?php print __('Clear', 'mactrack');?>'>
 					</td>
 					<td>
-						<input type='button' id='export' value='<?php print __('Export');?>'>
+						<input type='button' id='export' value='<?php print __('Export', 'mactrack');?>'>
 					</td>
 				</tr>
 			<?php
@@ -3048,11 +3049,11 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Site');?>
+						<?php print __('Site', 'mactrack');?>
 					</td>
 					<td>
 						<select id='site_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('Any');?></option>
+							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack');?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT * FROM mac_track_sites ORDER BY site_name');
 							if (sizeof($sites) > 0) {
@@ -3064,11 +3065,11 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 						</select>
 					</td>
 					<td>
-						<?php print __('SubType');?>
+						<?php print __('SubType', 'mactrack');?>
 					</td>
 					<td>
 						<select id='device_type_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('device_type_id') == '-1') {?> selected<?php }?>><?php print __('Any');?></option>
+							<option value='-1'<?php if (get_request_var('device_type_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack');?></option>
 							<?php
 							$device_types = db_fetch_assoc('SELECT DISTINCT mac_track_device_types.device_type_id,
 								mac_track_device_types.description, mac_track_device_types.sysDescr_match

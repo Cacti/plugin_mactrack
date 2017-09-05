@@ -230,7 +230,7 @@ function display_version() {
 	}
 
 	$info = plugin_mactrack_version();
-	print "Network MacTracker, Version " . $info['version'] .", " . COPYRIGHT_YEARS . "\n";
+	print "Network Device Tracking, Version " . $info['version'] .", " . COPYRIGHT_YEARS . "\n";
 }
 
 /*	display_help - displays the usage of the function */
@@ -245,3 +245,4 @@ function display_help () {
 	print "-v --version  - Display this help message\n";
 	print "-h --help     - display this help message\n";
 }
+
