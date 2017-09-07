@@ -638,7 +638,7 @@ msgstr "Tipos de Dispositivo"
 
 #: ../mactrack_device_types.php:932
 msgid "Device Type Description"
-msgstr "Descripción del dispositivo tipo"
+msgstr "Descripción del tipo de dispositivo"
 
 #: ../mactrack_device_types.php:935
 msgid "Port Scanner"
@@ -650,7 +650,7 @@ msgstr "Escáner de IP"
 
 #: ../mactrack_device_types.php:937
 msgid "sysDescription Match"
-msgstr "sysDescription Match"
+msgstr "sysDescription"
 
 #: ../mactrack_device_types.php:938
 msgid "Vendor OID Match"
@@ -782,7 +782,7 @@ msgstr ""
 
 #: ../mactrack_macwatch.php:330 ../setup.php:1855
 msgid "Ticket Number"
-msgstr "Numero de Ticket"
+msgstr "Número de Ticket"
 
 #: ../mactrack_macwatch.php:331
 msgid "Watch Description"
@@ -979,7 +979,7 @@ msgstr "Fabricante MAC"
 
 #: ../mactrack_vendormacs.php:160
 msgid "Corporation"
-msgstr "Corporacion"
+msgstr "Corporación"
 
 #: ../mactrack_vendormacs.php:161
 msgid "Address"
@@ -1041,7 +1041,7 @@ msgstr "Nombre del Fabricante"
 #: ../mactrack_view_macs.php:661 ../mactrack_view_macs.php:681
 #: ../mactrack_view_macs.php:806
 msgid "Port Number"
-msgstr "Numero de Puerto"
+msgstr "Número de Puerto"
 
 #: ../mactrack_view_arp.php:339
 msgid "Switch Device"
@@ -1049,7 +1049,7 @@ msgstr "Dispositivo Switch"
 
 #: ../mactrack_view_arp.php:369 ../mactrack_view_macs.php:868
 msgid "You must first choose a Site, Device or other search criteria."
-msgstr "Debes seleccionar un Sitio, dispositivo u otro criterio de busqueda."
+msgstr "Debes seleccionar un Sitio, dispositivo u otro criterio de búsqueda."
 
 #: ../mactrack_view_arp.php:371
 msgid "No MacTrack IP Results Found"
@@ -1182,7 +1182,7 @@ msgstr "No se encontraron Rangos de IP para el sitio MacTrack"
 
 #: ../mactrack_view_sites.php:31
 msgid "Device Tracking - Site Report View"
-msgstr "Seguimiento de dispositivos - Vista de informes de sitios"
+msgstr "MacTrack - Vista de informes de sitios"
 
 #: ../mactrack_view_sites.php:249 ../mactrack_view_sites.php:304
 #: ../mactrack_sites.php:445 ../mactrack_sites.php:489
@@ -1260,7 +1260,7 @@ msgstr "Debes seleccionar al menos una opción de SNMP."
 
 #: ../mactrack_snmp.php:213
 msgid "Are you sure you want to delete the following SNMP Options?"
-msgstr "Estas seguro que quieres eliminar las siguientes opciones de SNMP?"
+msgstr "Estás seguro que quieres eliminar las siguientes opciones de SNMP?"
 
 #: ../mactrack_snmp.php:220
 msgid ""
@@ -1353,7 +1353,7 @@ msgstr "Opciones SNMP"
 
 #: ../mactrack_snmp.php:515
 msgid "Title of SNMP Option Set"
-msgstr "Título del conjunto de opciones de SNMP"
+msgstr "Título del set de opciones de SNMP"
 
 #: ../mactrack_snmp.php:528
 msgid "No SNMP Option Sets"
@@ -1398,7 +1398,7 @@ msgid ""
 "Are you sure you want to import the following hosts to MacTrack?  Please "
 "specify additional MacTrack device options as given below."
 msgstr ""
-"Estas seguro que deseas importar los siguientes equipos a MacTrack? "
+"Estás seguro que deseas importar los siguientes equipos a MacTrack? "
 "Especifica opciones de dispositivos MacTrack adicionales como se indicar a "
 "continuación."
 
@@ -1408,7 +1408,7 @@ msgstr "Se usarán estas opciones de SNMP para el dispositivo MacTrack también.
 
 #: ../mactrack_view_devices.php:31
 msgid "Device Tracking - Device Report View"
-msgstr "Seguimiento de dispositivos - Vista de informes de dispositivos"
+msgstr "MacTrack - Vista de informes de dispositivos"
 
 #: ../mactrack_view_devices.php:159
 msgid "Unknown Device Type"
@@ -1436,7 +1436,7 @@ msgstr "Hub/Switch"
 
 #: ../mactrack_view_macs.php:31
 msgid "Device Tracking - MAC to IP Report View"
-msgstr "Seguimiento de dispositivos - Vista de informes MAC a IP"
+msgstr "MacTrack - Vista de informes MAC a IP"
 
 #: ../mactrack_view_macs.php:34
 msgid "Authorize"
@@ -1469,7 +1469,7 @@ msgstr "Debes seleccionar al menos una dirección MAC."
 
 #: ../mactrack_view_macs.php:176
 msgid "You are not permitted to change Mac Authorizations."
-msgstr "Tu no tienes permisos para cambiar Autorizaciones de MAC."
+msgstr "No tienes permisos para cambiar Autorizaciones de MAC."
 
 #: ../mactrack_view_macs.php:242
 #, php-format
@@ -1518,7 +1518,7 @@ msgstr "Fecha de la última escaneo"
 
 #: ../mactrack_view_macs.php:733
 msgid "You must choose a Site, Device or other search criteria."
-msgstr "Debes seleccionar un Sitio, dispositivo u otro criterio de busqueda."
+msgstr "Debes seleccionar un Sitio, dispositivo u otro criterio de búsqueda."
 
 #: ../mactrack_view_macs.php:735
 msgid "No MacTrack Port Results."
@@ -1555,7 +1555,7 @@ msgstr "Nombre de Puerto"
 #: ../setup.php:890 ../setup.php:1326 ../setup.php:1327 ../setup.php:1328
 #: ../setup.php:1329 ../setup.php:1330 ../setup.php:1331
 msgid "Device Tracking"
-msgstr "Seguimiento de dispositivos"
+msgstr "MacTrack"
 
 #: ../setup.php:894
 msgid "General Settings"
@@ -1639,7 +1639,7 @@ msgstr ""
 
 #: ../setup.php:944
 msgid "Switch Level Ignore Ports Delimiter"
-msgstr ""
+msgstr "Delimitador de puertos a ignorar a nivel Switch"
 
 #: ../setup.php:945
 msgid ""
@@ -1686,8 +1686,8 @@ msgid ""
 "Provide a regular expression of ifNames or ifDescriptions of ports to ignore "
 "in the interface list.  For example, (Vlan|Loopback|Null)."
 msgstr ""
-"Proporciona una expresión regular de ifNames o ifDescriptions de puertos a "
-"ignorar en la lista de interfaces. Por ejemplo: (Vlan|Loopback|Null). "
+"Proporciona una expresión regular de ifNames o ifDescriptions para puertos a "
+"ignorar en la lista de interfaces. Por ejemplo: (Vlan|Loopback|Null)."
 
 #: ../setup.php:967
 msgid "Bandwidth Usage Threshold"
@@ -1706,7 +1706,7 @@ msgstr ""
 #: ../setup.php:981
 #, php-format
 msgid "%d Percent"
-msgstr "Porcentaje %d"
+msgstr "%d Por ciento"
 
 #: ../setup.php:985
 msgid "DNS Settings"
@@ -1774,7 +1774,7 @@ msgstr ""
 
 #: ../setup.php:1027
 msgid "Notification Settings"
-msgstr "Opciones de notificacion"
+msgstr "Opciones de notificación"
 
 #: ../setup.php:1031
 msgid "Source Address"
@@ -1782,7 +1782,7 @@ msgstr "Dirección de Origen"
 
 #: ../setup.php:1032
 msgid "The source Email address for MacTrack Emails."
-msgstr "La dirección de Email de origen para Emails de MacTrack."
+msgstr "La dirección de correo de origen para correos de MacTrack."
 
 #: ../setup.php:1039
 msgid "Source Email Name"
@@ -1857,7 +1857,7 @@ msgstr ""
 
 #: ../setup.php:1086
 msgid "ArpWatch Database Path"
-msgstr "Ruta a la base de datos ArpWatch "
+msgstr "Ruta a la base de datos ArpWatch"
 
 #: ../setup.php:1087
 msgid "The location of the ArpWatch Database file on the Cacti server."
@@ -1986,7 +1986,7 @@ msgstr "Ver dispositivos de MacTrack"
 
 #: ../setup.php:1199
 msgid "Device Tracking Utilities"
-msgstr "Utilidades de seguimiento de dispositivos"
+msgstr "Herramientas de MacTrack"
 
 #: ../setup.php:1200
 msgid "Perform Database Maintenance"
@@ -2140,7 +2140,7 @@ msgstr "Utilidades de seguimiento"
 
 #: ../setup.php:1332 ../setup.php:1333
 msgid "Tracking Tools"
-msgstr "Herramientas de seguimiento"
+msgstr "Herramientas de MacTrack"
 
 #: ../setup.php:1332
 msgid "Mac Watch"
@@ -2148,7 +2148,7 @@ msgstr "Mac Watch"
 
 #: ../setup.php:1333
 msgid "Mac Authorizations"
-msgstr "Autorizaciones de Mac"
+msgstr "Autorizaciones de MAC"
 
 #: ../setup.php:1349
 msgid "Device Scanning Function Options"
@@ -2185,7 +2185,7 @@ msgstr ""
 
 #: ../setup.php:1382
 msgid "Vendor SNMP Object ID Match"
-msgstr ""
+msgstr "OID SNMP del Fabricante"
 
 #: ../setup.php:1389
 msgid "MAC Address Scanning Function"
@@ -2555,7 +2555,7 @@ msgstr "Contacto principal del Cliente"
 #: ../setup.php:1775
 msgid "The principal customer contact name and number for this site."
 msgstr ""
-"Nombre y numero de telefono del contacto principal del cliente para este "
+"Nombre y número de teléfono del contacto principal del cliente para este "
 "sitio."
 
 #: ../setup.php:1782
@@ -2565,7 +2565,7 @@ msgstr "Contacto de NetOps"
 #: ../setup.php:1783
 msgid "Please principal network support contact name and number for this site."
 msgstr ""
-"Nombre y numero de telefono del contacto de soporte de red principal para "
+"Nombre y número de teléfono del contacto de soporte de red principal para "
 "este sitio."
 
 #: ../setup.php:1790
@@ -2667,7 +2667,7 @@ msgid ""
 "authorized.  If you wish to authorize a group of MAC Addresses, you can use "
 "the wildcard character of '%' anywhere in the MAC Address."
 msgstr ""
-"Introduzca la dirección MAC o el texto de coincidencia de direccion MAC para "
+"Introduzca la dirección MAC o el texto de coincidencia de dirección MAC para "
 "que se autorice automáticamente. Si desea autorizar un grupo de direcciones "
 "MAC, puede utilizar el caracter comodín de '%' en cualquier parte de la "
 "dirección MAC."
