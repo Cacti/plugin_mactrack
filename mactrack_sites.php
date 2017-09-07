@@ -52,7 +52,7 @@ switch (get_request_var('action')) {
 	default:
 		if (isset_request_var('export')) {
 			mactrack_site_export();
-		}else{
+		} else {
 			top_header();
 			mactrack_site();
 			bottom_footer();
@@ -70,7 +70,7 @@ function form_save() {
 			get_nfilter_request_var('customer_contact'), get_nfilter_request_var('netops_contact'), 
 			get_nfilter_request_var('facilities_contact'), get_nfilter_request_var('site_info'));
 
-		header('Location: mactrack_sites.php?action=edit&site_id=' . (empty($site_id) ? get_filter_request_var('site_id') : $site_id));
+		header('Location: mactrack_sites.php?action=edit&header=false&site_id=' . (empty($site_id) ? get_filter_request_var('site_id') : $site_id));
 	}
 }
 
@@ -96,7 +96,7 @@ function form_actions() {
 				}
 			}
 
-			header('Location: mactrack_sites.php');
+			header('Location: mactrack_sites.php?header=false');
 			exit;
 		}
 	}
@@ -125,9 +125,9 @@ function form_actions() {
 
 	top_header();
 
-	html_start_box($site_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
-
 	form_start('mactrack_sites.php');
+
+	html_start_box($site_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
 
 	if (get_request_var('drp_action') == '1') { /* delete */
 		print "<tr>
@@ -141,7 +141,7 @@ function form_actions() {
 	if (!isset($site_array)) {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one site.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = '';
-	}else{
+	} else {
 		$save_html = "<input type='submit' name='save_x' value='" . __esc('Continue', 'mactrack') . "'>";
 	}
 
@@ -156,6 +156,8 @@ function form_actions() {
 	</tr>";
 
 	html_end_box();
+
+	form_end();
 
 	bottom_footer();
 }
@@ -218,7 +220,7 @@ function mactrack_site_export() {
 
 	$sql_where = '';
 
-	$sites = mactrack_site_get_site_records($sql_where, 0, FALSE);
+	$sites = mactrack_site_get_site_records($sql_where, 0, false);
 
 	if (get_request_var('detail') == 'false') {
 		$xport_array = array();
@@ -227,7 +229,7 @@ function mactrack_site_export() {
 			'"total_user_ports"');
 
 		if (sizeof($sites)) {
-			foreach($sites as $site) {
+			foreach ($sites as $site) {
 				array_push($xport_array,'"' . $site['site_name'] . '","' .
 				$site['total_devices'] . '","' .
 				$site['total_device_errors'] . '","' .
@@ -237,14 +239,14 @@ function mactrack_site_export() {
 				$site['total_user_ports'] . '"');
 			}
 		}
-	}else{
+	} else {
 		$xport_array = array();
 		array_push($xport_array, '"site_name","total_devices","vendor",' .
 			'"device_name","sum_ips_total","sum_ports_total",' .
 			'"sum_ports_active","sum_ports_trunk","sum_mac_active"');
 
 		if (sizeof($sites)) {
-			foreach($sites as $site) {
+			foreach ($sites as $site) {
 				array_push($xport_array,'"' . $site['site_name'] . '","' .
 				$site['total_devices'] . '","' .
 				$site['vendor'] . '","' .
@@ -260,7 +262,7 @@ function mactrack_site_export() {
 
 	header('Content-type: application/csv');
 	header('Content-Disposition: attachment; filename=cacti_site_xport.csv');
-	foreach($xport_array as $xport_line) {
+	foreach ($xport_array as $xport_line) {
 		print $xport_line . "\n";
 	}
 }
@@ -269,7 +271,7 @@ function mactrack_site_export() {
     Site Functions
    --------------------- */
 
-function mactrack_site_get_site_records(&$sql_where, $rows, $apply_limits = TRUE) {
+function mactrack_site_get_site_records(&$sql_where, $rows, $apply_limits = true) {
 	/* create SQL where clause */
 	$device_type_info = db_fetch_row_prepared('SELECT * 
 		FROM mac_track_device_types 
@@ -282,7 +284,7 @@ function mactrack_site_get_site_records(&$sql_where, $rows, $apply_limits = TRUE
 	if (get_request_var('filter') != '') {
 		if (get_request_var('detail') == 'false') {
 			$sql_where = "WHERE (mts.site_name LIKE '%" . get_request_var('filter') . "%')";
-		}else{
+		} else {
 			$sql_where = "WHERE (mts.vendor LIKE '%" . get_request_var('filter') . "%' OR " .
 				"mtdt.description LIKE '%" . get_request_var('filter') . "%' OR " .
 				"mts.site_name LIKE '%" . get_request_var('filter') . "%')";
@@ -290,51 +292,45 @@ function mactrack_site_get_site_records(&$sql_where, $rows, $apply_limits = TRUE
 	}
 
 	if (sizeof($device_type_info)) {
-		if (!strlen($sql_where)) {
-			$sql_where = 'WHERE (mtd.device_type_id=' . $device_type_info['device_type_id'] . ')';
-		}else{
-			$sql_where .= ' AND (mtd.device_type_id=' . $device_type_info['device_type_id'] . ')';
-		}
+		$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . '(mtd.device_type_id=' . $device_type_info['device_type_id'] . ')';
 	}
 
 	if ((get_request_var('site_id') != '-1') && (get_request_var('detail'))) {
-		if (!strlen($sql_where)) {
-			$sql_where = 'WHERE (mtd.site_id=' . get_request_var('site_id') . ')';
-		}else{
-			$sql_where .= ' AND (mtd.site_id=' . get_request_var('site_id') . ')';
-		}
+		$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . '(mtd.site_id=' . get_request_var('site_id') . ')';
 	}
 
 	$sql_order = get_order_string();
 	if ($apply_limits) {
 		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ',' . $rows;
-	}else{
+	} else {
 		$sql_limit = '';
 	}
 
 	if (get_request_var('detail') == 'false') {
-		$query_string = "SELECT mts.site_id, mts.site_name, mts.total_devices, mts.total_device_errors, 
-			mts.total_macs, mts.total_ips, mts.total_oper_ports, mts.total_user_ports
+		$query_string = "SELECT mts.site_id, mts.site_name, mts.total_devices, 
+			mts.total_device_errors, mts.total_macs, mts.total_ips, 
+			mts.total_oper_ports, mts.total_user_ports
 			FROM mac_track_sites AS mts
 			$sql_where
 			$sql_order
 			$sql_limit";
-	}else{
-		$query_string ="SELECT mts.site_id, mts.site_name, COUNT(mtdt.device_type_id) AS total_devices,
+	} else {
+		$query_string ="SELECT mts.site_id, mts.site_name, 
+			COUNT(mtdt.device_type_id) AS total_devices,
 			mtdt.vendor, mtdt.description,
 			SUM(mtd.ips_total) AS sum_ips_total,
 			SUM(mtd.ports_total) AS sum_ports_total,
 			SUM(mtd.ports_active) AS sum_ports_active,
 			SUM(mtd.ports_trunk) AS sum_ports_trunk,
 			SUM(mtd.macs_active) AS sum_macs_active
-			FROM (mac_track_device_types AS mtdt
+			FROM mac_track_device_types AS mtdt
 			RIGHT JOIN mac_track_devices AS mtd
-			ON (mtdt.device_type_id = mtd.device_type_id))
+			ON mtdt.device_type_id = mtd.device_type_id
 			RIGHT JOIN mac_track_sites AS mts
-			ON (mtd.site_id = mts.site_id)
+			ON mtd.site_id = mts.site_id
 			$sql_where
 			GROUP BY mts.site_name, mtdt.vendor, mtdt.description
-			HAVING (((COUNT(mtdt.device_type_id))>0))
+			HAVING COUNT(mtdt.device_type_id) > 0
 			$sql_order
 			$sql_limit";
 	}
@@ -358,7 +354,7 @@ function mactrack_site_edit() {
 			array(get_request_var('site_id')));
 
 		$header_label = __('Device Tracking Site [edit: %s]', $site['site_name'], 'mactrack');
-	}else{
+	} else {
 		$header_label = __('Device Tracking Site [new]', 'mactrack');
 	}
 
@@ -385,9 +381,9 @@ function mactrack_site() {
 
 	if (get_request_var('rows') == -1) {
 		$rows = read_config_option('num_rows_table');
-	}elseif (get_request_var('rows') == -2) {
+	} elseif (get_request_var('rows') == -2) {
 		$rows = 999999;
-	}else{
+	} else {
 		$rows = get_request_var('rows');
 	}
 
@@ -406,7 +402,7 @@ function mactrack_site() {
 			COUNT(mts.site_id)
 			FROM mac_track_sites AS mts
 			$sql_where");
-	}else{
+	} else {
 		$total_rows = db_fetch_cell("SELECT count(*)
 			FROM (mac_track_device_types AS mtdt
 			RIGHT JOIN mac_track_devices AS mtd
@@ -416,6 +412,8 @@ function mactrack_site() {
 			$sql_where
 			GROUP BY mts.site_name, mtdt.device_type_id");
 	}
+
+	form_start('mactrack_sites.php', 'chk');
 
 	if (get_request_var('detail') == 'false') {
 		$display_text = array(
@@ -452,7 +450,7 @@ function mactrack_site() {
 				form_checkbox_cell($site['site_name'], $site['site_id']);
 				form_end_row();
 			}
-		}else{
+		} else {
 			print '<tr><td><em>' . __('No Device Tracking Sites Found', 'mactrack') . '</em></td></tr>';
 		}
 
@@ -461,7 +459,7 @@ function mactrack_site() {
 		if (sizeof($sites)) {
 			print $nav;
 		}
-	}else{
+	} else {
 		$display_text = array(
 			'site_name'        => array(__('Site Name', 'mactrack'), 'ASC'),
 			'vendor'           => array(__('Vendor', 'mactrack'), 'ASC'),
@@ -502,7 +500,7 @@ function mactrack_site() {
 				</tr>
 				<?php
 			}
-		}else{
+		} else {
 			print '<tr><td><em>' . __('No Device Tracking Sites Found', 'mactrack') . '</em></td></tr>';
 		}
 
@@ -517,5 +515,7 @@ function mactrack_site() {
 	if (get_request_var('detail') == 'false') {
 		draw_actions_dropdown($site_actions);
 	}
+
+	form_end();
 }
 

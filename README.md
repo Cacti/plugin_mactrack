@@ -35,6 +35,7 @@ Bug and feature enhancements for the webseer plugin are handled in GitHub. If yo
 
 --- 4.1 ---
 * feature: Updates to facilitate i18n by contributors
+* issue#25: Unable to remove Site
 
 --- 4.0 ---
 * feature: Cacti 1.0 compatibility 
