@@ -1044,7 +1044,7 @@ function mactrack_config_settings () {
 			'friendly_name' => __('Source Email Name', 'mactrack'),
 			'description' => __('The Source Email name for Device Tracking Emails.', 'mactrack'),
 			'method' => 'textbox',
-			'default' => 'MACTrack Administrator',
+			'default' => __('MACTrack Administrator', 'mactrack'),
 			'max_length' => '100',
 			'size' => '30'
 			),

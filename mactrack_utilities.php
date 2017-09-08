@@ -487,7 +487,7 @@ function mactrack_utilities() {
 			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_proc_status'><?php print __('View Device Tracking Process Status', 'mactrack');?></a>
 		</td>
 		<td class='textArea'>
-			<?php print __('This option will let you show and set process information associated with the Device Tracking polling process.');?>
+			<?php print __('This option will let you show and set process information associated with the Device Tracking polling process.', 'mactrack');?>
 		</td>
 	</tr>
 
@@ -513,7 +513,7 @@ function mactrack_utilities() {
 
 	<tr class='odd'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_purge_scanning_funcs'><?php print __('Refresh Scanning Functions');?></a>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_purge_scanning_funcs'><?php print __('Refresh Scanning Functions', 'mactrack');?></a>
 		</td>
 		<td class='textArea'>
 			<?php print __('Deletes old and potentially stale Device Tracking scanning functions from the drop-down you receive when you edit a device type.', 'mactrack');?>
@@ -542,7 +542,7 @@ function mactrack_utilities() {
 
 	<tr class='odd'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data'><?php print __('Perform Aggregate Table Rebuild');?></a>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data'><?php print __('Perform Aggregate Table Rebuild', 'mactrack');?></a>
 		</td>
 		<td class='textArea'>
 			<?php print __('Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scaned data</strong> now.', 'mactrack');?>
