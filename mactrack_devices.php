@@ -998,17 +998,17 @@ function mactrack_device() {
 		$sql_where");
 
 	$display_text = array(
-		'device_name'      => array(__('Device Name'), 'ASC'),
-		'site_name'        => array(__('Site Name'), 'ASC'),
-		'snmp_status'      => array(__('Status'), 'ASC'),
-		'hostname'         => array(__('Hostname'), 'ASC'),
-		'device_type'      => array(__('Device Type'), 'ASC'),
-		'ips_total'        => array(__('Total IPs'), 'DESC'),
-		'ports_total'      => array(__('User Ports'), 'DESC'),
-		'ports_active'     => array(__('User Ports Up'), 'DESC'),
-		'ports_trunk'      => array(__('Trunk Ports'), 'DESC'),
-		'macs_active'      => array(__('Active Macs'), 'DESC'),
-		'last_runduration' => array(__('Last Duration'), 'DESC')
+		'device_name'      => array(__('Device Name', 'mactrack'), 'ASC'),
+		'site_name'        => array(__('Site Name', 'mactrack'), 'ASC'),
+		'snmp_status'      => array(__('Status', 'mactrack'), 'ASC'),
+		'hostname'         => array(__('Hostname', 'mactrack'), 'ASC'),
+		'device_type'      => array(__('Device Type', 'mactrack'), 'ASC'),
+		'ips_total'        => array(__('Total IPs', 'mactrack'), 'DESC'),
+		'ports_total'      => array(__('User Ports', 'mactrack'), 'DESC'),
+		'ports_active'     => array(__('User Ports Up', 'mactrack'), 'DESC'),
+		'ports_trunk'      => array(__('Trunk Ports', 'mactrack'), 'DESC'),
+		'macs_active'      => array(__('Active Macs', 'mactrack'), 'DESC'),
+		'last_runduration' => array(__('Last Duration', 'mactrack'), 'DESC')
 	);
 
 	$columns = sizeof($display_text) + 1;
