@@ -1184,7 +1184,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 			if (sizeof($new_port_key_array)) {
 			foreach ($new_port_key_array as $key => $port_key) {
-				$new_port_key_array[$key]["mac_address"] = @$port_macs[$port_key["key"]];
+				$new_port_key_array[$key]["mac_address"] = (isset($port_macs[$port_key["key"]]) ? $port_macs[$port_key["key"]]:'' );
 				mactrack_debug("INDEX: '". $key . "' MAC ADDRESS: " . $new_port_key_array[$key]["mac_address"]);
 			}
 			}
