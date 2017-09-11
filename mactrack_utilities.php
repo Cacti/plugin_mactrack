@@ -79,7 +79,9 @@ switch (get_request_var('action')) {
 		load_current_session_value('refresh', 'sess_mt_refresh', '30');
 
 		$refresh['seconds'] = get_request_var('refresh');
-		$refresh['page'] = 'mactrack_utilities.php?action=mactrack_proc_status';
+		$refresh['page'] = 'mactrack_utilities.php?action=mactrack_proc_status&header=false';
+		$refresh['logout']  = 'false';
+                set_page_refresh($refresh);
 
 		top_header();
 
@@ -165,7 +167,7 @@ function mactrack_display_run_status() {
 	?>
 	<script type='text/javascript'>
 	function applyFilter() {
-		strURL = 'mactrack_utilities.php?action=mactrack_proc_status&refresh='+$('#refresh').val();
+		strURL = 'mactrack_utilities.php?action=mactrack_proc_status&header=false&refresh=' + $('#refresh').val();
 		loadPageNoHeader(strURL);
 	}
 
@@ -192,7 +194,7 @@ function mactrack_display_run_status() {
 						?>
 					</td>
 					<td>
-						<input type='button' value='<?php print __esc('Refresh', 'mactrack');?>' id='refresh'>
+						<input type='button' value='<?php print __esc('Refresh', 'mactrack');?>' onClick='applyFilter()'>
 					</td>
 				</tr>
 			</table>
