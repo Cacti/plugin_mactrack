@@ -1068,9 +1068,10 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 	if (sizeof($active_ports_array)) {
 	foreach($active_ports_array as $port_info) {
 		$port_info =  mactrack_strip_alpha($port_info);
-		if (((@$ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
-			(@$ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
-			(@$ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
+		if (isset($indexes[$i]) && isset($ifInterfaces[$indexes[$i]]["ifType"])) {
+		if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
+			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
+			($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
 			if ($port_info == 1) {
 				$ports_active++;
 			}
