@@ -764,7 +764,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			$insert_vals .= ",";
 		}
 
-		$mac_address = @xform_mac_address($ifPhysAddress[$ifIndex]);
+		$mac_address = @xform_mac_address(isset($ifPhysAddress[$ifIndex]));
 
 		$insert_vals .= "('" .
 			@$device["site_id"]                 . "', '" . @$device["device_id"]         . "', '" .
