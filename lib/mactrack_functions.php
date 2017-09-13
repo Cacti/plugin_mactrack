@@ -763,9 +763,8 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		}else{
 			$insert_vals .= ",";
 		}
-
-		$mac_address = @xform_mac_address($ifPhysAddress[$ifIndex]);
-
+		
+		$mac_address = isset($ifPhysAddress[$ifIndex]) ? xform_mac_address($ifPhysAddress[$ifIndex]):'';
 		$insert_vals .= "('" .
 			@$device["site_id"]                 . "', '" . @$device["device_id"]         . "', '" .
 			@$device["snmp_sysUptime"]          . "', '" . @$ifIndex                     . "', '" .
@@ -1068,9 +1067,10 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 	if (sizeof($active_ports_array)) {
 	foreach($active_ports_array as $port_info) {
 		$port_info =  mactrack_strip_alpha($port_info);
-		if (((@$ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
-			(@$ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
-			(@$ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
+		if (isset($indexes[$i]) && isset($ifInterfaces[$indexes[$i]]["ifType"])) {
+		if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
+			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
+			($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
 			if ($port_info == 1) {
 				$ports_active++;
 			}
@@ -1184,7 +1184,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 			if (sizeof($new_port_key_array)) {
 			foreach ($new_port_key_array as $key => $port_key) {
-				$new_port_key_array[$key]["mac_address"] = @$port_macs[$port_key["key"]];
+				$new_port_key_array[$key]["mac_address"] = (isset($port_macs[$port_key["key"]]) ? $port_macs[$port_key["key"]]:'' );
 				mactrack_debug("INDEX: '". $key . "' MAC ADDRESS: " . $new_port_key_array[$key]["mac_address"]);
 			}
 			}
