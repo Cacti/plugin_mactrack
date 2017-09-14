@@ -1074,6 +1074,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 			if ($port_info == 1) {
 				$ports_active++;
 			}
+			}
 			$ports_total++;
 		}
 
