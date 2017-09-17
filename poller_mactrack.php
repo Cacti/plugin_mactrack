@@ -799,8 +799,11 @@ function collect_mactrack_data($start, $site_id = 0) {
 		}
 
 		foreach($stats as $stat) {
-			$num_ips = @$ips[$stat['site_id']];
-			if (empty($num_ips)) $num_ips = 0;
+			if (isset($ips[$stat['site_id']])) {
+				$num_ips = $ips[$stat['site_id']];
+			} else {
+				$num_ips = 0;
+			}
 
 			db_execute_prepared('UPDATE mac_track_sites 
 				SET total_devices = ?, total_ips = ?, total_macs = ?, 
@@ -816,8 +819,6 @@ function collect_mactrack_data($start, $site_id = 0) {
 					$stat['site_id']
 				)
 			);
-
-			db_execute($update_string);
 		}
 
 		mactrack_debug('Finished updating site table with collection statistics.');
