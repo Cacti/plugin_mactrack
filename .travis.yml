@@ -22,5 +22,5 @@ notifications:
     on_success: change
     on_failure: always
     recipients:
-- developers@cacti.net
+    - developers@cacti.net
 
