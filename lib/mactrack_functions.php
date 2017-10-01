@@ -2971,6 +2971,7 @@ function mactrack_tabs() {
 		'arp'        => __('IP Address', 'mactrack'),
 		'macs'       => __('MAC Address', 'mactrack'),
 		'interfaces' => __('Interfaces', 'mactrack'),
+		'dot1x'      => __('Dot1x', 'mactrack'),
 		'graphs'     => __('Graphs', 'mactrack')
 	);
 
