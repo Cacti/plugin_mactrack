@@ -57,6 +57,14 @@ if (isset($mactrack_scanning_functions_ip)) {
 	}
 }
 
+if (isset($mactrack_scanning_functions)) {
+	foreach($mactrack_scanning_functions_dot1x as $scanning_function) {
+		db_execute_prepared('REPLACE INTO mac_track_scanning_functions 
+			(scanning_function, type) 
+			VALUES (?, 1)', array($scanning_function));
+	}
+}
+
 $device_types_actions = array(
 	1 => __('Delete', 'mactrack'),
 	2 => __('Duplicate', 'mactrack')
@@ -115,8 +123,9 @@ function form_save() {
 			get_nfilter_request_var('description'), get_nfilter_request_var('vendor'), 
 			get_nfilter_request_var('device_type'), get_nfilter_request_var('sysDescr_match'), 
 			get_nfilter_request_var('sysObjectID_match'), get_nfilter_request_var('scanning_function'), 
-			get_nfilter_request_var('ip_scanning_function'), get_nfilter_request_var('serial_number_oid'), 
-			get_nfilter_request_var('lowPort'), get_nfilter_request_var('highPort'));
+			get_nfilter_request_var('ip_scanning_function'), get_nfilter_request_var('dot1x_scanning_function'),
+			get_nfilter_request_var('serial_number_oid'), get_nfilter_request_var('lowPort'), 
+			get_nfilter_request_var('highPort'));
 
 		header('Location: mactrack_device_types.php?action=edit&device_type_id=' . (empty($device_type_id) ? get_nfilter_request_var('device_type_id') : $device_type_id));
 	}
@@ -147,7 +156,7 @@ function api_mactrack_device_type_remove($device_type_id){
 
 function api_mactrack_device_type_save($device_type_id, $description,
 	$vendor, $device_type, $sysDescr_match, $sysObjectID_match, $scanning_function,
-	$ip_scanning_function, $serial_number_oid, $lowPort, $highPort) {
+	$ip_scanning_function, $dot1x_scanning_function, $serial_number_oid, $lowPort, $highPort) {
 
 	$save['device_type_id']       = $device_type_id;
 	$save['description']          = form_input_validate($description, 'description', '', false, 3);
@@ -158,6 +167,7 @@ function api_mactrack_device_type_save($device_type_id, $description,
 	$save['serial_number_oid']    = form_input_validate($serial_number_oid, 'serial_number_oid', '', true, 3);
 	$save['scanning_function']    = form_input_validate($scanning_function, 'scanning_function', '', true, 3);
 	$save['ip_scanning_function'] = form_input_validate($ip_scanning_function, 'ip_scanning_function', '', true, 3);
+	$save['dot1x_scanning_function'] = form_input_validate($dot1x_scanning_function, 'dot1x_scanning_function', '', true, 3);
 	$save['lowPort']              = form_input_validate($lowPort, 'lowPort', '', true, 3);
 	$save['highPort']             = form_input_validate($highPort, 'highPort', '', true, 3);
 
@@ -197,6 +207,7 @@ function api_mactrack_duplicate_device_type($device_type_id, $dup_id, $device_ty
 		$save['sysObjectID_match'] = __('--dup--', 'mactrack') . $device_type['sysObjectID_match'];
 		$save['scanning_function'] = $device_type['scanning_function'];
 		$save['ip_scanning_function'] = $device_type['ip_scanning_function'];
+		$save['dot1x_scanning_function'] = $device_type['dot1x_scanning_function'];
 		$save['lowPort'] = $device_type['lowPort'];
 		$save['highPort'] = $device_type['highPort'];
 
@@ -362,7 +373,7 @@ function mactrack_device_type_export() {
 	$xport_array = array();
 	array_push($xport_array, '"vendor","description","device_type",' .
 		'"sysDescr_match","sysObjectID_match","scanning_function","ip_scanning_function",' .
-		'"serial_number_oid","lowPort","highPort"');
+		'"dot1x_scanning_function","serial_number_oid","lowPort","highPort"');
 
 	if (sizeof($device_types)) {
 		foreach($device_types as $device_type) {
@@ -373,6 +384,7 @@ function mactrack_device_type_export() {
 			$device_type['sysObjectID_match'] . '","' .
 			$device_type['scanning_function'] . '","' .
 			$device_type['ip_scanning_function'] . '","' .
+			$device_type['dot1x_scanning_function'] . '","' .
 			$device_type['serial_number_oid'] . '","' .
 			$device_type['lowPort'] . '","' .
 			$device_type['highPort'] . '"');
@@ -508,6 +520,7 @@ function mactrack_device_type_import() {
 			<strong>sysObjectID_match</strong><?php print __(' - The vendor specific snmp sysObjectID that distinguishes this device from the next', 'mactrack');?><br>
 			<strong>scanning_function</strong><?php print __(' - The scanning function that will be used to scan this device type', 'mactrack');?><br>
 			<strong>ip_scanning_function</strong><?php print __(' - The IP scanning function that will be used to scan this device type', 'mactrack');?><br>
+			<strong>dot1x_scanning_function</strong><?php print __(' - The 802.1x scanning function that will be used to scan this device type', 'mactrack');?><br>
 			<strong>serial_number_oid</strong><?php print __(' - If the Serial Number for this device type can be obtained via an SNMP Query, add it\'s OID here', 'mactrack');?><br>
 			<strong>lowPort</strong><?php print __(' - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports', 'mactrack');?><br>
 			<strong>highPort</strong><?php print __(' - Same as the lowPort with the exception that this is the high numbered user port number', 'mactrack');?><br>
@@ -628,6 +641,7 @@ function mactrack_device_type_import_processor(&$device_types) {
 						break;
 					case 'scanning_function':
 					case 'ip_scanning_function':
+					case 'dot1x_scanning_function':	
 					case 'serial_number_oid':
 					case 'lowPort':
 					case 'highPort':
@@ -918,6 +932,7 @@ function mactrack_device_type() {
 		'device_type'          => array(__('Device Type', 'mactrack'), 'DESC'),
 		'scanning_function'    => array(__('Port Scanner', 'mactrack'), 'ASC'),
 		'ip_scanning_function' => array(__('IP Scanner', 'mactrack'), 'ASC'),
+		'dot1x_scanning_function' => array(__('Dot1x Scanner', 'mactrack'), 'ASC'),
 		'sysDescr_match'       => array(__('sysDescription Match', 'mactrack'), 'DESC'),
 		'sysObjectID_match'    => array(__('Vendor OID Match', 'mactrack'), 'DESC')
 	);
