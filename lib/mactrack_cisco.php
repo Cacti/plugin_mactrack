@@ -474,3 +474,131 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 
 	return $device;
 }
+function get_cisco_dhcpsnooping_table($site, &$device) {
+        global $debug, $scan_date;
+
+        /* get the cdsBindingInterface Index for the device */
+        $cdsBindingInterface = xform_stripped_oid('.1.3.6.1.4.1.9.9.380.1.4.1.1.5', $device);
+        $cdsBindingEntries   = array();
+
+        if (sizeof($cdsBindingInterface)) {
+                mactrack_debug('cdsBindingInterface data collection complete');
+                $dot1dTpFdbEntry = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1', $device);
+                mactrack_debug('dot1dTpFdbEntry data collection complete');
+                $cdsBindingsIpAddress  = xform_stripped_oid('.1.3.6.1.4.1.9.9.380.1.4.1.1.4', $device);
+                mactrack_debug('cdsBindingsIpAddress data collection complete');
+        }else{
+                /* to be removed */
+                $cdsBindingInterface   = xform_stripped_oid('.1.3.6.1.4.1.9.9.380.1.4.1.1.5', $device);
+                mactrack_debug('cdsBindingInterface data collection complete');
+                $dot1dTpFdbEntry = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1', $device);
+                mactrack_debug('dot1dTpFdbEntry data collection complete');
+                $cdsBindingsIpAddress = xform_stripped_oid('.1.3.6.1.4.1.9.9.380.1.4.1.1.4', $device);
+                mactrack_debug('cdsBindingsIpAddress data collection complete');
+        }
+
+        /* get the ifNames for the device */
+        $keys = array_keys($cdsBindingInterface);
+        $i = 0;
+        if (sizeof($cdsBindingInterface)) {
+        foreach($cdsBindingInterface as $cdsBindingIndex) {
+                $cdsBindingEntries[$i]['cdsBindingIndex'] = $cdsBindingIndex;
+                $cdsBindingEntries[$i]['dot1dTpFdbEntry'] = isset($dot1dTpFdbEntry[$keys[$i]]) ? xform_mac_address($dot1dTpFdbEntry[$keys[$i]]):'';
+                $cdsBindingEntries[$i]['cdsBindingsIpAddress'] = isset($cdsBindingsIpAddress[$keys[$i]]) ? xform_net_address($cdsBindingsIpAddress[$keys[$i]]):'';
+                $i++;
+        }
+        }
+        mactrack_debug('cdsBindingEntries assembly complete.');
+	/* output details to database */
+        if (sizeof($cdsBindingEntries)) {
+        foreach($cdsBindingEntries as $cdsBindingEntry) {
+                $insert_string = 'REPLACE INTO mac_track_ips
+                        (site_id,device_id,hostname,device_name,port_number,
+                        mac_address,ip_address,scan_date)
+                        VALUES (' .
+                        $device['site_id'] . ',' .
+                        $device['device_id'] . ',' .
+                        db_qstr($device['hostname']) . ',' .
+                        db_qstr($device['device_name']) . ',' .
+                        db_qstr($cdsBindingEntry['cdsBindingIndex']) . ',' .
+                        db_qstr($cdsBindingEntry['dot1dTpFdbEntry']) . ',' .
+                        db_qstr($cdsBindingEntry['cdsBindingsIpAddress']) . ',' .
+                        db_qstr($scan_date) . ')';
+
+                //mactrack_debug("SQL: " . $insert_string);
+
+                db_execute($insert_string);
+        }
+        }
+
+        /* save ip information for the device */
+        $device['ips_total'] = sizeof($cdsBindingEntries);
+        db_execute('UPDATE mac_track_devices SET ips_total =' . $device['ips_total'] . ' WHERE device_id=' . $device['device_id']);
+
+        mactrack_debug('HOST: ' . $device['hostname'] . ', IP address information collection complete');
+}
+
+/*	get_cisco_dot1x_table - This function reads a devices Dot1x table for a site and stores
+  the IP address, MAC address, Username, Domain and Status combinations in the mac_track_dot1x table.
+*/
+function get_cisco_dot1x_table($site, &$device) {
+	global $debug, $scan_date;
+
+	/* get the cafSessionAuthUserName from the device */
+	$cafSessionAuthUserName = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.10', $device);
+	$atEntries   = array();
+
+	if (sizeof($cafSessionAuthUserName)) {
+		mactrack_debug('cafSessionAuthUserName data collection complete');
+		$cafSessionClientMacAddress = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.2', $device);
+		mactrack_debug('cafSessionClientMacAddress data collection complete');
+		$cafSessionClientAddress  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.4', $device);
+		mactrack_debug('cafSessionClientAddress data collection complete');
+		$cafSessionDomain  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.6', $device);
+		mactrack_debug('cafSessionDomain data collection complete');
+		$cafSessionStatus  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.5', $device);
+		mactrack_debug('cafSessionStatus data collection complete');
+	}else{
+		/* Nothing to do here */
+		
+	}
+
+	$keys = array_keys($cafSessionAuthUserName);
+	$i = 0;
+	if (sizeof($cafSessionAuthUserName)) {
+	foreach($cafSessionAuthUserName as $Dot1xIndex) {
+		$Dot1xEntries[$i]['Dot1xIndex'] = $Dot1xIndex;
+		$Dot1xEntries[$i]['cafSessionClientMacAddress'] = isset($cafSessionClientMacAddress[$keys[$i]]) ? xform_mac_address($cafSessionClientMacAddress[$keys[$i]]):'';
+		$Dot1xEntries[$i]['cafSessionClientAddress'] = isset($cafSessionClientAddress[$keys[$i]]) ? xform_net_address($cafSessionClientAddress[$keys[$i]]):'';
+		$Dot1xEntries[$i]['cafSessionDomain'] = isset($cafSessionDomain[$keys[$i]]) ? $cafSessionDomain[$keys[$i]]:'';
+		$Dot1xEntries[$i]['cafSessionStatus'] = isset($cafSessionStatus[$keys[$i]]) ? $cafSessionStatus[$keys[$i]]:'';
+		$i++;
+	}
+	}
+	mactrack_debug('Dot1xEntries assembly complete.');
+
+	/* output details to database */
+	if (sizeof($Dot1xEntries)) {
+	foreach($Dot1xEntries as $Dot1xEntry) {
+		$insert_string = 'REPLACE INTO mac_track_dot1x 
+			(site_id,device_id,hostname,device_name,username,
+			mac_address,ip_address,domain,status,scan_date)
+			VALUES (' .
+			$device['site_id'] . ',' .
+			$device['device_id'] . ',' .
+			db_qstr($device['hostname']) . ',' .
+			db_qstr($device['device_name']) . ',' .
+			db_qstr($Dot1xEntry['Dot1xIndex']) . ',' .
+			db_qstr($Dot1xEntry['cafSessionClientMacAddress']) . ',' .
+			db_qstr($Dot1xEntry['cafSessionClientAddress']) . ',' .
+			db_qstr($Dot1xEntry['cafSessionDomain']) . ',' .
+			db_qstr($Dot1xEntry['cafSessionStatus']) . ',' .
+			db_qstr($scan_date) . ')';
+
+		//mactrack_debug("SQL: " . $insert_string);
+
+		db_execute($insert_string);
+	}
+	}
+
+}
