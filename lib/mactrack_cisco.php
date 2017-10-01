@@ -27,6 +27,12 @@ if (!isset($mactrack_scanning_functions)) { $mactrack_scanning_functions = array
 array_push($mactrack_scanning_functions, "get_catalyst_dot1dTpFdbEntry_ports");
 array_push($mactrack_scanning_functions, "get_IOS_dot1dTpFdbEntry_ports");
 
+if (!isset($mactrack_scanning_functions_ip)) { $mactrack_scanning_functions_ip = array(); }
+array_push($mactrack_scanning_functions_ip, 'get_cisco_dhcpsnooping_table');
+
+if (!isset($mactrack_scanning_functions_dot1x)) { $mactrack_scanning_functions_dot1x = array(); }
+array_push($mactrack_scanning_functions_dot1x, 'get_cisco_dot1x_table');
+
 /* get_catalyst_doet1dTpFdbEntry_ports
 	obtains port associations for Cisco Catalyst Swtiches.  Catalyst
 	switches are unique in that they support a different snmp_readstring for
