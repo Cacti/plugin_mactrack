@@ -47,7 +47,7 @@ function mactrack_debug($message) {
 }
 
 function mactrack_rebuild_scanning_funcs() {
-	global $config, $mactrack_scanning_functions_ip, $mactrack_scanning_functions;
+	global $config, $mactrack_scanning_functions_ip, $mactrack_scanning_functions, $mactrack_scanning_functions_dot1x;
 
 	if (defined('CACTI_BASE_PATH')) {
 		$config['base_path'] = CACTI_BASE_PATH;
@@ -70,6 +70,12 @@ function mactrack_rebuild_scanning_funcs() {
 	if (isset($mactrack_scanning_functions_ip)) {
 	foreach($mactrack_scanning_functions_ip as $scanning_function) {
 		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '2')");
+	}
+	}
+	db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('Not Applicable - Router', '1')");
+	if (isset($mactrack_scanning_functions_dot1x)) {
+	foreach($mactrack_scanning_functions_dot1x as $scanning_function) {
+		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '1')");
 	}
 	}
 }
