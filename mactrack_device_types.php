@@ -955,6 +955,7 @@ function mactrack_device_type() {
 			form_selectable_cell($mactrack_device_types[$device_type['device_type']], $device_type['device_type_id']);
 			form_selectable_cell($device_type['scanning_function'], $device_type['device_type_id']);
 			form_selectable_cell($device_type['ip_scanning_function'], $device_type['device_type_id']);
+			form_selectable_cell($device_type['dot1x_scanning_function'], $device_type['device_type_id']);
 			form_selectable_cell($device_type['sysDescr_match'], $device_type['device_type_id']);
 			form_selectable_cell($device_type['sysObjectID_match'], $device_type['device_type_id']);
 			form_checkbox_cell($device_type['description'], $device_type['device_type_id']);
