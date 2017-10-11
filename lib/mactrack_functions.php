@@ -2808,7 +2808,7 @@ function mactrack_legend_row($class, $text) {
 
 function mactrack_redirect() {
 	/* set the default tab */
-    get_filter_request_var('report', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-zA-Z]+)$/')));
+    get_filter_request_var('report', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-zA-Z0-9]+)$/')));
 
 	load_current_session_value('report', 'sess_mt_report', 'devices');
 	$current_tab = get_nfilter_request_var('report');
