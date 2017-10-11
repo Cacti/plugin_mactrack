@@ -346,8 +346,11 @@ function mactrack_database_upgrade () {
 		'ifMauAutoNegRemoteSignaling',
 		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifMauAutoNegRemoteSignaling` integer UNSIGNED NOT NULL default '0' AFTER `ifMauAutoNegAdminStatus`");
 	mactrack_add_column('mac_track_device_types',
+		'dot1x_scanning_function',
+		"ALTER TABLE `mac_track_device_types` ADD COLUMN `dot1x_scanning_function` varchar(100) default '' AFTER `ip_scanning_function`");
+	mactrack_add_column('mac_track_device_types',
 		'serial_number_oid',
-		"ALTER TABLE `mac_track_device_types` ADD COLUMN `serial_number_oid` varchar(100) default '' AFTER `ip_scanning_function`");
+		"ALTER TABLE `mac_track_device_types` ADD COLUMN `serial_number_oid` varchar(100) default '' AFTER `dot1x_scanning_function`");
 	mactrack_add_column('mac_track_sites',
 		'customer_contact',
 		"ALTER TABLE `mac_track_sites` ADD COLUMN `customer_contact` varchar(150) default '' AFTER `site_name`");
@@ -422,6 +425,7 @@ function mactrack_setup_table_new () {
 			`sysObjectID_match` varchar(40) NOT NULL default '',
 			`scanning_function` varchar(100) NOT NULL default '',
 			`ip_scanning_function` varchar(100) NOT NULL,
+			`dot1x_scanning_function` varchar(100) NOT NULL,
 			`serial_number_oid` varchar(100) default '',
 			`lowPort` int(10) unsigned NOT NULL default '0',
 			`highPort` int(10) unsigned NOT NULL default '0',
