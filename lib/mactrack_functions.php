@@ -2226,7 +2226,7 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 
 	if ($type != 'ui') print '<tr><td>';
 
-	if (sizeof($oui_database)) {
+	if (is_array($oui_database)) {
 		echo __('OUI Database Download from IEEE Complete', 'mactrack') . "\n";
 	}else{
 		echo __('OUI Database Download from IEEE FAILED', 'mactrack') . "\n";
@@ -2234,7 +2234,7 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 
 	if ($type != 'ui') print '</td></tr>';
 
-	if (sizeof($oui_database)) {
+	if (is_array($oui_database)) {
 		db_execute('UPDATE mac_track_oui_database SET present=0');
 
 		/* initialize some variables */
