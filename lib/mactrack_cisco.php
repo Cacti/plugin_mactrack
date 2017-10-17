@@ -565,7 +565,7 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 				$snmp_readstring = "vlan-" . $active_vlan["vlan_id"];
 			}
 
-			mactrack_debug("Processing has begun for VLAN: " . $active_vlan["vlan_id"]);
+			mactrack_debug('Processing has begun for VLAN: ' . $active_vlan["vlan_id"]);
 			
 			if (sizeof($active_vlans)) {
 			$dot1dTpFdbEntries[$n] = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.1', $device, $snmp_readstring);
@@ -576,12 +576,12 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 			mactrack_debug('dot1dTpFdbEntry data collection complete :' . sizeof($dot1dTpFdbEntries[$n]));
 				if ($n > 0 ) {
 					$dot1dTpFdbEntry = array_merge($dot1dTpFdbEntry, $dot1dTpFdbEntries[$n]);
-					mactrack_debug('merge data collection complete :' . sizeof($dot1dTpFdbEntry));
+					mactrack_debug('merge data collection complete : ' . sizeof($dot1dTpFdbEntry));
 				}
 			}
 			$n++;
 
-			mactrack_debug('dot1dTpFdbEntry vlan_id:' . $active_vlan["vlan_id"]);
+			mactrack_debug('dot1dTpFdbEntry vlan_id: ' . $active_vlan["vlan_id"]);
 			}
 						
 			$keys = array_keys($cdsBindingInterface); 
@@ -594,7 +594,7 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 				$cdsBindingEntries[$j]['cdsBindingsIpAddress'] = isset($cdsBindingsIpAddress[$keys[$j]]) ? xform_net_address($cdsBindingsIpAddress[$keys[$j]]):'';
 				$j++;
 			}
-			mactrack_debug("cdsBindingEntries Total entries: " . sizeof($cdsBindingEntries));
+			mactrack_debug('cdsBindingEntries Total entries: ' . sizeof($cdsBindingEntries));
 			}
 			mactrack_debug('cdsBindingEntries assembly complete.');
 		}else{
@@ -644,15 +644,15 @@ function get_cisco_dot1x_table($site, &$device) {
 	$cafSessionAuthUserName = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.10', $device);
 
 	if (sizeof($cafSessionAuthUserName)) {
-		mactrack_debug('cafSessionAuthUserName data collection complete' . sizeof($cafSessionAuthUserName));
+		mactrack_debug('cafSessionAuthUserName data collection complete: ' . sizeof($cafSessionAuthUserName));
 		$cafSessionClientMacAddress = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.2', $device);
-		mactrack_debug('cafSessionClientMacAddress data collection complete' . sizeof($cafSessionClientMacAddress));
+		mactrack_debug('cafSessionClientMacAddress data collection complete: ' . sizeof($cafSessionClientMacAddress));
 		$cafSessionClientAddress  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.4', $device);
-		mactrack_debug('cafSessionClientAddress data collection complete' . sizeof($cafSessionClientAddress));
+		mactrack_debug('cafSessionClientAddress data collection complete: ' . sizeof($cafSessionClientAddress));
 		$cafSessionDomain  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.6', $device);
-		mactrack_debug('cafSessionDomain data collection complete' . sizeof($cafSessionDomain));
+		mactrack_debug('cafSessionDomain data collection complete: ' . sizeof($cafSessionDomain));
 		$cafSessionStatus  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.5', $device);
-		mactrack_debug('cafSessionStatus data collection complete' . sizeof($cafSessionStatus));
+		mactrack_debug('cafSessionStatus data collection complete: ' . sizeof($cafSessionStatus));
 	}else{
 		/* Nothing to do here */
 		
@@ -673,7 +673,7 @@ function get_cisco_dot1x_table($site, &$device) {
 	}
 	
 	$ifIndexes = array_map(function ($ar) {return $ar['0'];}, $ifIndex); //re-arrange the previous exploded array
-	mactrack_debug('ifIndexes assembly complete' . sizeof($ifIndexes));
+	mactrack_debug('ifIndexes assembly complete: ' . sizeof($ifIndexes));
 	
 	$keys = array_keys($cafSessionAuthUserName);
 	$i = 0;
