@@ -552,23 +552,39 @@ function get_cisco_dot1x_table($site, &$device) {
 
 	/* get the cafSessionAuthUserName from the device */
 	$cafSessionAuthUserName = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.10', $device);
-	$atEntries   = array();
 
 	if (sizeof($cafSessionAuthUserName)) {
-		mactrack_debug('cafSessionAuthUserName data collection complete');
+		mactrack_debug('cafSessionAuthUserName data collection complete' . sizeof($cafSessionAuthUserName));
 		$cafSessionClientMacAddress = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.2', $device);
-		mactrack_debug('cafSessionClientMacAddress data collection complete');
+		mactrack_debug('cafSessionClientMacAddress data collection complete' . sizeof($cafSessionClientMacAddress));
 		$cafSessionClientAddress  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.4', $device);
-		mactrack_debug('cafSessionClientAddress data collection complete');
+		mactrack_debug('cafSessionClientAddress data collection complete' . sizeof($cafSessionClientAddress));
 		$cafSessionDomain  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.6', $device);
-		mactrack_debug('cafSessionDomain data collection complete');
+		mactrack_debug('cafSessionDomain data collection complete' . sizeof($cafSessionDomain));
 		$cafSessionStatus  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.5', $device);
-		mactrack_debug('cafSessionStatus data collection complete');
+		mactrack_debug('cafSessionStatus data collection complete' . sizeof($cafSessionStatus));
 	}else{
 		/* Nothing to do here */
 		
 	}
-
+	
+	$ifIndex = array();
+	$cafSessionAuthUserNames = array();
+	$cafSessionAuthUserKey = array_keys($cafSessionAuthUserName); //Getting the keys to explode the first part which is the ifIndex
+	$m = 0;
+	
+	/* This is to take the ifIndex from the OID */
+	if(sizeof($cafSessionAuthUserKey)) {
+		foreach($cafSessionAuthUserKey as $cafSessionAuthUserNames) {
+			$ifIndex[$m] = explode(".", $cafSessionAuthUserKey[$m]);
+			$m++;
+			}
+			
+	}
+	
+	$ifIndexes = array_map(function ($ar) {return $ar['0'];}, $ifIndex); //re-arrange the previous exploded array
+	mactrack_debug('ifIndexes assembly complete' . sizeof($ifIndexes));
+	
 	$keys = array_keys($cafSessionAuthUserName);
 	$i = 0;
 	if (sizeof($cafSessionAuthUserName)) {
@@ -578,6 +594,7 @@ function get_cisco_dot1x_table($site, &$device) {
 		$Dot1xEntries[$i]['cafSessionClientAddress'] = isset($cafSessionClientAddress[$keys[$i]]) ? xform_net_address($cafSessionClientAddress[$keys[$i]]):'';
 		$Dot1xEntries[$i]['cafSessionDomain'] = isset($cafSessionDomain[$keys[$i]]) ? $cafSessionDomain[$keys[$i]]:'';
 		$Dot1xEntries[$i]['cafSessionStatus'] = isset($cafSessionStatus[$keys[$i]]) ? $cafSessionStatus[$keys[$i]]:'';
+		$Dot1xEntries[$i]['port_number'] = isset($ifIndexes[$i]) ? $ifIndexes[$i]:'';
 		$i++;
 	}
 	}
@@ -588,7 +605,7 @@ function get_cisco_dot1x_table($site, &$device) {
 	foreach($Dot1xEntries as $Dot1xEntry) {
 		$insert_string = 'REPLACE INTO mac_track_dot1x 
 			(site_id,device_id,hostname,device_name,username,
-			mac_address,ip_address,domain,status,scan_date)
+			mac_address,ip_address,domain,status,port_number,scan_date)
 			VALUES (' .
 			$device['site_id'] . ',' .
 			$device['device_id'] . ',' .
@@ -599,6 +616,7 @@ function get_cisco_dot1x_table($site, &$device) {
 			db_qstr($Dot1xEntry['cafSessionClientAddress']) . ',' .
 			db_qstr($Dot1xEntry['cafSessionDomain']) . ',' .
 			db_qstr($Dot1xEntry['cafSessionStatus']) . ',' .
+			db_qstr($Dot1xEntry['port_number']) . ',' .
 			db_qstr($scan_date) . ')';
 
 		//mactrack_debug("SQL: " . $insert_string);
