@@ -2530,6 +2530,32 @@ function mactrack_format_interface_row($stat) {
 	return $row;
 }
 
+function mactrack_format_dot1x_row($port_result) {
+	global $config;
+
+	/* we will make a row string */
+	$row = '';
+	
+	if (get_request_var('scan_date') != 2) {
+			$scan_date = $port_result['scan_date'];
+	}else{
+			$scan_date = $port_result['max_scan_date'];
+		}
+
+	$row .= "<td nowrap style='width:1%;white-space:nowrap;'>" . mactrack_interface_actions($port_result['device_id'], $port_result['port_number']) . '</td>';
+	$row .= '<td><b>' . $port_result['device_name']                     . '</b></td>';
+	$row .= '<td>' . $port_result['hostname']            . '</td>';
+	$row .= '<td><b>' . $port_result['username']                          . '</b></td>';
+	$row .= '<td>' . $port_result['ip_address']                            . '</td>';
+	$row .= '<td>' . $port_result['mac_address']                            . '</td>';
+	$row .= '<td>' . $port_result['port_number']  . '</td>';
+	$row .= '<td>' . $port_result['ifName'] . '</td>';
+	$row .= '<td><b>' . ($port_result['domain'] == 2 ? 'DATA':'VOICE') . '</b></td>';
+	$row .= '<td><b>' . $port_result['status'] . '</b></td>';
+	$row .= "<td style='white-space:nowrap;'>" . $scan_date       . '</td>';
+	return $row;
+}
+
 function mactrack_display_Octets($octets) {
 	$suffix = '';
 	while ($octets > 1024) {
@@ -2689,6 +2715,24 @@ function mactrack_int_row_class($stat) {
 		return 'int_down';
 	} else {
 		return 'int_up';
+	}
+}
+
+function mactrack_dot1x_row_class($port_result) {
+	if ($port_result['status'] == '7') {
+		return 'authn_failed';
+	} elseif ($port_result['status'] == '5') {
+		return 'auth_failed';
+	} elseif ($port_result['status'] == '3') {
+		return 'auth_no_method';
+	} elseif ($port_result['status'] == '2') {
+		return 'running';
+	} elseif ($port_result['status'] == '1') {
+		return 'idle';	
+	} elseif ($port_result['status'] == '4') {
+		return 'auth_success';
+	} else {
+		return 'authn_success';
 	}
 }
 
