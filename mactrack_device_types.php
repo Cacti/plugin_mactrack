@@ -57,11 +57,11 @@ if (isset($mactrack_scanning_functions_ip)) {
 	}
 }
 
-if (isset($mactrack_scanning_functions)) {
+if (isset($mactrack_scanning_functions_dot1x)) {
 	foreach($mactrack_scanning_functions_dot1x as $scanning_function) {
 		db_execute_prepared('REPLACE INTO mac_track_scanning_functions 
 			(scanning_function, type) 
-			VALUES (?, 1)', array($scanning_function));
+			VALUES (?, 3)', array($scanning_function));
 	}
 }
 
