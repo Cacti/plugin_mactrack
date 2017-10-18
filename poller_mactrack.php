@@ -734,7 +734,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 				}else{
 					db_execute_prepared('UPDATE mac_track_ip_ranges
 						SET ips_current = ?,
-						ips_current_date = ?, 
+						ips_current_date = ? 
 						WHERE ip_range = ?
 						AND site_id = ?', 
 						array(
