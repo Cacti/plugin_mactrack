@@ -1446,7 +1446,7 @@ function mactrack_config_form () {
 		'description' => __('The Device Tracking scanning function specific to Switches with dot1x enabled.', 'mactrack'),
 		'value' => '|arg1:dot1x_scanning_function|',
 		'default' => 1,
-		'sql' => 'SELECT scanning_function AS id, scanning_function AS name FROM mac_track_scanning_functions WHERE type="1" ORDER BY scanning_function'
+		'sql' => 'SELECT scanning_function AS id, scanning_function AS name FROM mac_track_scanning_functions WHERE type="3" ORDER BY scanning_function'
 		),
 	'serial_number_oid' => array(
 		'method' => 'textbox',
