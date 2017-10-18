@@ -151,7 +151,7 @@ function form_actions() {
 
 	html_start_box($mactrack_view_macs_actions{get_request_var('drp_action')}, '60%', '', '3', 'center', '');
 	
-	form_start('mmactrack_view_macs.php');
+	form_start('mactrack_view_macs.php');
 
 	if (get_request_var('drp_action') == '1') { /* Authorize Macs */
 		print "<tr>
