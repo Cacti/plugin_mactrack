@@ -559,7 +559,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			/* exit if we've run too long */
 			if (($current - $start) > $max_run_duration) {
 				$exit_mactrack = true;
-				cacti_log('ERROR: Device Trackin timed out during main script processing.');
+				cacti_log('ERROR: Device Tracking timed out during main script processing.');
 				db_execute("DELETE FROM settings WHERE name='mactrack_process_status'");
 				db_process_remove('-1');
 				break;
