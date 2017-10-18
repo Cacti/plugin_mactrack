@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-09 01:44+1200\n"
+"POT-Creation-Date: 2017-10-18 16:02+1300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,247 +17,251 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../lib/mactrack_functions.php:2212
-msgid "Davice Tracking OUI Database Import Results"
+#: ../lib/mactrack_functions.php:2219
+msgid "Device Tracking OUI Database Import Results"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2213
+#: ../lib/mactrack_functions.php:2220
 msgid "Getting OUI Database from IEEE"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2215
+#: ../lib/mactrack_functions.php:2222
 msgid "Getting OUI Database from the IEEE"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2223
+#: ../lib/mactrack_functions.php:2230
 msgid "OUI Database Download from IEEE Complete"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2225
+#: ../lib/mactrack_functions.php:2232
 msgid "OUI Database Download from IEEE FAILED"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2318
+#: ../lib/mactrack_functions.php:2325
 #, php-format
 msgid "There were '%d' Entries Added/Updated in the database."
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2320
+#: ../lib/mactrack_functions.php:2327
 #, php-format
 msgid "There were '%d' Records Removed from the database."
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2342
+#: ../lib/mactrack_functions.php:2349
 msgid "atifIndexes data collection complete"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2360
+#: ../lib/mactrack_functions.php:2367
 msgid "atPhysAddress data collection complete"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2368
+#: ../lib/mactrack_functions.php:2375
 msgid "atNetAddress data collection complete"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2381
+#: ../lib/mactrack_functions.php:2388
 msgid "atEntries assembly complete."
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2407
+#: ../lib/mactrack_functions.php:2414
 #, php-format
 msgid "HOST: %s, IP address information collection complete"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2482 ../lib/mactrack_functions.php:2485
+#: ../lib/mactrack_functions.php:2489 ../lib/mactrack_functions.php:2492
 msgid "Since Restart"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2565
+#: ../lib/mactrack_functions.php:2598
 #, php-format
 msgid "Device Rescan '%s'"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2600
+#: ../lib/mactrack_functions.php:2633
 #, php-format
 msgid "Site scan '%s'"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2633
+#: ../lib/mactrack_functions.php:2666
 #, php-format
 msgid "Device Enable '%s'"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2652
+#: ../lib/mactrack_functions.php:2685
 #, php-format
 msgid "Device Disable '%d'"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2739 ../lib/mactrack_functions.php:2764
-#: ../lib/mactrack_functions.php:2765 ../lib/mactrack_functions.php:2841
-#: ../lib/mactrack_functions.php:2842 ../lib/mactrack_functions.php:2843
-#: ../lib/mactrack_functions.php:2844 ../lib/mactrack_functions.php:2845
+#: ../lib/mactrack_functions.php:2790 ../lib/mactrack_functions.php:2815
+#: ../lib/mactrack_functions.php:2816 ../lib/mactrack_functions.php:2892
+#: ../lib/mactrack_functions.php:2893 ../lib/mactrack_functions.php:2894
+#: ../lib/mactrack_functions.php:2895 ../lib/mactrack_functions.php:2896
 #: ../mactrack_macwatch.php:337 ../mactrack_macwatch.php:338
 #: ../mactrack_snmp.php:421 ../mactrack_snmp.php:426 ../mactrack_snmp.php:427
-#: ../mactrack_snmp.php:428 ../mactrack_view_arp.php:407
-#: ../mactrack_view_devices.php:334 ../mactrack_view_devices.php:335
-#: ../mactrack_view_devices.php:336 ../mactrack_view_devices.php:337
-#: ../mactrack_view_devices.php:338 ../mactrack_view_devices.php:339
+#: ../mactrack_snmp.php:428 ../mactrack_utilities.php:245
+#: ../mactrack_utilities.php:247 ../mactrack_utilities.php:249
+#: ../mactrack_view_arp.php:416 ../mactrack_view_devices.php:334
+#: ../mactrack_view_devices.php:335 ../mactrack_view_devices.php:336
+#: ../mactrack_view_devices.php:337 ../mactrack_view_devices.php:338
+#: ../mactrack_view_devices.php:339 ../mactrack_view_dot1x.php:514
 #: ../mactrack_view_interfaces.php:437 ../mactrack_view_macs.php:921
 #: ../mactrack_view_sites.php:351 ../mactrack_view_sites.php:352
 #: ../mactrack_view_sites.php:353 ../mactrack_view_sites.php:354
-#: ../mactrack_view_sites.php:355 ../mactrack_utilities.php:243
-#: ../mactrack_utilities.php:245 ../mactrack_utilities.php:247
-#: ../setup.php:977
+#: ../mactrack_view_sites.php:355 ../setup.php:1008
 msgid "N/A"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2741 ../setup.php:1246
+#: ../lib/mactrack_functions.php:2792 ../setup.php:1278
 #, php-format
 msgid "%d Minutes"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2745
+#: ../lib/mactrack_functions.php:2796
 #, php-format
 msgid "%d Hours"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2749 ../setup.php:1306 ../setup.php:1307
-#: ../setup.php:1308 ../setup.php:1309 ../setup.php:1310
+#: ../lib/mactrack_functions.php:2800 ../setup.php:1338 ../setup.php:1339
+#: ../setup.php:1340 ../setup.php:1341 ../setup.php:1342
 #, php-format
 msgid "%d Days"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2752
+#: ../lib/mactrack_functions.php:2803
 #, php-format
 msgid "%d Weeks"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2763
+#: ../lib/mactrack_functions.php:2814
 msgid "Not Recorded"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2782
+#: ../lib/mactrack_functions.php:2833
 #, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %f"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2784
+#: ../lib/mactrack_functions.php:2835
 #, php-format
 msgid ""
 "Status: Idle, LastRuntime: %f seconds, Processes: %d processes, Devices: %d, "
 "Next Run Time: %s"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2792
+#: ../lib/mactrack_functions.php:2843
 #, php-format
 msgid "Scanning Rate: Every %s"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2822
+#: ../lib/mactrack_functions.php:2873
 msgid "View Interfaces"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2827
+#: ../lib/mactrack_functions.php:2878
 msgid "Rescan Device"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2840 ../mactrack_view_devices.php:416
-#: ../mactrack_devices.php:1108
+#: ../lib/mactrack_functions.php:2891 ../mactrack_devices.php:1108
+#: ../mactrack_view_devices.php:416
 msgid "Not Detected"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2961 ../lib/mactrack_functions.php:3016
+#: ../lib/mactrack_functions.php:3012 ../lib/mactrack_functions.php:3068
 #: ../mactrack_sites.php:431 ../mactrack_sites.php:477
 #: ../mactrack_view_sites.php:258 ../mactrack_view_sites.php:322
-#: ../setup.php:1331
+#: ../setup.php:1363
 msgid "Sites"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2962 ../mactrack_device_types.php:917
-#: ../mactrack_sites.php:421 ../mactrack_view_devices.php:282
+#: ../lib/mactrack_functions.php:3013 ../mactrack_devices.php:1016
+#: ../mactrack_devices.php:1162 ../mactrack_sites.php:421
+#: ../mactrack_utilities.php:277 ../mactrack_view_devices.php:282
 #: ../mactrack_view_devices.php:467 ../mactrack_view_sites.php:249
-#: ../mactrack_utilities.php:275 ../mactrack_devices.php:1016
-#: ../mactrack_devices.php:1162 ../setup.php:1332
+#: ../setup.php:1364 ../mactrack_device_types.php:931
 msgid "Devices"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2963
+#: ../lib/mactrack_functions.php:3014
 msgid "IP Ranges"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2964
+#: ../lib/mactrack_functions.php:3015
 msgid "IP Address"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2965 ../setup.php:1833
+#: ../lib/mactrack_functions.php:3016 ../setup.php:1873
 msgid "MAC Address"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2966 ../mactrack_view_interfaces.php:293
+#: ../lib/mactrack_functions.php:3017 ../mactrack_view_interfaces.php:293
 #: ../mactrack_view_interfaces.php:512
 msgid "Interfaces"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2967 ../mactrack_view_graphs.php:154
+#: ../lib/mactrack_functions.php:3018
+msgid "Dot1x"
+msgstr ""
+
+#: ../lib/mactrack_functions.php:3019 ../mactrack_view_graphs.php:154
 msgid "Graphs"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:2996 ../mactrack_device_types.php:441
-#: ../mactrack_view_devices.php:461 ../mactrack_devices.php:1156
-#: ../setup.php:1267
+#: ../lib/mactrack_functions.php:3048 ../mactrack_devices.php:1156
+#: ../mactrack_view_devices.php:461 ../setup.php:1299
+#: ../mactrack_device_types.php:453
 msgid "Unknown"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:3010 ../mactrack_device_types.php:973
+#: ../lib/mactrack_functions.php:3062 ../mactrack_devices.php:1057
 #: ../mactrack_macauth.php:365 ../mactrack_macwatch.php:368
 #: ../mactrack_snmp.php:561 ../mactrack_vendormacs.php:199
-#: ../mactrack_view_arp.php:397 ../mactrack_view_devices.php:366
-#: ../mactrack_view_interfaces.php:530 ../mactrack_view_macs.php:911
-#: ../mactrack_devices.php:1057
+#: ../mactrack_view_arp.php:406 ../mactrack_view_devices.php:366
+#: ../mactrack_view_dot1x.php:504 ../mactrack_view_interfaces.php:530
+#: ../mactrack_view_macs.php:911 ../mactrack_device_types.php:989
 msgid "Search"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:3020 ../mactrack_device_types.php:983
+#: ../lib/mactrack_functions.php:3072 ../mactrack_devices.php:1166
 #: ../mactrack_macauth.php:375 ../mactrack_macwatch.php:378
 #: ../mactrack_snmp.php:571 ../mactrack_vendormacs.php:209
 #: ../mactrack_view_devices.php:471 ../mactrack_view_ips.php:277
-#: ../mactrack_devices.php:1166 ../setup.php:1279
+#: ../setup.php:1311 ../mactrack_device_types.php:999
 msgid "Default"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:3034
+#: ../lib/mactrack_functions.php:3086
 msgid "Show Device Details"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:3037
+#: ../lib/mactrack_functions.php:3089
 msgid "Go"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:3040
+#: ../lib/mactrack_functions.php:3092
 msgid "Clear"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:3043
+#: ../lib/mactrack_functions.php:3095
 msgid "Export"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:3052 ../mactrack_view_arp.php:403
-#: ../mactrack_view_devices.php:372 ../mactrack_view_interfaces.php:399
+#: ../lib/mactrack_functions.php:3104 ../mactrack_devices.php:1063
+#: ../mactrack_view_arp.php:412 ../mactrack_view_devices.php:372
+#: ../mactrack_view_dot1x.php:510 ../mactrack_view_interfaces.php:399
 #: ../mactrack_view_ips.php:257 ../mactrack_view_macs.php:917
-#: ../mactrack_devices.php:1063
 msgid "Site"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:3056 ../lib/mactrack_functions.php:3072
-#: ../mactrack_view_devices.php:404 ../mactrack_view_devices.php:415
-#: ../mactrack_view_devices.php:457 ../mactrack_view_ips.php:261
+#: ../lib/mactrack_functions.php:3108 ../lib/mactrack_functions.php:3124
 #: ../mactrack_devices.php:1096 ../mactrack_devices.php:1107
-#: ../mactrack_devices.php:1152
+#: ../mactrack_devices.php:1152 ../mactrack_view_devices.php:404
+#: ../mactrack_view_devices.php:415 ../mactrack_view_devices.php:457
+#: ../mactrack_view_ips.php:261
 msgid "Any"
 msgstr ""
 
-#: ../lib/mactrack_functions.php:3068 ../mactrack_view_devices.php:411
-#: ../mactrack_devices.php:1103
+#: ../lib/mactrack_functions.php:3120 ../mactrack_devices.php:1103
+#: ../mactrack_view_devices.php:411
 msgid "SubType"
 msgstr ""
 
@@ -282,324 +286,426 @@ msgid ""
 "well."
 msgstr ""
 
-#: ../mactrack_device_types.php:37
-msgid "Not Applicable - Router"
-msgstr ""
-
-#: ../mactrack_device_types.php:50
-msgid "Not Applicable - Switch/Hub"
-msgstr ""
-
-#: ../mactrack_device_types.php:61 ../mactrack_macauth.php:30
+#: ../mactrack_devices.php:31 ../mactrack_macauth.php:30
 #: ../mactrack_macwatch.php:30 ../mactrack_sites.php:32
 #: ../mactrack_snmp.php:30 ../mactrack_view_macs.php:39
-#: ../mactrack_devices.php:31
+#: ../mactrack_device_types.php:69
 msgid "Delete"
 msgstr ""
 
-#: ../mactrack_device_types.php:62 ../mactrack_snmp.php:31
-msgid "Duplicate"
+#: ../mactrack_devices.php:32
+msgid "Enable"
 msgstr ""
 
-#: ../mactrack_device_types.php:196 ../mactrack_device_types.php:197
-msgid "--dup--"
+#: ../mactrack_devices.php:33 ../mactrack_macwatch.php:31
+msgid "Disable"
 msgstr ""
 
-#: ../mactrack_device_types.php:265
-msgid "You must select at least one device type."
+#: ../mactrack_devices.php:34
+msgid "Change SNMP Options"
 msgstr ""
 
-#: ../mactrack_device_types.php:273
-msgid "Click 'Continue' to delete the following Device Type(s)."
+#: ../mactrack_devices.php:35
+msgid "Change Device Port Values"
 msgstr ""
 
-#: ../mactrack_device_types.php:280
+#: ../mactrack_devices.php:36
+msgid "Connect to Cacti Host via Hostname"
+msgstr ""
+
+#: ../mactrack_devices.php:37
+msgid "Copy SNMP Settings from Cacti Host"
+msgstr ""
+
+#: ../mactrack_devices.php:237
+msgid "You must select at least one device."
+msgstr ""
+
+#: ../mactrack_devices.php:245
+msgid "Click 'Continue' to enable the following devices."
+msgstr ""
+
+#: ../mactrack_devices.php:252
+msgid "Click 'Continue' to disable the following devices."
+msgstr ""
+
+#: ../mactrack_devices.php:259
 msgid ""
-"Click 'Continue' to duplciate the following Device Type(s). You may "
-"optionally change the description for the new device types.  Otherwise, do "
-"not change value below and the original name will be replicated with a new "
-"suffix."
+"Click 'Continue' to change SNMP parameters for the following devices, check "
+"the box next to the fields you want to update, and fill in the new value."
 msgstr ""
 
-#: ../mactrack_device_types.php:282
-msgid "Device Type Prefix:"
+#: ../mactrack_devices.php:289
+msgid ""
+"Click 'Continue' to change upper or lower port parameters for the following "
+"devices, check the box next to the fields you want to update, and fill in "
+"the new value."
 msgstr ""
 
-#: ../mactrack_device_types.php:282
-msgid "<description> (1)"
+#: ../mactrack_devices.php:319
+msgid ""
+"Click 'Continue' to connect the following devices to their respective Cacti "
+"Device.  The relation will be built on equal hostnames. Description will be "
+"updated as well."
 msgstr ""
 
-#: ../mactrack_device_types.php:427
-msgid "New Type"
+#: ../mactrack_devices.php:326
+msgid ""
+"Click 'Continue' to copy SNMP Settings from connected Cacti Device to Device "
+"Tracking Device.  All not connected Devices will silently be skipped. SNMP "
+"retries will be taken from Ping retries."
 msgstr ""
 
-#: ../mactrack_device_types.php:429
-msgid "Cisco"
+#: ../mactrack_devices.php:333
+msgid "Click 'Continue' to delete the following Devices"
 msgstr ""
 
-#: ../mactrack_device_types.php:454
-#, php-format
-msgid "There were %d Device Types Added!"
-msgstr ""
-
-#: ../mactrack_device_types.php:456
-msgid "No New Device Types Found!"
-msgstr ""
-
-#: ../mactrack_device_types.php:466 ../mactrack_devices.php:477
+#: ../mactrack_devices.php:477 ../mactrack_device_types.php:478
 msgid "Import Results"
 msgstr ""
 
-#: ../mactrack_device_types.php:468 ../mactrack_devices.php:479
+#: ../mactrack_devices.php:479 ../mactrack_device_types.php:480
 msgid "Cacti has imported the following items:"
 msgstr ""
 
-#: ../mactrack_device_types.php:479
-msgid "Import Device Tracking Device Types"
+#: ../mactrack_devices.php:493
+msgid "Import Device Tracking Devices"
 msgstr ""
 
-#: ../mactrack_device_types.php:482
-msgid "Import Device Types from Local File"
+#: ../mactrack_devices.php:496
+msgid "Import Devices from Local File"
 msgstr ""
 
-#: ../mactrack_device_types.php:483
+#: ../mactrack_devices.php:497
 msgid ""
-"Please specify the location of the CSV file containing your device type "
+"Please specify the location of the CSV file containing your device "
 "information."
 msgstr ""
 
-#: ../mactrack_device_types.php:490 ../mactrack_devices.php:504
+#: ../mactrack_devices.php:504 ../mactrack_device_types.php:502
 msgid "Overwrite Existing Data?"
 msgstr ""
 
-#: ../mactrack_device_types.php:491 ../mactrack_devices.php:505
+#: ../mactrack_devices.php:505 ../mactrack_device_types.php:503
 msgid ""
 "Should the import process be allowed to overwrite existing data?  Please "
 "note, this does not mean delete old row, only replace duplicate rows."
 msgstr ""
 
-#: ../mactrack_device_types.php:494 ../mactrack_devices.php:508
+#: ../mactrack_devices.php:508 ../mactrack_device_types.php:506
 msgid "Allow Existing Rows to be Updated?"
 msgstr ""
 
-#: ../mactrack_device_types.php:499 ../mactrack_devices.php:513
+#: ../mactrack_devices.php:513 ../mactrack_device_types.php:511
 msgid "Required File Format Notes"
 msgstr ""
 
-#: ../mactrack_device_types.php:502 ../mactrack_devices.php:516
+#: ../mactrack_devices.php:516 ../mactrack_device_types.php:514
 msgid "The file must contain a header row with the following column headings."
 msgstr ""
 
-#: ../mactrack_device_types.php:504
-msgid " - A common name for the device.  For example Cisco 6509 Switch"
+#: ../mactrack_devices.php:518
+msgid " - The SiteID known to Device Tracking for this device"
 msgstr ""
 
-#: ../mactrack_device_types.php:505
-msgid " - The vendor who produces this device"
+#: ../mactrack_devices.php:519
+msgid " - A simple name for the device.  For example Cisco 6509 Switch"
 msgstr ""
 
-#: ../mactrack_device_types.php:506
+#: ../mactrack_devices.php:520
+msgid " - The IP Address or DNS Name for the device"
+msgstr ""
+
+#: ../mactrack_devices.php:521
 msgid ""
-" - The type of device this is.  See the notes below for this integer value"
+" - More detailed information about the device, including location, "
+"environmental conditions, etc."
 msgstr ""
 
-#: ../mactrack_device_types.php:507
+#: ../mactrack_devices.php:522
+msgid " - A list of ports that should not be scanned for user devices"
+msgstr ""
+
+#: ../mactrack_devices.php:523
 msgid ""
-" - A unique set of characters from the snmp sysDescr that uniquely identify "
-"this device"
+" - Redundant information indicating the intended device type.  See below for "
+"valid values."
 msgstr ""
 
-#: ../mactrack_device_types.php:508
+#: ../mactrack_devices.php:524
+msgid " - Id of a set of SNMP options"
+msgstr ""
+
+#: ../mactrack_devices.php:525
+msgid " - The current snmp read string for the device"
+msgstr ""
+
+#: ../mactrack_devices.php:526
 msgid ""
-" - The vendor specific snmp sysObjectID that distinguishes this device from "
-"the next"
+" - The snmp version you wish to scan this device with.  Valid values are 1, "
+"2 and 3"
 msgstr ""
 
-#: ../mactrack_device_types.php:509
-msgid " - The scanning function that will be used to scan this device type"
+#: ../mactrack_devices.php:527
+msgid " - The UDP port that the snmp agent is running on"
 msgstr ""
 
-#: ../mactrack_device_types.php:510
-msgid " - The IP scanning function that will be used to scan this device type"
-msgstr ""
-
-#: ../mactrack_device_types.php:511
+#: ../mactrack_devices.php:528
 msgid ""
-" - If the Serial Number for this device type can be obtained via an SNMP "
-"Query, add it's OID here"
+" - The timeout in milliseconds to wait for an snmp response before trying "
+"again"
 msgstr ""
 
-#: ../mactrack_device_types.php:512
+#: ../mactrack_devices.php:529
+msgid " - The number of times to retry a snmp request before giving up"
+msgstr ""
+
+#: ../mactrack_devices.php:530
 msgid ""
-" - If your scanning function does not have the ability to isolate trunk "
-"ports or link ports, this is the starting port number for user ports"
+" - Specified the number of OID's that can be obtained in a single SNMP Get "
+"request"
 msgstr ""
 
-#: ../mactrack_device_types.php:513
-msgid ""
-" - Same as the lowPort with the exception that this is the high numbered "
-"user port number"
+#: ../mactrack_devices.php:531
+msgid " - SNMP V3: SNMP username"
 msgstr ""
 
-#: ../mactrack_device_types.php:515 ../mactrack_devices.php:539
+#: ../mactrack_devices.php:532
+msgid " - SNMP V3: SNMP password"
+msgstr ""
+
+#: ../mactrack_devices.php:533
+msgid " - SNMP V3: SNMP authentication protocol"
+msgstr ""
+
+#: ../mactrack_devices.php:534
+msgid " - SNMP V3: SNMP privacy passphrase"
+msgstr ""
+
+#: ../mactrack_devices.php:535
+msgid " - SNMP V3: SNMP privacy protocol"
+msgstr ""
+
+#: ../mactrack_devices.php:536
+msgid " - SNMP V3: SNMP context"
+msgstr ""
+
+#: ../mactrack_devices.php:537
+msgid " - SNMP V3: SNMP engine id"
+msgstr ""
+
+#: ../mactrack_devices.php:539 ../mactrack_device_types.php:528
 msgid ""
 "The primary key for this table is a combination of the following three "
 "fields:"
 msgstr ""
 
-#: ../mactrack_device_types.php:519
+#: ../mactrack_devices.php:543
 msgid ""
-"Therefore, if you attempt to import duplicate device types, the existing "
-"data will be updated with the new information."
+"Therefore, if you attempt to import duplicate devices, only the data you "
+"specify will be updated."
 msgstr ""
 
-#: ../mactrack_device_types.php:521 ../mactrack_devices.php:545
+#: ../mactrack_devices.php:545 ../mactrack_device_types.php:534
 msgid " is an integer field and must be one of the following:"
 msgstr ""
 
-#: ../mactrack_device_types.php:523 ../mactrack_devices.php:547
+#: ../mactrack_devices.php:547 ../mactrack_device_types.php:536
 msgid "1 - Switch/Hub"
 msgstr ""
 
-#: ../mactrack_device_types.php:524 ../mactrack_devices.php:548
+#: ../mactrack_devices.php:548 ../mactrack_device_types.php:537
 msgid "2 - Switch/Router"
 msgstr ""
 
-#: ../mactrack_device_types.php:525 ../mactrack_devices.php:549
+#: ../mactrack_devices.php:549 ../mactrack_device_types.php:538
 msgid "3 - Router"
 msgstr ""
 
-#: ../mactrack_device_types.php:527
-msgid ""
-"The devices device type is determined by scanning it's snmp agent for the "
-"sysObjectID and sysDescription and comparing it against values in the device "
-"types database.  The first match that is found in the database is used "
-"direct Device Tracking as to how to scan it.  Therefore, it is very "
-"important that you select valid sysObjectID_match, sysDescr_match, and "
-"scanning function for your devices."
-msgstr ""
-
-#: ../mactrack_device_types.php:544 ../mactrack_device_types.php:1032
-#: ../mactrack_devices.php:1097 ../setup.php:1250
-msgid "Switch/Hub"
-msgstr ""
-
-#: ../mactrack_device_types.php:545 ../mactrack_device_types.php:1033
-#: ../mactrack_view_devices.php:406 ../mactrack_devices.php:1098
-#: ../setup.php:1251
-msgid "Switch/Router"
-msgstr ""
-
-#: ../mactrack_device_types.php:546 ../mactrack_device_types.php:1034
-#: ../mactrack_view_devices.php:407 ../mactrack_devices.php:1099
-#: ../setup.php:1252
-msgid "Router"
-msgstr ""
-
-#: ../mactrack_device_types.php:693
+#: ../mactrack_devices.php:708
 #, php-format
-msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
+msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
 msgstr ""
 
-#: ../mactrack_device_types.php:695 ../mactrack_devices.php:710
+#: ../mactrack_devices.php:710 ../mactrack_device_types.php:709
 #, php-format
 msgid ""
 "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found "
 "where: %s"
 msgstr ""
 
-#: ../mactrack_device_types.php:751
-msgid "Unknown Assume \"Switch/Hub\""
-msgstr ""
-
-#: ../mactrack_device_types.php:786 ../mactrack_device_types.php:801
+#: ../mactrack_devices.php:794 ../mactrack_devices.php:809
 #, php-format
 msgid ""
-"INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, "
-"sysObjectID: %s"
+"INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP "
+"Port: %s"
 msgstr ""
 
-#: ../mactrack_device_types.php:788 ../mactrack_device_types.php:803
+#: ../mactrack_devices.php:796 ../mactrack_devices.php:811
+#, php-format
+msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr ""
+
+#: ../mactrack_devices.php:803
 #, php-format
 msgid ""
-"INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, "
-"sysObjectID: %s"
+"INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP "
+"Port: %s"
 msgstr ""
 
-#: ../mactrack_device_types.php:795
+#: ../mactrack_devices.php:838
 #, php-format
-msgid ""
-"INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: "
-"%s, sysObjectID: %s"
+msgid "Device Tracking Devices [edit: %s]"
 msgstr ""
 
-#: ../mactrack_device_types.php:831
-#, php-format
-msgid "Device Tracking Device Types [edit: %s]"
+#: ../mactrack_devices.php:842
+msgid "Device Tracking Devices [new]"
 msgstr ""
 
-#: ../mactrack_device_types.php:833
-msgid "Device Tracking Device Types [new]"
+#: ../mactrack_devices.php:855
+msgid "SNMP Information"
 msgstr ""
 
-#: ../mactrack_device_types.php:901
-msgid "Device Tracking Device Type Filters"
+#: ../mactrack_devices.php:875
+msgid "System:"
 msgstr ""
 
-#: ../mactrack_device_types.php:916
-msgid "Device Type Description"
+#: ../mactrack_devices.php:876
+msgid "Uptime:"
 msgstr ""
 
-#: ../mactrack_device_types.php:918 ../mactrack_sites.php:466
+#: ../mactrack_devices.php:877
+msgid "Hostname:"
+msgstr ""
+
+#: ../mactrack_devices.php:878
+msgid "ObjectID:"
+msgstr ""
+
+#: ../mactrack_devices.php:983
+msgid "Device Tracking Device Filters"
+msgstr ""
+
+#: ../mactrack_devices.php:1001 ../mactrack_view_devices.php:266
+#: ../setup.php:1638
+msgid "Device Name"
+msgstr ""
+
+#: ../mactrack_devices.php:1002 ../mactrack_sites.php:420
+#: ../mactrack_sites.php:464 ../mactrack_view_devices.php:267
+#: ../mactrack_view_ips.php:197 ../mactrack_view_sites.php:248
+#: ../mactrack_view_sites.php:309 ../setup.php:1669 ../setup.php:1811
+msgid "Site Name"
+msgstr ""
+
+#: ../mactrack_devices.php:1003 ../mactrack_devices.php:1148
+#: ../mactrack_utilities.php:277 ../mactrack_view_devices.php:268
+#: ../mactrack_view_devices.php:453 ../mactrack_view_dot1x.php:406
+#: ../mactrack_view_dot1x.php:420 ../mactrack_view_dot1x.php:593
+#: ../mactrack_view_interfaces.php:382
+msgid "Status"
+msgstr ""
+
+#: ../mactrack_devices.php:1004 ../mactrack_view_devices.php:269
+#: ../mactrack_view_interfaces.php:358 ../setup.php:1645
+msgid "Hostname"
+msgstr ""
+
+#: ../mactrack_devices.php:1005 ../mactrack_sites.php:466
 #: ../mactrack_view_devices.php:270 ../mactrack_view_sites.php:311
-#: ../mactrack_devices.php:1005 ../setup.php:1375
+#: ../setup.php:1407 ../mactrack_device_types.php:932
 msgid "Device Type"
 msgstr ""
 
-#: ../mactrack_device_types.php:919
-msgid "Port Scanner"
+#: ../mactrack_devices.php:1006
+msgid "Total IPs"
 msgstr ""
 
-#: ../mactrack_device_types.php:920
-msgid "IP Scanner"
+#: ../mactrack_devices.php:1007 ../mactrack_sites.php:423
+#: ../mactrack_view_devices.php:272 ../mactrack_view_sites.php:251
+msgid "User Ports"
 msgstr ""
 
-#: ../mactrack_device_types.php:921
-msgid "sysDescription Match"
+#: ../mactrack_devices.php:1008 ../mactrack_sites.php:424
+#: ../mactrack_view_devices.php:273 ../mactrack_view_sites.php:252
+msgid "User Ports Up"
 msgstr ""
 
-#: ../mactrack_device_types.php:922
-msgid "Vendor OID Match"
+#: ../mactrack_devices.php:1009 ../mactrack_view_devices.php:274
+msgid "Trunk Ports"
 msgstr ""
 
-#: ../mactrack_device_types.php:927 ../mactrack_device_types.php:979
-#: ../setup.php:1334
-msgid "Device Types"
+#: ../mactrack_devices.php:1010 ../mactrack_view_devices.php:275
+msgid "Active Macs"
 msgstr ""
 
-#: ../mactrack_device_types.php:949
-msgid "No Device Tracking Device Types Found"
+#: ../mactrack_devices.php:1011 ../mactrack_view_devices.php:277
+msgid "Last Duration"
 msgstr ""
 
-#: ../mactrack_device_types.php:1010 ../mactrack_sites.php:465
-#: ../mactrack_view_sites.php:310 ../setup.php:1368
-msgid "Vendor"
+#: ../mactrack_devices.php:1032
+msgid "No Device Tracking Devices"
 msgstr ""
 
-#: ../mactrack_device_types.php:1014 ../mactrack_device_types.php:1031
-#: ../mactrack_view_arp.php:423 ../mactrack_view_devices.php:376
+#: ../mactrack_devices.php:1067 ../mactrack_view_arp.php:432
+#: ../mactrack_view_devices.php:376 ../mactrack_view_dot1x.php:530
+#: ../mactrack_view_dot1x.php:612 ../mactrack_view_dot1x.php:647
 #: ../mactrack_view_interfaces.php:403 ../mactrack_view_interfaces.php:461
 #: ../mactrack_view_interfaces.php:491 ../mactrack_view_macs.php:937
 #: ../mactrack_view_macs.php:1004 ../mactrack_view_macs.php:1037
-#: ../mactrack_view_macs.php:1073 ../mactrack_devices.php:1067
-#: ../setup.php:1288
+#: ../mactrack_view_macs.php:1073 ../setup.php:1320
+#: ../mactrack_device_types.php:1030 ../mactrack_device_types.php:1047
 msgid "All"
 msgstr ""
 
-#: ../mactrack_device_types.php:1027 ../mactrack_view_devices.php:400
+#: ../mactrack_devices.php:1068 ../mactrack_view_devices.php:377
+#: ../setup.php:1305 ../setup.php:1656 ../setup.php:1672 ../setup.php:1717
+#: ../setup.php:1746
+msgid "None"
+msgstr ""
+
+#: ../mactrack_devices.php:1092 ../mactrack_view_devices.php:400
 #: ../mactrack_view_interfaces.php:359 ../mactrack_view_interfaces.php:457
-#: ../mactrack_devices.php:1092
+#: ../mactrack_device_types.php:1043
 msgid "Type"
+msgstr ""
+
+#: ../mactrack_devices.php:1097 ../setup.php:1282
+#: ../mactrack_device_types.php:557 ../mactrack_device_types.php:1048
+msgid "Switch/Hub"
+msgstr ""
+
+#: ../mactrack_devices.php:1098 ../mactrack_view_devices.php:406
+#: ../setup.php:1283 ../mactrack_device_types.php:558
+#: ../mactrack_device_types.php:1049
+msgid "Switch/Router"
+msgstr ""
+
+#: ../mactrack_devices.php:1099 ../mactrack_view_devices.php:407
+#: ../setup.php:1284 ../mactrack_device_types.php:559
+#: ../mactrack_device_types.php:1050
+msgid "Router"
+msgstr ""
+
+#: ../mactrack_devices.php:1153 ../mactrack_view_devices.php:458
+msgid "Up"
+msgstr ""
+
+#: ../mactrack_devices.php:1154 ../mactrack_view_devices.php:459
+#: ../setup.php:1324 ../setup.php:1351
+msgid "Disabled"
+msgstr ""
+
+#: ../mactrack_devices.php:1155 ../mactrack_view_devices.php:460
+msgid "Down"
+msgstr ""
+
+#: ../mactrack_devices.php:1157 ../mactrack_view_devices.php:462
+msgid "Error"
+msgstr ""
+
+#: ../mactrack_devices.php:1158 ../mactrack_view_devices.php:463
+msgid "No Cacti Link"
 msgstr ""
 
 #: ../mactrack_macauth.php:125
@@ -627,7 +733,7 @@ msgstr ""
 msgid "Mac Address"
 msgstr ""
 
-#: ../mactrack_macauth.php:315 ../setup.php:1918
+#: ../mactrack_macauth.php:315 ../setup.php:1958
 msgid "Reason"
 msgstr ""
 
@@ -650,10 +756,6 @@ msgstr ""
 #: ../mactrack_macauth.php:371 ../mactrack_vendormacs.php:205
 #: ../mactrack_view_macs.php:960
 msgid "MAC's"
-msgstr ""
-
-#: ../mactrack_macwatch.php:31 ../mactrack_devices.php:33
-msgid "Disable"
 msgstr ""
 
 #: ../mactrack_macwatch.php:129
@@ -681,7 +783,7 @@ msgstr ""
 msgid "Watch Name"
 msgstr ""
 
-#: ../mactrack_macwatch.php:311 ../setup.php:1860
+#: ../mactrack_macwatch.php:311 ../setup.php:1900
 msgid "Ticket Number"
 msgstr ""
 
@@ -726,27 +828,10 @@ msgstr ""
 msgid "Device Tracking Site Filters"
 msgstr ""
 
-#: ../mactrack_sites.php:420 ../mactrack_sites.php:464
-#: ../mactrack_view_devices.php:267 ../mactrack_view_ips.php:197
-#: ../mactrack_view_sites.php:248 ../mactrack_view_sites.php:309
-#: ../mactrack_devices.php:1002 ../setup.php:1629 ../setup.php:1771
-msgid "Site Name"
-msgstr ""
-
 #: ../mactrack_sites.php:422 ../mactrack_sites.php:468
 #: ../mactrack_view_devices.php:271 ../mactrack_view_sites.php:250
 #: ../mactrack_view_sites.php:313
 msgid "Total IP's"
-msgstr ""
-
-#: ../mactrack_sites.php:423 ../mactrack_view_devices.php:272
-#: ../mactrack_view_sites.php:251 ../mactrack_devices.php:1007
-msgid "User Ports"
-msgstr ""
-
-#: ../mactrack_sites.php:424 ../mactrack_view_devices.php:273
-#: ../mactrack_view_sites.php:252 ../mactrack_devices.php:1008
-msgid "User Ports Up"
 msgstr ""
 
 #: ../mactrack_sites.php:425 ../mactrack_sites.php:472
@@ -763,6 +848,11 @@ msgstr ""
 msgid "No Device Tracking Sites Found"
 msgstr ""
 
+#: ../mactrack_sites.php:465 ../mactrack_view_sites.php:310 ../setup.php:1400
+#: ../mactrack_device_types.php:1026
+msgid "Vendor"
+msgstr ""
+
 #: ../mactrack_sites.php:467 ../mactrack_view_sites.php:312
 msgid "Total Devices"
 msgstr ""
@@ -777,6 +867,10 @@ msgstr ""
 
 #: ../mactrack_sites.php:471 ../mactrack_view_sites.php:316
 msgid "Total Trunks"
+msgstr ""
+
+#: ../mactrack_snmp.php:31 ../mactrack_device_types.php:70
+msgid "Duplicate"
 msgstr ""
 
 #: ../mactrack_snmp.php:208
@@ -819,7 +913,7 @@ msgstr ""
 msgid "SNMP Option Set [new]"
 msgstr ""
 
-#: ../mactrack_snmp.php:399 ../mactrack_snmp.php:491 ../setup.php:1179
+#: ../mactrack_snmp.php:399 ../mactrack_snmp.php:491 ../setup.php:1210
 msgid "Device Tracking SNMP Options"
 msgstr ""
 
@@ -827,23 +921,23 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
-#: ../mactrack_snmp.php:403 ../setup.php:1110
+#: ../mactrack_snmp.php:403 ../setup.php:1141
 msgid "Version"
 msgstr ""
 
-#: ../mactrack_snmp.php:404 ../setup.php:1117
+#: ../mactrack_snmp.php:404 ../setup.php:1148
 msgid "Community"
 msgstr ""
 
-#: ../mactrack_snmp.php:405 ../setup.php:1132
+#: ../mactrack_snmp.php:405 ../setup.php:1163
 msgid "Port"
 msgstr ""
 
-#: ../mactrack_snmp.php:406 ../setup.php:1140
+#: ../mactrack_snmp.php:406 ../setup.php:1171
 msgid "Timeout"
 msgstr ""
 
-#: ../mactrack_snmp.php:407 ../setup.php:1148
+#: ../mactrack_snmp.php:407 ../setup.php:1179
 msgid "Retries"
 msgstr ""
 
@@ -851,7 +945,8 @@ msgstr ""
 msgid "Max OIDs"
 msgstr ""
 
-#: ../mactrack_snmp.php:409
+#: ../mactrack_snmp.php:409 ../mactrack_view_dot1x.php:399
+#: ../mactrack_view_dot1x.php:414
 msgid "Username"
 msgstr ""
 
@@ -864,11 +959,12 @@ msgid "Priv Proto"
 msgstr ""
 
 #: ../mactrack_snmp.php:412 ../mactrack_view_devices.php:265
+#: ../mactrack_view_dot1x.php:396 ../mactrack_view_dot1x.php:411
 #: ../mactrack_view_interfaces.php:357 ../mactrack_view_ips.php:196
 #: ../mactrack_view_macs.php:654 ../mactrack_view_macs.php:669
 #: ../mactrack_view_sites.php:247 ../mactrack_view_sites.php:308
-#: ../setup.php:1178 ../setup.php:1180 ../setup.php:1186 ../setup.php:1189
-#: ../setup.php:1192 ../setup.php:1195 ../setup.php:1198
+#: ../setup.php:1209 ../setup.php:1211 ../setup.php:1217 ../setup.php:1220
+#: ../setup.php:1223 ../setup.php:1226 ../setup.php:1229
 msgid "Actions"
 msgstr ""
 
@@ -892,6 +988,288 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
+#: ../mactrack_utilities.php:166
+msgid "Device Tracking Process Status"
+msgstr ""
+
+#: ../mactrack_utilities.php:186
+msgid "Refresh"
+msgstr ""
+
+#: ../mactrack_utilities.php:235
+msgid "Current Process Status"
+msgstr ""
+
+#: ../mactrack_utilities.php:237
+msgid "The Device Tracking Poller is:"
+msgstr ""
+
+#: ../mactrack_utilities.php:237
+msgid "RUNNING"
+msgstr ""
+
+#: ../mactrack_utilities.php:237 ../mactrack_utilities.php:263
+msgid "DISABLED"
+msgstr ""
+
+#: ../mactrack_utilities.php:237
+msgid "IDLE"
+msgstr ""
+
+#: ../mactrack_utilities.php:240
+msgid "Running Processes:"
+msgstr ""
+
+#: ../mactrack_utilities.php:243
+msgid "Last Time Poller Started:"
+msgstr ""
+
+#: ../mactrack_utilities.php:245
+msgid "Poller Frequency:"
+msgstr ""
+
+#: ../mactrack_utilities.php:247
+msgid "Approx. Next Runtime:"
+msgstr ""
+
+#: ../mactrack_utilities.php:249
+msgid "Approx. Next DB Maintenance:"
+msgstr ""
+
+#: ../mactrack_utilities.php:251
+msgid "Run Time Details"
+msgstr ""
+
+#: ../mactrack_utilities.php:253
+msgid "Last Poller Runtime:"
+msgstr ""
+
+#: ../mactrack_utilities.php:255
+msgid "Last Poller Maintenance Runtime:"
+msgstr ""
+
+#: ../mactrack_utilities.php:257
+msgid "Maximum Concurrent Processes:"
+msgstr ""
+
+#: ../mactrack_utilities.php:257
+msgid "processes"
+msgstr ""
+
+#: ../mactrack_utilities.php:259
+msgid "Maximum Per Device Scan Time:"
+msgstr ""
+
+#: ../mactrack_utilities.php:259
+msgid "minutes"
+msgstr ""
+
+#: ../mactrack_utilities.php:261
+msgid "DNS Configuration Information"
+msgstr ""
+
+#: ../mactrack_utilities.php:263
+msgid "Reverse DNS Resolution is"
+msgstr ""
+
+#: ../mactrack_utilities.php:263
+msgid "ENABLED"
+msgstr ""
+
+#: ../mactrack_utilities.php:265
+msgid "Primary DNS Server:"
+msgstr ""
+
+#: ../mactrack_utilities.php:267
+msgid "Secondary DNS Server:"
+msgstr ""
+
+#: ../mactrack_utilities.php:269
+msgid "DNS Resolution Timeout:"
+msgstr ""
+
+#: ../mactrack_utilities.php:269
+msgid "milliseconds"
+msgstr ""
+
+#: ../mactrack_utilities.php:273
+msgid "Running Process Summary"
+msgstr ""
+
+#: ../mactrack_utilities.php:275
+msgid "The DNS Resolver is Running"
+msgstr ""
+
+#: ../mactrack_utilities.php:275
+msgid "The DNS Resolver is Not Running"
+msgstr ""
+
+#: ../mactrack_utilities.php:277
+msgid "Date Started"
+msgstr ""
+
+#: ../mactrack_utilities.php:311
+msgid "Completed"
+msgstr ""
+
+#: ../mactrack_utilities.php:317 ../mactrack_view_dot1x.php:481
+#: ../mactrack_view_dot1x.php:599
+msgid "Running"
+msgstr ""
+
+#: ../mactrack_utilities.php:323
+msgid "Waiting"
+msgstr ""
+
+#: ../mactrack_utilities.php:330
+msgid "Other"
+msgstr ""
+
+#: ../mactrack_utilities.php:346 ../mactrack_utilities.php:403
+#: ../mactrack_utilities.php:426
+msgid "Are You Sure?"
+msgstr ""
+
+#: ../mactrack_utilities.php:346
+msgid ""
+"Are you sure you want to delete all the Port to MAC to IP results from the "
+"system?"
+msgstr ""
+
+#: ../mactrack_utilities.php:392 ../mactrack_utilities.php:415
+msgid "Device Tracking Database Results"
+msgstr ""
+
+#: ../mactrack_utilities.php:393 ../mactrack_utilities.php:463
+#, php-format
+msgid "The following number of records have been removed from the database: %s"
+msgstr ""
+
+#: ../mactrack_utilities.php:403
+msgid ""
+"Are you sure you want to delete all the Aggregated Port to MAC to IP results "
+"from the system?"
+msgstr ""
+
+#: ../mactrack_utilities.php:416
+#, php-format
+msgid ""
+"The following number of records have been removed from the aggergated table: "
+"%s"
+msgstr ""
+
+#: ../mactrack_utilities.php:426
+msgid ""
+"Are you sure you want to delete and recreate all the Aggregated Port to MAC "
+"to IP results from the system?"
+msgstr ""
+
+#: ../mactrack_utilities.php:452
+#, php-format
+msgid ""
+"The following number of records have been removed from the aggergated table: "
+"%s.  And %s records will be added."
+msgstr ""
+
+#: ../mactrack_utilities.php:473
+msgid ""
+"The Device Tracking scanning functions have been purged.  They will be "
+"recreated once you either edit a device or device type."
+msgstr ""
+
+#: ../mactrack_utilities.php:478
+msgid "Cacti Device Tracking System Utilities"
+msgstr ""
+
+#: ../mactrack_utilities.php:480
+msgid "Process Status Information"
+msgstr ""
+
+#: ../mactrack_utilities.php:489 ../setup.php:1242
+msgid "View Device Tracking Process Status"
+msgstr ""
+
+#: ../mactrack_utilities.php:492
+msgid ""
+"This option will let you show and set process information associated with "
+"the Device Tracking polling process."
+msgstr ""
+
+#: ../mactrack_utilities.php:496
+msgid "Database Administration"
+msgstr ""
+
+#: ../mactrack_utilities.php:500 ../setup.php:1237
+msgid "Perform Database Maintenance"
+msgstr ""
+
+#: ../mactrack_utilities.php:503
+msgid ""
+"Deletes expired Port to MAC to IP associations from the database.  Only "
+"records that have expired, based upon your criteria are removed."
+msgstr ""
+
+#: ../mactrack_utilities.php:509
+msgid "Refresh IEEE Vendor MAC/OUI Database"
+msgstr ""
+
+#: ../mactrack_utilities.php:512
+msgid ""
+"This function will download and install the latest OIU database from the "
+"IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC "
+"Address can be broken into two parts.  The first part of the MAC Addess "
+"contains the Vendor MAC.  The Vendor MAC identifies who manufactured the "
+"part.  This will be helpful in spot checking for rogue devices on your "
+"network."
+msgstr ""
+
+#: ../mactrack_utilities.php:518 ../setup.php:1238
+msgid "Refresh Scanning Functions"
+msgstr ""
+
+#: ../mactrack_utilities.php:521
+msgid ""
+"Deletes old and potentially stale Device Tracking scanning functions from "
+"the drop-down you receive when you edit a device type."
+msgstr ""
+
+#: ../mactrack_utilities.php:527
+msgid "Remove All Scan Results"
+msgstr ""
+
+#: ../mactrack_utilities.php:530
+msgid ""
+"Deletes <strong>ALL</strong> Port to MAC to IP associations from the "
+"database all IP Addresses, IP Ranges, and VLANS.  This utility is good when "
+"you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
+msgstr ""
+
+#: ../mactrack_utilities.php:534
+msgid "Aggregated Table Administration"
+msgstr ""
+
+#: ../mactrack_utilities.php:538
+msgid "Remove All Aggregated Results"
+msgstr ""
+
+#: ../mactrack_utilities.php:541
+msgid ""
+"Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP "
+"associations from the database.  Data will again be collected on the basis "
+"of <strong>only new</strong> scanned data in the next mactrack poller run."
+msgstr ""
+
+#: ../mactrack_utilities.php:547
+msgid "Perform Aggregate Table Rebuild"
+msgstr ""
+
+#: ../mactrack_utilities.php:550
+msgid ""
+"Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP "
+"associations from the database and their re-creation based on <strong>All "
+"scaned data</strong> now."
+msgstr ""
+
 #: ../mactrack_vendormacs.php:139
 msgid "Device Tracking Vendor Mac Filter"
 msgstr ""
@@ -908,7 +1286,7 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: ../mactrack_vendormacs.php:160 ../setup.php:1335
+#: ../mactrack_vendormacs.php:160 ../setup.php:1367
 msgid "Vendor Macs"
 msgstr ""
 
@@ -920,82 +1298,98 @@ msgstr ""
 msgid "Device Tracking - ARP/IP View"
 msgstr ""
 
-#: ../mactrack_view_arp.php:304 ../mactrack_view_arp.php:314
-#: ../mactrack_view_arp.php:326 ../mactrack_view_macs.php:655
+#: ../mactrack_view_arp.php:308 ../mactrack_view_arp.php:319
+#: ../mactrack_view_arp.php:332 ../mactrack_view_dot1x.php:397
+#: ../mactrack_view_dot1x.php:412 ../mactrack_view_macs.php:655
 #: ../mactrack_view_macs.php:670 ../mactrack_view_macs.php:795
 msgid "Switch Name"
 msgstr ""
 
-#: ../mactrack_view_arp.php:305 ../mactrack_view_arp.php:315
-#: ../mactrack_view_arp.php:327 ../mactrack_view_arp.php:336
+#: ../mactrack_view_arp.php:309 ../mactrack_view_arp.php:320
+#: ../mactrack_view_arp.php:333 ../mactrack_view_arp.php:343
+#: ../mactrack_view_dot1x.php:398 ../mactrack_view_dot1x.php:413
 #: ../mactrack_view_macs.php:656 ../mactrack_view_macs.php:671
 #: ../mactrack_view_macs.php:796
 msgid "Switch Hostname"
 msgstr ""
 
-#: ../mactrack_view_arp.php:306 ../mactrack_view_arp.php:316
-#: ../mactrack_view_arp.php:328 ../mactrack_view_arp.php:337
+#: ../mactrack_view_arp.php:310 ../mactrack_view_arp.php:321
+#: ../mactrack_view_arp.php:334 ../mactrack_view_arp.php:344
+#: ../mactrack_view_dot1x.php:400 ../mactrack_view_dot1x.php:415
 #: ../mactrack_view_macs.php:657 ../mactrack_view_macs.php:672
 #: ../mactrack_view_macs.php:797
 msgid "ED IP Address"
 msgstr ""
 
-#: ../mactrack_view_arp.php:307 ../mactrack_view_arp.php:317
-#: ../mactrack_view_macs.php:658 ../mactrack_view_macs.php:801
+#: ../mactrack_view_arp.php:311 ../mactrack_view_arp.php:322
+#: ../mactrack_view_dot1x.php:401 ../mactrack_view_macs.php:658
+#: ../mactrack_view_macs.php:801
 msgid "ED DNS Hostname"
 msgstr ""
 
-#: ../mactrack_view_arp.php:308 ../mactrack_view_arp.php:318
-#: ../mactrack_view_arp.php:329 ../mactrack_view_arp.php:338
+#: ../mactrack_view_arp.php:312 ../mactrack_view_arp.php:323
+#: ../mactrack_view_arp.php:335 ../mactrack_view_arp.php:345
+#: ../mactrack_view_dot1x.php:402 ../mactrack_view_dot1x.php:416
 #: ../mactrack_view_macs.php:659 ../mactrack_view_macs.php:673
 #: ../mactrack_view_macs.php:805
 msgid "ED MAC Address"
 msgstr ""
 
-#: ../mactrack_view_arp.php:309 ../mactrack_view_arp.php:319
-#: ../mactrack_view_arp.php:330 ../mactrack_view_arp.php:339
+#: ../mactrack_view_arp.php:313 ../mactrack_view_arp.php:324
+#: ../mactrack_view_arp.php:336 ../mactrack_view_arp.php:346
 #: ../mactrack_view_macs.php:660 ../mactrack_view_macs.php:674
 #: ../mactrack_view_macs.php:806
 msgid "Vendor Name"
 msgstr ""
 
-#: ../mactrack_view_arp.php:310 ../mactrack_view_arp.php:320
-#: ../mactrack_view_arp.php:331 ../mactrack_view_arp.php:340
+#: ../mactrack_view_arp.php:314 ../mactrack_view_arp.php:325
+#: ../mactrack_view_arp.php:337 ../mactrack_view_arp.php:347
+#: ../mactrack_view_dot1x.php:403 ../mactrack_view_dot1x.php:417
 #: ../mactrack_view_macs.php:661 ../mactrack_view_macs.php:675
 #: ../mactrack_view_macs.php:807
 msgid "Port Number"
 msgstr ""
 
-#: ../mactrack_view_arp.php:335
+#: ../mactrack_view_arp.php:315 ../mactrack_view_arp.php:326
+#: ../mactrack_view_arp.php:338 ../mactrack_view_arp.php:348
+#: ../mactrack_view_dot1x.php:404 ../mactrack_view_dot1x.php:418
+#: ../mactrack_view_macs.php:662 ../mactrack_view_macs.php:676
+#: ../mactrack_view_macs.php:808
+msgid "Port Name"
+msgstr ""
+
+#: ../mactrack_view_arp.php:342
 msgid "Switch Device"
 msgstr ""
 
-#: ../mactrack_view_arp.php:347
+#: ../mactrack_view_arp.php:355
 msgid "ARP Cache"
 msgstr ""
 
-#: ../mactrack_view_arp.php:373 ../mactrack_view_macs.php:882
+#: ../mactrack_view_arp.php:382 ../mactrack_view_macs.php:882
 msgid "You must first choose a Site, Device or other search criteria."
 msgstr ""
 
-#: ../mactrack_view_arp.php:375
+#: ../mactrack_view_arp.php:384
 msgid "No Device Tracking IP Results Found"
 msgstr ""
 
-#: ../mactrack_view_arp.php:419 ../mactrack_view_interfaces.php:487
-#: ../mactrack_view_macs.php:933
+#: ../mactrack_view_arp.php:428 ../mactrack_view_dot1x.php:526
+#: ../mactrack_view_interfaces.php:487 ../mactrack_view_macs.php:933
 msgid "Device"
 msgstr ""
 
-#: ../mactrack_view_arp.php:446 ../mactrack_view_ips.php:273
+#: ../mactrack_view_arp.php:455 ../mactrack_view_ips.php:273
 msgid "IP's"
 msgstr ""
 
-#: ../mactrack_view_arp.php:471 ../mactrack_view_macs.php:985
+#: ../mactrack_view_arp.php:480 ../mactrack_view_dot1x.php:578
+#: ../mactrack_view_macs.php:985
 msgid "IP"
 msgstr ""
 
-#: ../mactrack_view_arp.php:488 ../mactrack_view_macs.php:1054
+#: ../mactrack_view_arp.php:497 ../mactrack_view_dot1x.php:628
+#: ../mactrack_view_macs.php:1054
 msgid "MAC"
 msgstr ""
 
@@ -1007,71 +1401,95 @@ msgstr ""
 msgid "Unknown Device Type"
 msgstr ""
 
-#: ../mactrack_view_devices.php:266 ../mactrack_devices.php:1001
-#: ../setup.php:1598
-msgid "Device Name"
-msgstr ""
-
-#: ../mactrack_view_devices.php:268 ../mactrack_view_devices.php:453
-#: ../mactrack_view_interfaces.php:382 ../mactrack_utilities.php:275
-#: ../mactrack_devices.php:1003 ../mactrack_devices.php:1148
-msgid "Status"
-msgstr ""
-
-#: ../mactrack_view_devices.php:269 ../mactrack_view_interfaces.php:358
-#: ../mactrack_devices.php:1004 ../setup.php:1605
-msgid "Hostname"
-msgstr ""
-
-#: ../mactrack_view_devices.php:274 ../mactrack_devices.php:1009
-msgid "Trunk Ports"
-msgstr ""
-
-#: ../mactrack_view_devices.php:275 ../mactrack_devices.php:1010
-msgid "Active Macs"
-msgstr ""
-
 #: ../mactrack_view_devices.php:276
 msgid "Total VLAN's"
-msgstr ""
-
-#: ../mactrack_view_devices.php:277 ../mactrack_devices.php:1011
-msgid "Last Duration"
 msgstr ""
 
 #: ../mactrack_view_devices.php:345
 msgid "No Device Tracking Devices Found"
 msgstr ""
 
-#: ../mactrack_view_devices.php:377 ../mactrack_devices.php:1068
-#: ../setup.php:1273 ../setup.php:1616 ../setup.php:1632 ../setup.php:1677
-#: ../setup.php:1706
-msgid "None"
-msgstr ""
-
 #: ../mactrack_view_devices.php:405
 msgid "Hub/Switch"
 msgstr ""
 
-#: ../mactrack_view_devices.php:458 ../mactrack_devices.php:1153
-msgid "Up"
+#: ../mactrack_view_dot1x.php:31
+msgid "Device Tracking - 802.1x View"
 msgstr ""
 
-#: ../mactrack_view_devices.php:459 ../mactrack_devices.php:1154
-#: ../setup.php:1292 ../setup.php:1319
-msgid "Disabled"
+#: ../mactrack_view_dot1x.php:405 ../mactrack_view_dot1x.php:419
+#: ../mactrack_view_dot1x.php:643
+msgid "Domain"
 msgstr ""
 
-#: ../mactrack_view_devices.php:460 ../mactrack_devices.php:1155
-msgid "Down"
+#: ../mactrack_view_dot1x.php:407 ../mactrack_view_dot1x.php:421
+#: ../mactrack_view_macs.php:665 ../mactrack_view_macs.php:679
+#: ../mactrack_view_macs.php:814 ../mactrack_view_macs.php:816
+msgid "Last Scan Date"
 msgstr ""
 
-#: ../mactrack_view_devices.php:462 ../mactrack_devices.php:1157
-msgid "Error"
+#: ../mactrack_view_dot1x.php:431
+msgid "802.1x Sessions"
 msgstr ""
 
-#: ../mactrack_view_devices.php:463 ../mactrack_devices.php:1158
-msgid "No Cacti Link"
+#: ../mactrack_view_dot1x.php:464
+msgid "No Device Tracking 802.1x Sessions Found"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:477
+msgid "Authorization Success"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:478 ../mactrack_view_dot1x.php:601
+msgid "Authentication Success"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:479 ../mactrack_view_dot1x.php:604
+msgid "Authorization Failed"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:480 ../mactrack_view_dot1x.php:602
+msgid "Authentication Failed"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:482 ../mactrack_view_dot1x.php:598
+msgid "Idle"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:553
+msgid "Sessions"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:597
+msgid "Any Status"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:600
+msgid "No method"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:603
+msgid "Authorization Succcess"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:608 ../mactrack_view_macs.php:1033
+msgid "Show"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:613 ../mactrack_view_macs.php:1038
+msgid "Most Recent"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:648
+msgid "DATA"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:649
+msgid "VOICE"
+msgstr ""
+
+#: ../mactrack_view_dot1x.php:655 ../mactrack_view_macs.php:1081
+msgid "Portname"
 msgstr ""
 
 #: ../mactrack_view_graphs.php:32
@@ -1114,11 +1532,11 @@ msgstr ""
 msgid "Interface Down"
 msgstr ""
 
-#: ../mactrack_view_interfaces.php:360 ../setup.php:1463
+#: ../mactrack_view_interfaces.php:360 ../setup.php:1503
 msgid "Name"
 msgstr ""
 
-#: ../mactrack_view_interfaces.php:361 ../setup.php:1361
+#: ../mactrack_view_interfaces.php:361 ../setup.php:1393
 msgid "Description"
 msgstr ""
 
@@ -1337,11 +1755,6 @@ msgstr ""
 msgid "Click 'Continue' to Delete the following rows from Aggregated table."
 msgstr ""
 
-#: ../mactrack_view_macs.php:662 ../mactrack_view_macs.php:676
-#: ../mactrack_view_macs.php:808
-msgid "Port Name"
-msgstr ""
-
 #: ../mactrack_view_macs.php:663 ../mactrack_view_macs.php:677
 #: ../mactrack_view_macs.php:809
 msgid "VLAN ID"
@@ -1350,11 +1763,6 @@ msgstr ""
 #: ../mactrack_view_macs.php:664 ../mactrack_view_macs.php:678
 #: ../mactrack_view_macs.php:810 ../mactrack_view_macs.php:1000
 msgid "VLAN Name"
-msgstr ""
-
-#: ../mactrack_view_macs.php:665 ../mactrack_view_macs.php:679
-#: ../mactrack_view_macs.php:814 ../mactrack_view_macs.php:816
-msgid "Last Scan Date"
 msgstr ""
 
 #: ../mactrack_view_macs.php:689 ../mactrack_view_macs.php:829
@@ -1373,14 +1781,6 @@ msgstr ""
 msgid "Count"
 msgstr ""
 
-#: ../mactrack_view_macs.php:1033
-msgid "Show"
-msgstr ""
-
-#: ../mactrack_view_macs.php:1038
-msgid "Most Recent"
-msgstr ""
-
 #: ../mactrack_view_macs.php:1039
 msgid "Aggregated"
 msgstr ""
@@ -1397,750 +1797,227 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: ../mactrack_view_macs.php:1081
-msgid "Portname"
-msgstr ""
-
 #: ../mactrack_view_sites.php:31
 msgid "Device Tracking - Site Report View"
 msgstr ""
 
-#: ../mactrack_utilities.php:164
-msgid "Device Tracking Process Status"
-msgstr ""
-
-#: ../mactrack_utilities.php:184
-msgid "Refresh"
-msgstr ""
-
-#: ../mactrack_utilities.php:233
-msgid "Current Process Status"
-msgstr ""
-
-#: ../mactrack_utilities.php:235
-msgid "The Device Tracking Poller is:"
-msgstr ""
-
-#: ../mactrack_utilities.php:235
-msgid "RUNNING"
-msgstr ""
-
-#: ../mactrack_utilities.php:235 ../mactrack_utilities.php:261
-msgid "DISABLED"
-msgstr ""
-
-#: ../mactrack_utilities.php:235
-msgid "IDLE"
-msgstr ""
-
-#: ../mactrack_utilities.php:238
-msgid "Running Processes:"
-msgstr ""
-
-#: ../mactrack_utilities.php:241
-msgid "Last Time Poller Started:"
-msgstr ""
-
-#: ../mactrack_utilities.php:243
-msgid "Poller Frequency:"
-msgstr ""
-
-#: ../mactrack_utilities.php:245
-msgid "Approx. Next Runtime:"
-msgstr ""
-
-#: ../mactrack_utilities.php:247
-msgid "Approx. Next DB Maintenance:"
-msgstr ""
-
-#: ../mactrack_utilities.php:249
-msgid "Run Time Details"
-msgstr ""
-
-#: ../mactrack_utilities.php:251
-msgid "Last Poller Runtime:"
-msgstr ""
-
-#: ../mactrack_utilities.php:253
-msgid "Last Poller Maintenance Runtime:"
-msgstr ""
-
-#: ../mactrack_utilities.php:255
-msgid "Maximum Concurrent Processes:"
-msgstr ""
-
-#: ../mactrack_utilities.php:255
-msgid "processes"
-msgstr ""
-
-#: ../mactrack_utilities.php:257
-msgid "Maximum Per Device Scan Time:"
-msgstr ""
-
-#: ../mactrack_utilities.php:257
-msgid "minutes"
-msgstr ""
-
-#: ../mactrack_utilities.php:259
-msgid "DNS Configuration Information"
-msgstr ""
-
-#: ../mactrack_utilities.php:261
-msgid "Reverse DNS Resolution is"
-msgstr ""
-
-#: ../mactrack_utilities.php:261
-msgid "ENABLED"
-msgstr ""
-
-#: ../mactrack_utilities.php:263
-msgid "Primary DNS Server:"
-msgstr ""
-
-#: ../mactrack_utilities.php:265
-msgid "Secondary DNS Server:"
-msgstr ""
-
-#: ../mactrack_utilities.php:267
-msgid "DNS Resolution Timeout:"
-msgstr ""
-
-#: ../mactrack_utilities.php:267
-msgid "milliseconds"
-msgstr ""
-
-#: ../mactrack_utilities.php:271
-msgid "Running Process Summary"
-msgstr ""
-
-#: ../mactrack_utilities.php:273
-msgid "The DNS Resolver is Running"
-msgstr ""
-
-#: ../mactrack_utilities.php:273
-msgid "The DNS Resolver is Not Running"
-msgstr ""
-
-#: ../mactrack_utilities.php:275
-msgid "Date Started"
-msgstr ""
-
-#: ../mactrack_utilities.php:309
-msgid "Completed"
-msgstr ""
-
-#: ../mactrack_utilities.php:315
-msgid "Running"
-msgstr ""
-
-#: ../mactrack_utilities.php:321
-msgid "Waiting"
-msgstr ""
-
-#: ../mactrack_utilities.php:328
-msgid "Other"
-msgstr ""
-
-#: ../mactrack_utilities.php:344 ../mactrack_utilities.php:401
-#: ../mactrack_utilities.php:424
-msgid "Are You Sure?"
-msgstr ""
-
-#: ../mactrack_utilities.php:344
-msgid ""
-"Are you sure you want to delete all the Port to MAC to IP results from the "
-"system?"
-msgstr ""
-
-#: ../mactrack_utilities.php:390 ../mactrack_utilities.php:413
-msgid "Device Tracking Database Results"
-msgstr ""
-
-#: ../mactrack_utilities.php:391 ../mactrack_utilities.php:461
-#, php-format
-msgid "The following number of records have been removed from the database: %s"
-msgstr ""
-
-#: ../mactrack_utilities.php:401
-msgid ""
-"Are you sure you want to delete all the Aggregated Port to MAC to IP results "
-"from the system?"
-msgstr ""
-
-#: ../mactrack_utilities.php:414
-#, php-format
-msgid ""
-"The following number of records have been removed from the aggergated table: "
-"%s"
-msgstr ""
-
-#: ../mactrack_utilities.php:424
-msgid ""
-"Are you sure you want to delete and recreate all the Aggregated Port to MAC "
-"to IP results from the system?"
-msgstr ""
-
-#: ../mactrack_utilities.php:450
-#, php-format
-msgid ""
-"The following number of records have been removed from the aggergated table: "
-"%s.  And %s records will be added."
-msgstr ""
-
-#: ../mactrack_utilities.php:471
-msgid ""
-"The Device Tracking scanning functions have been purged.  They will be "
-"recreated once you either edit a device or device type."
-msgstr ""
-
-#: ../mactrack_utilities.php:476
-msgid "Cacti Device Tracking System Utilities"
-msgstr ""
-
-#: ../mactrack_utilities.php:478
-msgid "Process Status Information"
-msgstr ""
-
-#: ../mactrack_utilities.php:487 ../setup.php:1210
-msgid "View Device Tracking Process Status"
-msgstr ""
-
-#: ../mactrack_utilities.php:490
-msgid ""
-"This option will let you show and set process information associated with "
-"the Device Tracking polling process."
-msgstr ""
-
-#: ../mactrack_utilities.php:494
-msgid "Database Administration"
-msgstr ""
-
-#: ../mactrack_utilities.php:498 ../setup.php:1205
-msgid "Perform Database Maintenance"
-msgstr ""
-
-#: ../mactrack_utilities.php:501
-msgid ""
-"Deletes expired Port to MAC to IP associations from the database.  Only "
-"records that have expired, based upon your criteria are removed."
-msgstr ""
-
-#: ../mactrack_utilities.php:507
-msgid "Refresh IEEE Vendor MAC/OUI Database"
-msgstr ""
-
-#: ../mactrack_utilities.php:510
-msgid ""
-"This function will download and install the latest OIU database from the "
-"IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC "
-"Address can be broken into two parts.  The first part of the MAC Addess "
-"contains the Vendor MAC.  The Vendor MAC identifies who manufactured the "
-"part.  This will be helpful in spot checking for rogue devices on your "
-"network."
-msgstr ""
-
-#: ../mactrack_utilities.php:516 ../setup.php:1206
-msgid "Refresh Scanning Functions"
-msgstr ""
-
-#: ../mactrack_utilities.php:519
-msgid ""
-"Deletes old and potentially stale Device Tracking scanning functions from "
-"the drop-down you receive when you edit a device type."
-msgstr ""
-
-#: ../mactrack_utilities.php:525
-msgid "Remove All Scan Results"
-msgstr ""
-
-#: ../mactrack_utilities.php:528
-msgid ""
-"Deletes <strong>ALL</strong> Port to MAC to IP associations from the "
-"database all IP Addresses, IP Ranges, and VLANS.  This utility is good when "
-"you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
-msgstr ""
-
-#: ../mactrack_utilities.php:532
-msgid "Aggregated Table Administration"
-msgstr ""
-
-#: ../mactrack_utilities.php:536
-msgid "Remove All Aggregated Results"
-msgstr ""
-
-#: ../mactrack_utilities.php:539
-msgid ""
-"Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP "
-"associations from the database.  Data will again be collected on the basis "
-"of <strong>only new</strong> scanned data in the next mactrack poller run."
-msgstr ""
-
-#: ../mactrack_utilities.php:545
-msgid "Perform Aggregate Table Rebuild"
-msgstr ""
-
-#: ../mactrack_utilities.php:548
-msgid ""
-"Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP "
-"associations from the database and their re-creation based on <strong>All "
-"scaned data</strong> now."
-msgstr ""
-
-#: ../mactrack_devices.php:32
-msgid "Enable"
-msgstr ""
-
-#: ../mactrack_devices.php:34
-msgid "Change SNMP Options"
-msgstr ""
-
-#: ../mactrack_devices.php:35
-msgid "Change Device Port Values"
-msgstr ""
-
-#: ../mactrack_devices.php:36
-msgid "Connect to Cacti Host via Hostname"
-msgstr ""
-
-#: ../mactrack_devices.php:37
-msgid "Copy SNMP Settings from Cacti Host"
-msgstr ""
-
-#: ../mactrack_devices.php:237
-msgid "You must select at least one device."
-msgstr ""
-
-#: ../mactrack_devices.php:245
-msgid "Click 'Continue' to enable the following devices."
-msgstr ""
-
-#: ../mactrack_devices.php:252
-msgid "Click 'Continue' to disable the following devices."
-msgstr ""
-
-#: ../mactrack_devices.php:259
-msgid ""
-"Click 'Continue' to change SNMP parameters for the following devices, check "
-"the box next to the fields you want to update, and fill in the new value."
-msgstr ""
-
-#: ../mactrack_devices.php:289
-msgid ""
-"Click 'Continue' to change upper or lower port parameters for the following "
-"devices, check the box next to the fields you want to update, and fill in "
-"the new value."
-msgstr ""
-
-#: ../mactrack_devices.php:319
-msgid ""
-"Click 'Continue' to connect the following devices to their respective Cacti "
-"Device.  The relation will be built on equal hostnames. Description will be "
-"updated as well."
-msgstr ""
-
-#: ../mactrack_devices.php:326
-msgid ""
-"Click 'Continue' to copy SNMP Settings from connected Cacti Device to Device "
-"Tracking Device.  All not connected Devices will silently be skipped. SNMP "
-"retries will be taken from Ping retries."
-msgstr ""
-
-#: ../mactrack_devices.php:333
-msgid "Click 'Continue' to delete the following Devices"
-msgstr ""
-
-#: ../mactrack_devices.php:493
-msgid "Import Device Tracking Devices"
-msgstr ""
-
-#: ../mactrack_devices.php:496
-msgid "Import Devices from Local File"
-msgstr ""
-
-#: ../mactrack_devices.php:497
-msgid ""
-"Please specify the location of the CSV file containing your device "
-"information."
-msgstr ""
-
-#: ../mactrack_devices.php:518
-msgid " - The SiteID known to Device Tracking for this device"
-msgstr ""
-
-#: ../mactrack_devices.php:519
-msgid " - A simple name for the device.  For example Cisco 6509 Switch"
-msgstr ""
-
-#: ../mactrack_devices.php:520
-msgid " - The IP Address or DNS Name for the device"
-msgstr ""
-
-#: ../mactrack_devices.php:521
-msgid ""
-" - More detailed information about the device, including location, "
-"environmental conditions, etc."
-msgstr ""
-
-#: ../mactrack_devices.php:522
-msgid " - A list of ports that should not be scanned for user devices"
-msgstr ""
-
-#: ../mactrack_devices.php:523
-msgid ""
-" - Redundant information indicating the intended device type.  See below for "
-"valid values."
-msgstr ""
-
-#: ../mactrack_devices.php:524
-msgid " - Id of a set of SNMP options"
-msgstr ""
-
-#: ../mactrack_devices.php:525
-msgid " - The current snmp read string for the device"
-msgstr ""
-
-#: ../mactrack_devices.php:526
-msgid ""
-" - The snmp version you wish to scan this device with.  Valid values are 1, "
-"2 and 3"
-msgstr ""
-
-#: ../mactrack_devices.php:527
-msgid " - The UDP port that the snmp agent is running on"
-msgstr ""
-
-#: ../mactrack_devices.php:528
-msgid ""
-" - The timeout in milliseconds to wait for an snmp response before trying "
-"again"
-msgstr ""
-
-#: ../mactrack_devices.php:529
-msgid " - The number of times to retry a snmp request before giving up"
-msgstr ""
-
-#: ../mactrack_devices.php:530
-msgid ""
-" - Specified the number of OID's that can be obtained in a single SNMP Get "
-"request"
-msgstr ""
-
-#: ../mactrack_devices.php:531
-msgid " - SNMP V3: SNMP username"
-msgstr ""
-
-#: ../mactrack_devices.php:532
-msgid " - SNMP V3: SNMP password"
-msgstr ""
-
-#: ../mactrack_devices.php:533
-msgid " - SNMP V3: SNMP authentication protocol"
-msgstr ""
-
-#: ../mactrack_devices.php:534
-msgid " - SNMP V3: SNMP privacy passphrase"
-msgstr ""
-
-#: ../mactrack_devices.php:535
-msgid " - SNMP V3: SNMP privacy protocol"
-msgstr ""
-
-#: ../mactrack_devices.php:536
-msgid " - SNMP V3: SNMP context"
-msgstr ""
-
-#: ../mactrack_devices.php:537
-msgid " - SNMP V3: SNMP engine id"
-msgstr ""
-
-#: ../mactrack_devices.php:543
-msgid ""
-"Therefore, if you attempt to import duplicate devices, only the data you "
-"specify will be updated."
-msgstr ""
-
-#: ../mactrack_devices.php:708
-#, php-format
-msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
-msgstr ""
-
-#: ../mactrack_devices.php:794 ../mactrack_devices.php:809
-#, php-format
-msgid ""
-"INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP "
-"Port: %s"
-msgstr ""
-
-#: ../mactrack_devices.php:796 ../mactrack_devices.php:811
-#, php-format
-msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr ""
-
-#: ../mactrack_devices.php:803
-#, php-format
-msgid ""
-"INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP "
-"Port: %s"
-msgstr ""
-
-#: ../mactrack_devices.php:838
-#, php-format
-msgid "Device Tracking Devices [edit: %s]"
-msgstr ""
-
-#: ../mactrack_devices.php:842
-msgid "Device Tracking Devices [new]"
-msgstr ""
-
-#: ../mactrack_devices.php:855
-msgid "SNMP Information"
-msgstr ""
-
-#: ../mactrack_devices.php:875
-msgid "System:"
-msgstr ""
-
-#: ../mactrack_devices.php:876
-msgid "Uptime:"
-msgstr ""
-
-#: ../mactrack_devices.php:877
-msgid "Hostname:"
-msgstr ""
-
-#: ../mactrack_devices.php:878
-msgid "ObjectID:"
-msgstr ""
-
-#: ../mactrack_devices.php:983
-msgid "Device Tracking Device Filters"
-msgstr ""
-
-#: ../mactrack_devices.php:1006
-msgid "Total IPs"
-msgstr ""
-
-#: ../mactrack_devices.php:1032
-msgid "No Device Tracking Devices"
-msgstr ""
-
-#: ../setup.php:890 ../setup.php:1222 ../setup.php:1224 ../setup.php:1331
-#: ../setup.php:1332 ../setup.php:1333 ../setup.php:1334 ../setup.php:1335
-#: ../setup.php:1343
+#: ../setup.php:921 ../setup.php:1254 ../setup.php:1256 ../setup.php:1363
+#: ../setup.php:1364 ../setup.php:1365 ../setup.php:1366 ../setup.php:1367
+#: ../setup.php:1375
 msgid "Device Tracking"
 msgstr ""
 
-#: ../setup.php:894
+#: ../setup.php:925
 msgid "General Settings"
 msgstr ""
 
-#: ../setup.php:898
+#: ../setup.php:929
 msgid "Scanning Frequency"
 msgstr ""
 
-#: ../setup.php:899
+#: ../setup.php:930
 msgid ""
 "Choose when to collect MAC and IP Addresses and Interface statistics from "
 "your network devices."
 msgstr ""
 
-#: ../setup.php:905
+#: ../setup.php:936
 msgid "Concurrent Processes"
 msgstr ""
 
-#: ../setup.php:906
+#: ../setup.php:937
 msgid ""
 "Specify how many devices will be polled simultaneously until all devices "
 "have been polled."
 msgstr ""
 
-#: ../setup.php:913
+#: ../setup.php:944
 msgid "Scanner Max Runtime"
 msgstr ""
 
-#: ../setup.php:914
+#: ../setup.php:945
 msgid ""
 "Specify the number of minutes a device scanning function will be allowed to "
 "run prior to the system assuming it has been completed.  This setting will "
 "correct for abended scanning jobs."
 msgstr ""
 
-#: ../setup.php:921
+#: ../setup.php:952
 msgid "Start Time for Data Collection"
 msgstr ""
 
-#: ../setup.php:922
+#: ../setup.php:953
 msgid ""
 "When would you like the first data collection to take place.  All future "
 "data collection times will be based upon this start time.  A good example "
 "would be 12:00AM."
 msgstr ""
 
-#: ../setup.php:929
+#: ../setup.php:960
 msgid "Database Maintenance Time"
 msgstr ""
 
-#: ../setup.php:930
+#: ../setup.php:961
 msgid ""
 "When should old database records be removed from the database.  Please note "
 "that no access will be permitted to the port database while this action is "
 "taking place."
 msgstr ""
 
-#: ../setup.php:937
+#: ../setup.php:968
 msgid "Data Retention"
 msgstr ""
 
-#: ../setup.php:938
+#: ../setup.php:969
 msgid "How long should port MAC details be retained in the database."
 msgstr ""
 
-#: ../setup.php:944
+#: ../setup.php:975
 msgid "Switch Level Ignore Ports Delimiter"
 msgstr ""
 
-#: ../setup.php:945
+#: ../setup.php:976
 msgid ""
 "What delimiter should Device Tracking use when parsing the Ignore Ports "
 "string for each switch."
 msgstr ""
 
-#: ../setup.php:949
+#: ../setup.php:980
 msgid "Auto Detect"
 msgstr ""
 
-#: ../setup.php:950 ../setup.php:960
+#: ../setup.php:981 ../setup.php:991
 msgid "Colon [:]"
 msgstr ""
 
-#: ../setup.php:951
+#: ../setup.php:982
 msgid "Pipe [|]"
 msgstr ""
 
-#: ../setup.php:952
+#: ../setup.php:983
 msgid "Space [ ]"
 msgstr ""
 
-#: ../setup.php:956
+#: ../setup.php:987
 msgid "Mac Address Delimiter"
 msgstr ""
 
-#: ../setup.php:957
+#: ../setup.php:988
 msgid "How should each octet of the MAC address be delimited."
 msgstr ""
 
-#: ../setup.php:960
+#: ../setup.php:991
 msgid "Dash [-]"
 msgstr ""
 
-#: ../setup.php:964 ../setup.php:1659
+#: ../setup.php:995 ../setup.php:1699
 msgid "Ports to Ignore"
 msgstr ""
 
-#: ../setup.php:965
+#: ../setup.php:996
 msgid ""
 "Provide a regular expression of ifNames or ifDescriptions of ports to ignore "
 "in the interface list.  For example, (Vlan|Loopback|Null)."
 msgstr ""
 
-#: ../setup.php:972
+#: ../setup.php:1003
 msgid "Bandwidth Usage Threshold"
 msgstr ""
 
-#: ../setup.php:973
+#: ../setup.php:1004
 msgid ""
 "When reviewing network interface statistics, what bandwidth threshold do you "
 "want to view by default."
 msgstr ""
 
-#: ../setup.php:978 ../setup.php:979 ../setup.php:980 ../setup.php:981
-#: ../setup.php:982 ../setup.php:983 ../setup.php:984 ../setup.php:985
-#: ../setup.php:986
+#: ../setup.php:1009 ../setup.php:1010 ../setup.php:1011 ../setup.php:1012
+#: ../setup.php:1013 ../setup.php:1014 ../setup.php:1015 ../setup.php:1016
+#: ../setup.php:1017
 #, php-format
 msgid "%d Percent"
 msgstr ""
 
-#: ../setup.php:990
+#: ../setup.php:1021
 msgid "DNS Settings"
 msgstr ""
 
-#: ../setup.php:994
+#: ../setup.php:1025
 msgid "Perform Reverse DNS Name Resolution"
 msgstr ""
 
-#: ../setup.php:995
+#: ../setup.php:1026
 msgid ""
 "Should Device Tracking perform reverse DNS lookup of the IP addresses "
 "associated with ports. CAUTION: If DNS is not properly setup, this will slow "
 "scan time significantly."
 msgstr ""
 
-#: ../setup.php:1000
+#: ../setup.php:1031
 msgid "Primary DNS IP Address"
 msgstr ""
 
-#: ../setup.php:1001
+#: ../setup.php:1032
 msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
 msgstr ""
 
-#: ../setup.php:1008
+#: ../setup.php:1039
 msgid "Secondary DNS IP Address"
 msgstr ""
 
-#: ../setup.php:1009
+#: ../setup.php:1040
 msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
 msgstr ""
 
-#: ../setup.php:1016
+#: ../setup.php:1047
 msgid "DNS Timeout"
 msgstr ""
 
-#: ../setup.php:1017
+#: ../setup.php:1048
 msgid ""
 "Please enter the DNS timeout in milliseconds.  Device Tracking uses a PHP "
 "based DNS resolver."
 msgstr ""
 
-#: ../setup.php:1024
+#: ../setup.php:1055
 msgid "DNS Prime Interval"
 msgstr ""
 
-#: ../setup.php:1025
+#: ../setup.php:1056
 msgid ""
 "How often, in seconds do Device Tracking scanning IP's need to be resolved "
 "to MAC addresses for DNS resolution.  Using a larger number when you have "
 "several thousand devices will increase performance."
 msgstr ""
 
-#: ../setup.php:1032
+#: ../setup.php:1063
 msgid "Notification Settings"
 msgstr ""
 
-#: ../setup.php:1036
+#: ../setup.php:1067
 msgid "Source Address"
 msgstr ""
 
-#: ../setup.php:1037
+#: ../setup.php:1068
 msgid "The source Email address for Device Tracking Emails."
 msgstr ""
 
-#: ../setup.php:1044
+#: ../setup.php:1075
 msgid "Source Email Name"
 msgstr ""
 
-#: ../setup.php:1045
+#: ../setup.php:1076
 msgid "The Source Email name for Device Tracking Emails."
 msgstr ""
 
-#: ../setup.php:1047
+#: ../setup.php:1078
 msgid "MACTrack Administrator"
 msgstr ""
 
-#: ../setup.php:1052 ../setup.php:1848
+#: ../setup.php:1083 ../setup.php:1888
 msgid "MacWatch Default Body"
 msgstr ""
 
-#: ../setup.php:1053 ../setup.php:1849
+#: ../setup.php:1084 ../setup.php:1889
 msgid ""
 "The Email body preset for Device Tracking MacWatch Emails.  The body can "
 "contain any valid html tags.  It also supports replacement tags that will be "
@@ -2148,350 +2025,359 @@ msgid ""
 "<SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
 msgstr ""
 
-#: ../setup.php:1057 ../setup.php:1853
+#: ../setup.php:1088 ../setup.php:1893
 msgid ""
 "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>."
 "<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP "
 "<DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
 msgstr ""
 
-#: ../setup.php:1064
+#: ../setup.php:1095
 msgid "MacAuth Report Email Addresses"
 msgstr ""
 
-#: ../setup.php:1065
+#: ../setup.php:1096
 msgid ""
 "A comma delimited list of users to recieve the MacAuth Email notifications."
 msgstr ""
 
-#: ../setup.php:1074
+#: ../setup.php:1105
 msgid "MacAuth Report Frequency"
 msgstr ""
 
-#: ../setup.php:1075
+#: ../setup.php:1106
 msgid "How often will the MacAuth Reports be Emailed."
 msgstr ""
 
-#: ../setup.php:1081
+#: ../setup.php:1112
 msgid "Device Tracking ArpWatch Settings"
 msgstr ""
 
-#: ../setup.php:1085
+#: ../setup.php:1116
 msgid "Enable ArpWatch"
 msgstr ""
 
-#: ../setup.php:1086
+#: ../setup.php:1117
 msgid ""
 "Should Device Tracking also use ArpWatch data to supplement Mac to IP/DNS "
 "resolution?"
 msgstr ""
 
-#: ../setup.php:1091
+#: ../setup.php:1122
 msgid "ArpWatch Database Path"
 msgstr ""
 
-#: ../setup.php:1092
+#: ../setup.php:1123
 msgid "The location of the ArpWatch Database file on the Cacti server."
 msgstr ""
 
-#: ../setup.php:1099
+#: ../setup.php:1130
 msgid "SNMP Presets"
 msgstr ""
 
-#: ../setup.php:1103
+#: ../setup.php:1134
 msgid "Update Policy for SNMP Options"
 msgstr ""
 
-#: ../setup.php:1104
+#: ../setup.php:1135
 msgid ""
 "Policy for synchronization of SNMP Options between Cacti devices and Device "
 "Tracking Devices."
 msgstr ""
 
-#: ../setup.php:1111
+#: ../setup.php:1142
 msgid "Default SNMP version for all new hosts."
 msgstr ""
 
-#: ../setup.php:1118
+#: ../setup.php:1149
 msgid "Default SNMP read community for all new hosts."
 msgstr ""
 
-#: ../setup.php:1125
+#: ../setup.php:1156
 msgid "Communities"
 msgstr ""
 
-#: ../setup.php:1126
+#: ../setup.php:1157
 msgid ""
 "Fill in the list of available SNMP read strings to test for this device. "
 "Each read string must be separated by a colon ':'.  These read strings will "
 "be tested sequentially if the primary read string is invalid."
 msgstr ""
 
-#: ../setup.php:1133 ../setup.php:1494
+#: ../setup.php:1164 ../setup.php:1534
 msgid "The UDP/TCP Port to poll the SNMP agent on."
 msgstr ""
 
-#: ../setup.php:1141
+#: ../setup.php:1172
 msgid "Default SNMP timeout in milli-seconds."
 msgstr ""
 
-#: ../setup.php:1149
+#: ../setup.php:1180
 msgid ""
 "The number times the SNMP poller will attempt to reach the host before "
 "failing."
 msgstr ""
 
-#: ../setup.php:1162
+#: ../setup.php:1193
 msgid "snmpbulkwalk Binary Path"
 msgstr ""
 
-#: ../setup.php:1163
+#: ../setup.php:1194
 msgid "The path to your snmpbulkwalk binary."
 msgstr ""
 
-#: ../setup.php:1175
+#: ../setup.php:1206
 msgid "Device Tracking Devices"
 msgstr ""
 
-#: ../setup.php:1176 ../setup.php:1181 ../setup.php:1182 ../setup.php:1184
-#: ../setup.php:1188 ../setup.php:1191 ../setup.php:1194
+#: ../setup.php:1207 ../setup.php:1212 ../setup.php:1213 ../setup.php:1215
+#: ../setup.php:1219 ../setup.php:1222 ../setup.php:1225
 msgid "(Edit)"
 msgstr ""
 
-#: ../setup.php:1177 ../setup.php:1185
+#: ../setup.php:1208 ../setup.php:1216
 msgid "(Import)"
 msgstr ""
 
-#: ../setup.php:1183
+#: ../setup.php:1214
 msgid "Device Tracking Device Types"
 msgstr ""
 
-#: ../setup.php:1187
+#: ../setup.php:1218
 msgid "Device Tracking Sites"
 msgstr ""
 
-#: ../setup.php:1190
+#: ../setup.php:1221
 msgid "Mac Address Tracking Utility"
 msgstr ""
 
-#: ../setup.php:1193
+#: ../setup.php:1224
 msgid "Mac Address Authorization Utility"
 msgstr ""
 
-#: ../setup.php:1196
+#: ../setup.php:1227
 msgid "Device Tracking Vendor Macs"
 msgstr ""
 
-#: ../setup.php:1197
+#: ../setup.php:1228
 msgid "Device Tracking View Macs"
 msgstr ""
 
-#: ../setup.php:1199
+#: ../setup.php:1230
+msgid "Device Tracking Dot1x View"
+msgstr ""
+
+#: ../setup.php:1231
 msgid "Device Tracking IP Address Viewer"
 msgstr ""
 
-#: ../setup.php:1200
+#: ../setup.php:1232
 msgid "Device Tracking View Interfaces"
 msgstr ""
 
-#: ../setup.php:1201
+#: ../setup.php:1233
 msgid "Device Tracking View Sites"
 msgstr ""
 
-#: ../setup.php:1202
+#: ../setup.php:1234
 msgid "Device Tracking View IP Ranges"
 msgstr ""
 
-#: ../setup.php:1203
+#: ../setup.php:1235
 msgid "Device Tracking View Devices"
 msgstr ""
 
-#: ../setup.php:1204
+#: ../setup.php:1236
 msgid "Device Tracking Utilities"
 msgstr ""
 
-#: ../setup.php:1207
+#: ../setup.php:1239
 msgid "Truncate Port Results Table"
 msgstr ""
 
-#: ../setup.php:1208
+#: ../setup.php:1240
 msgid "Truncate Aggregated Port Results Table"
 msgstr ""
 
-#: ../setup.php:1209
+#: ../setup.php:1241
 msgid "Truncate and Re-create Aggregated Port Results Table"
 msgstr ""
 
-#: ../setup.php:1211
+#: ../setup.php:1243
 msgid "Refresh/Update Vendor MAC Database from IEEE"
 msgstr ""
 
-#: ../setup.php:1212 ../setup.php:1213
+#: ../setup.php:1244 ../setup.php:1245
 msgid "Device Tracking Graph Viewer"
 msgstr ""
 
-#: ../setup.php:1241 ../setup.php:1242 ../setup.php:1243 ../setup.php:1244
+#: ../setup.php:1273 ../setup.php:1274 ../setup.php:1275 ../setup.php:1276
 #, php-format
 msgid "%d Seconds"
 msgstr ""
 
-#: ../setup.php:1245
+#: ../setup.php:1277
 #, php-format
 msgid "%d Minute"
 msgstr ""
 
-#: ../setup.php:1257
+#: ../setup.php:1289
 msgid "Matches"
 msgstr ""
 
-#: ../setup.php:1258
+#: ../setup.php:1290
 msgid "Contains"
 msgstr ""
 
-#: ../setup.php:1259
+#: ../setup.php:1291
 msgid "Begins With"
 msgstr ""
 
-#: ../setup.php:1260
+#: ../setup.php:1292
 msgid "Does Not Contain"
 msgstr ""
 
-#: ../setup.php:1261
+#: ../setup.php:1293
 msgid "Does Not Begin With"
 msgstr ""
 
-#: ../setup.php:1262
+#: ../setup.php:1294
 msgid "Is Null"
 msgstr ""
 
-#: ../setup.php:1263
+#: ../setup.php:1295
 msgid "Is Not Null"
 msgstr ""
 
-#: ../setup.php:1268
+#: ../setup.php:1300
 msgid "Half"
 msgstr ""
 
-#: ../setup.php:1269
+#: ../setup.php:1301
 msgid "Full"
 msgstr ""
 
-#: ../setup.php:1274
+#: ../setup.php:1306
 msgid "Sync Cacti Device to Device Tracking Device"
 msgstr ""
 
-#: ../setup.php:1275
+#: ../setup.php:1307
 msgid "Sync Device Tracking Device to Cacti Device"
 msgstr ""
 
-#: ../setup.php:1293 ../setup.php:1294 ../setup.php:1295 ../setup.php:1296
+#: ../setup.php:1325 ../setup.php:1326 ../setup.php:1327 ../setup.php:1328
 #, php-format
 msgid "Every %d Minutes"
 msgstr ""
 
-#: ../setup.php:1297
+#: ../setup.php:1329
 #, php-format
 msgid "Every %d Hour"
 msgstr ""
 
-#: ../setup.php:1298 ../setup.php:1299 ../setup.php:1300 ../setup.php:1301
-#: ../setup.php:1321 ../setup.php:1876 ../setup.php:1877
+#: ../setup.php:1330 ../setup.php:1331 ../setup.php:1332 ../setup.php:1333
+#: ../setup.php:1353 ../setup.php:1916 ../setup.php:1917
 #, php-format
 msgid "Every %d Hours"
 msgstr ""
 
-#: ../setup.php:1302 ../setup.php:1322 ../setup.php:1878
+#: ../setup.php:1334 ../setup.php:1354 ../setup.php:1918
 msgid "Every Day"
 msgstr ""
 
-#: ../setup.php:1311
+#: ../setup.php:1343
 #, php-format
 msgid "%d Month"
 msgstr ""
 
-#: ../setup.php:1312 ../setup.php:1313 ../setup.php:1314
+#: ../setup.php:1344 ../setup.php:1345 ../setup.php:1346
 #, php-format
 msgid "%d Months"
 msgstr ""
 
-#: ../setup.php:1315
+#: ../setup.php:1347
 #, php-format
 msgid "%d Year"
 msgstr ""
 
-#: ../setup.php:1320
+#: ../setup.php:1352
 msgid "On Scan Completion"
 msgstr ""
 
-#: ../setup.php:1323
+#: ../setup.php:1355
 #, php-format
 msgid "Every %d Days"
 msgstr ""
 
-#: ../setup.php:1324
+#: ../setup.php:1356
 msgid "Every Week"
 msgstr ""
 
-#: ../setup.php:1330
+#: ../setup.php:1362
 msgid "Management"
 msgstr ""
 
-#: ../setup.php:1333 ../setup.php:1670 ../setup.php:1674
+#: ../setup.php:1365 ../setup.php:1710 ../setup.php:1714
 msgid "SNMP Options"
 msgstr ""
 
-#: ../setup.php:1336 ../setup.php:1337 ../setup.php:1338 ../setup.php:1344
+#: ../setup.php:1366 ../mactrack_device_types.php:942
+#: ../mactrack_device_types.php:995
+msgid "Device Types"
+msgstr ""
+
+#: ../setup.php:1368 ../setup.php:1369 ../setup.php:1370 ../setup.php:1376
 msgid "Tracking Tools"
 msgstr ""
 
-#: ../setup.php:1336
+#: ../setup.php:1368
 msgid "Mac Watch"
 msgstr ""
 
-#: ../setup.php:1337
+#: ../setup.php:1369
 msgid "Mac Authorizations"
 msgstr ""
 
-#: ../setup.php:1338
+#: ../setup.php:1370
 msgid "Tracking Utilities"
 msgstr ""
 
-#: ../setup.php:1357
+#: ../setup.php:1389
 msgid "Device Scanning Function Options"
 msgstr ""
 
-#: ../setup.php:1362
+#: ../setup.php:1394
 msgid "Give this device type a meaningful description."
 msgstr ""
 
-#: ../setup.php:1369
+#: ../setup.php:1401
 msgid "Fill in the name for the vendor of this device type."
 msgstr ""
 
-#: ../setup.php:1376
+#: ../setup.php:1408
 msgid "Choose the type of device."
 msgstr ""
 
-#: ../setup.php:1383
+#: ../setup.php:1415
 msgid "System Description Match"
 msgstr ""
 
-#: ../setup.php:1384 ../setup.php:1391
+#: ../setup.php:1416 ../setup.php:1423
 #, php-format
 msgid ""
 "Provide key information to help Device Tracking detect the type of device.  "
 "The wildcard character is the '%' sign."
 msgstr ""
 
-#: ../setup.php:1390
+#: ../setup.php:1422
 msgid "Vendor SNMP Object ID Match"
 msgstr ""
 
-#: ../setup.php:1397
+#: ../setup.php:1429
 msgid "MAC Address Scanning Function"
 msgstr ""
 
-#: ../setup.php:1398
+#: ../setup.php:1430
 msgid ""
 "The Device Tracking scanning function to call in order to obtain and store "
 "port details.  The function name is all that is required.  The following "
@@ -2500,223 +2386,233 @@ msgid ""
 "router."
 msgstr ""
 
-#: ../setup.php:1405
+#: ../setup.php:1437
 msgid "IP Address Scanning Function"
 msgstr ""
 
-#: ../setup.php:1406
+#: ../setup.php:1438
 msgid ""
 "The Device Tracking scanning function specific to Layer3 devices that track "
 "IP Addresses."
 msgstr ""
 
-#: ../setup.php:1413
+#: ../setup.php:1445
+msgid "802.1x Scanning Function"
+msgstr ""
+
+#: ../setup.php:1446
+msgid ""
+"The Device Tracking scanning function specific to Switches with dot1x "
+"enabled."
+msgstr ""
+
+#: ../setup.php:1453
 msgid "Serial Number Base OID"
 msgstr ""
 
-#: ../setup.php:1414
+#: ../setup.php:1454
 msgid ""
 "The SNMP OID used to obtain this device types serial number to be stored in "
 "the Device Tracking Asset Information table."
 msgstr ""
 
-#: ../setup.php:1421
+#: ../setup.php:1461
 msgid "Serial Number Collection Method"
 msgstr ""
 
-#: ../setup.php:1422
+#: ../setup.php:1462
 msgid ""
 "How is the serial number collected for this OID.  If 'SNMP Walk', we assume "
 "multiple serial numbers.  If 'Get', it will be only one.."
 msgstr ""
 
-#: ../setup.php:1425
+#: ../setup.php:1465
 msgid "SNMP Get"
 msgstr ""
 
-#: ../setup.php:1425
+#: ../setup.php:1465
 msgid "SNMP Walk"
 msgstr ""
 
-#: ../setup.php:1429
+#: ../setup.php:1469
 msgid "Low User Port Number"
 msgstr ""
 
-#: ../setup.php:1430 ../setup.php:1439
+#: ../setup.php:1470 ../setup.php:1479
 msgid ""
 "Provide the low user port number on this switch.  Leave 0 to allow the "
 "system to calculate it."
 msgstr ""
 
-#: ../setup.php:1438
+#: ../setup.php:1478
 msgid "High User Port Number"
 msgstr ""
 
-#: ../setup.php:1464
+#: ../setup.php:1504
 msgid "Fill in the name of this SNMP option set."
 msgstr ""
 
-#: ../setup.php:1476
+#: ../setup.php:1516
 msgid "SNMP Version"
 msgstr ""
 
-#: ../setup.php:1477
+#: ../setup.php:1517
 msgid "Choose the SNMP version for this host."
 msgstr ""
 
-#: ../setup.php:1484
+#: ../setup.php:1524
 msgid "SNMP Community String"
 msgstr ""
 
-#: ../setup.php:1485
+#: ../setup.php:1525
 msgid "Fill in the SNMP read community for this device."
 msgstr ""
 
-#: ../setup.php:1493
+#: ../setup.php:1533
 msgid "SNMP Port"
 msgstr ""
 
-#: ../setup.php:1502
+#: ../setup.php:1542
 msgid "SNMP Timeout"
 msgstr ""
 
-#: ../setup.php:1503
+#: ../setup.php:1543
 msgid ""
 "The maximum number of milliseconds Cacti will wait for an SNMP response "
 "(does not work with php-snmp support)."
 msgstr ""
 
-#: ../setup.php:1511
+#: ../setup.php:1551
 msgid "SNMP Retries"
 msgstr ""
 
-#: ../setup.php:1512
+#: ../setup.php:1552
 msgid ""
 "The maximum number of attempts to reach a device via an SNMP readstring "
 "prior to giving up."
 msgstr ""
 
-#: ../setup.php:1520
+#: ../setup.php:1560
 msgid "Maximum OID's Per Get Request"
 msgstr ""
 
-#: ../setup.php:1521
+#: ../setup.php:1561
 msgid ""
 "Specified the number of OID's that can be obtained in a single SNMP Get "
 "request."
 msgstr ""
 
-#: ../setup.php:1529
+#: ../setup.php:1569
 msgid "SNMP Username (v3)"
 msgstr ""
 
-#: ../setup.php:1530
+#: ../setup.php:1570
 msgid "SNMP v3 username for this device."
 msgstr ""
 
-#: ../setup.php:1538
+#: ../setup.php:1578
 msgid "SNMP Password (v3)"
 msgstr ""
 
-#: ../setup.php:1539
+#: ../setup.php:1579
 msgid "SNMP v3 password for this device."
 msgstr ""
 
-#: ../setup.php:1547
+#: ../setup.php:1587
 msgid "SNMP Auth Protocol (v3)"
 msgstr ""
 
-#: ../setup.php:1548
+#: ../setup.php:1588
 msgid "Choose the SNMPv3 Authorization Protocol."
 msgstr ""
 
-#: ../setup.php:1555
+#: ../setup.php:1595
 msgid "SNMP Privacy Passphrase (v3)"
 msgstr ""
 
-#: ../setup.php:1556
+#: ../setup.php:1596
 msgid "Choose the SNMPv3 Privacy Passphrase."
 msgstr ""
 
-#: ../setup.php:1564
+#: ../setup.php:1604
 msgid "SNMP Privacy Protocol (v3)"
 msgstr ""
 
-#: ../setup.php:1565
+#: ../setup.php:1605
 msgid "Choose the SNMPv3 Privacy Protocol."
 msgstr ""
 
-#: ../setup.php:1572
+#: ../setup.php:1612
 msgid "SNMP Context (v3)"
 msgstr ""
 
-#: ../setup.php:1573
+#: ../setup.php:1613
 msgid "Enter the SNMP v3 Context to use for this device."
 msgstr ""
 
-#: ../setup.php:1581
+#: ../setup.php:1621
 msgid "SNMP Engine ID (v3)"
 msgstr ""
 
-#: ../setup.php:1582
+#: ../setup.php:1622
 msgid "Enter the SNMP v3 Engine ID to use for this device."
 msgstr ""
 
-#: ../setup.php:1594
+#: ../setup.php:1634
 msgid "General Device Settings"
 msgstr ""
 
-#: ../setup.php:1599
+#: ../setup.php:1639
 msgid "Give this device a meaningful name."
 msgstr ""
 
-#: ../setup.php:1606
+#: ../setup.php:1646
 msgid "Fill in the fully qualified hostname for this device."
 msgstr ""
 
-#: ../setup.php:1611
+#: ../setup.php:1651
 msgid "Related Cacti Host"
 msgstr ""
 
-#: ../setup.php:1612
+#: ../setup.php:1652
 msgid "Given Device Tracking Host is connected to this Cacti Host."
 msgstr ""
 
-#: ../setup.php:1621
+#: ../setup.php:1661
 msgid "Scan Type"
 msgstr ""
 
-#: ../setup.php:1622
+#: ../setup.php:1662
 msgid "Choose the scan type you wish to perform on this device."
 msgstr ""
 
-#: ../setup.php:1630
+#: ../setup.php:1670
 msgid "Choose the site to associate with this device."
 msgstr ""
 
-#: ../setup.php:1637
+#: ../setup.php:1677
 msgid "Device Notes"
 msgstr ""
 
-#: ../setup.php:1638
+#: ../setup.php:1678
 msgid ""
 "This field value is useful to save general information about a specific "
 "device."
 msgstr ""
 
-#: ../setup.php:1647
+#: ../setup.php:1687
 msgid "Disable Device"
 msgstr ""
 
-#: ../setup.php:1648
+#: ../setup.php:1688
 msgid "Check this box to disable all checks for this host."
 msgstr ""
 
-#: ../setup.php:1655
+#: ../setup.php:1695
 msgid "Switch/Hub, Switch/Router Settings"
 msgstr ""
 
-#: ../setup.php:1660
+#: ../setup.php:1700
 msgid ""
 "Provide a list of ports on a specific switch/hub whose MAC results should be "
 "ignored.  Ports such as link/trunk ports that can not be distinguished from "
@@ -2725,195 +2621,405 @@ msgid ""
 "'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
 msgstr ""
 
-#: ../setup.php:1675
+#: ../setup.php:1715
 msgid "Select a set of SNMP options to try."
 msgstr ""
 
-#: ../setup.php:1682
+#: ../setup.php:1722
 msgid "Read Strings"
 msgstr ""
 
-#: ../setup.php:1683
+#: ../setup.php:1723
 msgid "<strong>DEPRECATED:</strong> SNMP community strings"
 msgstr ""
 
-#: ../setup.php:1688
+#: ../setup.php:1728
 msgid "Specific SNMP Settings"
 msgstr ""
 
-#: ../setup.php:1697
+#: ../setup.php:1737
 msgid "Connectivity Options"
 msgstr ""
 
-#: ../setup.php:1701
+#: ../setup.php:1741
 msgid "Terminal Type"
 msgstr ""
 
-#: ../setup.php:1702
+#: ../setup.php:1742
 msgid "Choose the terminal type that you use to connect to this device."
 msgstr ""
 
-#: ../setup.php:1707
+#: ../setup.php:1747
 msgid "Telnet"
 msgstr ""
 
-#: ../setup.php:1708
+#: ../setup.php:1748
 msgid "SSH"
 msgstr ""
 
-#: ../setup.php:1709
+#: ../setup.php:1749
 msgid "HTTP"
 msgstr ""
 
-#: ../setup.php:1710
+#: ../setup.php:1750
 msgid "HTTPS"
 msgstr ""
 
-#: ../setup.php:1714
+#: ../setup.php:1754
 msgid "User Name"
 msgstr ""
 
-#: ../setup.php:1715
+#: ../setup.php:1755
 msgid ""
 "The user name to be used for your custom authentication method.  Examples "
 "include SSH, RSH, HTML, etc."
 msgstr ""
 
-#: ../setup.php:1723
+#: ../setup.php:1763
 msgid "Password"
 msgstr ""
 
-#: ../setup.php:1724
+#: ../setup.php:1764
 msgid "The password to be used for your custom authentication."
 msgstr ""
 
-#: ../setup.php:1732
+#: ../setup.php:1772
 msgid "Private Key Path"
 msgstr ""
 
-#: ../setup.php:1733
+#: ../setup.php:1773
 msgid "The path to the private key used for SSH authentication."
 msgstr ""
 
-#: ../setup.php:1758
+#: ../setup.php:1798
 msgid "Sequence"
 msgstr ""
 
-#: ../setup.php:1759
+#: ../setup.php:1799
 msgid "Sequence of Item."
 msgstr ""
 
-#: ../setup.php:1767
+#: ../setup.php:1807
 msgid "General Site Settings"
 msgstr ""
 
-#: ../setup.php:1772
+#: ../setup.php:1812
 msgid "Please enter a reasonable name for this site."
 msgstr ""
 
-#: ../setup.php:1779
+#: ../setup.php:1819
 msgid "Primary Customer Contact"
 msgstr ""
 
-#: ../setup.php:1780
+#: ../setup.php:1820
 msgid "The principal customer contact name and number for this site."
 msgstr ""
 
-#: ../setup.php:1787
+#: ../setup.php:1827
 msgid "NetOps Contact"
 msgstr ""
 
-#: ../setup.php:1788
+#: ../setup.php:1828
 msgid "Please principal network support contact name and number for this site."
 msgstr ""
 
-#: ../setup.php:1795
+#: ../setup.php:1835
 msgid "Facilities Contact"
 msgstr ""
 
-#: ../setup.php:1796
+#: ../setup.php:1836
 msgid ""
 "Please principal facilities/security contact name and number for this site."
 msgstr ""
 
-#: ../setup.php:1803
+#: ../setup.php:1843
 msgid "Site Information"
 msgstr ""
 
-#: ../setup.php:1807
+#: ../setup.php:1847
 msgid ""
 "Provide any site-specific information, in free form, that allows you to "
 "better manage this location."
 msgstr ""
 
-#: ../setup.php:1829
+#: ../setup.php:1869
 msgid "General Mac Address Tracking Settings"
 msgstr ""
 
-#: ../setup.php:1834
+#: ../setup.php:1874
 msgid "Please enter the MAC Address to be watched for."
 msgstr ""
 
-#: ../setup.php:1841
+#: ../setup.php:1881
 msgid "MAC Tracking Name/Email Subject"
 msgstr ""
 
-#: ../setup.php:1842
+#: ../setup.php:1882
 msgid ""
 "Please enter a reasonable name for this MAC Tracking entry.  This "
 "information will be in the subject line of your Email"
 msgstr ""
 
-#: ../setup.php:1861
+#: ../setup.php:1901
 msgid ""
 "Ticket number for cross referencing with your corporate help desk system(s)."
 msgstr ""
 
-#: ../setup.php:1868
+#: ../setup.php:1908
 msgid "Notification Schedule"
 msgstr ""
 
-#: ../setup.php:1869
+#: ../setup.php:1909
 msgid "Choose how often an Email should be generated for this Mac Watch item."
 msgstr ""
 
-#: ../setup.php:1873
+#: ../setup.php:1913
 msgid "First Occurrence Only"
 msgstr ""
 
-#: ../setup.php:1874
+#: ../setup.php:1914
 msgid "All Occurrences"
 msgstr ""
 
-#: ../setup.php:1875
+#: ../setup.php:1915
 msgid "Every Hour"
 msgstr ""
 
-#: ../setup.php:1882
+#: ../setup.php:1922
 msgid "Email Addresses"
 msgstr ""
 
-#: ../setup.php:1883
+#: ../setup.php:1923
 msgid ""
 "Enter a semicolon separated of Email addresses that will be notified where "
 "this MAC address is."
 msgstr ""
 
-#: ../setup.php:1906
+#: ../setup.php:1946
 msgid "General Mac Address Authorization Settings"
 msgstr ""
 
-#: ../setup.php:1910
+#: ../setup.php:1950
 msgid "MAC Address Match"
 msgstr ""
 
-#: ../setup.php:1911
+#: ../setup.php:1951
 msgid ""
 "Please enter the MAC Address or Mac Address Match string to be automatically "
 "authorized.  If you wish to authorize a group of MAC Addresses, you can use "
 "the wildcard character of '%' anywhere in the MAC Address."
 msgstr ""
 
-#: ../setup.php:1920
+#: ../setup.php:1960
 msgid "Please add a reason for this entry."
+msgstr ""
+
+#: ../mactrack_device_types.php:37
+msgid "Not Applicable - Router"
+msgstr ""
+
+#: ../mactrack_device_types.php:50
+msgid "Not Applicable - Switch/Hub"
+msgstr ""
+
+#: ../mactrack_device_types.php:206 ../mactrack_device_types.php:207
+msgid "--dup--"
+msgstr ""
+
+#: ../mactrack_device_types.php:276
+msgid "You must select at least one device type."
+msgstr ""
+
+#: ../mactrack_device_types.php:284
+msgid "Click 'Continue' to delete the following Device Type(s)."
+msgstr ""
+
+#: ../mactrack_device_types.php:291
+msgid ""
+"Click 'Continue' to duplciate the following Device Type(s). You may "
+"optionally change the description for the new device types.  Otherwise, do "
+"not change value below and the original name will be replicated with a new "
+"suffix."
+msgstr ""
+
+#: ../mactrack_device_types.php:293
+msgid "Device Type Prefix:"
+msgstr ""
+
+#: ../mactrack_device_types.php:293
+msgid "<description> (1)"
+msgstr ""
+
+#: ../mactrack_device_types.php:439
+msgid "New Type"
+msgstr ""
+
+#: ../mactrack_device_types.php:441
+msgid "Cisco"
+msgstr ""
+
+#: ../mactrack_device_types.php:466
+#, php-format
+msgid "There were %d Device Types Added!"
+msgstr ""
+
+#: ../mactrack_device_types.php:468
+msgid "No New Device Types Found!"
+msgstr ""
+
+#: ../mactrack_device_types.php:491
+msgid "Import Device Tracking Device Types"
+msgstr ""
+
+#: ../mactrack_device_types.php:494
+msgid "Import Device Types from Local File"
+msgstr ""
+
+#: ../mactrack_device_types.php:495
+msgid ""
+"Please specify the location of the CSV file containing your device type "
+"information."
+msgstr ""
+
+#: ../mactrack_device_types.php:516
+msgid " - A common name for the device.  For example Cisco 6509 Switch"
+msgstr ""
+
+#: ../mactrack_device_types.php:517
+msgid " - The vendor who produces this device"
+msgstr ""
+
+#: ../mactrack_device_types.php:518
+msgid ""
+" - The type of device this is.  See the notes below for this integer value"
+msgstr ""
+
+#: ../mactrack_device_types.php:519
+msgid ""
+" - A unique set of characters from the snmp sysDescr that uniquely identify "
+"this device"
+msgstr ""
+
+#: ../mactrack_device_types.php:520
+msgid ""
+" - The vendor specific snmp sysObjectID that distinguishes this device from "
+"the next"
+msgstr ""
+
+#: ../mactrack_device_types.php:521
+msgid " - The scanning function that will be used to scan this device type"
+msgstr ""
+
+#: ../mactrack_device_types.php:522
+msgid " - The IP scanning function that will be used to scan this device type"
+msgstr ""
+
+#: ../mactrack_device_types.php:523
+msgid ""
+" - The 802.1x scanning function that will be used to scan this device type"
+msgstr ""
+
+#: ../mactrack_device_types.php:524
+msgid ""
+" - If the Serial Number for this device type can be obtained via an SNMP "
+"Query, add it's OID here"
+msgstr ""
+
+#: ../mactrack_device_types.php:525
+msgid ""
+" - If your scanning function does not have the ability to isolate trunk "
+"ports or link ports, this is the starting port number for user ports"
+msgstr ""
+
+#: ../mactrack_device_types.php:526
+msgid ""
+" - Same as the lowPort with the exception that this is the high numbered "
+"user port number"
+msgstr ""
+
+#: ../mactrack_device_types.php:532
+msgid ""
+"Therefore, if you attempt to import duplicate device types, the existing "
+"data will be updated with the new information."
+msgstr ""
+
+#: ../mactrack_device_types.php:540
+msgid ""
+"The devices device type is determined by scanning it's snmp agent for the "
+"sysObjectID and sysDescription and comparing it against values in the device "
+"types database.  The first match that is found in the database is used "
+"direct Device Tracking as to how to scan it.  Therefore, it is very "
+"important that you select valid sysObjectID_match, sysDescr_match, and "
+"scanning function for your devices."
+msgstr ""
+
+#: ../mactrack_device_types.php:707
+#, php-format
+msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
+msgstr ""
+
+#: ../mactrack_device_types.php:765
+msgid "Unknown Assume \"Switch/Hub\""
+msgstr ""
+
+#: ../mactrack_device_types.php:800 ../mactrack_device_types.php:815
+#, php-format
+msgid ""
+"INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, "
+"sysObjectID: %s"
+msgstr ""
+
+#: ../mactrack_device_types.php:802 ../mactrack_device_types.php:817
+#, php-format
+msgid ""
+"INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, "
+"sysObjectID: %s"
+msgstr ""
+
+#: ../mactrack_device_types.php:809
+#, php-format
+msgid ""
+"INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: "
+"%s, sysObjectID: %s"
+msgstr ""
+
+#: ../mactrack_device_types.php:845
+#, php-format
+msgid "Device Tracking Device Types [edit: %s]"
+msgstr ""
+
+#: ../mactrack_device_types.php:847
+msgid "Device Tracking Device Types [new]"
+msgstr ""
+
+#: ../mactrack_device_types.php:915
+msgid "Device Tracking Device Type Filters"
+msgstr ""
+
+#: ../mactrack_device_types.php:930
+msgid "Device Type Description"
+msgstr ""
+
+#: ../mactrack_device_types.php:933
+msgid "Port Scanner"
+msgstr ""
+
+#: ../mactrack_device_types.php:934
+msgid "IP Scanner"
+msgstr ""
+
+#: ../mactrack_device_types.php:935
+msgid "Dot1x Scanner"
+msgstr ""
+
+#: ../mactrack_device_types.php:936
+msgid "sysDescription Match"
+msgstr ""
+
+#: ../mactrack_device_types.php:937
+msgid "Vendor OID Match"
+msgstr ""
+
+#: ../mactrack_device_types.php:965
+msgid "No Device Tracking Device Types Found"
 msgstr ""
