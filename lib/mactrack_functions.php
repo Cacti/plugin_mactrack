@@ -72,10 +72,10 @@ function mactrack_rebuild_scanning_funcs() {
 		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '2')");
 	}
 	}
-	db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('Not Applicable - Router', '1')");
+	db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('Not Applicable', '3')");
 	if (isset($mactrack_scanning_functions_dot1x)) {
 	foreach($mactrack_scanning_functions_dot1x as $scanning_function) {
-		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '1')");
+		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '3')");
 	}
 	}
 }
