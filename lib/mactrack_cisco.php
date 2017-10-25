@@ -693,6 +693,7 @@ function get_cisco_dot1x_table($site, &$device) {
 	/* output details to database */
 	if (sizeof($Dot1xEntries)) {
 	foreach($Dot1xEntries as $Dot1xEntry) {
+		if ($Dot1xEntry['Dot1xIndex'] != '') { //This is workaround for what I think is a Cisco bug. If a port is not running dot1x why would it show related info?
 		$insert_string = 'REPLACE INTO mac_track_dot1x 
 			(site_id,device_id,hostname,device_name,username,
 			mac_address,ip_address,domain,status,port_number,scan_date)
@@ -712,6 +713,7 @@ function get_cisco_dot1x_table($site, &$device) {
 		//mactrack_debug("SQL: " . $insert_string);
 
 		db_execute($insert_string);
+		}
 	}
 	}
 
