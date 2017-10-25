@@ -83,9 +83,9 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 
 	if (sizeof($ifIndexes)) {
 	foreach($ifIndexes as $ifIndex) {
-		$ifInterfaces[$ifIndex]["trunkPortState"] = @$vlan_trunkstatus[$ifIndex];
+		$ifInterfaces[$ifIndex]["trunkPortState"] = isset($vlan_trunkstatus[$ifIndex]) ? $vlan_trunkstatus[$ifIndex]:'';
 		if ($vvlans) {
-			$ifInterfaces[$ifIndex]["vVlanID"] = @$portVoiceVLANs[$ifIndex];
+			$ifInterfaces[$ifIndex]["vVlanID"] = isset($portVoiceVLANs[$ifIndex]) ? $portVoiceVLANs[$ifIndex]:'';
 		}
 
 		if ($ifInterfaces[$ifIndex]["ifType"] == 6) {
