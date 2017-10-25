@@ -530,14 +530,20 @@ function mactrack_dot1x_filter() {
 							<option value='-1'<?php if (get_request_var('device_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack');?></option>
 							<?php
 							if (get_request_var('site_id') == -1) {
-								$filter_devices = db_fetch_assoc('SELECT device_id, device_name, hostname 
-									FROM mac_track_devices 
-									ORDER BY device_name');
+								$filter_devices = db_fetch_assoc('SELECT DISTINCT device_id, device_name, hostname
+                                                                        FROM mac_track_devices
+                                                                        WHERE device_type_id
+                                                                        IN (SELECT device_type_id from mac_track_device_types
+                                                                        WHERE dot1x_scanning_function="get_cisco_dot1x_table")
+                                                                        ORDER BY device_name');
 							}else{
-								$filter_devices = db_fetch_assoc_prepared('SELECT device_id, device_name, hostname 
-									FROM mac_track_devices 
-									WHERE site_id = ? 
-									ORDER BY device_name', 
+								$filter_devices = db_fetch_assoc_prepared('SELECT device_id, device_name, hostname
+                                                                        FROM mac_track_devices
+                                                                        WHERE (site_id = ? )
+                                                                        AND (device_type_id IN
+                                                                        (SELECT device_type_id from mac_track_device_types
+                                                                        WHERE dot1x_scanning_function="get_cisco_dot1x_table"))
+                                                                        ORDER BY device_name', 
 									array(get_request_var('site_id')));
 							}
 
@@ -613,7 +619,7 @@ function mactrack_dot1x_filter() {
 							<option value='2'<?php if (get_request_var('scan_date') == '2') {?> selected<?php }?>><?php print __('Most Recent', 'mactrack');?></option>
 							<?php
 
-							$scan_dates = db_fetch_assoc('SELECT scan_date FROM mac_track_dot1x ORDER BY scan_date DESC');
+							$scan_dates = db_fetch_assoc('SELECT DISTINCT scan_date FROM mac_track_dot1x ORDER BY scan_date DESC');
 							if (sizeof($scan_dates)) {
 								foreach ($scan_dates as $scan_date) {
 									print '<option value="' . $scan_date['scan_date'] . '"'; if (get_request_var('scan_date') == $scan_date['scan_date']) { print ' selected'; } print '>' . $scan_date['scan_date'] . '</option>';
