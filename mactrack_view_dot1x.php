@@ -619,7 +619,7 @@ function mactrack_dot1x_filter() {
 							<option value='2'<?php if (get_request_var('scan_date') == '2') {?> selected<?php }?>><?php print __('Most Recent', 'mactrack');?></option>
 							<?php
 
-							$scan_dates = db_fetch_assoc('SELECT DISTINCT scan_date FROM mac_track_dot1x ORDER BY scan_date DESC');
+							$scan_dates = db_fetch_assoc('SELECT DISTINCT scan_date FROM mac_track_dot1x ORDER BY scan_date DESC LIMIT 10');
 							if (sizeof($scan_dates)) {
 								foreach ($scan_dates as $scan_date) {
 									print '<option value="' . $scan_date['scan_date'] . '"'; if (get_request_var('scan_date') == $scan_date['scan_date']) { print ' selected'; } print '>' . $scan_date['scan_date'] . '</option>';
