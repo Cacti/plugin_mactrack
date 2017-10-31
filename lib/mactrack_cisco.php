@@ -426,7 +426,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		foreach($active_vlans as $active_vlan) {
 			if (sizeof($active_vlan["port_results"])) {
 			foreach($active_vlan["port_results"] as $port_result) {
-				$ifIndex    = @$brPorttoifIndexes[$j][$port_result["port_number"]];
+				$ifIndex    = (isset($brPorttoifIndexes[$j][$port_result["port_number"]]) ? $brPorttoifIndexes[$j][$port_result["port_number"]] : '');
 				$ifType     = (isset($ifInterfaces[$ifIndex]["ifType"]) ? $ifInterfaces[$ifIndex]["ifType"] : '');
 				$ifName     = (isset($ifInterfaces[$ifIndex]["ifName"]) ? $ifInterfaces[$ifIndex]["ifName"] : '');
 				$portNumber = (isset($ifInterfaces[$ifIndex]["ifName"]) ? $ifInterfaces[$ifIndex]["ifName"] : '');
@@ -438,7 +438,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 					$vVlanID = -1;
 				}
 
-				$portTrunkStatus = @$ifInterfaces[$ifIndex]["trunkPortState"];
+				$portTrunkStatus = (isset($ifInterfaces[$ifIndex]["trunkPortState"]) ? $ifInterfaces[$ifIndex]["trunkPortState"] : '');
 
 				/* only output legitamate end user ports */
 				if ($ifType == 6) {
