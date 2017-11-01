@@ -782,8 +782,10 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
                         (isset($ifDuplex[$ifIndex]) ? $ifDuplex[$ifIndex] : '')                     . "', " .
 			@db_qstr(@$ifDescr[$ifIndex])       . ", '"  . 
 			(isset($ifMtu[$ifIndex]) ? $ifMtu[$ifIndex] : '')             		     . "', '" .
-			$mac_address                        . "', '" . @$ifAdminStatus[$ifIndex]     . "', '" .
-			@$ifOperStatus[$ifIndex]            . "', '" . @$ifLastChange[$ifIndex]      . "', '" .
+			$mac_address                        . "', '" . 
+			(iseet($ifAdminStatus[$ifIndex]) ? $ifAdminStatus[$ifIndex] : '')    	    . "', '" .
+			(isset($ifOperStatus[$ifIndex]) ? $ifOperStatus[$ifIndex] : '')             . "', '" . 
+			(isset($ifLastChange[$ifIndex]) ? $ifLastChange[$ifIndex] : '')		    . "', '" .
 			(isset($ifInOctets[$ifIndex]) ? $ifInOctets[$ifIndex] : '')                 . "', '" . 
 			(isset($ifOutOctets[$ifIndex]) ? $ifOutOctets[$ifIndex] : '')      	     . "', '" .
 			(isset($ifHCInOctets[$ifIndex]) ? $ifHCInOctets[$ifIndex] : '')             . "', '" . 
