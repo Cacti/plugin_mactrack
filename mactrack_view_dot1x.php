@@ -297,7 +297,7 @@ function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = TRUE, $row
 		$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.device_id=' . get_request_var('device_id');
 	}
 
-	if ((get_request_var('scan_date') != '1') && (get_request_var('scan_date') != '2') && (get_request_var('scan_date') != '3')) {
+	if ((get_request_var('scan_date') != '1') && (get_request_var('scan_date') != '2')) {
 		$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mtd.scan_date='" . get_request_var('scan_date') . "'";
 	}
 
@@ -329,7 +329,7 @@ function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = TRUE, $row
 	}else{
 		$query_string = "SELECT mts.site_name, mtd.device_id, mtd.device_name, mtd.hostname, 
 			mtd.mac_address, mtd.username, mtd.ip_address, mtd.dns_hostname, mtd.port_number, 
-			mti.ifName, mtd.domain, mtd.status, MAX(mtd.scan_date) as max_scan_date
+			mti.ifName, mtd.domain, mtd.status, MAX(mtd.scan_date) AS max_scan_date
 			FROM mac_track_dot1x mtd
 			LEFT JOIN mac_track_sites mts
 			ON (mtd.site_id = mts.site_id)
