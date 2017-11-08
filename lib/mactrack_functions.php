@@ -2538,7 +2538,7 @@ function mactrack_format_dot1x_row($port_result) {
 	/* we will make a row string */
 	$row = '';
 	
-	if (get_request_var('scan_date') != 2) {
+	if (get_request_var('scan_date') != 3) {
 			$scan_date = $port_result['scan_date'];
 	}else{
 			$scan_date = $port_result['max_scan_date'];
