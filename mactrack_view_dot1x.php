@@ -329,7 +329,7 @@ function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = TRUE, $row
 	}else{
 		$query_string = "SELECT mts.site_name, mtd.device_id, mtd.device_name, mtd.hostname, 
 			mtd.mac_address, mtd.username, mtd.ip_address, mtd.dns_hostname, mtd.port_number, 
-			mti.ifName, mtd.domain, mtd.status, MAX(mtd.scan_date) AS max_scan_date
+			mti.ifName, mtd.domain, mtd.status, MAX(mtd.scan_date) AS scan_date
 			FROM mac_track_dot1x mtd
 			LEFT JOIN mac_track_sites mts
 			ON (mtd.site_id = mts.site_id)
@@ -373,7 +373,7 @@ function mactrack_view_dot1x() {
 	/* prevent table scans, either a device or site must be selected */
 	if (!strlen($sql_where)) {
 		$total_rows = 0;
-	}elseif (get_request_var('scan_date') == 1) {
+	}elseif (get_request_var('scan_date') != 3) {
 		$rows_query_string = "SELECT
 			COUNT(mtd.device_id)
 			FROM mac_track_dot1x mtd
@@ -404,7 +404,7 @@ function mactrack_view_dot1x() {
 			'ifName'     	=> array(__('Port Name', 'mactrack'), 'ASC'),
 			'domain'       	=> array(__('Domain', 'mactrack'), 'DESC'),
 			'status'     	=> array(__('Status', 'mactrack'), 'ASC'),
-			'max_scan_date' => array(__('Last Scan Date', 'mactrack'), 'DESC')
+			'scan_date' => array(__('Last Scan Date', 'mactrack'), 'DESC')
 		);
 	}else{
 		$display_text = array(
