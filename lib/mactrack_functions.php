@@ -1153,7 +1153,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 					}else{
 						$brPortIfIndex = @$port_key["port_number"];
 					}
-					$brPortIfType = (isset($ifInterfaces[$brPortIfIndex]["ifType"]) ? $ifInterfaces[$brPortIfIndex]["ifType"] : '';
+					$brPortIfType = (isset($ifInterfaces[$brPortIfIndex]["ifType"]) ? $ifInterfaces[$brPortIfIndex]["ifType"] : '');
 				}else{
 					$brPortIfIndex = $port_key["port_number"];
 					$brPortIfType = @$ifInterfaces[$port_key["port_number"]]["ifType"];
