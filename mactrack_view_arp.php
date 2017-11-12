@@ -116,7 +116,7 @@ function mactrack_view_export_ips() {
 	$xport_array = array();
 	array_push($xport_array, '"site_name","hostname","device_name",' .
 		'"mac_address","vendor_name",' .
-		'"ip_address","dns_hostname","port_number","scan_date"');
+		'"ip_address","dns_hostname","port_number","ifName","scan_date"');
 
 	if (sizeof($port_results)) {
 		foreach($port_results as $port_result) {
@@ -126,7 +126,8 @@ function mactrack_view_export_ips() {
 			$port_result['hostname'] . '","' . $port_result['device_name'] . '","' .
 			$port_result['mac_address'] . '","' . $port_result['vendor_name'] . '","' .
 			$port_result['ip_address'] . '","' . $port_result['dns_hostname'] . '","' .
-			$port_result['port_number'] . '","' . $scan_date . '"');
+			$port_result['port_number'] . '","' . $port_result['ifName'] . '","' .
+			$scan_date . '"');
 		}
 	}
 
@@ -232,12 +233,15 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = TRUE, $rows) 
 		$sql_limit = '';
 	}
 
-	$query_string = "SELECT mac_track_ips.*, mac_track_sites.site_name, mac_track_oui_database.*
+	$query_string = "SELECT mac_track_ips.*, mac_track_sites.site_name, mac_track_oui_database.*, mac_track_interfaces.ifName
 		FROM mac_track_ips
 		LEFT JOIN mac_track_sites
 		ON mac_track_ips.site_id = mac_track_sites.site_id
 		LEFT JOIN mac_track_oui_database
 		ON mac_track_oui_database.vendor_mac=SUBSTRING(mac_track_ips.mac_address, 1, 8)
+		LEFT JOIN mac_track_interfaces 
+		ON (mac_track_interfaces.device_id=mac_track_ips.device_id 
+		AND mac_track_interfaces.ifIndex=mac_track_ips.port_number)
 		$sql_where
 		$sql_order
 		$sql_limit";
@@ -307,7 +311,8 @@ function mactrack_view_ips() {
 				'dns_hostname' => array(__('ED DNS Hostname', 'mactrack'), 'ASC'),
 				'mac_address'  => array(__('ED MAC Address', 'mactrack'), 'ASC'),
 				'vendor_name'  => array(__('Vendor Name', 'mactrack'), 'ASC'),
-				'port_number'  => array(__('Port Number', 'mactrack'), 'DESC')
+				'port_number'  => array(__('Port Number', 'mactrack'), 'DESC'),
+				'ifName'       => array(__('Port Name', 'mactrack'), 'ASC')
 			);
 		}else{
 			$display_text = array(
@@ -317,7 +322,8 @@ function mactrack_view_ips() {
 				'dns_hostname' => array(__('ED DNS Hostname', 'mactrack'), 'ASC'),
 				'mac_address'  => array(__('ED MAC Address', 'mactrack'), 'ASC'),
 				'vendor_name'  => array(__('Vendor Name', 'mactrack'), 'ASC'),
-				'port_number'  => array(__('Port Number', 'mactrack'), 'DESC')
+				'port_number'  => array(__('Port Number', 'mactrack'), 'DESC'),
+				'ifName'       => array(__('Port Name', 'mactrack'), 'ASC')
 			);
 		}
 	}else{
@@ -328,7 +334,8 @@ function mactrack_view_ips() {
 				'ip_address'  => array(__('ED IP Address', 'mactrack'), 'ASC'),
 				'mac_address' => array(__('ED MAC Address', 'mactrack'), 'ASC'),
 				'vendor_name' => array(__('Vendor Name', 'mactrack'), 'ASC'),
-				'port_number' => array(__('Port Number', 'mactrack'), 'DESC')
+				'port_number' => array(__('Port Number', 'mactrack'), 'DESC'),
+				'ifName'       => array(__('Port Name', 'mactrack'), 'ASC')
 			);
 		}else{
 			$display_text = array(
@@ -337,7 +344,8 @@ function mactrack_view_ips() {
 				'ip_address'  => array(__('ED IP Address', 'mactrack'), 'ASC'),
 				'mac_address' => array(__('ED MAC Address', 'mactrack'), 'ASC'),
 				'vendor_name' => array(__('Vendor Name', 'mactrack'), 'ASC'),
-				'port_number' => array(__('Port Number', 'mactrack'), 'DESC')
+				'port_number' => array(__('Port Number', 'mactrack'), 'DESC'),
+				'ifName'       => array(__('Port Name', 'mactrack'), 'ASC')
 			);
 		}
 	}
@@ -366,6 +374,7 @@ function mactrack_view_ips() {
 			echo '<td>' . filter_value($port_result['mac_address'], get_request_var('filter')) . '</td>';
 			echo '<td>' . filter_value($port_result['vendor_name'], get_request_var('filter')) . '</td>';
 			echo '<td>' . $port_result['port_number'] . '</td>';
+			echo '<td>' . $port_result['ifName'] . '</td>';
 			form_end_row();
 		}
 	}else{

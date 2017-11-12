@@ -47,7 +47,7 @@ function mactrack_debug($message) {
 }
 
 function mactrack_rebuild_scanning_funcs() {
-	global $config, $mactrack_scanning_functions_ip, $mactrack_scanning_functions;
+	global $config, $mactrack_scanning_functions_ip, $mactrack_scanning_functions, $mactrack_scanning_functions_dot1x;
 
 	if (defined('CACTI_BASE_PATH')) {
 		$config['base_path'] = CACTI_BASE_PATH;
@@ -70,6 +70,12 @@ function mactrack_rebuild_scanning_funcs() {
 	if (isset($mactrack_scanning_functions_ip)) {
 	foreach($mactrack_scanning_functions_ip as $scanning_function) {
 		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '2')");
+	}
+	}
+	db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('Not Applicable', '3')");
+	if (isset($mactrack_scanning_functions_dot1x)) {
+	foreach($mactrack_scanning_functions_dot1x as $scanning_function) {
+		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '3')");
 	}
 	}
 }
@@ -776,8 +782,10 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
                         (isset($ifDuplex[$ifIndex]) ? $ifDuplex[$ifIndex] : '')                     . "', " .
 			@db_qstr(@$ifDescr[$ifIndex])       . ", '"  . 
 			(isset($ifMtu[$ifIndex]) ? $ifMtu[$ifIndex] : '')             		     . "', '" .
-			$mac_address                        . "', '" . @$ifAdminStatus[$ifIndex]     . "', '" .
-			@$ifOperStatus[$ifIndex]            . "', '" . @$ifLastChange[$ifIndex]      . "', '" .
+			$mac_address                        . "', '" . 
+			(iseet($ifAdminStatus[$ifIndex]) ? $ifAdminStatus[$ifIndex] : '')    	    . "', '" .
+			(isset($ifOperStatus[$ifIndex]) ? $ifOperStatus[$ifIndex] : '')             . "', '" . 
+			(isset($ifLastChange[$ifIndex]) ? $ifLastChange[$ifIndex] : '')		    . "', '" .
 			(isset($ifInOctets[$ifIndex]) ? $ifInOctets[$ifIndex] : '')                 . "', '" . 
 			(isset($ifOutOctets[$ifIndex]) ? $ifOutOctets[$ifIndex] : '')      	     . "', '" .
 			(isset($ifHCInOctets[$ifIndex]) ? $ifHCInOctets[$ifIndex] : '')             . "', '" . 
@@ -1116,7 +1124,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 				($port_number <= $highPort))) {
 
 				if (!in_array($port_number, $ignore_ports)) {
-					if ((@$port_status[$key] == "3") || (@$port_status[$key] == "5")) {
+					if ((isset($port_status[$key]) == "3") || (isset($port_status[$key]) == "5")) {
 						$port_key_array[$i]["key"] = $key;
 						$port_key_array[$i]["port_number"] = $port_number;
 
@@ -1145,7 +1153,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 					}else{
 						$brPortIfIndex = @$port_key["port_number"];
 					}
-					$brPortIfType = @$ifInterfaces[$brPortIfIndex]["ifType"];
+					$brPortIfType = (isset($ifInterfaces[$brPortIfIndex]["ifType"]) ? $ifInterfaces[$brPortIfIndex]["ifType"] : '');
 				}else{
 					$brPortIfIndex = $port_key["port_number"];
 					$brPortIfType = @$ifInterfaces[$port_key["port_number"]]["ifType"];
@@ -2220,7 +2228,7 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 
 	if ($type != 'ui') print '<tr><td>';
 
-	if (sizeof($oui_database)) {
+	if (is_array($oui_database)) {
 		echo __('OUI Database Download from IEEE Complete', 'mactrack') . "\n";
 	}else{
 		echo __('OUI Database Download from IEEE FAILED', 'mactrack') . "\n";
@@ -2228,7 +2236,7 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 
 	if ($type != 'ui') print '</td></tr>';
 
-	if (sizeof($oui_database)) {
+	if (is_array($oui_database)) {
 		db_execute('UPDATE mac_track_oui_database SET present=0');
 
 		/* initialize some variables */
@@ -2524,6 +2532,32 @@ function mactrack_format_interface_row($stat) {
 	return $row;
 }
 
+function mactrack_format_dot1x_row($port_result) {
+	global $config;
+
+	/* we will make a row string */
+	$row = '';
+	
+	if (get_request_var('scan_date') != 3) {
+			$scan_date = $port_result['scan_date'];
+	}else{
+			$scan_date = $port_result['max_scan_date'];
+		}
+
+	$row .= "<td nowrap style='width:1%;white-space:nowrap;'>" . mactrack_interface_actions($port_result['device_id'], $port_result['port_number']) . '</td>';
+	$row .= '<td><b>' . $port_result['device_name']                     . '</b></td>';
+	$row .= '<td>' . $port_result['hostname']            . '</td>';
+	$row .= '<td><b>' . $port_result['username']                          . '</b></td>';
+	$row .= '<td>' . $port_result['ip_address']                            . '</td>';
+	$row .= '<td>' . $port_result['mac_address']                            . '</td>';
+	$row .= '<td>' . $port_result['port_number']  . '</td>';
+	$row .= '<td>' . $port_result['ifName'] . '</td>';
+	$row .= '<td><b>' . ($port_result['domain'] == 2 ? 'DATA':'VOICE') . '</b></td>';
+	$row .= '<td><b>' . $port_result['status'] . '</b></td>';
+	$row .= "<td style='white-space:nowrap;'>" . $scan_date       . '</td>';
+	return $row;
+}
+
 function mactrack_display_Octets($octets) {
 	$suffix = '';
 	while ($octets > 1024) {
@@ -2686,6 +2720,24 @@ function mactrack_int_row_class($stat) {
 	}
 }
 
+function mactrack_dot1x_row_class($port_result) {
+	if ($port_result['status'] == '7') {
+		return 'authn_failed';
+	} elseif ($port_result['status'] == '5') {
+		return 'auth_failed';
+	} elseif ($port_result['status'] == '3') {
+		return 'auth_no_method';
+	} elseif ($port_result['status'] == '2') {
+		return 'running';
+	} elseif ($port_result['status'] == '1') {
+		return 'idle';	
+	} elseif ($port_result['status'] == '4') {
+		return 'auth_success';
+	} else {
+		return 'authn_success';
+	}
+}
+
 /* mactrack_create_sql_filter - this routine will take a filter string and process it into a
      sql where clause that will be returned to the caller with a formated SQL where clause
      that can then be integrated into the overall where clause.
@@ -2802,7 +2854,7 @@ function mactrack_legend_row($class, $text) {
 
 function mactrack_redirect() {
 	/* set the default tab */
-    get_filter_request_var('report', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-zA-Z]+)$/')));
+    get_filter_request_var('report', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-zA-Z0-9]+)$/')));
 
 	load_current_session_value('report', 'sess_mt_report', 'devices');
 	$current_tab = get_nfilter_request_var('report');
@@ -2965,6 +3017,7 @@ function mactrack_tabs() {
 		'arp'        => __('IP Address', 'mactrack'),
 		'macs'       => __('MAC Address', 'mactrack'),
 		'interfaces' => __('Interfaces', 'mactrack'),
+		'dot1x'      => __('Dot1x', 'mactrack'),
 		'graphs'     => __('Graphs', 'mactrack')
 	);
 

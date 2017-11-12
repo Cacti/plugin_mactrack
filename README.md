@@ -33,6 +33,15 @@ Bug and feature enhancements for the webseer plugin are handled in GitHub. If yo
 
 ## ChangeLog
 
+--- 4.2 ---
+* feature: new 802.1x scanning function (for cisco devices).
+* feature: new IP Scanning function 'DHCP Snooping' (for cisco devices).
+* feature: add port name column to IP Address view
+* feature: cacti.pot updated
+* feature: Added new TAB View Dot1x Sessions
+* feature: Added mactrack.css for every theme.
+* issue: Fix OUI Database import was removing existing records when failed.
+
 --- 4.1 ---
 * feature: Updates to facilitate i18n by contributors
 * issue#25: Unable to remove Site

@@ -2,7 +2,7 @@
 	background-color: rgba(148, 179, 107, 0.8);
 	text-align: center;
 	width: 12.5%;
-	color: #000000;
+	color: #eeeeee;
 }
 
 .int_up_wo_alias {
@@ -44,7 +44,7 @@
 	background-color: rgba(242, 25, 36, 0.8);
 	text-align: center;
 	width: 12.5%;
-	color: #000000;
+	color: #eeeeee;
 }
 
 .int_down {
@@ -57,13 +57,13 @@
 	background-color: rgba(148, 179, 107, 0.8);
 	text-align: center;
 	width: 12.5%;
-	color: #000000;
+	color: #eeeeee;
 }
 .auth_success {
 	background-color: rgba(126, 168, 129, 0.8);
 	text-align: center;
 	width: 12.5%;
-	color: #000000;
+	color: #eeeeee;
 }
 .authn_failed {
 	background-color: rgba(242, 23, 33, 0.8);
@@ -95,4 +95,3 @@
 	width: 12.5%;
 	color: #000000;
 }
-

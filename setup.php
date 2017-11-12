@@ -42,7 +42,7 @@ function plugin_mactrack_install() {
 	api_plugin_register_hook('mactrack', 'device_action_execute', 'mactrack_device_action_execute', 'mactrack_actions.php');
 
 	# Register our realms
-	api_plugin_register_realm('mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_graphs.php,mactrack_ajax.php', 'Device Tracking Viewer', 1);
+	api_plugin_register_realm('mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_dot1x.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_graphs.php,mactrack_ajax.php', 'Device Tracking Viewer', 1);
 	api_plugin_register_realm('mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'Device Tracking Administrator', 1);
 
 	mactrack_setup_table_new ();
@@ -56,6 +56,7 @@ function plugin_mactrack_uninstall () {
 	db_execute('DROP TABLE IF EXISTS `mac_track_interface_graphs`');
 	db_execute('DROP TABLE IF EXISTS `mac_track_ip_ranges`');
 	db_execute('DROP TABLE IF EXISTS `mac_track_ips`');
+	db_execute('DROP TABLE IF EXISTS `mac_track_dot1x`');
 	db_execute('DROP TABLE IF EXISTS `mac_track_macauth`');
 	db_execute('DROP TABLE IF EXISTS `mac_track_macwatch`');
 	db_execute('DROP TABLE IF EXISTS `mac_track_oui_database`');
@@ -123,7 +124,7 @@ function mactrack_check_upgrade () {
 
 		// If are realms are not present in plugin_realms recreate them with the old realm ids (minus 100) so that upgraded installs are not broken
 		if (!db_fetch_cell("SELECT id FROM plugin_realms WHERE plugin = 'mactrack'")) {
-			db_execute("INSERT INTO plugin_realms (id, plugin, file, display) VALUES (2020, 'mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_graphs.php,mactrack_ajax.php', 'Device Tracking Viewer')");
+			db_execute("INSERT INTO plugin_realms (id, plugin, file, display) VALUES (2020, 'mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_dot1x.php,mactrack_view_graphs.php,mactrack_ajax.php', 'Device Tracking Viewer')");
 			db_execute("INSERT INTO plugin_realms (id, plugin, file, display) VALUES (2021, 'mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'Device Tracking Administrator')");
 		}
 
@@ -345,8 +346,11 @@ function mactrack_database_upgrade () {
 		'ifMauAutoNegRemoteSignaling',
 		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifMauAutoNegRemoteSignaling` integer UNSIGNED NOT NULL default '0' AFTER `ifMauAutoNegAdminStatus`");
 	mactrack_add_column('mac_track_device_types',
+		'dot1x_scanning_function',
+		"ALTER TABLE `mac_track_device_types` ADD COLUMN `dot1x_scanning_function` varchar(100) default '' AFTER `ip_scanning_function`");
+	mactrack_add_column('mac_track_device_types',
 		'serial_number_oid',
-		"ALTER TABLE `mac_track_device_types` ADD COLUMN `serial_number_oid` varchar(100) default '' AFTER `ip_scanning_function`");
+		"ALTER TABLE `mac_track_device_types` ADD COLUMN `serial_number_oid` varchar(100) default '' AFTER `dot1x_scanning_function`");
 	mactrack_add_column('mac_track_sites',
 		'customer_contact',
 		"ALTER TABLE `mac_track_sites` ADD COLUMN `customer_contact` varchar(150) default '' AFTER `site_name`");
@@ -421,6 +425,7 @@ function mactrack_setup_table_new () {
 			`sysObjectID_match` varchar(40) NOT NULL default '',
 			`scanning_function` varchar(100) NOT NULL default '',
 			`ip_scanning_function` varchar(100) NOT NULL,
+			`dot1x_scanning_function` varchar(100) NOT NULL,
 			`serial_number_oid` varchar(100) default '',
 			`lowPort` int(10) unsigned NOT NULL default '0',
 			`highPort` int(10) unsigned NOT NULL default '0',
@@ -600,6 +605,32 @@ function mactrack_setup_table_new () {
 			ENGINE=InnoDB;");
 	}
 
+	if (!mactrack_db_table_exists('mac_track_dot1x')) {
+		db_execute("CREATE TABLE `mac_track_dot1x` (
+			`site_id` int(10) unsigned NOT NULL default '0',
+			`device_id` int(10) unsigned NOT NULL default '0',
+			`hostname` varchar(40) NOT NULL default '',
+			`device_name` varchar(100) NOT NULL default '',
+			`username` varchar(100) NOT NULL default '',
+			`domain` int(10) unsigned NOT NULL default '0',
+			`status` int(10) unsigned NOT NULL default '0',
+			`port_number` varchar(20) NOT NULL default '',
+			`mac_address` varchar(20) NOT NULL default '',
+			`ip_address` varchar(20) NOT NULL default '',
+			`dns_hostname` varchar(200) default '',
+			`scan_date` datetime NOT NULL default '0000-00-00 00:00:00',
+			PRIMARY KEY  (`scan_date`,`ip_address`,`mac_address`,`site_id`),
+			KEY `ip` (`ip_address`),
+			KEY `port_number` (`port_number`),
+			KEY `mac` (`mac_address`),
+			KEY `device_id` (`device_id`),
+			KEY `site_id` (`site_id`),
+			KEY `username` (`username`),
+			KEY `hostname` (`hostname`),
+			KEY `scan_date` (`scan_date`))
+			ENGINE=InnoDB;");
+	}
+	
 	if (!mactrack_db_table_exists('mac_track_macauth')) {
 		db_execute("CREATE TABLE `mac_track_macauth` (
 			`mac_address` varchar(20) NOT NULL,
@@ -1196,6 +1227,7 @@ function mactrack_draw_navigation_text ($nav) {
 	$nav['mactrack_vendormacs.php:'] = array('title' => __('Device Tracking Vendor Macs', 'mactrack'), 'mapping' => 'index.php:', 'url' => 'mactrack_vendormacs.php', 'level' => '1');
 	$nav['mactrack_view_macs.php:'] = array('title' => __('Device Tracking View Macs', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_macs.php', 'level' => '0');
 	$nav['mactrack_view_macs.php:actions'] = array('title' => __('Actions', 'mactrack'), 'mapping' => 'mactrack_view_macs.php:', 'url' => '', 'level' => '1');
+	$nav['mactrack_view_dot1x.php:'] = array('title' => __('Device Tracking Dot1x View', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_dot1x.php', 'level' => '0');
 	$nav['mactrack_view_arp.php:'] = array('title' => __('Device Tracking IP Address Viewer', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_arp.php', 'level' => '0');
 	$nav['mactrack_view_interfaces.php:'] = array('title' => __('Device Tracking View Interfaces', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_interfaces.php', 'level' => '0');
 	$nav['mactrack_view_sites.php:'] = array('title' => __('Device Tracking View Sites', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_sites.php', 'level' => '0');
@@ -1407,6 +1439,14 @@ function mactrack_config_form () {
 		'value' => '|arg1:ip_scanning_function|',
 		'default' => 1,
 		'sql' => 'SELECT scanning_function AS id, scanning_function AS name FROM mac_track_scanning_functions WHERE type="2" ORDER BY scanning_function'
+		),
+	'dot1x_scanning_function' => array(
+		'method' => 'drop_sql',
+		'friendly_name' => __('802.1x Scanning Function', 'mactrack'),
+		'description' => __('The Device Tracking scanning function specific to Switches with dot1x enabled.', 'mactrack'),
+		'value' => '|arg1:dot1x_scanning_function|',
+		'default' => 1,
+		'sql' => 'SELECT scanning_function AS id, scanning_function AS name FROM mac_track_scanning_functions WHERE type="3" ORDER BY scanning_function'
 		),
 	'serial_number_oid' => array(
 		'method' => 'textbox',
