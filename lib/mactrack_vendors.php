@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2010 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -38,3 +38,5 @@ include_once(dirname(__FILE__) . "/mactrack_juniper.php");
 include_once(dirname(__FILE__) . "/mactrack_linux.php");
 include_once(dirname(__FILE__) . "/mactrack_norbay.php");
 include_once(dirname(__FILE__) . "/mactrack_norbay_ng.php");
+include_once(dirname(__FILE__) . "/mactrack_tplink.php");
+include_once(dirname(__FILE__) . "/mactrack_trendnet.php");
