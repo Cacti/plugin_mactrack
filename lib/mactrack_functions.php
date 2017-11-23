@@ -783,7 +783,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 			@db_qstr(@$ifDescr[$ifIndex])       . ", '"  . 
 			(isset($ifMtu[$ifIndex]) ? $ifMtu[$ifIndex] : '')             		     . "', '" .
 			$mac_address                        . "', '" . 
-			(iseet($ifAdminStatus[$ifIndex]) ? $ifAdminStatus[$ifIndex] : '')    	    . "', '" .
+			(isset($ifAdminStatus[$ifIndex]) ? $ifAdminStatus[$ifIndex] : '')    	    . "', '" .
 			(isset($ifOperStatus[$ifIndex]) ? $ifOperStatus[$ifIndex] : '')             . "', '" . 
 			(isset($ifLastChange[$ifIndex]) ? $ifLastChange[$ifIndex] : '')		    . "', '" .
 			(isset($ifInOctets[$ifIndex]) ? $ifInOctets[$ifIndex] : '')                 . "', '" . 
