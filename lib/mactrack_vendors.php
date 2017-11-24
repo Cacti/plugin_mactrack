@@ -38,3 +38,5 @@ include_once(dirname(__FILE__) . "/mactrack_juniper.php");
 include_once(dirname(__FILE__) . "/mactrack_linux.php");
 include_once(dirname(__FILE__) . "/mactrack_norbay.php");
 include_once(dirname(__FILE__) . "/mactrack_norbay_ng.php");
+include_once(dirname(__FILE__) . "/mactrack_tplink.php");
+include_once(dirname(__FILE__) . "/mactrack_trendnet.php");
