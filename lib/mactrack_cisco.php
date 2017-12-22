@@ -659,6 +659,7 @@ function get_cisco_dot1x_table($site, &$device) {
 	}
 	
 	$ifIndex = array();
+	$Dot1xEntries = array();
 	$cafSessionAuthUserNames = array();
 	$cafSessionAuthUserKey = array_keys($cafSessionAuthUserName); //Getting the keys to explode the first part which is the ifIndex
 	$m = 0;
