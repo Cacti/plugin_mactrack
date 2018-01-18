@@ -2559,7 +2559,7 @@ function mactrack_format_dot1x_row($port_result) {
 
 	$status = 'Unknown';
 	if (array_key_exists($port_result['status'],$mactrack_device_status)) {
-		$status = $mactrack_device_status;
+		$status = $mactrack_device_status[$port_result['status']];
 	}
 
 	$row .= "<td nowrap style='width:1%;white-space:nowrap;'>" . mactrack_interface_actions($port_result['device_id'], $port_result['port_number']) . '</td>';
