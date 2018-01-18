@@ -2571,7 +2571,7 @@ function mactrack_format_dot1x_row($port_result) {
 	$row .= '<td>' . $port_result['port_number']  . '</td>';
 	$row .= '<td>' . $port_result['ifName'] . '</td>';
 	$row .= '<td><b>' . ($port_result['domain'] == 2 ? 'DATA':'VOICE') . '</b></td>';
-	$row .= '<td><b>' . $port_result['status'] . '</b></td>';
+	$row .= '<td><b>' . $status . '</b></td>';
 	$row .= "<td style='white-space:nowrap;'>" . $scan_date       . '</td>';
 	return $row;
 }
