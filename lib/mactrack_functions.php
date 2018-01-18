@@ -32,14 +32,16 @@ if (!isset($mactrack_scanning_functions_ip)) { $mactrack_scanning_functions_ip =
 array_push($mactrack_scanning_functions_ip, 'get_standard_arp_table', 'get_netscreen_arp_table');
 
 global $mactrack_device_status;
-if (!isset($mactrack_device_status)) { $mactrack_device_status = array(
-	1 => __('Idle', 'mactrack'),
-	2 => __('Running', 'mactrack'),
-	3 => __('No method', 'mactrack'),
-	4 => __('Authentication Success', 'mactrack'),
-	5 => __('Authentication Failed', 'mactrack'),
-	6 => __('Authorization Succcess', 'mactrack'),
-	7 => __('Authorization Failed', 'mactrack')
+if (!isset($mactrack_device_status)) {
+	$mactrack_device_status = array(
+		1 => __('Idle', 'mactrack'),
+		2 => __('Running', 'mactrack'),
+		3 => __('No method', 'mactrack'),
+		4 => __('Authentication Success', 'mactrack'),
+		5 => __('Authentication Failed', 'mactrack'),
+		6 => __('Authorization Succcess', 'mactrack'),
+		7 => __('Authorization Failed', 'mactrack')
+	);
 }
 
 function mactrack_debug($message) {
