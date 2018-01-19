@@ -31,6 +31,19 @@ global $mactrack_scanning_functions_ip;
 if (!isset($mactrack_scanning_functions_ip)) { $mactrack_scanning_functions_ip = array(); }
 array_push($mactrack_scanning_functions_ip, 'get_standard_arp_table', 'get_netscreen_arp_table');
 
+global $mactrack_device_status;
+if (!isset($mactrack_device_status)) {
+	$mactrack_device_status = array(
+		1 => __('Idle', 'mactrack'),
+		2 => __('Running', 'mactrack'),
+		3 => __('No method', 'mactrack'),
+		4 => __('Authentication Success', 'mactrack'),
+		5 => __('Authentication Failed', 'mactrack'),
+		6 => __('Authorization Succcess', 'mactrack'),
+		7 => __('Authorization Failed', 'mactrack')
+	);
+}
+
 function mactrack_debug($message) {
 	global $debug, $web, $config;
 	include_once($config['base_path'] . '/lib/functions.php');
@@ -2533,16 +2546,21 @@ function mactrack_format_interface_row($stat) {
 }
 
 function mactrack_format_dot1x_row($port_result) {
-	global $config;
+	global $config,$mactrack_device_status;
 
 	/* we will make a row string */
 	$row = '';
-	
+
 	if (get_request_var('scan_date') != 3) {
-			$scan_date = $port_result['scan_date'];
-	}else{
-			$scan_date = $port_result['max_scan_date'];
-		}
+		$scan_date = $port_result['scan_date'];
+	} else {
+		$scan_date = $port_result['max_scan_date'];
+	}
+
+	$status = 'Unknown';
+	if (array_key_exists($port_result['status'],$mactrack_device_status)) {
+		$status = $mactrack_device_status[$port_result['status']];
+	}
 
 	$row .= "<td nowrap style='width:1%;white-space:nowrap;'>" . mactrack_interface_actions($port_result['device_id'], $port_result['port_number']) . '</td>';
 	$row .= '<td><b>' . $port_result['device_name']                     . '</b></td>';
@@ -2553,7 +2571,7 @@ function mactrack_format_dot1x_row($port_result) {
 	$row .= '<td>' . $port_result['port_number']  . '</td>';
 	$row .= '<td>' . $port_result['ifName'] . '</td>';
 	$row .= '<td><b>' . ($port_result['domain'] == 2 ? 'DATA':'VOICE') . '</b></td>';
-	$row .= '<td><b>' . $port_result['status'] . '</b></td>';
+	$row .= '<td><b>' . $status . '</b></td>';
 	$row .= "<td style='white-space:nowrap;'>" . $scan_date       . '</td>';
 	return $row;
 }
