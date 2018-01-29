@@ -85,9 +85,9 @@ function mactrack_view_export_sites() {
 
 function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = TRUE) {
 	/* create SQL where clause */
-	$device_type_info = db_fetch_row_prepared('SELECT * 
-		FROM mac_track_device_types 
-		WHERE device_type_id = ?', 
+	$device_type_info = db_fetch_row_prepared('SELECT *
+		FROM mac_track_device_types
+		WHERE device_type_id = ?',
 		array(get_request_var('device_type_id')));
 
 	$sql_where = '';
@@ -137,9 +137,9 @@ function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = TRUE
 			SUM(mac_track_devices.ports_trunk) AS sum_ports_trunk,
 			SUM(mac_track_devices.macs_active) AS sum_macs_active
 			FROM (mac_track_device_types
-			RIGHT JOIN mac_track_devices 
+			RIGHT JOIN mac_track_devices
 			ON mac_track_device_types.device_type_id = mac_track_devices.device_type_id)
-			RIGHT JOIN mac_track_sites 
+			RIGHT JOIN mac_track_sites
 			ON mac_track_devices.site_id = mac_track_sites.site_id
 			$sql_where
 			GROUP BY mac_track_sites.site_name, mac_track_device_types.vendor, mac_track_device_types.description
@@ -213,7 +213,7 @@ function mactrack_view_sites() {
 		$rows = get_request_var('rows');
 	}
 
-	$webroot = $config['url_path'] . '/plugins/mactrack/';
+	$webroot = $config['url_path'] . 'plugins/mactrack/';
 
 	mactrack_tabs();
 
@@ -234,9 +234,9 @@ function mactrack_view_sites() {
 		$total_rows = sizeof(db_fetch_assoc("SELECT
 			mac_track_device_types.device_type_id, mac_track_sites.site_name
 			FROM (mac_track_device_types
-			RIGHT JOIN mac_track_devices 
+			RIGHT JOIN mac_track_devices
 			ON mac_track_device_types.device_type_id = mac_track_devices.device_type_id)
-			RIGHT JOIN mac_track_sites 
+			RIGHT JOIN mac_track_sites
 			ON mac_track_devices.site_id = mac_track_sites.site_id
 			$sql_where
 			GROUP BY mac_track_sites.site_name, mac_track_device_types.device_type_id"));

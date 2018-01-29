@@ -126,15 +126,15 @@ function mactrack_view_export_devices() {
 			$device['snmp_password']        . '","' . $device['snmp_auth_protocol']   . '","' .
 			$device['snmp_priv_passphrase'] . '","' . $device['snmp_priv_protocol']   . '","' .
 			$device['snmp_context']         . '","' . $device['snmp_engine_id']       . '","' .
-			$device['snmp_port']            . '","' . $device['snmp_timeout']         . '","' . 
-			$device['snmp_retries']         . '","' . $device['max_oids']             . '","' . 
-			$device['snmp_sysName']         . '","' . $device['snmp_sysLocation']     . '","' . 
-			$device['snmp_sysContact']      . '","' . $device['snmp_sysObjectID']     . '","' . 
-			$device['snmp_sysDescr']        . '","' . $device['snmp_sysUptime']       . '","' . 
-			$device['ignorePorts']          . '","' . $device['scan_type']            . '","' . 
-			$device['disabled']             . '","' . $device['ports_total']          . '","' . 
-			$device['ports_active']         . '","' . $device['ports_trunk']          . '","' . 
-			$device['macs_active']          . '","' . $device['last_rundate']         . '","' . 
+			$device['snmp_port']            . '","' . $device['snmp_timeout']         . '","' .
+			$device['snmp_retries']         . '","' . $device['max_oids']             . '","' .
+			$device['snmp_sysName']         . '","' . $device['snmp_sysLocation']     . '","' .
+			$device['snmp_sysContact']      . '","' . $device['snmp_sysObjectID']     . '","' .
+			$device['snmp_sysDescr']        . '","' . $device['snmp_sysUptime']       . '","' .
+			$device['ignorePorts']          . '","' . $device['scan_type']            . '","' .
+			$device['disabled']             . '","' . $device['ports_total']          . '","' .
+			$device['ports_active']         . '","' . $device['ports_trunk']          . '","' .
+			$device['macs_active']          . '","' . $device['last_rundate']         . '","' .
 			$device['last_runduration']     . '"');
 		}
 	}
@@ -240,7 +240,7 @@ function mactrack_view_devices() {
 		$rows = get_request_var('rows');
 	}
 
-	$webroot = $config['url_path'] . '/plugins/mactrack/';
+	$webroot = $config['url_path'] . 'plugins/mactrack/';
 
 	mactrack_tabs();
 
@@ -255,9 +255,9 @@ function mactrack_view_devices() {
 	$total_rows = db_fetch_cell("SELECT
 		COUNT(mac_track_devices.device_id)
 		FROM mac_track_sites
-		RIGHT JOIN mac_track_devices 
+		RIGHT JOIN mac_track_devices
 		ON mac_track_devices.site_id = mac_track_sites.site_id
-		LEFT JOIN mac_track_device_types 
+		LEFT JOIN mac_track_device_types
 		ON mac_track_device_types.device_type_id=mac_track_devices.device_type_id
 		$sql_where");
 
@@ -421,7 +421,7 @@ function mactrack_device_filter2() {
 									mac_track_device_types.description,
 									mac_track_device_types.sysDescr_match
 									FROM mac_track_device_types
-									INNER JOIN mac_track_devices 
+									INNER JOIN mac_track_devices
 									ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
 									WHERE device_type = ?
 									ORDER BY mac_track_device_types.description', array(get_request_var('type_id')));
@@ -431,7 +431,7 @@ function mactrack_device_filter2() {
 									mac_track_device_types.description,
 									mac_track_device_types.sysDescr_match
 									FROM mac_track_device_types
-									INNER JOIN mac_track_devices 
+									INNER JOIN mac_track_devices
 									ON (mac_track_device_types.device_type_id=mac_track_devices.device_type_id)
 									ORDER BY mac_track_device_types.description');
 							}
