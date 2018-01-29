@@ -34,6 +34,7 @@ Bug and feature enhancements for the webseer plugin are handled in GitHub. If yo
 ## ChangeLog
 
 --- 4.2 ---
+* feature: Basic documentation under github wiki + screenshots
 * issue#50: False positive errors in Cacti log relative to 802.1x functions
 * issue#52: Issues with paths to icons and pages
 * issue#53: Issues with unset $scan_date variable
