@@ -110,7 +110,7 @@ if (read_config_option('mt_reverse_dns') == 'on') {
 db_process_add(0, TRUE);
 
 if ($site_id != '') {
-	$sql_where = 'AND site_id=$site_id';
+	$sql_where = 'AND site_id=' . $site_id;
 }else{
 	$sql_where = '';
 }
@@ -135,9 +135,9 @@ while (1) {
 		$break = FALSE;
 	}
 
-	$unresolved_ips = db_fetch_assoc("SELECT * 
-		FROM mac_track_temp_ports 
-		WHERE ip_address != '' 
+	$unresolved_ips = db_fetch_assoc("SELECT *
+		FROM mac_track_temp_ports
+		WHERE ip_address != ''
 		AND (dns_hostname = '' OR dns_hostname IS NULL)");
 
 	if (sizeof($unresolved_ips) == 0) {
@@ -181,7 +181,7 @@ while (1) {
 
 		/* output updated details to database */
 		foreach($unresolved_ips as $unresolved_ip) {
-			$insert_string = 'REPLACE INTO mac_track_temp_ports 
+			$insert_string = 'REPLACE INTO mac_track_temp_ports
 				(site_id,device_id,hostname,dns_hostname,device_name,vlan_id,vlan_name,
 				mac_address,vendor_mac,ip_address,port_number,port_name,scan_date)
 				VALUES (' .
