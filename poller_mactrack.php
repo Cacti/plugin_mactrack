@@ -59,7 +59,7 @@ putenv('MIBS=RFC-1215');
 global $debug, $web, $track_errors;
 
 /* initialize variables */
-$site_id  = '';
+$site_id  = 0;
 $debug    = false;
 $forcerun = false;
 $web      = false;
@@ -140,7 +140,7 @@ if (read_config_option('mt_collection_timing') == 'disabled') {
 	/* we don't want to see errors in the cacti log */
 	errors_disable();
 
-	if ($site_id != '') {
+	if ($site_id > 0) {
 		mactrack_debug('About to enter Device Tracking Site Scan Processing');
 
 		/* take time and log performance data */
@@ -410,7 +410,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 	/* save the scan date information */
 	$scan_date = date('Y-m-d H:i:s');
-	if ($site_id == '' || $site_id == 0) {
+	if ($site_id == 0) {
 		db_execute_prepared("REPLACE INTO settings
 			(name, value) VALUES
 			('mt_scan_date', ?)",
@@ -444,7 +444,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 		$e_debug = '';
 	}
 
-	if ($site_id) {
+	if ($site_id > 0) {
 		$e_site = " -sid=$site_id";
 	} else {
 		$e_site = '';
