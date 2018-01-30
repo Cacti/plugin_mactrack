@@ -99,7 +99,7 @@ function mactrack_check_upgrade () {
 	}
 
 	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
-	
+
 	$current = plugin_mactrack_version();
 	$current = $current['version'];
 
@@ -259,7 +259,7 @@ function mactrack_database_upgrade () {
 		ADD COLUMN `int_ifOutMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInMulticastPkts`,
 		ADD COLUMN `int_ifInBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutMulticastPkts`,
 		ADD COLUMN `int_ifOutBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInBroadcastPkts`,");
-			
+
 	}
 
 	if (!mactrack_db_key_exists('mac_track_ports', 'site_id_device_id')) {
@@ -630,7 +630,7 @@ function mactrack_setup_table_new () {
 			KEY `scan_date` (`scan_date`))
 			ENGINE=InnoDB;");
 	}
-	
+
 	if (!mactrack_db_table_exists('mac_track_macauth')) {
 		db_execute("CREATE TABLE `mac_track_macauth` (
 			`mac_address` varchar(20) NOT NULL,
@@ -977,9 +977,9 @@ function mactrack_config_settings () {
 			'method' => 'drop_array',
 			'default' => '-1',
 			'array' => array(
-				'-1' => __('Auto Detect', 'mactrack'), 
-				':' => __('Colon [:]', 'mactrack'), 
-				'|' => __('Pipe [|]', 'mactrack'), 
+				'-1' => __('Auto Detect', 'mactrack'),
+				':' => __('Colon [:]', 'mactrack'),
+				'|' => __('Pipe [|]', 'mactrack'),
 				' ' => __('Space [ ]', 'mactrack')
 				)
 			),
@@ -1429,7 +1429,8 @@ function mactrack_config_form () {
 		'friendly_name' => __('MAC Address Scanning Function', 'mactrack'),
 		'description' => __('The Device Tracking scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: \'my_function($site, &$device, $lowport, $highport)\'.  There is no function required for a pure router.', 'mactrack'),
 		'value' => '|arg1:scanning_function|',
-		'default' => 1,
+		'default' => 0,
+		'none_value' => __('None', 'mactrack'),
 		'sql' => 'select scanning_function as id, scanning_function as name from mac_track_scanning_functions where type="1" order by scanning_function'
 		),
 	'ip_scanning_function' => array(
@@ -1437,7 +1438,8 @@ function mactrack_config_form () {
 		'friendly_name' => __('IP Address Scanning Function', 'mactrack'),
 		'description' => __('The Device Tracking scanning function specific to Layer3 devices that track IP Addresses.', 'mactrack'),
 		'value' => '|arg1:ip_scanning_function|',
-		'default' => 1,
+		'default' => 0,
+		'none_value' => __('None', 'mactrack'),
 		'sql' => 'SELECT scanning_function AS id, scanning_function AS name FROM mac_track_scanning_functions WHERE type="2" ORDER BY scanning_function'
 		),
 	'dot1x_scanning_function' => array(
@@ -1445,7 +1447,8 @@ function mactrack_config_form () {
 		'friendly_name' => __('802.1x Scanning Function', 'mactrack'),
 		'description' => __('The Device Tracking scanning function specific to Switches with dot1x enabled.', 'mactrack'),
 		'value' => '|arg1:dot1x_scanning_function|',
-		'default' => 1,
+		'default' => 0,
+		'none_value' => __('None', 'mactrack'),
 		'sql' => 'SELECT scanning_function AS id, scanning_function AS name FROM mac_track_scanning_functions WHERE type="3" ORDER BY scanning_function'
 		),
 	'serial_number_oid' => array(
@@ -1743,10 +1746,10 @@ function mactrack_config_form () {
 		'value' => '|arg1:term_type|',
 		'default' => 1,
 		'array' => array(
-			0 => __('None', 'mactrack'), 
-			1 => __('Telnet', 'mactrack'), 
-			2 => __('SSH', 'mactrack'), 
-			3 => __('HTTP', 'mactrack'), 
+			0 => __('None', 'mactrack'),
+			1 => __('Telnet', 'mactrack'),
+			2 => __('SSH', 'mactrack'),
+			3 => __('HTTP', 'mactrack'),
 			4 => __('HTTPS', 'mactrack'))
 		),
 	'user_name' => array(
@@ -1789,7 +1792,6 @@ function mactrack_config_form () {
 		'value' => '1'
 		)
 	);
-
 
 	/* file: mactrack_snmp.php, action: item_edit */
 	$fields_mactrack_snmp_item_edit = $fields_mactrack_snmp_item + array(
