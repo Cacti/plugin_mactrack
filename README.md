@@ -20,10 +20,14 @@ The MacTrack on GitHub requiest Cacti 1.0 as a minumum.
 ## Installation
 
 Just like any Cacti plugin, untar the package to the Cacti plugins directory, rename the directory to 'mactrack', and then from Cacti's Plugin Management interface, Install and Enable the plugin.
+## Documentation
+
+Some basic documentation and steps to follow as well as some troubleshooting tips you can find on the [MacTrack Wiki](https://github.com/Cacti/plugin_mactrack/wiki)!
+
 
 ## Bugs and Feature Enhancements
 
-Bug and feature enhancements for the webseer plugin are handled in GitHub. If you find a first search the Cacti forums for a solution before creating an issue in GitHub.
+Bug and feature enhancements for the Mactrack plugin are handled in GitHub. You may want try first searching the Cacti forums for a solution before creating an issue in GitHub.
 
 ## Special Thanks
 
