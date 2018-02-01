@@ -54,9 +54,11 @@ function mactrack_debug($message) {
 		print('DEBUG: ' . $message . "\n");
 	}
 
+	$debug_level=POLLER_VERBOSITY_DEBUG;
 	if (substr_count($message, 'ERROR:')) {
-		cacti_log($message, false, 'MACTRACK');
+		$devel_level=POLLER_VERBOSITY_LOW;
 	}
+	cacti_log($message, false, 'MACTRACK', $debug_level);
 }
 
 function mactrack_rebuild_scanning_funcs() {
