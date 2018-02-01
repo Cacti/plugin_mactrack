@@ -197,7 +197,7 @@ if (valid_snmp_device($device)) {
 				}
 			} else {
 				mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: IP Scanning Function in Device Type Table Is Null.');
-				$device['last_runmessage'] = 'WARNING: Scanning Function in Device Type Table Is Null.';
+				$device['last_runmessage'] = 'WARNING: IP Scanning Function in Device Type Table Is Null.';
 				$device['snmp_status'] = HOST_ERROR;
 			}
 
