@@ -171,6 +171,7 @@ if (valid_snmp_device($device)) {
 						$device['last_runmessage'] = 'WARNING: Scanning Function Does Not Exist.';
 						$device['snmp_status'] = HOST_ERROR;
 					}
+				}
 			} else {
 				mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: Scanning Function in Device Type Table Is Null.');
 				$device['last_runmessage'] = 'WARNING: Scanning Function in Device Type Table Is Null.';
@@ -208,6 +209,7 @@ if (valid_snmp_device($device)) {
 						$device['device_type_id'] = $device_type['device_type_id'];
 						$device['scan_type'] = $device_type['device_type'];
 						call_user_func_array($device_type['dot1x_scanning_function'], array($site, &$device));
+					}
 				} else {
 					mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: 802.1x Address Scanning Function Does Not Exist.');
 					$device['last_runmessage'] = 'WARNING: 802.1x Address Scanning Function Does Not Exist.';
