@@ -38,6 +38,7 @@ Bug and feature enhancements for the webseer plugin are handled in GitHub. If yo
 * issue#52: Issues with paths to icons and pages
 * issue#53: Issues with unset $scan_date variable
 * issue#54: Resolving SQL errors in mactrack_resolver.php
+* issue#61: Correct issue with function detection in mactrack_scanner.php
 * feature: new 802.1x scanning function (for cisco devices).
 * feature: new IP Scanning function 'DHCP Snooping' (for cisco devices).
 * feature: add port name column to IP Address view
