@@ -54,7 +54,7 @@ function mactrack_debug($message) {
 		print('DEBUG: ' . $message . "\n");
 	}
 
-	$debug_level=POLLER_VERBOSITY_DEBUG;
+	$debug_level=POLLER_VERBOSITY_HIGH;
 	if (substr_count($message, 'ERROR:')) {
 		$devel_level=POLLER_VERBOSITY_LOW;
 	}
