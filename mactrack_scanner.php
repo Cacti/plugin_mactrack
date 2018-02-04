@@ -153,70 +153,74 @@ if (valid_snmp_device($device)) {
 	/* locate the device type to obtain scanning function and low and high ports */
 	$device_type = find_scanning_function($device, $device_types);
 
-	/* for switches/hubs, we need to determine the mac to port mappings */
-	if (($device['scan_type'] == DEVICE_HUB_SWITCH) ||
-			($device['scan_type'] == DEVICE_SWITCH_ROUTER)) {
+	if (isset($device_type) && sizeof($device_type) > 0) {
+		/* for switches/hubs, we need to determine the mac to port mappings */
+		if (($device['scan_type'] == DEVICE_HUB_SWITCH) ||
+				($device['scan_type'] == DEVICE_SWITCH_ROUTER)) {
 
-		/* verify that the scanning function is not null and call it as applicable */
-		if (isset($device_type['scanning_function'])) {
-			if (strlen($device_type['scanning_function']) > 0) {
-				if (function_exists($device_type['scanning_function'])) {
-					mactrack_debug('Scanning function is ' . $device_type['scanning_function']);
-					$device['device_type_id'] = $device_type['device_type_id'];
-					$device['scan_type'] = $device_type['device_type'];
-					$device = call_user_func_array($device_type['scanning_function'], array($site, &$device, $device_type['lowPort'], $device_type['highPort']));
-				} else {
-					mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: Scanning Function Does Not Exist.');
-					$device['last_runmessage'] = 'WARNING: Scanning Function Does Not Exist.';
-					$device['snmp_status'] = HOST_ERROR;
+			/* verify that the scanning function is not null and call it as applicable */
+			if (isset($device_type['scanning_function'])) {
+				if (strlen($device_type['scanning_function']) > 0) {
+					if (function_exists($device_type['scanning_function'])) {
+						mactrack_debug('Scanning function is ' . $device_type['scanning_function']);
+						$device['device_type_id'] = $device_type['device_type_id'];
+						$device['scan_type'] = $device_type['device_type'];
+						$device = call_user_func_array($device_type['scanning_function'], array($site, &$device, $device_type['lowPort'], $device_type['highPort']));
+					} else {
+						mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: Scanning Function Does Not Exist.');
+						$device['last_runmessage'] = 'WARNING: Scanning Function Does Not Exist.';
+						$device['snmp_status'] = HOST_ERROR;
+					}
 				}
 			} else {
 				mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: Scanning Function in Device Type Table Is Null.');
 				$device['last_runmessage'] = 'WARNING: Scanning Function in Device Type Table Is Null.';
 				$device['snmp_status'] = HOST_ERROR;
 			}
-		} else {
-			mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: Device Type Not Found in Device Type Table.');
-			$device['last_runmessage'] = 'WARNING: Device Type Not Found in Device Type Table.';
-			$device['snmp_status'] = HOST_ERROR;
 		}
-	}
 
-	/* for routers and switch/routers we need to push the ARP table to mac_track_ip table */
-	if (($device['scan_type'] == DEVICE_SWITCH_ROUTER) ||
-		($device['scan_type'] == DEVICE_ROUTER)) {
+		/* for routers and switch/routers we need to push the ARP table to mac_track_ip table */
+		if (($device['scan_type'] == DEVICE_SWITCH_ROUTER) ||
+			($device['scan_type'] == DEVICE_ROUTER)) {
 
-		if (sizeof($device_type)) {
-			if ($device_type['ip_scanning_function'] > 0) {
-				if (function_exists($device_type['ip_scanning_function'])) {
-					mactrack_debug('IP Scanning function is ' . $device_type['ip_scanning_function']);
-					$device['device_type_id'] = $device_type['device_type_id'];
-					$device['scan_type'] = $device_type['device_type'];
-					call_user_func_array($device_type['ip_scanning_function'], array($site, &$device));
-				} else {
-					mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: IP Address Scanning Function Does Not Exist.');
-					$device['last_runmessage'] = 'WARNING: Scanning Function Does Not Exist.';
-					$device['snmp_status'] = HOST_ERROR;
+			if (isset($device_type['ip_scanning_function'])) {
+				if (strlen($device_type['ip_scanning_function']) > 0) {
+					if (function_exists($device_type['ip_scanning_function'])) {
+						mactrack_debug('IP Scanning function is ' . $device_type['ip_scanning_function']);
+						$device['device_type_id'] = $device_type['device_type_id'];
+						$device['scan_type'] = $device_type['device_type'];
+						call_user_func_array($device_type['ip_scanning_function'], array($site, &$device));
+					} else {
+						mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: IP Address Scanning Function Does Not Exist.');
+						$device['last_runmessage'] = 'WARNING: Scanning Function Does Not Exist.';
+						$device['snmp_status'] = HOST_ERROR;
+					}
 				}
+			} else {
+				mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: IP Scanning Function in Device Type Table Is Null.');
+				$device['last_runmessage'] = 'WARNING: IP Scanning Function in Device Type Table Is Null.';
+				$device['snmp_status'] = HOST_ERROR;
 			}
 
-			if ($device_type['dot1x_scanning_function'] > 0) {
-				if (function_exists($device_type['dot1x_scanning_function'])) {
-					mactrack_debug('802.1x Scanning function is ' . $device_type['dot1x_scanning_function']);
-					$device['device_type_id'] = $device_type['device_type_id'];
-					$device['scan_type'] = $device_type['device_type'];
-					call_user_func_array($device_type['dot1x_scanning_function'], array($site, &$device));
+			if (isset($device_type['dot1x_scanning_function'])) {
+				if (strlen($device_type['dot1x_scanning_function']) > 0) {
+					if (function_exists($device_type['dot1x_scanning_function'])) {
+						mactrack_debug('802.1x Scanning function is ' . $device_type['dot1x_scanning_function']);
+						$device['device_type_id'] = $device_type['device_type_id'];
+						$device['scan_type'] = $device_type['device_type'];
+						call_user_func_array($device_type['dot1x_scanning_function'], array($site, &$device));
+					}
 				} else {
 					mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: 802.1x Address Scanning Function Does Not Exist.');
-					$device['last_runmessage'] = 'WARNING: Scanning Function Does Not Exist.';
+					$device['last_runmessage'] = 'WARNING: 802.1x Address Scanning Function Does Not Exist.';
 					$device['snmp_status'] = HOST_ERROR;
 				}
 			}
-		} else {
-			mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: Device Type Not Found in Device Type Table.');
-			$device['last_runmessage'] = 'WARNING: Device Type Not Found in Device Type Table.';
-			$device['snmp_status'] = HOST_ERROR;
 		}
+	} else {
+		mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: Device Type Not Found in Device Type Table.');
+		$device['last_runmessage'] = 'WARNING: Device Type Not Found in Device Type Table.';
+		$device['snmp_status'] = HOST_ERROR;
 	}
 } else {
 	mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: Device unreachable.');
