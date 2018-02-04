@@ -20,10 +20,14 @@ The MacTrack on GitHub requiest Cacti 1.0 as a minumum.
 ## Installation
 
 Just like any Cacti plugin, untar the package to the Cacti plugins directory, rename the directory to 'mactrack', and then from Cacti's Plugin Management interface, Install and Enable the plugin.
+## Documentation
+
+Some basic documentation and steps to follow as well as some troubleshooting tips you can find on the [MacTrack Wiki](https://github.com/Cacti/plugin_mactrack/wiki)!
+
 
 ## Bugs and Feature Enhancements
 
-Bug and feature enhancements for the webseer plugin are handled in GitHub. If you find a first search the Cacti forums for a solution before creating an issue in GitHub.
+Bug and feature enhancements for the Mactrack plugin are handled in GitHub. You may want try first searching the Cacti forums for a solution before creating an issue in GitHub.
 
 ## Special Thanks
 
@@ -34,10 +38,12 @@ Bug and feature enhancements for the webseer plugin are handled in GitHub. If yo
 ## ChangeLog
 
 --- 4.2 ---
+* feature: Basic documentation under github wiki + screenshots
 * issue#50: False positive errors in Cacti log relative to 802.1x functions
 * issue#52: Issues with paths to icons and pages
 * issue#53: Issues with unset $scan_date variable
 * issue#54: Resolving SQL errors in mactrack_resolver.php
+* issue#57: Correct percentage sign issues in setup.php
 * issue#61: Correct issue with function detection in mactrack_scanner.php
 * feature: new 802.1x scanning function (for cisco devices).
 * feature: new IP Scanning function 'DHCP Snooping' (for cisco devices).

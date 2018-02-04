@@ -1413,14 +1413,14 @@ function mactrack_config_form () {
 	'sysDescr_match' => array(
 		'method' => 'textbox',
 		'friendly_name' => __('System Description Match', 'mactrack'),
-		'description' => __('Provide key information to help Device Tracking detect the type of device.  The wildcard character is the \'%\' sign.', 'mactrack'),
+		'description' => __('Provide key information to help Device Tracking detect the type of device.  The wildcard character is the \'&#37;\' sign.', 'mactrack'),
 		'value' => '|arg1:sysDescr_match|',
 		'max_length' => '250'
 		),
 	'sysObjectID_match' => array(
 		'method' => 'textbox',
 		'friendly_name' => __('Vendor SNMP Object ID Match', 'mactrack'),
-		'description' => __('Provide key information to help Device Tracking detect the type of device.  The wildcard character is the \'%\' sign.', 'mactrack'),
+		'description' => __('Provide key information to help Device Tracking detect the type of device.  The wildcard character is the \'&#37;\' sign.', 'mactrack'),
 		'value' => '|arg1:sysObjectID_match|',
 		'max_length' => '250'
 		),
@@ -1950,7 +1950,7 @@ function mactrack_config_form () {
 	'mac_address' => array(
 		'method' => 'textbox',
 		'friendly_name' => __('MAC Address Match', 'mactrack'),
-		'description' => __('Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of \'%\' anywhere in the MAC Address.', 'mactrack'),
+		'description' => __('Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of \'&#37;\' anywhere in the MAC Address.', 'mactrack'),
 		'value' => '|arg1:mac_address|',
 		'default' => '',
 		'max_length' => '40'
