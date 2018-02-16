@@ -1817,7 +1817,7 @@ function xform_mac_address($mac_address) {
 		}else{ /* return is hex */
 			$mac = "";
 			for ($j = 0; $j < strlen($mac_address); $j++) {
-				$mac .= bin2hex($mac_address[$j]) . read_config_option("mt_mac_delim");
+				$mac .= bin2hex($mac_address[$j]) . ($j == strlen($mac_address) ? '' : read_config_option("mt_mac_delim"));
 			}
 			$mac_address = $mac;
 		}
