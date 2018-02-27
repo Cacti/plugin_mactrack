@@ -1,0 +1,2670 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: macktrack on cacti 1.1.34\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-08 08:20-0500\n"
+"PO-Revision-Date: 2018-02-22 14:00+0800\n"
+"Last-Translator: \n"
+"Language-Team: sfqas <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../mactrack_view_macs.php:31
+msgid "Device Tracking - MAC to IP Report View"
+msgstr "设备跟踪 - MAC到IP报告视图"
+
+#: ../mactrack_view_macs.php:34
+msgid "Authorize"
+msgstr "授权"
+
+#: ../mactrack_view_macs.php:35
+msgid "Revoke"
+msgstr "撤消"
+
+#: ../mactrack_view_macs.php:39
+#: ../mactrack_macauth.php:30
+#: ../mactrack_sites.php:32
+#: ../mactrack_macwatch.php:30
+#: ../mactrack_devices.php:31
+#: ../mactrack_snmp.php:30
+#: ../mactrack_device_types.php:61
+msgid "Delete"
+msgstr "删除"
+
+#: ../mactrack_view_macs.php:118
+#, php-format
+msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
+msgstr "以下MAC地址无法撤消，因为它们是组授权 %s 的成员"
+
+#: ../mactrack_view_macs.php:159
+msgid "Are you sure you want to Authorize the following MAC Addresses?"
+msgstr "您确定要授权以下MAC地址吗？"
+
+#: ../mactrack_view_macs.php:166
+msgid "Are you sure you want to Revoke the following MAC Addresses?"
+msgstr "您确定要撤销以下MAC地址吗？"
+
+#: ../mactrack_view_macs.php:173
+msgid "You must select at least one MAC Address."
+msgstr "您必须至少选择一个MAC地址。"
+
+#: ../mactrack_view_macs.php:176
+msgid "You are not permitted to change Mac Authorizations."
+msgstr "您无权更改Mac授权。"
+
+#: ../mactrack_view_macs.php:179
+#: ../mactrack_view_macs.php:260
+#: ../mactrack_view_macs.php:1064
+#: ../mactrack_macauth.php:124
+#: ../mactrack_macwatch.php:128
+#: ../mactrack_devices.php:240
+#: ../mactrack_snmp.php:208
+#: ../mactrack_device_types.php:259
+msgid "Yes"
+msgstr "是"
+
+#: ../mactrack_view_macs.php:187
+#: ../mactrack_view_macs.php:1065
+#: ../mactrack_macauth.php:141
+#: ../mactrack_macwatch.php:145
+#: ../mactrack_devices.php:345
+#: ../mactrack_device_types.php:284
+msgid "No"
+msgstr "否"
+
+#: ../mactrack_view_macs.php:188
+#: ../mactrack_macauth.php:142
+#: ../mactrack_sites.php:150
+#: ../mactrack_macwatch.php:146
+#: ../mactrack_devices.php:346
+#: ../mactrack_device_types.php:285
+msgid "Return"
+msgstr "返回"
+
+#: ../mactrack_view_macs.php:242
+#, php-format
+msgid " Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
+msgstr "设备.:%s IP.:%s MAC.:%s 端口.:%s 计数.: [%s]"
+
+#: ../mactrack_view_macs.php:254
+msgid "You must select at least one Row."
+msgstr "您必须至少选择一个行。"
+
+#: ../mactrack_view_macs.php:257
+msgid "You are not permitted to delete rows."
+msgstr "您不允许删除行。"
+
+#: ../mactrack_view_macs.php:265
+msgid "Are you sure you want to Delete the following rows from Aggregated table?"
+msgstr "您确定要删除聚合表中的以下行吗？"
+
+#: ../mactrack_view_macs.php:648
+msgid "MAC Addresses"
+msgstr "MAC地址"
+
+#: ../mactrack_view_macs.php:656
+#: ../mactrack_view_macs.php:677
+#: ../mactrack_view_sites.php:245
+#: ../mactrack_view_sites.php:298
+#: ../mactrack_view_devices.php:265
+#: ../mactrack_snmp.php:405
+#: ../setup.php:1217
+#: ../setup.php:1219
+#: ../setup.php:1225
+#: ../setup.php:1228
+#: ../setup.php:1231
+#: ../setup.php:1234
+#: ../setup.php:1237
+#: ../mactrack_view_ips.php:198
+msgid "Actions"
+msgstr "操作"
+
+#: ../mactrack_view_macs.php:657
+#: ../mactrack_view_macs.php:678
+#: ../mactrack_view_macs.php:797
+#: ../mactrack_view_arp.php:302
+#: ../mactrack_view_arp.php:312
+#: ../mactrack_view_arp.php:326
+msgid "Switch Name"
+msgstr "交换名称"
+
+#: ../mactrack_view_macs.php:658
+#: ../mactrack_view_macs.php:679
+#: ../mactrack_view_macs.php:798
+#: ../mactrack_view_arp.php:303
+#: ../mactrack_view_arp.php:313
+#: ../mactrack_view_arp.php:327
+#: ../mactrack_view_arp.php:336
+msgid "Switch Hostname"
+msgstr "交换主机名"
+
+#: ../mactrack_view_macs.php:659
+#: ../mactrack_view_macs.php:680
+#: ../mactrack_view_macs.php:799
+#: ../mactrack_view_arp.php:304
+#: ../mactrack_view_arp.php:314
+#: ../mactrack_view_arp.php:328
+#: ../mactrack_view_arp.php:337
+msgid "ED IP Address"
+msgstr "ED IP地址"
+
+#: ../mactrack_view_macs.php:660
+#: ../mactrack_view_arp.php:305
+#: ../mactrack_view_arp.php:315
+msgid "ED DNS Hostname"
+msgstr "ED DNS主机名"
+
+#: ../mactrack_view_macs.php:661
+#: ../mactrack_view_macs.php:681
+#: ../mactrack_view_macs.php:806
+#: ../mactrack_view_arp.php:306
+#: ../mactrack_view_arp.php:316
+#: ../mactrack_view_arp.php:329
+#: ../mactrack_view_arp.php:338
+msgid "ED MAC Address"
+msgstr "ED MAC地址"
+
+#: ../mactrack_view_macs.php:662
+#: ../mactrack_view_macs.php:682
+#: ../mactrack_view_macs.php:807
+#: ../mactrack_view_arp.php:307
+#: ../mactrack_view_arp.php:317
+#: ../mactrack_view_arp.php:330
+#: ../mactrack_view_arp.php:339
+msgid "Vendor Name"
+msgstr "供应商名称"
+
+#: ../mactrack_view_macs.php:663
+#: ../mactrack_view_macs.php:683
+#: ../mactrack_view_macs.php:808
+#: ../mactrack_view_arp.php:308
+#: ../mactrack_view_arp.php:318
+#: ../mactrack_view_arp.php:331
+#: ../mactrack_view_arp.php:340
+msgid "Port Number"
+msgstr "端口号"
+
+#: ../mactrack_view_macs.php:664
+#: ../mactrack_view_macs.php:684
+#: ../mactrack_view_macs.php:809
+msgid "Port Name"
+msgstr "端口名称"
+
+#: ../mactrack_view_macs.php:665
+#: ../mactrack_view_macs.php:685
+#: ../mactrack_view_macs.php:810
+msgid "VLAN ID"
+msgstr "VLAN ID"
+
+#: ../mactrack_view_macs.php:666
+#: ../mactrack_view_macs.php:686
+#: ../mactrack_view_macs.php:811
+#: ../mactrack_view_macs.php:990
+msgid "VLAN Name"
+msgstr "VLAN名称"
+
+#: ../mactrack_view_macs.php:667
+#: ../mactrack_view_macs.php:687
+#: ../mactrack_view_macs.php:814
+#: ../mactrack_view_macs.php:816
+msgid "Last Scan Date"
+msgstr "上次扫描日期"
+
+#: ../mactrack_view_macs.php:735
+msgid "You must choose a Site, Device or other search criteria."
+msgstr "您必须选择一个网站，设备或其他搜索条件。"
+
+#: ../mactrack_view_macs.php:737
+msgid "No MacTrack Port Results."
+msgstr "没有MacTrack端口结果。"
+
+#: ../mactrack_view_macs.php:820
+msgid "Count"
+msgstr "计数"
+
+#: ../mactrack_view_macs.php:870
+#: ../mactrack_view_arp.php:365
+msgid "You must first choose a Site, Device or other search criteria."
+msgstr "您必须先选择一个网站，设备或其他搜索条件。"
+
+#: ../mactrack_view_macs.php:872
+msgid "No MacTrack Port Results"
+msgstr "没有MacTrack端口结果"
+
+#: ../mactrack_view_macs.php:899
+#: ../mactrack_macauth.php:359
+#: ../lib/mactrack_functions.php:2982
+#: ../mactrack_macwatch.php:372
+#: ../mactrack_view_interfaces.php:525
+#: ../mactrack_devices.php:1063
+#: ../mactrack_view_devices.php:357
+#: ../mactrack_snmp.php:549
+#: ../mactrack_vendormacs.php:192
+#: ../mactrack_view_arp.php:389
+#: ../mactrack_device_types.php:972
+msgid "Search"
+msgstr "搜索"
+
+#: ../mactrack_view_macs.php:905
+#: ../lib/mactrack_functions.php:3024
+#: ../mactrack_view_interfaces.php:393
+#: ../mactrack_devices.php:1069
+#: ../mactrack_view_devices.php:363
+#: ../mactrack_view_arp.php:395
+#: ../mactrack_view_ips.php:251
+msgid "Site"
+msgstr "站点"
+
+#: ../mactrack_view_macs.php:909
+#: ../lib/mactrack_functions.php:2711
+#: ../lib/mactrack_functions.php:2736
+#: ../lib/mactrack_functions.php:2737
+#: ../lib/mactrack_functions.php:2813
+#: ../lib/mactrack_functions.php:2814
+#: ../lib/mactrack_functions.php:2815
+#: ../lib/mactrack_functions.php:2816
+#: ../lib/mactrack_functions.php:2817
+#: ../mactrack_utilities.php:243
+#: ../mactrack_utilities.php:245
+#: ../mactrack_utilities.php:247
+#: ../mactrack_macwatch.php:341
+#: ../mactrack_macwatch.php:342
+#: ../mactrack_view_interfaces.php:431
+#: ../mactrack_view_sites.php:333
+#: ../mactrack_view_sites.php:334
+#: ../mactrack_view_sites.php:335
+#: ../mactrack_view_sites.php:336
+#: ../mactrack_view_sites.php:337
+#: ../mactrack_view_devices.php:325
+#: ../mactrack_view_devices.php:326
+#: ../mactrack_view_devices.php:327
+#: ../mactrack_view_devices.php:328
+#: ../mactrack_view_devices.php:329
+#: ../mactrack_view_devices.php:330
+#: ../mactrack_snmp.php:414
+#: ../mactrack_snmp.php:419
+#: ../mactrack_snmp.php:420
+#: ../mactrack_snmp.php:421
+#: ../setup.php:1016
+#: ../mactrack_view_arp.php:399
+msgid "N/A"
+msgstr "N/A"
+
+#: ../mactrack_view_macs.php:921
+#: ../mactrack_view_interfaces.php:482
+#: ../mactrack_view_arp.php:411
+msgid "Device"
+msgstr "设备"
+
+#: ../mactrack_view_macs.php:925
+#: ../mactrack_view_macs.php:994
+#: ../mactrack_view_macs.php:1027
+#: ../mactrack_view_macs.php:1063
+#: ../mactrack_view_interfaces.php:397
+#: ../mactrack_view_interfaces.php:457
+#: ../mactrack_view_interfaces.php:486
+#: ../mactrack_devices.php:1073
+#: ../mactrack_view_devices.php:367
+#: ../setup.php:1327
+#: ../mactrack_view_arp.php:415
+#: ../mactrack_device_types.php:1019
+#: ../mactrack_device_types.php:1036
+msgid "All"
+msgstr "所有"
+
+#: ../mactrack_view_macs.php:948
+#: ../mactrack_macauth.php:365
+#: ../mactrack_vendormacs.php:198
+msgid "MAC's"
+msgstr "MAC"
+
+#: ../mactrack_view_macs.php:962
+#: ../mactrack_macauth.php:380
+#: ../lib/mactrack_functions.php:3009
+#: ../mactrack_macwatch.php:393
+#: ../mactrack_view_interfaces.php:440
+#: ../mactrack_devices.php:1086
+#: ../mactrack_view_devices.php:380
+#: ../mactrack_snmp.php:572
+#: ../mactrack_vendormacs.php:213
+#: ../mactrack_view_arp.php:452
+#: ../mactrack_device_types.php:993
+msgid "Go"
+msgstr "开始"
+
+#: ../mactrack_view_macs.php:965
+#: ../mactrack_macauth.php:383
+#: ../lib/mactrack_functions.php:3012
+#: ../mactrack_macwatch.php:396
+#: ../mactrack_view_interfaces.php:443
+#: ../mactrack_devices.php:1089
+#: ../mactrack_view_devices.php:383
+#: ../mactrack_snmp.php:575
+#: ../mactrack_vendormacs.php:216
+#: ../mactrack_view_arp.php:455
+#: ../mactrack_view_ips.php:285
+#: ../mactrack_device_types.php:996
+msgid "Clear"
+msgstr "清楚"
+
+#: ../mactrack_view_macs.php:968
+#: ../lib/mactrack_functions.php:3015
+#: ../mactrack_view_interfaces.php:446
+#: ../mactrack_devices.php:1095
+#: ../mactrack_view_devices.php:386
+#: ../mactrack_vendormacs.php:219
+#: ../mactrack_view_arp.php:458
+#: ../mactrack_view_ips.php:282
+#: ../mactrack_device_types.php:1005
+msgid "Export"
+msgstr "导出"
+
+#: ../mactrack_view_macs.php:975
+#: ../mactrack_view_arp.php:465
+msgid "IP"
+msgstr "IP"
+
+#: ../mactrack_view_macs.php:1023
+msgid "Show"
+msgstr "显示"
+
+#: ../mactrack_view_macs.php:1028
+msgid "Most Recent"
+msgstr "最近的"
+
+#: ../mactrack_view_macs.php:1029
+msgid "Aggregated"
+msgstr "汇总"
+
+#: ../mactrack_view_macs.php:1044
+#: ../mactrack_view_arp.php:482
+msgid "MAC"
+msgstr "MAC"
+
+#: ../mactrack_view_macs.php:1059
+msgid "Authorized"
+msgstr "合法"
+
+#: ../mactrack_view_macs.php:1071
+msgid "Portname"
+msgstr "端口名称"
+
+#: ../mactrack_macauth.php:121
+msgid "You must select at least one Authorized Mac to delete."
+msgstr "您必须至少选择一个授权的Mac进行删除。"
+
+#: ../mactrack_macauth.php:129
+msgid "Are you sure you want to delete the following Authorized Mac's?"
+msgstr "您确定要删除以下授权的Mac吗？"
+
+#: ../mactrack_macauth.php:192
+#: ../mactrack_sites.php:277
+#: ../mactrack_utilities.php:344
+#: ../mactrack_utilities.php:404
+#: ../mactrack_utilities.php:430
+#: ../mactrack_macwatch.php:197
+#: ../mactrack_devices.php:834
+#: ../mactrack_snmp.php:335
+#: ../mactrack_device_types.php:817
+msgid "Are You Sure?"
+msgstr "你确定？"
+
+#: ../mactrack_macauth.php:192
+#, php-format
+msgid "Are you sure you want to delete the Authorized Mac Address(s) %s?"
+msgstr "您确定要删除授权的Mac地址吗？%s?"
+
+#: ../mactrack_macauth.php:233
+#, php-format
+msgid "MacTrack MacAuth [edit: %s]"
+msgstr "MacTrack MacAuth [编辑： %s]"
+
+#: ../mactrack_macauth.php:235
+msgid "MacTrack MacAuth [new]"
+msgstr "MacTrack MacAuth [新建]"
+
+#: ../mactrack_macauth.php:297
+msgid "MacTrack MacAuth Filters"
+msgstr "MacTrack MacAuth过滤器"
+
+#: ../mactrack_macauth.php:309
+msgid "Authorized Mac Addresses"
+msgstr "授权的Mac地址"
+
+#: ../mactrack_macauth.php:318
+#: ../mactrack_macwatch.php:325
+msgid "Mac Address"
+msgstr "MAC地址"
+
+#: ../mactrack_macauth.php:319
+#: ../setup.php:1957
+msgid "Reason"
+msgstr "原因"
+
+#: ../mactrack_macauth.php:320
+msgid "Added/Modified"
+msgstr "添加/修改"
+
+#: ../mactrack_macauth.php:321
+msgid "By"
+msgstr "由"
+
+#: ../mactrack_macauth.php:337
+msgid "No Authorized Mac Addresses"
+msgstr "没有授权的Mac地址"
+
+#: ../mactrack_macauth.php:369
+#: ../lib/mactrack_functions.php:2992
+#: ../mactrack_macwatch.php:382
+#: ../mactrack_devices.php:1176
+#: ../mactrack_view_devices.php:464
+#: ../mactrack_snmp.php:559
+#: ../setup.php:1318
+#: ../mactrack_vendormacs.php:202
+#: ../mactrack_view_ips.php:271
+#: ../mactrack_device_types.php:982
+msgid "Default"
+msgstr "默认"
+
+#: ../lib/mactrack_functions.php:2184
+msgid "MacTrack OUI Database Import Results"
+msgstr "MacTrack OUI数据库导入结果"
+
+#: ../lib/mactrack_functions.php:2185
+msgid "Getting OUI Database from IEEE"
+msgstr "从IEEE获取OUI数据库"
+
+#: ../lib/mactrack_functions.php:2187
+msgid "Getting OUI Database from the IEEE"
+msgstr "从IEEE获取OUI数据库"
+
+#: ../lib/mactrack_functions.php:2195
+msgid "OUI Database Download from IEEE Complete"
+msgstr "OUI数据库从IEEE完整版下载"
+
+#: ../lib/mactrack_functions.php:2197
+msgid "OUI Database Download from IEEE FAILED"
+msgstr "OUI数据库从IEEE FAILED下载"
+
+#: ../lib/mactrack_functions.php:2290
+#, php-format
+msgid "There were '%d' Entries Added/Updated in the database."
+msgstr "数据库中添加/更新了'%d'条目。"
+
+#: ../lib/mactrack_functions.php:2292
+#, php-format
+msgid "There were '%d' Records Removed from the database."
+msgstr "有从数据库中删除的%d' 个记录。"
+
+#: ../lib/mactrack_functions.php:2314
+msgid "atifIndexes data collection complete"
+msgstr "atifIndexes数据收集完成"
+
+#: ../lib/mactrack_functions.php:2332
+msgid "atPhysAddress data collection complete"
+msgstr "atPhysAddress数据收集完成"
+
+#: ../lib/mactrack_functions.php:2340
+msgid "atNetAddress data collection complete"
+msgstr "atNetAddress数据收集完成"
+
+#: ../lib/mactrack_functions.php:2353
+msgid "atEntries assembly complete."
+msgstr "atEntries程序集完成。"
+
+#: ../lib/mactrack_functions.php:2379
+#, php-format
+msgid "HOST: %s, IP address information collection complete"
+msgstr "主机：%s，IP地址信息收集完成"
+
+#: ../lib/mactrack_functions.php:2418
+msgid "View Non Interface Graphs"
+msgstr "查看非界面图"
+
+#: ../lib/mactrack_functions.php:2420
+msgid "No Non Interface Graphs in Cacti"
+msgstr "Cacti中没有非接口图"
+
+#: ../lib/mactrack_functions.php:2434
+msgid "View Interface Graphs"
+msgstr "查看界面图"
+
+#: ../lib/mactrack_functions.php:2439
+msgid "Device Not in Cacti"
+msgstr "设备不在acti中"
+
+#: ../lib/mactrack_functions.php:2454
+#: ../lib/mactrack_functions.php:2457
+msgid "Since Restart"
+msgstr "重新启动后"
+
+#: ../lib/mactrack_functions.php:2537
+#, php-format
+msgid "Device Rescan '%s'"
+msgstr "设备重新扫描'%s'"
+
+#: ../lib/mactrack_functions.php:2551
+#: ../lib/mactrack_functions.php:2585
+msgid "Clear Results"
+msgstr "清除结果"
+
+#: ../lib/mactrack_functions.php:2572
+#, php-format
+msgid "Site scan '%s'"
+msgstr "网站扫描'%s'"
+
+#: ../lib/mactrack_functions.php:2605
+#, php-format
+msgid "Device Enable '%s'"
+msgstr "设备启用 '%s'"
+
+#: ../lib/mactrack_functions.php:2624
+#, php-format
+msgid "Device Disable '%d'"
+msgstr "设备禁用'%d'"
+
+#: ../lib/mactrack_functions.php:2713
+#: ../setup.php:1285
+#, php-format
+msgid "%d Minutes"
+msgstr "%d 分钟"
+
+#: ../lib/mactrack_functions.php:2717
+#, php-format
+msgid "%d Hours"
+msgstr "%d 小时"
+
+#: ../lib/mactrack_functions.php:2721
+#: ../setup.php:1345
+#: ../setup.php:1346
+#: ../setup.php:1347
+#: ../setup.php:1348
+#: ../setup.php:1349
+#, php-format
+msgid "%d Days"
+msgstr "%d 天"
+
+#: ../lib/mactrack_functions.php:2724
+#, php-format
+msgid "%d Weeks"
+msgstr "%d 周"
+
+#: ../lib/mactrack_functions.php:2735
+msgid "Not Recorded"
+msgstr "未记录"
+
+#: ../lib/mactrack_functions.php:2754
+#, php-format
+msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %f"
+msgstr "状态：正在运行，进程： %d, 进度：%s, 上次运行时间: %f"
+
+#: ../lib/mactrack_functions.php:2756
+#, php-format
+msgid "Status: Idle, LastRuntime: %f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
+msgstr "状态：空闲, 上次运行时间: %f 秒，进程: %d 个进程，设备: %d, 下次运行时间: %s"
+
+#: ../lib/mactrack_functions.php:2764
+#, php-format
+msgid "Scanning Rate: Every %s"
+msgstr "扫描速度：每 %s"
+
+#: ../lib/mactrack_functions.php:2794
+#: ../mactrack_view_sites.php:271
+#: ../mactrack_view_sites.php:325
+#: ../mactrack_view_devices.php:316
+msgid "View Interfaces"
+msgstr "查看接口"
+
+#: ../lib/mactrack_functions.php:2799
+msgid "Rescan Device"
+msgstr "重新扫描设备"
+
+#: ../lib/mactrack_functions.php:2812
+#: ../mactrack_devices.php:1118
+#: ../mactrack_view_devices.php:409
+msgid "Not Detected"
+msgstr "没有检测到"
+
+#: ../lib/mactrack_functions.php:2933
+#: ../lib/mactrack_functions.php:2988
+#: ../mactrack_sites.php:435
+#: ../mactrack_sites.php:477
+#: ../mactrack_view_sites.php:237
+#: ../setup.php:1370
+msgid "Sites"
+msgstr "网站"
+
+#: ../lib/mactrack_functions.php:2934
+#: ../mactrack_sites.php:443
+#: ../mactrack_utilities.php:275
+#: ../mactrack_view_sites.php:247
+#: ../mactrack_devices.php:1009
+#: ../mactrack_devices.php:1172
+#: ../mactrack_view_devices.php:258
+#: ../mactrack_view_devices.php:460
+#: ../setup.php:1371
+#: ../mactrack_device_types.php:927
+msgid "Devices"
+msgstr "设备"
+
+#: ../lib/mactrack_functions.php:2935
+msgid "IP Ranges"
+msgstr "IP范围"
+
+#: ../lib/mactrack_functions.php:2936
+msgid "IP Address"
+msgstr "IP地址"
+
+#: ../lib/mactrack_functions.php:2937
+#: ../setup.php:1872
+msgid "MAC Address"
+msgstr "MAC地址"
+
+#: ../lib/mactrack_functions.php:2938
+#: ../mactrack_view_interfaces.php:285
+#: ../mactrack_view_interfaces.php:507
+msgid "Interfaces"
+msgstr "接口"
+
+#: ../lib/mactrack_functions.php:2939
+msgid "Graphs"
+msgstr "图表"
+
+#: ../lib/mactrack_functions.php:2968
+#: ../mactrack_devices.php:1166
+#: ../mactrack_view_devices.php:454
+#: ../setup.php:1306
+#: ../mactrack_device_types.php:431
+msgid "Unknown"
+msgstr "未知"
+
+#: ../lib/mactrack_functions.php:3006
+msgid "Show Device Details"
+msgstr "显示设备详情"
+
+#: ../lib/mactrack_functions.php:3028
+#: ../lib/mactrack_functions.php:3044
+#: ../mactrack_devices.php:1106
+#: ../mactrack_devices.php:1117
+#: ../mactrack_devices.php:1162
+#: ../mactrack_view_devices.php:397
+#: ../mactrack_view_devices.php:408
+#: ../mactrack_view_devices.php:450
+#: ../mactrack_view_ips.php:255
+msgid "Any"
+msgstr "任何"
+
+#: ../lib/mactrack_functions.php:3040
+#: ../mactrack_devices.php:1113
+#: ../mactrack_view_devices.php:404
+msgid "SubType"
+msgstr "子类型"
+
+#: ../mactrack_view_graphs.php:32
+msgid "Device Tracking - Monitored Device Graph View"
+msgstr "设备跟踪 - 受监控的设备图形视图"
+
+#: ../mactrack_view_graphs.php:72
+msgid "Custom Graph List Applied - Filtering from List"
+msgstr "自定义图表列表已应用 - 从列表中过滤"
+
+#: ../mactrack_sites.php:131
+msgid "Are you sure you want to delete the following site(s)?"
+msgstr "您确定要删除以下网站吗？"
+
+#: ../mactrack_sites.php:138
+msgid "You must select at least one site."
+msgstr "您必须至少选择一个网站。"
+
+#: ../mactrack_sites.php:277
+#, php-format
+msgid "Are you sure you want to delete the site <strong>'%s'</strong>?"
+msgstr "您确定要删除该网站吗 <strong>'%s'</strong>？"
+
+#: ../mactrack_sites.php:376
+#, php-format
+msgid "MacTrack Site [edit: %s]"
+msgstr "MacTrack网站[编辑：%s]"
+
+#: ../mactrack_sites.php:378
+msgid "MacTrack Site [new]"
+msgstr "MacTrack网站[新建]"
+
+#: ../mactrack_sites.php:410
+msgid "MacTrack Site Filters"
+msgstr "MacTrack网站过滤器"
+
+#: ../mactrack_sites.php:442
+#: ../mactrack_sites.php:484
+#: ../mactrack_view_sites.php:246
+#: ../mactrack_view_sites.php:299
+#: ../mactrack_devices.php:1019
+#: ../mactrack_view_devices.php:267
+#: ../setup.php:1665
+#: ../setup.php:1810
+#: ../mactrack_view_ips.php:199
+msgid "Site Name"
+msgstr "网站名称"
+
+#: ../mactrack_sites.php:444
+#: ../mactrack_sites.php:488
+#: ../mactrack_view_sites.php:248
+#: ../mactrack_view_sites.php:303
+#: ../mactrack_view_devices.php:271
+msgid "Total IP's"
+msgstr "总IP"
+
+#: ../mactrack_sites.php:445
+#: ../mactrack_view_sites.php:249
+#: ../mactrack_devices.php:1024
+#: ../mactrack_view_devices.php:272
+msgid "User Ports"
+msgstr "用户端口"
+
+#: ../mactrack_sites.php:446
+#: ../mactrack_view_sites.php:250
+#: ../mactrack_devices.php:1025
+#: ../mactrack_view_devices.php:273
+msgid "User Ports Up"
+msgstr "用户启动的端口"
+
+#: ../mactrack_sites.php:447
+#: ../mactrack_sites.php:492
+#: ../mactrack_view_sites.php:251
+#: ../mactrack_view_sites.php:307
+msgid "MACS Found"
+msgstr "MACS发现"
+
+#: ../mactrack_sites.php:448
+#: ../mactrack_view_sites.php:252
+msgid "Device Errors"
+msgstr "设备错误"
+
+#: ../mactrack_sites.php:468
+#: ../mactrack_sites.php:515
+#: ../mactrack_view_sites.php:286
+#: ../mactrack_view_sites.php:342
+msgid "No MacTrack Sites"
+msgstr "没有MacTrack网站"
+
+#: ../mactrack_sites.php:485
+#: ../mactrack_view_sites.php:300
+#: ../setup.php:1404
+#: ../mactrack_device_types.php:1015
+msgid "Vendor"
+msgstr "供应商"
+
+#: ../mactrack_sites.php:486
+#: ../mactrack_view_sites.php:301
+#: ../mactrack_devices.php:1022
+#: ../mactrack_view_devices.php:270
+#: ../setup.php:1411
+#: ../mactrack_device_types.php:928
+msgid "Device Type"
+msgstr "设备类型"
+
+#: ../mactrack_sites.php:487
+#: ../mactrack_view_sites.php:302
+msgid "Total Devices"
+msgstr "设备总数"
+
+#: ../mactrack_sites.php:489
+#: ../mactrack_view_sites.php:304
+msgid "Total User Ports"
+msgstr "总用户端口"
+
+#: ../mactrack_sites.php:490
+#: ../mactrack_view_sites.php:305
+msgid "Total Oper Ports"
+msgstr "总操作端口"
+
+#: ../mactrack_sites.php:491
+#: ../mactrack_view_sites.php:306
+msgid "Total Trunks"
+msgstr "总Trunks"
+
+#: ../mactrack_utilities.php:164
+msgid "MacTrack Process Status"
+msgstr "MacTrack进程状态"
+
+#: ../mactrack_utilities.php:184
+#: ../mactrack_utilities.php:195
+msgid "Refresh"
+msgstr "刷新"
+
+#: ../mactrack_utilities.php:233
+msgid "Current Process Status"
+msgstr "当前进程状态"
+
+#: ../mactrack_utilities.php:235
+msgid "The MacTrack Poller is:"
+msgstr "MacTrack轮询器是："
+
+#: ../mactrack_utilities.php:235
+msgid "RUNNING"
+msgstr "运行"
+
+#: ../mactrack_utilities.php:235
+#: ../mactrack_utilities.php:261
+msgid "DISABLED"
+msgstr "禁用"
+
+#: ../mactrack_utilities.php:235
+msgid "IDLE"
+msgstr "空闲"
+
+#: ../mactrack_utilities.php:238
+msgid "Running Processes:"
+msgstr "运行进程："
+
+#: ../mactrack_utilities.php:241
+msgid "Last Time Poller Started:"
+msgstr "最后一次轮询开始："
+
+#: ../mactrack_utilities.php:243
+msgid "Poller Frequency:"
+msgstr "轮询频率："
+
+#: ../mactrack_utilities.php:245
+msgid "Approx. Next Runtime:"
+msgstr "预计，下一次运行时间："
+
+#: ../mactrack_utilities.php:247
+msgid "Approx. Next DB Maintenance:"
+msgstr "预计，下一个DB维护："
+
+#: ../mactrack_utilities.php:249
+msgid "Run Time Details"
+msgstr "运行时间细节"
+
+#: ../mactrack_utilities.php:251
+msgid "Last Poller Runtime:"
+msgstr "最后的轮询运行时："
+
+#: ../mactrack_utilities.php:253
+msgid "Last Poller Maintenance Runtime:"
+msgstr "最后轮询维护运行时间："
+
+#: ../mactrack_utilities.php:255
+msgid "Maximum Concurrent Processes:"
+msgstr "最大并行处理："
+
+#: ../mactrack_utilities.php:255
+msgid "processes"
+msgstr "进程"
+
+#: ../mactrack_utilities.php:257
+msgid "Maximum Per Device Scan Time:"
+msgstr "每个设备的最大扫描时间："
+
+#: ../mactrack_utilities.php:257
+msgid "minutes"
+msgstr "分钟"
+
+#: ../mactrack_utilities.php:259
+msgid "DNS Configuration Information"
+msgstr "DNS配置信息"
+
+#: ../mactrack_utilities.php:261
+msgid "Reverse DNS Resolution is"
+msgstr "反向DNS解析是"
+
+#: ../mactrack_utilities.php:261
+msgid "ENABLED"
+msgstr "启用"
+
+#: ../mactrack_utilities.php:263
+msgid "Primary DNS Server:"
+msgstr "主DNS服务器："
+
+#: ../mactrack_utilities.php:265
+msgid "Secondary DNS Server:"
+msgstr "辅助DNS服务器："
+
+#: ../mactrack_utilities.php:267
+msgid "DNS Resolution Timeout:"
+msgstr "DNS解析超时："
+
+#: ../mactrack_utilities.php:267
+msgid "milliseconds"
+msgstr "毫秒"
+
+#: ../mactrack_utilities.php:271
+msgid "Running Process Summary"
+msgstr "运行过程摘要"
+
+#: ../mactrack_utilities.php:273
+msgid "The DNS Resolver is Running"
+msgstr "DNS解析器正在运行"
+
+#: ../mactrack_utilities.php:273
+msgid "The DNS Resolver is Not Running"
+msgstr "DNS解析器未运行"
+
+#: ../mactrack_utilities.php:275
+#: ../mactrack_devices.php:1020
+#: ../mactrack_devices.php:1158
+#: ../mactrack_view_devices.php:268
+#: ../mactrack_view_devices.php:446
+msgid "Status"
+msgstr "状态"
+
+#: ../mactrack_utilities.php:275
+msgid "Date Started"
+msgstr "开始日期"
+
+#: ../mactrack_utilities.php:309
+msgid "Completed"
+msgstr "已完成"
+
+#: ../mactrack_utilities.php:315
+msgid "Running"
+msgstr "运行"
+
+#: ../mactrack_utilities.php:321
+msgid "Waiting"
+msgstr "等候"
+
+#: ../mactrack_utilities.php:328
+msgid "Other"
+msgstr "其他"
+
+#: ../mactrack_utilities.php:344
+msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgstr "您确定要删除系统中的所有端口到MAC到IP结果吗？"
+
+#: ../mactrack_utilities.php:389
+#: ../mactrack_utilities.php:415
+msgid "Device Tracking Database Results"
+msgstr "设备跟踪数据库结果"
+
+#: ../mactrack_utilities.php:404
+msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
+msgstr "您确定要删除系统中的所有聚合端口到MAC到IP结果吗？"
+
+#: ../mactrack_utilities.php:430
+msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgstr "您确定要删除并重新创建系统中的所有聚合端口到MAC到IP结果吗？"
+
+#: ../mactrack_macwatch.php:31
+#: ../mactrack_devices.php:33
+msgid "Disable"
+msgstr "禁用"
+
+#: ../mactrack_macwatch.php:125
+msgid "You must select at least one watched Mac to delete."
+msgstr "您必须至少选择一个观看的Mac进行删除。"
+
+#: ../mactrack_macwatch.php:133
+msgid "Are you sure you want to delete the following watched Mac's?"
+msgstr "您确定要删除以下观看过的Mac吗？"
+
+#: ../mactrack_macwatch.php:197
+#, php-format
+msgid "Are you sure you want to delete the watched Mac Address %s?"
+msgstr "您确定要删除观看的Mac地址 %s吗？"
+
+#: ../mactrack_macwatch.php:241
+#, php-format
+msgid "MacTrack MacWatch [edit: %s]"
+msgstr "MacTrack MacWatch [编辑：%s]"
+
+#: ../mactrack_macwatch.php:243
+msgid "MacTrack MacWatch [new]"
+msgstr "MacTrack MacWatch [新建]"
+
+#: ../mactrack_macwatch.php:305
+msgid "MacTrack MacWatch Filters"
+msgstr "MacTrack MacWatch过滤器"
+
+#: ../mactrack_macwatch.php:315
+#: ../mactrack_macwatch.php:378
+msgid "Watches"
+msgstr "察看"
+
+#: ../mactrack_macwatch.php:324
+msgid "Watch Name"
+msgstr "观看名称"
+
+#: ../mactrack_macwatch.php:326
+#: ../setup.php:1899
+msgid "Ticket Number"
+msgstr "票号"
+
+#: ../mactrack_macwatch.php:327
+msgid "Watch Description"
+msgstr "观看说明"
+
+#: ../mactrack_macwatch.php:328
+msgid "First Seen"
+msgstr "首先看到"
+
+#: ../mactrack_macwatch.php:329
+msgid "Last Seen"
+msgstr "最后一次露面"
+
+#: ../mactrack_macwatch.php:347
+msgid "No MacTrack Watched Macs"
+msgstr "没有MacTrack观看Macs"
+
+#: ../mactrack_actions.php:224
+msgid "Import into MacTrack"
+msgstr "导入到MacTrack"
+
+#: ../mactrack_actions.php:239
+msgid "Are you sure you want to import the following hosts to MacTrack?  Please specify additional MacTrack device options as given below."
+msgstr "您确定要将以下主机导入MacTrack吗？ 请指定其他MacTrack设备选项，如下所示。"
+
+#: ../mactrack_actions.php:263
+msgid "We will use these devices SNMP options for the MacTrack device as well."
+msgstr "我们也将为MacTrack设备使用这些设备的SNMP选项。"
+
+#: ../mactrack_view_interfaces.php:31
+msgid "Device Tracking - Network Interfaces View"
+msgstr "设备跟踪 - 网络接口视图"
+
+#: ../mactrack_view_interfaces.php:316
+msgid "No MacTrack Interfaces Found"
+msgstr "找不到MacTrack界面"
+
+#: ../mactrack_view_interfaces.php:409
+msgid "Filters"
+msgstr "过滤器"
+
+#: ../mactrack_view_interfaces.php:413
+msgid "All Interfaces"
+msgstr "所有接口"
+
+#: ../mactrack_view_interfaces.php:414
+msgid "All Non-Ignored Interfaces"
+msgstr "所有非忽略的接口"
+
+#: ../mactrack_view_interfaces.php:415
+msgid "All Ignored Interfaces"
+msgstr "所有被忽略的接口"
+
+#: ../mactrack_view_interfaces.php:416
+#, php-format
+msgid "High In/Out Utilization > %d &#37;"
+msgstr "高输入/输出利用率 > %d &#37;"
+
+#: ../mactrack_view_interfaces.php:417
+#, php-format
+msgid "High In Utilization > %d &#37;"
+msgstr "输入利用率高 > %d &#37;"
+
+#: ../mactrack_view_interfaces.php:418
+#, php-format
+msgid "High Out Utilization > %d &#37;"
+msgstr "输出高利用率 > %d &#37;"
+
+#: ../mactrack_view_interfaces.php:419
+msgid "With Issues"
+msgstr "有问题"
+
+#: ../mactrack_view_interfaces.php:420
+msgid "Up Interfaces"
+msgstr "启用接口"
+
+#: ../mactrack_view_interfaces.php:421
+msgid "Up Interfaces No Alias"
+msgstr "启用接口没有别名"
+
+#: ../mactrack_view_interfaces.php:422
+msgid "Errors Accumulating"
+msgstr "错误积累"
+
+#: ../mactrack_view_interfaces.php:423
+msgid "Discards Accumulating"
+msgstr "丢弃积累"
+
+#: ../mactrack_view_interfaces.php:424
+msgid "Changed in Last Day"
+msgstr "在最后一天改变"
+
+#: ../mactrack_view_interfaces.php:427
+msgid "Bandwidth"
+msgstr "带宽"
+
+#: ../mactrack_view_interfaces.php:453
+#: ../mactrack_devices.php:1102
+#: ../mactrack_view_devices.php:393
+#: ../mactrack_device_types.php:1032
+msgid "Type"
+msgstr "类型"
+
+#: ../mactrack_view_interfaces.php:534
+msgid "Show Totals"
+msgstr "显示总计"
+
+#: ../mactrack_view_sites.php:31
+msgid "Device Tracking - Site Report View"
+msgstr "设备跟踪 - 站点报告视图"
+
+#: ../mactrack_view_sites.php:263
+#: ../mactrack_view_sites.php:319
+msgid "Edit Site"
+msgstr "编辑网站"
+
+#: ../mactrack_view_sites.php:264
+msgid "Rescan Site"
+msgstr "重新扫描网站"
+
+#: ../mactrack_view_sites.php:267
+#: ../mactrack_view_sites.php:322
+msgid "View Devices"
+msgstr "查看设备"
+
+#: ../mactrack_view_sites.php:268
+#: ../mactrack_view_sites.php:323
+msgid "View IP Ranges"
+msgstr "查看IP范围"
+
+#: ../mactrack_view_sites.php:269
+msgid "View IP Addresses"
+msgstr "查看IP地址"
+
+#: ../mactrack_view_sites.php:270
+#: ../mactrack_view_sites.php:324
+#: ../mactrack_view_devices.php:315
+msgid "View MAC Addresses"
+msgstr "查看MAC地址"
+
+#: ../mactrack_devices.php:32
+msgid "Enable"
+msgstr "启用"
+
+#: ../mactrack_devices.php:34
+msgid "Change SNMP Options"
+msgstr "更改SNMP选项"
+
+#: ../mactrack_devices.php:35
+msgid "Change Device Port Values"
+msgstr "更改设备端口值"
+
+#: ../mactrack_devices.php:36
+msgid "Connect to Cacti Host via Hostname"
+msgstr "通过主机名连接到Cacti主机"
+
+#: ../mactrack_devices.php:37
+msgid "Copy SNMP Settings from Cacti Host"
+msgstr "从Cacti主机复制SNMP设置"
+
+#: ../mactrack_devices.php:237
+msgid "You must select at least one device."
+msgstr "您必须至少选择一个设备。"
+
+#: ../mactrack_devices.php:245
+msgid "To enable the following devices, press the 'Yes' button below."
+msgstr "要启用以下设备，请按下面的“是”按钮。"
+
+#: ../mactrack_devices.php:252
+msgid "To disable the following devices, press the 'Yes' button below."
+msgstr "要禁用以下设备，请按下面的“是”按钮。"
+
+#: ../mactrack_devices.php:259
+msgid "To change SNMP parameters for the following devices, check the box next to the fields you want to update, fill in the new value, and click Save."
+msgstr "要更改以下设备的SNMP参数，请选中要更新的字段旁边的框，填写新值，然后单击保存。"
+
+#: ../mactrack_devices.php:289
+msgid "To change upper or lower port parameters for the following devices, check the box next to the fields you want to update, fill in the new value, and click Save."
+msgstr "要更改以下设备的上限或下限端口参数，请选中要更新的字段旁边的复选框，填写新值，然后单击保存。"
+
+#: ../mactrack_devices.php:319
+msgid "To connect the following devices to their respective Cacti Device, press the 'Yes' button below.  The relation will be built on equal hostnames. Description will be updated as well."
+msgstr "要将以下设备连接到各自的Cacti设备，请按下面的“是”按钮。 关系将建立在相同的主机名上。 说明也会更新。"
+
+#: ../mactrack_devices.php:326
+msgid "To copy SNMP Settings from connected Cacti Device to MacTrack Device, press the 'Yes' button below.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
+msgstr "要将SNMP设置从连接的Cacti设备复制到MacTrack设备，请按下面的“是”按钮。 所有未连接的设备将被无提示地跳过。 SNMP重试将取自Ping重试。"
+
+#: ../mactrack_devices.php:333
+msgid "Are you sure you want to delete the following devices?"
+msgstr "您确定要删除以下设备吗？"
+
+#: ../mactrack_devices.php:834
+#, php-format
+msgid "Are you sure you want to delete the host %s"
+msgstr "你确定要删除主机%s吗？"
+
+#: ../mactrack_devices.php:853
+#, php-format
+msgid "MacTrack Devices [edit: %s]"
+msgstr "MacTrack设备[编辑：%s]"
+
+#: ../mactrack_devices.php:856
+msgid "MacTrack Devices [new]"
+msgstr "MacTrack设备[新建]"
+
+#: ../mactrack_devices.php:1018
+#: ../mactrack_view_devices.php:266
+#: ../setup.php:1634
+msgid "Device Name"
+msgstr "设备名称"
+
+#: ../mactrack_devices.php:1021
+#: ../mactrack_view_devices.php:269
+#: ../setup.php:1641
+msgid "Hostname"
+msgstr "主机名"
+
+#: ../mactrack_devices.php:1023
+msgid "Total IPs"
+msgstr "总IP"
+
+#: ../mactrack_devices.php:1026
+#: ../mactrack_view_devices.php:274
+msgid "Trunk Ports"
+msgstr "Trunk 端口"
+
+#: ../mactrack_devices.php:1027
+#: ../mactrack_view_devices.php:275
+msgid "Active Macs"
+msgstr "活跃的Mac"
+
+#: ../mactrack_devices.php:1028
+#: ../mactrack_view_devices.php:277
+msgid "Last Duration"
+msgstr "持续时间"
+
+#: ../mactrack_devices.php:1038
+#: ../mactrack_view_devices.php:336
+msgid "No MacTrack Devices"
+msgstr "没有MacTrack设备"
+
+#: ../mactrack_devices.php:1074
+#: ../mactrack_view_devices.php:368
+#: ../setup.php:1312
+#: ../setup.php:1652
+#: ../setup.php:1668
+#: ../setup.php:1716
+#: ../setup.php:1745
+msgid "None"
+msgstr "没有"
+
+#: ../mactrack_devices.php:1092
+#: ../mactrack_device_types.php:1002
+msgid "Import"
+msgstr "导入"
+
+#: ../mactrack_devices.php:1107
+#: ../setup.php:1289
+#: ../mactrack_device_types.php:536
+#: ../mactrack_device_types.php:1037
+msgid "Switch/Hub"
+msgstr "交换机/集线器"
+
+#: ../mactrack_devices.php:1108
+#: ../mactrack_view_devices.php:399
+#: ../setup.php:1290
+#: ../mactrack_device_types.php:537
+#: ../mactrack_device_types.php:1038
+msgid "Switch/Router"
+msgstr "交换机/路由器"
+
+#: ../mactrack_devices.php:1109
+#: ../mactrack_view_devices.php:400
+#: ../setup.php:1291
+#: ../mactrack_device_types.php:538
+#: ../mactrack_device_types.php:1039
+msgid "Router"
+msgstr "路由器"
+
+#: ../mactrack_devices.php:1163
+#: ../mactrack_view_devices.php:451
+msgid "Up"
+msgstr "启用"
+
+#: ../mactrack_devices.php:1164
+#: ../mactrack_view_devices.php:452
+#: ../setup.php:1331
+#: ../setup.php:1358
+msgid "Disabled"
+msgstr "禁用"
+
+#: ../mactrack_devices.php:1165
+#: ../mactrack_view_devices.php:453
+msgid "Down"
+msgstr "离线"
+
+#: ../mactrack_devices.php:1167
+#: ../mactrack_view_devices.php:455
+msgid "Error"
+msgstr "错误"
+
+#: ../mactrack_devices.php:1168
+#: ../mactrack_view_devices.php:456
+msgid "No Cacti Link"
+msgstr "没有 Cacti链接"
+
+#: ../mactrack_view_devices.php:31
+msgid "Device Tracking - Device Report View"
+msgstr "设备跟踪 - 设备报告视图"
+
+#: ../mactrack_view_devices.php:159
+msgid "Unknown Device Type"
+msgstr "未知的设备类型"
+
+#: ../mactrack_view_devices.php:276
+msgid "Total VLAN's"
+msgstr "总VLAN"
+
+#: ../mactrack_view_devices.php:308
+msgid "Edit Device"
+msgstr "编辑设备"
+
+#: ../mactrack_view_devices.php:311
+msgid "View Graphs"
+msgstr "查看图表"
+
+#: ../mactrack_view_devices.php:313
+msgid "Device Not Mapped to Cacti Device"
+msgstr "未映射到Cacti设备的设备"
+
+#: ../mactrack_view_devices.php:398
+msgid "Hub/Switch"
+msgstr "集线器/交换机"
+
+#: ../mactrack_snmp.php:31
+#: ../mactrack_device_types.php:62
+msgid "Duplicate"
+msgstr "重复"
+
+#: ../mactrack_snmp.php:205
+msgid "You must select at least one SNMP Option."
+msgstr "您必须至少选择一个SNMP选项。"
+
+#: ../mactrack_snmp.php:213
+msgid "Are you sure you want to delete the following SNMP Options?"
+msgstr "您确定要删除以下SNMP选项吗？"
+
+#: ../mactrack_snmp.php:220
+msgid "When you click save, the following SNMP Options will be duplicated. You can optionally change the title format for the new SNMP Options."
+msgstr "当您单击保存时，以下SNMP选项将被复制。 您可以选择更改新的SNMP选项的标题格式。"
+
+#: ../mactrack_snmp.php:222
+msgid "Name Format:"
+msgstr "名称格式："
+
+#: ../mactrack_snmp.php:286
+#, php-format
+msgid "SNMP Options [edit %s]"
+msgstr "SNMP选项[编辑 %s]"
+
+#: ../mactrack_snmp.php:288
+msgid "SNMP Options [new]"
+msgstr "SNMP选项[新建]"
+
+#: ../mactrack_snmp.php:335
+#, php-format
+msgid "Are you sure you want to delete the SNMP Option Set(s) %s?"
+msgstr "您确定要删除SNMP选项集 %s吗？"
+
+#: ../mactrack_snmp.php:369
+#, php-format
+msgid "SNMP Option Set [edit: %s]"
+msgstr "SNMP选项集[编辑：%s]"
+
+#: ../mactrack_snmp.php:371
+msgid "SNMP Option Set [new]"
+msgstr "SNMP选项集[新建]"
+
+#: ../mactrack_snmp.php:392
+#: ../mactrack_snmp.php:484
+#: ../setup.php:1218
+msgid "MacTrack SNMP Options"
+msgstr "MacTrack SNMP选项"
+
+#: ../mactrack_snmp.php:395
+msgid "Item"
+msgstr "项目"
+
+#: ../mactrack_snmp.php:396
+#: ../setup.php:1149
+msgid "Version"
+msgstr "版本"
+
+#: ../mactrack_snmp.php:397
+#: ../setup.php:1156
+msgid "Community"
+msgstr "团体字体串"
+
+#: ../mactrack_snmp.php:398
+#: ../setup.php:1171
+msgid "Port"
+msgstr "端口"
+
+#: ../mactrack_snmp.php:399
+#: ../setup.php:1179
+msgid "Timeout"
+msgstr "超时"
+
+#: ../mactrack_snmp.php:400
+#: ../setup.php:1187
+msgid "Retries"
+msgstr "重试"
+
+#: ../mactrack_snmp.php:401
+msgid "Max OIDs"
+msgstr "最大OID"
+
+#: ../mactrack_snmp.php:402
+msgid "Username"
+msgstr "用户名"
+
+#: ../mactrack_snmp.php:403
+msgid "Auth Proto"
+msgstr "Auth Proto"
+
+#: ../mactrack_snmp.php:404
+msgid "Priv Proto"
+msgstr "Priv Proto"
+
+#: ../mactrack_snmp.php:433
+msgid "No SNMP Items"
+msgstr "没有SNMP项目"
+
+#: ../mactrack_snmp.php:505
+msgid "SNMP Settings"
+msgstr "SNMP设置"
+
+#: ../mactrack_snmp.php:512
+msgid "Title of SNMP Option Set"
+msgstr "SNMP选项集的标题"
+
+#: ../mactrack_snmp.php:525
+msgid "No SNMP Option Sets"
+msgstr "没有SNMP选项集"
+
+#: ../mactrack_snmp.php:555
+msgid "Options"
+msgstr "选项"
+
+#: ../setup.php:934
+#: ../setup.php:1370
+#: ../setup.php:1371
+#: ../setup.php:1372
+#: ../setup.php:1373
+#: ../setup.php:1374
+#: ../setup.php:1375
+msgid "Device Tracking"
+msgstr "设备跟踪"
+
+#: ../setup.php:938
+msgid "General Settings"
+msgstr "常规设置"
+
+#: ../setup.php:942
+msgid "Scanning Frequency"
+msgstr "扫描频率"
+
+#: ../setup.php:943
+msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
+msgstr "选择何时从您的网络设备收集MAC和IP地址以及接口统计信息。"
+
+#: ../setup.php:949
+msgid "Concurrent Processes"
+msgstr "并发进程"
+
+#: ../setup.php:950
+msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
+msgstr "指定在轮询所有设备之前同时轮询多少个设备。"
+
+#: ../setup.php:957
+msgid "Scanner Max Runtime"
+msgstr "扫描仪最大运行时间"
+
+#: ../setup.php:958
+msgid "Specify the number of minutes a device scanning function will allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
+msgstr "指定设备扫描功能允许在系统假设完成之前运行的分钟数。 此设置将纠正已被删除的扫描作业。"
+
+#: ../setup.php:965
+msgid "Start Time for Data Collection"
+msgstr "数据收集的开始时间"
+
+#: ../setup.php:966
+msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
+msgstr "您什么时候想要收集第一批数据？ 所有未来的数据收集时间将基于这个开始时间。 一个很好的例子是上午12:00。"
+
+#: ../setup.php:973
+msgid "Database Maintenance Time"
+msgstr "数据库维护时间"
+
+#: ../setup.php:974
+msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
+msgstr "什么时候应该从数据库中删除旧的数据库记录。 请注意，在进行此操作时，不允许访问端口数据库。"
+
+#: ../setup.php:981
+msgid "Data Retention"
+msgstr "数据保留"
+
+#: ../setup.php:982
+msgid "How long should port MAC details be retained in the database."
+msgstr "端口MAC细节应保留多长时间在数据库中。"
+
+#: ../setup.php:988
+msgid "Switch Level Ignore Ports Delimiter"
+msgstr "切换级别忽略端口分隔符"
+
+#: ../setup.php:989
+msgid "What delimiter should MacTrack use when parsing the Ignore Ports string for each switch."
+msgstr "解析每个交换机的Ignore Ports字符串时，MacTrack应使用什么分隔符。"
+
+#: ../setup.php:992
+msgid "Auto Detect"
+msgstr "自动侦测"
+
+#: ../setup.php:992
+#: ../setup.php:999
+msgid "Colon [:]"
+msgstr "冒号[:]"
+
+#: ../setup.php:992
+msgid "Pipe [|]"
+msgstr "管道[|]"
+
+#: ../setup.php:992
+msgid "Space [ ]"
+msgstr "空格 [ ]"
+
+#: ../setup.php:995
+msgid "Mac Address Delimiter"
+msgstr "Mac地址分隔符"
+
+#: ../setup.php:996
+msgid "How should each octet of the MAC address be delimited."
+msgstr "每个MAC地址的八位字节应该如何分隔。"
+
+#: ../setup.php:999
+msgid "Dash [-]"
+msgstr "短横 [-]"
+
+#: ../setup.php:1003
+#: ../setup.php:1695
+msgid "Ports to Ignore"
+msgstr "端口忽略"
+
+#: ../setup.php:1004
+msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
+msgstr "提供接口列表中要忽略的ifNames或ifDescriptions的正则表达式。 例如，（Vlan | Loopback | Null）。"
+
+#: ../setup.php:1011
+msgid "Bandwidth Usage Threshold"
+msgstr "带宽使用阈值"
+
+#: ../setup.php:1012
+msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
+msgstr "在查看网络接口统计信息时，默认情况下要查看哪个带宽阈值。"
+
+#: ../setup.php:1017
+#: ../setup.php:1018
+#: ../setup.php:1019
+#: ../setup.php:1020
+#: ../setup.php:1021
+#: ../setup.php:1022
+#: ../setup.php:1023
+#: ../setup.php:1024
+#: ../setup.php:1025
+#, php-format
+msgid "%d Percent"
+msgstr "百分之%d "
+
+#: ../setup.php:1029
+msgid "DNS Settings"
+msgstr "DNS设置"
+
+#: ../setup.php:1033
+msgid "Perform Reverse DNS Name Resolution"
+msgstr "执行反向DNS名称解析"
+
+#: ../setup.php:1034
+msgid "Should MacTrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
+msgstr "MacTrack应该执行与端口相关的IP地址的反向DNS查找。 小心：如果DNS设置不正确，这会显着减慢扫描时间。"
+
+#: ../setup.php:1039
+msgid "Primary DNS IP Address"
+msgstr "主DNS的IP地址"
+
+#: ../setup.php:1040
+msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
+msgstr "输入用于反向查找的主要DNS IP地址。"
+
+#: ../setup.php:1047
+msgid "Secondary DNS IP Address"
+msgstr "备用DNS IP地址"
+
+#: ../setup.php:1048
+msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
+msgstr "输入辅助DNS IP地址以用于反向查找。"
+
+#: ../setup.php:1055
+msgid "DNS Timeout"
+msgstr "DNS超时"
+
+#: ../setup.php:1056
+msgid "Please enter the DNS timeout in milliseconds.  MacTrack uses a PHP based DNS resolver."
+msgstr "请输入以毫秒为单位的DNS超时值。 MacTrack使用基于PHP的DNS解析器。"
+
+#: ../setup.php:1063
+msgid "DNS Prime Interval"
+msgstr "DNS Prime间隔"
+
+#: ../setup.php:1064
+msgid "How often, in seconds do MacTrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
+msgstr "几秒钟内，MacTrack扫描IP需要被解析为MAC地址以进行DNS解析。 当你有几千个设备时使用更大的数字将会提高性能。"
+
+#: ../setup.php:1071
+msgid "Notification Settings"
+msgstr "通知设置"
+
+#: ../setup.php:1075
+msgid "Source Address"
+msgstr "源地址"
+
+#: ../setup.php:1076
+msgid "The source Email address for MacTrack Emails."
+msgstr "MacTrack电子邮件的源电子邮件地址。"
+
+#: ../setup.php:1083
+msgid "Source Email Name"
+msgstr "源邮件名称"
+
+#: ../setup.php:1084
+msgid "The Source Email name for MacTrack Emails."
+msgstr "MacTrack电子邮件的源电子邮件名称。"
+
+#: ../setup.php:1091
+#: ../setup.php:1887
+msgid "MacWatch Default Body"
+msgstr "MacWatch默认主体"
+
+#: ../setup.php:1092
+#: ../setup.php:1888
+msgid "The Email body preset for MacTrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+msgstr "电子邮件正文为MacTrack MacWatch电子邮件预设。 正文可以包含任何有效的html标签。 它还支持发送电子邮件时将要处理的替换标签。 有效标签包括<IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+
+#: ../setup.php:1096
+#: ../setup.php:1892
+msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
+msgstr "MAC地址 <MAC>在IP地址 <IP> 处找到，用于票证号码： <TICKET>.<br>设备位于<br>站点： <SITENAME>,设备 <DEVICENAME>, IP <DEVICEIP>, 端口 <PORTNUMBER>,和端口名称 <PORTNAME>"
+
+#: ../setup.php:1103
+msgid "MacAuth Report Email Addresses"
+msgstr "MacAuth报告电子邮件地址"
+
+#: ../setup.php:1104
+msgid "A comma delimited list of users to recieve the MacAuth Email notifications."
+msgstr "以逗号分隔的用户列表，以接收MacAuth电子邮件通知。"
+
+#: ../setup.php:1113
+msgid "MacAuth Report Frequency"
+msgstr "MacAuth报告频率"
+
+#: ../setup.php:1114
+msgid "How often will the MacAuth Reports be Emailed."
+msgstr "MacAuth报告多长时间通过电子邮件发送。"
+
+#: ../setup.php:1120
+msgid "MacTrack ArpWatch Settings"
+msgstr "MacTrack ArpWatch设置"
+
+#: ../setup.php:1124
+msgid "Enable ArpWatch"
+msgstr "启用ArpWatch"
+
+#: ../setup.php:1125
+msgid "Should MacTrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
+msgstr "MacTrack是否也使用ArpWatch数据来补充Mac到IP / DNS的解析？"
+
+#: ../setup.php:1130
+msgid "ArpWatch Database Path"
+msgstr "ArpWatch数据库路径"
+
+#: ../setup.php:1131
+msgid "The location of the ArpWatch Database file on the Cacti server."
+msgstr "ArpWatch数据库文件在Cacti服务器上的位置。"
+
+#: ../setup.php:1138
+msgid "SNMP Presets"
+msgstr "SNMP预设"
+
+#: ../setup.php:1142
+msgid "Update Policy for SNMP Options"
+msgstr "SNMP选项的更新策略"
+
+#: ../setup.php:1143
+msgid "Policy for synchronization of SNMP Options between Cacti devices and MacTrack Devices."
+msgstr "用于在Cacti设备和MacTrack设备之间同步SNMP选项的策略。"
+
+#: ../setup.php:1150
+msgid "Default SNMP version for all new hosts."
+msgstr "所有新主机的默认SNMP版本。"
+
+#: ../setup.php:1157
+msgid "Default SNMP read community for all new hosts."
+msgstr "默认SNMP读取所有新主机的社区。"
+
+#: ../setup.php:1164
+msgid "Communities"
+msgstr "团体字符串"
+
+#: ../setup.php:1165
+msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
+msgstr "填写可用的SNMP读取字符串列表以测试此设备。 每个读取的字符串必须用冒号'：'分隔。 如果主读取字符串无效，这些读取的字符串将依次测试。"
+
+#: ../setup.php:1172
+#: ../setup.php:1530
+msgid "The UDP/TCP Port to poll the SNMP agent on."
+msgstr "用于轮询SNMP代理的UDP / TCP端口。"
+
+#: ../setup.php:1180
+msgid "Default SNMP timeout in milli-seconds."
+msgstr "以毫秒为单位的默认SNMP超时。"
+
+#: ../setup.php:1188
+msgid "The number times the SNMP poller will attempt to reach the host before failing."
+msgstr "在发生故障前，SNMP轮询器尝试访问主机的次数。"
+
+#: ../setup.php:1201
+msgid "snmpbulkwalk Binary Path"
+msgstr "snmpbulkwalk二进制路径"
+
+#: ../setup.php:1202
+msgid "The path to your snmpbulkwalk binary."
+msgstr "snmpbulkwalk二进制文件的路径。"
+
+#: ../setup.php:1214
+msgid "MacTrack Devices"
+msgstr "MacTrack设备"
+
+#: ../setup.php:1215
+#: ../setup.php:1220
+#: ../setup.php:1221
+#: ../setup.php:1223
+#: ../setup.php:1227
+#: ../setup.php:1230
+#: ../setup.php:1233
+msgid "(Edit)"
+msgstr "（编辑）"
+
+#: ../setup.php:1216
+#: ../setup.php:1224
+msgid "(Import)"
+msgstr "（引用）"
+
+#: ../setup.php:1222
+msgid "MacTrack Device Types"
+msgstr "MacTrack设备类型"
+
+#: ../setup.php:1226
+msgid "MacTrack Sites"
+msgstr "MacTrack网站"
+
+#: ../setup.php:1229
+msgid "Mac Address Tracking Utility"
+msgstr "Mac地址跟踪工具"
+
+#: ../setup.php:1232
+msgid "Mac Address Authorization Utility"
+msgstr "Mac地址授权实用程序"
+
+#: ../setup.php:1235
+msgid "MacTrack Vendor Macs"
+msgstr "MacTrack厂商Macs"
+
+#: ../setup.php:1236
+msgid "MacTrack View Macs"
+msgstr "MacTrack视图Macs"
+
+#: ../setup.php:1238
+msgid "MacTrack IP Address Viewer"
+msgstr "MacTrack IP地址查看器"
+
+#: ../setup.php:1239
+msgid "MacTrack View Interfaces"
+msgstr "MacTrack视图界面"
+
+#: ../setup.php:1240
+msgid "MacTrack View Sites"
+msgstr "MacTrack查看网站"
+
+#: ../setup.php:1241
+msgid "MacTrack View IP Ranges"
+msgstr "MacTrack查看IP范围"
+
+#: ../setup.php:1242
+msgid "MacTrack View Devices"
+msgstr "MacTrack视图设备"
+
+#: ../setup.php:1243
+msgid "Device Tracking Utilities"
+msgstr "设备跟踪实用程序"
+
+#: ../setup.php:1244
+msgid "Perform Database Maintenance"
+msgstr "执行数据库维护"
+
+#: ../setup.php:1245
+msgid "Refresh Scanning Functions"
+msgstr "刷新扫描功能"
+
+#: ../setup.php:1246
+msgid "Truncate Port Results Table"
+msgstr "截断端口结果表"
+
+#: ../setup.php:1247
+msgid "Truncate Aggregated Port Results Table"
+msgstr "截断聚合端口结果表"
+
+#: ../setup.php:1248
+msgid "Truncate and Re-create Aggregated Port Results Table"
+msgstr "截断并重新创建聚合端口结果表"
+
+#: ../setup.php:1249
+msgid "View MacTrack Process Status"
+msgstr "查看MacTrack进程状态"
+
+#: ../setup.php:1250
+msgid "Refresh/Update Vendor MAC Database from IEEE"
+msgstr "刷新/更新来自IEEE的供应商MAC数据库"
+
+#: ../setup.php:1251
+#: ../setup.php:1252
+msgid "MacTrack Graph Viewer"
+msgstr "MacTrack图形查看器"
+
+#: ../setup.php:1261
+#: ../setup.php:1263
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: ../setup.php:1280
+#: ../setup.php:1281
+#: ../setup.php:1282
+#: ../setup.php:1283
+#, php-format
+msgid "%d Seconds"
+msgstr "%d 秒"
+
+#: ../setup.php:1284
+#, php-format
+msgid "%d Minute"
+msgstr "%d 分"
+
+#: ../setup.php:1296
+msgid "Matches"
+msgstr "匹配"
+
+#: ../setup.php:1297
+msgid "Contains"
+msgstr "包含"
+
+#: ../setup.php:1298
+msgid "Begins With"
+msgstr "开始于"
+
+#: ../setup.php:1299
+msgid "Does Not Contain"
+msgstr "不含"
+
+#: ../setup.php:1300
+msgid "Does Not Begin With"
+msgstr "不开始"
+
+#: ../setup.php:1301
+msgid "Is Null"
+msgstr "空的"
+
+#: ../setup.php:1302
+msgid "Is Not Null"
+msgstr "非空"
+
+#: ../setup.php:1307
+msgid "Half"
+msgstr "一半"
+
+#: ../setup.php:1308
+msgid "Full"
+msgstr "满的"
+
+#: ../setup.php:1313
+msgid "Sync Cacti Device to MacTrack Device"
+msgstr "将Cacti设备同步到MacTrack设备"
+
+#: ../setup.php:1314
+msgid "Sync MacTrack Device to Cacti Device"
+msgstr "将MacTrack设备同步到Cacti设备"
+
+#: ../setup.php:1332
+#: ../setup.php:1333
+#: ../setup.php:1334
+#: ../setup.php:1335
+#, php-format
+msgid "Every %d Minutes"
+msgstr "每%d分钟"
+
+#: ../setup.php:1336
+#, php-format
+msgid "Every %d Hour"
+msgstr "每%d小时"
+
+#: ../setup.php:1337
+#: ../setup.php:1338
+#: ../setup.php:1339
+#: ../setup.php:1340
+#: ../setup.php:1360
+#: ../setup.php:1915
+#: ../setup.php:1916
+#, php-format
+msgid "Every %d Hours"
+msgstr "每%d小时"
+
+#: ../setup.php:1341
+#: ../setup.php:1361
+#: ../setup.php:1917
+msgid "Every Day"
+msgstr "每天"
+
+#: ../setup.php:1350
+#, php-format
+msgid "%d Month"
+msgstr "%d 月"
+
+#: ../setup.php:1351
+#: ../setup.php:1352
+#: ../setup.php:1353
+#, php-format
+msgid "%d Months"
+msgstr "%d 月"
+
+#: ../setup.php:1354
+#, php-format
+msgid "%d Year"
+msgstr "%d 年"
+
+#: ../setup.php:1359
+msgid "On Scan Completion"
+msgstr "扫描完成时"
+
+#: ../setup.php:1362
+#, php-format
+msgid "Every %d Days"
+msgstr "每%d天"
+
+#: ../setup.php:1363
+msgid "Every Week"
+msgstr "每周"
+
+#: ../setup.php:1369
+msgid "Management"
+msgstr "管理"
+
+#: ../setup.php:1372
+#: ../setup.php:1709
+#: ../setup.php:1713
+msgid "SNMP Options"
+msgstr "SNMP选项"
+
+#: ../setup.php:1373
+#: ../mactrack_device_types.php:919
+#: ../mactrack_device_types.php:978
+msgid "Device Types"
+msgstr "设备类型"
+
+#: ../setup.php:1374
+#: ../mactrack_vendormacs.php:148
+msgid "Vendor Macs"
+msgstr "供应商Macs"
+
+#: ../setup.php:1375
+msgid "Tracking Utilities"
+msgstr "跟踪实用程序"
+
+#: ../setup.php:1376
+#: ../setup.php:1377
+msgid "Tracking Tools"
+msgstr "跟踪工具"
+
+#: ../setup.php:1376
+msgid "Mac Watch"
+msgstr "Mac观察"
+
+#: ../setup.php:1377
+msgid "Mac Authorizations"
+msgstr "Mac授权"
+
+#: ../setup.php:1393
+msgid "Device Scanning Function Options"
+msgstr "设备扫描功能选项"
+
+#: ../setup.php:1397
+msgid "Description"
+msgstr "Description"
+
+#: ../setup.php:1398
+msgid "Give this device type a meaningful description."
+msgstr "给这个设备类型一个有意义的描述。"
+
+#: ../setup.php:1405
+msgid "Fill in the name for the vendor of this device type."
+msgstr "填写此设备类型供应商的名称。"
+
+#: ../setup.php:1412
+msgid "Choose the type of device."
+msgstr "选择设备的类型。"
+
+#: ../setup.php:1419
+msgid "System Description Match"
+msgstr "系统描述匹配"
+
+#: ../setup.php:1420
+#: ../setup.php:1427
+#, php-format
+msgid "Provide key information to help MacTrack detect the type of device.  The wildcard character is the '%' sign."
+msgstr "提供关键信息以帮助MacTrack检测设备的类型。 通配符是'%'符号。"
+
+#: ../setup.php:1426
+msgid "Vendor SNMP Object ID Match"
+msgstr "供应商SNMP对象ID匹配"
+
+#: ../setup.php:1433
+msgid "MAC Address Scanning Function"
+msgstr "MAC地址扫描功能"
+
+#: ../setup.php:1434
+msgid "The MacTrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
+msgstr "MacTrack扫描功能可以调用以获取和存储端口详细信息。 函数名称是所有必需的。 假定以下四个参数，并将始终追加： 'my_function($site, &$device, $lowport, $highport)'. 纯路由器不需要这个功能。"
+
+#: ../setup.php:1441
+msgid "IP Address Scanning Function"
+msgstr "IP地址扫描功能"
+
+#: ../setup.php:1442
+msgid "The MacTrack scanning function specific to Layer3 devices that track IP Addresses."
+msgstr "跟踪IP地址的Layer3设备专用的MacTrack扫描功能。"
+
+#: ../setup.php:1449
+msgid "Serial Number Base OID"
+msgstr "序列号基本OID"
+
+#: ../setup.php:1450
+msgid "The SNMP OID used to obtain this device types serial number to be stored in the MacTrack Asset Information table."
+msgstr "用于获取此设备的SNMP OID键入要存储在MacTrack资产信息表中的序列号。"
+
+#: ../setup.php:1457
+msgid "Serial Number Collection Method"
+msgstr "序列号收集方法"
+
+#: ../setup.php:1458
+msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
+msgstr "如何收集此OID的序列号。 如果'SNMP Walk'，我们假设有多个序列号。 如果'Get'，它将只有一个.."
+
+#: ../setup.php:1461
+msgid "SNMP Get"
+msgstr "SNMP获取"
+
+#: ../setup.php:1461
+msgid "SNMP Walk"
+msgstr "SNMP Walk"
+
+#: ../setup.php:1465
+msgid "Low User Port Number"
+msgstr "低用户端口号"
+
+#: ../setup.php:1466
+#: ../setup.php:1475
+msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
+msgstr "在此交换机上提供低用户端口号。 保留0以允许系统计算它。"
+
+#: ../setup.php:1474
+msgid "High User Port Number"
+msgstr "高用户端口号"
+
+#: ../setup.php:1499
+msgid "Name"
+msgstr "名称"
+
+#: ../setup.php:1500
+msgid "Fill in the name of this SNMP option set."
+msgstr "填写此SNMP选项集的名称。"
+
+#: ../setup.php:1512
+msgid "SNMP Version"
+msgstr "SNMP版本"
+
+#: ../setup.php:1513
+msgid "Choose the SNMP version for this host."
+msgstr "选择该主机的SNMP版本。"
+
+#: ../setup.php:1520
+msgid "SNMP Community String"
+msgstr "SNMP团体字符串"
+
+#: ../setup.php:1521
+msgid "Fill in the SNMP read community for this device."
+msgstr "填写此设备的SNMP读取社区。"
+
+#: ../setup.php:1529
+msgid "SNMP Port"
+msgstr "SNMP端口"
+
+#: ../setup.php:1538
+msgid "SNMP Timeout"
+msgstr "SNMP超时"
+
+#: ../setup.php:1539
+msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
+msgstr "最大毫秒数Cacti将等待SNMP响应（不支持php-snmp支持）。"
+
+#: ../setup.php:1547
+msgid "SNMP Retries"
+msgstr "SNMP重试"
+
+#: ../setup.php:1548
+msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
+msgstr "放弃之前通过SNMP读取字符串到达设备的最大尝试次数。"
+
+#: ../setup.php:1556
+msgid "Maximum OID's Per Get Request"
+msgstr "每个获取请求的最大OID"
+
+#: ../setup.php:1557
+msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
+msgstr "指定可以在单个SNMP Get请求中获取的OID的数量。"
+
+#: ../setup.php:1565
+msgid "SNMP Username (v3)"
+msgstr "SNMP用户名（v3）"
+
+#: ../setup.php:1566
+msgid "SNMP v3 username for this device."
+msgstr "此设备的SNMP v3用户名。"
+
+#: ../setup.php:1574
+msgid "SNMP Password (v3)"
+msgstr "SNMP密码（v3）"
+
+#: ../setup.php:1575
+msgid "SNMP v3 password for this device."
+msgstr "此设备的SNMP v3密码。"
+
+#: ../setup.php:1583
+msgid "SNMP Auth Protocol (v3)"
+msgstr "SNMP身份验证协议（v3）"
+
+#: ../setup.php:1584
+msgid "Choose the SNMPv3 Authorization Protocol."
+msgstr "选择SNMPv3授权协议。"
+
+#: ../setup.php:1591
+msgid "SNMP Privacy Passphrase (v3)"
+msgstr "SNMP隐私密码（v3）"
+
+#: ../setup.php:1592
+msgid "Choose the SNMPv3 Privacy Passphrase."
+msgstr "选择SNMPv3隐私密码。"
+
+#: ../setup.php:1600
+msgid "SNMP Privacy Protocol (v3)"
+msgstr "SNMP隐私协议（v3）"
+
+#: ../setup.php:1601
+msgid "Choose the SNMPv3 Privacy Protocol."
+msgstr "选择SNMPv3隐私协议。"
+
+#: ../setup.php:1608
+msgid "SNMP Context (v3)"
+msgstr "SNMP上下文（v3）"
+
+#: ../setup.php:1609
+msgid "Enter the SNMP v3 Context to use for this device."
+msgstr "输入用于此设备的SNMP v3上下文。"
+
+#: ../setup.php:1617
+msgid "SNMP Engine ID (v3)"
+msgstr "SNMP引擎ID（v3）"
+
+#: ../setup.php:1618
+msgid "Enter the SNMP v3 Engine ID to use for this device."
+msgstr "输入用于此设备的SNMP v3引擎ID。"
+
+#: ../setup.php:1630
+msgid "General Device Settings"
+msgstr "一般设备设置"
+
+#: ../setup.php:1635
+msgid "Give this device a meaningful name."
+msgstr "给这个设备一个有意义的名字。"
+
+#: ../setup.php:1642
+msgid "Fill in the fully qualified hostname for this device."
+msgstr "填写此设备的标准主机名。"
+
+#: ../setup.php:1647
+msgid "Related Cacti Host"
+msgstr "相关的Cacti 主机"
+
+#: ../setup.php:1648
+msgid "Given MacTrack Host is connected to this Cacti Host."
+msgstr "鉴于MacTrack主机已连接到此Cacti主机。"
+
+#: ../setup.php:1657
+msgid "Scan Type"
+msgstr "扫描类型"
+
+#: ../setup.php:1658
+msgid "Choose the scan type you wish to perform on this device."
+msgstr "选择您希望在此设备上执行的扫描类型。"
+
+#: ../setup.php:1666
+msgid "Choose the site to associate with this device."
+msgstr "选择要与此设备关联的网站。"
+
+#: ../setup.php:1673
+msgid "Device Notes"
+msgstr "设备说明"
+
+#: ../setup.php:1674
+msgid "This field value is useful to save general information about a specific device."
+msgstr "该字段值对于保存有关特定设备的一般信息很有用。"
+
+#: ../setup.php:1683
+msgid "Disable Device"
+msgstr "禁用设备"
+
+#: ../setup.php:1684
+msgid "Check this box to disable all checks for this host."
+msgstr "选中此框可禁用此主机的所有检查。"
+
+#: ../setup.php:1691
+msgid "Switch/Hub, Switch/Router Settings"
+msgstr "交换机/集线器，交换机/路由器设置"
+
+#: ../setup.php:1696
+msgid ""
+"Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such\n"
+"\t\tas link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be\n"
+"\t\tseparated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be\n"
+"\t\tacceptable for some manufacturers switch types."
+msgstr ""
+"提供一个特定交换机/集线器上的MAC结果应被忽略的端口列表。 链路/中继端口等端口不能与其他用户端口相区别。\n"
+"\t\t每个端口号必须用冒号，管道或空格分开：'，'| '，' '。 \n"
+"\t\t例如，对于某些制造商的开关类型，Fa0 / 1：Fa1 / 23或Fa0 / 1 Fa1 / 23是可以接受的。"
+
+#: ../setup.php:1714
+msgid "Select a set of SNMP options to try."
+msgstr "选择一组SNMP选项进行尝试。"
+
+#: ../setup.php:1721
+msgid "Read Strings"
+msgstr "读取字符串"
+
+#: ../setup.php:1722
+msgid "<strong>DEPRECATED:</strong> SNMP community strings"
+msgstr "<strong>DEPRECATED:</strong>SNMP社区字符串"
+
+#: ../setup.php:1727
+msgid "Specific SNMP Settings"
+msgstr "特定的SNMP设置"
+
+#: ../setup.php:1736
+msgid "Connectivity Options"
+msgstr "连接选项"
+
+#: ../setup.php:1740
+msgid "Terminal Type"
+msgstr "终端类型"
+
+#: ../setup.php:1741
+msgid "Choose the terminal type that you use to connect to this device."
+msgstr "选择用于连接到此设备的终端类型。"
+
+#: ../setup.php:1746
+msgid "Telnet"
+msgstr "Telnet"
+
+#: ../setup.php:1747
+msgid "SSH"
+msgstr "SSH"
+
+#: ../setup.php:1748
+msgid "HTTP"
+msgstr "HTTP"
+
+#: ../setup.php:1749
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: ../setup.php:1753
+msgid "User Name"
+msgstr "用户名"
+
+#: ../setup.php:1754
+msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
+msgstr "用于您的自定义身份验证方法的用户名。 例子包括SSH，RSH，HTML等。"
+
+#: ../setup.php:1762
+msgid "Password"
+msgstr "密码"
+
+#: ../setup.php:1763
+msgid "The password to be used for your custom authentication."
+msgstr "用于您的自定义身份验证的密码。"
+
+#: ../setup.php:1771
+msgid "Private Key Path"
+msgstr "私钥关键路径"
+
+#: ../setup.php:1772
+msgid "The path to the private key used for SSH authentication."
+msgstr "用于SSH身份验证的私钥的路径。"
+
+#: ../setup.php:1797
+msgid "Sequence"
+msgstr "序列"
+
+#: ../setup.php:1798
+msgid "Sequence of Item."
+msgstr "项目顺序。"
+
+#: ../setup.php:1806
+msgid "General Site Settings"
+msgstr "一般网站设置"
+
+#: ../setup.php:1811
+msgid "Please enter a reasonable name for this site."
+msgstr "请为此网站输入一个合理的名称。"
+
+#: ../setup.php:1818
+msgid "Primary Customer Contact"
+msgstr "主要客户联系人"
+
+#: ../setup.php:1819
+msgid "The principal customer contact name and number for this site."
+msgstr "该网站的主要客户联系人姓名和电话号码。"
+
+#: ../setup.php:1826
+msgid "NetOps Contact"
+msgstr "NetOps联系人"
+
+#: ../setup.php:1827
+msgid "Please principal network support contact name and number for this site."
+msgstr "请为本网站提供主要网络支持联系人姓名和电话号码。"
+
+#: ../setup.php:1834
+msgid "Facilities Contact"
+msgstr "设施联系"
+
+#: ../setup.php:1835
+msgid "Please principal facilities/security contact name and number for this site."
+msgstr "请为本网站提供主要设施/安全联系人姓名和电话号码。"
+
+#: ../setup.php:1842
+msgid "Site Information"
+msgstr "网站信息"
+
+#: ../setup.php:1846
+msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
+msgstr "以自由形式提供任何特定于站点的信息，以便您更好地管理此位置。"
+
+#: ../setup.php:1868
+msgid "General Mac Address Tracking Settings"
+msgstr "一般Mac地址跟踪设置"
+
+#: ../setup.php:1873
+msgid "Please enter the MAC Address to be watched for."
+msgstr "请输入要监视的MAC地址。"
+
+#: ../setup.php:1880
+msgid "MAC Tracking Name/Email Subject"
+msgstr "MAC跟踪名称/电子邮件主题"
+
+#: ../setup.php:1881
+msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
+msgstr "请为此MAC跟踪条目输入一个合理的名称。 这些信息将在您的电子邮件的主题行中"
+
+#: ../setup.php:1900
+msgid "Ticket number for cross referencing with your corporate help desk system(s)."
+msgstr "与您的公司帮助台系统交叉参考的票号。"
+
+#: ../setup.php:1907
+msgid "Notification Schedule"
+msgstr "通知时间表"
+
+#: ../setup.php:1908
+msgid "Choose how often an Email address should be generated for this Mac Watch item."
+msgstr "选择为此Mac Watch项目生成电子邮件地址的频率。"
+
+#: ../setup.php:1912
+msgid "First Occurrence Only"
+msgstr "第一次发生"
+
+#: ../setup.php:1913
+msgid "All Occurrences"
+msgstr "所有发生"
+
+#: ../setup.php:1914
+msgid "Every Hour"
+msgstr "每隔一小时"
+
+#: ../setup.php:1921
+msgid "Email Addresses"
+msgstr "电子邮件地址"
+
+#: ../setup.php:1922
+msgid "Enter a semicolon separated of Email addresses who will be notified where this MAC address is."
+msgstr "输入分号分隔的电子邮件地址，他们将在此MAC地址所在的位置被通知。"
+
+#: ../setup.php:1945
+msgid "General Mac Address Authorization Settings"
+msgstr "一般Mac地址授权设置"
+
+#: ../setup.php:1949
+msgid "MAC Address Match"
+msgstr "MAC地址匹配"
+
+#: ../setup.php:1950
+msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '%' anywhere in the MAC Address."
+msgstr "请输入MAC地址或MAC地址匹配字符串以自动授权。 如果您希望授权一组MAC地址，则可以在MAC地址的任何位置使用通配符'％'。"
+
+#: ../setup.php:1959
+msgid "Please add a reason for this entry."
+msgstr "请为此条目添加一个原因。"
+
+#: ../mactrack_vendormacs.php:135
+msgid "MacTrack Vendor Mac Filter"
+msgstr "MacTrack供应商Mac过滤器"
+
+#: ../mactrack_vendormacs.php:155
+msgid "Vendor MAC"
+msgstr "供应商MAC"
+
+#: ../mactrack_vendormacs.php:156
+msgid "Corporation"
+msgstr "公司"
+
+#: ../mactrack_vendormacs.php:157
+msgid "Address"
+msgstr "地址"
+
+#: ../mactrack_vendormacs.php:172
+msgid "No MacTrack Vendor MACS"
+msgstr "没有MacTrack供应商MAC"
+
+#: ../mactrack_view_arp.php:31
+msgid "Device Tracking - ARP/IP View"
+msgstr "设备跟踪 - ARP / IP视图"
+
+#: ../mactrack_view_arp.php:293
+msgid "ARP Cache"
+msgstr "ARP缓存"
+
+#: ../mactrack_view_arp.php:335
+msgid "Switch Device"
+msgstr "交换设备"
+
+#: ../mactrack_view_arp.php:367
+msgid "No MacTrack IP Results Found"
+msgstr "找不到MacTrack IP结果"
+
+#: ../mactrack_view_arp.php:438
+#: ../mactrack_view_ips.php:267
+msgid "IP's"
+msgstr "IP's"
+
+#: ../mactrack_view_ips.php:191
+msgid "IP Address Ranges"
+msgstr "IP地址范围"
+
+#: ../mactrack_view_ips.php:200
+msgid "IP Range"
+msgstr "IP范围"
+
+#: ../mactrack_view_ips.php:201
+msgid "Current IP Addresses"
+msgstr "当前IP地址"
+
+#: ../mactrack_view_ips.php:202
+msgid "Current Date"
+msgstr "当前日期"
+
+#: ../mactrack_view_ips.php:203
+msgid "Maximum IP Addresses"
+msgstr "最大IP地址"
+
+#: ../mactrack_view_ips.php:204
+msgid "Maximum Date"
+msgstr "最大日期"
+
+#: ../mactrack_view_ips.php:230
+msgid "No MacTrack Site IP Ranges Found"
+msgstr "找不到MacTrack网站IP范围"
+
+#: ../mactrack_device_types.php:256
+msgid "You must select at least one device type."
+msgstr "You must select at least one device type."
+
+#: ../mactrack_device_types.php:264
+msgid "Are you sure you want to delete the following device types?"
+msgstr "您确定要删除以下设备类型吗？"
+
+#: ../mactrack_device_types.php:271
+msgid "When you click save, the following device types will be duplicated. You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
+msgstr "当您单击保存时，以下设备类型将被复制。 您可以选择更改新设备类型的描述。 否则，请勿更改下面的值，原始名称将被复制为新的后缀。"
+
+#: ../mactrack_device_types.php:273
+msgid "Device Type Prefix:"
+msgstr "设备类型前缀："
+
+#: ../mactrack_device_types.php:417
+msgid "New Type"
+msgstr "New Type"
+
+#: ../mactrack_device_types.php:419
+msgid "Cisco"
+msgstr "思科"
+
+#: ../mactrack_device_types.php:444
+#, php-format
+msgid "There were %d Device Types Added!"
+msgstr "有%d设备类型已添加！"
+
+#: ../mactrack_device_types.php:446
+msgid "No New Device Types Found!"
+msgstr "找不到新的设备类型！"
+
+#: ../mactrack_device_types.php:456
+msgid "Import Results"
+msgstr "导入结果"
+
+#: ../mactrack_device_types.php:458
+msgid "Cacti has imported the following items:"
+msgstr "Cacti导入了以下条目："
+
+#: ../mactrack_device_types.php:469
+msgid "Import MacTrack Device Types"
+msgstr "导入MacTrack设备类型"
+
+#: ../mactrack_device_types.php:489
+msgid "Required File Format Notes"
+msgstr "必需的文件格式注释"
+
+#: ../mactrack_device_types.php:743
+msgid "Unknown Assume \"Switch/Hub\""
+msgstr "未知假设“开关/集线器”"
+
+#: ../mactrack_device_types.php:817
+#, php-format
+msgid "Are you sure you want to delete the device type %s?"
+msgstr "您确定要删除设备类型 %s吗？"
+
+#: ../mactrack_device_types.php:841
+#, php-format
+msgid "MacTrack Device Types [edit: %s]"
+msgstr "MacTrack设备类型[编辑：%s]"
+
+#: ../mactrack_device_types.php:843
+msgid "MacTrack Device Types [new]"
+msgstr "MacTrack设备类型[新建]"
+
+#: ../mactrack_device_types.php:907
+msgid "MacTrack Device Type Filters"
+msgstr "MacTrack设备类型过滤器"
+
+#: ../mactrack_device_types.php:926
+msgid "Device Type Description"
+msgstr "设备类型说明"
+
+#: ../mactrack_device_types.php:929
+msgid "Port Scanner"
+msgstr "端口扫描器"
+
+#: ../mactrack_device_types.php:930
+msgid "IP Scanner"
+msgstr "IP扫描器"
+
+#: ../mactrack_device_types.php:931
+msgid "sysDescription Match"
+msgstr "sysDescription匹配"
+
+#: ../mactrack_device_types.php:932
+msgid "Vendor OID Match"
+msgstr "供应商OID匹配"
+
+#: ../mactrack_device_types.php:950
+msgid "No MacTrack Device Types"
+msgstr "没有MacTrack设备类型"
+
+#: ../mactrack_device_types.php:993
+msgid "Submit Query"
+msgstr "提交查询"
+
+#: ../mactrack_device_types.php:996
+msgid "Clear Filtered Results"
+msgstr "清除筛选结果"
+
+#: ../mactrack_device_types.php:999
+msgid "Scan Active Devices for Unknown Device Types"
+msgstr "扫描活动设备以查找未知设备类型"
+
+#: ../mactrack_device_types.php:999
+msgid "Rescan"
+msgstr "重新扫描"
+
+#: ../mactrack_device_types.php:1002
+msgid "Import Device Types from a CSV File"
+msgstr "从CSV文件导入设备类型"
+
+#: ../mactrack_device_types.php:1005
+msgid "Export Device Types to Share with Others"
+msgstr "导出设备类型以与其他人共享"
+
