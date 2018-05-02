@@ -1095,12 +1095,12 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 	foreach($active_ports_array as $port_info) {
 		$port_info =  mactrack_strip_alpha($port_info);
 		if (isset($indexes[$i]) && isset($ifInterfaces[$indexes[$i]]["ifType"])) {
-		if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
-			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
-			($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
-			if ($port_info == 1) {
-				$ports_active++;
-			}
+			if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
+			     ($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
+			    ($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
+				if ($port_info == 1) {
+					$ports_active++;
+				}
 			}
 			$ports_total++;
 		}
@@ -1137,21 +1137,22 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 		*/
 		$i = 0;
 		if (sizeof($port_numbers)) {
-		foreach ($port_numbers as $key => $port_number) {
-			if (($highPort == 0) ||
-				(($port_number >= $lowPort) &&
-				($port_number <= $highPort))) {
+			foreach ($port_numbers as $key => $port_number) {
+				if (($highPort == 0) ||
+					(($port_number >= $lowPort) &&
+					($port_number <= $highPort))) {
 
-				if (!in_array($port_number, $ignore_ports)) {
-					if ((isset($port_status[$key]) == "3") || (isset($port_status[$key]) == "5")) {
-						$port_key_array[$i]["key"] = $key;
-						$port_key_array[$i]["port_number"] = $port_number;
+					if (!in_array($port_number, $ignore_ports)) {
+						if ((isset($port_status[$key]) && $port_status[$key] == "3") ||
+						    (isset($port_status[$key]) && $port_status[$key] == "5")) {
+							$port_key_array[$i]["key"] = $key;
+							$port_key_array[$i]["port_number"] = $port_number;
 
-						$i++;
+							$i++;
+						}
 					}
 				}
 			}
-		}
 		}
 
 		/* compare the user ports to the brige port data, store additional
