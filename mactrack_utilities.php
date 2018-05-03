@@ -341,14 +341,14 @@ function mactrack_display_run_status() {
 function mactrack_utilities_ports_clear() {
 	global $config;
 
-	if ((read_config_option('remove_verification') == 'on') && (!isset_request_var('confirm'))) {
+	if ((read_config_option('mt_maint_confirm') == 'on') && (!isset_request_var('confirm'))) {
 		top_header();
 		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete all the Port to MAC to IP results from the system?', 'mactrack'), 'mactrack_utilities.php', 'mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table');
 		bottom_footer();
 		exit;
 	}
 
-	if ((read_config_option('remove_verification') == '') || (isset_request_var('confirm'))) {
+	if ((read_config_option('mt_maint_confirm') == '') || (isset_request_var('confirm'))) {
 		$rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_ports');
 
 		db_execute('TRUNCATE TABLE mac_track_ports');
@@ -399,14 +399,14 @@ function mactrack_utilities_ports_clear() {
 function mactrack_utilities_purge_aggregated_data() {
 	global $config;
 
-	if ((read_config_option('remove_verification') == 'on') && (!isset_request_var('confirm'))) {
+	if ((read_config_option('mt_maint_confirm') == 'on') && (!isset_request_var('confirm'))) {
 		top_header();
 		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?', 'mactrack'), 'mactrack_utilities.php', 'mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data');
 		bottom_footer();
 		exit;
 	}
 
-	if ((read_config_option('remove_verification') == '') || (isset_request_var('confirm'))) {
+	if ((read_config_option('mt_maint_confirm') == '') || (isset_request_var('confirm'))) {
 		$rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_aggregated_ports');
 		db_execute('TRUNCATE TABLE mac_track_aggregated_ports');
 
@@ -422,7 +422,7 @@ function mactrack_utilities_purge_aggregated_data() {
 function mactrack_utilities_recreate_aggregated_data() {
 	global $config;
 
-	if ((read_config_option('remove_verification') == 'on') && (!isset_request_var('confirm'))) {
+	if ((read_config_option('mt_maint_confirm') == 'on') && (!isset_request_var('confirm'))) {
 		top_header();
 		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?', 'mactrack'), 'mactrack_utilities.php', 'mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data');
 		bottom_footer();
@@ -430,7 +430,7 @@ function mactrack_utilities_recreate_aggregated_data() {
 	}
 
 
-	if ((read_config_option('remove_verification') == '') || (isset_request_var('confirm'))) {
+	if ((read_config_option('mt_maint_confirm') == '') || (isset_request_var('confirm'))) {
 		$old_rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_aggregated_ports');
 		db_execute('TRUNCATE TABLE mac_track_aggregated_ports');
 

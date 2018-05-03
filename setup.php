@@ -964,6 +964,12 @@ function mactrack_config_settings () {
 			'max_length' => '10',
 			'size' => '8'
 			),
+		'mt_maint_confirm' => array(
+			'friendly_name' => __('Confirm Utilities Prompt', 'mactrack'),
+			'description' => __('When using utilities, prompt for verification', 'mactrack'),
+			'default' => read_config_option('deletion_verification'),
+			'method' => 'checkbox',
+			),
 		'mt_data_retention' => array(
 			'friendly_name' => __('Data Retention', 'mactrack'),
 			'description' => __('How long should port MAC details be retained in the database.', 'mactrack'),

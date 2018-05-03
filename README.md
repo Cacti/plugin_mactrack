@@ -37,6 +37,9 @@ Bug and feature enhancements for the Mactrack plugin are handled in GitHub. You 
 
 ## ChangeLog
 
+--- 4.3 ---
+* issue#70: Fix issue with Prompt confirmation button
+
 --- 4.2 ---
 * feature: Basic documentation under github wiki + screenshots
 * issue#50: False positive errors in Cacti log relative to 802.1x functions
