@@ -343,7 +343,7 @@ function mactrack_utilities_ports_clear() {
 
 	if ((read_config_option('mt_maint_confirm') == 'on') && (!isset_request_var('confirm'))) {
 		top_header();
-		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete all the Port to MAC to IP results from the system?', 'mactrack'), 'mactrack_utilities.php', 'mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table');
+		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete all the Port to MAC to IP results from the system?', 'mactrack'), 'plugins/mactrack/mactrack_utilities.php', 'plugins/mactrack/mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table');
 		bottom_footer();
 		exit;
 	}
