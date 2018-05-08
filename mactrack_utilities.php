@@ -401,7 +401,7 @@ function mactrack_utilities_purge_aggregated_data() {
 
 	if ((read_config_option('mt_maint_confirm') == 'on') && (!isset_request_var('confirm'))) {
 		top_header();
-		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?', 'mactrack'), 'mactrack_utilities.php', 'mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data');
+		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?', 'mactrack'), 'plugins/mactrack/mactrack_utilities.php', 'plugins/mactrack/mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data');
 		bottom_footer();
 		exit;
 	}
@@ -424,7 +424,7 @@ function mactrack_utilities_recreate_aggregated_data() {
 
 	if ((read_config_option('mt_maint_confirm') == 'on') && (!isset_request_var('confirm'))) {
 		top_header();
-		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?', 'mactrack'), 'mactrack_utilities.php', 'mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data');
+		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?', 'mactrack'), 'plugins/mactrack/mactrack_utilities.php', 'plugins/mactrack/mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data');
 		bottom_footer();
 		exit;
 	}
