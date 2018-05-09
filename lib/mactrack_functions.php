@@ -48,21 +48,20 @@ function mactrack_debug($message) {
 	global $debug, $web, $config;
 	include_once($config['base_path'] . '/lib/functions.php');
 
-	$debug_output=$debug;
+	$print_output=!(isset($web) && $web);
 	if (isset($web) && $web && !substr_count($message, 'SQL')) {
 		print('<p>' . $message . '</p>');		
-		$debug_output=false;
 	}
 
 	$debug_level=POLLER_VERBOSITY_HIGH;
-	if (substr_count($message, 'ERROR:')) {
+	if (substr_count($message, 'ERROR:') || $debug) {
 		$debug_level=POLLER_VERBOSITY_LOW;
 	}
 
 	if (!preg_match("~(\w): .*~",$message)) {
 		$message = "DEBUG: " . $message;
 	}
-	cacti_log($message, $debug_output, 'MACTRACK', $debug_level);
+	cacti_log($message, $print_output, 'MACTRACK', $debug_level);
 }
 
 function mactrack_rebuild_scanning_funcs() {
