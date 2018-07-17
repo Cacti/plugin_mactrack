@@ -1380,7 +1380,7 @@ function mactrack_config_arrays () {
 
 	if (cacti_version_compare(CACTI_VERSION, '1.2', '<')) {
 		$menu_glyphs[__('Device Tracking', 'mactrack')] = 'fa fa-shield';
-	] else {
+	} else {
 		$menu_glyphs[__('Device Tracking', 'mactrack')] = 'fa fa-shield-alt';
 	}
 	$menu_glyphs[__('Tracking Tools', 'mactrack')] = 'fa fa-bullhorn';
