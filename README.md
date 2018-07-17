@@ -40,6 +40,7 @@ Bug and feature enhancements for the Mactrack plugin are handled in GitHub. You 
 --- 4.3 ---
 * issue#70: Fix issue with Prompt confirmation button
 * issue#75: Command Line does not show output
+* issue#81: Add support for FontAwesome 5.0 under Cacti 1.2
 
 --- 4.2 ---
 * feature: Basic documentation under github wiki + screenshots
