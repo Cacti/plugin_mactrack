@@ -135,18 +135,24 @@ function form_mactrack_actions() {
         if ($selected_items != false) {
 			if (get_request_var('drp_action') == '2') { /* Enable Selected Devices */
 				for ($i=0;($i<count($selected_items));$i++) {
-					db_execute_prepared("UPDATE mac_track_devices SET disabled='' WHERE device_id = ?", array($selected_items[$i]));
+					db_execute_prepared("UPDATE mac_track_devices
+						SET disabled=''
+						WHERE device_id = ?",
+						array($selected_items[$i]));
 				}
 			}elseif (get_request_var('drp_action') == '3') { /* Disable Selected Devices */
 				for ($i=0;($i<count($selected_items));$i++) {
-					db_execute_prepared("UPDATE mac_track_devices SET disabled='on' WHERE device_id = ?", array($selected_items[$i]));
+					db_execute_prepared("UPDATE mac_track_devices
+						SET disabled='on'
+						WHERE device_id = ?",
+						array($selected_items[$i]));
 				}
 			}elseif (get_request_var('drp_action') == '4') { /* change snmp options */
 				for ($i=0;($i<count($selected_items));$i++) {
 					reset($fields_mactrack_device_edit);
 					while (list($field_name, $field_array) = each($fields_mactrack_device_edit)) {
 						if (isset_request_var("t_$field_name")) {
-							db_execute_prepared("UPDATE mac_track_devices 
+							db_execute_prepared("UPDATE mac_track_devices
 								SET $field_name = ?
 								WHERE device_id = ?",
 								array(get_request_var($field_name), $selected_items[$i]));
@@ -156,32 +162,38 @@ function form_mactrack_actions() {
 			}elseif (get_request_var('drp_action') == '5') { /* change port settings for multiple devices */
 				for ($i=0;($i<count($selected_items));$i++) {
 					reset($fields_mactrack_device_edit);
-					while (list($field_name, $field_array) = each($fields_host_edit)) {
+					while (list($field_name, $field_array) = each($fields_mactrack_device_edit)) {
 						if (isset_request_var("t_$field_name")) {
-							db_execute_prepared("UPDATE mac_track_devices 
-								SET $field_name = ? WHERE id = ?", 
+							db_execute_prepared("UPDATE mac_track_devices
+								SET $field_name = ?
+								WHERE id = ?",
 								array(get_request_var($field_name), $selected_items[$i]));
 						}
 					}
 				}
 			}elseif (get_request_var('drp_action') == '6') { /* Connect Selected Devices */
 				for ($i=0;($i<count($selected_items));$i++) {
-					$cacti_host = db_fetch_row_prepared('SELECT host.id, host.description FROM mac_track_devices 
-						LEFT JOIN host ON (mac_track_devices.hostname=host.hostname) 
-						WHERE mac_track_devices.device_id=?', array($selected_items[$i]));
+					$cacti_host = db_fetch_row_prepared('SELECT host.id, host.description
+						FROM mac_track_devices
+						LEFT JOIN host
+						ON mac_track_devices.hostname=host.hostname
+						WHERE mac_track_devices.device_id=?',
+						array($selected_items[$i]));
 
 					if (sizeof($cacti_host)) {
-						db_execute_prepared('UPDATE mac_track_devices SET host_id = ?, device_name = ? WHERE device_id = ?', 
+						db_execute_prepared('UPDATE mac_track_devices
+							SET host_id = ?, device_name = ?
+							WHERE device_id = ?',
 							array($cacti_host['id'],  $cacti_host['description'], $selected_items[$i]));
 					}
 				}
 			}elseif (get_request_var('drp_action') == '7') { /* Copy SNMP Settings */
 				for ($i=0;($i<count($selected_items));$i++) {
-					$cacti_host = db_fetch_row_prepared("SELECT host.*, 
-						host.snmp_community as snmp_readstring, 
+					$cacti_host = db_fetch_row_prepared("SELECT host.*,
+						host.snmp_community as snmp_readstring,
 						host.ping_retries as snmp_retries
-						FROM mac_track_devices 
-						LEFT JOIN host ON (mac_track_devices.hostname=host.hostname) 
+						FROM mac_track_devices
+						LEFT JOIN host ON mac_track_devices.hostname=host.hostname
 						WHERE mac_track_devices.device_id = ?", array($selected_items[$i]));
 
 					if (isset($cacti_host['id'])) {
@@ -194,7 +206,10 @@ function form_mactrack_actions() {
 						}
 
 						if (strlen($updates)) {
-							db_execute('UPDATE mac_track_devices SET ' . $updates .	' WHERE device_id=' . $selected_items[$i]);
+							db_execute_prepared('UPDATE mac_track_devices
+								SET ' . $updates . '
+								WHERE device_id=?',
+								array($selected_items[$i]));
 						}
 					} else {
 						# skip silently; possible enhacement: tell the user what we did
@@ -221,7 +236,10 @@ function form_mactrack_actions() {
 			input_validate_input_number($matches[1]);
 			/* ==================================================== */
 
-			$device_info = db_fetch_row_prepared('SELECT hostname, device_name FROM mac_track_devices WHERE device_id = ?', array($matches[1]));
+			$device_info = db_fetch_row_prepared('SELECT hostname, device_name
+							FROM mac_track_devices
+							WHERE device_id = ?',
+							array($matches[1]));
 			$device_list .= '<li>' . $device_info['device_name'] . ' (' . $device_info['hostname'] . ')</li>';
 			$device_array[] = $matches[1];
 		}
@@ -830,9 +848,9 @@ function mactrack_device_edit() {
 	/* ==================================================== */
 
 	if (!isempty_request_var('device_id')) {
-		$device = db_fetch_row_prepared('SELECT * 
-			FROM mac_track_devices 
-			WHERE device_id = ?', 
+		$device = db_fetch_row_prepared('SELECT *
+			FROM mac_track_devices
+			WHERE device_id = ?',
 			array(get_request_var('device_id')));
 
 		$header_label = __('Device Tracking Devices [edit: %s]', $device['device_name'], 'mactrack');
@@ -1113,8 +1131,8 @@ function mactrack_device_filter() {
 									mac_track_device_types.description,
 									mac_track_device_types.sysDescr_match
 									FROM mac_track_device_types
-									INNER JOIN mac_track_devices 
-									ON mac_track_device_types.device_type_id = mac_track_devices.device_type_id
+									INNER JOIN mac_track_devices
+									ON mac_track_device_types.device_type_id=mac_track_devices.device_type_id
 									WHERE device_type = ?
 									ORDER BY mac_track_device_types.description', array(get_request_var('type_id')));
 							}else{
@@ -1123,7 +1141,7 @@ function mactrack_device_filter() {
 									mac_track_device_types.description,
 									mac_track_device_types.sysDescr_match
 									FROM mac_track_device_types
-									INNER JOIN mac_track_devices 
+									INNER JOIN mac_track_devices
 									ON mac_track_device_types.device_type_id=mac_track_devices.device_type_id
 									ORDER BY mac_track_device_types.description');
 							}
