@@ -151,7 +151,7 @@ function form_mactrack_actions() {
 				for ($i=0;($i<count($selected_items));$i++) {
 					reset($fields_mactrack_device_edit);
 					while (list($field_name, $field_array) = each($fields_mactrack_device_edit)) {
-						if (isset_request_var("t_$field_name")) {
+						if (isset_request_var("t_$field_name") && preg_match('/^snmp_/', $field_name)) {
 							db_execute_prepared("UPDATE mac_track_devices
 								SET $field_name = ?
 								WHERE device_id = ?",
@@ -163,7 +163,7 @@ function form_mactrack_actions() {
 				for ($i=0;($i<count($selected_items));$i++) {
 					reset($fields_mactrack_device_edit);
 					while (list($field_name, $field_array) = each($fields_mactrack_device_edit)) {
-						if (isset_request_var("t_$field_name")) {
+						if (isset_request_var("t_$field_name") && preg_match('/^ignorePorts/', $field_name)) {
 							db_execute_prepared("UPDATE mac_track_devices
 								SET $field_name = ?
 								WHERE id = ?",
@@ -311,7 +311,7 @@ function form_mactrack_actions() {
 
 			$form_array = array();
 			while (list($field_name, $field_array) = each($fields_mactrack_device_edit)) {
-				if (preg_match('/^port_/', $field_name)) {
+				if (preg_match('/^ignorePort/', $field_name)) {
 					$form_array += array($field_name => $fields_mactrack_device_edit[$field_name]);
 
 					$form_array[$field_name]['value'] = '';
