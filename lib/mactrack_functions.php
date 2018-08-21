@@ -1807,23 +1807,33 @@ function xform_mac_address($mac_address) {
 	if (strlen($mac_address) == 0) {
 		$mac_address = "NOT USER";
 	}else{
+		$separator = read_config_option('mt_mac_delim');
 		if (strlen($mac_address) > 10) { /* return is in ascii */
-			$mac_address = str_replace("HEX-00:", "", strtoupper($mac_address));
-			$mac_address = str_replace("HEX-:", "", strtoupper($mac_address));
-			$mac_address = str_replace("HEX-", "", strtoupper($mac_address));
-			$mac_address = trim(str_replace("\"", "", $mac_address));
-			$mac_address = str_replace(" ", read_config_option("mt_mac_delim"), $mac_address);
-			$mac_address = str_replace(":", read_config_option("mt_mac_delim"), $mac_address);
+			$mac_address = str_replace('HEX-00:', '', $mac_address);
+			$mac_address = str_replace('HEX-:', '', $mac_address);
+			$mac_address = str_replace('HEX-', '', $mac_address);
+			$mac_address = trim(str_replace('"', '', $mac_address));
+			$mac_address = str_replace(' ', ':', $mac_address);
+			$mac_address = str_replace('-', ':', $mac_address);
 		}else{ /* return is hex */
 			$mac = "";
 			for ($j = 0; $j < strlen($mac_address); $j++) {
-				$mac .= bin2hex($mac_address[$j]) . ($j == strlen($mac_address) ? '' : read_config_option("mt_mac_delim"));
+				$mac .= bin2hex($mac_address[$j]) . ':';
 			}
 			$mac_address = $mac;
 		}
+
+		$mac_address = trim($mac_address);
+		while (strlen($mac_address) && $mac_address[0] == ':') {
+			$mac_address = substr($mac_address, 1);
+		}
+
+		while (strlen($mac_address) && $mac_address[strlen($mac_address) - 1] == ':') {
+			$mac_address = substr($mac_address, 0, strlen($mac_address) - 1);
+		}
 	}
 
-	return $mac_address;
+	return strtoupper($mac_address);
 }
 
 /*	xform_standard_indexed_data - This function takes an OID, and a device, and
