@@ -94,7 +94,7 @@ function form_mactrack_save() {
 			get_nfilter_request_var('user_name'), get_nfilter_request_var('user_password'), get_nfilter_request_var('term_type'), 
 			get_nfilter_request_var('private_key_path'), (isset_request_var('disabled') ? get_nfilter_request_var('disabled') : ''));
 
-		header('Location: mactrack_devices.php?action=edit&device_id=' . (empty($device_id) ? get_filter_request_var('device_id') : $device_id));
+		header('Location: mactrack_devices.php?action=edit&header=false&device_id=' . (empty($device_id) ? get_filter_request_var('device_id') : $device_id));
 	}
 
 	if (isset_request_var('save_component_import')) {
@@ -108,7 +108,7 @@ function form_mactrack_save() {
 				$_SESSION['import_debug_info'] = $debug_data;
 			}
 		}else{
-			header('Location: mactrack_devices.php?action=import'); exit;
+			header('Location: mactrack_devices.php?action=import&header'); exit;
 		}
 
 		header('Location: mactrack_devices.php?action=import');
