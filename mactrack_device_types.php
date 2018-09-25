@@ -119,15 +119,15 @@ default:
 
 function form_save() {
 	if ((isset_request_var('save_component_device_type')) && (isempty_request_var('add_dq_y'))) {
-		$device_type_id = api_mactrack_device_type_save(get_nfilter_request_var('device_type_id'), 
-			get_nfilter_request_var('description'), get_nfilter_request_var('vendor'), 
-			get_nfilter_request_var('device_type'), get_nfilter_request_var('sysDescr_match'), 
-			get_nfilter_request_var('sysObjectID_match'), get_nfilter_request_var('scanning_function'), 
+		$device_type_id = api_mactrack_device_type_save(get_nfilter_request_var('device_type_id'),
+			get_nfilter_request_var('description'), get_nfilter_request_var('vendor'),
+			get_nfilter_request_var('device_type'), get_nfilter_request_var('sysDescr_match'),
+			get_nfilter_request_var('sysObjectID_match'), get_nfilter_request_var('scanning_function'),
 			get_nfilter_request_var('ip_scanning_function'), get_nfilter_request_var('dot1x_scanning_function'),
-			get_nfilter_request_var('serial_number_oid'), get_nfilter_request_var('lowPort'), 
+			get_nfilter_request_var('serial_number_oid'), get_nfilter_request_var('lowPort'),
 			get_nfilter_request_var('highPort'));
 
-		header('Location: mactrack_device_types.php?action=edit&device_type_id=' . (empty($device_type_id) ? get_nfilter_request_var('device_type_id') : $device_type_id));
+		header('Location: mactrack_device_types.php?action=edit&header=false&device_type_id=' . (empty($device_type_id) ? get_nfilter_request_var('device_type_id') : $device_type_id));
 	}
 
 	if (isset_request_var('save_component_import')) {
