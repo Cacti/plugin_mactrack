@@ -190,8 +190,6 @@ function form_mactrack_snmp_actions() {
 
 	general_header();
 
-	display_output_messages();
-
 	?>
 	<script type='text/javascript'>
 	function goTo(strURL) {

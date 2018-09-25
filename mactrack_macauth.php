@@ -64,6 +64,12 @@ function form_save() {
 			get_nfilter_request_var('mac_address'), 
 			get_nfilter_request_var('description'));
 
+		if ($mac_id) {
+			raise_message(1);
+		} else {
+			raise_message(2);
+		}
+
 		header('Location: mactrack_macauth.php?action=edit&id=' . (empty($mac_id) ? get_request_var('mac_id') : $mac_id));
 	}
 }
@@ -226,12 +232,10 @@ function mactrack_maca_edit() {
 	get_filter_request_var('mac_id');
 	/* ==================================================== */
 
-	display_output_messages();
-
 	if (!isempty_request_var('mac_id')) {
-		$mac_record   = db_fetch_row_prepared('SELECT * 
-			FROM mac_track_macauth 
-			WHERE mac_id = ?', 
+		$mac_record   = db_fetch_row_prepared('SELECT *
+			FROM mac_track_macauth
+			WHERE mac_id = ?',
 			array(get_request_var('mac_id')));
 
 		$header_label = __('Device Tracking MacAuth [edit: %s]', $mac_record['mac_address'], 'mactrack');

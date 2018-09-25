@@ -70,6 +70,11 @@ function form_save() {
 			get_nfilter_request_var('customer_contact'), get_nfilter_request_var('netops_contact'), 
 			get_nfilter_request_var('facilities_contact'), get_nfilter_request_var('site_info'));
 
+		if ($site_id) {
+			raise_message(1);
+		} else {
+			raise_message(2);
+		}
 		header('Location: mactrack_sites.php?action=edit&header=false&site_id=' . (empty($site_id) ? get_filter_request_var('site_id') : $site_id));
 	}
 }
@@ -344,8 +349,6 @@ function mactrack_site_edit() {
 	/* ================= input validation ================= */
 	get_filter_request_var('site_id');
 	/* ==================================================== */
-
-	display_output_messages();
 
 	if (!isempty_request_var('site_id')) {
 		$site = db_fetch_row_prepared('SELECT * 

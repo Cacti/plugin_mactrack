@@ -32,35 +32,35 @@ include_once('./plugins/mactrack/lib/mactrack_functions.php');
 include_once('./plugins/mactrack/lib/mactrack_vendors.php');
 
 /* store the list of registered mactrack scanning functions */
-db_execute('REPLACE INTO mac_track_scanning_functions 
-	(scanning_function, type) 
+db_execute('REPLACE INTO mac_track_scanning_functions
+	(scanning_function, type)
 	VALUES (' . db_qstr(__('Not Applicable - Router', 'mactrack')) . ', 1)');
 
 if (isset($mactrack_scanning_functions)) {
 	foreach($mactrack_scanning_functions as $scanning_function) {
-		db_execute_prepared('REPLACE INTO mac_track_scanning_functions 
-			(scanning_function, type) 
+		db_execute_prepared('REPLACE INTO mac_track_scanning_functions
+			(scanning_function, type)
 			VALUES (?, 1)', array($scanning_function));
 	}
 }
 
 /* store the list of registered mactrack scanning functions */
-db_execute('REPLACE INTO mac_track_scanning_functions 
-	(scanning_function, type) 
+db_execute('REPLACE INTO mac_track_scanning_functions
+	(scanning_function, type)
 	VALUES (' . db_qstr(__('Not Applicable - Switch/Hub', 'mactrack')) . ', 2)');
 
 if (isset($mactrack_scanning_functions_ip)) {
 	foreach($mactrack_scanning_functions_ip as $scanning_function) {
-		db_execute_prepared('REPLACE INTO mac_track_scanning_functions 
-			(scanning_function, type) 
+		db_execute_prepared('REPLACE INTO mac_track_scanning_functions
+			(scanning_function, type)
 			VALUES (?, 2)', array($scanning_function));
 	}
 }
 
 if (isset($mactrack_scanning_functions_dot1x)) {
 	foreach($mactrack_scanning_functions_dot1x as $scanning_function) {
-		db_execute_prepared('REPLACE INTO mac_track_scanning_functions 
-			(scanning_function, type) 
+		db_execute_prepared('REPLACE INTO mac_track_scanning_functions
+			(scanning_function, type)
 			VALUES (?, 3)', array($scanning_function));
 	}
 }
@@ -127,6 +127,11 @@ function form_save() {
 			get_nfilter_request_var('serial_number_oid'), get_nfilter_request_var('lowPort'),
 			get_nfilter_request_var('highPort'));
 
+		if ($device_type_id) {
+			raise_message(1);
+		} else {
+			raise_message(2);
+		}
 		header('Location: mactrack_device_types.php?action=edit&header=false&device_type_id=' . (empty($device_type_id) ? get_nfilter_request_var('device_type_id') : $device_type_id));
 	}
 
@@ -834,12 +839,10 @@ function mactrack_device_type_edit() {
 	get_filter_request_var('device_type_id');
 	/* ==================================================== */
 
-	display_output_messages();
-
 	if (!isempty_request_var('device_type_id')) {
-		$device_type = db_fetch_row_prepared('SELECT * 
-			FROM mac_track_device_types 
-			WHERE device_type_id = ?', 
+		$device_type = db_fetch_row_prepared('SELECT *
+			FROM mac_track_device_types
+			WHERE device_type_id = ?',
 			array(get_request_var('device_type_id')));
 
 		$header_label = __('Device Tracking Device Types [edit: %s]', $device_type['description'], 'mactrack');

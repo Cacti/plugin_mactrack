@@ -66,7 +66,13 @@ function form_save() {
 			get_nfilter_request_var('ticket_number'), get_nfilter_request_var('description'),
 			get_nfilter_request_var('notify_schedule'), get_nfilter_request_var('email_addresses'));
 
-		header('Location: mactrack_macwatch.php?action=edit&id=' . (empty($mac_id) ? get_request_var('mac_id') : $mac_id));
+		if ($mac_id) {
+			raise_message(1);
+		} else {
+			raise_message(2);
+		}
+
+		header('Location: mactrack_macwatch.php?action=edit&header=false&id=' . (empty($mac_id) ? get_request_var('mac_id') : $mac_id));
 	}
 }
 
@@ -223,12 +229,10 @@ function mactrack_macw_edit() {
 	get_filter_request_var('mac_id');
 	/* ==================================================== */
 
-	display_output_messages();
-
 	if (!isempty_request_var('mac_id')) {
-		$mac_record = db_fetch_row_prepared('SELECT * 
-			FROM mac_track_macwatch 
-			WHERE mac_id = ?', 
+		$mac_record = db_fetch_row_prepared('SELECT *
+			FROM mac_track_macwatch
+			WHERE mac_id = ?',
 			array(get_request_var('mac_id')));
 
 		$header_label = __('Device Tracking MacWatch [edit: %s]', $mac_record['name'], 'mactrack');
