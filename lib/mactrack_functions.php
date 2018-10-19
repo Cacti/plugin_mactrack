@@ -3028,7 +3028,7 @@ function mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '')
 	$text['html'] = $message . '<br>';
 	$text['text'] = strip_tags(str_replace('<br>', "\n", $message));
 
-	$v = mactrack_version();
+	$v = plugin_mactrack_version();
 	$Mailer->header_set('X-Mailer', 'Cacti-MacTrack-v' . $v['version']);
 	$Mailer->header_set('User-Agent', 'Cacti-MacTrack-v' . $v['version']);
 
