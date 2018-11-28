@@ -217,11 +217,7 @@ if (read_config_option('mt_collection_timing') == 'disabled') {
 			}
 
 			if (empty($last_db_maint_time)) {
-				if (strtotime($database_maint_time) < $current_time) {
-					$next_db_maint_time = strtotime(date('Y-m-d') . ' ' . $database_maint_time) + 3600*24;
-				} else {
-					$next_db_maint_time = strtotime(date('Y-m-d') . ' ' . $database_maint_time);
-				}
+				$next_db_maint_time = strtotime(date('Y-m-d') . ' ' . $database_maint_time);
 			} else {
 				$next_db_maint_time = $last_db_maint_time + 24*3600;
 			}
