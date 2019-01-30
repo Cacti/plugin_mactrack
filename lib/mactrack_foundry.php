@@ -42,7 +42,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 	/* get VLAN Trunk status */
 	$vlan_trunkstatus = xform_standard_indexed_data(".1.3.6.1.4.1.1991.1.1.3.3.5.1.4", $device);
 	$device["vlans_total"] = sizeof($vlan_trunkstatus);
-	mactrack_debug("VLAN data collected. There are " . (sizeof($vlan_ids)) . " VLANS.");
+	mactrack_debug("VLAN data collected. There are " . (cacti_sizeof($vlan_ids)) . " VLANS.");
 
 	/* get the ifIndexes for the device */
 	$ifIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device);
@@ -64,7 +64,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 	$port_dualmode = xform_standard_indexed_data(".1.3.6.1.4.1.1991.1.1.3.3.5.1.24", $device);
 	mactrack_debug("ifVlanId data collection complete.");
 
-	if (sizeof($ifIndexes)) {
+	if (cacti_sizeof($ifIndexes)) {
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["ifIndex"] = $ifIndex;
 		$ifInterfaces[$ifIndex]["ifName"] = @$ifNames[$ifIndex];
@@ -77,7 +77,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 	mactrack_debug("ifInterfaces assembly complete.");
 
 	/* calculate the number of end user ports */
-	if (sizeof($ifTypes)) {
+	if (cacti_sizeof($ifTypes)) {
 	foreach ($ifTypes as $ifType) {
 		if (($ifType >= 6) && ($ifType <= 9)) {
 			$device["ports_total"]++;
@@ -87,7 +87,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 	mactrack_debug("Total Ports = " . $device["ports_total"]);
 
 	/* calculate the number of trunk ports */
-	if (sizeof($ifIndexes)) {
+	if (cacti_sizeof($ifIndexes)) {
 	foreach ($ifIndexes as $ifIndex) {
 		if (($ifInterfaces[$ifIndex]["trunkPortState"] == 1) &&
 			($ifInterfaces[$ifIndex]["ifVlanId"] == 0)) {
@@ -99,7 +99,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 
 	/* get VLAN details */
 	$i = 0;
-	if (sizeof($vlan_ids)) {
+	if (cacti_sizeof($vlan_ids)) {
 	foreach ($vlan_ids as $vlan_id => $vlan_name) {
 		$active_vlans[$i]["vlan_id"] = $vlan_id;
 		$active_vlans[$i]["vlan_name"] = $vlan_name;
@@ -109,7 +109,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 	}
 	}
 
-	if (sizeof($active_vlans)) {
+	if (cacti_sizeof($active_vlans)) {
 		/* get the port status information */
 		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", FALSE);
 		$port_vlan_data = xform_standard_indexed_data(".1.3.6.1.4.1.1991.1.1.3.2.6.1.1", $device);
@@ -118,7 +118,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 		$j = 0;
 		$port_array = array();
 
-		if (sizeof($port_results)) {
+		if (cacti_sizeof($port_results)) {
 			foreach ($port_results as $port_result) {
 				$ifIndex = $port_result["port_number"];
 				$ifType = $ifTypes[$ifIndex];
@@ -152,22 +152,22 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 			$indexes = array_keys($active_ports_array);
 
 			$i = 0;
-			if (sizeof($active_ports_array)) {
-			foreach($active_ports_array as $port_info) {
-				$port_info = mactrack_strip_alpha($port_info);
-				$ifInterfaces[$indexes[$i]]["ifType"] = mactrack_strip_alpha($ifInterfaces[$indexes[$i]]["ifType"]);
+			if (cacti_sizeof($active_ports_array)) {
+				foreach($active_ports_array as $port_info) {
+					$port_info = mactrack_strip_alpha($port_info);
+					$ifInterfaces[$indexes[$i]]["ifType"] = mactrack_strip_alpha($ifInterfaces[$indexes[$i]]["ifType"]);
 
-				mactrack_debug($ifInterfaces[$indexes[$i]]["ifType"]);
+					mactrack_debug($ifInterfaces[$indexes[$i]]["ifType"]);
 
-				if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
-					($ifInterfaces[$indexes[$i]]["ifType"] <=9)) ||
-					($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
-					if ($port_info == 1) {
-						$device["ports_active"]++;
+					if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
+						($ifInterfaces[$indexes[$i]]["ifType"] <=9)) ||
+						($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
+						if ($port_info == 1) {
+							$device["ports_active"]++;
+						}
+					$i++;
 					}
-				$i++;
 				}
-			}
 			}
 
 			$device["ports_active"] = $device["ports_active"] - $device["ports_trunk"];
@@ -187,7 +187,7 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 
 			db_store_device_port_results($device, $port_array, $scan_date);
 		}
-	}else{
+	} else {
 		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devices on this network device.");
 		$device["snmp_status"] = HOST_UP;
 		$device["last_runmessage"] = "Data collection completed ok. No active devices on this network device.";

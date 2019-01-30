@@ -62,7 +62,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 	$vlan_ids   = xform_standard_indexed_data(".1.3.6.1.4.1.1916.1.2.1.2.1.10", $device);
 	$vlan_names = xform_standard_indexed_data(".1.3.6.1.4.1.1916.1.2.1.2.1.2", $device);
 	$device["vlans_total"] = sizeof($vlan_ids);
-	mactrack_debug("There are " . (sizeof($vlan_ids)) . " VLANS.");
+	mactrack_debug("There are " . (cacti_sizeof($vlan_ids)) . " VLANS.");
 
 	/* get the ifIndexes for the device
 	   .1.3.6.1.2.1.2.2.1.1
@@ -90,7 +90,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 		$i++;
 	}
 
-	if (sizeof($active_vlans) > 0) {
+	if (cacti_sizeof($active_vlans) > 0) {
 
 		/* get the port status information */
 		/* get port_number and MAC addr */
@@ -172,7 +172,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 		$device["last_runmessage"] = "Data collection completed ok";
 		$device["macs_active"] = sizeof($port_array);
 		db_store_device_port_results($device, $port_array, $scan_date);
-	}else{
+	} else {
 		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devices on this network device.");
 		$device["snmp_status"] = HOST_UP;
 		$device["last_runmessage"] = "Data collection completed ok. No active devices on this network device.";
@@ -212,7 +212,7 @@ IF-MIB::ifName : get name of port from IfIndex
 		$atifIndexes = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.1", $device);
 		$atEntries   = array();
 
-		if (sizeof($atifIndexes)) {
+		if (cacti_sizeof($atifIndexes)) {
 			mactrack_debug("atifIndexes data collection complete");
 			$atPhysAddress = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.2", $device);
 			mactrack_debug("atPhysAddress data collection complete");
@@ -222,7 +222,7 @@ IF-MIB::ifName : get name of port from IfIndex
 			mactrack_debug("ifDescr data collection complete");
 		}
 		$i = 0;
-		if (sizeof($atifIndexes)) {
+		if (cacti_sizeof($atifIndexes)) {
 			foreach($atifIndexes as $key => $atifIndex) {
 				$atEntries[$i]["atifIndex"] = $ifDescr[$atifIndex];
 				$atEntries[$i]["atPhysAddress"] = xform_mac_address($atPhysAddress[$key]);
@@ -235,7 +235,7 @@ IF-MIB::ifName : get name of port from IfIndex
 		$FdbPortIfIndex = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.2.1.5", $device);
 		$atEntries   = array();
 
-		if (sizeof($FdbPortIfIndex)) {
+		if (cacti_sizeof($FdbPortIfIndex)) {
 			mactrack_debug("FdbPortIfIndex data collection complete");
 			$FdbMacAddress = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.2.1.3", $device);
 			mactrack_debug("FdbMacAddress data collection complete");
@@ -252,7 +252,7 @@ IF-MIB::ifName : get name of port from IfIndex
 		}
 
 		$i = 0;
-		if (sizeof($FdbPortIfIndex)) {
+		if (cacti_sizeof($FdbPortIfIndex)) {
 			foreach($FdbPortIfIndex as $key => $PortIndex) {
 				$atEntries[$i]["atifIndex"] = $ifName[$BasePortIfIndex[$PortIndex]] . ", vlan:" . $VlanIfVlanId[$FdbVlanIfIndex[$key]];
 				$atEntries[$i]["atPhysAddress"] = xform_mac_address($FdbMacAddress[$key]);
@@ -264,7 +264,7 @@ IF-MIB::ifName : get name of port from IfIndex
 	}
 
 	/* output details to database */
-	if (sizeof($atEntries)) {
+	if (cacti_sizeof($atEntries)) {
 		foreach($atEntries as $atEntry) {
 			$insert_string = "REPLACE INTO mac_track_ips " .
 				"(site_id,device_id,hostname,device_name,port_number," .

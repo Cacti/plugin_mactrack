@@ -32,7 +32,7 @@ $title = __('Device Tracking - Site Report View', 'mactrack');
 
 if (isset_request_var('export')) {
 	mactrack_view_export_sites();
-}else{
+} else {
 	mactrack_redirect();
 
 	general_header();
@@ -61,7 +61,7 @@ function mactrack_view_export_sites() {
 				$site['total_macs']       . '","' . $site['total_ips']           . '","' .
 				$site['total_oper_ports'] . '","' . $site['total_user_ports']    . '"');
 		}
-	}else{
+	} else {
 		array_push($xport_array, '"site_name","vendor","device_name","total_devices",' .
 				'"total_ips","total_user_ports","total_oper_ports","total_trunks",' .
 				'"total_macs_found"');
@@ -96,14 +96,14 @@ function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = TRUE
 	if (get_request_var('filter') != '') {
 		if (get_request_var('detail') == 'false') {
 			$sql_where = "WHERE (mac_track_sites.site_name LIKE '%" . get_request_var('filter') . "%')";
-		}else{
+		} else {
 			$sql_where = "WHERE (mac_track_device_types.vendor LIKE '%" . get_request_var('filter') . "%' OR " .
 				"mac_track_device_types.description LIKE '%" . get_request_var('filter') . "%' OR " .
 				"mac_track_sites.site_name LIKE '%" . get_request_var('filter') . "%')";
 		}
 	}
 
-	if (sizeof($device_type_info)) {
+	if (cacti_sizeof($device_type_info)) {
 		$sql_where = ($sql_where != '' ? ' AND ':'WHERE ') . '(mac_track_devices.device_type_id=' . $device_type_info['device_type_id'] . ')';
 	}
 
@@ -114,7 +114,7 @@ function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = TRUE
 	$sql_order = get_order_string();
 	if ($apply_limits) {
 		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
-	}else{
+	} else {
 		$sql_limit = '';
 	}
 
@@ -124,7 +124,7 @@ function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = TRUE
 			$sql_where
 			$sql_order
 			$sql_limit";
-	}else{
+	} else {
 		$query_string ="SELECT mac_track_sites.site_name, mac_track_sites.site_id,
 			COUNT(mac_track_device_types.device_type_id) AS total_devices,
 			mac_track_device_types.device_type_id,
@@ -207,9 +207,9 @@ function mactrack_view_sites() {
 
 	if (get_request_var('rows') == -1) {
 		$rows = read_config_option('num_rows_table');
-	}elseif (get_request_var('rows') == -2) {
+	} elseif (get_request_var('rows') == -2) {
 		$rows = 999999;
-	}else{
+	} else {
 		$rows = get_request_var('rows');
 	}
 
@@ -230,7 +230,7 @@ function mactrack_view_sites() {
 			COUNT(mac_track_sites.site_id)
 			FROM mac_track_sites
 			$sql_where");
-	}else{
+	} else {
 		$total_rows = sizeof(db_fetch_assoc("SELECT
 			mac_track_device_types.device_type_id, mac_track_sites.site_name
 			FROM (mac_track_device_types
@@ -263,7 +263,7 @@ function mactrack_view_sites() {
 
 		html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
-		if (sizeof($sites)) {
+		if (cacti_sizeof($sites)) {
 			foreach ($sites as $site) {
 				form_alternate_row('row_' . $site['site_id'], true);
 					?>
@@ -292,18 +292,18 @@ function mactrack_view_sites() {
 				</tr>
 				<?php
 			}
-		}else{
+		} else {
 			print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Sites Found', 'mactrack') . '</em></td></tr>';
 		}
 
 		html_end_box(false);
 
-		if (sizeof($sites)) {
+		if (cacti_sizeof($sites)) {
 			print $nav;
 
 			mactrack_display_stats();
 		}
-	}else{
+	} else {
 		$display_text = array(
 			'nosort'           => array(__('Actions', 'mactrack'), ''),
 			'site_name'        => array(__('Site Name', 'mactrack'), 'ASC'),
@@ -327,7 +327,7 @@ function mactrack_view_sites() {
 
 		html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
-		if (sizeof($sites)) {
+		if (cacti_sizeof($sites)) {
 			foreach ($sites as $site) {
 				form_alternate_row();
 					?>
@@ -356,13 +356,13 @@ function mactrack_view_sites() {
 				</tr>
 				<?php
 			}
-		}else{
+		} else {
 			print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Sites Found', 'mactrack') . '</em></td></tr>';
 		}
 
 		html_end_box(false);
 
-		if (sizeof($sites)) {
+		if (cacti_sizeof($sites)) {
 			print $nav;
 
 			mactrack_display_stats();

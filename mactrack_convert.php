@@ -53,8 +53,8 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 	$parms = $_SERVER['argv'];
 	array_shift($parms);
 
-	if (sizeof($parms)) {
-		foreach($parms as $parameter) {
+	if (cacti_sizeof($parms)) {
+		foreach ($parms as $parameter) {
 			if (strpos($parameter, '=')) {
 				list($arg, $value) = explode('=', $parameter);
 			} else {
@@ -108,7 +108,7 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 
 	if ($partioning == 'YES') {
 		mactrack_create_partitioned_table($engine, $days, true);
-	}else{
+	} else {
 		echo "FATAL: Partitioning Not Available, Exiting!\n";
 	}
 }
@@ -157,7 +157,7 @@ function mactrack_create_partitioned_table($engine = 'InnoDB', $days = 30, $migr
 
 	$parts = '';
 
-	for($i = $days; $i > 0; $i--) {
+	for ($i = $days; $i > 0; $i--) {
 		$timestamp = $now - ($i * 86400);
 		$date     = date('Y-m-d', $timestamp);
 		$format   = date('Ymd', $timestamp);
@@ -172,18 +172,18 @@ function mactrack_create_partitioned_table($engine = 'InnoDB', $days = 30, $migr
 		if ($migrate) {
 			print "NOTE: Migrating Old Data to Partitioned Tables\n";
 
-			$scan_dates = db_fetch_assoc('SELECT DISTINCT scan_date 
+			$scan_dates = db_fetch_assoc('SELECT DISTINCT scan_date
 				FROM mac_track_ports_backup');
 
-			if (sizeof($scan_dates)) {
-				foreach($scan_dates as $sd) {
-					db_execute_prepared('INSERT INTO mac_track_ports 
-						SELECT * 
-						FROM mac_track_ports_backups 
-						WHERE scan_date = ?', 
+			if (cacti_sizeof($scan_dates)) {
+				foreach ($scan_dates as $sd) {
+					db_execute_prepared('INSERT INTO mac_track_ports
+						SELECT *
+						FROM mac_track_ports_backups
+						WHERE scan_date = ?',
 						array($sd['scan_date']));
 
-					db_execute_prepared('DELETE FROM mac_track_ports_backup 
+					db_execute_prepared('DELETE FROM mac_track_ports_backup
 						WHERE scan_date = ?',
 						array($sd['scan_date']));
 				}
@@ -192,10 +192,10 @@ function mactrack_create_partitioned_table($engine = 'InnoDB', $days = 30, $migr
 
 		db_execute('DROP TABLE mac_track_ports_backup');
 
-		db_execute('REPLACE INTO `settings` 
+		db_execute('REPLACE INTO `settings`
 			SET name = "mt_data_retention", value = ?',
 			array($days));
-	}else{
+	} else {
 		print "FATAL: Conversion to Partitioned Table Failed\n";
 
 		/* rename the original table */

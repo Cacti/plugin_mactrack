@@ -153,7 +153,7 @@ function mactrack_db_column_exists($table, $column) {
 
 	if (mactrack_db_table_exists($table)) {
 		$columns  = db_fetch_assoc("SHOW COLUMNS FROM $table");
-		if (sizeof($columns)) {
+		if (cacti_sizeof($columns)) {
 			foreach($columns as $row) {
 				if ($row['Field'] == $column) {
 					$found = true;
@@ -171,7 +171,7 @@ function mactrack_db_key_exists($table, $index) {
 
 	if (mactrack_db_table_exists($table)) {
 		$keys  = db_fetch_assoc("SHOW INDEXES FROM $table");
-		if (sizeof($keys)) {
+		if (cacti_sizeof($keys)) {
 			foreach($keys as $key) {
 				if ($key['Key_name'] == $index) {
 					$found = true;
@@ -890,10 +890,10 @@ function mactrack_page_head() {
 	if (substr_count(get_current_page(), 'mactrack_')) {
 		if (!isset($config['base_path'])) {
 			print "<script type='text/javascript' src='" . URL_PATH . "plugins/mactrack/mactrack.js'></script>\n";
-		}else{
+		} else {
 			if (file_exists($config['base_path'] . '/plugins/mactrack/themes/' . get_selected_theme() . '/mactrack.css')) {
 				print "<link type='text/css' href='" . $config['url_path'] . "plugins/mactrack/themes/" . get_selected_theme() . "/mactrack.css' rel='stylesheet'>\n";
-			}else{
+			} else {
 				print "<link type='text/css' href='" . $config['url_path'] . "plugins/mactrack/mactrack.css' rel='stylesheet'>\n";
 			}
 		}
@@ -1258,7 +1258,7 @@ function mactrack_show_tab () {
 	if (api_user_realm_auth('mactrack_view_macs.php')) {
 		if (substr_count($_SERVER['REQUEST_URI'], 'mactrack_view_')) {
 			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_macs.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="' . __('Device Tracking', 'mactrack') . '"></a>';
-		}else{
+		} else {
 			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_macs.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="' . __('Device Tracking', 'mactrack') . '"></a>';
 		}
 	}
@@ -2004,7 +2004,7 @@ function convert_readstrings() {
 
 	$devices = db_fetch_assoc($sql);
 
-	if (sizeof($devices)) {
+	if (cacti_sizeof($devices)) {
 		$i = 0;
 		foreach($devices as $device) {
 			# create new SNMP Option Set
@@ -2015,7 +2015,7 @@ function convert_readstrings() {
 
 			# add each single option derived from readstrings
 			$read_strings = explode(':',$device['snmp_readstrings']);
-			if (sizeof($read_strings)) {
+			if (cacti_sizeof($read_strings)) {
 				foreach($read_strings as $snmp_readstring) {
 					unset($save);
 					$save['id']						= 0;

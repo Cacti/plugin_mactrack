@@ -43,7 +43,7 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
         /* get VLAN Trunk status: not (yet) implemented for Enterasys N7 */
         //$vlan_trunkstatus = xform_standard_indexed_data(".1.3.6.1.4.1.2272.1.3.3.1.4", $device);
         $device["vlans_total"] = sizeof($vlan_ids);
-        mactrack_debug("VLAN data collected. There are " . (sizeof($vlan_ids)) . " VLANS.");
+        mactrack_debug("VLAN data collected. There are " . (cacti_sizeof($vlan_ids)) . " VLANS.");
 
         /* get the ifIndexes for the device */
         $ifIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device);
@@ -61,7 +61,7 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	mactrack_debug("ifInterfaces assembly complete: " . sizeof($ifIndexes));
 
 	/* map vlans to bridge ports */
-        if (sizeof($vlan_ids) > 0) {
+        if (cacti_sizeof($vlan_ids) > 0) {
                 /* get the port status information */
                 #$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $device["snmp_readstring"], FALSE, $lowPort, $highPort);
                 $port_results = get_enterasys_N7_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $device["snmp_readstring"], FALSE, $lowPort, $highPort);
@@ -103,7 +103,7 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
                 $device["macs_active"] = sizeof($port_array);
                 mactrack_debug("macs active on this switch:" . $device["macs_active"]);
                 db_store_device_port_results($device, $port_array, $scan_date);
-        }else{
+        } else {
                 print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devcies on this network device.\n");
                 $device["snmp_status"] = HOST_UP;
                 $device["last_runmessage"] = "Data collection completed ok. No active devices on this network device.";
@@ -258,7 +258,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 		foreach ($port_key_array as $port_key) {
 			/* map bridge port to interface port and check type */
 			if ($port_key["port_number"] > 0) {
-				if (sizeof($bridgePortIfIndexes) != 0) {
+				if (cacti_sizeof($bridgePortIfIndexes) != 0) {
 					/* some hubs do not always return a port number in the bridge table.
 					   test for it by isset and substiture the port number from the ifTable
 					   if it isnt in the bridge table
@@ -266,11 +266,11 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 #print("searching bridge port: " . $port_key["port_number"] .", Bridge: " . $bridgePortIfIndexes[$port_key["port_number"]] . "\n");
 					if (isset($bridgePortIfIndexes[$port_key["port_number"]])) {
 						$brPortIfIndex = @$bridgePortIfIndexes[$port_key["port_number"]];
-					}else{
+					} else {
 						$brPortIfIndex = @$port_key["port_number"];
 					}
 					$brPortIfType = @$ifInterfaces[$brPortIfIndex]["ifType"];
-				}else{
+				} else {
 					$brPortIfIndex = $port_key["port_number"];
 					$brPortIfType = @$ifInterfaces[$port_key["port_number"]]["ifType"];
 				}
@@ -298,7 +298,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 
 		/* map mac address */
 		/* only continue if there were user ports defined */
-		if (sizeof($new_port_key_array) > 0) {
+		if (cacti_sizeof($new_port_key_array) > 0) {
 			/* get the bridges active MAC addresses */
 			$port_macs = xform_stripped_oid(".1.3.6.1.2.1.17.4.3.1.1", $device, $snmp_readstring);
 
@@ -312,28 +312,28 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 			}
 
 			mactrack_debug("Port mac address information collected: " . sizeof($port_macs));
-		}else{
+		} else {
 			mactrack_debug("No user ports on this network.");
 		}
-	}else{
+	} else {
 		mactrack_debug("No user ports on this network.");
 	}
 
 	if ($store_to_db) {
 		if ($ports_active <= 0) {
 			$device["last_runmessage"] = "Data collection completed ok";
-		}elseif (sizeof($new_port_key_array) > 0) {
+		} elseif (cacti_sizeof($new_port_key_array) > 0) {
 			$device["last_runmessage"] = "Data collection completed ok";
 			$device["macs_active"] = sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
-		}else{
+		} else {
 			$device["last_runmessage"] = "WARNING: Poller did not find active ports on this device.";
 		}
 
-		if(!$debug) {
+		if (!$debug) {
 			print(" - Complete\n");
 		}
-	}else{
+	} else {
 		return $new_port_key_array;
 	}
 

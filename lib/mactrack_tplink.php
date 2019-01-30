@@ -62,22 +62,24 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	$bridgePortIfIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.17.1.4.1.2", $device );
 
 	$i = 0;
-	if (sizeof($active_ports_array)) {
-	foreach($active_ports_array as $port_info) {
-		$port_info =  mactrack_strip_alpha($port_info);
+	if (cacti_sizeof($active_ports_array)) {
+		foreach ($active_ports_array as $port_info) {
+			$port_info =  mactrack_strip_alpha($port_info);
 
-		if ( isset( $bridgePortIfIndexes[$ifInterfaces[$indexes[$i]]["ifIndex"]] ) ) {
-		if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
-			($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
-			($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
-			if ($port_info == 1) {
-				$ports_active++;
+			if ( isset( $bridgePortIfIndexes[$ifInterfaces[$indexes[$i]]["ifIndex"]] ) ) {
+				if ((($ifInterfaces[$indexes[$i]]["ifType"] >= 6) &&
+					($ifInterfaces[$indexes[$i]]["ifType"] <= 9)) ||
+					($ifInterfaces[$indexes[$i]]["ifType"] == 71)) {
+					if ($port_info == 1) {
+						$ports_active++;
+					}
+
+					$ports_total++;
+				}
 			}
-			$ports_total++;
+
+			$i++;
 		}
-		}
-		$i++;
-	}
 	}
 
 	print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $ports_total . ", OPER PORTS: " . $ports_active);
@@ -95,8 +97,8 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	$vlan_trunkstatus = xform_standard_indexed_data(".1.3.6.1.4.1.11863.6.14.1.1.1.1.2", $device);
 
 	$device["vlans_total"] = sizeof($vlan_ids) - 1;
-	mactrack_debug("VLAN data collected. There are " . (sizeof($vlan_ids) - 1) . " VLANS.");
-	foreach($ifIndexes as $ifIndex) {
+	mactrack_debug("VLAN data collected. There are " . (cacti_sizeof($vlan_ids) - 1) . " VLANS.");
+	foreach ($ifIndexes as $ifIndex) {
 		if ( isset( $vlan_trunkstatus[$ifIndex] ) && $vlan_trunkstatus[$ifIndex] == 1 ) {
 			$device["ports_trunk"]++;
 		}
@@ -105,7 +107,7 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	mactrack_debug("ifInterfaces assembly complete.");
 
 	$i = 0;
-	foreach($vlan_ids as $vlan_id => $vlan_num) {
+	foreach ($vlan_ids as $vlan_id => $vlan_num) {
 		$active_vlans[$vlan_id]["vlan_id"] = $vlan_num;
 		$active_vlans[$vlan_id]["vlan_name"] = $vlan_names[$vlan_id];
 		$active_vlans++;
@@ -114,7 +116,7 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	}
 	mactrack_debug("Vlan assembly complete.");
 
-	if (sizeof($active_vlans) > 0) {
+	if (cacti_sizeof($active_vlans) > 0) {
 		$i = 0;
 		/* get the port status information */
 		$port_results = xform_stripped_oid ( ".1.3.6.1.2.1.17.1.4.1.2", $device );
@@ -128,7 +130,7 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		$i = 0;
 		$j = 0;
 		$port_array = array();
-		foreach($mac_results as $num => $mac_result) {
+		foreach ($mac_results as $num => $mac_result) {
 			if ( $mac_result != 0 ) {
 				$Xvlanid = substr ( $num, 0, strpos ( $num, "." ) );
 				$Xmac    = mach ( substr ( $num, strpos ( $num, ".") + 1 ) );
@@ -161,11 +163,13 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 
 		/* display completion message */
 		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $device["ports_total"] . ", ACTIVE PORTS: " . $device["ports_active"]);
+
 		$device["last_runmessage"] = "Data collection completed ok";
 		$device["macs_active"] = sizeof($port_array);
 		db_store_device_port_results($device, $port_array, $scan_date);
-	}else{
+	} else {
 		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devcies on this network device.");
+
 		$device["snmp_status"] = HOST_UP;
 		$device["last_runmessage"] = "Data collection completed ok. No active devices on this network device.";
 	}

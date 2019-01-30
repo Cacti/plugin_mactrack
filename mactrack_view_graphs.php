@@ -47,22 +47,22 @@ function mactrack_view_graphs() {
 	html_graph_validate_preview_request_vars();
 
 	if (!isset($_SESSION['sess_mt_gt'])) {
-		$_SESSION['sess_mt_gt'] = implode(',', array_rekey(db_fetch_assoc('SELECT DISTINCT gl.graph_template_id 
-			FROM graph_local AS gl 
+		$_SESSION['sess_mt_gt'] = implode(',', array_rekey(db_fetch_assoc('SELECT DISTINCT gl.graph_template_id
+			FROM graph_local AS gl
 			WHERE gl.host_id IN(
-				SELECT host_id 
+				SELECT host_id
 				FROM mac_track_devices
 			)'), 'graph_template_id', 'graph_template_id'));
 	}
 	$gt = $_SESSION['sess_mt_gt'];
 
 	if (!isset($_SESSION['sess_mt_hosts'])) {
-		$_SESSION['sess_mt_hosts'] = implode(',', array_rekey(db_fetch_assoc('SELECT h.id 
-			FROM host AS h 
+		$_SESSION['sess_mt_hosts'] = implode(',', array_rekey(db_fetch_assoc('SELECT h.id
+			FROM host AS h
 			WHERE h.id IN (
-				SELECT host_id 
+				SELECT host_id
 				FROM mac_track_devices
-			) 
+			)
 			ORDER BY id DESC'), 'id', 'id'));
 	}
 	$hosts = $_SESSION['sess_mt_hosts'];
@@ -72,13 +72,13 @@ function mactrack_view_graphs() {
 
 	if ($hosts != '') {
 		$hq = 'h.id IN (' . $hosts . ')';
-	}else{
+	} else {
 		$hq = 'h.id = 0';
 	}
 
 	if ($gt != '') {
 		$gq = 'gt.id IN (' . $gt . ')';
-	}else{
+	} else {
 		$gq = 'gt.id = 0';
 	}
 
@@ -95,7 +95,7 @@ function mactrack_view_graphs() {
 				foreach (explode(',',get_request_var('graph_list')) as $item) {
 					$graph_list[$item] = 1;
 				}
-			}else{
+			} else {
 				$graph_list = array();
 			}
 
@@ -114,7 +114,7 @@ function mactrack_view_graphs() {
 
 			$graph_array = array_keys($graph_list);
 
-			if (sizeof($graph_array)) {
+			if (cacti_sizeof($graph_array)) {
 				$sql_or = array_to_sql_or($graph_array, 'gl.id');
 			}
 		}
@@ -140,12 +140,12 @@ function mactrack_view_graphs() {
 	$limit  = (get_request_var('graphs')*(get_request_var('page')-1)) . ',' . get_request_var('graphs');
 	$order  = 'gtg.title_cache';
 
-	$graphs = get_allowed_graphs($sql_where, $order, $limit, $total_graphs);	
+	$graphs = get_allowed_graphs($sql_where, $order, $limit, $total_graphs);
 
 	/* do some fancy navigation url construction so we don't have to try and rebuild the url string */
 	if (preg_match('/page=[0-9]+/',basename($_SERVER['QUERY_STRING']))) {
 		$nav_url = str_replace('&page=' . get_request_var('page'), '', get_browser_query_string());
-	}else{
+	} else {
 		$nav_url = get_browser_query_string() . '&host_id=' . get_request_var('host_id');
 	}
 
@@ -159,7 +159,7 @@ function mactrack_view_graphs() {
 
 	if (get_request_var('thumbnails') == 'true') {
 		html_graph_thumbnail_area($graphs, '', 'graph_start=' . get_current_graph_start() . '&graph_end=' . get_current_graph_end(), '', get_request_var('columns'));
-	}else{
+	} else {
 		html_graph_area($graphs, '', 'graph_start=' . get_current_graph_start() . '&graph_end=' . get_current_graph_end(), '', get_request_var('columns'));
 	}
 

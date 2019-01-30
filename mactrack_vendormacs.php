@@ -30,7 +30,7 @@ set_default_action();
 
 if (isset_request_var('export')) {
 	mactrack_vmacs_export();
-}else{
+} else {
 	top_header();
 	mactrack_vmacs();
 	bottom_footer();
@@ -82,7 +82,7 @@ function mactrack_vmacs_export() {
 	$xport_array = array();
 	array_push($xport_array, '"vendor_mac","vendor_name","vendor_address"');
 
-	if (sizeof($vmacs)) {
+	if (cacti_sizeof($vmacs)) {
 		foreach($vmacs as $vmac) {
 			array_push($xport_array,'"' . $vmac['vendor_mac'] . '","' .
 			$vmac['vendor_name'] . '","' .
@@ -110,7 +110,7 @@ function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = TRU
 	$sql_order = get_order_string();
 	if ($apply_limits) {
 		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
-	}else{
+	} else {
 		$sql_limit = '';
 	}
 
@@ -130,9 +130,9 @@ function mactrack_vmacs() {
 
 	if (get_request_var('rows') == -1) {
 		$rows = read_config_option('num_rows_table');
-	}elseif (get_request_var('rows') == -2) {
+	} elseif (get_request_var('rows') == -2) {
 		$rows = 999999;
-	}else{
+	} else {
 		$rows = get_request_var('rows');
 	}
 
@@ -165,7 +165,7 @@ function mactrack_vmacs() {
 
 	html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
-	if (sizeof($vmacs)) {
+	if (cacti_sizeof($vmacs)) {
 		foreach ($vmacs as $vmac) {
 			form_alternate_row();
 				?>
@@ -175,13 +175,13 @@ function mactrack_vmacs() {
 			</tr>
 			<?php
 		}
-	}else{
+	} else {
 		print '<tr><td colspen="' . $columns . '"><em>' . __('No Device Tracking Vendor MACS Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);
 
-	if (sizeof($vmacs)) {
+	if (cacti_sizeof($vmacs)) {
 		print $nav;
 	}
 }
@@ -208,7 +208,7 @@ function mactrack_vmac_filter() {
 						<select id='rows' onChange='applyFilter()'>
 							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack');?></option>
 							<?php
-							if (sizeof($item_rows) > 0) {
+							if (cacti_sizeof($item_rows) > 0) {
 							foreach ($item_rows as $key => $value) {
 								print "<option value='" . $key . "'"; if (get_request_var('rows') == $key) { print ' selected'; } print '>' . $value . '</option>';
 							}

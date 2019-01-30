@@ -53,7 +53,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 	$vlan_trunkstatus = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.46.1.6.1.1.14", $device);
 
 	$device["vlans_total"] = sizeof($vlan_ids) - 3;
-	mactrack_debug("There are " . (sizeof($vlan_ids)-3) . " VLANS.");
+	mactrack_debug("There are " . (cacti_sizeof($vlan_ids)-3) . " VLANS.");
 
 	/* get the ifIndexes for the device */
 	$ifIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device);
@@ -64,25 +64,25 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 
 	/* get the Voice VLAN information if it exists */
 	$portVoiceVLANs = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.87.1.4.1.1.37.0", $device);
-	if (sizeof($portVoiceVLANs)) {
+	if (cacti_sizeof($portVoiceVLANs)) {
 		$vvlans = TRUE;
-	}else{
+	} else {
 		$portVoiceVLANs = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.68.1.5.1.1.1", $device);
-		if (sizeof($portVoiceVLANs)) {
+		if (cacti_sizeof($portVoiceVLANs)) {
 			$vvlans = TRUE;
-		}else{
+		} else {
 			$vvlans = FALSE;
 		}
 	}
 	mactrack_debug("Cisco Voice VLAN collection complete");
 	if ($vvlans) {
 		mactrack_debug("Voice VLANs exist on this device");
-	}else{
+	} else {
 		mactrack_debug("Voice VLANs do not exist on this device");
 	}
 
-	if (sizeof($ifIndexes)) {
-	foreach($ifIndexes as $ifIndex) {
+	if (cacti_sizeof($ifIndexes)) {
+	foreach ($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["trunkPortState"] = isset($vlan_trunkstatus[$ifIndex]) ? $vlan_trunkstatus[$ifIndex]:'';
 		if ($vvlans) {
 			$ifInterfaces[$ifIndex]["vVlanID"] = isset($portVoiceVLANs[$ifIndex]) ? $portVoiceVLANs[$ifIndex]:'';
@@ -104,7 +104,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 	mactrack_debug("portTrunking data collected.");
 
 	/* calculate the number of end user ports */
-	if (sizeof($portTrunking)) {
+	if (cacti_sizeof($portTrunking)) {
 	foreach ($portTrunking as $portTrunk) {
 		if ($portTrunk == 1) {
 			$device["ports_trunk"]++;
@@ -117,8 +117,8 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 	$j = 0;
 	$active_vlans = array();
 
-	if (sizeof($vlan_ids)) {
-	foreach($vlan_ids as $vlan_number => $vlanStatus) {
+	if (cacti_sizeof($vlan_ids)) {
+	foreach ($vlan_ids as $vlan_number => $vlanStatus) {
 		$vlanName = $vlan_names[$vlan_number];
 
 		if ($vlanStatus == 1) { /* vlan is operatinal */
@@ -138,7 +138,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 						$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
 						$device["snmp_priv_protocol"], $device["snmp_context"],
 						$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
-				}else{
+				} else {
 					$active_vlan_ports = cacti_snmp_get($device["hostname"], "",
 						".1.3.6.1.2.1.17.1.2.0", $device["snmp_version"],
 						$device["snmp_username"], $device["snmp_password"],
@@ -168,10 +168,10 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 	}
 	}
 
-	if (sizeof($active_vlans)) {
+	if (cacti_sizeof($active_vlans)) {
 		$i = 0;
 		/* get the port status information */
-		foreach($active_vlans as $active_vlan) {
+		foreach ($active_vlans as $active_vlan) {
 			/* ignore empty vlans */
 			if ($active_vlan["active_ports"] <= $device["ports_trunk"]) {
 				$active_vlans[$i]["port_results"] = array();
@@ -181,7 +181,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 
 			if ($device["snmp_version"] < "3") {
 				$snmp_readstring = $device["snmp_readstring"] . "@" . $active_vlan["vlan_id"];
-			}else{
+			} else {
 				$snmp_readstring = "cisco@" . $active_vlan["vlan_id"];
 			}
 
@@ -189,7 +189,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 
 			if ($highPort == 0) {
 				$active_vlans[$i]["port_results"] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, FALSE);
-			}else {
+			} else {
 				$active_vlans[$i]["port_results"] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, FALSE, $lowPort, $highPort);
 			}
 
@@ -198,7 +198,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 			mactrack_debug("Bridge port information about to be collected.");
 			mactrack_debug("VLAN_ID: " . $active_vlans[$i]["vlan_id"] . ", VLAN_NAME: " . $active_vlans[$i]["vlan_name"] . ", ACTIVE PORTS: " . sizeof($active_vlans[$i]["port_results"]));
 
-			if (sizeof($active_vlans[$i]["port_results"]) > 0) {
+			if (cacti_sizeof($active_vlans[$i]["port_results"]) > 0) {
 				$brPorttoifIndexes[$i] = xform_standard_indexed_data(".1.3.6.1.2.1.17.1.4.1.2", $device, $snmp_readstring);
 				mactrack_debug("Bridge port information collection complete.");
 			}
@@ -211,10 +211,10 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 		$j = 0;
 		$port_array = array();
 
-		if (sizeof($active_vlans)) {
-		foreach($active_vlans as $active_vlan) {
-			if (sizeof($active_vlan["port_results"])) {
-			foreach($active_vlan["port_results"] as $port_result) {
+		if (cacti_sizeof($active_vlans)) {
+		foreach ($active_vlans as $active_vlan) {
+			if (cacti_sizeof($active_vlan["port_results"])) {
+			foreach ($active_vlan["port_results"] as $port_result) {
 				$ifIndex         = @$brPorttoifIndexes[$j][$port_result["port_number"]];
 				$ifType          = (isset($ifInterfaces[$ifIndex]["ifType"]) ? $ifInterfaces[$ifIndex]["ifType"] : '');
 				$ifName          = (isset($ifInterfaces[$ifIndex]["ifName"]) ? $ifInterfaces[$ifIndex]["ifName"] : '');
@@ -224,7 +224,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 
 				if ($vvlans) {
 					$vVlanID = (isset($portVoiceVLANs[$ifIndex]) ? $portVoiceVLANs[$ifIndex] : '');
-				}else{
+				} else {
 					$vVlanID = -1;
 				}
 
@@ -258,7 +258,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 		$device["last_runmessage"] = "Data collection completed ok";
 		$device["macs_active"] = sizeof($port_array);
 		db_store_device_port_results($device, $port_array, $scan_date);
-	}else{
+	} else {
 		print("\nINFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devcies on this network device.\n");
 		$device["snmp_status"] = HOST_UP;
 		$device["last_runmessage"] = "Data collection completed ok. No active devices on this network device.";
@@ -287,7 +287,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 	$vlan_trunkstatus = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.46.1.6.1.1.14", $device);
 
 	$device["vlans_total"] = sizeof($vlan_ids) - 3;
-	mactrack_debug("There are " . (sizeof($vlan_ids)-3) . " VLANS.");
+	mactrack_debug("There are " . (cacti_sizeof($vlan_ids)-3) . " VLANS.");
 
 	/* get the ifIndexes for the device */
 	$ifIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device);
@@ -297,25 +297,25 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 
 	/* get the Voice VLAN information if it exists */
 	$portVoiceVLANs = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.87.1.4.1.1.37.0", $device);
-	if (sizeof($portVoiceVLANs) > 0) {
+	if (cacti_sizeof($portVoiceVLANs) > 0) {
 		$vvlans = TRUE;
-	}else{
+	} else {
 		$portVoiceVLANs = xform_standard_indexed_data(".1.3.6.1.4.1.9.9.68.1.5.1.1.1", $device);
-		if (sizeof($portVoiceVLANs) > 0) {
+		if (cacti_sizeof($portVoiceVLANs) > 0) {
 			$vvlans = TRUE;
-		}else{
+		} else {
 			$vvlans = FALSE;
 		}
 	}
 	mactrack_debug("Cisco Voice VLAN collection complete");
 	if ($vvlans) {
 		mactrack_debug("Voice VLANs exist on this device");
-	}else{
+	} else {
 		mactrack_debug("Voice VLANs do not exist on this device");
 	}
 
-	if (sizeof($ifIndexes)) {
-	foreach($ifIndexes as $ifIndex) {
+	if (cacti_sizeof($ifIndexes)) {
+	foreach ($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["trunkPortState"] = (isset($vlan_trunkstatus[$ifIndex]) ? $vlan_trunkstatus[$ifIndex] : '');
 		if ($vvlans) {
 			$ifInterfaces[$ifIndex]["vVlanID"] = (isset($portVoiceVLANs[$ifIndex]) ? $portVoiceVLANs[$ifIndex] : '');
@@ -337,8 +337,8 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 	$j = 0;
 	$active_vlans = array();
 
-	if (sizeof($vlan_ids)) {
-	foreach($vlan_ids as $vlan_number => $vlanStatus) {
+	if (cacti_sizeof($vlan_ids)) {
+	foreach ($vlan_ids as $vlan_number => $vlanStatus) {
 		$vlanName = $vlan_names[$vlan_number];
 
 		if ($vlanStatus == 1) { /* vlan is operatinal */
@@ -358,7 +358,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 						$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
 						$device["snmp_priv_protocol"], $device["snmp_context"],
 						$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
-				}else{
+				} else {
 					$active_vlan_ports = cacti_snmp_get($device["hostname"], "vlan-" . $vlan_number,
 						".1.3.6.1.2.1.17.1.2.0", $device["snmp_version"],
 						$device["snmp_username"], $device["snmp_password"],
@@ -388,20 +388,20 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 	}
 	}
 
-	if (sizeof($active_vlans)) {
+	if (cacti_sizeof($active_vlans)) {
 		$i = 0;
 		/* get the port status information */
-		foreach($active_vlans as $active_vlan) {
+		foreach ($active_vlans as $active_vlan) {
 			if ($device["snmp_version"] < "3") {
 				$snmp_readstring = $device["snmp_readstring"] . "@" . $active_vlan["vlan_id"];
-			}else{
+			} else {
 				$snmp_readstring = "vlan-" . $active_vlan["vlan_id"];
 			}
 
 			mactrack_debug("Processing has begun for VLAN: " . $active_vlan["vlan_id"]);
 			if ($highPort == 0) {
 				$active_vlans[$i]["port_results"] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, FALSE);
-			}else {
+			} else {
 				$active_vlans[$i]["port_results"] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, FALSE, $lowPort, $highPort);
 			}
 
@@ -410,7 +410,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 			mactrack_debug("Bridge port information about to be collected.");
 			mactrack_debug("VLAN_ID: " . $active_vlans[$i]["vlan_id"] . ", VLAN_NAME: " . $active_vlans[$i]["vlan_name"] . ", ACTIVE PORTS: " . sizeof($active_vlans[$i]["port_results"]));
 
-			if (sizeof($active_vlans[$i]["port_results"]) > 0) {
+			if (cacti_sizeof($active_vlans[$i]["port_results"]) > 0) {
 				$brPorttoifIndexes[$i] = xform_standard_indexed_data(".1.3.6.1.2.1.17.1.4.1.2", $device, $snmp_readstring);
 				mactrack_debug("Bridge port information collection complete.");
 			}
@@ -422,10 +422,10 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		$port_array = array();
 
 		mactrack_debug("Final cross check's now being performed.");
-		if (sizeof($active_vlans)) {
-		foreach($active_vlans as $active_vlan) {
-			if (sizeof($active_vlan["port_results"])) {
-			foreach($active_vlan["port_results"] as $port_result) {
+		if (cacti_sizeof($active_vlans)) {
+		foreach ($active_vlans as $active_vlan) {
+			if (cacti_sizeof($active_vlan["port_results"])) {
+			foreach ($active_vlan["port_results"] as $port_result) {
 				$ifIndex    = (isset($brPorttoifIndexes[$j][$port_result["port_number"]]) ? $brPorttoifIndexes[$j][$port_result["port_number"]] : '');
 				$ifType     = (isset($ifInterfaces[$ifIndex]["ifType"]) ? $ifInterfaces[$ifIndex]["ifType"] : '');
 				$ifName     = (isset($ifInterfaces[$ifIndex]["ifName"]) ? $ifInterfaces[$ifIndex]["ifName"] : '');
@@ -434,7 +434,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 				$portTrunk  = (isset($portTrunking[$ifName]) ? $portTrunking[$ifName] : '');
 				if ($vvlans) {
 					$vVlanID = (isset($portVoiceVLANs[$ifIndex]) ? $portVoiceVLANs[$ifIndex] : '');
-				}else{
+				} else {
 					$vVlanID = -1;
 				}
 
@@ -472,7 +472,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		$device["last_runmessage"] = "Data collection completed ok";
 		$device["macs_active"] = sizeof($port_array);
 		db_store_device_port_results($device, $port_array, $scan_date);
-	}else{
+	} else {
 		print("\nINFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active end devices on this device.\n");
 		$device["snmp_status"] = HOST_UP;
 		$device["last_runmessage"] = "Data collection completed ok.  No active end devices on this device.";
@@ -496,14 +496,14 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 	$cdsBindingsIpAddress 	= xform_stripped_oid('.1.3.6.1.4.1.9.9.380.1.4.1.1.4', $device);
 	$cdsBindingEntries   = array();
 	$dot1dTpFdbEntries   = array();
-		
+
 	/* build VLAN array from results */
 	$i = 0;
 	$j = 0;
 	$active_vlans = array();
 
-	if (sizeof($vlan_ids)) {
-	foreach($vlan_ids as $vlan_number => $vlanStatus) {
+	if (cacti_sizeof($vlan_ids)) {
+	foreach ($vlan_ids as $vlan_number => $vlanStatus) {
 		$vlanName = $vlan_names[$vlan_number];
 
 		if ($vlanStatus == 1) { /* vlan is operatinal */
@@ -523,7 +523,7 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 						$device["snmp_auth_protocol"], $device["snmp_priv_passphrase"],
 						$device["snmp_priv_protocol"], $device["snmp_context"],
 						$device["snmp_port"], $device["snmp_timeout"], $device["snmp_retries"]);
-				}else{
+				} else {
 					$active_vlan_ports = cacti_snmp_get($device["hostname"], "vlan-" . $vlan_number,
 						".1.3.6.1.2.1.17.1.2.0", $device["snmp_version"],
 						$device["snmp_username"], $device["snmp_password"],
@@ -552,22 +552,22 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 		$i++;
 	}
 	}
-	
-	if (sizeof($active_vlans)) {
+
+	if (cacti_sizeof($active_vlans)) {
 		$n = 1;
 		$dot1dTpFdbEntry   = array();
-		
+
 		/* get the port status information */
-		foreach($active_vlans as $active_vlan) {
+		foreach ($active_vlans as $active_vlan) {
 			if ($device["snmp_version"] < "3") {
 				$snmp_readstring = $device["snmp_readstring"] . "@" . $active_vlan["vlan_id"];
-			}else{
+			} else {
 				$snmp_readstring = "vlan-" . $active_vlan["vlan_id"];
 			}
 
 			mactrack_debug('Processing has begun for VLAN: ' . $active_vlan["vlan_id"]);
-			
-			if (sizeof($active_vlans)) {
+
+			if (cacti_sizeof($active_vlans)) {
 			$dot1dTpFdbEntries[$n] = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.1', $device, $snmp_readstring);
 			foreach ($dot1dTpFdbEntries[$n] as $key => $val) {
 				$dot1dTpFdbEntries[$n][$active_vlan["vlan_id"]. '.' . $key] = $val; //ugly tweak to add vlan id to OID.
@@ -583,12 +583,12 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 
 			mactrack_debug('dot1dTpFdbEntry vlan_id: ' . $active_vlan["vlan_id"]);
 			}
-						
-			$keys = array_keys($cdsBindingInterface); 
+
+			$keys = array_keys($cdsBindingInterface);
 
 			$j = 0;
-			if (sizeof($cdsBindingInterface)) {
-			foreach($cdsBindingInterface as $cdsBindingIndex) {
+			if (cacti_sizeof($cdsBindingInterface)) {
+			foreach ($cdsBindingInterface as $cdsBindingIndex) {
 				$cdsBindingEntries[$j]['cdsBindingIndex'] = $cdsBindingIndex;
 				$cdsBindingEntries[$j]['dot1dTpFdbEntry'] = isset($dot1dTpFdbEntry[$keys[$j]]) ? xform_mac_address($dot1dTpFdbEntry[$keys[$j]]):'';
 				$cdsBindingEntries[$j]['cdsBindingsIpAddress'] = isset($cdsBindingsIpAddress[$keys[$j]]) ? xform_net_address($cdsBindingsIpAddress[$keys[$j]]):'';
@@ -597,17 +597,17 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 			mactrack_debug('cdsBindingEntries Total entries: ' . sizeof($cdsBindingEntries));
 			}
 			mactrack_debug('cdsBindingEntries assembly complete.');
-		}else{
+		} else {
 		print("\nINFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active end devices on this device.\n");
 		$device["snmp_status"] = HOST_UP;
 		$device["last_runmessage"] = "Data collection completed ok.  No active end devices on this device.";
-	}	
-	
+	}
+
 	/* output details to database */
-	if (sizeof($cdsBindingEntries)) {
-	foreach($cdsBindingEntries as $cdsBindingEntry) {
+	if (cacti_sizeof($cdsBindingEntries)) {
+	foreach ($cdsBindingEntries as $cdsBindingEntry) {
 		if ($cdsBindingEntry['cdsBindingsIpAddress'] != '') { //It's acceptable to have IPs without a MAC (meaning that MAC is not present but DHCP entry is still present) here but not the other way around.
-		$insert_string = 'REPLACE INTO mac_track_ips 
+		$insert_string = 'REPLACE INTO mac_track_ips
 			(site_id,device_id,hostname,device_name,port_number,
 			mac_address,ip_address,scan_date)
 			VALUES (' .
@@ -643,7 +643,7 @@ function get_cisco_dot1x_table($site, &$device) {
 	/* get the cafSessionAuthUserName from the device */
 	$cafSessionAuthUserName = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.10', $device);
 
-	if (sizeof($cafSessionAuthUserName)) {
+	if (cacti_sizeof($cafSessionAuthUserName)) {
 		mactrack_debug('cafSessionAuthUserName data collection complete: ' . sizeof($cafSessionAuthUserName));
 		$cafSessionClientMacAddress = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.2', $device);
 		mactrack_debug('cafSessionClientMacAddress data collection complete: ' . sizeof($cafSessionClientMacAddress));
@@ -653,33 +653,33 @@ function get_cisco_dot1x_table($site, &$device) {
 		mactrack_debug('cafSessionDomain data collection complete: ' . sizeof($cafSessionDomain));
 		$cafSessionStatus  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.5', $device);
 		mactrack_debug('cafSessionStatus data collection complete: ' . sizeof($cafSessionStatus));
-	}else{
+	} else {
 		/* Nothing to do here */
-		
+
 	}
-	
+
 	$ifIndex = array();
 	$Dot1xEntries = array();
 	$cafSessionAuthUserNames = array();
 	$cafSessionAuthUserKey = array_keys($cafSessionAuthUserName); //Getting the keys to explode the first part which is the ifIndex
 	$m = 0;
-	
+
 	/* This is to take the ifIndex from the OID */
-	if(sizeof($cafSessionAuthUserKey)) {
-		foreach($cafSessionAuthUserKey as $cafSessionAuthUserNames) {
+	if (cacti_sizeof($cafSessionAuthUserKey)) {
+		foreach ($cafSessionAuthUserKey as $cafSessionAuthUserNames) {
 			$ifIndex[$m] = explode(".", $cafSessionAuthUserKey[$m]);
 			$m++;
 			}
-			
+
 	}
-	
+
 	$ifIndexes = array_map(function ($ar) {return $ar['0'];}, $ifIndex); //re-arrange the previous exploded array
 	mactrack_debug('ifIndexes assembly complete: ' . sizeof($ifIndexes));
-	
+
 	$keys = array_keys($cafSessionAuthUserName);
 	$i = 0;
-	if (sizeof($cafSessionAuthUserName)) {
-	foreach($cafSessionAuthUserName as $Dot1xIndex) {
+	if (cacti_sizeof($cafSessionAuthUserName)) {
+	foreach ($cafSessionAuthUserName as $Dot1xIndex) {
 		$Dot1xEntries[$i]['Dot1xIndex'] = $Dot1xIndex;
 		$Dot1xEntries[$i]['cafSessionClientMacAddress'] = isset($cafSessionClientMacAddress[$keys[$i]]) ? xform_mac_address($cafSessionClientMacAddress[$keys[$i]]):'';
 		$Dot1xEntries[$i]['cafSessionClientAddress'] = isset($cafSessionClientAddress[$keys[$i]]) ? xform_net_address($cafSessionClientAddress[$keys[$i]]):'';
@@ -692,10 +692,10 @@ function get_cisco_dot1x_table($site, &$device) {
 	mactrack_debug('Dot1xEntries assembly complete.');
 
 	/* output details to database */
-	if (sizeof($Dot1xEntries)) {
-	foreach($Dot1xEntries as $Dot1xEntry) {
+	if (cacti_sizeof($Dot1xEntries)) {
+	foreach ($Dot1xEntries as $Dot1xEntry) {
 		if ($Dot1xEntry['Dot1xIndex'] != '') { //This is workaround for what I think is a Cisco bug. If a port is not running dot1x why would it show related info?
-		$insert_string = 'REPLACE INTO mac_track_dot1x 
+		$insert_string = 'REPLACE INTO mac_track_dot1x
 			(site_id,device_id,hostname,device_name,username,
 			mac_address,ip_address,domain,status,port_number,scan_date)
 			VALUES (' .

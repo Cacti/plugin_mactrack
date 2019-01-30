@@ -57,10 +57,10 @@ define('DEVICE_ROUTER', 3);
 $parms = $_SERVER['argv'];
 array_shift($parms);
 
-$debug   = FALSE;
+$debug   = false;
 $site_id = '';
 
-if (sizeof($parms)) {
+if (cacti_sizeof($parms)) {
 	foreach($parms as $parameter) {
 		if (strpos($parameter, '=')) {
 			list($arg, $value) = explode('=', $parameter);
@@ -75,7 +75,7 @@ if (sizeof($parms)) {
 				break;
 			case '-d':
 			case '--debug':
-				$debug = TRUE;
+				$debug = true;
 				break;
 			case '--version':
 			case '-V':
@@ -100,18 +100,18 @@ if (read_config_option('mt_reverse_dns') == 'on') {
 	$timeout        = read_config_option('mt_dns_timeout');
 	$dns_primary    = read_config_option('mt_dns_primary');
 	$dns_secondary  = read_config_option('mt_dns_secondary');
-	$primary_down   = FALSE;
-	$secondary_down = FALSE;
-}else{
+	$primary_down   = false;
+	$secondary_down = false;
+} else {
 	exit;
 }
 
 /* place a process marker in the database for the ip resolver */
-db_process_add(0, TRUE);
+db_process_add(0, true);
 
 if ($site_id != '') {
 	$sql_where = 'AND site_id=' . $site_id;
-}else{
+} else {
 	$sql_where = '';
 }
 
@@ -129,10 +129,10 @@ while (1) {
 		GROUP BY last_rundate
 		ORDER BY last_rundate DESC");
 
-	if ((sizeof($run_status) == 1) && ($processes_running == 0)) {
-		$break = TRUE;
-	}else{
-		$break = FALSE;
+	if ((cacti_sizeof($run_status) == 1) && ($processes_running == 0)) {
+		$break = true;
+	} else {
+		$break = false;
 	}
 
 	$unresolved_ips = db_fetch_assoc("SELECT *
@@ -140,21 +140,21 @@ while (1) {
 		WHERE ip_address != ''
 		AND (dns_hostname = '' OR dns_hostname IS NULL)");
 
-	if (sizeof($unresolved_ips) == 0) {
+	if (cacti_sizeof($unresolved_ips) == 0) {
 		mactrack_debug('No IP\'s require resolving this pass');
 		sleep(3);
-	}else{
-		mactrack_debug(sizeof($unresolved_ips) . ' IP\'s require resolving this pass');
+	} else {
+		mactrack_debug(cacti_sizeof($unresolved_ips) . ' IP\'s require resolving this pass');
 
 		foreach($unresolved_ips as $key => $unresolved_ip) {
 			$dns_hostname = $unresolved_ip['ip_address'];
-			$success = TRUE;
+			$success = true;
 			if (!$primary_down) {
 				$dns_hostname = mactrack_get_dns_from_ip($unresolved_ip['ip_address'], $dns_primary, $timeout);
 				if ($dns_hostname == 'timed_out') {
 					$dns_hostname == $unresolved_ip['ip_address'];
-					$primary_down = TRUE;
-					$success = FALSE;
+					$primary_down = true;
+					$success = false;
 				}
 			}
 
@@ -162,8 +162,8 @@ while (1) {
 				$dns_hostname = mactrack_get_dns_from_ip($unresolved_ip['ip_address'], $dns_secondary, $timeout);
 				if ($dns_hostname == 'timed_out') {
 					$dns_hostname == $unresolved_ip['ip_address'];
-					$secondary_down = TRUE;
-					$success = FALSE;
+					$secondary_down = true;
+					$success = false;
 				}
 			}elseif (!$success) {
 				$dns_hostname == $unresolved_ip['ip_address'];
@@ -171,8 +171,8 @@ while (1) {
 
 			if (($primary_down) && ($secondary_down)) {
 				mactrack_debug('ERROR: Both Primary and Seconary DNS timed out, please increase timeout. Placing both DNS servers back online now.');
-				$secondary_down = FALSE;
-				$primary_down = FALSE;
+				$secondary_down = false;
+				$primary_down = false;
 			}
 
 			$unresolved_ips[$key]['dns_hostname'] = $dns_hostname;

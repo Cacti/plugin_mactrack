@@ -138,13 +138,13 @@ function mactrack_display_run_status() {
 				/* if timer expired within a polling interval, then poll */
 				if (($current_time - 300) < strtotime($base_start_time)) {
 					$next_run_time = strtotime(date('Y-m-d') . ' ' . $base_start_time);
-				}else{
+				} else {
 					$next_run_time = strtotime(date('Y-m-d') . ' ' . $base_start_time) + 3600*24;
 				}
-			}else{
+			} else {
 				$next_run_time = strtotime(date('Y-m-d') . ' ' . $base_start_time);
 			}
-		}else{
+		} else {
 			$collection_never_completed = FALSE;
 			$next_run_time = $last_run_time + $seconds_offset;
 		}
@@ -152,10 +152,10 @@ function mactrack_display_run_status() {
 		if (empty($last_db_maint_time)) {
 			if (strtotime($base_start_time) < $current_time) {
 				$next_db_maint_time = strtotime(date('Y-m-d') . ' ' . $database_maint_time) + 3600*24;
-			}else{
+			} else {
 				$next_db_maint_time = strtotime(date('Y-m-d') . ' ' . $database_maint_time);
 			}
-		}else{
+		} else {
 			$next_db_maint_time = $last_db_maint_time + 24*3600;
 		}
 
@@ -214,7 +214,7 @@ function mactrack_display_run_status() {
 		mac_track_processes.device_id,
 		mac_track_processes.start_date
 		FROM mac_track_devices
-		INNER JOIN mac_track_processes 
+		INNER JOIN mac_track_processes
 		ON mac_track_devices.device_id = mac_track_processes.device_id
 		WHERE mac_track_processes.device_id != 0');
 
@@ -278,31 +278,31 @@ function mactrack_display_run_status() {
 
 		$other_processes = 0;
 		$other_date = 0;
-		if (sizeof($run_status) == 1) {
+		if (cacti_sizeof($run_status) == 1) {
 			$waiting_processes = $total_devices - $total_processes;
 			$waiting_date = $run_status[0]['last_rundate'];
 			$completed_processes = 0;
 			$completed_date = '';
 			$running_processes = $total_processes;
 			$running_date = read_config_option('mt_scan_date', TRUE);
-		}else{
+		} else {
 			$i = 0;
 			foreach($run_status as $key => $run) {
-			switch ($key) {
-			case 0:
-				$completed_processes = $run['devices'];
-				$completed_date = $run['last_rundate'];
-				break;
-			case 1:
-				$waiting_processes = $run['devices'] - $total_processes;
-				$waiting_date = $run['last_rundate'];
-				$running_processes = $total_processes;
-				$running_date = read_config_option('mt_scan_date', TRUE);
-				break;
-			default;
-				$other_processes += $run['devices'];
-				$other_rundate = $run['last_rundate'];
-			}
+				switch ($key) {
+				case 0:
+					$completed_processes = $run['devices'];
+					$completed_date = $run['last_rundate'];
+					break;
+				case 1:
+					$waiting_processes = $run['devices'] - $total_processes;
+					$waiting_date = $run['last_rundate'];
+					$running_processes = $total_processes;
+					$running_date = read_config_option('mt_scan_date', TRUE);
+					break;
+				default;
+					$other_processes += $run['devices'];
+					$other_rundate = $run['last_rundate'];
+				}
 			}
 		}
 
@@ -362,7 +362,7 @@ function mactrack_utilities_ports_clear() {
 		db_execute('UPDATE mac_track_devices SET ips_total=0, ports_total=0, ports_active=0, ports_trunk=0, macs_active=0, vlans_total=0, last_runduration=0.0000');
 
 		$device_rows = db_fetch_assoc('SELECT device_id FROM mac_track_devices');
-		if (sizeof($device_rows)) {
+		if (cacti_sizeof($device_rows)) {
 			foreach ($device_rows as $device_row) {
 				db_execute_prepared('UPDATE mac_track_devices SET ips_total=0 WHERE device_id = ?',    array($device_row['device_id']));
 				db_execute_prepared('UPDATE mac_track_devices SET ports_total=0 WHERE device_id = ?',  array($device_row['device_id']));
@@ -376,7 +376,7 @@ function mactrack_utilities_ports_clear() {
 
 		$site_rows = db_fetch_assoc('SELECT site_id FROM mac_track_sites');
 
-		if (sizeof($site_rows)) {
+		if (cacti_sizeof($site_rows)) {
 			foreach ($site_rows as $site_row) {
 				db_execute_prepared('UPDATE mac_track_sites SET total_devices=0 WHERE site_id = ?',     array($site_row['site_id']));
 				db_execute_prepared('UPDATE mac_track_sites SET total_macs=0 WHERE site_id = ?',        array($site_row['site_id']));

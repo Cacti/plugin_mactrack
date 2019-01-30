@@ -49,7 +49,7 @@ function get_dlink_l2_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 	$link_ports = get_link_port_status($device);
 	mactrack_debug("ipAddrTable scanning for link ports data collection complete.");
 
-	foreach($ifIndexes as $ifIndex) {
+	foreach ($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["ifIndex"] = $ifIndex;
 		$ifInterfaces[$ifIndex]["ifName"] = @$ifNames[$ifIndex];
 		$ifInterfaces[$ifIndex]["ifType"] = $ifTypes[$ifIndex];
@@ -91,7 +91,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 	$indexes = array_keys($active_ports_array);
 
 	$i = 0;
-	foreach($active_ports_array as $port_info) {
+	foreach ($active_ports_array as $port_info) {
 	 //print ("=type--]=[". $ifInterfaces[$indexes[$i]]["ifType"] . "]\n");
 		if (((convert_dlink_data($ifInterfaces[$indexes[$i]]["ifType"]) >= 6) &&
 			(convert_dlink_data($ifInterfaces[$indexes[$i]]["ifType"]) <= 9)) ||
@@ -183,18 +183,18 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 		foreach ($port_key_array as $port_key) {
 			/* map bridge port to interface port and check type */
 			if ($port_key["port_number"] >= 0) {
-				if (sizeof($bridgePortIfIndexes) != 0) {
+				if (cacti_sizeof($bridgePortIfIndexes) != 0) {
 					/* some hubs do not always return a port number in the bridge table.
 					   test for it by isset and substiture the port number from the ifTable
 					   if it isnt in the bridge table
 					*/
 					if (isset($bridgePortIfIndexes[$port_key["port_number"]])) {
 						$brPortIfIndex = @$bridgePortIfIndexes[$port_key["port_number"]];
-					}else{
+					} else {
 						$brPortIfIndex = @$port_key["port_number"];
 					}
 					$brPortIfType = @$ifInterfaces[$brPortIfIndex]["ifType"];
-				}else{
+				} else {
 					$brPortIfIndex = $port_key["port_number"];
 					$brPortIfType = @$ifInterfaces[$port_key["port_number"]]["ifType"];
 				}
@@ -226,7 +226,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 
 		/* map mac address */
 		/* only continue if there were user ports defined */
-// 		if (sizeof($new_port_key_array) > 0) {
+// 		if (cacti_sizeof($new_port_key_array) > 0) {
 // 			/* get the bridges active MAC addresses */
 // // 			$port_macs = xform_stripped_oid(".1.3.6.1.2.1.17.4.3.1.1", $device, $snmp_readstring);
 // 			$port_macs = xform_dlink_stripped_oid(".1.3.6.1.2.1.17.7.1.2.2.1.2", $device, $snmp_readstring);
@@ -262,27 +262,27 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 // 			}
 //
 // 			mactrack_debug("Port mac address information collected.");
-// 		}else{
+// 		} else {
 // 			mactrack_debug("No user ports on this network.");
 // 		}
-	}else{
+	} else {
 		mactrack_debug("No user ports on this network.");
 	}
 
 	if ($store_to_db) {
 		if ($ports_active <= 0) {
 			$device["last_runmessage"] = "WARNING: Poller did not find active ports on this device.";
-		}elseif (sizeof($new_port_key_array) > 0) {
+		} elseif (cacti_sizeof($new_port_key_array) > 0) {
 			$device["last_runmessage"] = "Data collection completed ok";
 			$device["macs_active"] = sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
-		}else {
+		} else {
 			$device["last_runmessage"] = "WARNING: Poller did not find active ports on this device.";
 		}
-		if(!$debug) {
+		if (!$debug) {
 			print(" - Complete\n");
 		}
-	}else{
+	} else {
 		return $new_port_key_array;
 	}
 }
@@ -407,7 +407,7 @@ function xform_dlink_vlan_associations(&$device, $snmp_readstring = "") {
 		$device["snmp_retries"], $device["max_oids"]);
 
 	$i = 0;
-	foreach($xformArray as $xformItem) {
+	foreach ($xformArray as $xformItem) {
 		/* peel off the beginning of the OID */
 		$key = $xformItem["oid"];
 		$key = str_replace("iso", "1", $key);

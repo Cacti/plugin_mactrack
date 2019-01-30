@@ -44,16 +44,16 @@ function get_linux_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	/* get the ifNames for the device */
 	$ifNames = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.2", $device);
 	mactrack_debug("ifNames data collection complete.");
-	
+
 	foreach($ifNames as $ifkey => $value) {
 		if (substr_count($value, ".") > 0 ){
 			$ifVlan[$ifkey] = substr($value, strpos($value, ".")+1);
-		}else{
+		} else {
 			$ifVlan[$ifkey] = "N/A";
 		}
 	}
-	
-	
+
+
 	/* get ports that happen to be link ports */
 	$link_ports = get_link_port_status($device);
 	mactrack_debug("ipAddrTable scanning for link ports data collection complete.");
@@ -61,7 +61,7 @@ function get_linux_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["ifIndex"] = $ifIndex;
 		$ifInterfaces[$ifIndex]["ifName"] = @$ifNames[$ifIndex];
-		$ifInterfaces[$ifIndex]["ifType"] = convert_port_state_data($ifTypes[$ifIndex]);  
+		$ifInterfaces[$ifIndex]["ifType"] = convert_port_state_data($ifTypes[$ifIndex]);
 		$ifInterfaces[$ifIndex]["vlan_id"] = $ifVlan[$ifIndex];
 		//$ifInterfaces[$ifIndex]["linkPort"] = @$link_ports[$ifIndex];
 	}
@@ -127,10 +127,10 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 		$bridgePortIfIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device, $snmp_readstring);
 
 		$port_status = xform_stripped_oid(".1.3.6.1.2.1.4.22.1.4", $device, $snmp_readstring);
-        foreach ($port_status as $key_status => $status_value) { 
+        foreach ($port_status as $key_status => $status_value) {
             $port_status[$key_status]=convert_port_state_data($status_value);
         }
-        
+
 		/* get device active port numbers */
 		$port_numbers = xform_stripped_oid(".1.3.6.1.2.1.4.22.1.1", $device, $snmp_readstring);
 
@@ -164,18 +164,18 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 		foreach ($port_key_array as $port_key) {
 			/* map bridge port to interface port and check type */
 			if ($port_key["port_number"] > 0) {
-				if (sizeof($bridgePortIfIndexes) != 0) {
+				if (cacti_sizeof($bridgePortIfIndexes) != 0) {
 					/* some hubs do not always return a port number in the bridge table.
 					   test for it by isset and substiture the port number from the ifTable
 					   if it isnt in the bridge table
 					*/
 					if (isset($bridgePortIfIndexes[$port_key["port_number"]])) {
 						$brPortIfIndex = @$bridgePortIfIndexes[$port_key["port_number"]];
-					}else{
+					} else {
 						$brPortIfIndex = @$port_key["port_number"];
 					}
 					$brPortIfType = @$ifInterfaces[$brPortIfIndex]["ifType"];
-				}else{
+				} else {
 					$brPortIfIndex = $port_key["port_number"];
 					$brPortIfType = @$ifInterfaces[$port_key["port_number"]]["ifType"];
 				}
@@ -202,7 +202,7 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 
 		/* map mac address */
 		/* only continue if there were user ports defined */
-		if (sizeof($new_port_key_array) > 0) {
+		if (cacti_sizeof($new_port_key_array) > 0) {
 			/* get the bridges active MAC addresses */
 			$port_macs = xform_stripped_oid(".1.3.6.1.2.1.4.22.1.2", $device, $snmp_readstring);
 
@@ -216,28 +216,28 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 			}
 
 			mactrack_debug("Port mac address information collected.");
-		}else{
+		} else {
 			mactrack_debug("No user ports on this network.");
 		}
-	}else{
+	} else {
 		mactrack_debug("No user ports on this network.");
 	}
 
 	if ($store_to_db) {
 		if ($ports_active <= 0) {
 			$device["last_runmessage"] = "Data collection completed ok";
-		}elseif (sizeof($new_port_key_array) > 0) {
+		} elseif (cacti_sizeof($new_port_key_array) > 0) {
 			$device["last_runmessage"] = "Data collection completed ok";
 			$device["macs_active"] = sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
-		}else{
+		} else {
 			$device["last_runmessage"] = "WARNING: Poller did not find active ports on this device.";
 		}
 
-		if(!$debug) {
+		if (!$debug) {
 			print(" - Complete\n");
 		}
-	}else{
+	} else {
 		return $new_port_key_array;
 	}
 }
@@ -247,11 +247,11 @@ function convert_port_state_data($old_port_type) {
 			$pos1 = strpos($old_port_type, "(");
 			$pos2 = strpos($old_port_type, ")");
 			$rezult = substr($old_port_type, $pos1+1, $pos2-$pos1-1);
-		} else{
+		} else {
 			$rezult=$old_port_type;
 		}
-		
-return $rezult;  
+
+return $rezult;
 }
 
 ?>

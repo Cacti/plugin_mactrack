@@ -67,7 +67,7 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 		if ($device_id) {
 			raise_message(1);
 			sync_mactrack_to_cacti($save);
-		}else{
+		} else {
 			raise_message(2);
 			mactrack_debug("ERROR: Cacti Device: ($device_id/$host_id): $hostname, error on save: " . serialize($save));
 		}
@@ -105,7 +105,7 @@ function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops
 
 		if ($site_id) {
 			raise_message(1);
-		}else{
+		} else {
 			raise_message(2);
 		}
 	}
@@ -145,7 +145,7 @@ function sync_mactrack_to_cacti($mt_device) {
 		# fetch current data for cacti device
 		$cacti_device = db_fetch_row('SELECT * FROM host WHERE id=' . $mt_device['host_id']);
 
-		if(sizeof($cacti_device)) {
+		if (cacti_sizeof($cacti_device)) {
 
 			# update cacti device
 			api_device_save($cacti_device['id'], $cacti_device['host_template_id'],
@@ -160,7 +160,6 @@ function sync_mactrack_to_cacti($mt_device) {
 			mactrack_debug('Cacti Device: (' . $cacti_device['id'] . ') successfully updated');
 		}
 	}
-
 }
 
 function sync_cacti_to_mactrack($device) {

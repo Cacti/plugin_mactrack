@@ -33,7 +33,7 @@ $title = __('Device Tracking - Network Interfaces View', 'mactrack');
 /* check actions */
 if (isset_request_var('export')) {
 	mactrack_export_records();
-}else{
+} else {
 	mactrack_redirect();
 	mactrack_view();
 }
@@ -108,7 +108,7 @@ function mactrack_get_records(&$sql_where, $apply_limits = TRUE, $rows = '30') {
 	$sql_order = get_order_string();
 	if ($apply_limits) {
 		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
-	}else{
+	} else {
 		$sql_limit = '';
 	}
 
@@ -224,7 +224,7 @@ function mactrack_export_records() {
 		'"ifOutErrors","last_up_time",' .
 		'"last_down_time","stateChanges",');
 
-	if (sizeof($stats)) {
+	if (cacti_sizeof($stats)) {
 	foreach($stats as $stat) {
 		array_push($xport_array,'"' .
 			$stat['device_name']       . '","' . $stat["device_type"]       . '","' .
@@ -262,9 +262,9 @@ function mactrack_view() {
 
 	if (get_request_var('rows') == -1) {
 		$rows = read_config_option('num_rows_table');
-	}elseif (get_request_var('rows') == -2) {
+	} elseif (get_request_var('rows') == -2) {
 		$rows = 99999999;
-	}else{
+	} else {
 		$rows = get_request_var('rows');
 	}
 
@@ -299,17 +299,17 @@ function mactrack_view() {
 	html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
 	$i = 0;
-	if (sizeof($stats)) {
+	if (cacti_sizeof($stats)) {
 		foreach ($stats as $stat) {
 			/* find the background color and enclose it */
 			$class = mactrack_int_row_class($stat);
 
 			if ($class) {
 				print "<tr id='row_" . $stat['device_id'] . '_' . $stat['ifName'] . "' class='$class'>\n"; $i++;
-			}else{
+			} else {
 				if (($i % 2) == 1) {
 					$class = 'odd';
-				}else{
+				} else {
 					$class = 'even';
 				}
 
@@ -318,13 +318,13 @@ function mactrack_view() {
 
 			print mactrack_format_interface_row($stat);
 		}
-	}else{
+	} else {
 		print '<tr><td colspan="7"><em>' . __('No Device Tracking Interfaces Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);
 
-	if (sizeof($stats)) {
+	if (cacti_sizeof($stats)) {
 		print $nav;
 	}
 
@@ -343,7 +343,7 @@ function mactrack_view() {
 
 	print '</div>';
 
-	if (sizeof($stats)) {
+	if (cacti_sizeof($stats)) {
 		mactrack_display_stats();
 	}
 
@@ -371,7 +371,7 @@ function mactrack_display_array() {
 		$display_text += array('ifInUnknownProtos'     => array(__('UProto Total', 'mactrack'), 'DESC'));
 		$display_text += array('ifOutErrors'           => array(__('Out Err Total', 'mactrack'), 'DESC'));
 		$display_text += array('ifOutDiscards'         => array(__('Out Disc Total', 'mactrack'), 'DESC'));
-	}else{
+	} else {
 		$display_text += array('int_ifInErrors'        => array(__('In Err (E/S)', 'mactrack'), 'DESC'));
 		$display_text += array('int_ifInDiscards'      => array(__('In Disc (D/S)', 'mactrack'), 'DESC'));
 		$display_text += array('int_ifInUnknownProtos' => array(__('UProto (UP/S)', 'mactrack'), 'DESC'));
@@ -403,7 +403,7 @@ function mactrack_filter_table() {
 							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack');?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT site_id, site_name FROM mac_track_sites ORDER BY site_name');
-							if (sizeof($sites)) {
+							if (cacti_sizeof($sites)) {
 								foreach ($sites as $site) {
 									print '<option value="' . $site['site_id'] .'"'; if (get_request_var('site_id') == $site['site_id']) { print ' selected'; } print '>' . $site['site_name'] . '</option>';
 								}
@@ -463,11 +463,11 @@ function mactrack_filter_table() {
 							$sql_where = '';
 							if (get_request_var('site_id') != -1) {
 								$sql_where .= ' WHERE mac_track_devices.site_id=' . get_request_var('site_id');
-							}else{
+							} else {
 								$sql_where  = '';
 							}
 
-							$types = db_fetch_assoc("SELECT DISTINCT mac_track_device_types.device_type_id, 
+							$types = db_fetch_assoc("SELECT DISTINCT mac_track_device_types.device_type_id,
 								mac_track_device_types.description AS device_type
 								FROM mac_track_device_types
 								INNER JOIN mac_track_devices
@@ -475,7 +475,7 @@ function mactrack_filter_table() {
 								$sql_where
 								ORDER BY device_type");
 
-							if (sizeof($types)) {
+							if (cacti_sizeof($types)) {
 								foreach ($types as $type) {
 									print '<option value="' . $type['device_type_id'] .'"'; if (get_request_var('device_type_id') == $type['device_type_id']) { print ' selected'; } print '>' . $type['device_type'] . '</option>';
 								}
@@ -500,7 +500,7 @@ function mactrack_filter_table() {
 							}
 
 							$devices = array_rekey(db_fetch_assoc("SELECT device_id, device_name FROM mac_track_devices $sql_where ORDER BY device_name"), "device_id", "device_name");
-							if (sizeof($devices)) {
+							if (cacti_sizeof($devices)) {
 								foreach ($devices as $device_id => $device_name) {
 									print '<option value="' . $device_id .'"'; if (get_request_var('device_id') == $device_id) { print " selected"; } print ">" . $device_name . "</option>";
 								}
@@ -514,7 +514,7 @@ function mactrack_filter_table() {
 					<td>
 						<select id='rows' onChange='applyFilter()'>
 							<?php
-							if (sizeof($rows_selector)) {
+							if (cacti_sizeof($rows_selector)) {
 								foreach ($rows_selector as $key => $value) {
 									print '<option value="' . $key . '"'; if (get_request_var('rows') == $key) { print 'selected'; } print '>' . $value . '</option>';
 								}

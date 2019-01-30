@@ -44,7 +44,7 @@ $oui_file = '';
 /* add more memory for import */
 ini_set('memory_limit', '256M');
 
-if (sizeof($parms)) {
+if (cacti_sizeof($parms)) {
 	foreach($parms as $parameter) {
 		if (strpos($parameter, '=')) {
 			list($arg, $value) = explode('=', $parameter);
@@ -78,10 +78,10 @@ if (sizeof($parms)) {
 if (strlen($oui_file)) {
 	if (!file_exists($oui_file)) {
 		echo "ERROR: OUI Database file does not exist\n";
-	}else{
+	} else {
 		import_oui_database('ui', $oui_file);
 	}
-}else{
+} else {
 	import_oui_database();
 }
 

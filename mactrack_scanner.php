@@ -66,11 +66,11 @@ array_shift($parms);
 
 global $web, $debug;
 
-$debug     = FALSE;
-$web       = FALSE;
-$test_mode = FALSE;
+$debug     = false;
+$web       = false;
+$test_mode = false;
 
-if (sizeof($parms)) {
+if (cacti_sizeof($parms)) {
 	foreach($parms as $parameter) {
 		if (strpos($parameter, '=')) {
 			list($arg, $value) = explode('=', $parameter);
@@ -85,14 +85,14 @@ if (sizeof($parms)) {
 				break;
 			case '-d':
 			case '--debug':
-				$debug = TRUE;
+				$debug = true;
 				break;
 			case '-w':
 			case '--web':
-				$web = TRUE;
+				$web = true;
 				break;
 			case '-t':
-				$test_mode = TRUE;
+				$test_mode = true;
 				exit;
 			case '--version':
 			case '-V':
@@ -118,12 +118,12 @@ if (sizeof($parms)) {
 
 /* place a process marker in the database */
 if (!$test_mode) {
-	db_process_add($device_id, TRUE);
+	db_process_add($device_id, true);
 }
 
 /* get device information */
 $device = db_fetch_row_prepared('SELECT * FROM mac_track_devices WHERE device_id = ?', array($device_id));
-if (sizeof($device) == 0) {
+if (cacti_sizeof($device) == 0) {
 	mactrack_debug("ERROR: Device with Id of '$device_id' not found in database.  Can not continue.");
 	db_process_remove($device_id);
 	exit;
@@ -139,7 +139,7 @@ if (strlen($site) == 0) {
 
 /* get device types */
 $device_types = db_fetch_assoc('SELECT * FROM mac_track_device_types');
-if (sizeof($device_types) == 0) {
+if (cacti_sizeof($device_types) == 0) {
 	mactrack_debug('ERROR: No device types have been found.');
 	db_process_remove($device_id);
 	exit;
@@ -148,7 +148,7 @@ if (sizeof($device_types) == 0) {
 /* check the devices read string for validity, set to new if changed */
 if (valid_snmp_device($device)) {
 	mactrack_debug('HOST: ' . $device['hostname'] . ' is alive, processing has begun.');
-	$host_up = TRUE;
+	$host_up = true;
 
 	/* locate the device type to obtain scanning function and low and high ports */
 	$device_type = find_scanning_function($device, $device_types);
@@ -226,7 +226,7 @@ if (valid_snmp_device($device)) {
 	mactrack_debug('WARNING: SITE: ' . $site . ', IP: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', ERROR: Device unreachable.');
 	$device['last_runmessage'] = 'Device unreachable.';
 
-	$host_up = FALSE;
+	$host_up = false;
 }
 
 /* update the database with device status information */

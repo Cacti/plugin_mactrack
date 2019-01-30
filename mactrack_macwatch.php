@@ -61,8 +61,8 @@ default:
 
 function form_save() {
 	if ((isset_request_var('save_component_macw')) && (isempty_request_var('add_dq_y'))) {
-		$mac_id = api_mactrack_macw_save(get_nfilter_request_var('mac_id'), 
-			get_nfilter_request_var('mac_address'), get_nfilter_request_var('name'), 
+		$mac_id = api_mactrack_macw_save(get_nfilter_request_var('mac_id'),
+			get_nfilter_request_var('mac_address'), get_nfilter_request_var('name'),
 			get_nfilter_request_var('ticket_number'), get_nfilter_request_var('description'),
 			get_nfilter_request_var('notify_schedule'), get_nfilter_request_var('email_addresses'));
 
@@ -113,9 +113,9 @@ function form_actions() {
 			input_validate_input_number($matches[1]);
 			/* ==================================================== */
 
-			$macw_info = db_fetch_cell_prepared('SELECT name 
-				FROM mac_track_macwatch 
-				WHERE mac_id = ?', 
+			$macw_info = db_fetch_cell_prepared('SELECT name
+				FROM mac_track_macwatch
+				WHERE mac_id = ?',
 				array($matches[1]));
 
 			$macw_list .= '<li>' . $macw_info . '</li>';
@@ -134,7 +134,7 @@ function form_actions() {
 	if (!isset($macw_array)) {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one watched Mac to delete.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = "";
-	}else{
+	} else {
 		$save_html = "<input type='submit' name='save' value='" . __esc('Continue', 'mactrack') . "'>";
 
 		if (get_request_var('drp_action') == '1') { /* delete */
@@ -179,7 +179,7 @@ function api_mactrack_macw_save($mac_id, $mac_address, $name, $ticket_number, $d
 
 		if ($mac_id) {
 			raise_message(1);
-		}else{
+		} else {
 			raise_message(2);
 		}
 	}
@@ -209,7 +209,7 @@ function mactrack_macw_get_macw_records(&$sql_where, $rows, $apply_limits = TRUE
 	$sql_order = get_order_string();
 	if ($apply_limits) {
 		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ',' . $rows;
-	}else{
+	} else {
 		$sql_limit = '';
 	}
 
@@ -236,7 +236,7 @@ function mactrack_macw_edit() {
 			array(get_request_var('mac_id')));
 
 		$header_label = __('Device Tracking MacWatch [edit: %s]', $mac_record['name'], 'mactrack');
-	}else{
+	} else {
 		$header_label = __('Device Tracking MacWatch [new]', 'mactrack');
 	}
 
@@ -295,7 +295,7 @@ function mactrack_macw() {
 		$rows = read_config_option('num_rows_table');
 	}elseif (get_request_var('rows') == -2) {
 		$rows = 999999;
-	}else{
+	} else {
 		$rows = get_request_var('rows');
 	}
 
@@ -331,7 +331,7 @@ function mactrack_macw() {
 	html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
 	$i = 0;
-	if (sizeof($macw)) {
+	if (cacti_sizeof($macw)) {
 		foreach ($macw as $mac) {
 			form_alternate_row('line' . $mac['mac_id'], true);
 			form_selectable_cell(filter_value($mac['name'], get_request_var('filter'), 'mactrack_macwatch.php?action=edit&mac_id=' . $mac['mac_id']), $mac['mac_id']);
@@ -343,13 +343,13 @@ function mactrack_macw() {
 			form_selectable_cell($mac['name'], $mac['mac_id']);
 			form_end_row();
 		}
-	}else{
+	} else {
 		print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Watched Macs Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);
 
-	if (sizeof($macw)) {
+	if (cacti_sizeof($macw)) {
 		print $nav;
 	}
 
@@ -381,7 +381,7 @@ function mactrack_macw_filter() {
 						<select id='rows' onChange='applyFilter()'>
 							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack');?></option>
 							<?php
-							if (sizeof($item_rows)) {
+							if (cacti_sizeof($item_rows)) {
 								foreach ($item_rows as $key => $value) {
 									print "<option value='" . $key . "'"; if (get_request_var('rows') == $key) { print ' selected'; } print '>' . $value . '</option>';
 								}

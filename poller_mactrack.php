@@ -70,7 +70,7 @@ $track_errors = 0;
 $parms = $_SERVER['argv'];
 array_shift($parms);
 
-if (sizeof($parms)) {
+if (cacti_sizeof($parms)) {
 	foreach($parms as $parameter) {
 		if (strpos($parameter, '=')) {
 			list($arg, $value) = explode('=', $parameter);
@@ -128,7 +128,7 @@ if (read_config_option('mt_collection_timing') == 'disabled') {
 		if (strtotime($start_date) > (time() - $max_run_duration) && !$forcerun) {
 			mactrack_debug('ERROR: Can not start MAC Tracking process.  There is already one in progress');
 			exit;
-		}else if ($forcerun) {
+		} elseif ($forcerun) {
 			mactrack_debug('WARNING: Forcing Collection although Collection Appears in Process', true, 'MACTRACK');
 			db_execute('TRUNCATE mac_track_processes');
 		} else {
@@ -364,7 +364,7 @@ function clear_old_processes($site_id) {
 		WHERE start_date < ?' . ($site_id > 0 ? ' AND site_id=' . $site_id:''),
 		array($delete_time));
 
-	if (sizeof($old_procs)) {
+	if (cacti_sizeof($old_procs)) {
 		foreach($old_procs as $p) {
 			if ($p['process_id'] > 0) {
 				if (strstr(PHP_OS, 'WIN')) {
@@ -608,12 +608,12 @@ function collect_mactrack_data($start, $site_id = 0) {
 		}
 
 		/* if arpwatch is enabled, let's let it pick up the stragglers, based upon IP address first */
-		if ((read_config_option('mt_arpwatch') == 'on') && (sizeof($mac_ip_dns))) {
+		if ((read_config_option('mt_arpwatch') == 'on') && (cacti_sizeof($mac_ip_dns))) {
 			$ports = db_fetch_assoc('SELECT site_id, device_id, mac_address
 				FROM mac_track_temp_ports
 				WHERE updated = 0');
 
-			if (sizeof($ports)) {
+			if (cacti_sizeof($ports)) {
 				foreach($ports as $port) {
 					if (isset($mac_ip_dns[$port['mac_address']])) {
 						db_execute("UPDATE mac_track_temp_ports
@@ -668,7 +668,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 				FROM mac_track_processes
 				WHERE device_id = 0');
 
-			if (sizeof($resolver_running) == 0) {
+			if (cacti_sizeof($resolver_running) == 0) {
 				break;
 			}
 
@@ -716,7 +716,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 					AND site_id = ?',
 					array($ip_range['ip_range'], $ip_range['site_id']));
 
-				if (sizeof($range_record) == 0) {
+				if (cacti_sizeof($range_record) == 0) {
 					db_execute_prepared('REPLACE INTO `mac_track_ip_ranges`
 						(ip_range, site_id, ips_current, ips_current_date)
 						VALUES (?, ?, ?, ?)',
@@ -821,7 +821,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 		/* process macwatch data */
 		$macwatches = db_fetch_assoc('SELECT * FROM mac_track_macwatch');
-		if (sizeof($macwatches)) {
+		if (cacti_sizeof($macwatches)) {
 			$from     = read_config_option('mt_from_email');
 			$fromname = read_config_option('mt_from_name');
 
@@ -832,7 +832,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 					WHERE mac_address = ?',
 					array($record['mac_address']));
 
-				if (sizeof($found)) {
+				if (cacti_sizeof($found)) {
 					/* set the subject */
 					$subject = "MACAUTH Notification: Mac Address '" . $record['mac_address'] . "' Found, For: '" . $record['name'] . "'";
 
@@ -923,7 +923,7 @@ function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_tim
 			WHERE authorized=0');
 	}
 
-	if (sizeof($ports)) {
+	if (cacti_sizeof($ports)) {
 		foreach($ports as $port) {
 			/* create the report */
 		}

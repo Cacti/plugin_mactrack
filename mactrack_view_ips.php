@@ -32,7 +32,7 @@ $title = __('Device Tracking - Site IP Range Report View', 'mactrack');
 
 if (isset_request_var('export')) {
 	mactrack_view_export_ip_ranges();
-}else{
+} else {
 	mactrack_redirect();
 
 	general_header();
@@ -132,14 +132,14 @@ function mactrack_view_export_ip_ranges() {
 function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = TRUE) {
 	if (get_request_var('site_id') != '-1') {
 		$sql_where = 'WHERE mac_track_ip_ranges.site_id=' . get_request_var('site_id');
-	}else{
+	} else {
 		$sql_where = '';
 	}
 
 	$sql_order = get_order_string();
 	if ($apply_limits) {
 		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
-	}else{
+	} else {
 		$sql_limit = '';
 	}
 
@@ -152,7 +152,7 @@ function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = 
 		mac_track_ip_ranges.ips_max_date,
 		mac_track_ip_ranges.ips_current_date
 		FROM mac_track_ip_ranges
-		INNER JOIN mac_track_sites 
+		INNER JOIN mac_track_sites
 		ON (mac_track_ip_ranges.site_id=mac_track_sites.site_id)
 		$sql_where
 		$sql_order
@@ -168,9 +168,9 @@ function mactrack_view_ip_ranges() {
 
 	if (get_request_var('rows') == -1) {
 		$rows = read_config_option('num_rows_table');
-	}elseif (get_request_var('rows') == -2) {
+	} elseif (get_request_var('rows') == -2) {
 		$rows = 999999;
-	}else{
+	} else {
 		$rows = get_request_var('rows');
 	}
 
@@ -212,7 +212,7 @@ function mactrack_view_ip_ranges() {
 
 	html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
-	if (sizeof($ip_ranges)) {
+	if (cacti_sizeof($ip_ranges)) {
 		foreach ($ip_ranges as $ip_range) {
 			form_alternate_row();
 				?>
@@ -232,13 +232,13 @@ function mactrack_view_ip_ranges() {
 			</tr>
 			<?php
 		}
-	}else{
+	} else {
 		print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Site IP Ranges Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);
 
-	if (sizeof($ip_ranges)) {
+	if (cacti_sizeof($ip_ranges)) {
 		print $nav;
 		mactrack_display_stats();
 	}
@@ -261,7 +261,7 @@ function mactrack_ips_filter() {
 							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack');?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT * FROM mac_track_sites ORDER BY mac_track_sites.site_name');
-							if (sizeof($sites)) {
+							if (cacti_sizeof($sites)) {
 								foreach ($sites as $site) {
 									print '<option value="' . $site['site_id'] . '"'; if (get_request_var('site_id') == $site['site_id']) { print ' selected'; } print '>' . $site['site_name'] . '</option>';
 								}
@@ -276,7 +276,7 @@ function mactrack_ips_filter() {
 						<select id='rows' onChange='applyFilter()'>
 							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack');?></option>
 							<?php
-							if (sizeof($item_rows)) {
+							if (cacti_sizeof($item_rows)) {
 								foreach ($item_rows as $key => $value) {
 									print "<option value='" . $key . "'"; if (get_request_var('rows') == $key) { print ' selected'; } print '>' . $value . '</option>';
 								}
