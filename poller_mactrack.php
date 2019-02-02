@@ -380,7 +380,7 @@ function clear_old_processes($site_id) {
 
 			db_execute_prepared('DELETE FROM mac_track_processes
 				WHERE process_id = ?',
-				array($p));
+				array($p['process_id']));
 		}
 	}
 }
