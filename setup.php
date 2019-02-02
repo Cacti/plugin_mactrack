@@ -891,18 +891,12 @@ function mactrack_setup_table_new () {
 function mactrack_page_head() {
 	global $config;
 
-	if (substr_count(get_current_page(), 'mactrack_')) {
-		if (!isset($config['base_path'])) {
-			print "<script type='text/javascript' src='" . URL_PATH . "plugins/mactrack/mactrack.js'></script>\n";
-		} else {
-			if (file_exists($config['base_path'] . '/plugins/mactrack/themes/' . get_selected_theme() . '/mactrack.css')) {
-				print "<link type='text/css' href='" . $config['url_path'] . "plugins/mactrack/themes/" . get_selected_theme() . "/mactrack.css' rel='stylesheet'>\n";
-			} else {
-				print "<link type='text/css' href='" . $config['url_path'] . "plugins/mactrack/mactrack.css' rel='stylesheet'>\n";
-			}
-		}
-		print "<script type='text/javascript' src='" . $config['url_path'] . "plugins/mactrack/mactrack.js'></script>\n";
-		print "<script type='text/javascript' src='" . $config['url_path'] . "plugins/mactrack/mactrack_snmp.js'></script>\n";
+	print "<script type='text/javascript' src='" . $config['url_path'] . "plugins/mactrack/mactrack.js'></script>\n";
+	print "<script type='text/javascript' src='" . $config['url_path'] . "plugins/mactrack/mactrack_snmp.js'></script>\n";
+	if (file_exists($config['base_path'] . '/plugins/mactrack/themes/' . get_selected_theme() . '/mactrack.css')) {
+		print "<link type='text/css' href='" . $config['url_path'] . "plugins/mactrack/themes/" . get_selected_theme() . "/mactrack.css' rel='stylesheet'>\n";
+	} else {
+		print "<link type='text/css' href='" . $config['url_path'] . "plugins/mactrack/mactrack.css' rel='stylesheet'>\n";
 	}
 }
 
@@ -915,7 +909,7 @@ function mactrack_poller_bottom () {
 }
 
 function mactrack_config_settings () {
-	global $tabs, $settings, $snmp_versions, $mactrack_poller_frequencies,
+	global $tabs, $settings, $settings_user, $tabs_graphs, $snmp_versions, $mactrack_poller_frequencies,
 	$mactrack_data_retention, $mactrack_macauth_frequencies, $mactrack_update_policies;
 
 	$tabs['mactrack'] = __('Device Tracking', 'mactrack');
@@ -1205,6 +1199,27 @@ function mactrack_config_settings () {
 	}
 	$settings['path']=$ts;
 
+	$tabs_graphs += array('mactrack' => __('MacTrack Settings', 'mactrack'));
+
+	$settings_user += array(
+		'mactrack' => array(
+			'default_mactrack_tab' => array(
+				'friendly_name' => __('Default Tab', 'mactrack'),
+				'description' => __('Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second.', 'mactrack'),
+				'method' => 'drop_array',
+				'default' => 'sites',
+				'array' => array(
+					'sites' => __('Sites', 'mactrack'),
+					'devices' => __('Devices', 'mactrack'),
+					'ips' => __('IP Addresses', 'mactrack'),
+					'macs' => __('Max Addresses', 'mactrack'),
+					'interfaces' => __('Interfaces', 'mactrack'),
+					'dot1x' => __('dot1x Deta', 'mactrack')
+				)
+			)
+		)
+	);
+
 	mactrack_check_upgrade();
 }
 
@@ -1255,11 +1270,13 @@ function mactrack_draw_navigation_text ($nav) {
 function mactrack_show_tab () {
 	global $config, $user_auth_realm_filenames;
 
+	load_current_session_value('report', 'sess_mt_tab', read_user_setting('default_mactrack_tab'));
+
 	if (api_user_realm_auth('mactrack_view_macs.php')) {
 		if (substr_count($_SERVER['REQUEST_URI'], 'mactrack_view_')) {
-			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_sites.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
+			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_' . get_request_var('report') . '.php?report=' . get_request_var('report') . '"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
 		} else {
-			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_sites.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
+			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_' . get_request_var('report') . '.php?report=' . get_request_var('report') . '"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
 		}
 	}
 }

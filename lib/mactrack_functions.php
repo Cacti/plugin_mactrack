@@ -3082,6 +3082,8 @@ function mactrack_tabs() {
 		'graphs'     => __('Graphs', 'mactrack')
 	);
 
+	load_current_session_value('report', 'sess_mt_tab', read_user_setting('default_mactrack_tab'));
+
 	/* set the default tab */
 	$current_tab = get_request_var('report');
 
@@ -3097,7 +3099,10 @@ function mactrack_tabs() {
 		}
 	}
 
-	print "</ul></nav></div>\n";
+	print "</ul></nav><script type='text/javascript'>\n";
+
+	print "$(function() { console.log(pageName); if (pageName.indexOf('mactrack_view') >= 0) { $('.maintabs a.selected').attr('href', urlPath+'plugins/mactrack/'+pageName); } });";
+	print "</script></div>";
 }
 
 function mactrack_get_vendor_name($mac) {
