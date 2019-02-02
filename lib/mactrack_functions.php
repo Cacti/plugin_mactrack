@@ -3101,7 +3101,7 @@ function mactrack_tabs() {
 
 	print "</ul></nav><script type='text/javascript'>\n";
 
-	print "$(function() { console.log(pageName); if (pageName.indexOf('mactrack_view') >= 0) { $('.maintabs a.selected').attr('href', urlPath+'plugins/mactrack/'+pageName); } });";
+	print "$(function() { if (pageName.indexOf('mactrack_view') >= 0) { $('.maintabs a.selected').attr('href', urlPath+'plugins/mactrack/'+pageName); } });";
 	print "</script></div>";
 }
 
