@@ -127,13 +127,14 @@ function form_actions() {
 
 	top_header();
 
-	html_start_box($macw_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
-
 	form_start('mactrack_macwatch.php');
 
+	html_start_box($macw_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
+
 	if (!isset($macw_array)) {
-		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one watched Mac to delete.', 'mactrack') . "</span></td></tr>\n";
-		$save_html = "";
+		raise_message(40);
+		header('Location: mactrack_macwatch.php');
+		exit;
 	} else {
 		$save_html = "<input type='submit' name='save' value='" . __esc('Continue', 'mactrack') . "'>";
 
@@ -148,7 +149,7 @@ function form_actions() {
 	}
 
 	print "<tr>
-		<td colspan='2' align='right' class='saveRow'>
+		<td align='right' class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($macw_array) ? serialize($macw_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . (strlen($save_html) ? "
@@ -310,12 +311,26 @@ function mactrack_macw() {
 	$total_rows = db_fetch_cell("SELECT count(*) FROM mac_track_macwatch $sql_where");
 
 	$display_text = array(
-		'name'            => array(__('Watch Name', 'mactrack'), 'ASC'),
-		'mac_address'     => array(__('Mac Address', 'mactrack'), 'ASC'),
-		'ticket_number'   => array(__('Ticket Number', 'mactrack'), 'ASC'),
-		'nosort'          => array(__('Watch Description', 'mactrack'), 'ASC'),
-		'date_first_seen' => array(__('First Seen', 'mactrack'), 'ASC'),
-		'date_last_seen'  => array(__('Last Seen', 'mactrack'), 'ASC')
+		'name' => array(
+			'display' => __('Watch Name', 'mactrack'),
+			'sort' => 'ASC'
+		),
+		'mac_address' => array(
+			'display' => __('Mac Address', 'mactrack'),
+			'sort' => 'ASC'
+		),
+		'ticket_number' => array(
+			'display' => __('Ticket Number', 'mactrack'),
+			'sort' => 'ASC'
+		),
+		'date_first_seen' => array(
+			'display' => __('First Seen', 'mactrack'),
+			'sort' => 'ASC'
+		),
+		'date_last_seen'  => array(
+			'display' => __('Last Seen', 'mactrack'),
+			'sort' => 'ASC'
+		)
 	);
 
 	$columns = sizeof($display_text) + 1;
@@ -334,13 +349,14 @@ function mactrack_macw() {
 	if (cacti_sizeof($macw)) {
 		foreach ($macw as $mac) {
 			form_alternate_row('line' . $mac['mac_id'], true);
+
 			form_selectable_cell(filter_value($mac['name'], get_request_var('filter'), 'mactrack_macwatch.php?action=edit&mac_id=' . $mac['mac_id']), $mac['mac_id']);
 			form_selectable_cell(filter_value($mac['mac_address'], get_request_var('filter')), $mac['mac_id']);
 			form_selectable_cell(filter_value($mac['ticket_number'], get_request_var('filter')), $mac['mac_id']);
-			form_selectable_cell(filter_value($mac['description'], get_request_var('filter')), $mac['mac_id']);
 			form_selectable_cell($mac['date_first_seen'] == '0000-00-00 00:00:00' ? __('N/A', 'mactrack') : $mac['date_first_seen'], $mac['mac_id']);
 			form_selectable_cell($mac['date_last_seen'] == '0000-00-00 00:00:00' ? __('N/A', 'mactrack') : $mac['date_last_seen'], $mac['mac_id']);
-			form_selectable_cell($mac['name'], $mac['mac_id']);
+			form_checkbox_cell($mac['name'], $mac['mac_id']);
+
 			form_end_row();
 		}
 	} else {
