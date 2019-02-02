@@ -77,24 +77,43 @@ function mactrack_rebuild_scanning_funcs() {
 	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_vendors.php');
 
 	/* store the list of registered mactrack scanning functions */
-	db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('Not Applicable - Router', '1')");
+	db_execute("REPLACE INTO mac_track_scanning_functions
+		(scanning_function,type)
+		VALUES ('Not Applicable - Router', '1')");
+
 	if (isset($mactrack_scanning_functions)) {
-	foreach($mactrack_scanning_functions as $scanning_function) {
-		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '1')");
-	}
+		foreach($mactrack_scanning_functions as $scanning_function) {
+			db_execute_prepared('REPLACE INTO mac_track_scanning_functions
+				(scanning_function, type)
+				VALUES (?, ?)',
+				array($scanning_function, 1));
+		}
 	}
 
-	db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('Not Applicable - Switch/Hub', '2')");
+	db_execute("REPLACE INTO mac_track_scanning_functions
+		(scanning_function,type)
+		VALUES ('Not Applicable - Switch/Hub', '2')");
+
 	if (isset($mactrack_scanning_functions_ip)) {
-	foreach($mactrack_scanning_functions_ip as $scanning_function) {
-		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '2')");
+		foreach($mactrack_scanning_functions_ip as $scanning_function) {
+			db_execute_prepared('REPLACE INTO mac_track_scanning_functions
+				(scanning_function, type)
+				VALUES (?, ?)',
+				array($scanning_function, 2));
+		}
 	}
-	}
-	db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('Not Applicable', '3')");
+
+	db_execute("REPLACE INTO mac_track_scanning_functions
+		(scanning_function,type)
+		VALUES ('Not Applicable', '3')");
+
 	if (isset($mactrack_scanning_functions_dot1x)) {
-	foreach($mactrack_scanning_functions_dot1x as $scanning_function) {
-		db_execute("REPLACE INTO mac_track_scanning_functions (scanning_function,type) VALUES ('" . $scanning_function . "', '3')");
-	}
+		foreach($mactrack_scanning_functions_dot1x as $scanning_function) {
+			db_execute_prepared('REPLACE INTO mac_track_scanning_functions
+				(scanning_function, type)
+				VALUES (?, ?)',
+				array($scanning_function, 3));
+		}
 	}
 }
 
@@ -103,20 +122,7 @@ function mactrack_strip_alpha($string = '') {
 }
 
 function mactrack_check_user_realm($realm_id) {
-	if (empty($_SESSION['sess_user_id'])) {
-		return FALSE;
-	} elseif (!empty($_SESSION['sess_user_id'])) {
-		if ((!db_fetch_assoc("select
-			user_auth_realm.realm_id
-			from
-			user_auth_realm
-			where user_auth_realm.user_id='" . $_SESSION['sess_user_id'] . "'
-			and user_auth_realm.realm_id='$realm_id'")) || (empty($realm_id))) {
-			return FALSE;
-		} else {
-			return TRUE;
-		}
-	}
+	return is_realm_allowed($realm_id);
 }
 
 /* valid_snmp_device - This function validates that the device is reachable via snmp.
@@ -129,7 +135,7 @@ function valid_snmp_device(&$device) {
 	include_once($config['base_path'] . '/plugins/mactrack/mactrack_actions.php');
 
 	/* initialize variable */
-	$host_up = FALSE;
+	$host_up = false;
 	$device['snmp_status'] = HOST_DOWN;
 
 	/* force php to return numeric oid's */
@@ -151,7 +157,7 @@ function valid_snmp_device(&$device) {
 		(!substr_count($snmp_sysObjectID, 'No Such Object')) &&
 		(!substr_count($snmp_sysObjectID, 'Error In'))) {
 		$snmp_sysObjectID = trim(str_replace('"','', $snmp_sysObjectID));
-		$host_up = TRUE;
+		$host_up = true;
 		$device['snmp_status'] = HOST_UP;
 	} else {
 		/* loop through the default and then other common for the correct answer */
@@ -190,7 +196,7 @@ function valid_snmp_device(&$device) {
 				$snmp_sysObjectID = trim(str_replace("'", '', $snmp_sysObjectID));
 				$device['snmp_readstring'] = $snmp_option['snmp_readstring'];
 				$device['snmp_status'] = HOST_UP;
-				$host_up = TRUE;
+				$host_up = true;
 				# update cacti device, if required
 				sync_mactrack_to_cacti($device);
 				# update to mactrack itself is done by db_update_device_status in mactrack_scanner.php
@@ -200,7 +206,7 @@ function valid_snmp_device(&$device) {
 				break; # no need to continue if we have a match
 			} else {
 				$device['snmp_status'] = HOST_DOWN;
-				$host_up = FALSE;
+				$host_up = false;
 			}
 		}
 		}
@@ -287,8 +293,8 @@ function find_scanning_function(&$device, &$device_types) {
 	if (cacti_sizeof($device_types)) {
 	foreach($device_types as $device_type) {
 		/* by default none match */
-		$sysDescr_match = FALSE;
-		$sysObjectID_match = FALSE;
+		$sysDescr_match = false;
+		$sysObjectID_match = false;
 
 		/* search for a matching snmp_sysDescr */
 		if (substr_count($device_type['sysDescr_match'], '*') > 0) {
@@ -297,20 +303,20 @@ function find_scanning_function(&$device, &$device_types) {
 			if (cacti_sizeof($parts)) {
 			foreach($parts as $part) {
 				if (substr_count($device['sysDescr_match'],$part) > 0) {
-					$sysDescr_match = TRUE;
+					$sysDescr_match = true;
 				} else {
-					$sysDescr_match = FALSE;
+					$sysDescr_match = false;
 				}
 			}
 			}
 		} else {
 			if (strlen($device_type['sysDescr_match']) == 0) {
-				$sysDescr_match = TRUE;
+				$sysDescr_match = true;
 			} else {
 				if (substr_count($device['snmp_sysDescr'], $device_type['sysDescr_match'])) {
-					$sysDescr_match = TRUE;
+					$sysDescr_match = true;
 				} else {
-					$sysDescr_match = FALSE;
+					$sysDescr_match = false;
 				}
 			}
 		}
@@ -318,10 +324,10 @@ function find_scanning_function(&$device, &$device_types) {
 		/* search for a matching snmp_sysObjectID */
 		$len = strlen($device_type['sysObjectID_match']);
 		if (substr($device['snmp_sysObjectID'],0,$len) == $device_type['sysObjectID_match']) {
-			$sysObjectID_match = TRUE;
+			$sysObjectID_match = true;
 		}
 
-		if (($sysObjectID_match == TRUE) && ($sysDescr_match == TRUE)) {
+		if (($sysObjectID_match == true) && ($sysDescr_match == true)) {
 			$device['device_type_id'] = $device_type['device_type_id'];
 			$device['scan_type'] = $device_type['device_type'];
 			return $device_type;
@@ -449,7 +455,7 @@ function get_standard_arp_table($site, &$device) {
   and return data.  It also stores data in the mac_track_interfaces table.  Some of the
   data is also used for scanning purposes.
 */
-function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $getAlias = FALSE) {
+function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $getAlias = false) {
 	/* initialize the interfaces array */
 	$ifInterfaces = array();
 
@@ -578,7 +584,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 	$cur_octets_time  = time();
 
 	if ($prev_octets_time == 0) {
-		$divisor = FALSE;
+		$divisor = false;
 	} else {
 		$divisor = $cur_octets_time - $prev_octets_time;
 	}
@@ -761,9 +767,9 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		$int_ifOutErrors     = get_link_int_value("ifOutErrors", $ifIndex, $ifOutErrors, $db_interface, $divisor, "errors");
 
 		if ($int_ifInErrors > 0 || $int_ifOutErrors > 0) {
-			$int_errors_present = TRUE;
+			$int_errors_present = true;
 		} else {
-			$int_errors_present = FALSE;
+			$int_errors_present = false;
 		}
 
 		/* see if in discards's have been increasing */
@@ -773,9 +779,9 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = FALSE, $ge
 		$int_ifOutDiscards   = get_link_int_value("ifOutDiscards", $ifIndex, $ifOutDiscards, $db_interface, $divisor, "errors");
 
 		if ($int_ifInDiscards > 0 || $int_ifOutDiscards > 0) {
-			$int_discards_present = TRUE;
+			$int_discards_present = true;
 		} else {
-			$int_discards_present = FALSE;
+			$int_discards_present = false;
 		}
 
 		/* see if in discards's have been increasing */
@@ -1008,9 +1014,9 @@ function get_generic_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 	$ifIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device);
 	mactrack_debug("ifIndexes data collection complete");
 
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, FALSE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
 
-	get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", TRUE, $lowPort, $highPort);
+	get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", true, $lowPort, $highPort);
 
 	return $device;
 }
@@ -1032,9 +1038,9 @@ function get_generic_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort
 	$ifIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device);
 	mactrack_debug("ifIndexes data collection complete");
 
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, FALSE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
 
-	get_base_dot1qTpFdbEntry_ports($site, $device, $ifInterfaces, "", TRUE, $lowPort, $highPort);
+	get_base_dot1qTpFdbEntry_ports($site, $device, $ifInterfaces, "", true, $lowPort, $highPort);
 
 	return $device;
 }
@@ -1056,9 +1062,9 @@ function get_generic_wireless_ports($site, &$device, $lowPort = 0, $highPort = 0
 	$ifIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device);
 	mactrack_debug("ifIndexes data collection complete");
 
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, FALSE, FALSE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, false, false);
 
-	get_base_wireless_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", TRUE, $lowPort, $highPort);
+	get_base_wireless_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", true, $lowPort, $highPort);
 
 	return $device;
 }
@@ -1067,7 +1073,7 @@ function get_generic_wireless_ports($site, &$device, $lowPort = 0, $highPort = 0
   port bridge snmp table and return it to the calling progrem for further processing.
   This is a foundational function for all vendor data collection functions.
 */
-function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = TRUE, $lowPort = 1, $highPort = 9999) {
+function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 
 	/* initialize variables */
@@ -1248,7 +1254,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
   port bridge snmp table and return it to the calling progrem for further processing.
   This is a foundational function for all vendor data collection functions.
 */
-function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = TRUE, $lowPort = 1, $highPort = 9999) {
+function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 
 	/* initialize variables */
@@ -1424,7 +1430,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
   port bridge snmp table and return it to the calling progrem for further processing.
   This is a foundational function for all vendor data collection functions.
 */
-function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = TRUE, $lowPort = 1, $highPort = 9999) {
+function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 
 	/* initialize variables */
@@ -1701,7 +1707,7 @@ function mactrack_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 
 /*  get_link_port_status - This function walks an the ip mib for ifIndexes with
   ip addresses aka link ports and then returns that list if ifIndexes with a
-  TRUE array value if an IP exists on that ifIndex.
+  true array value if an IP exists on that ifIndex.
 */
 function get_link_port_status(&$device) {
 	$return_array = array();
@@ -1715,7 +1721,7 @@ function get_link_port_status(&$device) {
 
 	if (cacti_sizeof($walk_array)) {
 	foreach ($walk_array as $walk_item) {
-		$return_array[$walk_item["value"]] = TRUE;
+		$return_array[$walk_item["value"]] = true;
 	}
 	}
 
@@ -1996,7 +2002,7 @@ function xform_indexed_data($xformOID, &$device, $xformLevel = 1) {
 /*	db_process_add - This function adds a process to the process table with the entry
   with the device_id as key.
 */
-function db_process_add($device_id, $storepid = FALSE) {
+function db_process_add($device_id, $storepid = false) {
     /* store the PID if required */
 	if ($storepid) {
 		$pid = getmypid();
@@ -2025,7 +2031,7 @@ function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
 	$end_time = $seconds + $micro;
 	$runduration = $end_time - $start_time;
 
-	if ($host_up == TRUE) {
+	if ($host_up == true) {
 		$update_string = "UPDATE mac_track_devices " .
 			"SET ports_total='" . $device["ports_total"] . "'," .
 			"device_type_id='" . $device["device_type_id"] . "'," .
@@ -2086,47 +2092,50 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 
 	/* output details to database */
 	if (cacti_sizeof($port_array)) {
-	foreach($port_array as $port_value) {
-		if (($port_value["port_number"] <> "NOT USER") &&
-			(($port_value["mac_address"] <> "NOT USER") && (strlen($port_value["mac_address"]) > 0))){
+		foreach($port_array as $port_value) {
+			if (($port_value['port_number'] <> 'NOT USER') &&
+				(($port_value['mac_address'] <> 'NOT USER') && (strlen($port_value['mac_address']) > 0))){
 
-			$mac_authorized = db_check_auth($port_value["mac_address"]);
-			mactrack_debug("MAC Address '" . $port_value["mac_address"] . "' on device '" . $device["device_name"] . "' is " . (strlen($mac_authorized) ? "":"NOT") . " Authorized");
+				$mac_authorized = db_check_auth($port_value['mac_address']);
+				mactrack_debug('MAC Address \'' . $port_value['mac_address'] . '\' on device \'' . $device['device_name'] . '\' is ' . (strlen($mac_authorized) ? '':'NOT') . ' Authorized');
 
-			if (strlen($mac_authorized)) {
-				$authorized_mac = 1;
-			} else {
-				$authorized_mac = 0;
+				if (strlen($mac_authorized)) {
+					$authorized_mac = 1;
+				} else {
+					$authorized_mac = 0;
+				}
+
+				db_execute_prepared('REPLACE INTO mac_track_temp_ports
+					(site_id,device_id,hostname,device_name,vlan_id,vlan_name,
+					mac_address,port_number,port_name,scan_date,authorized)
+					VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+					array(
+						$device['site_id'],
+						$device['device_id'],
+						$device['hostname'],
+						$device['device_name'],
+						$port_value['vlan_id'],
+						$port_value['vlan_name'],
+						$port_value['mac_address'],
+						$port_value['port_number'],
+						$port_value['port_name'],
+						$scan_date,
+						$authorized_mac
+					)
+				);
 			}
-
-			$insert_string = "REPLACE INTO mac_track_temp_ports " .
-				"(site_id,device_id,hostname,device_name,vlan_id,vlan_name," .
-				"mac_address,port_number,port_name,scan_date,authorized)" .
-				" VALUES ('" .
-				$device["site_id"] . "','" .
-				$device["device_id"] . "'," .
-				db_qstr($device["hostname"]) . "," .
-				db_qstr($device["device_name"]) . ",'" .
-				$port_value["vlan_id"] . "'," .
-				db_qstr($port_value["vlan_name"]) . ",'" .
-				$port_value["mac_address"] . "','" .
-				$port_value["port_number"] . "'," .
-				db_qstr($port_value["port_name"]) . ",'" .
-				$scan_date . "','" .
-				$authorized_mac . "')";
-
-			db_execute($insert_string);
 		}
-	}
 	}
 }
 
 /* db_check_auth - This function checks whether the mac address exists in the mac_track+macauth table
 */
 function db_check_auth($mac_address) {
-	$check_string = "SELECT mac_id FROM mac_track_macauth WHERE mac_address LIKE '%%" . $mac_address . "%%'";
-
-	$query = db_fetch_cell($check_string);
+	$query = db_fetch_cell_prepared('SELECT mac_id
+		FROM mac_track_macauth
+		WHERE mac_address
+		LIKE ?',
+		array('%' . $mac_address . '%'));
 
 	return $query;
 }
@@ -2137,46 +2146,46 @@ function perform_mactrack_db_maint() {
 	global $database_default;
 
 	/* remove stale records from the poller database */
-	$retention = read_config_option("mt_data_retention");
+	$retention = read_config_option('mt_data_retention');
 	if (is_numeric($retention)) {
-		$retention_date = date("Y-m-d H:i:s", time() - ($retention *  86400));
+		$retention_date = date('Y-m-d H:i:s', time() - ($retention *  86400));
 		$days           = $retention;
 	} else {
 		switch ($retention) {
-		case "2days":
-			$retention_date = date("Y-m-d H:i:s", strtotime("-2 Days"));
+		case '2days':
+			$retention_date = date('Y-m-d H:i:s', strtotime('-2 Days'));
 			break;
-		case "5days":
-			$retention_date = date("Y-m-d H:i:s", strtotime("-5 Days"));
+		case '5days':
+			$retention_date = date('Y-m-d H:i:s', strtotime('-5 Days'));
 			break;
-		case "1week":
-			$retention_date = date("Y-m-d H:i:s", strtotime("-1 Week"));
+		case '1week':
+			$retention_date = date('Y-m-d H:i:s', strtotime('-1 Week'));
 			break;
-		case "2weeks":
-			$retention_date = date("Y-m-d H:i:s", strtotime("-2 Week"));
+		case '2weeks':
+			$retention_date = date('Y-m-d H:i:s', strtotime('-2 Week'));
 			break;
-		case "3weeks":
-			$retention_date = date("Y-m-d H:i:s", strtotime("-3 Week"));
+		case '3weeks':
+			$retention_date = date('Y-m-d H:i:s', strtotime('-3 Week'));
 			break;
-		case "1month":
-			$retention_date = date("Y-m-d H:i:s", strtotime("-1 Month"));
+		case '1month':
+			$retention_date = date('Y-m-d H:i:s', strtotime('-1 Month'));
 			break;
-		case "2months":
-			$retention_date = date("Y-m-d H:i:s", strtotime("-2 Months"));
+		case '2months':
+			$retention_date = date('Y-m-d H:i:s', strtotime('-2 Months'));
 			break;
 		default:
-			$retention_date = date("Y-m-d H:i:s", strtotime("-2 Days"));
+			$retention_date = date('Y-m-d H:i:s', strtotime('-2 Days'));
 		}
 
 		$days = ceil((time() - strtotime($retention_date)) / 86400);
 	}
 
-	db_execute("REPLACE INTO `settings` SET name='mt_data_retention', value='$days'");
+	set_config_option('mt_data_retention', $days);
 
-	mactrack_debug("Started deleting old records from the main database.");
+	mactrack_debug('Started deleting old records from the main database.');
 
-	$syntax = db_fetch_row("SHOW CREATE TABLE mac_track_ports");
-	if (substr_count($syntax["Create Table"], "PARTITION")) {
+	$syntax = db_fetch_row('SHOW CREATE TABLE mac_track_ports');
+	if (substr_count($syntax['Create Table'], 'PARTITION')) {
 		$partitioned = true;
 	} else {
 		$partitioned = false;
@@ -2185,32 +2194,34 @@ function perform_mactrack_db_maint() {
 	/* delete old syslog and syslog soft messages */
 	if ($retention > 0 || $partitioned) {
 		if (!$partitioned) {
-			db_execute("DELETE QUICK FROM mac_track_ports WHERE scan_date < '$retention_date'");
-			db_execute("OPTIMIZE TABLE mac_track_ports");
+			db_execute_prepared('DELETE QUICK FROM mac_track_ports WHERE scan_date < ?', array($retention_date));
+			db_execute('OPTIMIZE TABLE mac_track_ports');
 		} else {
 			$syslog_deleted = 0;
-			$number_of_partitions = db_fetch_assoc("SELECT *
+			$number_of_partitions = db_fetch_assoc_prepared('SELECT *
 				FROM `information_schema`.`partitions`
-				WHERE table_schema='" . $database_default . "' AND table_name='mac_track_ports'
-				ORDER BY partition_ordinal_position");
+				WHERE table_schema = ?
+				AND table_name="mac_track_ports"
+				ORDER BY partition_ordinal_position',
+				array($database_default));
 
 			$time     = time();
 			$now      = date('Y-m-d', $time);
 			$format   = date('Ymd', $time);
 			$cur_day  = db_fetch_row("SELECT TO_DAYS('$now') AS today");
-			$cur_day  = $cur_day["today"];
+			$cur_day  = $cur_day['today'];
 
-			$lday_ts  = read_config_option("mactrack_lastday_timestamp");
+			$lday_ts  = read_config_option('mactrack_lastday_timestamp');
 			$lnow     = date('Y-m-d', $lday_ts);
 			$lformat  = date('Ymd', $lday_ts);
 			$last_day = db_fetch_row("SELECT TO_DAYS('$lnow') AS today");
-			$last_day = $last_day["today"];
+			$last_day = $last_day['today'];
 
 			mactrack_debug("There are currently '" . sizeof($number_of_partitions) . "' Device Tracking Partitions, We will keep '$days' of them.");
 			mactrack_debug("The current day is '$cur_day', the last day is '$last_day'");
 
 			if ($cur_day != $last_day) {
-				db_execute("REPLACE INTO `settings` SET name='mactrack_lastday_timestamp', value='$time'");
+				set_config_option('mactrack_lastday_timestamp', $time);
 
 				if ($lday_ts != '') {
 					cacti_log("MACTRACK: Creating new partition 'd" . $lformat . "'", false, "SYSTEM");
@@ -2226,8 +2237,8 @@ function perform_mactrack_db_maint() {
 							while ($user_partitions > $days) {
 								$oldest = $number_of_partitions[$i];
 								cacti_log("MACTRACK: Removing old partition 'd" . $oldest["PARTITION_NAME"] . "'", false, "SYSTEM");
-								mactrack_debug("Removing partition '" . $oldest["PARTITION_NAME"] . "'");
-								db_execute("ALTER TABLE mac_track_ports DROP PARTITION " . $oldest["PARTITION_NAME"]);
+								mactrack_debug("Removing partition '" . $oldest['PARTITION_NAME'] . "'");
+								db_execute("ALTER TABLE mac_track_ports DROP PARTITION " . $oldest['PARTITION_NAME']);
 								$i++;
 								$user_partitions--;
 								$mactrack_deleted++;
@@ -2239,18 +2250,25 @@ function perform_mactrack_db_maint() {
 		}
 	}
 
-	db_execute("REPLACE INTO mac_track_scan_dates (SELECT DISTINCT scan_date FROM mac_track_ports);");
-	db_execute("DELETE FROM mac_track_scan_dates WHERE scan_date NOT IN (SELECT DISTINCT scan_date FROM mac_track_ports)");
-	mactrack_debug("Finished deleting old records from the main database.");
+	db_execute('REPLACE INTO mac_track_scan_dates
+		(SELECT DISTINCT scan_date FROM mac_track_ports)');
+
+	db_execute('DELETE FROM mac_track_scan_dates
+		WHERE scan_date NOT IN (
+			SELECT DISTINCT scan_date
+			FROM mac_track_ports
+		)');
+
+	mactrack_debug('Finished deleting old records from the main database.');
 }
 
 function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.ieee.org/oui.txt') {
 	$oui_alternate = 'https://services13.ieee.org/RST/standards-ra-web/rest/assignments/download/?registry=MA-L&format=txt';
 	if ($type != 'ui') {
 		html_start_box(__('Device Tracking OUI Database Import Results', 'mactrack'), '100%', '', '1', 'center', '');
-		echo '<tr><td>' . __('Getting OUI Database from IEEE', 'mactrack') . '</td></tr>';
+		print '<tr><td>' . __('Getting OUI Database from IEEE', 'mactrack') . '</td></tr>';
 	} else {
-		echo __('Getting OUI Database from the IEEE', 'mactrack') . "\n";
+		print __('Getting OUI Database from the IEEE', 'mactrack') . PHP_EOL;
 	}
 
 	$oui_database = file($oui_file);
@@ -2258,9 +2276,9 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 	if ($type != 'ui') print '<tr><td>';
 
 	if (is_array($oui_database)) {
-		echo __('OUI Database Download from IEEE Complete', 'mactrack') . "\n";
+		print __('OUI Database Download from IEEE Complete', 'mactrack') . PHP_EOL;
 	} else {
-		echo __('OUI Database Download from IEEE FAILED', 'mactrack') . "\n";
+		print __('OUI Database Download from IEEE FAILED', 'mactrack') . PHP_EOL;
 	}
 
 	if ($type != 'ui') print '</td></tr>';
@@ -2269,14 +2287,14 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 		db_execute('UPDATE mac_track_oui_database SET present=0');
 
 		/* initialize some variables */
-		$begin_vendor = FALSE;
+		$begin_vendor = false;
 		$vendor_mac     = '';
 		$vendor_name    = '';
 		$vendor_address = '';
 		$i = 0;
 		$sql = '';
 
-		if ($type != 'ui') echo '<tr><td>';
+		if ($type != 'ui') print '<tr><td>';
 
 		if (cacti_sizeof($oui_database)) {
 			foreach ($oui_database as $row) {
@@ -2299,7 +2317,7 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 
 					/* let the user know you are working */
 					if ((($i % 1000) == 0) && ($type == 'ui')) {
-						echo '.';
+						print '.';
 
 						db_execute('REPLACE INTO mac_track_oui_database
 							(vendor_mac, vendor_name, vendor_address, present)
@@ -2311,7 +2329,7 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 					$i++;
 
 					/* reinitialize variables */
-					$begin_vendor   = FALSE;
+					$begin_vendor   = false;
 					$vendor_mac     = '';
 					$vendor_name    = '';
 					$vendor_address = '';
@@ -2329,7 +2347,7 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 				}
 
 				if (substr_count($row, '(hex)')) {
-					$begin_vendor = TRUE;
+					$begin_vendor = true;
 					$vendor_mac = str_replace('-', ':', substr(trim($row), 0, 8));
 					$hex_end = strpos($row, '(hex)') + 5;
 					$vendor_name= trim(substr($row,$hex_end));
@@ -2353,9 +2371,9 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 
 		/* report some information */
 		if ($type != 'ui') print '<tr><td>';
-		echo "\n" . __('There were \'%d\' Entries Added/Updated in the database.', $i, 'mactrack');
-		if ($type != "ui") print "</td></td><tr><td>";
-		echo "\n" . __('There were \'%d\' Records Removed from the database.', $j, 'mactrack') . "\n";
+		print PHP_EOL . __('There were \'%d\' Entries Added/Updated in the database.', $i, 'mactrack');
+		if ($type != 'ui') print '</td></td><tr><td>';
+		print PHP_EOL . __('There were \'%d\' Records Removed from the database.', $j, 'mactrack') . PHP_EOL;
 		if ($type != 'ui') print '</td></tr>';
 
 		if ($type != 'ui') html_end_box();
@@ -2421,37 +2439,45 @@ function get_netscreen_arp_table($site, &$device) {
 	/* output details to database */
 	if (cacti_sizeof($atEntries)) {
 		foreach($atEntries as $atEntry) {
-			$insert_string = 'REPLACE INTO mac_track_ips
+			db_execute_prepared('REPLACE INTO mac_track_ips
 				(site_id,device_id,hostname,device_name,port_number,
 				mac_address,ip_address,scan_date)
-				 VALUES (' .
-				$device['site_id']                 . ',' .
-				$device['device_id']               . ',' .
-				db_qstr($device['hostname'])       . ',' .
-				db_qstr($device['device_name'])    . ',' .
-				db_qstr($atEntry['atifIndex'])     . ',' .
-				db_qstr($atEntry['atPhysAddress']) . ',' .
-				db_qstr($atEntry['atNetAddress'])  . ',' .
-				db_qstr($scan_date)                . ')';
-			db_execute($insert_string);
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+				array(
+					$device['site_id'],
+					$device['device_id'],
+					$device['hostname'],
+					$device['device_name'],
+					$atEntry['atifIndex'],
+					$atEntry['atPhysAddress'],
+					$atEntry['atNetAddress'],
+					$scan_date
+				)
+			);
 		}
 	}
 
 	/* save ip information for the device */
 	$device['ips_total'] = sizeof($atEntries);
 
-	db_execute('UPDATE mac_track_devices SET ips_total =' . $device['ips_total'] . ' WHERE device_id=' . $device['device_id']);
+	db_execute_prepared('UPDATE mac_track_devices
+		SET ips_total = ?
+		WHERE device_id = ?',
+		array($device['ips_total'], $device['device_id']));
 
 	mactrack_debug(__('HOST: %s, IP address information collection complete', $device['hostname'], 'mactrack'));
 }
 
-function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
+function mactrack_interface_actions($device_id, $ifName, $show_rescan = true) {
 	global $config;
 
 	$row    = '';
 	$rescan = '';
 
-	$device = db_fetch_row_prepared('SELECT host_id, disabled FROM mac_track_devices WHERE device_id = ?', array($device_id));
+	$device = db_fetch_row_prepared('SELECT host_id, disabled
+		FROM mac_track_devices
+		WHERE device_id = ?',
+		array($device_id));
 
 	if ($show_rescan) {
 		if (api_user_realm_auth('mactrack_sites.php')) {
@@ -2467,13 +2493,14 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 
 	if ($device['host_id'] != 0) {
 		/* get non-interface graphs */
-		$graphs = db_fetch_assoc_prepared('SELECT DISTINCT graph_local.id AS local_graph_id
-			FROM mac_track_interface_graphs
-			RIGHT JOIN graph_local
-			ON graph_local.host_id=mac_track_interface_graphs.host_id
-			AND graph_local.id=mac_track_interface_graphs.local_graph_id
-			WHERE graph_local.host_id = ?
-			AND mac_track_interface_graphs.device_id IS NULL', array($device['host_id']));
+		$graphs = db_fetch_assoc_prepared('SELECT DISTINCT gl.id AS local_graph_id
+			FROM mac_track_interface_graphs AS mtig
+			RIGHT JOIN graph_local AS gl
+			ON gl.host_id=mtig.host_id
+			AND gl.id=mtig.local_graph_id
+			WHERE gl.host_id = ?
+			AND mtig.device_id IS NULL',
+			array($device['host_id']));
 
 		if (cacti_sizeof($graphs)) {
 			$url  = $config['url_path'] . 'plugins/mactrack/mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=';
@@ -2489,7 +2516,8 @@ function mactrack_interface_actions($device_id, $ifName, $show_rescan = TRUE) {
 		/* get interface graphs */
 		$graphs = db_fetch_assoc_prepared('SELECT local_graph_id
 			FROM mac_track_interface_graphs
-			WHERE host_id = ? AND ifName = ?', array($device['host_id'], $ifName));
+			WHERE host_id = ? AND ifName = ?',
+			array($device['host_id'], $ifName));
 
 		if (cacti_sizeof($graphs)) {
 			$url  = $config['url_path'] . 'plugins/mactrack/mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=';
@@ -2621,7 +2649,7 @@ function mactrack_display_Octets($octets) {
 	return $octets . ' ' . $suffix;
 }
 
-function mactrack_rescan($web = FALSE) {
+function mactrack_rescan($web = false) {
 	global $config;
 
 	$device_id = get_request_var('device_id');
@@ -2658,11 +2686,14 @@ function mactrack_rescan($web = FALSE) {
 	}
 }
 
-function mactrack_site_scan($web = FALSE) {
+function mactrack_site_scan($web = false) {
 	global $config, $web;
 
 	$site_id = get_request_var('site_id');
-	$dbinfo  = db_fetch_row_prepared('SELECT * FROM mac_track_sites WHERE site_id = ?', array($site_id));
+	$dbinfo  = db_fetch_row_prepared('SELECT *
+		FROM mac_track_sites
+		WHERE site_id = ?',
+		array($site_id));
 
 	if (cacti_sizeof($dbinfo)) {
 		/* log the trasaction to the database */
@@ -2696,12 +2727,18 @@ function mactrack_enable() {
 	get_filter_request_var('device_id');
 	/* ==================================================== */
 
-	$dbinfo = db_fetch_row_prepared('SELECT * FROM mac_track_devices WHERE device_id = ?', array(get_request_var('device_id')));
+	$dbinfo = db_fetch_row_prepared('SELECT *
+		FROM mac_track_devices
+		WHERE device_id = ?',
+		array(get_request_var('device_id')));
 
 	/* log the trasaction to the database */
 	mactrack_log_action(__('Device Enable \'%s\'', $dbinfo['hostname'], 'mactrack'));
 
-	db_execute_prepared("UPDATE mac_track_devices SET disabled='' WHERE device_id = ?", array(get_request_var('device_id')));
+	db_execute_prepared('UPDATE mac_track_devices
+		SET disabled = ""
+		WHERE device_id = ?',
+		array(get_request_var('device_id')));
 
 	/* get the new html */
 	$html = mactrack_format_device_row($dbinfo);
@@ -2715,12 +2752,18 @@ function mactrack_disable() {
 	get_filter_request_var('device_id');
 	/* ==================================================== */
 
-	$dbinfo = db_fetch_row_prepared('SELECT * FROM mactrack_devices WHERE device_id = ?', array(get_request_var('device_id')));
+	$dbinfo = db_fetch_row_prepared('SELECT *
+		FROM mactrack_devices
+		WHERE device_id = ?',
+		array(get_request_var('device_id')));
 
 	/* log the trasaction to the database */
 	mactrack_log_action(__('Device Disable \'%d\'', $dbinfo['hostname'], 'mactrack'));
 
-	db_execute_prepared("UPDATE mactack_devices SET disabled='on' WHERE device_id = ?", array(get_request_var('device_id')));
+	db_execute_prepared('UPDATE mactack_devices
+		SET disabled="on"
+		WHERE device_id = ?',
+		array(get_request_var('device_id')));
 
 	/* get the new html */
 	$html = mactrack_format_device_row($stat);
@@ -2730,7 +2773,10 @@ function mactrack_disable() {
 }
 
 function mactrack_log_action($message) {
-	$user = db_fetch_row_prepared('SELECT username, full_name FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+	$user = db_fetch_row_prepared('SELECT username, full_name
+		FROM user_auth
+		WHERE id = ?',
+		array($_SESSION['sess_user_id']));
 
 	cacti_log('MACTRACK: ' . $message . ", by '" . $user['full_name'] . '(' . $user['username'] . ")'", false, 'SYSTEM');
 }
@@ -2845,8 +2891,8 @@ function mactrack_display_hours($value) {
 function mactrack_display_stats() {
 	/* check if scanning is running */
 	$processes = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes');
-	$frequency = read_config_option('mt_collection_timing', TRUE) * 60;
-	$mactrack_stats = read_config_option('stats_mactrack', TRUE);
+	$frequency = read_config_option('mt_collection_timing', true) * 60;
+	$mactrack_stats = read_config_option('stats_mactrack', true);
 	$time  = __('Not Recorded', 'mactrack');
 	$proc  = __('N/A', 'mactrack');
 	$devs  = __('N/A', 'mactrack');
@@ -2866,11 +2912,11 @@ function mactrack_display_stats() {
 	}
 
 	if ($processes > 0) {
-		$message = __('Status: Running, Processes: %d, Progress: %s, LastRuntime: %f', $processes, read_config_option('mactrack_process_status', TRUE), round($time,1), 'mactrack');
+		$message = __('Status: Running, Processes: %d, Progress: %s, LastRuntime: %f', $processes, read_config_option('mactrack_process_status', true), round($time,1), 'mactrack');
 	} else {
 		$message = __('Status: Idle, LastRuntime: %f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s',
 			round($time,1), $proc , $devs,
-			date('Y-m-d H:i:s', strtotime(read_config_option('mt_scan_date', TRUE)) + $frequency), 'mactrack');
+			date('Y-m-d H:i:s', strtotime(read_config_option('mt_scan_date', true)) + $frequency), 'mactrack');
 	}
 
 	html_start_box('', '100%', '', '3', 'center', '');
