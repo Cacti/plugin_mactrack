@@ -33,7 +33,6 @@ $title = __('Device Tracking - Monitored Device Graph View', 'mactrack');
 
 set_default_action();
 
-mactrack_redirect();
 general_header();
 mactrack_tabs();
 mactrack_view_graphs();

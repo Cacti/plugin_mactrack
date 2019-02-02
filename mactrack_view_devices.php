@@ -25,7 +25,6 @@
 $guest_account = true;
 chdir('../../');
 include('./include/auth.php');
-include_once('./include/global_arrays.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 $title = __('Device Tracking - Device Report View', 'macktrack');
@@ -33,7 +32,6 @@ $title = __('Device Tracking - Device Report View', 'macktrack');
 if (isset_request_var('export')) {
 	mactrack_view_export_devices();
 } else {
-	mactrack_redirect();
 	general_header();
 	mactrack_view_devices();
 	bottom_footer();

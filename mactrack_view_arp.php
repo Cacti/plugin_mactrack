@@ -25,7 +25,6 @@
 $guest_account = true;
 chdir('../../');
 include('./include/auth.php');
-include_once('./include/global_arrays.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 $title = __('Device Tracking - ARP/IP View', 'mactrack');
@@ -35,8 +34,6 @@ set_default_action();
 if (isset_request_var('export')) {
 	mactrack_view_export_ips();
 } else {
-	mactrack_redirect();
-
 	general_header();
 	mactrack_view_ips();
 	bottom_footer();

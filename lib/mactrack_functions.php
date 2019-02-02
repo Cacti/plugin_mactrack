@@ -2929,21 +2929,6 @@ function mactrack_legend_row($class, $text) {
 	print "<td width='16.67%' class='$class' style='text-align:center;;'>$text</td>";
 }
 
-function mactrack_redirect() {
-	/* set the default tab */
-    get_filter_request_var('report', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-zA-Z0-9]+)$/')));
-
-	load_current_session_value('report', 'sess_mt_report', 'devices');
-	$current_tab = get_nfilter_request_var('report');
-
-	$current_page = str_replace('mactrack_', '', str_replace('view_', '', str_replace('.php', '', get_current_page())));
-	$current_dir  = dirname(get_current_page(false));
-
-	if ($current_page != $current_tab) {
-		header('Location: ' . $current_dir . '/mactrack_view_' . $current_tab . '.php');
-	}
-}
-
 function mactrack_format_device_row($device, $actions=false) {
 	global $config, $mactrack_device_types;
 

@@ -25,7 +25,6 @@
 $guest_account = true;
 chdir('../../');
 include('./include/auth.php');
-include_once('./include/global_arrays.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 $title = __('Device Tracking - MAC to IP Report View', 'mactrack');
@@ -54,7 +53,6 @@ default:
 	if (isset_request_var('export')) {
 		mactrack_view_export_macs();
 	} else {
-		mactrack_redirect();
 		general_header();
 
 		mactrack_view_macs_validate_request_vars();
@@ -70,6 +68,7 @@ default:
 				mactrack_view_aggregated_macs();
 			}
 		}
+
 		bottom_footer();
 	}
 
@@ -147,7 +146,7 @@ function form_actions() {
 		}
 	}
 
-	top_header();
+	general_header();
 
 	html_start_box($mactrack_view_macs_actions{get_request_var('drp_action')}, '60%', '', '3', 'center', '');
 
@@ -244,7 +243,7 @@ function form_aggregated_actions() {
 		}
 	}
 
-	top_header();
+	general_header();
 
 	html_start_box($mactrack_view_agg_macs_actions{get_request_var('drp_action')}, '60%', '', '3', 'center', '');
 

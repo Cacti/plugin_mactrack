@@ -35,18 +35,16 @@ set_default_action();
 if (isset_request_var('export')) {
 	mactrack_view_export_dot1x();
 } else {
-	mactrack_redirect();
 	general_header();
 
 	mactrack_view_dot1x_validate_request_vars();
 
 	if (isset_request_var('scan_date')) {
-			mactrack_view_dot1x();
-	} else {
-
-		}
-		bottom_footer();
+		mactrack_view_dot1x();
 	}
+
+	bottom_footer();
+}
 
 function mactrack_view_dot1x_validate_request_vars() {
     /* ================= input validation and session storage ================= */

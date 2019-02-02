@@ -34,7 +34,6 @@ $title = __('Device Tracking - Network Interfaces View', 'mactrack');
 if (isset_request_var('export')) {
 	mactrack_export_records();
 } else {
-	mactrack_redirect();
 	mactrack_view();
 }
 
