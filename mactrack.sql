@@ -7,87 +7,88 @@ CREATE TABLE `mac_track_approved_macs` (
   `vendor` varchar(50) NOT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY  (`mac_prefix`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `mac_track_device_types`
 --
 
 CREATE TABLE `mac_track_device_types` (
-  `device_type_id` int(10) unsigned NOT NULL auto_increment,
-  `description` varchar(100) NOT NULL default '',
-  `vendor` varchar(40) NOT NULL default '',
-  `device_type` varchar(10) NOT NULL default '0',
-  `sysDescr_match` varchar(20) NOT NULL default '',
-  `sysObjectID_match` varchar(40) NOT NULL default '',
-  `scanning_function` varchar(100) NOT NULL default '',
+  `device_type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `description` varchar(100) NOT NULL DEFAULT '',
+  `vendor` varchar(40) NOT NULL DEFAULT '',
+  `device_type` varchar(10) NOT NULL DEFAULT '0',
+  `sysDescr_match` varchar(20) NOT NULL DEFAULT '',
+  `sysObjectID_match` varchar(40) NOT NULL DEFAULT '',
+  `scanning_function` varchar(100) NOT NULL DEFAULT '',
   `ip_scanning_function` varchar(100) NOT NULL,
-  `serial_number_oid` varchar(100) default '',
-  `lowPort` int(10) unsigned NOT NULL default '0',
-  `highPort` int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (`sysDescr_match`,`sysObjectID_match`,`device_type`),
+  `dot1x_scanning_function` varchar(100) NOT NULL,
+  `serial_number_oid` varchar(100) DEFAULT '',
+  `lowPort` int(10) unsigned NOT NULL DEFAULT '0',
+  `highPort` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`sysDescr_match`,`sysObjectID_match`,`device_type`),
   KEY `device_type` (`device_type`),
   KEY `device_type_id` (`device_type_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `mac_track_devices`
 --
 
 CREATE TABLE `mac_track_devices` (
-			`site_id` int(10) unsigned NOT NULL default '0',
-			`device_id` int(10) unsigned NOT NULL auto_increment,
-			`host_id` INTEGER UNSIGNED NOT NULL default '0',
-			`device_name` varchar(100) default '',
-			`device_type_id` int(10) unsigned default '0',
-			`hostname` varchar(40) NOT NULL default '',
-			`notes` text,
-			`disabled` char(2) default '',
-			`ignorePorts` varchar(255) default NULL,
-			`ips_total` int(10) unsigned NOT NULL default '0',
-			`vlans_total` int(10) unsigned NOT NULL default '0',
-			`ports_total` int(10) unsigned NOT NULL default '0',
-			`ports_active` int(10) unsigned NOT NULL default '0',
-			`ports_trunk` int(10) unsigned NOT NULL default '0',
-			`macs_active` int(10) unsigned NOT NULL default '0',
-			`scan_type` tinyint(11) NOT NULL default '1',
-			`term_type` tinyint(11) NOT NULL default '1',
-			`user_name` varchar(40) default NULL,
-			`user_password` varchar(40) default NULL,
-			`private_key_path` varchar(128) default '',
-			`snmp_options` int(10) unsigned NOT NULL default '0',
-			`snmp_readstring` varchar(100) NOT NULL,
-			`snmp_readstrings` varchar(255) default NULL,
-			`snmp_version` varchar(100) NOT NULL default '',
-			`snmp_port` int(10) NOT NULL default '161',
-			`snmp_timeout` int(10) unsigned NOT NULL default '500',
-			`snmp_retries` tinyint(11) unsigned NOT NULL default '3',
-			`snmp_sysName` varchar(100) default '',
-			`snmp_sysLocation` varchar(100) default '',
-			`snmp_sysContact` varchar(100) default '',
-			`snmp_sysObjectID` varchar(100) default NULL,
-			`snmp_sysDescr` varchar(100) default NULL,
-			`snmp_sysUptime` varchar(100) default NULL,
-			`snmp_status` int(10) unsigned NOT NULL default '0',
-			`snmp_username` varchar(50) default NULL,
-			`snmp_password` varchar(50) default NULL,
-			`snmp_auth_protocol` char(5) default '',
-			`snmp_priv_passphrase` varchar(200) default '',
-			`snmp_priv_protocol` char(6) default '',
-			`snmp_context` varchar(64) default '',
-			`max_oids` int(12) unsigned default '10',
-			`last_runmessage` varchar(100) default '',
-			`last_rundate` datetime NOT NULL default '0000-00-00 00:00:00',
-			`last_runduration` decimal(10,5) NOT NULL default '0.00000',
-			PRIMARY KEY  (`hostname`,`snmp_port`,`site_id`),
-			KEY `site_id` (`site_id`),
-			KEY `host_id`(`host_id`),
-			KEY `device_id` (`device_id`),
-			KEY `snmp_sysDescr` (`snmp_sysDescr`),
-			KEY `snmp_sysObjectID` (`snmp_sysObjectID`),
-			KEY `device_type_id` (`device_type_id`),
-			KEY `device_name` (`device_name`))
-			ENGINE=MyISAM COMMENT='Devices to be scanned for MAC addresses';
+  `site_id` int(10) unsigned NOT NULL default '0',
+  `device_id` int(10) unsigned NOT NULL auto_increment,
+  `host_id` INTEGER UNSIGNED NOT NULL default '0',
+  `device_name` varchar(100) default '',
+  `device_type_id` int(10) unsigned default '0',
+  `hostname` varchar(40) NOT NULL default '',
+  `notes` text,
+  `disabled` char(2) default '',
+  `ignorePorts` varchar(255) default NULL,
+  `ips_total` int(10) unsigned NOT NULL default '0',
+  `vlans_total` int(10) unsigned NOT NULL default '0',
+  `ports_total` int(10) unsigned NOT NULL default '0',
+  `ports_active` int(10) unsigned NOT NULL default '0',
+  `ports_trunk` int(10) unsigned NOT NULL default '0',
+  `macs_active` int(10) unsigned NOT NULL default '0',
+  `scan_type` tinyint(11) NOT NULL default '1',
+  `term_type` tinyint(11) NOT NULL default '1',
+  `user_name` varchar(40) default NULL,
+  `user_password` varchar(40) default NULL,
+  `private_key_path` varchar(128) default '',
+  `snmp_options` int(10) unsigned NOT NULL default '0',
+  `snmp_readstring` varchar(100) NOT NULL,
+  `snmp_readstrings` varchar(255) default NULL,
+  `snmp_version` varchar(100) NOT NULL default '',
+  `snmp_port` int(10) NOT NULL default '161',
+  `snmp_timeout` int(10) unsigned NOT NULL default '500',
+  `snmp_retries` tinyint(11) unsigned NOT NULL default '3',
+  `snmp_sysName` varchar(100) default '',
+  `snmp_sysLocation` varchar(100) default '',
+  `snmp_sysContact` varchar(100) default '',
+  `snmp_sysObjectID` varchar(100) default NULL,
+  `snmp_sysDescr` varchar(100) default NULL,
+  `snmp_sysUptime` varchar(100) default NULL,
+  `snmp_status` int(10) unsigned NOT NULL default '0',
+  `snmp_username` varchar(50) default NULL,
+  `snmp_password` varchar(50) default NULL,
+  `snmp_auth_protocol` char(5) default '',
+  `snmp_priv_passphrase` varchar(200) default '',
+  `snmp_priv_protocol` char(6) default '',
+  `snmp_context` varchar(64) default '',
+  `max_oids` int(12) unsigned default '10',
+  `last_runmessage` varchar(100) default '',
+  `last_rundate` datetime NOT NULL default '0000-00-00 00:00:00',
+  `last_runduration` decimal(10,5) NOT NULL default '0.00000',
+  PRIMARY KEY  (`hostname`,`snmp_port`,`site_id`),
+  KEY `site_id` (`site_id`),
+  KEY `host_id`(`host_id`),
+  KEY `device_id` (`device_id`),
+  KEY `snmp_sysDescr` (`snmp_sysDescr`),
+  KEY `snmp_sysObjectID` (`snmp_sysObjectID`),
+  KEY `device_type_id` (`device_type_id`),
+  KEY `device_name` (`device_name`))
+  ENGINE=InnoDB COMMENT='Devices to be scanned for MAC addresses';
 
 --
 -- Table structure for table `mac_track_interfaces`
@@ -132,7 +133,7 @@ CREATE TABLE `mac_track_interfaces` (
   KEY `ifOperStatus` (`ifOperStatus`),
   KEY `ifInDiscards` USING BTREE (`ifInUnknownProtos`),
   KEY `ifInErrors` USING BTREE (`ifInUnknownProtos`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `mac_track_ip_ranges`
@@ -147,7 +148,7 @@ CREATE TABLE `mac_track_ip_ranges` (
   `ips_current_date` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`ip_range`,`site_id`),
   KEY `site_id` (`site_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `mac_track_ips`
@@ -171,7 +172,7 @@ CREATE TABLE `mac_track_ips` (
   KEY `site_id` (`site_id`),
   KEY `hostname` (`hostname`),
   KEY `scan_date` (`scan_date`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `mac_track_macauth`
@@ -185,7 +186,7 @@ CREATE TABLE `mac_track_macauth` (
   `added_by` varchar(20) NOT NULL,
   PRIMARY KEY  (`mac_address`),
   KEY `mac_id` (`mac_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `mac_track_macwatch`
@@ -204,7 +205,7 @@ CREATE TABLE `mac_track_macwatch` (
   `date_last_seen` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`mac_address`),
   KEY `mac_id` (`mac_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `mac_track_oui_database`
@@ -217,7 +218,7 @@ CREATE TABLE `mac_track_oui_database` (
   `present` tinyint(3) unsigned NOT NULL default '1',
   PRIMARY KEY  (`vendor_mac`),
   KEY `vendor_name` (`vendor_name`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 --
 -- Dumping data for table `mac_track_oui_database`
@@ -262,7 +263,7 @@ CREATE TABLE `mac_track_ports` (
   KEY `dns_hostname` (`dns_hostname`),
   KEY `vendor_mac` (`vendor_mac`),
   KEY `authorized` (`authorized`)
-) ENGINE=MyISAM COMMENT='Database for Tracking Device MACs';
+) ENGINE=InnoDB COMMENT='Database for Tracking Device MACs';
 
 --
 -- Table structure for table `mac_track_processes`
@@ -274,7 +275,7 @@ CREATE TABLE `mac_track_processes` (
   `status` varchar(20) NOT NULL default 'Queued',
   `start_date` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`device_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `mac_track_scan_dates`
@@ -283,7 +284,7 @@ CREATE TABLE `mac_track_processes` (
 CREATE TABLE `mac_track_scan_dates` (
   `scan_date` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`scan_date`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `mac_track_scanning_functions`
@@ -294,7 +295,7 @@ CREATE TABLE `mac_track_scanning_functions` (
   `type` int(10) unsigned NOT NULL default '0',
   `description` varchar(200) NOT NULL default '',
   PRIMARY KEY  (`scanning_function`)
-) ENGINE=MyISAM COMMENT='Registered Scanning Functions';
+) ENGINE=InnoDB COMMENT='Registered Scanning Functions';
 
 --
 -- Table structure for table `mac_track_sites`
@@ -315,7 +316,7 @@ CREATE TABLE `mac_track_sites` (
   `total_oper_ports` int(10) unsigned NOT NULL default '0',
   `total_trunk_ports` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`site_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `mac_track_temp_ports`
@@ -349,7 +350,7 @@ CREATE TABLE `mac_track_temp_ports` (
   KEY `updated` (`updated`),
   KEY `vendor_mac` (`vendor_mac`),
   KEY `authorized` (`authorized`)
-) ENGINE=MyISAM COMMENT='Database for Storing Temporary Results for Tracking Device MACS';
+) ENGINE=InnoDB COMMENT='Database for Storing Temporary Results for Tracking Device MACS';
 
 --
 -- Table structure for table `mac_track_vlans`
@@ -363,7 +364,7 @@ CREATE TABLE `mac_track_vlans` (
   `present` tinyint(3) unsigned NOT NULL default '1',
   PRIMARY KEY  (`vlan_id`,`site_id`,`device_id`),
   KEY `vlan_name` (`vlan_name`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `mac_track_aggregated_ports`
@@ -403,4 +404,4 @@ CREATE TABLE `mac_track_aggregated_ports` (
   KEY `vendor_mac` (`vendor_mac`),
   KEY `authorized` (`authorized`),
   KEY `site_id_device_id` (`site_id`,`device_id`)
-) ENGINE=MyISAM COMMENT='Database for aggregated date for Tracking Device MAC''s';
+) ENGINE=InnoDB COMMENT='Database for aggregated date for Tracking Device MAC''s';
