@@ -46,7 +46,6 @@ if (!isset($mactrack_device_status)) {
 
 function mactrack_debug($message) {
 	global $debug, $web, $config;
-	include_once($config['base_path'] . '/lib/functions.php');
 
 	$print_output=!(isset($web) && $web);
 	if (isset($web) && $web && !substr_count($message, 'SQL')) {
@@ -73,7 +72,6 @@ function mactrack_rebuild_scanning_funcs() {
 
 	db_execute('TRUNCATE TABLE mac_track_scanning_functions');
 
-	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_vendors.php');
 
 	/* store the list of registered mactrack scanning functions */
@@ -132,7 +130,6 @@ function mactrack_check_user_realm($realm_id) {
  */
 function valid_snmp_device(&$device) {
 	global $config;
-	include_once($config['base_path'] . '/plugins/mactrack/mactrack_actions.php');
 
 	/* initialize variable */
 	$host_up = false;
@@ -2984,7 +2981,6 @@ function mactrack_format_device_row($device, $actions=false) {
 
 function mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '') {
 	global $config;
-	include_once($config['base_path'] . '/plugins/settings/include/mailer.php');
 
 	$subject = trim($subject);
 

@@ -21,6 +21,7 @@
  | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
+
 chdir('../../');
 include('./include/auth.php');
 include_once('./lib/snmp.php');
@@ -125,8 +126,6 @@ function form_mactrack_actions() {
 	/* ================= input validation ================= */
 	get_filter_request_var('drp_action');
 	/* ==================================================== */
-
-	include_once($config['base_path'] . '/lib/functions.php');
 
 	/* if we are to save this form, instead of display it */
 	if (isset_request_var('selected_items')) {

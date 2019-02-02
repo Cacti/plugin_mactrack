@@ -124,8 +124,12 @@ function mactrack_check_upgrade () {
 
 		// If are realms are not present in plugin_realms recreate them with the old realm ids (minus 100) so that upgraded installs are not broken
 		if (!db_fetch_cell("SELECT id FROM plugin_realms WHERE plugin = 'mactrack'")) {
-			db_execute("INSERT INTO plugin_realms (id, plugin, file, display) VALUES (2020, 'mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_dot1x.php,mactrack_view_graphs.php,mactrack_ajax.php', 'Device Tracking Viewer')");
-			db_execute("INSERT INTO plugin_realms (id, plugin, file, display) VALUES (2021, 'mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'Device Tracking Administrator')");
+			db_execute("INSERT INTO plugin_realms
+				(id, plugin, file, display)
+				VALUES (2020, 'mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_dot1x.php,mactrack_view_graphs.php,mactrack_ajax.php', 'Device Tracking Viewer')");
+			db_execute("INSERT INTO plugin_realms
+				(id, plugin, file, display)
+				VALUES (2021, 'mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'Device Tracking Administrator')");
 		}
 
 		/* rebuild the scanning functions */
@@ -904,10 +908,6 @@ function mactrack_page_head() {
 
 function mactrack_poller_bottom () {
 	global $config;
-
-	include_once($config['base_path'] . '/lib/poller.php');
-	include_once($config['base_path'] . '/lib/data_query.php');
-	include_once($config['base_path'] . '/lib/rrd.php');
 
 	$command_string = read_config_option('path_php_binary');
 	$extra_args = '-q ' . $config['base_path'] . '/plugins/mactrack/poller_mactrack.php';
@@ -1991,8 +1991,6 @@ function mactrack_config_form () {
 
 function convert_readstrings() {
 	global $config;
-
-	include_once($config['base_path'] . '/lib/functions.php');
 
 	$sql = 'SELECT DISTINCT ' .
 		'snmp_readstrings, ' .

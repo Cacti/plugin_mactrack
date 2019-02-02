@@ -25,14 +25,9 @@
  +-------------------------------------------------------------------------+
 */
 
-/* do NOT run this script through a web browser */
-if (!isset($_SERVER['argv'][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($_SERVER['REMOTE_ADDR'])) {
-	die('<br><strong>This script is only meant to run at the command line.</strong>');
-}
-
-$no_http_headers = true;
-include(dirname(__FILE__) . '/../../include/global.php');
-include_once(dirname(__FILE__) . '/lib/mactrack_functions.php');
+chdir('../../');
+include('./include/cli_check.php');
+include_once('./lib/mactrack_functions.php');
 
 /* process calling arguments */
 $parms = $_SERVER['argv'];
@@ -87,10 +82,6 @@ if (strlen($oui_file)) {
 
 function display_version() {
 	global $config;
-
-	if (!function_exists('plugin_mactrack_version')) {
-		include_once($config['base_path'] . '/plugins/mactrack/setup.php');
-	}
 
 	$info = plugin_mactrack_version();
 	print "Device Tracking Import OUI Database, Version " . $info["version"] . ", " . COPYRIGHT_YEARS . "\n";

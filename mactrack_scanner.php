@@ -22,25 +22,13 @@
  +-------------------------------------------------------------------------+
 */
 
-/* do NOT run this script through a web browser */
-if (!isset($_SERVER['argv'][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($_SERVER['REMOTE_ADDR'])) {
-	die('<br><strong>This script is only meant to run at the command line.</strong>');
-}
-
-$no_http_headers = true;
-
-$dir = dirname(__FILE__);
-chdir($dir);
-
-if (substr_count(strtolower($dir), 'mactrack')) {
-	chdir('../../');
-}
-
-include('./include/global.php');
+chdir('../../');
+include('./include/cli_check.php');
 include_once('./lib/snmp.php');
 include_once('./lib/ping.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 include_once('./plugins/mactrack/lib/mactrack_vendors.php');
+include_once('./plugins/mactrack/lib/mactrack_actions.php');
 
 /* Let the scanner run for no more that 25 minutes */
 ini_set('max_execution_time', 1500);
@@ -236,10 +224,6 @@ exit;
 
 function display_version() {
 	global $config;
-
-	if (!function_exists('plugin_mactrack_version')) {
-		include_once($config['base_path'] . '/plugins/mactrack/setup.php');
-	}
 
 	$info = plugin_mactrack_version();
 	print "Network Device Tracking, Version " . $info['version'] .", " . COPYRIGHT_YEARS . "\n";

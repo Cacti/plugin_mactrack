@@ -25,6 +25,7 @@
 chdir('../../');
 include('./include/auth.php');
 include_once('./lib/snmp.php');
+include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 $mactrack_snmp_actions = array(
 	1 => __('Delete', 'mactrack'),
@@ -276,8 +277,6 @@ function mactrack_snmp_item_edit() {
 	global $config;
 	global $fields_mactrack_snmp_item_edit;
 
-	include_once($config['base_path'].'/plugins/mactrack/lib/mactrack_functions.php');
-
 	/* ================= input validation ================= */
 	get_filter_request_var('id');
 	get_filter_request_var('item_id');
@@ -342,8 +341,6 @@ function mactrack_snmp_item_edit() {
 
 function mactrack_snmp_edit() {
 	global $config, $fields_mactrack_snmp_edit;
-
-	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 	/* ================= input validation ================= */
 	get_filter_request_var('id');

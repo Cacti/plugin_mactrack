@@ -23,23 +23,8 @@
  +-------------------------------------------------------------------------+
 */
 
-/* do NOT run this script through a web browser */
-if (!isset($_SERVER['argv'][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($_SERVER['REMOTE_ADDR'])) {
-	die('<br><strong>This script is only meant to run at the command line.</strong>');
-}
-
-/* We are not talking to the browser */
-$no_http_headers = true;
-
-$dir = dirname(__FILE__);
-chdir($dir);
-
-if (substr_count(strtolower($dir), 'mactrack')) {
-	chdir('../../');
-}
-
-/* Start Initialization Section */
-include('./include/global.php');
+chdir('../../');
+include('./include/cli_check.php');
 include_once('./lib/poller.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
@@ -331,10 +316,6 @@ function mactrack_error_handler($level, $message, $file, $line, $context) {
 
 function display_version() {
 	global $config;
-
-	if (!function_exists('plugin_macktrack_version')) {
-		include_once($config['base_path'] . '/plugins/mactrack/setup.php');
-	}
 
 	$info = plugin_mactrack_version();
 	print 'Device Tracking Master Poller, Version ' . $info['version'] . ', ' .  COPYRIGHT_YEARS . "\n";
