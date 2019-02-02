@@ -1257,9 +1257,9 @@ function mactrack_show_tab () {
 
 	if (api_user_realm_auth('mactrack_view_macs.php')) {
 		if (substr_count($_SERVER['REQUEST_URI'], 'mactrack_view_')) {
-			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_macs.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="' . __('Device Tracking', 'mactrack') . '"></a>';
+			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_sites.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
 		} else {
-			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_macs.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="' . __('Device Tracking', 'mactrack') . '"></a>';
+			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_sites.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
 		}
 	}
 }
