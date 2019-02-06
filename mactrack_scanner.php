@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -28,7 +28,7 @@ include_once('./lib/snmp.php');
 include_once('./lib/ping.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 include_once('./plugins/mactrack/lib/mactrack_vendors.php');
-include_once('./plugins/mactrack/lib/mactrack_actions.php');
+include_once('./plugins/mactrack/mactrack_actions.php');
 
 /* Let the scanner run for no more that 25 minutes */
 ini_set('max_execution_time', 1500);

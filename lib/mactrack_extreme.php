@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -145,6 +145,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 						$new_port_array["vlan_id"]   = $vlan_ids[$mac_vlan_list[$mac_key]];
 						$new_port_array["vlan_name"] = $vlan_names[$mac_vlan_list[$mac_key]];
 					}
+
 					//$new_port_array["port_number"]  = $ifIndex;
 					//$new_port_array["port_name"]    = $ifInterfaces[$ifIndex]["ifName"];
 					$new_port_array["port_number"]  = $ifInterfaces[$ifIndex]["ifName"];
@@ -152,16 +153,19 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 					$new_port_array["mac_address"]  = xform_mac_address($mac_addr_list[$mac_key]);
 					$ifInterfaces[$ifIndex]["Used"] = 1;
 					$port_array[] = $new_port_array;
+
 					mactrack_debug("VLAN: " . $new_port_array["vlan_id"] . ", " .
-							"NAME: " . $new_port_array["vlan_name"] . ", " .
-							"PORT: " . $ifIndex . ", " .
-							"NAME: " . $new_port_array["port_name"] . ", " .
-							"MAC: " . $new_port_array["mac_address"]);
+						"NAME: " . $new_port_array["vlan_name"] . ", " .
+						"PORT: " . $ifIndex . ", " .
+						"NAME: " . $new_port_array["port_name"] . ", " .
+						"MAC: " . $new_port_array["mac_address"]);
 				}
 			}
 		}
+
 		$device["ports_total"] = sizeof($ifInterfaces);
 		$device["ports_active"] = 0;
+
 		foreach ($ifInterfaces as $interface) {
 			if (isset($interface["Used"])) {
 				$device["ports_active"]++;
@@ -214,9 +218,9 @@ IF-MIB::ifName : get name of port from IfIndex
 
 		if (cacti_sizeof($atifIndexes)) {
 			mactrack_debug("atifIndexes data collection complete");
-			$atPhysAddress = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.2", $device);
+			$atPhysAddress = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.2", $device, true);
 			mactrack_debug("atPhysAddress data collection complete");
-			$atNetAddress  = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.3", $device);
+			$atNetAddress  = xform_stripped_oid(".1.3.6.1.2.1.3.1.1.3", $device, true);
 			mactrack_debug("atNetAddress data collection complete");
 			$ifDescr  = xform_stripped_oid(".1.3.6.1.2.1.2.2.1.2", $device);
 			mactrack_debug("ifDescr data collection complete");
@@ -237,7 +241,7 @@ IF-MIB::ifName : get name of port from IfIndex
 
 		if (cacti_sizeof($FdbPortIfIndex)) {
 			mactrack_debug("FdbPortIfIndex data collection complete");
-			$FdbMacAddress = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.2.1.3", $device);
+			$FdbMacAddress = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.2.1.3", $device, true);
 			mactrack_debug("FdbMacAddress data collection complete");
 			$FdbIPAddress  = xform_stripped_oid(".1.3.6.1.4.1.1916.1.16.2.1.2", $device);
 			mactrack_debug("FdbIPAddress data collection complete");

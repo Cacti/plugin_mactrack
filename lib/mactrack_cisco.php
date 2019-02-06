@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -212,54 +212,57 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 		$port_array = array();
 
 		if (cacti_sizeof($active_vlans)) {
-		foreach ($active_vlans as $active_vlan) {
-			if (cacti_sizeof($active_vlan['port_results'])) {
-			foreach ($active_vlan['port_results'] as $port_result) {
-				$ifIndex         = @$brPorttoifIndexes[$j][$port_result['port_number']];
-				$ifType          = (isset($ifInterfaces[$ifIndex]['ifType']) ? $ifInterfaces[$ifIndex]['ifType'] : '');
-				$ifName          = (isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '');
-				$portName        = (isset($portNames[$ifName]) ? $portNames[$ifName] : '');
-				$portTrunk       = (isset($portTrunking[$ifName]) ? $portTrunking[$ifName] : '');
-				$portTrunkStatus = (isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '');
+			foreach ($active_vlans as $active_vlan) {
+				if (cacti_sizeof($active_vlan['port_results'])) {
+					foreach ($active_vlan['port_results'] as $port_result) {
+						$ifIndex         = @$brPorttoifIndexes[$j][$port_result['port_number']];
+						$ifType          = (isset($ifInterfaces[$ifIndex]['ifType']) ? $ifInterfaces[$ifIndex]['ifType'] : '');
+						$ifName          = (isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '');
+						$portName        = (isset($portNames[$ifName]) ? $portNames[$ifName] : '');
+						$portTrunk       = (isset($portTrunking[$ifName]) ? $portTrunking[$ifName] : '');
+						$portTrunkStatus = (isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '');
 
-				if ($vvlans) {
-					$vVlanID = (isset($portVoiceVLANs[$ifIndex]) ? $portVoiceVLANs[$ifIndex] : '');
-				} else {
-					$vVlanID = -1;
-				}
+						if ($vvlans) {
+							$vVlanID = (isset($portVoiceVLANs[$ifIndex]) ? $portVoiceVLANs[$ifIndex] : '');
+						} else {
+							$vVlanID = -1;
+						}
 
-				/* only output legitamate end user ports */
-				if (($ifType == 6) && ($portTrunk == 2)) {
-					if (($portTrunkStatus == '2')||($portTrunkStatus == '4')||($portTrunkStatus =='')) {
-						$port_array[$i]['vlan_id']     = $active_vlan['vlan_id'];
-						$port_array[$i]['vlan_name']   = $active_vlan['vlan_name'];
-						$port_array[$i]['port_number'] = $ifInterfaces[$ifIndex]['ifName'];
-						$port_array[$i]['port_name']   = $portName;
-						$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
-						$device['ports_active']++;
-						$i++;
+						/* only output legitamate end user ports */
+						if (($ifType == 6) && ($portTrunk == 2)) {
+							if (($portTrunkStatus == '2')||($portTrunkStatus == '4')||($portTrunkStatus =='')) {
+								$port_array[$i]['vlan_id']     = $active_vlan['vlan_id'];
+								$port_array[$i]['vlan_name']   = $active_vlan['vlan_name'];
+								$port_array[$i]['port_number'] = $ifInterfaces[$ifIndex]['ifName'];
+								$port_array[$i]['port_name']   = $portName;
+								$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
+								$device['ports_active']++;
+								$i++;
 
-						mactrack_debug('VLAN: ' . $active_vlan['vlan_id'] . ', ' .
-							'NAME: ' . $active_vlan['vlan_name'] . ', ' .
-							'PORT: ' . $ifInterfaces[$ifIndex]['ifName'] . ', ' .
-							'NAME: ' . $portName . ', ' .
-							'MAC: ' . $port_result['mac_address']);
+								mactrack_debug('VLAN: ' . $active_vlan['vlan_id'] . ', ' .
+									'NAME: ' . $active_vlan['vlan_name'] . ', ' .
+									'PORT: ' . $ifInterfaces[$ifIndex]['ifName'] . ', ' .
+									'NAME: ' . $portName . ', ' .
+									'MAC: ' . $port_result['mac_address']);
+							}
+						}
 					}
 				}
-			}
-			}
 
-			$j++;
-		}
+				$j++;
+			}
 		}
 
 		/* display completion message */
 		print("\nINFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active'] . "\n");
+
 		$device['last_runmessage'] = 'Data collection completed ok';
 		$device['macs_active'] = sizeof($port_array);
+
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
 		print("\nINFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ", No active devcies on this network device.\n");
+
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
 	}
@@ -423,57 +426,61 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 
 		mactrack_debug('Final cross check\'s now being performed.');
 		if (cacti_sizeof($active_vlans)) {
-		foreach ($active_vlans as $active_vlan) {
-			if (cacti_sizeof($active_vlan['port_results'])) {
-			foreach ($active_vlan['port_results'] as $port_result) {
-				$ifIndex    = (isset($brPorttoifIndexes[$j][$port_result['port_number']]) ? $brPorttoifIndexes[$j][$port_result['port_number']] : '');
-				$ifType     = (isset($ifInterfaces[$ifIndex]['ifType']) ? $ifInterfaces[$ifIndex]['ifType'] : '');
-				$ifName     = (isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '');
-				$portNumber = (isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '');
-				$portName   = (isset($ifInterfaces[$ifIndex]['ifAlias']) ? $ifInterfaces[$ifIndex]['ifAlias'] : '');
-				$portTrunk  = (isset($portTrunking[$ifName]) ? $portTrunking[$ifName] : '');
-				if ($vvlans) {
-					$vVlanID = (isset($portVoiceVLANs[$ifIndex]) ? $portVoiceVLANs[$ifIndex] : '');
-				} else {
-					$vVlanID = -1;
-				}
+			foreach ($active_vlans as $active_vlan) {
+				if (cacti_sizeof($active_vlan['port_results'])) {
+					foreach ($active_vlan['port_results'] as $port_result) {
+						$ifIndex    = (isset($brPorttoifIndexes[$j][$port_result['port_number']]) ? $brPorttoifIndexes[$j][$port_result['port_number']] : '');
+						$ifType     = (isset($ifInterfaces[$ifIndex]['ifType']) ? $ifInterfaces[$ifIndex]['ifType'] : '');
+						$ifName     = (isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '');
+						$portNumber = (isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '');
+						$portName   = (isset($ifInterfaces[$ifIndex]['ifAlias']) ? $ifInterfaces[$ifIndex]['ifAlias'] : '');
+						$portTrunk  = (isset($portTrunking[$ifName]) ? $portTrunking[$ifName] : '');
 
-				$portTrunkStatus = (isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '');
+						if ($vvlans) {
+							$vVlanID = (isset($portVoiceVLANs[$ifIndex]) ? $portVoiceVLANs[$ifIndex] : '');
+						} else {
+							$vVlanID = -1;
+						}
 
-				/* only output legitamate end user ports */
-				if ($ifType == 6) {
-					if (($portTrunkStatus == '2') ||
-						(empty($portTrunkStatus)) ||
-						(($vVlanID > 0) && ($vVlanID <= 1000))) {
-						$port_array[$i]['vlan_id']     = $active_vlan['vlan_id'];
-						$port_array[$i]['vlan_name']   = $active_vlan['vlan_name'];
-						$port_array[$i]['port_number'] = $portNumber;
-						$port_array[$i]['port_name']   = $portName;
-						$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
-						$device['ports_active']++;
-						$i++;
+						$portTrunkStatus = (isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '');
 
-						mactrack_debug('VLAN: ' . $active_vlan['vlan_id'] . ', ' .
-							'NAME: ' . $active_vlan['vlan_name'] . ', ' .
-							'PORT: ' . $portNumber . ', ' .
-							'NAME: ' . $portName . ', ' .
-							'MAC: ' . $port_result['mac_address']);
+						/* only output legitamate end user ports */
+						if ($ifType == 6) {
+							if (($portTrunkStatus == '2') ||
+								(empty($portTrunkStatus)) ||
+								(($vVlanID > 0) && ($vVlanID <= 1000))) {
+								$port_array[$i]['vlan_id']     = $active_vlan['vlan_id'];
+								$port_array[$i]['vlan_name']   = $active_vlan['vlan_name'];
+								$port_array[$i]['port_number'] = $portNumber;
+								$port_array[$i]['port_name']   = $portName;
+								$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
+								$device['ports_active']++;
+								$i++;
+
+								mactrack_debug('VLAN: ' . $active_vlan['vlan_id'] . ', ' .
+									'NAME: ' . $active_vlan['vlan_name'] . ', ' .
+									'PORT: ' . $portNumber . ', ' .
+									'NAME: ' . $portName . ', ' .
+									'MAC: ' . $port_result['mac_address']);
+							}
+						}
 					}
 				}
-			}
-			}
 
-			$j++;
-		}
+				$j++;
+			}
 		}
 
 		/* display completion message */
 		print("\nINFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active'] . "\n");
+
 		$device['last_runmessage'] = 'Data collection completed ok';
 		$device['macs_active'] = sizeof($port_array);
+
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
 		print("\nINFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ", No active end devices on this device.\n");
+
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok.  No active end devices on this device.';
 	}
@@ -503,54 +510,54 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 	$active_vlans = array();
 
 	if (cacti_sizeof($vlan_ids)) {
-	foreach ($vlan_ids as $vlan_number => $vlanStatus) {
-		$vlanName = $vlan_names[$vlan_number];
+		foreach ($vlan_ids as $vlan_number => $vlanStatus) {
+			$vlanName = $vlan_names[$vlan_number];
 
-		if ($vlanStatus == 1) { /* vlan is operatinal */
-			switch ($vlan_number) {
-			case '1002':
-			case '1003':
-			case '1004':
-			case '1005':
-				$active_vlan_ports = 0;
-				break;
-			default:
-				if ($device['snmp_version'] < '3') {
-					$snmp_readstring = $device['snmp_readstring'] . '@' . $vlan_number;
-					$active_vlan_ports = cacti_snmp_get($device['hostname'], $snmp_readstring,
-						'.1.3.6.1.2.1.17.1.2.0', $device['snmp_version'],
-						$device['snmp_username'], $device['snmp_password'],
-						$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
-						$device['snmp_priv_protocol'], $device['snmp_context'],
-						$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
-				} else {
-					$active_vlan_ports = cacti_snmp_get($device['hostname'], 'vlan-' . $vlan_number,
-						'.1.3.6.1.2.1.17.1.2.0', $device['snmp_version'],
-						$device['snmp_username'], $device['snmp_password'],
-						$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
-						$device['snmp_priv_protocol'], 'vlan-' . $vlan_number,
-						$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
-				}
-
-				if ((!is_numeric($active_vlan_ports)) || ($active_vlan_ports) < 0) {
+			if ($vlanStatus == 1) { /* vlan is operatinal */
+				switch ($vlan_number) {
+				case '1002':
+				case '1003':
+				case '1004':
+				case '1005':
 					$active_vlan_ports = 0;
-				}
+					break;
+				default:
+					if ($device['snmp_version'] < '3') {
+						$snmp_readstring = $device['snmp_readstring'] . '@' . $vlan_number;
+						$active_vlan_ports = cacti_snmp_get($device['hostname'], $snmp_readstring,
+							'.1.3.6.1.2.1.17.1.2.0', $device['snmp_version'],
+							$device['snmp_username'], $device['snmp_password'],
+							$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
+							$device['snmp_priv_protocol'], $device['snmp_context'],
+							$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
+					} else {
+						$active_vlan_ports = cacti_snmp_get($device['hostname'], 'vlan-' . $vlan_number,
+							'.1.3.6.1.2.1.17.1.2.0', $device['snmp_version'],
+							$device['snmp_username'], $device['snmp_password'],
+							$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
+							$device['snmp_priv_protocol'], 'vlan-' . $vlan_number,
+							$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
+					}
 
-				mactrack_debug('VLAN Analysis for VLAN: ' . $vlan_number . '/' . $vlanName . ' is complete. ACTIVE PORTS: ' . $active_vlan_ports);
+					if ((!is_numeric($active_vlan_ports)) || ($active_vlan_ports) < 0) {
+						$active_vlan_ports = 0;
+					}
 
-				if ($active_vlan_ports > 0) { /* does the vlan have active ports on it */
-					$active_vlans[$j]['vlan_id'] = $vlan_number;
-					$active_vlans[$j]['vlan_name'] = $vlanName;
-					$active_vlans[$j]['active_ports'] = $active_vlan_ports;
-					$active_vlans++;
+					mactrack_debug('VLAN Analysis for VLAN: ' . $vlan_number . '/' . $vlanName . ' is complete. ACTIVE PORTS: ' . $active_vlan_ports);
 
-					$j++;
+					if ($active_vlan_ports > 0) { /* does the vlan have active ports on it */
+						$active_vlans[$j]['vlan_id'] = $vlan_number;
+						$active_vlans[$j]['vlan_name'] = $vlanName;
+						$active_vlans[$j]['active_ports'] = $active_vlan_ports;
+						$active_vlans++;
+
+						$j++;
+					}
 				}
 			}
-		}
 
-		$i++;
-	}
+			$i++;
+		}
 	}
 
 	if (cacti_sizeof($active_vlans)) {
@@ -568,12 +575,14 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 			mactrack_debug('Processing has begun for VLAN: ' . $active_vlan['vlan_id']);
 
 			if (cacti_sizeof($active_vlans)) {
-			$dot1dTpFdbEntries[$n] = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.1', $device, $snmp_readstring);
-			foreach ($dot1dTpFdbEntries[$n] as $key => $val) {
-				$dot1dTpFdbEntries[$n][$active_vlan['vlan_id']. '.' . $key] = $val; //ugly tweak to add vlan id to OID.
-				unset($dot1dTpFdbEntries[$n][$key]);
-			}
-			mactrack_debug('dot1dTpFdbEntry data collection complete :' . sizeof($dot1dTpFdbEntries[$n]));
+				$dot1dTpFdbEntries[$n] = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.1', $device, $snmp_readstring);
+				foreach ($dot1dTpFdbEntries[$n] as $key => $val) {
+					$dot1dTpFdbEntries[$n][$active_vlan['vlan_id']. '.' . $key] = $val; //ugly tweak to add vlan id to OID.
+					unset($dot1dTpFdbEntries[$n][$key]);
+				}
+
+				mactrack_debug('dot1dTpFdbEntry data collection complete :' . sizeof($dot1dTpFdbEntries[$n]));
+
 				if ($n > 0 ) {
 					$dot1dTpFdbEntry = array_merge($dot1dTpFdbEntry, $dot1dTpFdbEntries[$n]);
 					mactrack_debug('merge data collection complete : ' . sizeof($dot1dTpFdbEntry));
@@ -582,49 +591,52 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 			$n++;
 
 			mactrack_debug('dot1dTpFdbEntry vlan_id: ' . $active_vlan['vlan_id']);
-			}
+		}
 
-			$keys = array_keys($cdsBindingInterface);
+		$keys = array_keys($cdsBindingInterface);
 
-			$j = 0;
-			if (cacti_sizeof($cdsBindingInterface)) {
+		$j = 0;
+		if (cacti_sizeof($cdsBindingInterface)) {
 			foreach ($cdsBindingInterface as $cdsBindingIndex) {
 				$cdsBindingEntries[$j]['cdsBindingIndex'] = $cdsBindingIndex;
 				$cdsBindingEntries[$j]['dot1dTpFdbEntry'] = isset($dot1dTpFdbEntry[$keys[$j]]) ? xform_mac_address($dot1dTpFdbEntry[$keys[$j]]):'';
 				$cdsBindingEntries[$j]['cdsBindingsIpAddress'] = isset($cdsBindingsIpAddress[$keys[$j]]) ? xform_net_address($cdsBindingsIpAddress[$keys[$j]]):'';
 				$j++;
 			}
+
 			mactrack_debug('cdsBindingEntries Total entries: ' . sizeof($cdsBindingEntries));
-			}
-			mactrack_debug('cdsBindingEntries assembly complete.');
-		} else {
+		}
+
+		mactrack_debug('cdsBindingEntries assembly complete.');
+	} else {
 		print("\nINFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ", No active end devices on this device.\n");
+
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok.  No active end devices on this device.';
 	}
 
 	/* output details to database */
 	if (cacti_sizeof($cdsBindingEntries)) {
-	foreach ($cdsBindingEntries as $cdsBindingEntry) {
-		if ($cdsBindingEntry['cdsBindingsIpAddress'] != '') { //It's acceptable to have IPs without a MAC (meaning that MAC is not present but DHCP entry is still present) here but not the other way around.
-		$insert_string = 'REPLACE INTO mac_track_ips
-			(site_id,device_id,hostname,device_name,port_number,
-			mac_address,ip_address,scan_date)
-			VALUES (' .
-			$device['site_id'] . ',' .
-			$device['device_id'] . ',' .
-			db_qstr($device['hostname']) . ',' .
-			db_qstr($device['device_name']) . ',' .
-			db_qstr($cdsBindingEntry['cdsBindingIndex']) . ',' .
-			db_qstr($cdsBindingEntry['dot1dTpFdbEntry']) . ',' .
-			db_qstr($cdsBindingEntry['cdsBindingsIpAddress']) . ',' .
-			db_qstr($scan_date) . ')';
+		foreach ($cdsBindingEntries as $cdsBindingEntry) {
+			if ($cdsBindingEntry['cdsBindingsIpAddress'] != '') { //It's acceptable to have IPs without a MAC (meaning that MAC is not present but DHCP entry is still present) here but not the other way around.
+				$insert_string = 'REPLACE INTO mac_track_ips
+					(site_id,device_id,hostname,device_name,port_number,
+					mac_address,ip_address,scan_date)
+					VALUES (' .
+					$device['site_id'] . ',' .
+					$device['device_id'] . ',' .
+					db_qstr($device['hostname']) . ',' .
+					db_qstr($device['device_name']) . ',' .
+					db_qstr($cdsBindingEntry['cdsBindingIndex']) . ',' .
+					db_qstr($cdsBindingEntry['dot1dTpFdbEntry']) . ',' .
+					db_qstr($cdsBindingEntry['cdsBindingsIpAddress']) . ',' .
+					db_qstr($scan_date) . ')';
 
-		//mactrack_debug('SQL: ' . $insert_string);
+				//mactrack_debug('SQL: ' . $insert_string);
 
-		db_execute($insert_string);
+				db_execute($insert_string);
+			}
 		}
-	}
 	}
 
 	/* save ip information for the device */
@@ -655,7 +667,6 @@ function get_cisco_dot1x_table($site, &$device) {
 		mactrack_debug('cafSessionStatus data collection complete: ' . sizeof($cafSessionStatus));
 	} else {
 		/* Nothing to do here */
-
 	}
 
 	$ifIndex = array();
@@ -669,8 +680,7 @@ function get_cisco_dot1x_table($site, &$device) {
 		foreach ($cafSessionAuthUserKey as $cafSessionAuthUserNames) {
 			$ifIndex[$m] = explode('.', $cafSessionAuthUserKey[$m]);
 			$m++;
-			}
-
+		}
 	}
 
 	$ifIndexes = array_map(function ($ar) {return $ar['0'];}, $ifIndex); //re-arrange the previous exploded array
@@ -679,43 +689,43 @@ function get_cisco_dot1x_table($site, &$device) {
 	$keys = array_keys($cafSessionAuthUserName);
 	$i = 0;
 	if (cacti_sizeof($cafSessionAuthUserName)) {
-	foreach ($cafSessionAuthUserName as $Dot1xIndex) {
-		$Dot1xEntries[$i]['Dot1xIndex'] = $Dot1xIndex;
-		$Dot1xEntries[$i]['cafSessionClientMacAddress'] = isset($cafSessionClientMacAddress[$keys[$i]]) ? xform_mac_address($cafSessionClientMacAddress[$keys[$i]]):'';
-		$Dot1xEntries[$i]['cafSessionClientAddress'] = isset($cafSessionClientAddress[$keys[$i]]) ? xform_net_address($cafSessionClientAddress[$keys[$i]]):'';
-		$Dot1xEntries[$i]['cafSessionDomain'] = isset($cafSessionDomain[$keys[$i]]) ? $cafSessionDomain[$keys[$i]]:'';
-		$Dot1xEntries[$i]['cafSessionStatus'] = isset($cafSessionStatus[$keys[$i]]) ? $cafSessionStatus[$keys[$i]]:'';
-		$Dot1xEntries[$i]['port_number'] = isset($ifIndexes[$i]) ? $ifIndexes[$i]:'';
-		$i++;
-	}
+		foreach ($cafSessionAuthUserName as $Dot1xIndex) {
+			$Dot1xEntries[$i]['Dot1xIndex'] = $Dot1xIndex;
+			$Dot1xEntries[$i]['cafSessionClientMacAddress'] = isset($cafSessionClientMacAddress[$keys[$i]]) ? xform_mac_address($cafSessionClientMacAddress[$keys[$i]]):'';
+			$Dot1xEntries[$i]['cafSessionClientAddress'] = isset($cafSessionClientAddress[$keys[$i]]) ? xform_net_address($cafSessionClientAddress[$keys[$i]]):'';
+			$Dot1xEntries[$i]['cafSessionDomain'] = isset($cafSessionDomain[$keys[$i]]) ? $cafSessionDomain[$keys[$i]]:'';
+			$Dot1xEntries[$i]['cafSessionStatus'] = isset($cafSessionStatus[$keys[$i]]) ? $cafSessionStatus[$keys[$i]]:'';
+			$Dot1xEntries[$i]['port_number'] = isset($ifIndexes[$i]) ? $ifIndexes[$i]:'';
+			$i++;
+		}
 	}
 	mactrack_debug('Dot1xEntries assembly complete.');
 
 	/* output details to database */
 	if (cacti_sizeof($Dot1xEntries)) {
-	foreach ($Dot1xEntries as $Dot1xEntry) {
-		if ($Dot1xEntry['Dot1xIndex'] != '') { //This is workaround for what I think is a Cisco bug. If a port is not running dot1x why would it show related info?
-		$insert_string = 'REPLACE INTO mac_track_dot1x
-			(site_id,device_id,hostname,device_name,username,
-			mac_address,ip_address,domain,status,port_number,scan_date)
-			VALUES (' .
-			$device['site_id'] . ',' .
-			$device['device_id'] . ',' .
-			db_qstr($device['hostname']) . ',' .
-			db_qstr($device['device_name']) . ',' .
-			db_qstr($Dot1xEntry['Dot1xIndex']) . ',' .
-			db_qstr($Dot1xEntry['cafSessionClientMacAddress']) . ',' .
-			db_qstr($Dot1xEntry['cafSessionClientAddress']) . ',' .
-			db_qstr($Dot1xEntry['cafSessionDomain']) . ',' .
-			db_qstr($Dot1xEntry['cafSessionStatus']) . ',' .
-			db_qstr($Dot1xEntry['port_number']) . ',' .
-			db_qstr($scan_date) . ')';
+		foreach ($Dot1xEntries as $Dot1xEntry) {
+			if ($Dot1xEntry['Dot1xIndex'] != '') { //This is workaround for what I think is a Cisco bug. If a port is not running dot1x why would it show related info?
+				$insert_string = 'REPLACE INTO mac_track_dot1x
+					(site_id,device_id,hostname,device_name,username,
+					mac_address,ip_address,domain,status,port_number,scan_date)
+					VALUES (' .
+					$device['site_id'] . ',' .
+					$device['device_id'] . ',' .
+					db_qstr($device['hostname']) . ',' .
+					db_qstr($device['device_name']) . ',' .
+					db_qstr($Dot1xEntry['Dot1xIndex']) . ',' .
+					db_qstr($Dot1xEntry['cafSessionClientMacAddress']) . ',' .
+					db_qstr($Dot1xEntry['cafSessionClientAddress']) . ',' .
+					db_qstr($Dot1xEntry['cafSessionDomain']) . ',' .
+					db_qstr($Dot1xEntry['cafSessionStatus']) . ',' .
+					db_qstr($Dot1xEntry['port_number']) . ',' .
+					db_qstr($scan_date) . ')';
 
-		//mactrack_debug('SQL: ' . $insert_string);
+				//mactrack_debug('SQL: ' . $insert_string);
 
-		db_execute($insert_string);
+				db_execute($insert_string);
+			}
 		}
 	}
-	}
-
 }
+

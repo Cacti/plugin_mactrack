@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -19,8 +19,6 @@
  | about.php and/or the AUTHORS file for specific developer information.   |
  +-------------------------------------------------------------------------+
  | http://www.cacti.net/                                                   |
- +-------------------------------------------------------------------------+
- | Updates to the oui database can be obtained from the following web site |
  | http://standards-oui.ieee.org/oui/oui.txt                               |
  +-------------------------------------------------------------------------+
 */
