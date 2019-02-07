@@ -161,6 +161,10 @@ function sync_mactrack_to_cacti($mt_device) {
 }
 
 function sync_cacti_to_mactrack($device) {
+	global $config;
+
+	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+
 	/* do we want to 'Sync Cacti Device to Device Tracking Device'
 	 * AND has the device already been assigned a 'valid' Device Tracking device id
 	 * (aka: has the device been saved successfully) */
