@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -22,9 +22,15 @@
  +-------------------------------------------------------------------------+
 */
 
-chdir('../../');
+$dir = dirname(__FILE__);
+chdir($dir);
+
+if (substr_count(strtolower($dir), 'mactrack')) {
+	chdir('../../');
+}
+
 include('./include/cli_check.php');
-include_once('./plugins/mactrack/lib/mactrack_functions.php');
+include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 /* get the mactrack polling cycle */
 $max_run_duration = read_config_option('mt_collection_timing');

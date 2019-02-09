@@ -23,9 +23,15 @@
  +-------------------------------------------------------------------------+
 */
 
-chdir('../../');
+$dir = dirname(__FILE__);
+chdir($dir);
+
+if (substr_count(strtolower($dir), 'mactrack')) {
+	chdir('../../');
+}
+
 include('./include/cli_check.php');
-include_once('./lib/mactrack_functions.php');
+include_once($config['base_path'] . '/lib/mactrack_functions.php');
 
 /* process calling arguments */
 $parms = $_SERVER['argv'];

@@ -2,7 +2,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -23,10 +23,16 @@
  +-------------------------------------------------------------------------+
 */
 
-chdir('../../');
+$dir = dirname(__FILE__);
+chdir($dir);
+
+if (substr_count(strtolower($dir), 'mactrack')) {
+	chdir('../../');
+}
+
 include('./include/cli_check.php');
-include_once('./lib/poller.php');
-include_once('./plugins/mactrack/lib/mactrack_functions.php');
+include_once($config['base_path'] . '/lib/poller.php');
+include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 /* get the mactrack polling cycle */
 $max_run_duration = read_config_option('mt_collection_timing');
@@ -40,6 +46,9 @@ if (is_numeric($max_run_duration)) {
 
 /* Disable Mib File Loading */
 putenv('MIBS=RFC-1215');
+
+/* Allow Mactrack to Use Memory */
+ini_set('memory_limit', '-1');
 
 global $debug, $web, $track_errors;
 

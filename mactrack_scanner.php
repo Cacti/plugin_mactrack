@@ -22,26 +22,28 @@
  +-------------------------------------------------------------------------+
 */
 
-chdir('../../');
-include('./include/cli_check.php');
-include_once('./lib/snmp.php');
-include_once('./lib/ping.php');
-include_once('./plugins/mactrack/lib/mactrack_functions.php');
-include_once('./plugins/mactrack/lib/mactrack_vendors.php');
-include_once('./plugins/mactrack/mactrack_actions.php');
+$dir = dirname(__FILE__);
+chdir($dir);
 
-/* Let the scanner run for no more that 25 minutes */
-ini_set('max_execution_time', 1500);
+if (substr_count(strtolower($dir), 'mactrack')) {
+	chdir('../../');
+}
+
+include('./include/cli_check.php');
+include_once($config['base_path'] . '/lib/snmp.php');
+include_once($config['base_path'] . '/lib/ping.php');
+include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_vendors.php');
+include_once($config['base_path'] . '/plugins/mactrack/mactrack_actions.php');
 
 /* obtain some date/times for later use */
-$scan_date = read_config_option('mt_scan_date');
-list($micro,$seconds) = explode(' ', microtime());
-$start_time = $seconds + $micro;
+$scan_date  = read_config_option('mt_scan_date');
+$start_time = microtime(true);
 
 /* drop a few environment variables to minimize net-snmp load times */
 putenv('MIBS=RFC-1215');
 ini_set('max_execution_time', '0');
-ini_set('memory_limit', '256M');
+ini_set('memory_limit', '-1');
 
 /* establish constants */
 define('DEVICE_HUB_SWITCH', 1);
