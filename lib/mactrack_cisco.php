@@ -131,20 +131,22 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 				break;
 			default:
 				if ($device['snmp_version'] < '3') {
-					$snmp_readstring = cacti_escapeshellarg($device['snmp_readstring']) . '@' . $vlan_number;
+					$snmp_readstring = $device['snmp_readstring'] . '@' . $vlan_number;
 					$active_vlan_ports = cacti_snmp_get($device['hostname'], $snmp_readstring,
 						'.1.3.6.1.2.1.17.1.2.0', $device['snmp_version'],
 						$device['snmp_username'], $device['snmp_password'],
 						$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
 						$device['snmp_priv_protocol'], $device['snmp_context'],
-						$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
+						$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'],
+						SNMP_POLLER, $device['snmp_engine_id']);
 				} else {
 					$active_vlan_ports = cacti_snmp_get($device['hostname'], '',
 						'.1.3.6.1.2.1.17.1.2.0', $device['snmp_version'],
 						$device['snmp_username'], $device['snmp_password'],
 						$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
 						$device['snmp_priv_protocol'], 'vlan-' . $vlan_number,
-						$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
+						$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'],
+						SNMP_POLLER, $device['snmp_engine_id']);
 				}
 
 				if ((!is_numeric($active_vlan_ports)) || ($active_vlan_ports) < 0) {
@@ -180,7 +182,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 			}
 
 			if ($device['snmp_version'] < '3') {
-				$snmp_readstring = cacti_escapeshellarg($device['snmp_readstring']) . '@' . $active_vlan['vlan_id'];
+				$snmp_readstring = $device['snmp_readstring'] . '@' . $active_vlan['vlan_id'];
 			} else {
 				$snmp_readstring = 'cisco@' . $active_vlan['vlan_id'];
 			}
@@ -355,20 +357,22 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 					break;
 				default:
 					if ($device['snmp_version'] < '3') {
-						$snmp_readstring = cacti_escapeshellarg($device['snmp_readstring']) . '@' . $vlan_number;
+						$snmp_readstring = $device['snmp_readstring'] . '@' . $vlan_number;
 						$active_vlan_ports = cacti_snmp_get($device['hostname'], $snmp_readstring,
 							'.1.3.6.1.2.1.17.1.2.0', $device['snmp_version'],
 							$device['snmp_username'], $device['snmp_password'],
 							$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
 							$device['snmp_priv_protocol'], $device['snmp_context'],
-							$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
+							$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'],
+							SNMP_POLLER, $device['snmp_engine_id']);
 					} else {
 						$active_vlan_ports = cacti_snmp_get($device['hostname'], 'vlan-' . $vlan_number,
 							'.1.3.6.1.2.1.17.1.2.0', $device['snmp_version'],
 							$device['snmp_username'], $device['snmp_password'],
 							$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
 							$device['snmp_priv_protocol'], 'vlan-' . $vlan_number,
-							$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
+							$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'],
+							SNMP_POLLER, $device['snmp_engine_id']);
 					}
 
 					if ((!is_numeric($active_vlan_ports)) || ($active_vlan_ports) < 0) {
@@ -397,7 +401,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		/* get the port status information */
 		foreach ($active_vlans as $active_vlan) {
 			if ($device['snmp_version'] < '3') {
-				$snmp_readstring = cacti_escapeshellarg($device['snmp_readstring']) . '@' . $active_vlan['vlan_id'];
+				$snmp_readstring = $device['snmp_readstring'] . '@' . $active_vlan['vlan_id'];
 			} else {
 				$snmp_readstring = 'vlan-' . $active_vlan['vlan_id'];
 			}
@@ -524,21 +528,22 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 					break;
 				default:
 					if ($device['snmp_version'] < '3') {
-						$snmp_readstring = cacti_escapeshellarg($device['snmp_readstring']) . '@' . $vlan_number;
+						$snmp_readstring = $device['snmp_readstring'] . '@' . $vlan_number;
 						$active_vlan_ports = cacti_snmp_get($device['hostname'], $snmp_readstring,
 							'.1.3.6.1.2.1.17.1.2.0', $device['snmp_version'],
 							$device['snmp_username'], $device['snmp_password'],
 							$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
 							$device['snmp_priv_protocol'], $device['snmp_context'],
 							$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'],
-							SNMP_POLLER, $device['snmp_engineid']);
+							SNMP_POLLER, $device['snmp_engine_id']);
 					} else {
 						$active_vlan_ports = cacti_snmp_get($device['hostname'], 'vlan-' . $vlan_number,
 							'.1.3.6.1.2.1.17.1.2.0', $device['snmp_version'],
 							$device['snmp_username'], $device['snmp_password'],
 							$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
 							$device['snmp_priv_protocol'], 'vlan-' . $vlan_number,
-							$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
+							$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'],
+							SNMP_POLLER, $device['snmp_engine_id']);
 					}
 
 					if ((!is_numeric($active_vlan_ports)) || ($active_vlan_ports) < 0) {
@@ -569,7 +574,7 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 		/* get the port status information */
 		foreach ($active_vlans as $active_vlan) {
 			if ($device['snmp_version'] < '3') {
-				$snmp_readstring = cacti_escapeshellarg($device['snmp_readstring']) . '@' . $active_vlan['vlan_id'];
+				$snmp_readstring = $device['snmp_readstring'] . '@' . $active_vlan['vlan_id'];
 			} else {
 				$snmp_readstring = 'vlan-' . $active_vlan['vlan_id'];
 			}
