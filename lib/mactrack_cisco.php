@@ -60,18 +60,18 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 	mactrack_debug('ifIndexes data collection complete');
 
 	/* get and store the interfaces table */
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, FALSE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
 
 	/* get the Voice VLAN information if it exists */
 	$portVoiceVLANs = xform_standard_indexed_data('.1.3.6.1.4.1.9.9.87.1.4.1.1.37.0', $device);
 	if (cacti_sizeof($portVoiceVLANs)) {
-		$vvlans = TRUE;
+		$vvlans = true;
 	} else {
 		$portVoiceVLANs = xform_standard_indexed_data('.1.3.6.1.4.1.9.9.68.1.5.1.1.1', $device);
 		if (cacti_sizeof($portVoiceVLANs)) {
-			$vvlans = TRUE;
+			$vvlans = true;
 		} else {
-			$vvlans = FALSE;
+			$vvlans = false;
 		}
 	}
 	mactrack_debug('Cisco Voice VLAN collection complete');
@@ -190,9 +190,9 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 			mactrack_debug('Processing has begun for VLAN: ' . $active_vlan['vlan_id']);
 
 			if ($highPort == 0) {
-				$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, FALSE);
+				$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, false);
 			} else {
-				$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, FALSE, $lowPort, $highPort);
+				$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, false, $lowPort, $highPort);
 			}
 
 			/* get bridge port mappings */
@@ -298,18 +298,18 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 	$ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);
 	mactrack_debug('ifIndexes data collection complete');
 
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, TRUE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, true);
 
 	/* get the Voice VLAN information if it exists */
 	$portVoiceVLANs = xform_standard_indexed_data('.1.3.6.1.4.1.9.9.87.1.4.1.1.37.0', $device);
 	if (cacti_sizeof($portVoiceVLANs) > 0) {
-		$vvlans = TRUE;
+		$vvlans = true;
 	} else {
 		$portVoiceVLANs = xform_standard_indexed_data('.1.3.6.1.4.1.9.9.68.1.5.1.1.1', $device);
 		if (cacti_sizeof($portVoiceVLANs) > 0) {
-			$vvlans = TRUE;
+			$vvlans = true;
 		} else {
-			$vvlans = FALSE;
+			$vvlans = false;
 		}
 	}
 
@@ -408,9 +408,9 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 
 			mactrack_debug('Processing has begun for VLAN: ' . $active_vlan['vlan_id']);
 			if ($highPort == 0) {
-				$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, FALSE);
+				$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, false);
 			} else {
-				$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, FALSE, $lowPort, $highPort);
+				$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, false, $lowPort, $highPort);
 			}
 
 			/* get bridge port mappings */

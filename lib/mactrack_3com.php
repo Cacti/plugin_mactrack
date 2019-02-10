@@ -89,11 +89,11 @@ function get_3Com_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort
 	$ifIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device);
 	mactrack_debug("ifIndexes data collection complete");
 
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, FALSE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
 
 	complete_3com_ifName($device, $ifInterfaces);
 
-	get_3Com_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", TRUE, $lowPort, $highPort);
+	get_3Com_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", true, $lowPort, $highPort);
 
 	return $device;
 }
@@ -102,7 +102,7 @@ function get_3Com_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort
 /* same as get_base_dot1dTpFdbEntry_ports -
    but add iftype 117 gbit ethernet.
 */
-function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = TRUE, $lowPort = 1, $highPort = 9999) {
+function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 	mactrack_debug("Start get_3Com_base_dot1dTpFdbEntry_ports");
 	/* initialize variables */

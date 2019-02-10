@@ -37,11 +37,11 @@ include_once($config['base_path'] . '/lib/mactrack_functions.php');
 $parms = $_SERVER['argv'];
 array_shift($parms);
 
-$debug    = FALSE;
+$debug    = false;
 $oui_file = '';
 
 /* add more memory for import */
-ini_set('memory_limit', '256M');
+ini_set('memory_limit', '-1');
 
 if (cacti_sizeof($parms)) {
 	foreach($parms as $parameter) {

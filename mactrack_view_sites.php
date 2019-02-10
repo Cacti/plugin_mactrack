@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -42,7 +42,7 @@ function mactrack_view_export_sites() {
 
 	$sql_where = '';
 
-	$sites = mactrack_view_get_site_records($sql_where, 0, FALSE);
+	$sites = mactrack_view_get_site_records($sql_where, 0, false);
 
 	$xport_array = array();
 
@@ -80,7 +80,7 @@ function mactrack_view_export_sites() {
 	}
 }
 
-function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = TRUE) {
+function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = true) {
 	/* create SQL where clause */
 	$device_type_info = db_fetch_row_prepared('SELECT *
 		FROM mac_track_device_types

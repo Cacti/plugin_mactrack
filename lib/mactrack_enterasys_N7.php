@@ -56,7 +56,7 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	mactrack_debug("ifIndexes data collection complete: " . sizeof($ifIndexes));
 
 	/* get and store the interfaces table */
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, FALSE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
 #print_r($ifInterfaces);
 
 	foreach($ifIndexes as $ifIndex) {
@@ -69,8 +69,8 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	/* map vlans to bridge ports */
 	if (cacti_sizeof($vlan_ids) > 0) {
 		/* get the port status information */
-		#$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $device["snmp_readstring"], FALSE, $lowPort, $highPort);
-		$port_results = get_enterasys_N7_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $device["snmp_readstring"], FALSE, $lowPort, $highPort);
+		#$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $device["snmp_readstring"], false, $lowPort, $highPort);
+		$port_results = get_enterasys_N7_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $device["snmp_readstring"], false, $lowPort, $highPort);
 		#print_r($port_results);
 		/* get the ifIndexes for the device */
 		$vlan_names = xform_standard_indexed_data(".1.3.6.1.2.1.17.7.1.4.3.1.1", $device);
@@ -127,7 +127,7 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
   port bridge snmp table and return it to the calling progrem for further processing.
   This is a foundational function for all vendor data collection functions.
 */
-function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = TRUE, $lowPort = 1, $highPort = 9999) {
+function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 	mactrack_debug("FUNCTION: get_enterasys_N7_dot1dTpFdbEntry_ports started");
 

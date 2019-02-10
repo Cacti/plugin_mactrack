@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -77,7 +77,7 @@ function mactrack_vmacs_export() {
 
 	$sql_where = '';
 
-	$vmacs = mactrack_vmacs_get_vmac_records($sql_where, 0, FALSE);
+	$vmacs = mactrack_vmacs_get_vmac_records($sql_where, 0, false);
 
 	$xport_array = array();
 	array_push($xport_array, '"vendor_mac","vendor_name","vendor_address"');
@@ -97,7 +97,7 @@ function mactrack_vmacs_export() {
 	}
 }
 
-function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = TRUE) {
+function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = true) {
 	$sql_where = '';
 
 	/* form the 'where' clause for our main sql query */

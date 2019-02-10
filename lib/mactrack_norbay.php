@@ -56,7 +56,7 @@ function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPor
 	mactrack_debug("ifIndexes data collection complete");
 
 	/* get and store the interfaces table */
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, FALSE, FALSE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, false, false);
 
 	if (cacti_sizeof($ifIndexes)) {
 	foreach ($ifIndexes as $ifIndex) {
@@ -88,7 +88,7 @@ function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPor
 	if (cacti_sizeof($active_vlans)) {
 		$i = 0;
 		/* get the port status information */
-		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", FALSE);
+		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", false);
 		$port_vlan_data = xform_dot1q_vlan_associations($device);
 
 		$i = 0;
@@ -166,7 +166,7 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	mactrack_debug("ifIndexes data collection complete");
 
 	/* get and store the interfaces table */
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, FALSE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
 
 	if (cacti_sizeof($ifIndexes)) {
 		foreach ($ifIndexes as $ifIndex) {
@@ -204,7 +204,7 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	if (cacti_sizeof($active_vlans)) {
 		$i = 0;
 		/* get the port status information */
-		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", FALSE);
+		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", false);
 		$port_vlan_data = xform_dot1q_vlan_associations($device);
 
 		$i = 0;

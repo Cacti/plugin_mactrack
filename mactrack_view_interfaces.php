@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -26,7 +26,6 @@ $guest_account = true;
 chdir('../../');
 include('./include/auth.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
-ini_set('memory_limit', '256M');
 
 $title = __('Device Tracking - Network Interfaces View', 'mactrack');
 
@@ -37,10 +36,10 @@ if (isset_request_var('export')) {
 	mactrack_view();
 }
 
-function mactrack_get_records(&$sql_where, $apply_limits = TRUE, $rows = '30') {
+function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = '30') {
 	global $timespan, $group_function, $summary_stats;
 
-	$match = read_config_option('mt_ignorePorts', TRUE);
+	$match = read_config_option('mt_ignorePorts', true);
 	if ($match == '') {
 		$match = '(Vlan|Loopback|Null)';
 		db_execute_prepared('REPLACE INTO settings SET name="mt_ignorePorts", value = ?', array($match));
@@ -205,7 +204,7 @@ function mactrack_export_records() {
 
 	$sql_where  = '';
 
-	$stats = mactrack_get_records($sql_where, TRUE, 10000);
+	$stats = mactrack_get_records($sql_where, true, 10000);
 
 	$xport_array = array();
 
@@ -267,7 +266,7 @@ function mactrack_view() {
 		$rows = get_request_var('rows');
 	}
 
-	$stats = mactrack_get_records($sql_where, TRUE, $rows);
+	$stats = mactrack_get_records($sql_where, true, $rows);
 
 	mactrack_tabs();
 

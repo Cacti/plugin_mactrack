@@ -64,7 +64,7 @@ function get_dlink_l2_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 	}
 	mactrack_debug("ifInterfaces assembly complete.");
 
-	get_dlink_l2_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", TRUE, $lowPort, $highPort);
+	get_dlink_l2_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", true, $lowPort, $highPort);
 
 	return $device;
 	mactrack_debug("ppp------>>finish function get_dlink_l2_switch_ports for dev=: " . " dev=" . $device["hostname"] );
@@ -75,7 +75,7 @@ function get_dlink_l2_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
   port bridge snmp table and return it to the calling progrem for further processing.
   This is a foundational function for all vendor data collection functions.
 */
-function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = TRUE, $lowPort = 1, $highPort = 9999) {
+function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 
 	/* initialize variables */

@@ -52,7 +52,7 @@ function get_norbay_ng_switch_ports($site, &$device, $lowPort = 0, $highPort = 0
 	mactrack_debug("ifIndexes data collection complete");
 
 	/* get and store the interfaces table */
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, FALSE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
 
 	foreach ($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]["trunkPortState"] = @$vlan_trunkstatus[$ifIndex];
@@ -79,7 +79,7 @@ function get_norbay_ng_switch_ports($site, &$device, $lowPort = 0, $highPort = 0
 	if (cacti_sizeof($active_vlans) > 0) {
 		$i = 0;
 		/* get the port status information */
-		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", FALSE);
+		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", false);
 		$port_vlan_data = xform_standard_indexed_data("SNMPv2-SMI::enterprises.2272.1.3.3.1.7", $device);
 		$port_alias = xform_standard_indexed_data("IF-MIB::ifAlias", $device);
 

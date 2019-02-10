@@ -1048,14 +1048,22 @@ function get_link_int_value($snmp_oid, $ifIndex, &$snmp_array, &$db_interface, $
 		}
 
 		/* account for counter resets */
-		$frequency = read_config_option('mt_collection_timing') * 60;
-		if ($db_interface[$ifIndex]['ifHighSpeed'] > 0) {
-			if ($int_value > ($db_interface[$ifIndex]['ifHighSpeed'] * 1000000 * $frequency * 1.1)) {
-				$int_value = $snmp_array[$ifIndex];
-			}
-		} else {
-			if ($int_value > ($db_interface[$ifIndex]['ifSpeed'] * $frequency * 1.1 / 8)) {
-				$int_value = $snmp_array[$ifIndex];
+		$frequency = 0;
+		$timing = read_config_option('mt_collection_timing');
+
+		if ($timing != 'disabled') {
+			$frequency = $timing * 60;
+		}
+
+		if ($frequency > 0) {
+			if ($db_interface[$ifIndex]['ifHighSpeed'] > 0) {
+				if ($int_value > ($db_interface[$ifIndex]['ifHighSpeed'] * 1000000 * $frequency * 1.1)) {
+					$int_value = $snmp_array[$ifIndex];
+				}
+			} else {
+				if ($int_value > ($db_interface[$ifIndex]['ifSpeed'] * $frequency * 1.1 / 8)) {
+					$int_value = $snmp_array[$ifIndex];
+				}
 			}
 		}
 	} else {
@@ -1792,9 +1800,9 @@ function get_link_port_status(&$device) {
 		$device['snmp_retries'], $device['max_oids']);
 
 	if (cacti_sizeof($walk_array)) {
-	foreach ($walk_array as $walk_item) {
-		$return_array[$walk_item['value']] = true;
-	}
+		foreach ($walk_array as $walk_item) {
+			$return_array[$walk_item['value']] = true;
+		}
 	}
 
 	return $return_array;
@@ -1823,7 +1831,7 @@ function xform_stripped_oid($oid, &$device, $snmp_readstring = '', $hex = false)
 		$device['snmp_priv_passphrase'], $device['snmp_priv_protocol'],
 		$snmp_context, $device['snmp_port'], $device['snmp_timeout'],
 		$device['snmp_retries'], $device['max_oids'],
-		'', $device['snmp_engine_id'],
+		SNMP_POLLER, $device['snmp_engine_id'],
 		($hex ? SNMP_STRING_OUTPUT_HEX : SNMP_STRING_OUTPUT_GUESS));
 
 	$oid = preg_replace('/^\./', '', $oid);
@@ -1938,18 +1946,18 @@ function xform_standard_indexed_data($xformOID, &$device, $snmp_readstring = '',
 		$device['snmp_priv_passphrase'], $device['snmp_priv_protocol'],
 		$snmp_context, $device['snmp_port'], $device['snmp_timeout'],
 		$device['snmp_retries'], $device['max_oids'],
-		'', $device['snmp_engine_id'],
+		SNMP_POLLER, $device['snmp_engine_id'],
 		($hex ? SNMP_STRING_OUTPUT_HEX : SNMP_STRING_OUTPUT_GUESS));
 
 	$i = 0;
 
 	if (cacti_sizeof($xformArray)) {
-	foreach($xformArray as $xformItem) {
-		$perPos = strrpos($xformItem['oid'], '.');
-		$xformItemID = substr($xformItem['oid'], $perPos+1);
-		$xformArray[$i]['oid'] = $xformItemID;
-		$i++;
-	}
+		foreach($xformArray as $xformItem) {
+			$perPos = strrpos($xformItem['oid'], '.');
+			$xformItemID = substr($xformItem['oid'], $perPos+1);
+			$xformArray[$i]['oid'] = $xformItemID;
+			$i++;
+		}
 	}
 
 	return array_rekey($xformArray, 'oid', 'value');
@@ -1980,19 +1988,20 @@ function xform_dot1q_vlan_associations(&$device, $snmp_readstring = '') {
 	$i = 0;
 
 	if (cacti_sizeof($xformArray)) {
-	foreach($xformArray as $xformItem) {
-		/* peel off the beginning of the OID */
-		$key = $xformItem['oid'];
-		$key = str_replace('iso', '1', $key);
-		$key = str_replace('1.3.6.1.2.1.17.7.1.2.2.1.2.', '', $key);
+		foreach($xformArray as $xformItem) {
+			/* peel off the beginning of the OID */
+			$key = $xformItem['oid'];
+			$key = str_replace('iso', '1', $key);
+			$key = str_replace('1.3.6.1.2.1.17.7.1.2.2.1.2.', '', $key);
 
-		/* now grab the VLAN */
-		$perPos = strpos($key, '.');
-		$output_array[$i]['vlan_id'] = substr($key,0,$perPos);
-		/* save the key for association with the dot1d table */
-		$output_array[$i]['key'] = substr($key, $perPos+1);
-		$i++;
-	}
+			/* now grab the VLAN */
+			$perPos = strpos($key, '.');
+			$output_array[$i]['vlan_id'] = substr($key,0,$perPos);
+
+			/* save the key for association with the dot1d table */
+			$output_array[$i]['key'] = substr($key, $perPos+1);
+			$i++;
+		}
 	}
 
 	return array_rekey($output_array, 'key', 'vlan_id');
@@ -2014,16 +2023,16 @@ function xform_cisco_workgroup_port_data($xformOID, &$device) {
 	$i = 0;
 
 	if (cacti_sizeof($xformArray)) {
-	foreach($xformArray as $xformItem) {
-		$perPos = strrpos($xformItem['oid'], '.');
-		$xformItem_piece1 = substr($xformItem['oid'], $perPos+1);
-		$xformItem_remainder = substr($xformItem['oid'], 0, $perPos);
-		$perPos = strrpos($xformItem_remainder, '.');
-		$xformItem_piece2 = substr($xformItem_remainder, $perPos+1);
-		$xformArray[$i]['oid'] = $xformItem_piece2 . '/' . $xformItem_piece1;
+		foreach($xformArray as $xformItem) {
+			$perPos = strrpos($xformItem['oid'], '.');
+			$xformItem_piece1 = substr($xformItem['oid'], $perPos+1);
+			$xformItem_remainder = substr($xformItem['oid'], 0, $perPos);
+			$perPos = strrpos($xformItem_remainder, '.');
+			$xformItem_piece2 = substr($xformItem_remainder, $perPos+1);
+			$xformArray[$i]['oid'] = $xformItem_piece2 . '/' . $xformItem_piece1;
 
-		$i++;
-	}
+			$i++;
+		}
 	}
 
 	return array_rekey($xformArray, 'oid', 'value');
@@ -2042,36 +2051,36 @@ function xform_indexed_data($xformOID, &$device, $xformLevel = 1, $hex = false) 
 		$device['snmp_priv_passphrase'], $device['snmp_priv_protocol'],
 		$device['snmp_context'], $device['snmp_port'],
 		$device['snmp_timeout'], $device['snmp_retries'], $device['max_oids'],
-		$device['snmp_engine_id'],
-		'', ($hex ? SNMP_STRING_OUTPUT_HEX : SNMP_STRING_OUTPUT_GUESS));
+		SNMP_POLLER, $device['snmp_engine_id'],
+		($hex ? SNMP_STRING_OUTPUT_HEX : SNMP_STRING_OUTPUT_GUESS));
 
 	$i = 0;
 	$output_array = array();
 
 	if (cacti_sizeof($xformArray)) {
-	foreach($xformArray as $xformItem) {
-		/* break down key */
-		$OID = $xformItem['oid'];
-		for ($j = 0; $j < $xformLevel; $j++) {
-			$perPos = strrpos($OID, '.');
-			$xformItem_piece[$j] = substr($OID, $perPos+1);
-			$OID = substr($OID, 0, $perPos);
-		}
-
-		/* reassemble key */
-		$key = '';
-		for ($j = $xformLevel-1; $j >= 0; $j--) {
-			$key .= $xformItem_piece[$j];
-			if ($j > 0) {
-				$key .= '.';
+		foreach($xformArray as $xformItem) {
+			/* break down key */
+			$OID = $xformItem['oid'];
+			for ($j = 0; $j < $xformLevel; $j++) {
+				$perPos = strrpos($OID, '.');
+				$xformItem_piece[$j] = substr($OID, $perPos+1);
+				$OID = substr($OID, 0, $perPos);
 			}
+
+			/* reassemble key */
+			$key = '';
+			for ($j = $xformLevel-1; $j >= 0; $j--) {
+				$key .= $xformItem_piece[$j];
+				if ($j > 0) {
+					$key .= '.';
+				}
+			}
+
+			$output_array[$i]['key'] = $key;
+			$output_array[$i]['value'] = $xformItem['value'];
+
+			$i++;
 		}
-
-		$output_array[$i]['key'] = $key;
-		$output_array[$i]['value'] = $xformItem['value'];
-
-		$i++;
-	}
 	}
 
 	return array_rekey($output_array, 'key', 'value');
@@ -2961,8 +2970,15 @@ function mactrack_display_hours($value) {
 function mactrack_display_stats() {
 	/* check if scanning is running */
 	$processes = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes');
-	$frequency = read_config_option('mt_collection_timing', true) * 60;
+	$timing    = read_config_option('mt_collection_timing', true);
+	$frequency = 0;
+
+	if ($timing != 'disabled') {
+		$frequency = $timing * 60;
+	}
+
 	$mactrack_stats = read_config_option('stats_mactrack', true);
+
 	$time  = __('Not Recorded', 'mactrack');
 	$proc  = __('N/A', 'mactrack');
 	$devs  = __('N/A', 'mactrack');
@@ -2986,7 +3002,7 @@ function mactrack_display_stats() {
 	} else {
 		$message = __('Status: Idle, LastRuntime: %f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s',
 			round($time,1), $proc , $devs,
-			date('Y-m-d H:i:s', strtotime(read_config_option('mt_scan_date', true)) + $frequency), 'mactrack');
+			($timing != 'disabled' ? date('Y-m-d H:i:s', strtotime(read_config_option('mt_scan_date', true)) + $frequency):__('Disabled', 'mactrack')), 'mactrack');
 	}
 
 	html_start_box('', '100%', '', '3', 'center', '');

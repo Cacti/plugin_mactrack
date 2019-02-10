@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -396,7 +396,7 @@ function mactrack_view_export_macs() {
 
 	$sql_where = '';
 
-	$port_results = mactrack_view_get_mac_records($sql_where, 0, FALSE);
+	$port_results = mactrack_view_get_mac_records($sql_where, 0, false);
 
 	$xport_array = array();
 	array_push($xport_array, '"site_name","hostname","device_name",' .
@@ -428,7 +428,7 @@ function mactrack_view_export_macs() {
 	}
 }
 
-function mactrack_view_get_mac_records(&$sql_where, $apply_limits = TRUE, $rows) {
+function mactrack_view_get_mac_records(&$sql_where, $apply_limits = true, $rows) {
 	/* form the 'where' clause for our main sql query */
 	if (get_request_var('mac_filter') != '') {
 		switch (get_request_var('mac_filter_type_id')) {
@@ -623,7 +623,7 @@ function mactrack_view_macs() {
 		$rows = get_request_var('rows');
 	}
 
-	$port_results = mactrack_view_get_mac_records($sql_where, TRUE, $rows);
+	$port_results = mactrack_view_get_mac_records($sql_where, true, $rows);
 
 	/* prevent table scans, either a device or site must be selected */
 	if (!strlen($sql_where)) {
@@ -710,7 +710,7 @@ function mactrack_view_macs() {
 				$port_result['port_number'] . '-' . strtotime($scan_date);
 
 			form_alternate_row('line' . $key, true);
-			form_selectable_cell(mactrack_interface_actions($port_result['device_id'], $port_result['port_number'], FALSE), $key);
+			form_selectable_cell(mactrack_interface_actions($port_result['device_id'], $port_result['port_number'], false), $key);
 			form_selectable_cell($port_result['device_name'], $key);
 			form_selectable_cell($port_result['hostname'], $key);
 			form_selectable_cell(filter_value($port_result['ip_address'], get_request_var('filter')), $key);
@@ -772,7 +772,7 @@ function mactrack_view_aggregated_macs() {
 		$rows = get_request_var('rows');
 	}
 
-	$port_results = mactrack_view_get_mac_records($sql_where, TRUE, $rows);
+	$port_results = mactrack_view_get_mac_records($sql_where, true, $rows);
 
 	/* prevent table scans, either a device or site must be selected */
 	if (get_request_var('site_id') == -1 && get_request_var('device_id') == -1) {

@@ -41,7 +41,7 @@ function get_cabletron_switch_ports($site, &$device, $lowPort, $highPort) {
 	mactrack_debug('ifIndexes data collection complete');
 
 	/* get and store the interfaces table */
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, FALSE, FALSE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, false, false);
 
 	$securefast_marker = @cacti_snmp_get($device['hostname'], $device['snmp_readstring'],
 		'.1.3.6.1.4.1.52.4.2.4.2.1.1.1.1.1.1.1', $device['snmp_version'],
@@ -52,9 +52,9 @@ function get_cabletron_switch_ports($site, &$device, $lowPort, $highPort) {
 	mactrack_debug('Cabletron securefast marker obtained');
 
 	if (empty($securefast_marker)) {
-		get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, '', TRUE, $lowPort, $highPort);
+		get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, '', true, $lowPort, $highPort);
 	} else {
-		get_base_sfps_ports($site, $device, $ifInterfaces, '', TRUE, $lowPort, $highPort);
+		get_base_sfps_ports($site, $device, $ifInterfaces, '', true, $lowPort, $highPort);
 	}
 
 	return $device;

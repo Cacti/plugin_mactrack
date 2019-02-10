@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -30,10 +30,10 @@ include_once('./plugins/mactrack/lib/mactrack_functions.php');
 set_default_action();
 switch (get_request_var('action')) {
 case 'site_scan':
-	mactrack_site_scan(TRUE);
+	mactrack_site_scan(true);
 	break;
 case 'rescan':
-	mactrack_rescan(TRUE);
+	mactrack_rescan(true);
 	break;
 case 'enable':
 	mactrack_enable();

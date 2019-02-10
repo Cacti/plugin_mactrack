@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -101,7 +101,7 @@ function mactrack_view_export_devices() {
 
 	$sql_where = '';
 
-	$devices = mactrack_view_get_device_records($sql_where, 0, FALSE);
+	$devices = mactrack_view_get_device_records($sql_where, 0, false);
 
 	$xport_array = array();
 	array_push($xport_array, 'site_id, site_name, device_id, device_name, notes, ' .
@@ -144,7 +144,7 @@ function mactrack_view_export_devices() {
 	}
 }
 
-function mactrack_view_get_device_records(&$sql_where, $rows, $apply_limits = TRUE) {
+function mactrack_view_get_device_records(&$sql_where, $rows, $apply_limits = true) {
 	$device_type_info = db_fetch_row_prepared('SELECT * FROM mac_track_device_types WHERE device_type_id = ?', array(get_request_var('device_type_id')));
 
 	/* if the device type is not the same as the type_id, then reset it */

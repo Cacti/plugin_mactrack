@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -134,7 +134,7 @@ function mactrack_view_export_dot1x() {
 
 	$sql_where = '';
 
-	$port_results = mactrack_view_get_dot1x_records($sql_where, 0, FALSE);
+	$port_results = mactrack_view_get_dot1x_records($sql_where, 0, false);
 
 	$xport_array = array();
 	array_push($xport_array, '"site_name","hostname","device_name",' .
@@ -166,7 +166,7 @@ function mactrack_view_export_dot1x() {
 	}
 }
 
-function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = TRUE, $rows) {
+function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = true, $rows) {
 		/* status sql where */
 	if (get_request_var('status') == '0') { // Any Status
 		/* do nothing all records */
@@ -366,7 +366,7 @@ function mactrack_view_dot1x() {
 		$rows = get_request_var('rows');
 	}
 
-	$port_results = mactrack_view_get_dot1x_records($sql_where, TRUE, $rows);
+	$port_results = mactrack_view_get_dot1x_records($sql_where, true, $rows);
 
 	/* prevent table scans, either a device or site must be selected */
 	if (!strlen($sql_where)) {

@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -108,7 +108,7 @@ function mactrack_view_export_ips() {
 
 	$sql_where = '';
 
-	$port_results = mactrack_view_get_ip_records($sql_where, 0, FALSE);
+	$port_results = mactrack_view_get_ip_records($sql_where, 0, false);
 
 	$xport_array = array();
 	array_push($xport_array, '"site_name","hostname","device_name",' .
@@ -135,7 +135,7 @@ function mactrack_view_export_ips() {
 	}
 }
 
-function mactrack_view_get_ip_records(&$sql_where, $apply_limits = TRUE, $rows) {
+function mactrack_view_get_ip_records(&$sql_where, $apply_limits = true, $rows) {
 	/* form the 'where' clause for our main sql query */
 	if (get_request_var('mac_filter') != '') {
 		switch (get_request_var('mac_filter_type_id')) {
@@ -270,7 +270,7 @@ function mactrack_view_ips() {
 		$rows = get_request_var('rows');
 	}
 
-	$port_results = mactrack_view_get_ip_records($sql_where, TRUE, $rows);
+	$port_results = mactrack_view_get_ip_records($sql_where, true, $rows);
 
 	/* prevent table scans, either a device or site must be selected */
 	if (!strlen($sql_where)) {

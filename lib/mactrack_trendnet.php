@@ -49,7 +49,7 @@ function get_trendnet_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPor
 	$ifIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device);
 	mactrack_debug("ifIndexes data collection complete");
 
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, TRUE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, true);
 
 	/* sanitize ifInterfaces by removing text from ifType field */
 	if (cacti_sizeof($ifInterfaces)) {
@@ -59,7 +59,7 @@ function get_trendnet_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPor
 		}
 	}
 
-	get_base_trendnet_dot1qFdb_ports($site, $device, $ifInterfaces, "", TRUE, $lowPort, $highPort);
+	get_base_trendnet_dot1qFdb_ports($site, $device, $ifInterfaces, "", true, $lowPort, $highPort);
 
 	return $device;
 }
@@ -69,7 +69,7 @@ function get_trendnet_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPor
   This was mainly copied from the default dot1q function in mactrack_functions.php
   but was modified to work with Dell switches
 */
-function get_base_trendnet_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = TRUE, $lowPort = 1, $highPort = 9999) {
+function get_base_trendnet_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp_readstring = "", $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 
 	/* initialize variables */

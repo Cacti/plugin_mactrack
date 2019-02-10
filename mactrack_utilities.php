@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -29,7 +29,7 @@ include('./include/auth.php');
 set_default_action();
 
 /* add more memory for import */
-ini_set('memory_limit', '256M');
+ini_set('memory_limit', '-1');
 ini_set('max_execution_time', '300');
 
 switch (get_request_var('action')) {
@@ -105,16 +105,17 @@ switch (get_request_var('action')) {
 function mactrack_display_run_status() {
 	global $config, $refresh_interval, $mactrack_poller_frequencies;
 
-	$seconds_offset = read_config_option('mt_collection_timing', TRUE);
-	if ($seconds_offset <> 'disabled') {
+	$seconds_offset = read_config_option('mt_collection_timing', true);
+
+	if ($seconds_offset != 'disabled') {
 		$seconds_offset = $seconds_offset * 60;
 		/* find out if it's time to collect device information */
-		$base_start_time = read_config_option('mt_base_time', TRUE);
-		$database_maint_time = read_config_option('mt_maint_time', TRUE);
-		$last_run_time = read_config_option('mt_last_run_time', TRUE);
-		$last_db_maint_time = read_config_option('mt_last_db_maint_time', TRUE);
-		$previous_base_start_time = read_config_option('mt_prev_base_time', TRUE);
-		$previous_db_maint_time = read_config_option('mt_prev_db_maint_time', TRUE);
+		$base_start_time = read_config_option('mt_base_time', true);
+		$database_maint_time = read_config_option('mt_maint_time', true);
+		$last_run_time = read_config_option('mt_last_run_time', true);
+		$last_db_maint_time = read_config_option('mt_last_db_maint_time', true);
+		$previous_base_start_time = read_config_option('mt_prev_base_time', true);
+		$previous_db_maint_time = read_config_option('mt_prev_db_maint_time', true);
 
 		/* see if the user desires a new start time */
 		if (!empty($previous_base_start_time)) {
@@ -133,7 +134,7 @@ function mactrack_display_run_status() {
 		/* determine the next start time */
 		$current_time = strtotime('now');
 		if (empty($last_run_time)) {
-			$collection_never_completed = TRUE;
+			$collection_never_completed = true;
 			if ($current_time > strtotime($base_start_time)) {
 				/* if timer expired within a polling interval, then poll */
 				if (($current_time - 300) < strtotime($base_start_time)) {
@@ -145,7 +146,7 @@ function mactrack_display_run_status() {
 				$next_run_time = strtotime(date('Y-m-d') . ' ' . $base_start_time);
 			}
 		} else {
-			$collection_never_completed = FALSE;
+			$collection_never_completed = false;
 			$next_run_time = $last_run_time + $seconds_offset;
 		}
 
@@ -203,7 +204,7 @@ function mactrack_display_run_status() {
 	</tr>
 	<?php
 
-	html_end_box(TRUE);
+	html_end_box(true);
 
 	html_start_box('', '100%', '', '1', 'center', '');
 
@@ -234,13 +235,13 @@ function mactrack_display_run_status() {
 
 	html_header(array(__('Current Process Status', 'mactrack')), 2);
 	form_alternate_row();
-	print '<td>' . __('The Device Tracking Poller is:', 'mactrack') . '</td><td>' . ($total_processes > 0 ? __('RUNNING', 'mactrack') : ($seconds_offset == 'disabled' ? __('DISABLED', 'mactrack') : __('IDLE', 'mactrack'))) . '</td>';
+	print '<td>' . __('The Device Tracking Poller is:', 'mactrack') . '</td><td>' . ($total_processes > 0 ? __('Running', 'mactrack') : ($seconds_offset == 'disabled' ? __('Disabled', 'mactrack') : __('Idle', 'mactrack'))) . '</td>';
 	if ($total_processes > 0) {
 		form_alternate_row();
 		print '<td>' . __('Running Processes:', 'mactrack') . '</td><td>' . $total_processes . '</td>';
 	}
 	form_alternate_row();
-	print '<td width=200>' . __('Last Time Poller Started:', 'mactrack') . '</td><td>' . read_config_option('mt_scan_date', TRUE) . '</td>';
+	print '<td width=200>' . __('Last Time Poller Started:', 'mactrack') . '</td><td>' . read_config_option('mt_scan_date', true) . '</td>';
 	form_alternate_row();
 	print '<td width=200>' . __('Poller Frequency:', 'mactrack') . '</td><td>' . ($seconds_offset == 'disabled' ? __('N/A', 'mactrack') : $mactrack_poller_frequencies[$seconds_offset/60]) . '</td>';
 	form_alternate_row();
@@ -250,24 +251,24 @@ function mactrack_display_run_status() {
 
 	html_header(array(__('Run Time Details', 'mactrack')), 2);
 	form_alternate_row();
-	print '<td width=200>' . __('Last Poller Runtime:', 'mactrack') . '</td><td>' . read_config_option('stats_mactrack', TRUE) . '</td>';
+	print '<td width=200>' . __('Last Poller Runtime:', 'mactrack') . '</td><td>' . read_config_option('stats_mactrack', true) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Last Poller Maintenance Runtime:', 'mactrack') . '</td><td>' . read_config_option('stats_mactrack_maint', TRUE) . '</td>';
+	print '<td width=200>' . __('Last Poller Maintenance Runtime:', 'mactrack') . '</td><td>' . read_config_option('stats_mactrack_maint', true) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Maximum Concurrent Processes:', 'mactrack') . '</td><td> ' . read_config_option('mt_processes', TRUE) . __('processes', 'mactrack') . '</td>';
+	print '<td width=200>' . __('Maximum Concurrent Processes:', 'mactrack') . '</td><td> ' . read_config_option('mt_processes', true) . __('processes', 'mactrack') . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Maximum Per Device Scan Time:', 'mactrack') . '</td><td> ' . read_config_option('mt_script_runtime', TRUE) . __('minutes', 'mactrack') . '</td>';
+	print '<td width=200>' . __('Maximum Per Device Scan Time:', 'mactrack') . '</td><td> ' . read_config_option('mt_script_runtime', true) . __('minutes', 'mactrack') . '</td>';
 
 	html_header(array(__('DNS Configuration Information', 'mactrack')), 2);
 	form_alternate_row();
-	print '<td width=200>' . __('Reverse DNS Resolution is', 'mactrack') . '</td><td>' . (read_config_option('mt_reverse_dns', TRUE) == 'on' ? __('ENABLED', 'mactrack') : __('DISABLED', 'mactrack')) . '</td>';
+	print '<td width=200>' . __('Reverse DNS Resolution is', 'mactrack') . '</td><td>' . (read_config_option('mt_reverse_dns', true) == 'on' ? __('Enabled', 'mactrack') : __('Disabled', 'mactrack')) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Primary DNS Server:', 'mactrack') . '</td><td>' . read_config_option('mt_dns_primary', TRUE) . '</td>';
+	print '<td width=200>' . __('Primary DNS Server:', 'mactrack') . '</td><td>' . read_config_option('mt_dns_primary', true) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Secondary DNS Server:', 'mactrack') . '</td><td>' . read_config_option('mt_dns_secondary', TRUE) . '</td>';
+	print '<td width=200>' . __('Secondary DNS Server:', 'mactrack') . '</td><td>' . read_config_option('mt_dns_secondary', true) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('DNS Resolution Timeout:', 'mactrack') . '</td><td> ' . read_config_option('mt_dns_timeout', TRUE) . __('milliseconds', 'mactrack') . '</td>';
-	html_end_box(TRUE);
+	print '<td width=200>' . __('DNS Resolution Timeout:', 'mactrack') . '</td><td> ' . read_config_option('mt_dns_timeout', true) . __('milliseconds', 'mactrack') . '</td>';
+	html_end_box(true);
 
 	if ($total_processes > 0) {
 		html_start_box(__('Running Process Summary', 'mactrack'), '100%', '', '3', 'center', '');
@@ -284,7 +285,7 @@ function mactrack_display_run_status() {
 			$completed_processes = 0;
 			$completed_date = '';
 			$running_processes = $total_processes;
-			$running_date = read_config_option('mt_scan_date', TRUE);
+			$running_date = read_config_option('mt_scan_date', true);
 		} else {
 			$i = 0;
 			foreach($run_status as $key => $run) {
@@ -297,7 +298,7 @@ function mactrack_display_run_status() {
 					$waiting_processes = $run['devices'] - $total_processes;
 					$waiting_date = $run['last_rundate'];
 					$running_processes = $total_processes;
-					$running_date = read_config_option('mt_scan_date', TRUE);
+					$running_date = read_config_option('mt_scan_date', true);
 					break;
 				default;
 					$other_processes += $run['devices'];
@@ -333,7 +334,7 @@ function mactrack_display_run_status() {
 			<?php
 		}
 
-		html_end_box(TRUE);
+		html_end_box(true);
 	}
 
 }

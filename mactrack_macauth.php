@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -21,8 +21,8 @@
  | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
-chdir('../../');
 
+chdir('../../');
 include('./include/auth.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
@@ -201,7 +201,7 @@ function api_mactrack_maca_remove($mac_id) {
     MacAuth Functions
    --------------------- */
 
-function mactrack_maca_get_maca_records(&$sql_where, $rows, $apply_limits = TRUE) {
+function mactrack_maca_get_maca_records(&$sql_where, $rows, $apply_limits = true) {
 	/* form the 'where' clause for our main sql query */
 	$sql_where = '';
 	if (get_request_var('filter') != '') {

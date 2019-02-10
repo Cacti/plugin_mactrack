@@ -67,7 +67,7 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	mactrack_debug("ifIndexes data collection complete");
 
 	/* get and store the interfaces table */
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, FALSE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
 
 	foreach($ifIndexes as $ifIndex) {
 		if (($ifInterfaces[$ifIndex]["ifType"] >= 6) && ($ifInterfaces[$ifIndex]["ifType"] <= 9)) {
@@ -96,7 +96,7 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		$i = 0;
 		/* get the port status information */
 		$ifNames = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.18", $device);
-		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", FALSE, $lowPort, $highPort);
+		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", false, $lowPort, $highPort);
 
 		$port_vlan_data = xform_standard_indexed_data(".1.3.6.1.2.1.17.7.1.4.5.1.1", $device);
 		$port_alias = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.18", $device);

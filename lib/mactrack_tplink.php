@@ -50,7 +50,7 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	$ifIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device);
 	mactrack_debug("ifIndexes data collection complete");
 
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, FALSE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
 
 	/* initialize variables */
 	$port_keys = array();

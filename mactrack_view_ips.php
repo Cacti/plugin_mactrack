@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -102,7 +102,7 @@ function mactrack_view_export_ip_ranges() {
 
 	$sql_where = '';
 
-	$ip_ranges = mactrack_view_get_ip_range_records($sql_where, 0, FALSE);
+	$ip_ranges = mactrack_view_get_ip_range_records($sql_where, 0, false);
 
 	$xport_array = array();
 
@@ -126,7 +126,7 @@ function mactrack_view_export_ip_ranges() {
 	}
 }
 
-function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = TRUE) {
+function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = true) {
 	if (get_request_var('site_id') != '-1') {
 		$sql_where = 'WHERE mac_track_ip_ranges.site_id=' . get_request_var('site_id');
 	} else {

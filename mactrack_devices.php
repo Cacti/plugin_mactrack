@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2017 The Cacti Group                                 |
+ | Copyright (C) 2004-2019 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -439,7 +439,7 @@ function mactrack_device_export() {
 
 	$sql_where = '';
 
-	$devices = mactrack_get_devices($sql_where, 0, FALSE);
+	$devices = mactrack_get_devices($sql_where, 0, false);
 
 	$xport_array = array();
 	array_push($xport_array, 'site_id, site_name, device_id, device_name, notes, ' .
@@ -525,7 +525,7 @@ function mactrack_device_import() {
 			<input type='checkbox' name='allow_update' id='allow_update'><?php print __('Allow Existing Rows to be Updated?', 'mactrack');?>
 		</td><?php
 
-	html_end_box(FALSE);
+	html_end_box(false);
 
 	html_start_box(__('Required File Format Notes', 'mactrack'), '100%', '', '3', 'center', '');
 
@@ -588,7 +588,7 @@ function mactrack_device_import_processor(&$devices) {
 		if ($i == 0) {
 			$save_order = '(';
 			$j = 0;
-			$first_column = TRUE;
+			$first_column = true;
 			$required = 0;
 			$save_site_id_id = -1;
 			$save_snmp_port_id = -1;
@@ -626,7 +626,7 @@ function mactrack_device_import_processor(&$devices) {
 						$save_order .= $line_item;
 
 						$insert_columns[] = $j;
-						$first_column = FALSE;
+						$first_column = false;
 
 						if (strlen($update_suffix)) {
 							$update_suffix .= ", $line_item=VALUES($line_item)";
@@ -645,7 +645,7 @@ function mactrack_device_import_processor(&$devices) {
 						$required++;
 
 						$insert_columns[] = $j;
-						$first_column = FALSE;
+						$first_column = false;
 
 						if (strlen($update_suffix)) {
 							$update_suffix .= ", $line_item=VALUES($line_item)";
@@ -664,7 +664,7 @@ function mactrack_device_import_processor(&$devices) {
 						$required++;
 
 						$insert_columns[] = $j;
-						$first_column = FALSE;
+						$first_column = false;
 
 						if (strlen($update_suffix)) {
 							$update_suffix .= ", $line_item=VALUES($line_item)";
@@ -683,7 +683,7 @@ function mactrack_device_import_processor(&$devices) {
 						$required++;
 
 						$insert_columns[] = $j;
-						$first_column = FALSE;
+						$first_column = false;
 
 						if (strlen($update_suffix)) {
 							$update_suffix .= ", $line_item=VALUES($line_item)";
@@ -701,7 +701,7 @@ function mactrack_device_import_processor(&$devices) {
 						$save_device_name_id = $j;
 
 						$insert_columns[] = $j;
-						$first_column = FALSE;
+						$first_column = false;
 
 						if (strlen($update_suffix)) {
 							$update_suffix .= ", $line_item=VALUES($line_item)";
@@ -730,7 +730,7 @@ function mactrack_device_import_processor(&$devices) {
 		} else {
 			$save_value = '(';
 			$j = 0;
-			$first_column = TRUE;
+			$first_column = true;
 			$sql_where = '';
 
 			if (cacti_sizeof($line_array)) {
@@ -742,7 +742,7 @@ function mactrack_device_import_processor(&$devices) {
 					if (!$first_column) {
 						$save_value .= ',';
 					} else {
-						$first_column = FALSE;
+						$first_column = false;
 					}
 
 					if ($j == $save_site_id_id || $j == $save_snmp_port_id || $j == $save_host_id ) {
@@ -924,7 +924,7 @@ function mactrack_device_edit() {
 	form_save_button('mactrack_devices.php', 'return', 'device_id');
 }
 
-function mactrack_get_devices(&$sql_where, $rows, $apply_limits = TRUE) {
+function mactrack_get_devices(&$sql_where, $rows, $apply_limits = true) {
 	/* form the 'where' clause for our main sql query */
 	if (get_request_var('filter') != '') {
 		$sql_where = (strlen($sql_where) ? ' AND ': 'WHERE ') . "(mtd.hostname like '%" . get_request_var('filter') . "%'

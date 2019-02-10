@@ -76,7 +76,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 	   .1.3.6.1.2.1.31.1.1.1.18
 	   IF-MIB::ifAlias.<index> = alias
 	 */
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, TRUE, TRUE);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, true);
 
 	mactrack_debug("ifInterfaces assembly complete.");
 

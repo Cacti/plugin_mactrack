@@ -37,7 +37,7 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 	global $debug;
 
 	/* initialize variables */
-	$debug    = FALSE;
+	$debug    = false;
 	$engine   = 'InnoDB';
 	$days     = 30;
 
@@ -57,7 +57,7 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 			switch ($arg) {
 				case '-d':
 				case '--debug':
-					$debug = TRUE;
+					$debug = true;
 					break;
 				case '--days':
 					$days = $value;
