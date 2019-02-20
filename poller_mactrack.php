@@ -176,15 +176,8 @@ if (read_config_option('mt_collection_timing') == 'disabled') {
 			}
 
 			/* set to detect if the user cleared the time between polling cycles */
-			db_execute_prepared('REPLACE INTO settings
-				(name, value) VALUES
-				("mt_prev_base_time", ?)',
-				array($base_start_time));
-
-			db_execute_prepared('REPLACE INTO settings
-				(name, value) VALUES
-				("mt_prev_db_maint_time", ?)',
-				array($database_maint_time));
+			set_config_option('mt_prev_base_time', $base_start_time);
+			set_config_option('mt_prev_db_maint_time', $database_maint_time);
 
 			/* determine the next start time */
 			$current_time = strtotime('now');
@@ -229,10 +222,7 @@ if (read_config_option('mt_collection_timing') == 'disabled') {
 				/* take time and log performance data */
 				$start = microtime(true);
 
-				db_execute_prepared('REPLACE INTO settings
-					(name, value) VALUES
-					("mt_last_run_time", ?)',
-					array($current_time));
+				set_config_option('mt_last_run_time', $current_time);
 
 				collect_mactrack_data($start, $site_id);
 				log_mactrack_statistics('collect');
@@ -242,10 +232,7 @@ if (read_config_option('mt_collection_timing') == 'disabled') {
 				/* take time and log performance data */
 				$start = microtime(true);
 
-				db_execute_prepared('REPLACE INTO settings
-					(name, value) VALUES
-					("mt_last_db_maint_time", ?)',
-					array($current_time));
+				set_config_option('mt_last_db_maint_time', $current_time);
 
 				perform_mactrack_db_maint();
 				log_mactrack_statistics('maint');
@@ -397,10 +384,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 	/* save the scan date information */
 	$scan_date = date('Y-m-d H:i:s');
 	if ($site_id == 0) {
-		db_execute_prepared("REPLACE INTO settings
-			(name, value) VALUES
-			('mt_scan_date', ?)",
-			array($scan_date));
+		set_config_option('mt_scan_date', $scan_date);
 	}
 
 	/* just in case we've run too long */
@@ -550,12 +534,12 @@ function collect_mactrack_data($start, $site_id = 0) {
 				db_process_remove('-1');
 				break;
 			} else {
-				db_execute("REPLACE INTO settings SET name='mactrack_process_status', value='Total:$total_devices Completed:$j'");
+				set_config_option('mactrack_process_status', "Total:$total_devices Completed:$j");
 			}
 		}
 
 		/* wait for last process to exit */
-		$processes_running = db_fetch_cell('SELECT count(*) FROM mac_track_processes WHERE device_id > 0');
+		$processes_running = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes WHERE device_id > 0');
 		while (($processes_running > 0) && (!$exit_mactrack)) {
 			$processes_running = db_fetch_cell('SELECT count(*)
 				FROM mac_track_processes
@@ -931,9 +915,13 @@ function log_mactrack_statistics($type = 'collect') {
 
 	/* let's get the number of devices */
 	if (is_numeric($site_id)) {
-		$devices = db_fetch_cell_prepared('SELECT Count(*) FROM mac_track_devices WHERE site_id = ?', array($site_id));
+		$devices = db_fetch_cell_prepared('SELECT COUNT(*)
+			FROM mac_track_devices
+			WHERE site_id = ?',
+			array($site_id));
 	} else {
-		$devices = db_fetch_cell('SELECT Count(*) FROM mac_track_devices');
+		$devices = db_fetch_cell('SELECT COUNT(*)
+			FROM mac_track_devices');
 	}
 
 	$concurrent_processes = read_config_option('mt_processes');
@@ -951,10 +939,7 @@ function log_mactrack_statistics($type = 'collect') {
 			$devices);
 
 		/* log to the database */
-		db_execute_prepared('REPLACE INTO settings
-			(name,value) VALUES
-			("stats_mactrack", ?)',
-			array($cacti_stats));
+		set_config_option('stats_mactrack', $cacti_stats);
 
 		/* log to the logfile */
 		cacti_log('MACTRACK STATS: ' . $cacti_stats, true, 'SYSTEM');
@@ -962,10 +947,7 @@ function log_mactrack_statistics($type = 'collect') {
 		$cacti_stats = sprintf('Time:%01.4f', round($end-$start,4));
 
 		/* log to the database */
-		db_execute('REPLACE INTO settings
-			(name,value) VALUES
-			("stats_mactrack_maint", ?)',
-			array($cacti_stats));
+		set_config_option('stats_mactrack_maint', $cacti_stats);
 
 		/* log to the logfile */
 		cacti_log('MACTRACK MAINT STATS: ' . $cacti_stats, true, 'SYSTEM');
