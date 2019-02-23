@@ -116,12 +116,13 @@ if (read_config_option('mt_collection_timing') == 'disabled') {
 } else {
 	/* for manual scans, verify if we should run or not */
 	$running_processes = db_fetch_cell('SELECT count(*) FROM mac_track_processes');
+
 	if ($running_processes) {
 		$start_date = db_fetch_cell('SELECT MIN(start_date) FROM mac_track_processes');
 
-		if (strtotime($start_date) > (time() - $max_run_duration) && !$forcerun) {
-			mactrack_debug('ERROR: Can not start MAC Tracking process.  There is already one in progress');
-			exit;
+		if (time() < (strtotime($start_date) + $max_run_duration) && !$forcerun) {
+			echo "NOTE: Device Tracking currently running and max run duration not eclipsed.\n";
+			exit(0);
 		} elseif ($forcerun) {
 			mactrack_debug('WARNING: Forcing Collection although Collection Appears in Process', true, 'MACTRACK');
 			db_execute('TRUNCATE mac_track_processes');
