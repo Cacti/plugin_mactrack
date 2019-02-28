@@ -345,7 +345,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 
 	if (cacti_sizeof($vlan_ids)) {
 		foreach ($vlan_ids as $vlan_number => $vlanStatus) {
-			$vlanName = $vlan_names[$vlan_number];
+			$vlanName = @$vlan_names[$vlan_number];
 
 			if ($vlanStatus == 1) { /* vlan is operatinal */
 				switch ($vlan_number) {
