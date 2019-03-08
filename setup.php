@@ -541,7 +541,7 @@ function mactrack_config_settings() {
 					'sites' => __('Sites', 'mactrack'),
 					'devices' => __('Devices', 'mactrack'),
 					'ips' => __('IP Addresses', 'mactrack'),
-					'macs' => __('Max Addresses', 'mactrack'),
+					'macs' => __('Mac Addresses', 'mactrack'),
 					'interfaces' => __('Interfaces', 'mactrack'),
 					'dot1x' => __('dot1x Deta', 'mactrack')
 				)
