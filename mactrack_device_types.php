@@ -164,18 +164,18 @@ function api_mactrack_device_type_save($device_type_id, $description,
 	$vendor, $device_type, $sysDescr_match, $sysObjectID_match, $scanning_function,
 	$ip_scanning_function, $dot1x_scanning_function, $serial_number_oid, $lowPort, $highPort) {
 
-	$save['device_type_id']       = $device_type_id;
-	$save['description']          = form_input_validate($description, 'description', '', false, 3);
-	$save['vendor']               = $vendor;
-	$save['device_type']          = $device_type;
-	$save['sysDescr_match']       = form_input_validate($sysDescr_match, 'sysDescr_match', '', true, 3);
-	$save['sysObjectID_match']    = form_input_validate($sysObjectID_match, 'sysObjectID_match', '', true, 3);
-	$save['serial_number_oid']    = form_input_validate($serial_number_oid, 'serial_number_oid', '', true, 3);
-	$save['scanning_function']    = form_input_validate($scanning_function, 'scanning_function', '', true, 3);
-	$save['ip_scanning_function'] = form_input_validate($ip_scanning_function, 'ip_scanning_function', '', true, 3);
+	$save['device_type_id']          = $device_type_id;
+	$save['description']             = form_input_validate($description, 'description', '', false, 3);
+	$save['vendor']                  = $vendor;
+	$save['device_type']             = $device_type;
+	$save['sysDescr_match']          = form_input_validate($sysDescr_match, 'sysDescr_match', '', true, 3);
+	$save['sysObjectID_match']       = form_input_validate($sysObjectID_match, 'sysObjectID_match', '', true, 3);
+	$save['serial_number_oid']       = form_input_validate($serial_number_oid, 'serial_number_oid', '', true, 3);
+	$save['scanning_function']       = form_input_validate($scanning_function, 'scanning_function', '', true, 3);
+	$save['ip_scanning_function']    = form_input_validate($ip_scanning_function, 'ip_scanning_function', '', true, 3);
 	$save['dot1x_scanning_function'] = form_input_validate($dot1x_scanning_function, 'dot1x_scanning_function', '', true, 3);
-	$save['lowPort']              = form_input_validate($lowPort, 'lowPort', '', true, 3);
-	$save['highPort']             = form_input_validate($highPort, 'highPort', '', true, 3);
+	$save['lowPort']                 = form_input_validate($lowPort, 'lowPort', '', true, 3);
+	$save['highPort']                = form_input_validate($highPort, 'highPort', '', true, 3);
 
 	$device_type_id = 0;
 	if (!is_error_message()) {
@@ -931,14 +931,14 @@ function mactrack_device_type() {
 	form_start('mactrack_device_types.php', 'chk');
 
 	$display_text = array(
-		'description'          => array(__('Device Type Description', 'mactrack'), 'ASC'),
-		'vendor'               => array(__('Devices', 'mactrack'), 'DESC'),
-		'device_type'          => array(__('Device Type', 'mactrack'), 'DESC'),
-		'scanning_function'    => array(__('Port Scanner', 'mactrack'), 'ASC'),
-		'ip_scanning_function' => array(__('IP Scanner', 'mactrack'), 'ASC'),
+		'description'             => array(__('Device Type Description', 'mactrack'), 'ASC'),
+		'vendor'                  => array(__('Devices', 'mactrack'), 'DESC'),
+		'device_type'             => array(__('Device Type', 'mactrack'), 'DESC'),
+		'scanning_function'       => array(__('Port Scanner', 'mactrack'), 'ASC'),
+		'ip_scanning_function'    => array(__('IP Scanner', 'mactrack'), 'ASC'),
 		'dot1x_scanning_function' => array(__('Dot1x Scanner', 'mactrack'), 'ASC'),
-		'sysDescr_match'       => array(__('sysDescription Match', 'mactrack'), 'DESC'),
-		'sysObjectID_match'    => array(__('Vendor OID Match', 'mactrack'), 'DESC')
+		'sysDescr_match'          => array(__('sysDescription Match', 'mactrack'), 'DESC'),
+		'sysObjectID_match'       => array(__('Vendor OID Match', 'mactrack'), 'DESC')
 	);
 
 	$columns = sizeof($display_text) + 1;
@@ -957,9 +957,28 @@ function mactrack_device_type() {
 			form_selectable_cell('<a class="linkEditMain" href="mactrack_device_types.php?action=edit&device_type_id=' . $device_type['device_type_id'] . '">' . $device_type['description'] . '</a>', $device_type['device_type_id']);
 			form_selectable_cell($device_type['vendor'], $device_type['device_type_id']);
 			form_selectable_cell($mactrack_device_types[$device_type['device_type']], $device_type['device_type_id']);
-			form_selectable_cell($device_type['scanning_function'], $device_type['device_type_id']);
-			form_selectable_cell($device_type['ip_scanning_function'], $device_type['device_type_id']);
-			form_selectable_cell($device_type['dot1x_scanning_function'], $device_type['device_type_id']);
+
+			if (!empty($device_type['scanning_function'])) {
+				$function = $device_type['scanning_function'];
+			} else {
+				$function = __('N/A', 'mactrack');
+			}
+			form_selectable_cell($function, $device_type['device_type_id']);
+
+			if (!empty($device_type['ip_scanning_function'])) {
+				$function = $device_type['ip_scanning_function'];
+			} else {
+				$function = __('N/A', 'mactrack');
+			}
+			form_selectable_cell($function, $device_type['device_type_id']);
+
+			if (!empty($device_type['dot1x_scanning_function'])) {
+				$function = $device_type['dot1x_scanning_function'];
+			} else {
+				$function = __('N/A', 'mactrack');
+			}
+			form_selectable_cell($function, $device_type['device_type_id']);
+
 			form_selectable_cell($device_type['sysDescr_match'], $device_type['device_type_id']);
 			form_selectable_cell($device_type['sysObjectID_match'], $device_type['device_type_id']);
 			form_checkbox_cell($device_type['description'], $device_type['device_type_id']);

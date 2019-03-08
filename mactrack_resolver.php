@@ -31,6 +31,7 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 
 include('./include/cli_check.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+include_once($config['base_path'] . '/plugins/mactrack/incudes/Net_DNS2/Net/DNS2.php');
 
 /* get the mactrack polling cycle */
 $max_run_duration = read_config_option('mt_collection_timing');
@@ -108,6 +109,17 @@ if ($site_id != '') {
 	$sql_where = '';
 }
 
+$nameservers = array();
+if ($dns_primary != '') {
+	$nameservers[] = $dns_primary;
+}
+
+if ($dns_secondary != '') {
+	$nameservers[] = $dns_secondary;
+}
+
+$resolver = new Net_DNS2_Resolver(array('nameservers' => $nameservers));
+
 /* loop until you are it */
 while (1) {
 	$processes_running = db_fetch_cell('SELECT COUNT(*)
@@ -141,35 +153,17 @@ while (1) {
 
 		foreach($unresolved_ips as $key => $unresolved_ip) {
 			$dns_hostname = $unresolved_ip['ip_address'];
-			$success = true;
-			if (!$primary_down) {
-				$dns_hostname = mactrack_get_dns_from_ip($unresolved_ip['ip_address'], $dns_primary, $timeout);
-				if ($dns_hostname == 'timed_out') {
-					$dns_hostname == $unresolved_ip['ip_address'];
-					$primary_down = true;
-					$success = false;
-				}
-			}
 
-			if ((!$success) && (!$secondary_down)) {
-				$dns_hostname = mactrack_get_dns_from_ip($unresolved_ip['ip_address'], $dns_secondary, $timeout);
-				if ($dns_hostname == 'timed_out') {
-					$dns_hostname == $unresolved_ip['ip_address'];
-					$secondary_down = true;
-					$success = false;
-				}
-			}elseif (!$success) {
-				$dns_hostname == $unresolved_ip['ip_address'];
-			}
-
-			if (($primary_down) && ($secondary_down)) {
-				mactrack_debug('ERROR: Both Primary and Seconary DNS timed out, please increase timeout. Placing both DNS servers back online now.');
-				$secondary_down = false;
-				$primary_down = false;
+			try {
+				$resp = $resolver->query($dns_hostname, 'PTR');
+				$dns_hostname = $resp->answer[0]->ptrdname;
+			} catch(Net_DNS2_Exception $e) {
+				mactrack_debug('Unable to resolve IP Address: ' . $dns_hostname);
 			}
 
 			$unresolved_ips[$key]['dns_hostname'] = $dns_hostname;
 		}
+
 		mactrack_debug('DNS host association complete.');
 
 		/* output updated details to database */

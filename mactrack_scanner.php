@@ -193,7 +193,7 @@ if (valid_snmp_device($device)) {
 			}
 
 			if (isset($device_type['dot1x_scanning_function'])) {
-				if (strlen($device_type['dot1x_scanning_function']) > 0) {
+				if (!empty($device_type['dot1x_scanning_function'])) {
 					if (function_exists($device_type['dot1x_scanning_function'])) {
 						mactrack_debug('802.1x Scanning function is ' . $device_type['dot1x_scanning_function']);
 						$device['device_type_id'] = $device_type['device_type_id'];
