@@ -25,13 +25,9 @@
 $dir = dirname(__FILE__);
 chdir($dir);
 
-if (substr_count(strtolower($dir), 'mactrack')) {
-	chdir('../../');
-}
-
-include('./include/cli_check.php');
+include('../../include/cli_check.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
-include_once($config['base_path'] . '/plugins/mactrack/incudes/Net_DNS2/Net/DNS2.php');
+include_once($config['base_path'] . '/plugins/mactrack/Net/DNS2.php');
 
 /* get the mactrack polling cycle */
 $max_run_duration = read_config_option('mt_collection_timing');
@@ -97,6 +93,7 @@ if (read_config_option('mt_reverse_dns') == 'on') {
 	$primary_down   = false;
 	$secondary_down = false;
 } else {
+	mactrack_debug('Exiting due to Reverse DNS being disabled');
 	exit;
 }
 
