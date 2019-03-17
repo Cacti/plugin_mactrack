@@ -5,91 +5,102 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-18 16:02+1300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: tr-TR\n"
+"PO-Revision-Date: 2019-03-17 10:40-0400\n"
+"Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: ../lib/mactrack_functions.php:2219
+#, fuzzy
 msgid "Device Tracking OUI Database Import Results"
-msgstr ""
+msgstr "Cihaz Takibi OUI Veritabanı İthalat Sonuçları"
 
 #: ../lib/mactrack_functions.php:2220
+#, fuzzy
 msgid "Getting OUI Database from IEEE"
-msgstr ""
+msgstr "IEEE'den OUI Veritabanını Alma"
 
 #: ../lib/mactrack_functions.php:2222
+#, fuzzy
 msgid "Getting OUI Database from the IEEE"
-msgstr ""
+msgstr "IEEE'den OUI Veritabanını Alma"
 
 #: ../lib/mactrack_functions.php:2230
+#, fuzzy
 msgid "OUI Database Download from IEEE Complete"
-msgstr ""
+msgstr "IEEE Complete'ten OUI Veritabanını İndirin"
 
 #: ../lib/mactrack_functions.php:2232
+#, fuzzy
 msgid "OUI Database Download from IEEE FAILED"
-msgstr ""
+msgstr "OEE Veritabanını IEEE FAILED sitesinden indirin"
 
 #: ../lib/mactrack_functions.php:2325
-#, php-format
+#, fuzzy, php-format
 msgid "There were '%d' Entries Added/Updated in the database."
-msgstr ""
+msgstr "Veritabanında '% d' Eklenmiş / Güncellenmiş Girişler vardı."
 
 #: ../lib/mactrack_functions.php:2327
-#, php-format
+#, fuzzy, php-format
 msgid "There were '%d' Records Removed from the database."
-msgstr ""
+msgstr "Veritabanından kaldırılan '% d' Kayıtları vardı."
 
 #: ../lib/mactrack_functions.php:2349
+#, fuzzy
 msgid "atifIndexes data collection complete"
-msgstr ""
+msgstr "atifIndexes veri toplama işlemi tamamlandı"
 
 #: ../lib/mactrack_functions.php:2367
+#, fuzzy
 msgid "atPhysAddress data collection complete"
-msgstr ""
+msgstr "atPhysAddress veri toplama işlemi tamamlandı"
 
 #: ../lib/mactrack_functions.php:2375
+#, fuzzy
 msgid "atNetAddress data collection complete"
-msgstr ""
+msgstr "atNetAdresi veri toplama işlemi tamamlandı"
 
 #: ../lib/mactrack_functions.php:2388
+#, fuzzy
 msgid "atEntries assembly complete."
-msgstr ""
+msgstr "atEntries montajı tamamlandı."
 
 #: ../lib/mactrack_functions.php:2414
-#, php-format
+#, fuzzy, php-format
 msgid "HOST: %s, IP address information collection complete"
-msgstr ""
+msgstr "HOST: %s, IP adresi bilgisi toplama işlemi tamamlandı"
 
 #: ../lib/mactrack_functions.php:2489 ../lib/mactrack_functions.php:2492
+#, fuzzy
 msgid "Since Restart"
-msgstr ""
+msgstr "Yeniden Başlatıldığından beri"
 
 #: ../lib/mactrack_functions.php:2598
-#, php-format
+#, fuzzy, php-format
 msgid "Device Rescan '%s'"
-msgstr ""
+msgstr "' %s' Aygıti Yeniden Taraması"
 
 #: ../lib/mactrack_functions.php:2633
-#, php-format
+#, fuzzy, php-format
 msgid "Site scan '%s'"
-msgstr ""
+msgstr "Site taraması ' %s'"
 
 #: ../lib/mactrack_functions.php:2666
-#, php-format
+#, fuzzy, php-format
 msgid "Device Enable '%s'"
-msgstr ""
+msgstr "' %s' Aygıtını Etkinleştir"
 
 #: ../lib/mactrack_functions.php:2685
-#, php-format
+#, fuzzy, php-format
 msgid "Device Disable '%d'"
-msgstr ""
+msgstr "'% D' Aygıtını Devre Dışı Bırak"
 
 #: ../lib/mactrack_functions.php:2790 ../lib/mactrack_functions.php:2815
 #: ../lib/mactrack_functions.php:2816 ../lib/mactrack_functions.php:2892
@@ -107,109 +118,125 @@ msgstr ""
 #: ../mactrack_view_sites.php:351 ../mactrack_view_sites.php:352
 #: ../mactrack_view_sites.php:353 ../mactrack_view_sites.php:354
 #: ../mactrack_view_sites.php:355 ../setup.php:1008
+#, fuzzy
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: ../lib/mactrack_functions.php:2792 ../setup.php:1278
-#, php-format
+#, fuzzy, php-format
 msgid "%d Minutes"
-msgstr ""
+msgstr "%d Dakika"
 
 #: ../lib/mactrack_functions.php:2796
-#, php-format
+#, fuzzy, php-format
 msgid "%d Hours"
-msgstr ""
+msgstr "%d Saat"
 
 #: ../lib/mactrack_functions.php:2800 ../setup.php:1338 ../setup.php:1339
 #: ../setup.php:1340 ../setup.php:1341 ../setup.php:1342
-#, php-format
+#, fuzzy, php-format
 msgid "%d Days"
-msgstr ""
+msgstr "%d Gün"
 
 #: ../lib/mactrack_functions.php:2803
-#, php-format
+#, fuzzy, php-format
 msgid "%d Weeks"
-msgstr ""
+msgstr "% d Hafta"
 
 #: ../lib/mactrack_functions.php:2814
+#, fuzzy
 msgid "Not Recorded"
-msgstr ""
+msgstr "Kaydedilmedi"
 
 #: ../lib/mactrack_functions.php:2833
-#, php-format
+#, fuzzy, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %f"
-msgstr ""
+msgstr "Durum: Çalışıyor, İşlemler:% d, İlerleme: %s, Son Çalışma Zamanı:% f"
 
 #: ../lib/mactrack_functions.php:2835
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "Status: Idle, LastRuntime: %f seconds, Processes: %d processes, Devices: %d, "
 "Next Run Time: %s"
 msgstr ""
+"Durum: Boşta, Son Çalışma Zamanı:% f saniye, İşlemler:% d işlemler, Cihazlar:"
+"% d, Sonraki Çalışma Süresi: %s"
 
 #: ../lib/mactrack_functions.php:2843
-#, php-format
+#, fuzzy, php-format
 msgid "Scanning Rate: Every %s"
-msgstr ""
+msgstr "Tarama Hızı: Her %s"
 
 #: ../lib/mactrack_functions.php:2873
+#, fuzzy
 msgid "View Interfaces"
-msgstr ""
+msgstr "Arayüzleri Görüntüle"
 
 #: ../lib/mactrack_functions.php:2878
+#, fuzzy
 msgid "Rescan Device"
-msgstr ""
+msgstr "Cihazı Yeniden Tara"
 
 #: ../lib/mactrack_functions.php:2891 ../mactrack_devices.php:1108
 #: ../mactrack_view_devices.php:416
+#, fuzzy
 msgid "Not Detected"
-msgstr ""
+msgstr "Algılanmadı"
 
 #: ../lib/mactrack_functions.php:3012 ../lib/mactrack_functions.php:3068
 #: ../mactrack_sites.php:431 ../mactrack_sites.php:477
 #: ../mactrack_view_sites.php:258 ../mactrack_view_sites.php:322
 #: ../setup.php:1363
+#, fuzzy
 msgid "Sites"
-msgstr ""
+msgstr "Siteler"
 
 #: ../lib/mactrack_functions.php:3013 ../mactrack_devices.php:1016
 #: ../mactrack_devices.php:1162 ../mactrack_sites.php:421
 #: ../mactrack_utilities.php:277 ../mactrack_view_devices.php:282
 #: ../mactrack_view_devices.php:467 ../mactrack_view_sites.php:249
 #: ../setup.php:1364 ../mactrack_device_types.php:931
+#, fuzzy
 msgid "Devices"
-msgstr ""
+msgstr "Cihazlar"
 
 #: ../lib/mactrack_functions.php:3014
+#, fuzzy
 msgid "IP Ranges"
-msgstr ""
+msgstr "IP Aralıkları"
 
 #: ../lib/mactrack_functions.php:3015
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "IP Adresi"
 
 #: ../lib/mactrack_functions.php:3016 ../setup.php:1873
+#, fuzzy
 msgid "MAC Address"
-msgstr ""
+msgstr "Mac adresi"
 
 #: ../lib/mactrack_functions.php:3017 ../mactrack_view_interfaces.php:293
 #: ../mactrack_view_interfaces.php:512
+#, fuzzy
 msgid "Interfaces"
-msgstr ""
+msgstr "接口"
 
 #: ../lib/mactrack_functions.php:3018
+#, fuzzy
 msgid "Dot1x"
-msgstr ""
+msgstr "dot1x"
 
 #: ../lib/mactrack_functions.php:3019 ../mactrack_view_graphs.php:154
+#, fuzzy
 msgid "Graphs"
-msgstr ""
+msgstr "Grafikler"
 
 #: ../lib/mactrack_functions.php:3048 ../mactrack_devices.php:1156
 #: ../mactrack_view_devices.php:461 ../setup.php:1299
 #: ../mactrack_device_types.php:453
+#, fuzzy
 msgid "Unknown"
-msgstr ""
+msgstr "Bilinmeyen"
 
 #: ../lib/mactrack_functions.php:3062 ../mactrack_devices.php:1057
 #: ../mactrack_macauth.php:365 ../mactrack_macwatch.php:368
@@ -217,434 +244,550 @@ msgstr ""
 #: ../mactrack_view_arp.php:406 ../mactrack_view_devices.php:366
 #: ../mactrack_view_dot1x.php:504 ../mactrack_view_interfaces.php:530
 #: ../mactrack_view_macs.php:911 ../mactrack_device_types.php:989
+#, fuzzy
 msgid "Search"
-msgstr ""
+msgstr "Arama"
 
 #: ../lib/mactrack_functions.php:3072 ../mactrack_devices.php:1166
 #: ../mactrack_macauth.php:375 ../mactrack_macwatch.php:378
 #: ../mactrack_snmp.php:571 ../mactrack_vendormacs.php:209
 #: ../mactrack_view_devices.php:471 ../mactrack_view_ips.php:277
 #: ../setup.php:1311 ../mactrack_device_types.php:999
+#, fuzzy
 msgid "Default"
-msgstr ""
+msgstr "Varsayılan"
 
 #: ../lib/mactrack_functions.php:3086
+#, fuzzy
 msgid "Show Device Details"
-msgstr ""
+msgstr "Cihaz Detaylarını Göster"
 
 #: ../lib/mactrack_functions.php:3089
+#, fuzzy
 msgid "Go"
-msgstr ""
+msgstr "Git"
 
 #: ../lib/mactrack_functions.php:3092
+#, fuzzy
 msgid "Clear"
-msgstr ""
+msgstr "Temizle"
 
 #: ../lib/mactrack_functions.php:3095
+#, fuzzy
 msgid "Export"
-msgstr ""
+msgstr "Dışa Aktar"
 
 #: ../lib/mactrack_functions.php:3104 ../mactrack_devices.php:1063
 #: ../mactrack_view_arp.php:412 ../mactrack_view_devices.php:372
 #: ../mactrack_view_dot1x.php:510 ../mactrack_view_interfaces.php:399
 #: ../mactrack_view_ips.php:257 ../mactrack_view_macs.php:917
+#, fuzzy
 msgid "Site"
-msgstr ""
+msgstr "Site"
 
 #: ../lib/mactrack_functions.php:3108 ../lib/mactrack_functions.php:3124
 #: ../mactrack_devices.php:1096 ../mactrack_devices.php:1107
 #: ../mactrack_devices.php:1152 ../mactrack_view_devices.php:404
 #: ../mactrack_view_devices.php:415 ../mactrack_view_devices.php:457
 #: ../mactrack_view_ips.php:261
+#, fuzzy
 msgid "Any"
-msgstr ""
+msgstr "Herhangi"
 
 #: ../lib/mactrack_functions.php:3120 ../mactrack_devices.php:1103
 #: ../mactrack_view_devices.php:411
+#, fuzzy
 msgid "SubType"
-msgstr ""
+msgstr "SubType"
 
 #: ../mactrack_actions.php:211
-#, php-format
+#, fuzzy, php-format
 msgid "Device Tracking Device: (%s) successfully updated"
-msgstr ""
+msgstr "Cihaz İzleme Cihazı: ( %s) başarıyla güncellendi"
 
 #: ../mactrack_actions.php:224
+#, fuzzy
 msgid "Import into Device Tracking Database"
-msgstr ""
+msgstr "Aygıt İzleme Veritabanına İçe Aktar"
 
 #: ../mactrack_actions.php:239
+#, fuzzy
 msgid ""
 "Click 'Continue' to import the following Device to Device Tracking?  Please "
 "specify additional Device Tracking device options as given below."
 msgstr ""
+"Aşağıdaki Cihazı Cihaz Takibine Almak için 'Devam Et'i tıklayın. Lütfen "
+"aşağıda gösterildiği gibi ek Cihaz İzleme cihazı seçeneklerini belirtin."
 
 #: ../mactrack_actions.php:263
+#, fuzzy
 msgid ""
 "We will use these devices SNMP options for the Device Tracking device as "
 "well."
 msgstr ""
+"Bu cihazların SNMP seçeneklerini Cihaz İzleme cihazı için de kullanacağız."
 
 #: ../mactrack_devices.php:31 ../mactrack_macauth.php:30
-#: ../mactrack_macwatch.php:30 ../mactrack_sites.php:32
-#: ../mactrack_snmp.php:30 ../mactrack_view_macs.php:39
-#: ../mactrack_device_types.php:69
+#: ../mactrack_macwatch.php:30 ../mactrack_sites.php:32 ../mactrack_snmp.php:30
+#: ../mactrack_view_macs.php:39 ../mactrack_device_types.php:69
+#, fuzzy
 msgid "Delete"
-msgstr ""
+msgstr "Sil"
 
 #: ../mactrack_devices.php:32
+#, fuzzy
 msgid "Enable"
-msgstr ""
+msgstr "Etkinleştir"
 
 #: ../mactrack_devices.php:33 ../mactrack_macwatch.php:31
+#, fuzzy
 msgid "Disable"
-msgstr ""
+msgstr "Devre Dışı"
 
 #: ../mactrack_devices.php:34
+#, fuzzy
 msgid "Change SNMP Options"
-msgstr ""
+msgstr "SNMP Seçeneklerini Değiştir"
 
 #: ../mactrack_devices.php:35
+#, fuzzy
 msgid "Change Device Port Values"
-msgstr ""
+msgstr "Aygıt Bağlantı Noktası Değerlerini Değiştirme"
 
 #: ../mactrack_devices.php:36
+#, fuzzy
 msgid "Connect to Cacti Host via Hostname"
-msgstr ""
+msgstr "Ana bilgisayar adı üzerinden Cacti Host'a bağlanın"
 
 #: ../mactrack_devices.php:37
+#, fuzzy
 msgid "Copy SNMP Settings from Cacti Host"
-msgstr ""
+msgstr "SNMP Ayarlarını Cacti Host'tan Kopyala"
 
 #: ../mactrack_devices.php:237
+#, fuzzy
 msgid "You must select at least one device."
-msgstr ""
+msgstr "En az bir cihaz seçmelisiniz."
 
 #: ../mactrack_devices.php:245
+#, fuzzy
 msgid "Click 'Continue' to enable the following devices."
-msgstr ""
+msgstr "Aşağıdaki cihazları etkinleştirmek için 'Devam Et'i tıklayın."
 
 #: ../mactrack_devices.php:252
+#, fuzzy
 msgid "Click 'Continue' to disable the following devices."
-msgstr ""
+msgstr "Aşağıdaki cihazları devre dışı bırakmak için 'Devam Et'i tıklayın."
 
 #: ../mactrack_devices.php:259
+#, fuzzy
 msgid ""
 "Click 'Continue' to change SNMP parameters for the following devices, check "
 "the box next to the fields you want to update, and fill in the new value."
 msgstr ""
+"Aşağıdaki cihazların SNMP parametrelerini değiştirmek için 'Devam Et'i "
+"tıklayın, güncellemek istediğiniz alanların yanındaki kutuyu işaretleyin ve "
+"yeni değeri girin."
 
 #: ../mactrack_devices.php:289
+#, fuzzy
 msgid ""
 "Click 'Continue' to change upper or lower port parameters for the following "
 "devices, check the box next to the fields you want to update, and fill in "
 "the new value."
 msgstr ""
+"Aşağıdaki cihazların üst veya alt port parametrelerini değiştirmek için "
+"'Devam Et'i tıklayın, güncellemek istediğiniz alanların yanındaki kutuyu "
+"işaretleyin ve yeni değeri girin."
 
 #: ../mactrack_devices.php:319
+#, fuzzy
 msgid ""
 "Click 'Continue' to connect the following devices to their respective Cacti "
 "Device.  The relation will be built on equal hostnames. Description will be "
 "updated as well."
 msgstr ""
+"Aşağıdaki cihazları kendi Cacti Cihazlarına bağlamak için 'Devam Et'i "
+"tıklayın. İlişki eşit ana bilgisayar adlarına dayanacaktır. Açıklama da "
+"güncellenecektir."
 
 #: ../mactrack_devices.php:326
+#, fuzzy
 msgid ""
 "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Device "
 "Tracking Device.  All not connected Devices will silently be skipped. SNMP "
 "retries will be taken from Ping retries."
 msgstr ""
+"SNMP Ayarlarını bağlı Cacti Cihazından Cihaz İzleme Cihazına kopyalamak için "
+"'Devam Et'i tıklayın. Bağlı olmayan tüm cihazlar sessizce atlanacaktır. SNMP "
+"denemelerinden SNMP denemeleri alınacaktır."
 
 #: ../mactrack_devices.php:333
+#, fuzzy
 msgid "Click 'Continue' to delete the following Devices"
-msgstr ""
+msgstr "Aşağıdaki Cihazları silmek için 'Devam Et'i tıklayın."
 
 #: ../mactrack_devices.php:477 ../mactrack_device_types.php:478
+#, fuzzy
 msgid "Import Results"
-msgstr ""
+msgstr "İçeri Aktarma Sonuçları"
 
 #: ../mactrack_devices.php:479 ../mactrack_device_types.php:480
+#, fuzzy
 msgid "Cacti has imported the following items:"
-msgstr ""
+msgstr "Cacti aşağıdakileri ithal etti:"
 
 #: ../mactrack_devices.php:493
+#, fuzzy
 msgid "Import Device Tracking Devices"
-msgstr ""
+msgstr "Cihaz İzleme Cihazlarını İçe Aktar"
 
 #: ../mactrack_devices.php:496
+#, fuzzy
 msgid "Import Devices from Local File"
-msgstr ""
+msgstr "Aygıtları Yerel Dosyadan İçe Aktar"
 
 #: ../mactrack_devices.php:497
+#, fuzzy
 msgid ""
 "Please specify the location of the CSV file containing your device "
 "information."
-msgstr ""
+msgstr "Lütfen cihaz bilgilerinizi içeren CSV dosyasının konumunu belirtin."
 
 #: ../mactrack_devices.php:504 ../mactrack_device_types.php:502
+#, fuzzy
 msgid "Overwrite Existing Data?"
-msgstr ""
+msgstr "Mevcut Verilerin Üzerine Yazılsın mı?"
 
 #: ../mactrack_devices.php:505 ../mactrack_device_types.php:503
+#, fuzzy
 msgid ""
 "Should the import process be allowed to overwrite existing data?  Please "
 "note, this does not mean delete old row, only replace duplicate rows."
 msgstr ""
+"İçe aktarma işleminin mevcut verilerin üzerine yazmasına izin verilmeli "
+"midir? Lütfen dikkat, bu eski satırı silmek anlamına gelmez, sadece "
+"tekrarlanan satırları değiştir."
 
 #: ../mactrack_devices.php:508 ../mactrack_device_types.php:506
+#, fuzzy
 msgid "Allow Existing Rows to be Updated?"
-msgstr ""
+msgstr "Mevcut Satırların Güncellenmesine İzin Verilsin mi?"
 
 #: ../mactrack_devices.php:513 ../mactrack_device_types.php:511
+#, fuzzy
 msgid "Required File Format Notes"
-msgstr ""
+msgstr "Gerekli Dosya Biçimi Notları"
 
 #: ../mactrack_devices.php:516 ../mactrack_device_types.php:514
+#, fuzzy
 msgid "The file must contain a header row with the following column headings."
 msgstr ""
+"Dosya, aşağıdaki sütun başlıklarına sahip bir başlık satırı içermelidir."
 
 #: ../mactrack_devices.php:518
+#, fuzzy
 msgid " - The SiteID known to Device Tracking for this device"
-msgstr ""
+msgstr "- Bu cihaz için Cihaz Takibi olarak bilinen SiteID"
 
 #: ../mactrack_devices.php:519
+#, fuzzy
 msgid " - A simple name for the device.  For example Cisco 6509 Switch"
-msgstr ""
+msgstr "- Cihaz için basit bir isim. Örneğin Cisco 6509 Switch"
 
 #: ../mactrack_devices.php:520
+#, fuzzy
 msgid " - The IP Address or DNS Name for the device"
-msgstr ""
+msgstr "- Cihazın IP Adresi veya DNS Adı"
 
 #: ../mactrack_devices.php:521
+#, fuzzy
 msgid ""
 " - More detailed information about the device, including location, "
 "environmental conditions, etc."
 msgstr ""
+"- Konum, çevre koşulları vb. Dahil cihaz hakkında daha ayrıntılı bilgi."
 
 #: ../mactrack_devices.php:522
+#, fuzzy
 msgid " - A list of ports that should not be scanned for user devices"
 msgstr ""
+"- Kullanıcı cihazlarına taranmaması gereken bağlantı noktalarının listesi"
 
 #: ../mactrack_devices.php:523
+#, fuzzy
 msgid ""
 " - Redundant information indicating the intended device type.  See below for "
 "valid values."
 msgstr ""
+"- Amaçlanan cihaz tipini belirten fazla bilgi. Geçerli değerler için aşağıya "
+"bakın."
 
 #: ../mactrack_devices.php:524
+#, fuzzy
 msgid " - Id of a set of SNMP options"
-msgstr ""
+msgstr "- Bir dizi SNMP seçeneğinin kimliği"
 
 #: ../mactrack_devices.php:525
+#, fuzzy
 msgid " - The current snmp read string for the device"
-msgstr ""
+msgstr "- Cihaz için geçerli snmp okuma dizesi"
 
 #: ../mactrack_devices.php:526
+#, fuzzy
 msgid ""
 " - The snmp version you wish to scan this device with.  Valid values are 1, "
 "2 and 3"
 msgstr ""
+"- Bu cihazı taramak istediğiniz snmp sürümü. Geçerli değerler 1, 2 ve 3'tür."
 
 #: ../mactrack_devices.php:527
+#, fuzzy
 msgid " - The UDP port that the snmp agent is running on"
-msgstr ""
+msgstr "- Snmp aracısının çalıştığı UDP bağlantı noktası"
 
 #: ../mactrack_devices.php:528
+#, fuzzy
 msgid ""
 " - The timeout in milliseconds to wait for an snmp response before trying "
 "again"
 msgstr ""
+"- Milisaniye cinsinden zaman aşımı, tekrar denemeden önce bir snmp yanıtı "
+"beklemek için"
 
 #: ../mactrack_devices.php:529
+#, fuzzy
 msgid " - The number of times to retry a snmp request before giving up"
-msgstr ""
+msgstr "- Vazgeçmeden önce bir snmp isteğinin tekrar denenmesinin sayısı"
 
 #: ../mactrack_devices.php:530
+#, fuzzy
 msgid ""
 " - Specified the number of OID's that can be obtained in a single SNMP Get "
 "request"
-msgstr ""
+msgstr "- Tek bir SNMP İsteğinde alınabilecek OID sayısını belirledi"
 
 #: ../mactrack_devices.php:531
+#, fuzzy
 msgid " - SNMP V3: SNMP username"
-msgstr ""
+msgstr "- SNMP V3: SNMP kullanıcı adı"
 
 #: ../mactrack_devices.php:532
+#, fuzzy
 msgid " - SNMP V3: SNMP password"
-msgstr ""
+msgstr "- SNMP V3: SNMP şifresi"
 
 #: ../mactrack_devices.php:533
+#, fuzzy
 msgid " - SNMP V3: SNMP authentication protocol"
-msgstr ""
+msgstr "- SNMP V3: SNMP kimlik doğrulama protokolü"
 
 #: ../mactrack_devices.php:534
+#, fuzzy
 msgid " - SNMP V3: SNMP privacy passphrase"
-msgstr ""
+msgstr "- SNMP V3: SNMP gizlilik şifresi"
 
 #: ../mactrack_devices.php:535
+#, fuzzy
 msgid " - SNMP V3: SNMP privacy protocol"
-msgstr ""
+msgstr "- SNMP V3: SNMP gizlilik protokolü"
 
 #: ../mactrack_devices.php:536
+#, fuzzy
 msgid " - SNMP V3: SNMP context"
-msgstr ""
+msgstr "- SNMP V3: SNMP içeriği"
 
 #: ../mactrack_devices.php:537
+#, fuzzy
 msgid " - SNMP V3: SNMP engine id"
-msgstr ""
+msgstr "- SNMP V3: SNMP motor kimliği"
 
 #: ../mactrack_devices.php:539 ../mactrack_device_types.php:528
+#, fuzzy
 msgid ""
 "The primary key for this table is a combination of the following three "
 "fields:"
-msgstr ""
+msgstr "Bu tablonun birincil anahtarı, aşağıdaki üç alanın birleşimidir:"
 
 #: ../mactrack_devices.php:543
+#, fuzzy
 msgid ""
 "Therefore, if you attempt to import duplicate devices, only the data you "
 "specify will be updated."
 msgstr ""
+"Bu nedenle, yinelenen aygıtları içe aktarmayı denerseniz, yalnızca "
+"belirttiğiniz veriler güncellenir."
 
 #: ../mactrack_devices.php:545 ../mactrack_device_types.php:534
+#, fuzzy
 msgid " is an integer field and must be one of the following:"
-msgstr ""
+msgstr "tamsayı bir alandır ve aşağıdakilerden biri olmalıdır:"
 
 #: ../mactrack_devices.php:547 ../mactrack_device_types.php:536
+#, fuzzy
 msgid "1 - Switch/Hub"
-msgstr ""
+msgstr "1 - Anahtar / Hub"
 
 #: ../mactrack_devices.php:548 ../mactrack_device_types.php:537
+#, fuzzy
 msgid "2 - Switch/Router"
-msgstr ""
+msgstr "2 - Anahtar / Yönlendirici"
 
 #: ../mactrack_devices.php:549 ../mactrack_device_types.php:538
+#, fuzzy
 msgid "3 - Router"
-msgstr ""
+msgstr "3 - Yönlendirici"
 
 #: ../mactrack_devices.php:708
-#, php-format
+#, fuzzy, php-format
 msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
-msgstr ""
+msgstr "HEADER LINE İŞLENMİŞ TAMAM: <br> Sütun bulundu nerede: %s"
 
 #: ../mactrack_devices.php:710 ../mactrack_device_types.php:709
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found "
 "where: %s"
 msgstr ""
+"HEADER LINE İŞLEME HATASI: Zorunlu alan eksik <br> Sütun bulundu nerede: %s"
 
 #: ../mactrack_devices.php:794 ../mactrack_devices.php:809
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP "
 "Port: %s"
 msgstr ""
+"INSERT BAŞARI: Ana Bilgisayar Adı: Site Kimliği: %s, Cihaz Adı: %s, Ana "
+"Bilgisayar Adı %s, SNMP Bağlantı Noktası: %s"
 
 #: ../mactrack_devices.php:796 ../mactrack_devices.php:811
-#, php-format
+#, fuzzy, php-format
 msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
 msgstr ""
+"INSERT FAILED: Site Kimliği: %s, Aygıt Adı: %s, Ana Bilgisayar Adı %s, SNMP "
+"Bağlantı Noktası: %s"
 
 #: ../mactrack_devices.php:803
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP "
 "Port: %s"
 msgstr ""
+"INSERT SKIPPED, EXISTING: SiteID: %s, Aygıt Adı: %s, Ana Bilgisayar Adı %s, "
+"SNMP Bağlantı Noktası: %s"
 
 #: ../mactrack_devices.php:838
-#, php-format
+#, fuzzy, php-format
 msgid "Device Tracking Devices [edit: %s]"
-msgstr ""
+msgstr "Cihaz İzleme Cihazları [değiştir: %s]"
 
 #: ../mactrack_devices.php:842
+#, fuzzy
 msgid "Device Tracking Devices [new]"
-msgstr ""
+msgstr "Cihaz İzleme Cihazları [yeni]"
 
 #: ../mactrack_devices.php:855
+#, fuzzy
 msgid "SNMP Information"
-msgstr ""
+msgstr "SNMP Bilgisi"
 
 #: ../mactrack_devices.php:875
+#, fuzzy
 msgid "System:"
-msgstr ""
+msgstr "Sistem"
 
 #: ../mactrack_devices.php:876
+#, fuzzy
 msgid "Uptime:"
-msgstr ""
+msgstr "Çalışma Süresi"
 
 #: ../mactrack_devices.php:877
+#, fuzzy
 msgid "Hostname:"
-msgstr ""
+msgstr "Sunucu Adı"
 
 #: ../mactrack_devices.php:878
+#, fuzzy
 msgid "ObjectID:"
-msgstr ""
+msgstr "Nesne Kimliği:"
 
 #: ../mactrack_devices.php:983
+#, fuzzy
 msgid "Device Tracking Device Filters"
-msgstr ""
+msgstr "Cihaz Takibi Cihaz Filtreleri"
 
 #: ../mactrack_devices.php:1001 ../mactrack_view_devices.php:266
 #: ../setup.php:1638
+#, fuzzy
 msgid "Device Name"
-msgstr ""
+msgstr "Cihaz adı"
 
 #: ../mactrack_devices.php:1002 ../mactrack_sites.php:420
 #: ../mactrack_sites.php:464 ../mactrack_view_devices.php:267
 #: ../mactrack_view_ips.php:197 ../mactrack_view_sites.php:248
 #: ../mactrack_view_sites.php:309 ../setup.php:1669 ../setup.php:1811
+#, fuzzy
 msgid "Site Name"
-msgstr ""
+msgstr "Site Adı"
 
 #: ../mactrack_devices.php:1003 ../mactrack_devices.php:1148
 #: ../mactrack_utilities.php:277 ../mactrack_view_devices.php:268
 #: ../mactrack_view_devices.php:453 ../mactrack_view_dot1x.php:406
 #: ../mactrack_view_dot1x.php:420 ../mactrack_view_dot1x.php:593
 #: ../mactrack_view_interfaces.php:382
+#, fuzzy
 msgid "Status"
-msgstr ""
+msgstr "Durum"
 
 #: ../mactrack_devices.php:1004 ../mactrack_view_devices.php:269
 #: ../mactrack_view_interfaces.php:358 ../setup.php:1645
+#, fuzzy
 msgid "Hostname"
-msgstr ""
+msgstr "Sunucu Adı"
 
 #: ../mactrack_devices.php:1005 ../mactrack_sites.php:466
 #: ../mactrack_view_devices.php:270 ../mactrack_view_sites.php:311
 #: ../setup.php:1407 ../mactrack_device_types.php:932
+#, fuzzy
 msgid "Device Type"
-msgstr ""
+msgstr "Cihaz tipi"
 
 #: ../mactrack_devices.php:1006
+#, fuzzy
 msgid "Total IPs"
-msgstr ""
+msgstr "Toplam IP"
 
 #: ../mactrack_devices.php:1007 ../mactrack_sites.php:423
 #: ../mactrack_view_devices.php:272 ../mactrack_view_sites.php:251
+#, fuzzy
 msgid "User Ports"
-msgstr ""
+msgstr "Kullanıcı Limanlar"
 
 #: ../mactrack_devices.php:1008 ../mactrack_sites.php:424
 #: ../mactrack_view_devices.php:273 ../mactrack_view_sites.php:252
+#, fuzzy
 msgid "User Ports Up"
-msgstr ""
+msgstr "Kullanıcı Bağlantı Noktaları"
 
 #: ../mactrack_devices.php:1009 ../mactrack_view_devices.php:274
+#, fuzzy
 msgid "Trunk Ports"
-msgstr ""
+msgstr "Trunk Limanlar"
 
 #: ../mactrack_devices.php:1010 ../mactrack_view_devices.php:275
+#, fuzzy
 msgid "Active Macs"
-msgstr ""
+msgstr "Aktif Mac'ler"
 
 #: ../mactrack_devices.php:1011 ../mactrack_view_devices.php:277
+#, fuzzy
 msgid "Last Duration"
-msgstr ""
+msgstr "Son Süre"
 
 #: ../mactrack_devices.php:1032
+#, fuzzy
 msgid "No Device Tracking Devices"
-msgstr ""
+msgstr "Cihaz İzleme Cihazı Yok"
 
 #: ../mactrack_devices.php:1067 ../mactrack_view_arp.php:432
 #: ../mactrack_view_devices.php:376 ../mactrack_view_dot1x.php:530
@@ -654,308 +797,375 @@ msgstr ""
 #: ../mactrack_view_macs.php:1004 ../mactrack_view_macs.php:1037
 #: ../mactrack_view_macs.php:1073 ../setup.php:1320
 #: ../mactrack_device_types.php:1030 ../mactrack_device_types.php:1047
+#, fuzzy
 msgid "All"
-msgstr ""
+msgstr "Tümü"
 
 #: ../mactrack_devices.php:1068 ../mactrack_view_devices.php:377
 #: ../setup.php:1305 ../setup.php:1656 ../setup.php:1672 ../setup.php:1717
 #: ../setup.php:1746
+#, fuzzy
 msgid "None"
-msgstr ""
+msgstr "Yok"
 
 #: ../mactrack_devices.php:1092 ../mactrack_view_devices.php:400
 #: ../mactrack_view_interfaces.php:359 ../mactrack_view_interfaces.php:457
 #: ../mactrack_device_types.php:1043
+#, fuzzy
 msgid "Type"
-msgstr ""
+msgstr "Tip"
 
 #: ../mactrack_devices.php:1097 ../setup.php:1282
 #: ../mactrack_device_types.php:557 ../mactrack_device_types.php:1048
+#, fuzzy
 msgid "Switch/Hub"
-msgstr ""
+msgstr "Switch / Hub"
 
 #: ../mactrack_devices.php:1098 ../mactrack_view_devices.php:406
 #: ../setup.php:1283 ../mactrack_device_types.php:558
 #: ../mactrack_device_types.php:1049
+#, fuzzy
 msgid "Switch/Router"
-msgstr ""
+msgstr "Switch / Router"
 
 #: ../mactrack_devices.php:1099 ../mactrack_view_devices.php:407
 #: ../setup.php:1284 ../mactrack_device_types.php:559
 #: ../mactrack_device_types.php:1050
+#, fuzzy
 msgid "Router"
-msgstr ""
+msgstr "Yönlendirici"
 
 #: ../mactrack_devices.php:1153 ../mactrack_view_devices.php:458
+#, fuzzy
 msgid "Up"
-msgstr ""
+msgstr "Yukarı"
 
 #: ../mactrack_devices.php:1154 ../mactrack_view_devices.php:459
 #: ../setup.php:1324 ../setup.php:1351
+#, fuzzy
 msgid "Disabled"
-msgstr ""
+msgstr "Devre dışı"
 
 #: ../mactrack_devices.php:1155 ../mactrack_view_devices.php:460
+#, fuzzy
 msgid "Down"
-msgstr ""
+msgstr "Aşağı"
 
 #: ../mactrack_devices.php:1157 ../mactrack_view_devices.php:462
+#, fuzzy
 msgid "Error"
-msgstr ""
+msgstr "Hata"
 
 #: ../mactrack_devices.php:1158 ../mactrack_view_devices.php:463
+#, fuzzy
 msgid "No Cacti Link"
-msgstr ""
+msgstr "Kaktüs Bağlantısı Yok"
 
 #: ../mactrack_macauth.php:125
+#, fuzzy
 msgid "You must select at least one Authorized Mac to delete."
-msgstr ""
+msgstr "Silmek için en az bir Yetkili Mac seçmelisiniz."
 
 #: ../mactrack_macauth.php:133
+#, fuzzy
 msgid "Click 'Continue' to delete the following Authorized Mac's?"
-msgstr ""
+msgstr "Aşağıdaki Yetkili Mac'leri silmek için 'Devam Et'i tıklayın."
 
 #: ../mactrack_macauth.php:237
-#, php-format
+#, fuzzy, php-format
 msgid "Device Tracking MacAuth [edit: %s]"
-msgstr ""
+msgstr "Cihaz İzleme MacAuth [değiştir: %s]"
 
 #: ../mactrack_macauth.php:239
+#, fuzzy
 msgid "Device Tracking MacAuth [new]"
-msgstr ""
+msgstr "Cihaz İzleme MacAuth [yeni]"
 
 #: ../mactrack_macauth.php:301
+#, fuzzy
 msgid "Device Tracking MacAuth Filters"
-msgstr ""
+msgstr "Cihaz İzleme MacAuth Filtreleri"
 
 #: ../mactrack_macauth.php:314 ../mactrack_macwatch.php:310
+#, fuzzy
 msgid "Mac Address"
-msgstr ""
+msgstr "Mac adresi"
 
 #: ../mactrack_macauth.php:315 ../setup.php:1958
+#, fuzzy
 msgid "Reason"
-msgstr ""
+msgstr "Sebep"
 
 #: ../mactrack_macauth.php:316
+#, fuzzy
 msgid "Added/Modified"
-msgstr ""
+msgstr "Eklenen / Değiştirilen"
 
 #: ../mactrack_macauth.php:317
+#, fuzzy
 msgid "By"
-msgstr ""
+msgstr "Tarafından"
 
 #: ../mactrack_macauth.php:322
+#, fuzzy
 msgid "Authorized Mac Addresses"
-msgstr ""
+msgstr "Yetkili Mac Adresleri"
 
 #: ../mactrack_macauth.php:343
+#, fuzzy
 msgid "No Authorized Mac Addresses Found"
-msgstr ""
+msgstr "Yetkili Mac Adresi Bulunamadı"
 
 #: ../mactrack_macauth.php:371 ../mactrack_vendormacs.php:205
 #: ../mactrack_view_macs.php:960
+#, fuzzy
 msgid "MAC's"
-msgstr ""
+msgstr "MAC en"
 
 #: ../mactrack_macwatch.php:129
+#, fuzzy
 msgid "You must select at least one watched Mac to delete."
-msgstr ""
+msgstr "Silmek için en az bir izlenen Mac seçmelisiniz."
 
 #: ../mactrack_macwatch.php:137
+#, fuzzy
 msgid "Click 'Continue' to delete the following watched Mac's?"
-msgstr ""
+msgstr "Aşağıdaki izlenen Mac'leri silmek için 'Devam Et'i tıklayın."
 
 #: ../mactrack_macwatch.php:234
-#, php-format
+#, fuzzy, php-format
 msgid "Device Tracking MacWatch [edit: %s]"
-msgstr ""
+msgstr "Cihaz İzleme MacWatch [değiştir: %s]"
 
 #: ../mactrack_macwatch.php:236
+#, fuzzy
 msgid "Device Tracking MacWatch [new]"
-msgstr ""
+msgstr "Cihaz İzleme MacWatch [yeni]"
 
 #: ../mactrack_macwatch.php:298
+#, fuzzy
 msgid "Device Tracking MacWatch Filters"
-msgstr ""
+msgstr "Cihaz İzleme MacWatch Filtreleri"
 
 #: ../mactrack_macwatch.php:309
+#, fuzzy
 msgid "Watch Name"
-msgstr ""
+msgstr "İzle Adı"
 
 #: ../mactrack_macwatch.php:311 ../setup.php:1900
+#, fuzzy
 msgid "Ticket Number"
-msgstr ""
+msgstr "Bilet numarası"
 
 #: ../mactrack_macwatch.php:312
+#, fuzzy
 msgid "Watch Description"
-msgstr ""
+msgstr "İzle açıklaması"
 
 #: ../mactrack_macwatch.php:313
+#, fuzzy
 msgid "First Seen"
-msgstr ""
+msgstr "İlk görüş"
 
 #: ../mactrack_macwatch.php:314
+#, fuzzy
 msgid "Last Seen"
-msgstr ""
+msgstr "Son Görülme"
 
 #: ../mactrack_macwatch.php:319 ../mactrack_macwatch.php:374
+#, fuzzy
 msgid "Watches"
-msgstr ""
+msgstr "Saatler"
 
 #: ../mactrack_macwatch.php:343
+#, fuzzy
 msgid "No Device Tracking Watched Macs Found"
-msgstr ""
+msgstr "Hiçbir Cihaz İzleme İzlenen Mac Bulunamadı"
 
 #: ../mactrack_sites.php:135
+#, fuzzy
 msgid "Click 'Continue' to delete the following Site(s)?"
-msgstr ""
+msgstr "Aşağıdaki Siteleri silmek için 'Devam Et'i tıklayın."
 
 #: ../mactrack_sites.php:142
+#, fuzzy
 msgid "You must select at least one site."
-msgstr ""
+msgstr "En az bir site seçmelisiniz."
 
 #: ../mactrack_sites.php:356
-#, php-format
+#, fuzzy, php-format
 msgid "Device Tracking Site [edit: %s]"
-msgstr ""
+msgstr "Cihaz İzleme Sitesi [değiştir: %s]"
 
 #: ../mactrack_sites.php:358
+#, fuzzy
 msgid "Device Tracking Site [new]"
-msgstr ""
+msgstr "Cihaz İzleme Sitesi [yeni]"
 
 #: ../mactrack_sites.php:390
+#, fuzzy
 msgid "Device Tracking Site Filters"
-msgstr ""
+msgstr "Cihaz İzleme Sitesi Filtreleri"
 
 #: ../mactrack_sites.php:422 ../mactrack_sites.php:468
 #: ../mactrack_view_devices.php:271 ../mactrack_view_sites.php:250
 #: ../mactrack_view_sites.php:313
+#, fuzzy
 msgid "Total IP's"
-msgstr ""
+msgstr "Toplam IP"
 
 #: ../mactrack_sites.php:425 ../mactrack_sites.php:472
 #: ../mactrack_view_sites.php:253 ../mactrack_view_sites.php:317
+#, fuzzy
 msgid "MACS Found"
-msgstr ""
+msgstr "MACS Bulundu"
 
 #: ../mactrack_sites.php:426 ../mactrack_view_sites.php:254
+#, fuzzy
 msgid "Device Errors"
-msgstr ""
+msgstr "Cihaz Hataları"
 
 #: ../mactrack_sites.php:454 ../mactrack_sites.php:504
 #: ../mactrack_view_sites.php:296 ../mactrack_view_sites.php:360
+#, fuzzy
 msgid "No Device Tracking Sites Found"
-msgstr ""
+msgstr "Cihaz İzleme Sitesi Bulunamadı"
 
 #: ../mactrack_sites.php:465 ../mactrack_view_sites.php:310 ../setup.php:1400
 #: ../mactrack_device_types.php:1026
+#, fuzzy
 msgid "Vendor"
-msgstr ""
+msgstr "Satıcı"
 
 #: ../mactrack_sites.php:467 ../mactrack_view_sites.php:312
+#, fuzzy
 msgid "Total Devices"
-msgstr ""
+msgstr "Toplam cihaz"
 
 #: ../mactrack_sites.php:469 ../mactrack_view_sites.php:314
+#, fuzzy
 msgid "Total User Ports"
-msgstr ""
+msgstr "Toplam Kullanıcı Portu"
 
 #: ../mactrack_sites.php:470 ../mactrack_view_sites.php:315
+#, fuzzy
 msgid "Total Oper Ports"
-msgstr ""
+msgstr "Toplam Oper Portları"
 
 #: ../mactrack_sites.php:471 ../mactrack_view_sites.php:316
+#, fuzzy
 msgid "Total Trunks"
-msgstr ""
+msgstr "Toplam sandıklar"
 
 #: ../mactrack_snmp.php:31 ../mactrack_device_types.php:70
+#, fuzzy
 msgid "Duplicate"
-msgstr ""
+msgstr "Kopyala"
 
 #: ../mactrack_snmp.php:208
+#, fuzzy
 msgid "You must select at least one SNMP Option."
-msgstr ""
+msgstr "En az bir SNMP Seçeneği seçmelisiniz."
 
 #: ../mactrack_snmp.php:216
+#, fuzzy
 msgid "Click 'Continue' to delete the following SNMP Option(s)."
-msgstr ""
+msgstr "Aşağıdaki SNMP Seçeneklerini silmek için 'Devam Et'i tıklayın."
 
 #: ../mactrack_snmp.php:223
+#, fuzzy
 msgid ""
 "Click 'Continue' to duplicate the following SNMP Option(s). You can "
 "optionally change the title format for the new SNMP Options."
 msgstr ""
+"Aşağıdaki SNMP Seçeneklerini çoğaltmak için 'Devam Et'i tıklayın. İsteğe "
+"bağlı olarak yeni SNMP Seçenekleri için başlık formatını değiştirebilirsiniz."
 
 #: ../mactrack_snmp.php:225
+#, fuzzy
 msgid "Name Format:"
-msgstr ""
+msgstr "İsim Biçimi:"
 
 #: ../mactrack_snmp.php:225
+#, fuzzy
 msgid "<name> (1)"
-msgstr ""
+msgstr "<name> (1)"
 
 #: ../mactrack_snmp.php:301
-#, php-format
+#, fuzzy, php-format
 msgid "SNMP Options [edit %s]"
-msgstr ""
+msgstr "SNMP Seçenekleri [ %s düzenle]"
 
 #: ../mactrack_snmp.php:303
+#, fuzzy
 msgid "SNMP Options [new]"
-msgstr ""
+msgstr "SNMP Seçenekleri [yeni]"
 
 #: ../mactrack_snmp.php:372
-#, php-format
+#, fuzzy, php-format
 msgid "SNMP Option Set [edit: %s]"
-msgstr ""
+msgstr "SNMP Seçenek Seti [değiştir: %s]"
 
 #: ../mactrack_snmp.php:374
+#, fuzzy
 msgid "SNMP Option Set [new]"
-msgstr ""
+msgstr "SNMP Seçenek Seti [yeni]"
 
 #: ../mactrack_snmp.php:399 ../mactrack_snmp.php:491 ../setup.php:1210
+#, fuzzy
 msgid "Device Tracking SNMP Options"
-msgstr ""
+msgstr "Cihaz Takibi SNMP Seçenekleri"
 
 #: ../mactrack_snmp.php:402
+#, fuzzy
 msgid "Item"
-msgstr ""
+msgstr "Öğe"
 
 #: ../mactrack_snmp.php:403 ../setup.php:1141
+#, fuzzy
 msgid "Version"
-msgstr ""
+msgstr "Versiyon"
 
 #: ../mactrack_snmp.php:404 ../setup.php:1148
+#, fuzzy
 msgid "Community"
-msgstr ""
+msgstr "Topluluk"
 
 #: ../mactrack_snmp.php:405 ../setup.php:1163
+#, fuzzy
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: ../mactrack_snmp.php:406 ../setup.php:1171
+#, fuzzy
 msgid "Timeout"
-msgstr ""
+msgstr "Zaman Aşımı"
 
 #: ../mactrack_snmp.php:407 ../setup.php:1179
+#, fuzzy
 msgid "Retries"
-msgstr ""
+msgstr "Retries"
 
 #: ../mactrack_snmp.php:408
+#, fuzzy
 msgid "Max OIDs"
-msgstr ""
+msgstr "Maksimum OID"
 
 #: ../mactrack_snmp.php:409 ../mactrack_view_dot1x.php:399
 #: ../mactrack_view_dot1x.php:414
+#, fuzzy
 msgid "Username"
-msgstr ""
+msgstr "Kullanıcı Adı"
 
 #: ../mactrack_snmp.php:410
+#, fuzzy
 msgid "Auth Proto"
-msgstr ""
+msgstr "Yetkilendirme Protokolü"
 
 #: ../mactrack_snmp.php:411
+#, fuzzy
 msgid "Priv Proto"
-msgstr ""
+msgstr "Priv Protokolü"
 
 #: ../mactrack_snmp.php:412 ../mactrack_view_devices.php:265
 #: ../mactrack_view_dot1x.php:396 ../mactrack_view_dot1x.php:411
@@ -964,255 +1174,324 @@ msgstr ""
 #: ../mactrack_view_sites.php:247 ../mactrack_view_sites.php:308
 #: ../setup.php:1209 ../setup.php:1211 ../setup.php:1217 ../setup.php:1220
 #: ../setup.php:1223 ../setup.php:1226 ../setup.php:1229
+#, fuzzy
 msgid "Actions"
-msgstr ""
+msgstr "Eylemler"
 
 #: ../mactrack_snmp.php:440
+#, fuzzy
 msgid "No SNMP Items Found"
-msgstr ""
+msgstr "SNMP Öğesi Bulunamadı"
 
 #: ../mactrack_snmp.php:516
+#, fuzzy
 msgid "Title of SNMP Option Set"
-msgstr ""
+msgstr "SNMP Seçenek Kümesinin Başlığı"
 
 #: ../mactrack_snmp.php:521
+#, fuzzy
 msgid "SNMP Settings"
-msgstr ""
+msgstr "SNMP Ayarları"
 
 #: ../mactrack_snmp.php:537
+#, fuzzy
 msgid "No SNMP Option Sets Found"
-msgstr ""
+msgstr "SNMP Seçenek Ayarı Bulunamadı"
 
 #: ../mactrack_snmp.php:567
+#, fuzzy
 msgid "Options"
-msgstr ""
+msgstr "Seçenekler"
 
 #: ../mactrack_utilities.php:166
+#, fuzzy
 msgid "Device Tracking Process Status"
-msgstr ""
+msgstr "Cihaz İzleme Süreci Durumu"
 
 #: ../mactrack_utilities.php:186
+#, fuzzy
 msgid "Refresh"
-msgstr ""
+msgstr "Yenile"
 
 #: ../mactrack_utilities.php:235
+#, fuzzy
 msgid "Current Process Status"
-msgstr ""
+msgstr "Mevcut İşlem Durumu"
 
 #: ../mactrack_utilities.php:237
+#, fuzzy
 msgid "The Device Tracking Poller is:"
-msgstr ""
+msgstr "Cihaz İzleme Poller:"
 
 #: ../mactrack_utilities.php:237
+#, fuzzy
 msgid "RUNNING"
-msgstr ""
+msgstr "Çalışıyor"
 
 #: ../mactrack_utilities.php:237 ../mactrack_utilities.php:263
+#, fuzzy
 msgid "DISABLED"
-msgstr ""
+msgstr "Devre dışı"
 
 #: ../mactrack_utilities.php:237
+#, fuzzy
 msgid "IDLE"
-msgstr ""
+msgstr "Boşta"
 
 #: ../mactrack_utilities.php:240
+#, fuzzy
 msgid "Running Processes:"
-msgstr ""
+msgstr "Çalışan İşlemler:"
 
 #: ../mactrack_utilities.php:243
+#, fuzzy
 msgid "Last Time Poller Started:"
-msgstr ""
+msgstr "Son Zamanında Poller Başladı:"
 
 #: ../mactrack_utilities.php:245
+#, fuzzy
 msgid "Poller Frequency:"
-msgstr ""
+msgstr "Poller Frekansı:"
 
 #: ../mactrack_utilities.php:247
+#, fuzzy
 msgid "Approx. Next Runtime:"
-msgstr ""
+msgstr "Yaklaşık. Sonraki Çalışma Zamanı:"
 
 #: ../mactrack_utilities.php:249
+#, fuzzy
 msgid "Approx. Next DB Maintenance:"
-msgstr ""
+msgstr "Yaklaşık. Sonraki DB Bakımı:"
 
 #: ../mactrack_utilities.php:251
+#, fuzzy
 msgid "Run Time Details"
-msgstr ""
+msgstr "Çalışma Zamanı Detayları"
 
 #: ../mactrack_utilities.php:253
+#, fuzzy
 msgid "Last Poller Runtime:"
-msgstr ""
+msgstr "Son Poller Çalışma Zamanı:"
 
 #: ../mactrack_utilities.php:255
+#, fuzzy
 msgid "Last Poller Maintenance Runtime:"
-msgstr ""
+msgstr "Son Poller Bakım Çalışma Zamanı:"
 
 #: ../mactrack_utilities.php:257
+#, fuzzy
 msgid "Maximum Concurrent Processes:"
-msgstr ""
+msgstr "Maksimum Eşzamanlı İşlemler:"
 
 #: ../mactrack_utilities.php:257
+#, fuzzy
 msgid "processes"
-msgstr ""
+msgstr "Süreçler"
 
 #: ../mactrack_utilities.php:259
+#, fuzzy
 msgid "Maximum Per Device Scan Time:"
-msgstr ""
+msgstr "Aygıt Başına Tarama Süresi Başına Maksimum:"
 
 #: ../mactrack_utilities.php:259
+#, fuzzy
 msgid "minutes"
-msgstr ""
+msgstr "dakika"
 
 #: ../mactrack_utilities.php:261
+#, fuzzy
 msgid "DNS Configuration Information"
-msgstr ""
+msgstr "DNS Yapılandırma Bilgisi"
 
 #: ../mactrack_utilities.php:263
+#, fuzzy
 msgid "Reverse DNS Resolution is"
-msgstr ""
+msgstr "Ters DNS Çözünürlüğü"
 
 #: ../mactrack_utilities.php:263
+#, fuzzy
 msgid "ENABLED"
-msgstr ""
+msgstr "Etkin"
 
 #: ../mactrack_utilities.php:265
+#, fuzzy
 msgid "Primary DNS Server:"
-msgstr ""
+msgstr "Birincil DNS Sunucusu:"
 
 #: ../mactrack_utilities.php:267
+#, fuzzy
 msgid "Secondary DNS Server:"
-msgstr ""
+msgstr "İkincil DNS sunucusu:"
 
 #: ../mactrack_utilities.php:269
+#, fuzzy
 msgid "DNS Resolution Timeout:"
-msgstr ""
+msgstr "DNS Çözünürlük Zaman Aşımı:"
 
 #: ../mactrack_utilities.php:269
+#, fuzzy
 msgid "milliseconds"
-msgstr ""
+msgstr "Milisaniye "
 
 #: ../mactrack_utilities.php:273
+#, fuzzy
 msgid "Running Process Summary"
-msgstr ""
+msgstr "Çalışan İşlem Özeti"
 
 #: ../mactrack_utilities.php:275
+#, fuzzy
 msgid "The DNS Resolver is Running"
-msgstr ""
+msgstr "DNS Çözümleyicisi Çalışıyor"
 
 #: ../mactrack_utilities.php:275
+#, fuzzy
 msgid "The DNS Resolver is Not Running"
-msgstr ""
+msgstr "DNS Çözümleyicisi Çalışmıyor"
 
 #: ../mactrack_utilities.php:277
+#, fuzzy
 msgid "Date Started"
-msgstr ""
+msgstr "Başlama Tarihi"
 
 #: ../mactrack_utilities.php:311
+#, fuzzy
 msgid "Completed"
-msgstr ""
+msgstr "Tamamlandı"
 
 #: ../mactrack_utilities.php:317 ../mactrack_view_dot1x.php:481
 #: ../mactrack_view_dot1x.php:599
+#, fuzzy
 msgid "Running"
-msgstr ""
+msgstr "Çalışıyor"
 
 #: ../mactrack_utilities.php:323
+#, fuzzy
 msgid "Waiting"
-msgstr ""
+msgstr "Bekliyor"
 
 #: ../mactrack_utilities.php:330
+#, fuzzy
 msgid "Other"
-msgstr ""
+msgstr "Diğer"
 
 #: ../mactrack_utilities.php:346 ../mactrack_utilities.php:403
 #: ../mactrack_utilities.php:426
+#, fuzzy
 msgid "Are You Sure?"
-msgstr ""
+msgstr "Emin misiniz?"
 
 #: ../mactrack_utilities.php:346
+#, fuzzy
 msgid ""
 "Are you sure you want to delete all the Port to MAC to IP results from the "
 "system?"
 msgstr ""
+"Sistemden tüm Port - MAC - IP sonuçlarını silmek istediğinize emin misiniz?"
 
 #: ../mactrack_utilities.php:392 ../mactrack_utilities.php:415
+#, fuzzy
 msgid "Device Tracking Database Results"
-msgstr ""
+msgstr "Cihaz İzleme Veritabanı Sonuçları"
 
 #: ../mactrack_utilities.php:393 ../mactrack_utilities.php:463
-#, php-format
+#, fuzzy, php-format
 msgid "The following number of records have been removed from the database: %s"
-msgstr ""
+msgstr "Aşağıdaki kayıt sayısı veritabanından kaldırıldı: %s"
 
 #: ../mactrack_utilities.php:403
+#, fuzzy
 msgid ""
 "Are you sure you want to delete all the Aggregated Port to MAC to IP results "
 "from the system?"
 msgstr ""
+"Tüm Toplanan Bağlantı Noktasını MAC'tan IP'ye sonuçlardan silmek "
+"istediğinizden emin misiniz?"
 
 #: ../mactrack_utilities.php:416
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "The following number of records have been removed from the aggergated table: "
 "%s"
-msgstr ""
+msgstr "Aşağıdaki tablo, birleştirilen tablodan kaldırıldı: %s"
 
 #: ../mactrack_utilities.php:426
+#, fuzzy
 msgid ""
 "Are you sure you want to delete and recreate all the Aggregated Port to MAC "
 "to IP results from the system?"
 msgstr ""
+"Sistemden tüm Toplanan Bağlantı Noktası - MAC - IP sonuçlarını silmek ve "
+"yeniden oluşturmak istediğinizden emin misiniz?"
 
 #: ../mactrack_utilities.php:452
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "The following number of records have been removed from the aggergated table: "
 "%s.  And %s records will be added."
 msgstr ""
+"Aşağıdaki tablo, birleştirilen tablodan kaldırıldı: %s. Ve %s kayıtları "
+"eklenecek."
 
 #: ../mactrack_utilities.php:473
+#, fuzzy
 msgid ""
 "The Device Tracking scanning functions have been purged.  They will be "
 "recreated once you either edit a device or device type."
 msgstr ""
+"Cihaz İzleme tarama işlevleri temizlendi. Bir cihazı veya cihaz türünü "
+"düzenlediğinizde bunlar yeniden oluşturulur."
 
 #: ../mactrack_utilities.php:478
+#, fuzzy
 msgid "Cacti Device Tracking System Utilities"
-msgstr ""
+msgstr "Kaktüsler Cihaz Takip Sistemi Araçları"
 
 #: ../mactrack_utilities.php:480
+#, fuzzy
 msgid "Process Status Information"
-msgstr ""
+msgstr "Süreç Durum Bilgisi"
 
 #: ../mactrack_utilities.php:489 ../setup.php:1242
+#, fuzzy
 msgid "View Device Tracking Process Status"
-msgstr ""
+msgstr "Cihaz İzleme Süreci Durumunu Görüntüleyin"
 
 #: ../mactrack_utilities.php:492
+#, fuzzy
 msgid ""
 "This option will let you show and set process information associated with "
 "the Device Tracking polling process."
 msgstr ""
+"Bu seçenek, Cihaz İzleme oylama işlemi ile ilgili işlem bilgilerini "
+"göstermenize ve ayarlamanıza izin verecektir."
 
 #: ../mactrack_utilities.php:496
+#, fuzzy
 msgid "Database Administration"
-msgstr ""
+msgstr "Veritabanı yönetimi"
 
 #: ../mactrack_utilities.php:500 ../setup.php:1237
+#, fuzzy
 msgid "Perform Database Maintenance"
-msgstr ""
+msgstr "Veritabanı Bakımı Gerçekleştir"
 
 #: ../mactrack_utilities.php:503
+#, fuzzy
 msgid ""
 "Deletes expired Port to MAC to IP associations from the database.  Only "
 "records that have expired, based upon your criteria are removed."
 msgstr ""
+"Veritabanından süresi dolmuş Bağlantı Noktası - MAC arasındaki IP "
+"ilişkilerini siler. Yalnızca kriterlerinize dayanarak süresi dolmuş kayıtlar "
+"kaldırılır."
 
 #: ../mactrack_utilities.php:509
+#, fuzzy
 msgid "Refresh IEEE Vendor MAC/OUI Database"
-msgstr ""
+msgstr "IEEE Satıcı MAC / OUI Veritabanını Yenile"
 
 #: ../mactrack_utilities.php:512
+#, fuzzy
 msgid ""
 "This function will download and install the latest OIU database from the "
 "IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC "
@@ -1221,1162 +1500,1473 @@ msgid ""
 "part.  This will be helpful in spot checking for rogue devices on your "
 "network."
 msgstr ""
+"Bu işlev, en son OIU veritabanını IEEE Web Sitesinden indirip yükleyecektir. "
+"Her Ağ Arabirim Kartı (NIC) bir MAC Adresine sahiptir. MAC Adresi iki bölüme "
+"ayrılabilir. MAC Eklentisinin ilk kısmı Satıcı MAC'i içerir. Satıcı MAC, "
+"parçayı kimin ürettiğini tanımlar. Bu, ağınızdaki hileli aygıtları anında "
+"kontrol etmede yardımcı olacaktır."
 
 #: ../mactrack_utilities.php:518 ../setup.php:1238
+#, fuzzy
 msgid "Refresh Scanning Functions"
-msgstr ""
+msgstr "Tarama İşlevlerini Yenile"
 
 #: ../mactrack_utilities.php:521
+#, fuzzy
 msgid ""
 "Deletes old and potentially stale Device Tracking scanning functions from "
 "the drop-down you receive when you edit a device type."
 msgstr ""
+"Bir cihaz türünü düzenlediğinizde aldığınız açılır menüden eski ve "
+"potansiyel olarak eski olan Cihaz İzleme tarama işlevlerini siler."
 
 #: ../mactrack_utilities.php:527
+#, fuzzy
 msgid "Remove All Scan Results"
-msgstr ""
+msgstr "Tüm Tarama Sonuçlarını Kaldır"
 
 #: ../mactrack_utilities.php:530
+#, fuzzy
 msgid ""
 "Deletes <strong>ALL</strong> Port to MAC to IP associations from the "
 "database all IP Addresses, IP Ranges, and VLANS.  This utility is good when "
 "you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
 msgstr ""
+"Tüm IP Adreslerini, IP Aralıklarını ve VLANS'ı veritabanından <strong>TÜM</"
+"strong> Bağlantı Noktasından MAC'a IP ilişkilerine siler. Başlamak "
+"istediğinizde bu yardımcı program iyidir. <strong>TEHLİKE: Önceki tüm "
+"veriler silinir.</strong>"
 
 #: ../mactrack_utilities.php:534
+#, fuzzy
 msgid "Aggregated Table Administration"
-msgstr ""
+msgstr "Toplu Tablo Yönetimi"
 
 #: ../mactrack_utilities.php:538
+#, fuzzy
 msgid "Remove All Aggregated Results"
-msgstr ""
+msgstr "Tüm Toplu Sonuçları Kaldır"
 
 #: ../mactrack_utilities.php:541
+#, fuzzy
 msgid ""
 "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP "
 "associations from the database.  Data will again be collected on the basis "
 "of <strong>only new</strong> scanned data in the next mactrack poller run."
 msgstr ""
+"TÜM <strong>Toplanmış</strong> (Tarama Sonuçları Değil) Portunu MAC'tan "
+"veritabanına IP ilişkilerine siler. Veriler bir sonraki mactrack anket "
+"çalışmasında <strong>sadece yeni</strong> taranmış verilere dayanarak tekrar "
+"toplanacaktır."
 
 #: ../mactrack_utilities.php:547
+#, fuzzy
 msgid "Perform Aggregate Table Rebuild"
-msgstr ""
+msgstr "Toplam Tablo Yeniden Oluşturma işlemini gerçekleştirin"
 
 #: ../mactrack_utilities.php:550
+#, fuzzy
 msgid ""
 "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP "
 "associations from the database and their re-creation based on <strong>All "
 "scaned data</strong> now."
 msgstr ""
+"TÜM <strong>Toplanmış</strong> (Tarama Sonuçları Değil) <strong>Port'unu "
+"MAC'tan</strong> veritabanına IP ilişkilerine ve bunların <strong>taranan "
+"Tüm verilere</strong> göre yeniden oluşturulmasına izin verir."
 
 #: ../mactrack_vendormacs.php:139
+#, fuzzy
 msgid "Device Tracking Vendor Mac Filter"
-msgstr ""
+msgstr "Aygıt İzleme Satıcısı Mac Filtresi"
 
 #: ../mactrack_vendormacs.php:153
+#, fuzzy
 msgid "Vendor MAC"
-msgstr ""
+msgstr "Satıcı MAC'si"
 
 #: ../mactrack_vendormacs.php:154
+#, fuzzy
 msgid "Corporation"
-msgstr ""
+msgstr "Şirket"
 
 #: ../mactrack_vendormacs.php:155
+#, fuzzy
 msgid "Address"
-msgstr ""
+msgstr "E-posta Adresinden"
 
 #: ../mactrack_vendormacs.php:160 ../setup.php:1367
+#, fuzzy
 msgid "Vendor Macs"
-msgstr ""
+msgstr "Satıcı Mac'leri"
 
 #: ../mactrack_vendormacs.php:179
+#, fuzzy
 msgid "No Device Tracking Vendor MACS Found"
-msgstr ""
+msgstr "Hiçbir Cihaz İzleme Satıcısı MACS Bulunamadı"
 
 #: ../mactrack_view_arp.php:31
+#, fuzzy
 msgid "Device Tracking - ARP/IP View"
-msgstr ""
+msgstr "Cihaz Takibi - ARP / IP Görünümü"
 
 #: ../mactrack_view_arp.php:308 ../mactrack_view_arp.php:319
 #: ../mactrack_view_arp.php:332 ../mactrack_view_dot1x.php:397
 #: ../mactrack_view_dot1x.php:412 ../mactrack_view_macs.php:655
 #: ../mactrack_view_macs.php:670 ../mactrack_view_macs.php:795
+#, fuzzy
 msgid "Switch Name"
-msgstr ""
+msgstr "Anahtar Adı"
 
 #: ../mactrack_view_arp.php:309 ../mactrack_view_arp.php:320
 #: ../mactrack_view_arp.php:333 ../mactrack_view_arp.php:343
 #: ../mactrack_view_dot1x.php:398 ../mactrack_view_dot1x.php:413
 #: ../mactrack_view_macs.php:656 ../mactrack_view_macs.php:671
 #: ../mactrack_view_macs.php:796
+#, fuzzy
 msgid "Switch Hostname"
-msgstr ""
+msgstr "Ana Bilgisayar Adını Değiştir"
 
 #: ../mactrack_view_arp.php:310 ../mactrack_view_arp.php:321
 #: ../mactrack_view_arp.php:334 ../mactrack_view_arp.php:344
 #: ../mactrack_view_dot1x.php:400 ../mactrack_view_dot1x.php:415
 #: ../mactrack_view_macs.php:657 ../mactrack_view_macs.php:672
 #: ../mactrack_view_macs.php:797
+#, fuzzy
 msgid "ED IP Address"
-msgstr ""
+msgstr "ED IP Adresi"
 
 #: ../mactrack_view_arp.php:311 ../mactrack_view_arp.php:322
 #: ../mactrack_view_dot1x.php:401 ../mactrack_view_macs.php:658
 #: ../mactrack_view_macs.php:801
+#, fuzzy
 msgid "ED DNS Hostname"
-msgstr ""
+msgstr "ED DNS Ana Bilgisayar Adı"
 
 #: ../mactrack_view_arp.php:312 ../mactrack_view_arp.php:323
 #: ../mactrack_view_arp.php:335 ../mactrack_view_arp.php:345
 #: ../mactrack_view_dot1x.php:402 ../mactrack_view_dot1x.php:416
 #: ../mactrack_view_macs.php:659 ../mactrack_view_macs.php:673
 #: ../mactrack_view_macs.php:805
+#, fuzzy
 msgid "ED MAC Address"
-msgstr ""
+msgstr "ED MAC Adresi"
 
 #: ../mactrack_view_arp.php:313 ../mactrack_view_arp.php:324
 #: ../mactrack_view_arp.php:336 ../mactrack_view_arp.php:346
 #: ../mactrack_view_macs.php:660 ../mactrack_view_macs.php:674
 #: ../mactrack_view_macs.php:806
+#, fuzzy
 msgid "Vendor Name"
-msgstr ""
+msgstr "Tedarikçi Adı"
 
 #: ../mactrack_view_arp.php:314 ../mactrack_view_arp.php:325
 #: ../mactrack_view_arp.php:337 ../mactrack_view_arp.php:347
 #: ../mactrack_view_dot1x.php:403 ../mactrack_view_dot1x.php:417
 #: ../mactrack_view_macs.php:661 ../mactrack_view_macs.php:675
 #: ../mactrack_view_macs.php:807
+#, fuzzy
 msgid "Port Number"
-msgstr ""
+msgstr "Port numarası"
 
 #: ../mactrack_view_arp.php:315 ../mactrack_view_arp.php:326
 #: ../mactrack_view_arp.php:338 ../mactrack_view_arp.php:348
 #: ../mactrack_view_dot1x.php:404 ../mactrack_view_dot1x.php:418
 #: ../mactrack_view_macs.php:662 ../mactrack_view_macs.php:676
 #: ../mactrack_view_macs.php:808
+#, fuzzy
 msgid "Port Name"
-msgstr ""
+msgstr "Liman adı"
 
 #: ../mactrack_view_arp.php:342
+#, fuzzy
 msgid "Switch Device"
-msgstr ""
+msgstr "Cihazı Değiştir"
 
 #: ../mactrack_view_arp.php:355
+#, fuzzy
 msgid "ARP Cache"
-msgstr ""
+msgstr "ARP Önbelleği"
 
 #: ../mactrack_view_arp.php:382 ../mactrack_view_macs.php:882
+#, fuzzy
 msgid "You must first choose a Site, Device or other search criteria."
-msgstr ""
+msgstr "Önce bir Site, Cihaz veya başka bir arama kriteri seçmelisiniz."
 
 #: ../mactrack_view_arp.php:384
+#, fuzzy
 msgid "No Device Tracking IP Results Found"
-msgstr ""
+msgstr "IP İzleme Bulunamadı"
 
 #: ../mactrack_view_arp.php:428 ../mactrack_view_dot1x.php:526
 #: ../mactrack_view_interfaces.php:487 ../mactrack_view_macs.php:933
+#, fuzzy
 msgid "Device"
-msgstr ""
+msgstr "Cihaz"
 
 #: ../mactrack_view_arp.php:455 ../mactrack_view_ips.php:273
+#, fuzzy
 msgid "IP's"
-msgstr ""
+msgstr "IP kullanıcısının"
 
 #: ../mactrack_view_arp.php:480 ../mactrack_view_dot1x.php:578
 #: ../mactrack_view_macs.php:985
+#, fuzzy
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #: ../mactrack_view_arp.php:497 ../mactrack_view_dot1x.php:628
 #: ../mactrack_view_macs.php:1054
+#, fuzzy
 msgid "MAC"
-msgstr ""
+msgstr "MAC"
 
 #: ../mactrack_view_devices.php:31
+#, fuzzy
 msgid "Device Tracking - Device Report View"
-msgstr ""
+msgstr "Cihaz İzleme - Cihaz Rapor Görünümü"
 
 #: ../mactrack_view_devices.php:159
+#, fuzzy
 msgid "Unknown Device Type"
-msgstr ""
+msgstr "Bilinmeyen Aygıt Türü"
 
 #: ../mactrack_view_devices.php:276
+#, fuzzy
 msgid "Total VLAN's"
-msgstr ""
+msgstr "Toplam VLAN"
 
 #: ../mactrack_view_devices.php:345
+#, fuzzy
 msgid "No Device Tracking Devices Found"
-msgstr ""
+msgstr "Cihaz İzleme Cihazı Bulunamadı"
 
 #: ../mactrack_view_devices.php:405
+#, fuzzy
 msgid "Hub/Switch"
-msgstr ""
+msgstr "Hub / Switch"
 
 #: ../mactrack_view_dot1x.php:31
+#, fuzzy
 msgid "Device Tracking - 802.1x View"
-msgstr ""
+msgstr "Cihaz Takibi - 802.1x Görüntüle"
 
 #: ../mactrack_view_dot1x.php:405 ../mactrack_view_dot1x.php:419
 #: ../mactrack_view_dot1x.php:643
+#, fuzzy
 msgid "Domain"
-msgstr ""
+msgstr "Alan Adı"
 
 #: ../mactrack_view_dot1x.php:407 ../mactrack_view_dot1x.php:421
 #: ../mactrack_view_macs.php:665 ../mactrack_view_macs.php:679
 #: ../mactrack_view_macs.php:814 ../mactrack_view_macs.php:816
+#, fuzzy
 msgid "Last Scan Date"
-msgstr ""
+msgstr "Son Tarama Tarihi"
 
 #: ../mactrack_view_dot1x.php:431
+#, fuzzy
 msgid "802.1x Sessions"
-msgstr ""
+msgstr "802.1x Seansları"
 
 #: ../mactrack_view_dot1x.php:464
+#, fuzzy
 msgid "No Device Tracking 802.1x Sessions Found"
-msgstr ""
+msgstr "Cihaz Takibi Yok 802.1x Oturum Bulunamadı"
 
 #: ../mactrack_view_dot1x.php:477
+#, fuzzy
 msgid "Authorization Success"
-msgstr ""
+msgstr "Yetkilendirme Başarısı"
 
 #: ../mactrack_view_dot1x.php:478 ../mactrack_view_dot1x.php:601
+#, fuzzy
 msgid "Authentication Success"
-msgstr ""
+msgstr "Kimlik Doğrulama Başarısı"
 
 #: ../mactrack_view_dot1x.php:479 ../mactrack_view_dot1x.php:604
+#, fuzzy
 msgid "Authorization Failed"
-msgstr ""
+msgstr "Yetkilendirme Başarısız"
 
 #: ../mactrack_view_dot1x.php:480 ../mactrack_view_dot1x.php:602
+#, fuzzy
 msgid "Authentication Failed"
-msgstr ""
+msgstr "Doğrulama Başarısız"
 
 #: ../mactrack_view_dot1x.php:482 ../mactrack_view_dot1x.php:598
+#, fuzzy
 msgid "Idle"
-msgstr ""
+msgstr "Boşta"
 
 #: ../mactrack_view_dot1x.php:553
+#, fuzzy
 msgid "Sessions"
-msgstr ""
+msgstr "Oturumlar"
 
 #: ../mactrack_view_dot1x.php:597
+#, fuzzy
 msgid "Any Status"
-msgstr ""
+msgstr "Herhangi bir durum"
 
 #: ../mactrack_view_dot1x.php:600
+#, fuzzy
 msgid "No method"
-msgstr ""
+msgstr "Yöntem"
 
 #: ../mactrack_view_dot1x.php:603
+#, fuzzy
 msgid "Authorization Succcess"
-msgstr ""
+msgstr "Yetkilendirme Başarısı"
 
 #: ../mactrack_view_dot1x.php:608 ../mactrack_view_macs.php:1033
+#, fuzzy
 msgid "Show"
-msgstr ""
+msgstr "Göster"
 
 #: ../mactrack_view_dot1x.php:613 ../mactrack_view_macs.php:1038
+#, fuzzy
 msgid "Most Recent"
-msgstr ""
+msgstr "En Yeni"
 
 #: ../mactrack_view_dot1x.php:648
+#, fuzzy
 msgid "DATA"
-msgstr ""
+msgstr "Veri"
 
 #: ../mactrack_view_dot1x.php:649
+#, fuzzy
 msgid "VOICE"
-msgstr ""
+msgstr "SES"
 
 #: ../mactrack_view_dot1x.php:655 ../mactrack_view_macs.php:1081
+#, fuzzy
 msgid "Portname"
-msgstr ""
+msgstr "bağlantınoktasıadı"
 
 #: ../mactrack_view_graphs.php:32
+#, fuzzy
 msgid "Device Tracking - Monitored Device Graph View"
-msgstr ""
+msgstr "Cihaz Takibi - İzlenen Cihaz Grafik Görünümü"
 
 #: ../mactrack_view_graphs.php:71
+#, fuzzy
 msgid "Custom Graph List Applied - Filtering from List"
-msgstr ""
+msgstr "Uygulanan Özel Grafik Listesi - Listeden Filtreleme"
 
 #: ../mactrack_view_interfaces.php:31
+#, fuzzy
 msgid "Device Tracking - Network Interfaces View"
-msgstr ""
+msgstr "Cihaz Takibi - Ağ Arayüzleri Görünümü"
 
 #: ../mactrack_view_interfaces.php:322
+#, fuzzy
 msgid "No Device Tracking Interfaces Found"
-msgstr ""
+msgstr "Cihaz İzleme Arabirimi Bulunamadı"
 
 #: ../mactrack_view_interfaces.php:335
+#, fuzzy
 msgid "Interface Up"
-msgstr ""
+msgstr "Arayüz Yukarı"
 
 #: ../mactrack_view_interfaces.php:336
+#, fuzzy
 msgid "No Alias"
-msgstr ""
+msgstr "Takma Ad Yok"
 
 #: ../mactrack_view_interfaces.php:337
+#, fuzzy
 msgid "Errors Present"
-msgstr ""
+msgstr "Mevcut Hatalar"
 
 #: ../mactrack_view_interfaces.php:338
+#, fuzzy
 msgid "Discards Present"
-msgstr ""
+msgstr "Şimdiki Adayları"
 
 #: ../mactrack_view_interfaces.php:339
+#, fuzzy
 msgid "No Graphs"
-msgstr ""
+msgstr "Grafikler"
 
 #: ../mactrack_view_interfaces.php:340
+#, fuzzy
 msgid "Interface Down"
-msgstr ""
+msgstr "Arayüz Aşağı"
 
 #: ../mactrack_view_interfaces.php:360 ../setup.php:1503
+#, fuzzy
 msgid "Name"
-msgstr ""
+msgstr "İsim"
 
 #: ../mactrack_view_interfaces.php:361 ../setup.php:1393
+#, fuzzy
 msgid "Description"
-msgstr ""
+msgstr "Açıklama"
 
 #: ../mactrack_view_interfaces.php:362
+#, fuzzy
 msgid "Alias"
-msgstr ""
+msgstr "Takma adı"
 
 #: ../mactrack_view_interfaces.php:363
+#, fuzzy
 msgid "InBound %"
-msgstr ""
+msgstr "% InBound"
 
 #: ../mactrack_view_interfaces.php:364
+#, fuzzy
 msgid "OutBound %"
-msgstr ""
+msgstr "Giden %"
 
 #: ../mactrack_view_interfaces.php:365
+#, fuzzy
 msgid "In (B/S)"
-msgstr ""
+msgstr "İçinde (S / B)"
 
 #: ../mactrack_view_interfaces.php:366
+#, fuzzy
 msgid "Out (B/S)"
-msgstr ""
+msgstr "Çıkış (S / S)"
 
 #: ../mactrack_view_interfaces.php:369
+#, fuzzy
 msgid "In Err Total"
-msgstr ""
+msgstr "Err Toplam"
 
 #: ../mactrack_view_interfaces.php:370
+#, fuzzy
 msgid "In Disc Total"
-msgstr ""
+msgstr "Disk Toplamında"
 
 #: ../mactrack_view_interfaces.php:371
+#, fuzzy
 msgid "UProto Total"
-msgstr ""
+msgstr "UProto Toplam"
 
 #: ../mactrack_view_interfaces.php:372
+#, fuzzy
 msgid "Out Err Total"
-msgstr ""
+msgstr "Toplam Err Toplam"
 
 #: ../mactrack_view_interfaces.php:373
+#, fuzzy
 msgid "Out Disc Total"
-msgstr ""
+msgstr "Diskin Toplamı"
 
 #: ../mactrack_view_interfaces.php:375
+#, fuzzy
 msgid "In Err (E/S)"
-msgstr ""
+msgstr "Err'de (E / S)"
 
 #: ../mactrack_view_interfaces.php:376
+#, fuzzy
 msgid "In Disc (D/S)"
-msgstr ""
+msgstr "Diskte (D / S)"
 
 #: ../mactrack_view_interfaces.php:377
+#, fuzzy
 msgid "UProto (UP/S)"
-msgstr ""
+msgstr "UProto (YUKARI / S)"
 
 #: ../mactrack_view_interfaces.php:378
+#, fuzzy
 msgid "Out Err (OE/S)"
-msgstr ""
+msgstr "Hata Er (OE / S)"
 
 #: ../mactrack_view_interfaces.php:379
+#, fuzzy
 msgid "Out Disc (OD/S)"
-msgstr ""
+msgstr "Diske Çık (OD / S)"
 
 #: ../mactrack_view_interfaces.php:383
+#, fuzzy
 msgid "Last Change"
-msgstr ""
+msgstr "Son değişiklik"
 
 #: ../mactrack_view_interfaces.php:384
+#, fuzzy
 msgid "Last Scanned"
-msgstr ""
+msgstr "Son Taranan"
 
 #: ../mactrack_view_interfaces.php:415
+#, fuzzy
 msgid "Filters"
-msgstr ""
+msgstr "Günlük Filtreleri"
 
 #: ../mactrack_view_interfaces.php:419
+#, fuzzy
 msgid "All Interfaces"
-msgstr ""
+msgstr "Tüm Arayüzler"
 
 #: ../mactrack_view_interfaces.php:420
+#, fuzzy
 msgid "All Non-Ignored Interfaces"
-msgstr ""
+msgstr "Tüm Yoksayılan Arabirimler"
 
 #: ../mactrack_view_interfaces.php:421
+#, fuzzy
 msgid "All Ignored Interfaces"
-msgstr ""
+msgstr "Tüm Yok Sayılan Arabirimler"
 
 #: ../mactrack_view_interfaces.php:422
-#, php-format
+#, fuzzy, php-format
 msgid "High In/Out Utilization > %d &#37;"
-msgstr ""
+msgstr "Yüksek Giriş / Çıkış Kullanımı&gt;% d%"
 
 #: ../mactrack_view_interfaces.php:423
-#, php-format
+#, fuzzy, php-format
 msgid "High In Utilization > %d &#37;"
-msgstr ""
+msgstr "Yüksek Kullanım&gt;% d%"
 
 #: ../mactrack_view_interfaces.php:424
-#, php-format
+#, fuzzy, php-format
 msgid "High Out Utilization > %d &#37;"
-msgstr ""
+msgstr "Yüksek Çıkış Kullanımı&gt;% d%"
 
 #: ../mactrack_view_interfaces.php:425
+#, fuzzy
 msgid "With Issues"
-msgstr ""
+msgstr "Sorunları"
 
 #: ../mactrack_view_interfaces.php:426
+#, fuzzy
 msgid "Up Interfaces"
-msgstr ""
+msgstr "Up Arayüzleri"
 
 #: ../mactrack_view_interfaces.php:427
+#, fuzzy
 msgid "Up Interfaces No Alias"
-msgstr ""
+msgstr "Yukarı Arayüzler Takma Ad Yok"
 
 #: ../mactrack_view_interfaces.php:428
+#, fuzzy
 msgid "Errors Accumulating"
-msgstr ""
+msgstr "Biriken Hatalar"
 
 #: ../mactrack_view_interfaces.php:429
+#, fuzzy
 msgid "Discards Accumulating"
-msgstr ""
+msgstr "Biriktirme"
 
 #: ../mactrack_view_interfaces.php:430
+#, fuzzy
 msgid "Changed in Last Day"
-msgstr ""
+msgstr "Son Günde Değiştirildi"
 
 #: ../mactrack_view_interfaces.php:433
+#, fuzzy
 msgid "Bandwidth"
-msgstr ""
+msgstr "Bant genişliği"
 
 #: ../mactrack_view_interfaces.php:539
+#, fuzzy
 msgid "Show Totals"
-msgstr ""
+msgstr "Toplamları Göster"
 
 #: ../mactrack_view_ips.php:31
+#, fuzzy
 msgid "Device Tracking - Site IP Range Report View"
-msgstr ""
+msgstr "Cihaz Takibi - Site IP Aralığı Rapor Görünümü"
 
 #: ../mactrack_view_ips.php:198
+#, fuzzy
 msgid "IP Range"
-msgstr ""
+msgstr "Ip aralığı"
 
 #: ../mactrack_view_ips.php:199
+#, fuzzy
 msgid "Current IP Addresses"
-msgstr ""
+msgstr "Mevcut IP Adresleri"
 
 #: ../mactrack_view_ips.php:200
+#, fuzzy
 msgid "Current Date"
-msgstr ""
+msgstr "Geçerli tarih"
 
 #: ../mactrack_view_ips.php:201
+#, fuzzy
 msgid "Maximum IP Addresses"
-msgstr ""
+msgstr "Maksimum IP Adresleri"
 
 #: ../mactrack_view_ips.php:202
+#, fuzzy
 msgid "Maximum Date"
-msgstr ""
+msgstr "Maksimum Tarih"
 
 #: ../mactrack_view_ips.php:207
+#, fuzzy
 msgid "IP Address Ranges"
-msgstr ""
+msgstr "IP Adresi Aralıkları"
 
 #: ../mactrack_view_ips.php:236
+#, fuzzy
 msgid "No Device Tracking Site IP Ranges Found"
-msgstr ""
+msgstr "Cihaz İzleme Sitesi IP Aralığı Bulunamadı"
 
 #: ../mactrack_view_macs.php:31
+#, fuzzy
 msgid "Device Tracking - MAC to IP Report View"
-msgstr ""
+msgstr "Cihaz Takibi - MAC - IP Rapor Görünümü"
 
 #: ../mactrack_view_macs.php:34
+#, fuzzy
 msgid "Authorize"
-msgstr ""
+msgstr "İzin Ver"
 
 #: ../mactrack_view_macs.php:35
+#, fuzzy
 msgid "Revoke"
-msgstr ""
+msgstr "İptal Et"
 
 #: ../mactrack_view_macs.php:118
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "The following MAC Addresses Could not be revoked because they are members of "
 "Group Authorizations %s"
 msgstr ""
+"Aşağıdaki MAC Adresleri, %s Grup Yetkileri üyesi oldukları için iptal "
+"edilemedi."
 
 #: ../mactrack_view_macs.php:159
+#, fuzzy
 msgid "Click 'Continue' to Authorize the following MAC Addresses."
-msgstr ""
+msgstr "Aşağıdaki MAC Adreslerini Yetkilendirmek için 'Devam Et'i tıklayın."
 
 #: ../mactrack_view_macs.php:166
+#, fuzzy
 msgid "Click 'Continue' to Revoke the following MAC Addresses."
-msgstr ""
+msgstr "Aşağıdaki MAC Adreslerini İptal Etmek için 'Devam Et'i tıklayın."
 
 #: ../mactrack_view_macs.php:173
+#, fuzzy
 msgid "You must select at least one MAC Address."
-msgstr ""
+msgstr "En az bir MAC Adresi seçmelisiniz."
 
 #: ../mactrack_view_macs.php:176
+#, fuzzy
 msgid "You are not permitted to change Mac Authorizations."
-msgstr ""
+msgstr "Mac Yetkilerini değiştiremezsin."
 
 #: ../mactrack_view_macs.php:242
-#, php-format
+#, fuzzy, php-format
 msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
-msgstr ""
+msgstr "Dev.:% IP.:%s MAC.:%s PORT.:%s Sayı .: [ %s]"
 
 #: ../mactrack_view_macs.php:254
+#, fuzzy
 msgid "You must select at least one Row."
-msgstr ""
+msgstr "En az bir Satır seçmelisiniz."
 
 #: ../mactrack_view_macs.php:257
+#, fuzzy
 msgid "You are not permitted to delete rows."
-msgstr ""
+msgstr "Satırları silmek için izin verilmez."
 
 #: ../mactrack_view_macs.php:265
+#, fuzzy
 msgid "Click 'Continue' to Delete the following rows from Aggregated table."
 msgstr ""
+"Aşağıdaki tabloları Toplanan tablodan silmek için 'Devam Et'i tıklayın."
 
 #: ../mactrack_view_macs.php:663 ../mactrack_view_macs.php:677
 #: ../mactrack_view_macs.php:809
+#, fuzzy
 msgid "VLAN ID"
-msgstr ""
+msgstr "VLAN kimliği"
 
 #: ../mactrack_view_macs.php:664 ../mactrack_view_macs.php:678
 #: ../mactrack_view_macs.php:810 ../mactrack_view_macs.php:1000
+#, fuzzy
 msgid "VLAN Name"
-msgstr ""
+msgstr "VLAN Adı"
 
 #: ../mactrack_view_macs.php:689 ../mactrack_view_macs.php:829
+#, fuzzy
 msgid "MAC Addresses"
-msgstr ""
+msgstr "MAC Adresleri"
 
 #: ../mactrack_view_macs.php:739
+#, fuzzy
 msgid "You must choose a Site, Device or other search criteria."
-msgstr ""
+msgstr "Bir Site, Cihaz veya diğer arama kriterlerini seçmelisiniz."
 
 #: ../mactrack_view_macs.php:741 ../mactrack_view_macs.php:884
+#, fuzzy
 msgid "No Device Tracking Port Results Found"
-msgstr ""
+msgstr "Cihaz İzleme Portu Sonuçları Bulunamadı"
 
 #: ../mactrack_view_macs.php:820
+#, fuzzy
 msgid "Count"
-msgstr ""
+msgstr "Sayı"
 
 #: ../mactrack_view_macs.php:1039
+#, fuzzy
 msgid "Aggregated"
-msgstr ""
+msgstr "Toplu"
 
 #: ../mactrack_view_macs.php:1069
+#, fuzzy
 msgid "Authorized"
-msgstr ""
+msgstr "Yetkili"
 
 #: ../mactrack_view_macs.php:1074
+#, fuzzy
 msgid "Yes"
-msgstr ""
+msgstr "Evet"
 
 #: ../mactrack_view_macs.php:1075
+#, fuzzy
 msgid "No"
-msgstr ""
+msgstr "Hayır"
 
 #: ../mactrack_view_sites.php:31
+#, fuzzy
 msgid "Device Tracking - Site Report View"
-msgstr ""
+msgstr "Cihaz İzleme - Site Raporu Görünümü"
 
 #: ../setup.php:921 ../setup.php:1254 ../setup.php:1256 ../setup.php:1363
 #: ../setup.php:1364 ../setup.php:1365 ../setup.php:1366 ../setup.php:1367
 #: ../setup.php:1375
+#, fuzzy
 msgid "Device Tracking"
-msgstr ""
+msgstr "Cihaz Takibi"
 
 #: ../setup.php:925
+#, fuzzy
 msgid "General Settings"
-msgstr ""
+msgstr "Genel Ayarlar"
 
 #: ../setup.php:929
+#, fuzzy
 msgid "Scanning Frequency"
-msgstr ""
+msgstr "Tarama frekansı"
 
 #: ../setup.php:930
+#, fuzzy
 msgid ""
 "Choose when to collect MAC and IP Addresses and Interface statistics from "
 "your network devices."
 msgstr ""
+"Ağ cihazlarınızdan MAC ve IP Adresleri ve Arayüz istatistiklerini ne zaman "
+"toplayacağınızı seçin."
 
 #: ../setup.php:936
+#, fuzzy
 msgid "Concurrent Processes"
-msgstr ""
+msgstr "Eşzamanlı İşlemler"
 
 #: ../setup.php:937
+#, fuzzy
 msgid ""
 "Specify how many devices will be polled simultaneously until all devices "
 "have been polled."
 msgstr ""
+"Tüm aygıtlar yoklanıncaya kadar kaç aygıtın aynı anda yoklanacağını belirtin."
 
 #: ../setup.php:944
+#, fuzzy
 msgid "Scanner Max Runtime"
-msgstr ""
+msgstr "Tarayıcı Maksimum Çalışma Zamanı"
 
 #: ../setup.php:945
+#, fuzzy
 msgid ""
 "Specify the number of minutes a device scanning function will be allowed to "
 "run prior to the system assuming it has been completed.  This setting will "
 "correct for abended scanning jobs."
 msgstr ""
+"Bir cihaz tarama fonksiyonunun, sistemin tamamlandığını varsaymadan önce "
+"çalışmasına izin verileceği dakika sayısını belirtin. Bu ayar, iptal edilen "
+"tarama işlerini düzeltir."
 
 #: ../setup.php:952
+#, fuzzy
 msgid "Start Time for Data Collection"
-msgstr ""
+msgstr "Veri Toplamaya Başlama Zamanı"
 
 #: ../setup.php:953
+#, fuzzy
 msgid ""
 "When would you like the first data collection to take place.  All future "
 "data collection times will be based upon this start time.  A good example "
 "would be 12:00AM."
 msgstr ""
+"İlk veri toplamanın ne zaman gerçekleşmesini istiyorsunuz? Gelecekteki tüm "
+"veri toplama zamanları bu başlangıç zamanına bağlı olacaktır. İyi bir örnek, "
+"saat 12:00 olacaktır."
 
 #: ../setup.php:960
+#, fuzzy
 msgid "Database Maintenance Time"
-msgstr ""
+msgstr "Veritabanı Bakım Süresi"
 
 #: ../setup.php:961
+#, fuzzy
 msgid ""
 "When should old database records be removed from the database.  Please note "
 "that no access will be permitted to the port database while this action is "
 "taking place."
 msgstr ""
+"Eski veritabanı kayıtları ne zaman veritabanından kaldırılmalıdır? Bu işlem "
+"yapılırken liman veri tabanına erişim izni olmayacağını lütfen unutmayın."
 
 #: ../setup.php:968
+#, fuzzy
 msgid "Data Retention"
-msgstr ""
+msgstr "Veri saklama"
 
 #: ../setup.php:969
+#, fuzzy
 msgid "How long should port MAC details be retained in the database."
-msgstr ""
+msgstr "Port MAC detayları veritabanında ne kadar süreyle saklanmalıdır?"
 
 #: ../setup.php:975
+#, fuzzy
 msgid "Switch Level Ignore Ports Delimiter"
-msgstr ""
+msgstr "Anahtar Seviyesi Sınırları Yoksay Sınırlayıcıyı Değiştir"
 
 #: ../setup.php:976
+#, fuzzy
 msgid ""
 "What delimiter should Device Tracking use when parsing the Ignore Ports "
 "string for each switch."
 msgstr ""
+"Her izleme için Bağlantı Noktalarını Yoksay dizesini ayrıştırırken Aygıt "
+"İzleme'yi hangi sınırlayıcı kullanmalıdır?"
 
 #: ../setup.php:980
+#, fuzzy
 msgid "Auto Detect"
-msgstr ""
+msgstr "Otomatik tespit"
 
 #: ../setup.php:981 ../setup.php:991
+#, fuzzy
 msgid "Colon [:]"
-msgstr ""
+msgstr "Kolon [:]"
 
 #: ../setup.php:982
+#, fuzzy
 msgid "Pipe [|]"
-msgstr ""
+msgstr "Boru [|]"
 
 #: ../setup.php:983
+#, fuzzy
 msgid "Space [ ]"
-msgstr ""
+msgstr "Boşluk []"
 
 #: ../setup.php:987
+#, fuzzy
 msgid "Mac Address Delimiter"
-msgstr ""
+msgstr "Mac Adresi Sınırlayıcısı"
 
 #: ../setup.php:988
+#, fuzzy
 msgid "How should each octet of the MAC address be delimited."
-msgstr ""
+msgstr "MAC adresinin her sekizli nasıl sınırlandırılmalıdır."
 
 #: ../setup.php:991
+#, fuzzy
 msgid "Dash [-]"
-msgstr ""
+msgstr "Çizgi [-]"
 
 #: ../setup.php:995 ../setup.php:1699
+#, fuzzy
 msgid "Ports to Ignore"
-msgstr ""
+msgstr "Yoksayılacak Bağlantı Noktaları"
 
 #: ../setup.php:996
+#, fuzzy
 msgid ""
 "Provide a regular expression of ifNames or ifDescriptions of ports to ignore "
 "in the interface list.  For example, (Vlan|Loopback|Null)."
 msgstr ""
+"Arabirim listesinde yoksayılacak ifNames veya if ifes ifadelerinin düzenli "
+"ifadesini sağlayın. Örneğin, (Vlan | Loopback | Null)."
 
 #: ../setup.php:1003
+#, fuzzy
 msgid "Bandwidth Usage Threshold"
-msgstr ""
+msgstr "Bant Genişliği Kullanım Eşiği"
 
 #: ../setup.php:1004
+#, fuzzy
 msgid ""
 "When reviewing network interface statistics, what bandwidth threshold do you "
 "want to view by default."
 msgstr ""
+"Ağ arayüzü istatistiklerini incelerken, varsayılan olarak hangi bant "
+"genişliği eşiğini görüntülemek istiyorsunuz?"
 
 #: ../setup.php:1009 ../setup.php:1010 ../setup.php:1011 ../setup.php:1012
 #: ../setup.php:1013 ../setup.php:1014 ../setup.php:1015 ../setup.php:1016
 #: ../setup.php:1017
-#, php-format
+#, fuzzy, php-format
 msgid "%d Percent"
-msgstr ""
+msgstr "% d Yüzde"
 
 #: ../setup.php:1021
+#, fuzzy
 msgid "DNS Settings"
-msgstr ""
+msgstr "DNS ayarları"
 
 #: ../setup.php:1025
+#, fuzzy
 msgid "Perform Reverse DNS Name Resolution"
-msgstr ""
+msgstr "Ters DNS Adı Çözünürlüğü Gerçekleştir"
 
 #: ../setup.php:1026
+#, fuzzy
 msgid ""
 "Should Device Tracking perform reverse DNS lookup of the IP addresses "
 "associated with ports. CAUTION: If DNS is not properly setup, this will slow "
 "scan time significantly."
 msgstr ""
+"Aygıt Takibi, bağlantı noktalarıyla ilişkilendirilmiş IP adreslerinin geriye "
+"doğru DNS araması yapması durumunda. DİKKAT: DNS doğru şekilde kurulmazsa, "
+"bu tarama süresini önemli ölçüde yavaşlatır."
 
 #: ../setup.php:1031
+#, fuzzy
 msgid "Primary DNS IP Address"
-msgstr ""
+msgstr "Birincil DNS IP Adresi"
 
 #: ../setup.php:1032
+#, fuzzy
 msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
-msgstr ""
+msgstr "Geriye doğru aramalarda kullanılacak birincil DNS IP Adresini girin."
 
 #: ../setup.php:1039
+#, fuzzy
 msgid "Secondary DNS IP Address"
-msgstr ""
+msgstr "İkincil DNS IP Adresi"
 
 #: ../setup.php:1040
+#, fuzzy
 msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
-msgstr ""
+msgstr "Geriye doğru aramalarda kullanılacak ikincil DNS IP Adresini girin."
 
 #: ../setup.php:1047
+#, fuzzy
 msgid "DNS Timeout"
-msgstr ""
+msgstr "DNS Zaman Aşımı"
 
 #: ../setup.php:1048
+#, fuzzy
 msgid ""
 "Please enter the DNS timeout in milliseconds.  Device Tracking uses a PHP "
 "based DNS resolver."
 msgstr ""
+"Lütfen DNS zaman aşımını milisaniye cinsinden girin. Aygıt İzleme, PHP "
+"tabanlı bir DNS çözücü kullanır."
 
 #: ../setup.php:1055
+#, fuzzy
 msgid "DNS Prime Interval"
-msgstr ""
+msgstr "DNS Başbakan Aralığı"
 
 #: ../setup.php:1056
+#, fuzzy
 msgid ""
 "How often, in seconds do Device Tracking scanning IP's need to be resolved "
 "to MAC addresses for DNS resolution.  Using a larger number when you have "
 "several thousand devices will increase performance."
 msgstr ""
+"Ne kadar sıklıkla, saniye cinsinden Aygıt İzleme taraması IP'lerinin DNS "
+"çözümlemesi için MAC adreslerine çözülmesi gerekir. Birkaç bin cihazınız "
+"olduğunda daha büyük bir sayı kullanmak performansı artıracaktır."
 
 #: ../setup.php:1063
+#, fuzzy
 msgid "Notification Settings"
-msgstr ""
+msgstr "Bildirim Ayarları"
 
 #: ../setup.php:1067
+#, fuzzy
 msgid "Source Address"
-msgstr ""
+msgstr "Kaynak adresi"
 
 #: ../setup.php:1068
+#, fuzzy
 msgid "The source Email address for Device Tracking Emails."
-msgstr ""
+msgstr "Cihaz İzleme E-postaları için kaynak E-posta adresi."
 
 #: ../setup.php:1075
+#, fuzzy
 msgid "Source Email Name"
-msgstr ""
+msgstr "Kaynak E-posta Adı"
 
 #: ../setup.php:1076
+#, fuzzy
 msgid "The Source Email name for Device Tracking Emails."
-msgstr ""
+msgstr "Aygıt İzleme E-postaları için Kaynak E-posta adı."
 
 #: ../setup.php:1078
+#, fuzzy
 msgid "MACTrack Administrator"
-msgstr ""
+msgstr "MACTrack Yöneticisi"
 
 #: ../setup.php:1083 ../setup.php:1888
+#, fuzzy
 msgid "MacWatch Default Body"
-msgstr ""
+msgstr "MacWatch Varsayılan Gövde"
 
 #: ../setup.php:1084 ../setup.php:1889
+#, fuzzy
 msgid ""
 "The Email body preset for Device Tracking MacWatch Emails.  The body can "
 "contain any valid html tags.  It also supports replacement tags that will be "
 "processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, "
 "<SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
 msgstr ""
+"Cihaz İzleme MacWatch E-postaları için önceden ayarlanmış E-posta gövdesi. "
+"Vücut, herhangi bir geçerli html etiketi içerebilir. Ayrıca bir E-posta "
+"gönderirken işlenecek değiştirme etiketlerini de destekler. Geçerli "
+"etiketler şunları içerir: <IP> , <MAC> , <TICKET> , <SITENAME> , "
+"<DEVICEIP> , <PORTNAME> , <PORTNUMBER> , <DEVICENAME> ."
 
 #: ../setup.php:1088 ../setup.php:1893
+#, fuzzy
 msgid ""
 "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>."
 "<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP "
 "<DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
 msgstr ""
+"Mac adresi <MAC> IP adresinde bulundu <IP> Bilet Numarası için: <TICKET> . "
+"<br> Cihazın bulunduğu yer <br> site: <SITENAME> , Cihaz <DEVICENAME> , IP "
+"<DEVICEIP> , Liman <PORTNUMBER> ve Bağlantı Noktası Adı <PORTNAME>"
 
 #: ../setup.php:1095
+#, fuzzy
 msgid "MacAuth Report Email Addresses"
-msgstr ""
+msgstr "MacAuth Raporu E-posta Adresleri"
 
 #: ../setup.php:1096
+#, fuzzy
 msgid ""
 "A comma delimited list of users to recieve the MacAuth Email notifications."
 msgstr ""
+"MacAuth E-posta bildirimlerini almak için virgülle ayrılmış bir kullanıcı "
+"listesi."
 
 #: ../setup.php:1105
+#, fuzzy
 msgid "MacAuth Report Frequency"
-msgstr ""
+msgstr "MacAuth Rapor Sıklığı"
 
 #: ../setup.php:1106
+#, fuzzy
 msgid "How often will the MacAuth Reports be Emailed."
-msgstr ""
+msgstr "MacAuth Raporlarının ne sıklıkla E-postayla gönderileceği."
 
 #: ../setup.php:1112
+#, fuzzy
 msgid "Device Tracking ArpWatch Settings"
-msgstr ""
+msgstr "Cihaz İzleme ArpWatch Ayarları"
 
 #: ../setup.php:1116
+#, fuzzy
 msgid "Enable ArpWatch"
-msgstr ""
+msgstr "ArpWatch'u Etkinleştir"
 
 #: ../setup.php:1117
+#, fuzzy
 msgid ""
 "Should Device Tracking also use ArpWatch data to supplement Mac to IP/DNS "
 "resolution?"
 msgstr ""
+"Cihaz Takibi, Mac'ten IP / DNS çözünürlüğüne ek olarak ArpWatch verilerini "
+"de kullanmalı mı?"
 
 #: ../setup.php:1122
+#, fuzzy
 msgid "ArpWatch Database Path"
-msgstr ""
+msgstr "ArpWatch Veritabanı Yolu"
 
 #: ../setup.php:1123
+#, fuzzy
 msgid "The location of the ArpWatch Database file on the Cacti server."
-msgstr ""
+msgstr "Cacti sunucusundaki ArpWatch Veritabanı dosyasının konumu."
 
 #: ../setup.php:1130
+#, fuzzy
 msgid "SNMP Presets"
-msgstr ""
+msgstr "SNMP Hazır Ayarları"
 
 #: ../setup.php:1134
+#, fuzzy
 msgid "Update Policy for SNMP Options"
-msgstr ""
+msgstr "SNMP Seçenekleri için Güncelleme Politikası"
 
 #: ../setup.php:1135
+#, fuzzy
 msgid ""
 "Policy for synchronization of SNMP Options between Cacti devices and Device "
 "Tracking Devices."
 msgstr ""
+"Cacti cihazları ve Cihaz İzleme Cihazları arasında SNMP Seçeneklerinin "
+"senkronizasyonu için politika."
 
 #: ../setup.php:1142
+#, fuzzy
 msgid "Default SNMP version for all new hosts."
-msgstr ""
+msgstr "Tüm yeni ana bilgisayarlar için varsayılan SNMP sürümü."
 
 #: ../setup.php:1149
+#, fuzzy
 msgid "Default SNMP read community for all new hosts."
-msgstr ""
+msgstr "Varsayılan SNMP, tüm yeni ana bilgisayarlar için topluluk okur."
 
 #: ../setup.php:1156
+#, fuzzy
 msgid "Communities"
-msgstr ""
+msgstr "Topluluklar"
 
 #: ../setup.php:1157
+#, fuzzy
 msgid ""
 "Fill in the list of available SNMP read strings to test for this device. "
 "Each read string must be separated by a colon ':'.  These read strings will "
 "be tested sequentially if the primary read string is invalid."
 msgstr ""
+"Bu cihazı test etmek için mevcut SNMP okuma dizgilerinin listesini doldurun. "
+"Her okuma dizgisi bir ':' kolonuyla ayrılmalıdır. Birincil okuma dizisi "
+"geçersizse, bu okuma dizeleri sırayla test edilecektir."
 
 #: ../setup.php:1164 ../setup.php:1534
+#, fuzzy
 msgid "The UDP/TCP Port to poll the SNMP agent on."
-msgstr ""
+msgstr "SNMP aracısını çağırmak için UDP / TCP Bağlantı Noktası."
 
 #: ../setup.php:1172
+#, fuzzy
 msgid "Default SNMP timeout in milli-seconds."
-msgstr ""
+msgstr "Varsayılan SNMP zaman aşımı mili saniye cinsinden."
 
 #: ../setup.php:1180
+#, fuzzy
 msgid ""
 "The number times the SNMP poller will attempt to reach the host before "
 "failing."
 msgstr ""
+"SNMP yoklayıcısının başarısızlığa uğramadan önce ana bilgisayara erişmeye "
+"çalıştığı sayı."
 
 #: ../setup.php:1193
+#, fuzzy
 msgid "snmpbulkwalk Binary Path"
-msgstr ""
+msgstr "snmpbulkwalk İkili Yol"
 
 #: ../setup.php:1194
+#, fuzzy
 msgid "The path to your snmpbulkwalk binary."
-msgstr ""
+msgstr "Snmpbulkwalk ikili dosyanızın yolu."
 
 #: ../setup.php:1206
+#, fuzzy
 msgid "Device Tracking Devices"
-msgstr ""
+msgstr "Cihaz Takip Cihazları"
 
 #: ../setup.php:1207 ../setup.php:1212 ../setup.php:1213 ../setup.php:1215
 #: ../setup.php:1219 ../setup.php:1222 ../setup.php:1225
+#, fuzzy
 msgid "(Edit)"
-msgstr ""
+msgstr "(Düzenle)"
 
 #: ../setup.php:1208 ../setup.php:1216
+#, fuzzy
 msgid "(Import)"
-msgstr ""
+msgstr "İçe Aktar"
 
 #: ../setup.php:1214
+#, fuzzy
 msgid "Device Tracking Device Types"
-msgstr ""
+msgstr "Cihaz Takibi Cihaz Çeşitleri"
 
 #: ../setup.php:1218
+#, fuzzy
 msgid "Device Tracking Sites"
-msgstr ""
+msgstr "Cihaz İzleme Siteleri"
 
 #: ../setup.php:1221
+#, fuzzy
 msgid "Mac Address Tracking Utility"
-msgstr ""
+msgstr "Mac Adres İzleme Yardımcı Programı"
 
 #: ../setup.php:1224
+#, fuzzy
 msgid "Mac Address Authorization Utility"
-msgstr ""
+msgstr "Mac Adres Yetkilendirme Yardımcı Programı"
 
 #: ../setup.php:1227
+#, fuzzy
 msgid "Device Tracking Vendor Macs"
-msgstr ""
+msgstr "Aygıt Takibi Satıcı Mac'leri"
 
 #: ../setup.php:1228
+#, fuzzy
 msgid "Device Tracking View Macs"
-msgstr ""
+msgstr "Cihaz İzleme Mac'leri Görüntüle"
 
 #: ../setup.php:1230
+#, fuzzy
 msgid "Device Tracking Dot1x View"
-msgstr ""
+msgstr "Dot1x Cihaz İzlemesi"
 
 #: ../setup.php:1231
+#, fuzzy
 msgid "Device Tracking IP Address Viewer"
-msgstr ""
+msgstr "Cihaz İzleme IP Adresi Görüntüleyici"
 
 #: ../setup.php:1232
+#, fuzzy
 msgid "Device Tracking View Interfaces"
-msgstr ""
+msgstr "Cihaz İzleme Görünümü Arayüzleri"
 
 #: ../setup.php:1233
+#, fuzzy
 msgid "Device Tracking View Sites"
-msgstr ""
+msgstr "Cihaz İzleme Siteleri Görüntüleme"
 
 #: ../setup.php:1234
+#, fuzzy
 msgid "Device Tracking View IP Ranges"
-msgstr ""
+msgstr "Cihaz İzleme IP Aralıklarını Görüntüleyin"
 
 #: ../setup.php:1235
+#, fuzzy
 msgid "Device Tracking View Devices"
-msgstr ""
+msgstr "Cihaz İzleme Görünüm Cihazları"
 
 #: ../setup.php:1236
+#, fuzzy
 msgid "Device Tracking Utilities"
-msgstr ""
+msgstr "Cihaz İzleme Yardımcı Programları"
 
 #: ../setup.php:1239
+#, fuzzy
 msgid "Truncate Port Results Table"
-msgstr ""
+msgstr "Bağlantı Noktası Sonuçları Tablosunu Kes"
 
 #: ../setup.php:1240
+#, fuzzy
 msgid "Truncate Aggregated Port Results Table"
-msgstr ""
+msgstr "Toplanmış Bağlantı Noktası Sonuçları Tablosunu Kes"
 
 #: ../setup.php:1241
+#, fuzzy
 msgid "Truncate and Re-create Aggregated Port Results Table"
-msgstr ""
+msgstr "Kesilmiş ve Toplanan Liman Sonuçları Tablosunu Yeniden Oluşturma"
 
 #: ../setup.php:1243
+#, fuzzy
 msgid "Refresh/Update Vendor MAC Database from IEEE"
-msgstr ""
+msgstr "Satıcı MAC Veritabanını IEEE’den Yenile / Güncelle"
 
 #: ../setup.php:1244 ../setup.php:1245
+#, fuzzy
 msgid "Device Tracking Graph Viewer"
-msgstr ""
+msgstr "Cihaz İzleme Grafik Görüntüleyicisi"
 
 #: ../setup.php:1273 ../setup.php:1274 ../setup.php:1275 ../setup.php:1276
-#, php-format
+#, fuzzy, php-format
 msgid "%d Seconds"
-msgstr ""
+msgstr "%d saniye"
 
 #: ../setup.php:1277
-#, php-format
+#, fuzzy, php-format
 msgid "%d Minute"
-msgstr ""
+msgstr "% d Dakika"
 
 #: ../setup.php:1289
+#, fuzzy
 msgid "Matches"
-msgstr ""
+msgstr "maçlar"
 
 #: ../setup.php:1290
+#, fuzzy
 msgid "Contains"
-msgstr ""
+msgstr "şunu içeren"
 
 #: ../setup.php:1291
+#, fuzzy
 msgid "Begins With"
-msgstr ""
+msgstr "ile başlar"
 
 #: ../setup.php:1292
+#, fuzzy
 msgid "Does Not Contain"
-msgstr ""
+msgstr "içermez"
 
 #: ../setup.php:1293
+#, fuzzy
 msgid "Does Not Begin With"
-msgstr ""
+msgstr "İle başlamıyor"
 
 #: ../setup.php:1294
+#, fuzzy
 msgid "Is Null"
-msgstr ""
+msgstr "Boş"
 
 #: ../setup.php:1295
+#, fuzzy
 msgid "Is Not Null"
-msgstr ""
+msgstr "Boş Değil"
 
 #: ../setup.php:1300
+#, fuzzy
 msgid "Half"
-msgstr ""
+msgstr "Yarım"
 
 #: ../setup.php:1301
+#, fuzzy
 msgid "Full"
-msgstr ""
+msgstr "Tam"
 
 #: ../setup.php:1306
+#, fuzzy
 msgid "Sync Cacti Device to Device Tracking Device"
-msgstr ""
+msgstr "Cacti Cihazını Cihaz İzleme Cihazına Senkronize Et"
 
 #: ../setup.php:1307
+#, fuzzy
 msgid "Sync Device Tracking Device to Cacti Device"
-msgstr ""
+msgstr "Cihaz Takip Cihazını Cacti Cihazına Eşitleyin"
 
 #: ../setup.php:1325 ../setup.php:1326 ../setup.php:1327 ../setup.php:1328
-#, php-format
+#, fuzzy, php-format
 msgid "Every %d Minutes"
-msgstr ""
+msgstr "Her %d Dakika"
 
 #: ../setup.php:1329
-#, php-format
+#, fuzzy, php-format
 msgid "Every %d Hour"
-msgstr ""
+msgstr "Her% d saatte bir"
 
 #: ../setup.php:1330 ../setup.php:1331 ../setup.php:1332 ../setup.php:1333
 #: ../setup.php:1353 ../setup.php:1916 ../setup.php:1917
-#, php-format
+#, fuzzy, php-format
 msgid "Every %d Hours"
-msgstr ""
+msgstr "Her% d saatte bir"
 
 #: ../setup.php:1334 ../setup.php:1354 ../setup.php:1918
+#, fuzzy
 msgid "Every Day"
-msgstr ""
+msgstr "Her Gün"
 
 #: ../setup.php:1343
-#, php-format
+#, fuzzy, php-format
 msgid "%d Month"
-msgstr ""
+msgstr "% d Ay"
 
 #: ../setup.php:1344 ../setup.php:1345 ../setup.php:1346
-#, php-format
+#, fuzzy, php-format
 msgid "%d Months"
-msgstr ""
+msgstr "% d Ay"
 
 #: ../setup.php:1347
-#, php-format
+#, fuzzy, php-format
 msgid "%d Year"
-msgstr ""
+msgstr "% d Yıl"
 
 #: ../setup.php:1352
+#, fuzzy
 msgid "On Scan Completion"
-msgstr ""
+msgstr "Tarama Tamamlandığında"
 
 #: ../setup.php:1355
-#, php-format
+#, fuzzy, php-format
 msgid "Every %d Days"
-msgstr ""
+msgstr "Her% d Gün"
 
 #: ../setup.php:1356
+#, fuzzy
 msgid "Every Week"
-msgstr ""
+msgstr "Her Hafta"
 
 #: ../setup.php:1362
+#, fuzzy
 msgid "Management"
-msgstr ""
+msgstr "Kullanıcı Yonetimi"
 
 #: ../setup.php:1365 ../setup.php:1710 ../setup.php:1714
+#, fuzzy
 msgid "SNMP Options"
-msgstr ""
+msgstr "SNMP Seçenekleri"
 
 #: ../setup.php:1366 ../mactrack_device_types.php:942
 #: ../mactrack_device_types.php:995
+#, fuzzy
 msgid "Device Types"
-msgstr ""
+msgstr "Cihaz türleri"
 
 #: ../setup.php:1368 ../setup.php:1369 ../setup.php:1370 ../setup.php:1376
+#, fuzzy
 msgid "Tracking Tools"
-msgstr ""
+msgstr "İzleme Araçları"
 
 #: ../setup.php:1368
+#, fuzzy
 msgid "Mac Watch"
-msgstr ""
+msgstr "Mac izle"
 
 #: ../setup.php:1369
+#, fuzzy
 msgid "Mac Authorizations"
-msgstr ""
+msgstr "Mac Yetkileri"
 
 #: ../setup.php:1370
+#, fuzzy
 msgid "Tracking Utilities"
-msgstr ""
+msgstr "İzleme Araçları"
 
 #: ../setup.php:1389
+#, fuzzy
 msgid "Device Scanning Function Options"
-msgstr ""
+msgstr "Cihaz Tarama Fonksiyonu Seçenekleri"
 
 #: ../setup.php:1394
+#, fuzzy
 msgid "Give this device type a meaningful description."
-msgstr ""
+msgstr "Bu cihaz tipine anlamlı bir açıklama verin."
 
 #: ../setup.php:1401
+#, fuzzy
 msgid "Fill in the name for the vendor of this device type."
-msgstr ""
+msgstr "Bu cihaz türünün satıcısının adını girin."
 
 #: ../setup.php:1408
+#, fuzzy
 msgid "Choose the type of device."
-msgstr ""
+msgstr "Cihazın türünü seçin."
 
 #: ../setup.php:1415
+#, fuzzy
 msgid "System Description Match"
-msgstr ""
+msgstr "Sistem Açıklaması Eşleşmesi"
 
 #: ../setup.php:1416 ../setup.php:1423
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "Provide key information to help Device Tracking detect the type of device.  "
 "The wildcard character is the '%' sign."
 msgstr ""
+"Cihaz İzlemenin cihazın türünü algılamasına yardımcı olacak temel bilgileri "
+"girin. Joker karakter '%' işaretidir."
 
 #: ../setup.php:1422
+#, fuzzy
 msgid "Vendor SNMP Object ID Match"
-msgstr ""
+msgstr "Satıcı SNMP Nesne Kimliği Eşleşmesi"
 
 #: ../setup.php:1429
+#, fuzzy
 msgid "MAC Address Scanning Function"
-msgstr ""
+msgstr "MAC Adresi Tarama Fonksiyonu"
 
 #: ../setup.php:1430
+#, fuzzy
 msgid ""
 "The Device Tracking scanning function to call in order to obtain and store "
 "port details.  The function name is all that is required.  The following "
@@ -2384,234 +2974,308 @@ msgid ""
 "&$device, $lowport, $highport)'.  There is no function required for a pure "
 "router."
 msgstr ""
+"Port ayrıntılarını almak ve saklamak için arayacağınız Cihaz İzleme tarama "
+"işlevi. İşlev adı gerekli olan tek şey. Aşağıdaki dört parametre kabul "
+"edilir ve her zaman eklenecektir: &#39;my_function ($ site, &amp; $ device, "
+"$ lowport, $ highport)&#39;. Saf bir yönlendirici için gerekli bir fonksiyon "
+"yoktur."
 
 #: ../setup.php:1437
+#, fuzzy
 msgid "IP Address Scanning Function"
-msgstr ""
+msgstr "IP Adresi Tarama İşlevi"
 
 #: ../setup.php:1438
+#, fuzzy
 msgid ""
 "The Device Tracking scanning function specific to Layer3 devices that track "
 "IP Addresses."
 msgstr ""
+"IP Adreslerini izleyen Layer3 cihazlarına özgü Cihaz İzleme tarama işlevi."
 
 #: ../setup.php:1445
+#, fuzzy
 msgid "802.1x Scanning Function"
-msgstr ""
+msgstr "802.1x Tarama İşlevi"
 
 #: ../setup.php:1446
+#, fuzzy
 msgid ""
 "The Device Tracking scanning function specific to Switches with dot1x "
 "enabled."
-msgstr ""
+msgstr "Nokta1x etkinleştirilmiş Anahtarlara özgü Aygıt İzleme tarama işlevi."
 
 #: ../setup.php:1453
+#, fuzzy
 msgid "Serial Number Base OID"
-msgstr ""
+msgstr "Seri Numarası Tabanı OID"
 
 #: ../setup.php:1454
+#, fuzzy
 msgid ""
 "The SNMP OID used to obtain this device types serial number to be stored in "
 "the Device Tracking Asset Information table."
 msgstr ""
+"Bu cihazı elde etmek için kullanılan SNMP OID, Cihaz İzleme Varlık Bilgileri "
+"tablosunda saklanacak seri numarasını yazar."
 
 #: ../setup.php:1461
+#, fuzzy
 msgid "Serial Number Collection Method"
-msgstr ""
+msgstr "Seri Numarası Toplama Yöntemi"
 
 #: ../setup.php:1462
+#, fuzzy
 msgid ""
 "How is the serial number collected for this OID.  If 'SNMP Walk', we assume "
 "multiple serial numbers.  If 'Get', it will be only one.."
 msgstr ""
+"Bu OID için seri numarası nasıl toplanır? 'SNMP Walk' ise, birden fazla seri "
+"numarası alırız. 'Al' ise, sadece bir olacak .."
 
 #: ../setup.php:1465
+#, fuzzy
 msgid "SNMP Get"
-msgstr ""
+msgstr "SNMP Al"
 
 #: ../setup.php:1465
+#, fuzzy
 msgid "SNMP Walk"
-msgstr ""
+msgstr "SNMP Yürüyüşü"
 
 #: ../setup.php:1469
+#, fuzzy
 msgid "Low User Port Number"
-msgstr ""
+msgstr "Düşük Kullanıcı Port Numarası"
 
 #: ../setup.php:1470 ../setup.php:1479
+#, fuzzy
 msgid ""
 "Provide the low user port number on this switch.  Leave 0 to allow the "
 "system to calculate it."
 msgstr ""
+"Bu anahtardaki düşük kullanıcı portu numarasını girin. Sistemin "
+"hesaplamasını sağlamak için 0 bırakın."
 
 #: ../setup.php:1478
+#, fuzzy
 msgid "High User Port Number"
-msgstr ""
+msgstr "Yüksek Kullanıcı Port Numarası"
 
 #: ../setup.php:1504
+#, fuzzy
 msgid "Fill in the name of this SNMP option set."
-msgstr ""
+msgstr "Bu SNMP seçenek setinin adını girin."
 
 #: ../setup.php:1516
+#, fuzzy
 msgid "SNMP Version"
-msgstr ""
+msgstr "SNMP Sürümü"
 
 #: ../setup.php:1517
+#, fuzzy
 msgid "Choose the SNMP version for this host."
-msgstr ""
+msgstr "Bu ana bilgisayar için SNMP sürümünü seçin."
 
 #: ../setup.php:1524
+#, fuzzy
 msgid "SNMP Community String"
-msgstr ""
+msgstr "SNMP Topluluk Dize"
 
 #: ../setup.php:1525
+#, fuzzy
 msgid "Fill in the SNMP read community for this device."
-msgstr ""
+msgstr "Bu cihaz için SNMP okuma topluluğunu doldurun."
 
 #: ../setup.php:1533
+#, fuzzy
 msgid "SNMP Port"
-msgstr ""
+msgstr "SNMP Bağlantı Noktası"
 
 #: ../setup.php:1542
+#, fuzzy
 msgid "SNMP Timeout"
-msgstr ""
+msgstr "SNMP Zaman Aşımı"
 
 #: ../setup.php:1543
+#, fuzzy
 msgid ""
 "The maximum number of milliseconds Cacti will wait for an SNMP response "
 "(does not work with php-snmp support)."
 msgstr ""
+"Maksimum milisaniye kaktüs sayısı SNMP yanıtını bekleyecektir (php-snmp "
+"desteği ile çalışmaz)."
 
 #: ../setup.php:1551
+#, fuzzy
 msgid "SNMP Retries"
-msgstr ""
+msgstr "SNMP Yeniden Denedi"
 
 #: ../setup.php:1552
+#, fuzzy
 msgid ""
 "The maximum number of attempts to reach a device via an SNMP readstring "
 "prior to giving up."
 msgstr ""
+"Bir cihaza bir SNMP okuma yoluyla pes etmeden önce ulaşma girişimlerinin "
+"azami sayısı."
 
 #: ../setup.php:1560
+#, fuzzy
 msgid "Maximum OID's Per Get Request"
-msgstr ""
+msgstr "Alma İsteğine Göre Maksimum OID"
 
 #: ../setup.php:1561
+#, fuzzy
 msgid ""
 "Specified the number of OID's that can be obtained in a single SNMP Get "
 "request."
-msgstr ""
+msgstr "Tek bir SNMP Alma isteğinde elde edilebilecek OID sayısını belirtir."
 
 #: ../setup.php:1569
+#, fuzzy
 msgid "SNMP Username (v3)"
-msgstr ""
+msgstr "SNMP Kullanıcı Adı (v3)"
 
 #: ../setup.php:1570
+#, fuzzy
 msgid "SNMP v3 username for this device."
-msgstr ""
+msgstr "Bu cihaz için SNMP v3 kullanıcı adı."
 
 #: ../setup.php:1578
+#, fuzzy
 msgid "SNMP Password (v3)"
-msgstr ""
+msgstr "SNMP Parolası (v3)"
 
 #: ../setup.php:1579
+#, fuzzy
 msgid "SNMP v3 password for this device."
-msgstr ""
+msgstr "Bu cihaz için SNMP v3 şifresi."
 
 #: ../setup.php:1587
+#, fuzzy
 msgid "SNMP Auth Protocol (v3)"
-msgstr ""
+msgstr "SNMP Kimlik Doğrulama Protokolü (v3)"
 
 #: ../setup.php:1588
+#, fuzzy
 msgid "Choose the SNMPv3 Authorization Protocol."
-msgstr ""
+msgstr "SNMPv3 Yetkilendirme Protokolünü seçin."
 
 #: ../setup.php:1595
+#, fuzzy
 msgid "SNMP Privacy Passphrase (v3)"
-msgstr ""
+msgstr "SNMP Gizlilik Şifresi (v3)"
 
 #: ../setup.php:1596
+#, fuzzy
 msgid "Choose the SNMPv3 Privacy Passphrase."
-msgstr ""
+msgstr "SNMPv3 Gizlilik Şifresini seçin."
 
 #: ../setup.php:1604
+#, fuzzy
 msgid "SNMP Privacy Protocol (v3)"
-msgstr ""
+msgstr "SNMP Gizlilik Protokolü (v3)"
 
 #: ../setup.php:1605
+#, fuzzy
 msgid "Choose the SNMPv3 Privacy Protocol."
-msgstr ""
+msgstr "SNMPv3 Gizlilik Protokolünü seçin."
 
 #: ../setup.php:1612
+#, fuzzy
 msgid "SNMP Context (v3)"
-msgstr ""
+msgstr "SNMP İçeriği (v3)"
 
 #: ../setup.php:1613
+#, fuzzy
 msgid "Enter the SNMP v3 Context to use for this device."
-msgstr ""
+msgstr "Bu cihaz için kullanılacak SNMP v3 Bağlamını girin."
 
 #: ../setup.php:1621
+#, fuzzy
 msgid "SNMP Engine ID (v3)"
-msgstr ""
+msgstr "SNMP Motor Kimliği (v3)"
 
 #: ../setup.php:1622
+#, fuzzy
 msgid "Enter the SNMP v3 Engine ID to use for this device."
-msgstr ""
+msgstr "Bu cihaz için kullanılacak SNMP v3 Motor Kimliğini girin."
 
 #: ../setup.php:1634
+#, fuzzy
 msgid "General Device Settings"
-msgstr ""
+msgstr "Genel Cihaz Ayarları"
 
 #: ../setup.php:1639
+#, fuzzy
 msgid "Give this device a meaningful name."
-msgstr ""
+msgstr "Bu aygıta anlamlı bir ad verin."
 
 #: ../setup.php:1646
+#, fuzzy
 msgid "Fill in the fully qualified hostname for this device."
-msgstr ""
+msgstr "Bu cihaz için tam nitelikli ana bilgisayar adını girin."
 
 #: ../setup.php:1651
+#, fuzzy
 msgid "Related Cacti Host"
-msgstr ""
+msgstr "İlgili Kaktüsler Host"
 
 #: ../setup.php:1652
+#, fuzzy
 msgid "Given Device Tracking Host is connected to this Cacti Host."
 msgstr ""
+"Verilen Cihaz İzleme Ana Bilgisayarı bu Cacti Ana Bilgisayarına bağlandı."
 
 #: ../setup.php:1661
+#, fuzzy
 msgid "Scan Type"
-msgstr ""
+msgstr "Tarama tipi"
 
 #: ../setup.php:1662
+#, fuzzy
 msgid "Choose the scan type you wish to perform on this device."
-msgstr ""
+msgstr "Bu cihazda gerçekleştirmek istediğiniz tarama türünü seçin."
 
 #: ../setup.php:1670
+#, fuzzy
 msgid "Choose the site to associate with this device."
-msgstr ""
+msgstr "Bu cihazla ilişkilendirilecek siteyi seçin."
 
 #: ../setup.php:1677
+#, fuzzy
 msgid "Device Notes"
-msgstr ""
+msgstr "Cihaz Notları"
 
 #: ../setup.php:1678
+#, fuzzy
 msgid ""
 "This field value is useful to save general information about a specific "
 "device."
 msgstr ""
+"Bu alan değeri, belirli bir cihaz hakkında genel bilgileri kaydetmek için "
+"kullanışlıdır."
 
 #: ../setup.php:1687
+#, fuzzy
 msgid "Disable Device"
-msgstr ""
+msgstr "Cihazı Devre Dışı Bırak"
 
 #: ../setup.php:1688
+#, fuzzy
 msgid "Check this box to disable all checks for this host."
 msgstr ""
+"Bu ana bilgisayarın tüm denetimlerini devre dışı bırakmak için bu kutuyu "
+"işaretleyin."
 
 #: ../setup.php:1695
+#, fuzzy
 msgid "Switch/Hub, Switch/Router Settings"
-msgstr ""
+msgstr "Anahtar / Hub, Anahtar / Router Ayarları"
 
 #: ../setup.php:1700
+#, fuzzy
 msgid ""
 "Provide a list of ports on a specific switch/hub whose MAC results should be "
 "ignored.  Ports such as link/trunk ports that can not be distinguished from "
@@ -2619,330 +3283,440 @@ msgid ""
 "colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or "
 "'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
 msgstr ""
+"MAC sonuçlarının göz ardı edilmesi gereken belirli bir anahtar / hub "
+"üzerindeki bağlantı noktalarının bir listesini sağlayın. Diğer kullanıcı "
+"portlarından ayırt edilemeyen link / trunk portları gibi portlar örnektir. "
+"Her port numarası iki nokta üst üste, boru veya boşluk ile ayrılmalıdır: ',' "
+"| ',' '. Örneğin, bazı üreticilerin anahtar tipleri için 'Fa0 / 1: Fa1 / 23' "
+"veya 'Fa0 / 1 Fa1 / 23' kabul edilebilir."
 
 #: ../setup.php:1715
+#, fuzzy
 msgid "Select a set of SNMP options to try."
-msgstr ""
+msgstr "Denemek için bir SNMP seçeneği seçin."
 
 #: ../setup.php:1722
+#, fuzzy
 msgid "Read Strings"
-msgstr ""
+msgstr "Dizeleri Oku"
 
 #: ../setup.php:1723
+#, fuzzy
 msgid "<strong>DEPRECATED:</strong> SNMP community strings"
-msgstr ""
+msgstr "<strong>DEPRECATED:</strong> SNMP topluluk dizeleri"
 
 #: ../setup.php:1728
+#, fuzzy
 msgid "Specific SNMP Settings"
-msgstr ""
+msgstr "Özel SNMP Ayarları"
 
 #: ../setup.php:1737
+#, fuzzy
 msgid "Connectivity Options"
-msgstr ""
+msgstr "Bağlantı Seçenekleri"
 
 #: ../setup.php:1741
+#, fuzzy
 msgid "Terminal Type"
-msgstr ""
+msgstr "Terminal Tipi"
 
 #: ../setup.php:1742
+#, fuzzy
 msgid "Choose the terminal type that you use to connect to this device."
-msgstr ""
+msgstr "Bu cihaza bağlanmak için kullandığınız terminal türünü seçin."
 
 #: ../setup.php:1747
+#, fuzzy
 msgid "Telnet"
-msgstr ""
+msgstr "Telnet"
 
 #: ../setup.php:1748
+#, fuzzy
 msgid "SSH"
-msgstr ""
+msgstr "SSH"
 
 #: ../setup.php:1749
+#, fuzzy
 msgid "HTTP"
-msgstr ""
+msgstr "HTTP"
 
 #: ../setup.php:1750
+#, fuzzy
 msgid "HTTPS"
-msgstr ""
+msgstr "HTTPS"
 
 #: ../setup.php:1754
+#, fuzzy
 msgid "User Name"
-msgstr ""
+msgstr "Kullanıcı Adı"
 
 #: ../setup.php:1755
+#, fuzzy
 msgid ""
 "The user name to be used for your custom authentication method.  Examples "
 "include SSH, RSH, HTML, etc."
 msgstr ""
+"Özel kimlik doğrulama yönteminiz için kullanılacak kullanıcı adı. Örnekler "
+"arasında SSH, RSH, HTML vb."
 
 #: ../setup.php:1763
+#, fuzzy
 msgid "Password"
-msgstr ""
+msgstr "Şifre"
 
 #: ../setup.php:1764
+#, fuzzy
 msgid "The password to be used for your custom authentication."
-msgstr ""
+msgstr "Özel kimlik doğrulamanız için kullanılacak şifre."
 
 #: ../setup.php:1772
+#, fuzzy
 msgid "Private Key Path"
-msgstr ""
+msgstr "Özel Anahtar Yolu"
 
 #: ../setup.php:1773
+#, fuzzy
 msgid "The path to the private key used for SSH authentication."
-msgstr ""
+msgstr "SSH kimlik doğrulaması için kullanılan özel anahtara giden yol."
 
 #: ../setup.php:1798
+#, fuzzy
 msgid "Sequence"
-msgstr ""
+msgstr "Sekans"
 
 #: ../setup.php:1799
+#, fuzzy
 msgid "Sequence of Item."
-msgstr ""
+msgstr "Maddenin Sırası."
 
 #: ../setup.php:1807
+#, fuzzy
 msgid "General Site Settings"
-msgstr ""
+msgstr "Genel Site Ayarları"
 
 #: ../setup.php:1812
+#, fuzzy
 msgid "Please enter a reasonable name for this site."
-msgstr ""
+msgstr "Lütfen bu site için makul bir ad girin."
 
 #: ../setup.php:1819
+#, fuzzy
 msgid "Primary Customer Contact"
-msgstr ""
+msgstr "Birincil Müşteri İletişim"
 
 #: ../setup.php:1820
+#, fuzzy
 msgid "The principal customer contact name and number for this site."
-msgstr ""
+msgstr "Bu sitenin asıl müşteri irtibat adı ve numarası."
 
 #: ../setup.php:1827
+#, fuzzy
 msgid "NetOps Contact"
-msgstr ""
+msgstr "NetOps İletişim"
 
 #: ../setup.php:1828
+#, fuzzy
 msgid "Please principal network support contact name and number for this site."
 msgstr ""
+"Lütfen bu site için ana şebeke destek irtibat adı ve numarasını yazınız."
 
 #: ../setup.php:1835
+#, fuzzy
 msgid "Facilities Contact"
-msgstr ""
+msgstr "Tesisler İletişim"
 
 #: ../setup.php:1836
+#, fuzzy
 msgid ""
 "Please principal facilities/security contact name and number for this site."
-msgstr ""
+msgstr "Lütfen bu site için ana tesisler / güvenlik iletişim adı ve numarası."
 
 #: ../setup.php:1843
+#, fuzzy
 msgid "Site Information"
-msgstr ""
+msgstr "Site Bilgisi"
 
 #: ../setup.php:1847
+#, fuzzy
 msgid ""
 "Provide any site-specific information, in free form, that allows you to "
 "better manage this location."
 msgstr ""
+"Bu yeri daha iyi yönetmenize olanak tanıyan, siteye özgü bilgileri ücretsiz "
+"olarak sağlayın."
 
 #: ../setup.php:1869
+#, fuzzy
 msgid "General Mac Address Tracking Settings"
-msgstr ""
+msgstr "Genel Mac Adresi İzleme Ayarları"
 
 #: ../setup.php:1874
+#, fuzzy
 msgid "Please enter the MAC Address to be watched for."
-msgstr ""
+msgstr "Lütfen izlenecek MAC Adresini girin."
 
 #: ../setup.php:1881
+#, fuzzy
 msgid "MAC Tracking Name/Email Subject"
-msgstr ""
+msgstr "MAC İzleme Adı / E-posta Konusu"
 
 #: ../setup.php:1882
+#, fuzzy
 msgid ""
 "Please enter a reasonable name for this MAC Tracking entry.  This "
 "information will be in the subject line of your Email"
 msgstr ""
+"Lütfen bu MAC İzleme girişi için makul bir ad girin. Bu bilgi E-postanızın "
+"konu satırında olacaktır"
 
 #: ../setup.php:1901
+#, fuzzy
 msgid ""
 "Ticket number for cross referencing with your corporate help desk system(s)."
 msgstr ""
+"Kurumsal yardım masası sisteminizle çapraz referans almak için bilet "
+"numarası."
 
 #: ../setup.php:1908
+#, fuzzy
 msgid "Notification Schedule"
-msgstr ""
+msgstr "Bildirim Takvimi"
 
 #: ../setup.php:1909
+#, fuzzy
 msgid "Choose how often an Email should be generated for this Mac Watch item."
 msgstr ""
+"Bu Mac Watch öğesi için bir E-postanın ne sıklıkta üretileceğini seçin."
 
 #: ../setup.php:1913
+#, fuzzy
 msgid "First Occurrence Only"
-msgstr ""
+msgstr "Sadece İlk Oluşum"
 
 #: ../setup.php:1914
+#, fuzzy
 msgid "All Occurrences"
-msgstr ""
+msgstr "Tüm Oluşumlar"
 
 #: ../setup.php:1915
+#, fuzzy
 msgid "Every Hour"
-msgstr ""
+msgstr "Her saat"
 
 #: ../setup.php:1922
+#, fuzzy
 msgid "Email Addresses"
-msgstr ""
+msgstr "E-Posta Adres"
 
 #: ../setup.php:1923
+#, fuzzy
 msgid ""
 "Enter a semicolon separated of Email addresses that will be notified where "
 "this MAC address is."
 msgstr ""
+"Bu MAC adresinin nerede olduğunu bildiren E-posta adreslerinden ayrılmış bir "
+"noktalı virgül girin."
 
 #: ../setup.php:1946
+#, fuzzy
 msgid "General Mac Address Authorization Settings"
-msgstr ""
+msgstr "Genel Mac Adresi Yetkilendirme Ayarları"
 
 #: ../setup.php:1950
+#, fuzzy
 msgid "MAC Address Match"
-msgstr ""
+msgstr "MAC Adresi Eşleşmesi"
 
 #: ../setup.php:1951
+#, fuzzy
 msgid ""
 "Please enter the MAC Address or Mac Address Match string to be automatically "
 "authorized.  If you wish to authorize a group of MAC Addresses, you can use "
 "the wildcard character of '%' anywhere in the MAC Address."
 msgstr ""
+"Lütfen otomatik olarak yetkilendirilmek için MAC Adresini veya Mac Adres "
+"Eşleştirme dizesini girin. Bir grup MAC Adresini yetkilendirmek "
+"istiyorsanız, MAC Adresinin herhangi bir yerinde '%' joker karakterini "
+"kullanabilirsiniz."
 
 #: ../setup.php:1960
+#, fuzzy
 msgid "Please add a reason for this entry."
-msgstr ""
+msgstr "Lütfen bu giriş için bir sebep ekleyin."
 
 #: ../mactrack_device_types.php:37
+#, fuzzy
 msgid "Not Applicable - Router"
-msgstr ""
+msgstr "Uygulanamaz - Yönlendirici"
 
 #: ../mactrack_device_types.php:50
+#, fuzzy
 msgid "Not Applicable - Switch/Hub"
-msgstr ""
+msgstr "Uygulanamaz - Anahtar / Hub"
 
 #: ../mactrack_device_types.php:206 ../mactrack_device_types.php:207
+#, fuzzy
 msgid "--dup--"
-msgstr ""
+msgstr "--dup--"
 
 #: ../mactrack_device_types.php:276
+#, fuzzy
 msgid "You must select at least one device type."
-msgstr ""
+msgstr "En az bir cihaz tipi seçmelisiniz."
 
 #: ../mactrack_device_types.php:284
+#, fuzzy
 msgid "Click 'Continue' to delete the following Device Type(s)."
-msgstr ""
+msgstr "Aşağıdaki Cihaz Türlerini silmek için 'Devam Et'i tıklayın."
 
 #: ../mactrack_device_types.php:291
+#, fuzzy
 msgid ""
 "Click 'Continue' to duplciate the following Device Type(s). You may "
 "optionally change the description for the new device types.  Otherwise, do "
 "not change value below and the original name will be replicated with a new "
 "suffix."
 msgstr ""
+"Aşağıdaki Cihaz Türlerini çoğaltmak için 'Devam Et'i tıklayın. İsteğe bağlı "
+"olarak yeni cihaz türleri için açıklamayı değiştirebilirsiniz. Aksi "
+"takdirde, aşağıdaki değeri değiştirmeyin; orijinal ad yeni bir sonek ile "
+"çoğaltılır."
 
 #: ../mactrack_device_types.php:293
+#, fuzzy
 msgid "Device Type Prefix:"
-msgstr ""
+msgstr "Cihaz Tipi Öneki:"
 
 #: ../mactrack_device_types.php:293
+#, fuzzy
 msgid "<description> (1)"
-msgstr ""
+msgstr "<description> (1)"
 
 #: ../mactrack_device_types.php:439
+#, fuzzy
 msgid "New Type"
-msgstr ""
+msgstr "Yeni Tür"
 
 #: ../mactrack_device_types.php:441
+#, fuzzy
 msgid "Cisco"
-msgstr ""
+msgstr "Cisco"
 
 #: ../mactrack_device_types.php:466
-#, php-format
+#, fuzzy, php-format
 msgid "There were %d Device Types Added!"
-msgstr ""
+msgstr "% D cihaz tipi eklendi!"
 
 #: ../mactrack_device_types.php:468
+#, fuzzy
 msgid "No New Device Types Found!"
-msgstr ""
+msgstr "Yeni Cihaz Türü Bulunamadı!"
 
 #: ../mactrack_device_types.php:491
+#, fuzzy
 msgid "Import Device Tracking Device Types"
-msgstr ""
+msgstr "Aygıt İzleme Aygıt Türlerini İçe Aktar"
 
 #: ../mactrack_device_types.php:494
+#, fuzzy
 msgid "Import Device Types from Local File"
-msgstr ""
+msgstr "Aygıt Dosyalarını Yerel Dosyadan İçe Aktar"
 
 #: ../mactrack_device_types.php:495
+#, fuzzy
 msgid ""
 "Please specify the location of the CSV file containing your device type "
 "information."
 msgstr ""
+"Lütfen cihaz türü bilgilerinizi içeren CSV dosyasının konumunu belirtin."
 
 #: ../mactrack_device_types.php:516
+#, fuzzy
 msgid " - A common name for the device.  For example Cisco 6509 Switch"
-msgstr ""
+msgstr "- Cihaz için ortak bir ad. Örneğin Cisco 6509 Switch"
 
 #: ../mactrack_device_types.php:517
+#, fuzzy
 msgid " - The vendor who produces this device"
-msgstr ""
+msgstr "- Bu cihazı üreten satıcı"
 
 #: ../mactrack_device_types.php:518
+#, fuzzy
 msgid ""
 " - The type of device this is.  See the notes below for this integer value"
-msgstr ""
+msgstr "- Bu cihazın tipi. Bu tamsayı değeri için aşağıdaki notlara bakın"
 
 #: ../mactrack_device_types.php:519
+#, fuzzy
 msgid ""
 " - A unique set of characters from the snmp sysDescr that uniquely identify "
 "this device"
 msgstr ""
+"- snmp sysDescr'den bu aygıtı benzersiz şekilde tanımlayan benzersiz bir "
+"karakter kümesi"
 
 #: ../mactrack_device_types.php:520
+#, fuzzy
 msgid ""
 " - The vendor specific snmp sysObjectID that distinguishes this device from "
 "the next"
-msgstr ""
+msgstr "- Satıcıya bu cihazı diğerinden ayıran spesifik snmp sysObjectID"
 
 #: ../mactrack_device_types.php:521
+#, fuzzy
 msgid " - The scanning function that will be used to scan this device type"
-msgstr ""
+msgstr "- Bu cihaz türünü taramak için kullanılacak tarama işlevi"
 
 #: ../mactrack_device_types.php:522
+#, fuzzy
 msgid " - The IP scanning function that will be used to scan this device type"
-msgstr ""
+msgstr "- Bu cihaz türünü taramak için kullanılacak IP tarama işlevi"
 
 #: ../mactrack_device_types.php:523
+#, fuzzy
 msgid ""
 " - The 802.1x scanning function that will be used to scan this device type"
-msgstr ""
+msgstr "- Bu cihaz tipini taramak için kullanılacak 802.1x tarama fonksiyonu"
 
 #: ../mactrack_device_types.php:524
+#, fuzzy
 msgid ""
 " - If the Serial Number for this device type can be obtained via an SNMP "
 "Query, add it's OID here"
 msgstr ""
+"- Bu cihaz tipinin Seri Numarası bir SNMP Sorgusu ile edinilebiliyorsa, "
+"buraya OID değerini ekleyin."
 
 #: ../mactrack_device_types.php:525
+#, fuzzy
 msgid ""
 " - If your scanning function does not have the ability to isolate trunk "
 "ports or link ports, this is the starting port number for user ports"
 msgstr ""
+"- Tarama işleviniz, gövde bağlantı noktalarını veya bağlantı bağlantı "
+"noktalarını izole etme yeteneğine sahip değilse, bu kullanıcı bağlantı "
+"noktalarının başlangıç bağlantı noktası numarasıdır."
 
 #: ../mactrack_device_types.php:526
+#, fuzzy
 msgid ""
 " - Same as the lowPort with the exception that this is the high numbered "
 "user port number"
 msgstr ""
+"- Bu, yüksek numaralı kullanıcı bağlantı noktası numarası olması dışında, "
+"lowPort ile aynı"
 
 #: ../mactrack_device_types.php:532
+#, fuzzy
 msgid ""
 "Therefore, if you attempt to import duplicate device types, the existing "
 "data will be updated with the new information."
 msgstr ""
+"Bu nedenle, yinelenen aygıt türlerini içe aktarmayı denerseniz, mevcut "
+"veriler yeni bilgilerle güncellenir."
 
 #: ../mactrack_device_types.php:540
+#, fuzzy
 msgid ""
 "The devices device type is determined by scanning it's snmp agent for the "
 "sysObjectID and sysDescription and comparing it against values in the device "
@@ -2951,74 +3725,96 @@ msgid ""
 "important that you select valid sysObjectID_match, sysDescr_match, and "
 "scanning function for your devices."
 msgstr ""
+"Aygıt aygıt türü, sysObjectID ve sysDescription için snmp aracısını "
+"tarayarak ve aygıt türleri veritabanındaki değerlerle karşılaştırarak "
+"belirlenir. Veritabanında bulunan ilk eşleme, nasıl taranacağına dair "
+"doğrudan Aygıt İzleme'yi kullanmaktadır. Bu nedenle, aygıtlarınız için "
+"geçerli sysObjectID_match, sysDescr_match ve tarama işlevini seçmeniz çok "
+"önemlidir."
 
 #: ../mactrack_device_types.php:707
-#, php-format
+#, fuzzy, php-format
 msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
-msgstr ""
+msgstr "HEADER LINE İŞLENMİŞ TAMAM: <br> Sütun bulundu nerede: %s"
 
 #: ../mactrack_device_types.php:765
+#, fuzzy
 msgid "Unknown Assume \"Switch/Hub\""
-msgstr ""
+msgstr "Bilinmeyen \"Anahtar / Hub\" varsay."
 
 #: ../mactrack_device_types.php:800 ../mactrack_device_types.php:815
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, "
 "sysObjectID: %s"
 msgstr ""
+"INSERT BAŞARI: Satıcı: %s, Açıklama: %s, Tür: %s, sysDescr: %s, sysObjectID: "
+"%s"
 
 #: ../mactrack_device_types.php:802 ../mactrack_device_types.php:817
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, "
 "sysObjectID: %s"
 msgstr ""
+"INSERT FAILED: Satıcı: %s, Açıklama: %s, Tür: %s, sysDescr: %s, sysObjectID: "
+"%s"
 
 #: ../mactrack_device_types.php:809
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: "
 "%s, sysObjectID: %s"
 msgstr ""
+"INSERT SKIPPED, EXISTING: Satıcı: %s, Açıklama: %s, Tür: %s, sysDescr: %s, "
+"sysObjectID: %s"
 
 #: ../mactrack_device_types.php:845
-#, php-format
+#, fuzzy, php-format
 msgid "Device Tracking Device Types [edit: %s]"
-msgstr ""
+msgstr "Cihaz Takibi Cihaz Türleri [değiştir: %s]"
 
 #: ../mactrack_device_types.php:847
+#, fuzzy
 msgid "Device Tracking Device Types [new]"
-msgstr ""
+msgstr "Cihaz Takibi Cihaz Tipleri [yeni]"
 
 #: ../mactrack_device_types.php:915
+#, fuzzy
 msgid "Device Tracking Device Type Filters"
-msgstr ""
+msgstr "Cihaz Takibi Cihaz Tipi Filtreler"
 
 #: ../mactrack_device_types.php:930
+#, fuzzy
 msgid "Device Type Description"
-msgstr ""
+msgstr "Cihaz Tipi Açıklaması"
 
 #: ../mactrack_device_types.php:933
+#, fuzzy
 msgid "Port Scanner"
-msgstr ""
+msgstr "Port Tarayıcı"
 
 #: ../mactrack_device_types.php:934
+#, fuzzy
 msgid "IP Scanner"
-msgstr ""
+msgstr "IP Tarayıcı"
 
 #: ../mactrack_device_types.php:935
+#, fuzzy
 msgid "Dot1x Scanner"
-msgstr ""
+msgstr "Dot1x Tarayıcı"
 
 #: ../mactrack_device_types.php:936
+#, fuzzy
 msgid "sysDescription Match"
-msgstr ""
+msgstr "sysDescription Eşleşmesi"
 
 #: ../mactrack_device_types.php:937
+#, fuzzy
 msgid "Vendor OID Match"
-msgstr ""
+msgstr "Satıcı OID Eşleşmesi"
 
 #: ../mactrack_device_types.php:965
+#, fuzzy
 msgid "No Device Tracking Device Types Found"
-msgstr ""
+msgstr "Cihaz İzleme Cihazı Bulunamadı"

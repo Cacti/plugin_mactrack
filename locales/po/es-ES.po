@@ -3,16 +3,16 @@ msgstr ""
 "Project-Id-Version: Cacti 1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-18 16:02+1300\n"
-"PO-Revision-Date: 2019-03-16 23:56+0000\n"
+"PO-Revision-Date: 2019-03-17 00:14-0400\n"
 "Last-Translator: Larry Adams <thewitness@cacti.net>\n"
 "Language-Team: Spanish <http://translate.cacti.net/projects/cacti/mactrack/"
 "es-ES/>\n"
-"Language: es-ES\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.4-dev\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: ../lib/mactrack_functions.php:2219
 #, fuzzy
@@ -199,8 +199,9 @@ msgid "Interfaces"
 msgstr "Interfaces"
 
 #: ../lib/mactrack_functions.php:3018
+#, fuzzy
 msgid "Dot1x"
-msgstr ""
+msgstr "Punto1x"
 
 #: ../lib/mactrack_functions.php:3019 ../mactrack_view_graphs.php:154
 msgid "Graphs"
@@ -1522,8 +1523,9 @@ msgid "Last Scan Date"
 msgstr "Fecha de la última escaneo"
 
 #: ../mactrack_view_dot1x.php:431
+#, fuzzy
 msgid "802.1x Sessions"
-msgstr ""
+msgstr "Sesiones 802.1x"
 
 #: ../mactrack_view_dot1x.php:464
 #, fuzzy
@@ -1547,7 +1549,7 @@ msgstr "Falla de autenticación"
 #: ../mactrack_view_dot1x.php:480 ../mactrack_view_dot1x.php:602
 #, fuzzy
 msgid "Authentication Failed"
-msgstr "Falla de autenticación"
+msgstr "Falló autenticación: %s"
 
 #: ../mactrack_view_dot1x.php:482 ../mactrack_view_dot1x.php:598
 msgid "Idle"
@@ -1556,12 +1558,12 @@ msgstr "Ocioso"
 #: ../mactrack_view_dot1x.php:553
 #, fuzzy
 msgid "Sessions"
-msgstr "Permisos"
+msgstr "Sesiones"
 
 #: ../mactrack_view_dot1x.php:597
 #, fuzzy
 msgid "Any Status"
-msgstr "Estado"
+msgstr "Cualquier operación"
 
 #: ../mactrack_view_dot1x.php:600
 #, fuzzy
@@ -1582,12 +1584,14 @@ msgid "Most Recent"
 msgstr "Mas reciente"
 
 #: ../mactrack_view_dot1x.php:648
+#, fuzzy
 msgid "DATA"
-msgstr ""
+msgstr "DATOS"
 
 #: ../mactrack_view_dot1x.php:649
+#, fuzzy
 msgid "VOICE"
-msgstr ""
+msgstr "VOZ"
 
 #: ../mactrack_view_dot1x.php:655 ../mactrack_view_macs.php:1081
 msgid "Portname"
