@@ -1,18 +1,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Cacti 1\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: developer@cacti.net\n"
 "POT-Creation-Date: 2019-03-19 09:50+0000\n"
-"PO-Revision-Date: 2019-03-17 00:14-0400\n"
-"Last-Translator: Larry Adams <thewitness@cacti.net>\n"
+"PO-Revision-Date: 2019-04-01 21:12+0000\n"
+"Last-Translator: Javier Pobeda <javier.pobeda@pm.me>\n"
 "Language-Team: Spanish <http://translate.cacti.net/projects/cacti/mactrack/"
 "es-ES/>\n"
-"Language: es_ES\n"
+"Language: es-ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Weblate 3.4-dev\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
 #: mactrack_view_dot1x.php:480 mactrack_view_dot1x.php:602
@@ -170,7 +170,7 @@ msgstr "Deshabilitar dispositivo '%d'"
 #: mactrack_view_sites.php:350 mactrack_view_sites.php:351
 #: mactrack_view_sites.php:352 setup.php:337
 msgid "N/A"
-msgstr "N/A"
+msgstr "N/D"
 
 #: lib/mactrack_functions.php:2953 setup.php:630
 #, php-format
