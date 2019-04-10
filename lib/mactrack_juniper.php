@@ -104,10 +104,11 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 				$Xvlanid = substr($num, 0, strpos($num, '.'));
 				$Xmac    = mach(substr($num, strpos($num, '.') + 1));
 
-				$ifIndex = $port_results[$mac_result];
-				$ifType = $ifInterfaces[$ifIndex]['ifType'];
-				$ifName = $ifInterfaces[$ifIndex]['ifName'];
+				$ifIndex  = @$port_results[$mac_result];
+				$ifType   = @$ifInterfaces[$ifIndex]['ifType'];
+				$ifName   = @$ifInterfaces[$ifIndex]['ifName'];
 				$portName = $ifName;
+
 				$portTrunkStatus = @$ifInterfaces[$ifIndex]['trunkPortState'];
 
 				/* only output legitamate end user ports */
