@@ -150,7 +150,7 @@ if (valid_snmp_device($device)) {
 
 			/* verify that the scanning function is not null and call it as applicable */
 			if (isset($device_type['scanning_function'])) {
-				if ($device_type['scanning_function'] != '') {
+				if (!empty($device_type['scanning_function'])) {
 					if (function_exists($device_type['scanning_function'])) {
 						mactrack_debug('Scanning function is ' . $device_type['scanning_function']);
 						$device['device_type_id'] = $device_type['device_type_id'];
@@ -174,7 +174,7 @@ if (valid_snmp_device($device)) {
 			($device['scan_type'] == DEVICE_ROUTER)) {
 
 			if (isset($device_type['ip_scanning_function'])) {
-				if ($device_type['ip_scanning_function'] != '') {
+				if (!empty($device_type['ip_scanning_function'])) {
 					if (function_exists($device_type['ip_scanning_function'])) {
 						mactrack_debug('IP Scanning function is ' . $device_type['ip_scanning_function']);
 						$device['device_type_id'] = $device_type['device_type_id'];
@@ -193,7 +193,7 @@ if (valid_snmp_device($device)) {
 			}
 
 			if (isset($device_type['dot1x_scanning_function'])) {
-				if ($device_type['dot1x_scanning_function'] != '') {
+				if (!empty($device_type['dot1x_scanning_function'])) {
 					if (function_exists($device_type['dot1x_scanning_function'])) {
 						mactrack_debug('802.1x Scanning function is ' . $device_type['dot1x_scanning_function']);
 						$device['device_type_id'] = $device_type['device_type_id'];
