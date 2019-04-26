@@ -6,17 +6,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: macktrack on cacti 1.1.34\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: developer@cacti.net\n"
 "POT-Creation-Date: 2019-03-19 09:50+0000\n"
-"PO-Revision-Date: 2019-03-17 10:46-0400\n"
-"Last-Translator: \n"
-"Language-Team: sfqas <LL@li.org>\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2019-04-26 10:12+0000\n"
+"Last-Translator: whsir <wh@whsir.com>\n"
+"Language-Team: Chinese (Simplified) <http://translate.cacti.net/projects/"
+"cacti/mactrack/zh-CN/>\n"
+"Language: zh-CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.4-dev\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 2.2.1\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
 #: mactrack_view_dot1x.php:480 mactrack_view_dot1x.php:602
@@ -175,6 +177,7 @@ msgstr "设备禁用'%d'"
 #: mactrack_view_sites.php:348 mactrack_view_sites.php:349
 #: mactrack_view_sites.php:350 mactrack_view_sites.php:351
 #: mactrack_view_sites.php:352 setup.php:337
+#, fuzzy
 msgid "N/A"
 msgstr "N/A"
 
@@ -229,6 +232,7 @@ msgstr "扫描速度：每 %s"
 
 #: lib/mactrack_functions.php:3026 mactrack_view_devices.php:323
 #: mactrack_view_sites.php:278 mactrack_view_sites.php:340
+#, fuzzy
 msgid "View Interfaces"
 msgstr "查看接口"
 
@@ -260,8 +264,9 @@ msgid "IP Address"
 msgstr "IP地址"
 
 #: lib/mactrack_functions.php:3168 setup.php:1231
+#, fuzzy
 msgid "MAC Address"
-msgstr "MAC地址"
+msgstr "IP地址"
 
 #: lib/mactrack_functions.php:3169 mactrack_view_interfaces.php:291
 #: mactrack_view_interfaces.php:510 setup.php:545
@@ -287,6 +292,7 @@ msgstr "未知"
 #: mactrack_snmp.php:556 mactrack_vendormacs.php:199 mactrack_view_arp.php:377
 #: mactrack_view_devices.php:364 mactrack_view_dot1x.php:502
 #: mactrack_view_interfaces.php:528 mactrack_view_macs.php:910
+#, fuzzy
 msgid "Search"
 msgstr "搜索"
 
@@ -306,8 +312,9 @@ msgstr "显示设备详情"
 #: mactrack_snmp.php:580 mactrack_vendormacs.php:221 mactrack_view_arp.php:441
 #: mactrack_view_devices.php:388 mactrack_view_dot1x.php:572
 #: mactrack_view_interfaces.php:445 mactrack_view_macs.php:974
+#, fuzzy
 msgid "Go"
-msgstr "开始"
+msgstr "Go"
 
 #: lib/mactrack_functions.php:3249 mactrack_device_types.php:1035
 #: mactrack_devices.php:1099 mactrack_macauth.php:392 mactrack_macwatch.php:411
@@ -315,8 +322,9 @@ msgstr "开始"
 #: mactrack_view_devices.php:389 mactrack_view_dot1x.php:573
 #: mactrack_view_interfaces.php:446 mactrack_view_ips.php:287
 #: mactrack_view_macs.php:975
+#, fuzzy
 msgid "Clear"
-msgstr "清楚"
+msgstr "清除"
 
 #: lib/mactrack_functions.php:3252 mactrack_device_types.php:1038
 #: mactrack_devices.php:1101 mactrack_vendormacs.php:223
@@ -384,6 +392,7 @@ msgstr "不适用 - 交换机/集线器"
 #: mactrack_device_types.php:70 mactrack_devices.php:32 mactrack_macauth.php:30
 #: mactrack_macwatch.php:30 mactrack_sites.php:32 mactrack_snmp.php:31
 #: mactrack_view_macs.php:38
+#, fuzzy
 msgid "Delete"
 msgstr "删除"
 
@@ -403,9 +412,8 @@ msgstr "You must select at least one device type."
 #: mactrack_device_types.php:285 mactrack_devices.php:257
 #: mactrack_macauth.php:134 mactrack_macwatch.php:139 mactrack_sites.php:150
 #: mactrack_snmp.php:210 mactrack_view_macs.php:178 mactrack_view_macs.php:259
-#, fuzzy
 msgid "Continue"
-msgstr "包含"
+msgstr "继续"
 
 #: mactrack_device_types.php:290
 #, fuzzy
@@ -435,8 +443,9 @@ msgstr "设备类型前缀："
 #: mactrack_device_types.php:310 mactrack_devices.php:362
 #: mactrack_macauth.php:151 mactrack_macwatch.php:156 mactrack_sites.php:158
 #: mactrack_snmp.php:235 mactrack_view_macs.php:186 mactrack_view_macs.php:276
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: mactrack_device_types.php:311 mactrack_devices.php:363
 #: mactrack_macauth.php:152 mactrack_macwatch.php:157 mactrack_sites.php:159
@@ -1137,8 +1146,9 @@ msgstr "没有MacTrack设备"
 #: mactrack_devices.php:1085 mactrack_view_devices.php:375 setup.php:657
 #: setup.php:789 setup.php:798 setup.php:807 setup.php:1015 setup.php:1031
 #: setup.php:1076 setup.php:1105
+#, fuzzy
 msgid "None"
-msgstr "没有"
+msgstr "无"
 
 #: mactrack_devices.php:1171 mactrack_view_devices.php:456
 msgid "Up"
@@ -1855,12 +1865,14 @@ msgid "Total VLAN's"
 msgstr "总VLAN"
 
 #: mactrack_view_devices.php:315
+#, fuzzy
 msgid "Edit Device"
 msgstr "编辑设备"
 
 #: mactrack_view_devices.php:318
+#, fuzzy
 msgid "View Graphs"
-msgstr "查看图表"
+msgstr "查看图形"
 
 #: mactrack_view_devices.php:320
 msgid "Device Not Mapped to Cacti Device"
