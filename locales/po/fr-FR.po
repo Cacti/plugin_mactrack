@@ -6,16 +6,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: developer@cacti.net\n"
 "POT-Creation-Date: 2019-03-19 09:50+0000\n"
-"PO-Revision-Date: 2019-03-17 00:19-0400\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: fr_FR\n"
+"PO-Revision-Date: 2019-05-29 15:13+0000\n"
+"Last-Translator: Olivier VOGEL <olivier.vogel@st.com>\n"
+"Language-Team: French <http://translate.cacti.net/projects/cacti/mactrack/"
+"fr-FR/>\n"
+"Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.4-dev\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
 #: mactrack_view_dot1x.php:480 mactrack_view_dot1x.php:602
@@ -304,7 +306,6 @@ msgid "Dot1x"
 msgstr "Dot1x"
 
 #: lib/mactrack_functions.php:3171 mactrack_view_graphs.php:153
-#, fuzzy
 msgid "Graphs"
 msgstr "Graphiques"
 
@@ -319,7 +320,6 @@ msgstr "Inconnu"
 #: mactrack_snmp.php:556 mactrack_vendormacs.php:199 mactrack_view_arp.php:377
 #: mactrack_view_devices.php:364 mactrack_view_dot1x.php:502
 #: mactrack_view_interfaces.php:528 mactrack_view_macs.php:910
-#, fuzzy
 msgid "Search"
 msgstr "Rechercher"
 
@@ -327,7 +327,6 @@ msgstr "Rechercher"
 #: mactrack_devices.php:1184 mactrack_macauth.php:379 mactrack_macwatch.php:398
 #: mactrack_snmp.php:566 mactrack_vendormacs.php:209
 #: mactrack_view_devices.php:469 mactrack_view_ips.php:274 setup.php:663
-#, fuzzy
 msgid "Default"
 msgstr "Défaut"
 
@@ -377,7 +376,6 @@ msgstr "Site"
 #: mactrack_devices.php:1170 mactrack_view_devices.php:402
 #: mactrack_view_devices.php:413 mactrack_view_devices.php:455
 #: mactrack_view_ips.php:258
-#, fuzzy
 msgid "Any"
 msgstr "N'importe quel"
 
@@ -429,7 +427,6 @@ msgstr "Sans objet - Switch/Hub"
 #: mactrack_device_types.php:70 mactrack_devices.php:32 mactrack_macauth.php:30
 #: mactrack_macwatch.php:30 mactrack_sites.php:32 mactrack_snmp.php:31
 #: mactrack_view_macs.php:38
-#, fuzzy
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -451,9 +448,8 @@ msgstr "Vous devez sélectionner au moins un type d'appareil."
 #: mactrack_device_types.php:285 mactrack_devices.php:257
 #: mactrack_macauth.php:134 mactrack_macwatch.php:139 mactrack_sites.php:150
 #: mactrack_snmp.php:210 mactrack_view_macs.php:178 mactrack_view_macs.php:259
-#, fuzzy
 msgid "Continue"
-msgstr "contient"
+msgstr "Continuer"
 
 #: mactrack_device_types.php:290
 #, fuzzy
@@ -488,13 +484,13 @@ msgstr "Préfixe du type de dispositif :"
 #: mactrack_macauth.php:151 mactrack_macwatch.php:156 mactrack_sites.php:158
 #: mactrack_snmp.php:235 mactrack_view_macs.php:186 mactrack_view_macs.php:276
 msgid "Cancel"
-msgstr ""
+msgstr "Abandonner"
 
 #: mactrack_device_types.php:311 mactrack_devices.php:363
 #: mactrack_macauth.php:152 mactrack_macwatch.php:157 mactrack_sites.php:159
 #: mactrack_snmp.php:235 mactrack_view_macs.php:187 mactrack_view_macs.php:277
 msgid "Return"
-msgstr ""
+msgstr "Retour"
 
 #: mactrack_device_types.php:445
 #, fuzzy
@@ -2211,7 +2207,6 @@ msgid "Any Status"
 msgstr "Tout statut"
 
 #: mactrack_view_dot1x.php:612 mactrack_view_macs.php:1032
-#, fuzzy
 msgid "Show"
 msgstr "Afficher"
 
