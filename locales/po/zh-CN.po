@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: macktrack on cacti 1.1.34\n"
 "Report-Msgid-Bugs-To: developer@cacti.net\n"
 "POT-Creation-Date: 2019-03-19 09:50+0000\n"
-"PO-Revision-Date: 2019-04-26 10:12+0000\n"
-"Last-Translator: whsir <wh@whsir.com>\n"
+"PO-Revision-Date: 2019-07-13 03:14+0000\n"
+"Last-Translator: tomcat <luis_126@126.com>\n"
 "Language-Team: Chinese (Simplified) <http://translate.cacti.net/projects/"
 "cacti/mactrack/zh-CN/>\n"
 "Language: zh-CN\n"
@@ -292,7 +292,6 @@ msgstr "未知"
 #: mactrack_snmp.php:556 mactrack_vendormacs.php:199 mactrack_view_arp.php:377
 #: mactrack_view_devices.php:364 mactrack_view_dot1x.php:502
 #: mactrack_view_interfaces.php:528 mactrack_view_macs.php:910
-#, fuzzy
 msgid "Search"
 msgstr "搜索"
 
@@ -312,7 +311,6 @@ msgstr "显示设备详情"
 #: mactrack_snmp.php:580 mactrack_vendormacs.php:221 mactrack_view_arp.php:441
 #: mactrack_view_devices.php:388 mactrack_view_dot1x.php:572
 #: mactrack_view_interfaces.php:445 mactrack_view_macs.php:974
-#, fuzzy
 msgid "Go"
 msgstr "Go"
 
@@ -322,7 +320,6 @@ msgstr "Go"
 #: mactrack_view_devices.php:389 mactrack_view_dot1x.php:573
 #: mactrack_view_interfaces.php:446 mactrack_view_ips.php:287
 #: mactrack_view_macs.php:975
-#, fuzzy
 msgid "Clear"
 msgstr "清除"
 
