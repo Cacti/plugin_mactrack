@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: macktrack on cacti 1.1.34\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-19 09:50+0000\n"
-"PO-Revision-Date: 2019-07-13 03:14+0000\n"
+"PO-Revision-Date: 2019-07-16 13:15+0000\n"
 "Last-Translator: tomcat <luis_126@126.com>\n"
 "Language-Team: Chinese (Simplified) <http://translate.cacti.net/projects/"
 "cacti/mactrack/zh-CN/>\n"
@@ -1862,7 +1862,6 @@ msgid "Total VLAN's"
 msgstr "总VLAN"
 
 #: mactrack_view_devices.php:315
-#, fuzzy
 msgid "Edit Device"
 msgstr "编辑设备"
 
