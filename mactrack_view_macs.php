@@ -128,7 +128,7 @@ function form_actions() {
 	$delim = read_config_option('mt_mac_delim');
 
 	/* loop through each of the device types selected on the previous page and get more info about them */
-	while (list($var,$val) = each($_POST)) {
+	foreach ($_POST as $var => $val) {
 		if (substr($var,0,4) == 'chk_') {
 			$matches = substr($var,4);
 
@@ -220,7 +220,7 @@ function form_aggregated_actions() {
 	$row_array = array(); $mac_address_list = ''; $row_list = ''; $i = 0; $row_ids = '';
 
 	/* loop through each of the ports selected on the previous page and get more info about them */
-	while (list($var,$val) = each($_POST)) {
+	foreach ($_POST as $var => $val) {
 		if (preg_match('/^chk_([0-9]+)$/', $var, $matches)) {
 			/* ================= input validation ================= */
 			input_validate_input_number($matches[1]);

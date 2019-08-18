@@ -149,7 +149,7 @@ function form_mactrack_actions() {
 			} elseif (get_request_var('drp_action') == '4') { /* change snmp options */
 				for ($i=0;($i<count($selected_items));$i++) {
 					reset($fields_mactrack_device_edit);
-					while (list($field_name, $field_array) = each($fields_mactrack_device_edit)) {
+					foreach ($fields_mactrack_device_edit as $field_name => $field_array) {
 						if (isset_request_var("t_$field_name") && preg_match('/^snmp_/', $field_name)) {
 							db_execute_prepared("UPDATE mac_track_devices
 								SET $field_name = ?
@@ -161,7 +161,7 @@ function form_mactrack_actions() {
 			} elseif (get_request_var('drp_action') == '5') { /* change port settings for multiple devices */
 				for ($i=0;($i<count($selected_items));$i++) {
 					reset($fields_mactrack_device_edit);
-					while (list($field_name, $field_array) = each($fields_mactrack_device_edit)) {
+					foreach ($fields_mactrack_device_edit as $field_name => $field_array) {
 						if (isset_request_var("t_$field_name") && preg_match('/^ignorePorts/', $field_name)) {
 							db_execute_prepared("UPDATE mac_track_devices
 								SET $field_name = ?
@@ -198,7 +198,7 @@ function form_mactrack_actions() {
 					if (isset($cacti_host['id'])) {
 						reset($fields_mactrack_snmp_item);
 						$updates = '';
-						while (list($field_name, $field_array) = each($fields_mactrack_snmp_item)) {
+						foreach ($fields_mactrack_snmp_item as $field_name => $field_array) {
 							if (isset($cacti_host[$field_name])) {
 								$updates .= ($updates != '' ? ', ' : '') . $field_name . "='" . $cacti_host[$field_name] . "'";
 							}
@@ -229,7 +229,7 @@ function form_mactrack_actions() {
 	$device_list = ''; $i = 0;
 
 	/* loop through each of the host templates selected on the previous page and get more info about them */
-	while (list($var,$val) = each($_POST)) {
+	foreach ($_POST as $var => $val) {
 		if (preg_match('/^chk_([0-9]+)$/', $var, $matches)) {
 			/* ================= input validation ================= */
 			input_validate_input_number($matches[1]);
@@ -279,7 +279,7 @@ function form_mactrack_actions() {
 			</tr>";
 
 			$form_array = array();
-			while (list($field_name, $field_array) = each($fields_mactrack_device_edit)) {
+			foreach ($fields_mactrack_device_edit as $field_name => $field_array) {
 				if (preg_match('/^snmp_/', $field_name)) {
 					$form_array += array($field_name => $fields_mactrack_device_edit[$field_name]);
 
@@ -309,7 +309,7 @@ function form_mactrack_actions() {
 			</tr>";
 
 			$form_array = array();
-			while (list($field_name, $field_array) = each($fields_mactrack_device_edit)) {
+			foreach ($fields_mactrack_device_edit as $field_name => $field_array) {
 				if (preg_match('/^ignorePort/', $field_name)) {
 					$form_array += array($field_name => $fields_mactrack_device_edit[$field_name]);
 
@@ -452,7 +452,7 @@ function mactrack_device_export() {
 		'ports_trunk, macs_active, last_rundate, last_runduration');
 
 	if (cacti_sizeof($devices)) {
-		foreach($devices as $device) {
+		foreach ($devices as $device) {
 			array_push($xport_array,'"'     .
 			$device['site_id']              . '","' . $device['site_name']            . '","' .
 			$device['device_id']            . '","' . $device['device_name']          . '","' .
@@ -479,7 +479,7 @@ function mactrack_device_export() {
 	header('Content-Disposition: attachment; filename=cacti_device_xport.csv');
 
 	if (cacti_sizeof($xport_array)) {
-	foreach($xport_array as $xport_line) {
+	foreach ($xport_array as $xport_line) {
 		print $xport_line . "\n";
 	}
 	}
@@ -496,7 +496,7 @@ function mactrack_device_import() {
 		print "<tr class='even'><td><p class='textArea'>" . __('Cacti has imported the following items:', 'mactrack') . '</p>';
 
 		if (cacti_sizeof($_SESSION['import_debug_info'])) {
-			foreach($_SESSION['import_debug_info'] as $import_result) {
+			foreach ($_SESSION['import_debug_info'] as $import_result) {
 				print "<tr class='even'><td>" . $import_result . '</td>';
 				print '</tr>';
 			}
@@ -580,7 +580,7 @@ function mactrack_device_import_processor(&$devices) {
 	$return_array = array();
 
 	if (cacti_sizeof($devices)) {
-	foreach($devices as $device_line) {
+	foreach ($devices as $device_line) {
 		/* parse line */
 		$line_array = explode(',', $device_line);
 
@@ -597,7 +597,7 @@ function mactrack_device_import_processor(&$devices) {
 			$update_suffix = '';
 
 			if (cacti_sizeof($line_array)) {
-			foreach($line_array as $line_item) {
+			foreach ($line_array as $line_item) {
 				$line_item = trim(str_replace("'", '', $line_item));
 				$line_item = trim(str_replace('"', '', $line_item));
 
@@ -734,7 +734,7 @@ function mactrack_device_import_processor(&$devices) {
 			$sql_where = '';
 
 			if (cacti_sizeof($line_array)) {
-			foreach($line_array as $line_item) {
+			foreach ($line_array as $line_item) {
 				if (in_array($j, $insert_columns)) {
 					$line_item = trim(str_replace("'", '', $line_item));
 					$line_item = trim(str_replace('"', '', $line_item));

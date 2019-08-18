@@ -244,7 +244,7 @@ function mactrack_device_action_prepare($save) {
 			print '</tr>';
 
 			$form_array = array();
-			while (list($field_name, $field_array) = each($fields_mactrack_device_edit)) {
+			foreach($fields_mactrack_device_edit as $field_name => $field_array) {
 				/* show only those fields to the user, that cannot been taken from the device field */
 				if (preg_match('(site_id|scan_type|snmp_options|snmp_retries|ignorePorts|user_name|user_password|disabled|term_type|private_key_path)', $field_name)) {
 					$form_array += array($field_name => $fields_mactrack_device_edit[$field_name]);
