@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: macktrack on cacti 1.1.34\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-19 09:50+0000\n"
-"PO-Revision-Date: 2019-07-16 13:15+0000\n"
+"PO-Revision-Date: 2019-07-26 13:15+0000\n"
 "Last-Translator: tomcat <luis_126@126.com>\n"
 "Language-Team: Chinese (Simplified) <http://translate.cacti.net/projects/"
 "cacti/mactrack/zh-CN/>\n"
@@ -389,7 +389,6 @@ msgstr "不适用 - 交换机/集线器"
 #: mactrack_device_types.php:70 mactrack_devices.php:32 mactrack_macauth.php:30
 #: mactrack_macwatch.php:30 mactrack_sites.php:32 mactrack_snmp.php:31
 #: mactrack_view_macs.php:38
-#, fuzzy
 msgid "Delete"
 msgstr "删除"
 
@@ -1866,7 +1865,6 @@ msgid "Edit Device"
 msgstr "编辑设备"
 
 #: mactrack_view_devices.php:318
-#, fuzzy
 msgid "View Graphs"
 msgstr "查看图形"
 
