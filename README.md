@@ -79,6 +79,9 @@ issue in GitHub.
 
 * issue#98: Fix DB maintenance not running automatically
 
+* issue#120: mactrack_import_ouidb.php has incorrect path to function
+  definitions
+
 * feature: PHP 7.2 compatibility
 
 --- 4.2 ---

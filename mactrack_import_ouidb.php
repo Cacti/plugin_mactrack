@@ -31,7 +31,7 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 }
 
 include('./include/cli_check.php');
-include_once($config['base_path'] . '/lib/mactrack_functions.php');
+include_once($config['base_path'] . 'plugins/mactrack/lib/mactrack_functions.php');
 
 /* process calling arguments */
 $parms = $_SERVER['argv'];
