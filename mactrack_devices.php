@@ -905,16 +905,16 @@ function mactrack_device_edit() {
 
 	form_start('mactrack_devices.php');
 
-	html_start_box($header_label, '100%', '', '3', 'center', '');
+	html_start_box($header_label, '100%', true, '3', 'center', '');
 
 	/* preserve the devices site id between refreshes via a GET variable */
 	if (!isempty_request_var('site_id')) {
-		$fields_host_edit['site_id']['value'] = get_request_var('site_id');
+		$fields_mactrack_device_edit['site_id']['value'] = get_request_var('site_id');
 	}
 
 	draw_edit_form(
 		array(
-			'config' => array('no_form_tab' => true),
+			'config' => array('no_form_tag' => true),
 			'fields' => inject_form_variables($fields_mactrack_device_edit, (isset($device) ? $device : array()))
 		)
 	);
