@@ -905,7 +905,7 @@ function mactrack_device_edit() {
 
 	form_start('mactrack_devices.php');
 
-	html_start_box($header_label, '100%', '', '3', 'center', '');
+	html_start_box($header_label, '100%', true, '3', 'center', '');
 
 	/* preserve the devices site id between refreshes via a GET variable */
 	if (!isempty_request_var('site_id')) {
