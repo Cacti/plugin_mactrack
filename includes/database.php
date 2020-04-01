@@ -64,39 +64,87 @@ function mactrack_database_upgrade() {
 
 	mactrack_execute_sql('Correct a Scanning Function Bug', "DELETE FROM mac_track_scanning_functions WHERE scanning_function='Not Applicable - Hub/Switch'");
 
-	mactrack_add_column('mac_track_devices', 'host_id', "ALTER TABLE `mac_track_devices` ADD COLUMN `host_id` INTEGER UNSIGNED NOT NULL default '0' AFTER `device_id`");
+	mactrack_add_column('mac_track_devices',
+		'host_id',
+		"ALTER TABLE `mac_track_devices` ADD COLUMN `host_id` INTEGER UNSIGNED NOT NULL default '0' AFTER `device_id`");
 
-	mactrack_add_index('mac_track_devices', 'host_id', 'ALTER TABLE `mac_track_devices` ADD INDEX `host_id`(`host_id`)');
+	mactrack_add_index('mac_track_devices',
+		'host_id',
+		'ALTER TABLE `mac_track_devices` ADD INDEX `host_id`(`host_id`)');
 
-	mactrack_add_index('mac_track_ports', 'scan_date', 'ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)');
+	mactrack_add_index('mac_track_ports',
+		'scan_date',
+		'ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)');
 
-	if (!mactrack_db_column_exists('mac_track_interfaces', 'sysUptime')) {
-		db_execute("ALTER TABLE mac_track_interfaces
-		ADD COLUMN `sysUptime` int(10) unsigned NOT NULL default '0' AFTER `device_id`,
-		ADD COLUMN `ifInOctets` int(10) unsigned NOT NULL default '0' AFTER `vlan_trunk_status`,
-		ADD COLUMN `ifOutOctets` int(10) unsigned NOT NULL default '0' AFTER `ifInOctets`,
-		ADD COLUMN `ifHCInOctets` bigint(20) unsigned NOT NULL default '0' AFTER `ifOutOctets`,
-		ADD COLUMN `ifHCOutOctets` bigint(20) unsigned NOT NULL default '0' AFTER `ifHCInOctets`,
-		ADD COLUMN `ifInUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifHCOutOctets`,
-		ADD COLUMN `ifOutUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInUcastPkts`,
-		ADD COLUMN `ifInMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifOutUcastPkts`,
-		ADD COLUMN `ifOutMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInMulticastPkts`,
-		ADD COLUMN `ifInBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifOutMulticastPkts`,
-		ADD COLUMN `ifOutBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInBroadcastPkts`,
-		ADD COLUMN `inBound` double NOT NULL default '0' AFTER `ifOutErrors`,
-		ADD COLUMN `outBound` double NOT NULL default '0' AFTER `inBound`,
-		ADD COLUMN `int_ifInOctets` int(10) unsigned NOT NULL default '0' AFTER `outBound`,
-		ADD COLUMN `int_ifOutOctets` int(10) unsigned NOT NULL default '0' AFTER `int_ifInOctets`,
-		ADD COLUMN `int_ifHCInOctets` bigint(20) unsigned NOT NULL default '0' AFTER `int_ifOutOctets`,
-		ADD COLUMN `int_ifHCOutOctets` bigint(20) unsigned NOT NULL default '0' AFTER `int_ifHCInOctets`,
-		ADD COLUMN `int_ifInUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifHCOutOctets`,
-		ADD COLUMN `int_ifOutUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUcastPkts`
-		ADD COLUMN `int_ifInMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutUcastPkts`,
-		ADD COLUMN `int_ifOutMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInMulticastPkts`,
-		ADD COLUMN `int_ifInBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutMulticastPkts`,
-		ADD COLUMN `int_ifOutBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInBroadcastPkts`,");
-
-	}
+	mactrack_add_column('mac_track_interfaces',
+		'sysUptime',		
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `sysUptime` int(10) unsigned NOT NULL default '0' AFTER `device_id`");
+	mactrack_add_column('mac_track_interfaces',
+		'ifInOctets',	
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifInOctets` int(10) unsigned NOT NULL default '0' AFTER `vlan_trunk_status`");
+	mactrack_add_column('mac_track_interfaces',
+		'ifOutOctets',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutOctets` int(10) unsigned NOT NULL default '0' AFTER `ifInOctets`");
+	mactrack_add_column('mac_track_interfaces',
+		'ifHCInOctets',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifHCInOctets` bigint(20) unsigned NOT NULL default '0' AFTER `ifOutOctets`");
+	mactrack_add_column('mac_track_interfaces',
+		'ifHCOutOctets',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifHCOutOctets` bigint(20) unsigned NOT NULL default '0' AFTER `ifHCInOctets`");
+	mactrack_add_column('mac_track_interfaces',
+		'ifInUcastPkts',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifInUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifHCOutOctets`");
+	mactrack_add_column('mac_track_interfaces',
+		'ifOutUcastPkts',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInUcastPkts`");
+	mactrack_add_column('mac_track_interfaces',
+		'ifInMulticastPkts',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifInMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifOutUcastPkts`");
+	mactrack_add_column('mac_track_interfaces',
+		'ifOutMulticastPkts',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInMulticastPkts`");
+	mactrack_add_column('mac_track_interfaces',
+		'ifInBroadcastPkts',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifInBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifOutMulticastPkts`");
+	mactrack_add_column('mac_track_interfaces',
+		'ifOutBroadcastPkts',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInBroadcastPkts`");
+	mactrack_add_column('mac_track_interfaces',
+		'inBound',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `inBound` double NOT NULL default '0' AFTER `ifOutErrors`");
+	mactrack_add_column('mac_track_interfaces',
+		'outBound',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `outBound` double NOT NULL default '0' AFTER `inBound`");
+	mactrack_add_column('mac_track_interfaces',
+		'int_ifInOctets',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInOctets` int(10) unsigned NOT NULL default '0' AFTER `outBound`");
+	mactrack_add_column('mac_track_interfaces',
+		'int_ifOutOctets',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutOctets` int(10) unsigned NOT NULL default '0' AFTER `int_ifInOctets`");
+	mactrack_add_column('mac_track_interfaces',
+		'int_ifHCInOctets',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifHCInOctets` bigint(20) unsigned NOT NULL default '0' AFTER `int_ifOutOctets`");
+	mactrack_add_column('mac_track_interfaces',
+		'int_ifHCOutOctets',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifHCOutOctets` bigint(20) unsigned NOT NULL default '0' AFTER `int_ifHCInOctets`");
+	mactrack_add_column('mac_track_interfaces',
+		'int_ifInUcastPkts',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifHCOutOctets`");
+	mactrack_add_column('mac_track_interfaces',
+		'int_ifOutUcastPkts',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUcastPkts`");
+	mactrack_add_column('mac_track_interfaces',
+		'int_ifInMulticastPkts',		
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutUcastPkts`");
+	mactrack_add_column('mac_track_interfaces',
+		'int_ifOutMulticastPkts',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInMulticastPkts`");
+	mactrack_add_column('mac_track_interfaces',
+		'int_ifInBroadcastPkts',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutMulticastPkts`");
+	mactrack_add_column('mac_track_interfaces',
+		'int_ifOutBroadcastPkts',
+		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInBroadcastPkts`");
 
 	if (!mactrack_db_key_exists('mac_track_ports', 'site_id_device_id')) {
 		db_execute('ALTER TABLE `mac_track_ports` ADD INDEX `site_id_device_id`(`site_id`, `device_id`);');
