@@ -909,12 +909,12 @@ function mactrack_device_edit() {
 
 	/* preserve the devices site id between refreshes via a GET variable */
 	if (!isempty_request_var('site_id')) {
-		$fields_host_edit['site_id']['value'] = get_request_var('site_id');
+		$fields_mactrack_device_edit['site_id']['value'] = get_request_var('site_id');
 	}
 
 	draw_edit_form(
 		array(
-			'config' => array('no_form_tab' => true),
+			'config' => array('no_form_tag' => true),
 			'fields' => inject_form_variables($fields_mactrack_device_edit, (isset($device) ? $device : array()))
 		)
 	);
