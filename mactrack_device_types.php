@@ -853,7 +853,7 @@ function mactrack_device_type_edit() {
 
 	form_start('mactrack_device_types.php', 'chk');
 
-	html_start_box($header_label, '100%', '', '3', 'center', '');
+	html_start_box($header_label, '100%', true, '3', 'center', '');
 
 	draw_edit_form(
 		array(
@@ -925,8 +925,8 @@ function mactrack_device_type() {
 	$device_types = mactrack_get_device_types($sql_where, $rows);
 
 	$total_rows = db_fetch_cell("SELECT
-		COUNT(mac_track_device_types.device_type_id)
-		FROM mac_track_device_types" . $sql_where);
+		COUNT(mtdt.device_type_id)
+		FROM mac_track_device_types mtdt " . $sql_where);
 
 	form_start('mactrack_device_types.php', 'chk');
 
