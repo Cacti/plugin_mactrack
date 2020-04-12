@@ -25,6 +25,14 @@
 function mactrack_database_upgrade() {
 	global $database_default;
 
+	if (!mactrack_db_key_exists('mac_track_devices', 'device_id_UNIQUE')) {
+		db_execute('ALTER TABLE `mac_track_devices` ADD UNIQUE INDEX `device_id_UNIQUE` (`device_id`);');
+	}
+	
+	if (!mactrack_db_key_exists('mac_track_device_types', 'device_type_id_UNIQUE')) {
+		db_execute('ALTER TABLE `mac_track_device_types` ADD UNIQUE INDEX `device_type_id_UNIQUE` (`device_type_id`);');
+	}	
+
 	mactrack_add_column('mac_track_interfaces',
 		'ifHighSpeed',
 		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifHighSpeed` int(10) unsigned NOT NULL default '0' AFTER `ifSpeed`");
