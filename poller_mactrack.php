@@ -878,6 +878,9 @@ function collect_mactrack_data($start, $site_id = 0) {
 		db_execute('OPTIMIZE TABLE mac_track_ips');
 		db_execute('TRUNCATE TABLE mac_track_scan_dates');
 		db_execute('REPLACE INTO mac_track_scan_dates (SELECT DISTINCT scan_date from mac_track_ports)');
+		
+		api_plugin_hook_function('mac_track_finish_scan');
+		
 	} else {
 		cacti_log('NOTE: MACTRACK has no devices to process at this time', false, 'MACTRACK');
 	}
