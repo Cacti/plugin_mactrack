@@ -95,16 +95,16 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 		//$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, '', '', false);
 		$mac_results  = xform_stripped_oid ('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device);
 		$port_results = xform_stripped_oid ('.1.3.6.1.2.1.17.1.4.1.2', $device);
-
+		
 		$i = 0;
 		$j = 0;
 		$port_array = array();
 		foreach ($mac_results as $num => $mac_result) {
 			if ($mac_result != 0) {
-				$Xvlanid = substr($num, 0, strpos($num, '.'));
-				$Xmac    = mach(substr($num, strpos($num, '.') + 1));
+				$Xvlanid = substr($num, strpos($num, '.')+1, strpos($num, '.',1)-1);
+				$Xmac    = mach(substr($num, strpos($num, '.',1) + 1));
 
-				$ifIndex  = @$port_results[$mac_result];
+				$ifIndex  = @$port_results[".".strval($mac_result)];
 				$ifType   = @$ifInterfaces[$ifIndex]['ifType'];
 				$ifName   = @$ifInterfaces[$ifIndex]['ifName'];
 				$portName = $ifName;
@@ -116,7 +116,7 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 				if ( $portName != '' and $portName != '1' ) {
 					$port_array[$i]['vlan_id'] = $active_vlans[$Xvlanid]['vlan_id'];//@$vlan_ids[$Xvlanid];
 					$port_array[$i]['vlan_name'] = $active_vlans[$Xvlanid]['vlan_name'];//@$vlan_names[$Xvlandid];
-					$port_array[$i]['port_number'] = @$port_results[$mac_result];
+					$port_array[$i]['port_number'] = @$port_results[".".strval($mac_result)];
 					$port_array[$i]['port_name'] = trim ( $ifName );
 					$port_array[$i]['mac_address'] = xform_mac_address($Xmac);
 					$device['ports_active']++;
