@@ -68,7 +68,7 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	mactrack_debug('ifIndexes data collection complete');
 
 	/* get and store the interfaces table */
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, true);
 
 	/* get port description */
 
@@ -161,6 +161,5 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
 	}
-
 	return $device;
 }
