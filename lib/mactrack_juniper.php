@@ -68,7 +68,11 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	mactrack_debug('ifIndexes data collection complete');
 
 	/* get and store the interfaces table */
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, true);
+
+	/* get port description */
+
+	$portDescription = xform_standard_indexed_data('.1.0.8802.1.1.2.1.3.7.1.4', $device);
 
 	/* get port description */
 
@@ -128,7 +132,11 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 					$port_array[$i]['vlan_name'] = $active_vlans[$Xvlanid]['vlan_name'];//@$vlan_names[$Xvlandid];
 					//$port_array[$i]['port_number'] = @$port_results[".".strval($mac_result)];
 					$port_array[$i]['port_number'] = trim ( $ifName );
-					$port_array[$i]['port_name'] = $ifDesc;
+					if(isset($ifDesc)){
+						$port_array[$i]['port_name'] = $ifDesc;
+					}else{
+						$port_array[$i]['port_name'] = trim ( $ifName );
+					}
 					$port_array[$i]['mac_address'] = xform_mac_address($Xmac);
 					$device['ports_active']++;
 
@@ -157,6 +165,5 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
 	}
-
 	return $device;
 }
