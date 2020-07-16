@@ -51,7 +51,6 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	/* get VLAN information */
 	$vlan_ids   = xform_standard_indexed_data('.1.3.6.1.4.1.2636.3.40.1.5.1.5.1.5', $device);
 	$vlan_names = xform_standard_indexed_data('.1.3.6.1.4.1.2636.3.40.1.5.1.5.1.2', $device);
-	$vlan_trunkstatus = xform_standard_indexed_data('.1.3.6.1.4.1.2636.3.40.1.5.1.7.1.5', $device);
 
 	$device['vlans_total'] = sizeof($vlan_ids) - 1;
 	mactrack_debug('VLAN data collected. There are ' . (cacti_sizeof($vlan_ids) - 1) . ' VLANS.');
@@ -74,13 +73,12 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 
 	$portDescription = xform_standard_indexed_data('.1.0.8802.1.1.2.1.3.7.1.4', $device);
 
-	/* get port description */
-
-	$portDescription = xform_standard_indexed_data('.1.0.8802.1.1.2.1.3.7.1.4', $device);
+	/* get the ignore ports list from device */
+	$ignore_ports = port_list_to_array($device['ignorePorts']);
 
 	foreach ($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]['trunkPortState'] = @$vlan_trunkstatus[$ifIndex];
-		$ifInterfaces[$ifIndex]['portDesc']=$portDescription[$ifIndex];
+		$ifInterfaces[$ifIndex]['portDesc']=@$portDescription[$ifIndex];
 
 		if (($ifInterfaces[$ifIndex]['ifType'] == 'propVirtual(53)') ||
 			($ifInterfaces[$ifIndex]['ifType'] == '53') ||
@@ -152,13 +150,18 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 				$j++;
 			}
 		}
-
+		$newPorts=array();
+		foreach ($port_array as $port) {
+			if(in_array($port['port_number'], $ignore_ports)===false){
+				array_push($newPorts, $port);
+			}
+		}
 		/* display completion message */
 		print('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
-		$device['macs_active'] = sizeof($port_array);
-		db_store_device_port_results($device, $port_array, $scan_date);
+		$device['macs_active'] = sizeof($newPorts);
+		db_store_device_port_results($device, $newPorts, $scan_date);
 	} else {
 		print('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devcies on this network device.');
 
