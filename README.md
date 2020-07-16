@@ -321,7 +321,7 @@ issue in GitHub.
 
 * Initial Release!  Oh, so long ago
 
-## Changes made in Mactrack plugin
+## Changes made in Mactrack plugin by woranhun
 
 ###       Fixing bug: mac addresses were not visible under MAC Addresses tab
 
