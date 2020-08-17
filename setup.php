@@ -396,7 +396,7 @@ function mactrack_config_settings() {
 			'friendly_name' => __('Source Address', 'mactrack'),
 			'description' => __('The source Email address for Device Tracking Emails.', 'mactrack'),
 			'method' => 'textbox',
-			'default' => 'thewitness@cacti.net',
+			'default' => '',
 			'max_length' => '100',
 			'size' => '30'
 			),
