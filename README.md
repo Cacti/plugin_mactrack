@@ -67,6 +67,10 @@ issue in GitHub.
 
 ## ChangeLog
 
+--- 4.4 ---
+
+* issue#140: Mactrack PHP code error with Mailer class
+
 --- 4.3 ---
 
 * issue#70: Fix issue with Prompt confirmation button
