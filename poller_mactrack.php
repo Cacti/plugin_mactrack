@@ -35,12 +35,12 @@ include_once($config['base_path'] . '/lib/poller.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 /* get the mactrack polling cycle */
-$max_run_duration = read_config_option('mt_collection_timing');
-$poller_interval  = read_config_option('poller_interval');
+$collect_frequency = read_config_option('mt_collection_timing');
+$poller_interval   = read_config_option('poller_interval');
 
-if (is_numeric($max_run_duration)) {
+if (is_numeric($collect_frequency)) {
 	/* let PHP a 5 minutes less than the rerun frequency */
-	$max_run_duration = ($max_run_duration * 60) - $poller_interval;
+	$max_run_duration = ($collect_frequency * 60) - $poller_interval;
 	ini_set('max_execution_time', $max_run_duration);
 }
 
@@ -110,7 +110,7 @@ if (cacti_sizeof($parms)) {
 // Get rid of old/hung processes
 clear_old_processes($site_id);
 
-if (read_config_option('mt_collection_timing') == 'disabled') {
+if ($collect_frequency == 'disabled') {
 	echo "WARNING: Device Tracking is disabled, exiting\n";
 	exit(1);
 } else {
@@ -144,10 +144,10 @@ if (read_config_option('mt_collection_timing') == 'disabled') {
 		collect_mactrack_data($start, $site_id);
 	} else {
 		mactrack_debug('About to enter Device Tracking poller processing');
-		$seconds_offset = read_config_option('mt_collection_timing');
-		if (($seconds_offset <> 'disabled') || $forcerun) {
+		if ($forcerun || $collect_frequency > 0) {
 			mactrack_debug('Into Processing.  Checking to determine if it\'s time to run.');
-			$seconds_offset           = $seconds_offset * 60;
+			$collect_frequency        = $collect_frequency * 60;
+
 			/* find out if it's time to collect device information */
 			$base_start_time          = read_config_option('mt_base_time');
 			$database_maint_time      = read_config_option('mt_maint_time');
@@ -194,8 +194,9 @@ if (read_config_option('mt_collection_timing') == 'disabled') {
 					$next_run_time = strtotime(date('Y-m-d') . ' ' . $base_start_time);
 				}
 			} else {
-				$next_run_time = $last_run_time + $seconds_offset;
+				$next_run_time = $last_run_time + $collect_frequency;
 			}
+
 			$time_till_next_run = $next_run_time - $current_time;
 
 			if ($time_till_next_run < 0) {

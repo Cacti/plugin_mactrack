@@ -420,13 +420,40 @@ function mactrack_site() {
 
 	if (get_request_var('detail') == 'false') {
 		$display_text = array(
-			'site_name'           => array(__('Site Name', 'mactrack'), 'ASC'),
-			'total_devices'       => array(__('Devices', 'mactrack'), 'DESC'),
-			'total_ips'           => array(__('Total IP\'s', 'mactrack'), 'DESC'),
-			'total_user_ports'    => array(__('User Ports', 'mactrack'), 'DESC'),
-			'total_oper_ports'    => array(__('User Ports Up', 'mactrack'), 'DESC'),
-			'total_macs'          => array(__('MACS Found', 'mactrack'), 'DESC'),
-			'total_device_errors' => array(__('Device Errors', 'mactrack'), 'DESC')
+			'site_name' => array(
+				'display' => __('Site Name', 'mactrack'),
+				'sort'    => 'ASC'
+			),
+			'total_devices' => array(
+				'display' => __('Devices', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'total_ips' => array(
+				'display' => __('Total IP\'s', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'total_user_ports' => array(
+				'display' => __('User Ports', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'total_oper_ports' => array(
+				'display' => __('User Ports Up', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'total_macs' => array(
+				'display' => __('MACS Found', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'total_device_errors' => array(
+				'display' => __('Device Errors', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			)
 		);
 
 		$columns = sizeof($display_text) + 1;
@@ -444,12 +471,12 @@ function mactrack_site() {
 			foreach ($sites as $site) {
 				form_alternate_row('line' . $site['site_id'], true);
 				form_selectable_cell(filter_value($site['site_name'], get_request_var('filter'), 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']), $site['site_id']);
-				form_selectable_cell(number_format_i18n($site['total_devices']), $site['site_id']);
-				form_selectable_cell(number_format_i18n($site['total_ips']), $site['site_id']);
-				form_selectable_cell(number_format_i18n($site['total_user_ports']), $site['site_id']);
-				form_selectable_cell(number_format_i18n($site['total_oper_ports']), $site['site_id']);
-				form_selectable_cell(number_format_i18n($site['total_macs']), $site['site_id']);
-				form_selectable_cell($site['total_device_errors'], $site['site_id']);
+				form_selectable_cell(number_format_i18n($site['total_devices']), $site['site_id'], '', 'right');
+				form_selectable_cell(number_format_i18n($site['total_ips']), $site['site_id'], '', 'right');
+				form_selectable_cell(number_format_i18n($site['total_user_ports']), $site['site_id'], '', 'right');
+				form_selectable_cell(number_format_i18n($site['total_oper_ports']), $site['site_id'], '', 'right');
+				form_selectable_cell(number_format_i18n($site['total_macs']), $site['site_id'], '', 'right');
+				form_selectable_cell($site['total_device_errors'], $site['site_id'], '', 'right');
 				form_checkbox_cell($site['site_name'], $site['site_id']);
 				form_end_row();
 			}
@@ -464,15 +491,49 @@ function mactrack_site() {
 		}
 	} else {
 		$display_text = array(
-			'site_name'        => array(__('Site Name', 'mactrack'), 'ASC'),
-			'vendor'           => array(__('Vendor', 'mactrack'), 'ASC'),
-			'description'      => array(__('Device Type', 'mactrack'), 'DESC'),
-			'total_devices'    => array(__('Total Devices', 'mactrack'), 'DESC'),
-			'sum_ips_total'    => array(__('Total IP\'s', 'mactrack'), 'DESC'),
-			'sum_ports_total'  => array(__('Total User Ports', 'mactrack'), 'DESC'),
-			'sum_ports_active' => array(__('Total Oper Ports', 'mactrack'), 'DESC'),
-			'sum_ports_trunk'  => array(__('Total Trunks', 'mactrack'), 'DESC'),
-			'sum_macs_active'  => array(__('MACS Found', 'mactrack'), 'DESC')
+			'site_name' => array(
+				'display' => __('Site Name', 'mactrack'),
+				'sort'    => 'ASC'
+			),
+			'vendor' => array(
+				'display' => __('Vendor', 'mactrack'),
+				'sort'    => 'ASC'
+			),
+			'description' => array(
+				'display' => __('Device Type', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'total_devices' => array(
+				'display' => __('Total Devices', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'sum_ips_total' => array(
+				'display' => __('Total IP\'s', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'sum_ports_total' => array(
+				'display' => __('Total User Ports', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'sum_ports_active' => array(
+				'display' => __('Total Oper Ports', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'sum_ports_trunk' => array(
+				'display' => __('Total Trunks', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'sum_macs_active' => array(
+				'display' => __('MACS Found', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			)
 		);
 
 		$columns = sizeof($display_text);
@@ -487,21 +548,17 @@ function mactrack_site() {
 
 		if (cacti_sizeof($sites)) {
 			foreach ($sites as $site) {
-				form_alternate_row();
-					?>
-					<td width=200>
-						<?php print filter_value($site['site_name'], get_request_var('filter'), 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']);?>
-					</td>
-					<td><?php print filter_value($site['vendor'], get_request_var('filter'));?></td>
-					<td><?php print filter_value($site['description'], get_request_var('filter'));?></td>
-					<td><?php print number_format_i18n($site['total_devices']);?></td>
-					<td><?php print number_format_i18n($site['sum_ips_total']);?></td>
-					<td><?php print number_format_i18n($site['sum_ports_total']);?></td>
-					<td><?php print number_format_i18n($site['sum_ports_active']);?></td>
-					<td><?php print number_format_i18n($site['sum_ports_trunk']);?></td>
-					<td><?php print number_format_i18n($site['sum_macs_active']);?></td>
-				</tr>
-				<?php
+				form_alternate_row('line' . $site['site_id']);
+				form_selectable_cell(filter_value($site['site_name'], get_request_var('filter'), 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']), $site['site_id']);
+				form_selectable_cell(filter_value($site['vendor'], get_request_var('filter')), $site['site_id']);
+				form_selectable_cell(filter_value($site['description'], get_request_var('filter')), $site['site_id'], '', 'right');
+				form_selectable_cell(number_format_i18n($site['total_devices']), $site['site_id'], '', 'right');
+				form_selectable_cell(number_format_i18n($site['sum_ips_total']), $site['site_id'], '', 'right');
+				form_selectable_cell(number_format_i18n($site['sum_ports_total']), $site['site_id'], '', 'right');
+				form_selectable_cell(number_format_i18n($site['sum_ports_active']), $site['site_id'], '', 'right');
+				form_selectable_cell(number_format_i18n($site['sum_ports_trunk']), $site['site_id'], '', 'right');
+				form_selectable_cell(number_format_i18n($site['sum_macs_active']), $site['site_id'], '', 'right');
+				form_end_row();
 			}
 		} else {
 			print '<tr><td><em>' . __('No Device Tracking Sites Found', 'mactrack') . '</em></td></tr>';

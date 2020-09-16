@@ -1018,17 +1018,56 @@ function mactrack_device() {
 		$sql_where");
 
 	$display_text = array(
-		'device_name'      => array(__('Device Name', 'mactrack'), 'ASC'),
-		'site_name'        => array(__('Site Name', 'mactrack'), 'ASC'),
-		'snmp_status'      => array(__('Status', 'mactrack'), 'ASC'),
-		'hostname'         => array(__('Hostname', 'mactrack'), 'ASC'),
-		'device_type'      => array(__('Device Type', 'mactrack'), 'ASC'),
-		'ips_total'        => array(__('Total IPs', 'mactrack'), 'DESC'),
-		'ports_total'      => array(__('User Ports', 'mactrack'), 'DESC'),
-		'ports_active'     => array(__('User Ports Up', 'mactrack'), 'DESC'),
-		'ports_trunk'      => array(__('Trunk Ports', 'mactrack'), 'DESC'),
-		'macs_active'      => array(__('Active Macs', 'mactrack'), 'DESC'),
-		'last_runduration' => array(__('Last Duration', 'mactrack'), 'DESC')
+		'device_name' => array(
+			'display' => __('Device Name', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'site_name' => array(
+			'display' => __('Site Name', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'snmp_status' => array(
+			'display' => __('Status', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'hostname' => array(
+			'display' => __('Hostname', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'device_type' => array(
+			'display' => __('Device Type', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'ips_total' => array(
+			'display' => __('Total IPs', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'ports_total' => array(
+			'display' => __('User Ports', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'ports_active' => array(
+			'display' => __('User Ports Up', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'ports_trunk' => array(
+			'display' => __('Trunk Ports', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'macs_active' => array(
+			'display' => __('Active Macs', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'last_runduration' => array(
+			'display' => __('Last Duration', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		)
 	);
 
 	$columns = sizeof($display_text) + 1;
