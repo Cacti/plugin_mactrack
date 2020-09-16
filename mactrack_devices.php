@@ -1217,6 +1217,7 @@ function mactrack_device_filter() {
 		function exportRows() {
 			strURL  = urlPath+'plugins/mactrack/mactrack_devices.php?export=true';
 			document.location = strURL;
+			Pace.stop();
 		}
 
 		function importRows() {

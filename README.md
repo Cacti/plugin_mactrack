@@ -73,6 +73,8 @@ issue in GitHub.
 
 * issue#137: CMDPHP ERROR: A DB Exec Failed!, Error: Duplicate entry '7' for key 'PRIMARY'
 
+* issue#132: Changing device type sometimes create a duplicate entry
+
 --- 4.3 ---
 
 * issue#70: Fix issue with Prompt confirmation button

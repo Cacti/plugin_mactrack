@@ -25,13 +25,29 @@
 function mactrack_database_upgrade() {
 	global $database_default;
 
-	if (!mactrack_db_key_exists('mac_track_devices', 'device_id_UNIQUE')) {
-		db_execute('ALTER TABLE `mac_track_devices` ADD UNIQUE INDEX `device_id_UNIQUE` (`device_id`);');
+	if (mactrack_db_key_exists('mac_track_devices', 'device_id_UNIQUE')) {
+		db_execute('ALTER TABLE `mac_track_devices` DROP KEY device_id_UNIQUE');
 	}
-	
-	if (!mactrack_db_key_exists('mac_track_device_types', 'device_type_id_UNIQUE')) {
-		db_execute('ALTER TABLE `mac_track_device_types` ADD UNIQUE INDEX `device_type_id_UNIQUE` (`device_type_id`);');
-	}	
+
+	if (mactrack_db_key_exists('mac_track_device_types', 'device_type_id_UNIQUE')) {
+		db_execute('ALTER TABLE `mac_track_device_types` DROP KEY `device_type_id_UNIQUE`');
+	}
+
+	if (mactrack_db_key_exists('mac_track_devices', 'device_id')) {
+		db_execute('ALTER TABLE `mac_track_devices`
+			DROP PRIMARY KEY,
+			ADD PRIMARY KEY (device_id),
+			DROP INDEX device_id,
+			ADD UNIQUE INDEX hostname_snmp_port (hostname, snmp_port)');
+	}
+
+	if (mactrack_db_key_exists('mac_track_device_types', 'device_type_id')) {
+		db_execute('ALTER TABLE `mac_track_device_types`
+			DROP PRIMARY KEY,
+			ADD PRIMARY KEY (device_type_id),
+			DROP INDEX device_type_id,
+			ADD UNIQUE INDEX snmp_info (`sysDescr_match`,`sysObjectID_match`,`device_type`)');
+	}
 
 	mactrack_add_column('mac_track_interfaces',
 		'ifHighSpeed',
@@ -85,10 +101,10 @@ function mactrack_database_upgrade() {
 		'ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)');
 
 	mactrack_add_column('mac_track_interfaces',
-		'sysUptime',		
+		'sysUptime',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `sysUptime` int(10) unsigned NOT NULL default '0' AFTER `device_id`");
 	mactrack_add_column('mac_track_interfaces',
-		'ifInOctets',	
+		'ifInOctets',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifInOctets` int(10) unsigned NOT NULL default '0' AFTER `vlan_trunk_status`");
 	mactrack_add_column('mac_track_interfaces',
 		'ifOutOctets',
@@ -142,7 +158,7 @@ function mactrack_database_upgrade() {
 		'int_ifOutUcastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUcastPkts`");
 	mactrack_add_column('mac_track_interfaces',
-		'int_ifInMulticastPkts',		
+		'int_ifInMulticastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutUcastPkts`");
 	mactrack_add_column('mac_track_interfaces',
 		'int_ifOutMulticastPkts',
@@ -467,9 +483,9 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'serial_number_oid', 'type' => 'varchar(100)', 'NULL' => true);
 	$data['columns'][] = array('name' => 'lowPort', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'highPort', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['primary'] = 'sysDescr_match`,`sysObjectID_match`,`device_type';
+	$data['primary'] = 'device_type_id';
+	$data['unique_keys'] = array('name' => 'snmp_info', 'columns' => 'sysDescr_match`,`sysObjectID_match`,`device_type');
 	$data['keys'][] = array('name' => 'device_type', 'columns' => 'device_type');
-	$data['keys'][] = array('name' => 'device_type_id', 'columns' => 'device_type_id');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
 	api_plugin_db_table_create ('mactrack', 'mac_track_device_types', $data);
@@ -520,10 +536,10 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'last_runmessage', 'type' => 'varchar(100)', 'NULL' => true);
 	$data['columns'][] = array('name' => 'last_rundate', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
 	$data['columns'][] = array('name' => 'last_runduration', 'type' => 'decimal(10,5)', 'NULL' => false, 'default' => '0.00000');
-	$data['primary'] = 'hostname`,`snmp_port`,`site_id';
+	$data['primary'] = 'device_id';
+	$data['unique_keys'] = array('name' => 'hostname_snmp_port_site_id', 'columns' => 'hostname`,`snmp_port`,`site_id');
 	$data['keys'][] = array('name' => 'site_id', 'columns' => 'site_id');
 	$data['keys'][] = array('name' => 'host_id', 'columns' => 'host_id');
-	$data['keys'][] = array('name' => 'device_id', 'columns' => 'device_id');
 	$data['keys'][] = array('name' => 'snmp_sysDescr', 'columns' => 'snmp_sysDescr');
 	$data['keys'][] = array('name' => 'snmp_sysObjectID', 'columns' => 'snmp_sysObjectID');
 	$data['keys'][] = array('name' => 'device_type_id', 'columns' => 'device_type_id');
