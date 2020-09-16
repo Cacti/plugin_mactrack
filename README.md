@@ -71,6 +71,8 @@ issue in GitHub.
 
 * issue#140: Mactrack PHP code error with Mailer class
 
+* issue#137: CMDPHP ERROR: A DB Exec Failed!, Error: Duplicate entry '7' for key 'PRIMARY'
+
 --- 4.3 ---
 
 * issue#70: Fix issue with Prompt confirmation button

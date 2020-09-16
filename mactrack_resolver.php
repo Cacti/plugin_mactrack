@@ -163,12 +163,11 @@ while (1) {
 
 		mactrack_debug('DNS host association complete.');
 
+		$sql = array();
+
 		/* output updated details to database */
 		foreach($unresolved_ips as $unresolved_ip) {
-			$insert_string = 'REPLACE INTO mac_track_temp_ports
-				(site_id,device_id,hostname,dns_hostname,device_name,vlan_id,vlan_name,
-				mac_address,vendor_mac,ip_address,port_number,port_name,scan_date)
-				VALUES (' .
+			$sql[] = '(' .
 				$unresolved_ip['site_id']               . ',' .
 				$unresolved_ip['device_id']             . ',' .
 				db_qstr($unresolved_ip['hostname'])     . ',' .
@@ -182,13 +181,30 @@ while (1) {
 				db_qstr($unresolved_ip['port_number'])  . ',' .
 				db_qstr($unresolved_ip['port_name'])    . ',' .
 				db_qstr($unresolved_ip['scan_date'])    . ')';
-
-			db_execute($insert_string);
 		}
+
+		$sql_prefix = 'INSERT INTO mac_track_temp_ports
+			(site_id, device_id, hostname, dns_hostname, device_name, vlan_id, vlan_name,
+			mac_address, vendor_mac, ip_address, port_number, port_name, scan_date) VALUES ';
+
+		$sql_suffix = ' ON DUPLICATE KEY UPDATE
+			site_id = VALUES(site_id),
+			hostname = VALUES(hostname),
+			dns_hostname = VALUES(dns_hostname),
+			device_name = VALUES(device_name),
+			vlan_id = VALUES(vlan_id),
+			vlan_name = VALUES(vlan_name),
+			vendor_mac = VALUES(vendor_mac),
+			port_name = VALUES(port_name)';
+
+		db_execute($sql_prefix . implode(', ', $sql) . $sql_suffix);
+
 		mactrack_debug('Records updated with DNS information included.');
 	}
 
-	if ($break) break;
+	if ($break) {
+		break;
+	}
 }
 
 /* allow parent to close by removing process and then exit */

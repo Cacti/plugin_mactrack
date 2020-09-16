@@ -2098,7 +2098,7 @@ function db_process_add($device_id, $storepid = false) {
 	}
 
 	/* store pseudo process id in the database */
-	db_execute_prepared('INSERT INTO mac_track_processes
+	db_execute_prepared('REPLACE INTO mac_track_processes
 		(device_id, process_id, status, start_date)
 		VALUES (?, ?, "Running", NOW())',
 		array($device_id, $pid));
