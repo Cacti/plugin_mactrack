@@ -553,46 +553,286 @@ function mactrack_config_settings() {
 }
 
 function mactrack_draw_navigation_text($nav) {
-	$nav['mactrack_devices.php:'] = array('title' => __('Device Tracking Devices', 'mactrack'), 'mapping' => 'index.php:', 'url' => 'mactrack_devices.php', 'level' => '1');
-	$nav['mactrack_devices.php:edit'] = array('title' => __('(Edit)', 'mactrack'), 'mapping' => 'index.php:,mactrack_devices.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_devices.php:import'] = array('title' => __('(Import)', 'mactrack'), 'mapping' => 'index.php:,mactrack_devices.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_devices.php:actions'] = array('title' => __('Actions', 'mactrack'), 'mapping' => 'index.php:,mactrack_devices.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_snmp.php:'] = array('title' => __('Device Tracking SNMP Options', 'mactrack'), 'mapping' => 'index.php:', 'url' => 'mactrack_snmp.php', 'level' => '1');
-	$nav['mactrack_snmp.php:actions'] = array('title' => __('Actions', 'mactrack'), 'mapping' => 'index.php:,mactrack_snmp.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_snmp.php:edit'] = array('title' => __('(Edit)', 'mactrack'), 'mapping' => 'index.php:,mactrack_snmp.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_snmp.php:item_edit'] = array('title' => __('(Edit)', 'mactrack'), 'mapping' => 'index.php:,mactrack_snmp.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_device_types.php:'] = array('title' => __('Device Tracking Device Types', 'mactrack'), 'mapping' => 'index.php:', 'url' => 'mactrack_device_types.php', 'level' => '1');
-	$nav['mactrack_device_types.php:edit'] = array('title' => __('(Edit)', 'mactrack'), 'mapping' => 'index.php:,mactrack_device_types.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_device_types.php:import'] = array('title' => __('(Import)', 'mactrack'), 'mapping' => 'index.php:,mactrack_device_types.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_device_types.php:actions'] = array('title' => __('Actions', 'mactrack'), 'mapping' => 'index.php:,mactrack_device_types.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_sites.php:'] = array('title' => __('Device Tracking Sites', 'mactrack'), 'mapping' => 'index.php:', 'url' => 'mactrack_sites.php', 'level' => '1');
-	$nav['mactrack_sites.php:edit'] = array('title' => __('(Edit)', 'mactrack'), 'mapping' => 'index.php:,mactrack_sites.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_sites.php:actions'] = array('title' => __('Actions', 'mactrack'), 'mapping' => 'index.php:,mactrack_sites.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_macwatch.php:'] = array('title' => __('Mac Address Tracking Utility', 'mactrack'), 'mapping' => 'index.php:', 'url' => 'mactrack_macwatch.php', 'level' => '1');
-	$nav['mactrack_macwatch.php:edit'] = array('title' => __('(Edit)', 'mactrack'), 'mapping' => 'index.php:,mactrack_macwatch.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_macwatch.php:actions'] = array('title' => __('Actions', 'mactrack'), 'mapping' => 'index.php:,mactrack_macwatch.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_macauth.php:'] = array('title' => __('Mac Address Authorization Utility', 'mactrack'), 'mapping' => 'index.php:', 'url' => 'mactrack_macauth.php', 'level' => '1');
-	$nav['mactrack_macauth.php:edit'] = array('title' => __('(Edit)', 'mactrack'), 'mapping' => 'index.php:,mactrack_macauth.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_macauth.php:actions'] = array('title' => __('Actions', 'mactrack'), 'mapping' => 'index.php:,mactrack_macauth.php:', 'url' => '', 'level' => '2');
-	$nav['mactrack_vendormacs.php:'] = array('title' => __('Device Tracking Vendor Macs', 'mactrack'), 'mapping' => 'index.php:', 'url' => 'mactrack_vendormacs.php', 'level' => '1');
-	$nav['mactrack_view_macs.php:'] = array('title' => __('Device Tracking View Macs', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_macs.php', 'level' => '0');
-	$nav['mactrack_view_macs.php:actions'] = array('title' => __('Actions', 'mactrack'), 'mapping' => 'mactrack_view_macs.php:', 'url' => '', 'level' => '1');
-	$nav['mactrack_view_dot1x.php:'] = array('title' => __('Device Tracking Dot1x View', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_dot1x.php', 'level' => '0');
-	$nav['mactrack_view_arp.php:'] = array('title' => __('Device Tracking IP Address Viewer', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_arp.php', 'level' => '0');
-	$nav['mactrack_view_interfaces.php:'] = array('title' => __('Device Tracking View Interfaces', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_interfaces.php', 'level' => '0');
-	$nav['mactrack_view_sites.php:'] = array('title' => __('Device Tracking View Sites', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_sites.php', 'level' => '0');
-	$nav['mactrack_view_ips.php:'] = array('title' => __('Device Tracking View IP Ranges', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_ips.php', 'level' => '0');
-	$nav['mactrack_view_devices.php:'] = array('title' => __('Device Tracking View Devices', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_devices.php', 'level' => '0');
-	$nav['mactrack_utilities.php:'] = array('title' => __('Device Tracking Utilities', 'mactrack'), 'mapping' => 'index.php:', 'url' => 'mactrack_utilities.php', 'level' => '1');
-	$nav['mactrack_utilities.php:mactrack_utilities_perform_db_maint'] = array('title' => __('Perform Database Maintenance', 'mactrack'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
-	$nav['mactrack_utilities.php:mactrack_utilities_purge_scanning_funcs'] = array('title' => __('Refresh Scanning Functions', 'mactrack'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
-	$nav['mactrack_utilities.php:mactrack_utilities_truncate_ports_table'] = array('title' => __('Truncate Port Results Table', 'mactrack'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
-	$nav['mactrack_utilities.php:mactrack_utilities_purge_aggregated_data'] = array('title' => __('Truncate Aggregated Port Results Table', 'mactrack'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
-	$nav['mactrack_utilities.php:mactrack_utilities_recreate_aggregated_data'] = array('title' => __('Truncate and Re-create Aggregated Port Results Table', 'mactrack'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
-	$nav['mactrack_utilities.php:mactrack_proc_status'] = array('title' => __('View Device Tracking Process Status', 'mactrack'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
-	$nav['mactrack_utilities.php:mactrack_refresh_oui_database'] = array('title' => __('Refresh/Update Vendor MAC Database from IEEE', 'mactrack'), 'mapping' => 'index.php:,mactrack_utilities.php:', 'url' => 'mactrack_utilities.php', 'level' => '2');
-	$nav['mactrack_view_graphs.php:'] = array('title' => __('Device Tracking Graph Viewer', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_graphs.php', 'level' => '0');
-	$nav['mactrack_view_graphs.php:preview'] = array('title' => __('Device Tracking Graph Viewer', 'mactrack'), 'mapping' => '', 'url' => 'mactrack_view_graphs.php', 'level' => '0');
+	$nav['mactrack_devices.php:'] = array(
+		'title' => __('Device Tracking Devices', 'mactrack'),
+		'mapping' => 'index.php:',
+		'url' => 'mactrack_devices.php',
+		'level' => '1'
+	);
+
+	$nav['mactrack_devices.php:edit'] = array(
+		'title' => __('(Edit)', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_devices.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_devices.php:import'] = array(
+		'title' => __('(Import)', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_devices.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_devices.php:actions'] = array(
+		'title' => __('Actions', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_devices.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_snmp.php:'] = array(
+		'title' => __('Device Tracking SNMP Options', 'mactrack'),
+		'mapping' => 'index.php:',
+		'url' => 'mactrack_snmp.php',
+		'level' => '1'
+	);
+
+	$nav['mactrack_snmp.php:actions'] = array(
+		'title' => __('Actions', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_snmp.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_snmp.php:edit'] = array(
+		'title' => __('(Edit)', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_snmp.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_snmp.php:item_edit'] = array(
+		'title' => __('(Edit)', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_snmp.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_device_types.php:'] = array(
+		'title' => __('Device Tracking Device Types', 'mactrack'),
+		'mapping' => 'index.php:',
+		'url' => 'mactrack_device_types.php',
+		'level' => '1'
+	);
+
+	$nav['mactrack_device_types.php:edit'] = array(
+		'title' => __('(Edit)', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_device_types.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_device_types.php:import'] = array(
+		'title' => __('(Import)', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_device_types.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_device_types.php:actions'] = array(
+		'title' => __('Actions', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_device_types.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_sites.php:'] = array(
+		'title' => __('Device Tracking Sites', 'mactrack'),
+		'mapping' => 'index.php:',
+		'url' => 'mactrack_sites.php',
+		'level' => '1'
+	);
+
+	$nav['mactrack_sites.php:edit'] = array(
+		'title' => __('(Edit)', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_sites.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_sites.php:actions'] = array(
+		'title' => __('Actions', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_sites.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_macwatch.php:'] = array(
+		'title' => __('Mac Address Tracking Utility', 'mactrack'),
+		'mapping' => 'index.php:',
+		'url' => 'mactrack_macwatch.php',
+		'level' => '1'
+	);
+
+	$nav['mactrack_macwatch.php:edit'] = array(
+		'title' => __('(Edit)', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_macwatch.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_macwatch.php:actions'] = array(
+		'title' => __('Actions', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_macwatch.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_macauth.php:'] = array(
+		'title' => __('Mac Address Authorization Utility', 'mactrack'),
+		'mapping' => 'index.php:',
+		'url' => 'mactrack_macauth.php',
+		'level' => '1'
+	);
+
+	$nav['mactrack_macauth.php:edit'] = array(
+		'title' => __('(Edit)', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_macauth.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_macauth.php:actions'] = array(
+		'title' => __('Actions', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_macauth.php:',
+		'url' => '',
+		'level' => '2'
+	);
+
+	$nav['mactrack_vendormacs.php:'] = array(
+		'title' => __('Device Tracking Vendor Macs', 'mactrack'),
+		'mapping' => 'index.php:',
+		'url' => 'mactrack_vendormacs.php',
+		'level' => '1'
+	);
+
+	$nav['mactrack_view_macs.php:'] = array(
+		'title' => __('Device Tracking View Macs', 'mactrack'),
+		'mapping' => '',
+		'url' => 'mactrack_view_macs.php',
+		'level' => '0'
+	);
+
+	$nav['mactrack_view_macs.php:actions'] = array(
+		'title' => __('Actions', 'mactrack'),
+		'mapping' => 'mactrack_view_macs.php:',
+		'url' => '',
+		'level' => '1'
+	);
+
+	$nav['mactrack_view_dot1x.php:'] = array(
+		'title' => __('Device Tracking Dot1x View', 'mactrack'),
+		'mapping' => '',
+		'url' => 'mactrack_view_dot1x.php',
+		'level' => '0'
+	);
+
+	$nav['mactrack_view_arp.php:'] = array(
+		'title' => __('Device Tracking IP Address Viewer', 'mactrack'),
+		'mapping' => '',
+		'url' => 'mactrack_view_arp.php',
+		'level' => '0'
+	);
+
+	$nav['mactrack_view_interfaces.php:'] = array(
+		'title' => __('Device Tracking View Interfaces', 'mactrack'),
+		'mapping' => '',
+		'url' => 'mactrack_view_interfaces.php',
+		'level' => '0'
+	);
+
+	$nav['mactrack_view_sites.php:'] = array(
+		'title' => __('Device Tracking View Sites', 'mactrack'),
+		'mapping' => '',
+		'url' => 'mactrack_view_sites.php',
+		'level' => '0'
+	);
+
+	$nav['mactrack_view_ips.php:'] = array(
+		'title' => __('Device Tracking View IP Ranges', 'mactrack'),
+		'mapping' => '',
+		'url' => 'mactrack_view_ips.php',
+		'level' => '0'
+	);
+
+	$nav['mactrack_view_devices.php:'] = array(
+		'title' => __('Device Tracking View Devices', 'mactrack'),
+		'mapping' => '',
+		'url' => 'mactrack_view_devices.php',
+		'level' => '0'
+	);
+
+	$nav['mactrack_utilities.php:'] = array(
+		'title' => __('Device Tracking Utilities', 'mactrack'),
+		'mapping' => 'index.php:',
+		'url' => 'mactrack_utilities.php',
+		'level' => '1'
+	);
+
+	$nav['mactrack_utilities.php:mactrack_utilities_perform_db_maint'] = array(
+		'title' => __('Perform Database Maintenance', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_utilities.php:',
+		'url' => 'mactrack_utilities.php',
+		'level' => '2'
+	);
+
+	$nav['mactrack_utilities.php:mactrack_utilities_purge_scanning_funcs'] = array(
+		'title' => __('Refresh Scanning Functions', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_utilities.php:',
+		'url' => 'mactrack_utilities.php',
+		'level' => '2'
+	);
+
+	$nav['mactrack_utilities.php:mactrack_utilities_truncate_ports_table'] = array(
+		'title' => __('Truncate Port Results Table', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_utilities.php:',
+		'url' => 'mactrack_utilities.php',
+		'level' => '2'
+	);
+
+	$nav['mactrack_utilities.php:mactrack_utilities_purge_aggregated_data'] = array(
+		'title' => __('Truncate Aggregated Port Results Table', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_utilities.php:',
+		'url' => 'mactrack_utilities.php',
+		'level' => '2'
+	);
+
+	$nav['mactrack_utilities.php:mactrack_utilities_recreate_aggregated_data'] = array(
+		'title' => __('Truncate and Re-create Aggregated Port Results Table', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_utilities.php:',
+		'url' => 'mactrack_utilities.php',
+		'level' => '2'
+	);
+
+	$nav['mactrack_utilities.php:mactrack_proc_status'] = array(
+		'title' => __('View Device Tracking Process Status', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_utilities.php:',
+		'url' => 'mactrack_utilities.php',
+		'level' => '2'
+	);
+
+	$nav['mactrack_utilities.php:mactrack_refresh_oui_database'] = array(
+		'title' => __('Refresh/Update Vendor MAC Database from IEEE', 'mactrack'),
+		'mapping' => 'index.php:,mactrack_utilities.php:',
+		'url' => 'mactrack_utilities.php',
+		'level' => '2'
+	);
+
+	$nav['mactrack_view_graphs.php:'] = array(
+		'title' => __('Device Tracking Graph Viewer', 'mactrack'),
+		'mapping' => '',
+		'url' => 'mactrack_view_graphs.php',
+		'level' => '0'
+	);
+
+	$nav['mactrack_view_graphs.php:preview'] = array(
+		'title' => __('Device Tracking Graph Viewer', 'mactrack'),
+		'mapping' => '',
+		'url' => 'mactrack_view_graphs.php',
+		'level' => '0'
+	);
+
 	return $nav;
 }
 
@@ -603,9 +843,9 @@ function mactrack_show_tab() {
 
 	if (api_user_realm_auth('mactrack_view_macs.php')) {
 		if (substr_count($_SERVER['REQUEST_URI'], 'mactrack_view_')) {
-			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_' . get_request_var('report') . '.php?report=' . get_request_var('report') . '"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
+			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_' . get_nfilter_request_var('report') . '.php?report=' . get_nfilter_request_var('report') . '"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
 		} else {
-			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_' . get_request_var('report') . '.php?report=' . get_request_var('report') . '"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
+			print '<a href="' . $config['url_path'] . 'plugins/mactrack/mactrack_view_' . get_nfilter_request_var('report') . '.php?report=' . get_nfilter_request_var('report') . '"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
 		}
 	}
 }
