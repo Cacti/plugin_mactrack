@@ -256,14 +256,14 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 		}
 
 		/* display completion message */
-		print("\nINFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active'] . "\n");
+		mactrack_debug("INFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
 		$device['macs_active'] = sizeof($port_array);
 
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		print("\nINFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ", No active devcies on this network device.\n");
+		mactrack_debug("INFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ", No active devcies on this network device.");
 
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
@@ -477,14 +477,14 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		}
 
 		/* display completion message */
-		print("\nINFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active'] . "\n");
+		mactrack_debug("INFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
 		$device['macs_active'] = sizeof($port_array);
 
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		print("\nINFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ", No active end devices on this device.\n");
+		mactrack_debug("INFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ", No active end devices on this device.");
 
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok.  No active end devices on this device.';
@@ -616,7 +616,7 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 
 		mactrack_debug('cdsBindingEntries assembly complete.');
 	} else {
-		print("\nINFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ", No active end devices on this device.\n");
+		mactrack_debug("INFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ", No active end devices on this device.");
 
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok.  No active end devices on this device.';

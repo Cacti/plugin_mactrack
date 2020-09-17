@@ -113,9 +113,7 @@ function get_base_trendnet_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp
 	}
 
 	if ($store_to_db) {
-		print("\nINFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $ports_total . ", OPER PORTS: " . $ports_active); if ($debug) {
-			print("\n");
-		}
+		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $ports_total . ", OPER PORTS: " . $ports_active);
 
 		$device["ports_active"] = $ports_active;
 		$device["ports_total"] = $ports_total;
@@ -262,10 +260,6 @@ function get_base_trendnet_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
 			$device["last_runmessage"] = "WARNING: Poller did not find active ports on this device.";
-		}
-
-		if (!$debug) {
-			print(" - Complete\n");
 		}
 	} else {
 		return $new_port_key_array;

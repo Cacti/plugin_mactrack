@@ -146,13 +146,14 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		}
 
 		/* display completion message */
-		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $device["ports_total"] . ", ACTIVE PORTS: " . $device["ports_active"]);
+		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $device["ports_total"] . ", ACTIVE PORTS: " . $device["ports_active"]);
 
 		$device["last_runmessage"] = "Data collection completed ok";
 		$device["macs_active"] = sizeof($port_array);
+
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devcies on this network device.");
+		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devcies on this network device.");
 
 		$device["snmp_status"] = HOST_UP;
 		$device["last_runmessage"] = "Data collection completed ok. No active devices on this network device.";
@@ -207,3 +208,4 @@ function local_xform_indexed_data($xformOID, &$device, $xformLevel = 1) {
 
 	return $output_array;
 }
+

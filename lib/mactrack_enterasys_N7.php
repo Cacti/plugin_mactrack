@@ -106,7 +106,7 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		}
 
 		/* display completion message */
-		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . trim(substr($device["snmp_sysDescr"],0,40)) . ", TOTAL PORTS: " . $device["ports_total"] . ", ACTIVE PORTS: " . $device["ports_active"] . "\n");
+		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . trim(substr($device["snmp_sysDescr"],0,40)) . ", TOTAL PORTS: " . $device["ports_total"] . ", ACTIVE PORTS: " . $device["ports_active"]);
 
 		$device["last_runmessage"] = "Data collection completed ok";
 		$device["macs_active"] = sizeof($port_array);
@@ -114,7 +114,7 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		mactrack_debug("macs active on this switch:" . $device["macs_active"]);
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devcies on this network device.\n");
+		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devcies on this network device.");
 
 		$device["snmp_status"] = HOST_UP;
 		$device["last_runmessage"] = "Data collection completed ok. No active devices on this network device.";
@@ -164,10 +164,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 	}
 
 	if ($store_to_db) {
-		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $ports_total . ", OPER PORTS: " . $ports_active);
-		if ($debug) {
-			print("\n");
-		}
+		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"], 0, 40) . ", TOTAL PORTS: " . $ports_total . ", OPER PORTS: " . $ports_active);
 
 		$device["ports_active"] = $ports_active;
 		$device["ports_total"] = $ports_total;
@@ -339,10 +336,6 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 		} else {
 			$device["last_runmessage"] = "WARNING: Poller did not find active ports on this device.";
 		}
-
-		if (!$debug) {
-			print(" - Complete\n");
-		}
 	} else {
 		return $new_port_key_array;
 	}
@@ -498,4 +491,4 @@ function get_CTAlias_table($site, &$device) {
 
 	mactrack_debug("HOST: " . $device["hostname"] . ", IP address information collection complete: " . $device["ips_total"]);
 }
-?>
+

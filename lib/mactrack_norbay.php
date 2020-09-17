@@ -59,30 +59,29 @@ function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPor
 	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, false, false);
 
 	if (cacti_sizeof($ifIndexes)) {
-	foreach ($ifIndexes as $ifIndex) {
-		$ifInterfaces[$ifIndex]["trunkPortState"] = @$vlan_trunkstatus[$ifIndex];
-		$ifInterfaces[$ifIndex]["vlannum"] = hexdec($vlan_id_by_int[$ifIndex]);
+		foreach ($ifIndexes as $ifIndex) {
+			$ifInterfaces[$ifIndex]["trunkPortState"] = @$vlan_trunkstatus[$ifIndex];
+			$ifInterfaces[$ifIndex]["vlannum"] = hexdec($vlan_id_by_int[$ifIndex]);
 
-		if ($ifInterfaces[$ifIndex]["ifType"] == 6) {
-			$device["ports_total"]++;
+			if ($ifInterfaces[$ifIndex]["ifType"] == 6) {
+				$device["ports_total"]++;
+			}
+
+			if ($ifInterfaces[$ifIndex]["trunkPortState"] == 2) {
+				$device["ports_trunk"]++;
+			}
 		}
-
-		if ($ifInterfaces[$ifIndex]["trunkPortState"] == 2) {
-			$device["ports_trunk"]++;
-		}
-
-	}
 	}
 	mactrack_debug("ifInterfaces assembly complete.");
 
 	$i = 0;
 	if (cacti_sizeof($vlan_ids)) {
-	foreach ($vlan_ids as $vlan_id => $vlan_name) {
-		$active_vlans[$i]["vlan_id"] = $vlan_id;
-		$active_vlans[$i]["vlan_name"] = $vlan_name;
-		$active_vlans++;
-		$i++;
-	}
+		foreach ($vlan_ids as $vlan_id => $vlan_name) {
+			$active_vlans[$i]["vlan_id"] = $vlan_id;
+			$active_vlans[$i]["vlan_name"] = $vlan_name;
+			$active_vlans++;
+			$i++;
+		}
 	}
 
 	if (cacti_sizeof($active_vlans)) {
@@ -96,45 +95,49 @@ function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPor
 		$port_array = array();
 
 		if (cacti_sizeof($port_results)) {
-		foreach ($port_results as $port_result) {
-			$ifIndex = $port_result["port_number"];
-			$ifType = $ifInterfaces[$ifIndex]["ifType"];
-			$ifName = $ifInterfaces[$ifIndex]["ifName"];
-			$portName = "";
-			$portTrunkStatus = @$ifInterfaces[$ifIndex]["trunkPortState"];
-			$vlannum = @$ifInterfaces[$ifindex]["vlannum"];
+			foreach ($port_results as $port_result) {
+				$ifIndex = $port_result["port_number"];
+				$ifType = $ifInterfaces[$ifIndex]["ifType"];
+				$ifName = $ifInterfaces[$ifIndex]["ifName"];
+				$portName = "";
+				$portTrunkStatus = @$ifInterfaces[$ifIndex]["trunkPortState"];
+				$vlannum = @$ifInterfaces[$ifindex]["vlannum"];
 
-			/* only output legitamate end user ports */
-			if ((($ifType == 6) && ($portTrunkStatus == 1))) {
-			/*    $port_array[$i]["vlan_id"] = @$port_vlan_data[$port_result["key"]]; */
-				$port_array[$i]["vlan_id"]     = $vlannum;
-				$port_array[$i]["vlan_name"]   = @$vlan_ids[$vlannum];
-				$port_array[$i]["port_number"] = @$port_result["port_number"];
-				$port_array[$i]["port_name"]   = "";
-				$port_array[$i]["mac_address"] = xform_mac_address($port_result["mac_address"]);
-				$device["ports_active"]++;
+				/* only output legitamate end user ports */
+				if ((($ifType == 6) && ($portTrunkStatus == 1))) {
+					/*    $port_array[$i]["vlan_id"] = @$port_vlan_data[$port_result["key"]]; */
+					$port_array[$i]["vlan_id"]     = $vlannum;
+					$port_array[$i]["vlan_name"]   = @$vlan_ids[$vlannum];
+					$port_array[$i]["port_number"] = @$port_result["port_number"];
+					$port_array[$i]["port_name"]   = "";
+					$port_array[$i]["mac_address"] = xform_mac_address($port_result["mac_address"]);
+					$device["ports_active"]++;
 
-				mactrack_debug("VLAN: " . $port_array[$i]["vlan_id"] . ", " .
-					"NAME: " . $port_array[$i]["vlan_name"] . ", " .
-					"PORT: " . $ifInterfaces[$ifIndex]["ifName"] . ", " .
-					"NAME: " . $port_array[$i]["port_name"] . ", " .
-					"MAC: " . $port_array[$i]["mac_address"]);
+					mactrack_debug("VLAN: " . $port_array[$i]["vlan_id"] . ", " .
+						"NAME: " . $port_array[$i]["vlan_name"] . ", " .
+						"PORT: " . $ifInterfaces[$ifIndex]["ifName"] . ", " .
+						"NAME: " . $port_array[$i]["port_name"] . ", " .
+						"MAC: " . $port_array[$i]["mac_address"]);
 
-				$i++;
+					$i++;
+				}
+
+				$j++;
 			}
-
-			$j++;
-		}
 		}
 
 		/* display completion message */
-		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . trim(substr($device["snmp_sysDescr"],0,40)) . ", TOTAL PORTS: " . $device["ports_total"] . ", ACTIVE PORTS: " . $device["ports_active"] . "\n");
+		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . trim(substr($device["snmp_sysDescr"],0,40)) . ", TOTAL PORTS: " . $device["ports_total"] . ", ACTIVE PORTS: " . $device["ports_active"]);
+
 		$device["last_runmessage"] = "Data collection completed ok";
 		$device["macs_active"] = sizeof($port_array);
+
 		mactrack_debug("macs active on this switch:" . $device["macs_active"]);
+
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devcies on this network device.\n");
+		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devcies on this network device.");
+
 		$device["snmp_status"] = HOST_UP;
 		$device["last_runmessage"] = "Data collection completed ok. No active devices on this network device.";
 	}
@@ -256,13 +259,13 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 		}
 
 		/* display completion message */
-		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . trim(substr($device["snmp_sysDescr"],0,40)) . ", TOTAL PORTS: " . $device["ports_total"] . ", ACTIVE PORTS: " . $device["ports_active"]);
+		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . trim(substr($device["snmp_sysDescr"],0,40)) . ", TOTAL PORTS: " . $device["ports_total"] . ", ACTIVE PORTS: " . $device["ports_active"]);
 
 		$device["last_runmessage"] = "Data collection completed ok";
 		$device["macs_active"] = sizeof($port_array);
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devcies on this network device.");
+		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devcies on this network device.");
 
 		$device["snmp_status"] = HOST_UP;
 		$device["last_runmessage"] = "Data collection completed ok. No active devices on this network device.";
@@ -270,3 +273,4 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 
 	return $device;
 }
+

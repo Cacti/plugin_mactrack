@@ -214,9 +214,9 @@ function mactrack_view_ip_ranges() {
 			form_alternate_row();
 				?>
 				<td class='nowrap' style='width:1px;'>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $ip_range['site_id']);?>' title='<?php print __esc('Edit Site', 'mactrack');?>'><img src='<?php print $webroot;?>images/edit_object.png'></a>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&ip_filter_type_id=3&ip_filter=' . $ip_range['ip_range'] . '&device_id=-1&scan_date=3&site_id=' . $ip_range['site_id']);?>' title='<?php print __esc('View MAC Addresses', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_arp.php?report=arp&reset&ip_filter_type_id=3&ip_filter=' . $ip_range['ip_range'] . '.' . '&device_id=-1&scan_date=3&site_id=' . $ip_range['site_id']);?>' title='<?php print __esc('View IP Addresses', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_ipaddresses.gif'></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $ip_range['site_id']);?>' title='<?php print __esc('Edit Site', 'mactrack');?>'><i class='fas fa-edit'></i></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&ip_filter_type_id=3&ip_filter=' . $ip_range['ip_range'] . '&device_id=-1&scan_date=3&site_id=' . $ip_range['site_id']);?>' title='<?php print __esc('View MAC Addresses', 'mactrack');?>'><i class='fas fa-at'></i></a>
+					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_arp.php?report=arp&reset&ip_filter_type_id=3&ip_filter=' . $ip_range['ip_range'] . '.' . '&device_id=-1&scan_date=3&site_id=' . $ip_range['site_id']);?>' title='<?php print __esc('View IP Addresses', 'mactrack');?>'><i class='fas fa-desktop'></i></a>
 				</td>
 				<td class='hyperLink'>
 					<?php print $ip_range['site_name'];?>

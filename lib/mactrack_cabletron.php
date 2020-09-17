@@ -77,23 +77,20 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 
 	$i = 0;
 	if (cacti_sizeof($active_ports_array)) {
-	foreach($active_ports_array as $port_info) {
-		if (($ifInterfaces[$indexes[$i]]['ifType'] >= 6) &&
-			($ifInterfaces[$indexes[$i]]['ifType'] <= 9)) {
-			if ($port_info == 1) {
-				$ports_active++;
+		foreach($active_ports_array as $port_info) {
+			if (($ifInterfaces[$indexes[$i]]['ifType'] >= 6) &&
+				($ifInterfaces[$indexes[$i]]['ifType'] <= 9)) {
+				if ($port_info == 1) {
+					$ports_active++;
+				}
+				$ports_total++;
 			}
-			$ports_total++;
+			$i++;
 		}
-		$i++;
-	}
 	}
 
 	if ($store_to_db) {
-		print('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $ports_total . ', OPER PORTS: ' . $ports_active);
-		if ($debug) {
-			print("\n");
-		}
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $ports_total . ', OPER PORTS: ' . $ports_active);
 
 		$device['ports_active'] = $ports_active;
 		$device['ports_total'] = $ports_total;
@@ -139,10 +136,6 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 			db_store_device_port_results($device, $port_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';
-		}
-
-		if(!$debug) {
-			print(" - Complete\n");
 		}
 	} else {
 		return $port_array;
@@ -213,10 +206,7 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 		/* get the ignore ports list */
 		$ignore_ports = port_list_to_array($device['ignorePorts']);
 
-		print('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $ports_total . ', ACTIVE PORTS: ' . $ports_active);
-		if ($debug) {
-			print("\n");
-		}
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $ports_total . ', ACTIVE PORTS: ' . $ports_active);
 
 		$device['vlans_total'] = 0;
 		$device['ports_total'] = $ports_total;
@@ -302,16 +292,14 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} else {
 			mactrack_debug('INFO: The following device has no active ports: ' . $site . '/' . $device['hostname'] . "\n");
+
 			$device['last_runmessage'] = 'Data collection completed ok';
 		}
 	} else {
 		mactrack_debug('ERROR: Could not determine snmp_readstring for host: ' . $site . '/' . $device['hostname'] . "\n");
+
 		$device['snmp_status'] = HOST_ERROR;
 		$device['last_runmessage'] = 'ERROR: Could not determine snmp_readstring for host.';
-	}
-
-	if(!$debug) {
-		print(" - Complete\n");
 	}
 
 	$device['ports_active'] = $ports_active;
@@ -320,3 +308,4 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 
 	return $device;
 }
+

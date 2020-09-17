@@ -106,10 +106,7 @@ function get_base_dell_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp_rea
 	}
 
 	if ($store_to_db) {
-		print("\nINFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $ports_total . ", OPER PORTS: " . $ports_active);
-		if ($debug) {
-			print("\n");
-		}
+		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $ports_total . ", OPER PORTS: " . $ports_active);
 
 		$device["ports_active"] = $ports_active;
 		$device["ports_total"] = $ports_total;
@@ -241,10 +238,6 @@ function get_base_dell_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp_rea
 		} else {
 			$device["last_runmessage"] = "WARNING: Poller did not find active ports on this device.";
 		}
-
-		if (!$debug) {
-			print(" - Complete\n");
-		}
 	} else {
 		return $new_port_key_array;
 	}
@@ -277,3 +270,4 @@ function dell_mac_address_convert($mac_address) {
 
 	return $mac_address;
 }
+

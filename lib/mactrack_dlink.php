@@ -117,10 +117,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 	}
 
 	if ($store_to_db) {
-		print('\nINFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $ports_total . ', OPER PORTS: ' . $ports_active);
-		if ($debug) {
-			print('\n');
-		}
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $ports_total . ', OPER PORTS: ' . $ports_active);
 
 		$device['ports_active'] = $ports_active;
 		$device['ports_total'] = $ports_total;
@@ -219,7 +216,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 		mactrack_debug('Port number information collected.');
 
 	} else {
-		print('\nINFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devcies on this network device.\n');
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devcies on this network device.');
 
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
@@ -234,9 +231,6 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';
-		}
-		if (!$debug) {
-			print(' - Complete\n');
 		}
 	} else {
 		return $new_port_key_array;
@@ -337,22 +331,25 @@ function xform_dlink_vlan_associations(&$device, $snmp_readstring = '') {
 }
 
 function get_dlink_vlan_id($OID) {
-		if ($OID{0} != '.') {
+	if ($OID{0} != '.') {
 		$OID = '.' . $OID;
-		}
-		$perPos = strpos($OID, '.',1);
-		$vlan_id = substr($OID,1,$perPos-1);
+	}
+
+	$perPos = strpos($OID, '.',1);
+	$vlan_id = substr($OID,1,$perPos-1);
+
 	return $vlan_id;
 }
-function convert_dlink_data($old_port_type) {
-		if (substr_count($old_port_type, '(') > 0) {
-			$pos1 = strpos($old_port_type, '(');
-			$pos2 = strpos($old_port_type, ')');
-			$rezult = substr($old_port_type, $pos1+1, $pos2-$pos1-1);
-		} else{
-			$rezult=$old_port_type;
-		}
 
-return $rezult;
+function convert_dlink_data($old_port_type) {
+	if (substr_count($old_port_type, '(') > 0) {
+		$pos1 = strpos($old_port_type, '(');
+		$pos2 = strpos($old_port_type, ')');
+		$rezult = substr($old_port_type, $pos1+1, $pos2-$pos1-1);
+	} else{
+		$rezult=$old_port_type;
+	}
+
+	return $rezult;
 }
-?>
+

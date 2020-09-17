@@ -292,7 +292,7 @@ function mactrack_view() {
 
 	print $nav;
 
-	html_start_box('', '100%', '', '3', 'center', '');
+	html_start_box('', '100%', '', '3', 'left', '');
 
 	html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
@@ -303,7 +303,7 @@ function mactrack_view() {
 			$class = mactrack_int_row_class($stat);
 
 			if ($class) {
-				print "<tr id='row_" . $stat['device_id'] . '_' . $stat['ifName'] . "' class='$class'>\n"; $i++;
+				print "<tr id='line_" . $stat['device_id'] . '_' . $stat['ifName'] . "' class='selectable $class'>";
 			} else {
 				if (($i % 2) == 1) {
 					$class = 'odd';
@@ -311,10 +311,14 @@ function mactrack_view() {
 					$class = 'even';
 				}
 
-				print "<tr id='row_" . $stat['device_id'] . "' class='$class'>\n"; $i++;
+				print "<tr id='line_" . $stat['device_id'] . "' class='selectable $class'>";
 			}
 
+			$i++;
+
 			print mactrack_format_interface_row($stat);
+
+			form_end_row();
 		}
 	} else {
 		print '<tr><td colspan="7"><em>' . __('No Device Tracking Interfaces Found', 'mactrack') . '</em></td></tr>';
@@ -351,35 +355,128 @@ function mactrack_view() {
 }
 
 function mactrack_display_array() {
-	$display_text = array();
-	$display_text += array('nosort'            => array(__('Actions', 'mactrack'), 'ASC'));
-	$display_text += array('hostname'          => array(__('Hostname', 'mactrack'), 'ASC'));
-	$display_text += array('device_type'       => array(__('Type', 'mactrack'), 'ASC'));
-	$display_text += array('ifName'            => array(__('Name', 'mactrack'), 'ASC'));
-	$display_text += array('ifDescr'           => array(__('Description', 'mactrack'), 'ASC'));
-	$display_text += array('ifAlias'           => array(__('Alias', 'mactrack'), 'ASC'));
-	$display_text += array('inBound'           => array(__('InBound %', 'mactrack'), 'DESC'));
-	$display_text += array('outBound'          => array(__('OutBound %', 'mactrack'), 'DESC'));
-	$display_text += array('int_ifHCInOctets'  => array(__('In (B/S)', 'mactrack'), 'DESC'));
-	$display_text += array('int_ifHCOutOctets' => array(__('Out (B/S)', 'mactrack'), 'DESC'));
+	$display_text = array(
+		'nosort' => array(
+			'display' => __('Actions', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'hostname' => array(
+			'display' => __('Hostname', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'device_type' => array(
+			'display' => __('Type', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'ifName' => array(
+			'display' => __('Name', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'ifDescr' => array(
+			'display' => __('Description', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'ifAlias' => array(
+			'display' => __('Alias', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'inBound' => array(
+			'display' => __('InBound %', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'outBound' => array(
+			'display' => __('OutBound %', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'int_ifHCInOctets' => array(
+			'display' => __('In (B/S)', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'int_ifHCOutOctets' => array(
+			'display' => __('Out (B/S)', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		)
+	);
 
 	if (get_request_var('totals') == 'true') {
-		$display_text += array('ifInErrors'            => array(__('In Err Total', 'mactrack'), 'DESC'));
-		$display_text += array('ifInDiscards'          => array(__('In Disc Total', 'mactrack'), 'DESC'));
-		$display_text += array('ifInUnknownProtos'     => array(__('UProto Total', 'mactrack'), 'DESC'));
-		$display_text += array('ifOutErrors'           => array(__('Out Err Total', 'mactrack'), 'DESC'));
-		$display_text += array('ifOutDiscards'         => array(__('Out Disc Total', 'mactrack'), 'DESC'));
+		$display_text += array(
+			'ifInErrors' => array(
+				'display' => __('In Err Total', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'ifInDiscards' => array(
+				'display' => __('In Disc Total', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'ifInUnknownProtos' => array(
+				'display' => __('UProto Total', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'ifOutErrors' => array(
+				'display' => __('Out Err Total', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'ifOutDiscards' => array(
+				'display' => __('Out Disc Total', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			)
+		);
 	} else {
-		$display_text += array('int_ifInErrors'        => array(__('In Err (E/S)', 'mactrack'), 'DESC'));
-		$display_text += array('int_ifInDiscards'      => array(__('In Disc (D/S)', 'mactrack'), 'DESC'));
-		$display_text += array('int_ifInUnknownProtos' => array(__('UProto (UP/S)', 'mactrack'), 'DESC'));
-		$display_text += array('int_ifOutErrors'       => array(__('Out Err (OE/S)', 'mactrack'), 'DESC'));
-		$display_text += array('int_ifOutDiscards'     => array(__('Out Disc (OD/S)', 'mactrack'), 'DESC'));
+		$display_text += array(
+			'int_ifInErrors' => array(
+				'display' => __('In Err (E/S)', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'int_ifInDiscards' => array(
+				'display' => __('In Disc (D/S)', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'int_ifInUnknownProtos' => array(
+				'display' => __('UProto (UP/S)', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'int_ifOutErrors' => array(
+				'display' => __('Out Err (OE/S)', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'int_ifOutDiscards' => array(
+				'display' => __('Out Disc (OD/S)', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			)
+		);
 	}
 
-	$display_text += array('ifOperStatus' => array(__('Status', 'mactrack'), 'ASC'));
-	$display_text += array('ifLastChange' => array(__('Last Change', 'mactrack'), 'ASC'));
-	$display_text += array('last_rundate' => array(__('Last Scanned', 'mactrack'), 'ASC'));
+	$display_text += array(
+		'ifOperStatus' => array(
+			'display' => __('Status', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'ASC'
+		),
+		'ifLastChange' => array(
+			'display' => __('Last Change', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'ASC'
+		),
+		'last_rundate' => array(
+			'display' => __('Last Scanned', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'ASC'
+		)
+	);
 
 	return $display_text;
 }
@@ -576,6 +673,14 @@ function mactrack_filter_table() {
 
 				$('#export').click(function() {
 					exportRows();
+				});
+
+				$('.rescan').off('click').on('click', function(event) {
+					event.preventDefault();
+
+					var parts = $(this).attr('id').split('_');
+
+					scan_device_interface(parts[1], parts[2]);
 				});
 			});
 

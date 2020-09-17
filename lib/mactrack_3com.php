@@ -140,10 +140,7 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 
 
 	if ($store_to_db) {
-		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $ports_total . ", OPER PORTS: " . $ports_active);
-		if ($debug) {
-			print("\n");
-		}
+		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $ports_total . ", OPER PORTS: " . $ports_active);
 
 		$device["ports_active"] = $ports_active;
 		$device["ports_total"] = $ports_total;
@@ -254,11 +251,8 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 		} else {
 			$device["last_runmessage"] = "WARNING: Poller did not find active ports on this device.";
 		}
-
-		if(!$debug) {
-			print(" - Complete\n");
-		}
 	} else {
 		return $new_port_key_array;
 	}
 }
+

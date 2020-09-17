@@ -260,19 +260,64 @@ function mactrack_view_devices() {
 		$sql_where");
 
 	$display_text = array(
-		'nosort'           => array(__('Actions', 'mactrack'), ''),
-		'device_name'      => array(__('Device Name', 'mactrack'), 'ASC'),
-		'site_name'        => array(__('Site Name', 'mactrack'), 'ASC'),
-		'snmp_status'      => array(__('Status', 'mactrack'), 'ASC'),
-		'hostname'         => array(__('Hostname', 'mactrack'), 'ASC'),
-		'device_type'      => array(__('Device Type', 'mactrack'), 'ASC'),
-		'ips_total'        => array(__('Total IP\'s', 'mactrack'), 'DESC'),
-		'ports_total'      => array(__('User Ports', 'mactrack'), 'DESC'),
-		'ports_active'     => array(__('User Ports Up', 'mactrack'), 'DESC'),
-		'ports_trunk'      => array(__('Trunk Ports', 'mactrack'), 'DESC'),
-		'macs_active'      => array(__('Active Macs', 'mactrack'), 'DESC'),
-		'vlans_total'      => array(__('Total VLAN\'s', 'mactrack'), 'DESC'),
-		'last_runduration' => array(__('Last Duration', 'mactrack'), 'DESC')
+		'nosort' => array(
+			'display' => __('Actions', 'mactrack')
+		),
+		'device_name' => array(
+			'display' => __('Device Name', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'site_name' => array(
+			'display' => __('Site Name', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'snmp_status' => array(
+			'display' => __('Status', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'hostname' => array(
+			'display' => __('Hostname', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'device_type' => array(
+			'display' => __('Device Type', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'ips_total' => array(
+			'display' => __('Total IP\'s', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'ports_total' => array(
+			'display' => __('User Ports', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'ports_active' => array(
+			'display' => __('User Ports Up', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'ports_trunk'      => array(
+			'display' => __('Trunk Ports', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'macs_active'      => array(
+			'display' => __('Active Macs', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'vlans_total'      => array(
+			'display' => __('Total VLAN\'s', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'last_runduration' => array(
+			'display' => __('Last Duration', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		)
 	);
 
 	$columns = sizeof($display_text);
@@ -308,36 +353,45 @@ function mactrack_view_devices() {
 				break;
 			}
 
-			form_alternate_row();
-				?>
-				<td style='width:1px;'>
-					<?php if (api_user_realm_auth('mactrack_sites.php')) {?>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_devices.php?action=edit&device_id=' . $device['device_id']);?>' title='<?php print __esc('Edit Device', 'mactrack');?>'><img src='<?php print $webroot;?>images/edit_object.png'></a>
-					<?php api_plugin_hook_function('remote_link', $hostinfo); } ?>
-					<?php if ($device['host_id'] > 0) {?>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=&host_id=' . $device['host_id'] . '&graph_template_id=0&filter=');?>' title='<?php print __esc('View Graphs', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_graphs.gif'></a>
-					<?php } else {?>
-					<img title='<?php print __esc('Device Not Mapped to Cacti Device', 'mactrack');?>' src='<?php print $webroot;?>images/view_graphs_disabled.gif'>
-					<?php }?>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . get_request_var('site_id') . '&device_id=' . $device['device_id']);?>' title='<?php print __esc('View MAC Addresses', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_macs.gif'></a>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . get_request_var('site_id') . '&device=' . $device['device_id']);?>' title='<?php print __esc('View Interfaces', 'mactrack');?>'><img src='<?php print $webroot;?>images/view_interfaces.gif'></a>
-				</td>
-				<td class='hyperLink'>
-					<?php print filter_value($device['device_name'], get_request_var('filter'));?>
-				</td>
-				<td><?php print filter_value($device['site_name'], get_request_var('filter'));?>
-				<td><?php print get_colored_device_status(($device['disabled'] == 'on' ? true : false), $device['snmp_status']);?></td>
-				<td><?php print filter_value($device['hostname'], get_request_var('filter'));?>
-				<td><?php print $device['device_type'];?></td)>
-				<td><?php print ($device['scan_type'] == '1' ? __('N/A', 'mactrack') : number_format_i18n($device['ips_total']));?></td>
-				<td><?php print ($device['scan_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($device['ports_total']));?></td>
-				<td><?php print ($device['scan_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($device['ports_active']));?></td>
-				<td><?php print ($device['scan_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($device['ports_trunk']));?></td>
-				<td><?php print ($device['scan_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($device['macs_active']));?></td>
-				<td><?php print ($device['scan_type'] == '3' ? __('N/A', 'mactrack') : number_format_i18n($device['vlans_total']));?></td>
-				<td><?php print number_format($device['last_runduration'], 1);?></td>
-			</tr>
-			<?php
+			if (api_user_realm_auth('mactrack_sites.php')) {
+				$actions = "<a class='pic' href='" . html_escape($webroot . 'mactrack_devices.php?action=edit&device_id=' . $device['device_id']) . "' title='" . __esc('Edit Device', 'mactrack') . "'><i class='fas fa-edit'></i></a>";
+				ob_start();
+				api_plugin_hook_function('remote_link', $hostinfo);
+				$actions .= ob_get_clean();
+
+				if ($device['host_id']) {
+					$actions .= "<a class='pic' href='" . html_escape($webroot . 'mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=&host_id=' . $device['host_id'] . '&graph_template_id=0&filter=') . "' title='" . __esc('View Graphs', 'mactrack') . "'><i class='deviceRecovering fas fa-chart-line'></i></a>";
+				} else {
+					$actions .= "<img title='" . __esc('Device Not Mapped to Cacti Device', 'mactrack') . "' src='" . $webroot . "images/view_graphs_disabled.gif'>";
+				}
+			} else {
+				$actions = '';
+			}
+
+			$actions .= "<a class='pic' href='" . html_escape($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . get_request_var('site_id') . '&device_id=' . $device['device_id']) . "' title='" . __esc('View MAC Addresses', 'mactrack') . "'><i class='fas fa-at'></i></a>";
+
+			$actions .= "<a class='pic' href='" . html_escape($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . get_request_var('site_id') . '&device=' . $device['device_id']) . "' title='" . __esc('View Interfaces', 'mactrack') . "'><i class='fas fa-sitemap'></i></a>";
+
+			$st = $device['scan_type'];
+			$na = __('N/A', 'mactrack');
+
+			form_alternate_row('line' . $device['device_id']);
+
+			form_selectable_cell($actions, $device['device_id']);
+			form_selectable_cell(filter_value($device['device_name'], get_request_var('filter')), $device['device_id'], '', 'hyperLink');
+			form_selectable_cell(filter_value($device['site_name'], get_request_var('filter')), $device['device_id']);
+			form_selectable_cell(get_colored_device_status(($device['disabled'] == 'on' ? true : false), $device['snmp_status']), $device['device_id'], '', 'center');
+			form_selectable_cell(filter_value($device['hostname'], get_request_var('filter')), $device['device_id']);
+			form_selectable_cell($device['device_type'], $device['device_id']);
+			form_selectable_cell($st == '1' ? $na : number_format_i18n($device['ips_total']), $device['device_id'], '', 'right');
+			form_selectable_cell($st == '3' ? $na : number_format_i18n($device['ports_total']), $device['device_id'], '', 'right');
+			form_selectable_cell($st == '3' ? $na : number_format_i18n($device['ports_active']), $device['device_id'], '', 'right');
+			form_selectable_cell($st == '3' ? $na : number_format_i18n($device['ports_trunk']), $device['device_id'], '', 'right');
+			form_selectable_cell($st == '3' ? $na : number_format_i18n($device['macs_active']), $device['device_id'], '', 'right');
+			form_selectable_cell($st == '3' ? $na : number_format_i18n($device['vlans_total']), $device['device_id'], '', 'right');
+			form_selectable_cell(number_format($device['last_runduration'], 1), $device['device_id'], '', 'right');
+
+			form_end_row();
 		}
 	} else {
 		print '<tr><td colspan="10"><em>' . __('No Device Tracking Devices Found', 'mactrack') . '</em></td></tr>';

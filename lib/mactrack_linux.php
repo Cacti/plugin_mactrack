@@ -119,10 +119,7 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
     }
 
 	if ($store_to_db) {
-		print("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL INTERFACES: " . $ports_total . ", OPER INTERFACES: " . $ports_active);
-		if ($debug) {
-			print("\n");
-		}
+		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL INTERFACES: " . $ports_total . ", OPER INTERFACES: " . $ports_active);
 
 		$device["ports_active"] = $ports_active;
 		$device["ports_total"] = $ports_total;
@@ -240,25 +237,20 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 		} else {
 			$device["last_runmessage"] = "WARNING: Poller did not find active ports on this device.";
 		}
-
-		if (!$debug) {
-			print(" - Complete\n");
-		}
 	} else {
 		return $new_port_key_array;
 	}
 }
 
 function convert_port_state_data($old_port_type) {
-		if (substr_count($old_port_type, "(") > 0) {
-			$pos1 = strpos($old_port_type, "(");
-			$pos2 = strpos($old_port_type, ")");
-			$rezult = substr($old_port_type, $pos1+1, $pos2-$pos1-1);
-		} else {
-			$rezult=$old_port_type;
-		}
+	if (substr_count($old_port_type, "(") > 0) {
+		$pos1 = strpos($old_port_type, "(");
+		$pos2 = strpos($old_port_type, ")");
+		$rezult = substr($old_port_type, $pos1+1, $pos2-$pos1-1);
+	} else {
+		$rezult=$old_port_type;
+	}
 
-return $rezult;
+	return $rezult;
 }
 
-?>
