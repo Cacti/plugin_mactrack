@@ -3256,6 +3256,14 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 				$('#export').click(function() {
 					exportRows();
 				});
+
+				$('.siterescan').off('click').on('click', function(event) {
+					event.preventDefault();
+
+					var site_id = $(this).attr('id').replace('r_', '');
+
+					site_scan(site_id);
+				});
 			});
 			</script>
 		</td>
