@@ -3002,9 +3002,9 @@ function mactrack_display_stats() {
 	}
 
 	if ($processes > 0) {
-		$message = __('Status: Running, Processes: %d, Progress: %s, LastRuntime: %f', $processes, read_config_option('mactrack_process_status', true), round($time,1), 'mactrack');
+		$message = __('Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f', $processes, read_config_option('mactrack_process_status', true), round($time,1), 'mactrack');
 	} else {
-		$message = __('Status: Idle, LastRuntime: %f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s',
+		$message = __('Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s',
 			round($time,1), $proc , $devs,
 			($timing != 'disabled' ? date('Y-m-d H:i:s', strtotime(read_config_option('mt_scan_date', true)) + $frequency):__('Disabled', 'mactrack')), 'mactrack');
 	}
