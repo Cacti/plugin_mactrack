@@ -1,3 +1,47 @@
+.mtChart {
+	color: #CC6633 !important;
+}
+
+.mtChartDisabled {
+	color: #9999CC !important;
+}
+
+.mtEdit {
+	color: #CCCCCC !important;
+}
+
+.mtSync {
+	color: #66FF66 !important;
+}
+
+.mtRanges {
+	color: #006633 !important;
+}
+
+.mtInterfaces {
+	color: #993300 !important;
+}
+
+.mtNetwork {
+	color: #660033 !important;
+}
+
+.mtMacs {
+	color: #FF9999 !important;
+}
+
+.mtServer {
+	color: #336600 !important;
+}
+
+.mtPorts {
+	color: #993300 !important;
+}
+
+.mtIps {
+	color: #3399FF !important;
+}
+
 .int_up {
 	background-color: rgba(148, 179, 107, 0.2);
 	color: #eeeeee;

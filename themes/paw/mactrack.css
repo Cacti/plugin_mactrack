@@ -1,3 +1,47 @@
+.mtChart {
+	color: #CC6633;
+}
+
+.mtChartDisabled {
+	color: #9999CC;
+}
+
+.mtEdit {
+	color: #333333;
+}
+
+.mtSync {
+	color: #66FF66;
+}
+
+.mtRanges {
+	color: #006633;
+}
+
+.mtInterfaces {
+	color: #993300;
+}
+
+.mtNetwork {
+	color: #660033;
+}
+
+.mtMacs {
+	color: #FF9999;
+}
+
+.mtServer {
+	color: #336600;
+}
+
+.mtPorts {
+	color: #993300;
+}
+
+.mtIps {
+	color: #3399FF;
+}
+
 .int_up {
 	background-color: rgba(148, 179, 107, 0.8);
 	color: #eeeeee;

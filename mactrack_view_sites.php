@@ -293,21 +293,21 @@ function mactrack_view_sites() {
 		if (cacti_sizeof($sites)) {
 			foreach ($sites as $site) {
 				if (api_user_realm_auth('mactrack_sites.php')) {
-					$actions = "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']) . "' title='" . __esc('Edit Site', 'mactrack') . "'><i class='fas fa-edit'></i></a>";
-					$actions .= "<a class='pic siterescan' href='#' id='r_" . $site['site_id'] . "' title='" . __esc('Rescan Site', 'mactrack') . "'><i class='fa fa-sync'></i></a>";
+					$actions = "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']) . "' title='" . __esc('Edit Site', 'mactrack') . "'><i class='mtEdit fas fa-edit'></i></a>";
+					$actions .= "<a class='pic siterescan' href='#' id='r_" . $site['site_id'] . "' title='" . __esc('Rescan Site', 'mactrack') . "'><i class='mtSync fa fa-sync'></i></a>";
 				} else {
 					$actions = '';
 				}
 
-				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_devices.php?report=devices&reset&site_id=' . $site['site_id']) . "' title='" . __esc('View Devices', 'mactrack') . "'><i class='fas fa-server'></i></a>";
+				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_devices.php?report=devices&reset&site_id=' . $site['site_id']) . "' title='" . __esc('View Devices', 'mactrack') . "'><i class='mtServer fas fa-server'></i></a>";
 
-				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_ips.php?report=ips&reset&site_id=' . $site['site_id']) . "' title='" . __esc('View IP Ranges', 'mactrack') . "'><i class='fas fa-network-wired'></i></a>";
+				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_ips.php?report=ips&reset&site_id=' . $site['site_id']) . "' title='" . __esc('View IP Ranges', 'mactrack') . "'><i class='mtIps fas fa-network-wired'></i></a>";
 
-				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_arp.php?report=arp&reset&site_id=' . $site['site_id']) . "' title='" . __esc('View IP Addresses', 'mactrack') . "'><i class='fas fa-desktop'></i></a>";
+				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_arp.php?report=arp&reset&site_id=' . $site['site_id']) . "' title='" . __esc('View IP Addresses', 'mactrack') . "'><i class='mtPorts fas fa-desktop'></i></a>";
 
-				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']) . "' title='" . __esc('View MAC Addresses', 'mactrack') . "'><i class='fas fa-at'></i></a>";
+				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']) . "' title='" . __esc('View MAC Addresses', 'mactrack') . "'><i class='mtMacs fas fa-at'></i></a>";
 
-				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']) . "' title='" . __esc('View Interfaces', 'mactrack') . "'><i class='fas fa-ethernet'></i></a>";
+				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']) . "' title='" . __esc('View Interfaces', 'mactrack') . "'><i class='mtInterfaces fas fa-ethernet'></i></a>";
 
 				form_alternate_row('row_' . $site['site_id'], true);
 				form_selectable_cell($actions, 'row_' . $site['site_id'], '', 'nowrap');
@@ -393,15 +393,15 @@ function mactrack_view_sites() {
 		if (cacti_sizeof($sites)) {
 			foreach ($sites as $site) {
 				if (api_user_realm_auth('mactrack_sites.php')) {
-					$actions = "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']) . "' title='" . __esc('Edit Site', 'mactrack') . "'><i class='fas fa-edit'></i></a>";
+					$actions = "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $site['site_id']) . "' title='" . __esc('Edit Site', 'mactrack') . "'><i class='mtEdit fas fa-edit'></i></a>";
 				} else {
 					$actions = '';
 				}
 
-				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_devices.php?report=devices&site_id=' . $site['site_id'] . '&device_type_id=' . $site['device_type_id'] . '&type_id=-1&status=-1&filter=') . "' title='" . __esc('View Devices', 'mactrack') . "'><i class='fas fa-server'></i></a>";
-				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_ips.php?report=ips&reset&site_id=' . $site['site_id']) . "' title='" . __esc('View IP Ranges', 'mactrack') . "'><i class='fas fa-network-wired'></i></a>";
-				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']) . "' title='" . __esc('View MAC Addresses', 'mactrack') . "'><i class='fas fa-at'></i></a>";
-				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']) . "' title='" . __esc('View Interfaces', 'mactrack') . "'><i class='fas fa-ethernet'></i></a>";
+				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_devices.php?report=devices&site_id=' . $site['site_id'] . '&device_type_id=' . $site['device_type_id'] . '&type_id=-1&status=-1&filter=') . "' title='" . __esc('View Devices', 'mactrack') . "'><i class='mtServer fas fa-server'></i></a>";
+				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_ips.php?report=ips&reset&site_id=' . $site['site_id']) . "' title='" . __esc('View IP Ranges', 'mactrack') . "'><i class='mtIps fas fa-network-wired'></i></a>";
+				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . $site['site_id']) . "' title='" . __esc('View MAC Addresses', 'mactrack') . "'><i class='mtMacs fas fa-at'></i></a>";
+				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']) . "' title='" . __esc('View Interfaces', 'mactrack') . "'><i class='mtInterfaces fas fa-ethernet'></i></a>";
 
 				$dt = $site['device_type'];
 

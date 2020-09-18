@@ -2541,7 +2541,7 @@ function mactrack_interface_actions($device_id, $ifIndex, $show_rescan = true) {
 	if ($show_rescan) {
 		if (api_user_realm_auth('mactrack_sites.php')) {
 			if ($device['disabled'] == '') {
-				$rescan = "<a class='pic rescan' id='r_" . $device_id . '_' . str_replace(' ', ':', $ifIndex) . "' title='" . __esc('Rescan Device', 'mactrack') . "'><i class='deviceUp fa fa-sync'></i></a>";
+				$rescan = "<a class='pic rescan' id='r_" . $device_id . '_' . str_replace(' ', ':', $ifIndex) . "' title='" . __esc('Rescan Device', 'mactrack') . "'><i class='mtSync fa fa-sync'></i></a>";
 			}
 		}
 	}
@@ -2564,9 +2564,9 @@ function mactrack_interface_actions($device_id, $ifIndex, $show_rescan = true) {
 				$list .= (strlen($list) ? ',': '') . $graph['local_graph_id'];
 			}
 
-			$row .= "<a class='pic' href='" . htmlspecialchars($url . $list . '&page=1') . "' title='" .  __esc('View Non Interface Graphs', 'mactrack') . "'><i class='fas fa-chart-line'></i></a>";
+			$row .= "<a class='pic' href='" . htmlspecialchars($url . $list . '&page=1') . "' title='" .  __esc('View Non Interface Graphs', 'mactrack') . "'><i class='mtChart fas fa-chart-line'></i></a>";
 		} else {
-			$row .= "<i class='deviceDisabled fas fa-chart-line'  title='" . __esc('No Non Interface Graphs in Cacti', 'mactrack') . "'></i>";
+			$row .= "<i class='mtChartDisabled fas fa-chart-line'  title='" . __esc('No Non Interface Graphs in Cacti', 'mactrack') . "'></i>";
 		}
 
 		/* get interface graphs */
@@ -2583,9 +2583,9 @@ function mactrack_interface_actions($device_id, $ifIndex, $show_rescan = true) {
 				$list .= (strlen($list) ? ',': '') . $graph['local_graph_id'];
 			}
 
-			$row .= "<a class='pic' href='" . htmlspecialchars($url . $list . '&page=1') . "' title='" . __esc('View Interface Graphs', 'mactrack') . "'><i class='fas fa-chart-line'></i></a>";
+			$row .= "<a class='pic' href='" . htmlspecialchars($url . $list . '&page=1') . "' title='" . __esc('View Interface Graphs', 'mactrack') . "'><i class='mtChart fas fa-chart-line'></i></a>";
 		} else {
-			$row .= "<i class='deviceDisabled fas fa-chart-line'  title='" . __esc('No Interface Graphs in Cacti', 'mactrack') . "'></i>";
+			$row .= "<i class='mcChartDisabled fas fa-chart-line'  title='" . __esc('No Interface Graphs in Cacti', 'mactrack') . "'></i>";
 		}
 	}
 
@@ -3027,7 +3027,7 @@ function mactrack_format_device_row($device, $actions=false) {
 
 	/* viewer level */
 	if ($actions) {
-		$row = "<a class='pic' href='" . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_interfaces.php?device_id=' . $device['device_id'] . '&issues=0&page=1') . "' title='" . __('View Interfaces', 'mactrack') . "'><i class='fas fa-sitemap'></i></a>";
+		$row = "<a class='pic' href='" . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_interfaces.php?device_id=' . $device['device_id'] . '&issues=0&page=1') . "' title='" . __('View Interfaces', 'mactrack') . "'><i class='mtRanges fas fa-sitemap'></i></a>";
 
 		/* admin level */
 		if (api_user_realm_auth('mactrack_sites.php')) {

@@ -354,13 +354,13 @@ function mactrack_view_devices() {
 			}
 
 			if (api_user_realm_auth('mactrack_sites.php')) {
-				$actions = "<a class='pic' href='" . html_escape($webroot . 'mactrack_devices.php?action=edit&device_id=' . $device['device_id']) . "' title='" . __esc('Edit Device', 'mactrack') . "'><i class='fas fa-edit'></i></a>";
+				$actions = "<a class='pic' href='" . html_escape($webroot . 'mactrack_devices.php?action=edit&device_id=' . $device['device_id']) . "' title='" . __esc('Edit Device', 'mactrack') . "'><i class='mtEdit fas fa-edit'></i></a>";
 				ob_start();
 				api_plugin_hook_function('remote_link', $hostinfo);
 				$actions .= ob_get_clean();
 
 				if ($device['host_id']) {
-					$actions .= "<a class='pic' href='" . html_escape($webroot . 'mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=&host_id=' . $device['host_id'] . '&graph_template_id=0&filter=') . "' title='" . __esc('View Graphs', 'mactrack') . "'><i class='deviceRecovering fas fa-chart-line'></i></a>";
+					$actions .= "<a class='pic' href='" . html_escape($webroot . 'mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=&host_id=' . $device['host_id'] . '&graph_template_id=0&filter=') . "' title='" . __esc('View Graphs', 'mactrack') . "'><i class='mtChart fas fa-chart-line'></i></a>";
 				} else {
 					$actions .= "<img title='" . __esc('Device Not Mapped to Cacti Device', 'mactrack') . "' src='" . $webroot . "images/view_graphs_disabled.gif'>";
 				}
@@ -368,9 +368,9 @@ function mactrack_view_devices() {
 				$actions = '';
 			}
 
-			$actions .= "<a class='pic' href='" . html_escape($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . get_request_var('site_id') . '&device_id=' . $device['device_id']) . "' title='" . __esc('View MAC Addresses', 'mactrack') . "'><i class='fas fa-at'></i></a>";
+			$actions .= "<a class='pic' href='" . html_escape($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . get_request_var('site_id') . '&device_id=' . $device['device_id']) . "' title='" . __esc('View MAC Addresses', 'mactrack') . "'><i class='mtMacs fas fa-at'></i></a>";
 
-			$actions .= "<a class='pic' href='" . html_escape($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . get_request_var('site_id') . '&device=' . $device['device_id']) . "' title='" . __esc('View Interfaces', 'mactrack') . "'><i class='fas fa-sitemap'></i></a>";
+			$actions .= "<a class='pic' href='" . html_escape($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . get_request_var('site_id') . '&device=' . $device['device_id']) . "' title='" . __esc('View Interfaces', 'mactrack') . "'><i class='mtRanges fas fa-sitemap'></i></a>";
 
 			$st = $device['scan_type'];
 			$na = __('N/A', 'mactrack');
