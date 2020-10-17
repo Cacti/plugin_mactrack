@@ -1838,29 +1838,27 @@ function xform_stripped_oid($oid, &$device, $snmp_readstring = '', $hex = false)
   decimal notation and return.
 */
 function xform_net_address($ip_address) {
+	$ip_address = trim($ip_address);
+
 	if (substr_count($ip_address, 'Network Address:')) {
 		$ip_address = trim(str_replace('Network Address:', '', $ip_address));
 	}
+
+	// Adjust for HEX IP in form "0A 09 15 72"
+	$ip_address = str_replace(' ', ':', $ip_address);
 
 	if (substr_count($ip_address, ':') != 0) {
 		if (strlen($ip_address) > 11) {
 			/* ipv6, don't alter */
 		} else {
-			$new_address = '';
-			while (1) {
-				$new_address .= hexdec(substr($ip_address, 0, 2));
-				$ip_address = substr($ip_address, 3);
-				if (!substr_count($ip_address, ':')) {
-					if (strlen($ip_address)) {
-						$ip_address = trim($new_address . '.' . hexdec(trim($ip_address)));
-					} else {
-						$ip_address = trim($new_address . $ip_address);
-					}
-					break;
-				} else {
-					$new_address .= '.';
-				}
+			$newaddr = '';
+			$address = explode(':', $ip_address);
+
+			foreach($address as $index => $part) {
+				$newaddr .= ($index == 0 ? '':'.') . hexdec($part);
 			}
+
+			$ip_address = $newaddr;
 		}
 	}
 
@@ -1872,34 +1870,31 @@ function xform_net_address($ip_address) {
   function expects.
 */
 function xform_mac_address($mac_address) {
+	$max_address = trim($mac_address);
+
 	if (strlen($mac_address) == 0) {
 		$mac_address = 'NOT USER';
 	} else {
 		$separator = read_config_option('mt_mac_delim');
+
 		if (strlen($mac_address) > 10) { /* return is in ascii */
-			$mac_address = str_replace('HEX-00:', '', $mac_address);
-			$mac_address = str_replace('HEX-:', '', $mac_address);
-			$mac_address = str_replace('HEX-', '', $mac_address);
-			$mac_address = trim(str_replace('"', '', $mac_address));
-			$mac_address = str_replace(' ', ':', $mac_address);
-			$mac_address = str_replace('-', ':', $mac_address);
+			$max_address = str_replace(
+				array('HEX-00:', 'HEX-:', 'HEX-', '"', ' ', '-'),
+				array('',        '',      '',     '',  ':', ':'),
+				$mac_address
+			);
 		} else { /* return is hex */
 			$mac = '';
+
 			for ($j = 0; $j < strlen($mac_address); $j++) {
 				$mac .= bin2hex($mac_address[$j]) . ':';
 			}
+
 			$mac_address = $mac;
 		}
-
-		$mac_address = trim($mac_address);
-		while (strlen($mac_address) && $mac_address[0] == ':') {
-			$mac_address = substr($mac_address, 1);
-		}
-
-		while (strlen($mac_address) && $mac_address[strlen($mac_address) - 1] == ':') {
-			$mac_address = substr($mac_address, 0, strlen($mac_address) - 1);
-		}
 	}
+
+	$mac_address = str_replace(':', $separator, $max_address);
 
 	return strtoupper($mac_address);
 }
@@ -2367,12 +2362,6 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 						db_qstr($vendor_mac) . ', ' .
 						db_qstr(ucwords(strtolower($vendor_name))) . ', ' .
 						db_qstr(str_replace("\n", ', ', ucwords(strtolower(trim($vendor_address))))) . ', 1)';
-
-//					db_execute("REPLACE INTO mac_track_oui_database
-//						(vendor_mac, vendor_name, vendor_address, present)
-//						VALUES ('" . $vendor_mac . "'," .
-//						db_qstr(ucwords(strtolower($vendor_name))) . ',' .
-//						db_qstr(str_replace("\n", ', ', ucwords(strtolower(trim($vendor_address))))) . ",'1')");
 
 					/* let the user know you are working */
 					if ((($i % 1000) == 0) && ($type == 'ui')) {

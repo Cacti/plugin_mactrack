@@ -38,9 +38,9 @@ function get_dlink_l2_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 	global $debug, $scan_date;
 
 	/* initialize port counters */
-	$device['ports_total'] = 0;
+	$device['ports_total']  = 0;
 	$device['ports_active'] = 0;
-	$device['ports_trunk'] = 0;
+	$device['ports_trunk']  = 0;
 
 	/* get the ifIndexes for the device */
 	$ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);

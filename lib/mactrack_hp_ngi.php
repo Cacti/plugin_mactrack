@@ -30,7 +30,7 @@
 
 /* register this functions scanning functions */
 if (!isset($mactrack_scanning_functions)) { $mactrack_scanning_functions = array(); }
-array_push($mactrack_scanning_functions, "get_procurve_ngi_switch_ports");
+array_push($mactrack_scanning_functions, 'get_procurve_ngi_switch_ports');
 
 function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
@@ -39,20 +39,20 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	$nrVlans = array();
 
 	/* initialize port counters */
-	$device["ports_total"] = 0;
-	$device["ports_active"] = 0;
-	$device["ports_trunk"] = 0;
+	$device['ports_total']  = 0;
+	$device['ports_active'] = 0;
+	$device['ports_trunk']  = 0;
 
 	/* get VLAN information */
-	$vlan_ids = xform_standard_indexed_data(".1.3.6.1.2.1.17.7.1.4.3.1.1", $device);
-	$device["vlans_total"] = sizeof($vlan_ids);
+	$vlan_ids = xform_standard_indexed_data('.1.3.6.1.2.1.17.7.1.4.3.1.1', $device);
+	$device['vlans_total'] = sizeof($vlan_ids);
 
 	/* get VLAN Trunk status */
-	$vlan_trunkstatus = local_xform_indexed_data(".1.3.6.1.4.1.11.2.14.11.5.1.7.1.15.3.1.1", $device, $xformLevel = 1);
+	$vlan_trunkstatus = local_xform_indexed_data('.1.3.6.1.4.1.11.2.14.11.5.1.7.1.15.3.1.1', $device, $xformLevel = 1);
 	if (cacti_sizeof($vlan_trunkstatus)) {
 	foreach($vlan_trunkstatus as $vlan_trunk) {
-		$ifIndex = $vlan_trunk["key"];
-		$vlan = $vlan_trunk["value"];
+		$ifIndex = $vlan_trunk['key'];
+		$vlan = $vlan_trunk['value'];
 		if (!isset($nrVlans[$ifIndex])) {
 			$nrVlans[$ifIndex] = 1;
 		} else {
@@ -60,32 +60,32 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		}
 	}
 	}
-	mactrack_debug("VLAN data collected. There are " . (cacti_sizeof($vlan_ids)) . " VLANS.");
+	mactrack_debug('VLAN data collected. There are ' . (cacti_sizeof($vlan_ids)) . ' VLANS.');
 
 	/* get the ifIndexes for the device */
-	$ifIndexes = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.1", $device);
-	mactrack_debug("ifIndexes data collection complete");
+	$ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);
+	mactrack_debug('ifIndexes data collection complete');
 
 	/* get and store the interfaces table */
 	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
 
 	foreach($ifIndexes as $ifIndex) {
-		if (($ifInterfaces[$ifIndex]["ifType"] >= 6) && ($ifInterfaces[$ifIndex]["ifType"] <= 9)) {
-			$device["ports_total"]++;
+		if (($ifInterfaces[$ifIndex]['ifType'] >= 6) && ($ifInterfaces[$ifIndex]['ifType'] <= 9)) {
+			$device['ports_total']++;
 		}
 
 		/* A port with more than one vlan is a trunk */
 		if (isset($nrVlans[$ifIndex]) && $nrVlans[$ifIndex] > 1) {
-			$device["ports_trunk"]++;
+			$device['ports_trunk']++;
 		}
 	}
-	mactrack_debug("ifInterfaces assembly complete.");
+	mactrack_debug('ifInterfaces assembly complete.');
 
 	$i = 0;
 	if (cacti_sizeof($vlan_ids)) {
 	foreach($vlan_ids as $vlan_id => $vlan_name) {
-		$active_vlans[$i]["vlan_id"] = $vlan_id;
-		$active_vlans[$i]["vlan_name"] = $vlan_name;
+		$active_vlans[$i]['vlan_id'] = $vlan_id;
+		$active_vlans[$i]['vlan_name'] = $vlan_name;
 		$active_vlans++;
 
 		$i++;
@@ -95,11 +95,11 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	if (cacti_sizeof($active_vlans) > 0) {
 		$i = 0;
 		/* get the port status information */
-		$ifNames = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.18", $device);
-		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, "", "", false, $lowPort, $highPort);
+		$ifNames = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.18', $device);
+		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, '', '', false, $lowPort, $highPort);
 
-		$port_vlan_data = xform_standard_indexed_data(".1.3.6.1.2.1.17.7.1.4.5.1.1", $device);
-		$port_alias = xform_standard_indexed_data(".1.3.6.1.2.1.31.1.1.1.18", $device);
+		$port_vlan_data = xform_standard_indexed_data('.1.3.6.1.2.1.17.7.1.4.5.1.1', $device);
+		$port_alias = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.18', $device);
 
 		$i = 0;
 		$j = 0;
@@ -108,9 +108,9 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		$port_array = array();
 		if (cacti_sizeof($port_results)) {
 			foreach($port_results as $port_result) {
-				$ifIndex = $port_result["port_number"];
-				$ifType = $ifInterfaces[$ifIndex]["ifType"];
-				$ifName = $ifInterfaces[$ifIndex]["ifName"];
+				$ifIndex = $port_result['port_number'];
+				$ifType = $ifInterfaces[$ifIndex]['ifType'];
+				$ifName = $ifInterfaces[$ifIndex]['ifName'];
 				$portName = $ifName;
 
 				/* A port with more than one vlan is a trunk */
@@ -120,22 +120,22 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 
 				/* only output legitamate end user ports */
 				if (($ifType >= 6) && ($ifType <= 9) && ($trunk == 0)) {
-					$port_array[$i]["vlan_id"]     = @$port_vlan_data[$port_result["port_number"]];
-					$port_array[$i]["vlan_name"]   = @$vlan_ids[$port_array[$i]["vlan_id"]];
-					$port_array[$i]["port_number"] = $ifName;
-					if (isset($port_alias[$port_result["port_number"]])) {
-						$port_array[$i]["port_name"]   = @$port_alias[$port_result["port_number"]];
+					$port_array[$i]['vlan_id']     = @$port_vlan_data[$port_result['port_number']];
+					$port_array[$i]['vlan_name']   = @$vlan_ids[$port_array[$i]['vlan_id']];
+					$port_array[$i]['port_number'] = $ifName;
+					if (isset($port_alias[$port_result['port_number']])) {
+						$port_array[$i]['port_name']   = @$port_alias[$port_result['port_number']];
 					} else {
-						$port_array[$i]["port_name"]   = @$ifNames[$port_result["port_number"]];
+						$port_array[$i]['port_name']   = @$ifNames[$port_result['port_number']];
 					}
-					$port_array[$i]["mac_address"] = xform_mac_address($port_result["mac_address"]);
-					$device["ports_active"]++;
+					$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
+					$device['ports_active']++;
 
-					mactrack_debug("VLAN: " . $port_array[$i]["vlan_id"] . ", " .
-						"NAME: " . $port_array[$i]["vlan_name"] . ", " .
-						"PORT: " . $ifIndex . ", " .
-						"NAME: " . $port_array[$i]["port_name"] . ", " .
-						"MAC: " . $port_array[$i]["mac_address"]);
+					mactrack_debug('VLAN: ' . $port_array[$i]['vlan_id'] . ', ' .
+						'NAME: ' . $port_array[$i]['vlan_name'] . ', ' .
+						'PORT: ' . $ifIndex . ', ' .
+						'NAME: ' . $port_array[$i]['port_name'] . ', ' .
+						'MAC: ' . $port_array[$i]['mac_address']);
 
 					$i++;
 				}
@@ -146,17 +146,17 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		}
 
 		/* display completion message */
-		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", TOTAL PORTS: " . $device["ports_total"] . ", ACTIVE PORTS: " . $device["ports_active"]);
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
-		$device["last_runmessage"] = "Data collection completed ok";
-		$device["macs_active"] = sizeof($port_array);
+		$device['last_runmessage'] = 'Data collection completed ok';
+		$device['macs_active'] = sizeof($port_array);
 
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		mactrack_debug("INFO: HOST: " . $device["hostname"] . ", TYPE: " . substr($device["snmp_sysDescr"],0,40) . ", No active devcies on this network device.");
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devcies on this network device.');
 
-		$device["snmp_status"] = HOST_UP;
-		$device["last_runmessage"] = "Data collection completed ok. No active devices on this network device.";
+		$device['snmp_status'] = HOST_UP;
+		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
 	}
 
 	return $device;
@@ -172,36 +172,36 @@ function local_xform_indexed_data($xformOID, &$device, $xformLevel = 1) {
 	global $debug;
 
 	/* get raw index data */
-	$xformArray = cacti_snmp_walk($device["hostname"], $device["snmp_readstring"],
-		$xformOID, $device["snmp_version"], $device["snmp_username"],
-		$device["snmp_password"], $device["snmp_auth_protocol"],
-		$device["snmp_priv_passphrase"], $device["snmp_priv_protocol"], $device["snmp_context"],
-		$device["snmp_port"], $device["snmp_timeout"],
-		$device["snmp_retries"], $device["max_oids"]);
+	$xformArray = cacti_snmp_walk($device['hostname'], $device['snmp_readstring'],
+		$xformOID, $device['snmp_version'], $device['snmp_username'],
+		$device['snmp_password'], $device['snmp_auth_protocol'],
+		$device['snmp_priv_passphrase'], $device['snmp_priv_protocol'], $device['snmp_context'],
+		$device['snmp_port'], $device['snmp_timeout'],
+		$device['snmp_retries'], $device['max_oids']);
 
 	$i = 0;
 	$output_array = array();
 	if (cacti_sizeof($xformArray)) {
 		foreach($xformArray as $xformItem) {
 			/* break down key */
-			$OID = $xformItem["oid"];
+			$OID = $xformItem['oid'];
 			for ($j = 0; $j < $xformLevel; $j++) {
-				$perPos = strrpos($OID, ".");
+				$perPos = strrpos($OID, '.');
 				$xformItem_piece[$j] = substr($OID, $perPos+1);
 				$OID = substr($OID, 0, $perPos);
 			}
 
 			/* reassemble key */
-			$key = "";
+			$key = '';
 			for ($j = $xformLevel-1; $j >= 0; $j--) {
 				$key .= $xformItem_piece[$j];
 				if ($j > 0) {
-					$key .= ".";
+					$key .= '.';
 				}
 			}
 
-			$output_array[$i]["key"] = $key;
-			$output_array[$i]["value"] = $xformItem["value"];
+			$output_array[$i]['key'] = $key;
+			$output_array[$i]['value'] = $xformItem['value'];
 			$i++;
 		}
 	}

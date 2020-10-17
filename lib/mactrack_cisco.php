@@ -256,14 +256,14 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 		}
 
 		/* display completion message */
-		mactrack_debug("INFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
 		$device['macs_active'] = sizeof($port_array);
 
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		mactrack_debug("INFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ", No active devcies on this network device.");
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devcies on this network device.');
 
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
@@ -477,14 +477,14 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		}
 
 		/* display completion message */
-		mactrack_debug("INFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
 		$device['macs_active'] = sizeof($port_array);
 
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		mactrack_debug("INFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ", No active end devices on this device.");
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active end devices on this device.');
 
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok.  No active end devices on this device.';
@@ -616,7 +616,7 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 
 		mactrack_debug('cdsBindingEntries assembly complete.');
 	} else {
-		mactrack_debug("INFO: HOST: " . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ", No active end devices on this device.");
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active end devices on this device.');
 
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok.  No active end devices on this device.';
@@ -673,65 +673,66 @@ function get_cisco_dot1x_table($site, &$device) {
 		$cafSessionStatus  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.5', $device);
 		mactrack_debug('cafSessionStatus data collection complete: ' . sizeof($cafSessionStatus));
 	} else {
-		/* Nothing to do here */
+		mactrack_debug(sprintf('The Device: %s does not support dot1x', $device['hostname']));
+		return false;
 	}
 
 	$ifIndex = array();
-	$Dot1xEntries = array();
+	$entries = array();
 	$cafSessionAuthUserNames = array();
 	$cafSessionAuthUserKey = array_keys($cafSessionAuthUserName); //Getting the keys to explode the first part which is the ifIndex
-	$m = 0;
 
 	/* This is to take the ifIndex from the OID */
-	if (cacti_sizeof($cafSessionAuthUserKey)) {
-		foreach ($cafSessionAuthUserKey as $cafSessionAuthUserNames) {
-			$ifIndex[$m] = explode('.', $cafSessionAuthUserKey[$m]);
-			$m++;
-		}
-	}
-
-	$ifIndexes = array_map(function ($ar) {return $ar['0'];}, $ifIndex); //re-arrange the previous exploded array
-	mactrack_debug('ifIndexes assembly complete: ' . sizeof($ifIndexes));
-
-	$keys = array_keys($cafSessionAuthUserName);
 	$i = 0;
 	if (cacti_sizeof($cafSessionAuthUserName)) {
-		foreach ($cafSessionAuthUserName as $Dot1xIndex) {
-			$Dot1xEntries[$i]['Dot1xIndex'] = $Dot1xIndex;
-			$Dot1xEntries[$i]['cafSessionClientMacAddress'] = isset($cafSessionClientMacAddress[$keys[$i]]) ? xform_mac_address($cafSessionClientMacAddress[$keys[$i]]):'';
-			$Dot1xEntries[$i]['cafSessionClientAddress'] = isset($cafSessionClientAddress[$keys[$i]]) ? xform_net_address($cafSessionClientAddress[$keys[$i]]):'';
-			$Dot1xEntries[$i]['cafSessionDomain'] = isset($cafSessionDomain[$keys[$i]]) ? $cafSessionDomain[$keys[$i]]:'';
-			$Dot1xEntries[$i]['cafSessionStatus'] = isset($cafSessionStatus[$keys[$i]]) ? $cafSessionStatus[$keys[$i]]:'';
-			$Dot1xEntries[$i]['port_number'] = isset($ifIndexes[$i]) ? $ifIndexes[$i]:'';
+		foreach ($cafSessionAuthUserName as $keyName) {
+			$parts = explode('.', trim($keyName, '.'));
+			$ifIndexes[$m] = $parts[0];
 			$i++;
 		}
 	}
-	mactrack_debug('Dot1xEntries assembly complete.');
+
+	mactrack_debug('ifIndexes assembly complete: ' . sizeof($ifIndexes));
+
+	$i = 0;
+	if (cacti_sizeof($cafSessionAuthUserName)) {
+		foreach ($cafSessionAuthUserName as $index) {
+			$entries[$i]['Dot1xIndex']                 = $index;
+			$entries[$i]['cafSessionClientMacAddress'] = isset($cafSessionClientMacAddress[$index]) ? xform_mac_address($cafSessionClientMacAddress[$index]):'';
+			$entries[$i]['cafSessionClientAddress']    = isset($cafSessionClientAddress[$index]) ? xform_net_address($cafSessionClientAddress[$index]):'';
+			$entries[$i]['cafSessionDomain']           = isset($cafSessionDomain[$index]) ? $cafSessionDomain[$index]:'';
+			$entries[$i]['cafSessionStatus']           = isset($cafSessionStatus[$index]) ? $cafSessionStatus[$index]:'';
+			$entries[$i]['port_number']                = isset($ifIndexes[$i]) ? $ifIndexes[$i]:'';
+			$i++;
+		}
+	}
+	mactrack_debug('entries assembly complete.');
 
 	/* output details to database */
-	if (cacti_sizeof($Dot1xEntries)) {
-		foreach ($Dot1xEntries as $Dot1xEntry) {
-			if ($Dot1xEntry['Dot1xIndex'] != '') { //This is workaround for what I think is a Cisco bug. If a port is not running dot1x why would it show related info?
-				$insert_string = 'REPLACE INTO mac_track_dot1x
-					(site_id,device_id,hostname,device_name,username,
-					mac_address,ip_address,domain,status,port_number,scan_date)
-					VALUES (' .
-					$device['site_id'] . ',' .
+	$sql = array();
+	$prefix = 'REPLACE INTO mac_track_dot1x
+		(site_id, device_id, hostname, device_name, username, mac_address, ip_address, domain, status, port_number, scan_date)
+		VALUES ';
+
+	if (cacti_sizeof($entries)) {
+		foreach ($entries as $entry) {
+			if ($entry['Dot1xIndex'] != '') {
+				$sql[] = '(' . $device['site_id'] . ',' .
 					$device['device_id'] . ',' .
 					db_qstr($device['hostname']) . ',' .
 					db_qstr($device['device_name']) . ',' .
-					db_qstr($Dot1xEntry['Dot1xIndex']) . ',' .
-					db_qstr($Dot1xEntry['cafSessionClientMacAddress']) . ',' .
-					db_qstr($Dot1xEntry['cafSessionClientAddress']) . ',' .
-					db_qstr($Dot1xEntry['cafSessionDomain']) . ',' .
-					db_qstr($Dot1xEntry['cafSessionStatus']) . ',' .
-					db_qstr($Dot1xEntry['port_number']) . ',' .
+					db_qstr($entry['Dot1xIndex']) . ',' .
+					db_qstr($entry['cafSessionClientMacAddress']) . ',' .
+					db_qstr($entry['cafSessionClientAddress']) . ',' .
+					db_qstr($entry['cafSessionDomain']) . ',' .
+					db_qstr($entry['cafSessionStatus']) . ',' .
+					db_qstr($entry['port_number']) . ',' .
 					db_qstr($scan_date) . ')';
-
-				//mactrack_debug('SQL: ' . $insert_string);
-
-				db_execute($insert_string);
 			}
+		}
+
+		if (cacti_sizeof($sql)) {
+			db_execute($prefix . implode(', ', $sql));
 		}
 	}
 }

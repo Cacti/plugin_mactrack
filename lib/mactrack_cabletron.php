@@ -291,12 +291,12 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} else {
-			mactrack_debug('INFO: The following device has no active ports: ' . $site . '/' . $device['hostname'] . "\n");
+			mactrack_debug('INFO: The following device has no active ports: ' . $site . '/' . $device['hostname']);
 
 			$device['last_runmessage'] = 'Data collection completed ok';
 		}
 	} else {
-		mactrack_debug('ERROR: Could not determine snmp_readstring for host: ' . $site . '/' . $device['hostname'] . "\n");
+		mactrack_debug('ERROR: Could not determine snmp_readstring for host: ' . $site . '/' . $device['hostname']);
 
 		$device['snmp_status'] = HOST_ERROR;
 		$device['last_runmessage'] = 'ERROR: Could not determine snmp_readstring for host.';
