@@ -28,6 +28,7 @@ include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 /* check actions */
 set_default_action();
+cacti_session_close();
 switch (get_request_var('action')) {
 case 'site_scan':
 	mactrack_site_scan(true);
