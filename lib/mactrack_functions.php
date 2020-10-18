@@ -3061,6 +3061,24 @@ function mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '')
 	mailer($from, $to, '', '', '', $subject, $message, '', '', $headers);
 }
 
+function mactrack_sanitize_load_report() {
+	if (!isset_request_var('report')) {
+		if (isset($_SESSION['sess_mt_tab']) && $_SESSION['sess_mt_tab'] != '') {
+			set_request_var('report', $_SESSION['sess_mt_tab']);
+		} else {
+			set_request_var('report', read_user_setting('default_mactrack_tab'));
+		}
+
+		if (get_request_var('report') == '') {
+			set_request_var('report', 'sites');
+		}
+	} else {
+		set_request_var('report', sanitize_search_string(get_nfilter_request_var('report')));
+	}
+
+	$_SESSION['sess_mt_tab'] = get_request_var('report');
+}
+
 function mactrack_tabs() {
 	global $config;
 

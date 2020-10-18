@@ -836,30 +836,17 @@ function mactrack_draw_navigation_text($nav) {
 	return $nav;
 }
 
-function mactrack_sanitize_load_report() {
-	if (!isset_request_var('report')) {
-		if (isset($_SESSION['sess_mt_tab'])) {
-			set_request_var('report', $_SESSION['sess_mt_tab']);
-		} else {
-			set_request_var('report', read_user_setting('default_mactrack_tab'));
-		}
-	} else {
-		set_request_var('report', sanitize_search_string(get_nfilter_request_var('report')));
-	}
-
-	$_SESSION['sess_mt_tab'] = get_request_var('report');
-}
-
 function mactrack_show_tab() {
 	global $config, $user_auth_realm_filenames;
 
-	if (api_user_realm_auth('mactrack_view_macs.php')) {
-		if (substr_count($_SERVER['REQUEST_URI'], 'mactrack_view_')) {
-			mactrack_sanitize_load_report();
+	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
-			print '<a href="' . html_escape($config['url_path'] . 'plugins/mactrack/mactrack_view_' . get_nfilter_request_var('report') . '.php?report=' . get_nfilter_request_var('report')) . '"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
+	if (api_user_realm_auth('mactrack_view_macs.php')) {
+		mactrack_sanitize_load_report();
+		if (substr_count($_SERVER['REQUEST_URI'], 'mactrack_view_')) {
+			print '<a href="' . html_escape($config['url_path'] . 'plugins/mactrack/mactrack_view_default.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
 		} else {
-			print '<a href="' . html_escape($config['url_path'] . 'plugins/mactrack/mactrack_view_' . get_nfilter_request_var('report') . '.php?report=' . get_nfilter_request_var('report')) . '"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
+			print '<a href="' . html_escape($config['url_path'] . 'plugins/mactrack/mactrack_view_default.php"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
 		}
 	}
 }
