@@ -3076,10 +3076,10 @@ function mactrack_tabs() {
 		'graphs'     => __('Graphs', 'mactrack')
 	);
 
-	load_current_session_value('report', 'sess_mt_tab', read_user_setting('default_mactrack_tab'));
+	mactrack_sanitize_load_report();
 
 	/* set the default tab */
-	$current_tab = get_request_var('report');
+	$current_tab = get_nfilter_request_var('report');
 
 	/* draw the tabs */
 	print "<div class='tabs'><nav><ul>\n";
