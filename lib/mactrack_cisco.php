@@ -682,27 +682,20 @@ function get_cisco_dot1x_table($site, &$device) {
 	$cafSessionAuthUserNames = array();
 	$cafSessionAuthUserKey = array_keys($cafSessionAuthUserName); //Getting the keys to explode the first part which is the ifIndex
 
-	/* This is to take the ifIndex from the OID */
-	$i = 0;
-	if (cacti_sizeof($cafSessionAuthUserName)) {
-		foreach ($cafSessionAuthUserName as $keyName) {
-			$parts = explode('.', trim($keyName, '.'));
-			$ifIndexes[$i] = $parts[0];
-			$i++;
-		}
-	}
-
 	mactrack_debug('ifIndexes assembly complete: ' . sizeof($ifIndexes));
 
 	$i = 0;
 	if (cacti_sizeof($cafSessionAuthUserName)) {
-		foreach ($cafSessionAuthUserName as $index) {
+		foreach ($cafSessionAuthUserName as $index => $value) {
 			$entries[$i]['Dot1xIndex']                 = $index;
 			$entries[$i]['cafSessionClientMacAddress'] = isset($cafSessionClientMacAddress[$index]) ? xform_mac_address($cafSessionClientMacAddress[$index]):'';
 			$entries[$i]['cafSessionClientAddress']    = isset($cafSessionClientAddress[$index]) ? xform_net_address($cafSessionClientAddress[$index]):'';
 			$entries[$i]['cafSessionDomain']           = isset($cafSessionDomain[$index]) ? $cafSessionDomain[$index]:'';
 			$entries[$i]['cafSessionStatus']           = isset($cafSessionStatus[$index]) ? $cafSessionStatus[$index]:'';
-			$entries[$i]['port_number']                = isset($ifIndexes[$i]) ? $ifIndexes[$i]:'';
+
+			$parts = explode('.', trim($index, '.'));
+			$entries[$i]['port_number'] = $parts[0];
+
 			$i++;
 		}
 	}
