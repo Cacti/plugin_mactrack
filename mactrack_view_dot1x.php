@@ -315,24 +315,26 @@ function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = true, $row
 	if ((get_request_var('scan_date') != 2)) {
 		$query_string = "SELECT mts.site_name, mtd.device_id, mtd.device_name, mtd.hostname,
 			mtd.mac_address, mtd.username, mtd.ip_address, mtd.dns_hostname, mtd.port_number,
-			mti.ifName, mtd.domain, mtd.status, mtd.scan_date
+			mti.ifName, mti.ifDescr, mtd.domain, mtd.status, mtd.scan_date
 			FROM mac_track_dot1x mtd
 			LEFT JOIN mac_track_sites mts
-			ON (mtd.site_id = mts.site_id)
+			ON mtd.site_id = mts.site_id
 			LEFT JOIN mac_track_interfaces mti
-			ON (mtd.port_number = mti.ifIndex AND mtd.device_id=mti.device_id)
+			ON mtd.port_number = mti.ifIndex
+			AND mtd.device_id=mti.device_id
 			$sql_where
 			$sql_order
 			$sql_limit";
 	} else {
 		$query_string = "SELECT mts.site_name, mtd.device_id, mtd.device_name, mtd.hostname,
 			mtd.mac_address, mtd.username, mtd.ip_address, mtd.dns_hostname, mtd.port_number,
-			mti.ifName, mtd.domain, mtd.status, MAX(mtd.scan_date) AS scan_date
+			mti.ifName, mti.ifDescr, mtd.domain, mtd.status, MAX(mtd.scan_date) AS scan_date
 			FROM mac_track_dot1x mtd
 			LEFT JOIN mac_track_sites mts
 			ON (mtd.site_id = mts.site_id)
 			LEFT JOIN mac_track_interfaces mti
-			ON (mtd.port_number = mti.ifIndex AND mtd.device_id=mti.device_id)
+			ON mtd.port_number = mti.ifIndex
+			AND mtd.device_id=mti.device_id
 			$sql_where
 			GROUP BY device_id, mac_address, port_number, ip_address
 			$sql_order
@@ -391,32 +393,30 @@ function mactrack_view_dot1x() {
 
 	if (read_config_option('mt_reverse_dns') != '') {
 		$display_text = array(
-			'nosort'        => array(__('Actions', 'mactrack'), ''),
-			'device_name'   => array(__('Switch Name', 'mactrack'), 'ASC'),
-			'hostname'      => array(__('Switch Hostname', 'mactrack'), 'ASC'),
-			'username'		=> array(__('Username', 'mactrack'), 'ASC'),
-			'ip_address'    => array(__('ED IP Address', 'mactrack'), 'ASC'),
-			'dns_hostname'  => array(__('ED DNS Hostname', 'mactrack'), 'ASC'),
-			'mac_address'   => array(__('ED MAC Address', 'mactrack'), 'ASC'),
-			'port_number'   => array(__('Port Number', 'mactrack'), 'DESC'),
-			'ifName'     	=> array(__('Port Name', 'mactrack'), 'ASC'),
-			'domain'       	=> array(__('Domain', 'mactrack'), 'DESC'),
-			'status'     	=> array(__('Status', 'mactrack'), 'ASC'),
-			'scan_date' => array(__('Last Scan Date', 'mactrack'), 'DESC')
+			'nosort'       => array(__('Actions', 'mactrack'), ''),
+			'device_name'  => array(__('Switch Name', 'mactrack'), 'ASC'),
+			'hostname'     => array(__('Switch Hostname', 'mactrack'), 'ASC'),
+			'username'     => array(__('Username', 'mactrack'), 'ASC'),
+			'ip_address'   => array(__('ED IP Address', 'mactrack'), 'ASC'),
+			'dns_hostname' => array(__('ED DNS Hostname', 'mactrack'), 'ASC'),
+			'mac_address'  => array(__('ED MAC Address', 'mactrack'), 'ASC'),
+			'ifName'       => array(__('Port Name', 'mactrack'), 'ASC'),
+			'domain'       => array(__('Domain', 'mactrack'), 'DESC'),
+			'status'       => array(__('Status', 'mactrack'), 'ASC'),
+			'scan_date'    => array(__('Last Scan Date', 'mactrack'), 'DESC')
 		);
 	} else {
 		$display_text = array(
-			'nosort'      	=> array(__('Actions', 'mactrack'), ''),
-			'device_name' 	=> array(__('Switch Name', 'mactrack'), 'ASC'),
-			'hostname'    	=> array(__('Switch Hostname', 'mactrack'), 'ASC'),
-			'username'		=> array(__('Username', 'mactrack'), 'ASC'),
-			'ip_address'  	=> array(__('ED IP Address', 'mactrack'), 'ASC'),
-			'mac_address' 	=> array(__('ED MAC Address', 'mactrack'), 'ASC'),
-			'port_number' 	=> array(__('Port Number', 'mactrack'), 'DESC'),
-			'ifName'   	=> array(__('Port Name', 'mactrack'), 'ASC'),
-			'domain'     	=> array(__('Domain', 'mactrack'), 'DESC'),
-			'status'   		=> array(__('Status', 'mactrack'), 'ASC'),
-			'scan_date'   => array(__('Last Scan Date', 'mactrack'), 'DESC')
+			'nosort'       => array(__('Actions', 'mactrack'), ''),
+			'device_name'  => array(__('Switch Name', 'mactrack'), 'ASC'),
+			'hostname'     => array(__('Switch Hostname', 'mactrack'), 'ASC'),
+			'username'     => array(__('Username', 'mactrack'), 'ASC'),
+			'ip_address'   => array(__('ED IP Address', 'mactrack'), 'ASC'),
+			'mac_address'  => array(__('ED MAC Address', 'mactrack'), 'ASC'),
+			'ifName'       => array(__('Port Name', 'mactrack'), 'ASC'),
+			'domain'       => array(__('Domain', 'mactrack'), 'DESC'),
+			'status'       => array(__('Status', 'mactrack'), 'ASC'),
+			'scan_date'    => array(__('Last Scan Date', 'mactrack'), 'DESC')
 		);
 	}
 

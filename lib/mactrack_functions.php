@@ -1860,6 +1860,7 @@ function xform_net_address($ip_address) {
 
 			$ip_address = $newaddr;
 		}
+	} else {
 	}
 
 	return $ip_address;
@@ -2655,17 +2656,22 @@ function mactrack_format_dot1x_row($port_result) {
 		$status = $mactrack_device_status[$port_result['status']];
 	}
 
-	$row .= "<td nowrap style='width:1%;white-space:nowrap;'>" . mactrack_interface_actions($port_result['device_id'], $port_result['port_number']) . '</td>';
-	$row .= '<td><b>' . $port_result['device_name']                     . '</b></td>';
-	$row .= '<td>' . $port_result['hostname']            . '</td>';
-	$row .= '<td><b>' . $port_result['username']                          . '</b></td>';
-	$row .= '<td>' . $port_result['ip_address']                            . '</td>';
-	$row .= '<td>' . $port_result['mac_address']                            . '</td>';
-	$row .= '<td>' . $port_result['port_number']  . '</td>';
-	$row .= '<td>' . $port_result['ifName'] . '</td>';
-	$row .= '<td><b>' . ($port_result['domain'] == 2 ? 'DATA':'VOICE') . '</b></td>';
+	$row .= "<td class='nowrap'>" . mactrack_interface_actions($port_result['device_id'], $port_result['port_number']) . '</td>';
+	$row .= '<td><b>' . $port_result['device_name'] . '</b></td>';
+	$row .= '<td>'    . $port_result['hostname']    . '</td>';
+	$row .= '<td><b>' . $port_result['username']    . '</b></td>';
+	$row .= '<td>'    . $port_result['ip_address']  . '</td>';
+
+	if (read_config_option('mt_reverse_dns') != '') {
+		$row .= '<td>' . $port_result['dns_hostname']  . '</td>';
+	}
+
+	$row .= '<td>'    . $port_result['mac_address'] . '</td>';
+	$row .= '<td>'    . $port_result['ifName']      . '</td>';
+	$row .= '<td><b>' . ($port_result['domain'] == 2 ? __('Data', 'mactrack'):__('Voice', 'mactrack') . '</b></td>';
 	$row .= '<td><b>' . $status . '</b></td>';
-	$row .= "<td style='white-space:nowrap;'>" . $scan_date       . '</td>';
+	$row .= "<td class='nowrap'>" . $scan_date . '</td>';
+
 	return $row;
 }
 
