@@ -682,7 +682,7 @@ function get_cisco_dot1x_table($site, &$device) {
 	$cafSessionAuthUserNames = array();
 	$cafSessionAuthUserKey = array_keys($cafSessionAuthUserName); //Getting the keys to explode the first part which is the ifIndex
 
-	mactrack_debug('ifIndexes assembly complete: ' . sizeof($ifIndexes));
+	mactrack_debug('cafSessionAuthUserName assembly complete: ' . sizeof($cafSessionAuthUserName));
 
 	$i = 0;
 	if (cacti_sizeof($cafSessionAuthUserName)) {
@@ -700,7 +700,7 @@ function get_cisco_dot1x_table($site, &$device) {
 			$i++;
 		}
 	}
-	mactrack_debug('entries assembly complete.');
+	mactrack_debug('cafSession assembly complete.');
 
 	/* output details to database */
 	$sql = array();
