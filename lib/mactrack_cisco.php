@@ -687,7 +687,7 @@ function get_cisco_dot1x_table($site, &$device) {
 	if (cacti_sizeof($cafSessionAuthUserName)) {
 		foreach ($cafSessionAuthUserName as $keyName) {
 			$parts = explode('.', trim($keyName, '.'));
-			$ifIndexes[$m] = $parts[0];
+			$ifIndexes[$i] = $parts[0];
 			$i++;
 		}
 	}
