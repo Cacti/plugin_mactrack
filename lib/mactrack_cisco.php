@@ -687,7 +687,8 @@ function get_cisco_dot1x_table($site, &$device) {
 	$i = 0;
 	if (cacti_sizeof($cafSessionAuthUserName)) {
 		foreach ($cafSessionAuthUserName as $index => $value) {
-			$entries[$i]['Dot1xIndex']                 = $index;
+			$entries[$i]['Dot1xIndex'] = $index;
+			$entries[$i]['UserName']   = $value;
 			$entries[$i]['cafSessionClientMacAddress'] = isset($cafSessionClientMacAddress[$index]) ? xform_mac_address($cafSessionClientMacAddress[$index]):'';
 			$entries[$i]['cafSessionClientAddress']    = isset($cafSessionClientAddress[$index]) ? xform_net_address($cafSessionClientAddress[$index]):'';
 			$entries[$i]['cafSessionDomain']           = isset($cafSessionDomain[$index]) ? $cafSessionDomain[$index]:'';
@@ -709,12 +710,12 @@ function get_cisco_dot1x_table($site, &$device) {
 
 	if (cacti_sizeof($entries)) {
 		foreach ($entries as $entry) {
-			if ($entry['Dot1xIndex'] != '') {
+			if ($entry['UserName'] != '') {
 				$sql[] = '(' . $device['site_id'] . ',' .
 					$device['device_id'] . ',' .
 					db_qstr($device['hostname']) . ',' .
 					db_qstr($device['device_name']) . ',' .
-					db_qstr($entry['Dot1xIndex']) . ',' .
+					db_qstr($entry['UserName']) . ',' .
 					db_qstr($entry['cafSessionClientMacAddress']) . ',' .
 					db_qstr($entry['cafSessionClientAddress']) . ',' .
 					db_qstr($entry['cafSessionDomain']) . ',' .
