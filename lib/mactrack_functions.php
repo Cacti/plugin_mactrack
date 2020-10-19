@@ -1872,26 +1872,24 @@ function xform_net_address($ip_address) {
 function xform_mac_address($mac_address) {
 	$max_address = trim($mac_address);
 
+	$separator = read_config_option('mt_mac_delim');
+
 	if (strlen($mac_address) == 0) {
 		$mac_address = 'NOT USER';
-	} else {
-		$separator = read_config_option('mt_mac_delim');
+	} elseif (strlen($mac_address) > 10) { /* return is in ascii */
+		$max_address = str_replace(
+			array('HEX-00:', 'HEX-:', 'HEX-', '"', ' ', '-'),
+			array('',        '',      '',     '',  ':', ':'),
+			$mac_address
+		);
+	} else { /* return is hex */
+		$mac = '';
 
-		if (strlen($mac_address) > 10) { /* return is in ascii */
-			$max_address = str_replace(
-				array('HEX-00:', 'HEX-:', 'HEX-', '"', ' ', '-'),
-				array('',        '',      '',     '',  ':', ':'),
-				$mac_address
-			);
-		} else { /* return is hex */
-			$mac = '';
-
-			for ($j = 0; $j < strlen($mac_address); $j++) {
-				$mac .= bin2hex($mac_address[$j]) . ':';
-			}
-
-			$mac_address = $mac;
+		for ($j = 0; $j < strlen($mac_address); $j++) {
+			$mac .= bin2hex($mac_address[$j]) . ':';
 		}
+
+		$mac_address = $mac;
 	}
 
 	$mac_address = str_replace(':', $separator, $max_address);
