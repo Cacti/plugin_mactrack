@@ -1844,26 +1844,31 @@ function xform_net_address($ip_address) {
 		$ip_address = trim(str_replace('Network Address:', '', $ip_address));
 	}
 
-	// Adjust for HEX IP in form "0A 09 15 72"
-	$ip_address = str_replace(' ', ':', $ip_address);
-
-	if (substr_count($ip_address, ':') != 0) {
-		if (strlen($ip_address) > 11) {
-			/* ipv6, don't alter */
-		} else {
-			$newaddr = '';
-			$address = explode(':', $ip_address);
-
-			foreach($address as $index => $part) {
-				$newaddr .= ($index == 0 ? '':'.') . hexdec($part);
-			}
-
-			$ip_address = $newaddr;
-		}
+	// Handle the binary format first
+	$length = strlen($ip_address);
+	if ($length == 4 or $length == 16) {
+		return inet_ntop(pack('A' . $length, $ip_address));
 	} else {
-	}
+		// Adjust for HEX IP in form "0A 09 15 72"
+		$ip_address = str_replace(' ', ':', $ip_address);
 
-	return $ip_address;
+		if (substr_count($ip_address, ':') != 0) {
+			if (strlen($ip_address) > 11) {
+				/* ipv6, don't alter */
+			} else {
+				$newaddr = '';
+				$address = explode(':', $ip_address);
+
+				foreach($address as $index => $part) {
+					$newaddr .= ($index == 0 ? '':'.') . hexdec($part);
+				}
+
+				$ip_address = $newaddr;
+			}
+		}
+
+		return $ip_address;
+	}
 }
 
 /*	xform_mac_address - This function will take a variable that is either formated as
