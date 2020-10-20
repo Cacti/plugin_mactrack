@@ -349,7 +349,7 @@ function mactrack_view() {
 		mactrack_display_stats();
 	}
 
-	print '<div id="response"></div>';
+	print '<div id="response" title="' . __esc('Interface Scan Results', 'mactrack') . '"></div>';
 
 	bottom_footer();
 }

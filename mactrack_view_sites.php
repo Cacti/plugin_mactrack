@@ -431,6 +431,6 @@ function mactrack_view_sites() {
 		}
 	}
 
-	print '<div id="response"></div>';
+	print '<div id="response" title="' . __esc('Site Scan Results', 'mactrack') . '"></div>';
 }
 

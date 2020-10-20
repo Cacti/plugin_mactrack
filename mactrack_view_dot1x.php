@@ -483,7 +483,7 @@ function mactrack_view_dot1x() {
 
 	print '</div>';
 
-	print '<div id="response"></div>';
+	print '<div id="response" title="' . __esc('Dot1x Scan Results', 'mactrack') . '"></div>';
 
 	bottom_footer();
 

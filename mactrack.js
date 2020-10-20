@@ -8,7 +8,7 @@ function scan_device(device_id) {
 		device_id = data.device_id;
 		content   = data.content;
 		$('#r_' + device_id).find('i').removeClass('fa-spin');
-		$('#response').hide().html(content).dialog({ 'width': 800 });
+		$('#response').hide().html(content).dialog({ width: 800, maxHeight: 500 });
 	});
 }
 
@@ -20,7 +20,7 @@ function site_scan(site_id) {
 		var site_id   = data.site_id
 		var content   = data.content;
 		$('#r_' + site_id).find('i').removeClass('fa-spin');
-		$('#response').hide().html(content).dialog({ 'width': 800 });
+		$('#response').hide().html(content).dialog({ width: 800, maxHeight: 500 });
 	});
 }
 
@@ -34,7 +34,7 @@ function scan_device_interface(device_id, ifIndex) {
 		var ifIndex   = data.ifIndex;
 		var content   = data.content;
 		$('#r_' + device_id + '_' + ifIndex).find('i').removeClass('fa-spin');
-		$('#response').hide().html(content).dialog({ 'width': 800 });
+		$('#response').hide().html(content).dialog({ width: 800, maxHeight: 500 });
 	});
 }
 
