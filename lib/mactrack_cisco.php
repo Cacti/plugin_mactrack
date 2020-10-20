@@ -664,9 +664,9 @@ function get_cisco_dot1x_table($site, &$device) {
 
 	if (cacti_sizeof($cafSessionAuthUserName)) {
 		mactrack_debug('cafSessionAuthUserName data collection complete: ' . sizeof($cafSessionAuthUserName));
-		$cafSessionClientMacAddress = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.2', $device);
+		$cafSessionClientMacAddress = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.2', $device, '', true);
 		mactrack_debug('cafSessionClientMacAddress data collection complete: ' . sizeof($cafSessionClientMacAddress));
-		$cafSessionClientAddress  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.4', $device);
+		$cafSessionClientAddress  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.4', $device, '', true);
 		mactrack_debug('cafSessionClientAddress data collection complete: ' . sizeof($cafSessionClientAddress));
 		$cafSessionDomain  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.6', $device);
 		mactrack_debug('cafSessionDomain data collection complete: ' . sizeof($cafSessionDomain));
