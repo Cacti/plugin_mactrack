@@ -3055,7 +3055,7 @@ function mactrack_format_device_row($device, $actions=false) {
 
 }
 
-function mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '') {
+function mactrack_mail($to, $fromemail, $fromname, $subject, $message, $headers = '') {
 	global $config;
 
 	$v = plugin_mactrack_version();
@@ -3064,7 +3064,7 @@ function mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '')
 		'User-Agent' => 'Cacti-MacTrack-v' . $v['version']
 	);
 
-	$from[0]['email'] = $from;
+	$from[0]['email'] = $fromemail;
 	$from[0]['name']  = $fromname;
 
 	mailer($from, $to, '', '', '', $subject, $message, '', '', $headers);
