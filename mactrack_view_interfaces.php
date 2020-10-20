@@ -303,7 +303,7 @@ function mactrack_view() {
 			$class = mactrack_int_row_class($stat);
 
 			if ($class) {
-				print "<tr id='line_" . $stat['device_id'] . '_' . $stat['ifName'] . "' class='selectable $class'>";
+				print "<tr id='line_" . $stat['device_id'] . '_' . $stat['ifName'] . "' class='tableRow selectable $class'>";
 			} else {
 				if (($i % 2) == 1) {
 					$class = 'odd';
@@ -311,7 +311,7 @@ function mactrack_view() {
 					$class = 'even';
 				}
 
-				print "<tr id='line_" . $stat['device_id'] . "' class='selectable $class'>";
+				print "<tr id='line_" . $stat['device_id'] . "' class='tableRow selectable $class'>";
 			}
 
 			$i++;

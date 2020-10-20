@@ -445,7 +445,7 @@ function mactrack_view_dot1x() {
 			$class = mactrack_dot1x_row_class($port_result);
 
 			if ($class) {
-				print "<tr id='row_" . $port_result['device_id'] . '_' . $port_result['port_number'] . "' class='$class'>\n"; $i++;
+				print "<tr id='row_" . $port_result['device_id'] . '_' . $port_result['port_number'] . "' class='tableRow $class'>\n"; $i++;
 			} else {
 				if (($i % 2) == 1) {
 					$class = 'odd';
@@ -453,7 +453,7 @@ function mactrack_view_dot1x() {
 					$class = 'even';
 				}
 
-				print "<tr id='row_" . $port_result['device_id'] . "' class='$class'>\n"; $i++;
+				print "<tr id='row_" . $port_result['device_id'] . "' class='tableRow $class'>\n"; $i++;
 			}
 
 			print mactrack_format_dot1x_row($port_result);
