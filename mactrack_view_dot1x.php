@@ -502,7 +502,7 @@ function mactrack_dot1x_filter() {
 						<?php print __('Search', 'mactrack');?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter');?>'>
+						<input type='text' id='filter' size='25' value='<?php print html_escape_request_var('filter');?>'>
 					</td>
 					<td>
 						<?php print __('Site', 'mactrack');?>
@@ -511,7 +511,10 @@ function mactrack_dot1x_filter() {
 						<select id='site_id' onChange='applyFilter()'>
 							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('N/A', 'mactrack');?></option>
 							<?php
-							$sites = db_fetch_assoc('select site_id,site_name from mac_track_sites order by site_name');
+							$sites = db_fetch_assoc('SELECT site_id, site_name
+								FROM mac_track_sites
+								ORDER BY site_name');
+
 							if (cacti_sizeof($sites)) {
 								foreach ($sites as $site) {
 									print '<option value="' . $site['site_id'] .'"'; if (get_request_var('site_id') == $site['site_id']) { print ' selected'; } print '>' . $site['site_name'] . '</option>';
@@ -547,7 +550,7 @@ function mactrack_dot1x_filter() {
 
 							if (cacti_sizeof($filter_devices)) {
 								foreach ($filter_devices as $filter_device) {
-									print '<option value=" ' . $filter_device['device_id'] . '"'; if (get_request_var('device_id') == $filter_device['device_id']) { print ' selected'; } print '>' . $filter_device['device_name'] . '(' . $filter_device['hostname'] . ')' .  '</option>';
+									print '<option value="' . $filter_device['device_id'] . '"' . (get_request_var('device_id') == $filter_device['device_id'] ? ' selected':'') . '>' . html_escape($filter_device['device_name'] . '(' . $filter_device['hostname'] . ')') .  '</option>';
 								}
 							}
 							?>
@@ -561,7 +564,7 @@ function mactrack_dot1x_filter() {
 							<?php
 							if (cacti_sizeof($rows_selector)) {
 								foreach ($rows_selector as $key => $value) {
-									print '<option value="' . $key . '"'; if (get_request_var('rows') == $key) { print ' selected'; } print '>' . $value . '</option>\n';
+									print '<option value="' . $key . '"' . (get_request_var('rows') == $key ? ' selected':'') . '>' . $value . '</option>';
 								}
 							}
 							?>
@@ -584,8 +587,8 @@ function mactrack_dot1x_filter() {
 					<td>
 						<select id='ip_filter_type_id'>
 							<?php
-							for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
-								print "<option value='" . $i . "'"; if (get_request_var('ip_filter_type_id') == $i) { print ' selected'; } print '>' . $mactrack_search_types[$i] . '</option>';
+							foreach($mactrack_search_types as $i => $type) {
+								print "<option value='$i'" . (get_request_var('ip_filter_type_id') == $i ? ' selected':'') . '>' . $type . '</option>';
 							}
 							?>
 						</select>
@@ -598,14 +601,22 @@ function mactrack_dot1x_filter() {
 					</td>
 					<td>
 						<select id='status' onChange='applyFilter()'>
-							<option value='0'<?php if (get_request_var('status') == '0') {?> selected<?php }?>><?php print __('Any Status', 'mactrack');?></option>
-							<option value='1'<?php if (get_request_var('status') == '1') {?> selected<?php }?>><?php print __('Idle', 'mactrack');?></option>
-							<option value='2'<?php if (get_request_var('status') == '2') {?> selected<?php }?>><?php print __('Running', 'mactrack');?></option>
-							<option value='3'<?php if (get_request_var('status') == '3') {?> selected<?php }?>><?php print __('No method', 'mactrack');?></option>
-							<option value='4'<?php if (get_request_var('status') == '4') {?> selected<?php }?>><?php print __('Authentication Success', 'mactrack');?></option>
-							<option value='5'<?php if (get_request_var('status') == '5') {?> selected<?php }?>><?php print __('Authentication Failed', 'mactrack');?></option>
-							<option value='6'<?php if (get_request_var('status') == '6') {?> selected<?php }?>><?php print __('Authorization Succcess', 'mactrack');?></option>
-							<option value='7'<?php if (get_request_var('status') == '7') {?> selected<?php }?>><?php print __('Authorization Failed', 'mactrack');?></option>
+							<?php
+							$all_status = array(
+								0 => __esc('Any Status', 'mactrack'),
+								1 => __esc('Idle', 'mactrack'),
+								2 => __esc('Running', 'mactrack'),
+								3 => __esc('No method', 'mactrack'),
+								4 => __esc('Authentication Success', 'mactrack'),
+								5 => __esc('Authentication Failed', 'mactrack'),
+								6 => __esc('Authorization Success', 'mactrack'),
+								7 => __esc('Authorization Failed', 'mactrack'),
+							);
+
+							foreach($all_status as $i => $status) {
+								print "<option value='$i'" . (get_request_var('status') == $i ? ' selected':'') . '>' . $status . '</option>';
+							}
+							?>
 						</select>
 					</td>
 					<td>
@@ -616,11 +627,14 @@ function mactrack_dot1x_filter() {
 							<option value='1'<?php if (get_request_var('scan_date') == '1') {?> selected<?php }?>><?php print __('All', 'mactrack');?></option>
 							<option value='2'<?php if (get_request_var('scan_date') == '2') {?> selected<?php }?>><?php print __('Most Recent', 'mactrack');?></option>
 							<?php
+							$scan_dates = db_fetch_assoc('SELECT DISTINCT scan_date
+								FROM mac_track_dot1x
+								ORDER BY scan_date
+								DESC LIMIT 10');
 
-							$scan_dates = db_fetch_assoc('SELECT DISTINCT scan_date FROM mac_track_dot1x ORDER BY scan_date DESC LIMIT 10');
 							if (cacti_sizeof($scan_dates)) {
 								foreach ($scan_dates as $scan_date) {
-									print '<option value="' . $scan_date['scan_date'] . '"'; if (get_request_var('scan_date') == $scan_date['scan_date']) { print ' selected'; } print '>' . $scan_date['scan_date'] . '</option>';
+									print '<option value="' . $scan_date['scan_date'] . '"' . (get_request_var('scan_date') == $scan_date['scan_date'] ? ' selected':'') . '>' . $scan_date['scan_date'] . '</option>';
 								}
 							}
 							?>
@@ -634,14 +648,14 @@ function mactrack_dot1x_filter() {
 					<td>
 						<select id='mac_filter_type_id'>
 							<?php
-							for($i=1;$i<=sizeof($mactrack_search_types)-2;$i++) {
-								print "<option value='" . $i . "'"; if (get_request_var('mac_filter_type_id') == $i) { print ' selected'; } print '>' . $mactrack_search_types[$i] . '</option>';
+							foreach($mactrack_search_types as $i => $type) {
+								print "<option value='$i'" . (get_request_var('mac_filter_type_id') == $i ? ' selected':'') . '>' . $type . '</option>';
 							}
 							?>
 						</select>
 					</td>
 					<td>
-						<input type='text' id='mac_filter' size='25' value='<?php print get_request_var('mac_filter');?>'>
+						<input type='text' id='mac_filter' size='25' value='<?php print html_escape_request_var('mac_filter');?>'>
 					</td>
 					<td>
 						<?php print __('Domain', 'mactrack');?>
@@ -661,14 +675,14 @@ function mactrack_dot1x_filter() {
 					<td>
 						<select id='port_name_filter_type_id'>
 							<?php
-							for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
-								print "<option value='" . $i . "'"; if (get_request_var('port_name_filter_type_id') == $i) { print ' selected'; } print '>' . $mactrack_search_types[$i] . '</option>';
+							foreach($mactrack_search_types as $i => $type) {
+								print "<option value='$i'" . (get_request_var('port_name_filter_type_id') == $i ? ' selected':'') . '>' . $type . '</option>';
 							}
 							?>
 						</select>
 					</td>
 					<td>
-						<input type='text' id='port_name_filter' size='25' value='<?php print get_request_var('port_name_filter');?>'>
+						<input type='text' id='port_name_filter' size='25' value='<?php print html_escape_request_var('port_name_filter');?>'>
 					</td>
 					<td colspan='2'>
 					</td>
@@ -688,7 +702,7 @@ function mactrack_dot1x_filter() {
 				strURL += '&ip_filter_type_id=' + $('#ip_filter_type_id').val();
 				strURL += '&ip_filter=' + $('#ip_filter').val();
 				strURL += '&port_name_filter_type_id=' + $('#port_name_filter_type_id').val();
-		                strURL += '&port_name_filter=' + $('#port_name_filter').val();
+				strURL += '&port_name_filter=' + $('#port_name_filter').val();
 				strURL += '&scan_date=' + $('#scan_date').val();
 				strURL += '&domain=' + $('#domain').val();
 				strURL += '&status=' + $('#status').val();

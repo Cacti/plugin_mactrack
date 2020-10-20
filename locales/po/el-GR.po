@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-19 09:50+0000\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2020-10-20 08:43-0400\n"
 "PO-Revision-Date: 2019-03-17 00:14-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,369 +18,375 @@ msgstr ""
 "X-Generator: Poedit 2.2.1\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
-#: mactrack_view_dot1x.php:480 mactrack_view_dot1x.php:602
+#: mactrack_view_dot1x.php:480 mactrack_view_dot1x.php:607
 #, fuzzy
 msgid "Idle"
 msgstr "Αεργος"
 
 #: lib/mactrack_functions.php:38 mactrack_utilities.php:238
 #: mactrack_utilities.php:318 mactrack_view_dot1x.php:479
-#: mactrack_view_dot1x.php:603
+#: mactrack_view_dot1x.php:608
 #, fuzzy
 msgid "Running"
 msgstr "Τρέξιμο"
 
-#: lib/mactrack_functions.php:39 mactrack_view_dot1x.php:604
+#: lib/mactrack_functions.php:39 mactrack_view_dot1x.php:609
 #, fuzzy
 msgid "No method"
 msgstr "Μέθοδος"
 
 #: lib/mactrack_functions.php:40 mactrack_view_dot1x.php:476
-#: mactrack_view_dot1x.php:605
+#: mactrack_view_dot1x.php:610
 #, fuzzy
 msgid "Authentication Success"
 msgstr "Επιτυχία ελέγχου ταυτότητας"
 
 #: lib/mactrack_functions.php:41 mactrack_view_dot1x.php:478
-#: mactrack_view_dot1x.php:606
+#: mactrack_view_dot1x.php:611
 #, fuzzy
 msgid "Authentication Failed"
 msgstr "Η ταυτοποίηση απέτυχε"
 
-#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:607
+#: lib/mactrack_functions.php:42
 #, fuzzy
 msgid "Authorization Succcess"
 msgstr "Εξουσιοδότηση Succcess"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
-#: mactrack_view_dot1x.php:608
+#: mactrack_view_dot1x.php:613
 #, fuzzy
 msgid "Authorization Failed"
 msgstr "Η εξουσιοδότηση απέτυχε"
 
-#: lib/mactrack_functions.php:2347
+#: lib/mactrack_functions.php:2326
 #, fuzzy
 msgid "Device Tracking OUI Database Import Results"
-msgstr ""
-"Παρακολούθηση των αποτελεσμάτων εισαγωγής δεδομένων βάσης δεδομένων OUI"
+msgstr "Παρακολούθηση των αποτελεσμάτων εισαγωγής δεδομένων βάσης δεδομένων OUI"
 
-#: lib/mactrack_functions.php:2348
+#: lib/mactrack_functions.php:2327
 #, fuzzy
 msgid "Getting OUI Database from IEEE"
 msgstr "Λήψη βάσης δεδομένων OUI από το IEEE"
 
-#: lib/mactrack_functions.php:2350
+#: lib/mactrack_functions.php:2329
 #, fuzzy
 msgid "Getting OUI Database from the IEEE"
 msgstr "Λήψη βάσης δεδομένων OUI από το IEEE"
 
-#: lib/mactrack_functions.php:2358
+#: lib/mactrack_functions.php:2337
 #, fuzzy
 msgid "OUI Database Download from IEEE Complete"
 msgstr "Λήψη βάσης δεδομένων OUI από το IEEE Complete"
 
-#: lib/mactrack_functions.php:2360
+#: lib/mactrack_functions.php:2339
 #, fuzzy
 msgid "OUI Database Download from IEEE FAILED"
 msgstr "Λήψη βάσης δεδομένων OUI από το IEEE FAILED"
 
-#: lib/mactrack_functions.php:2453
+#: lib/mactrack_functions.php:2426
 #, fuzzy, php-format
 msgid "There were '%d' Entries Added/Updated in the database."
-msgstr ""
-"Υπήρχαν καταχωρήσεις '% d' Προστέθηκαν / ενημερώθηκαν στη βάση δεδομένων."
+msgstr "Υπήρχαν καταχωρήσεις '% d' Προστέθηκαν / ενημερώθηκαν στη βάση δεδομένων."
 
-#: lib/mactrack_functions.php:2455
+#: lib/mactrack_functions.php:2428
 #, fuzzy, php-format
 msgid "There were '%d' Records Removed from the database."
 msgstr "Υπήρχαν αφαιρούμενες εγγραφές '% d' από τη βάση δεδομένων."
 
-#: lib/mactrack_functions.php:2477
+#: lib/mactrack_functions.php:2450
 #, fuzzy
 msgid "atifIndexes data collection complete"
 msgstr "ολοκληρώθηκε η συλλογή δεδομένων atifIndexes"
 
-#: lib/mactrack_functions.php:2495
+#: lib/mactrack_functions.php:2468
 #, fuzzy
 msgid "atPhysAddress data collection complete"
 msgstr "στη συλλογή δεδομένωνPhysAddress ολοκληρώθηκε"
 
-#: lib/mactrack_functions.php:2503
+#: lib/mactrack_functions.php:2476
 #, fuzzy
 msgid "atNetAddress data collection complete"
 msgstr "Η συλλογή δεδομένων atNetAddress ολοκληρώθηκε"
 
-#: lib/mactrack_functions.php:2516
+#: lib/mactrack_functions.php:2489
 #, fuzzy
 msgid "atEntries assembly complete."
 msgstr "στην ολοκλήρωση της συναρμολόγησης."
 
-#: lib/mactrack_functions.php:2547
+#: lib/mactrack_functions.php:2520
 #, fuzzy, php-format
 msgid "HOST: %s, IP address information collection complete"
 msgstr "HOST: %s, ολοκληρώθηκε η συλλογή πληροφοριών διεύθυνσης IP"
 
-#: lib/mactrack_functions.php:2564 lib/mactrack_functions.php:3031
+#: lib/mactrack_functions.php:2537 lib/mactrack_functions.php:3033
 #, fuzzy
 msgid "Rescan Device"
 msgstr "Εγκαταστήστε ξανά τη συσκευή"
 
-#: lib/mactrack_functions.php:2590
+#: lib/mactrack_functions.php:2560
 #, fuzzy
 msgid "View Non Interface Graphs"
 msgstr "Προβολή διεπαφών"
 
-#: lib/mactrack_functions.php:2592
+#: lib/mactrack_functions.php:2562
 msgid "No Non Interface Graphs in Cacti"
 msgstr ""
 
-#: lib/mactrack_functions.php:2607
+#: lib/mactrack_functions.php:2579
 #, fuzzy
 msgid "View Interface Graphs"
 msgstr "Προβολή διεπαφών"
 
-#: lib/mactrack_functions.php:2612
+#: lib/mactrack_functions.php:2581
 #, fuzzy
-msgid "Device Not in Cacti"
-msgstr "Σημειώσεις συσκευής"
+msgid "No Interface Graphs in Cacti"
+msgstr "Προβολή διεπαφών"
 
-#: lib/mactrack_functions.php:2627 lib/mactrack_functions.php:2630
+#: lib/mactrack_functions.php:2598 lib/mactrack_functions.php:2601
 #, fuzzy
 msgid "Since Restart"
 msgstr "Από την επανεκκίνηση"
 
-#: lib/mactrack_functions.php:2741
+#: lib/mactrack_functions.php:2640 mactrack_devices.php:1215
+#: mactrack_view_devices.php:512
+#, fuzzy
+msgid "Down"
+msgstr "Πεσμένος"
+
+#: lib/mactrack_functions.php:2640 mactrack_devices.php:1213
+#: mactrack_view_devices.php:510
+#, fuzzy
+msgid "Up"
+msgstr "Πάνω"
+
+#: lib/mactrack_functions.php:2676
+msgid "Data"
+msgstr ""
+
+#: lib/mactrack_functions.php:2676
+msgid "Voice"
+msgstr ""
+
+#: lib/mactrack_functions.php:2728
 #, fuzzy, php-format
 msgid "Device Rescan '%s'"
 msgstr "Επαναφορά συσκευής ' %s'"
 
-#: lib/mactrack_functions.php:2755 lib/mactrack_functions.php:2792
-#, fuzzy
-msgid "Clear Results"
-msgstr "Εισαγωγή Αποτελεσμάτων"
-
-#: lib/mactrack_functions.php:2779
+#: lib/mactrack_functions.php:2768
 #, fuzzy, php-format
 msgid "Site scan '%s'"
 msgstr "Σάρωση ιστοτόπου ' %s'"
 
-#: lib/mactrack_functions.php:2815
+#: lib/mactrack_functions.php:2805
 #, fuzzy, php-format
 msgid "Device Enable '%s'"
 msgstr "Ενεργοποίηση συσκευής ' %s'"
 
-#: lib/mactrack_functions.php:2840
+#: lib/mactrack_functions.php:2837
 #, fuzzy, php-format
 msgid "Device Disable '%d'"
 msgstr "Η συσκευή απενεργοποιείται '% d'"
 
-#: lib/mactrack_functions.php:2951 lib/mactrack_functions.php:2983
-#: lib/mactrack_functions.php:2984 lib/mactrack_functions.php:3045
-#: lib/mactrack_functions.php:3046 lib/mactrack_functions.php:3047
+#: lib/mactrack_functions.php:2953 lib/mactrack_functions.php:2985
+#: lib/mactrack_functions.php:2986 lib/mactrack_functions.php:3047
 #: lib/mactrack_functions.php:3048 lib/mactrack_functions.php:3049
+#: lib/mactrack_functions.php:3050 lib/mactrack_functions.php:3051
 #: mactrack_device_types.php:964 mactrack_device_types.php:971
 #: mactrack_device_types.php:978 mactrack_macwatch.php:356
 #: mactrack_macwatch.php:357 mactrack_snmp.php:416 mactrack_snmp.php:421
 #: mactrack_snmp.php:422 mactrack_snmp.php:423 mactrack_utilities.php:246
 #: mactrack_utilities.php:248 mactrack_utilities.php:250
-#: mactrack_view_arp.php:387 mactrack_view_devices.php:332
-#: mactrack_view_devices.php:333 mactrack_view_devices.php:334
-#: mactrack_view_devices.php:335 mactrack_view_devices.php:336
-#: mactrack_view_devices.php:337 mactrack_view_dot1x.php:512
-#: mactrack_view_interfaces.php:435 mactrack_view_macs.php:920
-#: mactrack_view_sites.php:348 mactrack_view_sites.php:349
-#: mactrack_view_sites.php:350 mactrack_view_sites.php:351
-#: mactrack_view_sites.php:352 setup.php:337
+#: mactrack_view_arp.php:387 mactrack_view_devices.php:376
+#: mactrack_view_dot1x.php:512 mactrack_view_interfaces.php:532
+#: mactrack_view_macs.php:920 mactrack_view_sites.php:414
+#: mactrack_view_sites.php:415 mactrack_view_sites.php:416
+#: mactrack_view_sites.php:417 mactrack_view_sites.php:418 setup.php:337
 #, fuzzy
 msgid "N/A"
 msgstr "Μη Διαθέσιμο"
 
-#: lib/mactrack_functions.php:2953 setup.php:630
+#: lib/mactrack_functions.php:2955 setup.php:871
 #, fuzzy, php-format
 msgid "%d Minutes"
 msgstr "%d λεπτά"
 
-#: lib/mactrack_functions.php:2957
+#: lib/mactrack_functions.php:2959
 #, fuzzy, php-format
 msgid "%d Hours"
 msgstr "% d Ώρες"
 
-#: lib/mactrack_functions.php:2961 setup.php:690 setup.php:691 setup.php:692
-#: setup.php:693 setup.php:694
+#: lib/mactrack_functions.php:2963 setup.php:931 setup.php:932 setup.php:933
+#: setup.php:934 setup.php:935
 #, fuzzy, php-format
 msgid "%d Days"
 msgstr "%d Ημέρες"
 
-#: lib/mactrack_functions.php:2964
+#: lib/mactrack_functions.php:2966
 #, fuzzy, php-format
 msgid "%d Weeks"
 msgstr "% d εβδομάδες"
 
-#: lib/mactrack_functions.php:2982
+#: lib/mactrack_functions.php:2984
 #, fuzzy
 msgid "Not Recorded"
 msgstr "Δεν έχει καταγραφεί"
 
-#: lib/mactrack_functions.php:3001
-#, fuzzy, php-format
-msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %f"
-msgstr "Κατάσταση: Τρέξιμο, Διαδικασίες:% d, Πρόοδος: %s, LastRuntime:% f"
-
 #: lib/mactrack_functions.php:3003
 #, fuzzy, php-format
-msgid ""
-"Status: Idle, LastRuntime: %f seconds, Processes: %d processes, Devices: %d, "
-"Next Run Time: %s"
-msgstr ""
-"Κατάσταση: Idle, LastRuntime:% f δευτερόλεπτα, Διαδικασίες:% d διεργασίες, "
-"Συσκευές:% d, Επόμενος χρόνος εκτέλεσης: %s"
+msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
+msgstr "Κατάσταση: Τρέξιμο, Διαδικασίες:% d, Πρόοδος: %s, LastRuntime:% f"
 
-#: lib/mactrack_functions.php:3005 mactrack_devices.php:1172
+#: lib/mactrack_functions.php:3005
+#, fuzzy, php-format
+msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
+msgstr "Κατάσταση: Idle, LastRuntime:% f δευτερόλεπτα, Διαδικασίες:% d διεργασίες, Συσκευές:% d, Επόμενος χρόνος εκτέλεσης: %s"
+
+#: lib/mactrack_functions.php:3007 mactrack_devices.php:1214
 #: mactrack_utilities.php:238 mactrack_utilities.php:264
-#: mactrack_view_devices.php:457 setup.php:676 setup.php:703
+#: mactrack_view_devices.php:511 setup.php:917 setup.php:944
 #, fuzzy
 msgid "Disabled"
 msgstr "Απενεργοποιημένο"
 
-#: lib/mactrack_functions.php:3011
+#: lib/mactrack_functions.php:3013
 #, fuzzy, php-format
 msgid "Scanning Rate: Every %s"
 msgstr "Ρυθμός σάρωσης: Κάθε %s"
 
-#: lib/mactrack_functions.php:3026 mactrack_view_devices.php:323
-#: mactrack_view_sites.php:278 mactrack_view_sites.php:340
+#: lib/mactrack_functions.php:3028 mactrack_view_devices.php:373
+#: mactrack_view_sites.php:310 mactrack_view_sites.php:404
 #, fuzzy
 msgid "View Interfaces"
 msgstr "Προβολή διεπαφών"
 
-#: lib/mactrack_functions.php:3044 mactrack_devices.php:1125
-#: mactrack_view_devices.php:414
+#: lib/mactrack_functions.php:3046 mactrack_devices.php:1167
+#: mactrack_view_devices.php:468
 #, fuzzy
 msgid "Not Detected"
 msgstr "Δεν εντοπίστηκε"
 
-#: lib/mactrack_functions.php:3164 lib/mactrack_functions.php:3225
-#: mactrack_sites.php:434 mactrack_sites.php:480 mactrack_view_sites.php:255
-#: mactrack_view_sites.php:319 setup.php:541 setup.php:715
+#: lib/mactrack_functions.php:3096 lib/mactrack_functions.php:3157
+#: mactrack_sites.php:461 mactrack_sites.php:541 mactrack_view_sites.php:285
+#: setup.php:541 setup.php:956
 #, fuzzy
 msgid "Sites"
 msgstr "Ιστοσελίδες"
 
-#: lib/mactrack_functions.php:3165 mactrack_device_types.php:935
-#: mactrack_devices.php:1033 mactrack_devices.php:1180 mactrack_sites.php:424
-#: mactrack_utilities.php:278 mactrack_view_devices.php:280
-#: mactrack_view_devices.php:465 mactrack_view_sites.php:246 setup.php:542
-#: setup.php:716
+#: lib/mactrack_functions.php:3097 mactrack_device_types.php:935
+#: mactrack_devices.php:1075 mactrack_devices.php:1222 mactrack_sites.php:428
+#: mactrack_utilities.php:278 mactrack_view_devices.php:325
+#: mactrack_view_devices.php:519 mactrack_view_sites.php:252 setup.php:542
+#: setup.php:957
 #, fuzzy
 msgid "Devices"
 msgstr "Τύπος Συσκευής"
 
-#: lib/mactrack_functions.php:3166
+#: lib/mactrack_functions.php:3098
 #, fuzzy
 msgid "IP Ranges"
 msgstr "IP Περιθώρια"
 
-#: lib/mactrack_functions.php:3167
+#: lib/mactrack_functions.php:3099
 #, fuzzy
 msgid "IP Address"
 msgstr "IP Address"
 
-#: lib/mactrack_functions.php:3168 setup.php:1231
+#: lib/mactrack_functions.php:3100 setup.php:1472
 #, fuzzy
 msgid "MAC Address"
 msgstr "Διεύθυνση MAC"
 
-#: lib/mactrack_functions.php:3169 mactrack_view_interfaces.php:291
-#: mactrack_view_interfaces.php:510 setup.php:545
+#: lib/mactrack_functions.php:3101 mactrack_view_interfaces.php:291
+#: mactrack_view_interfaces.php:607 setup.php:545
 #, fuzzy
 msgid "Interfaces"
 msgstr "Διεπαφές"
 
-#: lib/mactrack_functions.php:3170
+#: lib/mactrack_functions.php:3102
 #, fuzzy
 msgid "Dot1x"
 msgstr "Dot1x"
 
-#: lib/mactrack_functions.php:3171 mactrack_view_graphs.php:153
+#: lib/mactrack_functions.php:3103 mactrack_view_graphs.php:153
 #, fuzzy
 msgid "Graphs"
 msgstr "Γραφήματα"
 
-#: lib/mactrack_functions.php:3205 mactrack_device_types.php:459
-#: mactrack_devices.php:1174 mactrack_view_devices.php:459 setup.php:651
+#: lib/mactrack_functions.php:3137 mactrack_device_types.php:459
+#: mactrack_devices.php:1216 mactrack_view_devices.php:513 setup.php:892
 #, fuzzy
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: lib/mactrack_functions.php:3219 mactrack_device_types.php:1012
-#: mactrack_devices.php:1074 mactrack_macauth.php:369 mactrack_macwatch.php:388
+#: lib/mactrack_functions.php:3151 mactrack_device_types.php:1012
+#: mactrack_devices.php:1116 mactrack_macauth.php:369 mactrack_macwatch.php:388
 #: mactrack_snmp.php:556 mactrack_vendormacs.php:199 mactrack_view_arp.php:377
-#: mactrack_view_devices.php:364 mactrack_view_dot1x.php:502
-#: mactrack_view_interfaces.php:528 mactrack_view_macs.php:910
+#: mactrack_view_devices.php:418 mactrack_view_dot1x.php:502
+#: mactrack_view_interfaces.php:625 mactrack_view_macs.php:910
 #, fuzzy
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: lib/mactrack_functions.php:3229 mactrack_device_types.php:1022
-#: mactrack_devices.php:1184 mactrack_macauth.php:379 mactrack_macwatch.php:398
+#: lib/mactrack_functions.php:3161 mactrack_device_types.php:1022
+#: mactrack_devices.php:1226 mactrack_macauth.php:379 mactrack_macwatch.php:398
 #: mactrack_snmp.php:566 mactrack_vendormacs.php:209
-#: mactrack_view_devices.php:469 mactrack_view_ips.php:274 setup.php:663
+#: mactrack_view_devices.php:523 mactrack_view_ips.php:274 setup.php:904
 #, fuzzy
 msgid "Default"
 msgstr "Προεπιλογή"
 
-#: lib/mactrack_functions.php:3243
+#: lib/mactrack_functions.php:3175
 #, fuzzy
 msgid "Show Device Details"
 msgstr "Εμφάνιση λεπτομερειών συσκευής"
 
-#: lib/mactrack_functions.php:3246 mactrack_device_types.php:1034
-#: mactrack_devices.php:1098 mactrack_macauth.php:391 mactrack_macwatch.php:410
+#: lib/mactrack_functions.php:3178 mactrack_device_types.php:1034
+#: mactrack_devices.php:1140 mactrack_macauth.php:391 mactrack_macwatch.php:410
 #: mactrack_snmp.php:580 mactrack_vendormacs.php:221 mactrack_view_arp.php:441
-#: mactrack_view_devices.php:388 mactrack_view_dot1x.php:572
-#: mactrack_view_interfaces.php:445 mactrack_view_macs.php:974
+#: mactrack_view_devices.php:442 mactrack_view_dot1x.php:575
+#: mactrack_view_interfaces.php:542 mactrack_view_macs.php:974
 #, fuzzy
 msgid "Go"
 msgstr "Πήγαινε"
 
-#: lib/mactrack_functions.php:3249 mactrack_device_types.php:1035
-#: mactrack_devices.php:1099 mactrack_macauth.php:392 mactrack_macwatch.php:411
+#: lib/mactrack_functions.php:3181 mactrack_device_types.php:1035
+#: mactrack_devices.php:1141 mactrack_macauth.php:392 mactrack_macwatch.php:411
 #: mactrack_snmp.php:581 mactrack_vendormacs.php:222 mactrack_view_arp.php:442
-#: mactrack_view_devices.php:389 mactrack_view_dot1x.php:573
-#: mactrack_view_interfaces.php:446 mactrack_view_ips.php:287
+#: mactrack_view_devices.php:443 mactrack_view_dot1x.php:576
+#: mactrack_view_interfaces.php:543 mactrack_view_ips.php:287
 #: mactrack_view_macs.php:975
 #, fuzzy
 msgid "Clear"
 msgstr "Καθαρισμός"
 
-#: lib/mactrack_functions.php:3252 mactrack_device_types.php:1038
-#: mactrack_devices.php:1101 mactrack_vendormacs.php:223
-#: mactrack_view_arp.php:443 mactrack_view_devices.php:390
-#: mactrack_view_dot1x.php:574 mactrack_view_interfaces.php:447
+#: lib/mactrack_functions.php:3184 mactrack_device_types.php:1038
+#: mactrack_devices.php:1143 mactrack_vendormacs.php:223
+#: mactrack_view_arp.php:443 mactrack_view_devices.php:444
+#: mactrack_view_dot1x.php:577 mactrack_view_interfaces.php:544
 #: mactrack_view_ips.php:286 mactrack_view_macs.php:976
 #, fuzzy
 msgid "Export"
 msgstr "Εξαγωγή"
 
-#: lib/mactrack_functions.php:3261 mactrack_devices.php:1080
-#: mactrack_view_arp.php:383 mactrack_view_devices.php:370
-#: mactrack_view_dot1x.php:508 mactrack_view_interfaces.php:397
+#: lib/mactrack_functions.php:3193 mactrack_devices.php:1122
+#: mactrack_view_arp.php:383 mactrack_view_devices.php:424
+#: mactrack_view_dot1x.php:508 mactrack_view_interfaces.php:494
 #: mactrack_view_ips.php:254 mactrack_view_macs.php:916
 #, fuzzy
 msgid "Site"
 msgstr "Ιστοσελίδα"
 
-#: lib/mactrack_functions.php:3265 lib/mactrack_functions.php:3281
-#: mactrack_devices.php:1113 mactrack_devices.php:1124
-#: mactrack_devices.php:1170 mactrack_view_devices.php:402
-#: mactrack_view_devices.php:413 mactrack_view_devices.php:455
+#: lib/mactrack_functions.php:3197 lib/mactrack_functions.php:3213
+#: mactrack_devices.php:1155 mactrack_devices.php:1166
+#: mactrack_devices.php:1212 mactrack_view_devices.php:456
+#: mactrack_view_devices.php:467 mactrack_view_devices.php:509
 #: mactrack_view_ips.php:258
 #, fuzzy
 msgid "Any"
 msgstr "Οποιοδήποτε"
 
-#: lib/mactrack_functions.php:3277 mactrack_devices.php:1120
-#: mactrack_view_devices.php:409
+#: lib/mactrack_functions.php:3209 mactrack_devices.php:1162
+#: mactrack_view_devices.php:463
 #, fuzzy
 msgid "SubType"
 msgstr "SubType"
@@ -397,22 +403,13 @@ msgstr "Εισαγωγή στη βάση δεδομένων παρακολούθ
 
 #: mactrack_actions.php:243
 #, fuzzy
-msgid ""
-"Click 'Continue' to import the following Device to Device Tracking?  Please "
-"specify additional Device Tracking device options as given below."
-msgstr ""
-"Κάντε κλικ στην επιλογή 'Συνέχεια' για να εισαγάγετε την ακόλουθη συσκευή "
-"στην παρακολούθηση συσκευών; Προσδιορίστε τις πρόσθετες επιλογές συσκευής "
-"παρακολούθησης συσκευών, όπως δίνονται παρακάτω."
+msgid "Click 'Continue' to import the following Device to Device Tracking?  Please specify additional Device Tracking device options as given below."
+msgstr "Κάντε κλικ στην επιλογή 'Συνέχεια' για να εισαγάγετε την ακόλουθη συσκευή στην παρακολούθηση συσκευών; Προσδιορίστε τις πρόσθετες επιλογές συσκευής παρακολούθησης συσκευών, όπως δίνονται παρακάτω."
 
 #: mactrack_actions.php:267
 #, fuzzy
-msgid ""
-"We will use these devices SNMP options for the Device Tracking device as "
-"well."
-msgstr ""
-"Θα χρησιμοποιήσουμε και αυτές τις επιλογές των συσκευών SNMP για τη συσκευή "
-"εντοπισμού συσκευής."
+msgid "We will use these devices SNMP options for the Device Tracking device as well."
+msgstr "Θα χρησιμοποιήσουμε και αυτές τις επιλογές των συσκευών SNMP για τη συσκευή εντοπισμού συσκευής."
 
 #: mactrack_device_types.php:38
 #, fuzzy
@@ -446,7 +443,7 @@ msgstr "- -"
 msgid "You must select at least one device type."
 msgstr "Πρέπει να επιλέξετε τουλάχιστον έναν τύπο συσκευής."
 
-#: mactrack_device_types.php:285 mactrack_devices.php:257
+#: mactrack_device_types.php:285 mactrack_devices.php:258
 #: mactrack_macauth.php:134 mactrack_macwatch.php:139 mactrack_sites.php:150
 #: mactrack_snmp.php:210 mactrack_view_macs.php:178 mactrack_view_macs.php:259
 #, fuzzy
@@ -456,22 +453,12 @@ msgstr "περιέχει"
 #: mactrack_device_types.php:290
 #, fuzzy
 msgid "Click 'Continue' to delete the following Device Type(s)."
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τους ακόλουθους τύπους "
-"συσκευών."
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τους ακόλουθους τύπους συσκευών."
 
 #: mactrack_device_types.php:297
 #, fuzzy
-msgid ""
-"Click 'Continue' to duplciate the following Device Type(s). You may "
-"optionally change the description for the new device types.  Otherwise, do "
-"not change value below and the original name will be replicated with a new "
-"suffix."
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τον παρακάτω τύπο "
-"συσκευής. Μπορείτε να αλλάξετε προαιρετικά την περιγραφή για τους νέους "
-"τύπους συσκευών. Διαφορετικά, μην αλλάξετε την τιμή παρακάτω και το αρχικό "
-"όνομα θα αναπαραχθεί με μια νέα κατάληξη."
+msgid "Click 'Continue' to duplciate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τον παρακάτω τύπο συσκευής. Μπορείτε να αλλάξετε προαιρετικά την περιγραφή για τους νέους τύπους συσκευών. Διαφορετικά, μην αλλάξετε την τιμή παρακάτω και το αρχικό όνομα θα αναπαραχθεί με μια νέα κατάληξη."
 
 #: mactrack_device_types.php:299
 #, fuzzy
@@ -483,13 +470,13 @@ msgstr "<description> (1)"
 msgid "Device Type Prefix:"
 msgstr "Πρόθεμα τύπου συσκευής:"
 
-#: mactrack_device_types.php:310 mactrack_devices.php:362
+#: mactrack_device_types.php:310 mactrack_devices.php:363
 #: mactrack_macauth.php:151 mactrack_macwatch.php:156 mactrack_sites.php:158
 #: mactrack_snmp.php:235 mactrack_view_macs.php:186 mactrack_view_macs.php:276
 msgid "Cancel"
 msgstr ""
 
-#: mactrack_device_types.php:311 mactrack_devices.php:363
+#: mactrack_device_types.php:311 mactrack_devices.php:364
 #: mactrack_macauth.php:152 mactrack_macwatch.php:157 mactrack_sites.php:159
 #: mactrack_snmp.php:235 mactrack_view_macs.php:187 mactrack_view_macs.php:277
 msgid "Return"
@@ -515,12 +502,12 @@ msgstr "Υπήρχαν% d Τύποι συσκευών που προστέθηκ�
 msgid "No New Device Types Found!"
 msgstr "Δεν βρέθηκαν νέοι τύποι συσκευών!"
 
-#: mactrack_device_types.php:484 mactrack_devices.php:494
+#: mactrack_device_types.php:484 mactrack_devices.php:495
 #, fuzzy
 msgid "Import Results"
 msgstr "Εισαγωγή Αποτελεσμάτων"
 
-#: mactrack_device_types.php:486 mactrack_devices.php:496
+#: mactrack_device_types.php:486 mactrack_devices.php:497
 #, fuzzy
 msgid "Cacti has imported the following items:"
 msgstr "Ο Cacti εισήγαγε τα ακόλουθα στοιχεία:"
@@ -537,44 +524,33 @@ msgstr "Εισαγωγή τύπων συσκευών από το τοπικό α
 
 #: mactrack_device_types.php:501
 #, fuzzy
-msgid ""
-"Please specify the location of the CSV file containing your device type "
-"information."
-msgstr ""
-"Καθορίστε τη θέση του αρχείου CSV που περιέχει τις πληροφορίες τύπου "
-"συσκευής σας."
+msgid "Please specify the location of the CSV file containing your device type information."
+msgstr "Καθορίστε τη θέση του αρχείου CSV που περιέχει τις πληροφορίες τύπου συσκευής σας."
 
-#: mactrack_device_types.php:508 mactrack_devices.php:521
+#: mactrack_device_types.php:508 mactrack_devices.php:522
 #, fuzzy
 msgid "Overwrite Existing Data?"
 msgstr "Να αντικαταστήσετε υπάρχοντα δεδομένα;"
 
-#: mactrack_device_types.php:509 mactrack_devices.php:522
+#: mactrack_device_types.php:509 mactrack_devices.php:523
 #, fuzzy
-msgid ""
-"Should the import process be allowed to overwrite existing data?  Please "
-"note, this does not mean delete old row, only replace duplicate rows."
-msgstr ""
-"Πρέπει να επιτραπεί στη διαδικασία εισαγωγής να αντικαταστήσει υπάρχοντα "
-"δεδομένα; Σημειώστε ότι αυτό δεν σημαίνει διαγραφή παλιάς σειράς, "
-"αντικαταστήστε μόνο τις διπλές σειρές."
+msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
+msgstr "Πρέπει να επιτραπεί στη διαδικασία εισαγωγής να αντικαταστήσει υπάρχοντα δεδομένα; Σημειώστε ότι αυτό δεν σημαίνει διαγραφή παλιάς σειράς, αντικαταστήστε μόνο τις διπλές σειρές."
 
-#: mactrack_device_types.php:512 mactrack_devices.php:525
+#: mactrack_device_types.php:512 mactrack_devices.php:526
 #, fuzzy
 msgid "Allow Existing Rows to be Updated?"
 msgstr "Να επιτρέπεται η ενημέρωση υφιστάμενων σειρών;"
 
-#: mactrack_device_types.php:517 mactrack_devices.php:530
+#: mactrack_device_types.php:517 mactrack_devices.php:531
 #, fuzzy
 msgid "Required File Format Notes"
 msgstr "Απαιτούμενες σημειώσεις μορφοτύπου αρχείου"
 
-#: mactrack_device_types.php:520 mactrack_devices.php:533
+#: mactrack_device_types.php:520 mactrack_devices.php:534
 #, fuzzy
 msgid "The file must contain a header row with the following column headings."
-msgstr ""
-"Το αρχείο πρέπει να περιέχει μια σειρά κεφαλίδας με τις ακόλουθες "
-"επικεφαλίδες στηλών."
+msgstr "Το αρχείο πρέπει να περιέχει μια σειρά κεφαλίδας με τις ακόλουθες επικεφαλίδες στηλών."
 
 #: mactrack_device_types.php:522
 #, fuzzy
@@ -588,148 +564,98 @@ msgstr "- Ο πωλητής που παράγει αυτή τη συσκευή"
 
 #: mactrack_device_types.php:524
 #, fuzzy
-msgid ""
-" - The type of device this is.  See the notes below for this integer value"
-msgstr ""
-"- Ο τύπος της συσκευής είναι. Δείτε τις παρακάτω σημειώσεις για αυτήν την "
-"ακέραια τιμή"
+msgid " - The type of device this is.  See the notes below for this integer value"
+msgstr "- Ο τύπος της συσκευής είναι. Δείτε τις παρακάτω σημειώσεις για αυτήν την ακέραια τιμή"
 
 #: mactrack_device_types.php:525
 #, fuzzy
-msgid ""
-" - A unique set of characters from the snmp sysDescr that uniquely identify "
-"this device"
-msgstr ""
-"- Ένα μοναδικό σύνολο χαρακτήρων από το snms sysDescr που αναγνωρίζουν "
-"μοναδικά αυτή τη συσκευή"
+msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
+msgstr "- Ένα μοναδικό σύνολο χαρακτήρων από το snms sysDescr που αναγνωρίζουν μοναδικά αυτή τη συσκευή"
 
 #: mactrack_device_types.php:526
 #, fuzzy
-msgid ""
-" - The vendor specific snmp sysObjectID that distinguishes this device from "
-"the next"
-msgstr ""
-"- Το smsObjectID για το συγκεκριμένο προμηθευτή που διακρίνει αυτή τη "
-"συσκευή από την επόμενη"
+msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
+msgstr "- Το smsObjectID για το συγκεκριμένο προμηθευτή που διακρίνει αυτή τη συσκευή από την επόμενη"
 
 #: mactrack_device_types.php:527
 #, fuzzy
 msgid " - The scanning function that will be used to scan this device type"
-msgstr ""
-"- Η λειτουργία σάρωσης που θα χρησιμοποιηθεί για τη σάρωση αυτού του τύπου "
-"συσκευής"
+msgstr "- Η λειτουργία σάρωσης που θα χρησιμοποιηθεί για τη σάρωση αυτού του τύπου συσκευής"
 
 #: mactrack_device_types.php:528
 #, fuzzy
 msgid " - The IP scanning function that will be used to scan this device type"
-msgstr ""
-"- Η λειτουργία σάρωσης IP που θα χρησιμοποιηθεί για τη σάρωση αυτού του "
-"τύπου συσκευής"
+msgstr "- Η λειτουργία σάρωσης IP που θα χρησιμοποιηθεί για τη σάρωση αυτού του τύπου συσκευής"
 
 #: mactrack_device_types.php:529
 #, fuzzy
-msgid ""
-" - The 802.1x scanning function that will be used to scan this device type"
-msgstr ""
-"- Η λειτουργία σάρωσης 802.1x που θα χρησιμοποιηθεί για τη σάρωση αυτού του "
-"τύπου συσκευής"
+msgid " - The 802.1x scanning function that will be used to scan this device type"
+msgstr "- Η λειτουργία σάρωσης 802.1x που θα χρησιμοποιηθεί για τη σάρωση αυτού του τύπου συσκευής"
 
 #: mactrack_device_types.php:530
 #, fuzzy
-msgid ""
-" - If the Serial Number for this device type can be obtained via an SNMP "
-"Query, add it's OID here"
-msgstr ""
-"- Εάν ο σειριακός αριθμός για αυτόν τον τύπο συσκευής μπορεί να ληφθεί μέσω "
-"ενός ερωτήματος SNMP, προσθέστε εδώ το OID του"
+msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
+msgstr "- Εάν ο σειριακός αριθμός για αυτόν τον τύπο συσκευής μπορεί να ληφθεί μέσω ενός ερωτήματος SNMP, προσθέστε εδώ το OID του"
 
 #: mactrack_device_types.php:531
 #, fuzzy
-msgid ""
-" - If your scanning function does not have the ability to isolate trunk "
-"ports or link ports, this is the starting port number for user ports"
-msgstr ""
-"- Εάν η λειτουργία σάρωσης δεν έχει τη δυνατότητα απομόνωσης θυρών κορμού ή "
-"θυρών σύνδεσης, αυτός είναι ο αριθμός θύρας εκκίνησης για θύρες χρηστών"
+msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
+msgstr "- Εάν η λειτουργία σάρωσης δεν έχει τη δυνατότητα απομόνωσης θυρών κορμού ή θυρών σύνδεσης, αυτός είναι ο αριθμός θύρας εκκίνησης για θύρες χρηστών"
 
 #: mactrack_device_types.php:532
 #, fuzzy
-msgid ""
-" - Same as the lowPort with the exception that this is the high numbered "
-"user port number"
-msgstr ""
-"- Ίδιο με το lowPort με την εξαίρεση ότι πρόκειται για τον αριθμό θύρας του "
-"χρήστη με υψηλές αριθμητικές τιμές"
+msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
+msgstr "- Ίδιο με το lowPort με την εξαίρεση ότι πρόκειται για τον αριθμό θύρας του χρήστη με υψηλές αριθμητικές τιμές"
 
-#: mactrack_device_types.php:534 mactrack_devices.php:556
+#: mactrack_device_types.php:534 mactrack_devices.php:557
 #, fuzzy
-msgid ""
-"The primary key for this table is a combination of the following three "
-"fields:"
-msgstr ""
-"Το πρωτεύον κλειδί για αυτόν τον πίνακα είναι ένας συνδυασμός των ακόλουθων "
-"τριών πεδίων:"
+msgid "The primary key for this table is a combination of the following three fields:"
+msgstr "Το πρωτεύον κλειδί για αυτόν τον πίνακα είναι ένας συνδυασμός των ακόλουθων τριών πεδίων:"
 
 #: mactrack_device_types.php:538
 #, fuzzy
-msgid ""
-"Therefore, if you attempt to import duplicate device types, the existing "
-"data will be updated with the new information."
-msgstr ""
-"Επομένως, αν επιχειρήσετε να εισαγάγετε τύπους συσκευών διπλότυπων, τα "
-"υπάρχοντα δεδομένα θα ενημερωθούν με τις νέες πληροφορίες."
+msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
+msgstr "Επομένως, αν επιχειρήσετε να εισαγάγετε τύπους συσκευών διπλότυπων, τα υπάρχοντα δεδομένα θα ενημερωθούν με τις νέες πληροφορίες."
 
-#: mactrack_device_types.php:540 mactrack_devices.php:562
+#: mactrack_device_types.php:540 mactrack_devices.php:563
 #, fuzzy
 msgid " is an integer field and must be one of the following:"
 msgstr "είναι ένα ακέραιο πεδίο και πρέπει να είναι ένα από τα ακόλουθα:"
 
-#: mactrack_device_types.php:542 mactrack_devices.php:564
+#: mactrack_device_types.php:542 mactrack_devices.php:565
 #, fuzzy
 msgid "1 - Switch/Hub"
 msgstr "1 - Διακόπτης / διανομέας"
 
-#: mactrack_device_types.php:543 mactrack_devices.php:565
+#: mactrack_device_types.php:543 mactrack_devices.php:566
 #, fuzzy
 msgid "2 - Switch/Router"
 msgstr "2 - Διακόπτης / δρομολογητής"
 
-#: mactrack_device_types.php:544 mactrack_devices.php:566
+#: mactrack_device_types.php:544 mactrack_devices.php:567
 #, fuzzy
 msgid "3 - Router"
 msgstr "3 - Δρομολογητής"
 
 #: mactrack_device_types.php:546
 #, fuzzy
-msgid ""
-"The devices device type is determined by scanning it's snmp agent for the "
-"sysObjectID and sysDescription and comparing it against values in the device "
-"types database.  The first match that is found in the database is used "
-"direct Device Tracking as to how to scan it.  Therefore, it is very "
-"important that you select valid sysObjectID_match, sysDescr_match, and "
-"scanning function for your devices."
-msgstr ""
-"Ο τύπος συσκευής συσκευών καθορίζεται από τη σάρωση του παράγοντα snmp του "
-"sysObjectID και sysDescription και τη σύγκρισή του με τις τιμές στη βάση "
-"δεδομένων τύπων συσκευών. Η πρώτη αντιστοίχιση που βρίσκεται στη βάση "
-"δεδομένων χρησιμοποιείται για άμεση παρακολούθηση συσκευών σχετικά με τον "
-"τρόπο σάρωσης. Επομένως, είναι πολύ σημαντικό να επιλέξετε έγκυρη λειτουργία "
-"sysObjectID_match, sysDescr_match και σάρωση για τις συσκευές σας."
+msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used direct Device Tracking as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
+msgstr "Ο τύπος συσκευής συσκευών καθορίζεται από τη σάρωση του παράγοντα snmp του sysObjectID και sysDescription και τη σύγκρισή του με τις τιμές στη βάση δεδομένων τύπων συσκευών. Η πρώτη αντιστοίχιση που βρίσκεται στη βάση δεδομένων χρησιμοποιείται για άμεση παρακολούθηση συσκευών σχετικά με τον τρόπο σάρωσης. Επομένως, είναι πολύ σημαντικό να επιλέξετε έγκυρη λειτουργία sysObjectID_match, sysDescr_match και σάρωση για τις συσκευές σας."
 
 #: mactrack_device_types.php:563 mactrack_device_types.php:1071
-#: mactrack_devices.php:1114 setup.php:634
+#: mactrack_devices.php:1156 setup.php:875
 #, fuzzy
 msgid "Switch/Hub"
 msgstr "Διακόπτης / διανομέας"
 
 #: mactrack_device_types.php:564 mactrack_device_types.php:1072
-#: mactrack_devices.php:1115 mactrack_view_devices.php:404 setup.php:635
+#: mactrack_devices.php:1157 mactrack_view_devices.php:458 setup.php:876
 #, fuzzy
 msgid "Switch/Router"
 msgstr "Διακόπτης / δρομολογητής"
 
 #: mactrack_device_types.php:565 mactrack_device_types.php:1073
-#: mactrack_devices.php:1116 mactrack_view_devices.php:405 setup.php:636
+#: mactrack_devices.php:1158 mactrack_view_devices.php:459 setup.php:877
 #, fuzzy
 msgid "Router"
 msgstr "Router"
@@ -739,14 +665,10 @@ msgstr "Router"
 msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
 msgstr "ΕΠΕΞΕΡΓΑΣΙΑ ΚΕΦΑΛΗΣ ΟΚ: <br> Στήλες που βρέθηκαν όπου: %s"
 
-#: mactrack_device_types.php:715 mactrack_devices.php:727
+#: mactrack_device_types.php:715 mactrack_devices.php:728
 #, fuzzy, php-format
-msgid ""
-"HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found "
-"where: %s"
-msgstr ""
-"ΣΦΑΛΜΑ ΕΠΕΞΕΡΓΑΣΙΑΣ ΓΡΑΜΜΩΝ ΚΕΝΤΡΟΥ: Λείπει το απαιτούμενο πεδίο <br> Στήλες "
-"που βρέθηκαν όπου: %s"
+msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
+msgstr "ΣΦΑΛΜΑ ΕΠΕΞΕΡΓΑΣΙΑΣ ΓΡΑΜΜΩΝ ΚΕΝΤΡΟΥ: Λείπει το απαιτούμενο πεδίο <br> Στήλες που βρέθηκαν όπου: %s"
 
 #: mactrack_device_types.php:771
 #, fuzzy
@@ -755,30 +677,18 @@ msgstr "Άγνωστο υποθέτω \"Switch / Hub\""
 
 #: mactrack_device_types.php:806 mactrack_device_types.php:821
 #, fuzzy, php-format
-msgid ""
-"INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, "
-"sysObjectID: %s"
-msgstr ""
-"ΕΙΣΑΓΩΓΗ: Εισαγωγέας: %s, Περιγραφή: %s, Τύπος: %s, sysDescr: %s, "
-"sysObjectID: %s"
+msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "ΕΙΣΑΓΩΓΗ: Εισαγωγέας: %s, Περιγραφή: %s, Τύπος: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php:808 mactrack_device_types.php:823
 #, fuzzy, php-format
-msgid ""
-"INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, "
-"sysObjectID: %s"
-msgstr ""
-"INSERT FAILED: Προμηθευτής: %s, Περιγραφή: %s, Τύπος: %s, sysDescr: %s, "
-"sysObjectID: %s"
+msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "INSERT FAILED: Προμηθευτής: %s, Περιγραφή: %s, Τύπος: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php:815
 #, fuzzy, php-format
-msgid ""
-"INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: "
-"%s, sysObjectID: %s"
-msgstr ""
-"INSERT SKIPPED, ΥΦΙΣΤΑΜΕΝΟΣ: Προμηθευτής: %s, Περιγραφή: %s, Τύπος: %s, "
-"sysDescr: %s, sysObjectID: %s"
+msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "INSERT SKIPPED, ΥΦΙΣΤΑΜΕΝΟΣ: Προμηθευτής: %s, Περιγραφή: %s, Τύπος: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php:849
 #, fuzzy, php-format
@@ -800,9 +710,9 @@ msgstr "Φίλτρα τύπου συσκευής εντοπισμού συσκε
 msgid "Device Type Description"
 msgstr "Τύπος συσκευής Περιγραφή"
 
-#: mactrack_device_types.php:936 mactrack_devices.php:1022
-#: mactrack_sites.php:469 mactrack_view_devices.php:268
-#: mactrack_view_sites.php:308 setup.php:763
+#: mactrack_device_types.php:936 mactrack_devices.php:1038
+#: mactrack_sites.php:503 mactrack_view_devices.php:283
+#: mactrack_view_sites.php:348 setup.php:1004
 #, fuzzy
 msgid "Device Type"
 msgstr "Τύπος συσκευής"
@@ -832,7 +742,7 @@ msgstr "sysDescription Match"
 msgid "Vendor OID Match"
 msgstr "Ταιριάσματος OID προμηθευτή"
 
-#: mactrack_device_types.php:946 mactrack_device_types.php:1018 setup.php:718
+#: mactrack_device_types.php:946 mactrack_device_types.php:1018 setup.php:959
 #, fuzzy
 msgid "Device Types"
 msgstr "Τύποι συσκευών"
@@ -860,7 +770,7 @@ msgstr "Εγκαταστήστε ξανά τη συσκευή"
 msgid "Scan Active Devices for Unknown Device Types"
 msgstr "Τύποι συσκευών εντοπισμού συσκευής"
 
-#: mactrack_device_types.php:1037 mactrack_devices.php:1100
+#: mactrack_device_types.php:1037 mactrack_devices.php:1142
 #, fuzzy
 msgid "Import"
 msgstr "Εισαγωγή"
@@ -875,27 +785,27 @@ msgstr "Εισαγωγή τύπων συσκευών από το τοπικό α
 msgid "Export Device Types to Share with Others"
 msgstr "Εισαγωγή τύπων συσκευών από το τοπικό αρχείο"
 
-#: mactrack_device_types.php:1049 mactrack_sites.php:468
-#: mactrack_view_sites.php:307 setup.php:756
+#: mactrack_device_types.php:1049 mactrack_sites.php:499
+#: mactrack_view_sites.php:344 setup.php:997
 #, fuzzy
 msgid "Vendor"
 msgstr "Προμηθευτής"
 
 #: mactrack_device_types.php:1053 mactrack_device_types.php:1070
-#: mactrack_devices.php:1084 mactrack_view_arp.php:403
-#: mactrack_view_devices.php:374 mactrack_view_dot1x.php:528
-#: mactrack_view_dot1x.php:616 mactrack_view_dot1x.php:651
-#: mactrack_view_interfaces.php:401 mactrack_view_interfaces.php:459
-#: mactrack_view_interfaces.php:489 mactrack_view_macs.php:936
+#: mactrack_devices.php:1126 mactrack_view_arp.php:403
+#: mactrack_view_devices.php:428 mactrack_view_dot1x.php:531
+#: mactrack_view_dot1x.php:627 mactrack_view_dot1x.php:665
+#: mactrack_view_interfaces.php:498 mactrack_view_interfaces.php:556
+#: mactrack_view_interfaces.php:586 mactrack_view_macs.php:936
 #: mactrack_view_macs.php:1003 mactrack_view_macs.php:1036
-#: mactrack_view_macs.php:1072 setup.php:672
+#: mactrack_view_macs.php:1072 setup.php:913
 #, fuzzy
 msgid "All"
 msgstr "Όλα"
 
-#: mactrack_device_types.php:1066 mactrack_devices.php:1109
-#: mactrack_view_devices.php:398 mactrack_view_interfaces.php:357
-#: mactrack_view_interfaces.php:455
+#: mactrack_device_types.php:1066 mactrack_devices.php:1151
+#: mactrack_view_devices.php:452 mactrack_view_interfaces.php:368
+#: mactrack_view_interfaces.php:552
 #, fuzzy
 msgid "Type"
 msgstr "Τύπος"
@@ -930,388 +840,304 @@ msgstr "Συνδεθείτε στο Cacti Host μέσω Hostname"
 msgid "Copy SNMP Settings from Cacti Host"
 msgstr "Αντιγράψτε τις ρυθμίσεις SNMP από το Host Cacti"
 
-#: mactrack_devices.php:254
+#: mactrack_devices.php:255
 #, fuzzy
 msgid "You must select at least one device."
 msgstr "Πρέπει να επιλέξετε τουλάχιστον μία συσκευή."
 
-#: mactrack_devices.php:262
+#: mactrack_devices.php:263
 #, fuzzy
 msgid "Click 'Continue' to enable the following devices."
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να ενεργοποιήσετε τις ακόλουθες "
-"συσκευές."
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να ενεργοποιήσετε τις ακόλουθες συσκευές."
 
-#: mactrack_devices.php:269
+#: mactrack_devices.php:270
 #, fuzzy
 msgid "Click 'Continue' to disable the following devices."
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να απενεργοποιήσετε τις παρακάτω "
-"συσκευές."
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να απενεργοποιήσετε τις παρακάτω συσκευές."
 
-#: mactrack_devices.php:276
+#: mactrack_devices.php:277
 #, fuzzy
-msgid ""
-"Click 'Continue' to change SNMP parameters for the following devices, check "
-"the box next to the fields you want to update, and fill in the new value."
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να αλλάξετε παραμέτρους SNMP για τις "
-"ακόλουθες συσκευές, επιλέξτε το πλαίσιο δίπλα στα πεδία που θέλετε να "
-"ενημερώσετε και συμπληρώστε τη νέα τιμή."
+msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να αλλάξετε παραμέτρους SNMP για τις ακόλουθες συσκευές, επιλέξτε το πλαίσιο δίπλα στα πεδία που θέλετε να ενημερώσετε και συμπληρώστε τη νέα τιμή."
 
-#: mactrack_devices.php:306
+#: mactrack_devices.php:307
 #, fuzzy
-msgid ""
-"Click 'Continue' to change upper or lower port parameters for the following "
-"devices, check the box next to the fields you want to update, and fill in "
-"the new value."
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να αλλάξετε τις ανώτερες ή τις "
-"κατώτερες παραμέτρους της θύρας για τις ακόλουθες συσκευές, επιλέξτε το "
-"πλαίσιο δίπλα στα πεδία που θέλετε να ενημερώσετε και συμπληρώστε τη νέα "
-"τιμή."
+msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να αλλάξετε τις ανώτερες ή τις κατώτερες παραμέτρους της θύρας για τις ακόλουθες συσκευές, επιλέξτε το πλαίσιο δίπλα στα πεδία που θέλετε να ενημερώσετε και συμπληρώστε τη νέα τιμή."
 
-#: mactrack_devices.php:336
+#: mactrack_devices.php:337
 #, fuzzy
-msgid ""
-"Click 'Continue' to connect the following devices to their respective Cacti "
-"Device.  The relation will be built on equal hostnames. Description will be "
-"updated as well."
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να συνδέσετε τις ακόλουθες συσκευές "
-"στην αντίστοιχη συσκευή Cacti. Η σχέση θα βασίζεται σε ίσα ονόματα hostname. "
-"Η περιγραφή θα ενημερωθεί επίσης."
+msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να συνδέσετε τις ακόλουθες συσκευές στην αντίστοιχη συσκευή Cacti. Η σχέση θα βασίζεται σε ίσα ονόματα hostname. Η περιγραφή θα ενημερωθεί επίσης."
 
-#: mactrack_devices.php:343
+#: mactrack_devices.php:344
 #, fuzzy
-msgid ""
-"Click 'Continue' to copy SNMP Settings from connected Cacti Device to Device "
-"Tracking Device.  All not connected Devices will silently be skipped. SNMP "
-"retries will be taken from Ping retries."
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να αντιγράψετε τις ρυθμίσεις SNMP από "
-"τη συνδεδεμένη συσκευή Cacti στη συσκευή εντοπισμού συσκευών. Όλες οι "
-"συσκευές που δεν είναι συνδεδεμένες Οι συσκευές θα σβηστούν σιωπηλά. Οι "
-"επαναλήψεις SNMP θα ληφθούν από τις δοκιμασίες Ping."
+msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Device Tracking Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να αντιγράψετε τις ρυθμίσεις SNMP από τη συνδεδεμένη συσκευή Cacti στη συσκευή εντοπισμού συσκευών. Όλες οι συσκευές που δεν είναι συνδεδεμένες Οι συσκευές θα σβηστούν σιωπηλά. Οι επαναλήψεις SNMP θα ληφθούν από τις δοκιμασίες Ping."
 
-#: mactrack_devices.php:350
+#: mactrack_devices.php:351
 #, fuzzy
 msgid "Click 'Continue' to delete the following Devices"
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τις ακόλουθες συσκευές"
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τις ακόλουθες συσκευές"
 
-#: mactrack_devices.php:510
+#: mactrack_devices.php:511
 #, fuzzy
 msgid "Import Device Tracking Devices"
 msgstr "Εισαγωγή συσκευών παρακολούθησης συσκευών"
 
-#: mactrack_devices.php:513
+#: mactrack_devices.php:514
 #, fuzzy
 msgid "Import Devices from Local File"
 msgstr "Εισαγωγή συσκευών από το τοπικό αρχείο"
 
-#: mactrack_devices.php:514
+#: mactrack_devices.php:515
 #, fuzzy
-msgid ""
-"Please specify the location of the CSV file containing your device "
-"information."
-msgstr ""
-"Καθορίστε τη θέση του αρχείου CSV που περιέχει τις πληροφορίες της συσκευής "
-"σας."
-
-#: mactrack_devices.php:535
-#, fuzzy
-msgid " - The SiteID known to Device Tracking for this device"
-msgstr ""
-"- Το αναγνωριστικό siteID που είναι γνωστό στην Παρακολούθηση συσκευών για "
-"αυτήν τη συσκευή"
+msgid "Please specify the location of the CSV file containing your device information."
+msgstr "Καθορίστε τη θέση του αρχείου CSV που περιέχει τις πληροφορίες της συσκευής σας."
 
 #: mactrack_devices.php:536
 #, fuzzy
-msgid " - A simple name for the device.  For example Cisco 6509 Switch"
-msgstr ""
-"- Ένα απλό όνομα για τη συσκευή. Για παράδειγμα, ο διακόπτης Cisco 6509"
+msgid " - The SiteID known to Device Tracking for this device"
+msgstr "- Το αναγνωριστικό siteID που είναι γνωστό στην Παρακολούθηση συσκευών για αυτήν τη συσκευή"
 
 #: mactrack_devices.php:537
+#, fuzzy
+msgid " - A simple name for the device.  For example Cisco 6509 Switch"
+msgstr "- Ένα απλό όνομα για τη συσκευή. Για παράδειγμα, ο διακόπτης Cisco 6509"
+
+#: mactrack_devices.php:538
 #, fuzzy
 msgid " - The IP Address or DNS Name for the device"
 msgstr "- Η διεύθυνση IP ή το όνομα DNS για τη συσκευή"
 
-#: mactrack_devices.php:538
-#, fuzzy
-msgid ""
-" - More detailed information about the device, including location, "
-"environmental conditions, etc."
-msgstr ""
-"- Λεπτομερέστερες πληροφορίες σχετικά με τη συσκευή, συμπεριλαμβανομένης της "
-"τοποθεσίας, των περιβαλλοντικών συνθηκών κ.λπ."
-
 #: mactrack_devices.php:539
 #, fuzzy
-msgid " - A list of ports that should not be scanned for user devices"
-msgstr ""
-"- Μια λίστα με θύρες που δεν θα πρέπει να σαρωθούν για συσκευές χρηστών"
+msgid " - More detailed information about the device, including location, environmental conditions, etc."
+msgstr "- Λεπτομερέστερες πληροφορίες σχετικά με τη συσκευή, συμπεριλαμβανομένης της τοποθεσίας, των περιβαλλοντικών συνθηκών κ.λπ."
 
 #: mactrack_devices.php:540
 #, fuzzy
-msgid ""
-" - Redundant information indicating the intended device type.  See below for "
-"valid values."
-msgstr ""
-"- Πλεονάζουσες πληροφορίες που δείχνουν τον τύπο συσκευής που προορίζεται. "
-"Δείτε παρακάτω για έγκυρες τιμές."
+msgid " - A list of ports that should not be scanned for user devices"
+msgstr "- Μια λίστα με θύρες που δεν θα πρέπει να σαρωθούν για συσκευές χρηστών"
 
 #: mactrack_devices.php:541
+#, fuzzy
+msgid " - Redundant information indicating the intended device type.  See below for valid values."
+msgstr "- Πλεονάζουσες πληροφορίες που δείχνουν τον τύπο συσκευής που προορίζεται. Δείτε παρακάτω για έγκυρες τιμές."
+
+#: mactrack_devices.php:542
 #, fuzzy
 msgid " - Id of a set of SNMP options"
 msgstr "- Id ενός συνόλου επιλογών SNMP"
 
-#: mactrack_devices.php:542
+#: mactrack_devices.php:543
 #, fuzzy
 msgid " - The current snmp read string for the device"
 msgstr "- Η τρέχουσα snmp αναγνωστική συμβολοσειρά για τη συσκευή"
 
-#: mactrack_devices.php:543
-#, fuzzy
-msgid ""
-" - The snmp version you wish to scan this device with.  Valid values are 1, "
-"2 and 3"
-msgstr ""
-"- Η έκδοση snmp που θέλετε να σαρώσετε με τη συσκευή. Οι έγκυρες τιμές είναι "
-"1, 2 και 3"
-
 #: mactrack_devices.php:544
+#, fuzzy
+msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
+msgstr "- Η έκδοση snmp που θέλετε να σαρώσετε με τη συσκευή. Οι έγκυρες τιμές είναι 1, 2 και 3"
+
+#: mactrack_devices.php:545
 #, fuzzy
 msgid " - The UDP port that the snmp agent is running on"
 msgstr "- Η θύρα UDP που τρέχει ο παράγοντας snmp"
 
-#: mactrack_devices.php:545
-#, fuzzy
-msgid ""
-" - The timeout in milliseconds to wait for an snmp response before trying "
-"again"
-msgstr ""
-"- Το χρονικό όριο σε χιλιοστά του δευτερολέπτου για να περιμένετε μια "
-"απόκριση snmp πριν δοκιμάσετε ξανά"
-
 #: mactrack_devices.php:546
 #, fuzzy
-msgid " - The number of times to retry a snmp request before giving up"
-msgstr ""
-"- Ο αριθμός των φορών που θα ξαναδοκιμάσετε μια αίτηση snmp πριν "
-"εγκαταλείψετε"
+msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
+msgstr "- Το χρονικό όριο σε χιλιοστά του δευτερολέπτου για να περιμένετε μια απόκριση snmp πριν δοκιμάσετε ξανά"
 
 #: mactrack_devices.php:547
 #, fuzzy
-msgid ""
-" - Specified the number of OID's that can be obtained in a single SNMP Get "
-"request"
-msgstr ""
-"- Καθορίστηκε ο αριθμός των OID που μπορούν να ληφθούν σε ένα μόνο SNMP Get "
-"Request"
+msgid " - The number of times to retry a snmp request before giving up"
+msgstr "- Ο αριθμός των φορών που θα ξαναδοκιμάσετε μια αίτηση snmp πριν εγκαταλείψετε"
 
 #: mactrack_devices.php:548
+#, fuzzy
+msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
+msgstr "- Καθορίστηκε ο αριθμός των OID που μπορούν να ληφθούν σε ένα μόνο SNMP Get Request"
+
+#: mactrack_devices.php:549
 #, fuzzy
 msgid " - SNMP V3: SNMP username"
 msgstr "- Όνομα χρήστη SNMP V3: SNMP"
 
-#: mactrack_devices.php:549
+#: mactrack_devices.php:550
 #, fuzzy
 msgid " - SNMP V3: SNMP password"
 msgstr "- Κωδικός SNMP V3: SNMP"
 
-#: mactrack_devices.php:550
+#: mactrack_devices.php:551
 #, fuzzy
 msgid " - SNMP V3: SNMP authentication protocol"
 msgstr "- Πρωτόκολλο ελέγχου ταυτότητας SNMP V3: SNMP"
 
-#: mactrack_devices.php:551
+#: mactrack_devices.php:552
 #, fuzzy
 msgid " - SNMP V3: SNMP privacy passphrase"
 msgstr "- SNMP V3: Φράση πρόσβασης ιδιωτικού απορρήτου SNMP"
 
-#: mactrack_devices.php:552
+#: mactrack_devices.php:553
 #, fuzzy
 msgid " - SNMP V3: SNMP privacy protocol"
 msgstr "- Πρωτόκολλο SNMP V3: SNMP"
 
-#: mactrack_devices.php:553
+#: mactrack_devices.php:554
 #, fuzzy
 msgid " - SNMP V3: SNMP context"
 msgstr "- SNMP V3: περιβάλλον SNMP"
 
-#: mactrack_devices.php:554
+#: mactrack_devices.php:555
 #, fuzzy
 msgid " - SNMP V3: SNMP engine id"
 msgstr "- SNMP V3: id του κινητήρα SNMP"
 
-#: mactrack_devices.php:560
+#: mactrack_devices.php:561
 #, fuzzy
-msgid ""
-"Therefore, if you attempt to import duplicate devices, only the data you "
-"specify will be updated."
-msgstr ""
-"Επομένως, εάν προσπαθήσετε να εισαγάγετε διπλές συσκευές, θα ενημερώνονται "
-"μόνο τα δεδομένα που καθορίζετε."
+msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
+msgstr "Επομένως, εάν προσπαθήσετε να εισαγάγετε διπλές συσκευές, θα ενημερώνονται μόνο τα δεδομένα που καθορίζετε."
 
-#: mactrack_devices.php:725
+#: mactrack_devices.php:726
 #, fuzzy, php-format
 msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
 msgstr "ΕΠΕΞΕΡΓΑΣΙΑ ΚΕΦΑΛΗΣ ΟΚ: <br> Στήλες που βρέθηκαν όπου: %s"
 
-#: mactrack_devices.php:811 mactrack_devices.php:826
+#: mactrack_devices.php:812 mactrack_devices.php:827
 #, fuzzy, php-format
-msgid ""
-"INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP "
-"Port: %s"
-msgstr ""
-"ΕΓΚΑΤΕΣΤΕ ΕΔΡΑ: Όνομα κεντρικού υπολογιστή: Αναγνωριστικό περιοχών: %s, "
-"Όνομα συσκευής: %s, Όνομα κεντρικού υπολογιστή %s, Θύρα SNMP: %s"
+msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "ΕΓΚΑΤΕΣΤΕ ΕΔΡΑ: Όνομα κεντρικού υπολογιστή: Αναγνωριστικό περιοχών: %s, Όνομα συσκευής: %s, Όνομα κεντρικού υπολογιστή %s, Θύρα SNMP: %s"
 
-#: mactrack_devices.php:813 mactrack_devices.php:828
+#: mactrack_devices.php:814 mactrack_devices.php:829
 #, fuzzy, php-format
 msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr ""
-"INSERT FAILED: SiteID: %s, Όνομα συσκευής: %s, Όνομα κεντρικού υπολογιστή "
-"%s, Θύρα SNMP: %s"
+msgstr "INSERT FAILED: SiteID: %s, Όνομα συσκευής: %s, Όνομα κεντρικού υπολογιστή %s, Θύρα SNMP: %s"
 
-#: mactrack_devices.php:820
+#: mactrack_devices.php:821
 #, fuzzy, php-format
-msgid ""
-"INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP "
-"Port: %s"
-msgstr ""
-"INSERT SKIPPED, ΥΠΑΡΧΟΥΣΑ: SiteID: %s, Όνομα συσκευής: %s, Όνομα κεντρικού "
-"υπολογιστή %s, Θύρα SNMP: %s"
+msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "INSERT SKIPPED, ΥΠΑΡΧΟΥΣΑ: SiteID: %s, Όνομα συσκευής: %s, Όνομα κεντρικού υπολογιστή %s, Θύρα SNMP: %s"
 
-#: mactrack_devices.php:855
+#: mactrack_devices.php:856
 #, fuzzy, php-format
 msgid "Device Tracking Devices [edit: %s]"
 msgstr "Συσκευές παρακολούθησης συσκευών [επεξεργασία: %s]"
 
-#: mactrack_devices.php:859
+#: mactrack_devices.php:860
 #, fuzzy
 msgid "Device Tracking Devices [new]"
 msgstr "Συσκευές παρακολούθησης συσκευών [new]"
 
-#: mactrack_devices.php:872
+#: mactrack_devices.php:873
 #, fuzzy
 msgid "SNMP Information"
 msgstr "Πληροφορίες SNMP"
 
-#: mactrack_devices.php:892
+#: mactrack_devices.php:895
 #, fuzzy
 msgid "System:"
 msgstr "Σύστημα"
 
-#: mactrack_devices.php:893
+#: mactrack_devices.php:896
 #, fuzzy
 msgid "Uptime:"
 msgstr "Ώρα λειτουργίας:"
 
-#: mactrack_devices.php:894
+#: mactrack_devices.php:897
 #, fuzzy
 msgid "Hostname:"
 msgstr "Όνομα κεντρικού υπολογιστή:"
 
-#: mactrack_devices.php:895
+#: mactrack_devices.php:898
 #, fuzzy
 msgid "ObjectID:"
 msgstr "ObjectID:"
 
-#: mactrack_devices.php:1000
+#: mactrack_devices.php:1003
 #, fuzzy
 msgid "Device Tracking Device Filters"
 msgstr "Φίλτρα συσκευών εντοπισμού συσκευών"
 
-#: mactrack_devices.php:1018 mactrack_view_devices.php:264 setup.php:997
+#: mactrack_devices.php:1022 mactrack_view_devices.php:267 setup.php:1238
 #, fuzzy
 msgid "Device Name"
 msgstr "Όνομα συσκευής"
 
-#: mactrack_devices.php:1019 mactrack_sites.php:423 mactrack_sites.php:467
-#: mactrack_view_devices.php:265 mactrack_view_ips.php:194
-#: mactrack_view_sites.php:245 mactrack_view_sites.php:306 setup.php:1028
-#: setup.php:1169
+#: mactrack_devices.php:1026 mactrack_sites.php:424 mactrack_sites.php:495
+#: mactrack_view_devices.php:271 mactrack_view_ips.php:194
+#: mactrack_view_sites.php:248 mactrack_view_sites.php:340 setup.php:1269
+#: setup.php:1410
 #, fuzzy
 msgid "Site Name"
 msgstr "Ορίστε Όνομα"
 
-#: mactrack_devices.php:1020 mactrack_devices.php:1166
-#: mactrack_utilities.php:278 mactrack_view_devices.php:266
-#: mactrack_view_devices.php:451 mactrack_view_dot1x.php:404
-#: mactrack_view_dot1x.php:418 mactrack_view_dot1x.php:597
-#: mactrack_view_interfaces.php:380
+#: mactrack_devices.php:1030 mactrack_devices.php:1208
+#: mactrack_utilities.php:278 mactrack_view_devices.php:275
+#: mactrack_view_devices.php:505 mactrack_view_dot1x.php:405
+#: mactrack_view_dot1x.php:418 mactrack_view_dot1x.php:600
+#: mactrack_view_interfaces.php:465
 #, fuzzy
 msgid "Status"
 msgstr "Κατάσταση"
 
-#: mactrack_devices.php:1021 mactrack_view_devices.php:267
-#: mactrack_view_interfaces.php:356 setup.php:1004
+#: mactrack_devices.php:1034 mactrack_view_devices.php:279
+#: mactrack_view_interfaces.php:364 setup.php:1245
 #, fuzzy
 msgid "Hostname"
 msgstr "Όνομα κεντρικού υπολογιστή"
 
-#: mactrack_devices.php:1023
+#: mactrack_devices.php:1042
 #, fuzzy
 msgid "Total IPs"
 msgstr "Συνολικά IP"
 
-#: mactrack_devices.php:1024 mactrack_sites.php:426
-#: mactrack_view_devices.php:270 mactrack_view_sites.php:248
+#: mactrack_devices.php:1047 mactrack_sites.php:438
+#: mactrack_view_devices.php:292 mactrack_view_sites.php:262
 #, fuzzy
 msgid "User Ports"
 msgstr "Θύρες χρηστών"
 
-#: mactrack_devices.php:1025 mactrack_sites.php:427
-#: mactrack_view_devices.php:271 mactrack_view_sites.php:249
+#: mactrack_devices.php:1052 mactrack_sites.php:443
+#: mactrack_view_devices.php:297 mactrack_view_sites.php:267
 #, fuzzy
 msgid "User Ports Up"
 msgstr "Οι θύρες χρηστών επάνω"
 
-#: mactrack_devices.php:1026 mactrack_view_devices.php:272
+#: mactrack_devices.php:1057 mactrack_view_devices.php:302
 #, fuzzy
 msgid "Trunk Ports"
 msgstr "Θύρες κορμού"
 
-#: mactrack_devices.php:1027 mactrack_view_devices.php:273
+#: mactrack_devices.php:1062 mactrack_view_devices.php:307
 #, fuzzy
 msgid "Active Macs"
 msgstr "Ενεργοί Mac"
 
-#: mactrack_devices.php:1028 mactrack_view_devices.php:275
+#: mactrack_devices.php:1067 mactrack_view_devices.php:317
 #, fuzzy
 msgid "Last Duration"
 msgstr "Τελευταία Διάρκεια"
 
-#: mactrack_devices.php:1049
+#: mactrack_devices.php:1091
 #, fuzzy
 msgid "No Device Tracking Devices"
 msgstr "Δεν υπάρχουν συσκευές παρακολούθησης συσκευών"
 
-#: mactrack_devices.php:1085 mactrack_view_devices.php:375 setup.php:657
-#: setup.php:789 setup.php:798 setup.php:807 setup.php:1015 setup.php:1031
-#: setup.php:1076 setup.php:1105
+#: mactrack_devices.php:1127 mactrack_view_devices.php:429 setup.php:898
+#: setup.php:1030 setup.php:1039 setup.php:1048 setup.php:1256 setup.php:1272
+#: setup.php:1317 setup.php:1346
 #, fuzzy
 msgid "None"
 msgstr "Κανένα"
 
-#: mactrack_devices.php:1171 mactrack_view_devices.php:456
-#, fuzzy
-msgid "Up"
-msgstr "Πάνω"
-
-#: mactrack_devices.php:1173 mactrack_view_devices.php:458
-#, fuzzy
-msgid "Down"
-msgstr "Πεσμένος"
-
-#: mactrack_devices.php:1175 mactrack_view_devices.php:460
+#: mactrack_devices.php:1217 mactrack_view_devices.php:514
 #, fuzzy
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: mactrack_devices.php:1176 mactrack_view_devices.php:461
+#: mactrack_devices.php:1218 mactrack_view_devices.php:515
 #, fuzzy
 msgid "No Cacti Link"
 msgstr "Δεν υπάρχει σύνδεσμος Cacti"
@@ -1319,15 +1145,12 @@ msgstr "Δεν υπάρχει σύνδεσμος Cacti"
 #: mactrack_macauth.php:131
 #, fuzzy
 msgid "You must select at least one Authorized Mac to delete."
-msgstr ""
-"Πρέπει να επιλέξετε τουλάχιστον ένα εξουσιοδοτημένο Mac για να διαγράψετε."
+msgstr "Πρέπει να επιλέξετε τουλάχιστον ένα εξουσιοδοτημένο Mac για να διαγράψετε."
 
 #: mactrack_macauth.php:139
 #, fuzzy
 msgid "Click 'Continue' to delete the following Authorized Mac's?"
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τα παρακάτω "
-"εξουσιοδοτημένα Mac;"
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τα παρακάτω εξουσιοδοτημένα Mac;"
 
 #: mactrack_macauth.php:241
 #, fuzzy, php-format
@@ -1349,7 +1172,7 @@ msgstr "Φίλτρα MacAuth για την παρακολούθηση συσκε
 msgid "Mac Address"
 msgstr "Διεύθυνση MAC"
 
-#: mactrack_macauth.php:319 setup.php:1316
+#: mactrack_macauth.php:319 setup.php:1557
 #, fuzzy
 msgid "Reason"
 msgstr "Αιτία:"
@@ -1383,9 +1206,7 @@ msgstr "MAC's"
 #: mactrack_macwatch.php:144
 #, fuzzy
 msgid "Click 'Continue' to delete the following watched Mac's?"
-msgstr ""
-"Κάντε κλικ στο κουμπί 'Συνέχεια' για να διαγράψετε τα παρακάτω "
-"παρακολουθούμενα Mac;"
+msgstr "Κάντε κλικ στο κουμπί 'Συνέχεια' για να διαγράψετε τα παρακάτω παρακολουθούμενα Mac;"
 
 #: mactrack_macwatch.php:239
 #, fuzzy, php-format
@@ -1407,7 +1228,7 @@ msgstr "Παρακολούθηση συσκευών φίλτρων MacWatch"
 msgid "Watch Name"
 msgstr "Παρακολουθήστε το όνομα"
 
-#: mactrack_macwatch.php:323 setup.php:1258
+#: mactrack_macwatch.php:323 setup.php:1499
 #, fuzzy
 msgid "Ticket Number"
 msgstr "Αριθμός εισιτηρίου"
@@ -1435,9 +1256,7 @@ msgstr "Δεν βρέθηκαν συσκευές παρακολούθησης σ
 #: mactrack_sites.php:140
 #, fuzzy
 msgid "Click 'Continue' to delete the following Site(s)?"
-msgstr ""
-"Κάντε κλικ στην επιλογή 'Συνέχεια' για να διαγράψετε τους παρακάτω "
-"ιστότοπους;"
+msgstr "Κάντε κλικ στην επιλογή 'Συνέχεια' για να διαγράψετε τους παρακάτω ιστότοπους;"
 
 #: mactrack_sites.php:147
 #, fuzzy
@@ -1459,45 +1278,45 @@ msgstr "Site Tracking Device [new]"
 msgid "Device Tracking Site Filters"
 msgstr "Φίλτρα ιστότοπου παρακολούθησης συσκευών"
 
-#: mactrack_sites.php:425 mactrack_sites.php:471 mactrack_view_devices.php:269
-#: mactrack_view_sites.php:247 mactrack_view_sites.php:310
+#: mactrack_sites.php:433 mactrack_sites.php:513 mactrack_view_devices.php:287
+#: mactrack_view_sites.php:257 mactrack_view_sites.php:357
 #, fuzzy
 msgid "Total IP's"
 msgstr "Συνολικά IP"
 
-#: mactrack_sites.php:428 mactrack_sites.php:475 mactrack_view_sites.php:250
-#: mactrack_view_sites.php:314
+#: mactrack_sites.php:448 mactrack_sites.php:533 mactrack_view_sites.php:272
+#: mactrack_view_sites.php:377
 #, fuzzy
 msgid "MACS Found"
 msgstr "Το MACS βρέθηκε"
 
-#: mactrack_sites.php:429 mactrack_view_sites.php:251
+#: mactrack_sites.php:453 mactrack_view_sites.php:277
 #, fuzzy
 msgid "Device Errors"
 msgstr "Σφάλματα συσκευής"
 
-#: mactrack_sites.php:457 mactrack_sites.php:507 mactrack_view_sites.php:293
-#: mactrack_view_sites.php:357
+#: mactrack_sites.php:484 mactrack_sites.php:564 mactrack_view_sites.php:324
+#: mactrack_view_sites.php:422
 #, fuzzy
 msgid "No Device Tracking Sites Found"
 msgstr "Δεν βρέθηκαν τοποθεσίες εντοπισμού συσκευών"
 
-#: mactrack_sites.php:470 mactrack_view_sites.php:309
+#: mactrack_sites.php:508 mactrack_view_sites.php:352
 #, fuzzy
 msgid "Total Devices"
 msgstr "Σύνολο συσκευών"
 
-#: mactrack_sites.php:472 mactrack_view_sites.php:311
+#: mactrack_sites.php:518 mactrack_view_sites.php:362
 #, fuzzy
 msgid "Total User Ports"
 msgstr "Συνολικές θύρες χρηστών"
 
-#: mactrack_sites.php:473 mactrack_view_sites.php:312
+#: mactrack_sites.php:523 mactrack_view_sites.php:367
 #, fuzzy
 msgid "Total Oper Ports"
 msgstr "Συνολικές θύρες λειτουργιών"
 
-#: mactrack_sites.php:474 mactrack_view_sites.php:313
+#: mactrack_sites.php:528 mactrack_view_sites.php:372
 #, fuzzy
 msgid "Total Trunks"
 msgstr "Σύνολο κορμών"
@@ -1510,19 +1329,12 @@ msgstr "Πρέπει να επιλέξετε τουλάχιστον μία επ�
 #: mactrack_snmp.php:215
 #, fuzzy
 msgid "Click 'Continue' to delete the following SNMP Option(s)."
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τις ακόλουθες επιλογές "
-"SNMP."
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τις ακόλουθες επιλογές SNMP."
 
 #: mactrack_snmp.php:222
 #, fuzzy
-msgid ""
-"Click 'Continue' to duplicate the following SNMP Option(s). You can "
-"optionally change the title format for the new SNMP Options."
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να αντιγράψετε τις ακόλουθες επιλογές "
-"SNMP. Μπορείτε να αλλάξετε προαιρετικά τη μορφή τίτλου για τις νέες επιλογές "
-"SNMP."
+msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να αντιγράψετε τις ακόλουθες επιλογές SNMP. Μπορείτε να αλλάξετε προαιρετικά τη μορφή τίτλου για τις νέες επιλογές SNMP."
 
 #: mactrack_snmp.php:224
 #, fuzzy
@@ -1554,7 +1366,7 @@ msgstr "Επιλογή επιλογών SNMP [επεξεργασία: %s]"
 msgid "SNMP Option Set [new]"
 msgstr "Επιλογή επιλογών SNMP [new]"
 
-#: mactrack_snmp.php:394 mactrack_snmp.php:486 setup.php:560
+#: mactrack_snmp.php:394 mactrack_snmp.php:486 setup.php:585
 #, fuzzy
 msgid "Device Tracking SNMP Options"
 msgstr "Παρακολούθηση συσκευών Επιλογές SNMP"
@@ -1594,8 +1406,8 @@ msgstr "Επαναλαμβάνει"
 msgid "Max OIDs"
 msgstr "Μέγιστα αναγνωριστικά OID"
 
-#: mactrack_snmp.php:404 mactrack_view_dot1x.php:397
-#: mactrack_view_dot1x.php:412
+#: mactrack_snmp.php:404 mactrack_view_dot1x.php:399
+#: mactrack_view_dot1x.php:413
 #, fuzzy
 msgid "Username"
 msgstr "Όνομα Χρήστη"
@@ -1610,13 +1422,13 @@ msgstr "Auth Proto"
 msgid "Priv Proto"
 msgstr "Priv Proto"
 
-#: mactrack_snmp.php:407 mactrack_view_devices.php:263
-#: mactrack_view_dot1x.php:394 mactrack_view_dot1x.php:409
-#: mactrack_view_interfaces.php:355 mactrack_view_ips.php:193
+#: mactrack_snmp.php:407 mactrack_view_devices.php:264
+#: mactrack_view_dot1x.php:396 mactrack_view_dot1x.php:410
+#: mactrack_view_interfaces.php:360 mactrack_view_ips.php:193
 #: mactrack_view_macs.php:653 mactrack_view_macs.php:668
-#: mactrack_view_sites.php:244 mactrack_view_sites.php:305 setup.php:559
-#: setup.php:561 setup.php:567 setup.php:570 setup.php:573 setup.php:576
-#: setup.php:579
+#: mactrack_view_sites.php:245 mactrack_view_sites.php:337 setup.php:578
+#: setup.php:592 setup.php:634 setup.php:655 setup.php:676 setup.php:697
+#: setup.php:718
 #, fuzzy
 msgid "Actions"
 msgstr "Ενέργειες"
@@ -1804,12 +1616,8 @@ msgstr "Είσαι σίγουρος?"
 
 #: mactrack_utilities.php:347
 #, fuzzy
-msgid ""
-"Are you sure you want to delete all the Port to MAC to IP results from the "
-"system?"
-msgstr ""
-"Είστε βέβαιοι ότι θέλετε να διαγράψετε όλα τα αποτελέσματα σύνδεσης Port to "
-"MAC to IP από το σύστημα;"
+msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε όλα τα αποτελέσματα σύνδεσης Port to MAC to IP από το σύστημα;"
 
 #: mactrack_utilities.php:394 mactrack_utilities.php:417
 #, fuzzy
@@ -1823,47 +1631,28 @@ msgstr "Ο ακόλουθος αριθμός εγγραφών έχει αφαι�
 
 #: mactrack_utilities.php:405
 #, fuzzy
-msgid ""
-"Are you sure you want to delete all the Aggregated Port to MAC to IP results "
-"from the system?"
-msgstr ""
-"Είστε βέβαιοι ότι θέλετε να διαγράψετε όλα τα αποτελέσματα της "
-"Συγκεντρωμένης Θύρας σε MAC έως IP από το σύστημα;"
+msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε όλα τα αποτελέσματα της Συγκεντρωμένης Θύρας σε MAC έως IP από το σύστημα;"
 
 #: mactrack_utilities.php:418
 #, fuzzy, php-format
-msgid ""
-"The following number of records have been removed from the aggergated table: "
-"%s"
-msgstr ""
-"Ο ακόλουθος αριθμός εγγραφών έχει αφαιρεθεί από τον συγκεντρωτικό πίνακα: %s"
+msgid "The following number of records have been removed from the aggergated table: %s"
+msgstr "Ο ακόλουθος αριθμός εγγραφών έχει αφαιρεθεί από τον συγκεντρωτικό πίνακα: %s"
 
 #: mactrack_utilities.php:428
 #, fuzzy
-msgid ""
-"Are you sure you want to delete and recreate all the Aggregated Port to MAC "
-"to IP results from the system?"
-msgstr ""
-"Είστε βέβαιοι ότι θέλετε να διαγράψετε και να αναδημιουργήσετε όλες τις "
-"συγκεντρωτικές θύρες από MAC σε αποτελέσματα IP από το σύστημα;"
+msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε και να αναδημιουργήσετε όλες τις συγκεντρωτικές θύρες από MAC σε αποτελέσματα IP από το σύστημα;"
 
 #: mactrack_utilities.php:454
 #, fuzzy, php-format
-msgid ""
-"The following number of records have been removed from the aggergated table: "
-"%s.  And %s records will be added."
-msgstr ""
-"Ο ακόλουθος αριθμός εγγραφών έχει αφαιρεθεί από τον συγκεντρωτικό πίνακα: "
-"%s. Θα προστεθούν και οι εγγραφές %s."
+msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
+msgstr "Ο ακόλουθος αριθμός εγγραφών έχει αφαιρεθεί από τον συγκεντρωτικό πίνακα: %s. Θα προστεθούν και οι εγγραφές %s."
 
 #: mactrack_utilities.php:475
 #, fuzzy
-msgid ""
-"The Device Tracking scanning functions have been purged.  They will be "
-"recreated once you either edit a device or device type."
-msgstr ""
-"Οι λειτουργίες σάρωσης εντοπισμού συσκευής έχουν καθαριστεί. Θα "
-"δημιουργηθούν ξανά όταν επεξεργαστείτε μια συσκευή ή έναν τύπο συσκευής."
+msgid "The Device Tracking scanning functions have been purged.  They will be recreated once you either edit a device or device type."
+msgstr "Οι λειτουργίες σάρωσης εντοπισμού συσκευής έχουν καθαριστεί. Θα δημιουργηθούν ξανά όταν επεξεργαστείτε μια συσκευή ή έναν τύπο συσκευής."
 
 #: mactrack_utilities.php:480
 #, fuzzy
@@ -1875,39 +1664,30 @@ msgstr "Βοηθητικά στοιχεία συστήματος παρακολ�
 msgid "Process Status Information"
 msgstr "Πληροφορίες κατάστασης διαδικασίας"
 
-#: mactrack_utilities.php:491 setup.php:592
+#: mactrack_utilities.php:491 setup.php:809
 #, fuzzy
 msgid "View Device Tracking Process Status"
 msgstr "Προβολή κατάστασης διεργασίας παρακολούθησης συσκευής"
 
 #: mactrack_utilities.php:494
 #, fuzzy
-msgid ""
-"This option will let you show and set process information associated with "
-"the Device Tracking polling process."
-msgstr ""
-"Αυτή η επιλογή θα σας επιτρέψει να εμφανίσετε και να ορίσετε τις πληροφορίες "
-"επεξεργασίας που σχετίζονται με τη διαδικασία διερεύνησης παρακολούθησης "
-"συσκευής."
+msgid "This option will let you show and set process information associated with the Device Tracking polling process."
+msgstr "Αυτή η επιλογή θα σας επιτρέψει να εμφανίσετε και να ορίσετε τις πληροφορίες επεξεργασίας που σχετίζονται με τη διαδικασία διερεύνησης παρακολούθησης συσκευής."
 
 #: mactrack_utilities.php:498
 #, fuzzy
 msgid "Database Administration"
 msgstr "Διαχείριση βάσεων δεδομένων"
 
-#: mactrack_utilities.php:502 setup.php:587
+#: mactrack_utilities.php:502 setup.php:774
 #, fuzzy
 msgid "Perform Database Maintenance"
 msgstr "Εκτελέστε συντήρηση βάσεων δεδομένων"
 
 #: mactrack_utilities.php:505
 #, fuzzy
-msgid ""
-"Deletes expired Port to MAC to IP associations from the database.  Only "
-"records that have expired, based upon your criteria are removed."
-msgstr ""
-"Διαγράφει τις ληγμένες θύρες σε συνδέσεις MAC σε IP από τη βάση δεδομένων. "
-"Μόνο τα αρχεία που έχουν λήξει, βάσει των κριτηρίων σας, καταργούνται."
+msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
+msgstr "Διαγράφει τις ληγμένες θύρες σε συνδέσεις MAC σε IP από τη βάση δεδομένων. Μόνο τα αρχεία που έχουν λήξει, βάσει των κριτηρίων σας, καταργούνται."
 
 #: mactrack_utilities.php:511
 #, fuzzy
@@ -1916,34 +1696,18 @@ msgstr "Ανανέωση της βάσης δεδομένων MAC / OUI προμ
 
 #: mactrack_utilities.php:514
 #, fuzzy
-msgid ""
-"This function will download and install the latest OIU database from the "
-"IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC "
-"Address can be broken into two parts.  The first part of the MAC Addess "
-"contains the Vendor MAC.  The Vendor MAC identifies who manufactured the "
-"part.  This will be helpful in spot checking for rogue devices on your "
-"network."
-msgstr ""
-"Αυτή η λειτουργία θα μεταφορτώσει και θα εγκαταστήσει την τελευταία βάση "
-"δεδομένων OIU από τον ιστότοπο IEEE. Κάθε κάρτα διεπαφής δικτύου (NIC) έχει "
-"μια διεύθυνση MAC. Η διεύθυνση MAC μπορεί να χωριστεί σε δύο μέρη. Το πρώτο "
-"μέρος του MAC Addess περιέχει τον προμηθευτή MAC. Ο προμηθευτής MAC "
-"προσδιορίζει ποιος κατασκευάζει το μέρος. Αυτό θα είναι χρήσιμο για τον "
-"έλεγχο των αχρεωστήτων συσκευών στο δίκτυό σας."
+msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Addess contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
+msgstr "Αυτή η λειτουργία θα μεταφορτώσει και θα εγκαταστήσει την τελευταία βάση δεδομένων OIU από τον ιστότοπο IEEE. Κάθε κάρτα διεπαφής δικτύου (NIC) έχει μια διεύθυνση MAC. Η διεύθυνση MAC μπορεί να χωριστεί σε δύο μέρη. Το πρώτο μέρος του MAC Addess περιέχει τον προμηθευτή MAC. Ο προμηθευτής MAC προσδιορίζει ποιος κατασκευάζει το μέρος. Αυτό θα είναι χρήσιμο για τον έλεγχο των αχρεωστήτων συσκευών στο δίκτυό σας."
 
-#: mactrack_utilities.php:520 setup.php:588
+#: mactrack_utilities.php:520 setup.php:781
 #, fuzzy
 msgid "Refresh Scanning Functions"
 msgstr "Ανανέωση λειτουργιών σάρωσης"
 
 #: mactrack_utilities.php:523
 #, fuzzy
-msgid ""
-"Deletes old and potentially stale Device Tracking scanning functions from "
-"the drop-down you receive when you edit a device type."
-msgstr ""
-"Διαγράφει τις παλιές και δυνητικά παρωχημένες λειτουργίες σάρωσης εντοπισμού "
-"συσκευών από το αναπτυσσόμενο μενού που επεξεργάζεστε σε έναν τύπο συσκευής."
+msgid "Deletes old and potentially stale Device Tracking scanning functions from the drop-down you receive when you edit a device type."
+msgstr "Διαγράφει τις παλιές και δυνητικά παρωχημένες λειτουργίες σάρωσης εντοπισμού συσκευών από το αναπτυσσόμενο μενού που επεξεργάζεστε σε έναν τύπο συσκευής."
 
 #: mactrack_utilities.php:529
 #, fuzzy
@@ -1952,15 +1716,8 @@ msgstr "Αφαίρεση όλων των αποτελεσμάτων σάρωση
 
 #: mactrack_utilities.php:532
 #, fuzzy
-msgid ""
-"Deletes <strong>ALL</strong> Port to MAC to IP associations from the "
-"database all IP Addresses, IP Ranges, and VLANS.  This utility is good when "
-"you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
-msgstr ""
-"Διαγράφει <strong>όλες τις</strong> θύρες σε συνδέσεις MAC σε IP από τη βάση "
-"δεδομένων όλες τις διευθύνσεις IP, IP διευθύνσεις και VLANS. Αυτό το "
-"βοηθητικό πρόγραμμα είναι καλό όταν θέλετε να ξεκινήσετε πάλι. "
-"<strong>ΚΙΝΔΥΝΟΣ: Όλα τα προηγούμενα δεδομένα διαγράφονται.</strong>"
+msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
+msgstr "Διαγράφει <strong>όλες τις</strong> θύρες σε συνδέσεις MAC σε IP από τη βάση δεδομένων όλες τις διευθύνσεις IP, IP διευθύνσεις και VLANS. Αυτό το βοηθητικό πρόγραμμα είναι καλό όταν θέλετε να ξεκινήσετε πάλι. <strong>ΚΙΝΔΥΝΟΣ: Όλα τα προηγούμενα δεδομένα διαγράφονται.</strong>"
 
 #: mactrack_utilities.php:536
 #, fuzzy
@@ -1974,15 +1731,8 @@ msgstr "Καταργήστε όλα τα συγκεντρωτικά αποτελ
 
 #: mactrack_utilities.php:543
 #, fuzzy
-msgid ""
-"Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP "
-"associations from the database.  Data will again be collected on the basis "
-"of <strong>only new</strong> scanned data in the next mactrack poller run."
-msgstr ""
-"Διαγράφει όλα τα <strong>Συγκεντρωμένα</strong> (Αποτελέσματα ανίχνευσης "
-"αποτελεσμάτων) σε MAC σε IP συνδέσεις από τη βάση δεδομένων. Τα δεδομένα θα "
-"συλλεχθούν και πάλι με βάση <strong>μόνο νέα</strong> δεδομένα που έχουν "
-"σαρωθεί στο επόμενο ματράκ πλέγμα."
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
+msgstr "Διαγράφει όλα τα <strong>Συγκεντρωμένα</strong> (Αποτελέσματα ανίχνευσης αποτελεσμάτων) σε MAC σε IP συνδέσεις από τη βάση δεδομένων. Τα δεδομένα θα συλλεχθούν και πάλι με βάση <strong>μόνο νέα</strong> δεδομένα που έχουν σαρωθεί στο επόμενο ματράκ πλέγμα."
 
 #: mactrack_utilities.php:549
 #, fuzzy
@@ -1991,14 +1741,8 @@ msgstr "Εκτελέστε την επαναδημιουργία συγκεντ�
 
 #: mactrack_utilities.php:552
 #, fuzzy
-msgid ""
-"Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP "
-"associations from the database and their re-creation based on <strong>All "
-"scaned data</strong> now."
-msgstr ""
-"Διαγράφει όλα τα <strong>συσσωρευμένα</strong> (μη σαρωτά αποτελέσματα) θύρα "
-"σε συνδέσεις MAC σε IP από τη βάση δεδομένων και την εκ νέου δημιουργία τους "
-"με βάση <strong>όλα τα δεδομένα σάρωσης</strong> τώρα."
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scaned data</strong> now."
+msgstr "Διαγράφει όλα τα <strong>συσσωρευμένα</strong> (μη σαρωτά αποτελέσματα) θύρα σε συνδέσεις MAC σε IP από τη βάση δεδομένων και την εκ νέου δημιουργία τους με βάση <strong>όλα τα δεδομένα σάρωσης</strong> τώρα."
 
 #: mactrack_vendormacs.php:139
 #, fuzzy
@@ -2020,7 +1764,7 @@ msgstr "Εταιρεία"
 msgid "Address"
 msgstr "Από διεύθυνση email"
 
-#: mactrack_vendormacs.php:160 setup.php:719
+#: mactrack_vendormacs.php:160 setup.php:960
 #, fuzzy
 msgid "Vendor Macs"
 msgstr "Προμηθευτές Mac"
@@ -2035,35 +1779,35 @@ msgstr "Δεν βρέθηκε MACS προμηθευτή παρακολούθησ
 msgid "Device Tracking - ARP/IP View"
 msgstr "Παρακολούθηση συσκευών - Προβολή ARP / IP"
 
-#: mactrack_view_arp.php:303 mactrack_view_dot1x.php:395
-#: mactrack_view_dot1x.php:410 mactrack_view_macs.php:654
+#: mactrack_view_arp.php:303 mactrack_view_dot1x.php:397
+#: mactrack_view_dot1x.php:411 mactrack_view_macs.php:654
 #: mactrack_view_macs.php:669 mactrack_view_macs.php:794
 #, fuzzy
 msgid "Switch Name"
 msgstr "Αλλαγή ονόματος"
 
-#: mactrack_view_arp.php:304 mactrack_view_dot1x.php:396
-#: mactrack_view_dot1x.php:411 mactrack_view_macs.php:655
+#: mactrack_view_arp.php:304 mactrack_view_dot1x.php:398
+#: mactrack_view_dot1x.php:412 mactrack_view_macs.php:655
 #: mactrack_view_macs.php:670 mactrack_view_macs.php:795
 #, fuzzy
 msgid "Switch Hostname"
 msgstr "Αλλαγή ονόματος κεντρικού υπολογιστή"
 
-#: mactrack_view_arp.php:305 mactrack_view_dot1x.php:398
-#: mactrack_view_dot1x.php:413 mactrack_view_macs.php:656
+#: mactrack_view_arp.php:305 mactrack_view_dot1x.php:400
+#: mactrack_view_dot1x.php:414 mactrack_view_macs.php:656
 #: mactrack_view_macs.php:671 mactrack_view_macs.php:796
 #, fuzzy
 msgid "ED IP Address"
 msgstr "ED διεύθυνση IP"
 
-#: mactrack_view_arp.php:311 mactrack_view_dot1x.php:399
+#: mactrack_view_arp.php:311 mactrack_view_dot1x.php:401
 #: mactrack_view_macs.php:657 mactrack_view_macs.php:800
 #, fuzzy
 msgid "ED DNS Hostname"
 msgstr "Όνομα κεντρικού υπολογιστή DN DNS"
 
-#: mactrack_view_arp.php:316 mactrack_view_dot1x.php:400
-#: mactrack_view_dot1x.php:414 mactrack_view_macs.php:658
+#: mactrack_view_arp.php:316 mactrack_view_dot1x.php:402
+#: mactrack_view_dot1x.php:415 mactrack_view_macs.php:658
 #: mactrack_view_macs.php:672 mactrack_view_macs.php:804
 #, fuzzy
 msgid "ED MAC Address"
@@ -2075,14 +1819,13 @@ msgstr "ED MAC διεύθυνση"
 msgid "Vendor Name"
 msgstr "Ονομα πωλητή"
 
-#: mactrack_view_arp.php:318 mactrack_view_dot1x.php:401
-#: mactrack_view_dot1x.php:415 mactrack_view_macs.php:660
+#: mactrack_view_arp.php:318 mactrack_view_macs.php:660
 #: mactrack_view_macs.php:674 mactrack_view_macs.php:806
 #, fuzzy
 msgid "Port Number"
 msgstr "Αριθμός θύρας"
 
-#: mactrack_view_arp.php:319 mactrack_view_dot1x.php:402
+#: mactrack_view_arp.php:319 mactrack_view_dot1x.php:403
 #: mactrack_view_dot1x.php:416 mactrack_view_macs.php:661
 #: mactrack_view_macs.php:675 mactrack_view_macs.php:807
 #, fuzzy
@@ -2104,8 +1847,8 @@ msgstr "Πρέπει πρώτα να επιλέξετε ένα Site, Device ή �
 msgid "No Device Tracking IP Results Found"
 msgstr "Δεν βρέθηκαν αποτελέσματα IP παρακολούθησης συσκευών"
 
-#: mactrack_view_arp.php:399 mactrack_view_dot1x.php:524
-#: mactrack_view_interfaces.php:485 mactrack_view_macs.php:932
+#: mactrack_view_arp.php:399 mactrack_view_dot1x.php:527
+#: mactrack_view_interfaces.php:582 mactrack_view_macs.php:932
 #, fuzzy
 msgid "Device"
 msgstr "Συσκευή"
@@ -2115,13 +1858,13 @@ msgstr "Συσκευή"
 msgid "IP's"
 msgstr "IP"
 
-#: mactrack_view_arp.php:451 mactrack_view_dot1x.php:582
+#: mactrack_view_arp.php:451 mactrack_view_dot1x.php:585
 #: mactrack_view_macs.php:984
 #, fuzzy
 msgid "IP"
 msgstr "IP"
 
-#: mactrack_view_arp.php:468 mactrack_view_dot1x.php:632
+#: mactrack_view_arp.php:468 mactrack_view_dot1x.php:646
 #: mactrack_view_macs.php:1053
 #, fuzzy
 msgid "MAC"
@@ -2137,38 +1880,38 @@ msgstr "Παρακολούθηση συσκευής - Προβολή αναφο�
 msgid "Unknown Device Type"
 msgstr "Άγνωστος τύπος συσκευής"
 
-#: mactrack_view_devices.php:274
+#: mactrack_view_devices.php:312
 #, fuzzy
 msgid "Total VLAN's"
 msgstr "Σύνολο VLAN's"
 
-#: mactrack_view_devices.php:315
+#: mactrack_view_devices.php:357
 #, fuzzy
 msgid "Edit Device"
 msgstr "Διακόψτε τη συσκευή"
 
-#: mactrack_view_devices.php:318
+#: mactrack_view_devices.php:363
 #, fuzzy
 msgid "View Graphs"
 msgstr "Γραφήματα"
 
-#: mactrack_view_devices.php:320
+#: mactrack_view_devices.php:365
 #, fuzzy
 msgid "Device Not Mapped to Cacti Device"
 msgstr "Συγχρονίστε τη συσκευή εντοπισμού συσκευής στη συσκευή Cacti"
 
-#: mactrack_view_devices.php:322 mactrack_view_ips.php:218
-#: mactrack_view_sites.php:277 mactrack_view_sites.php:339
+#: mactrack_view_devices.php:371 mactrack_view_ips.php:218
+#: mactrack_view_sites.php:308 mactrack_view_sites.php:403
 #, fuzzy
 msgid "View MAC Addresses"
 msgstr "Διευθύνσεις MAC"
 
-#: mactrack_view_devices.php:343
+#: mactrack_view_devices.php:397
 #, fuzzy
 msgid "No Device Tracking Devices Found"
 msgstr "Δεν βρέθηκαν συσκευές εντοπισμού συσκευών"
 
-#: mactrack_view_devices.php:403
+#: mactrack_view_devices.php:457
 #, fuzzy
 msgid "Hub/Switch"
 msgstr "Hub / Διακόπτης"
@@ -2178,13 +1921,13 @@ msgstr "Hub / Διακόπτης"
 msgid "Device Tracking - 802.1x View"
 msgstr "Παρακολούθηση συσκευών - Προβολή 802.1x"
 
-#: mactrack_view_dot1x.php:403 mactrack_view_dot1x.php:417
-#: mactrack_view_dot1x.php:647
+#: mactrack_view_dot1x.php:404 mactrack_view_dot1x.php:417
+#: mactrack_view_dot1x.php:661
 #, fuzzy
 msgid "Domain"
 msgstr "Domain"
 
-#: mactrack_view_dot1x.php:405 mactrack_view_dot1x.php:419
+#: mactrack_view_dot1x.php:406 mactrack_view_dot1x.php:419
 #: mactrack_view_macs.php:664 mactrack_view_macs.php:678
 #: mactrack_view_macs.php:813 mactrack_view_macs.php:815
 #, fuzzy
@@ -2201,42 +1944,47 @@ msgstr "802.1x συνεδρίες"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "Δεν βρέθηκαν εντολές παρακολούθησης συσκευών 802.1x συνεδρίες"
 
-#: mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
 #, fuzzy
 msgid "Authorization Success"
 msgstr "Επιτυχία εξουσιοδότησης"
 
-#: mactrack_view_dot1x.php:557
+#: mactrack_view_dot1x.php:486
+#, fuzzy
+msgid "Dot1x Scan Results"
+msgstr "Scanner Dot1x"
+
+#: mactrack_view_dot1x.php:560
 #, fuzzy
 msgid "Sessions"
 msgstr "Συνδέσεις"
 
-#: mactrack_view_dot1x.php:601
+#: mactrack_view_dot1x.php:606
 #, fuzzy
 msgid "Any Status"
 msgstr "Όλες οι καταστάσεις"
 
-#: mactrack_view_dot1x.php:612 mactrack_view_macs.php:1032
+#: mactrack_view_dot1x.php:623 mactrack_view_macs.php:1032
 #, fuzzy
 msgid "Show"
 msgstr "Εμφάνιση"
 
-#: mactrack_view_dot1x.php:617 mactrack_view_macs.php:1037
+#: mactrack_view_dot1x.php:628 mactrack_view_macs.php:1037
 #, fuzzy
 msgid "Most Recent"
 msgstr "Πιο Πρόσφατα"
 
-#: mactrack_view_dot1x.php:652
+#: mactrack_view_dot1x.php:666
 #, fuzzy
 msgid "DATA"
 msgstr "Ημερομηνία"
 
-#: mactrack_view_dot1x.php:653
+#: mactrack_view_dot1x.php:667
 #, fuzzy
 msgid "VOICE"
 msgstr "ΦΩΝΗ"
 
-#: mactrack_view_dot1x.php:659 mactrack_view_macs.php:1080
+#: mactrack_view_dot1x.php:673 mactrack_view_macs.php:1080
 #, fuzzy
 msgid "Portname"
 msgstr "Portname"
@@ -2249,215 +1997,219 @@ msgstr "Παρακολούθηση συσκευών - Προβολή γραφή�
 #: mactrack_view_graphs.php:70
 #, fuzzy
 msgid "Custom Graph List Applied - Filtering from List"
-msgstr ""
-"Προσαρμοσμένη λίστα προσαρμοσμένων γραφημάτων - Φιλτράρισμα από τη λίστα"
+msgstr "Προσαρμοσμένη λίστα προσαρμοσμένων γραφημάτων - Φιλτράρισμα από τη λίστα"
 
 #: mactrack_view_interfaces.php:30
 #, fuzzy
 msgid "Device Tracking - Network Interfaces View"
 msgstr "Παρακολούθηση συσκευών - Προβολή διεπαφών δικτύου"
 
-#: mactrack_view_interfaces.php:320
+#: mactrack_view_interfaces.php:324
 #, fuzzy
 msgid "No Device Tracking Interfaces Found"
 msgstr "Δεν βρέθηκαν διεπαφές εντοπισμού συσκευών"
 
-#: mactrack_view_interfaces.php:333
+#: mactrack_view_interfaces.php:337
 #, fuzzy
 msgid "Interface Up"
 msgstr "Διασύνδεση προς τα επάνω"
 
-#: mactrack_view_interfaces.php:334
+#: mactrack_view_interfaces.php:338
 #, fuzzy
 msgid "No Alias"
 msgstr "Δεν υπάρχει ψευδώνυμο"
 
-#: mactrack_view_interfaces.php:335
+#: mactrack_view_interfaces.php:339
 #, fuzzy
 msgid "Errors Present"
 msgstr "Προσωπικά σφάλματα"
 
-#: mactrack_view_interfaces.php:336
+#: mactrack_view_interfaces.php:340
 #, fuzzy
 msgid "Discards Present"
 msgstr "Απορρίμματα Παρόν"
 
-#: mactrack_view_interfaces.php:337
+#: mactrack_view_interfaces.php:341
 #, fuzzy
 msgid "No Graphs"
 msgstr "Δεν υπάρχουν γραφήματα"
 
-#: mactrack_view_interfaces.php:338
+#: mactrack_view_interfaces.php:342
 #, fuzzy
 msgid "Interface Down"
 msgstr "Διασύνδεση προς τα κάτω"
 
-#: mactrack_view_interfaces.php:358 setup.php:862
+#: mactrack_view_interfaces.php:352
+#, fuzzy
+msgid "Interface Scan Results"
+msgstr "Αφαίρεση όλων των αποτελεσμάτων σάρωσης"
+
+#: mactrack_view_interfaces.php:372 setup.php:1103
 #, fuzzy
 msgid "Name"
 msgstr "Όνομα"
 
-#: mactrack_view_interfaces.php:359 setup.php:749
+#: mactrack_view_interfaces.php:376 setup.php:990
 #, fuzzy
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: mactrack_view_interfaces.php:360
+#: mactrack_view_interfaces.php:380
 #, fuzzy
 msgid "Alias"
 msgstr "Ψευδώνυμο"
 
-#: mactrack_view_interfaces.php:361
+#: mactrack_view_interfaces.php:384
 #, fuzzy
 msgid "InBound %"
 msgstr "Εισερχόμενος %"
 
-#: mactrack_view_interfaces.php:362
+#: mactrack_view_interfaces.php:389
 #, fuzzy
 msgid "OutBound %"
 msgstr "OutBound%"
 
-#: mactrack_view_interfaces.php:363
+#: mactrack_view_interfaces.php:394
 #, fuzzy
 msgid "In (B/S)"
 msgstr "Στο (B / S)"
 
-#: mactrack_view_interfaces.php:364
+#: mactrack_view_interfaces.php:399
 #, fuzzy
 msgid "Out (B/S)"
 msgstr "Out (B / S)"
 
-#: mactrack_view_interfaces.php:367
+#: mactrack_view_interfaces.php:408
 #, fuzzy
 msgid "In Err Total"
 msgstr "Στο Err Total"
 
-#: mactrack_view_interfaces.php:368
+#: mactrack_view_interfaces.php:413
 #, fuzzy
 msgid "In Disc Total"
 msgstr "Στο δίσκο Total"
 
-#: mactrack_view_interfaces.php:369
+#: mactrack_view_interfaces.php:418
 #, fuzzy
 msgid "UProto Total"
 msgstr "Συνολικά συνολικά"
 
-#: mactrack_view_interfaces.php:370
+#: mactrack_view_interfaces.php:423
 #, fuzzy
 msgid "Out Err Total"
 msgstr "Out Err Σύνολο"
 
-#: mactrack_view_interfaces.php:371
+#: mactrack_view_interfaces.php:428
 #, fuzzy
 msgid "Out Disc Total"
 msgstr "Out Disc Σύνολο"
 
-#: mactrack_view_interfaces.php:373
+#: mactrack_view_interfaces.php:436
 #, fuzzy
 msgid "In Err (E/S)"
 msgstr "Στο Err (E / S)"
 
-#: mactrack_view_interfaces.php:374
+#: mactrack_view_interfaces.php:441
 #, fuzzy
 msgid "In Disc (D/S)"
 msgstr "Στο δίσκο (D / S)"
 
-#: mactrack_view_interfaces.php:375
+#: mactrack_view_interfaces.php:446
 #, fuzzy
 msgid "UProto (UP/S)"
 msgstr "UProto (UP / S)"
 
-#: mactrack_view_interfaces.php:376
+#: mactrack_view_interfaces.php:451
 #, fuzzy
 msgid "Out Err (OE/S)"
 msgstr "Έξοδος Err (OE / S)"
 
-#: mactrack_view_interfaces.php:377
+#: mactrack_view_interfaces.php:456
 #, fuzzy
 msgid "Out Disc (OD/S)"
 msgstr "Δίσκος εξόδου (OD / S)"
 
-#: mactrack_view_interfaces.php:381
+#: mactrack_view_interfaces.php:470
 #, fuzzy
 msgid "Last Change"
 msgstr "Τελευταία αλλαγή"
 
-#: mactrack_view_interfaces.php:382
+#: mactrack_view_interfaces.php:475
 #, fuzzy
 msgid "Last Scanned"
 msgstr "Τελευταία σάρωση"
 
-#: mactrack_view_interfaces.php:413
+#: mactrack_view_interfaces.php:510
 #, fuzzy
 msgid "Filters"
 msgstr "Φίλτρα"
 
-#: mactrack_view_interfaces.php:417
+#: mactrack_view_interfaces.php:514
 #, fuzzy
 msgid "All Interfaces"
 msgstr "Όλες οι διεπαφές"
 
-#: mactrack_view_interfaces.php:418
+#: mactrack_view_interfaces.php:515
 #, fuzzy
 msgid "All Non-Ignored Interfaces"
 msgstr "Όλες οι μη παρεμποδισμένες διεπαφές"
 
-#: mactrack_view_interfaces.php:419
+#: mactrack_view_interfaces.php:516
 #, fuzzy
 msgid "All Ignored Interfaces"
 msgstr "Όλες οι παραβλέπονται διεπαφές"
 
-#: mactrack_view_interfaces.php:420
+#: mactrack_view_interfaces.php:517
 #, fuzzy, php-format
 msgid "High In/Out Utilization > %d &#37;"
 msgstr "Υψηλή απόδοση εισόδου / εξόδου&gt;% d%"
 
-#: mactrack_view_interfaces.php:421
+#: mactrack_view_interfaces.php:518
 #, fuzzy, php-format
 msgid "High In Utilization > %d &#37;"
 msgstr "Υψηλή χρήση&gt;% d%"
 
-#: mactrack_view_interfaces.php:422
+#: mactrack_view_interfaces.php:519
 #, fuzzy, php-format
 msgid "High Out Utilization > %d &#37;"
 msgstr "Υψηλή απόδοση χρήσης&gt;% d%"
 
-#: mactrack_view_interfaces.php:423
+#: mactrack_view_interfaces.php:520
 #, fuzzy
 msgid "With Issues"
 msgstr "Με θέματα"
 
-#: mactrack_view_interfaces.php:424
+#: mactrack_view_interfaces.php:521
 #, fuzzy
 msgid "Up Interfaces"
 msgstr "Up Interfaces"
 
-#: mactrack_view_interfaces.php:425
+#: mactrack_view_interfaces.php:522
 #, fuzzy
 msgid "Up Interfaces No Alias"
 msgstr "Up Interfaces Δεν υπάρχει ψευδώνυμο"
 
-#: mactrack_view_interfaces.php:426
+#: mactrack_view_interfaces.php:523
 #, fuzzy
 msgid "Errors Accumulating"
 msgstr "Σφάλματα συσσώρευσης"
 
-#: mactrack_view_interfaces.php:427
+#: mactrack_view_interfaces.php:524
 #, fuzzy
 msgid "Discards Accumulating"
 msgstr "Απορρίψεις Συσσωρεύονται"
 
-#: mactrack_view_interfaces.php:428
+#: mactrack_view_interfaces.php:525
 #, fuzzy
 msgid "Changed in Last Day"
 msgstr "Αλλαγή στην τελευταία μέρα"
 
-#: mactrack_view_interfaces.php:431
+#: mactrack_view_interfaces.php:528
 #, fuzzy
 msgid "Bandwidth"
 msgstr "εύρος ζώνης"
 
-#: mactrack_view_interfaces.php:537
+#: mactrack_view_interfaces.php:634
 #, fuzzy
 msgid "Show Totals"
 msgstr "Εμφάνιση αθροισμάτων"
@@ -2497,13 +2249,13 @@ msgstr "Μέγιστη ημερομηνία"
 msgid "IP Address Ranges"
 msgstr "IP διευθύνσεις"
 
-#: mactrack_view_ips.php:217 mactrack_view_sites.php:270
-#: mactrack_view_sites.php:334
+#: mactrack_view_ips.php:217 mactrack_view_sites.php:296
+#: mactrack_view_sites.php:396
 #, fuzzy
 msgid "Edit Site"
 msgstr "Ιστοσελίδα"
 
-#: mactrack_view_ips.php:219 mactrack_view_sites.php:276
+#: mactrack_view_ips.php:219 mactrack_view_sites.php:306
 #, fuzzy
 msgid "View IP Addresses"
 msgstr "Τρέχουσες διευθύνσεις IP"
@@ -2530,26 +2282,18 @@ msgstr "Ανάκληση"
 
 #: mactrack_view_macs.php:117
 #, fuzzy, php-format
-msgid ""
-"The following MAC Addresses Could not be revoked because they are members of "
-"Group Authorizations %s"
-msgstr ""
-"Οι ακόλουθες διευθύνσεις MAC δεν μπορούν να ανακληθούν επειδή είναι μέλη των "
-"εξουσιοδοτήσεων ομάδας %s"
+msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
+msgstr "Οι ακόλουθες διευθύνσεις MAC δεν μπορούν να ανακληθούν επειδή είναι μέλη των εξουσιοδοτήσεων ομάδας %s"
 
 #: mactrack_view_macs.php:158
 #, fuzzy
 msgid "Click 'Continue' to Authorize the following MAC Addresses."
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να εξουσιοδοτήσετε τις παρακάτω "
-"διευθύνσεις MAC."
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να εξουσιοδοτήσετε τις παρακάτω διευθύνσεις MAC."
 
 #: mactrack_view_macs.php:165
 #, fuzzy
 msgid "Click 'Continue' to Revoke the following MAC Addresses."
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να καταργήσετε τις ακόλουθες "
-"διευθύνσεις MAC."
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να καταργήσετε τις ακόλουθες διευθύνσεις MAC."
 
 #: mactrack_view_macs.php:172
 #, fuzzy
@@ -2579,9 +2323,7 @@ msgstr "Δεν επιτρέπεται η διαγραφή σειρών."
 #: mactrack_view_macs.php:264
 #, fuzzy
 msgid "Click 'Continue' to Delete the following rows from Aggregated table."
-msgstr ""
-"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τις ακόλουθες σειρές "
-"από τον πίνακα \"Συγκεντρωμένοι\"."
+msgstr "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τις ακόλουθες σειρές από τον πίνακα \"Συγκεντρωμένοι\"."
 
 #: mactrack_view_macs.php:662 mactrack_view_macs.php:676
 #: mactrack_view_macs.php:808
@@ -2603,8 +2345,7 @@ msgstr "Διευθύνσεις MAC"
 #: mactrack_view_macs.php:738
 #, fuzzy
 msgid "You must choose a Site, Device or other search criteria."
-msgstr ""
-"Πρέπει να επιλέξετε έναν ιστότοπο, μια συσκευή ή άλλα κριτήρια αναζήτησης."
+msgstr "Πρέπει να επιλέξετε έναν ιστότοπο, μια συσκευή ή άλλα κριτήρια αναζήτησης."
 
 #: mactrack_view_macs.php:740 mactrack_view_macs.php:883
 #, fuzzy
@@ -2641,23 +2382,33 @@ msgstr "Όχι"
 msgid "Device Tracking - Site Report View"
 msgstr "Παρακολούθηση συσκευών - προβολή αναφοράς ιστότοπου"
 
-#: mactrack_view_sites.php:271
+#: mactrack_view_sites.php:297
 #, fuzzy
 msgid "Rescan Site"
 msgstr "Εγκαταστήστε ξανά τη συσκευή"
 
-#: mactrack_view_sites.php:274 mactrack_view_sites.php:337
+#: mactrack_view_sites.php:302 mactrack_view_sites.php:401
 #, fuzzy
 msgid "View Devices"
 msgstr "Τύπος Συσκευής"
 
-#: mactrack_view_sites.php:275 mactrack_view_sites.php:338
+#: mactrack_view_sites.php:304 mactrack_view_sites.php:402
 #, fuzzy
 msgid "View IP Ranges"
 msgstr "IP Περιθώρια"
 
-#: setup.php:244 setup.php:715 setup.php:716 setup.php:717 setup.php:718
-#: setup.php:719 setup.php:728 setup.php:730
+#: mactrack_view_sites.php:385
+#, fuzzy
+msgid "Sites / Device Types"
+msgstr "Τύποι συσκευών"
+
+#: mactrack_view_sites.php:434
+#, fuzzy
+msgid "Site Scan Results"
+msgstr "Αφαίρεση όλων των αποτελεσμάτων σάρωσης"
+
+#: setup.php:244 setup.php:956 setup.php:957 setup.php:958 setup.php:959
+#: setup.php:960 setup.php:969 setup.php:971
 #, fuzzy
 msgid "Device Tracking"
 msgstr "Παρακολούθηση συσκευών"
@@ -2674,12 +2425,8 @@ msgstr "Συχνότητα σάρωσης"
 
 #: setup.php:253
 #, fuzzy
-msgid ""
-"Choose when to collect MAC and IP Addresses and Interface statistics from "
-"your network devices."
-msgstr ""
-"Επιλέξτε πότε πρέπει να συλλέξετε στατιστικά στοιχεία διευθύνσεων MAC και IP "
-"και στατιστικών διεπαφών από τις συσκευές δικτύου."
+msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
+msgstr "Επιλέξτε πότε πρέπει να συλλέξετε στατιστικά στοιχεία διευθύνσεων MAC και IP και στατιστικών διεπαφών από τις συσκευές δικτύου."
 
 #: setup.php:259
 #, fuzzy
@@ -2688,12 +2435,8 @@ msgstr "Συγχρονισμένες διαδικασίες"
 
 #: setup.php:260
 #, fuzzy
-msgid ""
-"Specify how many devices will be polled simultaneously until all devices "
-"have been polled."
-msgstr ""
-"Καθορίστε πόσες συσκευές θα ερωτηθούν ταυτόχρονα μέχρι να ερωτηθούν όλες οι "
-"συσκευές."
+msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
+msgstr "Καθορίστε πόσες συσκευές θα ερωτηθούν ταυτόχρονα μέχρι να ερωτηθούν όλες οι συσκευές."
 
 #: setup.php:267
 #, fuzzy
@@ -2702,14 +2445,8 @@ msgstr "Max Runtime σαρωτή"
 
 #: setup.php:268
 #, fuzzy
-msgid ""
-"Specify the number of minutes a device scanning function will be allowed to "
-"run prior to the system assuming it has been completed.  This setting will "
-"correct for abended scanning jobs."
-msgstr ""
-"Καθορίστε τον αριθμό των λεπτών που θα επιτρέπεται η εκτέλεση μιας "
-"λειτουργίας σάρωσης συσκευής πριν από το σύστημα, υποθέτοντας ότι έχει "
-"ολοκληρωθεί. Αυτή η ρύθμιση θα διορθώσει τις εργασίες απομάκρυνσης σάρωσης."
+msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
+msgstr "Καθορίστε τον αριθμό των λεπτών που θα επιτρέπεται η εκτέλεση μιας λειτουργίας σάρωσης συσκευής πριν από το σύστημα, υποθέτοντας ότι έχει ολοκληρωθεί. Αυτή η ρύθμιση θα διορθώσει τις εργασίες απομάκρυνσης σάρωσης."
 
 #: setup.php:275
 #, fuzzy
@@ -2718,14 +2455,8 @@ msgstr "Ώρα έναρξης συλλογής δεδομένων"
 
 #: setup.php:276
 #, fuzzy
-msgid ""
-"When would you like the first data collection to take place.  All future "
-"data collection times will be based upon this start time.  A good example "
-"would be 12:00AM."
-msgstr ""
-"Πότε θα θέλατε να πραγματοποιηθεί η πρώτη συλλογή δεδομένων. Όλοι οι "
-"μελλοντικοί χρόνοι συλλογής δεδομένων θα βασίζονται σε αυτήν την ώρα "
-"έναρξης. Ένα καλό παράδειγμα θα ήταν η ώρα 12:00 π.μ."
+msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
+msgstr "Πότε θα θέλατε να πραγματοποιηθεί η πρώτη συλλογή δεδομένων. Όλοι οι μελλοντικοί χρόνοι συλλογής δεδομένων θα βασίζονται σε αυτήν την ώρα έναρξης. Ένα καλό παράδειγμα θα ήταν η ώρα 12:00 π.μ."
 
 #: setup.php:283
 #, fuzzy
@@ -2734,14 +2465,8 @@ msgstr "Χρόνος συντήρησης βάσης δεδομένων"
 
 #: setup.php:284
 #, fuzzy
-msgid ""
-"When should old database records be removed from the database.  Please note "
-"that no access will be permitted to the port database while this action is "
-"taking place."
-msgstr ""
-"Πότε πρέπει να καταργηθούν οι παλιές εγγραφές βάσης δεδομένων από τη βάση "
-"δεδομένων. Λάβετε υπόψη ότι δεν επιτρέπεται η πρόσβαση στη βάση δεδομένων "
-"θύρας κατά τη διάρκεια αυτής της ενέργειας."
+msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
+msgstr "Πότε πρέπει να καταργηθούν οι παλιές εγγραφές βάσης δεδομένων από τη βάση δεδομένων. Λάβετε υπόψη ότι δεν επιτρέπεται η πρόσβαση στη βάση δεδομένων θύρας κατά τη διάρκεια αυτής της ενέργειας."
 
 #: setup.php:291
 msgid "Confirm Utilities Prompt"
@@ -2759,9 +2484,7 @@ msgstr "Διατήρηση Δεδομένων"
 #: setup.php:298
 #, fuzzy
 msgid "How long should port MAC details be retained in the database."
-msgstr ""
-"Πόσο καιρό θα πρέπει να διατηρηθούν στη βάση δεδομένων λεπτομέρειες της "
-"θύρας MAC."
+msgstr "Πόσο καιρό θα πρέπει να διατηρηθούν στη βάση δεδομένων λεπτομέρειες της θύρας MAC."
 
 #: setup.php:304
 #, fuzzy
@@ -2770,12 +2493,8 @@ msgstr "Επίπεδο διακόπτη Ignore Ports Delimiter"
 
 #: setup.php:305
 #, fuzzy
-msgid ""
-"What delimiter should Device Tracking use when parsing the Ignore Ports "
-"string for each switch."
-msgstr ""
-"Τι οριοθέτης πρέπει να χρησιμοποιεί η εντολή Tracking κατά την ανάλυση της "
-"συμβολοσειράς Ignore Ports για κάθε διακόπτη."
+msgid "What delimiter should Device Tracking use when parsing the Ignore Ports string for each switch."
+msgstr "Τι οριοθέτης πρέπει να χρησιμοποιεί η εντολή Tracking κατά την ανάλυση της συμβολοσειράς Ignore Ports για κάθε διακόπτη."
 
 #: setup.php:309
 #, fuzzy
@@ -2812,19 +2531,15 @@ msgstr "Πώς πρέπει να οριοθετείται κάθε οκτάδα 
 msgid "Dash [-]"
 msgstr "Dash [-]"
 
-#: setup.php:324 setup.php:1058
+#: setup.php:324 setup.php:1299
 #, fuzzy
 msgid "Ports to Ignore"
 msgstr "Θύρες για Ignore"
 
 #: setup.php:325
 #, fuzzy
-msgid ""
-"Provide a regular expression of ifNames or ifDescriptions of ports to ignore "
-"in the interface list.  For example, (Vlan|Loopback|Null)."
-msgstr ""
-"Παρέχετε μια κανονική έκφραση ifNames ή ifDescriptions των θυρών που "
-"αγνοούνται στη λίστα διεπαφών. Για παράδειγμα, (Vlan | Loopback | Null)."
+msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
+msgstr "Παρέχετε μια κανονική έκφραση ifNames ή ifDescriptions των θυρών που αγνοούνται στη λίστα διεπαφών. Για παράδειγμα, (Vlan | Loopback | Null)."
 
 #: setup.php:332
 #, fuzzy
@@ -2833,12 +2548,8 @@ msgstr "Όριο χρήσης εύρους ζώνης"
 
 #: setup.php:333
 #, fuzzy
-msgid ""
-"When reviewing network interface statistics, what bandwidth threshold do you "
-"want to view by default."
-msgstr ""
-"Κατά την εξέταση των στατιστικών στοιχείων διεπαφής δικτύου, ποιο είναι το "
-"όριο εύρους ζώνης που θέλετε να προβάλετε από προεπιλογή."
+msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
+msgstr "Κατά την εξέταση των στατιστικών στοιχείων διεπαφής δικτύου, ποιο είναι το όριο εύρους ζώνης που θέλετε να προβάλετε από προεπιλογή."
 
 #: setup.php:338 setup.php:339 setup.php:340 setup.php:341 setup.php:342
 #: setup.php:343 setup.php:344 setup.php:345 setup.php:346
@@ -2858,14 +2569,8 @@ msgstr "Εκτελέστε αντίστροφη αντιστοίχιση ονο�
 
 #: setup.php:355
 #, fuzzy
-msgid ""
-"Should Device Tracking perform reverse DNS lookup of the IP addresses "
-"associated with ports. CAUTION: If DNS is not properly setup, this will slow "
-"scan time significantly."
-msgstr ""
-"Εάν η παρακολούθηση συσκευών πραγματοποιεί αντίστροφη αναζήτηση DNS των "
-"διευθύνσεων IP που σχετίζονται με τις θύρες. ΠΡΟΣΟΧΗ: Εάν το DNS δεν είναι "
-"σωστά ρυθμισμένο, αυτό θα επιβραδύνει σημαντικά τον χρόνο σάρωσης."
+msgid "Should Device Tracking perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
+msgstr "Εάν η παρακολούθηση συσκευών πραγματοποιεί αντίστροφη αναζήτηση DNS των διευθύνσεων IP που σχετίζονται με τις θύρες. ΠΡΟΣΟΧΗ: Εάν το DNS δεν είναι σωστά ρυθμισμένο, αυτό θα επιβραδύνει σημαντικά τον χρόνο σάρωσης."
 
 #: setup.php:360
 #, fuzzy
@@ -2875,9 +2580,7 @@ msgstr "Πρωτεύουσα διεύθυνση IP DNS"
 #: setup.php:361
 #, fuzzy
 msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
-msgstr ""
-"Καταχωρίστε την κύρια διεύθυνση IP DNS για να χρησιμοποιήσετε για αντίστροφη "
-"αναζήτηση."
+msgstr "Καταχωρίστε την κύρια διεύθυνση IP DNS για να χρησιμοποιήσετε για αντίστροφη αναζήτηση."
 
 #: setup.php:368
 #, fuzzy
@@ -2887,9 +2590,7 @@ msgstr "Δευτερεύουσα διεύθυνση IP DNS"
 #: setup.php:369
 #, fuzzy
 msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
-msgstr ""
-"Εισαγάγετε τη δευτερεύουσα διεύθυνση IP DNS που θέλετε να χρησιμοποιήσετε "
-"για αντίστροφες αναζητήσεις."
+msgstr "Εισαγάγετε τη δευτερεύουσα διεύθυνση IP DNS που θέλετε να χρησιμοποιήσετε για αντίστροφες αναζητήσεις."
 
 #: setup.php:376
 #, fuzzy
@@ -2898,13 +2599,8 @@ msgstr "DNS Timeout"
 
 #: setup.php:377
 #, fuzzy
-msgid ""
-"Please enter the DNS timeout in milliseconds.  Device Tracking uses a PHP "
-"based DNS resolver."
-msgstr ""
-"Καταχωρίστε το χρονικό όριο του DNS σε χιλιοστά του δευτερολέπτου. Η "
-"Παρακολούθηση συσκευών χρησιμοποιεί έναν διαχωριστή DNS που βασίζεται στην "
-"PHP."
+msgid "Please enter the DNS timeout in milliseconds.  Device Tracking uses a PHP based DNS resolver."
+msgstr "Καταχωρίστε το χρονικό όριο του DNS σε χιλιοστά του δευτερολέπτου. Η Παρακολούθηση συσκευών χρησιμοποιεί έναν διαχωριστή DNS που βασίζεται στην PHP."
 
 #: setup.php:384
 #, fuzzy
@@ -2913,15 +2609,8 @@ msgstr "Πρωτεύον διάστημα DNS"
 
 #: setup.php:385
 #, fuzzy
-msgid ""
-"How often, in seconds do Device Tracking scanning IP's need to be resolved "
-"to MAC addresses for DNS resolution.  Using a larger number when you have "
-"several thousand devices will increase performance."
-msgstr ""
-"Πόσο συχνά, σε δευτερόλεπτα, πρέπει να επιλυθεί η παρακολούθηση συσκευής "
-"παρακολούθησης συσκευών IP για διευθύνσεις MAC για ανάλυση DNS. "
-"Χρησιμοποιώντας μεγαλύτερο αριθμό όταν έχετε πολλές χιλιάδες συσκευές, θα "
-"αυξήσετε την απόδοση."
+msgid "How often, in seconds do Device Tracking scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
+msgstr "Πόσο συχνά, σε δευτερόλεπτα, πρέπει να επιλυθεί η παρακολούθηση συσκευής παρακολούθησης συσκευών IP για διευθύνσεις MAC για ανάλυση DNS. Χρησιμοποιώντας μεγαλύτερο αριθμό όταν έχετε πολλές χιλιάδες συσκευές, θα αυξήσετε την απόδοση."
 
 #: setup.php:392
 #, fuzzy
@@ -2936,9 +2625,7 @@ msgstr "Διεύθυνση πηγής"
 #: setup.php:397
 #, fuzzy
 msgid "The source Email address for Device Tracking Emails."
-msgstr ""
-"Η διεύθυνση προέλευσης ηλεκτρονικού ταχυδρομείου για τα μηνύματα "
-"ηλεκτρονικού ταχυδρομείου εντοπισμού συσκευών."
+msgstr "Η διεύθυνση προέλευσης ηλεκτρονικού ταχυδρομείου για τα μηνύματα ηλεκτρονικού ταχυδρομείου εντοπισμού συσκευών."
 
 #: setup.php:404
 #, fuzzy
@@ -2948,46 +2635,27 @@ msgstr "Όνομα πηγής ηλεκτρονικού ταχυδρομείου"
 #: setup.php:405
 #, fuzzy
 msgid "The Source Email name for Device Tracking Emails."
-msgstr ""
-"Το όνομα Email προέλευσης για τα μηνύματα ηλεκτρονικού ταχυδρομείου "
-"εντοπισμού συσκευών."
+msgstr "Το όνομα Email προέλευσης για τα μηνύματα ηλεκτρονικού ταχυδρομείου εντοπισμού συσκευών."
 
 #: setup.php:407
 #, fuzzy
 msgid "MACTrack Administrator"
 msgstr "Διαχειριστής MACTrack"
 
-#: setup.php:412 setup.php:1246
+#: setup.php:412 setup.php:1487
 #, fuzzy
 msgid "MacWatch Default Body"
 msgstr "Προεπιλεγμένο σώμα MacWatch"
 
-#: setup.php:413 setup.php:1247
+#: setup.php:413 setup.php:1488
 #, fuzzy
-msgid ""
-"The Email body preset for Device Tracking MacWatch Emails.  The body can "
-"contain any valid html tags.  It also supports replacement tags that will be "
-"processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, "
-"<SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
-msgstr ""
-"Το προεπιλεγμένο σώμα σώματος ηλεκτρονικού ταχυδρομείου για μηνύματα "
-"ηλεκτρονικού ταχυδρομείου παρακολούθησης συσκευών MacWatch. Το σώμα μπορεί "
-"να περιέχει οποιεσδήποτε έγκυρες ετικέτες html. Υποστηρίζει επίσης ετικέτες "
-"αντικατάστασης που θα επεξεργαστούν κατά την αποστολή ενός μηνύματος "
-"ηλεκτρονικού ταχυδρομείου. Ισχύουν οι ετικέτες <IP> , <MAC> , <TICKET> , "
-"<SITENAME> , <DEVICEIP> , <PORTNAME> , <PORTNUMBER> , <DEVICENAME> ."
+msgid "The Email body preset for Device Tracking MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+msgstr "Το προεπιλεγμένο σώμα σώματος ηλεκτρονικού ταχυδρομείου για μηνύματα ηλεκτρονικού ταχυδρομείου παρακολούθησης συσκευών MacWatch. Το σώμα μπορεί να περιέχει οποιεσδήποτε έγκυρες ετικέτες html. Υποστηρίζει επίσης ετικέτες αντικατάστασης που θα επεξεργαστούν κατά την αποστολή ενός μηνύματος ηλεκτρονικού ταχυδρομείου. Ισχύουν οι ετικέτες <IP> , <MAC> , <TICKET> , <SITENAME> , <DEVICEIP> , <PORTNAME> , <PORTNUMBER> , <DEVICENAME> ."
 
-#: setup.php:417 setup.php:1251
+#: setup.php:417 setup.php:1492
 #, fuzzy
-msgid ""
-"Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>."
-"<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP "
-"<DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
-msgstr ""
-"Διεύθυνση MAC <MAC> που βρέθηκαν στη διεύθυνση IP <IP> για τον αριθμό "
-"εισιτηρίου: <TICKET> . <br> Η συσκευή βρίσκεται στη θέση <br> Ιστοσελίδα: "
-"<SITENAME> , Συσκευή <DEVICENAME> , IP <DEVICEIP> , Λιμάνι <PORTNUMBER> , "
-"και όνομα θύρας <PORTNAME>"
+msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
+msgstr "Διεύθυνση MAC <MAC> που βρέθηκαν στη διεύθυνση IP <IP> για τον αριθμό εισιτηρίου: <TICKET> . <br> Η συσκευή βρίσκεται στη θέση <br> Ιστοσελίδα: <SITENAME> , Συσκευή <DEVICENAME> , IP <DEVICEIP> , Λιμάνι <PORTNUMBER> , και όνομα θύρας <PORTNAME>"
 
 #: setup.php:424
 #, fuzzy
@@ -2996,11 +2664,8 @@ msgstr "Αναφορές διευθύνσεων ηλεκτρονικού ταχ�
 
 #: setup.php:425
 #, fuzzy
-msgid ""
-"A comma delimited list of users to recieve the MacAuth Email notifications."
-msgstr ""
-"Μια λίστα χρηστών οριοθετημένη με κόμμα για να λάβετε τις ειδοποιήσεις "
-"ηλεκτρονικού ταχυδρομείου MacAuth."
+msgid "A comma delimited list of users to recieve the MacAuth Email notifications."
+msgstr "Μια λίστα χρηστών οριοθετημένη με κόμμα για να λάβετε τις ειδοποιήσεις ηλεκτρονικού ταχυδρομείου MacAuth."
 
 #: setup.php:434
 #, fuzzy
@@ -3010,8 +2675,7 @@ msgstr "MacAuth Report Frequency"
 #: setup.php:435
 #, fuzzy
 msgid "How often will the MacAuth Reports be Emailed."
-msgstr ""
-"Πόσο συχνά θα στέλνονται μέσω ηλεκτρονικού ταχυδρομείου οι Αναφορές MacAuth."
+msgstr "Πόσο συχνά θα στέλνονται μέσω ηλεκτρονικού ταχυδρομείου οι Αναφορές MacAuth."
 
 #: setup.php:441
 #, fuzzy
@@ -3025,12 +2689,8 @@ msgstr "Ενεργοποιήστε το ArpWatch"
 
 #: setup.php:446
 #, fuzzy
-msgid ""
-"Should Device Tracking also use ArpWatch data to supplement Mac to IP/DNS "
-"resolution?"
-msgstr ""
-"Πρέπει η παρακολούθηση συσκευών να χρησιμοποιεί επίσης δεδομένα ArpWatch για "
-"να συμπληρώσει την ανάλυση Mac / IP / DNS;"
+msgid "Should Device Tracking also use ArpWatch data to supplement Mac to IP/DNS resolution?"
+msgstr "Πρέπει η παρακολούθηση συσκευών να χρησιμοποιεί επίσης δεδομένα ArpWatch για να συμπληρώσει την ανάλυση Mac / IP / DNS;"
 
 #: setup.php:451
 #, fuzzy
@@ -3054,12 +2714,8 @@ msgstr "Πολιτική ενημέρωσης για επιλογές SNMP"
 
 #: setup.php:464
 #, fuzzy
-msgid ""
-"Policy for synchronization of SNMP Options between Cacti devices and Device "
-"Tracking Devices."
-msgstr ""
-"Πολιτική για συγχρονισμό των επιλογών SNMP μεταξύ συσκευών Cacti και "
-"Συσκευών παρακολούθησης συσκευών."
+msgid "Policy for synchronization of SNMP Options between Cacti devices and Device Tracking Devices."
+msgstr "Πολιτική για συγχρονισμό των επιλογών SNMP μεταξύ συσκευών Cacti και Συσκευών παρακολούθησης συσκευών."
 
 #: setup.php:471
 #, fuzzy
@@ -3069,9 +2725,7 @@ msgstr "Προεπιλεγμένη έκδοση SNMP για όλους τους 
 #: setup.php:478
 #, fuzzy
 msgid "Default SNMP read community for all new hosts."
-msgstr ""
-"Προεπιλεγμένη κοινότητα ανάγνωσης SNMP για όλους τους νέους κεντρικούς "
-"υπολογιστές."
+msgstr "Προεπιλεγμένη κοινότητα ανάγνωσης SNMP για όλους τους νέους κεντρικούς υπολογιστές."
 
 #: setup.php:485
 #, fuzzy
@@ -3080,17 +2734,10 @@ msgstr "Κοινοτήτων"
 
 #: setup.php:486
 #, fuzzy
-msgid ""
-"Fill in the list of available SNMP read strings to test for this device. "
-"Each read string must be separated by a colon ':'.  These read strings will "
-"be tested sequentially if the primary read string is invalid."
-msgstr ""
-"Συμπληρώστε τη λίστα των διαθέσιμων συμβολοσειρών ανάγνωσης SNMP για να "
-"δοκιμάσετε αυτήν τη συσκευή. Κάθε αναγνωσμένη συμβολοσειρά πρέπει να "
-"διαχωρίζεται από ένα τελεία \":\". Αυτές οι συμβολοσειρές ανάγνωσης θα "
-"δοκιμαστούν διαδοχικά αν η κύρια συμβολοσειρά ανάγνωσης δεν είναι έγκυρη."
+msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
+msgstr "Συμπληρώστε τη λίστα των διαθέσιμων συμβολοσειρών ανάγνωσης SNMP για να δοκιμάσετε αυτήν τη συσκευή. Κάθε αναγνωσμένη συμβολοσειρά πρέπει να διαχωρίζεται από ένα τελεία \":\". Αυτές οι συμβολοσειρές ανάγνωσης θα δοκιμαστούν διαδοχικά αν η κύρια συμβολοσειρά ανάγνωσης δεν είναι έγκυρη."
 
-#: setup.php:493 setup.php:893
+#: setup.php:493 setup.php:1134
 #, fuzzy
 msgid "The UDP/TCP Port to poll the SNMP agent on."
 msgstr "Η θύρα UDP / TCP για τη δημοσκόπηση του παράγοντα SNMP."
@@ -3102,12 +2749,8 @@ msgstr "Προκαθορισμένο χρονικό όριο SNMP σε milli-δ�
 
 #: setup.php:509
 #, fuzzy
-msgid ""
-"The number times the SNMP poller will attempt to reach the host before "
-"failing."
-msgstr ""
-"Ο αριθμός των φορών που το SNMP poller θα προσπαθήσει να φτάσει στον "
-"κεντρικό υπολογιστή πριν αποτύχει."
+msgid "The number times the SNMP poller will attempt to reach the host before failing."
+msgstr "Ο αριθμός των φορών που το SNMP poller θα προσπαθήσει να φτάσει στον κεντρικό υπολογιστή πριν αποτύχει."
 
 #: setup.php:522
 #, fuzzy
@@ -3130,9 +2773,7 @@ msgid "Default Tab"
 msgstr "Προεπιλογή"
 
 #: setup.php:537
-msgid ""
-"Which MacTrack tab would you want to be your Default tab every time you goto "
-"the MacTrack second."
+msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr ""
 
 #: setup.php:543
@@ -3149,934 +2790,825 @@ msgstr "Διεύθυνση MAC"
 msgid "dot1x Deta"
 msgstr ""
 
-#: setup.php:556
+#: setup.php:557
 #, fuzzy
 msgid "Device Tracking Devices"
 msgstr "Συσκευές παρακολούθησης συσκευών"
 
-#: setup.php:557 setup.php:562 setup.php:563 setup.php:565 setup.php:569
-#: setup.php:572 setup.php:575
+#: setup.php:564 setup.php:599 setup.php:606 setup.php:620 setup.php:648
+#: setup.php:669 setup.php:690
 #, fuzzy
 msgid "(Edit)"
 msgstr "(Eπεξεργασία)"
 
-#: setup.php:558 setup.php:566
+#: setup.php:571 setup.php:627
 #, fuzzy
 msgid "(Import)"
 msgstr "Εισαγωγή"
 
-#: setup.php:564
+#: setup.php:613
 #, fuzzy
 msgid "Device Tracking Device Types"
 msgstr "Τύποι συσκευών εντοπισμού συσκευής"
 
-#: setup.php:568
+#: setup.php:641
 #, fuzzy
 msgid "Device Tracking Sites"
 msgstr "Ιστότοποι παρακολούθησης συσκευών"
 
-#: setup.php:571
+#: setup.php:662
 #, fuzzy
 msgid "Mac Address Tracking Utility"
 msgstr "Βοηθητικό εργαλείο παρακολούθησης διευθύνσεων Mac"
 
-#: setup.php:574
+#: setup.php:683
 #, fuzzy
 msgid "Mac Address Authorization Utility"
 msgstr "Βοηθητικό πρόγραμμα εξουσιοδότησης διευθύνσεων Mac"
 
-#: setup.php:577
+#: setup.php:704
 #, fuzzy
 msgid "Device Tracking Vendor Macs"
 msgstr "Μηχανικοί προμηθευτών παρακολούθησης συσκευών"
 
-#: setup.php:578
+#: setup.php:711
 #, fuzzy
 msgid "Device Tracking View Macs"
 msgstr "Παρακολούθηση συσκευών Προβολή Mac"
 
-#: setup.php:580
+#: setup.php:725
 #, fuzzy
 msgid "Device Tracking Dot1x View"
 msgstr "Παρακολούθηση συσκευής Dot1x Προβολή"
 
-#: setup.php:581
+#: setup.php:732
 #, fuzzy
 msgid "Device Tracking IP Address Viewer"
 msgstr "Πρόγραμμα προβολής διεύθυνσης IP παρακολούθησης συσκευών"
 
-#: setup.php:582
+#: setup.php:739
 #, fuzzy
 msgid "Device Tracking View Interfaces"
 msgstr "Διεπαφές προβολής παρακολούθησης συσκευών"
 
-#: setup.php:583
+#: setup.php:746
 #, fuzzy
 msgid "Device Tracking View Sites"
 msgstr "Παρακολούθηση ιστότοπων παρακολούθησης συσκευών"
 
-#: setup.php:584
+#: setup.php:753
 #, fuzzy
 msgid "Device Tracking View IP Ranges"
 msgstr "Παρακολούθηση συσκευών Προβολή περιοχών IP"
 
-#: setup.php:585
+#: setup.php:760
 #, fuzzy
 msgid "Device Tracking View Devices"
 msgstr "Παρακολούθηση συσκευών Προβολή συσκευών"
 
-#: setup.php:586
+#: setup.php:767
 #, fuzzy
 msgid "Device Tracking Utilities"
 msgstr "Βοηθητικά προγράμματα εντοπισμού συσκευών"
 
-#: setup.php:589
+#: setup.php:788
 #, fuzzy
 msgid "Truncate Port Results Table"
 msgstr "Καταργήστε τον Πίνακα Αποτελεσμάτων Θύρας"
 
-#: setup.php:590
+#: setup.php:795
 #, fuzzy
 msgid "Truncate Aggregated Port Results Table"
 msgstr "Καταργήστε τον Πίνακα Αποτελεσμάτων Συγκεντρωμένης Θύρας"
 
-#: setup.php:591
+#: setup.php:802
 #, fuzzy
 msgid "Truncate and Re-create Aggregated Port Results Table"
-msgstr ""
-"Καταργήστε και επαναδημιουργήστε τον Πίνακα Αποτελεσμάτων Συγκεντρωμένων "
-"Λιμένων"
+msgstr "Καταργήστε και επαναδημιουργήστε τον Πίνακα Αποτελεσμάτων Συγκεντρωμένων Λιμένων"
 
-#: setup.php:593
+#: setup.php:816
 #, fuzzy
 msgid "Refresh/Update Vendor MAC Database from IEEE"
 msgstr "Ανανέωση / ενημέρωση βάσης δεδομένων προμηθευτών MAC από IEEE"
 
-#: setup.php:594 setup.php:595
+#: setup.php:823 setup.php:830
 #, fuzzy
 msgid "Device Tracking Graph Viewer"
 msgstr "Παρακολούθηση γραφημάτων εντοπισμού συσκευών"
 
-#: setup.php:606 setup.php:608
+#: setup.php:847 setup.php:849
 msgid "MacTrack"
 msgstr ""
 
-#: setup.php:625 setup.php:626 setup.php:627 setup.php:628
+#: setup.php:866 setup.php:867 setup.php:868 setup.php:869
 #, fuzzy, php-format
 msgid "%d Seconds"
 msgstr "%d δευτερόλεπτα"
 
-#: setup.php:629
+#: setup.php:870
 #, fuzzy, php-format
 msgid "%d Minute"
 msgstr "% d λεπτά"
 
-#: setup.php:641
+#: setup.php:882
 #, fuzzy
 msgid "Matches"
 msgstr "Αγώνες"
 
-#: setup.php:642
+#: setup.php:883
 #, fuzzy
 msgid "Contains"
 msgstr "περιέχει"
 
-#: setup.php:643
+#: setup.php:884
 #, fuzzy
 msgid "Begins With"
 msgstr "Ξεκινάει από"
 
-#: setup.php:644
+#: setup.php:885
 #, fuzzy
 msgid "Does Not Contain"
 msgstr "Δεν περιέχει"
 
-#: setup.php:645
+#: setup.php:886
 #, fuzzy
 msgid "Does Not Begin With"
 msgstr "Δεν ξεκινάει με"
 
-#: setup.php:646
+#: setup.php:887
 #, fuzzy
 msgid "Is Null"
 msgstr "Είναι Null"
 
-#: setup.php:647
+#: setup.php:888
 #, fuzzy
 msgid "Is Not Null"
 msgstr "Δεν είναι Null"
 
-#: setup.php:652
+#: setup.php:893
 #, fuzzy
 msgid "Half"
 msgstr "Ήμισυ"
 
-#: setup.php:653
+#: setup.php:894
 #, fuzzy
 msgid "Full"
 msgstr "Πλήρης"
 
-#: setup.php:658
+#: setup.php:899
 #, fuzzy
 msgid "Sync Cacti Device to Device Tracking Device"
 msgstr "Συγχρονίστε τη συσκευή Cacti με τη συσκευή εντοπισμού συσκευών"
 
-#: setup.php:659
+#: setup.php:900
 #, fuzzy
 msgid "Sync Device Tracking Device to Cacti Device"
 msgstr "Συγχρονίστε τη συσκευή εντοπισμού συσκευής στη συσκευή Cacti"
 
-#: setup.php:677 setup.php:678 setup.php:679 setup.php:680
+#: setup.php:918 setup.php:919 setup.php:920 setup.php:921
 #, fuzzy, php-format
 msgid "Every %d Minutes"
 msgstr "Κάθε %d λεπτά"
 
-#: setup.php:681
+#: setup.php:922
 #, fuzzy, php-format
 msgid "Every %d Hour"
 msgstr "Κάθε% d ώρα"
 
-#: setup.php:682 setup.php:683 setup.php:684 setup.php:685 setup.php:705
-#: setup.php:1274 setup.php:1275
+#: setup.php:923 setup.php:924 setup.php:925 setup.php:926 setup.php:946
+#: setup.php:1515 setup.php:1516
 #, fuzzy, php-format
 msgid "Every %d Hours"
 msgstr "Κάθε% d Ώρες"
 
-#: setup.php:686 setup.php:706 setup.php:1276
+#: setup.php:927 setup.php:947 setup.php:1517
 #, fuzzy
 msgid "Every Day"
 msgstr "Κάθε μέρα"
 
-#: setup.php:695
+#: setup.php:936
 #, fuzzy, php-format
 msgid "%d Month"
 msgstr "% d Μήνας"
 
-#: setup.php:696 setup.php:697 setup.php:698
+#: setup.php:937 setup.php:938 setup.php:939
 #, fuzzy, php-format
 msgid "%d Months"
 msgstr "% d Μήνες"
 
-#: setup.php:699
+#: setup.php:940
 #, fuzzy, php-format
 msgid "%d Year"
 msgstr "% d Έτος"
 
-#: setup.php:704
+#: setup.php:945
 #, fuzzy
 msgid "On Scan Completion"
 msgstr "Κατά την ολοκλήρωση της σάρωσης"
 
-#: setup.php:707
+#: setup.php:948
 #, fuzzy, php-format
 msgid "Every %d Days"
 msgstr "Κάθε% d ημέρες"
 
-#: setup.php:708
+#: setup.php:949
 #, fuzzy
 msgid "Every Week"
 msgstr "Κάθε Εβδομάδα"
 
-#: setup.php:714
+#: setup.php:955
 #, fuzzy
 msgid "Management"
 msgstr "Διαχείριση χρηστών"
 
-#: setup.php:717 setup.php:1069 setup.php:1073
+#: setup.php:958 setup.php:1310 setup.php:1314
 #, fuzzy
 msgid "SNMP Options"
 msgstr "Επιλογές SNMP"
 
-#: setup.php:720
+#: setup.php:961
 #, fuzzy
 msgid "Mac Watch"
 msgstr "Mac Watch"
 
-#: setup.php:720 setup.php:721 setup.php:722 setup.php:732
+#: setup.php:961 setup.php:962 setup.php:963 setup.php:973
 #, fuzzy
 msgid "Tracking Tools"
 msgstr "Εργαλεία παρακολούθησης"
 
-#: setup.php:721
+#: setup.php:962
 #, fuzzy
 msgid "Mac Authorizations"
 msgstr "Εξουσιοδοτήσεις Mac"
 
-#: setup.php:722
+#: setup.php:963
 #, fuzzy
 msgid "Tracking Utilities"
 msgstr "Βοηθητικά προγράμματα εντοπισμού"
 
-#: setup.php:745
+#: setup.php:986
 #, fuzzy
 msgid "Device Scanning Function Options"
 msgstr "Επιλογές λειτουργιών σάρωσης συσκευής"
 
-#: setup.php:750
+#: setup.php:991
 #, fuzzy
 msgid "Give this device type a meaningful description."
 msgstr "Δώστε σε αυτή τη συσκευή μια σημαντική περιγραφή."
 
-#: setup.php:757
+#: setup.php:998
 #, fuzzy
 msgid "Fill in the name for the vendor of this device type."
 msgstr "Συμπληρώστε το όνομα του πωλητή αυτού του τύπου συσκευής."
 
-#: setup.php:764
+#: setup.php:1005
 #, fuzzy
 msgid "Choose the type of device."
 msgstr "Επιλέξτε τον τύπο της συσκευής."
 
-#: setup.php:771
+#: setup.php:1012
 #, fuzzy
 msgid "System Description Match"
 msgstr "Περιγραφή συστήματος Συσχέτιση"
 
-#: setup.php:772 setup.php:779
+#: setup.php:1013 setup.php:1020
 #, fuzzy
-msgid ""
-"Provide key information to help Device Tracking detect the type of device.  "
-"The wildcard character is the '&#37;' sign."
-msgstr ""
-"Παρέχετε βασικές πληροφορίες για να βοηθήσετε την Παρακολούθηση συσκευών να "
-"εντοπίσει τον τύπο της συσκευής. Ο χαρακτήρας μπαλαντέρ είναι το σύμβολο '%'."
+msgid "Provide key information to help Device Tracking detect the type of device.  The wildcard character is the '&#37;' sign."
+msgstr "Παρέχετε βασικές πληροφορίες για να βοηθήσετε την Παρακολούθηση συσκευών να εντοπίσει τον τύπο της συσκευής. Ο χαρακτήρας μπαλαντέρ είναι το σύμβολο '%'."
 
-#: setup.php:778
+#: setup.php:1019
 #, fuzzy
 msgid "Vendor SNMP Object ID Match"
 msgstr "Αντιστοιχία ταυτότητας αντικειμένου SNMP αντικειμένου προμηθευτή"
 
-#: setup.php:785
+#: setup.php:1026
 #, fuzzy
 msgid "MAC Address Scanning Function"
 msgstr "Λειτουργία σάρωσης διευθύνσεων MAC"
 
-#: setup.php:786
+#: setup.php:1027
 #, fuzzy
-msgid ""
-"The Device Tracking scanning function to call in order to obtain and store "
-"port details.  The function name is all that is required.  The following "
-"four parameters are assumed and will always be appended: 'my_function($site, "
-"&$device, $lowport, $highport)'.  There is no function required for a pure "
-"router."
-msgstr ""
-"Η λειτουργία σάρωσης εντοπισμού συσκευής για κλήση προκειμένου να ληφθούν "
-"και να αποθηκευτούν λεπτομέρειες για τη θύρα. Το όνομα της λειτουργίας είναι "
-"το μόνο που απαιτείται. Υποστηρίζονται οι ακόλουθες τέσσερις παράμετροι και "
-"θα επισυνάπτονται πάντοτε: &#39;my_function ($ site, &amp; $ device, $ "
-"lowport, $ highport)&#39;. Δεν απαιτείται λειτουργία για έναν καθαρό "
-"δρομολογητή."
+msgid "The Device Tracking scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
+msgstr "Η λειτουργία σάρωσης εντοπισμού συσκευής για κλήση προκειμένου να ληφθούν και να αποθηκευτούν λεπτομέρειες για τη θύρα. Το όνομα της λειτουργίας είναι το μόνο που απαιτείται. Υποστηρίζονται οι ακόλουθες τέσσερις παράμετροι και θα επισυνάπτονται πάντοτε: &#39;my_function ($ site, &amp; $ device, $ lowport, $ highport)&#39;. Δεν απαιτείται λειτουργία για έναν καθαρό δρομολογητή."
 
-#: setup.php:794
+#: setup.php:1035
 #, fuzzy
 msgid "IP Address Scanning Function"
 msgstr "Λειτουργία σάρωσης διεύθυνσης IP"
 
-#: setup.php:795
+#: setup.php:1036
 #, fuzzy
-msgid ""
-"The Device Tracking scanning function specific to Layer3 devices that track "
-"IP Addresses."
-msgstr ""
-"Η λειτουργία σάρωσης εντοπισμού συσκευής που αφορά τις συσκευές Layer3 που "
-"παρακολουθούν τις διευθύνσεις IP."
+msgid "The Device Tracking scanning function specific to Layer3 devices that track IP Addresses."
+msgstr "Η λειτουργία σάρωσης εντοπισμού συσκευής που αφορά τις συσκευές Layer3 που παρακολουθούν τις διευθύνσεις IP."
 
-#: setup.php:803
+#: setup.php:1044
 #, fuzzy
 msgid "802.1x Scanning Function"
 msgstr "Λειτουργία σάρωσης 802.1x"
 
-#: setup.php:804
+#: setup.php:1045
 #, fuzzy
-msgid ""
-"The Device Tracking scanning function specific to Switches with dot1x "
-"enabled."
-msgstr ""
-"Η λειτουργία σάρωσης εντοπισμού συσκευής, η οποία είναι συγκεκριμένη για τις "
-"επιλογές Switches with dot1x, είναι ενεργοποιημένη."
+msgid "The Device Tracking scanning function specific to Switches with dot1x enabled."
+msgstr "Η λειτουργία σάρωσης εντοπισμού συσκευής, η οποία είναι συγκεκριμένη για τις επιλογές Switches with dot1x, είναι ενεργοποιημένη."
 
-#: setup.php:812
+#: setup.php:1053
 #, fuzzy
 msgid "Serial Number Base OID"
 msgstr "Σειριακός αριθμός βάσης OID"
 
-#: setup.php:813
+#: setup.php:1054
 #, fuzzy
-msgid ""
-"The SNMP OID used to obtain this device types serial number to be stored in "
-"the Device Tracking Asset Information table."
-msgstr ""
-"Το SNMP OID χρησιμοποιήθηκε για την απόκτηση αυτού του σειριακού αριθμού "
-"συσκευών τύπων συσκευών που θα αποθηκευτούν στον πίνακα πληροφοριών συσκευής "
-"παρακολούθησης συσκευής."
+msgid "The SNMP OID used to obtain this device types serial number to be stored in the Device Tracking Asset Information table."
+msgstr "Το SNMP OID χρησιμοποιήθηκε για την απόκτηση αυτού του σειριακού αριθμού συσκευών τύπων συσκευών που θα αποθηκευτούν στον πίνακα πληροφοριών συσκευής παρακολούθησης συσκευής."
 
-#: setup.php:820
+#: setup.php:1061
 #, fuzzy
 msgid "Serial Number Collection Method"
 msgstr "Μέθοδος συλλογής σειριακού αριθμού"
 
-#: setup.php:821
+#: setup.php:1062
 #, fuzzy
-msgid ""
-"How is the serial number collected for this OID.  If 'SNMP Walk', we assume "
-"multiple serial numbers.  If 'Get', it will be only one.."
-msgstr ""
-"Πώς συλλέγεται ο σειριακός αριθμός για αυτό το OID. Αν το 'SNMP Walk' "
-"υποθέσουμε πολλαπλούς σειριακούς αριθμούς. Εάν 'Get', θα είναι μόνο ένα .."
+msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
+msgstr "Πώς συλλέγεται ο σειριακός αριθμός για αυτό το OID. Αν το 'SNMP Walk' υποθέσουμε πολλαπλούς σειριακούς αριθμούς. Εάν 'Get', θα είναι μόνο ένα .."
 
-#: setup.php:824
+#: setup.php:1065
 #, fuzzy
 msgid "SNMP Get"
 msgstr "SNMP Get"
 
-#: setup.php:824
+#: setup.php:1065
 #, fuzzy
 msgid "SNMP Walk"
 msgstr "SNMP Walk"
 
-#: setup.php:828
+#: setup.php:1069
 #, fuzzy
 msgid "Low User Port Number"
 msgstr "Χαμηλός αριθμός θύρας χρήστη"
 
-#: setup.php:829 setup.php:838
+#: setup.php:1070 setup.php:1079
 #, fuzzy
-msgid ""
-"Provide the low user port number on this switch.  Leave 0 to allow the "
-"system to calculate it."
-msgstr ""
-"Παρέχετε τον αριθμό θύρας χαμηλού χρήστη σε αυτόν τον διακόπτη. Αφήστε το 0 "
-"για να επιτρέψετε στο σύστημα να το υπολογίσει."
+msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
+msgstr "Παρέχετε τον αριθμό θύρας χαμηλού χρήστη σε αυτόν τον διακόπτη. Αφήστε το 0 για να επιτρέψετε στο σύστημα να το υπολογίσει."
 
-#: setup.php:837
+#: setup.php:1078
 #, fuzzy
 msgid "High User Port Number"
 msgstr "Αριθμός θύρας υψηλού χρήστη"
 
-#: setup.php:863
+#: setup.php:1104
 #, fuzzy
 msgid "Fill in the name of this SNMP option set."
 msgstr "Συμπληρώστε το όνομα αυτού του συνόλου επιλογών SNMP."
 
-#: setup.php:875
+#: setup.php:1116
 #, fuzzy
 msgid "SNMP Version"
 msgstr "Έκδοση SNMP"
 
-#: setup.php:876
+#: setup.php:1117
 #, fuzzy
 msgid "Choose the SNMP version for this host."
 msgstr "Επιλέξτε την έκδοση SNMP για αυτόν τον κεντρικό υπολογιστή."
 
-#: setup.php:883
+#: setup.php:1124
 #, fuzzy
 msgid "SNMP Community String"
 msgstr "SNMP Community String"
 
-#: setup.php:884
+#: setup.php:1125
 #, fuzzy
 msgid "Fill in the SNMP read community for this device."
 msgstr "Συμπληρώστε την κοινότητα ανάγνωσης SNMP για αυτήν τη συσκευή."
 
-#: setup.php:892
+#: setup.php:1133
 #, fuzzy
 msgid "SNMP Port"
 msgstr "SNMP θύρα"
 
-#: setup.php:901
+#: setup.php:1142
 #, fuzzy
 msgid "SNMP Timeout"
 msgstr "SNMP Timeout"
 
-#: setup.php:902
+#: setup.php:1143
 #, fuzzy
-msgid ""
-"The maximum number of milliseconds Cacti will wait for an SNMP response "
-"(does not work with php-snmp support)."
-msgstr ""
-"Ο μέγιστος αριθμός χιλιοστών του δευτερολέπτου Cacti θα περιμένει μια "
-"απάντηση SNMP (δεν λειτουργεί με την υποστήριξη php-snmp)."
+msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
+msgstr "Ο μέγιστος αριθμός χιλιοστών του δευτερολέπτου Cacti θα περιμένει μια απάντηση SNMP (δεν λειτουργεί με την υποστήριξη php-snmp)."
 
-#: setup.php:910
+#: setup.php:1151
 #, fuzzy
 msgid "SNMP Retries"
 msgstr "SNMP επανάληψη"
 
-#: setup.php:911
+#: setup.php:1152
 #, fuzzy
-msgid ""
-"The maximum number of attempts to reach a device via an SNMP readstring "
-"prior to giving up."
-msgstr ""
-"Ο μέγιστος αριθμός προσπαθειών για την προσέγγιση μιας συσκευής μέσω μιας "
-"σειράς ανάγνωσης SNMP πριν από την εγκατάλειψη."
+msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
+msgstr "Ο μέγιστος αριθμός προσπαθειών για την προσέγγιση μιας συσκευής μέσω μιας σειράς ανάγνωσης SNMP πριν από την εγκατάλειψη."
 
-#: setup.php:919
+#: setup.php:1160
 #, fuzzy
 msgid "Maximum OID's Per Get Request"
 msgstr "Μέγιστο ανά αίτηση λήψης OID"
 
-#: setup.php:920
+#: setup.php:1161
 #, fuzzy
-msgid ""
-"Specified the number of OID's that can be obtained in a single SNMP Get "
-"request."
-msgstr ""
-"Καθορίστηκε ο αριθμός των OID που μπορούν να ληφθούν σε ένα μόνο SNMP Get "
-"Request."
+msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
+msgstr "Καθορίστηκε ο αριθμός των OID που μπορούν να ληφθούν σε ένα μόνο SNMP Get Request."
 
-#: setup.php:928
+#: setup.php:1169
 #, fuzzy
 msgid "SNMP Username (v3)"
 msgstr "Όνομα χρήστη SNMP (v3)"
 
-#: setup.php:929
+#: setup.php:1170
 #, fuzzy
 msgid "SNMP v3 username for this device."
 msgstr "Όνομα χρήστη SNMP v3 για αυτήν τη συσκευή."
 
-#: setup.php:937
+#: setup.php:1178
 #, fuzzy
 msgid "SNMP Password (v3)"
 msgstr "Κωδικός SNMP (v3)"
 
-#: setup.php:938
+#: setup.php:1179
 #, fuzzy
 msgid "SNMP v3 password for this device."
 msgstr "Κωδικός SNMP v3 για αυτήν τη συσκευή."
 
-#: setup.php:946
+#: setup.php:1187
 #, fuzzy
 msgid "SNMP Auth Protocol (v3)"
 msgstr "Πρωτόκολλο SNMP Auth (v3)"
 
-#: setup.php:947
+#: setup.php:1188
 #, fuzzy
 msgid "Choose the SNMPv3 Authorization Protocol."
 msgstr "Επιλέξτε το Πρωτόκολλο Εξουσιοδότησης SNMPv3."
 
-#: setup.php:954
+#: setup.php:1195
 #, fuzzy
 msgid "SNMP Privacy Passphrase (v3)"
 msgstr "Φράση προστασίας απορρήτου SNMP (v3)"
 
-#: setup.php:955
+#: setup.php:1196
 #, fuzzy
 msgid "Choose the SNMPv3 Privacy Passphrase."
 msgstr "Επιλέξτε τη φράση απορρήτου SNMPv3."
 
-#: setup.php:963
+#: setup.php:1204
 #, fuzzy
 msgid "SNMP Privacy Protocol (v3)"
 msgstr "Πρωτόκολλο προστασίας ιδιωτικών δεδομένων SNMP (v3)"
 
-#: setup.php:964
+#: setup.php:1205
 #, fuzzy
 msgid "Choose the SNMPv3 Privacy Protocol."
 msgstr "Επιλέξτε το πρωτόκολλο προστασίας ιδιωτικού απορρήτου SNMPv3."
 
-#: setup.php:971
+#: setup.php:1212
 #, fuzzy
 msgid "SNMP Context (v3)"
 msgstr "Το περιβάλλον SNMP (v3)"
 
-#: setup.php:972
+#: setup.php:1213
 #, fuzzy
 msgid "Enter the SNMP v3 Context to use for this device."
-msgstr ""
-"Εισαγάγετε το περιβάλλον SNMP v3 που θέλετε να χρησιμοποιήσετε για αυτήν τη "
-"συσκευή."
+msgstr "Εισαγάγετε το περιβάλλον SNMP v3 που θέλετε να χρησιμοποιήσετε για αυτήν τη συσκευή."
 
-#: setup.php:980
+#: setup.php:1221
 #, fuzzy
 msgid "SNMP Engine ID (v3)"
 msgstr "Αναγνωριστικό μηχανής SNMP (v3)"
 
-#: setup.php:981
+#: setup.php:1222
 #, fuzzy
 msgid "Enter the SNMP v3 Engine ID to use for this device."
-msgstr ""
-"Εισαγάγετε το αναγνωριστικό μηχανής SNMP v3 για χρήση σε αυτή τη συσκευή."
+msgstr "Εισαγάγετε το αναγνωριστικό μηχανής SNMP v3 για χρήση σε αυτή τη συσκευή."
 
-#: setup.php:993
+#: setup.php:1234
 #, fuzzy
 msgid "General Device Settings"
 msgstr "Γενικές ρυθμίσεις συσκευής"
 
-#: setup.php:998
+#: setup.php:1239
 #, fuzzy
 msgid "Give this device a meaningful name."
 msgstr "Δώστε σε αυτή τη συσκευή ένα αξιόλογο όνομα."
 
-#: setup.php:1005
+#: setup.php:1246
 #, fuzzy
 msgid "Fill in the fully qualified hostname for this device."
-msgstr ""
-"Συμπληρώστε το πλήρως αναγνωρισμένο όνομα κεντρικού υπολογιστή για αυτήν τη "
-"συσκευή."
+msgstr "Συμπληρώστε το πλήρως αναγνωρισμένο όνομα κεντρικού υπολογιστή για αυτήν τη συσκευή."
 
-#: setup.php:1010
+#: setup.php:1251
 #, fuzzy
 msgid "Related Cacti Host"
 msgstr "Σχετικά Host Cacti"
 
-#: setup.php:1011
+#: setup.php:1252
 #, fuzzy
 msgid "Given Device Tracking Host is connected to this Cacti Host."
-msgstr ""
-"Δεδομένου του Host Tracking Tracking είναι συνδεδεμένο με αυτό το Host Cacti."
+msgstr "Δεδομένου του Host Tracking Tracking είναι συνδεδεμένο με αυτό το Host Cacti."
 
-#: setup.php:1020
+#: setup.php:1261
 #, fuzzy
 msgid "Scan Type"
 msgstr "Τύπος σάρωσης"
 
-#: setup.php:1021
+#: setup.php:1262
 #, fuzzy
 msgid "Choose the scan type you wish to perform on this device."
 msgstr "Επιλέξτε τον τύπο σάρωσης που θέλετε να εκτελέσετε σε αυτή τη συσκευή."
 
-#: setup.php:1029
+#: setup.php:1270
 #, fuzzy
 msgid "Choose the site to associate with this device."
 msgstr "Επιλέξτε τον ιστότοπο που θα συσχετιστεί με αυτήν τη συσκευή."
 
-#: setup.php:1036
+#: setup.php:1277
 #, fuzzy
 msgid "Device Notes"
 msgstr "Σημειώσεις συσκευής"
 
-#: setup.php:1037
+#: setup.php:1278
 #, fuzzy
-msgid ""
-"This field value is useful to save general information about a specific "
-"device."
-msgstr ""
-"Αυτή η τιμή πεδίου είναι χρήσιμη για την αποθήκευση γενικών πληροφοριών "
-"σχετικά με μια συγκεκριμένη συσκευή."
+msgid "This field value is useful to save general information about a specific device."
+msgstr "Αυτή η τιμή πεδίου είναι χρήσιμη για την αποθήκευση γενικών πληροφοριών σχετικά με μια συγκεκριμένη συσκευή."
 
-#: setup.php:1046
+#: setup.php:1287
 #, fuzzy
 msgid "Disable Device"
 msgstr "Απενεργοποιήστε τη συσκευή"
 
-#: setup.php:1047
+#: setup.php:1288
 #, fuzzy
 msgid "Check this box to disable all checks for this host."
-msgstr ""
-"Επιλέξτε αυτό το πλαίσιο για να απενεργοποιήσετε όλους τους ελέγχους για "
-"αυτόν τον κεντρικό υπολογιστή."
+msgstr "Επιλέξτε αυτό το πλαίσιο για να απενεργοποιήσετε όλους τους ελέγχους για αυτόν τον κεντρικό υπολογιστή."
 
-#: setup.php:1054
+#: setup.php:1295
 #, fuzzy
 msgid "Switch/Hub, Switch/Router Settings"
 msgstr "Διακόπτης / διανομέας, ρυθμίσεις διακόπτη / δρομολογητή"
 
-#: setup.php:1059
+#: setup.php:1300
 #, fuzzy
-msgid ""
-"Provide a list of ports on a specific switch/hub whose MAC results should be "
-"ignored.  Ports such as link/trunk ports that can not be distinguished from "
-"other user ports are examples.  Each port number must be separated by a "
-"colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or "
-"'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
-msgstr ""
-"Παρέχετε μια λίστα με θύρες σε ένα συγκεκριμένο διακόπτη / διανομέα των "
-"οποίων τα αποτελέσματα MAC πρέπει να αγνοηθούν. Θύρες όπως θύρες σύνδεσης / "
-"κορμού που δεν μπορούν να διακριθούν από άλλες θύρες χρηστών είναι "
-"παραδείγματα. Κάθε αριθμός θύρας πρέπει να χωρίζεται από ένα τελεία, ένα "
-"σωλήνα ή ένα κενό ':', '|' ',' '. Για παράδειγμα, για ορισμένους τύπους "
-"διακοπτών κατασκευαστών θα ήταν αποδεκτές οι τιμές «Fa0 / 1: Fa1 / 23» ή "
-"«Fa0 / 1 Fa1 / 23»."
+msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
+msgstr "Παρέχετε μια λίστα με θύρες σε ένα συγκεκριμένο διακόπτη / διανομέα των οποίων τα αποτελέσματα MAC πρέπει να αγνοηθούν. Θύρες όπως θύρες σύνδεσης / κορμού που δεν μπορούν να διακριθούν από άλλες θύρες χρηστών είναι παραδείγματα. Κάθε αριθμός θύρας πρέπει να χωρίζεται από ένα τελεία, ένα σωλήνα ή ένα κενό ':', '|' ',' '. Για παράδειγμα, για ορισμένους τύπους διακοπτών κατασκευαστών θα ήταν αποδεκτές οι τιμές «Fa0 / 1: Fa1 / 23» ή «Fa0 / 1 Fa1 / 23»."
 
-#: setup.php:1074
+#: setup.php:1315
 #, fuzzy
 msgid "Select a set of SNMP options to try."
 msgstr "Επιλέξτε ένα σύνολο επιλογών SNMP για να δοκιμάσετε."
 
-#: setup.php:1081
+#: setup.php:1322
 #, fuzzy
 msgid "Read Strings"
 msgstr "Διαβάστε τις χορδές"
 
-#: setup.php:1082
+#: setup.php:1323
 #, fuzzy
 msgid "<strong>DEPRECATED:</strong> SNMP community strings"
 msgstr "<strong>DEPRECATED:</strong> Κοινότητες χορδών SNMP"
 
-#: setup.php:1087
+#: setup.php:1328
 #, fuzzy
 msgid "Specific SNMP Settings"
 msgstr "Ειδικές ρυθμίσεις SNMP"
 
-#: setup.php:1096
+#: setup.php:1337
 #, fuzzy
 msgid "Connectivity Options"
 msgstr "Επιλογές συνδεσιμότητας"
 
-#: setup.php:1100
+#: setup.php:1341
 #, fuzzy
 msgid "Terminal Type"
 msgstr "Τύπος τερματικού"
 
-#: setup.php:1101
+#: setup.php:1342
 #, fuzzy
 msgid "Choose the terminal type that you use to connect to this device."
-msgstr ""
-"Επιλέξτε τον τύπο τερματικού που χρησιμοποιείτε για να συνδεθείτε σε αυτήν "
-"τη συσκευή."
+msgstr "Επιλέξτε τον τύπο τερματικού που χρησιμοποιείτε για να συνδεθείτε σε αυτήν τη συσκευή."
 
-#: setup.php:1106
+#: setup.php:1347
 #, fuzzy
 msgid "Telnet"
 msgstr "远程登录"
 
-#: setup.php:1107
+#: setup.php:1348
 #, fuzzy
 msgid "SSH"
 msgstr "SSH"
 
-#: setup.php:1108
+#: setup.php:1349
 #, fuzzy
 msgid "HTTP"
 msgstr "HTTP"
 
-#: setup.php:1109
+#: setup.php:1350
 #, fuzzy
 msgid "HTTPS"
 msgstr "HTTPS"
 
-#: setup.php:1113
+#: setup.php:1354
 #, fuzzy
 msgid "User Name"
 msgstr "Όνομα Χρήστη"
 
-#: setup.php:1114
+#: setup.php:1355
 #, fuzzy
-msgid ""
-"The user name to be used for your custom authentication method.  Examples "
-"include SSH, RSH, HTML, etc."
-msgstr ""
-"Το όνομα χρήστη που θα χρησιμοποιηθεί για τη προσαρμοσμένη μέθοδο "
-"επαλήθευσης ταυτότητας. Τα παραδείγματα περιλαμβάνουν SSH, RSH, HTML, κ.λπ."
+msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
+msgstr "Το όνομα χρήστη που θα χρησιμοποιηθεί για τη προσαρμοσμένη μέθοδο επαλήθευσης ταυτότητας. Τα παραδείγματα περιλαμβάνουν SSH, RSH, HTML, κ.λπ."
 
-#: setup.php:1122
+#: setup.php:1363
 #, fuzzy
 msgid "Password"
 msgstr "Κωδικός"
 
-#: setup.php:1123
+#: setup.php:1364
 #, fuzzy
 msgid "The password to be used for your custom authentication."
-msgstr ""
-"Ο κωδικός πρόσβασης που θα χρησιμοποιηθεί για τον προσαρμοσμένο έλεγχο "
-"ταυτότητας."
+msgstr "Ο κωδικός πρόσβασης που θα χρησιμοποιηθεί για τον προσαρμοσμένο έλεγχο ταυτότητας."
 
-#: setup.php:1131
+#: setup.php:1372
 #, fuzzy
 msgid "Private Key Path"
 msgstr "Διαδρομή ιδιωτικού κλειδιού"
 
-#: setup.php:1132
+#: setup.php:1373
 #, fuzzy
 msgid "The path to the private key used for SSH authentication."
-msgstr ""
-"Η διαδρομή προς το ιδιωτικό κλειδί που χρησιμοποιείται για τον έλεγχο "
-"ταυτότητας SSH."
+msgstr "Η διαδρομή προς το ιδιωτικό κλειδί που χρησιμοποιείται για τον έλεγχο ταυτότητας SSH."
 
-#: setup.php:1156
+#: setup.php:1397
 #, fuzzy
 msgid "Sequence"
 msgstr "Αλληλουχία"
 
-#: setup.php:1157
+#: setup.php:1398
 #, fuzzy
 msgid "Sequence of Item."
 msgstr "Ακολουθία του στοιχείου."
 
-#: setup.php:1165
+#: setup.php:1406
 #, fuzzy
 msgid "General Site Settings"
 msgstr "Γενικές ρυθμίσεις τοποθεσίας"
 
-#: setup.php:1170
+#: setup.php:1411
 #, fuzzy
 msgid "Please enter a reasonable name for this site."
 msgstr "Καταχωρίστε ένα λογικό όνομα για αυτόν τον ιστότοπο."
 
-#: setup.php:1177
+#: setup.php:1418
 #, fuzzy
 msgid "Primary Customer Contact"
 msgstr "Επικοινωνία με τους κύριους πελάτες"
 
-#: setup.php:1178
+#: setup.php:1419
 #, fuzzy
 msgid "The principal customer contact name and number for this site."
-msgstr ""
-"Το κύριο όνομα και αριθμός επικοινωνίας με τον πελάτη για αυτόν τον ιστότοπο."
+msgstr "Το κύριο όνομα και αριθμός επικοινωνίας με τον πελάτη για αυτόν τον ιστότοπο."
 
-#: setup.php:1185
+#: setup.php:1426
 #, fuzzy
 msgid "NetOps Contact"
 msgstr "Επικοινωνία NetOps"
 
-#: setup.php:1186
+#: setup.php:1427
 #, fuzzy
 msgid "Please principal network support contact name and number for this site."
-msgstr ""
-"Παρακαλούμε κύριο όνομα και αριθμό επικοινωνίας υποστήριξης δικτύου για "
-"αυτόν τον ιστότοπο."
+msgstr "Παρακαλούμε κύριο όνομα και αριθμό επικοινωνίας υποστήριξης δικτύου για αυτόν τον ιστότοπο."
 
-#: setup.php:1193
+#: setup.php:1434
 #, fuzzy
 msgid "Facilities Contact"
 msgstr "Εγκαταστάσεις Επικοινωνία"
 
-#: setup.php:1194
+#: setup.php:1435
 #, fuzzy
-msgid ""
-"Please principal facilities/security contact name and number for this site."
-msgstr ""
-"Παρακαλούμε, κύριο όνομα και αριθμό επαφών για την εγκατάσταση / ασφάλεια "
-"για αυτόν τον ιστότοπο."
+msgid "Please principal facilities/security contact name and number for this site."
+msgstr "Παρακαλούμε, κύριο όνομα και αριθμό επαφών για την εγκατάσταση / ασφάλεια για αυτόν τον ιστότοπο."
 
-#: setup.php:1201
+#: setup.php:1442
 #, fuzzy
 msgid "Site Information"
 msgstr "Πληροφορίες ιστοτόπου"
 
-#: setup.php:1205
+#: setup.php:1446
 #, fuzzy
-msgid ""
-"Provide any site-specific information, in free form, that allows you to "
-"better manage this location."
-msgstr ""
-"Παρέχετε τυχόν πληροφορίες σχετικά με τον ιστότοπο, σε ελεύθερη μορφή, που "
-"σας επιτρέπουν να διαχειριστείτε καλύτερα αυτή τη θέση."
+msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
+msgstr "Παρέχετε τυχόν πληροφορίες σχετικά με τον ιστότοπο, σε ελεύθερη μορφή, που σας επιτρέπουν να διαχειριστείτε καλύτερα αυτή τη θέση."
 
-#: setup.php:1227
+#: setup.php:1468
 #, fuzzy
 msgid "General Mac Address Tracking Settings"
 msgstr "Γενικές ρυθμίσεις παρακολούθησης διευθύνσεων Mac"
 
-#: setup.php:1232
+#: setup.php:1473
 #, fuzzy
 msgid "Please enter the MAC Address to be watched for."
 msgstr "Εισαγάγετε τη διεύθυνση MAC που θέλετε να παρακολουθήσετε."
 
-#: setup.php:1239
+#: setup.php:1480
 #, fuzzy
 msgid "MAC Tracking Name/Email Subject"
 msgstr "Όνομα παρακολούθησης MAC / θέμα ηλεκτρονικού ταχυδρομείου"
 
-#: setup.php:1240
+#: setup.php:1481
 #, fuzzy
-msgid ""
-"Please enter a reasonable name for this MAC Tracking entry.  This "
-"information will be in the subject line of your Email"
-msgstr ""
-"Καταχωρίστε ένα εύλογο όνομα για αυτήν την καταχώρηση παρακολούθησης MAC. "
-"Αυτές οι πληροφορίες θα βρίσκονται στη γραμμή θέματος του μηνύματος "
-"ηλεκτρονικού ταχυδρομείου σας"
+msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
+msgstr "Καταχωρίστε ένα εύλογο όνομα για αυτήν την καταχώρηση παρακολούθησης MAC. Αυτές οι πληροφορίες θα βρίσκονται στη γραμμή θέματος του μηνύματος ηλεκτρονικού ταχυδρομείου σας"
 
-#: setup.php:1259
+#: setup.php:1500
 #, fuzzy
-msgid ""
-"Ticket number for cross referencing with your corporate help desk system(s)."
-msgstr ""
-"Αριθμός εισιτηρίου για διασταυρούμενη αναφορά με το εταιρικό σας σύστημα "
-"εξυπηρέτησης πελατών."
+msgid "Ticket number for cross referencing with your corporate help desk system(s)."
+msgstr "Αριθμός εισιτηρίου για διασταυρούμενη αναφορά με το εταιρικό σας σύστημα εξυπηρέτησης πελατών."
 
-#: setup.php:1266
+#: setup.php:1507
 #, fuzzy
 msgid "Notification Schedule"
 msgstr "Χρονοδιάγραμμα ειδοποιήσεων"
 
-#: setup.php:1267
+#: setup.php:1508
 #, fuzzy
 msgid "Choose how often an Email should be generated for this Mac Watch item."
-msgstr ""
-"Επιλέξτε πόσο συχνά πρέπει να δημιουργείται ένα μήνυμα ηλεκτρονικού "
-"ταχυδρομείου για αυτό το στοιχείο παρακολούθησης Mac."
+msgstr "Επιλέξτε πόσο συχνά πρέπει να δημιουργείται ένα μήνυμα ηλεκτρονικού ταχυδρομείου για αυτό το στοιχείο παρακολούθησης Mac."
 
-#: setup.php:1271
+#: setup.php:1512
 #, fuzzy
 msgid "First Occurrence Only"
 msgstr "Πρώτη εμφάνιση μόνο"
 
-#: setup.php:1272
+#: setup.php:1513
 #, fuzzy
 msgid "All Occurrences"
 msgstr "Όλα τα περιστατικά"
 
-#: setup.php:1273
+#: setup.php:1514
 #, fuzzy
 msgid "Every Hour"
 msgstr "Κάθε ώρα"
 
-#: setup.php:1280
+#: setup.php:1521
 #, fuzzy
 msgid "Email Addresses"
 msgstr "Διευθύνσεις ηλεκτρονικού ταχυδρομείου"
 
-#: setup.php:1281
+#: setup.php:1522
 #, fuzzy
-msgid ""
-"Enter a semicolon separated of Email addresses that will be notified where "
-"this MAC address is."
-msgstr ""
-"Καταχωρίστε ένα ερωτηματικό διαχωρισμένο από διευθύνσεις ηλεκτρονικού "
-"ταχυδρομείου που θα ειδοποιηθούν σε περίπτωση που είναι αυτή η διεύθυνση MAC."
+msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
+msgstr "Καταχωρίστε ένα ερωτηματικό διαχωρισμένο από διευθύνσεις ηλεκτρονικού ταχυδρομείου που θα ειδοποιηθούν σε περίπτωση που είναι αυτή η διεύθυνση MAC."
 
-#: setup.php:1304
+#: setup.php:1545
 #, fuzzy
 msgid "General Mac Address Authorization Settings"
 msgstr "Γενικές Ρυθμίσεις Εξουσιοδότησης Διεύθυνσης Mac"
 
-#: setup.php:1308
+#: setup.php:1549
 #, fuzzy
 msgid "MAC Address Match"
 msgstr "Αντιστοιχία διεύθυνσης MAC"
 
-#: setup.php:1309
+#: setup.php:1550
 #, fuzzy
-msgid ""
-"Please enter the MAC Address or Mac Address Match string to be automatically "
-"authorized.  If you wish to authorize a group of MAC Addresses, you can use "
-"the wildcard character of '&#37;' anywhere in the MAC Address."
-msgstr ""
-"Εισαγάγετε τη διεύθυνση MAC ή τη συμβολοσειρά αντιστοιχίας MAC Address για "
-"αυτόματη εξουσιοδότηση. Αν θέλετε να εξουσιοδοτήσετε μια ομάδα διευθύνσεων "
-"MAC, μπορείτε να χρησιμοποιήσετε τον χαρακτήρα μπαλαντέρ του '%' οπουδήποτε "
-"στη διεύθυνση MAC."
+msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
+msgstr "Εισαγάγετε τη διεύθυνση MAC ή τη συμβολοσειρά αντιστοιχίας MAC Address για αυτόματη εξουσιοδότηση. Αν θέλετε να εξουσιοδοτήσετε μια ομάδα διευθύνσεων MAC, μπορείτε να χρησιμοποιήσετε τον χαρακτήρα μπαλαντέρ του '%' οπουδήποτε στη διεύθυνση MAC."
 
-#: setup.php:1318
+#: setup.php:1559
 #, fuzzy
 msgid "Please add a reason for this entry."
 msgstr "Προσθέστε έναν λόγο για αυτή την καταχώρηση."
 
 #, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr ""
-#~ "Πρέπει να επιλέξετε τουλάχιστον ένα Mac που έχετε παρακολουθήσει για "
-#~ "διαγραφή."
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "Παρακολουθήστε την περιγραφή"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "ΤΡΕΞΙΜΟ"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "Απενεργοποιημένο"
+#~ msgid "ENABLED"
+#~ msgstr "Ενεργοποιημένο"
 
 #, fuzzy
 #~ msgid "IDLE"
 #~ msgstr "ΑΕΡΓΟΣ"
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "Ενεργοποιημένο"
+#~ msgid "DISABLED"
+#~ msgstr "Απενεργοποιημένο"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "ΤΡΕΞΙΜΟ"
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "Παρακολουθήστε την περιγραφή"
+
+#, fuzzy
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "Πρέπει να επιλέξετε τουλάχιστον ένα Mac που έχετε παρακολουθήσει για διαγραφή."
+
+#, fuzzy
+#~ msgid "Clear Results"
+#~ msgstr "Εισαγωγή Αποτελεσμάτων"
+
+#, fuzzy
+#~ msgid "Device Not in Cacti"
+#~ msgstr "Σημειώσεις συσκευής"
