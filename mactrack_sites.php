@@ -123,9 +123,8 @@ function form_actions() {
 
 			$site_list .= '<li>' . $site_info . '</li>';
 			$site_array[$i] = $matches[1];
+			$i++;
 		}
-
-		$i++;
 	}
 
 	top_header();

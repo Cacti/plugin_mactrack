@@ -241,7 +241,8 @@ function form_mactrack_actions() {
 							WHERE device_id = ?',
 							array($matches[1]));
 			$device_list .= '<li>' . $device_info['device_name'] . ' (' . $device_info['hostname'] . ')</li>';
-			$device_array[] = $matches[1];
+			$device_array[$i] = $matches[1];
+			$i++;
 		}
 	}
 

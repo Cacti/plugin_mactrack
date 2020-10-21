@@ -120,9 +120,8 @@ function form_actions() {
 
 			$macw_list .= '<li>' . $macw_info . '</li>';
 			$macw_array[$i] = $matches[1];
+			$i++;
 		}
-
-		$i++;
 	}
 
 	top_header();
