@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-03-17 08:58-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,10 +47,11 @@ msgstr "Authenticatie succesvol"
 msgid "Authentication Failed"
 msgstr "Authenticatie mislukt: %s"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
-msgstr "Autorisatie Succesvoltooiing"
+msgid "Authorization Success"
+msgstr "Autorisatie Succes"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:613
@@ -1944,11 +1945,6 @@ msgstr "802.1x Sessies"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "Geen apparaattracering 802.1x sessies gevonden"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "Autorisatie Succes"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3582,33 +3578,37 @@ msgid "Please add a reason for this entry."
 msgstr "Voeg een reden voor deze vermelding toe."
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "Ingeschakeld"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "Inactief"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "Uitgeschakeld"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "Actief"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "Horloge Beschrijving"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "U moet ten minste één bewaakte Mac selecteren om te verwijderen."
+#~ msgid "Device Not in Cacti"
+#~ msgstr "Notities over het apparaat"
 
 #, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "Import resultaten"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "Notities over het apparaat"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "U moet ten minste één bewaakte Mac selecteren om te verwijderen."
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "Horloge Beschrijving"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "Actief"
+
+#, fuzzy
+#~ msgid "DISABLED"
+#~ msgstr "Uitgeschakeld"
+
+#, fuzzy
+#~ msgid "IDLE"
+#~ msgstr "Inactief"
+
+#, fuzzy
+#~ msgid "ENABLED"
+#~ msgstr "Ingeschakeld"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "Autorisatie Succesvoltooiing"

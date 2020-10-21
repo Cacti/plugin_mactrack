@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-03-17 10:53-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,10 +47,11 @@ msgstr "認證成功"
 msgid "Authentication Failed"
 msgstr "身份驗證失敗"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
-msgstr "授權Succcess"
+msgid "Authorization Success"
+msgstr "授權成功"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:613
@@ -1944,11 +1945,6 @@ msgstr "802.1x會話"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "未找到設備跟踪802.1x會話"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "授權成功"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3582,33 +3578,37 @@ msgid "Please add a reason for this entry."
 msgstr "請為此條目添加原因。"
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "啟用"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "閒置"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "停用"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "運行"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "觀看說明"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "您必須至少選擇一個要觀看的Mac才能刪除。"
+#~ msgid "Device Not in Cacti"
+#~ msgstr "設備說明"
 
 #, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "匯入結果"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "設備說明"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "您必須至少選擇一個要觀看的Mac才能刪除。"
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "觀看說明"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "運行"
+
+#, fuzzy
+#~ msgid "DISABLED"
+#~ msgstr "停用"
+
+#, fuzzy
+#~ msgid "IDLE"
+#~ msgstr "閒置"
+
+#, fuzzy
+#~ msgid "ENABLED"
+#~ msgstr "啟用"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "授權Succcess"

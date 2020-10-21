@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-03-17 09:38-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,10 +47,11 @@ msgstr "Успех аутентификации"
 msgid "Authentication Failed"
 msgstr "Аутентификация неудачна"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
-msgstr "Авторизация Успех"
+msgid "Authorization Success"
+msgstr "Успех авторизации"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:613
@@ -1944,11 +1945,6 @@ msgstr "802.1x сессии"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "Отслеживание устройств 802.1x сеансов не обнаружено"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "Успех авторизации"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3582,33 +3578,37 @@ msgid "Please add a reason for this entry."
 msgstr "Пожалуйста, добавьте причину для этой записи."
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "Включено"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "Неактивно"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "Выключен"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "В процессе"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "Смотреть Описание часов"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "Для удаления необходимо выбрать хотя бы один просматриваемый Mac."
+#~ msgid "Device Not in Cacti"
+#~ msgstr "Примечания к устройству"
 
 #, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "Импорт Результатов"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "Примечания к устройству"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "Для удаления необходимо выбрать хотя бы один просматриваемый Mac."
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "Смотреть Описание часов"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "В процессе"
+
+#, fuzzy
+#~ msgid "DISABLED"
+#~ msgstr "Выключен"
+
+#, fuzzy
+#~ msgid "IDLE"
+#~ msgstr "Неактивно"
+
+#, fuzzy
+#~ msgid "ENABLED"
+#~ msgstr "Включено"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "Авторизация Успех"

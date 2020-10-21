@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-03-17 08:40-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,9 +47,10 @@ msgstr "Successo dell'autenticazione"
 msgid "Authentication Failed"
 msgstr "Autenticazione non riuscita"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
+msgid "Authorization Success"
 msgstr "Successo dell'autorizzazione"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
@@ -1944,11 +1945,6 @@ msgstr "802.1x Sessioni"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "Nessuna traccia del dispositivo 802.1x Sessioni trovate"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "Successo dell'autorizzazione"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3582,33 +3578,37 @@ msgid "Please add a reason for this entry."
 msgstr "Si prega di aggiungere un motivo per questa voce."
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "Abilitato"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "Idle"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "Disabilitato"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "Corsa"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "Guarda la descrizione"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "È necessario selezionare almeno un Mac guardato per eliminare."
+#~ msgid "Device Not in Cacti"
+#~ msgstr "Note sul dispositivo"
 
 #, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "Importare i risultati"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "Note sul dispositivo"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "È necessario selezionare almeno un Mac guardato per eliminare."
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "Guarda la descrizione"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "Corsa"
+
+#, fuzzy
+#~ msgid "DISABLED"
+#~ msgstr "Disabilitato"
+
+#, fuzzy
+#~ msgid "IDLE"
+#~ msgstr "Idle"
+
+#, fuzzy
+#~ msgid "ENABLED"
+#~ msgstr "Abilitato"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "Successo dell'autorizzazione"

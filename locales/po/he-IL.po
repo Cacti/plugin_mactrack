@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-03-17 06:44-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,10 +47,11 @@ msgstr "ההזדהות הצליחה"
 msgid "Authentication Failed"
 msgstr "האימות נכשל"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
-msgstr "אישור"
+msgid "Authorization Success"
+msgstr "אישור הצלחה"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:613
@@ -1944,11 +1945,6 @@ msgstr "802.1x פעילויות באתר"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "אין מעקב אחר התקנים נמצאו 802.1x פעילויות באתר"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "אישור הצלחה"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3582,33 +3578,37 @@ msgid "Please add a reason for this entry."
 msgstr "הוסף סיבה לערך זה."
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "מאופשר"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "ממתין"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "לא זמין"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "פועל"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "תיאור השעון"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "עליך לבחור לפחות Mac אחד שנצפה כדי למחוק."
+#~ msgid "Device Not in Cacti"
+#~ msgstr "הערות מכשיר"
 
 #, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "תוצאות ייבוא"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "הערות מכשיר"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "עליך לבחור לפחות Mac אחד שנצפה כדי למחוק."
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "תיאור השעון"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "פועל"
+
+#, fuzzy
+#~ msgid "DISABLED"
+#~ msgstr "לא זמין"
+
+#, fuzzy
+#~ msgid "IDLE"
+#~ msgstr "ממתין"
+
+#, fuzzy
+#~ msgid "ENABLED"
+#~ msgstr "מאופשר"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "אישור"

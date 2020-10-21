@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-03-17 09:57-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,10 +47,11 @@ msgstr "Autentiseringsframgång"
 msgid "Authentication Failed"
 msgstr "Autentisering misslyckades"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
-msgstr "Auktorisation framgång"
+msgid "Authorization Success"
+msgstr "Godkännande framgång"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:613
@@ -1944,11 +1945,6 @@ msgstr "802.1x sessioner"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "Ingen enhetsspårning hittades 802.1x sessioner"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "Godkännande framgång"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3582,33 +3578,37 @@ msgid "Please add a reason for this entry."
 msgstr "Lägg till en anledning till denna post."
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "Aktiverad"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "Sysslolös"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "Inaktiverad"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "Kör"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "Titta på Beskrivning"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "Du måste välja minst en tittad Mac att radera."
+#~ msgid "Device Not in Cacti"
+#~ msgstr "Enhetsanvisningar"
 
 #, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "Importera resultat"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "Enhetsanvisningar"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "Du måste välja minst en tittad Mac att radera."
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "Titta på Beskrivning"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "Kör"
+
+#, fuzzy
+#~ msgid "DISABLED"
+#~ msgstr "Inaktiverad"
+
+#, fuzzy
+#~ msgid "IDLE"
+#~ msgstr "Sysslolös"
+
+#, fuzzy
+#~ msgid "ENABLED"
+#~ msgstr "Aktiverad"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "Auktorisation framgång"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-03-17 10:40-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,9 +47,10 @@ msgstr "Kimlik Doğrulama Başarısı"
 msgid "Authentication Failed"
 msgstr "Doğrulama Başarısız"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
+msgid "Authorization Success"
 msgstr "Yetkilendirme Başarısı"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
@@ -1944,11 +1945,6 @@ msgstr "802.1x Seansları"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "Cihaz Takibi Yok 802.1x Oturum Bulunamadı"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "Yetkilendirme Başarısı"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3582,33 +3578,37 @@ msgid "Please add a reason for this entry."
 msgstr "Lütfen bu giriş için bir sebep ekleyin."
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "Etkin"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "Boşta"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "Devre dışı"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "Çalışıyor"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "İzle açıklaması"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "Silmek için en az bir izlenen Mac seçmelisiniz."
+#~ msgid "Device Not in Cacti"
+#~ msgstr "Cihaz Notları"
 
 #, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "İçeri Aktarma Sonuçları"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "Cihaz Notları"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "Silmek için en az bir izlenen Mac seçmelisiniz."
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "İzle açıklaması"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "Çalışıyor"
+
+#, fuzzy
+#~ msgid "DISABLED"
+#~ msgstr "Devre dışı"
+
+#, fuzzy
+#~ msgid "IDLE"
+#~ msgstr "Boşta"
+
+#, fuzzy
+#~ msgid "ENABLED"
+#~ msgstr "Etkin"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "Yetkilendirme Başarısı"

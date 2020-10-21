@@ -39,7 +39,7 @@ if (!isset($mactrack_device_status)) {
 		3 => __('No method', 'mactrack'),
 		4 => __('Authentication Success', 'mactrack'),
 		5 => __('Authentication Failed', 'mactrack'),
-		6 => __('Authorization Succcess', 'mactrack'),
+		6 => __('Authorization Success', 'mactrack'),
 		7 => __('Authorization Failed', 'mactrack')
 	);
 }

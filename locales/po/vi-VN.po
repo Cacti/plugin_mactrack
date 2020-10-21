@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-03-17 10:45-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,9 +47,10 @@ msgstr "Xác thực thành công"
 msgid "Authentication Failed"
 msgstr "Quá trình xác thực đã thất bại"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
+msgid "Authorization Success"
 msgstr "Ủy quyền thành công"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
@@ -1944,11 +1945,6 @@ msgstr "Phiên 802.1x"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "Không tìm thấy thiết bị theo dõi 802.1x"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "Ủy quyền thành công"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3582,33 +3578,37 @@ msgid "Please add a reason for this entry."
 msgstr "Vui lòng thêm một lý do cho mục này."
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "Bật"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "Rảnh rỗi"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "Vô hiệu hóa"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "Đang chạy"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "Xem mô tả"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "Bạn phải chọn ít nhất một máy Mac đã xem để xóa."
+#~ msgid "Device Not in Cacti"
+#~ msgstr "Ghi chú thiết bị"
 
 #, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "Kết quả nhập khẩu"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "Ghi chú thiết bị"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "Bạn phải chọn ít nhất một máy Mac đã xem để xóa."
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "Xem mô tả"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "Đang chạy"
+
+#, fuzzy
+#~ msgid "DISABLED"
+#~ msgstr "Vô hiệu hóa"
+
+#, fuzzy
+#~ msgid "IDLE"
+#~ msgstr "Rảnh rỗi"
+
+#, fuzzy
+#~ msgid "ENABLED"
+#~ msgstr "Bật"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "Ủy quyền thành công"

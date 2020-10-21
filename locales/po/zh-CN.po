@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: macktrack on cacti 1.1.34\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-07-26 13:15+0000\n"
 "Last-Translator: tomcat <luis_126@126.com>\n"
 "Language-Team: Chinese (Simplified) <http://translate.cacti.net/projects/cacti/mactrack/zh-CN/>\n"
@@ -48,9 +48,10 @@ msgstr "认证成功"
 msgid "Authentication Failed"
 msgstr "认证失败: %s"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
+msgid "Authorization Success"
 msgstr "Mac授权"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
@@ -1765,11 +1766,6 @@ msgstr "802.1x会话"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "未找到设备跟踪802.1x会话"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "Mac授权"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3178,92 +3174,96 @@ msgstr "请输入MAC地址或MAC地址匹配字符串以自动授权。 如果�
 msgid "Please add a reason for this entry."
 msgstr "请为此条目添加一个原因。"
 
-#~ msgid "No MacTrack Device Types"
-#~ msgstr "没有MacTrack设备类型"
-
-#~ msgid "Are you sure you want to delete the device type %s?"
-#~ msgstr "您确定要删除设备类型 %s吗？"
-
-#~ msgid "MacTrack View Sites"
-#~ msgstr "MacTrack查看网站"
-
-#~ msgid "MacTrack View Interfaces"
-#~ msgstr "MacTrack视图界面"
-
-#~ msgid "MacTrack View Macs"
-#~ msgstr "MacTrack视图Macs"
-
-#~ msgid "MacTrack Device Types"
-#~ msgstr "MacTrack设备类型"
-
-#~ msgid "MacTrack Devices"
-#~ msgstr "MacTrack设备"
-
-#~ msgid "Are you sure you want to delete the SNMP Option Set(s) %s?"
-#~ msgstr "您确定要删除SNMP选项集 %s吗？"
-
-#~ msgid "Are you sure you want to delete the host %s"
-#~ msgstr "你确定要删除主机%s吗？"
-
-#~ msgid "To disable the following devices, press the 'Yes' button below."
-#~ msgstr "要禁用以下设备，请按下面的“是”按钮。"
-
-#~ msgid "To enable the following devices, press the 'Yes' button below."
-#~ msgstr "要启用以下设备，请按下面的“是”按钮。"
-
-#~ msgid "Import into MacTrack"
-#~ msgstr "导入到MacTrack"
-
-#~ msgid "Are you sure you want to delete the watched Mac Address %s?"
-#~ msgstr "您确定要删除观看的Mac地址 %s吗？"
-
-#~ msgid "MacTrack Process Status"
-#~ msgstr "MacTrack进程状态"
-
-#~ msgid "No MacTrack Sites"
-#~ msgstr "没有MacTrack网站"
-
-#~ msgid "MacTrack Site Filters"
-#~ msgstr "MacTrack网站过滤器"
-
-#~ msgid "MacTrack Site [new]"
-#~ msgstr "MacTrack网站[新建]"
-
-#~ msgid "Are you sure you want to delete the site <strong>'%s'</strong>?"
-#~ msgstr "您确定要删除该网站吗 <strong>'%s'</strong>？"
-
-#~ msgid "Are you sure you want to delete the Authorized Mac Address(s) %s?"
-#~ msgstr "您确定要删除授权的Mac地址吗？%s?"
-
-#~ msgid "No MacTrack Port Results"
-#~ msgstr "没有MacTrack端口结果"
-
-#~ msgid "No MacTrack Port Results."
-#~ msgstr "没有MacTrack端口结果。"
-
-#~ msgid "Switch Device"
-#~ msgstr "交换设备"
-
-#~ msgid "ENABLED"
-#~ msgstr "启用"
-
-#~ msgid "IDLE"
-#~ msgstr "空闲"
-
-#~ msgid "DISABLED"
-#~ msgstr "禁用"
-
-#~ msgid "RUNNING"
-#~ msgstr "运行"
-
-#~ msgid "Watch Description"
-#~ msgstr "观看说明"
-
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "您必须至少选择一个观看的Mac进行删除。"
+#~ msgid "Device Not in Cacti"
+#~ msgstr "设备不在acti中"
 
 #~ msgid "Clear Results"
 #~ msgstr "清除结果"
 
-#~ msgid "Device Not in Cacti"
-#~ msgstr "设备不在acti中"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "您必须至少选择一个观看的Mac进行删除。"
+
+#~ msgid "Watch Description"
+#~ msgstr "观看说明"
+
+#~ msgid "RUNNING"
+#~ msgstr "运行"
+
+#~ msgid "DISABLED"
+#~ msgstr "禁用"
+
+#~ msgid "IDLE"
+#~ msgstr "空闲"
+
+#~ msgid "ENABLED"
+#~ msgstr "启用"
+
+#~ msgid "Switch Device"
+#~ msgstr "交换设备"
+
+#~ msgid "No MacTrack Port Results."
+#~ msgstr "没有MacTrack端口结果。"
+
+#~ msgid "No MacTrack Port Results"
+#~ msgstr "没有MacTrack端口结果"
+
+#~ msgid "Are you sure you want to delete the Authorized Mac Address(s) %s?"
+#~ msgstr "您确定要删除授权的Mac地址吗？%s?"
+
+#~ msgid "Are you sure you want to delete the site <strong>'%s'</strong>?"
+#~ msgstr "您确定要删除该网站吗 <strong>'%s'</strong>？"
+
+#~ msgid "MacTrack Site [new]"
+#~ msgstr "MacTrack网站[新建]"
+
+#~ msgid "MacTrack Site Filters"
+#~ msgstr "MacTrack网站过滤器"
+
+#~ msgid "No MacTrack Sites"
+#~ msgstr "没有MacTrack网站"
+
+#~ msgid "MacTrack Process Status"
+#~ msgstr "MacTrack进程状态"
+
+#~ msgid "Are you sure you want to delete the watched Mac Address %s?"
+#~ msgstr "您确定要删除观看的Mac地址 %s吗？"
+
+#~ msgid "Import into MacTrack"
+#~ msgstr "导入到MacTrack"
+
+#~ msgid "To enable the following devices, press the 'Yes' button below."
+#~ msgstr "要启用以下设备，请按下面的“是”按钮。"
+
+#~ msgid "To disable the following devices, press the 'Yes' button below."
+#~ msgstr "要禁用以下设备，请按下面的“是”按钮。"
+
+#~ msgid "Are you sure you want to delete the host %s"
+#~ msgstr "你确定要删除主机%s吗？"
+
+#~ msgid "Are you sure you want to delete the SNMP Option Set(s) %s?"
+#~ msgstr "您确定要删除SNMP选项集 %s吗？"
+
+#~ msgid "MacTrack Devices"
+#~ msgstr "MacTrack设备"
+
+#~ msgid "MacTrack Device Types"
+#~ msgstr "MacTrack设备类型"
+
+#~ msgid "MacTrack View Macs"
+#~ msgstr "MacTrack视图Macs"
+
+#~ msgid "MacTrack View Interfaces"
+#~ msgstr "MacTrack视图界面"
+
+#~ msgid "MacTrack View Sites"
+#~ msgstr "MacTrack查看网站"
+
+#~ msgid "Are you sure you want to delete the device type %s?"
+#~ msgstr "您确定要删除设备类型 %s吗？"
+
+#~ msgid "No MacTrack Device Types"
+#~ msgstr "没有MacTrack设备类型"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "Mac授权"

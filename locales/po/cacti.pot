@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,8 +42,9 @@ msgstr ""
 msgid "Authentication Failed"
 msgstr ""
 
-#: lib/mactrack_functions.php:42
-msgid "Authorization Succcess"
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
+msgid "Authorization Success"
 msgstr ""
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
@@ -1623,10 +1624,6 @@ msgstr ""
 
 #: mactrack_view_dot1x.php:462
 msgid "No Device Tracking 802.1x Sessions Found"
-msgstr ""
-
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-msgid "Authorization Success"
 msgstr ""
 
 #: mactrack_view_dot1x.php:486

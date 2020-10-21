@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-03-17 08:52-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,10 +47,11 @@ msgstr "인증 성공"
 msgid "Authentication Failed"
 msgstr "인증 실패"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
-msgstr "권한 부여 성공"
+msgid "Authorization Success"
+msgstr "승인 성공"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:613
@@ -1944,11 +1945,6 @@ msgstr "802.1x 세션"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "장치 추적 없음 802.1x 세션 발견"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "승인 성공"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3582,33 +3578,37 @@ msgid "Please add a reason for this entry."
 msgstr "이 항목에 대한 이유를 추가하십시오."
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "활성화"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "게으른"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "비활성화"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "실행 중"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "설명 설명"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "감시 할 Mac을 하나 이상 선택해야합니다."
+#~ msgid "Device Not in Cacti"
+#~ msgstr "디바이스 노트"
 
 #, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "결과 가져 오기"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "디바이스 노트"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "감시 할 Mac을 하나 이상 선택해야합니다."
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "설명 설명"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "실행 중"
+
+#, fuzzy
+#~ msgid "DISABLED"
+#~ msgstr "비활성화"
+
+#, fuzzy
+#~ msgid "IDLE"
+#~ msgstr "게으른"
+
+#, fuzzy
+#~ msgid "ENABLED"
+#~ msgstr "활성화"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "권한 부여 성공"
