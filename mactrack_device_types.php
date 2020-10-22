@@ -268,7 +268,8 @@ function form_actions() {
 				array($matches[1]));
 
 			$device_types_list .= '<li>' . $device_types_info['description'] . '</li>';
-			$device_types_array[] = $matches[1];
+			$device_types_array[$i] = $matches[1];
+			$i++;
 		}
 	}
 

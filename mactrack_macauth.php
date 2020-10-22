@@ -117,7 +117,8 @@ function form_actions() {
 				array($matches[1]));
 
 			$maca_list .= '<li>' . $maca_info . '</li>';
-			$maca_array[] = $matches[1];
+			$maca_array[$i] = $matches[1];
+			$i++;
 		}
 	}
 
