@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-03-17 00:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,10 +47,11 @@ msgstr "Успех за удостоверяване"
 msgid "Authentication Failed"
 msgstr "Неуспешна идентификация"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
-msgstr "Разрешение Succcess"
+msgid "Authorization Success"
+msgstr "Успех за оторизация"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:613
@@ -1944,11 +1945,6 @@ msgstr "802.1x сесии"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "Намерени са сесии за проследяване на устройства от 802.1x"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "Успех за оторизация"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3582,33 +3578,37 @@ msgid "Please add a reason for this entry."
 msgstr "Моля, добавете причина за това вписване."
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "Разрешен"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "ПРАЗЕН"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "Изключен"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "실행 중"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "Описание на часовника"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "Трябва да изберете поне един наблюдаван Mac за изтриване."
+#~ msgid "Device Not in Cacti"
+#~ msgstr "Бележки за устройството"
 
 #, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "Резултати от импортиране"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "Бележки за устройството"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "Трябва да изберете поне един наблюдаван Mac за изтриване."
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "Описание на часовника"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "실행 중"
+
+#, fuzzy
+#~ msgid "DISABLED"
+#~ msgstr "Изключен"
+
+#, fuzzy
+#~ msgid "IDLE"
+#~ msgstr "ПРАЗЕН"
+
+#, fuzzy
+#~ msgid "ENABLED"
+#~ msgstr "Разрешен"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "Разрешение Succcess"

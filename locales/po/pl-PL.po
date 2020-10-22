@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-07-13 04:14+0000\n"
 "Last-Translator: Jaroslaw Kłopotek <jkl@interduo.pl>\n"
 "Language-Team: Polish <http://translate.cacti.net/projects/cacti/mactrack/pl-PL/>\n"
@@ -48,9 +48,10 @@ msgstr "Uwierzytelnianie Sukces"
 msgid "Authentication Failed"
 msgstr "Uwierzytelnienie nie powiodło się"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
+msgid "Authorization Success"
 msgstr "Sukces autoryzacji"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
@@ -1932,11 +1933,6 @@ msgstr "802,1x Sesje"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "Brak śledzenia urządzeń 802.1x Znaleziono sesje"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "Sukces autoryzacji"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3569,33 +3565,37 @@ msgid "Please add a reason for this entry."
 msgstr "Proszę podać powód tego wpisu."
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "Włączone"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "Bezczynny"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "Wyłączone"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "Pracuje"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "Opis zegarka"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "Musisz wybrać co najmniej jeden obserwowany komputer Mac, który chcesz usunąć."
+#~ msgid "Device Not in Cacti"
+#~ msgstr "Wskazówki dotyczące urządzeń"
 
 #, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "Wyniki przywozu"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "Wskazówki dotyczące urządzeń"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "Musisz wybrać co najmniej jeden obserwowany komputer Mac, który chcesz usunąć."
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "Opis zegarka"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "Pracuje"
+
+#, fuzzy
+#~ msgid "DISABLED"
+#~ msgstr "Wyłączone"
+
+#, fuzzy
+#~ msgid "IDLE"
+#~ msgstr "Bezczynny"
+
+#, fuzzy
+#~ msgid "ENABLED"
+#~ msgstr "Włączone"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "Sukces autoryzacji"

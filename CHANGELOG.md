@@ -1,6 +1,6 @@
 ## ChangeLog
 
---- 4.3 ---
+--- 4.3 / 4.4 ---
 
 * issue#70: Fix issue with Prompt confirmation button
 
@@ -47,6 +47,8 @@
 * issue#137: CMDPHP ERROR: A DB Exec Failed!, Error: Duplicate entry '7' for key 'PRIMARY'
 
 * feature: PHP 7.2 compatibility
+
+* feature: Switch port_number to integer type of performance reasons
 
 --- 4.2 ---
 

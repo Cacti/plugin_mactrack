@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-03-17 07:37-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,10 +47,11 @@ msgstr "प्रमाणीकरण सफलता"
 msgid "Authentication Failed"
 msgstr "प्रमाणीकरण विफल होना"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
-msgstr "प्राधिकार सक्सेस"
+msgid "Authorization Success"
+msgstr "प्राधिकरण की सफलता"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:613
@@ -1944,11 +1945,6 @@ msgstr "802.1x सत्र"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "कोई डिवाइस ट्रैकिंग 802.1x सत्र नहीं मिला"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "प्राधिकरण की सफलता"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3582,33 +3578,37 @@ msgid "Please add a reason for this entry."
 msgstr "कृपया इस प्रविष्टि के लिए एक कारण जोड़ें।"
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "सक्षम"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "निष्क्रिय"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "अक्षम"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "चल रहा है"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "विवरण देखें"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "हटाने के लिए आपको कम से कम एक देखे गए मैक का चयन करना होगा।"
+#~ msgid "Device Not in Cacti"
+#~ msgstr "डिवाइस नोट्स"
 
 #, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "आयात परिणाम"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "डिवाइस नोट्स"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "हटाने के लिए आपको कम से कम एक देखे गए मैक का चयन करना होगा।"
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "विवरण देखें"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "चल रहा है"
+
+#, fuzzy
+#~ msgid "DISABLED"
+#~ msgstr "अक्षम"
+
+#, fuzzy
+#~ msgid "IDLE"
+#~ msgstr "निष्क्रिय"
+
+#, fuzzy
+#~ msgid "ENABLED"
+#~ msgstr "सक्षम"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "प्राधिकार सक्सेस"

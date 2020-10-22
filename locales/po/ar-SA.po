@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-10-20 08:43-0400\n"
+"POT-Creation-Date: 2020-10-20 10:25-0400\n"
 "PO-Revision-Date: 2019-03-16 23:57-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,10 +47,11 @@ msgstr "نجاح المصادقة"
 msgid "Authentication Failed"
 msgstr "المصادقة فشلت"
 
-#: lib/mactrack_functions.php:42
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
+#: mactrack_view_dot1x.php:612
 #, fuzzy
-msgid "Authorization Succcess"
-msgstr "إذن النجاح"
+msgid "Authorization Success"
+msgstr "النجاح إذن"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:613
@@ -1944,11 +1945,6 @@ msgstr "جلسات 802.1x"
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "لم يتم العثور على جلسات تتبع الأجهزة 802.1x"
 
-#: mactrack_view_dot1x.php:475 mactrack_view_dot1x.php:612
-#, fuzzy
-msgid "Authorization Success"
-msgstr "النجاح إذن"
-
 #: mactrack_view_dot1x.php:486
 #, fuzzy
 msgid "Dot1x Scan Results"
@@ -3582,33 +3578,37 @@ msgid "Please add a reason for this entry."
 msgstr "الرجاء إضافة سبب لهذا الإدخال."
 
 #, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "مفعل"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "IDLE"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "معطل"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "جري"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "مشاهدة الوصف"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "يجب تحديد ما لا يقل عن واحد لمشاهدة ماك لحذف."
+#~ msgid "Device Not in Cacti"
+#~ msgstr "ملاحظات الجهاز"
 
 #, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "استيراد النتائج"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "ملاحظات الجهاز"
+#~ msgid "You must select at least one watched Mac to delete."
+#~ msgstr "يجب تحديد ما لا يقل عن واحد لمشاهدة ماك لحذف."
+
+#, fuzzy
+#~ msgid "Watch Description"
+#~ msgstr "مشاهدة الوصف"
+
+#, fuzzy
+#~ msgid "RUNNING"
+#~ msgstr "جري"
+
+#, fuzzy
+#~ msgid "DISABLED"
+#~ msgstr "معطل"
+
+#, fuzzy
+#~ msgid "IDLE"
+#~ msgstr "IDLE"
+
+#, fuzzy
+#~ msgid "ENABLED"
+#~ msgstr "مفعل"
+
+#, fuzzy
+#~ msgid "Authorization Succcess"
+#~ msgstr "إذن النجاح"
