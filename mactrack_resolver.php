@@ -173,7 +173,7 @@ while (1) {
 				db_qstr($unresolved_ip['hostname'])     . ',' .
 				db_qstr($unresolved_ip['dns_hostname']) . ',' .
 				db_qstr($unresolved_ip['device_name'])  . ',' .
-				$unresolved_ip['vlan_id']               . ',' .
+				db_qstr($unresolved_ip['vlan_id'])      . ',' .
 				db_qstr($unresolved_ip['vlan_name'])    . ',' .
 				db_qstr($unresolved_ip['mac_address'])  . ',' .
 				db_qstr($unresolved_ip['vendor_mac'])   . ',' .

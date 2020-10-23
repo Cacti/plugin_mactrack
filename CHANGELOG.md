@@ -50,6 +50,8 @@
 
 * issue#137: CMDPHP ERROR: A DB Exec Failed!, Error: Duplicate entry '7' for key 'PRIMARY'
 
+* issue#143: mactrack_resolver.php variable vlan_id line 176
+
 * feature: PHP 7.2 compatibility
 
 * feature: Switch port_number to integer type of performance reasons
