@@ -103,69 +103,91 @@ function mactrack_database_upgrade() {
 	mactrack_add_column('mac_track_interfaces',
 		'sysUptime',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `sysUptime` int(10) unsigned NOT NULL default '0' AFTER `device_id`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'ifInOctets',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifInOctets` int(10) unsigned NOT NULL default '0' AFTER `vlan_trunk_status`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'ifOutOctets',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutOctets` int(10) unsigned NOT NULL default '0' AFTER `ifInOctets`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'ifHCInOctets',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifHCInOctets` bigint(20) unsigned NOT NULL default '0' AFTER `ifOutOctets`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'ifHCOutOctets',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifHCOutOctets` bigint(20) unsigned NOT NULL default '0' AFTER `ifHCInOctets`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'ifInUcastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifInUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifHCOutOctets`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'ifOutUcastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInUcastPkts`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'ifInMulticastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifInMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifOutUcastPkts`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'ifOutMulticastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInMulticastPkts`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'ifInBroadcastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifInBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifOutMulticastPkts`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'ifOutBroadcastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInBroadcastPkts`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'inBound',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `inBound` double NOT NULL default '0' AFTER `ifOutErrors`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'outBound',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `outBound` double NOT NULL default '0' AFTER `inBound`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'int_ifInOctets',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInOctets` int(10) unsigned NOT NULL default '0' AFTER `outBound`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'int_ifOutOctets',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutOctets` int(10) unsigned NOT NULL default '0' AFTER `int_ifInOctets`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'int_ifHCInOctets',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifHCInOctets` bigint(20) unsigned NOT NULL default '0' AFTER `int_ifOutOctets`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'int_ifHCOutOctets',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifHCOutOctets` bigint(20) unsigned NOT NULL default '0' AFTER `int_ifHCInOctets`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'int_ifInUcastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifHCOutOctets`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'int_ifOutUcastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUcastPkts`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'int_ifInMulticastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutUcastPkts`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'int_ifOutMulticastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInMulticastPkts`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'int_ifInBroadcastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutMulticastPkts`");
+
 	mactrack_add_column('mac_track_interfaces',
 		'int_ifOutBroadcastPkts',
 		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInBroadcastPkts`");
@@ -366,35 +388,42 @@ function mactrack_database_upgrade() {
 		'device_name',
 		"ALTER TABLE `mac_track_ips` ADD COLUMN `device_name` varchar(100) NOT NULL default '' AFTER `hostname`");
 
-	db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
+	$columns = array_rekey(
+		db_fetch_assoc('SHOW COLUMNS FROM mac_track_ips'),
+		'Field', 'Type'
+	);
 
-	db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
+	if (strpos($columns['port_number'], 'int(10)') !== false) {
+		db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
 
-	db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
+		db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
 
-	db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
+		db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
 
-	db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
+		db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
 
-	db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN first_scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+		db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
 
-	db_execute("ALTER TABLE mac_track_devices MODIFY COLUMN last_rundate TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+		db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN first_scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
 
-	db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+		db_execute("ALTER TABLE mac_track_devices MODIFY COLUMN last_rundate TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
 
-	db_execute("ALTER TABLE mac_track_ip_ranges MODIFY COLUMN ips_max_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+		db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
 
-	db_execute("ALTER TABLE mac_track_ip_ranges MODIFY COLUMN ips_current_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+		db_execute("ALTER TABLE mac_track_ip_ranges MODIFY COLUMN ips_max_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
 
-	db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+		db_execute("ALTER TABLE mac_track_ip_ranges MODIFY COLUMN ips_current_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
 
-	db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+		db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
 
-	db_execute("ALTER TABLE mac_track_processes MODIFY COLUMN start_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+		db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
 
-	db_execute("ALTER TABLE mac_track_scan_dates MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+		db_execute("ALTER TABLE mac_track_processes MODIFY COLUMN start_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
 
-	db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+		db_execute("ALTER TABLE mac_track_scan_dates MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+
+		db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+	}
 
 	$tables = db_fetch_assoc("SELECT DISTINCT TABLE_NAME
 		FROM information_schema.COLUMNS
