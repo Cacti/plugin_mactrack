@@ -56,6 +56,8 @@
 
 * feature: Switch port_number to integer type of performance reasons
 
+* feature: Update Net_DNS2 to version 1.5
+
 --- 4.2 ---
 
 * feature: Basic documentation under github wiki + screenshots
