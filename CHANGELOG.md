@@ -2,6 +2,10 @@
 
 --- 4.3 / 4.4 ---
 
+* bug: unable to delete Mac Watch and Sites records
+
+* bug: Mac Watch can not send mail
+
 * issue#70: Fix issue with Prompt confirmation button
 
 * issue#75: Command Line does not show output
