@@ -107,6 +107,7 @@ if ($site_id != '') {
 }
 
 $nameservers = array();
+
 if ($dns_primary != '') {
 	$nameservers[] = $dns_primary;
 }
@@ -115,7 +116,13 @@ if ($dns_secondary != '') {
 	$nameservers[] = $dns_secondary;
 }
 
-$resolver = new Net_DNS2_Resolver(array('nameservers' => $nameservers));
+if (cacti_sizeof($nameservers)) {
+	$use_resolver = false;
+	$resolver = false;
+} else {
+	$use_resolver = true;
+	$resolver = new Net_DNS2_Resolver(array('nameservers' => $nameservers));
+}
 
 /* loop until you are it */
 while (1) {
@@ -151,11 +158,24 @@ while (1) {
 		foreach($unresolved_ips as $key => $unresolved_ip) {
 			$dns_hostname = $unresolved_ip['ip_address'];
 
-			try {
-				$resp = $resolver->query($dns_hostname, 'PTR');
-				$dns_hostname = $resp->answer[0]->ptrdname;
-			} catch(Net_DNS2_Exception $e) {
-				mactrack_debug('Unable to resolve IP Address: ' . $dns_hostname);
+			if ($use_resolver) {
+				try {
+					$resp = $resolver->query($dns_hostname, 'PTR');
+					$dns_hostname = $resp->answer[0]->ptrdname;
+				} catch(Net_DNS2_Exception $e) {
+					$dns_hostname = gethostbyaddr($unresolved_ip['ip_address']);
+
+					if ($dns_hostname === false) {
+						mactrack_debug('Unable to resolve IP Address: ' . $unresolved_ip['ip_address']);
+					}
+				}
+			} else {
+				$dns_hostname = gethostbyaddr($unresolved_ip['ip_address']);
+
+				if ($dns_hostname === false) {
+					$dns_hostname = $unresolved_ip['ip_address'];
+					mactrack_debug('Unable to resolve IP Address: ' . $unresolved_ip['ip_address']);
+				}
 			}
 
 			$unresolved_ips[$key]['dns_hostname'] = $dns_hostname;

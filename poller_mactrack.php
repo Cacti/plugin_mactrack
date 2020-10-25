@@ -919,7 +919,7 @@ function log_mactrack_statistics($type = 'collect') {
 	global $start, $site_id;
 
 	/* let's get the number of devices */
-	if (is_numeric($site_id)) {
+	if ($site_id > 0) {
 		$devices = db_fetch_cell_prepared('SELECT COUNT(*)
 			FROM mac_track_devices
 			WHERE site_id = ?',

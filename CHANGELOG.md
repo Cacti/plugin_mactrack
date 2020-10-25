@@ -6,6 +6,8 @@
 
 * bug: Mac Watch can not send mail
 
+* bug: Number of devices scanned incorrect for main scanner
+
 * issue#70: Fix issue with Prompt confirmation button
 
 * issue#75: Command Line does not show output
@@ -57,6 +59,8 @@
 * feature: Switch port_number to integer type of performance reasons
 
 * feature: Update Net_DNS2 to version 1.5
+
+* feature: Use local DNS to resolve when either the resolver fails or there are no DNS servers listed
 
 --- 4.2 ---
 
