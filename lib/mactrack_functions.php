@@ -3009,7 +3009,7 @@ function mactrack_display_stats() {
 
 	html_start_box('', '100%', '', '3', 'center', '');
 
-	print '<tr>';
+	print '<tr class="tableRow">';
 	print '<td>' . __('Scanning Rate: Every %s', mactrack_display_hours(read_config_option('mt_collection_timing')), 'mactrack') . ', ' . $message . '</td>';
 	print '</tr>';
 

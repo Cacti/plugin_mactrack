@@ -475,7 +475,7 @@ function mactrack_view_dot1x() {
 	print '<div class="center" style="position:fixed;left:0;bottom:0;display:table;margin-left:auto;margin-right:auto;width:100%;">';
 
 	html_start_box('', '100%', '', '3', 'center', '');
-	print '<tr>';
+	print '<tr class="tableRow">';
 	mactrack_legend_row('authn_success', __('Authorization Success', 'mactrack'));
 	mactrack_legend_row('auth_success', __('Authentication Success', 'mactrack'));
 	mactrack_legend_row('authn_failed', __('Authorization Failed', 'mactrack'));
