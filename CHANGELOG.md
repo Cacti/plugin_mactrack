@@ -42,6 +42,8 @@
 
 * issue#117: Juniper EX4200 issues with getJEX_switch_ports
 
+* issue#118: Undefined property: Net_DNS2_RR_CNAME::$ptrdname in file
+
 * issue#119: No values for Dot1x and browser hangs
 
 * issue#120: mactrack_import_ouidb.php has incorrect path to function definitions
