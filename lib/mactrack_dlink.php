@@ -106,7 +106,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 		foreach ($active_ports_array as $port_info) {
 			if (((convert_dlink_data($ifInterfaces[$indexes[$i]]['ifType']) >= 6) &&
 				(convert_dlink_data($ifInterfaces[$indexes[$i]]['ifType']) <= 9)) ||
-		  (convert_dlink_data($ifInterfaces[$indexes[$i]]['ifType']) == 117)) {
+				(convert_dlink_data($ifInterfaces[$indexes[$i]]['ifType']) == 117)) {
 				if (convert_dlink_data($port_info) == 1) {
 					$ports_active++;
 				}
@@ -135,19 +135,10 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 		/* get device active port numbers */
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, $snmp_readstring);
 
-    /* get device active port numbers */
-		//$vlan_id = get_vlan_id_oid($port_numbers);
-
-
-    /* get device active port numbers */
-		//$vlan_ids = xform_dlink_vlan_associations($device, $snmp_readstring);
-
 		/* get the ignore ports list from device */
 		$ignore_ports = port_list_to_array($device['ignorePorts']);
 
-		/* determine user ports for this device and transfer user ports to
-		   a new array.
-		*/
+		/* determine user ports for this device and transfer user ports to a new array. */
 		$i = 0;
 
 		if (cacti_sizeof($port_numbers) > 0) {
@@ -167,8 +158,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 			}
 		}
 
-    $i = 0;
-
+		$i = 0;
 
 		/* compare the user ports to the brige port data, store additional
 		   relevant data about the port.
@@ -201,11 +191,11 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 						(convert_dlink_data($brPortIfType) <= 9)) || (convert_dlink_data($brPortIfType) == 117)) &&
 						(!isset($ifInterfaces[$brPortIfIndex]['portLink']))) {
 						/* set some defaults  */
-						$new_port_key_array[$i]['vlan_id'] = get_dlink_vlan_id($port_key['key']);
-						$new_port_key_array[$i]['vlan_name'] = $vlan_names[$new_port_key_array[$i]['vlan_id']];
+						$new_port_key_array[$i]['vlan_id']     = get_dlink_vlan_id($port_key['key']);
+						$new_port_key_array[$i]['vlan_name']   = $vlan_names[$new_port_key_array[$i]['vlan_id']];
 						$new_port_key_array[$i]['mac_address'] = dlink_convert_macs($port_key['key']);
 						$new_port_key_array[$i]['port_number'] = $port_key['port_number'];
-						$new_port_key_array[$i]['port_name'] = @$ifNames[$port_key['port_number']];
+						$new_port_key_array[$i]['port_name']   = @$ifNames[$port_key['port_number']];
 						/* now set the real data */
 						$new_port_key_array[$i]['key'] = $port_key['key'];
 						$i++;
@@ -285,7 +275,6 @@ if (!function_exists('stripos')) {
 	}
 }
 
-
 function xform_dlink_vlan_associations(&$device, $snmp_readstring = '') {
 	/* get raw index data */
 	if ($snmp_readstring == '') {
@@ -331,25 +320,25 @@ function xform_dlink_vlan_associations(&$device, $snmp_readstring = '') {
 }
 
 function get_dlink_vlan_id($OID) {
-	if ($OID{0} != '.') {
+	if ($OID[0] != '.') {
 		$OID = '.' . $OID;
 	}
 
-	$perPos = strpos($OID, '.',1);
-	$vlan_id = substr($OID,1,$perPos-1);
+	$perPos  = strpos($OID, '.', 1);
+	$vlan_id = substr($OID, 1, $perPos-1);
 
 	return $vlan_id;
 }
 
 function convert_dlink_data($old_port_type) {
 	if (substr_count($old_port_type, '(') > 0) {
-		$pos1 = strpos($old_port_type, '(');
-		$pos2 = strpos($old_port_type, ')');
-		$rezult = substr($old_port_type, $pos1+1, $pos2-$pos1-1);
+		$pos1   = strpos($old_port_type, '(');
+		$pos2   = strpos($old_port_type, ')');
+		$result = substr($old_port_type, $pos1+1, $pos2-$pos1-1);
 	} else{
-		$rezult=$old_port_type;
+		$result = $old_port_type;
 	}
 
-	return $rezult;
+	return $result;
 }
 

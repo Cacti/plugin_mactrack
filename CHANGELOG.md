@@ -12,6 +12,8 @@
 
 * issue#75: Command Line does not show output
 
+* issue#77: dlink switch vlan name is null
+
 * issue#81: Add support for FontAwesome 5.0 under Cacti 1.2
 
 * issue#82: Device Type shows twice / % does not work with Vendor SNMP Object ID Match
