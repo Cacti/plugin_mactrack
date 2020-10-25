@@ -315,17 +315,16 @@ function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = true, $row
 		$sql_limit = '';
 	}
 
-
 	if ((get_request_var('scan_date') != 2)) {
 		$query_string = "SELECT mts.site_name, mtd.device_id, mtd.device_name, mtd.hostname,
 			mtd.mac_address, mtd.username, mtd.ip_address, mtd.dns_hostname, mtd.port_number,
 			mti.ifName, mti.ifDescr, mtd.domain, mtd.status, mtd.scan_date
-			FROM mac_track_dot1x mtd
-			LEFT JOIN mac_track_sites mts
+			FROM mac_track_dot1x AS mtd
+			LEFT JOIN mac_track_sites AS mts
 			ON mtd.site_id = mts.site_id
-			LEFT JOIN mac_track_interfaces mti
+			LEFT JOIN mac_track_interfaces AS mti
 			ON mtd.port_number = mti.ifIndex
-			AND mtd.device_id=mti.device_id
+			AND mtd.device_id = mti.device_id
 			$sql_where
 			$sql_order
 			$sql_limit";
@@ -333,12 +332,12 @@ function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = true, $row
 		$query_string = "SELECT mts.site_name, mtd.device_id, mtd.device_name, mtd.hostname,
 			mtd.mac_address, mtd.username, mtd.ip_address, mtd.dns_hostname, mtd.port_number,
 			mti.ifName, mti.ifDescr, mtd.domain, mtd.status, MAX(mtd.scan_date) AS scan_date
-			FROM mac_track_dot1x mtd
-			LEFT JOIN mac_track_sites mts
+			FROM mac_track_dot1x AS mtd
+			LEFT JOIN mac_track_sites AS mts
 			ON (mtd.site_id = mts.site_id)
-			LEFT JOIN mac_track_interfaces mti
+			LEFT JOIN mac_track_interfaces AS mti
 			ON mtd.port_number = mti.ifIndex
-			AND mtd.device_id=mti.device_id
+			AND mtd.device_id = mti.device_id
 			$sql_where
 			GROUP BY device_id, mac_address, port_number, ip_address
 			$sql_order
@@ -380,16 +379,24 @@ function mactrack_view_dot1x() {
 	} elseif (get_request_var('scan_date') != 3) {
 		$rows_query_string = "SELECT
 			COUNT(mtd.device_id)
-			FROM mac_track_dot1x mtd
-			LEFT JOIN mac_track_sites mts ON (mtd.site_id = mts.site_id)
+			FROM mac_track_dot1x AS mtd
+			LEFT JOIN mac_track_sites AS mts
+			ON mtd.site_id = mts.site_id
+			LEFT JOIN mac_track_interfaces AS mti
+			ON mtd.port_number = mti.ifIndex
+			AND mtd.device_id = mti.device_id
 			$sql_where";
 
 		$total_rows = db_fetch_cell($rows_query_string);
 	} else {
 		$rows_query_string = "SELECT
 			COUNT(DISTINCT device_id, mac_address, port_number, ip_address)
-			FROM mac_track_dot1x mtd
-			LEFT JOIN mac_track_sites mts ON (mtd.site_id = mts.site_id)
+			FROM mac_track_dot1x AS mtd
+			LEFT JOIN mac_track_sites AS mts
+			ON mtd.site_id = mts.site_id
+			LEFT JOIN mac_track_interfaces AS mti
+			ON mtd.port_number = mti.ifIndex
+			AND mtd.device_id = mti.device_id
 			$sql_where";
 
 		$total_rows = db_fetch_cell($rows_query_string);
