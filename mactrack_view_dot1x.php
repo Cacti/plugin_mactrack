@@ -166,19 +166,19 @@ function mactrack_view_export_dot1x() {
 function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = true, $rows) {
 	/* status sql where */
 	if (get_request_var('status') == '1') { // Idle
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . 'mtd.status = 1';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 1';
 	} elseif (get_request_var('status') == '2') { // Running
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . 'mtd.status = 2';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 2';
 	} elseif (get_request_var('status') == '3') { // No Method
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . 'mtd.status = 3';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 3';
 	} elseif (get_request_var('status') == '4') { // Authentication Success
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . 'mtd.status = 4';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 4';
 	} elseif (get_request_var('status') == '5') { // Authentication Failed
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . 'mtd.status = 5';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 5';
 	} elseif (get_request_var('status') == '6') { // Authorization Success
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . 'mtd.status = 6';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 6';
 	} elseif (get_request_var('status') == '7') { // Authorization Failed
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . 'mtd.status = 7';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 7';
 	}
 
 	/* form the 'where' clause for our main sql query */
@@ -187,19 +187,19 @@ function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = true, $row
 			case '1': /* do not filter */
 				break;
 			case '2': /* matches */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.mac_address = ' . db_qstr(get_request_var('mac_filter'));
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.mac_address = ' . db_qstr(get_request_var('mac_filter'));
 				break;
 			case '3': /* contains */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.mac_address LIKE ' . db_qstr('%' . get_request_var('mac_filter') . '%');
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.mac_address LIKE ' . db_qstr('%' . get_request_var('mac_filter') . '%');
 				break;
 			case '4': /* begins with */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.mac_address LIKE ' . db_qstr(get_request_var('mac_filter') . '%');
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.mac_address LIKE ' . db_qstr(get_request_var('mac_filter') . '%');
 				break;
 			case '5': /* does not contain */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.mac_address NOT LIKE ' . db_qstr('%' . get_request_var('mac_filter') . '%');
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.mac_address NOT LIKE ' . db_qstr('%' . get_request_var('mac_filter') . '%');
 				break;
 			case '6': /* does not begin with */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.mac_address NOT LIKE ' . db_qstr(get_request_var('mac_filter') . '%');
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.mac_address NOT LIKE ' . db_qstr(get_request_var('mac_filter') . '%');
 				break;
 		}
 	}
@@ -209,25 +209,25 @@ function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = true, $row
 			case '1': /* do not filter */
 				break;
 			case '2': /* matches */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.ip_address = ' . db_qstr(get_request_var('ip_filter'));
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.ip_address = ' . db_qstr(get_request_var('ip_filter'));
 				break;
 			case '3': /* contains */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.ip_address LIKE ' . db_qstr('%' . get_request_var('ip_filter') . '%');
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.ip_address LIKE ' . db_qstr('%' . get_request_var('ip_filter') . '%');
 				break;
 			case '4': /* begins with */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.ip_address LIKE ' . db_qstr(get_request_var('ip_filter') . '%');
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.ip_address LIKE ' . db_qstr(get_request_var('ip_filter') . '%');
 				break;
 			case '5': /* does not contain */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.ip_address NOT LIKE ' . db_qstr('%' . get_request_var('ip_filter') . '%');
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.ip_address NOT LIKE ' . db_qstr('%' . get_request_var('ip_filter') . '%');
 				break;
 			case '6': /* does not begin with */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.ip_address NOT LIKE ' . db_qstr(get_request_var('ip_filter') . '%');
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.ip_address NOT LIKE ' . db_qstr(get_request_var('ip_filter') . '%');
 				break;
 			case '7': /* is null */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.ip_address = ""';
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.ip_address = ""';
 				break;
 			case '8': /* is not null */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.ip_address != ""';
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.ip_address != ""';
 				break;
 		}
 	}
@@ -237,62 +237,68 @@ function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = true, $row
 			case '1': /* do not filter */
 				break;
 			case '2': /* matches */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mti.ifName = ' . db_qstr(get_request_var('port_name_filter'));
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mti.ifName = ' . db_qstr(get_request_var('port_name_filter'));
 				break;
 			case '3': /* contains */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mti.ifName LIKE ' . db_qstr('%' . get_request_var('port_name_filter') . '%');
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mti.ifName LIKE ' . db_qstr('%' . get_request_var('port_name_filter') . '%');
 				break;
 			case '4': /* begins with */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mti.ifName LIKE ' . db_qstr(get_request_var('port_name_filter') . '%');
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mti.ifName LIKE ' . db_qstr(get_request_var('port_name_filter') . '%');
 				break;
 			case '5': /* does not contain */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mti.ifName NOT LIKE ' . db_qstr('%' . get_request_var('port_name_filter') . '%');
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mti.ifName NOT LIKE ' . db_qstr('%' . get_request_var('port_name_filter') . '%');
 				break;
 			case '6': /* does not begin with */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mti.ifName NOT LIKE ' . db_qstr(get_request_var('port_name_filter') . '%');
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mti.ifName NOT LIKE ' . db_qstr(get_request_var('port_name_filter') . '%');
 				break;
 			case '7': /* is null */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mti.ifName = ""';
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mti.ifName = ""';
 				break;
 			case '8': /* is not null */
-				$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mti.ifName != ""';
+				$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mti.ifName != ""';
 				break;
 		}
 	}
 
 	if (get_request_var('filter') != '') {
-		if (strlen(read_config_option('mt_reverse_dns'))) {
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') .
+		if (read_config_option('mt_reverse_dns') != '') {
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') .
 				' (mtd.dns_hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtd.device_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mti.ifName LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mtd.ip_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mtd.mac_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtd.hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtd.status LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		} else {
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') .
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') .
 				' (mtd.device_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mti.ifName LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mtd.ip_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mtd.mac_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtd.hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtd.status LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		}
 	}
 
 	if (get_request_var('domain') != '-1') {
-		$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.domain = ' . db_qstr(get_request_var('domain'));
+		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.domain = ' . db_qstr(get_request_var('domain'));
 	}
 
 	if (get_request_var('site_id') != '-1') {
-		$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.site_id = ' . get_request_var('site_id');
+		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.site_id = ' . get_request_var('site_id');
 	}
 
 	if (get_request_var('status') != '0') {
-		$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.status = ' . get_request_var('status');
+		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.status = ' . get_request_var('status');
 	}
 
 	if (get_request_var('device_id') != '-1') {
-		$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.device_id = ' . get_request_var('device_id');
+		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.device_id = ' . get_request_var('device_id');
 	}
 
 	if ((get_request_var('scan_date') != '1') && (get_request_var('scan_date') != '2')) {
-		$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mtd.scan_date =' . db_qstr(get_request_var('scan_date'));
+		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mtd.scan_date =' . db_qstr(get_request_var('scan_date'));
 	}
 
 	/* prevent table scans, either a device or site must be selected */
@@ -339,7 +345,7 @@ function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = true, $row
 			$sql_limit";
 	}
 
-	if (strlen($sql_where) == 0) {
+	if ($sql_where == '') {
 		return array();
 	} else {
 		return db_fetch_assoc($query_string);
@@ -369,7 +375,7 @@ function mactrack_view_dot1x() {
 	$port_results = mactrack_view_get_dot1x_records($sql_where, true, $rows);
 
 	/* prevent table scans, either a device or site must be selected */
-	if (!strlen($sql_where)) {
+	if ($sql_where == '') {
 		$total_rows = 0;
 	} elseif (get_request_var('scan_date') != 3) {
 		$rows_query_string = "SELECT
