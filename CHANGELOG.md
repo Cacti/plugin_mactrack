@@ -8,6 +8,8 @@
 
 * bug: Number of devices scanned incorrect for main scanner
 
+* bug: MacAuthorizations Interface not accessible through MacTrack tab
+
 * issue#70: Fix issue with Prompt confirmation button
 
 * issue#75: Command Line does not show output

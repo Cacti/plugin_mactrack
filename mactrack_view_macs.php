@@ -171,7 +171,7 @@ function form_actions() {
 	if (!isset($mac_address_array)) {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one MAC Address.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = '';
-	} else if (!mactrack_check_user_realm(2122)) {
+	} elseif (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		print "<tr><td clsas='even'><span class='textError'>" . __('You are not permitted to change Mac Authorizations.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = '';
 	} else {
@@ -252,7 +252,7 @@ function form_aggregated_actions() {
 	if (!sizeof($row_array)) {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one Row.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = "";
-	} else if (!mactrack_check_user_realm(2122)) {
+	} elseif (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		print "<tr><td class='even'><span class='textError'>" . __('You are not permitted to delete rows.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = "";
 	} else {
@@ -756,7 +756,7 @@ function mactrack_view_macs() {
 		);
 	}
 
-	if (mactrack_check_user_realm(2122)) {
+	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		$columns = sizeof($display_text) + 1;
 	} else {
 		$columns = sizeof($display_text);
@@ -768,7 +768,7 @@ function mactrack_view_macs() {
 
 	html_start_box('', '100%', '', '3', 'center', '');
 
-	if (mactrack_check_user_realm(2122)) {
+	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 	} else {
 		html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
@@ -804,7 +804,7 @@ function mactrack_view_macs() {
 			form_selectable_cell(filter_value($port_result['vlan_name'], get_request_var('filter')), $key, '', 'right');
 			form_selectable_cell($scan_date, $key, '', 'right');
 
-			if (mactrack_check_user_realm(2122)) {
+			if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 				form_checkbox_cell($port_result['mac_address'], $key);
 			}
 
@@ -824,7 +824,7 @@ function mactrack_view_macs() {
 		print $nav;
 	}
 
-	if (mactrack_check_user_realm(2122)) {
+	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		draw_actions_dropdown($mactrack_view_macs_actions);
 	}
 }
@@ -896,7 +896,7 @@ function mactrack_view_aggregated_macs() {
 		$display_text['count_rec'] = array(__('Count', 'mactrack'), 'ASC');
 	}
 
-	if (mactrack_check_user_realm(2122)) {
+	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		$columns = sizeof($display_text) + 1;
 	} else {
 		$columns = sizeof($display_text);
@@ -908,7 +908,7 @@ function mactrack_view_aggregated_macs() {
 
 	html_start_box('', '100%', '', '3', 'center', '');
 
-	if (mactrack_check_user_realm(2122)) {
+	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 	} else {
 		html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
@@ -947,7 +947,7 @@ function mactrack_view_aggregated_macs() {
 			form_selectable_cell($color_line_date . $port_result['date_last'], $key);
 			form_selectable_cell($port_result['count_rec'], $key);
 
-			if (mactrack_check_user_realm(2122)) {
+			if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 				form_checkbox_cell($port_result['mac_address'], $key);
 			}
 
@@ -968,7 +968,7 @@ function mactrack_view_aggregated_macs() {
 		mactrack_display_stats();
 	}
 
-	if (mactrack_check_user_realm(2122)) {
+	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		/* draw the dropdown containing a list of available actions for this form */
 		draw_actions_dropdown($mactrack_view_agg_macs_actions);
 	}

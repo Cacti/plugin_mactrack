@@ -430,7 +430,7 @@ function mactrack_view_dot1x() {
 		);
 	}
 
-	if (mactrack_check_user_realm(2122)) {
+	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		$columns = sizeof($display_text) + 1;
 	} else {
 		$columns = sizeof($display_text);
@@ -442,7 +442,7 @@ function mactrack_view_dot1x() {
 
 	html_start_box('', '100%', '', '3', 'center', '');
 
-	if (mactrack_check_user_realm(2122)) {
+	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 	} else {
 		html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
