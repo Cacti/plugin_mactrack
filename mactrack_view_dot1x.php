@@ -264,20 +264,19 @@ function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = true, $row
 		if (read_config_option('mt_reverse_dns') != '') {
 			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') .
 				' (mtd.dns_hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
-				'mtd.device_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mti.ifName LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mtd.device_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mtd.username LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtd.ip_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
-				'mtd.mac_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
-				'mtd.hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
-				'mtd.status LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
+				'mtd.mac_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		} else {
 			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') .
-				' (mtd.device_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				' (mtd.dns_hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mti.ifName LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mtd.device_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mtd.username LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtd.ip_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
-				'mtd.mac_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
-				'mtd.hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
-				'mtd.status LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
+				'mtd.mac_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		}
 	}
 
