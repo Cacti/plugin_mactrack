@@ -356,19 +356,16 @@ function mactrack_view_macs_validate_request_vars() {
             'options' => array('options' => 'sanitize_search_string')
             ),
         'ip_filter' => array(
-            'filter' => FILTER_CALLBACK,
+            'filter' => FILTER_DEFAULT,
             'default' => '',
-            'options' => array('options' => 'sanitize_search_string')
             ),
         'mac_filter' => array(
-            'filter' => FILTER_CALLBACK,
+            'filter' => FILTER_DEFAULT,
             'default' => '',
-            'options' => array('options' => 'sanitize_search_string')
             ),
         'port_name_filter' => array(
-            'filter' => FILTER_CALLBACK,
+            'filter' => FILTER_DEFAULT,
             'default' => '',
-            'options' => array('options' => 'sanitize_search_string')
             ),
         'scan_date' => array(
             'filter' => FILTER_CALLBACK,
@@ -435,19 +432,19 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = true, $rows)
 		case '1': /* do not filter */
 			break;
 		case '2': /* matches */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.mac_address='" . get_request_var('mac_filter') . "'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.mac_address = ' . db_qstr(get_request_var('mac_filter'));
 			break;
 		case '3': /* contains */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.mac_address LIKE '%" . get_request_var('mac_filter') . "%'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.mac_address LIKE ' . db_qstr('%' . get_request_var('mac_filter') . '%');
 			break;
 		case '4': /* begins with */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.mac_address LIKE '" . get_request_var('mac_filter') . "%'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.mac_address LIKE ' . db_qstr(get_request_var('mac_filter') . '%');
 			break;
 		case '5': /* does not contain */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.mac_address NOT LIKE '%" . get_request_var('mac_filter') . "%'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.mac_address NOT LIKE ' . db_qstr('%' . get_request_var('mac_filter') . '%');
 			break;
 		case '6': /* does not begin with */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.mac_address NOT LIKE '" . get_request_var('mac_filter') . "%'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.mac_address NOT LIKE ' . db_qstr(get_request_var('mac_filter') . '%');
 		}
 	}
 
@@ -456,25 +453,25 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = true, $rows)
 		case '1': /* do not filter */
 			break;
 		case '2': /* matches */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.ip_address='" . get_request_var('ip_filter') . "'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.ip_address = ' . db_qstr(get_request_var('ip_filter'));
 			break;
 		case '3': /* contains */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.ip_address LIKE '%" . get_request_var('ip_filter') . "%'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.ip_address LIKE ' . db_qstr('%' . get_request_var('ip_filter') . '%');
 			break;
 		case '4': /* begins with */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.ip_address LIKE '" . get_request_var('ip_filter') . "%'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.ip_address LIKE ' . db_qstr(get_request_var('ip_filter') . '%');
 			break;
 		case '5': /* does not contain */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.ip_address NOT LIKE '%" . get_request_var('ip_filter') . "%'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.ip_address NOT LIKE ' . db_qstr('%' . get_request_var('ip_filter') . '%');
 			break;
 		case '6': /* does not begin with */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.ip_address NOT LIKE '" . get_request_var('ip_filter') . "%'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.ip_address NOT LIKE ' . db_qstr(get_request_var('ip_filter') . '%');
 			break;
 		case '7': /* is null */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.ip_address = ''";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.ip_address = ""';
 			break;
 		case '8': /* is not null */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.ip_address != ''";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.ip_address != ""';
 		}
 	}
 
@@ -483,68 +480,71 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = true, $rows)
 		case '1': /* do not filter */
 			break;
 		case '2': /* matches */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.port_name='" . get_request_var('port_name_filter') . "'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.port_name = ' . db_qstr(get_request_var('port_name_filter'));
 			break;
 		case '3': /* contains */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.port_name LIKE '%" . get_request_var('port_name_filter') . "%'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.port_name LIKE ' . db_qstr('%' . get_request_var('port_name_filter') . '%');
 			break;
 		case '4': /* begins with */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.port_name LIKE '" . get_request_var('port_name_filter') . "%'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.port_name LIKE ' . db_qstr(get_request_var('port_name_filter') . '%');
 			break;
 		case '5': /* does not contain */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.port_name NOT LIKE '%" . get_request_var('port_name_filter') . "%'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.port_name NOT LIKE ' . db_qstr('%' . get_request_var('port_name_filter') . '%');
 			break;
 		case '6': /* does not begin with */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.port_name NOT LIKE '" . get_request_var('port_name_filter') . "%'";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.port_name NOT LIKE ' . db_qstr(get_request_var('port_name_filter') . '%');
 			break;
 		case '7': /* is null */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.port_name = ''";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.port_name = ""';
 			break;
 		case '8': /* is not null */
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.port_name != ''";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.port_name != ""';
+			break;
 		}
 	}
 
 	if (get_request_var('filter') != '') {
 		if (strlen(read_config_option('mt_reverse_dns'))) {
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') .
-				" (mac_track_ports.dns_hostname LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mac_track_ports.device_name LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mac_track_ports.hostname LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mac_track_oui_database.vendor_name LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mac_track_ports.vlan_name LIKE '%" . get_request_var('filter') . "%')";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') .
+				' (mac_track_ports.dns_hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mac_track_ports.device_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mac_track_ports.hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mac_track_oui_database.vendor_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mac_track_ports.vlan_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		} else {
-			$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') .
-				" (mac_track_ports.device_name LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mac_track_ports.hostname LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mac_track_oui_database.vendor_name LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mac_track_ports.vlan_name LIKE '%" . get_request_var('filter') . "%')";
+			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') .
+				' (mac_track_ports.device_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mac_track_ports.hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mac_track_oui_database.vendor_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mac_track_ports.vlan_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		}
 	}
 
 	if (get_request_var('authorized') != '-1') {
-		$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mac_track_ports.authorized=' . get_request_var('authorized');
+		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.authorized = ' . get_request_var('authorized');
 	}
 
 	if (get_request_var('site_id') != '-1') {
-		$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mac_track_ports.site_id=' . get_request_var('site_id');
+		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.site_id = ' . get_request_var('site_id');
 	}
 
 	if (get_request_var('vlan') != '-1') {
-		$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mac_track_ports.vlan_id=' . get_request_var('vlan');
+		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.vlan_id = ' . get_request_var('vlan');
 	}
 
 	if (get_request_var('device_id') != '-1') {
-		$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . ' mac_track_ports.device_id=' . get_request_var('device_id');
+		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.device_id = ' . get_request_var('device_id');
 	}
 
 	if ((get_request_var('scan_date') != '1') && (get_request_var('scan_date') != '2') && (get_request_var('scan_date') != '3')) {
-		$sql_where .= (strlen($sql_where) ? ' AND':'WHERE') . " mac_track_ports.scan_date='" . get_request_var('scan_date') . "'";
+		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mac_track_ports.scan_date = ' . db_qstr(get_request_var('scan_date'));
 	}
 
 	/* prevent table scans, either a device or site must be selected */
 	if (get_request_var('site_id') == -1 && get_request_var('device_id') == -1) {
-		if (!strlen($sql_where)) return array();
+		if ($sql_where == '') {
+			return array();
+		}
 	}
 
 	$sql_order = get_order_string();
@@ -596,7 +596,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = true, $rows)
 			$sql_limit";
 	}
 
-	if (strlen($sql_where) == 0) {
+	if ($sql_where == '') {
 		return array();
 	} else {
 		return db_fetch_assoc($query_string);
@@ -626,7 +626,7 @@ function mactrack_view_macs() {
 	$port_results = mactrack_view_get_mac_records($sql_where, true, $rows);
 
 	/* prevent table scans, either a device or site must be selected */
-	if (!strlen($sql_where)) {
+	if ($sql_where == '') {
 		$total_rows = 0;
 	} elseif (get_request_var('scan_date') == 1) {
 		$rows_query_string = "SELECT
@@ -650,32 +650,109 @@ function mactrack_view_macs() {
 
 	if (read_config_option('mt_reverse_dns') != '') {
 		$display_text = array(
-			'nosort'        => array(__('Actions', 'mactrack'), ''),
-			'device_name'   => array(__('Switch Name', 'mactrack'), 'ASC'),
-			'hostname'      => array(__('Switch Hostname', 'mactrack'), 'ASC'),
-			'ip_address'    => array(__('ED IP Address', 'mactrack'), 'ASC'),
-			'dns_hostname'  => array(__('ED DNS Hostname', 'mactrack'), 'ASC'),
-			'mac_address'   => array(__('ED MAC Address', 'mactrack'), 'ASC'),
-			'vendor_name'   => array(__('Vendor Name', 'mactrack'), 'ASC'),
-			'port_number'   => array(__('Port Number', 'mactrack'), 'DESC'),
-			'port_name'     => array(__('Port Name', 'mactrack'), 'ASC'),
-			'vlan_id'       => array(__('VLAN ID', 'mactrack'), 'DESC'),
-			'vlan_name'     => array(__('VLAN Name', 'mactrack'), 'ASC'),
-			'max_scan_date' => array(__('Last Scan Date', 'mactrack'), 'DESC')
+			'nosort' => array(
+				'display' => __('Actions', 'mactrack'),
+			),
+			'device_name' => array(
+				'display' => __('Switch Name', 'mactrack'),
+				'sort' => 'ASC'
+			),
+			'hostname' => array(
+				'display' => __('Switch Hostname', 'mactrack'),
+				'sort'    => 'ASC'
+			),
+			'ip_address' => array(
+				'display' => __('ED IP Address', 'mactrack'),
+				'sort'    => 'ASC'
+			),
+			'dns_hostname' => array(
+				'display' => __('ED DNS Hostname', 'mactrack'),
+				'sort'    => 'ASC'
+			),
+			'mac_address' => array(
+				'display' => __('ED MAC Address', 'mactrack'),
+				'sort'    => 'ASC'
+			),
+			'vendor_name' => array(
+				'display' => __('Vendor Name', 'mactrack'),
+				'sort'    => 'ASC'
+			),
+			'port_number' => array(
+				'display' => __('Port Number', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'port_name' => array(
+				'display' => __('Port Name', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'ASC'
+			),
+			'vlan_id' => array(
+				'display' => __('VLAN ID', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'vlan_name' => array(
+				'display' => __('VLAN Name', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'ASC'
+			),
+			'max_scan_date' => array(
+				'display' => __('Last Scan Date', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			)
 		);
 	} else {
 		$display_text = array(
-			'nosort'      => array(__('Actions', 'mactrack'), ''),
-			'device_name' => array(__('Switch Name', 'mactrack'), 'ASC'),
-			'hostname'    => array(__('Switch Hostname', 'mactrack'), 'ASC'),
-			'ip_address'  => array(__('ED IP Address', 'mactrack'), 'ASC'),
-			'mac_address' => array(__('ED MAC Address', 'mactrack'), 'ASC'),
-			'vendor_name' => array(__('Vendor Name', 'mactrack'), 'ASC'),
-			'port_number' => array(__('Port Number', 'mactrack'), 'DESC'),
-			'port_name'   => array(__('Port Name', 'mactrack'), 'ASC'),
-			'vlan_id'     => array(__('VLAN ID', 'mactrack'), 'DESC'),
-			'vlan_name'   => array(__('VLAN Name', 'mactrack'), 'ASC'),
-			'scan_date'   => array(__('Last Scan Date', 'mactrack'), 'DESC')
+			'nosort' => array(
+				'display' => __('Actions', 'mactrack')
+			),
+			'device_name' => array(
+				'display' => __('Switch Name', 'mactrack'),
+				'sort'    => 'ASC'
+			),
+			'hostname' => array(
+				'display' => __('Switch Hostname', 'mactrack'),
+				'sort'    => 'ASC'
+			),
+			'ip_address' => array(
+				'display' => __('ED IP Address', 'mactrack'),
+				'sort'    => 'ASC'
+			),
+			'mac_address' => array(
+				'display' => __('ED MAC Address', 'mactrack'),
+				'sort'    => 'ASC'
+			),
+			'vendor_name' => array(
+				'display' => __('Vendor Name', 'mactrack'),
+				'sort'    => 'ASC'
+			),
+			'port_number' => array(
+				'display' => __('Port Number', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'port_name' => array(
+				'display' => __('Port Name', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'ASC'
+			),
+			'vlan_id' => array(
+				'display' => __('VLAN ID', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			),
+			'vlan_name' => array(
+				'display' => __('VLAN Name', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'ASC'
+			),
+			'scan_date' => array(
+				'display' => __('Last Scan Date', 'mactrack'),
+				'align'   => 'right',
+				'sort'    => 'DESC'
+			)
 		);
 	}
 
@@ -721,11 +798,11 @@ function mactrack_view_macs() {
 
 			form_selectable_cell(filter_value($port_result['mac_address'], get_request_var('filter')), $key);
 			form_selectable_cell(filter_value($port_result['vendor_name'], get_request_var('filter')), $key);
-			form_selectable_cell($port_result['port_number'], $key);
-			form_selectable_cell(filter_value($port_result['port_name'], get_request_var('filter')), $key);
-			form_selectable_cell($port_result['vlan_id'], $key);
-			form_selectable_cell(filter_value($port_result['vlan_name'], get_request_var('filter')), $key);
-			form_selectable_cell($scan_date, $key);
+			form_selectable_cell($port_result['port_number'], $key, '', 'right');
+			form_selectable_cell(filter_value($port_result['port_name'], get_request_var('filter')), $key, '', 'right');
+			form_selectable_cell($port_result['vlan_id'], $key, '', 'right');
+			form_selectable_cell(filter_value($port_result['vlan_name'], get_request_var('filter')), $key, '', 'right');
+			form_selectable_cell($scan_date, $key, '', 'right');
 
 			if (mactrack_check_user_realm(2122)) {
 				form_checkbox_cell($port_result['mac_address'], $key);
@@ -993,7 +1070,7 @@ function mactrack_mac_filter() {
 						</select>
 					</td>
 					<td>
-						<input type='text' id='ip_filter' size='25' value='<?php print get_request_var('ip_filter');?>'>
+						<input type='text' id='ip_filter' size='25' value='<?php print html_escape_request_var('ip_filter');?>'>
 					</td>
 					<td>
 						<?php print __('VLAN Name', 'mactrack');?>
@@ -1008,7 +1085,7 @@ function mactrack_mac_filter() {
 							}
 
 							if (get_request_var('site_id') != '-1') {
-								if (strlen($sql_where)) {
+								if ($sql_where != '') {
 									$sql_where .= ' AND site_id=' . get_request_var('site_id');
 								} else {
 									$sql_where = 'WHERE site_id=' . get_request_var('site_id');
@@ -1062,7 +1139,7 @@ function mactrack_mac_filter() {
 						</select>
 					</td>
 					<td>
-						<input type='text' id='mac_filter' size='25' value='<?php print get_request_var('mac_filter');?>'>
+						<input type='text' id='mac_filter' size='25' value='<?php print html_escape_request_var('mac_filter');?>'>
 					</td>
 					<td>
 						<?php print __('Authorized', 'mactrack');?>
@@ -1089,7 +1166,7 @@ function mactrack_mac_filter() {
 						</select>
 					</td>
 					<td>
-						<input type='text' id='port_name_filter' size='25' value='<?php print get_request_var('port_name_filter');?>'>
+						<input type='text' id='port_name_filter' size='25' value='<?php print html_escape_request_var('port_name_filter');?>'>
 					</td>
 					<td colspan='2'>
 					</td>
@@ -1109,7 +1186,7 @@ function mactrack_mac_filter() {
 				strURL += '&ip_filter_type_id=' + $('#ip_filter_type_id').val();
 				strURL += '&ip_filter=' + $('#ip_filter').val();
 				strURL += '&port_name_filter_type_id=' + $('#port_name_filter_type_id').val();
-		                strURL += '&port_name_filter=' + $('#port_name_filter').val();
+				strURL += '&port_name_filter=' + $('#port_name_filter').val();
 				strURL += '&scan_date=' + $('#scan_date').val();
 				strURL += '&authorized=' + $('#authorized').val();
 				strURL += '&vlan=' + $('#vlan').val();

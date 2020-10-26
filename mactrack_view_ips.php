@@ -128,7 +128,7 @@ function mactrack_view_export_ip_ranges() {
 
 function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = true) {
 	if (get_request_var('site_id') != '-1') {
-		$sql_where = 'WHERE mac_track_ip_ranges.site_id=' . get_request_var('site_id');
+		$sql_where = 'WHERE mtir.site_id = ' . get_request_var('site_id');
 	} else {
 		$sql_where = '';
 	}
@@ -141,16 +141,16 @@ function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = 
 	}
 
 	$ip_ranges = "SELECT
-		mac_track_sites.site_id,
-		mac_track_sites.site_name,
-		mac_track_ip_ranges.ip_range,
-		mac_track_ip_ranges.ips_max,
-		mac_track_ip_ranges.ips_current,
-		mac_track_ip_ranges.ips_max_date,
-		mac_track_ip_ranges.ips_current_date
-		FROM mac_track_ip_ranges
-		INNER JOIN mac_track_sites
-		ON (mac_track_ip_ranges.site_id=mac_track_sites.site_id)
+		mts.site_id,
+		mts.site_name,
+		mtir.ip_range,
+		mtir.ips_max,
+		mtir.ips_current,
+		mtir.ips_max_date,
+		mtir.ips_current_date
+		FROM mac_track_ip_ranges AS mtir
+		INNER JOIN mac_track_sites AS mts
+		ON mtir.site_id = mts.site_id
 		$sql_where
 		$sql_order
 		$sql_limit";
@@ -184,19 +184,44 @@ function mactrack_view_ip_ranges() {
 	$ip_ranges = mactrack_view_get_ip_range_records($sql_where, $rows);
 
 	$total_rows = db_fetch_cell("SELECT
-		COUNT(mac_track_ip_ranges.ip_range)
-		FROM mac_track_ip_ranges
-		INNER JOIN mac_track_sites ON (mac_track_ip_ranges.site_id=mac_track_sites.site_id)
+		COUNT(mtir.ip_range)
+		FROM mac_track_ip_ranges AS mtir
+		INNER JOIN mac_track_sites AS mts
+		ON mtir.site_id = mts.site_id
 		$sql_where");
 
 	$display_text = array(
-		'nosort'           => array(__('Actions', 'mactrack'), ''),
-		'site_name'        => array(__('Site Name', 'mactrack'), 'ASC'),
-		'ip_range'         => array(__('IP Range', 'mactrack'), 'ASC'),
-		'ips_current'      => array(__('Current IP Addresses', 'mactrack'), 'DESC'),
-		'ips_current_date' => array(__('Current Date', 'mactrack'), 'DESC'),
-		'ips_max'          => array(__('Maximum IP Addresses', 'mactrack'), 'DESC'),
-		'ips_max_date'     => array(__('Maximum Date', 'mactrack'), 'DESC')
+		'nosort' => array(
+			'display' => __('Actions', 'mactrack')
+		),
+		'site_name' => array(
+			'display' => __('Site Name', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'ip_range' => array(
+			'display' => __('IP Range', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'ips_current' => array(
+			'display' => __('Current IP Addresses', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'ips_current_date' => array(
+			'display' => __('Current Date', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'ips_max' => array(
+			'display' => __('Maximum IP Addresses', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'ips_max_date' => array(
+			'display' => __('Maximum Date', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		)
 	);
 
 	$columns = sizeof($display_text);
@@ -210,24 +235,43 @@ function mactrack_view_ip_ranges() {
 	html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
 	if (cacti_sizeof($ip_ranges)) {
+		$i = 0;
+
 		foreach ($ip_ranges as $ip_range) {
-			form_alternate_row();
-				?>
-				<td class='nowrap' style='width:1px;'>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_sites.php?action=edit&site_id=' . $ip_range['site_id']);?>' title='<?php print __esc('Edit Site', 'mactrack');?>'><i class='mtEdit fas fa-edit'></i></a>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_macs.php?report=macs&reset&ip_filter_type_id=3&ip_filter=' . $ip_range['ip_range'] . '&device_id=-1&scan_date=3&site_id=' . $ip_range['site_id']);?>' title='<?php print __esc('View MAC Addresses', 'mactrack');?>'><i class='mtMacs fas fa-at'></i></a>
-					<a href='<?php print htmlspecialchars($webroot . 'mactrack_view_arp.php?report=arp&reset&ip_filter_type_id=3&ip_filter=' . $ip_range['ip_range'] . '.' . '&device_id=-1&scan_date=3&site_id=' . $ip_range['site_id']);?>' title='<?php print __esc('View IP Addresses', 'mactrack');?>'><i class='mtPorts fas fa-desktop'></i></a>
-				</td>
-				<td class='hyperLink'>
-					<?php print $ip_range['site_name'];?>
-				</td>
-				<td><?php print $ip_range['ip_range'] . '.*';?></td>
-				<td><?php print number_format_i18n($ip_range['ips_current']);?></td>
-				<td><?php print $ip_range['ips_current_date'];?></td>
-				<td><?php print number_format_i18n($ip_range['ips_max']);?></td>
-				<td><?php print $ip_range['ips_max_date'];?></td>
-			</tr>
-			<?php
+			$url  = '<a href="' . html_escape($webroot . 'mactrack_sites.php' .
+				'?action=edit' .
+				'&reset=true' .
+				'&site_id=' . $ip_range['site_id']) . '" title="' . __esc('Edit Site', 'mactrack') . '"><i class="mtEdit fas fa-edit"></i></a>';
+
+			$url .= '<a href="' . html_escape($webroot . 'mactrack_view_macs.php' .
+				'?report=macs' .
+				'&reset=true' .
+				'&ip_filter_type_id=3' .
+				'&ip_filter=' . $ip_range['ip_range'] .
+				'&device_id=-1' .
+				'&scan_date=3' .
+				'&site_id=' . $ip_range['site_id']) . '" title="' . __esc('View MAC Addresses', 'mactrack') . '"><i class="mtMacs fas fa-at"></i></a>';
+
+			$url .= '<a href="' . html_escape($webroot . 'mactrack_view_arp.php' .
+				'?report=arp' .
+				'&reset=true' .
+				'&ip_filter_type_id=3' .
+				'&ip_filter=' . $ip_range['ip_range'] . '.' .
+				'&device_id=-1' .
+				'&scan_date=3' .
+				'&site_id=' . $ip_range['site_id']) . '" title="' . __esc('View IP Addresses', 'mactrack') . '"><i class="mtPorts fas fa-desktop"></i></a>';
+
+			form_alternate_row('line' . $i, true);
+			form_selectable_cell($url, $i);
+			form_selectable_cell($ip_range['site_name'], $i);
+			form_selectable_cell($ip_range['ip_range'] . '.*', $i);
+			form_selectable_cell(number_format_i18n($ip_range['ips_current']), $i, '', 'right');
+			form_selectable_cell($ip_range['ips_current_date'], $i, '', 'right');
+			form_selectable_cell(number_format_i18n($ip_range['ips_max']), $i, '', 'right');
+			form_selectable_cell($ip_range['ips_max_date'], $i, '', 'right');
+			form_end_row();
+
+			$i++;
 		}
 	} else {
 		print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Site IP Ranges Found', 'mactrack') . '</em></td></tr>';
