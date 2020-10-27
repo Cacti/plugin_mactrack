@@ -410,7 +410,7 @@ function mactrack_view_export_macs() {
 			if (get_request_var('scan_date') == 1) {
 				$scan_date = $port_result['scan_date'];
 			} else {
-				$scan_date = $port_result['max_scan_date'];
+				$scan_date = $port_result['scan_date'];
 			}
 
 			array_push($xport_array,'"' . $port_result['site_name'] . '","' .
@@ -563,7 +563,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = true, $rows)
 		$query_string = "SELECT
 			row_id, site_name, device_id, device_name, hostname, mtp.mac_address,
 			vendor_name, ip_address, dns_hostname, port_number,
-			port_name, vlan_id, vlan_name, date_last, count_rec, active_last, mtm.mac_id
+			port_name, vlan_id, vlan_name, MAX(date_last) AS scan_date, COUNT(count_rec) AS count_rec, active_last, mtm.mac_id
 			FROM mac_track_aggregated_ports AS mtp
 			LEFT JOIN mac_track_sites AS mts
 			ON mtp.site_id = mts.site_id
@@ -572,6 +572,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = true, $rows)
 			LEFT JOIN mac_track_oui_database AS mtod
 			ON mtod.vendor_mac = mtp.vendor_mac
 			$sql_where
+			GROUP BY device_id, ip_address, mtp.mac_address
 			$sql_order
 			$sql_limit";
 	} elseif ((get_request_var('scan_date') != 2)) {
@@ -593,7 +594,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = true, $rows)
 		$query_string = "SELECT
 			site_name, device_id, device_name, hostname, mtp.mac_address,
 			vendor_name, ip_address, dns_hostname, port_number,
-			port_name, vlan_id, vlan_name, MAX(scan_date) AS max_scan_date, mtm.mac_id
+			port_name, vlan_id, vlan_name, MAX(scan_date) AS scan_date, mtm.mac_id
 			FROM mac_track_ports AS mtp
 			LEFT JOIN mac_track_sites AS mts
 			ON mtp.site_id = mts.site_id
@@ -663,121 +664,76 @@ function mactrack_view_macs() {
 		$total_rows = db_fetch_cell($rows_query_string);
 	}
 
+	$display_text1 = array(
+		'nosort' => array(
+			'display' => __('Actions', 'mactrack'),
+		),
+		'device_name' => array(
+			'display' => __('Switch Name', 'mactrack'),
+			'sort' => 'ASC'
+		),
+		'hostname' => array(
+			'display' => __('Switch Hostname', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'ip_address' => array(
+			'display' => __('ED IP Address', 'mactrack'),
+			'sort'    => 'ASC'
+		)
+	);
+
+	$display_text2 = array();
+
 	if (read_config_option('mt_reverse_dns') != '') {
-		$display_text = array(
-			'nosort' => array(
-				'display' => __('Actions', 'mactrack'),
-			),
-			'device_name' => array(
-				'display' => __('Switch Name', 'mactrack'),
-				'sort' => 'ASC'
-			),
-			'hostname' => array(
-				'display' => __('Switch Hostname', 'mactrack'),
-				'sort'    => 'ASC'
-			),
-			'ip_address' => array(
-				'display' => __('ED IP Address', 'mactrack'),
-				'sort'    => 'ASC'
-			),
+		$display_text2 = array(
 			'dns_hostname' => array(
 				'display' => __('ED DNS Hostname', 'mactrack'),
 				'sort'    => 'ASC'
-			),
-			'mac_address' => array(
-				'display' => __('ED MAC Address', 'mactrack'),
-				'sort'    => 'ASC'
-			),
-			'authorized' => array(
-				'display' => __('Authorized', 'mactrack'),
-				'sort'    => 'ASC'
-			),
-			'vendor_name' => array(
-				'display' => __('Vendor Name', 'mactrack'),
-				'sort'    => 'ASC'
-			),
-			'port_number' => array(
-				'display' => __('Port Number', 'mactrack'),
-				'align'   => 'right',
-				'sort'    => 'DESC'
-			),
-			'port_name' => array(
-				'display' => __('Port Name', 'mactrack'),
-				'align'   => 'right',
-				'sort'    => 'ASC'
-			),
-			'vlan_id' => array(
-				'display' => __('VLAN ID', 'mactrack'),
-				'align'   => 'right',
-				'sort'    => 'DESC'
-			),
-			'vlan_name' => array(
-				'display' => __('VLAN Name', 'mactrack'),
-				'align'   => 'right',
-				'sort'    => 'ASC'
-			),
-			'max_scan_date' => array(
-				'display' => __('Last Scan Date', 'mactrack'),
-				'align'   => 'right',
-				'sort'    => 'DESC'
-			)
-		);
-	} else {
-		$display_text = array(
-			'nosort' => array(
-				'display' => __('Actions', 'mactrack')
-			),
-			'device_name' => array(
-				'display' => __('Switch Name', 'mactrack'),
-				'sort'    => 'ASC'
-			),
-			'hostname' => array(
-				'display' => __('Switch Hostname', 'mactrack'),
-				'sort'    => 'ASC'
-			),
-			'ip_address' => array(
-				'display' => __('ED IP Address', 'mactrack'),
-				'sort'    => 'ASC'
-			),
-			'mac_address' => array(
-				'display' => __('ED MAC Address', 'mactrack'),
-				'sort'    => 'ASC'
-			),
-			'authorized' => array(
-				'display' => __('Authorized', 'mactrack'),
-				'sort'    => 'ASC'
-			),
-			'vendor_name' => array(
-				'display' => __('Vendor Name', 'mactrack'),
-				'sort'    => 'ASC'
-			),
-			'port_number' => array(
-				'display' => __('Port Number', 'mactrack'),
-				'align'   => 'right',
-				'sort'    => 'DESC'
-			),
-			'port_name' => array(
-				'display' => __('Port Name', 'mactrack'),
-				'align'   => 'right',
-				'sort'    => 'ASC'
-			),
-			'vlan_id' => array(
-				'display' => __('VLAN ID', 'mactrack'),
-				'align'   => 'right',
-				'sort'    => 'DESC'
-			),
-			'vlan_name' => array(
-				'display' => __('VLAN Name', 'mactrack'),
-				'align'   => 'right',
-				'sort'    => 'ASC'
-			),
-			'scan_date' => array(
-				'display' => __('Last Scan Date', 'mactrack'),
-				'align'   => 'right',
-				'sort'    => 'DESC'
 			)
 		);
 	}
+
+	$display_text3 = array(
+		'mac_address' => array(
+			'display' => __('ED MAC Address', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'authorized' => array(
+			'display' => __('Authorized', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'vendor_name' => array(
+			'display' => __('Vendor Name', 'mactrack'),
+			'sort'    => 'ASC'
+		),
+		'port_number' => array(
+			'display' => __('Port Number', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'port_name' => array(
+			'display' => __('Port Name', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'ASC'
+		),
+		'vlan_id' => array(
+			'display' => __('VLAN ID', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		),
+		'vlan_name' => array(
+			'display' => __('VLAN Name', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'ASC'
+		),
+		'scan_date' => array(
+			'display' => __('Last Scan Date', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
+		)
+	);
+
+	$display_text = array_merge($display_text1, $display_text2, $display_text3);
 
 	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		$columns = sizeof($display_text) + 1;
@@ -807,7 +763,7 @@ function mactrack_view_macs() {
 			if (get_request_var('scan_date') != 2) {
 				$scan_date = $port_result['scan_date'];
 			} else {
-				$scan_date = $port_result['max_scan_date'];
+				$scan_date = $port_result['scan_date'];
 			}
 
 			$key =  str_replace($delim, '_', $port_result['mac_address']) . '-' . $port_result['device_id'] .
@@ -819,7 +775,7 @@ function mactrack_view_macs() {
 			form_selectable_cell($port_result['hostname'], $key);
 			form_selectable_cell(filter_value($port_result['ip_address'], get_request_var('filter')), $key);
 
-			if (strlen(read_config_option('mt_reverse_dns')) > 0) {
+			if (read_config_option('mt_reverse_dns') == 'on') {
 				form_selectable_cell(filter_value($port_result['dns_hostname'], get_request_var('filter')), $key);
 			}
 
@@ -918,7 +874,7 @@ function mactrack_view_aggregated_macs() {
 		)
 	);
 
-	if (strlen(read_config_option('mt_reverse_dns')) > 0) {
+	if (read_config_option('mt_reverse_dns') == 'on') {
 		$display_text['dns_hostname'] = array(
 			'display' => __('ED DNS Hostname', 'mactrack'),
 			'sort'    => 'ASC'
@@ -961,7 +917,7 @@ function mactrack_view_aggregated_macs() {
 	));
 
 	if (get_request_var('rows') == 1) {
-		$display_text['max_scan_date'] = array(
+		$display_text['scan_date'] = array(
 			'display' => __('Last Scan Date', 'mactrack'),
 			'align'   => 'right',
 			'sort'    => 'DESC'
@@ -1011,7 +967,7 @@ function mactrack_view_aggregated_macs() {
 			}
 
 			$key =  str_replace($delim, '_', $port_result['mac_address']) . '-' . $port_result['device_id'] .
-					$port_result['port_number'] . '-' . $port_result['date_last'];
+					$port_result['port_number'] . '-' . $port_result['scan_date'];
 
 			$key = $port_result['row_id'];
 
@@ -1037,7 +993,7 @@ function mactrack_view_aggregated_macs() {
 			form_selectable_cell(filter_value($port_result['port_name'], get_request_var('filter')), $key, '', 'right');
 			form_selectable_cell($port_result['vlan_id'], $key, '', 'right');
 			form_selectable_cell(filter_value($port_result['vlan_name'], get_request_var('filter')), $key, '', 'right');
-			form_selectable_cell($color_line_date . $port_result['date_last'], $key, '', 'right');
+			form_selectable_cell($color_line_date . $port_result['scan_date'], $key, '', 'right');
 			form_selectable_cell($port_result['count_rec'], $key, '', 'right');
 
 			if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
