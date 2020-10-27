@@ -844,16 +844,18 @@ function mactrack_view_aggregated_macs() {
 	$port_results = mactrack_view_get_mac_records($sql_where, true, $rows);
 
 	/* prevent table scans, either a device or site must be selected */
-	if (get_request_var('site_id') == -1 && get_request_var('device_id') == -1) {
+	if ($sql_where == '') {
 		$total_rows = 0;
 	} else {
 		$rows_query_string = "SELECT
-			COUNT(*)
+			COUNT(DISTINCT device_id, ip_address, mtp.mac_address)
 			FROM mac_track_aggregated_ports AS mtp
 			LEFT JOIN mac_track_sites AS mts
 			ON mtp.site_id = mts.site_id
+			LEFT JOIN mac_track_macauth AS mtm
+			ON mtm.mac_address = mtp.mac_address
 			LEFT JOIN mac_track_oui_database AS mtod
-			ON mdod.vendor_mac = mtp.vendor_mac)
+			ON mtod.vendor_mac = mtp.vendor_mac
 			$sql_where";
 
 		$total_rows = db_fetch_cell($rows_query_string);
