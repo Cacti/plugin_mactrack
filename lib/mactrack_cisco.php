@@ -238,7 +238,6 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 								$port_array[$i]['port_number'] = $ifInterfaces[$ifIndex]['ifName'];
 								$port_array[$i]['port_name']   = $portName;
 								$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
-								$device['ports_active']++;
 								$i++;
 
 								mactrack_debug('VLAN: ' . $active_vlan['vlan_id'] . ', ' .
@@ -459,7 +458,6 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 								$port_array[$i]['port_number'] = $portNumber;
 								$port_array[$i]['port_name']   = $portName;
 								$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
-								$device['ports_active']++;
 								$i++;
 
 								mactrack_debug('VLAN: ' . $active_vlan['vlan_id'] . ', ' .

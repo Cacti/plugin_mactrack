@@ -1194,11 +1194,11 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 			$i++;
 		}
 	}
+    $device['ports_active'] = $ports_active;
 
 	if ($store_to_db) {
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $ports_total . ', OPER PORTS: ' . $ports_active);
-
-		$device['ports_active'] = $ports_active;
+	
 		$device['ports_total'] = $ports_total;
 		$device['macs_active'] = 0;
 	}
@@ -1534,11 +1534,11 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 			$i++;
 		}
 	}
-
+    $device['ports_active'] = $ports_active;
+    
 	if ($store_to_db) {
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $ports_total . ', OPER PORTS: ' . $ports_active);
-
-		$device['ports_active'] = $ports_active;
+	
 		$device['ports_total'] = $ports_total;
 		$device['macs_active'] = 0;
 	}
