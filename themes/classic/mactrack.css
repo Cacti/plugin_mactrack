@@ -81,31 +81,31 @@
 	background-color: rgba(242, 23, 33, 0.8);
 	color: #eeeeee;
 }
-.authn_success {
+.dot1x_authn_success {
 	background-color: rgba(148, 179, 107, 0.8);
 	color: #000000;
 }
-.auth_success {
+.dot1x_auth_success {
 	background-color: rgba(126, 168, 129, 0.8);
 	color: #000000;
 }
-.authn_failed {
+.dot1x_authn_failed {
 	background-color: rgba(242, 23, 33, 0.8);
 	color: #eeeeee;
 }
-.auth_failed {
+.dot1x_auth_failed {
 	background-color: rgba(255, 122, 48, 0.8);
 	color: #eeeeee;
 }
-.running {
+.dot1x_running {
 	background-color: rgba(251, 74, 20, 0.8);
 	color: #eeeeee;
 }
-.idle {
+.dot1x_idle {
 	background-color: rgba(250, 253, 158, 0.8);
 	color: #000000;
 }
-.auth_no_method {
+.dot1x_auth_no_method {
 	background-color: rgba(205, 207, 196, 0.8);
 	color: #000000;
 }

@@ -2883,19 +2883,19 @@ function mactrack_int_row_class($stat) {
 
 function mactrack_dot1x_row_class($port_result) {
 	if ($port_result['status'] == '7') {
-		return 'authn_failed';
+		return 'dot1x_authn_failed';
 	} elseif ($port_result['status'] == '5') {
-		return 'auth_failed';
+		return 'dot1x_auth_failed';
 	} elseif ($port_result['status'] == '3') {
-		return 'auth_no_method';
+		return 'dot1x_auth_no_method';
 	} elseif ($port_result['status'] == '2') {
-		return 'running';
+		return 'dot1x_running';
 	} elseif ($port_result['status'] == '1') {
-		return 'idle';
+		return 'dot1x_idle';
 	} elseif ($port_result['status'] == '4') {
-		return 'auth_success';
+		return 'dot1x_auth_success';
 	} else {
-		return 'authn_success';
+		return 'dot1x_authn_success';
 	}
 }
 
