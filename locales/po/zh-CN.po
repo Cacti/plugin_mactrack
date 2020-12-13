@@ -8,22 +8,21 @@ msgstr ""
 "Project-Id-Version: macktrack on cacti 1.1.34\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2020-10-20 10:25-0400\n"
-"PO-Revision-Date: 2019-07-26 13:15+0000\n"
+"PO-Revision-Date: 2020-12-12 19:13-0500\n"
 "Last-Translator: tomcat <luis_126@126.com>\n"
 "Language-Team: Chinese (Simplified) <http://translate.cacti.net/projects/cacti/mactrack/zh-CN/>\n"
-"Language: zh-CN\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.4-dev\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
 #: mactrack_view_dot1x.php:480 mactrack_view_dot1x.php:607
-#, fuzzy
 msgid "Idle"
-msgstr "闲"
+msgstr "空闲"
 
 #: lib/mactrack_functions.php:38 mactrack_utilities.php:238
 #: mactrack_utilities.php:318 mactrack_view_dot1x.php:479
@@ -38,15 +37,13 @@ msgstr "方法"
 
 #: lib/mactrack_functions.php:40 mactrack_view_dot1x.php:476
 #: mactrack_view_dot1x.php:610
-#, fuzzy
 msgid "Authentication Success"
 msgstr "认证成功"
 
 #: lib/mactrack_functions.php:41 mactrack_view_dot1x.php:478
 #: mactrack_view_dot1x.php:611
-#, fuzzy
 msgid "Authentication Failed"
-msgstr "认证失败: %s"
+msgstr "身份认证失败"
 
 #: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
 #: mactrack_view_dot1x.php:612
@@ -56,7 +53,6 @@ msgstr "Mac授权"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:613
-#, fuzzy
 msgid "Authorization Failed"
 msgstr "授权失败"
 
@@ -149,11 +145,11 @@ msgstr "启用"
 
 #: lib/mactrack_functions.php:2676
 msgid "Data"
-msgstr ""
+msgstr "数据"
 
 #: lib/mactrack_functions.php:2676
 msgid "Voice"
-msgstr ""
+msgstr "语音"
 
 #: lib/mactrack_functions.php:2728
 #, php-format
@@ -189,7 +185,6 @@ msgstr "设备禁用'%d'"
 #: mactrack_view_macs.php:920 mactrack_view_sites.php:414
 #: mactrack_view_sites.php:415 mactrack_view_sites.php:416
 #: mactrack_view_sites.php:417 mactrack_view_sites.php:418 setup.php:337
-#, fuzzy
 msgid "N/A"
 msgstr "N/A"
 
@@ -273,9 +268,8 @@ msgid "IP Address"
 msgstr "IP地址"
 
 #: lib/mactrack_functions.php:3100 setup.php:1472
-#, fuzzy
 msgid "MAC Address"
-msgstr "IP地址"
+msgstr "MAC地址"
 
 #: lib/mactrack_functions.php:3101 mactrack_view_interfaces.php:291
 #: mactrack_view_interfaces.php:607 setup.php:545
@@ -361,9 +355,9 @@ msgid "SubType"
 msgstr "子类型"
 
 #: mactrack_actions.php:215
-#, fuzzy, php-format
+#, php-format
 msgid "Device Tracking Device: (%s) successfully updated"
-msgstr "设备跟踪 - 设备报告视图"
+msgstr "设备跟踪设备:(%s)已成功更新"
 
 #: mactrack_actions.php:228
 #, fuzzy
@@ -437,7 +431,6 @@ msgstr "设备类型前缀："
 #: mactrack_device_types.php:310 mactrack_devices.php:363
 #: mactrack_macauth.php:151 mactrack_macwatch.php:156 mactrack_sites.php:158
 #: mactrack_snmp.php:235 mactrack_view_macs.php:186 mactrack_view_macs.php:276
-#, fuzzy
 msgid "Cancel"
 msgstr "取消"
 
@@ -488,9 +481,8 @@ msgid "Please specify the location of the CSV file containing your device type i
 msgstr "请指定包含设备类型信息的CSV文件的位置。"
 
 #: mactrack_device_types.php:508 mactrack_devices.php:522
-#, fuzzy
 msgid "Overwrite Existing Data?"
-msgstr "覆盖现有数据？"
+msgstr "覆盖现有数据?"
 
 #: mactrack_device_types.php:509 mactrack_devices.php:523
 #, fuzzy
@@ -498,18 +490,16 @@ msgid "Should the import process be allowed to overwrite existing data?  Please 
 msgstr "是否允许导入过程覆盖现有数据？ 请注意，这并不意味着删除旧的行，只能替换重复的行。"
 
 #: mactrack_device_types.php:512 mactrack_devices.php:526
-#, fuzzy
 msgid "Allow Existing Rows to be Updated?"
-msgstr "允许更新现有的行？"
+msgstr "允许更新现有的行?"
 
 #: mactrack_device_types.php:517 mactrack_devices.php:531
 msgid "Required File Format Notes"
 msgstr "必需的文件格式注释"
 
 #: mactrack_device_types.php:520 mactrack_devices.php:534
-#, fuzzy
 msgid "The file must contain a header row with the following column headings."
-msgstr "该文件必须包含具有以下列标题的标题行。"
+msgstr "该文件必须包含具有以下列标题的标题行."
 
 #: mactrack_device_types.php:522
 #, fuzzy
@@ -617,23 +607,23 @@ msgid "Router"
 msgstr "路由器"
 
 #: mactrack_device_types.php:713
-#, fuzzy, php-format
+#, php-format
 msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
-msgstr "HEADER LINE PROCESSED OK： <br>列中找到：％s"
+msgstr "标题行处理OK: <br>列找到其中:%s"
 
 #: mactrack_device_types.php:715 mactrack_devices.php:728
-#, fuzzy, php-format
+#, php-format
 msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
-msgstr "HEADER LINE PROCESSING ERROR：缺少必填字段<br>列中找到：％s"
+msgstr "标题行处理错误:缺少必需字段<br>列发现:%s"
 
 #: mactrack_device_types.php:771
 msgid "Unknown Assume \"Switch/Hub\""
 msgstr "未知假设“开关/集线器”"
 
 #: mactrack_device_types.php:806 mactrack_device_types.php:821
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
-msgstr "INSERT SUCCEEDED：供应商：％s，描述：％s，类型：％s，sysDescr：％s，sysObjectID：％s"
+msgstr "插入成功:供应商:%s，描述:%s，类型:%s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php:808 mactrack_device_types.php:823
 #, fuzzy, php-format
@@ -641,9 +631,9 @@ msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysOb
 msgstr "INSERT FAILED：供应商：％s，描述：％s，类型：％s，sysDescr：％s，sysObjectID：％s"
 
 #: mactrack_device_types.php:815
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
-msgstr "INSERT SKIPPED，现有：供应商：％s，描述：％s，类型：％s，sysDescr：％s，sysObjectID：％s"
+msgstr "插入跳过的，现有的:供应商:%s，描述:%s，类型:%s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php:849
 #, fuzzy, php-format
@@ -935,24 +925,24 @@ msgid "Therefore, if you attempt to import duplicate devices, only the data you 
 msgstr "因此，如果您尝试导入重复的设备，则只会更新您指定的数据。"
 
 #: mactrack_devices.php:726
-#, fuzzy, php-format
+#, php-format
 msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
-msgstr "HEADER LINE PROCESSED OK： <br>列中找到：％s"
+msgstr "标题行处理OK: <br>列找到其中:%s"
 
 #: mactrack_devices.php:812 mactrack_devices.php:827
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr "INSERT SUCCEEDED：主机名：SiteID：％s，设备名称：％s，主机名％s，SNMP端口：％s"
+msgstr "插入成功:主机名:SiteID: %s，设备名:%s，主机名:%s, SNMP端口:%s"
 
 #: mactrack_devices.php:814 mactrack_devices.php:829
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr "INSERT FAILED：SiteID：％s，设备名称：％s，主机名％s，SNMP端口：％s"
+msgstr "插入失败:SiteID: %s，设备名:%s，主机名:%s, SNMP端口:%s"
 
 #: mactrack_devices.php:821
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr "INSERT SKIPPED，EXISTING：SiteID：％s，设备名称：％s，主机名％s，SNMP端口：％s"
+msgstr "插入跳过的、现有的:SiteID: %s、设备名:%s、主机名%s、SNMP端口:%s"
 
 #: mactrack_devices.php:856
 #, fuzzy, php-format
@@ -965,22 +955,18 @@ msgid "Device Tracking Devices [new]"
 msgstr "MacTrack设备[新建]"
 
 #: mactrack_devices.php:873
-#, fuzzy
 msgid "SNMP Information"
 msgstr "SNMP 信息"
 
 #: mactrack_devices.php:895
-#, fuzzy
 msgid "System:"
 msgstr "系统:"
 
 #: mactrack_devices.php:896
-#, fuzzy
 msgid "Uptime:"
 msgstr "Uptime:"
 
 #: mactrack_devices.php:897
-#, fuzzy
 msgid "Hostname:"
 msgstr "主机名:"
 
@@ -1052,7 +1038,6 @@ msgstr "没有MacTrack设备"
 #: mactrack_devices.php:1127 mactrack_view_devices.php:429 setup.php:898
 #: setup.php:1030 setup.php:1039 setup.php:1048 setup.php:1256 setup.php:1272
 #: setup.php:1317 setup.php:1346
-#, fuzzy
 msgid "None"
 msgstr "无"
 
@@ -1228,7 +1213,6 @@ msgid "You must select at least one SNMP Option."
 msgstr "您必须至少选择一个SNMP选项。"
 
 #: mactrack_snmp.php:215
-#, fuzzy
 msgid "Click 'Continue' to delete the following SNMP Option(s)."
 msgstr "点击 '继续' 删除以下SNMP 选项."
 
@@ -1334,7 +1318,6 @@ msgid "SNMP Settings"
 msgstr "SNMP设置"
 
 #: mactrack_snmp.php:532
-#, fuzzy
 msgid "No SNMP Option Sets Found"
 msgstr "未找到SNMP 选项集"
 
@@ -1413,7 +1396,6 @@ msgid "DNS Configuration Information"
 msgstr "DNS配置信息"
 
 #: mactrack_utilities.php:264
-#, fuzzy
 msgid "Enabled"
 msgstr "启用"
 
@@ -1479,27 +1461,27 @@ msgid "Device Tracking Database Results"
 msgstr "设备跟踪数据库结果"
 
 #: mactrack_utilities.php:395 mactrack_utilities.php:465
-#, fuzzy, php-format
+#, php-format
 msgid "The following number of records have been removed from the database: %s"
-msgstr "有从数据库中删除的%d' 个记录。"
+msgstr "从数据库中删除的记录数量如下:%s"
 
 #: mactrack_utilities.php:405
 msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
 msgstr "您确定要删除系统中的所有聚合端口到MAC到IP结果吗？"
 
 #: mactrack_utilities.php:418
-#, fuzzy, php-format
+#, php-format
 msgid "The following number of records have been removed from the aggergated table: %s"
-msgstr "已从aggergated表中删除以下数量的记录：％s"
+msgstr "从aggergate表中删除的记录数量如下:%s"
 
 #: mactrack_utilities.php:428
 msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
 msgstr "您确定要删除并重新创建系统中的所有聚合端口到MAC到IP结果吗？"
 
 #: mactrack_utilities.php:454
-#, fuzzy, php-format
+#, php-format
 msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
-msgstr "已从aggergated表中删除以下数量的记录：％s。并且将添加％s记录。"
+msgstr "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
 
 #: mactrack_utilities.php:475
 #, fuzzy
@@ -1746,9 +1728,8 @@ msgstr "设备跟踪 - ARP / IP视图"
 
 #: mactrack_view_dot1x.php:404 mactrack_view_dot1x.php:417
 #: mactrack_view_dot1x.php:661
-#, fuzzy
 msgid "Domain"
-msgstr "删除用户域"
+msgstr "域名"
 
 #: mactrack_view_dot1x.php:406 mactrack_view_dot1x.php:419
 #: mactrack_view_macs.php:664 mactrack_view_macs.php:678
@@ -1772,12 +1753,10 @@ msgid "Dot1x Scan Results"
 msgstr "端口扫描器"
 
 #: mactrack_view_dot1x.php:560
-#, fuzzy
 msgid "Sessions"
 msgstr "会话"
 
 #: mactrack_view_dot1x.php:606
-#, fuzzy
 msgid "Any Status"
 msgstr "任何状态"
 
@@ -1790,12 +1769,10 @@ msgid "Most Recent"
 msgstr "最近的"
 
 #: mactrack_view_dot1x.php:666
-#, fuzzy
 msgid "DATA"
 msgstr "数据"
 
 #: mactrack_view_dot1x.php:667
-#, fuzzy
 msgid "VOICE"
 msgstr "语音"
 
@@ -1843,7 +1820,7 @@ msgstr "丢弃礼物"
 #: mactrack_view_interfaces.php:341
 #, fuzzy
 msgid "No Graphs"
-msgstr "图表"
+msgstr "图形"
 
 #: mactrack_view_interfaces.php:342
 #, fuzzy
@@ -1864,7 +1841,6 @@ msgid "Description"
 msgstr "Description"
 
 #: mactrack_view_interfaces.php:380
-#, fuzzy
 msgid "Alias"
 msgstr "别名"
 
@@ -1881,7 +1857,7 @@ msgstr "OutBound％"
 #: mactrack_view_interfaces.php:394
 #, fuzzy
 msgid "In (B/S)"
-msgstr "SNMP 版本:<b>%s</b>"
+msgstr "数据库用户: <b>%s</b>"
 
 #: mactrack_view_interfaces.php:399
 #, fuzzy
@@ -1939,7 +1915,6 @@ msgid "Out Disc (OD/S)"
 msgstr "出盘（OD / S）"
 
 #: mactrack_view_interfaces.php:470
-#, fuzzy
 msgid "Last Change"
 msgstr "最后更改"
 
@@ -2172,9 +2147,8 @@ msgid "Sites / Device Types"
 msgstr "设备类型"
 
 #: mactrack_view_sites.php:434
-#, fuzzy
 msgid "Site Scan Results"
-msgstr "删除所有扫描结果"
+msgstr "网站扫描结果"
 
 #: setup.php:244 setup.php:956 setup.php:957 setup.php:958 setup.php:959
 #: setup.php:960 setup.php:969 setup.php:971
@@ -2227,12 +2201,14 @@ msgid "When should old database records be removed from the database.  Please no
 msgstr "什么时候应该从数据库中删除旧的数据库记录。 请注意，在进行此操作时，不允许访问端口数据库。"
 
 #: setup.php:291
+#, fuzzy
 msgid "Confirm Utilities Prompt"
-msgstr ""
+msgstr "确认实用程序提示"
 
 #: setup.php:292
+#, fuzzy
 msgid "When using utilities, prompt for verification"
-msgstr ""
+msgstr "使用实用程序时，提示进行验证"
 
 #: setup.php:297
 msgid "Data Retention"
@@ -2481,16 +2457,15 @@ msgid "MacTrack Settings"
 msgstr "MacTrack网站"
 
 #: setup.php:536
-#, fuzzy
 msgid "Default Tab"
-msgstr "默认"
+msgstr "默认标签"
 
 #: setup.php:537
+#, fuzzy
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
-msgstr ""
+msgstr "每次您进入MacTrack时，您希望将哪个MacTrack选项卡作为“默认”选项卡。"
 
 #: setup.php:543
-#, fuzzy
 msgid "IP Addresses"
 msgstr "IP地址"
 
@@ -2500,8 +2475,9 @@ msgid "Mac Addresses"
 msgstr "MAC地址"
 
 #: setup.php:546
+#, fuzzy
 msgid "dot1x Deta"
-msgstr ""
+msgstr "dot1x Deta"
 
 #: setup.php:557
 #, fuzzy

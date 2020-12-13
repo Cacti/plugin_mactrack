@@ -8,25 +8,23 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2020-10-20 10:25-0400\n"
-"PO-Revision-Date: 2019-03-17 09:57-0400\n"
+"PO-Revision-Date: 2020-12-12 19:11-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
 #: mactrack_view_dot1x.php:480 mactrack_view_dot1x.php:607
-#, fuzzy
 msgid "Idle"
 msgstr "Sysslolös"
 
 #: lib/mactrack_functions.php:38 mactrack_utilities.php:238
 #: mactrack_utilities.php:318 mactrack_view_dot1x.php:479
 #: mactrack_view_dot1x.php:608
-#, fuzzy
 msgid "Running"
 msgstr "Kör"
 
@@ -43,7 +41,6 @@ msgstr "Autentiseringsframgång"
 
 #: lib/mactrack_functions.php:41 mactrack_view_dot1x.php:478
 #: mactrack_view_dot1x.php:611
-#, fuzzy
 msgid "Authentication Failed"
 msgstr "Autentisering misslyckades"
 
@@ -130,8 +127,9 @@ msgid "View Non Interface Graphs"
 msgstr "Visa gränssnitt"
 
 #: lib/mactrack_functions.php:2562
+#, fuzzy
 msgid "No Non Interface Graphs in Cacti"
-msgstr ""
+msgstr "Inga icke-gränssnittsdiagram i kaktusar"
 
 #: lib/mactrack_functions.php:2579
 #, fuzzy
@@ -150,23 +148,22 @@ msgstr "Sedan omstart"
 
 #: lib/mactrack_functions.php:2640 mactrack_devices.php:1215
 #: mactrack_view_devices.php:512
-#, fuzzy
 msgid "Down"
 msgstr "Nere"
 
 #: lib/mactrack_functions.php:2640 mactrack_devices.php:1213
 #: mactrack_view_devices.php:510
-#, fuzzy
 msgid "Up"
 msgstr "Uppe"
 
 #: lib/mactrack_functions.php:2676
 msgid "Data"
-msgstr ""
+msgstr "Data"
 
 #: lib/mactrack_functions.php:2676
+#, fuzzy
 msgid "Voice"
-msgstr ""
+msgstr "Röst"
 
 #: lib/mactrack_functions.php:2728
 #, fuzzy, php-format
@@ -202,14 +199,13 @@ msgstr "Enhet Inaktivera \"% d\""
 #: mactrack_view_macs.php:920 mactrack_view_sites.php:414
 #: mactrack_view_sites.php:415 mactrack_view_sites.php:416
 #: mactrack_view_sites.php:417 mactrack_view_sites.php:418 setup.php:337
-#, fuzzy
 msgid "N/A"
 msgstr "N/A"
 
 #: lib/mactrack_functions.php:2955 setup.php:871
 #, fuzzy, php-format
 msgid "%d Minutes"
-msgstr "%d minuter"
+msgstr "Var %d minut"
 
 #: lib/mactrack_functions.php:2959
 #, fuzzy, php-format
@@ -218,9 +214,9 @@ msgstr "% d timmar"
 
 #: lib/mactrack_functions.php:2963 setup.php:931 setup.php:932 setup.php:933
 #: setup.php:934 setup.php:935
-#, fuzzy, php-format
+#, php-format
 msgid "%d Days"
-msgstr "% d dagar"
+msgstr "<ph id=\"mtc_1\" equiv-text=\"base64:JWQ=\"/> Dagar"
 
 #: lib/mactrack_functions.php:2966
 #, fuzzy, php-format
@@ -245,7 +241,6 @@ msgstr "Status: Inaktiv, LastRuntime:% f sekunder, Processer:% d processer, Enhe
 #: lib/mactrack_functions.php:3007 mactrack_devices.php:1214
 #: mactrack_utilities.php:238 mactrack_utilities.php:264
 #: mactrack_view_devices.php:511 setup.php:917 setup.php:944
-#, fuzzy
 msgid "Disabled"
 msgstr "Inaktiverad"
 
@@ -262,14 +257,12 @@ msgstr "Visa gränssnitt"
 
 #: lib/mactrack_functions.php:3046 mactrack_devices.php:1167
 #: mactrack_view_devices.php:468
-#, fuzzy
 msgid "Not Detected"
-msgstr "Ej upptäckt"
+msgstr "Hittades inte"
 
 #: lib/mactrack_functions.php:3096 lib/mactrack_functions.php:3157
 #: mactrack_sites.php:461 mactrack_sites.php:541 mactrack_view_sites.php:285
 #: setup.php:541 setup.php:956
-#, fuzzy
 msgid "Sites"
 msgstr "Webbsidor"
 
@@ -278,7 +271,6 @@ msgstr "Webbsidor"
 #: mactrack_utilities.php:278 mactrack_view_devices.php:325
 #: mactrack_view_devices.php:519 mactrack_view_sites.php:252 setup.php:542
 #: setup.php:957
-#, fuzzy
 msgid "Devices"
 msgstr "Enheter"
 
@@ -288,7 +280,6 @@ msgid "IP Ranges"
 msgstr "IP-områden"
 
 #: lib/mactrack_functions.php:3099
-#, fuzzy
 msgid "IP Address"
 msgstr "IP adress"
 
@@ -309,13 +300,11 @@ msgid "Dot1x"
 msgstr "Dot1x"
 
 #: lib/mactrack_functions.php:3103 mactrack_view_graphs.php:153
-#, fuzzy
 msgid "Graphs"
 msgstr "Grafer"
 
 #: lib/mactrack_functions.php:3137 mactrack_device_types.php:459
 #: mactrack_devices.php:1216 mactrack_view_devices.php:513 setup.php:892
-#, fuzzy
 msgid "Unknown"
 msgstr "Okänd"
 
@@ -324,7 +313,6 @@ msgstr "Okänd"
 #: mactrack_snmp.php:556 mactrack_vendormacs.php:199 mactrack_view_arp.php:377
 #: mactrack_view_devices.php:418 mactrack_view_dot1x.php:502
 #: mactrack_view_interfaces.php:625 mactrack_view_macs.php:910
-#, fuzzy
 msgid "Search"
 msgstr "Sök"
 
@@ -332,7 +320,6 @@ msgstr "Sök"
 #: mactrack_devices.php:1226 mactrack_macauth.php:379 mactrack_macwatch.php:398
 #: mactrack_snmp.php:566 mactrack_vendormacs.php:209
 #: mactrack_view_devices.php:523 mactrack_view_ips.php:274 setup.php:904
-#, fuzzy
 msgid "Default"
 msgstr "Standard"
 
@@ -346,9 +333,8 @@ msgstr "Visa enhetens detaljer"
 #: mactrack_snmp.php:580 mactrack_vendormacs.php:221 mactrack_view_arp.php:441
 #: mactrack_view_devices.php:442 mactrack_view_dot1x.php:575
 #: mactrack_view_interfaces.php:542 mactrack_view_macs.php:974
-#, fuzzy
 msgid "Go"
-msgstr "Utför"
+msgstr "Start"
 
 #: lib/mactrack_functions.php:3181 mactrack_device_types.php:1035
 #: mactrack_devices.php:1141 mactrack_macauth.php:392 mactrack_macwatch.php:411
@@ -356,7 +342,6 @@ msgstr "Utför"
 #: mactrack_view_devices.php:443 mactrack_view_dot1x.php:576
 #: mactrack_view_interfaces.php:543 mactrack_view_ips.php:287
 #: mactrack_view_macs.php:975
-#, fuzzy
 msgid "Clear"
 msgstr "Rensa"
 
@@ -365,7 +350,6 @@ msgstr "Rensa"
 #: mactrack_view_arp.php:443 mactrack_view_devices.php:444
 #: mactrack_view_dot1x.php:577 mactrack_view_interfaces.php:544
 #: mactrack_view_ips.php:286 mactrack_view_macs.php:976
-#, fuzzy
 msgid "Export"
 msgstr "Exportera"
 
@@ -373,7 +357,6 @@ msgstr "Exportera"
 #: mactrack_view_arp.php:383 mactrack_view_devices.php:424
 #: mactrack_view_dot1x.php:508 mactrack_view_interfaces.php:494
 #: mactrack_view_ips.php:254 mactrack_view_macs.php:916
-#, fuzzy
 msgid "Site"
 msgstr "Webbplats"
 
@@ -382,7 +365,6 @@ msgstr "Webbplats"
 #: mactrack_devices.php:1212 mactrack_view_devices.php:456
 #: mactrack_view_devices.php:467 mactrack_view_devices.php:509
 #: mactrack_view_ips.php:258
-#, fuzzy
 msgid "Any"
 msgstr "Vilken som helst"
 
@@ -425,12 +407,10 @@ msgstr "Ej tillämpligt - Switch / Hub"
 #: mactrack_device_types.php:70 mactrack_devices.php:32 mactrack_macauth.php:30
 #: mactrack_macwatch.php:30 mactrack_sites.php:32 mactrack_snmp.php:31
 #: mactrack_view_macs.php:38
-#, fuzzy
 msgid "Delete"
-msgstr "Ta bort"
+msgstr "Radera"
 
 #: mactrack_device_types.php:71 mactrack_snmp.php:32
-#, fuzzy
 msgid "Duplicate"
 msgstr "Duplicera"
 
@@ -447,9 +427,8 @@ msgstr "Du måste välja minst en enhetstyp."
 #: mactrack_device_types.php:285 mactrack_devices.php:258
 #: mactrack_macauth.php:134 mactrack_macwatch.php:139 mactrack_sites.php:150
 #: mactrack_snmp.php:210 mactrack_view_macs.php:178 mactrack_view_macs.php:259
-#, fuzzy
 msgid "Continue"
-msgstr "innehåller"
+msgstr "Fortsätt"
 
 #: mactrack_device_types.php:290
 #, fuzzy
@@ -475,13 +454,13 @@ msgstr "Enhets typ prefix:"
 #: mactrack_macauth.php:151 mactrack_macwatch.php:156 mactrack_sites.php:158
 #: mactrack_snmp.php:235 mactrack_view_macs.php:186 mactrack_view_macs.php:276
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: mactrack_device_types.php:311 mactrack_devices.php:364
 #: mactrack_macauth.php:152 mactrack_macwatch.php:157 mactrack_sites.php:159
 #: mactrack_snmp.php:235 mactrack_view_macs.php:187 mactrack_view_macs.php:277
 msgid "Return"
-msgstr ""
+msgstr "Tillbaka"
 
 #: mactrack_device_types.php:445
 #, fuzzy
@@ -504,12 +483,10 @@ msgid "No New Device Types Found!"
 msgstr "Inga nya enhetstyper hittades!"
 
 #: mactrack_device_types.php:484 mactrack_devices.php:495
-#, fuzzy
 msgid "Import Results"
 msgstr "Importera resultat"
 
 #: mactrack_device_types.php:486 mactrack_devices.php:497
-#, fuzzy
 msgid "Cacti has imported the following items:"
 msgstr "Cacti har importerat följande:"
 
@@ -754,17 +731,18 @@ msgid "No Device Tracking Device Types Found"
 msgstr "Inga enheter för enhetsspårningsenheter hittades"
 
 #: mactrack_device_types.php:1034
+#, fuzzy
 msgid "Submit Query"
-msgstr ""
+msgstr "Skicka fråga"
 
 #: mactrack_device_types.php:1035
+#, fuzzy
 msgid "Clear Filtered Results"
-msgstr ""
+msgstr "Rensa filtrerade resultat"
 
 #: mactrack_device_types.php:1036
-#, fuzzy
 msgid "Rescan"
-msgstr "Återcan-enhet"
+msgstr "Omsökning"
 
 #: mactrack_device_types.php:1036
 #, fuzzy
@@ -772,7 +750,6 @@ msgid "Scan Active Devices for Unknown Device Types"
 msgstr "Enhetsspårningsenhetstyper"
 
 #: mactrack_device_types.php:1037 mactrack_devices.php:1142
-#, fuzzy
 msgid "Import"
 msgstr "Importera"
 
@@ -788,7 +765,6 @@ msgstr "Importera enhetstyper från lokal fil"
 
 #: mactrack_device_types.php:1049 mactrack_sites.php:499
 #: mactrack_view_sites.php:344 setup.php:997
-#, fuzzy
 msgid "Vendor"
 msgstr "Säljare"
 
@@ -800,24 +776,20 @@ msgstr "Säljare"
 #: mactrack_view_interfaces.php:586 mactrack_view_macs.php:936
 #: mactrack_view_macs.php:1003 mactrack_view_macs.php:1036
 #: mactrack_view_macs.php:1072 setup.php:913
-#, fuzzy
 msgid "All"
 msgstr "Alla"
 
 #: mactrack_device_types.php:1066 mactrack_devices.php:1151
 #: mactrack_view_devices.php:452 mactrack_view_interfaces.php:368
 #: mactrack_view_interfaces.php:552
-#, fuzzy
 msgid "Type"
 msgstr "Typ"
 
 #: mactrack_devices.php:33
-#, fuzzy
 msgid "Enable"
 msgstr "Aktivera"
 
 #: mactrack_devices.php:34 mactrack_macwatch.php:31
-#, fuzzy
 msgid "Disable"
 msgstr "Inaktivera"
 
@@ -1042,14 +1014,12 @@ msgid "System:"
 msgstr "System"
 
 #: mactrack_devices.php:896
-#, fuzzy
 msgid "Uptime:"
-msgstr "Uptime:"
+msgstr "Upptid:"
 
 #: mactrack_devices.php:897
-#, fuzzy
 msgid "Hostname:"
-msgstr "Värdnamn"
+msgstr "& Värddatornamn:"
 
 #: mactrack_devices.php:898
 #, fuzzy
@@ -1062,7 +1032,6 @@ msgid "Device Tracking Device Filters"
 msgstr "Device Tracking Device Filters"
 
 #: mactrack_devices.php:1022 mactrack_view_devices.php:267 setup.php:1238
-#, fuzzy
 msgid "Device Name"
 msgstr "Enhetsnamn"
 
@@ -1070,7 +1039,6 @@ msgstr "Enhetsnamn"
 #: mactrack_view_devices.php:271 mactrack_view_ips.php:194
 #: mactrack_view_sites.php:248 mactrack_view_sites.php:340 setup.php:1269
 #: setup.php:1410
-#, fuzzy
 msgid "Site Name"
 msgstr "Webbplatsnamn"
 
@@ -1079,13 +1047,11 @@ msgstr "Webbplatsnamn"
 #: mactrack_view_devices.php:505 mactrack_view_dot1x.php:405
 #: mactrack_view_dot1x.php:418 mactrack_view_dot1x.php:600
 #: mactrack_view_interfaces.php:465
-#, fuzzy
 msgid "Status"
 msgstr "Status"
 
 #: mactrack_devices.php:1034 mactrack_view_devices.php:279
 #: mactrack_view_interfaces.php:364 setup.php:1245
-#, fuzzy
 msgid "Hostname"
 msgstr "Värdnamn"
 
@@ -1129,12 +1095,10 @@ msgstr "Inga enheter för spårning av enheter"
 #: mactrack_devices.php:1127 mactrack_view_devices.php:429 setup.php:898
 #: setup.php:1030 setup.php:1039 setup.php:1048 setup.php:1256 setup.php:1272
 #: setup.php:1317 setup.php:1346
-#, fuzzy
 msgid "None"
 msgstr "Ingen"
 
 #: mactrack_devices.php:1217 mactrack_view_devices.php:514
-#, fuzzy
 msgid "Error"
 msgstr "Fel"
 
@@ -1174,7 +1138,6 @@ msgid "Mac Address"
 msgstr "MAC-adress"
 
 #: mactrack_macauth.php:319 setup.php:1557
-#, fuzzy
 msgid "Reason"
 msgstr "Orsak"
 
@@ -1184,7 +1147,6 @@ msgid "Added/Modified"
 msgstr "Inkom / Ändrad"
 
 #: mactrack_macauth.php:321
-#, fuzzy
 msgid "By"
 msgstr "Av"
 
@@ -1240,7 +1202,6 @@ msgid "First Seen"
 msgstr "Först sett"
 
 #: mactrack_macwatch.php:331
-#, fuzzy
 msgid "Last Seen"
 msgstr "Sågs senast"
 
@@ -1345,7 +1306,7 @@ msgstr "<name> (1)"
 #: mactrack_snmp.php:224
 #, fuzzy
 msgid "Name Format:"
-msgstr "Namnformat:"
+msgstr "Namnformat"
 
 #: mactrack_snmp.php:298
 #, fuzzy, php-format
@@ -1373,34 +1334,28 @@ msgid "Device Tracking SNMP Options"
 msgstr "Enhet som spårar SNMP-alternativ"
 
 #: mactrack_snmp.php:397
-#, fuzzy
 msgid "Item"
 msgstr "Artikel"
 
 #: mactrack_snmp.php:398 setup.php:470
-#, fuzzy
 msgid "Version"
 msgstr "Version"
 
 #: mactrack_snmp.php:399 setup.php:477
-#, fuzzy
 msgid "Community"
 msgstr "Gemenskaphet"
 
 #: mactrack_snmp.php:400 setup.php:492
-#, fuzzy
 msgid "Port"
 msgstr "Port"
 
 #: mactrack_snmp.php:401 setup.php:500
-#, fuzzy
 msgid "Timeout"
-msgstr "Paus"
+msgstr "Timeout"
 
 #: mactrack_snmp.php:402 setup.php:508
-#, fuzzy
 msgid "Retries"
-msgstr "försök"
+msgstr "Försök"
 
 #: mactrack_snmp.php:403
 #, fuzzy
@@ -1409,7 +1364,6 @@ msgstr "Max OIDs"
 
 #: mactrack_snmp.php:404 mactrack_view_dot1x.php:399
 #: mactrack_view_dot1x.php:413
-#, fuzzy
 msgid "Username"
 msgstr "Användarnamn"
 
@@ -1430,7 +1384,6 @@ msgstr "Priv Proto"
 #: mactrack_view_sites.php:245 mactrack_view_sites.php:337 setup.php:578
 #: setup.php:592 setup.php:634 setup.php:655 setup.php:676 setup.php:697
 #: setup.php:718
-#, fuzzy
 msgid "Actions"
 msgstr "Åtgärder"
 
@@ -1455,7 +1408,6 @@ msgid "No SNMP Option Sets Found"
 msgstr "Inga SNMP-alternativsatser hittades"
 
 #: mactrack_snmp.php:562
-#, fuzzy
 msgid "Options"
 msgstr "Alternativ"
 
@@ -1465,7 +1417,6 @@ msgid "Device Tracking Process Status"
 msgstr "Enhetsspårningsprocessstatus"
 
 #: mactrack_utilities.php:187 mactrack_utilities.php:198
-#, fuzzy
 msgid "Refresh"
 msgstr "Uppdatera"
 
@@ -1527,7 +1478,7 @@ msgstr "Maximala samtidiga processer:"
 #: mactrack_utilities.php:258
 #, fuzzy
 msgid "processes"
-msgstr "processer"
+msgstr "Processer"
 
 #: mactrack_utilities.php:260
 #, fuzzy
@@ -1535,7 +1486,6 @@ msgid "Maximum Per Device Scan Time:"
 msgstr "Maximal per enhetens skanningstid:"
 
 #: mactrack_utilities.php:260
-#, fuzzy
 msgid "minutes"
 msgstr "minuter"
 
@@ -1545,9 +1495,8 @@ msgid "DNS Configuration Information"
 msgstr "DNS-konfigurationsinformation"
 
 #: mactrack_utilities.php:264
-#, fuzzy
 msgid "Enabled"
-msgstr "Aktivera"
+msgstr "Aktiverad"
 
 #: mactrack_utilities.php:264
 #, fuzzy
@@ -1570,7 +1519,6 @@ msgid "DNS Resolution Timeout:"
 msgstr "DNS-upplösningstidsavbrott:"
 
 #: mactrack_utilities.php:270
-#, fuzzy
 msgid "milliseconds"
 msgstr "millisekunder"
 
@@ -1595,23 +1543,19 @@ msgid "Date Started"
 msgstr "Datum startat"
 
 #: mactrack_utilities.php:312
-#, fuzzy
 msgid "Completed"
 msgstr "Slutförd"
 
 #: mactrack_utilities.php:324
-#, fuzzy
 msgid "Waiting"
 msgstr "Väntar"
 
 #: mactrack_utilities.php:331
-#, fuzzy
 msgid "Other"
 msgstr "Annat"
 
 #: mactrack_utilities.php:347 mactrack_utilities.php:405
 #: mactrack_utilities.php:428
-#, fuzzy
 msgid "Are You Sure?"
 msgstr "Är du säker?"
 
@@ -1756,14 +1700,12 @@ msgid "Vendor MAC"
 msgstr "Leverantör MAC"
 
 #: mactrack_vendormacs.php:154
-#, fuzzy
 msgid "Corporation"
 msgstr "Företag"
 
 #: mactrack_vendormacs.php:155
-#, fuzzy
 msgid "Address"
-msgstr "Från E-post"
+msgstr "Adress"
 
 #: mactrack_vendormacs.php:160 setup.php:960
 #, fuzzy
@@ -1816,13 +1758,11 @@ msgstr "ED MAC-adress"
 
 #: mactrack_view_arp.php:317 mactrack_view_macs.php:659
 #: mactrack_view_macs.php:673 mactrack_view_macs.php:805
-#, fuzzy
 msgid "Vendor Name"
 msgstr "Säljarens namn"
 
 #: mactrack_view_arp.php:318 mactrack_view_macs.php:660
 #: mactrack_view_macs.php:674 mactrack_view_macs.php:806
-#, fuzzy
 msgid "Port Number"
 msgstr "Portnummer"
 
@@ -1850,7 +1790,6 @@ msgstr "Inga IP-resultat hittades för enhetsspårning"
 
 #: mactrack_view_arp.php:399 mactrack_view_dot1x.php:527
 #: mactrack_view_interfaces.php:582 mactrack_view_macs.php:932
-#, fuzzy
 msgid "Device"
 msgstr "Enhet"
 
@@ -1861,7 +1800,6 @@ msgstr "IP: s"
 
 #: mactrack_view_arp.php:451 mactrack_view_dot1x.php:585
 #: mactrack_view_macs.php:984
-#, fuzzy
 msgid "IP"
 msgstr "IP"
 
@@ -1892,9 +1830,8 @@ msgid "Edit Device"
 msgstr "Byt enhet"
 
 #: mactrack_view_devices.php:363
-#, fuzzy
 msgid "View Graphs"
-msgstr "Grafer"
+msgstr "Se grafer"
 
 #: mactrack_view_devices.php:365
 #, fuzzy
@@ -1924,7 +1861,6 @@ msgstr "Enhetsspårning - 802.1x View"
 
 #: mactrack_view_dot1x.php:404 mactrack_view_dot1x.php:417
 #: mactrack_view_dot1x.php:661
-#, fuzzy
 msgid "Domain"
 msgstr "Domän"
 
@@ -1951,7 +1887,6 @@ msgid "Dot1x Scan Results"
 msgstr "Dot1x-skanner"
 
 #: mactrack_view_dot1x.php:560
-#, fuzzy
 msgid "Sessions"
 msgstr "Sessioner"
 
@@ -1961,12 +1896,10 @@ msgid "Any Status"
 msgstr "Vilken status som helst"
 
 #: mactrack_view_dot1x.php:623 mactrack_view_macs.php:1032
-#, fuzzy
 msgid "Show"
 msgstr "Visa"
 
 #: mactrack_view_dot1x.php:628 mactrack_view_macs.php:1037
-#, fuzzy
 msgid "Most Recent"
 msgstr "Senaste"
 
@@ -2041,17 +1974,14 @@ msgid "Interface Scan Results"
 msgstr "Ta bort alla scanningsresultat"
 
 #: mactrack_view_interfaces.php:372 setup.php:1103
-#, fuzzy
 msgid "Name"
 msgstr "Namn"
 
 #: mactrack_view_interfaces.php:376 setup.php:990
-#, fuzzy
 msgid "Description"
 msgstr "Beskrivning"
 
 #: mactrack_view_interfaces.php:380
-#, fuzzy
 msgid "Alias"
 msgstr "Alias"
 
@@ -2136,7 +2066,6 @@ msgid "Last Scanned"
 msgstr "Senast skannad"
 
 #: mactrack_view_interfaces.php:510
-#, fuzzy
 msgid "Filters"
 msgstr "Filter"
 
@@ -2216,7 +2145,6 @@ msgid "Device Tracking - Site IP Range Report View"
 msgstr "Enhetsspårning - Rapport för rapportintervaller för webbsidor"
 
 #: mactrack_view_ips.php:195
-#, fuzzy
 msgid "IP Range"
 msgstr "IP-intervall"
 
@@ -2226,7 +2154,6 @@ msgid "Current IP Addresses"
 msgstr "Nuvarande IP-adresser"
 
 #: mactrack_view_ips.php:197
-#, fuzzy
 msgid "Current Date"
 msgstr "Aktuellt datum"
 
@@ -2247,9 +2174,8 @@ msgstr "IP-adressområden"
 
 #: mactrack_view_ips.php:217 mactrack_view_sites.php:296
 #: mactrack_view_sites.php:396
-#, fuzzy
 msgid "Edit Site"
-msgstr "Webbplats"
+msgstr "Redigera webbplats"
 
 #: mactrack_view_ips.php:219 mactrack_view_sites.php:306
 #, fuzzy
@@ -2267,12 +2193,10 @@ msgid "Device Tracking - MAC to IP Report View"
 msgstr "Enhetsspårning - MAC till IP Rapportvy"
 
 #: mactrack_view_macs.php:33
-#, fuzzy
 msgid "Authorize"
 msgstr "Auktorisera"
 
 #: mactrack_view_macs.php:34
-#, fuzzy
 msgid "Revoke"
 msgstr "Återkalla"
 
@@ -2349,7 +2273,6 @@ msgid "No Device Tracking Port Results Found"
 msgstr "Inga felsökningsportresultat hittades"
 
 #: mactrack_view_macs.php:819
-#, fuzzy
 msgid "Count"
 msgstr "Antal"
 
@@ -2359,17 +2282,14 @@ msgid "Aggregated"
 msgstr "aggregerade"
 
 #: mactrack_view_macs.php:1068
-#, fuzzy
 msgid "Authorized"
-msgstr "Autentiserad"
+msgstr "Auktoriserad"
 
 #: mactrack_view_macs.php:1073
-#, fuzzy
 msgid "Yes"
 msgstr "Ja"
 
 #: mactrack_view_macs.php:1074
-#, fuzzy
 msgid "No"
 msgstr "Nej"
 
@@ -2410,7 +2330,6 @@ msgid "Device Tracking"
 msgstr "Enhetsspårning"
 
 #: setup.php:248
-#, fuzzy
 msgid "General Settings"
 msgstr "Allmänna inställningar"
 
@@ -2465,15 +2384,16 @@ msgid "When should old database records be removed from the database.  Please no
 msgstr "När ska gamla databasposter tas bort från databasen. Observera att porten inte tillåter åtkomst när den här åtgärden äger rum."
 
 #: setup.php:291
+#, fuzzy
 msgid "Confirm Utilities Prompt"
-msgstr ""
+msgstr "Bekräfta verktygsfrågan"
 
 #: setup.php:292
+#, fuzzy
 msgid "When using utilities, prompt for verification"
-msgstr ""
+msgstr "Be om verifiering när du använder verktyg"
 
 #: setup.php:297
-#, fuzzy
 msgid "Data Retention"
 msgstr "Datalagring"
 
@@ -2609,7 +2529,6 @@ msgid "How often, in seconds do Device Tracking scanning IP's need to be resolve
 msgstr "Hur ofta, i sekunder gör att Enhetsspårnings-skanning IP måste lösas till MAC-adresser för DNS-upplösning. Att använda ett större antal när du har flera tusen enheter ökar prestandan."
 
 #: setup.php:392
-#, fuzzy
 msgid "Notification Settings"
 msgstr "Inställningar för aviseringar"
 
@@ -2764,13 +2683,13 @@ msgid "MacTrack Settings"
 msgstr "SNMP-inställningar"
 
 #: setup.php:536
-#, fuzzy
 msgid "Default Tab"
-msgstr "Standard"
+msgstr "Standardflik"
 
 #: setup.php:537
+#, fuzzy
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
-msgstr ""
+msgstr "Vilken MacTrack-flik vill du vara din standardflik varje gång du går till MacTrack-sekunden."
 
 #: setup.php:543
 #, fuzzy
@@ -2783,8 +2702,9 @@ msgid "Mac Addresses"
 msgstr "MAC-adress"
 
 #: setup.php:546
+#, fuzzy
 msgid "dot1x Deta"
-msgstr ""
+msgstr "dot1x Deta"
 
 #: setup.php:557
 #, fuzzy
@@ -2793,7 +2713,6 @@ msgstr "Enhetsspårningsenheter"
 
 #: setup.php:564 setup.php:599 setup.php:606 setup.php:620 setup.php:648
 #: setup.php:669 setup.php:690
-#, fuzzy
 msgid "(Edit)"
 msgstr "(Redigera)"
 
@@ -2893,8 +2812,9 @@ msgid "Device Tracking Graph Viewer"
 msgstr "Enhetsspårning Graph Viewer"
 
 #: setup.php:847 setup.php:849
+#, fuzzy
 msgid "MacTrack"
-msgstr ""
+msgstr "MacTrack"
 
 #: setup.php:866 setup.php:867 setup.php:868 setup.php:869
 #, fuzzy, php-format
@@ -2907,14 +2827,12 @@ msgid "%d Minute"
 msgstr "% d minut"
 
 #: setup.php:882
-#, fuzzy
 msgid "Matches"
-msgstr "träffar"
+msgstr "Matcher"
 
 #: setup.php:883
-#, fuzzy
 msgid "Contains"
-msgstr "innehåller"
+msgstr "Innehåller"
 
 #: setup.php:884
 #, fuzzy
@@ -2924,7 +2842,7 @@ msgstr "börjar med"
 #: setup.php:885
 #, fuzzy
 msgid "Does Not Contain"
-msgstr "Innehåller inte"
+msgstr "innehåller inte"
 
 #: setup.php:886
 #, fuzzy
@@ -2942,12 +2860,10 @@ msgid "Is Not Null"
 msgstr "Är inte noll"
 
 #: setup.php:893
-#, fuzzy
 msgid "Half"
 msgstr "Halv"
 
 #: setup.php:894
-#, fuzzy
 msgid "Full"
 msgstr "Full"
 
@@ -2962,7 +2878,7 @@ msgid "Sync Device Tracking Device to Cacti Device"
 msgstr "Synkroniser Enhetsspårningsenhet till Cacti Device"
 
 #: setup.php:918 setup.php:919 setup.php:920 setup.php:921
-#, fuzzy, php-format
+#, php-format
 msgid "Every %d Minutes"
 msgstr "Var %d minut"
 
@@ -2978,7 +2894,6 @@ msgid "Every %d Hours"
 msgstr "Varje% d timmar"
 
 #: setup.php:927 setup.php:947 setup.php:1517
-#, fuzzy
 msgid "Every Day"
 msgstr "Varje dag"
 
@@ -3008,12 +2923,10 @@ msgid "Every %d Days"
 msgstr "Varje% d dagar"
 
 #: setup.php:949
-#, fuzzy
 msgid "Every Week"
 msgstr "Varje vecka"
 
 #: setup.php:955
-#, fuzzy
 msgid "Management"
 msgstr "Hantering"
 
@@ -3403,12 +3316,10 @@ msgid "HTTP"
 msgstr "HTTP"
 
 #: setup.php:1350
-#, fuzzy
 msgid "HTTPS"
 msgstr "HTTPS"
 
 #: setup.php:1354
-#, fuzzy
 msgid "User Name"
 msgstr "Användarnamn"
 
@@ -3418,7 +3329,6 @@ msgid "The user name to be used for your custom authentication method.  Examples
 msgstr "Användarnamnet som ska användas för din anpassade autentiseringsmetod. Exempel är SSH, RSH, HTML, etc."
 
 #: setup.php:1363
-#, fuzzy
 msgid "Password"
 msgstr "Lösenord"
 
@@ -3438,7 +3348,6 @@ msgid "The path to the private key used for SSH authentication."
 msgstr "Vägen till den privata nyckeln som används för SSH-autentisering."
 
 #: setup.php:1397
-#, fuzzy
 msgid "Sequence"
 msgstr "Sekvens"
 
@@ -3488,7 +3397,6 @@ msgid "Please principal facilities/security contact name and number for this sit
 msgstr "Vänligen huvudkontor / säkerhet kontakt namn och nummer för denna webbplats."
 
 #: setup.php:1442
-#, fuzzy
 msgid "Site Information"
 msgstr "Sidinformation"
 
@@ -3548,7 +3456,6 @@ msgid "Every Hour"
 msgstr "Varje timme"
 
 #: setup.php:1521
-#, fuzzy
 msgid "Email Addresses"
 msgstr "E-postadresser"
 

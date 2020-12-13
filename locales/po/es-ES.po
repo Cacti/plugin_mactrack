@@ -3,15 +3,15 @@ msgstr ""
 "Project-Id-Version: Cacti 1\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2020-10-20 10:25-0400\n"
-"PO-Revision-Date: 2019-04-01 21:12+0000\n"
+"PO-Revision-Date: 2020-12-12 19:05-0500\n"
 "Last-Translator: Javier Pobeda <javier.pobeda@pm.me>\n"
 "Language-Team: Spanish <http://translate.cacti.net/projects/cacti/mactrack/es-ES/>\n"
-"Language: es-ES\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.4-dev\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
 #: mactrack_view_dot1x.php:480 mactrack_view_dot1x.php:607
@@ -36,9 +36,8 @@ msgstr "Autenticación exitosa"
 
 #: lib/mactrack_functions.php:41 mactrack_view_dot1x.php:478
 #: mactrack_view_dot1x.php:611
-#, fuzzy
 msgid "Authentication Failed"
-msgstr "Falló autenticación: %s"
+msgstr "Por favor verifique los datos introducidos. El mail no está registrado o la contraseña no coincide."
 
 #: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
 #: mactrack_view_dot1x.php:612
@@ -48,9 +47,8 @@ msgstr "Autenticación exitosa"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:613
-#, fuzzy
 msgid "Authorization Failed"
-msgstr "Falla de autenticación"
+msgstr "Error de autorización"
 
 #: lib/mactrack_functions.php:2326
 #, fuzzy
@@ -140,13 +138,13 @@ msgid "Up"
 msgstr "Arriba"
 
 #: lib/mactrack_functions.php:2676
-#, fuzzy
 msgid "Data"
-msgstr "Datos WMI"
+msgstr "Datos"
 
 #: lib/mactrack_functions.php:2676
+#, fuzzy
 msgid "Voice"
-msgstr ""
+msgstr "Voz"
 
 #: lib/mactrack_functions.php:2728
 #, php-format
@@ -1642,14 +1640,12 @@ msgid "Dot1x Scan Results"
 msgstr "Escáner de puertos"
 
 #: mactrack_view_dot1x.php:560
-#, fuzzy
 msgid "Sessions"
 msgstr "Sesiones"
 
 #: mactrack_view_dot1x.php:606
-#, fuzzy
 msgid "Any Status"
-msgstr "Cualquier operación"
+msgstr "Cualquier Estado"
 
 #: mactrack_view_dot1x.php:623 mactrack_view_macs.php:1032
 msgid "Show"
@@ -1662,7 +1658,7 @@ msgstr "Mas reciente"
 #: mactrack_view_dot1x.php:666
 #, fuzzy
 msgid "DATA"
-msgstr "DATOS"
+msgstr "Datos"
 
 #: mactrack_view_dot1x.php:667
 #, fuzzy
@@ -2066,12 +2062,14 @@ msgid "When should old database records be removed from the database.  Please no
 msgstr "Cuando deberían removerse los registros antiguos de la base de datos. Ten en cuenta que no permitirá acceso a la base de datos de puertos mientras esta acción se ejecuta."
 
 #: setup.php:291
+#, fuzzy
 msgid "Confirm Utilities Prompt"
-msgstr ""
+msgstr "Confirmar el aviso de utilidades"
 
 #: setup.php:292
+#, fuzzy
 msgid "When using utilities, prompt for verification"
-msgstr ""
+msgstr "Cuando use utilidades, solicite verificación"
 
 #: setup.php:297
 msgid "Data Retention"
@@ -2309,18 +2307,17 @@ msgid "MacTrack Settings"
 msgstr "Sitios MacTrack"
 
 #: setup.php:536
-#, fuzzy
 msgid "Default Tab"
-msgstr "Arbol predeterminado"
+msgstr "Pestaña por defecto"
 
 #: setup.php:537
+#, fuzzy
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
-msgstr ""
+msgstr "¿Qué pestaña de MacTrack desea que sea su pestaña predeterminada cada vez que vaya a MacTrack en segundo lugar?"
 
 #: setup.php:543
-#, fuzzy
 msgid "IP Addresses"
-msgstr "Dirección IP"
+msgstr "Direcciones IP"
 
 #: setup.php:544
 #, fuzzy
@@ -2328,8 +2325,9 @@ msgid "Mac Addresses"
 msgstr "Dirección MAC"
 
 #: setup.php:546
+#, fuzzy
 msgid "dot1x Deta"
-msgstr ""
+msgstr "dot1x Deta"
 
 #: setup.php:557
 msgid "Device Tracking Devices"

@@ -8,25 +8,23 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2020-10-20 10:25-0400\n"
-"PO-Revision-Date: 2019-03-17 08:45-0400\n"
+"PO-Revision-Date: 2020-12-12 19:07-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
 #: mactrack_view_dot1x.php:480 mactrack_view_dot1x.php:607
-#, fuzzy
 msgid "Idle"
 msgstr "待機"
 
 #: lib/mactrack_functions.php:38 mactrack_utilities.php:238
 #: mactrack_utilities.php:318 mactrack_view_dot1x.php:479
 #: mactrack_view_dot1x.php:608
-#, fuzzy
 msgid "Running"
 msgstr "実行中"
 
@@ -43,9 +41,8 @@ msgstr "認証成功"
 
 #: lib/mactrack_functions.php:41 mactrack_view_dot1x.php:478
 #: mactrack_view_dot1x.php:611
-#, fuzzy
 msgid "Authentication Failed"
-msgstr "認証に失敗しました：％s"
+msgstr "認証に失敗"
 
 #: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:475
 #: mactrack_view_dot1x.php:612
@@ -130,8 +127,9 @@ msgid "View Non Interface Graphs"
 msgstr "インターフェースの表示"
 
 #: lib/mactrack_functions.php:2562
+#, fuzzy
 msgid "No Non Interface Graphs in Cacti"
-msgstr ""
+msgstr "サボテンに非インターフェースグラフはありません"
 
 #: lib/mactrack_functions.php:2579
 #, fuzzy
@@ -150,23 +148,21 @@ msgstr "再起動以降"
 
 #: lib/mactrack_functions.php:2640 mactrack_devices.php:1215
 #: mactrack_view_devices.php:512
-#, fuzzy
 msgid "Down"
 msgstr "下"
 
 #: lib/mactrack_functions.php:2640 mactrack_devices.php:1213
 #: mactrack_view_devices.php:510
-#, fuzzy
 msgid "Up"
 msgstr "上"
 
 #: lib/mactrack_functions.php:2676
 msgid "Data"
-msgstr ""
+msgstr "データ"
 
 #: lib/mactrack_functions.php:2676
 msgid "Voice"
-msgstr ""
+msgstr "ボイス"
 
 #: lib/mactrack_functions.php:2728
 #, fuzzy, php-format
@@ -202,14 +198,13 @@ msgstr "デバイス無効 '％d'"
 #: mactrack_view_macs.php:920 mactrack_view_sites.php:414
 #: mactrack_view_sites.php:415 mactrack_view_sites.php:416
 #: mactrack_view_sites.php:417 mactrack_view_sites.php:418 setup.php:337
-#, fuzzy
 msgid "N/A"
 msgstr "該当なし"
 
 #: lib/mactrack_functions.php:2955 setup.php:871
 #, fuzzy, php-format
 msgid "%d Minutes"
-msgstr "%d 分"
+msgstr "%d 分ごと"
 
 #: lib/mactrack_functions.php:2959
 #, fuzzy, php-format
@@ -218,9 +213,9 @@ msgstr "％d時間"
 
 #: lib/mactrack_functions.php:2963 setup.php:931 setup.php:932 setup.php:933
 #: setup.php:934 setup.php:935
-#, fuzzy, php-format
+#, php-format
 msgid "%d Days"
-msgstr "％d日"
+msgstr "<ph id=\"mtc_1\" equiv-text=\"base64:JWQ=\"/> 日"
 
 #: lib/mactrack_functions.php:2966
 #, fuzzy, php-format
@@ -245,7 +240,6 @@ msgstr "ステータス：アイドル、LastRuntime：％f秒、プロセス：
 #: lib/mactrack_functions.php:3007 mactrack_devices.php:1214
 #: mactrack_utilities.php:238 mactrack_utilities.php:264
 #: mactrack_view_devices.php:511 setup.php:917 setup.php:944
-#, fuzzy
 msgid "Disabled"
 msgstr "無効"
 
@@ -269,7 +263,6 @@ msgstr "見つかりませんでした"
 #: lib/mactrack_functions.php:3096 lib/mactrack_functions.php:3157
 #: mactrack_sites.php:461 mactrack_sites.php:541 mactrack_view_sites.php:285
 #: setup.php:541 setup.php:956
-#, fuzzy
 msgid "Sites"
 msgstr "サイト"
 
@@ -278,7 +271,6 @@ msgstr "サイト"
 #: mactrack_utilities.php:278 mactrack_view_devices.php:325
 #: mactrack_view_devices.php:519 mactrack_view_sites.php:252 setup.php:542
 #: setup.php:957
-#, fuzzy
 msgid "Devices"
 msgstr "デバイス"
 
@@ -288,18 +280,15 @@ msgid "IP Ranges"
 msgstr "IP範囲"
 
 #: lib/mactrack_functions.php:3099
-#, fuzzy
 msgid "IP Address"
 msgstr "IPアドレス"
 
 #: lib/mactrack_functions.php:3100 setup.php:1472
-#, fuzzy
 msgid "MAC Address"
 msgstr "MAC アドレス"
 
 #: lib/mactrack_functions.php:3101 mactrack_view_interfaces.php:291
 #: mactrack_view_interfaces.php:607 setup.php:545
-#, fuzzy
 msgid "Interfaces"
 msgstr "インターフェイス"
 
@@ -309,13 +298,11 @@ msgid "Dot1x"
 msgstr "Dot1x"
 
 #: lib/mactrack_functions.php:3103 mactrack_view_graphs.php:153
-#, fuzzy
 msgid "Graphs"
 msgstr "グラフ"
 
 #: lib/mactrack_functions.php:3137 mactrack_device_types.php:459
 #: mactrack_devices.php:1216 mactrack_view_devices.php:513 setup.php:892
-#, fuzzy
 msgid "Unknown"
 msgstr "不明"
 
@@ -324,7 +311,6 @@ msgstr "不明"
 #: mactrack_snmp.php:556 mactrack_vendormacs.php:199 mactrack_view_arp.php:377
 #: mactrack_view_devices.php:418 mactrack_view_dot1x.php:502
 #: mactrack_view_interfaces.php:625 mactrack_view_macs.php:910
-#, fuzzy
 msgid "Search"
 msgstr "検索"
 
@@ -332,7 +318,6 @@ msgstr "検索"
 #: mactrack_devices.php:1226 mactrack_macauth.php:379 mactrack_macwatch.php:398
 #: mactrack_snmp.php:566 mactrack_vendormacs.php:209
 #: mactrack_view_devices.php:523 mactrack_view_ips.php:274 setup.php:904
-#, fuzzy
 msgid "Default"
 msgstr "デフォルト"
 
@@ -346,7 +331,6 @@ msgstr "デバイス詳細を表示"
 #: mactrack_snmp.php:580 mactrack_vendormacs.php:221 mactrack_view_arp.php:441
 #: mactrack_view_devices.php:442 mactrack_view_dot1x.php:575
 #: mactrack_view_interfaces.php:542 mactrack_view_macs.php:974
-#, fuzzy
 msgid "Go"
 msgstr "Go"
 
@@ -356,7 +340,6 @@ msgstr "Go"
 #: mactrack_view_devices.php:443 mactrack_view_dot1x.php:576
 #: mactrack_view_interfaces.php:543 mactrack_view_ips.php:287
 #: mactrack_view_macs.php:975
-#, fuzzy
 msgid "Clear"
 msgstr "クリア"
 
@@ -365,7 +348,6 @@ msgstr "クリア"
 #: mactrack_view_arp.php:443 mactrack_view_devices.php:444
 #: mactrack_view_dot1x.php:577 mactrack_view_interfaces.php:544
 #: mactrack_view_ips.php:286 mactrack_view_macs.php:976
-#, fuzzy
 msgid "Export"
 msgstr "エクスポート"
 
@@ -373,7 +355,6 @@ msgstr "エクスポート"
 #: mactrack_view_arp.php:383 mactrack_view_devices.php:424
 #: mactrack_view_dot1x.php:508 mactrack_view_interfaces.php:494
 #: mactrack_view_ips.php:254 mactrack_view_macs.php:916
-#, fuzzy
 msgid "Site"
 msgstr "サイト"
 
@@ -382,7 +363,6 @@ msgstr "サイト"
 #: mactrack_devices.php:1212 mactrack_view_devices.php:456
 #: mactrack_view_devices.php:467 mactrack_view_devices.php:509
 #: mactrack_view_ips.php:258
-#, fuzzy
 msgid "Any"
 msgstr "任意"
 
@@ -425,12 +405,10 @@ msgstr "該当なし - スイッチ/ハブ"
 #: mactrack_device_types.php:70 mactrack_devices.php:32 mactrack_macauth.php:30
 #: mactrack_macwatch.php:30 mactrack_sites.php:32 mactrack_snmp.php:31
 #: mactrack_view_macs.php:38
-#, fuzzy
 msgid "Delete"
 msgstr "削除"
 
 #: mactrack_device_types.php:71 mactrack_snmp.php:32
-#, fuzzy
 msgid "Duplicate"
 msgstr "複製"
 
@@ -447,9 +425,8 @@ msgstr "少なくとも1つの装置タイプを選択する必要がありま�
 #: mactrack_device_types.php:285 mactrack_devices.php:258
 #: mactrack_macauth.php:134 mactrack_macwatch.php:139 mactrack_sites.php:150
 #: mactrack_snmp.php:210 mactrack_view_macs.php:178 mactrack_view_macs.php:259
-#, fuzzy
 msgid "Continue"
-msgstr "含む"
+msgstr "続ける"
 
 #: mactrack_device_types.php:290
 #, fuzzy
@@ -475,13 +452,13 @@ msgstr "デバイスタイププレフィックス："
 #: mactrack_macauth.php:151 mactrack_macwatch.php:156 mactrack_sites.php:158
 #: mactrack_snmp.php:235 mactrack_view_macs.php:186 mactrack_view_macs.php:276
 msgid "Cancel"
-msgstr ""
+msgstr "取り消し"
 
 #: mactrack_device_types.php:311 mactrack_devices.php:364
 #: mactrack_macauth.php:152 mactrack_macwatch.php:157 mactrack_sites.php:159
 #: mactrack_snmp.php:235 mactrack_view_macs.php:187 mactrack_view_macs.php:277
 msgid "Return"
-msgstr ""
+msgstr "帰還"
 
 #: mactrack_device_types.php:445
 #, fuzzy
@@ -504,7 +481,6 @@ msgid "No New Device Types Found!"
 msgstr "新しいデバイスタイプは見つかりませんでした。"
 
 #: mactrack_device_types.php:484 mactrack_devices.php:495
-#, fuzzy
 msgid "Import Results"
 msgstr "読み込み結果"
 
@@ -657,7 +633,6 @@ msgstr "スイッチ/ルーター"
 
 #: mactrack_device_types.php:565 mactrack_device_types.php:1073
 #: mactrack_devices.php:1158 mactrack_view_devices.php:459 setup.php:877
-#, fuzzy
 msgid "Router"
 msgstr "ルーター"
 
@@ -714,9 +689,8 @@ msgstr "デバイスタイプ説明"
 #: mactrack_device_types.php:936 mactrack_devices.php:1038
 #: mactrack_sites.php:503 mactrack_view_devices.php:283
 #: mactrack_view_sites.php:348 setup.php:1004
-#, fuzzy
 msgid "Device Type"
-msgstr "デバイスタイプ"
+msgstr "測定器タイプ"
 
 #: mactrack_device_types.php:937
 #, fuzzy
@@ -754,17 +728,18 @@ msgid "No Device Tracking Device Types Found"
 msgstr "デバイス追跡デバイスタイプが見つかりません"
 
 #: mactrack_device_types.php:1034
+#, fuzzy
 msgid "Submit Query"
-msgstr ""
+msgstr "クエリを送信"
 
 #: mactrack_device_types.php:1035
+#, fuzzy
 msgid "Clear Filtered Results"
-msgstr ""
+msgstr "フィルタリングされた結果をクリアする"
 
 #: mactrack_device_types.php:1036
-#, fuzzy
 msgid "Rescan"
-msgstr "デバイスの再スキャン"
+msgstr "再スキャン"
 
 #: mactrack_device_types.php:1036
 #, fuzzy
@@ -772,7 +747,6 @@ msgid "Scan Active Devices for Unknown Device Types"
 msgstr "デバイス追跡デバイスタイプ"
 
 #: mactrack_device_types.php:1037 mactrack_devices.php:1142
-#, fuzzy
 msgid "Import"
 msgstr "インポート"
 
@@ -788,7 +762,6 @@ msgstr "ローカルファイルからのデバイスタイプのインポート
 
 #: mactrack_device_types.php:1049 mactrack_sites.php:499
 #: mactrack_view_sites.php:344 setup.php:997
-#, fuzzy
 msgid "Vendor"
 msgstr "販売者"
 
@@ -800,24 +773,20 @@ msgstr "販売者"
 #: mactrack_view_interfaces.php:586 mactrack_view_macs.php:936
 #: mactrack_view_macs.php:1003 mactrack_view_macs.php:1036
 #: mactrack_view_macs.php:1072 setup.php:913
-#, fuzzy
 msgid "All"
 msgstr "すべて"
 
 #: mactrack_device_types.php:1066 mactrack_devices.php:1151
 #: mactrack_view_devices.php:452 mactrack_view_interfaces.php:368
 #: mactrack_view_interfaces.php:552
-#, fuzzy
 msgid "Type"
 msgstr "タイプ"
 
 #: mactrack_devices.php:33
-#, fuzzy
 msgid "Enable"
 msgstr "有効"
 
 #: mactrack_devices.php:34 mactrack_macwatch.php:31
-#, fuzzy
 msgid "Disable"
 msgstr "無効"
 
@@ -1037,9 +1006,8 @@ msgid "SNMP Information"
 msgstr "SNMP情報"
 
 #: mactrack_devices.php:895
-#, fuzzy
 msgid "System:"
-msgstr "システム"
+msgstr "システム："
 
 #: mactrack_devices.php:896
 #, fuzzy
@@ -1047,7 +1015,6 @@ msgid "Uptime:"
 msgstr "あなたのアップタイムロボットAPIキー："
 
 #: mactrack_devices.php:897
-#, fuzzy
 msgid "Hostname:"
 msgstr "ホスト："
 
@@ -1062,7 +1029,6 @@ msgid "Device Tracking Device Filters"
 msgstr "デバイス追跡デバイスフィルタ"
 
 #: mactrack_devices.php:1022 mactrack_view_devices.php:267 setup.php:1238
-#, fuzzy
 msgid "Device Name"
 msgstr "デバイス名"
 
@@ -1070,7 +1036,6 @@ msgstr "デバイス名"
 #: mactrack_view_devices.php:271 mactrack_view_ips.php:194
 #: mactrack_view_sites.php:248 mactrack_view_sites.php:340 setup.php:1269
 #: setup.php:1410
-#, fuzzy
 msgid "Site Name"
 msgstr "サイト名"
 
@@ -1079,13 +1044,11 @@ msgstr "サイト名"
 #: mactrack_view_devices.php:505 mactrack_view_dot1x.php:405
 #: mactrack_view_dot1x.php:418 mactrack_view_dot1x.php:600
 #: mactrack_view_interfaces.php:465
-#, fuzzy
 msgid "Status"
 msgstr "状態"
 
 #: mactrack_devices.php:1034 mactrack_view_devices.php:279
 #: mactrack_view_interfaces.php:364 setup.php:1245
-#, fuzzy
 msgid "Hostname"
 msgstr "ホスト名"
 
@@ -1129,12 +1092,10 @@ msgstr "デバイス追跡デバイスなし"
 #: mactrack_devices.php:1127 mactrack_view_devices.php:429 setup.php:898
 #: setup.php:1030 setup.php:1039 setup.php:1048 setup.php:1256 setup.php:1272
 #: setup.php:1317 setup.php:1346
-#, fuzzy
 msgid "None"
 msgstr "なし"
 
 #: mactrack_devices.php:1217 mactrack_view_devices.php:514
-#, fuzzy
 msgid "Error"
 msgstr "エラー"
 
@@ -1174,9 +1135,8 @@ msgid "Mac Address"
 msgstr "Macアドレス"
 
 #: mactrack_macauth.php:319 setup.php:1557
-#, fuzzy
 msgid "Reason"
-msgstr "報告理由:"
+msgstr "理由"
 
 #: mactrack_macauth.php:320
 #, fuzzy
@@ -1184,9 +1144,8 @@ msgid "Added/Modified"
 msgstr "追加/変更"
 
 #: mactrack_macauth.php:321
-#, fuzzy
 msgid "By"
-msgstr "By"
+msgstr "投稿者"
 
 #: mactrack_macauth.php:326
 #, fuzzy
@@ -1240,12 +1199,10 @@ msgid "First Seen"
 msgstr "最初に見た"
 
 #: mactrack_macwatch.php:331
-#, fuzzy
 msgid "Last Seen"
 msgstr "最後に見たのは"
 
 #: mactrack_macwatch.php:338 mactrack_macwatch.php:394
-#, fuzzy
 msgid "Watches"
 msgstr "時計"
 
@@ -1345,7 +1302,7 @@ msgstr "<name> （1）"
 #: mactrack_snmp.php:224
 #, fuzzy
 msgid "Name Format:"
-msgstr "名前の形式："
+msgstr "名前の形式"
 
 #: mactrack_snmp.php:298
 #, fuzzy, php-format
@@ -1373,32 +1330,26 @@ msgid "Device Tracking SNMP Options"
 msgstr "デバイストラッキングのSNMPオプション"
 
 #: mactrack_snmp.php:397
-#, fuzzy
 msgid "Item"
 msgstr "項目"
 
 #: mactrack_snmp.php:398 setup.php:470
-#, fuzzy
 msgid "Version"
 msgstr "バージョン"
 
 #: mactrack_snmp.php:399 setup.php:477
-#, fuzzy
 msgid "Community"
 msgstr "コミュニティ"
 
 #: mactrack_snmp.php:400 setup.php:492
-#, fuzzy
 msgid "Port"
 msgstr "ポート"
 
 #: mactrack_snmp.php:401 setup.php:500
-#, fuzzy
 msgid "Timeout"
 msgstr "タイムアウト"
 
 #: mactrack_snmp.php:402 setup.php:508
-#, fuzzy
 msgid "Retries"
 msgstr "再試行"
 
@@ -1409,7 +1360,6 @@ msgstr "最大OID"
 
 #: mactrack_snmp.php:404 mactrack_view_dot1x.php:399
 #: mactrack_view_dot1x.php:413
-#, fuzzy
 msgid "Username"
 msgstr "ユーザー名"
 
@@ -1430,7 +1380,6 @@ msgstr "特権プロト"
 #: mactrack_view_sites.php:245 mactrack_view_sites.php:337 setup.php:578
 #: setup.php:592 setup.php:634 setup.php:655 setup.php:676 setup.php:697
 #: setup.php:718
-#, fuzzy
 msgid "Actions"
 msgstr "操作"
 
@@ -1445,9 +1394,8 @@ msgid "Title of SNMP Option Set"
 msgstr "SNMPオプションセットのタイトル"
 
 #: mactrack_snmp.php:516
-#, fuzzy
 msgid "SNMP Settings"
-msgstr "SNMP設定"
+msgstr "SNMP 設定"
 
 #: mactrack_snmp.php:532
 #, fuzzy
@@ -1455,7 +1403,6 @@ msgid "No SNMP Option Sets Found"
 msgstr "SNMPオプションセットが見つかりません"
 
 #: mactrack_snmp.php:562
-#, fuzzy
 msgid "Options"
 msgstr "オプション"
 
@@ -1465,7 +1412,6 @@ msgid "Device Tracking Process Status"
 msgstr "デバイス追跡プロセスのステータス"
 
 #: mactrack_utilities.php:187 mactrack_utilities.php:198
-#, fuzzy
 msgid "Refresh"
 msgstr "更新"
 
@@ -1535,7 +1481,6 @@ msgid "Maximum Per Device Scan Time:"
 msgstr "デバイスあたりの最大スキャン時間："
 
 #: mactrack_utilities.php:260
-#, fuzzy
 msgid "minutes"
 msgstr "分"
 
@@ -1545,7 +1490,6 @@ msgid "DNS Configuration Information"
 msgstr "DNS設定情報"
 
 #: mactrack_utilities.php:264
-#, fuzzy
 msgid "Enabled"
 msgstr "有効"
 
@@ -1570,7 +1514,6 @@ msgid "DNS Resolution Timeout:"
 msgstr "DNS解決タイムアウト："
 
 #: mactrack_utilities.php:270
-#, fuzzy
 msgid "milliseconds"
 msgstr "ミリ秒"
 
@@ -1595,23 +1538,19 @@ msgid "Date Started"
 msgstr "開始日"
 
 #: mactrack_utilities.php:312
-#, fuzzy
 msgid "Completed"
 msgstr "完了"
 
 #: mactrack_utilities.php:324
-#, fuzzy
 msgid "Waiting"
 msgstr "待機中"
 
 #: mactrack_utilities.php:331
-#, fuzzy
 msgid "Other"
 msgstr "その他"
 
 #: mactrack_utilities.php:347 mactrack_utilities.php:405
 #: mactrack_utilities.php:428
-#, fuzzy
 msgid "Are You Sure?"
 msgstr "本当にしますか?"
 
@@ -1756,14 +1695,12 @@ msgid "Vendor MAC"
 msgstr "ベンダーMAC"
 
 #: mactrack_vendormacs.php:154
-#, fuzzy
 msgid "Corporation"
-msgstr "Corporation"
+msgstr "法人"
 
 #: mactrack_vendormacs.php:155
-#, fuzzy
 msgid "Address"
-msgstr "メールアドレスから"
+msgstr "住所"
 
 #: mactrack_vendormacs.php:160 setup.php:960
 #, fuzzy
@@ -1816,13 +1753,11 @@ msgstr "ED MACアドレス"
 
 #: mactrack_view_arp.php:317 mactrack_view_macs.php:659
 #: mactrack_view_macs.php:673 mactrack_view_macs.php:805
-#, fuzzy
 msgid "Vendor Name"
 msgstr "店舗名"
 
 #: mactrack_view_arp.php:318 mactrack_view_macs.php:660
 #: mactrack_view_macs.php:674 mactrack_view_macs.php:806
-#, fuzzy
 msgid "Port Number"
 msgstr "ポート番号"
 
@@ -1850,7 +1785,6 @@ msgstr "デバイストラッキングIPの結果が見つかりません"
 
 #: mactrack_view_arp.php:399 mactrack_view_dot1x.php:527
 #: mactrack_view_interfaces.php:582 mactrack_view_macs.php:932
-#, fuzzy
 msgid "Device"
 msgstr "デバイス"
 
@@ -1861,13 +1795,11 @@ msgstr "IP"
 
 #: mactrack_view_arp.php:451 mactrack_view_dot1x.php:585
 #: mactrack_view_macs.php:984
-#, fuzzy
 msgid "IP"
 msgstr "IP"
 
 #: mactrack_view_arp.php:468 mactrack_view_dot1x.php:646
 #: mactrack_view_macs.php:1053
-#, fuzzy
 msgid "MAC"
 msgstr "MAC"
 
@@ -1892,9 +1824,8 @@ msgid "Edit Device"
 msgstr "スイッチ装置"
 
 #: mactrack_view_devices.php:363
-#, fuzzy
 msgid "View Graphs"
-msgstr "グラフ"
+msgstr "グラフを表示する"
 
 #: mactrack_view_devices.php:365
 #, fuzzy
@@ -1924,7 +1855,6 @@ msgstr "デバイストラッキング -  802.1x表示"
 
 #: mactrack_view_dot1x.php:404 mactrack_view_dot1x.php:417
 #: mactrack_view_dot1x.php:661
-#, fuzzy
 msgid "Domain"
 msgstr "ドメイン"
 
@@ -1951,22 +1881,18 @@ msgid "Dot1x Scan Results"
 msgstr "Dot1xスキャナー"
 
 #: mactrack_view_dot1x.php:560
-#, fuzzy
 msgid "Sessions"
-msgstr "セッション"
+msgstr "権限"
 
 #: mactrack_view_dot1x.php:606
-#, fuzzy
 msgid "Any Status"
 msgstr "すべてのステータス"
 
 #: mactrack_view_dot1x.php:623 mactrack_view_macs.php:1032
-#, fuzzy
 msgid "Show"
 msgstr "表示"
 
 #: mactrack_view_dot1x.php:628 mactrack_view_macs.php:1037
-#, fuzzy
 msgid "Most Recent"
 msgstr "最新"
 
@@ -2041,19 +1967,16 @@ msgid "Interface Scan Results"
 msgstr "すべてのスキャン結果を削除する"
 
 #: mactrack_view_interfaces.php:372 setup.php:1103
-#, fuzzy
 msgid "Name"
 msgstr "名前"
 
 #: mactrack_view_interfaces.php:376 setup.php:990
-#, fuzzy
 msgid "Description"
 msgstr "説明"
 
 #: mactrack_view_interfaces.php:380
-#, fuzzy
 msgid "Alias"
-msgstr "别号"
+msgstr "エイリアス"
 
 #: mactrack_view_interfaces.php:384
 #, fuzzy
@@ -2136,9 +2059,8 @@ msgid "Last Scanned"
 msgstr "最後にスキャンされた"
 
 #: mactrack_view_interfaces.php:510
-#, fuzzy
 msgid "Filters"
-msgstr "ログのフィルター"
+msgstr "フィルター"
 
 #: mactrack_view_interfaces.php:514
 #, fuzzy
@@ -2201,7 +2123,6 @@ msgid "Changed in Last Day"
 msgstr "最終日に変更"
 
 #: mactrack_view_interfaces.php:528
-#, fuzzy
 msgid "Bandwidth"
 msgstr "帯域幅"
 
@@ -2216,9 +2137,8 @@ msgid "Device Tracking - Site IP Range Report View"
 msgstr "デバイストラッキング - サイトIP範囲レポートビュー"
 
 #: mactrack_view_ips.php:195
-#, fuzzy
 msgid "IP Range"
-msgstr "IP範囲"
+msgstr "IPアドレスの範囲"
 
 #: mactrack_view_ips.php:196
 #, fuzzy
@@ -2226,7 +2146,6 @@ msgid "Current IP Addresses"
 msgstr "現在のIPアドレス"
 
 #: mactrack_view_ips.php:197
-#, fuzzy
 msgid "Current Date"
 msgstr "現在の日付"
 
@@ -2236,9 +2155,8 @@ msgid "Maximum IP Addresses"
 msgstr "最大IPアドレス"
 
 #: mactrack_view_ips.php:199
-#, fuzzy
 msgid "Maximum Date"
-msgstr "最大日"
+msgstr "最大日付"
 
 #: mactrack_view_ips.php:204
 #, fuzzy
@@ -2247,9 +2165,8 @@ msgstr "IPアドレス範囲"
 
 #: mactrack_view_ips.php:217 mactrack_view_sites.php:296
 #: mactrack_view_sites.php:396
-#, fuzzy
 msgid "Edit Site"
-msgstr "サイト"
+msgstr "サイトを編集"
 
 #: mactrack_view_ips.php:219 mactrack_view_sites.php:306
 #, fuzzy
@@ -2267,12 +2184,10 @@ msgid "Device Tracking - MAC to IP Report View"
 msgstr "デバイストラッキング -  MACからIPへのレポートビュー"
 
 #: mactrack_view_macs.php:33
-#, fuzzy
 msgid "Authorize"
 msgstr "売上承認"
 
 #: mactrack_view_macs.php:34
-#, fuzzy
 msgid "Revoke"
 msgstr "取消し"
 
@@ -2323,7 +2238,6 @@ msgstr "[続行]をクリックして、集計テーブルから次の行を削�
 
 #: mactrack_view_macs.php:662 mactrack_view_macs.php:676
 #: mactrack_view_macs.php:808
-#, fuzzy
 msgid "VLAN ID"
 msgstr "VLAN ID"
 
@@ -2349,7 +2263,6 @@ msgid "No Device Tracking Port Results Found"
 msgstr "デバイストラッキングポートの結果が見つかりません"
 
 #: mactrack_view_macs.php:819
-#, fuzzy
 msgid "Count"
 msgstr "カウント"
 
@@ -2359,17 +2272,14 @@ msgid "Aggregated"
 msgstr "集約された"
 
 #: mactrack_view_macs.php:1068
-#, fuzzy
 msgid "Authorized"
-msgstr "承認済み"
+msgstr "承認"
 
 #: mactrack_view_macs.php:1073
-#, fuzzy
 msgid "Yes"
 msgstr "はい"
 
 #: mactrack_view_macs.php:1074
-#, fuzzy
 msgid "No"
 msgstr "いいえ"
 
@@ -2410,7 +2320,6 @@ msgid "Device Tracking"
 msgstr "デバイストラッキング"
 
 #: setup.php:248
-#, fuzzy
 msgid "General Settings"
 msgstr "一般設定"
 
@@ -2465,15 +2374,16 @@ msgid "When should old database records be removed from the database.  Please no
 msgstr "データベースから古いデータベースレコードを削除する時期。この操作が行われている間は、ポートデータベースへのアクセスは許可されません。"
 
 #: setup.php:291
+#, fuzzy
 msgid "Confirm Utilities Prompt"
-msgstr ""
+msgstr "ユーティリティプロンプトの確認"
 
 #: setup.php:292
+#, fuzzy
 msgid "When using utilities, prompt for verification"
-msgstr ""
+msgstr "ユーティリティを使用する場合は、確認を求めるプロンプトを表示します"
 
 #: setup.php:297
-#, fuzzy
 msgid "Data Retention"
 msgstr "データ保持"
 
@@ -2609,14 +2519,12 @@ msgid "How often, in seconds do Device Tracking scanning IP's need to be resolve
 msgstr "DNSを解決するために、Device TrackingがIPをスキャンするのをMACアドレスに解決する必要があるのは何秒であるか。数千のデバイスがあるときにもっと大きい数を使用すると、パフォーマンスが向上します。"
 
 #: setup.php:392
-#, fuzzy
 msgid "Notification Settings"
 msgstr "通知設定"
 
 #: setup.php:396
-#, fuzzy
 msgid "Source Address"
-msgstr "送信元アドレス"
+msgstr "ソースアドレス"
 
 #: setup.php:397
 #, fuzzy
@@ -2724,9 +2632,8 @@ msgid "Default SNMP read community for all new hosts."
 msgstr "すべての新しいホストに対するデフォルトのSNMP読み取りコミュニティ。"
 
 #: setup.php:485
-#, fuzzy
 msgid "Communities"
-msgstr "コミュニティズ"
+msgstr "コミュニティー"
 
 #: setup.php:486
 #, fuzzy
@@ -2769,11 +2676,11 @@ msgid "Default Tab"
 msgstr "デフォルト"
 
 #: setup.php:537
+#, fuzzy
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
-msgstr ""
+msgstr "MacTrackに移動するたびに、どのMacTrackタブをデフォルトタブにしますか。"
 
 #: setup.php:543
-#, fuzzy
 msgid "IP Addresses"
 msgstr "IPアドレス"
 
@@ -2783,8 +2690,9 @@ msgid "Mac Addresses"
 msgstr "Macアドレス"
 
 #: setup.php:546
+#, fuzzy
 msgid "dot1x Deta"
-msgstr ""
+msgstr "dot1x Deta"
 
 #: setup.php:557
 #, fuzzy
@@ -2793,7 +2701,6 @@ msgstr "デバイス追跡デバイス"
 
 #: setup.php:564 setup.php:599 setup.php:606 setup.php:620 setup.php:648
 #: setup.php:669 setup.php:690
-#, fuzzy
 msgid "(Edit)"
 msgstr "(編集)"
 
@@ -2893,8 +2800,9 @@ msgid "Device Tracking Graph Viewer"
 msgstr "デバイストラッキンググラフビューア"
 
 #: setup.php:847 setup.php:849
+#, fuzzy
 msgid "MacTrack"
-msgstr ""
+msgstr "MacTrack"
 
 #: setup.php:866 setup.php:867 setup.php:868 setup.php:869
 #, fuzzy, php-format
@@ -2907,12 +2815,10 @@ msgid "%d Minute"
 msgstr "％d分"
 
 #: setup.php:882
-#, fuzzy
 msgid "Matches"
-msgstr "一致"
+msgstr "試合"
 
 #: setup.php:883
-#, fuzzy
 msgid "Contains"
 msgstr "含む"
 
@@ -2922,14 +2828,13 @@ msgid "Begins With"
 msgstr "始まる"
 
 #: setup.php:885
-#, fuzzy
 msgid "Does Not Contain"
-msgstr "含まない"
+msgstr "を含まない"
 
 #: setup.php:886
 #, fuzzy
 msgid "Does Not Begin With"
-msgstr "で始まらない"
+msgstr "が右の値と前方不一致"
 
 #: setup.php:887
 #, fuzzy
@@ -2937,19 +2842,16 @@ msgid "Is Null"
 msgstr "無効です"
 
 #: setup.php:888
-#, fuzzy
 msgid "Is Not Null"
-msgstr "NULLではない"
+msgstr "空欄ではない"
 
 #: setup.php:893
-#, fuzzy
 msgid "Half"
 msgstr "半二重"
 
 #: setup.php:894
-#, fuzzy
 msgid "Full"
-msgstr "フルサイズ"
+msgstr "フル"
 
 #: setup.php:899
 #, fuzzy
@@ -2962,7 +2864,7 @@ msgid "Sync Device Tracking Device to Cacti Device"
 msgstr "デバイストラッキングデバイスとCactiデバイスの同期"
 
 #: setup.php:918 setup.php:919 setup.php:920 setup.php:921
-#, fuzzy, php-format
+#, php-format
 msgid "Every %d Minutes"
 msgstr "%d 分ごと"
 
@@ -2978,7 +2880,6 @@ msgid "Every %d Hours"
 msgstr "％d時間ごと"
 
 #: setup.php:927 setup.php:947 setup.php:1517
-#, fuzzy
 msgid "Every Day"
 msgstr "毎日"
 
@@ -3008,12 +2909,10 @@ msgid "Every %d Days"
 msgstr "％d日ごと"
 
 #: setup.php:949
-#, fuzzy
 msgid "Every Week"
 msgstr "毎週"
 
 #: setup.php:955
-#, fuzzy
 msgid "Management"
 msgstr "マネジメント"
 
@@ -3178,12 +3077,10 @@ msgid "Fill in the SNMP read community for this device."
 msgstr "このデバイスのSNMP読み取りコミュニティに記入してください。"
 
 #: setup.php:1133
-#, fuzzy
 msgid "SNMP Port"
 msgstr "SNMP ポート"
 
 #: setup.php:1142
-#, fuzzy
 msgid "SNMP Timeout"
 msgstr "SNMP タイムアウト"
 
@@ -3308,7 +3205,6 @@ msgid "Given Device Tracking Host is connected to this Cacti Host."
 msgstr "与えられたデバイス追跡ホストはこのCactiホストに接続されています。"
 
 #: setup.php:1261
-#, fuzzy
 msgid "Scan Type"
 msgstr "スキャンの種類"
 
@@ -3393,22 +3289,18 @@ msgid "Telnet"
 msgstr "Telnet"
 
 #: setup.php:1348
-#, fuzzy
 msgid "SSH"
 msgstr "SSH"
 
 #: setup.php:1349
-#, fuzzy
 msgid "HTTP"
 msgstr "HTTP"
 
 #: setup.php:1350
-#, fuzzy
 msgid "HTTPS"
 msgstr "HTTPS"
 
 #: setup.php:1354
-#, fuzzy
 msgid "User Name"
 msgstr "ユーザー名"
 
@@ -3418,7 +3310,6 @@ msgid "The user name to be used for your custom authentication method.  Examples
 msgstr "カスタム認証方法に使用されるユーザー名。例としては、SSH、RSH、HTMLなどがあります。"
 
 #: setup.php:1363
-#, fuzzy
 msgid "Password"
 msgstr "パスワード"
 
@@ -3438,9 +3329,8 @@ msgid "The path to the private key used for SSH authentication."
 msgstr "SSH認証に使用される秘密鍵へのパス。"
 
 #: setup.php:1397
-#, fuzzy
 msgid "Sequence"
-msgstr "シーケンス"
+msgstr "配列"
 
 #: setup.php:1398
 #, fuzzy
@@ -3448,7 +3338,6 @@ msgid "Sequence of Item."
 msgstr "項目のシーケンス"
 
 #: setup.php:1406
-#, fuzzy
 msgid "General Site Settings"
 msgstr "一般的なサイトの設定"
 
@@ -3488,7 +3377,6 @@ msgid "Please principal facilities/security contact name and number for this sit
 msgstr "このサイトの主要施設/セキュリティ連絡先の名前と番号を入力してください。"
 
 #: setup.php:1442
-#, fuzzy
 msgid "Site Information"
 msgstr "サイト情報"
 
@@ -3548,7 +3436,6 @@ msgid "Every Hour"
 msgstr "毎時"
 
 #: setup.php:1521
-#, fuzzy
 msgid "Email Addresses"
 msgstr "E メールアドレス"
 

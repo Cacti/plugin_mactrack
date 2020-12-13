@@ -8,25 +8,23 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2020-10-20 10:25-0400\n"
-"PO-Revision-Date: 2019-03-17 06:44-0400\n"
+"PO-Revision-Date: 2020-12-12 19:06-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
 #: mactrack_view_dot1x.php:480 mactrack_view_dot1x.php:607
-#, fuzzy
 msgid "Idle"
 msgstr "ממתין"
 
 #: lib/mactrack_functions.php:38 mactrack_utilities.php:238
 #: mactrack_utilities.php:318 mactrack_view_dot1x.php:479
 #: mactrack_view_dot1x.php:608
-#, fuzzy
 msgid "Running"
 msgstr "פועל"
 
@@ -37,13 +35,11 @@ msgstr "שיטה"
 
 #: lib/mactrack_functions.php:40 mactrack_view_dot1x.php:476
 #: mactrack_view_dot1x.php:610
-#, fuzzy
 msgid "Authentication Success"
 msgstr "ההזדהות הצליחה"
 
 #: lib/mactrack_functions.php:41 mactrack_view_dot1x.php:478
 #: mactrack_view_dot1x.php:611
-#, fuzzy
 msgid "Authentication Failed"
 msgstr "האימות נכשל"
 
@@ -55,7 +51,6 @@ msgstr "אישור הצלחה"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:613
-#, fuzzy
 msgid "Authorization Failed"
 msgstr "האימות נכשל"
 
@@ -130,8 +125,9 @@ msgid "View Non Interface Graphs"
 msgstr "הצג ממשקים"
 
 #: lib/mactrack_functions.php:2562
+#, fuzzy
 msgid "No Non Interface Graphs in Cacti"
-msgstr ""
+msgstr "אין גרפים ללא ממשק בקקטוסים"
 
 #: lib/mactrack_functions.php:2579
 #, fuzzy
@@ -150,23 +146,22 @@ msgstr "מאז הפעלה מחדש"
 
 #: lib/mactrack_functions.php:2640 mactrack_devices.php:1215
 #: mactrack_view_devices.php:512
-#, fuzzy
 msgid "Down"
 msgstr "למטה"
 
 #: lib/mactrack_functions.php:2640 mactrack_devices.php:1213
 #: mactrack_view_devices.php:510
-#, fuzzy
 msgid "Up"
 msgstr "למעלה"
 
 #: lib/mactrack_functions.php:2676
 msgid "Data"
-msgstr ""
+msgstr "נתונים"
 
 #: lib/mactrack_functions.php:2676
+#, fuzzy
 msgid "Voice"
-msgstr ""
+msgstr "קוֹל"
 
 #: lib/mactrack_functions.php:2728
 #, fuzzy, php-format
@@ -202,7 +197,6 @@ msgstr "השבתת '% d'"
 #: mactrack_view_macs.php:920 mactrack_view_sites.php:414
 #: mactrack_view_sites.php:415 mactrack_view_sites.php:416
 #: mactrack_view_sites.php:417 mactrack_view_sites.php:418 setup.php:337
-#, fuzzy
 msgid "N/A"
 msgstr "לא זמין"
 
@@ -218,7 +212,7 @@ msgstr "% d שעות"
 
 #: lib/mactrack_functions.php:2963 setup.php:931 setup.php:932 setup.php:933
 #: setup.php:934 setup.php:935
-#, fuzzy, php-format
+#, php-format
 msgid "%d Days"
 msgstr "%d ימים"
 
@@ -245,7 +239,6 @@ msgstr "מצב: מצב המתנה: LastRuntime:% f שניות, תהליכים:% 
 #: lib/mactrack_functions.php:3007 mactrack_devices.php:1214
 #: mactrack_utilities.php:238 mactrack_utilities.php:264
 #: mactrack_view_devices.php:511 setup.php:917 setup.php:944
-#, fuzzy
 msgid "Disabled"
 msgstr "לא זמין"
 
@@ -269,7 +262,6 @@ msgstr "לא זוהה"
 #: lib/mactrack_functions.php:3096 lib/mactrack_functions.php:3157
 #: mactrack_sites.php:461 mactrack_sites.php:541 mactrack_view_sites.php:285
 #: setup.php:541 setup.php:956
-#, fuzzy
 msgid "Sites"
 msgstr "אתרים"
 
@@ -278,7 +270,6 @@ msgstr "אתרים"
 #: mactrack_utilities.php:278 mactrack_view_devices.php:325
 #: mactrack_view_devices.php:519 mactrack_view_sites.php:252 setup.php:542
 #: setup.php:957
-#, fuzzy
 msgid "Devices"
 msgstr "ניתן להתנתק מכל ההתקנים האחרים, כגון טלפון נייד או מחשב ציבורי, על ידי לחיצה על כפתור התנתקות מכל ההתקנים האחרים."
 
@@ -288,12 +279,10 @@ msgid "IP Ranges"
 msgstr "IP טווחים"
 
 #: lib/mactrack_functions.php:3099
-#, fuzzy
 msgid "IP Address"
 msgstr "כתובת IP"
 
 #: lib/mactrack_functions.php:3100 setup.php:1472
-#, fuzzy
 msgid "MAC Address"
 msgstr "כתובת MAC"
 
@@ -309,13 +298,11 @@ msgid "Dot1x"
 msgstr "Dot1x"
 
 #: lib/mactrack_functions.php:3103 mactrack_view_graphs.php:153
-#, fuzzy
 msgid "Graphs"
 msgstr "גרפים"
 
 #: lib/mactrack_functions.php:3137 mactrack_device_types.php:459
 #: mactrack_devices.php:1216 mactrack_view_devices.php:513 setup.php:892
-#, fuzzy
 msgid "Unknown"
 msgstr "לא ידוע"
 
@@ -324,7 +311,6 @@ msgstr "לא ידוע"
 #: mactrack_snmp.php:556 mactrack_vendormacs.php:199 mactrack_view_arp.php:377
 #: mactrack_view_devices.php:418 mactrack_view_dot1x.php:502
 #: mactrack_view_interfaces.php:625 mactrack_view_macs.php:910
-#, fuzzy
 msgid "Search"
 msgstr "חיפוש"
 
@@ -332,7 +318,6 @@ msgstr "חיפוש"
 #: mactrack_devices.php:1226 mactrack_macauth.php:379 mactrack_macwatch.php:398
 #: mactrack_snmp.php:566 mactrack_vendormacs.php:209
 #: mactrack_view_devices.php:523 mactrack_view_ips.php:274 setup.php:904
-#, fuzzy
 msgid "Default"
 msgstr "ברירת מחדל"
 
@@ -346,7 +331,6 @@ msgstr "הצג את פרטי המכשיר"
 #: mactrack_snmp.php:580 mactrack_vendormacs.php:221 mactrack_view_arp.php:441
 #: mactrack_view_devices.php:442 mactrack_view_dot1x.php:575
 #: mactrack_view_interfaces.php:542 mactrack_view_macs.php:974
-#, fuzzy
 msgid "Go"
 msgstr "עבור"
 
@@ -356,7 +340,6 @@ msgstr "עבור"
 #: mactrack_view_devices.php:443 mactrack_view_dot1x.php:576
 #: mactrack_view_interfaces.php:543 mactrack_view_ips.php:287
 #: mactrack_view_macs.php:975
-#, fuzzy
 msgid "Clear"
 msgstr "נקה"
 
@@ -365,7 +348,6 @@ msgstr "נקה"
 #: mactrack_view_arp.php:443 mactrack_view_devices.php:444
 #: mactrack_view_dot1x.php:577 mactrack_view_interfaces.php:544
 #: mactrack_view_ips.php:286 mactrack_view_macs.php:976
-#, fuzzy
 msgid "Export"
 msgstr "ייצא"
 
@@ -373,7 +355,6 @@ msgstr "ייצא"
 #: mactrack_view_arp.php:383 mactrack_view_devices.php:424
 #: mactrack_view_dot1x.php:508 mactrack_view_interfaces.php:494
 #: mactrack_view_ips.php:254 mactrack_view_macs.php:916
-#, fuzzy
 msgid "Site"
 msgstr "אתר"
 
@@ -382,7 +363,6 @@ msgstr "אתר"
 #: mactrack_devices.php:1212 mactrack_view_devices.php:456
 #: mactrack_view_devices.php:467 mactrack_view_devices.php:509
 #: mactrack_view_ips.php:258
-#, fuzzy
 msgid "Any"
 msgstr "הכל"
 
@@ -425,12 +405,10 @@ msgstr "לא רלוונטי - Switch / Hub"
 #: mactrack_device_types.php:70 mactrack_devices.php:32 mactrack_macauth.php:30
 #: mactrack_macwatch.php:30 mactrack_sites.php:32 mactrack_snmp.php:31
 #: mactrack_view_macs.php:38
-#, fuzzy
 msgid "Delete"
 msgstr "מחק"
 
 #: mactrack_device_types.php:71 mactrack_snmp.php:32
-#, fuzzy
 msgid "Duplicate"
 msgstr "שכפל"
 
@@ -447,9 +425,8 @@ msgstr "עליך לבחור לפחות סוג התקן אחד."
 #: mactrack_device_types.php:285 mactrack_devices.php:258
 #: mactrack_macauth.php:134 mactrack_macwatch.php:139 mactrack_sites.php:150
 #: mactrack_snmp.php:210 mactrack_view_macs.php:178 mactrack_view_macs.php:259
-#, fuzzy
 msgid "Continue"
-msgstr "מכיל"
+msgstr "המשך"
 
 #: mactrack_device_types.php:290
 #, fuzzy
@@ -475,13 +452,13 @@ msgstr "קידומת סוג מכשיר:"
 #: mactrack_macauth.php:151 mactrack_macwatch.php:156 mactrack_sites.php:158
 #: mactrack_snmp.php:235 mactrack_view_macs.php:186 mactrack_view_macs.php:276
 msgid "Cancel"
-msgstr ""
+msgstr "ביטול"
 
 #: mactrack_device_types.php:311 mactrack_devices.php:364
 #: mactrack_macauth.php:152 mactrack_macwatch.php:157 mactrack_sites.php:159
 #: mactrack_snmp.php:235 mactrack_view_macs.php:187 mactrack_view_macs.php:277
 msgid "Return"
-msgstr ""
+msgstr "חזרה אל עריכת פוסט"
 
 #: mactrack_device_types.php:445
 #, fuzzy
@@ -714,7 +691,6 @@ msgstr "תיאור סוג התקן"
 #: mactrack_device_types.php:936 mactrack_devices.php:1038
 #: mactrack_sites.php:503 mactrack_view_devices.php:283
 #: mactrack_view_sites.php:348 setup.php:1004
-#, fuzzy
 msgid "Device Type"
 msgstr "סוג התקן"
 
@@ -754,17 +730,18 @@ msgid "No Device Tracking Device Types Found"
 msgstr "לא נמצאו סוגי התקנים למעקב אחר מכשירים"
 
 #: mactrack_device_types.php:1034
+#, fuzzy
 msgid "Submit Query"
-msgstr ""
+msgstr "הגש שאילתה"
 
 #: mactrack_device_types.php:1035
+#, fuzzy
 msgid "Clear Filtered Results"
-msgstr ""
+msgstr "נקה תוצאות מסוננות"
 
 #: mactrack_device_types.php:1036
-#, fuzzy
 msgid "Rescan"
-msgstr "מכשיר Rescan"
+msgstr "×¢×§××£ ××ª ×¨×©×××ª ××§×××××× (×××××× \"hextile raw\")"
 
 #: mactrack_device_types.php:1036
 #, fuzzy
@@ -772,7 +749,6 @@ msgid "Scan Active Devices for Unknown Device Types"
 msgstr "סוגי מכשירים למעקב אחר מכשירים"
 
 #: mactrack_device_types.php:1037 mactrack_devices.php:1142
-#, fuzzy
 msgid "Import"
 msgstr "ייבוא"
 
@@ -788,7 +764,6 @@ msgstr "ייבוא סוגי התקנים מקובץ מקומי"
 
 #: mactrack_device_types.php:1049 mactrack_sites.php:499
 #: mactrack_view_sites.php:344 setup.php:997
-#, fuzzy
 msgid "Vendor"
 msgstr "ספק"
 
@@ -800,24 +775,20 @@ msgstr "ספק"
 #: mactrack_view_interfaces.php:586 mactrack_view_macs.php:936
 #: mactrack_view_macs.php:1003 mactrack_view_macs.php:1036
 #: mactrack_view_macs.php:1072 setup.php:913
-#, fuzzy
 msgid "All"
 msgstr "הכל"
 
 #: mactrack_device_types.php:1066 mactrack_devices.php:1151
 #: mactrack_view_devices.php:452 mactrack_view_interfaces.php:368
 #: mactrack_view_interfaces.php:552
-#, fuzzy
 msgid "Type"
 msgstr "סוג"
 
 #: mactrack_devices.php:33
-#, fuzzy
 msgid "Enable"
 msgstr "אפשר"
 
 #: mactrack_devices.php:34 mactrack_macwatch.php:31
-#, fuzzy
 msgid "Disable"
 msgstr "כיבוי"
 
@@ -1037,17 +1008,15 @@ msgid "SNMP Information"
 msgstr "מידע SNMP"
 
 #: mactrack_devices.php:895
-#, fuzzy
 msgid "System:"
-msgstr "מערכת"
+msgstr "מערכת הפעלה:"
 
 #: mactrack_devices.php:896
 #, fuzzy
 msgid "Uptime:"
-msgstr "Uptime:"
+msgstr "זמן פעילות השרת"
 
 #: mactrack_devices.php:897
-#, fuzzy
 msgid "Hostname:"
 msgstr "שם מארח:"
 
@@ -1062,15 +1031,13 @@ msgid "Device Tracking Device Filters"
 msgstr "מסנני מכשיר למעקב אחר מכשירים"
 
 #: mactrack_devices.php:1022 mactrack_view_devices.php:267 setup.php:1238
-#, fuzzy
 msgid "Device Name"
-msgstr "שם התקן"
+msgstr "שם ההתקן:% 1"
 
 #: mactrack_devices.php:1026 mactrack_sites.php:424 mactrack_sites.php:495
 #: mactrack_view_devices.php:271 mactrack_view_ips.php:194
 #: mactrack_view_sites.php:248 mactrack_view_sites.php:340 setup.php:1269
 #: setup.php:1410
-#, fuzzy
 msgid "Site Name"
 msgstr "שם אתר"
 
@@ -1079,15 +1046,13 @@ msgstr "שם אתר"
 #: mactrack_view_devices.php:505 mactrack_view_dot1x.php:405
 #: mactrack_view_dot1x.php:418 mactrack_view_dot1x.php:600
 #: mactrack_view_interfaces.php:465
-#, fuzzy
 msgid "Status"
 msgstr "סטטוס"
 
 #: mactrack_devices.php:1034 mactrack_view_devices.php:279
 #: mactrack_view_interfaces.php:364 setup.php:1245
-#, fuzzy
 msgid "Hostname"
-msgstr "שם מארח"
+msgstr "Hostname"
 
 #: mactrack_devices.php:1042
 #, fuzzy
@@ -1129,12 +1094,10 @@ msgstr "אין מכשירים למעקב אחר מכשירים"
 #: mactrack_devices.php:1127 mactrack_view_devices.php:429 setup.php:898
 #: setup.php:1030 setup.php:1039 setup.php:1048 setup.php:1256 setup.php:1272
 #: setup.php:1317 setup.php:1346
-#, fuzzy
 msgid "None"
 msgstr "ללא"
 
 #: mactrack_devices.php:1217 mactrack_view_devices.php:514
-#, fuzzy
 msgid "Error"
 msgstr "שגיאה"
 
@@ -1174,7 +1137,6 @@ msgid "Mac Address"
 msgstr "כתובת MAC"
 
 #: mactrack_macauth.php:319 setup.php:1557
-#, fuzzy
 msgid "Reason"
 msgstr "סיבה"
 
@@ -1184,7 +1146,6 @@ msgid "Added/Modified"
 msgstr "נוסף / השתנה"
 
 #: mactrack_macauth.php:321
-#, fuzzy
 msgid "By"
 msgstr "מאת"
 
@@ -1230,7 +1191,6 @@ msgid "Watch Name"
 msgstr "שם צפייה"
 
 #: mactrack_macwatch.php:323 setup.php:1499
-#, fuzzy
 msgid "Ticket Number"
 msgstr "מספר הכרטיס"
 
@@ -1240,12 +1200,10 @@ msgid "First Seen"
 msgstr "נראה לראשונה"
 
 #: mactrack_macwatch.php:331
-#, fuzzy
 msgid "Last Seen"
-msgstr "נראה לאחרונה"
+msgstr "נראה/תה לאחרונה"
 
 #: mactrack_macwatch.php:338 mactrack_macwatch.php:394
-#, fuzzy
 msgid "Watches"
 msgstr "שעונים"
 
@@ -1345,7 +1303,7 @@ msgstr "<name> (1)"
 #: mactrack_snmp.php:224
 #, fuzzy
 msgid "Name Format:"
-msgstr "פורמט שם:"
+msgstr "פורמט שם"
 
 #: mactrack_snmp.php:298
 #, fuzzy, php-format
@@ -1373,27 +1331,22 @@ msgid "Device Tracking SNMP Options"
 msgstr "מעקב אחר הגדרות SNMP של התקנים"
 
 #: mactrack_snmp.php:397
-#, fuzzy
 msgid "Item"
 msgstr "פריט"
 
 #: mactrack_snmp.php:398 setup.php:470
-#, fuzzy
 msgid "Version"
 msgstr "גרסה"
 
 #: mactrack_snmp.php:399 setup.php:477
-#, fuzzy
 msgid "Community"
 msgstr "קהילה"
 
 #: mactrack_snmp.php:400 setup.php:492
-#, fuzzy
 msgid "Port"
 msgstr "פורט"
 
 #: mactrack_snmp.php:401 setup.php:500
-#, fuzzy
 msgid "Timeout"
 msgstr "פסק זמן"
 
@@ -1409,7 +1362,6 @@ msgstr "מקסימום OIDs"
 
 #: mactrack_snmp.php:404 mactrack_view_dot1x.php:399
 #: mactrack_view_dot1x.php:413
-#, fuzzy
 msgid "Username"
 msgstr "שם משתמש"
 
@@ -1430,7 +1382,6 @@ msgstr "פריו פרוטו"
 #: mactrack_view_sites.php:245 mactrack_view_sites.php:337 setup.php:578
 #: setup.php:592 setup.php:634 setup.php:655 setup.php:676 setup.php:697
 #: setup.php:718
-#, fuzzy
 msgid "Actions"
 msgstr "פעולות"
 
@@ -1455,7 +1406,6 @@ msgid "No SNMP Option Sets Found"
 msgstr "לא נמצאו ערכות SNMP אופציות"
 
 #: mactrack_snmp.php:562
-#, fuzzy
 msgid "Options"
 msgstr "אפשרויות"
 
@@ -1465,7 +1415,6 @@ msgid "Device Tracking Process Status"
 msgstr "סטטוס תהליך מעקב אחר מכשירים"
 
 #: mactrack_utilities.php:187 mactrack_utilities.php:198
-#, fuzzy
 msgid "Refresh"
 msgstr "רענן"
 
@@ -1535,7 +1484,6 @@ msgid "Maximum Per Device Scan Time:"
 msgstr "מקסימום לכל התקן זמן סריקה:"
 
 #: mactrack_utilities.php:260
-#, fuzzy
 msgid "minutes"
 msgstr "דקות"
 
@@ -1545,9 +1493,8 @@ msgid "DNS Configuration Information"
 msgstr "מידע על תצורת DNS"
 
 #: mactrack_utilities.php:264
-#, fuzzy
 msgid "Enabled"
-msgstr "אפשר"
+msgstr "מאופשר"
 
 #: mactrack_utilities.php:264
 #, fuzzy
@@ -1590,22 +1537,18 @@ msgid "The DNS Resolver is Running"
 msgstr "DNS Resolver פועל"
 
 #: mactrack_utilities.php:278
-#, fuzzy
 msgid "Date Started"
 msgstr "תאריך פתיחה"
 
 #: mactrack_utilities.php:312
-#, fuzzy
 msgid "Completed"
 msgstr "הושלם"
 
 #: mactrack_utilities.php:324
-#, fuzzy
 msgid "Waiting"
 msgstr "ממתין"
 
 #: mactrack_utilities.php:331
-#, fuzzy
 msgid "Other"
 msgstr "אחר"
 
@@ -1761,9 +1704,8 @@ msgid "Corporation"
 msgstr "תאגיד"
 
 #: mactrack_vendormacs.php:155
-#, fuzzy
 msgid "Address"
-msgstr "נשלח מדוא\"ל"
+msgstr "כתובת"
 
 #: mactrack_vendormacs.php:160 setup.php:960
 #, fuzzy
@@ -1816,7 +1758,6 @@ msgstr "כתובת MAC MAC"
 
 #: mactrack_view_arp.php:317 mactrack_view_macs.php:659
 #: mactrack_view_macs.php:673 mactrack_view_macs.php:805
-#, fuzzy
 msgid "Vendor Name"
 msgstr "שם הספק"
 
@@ -1850,7 +1791,6 @@ msgstr "לא נמצאו תוצאות מעקב IP של התקנים"
 
 #: mactrack_view_arp.php:399 mactrack_view_dot1x.php:527
 #: mactrack_view_interfaces.php:582 mactrack_view_macs.php:932
-#, fuzzy
 msgid "Device"
 msgstr "התקן"
 
@@ -1861,7 +1801,6 @@ msgstr "IP"
 
 #: mactrack_view_arp.php:451 mactrack_view_dot1x.php:585
 #: mactrack_view_macs.php:984
-#, fuzzy
 msgid "IP"
 msgstr "כתובת IP"
 
@@ -1924,7 +1863,6 @@ msgstr "מעקב אחר מכשירים - תצוגת 802.1x"
 
 #: mactrack_view_dot1x.php:404 mactrack_view_dot1x.php:417
 #: mactrack_view_dot1x.php:661
-#, fuzzy
 msgid "Domain"
 msgstr "דומיין"
 
@@ -1951,22 +1889,18 @@ msgid "Dot1x Scan Results"
 msgstr "Dot1x סורק"
 
 #: mactrack_view_dot1x.php:560
-#, fuzzy
 msgid "Sessions"
-msgstr "מושבים"
+msgstr "הפעלות"
 
 #: mactrack_view_dot1x.php:606
-#, fuzzy
 msgid "Any Status"
 msgstr "כל הסטטוסים"
 
 #: mactrack_view_dot1x.php:623 mactrack_view_macs.php:1032
-#, fuzzy
 msgid "Show"
 msgstr "הצג"
 
 #: mactrack_view_dot1x.php:628 mactrack_view_macs.php:1037
-#, fuzzy
 msgid "Most Recent"
 msgstr "הכי חדשים"
 
@@ -2041,17 +1975,14 @@ msgid "Interface Scan Results"
 msgstr "הסר את כל תוצאות הסריקה"
 
 #: mactrack_view_interfaces.php:372 setup.php:1103
-#, fuzzy
 msgid "Name"
 msgstr "שם"
 
 #: mactrack_view_interfaces.php:376 setup.php:990
-#, fuzzy
 msgid "Description"
 msgstr "תיאור"
 
 #: mactrack_view_interfaces.php:380
-#, fuzzy
 msgid "Alias"
 msgstr "כינוי"
 
@@ -2126,7 +2057,6 @@ msgid "Out Disc (OD/S)"
 msgstr "דיסק חיצוני (OD / S)"
 
 #: mactrack_view_interfaces.php:470
-#, fuzzy
 msgid "Last Change"
 msgstr "שינוי אחרון"
 
@@ -2136,7 +2066,6 @@ msgid "Last Scanned"
 msgstr "סרוק לאחרונה"
 
 #: mactrack_view_interfaces.php:510
-#, fuzzy
 msgid "Filters"
 msgstr "מסננים"
 
@@ -2201,7 +2130,6 @@ msgid "Changed in Last Day"
 msgstr "השתנה ביום האחרון"
 
 #: mactrack_view_interfaces.php:528
-#, fuzzy
 msgid "Bandwidth"
 msgstr "רוחב פס"
 
@@ -2226,7 +2154,6 @@ msgid "Current IP Addresses"
 msgstr "כתובות IP נוכחיות"
 
 #: mactrack_view_ips.php:197
-#, fuzzy
 msgid "Current Date"
 msgstr "התאריך הנוכחי"
 
@@ -2267,14 +2194,12 @@ msgid "Device Tracking - MAC to IP Report View"
 msgstr "מעקב אחר התקנים - תצוגת דוח IP ל - MAC"
 
 #: mactrack_view_macs.php:33
-#, fuzzy
 msgid "Authorize"
-msgstr "הרשאה"
+msgstr "אשר"
 
 #: mactrack_view_macs.php:34
-#, fuzzy
 msgid "Revoke"
-msgstr "בטל"
+msgstr "שלול"
 
 #: mactrack_view_macs.php:117
 #, fuzzy, php-format
@@ -2349,7 +2274,6 @@ msgid "No Device Tracking Port Results Found"
 msgstr "לא נמצאו תוצאות מעקב אחר התקן"
 
 #: mactrack_view_macs.php:819
-#, fuzzy
 msgid "Count"
 msgstr "ספירה"
 
@@ -2359,17 +2283,14 @@ msgid "Aggregated"
 msgstr "מצטבר"
 
 #: mactrack_view_macs.php:1068
-#, fuzzy
 msgid "Authorized"
 msgstr "מאושר"
 
 #: mactrack_view_macs.php:1073
-#, fuzzy
 msgid "Yes"
 msgstr "כן"
 
 #: mactrack_view_macs.php:1074
-#, fuzzy
 msgid "No"
 msgstr "לא"
 
@@ -2410,7 +2331,6 @@ msgid "Device Tracking"
 msgstr "מעקב אחר מכשירים"
 
 #: setup.php:248
-#, fuzzy
 msgid "General Settings"
 msgstr "הגדרות כלליות"
 
@@ -2465,12 +2385,14 @@ msgid "When should old database records be removed from the database.  Please no
 msgstr "כאשר יש להסיר רשומות מסד נתונים ישנות ממסד הנתונים. שים לב שלא תותר גישה למסד הנתונים של הנמל בזמן פעולה זו."
 
 #: setup.php:291
+#, fuzzy
 msgid "Confirm Utilities Prompt"
-msgstr ""
+msgstr "אשר את בקשת השירות"
 
 #: setup.php:292
+#, fuzzy
 msgid "When using utilities, prompt for verification"
-msgstr ""
+msgstr "בעת שימוש בכלי שירות, בקש לאימות"
 
 #: setup.php:297
 #, fuzzy
@@ -2609,9 +2531,8 @@ msgid "How often, in seconds do Device Tracking scanning IP's need to be resolve
 msgstr "באיזו תדירות, תוך שניות עוקבת את 'מעקב אחר מכשירים' את הצורך של ה- IP להיפתר לכתובות MAC עבור רזולוציית DNS. באמצעות מספר גדול יותר כאשר יש לך כמה אלפי מכשירים יגדיל את הביצועים."
 
 #: setup.php:392
-#, fuzzy
 msgid "Notification Settings"
-msgstr "הגדרות התראה"
+msgstr "הגדרות התראות"
 
 #: setup.php:396
 #, fuzzy
@@ -2769,13 +2690,13 @@ msgid "Default Tab"
 msgstr "ברירת מחדל"
 
 #: setup.php:537
+#, fuzzy
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
-msgstr ""
+msgstr "איזו כרטיסיית MacTrack תרצה להיות כרטיסיית ברירת המחדל שלך בכל פעם שאתה עובר לשנייה של MacTrack."
 
 #: setup.php:543
-#, fuzzy
 msgid "IP Addresses"
-msgstr "כתובת IP"
+msgstr "כתובות IP"
 
 #: setup.php:544
 #, fuzzy
@@ -2783,8 +2704,9 @@ msgid "Mac Addresses"
 msgstr "כתובת MAC"
 
 #: setup.php:546
+#, fuzzy
 msgid "dot1x Deta"
-msgstr ""
+msgstr "dot1x Deta"
 
 #: setup.php:557
 #, fuzzy
@@ -2793,7 +2715,6 @@ msgstr "התקני מעקב מכשירים"
 
 #: setup.php:564 setup.php:599 setup.php:606 setup.php:620 setup.php:648
 #: setup.php:669 setup.php:690
-#, fuzzy
 msgid "(Edit)"
 msgstr "(עריכה)"
 
@@ -2893,18 +2814,19 @@ msgid "Device Tracking Graph Viewer"
 msgstr "מציג גרף מעקב אחר מכשירים"
 
 #: setup.php:847 setup.php:849
+#, fuzzy
 msgid "MacTrack"
-msgstr ""
+msgstr "MacTrack"
 
 #: setup.php:866 setup.php:867 setup.php:868 setup.php:869
 #, fuzzy, php-format
 msgid "%d Seconds"
-msgstr "% d שניות"
+msgstr "%d שניות"
 
 #: setup.php:870
-#, fuzzy, php-format
+#, php-format
 msgid "%d Minute"
-msgstr "% d דקות"
+msgstr "‫%d דקה"
 
 #: setup.php:882
 #, fuzzy
@@ -2912,7 +2834,6 @@ msgid "Matches"
 msgstr "התאמות"
 
 #: setup.php:883
-#, fuzzy
 msgid "Contains"
 msgstr "מכיל"
 
@@ -2947,7 +2868,6 @@ msgid "Half"
 msgstr "חצי"
 
 #: setup.php:894
-#, fuzzy
 msgid "Full"
 msgstr "מלא"
 
@@ -2962,9 +2882,9 @@ msgid "Sync Device Tracking Device to Cacti Device"
 msgstr "סנכרון מכשיר מעקב ההתקנים על מכשיר קקט"
 
 #: setup.php:918 setup.php:919 setup.php:920 setup.php:921
-#, fuzzy, php-format
+#, php-format
 msgid "Every %d Minutes"
-msgstr "כל% d דקות"
+msgstr "כל %d דקות"
 
 #: setup.php:922
 #, fuzzy, php-format
@@ -2978,7 +2898,6 @@ msgid "Every %d Hours"
 msgstr "כל% d שעות"
 
 #: setup.php:927 setup.php:947 setup.php:1517
-#, fuzzy
 msgid "Every Day"
 msgstr "כל יום"
 
@@ -3008,12 +2927,10 @@ msgid "Every %d Days"
 msgstr "כל% d ימים"
 
 #: setup.php:949
-#, fuzzy
 msgid "Every Week"
 msgstr "כל שבוע"
 
 #: setup.php:955
-#, fuzzy
 msgid "Management"
 msgstr "ניהול"
 
@@ -3028,7 +2945,6 @@ msgid "Mac Watch"
 msgstr "מק Watch"
 
 #: setup.php:961 setup.php:962 setup.php:963 setup.php:973
-#, fuzzy
 msgid "Tracking Tools"
 msgstr "כלי מעקב"
 
@@ -3393,7 +3309,6 @@ msgid "Telnet"
 msgstr "Telnet"
 
 #: setup.php:1348
-#, fuzzy
 msgid "SSH"
 msgstr "SSH"
 
@@ -3408,7 +3323,6 @@ msgid "HTTPS"
 msgstr "HTTPS"
 
 #: setup.php:1354
-#, fuzzy
 msgid "User Name"
 msgstr "שם משתמש"
 
@@ -3418,7 +3332,6 @@ msgid "The user name to be used for your custom authentication method.  Examples
 msgstr "שם המשתמש שישמש לשיטת האימות המותאמת אישית שלך. דוגמאות כוללות SSH, RSH, HTML וכו '."
 
 #: setup.php:1363
-#, fuzzy
 msgid "Password"
 msgstr "סיסמה"
 
@@ -3548,7 +3461,6 @@ msgid "Every Hour"
 msgstr "כל שעה"
 
 #: setup.php:1521
-#, fuzzy
 msgid "Email Addresses"
 msgstr "כתובות דוא\"ל"
 
