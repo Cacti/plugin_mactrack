@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-12-12 20:00-0500\n"
+"POT-Creation-Date: 2020-12-12 22:16-0500\n"
 "PO-Revision-Date: 2020-12-12 19:13-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3495,10 +3495,6 @@ msgid "Please add a reason for this entry."
 msgstr "Vui lòng thêm một lý do cho mục này."
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "Ghi chú thiết bị"
-
-#, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "Kết quả nhập khẩu"
 
@@ -3525,6 +3521,10 @@ msgstr "Vui lòng thêm một lý do cho mục này."
 #, fuzzy
 #~ msgid "ENABLED"
 #~ msgstr "Bật"
+
+#, fuzzy
+#~ msgid "Device Not in Cacti"
+#~ msgstr "Ghi chú thiết bị"
 
 #, fuzzy
 #~ msgid "Authorization Succcess"

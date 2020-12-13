@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-12-12 20:00-0500\n"
+"POT-Creation-Date: 2020-12-12 22:16-0500\n"
 "PO-Revision-Date: 2020-12-12 19:14-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3481,10 +3481,6 @@ msgid "Please add a reason for this entry."
 msgstr "請為此條目添加原因。"
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "設備說明"
-
-#, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "匯入結果"
 
@@ -3511,6 +3507,10 @@ msgstr "請為此條目添加原因。"
 #, fuzzy
 #~ msgid "ENABLED"
 #~ msgstr "啟用"
+
+#, fuzzy
+#~ msgid "Device Not in Cacti"
+#~ msgstr "設備說明"
 
 #, fuzzy
 #~ msgid "Authorization Succcess"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: macktrack on cacti 1.1.34\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-12-12 20:00-0500\n"
+"POT-Creation-Date: 2020-12-12 22:16-0500\n"
 "PO-Revision-Date: 2020-12-12 19:13-0500\n"
 "Last-Translator: tomcat <luis_126@126.com>\n"
 "Language-Team: Chinese (Simplified) <http://translate.cacti.net/projects/cacti/mactrack/zh-CN/>\n"
@@ -3160,9 +3160,6 @@ msgstr "请输入MAC地址或MAC地址匹配字符串以自动授权。 如果�
 msgid "Please add a reason for this entry."
 msgstr "请为此条目添加一个原因。"
 
-#~ msgid "Device Not in Cacti"
-#~ msgstr "设备不在acti中"
-
 #~ msgid "Clear Results"
 #~ msgstr "清除结果"
 
@@ -3249,6 +3246,9 @@ msgstr "请为此条目添加一个原因。"
 
 #~ msgid "No MacTrack Device Types"
 #~ msgstr "没有MacTrack设备类型"
+
+#~ msgid "Device Not in Cacti"
+#~ msgstr "设备不在acti中"
 
 #, fuzzy
 #~ msgid "Authorization Succcess"

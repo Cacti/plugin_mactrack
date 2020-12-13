@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-12-12 20:00-0500\n"
+"POT-Creation-Date: 2020-12-12 22:16-0500\n"
 "PO-Revision-Date: 2020-12-12 19:05-0500\n"
 "Last-Translator: The Cacti Group <weblate@cacti.net>\n"
 "Language-Team: German <http://translate.cacti.net/projects/cacti/mactrack/de-DE/>\n"
@@ -3444,10 +3444,6 @@ msgid "Please add a reason for this entry."
 msgstr "Bitte geben Sie einen Grund für diesen Eintrag an."
 
 #, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "Gerätehinweise"
-
-#, fuzzy
 #~ msgid "Clear Results"
 #~ msgstr "Ergebnisse importieren"
 
@@ -3474,6 +3470,10 @@ msgstr "Bitte geben Sie einen Grund für diesen Eintrag an."
 #, fuzzy
 #~ msgid "ENABLED"
 #~ msgstr "Aktiviert"
+
+#, fuzzy
+#~ msgid "Device Not in Cacti"
+#~ msgstr "Gerätehinweise"
 
 #, fuzzy
 #~ msgid "Authorization Succcess"
