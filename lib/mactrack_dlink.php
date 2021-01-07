@@ -228,7 +228,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 }
 
 function dlink_convert_macs ($oldmac){
-	if ($oldmac{0} != '.') {
+	if ($oldmac[0] != '.') {
 		$oldmac = '.' . $oldmac;
 	}
 	$oldmac=substr($oldmac,stripos($oldmac,'.')+1);
