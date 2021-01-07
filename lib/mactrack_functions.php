@@ -705,7 +705,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 		}
 
 		/* update the last up/down status */
-		if (!isset($db_interface[$ifIndex]['ifOperStatus'])) {
+		if (!isset($db_interface[$ifIndex])) {
 			if ($ifOperStatus[$ifIndex] == 1) {
 				$last_up_time = date('Y-m-d H:i:s');
 				$stateChanges = 0;
