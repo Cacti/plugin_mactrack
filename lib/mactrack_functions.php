@@ -2163,6 +2163,10 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 					$authorized_mac = 0;
 				}
 
+				if (!isset($port_value['vlan_name'])) {
+					$port_value['vlan_name'] = 'N/A';
+				}
+
 				db_execute_prepared('REPLACE INTO mac_track_temp_ports
 					(site_id,device_id,hostname,device_name,vlan_id,vlan_name,
 					mac_address,port_number,port_name,scan_date,authorized)
