@@ -4,18 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-12-12 22:16-0500\n"
-"PO-Revision-Date: 2020-12-12 19:14-0500\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: zh_TW\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2020-12-12 22:16-0500\nPO-Revision-Date: 2021-05-04 08:47+0000\nLast-Translator: Linya Huang <linya0405@gmail.com>\nLanguage-Team: Chinese (Traditional) <http://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\nLanguage: zh-TW\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 4.3.2\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -220,7 +209,7 @@ msgid "%d Days"
 msgstr "%d 天"
 
 #: lib/mactrack_functions.php:2966
-#, fuzzy, php-format
+#, php-format
 msgid "%d Weeks"
 msgstr "％d週"
 
@@ -2896,17 +2885,17 @@ msgid "Every Day"
 msgstr "每天"
 
 #: setup.php:936
-#, fuzzy, php-format
+#, php-format
 msgid "%d Month"
 msgstr "％d月"
 
 #: setup.php:937 setup.php:938 setup.php:939
-#, fuzzy, php-format
+#, php-format
 msgid "%d Months"
 msgstr "％d個月"
 
 #: setup.php:940
-#, fuzzy, php-format
+#, php-format
 msgid "%d Year"
 msgstr "％d年"
 
