@@ -1,5 +1,9 @@
 ## ChangeLog
 
+--- develop ---
+
+* issue#165: The file mactrack_actions.php will throw and error if an the $save array is discarded by another plugin
+
 --- 4.3 / 4.4 ---
 
 * bug: unable to delete Mac Watch and Sites records
@@ -9,12 +13,14 @@
 * bug: Number of devices scanned incorrect for main scanner
 
 * bug: MacAuthorizations Interface not accessible through MacTrack tab
+* bug: Mac Watch can not send mail
 
 * issue#70: Fix issue with Prompt confirmation button
 
 * issue#75: Command Line does not show output
 
 * issue#77: dlink switch vlan name is null
+* issue#75: Command Line does not show output
 
 * issue#81: Add support for FontAwesome 5.0 under Cacti 1.2
 
@@ -47,6 +53,7 @@
 * issue#117: Juniper EX4200 issues with getJEX_switch_ports
 
 * issue#118: Undefined property: Net_DNS2_RR_CNAME::$ptrdname in file
+* issue#117: Juniper EX4200 issues with getJEX_switch_ports
 
 * issue#119: No values for Dot1x and browser hangs
 
@@ -67,6 +74,7 @@
 * feature: Update Net_DNS2 to version 1.5
 
 * feature: Use local DNS to resolve when either the resolver fails or there are no DNS servers listed
+* feature: Update Net_DNS2 to version 1.5
 
 --- 4.2 ---
 

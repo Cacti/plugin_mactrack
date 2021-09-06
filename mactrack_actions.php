@@ -147,7 +147,6 @@ function sync_mactrack_to_cacti($mt_device) {
 		$cacti_device = db_fetch_row('SELECT * FROM host WHERE id=' . $mt_device['host_id']);
 
 		if (cacti_sizeof($cacti_device)) {
-
 			# update cacti device
 			api_device_save($cacti_device['id'], $cacti_device['host_template_id'],
 				$cacti_device['description'], $cacti_device['hostname'],
@@ -230,11 +229,9 @@ function mactrack_device_action_array($action) {
 }
 
 function mactrack_device_action_prepare($save) {
-	# globals used
 	global $config, $fields_mactrack_device_edit;
 
-	# it's our turn
-	if ($save['drp_action'] == 'plugin_mactrack_device') { /* mactrack */
+	if (isset($save['drp_action']) && $save['drp_action'] == 'plugin_mactrack_device') {
 		/* find out which (if any) hosts have been checked, so we can tell the user */
 		if (isset($save['host_array'])) {
 			/* list affected hosts */
@@ -270,7 +267,7 @@ function mactrack_device_action_prepare($save) {
 		}
 	}
 
-	return $save; # required for next hook in chain
+	return $save;
 }
 
 /**
@@ -281,8 +278,7 @@ function mactrack_device_action_prepare($save) {
 function mactrack_device_action_execute($action) {
 	global $config;
 
-	# it's our turn
-	if ($action == 'plugin_mactrack_device') { /* mactrack */
+	if ($action == 'plugin_mactrack_device') {
 		/* find out which (if any) hosts have been checked, so we can tell the user */
 		if (isset_request_var('selected_items')) {
 			$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
