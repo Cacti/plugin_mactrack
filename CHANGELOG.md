@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* issue: MacTrack View Devices continues to use a legacy icon over a Fontawesome glyph
+
 * issue#165: The file mactrack_actions.php will throw and error if an the $save array is discarded by another plugin
 
 --- 4.3 / 4.4 ---
@@ -13,6 +15,7 @@
 * bug: Number of devices scanned incorrect for main scanner
 
 * bug: MacAuthorizations Interface not accessible through MacTrack tab
+
 * bug: Mac Watch can not send mail
 
 * issue#70: Fix issue with Prompt confirmation button

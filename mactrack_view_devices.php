@@ -362,7 +362,7 @@ function mactrack_view_devices() {
 				if ($device['host_id']) {
 					$actions .= "<a class='pic' href='" . html_escape($webroot . 'mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=&host_id=' . $device['host_id'] . '&graph_template_id=0&filter=') . "' title='" . __esc('View Graphs', 'mactrack') . "'><i class='mtChart fas fa-chart-line'></i></a>";
 				} else {
-					$actions .= "<img title='" . __esc('Device Not Mapped to Cacti Device', 'mactrack') . "' src='" . $webroot . "images/view_graphs_disabled.gif'>";
+					$actions .= "<i class='mcChartDisabled fas fa-chart-line' title='" . __esc('Device Not Mapped to Cacti Device', 'mactrack') . "' ></i>";
 				}
 			} else {
 				$actions = '';
