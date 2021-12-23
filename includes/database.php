@@ -394,16 +394,16 @@ function mactrack_database_upgrade() {
 	);
 
 	if (strpos($columns['port_number'], 'int(10)') !== false) {
-		db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
+		db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
 
-		db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
+		db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
 
-		db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
+		db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
 
-		db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
+		db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
 
-		db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN port_number int(10) unsigned NOT NULL default '0'");
-
+		db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
+	} else {
 		db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN first_scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
 
 		db_execute("ALTER TABLE mac_track_devices MODIFY COLUMN last_rundate TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
@@ -467,7 +467,7 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'vendor_mac', 'type' => 'varchar(8)', 'NULL' => true);
 	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'port_number', 'type' => 'int(10)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
+	$data['columns'][] = array('name' => 'port_number', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'port_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'date_last', 'type' => 'timestamp', 'NULL' => false, 'default' => 'CURRENT_TIMESTAMP', 'on_update' => 'CURRENT_TIMESTAMP');
 	$data['columns'][] = array('name' => 'first_scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
@@ -588,7 +588,7 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'username', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'domain', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'status', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'port_number', 'type' => 'int(10)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
+	$data['columns'][] = array('name' => 'port_number', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true);
@@ -719,7 +719,7 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'port_number', 'type' => 'int(10)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
+	$data['columns'][] = array('name' => 'port_number', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true);
@@ -788,7 +788,7 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'vendor_mac', 'type' => 'varchar(8)', 'NULL' => true, 'default' => '');
 	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'port_number', 'type' => 'int(10)', 'unsignend' => true, 'NULL' => false, 'default' => '0');
+	$data['columns'][] = array('name' => 'port_number', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'port_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
 	$data['columns'][] = array('name' => 'authorized', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0');
@@ -896,7 +896,7 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'vendor_mac', 'type' => 'varchar(8)', 'NULL' => true);
 	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'port_number', 'type' => 'int(10)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
+	$data['columns'][] = array('name' => 'port_number', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'port_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
 	$data['columns'][] = array('name' => 'updated', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0');
