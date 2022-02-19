@@ -1029,7 +1029,7 @@ function get_link_int_value($snmp_oid, $ifIndex, &$snmp_array, &$db_interface, $
 		$int_value = 0;
 	} elseif (!isset($snmp_array[$ifIndex])) {
 		$int_value = 0;
-	} elseif ($snmp_array[$ifIndex] <> $db_interface[$ifIndex][$snmp_oid]) {
+	} elseif ($snmp_array[$ifIndex] != $db_interface[$ifIndex][$snmp_oid]) {
 		/* account for 2E32 rollover */
 		/* there are two types of rollovers one rolls to 0 */
 		/* the other counts backwards.  let's make an educated guess */
@@ -2994,6 +2994,7 @@ function mactrack_display_stats() {
 		if (cacti_sizeof($stats == 3)) {
 			$time = explode(':', $stats[0]);
 			$time = $time[1];
+			$time = round($time, 1);
 
 			$proc = explode(':', $stats[1]);
 			$proc = $proc[1];
@@ -3004,10 +3005,10 @@ function mactrack_display_stats() {
 	}
 
 	if ($processes > 0) {
-		$message = __('Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f', $processes, read_config_option('mactrack_process_status', true), round($time,1), 'mactrack');
+		$message = __('Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f', $processes, read_config_option('mactrack_process_status', true), $time, 'mactrack');
 	} else {
 		$message = __('Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s',
-			round($time,1), $proc , $devs,
+			$time, $proc , $devs,
 			($timing != 'disabled' ? date('Y-m-d H:i:s', strtotime(read_config_option('mt_scan_date', true)) + $frequency):__('Disabled', 'mactrack')), 'mactrack');
 	}
 
