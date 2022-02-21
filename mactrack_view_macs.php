@@ -150,7 +150,7 @@ function form_actions() {
 
 	form_start('mactrack_view_macs.php');
 
-	html_start_box($mactrack_view_macs_actions{get_request_var('drp_action')}, '60%', '', '3', 'center', '');
+	html_start_box($mactrack_view_macs_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
 
 	if (get_request_var('drp_action') == '1') { /* Authorize Macs */
 		print "<tr>
@@ -249,7 +249,7 @@ function form_aggregated_actions() {
 
 	form_start('mactrack_view_macs.php');
 
-	html_start_box($mactrack_view_agg_macs_actions{get_request_var('drp_action')}, '60%', '', '3', 'center', '');
+	html_start_box($mactrack_view_agg_macs_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
 
 	if (!sizeof($row_array)) {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one Row.', 'mactrack') . "</span></td></tr>\n";

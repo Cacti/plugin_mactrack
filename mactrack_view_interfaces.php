@@ -381,12 +381,12 @@ function mactrack_display_array() {
 			'sort'    => 'ASC'
 		),
 		'inBound' => array(
-			'display' => __('InBound %', 'mactrack'),
+			'display' => __('InBound %%%', 'mactrack'),
 			'align'   => 'right',
 			'sort'    => 'DESC'
 		),
 		'outBound' => array(
-			'display' => __('OutBound %', 'mactrack'),
+			'display' => __('OutBound %%%', 'mactrack'),
 			'align'   => 'right',
 			'sort'    => 'DESC'
 		),
