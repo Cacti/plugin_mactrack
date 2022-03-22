@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2020 The Cacti Group                                 |
+ | Copyright (C) 2004-2022 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -381,12 +381,12 @@ function mactrack_display_array() {
 			'sort'    => 'ASC'
 		),
 		'inBound' => array(
-			'display' => __('InBound %', 'mactrack'),
+			'display' => __('InBound %%%', 'mactrack'),
 			'align'   => 'right',
 			'sort'    => 'DESC'
 		),
 		'outBound' => array(
-			'display' => __('OutBound %', 'mactrack'),
+			'display' => __('OutBound %%%', 'mactrack'),
 			'align'   => 'right',
 			'sort'    => 'DESC'
 		),

@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2020 The Cacti Group                                 |
+ | Copyright (C) 2004-2022 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -370,7 +370,7 @@ function mactrack_view_devices() {
 
 			$actions .= "<a class='pic' href='" . html_escape($webroot . 'mactrack_view_macs.php?report=macs&reset&device_id=-1&scan_date=3&site_id=' . get_request_var('site_id') . '&device_id=' . $device['device_id']) . "' title='" . __esc('View MAC Addresses', 'mactrack') . "'><i class='mtMacs fas fa-at'></i></a>";
 
-			$actions .= "<a class='pic' href='" . html_escape($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . get_request_var('site_id') . '&device=' . $device['device_id']) . "' title='" . __esc('View Interfaces', 'mactrack') . "'><i class='mtRanges fas fa-sitemap'></i></a>";
+			$actions .= "<a class='pic' href='" . html_escape($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . get_request_var('site_id') . '&device_id=' . $device['device_id']) . "' title='" . __esc('View Interfaces', 'mactrack') . "'><i class='mtRanges fas fa-sitemap'></i></a>";
 
 			$st = $device['scan_type'];
 			$na = __('N/A', 'mactrack');

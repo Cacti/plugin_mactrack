@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2020 The Cacti Group                                 |
+ | Copyright (C) 2004-2022 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -842,7 +842,6 @@ function mactrack_show_tab() {
 	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 	if (api_user_realm_auth('mactrack_view_macs.php')) {
-		mactrack_sanitize_load_report();
 		if (substr_count($_SERVER['REQUEST_URI'], 'mactrack_view_')) {
 			print '<a href="' . html_escape($config['url_path'] . 'plugins/mactrack/mactrack_view_' . get_request_var('report') . '.php') . '"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';
 		} else {
