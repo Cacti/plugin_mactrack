@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2020 The Cacti Group                                 |
+ | Copyright (C) 2004-2022 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -31,7 +31,7 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 }
 
 include('./include/cli_check.php');
-include_once($config['base_path'] . 'plugins/mactrack/lib/mactrack_functions.php');
+include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 /* process calling arguments */
 $parms = $_SERVER['argv'];
