@@ -603,6 +603,26 @@ function collect_mactrack_data($start, $site_id = 0) {
 			}
 		}
 
+		/* check the arp table for entries */
+		$ports = db_fetch_assoc('SELECT site_id,device_id,mac_address,ip_address
+			FROM mac_track_temp_ports
+			WHERE updated = 0');
+		if (cacti_sizeof($ports)) {
+			foreach($ports as $port) {
+				$macs = db_fetch_row("SELECT mac_address,ip_address
+					FROM mac_track_arp
+					WHERE mac_address = '" . $port['mac_address'] . "'");
+				if (isset($macs['ip_address'])) {
+					db_execute("UPDATE mac_track_temp_ports
+						SET updated=1, ip_address='" . $macs['ip_address'] . "'
+						WHERE site_id='" . $port['site_id'] . "'
+						AND device_id='" . $port['device_id'] . "'
+						AND mac_address='" . $port['mac_address'] . "'");
+				}
+			}
+		}
+
+
 		/* resolve some ip's to mac addresses to let the resolver knock them out */
 		db_execute_prepared('UPDATE mac_track_temp_ports
 			INNER JOIN mac_track_ips

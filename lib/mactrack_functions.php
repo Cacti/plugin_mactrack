@@ -423,6 +423,12 @@ function get_standard_arp_table($site, &$device) {
 	/* output details to database */
 	if (cacti_sizeof($atEntries)) {
 		foreach($atEntries as $atEntry) {
+			/* check the mac_track_arp table if no IP address is found */
+			if ($atEntry['atNetAddress'] == "") {
+				$atEntry['atNetAddress'] = db_check_for_ip($atEntry['atPhysAddress']);
+				mactrack_debug('atNetAddress ****:' . $atEntry['atPhysAddress'] . '(' . $atEntry['atNetAddress'] . ')');
+			}
+
 			db_execute_prepared('REPLACE INTO mac_track_ips
 				(site_id, device_id, hostname, device_name, port_number, mac_address, ip_address, scan_date)
 				VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
@@ -1324,6 +1330,52 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 	}
 }
 
+/* get_ios_vrf_arp_table
+  	obtains arp associations for cisco Catalyst Switches.
+  	At this stage only tested on 6800 series
+ */
+
+function get_ios_vrf_arp_table($oid, &$device, $snmp_readstring = '', $hex = false) {
+	$return_array = array();
+
+	if (!strlen($snmp_readstring)) {
+		$snmp_readstring = $device['snmp_readstring'];
+	}
+
+	if ($device['snmp_version'] == '3' && substr_count($snmp_readstring,'vlan-')) {
+		$snmp_context = $snmp_readstring;
+	} else {
+		$snmp_context = $device['snmp_context'];
+	}
+
+	$walk_array = cacti_snmp_walk($device['hostname'], $snmp_readstring,
+		$oid, $device['snmp_version'], $device['snmp_username'],
+		$device['snmp_password'], $device['snmp_auth_protocol'],
+		$device['snmp_priv_passphrase'], $device['snmp_priv_protocol'],
+		$snmp_context, $device['snmp_port'], $device['snmp_timeout'],
+		$device['snmp_retries'], $device['max_oids'],
+		SNMP_POLLER, $device['snmp_engine_id'],
+		($hex ? SNMP_STRING_OUTPUT_HEX : SNMP_STRING_OUTPUT_GUESS));
+
+	$i = 0;
+
+	if (cacti_sizeof($walk_array)) {
+
+		foreach ($walk_array as $walk_item) {
+			$key = $walk_item['oid'];
+			$key = preg_replace('/' . $oid . '\.[0-9]+\.1\./', '', $key);
+			$return_array[$i]['key'] = $key;
+			$return_array[$i]['value'] = str_replace(' ', ':', $walk_item['value']);
+
+			$i++;
+		}
+	}
+
+	return $return_array;
+
+}
+
+
 /*	get_base_wireless_dot1dTpFdbEntry_ports - This function will grab information from the
   port bridge snmp table and return it to the calling progrem for further processing.
   This is a foundational function for all vendor data collection functions.
@@ -2199,6 +2251,17 @@ function db_check_auth($mac_address) {
 		LIKE ?',
 		array('%' . $mac_address . '%'));
 
+	return $query;
+}
+
+/* db_check_for_ip - This function checks whether the mac address has a matching IP address in the mac_track_arp table
+*/
+function db_check_for_ip($mac_address) {
+	$query = db_fetch_cell_prepared('SELECT ip_address
+		FROM mac_track_arp
+		WHERE mac_address
+		LIKE ?',
+		array('%' . $mac_address . '%'));
 	return $query;
 }
 
