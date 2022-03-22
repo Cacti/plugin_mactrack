@@ -29,6 +29,7 @@ array_push($mactrack_scanning_functions, 'get_IOS_dot1dTpFdbEntry_ports');
 
 if (!isset($mactrack_scanning_functions_ip)) { $mactrack_scanning_functions_ip = array(); }
 array_push($mactrack_scanning_functions_ip, 'get_cisco_dhcpsnooping_table');
+array_push($mactrack_scanning_functions_ip, 'get_cisco_vrf_arp_table');
 
 if (!isset($mactrack_scanning_functions_dot1x)) { $mactrack_scanning_functions_dot1x = array(); }
 array_push($mactrack_scanning_functions_dot1x, 'get_cisco_dot1x_table');
@@ -639,10 +640,46 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 					db_qstr($cdsBindingEntry['cdsBindingsIpAddress']) . ',' .
 					db_qstr($scan_date) . ')';
 
-				//mactrack_debug('SQL: ' . $insert_string);
-
 				db_execute($insert_string);
 			}
+		}
+	}
+
+	/* save ip information for the device */
+	$device['ips_total'] = sizeof($cdsBindingEntries);
+	db_execute('UPDATE mac_track_devices SET ips_total =' . $device['ips_total'] . ' WHERE device_id=' . $device['device_id']);
+
+	mactrack_debug('HOST: ' . $device['hostname'] . ', IP address information collection complete');
+}
+
+/*	get_cisco_vrf_arp_table - This function reads a devices ARP table for a site with VRF/MPLS and stores
+  the IP address and MAC address combinations in the mac_track_ips table.
+*/
+function get_cisco_vrf_arp_table($site, &$device) {
+	global $debug, $scan_date;
+
+	/* get the cdsBindingInterface Index for the device */
+	$cdsBindingEntries 	= get_ios_vrf_arp_table('.1.3.6.1.2.1.3.1.1.2', $device);
+
+
+	/* output details to database */
+	if (cacti_sizeof($cdsBindingEntries)) {
+		foreach ($cdsBindingEntries as $cdsBindingEntry) {
+			$insert_string = 'INSERT INTO mac_track_arp
+				(site_id,ip_address,mac_address,scan_date)
+				VALUES
+				(' .
+					$device['site_id'] . ',' . 
+					db_qstr($cdsBindingEntry['key']) . ',' .
+					db_qstr($cdsBindingEntry['value']) . ',' .
+					db_qstr($scan_date) . '
+				)
+				ON DUPLICATE KEY UPDATE
+				`ip_address` = ' . db_qstr($cdsBindingEntry['key']) . ',
+				`scan_date` = ' .  db_qstr($scan_date) . ';';
+
+			 db_execute($insert_string);
+
 		}
 	}
 
