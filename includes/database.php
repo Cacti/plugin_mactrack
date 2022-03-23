@@ -425,6 +425,19 @@ function mactrack_database_upgrade() {
 		db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
 	}
 
+	if (!db_table_exists('mac_track_arp')) {
+		$data = array();
+		$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => false);
+		$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => true, 'default' => '');
+		$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
+		$data['columns'][] = array('name' => 'scan_date', 'type' => 'datetime', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
+		$data['primary'] = 'mac_address';
+		$data['unique_keys'] = array('name' => `mac_address`, 'columns' => `sysDescr_match`);
+		$data['type'] = 'InnoDB';
+		$data['comment'] = 'Table for VRF ARP translation';
+		api_plugin_db_table_create ('mactrack', 'mac_track_arp', $data);
+	}
+
 	$tables = db_fetch_assoc("SELECT DISTINCT TABLE_NAME
 		FROM information_schema.COLUMNS
 		WHERE TABLE_SCHEMA = SCHEMA()
@@ -928,5 +941,16 @@ function mactrack_setup_database() {
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
 	api_plugin_db_table_create ('mactrack', 'mac_track_vlans', $data);
+
+	$data = array();
+	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => false);
+	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => true, 'default' => '');
+	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'scan_date', 'type' => 'datetime', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
+	$data['primary'] = 'mac_address';
+	$data['unique_keys'] = array('name' => `mac_address`, 'columns' => `sysDescr_match`);
+	$data['type'] = 'InnoDB';
+	$data['comment'] = 'Table for VRF ARP translation';
+	api_plugin_db_table_create ('mactrack', 'mac_track_arp', $data);
 }
 
