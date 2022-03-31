@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2020-12-12 22:16-0500\nPO-Revision-Date: 2022-03-25 04:14+0000\nLast-Translator: Anatoliy <hamrad99h2@gmail.com>\nLanguage-Team: Russian <http://translate.cacti.net/projects/cacti/mactrack/ru/>\nLanguage: ru-RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 4.8.1\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2020-12-12 22:16-0500\nPO-Revision-Date: 2022-03-31 16:49+0000\nLast-Translator: Anatoliy <hamrad99h2@gmail.com>\nLanguage-Team: Russian <http://translate.cacti.net/projects/cacti/mactrack/ru/>\nLanguage: ru-RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 4.8.1\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -301,7 +301,7 @@ msgstr "Неизвестно"
 #: mactrack_view_devices.php:418 mactrack_view_dot1x.php:512
 #: mactrack_view_interfaces.php:625 mactrack_view_macs.php:1038
 msgid "Search"
-msgstr "Найти"
+msgstr "Поиск"
 
 #: lib/mactrack_functions.php:3161 mactrack_device_types.php:1023
 #: mactrack_devices.php:1227 mactrack_macauth.php:380 mactrack_macwatch.php:397
@@ -798,7 +798,6 @@ msgid "Copy SNMP Settings from Cacti Host"
 msgstr "Копирование настроек SNMP с Cacti Host'а"
 
 #: mactrack_devices.php:256
-#, fuzzy
 msgid "You must select at least one device."
 msgstr "Вы должны выбрать хотя бы одно устройство."
 
@@ -2313,7 +2312,7 @@ msgstr "Отслеживание устройства"
 
 #: setup.php:248
 msgid "General Settings"
-msgstr "Основые Настройки"
+msgstr "Основные Настройки"
 
 #: setup.php:252
 #, fuzzy
