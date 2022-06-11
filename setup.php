@@ -841,6 +841,10 @@ function mactrack_show_tab() {
 
 	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
+	if (!isset_request_var('report')) {
+		set_request_var('report', 'sites');
+	}
+
 	if (api_user_realm_auth('mactrack_view_macs.php')) {
 		if (substr_count($_SERVER['REQUEST_URI'], 'mactrack_view_')) {
 			print '<a href="' . html_escape($config['url_path'] . 'plugins/mactrack/mactrack_view_' . get_request_var('report') . '.php') . '"><img src="' . $config['url_path'] . 'plugins/mactrack/images/tab_mactrack_down.png" alt="' . __('MacTrack', 'mactrack') . '"></a>';

@@ -6,6 +6,8 @@
 
 * issue#165: The file mactrack_actions.php will throw and error if an the $save array is discarded by another plugin
 
+* issue#172: Wrong URL on the main tab in the UI
+
 --- 4.3 / 4.4 ---
 
 * bug: unable to delete Mac Watch and Sites records
