@@ -67,7 +67,7 @@ function mactrack_view_graphs() {
 	$hosts = $_SESSION['sess_mt_hosts'];
 
 	/* include graph view filter selector */
-	html_start_box($title . (isset_request_var('style') && strlen(get_request_var('style')) ? ' [ ' . __('Custom Graph List Applied - Filtering from List', 'mactrack') . ' ]':''), '100%', '', '3', 'center', '');
+	html_start_box($title . (isset_request_var('style') && get_request_var('style') != '' ? ' [ ' . __('Custom Graph List Applied - Filtering from List', 'mactrack') . ' ]':''), '100%', '', '3', 'center', '');
 
 	if ($hosts != '') {
 		$hq = 'h.id IN (' . $hosts . ')';
@@ -128,12 +128,12 @@ function mactrack_view_graphs() {
 
 	// Host Id sql_where
 	if (get_request_var('host_id') > 0) {
-		$sql_where .= (strlen($sql_where) ? ' AND':'') . ' gl.host_id=' . get_request_var('host_id');
+		$sql_where .= ($sql_where != '' ? ' AND':'') . ' gl.host_id=' . get_request_var('host_id');
 	}
 
 	// Graph Template Id sql_where
 	if (get_request_var('graph_template_id') > 0) {
-		$sql_where .= (strlen($sql_where) ? ' AND':'') . ' gl.graph_template_id=' . get_request_var('graph_template_id');
+		$sql_where .= ($sql_where != '' ? ' AND':'') . ' gl.graph_template_id=' . get_request_var('graph_template_id');
 	}
 
 	$limit  = (get_request_var('graphs')*(get_request_var('page')-1)) . ',' . get_request_var('graphs');

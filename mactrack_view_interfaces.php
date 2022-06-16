@@ -50,27 +50,27 @@ function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = '30') {
 	if (get_request_var('issues') == '-2') { // All Interfaces
 		/* do nothing all records */
 	} elseif (get_request_var('issues') == '-3') { // Non Ignored Interfaces
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . $ignore;
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . $ignore;
 	} elseif (get_request_var('issues') == '-4') { // Ignored Interfaces
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . ' NOT ' . $ignore;
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . ' NOT ' . $ignore;
 	} elseif (get_request_var('issues') == '-1') { // With Issues
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . "((int_errors_present=1 OR int_discards_present=1) AND $ignore)";
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . "((int_errors_present=1 OR int_discards_present=1) AND $ignore)";
 	} elseif (get_request_var('issues') == '0') { // Up Interfaces
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . "(ifOperStatus=1 AND $ignore)";
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . "(ifOperStatus=1 AND $ignore)";
 	} elseif (get_request_var('issues') == '1') { // Up w/o Alias
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . "(ifOperStatus=1 AND ifAlias='' AND $ignore)";
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . "(ifOperStatus=1 AND ifAlias='' AND $ignore)";
 	} elseif (get_request_var('issues') == '2') { // Errors Up
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . "(int_errors_present=1 AND $ignore)";
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . "(int_errors_present=1 AND $ignore)";
 	} elseif (get_request_var('issues') == '3') { // Discards Up
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . "(int_discards_present=1 AND $ignore)";
+		$sql_where .= ($sql_where != ''? ' AND ' : 'WHERE ') . "(int_discards_present=1 AND $ignore)";
 	} elseif (get_request_var('issues') == '7') { // Change < 24 Hours
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . '(mac_track_interfaces.sysUptime-ifLastChange < 8640000) AND ifLastChange > 0 AND (mac_track_interfaces.sysUptime-ifLastChange > 0)';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_interfaces.sysUptime-ifLastChange < 8640000) AND ifLastChange > 0 AND (mac_track_interfaces.sysUptime-ifLastChange > 0)';
 	} elseif (get_request_var('issues') == '9' && get_filter_request_var('bwusage') != '-1') { // In/Out over 70%
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . '((inBound>' . get_request_var('bwusage') . ' OR outBound>' . get_request_var('bwusage') . ") AND $ignore)";
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '((inBound>' . get_request_var('bwusage') . ' OR outBound>' . get_request_var('bwusage') . ") AND $ignore)";
 	} elseif (get_request_var('issues') == '10' && get_filter_request_var('bwusage') != '-1') { // In over 70%
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . '(inBound>' . get_request_var('bwusage') . " AND $ignore)";
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(inBound>' . get_request_var('bwusage') . " AND $ignore)";
 	} elseif (get_request_var('issues') == '11' && get_filter_request_var('bwusage') != '-1') { // Out over 70%
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . '(outBound>' . get_request_var('bwusage') . " AND $ignore)";
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(outBound>' . get_request_var('bwusage') . " AND $ignore)";
 	} else {
 
 	}
@@ -78,29 +78,29 @@ function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = '30') {
 	/* filter sql where */
 	$filter_where = mactrack_create_sql_filter(get_request_var('filter'), array('ifAlias', 'hostname', 'ifName', 'ifDescr'));
 
-	if (strlen($filter_where)) {
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . $filter_where;
+	if ($filter_where != '') {
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . $filter_where;
 	}
 
 	/* device_id sql where */
 	if (get_filter_request_var('device_id') == '-1') {
 		/* do nothing all states */
 	} else {
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . 'mac_track_interfaces.device_id=' . get_request_var('device_id');
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mac_track_interfaces.device_id=' . get_request_var('device_id');
 	}
 
 	/* site sql where */
 	if (get_filter_request_var('site_id') == '-1') {
 		/* do nothing all sites */
 	} else {
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . 'mac_track_interfaces.site_id=' . get_request_var('site_id');
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mac_track_interfaces.site_id=' . get_request_var('site_id');
 	}
 
 	/* type sql where */
 	if (get_filter_request_var('device_type_id') == '-1') {
 		/* do nothing all states */
 	} else {
-		$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . 'mac_track_devices.device_type_id=' . get_request_var('device_type_id');
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mac_track_devices.device_type_id=' . get_request_var('device_type_id');
 	}
 
 	$sql_order = get_order_string();
@@ -587,11 +587,11 @@ function mactrack_filter_table() {
 							<?php
 							$sql_where = '';
 							if (get_request_var('site_id') != -1) {
-								$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . 'site_id=' . get_request_var('site_id');
+								$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'site_id=' . get_request_var('site_id');
 							}
 
 							if (get_request_var('device_type_id') != '-1') {
-								$sql_where .= (strlen($sql_where) ? ' AND ' : 'WHERE ') . 'device_type_id=' . get_request_var('device_type_id');
+								$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'device_type_id=' . get_request_var('device_type_id');
 							}
 
 							$devices = array_rekey(db_fetch_assoc("SELECT device_id, device_name FROM mac_track_devices $sql_where ORDER BY device_name"), "device_id", "device_name");

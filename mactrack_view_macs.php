@@ -182,7 +182,7 @@ function form_actions() {
 		<td colspan='2' class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($mac_address_array) ? serialize($mac_address_array) : '') . "'>
-			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . (strlen($save_html) ? "
+			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . ($save_html != '' ? "
 			<input type='button' onClick='cactiReturnTo()' value='" . __esc('Cancel', 'mactrack') . "'>
 			$save_html" : "<input type='button' onClick='cactiReturnTo()' value='" . __esc('Return', 'mactrack') . "'>") . "
 		</td>
@@ -274,7 +274,7 @@ function form_aggregated_actions() {
 		<td colspan='2' align='right' class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($row_array) ? serialize($row_array) : '') . "'>
-			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . (strlen($save_html) ? "
+			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . ($save_html != '' ? "
 			<input type='button' onClick='cactiReturnTo()' value='" . __esc('Cancel', 'macktrack') . "'>
 			$save_html" : "<input type='button' onClick='cactiReturnTo()' value='" . __esc('Return', 'mactrack') . "'>") . "
 		</td>
@@ -509,7 +509,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = true, $rows)
 	}
 
 	if (get_request_var('filter') != '') {
-		if (strlen(read_config_option('mt_reverse_dns'))) {
+		if (read_config_option('mt_reverse_dns') != '') {
 			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') .
 				' (mtp.dns_hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtp.device_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
@@ -978,7 +978,7 @@ function mactrack_view_aggregated_macs() {
 			form_selectable_cell(filter_value($port_result['hostname'], get_request_var('filter')), $key);
 			form_selectable_cell(filter_value($port_result['ip_address'], get_request_var('filter')), $key);
 
-			if (strlen(read_config_option('mt_reverse_dns')) > 0) {
+			if (read_config_option('mt_reverse_dns') != '') {
 				form_selectable_cell(filter_value($port_result['dns_hostname'], get_request_var('filter')), $key);
 			}
 

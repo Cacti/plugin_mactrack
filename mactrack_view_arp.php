@@ -196,7 +196,7 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = true, $rows) 
 	}
 
 	if (get_request_var('filter') != '') {
-		if (strlen(read_config_option('mt_reverse_dns')) > 0) {
+		if (read_config_option('mt_reverse_dns') != '') {
 			$sql_where .= ($sql_where != '' ? ' AND':'WHERE') .
 				' (mti.dns_hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtod.vendor_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
@@ -367,7 +367,7 @@ function mactrack_view_ips() {
 			form_selectable_cell($port_result['hostname'], $i);
 			form_selectable_cell(filter_value($port_result['ip_address'], get_request_var('filter')), $i);
 
-			if (strlen(read_config_option('mt_reverse_dns')) > 0) {
+			if (read_config_option('mt_reverse_dns') != '') {
 				form_selectable_cell(filter_value($port_result['dns_hostname'], get_request_var('filter')), $i);
 			}
 
