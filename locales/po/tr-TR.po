@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2020-12-12 22:16-0500\nPO-Revision-Date: 2022-06-11 03:50+0000\nLast-Translator: San IPE <sanipe1949@krunsea.com>\nLanguage-Team: Turkish <http://translate.cacti.net/projects/cacti/mactrack/tr/>\nLanguage: tr-TR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 4.8.1\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2020-12-12 22:16-0500\nPO-Revision-Date: 2022-06-21 05:25+0000\nLast-Translator: San IPE <sanipe1949@krunsea.com>\nLanguage-Team: Turkish <http://translate.cacti.net/projects/cacti/mactrack/tr/>\nLanguage: tr-TR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 4.8.1\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -208,9 +208,9 @@ msgid "%d Days"
 msgstr "%d Gün"
 
 #: lib/mactrack_functions.php:2966
-#, fuzzy, php-format
+#, php-format
 msgid "%d Weeks"
-msgstr "% d Hafta"
+msgstr "%d Hafta"
 
 #: lib/mactrack_functions.php:2984
 #, fuzzy
@@ -302,7 +302,7 @@ msgstr "Bilinmeyen"
 #: mactrack_view_devices.php:418 mactrack_view_dot1x.php:512
 #: mactrack_view_interfaces.php:625 mactrack_view_macs.php:1038
 msgid "Search"
-msgstr "Arama"
+msgstr "Ara"
 
 #: lib/mactrack_functions.php:3161 mactrack_device_types.php:1023
 #: mactrack_devices.php:1227 mactrack_macauth.php:380 mactrack_macwatch.php:397
@@ -2888,19 +2888,19 @@ msgid "Every Day"
 msgstr "Her Gün"
 
 #: setup.php:936
-#, fuzzy, php-format
+#, php-format
 msgid "%d Month"
-msgstr "% d Ay"
+msgstr "%d Ay"
 
 #: setup.php:937 setup.php:938 setup.php:939
-#, fuzzy, php-format
+#, php-format
 msgid "%d Months"
-msgstr "% d Ay"
+msgstr "%d Ay"
 
 #: setup.php:940
 #, php-format
 msgid "%d Year"
-msgstr "%d yıl"
+msgstr "%d Yıl"
 
 #: setup.php:945
 #, fuzzy
