@@ -1,12 +1,12 @@
 ## ChangeLog
 
---- develop ---
-
-* issue: MacTrack View Devices continues to use a legacy icon over a Fontawesome glyph
+--- 4.5 ---
 
 * issue#165: The file mactrack_actions.php will throw and error if an the $save array is discarded by another plugin
 
-* issue#172: Wrong URL on the main tab in the UI
+* issue#169: Add back support for the MacTrack ARP Table
+
+* feature#170: Add support for Cisco VRF ARP Table
 
 --- 4.3 / 4.4 ---
 
@@ -17,7 +17,6 @@
 * bug: Number of devices scanned incorrect for main scanner
 
 * bug: MacAuthorizations Interface not accessible through MacTrack tab
-
 * bug: Mac Watch can not send mail
 
 * issue#70: Fix issue with Prompt confirmation button
