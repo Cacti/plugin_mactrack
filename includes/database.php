@@ -265,7 +265,7 @@ function mactrack_database_upgrade() {
 		$data['primary'] = 'id';
 		$data['type'] = 'InnoDB';
 		$data['comment'] = 'Group of SNMP Option Sets';
-		api_plugin_db_table_create ('mactrack', 'mac_track_snmp', $data);
+		api_plugin_db_table_create('mactrack', 'mac_track_snmp', $data);
 	}
 
 	if (!db_table_exists('mac_track_snmp_items')) {
@@ -289,7 +289,7 @@ function mactrack_database_upgrade() {
 		$data['primary'] = 'id`,`snmp_id';
 		$data['type'] = 'InnoDB';
 		$data['comment'] = 'Set of SNMP Options';
-		api_plugin_db_table_create ('mactrack', 'mac_track_snmp_items', $data);
+		api_plugin_db_table_create('mactrack', 'mac_track_snmp_items', $data);
 	}
 
 	mactrack_add_column('mac_track_snmp_items',
@@ -313,7 +313,7 @@ function mactrack_database_upgrade() {
 		$data['keys'][] = array('name' => 'device_id', 'columns' => 'device_id');
 		$data['type'] = 'InnoDB';
 		$data['comment'] = '';
-		api_plugin_db_table_create ('mactrack', 'mac_track_interface_graphs', $data);
+		api_plugin_db_table_create('mactrack', 'mac_track_interface_graphs', $data);
 	}
 
 	mactrack_add_column('mac_track_interfaces',
@@ -427,15 +427,14 @@ function mactrack_database_upgrade() {
 
 	if (!db_table_exists('mac_track_arp')) {
 		$data = array();
-		$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => false);
+		$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
 		$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => true, 'default' => '');
 		$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 		$data['columns'][] = array('name' => 'scan_date', 'type' => 'datetime', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-		$data['primary'] = 'mac_address';
-		$data['unique_keys'] = array('name' => `mac_address`, 'columns' => `sysDescr_match`);
+		$data['primary'] = 'mac_address, ip_address';
 		$data['type'] = 'InnoDB';
 		$data['comment'] = 'Table for VRF ARP translation';
-		api_plugin_db_table_create ('mactrack', 'mac_track_arp', $data);
+		api_plugin_db_table_create('mactrack', 'mac_track_arp', $data);
 	}
 
 	$tables = db_fetch_assoc("SELECT DISTINCT TABLE_NAME
@@ -504,7 +503,7 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'site_id_device_id', 'columns' => 'site_id`,`device_id');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = 'Database for aggregated date for Tracking Device MACs';
-	api_plugin_db_table_create ('mactrack', 'mac_track_aggregated_ports', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_aggregated_ports', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'mac_prefix', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
@@ -513,7 +512,7 @@ function mactrack_setup_database() {
 	$data['primary'] = 'mac_prefix';
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_approved_macs', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_approved_macs', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'device_type_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
@@ -533,7 +532,7 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'device_type', 'columns' => 'device_type');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_device_types', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_device_types', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
@@ -591,7 +590,7 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'device_name', 'columns' => 'device_name');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = 'Devices to be scanned for MAC addresses';
-	api_plugin_db_table_create ('mactrack', 'mac_track_devices', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_devices', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
@@ -617,7 +616,7 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'scan_date', 'columns' => 'scan_date');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_dot1x', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_dot1x', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
@@ -635,7 +634,7 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'device_id', 'columns' => 'device_id');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_interface_graphs', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_interface_graphs', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
@@ -712,7 +711,7 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'ifInErrors', 'columns' => 'ifInUnknownProtos');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_interfaces', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_interfaces', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'ip_range', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
@@ -725,7 +724,7 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'site_id', 'columns' => 'site_id');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_ip_ranges', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_ip_ranges', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
@@ -747,7 +746,7 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'scan_date', 'columns' => 'scan_date');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_ips', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_ips', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
@@ -759,7 +758,7 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'mac_id', 'columns' => 'mac_id');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_macauth', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_macauth', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
@@ -777,7 +776,7 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'mac_id', 'columns' => 'mac_id');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_macwatch', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_macwatch', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'vendor_mac', 'type' => 'varchar(8)', 'NULL' => false, 'default' => '');
@@ -788,7 +787,7 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'vendor_name', 'columns' => 'vendor_name');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_oui_database', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_oui_database', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
@@ -821,7 +820,7 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'authorized', 'columns' => 'authorized');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = 'Database for Tracking Device MACs';
-	api_plugin_db_table_create ('mactrack', 'mac_track_ports', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_ports', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'device_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0');
@@ -831,14 +830,14 @@ function mactrack_setup_database() {
 	$data['primary'] = 'device_id';
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_processes', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_processes', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
 	$data['primary'] = 'scan_date';
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_scan_dates', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_scan_dates', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'scanning_function', 'type' => 'varchar(100)', 'NULL' => false);
@@ -847,7 +846,7 @@ function mactrack_setup_database() {
 	$data['primary'] = 'scanning_function';
 	$data['type'] = 'InnoDB';
 	$data['comment'] = 'Registered Scanning Functions';
-	api_plugin_db_table_create ('mactrack', 'mac_track_scanning_functions', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_scanning_functions', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
@@ -866,7 +865,7 @@ function mactrack_setup_database() {
 	$data['primary'] = 'site_id';
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_sites', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_sites', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
@@ -874,7 +873,7 @@ function mactrack_setup_database() {
 	$data['primary'] = 'id';
 	$data['type'] = 'InnoDB';
 	$data['comment'] = 'Group of SNMP Option Sets';
-	api_plugin_db_table_create ('mactrack', 'mac_track_snmp', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_snmp', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
@@ -896,7 +895,7 @@ function mactrack_setup_database() {
 	$data['primary'] = 'id`,`snmp_id';
 	$data['type'] = 'InnoDB';
 	$data['comment'] = 'Set of SNMP Options';
-	api_plugin_db_table_create ('mactrack', 'mac_track_snmp_items', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_snmp_items', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
@@ -928,7 +927,7 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'authorized', 'columns' => 'authorized');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = 'Database for Storing Temporary Results for Tracking Device MACS';
-	api_plugin_db_table_create ('mactrack', 'mac_track_temp_ports', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_temp_ports', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'vlan_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
@@ -940,17 +939,16 @@ function mactrack_setup_database() {
 	$data['keys'][] = array('name' => 'vlan_name', 'columns' => 'vlan_name');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
-	api_plugin_db_table_create ('mactrack', 'mac_track_vlans', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_vlans', $data);
 
 	$data = array();
-	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => false);
+	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => true, 'default' => '');
 	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'scan_date', 'type' => 'datetime', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['primary'] = 'mac_address';
-	$data['unique_keys'] = array('name' => `mac_address`, 'columns' => `sysDescr_match`);
+	$data['primary'] = 'mac_address, ip_address';
 	$data['type'] = 'InnoDB';
 	$data['comment'] = 'Table for VRF ARP translation';
-	api_plugin_db_table_create ('mactrack', 'mac_track_arp', $data);
+	api_plugin_db_table_create('mactrack', 'mac_track_arp', $data);
 }
 
