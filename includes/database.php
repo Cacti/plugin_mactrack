@@ -431,7 +431,7 @@ function mactrack_database_upgrade() {
 		$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => true, 'default' => '');
 		$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 		$data['columns'][] = array('name' => 'scan_date', 'type' => 'datetime', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-		$data['primary'] = 'mac_address, ip_address';
+		$data['primary'] = 'mac_address`, `ip_address';
 		$data['type'] = 'InnoDB';
 		$data['comment'] = 'Table for VRF ARP translation';
 		api_plugin_db_table_create('mactrack', 'mac_track_arp', $data);
@@ -946,7 +946,7 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => true, 'default' => '');
 	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'scan_date', 'type' => 'datetime', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['primary'] = 'mac_address, ip_address';
+	$data['primary'] = 'mac_address`, `ip_address';
 	$data['type'] = 'InnoDB';
 	$data['comment'] = 'Table for VRF ARP translation';
 	api_plugin_db_table_create('mactrack', 'mac_track_arp', $data);
