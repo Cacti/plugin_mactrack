@@ -70,7 +70,7 @@ function complete_3com_ifName(&$device, &$ifIndexes) {
 				$ifdesc = preg_replace($pattern3, $replacement3, $ifdesc);
 				$ifIndexes[$key]['ifName'] = $ifdesc ;
 
-				db_execute_preapred('UPDATE mac_track_interfaces
+				db_execute_prepared('UPDATE mac_track_interfaces
 					SET ifName = ?
 					WHERE device_id = ?
 					AND ifIndex = ?',
