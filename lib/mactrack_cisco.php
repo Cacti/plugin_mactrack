@@ -53,7 +53,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 	$vlan_names       = xform_standard_indexed_data('.1.3.6.1.4.1.9.9.46.1.3.1.1.4', $device);
 	$vlan_trunkstatus = xform_standard_indexed_data('.1.3.6.1.4.1.9.9.46.1.6.1.1.14', $device);
 
-	$device['vlans_total'] = sizeof($vlan_ids) - 3;
+	$device['vlans_total'] = cacti_sizeof($vlan_ids) - 3;
 	mactrack_debug('There are ' . (cacti_sizeof($vlan_ids)-3) . ' VLANS.');
 
 	/* get the ifIndexes for the device */
@@ -199,7 +199,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 			/* get bridge port mappings */
 			/* get bridge port to ifIndex mappings */
 			mactrack_debug('Bridge port information about to be collected.');
-			mactrack_debug('VLAN_ID: ' . $active_vlans[$i]['vlan_id'] . ', VLAN_NAME: ' . $active_vlans[$i]['vlan_name'] . ', ACTIVE PORTS: ' . sizeof($active_vlans[$i]['port_results']));
+			mactrack_debug('VLAN_ID: ' . $active_vlans[$i]['vlan_id'] . ', VLAN_NAME: ' . $active_vlans[$i]['vlan_name'] . ', ACTIVE PORTS: ' . cacti_sizeof($active_vlans[$i]['port_results']));
 
 			if (cacti_sizeof($active_vlans[$i]['port_results']) > 0) {
 				$brPorttoifIndexes[$i] = xform_standard_indexed_data('.1.3.6.1.2.1.17.1.4.1.2', $device, $snmp_readstring);
@@ -259,7 +259,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
-		$device['macs_active'] = sizeof($port_array);
+		$device['macs_active'] = cacti_sizeof($port_array);
 
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
@@ -291,7 +291,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 	$vlan_names       = xform_standard_indexed_data('.1.3.6.1.4.1.9.9.46.1.3.1.1.4', $device);
 	$vlan_trunkstatus = xform_standard_indexed_data('.1.3.6.1.4.1.9.9.46.1.6.1.1.14', $device);
 
-	$device['vlans_total'] = sizeof($vlan_ids) - 3;
+	$device['vlans_total'] = cacti_sizeof($vlan_ids) - 3;
 	mactrack_debug('There are ' . (cacti_sizeof($vlan_ids)-3) . ' VLANS.');
 
 	/* get the ifIndexes for the device */
@@ -416,7 +416,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 			/* get bridge port mappings */
 			/* get bridge port to ifIndex mappings */
 			mactrack_debug('Bridge port information about to be collected.');
-			mactrack_debug('VLAN_ID: ' . $active_vlans[$i]['vlan_id'] . ', VLAN_NAME: ' . $active_vlans[$i]['vlan_name'] . ', ACTIVE PORTS: ' . sizeof($active_vlans[$i]['port_results']));
+			mactrack_debug('VLAN_ID: ' . $active_vlans[$i]['vlan_id'] . ', VLAN_NAME: ' . $active_vlans[$i]['vlan_name'] . ', ACTIVE PORTS: ' . cacti_sizeof($active_vlans[$i]['port_results']));
 
 			if (cacti_sizeof($active_vlans[$i]['port_results']) > 0) {
 				$brPorttoifIndexes[$i] = xform_standard_indexed_data('.1.3.6.1.2.1.17.1.4.1.2', $device, $snmp_readstring);
@@ -479,7 +479,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
-		$device['macs_active'] = sizeof($port_array);
+		$device['macs_active'] = cacti_sizeof($port_array);
 
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
@@ -587,11 +587,11 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 					unset($dot1dTpFdbEntries[$n][$key]);
 				}
 
-				mactrack_debug('dot1dTpFdbEntry data collection complete :' . sizeof($dot1dTpFdbEntries[$n]));
+				mactrack_debug('dot1dTpFdbEntry data collection complete :' . cacti_sizeof($dot1dTpFdbEntries[$n]));
 
 				if ($n > 0 ) {
 					$dot1dTpFdbEntry = array_merge($dot1dTpFdbEntry, $dot1dTpFdbEntries[$n]);
-					mactrack_debug('merge data collection complete : ' . sizeof($dot1dTpFdbEntry));
+					mactrack_debug('merge data collection complete : ' . cacti_sizeof($dot1dTpFdbEntry));
 				}
 			}
 			$n++;
@@ -610,7 +610,7 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 				$j++;
 			}
 
-			mactrack_debug('cdsBindingEntries Total entries: ' . sizeof($cdsBindingEntries));
+			mactrack_debug('cdsBindingEntries Total entries: ' . cacti_sizeof($cdsBindingEntries));
 		}
 
 		mactrack_debug('cdsBindingEntries assembly complete.');
@@ -644,7 +644,7 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 	}
 
 	/* save ip information for the device */
-	$device['ips_total'] = sizeof($cdsBindingEntries);
+	$device['ips_total'] = cacti_sizeof($cdsBindingEntries);
 	db_execute('UPDATE mac_track_devices SET ips_total =' . $device['ips_total'] . ' WHERE device_id=' . $device['device_id']);
 
 	mactrack_debug('HOST: ' . $device['hostname'] . ', IP address information collection complete');
@@ -667,7 +667,7 @@ function get_cisco_vrf_arp_table($site, &$device) {
 				(site_id,ip_address,mac_address,scan_date)
 				VALUES
 				(' .
-					$device['site_id'] . ',' . 
+					$device['site_id'] . ',' .
 					db_qstr($cdsBindingEntry['key']) . ',' .
 					db_qstr($cdsBindingEntry['value']) . ',' .
 					db_qstr($scan_date) . '
@@ -682,7 +682,7 @@ function get_cisco_vrf_arp_table($site, &$device) {
 	}
 
 	/* save ip information for the device */
-	$device['ips_total'] = sizeof($cdsBindingEntries);
+	$device['ips_total'] = cacti_sizeof($cdsBindingEntries);
 	db_execute('UPDATE mac_track_devices SET ips_total =' . $device['ips_total'] . ' WHERE device_id=' . $device['device_id']);
 
 	mactrack_debug('HOST: ' . $device['hostname'] . ', IP address information collection complete');
@@ -698,15 +698,15 @@ function get_cisco_dot1x_table($site, &$device) {
 	$cafSessionAuthUserName = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.10', $device);
 
 	if (cacti_sizeof($cafSessionAuthUserName)) {
-		mactrack_debug('cafSessionAuthUserName data collection complete: ' . sizeof($cafSessionAuthUserName));
+		mactrack_debug('cafSessionAuthUserName data collection complete: ' . cacti_sizeof($cafSessionAuthUserName));
 		$cafSessionClientMacAddress = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.2', $device, '', true);
-		mactrack_debug('cafSessionClientMacAddress data collection complete: ' . sizeof($cafSessionClientMacAddress));
+		mactrack_debug('cafSessionClientMacAddress data collection complete: ' . cacti_sizeof($cafSessionClientMacAddress));
 		$cafSessionClientAddress  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.4', $device, '', true);
-		mactrack_debug('cafSessionClientAddress data collection complete: ' . sizeof($cafSessionClientAddress));
+		mactrack_debug('cafSessionClientAddress data collection complete: ' . cacti_sizeof($cafSessionClientAddress));
 		$cafSessionDomain  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.6', $device);
-		mactrack_debug('cafSessionDomain data collection complete: ' . sizeof($cafSessionDomain));
+		mactrack_debug('cafSessionDomain data collection complete: ' . cacti_sizeof($cafSessionDomain));
 		$cafSessionStatus  = xform_stripped_oid('.1.3.6.1.4.1.9.9.656.1.4.1.1.5', $device);
-		mactrack_debug('cafSessionStatus data collection complete: ' . sizeof($cafSessionStatus));
+		mactrack_debug('cafSessionStatus data collection complete: ' . cacti_sizeof($cafSessionStatus));
 	} else {
 		mactrack_debug(sprintf('The Device: %s does not support dot1x', $device['hostname']));
 		return false;
@@ -717,7 +717,7 @@ function get_cisco_dot1x_table($site, &$device) {
 	$cafSessionAuthUserNames = array();
 	$cafSessionAuthUserKey = array_keys($cafSessionAuthUserName); //Getting the keys to explode the first part which is the ifIndex
 
-	mactrack_debug('cafSessionAuthUserName assembly complete: ' . sizeof($cafSessionAuthUserName));
+	mactrack_debug('cafSessionAuthUserName assembly complete: ' . cacti_sizeof($cafSessionAuthUserName));
 
 	$i = 0;
 	if (cacti_sizeof($cafSessionAuthUserName)) {

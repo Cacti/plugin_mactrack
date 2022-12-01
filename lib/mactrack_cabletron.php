@@ -101,7 +101,7 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 	$sfps_A_mac_addresses = xform_indexed_data('.1.3.6.1.4.1.52.4.2.4.2.2.3.6.1.1.8', $device, 3, true);
 
 	$sfps_A_keys = array_keys($sfps_A_ports);
-	$sfps_A_size = sizeof($sfps_A_ports);
+	$sfps_A_size = cacti_sizeof($sfps_A_ports);
 
 	$j = 0;
 	$i = 0;
@@ -121,7 +121,7 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 
 	$j = 0;
 	$port_array = array();
-	for ($i=0;$i < sizeof($temp_port_A_array);$i++) {
+	for ($i=0;$i < cacti_sizeof($temp_port_A_array);$i++) {
 		$port_array[$temp_port_A_array[$i]['port_number']]['vlan_id'] = 'N/A';
 		$port_array[$temp_port_A_array[$i]['port_number']]['vlan_name'] = 'N/A';
 		$port_array[$temp_port_A_array[$i]['port_number']]['port_name'] = 'N/A';
@@ -132,7 +132,7 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 	if ($store_to_db) {
 		if (cacti_sizeof($port_array) > 0) {
 			$device['last_runmessage'] = 'Data collection completed ok';
-			$device['macs_active'] = sizeof($port_array);
+			$device['macs_active'] = cacti_sizeof($port_array);
 			db_store_device_port_results($device, $port_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';
@@ -303,7 +303,7 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 	}
 
 	$device['ports_active'] = $ports_active;
-	$device['macs_active'] = sizeof($new_port_key_array);
+	$device['macs_active'] = cacti_sizeof($new_port_key_array);
 	db_store_device_port_results($device, $new_port_key_array, $scan_date);
 
 	return $device;

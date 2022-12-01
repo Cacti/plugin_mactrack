@@ -6,6 +6,8 @@
 
 * issue#169: Add back support for the MacTrack ARP Table
 
+* issue#175: Uncaught TypeError: sizeof(): Argument #1 ($value) must be of type Countable|array
+
 * feature#170: Add support for Cisco VRF ARP Table
 
 --- 4.3 / 4.4 ---
@@ -359,7 +361,7 @@ Changes are available on the link above.
 
 #### Fixing bug: The MAC addresses had 7 groups instead of 6. They were too long.
 
-Basically the start position of the substring was wrong. 
+Basically the start position of the substring was wrong.
 
 #### Fixing Juniper trunk port counter
 
@@ -393,13 +395,13 @@ https://github.com/Cacti/plugin_mactrack/commit/bc5ba709134006488a80b4cf3beae782
 
 https://github.com/Cacti/plugin_mactrack/commits/develop (it was not accepted by the official Cacti repository when the documentation was made.)
 
-Port ignore option was not implemented for Juniper switches. 
+Port ignore option was not implemented for Juniper switches.
 
 ## Mactrack cheat sheet
 
 ### mactrack scanner
 
-Main debugging tool: 
+Main debugging tool:
 
 -d stands for debug mode.
 

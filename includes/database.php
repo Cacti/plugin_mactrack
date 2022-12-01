@@ -442,7 +442,7 @@ function mactrack_database_upgrade() {
 		WHERE TABLE_SCHEMA = SCHEMA()
 		AND TABLE_NAME LIKE 'mac_track%'");
 
-	if (sizeof($tables)) {
+	if (cacti_sizeof($tables)) {
 		foreach ($tables as $table) {
 			$columns = db_fetch_assoc("SELECT *
 				FROM information_schema.COLUMNS

@@ -52,7 +52,7 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	$vlan_ids   = xform_standard_indexed_data('.1.3.6.1.4.1.2636.3.40.1.5.1.5.1.5', $device);
 	$vlan_names = xform_standard_indexed_data('.1.3.6.1.4.1.2636.3.40.1.5.1.5.1.2', $device);
 
-	$device['vlans_total'] = sizeof($vlan_ids) - 1;
+	$device['vlans_total'] = cacti_sizeof($vlan_ids) - 1;
 	mactrack_debug('VLAN data collected. There are ' . (cacti_sizeof($vlan_ids) - 1) . ' VLANS.');
 
 	/* get VLAN Trunk status */
@@ -160,7 +160,7 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
-		$device['macs_active'] = sizeof($newPorts);
+		$device['macs_active'] = cacti_sizeof($newPorts);
 
 		db_store_device_port_results($device, $newPorts, $scan_date);
 	} else {

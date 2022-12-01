@@ -48,12 +48,12 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 #print_r($vlan_ids);
 	/* get VLAN Trunk status: not (yet) implemented for Enterasys N7 */
 	//$vlan_trunkstatus = xform_standard_indexed_data('.1.3.6.1.4.1.2272.1.3.3.1.4', $device);
-	$device['vlans_total'] = sizeof($vlan_ids);
+	$device['vlans_total'] = cacti_sizeof($vlan_ids);
 	mactrack_debug('VLAN data collected. There are ' . (cacti_sizeof($vlan_ids)) . ' VLANS.');
 
 	/* get the ifIndexes for the device */
 	$ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);
-	mactrack_debug('ifIndexes data collection complete: ' . sizeof($ifIndexes));
+	mactrack_debug('ifIndexes data collection complete: ' . cacti_sizeof($ifIndexes));
 
 	/* get and store the interfaces table */
 	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
@@ -64,7 +64,7 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 			$device['ports_total']++;
 		}
 	}
-	mactrack_debug('ifInterfaces assembly complete: ' . sizeof($ifIndexes));
+	mactrack_debug('ifInterfaces assembly complete: ' . cacti_sizeof($ifIndexes));
 
 	/* map vlans to bridge ports */
 	if (cacti_sizeof($vlan_ids) > 0) {
@@ -108,7 +108,7 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . trim(substr($device['snmp_sysDescr'],0,40)) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
-		$device['macs_active'] = sizeof($port_array);
+		$device['macs_active'] = cacti_sizeof($port_array);
 
 		mactrack_debug('macs active on this switch:' . $device['macs_active']);
 		db_store_device_port_results($device, $port_array, $scan_date);
@@ -147,7 +147,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 
 	/* get the operational status of the ports */
 	$active_ports_array = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.8', $device);
-	mactrack_debug('get active ports: ' . sizeof($active_ports_array));
+	mactrack_debug('get active ports: ' . cacti_sizeof($active_ports_array));
 	$indexes = array_keys($active_ports_array);
 
 	$i = 0;
@@ -186,7 +186,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 		table value = ifIndex */
 		/* -------------------------------------------- */
 		$bridgePortIfIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.17.1.4.1.2', $device, $snmp_readstring);
-		mactrack_debug('get bridgePortIfIndexes: ' . sizeof($bridgePortIfIndexes));
+		mactrack_debug('get bridgePortIfIndexes: ' . cacti_sizeof($bridgePortIfIndexes));
 
 		/* get port status: dot1dTpFdbStatus from dot1dTpFdbTable
 		GET NEXT: 1.3.6.1.2.1.17.4.3.1.3.0.0.94.0.1.1: 3
@@ -203,7 +203,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 		table value = port status (other(1), invalid(2), learned(3), self(4), mgmt(5)*/
 		/* -------------------------------------------- */
 		$port_status = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.3', $device, $snmp_readstring);
-		mactrack_debug('get port_status: ' . sizeof($port_status));
+		mactrack_debug('get port_status: ' . cacti_sizeof($port_status));
 
 		/* get device active port numbers: dot1dTpFdbPort from dot1dTpFdbTable
 		GET NEXT: 1.3.6.1.2.1.17.4.3.1.2.0.0.94.0.1.1: 72
@@ -220,13 +220,13 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 		table value = bridge port */
 		/* -------------------------------------------- */
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.2', $device, $snmp_readstring);
-		mactrack_debug('get port_numbers: ' . sizeof($port_numbers));
+		mactrack_debug('get port_numbers: ' . cacti_sizeof($port_numbers));
 
 		/* get VLAN information */
 		/* -------------------------------------------- */
 		#$vlan_ids = xform_enterasys_N7_vlan_associations($device, $snmp_readstring);
 		$vlan_ids = xform_dot1q_vlan_associations($device, $snmp_readstring);
-		mactrack_debug('get vlan_ids: ' . sizeof($vlan_ids));
+		mactrack_debug('get vlan_ids: ' . cacti_sizeof($vlan_ids));
 #print_r($vlan_ids);
 
 
@@ -300,7 +300,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 				}
 			}
 		}
-		mactrack_debug('Port number information collected: ' . sizeof($new_port_key_array));
+		mactrack_debug('Port number information collected: ' . cacti_sizeof($new_port_key_array));
 
 		/* map mac address */
 		/* only continue if there were user ports defined */
@@ -317,7 +317,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 				mactrack_debug('INDEX: ' . $key . ' MAC ADDRESS: ' . $new_port_key_array[$key]['mac_address']);
 			}
 
-			mactrack_debug('Port mac address information collected: ' . sizeof($port_macs));
+			mactrack_debug('Port mac address information collected: ' . cacti_sizeof($port_macs));
 		} else {
 			mactrack_debug('No user ports on this network.');
 		}
@@ -330,7 +330,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} elseif (cacti_sizeof($new_port_key_array) > 0) {
 			$device['last_runmessage'] = 'Data collection completed ok';
-			$device['macs_active'] = sizeof($new_port_key_array);
+			$device['macs_active'] = cacti_sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';
@@ -411,11 +411,11 @@ function get_CTAlias_table($site, &$device) {
 
 	/* get the CTAlias Table for the device */
 	$CTAliasInterfaces = xform_indexed_data('.1.3.6.1.4.1.52.4.1.3.7.1.1.1.1.3', $device, 2);
-	mactrack_debug('CTAliasInterfaces data collection complete: ' . sizeof($CTAliasInterfaces));
+	mactrack_debug('CTAliasInterfaces data collection complete: ' . cacti_sizeof($CTAliasInterfaces));
 
 	/* get the CTAliasMacAddress for the device */
 	$CTAliasMacAddress = xform_indexed_data('.1.3.6.1.4.1.52.4.1.3.7.1.1.1.1.4', $device, 2, true);
-	mactrack_debug('CTAliasMacAddress data collection complete: ' . sizeof($CTAliasMacAddress));
+	mactrack_debug('CTAliasMacAddress data collection complete: ' . cacti_sizeof($CTAliasMacAddress));
 
 	/* convert the mac address if necessary */
 	$keys = array_keys($CTAliasMacAddress);
@@ -427,11 +427,11 @@ function get_CTAlias_table($site, &$device) {
 
 	/* get the CTAliasProtocol Table for the device */
 	$CTAliasProtocol = xform_indexed_data('.1.3.6.1.4.1.52.4.1.3.7.1.1.1.1.6', $device, 2);
-	mactrack_debug('CTAliasProtocol data collection complete: ' . sizeof($CTAliasProtocol));
+	mactrack_debug('CTAliasProtocol data collection complete: ' . cacti_sizeof($CTAliasProtocol));
 
 	/* get the CTAliasAddressText for the device */
 	$CTAliasAddressText = xform_indexed_data('.1.3.6.1.4.1.52.4.1.3.7.1.1.1.1.9', $device, 2);
-	mactrack_debug('CTAliasAddressText data collection complete: ' . sizeof($CTAliasAddressText));
+	mactrack_debug('CTAliasAddressText data collection complete: ' . cacti_sizeof($CTAliasAddressText));
 
 	/* get the ifNames for the device */
 	$keys = array_keys($CTAliasInterfaces);
@@ -448,7 +448,7 @@ function get_CTAlias_table($site, &$device) {
 		$CTAliasEntries[$i]['CTAliasAddressText'] = @$CTAliasAddressText[$keys[$i]];
 		$i++;
 	}
-	mactrack_debug('CTAliasEntries assembly complete: ' . sizeof($CTAliasEntries));
+	mactrack_debug('CTAliasEntries assembly complete: ' . cacti_sizeof($CTAliasEntries));
 
 	/* output details to database */
 	if (cacti_sizeof($CTAliasEntries)) {
@@ -477,7 +477,7 @@ function get_CTAlias_table($site, &$device) {
 	}
 
 	/* save ip information for the device */
-	$device['ips_total'] = sizeof($CTAliasEntries);
+	$device['ips_total'] = cacti_sizeof($CTAliasEntries);
 
 	db_execute_prepared('UPDATE mac_track_devices
 		SET ips_total = ?

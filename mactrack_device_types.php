@@ -238,11 +238,11 @@ function form_actions() {
 
 		if ($selected_items != false) {
 			if (get_request_var('drp_action') == '1') { /* delete */
-				for ($i=0; $i<count($selected_items); $i++) {
+				for ($i=0; $i<cacti_sizeof($selected_items); $i++) {
 					api_mactrack_device_type_remove($selected_items[$i]);
 				}
 			} elseif (get_nfilter_request_var('drp_action') == '2') { /* duplicate */
-				for ($i=0;($i<count($selected_items));$i++) {
+				for ($i=0;($i<cacti_sizeof($selected_items));$i++) {
 					api_mactrack_duplicate_device_type($selected_items[$i], $i, get_request_var('title_format'));
 				}
 			}
@@ -470,7 +470,7 @@ function mactrack_rescan_device_types() {
 					db_qstr($item['snmp_sysObjectID']) . ")");
 		}
 
-		print __('There were %d Device Types Added!', sizeof($insert_array), 'mactrack');
+		print __('There were %d Device Types Added!', cacti_sizeof($insert_array), 'mactrack');
 	} else {
 		print __('No New Device Types Found!', 'mactrack');
 	}
@@ -942,7 +942,7 @@ function mactrack_device_type() {
 		'sysObjectID_match'       => array(__('Vendor OID Match', 'mactrack'), 'DESC')
 	);
 
-	$columns = sizeof($display_text) + 1;
+	$columns = cacti_sizeof($display_text) + 1;
 
 	$nav = html_nav_bar('mactrack_device_types.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Device Types', 'mactrack'), 'page', 'main');
 

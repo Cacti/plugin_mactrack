@@ -220,7 +220,7 @@ function mactrack_display_run_status() {
 		WHERE mac_track_processes.device_id != 0');
 
 	$resolver_running = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes WHERE device_id=0');
-	$total_processes = sizeof($running_processes);
+	$total_processes = cacti_sizeof($running_processes);
 
 	$run_status = db_fetch_assoc("SELECT last_rundate,
 		COUNT(last_rundate) AS devices

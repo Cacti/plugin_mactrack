@@ -1,142 +1,142 @@
 <?php
 
 /**
- * DNS Library for handling lookups and updates. 
+ * DNS Library for handling lookups and updates.
  *
  * Copyright (c) 2020, Mike Pultz <mike@mikepultz.com>. All rights reserved.
  *
  * See LICENSE for more details.
  *
  * @category  Networking
- * @package   Net_DNS2
- * @author    Mike Pultz <mike@mikepultz.com>
+ * @package	  Net_DNS2
+ * @author	  Mike Pultz <mike@mikepultz.com>
  * @copyright 2020 Mike Pultz <mike@mikepultz.com>
- * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @link      https://netdns2.com/
- * @since     File available since Release 0.6.0
+ * @license	  http://www.opensource.org/licenses/bsd-license.php  BSD License
+ * @link	  https://netdns2.com/
+ * @since	  File available since Release 0.6.0
  *
  */
 
 /**
  * ISDN Resource Record - RFC1183 section 3.2
  *
- *    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
- *    /                    ISDN-address               /
- *    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
- *    /                    SA                         /
- *    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+ *	  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+ *	  /					   ISDN-address				  /
+ *	  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+ *	  /					   SA						  /
+ *	  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  *
  */
 class Net_DNS2_RR_ISDN extends Net_DNS2_RR
 {
-    /*
-     * ISDN Number
-     */
-    public $isdnaddress;
-    
-    /*
-     * Sub-Address
-     */
-    public $sa;
+	/*
+	 * ISDN Number
+	 */
+	public $isdnaddress;
 
-    /**
-     * method to return the rdata portion of the packet as a string
-     *
-     * @return  string
-     * @access  protected
-     *
-     */
-    protected function rrToString()
-    {
-        return $this->formatString($this->isdnaddress) . ' ' . 
-            $this->formatString($this->sa);
-    }
+	/*
+	 * Sub-Address
+	 */
+	public $sa;
 
-    /**
-     * parses the rdata portion from a standard DNS config line
-     *
-     * @param array $rdata a string split line of values for the rdata
-     *
-     * @return boolean
-     * @access protected
-     *
-     */
-    protected function rrFromString(array $rdata)
-    {
-        $data = $this->buildString($rdata);
-        if (count($data) >= 1) {
+	/**
+	 * method to return the rdata portion of the packet as a string
+	 *
+	 * @return	string
+	 * @access	protected
+	 *
+	 */
+	protected function rrToString()
+	{
+		return $this->formatString($this->isdnaddress) . ' ' .
+			$this->formatString($this->sa);
+	}
 
-            $this->isdnaddress = $data[0];
-            if (isset($data[1])) {
-                
-                $this->sa = $data[1];
-            }
+	/**
+	 * parses the rdata portion from a standard DNS config line
+	 *
+	 * @param array $rdata a string split line of values for the rdata
+	 *
+	 * @return boolean
+	 * @access protected
+	 *
+	 */
+	protected function rrFromString(array $rdata)
+	{
+		$data = $this->buildString($rdata);
+		if (cacti_sizeof($data) >= 1) {
 
-            return true;
-        }
+			$this->isdnaddress = $data[0];
+			if (isset($data[1])) {
 
-        return false;
-    }
+				$this->sa = $data[1];
+			}
 
-    /**
-     * parses the rdata of the Net_DNS2_Packet object
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
-     *
-     * @return boolean
-     * @access protected
-     *
-     */
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        if ($this->rdlength > 0) {
+			return true;
+		}
 
-            $this->isdnaddress = Net_DNS2_Packet::label($packet, $packet->offset);
+		return false;
+	}
 
-            //
-            // look for a SA (sub address) - it's optional
-            //
-            if ( (strlen($this->isdnaddress) + 1) < $this->rdlength) {
+	/**
+	 * parses the rdata of the Net_DNS2_Packet object
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
+	 *
+	 * @return boolean
+	 * @access protected
+	 *
+	 */
+	protected function rrSet(Net_DNS2_Packet &$packet)
+	{
+		if ($this->rdlength > 0) {
 
-                $this->sa = Net_DNS2_Packet::label($packet, $packet->offset);
-            } else {
-            
-                $this->sa = '';
-            }
+			$this->isdnaddress = Net_DNS2_Packet::label($packet, $packet->offset);
 
-            return true;
-        }
+			//
+			// look for a SA (sub address) - it's optional
+			//
+			if ( (strlen($this->isdnaddress) + 1) < $this->rdlength) {
 
-        return false;
-    }
+				$this->sa = Net_DNS2_Packet::label($packet, $packet->offset);
+			} else {
 
-    /**
-     * returns the rdata portion of the DNS packet
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-     *                                 compressed names
-     *
-     * @return mixed                   either returns a binary packed
-     *                                 string or null on failure
-     * @access protected
-     *
-     */
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        if (strlen($this->isdnaddress) > 0) {
+				$this->sa = '';
+			}
 
-            $data = chr(strlen($this->isdnaddress)) . $this->isdnaddress;
-            if (!empty($this->sa)) {
+			return true;
+		}
 
-                $data .= chr(strlen($this->sa));
-                $data .= $this->sa;
-            }
+		return false;
+	}
 
-            $packet->offset += strlen($data);
+	/**
+	 * returns the rdata portion of the DNS packet
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
+	 *								   compressed names
+	 *
+	 * @return mixed				   either returns a binary packed
+	 *								   string or null on failure
+	 * @access protected
+	 *
+	 */
+	protected function rrGet(Net_DNS2_Packet &$packet)
+	{
+		if (strlen($this->isdnaddress) > 0) {
 
-            return $data;
-        }
-        
-        return null; 
-    }
+			$data = chr(strlen($this->isdnaddress)) . $this->isdnaddress;
+			if (!empty($this->sa)) {
+
+				$data .= chr(strlen($this->sa));
+				$data .= $this->sa;
+			}
+
+			$packet->offset += strlen($data);
+
+			return $data;
+		}
+
+		return null;
+	}
 }

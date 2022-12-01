@@ -100,7 +100,7 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	$vlan_names = xform_standard_indexed_data('.1.3.6.1.4.1.11863.6.14.1.2.1.1.2', $device);
 	$vlan_trunkstatus = xform_standard_indexed_data('.1.3.6.1.4.1.11863.6.14.1.1.1.1.2', $device);
 
-	$device['vlans_total'] = sizeof($vlan_ids) - 1;
+	$device['vlans_total'] = cacti_sizeof($vlan_ids) - 1;
 	mactrack_debug('VLAN data collected. There are ' . (cacti_sizeof($vlan_ids) - 1) . ' VLANS.');
 	foreach ($ifIndexes as $ifIndex) {
 		if ( isset( $vlan_trunkstatus[$ifIndex] ) && $vlan_trunkstatus[$ifIndex] == 1 ) {
@@ -169,7 +169,7 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
-		$device['macs_active'] = sizeof($port_array);
+		$device['macs_active'] = cacti_sizeof($port_array);
 
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {

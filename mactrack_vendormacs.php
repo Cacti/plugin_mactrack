@@ -155,7 +155,7 @@ function mactrack_vmacs() {
 		'vendor_address' => array(__('Address', 'mactrack'), 'ASC')
 	);
 
-	$columns = sizeof($display_text);
+	$columns = cacti_sizeof($display_text);
 
 	$nav = html_nav_bar('mactrack_vendormacs.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Vendor Macs', 'mactrack'), 'page', 'main');
 

@@ -347,7 +347,7 @@ function mactrack_view_ips() {
 
 	$display_text = array_merge($display_text1, $display_dns, $display_text2);
 
-	$columns = sizeof($display_text);
+	$columns = cacti_sizeof($display_text);
 
 	$nav = html_nav_bar('mactrack_view_arp.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('ARP Cache', 'mactrack'), 'page', 'main');
 
@@ -485,7 +485,7 @@ function mactrack_ip_address_filter() {
 					<td>
 						<select id='ip_filter_type_id'>
 							<?php
-							for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
+							for($i=1;$i<=cacti_sizeof($mactrack_search_types);$i++) {
 								print "<option value='" . $i . "'"; if (get_request_var('ip_filter_type_id') == $i) { print ' selected'; } print '>' . $mactrack_search_types[$i] . '</option>';
 							}
 							?>
@@ -502,7 +502,7 @@ function mactrack_ip_address_filter() {
 					<td>
 						<select id='mac_filter_type_id'>
 							<?php
-							for($i=1;$i<=sizeof($mactrack_search_types)-2;$i++) {
+							for($i=1;$i<=cacti_sizeof($mactrack_search_types)-2;$i++) {
 								print "<option value='" . $i . "'"; if (get_request_var('mac_filter_type_id') == $i) { print ' selected'; } print '>' . $mactrack_search_types[$i] . '</option>';
 							}
 							?>

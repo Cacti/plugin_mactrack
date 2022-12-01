@@ -406,7 +406,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			ORDER BY site_id");
 	}
 
-	$total_devices = sizeof($device_ids);
+	$total_devices = cacti_sizeof($device_ids);
 
 	$concurrent_processes = read_config_option('mt_processes');
 

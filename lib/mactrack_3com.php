@@ -76,7 +76,7 @@ function complete_3com_ifName(&$device, &$ifIndexes) {
 					AND ifIndex = ?',
 					array($ifdesc, $device['device_id'], $key));
 
-				if ($i<sizeof($local_graph_id)) {
+				if ($i<cacti_sizeof($local_graph_id)) {
 					db_execute('UPDATE mac_track_interface_graphs
 						SET ifIndex = ?, ifName = ?
 						WHERE device_id = ?
@@ -262,7 +262,7 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} elseif (cacti_sizeof($new_port_key_array) > 0) {
 			$device['last_runmessage'] = 'Data collection completed ok';
-			$device['macs_active'] = sizeof($new_port_key_array);
+			$device['macs_active'] = cacti_sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';

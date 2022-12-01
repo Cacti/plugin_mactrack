@@ -251,7 +251,7 @@ function form_aggregated_actions() {
 
 	html_start_box($mactrack_view_agg_macs_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
 
-	if (!sizeof($row_array)) {
+	if (!cacti_sizeof($row_array)) {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one Row.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = "";
 	} elseif (api_plugin_user_realm_auth('mactrack_macauth.php')) {
@@ -736,9 +736,9 @@ function mactrack_view_macs() {
 	$display_text = array_merge($display_text1, $display_text2, $display_text3);
 
 	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
-		$columns = sizeof($display_text) + 1;
+		$columns = cacti_sizeof($display_text) + 1;
 	} else {
-		$columns = sizeof($display_text);
+		$columns = cacti_sizeof($display_text);
 	}
 
 	$nav = html_nav_bar('mactrack_view_macs.php?report=macs', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('MAC Addresses', 'mactrack'), 'page', 'main');
@@ -941,9 +941,9 @@ function mactrack_view_aggregated_macs() {
 	}
 
 	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
-		$columns = sizeof($display_text) + 1;
+		$columns = cacti_sizeof($display_text) + 1;
 	} else {
-		$columns = sizeof($display_text);
+		$columns = cacti_sizeof($display_text);
 	}
 
 	$nav = html_nav_bar('mactrack_view_macs.php?report=macs&scan_date=3', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('MAC Addresses', 'mactrack'), 'page', 'main');
@@ -1114,7 +1114,7 @@ function mactrack_mac_filter() {
 					<td>
 						<select id='ip_filter_type_id'>
 							<?php
-							for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
+							for($i=1;$i<=cacti_sizeof($mactrack_search_types);$i++) {
 								print "<option value='" . $i . "'"; if (get_request_var('ip_filter_type_id') == $i) { print ' selected'; } print '>' . $mactrack_search_types[$i] . '</option>';
 							}
 							?>
@@ -1183,7 +1183,7 @@ function mactrack_mac_filter() {
 					<td>
 						<select id='mac_filter_type_id'>
 							<?php
-							for($i=1;$i<=sizeof($mactrack_search_types)-2;$i++) {
+							for($i=1;$i<=cacti_sizeof($mactrack_search_types)-2;$i++) {
 								print "<option value='" . $i . "'"; if (get_request_var('mac_filter_type_id') == $i) { print ' selected'; } print '>' . $mactrack_search_types[$i] . '</option>';
 							}
 							?>
@@ -1210,7 +1210,7 @@ function mactrack_mac_filter() {
 					<td>
 						<select id='port_name_filter_type_id'>
 							<?php
-							for($i=1;$i<=sizeof($mactrack_search_types);$i++) {
+							for($i=1;$i<=cacti_sizeof($mactrack_search_types);$i++) {
 								print "<option value='" . $i . "'"; if (get_request_var('port_name_filter_type_id') == $i) { print ' selected'; } print '>' . $mactrack_search_types[$i] . '</option>';
 							}
 							?>

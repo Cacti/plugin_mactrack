@@ -1,19 +1,19 @@
 <?php
 
 /**
- * DNS Library for handling lookups and updates. 
+ * DNS Library for handling lookups and updates.
  *
  * Copyright (c) 2020, Mike Pultz <mike@mikepultz.com>. All rights reserved.
  *
- * See LICENSE for more details.  
+ * See LICENSE for more details.
  *
  * @category  Networking
- * @package   Net_DNS2
- * @author    Mike Pultz <mike@mikepultz.com>
+ * @package	  Net_DNS2
+ * @author	  Mike Pultz <mike@mikepultz.com>
  * @copyright 2020 Mike Pultz <mike@mikepultz.com>
- * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @link      https://netdns2.com/
- * @since     File available since Release 0.6.0
+ * @license	  http://www.opensource.org/licenses/bsd-license.php  BSD License
+ * @link	  https://netdns2.com/
+ * @since	  File available since Release 0.6.0
  *
  */
 
@@ -24,183 +24,179 @@
  */
 class Net_DNS2_BitMap
 {
-    /**
-     * parses a RR bitmap field defined in RFC3845, into an array of RR names.
-     *
-     * Type Bit Map(s) Field = ( Window Block # | Bitmap Length | Bitmap ) +
-     *
-     * @param string $data a bitmap stringto parse
-     *
-     * @return array
-     * @access public
-     *
-     */
-    public static function bitMapToArray($data)
-    {
-        if (strlen($data) == 0) {
-            return [];
-        }
+	/**
+	 * parses a RR bitmap field defined in RFC3845, into an array of RR names.
+	 *
+	 * Type Bit Map(s) Field = ( Window Block # | Bitmap Length | Bitmap ) +
+	 *
+	 * @param string $data a bitmap stringto parse
+	 *
+	 * @return array
+	 * @access public
+	 *
+	 */
+	public static function bitMapToArray($data)
+	{
+		if (strlen($data) == 0) {
+			return [];
+		}
 
-        $output = [];
-        $offset = 0;
-        $length = strlen($data);
+		$output = [];
+		$offset = 0;
+		$length = strlen($data);
 
-        while ($offset < $length) {
-            
-            //
-            // unpack the window and length values
-            //
-            $x = unpack('@' . $offset . '/Cwindow/Clength', $data);
-            $offset += 2;
+		while ($offset < $length) {
 
-            //
-            // copy out the bitmap value
-            //
-            $bitmap = unpack('C*', substr($data, $offset, $x['length']));
-            $offset += $x['length'];
+			//
+			// unpack the window and length values
+			//
+			$x = unpack('@' . $offset . '/Cwindow/Clength', $data);
+			$offset += 2;
 
-            //
-            // I'm not sure if there's a better way of doing this, but PHP doesn't
-            // have a 'B' flag for unpack()
-            //
-            $bitstr = '';
-            foreach ($bitmap as $r) {
-                
-                $bitstr .= sprintf('%08b', $r);
-            }
+			//
+			// copy out the bitmap value
+			//
+			$bitmap = unpack('C*', substr($data, $offset, $x['length']));
+			$offset += $x['length'];
 
-            $blen = strlen($bitstr);
-            for ($i=0; $i<$blen; $i++) {
+			//
+			// I'm not sure if there's a better way of doing this, but PHP doesn't
+			// have a 'B' flag for unpack()
+			//
+			$bitstr = '';
+			foreach ($bitmap as $r) {
+				$bitstr .= sprintf('%08b', $r);
+			}
 
-                if ($bitstr[$i] == '1') {
-                
-                    $type = $x['window'] * 256 + $i;
+			$blen = strlen($bitstr);
+			for ($i=0; $i<$blen; $i++) {
 
-                    if (isset(Net_DNS2_Lookups::$rr_types_by_id[$type])) {
+				if ($bitstr[$i] == '1') {
+					$type = $x['window'] * 256 + $i;
 
-                        $output[] = Net_DNS2_Lookups::$rr_types_by_id[$type];
-                    } else {
+					if (isset(Net_DNS2_Lookups::$rr_types_by_id[$type])) {
 
-                        $output[] = 'TYPE' . $type;
-                    }
-                }
-            }
-        }
+						$output[] = Net_DNS2_Lookups::$rr_types_by_id[$type];
+					} else {
 
-        return $output;
-    }
+						$output[] = 'TYPE' . $type;
+					}
+				}
+			}
+		}
 
-    /**
-     * builds a RR Bit map from an array of RR type names
-     *
-     * @param array $data a list of RR names
-     *
-     * @return string
-     * @access public
-     *
-     */
-    public static function arrayToBitMap(array $data)
-    {
-        if (count($data) == 0) {
-            return '';
-        }
+		return $output;
+	}
 
-        $current_window = 0;
+	/**
+	 * builds a RR Bit map from an array of RR type names
+	 *
+	 * @param array $data a list of RR names
+	 *
+	 * @return string
+	 * @access public
+	 *
+	 */
+	public static function arrayToBitMap(array $data)
+	{
+		if (cacti_sizeof($data) == 0) {
+			return '';
+		}
 
-        //
-        // go through each RR
-        //
-        $max = 0;
-        $bm = [];
+		$current_window = 0;
 
-        foreach ($data as $rr) {
-        
-            $rr = strtoupper($rr);
+		//
+		// go through each RR
+		//
+		$max = 0;
+		$bm = [];
 
-            //
-            // get the type id for the RR
-            //
-            $type = @Net_DNS2_Lookups::$rr_types_by_name[$rr];
-            if (isset($type)) {
+		foreach ($data as $rr) {
+			$rr = strtoupper($rr);
 
-                //
-                // skip meta types or qtypes
-                //  
-                if ( (isset(Net_DNS2_Lookups::$rr_qtypes_by_id[$type]))
-                    || (isset(Net_DNS2_Lookups::$rr_metatypes_by_id[$type]))
-                ) {
-                    continue;
-                }
+			//
+			// get the type id for the RR
+			//
+			$type = @Net_DNS2_Lookups::$rr_types_by_name[$rr];
+			if (isset($type)) {
 
-            } else {
+				//
+				// skip meta types or qtypes
+				//
+				if ( (isset(Net_DNS2_Lookups::$rr_qtypes_by_id[$type]))
+					|| (isset(Net_DNS2_Lookups::$rr_metatypes_by_id[$type]))
+				) {
+					continue;
+				}
 
-                //
-                // if it's not found, then it must be defined as TYPE<id>, per
-                // RFC3845 section 2.2, if it's not, we ignore it.
-                //
-                list($name, $type) = explode('TYPE', $rr);
-                if (!isset($type)) {
+			} else {
 
-                    continue;
-                }
-            }
+				//
+				// if it's not found, then it must be defined as TYPE<id>, per
+				// RFC3845 section 2.2, if it's not, we ignore it.
+				//
+				list($name, $type) = explode('TYPE', $rr);
+				if (!isset($type)) {
 
-            //
-            // build the current window
-            //
-            $current_window = (int)($type / 256);
-            
-            $val = $type - $current_window * 256.0;
-            if ($val > $max) {
-                $max = $val;
-            }
+					continue;
+				}
+			}
 
-            $bm[$current_window][$val] = 1;
-            $bm[$current_window]['length'] = ceil(($max + 1) / 8);
-        }
+			//
+			// build the current window
+			//
+			$current_window = (int)($type / 256);
 
-        $output = '';
+			$val = $type - $current_window * 256.0;
+			if ($val > $max) {
+				$max = $val;
+			}
 
-        foreach ($bm as $window => $bitdata) {
+			$bm[$current_window][$val] = 1;
+			$bm[$current_window]['length'] = ceil(($max + 1) / 8);
+		}
 
-            $bitstr = '';
+		$output = '';
 
-            for ($i=0; $i<$bm[$window]['length'] * 8; $i++) {
-                if (isset($bm[$window][$i])) {
-                    $bitstr .= '1';
-                } else {
-                    $bitstr .= '0';
-                }
-            }
+		foreach ($bm as $window => $bitdata) {
 
-            $output .= pack('CC', $window, $bm[$window]['length']);
-            $output .= pack('H*', self::bigBaseConvert($bitstr));
-        }
+			$bitstr = '';
 
-        return $output;
-    }
+			for ($i=0; $i<$bm[$window]['length'] * 8; $i++) {
+				if (isset($bm[$window][$i])) {
+					$bitstr .= '1';
+				} else {
+					$bitstr .= '0';
+				}
+			}
 
-    /**
-     * a base_convert that handles large numbers; forced to 2/16
-     *
-     * @param string $number a bit string
-     *
-     * @return string
-     * @access public
-     *
-     */
-    public static function bigBaseConvert($number)
-    {
-        $result = '';
+			$output .= pack('CC', $window, $bm[$window]['length']);
+			$output .= pack('H*', self::bigBaseConvert($bitstr));
+		}
 
-        $bin = substr(chunk_split(strrev($number), 4, '-'), 0, -1);
-        $temp = preg_split('[-]', $bin, -1, PREG_SPLIT_DELIM_CAPTURE);
-        
-        for ($i = count($temp)-1;$i >= 0;$i--) {
-            
-            $result = $result . base_convert(strrev($temp[$i]), 2, 16);
-        }
-        
-        return strtoupper($result);
-    }
+		return $output;
+	}
+
+	/**
+	 * a base_convert that handles large numbers; forced to 2/16
+	 *
+	 * @param string $number a bit string
+	 *
+	 * @return string
+	 * @access public
+	 *
+	 */
+	public static function bigBaseConvert($number)
+	{
+		$result = '';
+
+		$bin = substr(chunk_split(strrev($number), 4, '-'), 0, -1);
+		$temp = preg_split('[-]', $bin, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+		for ($i = cacti_sizeof($temp)-1;$i >= 0;$i--) {
+			$result = $result . base_convert(strrev($temp[$i]), 2, 16);
+		}
+
+		return strtoupper($result);
+	}
 }

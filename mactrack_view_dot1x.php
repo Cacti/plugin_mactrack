@@ -431,9 +431,9 @@ function mactrack_view_dot1x() {
 	}
 
 	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
-		$columns = sizeof($display_text) + 1;
+		$columns = cacti_sizeof($display_text) + 1;
 	} else {
-		$columns = sizeof($display_text);
+		$columns = cacti_sizeof($display_text);
 	}
 
 	$nav = html_nav_bar('mactrack_view_dot1x.php?report=dot1x', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('802.1x Sessions', 'mactrack'), 'page', 'main');

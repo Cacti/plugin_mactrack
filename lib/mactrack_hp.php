@@ -44,7 +44,7 @@ function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 
 	/* get VLAN Trunk status */
 	$vlan_trunkstatus = xform_standard_indexed_data('.1.3.6.1.4.1.11.2.14.11.5.1.3.1.1.8.1.1.1', $device);
-	$device['vlans_total'] = sizeof($vlan_ids);
+	$device['vlans_total'] = cacti_sizeof($vlan_ids);
 	mactrack_debug('VLAN data collected. There are ' . (cacti_sizeof($vlan_ids)) . ' VLANS.');
 
 	/* get the ifIndexes for the device */
@@ -123,7 +123,7 @@ function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
-		$device['macs_active'] = sizeof($port_array);
+		$device['macs_active'] = cacti_sizeof($port_array);
 
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {

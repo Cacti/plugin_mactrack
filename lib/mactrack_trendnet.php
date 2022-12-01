@@ -122,7 +122,7 @@ function get_base_trendnet_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp
 
 	/* get VLAN information */
 	$vlan_names = xform_stripped_oid('.1.3.6.1.2.1.17.7.1.4.3.1.1', $device, $snmp_readstring);
-	$device['vlans_total'] = sizeof($vlan_names) - 1;
+	$device['vlans_total'] = cacti_sizeof($vlan_names) - 1;
 	mactrack_debug('VLAN data collected. There are ' . (cacti_sizeof($vlan_names) - 1) . ' VLANS.');
 
 	$port_status = xform_stripped_oid('.1.3.6.1.4.1.28866.2.18.116.7.1.4.7.1.2', $device, $snmp_readstring);
@@ -256,7 +256,7 @@ function get_base_trendnet_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} elseif (cacti_sizeof($new_port_key_array) > 0) {
 			$device['last_runmessage'] = 'Data collection completed ok';
-			$device['macs_active'] = sizeof($new_port_key_array);
+			$device['macs_active'] = cacti_sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';

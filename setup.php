@@ -85,9 +85,9 @@ function mactrack_check_upgrade() {
 	$current = $current['version'];
 
 	$old     = db_fetch_row("SELECT * FROM plugin_config WHERE directory='mactrack'");
-	if (!sizeof($old) || $current != $old['version']) {
+	if (!cacti_sizeof($old) || $current != $old['version']) {
 		/* if the plugin is installed and/or active */
-		if (!sizeof($old) || $old['status'] == 1 || $old['status'] == 4) {
+		if (!cacti_sizeof($old) || $old['status'] == 1 || $old['status'] == 4) {
 			/* re-register the hooks */
 			plugin_mactrack_install();
 			if (api_plugin_is_enabled('mactrack')) {
@@ -130,7 +130,7 @@ function mactrack_check_upgrade() {
 }
 
 function mactrack_db_table_exists($table) {
-	return sizeof(db_fetch_assoc("SHOW TABLES LIKE '$table'"));
+	return cacti_sizeof(db_fetch_assoc("SHOW TABLES LIKE '$table'"));
 }
 
 function mactrack_db_column_exists($table, $column) {

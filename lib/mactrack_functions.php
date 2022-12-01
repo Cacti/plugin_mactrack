@@ -48,7 +48,7 @@ function mactrack_debug($message) {
 	global $debug, $web, $config;
 
 	$print_output=!(isset($web) && $web);
-	if (isset($web) && $web && !substr_count($message, 'SQL')) {
+	if (isset($web) && $web && is_string($message) && !substr_count($message, 'SQL')) {
 		print($message . '<br>');
 	}
 
@@ -344,9 +344,9 @@ function port_list_to_array($port_list, $delimiter = ':') {
 
 	if (read_config_option('mt_ignorePorts_delim') == '-1') {
 		/* find the delimiter */
-		$t1 = sizeof(explode(':', $port_list));
-		$t2 = sizeof(explode('|', $port_list));
-		$t3 = sizeof(explode(' ', $port_list));
+		$t1 = cacti_sizeof(explode(':', $port_list));
+		$t2 = cacti_sizeof(explode('|', $port_list));
+		$t3 = cacti_sizeof(explode(' ', $port_list));
 
 		if ($t1 > $t2 && $t1 > $t3) {
 			$delimiter = ':';
@@ -447,7 +447,7 @@ function get_standard_arp_table($site, &$device) {
 	}
 
 	/* save ip information for the device */
-	$device['ips_total'] = sizeof($atEntries);
+	$device['ips_total'] = cacti_sizeof($atEntries);
 	db_execute_prepared('UPDATE mac_track_devices
 		SET ips_total = ?
 		WHERE device_id = ?',
@@ -466,7 +466,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 
 	/* get the ifIndexes for the device */
 	$ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);
-	mactrack_debug('ifIndexes data collection complete. \'' . sizeof($ifIndexes) . '\' rows found!');
+	mactrack_debug('ifIndexes data collection complete. \'' . cacti_sizeof($ifIndexes) . '\' rows found!');
 
 	$ifTypes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.3', $device);
 	if (cacti_sizeof($ifTypes)) {
@@ -478,21 +478,21 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 			}
 		}
 	}
-	mactrack_debug('ifTypes data collection complete. \'' . sizeof($ifTypes) . '\' rows found!');
+	mactrack_debug('ifTypes data collection complete. \'' . cacti_sizeof($ifTypes) . '\' rows found!');
 
 	$ifNames = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.1', $device);
-	mactrack_debug('ifNames data collection complete. \'' . sizeof($ifNames) . '\' rows found!');
+	mactrack_debug('ifNames data collection complete. \'' . cacti_sizeof($ifNames) . '\' rows found!');
 
 	/* get ports names through use of ifAlias */
 	if ($getAlias) {
 		$ifAliases = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.18', $device);
-		mactrack_debug('ifAlias data collection complete. \'' . sizeof($ifAliases) . '\' rows found!');
+		mactrack_debug('ifAlias data collection complete. \'' . cacti_sizeof($ifAliases) . '\' rows found!');
 	}
 
 	/* get ports that happen to be link ports */
 	if ($getLinkPorts) {
 		$link_ports = get_link_port_status($device);
-		mactrack_debug("ipAddrTable scanning for link ports data collection complete. '" . sizeof($link_ports) . "' rows found!");
+		mactrack_debug("ipAddrTable scanning for link ports data collection complete. '" . cacti_sizeof($link_ports) . "' rows found!");
 	}
 
 	/* required only for interfaces table */
@@ -582,22 +582,22 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 	$insert_vals = '';
 
 	$ifSpeed = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.5', $device);
-	mactrack_debug("ifSpeed data collection complete. '" . sizeof($ifSpeed) . "' rows found!");
+	mactrack_debug("ifSpeed data collection complete. '" . cacti_sizeof($ifSpeed) . "' rows found!");
 
 	$ifHighSpeed = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.15', $device);
-	mactrack_debug("ifHighSpeed data collection complete. '" . sizeof($ifHighSpeed) . "' rows found!");
+	mactrack_debug("ifHighSpeed data collection complete. '" . cacti_sizeof($ifHighSpeed) . "' rows found!");
 
 	$ifDuplex = xform_standard_indexed_data('.1.3.6.1.2.1.10.7.2.1.19', $device);
-	mactrack_debug("ifDuplex data collection complete. '" . sizeof($ifDuplex) . "' rows found!");
+	mactrack_debug("ifDuplex data collection complete. '" . cacti_sizeof($ifDuplex) . "' rows found!");
 
 	$ifDescr = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.2', $device);
-	mactrack_debug("ifDescr data collection complete. '" . sizeof($ifDescr) . "' rows found!");
+	mactrack_debug("ifDescr data collection complete. '" . cacti_sizeof($ifDescr) . "' rows found!");
 
 	$ifMtu = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.4', $device);
-	mactrack_debug("ifMtu data collection complete. '" . sizeof($ifMtu) . "' rows found!");
+	mactrack_debug("ifMtu data collection complete. '" . cacti_sizeof($ifMtu) . "' rows found!");
 
 	$ifPhysAddress = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.6', $device, '', true);
-	mactrack_debug("ifPhysAddress data collection complete. '" . sizeof($ifPhysAddress) . "' rows found!");
+	mactrack_debug("ifPhysAddress data collection complete. '" . cacti_sizeof($ifPhysAddress) . "' rows found!");
 
 	$ifAdminStatus = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.7', $device);
 	if (cacti_sizeof($ifAdminStatus)) {
@@ -609,7 +609,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 			}
 		}
 	}
-	mactrack_debug("ifAdminStatus data collection complete. '" . sizeof($ifAdminStatus) . "' rows found!");
+	mactrack_debug("ifAdminStatus data collection complete. '" . cacti_sizeof($ifAdminStatus) . "' rows found!");
 
 	$ifOperStatus = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.8', $device);
 	if (cacti_sizeof($ifOperStatus)) {
@@ -621,10 +621,10 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 			}
 		}
 	}
-	mactrack_debug("ifOperStatus data collection complete. '" . sizeof($ifOperStatus) . "' rows found!");
+	mactrack_debug("ifOperStatus data collection complete. '" . cacti_sizeof($ifOperStatus) . "' rows found!");
 
 	$ifLastChange = xform_standard_indexed_data(".1.3.6.1.2.1.2.2.1.9", $device);
-	mactrack_debug("ifLastChange data collection complete. '" . sizeof($ifLastChange) . "' rows found!");
+	mactrack_debug("ifLastChange data collection complete. '" . cacti_sizeof($ifLastChange) . "' rows found!");
 
 	/* get timing for rate information */
 	$prev_octets_time = strtotime($device['last_rundate']);
@@ -638,53 +638,53 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 
 	/* if the device is snmpv2 use high speed and don't bother with the low speed stuff */
 	$ifInOctets = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.10', $device);
-	mactrack_debug("ifInOctets data collection complete. '" . sizeof($ifInOctets) . "' rows found!");
+	mactrack_debug("ifInOctets data collection complete. '" . cacti_sizeof($ifInOctets) . "' rows found!");
 
 	$ifOutOctets = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.16', $device);
-	mactrack_debug("ifOutOctets data collection complete. '" . sizeof($ifOutOctets) . "' rows found!");
+	mactrack_debug("ifOutOctets data collection complete. '" . cacti_sizeof($ifOutOctets) . "' rows found!");
 
 	if ($device['snmp_version'] > 1) {
 		$ifHCInOctets = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.6', $device);
-		mactrack_debug("ifHCInOctets data collection complete. '" . sizeof($ifHCInOctets) . "' rows found!");
+		mactrack_debug("ifHCInOctets data collection complete. '" . cacti_sizeof($ifHCInOctets) . "' rows found!");
 
 		$ifHCOutOctets = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.10', $device);
-		mactrack_debug("ifHCOutOctets data collection complete. '" . sizeof($ifHCOutOctets) . "' rows found!");
+		mactrack_debug("ifHCOutOctets data collection complete. '" . cacti_sizeof($ifHCOutOctets) . "' rows found!");
 	}
 
 
 	$ifInMulticastPkts = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.2', $device);
-	mactrack_debug("ifInMulticastPkts data collection complete. '" . sizeof($ifInMulticastPkts) . "' rows found!");
+	mactrack_debug("ifInMulticastPkts data collection complete. '" . cacti_sizeof($ifInMulticastPkts) . "' rows found!");
 
 	$ifOutMulticastPkts = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.4', $device);
-	mactrack_debug("ifOutMulticastPkts data collection complete. '" . sizeof($ifOutMulticastPkts) . "' rows found!");
+	mactrack_debug("ifOutMulticastPkts data collection complete. '" . cacti_sizeof($ifOutMulticastPkts) . "' rows found!");
 
 	$ifInBroadcastPkts = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.3', $device);
-	mactrack_debug("ifInBroadcastPkts data collection complete. '" . sizeof($ifInBroadcastPkts) . "' rows found!");
+	mactrack_debug("ifInBroadcastPkts data collection complete. '" . cacti_sizeof($ifInBroadcastPkts) . "' rows found!");
 
 	$ifOutBroadcastPkts = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.5', $device);
-	mactrack_debug("ifOutBroadcastPkts data collection complete. '" . sizeof($ifOutBroadcastPkts) . "' rows found!");
+	mactrack_debug("ifOutBroadcastPkts data collection complete. '" . cacti_sizeof($ifOutBroadcastPkts) . "' rows found!");
 
 	$ifInUcastPkts = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.11', $device);
-	mactrack_debug("ifInUcastPkts data collection complete. '" . sizeof($ifInUcastPkts) . "' rows found!");
+	mactrack_debug("ifInUcastPkts data collection complete. '" . cacti_sizeof($ifInUcastPkts) . "' rows found!");
 
 	$ifOutUcastPkts = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.17', $device);
-	mactrack_debug("ifOutUcastPkts data collection complete. '" . sizeof($ifOutUcastPkts) . "' rows found!");
+	mactrack_debug("ifOutUcastPkts data collection complete. '" . cacti_sizeof($ifOutUcastPkts) . "' rows found!");
 
 	/* get information on error conditions */
 	$ifInDiscards = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.13', $device);
-	mactrack_debug("ifInDiscards data collection complete. '" . sizeof($ifInDiscards) . "' rows found!");
+	mactrack_debug("ifInDiscards data collection complete. '" . cacti_sizeof($ifInDiscards) . "' rows found!");
 
 	$ifInErrors = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.14', $device);
-	mactrack_debug("ifInErrors data collection complete. '" . sizeof($ifInErrors) . "' rows found!");
+	mactrack_debug("ifInErrors data collection complete. '" . cacti_sizeof($ifInErrors) . "' rows found!");
 
 	$ifInUnknownProtos = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.15', $device);
-	mactrack_debug("ifInUnknownProtos data collection complete. '" . sizeof($ifInUnknownProtos) . "' rows found!");
+	mactrack_debug("ifInUnknownProtos data collection complete. '" . cacti_sizeof($ifInUnknownProtos) . "' rows found!");
 
 	$ifOutDiscards = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.19', $device);
-	mactrack_debug("ifOutDiscards data collection complete. '" . sizeof($ifOutDiscards) . "' rows found!");
+	mactrack_debug("ifOutDiscards data collection complete. '" . cacti_sizeof($ifOutDiscards) . "' rows found!");
 
 	$ifOutErrors = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.20', $device);
-	mactrack_debug("ifOutErrors data collection complete. '" . sizeof($ifOutErrors) . "' rows found!");
+	mactrack_debug("ifOutErrors data collection complete. '" . cacti_sizeof($ifOutErrors) . "' rows found!");
 
 	$vlan_id    = '';
 	$vlan_name  = '';
@@ -1204,7 +1204,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 	if ($store_to_db) {
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $ports_total . ', OPER PORTS: ' . $ports_active);
-	
+
 		$device['ports_total'] = $ports_total;
 		$device['macs_active'] = 0;
 	}
@@ -1320,7 +1320,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} elseif (cacti_sizeof($new_port_key_array)) {
 			$device['last_runmessage'] = 'Data collection completed ok';
-			$device['macs_active'] = sizeof($new_port_key_array);
+			$device['macs_active'] = cacti_sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';
@@ -1535,7 +1535,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} elseif (cacti_sizeof($new_port_key_array)) {
 			$device['last_runmessage'] = 'Data collection completed ok';
-			$device['macs_active'] = sizeof($new_port_key_array);
+			$device['macs_active'] = cacti_sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';
@@ -1587,10 +1587,10 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 		}
 	}
     $device['ports_active'] = $ports_active;
-    
+
 	if ($store_to_db) {
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $ports_total . ', OPER PORTS: ' . $ports_active);
-	
+
 		$device['ports_total'] = $ports_total;
 		$device['macs_active'] = 0;
 	}
@@ -1704,7 +1704,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} elseif (cacti_sizeof($new_port_key_array)) {
 			$device['last_runmessage'] = 'Data collection completed ok';
-			$device['macs_active'] = sizeof($new_port_key_array);
+			$device['macs_active'] = cacti_sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';
@@ -2342,7 +2342,7 @@ function perform_mactrack_db_maint() {
 			$last_day = db_fetch_row("SELECT TO_DAYS('$lnow') AS today");
 			$last_day = $last_day['today'];
 
-			mactrack_debug("There are currently '" . sizeof($number_of_partitions) . "' Device Tracking Partitions, We will keep '$days' of them.");
+			mactrack_debug("There are currently '" . cacti_sizeof($number_of_partitions) . "' Device Tracking Partitions, We will keep '$days' of them.");
 			mactrack_debug("The current day is '$cur_day', the last day is '$last_day'");
 
 			if ($cur_day != $last_day) {
@@ -2356,7 +2356,7 @@ function perform_mactrack_db_maint() {
 						PARTITION dMaxValue VALUES LESS THAN MAXVALUE)");
 
 					if ($days > 0) {
-						$user_partitions = sizeof($number_of_partitions) - 1;
+						$user_partitions = cacti_sizeof($number_of_partitions) - 1;
 						if ($user_partitions >= $days) {
 							$i = 0;
 							while ($user_partitions > $days) {
@@ -2577,7 +2577,7 @@ function get_netscreen_arp_table($site, &$device) {
 	}
 
 	/* save ip information for the device */
-	$device['ips_total'] = sizeof($atEntries);
+	$device['ips_total'] = cacti_sizeof($atEntries);
 
 	db_execute_prepared('UPDATE mac_track_devices
 		SET ips_total = ?
@@ -2980,7 +2980,7 @@ function mactrack_create_sql_filter($filter, $fields) {
 	$query = '';
 
 	/* field names are required */
-	if (!sizeof($fields)) return;
+	if (!cacti_sizeof($fields)) return;
 
 	/* the filter must be non-blank */
 	if (!strlen($filter)) return;
@@ -3355,3 +3355,14 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 	<?php
 }
 
+if (!function_exists('cacti_sizeof')) {
+	function cacti_sizeof($array) {
+		return ($array === false || !is_array($array)) ? 0 : sizeof($array);
+	}
+}
+
+if (!function_exists('cacti_count')) {
+	function cacti_count($array) {
+		return ($array === false || !is_array($array)) ? 0 : count($array);
+	}
+}

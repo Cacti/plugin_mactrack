@@ -96,7 +96,7 @@ function form_actions() {
 
 		if ($selected_items != false) {
 			if (get_request_var('drp_action') == '1') { /* delete */
-				for ($i=0; $i<count($selected_items); $i++) {
+				for ($i=0; $i<cacti_sizeof($selected_items); $i++) {
 					api_mactrack_site_remove($selected_items[$i]);
 				}
 			}
@@ -455,7 +455,7 @@ function mactrack_site() {
 			)
 		);
 
-		$columns = sizeof($display_text) + 1;
+		$columns = cacti_sizeof($display_text) + 1;
 
 		$nav = html_nav_bar('mactrack_sites.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_filter_request_var('page'), $rows, $total_rows, $columns, __('Sites', 'mactrack'), 'page', 'main');
 
@@ -535,7 +535,7 @@ function mactrack_site() {
 			)
 		);
 
-		$columns = sizeof($display_text);
+		$columns = cacti_sizeof($display_text);
 
 		$nav = html_nav_bar('mactrack_sites.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_filter_request_var('page'), $rows, $total_rows, $columns, __('Sites', 'mactrack'), 'page', 'main');
 

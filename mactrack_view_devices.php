@@ -320,7 +320,7 @@ function mactrack_view_devices() {
 		)
 	);
 
-	$columns = sizeof($display_text);
+	$columns = cacti_sizeof($display_text);
 
 	$nav = html_nav_bar('mactrack_view_devices.php?report=devices', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Devices', 'mactrack'), 'page', 'main');
 

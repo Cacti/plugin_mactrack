@@ -143,7 +143,7 @@ if (valid_snmp_device($device)) {
 	/* locate the device type to obtain scanning function and low and high ports */
 	$device_type = find_scanning_function($device, $device_types);
 
-	if (isset($device_type) && sizeof($device_type) > 0) {
+	if (isset($device_type) && cacti_sizeof($device_type) > 0) {
 		/* for switches/hubs, we need to determine the mac to port mappings */
 		if (($device['scan_type'] == DEVICE_HUB_SWITCH) ||
 				($device['scan_type'] == DEVICE_SWITCH_ROUTER)) {

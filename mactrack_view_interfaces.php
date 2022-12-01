@@ -286,7 +286,7 @@ function mactrack_view() {
 
 	$display_text = mactrack_display_array();
 
-	$columns = sizeof($display_text);
+	$columns = cacti_sizeof($display_text);
 
 	$nav = html_nav_bar('mactrack_view_interfaces.php?report=interfaces', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Interfaces', 'mactrack'), 'page', 'main');
 

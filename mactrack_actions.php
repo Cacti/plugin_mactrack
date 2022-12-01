@@ -285,7 +285,7 @@ function mactrack_device_action_execute($action) {
 
 			if ($selected_items != false) {
 				/* work on all selected hosts */
-				for ($i=0;($i<count($selected_items));$i++) {
+				for ($i=0;($i<cacti_sizeof($selected_items));$i++) {
 					# fetch row from host table
 					$device = db_fetch_row_prepared('SELECT * from host WHERE id = ?', array($selected_items[$i]));
 

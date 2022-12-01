@@ -134,21 +134,21 @@ function form_mactrack_actions() {
 
         if ($selected_items != false) {
 			if (get_request_var('drp_action') == '2') { /* Enable Selected Devices */
-				for ($i=0;($i<count($selected_items));$i++) {
+				for ($i=0;($i<cacti_sizeof($selected_items));$i++) {
 					db_execute_prepared("UPDATE mac_track_devices
 						SET disabled=''
 						WHERE device_id = ?",
 						array($selected_items[$i]));
 				}
 			} elseif (get_request_var('drp_action') == '3') { /* Disable Selected Devices */
-				for ($i=0;($i<count($selected_items));$i++) {
+				for ($i=0;($i<cacti_sizeof($selected_items));$i++) {
 					db_execute_prepared("UPDATE mac_track_devices
 						SET disabled='on'
 						WHERE device_id = ?",
 						array($selected_items[$i]));
 				}
 			} elseif (get_request_var('drp_action') == '4') { /* change snmp options */
-				for ($i=0;($i<count($selected_items));$i++) {
+				for ($i=0;($i<cacti_sizeof($selected_items));$i++) {
 					reset($fields_mactrack_device_edit);
 					foreach ($fields_mactrack_device_edit as $field_name => $field_array) {
 						if (isset_request_var("t_$field_name") && preg_match('/^snmp_/', $field_name)) {
@@ -160,7 +160,7 @@ function form_mactrack_actions() {
 					}
 				}
 			} elseif (get_request_var('drp_action') == '5') { /* change port settings for multiple devices */
-				for ($i=0;($i<count($selected_items));$i++) {
+				for ($i=0;($i<cacti_sizeof($selected_items));$i++) {
 					reset($fields_mactrack_device_edit);
 					foreach ($fields_mactrack_device_edit as $field_name => $field_array) {
 						if (isset_request_var("t_$field_name") && preg_match('/^ignorePorts/', $field_name)) {
@@ -172,7 +172,7 @@ function form_mactrack_actions() {
 					}
 				}
 			} elseif (get_request_var('drp_action') == '6') { /* Connect Selected Devices */
-				for ($i=0;($i<count($selected_items));$i++) {
+				for ($i=0;($i<cacti_sizeof($selected_items));$i++) {
 					$cacti_host = db_fetch_row_prepared('SELECT host.id, host.description
 						FROM mac_track_devices
 						LEFT JOIN host
@@ -188,7 +188,7 @@ function form_mactrack_actions() {
 					}
 				}
 			} elseif (get_request_var('drp_action') == '7') { /* Copy SNMP Settings */
-				for ($i=0;($i<count($selected_items));$i++) {
+				for ($i=0;($i<cacti_sizeof($selected_items));$i++) {
 					$cacti_host = db_fetch_row_prepared("SELECT host.*,
 						host.snmp_community as snmp_readstring,
 						host.ping_retries as snmp_retries
@@ -216,7 +216,7 @@ function form_mactrack_actions() {
 					}
 				}
 			} elseif (get_request_var('drp_action') == '1') { /* delete */
-				for ($i=0; $i<count($selected_items); $i++) {
+				for ($i=0; $i<cacti_sizeof($selected_items); $i++) {
 					api_mactrack_device_remove($selected_items[$i]);
 				}
 			}
@@ -252,7 +252,7 @@ function form_mactrack_actions() {
 
 	html_start_box($device_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
 
-	if (!sizeof($device_array)) {
+	if (!cacti_sizeof($device_array)) {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one device.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = "";
 	} else {
@@ -1071,7 +1071,7 @@ function mactrack_device() {
 		)
 	);
 
-	$columns = sizeof($display_text) + 1;
+	$columns = cacti_sizeof($display_text) + 1;
 
 	$nav = html_nav_bar('mactrack_devices.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Devices', 'mactrack'), 'page', 'main');
 

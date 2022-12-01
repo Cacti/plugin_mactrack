@@ -164,7 +164,7 @@ function form_mactrack_snmp_actions() {
 				db_execute('DELETE FROM mac_track_snmp WHERE ' . array_to_sql_or($selected_items, 'id'));
 				db_execute('DELETE FROM mac_track_snmp_items WHERE ' . str_replace('id', 'snmp_id', array_to_sql_or($selected_items, 'id')));
 			} elseif (get_nfilter_request_var('drp_action') == '2') { /* duplicate */
-				for ($i=0;($i<count($selected_items));$i++) {
+				for ($i=0;($i<cacti_sizeof($selected_items));$i++) {
 					duplicate_mactrack($selected_items[$i], get_nfilter_request_var('name_format'));
 				}
 			}
@@ -422,7 +422,7 @@ function mactrack_snmp_edit() {
 				$form_data .= '<td>' . 	($item['snmp_version'] == 3 ? $item['snmp_auth_protocol'] : __('N/A', 'mactrack')) . '</td>';
 				$form_data .= '<td>' . 	($item['snmp_version'] == 3 ? $item['snmp_priv_protocol'] : __('N/A', 'mactrack')) . '</td>';
 				$form_data .= '<td class="right">' .
-					($i < sizeof($items) ? '<a class="remover fa fa-caret-down moveArrow" href="' . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_snmp.php?action=item_movedown&item_id=' . $item["id"] . '&id=' . $item["snmp_id"]) . '"></a>':'<span class="moveArrowNone"></span>') .
+					($i < cacti_sizeof($items) ? '<a class="remover fa fa-caret-down moveArrow" href="' . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_snmp.php?action=item_movedown&item_id=' . $item["id"] . '&id=' . $item["snmp_id"]) . '"></a>':'<span class="moveArrowNone"></span>') .
 					($i > 1 ? '<a class="remover fa fa-caret-up moveArrow" href="' . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_snmp.php?action=item_moveup&item_id=' . $item["id"] .	'&id=' . $item["snmp_id"]) .'"></a>':'<span class="moveArrowNone"></span>');
 
 				$form_data .= '<a class="delete deleteMarker fa fa-remove" href="' . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_snmp.php?action=item_remove&item_id=' . $item["id"] .	'&id=' . $item["snmp_id"]) . '"></a>' . '</td></tr>';
@@ -511,7 +511,7 @@ function mactrack_snmp() {
 		'name' => array(__('Title of SNMP Option Set', 'mactrack'), 'ASC'),
 	);
 
-	$columns = sizeof($display_text) + 1;
+	$columns = cacti_sizeof($display_text) + 1;
 
 	$nav = html_nav_bar('mactrack_snmp.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('SNMP Settings', 'mactrack'), 'page', 'main');
 

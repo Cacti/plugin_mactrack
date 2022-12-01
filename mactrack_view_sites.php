@@ -228,7 +228,7 @@ function mactrack_view_sites() {
 			FROM mac_track_sites
 			$sql_where");
 	} else {
-		$total_rows = sizeof(db_fetch_assoc("SELECT
+		$total_rows = cacti_sizeof(db_fetch_assoc("SELECT
 			mac_track_device_types.device_type_id, mac_track_sites.site_name
 			FROM (mac_track_device_types
 			RIGHT JOIN mac_track_devices
@@ -280,7 +280,7 @@ function mactrack_view_sites() {
 			)
 		);
 
-		$columns = sizeof($display_text);
+		$columns = cacti_sizeof($display_text);
 
 		$nav = html_nav_bar('mactrack_view_sites.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Sites', 'mactrack'), 'page', 'main');
 
@@ -380,7 +380,7 @@ function mactrack_view_sites() {
 			)
 		);
 
-		$columns = sizeof($display_text);
+		$columns = cacti_sizeof($display_text);
 
 		$nav = html_nav_bar('mactrack_view_sites.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Sites / Device Types', 'mactrack'), 'page', 'main');
 

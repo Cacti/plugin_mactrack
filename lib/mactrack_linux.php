@@ -232,7 +232,7 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} elseif (cacti_sizeof($new_port_key_array) > 0) {
 			$device['last_runmessage'] = 'Data collection completed ok';
-			$device['macs_active'] = sizeof($new_port_key_array);
+			$device['macs_active'] = cacti_sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';
@@ -243,14 +243,13 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 }
 
 function convert_port_state_data($old_port_type) {
-	if (substr_count($old_port_type, '(') > 0) {
+	$result=$old_port_type;
+	if (is_string($old_port_type) && substr_count($old_port_type, '(') > 0) {
 		$pos1 = strpos($old_port_type, '(');
 		$pos2 = strpos($old_port_type, ')');
-		$rezult = substr($old_port_type, $pos1+1, $pos2-$pos1-1);
-	} else {
-		$rezult=$old_port_type;
+		$result = substr($old_port_type, $pos1+1, $pos2-$pos1-1);
 	}
 
-	return $rezult;
+	return $result;
 }
 

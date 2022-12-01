@@ -224,7 +224,7 @@ function mactrack_view_ip_ranges() {
 		)
 	);
 
-	$columns = sizeof($display_text);
+	$columns = cacti_sizeof($display_text);
 
 	$nav = html_nav_bar('mactrack_view_ips.php', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('IP Address Ranges', 'mactrack'), 'page', 'main');
 

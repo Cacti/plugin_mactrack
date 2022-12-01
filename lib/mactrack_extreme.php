@@ -61,7 +61,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 	 */
 	$vlan_ids   = xform_standard_indexed_data('.1.3.6.1.4.1.1916.1.2.1.2.1.10', $device);
 	$vlan_names = xform_standard_indexed_data('.1.3.6.1.4.1.1916.1.2.1.2.1.2', $device);
-	$device['vlans_total'] = sizeof($vlan_ids);
+	$device['vlans_total'] = cacti_sizeof($vlan_ids);
 	mactrack_debug('There are ' . (cacti_sizeof($vlan_ids)) . ' VLANS.');
 
 	/* get the ifIndexes for the device
@@ -163,7 +163,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 			}
 		}
 
-		$device['ports_total'] = sizeof($ifInterfaces);
+		$device['ports_total'] = cacti_sizeof($ifInterfaces);
 		$device['ports_active'] = 0;
 
 		foreach ($ifInterfaces as $interface) {
@@ -176,7 +176,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
-		$device['macs_active'] = sizeof($port_array);
+		$device['macs_active'] = cacti_sizeof($port_array);
 
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
@@ -296,12 +296,12 @@ IF-MIB::ifName : get name of port from IfIndex
 	}
 
 	/* save ip information for the device */
-	$device['ips_total'] = sizeof($atEntries);
+	$device['ips_total'] = cacti_sizeof($atEntries);
 	db_execute_prepared('UPDATE mac_track_devices
 		SET ips_total = ?
 		WHERE device_id = ?',
 		array($device['ips_total'], $device['device_id']));
 
-	mactrack_debug('HOST: ' . $device['hostname'] . ', IP address information collection complete: nb IP=' . sizeof($atEntries) . '.');
+	mactrack_debug('HOST: ' . $device['hostname'] . ', IP address information collection complete: nb IP=' . cacti_sizeof($atEntries) . '.');
 }
 
