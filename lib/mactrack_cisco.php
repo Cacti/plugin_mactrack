@@ -385,7 +385,6 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 						$active_vlans[$j]['vlan_id'] = $vlan_number;
 						$active_vlans[$j]['vlan_name'] = $vlanName;
 						$active_vlans[$j]['active_ports'] = $active_vlan_ports;
-						$active_vlans++;
 
 						$j++;
 					}

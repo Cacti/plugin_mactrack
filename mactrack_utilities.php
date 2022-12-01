@@ -189,8 +189,10 @@ function mactrack_display_run_status() {
 					<td>
 						<select id='refresh' onChange='applyFilter()'>
 						<?php
-						foreach ($refresh_interval as $key => $interval) {
-							print '<option value="' . $key . '"'; if (get_request_var('refresh') == $key) { print ' selected'; } print '>' . $interval . '</option>';
+						if (cacti_sizeof($refresh_interval)) {
+							foreach ($refresh_interval as $key => $interval) {
+								print '<option value="' . $key . '"'; if (get_request_var('refresh') == $key) { print ' selected'; } print '>' . $interval . '</option>';
+							}
 						}
 						?>
 					</td>
