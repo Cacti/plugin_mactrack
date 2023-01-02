@@ -175,11 +175,12 @@ function sync_cacti_to_mactrack($device) {
 		# now fetch the related device from mac_track_devices, if any
 		$mt_device = db_fetch_row('SELECT * from mac_track_devices WHERE host_id=' . $device['id']);
 
-		if (!isset($mt_device['snmp_engine_id'])) {
-			$mt_device['snmp_engine_id'] = '';
-		}
+		if (is_array($mt_device) && $mt_device) {
 
-		if (is_array($mt_device)) {
+			if (!isset($mt_device['snmp_engine_id'])) {
+				$mt_device['snmp_engine_id'] = '';
+			}
+		
 			# update mac_track_device
 			$device_id = api_mactrack_device_save(
 				$mt_device['device_id'], 			# not a host column
