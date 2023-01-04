@@ -2,13 +2,16 @@
 
 --- 4.5 ---
 
-* issue#165: The file mactrack_actions.php will throw and error if an the $save array is discarded by another plugin
+* issue#165: The file mactrack_actions.php will throw and error if an the $save
+  array is discarded by another plugin
 
 * issue#169: Add back support for the MacTrack ARP Table
 
-* issue#175: Uncaught TypeError: sizeof(): Argument #1 ($value) must be of type Countable|array
+* issue#175: Uncaught TypeError: sizeof(): Argument #1 ($value) must be of type
+  Countable|array
 
 * feature#170: Add support for Cisco VRF ARP Table
+
 
 --- 4.3 / 4.4 ---
 
@@ -19,6 +22,7 @@
 * bug: Number of devices scanned incorrect for main scanner
 
 * bug: MacAuthorizations Interface not accessible through MacTrack tab
+
 * bug: Mac Watch can not send mail
 
 * issue#70: Fix issue with Prompt confirmation button
@@ -26,11 +30,13 @@
 * issue#75: Command Line does not show output
 
 * issue#77: dlink switch vlan name is null
+
 * issue#75: Command Line does not show output
 
 * issue#81: Add support for FontAwesome 5.0 under Cacti 1.2
 
-* issue#82: Device Type shows twice / % does not work with Vendor SNMP Object ID Match
+* issue#82: Device Type shows twice / % does not work with Vendor SNMP Object ID
+  Match
 
 * issue#87: Cant save settings on Cacti devices when MacTrack plugin is enabled
 
@@ -40,17 +46,21 @@
 
 * issue#105: Error when starting Mactrack scan
 
-* issue#107: MACTRACK ERROR: Can not start MAC Tracking process. There is already one in progress
+* issue#107: MACTRACK ERROR: Can not start MAC Tracking process. There is
+  already one in progress
 
 * issue#109: Column 'vlan_name' cannot be null
 
 * issue#110: Undefined offset for all vlans retrieved.
 
-* issue#111: String size overflow in file:cacti/plugins/mactrack/lib/mactrack_functions.php on line: 1774
+* issue#111: String size overflow in
+  file:cacti/plugins/mactrack/lib/mactrack_functions.php on line: 1774
 
-* issue#112: Mactrack user settings typo says max addresses instead of mac addresses.
+* issue#112: Mactrack user settings typo says max addresses instead of mac
+  addresses.
 
-* issue#114: Uncaught Error: Class 'Net_DNS2_Resolver' not found in mactrack_resolver.php
+* issue#114: Uncaught Error: Class 'Net_DNS2_Resolver' not found in
+  mactrack_resolver.php
 
 * issue#115: ERROR: 802.1x Address Scanning Function Does Not Exist.
 
@@ -59,17 +69,21 @@
 * issue#117: Juniper EX4200 issues with getJEX_switch_ports
 
 * issue#118: Undefined property: Net_DNS2_RR_CNAME::$ptrdname in file
+
 * issue#117: Juniper EX4200 issues with getJEX_switch_ports
 
 * issue#119: No values for Dot1x and browser hangs
 
-* issue#120: mactrack_import_ouidb.php has incorrect path to function definitions
+* issue#120: mactrack_import_ouidb.php has incorrect path to function
+  definitions
 
-* issue#128: Re-HUPping MacTrack Plugin post Maria upgrade getting the 'Error: Index column size too large. The maximum column size is 767 bytes.'
+* issue#128: Re-HUPping MacTrack Plugin post Maria upgrade getting the 'Error:
+  Index column size too large. The maximum column size is 767 bytes.'
 
 * issue#132: Changing device type sometimes create a duplicate entry
 
-* issue#137: CMDPHP ERROR: A DB Exec Failed!, Error: Duplicate entry '7' for key 'PRIMARY'
+* issue#137: CMDPHP ERROR: A DB Exec Failed!, Error: Duplicate entry '7' for key
+  'PRIMARY'
 
 * issue#143: mactrack_resolver.php variable vlan_id line 176
 
@@ -79,8 +93,11 @@
 
 * feature: Update Net_DNS2 to version 1.5
 
-* feature: Use local DNS to resolve when either the resolver fails or there are no DNS servers listed
+* feature: Use local DNS to resolve when either the resolver fails or there are
+  no DNS servers listed
+
 * feature: Update Net_DNS2 to version 1.5
+
 
 --- 4.2 ---
 
@@ -112,6 +129,7 @@
 
 * issue: Fix OUI Database import was removing existing records when failed.
 
+
 --- 4.1 ---
 
 * feature: Updates to facilitate i18n by contributors
@@ -119,6 +137,7 @@
 * issue#25: Unable to remove Site
 
 * issue#34: Ambiguous messages when running the MacTrack poller
+
 
 --- 4.0 ---
 
@@ -145,6 +164,7 @@
 
 * feature: Updated spanish translations
 
+
 --- 3.0 ---
 
 * bug#0001838: support partitioned tables mac_track_ports
@@ -169,6 +189,7 @@
 
 * feature: Support new Theme engine
 
+
 --- 2.9 ---
 
 * bug#0001799: Select all checkbox on Mac Addresses tab not working
@@ -185,11 +206,13 @@
 
 * bug: Saving an edited site redirects to blank page
 
+
 --- 2.8 ---
 
 * compat: Allow proper navigation text generation
 
 * bug: Guest user could not access site
+
 
 --- 2.7 ---
 
@@ -204,6 +227,7 @@
 * bug: Exporting Devices from the Console did not work
 
 * bug: Lastchange was not displaying correctly
+
 
 --- 2.6 ---
 
@@ -231,6 +255,7 @@
 
 * bug: When viewing IP's, device filter not operable
 
+
 --- 2.5 ---
 
 * bug#0001677: Undefined indexes
@@ -242,6 +267,7 @@
 * bug: Interfaces table not being created during upgrade
 
 * feature: Portname search filter courtesy KAA and gthe
+
 
 --- 2.4 ---
 
@@ -298,8 +324,8 @@
 * feature: optionally sync SNMP settings of mac_track_devices and cacti device,
   governed by a config setting (defaulting to "none") to allow either:
 
-  mactrack -> host (when scanning) or
-  host -> mactrack updates (when manually updating the host)
+  mactrack -> host (when scanning) or host -> mactrack updates (when manually
+  updating the host)
 
 * feature: allow for "connecting" existing mactrack devices to cacti devices
   (via hostname, new action for mactrack_devices.php)
@@ -311,9 +337,11 @@
 
 * feature: Add columns for AutoNegotiation - Implementation TBD
 
+
 --- 1.1 ---
 
 * First Official Release
+
 
 --- 0.1 ---
 
@@ -351,7 +379,8 @@ $ifIndex  = @$port_results[".".strval($mac_result)];
 
 in the `lib\mactrack_juniper.php` file.
 
-An extra dot was added to the keys of the port dictionary when it was made from the OID.
+An extra dot was added to the keys of the port dictionary when it was made from
+the OID.
 
 ### More bug fixing with Juniper switches
 
@@ -359,7 +388,8 @@ https://github.com/Cacti/plugin_mactrack/commit/f2deee43c1229e5bd3110e19e685153b
 
 Changes are available on the link above.
 
-#### Fixing bug: The MAC addresses had 7 groups instead of 6. They were too long.
+#### Fixing bug: The MAC addresses had 7 groups instead of 6. They were too
+#### long.
 
 Basically the start position of the substring was wrong.
 
@@ -381,19 +411,20 @@ was added to the code.
 
 #### Fixing: port names issue
 
-Changed Juniper port names, port numbers and port descriptions according to Cisco's equivalent of the same fields in the DB.
-Port number became Interface name (e.g. ge-0/0/0.0).
-Port name became Interface description.
-Port description was added to $ifInterfaces.
-Tested with EX-2200 switches.
+Changed Juniper port names, port numbers and port descriptions according to
+Cisco's equivalent of the same fields in the DB. Port number became Interface
+name (e.g. ge-0/0/0.0). Port name became Interface description. Port description
+was added to $ifInterfaces. Tested with EX-2200 switches.
 
-#### Interface description are now visible under the interfaces tab and port_name cannot be null.
+#### Interface description are now visible under the interfaces tab and
+#### port_name cannot be null.
 
 https://github.com/Cacti/plugin_mactrack/commit/bc5ba709134006488a80b4cf3beae782fd9fbd84
 
 ### Juniper port ignore
 
-https://github.com/Cacti/plugin_mactrack/commits/develop (it was not accepted by the official Cacti repository when the documentation was made.)
+https://github.com/Cacti/plugin_mactrack/commits/develop (it was not accepted by
+the official Cacti repository when the documentation was made.)
 
 Port ignore option was not implemented for Juniper switches.
 
@@ -407,7 +438,9 @@ Main debugging tool:
 
 -id=deviceid selects the device on which the scan will run
 
-The result of the scan will be saved to the **mac_track_temp_ports** table in mysql. It won't be merged into the **mac_track_ports** table which is used by Cacti to build the view macs webpage.
+The result of the scan will be saved to the **mac_track_temp_ports** table in
+mysql. It won't be merged into the **mac_track_ports** table which is used by
+Cacti to build the view macs webpage.
 
 ```bash
 php mactrack_scanner.php -d -id=10
@@ -427,12 +460,18 @@ php poller_mactrack.php -d -f
 
 ### Terminated mactrack process
 
-If the poller or the scanner was terminated you should clear the **mac_track_processes** table by hand.
+If the poller or the scanner was terminated you should clear the
+**mac_track_processes** table by hand.
 
 ### Clear mac addresses
 
-To clear the mac addresses from Cacti you should **TRUNCATE** the **mac_track_ports** table.
+To clear the mac addresses from Cacti you should **TRUNCATE** the
+**mac_track_ports** table.
 
 ### Duplicate device bug
 
-When editing a device from Cacti you should check **mac_track_devices** table. Sometimes it makes a duplicate entry. Simply delete the old one.
+When editing a device from Cacti you should check **mac_track_devices** table.
+Sometimes it makes a duplicate entry. Simply delete the old one.
+
+-----------------------------------------------
+Copyright (c) 2004-2023 - The Cacti Group, Inc.

@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2022 The Cacti Group                                 |
+ | Copyright (C) 2004-2023 The Cacti Group                                 |
  | Copyright (C) 2005 Mark Webster                                         |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |

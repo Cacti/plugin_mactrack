@@ -4,7 +4,7 @@
 
 ## Changes made in Mactrack plugin
 
-###       Fixing bug: mac addresses were not visible under MAC Addresses tab
+### Fixing bug: mac addresses were not visible under MAC Addresses tab
 
 https://github.com/Cacti/plugin_mactrack/commit/cc681b143cfdd43ec79a800009699308d5832407
 
@@ -34,7 +34,8 @@ $ifIndex  = @$port_results[".".strval($mac_result)];
 
 in the `lib\mactrack_juniper.php` file.
 
-An extra dot was added to the keys of the port dictionary when it was made from the OID.
+An extra dot was added to the keys of the port dictionary when it was made from
+the OID.
 
 ### More bug fixing with Juniper switches
 
@@ -42,9 +43,10 @@ https://github.com/Cacti/plugin_mactrack/commit/f2deee43c1229e5bd3110e19e685153b
 
 Changes are available on the link above.
 
-#### Fixing bug: The MAC addresses had 7 groups instead of 6. They were too long.
+#### Fixing bug: The MAC addresses had 7 groups instead of 6. They were too
+#### long.
 
-Basically the start position of the substring was wrong. 
+Basically the start position of the substring was wrong.
 
 #### Fixing Juniper trunk port counter
 
@@ -64,13 +66,13 @@ was added to the code.
 
 #### Fixing: port names issue
 
-Changed Juniper port names, port numbers and port descriptions according to Cisco's equivalent of the same fields in the DB.
-Port number became Interface name (e.g. ge-0/0/0.0).
-Port name became Interface description.
-Port description was added to $ifInterfaces.
-Tested with EX-2200 switches.
+Changed Juniper port names, port numbers and port descriptions according to
+Cisco's equivalent of the same fields in the DB. Port number became Interface
+name (e.g. ge-0/0/0.0). Port name became Interface description. Port description
+was added to $ifInterfaces. Tested with EX-2200 switches.
 
-#### Interface description are now visible under the interfaces tab and port_name cannot be null.
+#### Interface description are now visible under the interfaces tab and
+#### port_name cannot be null.
 
 https://github.com/Cacti/plugin_mactrack/commit/bc5ba709134006488a80b4cf3beae782fd9fbd84
 
@@ -90,7 +92,9 @@ Main debugging tool:
 
 -id=deviceid selects the device on which the scan will run
 
-The result of the scan will be saved to the **mac_track_temp_ports** table in mysql. It won't be merged into the **mac_track_ports** table which is used by Cacti to build the view macs webpage.
+The result of the scan will be saved to the **mac_track_temp_ports** table in
+mysql. It won't be merged into the **mac_track_ports** table which is used by
+Cacti to build the view macs webpage.
 
 ```bash
 php mactrack_scanner.php -d -id=10
@@ -110,15 +114,18 @@ php poller_mactrack.php -d -f
 
 ### Terminated mactrack process
 
-If the poller or the scanner was terminated you should clear the **mac_track_processes** table by hand.
+If the poller or the scanner was terminated you should clear the
+**mac_track_processes** table by hand.
 
 ### Clear mac addresses
 
-To clear the mac addresses from Cacti you should **TRUNCATE** the **mac_track_ports** table.
+To clear the mac addresses from Cacti you should **TRUNCATE** the
+**mac_track_ports** table.
 
 ### Duplicate device bug
 
-When editing a device from Cacti you should check **mac_track_devices** table. Sometimes it makes a duplicate entry. Simply delete the old one.
+When editing a device from Cacti you should check **mac_track_devices** table.
+Sometimes it makes a duplicate entry. Simply delete the old one.
 
-
-
+-----------------------------------------------
+Copyright (c) 2004-2023 - The Cacti Group, Inc.

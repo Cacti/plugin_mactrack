@@ -40,7 +40,8 @@ interface, Install and Enable the plugin.
 ## Documentation
 
 Some basic documentation and steps to follow as well as some troubleshooting
-tips you can find on the [MacTrack Wiki](https://github.com/Cacti/plugin_mactrack/wiki)!
+tips you can find on the [MacTrack
+Wiki](https://github.com/Cacti/plugin_mactrack/wiki)!
 
 ## Bugs and Feature Enhancements
 
@@ -57,8 +58,8 @@ issue in GitHub.
 
 * *Larry Adams (TheWitness)*
 
-  For supporting this monster on his free time even though he no longer works
-  in the network space.
+  For supporting this monster on his free time even though he no longer works in
+  the network space.
 
 * *Reinhard Scheck (gandalf)*
 
@@ -69,3 +70,5 @@ issue in GitHub.
 
   For just using Cacti.  Thanks for giving me a hobby to live for.
 
+-----------------------------------------------
+Copyright (c) 2004-2023 - The Cacti Group, Inc.
