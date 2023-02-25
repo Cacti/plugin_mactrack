@@ -2,6 +2,8 @@
 
 --- 4.5 ---
 
+* security: Fix potential security exposure with unserialize() function
+
 * issue#165: The file mactrack_actions.php will throw and error if an the $save
   array is discarded by another plugin
 
