@@ -957,7 +957,7 @@ function mactrack_find_host_graphs($device_id, $host_id) {
 		array($host_id, $field_name));
 
 	$output_array    = array();
-	if(cacti_sizeof($local_data_ids)) {
+	if (cacti_sizeof($local_data_ids)) {
 		foreach($local_data_ids as $local_data_id) {
 			$local_graph_ids = array_rekey(
 				db_fetch_assoc_prepared('SELECT DISTINCT gtg.local_graph_id AS id, gtg.graph_template_id
