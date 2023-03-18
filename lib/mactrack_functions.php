@@ -794,24 +794,18 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 			}
 		}
 
-
 		$int_ifInMulticastPkts  = get_link_int_value('ifInMulticastPkts', $ifIndex, $ifInMulticastPkts, $db_interface, $divisor, 'traffic');
-
 		$int_ifOutMulticastPkts = get_link_int_value('ifOutMulticastPkts', $ifIndex, $ifOutMulticastPkts, $db_interface, $divisor, 'traffic');
-
 		$int_ifInBroadcastPkts  = get_link_int_value('ifInBroadcastPkts', $ifIndex, $ifInBroadcastPkts, $db_interface, $divisor, 'traffic');
-
 		$int_ifOutBroadcastPkts = get_link_int_value('ifOutBroadcastPkts', $ifIndex, $ifOutBroadcastPkts, $db_interface, $divisor, 'traffic');
-
-		$int_ifInUcastPkts   = get_link_int_value('ifInUcastPkts', $ifIndex, $ifInUcastPkts, $db_interface, $divisor, 'traffic');
-
-		$int_ifOutUcastPkts  = get_link_int_value('ifOutUcastPkts', $ifIndex, $ifOutUcastPkts, $db_interface, $divisor, 'traffic');
+		$int_ifInUcastPkts      = get_link_int_value('ifInUcastPkts', $ifIndex, $ifInUcastPkts, $db_interface, $divisor, 'traffic');
+		$int_ifOutUcastPkts     = get_link_int_value('ifOutUcastPkts', $ifIndex, $ifOutUcastPkts, $db_interface, $divisor, 'traffic');
 
 		/* see if in error's have been increasing */
-		$int_ifInErrors      = get_link_int_value('ifInErrors', $ifIndex, $ifInErrors, $db_interface, $divisor, 'errors');
+		$int_ifInErrors         = get_link_int_value('ifInErrors', $ifIndex, $ifInErrors, $db_interface, $divisor, 'errors');
 
 		/* see if out error's have been increasing */
-		$int_ifOutErrors     = get_link_int_value('ifOutErrors', $ifIndex, $ifOutErrors, $db_interface, $divisor, 'errors');
+		$int_ifOutErrors        = get_link_int_value('ifOutErrors', $ifIndex, $ifOutErrors, $db_interface, $divisor, 'errors');
 
 		if ($int_ifInErrors > 0 || $int_ifOutErrors > 0) {
 			$int_errors_present = true;
@@ -841,17 +835,42 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 			$insert_vals .= ',';
 		}
 
+		if (isset($ifTypes[$ifIndex])) {
+			$type = $ifTypes[$ifIndex];
+		} else {
+			$type = 'Undefined';
+		}
+
+		if (isset($ifNames[$ifIndex])) {
+			$name = $ifNames[$ifIndex];
+		} else {
+			$name = 'Undefined';
+		}
+
+		if (isset($ifSpeed[$ifIndex])) {
+			$speed = $ifSpeed[$ifIndex];
+		} else {
+			$speed = 0;
+		}
+
+		if (isset($ifDescr[$ifIndex])) {
+			$desc = $ifDescr[$ifIndex];
+		} else {
+			$desc = '';
+		}
+
 		$mac_address = isset($ifPhysAddress[$ifIndex]) ? xform_mac_address($ifPhysAddress[$ifIndex]):'';
+
 		$insert_vals .= "('" .
-			@$device['site_id']                 . "', '" . @$device['device_id']         . "', '" .
-			@$device['snmp_sysUptime']          . "', '" . @$ifIndex                     . "', '" .
-			@$ifTypes[$ifIndex]                 . "', "  . @db_qstr(@$ifNames[$ifIndex]) . ", "  .
-			@db_qstr($ifAlias)                  . ", '"  . @$linkPort                    . "', '" .
-			@$vlan_id                           . "', "  . @db_qstr(@$vlan_name)         . ", '"  .
-			@$vlan_trunk                        . "', '" . @$ifSpeed[$ifIndex]           . "', '" .
+			$device['site_id']                  . "', '" . $device['device_id']          . "', '" .
+			$device['snmp_sysUptime']           . "', '" . $ifIndex                      . "', "  .
+			db_qstr($type)                      . ", "   . db_qstr($name)                . ", "   .
+			db_qstr($ifAlias)                   . ", '"  . $linkPort                     . "', '" .
+			$vlan_id                            . "', "  . db_qstr($vlan_name)           . ", '"  .
+			$vlan_trunk                         . "', '" . $speed                        . "', '" .
 			(isset($ifHighSpeed[$ifIndex]) ? $ifHighSpeed[$ifIndex] : '')                . "', '" .
 			(isset($ifDuplex[$ifIndex]) ? $ifDuplex[$ifIndex] : '')                      . "', " .
-			@db_qstr(@$ifDescr[$ifIndex])                                                . ", '"  .
+			db_qstr($desc)                                                               . ", '"  .
 			(isset($ifMtu[$ifIndex]) ? $ifMtu[$ifIndex] : '')             		         . "', '" .
 			$mac_address                                                                 . "', '" .
 			(isset($ifAdminStatus[$ifIndex]) ? $ifAdminStatus[$ifIndex] : '')    	     . "', '" .
@@ -885,6 +904,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 
 		$i++;
 	}
+
 	mactrack_debug('ifInterfaces assembly complete: ' . strlen($insert_prefix . $insert_vals . $insert_suffix));
 
 	if (strlen($insert_vals)) {
@@ -970,7 +990,7 @@ function mactrack_find_host_graphs($device_id, $host_id) {
 			$field_name, array('device_id', 'ifIndex')
 		);
 
-		if(cacti_sizeof($interfaces)) {
+		if (cacti_sizeof($interfaces)) {
 			foreach($interfaces as $key => $data) {
 				if (isset($output_array[$key])) {
 					foreach($output_array[$key] as $local_graph_id => $graph_details) {
@@ -1320,7 +1340,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} elseif (cacti_sizeof($new_port_key_array)) {
 			$device['last_runmessage'] = 'Data collection completed ok';
-			$device['macs_active'] = cacti_sizeof($new_port_key_array);
+			$device['macs_active']     = cacti_sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';
@@ -1535,7 +1555,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} elseif (cacti_sizeof($new_port_key_array)) {
 			$device['last_runmessage'] = 'Data collection completed ok';
-			$device['macs_active'] = cacti_sizeof($new_port_key_array);
+			$device['macs_active']     = cacti_sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';
@@ -1704,7 +1724,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} elseif (cacti_sizeof($new_port_key_array)) {
 			$device['last_runmessage'] = 'Data collection completed ok';
-			$device['macs_active'] = cacti_sizeof($new_port_key_array);
+			$device['macs_active']     = cacti_sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';

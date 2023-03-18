@@ -1,5 +1,9 @@
 ## ChangeLog
 
+--- develop ---
+
+* issue#183: Undefined array key in lib/mactrack_functions.php
+
 --- 4.5 ---
 
 * security: Fix potential security exposure with unserialize() function
