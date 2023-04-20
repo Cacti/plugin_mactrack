@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2020-12-12 22:16-0500\nPO-Revision-Date: 2021-01-18 18:17+0000\nLast-Translator: Luís Silva <luis.m.ribeiro.silva@tecnico.ulisboa.pt>\nLanguage-Team: Portuguese (Brazil) <http://translate.cacti.net/projects/cacti/mactrack/pt_BR/>\nLanguage: pt-BR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 4.3.2\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2020-12-12 22:16-0500\nPO-Revision-Date: 2023-04-20 18:52+0000\nLast-Translator: Ede Willians dos Santos Cavalcante <edewillians10@gmail.com>\nLanguage-Team: Portuguese (Brazil) <http://translate.cacti.net/projects/cacti/mactrack/pt_BR/>\nLanguage: pt-BR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 4.8.1\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -138,12 +138,12 @@ msgstr "Desde o reinício"
 #: lib/mactrack_functions.php:2640 mactrack_devices.php:1216
 #: mactrack_view_devices.php:512
 msgid "Down"
-msgstr "Baixo"
+msgstr "Down"
 
 #: lib/mactrack_functions.php:2640 mactrack_devices.php:1214
 #: mactrack_view_devices.php:510
 msgid "Up"
-msgstr "Acima"
+msgstr "Up"
 
 #: lib/mactrack_functions.php:2676
 msgid "Data"
@@ -1004,7 +1004,7 @@ msgstr "Tempo ativo:"
 
 #: mactrack_devices.php:898
 msgid "Hostname:"
-msgstr "Servidor:"
+msgstr "Hostname: "
 
 #: mactrack_devices.php:899
 #, fuzzy
