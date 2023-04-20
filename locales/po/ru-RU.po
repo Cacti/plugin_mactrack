@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2020-12-12 22:16-0500\nPO-Revision-Date: 2023-04-18 10:47+0000\nLast-Translator: Сергей <zersh@mail.ru>\nLanguage-Team: Russian <http://translate.cacti.net/projects/cacti/mactrack/ru/>\nLanguage: ru-RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 4.8.1\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2020-12-12 22:16-0500\nPO-Revision-Date: 2023-04-20 18:53+0000\nLast-Translator: Сергей <zersh@mail.ru>\nLanguage-Team: Russian <http://translate.cacti.net/projects/cacti/mactrack/ru/>\nLanguage: ru-RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 4.8.1\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:238
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -1038,9 +1038,8 @@ msgid "Hostname"
 msgstr "Имя хоста"
 
 #: mactrack_devices.php:1043
-#, fuzzy
 msgid "Total IPs"
-msgstr "Всего КН"
+msgstr "Всего IP"
 
 #: mactrack_devices.php:1048 mactrack_sites.php:437
 #: mactrack_view_devices.php:292 mactrack_view_sites.php:262
@@ -1269,9 +1268,8 @@ msgid "You must select at least one SNMP Option."
 msgstr "Вы должны выбрать хотя бы одну опцию SNMP."
 
 #: mactrack_snmp.php:215
-#, fuzzy
 msgid "Click 'Continue' to delete the following SNMP Option(s)."
-msgstr "Нажмите кнопку \"Продолжить\", чтобы удалить следующие опции SNMP."
+msgstr "Нажмите \"Продолжить\", чтобы удалить следующие опции SNMP."
 
 #: mactrack_snmp.php:222
 #, fuzzy
@@ -1294,7 +1292,6 @@ msgid "SNMP Options [edit %s]"
 msgstr "Параметры SNMP [Редактировать %s]"
 
 #: mactrack_snmp.php:300
-#, fuzzy
 msgid "SNMP Options [new]"
 msgstr "Параметры SNMP [новые]"
 
@@ -1304,9 +1301,8 @@ msgid "SNMP Option Set [edit: %s]"
 msgstr "Установить Параметры SNMP [Изменить: %s]"
 
 #: mactrack_snmp.php:369
-#, fuzzy
 msgid "SNMP Option Set [new]"
-msgstr "Опция SNMP Установить [new] (новый)"
+msgstr "Опция SNMP Установить [new]"
 
 #: mactrack_snmp.php:394 mactrack_snmp.php:486 setup.php:585
 #, fuzzy
@@ -1338,9 +1334,8 @@ msgid "Retries"
 msgstr "Попытки"
 
 #: mactrack_snmp.php:403
-#, fuzzy
 msgid "Max OIDs"
-msgstr "Максимальное количество идентификационных номеров"
+msgstr "Макс OIDS"
 
 #: mactrack_snmp.php:404 mactrack_view_dot1x.php:409
 #: mactrack_view_dot1x.php:423
@@ -1382,9 +1377,8 @@ msgid "SNMP Settings"
 msgstr "Настройки SNMP"
 
 #: mactrack_snmp.php:532
-#, fuzzy
 msgid "No SNMP Option Sets Found"
-msgstr "Нет наборов параметров SNMP Не найдено"
+msgstr "SNMP параметры не найдены"
 
 #: mactrack_snmp.php:562
 msgid "Options"
@@ -2792,9 +2786,9 @@ msgid "MacTrack"
 msgstr "MacTrack"
 
 #: setup.php:866 setup.php:867 setup.php:868 setup.php:869
-#, fuzzy, php-format
+#, php-format
 msgid "%d Seconds"
-msgstr "<ph id=\"mtc_1\" equiv-text=\"base64:JWQ=\"/> секунд"
+msgstr "%d секунд"
 
 #: setup.php:870
 #, php-format
@@ -2906,7 +2900,6 @@ msgid "Management"
 msgstr "Управление"
 
 #: setup.php:958 setup.php:1310 setup.php:1314
-#, fuzzy
 msgid "SNMP Options"
 msgstr "Параметры SNMP"
 
@@ -2950,7 +2943,6 @@ msgid "Choose the type of device."
 msgstr "Выберите тип устройства."
 
 #: setup.php:1012
-#, fuzzy
 msgid "System Description Match"
 msgstr "Соответствие описания системы"
 
@@ -3015,7 +3007,6 @@ msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assu
 msgstr "Как серийный номер, собранный для этого OID.  Если 'SNMP Walk', мы предполагаем несколько серийных номеров.  Если \"Получить\", то это будет только один..."
 
 #: setup.php:1065
-#, fuzzy
 msgid "SNMP Get"
 msgstr "SNMP Получить"
 
@@ -3040,9 +3031,8 @@ msgid "High User Port Number"
 msgstr "Высокий номер порта пользователя"
 
 #: setup.php:1104
-#, fuzzy
 msgid "Fill in the name of this SNMP option set."
-msgstr "Введите имя этого набора параметров SNMP."
+msgstr "Введите имя этого набора опций SNMP."
 
 #: setup.php:1116
 msgid "SNMP Version"
@@ -3319,7 +3309,6 @@ msgid "Sequence"
 msgstr "*Sequence* (секвенция)"
 
 #: setup.php:1398
-#, fuzzy
 msgid "Sequence of Item."
 msgstr "Последовательность пунктов."
 
