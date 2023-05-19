@@ -419,14 +419,14 @@ function get_h3c_3com_arp_table($site, &$device) {
 		foreach($atifIndexes as $key => $atifIndex) {
 			$tmpmac = xform_mac_address($mac_address[$key]);
 
-			$port = db_fetch_cell_prepared('SELECT port_name FROM mac_track_ports 
+			$port = db_fetch_cell_prepared('SELECT port_number FROM mac_track_ports 
 				WHERE mac_address=? ORDER BY scan_date DESC LIMIT 1', array($tmpmac));
 
 			if ($port) {
 				$atEntries[$i]['atifIndex'] = $port;
 			} else {
 				// here isn't port index but vlan interface name.
-				$atEntries[$i]['atifIndex'] = $ifDescr[$atifIndex];
+				$atEntries[$i]['atifIndex'] = $atifIndex;
 			}
 
 			$atEntries[$i]['atPhysAddress'] = $tmpmac;
