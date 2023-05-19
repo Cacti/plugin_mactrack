@@ -403,6 +403,8 @@ function mactrack_database_upgrade() {
 		db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
 
 		db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
+	if (strpos($columns['port_number'], 'varchar(20)') !== false) {
+		db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
 	} else {
 		db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN first_scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
 
@@ -731,7 +733,7 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'port_number', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'port_number', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true);
