@@ -3,6 +3,7 @@
 --- develop ---
 
 * issue#183: Undefined array key in lib/mactrack_functions.php
+* issue#184: add H3C/3Com modern switches/routers
 
 --- 4.5 ---
 
