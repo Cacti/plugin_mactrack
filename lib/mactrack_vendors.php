@@ -40,3 +40,4 @@ include_once(dirname(__FILE__) . '/mactrack_norbay.php');
 include_once(dirname(__FILE__) . '/mactrack_norbay_ng.php');
 include_once(dirname(__FILE__) . '/mactrack_tplink.php');
 include_once(dirname(__FILE__) . '/mactrack_trendnet.php');
+include_once(dirname(__FILE__) . '/mactrack_h3c_3com.php');
