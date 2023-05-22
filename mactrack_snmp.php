@@ -57,7 +57,7 @@ case 'item_moveup':
 case 'item_remove':
 	mactrack_snmp_item_remove();
 
-	header('Location: mactrack_snmp.php?header=false&action=edit&id=' . get_filter_request_var('id'));
+	header('Location: mactrack_snmp.php?header=true&action=edit&id=' . get_filter_request_var('id'));
 	break;
 case 'item_edit':
 	top_header();
@@ -77,6 +77,46 @@ default:
 	bottom_footer();
 
 	break;
+}
+
+function duplicate_mactrack($snmp_id, $new_name) {
+
+        $snmp_opt       = db_fetch_row_prepared('SELECT * FROM mac_track_snmp WHERE id = ?', array($snmp_id));
+        $snmp_opt_items = db_fetch_assoc_prepared('SELECT * FROM mac_track_snmp_items WHERE snmp_id = ?', array($snmp_id));
+
+        /* substitute the title variable */
+        $save['name'] = str_replace('<name>', $snmp_opt['name'], $new_name);
+
+        /* create new entry */
+        $save['id']   = 0;
+
+        $snmp_id = sql_save($save, 'mac_track_snmp');
+
+        /* create new entry(s): mac_track_snmp_items  */
+        if (cacti_sizeof($snmp_opt_items) > 0) {
+                foreach ($snmp_opt_items as $snmp_opt_item) {
+                        unset($save);
+
+                        $save['id']			= 0;
+                        $save['snmp_id']		= $snmp_id;
+                        $save['sequence']		= $snmp_opt_item['sequence'];
+                        $save['snmp_version']		= $snmp_opt_item['snmp_version'];
+                        $save['snmp_readstring']	= $snmp_opt_item['snmp_readstring'];
+                        $save['snmp_port']		= $snmp_opt_item['snmp_port'];
+                        $save['snmp_timeout']		= $snmp_opt_item['snmp_timeout'];
+                        $save['snmp_retries']		= $snmp_opt_item['snmp_retries'];
+                        $save['max_oids']		= $snmp_opt_item['max_oids'];
+                        $save['snmp_username']		= $snmp_opt_item['snmp_username'];
+                        $save['snmp_password']		= $snmp_opt_item['snmp_password'];
+                        $save['snmp_auth_protocol']	= $snmp_opt_item['snmp_auth_protocol'];
+                        $save['snmp_priv_passphrase']	= $snmp_opt_item['snmp_priv_passphrase'];
+                        $save['snmp_priv_protocol']	= $snmp_opt_item['snmp_priv_protocol'];
+                        $save['snmp_context']		= $snmp_opt_item['snmp_context'];
+                        $save['snmp_engine_id']		= $snmp_opt_item['snmp_engine_id'];
+
+                        sql_save($save, 'mac_track_snmp_items');
+                }
+        }
 }
 
 function form_mactrack_snmp_save() {
@@ -169,7 +209,7 @@ function form_mactrack_snmp_actions() {
 				}
 			}
 
-			header('Location: mactrack_snmp.php?header=false');
+			header('Location: mactrack_snmp.php?header=true');
 			exit;
 		}
 	}
@@ -305,6 +345,7 @@ function mactrack_snmp_item_edit() {
 	}
 
 	form_start(get_current_page(), 'mactrack_item_edit');
+
 
 	html_start_box($header_label, '100%', '', '3', 'center', '');
 
@@ -483,6 +524,8 @@ function mactrack_snmp() {
 		$rows = get_request_var('rows');
 	}
 
+	form_start('mactrack_snmp.php', 'mactrack');
+
 	html_start_box(__('Device Tracking SNMP Options', 'mactrack'), '100%', '', '3', 'center', 'mactrack_snmp.php?action=edit');
 	snmp_options_filter();
 	html_end_box();
@@ -517,11 +560,12 @@ function mactrack_snmp() {
 
 	print $nav;
 
-	html_start_box('', '100%', '', '3', 'center', '');
+	html_start_box('', '100%', '', '2', 'center', '');
 
-	html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
+	html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'),false);
 
 	if (cacti_sizeof($snmp_groups)) {
+
 		foreach ($snmp_groups as $snmp_group) {
 			form_alternate_row('line' . $snmp_group['id'], true);
 			form_selectable_cell(filter_value($snmp_group['name'], get_request_var('filter'), 'mactrack_snmp.php?action=edit&id=' . $snmp_group['id'] . '&page=1'), $snmp_group['id']);
