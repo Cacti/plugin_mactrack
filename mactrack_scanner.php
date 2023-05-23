@@ -106,6 +106,12 @@ if (cacti_sizeof($parms)) {
 	exit;
 }
 
+if (!$device_id) {
+	print "ERROR: missing id (host_id) parameter\n\n";
+	display_help();
+	exit;
+}
+
 /* place a process marker in the database */
 if (!$test_mode) {
 	db_process_add($device_id, true);
@@ -118,6 +124,13 @@ if (cacti_sizeof($device) == 0) {
 	db_process_remove($device_id);
 	exit;
 }
+
+if ($device['site_id'] != 0) {
+	$scan_date = date('Y-m-d H:i:s');
+} else {
+	$scan_date  = read_config_option('mt_scan_date');
+}
+
 
 /* get the site name */
 $site = db_fetch_cell_prepared('SELECT site_name FROM mac_track_sites WHERE site_id = ?', array($device['site_id']));
