@@ -1013,14 +1013,14 @@ function mactrack_config_form () {
 	'sysDescr_match' => array(
 		'method' => 'textbox',
 		'friendly_name' => __('System Description Match', 'mactrack'),
-		'description' => __('Provide key information to help Device Tracking detect the type of device.  The wildcard character is the \'&#37;\' sign.', 'mactrack'),
+		'description' => __('Provide key information to help Device Tracking detect the type of device.  The wildcard character is the \'&#42;\' sign.', 'mactrack'),
 		'value' => '|arg1:sysDescr_match|',
 		'max_length' => '250'
 		),
 	'sysObjectID_match' => array(
 		'method' => 'textbox',
 		'friendly_name' => __('Vendor SNMP Object ID Match', 'mactrack'),
-		'description' => __('Provide key information to help Device Tracking detect the type of device.  The wildcard character is the \'&#37;\' sign.', 'mactrack'),
+		'description' => __('Provide key information to help Device Tracking detect the type of device.  The wildcard character is the \'&#42;\' sign.', 'mactrack'),
 		'value' => '|arg1:sysObjectID_match|',
 		'max_length' => '250'
 		),

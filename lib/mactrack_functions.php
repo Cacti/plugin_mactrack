@@ -300,10 +300,12 @@ function find_scanning_function(&$device, &$device_types) {
 				$parts = explode('*', $device_type['sysDescr_match']);
 				if (cacti_sizeof($parts)) {
 					foreach($parts as $part) {
-						if (substr_count($device['sysDescr_match'],$part) > 0) {
-							$sysDescr_match = true;
-						} else {
-							$sysDescr_match = false;
+						if (strlen($part) > 0) {
+							if (substr_count($device['snmp_sysDescr'],$part) > 0) {
+								$sysDescr_match = true;
+							} else {
+								$sysDescr_match = false;
+							}
 						}
 					}
 				}
@@ -319,10 +321,19 @@ function find_scanning_function(&$device, &$device_types) {
 				}
 			}
 
-			/* search for a matching snmp_sysObjectID */
-			$len = strlen($device_type['sysObjectID_match']);
-			if (substr($device['snmp_sysObjectID'],0,$len) == $device_type['sysObjectID_match']) {
-				$sysObjectID_match = true;
+			/* search for a matching snmp_sysObjectID*/
+			/* need to assume mixed string */
+			$parts = explode('*', $device_type['sysObjectID_match']);
+			if (cacti_sizeof($parts)) {
+				foreach($parts as $part) {
+					if (strlen($part) > 0) {
+						if (substr_count($device['snmp_sysObjectID'],$part) > 0) {
+							$sysObjectID_match = true;
+						} else {
+							$sysObjectID_match = false;
+						}
+					}
+				}
 			}
 
 			if (($sysObjectID_match == true) && ($sysDescr_match == true)) {
