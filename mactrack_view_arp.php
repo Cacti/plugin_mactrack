@@ -94,6 +94,11 @@ function mactrack_view_ips_validate_request_vars() {
             'filter' => FILTER_CALLBACK,
             'default' => 'ASC',
             'options' => array('options' => 'sanitize_search_string')
+            ),
+        'scan_date' => array(
+            'filter' => FILTER_CALLBACK,
+            'default' => '2',
+            'options' => array('options' => 'sanitize_search_string')
             )
     );
 
@@ -223,6 +228,13 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = true, $rows) 
 		}
 	}
 
+	if ((get_request_var('scan_date') == '2')) {
+		$last = db_fetch_cell('SELECT MAX(scan_date) FROM mac_track_scan_dates');
+		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . " mti.scan_date = '" . $last . "'";
+	} elseif ((get_request_var('scan_date') != '1')) {
+		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mti.scan_date = ' . db_qstr(get_request_var('scan_date'));
+	}
+
 	$sql_order = get_order_string();
 	if ($apply_limits && $rows != 999999) {
 		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
@@ -243,7 +255,7 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = true, $rows) 
 		$sql_order
 		$sql_limit";
 
-	//echo $query_string;
+//	echo $query_string;
 
 	return db_fetch_assoc($query_string);
 }
@@ -273,9 +285,10 @@ function mactrack_view_ips() {
 	$port_results = mactrack_view_get_ip_records($sql_where, true, $rows);
 
 	/* prevent table scans, either a device or site must be selected */
+
 	if ($sql_where == '') {
 		$total_rows = 0;
-	} elseif (get_request_var('rows') == 1) {
+	} elseif (get_request_var('rows') == 1 || (get_request_var('scan_date') == 1)) {
 		$rows_query_string = "SELECT
 			COUNT(mti.device_id)
 			FROM mac_track_ips AS mti
@@ -342,6 +355,11 @@ function mactrack_view_ips() {
 			'display' => __('Port Name', 'mactrack'),
 			'align'   => 'right',
 			'sort'    => 'ASC'
+		),
+		'scan_date' => array(
+			'display' => __('Last Scan Date', 'mactrack'),
+			'align'   => 'right',
+			'sort'    => 'DESC'
 		)
 	);
 
@@ -361,6 +379,7 @@ function mactrack_view_ips() {
 	$delim = read_config_option('mt_mac_delim');
 	if (cacti_sizeof($port_results)) {
 		foreach ($port_results as $port_result) {
+
 			form_alternate_row('line' . $i, true);
 
 			form_selectable_cell($port_result['device_name'], $i);
@@ -375,6 +394,7 @@ function mactrack_view_ips() {
 			form_selectable_cell(filter_value($port_result['vendor_name'], get_request_var('filter')), $i);
 			form_selectable_cell($port_result['port_number'], $i, '', 'right');
 			form_selectable_cell($port_result['ifName'], $i, '', 'right');
+			form_selectable_cell($port_result['scan_date'], $i, '', 'right');
 
 			form_end_row();
 
@@ -494,6 +514,24 @@ function mactrack_ip_address_filter() {
 					<td>
 						<input type='text' id='ip_filter' size='25' value='<?php print html_escape_request_var('ip_filter');?>'>
 					</td>
+					<td>
+						<?php print __('Show', 'mactrack');?>
+					</td>
+					<td>
+						<select id='scan_date' onChange='applyFilter()'>
+							<option value='1'<?php if (get_request_var('scan_date') == '1') {?> selected<?php }?>><?php print __('All', 'mactrack');?></option>
+							<option value='2'<?php if (get_request_var('scan_date') == '2') {?> selected<?php }?>><?php print __('Most Recent', 'mactrack');?></option>
+							<?php
+
+							$scan_dates = db_fetch_assoc('SELECT scan_date FROM mac_track_scan_dates ORDER BY scan_date DESC');
+							if (cacti_sizeof($scan_dates)) {
+								foreach ($scan_dates as $scan_date) {
+									print '<option value="' . $scan_date['scan_date'] . '"'; if (get_request_var('scan_date') == $scan_date['scan_date']) { print ' selected'; } print '>' . $scan_date['scan_date'] . '</option>';
+								}
+							}
+							?>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<td>
@@ -526,6 +564,7 @@ function mactrack_ip_address_filter() {
 				strURL += '&filter=' + $('#filter').val();
 				strURL += '&ip_filter_type_id=' + $('#ip_filter_type_id').val();
 				strURL += '&ip_filter=' + $('#ip_filter').val();
+				strURL += '&scan_date=' + $('#scan_date').val();
 
 				loadPageNoHeader(strURL);
 			}

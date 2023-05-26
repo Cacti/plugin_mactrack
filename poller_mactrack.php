@@ -894,7 +894,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 		/* purge the ip address and temp port table */
 		db_execute('TRUNCATE TABLE mac_track_temp_ports');
 
-		db_execute_prepared('DELETE FROM mac_track_ips WHERE scan_date < ?', array($scan_date));
+		db_execute_prepared('DELETE FROM mac_track_ips WHERE scan_date < NOW() - interval ? DAY', array(read_config_option('mt_data_retention_ip')));
 
 		db_execute('OPTIMIZE TABLE mac_track_ips');
 		db_execute('TRUNCATE TABLE mac_track_scan_dates');

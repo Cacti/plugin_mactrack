@@ -297,7 +297,14 @@ function mactrack_config_settings() {
 			'friendly_name' => __('Data Retention', 'mactrack'),
 			'description' => __('How long should port MAC details be retained in the database.', 'mactrack'),
 			'method' => 'drop_array',
-			'default' => '2weeks',
+			'default' => '14',
+			'array' => $mactrack_data_retention,
+			),
+		'mt_data_retention_ip' => array(
+			'friendly_name' => __('Data Retention IPs', 'mactrack'),
+			'description' => __('How long should discovered IPs details be retained in the database.', 'mactrack'),
+			'method' => 'drop_array',
+			'default' => '3',
 			'array' => $mactrack_data_retention,
 			),
 		'mt_ignorePorts_delim' => array(
