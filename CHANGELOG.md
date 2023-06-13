@@ -5,6 +5,7 @@
 * issue#183: Undefined array key in lib/mactrack_functions.php
 * issue#184: add H3C/3Com modern switches/routers
 * issue#189: Add IP addresses retention
+* issue:190: Add HPE/Aruba OSCX switches 
 
 --- 4.5 ---
 
