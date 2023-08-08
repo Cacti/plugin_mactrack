@@ -1092,6 +1092,13 @@ function mactrack_config_form () {
 		'max_length' => '100',
 		'size' => '10'
 		),
+	'disabled' => array(
+		'method' => 'checkbox',
+		'friendly_name' => __('Disabled', 'mactrack'),
+		'description' => __('Disabled device type is not used.', 'mactrack'),
+		'value' => '|arg1:disabled|',
+		'default' => ''
+		),
 	'device_type_id' => array(
 		'method' => 'hidden_zero',
 		'value' => '|arg1:device_type_id|'

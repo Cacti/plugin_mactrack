@@ -2,9 +2,12 @@
 
 --- develop ---
 
+--- 4.6 ---
+
 * issue#183: Undefined array key in lib/mactrack_functions.php
 * issue#184: add H3C/3Com modern switches/routers
 * issue#189: Add IP addresses retention
+* feature: Prepared device types
 
 --- 4.5 ---
 

@@ -126,7 +126,8 @@ function form_save() {
 			get_nfilter_request_var('sysObjectID_match'), get_nfilter_request_var('scanning_function'),
 			get_nfilter_request_var('ip_scanning_function'), get_nfilter_request_var('dot1x_scanning_function'),
 			get_nfilter_request_var('serial_number_oid'), get_nfilter_request_var('lowPort'),
-			get_nfilter_request_var('highPort'));
+			get_nfilter_request_var('highPort'),
+			(isset_request_var('disabled') ? get_nfilter_request_var('disabled') : ''));
 
 		if ($device_type_id) {
 			raise_message(1);
@@ -162,7 +163,7 @@ function api_mactrack_device_type_remove($device_type_id){
 
 function api_mactrack_device_type_save($device_type_id, $description,
 	$vendor, $device_type, $sysDescr_match, $sysObjectID_match, $scanning_function,
-	$ip_scanning_function, $dot1x_scanning_function, $serial_number_oid, $lowPort, $highPort) {
+	$ip_scanning_function, $dot1x_scanning_function, $serial_number_oid, $lowPort, $highPort, $disabled) {
 
 	$save['device_type_id']          = $device_type_id;
 	$save['description']             = form_input_validate($description, 'description', '', false, 3);
@@ -176,6 +177,7 @@ function api_mactrack_device_type_save($device_type_id, $description,
 	$save['dot1x_scanning_function'] = form_input_validate($dot1x_scanning_function, 'dot1x_scanning_function', '', true, 3);
 	$save['lowPort']                 = form_input_validate($lowPort, 'lowPort', '', true, 3);
 	$save['highPort']                = form_input_validate($highPort, 'highPort', '', true, 3);
+	$save['disabled']                = $disabled ? 'on' : '';
 
 	$device_type_id = 0;
 	if (!is_error_message()) {
@@ -216,6 +218,7 @@ function api_mactrack_duplicate_device_type($device_type_id, $dup_id, $device_ty
 		$save['dot1x_scanning_function'] = $device_type['dot1x_scanning_function'];
 		$save['lowPort'] = $device_type['lowPort'];
 		$save['highPort'] = $device_type['highPort'];
+		$save['disabled'] = $device_type['disabled'];
 
 		$device_type_id = sql_save($save, 'mac_track_device_types', array('device_type_id'));
 	}
@@ -380,7 +383,7 @@ function mactrack_device_type_export() {
 	$xport_array = array();
 	array_push($xport_array, '"vendor","description","device_type",' .
 		'"sysDescr_match","sysObjectID_match","scanning_function","ip_scanning_function",' .
-		'"dot1x_scanning_function","serial_number_oid","lowPort","highPort"');
+		'"dot1x_scanning_function","serial_number_oid","lowPort","highPort","disabled"');
 
 	if (cacti_sizeof($device_types)) {
 		foreach ($device_types as $device_type) {
@@ -394,7 +397,8 @@ function mactrack_device_type_export() {
 			$device_type['dot1x_scanning_function'] . '","' .
 			$device_type['serial_number_oid'] . '","' .
 			$device_type['lowPort'] . '","' .
-			$device_type['highPort'] . '"');
+			$device_type['highPort'] . '","' .
+			$device_type['disabled'] . '"');
 		}
 	}
 
@@ -531,6 +535,7 @@ function mactrack_device_type_import() {
 			<strong>serial_number_oid</strong><?php print __(' - If the Serial Number for this device type can be obtained via an SNMP Query, add it\'s OID here', 'mactrack');?><br>
 			<strong>lowPort</strong><?php print __(' - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports', 'mactrack');?><br>
 			<strong>highPort</strong><?php print __(' - Same as the lowPort with the exception that this is the high numbered user port number', 'mactrack');?><br>
+			<strong>disabled</strong><?php print __(' - Disabled type is not user', 'mactrack');?><br>
 			<br>
 			<strong><?php print __('The primary key for this table is a combination of the following three fields:', 'mactrack');?></strong>
 			<br><br>
@@ -939,7 +944,8 @@ function mactrack_device_type() {
 		'ip_scanning_function'    => array(__('IP Scanner', 'mactrack'), 'ASC'),
 		'dot1x_scanning_function' => array(__('Dot1x Scanner', 'mactrack'), 'ASC'),
 		'sysDescr_match'          => array(__('sysDescription Match', 'mactrack'), 'DESC'),
-		'sysObjectID_match'       => array(__('Vendor OID Match', 'mactrack'), 'DESC')
+		'sysObjectID_match'       => array(__('Vendor OID Match', 'mactrack'), 'DESC'),
+		'disabled'                => array(__('Disabled', 'mactrack'), 'DESC')
 	);
 
 	$columns = cacti_sizeof($display_text) + 1;
@@ -982,6 +988,7 @@ function mactrack_device_type() {
 
 			form_selectable_cell($device_type['sysDescr_match'], $device_type['device_type_id']);
 			form_selectable_cell($device_type['sysObjectID_match'], $device_type['device_type_id']);
+			form_selectable_cell($device_type['disabled'], $device_type['device_type_id']);
 			form_checkbox_cell($device_type['description'], $device_type['device_type_id']);
 			form_end_row();
 		}
