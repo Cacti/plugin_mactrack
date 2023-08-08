@@ -141,7 +141,7 @@ if (strlen($site) == 0) {
 }
 
 /* get device types */
-$device_types = db_fetch_assoc('SELECT * FROM mac_track_device_types');
+$device_types = db_fetch_assoc("SELECT * FROM mac_track_device_types where disabled !='on'");
 if (cacti_sizeof($device_types) == 0) {
 	mactrack_debug('ERROR: No device types have been found.');
 	db_process_remove($device_id);

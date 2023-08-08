@@ -466,6 +466,39 @@ function mactrack_database_upgrade() {
 			}
 		}
 	}
+
+	# new for 4.6
+	mactrack_add_column('mac_track_device_types',
+	'disabled',
+	"ALTER TABLE `mac_track_device_types` ADD COLUMN `disabled` varchar(2) default '' AFTER `highPort`");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Comware 5130','H3C','2','','.1.3.6.1.4.1.25506.11.1.18*','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Aruba 6300','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.109','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Aruba 6200','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.300','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Comware 1920','HPE','2','','.1.3.6.1.4.1.25506.11.1.164','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Comware 5140','HPE','2','','.1.3.6.1.4.1.25506.11.1.297','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Aruba 2530 8p','HPE','2','','.1.3.6.1.4.1.11.2.3.7.11.141','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Aruba 2930 8p','Aruba','2','','.1.3.6.1.4.1.11.2.3.7.11.181.16','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
 }
 
 function mactrack_setup_database() {
@@ -529,6 +562,7 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'serial_number_oid', 'type' => 'varchar(100)', 'NULL' => true);
 	$data['columns'][] = array('name' => 'lowPort', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'highPort', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
+	$data['columns'][] = array('name' => 'disabled', 'type' => 'varchar(2)', 'NULL' => false, 'default' => '');
 	$data['primary'] = 'device_type_id';
 	$data['unique_keys'] = array('name' => 'snmp_info', 'columns' => 'sysDescr_match`,`sysObjectID_match`,`device_type');
 	$data['keys'][] = array('name' => 'device_type', 'columns' => 'device_type');
@@ -952,5 +986,35 @@ function mactrack_setup_database() {
 	$data['type'] = 'InnoDB';
 	$data['comment'] = 'Table for VRF ARP translation';
 	api_plugin_db_table_create('mactrack', 'mac_track_arp', $data);
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Comware 5130','H3C','2','','.1.3.6.1.4.1.25506.11.1.18*','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Aruba 6300','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.109','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Aruba 6200','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.300','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Comware 1920','HPE','2','','.1.3.6.1.4.1.25506.11.1.164','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Comware 5140','HPE','2','','.1.3.6.1.4.1.25506.11.1.297','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Aruba 2530 8p','HPE','2','','.1.3.6.1.4.1.11.2.3.7.11.141','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Aruba 2930 8p','Aruba','2','','.1.3.6.1.4.1.11.2.3.7.11.181.16','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
+
+
 }
 
