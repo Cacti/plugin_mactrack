@@ -878,13 +878,44 @@ function mactrack_device_edit() {
 					/* force php to return numeric oid's */
 					cacti_oid_numeric_format();
 
-					$snmp_system = cacti_snmp_get($device['hostname'], $device['snmp_readstring'], '.1.3.6.1.2.1.1.1.0', $device['snmp_version'], $device['snmp_username'], $device['snmp_password'], $device['snmp_auth_protocol'], $device['snmp_priv_passphrase'], $device['snmp_priv_protocol'], $device['snmp_context'], $device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'], SNMP_WEBUI);
+					$old_device = $device;
 
-					if ($snmp_system == '') {
+// tady
+ 					if (!valid_snmp_device($device)) {
+//					if ($snmp_system == '') {
 						print "<span style='color: #ff0000; font-weight: bold;'>SNMP error</span>\n";
 					} else {
-						$snmp_uptime = cacti_snmp_get($device['hostname'], $device['snmp_readstring'], '.1.3.6.1.2.1.1.3.0', $device['snmp_version'], $device['snmp_username'], $device['snmp_password'], $device['snmp_auth_protocol'], $device['snmp_priv_passphrase'], $device['snmp_priv_protocol'], $device['snmp_context'], $device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'], SNMP_WEBUI);
+						// snmp readstring is incorrect but mactrack found correct values in any snmp set
+						if ($device['snmp_readstring'] != $old_device['snmp_readstring'] ||
+							$device['snmp_version'] != $old_device['snmp_version'] ||
+							$device['snmp_username'] != $old_device['snmp_username'] ||
+							$device['snmp_password'] != $old_device['snmp_password'] ||
+							$device['snmp_auth_protocol'] != $old_device['snmp_auth_protocol'] ||
+							$device['snmp_priv_passphrase'] != $old_device['snmp_priv_passphrase'] ||
+							$device['snmp_priv_protocol'] != $old_device['snmp_priv_protocol'] ||
+							$device['snmp_context'] != $old_device['snmp_context'] ||
+							$device['snmp_port'] != $old_device['snmp_port'] ||
+							$device['snmp_timeout'] != $old_device['snmp_timeout'] ||
+							$device['snmp_retries'] != $old_device['snmp_retries']
+							) {
+							
+							db_execute_prepared('UPDATE mac_track_devices
+								SET device_type_id = ?, scan_type = ?, snmp_version = ?,
+								snmp_readstring = ?, snmp_port = ?, snmp_timeout = ?, snmp_retries = ?,
+								max_oids = ?, snmp_username = ?, snmp_password = ?, snmp_auth_protocol = ?,
+								snmp_priv_passphrase = ?, snmp_priv_protocol = ?, snmp_context = ?,
+								WHERE device_id = ?',
+								array(
+									$device['device_type_id'], $device ['scan_type'], $device['snmp_version'],
+									$device['snmp_readstring'], $device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'],
+									$device['max_oids'],  $device['snmp_username'], $device['snmp_password'], $device['snmp_auth_protocol'],
+									$device['snmp_priv_passphrase'], $device['snmp_priv_protocol'],  $device['snmp_context'],
+									$device['device_id']
+								));
+						}
 
+						$snmp_system = cacti_snmp_get($device['hostname'], $device['snmp_readstring'], '.1.3.6.1.2.1.1.1.0', $device['snmp_version'], $device['snmp_username'], $device['snmp_password'], $device['snmp_auth_protocol'], $device['snmp_priv_passphrase'], $device['snmp_priv_protocol'], $device['snmp_context'], $device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'], SNMP_WEBUI);
+						$snmp_uptime = cacti_snmp_get($device['hostname'], $device['snmp_readstring'], '.1.3.6.1.2.1.1.3.0', $device['snmp_version'], $device['snmp_username'], $device['snmp_password'], $device['snmp_auth_protocol'], $device['snmp_priv_passphrase'], $device['snmp_priv_protocol'], $device['snmp_context'], $device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'], SNMP_WEBUI);
 						$snmp_hostname = cacti_snmp_get($device['hostname'], $device['snmp_readstring'], '.1.3.6.1.2.1.1.5.0', $device['snmp_version'], $device['snmp_username'], $device['snmp_password'], $device['snmp_auth_protocol'], $device['snmp_priv_passphrase'], $device['snmp_priv_protocol'], $device['snmp_context'], $device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'], SNMP_WEBUI);
 
 						$snmp_objid = cacti_snmp_get($device['hostname'], $device['snmp_readstring'], '.1.3.6.1.2.1.1.2.0', $device['snmp_version'], $device['snmp_username'], $device['snmp_password'], $device['snmp_auth_protocol'], $device['snmp_priv_passphrase'], $device['snmp_priv_protocol'], $device['snmp_context'], $device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries'], SNMP_WEBUI);
