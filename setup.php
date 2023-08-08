@@ -1329,7 +1329,7 @@ function mactrack_config_form () {
 	'snmp_options' => array(
 		'method' => 'drop_sql',
 		'friendly_name' => __('SNMP Options', 'mactrack'),
-		'description' => __('Select a set of SNMP options to try.', 'mactrack'),
+		'description' => __('You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set', 'mactrack'),
 		'value' => '|arg1:snmp_options|',
 		'none_value' => __('None', 'mactrack'),
 		'sql' => 'select * from mac_track_snmp order by name'
