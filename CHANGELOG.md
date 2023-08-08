@@ -8,6 +8,7 @@
 * issue#184: add H3C/3Com modern switches/routers
 * issue#189: Add IP addresses retention
 * issue:190: Add HPE/Aruba OSCX switches 
+* issue:192: Improve working with SNMP sets 
 * feature: Prepared device types
 
 --- 4.5 ---
