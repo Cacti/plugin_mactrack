@@ -4,6 +4,7 @@
 
 --- 4.6 ---
 
+* issue#148: Bad value of mactrack/Devices/UserPortsUP
 * issue#156: mactrack/lib/mactrack_functions.php :error Undefined offset:
 * issue#162: Port no and Port name not showing in Mac Address Tab
 * issue#178: MACTRACK 4.5 on CACTI 1.2.23 doesn't send mail (SMTP send mail verified, ok) 
