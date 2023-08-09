@@ -3166,6 +3166,10 @@ function mactrack_mail($to, $fromemail, $fromname, $subject, $message, $headers 
 	$from[0]['email'] = $fromemail;
 	$from[0]['name']  = $fromname;
 
+	if (strpos(';', $to)) {
+		$to = explode(';', $to);
+	}
+
 	mailer($from, $to, '', '', '', $subject, $message, '', '', $headers);
 }
 

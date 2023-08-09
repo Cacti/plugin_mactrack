@@ -4,6 +4,7 @@
 
 --- 4.6 ---
 
+* issue#178: MACTRACK 4.5 on CACTI 1.2.23 doesn't send mail (SMTP send mail verified, ok) 
 * issue#183: Undefined array key in lib/mactrack_functions.php
 * issue#184: add H3C/3Com modern switches/routers
 * issue#189: Add IP addresses retention
