@@ -344,6 +344,11 @@ function mactrack_device_type_request_validation() {
 			'default' => '-1',
 			'pageset' => true
 			),
+		'enabled' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '-1',
+			'pageset' => true
+			),
 		'vendor' => array(
 			'filter' => FILTER_CALLBACK,
 			'pageset' => true,
@@ -535,7 +540,7 @@ function mactrack_device_type_import() {
 			<strong>serial_number_oid</strong><?php print __(' - If the Serial Number for this device type can be obtained via an SNMP Query, add it\'s OID here', 'mactrack');?><br>
 			<strong>lowPort</strong><?php print __(' - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports', 'mactrack');?><br>
 			<strong>highPort</strong><?php print __(' - Same as the lowPort with the exception that this is the high numbered user port number', 'mactrack');?><br>
-			<strong>disabled</strong><?php print __(' - Disabled type is not user', 'mactrack');?><br>
+			<strong>disabled</strong><?php print __(' - Disabled type is not used', 'mactrack');?><br>
 			<br>
 			<strong><?php print __('The primary key for this table is a combination of the following three fields:', 'mactrack');?></strong>
 			<br><br>
@@ -893,6 +898,12 @@ function mactrack_get_device_types(&$sql_where, $rows, $apply_limits = true) {
 		$sql_where .= (strlen($sql_where) ? ' AND ': ' WHERE ') . "(mtdt.device_type=" . get_request_var('type_id') . ")";
 	}
 
+	if (get_request_var('enabled') == '-1') {
+		/* Show all items */
+	} else {
+		$sql_where .= (strlen($sql_where) ? ' AND ': ' WHERE ') . "(mtdt.disabled=" . (get_request_var('enabled') == 1 ? "''" : "'on'") . ")";
+	}
+
 	$sql_order = get_order_string();
 	if ($apply_limits) {
 		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
@@ -988,7 +999,7 @@ function mactrack_device_type() {
 
 			form_selectable_cell($device_type['sysDescr_match'], $device_type['device_type_id']);
 			form_selectable_cell($device_type['sysObjectID_match'], $device_type['device_type_id']);
-			form_selectable_cell($device_type['disabled'], $device_type['device_type_id']);
+			form_selectable_cell($device_type['disabled'] != '' ? __('Yes'):__('No'), $device_type['device_type_id']);
 			form_checkbox_cell($device_type['description'], $device_type['device_type_id']);
 			form_end_row();
 		}
@@ -1081,6 +1092,17 @@ function mactrack_device_type_filter() {
 							<option value='3'<?php if (get_request_var('type_id') == '3') print ' selected';?>><?php print __('Router', 'mactrack');?></option>
 						</select>
 					</td>
+					<td>
+						<?php print __('Enabled', 'mactrack');?>
+					</td>
+					<td>
+						<select id='enabled' onChange='applyFilter()'>
+							<option value='-1'<?php if (get_request_var('enabled') == '-1') print ' selected';?>><?php print __('All', 'mactrack');?></option>
+							<option value='1'<?php if (get_request_var('enabled') == '1') print ' selected';?>><?php print __('Yes', 'mactrack');?></option>
+							<option value='2'<?php if (get_request_var('enabled') == '2') print ' selected';?>><?php print __('No', 'mactrack');?></option>							
+						</select>
+					</td>
+
 				</tr>
 			</table>
 			<script type='text/javascript'>
@@ -1088,6 +1110,7 @@ function mactrack_device_type_filter() {
 				strURL  = urlPath+'plugins/mactrack/mactrack_device_types.php?header=false';
 				strURL += '&vendor=' + $('#vendor').val();
 				strURL += '&type_id=' + $('#type_id').val();
+				strURL += '&enabled=' + $('#enabled').val();
 				strURL += '&filter=' + $('#filter').val();
 				strURL += '&rows=' + $('#rows').val();
 				loadPageNoHeader(strURL);
