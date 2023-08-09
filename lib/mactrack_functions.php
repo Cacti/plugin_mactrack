@@ -870,6 +870,10 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 			$desc = '';
 		}
 
+		if (isset($ifLastChange[$ifIndex]) && strpos($ifLastChange[$ifIndex], ':') !== false) {
+			$ifLastChange[$ifIndex] = mactrack_timetics_to_seconds($ifLastChange[$ifIndex]);
+		}
+
 		$mac_address = isset($ifPhysAddress[$ifIndex]) ? xform_mac_address($ifPhysAddress[$ifIndex]):'';
 
 		$insert_vals .= "('" .
@@ -944,6 +948,24 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 	}
 
 	return $ifInterfaces;
+}
+
+function mactrack_timetics_to_seconds($timetics) {
+	$time  = 0;
+	$parts = explode(':', $timetics);
+
+	if (cacti_sizeof($parts) == 4) {
+		$time += $parts[0] * 86400;
+		$time += $parts[1] * 3600;
+		$time += $parts[2] * 60;
+		$time += round($parts[3], 0);
+	} elseif (cacti_sizeof($parts) == 3) {
+		$time += $parts[0] * 3600;
+		$time += $parts[1] * 60;
+		$time += round($parts[2],0);
+	}
+
+	return $time;
 }
 
 function mactrack_find_host_graphs($device_id, $host_id) {
@@ -3165,6 +3187,10 @@ function mactrack_mail($to, $fromemail, $fromname, $subject, $message, $headers 
 
 	$from[0]['email'] = $fromemail;
 	$from[0]['name']  = $fromname;
+
+	if (strpos($to, ';') !== false) {
+		$to = explode(';', $to);
+	}
 
 	mailer($from, $to, '', '', '', $subject, $message, '', '', $headers);
 }

@@ -4,10 +4,16 @@
 
 --- 4.6 ---
 
+* issue#148: Bad value of mactrack/Devices/UserPortsUP
+* issue#156: mactrack/lib/mactrack_functions.php :error Undefined offset:
+* issue#162: Port no and Port name not showing in Mac Address Tab
+* issue#178: MACTRACK 4.5 on CACTI 1.2.23 doesn't send mail (SMTP send mail verified, ok) 
+* issue#181: Interface ifLastChange unable to handle results returned in timetics
 * issue#183: Undefined array key in lib/mactrack_functions.php
 * issue#184: add H3C/3Com modern switches/routers
 * issue#189: Add IP addresses retention
 * issue:190: Add HPE/Aruba OSCX switches 
+* issue:192: Improve working with SNMP sets 
 * feature: Prepared device types
 
 --- 4.5 ---
