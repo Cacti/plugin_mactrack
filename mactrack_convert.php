@@ -122,7 +122,7 @@ function mactrack_create_partitioned_table($engine = 'InnoDB', $days = 30, $migr
 		`vendor_mac` varchar(8) default NULL,
 		`ip_address` varchar(20) NOT NULL default '',
 		`dns_hostname` varchar(200) default '',
-		`port_number` varchar(10) NOT NULL default '',
+		`port_number` varchar(30) NOT NULL default '',
 		`port_name` varchar(50) NOT NULL default '',
 		`scan_date` datetime NOT NULL default '0000-00-00 00:00:00',
 		`authorized` tinyint(3) unsigned NOT NULL default '0',
