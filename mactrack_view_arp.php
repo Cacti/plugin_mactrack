@@ -382,7 +382,7 @@ function mactrack_view_ips() {
 
 			form_alternate_row('line' . $i, true);
 
-			form_selectable_cell($port_result['device_name'], $i);
+			form_selectable_cell($port_result['device_name'], $i, '1%');
 			form_selectable_cell($port_result['hostname'], $i);
 			form_selectable_cell(filter_value($port_result['ip_address'], get_request_var('filter')), $i);
 
