@@ -115,7 +115,7 @@ if ($collect_frequency == 'disabled') {
 	exit(1);
 } else {
 	/* for manual scans, verify if we should run or not */
-	$running_processes = db_fetch_cell('SELECT count(*) FROM mac_track_processes');
+	$running_processes = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes');
 
 	if ($running_processes) {
 		$start_date = db_fetch_cell('SELECT MIN(start_date) FROM mac_track_processes');
@@ -397,12 +397,12 @@ function collect_mactrack_data($start, $site_id = 0) {
 		$device_ids = db_fetch_assoc_prepared('SELECT device_id
 			FROM mac_track_devices
 			WHERE site_id = ?
-			AND disabled=""',
+			AND disabled = ""',
 			array($site_id));
 	} else {
 		$device_ids = db_fetch_assoc("SELECT device_id
 			FROM mac_track_devices
-			WHERE disabled=''
+			WHERE disabled = ''
 			ORDER BY site_id");
 	}
 
@@ -425,7 +425,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 	/* add the parent process to the process list */
 	db_process_add('-1');
 
-	if ($total_devices > 0) {
+	if ($total_devices) {
 		/* grab arpwatch data */
 		if (read_config_option('mt_arpwatch') == 'on') {
 			$arp_db     = read_config_option('mt_arpwatch_path');
@@ -472,9 +472,12 @@ function collect_mactrack_data($start, $site_id = 0) {
 		$i = 0;
 		$last_time = strtotime('now');
 		$processes_available = $concurrent_processes;
+
 		while ($j < $total_devices) {
-			/* retreive the number of concurrent mac_track processes to run */
-			/* default to 10 for now */
+			/**
+			 * retreive the number of concurrent mac_track processes to run
+			 * default to 10 for now
+			 */
 			$concurrent_processes = db_fetch_cell("SELECT value FROM settings WHERE name='mt_processes'");
 
 			for ($i = 0; $i < $processes_available; $i++) {
@@ -484,6 +487,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 				mactrack_debug('CMD: ' . $command_string . $extra_args);
 				exec_background($command_string, $extra_args);
 			}
+
 			$j = $j + $i;
 
 			/* launch the dns resolver if it hasn't been yet */
@@ -496,10 +500,14 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 			mactrack_debug('A process cycle launch just completed.');
 
-			/* wait the correct number of seconds for proccesses prior to
-			   attempting to update records */
+			/**
+			 * wait the correct number of seconds for proccesses prior to
+			 * attempting to update records
+			 */
 			sleep(2);
+
 			$current_time = strtotime('now');
+
 			if (($current_time - $last_time) > read_config_option('mt_dns_prime_interval')) {
 				/* resolve some ip's to mac addresses to let the resolver knock them out */
 				db_execute_prepared('UPDATE mac_track_temp_ports
@@ -517,7 +525,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 				$last_time = $current_time;
 			}
 
-			$processes_running = db_fetch_cell('SELECT count(*) FROM mac_track_processes');
+			$processes_running = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes');
 
 			if ($dns_resolver_required) {
 				$processes_available = $concurrent_processes - $processes_running + 1;
@@ -541,18 +549,24 @@ function collect_mactrack_data($start, $site_id = 0) {
 		}
 
 		/* wait for last process to exit */
-		$processes_running = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes WHERE device_id > 0');
-		while (($processes_running > 0) && (!$exit_mactrack)) {
-			$processes_running = db_fetch_cell('SELECT count(*)
+		$processes_running = db_fetch_cell('SELECT COUNT(*)
+			FROM mac_track_processes
+			WHERE device_id > 0');
+
+		while ($processes_running > 0 && !$exit_mactrack) {
+			$processes_running = db_fetch_cell('SELECT COUNT(*)
 				FROM mac_track_processes
 				WHERE device_id > 0');
 
-			$devices_running = db_fetch_cell("SELECT group_concat(CAST(`device_id` as CHAR) SEPARATOR ', ') as t
+			$devices_running = db_fetch_cell("SELECT GROUP_CONCAT(CAST(`device_id` as CHAR) SEPARATOR ', ')
 				FROM mac_track_processes");
 
-			/* wait the correct number of seconds for proccesses prior to
-			   attempting to update records */
+			/**
+			 * wait the correct number of seconds for proccesses prior to
+			 * attempting to update records
+			 */
 			sleep(2);
+
 			$current_time = strtotime('now');
 
 			if (($current_time - $last_time) > read_config_option('mt_dns_prime_interval')) {
@@ -592,48 +606,91 @@ function collect_mactrack_data($start, $site_id = 0) {
 			if (cacti_sizeof($ports)) {
 				foreach($ports as $port) {
 					if (isset($mac_ip_dns[$port['mac_address']])) {
-						db_execute("UPDATE mac_track_temp_ports
-							SET updated=1, ip_address='" . $mac_ip_dns[$port['mac_address']]['ip'] . "'" .
-							($mac_ip_dns[$port['mac_address']]['dns'] != '' ? ", dns_hostname='" . $mac_ip_dns[$port['mac_address']]['dns'] . "'" : '') . '
-							WHERE site_id=' . $port['site_id'] . '
-							AND device_id=' . $port['device_id'] . "
-							AND mac_address='" . $port['mac_address'] . "'");
+						if ($mac_ip_dns[$port['mac_address']]['dns'] != '') {
+							db_execute_prepared('UPDATE mac_track_temp_ports
+								SET updated = 1, ip_address = ?, dns_hostname = ?
+								WHERE site_id = ?
+								AND device_id = ?
+								AND mac_address = ?',
+								array(
+									$mac_ip_dns[$port['mac_address']]['ip'],
+									$mac_ip_dns[$port['mac_address']]['dns'],
+									$port['site_id'],
+									$port['device_id'],
+									$port['mac_address']
+								)
+							);
+						} else {
+							db_execute_prepared('UPDATE mac_track_temp_ports
+								SET updated = 1, ip_address = ?
+								WHERE site_id = ?
+								AND device_id = ?
+								AND mac_address = ?',
+								array(
+									$mac_ip_dns[$port['mac_address']]['ip'],
+									$port['site_id'],
+									$port['device_id'],
+									$port['mac_address']
+								)
+							);
+						}
 					}
 				}
 			}
 		}
 
 		/* check the arp table for entries */
-		$ports = db_fetch_assoc('SELECT site_id,device_id,mac_address,ip_address
+		$ports = db_fetch_assoc('SELECT site_id, device_id, mac_address, ip_address
 			FROM mac_track_temp_ports
 			WHERE updated = 0');
+
 		if (cacti_sizeof($ports)) {
 			foreach($ports as $port) {
-				$macs = db_fetch_row("SELECT mac_address,ip_address
+				$macs = db_fetch_row_prepared('SELECT mac_address,ip_address
 					FROM mac_track_arp
-					WHERE mac_address = '" . $port['mac_address'] . "'");
+					WHERE mac_address = ?',
+					array($port['mac_address']));
+
 				if (isset($macs['ip_address'])) {
-					db_execute("UPDATE mac_track_temp_ports
-						SET updated=1, ip_address='" . $macs['ip_address'] . "'
-						WHERE site_id='" . $port['site_id'] . "'
-						AND device_id='" . $port['device_id'] . "'
-						AND mac_address='" . $port['mac_address'] . "'");
+					db_execute_prepared('UPDATE mac_track_temp_ports
+						SET updated=1, ip_address = ?
+						WHERE site_id = ?
+						AND device_id = ?
+						AND mac_address = ?',
+						array($macs['ip_address'], $port['site_id'], $port['device_id'] . $port['mac_address']));
 				}
 			}
 		}
 
-
 		/* resolve some ip's to mac addresses to let the resolver knock them out */
 		db_execute_prepared('UPDATE mac_track_temp_ports
 			INNER JOIN mac_track_ips
-			ON mac_track_temp_ports.mac_address=mac_track_ips.mac_address
-			AND mac_track_temp_ports.site_id=mac_track_ips.site_id
-			SET mac_track_temp_ports.ip_address=mac_track_ips.ip_address
-			WHERE mac_track_temp_ports.updated=0
+			ON mac_track_temp_ports.mac_address = mac_track_ips.mac_address
+			AND mac_track_temp_ports.site_id = mac_track_ips.site_id
+			SET mac_track_temp_ports.ip_address = mac_track_ips.ip_address
+			WHERE mac_track_temp_ports.updated = 0
 			AND mac_track_ips.scan_date = ?',
 			array($scan_date));
 
 		mactrack_debug('Interum IP addresses to MAC addresses association pass complete.');
+
+		/* report out some debugging information */
+		if ($debug) {
+			$site_data = db_fetch_assoc("SELECT site_id, SUBSTRING_INDEX(ip_address, '.', 2) AS subnet_range
+				FROM mac_track_temp_ports
+				GROUP BY site_id, subnet_range");
+
+			if (cacti_sizeof($site_data)) {
+				foreach($site_data as $record) {
+					mactrack_debug(sprintf('Site %s has ip range %s', $record['site_id'], $record['subnet_range']));
+				}
+			}
+
+			$errors_tp  = db_fetch_cell('SELECT COUNT(*) FROM mac_track_temp_ports WHERE mac_address like "% %"');
+			$errors_arp = db_fetch_cell('SELECT COUNT(*) FROM mac_track_ips WHERE mac_address like "% %"');
+			mactrack_debug("The Temp Ports table had $errors_tp mac tracks with spaces");
+			mactrack_debug("The IP Address table had $errors_arp mac tracks with spaces");
+		}
 
 		/* populate the vendor_macs for this pass */
 		db_execute('UPDATE mac_track_temp_ports
@@ -654,8 +711,10 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 		mactrack_debug('MAC VLANs in VLAN Table Updated.');
 
-		/* let the resolver know that the parent process is finished and then wait
-		   for the resolver if applicable */
+		/**
+		 * let the resolver know that the parent process is finished and then wait
+		 * for the resolver if applicable
+		 */
 		db_process_remove('-1');
 
 		while (!$exit_mactrack) {
@@ -742,24 +801,24 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 		/* update the max values if required */
 		db_execute('UPDATE `mac_track_ip_ranges`
-			SET ips_max=ips_current, ips_max_date=ips_current_date
+			SET ips_max = ips_current, ips_max_date = ips_current_date
 			WHERE ips_current > ips_max');
 
 		/* collect statistics */
 		if ($site_id == 0) {
 			$stats = db_fetch_assoc('SELECT site_id,
-				count(device_id) as total_devices,
-				sum(ports_active) as total_oper_ports,
-				sum(macs_active) as total_macs,
-				sum(ports_total) as total_user_ports
+				COUNT(device_id) AS total_devices,
+				SUM(ports_active) AS total_oper_ports,
+				SUM(macs_active) AS total_macs,
+				SUM(ports_total) AS total_user_ports
 				FROM mac_track_devices
 				GROUP BY site_id');
 		} else {
 			$stats = db_fetch_assoc_prepared('SELECT site_id,
-				count(device_id) as total_devices,
-				sum(ports_active) as total_oper_ports,
-				sum(macs_active) as total_macs,
-				sum(ports_total) as total_user_ports
+				COUNT(device_id) AS total_devices,
+				SUM(ports_active) AS total_oper_ports,
+				SUM(macs_active) AS total_macs,
+				SUM(ports_total) AS total_user_ports
 				FROM mac_track_devices
 				WHERE site_id = ?
 				GROUP BY site_id',
@@ -767,12 +826,12 @@ function collect_mactrack_data($start, $site_id = 0) {
 		}
 
 		/* collect total device errors */
-		$errors = db_fetch_assoc('SELECT site_id, snmp_status, count(device_id) as total_device_errors
+		$errors = db_fetch_assoc('SELECT site_id, snmp_status, COUNT(device_id) AS total_device_errors
 			FROM mac_track_devices
 			GROUP BY site_id, snmp_status');
 
 		$ips = array_rekey(
-			db_fetch_assoc_prepared('SELECT site_id, count(ip_address) as total_ips
+			db_fetch_assoc_prepared('SELECT site_id, COUNT(ip_address) AS total_ips
 				FROM mac_track_ips
 				WHERE scan_date = ?
 				GROUP BY site_id',
@@ -859,7 +918,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 					/* update the the correct information */
 					db_execute_prepared('UPDATE mac_track_macwatch
-						SET discovered=1, date_last_seen=NOW()' .
+						SET discovered = 1, date_last_seen=NOW()' .
 						(strtotime($record['date_first_seen']) == 0 ? ', date_first_seen=NOW()':'') . '
 						WHERE mac_address = ?',
 						array($record['mac_address']));
@@ -881,6 +940,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 		/* process aggregated data */
 		db_execute('UPDATE mac_track_aggregated_ports SET active_last=0');
+
 		db_execute('INSERT INTO mac_track_aggregated_ports
 			(site_id, device_id, hostname, device_name,
 			vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
@@ -889,19 +949,20 @@ function collect_mactrack_data($start, $site_id = 0) {
 			vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
 			port_number, port_name, scan_date, scan_date, 1, 1, authorized
 			FROM mac_track_temp_ports
-			ON DUPLICATE KEY UPDATE count_rec=count_rec+1, active_last=1, date_last=mac_track_temp_ports.scan_date');
+			ON DUPLICATE KEY UPDATE count_rec=count_rec + 1, active_last = 1, date_last = mac_track_temp_ports.scan_date');
 
 		/* purge the ip address and temp port table */
 		db_execute('TRUNCATE TABLE mac_track_temp_ports');
 
-		db_execute_prepared('DELETE FROM mac_track_ips WHERE scan_date < NOW() - interval ? DAY', array(read_config_option('mt_data_retention_ip')));
+		db_execute_prepared('DELETE FROM mac_track_ips
+			WHERE scan_date < NOW() - interval ? DAY',
+			array(read_config_option('mt_data_retention_ip')));
 
 		db_execute('OPTIMIZE TABLE mac_track_ips');
 		db_execute('TRUNCATE TABLE mac_track_scan_dates');
 		db_execute('REPLACE INTO mac_track_scan_dates (SELECT DISTINCT scan_date from mac_track_ports)');
 
 		api_plugin_hook_function('mac_track_finish_scan');
-
 	} else {
 		cacti_log('NOTE: MACTRACK has no devices to process at this time', false, 'MACTRACK');
 	}
@@ -912,23 +973,23 @@ function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_tim
 		$ports = db_fetch_assoc('SELECT mac_track_temp_ports.*, mac_track_sites.site_name
 			FROM mac_track_temp_ports
 			LEFT JOIN mac_track_sites
-			ON mac_track_sites.site_id=mac_track_temp_ports.site_id
-			WHERE authorized=0');
+			ON mac_track_sites.site_id = mac_track_temp_ports.site_id
+			WHERE authorized = 0');
 	} else {
 		$ports = db_fetch_assoc('SELECT mac_track_ports.*, mac_track_sites.site_name
 			FROM mac_track_ports
 			LEFT JOIN mac_track_sites
-			ON mac_track_sites.site_id=mac_track_temp_ports.site_id
-			WHERE authorized=0');
+			ON mac_track_sites.site_id = mac_track_temp_ports.site_id
+			WHERE authorized = 0');
 	}
 
 	if (cacti_sizeof($ports)) {
 		foreach($ports as $port) {
 			/* create the report */
 		}
-
-		/* email the report */
 	} else {
+		/* email the report */
+
 		if ($mac_auth_frequency > 0) {
 			/* send out an empty report */
 		}
