@@ -310,7 +310,7 @@ function mactrack_view_sites() {
 				$actions .= "<a class='pic' href='" . htmlspecialchars($webroot . 'mactrack_view_interfaces.php?report=interfaces&reset&site=' . $site['site_id']) . "' title='" . __esc('View Interfaces', 'mactrack') . "'><i class='mtInterfaces fas fa-ethernet'></i></a>";
 
 				form_alternate_row('row_' . $site['site_id'], true);
-				form_selectable_cell($actions, 'row_' . $site['site_id'], '', 'nowrap');
+				form_selectable_cell($actions, 'row_' . $site['site_id'], '1%', 'nowrap');
 				form_selectable_cell(filter_value($site['site_name'], get_request_var('filter')), 'row_' . $site['site_id'], '', 'hyperLink');
 				form_selectable_cell(number_format_i18n($site['total_devices']), 'row_' . $site['site_id'], '', 'right');
 				form_selectable_cell(number_format_i18n($site['total_ips']), 'row_' . $site['site_id'], '', 'right');

@@ -262,7 +262,7 @@ function mactrack_view_ip_ranges() {
 				'&site_id=' . $ip_range['site_id']) . '" title="' . __esc('View IP Addresses', 'mactrack') . '"><i class="mtPorts fas fa-desktop"></i></a>';
 
 			form_alternate_row('line' . $i, true);
-			form_selectable_cell($url, $i);
+			form_selectable_cell($url, $i, '1%');
 			form_selectable_cell($ip_range['site_name'], $i);
 			form_selectable_cell($ip_range['ip_range'] . '.*', $i);
 			form_selectable_cell(number_format_i18n($ip_range['ips_current']), $i, '', 'right');

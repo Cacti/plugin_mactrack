@@ -377,7 +377,7 @@ function mactrack_view_devices() {
 
 			form_alternate_row('line' . $device['device_id']);
 
-			form_selectable_cell($actions, $device['device_id']);
+			form_selectable_cell($actions, $device['device_id'], '1%');
 			form_selectable_cell(filter_value($device['device_name'], get_request_var('filter')), $device['device_id'], '', 'hyperLink');
 			form_selectable_cell(filter_value($device['site_name'], get_request_var('filter')), $device['device_id']);
 			form_selectable_cell(get_colored_device_status(($device['disabled'] == 'on' ? true : false), $device['snmp_status']), $device['device_id'], '', 'center');
