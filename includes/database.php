@@ -474,31 +474,171 @@ function mactrack_database_upgrade() {
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Comware 5130','H3C','2','','.1.3.6.1.4.1.25506.11.1.18*','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
+		VALUES ('Comware 5130-default','H3C','2','','.1.3.6.1.4.1.25506.11.1.18*','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Aruba 6300','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.109','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
+		VALUES ('Aruba 6300-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.109','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Aruba 6200','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.300','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
+		VALUES ('Aruba 6200-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.300','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Comware 1920','HPE','2','','.1.3.6.1.4.1.25506.11.1.164','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
+		VALUES ('Comware 1920-default','HPE','2','','.1.3.6.1.4.1.25506.11.1.164','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Comware 5140','HPE','2','','.1.3.6.1.4.1.25506.11.1.297','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
+		VALUES ('Comware 5140-default','HPE','2','','.1.3.6.1.4.1.25506.11.1.297','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Aruba 2530 8p','HPE','2','','.1.3.6.1.4.1.11.2.3.7.11.141','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
+		VALUES ('Aruba 2530 8p-default','HPE','2','','.1.3.6.1.4.1.11.2.3.7.11.141','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Aruba 2930 8p','Aruba','2','','.1.3.6.1.4.1.11.2.3.7.11.181.16','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
+		VALUES ('Aruba 2930 8p-default','Aruba','2','','.1.3.6.1.4.1.11.2.3.7.11.181.16','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C2600 Router-default','Cisco','3','*C2600*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C2960S Switch-default','Cisco','2','*C2960S*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C3550 Switch-default','Cisco','2','*C3550*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C3750 Switch-default','Cisco','2','*C3750*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('45xx Switch-default','Cisco','2','*cat4000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('45xx Switch-default','Cisco','2','*4500*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C2900 Router-default','Cisco','3','*C2900*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('ASR Router-default','Cisco','3','*ASR1000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('6513 Switch/Router-default','Cisco','2','*s72033_rp*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('CE500 Switch-default','Cisco','1','*CE500*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C2950 Switch-default','Cisco','2','*C2950*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C2800 Router-default','Cisco','3','*C2800*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('BladeCenter2 10G-default','Cisco','2','*CBS31X0*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('DellBladeCenter-default','Dell','2','*Ethernet Switch*','','get_dell_dot1q_switch_ports','get_CTAlias_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('VG224-default','Cisco','3','*vg224*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C870 Router-default','Cisco','3','*C870*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Cisco ASA-default','Cisco','3','*Adaptive Security Appliance*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C3x50 Switch-default','Cisco','2','*CAT3K*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C3900 Router-default','Cisco','3','*C3900*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Blade Center 10/100-default','Cisco','2','*CIGESM-I6K2L2Q4-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('CAT4500-default','Cisco','2','*cat4500*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C3560 Switch-default','Cisco','2','*C3560*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('ProCurve Switch-default','HP','2','*ProCurve Switch*','','get_procurve_ngi_switch_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('CAT3K_CAA-UNIVERSALK9-M-default','Cisco','2','*CAT3K_CAA-UNIVERSALK9-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('IBM Flex System Fabric-default','IBM','2','*IBM Flex System Fabric*','','get_generic_dot1q_switch_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C2960X Switch-default','Cisco','2','*C2960X*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('2960 Switch Lite-default','Cisco','2','*C2960-LANLITEK9-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('2960 Switch Base-default','Cisco','2','*C2960-LANBASEK9-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('VG3X0-default','Cisco','3','*VG3X0*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('93xx + 94xx Switch-default','Cisco','2','*CAT9K_IOSXE*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('43xx Router-default','Cisco','3','*ISR Software*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Nexus Generic-default','Cisco','2','*nxos*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Nexus 7K-default','Cisco','2','*n7000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','.1.3.6.1.4.1.9.12.3.1.3.932',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Nexus 5K-default','Cisco','2','*n5000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('92xx Switch-default','Cisco','1','*CAT9K_LITE_IOSXE*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 }
 
 function mactrack_setup_database() {
@@ -989,32 +1129,170 @@ function mactrack_setup_database() {
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Comware 5130','H3C','2','','.1.3.6.1.4.1.25506.11.1.18*','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
+		VALUES ('Comware 5130-default','H3C','2','','.1.3.6.1.4.1.25506.11.1.18*','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Aruba 6300','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.109','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
+		VALUES ('Aruba 6300-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.109','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Aruba 6200','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.300','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
+		VALUES ('Aruba 6200-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.300','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Comware 1920','HPE','2','','.1.3.6.1.4.1.25506.11.1.164','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
+		VALUES ('Comware 1920-default','HPE','2','','.1.3.6.1.4.1.25506.11.1.164','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Comware 5140','HPE','2','','.1.3.6.1.4.1.25506.11.1.297','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
+		VALUES ('Comware 5140-default','HPE','2','','.1.3.6.1.4.1.25506.11.1.297','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Aruba 2530 8p','HPE','2','','.1.3.6.1.4.1.11.2.3.7.11.141','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
+		VALUES ('Aruba 2530 8p-default','HPE','2','','.1.3.6.1.4.1.11.2.3.7.11.141','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-		VALUES ('Aruba 2930 8p','Aruba','2','','.1.3.6.1.4.1.11.2.3.7.11.181.16','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
+		VALUES ('Aruba 2930 8p-default','Aruba','2','','.1.3.6.1.4.1.11.2.3.7.11.181.16','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
 
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C2600 Router-default','Cisco','3','*C2600*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C2960S Switch-default','Cisco','2','*C2960S*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C3550 Switch-default','Cisco','2','*C3550*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C3750 Switch-default','Cisco','2','*C3750*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('45xx Switch-default','Cisco','2','*cat4000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('45xx Switch-default','Cisco','2','*4500*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C2900 Router-default','Cisco','3','*C2900*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('ASR Router-default','Cisco','3','*ASR1000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('6513 Switch/Router-default','Cisco','2','*s72033_rp*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('CE500 Switch-default','Cisco','1','*CE500*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C2950 Switch-default','Cisco','2','*C2950*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C2800 Router-default','Cisco','3','*C2800*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('BladeCenter2 10G-default','Cisco','2','*CBS31X0*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('DellBladeCenter-default','Dell','2','*Ethernet Switch*','','get_dell_dot1q_switch_ports','get_CTAlias_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('VG224-default','Cisco','3','*vg224*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C870 Router-default','Cisco','3','*C870*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Cisco ASA-default','Cisco','3','*Adaptive Security Appliance*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C3x50 Switch-default','Cisco','2','*CAT3K*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C3900 Router-default','Cisco','3','*C3900*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Blade Center 10/100-default','Cisco','2','*CIGESM-I6K2L2Q4-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('CAT4500-default','Cisco','2','*cat4500*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C3560 Switch-default','Cisco','2','*C3560*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('ProCurve Switch-default','HP','2','*ProCurve Switch*','','get_procurve_ngi_switch_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('CAT3K_CAA-UNIVERSALK9-M-default','Cisco','2','*CAT3K_CAA-UNIVERSALK9-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('IBM Flex System Fabric-default','IBM','2','*IBM Flex System Fabric*','','get_generic_dot1q_switch_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('C2960X Switch-default','Cisco','2','*C2960X*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('2960 Switch Lite-default','Cisco','2','*C2960-LANLITEK9-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('2960 Switch Base-default','Cisco','2','*C2960-LANBASEK9-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('VG3X0-default','Cisco','3','*VG3X0*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('93xx + 94xx Switch-default','Cisco','2','*CAT9K_IOSXE*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('43xx Router-default','Cisco','3','*ISR Software*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Nexus Generic-default','Cisco','2','*nxos*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Nexus 7K-default','Cisco','2','*n7000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','.1.3.6.1.4.1.9.12.3.1.3.932',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('Nexus 5K-default','Cisco','2','*n5000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+
+	db_execute("INSERT INTO mac_track_device_types
+		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
+		VALUES ('92xx Switch-default','Cisco','1','*CAT9K_LITE_IOSXE*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 }
 
