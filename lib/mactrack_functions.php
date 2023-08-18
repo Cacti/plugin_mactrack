@@ -323,15 +323,27 @@ function find_scanning_function(&$device, &$device_types) {
 
 			/* search for a matching snmp_sysObjectID*/
 			/* need to assume mixed string */
-			$parts = explode('*', $device_type['sysObjectID_match']);
-			if (cacti_sizeof($parts)) {
-				foreach($parts as $part) {
-					if (strlen($part) > 0) {
-						if (substr_count($device['snmp_sysObjectID'],$part) > 0) {
-							$sysObjectID_match = true;
-						} else {
-							$sysObjectID_match = false;
+			if (substr_count($device_type['sysObjectID_match'], '*') > 0) {
+				$parts = explode('*', $device_type['sysObjectID_match']);
+				if (cacti_sizeof($parts)) {
+					foreach($parts as $part) {
+						if (strlen($part) > 0) {
+							if (substr_count($device['snmp_sysObjectID'],$part) > 0) {
+								$sysObjectID_match = true;
+							} else {
+								$sysObjectID_match = false;
+							}
 						}
+					}
+				}
+			} else {
+				if (strlen($device_type['sysObjectID_match']) == 0) {
+					$sysObjectID_match = true;
+				} else {
+					if (substr_count($device['snmp_sysObjectID'], $device_type['sysObjectID_match'])) {
+						$sysObjectID_match = true;
+					} else {
+						$sysObjectID_match = false;
 					}
 				}
 			}
