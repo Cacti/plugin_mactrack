@@ -14,7 +14,9 @@
 * issue#189: Add IP addresses retention
 * issue:190: Add HPE/Aruba OSCX switches 
 * issue:192: Improve working with SNMP sets 
+* issue:195: Fix incorrectly recognizing device types 
 * feature: Prepared device types
+* feature#197: Add more default device types
 
 --- 4.5 ---
 
