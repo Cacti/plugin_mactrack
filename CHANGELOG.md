@@ -16,6 +16,7 @@
 * issue:192: Improve working with SNMP sets 
 * issue:195: Fix incorrectly recognizing device types 
 * issue:199: Fix authorize/revoke macs 
+* issue:200: Add process control to dns resolver 
 * feature: Prepared device types
 * feature#197: Add more default device types
 
