@@ -97,6 +97,14 @@ if (read_config_option('mt_reverse_dns') == 'on') {
 	exit;
 }
 
+/* silently end if the registered process is still running  */
+if (!register_process_start('mactrack_resolver', 'master', 0, 86400)) {
+	print "FATAL: Detected an already running process." . PHP_EOL;
+	exit(0);
+}
+
+
+
 /* place a process marker in the database for the ip resolver */
 db_process_add(0, true);
 
@@ -226,6 +234,9 @@ while (1) {
 		break;
 	}
 }
+
+unregister_process('mactrack_resolver', 'master');
+
 
 /* allow parent to close by removing process and then exit */
 db_process_remove(0);
