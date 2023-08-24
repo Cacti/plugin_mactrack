@@ -88,13 +88,19 @@ function form_actions() {
 
 	/* if we are to save this form, instead of display it */
 	if (isset_request_var('selected_items')) {
-		$selected_items = sanitize_unserialize_selected_items(get_request_var('selected_items'));
+
+		$selected_items = unserialize(get_nfilter_request_var('selected_items'));
+
+		foreach ($selected_items as $key=>$value) {
+			if (!filter_var($value, FILTER_VALIDATE_MAC)) {
+				unset($selected_items[$key]);
+			}
+		}
 
 		if (cacti_sizeof($selected_items)) {
 			if (get_request_var('drp_action') == '1') { /* Authorize */
 				if (cacti_sizeof($selected_items)) {
 					foreach($selected_items as $mac) {
-						$mac = sanitize_search_string($mac);
 						api_mactrack_authorize_mac_addresses($mac);
 					}
 				}
@@ -102,7 +108,6 @@ function form_actions() {
 				$errors = '';
 				if (cacti_sizeof($selected_items)) {
 					foreach($selected_items as $mac) {
-						$mac = sanitize_search_string($mac);
 						$mac_found = db_fetch_cell_prepared('SELECT mac_address FROM mac_track_macauth WHERE mac_address = ?', array($mac));
 
 						if ($mac_found) {
