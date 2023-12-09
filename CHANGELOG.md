@@ -309,7 +309,7 @@
 
 * bug: fix syntax of cacti_snmp_* calls
 
-* feature: 0001638: Allow Interface Data to Be "Scaned" on Demand from the WebUI
+* feature: 0001638: Allow Interface Data to Be "Scanned" on Demand from the WebUI
   Similar to Scanner
 
 * feature: 0001637: Enable Site Level Scanning Through the UI and Using Ajax

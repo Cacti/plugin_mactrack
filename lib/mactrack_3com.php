@@ -91,7 +91,7 @@ function complete_3com_ifName(&$device, &$ifIndexes) {
 }
 
 /* get_3Com_dot1dTpFdbEntry_ports
-   same as get_dot1dTpFdbEntry_ports whith small modification for 3com devices
+   same as get_dot1dTpFdbEntry_ports with small modification for 3com devices
 */
 function get_3Com_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
@@ -140,7 +140,7 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 	/* get the operational status of the ports */
 	$active_ports_array = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.8', $device);
 	$indexes = array_keys($active_ports_array);
-	/* get the consol port */
+	/* get the console port */
 	$link_ports = get_link_port_status($device);
 
 	$i = 0;
@@ -191,7 +191,7 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 				}
 			}
 		}
-		/* compare the user ports to the brige port data, store additional
+		/* compare the user ports to the bridge port data, store additional
 		   relevant data about the port.
 		*/
 		$i = 0;
@@ -200,7 +200,7 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 			if ($port_key['port_number'] > 0) {
 				if (cacti_sizeof($bridgePortIfIndexes) != 0) {
 					/* some hubs do not always return a port number in the bridge table.
-					   test for it by isset and substiture the port number from the ifTable
+					   test for it by isset and substitute the port number from the ifTable
 					   if it isnt in the bridge table
 					*/
 					if (isset($bridgePortIfIndexes[$port_key['port_number']])) {

@@ -1,7 +1,7 @@
 # mactrack
 
 The MacTrack plugin is designed to scan network switches, routers and
-intellegent hubs for connected devices, and record their location either based
+intelligent hubs for connected devices, and record their location either based
 upon the portname or alias of the switch or hub.  It also attempts to discover
 the ip address of the mac address from the routers included in the MacTrack
 database.  MacTrack can also use arpwatch to gether IP to MAC address
@@ -29,7 +29,7 @@ utilization is, where there are errors, etc within their network.
 
 ## Prerequisites
 
-The MacTrack on GitHub requires Cacti 1.2.14 as a minumum.
+The MacTrack on GitHub requires Cacti 1.2.14 as a minimum.
 
 ## Installation
 
@@ -60,7 +60,7 @@ issue in GitHub.
 
 * *Jimmy Conner (cigamit)*
 
-  For bringing the plugin architecture to the world of Cacti and provding
+  For bringing the plugin architecture to the world of Cacti and providing
   continual support of my development efforts.
 
 * *Larry Adams (TheWitness)*

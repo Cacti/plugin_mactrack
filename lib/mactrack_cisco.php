@@ -35,7 +35,7 @@ if (!isset($mactrack_scanning_functions_dot1x)) { $mactrack_scanning_functions_d
 array_push($mactrack_scanning_functions_dot1x, 'get_cisco_dot1x_table');
 
 /* get_catalyst_doet1dTpFdbEntry_ports
-	obtains port associations for Cisco Catalyst Swtiches.  Catalyst
+	obtains port associations for Cisco Catalyst Switches.  Catalyst
 	switches are unique in that they support a different snmp_readstring for
 	every VLAN interface on the switch.
 */
@@ -231,7 +231,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 							$vVlanID = -1;
 						}
 
-						/* only output legitamate end user ports */
+						/* only output legitimate end user ports */
 						if (($ifType == 6) && ($portTrunk == 2)) {
 							if (($portTrunkStatus == '2')||($portTrunkStatus == '4')||($portTrunkStatus =='')) {
 								$port_array[$i]['vlan_id']     = $active_vlan['vlan_id'];
@@ -263,7 +263,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devcies on this network device.');
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devices on this network device.');
 
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
@@ -273,7 +273,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 }
 
 /* get_IOS_dot1dTpFdbEntry_ports
-	obtains port associations for Cisco Catalyst Swtiches.  Catalyst
+	obtains port associations for Cisco Catalyst Switches.  Catalyst
 	switches are unique in that they support a different snmp_readstring for
 	every VLAN interface on the switch.
 */
@@ -448,7 +448,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 
 						$portTrunkStatus = (isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '');
 
-						/* only output legitamate end user ports */
+						/* only output legitimate end user ports */
 						if ($ifType == 6) {
 							if (($portTrunkStatus == '2') ||
 								(empty($portTrunkStatus)) ||
