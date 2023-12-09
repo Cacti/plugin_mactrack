@@ -475,7 +475,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 		while ($j < $total_devices) {
 			/**
-			 * retreive the number of concurrent mac_track processes to run
+			 * retrieve the number of concurrent mac_track processes to run
 			 * default to 10 for now
 			 */
 			$concurrent_processes = db_fetch_cell("SELECT value FROM settings WHERE name='mt_processes'");
@@ -501,7 +501,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			mactrack_debug('A process cycle launch just completed.');
 
 			/**
-			 * wait the correct number of seconds for proccesses prior to
+			 * wait the correct number of seconds for processes prior to
 			 * attempting to update records
 			 */
 			sleep(2);
@@ -562,7 +562,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 				FROM mac_track_processes");
 
 			/**
-			 * wait the correct number of seconds for proccesses prior to
+			 * wait the correct number of seconds for processes prior to
 			 * attempting to update records
 			 */
 			sleep(2);
@@ -754,7 +754,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 		mactrack_debug('Finished transferring scan results to main table.');
 
-		/* transfer the subnet information, although primative, into the ip_ranges table */
+		/* transfer the subnet information, although primitive, into the ip_ranges table */
 		$ip_ranges = db_fetch_assoc("SELECT SUBSTRING_INDEX(`ip_address`,'.',3) AS ip_range,
 			site_id,
 			COUNT(DISTINCT ip_address) AS ips_current,

@@ -98,7 +98,7 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 
 	$partitioning = db_fetch_cell("SHOW GLOBAL VARIABLES LIKE 'have_partitioning'");
 
-	if ($partioning == 'YES') {
+	if ($partitioning == 'YES') {
 		mactrack_create_partitioned_table($engine, $days, true);
 	} else {
 		echo "FATAL: Partitioning Not Available, Exiting!\n";

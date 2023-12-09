@@ -298,7 +298,7 @@ function form_actions() {
 		} elseif (get_request_var('drp_action') == '2') { /* duplicate */
 			print "<tr>
 				<td class='textArea'>
-					<p>" . __('Click \'Continue\' to duplciate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix.', 'mactrack') . "</p>
+					<p>" . __('Click \'Continue\' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix.', 'mactrack') . "</p>
 					<ul>$device_types_list</ul>
 					<p>" . __('Device Type Prefix:', 'mactrack') . '<br>'; form_text_box('title_format', __('<description> (1)', 'mactrack'), '', '255', '30', 'text'); print "</p>
 				</td>

@@ -429,7 +429,7 @@ function mactrack_config_settings() {
 			),
 		'mt_macauth_emails' => array(
 			'friendly_name' => __('MacAuth Report Email Addresses', 'mactrack'),
-			'description' => __('A comma delimited list of users to recieve the MacAuth Email notifications.', 'mactrack'),
+			'description' => __('A comma delimited list of users to receive the MacAuth Email notifications.', 'mactrack'),
 			'method' => 'textarea',
 			'default' => '',
 			'class' => 'textAreaNotes',

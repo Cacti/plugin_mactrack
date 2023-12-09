@@ -212,7 +212,7 @@ function form_mactrack_actions() {
 								array($selected_items[$i]));
 						}
 					} else {
-						# skip silently; possible enhacement: tell the user what we did
+						# skip silently; possible enhancement: tell the user what we did
 					}
 				}
 			} elseif (get_request_var('drp_action') == '1') { /* delete */

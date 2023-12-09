@@ -513,7 +513,7 @@ function mactrack_utilities() {
 			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_refresh_oui_database'><?php print __('Refresh IEEE Vendor MAC/OUI Database', 'mactrack');?></a>
 		</td>
 		<td class='textArea'>
-			<?php print __('This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Addess contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network.', 'mactrack');?>
+			<?php print __('This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network.', 'mactrack');?>
 		</td>
 	</tr>
 
@@ -551,7 +551,7 @@ function mactrack_utilities() {
 			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data'><?php print __('Perform Aggregate Table Rebuild', 'mactrack');?></a>
 		</td>
 		<td class='textArea'>
-			<?php print __('Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scaned data</strong> now.', 'mactrack');?>
+			<?php print __('Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now.', 'mactrack');?>
 		</td>
 	</tr>
 	<?php
