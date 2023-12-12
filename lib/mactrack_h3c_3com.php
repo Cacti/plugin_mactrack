@@ -129,7 +129,7 @@ function get_h3c_3com_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 	
 			$ifType = $ifInterfaces[$ifIndex]['ifType'];
 
-			/* only output legitamate end user ports */
+			/* only output legitimate end user ports */
 			if (($ifType >= 6) && ($ifType <= 9)) {
 				$port_array[$i]['vlan_id']     = @$port_vlan_data[$port_result['port_number']];
 				$port_array[$i]['vlan_name']   = @$vlan_names[$port_array[$i]['vlan_id']];
@@ -158,7 +158,7 @@ function get_h3c_3com_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 		mactrack_debug('macs active on this switch:' . $device['macs_active']);
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devcies on this network device.');
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devices on this network device.');
 
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
@@ -300,7 +300,7 @@ function get_h3c_3com_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 			}
 		}
 
-		/* compare the user ports to the brige port data, store additional
+		/* compare the user ports to the bridge port data, store additional
 		   relevant data about the port.
 		*/
 		$i = 0;
@@ -309,7 +309,7 @@ function get_h3c_3com_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 			if ($port_key['port_number'] > 0) {
 				if (cacti_sizeof($bridgePortIfIndexes) != 0) {
 					/* some hubs do not always return a port number in the bridge table.
-					   test for it by isset and substiture the port number from the ifTable
+					   test for it by isset and substitute the port number from the ifTable
 					   if it isnt in the bridge table
 					*/
 					mactrack_debug('Searching Bridge Port: ' . $port_key['port_number'] . ', Bridge: ' . $bridgePortIfIndexes[$port_key['port_number']]);
@@ -400,10 +400,10 @@ function get_h3c_3com_arp_table($site, &$device) {
 
 	if (cacti_sizeof($atifIndexes)) {
 		$mac_address = xform_indexed_data('.1.3.6.1.2.1.4.22.1.2', $device, 4);
-		mactrack_debug('MAC adresses data collection complete ' . cacti_sizeof($mac_address));
+		mactrack_debug('MAC addresses data collection complete ' . cacti_sizeof($mac_address));
 
 		$ip_address  = xform_indexed_data('.1.3.6.1.2.1.3.1.1.3', $device, 4);
-		mactrack_debug('IP adresses data collection complete ' . cacti_sizeof($ip_address));
+		mactrack_debug('IP addresses data collection complete ' . cacti_sizeof($ip_address));
 
 		$port  = xform_indexed_data('.1.3.6.1.2.1.3.1.1.1', $device, 4);
 		mactrack_debug('Ports data collection complete ' . cacti_sizeof($port));

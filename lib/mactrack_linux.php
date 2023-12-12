@@ -161,7 +161,7 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 			}
 		}
 
-		/* compare the user ports to the brige port data, store additional
+		/* compare the user ports to the bridge port data, store additional
 		   relevant data about the port.
 		*/
 		$i = 0;
@@ -170,7 +170,7 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 			if ($port_key['port_number'] > 0) {
 				if (cacti_sizeof($bridgePortIfIndexes) != 0) {
 					/* some hubs do not always return a port number in the bridge table.
-					   test for it by isset and substiture the port number from the ifTable
+					   test for it by isset and substitute the port number from the ifTable
 					   if it isnt in the bridge table
 					*/
 					if (isset($bridgePortIfIndexes[$port_key['port_number']])) {

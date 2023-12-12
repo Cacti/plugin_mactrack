@@ -118,7 +118,7 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 					$trunk = 1;
 				}
 
-				/* only output legitamate end user ports */
+				/* only output legitimate end user ports */
 				if (($ifType >= 6) && ($ifType <= 9) && ($trunk == 0)) {
 					$port_array[$i]['vlan_id']     = @$port_vlan_data[$port_result['port_number']];
 					$port_array[$i]['vlan_name']   = @$vlan_ids[$port_array[$i]['vlan_id']];
@@ -152,7 +152,7 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devcies on this network device.');
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devices on this network device.');
 
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';

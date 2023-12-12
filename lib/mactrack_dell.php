@@ -165,7 +165,7 @@ function get_base_dell_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp_rea
 			}
 		}
 
-		/* compare the user ports to the brige port data, store additional
+		/* compare the user ports to the bridge port data, store additional
 		   relevant data about the port.
 		*/
 		$i = 0;

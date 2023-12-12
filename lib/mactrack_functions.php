@@ -802,7 +802,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 			$int_ifHCOutOctets = get_link_int_value('ifHCOutOctets', $ifIndex, $ifHCOutOctets, $db_interface, $divisor, 'traffic', '64');
 		}
 
-		/* accomodate values in high speed octets for interfaces that don't support 64 bit */
+		/* accommodate values in high speed octets for interfaces that don't support 64 bit */
 		if (isset($ifInOctets[$ifIndex])) {
 			if (!isset($ifHCInOctets[$ifIndex])) {
 				$ifHCInOctets[$ifIndex] = $ifInOctets[$ifIndex];
@@ -1057,7 +1057,7 @@ function mactrack_find_host_graphs($device_id, $host_id) {
 	}
 
 	if ($found) {
-		/* let's make sure we mark everthing gone first */
+		/* let's make sure we mark everything gone first */
 		db_execute_prepared('UPDATE mac_track_interface_graphs
 			SET present = 0
 			WHERE device_id = ?
@@ -1309,7 +1309,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 			}
 		}
 
-		/* compare the user ports to the brige port data, store additional
+		/* compare the user ports to the bridge port data, store additional
 		   relevant data about the port.
 		*/
 		$i = 0;
@@ -1319,7 +1319,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 			if ($port_key['port_number'] > 0) {
 				if (cacti_sizeof($bridgePortIfIndexes)) {
 					/* some hubs do not always return a port number in the bridge table.
-					   test for it by isset and substiture the port number from the ifTable
+					   test for it by isset and substitute the port number from the ifTable
 					   if it isnt in the bridge table
 					*/
 					if (isset($bridgePortIfIndexes[$port_key['port_number']])) {
@@ -1534,7 +1534,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 		}
 		}
 
-		/* compare the user ports to the brige port data, store additional
+		/* compare the user ports to the bridge port data, store additional
 		   relevant data about the port.
 		*/
 		$i = 0;
@@ -1703,7 +1703,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 			}
 		}
 
-		/* compare the user ports to the brige port data, store additional
+		/* compare the user ports to the bridge port data, store additional
 		   relevant data about the port.
 		*/
 		$i = 0;
@@ -1951,7 +1951,7 @@ function xform_stripped_oid($oid, &$device, $snmp_readstring = '', $hex = false)
 }
 
 /*  xform_net_address - This function will return the IP address.  If the agent or snmp
-  returns a differently formated IP address, then this function will convert it to dotted
+  returns a differently formatted IP address, then this function will convert it to dotted
   decimal notation and return.
 */
 function xform_net_address($ip_address) {
@@ -1988,7 +1988,7 @@ function xform_net_address($ip_address) {
 	}
 }
 
-/*	xform_mac_address - This function will take a variable that is either formated as
+/*	xform_mac_address - This function will take a variable that is either formatted as
   hex or as a string representing hex and convert it to what the mactrack scanning
   function expects.
 */
@@ -2856,7 +2856,7 @@ function mactrack_rescan($web = false) {
 
 	if (cacti_sizeof($dbinfo)) {
 		if ($dbinfo['disabled'] == '') {
-			/* log the trasaction to the database */
+			/* log the transaction to the database */
 			mactrack_log_action(__('Device Rescan \'%s\'', $dbinfo['hostname'], 'mactrack'));
 
 			/* create the command script */
@@ -2870,7 +2870,7 @@ function mactrack_rescan($web = false) {
 			/* add the cacti header */
 			ob_start();
 
-			/* exeucte the command, and show the results */
+			/* execute the command, and show the results */
 			$command = read_config_option('path_php_binary') . ' -q ' . $command_string . $extra_args;
 			passthru($command);
 
@@ -2896,7 +2896,7 @@ function mactrack_site_scan($web = false) {
 	$data = array();
 
 	if (cacti_sizeof($dbinfo)) {
-		/* log the trasaction to the database */
+		/* log the transaction to the database */
 		mactrack_log_action(__('Site scan \'%s\'', $dbinfo['site_name'], 'mactrack'));
 
 		/* create the command script */
@@ -2909,7 +2909,7 @@ function mactrack_site_scan($web = false) {
 		/* add the cacti header */
 		ob_start();
 
-		/* exeucte the command, and show the results */
+		/* execute the command, and show the results */
 		$command = read_config_option('path_php_binary') . ' -q ' . $command_string . $extra_args;
 		passthru($command);
 
@@ -2933,7 +2933,7 @@ function mactrack_enable() {
 
 	$data = array();
 
-	/* log the trasaction to the database */
+	/* log the transaction to the database */
 	mactrack_log_action(__('Device Enable \'%s\'', $dbinfo['hostname'], 'mactrack'));
 
 	db_execute_prepared('UPDATE mac_track_devices
@@ -2965,7 +2965,7 @@ function mactrack_disable() {
 
 	$data = array();
 
-	/* log the trasaction to the database */
+	/* log the transaction to the database */
 	mactrack_log_action(__('Device Disable \'%d\'', $dbinfo['hostname'], 'mactrack'));
 
 	db_execute_prepared('UPDATE mactack_devices
@@ -3032,9 +3032,9 @@ function mactrack_dot1x_row_class($port_result) {
 }
 
 /* mactrack_create_sql_filter - this routine will take a filter string and process it into a
-     sql where clause that will be returned to the caller with a formated SQL where clause
+     sql where clause that will be returned to the caller with a formatted SQL where clause
      that can then be integrated into the overall where clause.
-     The filter takes the following forms.  The default is to find occurance that match "all"
+     The filter takes the following forms.  The default is to find occurrence that match "all"
      Any string prefixed by a "-" will mean "exclude" this search string.  Boolean expressions
      are currently not supported.
    @arg $filter - (string) The filter provided by the user

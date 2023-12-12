@@ -28,7 +28,7 @@ array_push($mactrack_scanning_functions, 'get_procurve_switch_ports');
 
 /* get_procurve_switch_ports
 	obtains port associations for HP Procurve Switches.  Designed after the
-	HP J4121A ProCurve Switch 4000M Network Swtich.
+	HP J4121A ProCurve Switch 4000M Network Switch.
 */
 function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
@@ -98,7 +98,7 @@ function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 				$portName = $ifName;
 				$portTrunkStatus = @$ifInterfaces[$ifIndex]['trunkPortState'];
 
-				/* only output legitamate end user ports */
+				/* only output legitimate end user ports */
 				if (($ifType >= 6) && ($ifType <= 9)) {
 					$port_array[$i]['vlan_id']     = @$port_vlan_data[$port_result['port_number']];
 					$port_array[$i]['vlan_name']   = @$vlan_ids[$port_array[$i]['vlan_id']];
@@ -127,7 +127,7 @@ function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devcies on this network device.');
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devices on this network device.');
 
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';

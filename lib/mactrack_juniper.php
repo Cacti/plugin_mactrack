@@ -123,7 +123,7 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 
 				$portTrunkStatus = @$ifInterfaces[$ifIndex]['trunkPortState'];
 
-				/* only output legitamate end user ports */
+				/* only output legitimate end user ports */
 				//if ((($ifType >= 6) && ($ifType <= 9)) and ( $portName != '' or $portName != '1' )) {
 				if ( $portName != '' and $portName != '1' ) {
 					$port_array[$i]['vlan_id'] = $active_vlans[$Xvlanid]['vlan_id'];//@$vlan_ids[$Xvlanid];
@@ -164,7 +164,7 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 
 		db_store_device_port_results($device, $newPorts, $scan_date);
 	} else {
-		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devcies on this network device.');
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devices on this network device.');
 
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';

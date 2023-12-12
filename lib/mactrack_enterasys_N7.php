@@ -84,7 +84,7 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 			#print_r($port_result); print_r($ifInterfaces[$ifIndex]);
 			$ifType = $ifInterfaces[$ifIndex]['ifType'];
 
-			/* only output legitamate end user ports */
+			/* only output legitimate end user ports */
 			if (($ifType >= 6) && ($ifType <= 9)) {
 				$port_array[$i]['vlan_id'] = @$vlan_ids[$port_result['key']];
 				$port_array[$i]['vlan_name'] = @$vlan_names[$port_array[$i]['vlan_id']];
@@ -113,7 +113,7 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		mactrack_debug('macs active on this switch:' . $device['macs_active']);
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
-		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devcies on this network device.');
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devices on this network device.');
 
 		$device['snmp_status'] = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
@@ -257,7 +257,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 			}
 		}
 
-		/* compare the user ports to the brige port data, store additional
+		/* compare the user ports to the bridge port data, store additional
 		   relevant data about the port.
 		*/
 		$i = 0;
@@ -266,7 +266,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 			if ($port_key['port_number'] > 0) {
 				if (cacti_sizeof($bridgePortIfIndexes) != 0) {
 					/* some hubs do not always return a port number in the bridge table.
-					   test for it by isset and substiture the port number from the ifTable
+					   test for it by isset and substitute the port number from the ifTable
 					   if it isnt in the bridge table
 					*/
 					mactrack_debug('Searching Bridge Port: ' . $port_key['port_number'] . ', Bridge: ' . $bridgePortIfIndexes[$port_key['port_number']]);
