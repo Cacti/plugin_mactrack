@@ -4,18 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2023-12-11 21:38-0600\n"
-"PO-Revision-Date: 2020-12-12 19:09-0500\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: nl_NL\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2023-12-11 21:38-0600\nPO-Revision-Date: 2024-01-31 14:27+0000\nLast-Translator: Edwin Lankamp <edwin.lankamp@gmail.com>\nLanguage-Team: Dutch <http://translate.cacti.net/projects/cacti/mactrack/nl/>\nLanguage: nl-NL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 4.8.1\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -41,7 +30,7 @@ msgstr "Authenticatie succesvol"
 #: lib/mactrack_functions.php:41 mactrack_view_dot1x.php:488
 #: mactrack_view_dot1x.php:621
 msgid "Authentication Failed"
-msgstr "Authenticatie is mislukt."
+msgstr "Authenticatie mislukt"
 
 #: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:485
 #: mactrack_view_dot1x.php:622
@@ -227,14 +216,14 @@ msgid "Not Recorded"
 msgstr "Niet opgenomen"
 
 #: lib/mactrack_functions.php:3136
-#, fuzzy, php-format
+#, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
-msgstr "Status: Lopend, Processen: %d, Vooruitgang: %s, LastRuntime: %f"
+msgstr "Status: Lopend, Processen: %d, Vooruitgang: %s, LastRuntime: %2.1f"
 
 #: lib/mactrack_functions.php:3138
-#, fuzzy, php-format
+#, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
-msgstr "Status: Inactief, LastRuntime: %f seconden, Processen: %d processen, Apparaten: %d, Volgende Looptijd: %s"
+msgstr "Status: Inactief, LastRuntime: %2.1f seconden, Processen: %d processen, Apparaten: %d, Volgende Looptijd: %s"
 
 #: lib/mactrack_functions.php:3140 mactrack_device_types.php:959
 #: mactrack_devices.php:1246 mactrack_utilities.php:240
@@ -321,7 +310,6 @@ msgid "Default"
 msgstr "Standaard"
 
 #: lib/mactrack_functions.php:3312
-#, fuzzy
 msgid "Show Device Details"
 msgstr "Apparaatdetails tonen"
 
@@ -412,9 +400,8 @@ msgid "Duplicate"
 msgstr "Dupliceer"
 
 #: mactrack_device_types.php:214 mactrack_device_types.php:215
-#, fuzzy
 msgid "--dup--"
-msgstr "--duizelingwekkend"
+msgstr "--dup--"
 
 #: mactrack_device_types.php:286
 #, fuzzy
@@ -464,7 +451,6 @@ msgid "New Type"
 msgstr "Nieuwe Dienstverband"
 
 #: mactrack_device_types.php:457
-#, fuzzy
 msgid "Cisco"
 msgstr "Cisco"
 
@@ -1655,9 +1641,8 @@ msgid "Remove All Scan Results"
 msgstr "Alle scanresultaten verwijderen"
 
 #: mactrack_utilities.php:534
-#, fuzzy
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
-msgstr "Verwijdert <strong>ALL</strong>ALL</strong> Port to MAC naar IP associaties uit de database alle IP-adressen, IP-bereiken en VLANS.  Dit hulpprogramma is goed wanneer u opnieuw wilt beginnen.  <strong>DANGER: Alle eerdere gegevens worden verwijderd.</strong>"
+msgstr "Verwijdert <strong>ALL</strong> Port to MAC naar IP associaties uit de database alle IP-adressen, IP-bereiken en VLANS.   Dit hulpprogramma is goed wanneer u opnieuw wilt beginnen.   <strong>DANGER: Alle eerdere gegevens worden verwijderd.</strong>"
 
 #: mactrack_utilities.php:538
 #, fuzzy
@@ -1670,9 +1655,8 @@ msgid "Remove All Aggregated Results"
 msgstr "Alle geaggregeerde resultaten verwijderen"
 
 #: mactrack_utilities.php:545
-#, fuzzy
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
-msgstr "Verwijdert ALLE <sterke>Aggregated</strong> (Not Scan Results) Port to MAC to MAC to IP associaties uit de database.  De gegevens worden opnieuw verzameld op basis van <strong>alleen nieuwe</strong> gescande gegevens in de volgende mactrack pollerrun."
+msgstr "Verwijdert ALLE <strong>Aggregated</strong> (Not Scan Results) Port to MAC to MAC to IP associaties uit de database.  De gegevens worden opnieuw verzameld op basis van <strong>alleen nieuwe</strong> gescande gegevens in de volgende mactrack pollerrun."
 
 #: mactrack_utilities.php:551
 #, fuzzy
@@ -2328,7 +2312,7 @@ msgstr "Apparaat Tracking"
 
 #: setup.php:248
 msgid "General Settings"
-msgstr "Algemene instellingen"
+msgstr "Algemene Instellingen"
 
 #: setup.php:252
 #, fuzzy
@@ -2569,9 +2553,8 @@ msgid "The Email body preset for Device Tracking MacWatch Emails.  The body can 
 msgstr "De vooringestelde Email body voor Device Tracking MacWatch-e-mails.  De body kan alle geldige html tags bevatten.  Het ondersteunt ook vervangende tags die worden verwerkt bij het verzenden van een e-mail.  Geldige tags zijn <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
 
 #: setup.php:424 setup.php:1509
-#, fuzzy
 msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
-msgstr "Mac-adres <MAC> gevonden op IP-adres <IP> voor ticketnummer: <TICKET>.<br>Het apparaat bevindt zich op<br>Site: <SITENAME>, Apparaat <DEVICENAME>, IP <DEVICEIP>, poort <PORTNUMBER> en poortnaam <PORTNAME>."
+msgstr "Mac-adres <MAC> gevonden op IP-adres <IP> voor ticketnummer: <TICKET>.<br>Het apparaat bevindt zich op<br>Site: <SITENAME>, Apparaat <DEVICENAME>, IP <DEVICEIP>, poort <PORTNUMBER> en poortnaam <PORTNAME>"
 
 #: setup.php:431
 #, fuzzy
@@ -2711,7 +2694,7 @@ msgstr "Apparaatvolgsystemen"
 #: setup.php:571 setup.php:606 setup.php:613 setup.php:627 setup.php:655
 #: setup.php:676 setup.php:697
 msgid "(Edit)"
-msgstr "(Wijzig)"
+msgstr "(bewerken)"
 
 #: setup.php:578 setup.php:634
 #, fuzzy
@@ -3248,9 +3231,8 @@ msgid "Read Strings"
 msgstr "Lezen Strings"
 
 #: setup.php:1340
-#, fuzzy
 msgid "<strong>DEPRECATED:</strong> SNMP community strings"
-msgstr "<sterk>DEPRECATED:</sterk> SNMP-gemeenschapsstrings"
+msgstr "<strong>DEPRECATED:</strong> SNMP-gemeenschapsstrings"
 
 #: setup.php:1345
 #, fuzzy
@@ -3277,7 +3259,6 @@ msgid "Telnet"
 msgstr "Telnet"
 
 #: setup.php:1365
-#, fuzzy
 msgid "SSH"
 msgstr "SSH"
 
@@ -3391,9 +3372,8 @@ msgid "MAC Tracking Name/Email Subject"
 msgstr "MAC Tracking Naam/E-mail Onderwerp"
 
 #: setup.php:1498
-#, fuzzy
 msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
-msgstr "Voer een redelijke naam in voor deze MAC Tracking entry.  Deze informatie staat in de onderwerpregel van uw e-mail."
+msgstr "Voer een redelijke naam in voor deze MAC Tracking entry.  Deze informatie staat in de onderwerpregel van uw e-mail"
 
 #: setup.php:1517
 #, fuzzy
