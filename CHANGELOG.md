@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* issue#206: Improve PHP8.x - undefined variables, array keys, ... 
+
 --- 4.6 ---
 
 * issue#148: Bad value of mactrack/Devices/UserPortsUP
