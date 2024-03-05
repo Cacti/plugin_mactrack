@@ -750,7 +750,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 			$stateChanges   = $db_interface[$ifIndex]['stateChanges'];
 
 			if ($db_interface[$ifIndex]['ifOperStatus'] == 0) { /* interface previously not up */
-				if ($ifOperStatus[$ifIndex] == 1) {
+				if (isset($ifOperStatus[$ifIndex]) && $ifOperStatus[$ifIndex] == 1) {
 					/* the interface just went up, mark the time */
 					$last_up_time = date('Y-m-d H:i:s');
 					$stateChanges += 1;
