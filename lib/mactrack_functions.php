@@ -3435,3 +3435,11 @@ if (!function_exists('cacti_count')) {
 		return ($array === false || !is_array($array)) ? 0 : count($array);
 	}
 }
+
+function mactrack_arr_key ($array, $key, $default = '') {
+	if (array_key_exists($key, $array)) {
+		return $array[$key];
+	} else {
+		return $default;
+	}
+}

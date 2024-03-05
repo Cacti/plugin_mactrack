@@ -77,8 +77,8 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	$ignore_ports = port_list_to_array($device['ignorePorts']);
 
 	foreach ($ifIndexes as $ifIndex) {
-		$ifInterfaces[$ifIndex]['trunkPortState'] = @$vlan_trunkstatus[$ifIndex];
-		$ifInterfaces[$ifIndex]['portDesc']=@$portDescription[$ifIndex];
+		$ifInterfaces[$ifIndex]['trunkPortState'] = mactrack_arr_key($vlan_trunkstatus, $ifIndex);
+		$ifInterfaces[$ifIndex]['portDesc'] = mactrack_arr_key($portDescription, $ifIndex);
 
 		if (($ifInterfaces[$ifIndex]['ifType'] == 'propVirtual(53)') ||
 			($ifInterfaces[$ifIndex]['ifType'] == '53') ||
@@ -114,20 +114,20 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 				$Xvlanid = substr($num, strpos($num, '.')+1, strpos($num, '.',1)-1);
 				$Xmac    = mach(substr($num, strpos($num, '.',1) + 1));
 
-				$ifIndex  = @$port_results[".".strval($mac_result)];
-				$ifType   = @$ifInterfaces[$ifIndex]['ifType'];
-				$ifName   = @$ifInterfaces[$ifIndex]['ifName'];
+				$ifIndex  = mactrack_arr_key($port_results, ".".strval($mac_result));
+				$ifType   = isset($ifInterfaces[$ifIndex]['ifType']) ? $ifInterfaces[$ifIndex]['ifType'] : '';
+				$ifName   = isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '';
 				$ifDesc   = "";
-				$ifDesc   = @$ifInterfaces[$ifIndex]['portDesc'];
+				$ifDesc   = isset($ifInterfaces[$ifIndex]['portDesc']) ? $ifInterfaces[$ifIndex]['portDesc'] : '';
 				$portName = $ifName;
 
-				$portTrunkStatus = @$ifInterfaces[$ifIndex]['trunkPortState'];
+				$portTrunkStatus = isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '';
 
 				/* only output legitimate end user ports */
 				//if ((($ifType >= 6) && ($ifType <= 9)) and ( $portName != '' or $portName != '1' )) {
 				if ( $portName != '' and $portName != '1' ) {
-					$port_array[$i]['vlan_id'] = $active_vlans[$Xvlanid]['vlan_id'];//@$vlan_ids[$Xvlanid];
-					$port_array[$i]['vlan_name'] = $active_vlans[$Xvlanid]['vlan_name'];//@$vlan_names[$Xvlandid];
+					$port_array[$i]['vlan_id'] = $active_vlans[$Xvlanid]['vlan_id']; //@$vlan_ids[$Xvlanid];
+					$port_array[$i]['vlan_name'] = $active_vlans[$Xvlanid]['vlan_name']; //@$vlan_names[$Xvlandid];
 					//$port_array[$i]['port_number'] = @$port_results[".".strval($mac_result)];
 					$port_array[$i]['port_number'] = trim ( $ifName );
 					if(isset($ifDesc)){

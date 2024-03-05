@@ -55,7 +55,7 @@ function get_procurve_ng_switch_ports($site, &$device, $lowPort = 0, $highPort =
 	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
 
 	foreach ($ifIndexes as $ifIndex) {
-		$ifInterfaces[$ifIndex]['trunkPortState'] = @$vlan_trunkstatus[$ifIndex];
+		$ifInterfaces[$ifIndex]['trunkPortState'] = mactrack_arr_key($vlan_trunkstatus, $ifIndex);
 
 		if (($ifInterfaces[$ifIndex]['ifType'] >= 6) && ($ifInterfaces[$ifIndex]['ifType'] <= 9)) {
 			$device['ports_total']++;
@@ -88,17 +88,17 @@ function get_procurve_ng_switch_ports($site, &$device, $lowPort = 0, $highPort =
 		$port_array = array();
 		foreach ($port_results as $port_result) {
 			$ifIndex  = $port_result['port_number'];
-			$ifType   = @$ifInterfaces[$ifIndex]['ifType'];
-			$ifName   = @$ifInterfaces['ifAlias'][$ifIndex];
+			$ifType   = isset($ifInterfaces[$ifIndex]['ifType']) ? $ifInterfaces[$ifIndex]['ifType'] : '';
+			$ifName   = isset($ifInterfaces['ifAlias'][$ifIndex]) ? $ifInterfaces['ifAlias'][$ifIndex] : '';
 			$portName = $ifName;
-			$portTrunkStatus = @$ifInterfaces[$ifIndex]['trunkPortState'];
+			$portTrunkStatus = isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '';
 
 			/* only output legitimate end user ports */
 			if (($ifType >= 6) && ($ifType <= 9)) {
-				$port_array[$i]['vlan_id']     = @$port_vlan_data[$port_result['port_number']];
-				$port_array[$i]['vlan_name']   = @$vlan_ids[$port_array[$i]['vlan_id']];
-				$port_array[$i]['port_number'] = @$port_result['port_number'];
-				$port_array[$i]['port_name']   = @$port_alias[$port_result['port_number']];
+				$port_array[$i]['vlan_id']     = mactrack_arr_key($port_vlan_data, $port_result['port_number']);
+				$port_array[$i]['vlan_name']   = mactrack_arr_key($vlan_ids, $port_array[$i]['vlan_id']);
+				$port_array[$i]['port_number'] = mactrack_arr_key($port_result, 'port_number');
+				$port_array[$i]['port_name']   = mactrack_arr_key($port_alias, $port_result['port_number']);
 				$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
 				$device['ports_active']++;
 

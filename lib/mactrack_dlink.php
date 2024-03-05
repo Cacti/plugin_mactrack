@@ -61,9 +61,9 @@ function get_dlink_l2_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 	if (cacti_sizeof($ifIndexes)) {
 		foreach ($ifIndexes as $ifIndex) {
 			$ifInterfaces[$ifIndex]['ifIndex'] = $ifIndex;
-			$ifInterfaces[$ifIndex]['ifName'] = @$ifNames[$ifIndex];
+			$ifInterfaces[$ifIndex]['ifName'] = mactrack_arr_key($ifNames, $ifIndex);
 			$ifInterfaces[$ifIndex]['ifType'] = $ifTypes[$ifIndex];
-			$ifInterfaces[$ifIndex]['linkPort'] = @$link_ports[$ifIndex];
+			$ifInterfaces[$ifIndex]['linkPort'] = mactrack_arr_key($link_ports, $ifIndex);
 		}
 	}
 	mactrack_debug('ifInterfaces assembly complete.');

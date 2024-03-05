@@ -56,7 +56,7 @@ function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 
 	if (cacti_sizeof($ifIndexes)) {
 		foreach($ifIndexes as $ifIndex) {
-			$ifInterfaces[$ifIndex]['trunkPortState'] = @$vlan_trunkstatus[$ifIndex];
+			$ifInterfaces[$ifIndex]['trunkPortState'] = mactrack_arr_key($vlan_trunkstatus, $ifIndex);
 
 			if (($ifInterfaces[$ifIndex]['ifType'] >= 6) && ($ifInterfaces[$ifIndex]['ifType'] <= 9)) {
 				$device['ports_total']++;
@@ -96,13 +96,13 @@ function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 				$ifType = $ifInterfaces[$ifIndex]['ifType'];
 				$ifName = $ifInterfaces[$ifIndex]['ifName'];
 				$portName = $ifName;
-				$portTrunkStatus = @$ifInterfaces[$ifIndex]['trunkPortState'];
+				$portTrunkStatus = isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '';
 
 				/* only output legitimate end user ports */
 				if (($ifType >= 6) && ($ifType <= 9)) {
-					$port_array[$i]['vlan_id']     = @$port_vlan_data[$port_result['port_number']];
-					$port_array[$i]['vlan_name']   = @$vlan_ids[$port_array[$i]['vlan_id']];
-					$port_array[$i]['port_number'] = @$port_result['port_number'];
+					$port_array[$i]['vlan_id']     = mactrack_arr_key($port_vlan_data, $port_result['port_number']);
+					$port_array[$i]['vlan_name']   = mactrack_arr_key($vlan_ids, $port_array[$i]['vlan_id']);
+					$port_array[$i]['port_number'] = mactrack_arr_key($port_result, 'port_number');
 					$port_array[$i]['port_name']   = $portName;
 					$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
 

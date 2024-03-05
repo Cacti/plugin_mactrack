@@ -218,7 +218,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 			foreach ($active_vlans as $active_vlan) {
 				if (cacti_sizeof($active_vlan['port_results'])) {
 					foreach ($active_vlan['port_results'] as $port_result) {
-						$ifIndex         = @$brPorttoifIndexes[$j][$port_result['port_number']];
+						$ifIndex         = isset($brPorttoifIndexes[$j][$port_result['port_number']]) ? $brPorttoifIndexes[$j][$port_result['port_number']] : '';
 						$ifType          = (isset($ifInterfaces[$ifIndex]['ifType']) ? $ifInterfaces[$ifIndex]['ifType'] : '');
 						$ifName          = (isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '');
 						$portName        = (isset($portNames[$ifName]) ? $portNames[$ifName] : '');
@@ -345,7 +345,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 
 	if (cacti_sizeof($vlan_ids)) {
 		foreach ($vlan_ids as $vlan_number => $vlanStatus) {
-			$vlanName = @$vlan_names[$vlan_number];
+			$vlanName = mactrack_arr_key($vlan_names, $vlan_number);
 
 			if ($vlanStatus == 1) { /* vlan is operatinal */
 				switch ($vlan_number) {

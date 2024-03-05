@@ -149,10 +149,10 @@ function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 
 
 			/* only output legitimate end user ports */
 			if (($ifType >= 6) && ($ifType <= 9)) {
-				$port_array[$i]['vlan_id']     = @$port_vlan_data[$port_result['port_number']];
-				$port_array[$i]['vlan_name']   = @$vlan_names[$port_array[$i]['vlan_id']];
-				$port_array[$i]['port_number'] = @$port_result['port_number'];
-				$port_array[$i]['port_name'] = @$ifInterfaces[$ifIndex]['ifName'];
+				$port_array[$i]['vlan_id']     = mactrack_arr_key($port_vlan_data, $port_result['port_number']);
+				$port_array[$i]['vlan_name']   = isset($vlan_names[$port_array[$i]['vlan_id']]) ? $vlan_names[$port_array[$i]['vlan_id']] : '';
+				$port_array[$i]['port_number'] = mactrack_arr_key($port_result, 'port_number');
+				$port_array[$i]['port_name']   = isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '';
 				$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
 				mactrack_debug('VLAN: ' . $port_array[$i]['vlan_id'] . ', ' .
 					'NAME: ' . $port_array[$i]['vlan_name'] . ', ' .
@@ -318,7 +318,7 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 				($port_number <= $highPort))) {
 
 				if (!in_array($port_number, $ignore_ports)) {
-					if (@$port_status[$key] == '3') {
+					if (isset($port_status[$key]) && $port_status[$key] == '3') {
 						$port_key_array[$i]['key'] = substr($key,1);
 						$port_key_array[$i]['port_number'] = $port_number;
 						$i++;
@@ -342,14 +342,14 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 					*/
 					mactrack_debug('Searching Bridge Port: ' . $port_key['port_number'] . ', Bridge: ' . $bridgePortIfIndexes[$port_key['port_number']]);
 					if (isset($bridgePortIfIndexes[$port_key['port_number']])) {
-						$brPortIfIndex = @$bridgePortIfIndexes[$port_key['port_number']];
+						$brPortIfIndex = mactrack_arr_key($bridgePortIfIndexes, $port_key['port_number']);
 					} else {
-						$brPortIfIndex = @$port_key['port_number'];
+						$brPortIfIndex = mactrack_arr_key($port_key, 'port_number');
 					}
-					$brPortIfType = @$ifInterfaces[$brPortIfIndex]['ifType'];
+					$brPortIfType = isset($ifInterfaces[$brPortIfIndex]['ifType']) ? $ifInterfaces[$brPortIfIndex]['ifType'] : '';
 				} else {
 					$brPortIfIndex = $port_key['port_number'];
-					$brPortIfType = @$ifInterfaces[$port_key['port_number']]['ifType'];
+					$brPortIfType = isset($ifInterfaces[$port_key['port_number']]['ifType']) ? $ifInterfaces[$port_key['port_number']]['ifType'] : '';
 				}
 
 				if (($brPortIfType >= 6) &&
@@ -363,12 +363,12 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 					$new_port_key_array[$i]['port_name'] = 'N/A';
 
 					/* now set the real data */
-					$new_port_key_array[$i]['key'] = @$port_key['key'];
-					$new_port_key_array[$i]['port_number'] = @$brPortIfIndex;
-					$new_port_key_array[$i]['port_name'] = $ifInterfaces[$port_key['port_number']];
+					$new_port_key_array[$i]['key'] = mactrack_arr_key($port_key, 'key');
+					$new_port_key_array[$i]['port_number'] = isset($brPortIfIndex) ? $brPortIfIndex : '';
+					$new_port_key_array[$i]['port_name'] = mactrack_arr_key(ifInterfaces, $port_key['port_number']);
 					$new_port_key_array[$i]['mac_address'] = oscx_mac($port_key['key']);
-					$new_port_key_array[$i]['vlan_id'] = @$port_vlan_data[$brPortIfIndex];
-					$new_port_key_array[$i]['vlan_name'] = @$vlan_names[$port_vlan_data[$brPortIfIndex]];
+					$new_port_key_array[$i]['vlan_id'] = mactrack_arr_key($port_vlan_data, $brPortIfIndex);
+					$new_port_key_array[$i]['vlan_name'] = isset ($brPortIfIndex) ? mactrack_arr_key($vlan_names, $port_vlan_data[$brPortIfIndex]) : '';
 
 					$i++;
 				}
