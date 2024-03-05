@@ -183,7 +183,7 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 				($port_number <= $highPort))) {
 				$ifname = $ifInterfaces[$bridgePortIfIndexes[$port_number]]['ifName'];
 				if (!in_array($ifname, $ignore_ports)) {
-					if (@$port_status[$key] == '3') {
+					if (isset($port_status[$key]) && $port_status[$key] == '3') {
 						$port_key_array[$i]['key'] = $key;
 						$port_key_array[$i]['port_number'] = $port_number;
 						$i++;
@@ -204,14 +204,14 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 					   if it isnt in the bridge table
 					*/
 					if (isset($bridgePortIfIndexes[$port_key['port_number']])) {
-						$brPortIfIndex = @$bridgePortIfIndexes[$port_key['port_number']];
+						$brPortIfIndex = mactrack_arr_key($bridgePortIfIndexes, $port_key['port_number']);
 					} else {
-						$brPortIfIndex = @$port_key['port_number'];
+						$brPortIfIndex = isset($port_key['port_number']) ? $port_key['port_number'] : '';
 					}
-					$brPortIfType = @$ifInterfaces[$brPortIfIndex]['ifType'];
+					$brPortIfType = isset($ifInterfaces[$brPortIfIndex]['ifType']) ? $ifInterfaces[$brPortIfIndex]['ifType'] : '';
 				} else {
 					$brPortIfIndex = $port_key['port_number'];
-					$brPortIfType = @$ifInterfaces[$port_key['port_number']]['ifType'];
+					$brPortIfType = isset($ifInterfaces[$port_key['port_number']]['ifType']) ? $ifInterfaces[$port_key['port_number']]['ifType'] : '';
 				}
 
 				if (((($brPortIfType >= 6) &&
@@ -246,7 +246,7 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 			}
 
 			foreach ($new_port_key_array as $key => $port_key) {
-				$new_port_key_array[$key]['mac_address'] = @$port_macs[$port_key['key']];
+				$new_port_key_array[$key]['mac_address'] = mactrack_arr_key($port_macs, $port_key['key']);
 			}
 
 			mactrack_debug('Port mac address information collected.');

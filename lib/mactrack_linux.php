@@ -67,10 +67,10 @@ function get_linux_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 
 	foreach($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]['ifIndex'] = $ifIndex;
-		$ifInterfaces[$ifIndex]['ifName'] = @$ifNames[$ifIndex];
+		$ifInterfaces[$ifIndex]['ifName'] = mactrack_arr_key($ifNames, $ifIndex);
 		$ifInterfaces[$ifIndex]['ifType'] = convert_port_state_data($ifTypes[$ifIndex]);
 		$ifInterfaces[$ifIndex]['vlan_id'] = $ifVlan[$ifIndex];
-		//$ifInterfaces[$ifIndex]['linkPort'] = @$link_ports[$ifIndex];
+		//$ifInterfaces[$ifIndex]['linkPort'] = mactrack_arr_key($link_ports, $ifIndex);
 	}
 	mactrack_debug('ifInterfaces assembly complete.');
 
@@ -151,7 +151,7 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 				($port_number <= $highPort))) {
 
 				if (!in_array($port_number, $ignore_ports)) {
-					if (@$port_status[$key] == '3') {
+					if (isset($port_status[$key]) && $port_status[$key] == '3') {
 						$port_key_array[$i]['key'] = $key;
 						$port_key_array[$i]['port_number'] = $port_number;
 
@@ -174,14 +174,14 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 					   if it isnt in the bridge table
 					*/
 					if (isset($bridgePortIfIndexes[$port_key['port_number']])) {
-						$brPortIfIndex = @$bridgePortIfIndexes[$port_key['port_number']];
+						$brPortIfIndex = mactrack_arr_key($bridgePortIfIndexes, $port_key['port_number']);
 					} else {
-						$brPortIfIndex = @$port_key['port_number'];
+						$brPortIfIndex = mactrack_arr_key($port_key, 'port_number');
 					}
-					$brPortIfType = @$ifInterfaces[$brPortIfIndex]['ifType'];
+					$brPortIfType = isset($ifInterfaces[$brPortIfIndex]['ifType']) ? $ifInterfaces[$brPortIfIndex]['ifType'] : '';
 				} else {
 					$brPortIfIndex = $port_key['port_number'];
-					$brPortIfType = @$ifInterfaces[$port_key['port_number']]['ifType'];
+					$brPortIfType = isset($ifInterfaces[$port_key['port_number']]['ifType']) ? $ifInterfaces[$port_key['port_number']]['ifType'] : '';
 				}
 
 				if (($brPortIfType >= 6) &&
@@ -197,7 +197,7 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 					/* now set the real data */
 					$new_port_key_array[$i]['key'] = $port_key['key'];
 					$new_port_key_array[$i]['port_number'] = $port_key['port_number'];
-					$new_port_key_array[$i]['vlan_id'] = @$ifInterfaces[$port_key['port_number']]['vlan_id'];
+					$new_port_key_array[$i]['vlan_id'] = isset($ifInterfaces[$port_key['port_number']]['vlan_id']) ? $ifInterfaces[$port_key['port_number']]['vlan_id'] : '';
 					$i++;
 				}
 			}
@@ -215,7 +215,7 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 			}
 
 			foreach ($new_port_key_array as $key => $port_key) {
-				$new_port_key_array[$key]['mac_address'] = @$port_macs[$port_key['key']];
+				$new_port_key_array[$key]['mac_address'] = mactrack_arr_key($port_macs, $port_key['key']);
 				//mactrack_debug('INDEX: ''. $key . '' MAC ADDRESS: ' . $new_port_key_array[$key]['mac_address']);
 			}
 

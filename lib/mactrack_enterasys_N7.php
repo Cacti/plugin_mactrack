@@ -86,10 +86,10 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 
 			/* only output legitimate end user ports */
 			if (($ifType >= 6) && ($ifType <= 9)) {
-				$port_array[$i]['vlan_id'] = @$vlan_ids[$port_result['key']];
-				$port_array[$i]['vlan_name'] = @$vlan_names[$port_array[$i]['vlan_id']];
-				$port_array[$i]['port_number'] = @$port_result['port_number'];
-				$port_array[$i]['port_name'] = @$ifInterfaces[$ifIndex]['ifName'];
+				$port_array[$i]['vlan_id']     = mactrack_arr_key($vlan_ids, $port_result['key']);
+				$port_array[$i]['vlan_name']   = mactrack_arr_key($vlan_names, $port_array[$i]['vlan_id']);
+				$port_array[$i]['port_number'] = mactrack_arr_key($port_result, 'port_number');
+				$port_array[$i]['port_name']   = isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '';
 				$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
 
 				mactrack_debug('VLAN: ' . $port_array[$i]['vlan_id'] . ', ' .
@@ -247,7 +247,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 				($port_number <= $highPort))) {
 
 				if (!in_array($port_number, $ignore_ports)) {
-					if (@$port_status[$key] == '3') {
+					if (isset($port_status[$key])  && $port_status[$key] == '3') {
 						$port_key_array[$i]['key'] = $key;
 						$port_key_array[$i]['port_number'] = $port_number;
 #print('i: $i, Key: ' . $port_key_array[$i]['key'] . ', Number: $port_number\n');
@@ -271,14 +271,14 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 					*/
 					mactrack_debug('Searching Bridge Port: ' . $port_key['port_number'] . ', Bridge: ' . $bridgePortIfIndexes[$port_key['port_number']]);
 					if (isset($bridgePortIfIndexes[$port_key['port_number']])) {
-						$brPortIfIndex = @$bridgePortIfIndexes[$port_key['port_number']];
+						$brPortIfIndex = mactrack_arr_key($bridgePortIfIndexes, $port_key['port_number']);
 					} else {
-						$brPortIfIndex = @$port_key['port_number'];
+						$brPortIfIndex = mactrack_arr_key($port_key, 'port_number');
 					}
-					$brPortIfType = @$ifInterfaces[$brPortIfIndex]['ifType'];
+					$brPortIfType = isset($ifInterfaces[$brPortIfIndex]['ifType']) ? $ifInterfaces[$brPortIfIndex]['ifType'] : '';
 				} else {
 					$brPortIfIndex = $port_key['port_number'];
-					$brPortIfType = @$ifInterfaces[$port_key['port_number']]['ifType'];
+					$brPortIfType = isset($ifInterfaces[$port_key['port_number']]['ifType']) ? $ifInterfaces[$port_key['port_number']]['ifType'] : '';
 				}
 
 				if (($brPortIfType >= 6) &&
@@ -292,9 +292,9 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 					$new_port_key_array[$i]['port_name'] = 'N/A';
 
 					/* now set the real data */
-					$new_port_key_array[$i]['key'] = @$port_key['key'];
-					$new_port_key_array[$i]['port_number'] = @$brPortIfIndex;
-					$new_port_key_array[$i]['vlan_id'] = @$vlan_ids[$port_key['key']];
+					$new_port_key_array[$i]['key'] = mactrack_arr_key($port_key, 'key');
+					$new_port_key_array[$i]['port_number'] = isset($brPortIfIndex) ? $brPortIfIndex : '';
+					$new_port_key_array[$i]['vlan_id'] = mactrack_arr_key($vlan_ids, $port_key['key']);
 #print_r($new_port_key_array[$i]);
 					$i++;
 				}
@@ -313,7 +313,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 			}
 
 			foreach ($new_port_key_array as $key => $port_key) {
-				$new_port_key_array[$key]['mac_address'] = @$port_macs[$port_key['key']];
+				$new_port_key_array[$key]['mac_address'] = mactrack_arr_key($port_macs, $port_key['key']);
 				mactrack_debug('INDEX: ' . $key . ' MAC ADDRESS: ' . $new_port_key_array[$key]['mac_address']);
 			}
 
@@ -440,12 +440,10 @@ function get_CTAlias_table($site, &$device) {
 
 	foreach($CTAliasInterfaces as $ifIndex) {
 		$CTAliasEntries[$i]['ifIndex'] = $ifIndex;
-#		$CTAliasEntries[$i]['timestamp'] = @substr($keys[$i], 0, stripos($keys[$i], '.'));
 		$CTAliasEntries[$i]['timestamp'] = $keys[$i];
-		$CTAliasEntries[$i]['CTAliasProtocol'] = @$CTAliasProtocol[$keys[$i]];
-		$CTAliasEntries[$i]['CTAliasMacAddress'] = @$CTAliasMacAddress[$keys[$i]];
-#		$CTAliasEntries[$i]['CTAliasAddressText'] = @xform_net_address($CTAliasAddressText[$keys[$i]]);
-		$CTAliasEntries[$i]['CTAliasAddressText'] = @$CTAliasAddressText[$keys[$i]];
+		$CTAliasEntries[$i]['CTAliasProtocol'] = mactrack_arr_key($CTAliasProtocol, $keys[$i]);
+		$CTAliasEntries[$i]['CTAliasMacAddress'] = mactrack_arr_key($CTAliasMacAddress, $keys[$i]);
+		$CTAliasEntries[$i]['CTAliasAddressText'] = mactrack_arr_key($CTAliasAddressText, $keys[$i]);
 		$i++;
 	}
 	mactrack_debug('CTAliasEntries assembly complete: ' . cacti_sizeof($CTAliasEntries));

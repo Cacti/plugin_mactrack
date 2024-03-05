@@ -60,7 +60,7 @@ function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPor
 
 	if (cacti_sizeof($ifIndexes)) {
 		foreach ($ifIndexes as $ifIndex) {
-			$ifInterfaces[$ifIndex]['trunkPortState'] = @$vlan_trunkstatus[$ifIndex];
+			$ifInterfaces[$ifIndex]['trunkPortState'] = mactrack_arr_key($vlan_trunkstatus, $ifIndex);
 			$ifInterfaces[$ifIndex]['vlannum'] = hexdec($vlan_id_by_int[$ifIndex]);
 
 			if ($ifInterfaces[$ifIndex]['ifType'] == 6) {
@@ -100,15 +100,15 @@ function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPor
 				$ifType = $ifInterfaces[$ifIndex]['ifType'];
 				$ifName = $ifInterfaces[$ifIndex]['ifName'];
 				$portName = '';
-				$portTrunkStatus = @$ifInterfaces[$ifIndex]['trunkPortState'];
-				$vlannum = @$ifInterfaces[$ifindex]['vlannum'];
+				$portTrunkStatus = isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '';
+				$vlannum = isset($ifInterfaces[$ifindex]['vlannum']) ? $ifInterfaces[$ifindex]['vlannum'] : '';
 
 				/* only output legitimate end user ports */
 				if ((($ifType == 6) && ($portTrunkStatus == 1))) {
 					/*    $port_array[$i]['vlan_id'] = @$port_vlan_data[$port_result['key']]; */
 					$port_array[$i]['vlan_id']     = $vlannum;
-					$port_array[$i]['vlan_name']   = @$vlan_ids[$vlannum];
-					$port_array[$i]['port_number'] = @$port_result['port_number'];
+					$port_array[$i]['vlan_name']   = mactrack_arr_key($vlan_ids, $vlannum);
+					$port_array[$i]['port_number'] = mactrack_arr_key($port_result, 'port_number');
 					$port_array[$i]['port_name']   = '';
 					$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
 
@@ -172,8 +172,8 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 
 	if (cacti_sizeof($ifIndexes)) {
 		foreach ($ifIndexes as $ifIndex) {
-			$ifInterfaces[$ifIndex]['trunkPortState'] = @$vlan_trunkstatus[$ifIndex];
-			$ifInterfaces[$ifIndex]['vlannum']        = @$vlan_ids[$ifIndex];
+			$ifInterfaces[$ifIndex]['trunkPortState'] = mactrack_arr_key($vlan_trunkstatus, $ifIndex);
+			$ifInterfaces[$ifIndex]['vlannum']        = mactrack_arr_key($vlan_ids, $ifIndex);
 			$ifInterfaces[$ifIndex]['ifOperStatus']   =  mactrack_strip_alpha($ifInterfaces[$ifIndex]['ifOperStatus']);
 
 			if ($ifInterfaces[$ifIndex]['ifType'] == 6) {
@@ -226,19 +226,19 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 					$portName = preg_replace('/BayStack - /', '', $ifDescr);
 				}
 
-				$portTrunkStatus = @$ifInterfaces[$ifIndex]['trunkPortState'];
+				$portTrunkStatus = isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '';
 
 				/* only output legitimate end user ports */
 				if ((($ifType == 6) && ($portTrunkStatus == 1))) {
-					$port_array[$i]['vlan_id'] = @$port_vlan_data[$port_result['key']];
-					$port_array[$i]['vlan_name'] = @$vlan_ids[$port_array[$i]['vlan_id']];
-					$port_array[$i]['port_number'] = @$port_result['port_number'];
+					$port_array[$i]['vlan_id'] = mactrack_arr_key($port_vlan_data, $port_result['key']);
+					$port_array[$i]['vlan_name'] = mactrack_arr_key($vlan_ids, $port_array[$i]['vlan_id']);
+					$port_array[$i]['port_number'] = mactrack_arr_key($port_result, 'port_number');
 					$port_array[$i]['port_name'] = $portName;
 					$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
 
 					foreach ($port_array as $test_array) {
 						if (($test_array['port_name'] == $portName) && ($test_array['mac_address'] != $port_result['mac_address'])) {
-							$port_array[$i]['port_number'] = @$port_result['port_number'] . ' - *';
+							$port_array[$i]['port_number'] = mactrack_arr_key($port_result, 'port_number') . ' - *';
 						}
 					}
 
