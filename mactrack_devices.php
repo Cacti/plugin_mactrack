@@ -880,9 +880,7 @@ function mactrack_device_edit() {
 
 					$old_device = $device;
 
-// tady
  					if (!valid_snmp_device($device)) {
-//					if ($snmp_system == '') {
 						print "<span style='color: #ff0000; font-weight: bold;'>SNMP error</span>\n";
 					} else {
 						// snmp readstring is incorrect but mactrack found correct values in any snmp set
