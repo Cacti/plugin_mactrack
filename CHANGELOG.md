@@ -3,6 +3,7 @@
 --- develop ---
 
 * issue#206: Improve PHP8.x - undefined variables, array keys, ... 
+* issue#198: Better control for DNS resolving process
 
 --- 4.6 ---
 

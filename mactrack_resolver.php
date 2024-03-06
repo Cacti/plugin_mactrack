@@ -36,6 +36,9 @@ if (is_numeric($max_run_duration)) {
 	/* let PHP a 5 minutes less than the rerun frequency */
 	$max_run_duration = ($max_run_duration * 60) - 300;
 	ini_set('max_execution_time', $max_run_duration);
+} else {
+	$max_run_duration = 3300;
+	ini_set('max_execution_time', $max_run_duration);
 }
 
 /* establish constants */
@@ -98,7 +101,7 @@ if (read_config_option('mt_reverse_dns') == 'on') {
 }
 
 /* silently end if the registered process is still running  */
-if (!register_process_start('mactrack_resolver', 'master', 0, 86400)) {
+if (!register_process_start('mactrack_resolver', 'master', 0, $max_run_duration-300)) {
 	print "FATAL: Detected an already running process." . PHP_EOL;
 	exit(0);
 }
