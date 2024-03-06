@@ -98,7 +98,7 @@ if (read_config_option('mt_reverse_dns') == 'on') {
 }
 
 /* silently end if the registered process is still running  */
-if (!register_process_start('mactrack_resolver', 'master', 0, 86400)) {
+if (!register_process_start('mactrack_resolver', 'master', 0, $max_run_duration-300)) {
 	print "FATAL: Detected an already running process." . PHP_EOL;
 	exit(0);
 }
