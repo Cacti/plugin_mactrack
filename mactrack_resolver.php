@@ -36,6 +36,9 @@ if (is_numeric($max_run_duration)) {
 	/* let PHP a 5 minutes less than the rerun frequency */
 	$max_run_duration = ($max_run_duration * 60) - 300;
 	ini_set('max_execution_time', $max_run_duration);
+} else {
+	$max_run_duration = 3300;
+	ini_set('max_execution_time', $max_run_duration);
 }
 
 /* establish constants */
