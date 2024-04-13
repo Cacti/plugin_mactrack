@@ -32,6 +32,9 @@ include_once($config['base_path'] . '/plugins/mactrack/Net/DNS2.php');
 /* get the mactrack polling cycle */
 $max_run_duration = read_config_option('mt_collection_timing');
 
+/* get the mactrack max script runtime - in minutes */
+$max_script_runtime = read_config_option('mt_script_runtime') * 60;
+
 if (is_numeric($max_run_duration)) {
 	/* let PHP a 5 minutes less than the rerun frequency */
 	$max_run_duration = ($max_run_duration * 60) - 300;
@@ -145,7 +148,7 @@ while (1) {
 		FROM mac_track_processes
 		WHERE device_id != 0');
 
-	if ((($now - $start) > ($max_run_duration-10)) && ($processes_running == 0)) {
+	if ((($now - $start) > ($max_script_runtime)) && ($processes_running == 0)) {
 		$break = true;
 	} else {
 		$break = false;
