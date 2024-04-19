@@ -92,7 +92,7 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	$i = 0;
 	foreach ($vlan_ids as $vlan_id => $vlan_num) {
 		$active_vlans[$vlan_id]['vlan_id'] = $vlan_num;
-		$active_vlans[$vlan_id]['vlan_name'] = $vlan_names[$vlan_id];
+		$active_vlans[$vlan_id]['vlan_name'] = mactrack_arr_key($vlan_names, $vlan_id);
 		$active_vlans++;
 
 		$i++;
