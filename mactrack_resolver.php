@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2024 The Cacti Group                                 |
+ | Copyright (C) 2004-2023 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -32,6 +32,9 @@ include_once($config['base_path'] . '/plugins/mactrack/Net/DNS2.php');
 /* get the mactrack polling cycle */
 $max_run_duration = read_config_option('mt_collection_timing');
 
+/* get the mactrack max script runtime - in minutes */
+$max_script_runtime = read_config_option('mt_script_runtime') * 60;
+
 if (is_numeric($max_run_duration)) {
 	/* let PHP a 5 minutes less than the rerun frequency */
 	$max_run_duration = ($max_run_duration * 60) - 300;
@@ -52,6 +55,7 @@ array_shift($parms);
 
 $debug   = false;
 $site_id = '';
+$start = time();
 
 if (cacti_sizeof($parms)) {
 	foreach($parms as $parameter) {
@@ -137,19 +141,14 @@ if (cacti_sizeof($nameservers)) {
 
 /* loop until you are it */
 while (1) {
+
+	$now = time();
+
 	$processes_running = db_fetch_cell('SELECT COUNT(*)
 		FROM mac_track_processes
 		WHERE device_id != 0');
 
-	$run_status = db_fetch_assoc("SELECT last_rundate,
-		COUNT(last_rundate) AS devices
-		FROM mac_track_devices
-		WHERE disabled = ''
-		$sql_where
-		GROUP BY last_rundate
-		ORDER BY last_rundate DESC");
-
-	if ((cacti_sizeof($run_status) == 1) && ($processes_running == 0)) {
+	if ((($now - $start) > ($max_script_runtime)) && ($processes_running == 0)) {
 		$break = true;
 	} else {
 		$break = false;
