@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2023-12-11 21:38-0600\n"
-"PO-Revision-Date: 2021-05-04 08:47+0000\n"
+"POT-Creation-Date: 2024-04-20 17:08-0400\n"
+"PO-Revision-Date: 2024-04-20 17:52-0400\n"
 "Last-Translator: Linya Huang <linya0405@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <http://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\n"
-"Language: zh-TW\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -30,130 +30,110 @@ msgid "Running"
 msgstr "運行"
 
 #: lib/mactrack_functions.php:39
-#, fuzzy
 msgid "No method"
 msgstr "方法"
 
 #: lib/mactrack_functions.php:40 mactrack_view_dot1x.php:486
 #: mactrack_view_dot1x.php:620
-#, fuzzy
 msgid "Authentication Success"
 msgstr "認證成功"
 
 #: lib/mactrack_functions.php:41 mactrack_view_dot1x.php:488
 #: mactrack_view_dot1x.php:621
-#, fuzzy
 msgid "Authentication Failed"
 msgstr "身份驗證失敗"
 
 #: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:485
 #: mactrack_view_dot1x.php:622
-#, fuzzy
 msgid "Authorization Success"
 msgstr "授權成功"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:487
 #: mactrack_view_dot1x.php:623
-#, fuzzy
 msgid "Authorization Failed"
 msgstr "授權失敗"
 
 #: lib/mactrack_functions.php:2458
-#, fuzzy
 msgid "Device Tracking OUI Database Import Results"
 msgstr "設備跟踪OUI數據庫導入結果"
 
 #: lib/mactrack_functions.php:2459
-#, fuzzy
 msgid "Getting OUI Database from IEEE"
 msgstr "從IEEE獲取OUI數據庫"
 
 #: lib/mactrack_functions.php:2461
-#, fuzzy
 msgid "Getting OUI Database from the IEEE"
 msgstr "從IEEE獲取OUI數據庫"
 
 #: lib/mactrack_functions.php:2469
-#, fuzzy
 msgid "OUI Database Download from IEEE Complete"
 msgstr "從IEEE Complete下載OUI數據庫"
 
 #: lib/mactrack_functions.php:2471
-#, fuzzy
 msgid "OUI Database Download from IEEE FAILED"
 msgstr "從FAILED下載OUI數據庫"
 
 #: lib/mactrack_functions.php:2558
-#, fuzzy, php-format
+#, php-format
 msgid "There were '%d' Entries Added/Updated in the database."
-msgstr "數據庫中添加/更新了'％d'個條目。"
+msgstr "資料庫中新增/更新了'%d'個條目。"
 
 #: lib/mactrack_functions.php:2560
-#, fuzzy, php-format
+#, php-format
 msgid "There were '%d' Records Removed from the database."
-msgstr "從數據庫中刪除了'％d'記錄。"
+msgstr "已從資料庫中移除'%d'個記錄。"
 
 #: lib/mactrack_functions.php:2582
-#, fuzzy
 msgid "atifIndexes data collection complete"
 msgstr "atifIndexes數據收集完成"
 
 #: lib/mactrack_functions.php:2600
-#, fuzzy
 msgid "atPhysAddress data collection complete"
 msgstr "atPhysAddress數據收集完成"
 
 #: lib/mactrack_functions.php:2608
-#, fuzzy
 msgid "atNetAddress data collection complete"
 msgstr "atNetAddress數據收集完成"
 
 #: lib/mactrack_functions.php:2621
-#, fuzzy
 msgid "atEntries assembly complete."
 msgstr "atEntries裝配完成。"
 
 #: lib/mactrack_functions.php:2652
-#, fuzzy, php-format
+#, php-format
 msgid "HOST: %s, IP address information collection complete"
-msgstr "主機：％s，IP地址信息收集完成"
+msgstr "主機： %s ， IP地址信息收集完成"
 
 #: lib/mactrack_functions.php:2669 lib/mactrack_functions.php:3166
-#, fuzzy
 msgid "Rescan Device"
 msgstr "重新掃描設備"
 
 #: lib/mactrack_functions.php:2692
-#, fuzzy
 msgid "View Non Interface Graphs"
 msgstr "查看接口"
 
 #: lib/mactrack_functions.php:2694
-#, fuzzy
 msgid "No Non Interface Graphs in Cacti"
 msgstr "仙人掌中沒有非接口圖"
 
 #: lib/mactrack_functions.php:2711
-#, fuzzy
 msgid "View Interface Graphs"
 msgstr "查看接口"
 
 #: lib/mactrack_functions.php:2713
-#, fuzzy
 msgid "No Interface Graphs in Cacti"
 msgstr "查看接口"
 
 #: lib/mactrack_functions.php:2730 lib/mactrack_functions.php:2733
-#, fuzzy
 msgid "Since Restart"
 msgstr "自重啟以來"
 
-#: lib/mactrack_functions.php:2772 mactrack_devices.php:1247
+#: lib/mactrack_functions.php:2772 mactrack_devices.php:1245
 #: mactrack_view_devices.php:512
 msgid "Down"
 msgstr "向下"
 
-#: lib/mactrack_functions.php:2772 mactrack_devices.php:1245
+#: lib/mactrack_functions.php:2772 mactrack_devices.php:1243
 #: mactrack_view_devices.php:510
 msgid "Up"
 msgstr "向上"
@@ -163,29 +143,28 @@ msgid "Data"
 msgstr "數據"
 
 #: lib/mactrack_functions.php:2808
-#, fuzzy
 msgid "Voice"
 msgstr "語音"
 
 #: lib/mactrack_functions.php:2860
-#, fuzzy, php-format
+#, php-format
 msgid "Device Rescan '%s'"
-msgstr "設備重新掃描'％s'"
+msgstr "裝置重新掃描'%s'"
 
 #: lib/mactrack_functions.php:2900
-#, fuzzy, php-format
+#, php-format
 msgid "Site scan '%s'"
-msgstr "網站掃描'％s'"
+msgstr "網站掃描'%s'"
 
 #: lib/mactrack_functions.php:2937
-#, fuzzy, php-format
+#, php-format
 msgid "Device Enable '%s'"
-msgstr "設備啟用'％s'"
+msgstr "裝置啟用'%s'"
 
 #: lib/mactrack_functions.php:2969
-#, fuzzy, php-format
+#, php-format
 msgid "Device Disable '%d'"
-msgstr "設備禁用'％d'"
+msgstr "裝置停用'%d'"
 
 #: lib/mactrack_functions.php:3085 lib/mactrack_functions.php:3117
 #: lib/mactrack_functions.php:3118 lib/mactrack_functions.php:3180
@@ -223,44 +202,41 @@ msgstr "%d 天"
 #: lib/mactrack_functions.php:3098
 #, php-format
 msgid "%d Weeks"
-msgstr "％d週"
+msgstr "最後％d週"
 
 #: lib/mactrack_functions.php:3116
-#, fuzzy
 msgid "Not Recorded"
 msgstr "沒有記錄"
 
 #: lib/mactrack_functions.php:3136
-#, fuzzy, php-format
+#, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
-msgstr "狀態：正在運行，進程：％d，進度：％s，LastRuntime：％f"
+msgstr "狀態：正在執行，處理程序： %d ，進度： %s ， LastRuntime ： %2.1f"
 
 #: lib/mactrack_functions.php:3138
-#, fuzzy, php-format
+#, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
-msgstr "狀態：空閒，LastRuntime：％f秒，進程：％d進程，設備：％d，下次運行時間：％s"
+msgstr "狀態：閒置，上次執行時間： %2.1f秒，處理程序： %d個處理程序，裝置： %d ，下次執行時間： %s"
 
 #: lib/mactrack_functions.php:3140 mactrack_device_types.php:959
-#: mactrack_devices.php:1246 mactrack_utilities.php:240
+#: mactrack_devices.php:1244 mactrack_utilities.php:240
 #: mactrack_utilities.php:266 mactrack_view_devices.php:511 setup.php:927
 #: setup.php:954 setup.php:1097
 msgid "Disabled"
 msgstr "停用"
 
 #: lib/mactrack_functions.php:3146
-#, fuzzy, php-format
+#, php-format
 msgid "Scanning Rate: Every %s"
-msgstr "掃描速度：每％s"
+msgstr "掃描速率：每%s"
 
 #: lib/mactrack_functions.php:3161 mactrack_view_devices.php:373
 #: mactrack_view_sites.php:310 mactrack_view_sites.php:404
-#, fuzzy
 msgid "View Interfaces"
 msgstr "查看接口"
 
-#: lib/mactrack_functions.php:3179 mactrack_devices.php:1199
+#: lib/mactrack_functions.php:3179 mactrack_devices.php:1197
 #: mactrack_view_devices.php:468
-#, fuzzy
 msgid "Not Detected"
 msgstr "沒有檢測到"
 
@@ -271,7 +247,7 @@ msgid "Sites"
 msgstr "網站"
 
 #: lib/mactrack_functions.php:3234 mactrack_device_types.php:952
-#: mactrack_devices.php:1107 mactrack_devices.php:1254 mactrack_sites.php:427
+#: mactrack_devices.php:1105 mactrack_devices.php:1252 mactrack_sites.php:427
 #: mactrack_utilities.php:280 mactrack_view_devices.php:325
 #: mactrack_view_devices.php:519 mactrack_view_sites.php:252 setup.php:549
 #: setup.php:967
@@ -296,7 +272,6 @@ msgid "Interfaces"
 msgstr "介面卡"
 
 #: lib/mactrack_functions.php:3239
-#, fuzzy
 msgid "Dot1x"
 msgstr "DOT1X"
 
@@ -305,12 +280,12 @@ msgid "Graphs"
 msgstr "圖表"
 
 #: lib/mactrack_functions.php:3274 mactrack_device_types.php:469
-#: mactrack_devices.php:1248 mactrack_view_devices.php:513 setup.php:902
+#: mactrack_devices.php:1246 mactrack_view_devices.php:513 setup.php:902
 msgid "Unknown"
 msgstr "未知"
 
 #: lib/mactrack_functions.php:3288 mactrack_device_types.php:1031
-#: mactrack_devices.php:1148 mactrack_macauth.php:370 mactrack_macwatch.php:387
+#: mactrack_devices.php:1146 mactrack_macauth.php:370 mactrack_macwatch.php:387
 #: mactrack_snmp.php:600 mactrack_vendormacs.php:199 mactrack_view_arp.php:429
 #: mactrack_view_devices.php:418 mactrack_view_dot1x.php:512
 #: mactrack_view_interfaces.php:625 mactrack_view_macs.php:1043
@@ -318,19 +293,18 @@ msgid "Search"
 msgstr "搜尋"
 
 #: lib/mactrack_functions.php:3298 mactrack_device_types.php:1041
-#: mactrack_devices.php:1258 mactrack_macauth.php:380 mactrack_macwatch.php:397
+#: mactrack_devices.php:1256 mactrack_macauth.php:380 mactrack_macwatch.php:397
 #: mactrack_snmp.php:610 mactrack_vendormacs.php:209
 #: mactrack_view_devices.php:523 mactrack_view_ips.php:318 setup.php:914
 msgid "Default"
 msgstr "預設"
 
 #: lib/mactrack_functions.php:3312
-#, fuzzy
 msgid "Show Device Details"
 msgstr "顯示設備細節"
 
 #: lib/mactrack_functions.php:3315 mactrack_device_types.php:1053
-#: mactrack_devices.php:1172 mactrack_macauth.php:392 mactrack_macwatch.php:409
+#: mactrack_devices.php:1170 mactrack_macauth.php:392 mactrack_macwatch.php:409
 #: mactrack_snmp.php:624 mactrack_vendormacs.php:221 mactrack_view_arp.php:493
 #: mactrack_view_devices.php:442 mactrack_view_dot1x.php:585
 #: mactrack_view_interfaces.php:542 mactrack_view_macs.php:1107
@@ -338,7 +312,7 @@ msgid "Go"
 msgstr "送出"
 
 #: lib/mactrack_functions.php:3318 mactrack_device_types.php:1054
-#: mactrack_devices.php:1173 mactrack_macauth.php:393 mactrack_macwatch.php:410
+#: mactrack_devices.php:1171 mactrack_macauth.php:393 mactrack_macwatch.php:410
 #: mactrack_snmp.php:625 mactrack_vendormacs.php:222 mactrack_view_arp.php:494
 #: mactrack_view_devices.php:443 mactrack_view_dot1x.php:586
 #: mactrack_view_interfaces.php:543 mactrack_view_ips.php:331
@@ -347,14 +321,14 @@ msgid "Clear"
 msgstr "清除"
 
 #: lib/mactrack_functions.php:3321 mactrack_device_types.php:1057
-#: mactrack_devices.php:1175 mactrack_vendormacs.php:223
+#: mactrack_devices.php:1173 mactrack_vendormacs.php:223
 #: mactrack_view_arp.php:495 mactrack_view_devices.php:444
 #: mactrack_view_dot1x.php:587 mactrack_view_interfaces.php:544
 #: mactrack_view_ips.php:330 mactrack_view_macs.php:1109
 msgid "Export"
 msgstr "匯出"
 
-#: lib/mactrack_functions.php:3330 mactrack_devices.php:1154
+#: lib/mactrack_functions.php:3330 mactrack_devices.php:1152
 #: mactrack_view_arp.php:435 mactrack_view_devices.php:424
 #: mactrack_view_dot1x.php:518 mactrack_view_interfaces.php:494
 #: mactrack_view_ips.php:298 mactrack_view_macs.php:1049
@@ -362,46 +336,40 @@ msgid "Site"
 msgstr "網站"
 
 #: lib/mactrack_functions.php:3334 lib/mactrack_functions.php:3350
-#: mactrack_devices.php:1187 mactrack_devices.php:1198
-#: mactrack_devices.php:1244 mactrack_view_devices.php:456
+#: mactrack_devices.php:1185 mactrack_devices.php:1196
+#: mactrack_devices.php:1242 mactrack_view_devices.php:456
 #: mactrack_view_devices.php:467 mactrack_view_devices.php:509
 #: mactrack_view_ips.php:302
 msgid "Any"
 msgstr "任何"
 
-#: lib/mactrack_functions.php:3346 mactrack_devices.php:1194
+#: lib/mactrack_functions.php:3346 mactrack_devices.php:1192
 #: mactrack_view_devices.php:463
-#, fuzzy
 msgid "SubType"
 msgstr "子類型"
 
 #: mactrack_actions.php:215
-#, fuzzy, php-format
+#, php-format
 msgid "Device Tracking Device: (%s) successfully updated"
-msgstr "設備跟踪設備：（％s）已成功更新"
+msgstr "裝置追蹤裝置： (%s)已成功更新"
 
 #: mactrack_actions.php:228
-#, fuzzy
 msgid "Import into Device Tracking Database"
 msgstr "導入設備跟踪數據庫"
 
 #: mactrack_actions.php:241
-#, fuzzy
 msgid "Click 'Continue' to import the following Device to Device Tracking?  Please specify additional Device Tracking device options as given below."
 msgstr "點擊“繼續”將以下設備導入設備跟踪？請指定其他設備跟踪設備選項，如下所示。"
 
 #: mactrack_actions.php:265
-#, fuzzy
 msgid "We will use these devices SNMP options for the Device Tracking device as well."
 msgstr "我們也將這些設備用於設備跟踪設備的SNMP選項。"
 
 #: mactrack_device_types.php:38
-#, fuzzy
 msgid "Not Applicable - Router"
 msgstr "不適用 - 路由器"
 
 #: mactrack_device_types.php:51
-#, fuzzy
 msgid "Not Applicable - Switch/Hub"
 msgstr "不適用 - 交換機/集線器"
 
@@ -416,12 +384,10 @@ msgid "Duplicate"
 msgstr "複製"
 
 #: mactrack_device_types.php:214 mactrack_device_types.php:215
-#, fuzzy
 msgid "--dup--"
 msgstr "--dup--"
 
 #: mactrack_device_types.php:286
-#, fuzzy
 msgid "You must select at least one device type."
 msgstr "您必須至少選擇一種設備類型。"
 
@@ -432,22 +398,18 @@ msgid "Continue"
 msgstr "繼續"
 
 #: mactrack_device_types.php:294
-#, fuzzy
 msgid "Click 'Continue' to delete the following Device Type(s)."
 msgstr "單擊“繼續”以刪除以下設備類型。"
 
 #: mactrack_device_types.php:301
-#, fuzzy
 msgid "Click 'Continue' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
 msgstr "單擊“繼續”以復制以下設備類型。您可以選擇更改新設備類型的描述。否則，請勿更改以下值，並使用新後綴複製原始名稱。"
 
 #: mactrack_device_types.php:303
-#, fuzzy
 msgid "<description> (1)"
 msgstr "<description> （1）"
 
 #: mactrack_device_types.php:303
-#, fuzzy
 msgid "Device Type Prefix:"
 msgstr "設備類型前綴："
 
@@ -472,12 +434,11 @@ msgid "Cisco"
 msgstr "Cisco"
 
 #: mactrack_device_types.php:482
-#, fuzzy, php-format
+#, php-format
 msgid "There were %d Device Types Added!"
-msgstr "有％d個設備類型已添加！"
+msgstr "已新增%d個裝置類型！"
 
 #: mactrack_device_types.php:484
-#, fuzzy
 msgid "No New Device Types Found!"
 msgstr "找不到新的設備類型！"
 
@@ -486,245 +447,205 @@ msgid "Import Results"
 msgstr "匯入結果"
 
 #: mactrack_device_types.php:496 mactrack_devices.php:498
-#, fuzzy
 msgid "Cacti has imported the following items:"
 msgstr "Cacti已導入以下物品："
 
 #: mactrack_device_types.php:507
-#, fuzzy
 msgid "Import Device Tracking Device Types"
 msgstr "導入設備跟踪設備類型"
 
 #: mactrack_device_types.php:510
-#, fuzzy
 msgid "Import Device Types from Local File"
 msgstr "從本地文件導入設備類型"
 
 #: mactrack_device_types.php:511
-#, fuzzy
 msgid "Please specify the location of the CSV file containing your device type information."
 msgstr "請指定包含設備類型信息的CSV文件的位置。"
 
 #: mactrack_device_types.php:518 mactrack_devices.php:523
-#, fuzzy
 msgid "Overwrite Existing Data?"
 msgstr "覆蓋現有數據？"
 
 #: mactrack_device_types.php:519 mactrack_devices.php:524
-#, fuzzy
 msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
 msgstr "是否允許導入過程覆蓋現有數據？請注意，這並不意味著刪除舊行，只替換重複行。"
 
 #: mactrack_device_types.php:522 mactrack_devices.php:527
-#, fuzzy
 msgid "Allow Existing Rows to be Updated?"
 msgstr "允許更新現有行？"
 
 #: mactrack_device_types.php:527 mactrack_devices.php:532
-#, fuzzy
 msgid "Required File Format Notes"
 msgstr "所需的文件格式說明"
 
 #: mactrack_device_types.php:530 mactrack_devices.php:535
-#, fuzzy
 msgid "The file must contain a header row with the following column headings."
 msgstr "該文件必須包含帶有以下列標題的標題行。"
 
 #: mactrack_device_types.php:532
-#, fuzzy
 msgid " - A common name for the device.  For example Cisco 6509 Switch"
 msgstr "- 設備的通用名稱。例如Cisco 6509交換機"
 
 #: mactrack_device_types.php:533
-#, fuzzy
 msgid " - The vendor who produces this device"
 msgstr "- 生產此設備的供應商"
 
 #: mactrack_device_types.php:534
-#, fuzzy
 msgid " - The type of device this is.  See the notes below for this integer value"
 msgstr "- 這是設備的類型。有關此整數值，請參閱下面的註釋"
 
 #: mactrack_device_types.php:535
-#, fuzzy
 msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
 msgstr "- 來自snmp sysDescr的唯一一組字符，用於唯一標識此設備"
 
 #: mactrack_device_types.php:536
-#, fuzzy
 msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
 msgstr "- 供應商特定的snmp sysObjectID，用於區分此設備與下一個設備"
 
 #: mactrack_device_types.php:537
-#, fuzzy
 msgid " - The scanning function that will be used to scan this device type"
 msgstr "- 用於掃描此設備類型的掃描功能"
 
 #: mactrack_device_types.php:538
-#, fuzzy
 msgid " - The IP scanning function that will be used to scan this device type"
 msgstr "- 用於掃描此設備類型的IP掃描功能"
 
 #: mactrack_device_types.php:539
-#, fuzzy
 msgid " - The 802.1x scanning function that will be used to scan this device type"
 msgstr "- 將用於掃描此設備類型的802.1x掃描功能"
 
 #: mactrack_device_types.php:540
-#, fuzzy
 msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
 msgstr "- 如果可以通過SNMP查詢獲取此設備類型的序列號，請在此處添加它的OID"
 
 #: mactrack_device_types.php:541
-#, fuzzy
 msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
 msgstr "- 如果您的掃描功能無法隔離中繼端口或鏈路端口，則這是用戶端口的起始端口號"
 
 #: mactrack_device_types.php:542
-#, fuzzy
 msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
 msgstr "- 與lowPort相同，但這是高編號的用戶端口號"
 
 #: mactrack_device_types.php:543
 msgid " - Disabled type is not used"
-msgstr ""
+msgstr "-未使用停用類型"
 
 #: mactrack_device_types.php:545 mactrack_devices.php:558
-#, fuzzy
 msgid "The primary key for this table is a combination of the following three fields:"
 msgstr "此表的主鍵是以下三個字段的組合："
 
 #: mactrack_device_types.php:549
-#, fuzzy
 msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
 msgstr "因此，如果您嘗試導入重複的設備類型，將使用新信息更新現有數據。"
 
 #: mactrack_device_types.php:551 mactrack_devices.php:564
-#, fuzzy
 msgid " is an integer field and must be one of the following:"
 msgstr "是整數字段，必須是以下之一："
 
 #: mactrack_device_types.php:553 mactrack_devices.php:566
-#, fuzzy
 msgid "1 - Switch/Hub"
 msgstr "1  - 交換機/集線器"
 
 #: mactrack_device_types.php:554 mactrack_devices.php:567
-#, fuzzy
 msgid "2 - Switch/Router"
 msgstr "2  - 交換機/路由器"
 
 #: mactrack_device_types.php:555 mactrack_devices.php:568
-#, fuzzy
 msgid "3 - Router"
 msgstr "3  - 路由器"
 
 #: mactrack_device_types.php:557
-#, fuzzy
 msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used direct Device Tracking as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
 msgstr "設備設備類型是通過掃描它的snmp代理來確定sysObjectID和sysDescription並將其與設備類型數據庫中的值進行比較來確定的。在數據庫中找到的第一個匹配項使用直接設備跟踪來了解如何掃描它。因此，為設備選擇有效的sysObjectID_match，sysDescr_match和掃描功能非常重要。"
 
 #: mactrack_device_types.php:574 mactrack_device_types.php:1090
-#: mactrack_devices.php:1188 setup.php:885
-#, fuzzy
+#: mactrack_devices.php:1186 setup.php:885
 msgid "Switch/Hub"
 msgstr "交換機/集線器"
 
 #: mactrack_device_types.php:575 mactrack_device_types.php:1091
-#: mactrack_devices.php:1189 mactrack_view_devices.php:458 setup.php:886
-#, fuzzy
+#: mactrack_devices.php:1187 mactrack_view_devices.php:458 setup.php:886
 msgid "Switch/Router"
 msgstr "交換機/路由器"
 
 #: mactrack_device_types.php:576 mactrack_device_types.php:1092
-#: mactrack_devices.php:1190 mactrack_view_devices.php:459 setup.php:887
-#, fuzzy
+#: mactrack_devices.php:1188 mactrack_view_devices.php:459 setup.php:887
 msgid "Router"
 msgstr "路由器"
 
 #: mactrack_device_types.php:724
-#, fuzzy, php-format
+#, php-format
 msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
-msgstr "HEADER LINE PROCESSED OK： <br>列中找到：％s"
+msgstr "標題行處理正常：<br>找到列，其中： %s"
 
 #: mactrack_device_types.php:726 mactrack_devices.php:729
-#, fuzzy, php-format
+#, php-format
 msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
-msgstr "HEADER LINE PROCESSING ERROR：缺少必填字段<br>列中找到：％s"
+msgstr "標題行處理錯誤：找不到必填欄位欄<br>位，其中： %s"
 
 #: mactrack_device_types.php:782
-#, fuzzy
 msgid "Unknown Assume \"Switch/Hub\""
 msgstr "未知假設“Switch / Hub”"
 
 #: mactrack_device_types.php:817 mactrack_device_types.php:832
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
-msgstr "INSERT SUCCEEDED：供應商：％s，描述：％s，類型：％s，sysDescr：％s，sysObjectID：％s"
+msgstr "插入成功：供應商： %s ，描述： %s ，類型： %s ， sysDescr ： %s ， sysObjectID ： %s"
 
 #: mactrack_device_types.php:819 mactrack_device_types.php:834
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
-msgstr "INSERT FAILED：供應商：％s，描述：％s，類型：％s，sysDescr：％s，sysObjectID：％s"
+msgstr "插入失敗：供應商： %s ，描述： %s ，類型： %s ， sysDescr ： %s ， sysObjectID ： %s"
 
 #: mactrack_device_types.php:826
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
-msgstr "INSERT SKIPPED，現有：供應商：％s，描述：％s，類型：％s，sysDescr：％s，sysObjectID：％s"
+msgstr "插入已跳過，現有：供應商： %s ，描述： %s ，類型： %s ， sysDescr ： %s ， sysObjectID ： %s"
 
 #: mactrack_device_types.php:860
-#, fuzzy, php-format
+#, php-format
 msgid "Device Tracking Device Types [edit: %s]"
-msgstr "設備跟踪設備類型[編輯：％s]"
+msgstr "裝置追蹤裝置類型[編輯： %s]"
 
 #: mactrack_device_types.php:862
-#, fuzzy
 msgid "Device Tracking Device Types [new]"
 msgstr "設備跟踪設備類型[新]"
 
 #: mactrack_device_types.php:936
-#, fuzzy
 msgid "Device Tracking Device Type Filters"
 msgstr "設備跟踪設備類型過濾器"
 
 #: mactrack_device_types.php:951
-#, fuzzy
 msgid "Device Type Description"
 msgstr "設備類型說明"
 
-#: mactrack_device_types.php:953 mactrack_devices.php:1070
+#: mactrack_device_types.php:953 mactrack_devices.php:1068
 #: mactrack_sites.php:502 mactrack_view_devices.php:283
 #: mactrack_view_sites.php:348 setup.php:1014
 msgid "Device Type"
 msgstr "設備類型"
 
 #: mactrack_device_types.php:954
-#, fuzzy
 msgid "Port Scanner"
 msgstr "端口掃描儀"
 
 #: mactrack_device_types.php:955
-#, fuzzy
 msgid "IP Scanner"
 msgstr "IP掃描儀"
 
 #: mactrack_device_types.php:956
-#, fuzzy
 msgid "Dot1x Scanner"
 msgstr "Dot1x掃描儀"
 
 #: mactrack_device_types.php:957
-#, fuzzy
 msgid "sysDescription Match"
 msgstr "sysDescription匹配"
 
 #: mactrack_device_types.php:958
-#, fuzzy
 msgid "Vendor OID Match"
 msgstr "供應商OID匹配"
 
 #: mactrack_device_types.php:964 mactrack_device_types.php:1037 setup.php:969
-#, fuzzy
 msgid "Device Types"
 msgstr "設備類型"
 
@@ -739,7 +660,6 @@ msgid "Yes"
 msgstr "是"
 
 #: mactrack_device_types.php:1007
-#, fuzzy
 msgid "No Device Tracking Device Types Found"
 msgstr "未找到設備跟踪設備類型"
 
@@ -748,7 +668,6 @@ msgid "Submit Query"
 msgstr "送出查詢"
 
 #: mactrack_device_types.php:1054
-#, fuzzy
 msgid "Clear Filtered Results"
 msgstr "清除篩選結果"
 
@@ -757,21 +676,18 @@ msgid "Rescan"
 msgstr "重新掃描"
 
 #: mactrack_device_types.php:1055
-#, fuzzy
 msgid "Scan Active Devices for Unknown Device Types"
 msgstr "設備跟踪設備類型"
 
-#: mactrack_device_types.php:1056 mactrack_devices.php:1174
+#: mactrack_device_types.php:1056 mactrack_devices.php:1172
 msgid "Import"
 msgstr "匯入"
 
 #: mactrack_device_types.php:1056
-#, fuzzy
 msgid "Import Device Types from a CSV File"
 msgstr "從本地文件導入設備類型"
 
 #: mactrack_device_types.php:1057
-#, fuzzy
 msgid "Export Device Types to Share with Others"
 msgstr "從本地文件導入設備類型"
 
@@ -781,7 +697,7 @@ msgid "Vendor"
 msgstr "供應商"
 
 #: mactrack_device_types.php:1072 mactrack_device_types.php:1089
-#: mactrack_device_types.php:1100 mactrack_devices.php:1158
+#: mactrack_device_types.php:1100 mactrack_devices.php:1156
 #: mactrack_view_arp.php:455 mactrack_view_arp.php:522
 #: mactrack_view_devices.php:428 mactrack_view_dot1x.php:541
 #: mactrack_view_dot1x.php:637 mactrack_view_dot1x.php:675
@@ -792,7 +708,7 @@ msgstr "供應商"
 msgid "All"
 msgstr "全部"
 
-#: mactrack_device_types.php:1085 mactrack_devices.php:1183
+#: mactrack_device_types.php:1085 mactrack_devices.php:1181
 #: mactrack_view_devices.php:452 mactrack_view_interfaces.php:368
 #: mactrack_view_interfaces.php:552
 msgid "Type"
@@ -811,256 +727,214 @@ msgid "Disable"
 msgstr "停用"
 
 #: mactrack_devices.php:35
-#, fuzzy
 msgid "Change SNMP Options"
 msgstr "更改SNMP選項"
 
 #: mactrack_devices.php:36
-#, fuzzy
 msgid "Change Device Port Values"
 msgstr "更改設備端口值"
 
 #: mactrack_devices.php:37
-#, fuzzy
 msgid "Connect to Cacti Host via Hostname"
 msgstr "通過主機名連接到Cacti主機"
 
 #: mactrack_devices.php:38
-#, fuzzy
 msgid "Copy SNMP Settings from Cacti Host"
 msgstr "從Cacti主機複製SNMP設置"
 
 #: mactrack_devices.php:256
-#, fuzzy
 msgid "You must select at least one device."
 msgstr "您必須至少選擇一個設備。"
 
 #: mactrack_devices.php:264
-#, fuzzy
 msgid "Click 'Continue' to enable the following devices."
 msgstr "單擊“繼續”以啟用以下設備。"
 
 #: mactrack_devices.php:271
-#, fuzzy
 msgid "Click 'Continue' to disable the following devices."
 msgstr "單擊“繼續”以禁用以下設備。"
 
 #: mactrack_devices.php:278
-#, fuzzy
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
 msgstr "單擊“繼續”以更改以下設備的SNMP參數，選中要更新的字段旁邊的框，然後填寫新值。"
 
 #: mactrack_devices.php:308
-#, fuzzy
 msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
 msgstr "單擊“繼續”以更改以下設備的上部或下部端口參數，選中要更新的字段旁邊的框，然後填寫新值。"
 
 #: mactrack_devices.php:338
-#, fuzzy
 msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
 msgstr "單擊“繼續”將以下設備連接到各自的Cacti設備。該關係將建立在相同的主機名上。說明也將更新。"
 
 #: mactrack_devices.php:345
-#, fuzzy
 msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Device Tracking Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
 msgstr "單擊“繼續”將SNMP設置從連接的仙人掌設備複製到設備跟踪設備。所有未連接的設備都將被靜默跳過。 SNMP重試將從Ping重試中獲取。"
 
 #: mactrack_devices.php:352
-#, fuzzy
 msgid "Click 'Continue' to delete the following Devices"
 msgstr "單擊“繼續”以刪除以下設備"
 
 #: mactrack_devices.php:512
-#, fuzzy
 msgid "Import Device Tracking Devices"
 msgstr "導入設備跟踪設備"
 
 #: mactrack_devices.php:515
-#, fuzzy
 msgid "Import Devices from Local File"
 msgstr "從本地文件導入設備"
 
 #: mactrack_devices.php:516
-#, fuzzy
 msgid "Please specify the location of the CSV file containing your device information."
 msgstr "請指定包含設備信息的CSV文件的位置。"
 
 #: mactrack_devices.php:537
-#, fuzzy
 msgid " - The SiteID known to Device Tracking for this device"
 msgstr "- 此設備的設備跟踪已知的SiteID"
 
 #: mactrack_devices.php:538
-#, fuzzy
 msgid " - A simple name for the device.  For example Cisco 6509 Switch"
 msgstr "- 設備的簡單名稱。例如Cisco 6509交換機"
 
 #: mactrack_devices.php:539
-#, fuzzy
 msgid " - The IP Address or DNS Name for the device"
 msgstr "- 設備的IP地址或DNS名稱"
 
 #: mactrack_devices.php:540
-#, fuzzy
 msgid " - More detailed information about the device, including location, environmental conditions, etc."
 msgstr "- 有關設備的更多詳細信息，包括位置，環境條件等。"
 
 #: mactrack_devices.php:541
-#, fuzzy
 msgid " - A list of ports that should not be scanned for user devices"
 msgstr "- 不應掃描用戶設備的端口列表"
 
 #: mactrack_devices.php:542
-#, fuzzy
 msgid " - Redundant information indicating the intended device type.  See below for valid values."
 msgstr "- 指示預期設備類型的冗餘信息。請參閱下面的有效值。"
 
 #: mactrack_devices.php:543
-#, fuzzy
 msgid " - Id of a set of SNMP options"
 msgstr "- 一組SNMP選項的ID"
 
 #: mactrack_devices.php:544
-#, fuzzy
 msgid " - The current snmp read string for the device"
 msgstr "- 設備的當前snmp讀取字符串"
 
 #: mactrack_devices.php:545
-#, fuzzy
 msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
 msgstr "- 您希望掃描此設備的snmp版本。有效值為1,2和3"
 
 #: mactrack_devices.php:546
-#, fuzzy
 msgid " - The UDP port that the snmp agent is running on"
 msgstr "- 運行snmp代理的UDP端口"
 
 #: mactrack_devices.php:547
-#, fuzzy
 msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
 msgstr "- 再次嘗試之前等待snmp響應的超時（以毫秒為單位）"
 
 #: mactrack_devices.php:548
-#, fuzzy
 msgid " - The number of times to retry a snmp request before giving up"
 msgstr "- 放棄之前重試snmp請求的次數"
 
 #: mactrack_devices.php:549
-#, fuzzy
 msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
 msgstr "- 指定可在單個SNMP Get請求中獲取的OID數"
 
 #: mactrack_devices.php:550
-#, fuzzy
 msgid " - SNMP V3: SNMP username"
 msgstr "-  SNMP V3：SNMP用戶名"
 
 #: mactrack_devices.php:551
-#, fuzzy
 msgid " - SNMP V3: SNMP password"
 msgstr "-  SNMP V3：SNMP密碼"
 
 #: mactrack_devices.php:552
-#, fuzzy
 msgid " - SNMP V3: SNMP authentication protocol"
 msgstr "-  SNMP V3：SNMP身份驗證協議"
 
 #: mactrack_devices.php:553
-#, fuzzy
 msgid " - SNMP V3: SNMP privacy passphrase"
 msgstr "-  SNMP V3：SNMP隱私密碼"
 
 #: mactrack_devices.php:554
-#, fuzzy
 msgid " - SNMP V3: SNMP privacy protocol"
 msgstr "-  SNMP V3：SNMP隱私協議"
 
 #: mactrack_devices.php:555
-#, fuzzy
 msgid " - SNMP V3: SNMP context"
 msgstr "-  SNMP V3：SNMP上下文"
 
 #: mactrack_devices.php:556
-#, fuzzy
 msgid " - SNMP V3: SNMP engine id"
 msgstr "-  SNMP V3：SNMP引擎ID"
 
 #: mactrack_devices.php:562
-#, fuzzy
 msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
 msgstr "因此，如果您嘗試導入重複的設備，則只會更新您指定的數據。"
 
 #: mactrack_devices.php:727
-#, fuzzy, php-format
+#, php-format
 msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
-msgstr "HEADER LINE PROCESSED OK： <br>列中找到：％s"
+msgstr "標題行處理正常：<br>找到列，其中： %s"
 
 #: mactrack_devices.php:813 mactrack_devices.php:828
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr "INSERT SUCCEEDED：主機名：SiteID：％s，設備名稱：％s，主機名％s，SNMP端口：％s"
+msgstr "插入成功：主機名稱： SiteID ： %s ，裝置名稱： %s ，主機名稱%s ， SNMP連接埠： %s"
 
 #: mactrack_devices.php:815 mactrack_devices.php:830
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr "INSERT FAILED：SiteID：％s，設備名稱：％s，主機名％s，SNMP端口：％s"
+msgstr "插入失敗： SiteID ： %s ，裝置名稱： %s ，主機名稱%s ， SNMP連接埠： %s"
 
 #: mactrack_devices.php:822
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr "INSERT SKIPPED，EXISTING：SiteID：％s，設備名稱：％s，主機名％s，SNMP端口：％s"
+msgstr "插入已跳過，現有： SiteID ： %s ，裝置名稱： %s ，主機名稱%s ， SNMP連接埠： %s"
 
 #: mactrack_devices.php:857
-#, fuzzy, php-format
+#, php-format
 msgid "Device Tracking Devices [edit: %s]"
-msgstr "設備跟踪設備[編輯：％s]"
+msgstr "裝置追蹤裝置[編輯： %s]"
 
 #: mactrack_devices.php:861
-#, fuzzy
 msgid "Device Tracking Devices [new]"
 msgstr "設備跟踪設備[新]"
 
 #: mactrack_devices.php:874
-#, fuzzy
 msgid "SNMP Information"
 msgstr "SNMP信息"
 
-#: mactrack_devices.php:927
-#, fuzzy
+#: mactrack_devices.php:925
 msgid "System:"
 msgstr "取得系統報表"
 
-#: mactrack_devices.php:928
-#, fuzzy
+#: mactrack_devices.php:926
 msgid "Uptime:"
 msgstr "運行時間"
 
-#: mactrack_devices.php:929
+#: mactrack_devices.php:927
 msgid "Hostname:"
 msgstr "主機名稱："
 
-#: mactrack_devices.php:930
-#, fuzzy
+#: mactrack_devices.php:928
 msgid "ObjectID:"
 msgstr "對象ID："
 
-#: mactrack_devices.php:1035
-#, fuzzy
+#: mactrack_devices.php:1033
 msgid "Device Tracking Device Filters"
 msgstr "設備跟踪設備過濾器"
 
-#: mactrack_devices.php:1054 mactrack_view_devices.php:267 setup.php:1255
+#: mactrack_devices.php:1052 mactrack_view_devices.php:267 setup.php:1255
 msgid "Device Name"
 msgstr "設備名稱"
 
-#: mactrack_devices.php:1058 mactrack_sites.php:423 mactrack_sites.php:494
+#: mactrack_devices.php:1056 mactrack_sites.php:423 mactrack_sites.php:494
 #: mactrack_view_devices.php:271 mactrack_view_ips.php:198
 #: mactrack_view_sites.php:248 mactrack_view_sites.php:340 setup.php:1286
 #: setup.php:1427
 msgid "Site Name"
 msgstr "網站名稱"
 
-#: mactrack_devices.php:1062 mactrack_devices.php:1240
+#: mactrack_devices.php:1060 mactrack_devices.php:1238
 #: mactrack_utilities.php:280 mactrack_view_devices.php:275
 #: mactrack_view_devices.php:505 mactrack_view_dot1x.php:415
 #: mactrack_view_dot1x.php:428 mactrack_view_dot1x.php:610
@@ -1068,85 +942,73 @@ msgstr "網站名稱"
 msgid "Status"
 msgstr "狀態"
 
-#: mactrack_devices.php:1066 mactrack_view_devices.php:279
+#: mactrack_devices.php:1064 mactrack_view_devices.php:279
 #: mactrack_view_interfaces.php:364 setup.php:1262
 msgid "Hostname"
 msgstr "主機名稱"
 
-#: mactrack_devices.php:1074
-#, fuzzy
+#: mactrack_devices.php:1072
 msgid "Total IPs"
 msgstr "總IP數"
 
-#: mactrack_devices.php:1079 mactrack_sites.php:437
+#: mactrack_devices.php:1077 mactrack_sites.php:437
 #: mactrack_view_devices.php:292 mactrack_view_sites.php:262
-#, fuzzy
 msgid "User Ports"
 msgstr "用戶端口"
 
-#: mactrack_devices.php:1084 mactrack_sites.php:442
+#: mactrack_devices.php:1082 mactrack_sites.php:442
 #: mactrack_view_devices.php:297 mactrack_view_sites.php:267
-#, fuzzy
 msgid "User Ports Up"
 msgstr "用戶端口Up"
 
-#: mactrack_devices.php:1089 mactrack_view_devices.php:302
-#, fuzzy
+#: mactrack_devices.php:1087 mactrack_view_devices.php:302
 msgid "Trunk Ports"
 msgstr "中繼端口"
 
-#: mactrack_devices.php:1094 mactrack_view_devices.php:307
-#, fuzzy
+#: mactrack_devices.php:1092 mactrack_view_devices.php:307
 msgid "Active Macs"
 msgstr "有源Mac"
 
-#: mactrack_devices.php:1099 mactrack_view_devices.php:317
-#, fuzzy
+#: mactrack_devices.php:1097 mactrack_view_devices.php:317
 msgid "Last Duration"
 msgstr "上次持續時間"
 
-#: mactrack_devices.php:1123
-#, fuzzy
+#: mactrack_devices.php:1121
 msgid "No Device Tracking Devices"
 msgstr "沒有設備跟踪設備"
 
-#: mactrack_devices.php:1159 mactrack_view_devices.php:429 setup.php:908
+#: mactrack_devices.php:1157 mactrack_view_devices.php:429 setup.php:908
 #: setup.php:1040 setup.php:1049 setup.php:1058 setup.php:1273 setup.php:1289
 #: setup.php:1334 setup.php:1363
 msgid "None"
 msgstr "無"
 
-#: mactrack_devices.php:1249 mactrack_view_devices.php:514
+#: mactrack_devices.php:1247 mactrack_view_devices.php:514
 msgid "Error"
 msgstr "錯誤"
 
-#: mactrack_devices.php:1250 mactrack_view_devices.php:515
-#, fuzzy
+#: mactrack_devices.php:1248 mactrack_view_devices.php:515
 msgid "No Cacti Link"
 msgstr "沒有Cacti Link"
 
 #: mactrack_macauth.php:132
-#, fuzzy
 msgid "You must select at least one Authorized Mac to delete."
 msgstr "您必須至少選擇一個要刪除的授權Mac。"
 
 #: mactrack_macauth.php:140
-#, fuzzy
 msgid "Click 'Continue' to delete the following Authorized Mac's?"
 msgstr "點擊“繼續”刪除以下授權的Mac？"
 
 #: mactrack_macauth.php:242
-#, fuzzy, php-format
+#, php-format
 msgid "Device Tracking MacAuth [edit: %s]"
-msgstr "設備跟踪MacAuth [編輯：％s]"
+msgstr "裝置追蹤MacAuth [編輯： %s]"
 
 #: mactrack_macauth.php:244
-#, fuzzy
 msgid "Device Tracking MacAuth [new]"
 msgstr "設備跟踪MacAuth [新]"
 
 #: mactrack_macauth.php:306
-#, fuzzy
 msgid "Device Tracking MacAuth Filters"
 msgstr "設備跟踪MacAuth過濾器"
 
@@ -1159,7 +1021,6 @@ msgid "Reason"
 msgstr "原因"
 
 #: mactrack_macauth.php:321
-#, fuzzy
 msgid "Added/Modified"
 msgstr "添加/修改"
 
@@ -1168,43 +1029,36 @@ msgid "By"
 msgstr "由"
 
 #: mactrack_macauth.php:327
-#, fuzzy
 msgid "Authorized Mac Addresses"
 msgstr "授權的Mac地址"
 
 #: mactrack_macauth.php:348
-#, fuzzy
 msgid "No Authorized Mac Addresses Found"
 msgstr "未找到授權的Mac地址"
 
 #: mactrack_macauth.php:376 mactrack_vendormacs.php:205
 #: mactrack_view_macs.php:1092
-#, fuzzy
 msgid "MAC's"
 msgstr "MAC的"
 
 #: mactrack_macwatch.php:143
-#, fuzzy
 msgid "Click 'Continue' to delete the following watched Mac's?"
 msgstr "點擊“繼續”刪除以下觀看的Mac？"
 
 #: mactrack_macwatch.php:238
-#, fuzzy, php-format
+#, php-format
 msgid "Device Tracking MacWatch [edit: %s]"
-msgstr "設備跟踪MacWatch [編輯：％s]"
+msgstr "裝置追蹤MacWatch [編輯： %s]"
 
 #: mactrack_macwatch.php:240
-#, fuzzy
 msgid "Device Tracking MacWatch [new]"
 msgstr "設備跟踪MacWatch [新]"
 
 #: mactrack_macwatch.php:302
-#, fuzzy
 msgid "Device Tracking MacWatch Filters"
 msgstr "設備跟踪MacWatch過濾器"
 
 #: mactrack_macwatch.php:314
-#, fuzzy
 msgid "Watch Name"
 msgstr "觀看名稱"
 
@@ -1213,7 +1067,6 @@ msgid "Ticket Number"
 msgstr "票號"
 
 #: mactrack_macwatch.php:326
-#, fuzzy
 msgid "First Seen"
 msgstr "第一眼看見"
 
@@ -1226,55 +1079,46 @@ msgid "Watches"
 msgstr "手錶"
 
 #: mactrack_macwatch.php:362
-#, fuzzy
 msgid "No Device Tracking Watched Macs Found"
 msgstr "找不到設備跟踪觀看的Mac"
 
 #: mactrack_sites.php:139
-#, fuzzy
 msgid "Click 'Continue' to delete the following Site(s)?"
 msgstr "點擊“繼續”刪除以下網站？"
 
 #: mactrack_sites.php:146
-#, fuzzy
 msgid "You must select at least one site."
 msgstr "您必須至少選擇一個站點。"
 
 #: mactrack_sites.php:358
-#, fuzzy, php-format
+#, php-format
 msgid "Device Tracking Site [edit: %s]"
-msgstr "設備跟踪網站[編輯：％s]"
+msgstr "裝置追蹤網站[編輯： %s]"
 
 #: mactrack_sites.php:360
-#, fuzzy
 msgid "Device Tracking Site [new]"
 msgstr "設備跟踪網站[新]"
 
 #: mactrack_sites.php:392
-#, fuzzy
 msgid "Device Tracking Site Filters"
 msgstr "設備跟踪站點過濾器"
 
 #: mactrack_sites.php:432 mactrack_sites.php:512 mactrack_view_devices.php:287
 #: mactrack_view_sites.php:257 mactrack_view_sites.php:357
-#, fuzzy
 msgid "Total IP's"
 msgstr "總IP"
 
 #: mactrack_sites.php:447 mactrack_sites.php:532 mactrack_view_sites.php:272
 #: mactrack_view_sites.php:377
-#, fuzzy
 msgid "MACS Found"
 msgstr "找到MACS"
 
 #: mactrack_sites.php:452 mactrack_view_sites.php:277
-#, fuzzy
 msgid "Device Errors"
 msgstr "設備錯誤"
 
 #: mactrack_sites.php:483 mactrack_sites.php:563 mactrack_view_sites.php:324
 #: mactrack_view_sites.php:422
-#, fuzzy
 msgid "No Device Tracking Sites Found"
 msgstr "找不到設備跟踪站點"
 
@@ -1283,67 +1127,56 @@ msgid "Total Devices"
 msgstr "設備總數"
 
 #: mactrack_sites.php:517 mactrack_view_sites.php:362
-#, fuzzy
 msgid "Total User Ports"
 msgstr "用戶端口總數"
 
 #: mactrack_sites.php:522 mactrack_view_sites.php:367
-#, fuzzy
 msgid "Total Oper Ports"
 msgstr "總操作端口"
 
 #: mactrack_sites.php:527 mactrack_view_sites.php:372
-#, fuzzy
 msgid "Total Trunks"
 msgstr "總中繼線"
 
 #: mactrack_snmp.php:247
-#, fuzzy
 msgid "You must select at least one SNMP Option."
 msgstr "您必須至少選擇一個SNMP選項。"
 
 #: mactrack_snmp.php:255
-#, fuzzy
 msgid "Click 'Continue' to delete the following SNMP Option(s)."
 msgstr "單擊“繼續”以刪除以下SNMP選項。"
 
 #: mactrack_snmp.php:262
-#, fuzzy
 msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
 msgstr "單擊“繼續”以復制以下SNMP選項。您可以選擇更改新SNMP選項的標題格式。"
 
 #: mactrack_snmp.php:264
-#, fuzzy
 msgid "<name> (1)"
 msgstr "<name> （1）"
 
 #: mactrack_snmp.php:264
-#, fuzzy
 msgid "Name Format:"
 msgstr "名稱格式："
 
 #: mactrack_snmp.php:338
-#, fuzzy, php-format
+#, php-format
 msgid "SNMP Options [edit %s]"
-msgstr "SNMP選項[編輯％s]"
+msgstr "SNMP選項[編輯：％s]"
 
 #: mactrack_snmp.php:340
-#, fuzzy
 msgid "SNMP Options [new]"
 msgstr "SNMP選項[新]"
 
 #: mactrack_snmp.php:408
-#, fuzzy, php-format
+#, php-format
 msgid "SNMP Option Set [edit: %s]"
 msgstr "SNMP選項集[編輯：％s]"
 
 #: mactrack_snmp.php:410
-#, fuzzy
 msgid "SNMP Option Set [new]"
 msgstr "SNMP選項集[新]"
 
 #: mactrack_snmp.php:435 mactrack_snmp.php:529 setup.php:592
-#, fuzzy
 msgid "Device Tracking SNMP Options"
 msgstr "設備跟踪SNMP選項"
 
@@ -1372,7 +1205,6 @@ msgid "Retries"
 msgstr "重試"
 
 #: mactrack_snmp.php:444
-#, fuzzy
 msgid "Max OIDs"
 msgstr "最大OID"
 
@@ -1382,12 +1214,10 @@ msgid "Username"
 msgstr "用戶名"
 
 #: mactrack_snmp.php:446
-#, fuzzy
 msgid "Auth Proto"
 msgstr "Auth Proto"
 
 #: mactrack_snmp.php:447
-#, fuzzy
 msgid "Priv Proto"
 msgstr "Priv Proto"
 
@@ -1401,22 +1231,18 @@ msgid "Actions"
 msgstr "動作"
 
 #: mactrack_snmp.php:476
-#, fuzzy
 msgid "No SNMP Items Found"
 msgstr "找不到SNMP項目"
 
 #: mactrack_snmp.php:554
-#, fuzzy
 msgid "Title of SNMP Option Set"
 msgstr "SNMP選項集的標題"
 
 #: mactrack_snmp.php:559
-#, fuzzy
 msgid "SNMP Settings"
 msgstr "SNMP設置"
 
 #: mactrack_snmp.php:576
-#, fuzzy
 msgid "No SNMP Option Sets Found"
 msgstr "找不到SNMP選項集"
 
@@ -1425,7 +1251,6 @@ msgid "Options"
 msgstr "選項"
 
 #: mactrack_utilities.php:167
-#, fuzzy
 msgid "Device Tracking Process Status"
 msgstr "設備跟踪流程狀態"
 
@@ -1434,67 +1259,54 @@ msgid "Refresh"
 msgstr "重新整理"
 
 #: mactrack_utilities.php:238
-#, fuzzy
 msgid "Current Process Status"
 msgstr "當前流程狀態"
 
 #: mactrack_utilities.php:240
-#, fuzzy
 msgid "The Device Tracking Poller is:"
 msgstr "設備跟踪輪詢器是："
 
 #: mactrack_utilities.php:243
-#, fuzzy
 msgid "Running Processes:"
 msgstr "運行流程："
 
 #: mactrack_utilities.php:246
-#, fuzzy
 msgid "Last Time Poller Started:"
 msgstr "上一次Poller開始："
 
 #: mactrack_utilities.php:248
-#, fuzzy
 msgid "Poller Frequency:"
 msgstr "輪詢頻率："
 
 #: mactrack_utilities.php:250
-#, fuzzy
 msgid "Approx. Next Runtime:"
 msgstr "約。下次運行時："
 
 #: mactrack_utilities.php:252
-#, fuzzy
 msgid "Approx. Next DB Maintenance:"
 msgstr "約。下一個DB維護："
 
 #: mactrack_utilities.php:254
-#, fuzzy
 msgid "Run Time Details"
 msgstr "運行時詳細信息"
 
 #: mactrack_utilities.php:256
-#, fuzzy
 msgid "Last Poller Runtime:"
 msgstr "最後輪詢運行時："
 
 #: mactrack_utilities.php:258
-#, fuzzy
 msgid "Last Poller Maintenance Runtime:"
 msgstr "最後輪詢維護運行時間："
 
 #: mactrack_utilities.php:260
-#, fuzzy
 msgid "Maximum Concurrent Processes:"
 msgstr "最大並發進程："
 
 #: mactrack_utilities.php:260
-#, fuzzy
 msgid "processes"
 msgstr "商品/物料的流動程序"
 
 #: mactrack_utilities.php:262
-#, fuzzy
 msgid "Maximum Per Device Scan Time:"
 msgstr "每設備掃描時間最大值："
 
@@ -1503,27 +1315,22 @@ msgid "minutes"
 msgstr "分鐘"
 
 #: mactrack_utilities.php:264
-#, fuzzy
 msgid "DNS Configuration Information"
 msgstr "DNS配置信息"
 
 #: mactrack_utilities.php:266
-#, fuzzy
 msgid "Reverse DNS Resolution is"
 msgstr "反向DNS解析是"
 
 #: mactrack_utilities.php:268
-#, fuzzy
 msgid "Primary DNS Server:"
 msgstr "主DNS服務器："
 
 #: mactrack_utilities.php:270
-#, fuzzy
 msgid "Secondary DNS Server:"
 msgstr "輔助DNS服務器："
 
 #: mactrack_utilities.php:272
-#, fuzzy
 msgid "DNS Resolution Timeout:"
 msgstr "DNS解析超時："
 
@@ -1532,22 +1339,18 @@ msgid "milliseconds"
 msgstr "毫秒"
 
 #: mactrack_utilities.php:276
-#, fuzzy
 msgid "Running Process Summary"
 msgstr "運行流程摘要"
 
 #: mactrack_utilities.php:278
-#, fuzzy
 msgid "The DNS Resolver is Not Running"
 msgstr "DNS解析器未運行"
 
 #: mactrack_utilities.php:278
-#, fuzzy
 msgid "The DNS Resolver is Running"
 msgstr "DNS解析器正在運行"
 
 #: mactrack_utilities.php:280
-#, fuzzy
 msgid "Date Started"
 msgstr "開始日期"
 
@@ -1569,142 +1372,117 @@ msgid "Are You Sure?"
 msgstr "確定嗎？"
 
 #: mactrack_utilities.php:349
-#, fuzzy
 msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
 msgstr "您確定要從系統中刪除所有端口到MAC到IP的結果嗎？"
 
 #: mactrack_utilities.php:396 mactrack_utilities.php:419
-#, fuzzy
 msgid "Device Tracking Database Results"
 msgstr "設備跟踪數據庫結果"
 
 #: mactrack_utilities.php:397 mactrack_utilities.php:467
-#, fuzzy, php-format
+#, php-format
 msgid "The following number of records have been removed from the database: %s"
-msgstr "已從數據庫中刪除以下數量的記錄：％s"
+msgstr "已從資料庫中刪除以下數量的記錄： %s"
 
 #: mactrack_utilities.php:407
-#, fuzzy
 msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
 msgstr "您確定要從系統中刪除所有聚合端口到MAC到IP的結果嗎？"
 
 #: mactrack_utilities.php:420
-#, fuzzy, php-format
+#, php-format
 msgid "The following number of records have been removed from the aggergated table: %s"
-msgstr "已從aggergated表中刪除以下數量的記錄：％s"
+msgstr "已從綜合表中刪除以下數量的記錄： %s"
 
 #: mactrack_utilities.php:430
-#, fuzzy
 msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
 msgstr "您確定要從系統中刪除並重新創建所有聚合端口到MAC到IP的結果嗎？"
 
 #: mactrack_utilities.php:456
-#, fuzzy, php-format
+#, php-format
 msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
-msgstr "已從aggergated表中刪除以下數量的記錄：％s。並且將添加％s記錄。"
+msgstr "已從綜合表中刪除以下數量的記錄： %s。將新增%s個記錄。"
 
 #: mactrack_utilities.php:477
-#, fuzzy
 msgid "The Device Tracking scanning functions have been purged.  They will be recreated once you either edit a device or device type."
 msgstr "設備跟踪掃描功能已被清除。編輯設備或設備類型後，將重新創建它們。"
 
 #: mactrack_utilities.php:482
-#, fuzzy
 msgid "Cacti Device Tracking System Utilities"
 msgstr "仙人掌裝置跟踪系統實用程序"
 
 #: mactrack_utilities.php:484
-#, fuzzy
 msgid "Process Status Information"
 msgstr "流程狀態信息"
 
 #: mactrack_utilities.php:493 setup.php:816
-#, fuzzy
 msgid "View Device Tracking Process Status"
 msgstr "查看設備跟踪流程狀態"
 
 #: mactrack_utilities.php:496
-#, fuzzy
 msgid "This option will let you show and set process information associated with the Device Tracking polling process."
 msgstr "此選項將允許您顯示和設置與設備跟踪輪詢過程關聯的過程信息。"
 
 #: mactrack_utilities.php:500
-#, fuzzy
 msgid "Database Administration"
 msgstr "數據庫管理"
 
 #: mactrack_utilities.php:504 setup.php:781
-#, fuzzy
 msgid "Perform Database Maintenance"
 msgstr "執行數據庫維護"
 
 #: mactrack_utilities.php:507
-#, fuzzy
 msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
 msgstr "從數據庫中刪除過期的端口到MAC到IP關聯。僅刪除基於您的條件已過期的記錄。"
 
 #: mactrack_utilities.php:513
-#, fuzzy
 msgid "Refresh IEEE Vendor MAC/OUI Database"
 msgstr "刷新IEEE供應商MAC / OUI數據庫"
 
 #: mactrack_utilities.php:516
-#, fuzzy
 msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
 msgstr "此功能將從IEEE網站下載並安裝最新的OIU數據庫。每個網絡接口卡（NIC）都有一個MAC地址。 MAC地址可以分為兩部分。 MAC Addess的第一部分包含供應商MAC。供應商MAC識別製造零件的人員。這有助於對網絡上的惡意設備進行抽查。"
 
 #: mactrack_utilities.php:522 setup.php:788
-#, fuzzy
 msgid "Refresh Scanning Functions"
 msgstr "刷新掃描功能"
 
 #: mactrack_utilities.php:525
-#, fuzzy
 msgid "Deletes old and potentially stale Device Tracking scanning functions from the drop-down you receive when you edit a device type."
 msgstr "從編輯設備類型時收到的下拉列表中刪除舊的和可能過時的設備跟踪掃描功能。"
 
 #: mactrack_utilities.php:531
-#, fuzzy
 msgid "Remove All Scan Results"
 msgstr "刪除所有掃描結果"
 
 #: mactrack_utilities.php:534
-#, fuzzy
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
 msgstr "從數據庫中刪除<strong>所有</strong>端口，IP範圍和VLAN的<strong>所有</strong>端口到MAC到IP關聯。當您想重新開始時，此實用程序很好。 <strong>危險：刪除所有先前的數據。</strong>"
 
 #: mactrack_utilities.php:538
-#, fuzzy
 msgid "Aggregated Table Administration"
 msgstr "聚合表管理"
 
 #: mactrack_utilities.php:542
-#, fuzzy
 msgid "Remove All Aggregated Results"
 msgstr "刪除所有聚合結果"
 
 #: mactrack_utilities.php:545
-#, fuzzy
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
 msgstr "從數據庫中刪除所有<strong>聚合</strong> （非掃描結果）端口到MAC到IP關聯。將在下一個mactrack輪詢器運行中<strong>僅</strong>基於<strong>新</strong>掃描數據再次收集數據。"
 
 #: mactrack_utilities.php:551
-#, fuzzy
 msgid "Perform Aggregate Table Rebuild"
 msgstr "執行聚合表重建"
 
 #: mactrack_utilities.php:554
-#, fuzzy
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
 msgstr "從數據庫中刪除所有<strong>聚合</strong> （非掃描結果）端口到MAC到IP關聯，並立即根據<strong>所有掃描數據</strong>重新創建它們。"
 
 #: mactrack_vendormacs.php:139
-#, fuzzy
 msgid "Device Tracking Vendor Mac Filter"
 msgstr "設備跟踪供應商Mac過濾器"
 
 #: mactrack_vendormacs.php:153
-#, fuzzy
 msgid "Vendor MAC"
 msgstr "供應商MAC"
 
@@ -1717,51 +1495,43 @@ msgid "Address"
 msgstr "地址"
 
 #: mactrack_vendormacs.php:160 setup.php:970
-#, fuzzy
 msgid "Vendor Macs"
 msgstr "供應商Macs"
 
 #: mactrack_vendormacs.php:179
-#, fuzzy
 msgid "No Device Tracking Vendor MACS Found"
 msgstr "未找到設備跟踪供應商MACS"
 
 #: mactrack_view_arp.php:30
-#, fuzzy
 msgid "Device Tracking - ARP/IP View"
 msgstr "設備跟踪 -  ARP / IP視圖"
 
 #: mactrack_view_arp.php:317 mactrack_view_dot1x.php:407
 #: mactrack_view_dot1x.php:421 mactrack_view_macs.php:677
 #: mactrack_view_macs.php:871
-#, fuzzy
 msgid "Switch Name"
 msgstr "切換名稱"
 
 #: mactrack_view_arp.php:321 mactrack_view_dot1x.php:408
 #: mactrack_view_dot1x.php:422 mactrack_view_macs.php:681
 #: mactrack_view_macs.php:875
-#, fuzzy
 msgid "Switch Hostname"
 msgstr "切換主機名"
 
 #: mactrack_view_arp.php:325 mactrack_view_dot1x.php:410
 #: mactrack_view_dot1x.php:424 mactrack_view_macs.php:685
 #: mactrack_view_macs.php:879
-#, fuzzy
 msgid "ED IP Address"
 msgstr "ED IP地址"
 
 #: mactrack_view_arp.php:334 mactrack_view_dot1x.php:411
 #: mactrack_view_macs.php:695 mactrack_view_macs.php:886
-#, fuzzy
 msgid "ED DNS Hostname"
 msgstr "ED DNS主機名"
 
 #: mactrack_view_arp.php:342 mactrack_view_dot1x.php:412
 #: mactrack_view_dot1x.php:425 mactrack_view_macs.php:703
 #: mactrack_view_macs.php:893
-#, fuzzy
 msgid "ED MAC Address"
 msgstr "ED MAC地址"
 
@@ -1784,22 +1554,18 @@ msgstr "埠口名稱"
 #: mactrack_view_arp.php:360 mactrack_view_dot1x.php:416
 #: mactrack_view_dot1x.php:429 mactrack_view_macs.php:735
 #: mactrack_view_macs.php:928 mactrack_view_macs.php:934
-#, fuzzy
 msgid "Last Scan Date"
 msgstr "上次掃描日期"
 
 #: mactrack_view_arp.php:370
-#, fuzzy
 msgid "ARP Cache"
 msgstr "ARP緩存"
 
 #: mactrack_view_arp.php:405 mactrack_view_macs.php:1014
-#, fuzzy
 msgid "You must first choose a Site, Device or other search criteria."
 msgstr "您必須先選擇站點，設備或其他搜索條件。"
 
 #: mactrack_view_arp.php:407
-#, fuzzy
 msgid "No Device Tracking IP Results Found"
 msgstr "未找到設備跟踪IP結果"
 
@@ -1809,7 +1575,6 @@ msgid "Device"
 msgstr "裝置"
 
 #: mactrack_view_arp.php:478 mactrack_view_ips.php:314
-#, fuzzy
 msgid "IP's"
 msgstr "IP的"
 
@@ -1834,53 +1599,43 @@ msgid "MAC"
 msgstr "MAC"
 
 #: mactrack_view_devices.php:30
-#, fuzzy
 msgid "Device Tracking - Device Report View"
 msgstr "設備跟踪 - 設備報告視圖"
 
 #: mactrack_view_devices.php:157
-#, fuzzy
 msgid "Unknown Device Type"
 msgstr "未知的設備類型"
 
 #: mactrack_view_devices.php:312
-#, fuzzy
 msgid "Total VLAN's"
 msgstr "總VLAN"
 
 #: mactrack_view_devices.php:357
-#, fuzzy
 msgid "Edit Device"
 msgstr "開關設備"
 
 #: mactrack_view_devices.php:363
-#, fuzzy
 msgid "View Graphs"
 msgstr "圖表"
 
 #: mactrack_view_devices.php:365
-#, fuzzy
 msgid "Device Not Mapped to Cacti Device"
 msgstr "將設備跟踪設備同步到Cacti設備"
 
 #: mactrack_view_devices.php:371 mactrack_view_ips.php:253
 #: mactrack_view_sites.php:308 mactrack_view_sites.php:403
-#, fuzzy
 msgid "View MAC Addresses"
 msgstr "MAC地址"
 
 #: mactrack_view_devices.php:397
-#, fuzzy
 msgid "No Device Tracking Devices Found"
 msgstr "找不到設備跟踪設備"
 
 #: mactrack_view_devices.php:457
-#, fuzzy
 msgid "Hub/Switch"
 msgstr "集線器/交換機"
 
 #: mactrack_view_dot1x.php:31
-#, fuzzy
 msgid "Device Tracking - 802.1x View"
 msgstr "設備跟踪 -  802.1x視圖"
 
@@ -1890,17 +1645,14 @@ msgid "Domain"
 msgstr "網域"
 
 #: mactrack_view_dot1x.php:439
-#, fuzzy
 msgid "802.1x Sessions"
 msgstr "802.1x會話"
 
 #: mactrack_view_dot1x.php:472
-#, fuzzy
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "未找到設備跟踪802.1x會話"
 
 #: mactrack_view_dot1x.php:496
-#, fuzzy
 msgid "Dot1x Scan Results"
 msgstr "Dot1x掃描儀"
 
@@ -1909,82 +1661,66 @@ msgid "Sessions"
 msgstr "會議"
 
 #: mactrack_view_dot1x.php:616
-#, fuzzy
 msgid "Any Status"
 msgstr "任何狀態"
 
 #: mactrack_view_dot1x.php:619
-#, fuzzy
 msgid "No Method"
 msgstr "方法"
 
 #: mactrack_view_dot1x.php:676
-#, fuzzy
 msgid "DATA"
 msgstr "數據"
 
 #: mactrack_view_dot1x.php:677
-#, fuzzy
 msgid "VOICE"
 msgstr "語音"
 
 #: mactrack_view_dot1x.php:683 mactrack_view_macs.php:1213
-#, fuzzy
 msgid "Portname"
 msgstr "端口名稱"
 
 #: mactrack_view_graphs.php:32
-#, fuzzy
 msgid "Device Tracking - Monitored Device Graph View"
 msgstr "設備跟踪 - 受監控的設備圖表視圖"
 
 #: mactrack_view_graphs.php:70
-#, fuzzy
 msgid "Custom Graph List Applied - Filtering from List"
 msgstr "應用自定義圖表列表 - 從列表中過濾"
 
 #: mactrack_view_interfaces.php:30
-#, fuzzy
 msgid "Device Tracking - Network Interfaces View"
 msgstr "設備跟踪 - 網絡接口視圖"
 
 #: mactrack_view_interfaces.php:324
-#, fuzzy
 msgid "No Device Tracking Interfaces Found"
 msgstr "未找到設備跟踪接口"
 
 #: mactrack_view_interfaces.php:337
-#, fuzzy
 msgid "Interface Up"
 msgstr "接口"
 
 #: mactrack_view_interfaces.php:338
-#, fuzzy
 msgid "No Alias"
 msgstr "沒有別名"
 
 #: mactrack_view_interfaces.php:339
-#, fuzzy
 msgid "Errors Present"
 msgstr "存在錯誤"
 
 #: mactrack_view_interfaces.php:340
-#, fuzzy
 msgid "Discards Present"
 msgstr "丟棄禮物"
 
 #: mactrack_view_interfaces.php:341
-#, fuzzy
 msgid "No Graphs"
 msgstr "圖表"
 
 #: mactrack_view_interfaces.php:342
-#, fuzzy
 msgid "Interface Down"
 msgstr "接口關閉"
 
 #: mactrack_view_interfaces.php:352
-#, fuzzy
 msgid "Interface Scan Results"
 msgstr "刪除所有掃描結果"
 
@@ -2001,82 +1737,66 @@ msgid "Alias"
 msgstr "別名"
 
 #: mactrack_view_interfaces.php:384
-#, fuzzy
 msgid "InBound %%%"
 msgstr "InBound％"
 
 #: mactrack_view_interfaces.php:389
-#, fuzzy
 msgid "OutBound %%%"
 msgstr "OutBound％"
 
 #: mactrack_view_interfaces.php:394
-#, fuzzy
 msgid "In (B/S)"
 msgstr "在（B / S）"
 
 #: mactrack_view_interfaces.php:399
-#, fuzzy
 msgid "Out (B/S)"
 msgstr "出（B / S）"
 
 #: mactrack_view_interfaces.php:408
-#, fuzzy
 msgid "In Err Total"
 msgstr "在Err Total中"
 
 #: mactrack_view_interfaces.php:413
-#, fuzzy
 msgid "In Disc Total"
 msgstr "在Disc Total中"
 
 #: mactrack_view_interfaces.php:418
-#, fuzzy
 msgid "UProto Total"
 msgstr "UProto Total"
 
 #: mactrack_view_interfaces.php:423
-#, fuzzy
 msgid "Out Err Total"
 msgstr "Out Err Total"
 
 #: mactrack_view_interfaces.php:428
-#, fuzzy
 msgid "Out Disc Total"
 msgstr "Out Disc Total"
 
 #: mactrack_view_interfaces.php:436
-#, fuzzy
 msgid "In Err (E/S)"
 msgstr "在Err（E / S）"
 
 #: mactrack_view_interfaces.php:441
-#, fuzzy
 msgid "In Disc (D/S)"
 msgstr "在光盤（D / S）"
 
 #: mactrack_view_interfaces.php:446
-#, fuzzy
 msgid "UProto (UP/S)"
 msgstr "UProto（UP / S）"
 
 #: mactrack_view_interfaces.php:451
-#, fuzzy
 msgid "Out Err (OE/S)"
 msgstr "Out Err（OE / S）"
 
 #: mactrack_view_interfaces.php:456
-#, fuzzy
 msgid "Out Disc (OD/S)"
 msgstr "出盤（OD / S）"
 
 #: mactrack_view_interfaces.php:470
-#, fuzzy
 msgid "Last Change"
 msgstr "最後一次變更"
 
 #: mactrack_view_interfaces.php:475
-#, fuzzy
 msgid "Last Scanned"
 msgstr "上次掃描"
 
@@ -2085,62 +1805,53 @@ msgid "Filters"
 msgstr "篩選"
 
 #: mactrack_view_interfaces.php:514
-#, fuzzy
 msgid "All Interfaces"
 msgstr "所有接口"
 
 #: mactrack_view_interfaces.php:515
-#, fuzzy
 msgid "All Non-Ignored Interfaces"
 msgstr "所有非忽略接口"
 
 #: mactrack_view_interfaces.php:516
-#, fuzzy
 msgid "All Ignored Interfaces"
 msgstr "所有忽略的接口"
 
 #: mactrack_view_interfaces.php:517
-#, fuzzy, php-format
+#, php-format
 msgid "High In/Out Utilization > %d &#37;"
-msgstr "高進/出利用率&gt;％d％"
+msgstr "高輸入/輸出利用率> %d %"
 
 #: mactrack_view_interfaces.php:518
-#, fuzzy, php-format
+#, php-format
 msgid "High In Utilization > %d &#37;"
-msgstr "利用率高&gt;％d％"
+msgstr "高利用率> %d %"
 
 #: mactrack_view_interfaces.php:519
-#, fuzzy, php-format
+#, php-format
 msgid "High Out Utilization > %d &#37;"
-msgstr "高出利用率&gt;％d％"
+msgstr "高輸出利用率> %d %"
 
 #: mactrack_view_interfaces.php:520
-#, fuzzy
 msgid "With Issues"
 msgstr "沒有發現問題"
 
 #: mactrack_view_interfaces.php:521
-#, fuzzy
 msgid "Up Interfaces"
 msgstr "接口"
 
 #: mactrack_view_interfaces.php:522
-#, fuzzy
 msgid "Up Interfaces No Alias"
 msgstr "接口沒有別名"
 
 #: mactrack_view_interfaces.php:523
-#, fuzzy
 msgid "Errors Accumulating"
 msgstr "錯誤累積"
 
 #: mactrack_view_interfaces.php:524
-#, fuzzy
 msgid "Discards Accumulating"
 msgstr "丟棄累積"
 
 #: mactrack_view_interfaces.php:525
-#, fuzzy
 msgid "Changed in Last Day"
 msgstr "在最後一天改變了"
 
@@ -2149,22 +1860,18 @@ msgid "Bandwidth"
 msgstr "流量"
 
 #: mactrack_view_interfaces.php:634
-#, fuzzy
 msgid "Show Totals"
 msgstr "顯示總計"
 
 #: mactrack_view_ips.php:30
-#, fuzzy
 msgid "Device Tracking - Site IP Range Report View"
 msgstr "設備跟踪 - 站點IP範圍報告視圖"
 
 #: mactrack_view_ips.php:202
-#, fuzzy
 msgid "IP Range"
 msgstr "IP範圍"
 
 #: mactrack_view_ips.php:206
-#, fuzzy
 msgid "Current IP Addresses"
 msgstr "當前的IP地址"
 
@@ -2173,17 +1880,14 @@ msgid "Current Date"
 msgstr "目前日期"
 
 #: mactrack_view_ips.php:216
-#, fuzzy
 msgid "Maximum IP Addresses"
 msgstr "最大IP地址"
 
 #: mactrack_view_ips.php:221
-#, fuzzy
 msgid "Maximum Date"
 msgstr "最長日期"
 
 #: mactrack_view_ips.php:229
-#, fuzzy
 msgid "IP Address Ranges"
 msgstr "IP地址範圍"
 
@@ -2193,17 +1897,14 @@ msgid "Edit Site"
 msgstr "編輯網站"
 
 #: mactrack_view_ips.php:262 mactrack_view_sites.php:306
-#, fuzzy
 msgid "View IP Addresses"
 msgstr "當前的IP地址"
 
 #: mactrack_view_ips.php:277
-#, fuzzy
 msgid "No Device Tracking Site IP Ranges Found"
 msgstr "未找到設備跟踪站點IP範圍"
 
 #: mactrack_view_macs.php:30
-#, fuzzy
 msgid "Device Tracking - MAC to IP Report View"
 msgstr "設備跟踪 -  MAC到IP報告視圖"
 
@@ -2216,47 +1917,40 @@ msgid "Revoke"
 msgstr "撤銷"
 
 #: mactrack_view_macs.php:122
-#, fuzzy, php-format
+#, php-format
 msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
-msgstr "以下MAC地址無法撤銷，因為它們是組授權％s的成員"
+msgstr "下列MAC位址無法撤銷，因為它們是羣組授權%s的成員"
 
 #: mactrack_view_macs.php:163
-#, fuzzy
 msgid "Click 'Continue' to Authorize the following MAC Addresses."
 msgstr "單擊“繼續”以授權以下MAC地址。"
 
 #: mactrack_view_macs.php:170
-#, fuzzy
 msgid "Click 'Continue' to Revoke the following MAC Addresses."
 msgstr "單擊“繼續”以撤消以下MAC地址。"
 
 #: mactrack_view_macs.php:177
-#, fuzzy
 msgid "You must select at least one MAC Address."
 msgstr "您必須至少選擇一個MAC地址。"
 
 #: mactrack_view_macs.php:180
-#, fuzzy
 msgid "You are not permitted to change Mac Authorizations."
 msgstr "您無權更改Mac授權。"
 
 #: mactrack_view_macs.php:248
-#, fuzzy, php-format
+#, php-format
 msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
-msgstr "Dev.:%sIP.:%s MAC.:%s PORT.:%s Count。：[％s]"
+msgstr "開發人員： %s IP ： %s MAC ： %s連接埠： %s計數： [%s]"
 
 #: mactrack_view_macs.php:260
-#, fuzzy
 msgid "You must select at least one Row."
 msgstr "您必須至少選擇一行。"
 
 #: mactrack_view_macs.php:263
-#, fuzzy
 msgid "You are not permitted to delete rows."
 msgstr "您不能刪除行。"
 
 #: mactrack_view_macs.php:271
-#, fuzzy
 msgid "Click 'Continue' to Delete the following rows from Aggregated table."
 msgstr "單擊“繼續”以從“聚合表”中刪除以下行。"
 
@@ -2276,22 +1970,18 @@ msgid "VLAN Name"
 msgstr "VLAN 名稱"
 
 #: mactrack_view_macs.php:749 mactrack_view_macs.php:954
-#, fuzzy
 msgid "MAC Addresses"
 msgstr "MAC地址"
 
 #: mactrack_view_macs.php:790 mactrack_view_macs.php:993
-#, fuzzy
 msgid "Not Authorized"
 msgstr "授權的"
 
 #: mactrack_view_macs.php:810
-#, fuzzy
 msgid "You must choose a Site, Device or other search criteria."
 msgstr "您必須選擇站點，設備或其他搜索條件。"
 
 #: mactrack_view_macs.php:812 mactrack_view_macs.php:1016
-#, fuzzy
 msgid "No Device Tracking Port Results Found"
 msgstr "未找到設備跟踪端口結果"
 
@@ -2300,43 +1990,35 @@ msgid "Count"
 msgstr "計數"
 
 #: mactrack_view_macs.php:1171
-#, fuzzy
 msgid "Aggregated"
 msgstr "匯總"
 
 #: mactrack_view_sites.php:30
-#, fuzzy
 msgid "Device Tracking - Site Report View"
 msgstr "設備跟踪 - 站點報告視圖"
 
 #: mactrack_view_sites.php:297
-#, fuzzy
 msgid "Rescan Site"
 msgstr "重新掃描設備"
 
 #: mactrack_view_sites.php:302 mactrack_view_sites.php:401
-#, fuzzy
 msgid "View Devices"
 msgstr "設備"
 
 #: mactrack_view_sites.php:304 mactrack_view_sites.php:402
-#, fuzzy
 msgid "View IP Ranges"
 msgstr "IP 範圍"
 
 #: mactrack_view_sites.php:385
-#, fuzzy
 msgid "Sites / Device Types"
 msgstr "設備類型"
 
 #: mactrack_view_sites.php:434
-#, fuzzy
 msgid "Site Scan Results"
 msgstr "刪除所有掃描結果"
 
 #: setup.php:244 setup.php:966 setup.php:967 setup.php:968 setup.php:969
 #: setup.php:970 setup.php:979 setup.php:981
-#, fuzzy
 msgid "Device Tracking"
 msgstr "設備跟踪"
 
@@ -2345,62 +2027,50 @@ msgid "General Settings"
 msgstr "一般設定"
 
 #: setup.php:252
-#, fuzzy
 msgid "Scanning Frequency"
 msgstr "掃描頻率"
 
 #: setup.php:253
-#, fuzzy
 msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
 msgstr "選擇何時從網絡設備收集MAC和IP地址和接口統計信息。"
 
 #: setup.php:259
-#, fuzzy
 msgid "Concurrent Processes"
 msgstr "並發進程"
 
 #: setup.php:260
-#, fuzzy
 msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
 msgstr "指定在輪詢所有設備之前同時輪詢多少設備。"
 
 #: setup.php:267
-#, fuzzy
 msgid "Scanner Max Runtime"
 msgstr "掃描儀最大運行時間"
 
 #: setup.php:268
-#, fuzzy
 msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
 msgstr "指定在系統完成之前允許設備掃描功能運行的分鐘數。此設置將更正已刪除的掃描作業。"
 
 #: setup.php:275
-#, fuzzy
 msgid "Start Time for Data Collection"
 msgstr "數據收集的開始時間"
 
 #: setup.php:276
-#, fuzzy
 msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
 msgstr "您希望何時進行第一次數據收集？所有未來的數據收集時間都將基於此開始時間。一個很好的例子是凌晨12:00。"
 
 #: setup.php:283
-#, fuzzy
 msgid "Database Maintenance Time"
 msgstr "數據庫維護時間"
 
 #: setup.php:284
-#, fuzzy
 msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
 msgstr "何時應從數據庫中刪除舊數據庫記錄。請注意，在執行此操作時，不允許訪問端口數據庫。"
 
 #: setup.php:291
-#, fuzzy
 msgid "Confirm Utilities Prompt"
 msgstr "確認實用程序提示"
 
 #: setup.php:292
-#, fuzzy
 msgid "When using utilities, prompt for verification"
 msgstr "使用實用程序時，提示進行驗證"
 
@@ -2409,28 +2079,22 @@ msgid "Data Retention"
 msgstr "數據保留"
 
 #: setup.php:298
-#, fuzzy
 msgid "How long should port MAC details be retained in the database."
 msgstr "端口MAC詳細信息應保留在數據庫中多長時間。"
 
 #: setup.php:304
-#, fuzzy
-#| msgid "Data Retention"
 msgid "Data Retention IPs"
 msgstr "數據保留"
 
 #: setup.php:305
-#, fuzzy
 msgid "How long should discovered IPs details be retained in the database."
 msgstr "端口MAC詳細信息應保留在數據庫中多長時間。"
 
 #: setup.php:311
-#, fuzzy
 msgid "Switch Level Ignore Ports Delimiter"
 msgstr "切換級別忽略端口分隔符"
 
 #: setup.php:312
-#, fuzzy
 msgid "What delimiter should Device Tracking use when parsing the Ignore Ports string for each switch."
 msgstr "解析每個交換機的忽略端口字符串時，設備跟踪應使用什麼分隔符。"
 
@@ -2439,113 +2103,92 @@ msgid "Auto Detect"
 msgstr "自動偵測"
 
 #: setup.php:317 setup.php:327
-#, fuzzy
 msgid "Colon [:]"
 msgstr "冒號[：]"
 
 #: setup.php:318
-#, fuzzy
 msgid "Pipe [|]"
 msgstr "管道[|]"
 
 #: setup.php:319
-#, fuzzy
 msgid "Space [ ]"
 msgstr "空間 [ ]"
 
 #: setup.php:323
-#, fuzzy
 msgid "Mac Address Delimiter"
 msgstr "Mac地址分隔符"
 
 #: setup.php:324
-#, fuzzy
 msgid "How should each octet of the MAC address be delimited."
 msgstr "應該如何劃分MAC地址的每個八位字節。"
 
 #: setup.php:327
-#, fuzzy
 msgid "Dash [-]"
 msgstr "短劃線[ - ]"
 
 #: setup.php:331 setup.php:1316
-#, fuzzy
 msgid "Ports to Ignore"
 msgstr "要忽略的端口"
 
 #: setup.php:332
-#, fuzzy
 msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
 msgstr "在接口列表中提供要忽略的ifNames或ifDescriptions端口的正則表達式。例如，（Vlan | Loopback | Null）。"
 
 #: setup.php:339
-#, fuzzy
 msgid "Bandwidth Usage Threshold"
 msgstr "帶寬使用閾值"
 
 #: setup.php:340
-#, fuzzy
 msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
 msgstr "查看網絡接口統計信息時，默認情況下要查看的帶寬閾值。"
 
 #: setup.php:345 setup.php:346 setup.php:347 setup.php:348 setup.php:349
 #: setup.php:350 setup.php:351 setup.php:352 setup.php:353
-#, fuzzy, php-format
+#, php-format
 msgid "%d Percent"
-msgstr "％d百分比"
+msgstr "百分比"
 
 #: setup.php:357
-#, fuzzy
 msgid "DNS Settings"
 msgstr "DNS設置"
 
 #: setup.php:361
-#, fuzzy
 msgid "Perform Reverse DNS Name Resolution"
 msgstr "執行反向DNS名稱解析"
 
 #: setup.php:362
-#, fuzzy
 msgid "Should Device Tracking perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
 msgstr "設備跟踪是否應執行與端口關聯的IP地址的反向DNS查找。注意：如果未正確設置DNS，則會顯著降低掃描時間。"
 
 #: setup.php:367
-#, fuzzy
 msgid "Primary DNS IP Address"
 msgstr "主DNS IP地址"
 
 #: setup.php:368
-#, fuzzy
 msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
 msgstr "輸入主DNS IP地址以用於反向查找。"
 
 #: setup.php:375
-#, fuzzy
 msgid "Secondary DNS IP Address"
 msgstr "輔助DNS IP地址"
 
 #: setup.php:376
-#, fuzzy
 msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
 msgstr "輸入用於反向查找的輔助DNS IP地址。"
 
 #: setup.php:383
-#, fuzzy
 msgid "DNS Timeout"
 msgstr "DNS超時"
 
 #: setup.php:384
-#, fuzzy
 msgid "Please enter the DNS timeout in milliseconds.  Device Tracking uses a PHP based DNS resolver."
 msgstr "請輸入DNS超時（以毫秒為單位）。設備跟踪使用基於PHP的DNS解析器。"
 
 #: setup.php:391
-#, fuzzy
 msgid "DNS Prime Interval"
 msgstr "DNS Prime間隔"
 
 #: setup.php:392
-#, fuzzy
 msgid "How often, in seconds do Device Tracking scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
 msgstr "設備跟踪掃描IP需要在幾秒鐘內解析為MAC地址以進行DNS解析的頻率。擁有數千台設備時使用更大的數字將提高性能。"
 
@@ -2554,152 +2197,122 @@ msgid "Notification Settings"
 msgstr "通知設定"
 
 #: setup.php:403
-#, fuzzy
 msgid "Source Address"
 msgstr "來源地址"
 
 #: setup.php:404
-#, fuzzy
 msgid "The source Email address for Device Tracking Emails."
 msgstr "設備跟踪電子郵件的源電子郵件地址。"
 
 #: setup.php:411
-#, fuzzy
 msgid "Source Email Name"
 msgstr "來源電子郵件名稱"
 
 #: setup.php:412
-#, fuzzy
 msgid "The Source Email name for Device Tracking Emails."
 msgstr "設備跟踪電子郵件的源電子郵件名稱。"
 
 #: setup.php:414
-#, fuzzy
 msgid "MACTrack Administrator"
 msgstr "MACTrack管理員"
 
 #: setup.php:419 setup.php:1504
-#, fuzzy
 msgid "MacWatch Default Body"
 msgstr "MacWatch默認正文"
 
 #: setup.php:420 setup.php:1505
-#, fuzzy
 msgid "The Email body preset for Device Tracking MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
 msgstr "設備跟踪MacWatch電子郵件的電子郵件正文預設。正文可以包含任何有效的html標記。它還支持在發送電子郵件時將處理的替換標籤。有效標籤包括<IP> ， <MAC> ， <TICKET> ， <SITENAME> ， <DEVICEIP> ， <PORTNAME> ， <PORTNUMBER> ， <DEVICENAME> 。"
 
 #: setup.php:424 setup.php:1509
-#, fuzzy
 msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
 msgstr "MAC地址<MAC>在IP地址找到<IP>票號： <TICKET> 。 <br>該設備位於<br>現場： <SITENAME> ，設備<DEVICENAME> ，IP <DEVICEIP> ， 港口<PORTNUMBER>和端口名稱<PORTNAME>"
 
 #: setup.php:431
-#, fuzzy
 msgid "MacAuth Report Email Addresses"
 msgstr "MacAuth報告電子郵件地址"
 
 #: setup.php:432
-#, fuzzy
 msgid "A comma delimited list of users to receive the MacAuth Email notifications."
 msgstr "以逗號分隔的用戶列表，用於接收MacAuth電子郵件通知。"
 
 #: setup.php:441
-#, fuzzy
 msgid "MacAuth Report Frequency"
 msgstr "MacAuth報告頻率"
 
 #: setup.php:442
-#, fuzzy
 msgid "How often will the MacAuth Reports be Emailed."
 msgstr "MacAuth報告多久會通過電子郵件發送一次。"
 
 #: setup.php:448
-#, fuzzy
 msgid "Device Tracking ArpWatch Settings"
 msgstr "設備跟踪ArpWatch設置"
 
 #: setup.php:452
-#, fuzzy
 msgid "Enable ArpWatch"
 msgstr "啟用ArpWatch"
 
 #: setup.php:453
-#, fuzzy
 msgid "Should Device Tracking also use ArpWatch data to supplement Mac to IP/DNS resolution?"
 msgstr "設備跟踪是否還應使用ArpWatch數據來補充Mac到IP / DNS的分辨率？"
 
 #: setup.php:458
-#, fuzzy
 msgid "ArpWatch Database Path"
 msgstr "ArpWatch數據庫路徑"
 
 #: setup.php:459
-#, fuzzy
 msgid "The location of the ArpWatch Database file on the Cacti server."
 msgstr "ArpWatch數據庫文件在Cacti服務器上的位置。"
 
 #: setup.php:466
-#, fuzzy
 msgid "SNMP Presets"
 msgstr "SNMP預設"
 
 #: setup.php:470
-#, fuzzy
 msgid "Update Policy for SNMP Options"
 msgstr "SNMP選項的更新策略"
 
 #: setup.php:471
-#, fuzzy
 msgid "Policy for synchronization of SNMP Options between Cacti devices and Device Tracking Devices."
 msgstr "Cacti設備和設備跟踪設備之間SNMP選項同步的策略。"
 
 #: setup.php:478
-#, fuzzy
 msgid "Default SNMP version for all new hosts."
 msgstr "所有新主機的默認SNMP版本。"
 
 #: setup.php:485
-#, fuzzy
 msgid "Default SNMP read community for all new hosts."
 msgstr "所有新主機的默認SNMP讀取社區。"
 
 #: setup.php:492
-#, fuzzy
 msgid "Communities"
 msgstr "社區"
 
 #: setup.php:493
-#, fuzzy
 msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
 msgstr "填寫可用的SNMP讀取字符串列表以測試此設備。每個讀取字符串必須用冒號'：'分隔。如果主讀取字符串無效，將按順序測試這些讀取字符串。"
 
 #: setup.php:500 setup.php:1151
-#, fuzzy
 msgid "The UDP/TCP Port to poll the SNMP agent on."
 msgstr "用於輪詢SNMP代理的UDP / TCP端口。"
 
 #: setup.php:508
-#, fuzzy
 msgid "Default SNMP timeout in milli-seconds."
 msgstr "默認SNMP超時，以毫秒為單位。"
 
 #: setup.php:516
-#, fuzzy
 msgid "The number times the SNMP poller will attempt to reach the host before failing."
 msgstr "SNMP輪詢器在失敗之前嘗試到達主機的次數。"
 
 #: setup.php:529
-#, fuzzy
 msgid "snmpbulkwalk Binary Path"
 msgstr "snmpbulkwalk二進制路徑"
 
 #: setup.php:530
-#, fuzzy
 msgid "The path to your snmpbulkwalk binary."
 msgstr "你的snmpbulkwalk二進製文件的路徑。"
 
 #: setup.php:538
-#, fuzzy
 msgid "MacTrack Settings"
 msgstr "SNMP設置"
 
@@ -2708,7 +2321,6 @@ msgid "Default Tab"
 msgstr "預設頁面"
 
 #: setup.php:544
-#, fuzzy
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr "每次您進入MacTrack時，您希望將哪個MacTrack選項卡作為“默認”選項卡。"
 
@@ -2717,17 +2329,14 @@ msgid "IP Addresses"
 msgstr "匿名IP地址。根據國家隱私法，在某些國家/地區設置此選項是強制性的。 <a href=\"https://support.google.com/analytics/answer/2763052\" target=\"_blank\">詳細了解IP匿名化</a> 。"
 
 #: setup.php:551
-#, fuzzy
 msgid "Mac Addresses"
 msgstr "MAC地址"
 
 #: setup.php:553
-#, fuzzy
 msgid "dot1x Deta"
 msgstr "dot1x Deta"
 
 #: setup.php:564
-#, fuzzy
 msgid "Device Tracking Devices"
 msgstr "設備跟踪設備"
 
@@ -2737,107 +2346,87 @@ msgid "(Edit)"
 msgstr "(編輯)"
 
 #: setup.php:578 setup.php:634
-#, fuzzy
 msgid "(Import)"
 msgstr "匯入"
 
 #: setup.php:620
-#, fuzzy
 msgid "Device Tracking Device Types"
 msgstr "設備跟踪設備類型"
 
 #: setup.php:648
-#, fuzzy
 msgid "Device Tracking Sites"
 msgstr "設備跟踪網站"
 
 #: setup.php:669
-#, fuzzy
 msgid "Mac Address Tracking Utility"
 msgstr "Mac地址跟踪實用程序"
 
 #: setup.php:690
-#, fuzzy
 msgid "Mac Address Authorization Utility"
 msgstr "Mac地址授權實用程序"
 
 #: setup.php:711
-#, fuzzy
 msgid "Device Tracking Vendor Macs"
 msgstr "設備跟踪供應商Mac"
 
 #: setup.php:718
-#, fuzzy
 msgid "Device Tracking View Macs"
 msgstr "設備跟踪查看Mac"
 
 #: setup.php:732
-#, fuzzy
 msgid "Device Tracking Dot1x View"
 msgstr "設備跟踪Dot1x視圖"
 
 #: setup.php:739
-#, fuzzy
 msgid "Device Tracking IP Address Viewer"
 msgstr "設備跟踪IP地址查看器"
 
 #: setup.php:746
-#, fuzzy
 msgid "Device Tracking View Interfaces"
 msgstr "設備跟踪視圖接口"
 
 #: setup.php:753
-#, fuzzy
 msgid "Device Tracking View Sites"
 msgstr "設備跟踪查看網站"
 
 #: setup.php:760
-#, fuzzy
 msgid "Device Tracking View IP Ranges"
 msgstr "設備跟踪查看IP範圍"
 
 #: setup.php:767
-#, fuzzy
 msgid "Device Tracking View Devices"
 msgstr "設備跟踪查看設備"
 
 #: setup.php:774
-#, fuzzy
 msgid "Device Tracking Utilities"
 msgstr "設備跟踪實用程序"
 
 #: setup.php:795
-#, fuzzy
 msgid "Truncate Port Results Table"
 msgstr "截斷端口結果表"
 
 #: setup.php:802
-#, fuzzy
 msgid "Truncate Aggregated Port Results Table"
 msgstr "截斷聚合端口結果表"
 
 #: setup.php:809
-#, fuzzy
 msgid "Truncate and Re-create Aggregated Port Results Table"
 msgstr "截斷並重新創建聚合端口結果表"
 
 #: setup.php:823
-#, fuzzy
 msgid "Refresh/Update Vendor MAC Database from IEEE"
 msgstr "從IEEE刷新/更新供應商MAC數據庫"
 
 #: setup.php:830 setup.php:837
-#, fuzzy
 msgid "Device Tracking Graph Viewer"
 msgstr "設備跟踪圖查看器"
 
 #: setup.php:857 setup.php:859
-#, fuzzy
 msgid "MacTrack"
 msgstr "MacTrack"
 
 #: setup.php:876 setup.php:877 setup.php:878 setup.php:879
-#, fuzzy, php-format
+#, php-format
 msgid "%d Seconds"
 msgstr "%d 秒"
 
@@ -2855,27 +2444,22 @@ msgid "Contains"
 msgstr "包含"
 
 #: setup.php:894
-#, fuzzy
 msgid "Begins With"
 msgstr "開始於"
 
 #: setup.php:895
-#, fuzzy
 msgid "Does Not Contain"
 msgstr "不包含"
 
 #: setup.php:896
-#, fuzzy
 msgid "Does Not Begin With"
 msgstr "不會開始"
 
 #: setup.php:897
-#, fuzzy
 msgid "Is Null"
 msgstr "一片空白"
 
 #: setup.php:898
-#, fuzzy
 msgid "Is Not Null"
 msgstr "不是空的"
 
@@ -2888,12 +2472,10 @@ msgid "Full"
 msgstr "完整"
 
 #: setup.php:909
-#, fuzzy
 msgid "Sync Cacti Device to Device Tracking Device"
 msgstr "將Cacti設備同步到設備跟踪設備"
 
 #: setup.php:910
-#, fuzzy
 msgid "Sync Device Tracking Device to Cacti Device"
 msgstr "將設備跟踪設備同步到Cacti設備"
 
@@ -2903,13 +2485,13 @@ msgid "Every %d Minutes"
 msgstr "每 %d 分鐘"
 
 #: setup.php:932
-#, fuzzy, php-format
+#, php-format
 msgid "Every %d Hour"
-msgstr "每％d小時"
+msgstr "每%d小時"
 
 #: setup.php:933 setup.php:934 setup.php:935 setup.php:936 setup.php:956
 #: setup.php:1532 setup.php:1533
-#, fuzzy, php-format
+#, php-format
 msgid "Every %d Hours"
 msgstr "每個％d小時"
 
@@ -2918,29 +2500,28 @@ msgid "Every Day"
 msgstr "每天"
 
 #: setup.php:946
-#, php-format
+#, fuzzy, php-format
 msgid "%d Month"
-msgstr "％d月"
+msgstr "月"
 
 #: setup.php:947 setup.php:948 setup.php:949
 #, php-format
 msgid "%d Months"
-msgstr "％d個月"
+msgstr "最後％d個月"
 
 #: setup.php:950
 #, php-format
 msgid "%d Year"
-msgstr "％d年"
+msgstr "%d年"
 
 #: setup.php:955
-#, fuzzy
 msgid "On Scan Completion"
 msgstr "在掃描完成時"
 
 #: setup.php:958
-#, fuzzy, php-format
+#, php-format
 msgid "Every %d Days"
-msgstr "每隔％d天"
+msgstr "每 %0% 天"
 
 #: setup.php:959
 msgid "Every Week"
@@ -2951,375 +2532,302 @@ msgid "Management"
 msgstr "管理"
 
 #: setup.php:968 setup.php:1327 setup.php:1331
-#, fuzzy
 msgid "SNMP Options"
 msgstr "SNMP選項"
 
 #: setup.php:971
-#, fuzzy
 msgid "Mac Watch"
 msgstr "Mac Watch"
 
 #: setup.php:971 setup.php:972 setup.php:973 setup.php:983
-#, fuzzy
 msgid "Tracking Tools"
 msgstr "跟踪工具"
 
 #: setup.php:972
-#, fuzzy
 msgid "Mac Authorizations"
 msgstr "Mac授權"
 
 #: setup.php:973
-#, fuzzy
 msgid "Tracking Utilities"
 msgstr "跟踪實用程序"
 
 #: setup.php:996
-#, fuzzy
 msgid "Device Scanning Function Options"
 msgstr "設備掃描功能選項"
 
 #: setup.php:1001
-#, fuzzy
 msgid "Give this device type a meaningful description."
 msgstr "為此設備類型提供有意義的描述。"
 
 #: setup.php:1008
-#, fuzzy
 msgid "Fill in the name for the vendor of this device type."
 msgstr "填寫此設備類型的供應商的名稱。"
 
 #: setup.php:1015
-#, fuzzy
 msgid "Choose the type of device."
 msgstr "選擇設備類型。"
 
 #: setup.php:1022
-#, fuzzy
 msgid "System Description Match"
 msgstr "系統描述匹配"
 
 #: setup.php:1023 setup.php:1030
-#, fuzzy
 msgid "Provide key information to help Device Tracking detect the type of device.  The wildcard character is the '&#42;' sign."
 msgstr "提供關鍵信息以幫助設備跟踪檢測設備類型。通配符是'％'符號。"
 
 #: setup.php:1029
-#, fuzzy
 msgid "Vendor SNMP Object ID Match"
 msgstr "供應商SNMP對象ID匹配"
 
 #: setup.php:1036
-#, fuzzy
 msgid "MAC Address Scanning Function"
 msgstr "MAC地址掃描功能"
 
 #: setup.php:1037
-#, fuzzy
 msgid "The Device Tracking scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
 msgstr "要跟踪設備跟踪掃描功能以獲取和存儲端口詳細信息。功能名稱就是所需的全部內容。假設以下四個參數並且將始終附加：&#39;my_function（$ site，＆$ device，$ lowport，$ highport）&#39;。純路由器不需要任何功能。"
 
 #: setup.php:1045
-#, fuzzy
 msgid "IP Address Scanning Function"
 msgstr "IP地址掃描功能"
 
 #: setup.php:1046
-#, fuzzy
 msgid "The Device Tracking scanning function specific to Layer3 devices that track IP Addresses."
 msgstr "特定於跟踪IP地址的第3層設備的設備跟踪掃描功能。"
 
 #: setup.php:1054
-#, fuzzy
 msgid "802.1x Scanning Function"
 msgstr "802.1x掃描功能"
 
 #: setup.php:1055
-#, fuzzy
 msgid "The Device Tracking scanning function specific to Switches with dot1x enabled."
 msgstr "特定於啟用了dot1x的交換機的設備跟踪掃描功能。"
 
 #: setup.php:1063
-#, fuzzy
 msgid "Serial Number Base OID"
 msgstr "序列號基礎OID"
 
 #: setup.php:1064
-#, fuzzy
 msgid "The SNMP OID used to obtain this device types serial number to be stored in the Device Tracking Asset Information table."
 msgstr "用於獲取此設備的SNMP OID鍵入要存儲在“設備跟踪資產信息”表中的序列號。"
 
 #: setup.php:1071
-#, fuzzy
 msgid "Serial Number Collection Method"
 msgstr "序列號收集方法"
 
 #: setup.php:1072
-#, fuzzy
 msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
 msgstr "如何為此OID收集序列號。如果是'SNMP Walk'，我們假設有多個序列號。如果'獲得'，它將只有一個.."
 
 #: setup.php:1075
-#, fuzzy
 msgid "SNMP Get"
 msgstr "SNMP獲取"
 
 #: setup.php:1075
-#, fuzzy
 msgid "SNMP Walk"
 msgstr "SNMP Walk"
 
 #: setup.php:1079
-#, fuzzy
 msgid "Low User Port Number"
 msgstr "低用戶端口號"
 
 #: setup.php:1080 setup.php:1089
-#, fuzzy
 msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
 msgstr "在此交換機上提供低用戶端口號。保留0以允許系統計算它。"
 
 #: setup.php:1088
-#, fuzzy
 msgid "High User Port Number"
 msgstr "高用戶端口號"
 
 #: setup.php:1098
 msgid "Disabled device type is not used."
-msgstr ""
+msgstr "未使用已停用的裝置類型。"
 
 #: setup.php:1121
-#, fuzzy
 msgid "Fill in the name of this SNMP option set."
 msgstr "填寫此SNMP選項集的名稱。"
 
 #: setup.php:1133
-#, fuzzy
 msgid "SNMP Version"
 msgstr "SNMP版本"
 
 #: setup.php:1134
-#, fuzzy
 msgid "Choose the SNMP version for this host."
 msgstr "選擇此主機的SNMP版本。"
 
 #: setup.php:1141
-#, fuzzy
 msgid "SNMP Community String"
 msgstr "SNMP社區字符串"
 
 #: setup.php:1142
-#, fuzzy
 msgid "Fill in the SNMP read community for this device."
 msgstr "填寫此設備的SNMP讀取社區。"
 
 #: setup.php:1150
-#, fuzzy
 msgid "SNMP Port"
 msgstr "SNMP端口"
 
 #: setup.php:1159
-#, fuzzy
 msgid "SNMP Timeout"
 msgstr "SNMP超時"
 
 #: setup.php:1160
-#, fuzzy
 msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
 msgstr "Cacti等待SNMP響應的最大毫秒數（不支持php-snmp）。"
 
 #: setup.php:1168
-#, fuzzy
 msgid "SNMP Retries"
 msgstr "SNMP重試"
 
 #: setup.php:1169
-#, fuzzy
 msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
 msgstr "在放棄之前通過SNMP讀取串到達設備的最大嘗試次數。"
 
 #: setup.php:1177
-#, fuzzy
 msgid "Maximum OID's Per Get Request"
 msgstr "每次獲取請求的最大OID"
 
 #: setup.php:1178
-#, fuzzy
 msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
 msgstr "指定可在單個SNMP Get請求中獲取的OID數。"
 
 #: setup.php:1186
-#, fuzzy
 msgid "SNMP Username (v3)"
 msgstr "SNMP用戶名（v3）"
 
 #: setup.php:1187
-#, fuzzy
 msgid "SNMP v3 username for this device."
 msgstr "此設備的SNMP v3用戶名。"
 
 #: setup.php:1195
-#, fuzzy
 msgid "SNMP Password (v3)"
 msgstr "SNMP密碼（v3）"
 
 #: setup.php:1196
-#, fuzzy
 msgid "SNMP v3 password for this device."
 msgstr "此設備的SNMP v3密碼。"
 
 #: setup.php:1204
-#, fuzzy
 msgid "SNMP Auth Protocol (v3)"
 msgstr "SNMP身份驗證協議（v3）"
 
 #: setup.php:1205
-#, fuzzy
 msgid "Choose the SNMPv3 Authorization Protocol."
 msgstr "選擇SNMPv3授權協議。"
 
 #: setup.php:1212
-#, fuzzy
 msgid "SNMP Privacy Passphrase (v3)"
 msgstr "SNMP隱私密碼（v3）"
 
 #: setup.php:1213
-#, fuzzy
 msgid "Choose the SNMPv3 Privacy Passphrase."
 msgstr "選擇SNMPv3隱私密碼。"
 
 #: setup.php:1221
-#, fuzzy
 msgid "SNMP Privacy Protocol (v3)"
 msgstr "SNMP隱私協議（v3）"
 
 #: setup.php:1222
-#, fuzzy
 msgid "Choose the SNMPv3 Privacy Protocol."
 msgstr "選擇SNMPv3隱私協議。"
 
 #: setup.php:1229
-#, fuzzy
 msgid "SNMP Context (v3)"
 msgstr "SNMP上下文（v3）"
 
 #: setup.php:1230
-#, fuzzy
 msgid "Enter the SNMP v3 Context to use for this device."
 msgstr "輸入要用於此設備的SNMP v3上下文。"
 
 #: setup.php:1238
-#, fuzzy
 msgid "SNMP Engine ID (v3)"
 msgstr "SNMP引擎ID（v3）"
 
 #: setup.php:1239
-#, fuzzy
 msgid "Enter the SNMP v3 Engine ID to use for this device."
 msgstr "輸入要用於此設備的SNMP v3引擎ID。"
 
 #: setup.php:1251
-#, fuzzy
 msgid "General Device Settings"
 msgstr "常規設備設置"
 
 #: setup.php:1256
-#, fuzzy
 msgid "Give this device a meaningful name."
 msgstr "為此設備提供有意義的名稱。"
 
 #: setup.php:1263
-#, fuzzy
 msgid "Fill in the fully qualified hostname for this device."
 msgstr "填寫此設備的完全限定主機名。"
 
 #: setup.php:1268
-#, fuzzy
 msgid "Related Cacti Host"
 msgstr "相關的Cacti主機"
 
 #: setup.php:1269
-#, fuzzy
 msgid "Given Device Tracking Host is connected to this Cacti Host."
 msgstr "給定設備跟踪主機連接到此Cacti主機。"
 
 #: setup.php:1278
-#, fuzzy
 msgid "Scan Type"
 msgstr "掃描類型"
 
 #: setup.php:1279
-#, fuzzy
 msgid "Choose the scan type you wish to perform on this device."
 msgstr "選擇您要在此設備上執行的掃描類型。"
 
 #: setup.php:1287
-#, fuzzy
 msgid "Choose the site to associate with this device."
 msgstr "選擇要與此設備關聯的站點。"
 
 #: setup.php:1294
-#, fuzzy
 msgid "Device Notes"
 msgstr "設備說明"
 
 #: setup.php:1295
-#, fuzzy
 msgid "This field value is useful to save general information about a specific device."
 msgstr "此字段值可用於保存有關特定設備的常規信息。"
 
 #: setup.php:1304
-#, fuzzy
 msgid "Disable Device"
 msgstr "禁用設備"
 
 #: setup.php:1305
-#, fuzzy
 msgid "Check this box to disable all checks for this host."
 msgstr "選中此框可禁用此主機的所有檢查。"
 
 #: setup.php:1312
-#, fuzzy
 msgid "Switch/Hub, Switch/Router Settings"
 msgstr "交換機/集線器，交換機/路由器設置"
 
 #: setup.php:1317
-#, fuzzy
 msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
 msgstr "提供特定交換機/集線器上的端口列表，其MAC結果應被忽略。例如，無法與其他用戶端口區分的鏈路/中繼端口等端口。每個端口號必須用冒號，管道或空格'：'，'|'，''分隔。例如，某些製造商的交換機類型可以接受'Fa0 / 1：Fa1 / 23'或'Fa0 / 1 Fa1 / 23'。"
 
 #: setup.php:1332
 msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
-msgstr ""
+msgstr "您可以使用特定的SNMP設定或選取SNMP集。在第二種情況下， mactrack嘗試從SNMP集中尋找正確的設置"
 
 #: setup.php:1339
-#, fuzzy
 msgid "Read Strings"
 msgstr "閱讀字符串"
 
 #: setup.php:1340
-#, fuzzy
 msgid "<strong>DEPRECATED:</strong> SNMP community strings"
 msgstr "<strong>DEPRECATED：</strong> SNMP社區字符串"
 
 #: setup.php:1345
-#, fuzzy
 msgid "Specific SNMP Settings"
 msgstr "特定的SNMP設置"
 
 #: setup.php:1354
-#, fuzzy
 msgid "Connectivity Options"
 msgstr "連接選項"
 
 #: setup.php:1358
-#, fuzzy
 msgid "Terminal Type"
 msgstr "終端類型"
 
 #: setup.php:1359
-#, fuzzy
 msgid "Choose the terminal type that you use to connect to this device."
 msgstr "選擇用於連接此設備的終端類型。"
 
@@ -3344,7 +2852,6 @@ msgid "User Name"
 msgstr "使用者名稱"
 
 #: setup.php:1372
-#, fuzzy
 msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
 msgstr "用於自定義身份驗證方法的用戶名。示例包括SSH，RSH，HTML等。"
 
@@ -3353,17 +2860,14 @@ msgid "Password"
 msgstr "密碼"
 
 #: setup.php:1381
-#, fuzzy
 msgid "The password to be used for your custom authentication."
 msgstr "用於自定義身份驗證的密碼。"
 
 #: setup.php:1389
-#, fuzzy
 msgid "Private Key Path"
 msgstr "私鑰路徑"
 
 #: setup.php:1390
-#, fuzzy
 msgid "The path to the private key used for SSH authentication."
 msgstr "用於SSH身份驗證的私鑰的路徑。"
 
@@ -3372,107 +2876,86 @@ msgid "Sequence"
 msgstr "序列"
 
 #: setup.php:1415
-#, fuzzy
 msgid "Sequence of Item."
 msgstr "項目順序。"
 
 #: setup.php:1423
-#, fuzzy
 msgid "General Site Settings"
 msgstr "常規網站設置"
 
 #: setup.php:1428
-#, fuzzy
 msgid "Please enter a reasonable name for this site."
 msgstr "請輸入此網站的合理名稱。"
 
 #: setup.php:1435
-#, fuzzy
 msgid "Primary Customer Contact"
 msgstr "主要客戶聯繫人"
 
 #: setup.php:1436
-#, fuzzy
 msgid "The principal customer contact name and number for this site."
 msgstr "此站點的主要客戶聯繫人姓名和號碼。"
 
 #: setup.php:1443
-#, fuzzy
 msgid "NetOps Contact"
 msgstr "NetOps聯繫人"
 
 #: setup.php:1444
-#, fuzzy
 msgid "Please principal network support contact name and number for this site."
 msgstr "請主要網絡支持本網站的聯繫人姓名和號碼。"
 
 #: setup.php:1451
-#, fuzzy
 msgid "Facilities Contact"
 msgstr "設施聯繫"
 
 #: setup.php:1452
-#, fuzzy
 msgid "Please principal facilities/security contact name and number for this site."
 msgstr "請主要設施/安全聯繫人姓名和本網站的電話號碼。"
 
 #: setup.php:1459
-#, fuzzy
 msgid "Site Information"
 msgstr "網站信息"
 
 #: setup.php:1463
-#, fuzzy
 msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
 msgstr "以免費形式提供任何特定於站點的信息，以便您更好地管理此位置。"
 
 #: setup.php:1485
-#, fuzzy
 msgid "General Mac Address Tracking Settings"
 msgstr "常規Mac地址跟踪設置"
 
 #: setup.php:1490
-#, fuzzy
 msgid "Please enter the MAC Address to be watched for."
 msgstr "請輸入要觀看的MAC地址。"
 
 #: setup.php:1497
-#, fuzzy
 msgid "MAC Tracking Name/Email Subject"
 msgstr "MAC跟踪名稱/電子郵件主題"
 
 #: setup.php:1498
-#, fuzzy
 msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
 msgstr "請為此MAC跟踪條目輸入合理的名稱。此信息將在您的電子郵件的主題行中"
 
 #: setup.php:1517
-#, fuzzy
 msgid "Ticket number for cross referencing with your corporate help desk system(s)."
 msgstr "與公司服務台系統交叉引用的票號。"
 
 #: setup.php:1524
-#, fuzzy
 msgid "Notification Schedule"
 msgstr "通知時間表"
 
 #: setup.php:1525
-#, fuzzy
 msgid "Choose how often an Email should be generated for this Mac Watch item."
 msgstr "選擇為此Mac Watch項目生成電子郵件的頻率。"
 
 #: setup.php:1529
-#, fuzzy
 msgid "First Occurrence Only"
 msgstr "首次出現"
 
 #: setup.php:1530
-#, fuzzy
 msgid "All Occurrences"
 msgstr "所有事件"
 
 #: setup.php:1531
-#, fuzzy
 msgid "Every Hour"
 msgstr "每隔一小時"
 
@@ -3481,66 +2964,21 @@ msgid "Email Addresses"
 msgstr "電子郵件信箱"
 
 #: setup.php:1539
-#, fuzzy
 msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
 msgstr "輸入分號的電子郵件地址，將通知此MAC地址。"
 
 #: setup.php:1562
-#, fuzzy
 msgid "General Mac Address Authorization Settings"
 msgstr "常規Mac地址授權設置"
 
 #: setup.php:1566
-#, fuzzy
 msgid "MAC Address Match"
 msgstr "MAC地址匹配"
 
 #: setup.php:1567
-#, fuzzy
 msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
 msgstr "請輸入要自動授權的MAC地址或Mac地址匹配字符串。如果您希望授權一組MAC地址，可以在MAC地址的任何位置使用'％'的通配符。"
 
 #: setup.php:1576
-#, fuzzy
 msgid "Please add a reason for this entry."
 msgstr "請為此條目添加原因。"
-
-#, fuzzy
-#~ msgid "Select a set of SNMP options to try."
-#~ msgstr "選擇一組要嘗試的SNMP選項。"
-
-#, fuzzy
-#~ msgid "Clear Results"
-#~ msgstr "匯入結果"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "您必須至少選擇一個要觀看的Mac才能刪除。"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "觀看說明"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "運行"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "停用"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "閒置"
-
-#, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "啟用"
-
-#, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "設備說明"
-
-#, fuzzy
-#~ msgid "Authorization Succcess"
-#~ msgstr "授權Succcess"

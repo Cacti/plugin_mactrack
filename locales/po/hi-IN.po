@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2023-12-11 21:38-0600\n"
-"PO-Revision-Date: 2020-12-12 19:06-0500\n"
+"POT-Creation-Date: 2024-04-20 17:08-0400\n"
+"PO-Revision-Date: 2024-04-20 17:32-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hi_IN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -29,130 +29,110 @@ msgid "Running"
 msgstr "चल रहा है"
 
 #: lib/mactrack_functions.php:39
-#, fuzzy
 msgid "No method"
 msgstr "तरीका"
 
 #: lib/mactrack_functions.php:40 mactrack_view_dot1x.php:486
 #: mactrack_view_dot1x.php:620
-#, fuzzy
 msgid "Authentication Success"
 msgstr "प्रमाणीकरण सफलता"
 
 #: lib/mactrack_functions.php:41 mactrack_view_dot1x.php:488
 #: mactrack_view_dot1x.php:621
-#, fuzzy
 msgid "Authentication Failed"
 msgstr "प्रमाणीकरण विफल होना"
 
 #: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:485
 #: mactrack_view_dot1x.php:622
-#, fuzzy
 msgid "Authorization Success"
 msgstr "प्राधिकरण की सफलता"
 
 #: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:487
 #: mactrack_view_dot1x.php:623
-#, fuzzy
 msgid "Authorization Failed"
 msgstr "अधिकृतीकरण विफल"
 
 #: lib/mactrack_functions.php:2458
-#, fuzzy
 msgid "Device Tracking OUI Database Import Results"
 msgstr "डिवाइस ट्रैकिंग OUI डेटाबेस आयात परिणाम"
 
 #: lib/mactrack_functions.php:2459
-#, fuzzy
 msgid "Getting OUI Database from IEEE"
 msgstr "IEEE से OUI डेटाबेस प्राप्त करना"
 
 #: lib/mactrack_functions.php:2461
-#, fuzzy
 msgid "Getting OUI Database from the IEEE"
 msgstr "IEEE से OUI डेटाबेस प्राप्त करना"
 
 #: lib/mactrack_functions.php:2469
-#, fuzzy
 msgid "OUI Database Download from IEEE Complete"
 msgstr "आईईई पूरा से OUI डेटाबेस डाउनलोड"
 
 #: lib/mactrack_functions.php:2471
-#, fuzzy
 msgid "OUI Database Download from IEEE FAILED"
 msgstr "आईईई फेल से OUI डेटाबेस डाउनलोड"
 
 #: lib/mactrack_functions.php:2558
-#, fuzzy, php-format
+#, php-format
 msgid "There were '%d' Entries Added/Updated in the database."
 msgstr "डेटाबेस में '% d' प्रविष्टियाँ जोड़ी गईं / अपडेट की गईं।"
 
 #: lib/mactrack_functions.php:2560
-#, fuzzy, php-format
+#, php-format
 msgid "There were '%d' Records Removed from the database."
 msgstr "डेटाबेस से '% d' रिकॉर्ड्स निकाले गए।"
 
 #: lib/mactrack_functions.php:2582
-#, fuzzy
 msgid "atifIndexes data collection complete"
 msgstr "atifIndexes डेटा संग्रह पूरा हुआ"
 
 #: lib/mactrack_functions.php:2600
-#, fuzzy
 msgid "atPhysAddress data collection complete"
 msgstr "atPhysAddress डेटा संग्रह पूरा करें"
 
 #: lib/mactrack_functions.php:2608
-#, fuzzy
 msgid "atNetAddress data collection complete"
 msgstr "atNetAddress डेटा संग्रह पूरा हुआ"
 
 #: lib/mactrack_functions.php:2621
-#, fuzzy
 msgid "atEntries assembly complete."
 msgstr "विधानसभा पूरी हो जाती है।"
 
 #: lib/mactrack_functions.php:2652
-#, fuzzy, php-format
+#, php-format
 msgid "HOST: %s, IP address information collection complete"
 msgstr "HOST: %s, IP पता सूचना संग्रह पूर्ण"
 
 #: lib/mactrack_functions.php:2669 lib/mactrack_functions.php:3166
-#, fuzzy
 msgid "Rescan Device"
 msgstr "रेसकान डिवाइस"
 
 #: lib/mactrack_functions.php:2692
-#, fuzzy
 msgid "View Non Interface Graphs"
 msgstr "अंतर देखें"
 
 #: lib/mactrack_functions.php:2694
-#, fuzzy
 msgid "No Non Interface Graphs in Cacti"
 msgstr "कैक्टि में कोई गैर इंटरफ़ेस ग्राफ़ नहीं"
 
 #: lib/mactrack_functions.php:2711
-#, fuzzy
 msgid "View Interface Graphs"
 msgstr "अंतर देखें"
 
 #: lib/mactrack_functions.php:2713
-#, fuzzy
 msgid "No Interface Graphs in Cacti"
 msgstr "अंतर देखें"
 
 #: lib/mactrack_functions.php:2730 lib/mactrack_functions.php:2733
-#, fuzzy
 msgid "Since Restart"
 msgstr "रिस्टार्ट के बाद से"
 
-#: lib/mactrack_functions.php:2772 mactrack_devices.php:1247
+#: lib/mactrack_functions.php:2772 mactrack_devices.php:1245
 #: mactrack_view_devices.php:512
 msgid "Down"
 msgstr "नीचे"
 
-#: lib/mactrack_functions.php:2772 mactrack_devices.php:1245
+#: lib/mactrack_functions.php:2772 mactrack_devices.php:1243
 #: mactrack_view_devices.php:510
 msgid "Up"
 msgstr "ऊपर"
@@ -162,27 +142,26 @@ msgid "Data"
 msgstr "डाटा"
 
 #: lib/mactrack_functions.php:2808
-#, fuzzy
 msgid "Voice"
 msgstr "आवाज़"
 
 #: lib/mactrack_functions.php:2860
-#, fuzzy, php-format
+#, php-format
 msgid "Device Rescan '%s'"
 msgstr "डिवाइस Rescan ' %s'"
 
 #: lib/mactrack_functions.php:2900
-#, fuzzy, php-format
+#, php-format
 msgid "Site scan '%s'"
 msgstr "साइट स्कैन ' %s'"
 
 #: lib/mactrack_functions.php:2937
-#, fuzzy, php-format
+#, php-format
 msgid "Device Enable '%s'"
 msgstr "डिवाइस सक्षम ' %s'"
 
 #: lib/mactrack_functions.php:2969
-#, fuzzy, php-format
+#, php-format
 msgid "Device Disable '%d'"
 msgstr "डिवाइस अक्षम '% d'"
 
@@ -204,62 +183,59 @@ msgid "N/A"
 msgstr "लागू नहीं"
 
 #: lib/mactrack_functions.php:3087 setup.php:881
-#, fuzzy, php-format
+#, php-format
 msgid "%d Minutes"
 msgstr "% d मिनट"
 
 #: lib/mactrack_functions.php:3091
-#, fuzzy, php-format
+#, php-format
 msgid "%d Hours"
 msgstr "% d घंटे"
 
 #: lib/mactrack_functions.php:3095 setup.php:941 setup.php:942 setup.php:943
 #: setup.php:944 setup.php:945
-#, fuzzy, php-format
+#, php-format
 msgid "%d Days"
-msgstr "% ड डय"
+msgstr "%d दिन"
 
 #: lib/mactrack_functions.php:3098
-#, fuzzy, php-format
+#, php-format
 msgid "%d Weeks"
-msgstr "% द वीक"
+msgstr "%d सप्ताह"
 
 #: lib/mactrack_functions.php:3116
-#, fuzzy
 msgid "Not Recorded"
 msgstr "दर्ज नहीं है"
 
 #: lib/mactrack_functions.php:3136
-#, fuzzy, php-format
+#, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
 msgstr "स्थिति: चल रहा है, प्रक्रियाएँ:% d, प्रगति: %s, अंतिम समय:% f"
 
 #: lib/mactrack_functions.php:3138
-#, fuzzy, php-format
+#, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
 msgstr "स्थिति: निष्क्रिय, अंतिम समय:% f सेकंड, प्रक्रियाएँ:% d प्रक्रियाएँ, उपकरण:% d, अगला रन समय: %s"
 
 #: lib/mactrack_functions.php:3140 mactrack_device_types.php:959
-#: mactrack_devices.php:1246 mactrack_utilities.php:240
+#: mactrack_devices.php:1244 mactrack_utilities.php:240
 #: mactrack_utilities.php:266 mactrack_view_devices.php:511 setup.php:927
 #: setup.php:954 setup.php:1097
 msgid "Disabled"
 msgstr "अक्षम"
 
 #: lib/mactrack_functions.php:3146
-#, fuzzy, php-format
+#, php-format
 msgid "Scanning Rate: Every %s"
 msgstr "स्कैनिंग दर: हर %s"
 
 #: lib/mactrack_functions.php:3161 mactrack_view_devices.php:373
 #: mactrack_view_sites.php:310 mactrack_view_sites.php:404
-#, fuzzy
 msgid "View Interfaces"
 msgstr "अंतर देखें"
 
-#: lib/mactrack_functions.php:3179 mactrack_devices.php:1199
+#: lib/mactrack_functions.php:3179 mactrack_devices.php:1197
 #: mactrack_view_devices.php:468
-#, fuzzy
 msgid "Not Detected"
 msgstr "पता नहीं लगा"
 
@@ -270,7 +246,7 @@ msgid "Sites"
 msgstr "साइटां"
 
 #: lib/mactrack_functions.php:3234 mactrack_device_types.php:952
-#: mactrack_devices.php:1107 mactrack_devices.php:1254 mactrack_sites.php:427
+#: mactrack_devices.php:1105 mactrack_devices.php:1252 mactrack_sites.php:427
 #: mactrack_utilities.php:280 mactrack_view_devices.php:325
 #: mactrack_view_devices.php:519 mactrack_view_sites.php:252 setup.php:549
 #: setup.php:967
@@ -278,7 +254,6 @@ msgid "Devices"
 msgstr "डिवाइस"
 
 #: lib/mactrack_functions.php:3235
-#, fuzzy
 msgid "IP Ranges"
 msgstr "आईपी रेंज"
 
@@ -287,33 +262,29 @@ msgid "IP Address"
 msgstr "IP सिरनामा"
 
 #: lib/mactrack_functions.php:3237 setup.php:1489
-#, fuzzy
 msgid "MAC Address"
 msgstr "मैक पते"
 
 #: lib/mactrack_functions.php:3238 mactrack_view_interfaces.php:291
 #: mactrack_view_interfaces.php:607 setup.php:552
-#, fuzzy
 msgid "Interfaces"
 msgstr "इंटरफेस"
 
 #: lib/mactrack_functions.php:3239
-#, fuzzy
 msgid "Dot1x"
 msgstr "Dot1x"
 
 #: lib/mactrack_functions.php:3240 mactrack_view_graphs.php:153
-#, fuzzy
 msgid "Graphs"
 msgstr "रेखांकन"
 
 #: lib/mactrack_functions.php:3274 mactrack_device_types.php:469
-#: mactrack_devices.php:1248 mactrack_view_devices.php:513 setup.php:902
+#: mactrack_devices.php:1246 mactrack_view_devices.php:513 setup.php:902
 msgid "Unknown"
 msgstr "अज्ञात"
 
 #: lib/mactrack_functions.php:3288 mactrack_device_types.php:1031
-#: mactrack_devices.php:1148 mactrack_macauth.php:370 mactrack_macwatch.php:387
+#: mactrack_devices.php:1146 mactrack_macauth.php:370 mactrack_macwatch.php:387
 #: mactrack_snmp.php:600 mactrack_vendormacs.php:199 mactrack_view_arp.php:429
 #: mactrack_view_devices.php:418 mactrack_view_dot1x.php:512
 #: mactrack_view_interfaces.php:625 mactrack_view_macs.php:1043
@@ -321,19 +292,18 @@ msgid "Search"
 msgstr "खोजें"
 
 #: lib/mactrack_functions.php:3298 mactrack_device_types.php:1041
-#: mactrack_devices.php:1258 mactrack_macauth.php:380 mactrack_macwatch.php:397
+#: mactrack_devices.php:1256 mactrack_macauth.php:380 mactrack_macwatch.php:397
 #: mactrack_snmp.php:610 mactrack_vendormacs.php:209
 #: mactrack_view_devices.php:523 mactrack_view_ips.php:318 setup.php:914
 msgid "Default"
 msgstr "डिफ़ॉल्ट"
 
 #: lib/mactrack_functions.php:3312
-#, fuzzy
 msgid "Show Device Details"
 msgstr "डिवाइस का विवरण दिखाएं"
 
 #: lib/mactrack_functions.php:3315 mactrack_device_types.php:1053
-#: mactrack_devices.php:1172 mactrack_macauth.php:392 mactrack_macwatch.php:409
+#: mactrack_devices.php:1170 mactrack_macauth.php:392 mactrack_macwatch.php:409
 #: mactrack_snmp.php:624 mactrack_vendormacs.php:221 mactrack_view_arp.php:493
 #: mactrack_view_devices.php:442 mactrack_view_dot1x.php:585
 #: mactrack_view_interfaces.php:542 mactrack_view_macs.php:1107
@@ -341,7 +311,7 @@ msgid "Go"
 msgstr "जाएं"
 
 #: lib/mactrack_functions.php:3318 mactrack_device_types.php:1054
-#: mactrack_devices.php:1173 mactrack_macauth.php:393 mactrack_macwatch.php:410
+#: mactrack_devices.php:1171 mactrack_macauth.php:393 mactrack_macwatch.php:410
 #: mactrack_snmp.php:625 mactrack_vendormacs.php:222 mactrack_view_arp.php:494
 #: mactrack_view_devices.php:443 mactrack_view_dot1x.php:586
 #: mactrack_view_interfaces.php:543 mactrack_view_ips.php:331
@@ -350,14 +320,14 @@ msgid "Clear"
 msgstr "明确"
 
 #: lib/mactrack_functions.php:3321 mactrack_device_types.php:1057
-#: mactrack_devices.php:1175 mactrack_vendormacs.php:223
+#: mactrack_devices.php:1173 mactrack_vendormacs.php:223
 #: mactrack_view_arp.php:495 mactrack_view_devices.php:444
 #: mactrack_view_dot1x.php:587 mactrack_view_interfaces.php:544
 #: mactrack_view_ips.php:330 mactrack_view_macs.php:1109
 msgid "Export"
 msgstr "एक्सपोर्ट"
 
-#: lib/mactrack_functions.php:3330 mactrack_devices.php:1154
+#: lib/mactrack_functions.php:3330 mactrack_devices.php:1152
 #: mactrack_view_arp.php:435 mactrack_view_devices.php:424
 #: mactrack_view_dot1x.php:518 mactrack_view_interfaces.php:494
 #: mactrack_view_ips.php:298 mactrack_view_macs.php:1049
@@ -365,46 +335,40 @@ msgid "Site"
 msgstr "साइट"
 
 #: lib/mactrack_functions.php:3334 lib/mactrack_functions.php:3350
-#: mactrack_devices.php:1187 mactrack_devices.php:1198
-#: mactrack_devices.php:1244 mactrack_view_devices.php:456
+#: mactrack_devices.php:1185 mactrack_devices.php:1196
+#: mactrack_devices.php:1242 mactrack_view_devices.php:456
 #: mactrack_view_devices.php:467 mactrack_view_devices.php:509
 #: mactrack_view_ips.php:302
 msgid "Any"
 msgstr "कोई भी@ label"
 
-#: lib/mactrack_functions.php:3346 mactrack_devices.php:1194
+#: lib/mactrack_functions.php:3346 mactrack_devices.php:1192
 #: mactrack_view_devices.php:463
-#, fuzzy
 msgid "SubType"
 msgstr "उपप्रकार"
 
 #: mactrack_actions.php:215
-#, fuzzy, php-format
+#, php-format
 msgid "Device Tracking Device: (%s) successfully updated"
 msgstr "डिवाइस ट्रैकिंग डिवाइस: ( %s) सफलतापूर्वक अपडेट किया गया"
 
 #: mactrack_actions.php:228
-#, fuzzy
 msgid "Import into Device Tracking Database"
 msgstr "डिवाइस ट्रैकिंग डेटाबेस में आयात करें"
 
 #: mactrack_actions.php:241
-#, fuzzy
 msgid "Click 'Continue' to import the following Device to Device Tracking?  Please specify additional Device Tracking device options as given below."
 msgstr "डिवाइस ट्रैकिंग के लिए निम्न डिवाइस आयात करने के लिए 'जारी रखें' पर क्लिक करें? कृपया नीचे दिए गए अनुसार अतिरिक्त डिवाइस ट्रैकिंग डिवाइस विकल्प निर्दिष्ट करें।"
 
 #: mactrack_actions.php:265
-#, fuzzy
 msgid "We will use these devices SNMP options for the Device Tracking device as well."
 msgstr "हम डिवाइस ट्रैकिंग डिवाइस के लिए भी इन उपकरणों SNMP विकल्पों का उपयोग करेंगे।"
 
 #: mactrack_device_types.php:38
-#, fuzzy
 msgid "Not Applicable - Router"
 msgstr "लागू नहीं - राउटर"
 
 #: mactrack_device_types.php:51
-#, fuzzy
 msgid "Not Applicable - Switch/Hub"
 msgstr "लागू नहीं - स्विच / हब"
 
@@ -419,12 +383,10 @@ msgid "Duplicate"
 msgstr "डुप्लीकेट"
 
 #: mactrack_device_types.php:214 mactrack_device_types.php:215
-#, fuzzy
 msgid "--dup--"
 msgstr "--dup--"
 
 #: mactrack_device_types.php:286
-#, fuzzy
 msgid "You must select at least one device type."
 msgstr "आपको कम से कम एक डिवाइस प्रकार का चयन करना होगा।"
 
@@ -435,22 +397,18 @@ msgid "Continue"
 msgstr "जारी रखें"
 
 #: mactrack_device_types.php:294
-#, fuzzy
 msgid "Click 'Continue' to delete the following Device Type(s)."
 msgstr "निम्न डिवाइस प्रकारों को हटाने के लिए 'जारी रखें' पर क्लिक करें।"
 
 #: mactrack_device_types.php:301
-#, fuzzy
 msgid "Click 'Continue' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
 msgstr "निम्न डिवाइस प्रकार (ओं) को दोहराए जाने के लिए 'जारी रखें' पर क्लिक करें। आप नए डिवाइस प्रकारों के लिए वैकल्पिक रूप से विवरण बदल सकते हैं। अन्यथा, नीचे मूल्य नहीं बदलें और मूल नाम को नए प्रत्यय के साथ दोहराया जाएगा।"
 
 #: mactrack_device_types.php:303
-#, fuzzy
 msgid "<description> (1)"
 msgstr "<description> (1)"
 
 #: mactrack_device_types.php:303
-#, fuzzy
 msgid "Device Type Prefix:"
 msgstr "डिवाइस प्रकार उपसर्ग:"
 
@@ -467,271 +425,226 @@ msgid "Return"
 msgstr "वापसी"
 
 #: mactrack_device_types.php:455
-#, fuzzy
 msgid "New Type"
 msgstr "नया प्रकार"
 
 #: mactrack_device_types.php:457
-#, fuzzy
 msgid "Cisco"
 msgstr "सिस्को"
 
 #: mactrack_device_types.php:482
-#, fuzzy, php-format
+#, php-format
 msgid "There were %d Device Types Added!"
-msgstr "% D डिवाइस प्रकार जोड़े गए थे!"
+msgstr "%d डिवाइस के प्रकार जोड़े गए थे!"
 
 #: mactrack_device_types.php:484
-#, fuzzy
 msgid "No New Device Types Found!"
 msgstr "कोई नया उपकरण प्रकार नहीं मिला!"
 
 #: mactrack_device_types.php:494 mactrack_devices.php:496
-#, fuzzy
 msgid "Import Results"
 msgstr "आयात परिणाम"
 
 #: mactrack_device_types.php:496 mactrack_devices.php:498
-#, fuzzy
 msgid "Cacti has imported the following items:"
 msgstr "Cacti ने निम्नलिखित वस्तुओं का आयात किया है:"
 
 #: mactrack_device_types.php:507
-#, fuzzy
 msgid "Import Device Tracking Device Types"
 msgstr "डिवाइस ट्रैकिंग डिवाइस प्रकार आयात करें"
 
 #: mactrack_device_types.php:510
-#, fuzzy
 msgid "Import Device Types from Local File"
 msgstr "स्थानीय फ़ाइल से डिवाइस प्रकार आयात करें"
 
 #: mactrack_device_types.php:511
-#, fuzzy
 msgid "Please specify the location of the CSV file containing your device type information."
 msgstr "कृपया अपने डिवाइस प्रकार की जानकारी युक्त CSV फ़ाइल का स्थान निर्दिष्ट करें।"
 
 #: mactrack_device_types.php:518 mactrack_devices.php:523
-#, fuzzy
 msgid "Overwrite Existing Data?"
 msgstr "मौजूदा डेटा को अधिलेखित करें?"
 
 #: mactrack_device_types.php:519 mactrack_devices.php:524
-#, fuzzy
 msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
 msgstr "क्या आयात प्रक्रिया को मौजूदा डेटा को अधिलेखित करने की अनुमति दी जानी चाहिए? कृपया ध्यान दें, इसका मतलब पुरानी पंक्ति को हटाना नहीं है, केवल डुप्लिकेट पंक्तियों को बदलें।"
 
 #: mactrack_device_types.php:522 mactrack_devices.php:527
-#, fuzzy
 msgid "Allow Existing Rows to be Updated?"
 msgstr "मौजूदा पंक्तियों को अपडेट करने की अनुमति दें?"
 
 #: mactrack_device_types.php:527 mactrack_devices.php:532
-#, fuzzy
 msgid "Required File Format Notes"
 msgstr "आवश्यक फ़ाइल स्वरूप नोट्स"
 
 #: mactrack_device_types.php:530 mactrack_devices.php:535
-#, fuzzy
 msgid "The file must contain a header row with the following column headings."
 msgstr "फ़ाइल में निम्नलिखित कॉलम शीर्षकों के साथ एक हेडर पंक्ति होनी चाहिए।"
 
 #: mactrack_device_types.php:532
-#, fuzzy
 msgid " - A common name for the device.  For example Cisco 6509 Switch"
 msgstr "- डिवाइस के लिए एक सामान्य नाम। उदाहरण के लिए सिस्को 6509 स्विच"
 
 #: mactrack_device_types.php:533
-#, fuzzy
 msgid " - The vendor who produces this device"
 msgstr "- विक्रेता जो इस उपकरण का उत्पादन करता है"
 
 #: mactrack_device_types.php:534
-#, fuzzy
 msgid " - The type of device this is.  See the notes below for this integer value"
 msgstr "- यह किस प्रकार का डिवाइस है। इस पूर्णांक मान के लिए नीचे दिए गए नोट देखें"
 
 #: mactrack_device_types.php:535
-#, fuzzy
 msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
 msgstr "- स्नाप sysDescr के पात्रों का एक अनूठा सेट जो विशिष्ट रूप से इस उपकरण की पहचान करता है"
 
 #: mactrack_device_types.php:536
-#, fuzzy
 msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
 msgstr "- विक्रेता विशिष्ट स्निप sysObjectID जो इस डिवाइस को अगले से अलग करता है"
 
 #: mactrack_device_types.php:537
-#, fuzzy
 msgid " - The scanning function that will be used to scan this device type"
 msgstr "- इस डिवाइस प्रकार को स्कैन करने के लिए स्कैनिंग फ़ंक्शन का उपयोग किया जाएगा"
 
 #: mactrack_device_types.php:538
-#, fuzzy
 msgid " - The IP scanning function that will be used to scan this device type"
 msgstr "- आईपी स्कैनिंग फ़ंक्शन जो इस डिवाइस प्रकार को स्कैन करने के लिए उपयोग किया जाएगा"
 
 #: mactrack_device_types.php:539
-#, fuzzy
 msgid " - The 802.1x scanning function that will be used to scan this device type"
 msgstr "- 802.1x स्कैनिंग फंक्शन जिसका उपयोग इस डिवाइस के प्रकार को स्कैन करने के लिए किया जाएगा"
 
 #: mactrack_device_types.php:540
-#, fuzzy
 msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
 msgstr "- यदि इस डिवाइस प्रकार के लिए सीरियल नंबर एक SNMP क्वेरी के माध्यम से प्राप्त किया जा सकता है, तो इसे यहाँ OID जोड़ें"
 
 #: mactrack_device_types.php:541
-#, fuzzy
 msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
 msgstr "- यदि आपके स्कैनिंग फ़ंक्शन में ट्रंक पोर्ट या लिंक पोर्ट को अलग करने की क्षमता नहीं है, तो यह उपयोगकर्ता पोर्ट के लिए शुरुआती पोर्ट नंबर है"
 
 #: mactrack_device_types.php:542
-#, fuzzy
 msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
 msgstr "- अपवाद के रूप में वही है जो इस अपवाद के साथ है कि यह उच्च संख्या वाला उपयोगकर्ता पोर्ट नंबर है"
 
 #: mactrack_device_types.php:543
 msgid " - Disabled type is not used"
-msgstr ""
+msgstr "- विकलांग प्रकार का उपयोग नहीं किया जाता है"
 
 #: mactrack_device_types.php:545 mactrack_devices.php:558
-#, fuzzy
 msgid "The primary key for this table is a combination of the following three fields:"
 msgstr "इस तालिका की प्राथमिक कुंजी निम्नलिखित तीन क्षेत्रों का एक संयोजन है:"
 
 #: mactrack_device_types.php:549
-#, fuzzy
 msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
 msgstr "इसलिए, यदि आप डुप्लिकेट डिवाइस प्रकारों को आयात करने का प्रयास करते हैं, तो मौजूदा डेटा को नई जानकारी के साथ अपडेट किया जाएगा।"
 
 #: mactrack_device_types.php:551 mactrack_devices.php:564
-#, fuzzy
 msgid " is an integer field and must be one of the following:"
 msgstr "पूर्णांक फ़ील्ड है और निम्न में से एक होना चाहिए:"
 
 #: mactrack_device_types.php:553 mactrack_devices.php:566
-#, fuzzy
 msgid "1 - Switch/Hub"
 msgstr "1 - स्विच / हब"
 
 #: mactrack_device_types.php:554 mactrack_devices.php:567
-#, fuzzy
 msgid "2 - Switch/Router"
 msgstr "2 - स्विच / राउटर"
 
 #: mactrack_device_types.php:555 mactrack_devices.php:568
-#, fuzzy
 msgid "3 - Router"
 msgstr "3 - राउटर"
 
 #: mactrack_device_types.php:557
-#, fuzzy
 msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used direct Device Tracking as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
 msgstr "डिवाइस डिवाइस का प्रकार sysObjectID और sysDescription के लिए यह snmp एजेंट को स्कैन करके और डिवाइस प्रकार डेटाबेस में मूल्यों के खिलाफ तुलना करके निर्धारित किया जाता है। डेटाबेस में पाया जाने वाला पहला मैच प्रत्यक्ष डिवाइस ट्रैकिंग का उपयोग किया जाता है कि इसे कैसे स्कैन किया जाए। इसलिए, यह बहुत महत्वपूर्ण है कि आप अपने उपकरणों के लिए वैध sysObjectID_match, sysDescr_match और स्कैनिंग फ़ंक्शन का चयन करें।"
 
 #: mactrack_device_types.php:574 mactrack_device_types.php:1090
-#: mactrack_devices.php:1188 setup.php:885
-#, fuzzy
+#: mactrack_devices.php:1186 setup.php:885
 msgid "Switch/Hub"
 msgstr "स्विच / हब"
 
 #: mactrack_device_types.php:575 mactrack_device_types.php:1091
-#: mactrack_devices.php:1189 mactrack_view_devices.php:458 setup.php:886
-#, fuzzy
+#: mactrack_devices.php:1187 mactrack_view_devices.php:458 setup.php:886
 msgid "Switch/Router"
 msgstr "स्विच / रूटर"
 
 #: mactrack_device_types.php:576 mactrack_device_types.php:1092
-#: mactrack_devices.php:1190 mactrack_view_devices.php:459 setup.php:887
-#, fuzzy
+#: mactrack_devices.php:1188 mactrack_view_devices.php:459 setup.php:887
 msgid "Router"
 msgstr "रूटर"
 
 #: mactrack_device_types.php:724
-#, fuzzy, php-format
+#, php-format
 msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
 msgstr "हेड लाइन की प्रक्रिया ठीक है: <br> कॉलम मिले जहां: %s"
 
 #: mactrack_device_types.php:726 mactrack_devices.php:729
-#, fuzzy, php-format
+#, php-format
 msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
 msgstr "हेडर लाइन प्रसंस्करण ERROR: आवश्यक फ़ील्ड गुम है <br> कॉलम मिले जहां: %s"
 
 #: mactrack_device_types.php:782
-#, fuzzy
 msgid "Unknown Assume \"Switch/Hub\""
 msgstr "अज्ञात मान लें \"स्विच / हब\""
 
 #: mactrack_device_types.php:817 mactrack_device_types.php:832
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
 msgstr "INSERT स्वीकृत: विक्रेता: %s, विवरण: %s, प्रकार: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php:819 mactrack_device_types.php:834
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
 msgstr "सम्मिलित किया गया: विक्रेता: %s, विवरण: %s, प्रकार: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php:826
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
 msgstr "INSERT SKIPPED, EXISTING: विक्रेता: %s, विवरण: %s, प्रकार: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php:860
-#, fuzzy, php-format
+#, php-format
 msgid "Device Tracking Device Types [edit: %s]"
 msgstr "डिवाइस ट्रैकिंग डिवाइस के प्रकार [संपादित करें: %s]"
 
 #: mactrack_device_types.php:862
-#, fuzzy
 msgid "Device Tracking Device Types [new]"
 msgstr "डिवाइस ट्रैकिंग डिवाइस प्रकार [नया]"
 
 #: mactrack_device_types.php:936
-#, fuzzy
 msgid "Device Tracking Device Type Filters"
 msgstr "डिवाइस ट्रैकिंग डिवाइस प्रकार फ़िल्टर"
 
 #: mactrack_device_types.php:951
-#, fuzzy
 msgid "Device Type Description"
 msgstr "डिवाइस प्रकार विवरण"
 
-#: mactrack_device_types.php:953 mactrack_devices.php:1070
+#: mactrack_device_types.php:953 mactrack_devices.php:1068
 #: mactrack_sites.php:502 mactrack_view_devices.php:283
 #: mactrack_view_sites.php:348 setup.php:1014
-#, fuzzy
 msgid "Device Type"
 msgstr "उपकरण का प्रकार"
 
 #: mactrack_device_types.php:954
-#, fuzzy
 msgid "Port Scanner"
 msgstr "पोर्ट स्कैनर"
 
 #: mactrack_device_types.php:955
-#, fuzzy
 msgid "IP Scanner"
 msgstr "आईपी स्कैनर"
 
 #: mactrack_device_types.php:956
-#, fuzzy
 msgid "Dot1x Scanner"
 msgstr "डॉट 1 एक्स स्कैनर"
 
 #: mactrack_device_types.php:957
-#, fuzzy
 msgid "sysDescription Match"
 msgstr "sysDescription मिलान"
 
 #: mactrack_device_types.php:958
-#, fuzzy
 msgid "Vendor OID Match"
 msgstr "विक्रेता OID मैच"
 
 #: mactrack_device_types.php:964 mactrack_device_types.php:1037 setup.php:969
-#, fuzzy
 msgid "Device Types"
 msgstr "डिवाइस के प्रकार"
 
@@ -746,17 +659,14 @@ msgid "Yes"
 msgstr "हाँ"
 
 #: mactrack_device_types.php:1007
-#, fuzzy
 msgid "No Device Tracking Device Types Found"
 msgstr "कोई डिवाइस ट्रैकिंग डिवाइस प्रकार नहीं मिला"
 
 #: mactrack_device_types.php:1053
-#, fuzzy
 msgid "Submit Query"
 msgstr "जिज्ञासा दर्ज करें"
 
 #: mactrack_device_types.php:1054
-#, fuzzy
 msgid "Clear Filtered Results"
 msgstr "फ़िल्टर किए गए परिणाम साफ़ करें"
 
@@ -765,32 +675,28 @@ msgid "Rescan"
 msgstr "री- स्कैन"
 
 #: mactrack_device_types.php:1055
-#, fuzzy
 msgid "Scan Active Devices for Unknown Device Types"
 msgstr "डिवाइस ट्रैकिंग डिवाइस के प्रकार"
 
-#: mactrack_device_types.php:1056 mactrack_devices.php:1174
+#: mactrack_device_types.php:1056 mactrack_devices.php:1172
 msgid "Import"
 msgstr "आयात करें"
 
 #: mactrack_device_types.php:1056
-#, fuzzy
 msgid "Import Device Types from a CSV File"
 msgstr "स्थानीय फ़ाइल से डिवाइस प्रकार आयात करें"
 
 #: mactrack_device_types.php:1057
-#, fuzzy
 msgid "Export Device Types to Share with Others"
 msgstr "स्थानीय फ़ाइल से डिवाइस प्रकार आयात करें"
 
 #: mactrack_device_types.php:1068 mactrack_sites.php:498
 #: mactrack_view_sites.php:344 setup.php:1007
-#, fuzzy
 msgid "Vendor"
 msgstr "विक्रेता"
 
 #: mactrack_device_types.php:1072 mactrack_device_types.php:1089
-#: mactrack_device_types.php:1100 mactrack_devices.php:1158
+#: mactrack_device_types.php:1100 mactrack_devices.php:1156
 #: mactrack_view_arp.php:455 mactrack_view_arp.php:522
 #: mactrack_view_devices.php:428 mactrack_view_dot1x.php:541
 #: mactrack_view_dot1x.php:637 mactrack_view_dot1x.php:675
@@ -801,7 +707,7 @@ msgstr "विक्रेता"
 msgid "All"
 msgstr "所有"
 
-#: mactrack_device_types.php:1085 mactrack_devices.php:1183
+#: mactrack_device_types.php:1085 mactrack_devices.php:1181
 #: mactrack_view_devices.php:452 mactrack_view_interfaces.php:368
 #: mactrack_view_interfaces.php:552
 msgid "Type"
@@ -820,255 +726,214 @@ msgid "Disable"
 msgstr "अक्षम करें"
 
 #: mactrack_devices.php:35
-#, fuzzy
 msgid "Change SNMP Options"
 msgstr "SNMP विकल्प बदलें"
 
 #: mactrack_devices.php:36
-#, fuzzy
 msgid "Change Device Port Values"
 msgstr "डिवाइस पोर्ट मान बदलें"
 
 #: mactrack_devices.php:37
-#, fuzzy
 msgid "Connect to Cacti Host via Hostname"
 msgstr "होस्टनाम के माध्यम से कैक्टि होस्ट से कनेक्ट करें"
 
 #: mactrack_devices.php:38
-#, fuzzy
 msgid "Copy SNMP Settings from Cacti Host"
 msgstr "Cacti होस्ट से SNMP सेटिंग्स कॉपी करें"
 
 #: mactrack_devices.php:256
-#, fuzzy
 msgid "You must select at least one device."
 msgstr "आपके लिए कम से कम एक डिवाइस चुनना ज़रूरी है।"
 
 #: mactrack_devices.php:264
-#, fuzzy
 msgid "Click 'Continue' to enable the following devices."
 msgstr "निम्नलिखित उपकरणों को सक्षम करने के लिए 'जारी रखें' पर क्लिक करें।"
 
 #: mactrack_devices.php:271
-#, fuzzy
 msgid "Click 'Continue' to disable the following devices."
 msgstr "निम्नलिखित उपकरणों को निष्क्रिय करने के लिए 'जारी रखें' पर क्लिक करें।"
 
 #: mactrack_devices.php:278
-#, fuzzy
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
 msgstr "निम्नलिखित उपकरणों के लिए एसएनएमपी मापदंडों को बदलने के लिए 'जारी रखें' पर क्लिक करें, उन फ़ील्ड के बगल में स्थित बॉक्स को चेक करें जिन्हें आप अपडेट करना चाहते हैं, और नए मूल्य भरें।"
 
 #: mactrack_devices.php:308
-#, fuzzy
 msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
 msgstr "निम्न उपकरणों के लिए ऊपरी या निचले पोर्ट मापदंडों को बदलने के लिए 'जारी रखें' पर क्लिक करें, उन फ़ील्ड के बगल में स्थित बॉक्स को चेक करें जिन्हें आप अपडेट करना चाहते हैं, और नए मूल्य भरें।"
 
 #: mactrack_devices.php:338
-#, fuzzy
 msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
 msgstr "निम्नलिखित उपकरणों को उनके संबंधित कैक्टि डिवाइस से जोड़ने के लिए 'जारी रखें' पर क्लिक करें। संबंध समान होस्टनामों पर बनाया जाएगा। विवरण अपडेट किया जाएगा।"
 
 #: mactrack_devices.php:345
-#, fuzzy
 msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Device Tracking Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
 msgstr "कनेक्ट Cacti डिवाइस से डिवाइस ट्रैकिंग डिवाइस तक SNMP सेटिंग्स कॉपी करने के लिए 'जारी रखें' पर क्लिक करें। सभी कनेक्टेड डिवाइस चुपचाप छोड़ दिए जाएंगे। SNMP रिट्रीज़ को पिंग रिट्रीज़ से लिया जाएगा।"
 
 #: mactrack_devices.php:352
-#, fuzzy
 msgid "Click 'Continue' to delete the following Devices"
 msgstr "निम्न डिवाइस को हटाने के लिए 'जारी रखें' पर क्लिक करें"
 
 #: mactrack_devices.php:512
-#, fuzzy
 msgid "Import Device Tracking Devices"
 msgstr "डिवाइस ट्रैकिंग डिवाइस आयात करें"
 
 #: mactrack_devices.php:515
-#, fuzzy
 msgid "Import Devices from Local File"
 msgstr "स्थानीय फ़ाइल से आयात उपकरण"
 
 #: mactrack_devices.php:516
-#, fuzzy
 msgid "Please specify the location of the CSV file containing your device information."
 msgstr "कृपया अपनी डिवाइस जानकारी युक्त CSV फ़ाइल का स्थान निर्दिष्ट करें।"
 
 #: mactrack_devices.php:537
-#, fuzzy
 msgid " - The SiteID known to Device Tracking for this device"
 msgstr "- इस डिवाइस के लिए डिवाइस ट्रैकिंग के लिए जाना जाने वाला साइटआईडी"
 
 #: mactrack_devices.php:538
-#, fuzzy
 msgid " - A simple name for the device.  For example Cisco 6509 Switch"
 msgstr "- डिवाइस के लिए एक सरल नाम। उदाहरण के लिए सिस्को 6509 स्विच"
 
 #: mactrack_devices.php:539
-#, fuzzy
 msgid " - The IP Address or DNS Name for the device"
 msgstr "- डिवाइस के लिए आईपी एड्रेस या डीएनएस नाम"
 
 #: mactrack_devices.php:540
-#, fuzzy
 msgid " - More detailed information about the device, including location, environmental conditions, etc."
 msgstr "- डिवाइस के बारे में अधिक विस्तृत जानकारी, जिसमें स्थान, पर्यावरण की स्थिति, आदि शामिल हैं।"
 
 #: mactrack_devices.php:541
-#, fuzzy
 msgid " - A list of ports that should not be scanned for user devices"
 msgstr "- बंदरगाहों की एक सूची जिसे उपयोगकर्ता उपकरणों के लिए स्कैन नहीं किया जाना चाहिए"
 
 #: mactrack_devices.php:542
-#, fuzzy
 msgid " - Redundant information indicating the intended device type.  See below for valid values."
 msgstr "- अनावश्यक डिवाइस के प्रकार को इंगित करने वाली अनावश्यक जानकारी। मान्य मानों के लिए नीचे देखें।"
 
 #: mactrack_devices.php:543
-#, fuzzy
 msgid " - Id of a set of SNMP options"
 msgstr "- एसएनएमपी विकल्पों के एक सेट की आईडी"
 
 #: mactrack_devices.php:544
-#, fuzzy
 msgid " - The current snmp read string for the device"
 msgstr "- वर्तमान स्नैंप डिवाइस के लिए स्ट्रिंग पढ़ें"
 
 #: mactrack_devices.php:545
-#, fuzzy
 msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
 msgstr "- जिस स्नैंप संस्करण को आप इस उपकरण से स्कैन करना चाहते हैं। मान्य मान 1, 2 और 3 हैं"
 
 #: mactrack_devices.php:546
-#, fuzzy
 msgid " - The UDP port that the snmp agent is running on"
 msgstr "- स्नैपी एजेंट पर चलने वाला यूडीपी पोर्ट"
 
 #: mactrack_devices.php:547
-#, fuzzy
 msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
 msgstr "- दोबारा कोशिश करने से पहले मिली प्रतिक्रिया के लिए प्रतीक्षा करने के लिए मिलीसेकंड में मध्यांतर"
 
 #: mactrack_devices.php:548
-#, fuzzy
 msgid " - The number of times to retry a snmp request before giving up"
 msgstr "- देने से पहले एक स्नैम्प अनुरोध को पुनः प्राप्त करने की संख्या"
 
 #: mactrack_devices.php:549
-#, fuzzy
 msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
 msgstr "- OID की संख्या निर्दिष्ट करें जो एक सिंगल SNMP प्राप्त अनुरोध में प्राप्त की जा सकती है"
 
 #: mactrack_devices.php:550
-#, fuzzy
 msgid " - SNMP V3: SNMP username"
 msgstr "- SNMP V3: SNMP उपयोगकर्ता नाम"
 
 #: mactrack_devices.php:551
-#, fuzzy
 msgid " - SNMP V3: SNMP password"
 msgstr "- एसएनएमपी वी 3: एसएनएमपी पासवर्ड"
 
 #: mactrack_devices.php:552
-#, fuzzy
 msgid " - SNMP V3: SNMP authentication protocol"
 msgstr "- एसएनएमपी वी 3: एसएनएमपी प्रमाणीकरण प्रोटोकॉल"
 
 #: mactrack_devices.php:553
-#, fuzzy
 msgid " - SNMP V3: SNMP privacy passphrase"
 msgstr "- SNMP V3: SNMP गोपनीयता पासफ़्रेज़"
 
 #: mactrack_devices.php:554
-#, fuzzy
 msgid " - SNMP V3: SNMP privacy protocol"
 msgstr "- एसएनएमपी वी 3: एसएनएमपी गोपनीयता प्रोटोकॉल"
 
 #: mactrack_devices.php:555
-#, fuzzy
 msgid " - SNMP V3: SNMP context"
 msgstr "- एसएनएमपी वी 3: एसएनएमपी संदर्भ"
 
 #: mactrack_devices.php:556
-#, fuzzy
 msgid " - SNMP V3: SNMP engine id"
 msgstr "- एसएनएमपी वी 3: एसएनएमपी इंजन आईडी"
 
 #: mactrack_devices.php:562
-#, fuzzy
 msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
 msgstr "इसलिए, यदि आप डुप्लिकेट डिवाइस आयात करने का प्रयास करते हैं, तो केवल आपके द्वारा निर्दिष्ट डेटा अपडेट किया जाएगा।"
 
 #: mactrack_devices.php:727
-#, fuzzy, php-format
+#, php-format
 msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
 msgstr "हेड लाइन की प्रक्रिया ठीक है: <br> कॉलम मिले जहां: %s"
 
 #: mactrack_devices.php:813 mactrack_devices.php:828
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
 msgstr "INSERT SUCCEEDED: Hostname: SiteID: %s, डिवाइस नाम: %s, Hostname %s, SNMP पोर्ट: %s"
 
 #: mactrack_devices.php:815 mactrack_devices.php:830
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
 msgstr "INSERT विफल: साइटआईडी: %s, डिवाइस नाम: %s, होस्टनाम %s, SNMP पोर्ट: %s"
 
 #: mactrack_devices.php:822
-#, fuzzy, php-format
+#, php-format
 msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
 msgstr "INSERT SKIPPED, EXISTING: SiteID: %s, डिवाइस नाम: %s, होस्टनाम %s, SNMP पोर्ट: %s"
 
 #: mactrack_devices.php:857
-#, fuzzy, php-format
+#, php-format
 msgid "Device Tracking Devices [edit: %s]"
 msgstr "डिवाइस ट्रैकिंग डिवाइस [संपादित करें: %s]"
 
 #: mactrack_devices.php:861
-#, fuzzy
 msgid "Device Tracking Devices [new]"
 msgstr "डिवाइस ट्रैकिंग डिवाइस [नया]"
 
 #: mactrack_devices.php:874
-#, fuzzy
 msgid "SNMP Information"
 msgstr "एसएनएमपी सूचना"
 
-#: mactrack_devices.php:927
+#: mactrack_devices.php:925
 msgid "System:"
 msgstr "तंत्रः"
 
-#: mactrack_devices.php:928
-#, fuzzy
+#: mactrack_devices.php:926
 msgid "Uptime:"
 msgstr "चालू रहने का समय"
 
-#: mactrack_devices.php:929
+#: mactrack_devices.php:927
 msgid "Hostname:"
 msgstr "#-#-#-#-# balsa.HEAD.hi.po (Balsa 2.x) #-#-#-#-# उपयोगकर्ता का नाम #-#-#-#-# eel.HEAD.hi.po (eel VERSION) #-#-#-#-# उपयोगकर्ता का नाम: (_U)"
 
-#: mactrack_devices.php:930
-#, fuzzy
+#: mactrack_devices.php:928
 msgid "ObjectID:"
 msgstr "ObjectID:"
 
-#: mactrack_devices.php:1035
-#, fuzzy
+#: mactrack_devices.php:1033
 msgid "Device Tracking Device Filters"
 msgstr "डिवाइस ट्रैकिंग डिवाइस फ़िल्टर"
 
-#: mactrack_devices.php:1054 mactrack_view_devices.php:267 setup.php:1255
+#: mactrack_devices.php:1052 mactrack_view_devices.php:267 setup.php:1255
 msgid "Device Name"
 msgstr "उपकरण नामः% 1"
 
-#: mactrack_devices.php:1058 mactrack_sites.php:423 mactrack_sites.php:494
+#: mactrack_devices.php:1056 mactrack_sites.php:423 mactrack_sites.php:494
 #: mactrack_view_devices.php:271 mactrack_view_ips.php:198
 #: mactrack_view_sites.php:248 mactrack_view_sites.php:340 setup.php:1286
 #: setup.php:1427
 msgid "Site Name"
 msgstr "साइट नाम"
 
-#: mactrack_devices.php:1062 mactrack_devices.php:1240
+#: mactrack_devices.php:1060 mactrack_devices.php:1238
 #: mactrack_utilities.php:280 mactrack_view_devices.php:275
 #: mactrack_view_devices.php:505 mactrack_view_dot1x.php:415
 #: mactrack_view_dot1x.php:428 mactrack_view_dot1x.php:610
@@ -1076,100 +941,85 @@ msgstr "साइट नाम"
 msgid "Status"
 msgstr "ऑर्डर स्थिति"
 
-#: mactrack_devices.php:1066 mactrack_view_devices.php:279
+#: mactrack_devices.php:1064 mactrack_view_devices.php:279
 #: mactrack_view_interfaces.php:364 setup.php:1262
 msgid "Hostname"
 msgstr "होस्टनांऽ"
 
-#: mactrack_devices.php:1074
-#, fuzzy
+#: mactrack_devices.php:1072
 msgid "Total IPs"
 msgstr "कुल आईपी"
 
-#: mactrack_devices.php:1079 mactrack_sites.php:437
+#: mactrack_devices.php:1077 mactrack_sites.php:437
 #: mactrack_view_devices.php:292 mactrack_view_sites.php:262
-#, fuzzy
 msgid "User Ports"
 msgstr "उपयोगकर्ता पोर्ट"
 
-#: mactrack_devices.php:1084 mactrack_sites.php:442
+#: mactrack_devices.php:1082 mactrack_sites.php:442
 #: mactrack_view_devices.php:297 mactrack_view_sites.php:267
-#, fuzzy
 msgid "User Ports Up"
 msgstr "उपयोगकर्ता पोर्ट्स अप"
 
-#: mactrack_devices.php:1089 mactrack_view_devices.php:302
-#, fuzzy
+#: mactrack_devices.php:1087 mactrack_view_devices.php:302
 msgid "Trunk Ports"
 msgstr "ट्रंक पोर्ट"
 
-#: mactrack_devices.php:1094 mactrack_view_devices.php:307
-#, fuzzy
+#: mactrack_devices.php:1092 mactrack_view_devices.php:307
 msgid "Active Macs"
 msgstr "सक्रिय मैक"
 
-#: mactrack_devices.php:1099 mactrack_view_devices.php:317
-#, fuzzy
+#: mactrack_devices.php:1097 mactrack_view_devices.php:317
 msgid "Last Duration"
 msgstr "अंतिम अवधि"
 
-#: mactrack_devices.php:1123
-#, fuzzy
+#: mactrack_devices.php:1121
 msgid "No Device Tracking Devices"
 msgstr "कोई डिवाइस ट्रैकिंग डिवाइस नहीं"
 
-#: mactrack_devices.php:1159 mactrack_view_devices.php:429 setup.php:908
+#: mactrack_devices.php:1157 mactrack_view_devices.php:429 setup.php:908
 #: setup.php:1040 setup.php:1049 setup.php:1058 setup.php:1273 setup.php:1289
 #: setup.php:1334 setup.php:1363
 msgid "None"
 msgstr "कोई नहीं"
 
-#: mactrack_devices.php:1249 mactrack_view_devices.php:514
+#: mactrack_devices.php:1247 mactrack_view_devices.php:514
 msgid "Error"
 msgstr "त्रुटि"
 
-#: mactrack_devices.php:1250 mactrack_view_devices.php:515
-#, fuzzy
+#: mactrack_devices.php:1248 mactrack_view_devices.php:515
 msgid "No Cacti Link"
 msgstr "कोई कैक्टि लिंक नहीं"
 
 #: mactrack_macauth.php:132
-#, fuzzy
 msgid "You must select at least one Authorized Mac to delete."
 msgstr "आपको हटाने के लिए कम से कम एक अधिकृत मैक का चयन करना होगा।"
 
 #: mactrack_macauth.php:140
-#, fuzzy
 msgid "Click 'Continue' to delete the following Authorized Mac's?"
 msgstr "निम्नलिखित अधिकृत मैक को हटाने के लिए 'जारी रखें' पर क्लिक करें?"
 
 #: mactrack_macauth.php:242
-#, fuzzy, php-format
+#, php-format
 msgid "Device Tracking MacAuth [edit: %s]"
 msgstr "डिवाइस ट्रैकिंग MacAuth [संपादित करें: %s]"
 
 #: mactrack_macauth.php:244
-#, fuzzy
 msgid "Device Tracking MacAuth [new]"
 msgstr "डिवाइस ट्रैकिंग MacAuth [नया]"
 
 #: mactrack_macauth.php:306
-#, fuzzy
 msgid "Device Tracking MacAuth Filters"
 msgstr "डिवाइस ट्रैकिंग Macuth फिल्टर"
 
 #: mactrack_macauth.php:319 mactrack_macwatch.php:318
-#, fuzzy
 msgid "Mac Address"
 msgstr "मैक पते"
 
 #: mactrack_macauth.php:320 setup.php:1574
-#, fuzzy
 msgid "Reason"
 msgstr "कारण:"
 
 #: mactrack_macauth.php:321
-#, fuzzy
 msgid "Added/Modified"
 msgstr "जोड़ा गया / संशोधित"
 
@@ -1178,186 +1028,154 @@ msgid "By"
 msgstr "在"
 
 #: mactrack_macauth.php:327
-#, fuzzy
 msgid "Authorized Mac Addresses"
 msgstr "अधिकृत मैक पते"
 
 #: mactrack_macauth.php:348
-#, fuzzy
 msgid "No Authorized Mac Addresses Found"
 msgstr "कोई अधिकृत मैक पते नहीं मिले"
 
 #: mactrack_macauth.php:376 mactrack_vendormacs.php:205
 #: mactrack_view_macs.php:1092
-#, fuzzy
 msgid "MAC's"
 msgstr "मैक के"
 
 #: mactrack_macwatch.php:143
-#, fuzzy
 msgid "Click 'Continue' to delete the following watched Mac's?"
 msgstr "निम्नलिखित देखे गए मैक को हटाने के लिए 'जारी रखें' पर क्लिक करें?"
 
 #: mactrack_macwatch.php:238
-#, fuzzy, php-format
+#, php-format
 msgid "Device Tracking MacWatch [edit: %s]"
 msgstr "डिवाइस ट्रैकिंग MacWatch [संपादित करें: %s]"
 
 #: mactrack_macwatch.php:240
-#, fuzzy
 msgid "Device Tracking MacWatch [new]"
 msgstr "डिवाइस ट्रैकिंग मैकवाच [नया]"
 
 #: mactrack_macwatch.php:302
-#, fuzzy
 msgid "Device Tracking MacWatch Filters"
 msgstr "डिवाइस ट्रैकिंग MacWatch फ़िल्टर"
 
 #: mactrack_macwatch.php:314
-#, fuzzy
 msgid "Watch Name"
 msgstr "नाम देखो"
 
 #: mactrack_macwatch.php:322 setup.php:1516
-#, fuzzy
 msgid "Ticket Number"
 msgstr "टिकट नंबर"
 
 #: mactrack_macwatch.php:326
-#, fuzzy
 msgid "First Seen"
 msgstr "पहले देखा"
 
 #: mactrack_macwatch.php:330
-#, fuzzy
 msgid "Last Seen"
 msgstr "अंतिम बार देखा गया"
 
 #: mactrack_macwatch.php:337 mactrack_macwatch.php:393
-#, fuzzy
 msgid "Watches"
 msgstr "घड़ियों"
 
 #: mactrack_macwatch.php:362
-#, fuzzy
 msgid "No Device Tracking Watched Macs Found"
 msgstr "कोई डिवाइस ट्रैकिंग देखा मैक मिला"
 
 #: mactrack_sites.php:139
-#, fuzzy
 msgid "Click 'Continue' to delete the following Site(s)?"
 msgstr "निम्नलिखित साइट को हटाने के लिए 'जारी रखें' पर क्लिक करें?"
 
 #: mactrack_sites.php:146
-#, fuzzy
 msgid "You must select at least one site."
 msgstr "आपको कम से कम एक साइट का चयन करना होगा।"
 
 #: mactrack_sites.php:358
-#, fuzzy, php-format
+#, php-format
 msgid "Device Tracking Site [edit: %s]"
 msgstr "डिवाइस ट्रैकिंग साइट [संपादित करें: %s]"
 
 #: mactrack_sites.php:360
-#, fuzzy
 msgid "Device Tracking Site [new]"
 msgstr "डिवाइस ट्रैकिंग साइट [नया]"
 
 #: mactrack_sites.php:392
-#, fuzzy
 msgid "Device Tracking Site Filters"
 msgstr "डिवाइस ट्रैकिंग साइट फ़िल्टर"
 
 #: mactrack_sites.php:432 mactrack_sites.php:512 mactrack_view_devices.php:287
 #: mactrack_view_sites.php:257 mactrack_view_sites.php:357
-#, fuzzy
 msgid "Total IP's"
 msgstr "कुल आईपी"
 
 #: mactrack_sites.php:447 mactrack_sites.php:532 mactrack_view_sites.php:272
 #: mactrack_view_sites.php:377
-#, fuzzy
 msgid "MACS Found"
 msgstr "एमएसीएस मिला"
 
 #: mactrack_sites.php:452 mactrack_view_sites.php:277
-#, fuzzy
 msgid "Device Errors"
 msgstr "डिवाइस त्रुटियां"
 
 #: mactrack_sites.php:483 mactrack_sites.php:563 mactrack_view_sites.php:324
 #: mactrack_view_sites.php:422
-#, fuzzy
 msgid "No Device Tracking Sites Found"
 msgstr "कोई उपकरण ट्रैकिंग साइटें नहीं मिलीं"
 
 #: mactrack_sites.php:507 mactrack_view_sites.php:352
-#, fuzzy
 msgid "Total Devices"
 msgstr "कुल उपकरण"
 
 #: mactrack_sites.php:517 mactrack_view_sites.php:362
-#, fuzzy
 msgid "Total User Ports"
 msgstr "कुल उपयोगकर्ता पोर्ट"
 
 #: mactrack_sites.php:522 mactrack_view_sites.php:367
-#, fuzzy
 msgid "Total Oper Ports"
 msgstr "कुल परिचालन बंदरगाह"
 
 #: mactrack_sites.php:527 mactrack_view_sites.php:372
-#, fuzzy
 msgid "Total Trunks"
 msgstr "कुल चड्डी"
 
 #: mactrack_snmp.php:247
-#, fuzzy
 msgid "You must select at least one SNMP Option."
 msgstr "आपको कम से कम एक SNMP विकल्प का चयन करना होगा।"
 
 #: mactrack_snmp.php:255
-#, fuzzy
 msgid "Click 'Continue' to delete the following SNMP Option(s)."
 msgstr "निम्नलिखित SNMP विकल्प (s) को हटाने के लिए 'जारी रखें' पर क्लिक करें।"
 
 #: mactrack_snmp.php:262
-#, fuzzy
 msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
 msgstr "निम्नलिखित SNMP विकल्प (ओं) की नकल करने के लिए 'जारी रखें' पर क्लिक करें। आप वैकल्पिक रूप से नए SNMP विकल्प के लिए शीर्षक प्रारूप बदल सकते हैं।"
 
 #: mactrack_snmp.php:264
-#, fuzzy
 msgid "<name> (1)"
 msgstr "<name> (1)"
 
 #: mactrack_snmp.php:264
-#, fuzzy
 msgid "Name Format:"
 msgstr "नाम प्रारूप:"
 
 #: mactrack_snmp.php:338
-#, fuzzy, php-format
+#, php-format
 msgid "SNMP Options [edit %s]"
 msgstr "SNMP विकल्प [ %s संपादित करें]"
 
 #: mactrack_snmp.php:340
-#, fuzzy
 msgid "SNMP Options [new]"
 msgstr "SNMP विकल्प [नया]"
 
 #: mactrack_snmp.php:408
-#, fuzzy, php-format
+#, php-format
 msgid "SNMP Option Set [edit: %s]"
 msgstr "SNMP विकल्प सेट [संपादित करें: %s]"
 
 #: mactrack_snmp.php:410
-#, fuzzy
 msgid "SNMP Option Set [new]"
 msgstr "SNMP विकल्प सेट [नया]"
 
 #: mactrack_snmp.php:435 mactrack_snmp.php:529 setup.php:592
-#, fuzzy
 msgid "Device Tracking SNMP Options"
 msgstr "डिवाइस ट्रैकिंग SNMP विकल्प"
 
@@ -1382,12 +1200,10 @@ msgid "Timeout"
 msgstr "टाइमआउट"
 
 #: mactrack_snmp.php:443 setup.php:515
-#, fuzzy
 msgid "Retries"
 msgstr "पुनर्प्रयास"
 
 #: mactrack_snmp.php:444
-#, fuzzy
 msgid "Max OIDs"
 msgstr "मैक्स ओआईडी"
 
@@ -1397,12 +1213,10 @@ msgid "Username"
 msgstr "उपयोगकर्ता नाम"
 
 #: mactrack_snmp.php:446
-#, fuzzy
 msgid "Auth Proto"
 msgstr "प्रामाणिक प्रोटो"
 
 #: mactrack_snmp.php:447
-#, fuzzy
 msgid "Priv Proto"
 msgstr "प्रिवी प्रोटो"
 
@@ -1416,32 +1230,26 @@ msgid "Actions"
 msgstr "कार्रवाइयाँ"
 
 #: mactrack_snmp.php:476
-#, fuzzy
 msgid "No SNMP Items Found"
 msgstr "कोई SNMP आइटम नहीं मिला"
 
 #: mactrack_snmp.php:554
-#, fuzzy
 msgid "Title of SNMP Option Set"
 msgstr "एसएनएमपी विकल्प सेट का शीर्षक"
 
 #: mactrack_snmp.php:559
-#, fuzzy
 msgid "SNMP Settings"
 msgstr "SNMP सेटिंग्स"
 
 #: mactrack_snmp.php:576
-#, fuzzy
 msgid "No SNMP Option Sets Found"
 msgstr "कोई SNMP विकल्प सेट नहीं मिला"
 
 #: mactrack_snmp.php:606
-#, fuzzy
 msgid "Options"
 msgstr "विकल्प"
 
 #: mactrack_utilities.php:167
-#, fuzzy
 msgid "Device Tracking Process Status"
 msgstr "डिवाइस ट्रैकिंग प्रक्रिया की स्थिति"
 
@@ -1450,67 +1258,54 @@ msgid "Refresh"
 msgstr "रीफ्रैश करो"
 
 #: mactrack_utilities.php:238
-#, fuzzy
 msgid "Current Process Status"
 msgstr "वर्तमान प्रक्रिया की स्थिति"
 
 #: mactrack_utilities.php:240
-#, fuzzy
 msgid "The Device Tracking Poller is:"
 msgstr "डिवाइस ट्रैकिंग पोल है:"
 
 #: mactrack_utilities.php:243
-#, fuzzy
 msgid "Running Processes:"
 msgstr "प्रक्रिया चल रही है:"
 
 #: mactrack_utilities.php:246
-#, fuzzy
 msgid "Last Time Poller Started:"
 msgstr "अंतिम बार मतदान शुरू:"
 
 #: mactrack_utilities.php:248
-#, fuzzy
 msgid "Poller Frequency:"
 msgstr "ध्रुवीय आवृत्ति:"
 
 #: mactrack_utilities.php:250
-#, fuzzy
 msgid "Approx. Next Runtime:"
 msgstr "लगभग। अगला रनटाइम:"
 
 #: mactrack_utilities.php:252
-#, fuzzy
 msgid "Approx. Next DB Maintenance:"
 msgstr "लगभग। अगला DB रखरखाव:"
 
 #: mactrack_utilities.php:254
-#, fuzzy
 msgid "Run Time Details"
 msgstr "समय विवरण चलाएँ"
 
 #: mactrack_utilities.php:256
-#, fuzzy
 msgid "Last Poller Runtime:"
 msgstr "अंतिम पोल रनटाइम:"
 
 #: mactrack_utilities.php:258
-#, fuzzy
 msgid "Last Poller Maintenance Runtime:"
 msgstr "अंतिम पोलर रखरखाव रनटाइम:"
 
 #: mactrack_utilities.php:260
-#, fuzzy
 msgid "Maximum Concurrent Processes:"
 msgstr "अधिकतम समवर्ती प्रक्रियाएं:"
 
 #: mactrack_utilities.php:260
-#, fuzzy
 msgid "processes"
 msgstr "प्रक्रम"
 
 #: mactrack_utilities.php:262
-#, fuzzy
 msgid "Maximum Per Device Scan Time:"
 msgstr "अधिकतम प्रति डिवाइस स्कैन समय:"
 
@@ -1519,62 +1314,50 @@ msgid "minutes"
 msgstr "मिनट"
 
 #: mactrack_utilities.php:264
-#, fuzzy
 msgid "DNS Configuration Information"
 msgstr "DNS कॉन्फ़िगरेशन जानकारी"
 
 #: mactrack_utilities.php:266
-#, fuzzy
 msgid "Reverse DNS Resolution is"
 msgstr "DNS रिज़ॉल्यूशन उल्टा है"
 
 #: mactrack_utilities.php:268
-#, fuzzy
 msgid "Primary DNS Server:"
 msgstr "प्राथमिक डीएनएस सर्वर:"
 
 #: mactrack_utilities.php:270
-#, fuzzy
 msgid "Secondary DNS Server:"
 msgstr "द्वितीयक DNS सर्वर:"
 
 #: mactrack_utilities.php:272
-#, fuzzy
 msgid "DNS Resolution Timeout:"
 msgstr "DNS रिज़ॉल्यूशन टाइमआउट:"
 
 #: mactrack_utilities.php:272
-#, fuzzy
 msgid "milliseconds"
 msgstr "मिलीसेकेंड"
 
 #: mactrack_utilities.php:276
-#, fuzzy
 msgid "Running Process Summary"
 msgstr "प्रक्रिया सारांश चल रहा है"
 
 #: mactrack_utilities.php:278
-#, fuzzy
 msgid "The DNS Resolver is Not Running"
 msgstr "DNS रिज़ॉल्वर नहीं चल रहा है"
 
 #: mactrack_utilities.php:278
-#, fuzzy
 msgid "The DNS Resolver is Running"
 msgstr "DNS रिज़ॉल्वर चल रहा है"
 
 #: mactrack_utilities.php:280
-#, fuzzy
 msgid "Date Started"
 msgstr "तारीख शुरू"
 
 #: mactrack_utilities.php:314
-#, fuzzy
 msgid "Completed"
 msgstr "पूरा कर लिया है"
 
 #: mactrack_utilities.php:326
-#, fuzzy
 msgid "Waiting"
 msgstr "इंतज़ार कर रही"
 
@@ -1588,207 +1371,171 @@ msgid "Are You Sure?"
 msgstr "क्या आप सुनिश्चित हैं?"
 
 #: mactrack_utilities.php:349
-#, fuzzy
 msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
 msgstr "क्या आप सुनिश्चित हैं कि आप सिस्टम से सभी पोर्ट टू मैक आईपी परिणामों को हटाना चाहते हैं?"
 
 #: mactrack_utilities.php:396 mactrack_utilities.php:419
-#, fuzzy
 msgid "Device Tracking Database Results"
 msgstr "डिवाइस ट्रैकिंग डेटाबेस परिणाम"
 
 #: mactrack_utilities.php:397 mactrack_utilities.php:467
-#, fuzzy, php-format
+#, php-format
 msgid "The following number of records have been removed from the database: %s"
 msgstr "निम्नलिखित रिकॉर्ड्स को डेटाबेस से हटा दिया गया है: %s"
 
 #: mactrack_utilities.php:407
-#, fuzzy
 msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
 msgstr "क्या आप वाकई सिस्टम से IP परिणाम के लिए सभी एग्रिगेटेड पोर्ट को MAC में हटाना चाहते हैं?"
 
 #: mactrack_utilities.php:420
-#, fuzzy, php-format
+#, php-format
 msgid "The following number of records have been removed from the aggergated table: %s"
 msgstr "निम्न तालिका से निम्न संख्या को हटा दिया गया है: %s"
 
 #: mactrack_utilities.php:430
-#, fuzzy
 msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
 msgstr "क्या आप वाकई सिस्टम से आईपी परिणामों के लिए सभी एग्रग्रेटेड पोर्ट को MAC में डिलीट और रीक्रिएट करना चाहते हैं?"
 
 #: mactrack_utilities.php:456
-#, fuzzy, php-format
+#, php-format
 msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
 msgstr "निम्न तालिका से निम्न संख्या को हटा दिया गया है: %s। और %s रिकॉर्ड जोड़े जाएंगे।"
 
 #: mactrack_utilities.php:477
-#, fuzzy
 msgid "The Device Tracking scanning functions have been purged.  They will be recreated once you either edit a device or device type."
 msgstr "डिवाइस ट्रैकिंग स्कैनिंग फ़ंक्शन को शुद्ध कर दिया गया है। एक बार जब आप किसी डिवाइस या डिवाइस के प्रकार को संपादित करते हैं, तो उन्हें पुनः बनाया जाएगा"
 
 #: mactrack_utilities.php:482
-#, fuzzy
 msgid "Cacti Device Tracking System Utilities"
 msgstr "कैक्टि डिवाइस ट्रैकिंग सिस्टम यूटिलिटीज"
 
 #: mactrack_utilities.php:484
-#, fuzzy
 msgid "Process Status Information"
 msgstr "प्रक्रिया स्थिति की जानकारी"
 
 #: mactrack_utilities.php:493 setup.php:816
-#, fuzzy
 msgid "View Device Tracking Process Status"
 msgstr "डिवाइस ट्रैकिंग प्रक्रिया की स्थिति देखें"
 
 #: mactrack_utilities.php:496
-#, fuzzy
 msgid "This option will let you show and set process information associated with the Device Tracking polling process."
 msgstr "यह विकल्प आपको डिवाइस ट्रैकिंग मतदान प्रक्रिया से जुड़ी जानकारी दिखाने और सेट करने देगा।"
 
 #: mactrack_utilities.php:500
-#, fuzzy
 msgid "Database Administration"
 msgstr "डेटाबेस व्यवस्थापन"
 
 #: mactrack_utilities.php:504 setup.php:781
-#, fuzzy
 msgid "Perform Database Maintenance"
 msgstr "डेटाबेस रखरखाव करें"
 
 #: mactrack_utilities.php:507
-#, fuzzy
 msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
 msgstr "डेटाबेस से आईपी संघों को मैक को पोर्ट की अवधि समाप्त हो गई। केवल वे रिकॉर्ड जो आपके मानदंड के आधार पर समाप्त हो गए हैं, हटा दिए गए हैं।"
 
 #: mactrack_utilities.php:513
-#, fuzzy
 msgid "Refresh IEEE Vendor MAC/OUI Database"
 msgstr "IEEE विक्रेता मैक / OUI डेटाबेस को ताज़ा करें"
 
 #: mactrack_utilities.php:516
-#, fuzzy
 msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
 msgstr "यह फ़ंक्शन IEEE वेबसाइट से नवीनतम OIU डेटाबेस को डाउनलोड और इंस्टॉल करेगा। प्रत्येक नेटवर्क इंटरफेस कार्ड (NIC) में एक मैक एड्रेस होता है। मैक पते को दो भागों में विभाजित किया जा सकता है। मैक एडेस के पहले भाग में वेंडर मैक होता है। विक्रेता मैक पहचानता है कि किसने भाग का निर्माण किया। यह आपके नेटवर्क पर दुष्ट उपकरणों के लिए स्पॉट चेकिंग में सहायक होगा।"
 
 #: mactrack_utilities.php:522 setup.php:788
-#, fuzzy
 msgid "Refresh Scanning Functions"
 msgstr "रिफ्रेश स्कैनिंग फ़ंक्शंस"
 
 #: mactrack_utilities.php:525
-#, fuzzy
 msgid "Deletes old and potentially stale Device Tracking scanning functions from the drop-down you receive when you edit a device type."
 msgstr "जब आप डिवाइस प्रकार को संपादित करते हैं तो ड्रॉप-डाउन से पुराने और संभावित बासी डिवाइस ट्रैकिंग स्कैनिंग कार्य हटाता है।"
 
 #: mactrack_utilities.php:531
-#, fuzzy
 msgid "Remove All Scan Results"
 msgstr "सभी स्कैन परिणाम निकालें"
 
 #: mactrack_utilities.php:534
-#, fuzzy
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
 msgstr "डेटाबेस से सभी आईपी पते, आईपी रेंज और वीएलएएनएस के लिए मैक पोर्ट से आईपी संघों के लिए <strong>सभी</strong> पोर्ट हटाता है। जब आप शुरू करना चाहते हैं तो यह उपयोगिता अच्छी है। <strong>DANGER: सभी पूर्व डेटा हटा दिए गए हैं।</strong>"
 
 #: mactrack_utilities.php:538
-#, fuzzy
 msgid "Aggregated Table Administration"
 msgstr "एकत्र तालिका प्रशासन"
 
 #: mactrack_utilities.php:542
-#, fuzzy
 msgid "Remove All Aggregated Results"
 msgstr "सभी एकत्रित परिणाम निकालें"
 
 #: mactrack_utilities.php:545
-#, fuzzy
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
 msgstr "डेटाबेस से आईपी संघों के लिए मैक के लिए सभी <strong>एकत्र</strong> (स्कैन परिणाम नहीं) पोर्ट हटाता है। अगले मैक्रैक पोलर रन में <strong>केवल नए</strong> स्कैन किए गए डेटा के आधार पर डेटा फिर से एकत्र किया जाएगा।"
 
 #: mactrack_utilities.php:551
-#, fuzzy
 msgid "Perform Aggregate Table Rebuild"
 msgstr "एग्रीगेट टेबल का पुनर्निर्माण करें"
 
 #: mactrack_utilities.php:554
-#, fuzzy
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
 msgstr "डेटाबेस से आईपी संघों को मैक और आईपी स्कैन के लिए सभी <strong>एकत्र</strong> (नहीं स्कैन परिणाम) <strong>पोर्ट्स और</strong> अब <strong>सभी स्कैन किए गए डेटा के</strong> आधार पर उनका पुनः निर्माण।"
 
 #: mactrack_vendormacs.php:139
-#, fuzzy
 msgid "Device Tracking Vendor Mac Filter"
 msgstr "डिवाइस ट्रैकिंग विक्रेता मैक फ़िल्टर"
 
 #: mactrack_vendormacs.php:153
-#, fuzzy
 msgid "Vendor MAC"
 msgstr "विक्रेता मैक"
 
 #: mactrack_vendormacs.php:154
-#, fuzzy
 msgid "Corporation"
 msgstr "निगम"
 
 #: mactrack_vendormacs.php:155
-#, fuzzy
 msgid "Address"
 msgstr "IP सिरनामा"
 
 #: mactrack_vendormacs.php:160 setup.php:970
-#, fuzzy
 msgid "Vendor Macs"
 msgstr "वेंडर मैक"
 
 #: mactrack_vendormacs.php:179
-#, fuzzy
 msgid "No Device Tracking Vendor MACS Found"
 msgstr "कोई डिवाइस ट्रैकिंग विक्रेता मैक नहीं मिला"
 
 #: mactrack_view_arp.php:30
-#, fuzzy
 msgid "Device Tracking - ARP/IP View"
 msgstr "डिवाइस ट्रैकिंग - एआरपी / आईपी व्यू"
 
 #: mactrack_view_arp.php:317 mactrack_view_dot1x.php:407
 #: mactrack_view_dot1x.php:421 mactrack_view_macs.php:677
 #: mactrack_view_macs.php:871
-#, fuzzy
 msgid "Switch Name"
 msgstr "नाम स्विच करें"
 
 #: mactrack_view_arp.php:321 mactrack_view_dot1x.php:408
 #: mactrack_view_dot1x.php:422 mactrack_view_macs.php:681
 #: mactrack_view_macs.php:875
-#, fuzzy
 msgid "Switch Hostname"
 msgstr "होस्टनाम स्विच करें"
 
 #: mactrack_view_arp.php:325 mactrack_view_dot1x.php:410
 #: mactrack_view_dot1x.php:424 mactrack_view_macs.php:685
 #: mactrack_view_macs.php:879
-#, fuzzy
 msgid "ED IP Address"
 msgstr "ईडी आईपी एड्रेस"
 
 #: mactrack_view_arp.php:334 mactrack_view_dot1x.php:411
 #: mactrack_view_macs.php:695 mactrack_view_macs.php:886
-#, fuzzy
 msgid "ED DNS Hostname"
 msgstr "ED DNS होस्टनाम"
 
 #: mactrack_view_arp.php:342 mactrack_view_dot1x.php:412
 #: mactrack_view_dot1x.php:425 mactrack_view_macs.php:703
 #: mactrack_view_macs.php:893
-#, fuzzy
 msgid "ED MAC Address"
 msgstr "ईडी मैक एड्रेस"
 
 #: mactrack_view_arp.php:346 mactrack_view_macs.php:711
 #: mactrack_view_macs.php:901
-#, fuzzy
 msgid "Vendor Name"
 msgstr "विक्रेता का नाम"
 
@@ -1800,29 +1547,24 @@ msgstr "पोर्ट संख्या"
 #: mactrack_view_arp.php:355 mactrack_view_dot1x.php:413
 #: mactrack_view_dot1x.php:426 mactrack_view_macs.php:720
 #: mactrack_view_macs.php:910
-#, fuzzy
 msgid "Port Name"
 msgstr "पोर्ट नाम"
 
 #: mactrack_view_arp.php:360 mactrack_view_dot1x.php:416
 #: mactrack_view_dot1x.php:429 mactrack_view_macs.php:735
 #: mactrack_view_macs.php:928 mactrack_view_macs.php:934
-#, fuzzy
 msgid "Last Scan Date"
 msgstr "अंतिम स्कैन तिथि"
 
 #: mactrack_view_arp.php:370
-#, fuzzy
 msgid "ARP Cache"
 msgstr "एआरपी कैश"
 
 #: mactrack_view_arp.php:405 mactrack_view_macs.php:1014
-#, fuzzy
 msgid "You must first choose a Site, Device or other search criteria."
 msgstr "आपको पहले एक साइट, उपकरण या अन्य खोज मापदंड चुनना होगा।"
 
 #: mactrack_view_arp.php:407
-#, fuzzy
 msgid "No Device Tracking IP Results Found"
 msgstr "कोई डिवाइस ट्रैकिंग आईपी परिणाम नहीं मिला"
 
@@ -1832,7 +1574,6 @@ msgid "Device"
 msgstr "डिवाइस"
 
 #: mactrack_view_arp.php:478 mactrack_view_ips.php:314
-#, fuzzy
 msgid "IP's"
 msgstr "आईपी के"
 
@@ -1848,170 +1589,137 @@ msgstr "दिखाना"
 
 #: mactrack_view_arp.php:523 mactrack_view_dot1x.php:638
 #: mactrack_view_macs.php:1170
-#, fuzzy
 msgid "Most Recent"
 msgstr "सबसे हाल का"
 
 #: mactrack_view_arp.php:538 mactrack_view_dot1x.php:656
 #: mactrack_view_macs.php:1186
-#, fuzzy
 msgid "MAC"
 msgstr "मैक"
 
 #: mactrack_view_devices.php:30
-#, fuzzy
 msgid "Device Tracking - Device Report View"
 msgstr "डिवाइस ट्रैकिंग - डिवाइस रिपोर्ट दृश्य"
 
 #: mactrack_view_devices.php:157
-#, fuzzy
 msgid "Unknown Device Type"
 msgstr "अज्ञात डिवाइस प्रकार"
 
 #: mactrack_view_devices.php:312
-#, fuzzy
 msgid "Total VLAN's"
 msgstr "कुल वीएलएएन का"
 
 #: mactrack_view_devices.php:357
-#, fuzzy
 msgid "Edit Device"
 msgstr "डिवाइस स्विच करें"
 
 #: mactrack_view_devices.php:363
-#, fuzzy
 msgid "View Graphs"
 msgstr "रेखांकन"
 
 #: mactrack_view_devices.php:365
-#, fuzzy
 msgid "Device Not Mapped to Cacti Device"
 msgstr "डिवाइस डिवाइस को Cacti डिवाइस पर सिंक करें"
 
 #: mactrack_view_devices.php:371 mactrack_view_ips.php:253
 #: mactrack_view_sites.php:308 mactrack_view_sites.php:403
-#, fuzzy
 msgid "View MAC Addresses"
 msgstr "मैक पते"
 
 #: mactrack_view_devices.php:397
-#, fuzzy
 msgid "No Device Tracking Devices Found"
 msgstr "कोई उपकरण ट्रैकिंग उपकरण नहीं मिला"
 
 #: mactrack_view_devices.php:457
-#, fuzzy
 msgid "Hub/Switch"
 msgstr "हब / स्विच"
 
 #: mactrack_view_dot1x.php:31
-#, fuzzy
 msgid "Device Tracking - 802.1x View"
 msgstr "डिवाइस ट्रैकिंग - 802.1x देखें"
 
 #: mactrack_view_dot1x.php:414 mactrack_view_dot1x.php:427
 #: mactrack_view_dot1x.php:671
-#, fuzzy
 msgid "Domain"
 msgstr "डोमेन"
 
 #: mactrack_view_dot1x.php:439
-#, fuzzy
 msgid "802.1x Sessions"
 msgstr "802.1x सत्र"
 
 #: mactrack_view_dot1x.php:472
-#, fuzzy
 msgid "No Device Tracking 802.1x Sessions Found"
 msgstr "कोई डिवाइस ट्रैकिंग 802.1x सत्र नहीं मिला"
 
 #: mactrack_view_dot1x.php:496
-#, fuzzy
 msgid "Dot1x Scan Results"
 msgstr "डॉट 1 एक्स स्कैनर"
 
 #: mactrack_view_dot1x.php:570
-#, fuzzy
 msgid "Sessions"
 msgstr "सत्र"
 
 #: mactrack_view_dot1x.php:616
-#, fuzzy
 msgid "Any Status"
 msgstr "कोई भी स्थिति"
 
 #: mactrack_view_dot1x.php:619
-#, fuzzy
 msgid "No Method"
 msgstr "तरीका"
 
 #: mactrack_view_dot1x.php:676
-#, fuzzy
 msgid "DATA"
 msgstr "डाटा"
 
 #: mactrack_view_dot1x.php:677
-#, fuzzy
 msgid "VOICE"
 msgstr "आवाज़"
 
 #: mactrack_view_dot1x.php:683 mactrack_view_macs.php:1213
-#, fuzzy
 msgid "Portname"
 msgstr "PORTNAME"
 
 #: mactrack_view_graphs.php:32
-#, fuzzy
 msgid "Device Tracking - Monitored Device Graph View"
 msgstr "डिवाइस ट्रैकिंग - मॉनिटर किया गया डिवाइस ग्राफ़ दृश्य"
 
 #: mactrack_view_graphs.php:70
-#, fuzzy
 msgid "Custom Graph List Applied - Filtering from List"
 msgstr "कस्टम ग्राफ़ सूची लागू - सूची से फ़िल्टरिंग"
 
 #: mactrack_view_interfaces.php:30
-#, fuzzy
 msgid "Device Tracking - Network Interfaces View"
 msgstr "डिवाइस ट्रैकिंग - नेटवर्क इंटरफेस देखें"
 
 #: mactrack_view_interfaces.php:324
-#, fuzzy
 msgid "No Device Tracking Interfaces Found"
 msgstr "कोई डिवाइस ट्रैकिंग इंटरफेस नहीं मिला"
 
 #: mactrack_view_interfaces.php:337
-#, fuzzy
 msgid "Interface Up"
 msgstr "इंटरफ़ेस अप"
 
 #: mactrack_view_interfaces.php:338
-#, fuzzy
 msgid "No Alias"
 msgstr "कोई अन्य नहीं"
 
 #: mactrack_view_interfaces.php:339
-#, fuzzy
 msgid "Errors Present"
 msgstr "त्रुटियाँ वर्तमान"
 
 #: mactrack_view_interfaces.php:340
-#, fuzzy
 msgid "Discards Present"
 msgstr "सादर उपस्थित"
 
 #: mactrack_view_interfaces.php:341
-#, fuzzy
 msgid "No Graphs"
 msgstr "कोई रेखांकन नहीं"
 
 #: mactrack_view_interfaces.php:342
-#, fuzzy
 msgid "Interface Down"
 msgstr "इंटरफ़ेस नीचे"
 
 #: mactrack_view_interfaces.php:352
-#, fuzzy
 msgid "Interface Scan Results"
 msgstr "सभी स्कैन परिणाम निकालें"
 
@@ -2024,357 +1732,292 @@ msgid "Description"
 msgstr "विवरण"
 
 #: mactrack_view_interfaces.php:380
-#, fuzzy
 msgid "Alias"
 msgstr "उपनाम"
 
 #: mactrack_view_interfaces.php:384
-#, fuzzy
 msgid "InBound %%%"
 msgstr "इनबाउंड%"
 
 #: mactrack_view_interfaces.php:389
-#, fuzzy
 msgid "OutBound %%%"
 msgstr "आउटबाउंड%"
 
 #: mactrack_view_interfaces.php:394
-#, fuzzy
 msgid "In (B/S)"
 msgstr "इन (बी / एस)"
 
 #: mactrack_view_interfaces.php:399
-#, fuzzy
 msgid "Out (B/S)"
 msgstr "बाहर (बी / एस)"
 
 #: mactrack_view_interfaces.php:408
-#, fuzzy
 msgid "In Err Total"
 msgstr "इर कुल में"
 
 #: mactrack_view_interfaces.php:413
-#, fuzzy
 msgid "In Disc Total"
 msgstr "डिस्क कुल में"
 
 #: mactrack_view_interfaces.php:418
-#, fuzzy
 msgid "UProto Total"
 msgstr "UProto कुल"
 
 #: mactrack_view_interfaces.php:423
-#, fuzzy
 msgid "Out Err Total"
 msgstr "एरर टोटल"
 
 #: mactrack_view_interfaces.php:428
-#, fuzzy
 msgid "Out Disc Total"
 msgstr "डिस्क से बाहर कुल"
 
 #: mactrack_view_interfaces.php:436
-#, fuzzy
 msgid "In Err (E/S)"
 msgstr "इर्र (ई / एस) में"
 
 #: mactrack_view_interfaces.php:441
-#, fuzzy
 msgid "In Disc (D/S)"
 msgstr "डिस्क में (डी / एस)"
 
 #: mactrack_view_interfaces.php:446
-#, fuzzy
 msgid "UProto (UP/S)"
 msgstr "UProto (यूपी / एस)"
 
 #: mactrack_view_interfaces.php:451
-#, fuzzy
 msgid "Out Err (OE/S)"
 msgstr "एर (OE / S)"
 
 #: mactrack_view_interfaces.php:456
-#, fuzzy
 msgid "Out Disc (OD/S)"
 msgstr "डिस्क से बाहर (OD / S)"
 
 #: mactrack_view_interfaces.php:470
-#, fuzzy
 msgid "Last Change"
 msgstr "अंतिम परिवर्तन"
 
 #: mactrack_view_interfaces.php:475
-#, fuzzy
 msgid "Last Scanned"
 msgstr "अंतिम बार स्कैन किया गया"
 
 #: mactrack_view_interfaces.php:510
-#, fuzzy
 msgid "Filters"
 msgstr "फिल्टर"
 
 #: mactrack_view_interfaces.php:514
-#, fuzzy
 msgid "All Interfaces"
 msgstr "सभी इंटरफेस"
 
 #: mactrack_view_interfaces.php:515
-#, fuzzy
 msgid "All Non-Ignored Interfaces"
 msgstr "सभी गैर-उपेक्षित इंटरफेस"
 
 #: mactrack_view_interfaces.php:516
-#, fuzzy
 msgid "All Ignored Interfaces"
 msgstr "सभी को नजरअंदाज कर दिया"
 
 #: mactrack_view_interfaces.php:517
-#, fuzzy, php-format
+#, php-format
 msgid "High In/Out Utilization > %d &#37;"
-msgstr "उच्च इन / आउट उपयोग&gt;% d%"
+msgstr "उच्च इन/आउट उपयोग > %d &#37;"
 
 #: mactrack_view_interfaces.php:518
-#, fuzzy, php-format
+#, php-format
 msgid "High In Utilization > %d &#37;"
-msgstr "उच्च उपयोग&gt;% d%"
+msgstr "उपयोग में उच्च > %d &#37;"
 
 #: mactrack_view_interfaces.php:519
-#, fuzzy, php-format
+#, php-format
 msgid "High Out Utilization > %d &#37;"
-msgstr "उच्च उपयोग&gt;% d%"
+msgstr "हाई आउट यूटिलाइजेशन > %d &#37;"
 
 #: mactrack_view_interfaces.php:520
-#, fuzzy
 msgid "With Issues"
 msgstr "मुद्दों के साथ"
 
 #: mactrack_view_interfaces.php:521
-#, fuzzy
 msgid "Up Interfaces"
 msgstr "इंटरफेसेस"
 
 #: mactrack_view_interfaces.php:522
-#, fuzzy
 msgid "Up Interfaces No Alias"
 msgstr "इंटरफेसेस नो अलायस"
 
 #: mactrack_view_interfaces.php:523
-#, fuzzy
 msgid "Errors Accumulating"
 msgstr "संचय करना"
 
 #: mactrack_view_interfaces.php:524
-#, fuzzy
 msgid "Discards Accumulating"
 msgstr "संचित करना"
 
 #: mactrack_view_interfaces.php:525
-#, fuzzy
 msgid "Changed in Last Day"
 msgstr "लास्ट डे में चेंज किया गया"
 
 #: mactrack_view_interfaces.php:528
-#, fuzzy
 msgid "Bandwidth"
 msgstr "बैंडविड्थ"
 
 #: mactrack_view_interfaces.php:634
-#, fuzzy
 msgid "Show Totals"
 msgstr "टोटल दिखाओ"
 
 #: mactrack_view_ips.php:30
-#, fuzzy
 msgid "Device Tracking - Site IP Range Report View"
 msgstr "डिवाइस ट्रैकिंग - साइट आईपी रेंज रिपोर्ट देखें"
 
 #: mactrack_view_ips.php:202
-#, fuzzy
 msgid "IP Range"
 msgstr "आईपी रेंज"
 
 #: mactrack_view_ips.php:206
-#, fuzzy
 msgid "Current IP Addresses"
 msgstr "वर्तमान आईपी पते"
 
 #: mactrack_view_ips.php:211
-#, fuzzy
 msgid "Current Date"
 msgstr "आज की तारीख"
 
 #: mactrack_view_ips.php:216
-#, fuzzy
 msgid "Maximum IP Addresses"
 msgstr "अधिकतम आईपी पते"
 
 #: mactrack_view_ips.php:221
-#, fuzzy
 msgid "Maximum Date"
 msgstr "अधिकतम तिथि"
 
 #: mactrack_view_ips.php:229
-#, fuzzy
 msgid "IP Address Ranges"
 msgstr "आईपी पता सीमाओं"
 
 #: mactrack_view_ips.php:244 mactrack_view_sites.php:296
 #: mactrack_view_sites.php:396
-#, fuzzy
 msgid "Edit Site"
 msgstr "साइट"
 
 #: mactrack_view_ips.php:262 mactrack_view_sites.php:306
-#, fuzzy
 msgid "View IP Addresses"
 msgstr "वर्तमान आईपी पते"
 
 #: mactrack_view_ips.php:277
-#, fuzzy
 msgid "No Device Tracking Site IP Ranges Found"
 msgstr "कोई डिवाइस ट्रैकिंग साइट आईपी रेंजेज़ नहीं मिली"
 
 #: mactrack_view_macs.php:30
-#, fuzzy
 msgid "Device Tracking - MAC to IP Report View"
 msgstr "डिवाइस ट्रैकिंग - मैक टू आईपी रिपोर्ट व्यू"
 
 #: mactrack_view_macs.php:33
-#, fuzzy
 msgid "Authorize"
 msgstr "अधिकृत करें"
 
 #: mactrack_view_macs.php:34
-#, fuzzy
 msgid "Revoke"
 msgstr "वापस लेना"
 
 #: mactrack_view_macs.php:122
-#, fuzzy, php-format
+#, php-format
 msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
 msgstr "निम्न मैक पते निरस्त नहीं किए जा सकते क्योंकि वे समूह प्राधिकरण %s के सदस्य हैं"
 
 #: mactrack_view_macs.php:163
-#, fuzzy
 msgid "Click 'Continue' to Authorize the following MAC Addresses."
 msgstr "निम्नलिखित मैक पते को अधिकृत करने के लिए 'जारी रखें' पर क्लिक करें।"
 
 #: mactrack_view_macs.php:170
-#, fuzzy
 msgid "Click 'Continue' to Revoke the following MAC Addresses."
 msgstr "निम्नलिखित मैक पते को निरस्त करने के लिए 'जारी रखें' पर क्लिक करें।"
 
 #: mactrack_view_macs.php:177
-#, fuzzy
 msgid "You must select at least one MAC Address."
 msgstr "आपको कम से कम एक मैक पते का चयन करना होगा।"
 
 #: mactrack_view_macs.php:180
-#, fuzzy
 msgid "You are not permitted to change Mac Authorizations."
 msgstr "आपको मैक प्राधिकरण बदलने की अनुमति नहीं है।"
 
 #: mactrack_view_macs.php:248
-#, fuzzy, php-format
+#, php-format
 msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
-msgstr "Dev.:%s IP.:%s MAC.:% PORT.:%s गणना: [ %s]"
+msgstr "Dev..:%s IP .:%s MAC .:%s PORT .:%s Count .:[%s]"
 
 #: mactrack_view_macs.php:260
-#, fuzzy
 msgid "You must select at least one Row."
 msgstr "आपको कम से कम एक पंक्ति का चयन करना होगा।"
 
 #: mactrack_view_macs.php:263
-#, fuzzy
 msgid "You are not permitted to delete rows."
 msgstr "आपको पंक्तियों को हटाने की अनुमति नहीं है।"
 
 #: mactrack_view_macs.php:271
-#, fuzzy
 msgid "Click 'Continue' to Delete the following rows from Aggregated table."
 msgstr "एग्रीगेटेड टेबल से निम्नलिखित पंक्तियों को हटाने के लिए 'जारी रखें' पर क्लिक करें।"
 
 #: mactrack_view_macs.php:707 mactrack_view_macs.php:788
 #: mactrack_view_macs.php:897 mactrack_view_macs.php:991
 #: mactrack_view_macs.php:1201
-#, fuzzy
 msgid "Authorized"
 msgstr "अधिकार दिया गया"
 
 #: mactrack_view_macs.php:725 mactrack_view_macs.php:915
-#, fuzzy
 msgid "VLAN ID"
 msgstr "वीएलएन आईडी"
 
 #: mactrack_view_macs.php:730 mactrack_view_macs.php:920
 #: mactrack_view_macs.php:1132
-#, fuzzy
 msgid "VLAN Name"
 msgstr "VLAN का नाम"
 
 #: mactrack_view_macs.php:749 mactrack_view_macs.php:954
-#, fuzzy
 msgid "MAC Addresses"
 msgstr "मैक पते"
 
 #: mactrack_view_macs.php:790 mactrack_view_macs.php:993
-#, fuzzy
 msgid "Not Authorized"
 msgstr "अधिकार दिया गया"
 
 #: mactrack_view_macs.php:810
-#, fuzzy
 msgid "You must choose a Site, Device or other search criteria."
 msgstr "आपको एक साइट, उपकरण या अन्य खोज मापदंड चुनना होगा।"
 
 #: mactrack_view_macs.php:812 mactrack_view_macs.php:1016
-#, fuzzy
 msgid "No Device Tracking Port Results Found"
 msgstr "कोई डिवाइस ट्रैकिंग पोर्ट परिणाम नहीं मिला"
 
 #: mactrack_view_macs.php:942
-#, fuzzy
 msgid "Count"
 msgstr "गिनती"
 
 #: mactrack_view_macs.php:1171
-#, fuzzy
 msgid "Aggregated"
 msgstr "एकत्रित"
 
 #: mactrack_view_sites.php:30
-#, fuzzy
 msgid "Device Tracking - Site Report View"
 msgstr "डिवाइस ट्रैकिंग - साइट रिपोर्ट दृश्य"
 
 #: mactrack_view_sites.php:297
-#, fuzzy
 msgid "Rescan Site"
 msgstr "रेसकान डिवाइस"
 
 #: mactrack_view_sites.php:302 mactrack_view_sites.php:401
-#, fuzzy
 msgid "View Devices"
 msgstr "उपकरण"
 
 #: mactrack_view_sites.php:304 mactrack_view_sites.php:402
-#, fuzzy
 msgid "View IP Ranges"
 msgstr "आईपी रेंज"
 
 #: mactrack_view_sites.php:385
-#, fuzzy
 msgid "Sites / Device Types"
 msgstr "डिवाइस के प्रकार"
 
 #: mactrack_view_sites.php:434
-#, fuzzy
 msgid "Site Scan Results"
 msgstr "सभी स्कैन परिणाम निकालें"
 
 #: setup.php:244 setup.php:966 setup.php:967 setup.php:968 setup.php:969
 #: setup.php:970 setup.php:979 setup.php:981
-#, fuzzy
 msgid "Device Tracking"
 msgstr "डिवाइस ट्रैकिंग"
 
@@ -2383,615 +2026,503 @@ msgid "General Settings"
 msgstr "सामान्य सेटिंग्स"
 
 #: setup.php:252
-#, fuzzy
 msgid "Scanning Frequency"
 msgstr "स्कैनिंग आवृत्ति"
 
 #: setup.php:253
-#, fuzzy
 msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
 msgstr "अपने नेटवर्क उपकरणों से मैक और आईपी पते और इंटरफ़ेस आँकड़े एकत्र करने के लिए कब चुनें।"
 
 #: setup.php:259
-#, fuzzy
 msgid "Concurrent Processes"
 msgstr "समवर्ती प्रक्रियाएँ"
 
 #: setup.php:260
-#, fuzzy
 msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
 msgstr "निर्दिष्ट करें कि जब तक सभी उपकरणों को मतदान नहीं किया गया है, तब तक कितने डिवाइस एक साथ मतदान करेंगे।"
 
 #: setup.php:267
-#, fuzzy
 msgid "Scanner Max Runtime"
 msgstr "स्कैनर अधिकतम रनटाइम"
 
 #: setup.php:268
-#, fuzzy
 msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
 msgstr "यह निर्दिष्ट करें कि सिस्टम पूरा होने से पहले डिवाइस स्कैनिंग फ़ंक्शन को चलाने से पहले मिनटों की संख्या निर्दिष्ट करें। यह सेटिंग एब्सेंटेड स्कैनिंग जॉब्स के लिए सही होगी।"
 
 #: setup.php:275
-#, fuzzy
 msgid "Start Time for Data Collection"
 msgstr "डेटा संग्रह के लिए समय शुरू करें"
 
 #: setup.php:276
-#, fuzzy
 msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
 msgstr "आप पहले डेटा संग्रह को कब लेना चाहते हैं। भविष्य के सभी डेटा संग्रह समय इस प्रारंभ समय पर आधारित होंगे। एक अच्छा उदाहरण 12:00 पूर्वाह्न होगा।"
 
 #: setup.php:283
-#, fuzzy
 msgid "Database Maintenance Time"
 msgstr "डेटाबेस रखरखाव समय"
 
 #: setup.php:284
-#, fuzzy
 msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
 msgstr "डेटाबेस से पुराने डेटाबेस रिकॉर्ड को कब हटाया जाना चाहिए। कृपया ध्यान दें कि इस कार्रवाई के दौरान पोर्ट डेटाबेस तक किसी भी पहुंच की अनुमति नहीं होगी।"
 
 #: setup.php:291
-#, fuzzy
 msgid "Confirm Utilities Prompt"
 msgstr "उपयोगिता की पुष्टि करें"
 
 #: setup.php:292
-#, fuzzy
 msgid "When using utilities, prompt for verification"
 msgstr "उपयोगिताओं का उपयोग करते समय, सत्यापन के लिए संकेत दें"
 
 #: setup.php:297
-#, fuzzy
 msgid "Data Retention"
 msgstr "डेटा प्रतिधारण"
 
 #: setup.php:298
-#, fuzzy
 msgid "How long should port MAC details be retained in the database."
 msgstr "कितनी देर तक पोर्ट मैक विवरण डेटाबेस में बनाए रखा जाना चाहिए।"
 
 #: setup.php:304
-#, fuzzy
 msgid "Data Retention IPs"
 msgstr "डेटा प्रतिधारण"
 
 #: setup.php:305
-#, fuzzy
 msgid "How long should discovered IPs details be retained in the database."
 msgstr "कितनी देर तक पोर्ट मैक विवरण डेटाबेस में बनाए रखा जाना चाहिए।"
 
 #: setup.php:311
-#, fuzzy
 msgid "Switch Level Ignore Ports Delimiter"
 msgstr "स्विच स्तर बंदरगाहों पोर्ट पर ध्यान न दें"
 
 #: setup.php:312
-#, fuzzy
 msgid "What delimiter should Device Tracking use when parsing the Ignore Ports string for each switch."
 msgstr "प्रत्येक स्विच के लिए इग्नोर पोर्ट्स स्ट्रिंग को पार्स करते समय डिवाइस ट्रैकिंग का क्या परिसीमन होना चाहिए।"
 
 #: setup.php:316
-#, fuzzy
 msgid "Auto Detect"
 msgstr "स्वयंं पता लगाना"
 
 #: setup.php:317 setup.php:327
-#, fuzzy
 msgid "Colon [:]"
 msgstr "बृहदान्त्र [:]"
 
 #: setup.php:318
-#, fuzzy
 msgid "Pipe [|]"
 msgstr "पाइप [|]"
 
 #: setup.php:319
-#, fuzzy
 msgid "Space [ ]"
 msgstr "अंतरिक्ष []"
 
 #: setup.php:323
-#, fuzzy
 msgid "Mac Address Delimiter"
 msgstr "मैक पता Delimiter"
 
 #: setup.php:324
-#, fuzzy
 msgid "How should each octet of the MAC address be delimited."
 msgstr "मैक पते के प्रत्येक ऑक्टेट को कैसे सीमांकित किया जाना चाहिए।"
 
 #: setup.php:327
-#, fuzzy
 msgid "Dash [-]"
 msgstr "पानी का छींटा [-]"
 
 #: setup.php:331 setup.php:1316
-#, fuzzy
 msgid "Ports to Ignore"
 msgstr "बंदरगाहों को नजरअंदाज करना"
 
 #: setup.php:332
-#, fuzzy
 msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
 msgstr "इंटरफ़ेस सूची में उपेक्षा करने के लिए बंदरगाहों की ifNames या ifDeslass की एक नियमित अभिव्यक्ति प्रदान करें। उदाहरण के लिए, (वलन | लूपबैक | नल)।"
 
 #: setup.php:339
-#, fuzzy
 msgid "Bandwidth Usage Threshold"
 msgstr "बैंडविड्थ उपयोग थ्रेसहोल्ड"
 
 #: setup.php:340
-#, fuzzy
 msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
 msgstr "नेटवर्क इंटरफ़ेस आँकड़ों की समीक्षा करते समय, आप किस बैंडविड्थ सीमा को डिफ़ॉल्ट रूप से देखना चाहते हैं।"
 
 #: setup.php:345 setup.php:346 setup.php:347 setup.php:348 setup.php:349
 #: setup.php:350 setup.php:351 setup.php:352 setup.php:353
-#, fuzzy, php-format
+#, php-format
 msgid "%d Percent"
 msgstr "% d प्रतिशत"
 
 #: setup.php:357
-#, fuzzy
 msgid "DNS Settings"
 msgstr "DNS सेटिंग्स"
 
 #: setup.php:361
-#, fuzzy
 msgid "Perform Reverse DNS Name Resolution"
 msgstr "रिवर्स DNS नाम रिज़ॉल्यूशन निष्पादित करें"
 
 #: setup.php:362
-#, fuzzy
 msgid "Should Device Tracking perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
 msgstr "क्या डिवाइस ट्रैकिंग पोर्ट से जुड़े आईपी पतों की रिवर्स डीएनएस लुकअप करना चाहिए। चेतावनी: यदि DNS ठीक से सेटअप नहीं है, तो यह समय को काफी कम कर देगा।"
 
 #: setup.php:367
-#, fuzzy
 msgid "Primary DNS IP Address"
 msgstr "प्राथमिक DNS IP पता"
 
 #: setup.php:368
-#, fuzzy
 msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
 msgstr "रिवर्स लुकअप के लिए उपयोग करने के लिए प्राथमिक DNS आईपी पता दर्ज करें।"
 
 #: setup.php:375
-#, fuzzy
 msgid "Secondary DNS IP Address"
 msgstr "द्वितीयक DNS IP पता"
 
 #: setup.php:376
-#, fuzzy
 msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
 msgstr "रिवर्स लुकअप के लिए उपयोग करने के लिए द्वितीयक DNS IP पता दर्ज करें।"
 
 #: setup.php:383
-#, fuzzy
 msgid "DNS Timeout"
 msgstr "डीएनएस टाइमआउट"
 
 #: setup.php:384
-#, fuzzy
 msgid "Please enter the DNS timeout in milliseconds.  Device Tracking uses a PHP based DNS resolver."
 msgstr "कृपया मिलीसेकंड में DNS टाइमआउट दर्ज करें। डिवाइस ट्रैकिंग एक PHP आधारित DNS रिज़ॉल्वर का उपयोग करता है।"
 
 #: setup.php:391
-#, fuzzy
 msgid "DNS Prime Interval"
 msgstr "डीएनएस प्राइम इंटरवल"
 
 #: setup.php:392
-#, fuzzy
 msgid "How often, in seconds do Device Tracking scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
 msgstr "कितनी बार, सेकंड में डिवाइस ट्रैकिंग स्कैनिंग आईपी को DNS रिज़ॉल्यूशन के मैक पते पर हल करने की आवश्यकता होती है। जब आप कई हज़ार डिवाइसों को बढ़ाएँगे तो प्रदर्शन बढ़ेगा।"
 
 #: setup.php:399
-#, fuzzy
 msgid "Notification Settings"
 msgstr "अधिसूचना सेटिंग"
 
 #: setup.php:403
-#, fuzzy
 msgid "Source Address"
 msgstr "स्रोत पता"
 
 #: setup.php:404
-#, fuzzy
 msgid "The source Email address for Device Tracking Emails."
 msgstr "डिवाइस ट्रैकिंग ईमेल के लिए स्रोत ईमेल पता।"
 
 #: setup.php:411
-#, fuzzy
 msgid "Source Email Name"
 msgstr "स्रोत ईमेल नाम"
 
 #: setup.php:412
-#, fuzzy
 msgid "The Source Email name for Device Tracking Emails."
 msgstr "डिवाइस ट्रैकिंग ईमेल का स्रोत ईमेल नाम।"
 
 #: setup.php:414
-#, fuzzy
 msgid "MACTrack Administrator"
 msgstr "मैकट्रैक एडमिनिस्ट्रेटर"
 
 #: setup.php:419 setup.php:1504
-#, fuzzy
 msgid "MacWatch Default Body"
 msgstr "MacWatch डिफ़ॉल्ट निकाय"
 
 #: setup.php:420 setup.php:1505
-#, fuzzy
 msgid "The Email body preset for Device Tracking MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
 msgstr "मैक ट्रैकिंग डिवाइस ईमेल ट्रैकिंग के लिए ईमेल बॉडी प्रीसेट। शरीर में कोई भी मान्य HTML टैग हो सकते हैं। यह प्रतिस्थापन टैग का भी समर्थन करता है जिसे ईमेल भेजते समय संसाधित किया जाएगा। मान्य टैग शामिल हैं <IP> , <MAC> , <TICKET> , <SITENAME> , <DEVICEIP> , <PORTNAME> , <PORTNUMBER> , <DEVICENAME> ।"
 
 #: setup.php:424 setup.php:1509
-#, fuzzy
 msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
 msgstr "मैक पते <MAC> आईपी पते पर मिला <IP> टिकट संख्या के लिए: <TICKET> । <br> डिवाइस पर स्थित है <br> साइट: <SITENAME> , डिवाइस <DEVICENAME> , आईपी <DEVICEIP> , बंदरगाह <PORTNUMBER> और पोर्ट नाम <PORTNAME>"
 
 #: setup.php:431
-#, fuzzy
 msgid "MacAuth Report Email Addresses"
 msgstr "MacAuth रिपोर्ट ईमेल पते"
 
 #: setup.php:432
-#, fuzzy
 msgid "A comma delimited list of users to receive the MacAuth Email notifications."
 msgstr "MacAuth ईमेल सूचनाएँ प्राप्त करने के लिए उपयोगकर्ताओं की एक अल्पविराम सीमांकित सूची।"
 
 #: setup.php:441
-#, fuzzy
 msgid "MacAuth Report Frequency"
 msgstr "MacAuth रिपोर्ट आवृत्ति"
 
 #: setup.php:442
-#, fuzzy
 msgid "How often will the MacAuth Reports be Emailed."
 msgstr "MacAuth रिपोर्ट को कितनी बार ईमेल किया जाएगा।"
 
 #: setup.php:448
-#, fuzzy
 msgid "Device Tracking ArpWatch Settings"
 msgstr "डिवाइस ट्रैकिंग ArpWatch सेटिंग्स"
 
 #: setup.php:452
-#, fuzzy
 msgid "Enable ArpWatch"
 msgstr "ArpWatch सक्षम करें"
 
 #: setup.php:453
-#, fuzzy
 msgid "Should Device Tracking also use ArpWatch data to supplement Mac to IP/DNS resolution?"
 msgstr "क्या डिवाइस ट्रैकिंग को मैक / आईपी / डीएनएस रिज़ॉल्यूशन के पूरक के लिए ArpWatch डेटा का भी उपयोग करना चाहिए?"
 
 #: setup.php:458
-#, fuzzy
 msgid "ArpWatch Database Path"
 msgstr "ArpWatch डेटाबेस पथ"
 
 #: setup.php:459
-#, fuzzy
 msgid "The location of the ArpWatch Database file on the Cacti server."
 msgstr "कैक्टि सर्वर पर ArpWatch डेटाबेस फ़ाइल का स्थान।"
 
 #: setup.php:466
-#, fuzzy
 msgid "SNMP Presets"
 msgstr "SNMP प्रीसेट"
 
 #: setup.php:470
-#, fuzzy
 msgid "Update Policy for SNMP Options"
 msgstr "एसएनएमपी विकल्पों के लिए अद्यतन नीति"
 
 #: setup.php:471
-#, fuzzy
 msgid "Policy for synchronization of SNMP Options between Cacti devices and Device Tracking Devices."
 msgstr "Cacti उपकरणों और डिवाइस ट्रैकिंग उपकरणों के बीच SNMP विकल्पों के सिंक्रनाइज़ेशन के लिए नीति।"
 
 #: setup.php:478
-#, fuzzy
 msgid "Default SNMP version for all new hosts."
 msgstr "सभी नए होस्ट के लिए डिफ़ॉल्ट SNMP संस्करण।"
 
 #: setup.php:485
-#, fuzzy
 msgid "Default SNMP read community for all new hosts."
 msgstr "डिफ़ॉल्ट SNMP सभी नए होस्ट के लिए समुदाय को पढ़ता है।"
 
 #: setup.php:492
-#, fuzzy
 msgid "Communities"
 msgstr "समुदाय"
 
 #: setup.php:493
-#, fuzzy
 msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
 msgstr "इस उपकरण के परीक्षण के लिए उपलब्ध SNMP रीड स्ट्रिंग्स की सूची भरें। प्रत्येक रीड स्ट्रिंग को एक कोलोन द्वारा अलग किया जाना चाहिए ':'। इन रीड स्ट्रिंग्स को क्रमिक रूप से जांचा जाएगा यदि प्राथमिक रीड स्ट्रिंग अमान्य है।"
 
 #: setup.php:500 setup.php:1151
-#, fuzzy
 msgid "The UDP/TCP Port to poll the SNMP agent on."
 msgstr "UDP / TCP पोर्ट SNMP एजेंट को चुनने के लिए।"
 
 #: setup.php:508
-#, fuzzy
 msgid "Default SNMP timeout in milli-seconds."
 msgstr "मिली-सेकंड में डिफ़ॉल्ट SNMP टाइमआउट।"
 
 #: setup.php:516
-#, fuzzy
 msgid "The number times the SNMP poller will attempt to reach the host before failing."
 msgstr "एसएनएमपी मतदाता की संख्या कई बार विफल होने से पहले मेजबान तक पहुंचने का प्रयास करेगी।"
 
 #: setup.php:529
-#, fuzzy
 msgid "snmpbulkwalk Binary Path"
 msgstr "snmpbulkwalk बाइनरी पथ"
 
 #: setup.php:530
-#, fuzzy
 msgid "The path to your snmpbulkwalk binary."
 msgstr "आपके snmpbulkwalk बाइनरी का रास्ता"
 
 #: setup.php:538
-#, fuzzy
 msgid "MacTrack Settings"
 msgstr "SNMP सेटिंग्स"
 
 #: setup.php:543
-#, fuzzy
 msgid "Default Tab"
 msgstr "चूक"
 
 #: setup.php:544
-#, fuzzy
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr "हर बार जब आप MacTrack सेकंड के दौरान अपने मैक टैब को अपने डिफ़ॉल्ट टैब के रूप में देखना चाहेंगे।"
 
 #: setup.php:550
-#, fuzzy
 msgid "IP Addresses"
 msgstr "आईपी पता"
 
 #: setup.php:551
-#, fuzzy
 msgid "Mac Addresses"
 msgstr "मैक पते"
 
 #: setup.php:553
-#, fuzzy
 msgid "dot1x Deta"
 msgstr "dot1x Deta"
 
 #: setup.php:564
-#, fuzzy
 msgid "Device Tracking Devices"
 msgstr "डिवाइस ट्रैकिंग डिवाइस"
 
 #: setup.php:571 setup.php:606 setup.php:613 setup.php:627 setup.php:655
 #: setup.php:676 setup.php:697
-#, fuzzy
 msgid "(Edit)"
 msgstr "संपादित करें"
 
 #: setup.php:578 setup.php:634
-#, fuzzy
 msgid "(Import)"
 msgstr "आयात करें"
 
 #: setup.php:620
-#, fuzzy
 msgid "Device Tracking Device Types"
 msgstr "डिवाइस ट्रैकिंग डिवाइस के प्रकार"
 
 #: setup.php:648
-#, fuzzy
 msgid "Device Tracking Sites"
 msgstr "डिवाइस ट्रैकिंग साइटें"
 
 #: setup.php:669
-#, fuzzy
 msgid "Mac Address Tracking Utility"
 msgstr "मैक एड्रेस ट्रैकिंग उपयोगिता"
 
 #: setup.php:690
-#, fuzzy
 msgid "Mac Address Authorization Utility"
 msgstr "मैक एड्रेस प्राधिकरण उपयोगिता"
 
 #: setup.php:711
-#, fuzzy
 msgid "Device Tracking Vendor Macs"
 msgstr "डिवाइस ट्रैकिंग वेंडर मैक"
 
 #: setup.php:718
-#, fuzzy
 msgid "Device Tracking View Macs"
 msgstr "डिवाइस ट्रैकिंग व्यू मैक"
 
 #: setup.php:732
-#, fuzzy
 msgid "Device Tracking Dot1x View"
 msgstr "डिवाइस ट्रैकिंग Dot1x व्यू"
 
 #: setup.php:739
-#, fuzzy
 msgid "Device Tracking IP Address Viewer"
 msgstr "डिवाइस ट्रैकिंग आईपी एड्रेस व्यूअर"
 
 #: setup.php:746
-#, fuzzy
 msgid "Device Tracking View Interfaces"
 msgstr "डिवाइस ट्रैकिंग व्यू इंटरफेस"
 
 #: setup.php:753
-#, fuzzy
 msgid "Device Tracking View Sites"
 msgstr "डिवाइस ट्रैकिंग साइट देखें"
 
 #: setup.php:760
-#, fuzzy
 msgid "Device Tracking View IP Ranges"
 msgstr "डिवाइस ट्रैकिंग आईपी रेंज देखें"
 
 #: setup.php:767
-#, fuzzy
 msgid "Device Tracking View Devices"
 msgstr "डिवाइस ट्रैकिंग डिवाइस देखें"
 
 #: setup.php:774
-#, fuzzy
 msgid "Device Tracking Utilities"
 msgstr "डिवाइस ट्रैकिंग उपयोगिताएँ"
 
 #: setup.php:795
-#, fuzzy
 msgid "Truncate Port Results Table"
 msgstr "ट्रंकट पोर्ट परिणाम तालिका"
 
 #: setup.php:802
-#, fuzzy
 msgid "Truncate Aggregated Port Results Table"
 msgstr "Truncate Aggregated पोर्ट परिणाम तालिका"
 
 #: setup.php:809
-#, fuzzy
 msgid "Truncate and Re-create Aggregated Port Results Table"
 msgstr "अलग-अलग पोर्ट परिणाम तालिका को अलग करें और पुन: बनाएं"
 
 #: setup.php:823
-#, fuzzy
 msgid "Refresh/Update Vendor MAC Database from IEEE"
 msgstr "IEEE से विक्रेता मैक डेटाबेस को रिफ्रेश / अपडेट करें"
 
 #: setup.php:830 setup.php:837
-#, fuzzy
 msgid "Device Tracking Graph Viewer"
 msgstr "डिवाइस ट्रैकिंग ग्राफ़ व्यूअर"
 
 #: setup.php:857 setup.php:859
-#, fuzzy
 msgid "MacTrack"
 msgstr "MacTrack"
 
 #: setup.php:876 setup.php:877 setup.php:878 setup.php:879
-#, fuzzy, php-format
+#, php-format
 msgid "%d Seconds"
 msgstr "% d सेकंड्स"
 
 #: setup.php:880
-#, fuzzy, php-format
+#, php-format
 msgid "%d Minute"
 msgstr "% d मिनट"
 
 #: setup.php:892
-#, fuzzy
 msgid "Matches"
 msgstr "माचिस"
 
 #: setup.php:893
-#, fuzzy
 msgid "Contains"
 msgstr "रखता है"
 
 #: setup.php:894
-#, fuzzy
 msgid "Begins With"
 msgstr "साथ शुरू होता है"
 
 #: setup.php:895
-#, fuzzy
 msgid "Does Not Contain"
 msgstr "नहीं रखता है"
 
 #: setup.php:896
-#, fuzzy
 msgid "Does Not Begin With"
 msgstr "के साथ शुरू नहीं होता है"
 
 #: setup.php:897
-#, fuzzy
 msgid "Is Null"
 msgstr "शून्य है"
 
 #: setup.php:898
-#, fuzzy
 msgid "Is Not Null"
 msgstr "निरर्थक नहीं है"
 
 #: setup.php:903
-#, fuzzy
 msgid "Half"
 msgstr "आधा"
 
 #: setup.php:904
-#, fuzzy
 msgid "Full"
 msgstr "पूर्ण"
 
 #: setup.php:909
-#, fuzzy
 msgid "Sync Cacti Device to Device Tracking Device"
 msgstr "डिवाइस ट्रैकिंग डिवाइस के लिए कैक्टि डिवाइस को सिंक करें"
 
 #: setup.php:910
-#, fuzzy
 msgid "Sync Device Tracking Device to Cacti Device"
 msgstr "डिवाइस डिवाइस को Cacti डिवाइस पर सिंक करें"
 
 #: setup.php:928 setup.php:929 setup.php:930 setup.php:931
-#, fuzzy, php-format
+#, php-format
 msgid "Every %d Minutes"
 msgstr "प्रत्येक% d मिनट"
 
 #: setup.php:932
-#, fuzzy, php-format
+#, php-format
 msgid "Every %d Hour"
 msgstr "हर% d घंटा"
 
 #: setup.php:933 setup.php:934 setup.php:935 setup.php:936 setup.php:956
 #: setup.php:1532 setup.php:1533
-#, fuzzy, php-format
+#, php-format
 msgid "Every %d Hours"
-msgstr "हर द% ख ड"
+msgstr "हर %d घंटे में"
 
 #: setup.php:937 setup.php:957 setup.php:1534
-#, fuzzy
 msgid "Every Day"
 msgstr "हर रोज"
 
 #: setup.php:946
-#, fuzzy, php-format
+#, php-format
 msgid "%d Month"
 msgstr "% d महीना"
 
 #: setup.php:947 setup.php:948 setup.php:949
-#, fuzzy, php-format
+#, php-format
 msgid "%d Months"
 msgstr "% d माह"
 
 #: setup.php:950
-#, fuzzy, php-format
+#, php-format
 msgid "%d Year"
 msgstr "% d वष"
 
 #: setup.php:955
-#, fuzzy
 msgid "On Scan Completion"
 msgstr "स्कैन समापन पर"
 
 #: setup.php:958
-#, fuzzy, php-format
+#, php-format
 msgid "Every %d Days"
-msgstr "हर% द डेज"
+msgstr "हर %d दिन में"
 
 #: setup.php:959
-#, fuzzy
 msgid "Every Week"
 msgstr "प्रति सप्ताह"
 
@@ -3000,395 +2531,318 @@ msgid "Management"
 msgstr "प्रबंधन"
 
 #: setup.php:968 setup.php:1327 setup.php:1331
-#, fuzzy
 msgid "SNMP Options"
 msgstr "SNMP विकल्प"
 
 #: setup.php:971
-#, fuzzy
 msgid "Mac Watch"
 msgstr "मैक वॉच"
 
 #: setup.php:971 setup.php:972 setup.php:973 setup.php:983
-#, fuzzy
 msgid "Tracking Tools"
 msgstr "ट्रैकिंग उपकरण"
 
 #: setup.php:972
-#, fuzzy
 msgid "Mac Authorizations"
 msgstr "मैक प्राधिकरण"
 
 #: setup.php:973
-#, fuzzy
 msgid "Tracking Utilities"
 msgstr "ट्रैकिंग उपयोगिताएँ"
 
 #: setup.php:996
-#, fuzzy
 msgid "Device Scanning Function Options"
 msgstr "डिवाइस स्कैनिंग फ़ंक्शन विकल्प"
 
 #: setup.php:1001
-#, fuzzy
 msgid "Give this device type a meaningful description."
 msgstr "इस उपकरण को एक सार्थक विवरण दें।"
 
 #: setup.php:1008
-#, fuzzy
 msgid "Fill in the name for the vendor of this device type."
 msgstr "इस उपकरण प्रकार के विक्रेता के लिए नाम भरें।"
 
 #: setup.php:1015
-#, fuzzy
 msgid "Choose the type of device."
 msgstr "डिवाइस का प्रकार चुनें।"
 
 #: setup.php:1022
-#, fuzzy
 msgid "System Description Match"
 msgstr "सिस्टम विवरण मिलान"
 
 #: setup.php:1023 setup.php:1030
-#, fuzzy
 msgid "Provide key information to help Device Tracking detect the type of device.  The wildcard character is the '&#42;' sign."
 msgstr "डिवाइस ट्रैकिंग के प्रकार का पता लगाने में मदद करने के लिए महत्वपूर्ण जानकारी प्रदान करें। वाइल्डकार्ड वर्ण '%' चिन्ह है।"
 
 #: setup.php:1029
-#, fuzzy
 msgid "Vendor SNMP Object ID Match"
 msgstr "विक्रेता SNMP ऑब्जेक्ट आईडी मिलान"
 
 #: setup.php:1036
-#, fuzzy
 msgid "MAC Address Scanning Function"
 msgstr "मैक एड्रेस स्कैनिंग फंक्शन"
 
 #: setup.php:1037
-#, fuzzy
 msgid "The Device Tracking scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
 msgstr "पोर्ट विवरण प्राप्त करने और संग्रहीत करने के लिए कॉल करने के लिए डिवाइस ट्रैकिंग स्कैनिंग फ़ंक्शन। फ़ंक्शन का नाम सभी आवश्यक है। निम्नलिखित चार मापदंडों को माना जाता है और हमेशा जोड़ा जाएगा: &#39;my_function ($ साइट, और $ डिवाइस, $ लोपोर्ट, $ हाईपोर्ट)&#39;। शुद्ध राउटर के लिए कोई फ़ंक्शन आवश्यक नहीं है।"
 
 #: setup.php:1045
-#, fuzzy
 msgid "IP Address Scanning Function"
 msgstr "आईपी एड्रेस स्कैनिंग फंक्शन"
 
 #: setup.php:1046
-#, fuzzy
 msgid "The Device Tracking scanning function specific to Layer3 devices that track IP Addresses."
 msgstr "IP ट्रैकिंग ट्रैक करने वाले Layer3 उपकरणों के लिए विशिष्ट डिवाइस ट्रैकिंग स्कैनिंग फ़ंक्शन।"
 
 #: setup.php:1054
-#, fuzzy
 msgid "802.1x Scanning Function"
 msgstr "802.1x स्कैनिंग फंक्शन"
 
 #: setup.php:1055
-#, fuzzy
 msgid "The Device Tracking scanning function specific to Switches with dot1x enabled."
 msgstr "डॉट ट्रैकिंग के साथ स्विच करने के लिए विशिष्ट डिवाइस ट्रैकिंग स्कैनिंग फ़ंक्शन सक्षम है।"
 
 #: setup.php:1063
-#, fuzzy
 msgid "Serial Number Base OID"
 msgstr "सीरियल नंबर आधार OID"
 
 #: setup.php:1064
-#, fuzzy
 msgid "The SNMP OID used to obtain this device types serial number to be stored in the Device Tracking Asset Information table."
 msgstr "SNMP OID का उपयोग इस डिवाइस प्रकार सीरियल नंबर को प्राप्त करने के लिए किया जाता है जिसे डिवाइस ट्रैकिंग एसेट इंफॉर्मेशन टेबल में संग्रहीत किया जाता है।"
 
 #: setup.php:1071
-#, fuzzy
 msgid "Serial Number Collection Method"
 msgstr "क्रम संख्या संग्रह विधि"
 
 #: setup.php:1072
-#, fuzzy
 msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
 msgstr "इस OID के लिए सीरियल नंबर कैसे एकत्र किया गया है। यदि 'SNMP वॉक', हम कई सीरियल नंबर मानते हैं। अगर 'मिलता है', तो यह केवल एक ही होगा।"
 
 #: setup.php:1075
-#, fuzzy
 msgid "SNMP Get"
 msgstr "SNMP मिलता है"
 
 #: setup.php:1075
-#, fuzzy
 msgid "SNMP Walk"
 msgstr "एसएनएमपी वॉक"
 
 #: setup.php:1079
-#, fuzzy
 msgid "Low User Port Number"
 msgstr "कम उपयोगकर्ता पोर्ट नंबर"
 
 #: setup.php:1080 setup.php:1089
-#, fuzzy
 msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
 msgstr "इस स्विच पर कम उपयोगकर्ता पोर्ट नंबर प्रदान करें। सिस्टम को इसकी गणना करने की अनुमति देने के लिए 0 छोड़ दें।"
 
 #: setup.php:1088
-#, fuzzy
 msgid "High User Port Number"
 msgstr "हाई यूजर पोर्ट नंबर"
 
 #: setup.php:1098
 msgid "Disabled device type is not used."
-msgstr ""
+msgstr "अक्षम डिवाइस प्रकार का उपयोग नहीं किया जाता है।"
 
 #: setup.php:1121
-#, fuzzy
 msgid "Fill in the name of this SNMP option set."
 msgstr "इस SNMP विकल्प सेट के नाम को भरें।"
 
 #: setup.php:1133
-#, fuzzy
 msgid "SNMP Version"
 msgstr "SNMP संस्करण"
 
 #: setup.php:1134
-#, fuzzy
 msgid "Choose the SNMP version for this host."
 msgstr "इस होस्ट के लिए SNMP संस्करण चुनें।"
 
 #: setup.php:1141
-#, fuzzy
 msgid "SNMP Community String"
 msgstr "SNMP सामुदायिक स्ट्रिंग"
 
 #: setup.php:1142
-#, fuzzy
 msgid "Fill in the SNMP read community for this device."
 msgstr "इस उपकरण के लिए SNMP रीड समुदाय में भरें।"
 
 #: setup.php:1150
-#, fuzzy
 msgid "SNMP Port"
 msgstr "SNMP पोर्ट"
 
 #: setup.php:1159
-#, fuzzy
 msgid "SNMP Timeout"
 msgstr "एसएनएमपी टाइमआउट"
 
 #: setup.php:1160
-#, fuzzy
 msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
 msgstr "अधिकतम संख्या में मिलीसेक्ट Cacti एक SNMP प्रतिक्रिया (php-snmp समर्थन के साथ काम नहीं करता है) की प्रतीक्षा करेगा।"
 
 #: setup.php:1168
-#, fuzzy
 msgid "SNMP Retries"
 msgstr "एसएनएमपी रिटायर"
 
 #: setup.php:1169
-#, fuzzy
 msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
 msgstr "एसएनएमपी के माध्यम से एक उपकरण तक पहुंचने के प्रयासों की अधिकतम संख्या पहले पढ़ने देने से पहले।"
 
 #: setup.php:1177
-#, fuzzy
 msgid "Maximum OID's Per Get Request"
 msgstr "अधिकतम ओआईडी का प्रति अनुरोध प्राप्त करें"
 
 #: setup.php:1178
-#, fuzzy
 msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
 msgstr "निर्दिष्ट है कि OID की संख्या एक सिंगल SNMP में प्राप्त की जा सकती है।"
 
 #: setup.php:1186
-#, fuzzy
 msgid "SNMP Username (v3)"
 msgstr "SNMP उपयोगकर्ता नाम (v3)"
 
 #: setup.php:1187
-#, fuzzy
 msgid "SNMP v3 username for this device."
 msgstr "इस उपकरण के लिए SNMP v3 उपयोगकर्ता नाम।"
 
 #: setup.php:1195
-#, fuzzy
 msgid "SNMP Password (v3)"
 msgstr "SNMP पासवर्ड (v3)"
 
 #: setup.php:1196
-#, fuzzy
 msgid "SNMP v3 password for this device."
 msgstr "इस डिवाइस के लिए SNMP v3 पासवर्ड।"
 
 #: setup.php:1204
-#, fuzzy
 msgid "SNMP Auth Protocol (v3)"
 msgstr "SNMP प्रामाणिक प्रोटोकॉल (v3)"
 
 #: setup.php:1205
-#, fuzzy
 msgid "Choose the SNMPv3 Authorization Protocol."
 msgstr "SNMPv3 प्राधिकरण प्रोटोकॉल चुनें।"
 
 #: setup.php:1212
-#, fuzzy
 msgid "SNMP Privacy Passphrase (v3)"
 msgstr "SNMP गोपनीयता पासफ़्रेज़ (v3)"
 
 #: setup.php:1213
-#, fuzzy
 msgid "Choose the SNMPv3 Privacy Passphrase."
 msgstr "SNMPv3 गोपनीयता पासफ़्रेज़ चुनें।"
 
 #: setup.php:1221
-#, fuzzy
 msgid "SNMP Privacy Protocol (v3)"
 msgstr "SNMP गोपनीयता प्रोटोकॉल (v3)"
 
 #: setup.php:1222
-#, fuzzy
 msgid "Choose the SNMPv3 Privacy Protocol."
 msgstr "SNMPv3 गोपनीयता प्रोटोकॉल चुनें।"
 
 #: setup.php:1229
-#, fuzzy
 msgid "SNMP Context (v3)"
 msgstr "SNMP संदर्भ (v3)"
 
 #: setup.php:1230
-#, fuzzy
 msgid "Enter the SNMP v3 Context to use for this device."
 msgstr "इस उपकरण का उपयोग करने के लिए SNMP v3 संदर्भ दर्ज करें।"
 
 #: setup.php:1238
-#, fuzzy
 msgid "SNMP Engine ID (v3)"
 msgstr "SNMP इंजन आईडी (v3)"
 
 #: setup.php:1239
-#, fuzzy
 msgid "Enter the SNMP v3 Engine ID to use for this device."
 msgstr "इस उपकरण का उपयोग करने के लिए SNMP v3 इंजन ID दर्ज करें"
 
 #: setup.php:1251
-#, fuzzy
 msgid "General Device Settings"
 msgstr "सामान्य उपकरण सेटिंग्स"
 
 #: setup.php:1256
-#, fuzzy
 msgid "Give this device a meaningful name."
 msgstr "इस उपकरण को एक सार्थक नाम दें।"
 
 #: setup.php:1263
-#, fuzzy
 msgid "Fill in the fully qualified hostname for this device."
 msgstr "इस उपकरण के लिए पूरी तरह से योग्य होस्टनाम भरें।"
 
 #: setup.php:1268
-#, fuzzy
 msgid "Related Cacti Host"
 msgstr "संबंधित कैक्टि होस्ट"
 
 #: setup.php:1269
-#, fuzzy
 msgid "Given Device Tracking Host is connected to this Cacti Host."
 msgstr "दिया गया डिवाइस ट्रैकिंग होस्ट इस कैक्टि होस्ट से जुड़ा है।"
 
 #: setup.php:1278
-#, fuzzy
 msgid "Scan Type"
 msgstr "स्कैन का प्रकार"
 
 #: setup.php:1279
-#, fuzzy
 msgid "Choose the scan type you wish to perform on this device."
 msgstr "इस डिवाइस पर प्रदर्शन करने के लिए स्कैन प्रकार चुनें।"
 
 #: setup.php:1287
-#, fuzzy
 msgid "Choose the site to associate with this device."
 msgstr "इस उपकरण के साथ जुड़ने के लिए साइट चुनें।"
 
 #: setup.php:1294
-#, fuzzy
 msgid "Device Notes"
 msgstr "डिवाइस नोट्स"
 
 #: setup.php:1295
-#, fuzzy
 msgid "This field value is useful to save general information about a specific device."
 msgstr "विशिष्ट डिवाइस के बारे में सामान्य जानकारी को बचाने के लिए यह फ़ील्ड मान उपयोगी है।"
 
 #: setup.php:1304
-#, fuzzy
 msgid "Disable Device"
 msgstr "डिवाइस को अक्षम करें"
 
 #: setup.php:1305
-#, fuzzy
 msgid "Check this box to disable all checks for this host."
 msgstr "इस होस्ट के सभी चेक को अक्षम करने के लिए इस बॉक्स को चेक करें।"
 
 #: setup.php:1312
-#, fuzzy
 msgid "Switch/Hub, Switch/Router Settings"
 msgstr "स्विच / हब, स्विच / राउटर सेटिंग्स"
 
 #: setup.php:1317
-#, fuzzy
 msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
 msgstr "एक विशिष्ट स्विच / हब पर बंदरगाहों की सूची प्रदान करें जिनके मैक परिणामों को अनदेखा किया जाना चाहिए। लिंक जैसे लिंक / ट्रंक पोर्ट जिन्हें अन्य उपयोगकर्ता पोर्ट से अलग नहीं किया जा सकता है, उदाहरण हैं। प्रत्येक पोर्ट नंबर को एक बृहदान्त्र, पाइप या एक स्थान द्वारा अलग किया जाना चाहिए: ':', '|', ''। उदाहरण के लिए, 'Fa0 / 1: Fa1 / 23' या 'Fa0 / 1 Fa1 / 23' कुछ विशेष प्रकार के स्विच प्रकारों के लिए स्वीकार्य होंगे।"
 
 #: setup.php:1332
 msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
-msgstr ""
+msgstr "आप विशिष्ट SNMP सेटिंग का उपयोग कर सकते हैं या SNMP सेट का चयन कर सकते हैं। दूसरे मामले में, मैक्ट्रैक SNMP सेट से सही सेटिंग खोजने की कोशिश करता है"
 
 #: setup.php:1339
-#, fuzzy
 msgid "Read Strings"
 msgstr "स्ट्रिंग्स पढ़ें"
 
 #: setup.php:1340
-#, fuzzy
 msgid "<strong>DEPRECATED:</strong> SNMP community strings"
 msgstr "<strong>परिभाषित:</strong> SNMP सामुदायिक तार"
 
 #: setup.php:1345
-#, fuzzy
 msgid "Specific SNMP Settings"
 msgstr "विशिष्ट SNMP सेटिंग्स"
 
 #: setup.php:1354
-#, fuzzy
 msgid "Connectivity Options"
 msgstr "कनेक्टिविटी विकल्प"
 
 #: setup.php:1358
-#, fuzzy
 msgid "Terminal Type"
 msgstr "टर्मिनल प्रकार"
 
 #: setup.php:1359
-#, fuzzy
 msgid "Choose the terminal type that you use to connect to this device."
 msgstr "इस उपकरण से कनेक्ट करने के लिए उपयोग होने वाले टर्मिनल प्रकार को चुनें।"
 
 #: setup.php:1364
-#, fuzzy
 msgid "Telnet"
 msgstr "टेलनेट"
 
 #: setup.php:1365
-#, fuzzy
 msgid "SSH"
 msgstr "SSH"
 
 #: setup.php:1366
-#, fuzzy
 msgid "HTTP"
 msgstr "एचटीटीपी"
 
 #: setup.php:1367
-#, fuzzy
 msgid "HTTPS"
 msgstr "HTTPS"
 
@@ -3397,7 +2851,6 @@ msgid "User Name"
 msgstr "उपयोगकर्ता नाम"
 
 #: setup.php:1372
-#, fuzzy
 msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
 msgstr "आपके कस्टम प्रमाणीकरण विधि के लिए उपयोग किया जाने वाला उपयोगकर्ता नाम। उदाहरणों में SSH, RSH, HTML आदि शामिल हैं।"
 
@@ -3406,17 +2859,14 @@ msgid "Password"
 msgstr "पासवर्ड"
 
 #: setup.php:1381
-#, fuzzy
 msgid "The password to be used for your custom authentication."
 msgstr "आपके कस्टम प्रमाणीकरण के लिए उपयोग किया जाने वाला पासवर्ड।"
 
 #: setup.php:1389
-#, fuzzy
 msgid "Private Key Path"
 msgstr "निजी कुंजी पथ"
 
 #: setup.php:1390
-#, fuzzy
 msgid "The path to the private key used for SSH authentication."
 msgstr "SSH प्रमाणीकरण के लिए उपयोग की जाने वाली निजी कुंजी का पथ।"
 
@@ -3425,176 +2875,109 @@ msgid "Sequence"
 msgstr "अनुक्रम"
 
 #: setup.php:1415
-#, fuzzy
 msgid "Sequence of Item."
 msgstr "मद का अनुक्रम।"
 
 #: setup.php:1423
-#, fuzzy
 msgid "General Site Settings"
 msgstr "सामान्य साइट सेटिंग्स"
 
 #: setup.php:1428
-#, fuzzy
 msgid "Please enter a reasonable name for this site."
 msgstr "कृपया इस साइट के लिए एक उचित नाम दर्ज करें।"
 
 #: setup.php:1435
-#, fuzzy
 msgid "Primary Customer Contact"
 msgstr "प्राथमिक ग्राहक संपर्क"
 
 #: setup.php:1436
-#, fuzzy
 msgid "The principal customer contact name and number for this site."
 msgstr "इस साइट के लिए मुख्य ग्राहक संपर्क नाम और संख्या।"
 
 #: setup.php:1443
-#, fuzzy
 msgid "NetOps Contact"
 msgstr "नेटऑप्स संपर्क"
 
 #: setup.php:1444
-#, fuzzy
 msgid "Please principal network support contact name and number for this site."
 msgstr "कृपया इस साइट के लिए मुख्य नेटवर्क समर्थन संपर्क नाम और संख्या।"
 
 #: setup.php:1451
-#, fuzzy
 msgid "Facilities Contact"
 msgstr "सुविधाएं संपर्क करें"
 
 #: setup.php:1452
-#, fuzzy
 msgid "Please principal facilities/security contact name and number for this site."
 msgstr "कृपया इस साइट के लिए प्रमुख सुविधाएं / सुरक्षा संपर्क नाम और संख्या।"
 
 #: setup.php:1459
-#, fuzzy
 msgid "Site Information"
 msgstr "साइट जानकारी"
 
 #: setup.php:1463
-#, fuzzy
 msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
 msgstr "किसी भी साइट-विशिष्ट जानकारी को निःशुल्क रूप में प्रदान करें, जो आपको इस स्थान का बेहतर प्रबंधन करने की अनुमति देता है।"
 
 #: setup.php:1485
-#, fuzzy
 msgid "General Mac Address Tracking Settings"
 msgstr "सामान्य मैक एड्रेस ट्रैकिंग सेटिंग्स"
 
 #: setup.php:1490
-#, fuzzy
 msgid "Please enter the MAC Address to be watched for."
 msgstr "कृपया देखे जाने के लिए मैक एड्रेस दर्ज करें।"
 
 #: setup.php:1497
-#, fuzzy
 msgid "MAC Tracking Name/Email Subject"
 msgstr "मैक ट्रैकिंग नाम / ईमेल विषय"
 
 #: setup.php:1498
-#, fuzzy
 msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
 msgstr "कृपया इस मैक ट्रैकिंग प्रविष्टि के लिए एक उचित नाम दर्ज करें। यह जानकारी आपके ईमेल की विषय पंक्ति में होगी"
 
 #: setup.php:1517
-#, fuzzy
 msgid "Ticket number for cross referencing with your corporate help desk system(s)."
 msgstr "अपने कॉरपोरेट हेल्प डेस्क सिस्टम के साथ क्रॉस रेफ़रिंग के लिए टिकट नंबर।"
 
 #: setup.php:1524
-#, fuzzy
 msgid "Notification Schedule"
 msgstr "अधिसूचना अनुसूची"
 
 #: setup.php:1525
-#, fuzzy
 msgid "Choose how often an Email should be generated for this Mac Watch item."
 msgstr "चुनें कि इस मैक वॉच आइटम के लिए कितनी बार एक ईमेल तैयार किया जाना चाहिए।"
 
 #: setup.php:1529
-#, fuzzy
 msgid "First Occurrence Only"
 msgstr "केवल पहली घटना"
 
 #: setup.php:1530
-#, fuzzy
 msgid "All Occurrences"
 msgstr "सभी अवसरों"
 
 #: setup.php:1531
-#, fuzzy
 msgid "Every Hour"
 msgstr "प्रत्येक घंटे"
 
 #: setup.php:1538
-#, fuzzy
 msgid "Email Addresses"
 msgstr "ईमेल पता"
 
 #: setup.php:1539
-#, fuzzy
 msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
 msgstr "ईमेल पते से अलग एक अर्धविराम प्रविष्ट करें जो अधिसूचित किया जाएगा कि यह मैक पता कहाँ है।"
 
 #: setup.php:1562
-#, fuzzy
 msgid "General Mac Address Authorization Settings"
 msgstr "सामान्य मैक पता प्राधिकरण सेटिंग्स"
 
 #: setup.php:1566
-#, fuzzy
 msgid "MAC Address Match"
 msgstr "मैक एड्रेस मैच"
 
 #: setup.php:1567
-#, fuzzy
 msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
 msgstr "कृपया स्वचालित रूप से अधिकृत होने के लिए मैक एड्रेस या मैक एड्रेस मैच स्ट्रिंग दर्ज करें। यदि आप मैक एड्रेस के एक समूह को अधिकृत करना चाहते हैं, तो आप मैक एड्रेस में कहीं भी '%' के वाइल्डकार्ड वर्ण का उपयोग कर सकते हैं।"
 
 #: setup.php:1576
-#, fuzzy
 msgid "Please add a reason for this entry."
 msgstr "कृपया इस प्रविष्टि के लिए एक कारण जोड़ें।"
-
-#, fuzzy
-#~ msgid "Select a set of SNMP options to try."
-#~ msgstr "कोशिश करने के लिए SNMP विकल्पों के एक सेट का चयन करें।"
-
-#, fuzzy
-#~ msgid "Clear Results"
-#~ msgstr "आयात परिणाम"
-
-#, fuzzy
-#~ msgid "You must select at least one watched Mac to delete."
-#~ msgstr "हटाने के लिए आपको कम से कम एक देखे गए मैक का चयन करना होगा।"
-
-#, fuzzy
-#~ msgid "Watch Description"
-#~ msgstr "विवरण देखें"
-
-#, fuzzy
-#~ msgid "RUNNING"
-#~ msgstr "चल रहा है"
-
-#, fuzzy
-#~ msgid "DISABLED"
-#~ msgstr "अक्षम"
-
-#, fuzzy
-#~ msgid "IDLE"
-#~ msgstr "निष्क्रिय"
-
-#, fuzzy
-#~ msgid "ENABLED"
-#~ msgstr "सक्षम"
-
-#, fuzzy
-#~ msgid "Device Not in Cacti"
-#~ msgstr "डिवाइस नोट्स"
-
-#, fuzzy
-#~ msgid "Authorization Succcess"
-#~ msgstr "प्राधिकार सक्सेस"
