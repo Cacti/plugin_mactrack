@@ -769,7 +769,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 					}
 				}
 			} else {
-				if ($ifOperStatus[$ifIndex] == 0) {
+				if (isset($ifOperStatus[$ifIndex]) && $ifOperStatus[$ifIndex] == 0) {
 					/* the interface just went down, mark the time */
 					$last_down_time = date('Y-m-d H:i:s');
 					$stateChanges += 1;
