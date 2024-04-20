@@ -1,10 +1,9 @@
 ## ChangeLog
 
---- develop ---
+--- 4.7 ---
 
 * issue#206: Improve PHP8.x - undefined variables, array keys, ... 
 * issue#198: Better control for DNS resolving process
-
 
 --- 4.6 ---
 
@@ -16,11 +15,11 @@
 * issue#183: Undefined array key in lib/mactrack_functions.php
 * issue#184: add H3C/3Com modern switches/routers
 * issue#189: Add IP addresses retention
-* issue:190: Add HPE/Aruba OSCX switches 
-* issue:192: Improve working with SNMP sets 
-* issue:195: Fix incorrectly recognizing device types 
-* issue:199: Fix authorize/revoke macs 
-* issue:200: Add process control to dns resolver 
+* issue#190: Add HPE/Aruba OSCX switches 
+* issue#192: Improve working with SNMP sets 
+* issue#195: Fix incorrectly recognizing device types 
+* issue#199: Fix authorize/revoke macs 
+* issue#200: Add process control to dns resolver 
 * feature: Prepared device types
 * feature#197: Add more default device types
 
