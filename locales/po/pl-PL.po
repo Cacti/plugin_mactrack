@@ -2982,4 +2982,3 @@ msgstr "Wprowadź adres MAC lub łańcuch Mac Address Match, aby uzyskać automa
 #: setup.php:1576
 msgid "Please add a reason for this entry."
 msgstr "Proszę podać powód tego wpisu."
-
