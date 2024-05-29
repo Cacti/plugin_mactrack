@@ -241,7 +241,7 @@ function display_version() {
 function display_help () {
 	display_version();
 
-	print "\nusage: mactrack_device.php -id=host_id [-w] [-d] [-h] [--help] [-v] [--version]\n\n";
+	print "\nusage: mactrack_scanner.php -id=host_id [-w] [-d] [-h] [--help] [-v] [--version]\n\n";
 	print "-id=host_id   - the mac_track_devices host_id to scan\n";
 	print "-d | --debug  - Display verbose output during execution\n";
 	print "-w | --web    - Display web compatible output during execution\n";
