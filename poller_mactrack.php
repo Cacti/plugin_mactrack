@@ -385,9 +385,9 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 	/* save the scan date information */
 	$scan_date = date('Y-m-d H:i:s');
-	if ($site_id == 0) {
+	//if ($site_id == 0) {
 		set_config_option('mt_scan_date', $scan_date);
-	}
+	//}
 
 	/* just in case we've run too long */
 	$exit_mactrack = false;
