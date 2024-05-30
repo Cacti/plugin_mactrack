@@ -92,16 +92,20 @@ function form_actions() {
 		$selected_items = unserialize(get_nfilter_request_var('selected_items'));
 
 		foreach ($selected_items as $key=>$value) {
-			if (!filter_var($value, FILTER_VALIDATE_MAC)) {
+			//if (!filter_var($value, FILTER_VALIDATE_MAC)) {
+			if (!filter_var($key, FILTER_VALIDATE_MAC)) { //modify by xxconn@20240530
 				unset($selected_items[$key]);
-			}
+			} elseif (!filter_var($value, FILTER_VALIDATE_IP)) { //add by xxconn@20240530 begin
+				unset($selected_items[$key]);
+			} //add by xxconn@20240530 end
 		}
 
 		if (cacti_sizeof($selected_items)) {
 			if (get_request_var('drp_action') == '1') { /* Authorize */
 				if (cacti_sizeof($selected_items)) {
-					foreach($selected_items as $mac) {
-						api_mactrack_authorize_mac_addresses($mac);
+					//foreach($selected_items as $mac) {
+					foreach($selected_items as $mac=>$ip) { //modify by xxconn@20240530
+						api_mactrack_authorize_mac_addresses($mac, $ip); //modify by xxconn@20240530
 					}
 				}
 			} elseif (get_request_var('drp_action') == '2') { /* Revoke */
