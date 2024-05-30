@@ -142,11 +142,13 @@ function form_actions() {
 				$matches = sanitize_search_string($matches);
 				$parts   = explode('-', $matches);
 				$mac     = str_replace('_', $delim, $parts[0]);
+				$ip      = str_replace('_', $delim, $parts[1]); //add by xxconn@20240530
 			}
 
 			if (!isset($mac_address_array[$mac])) {
 				$mac_address_list .= '<li>' . $mac . '</li>';
-				$mac_address_array[$mac] = $mac;
+				//$mac_address_array[$mac] = $mac;
+				$mac_address_array[$mac] = $ip; //modify by xxconn@20240530
 			}
 		}
 	}
@@ -771,7 +773,8 @@ function mactrack_view_macs() {
 				$scan_date = $port_result['scan_date'];
 			}
 
-			$key =  str_replace($delim, '_', $port_result['mac_address']) . '-' . $port_result['device_id'] .
+			//$key =  str_replace($delim, '_', $port_result['mac_address']) . '-' . $port_result['device_id'] .
+			$key =  str_replace($delim, '_', $port_result['mac_address']) . '-' . $port_result['ip_address'] . '-' . $port_result['device_id'] .
 				$port_result['port_number'] . '-' . strtotime($scan_date);
 
 			form_alternate_row('line' . $key, true);
