@@ -91,27 +91,25 @@ function form_actions() {
 
 		$selected_items = unserialize(get_nfilter_request_var('selected_items'));
 
-		foreach ($selected_items as $key=>$value) {
-			//if (!filter_var($value, FILTER_VALIDATE_MAC)) {
-			if (!filter_var($key, FILTER_VALIDATE_MAC)) { //modify by xxconn@20240530
-				unset($selected_items[$key]);
-			} elseif (!filter_var($value, FILTER_VALIDATE_IP)) { //add by xxconn@20240530 begin
-				unset($selected_items[$key]);
-			} //add by xxconn@20240530 end
+		foreach ($selected_items as $mac=>$ip) {
+			if (!filter_var($mac, FILTER_VALIDATE_MAC)) {
+				unset($selected_items[$mac]);
+			} elseif (!filter_var($ip, FILTER_VALIDATE_IP)) {
+				unset($selected_items[$mac]);
+			}
 		}
 
 		if (cacti_sizeof($selected_items)) {
 			if (get_request_var('drp_action') == '1') { /* Authorize */
 				if (cacti_sizeof($selected_items)) {
-					//foreach($selected_items as $mac) {
-					foreach($selected_items as $mac=>$ip) { //modify by xxconn@20240530
-						api_mactrack_authorize_mac_addresses($mac, $ip); //modify by xxconn@20240530
+					foreach($selected_items as $mac=>$ip) {
+						api_mactrack_authorize_mac_addresses($mac, $ip);
 					}
 				}
 			} elseif (get_request_var('drp_action') == '2') { /* Revoke */
 				$errors = '';
 				if (cacti_sizeof($selected_items)) {
-					foreach($selected_items as $mac) {
+					foreach($selected_items as $mac=>$ip) {
 						$mac_found = db_fetch_cell_prepared('SELECT mac_address FROM mac_track_macauth WHERE mac_address = ?', array($mac));
 
 						if ($mac_found) {
@@ -146,13 +144,12 @@ function form_actions() {
 				$matches = sanitize_search_string($matches);
 				$parts   = explode('-', $matches);
 				$mac     = str_replace('_', $delim, $parts[0]);
-				$ip      = str_replace('_', $delim, $parts[1]); //add by xxconn@20240530
+				$ip      = str_replace('_', $delim, $parts[1]);
 			}
 
 			if (!isset($mac_address_array[$mac])) {
 				$mac_address_list .= '<li>' . $mac . '</li>';
-				//$mac_address_array[$mac] = $mac;
-				$mac_address_array[$mac] = $ip; //modify by xxconn@20240530
+				$mac_address_array[$mac] = $ip;
 			}
 		}
 	}
@@ -777,7 +774,6 @@ function mactrack_view_macs() {
 				$scan_date = $port_result['scan_date'];
 			}
 
-			//$key =  str_replace($delim, '_', $port_result['mac_address']) . '-' . $port_result['device_id'] .
 			$key =  str_replace($delim, '_', $port_result['mac_address']) . '-' . $port_result['ip_address'] . '-' . $port_result['device_id'] .
 				$port_result['port_number'] . '-' . strtotime($scan_date);
 
