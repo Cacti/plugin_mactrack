@@ -672,7 +672,7 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'active_last', 'unsigned' => true, 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'authorized', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0');
 	$data['primary'] = 'row_id';
-	$data['keys'][] = array('name' => 'port_number', 'columns' => 'port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized');
+	$data['unique_keys'][] = array('name' => 'port_number', 'columns' => 'port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized');
 	$data['keys'][] = array('name' => 'site_id', 'columns' => 'site_id');
 	$data['keys'][] = array('name' => 'device_name', 'columns' => 'device_name');
 	$data['keys'][] = array('name' => 'mac', 'columns' => 'mac_address');
