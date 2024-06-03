@@ -152,6 +152,7 @@ function valid_snmp_device(&$device) {
 	$snmp_sysObjectID = str_replace('.iso', '.1', $snmp_sysObjectID);
 
 	if ((strlen($snmp_sysObjectID) > 0) &&
+	    	$snmp_sysObjectID != 'U' &&
 		(!substr_count($snmp_sysObjectID, 'No Such Object')) &&
 		(!substr_count($snmp_sysObjectID, 'Error In'))) {
 		$snmp_sysObjectID = trim(str_replace('"','', $snmp_sysObjectID));
@@ -189,6 +190,7 @@ function valid_snmp_device(&$device) {
 				$snmp_sysObjectID = str_replace('.iso', '.1', $snmp_sysObjectID);
 
 				if ((strlen($snmp_sysObjectID) > 0) &&
+				    	$snmp_sysObjectID != 'U' &&
 					(!substr_count($snmp_sysObjectID, 'No Such Object')) &&
 					(!substr_count($snmp_sysObjectID, 'Error In'))) {
 					$snmp_sysObjectID = trim(str_replace("'", '', $snmp_sysObjectID));
@@ -403,6 +405,9 @@ function get_standard_arp_table($site, &$device) {
 	$atifIndexes = xform_stripped_oid('.1.3.6.1.2.1.3.1.1.1', $device);
 	$atEntries   = array();
 
+	$atifNames = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.1', $device);
+	mactrack_debug('ifNames data collection complete. \'' . cacti_sizeof($atifNames) . '\' rows found!');
+
 	if (cacti_sizeof($atifIndexes)) {
 		mactrack_debug('atifIndexes data collection complete');
 		$atPhysAddress = xform_stripped_oid('.1.3.6.1.2.1.3.1.1.2', $device);
@@ -460,7 +465,7 @@ function get_standard_arp_table($site, &$device) {
 					$device['device_id'],
 					$device['hostname'],
 					$device['device_name'],
-					$atEntry['atifIndex'],
+					$atEntry['atifName'],
 					$atEntry['atPhysAddress'],
 					$atEntry['atNetAddress'],
 					$scan_date
@@ -3081,7 +3086,7 @@ function mactrack_create_sql_filter($filter, $fields) {
 }
 
 function mactrack_display_hours($value) {
-	if ($value == '') {
+	if ($value == '' || $value == 'disabled')  {
 		return __('N/A', 'mactrack');
 	} elseif ($value < 60) {
 		return __('%d Minutes', round($value,0), 'mactrack');
