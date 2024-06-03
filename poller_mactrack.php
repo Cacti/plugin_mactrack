@@ -397,13 +397,14 @@ function collect_mactrack_data($start, $site_id = 0) {
 		$device_ids = db_fetch_assoc_prepared('SELECT device_id
 			FROM mac_track_devices
 			WHERE site_id = ?
-			AND disabled = ""',
+			AND disabled = ""
+   			ORDER BY last_runduration DESC',
 			array($site_id));
 	} else {
-		$device_ids = db_fetch_assoc("SELECT device_id
+		$device_ids = db_fetch_assoc('SELECT device_id
 			FROM mac_track_devices
-			WHERE disabled = ''
-			ORDER BY site_id");
+			WHERE disabled = ""
+			ORDER BY last_runduration DESC');
 	}
 
 	$total_devices = cacti_sizeof($device_ids);
