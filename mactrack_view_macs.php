@@ -35,7 +35,7 @@ $mactrack_view_macs_actions = array(
 );
 
 $mactrack_view_agg_macs_actions = array(
-	'01' => __('Delete', 'mactrack')
+	'3' => __('Delete', 'mactrack')
 );
 
 set_default_action();
@@ -212,10 +212,10 @@ function form_aggregated_actions() {
 
 	/* if we are to save this form, instead of display it */
 	if (isset_request_var('selected_items')) {
-        $selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
+        	$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
 
-        if ($selected_items != false) {
-			if (get_request_var('drp_action') == '01') { /* Delete */
+        	if ($selected_items != false) {
+			if (get_request_var('drp_action') == '3') { /* Delete */
 				if (cacti_sizeof($selected_items)) {
 					db_execute('DELETE FROM mac_track_aggregated_ports WHERE row_id IN (' . implode(',', $selected_items) . ')');
 				}
@@ -268,7 +268,7 @@ function form_aggregated_actions() {
 	} else {
 		$save_html = "<input type='submit' name='save' value='" . __esc('Continue', 'mactrack') . "'>";
 
-		if (get_request_var('drp_action') == '1') { /* Delete Macs */
+		if (get_request_var('drp_action') == '3') { /* Delete Macs */
 			print "<tr>
 				<td class='textArea'>
 					<p>" . __('Click \'Continue\' to Delete the following rows from Aggregated table.', 'mactrack') . "</p>
