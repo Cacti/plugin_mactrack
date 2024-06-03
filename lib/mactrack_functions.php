@@ -440,7 +440,7 @@ function get_standard_arp_table($site, &$device) {
 	$i = 0;
 	if (cacti_sizeof($atifIndexes)) {
 		foreach($atifIndexes as $atifIndex) {
-			$atEntries[$i]['atifIndex'] = $atifIndex;
+			$atEntries[$i]['atifName'] = isset($atifNames[$atifIndex]) ? $atifNames[$atifIndex]:'';
 			$atEntries[$i]['atPhysAddress'] = isset($atPhysAddress[$keys[$i]]) ? $atPhysAddress[$keys[$i]]:'';
 			$atEntries[$i]['atNetAddress'] = isset($atNetAddress[$keys[$i]]) ? xform_net_address($atNetAddress[$keys[$i]]):'';
 			$i++;
