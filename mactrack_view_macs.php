@@ -372,8 +372,8 @@ function mactrack_view_macs_validate_request_vars() {
 	'authorized' => array(
             'filter' => FILTER_VALIDATE_INT,
             'default' => '-1',
-			'pageset' => true
-			),
+	    'pageset' => true
+	    ),
         'filter' => array(
             'filter' => FILTER_CALLBACK,
             'pageset' => true,
