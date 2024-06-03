@@ -295,23 +295,35 @@ function form_aggregated_actions() {
 	bottom_footer();
 }
 
-function api_mactrack_authorize_mac_addresses($mac_address){
+function api_mactrack_authorize_mac_addresses($mac_address, $ip_address){
 	db_execute_prepared('UPDATE mac_track_ports
 		SET authorized=1
-		WHERE mac_address = ?', array($mac_address));
+		WHERE mac_address = ?',
+		array($mac_address));
+
+	db_execute_prepared('UPDATE mac_track_aggregated_ports
+		SET authorized=1
+		WHERE mac_address = ?',
+		array($mac_address));
 
 	db_execute_prepared('UPDATE mac_track_temp_ports
 		SET authorized=1
-		WHERE mac_address = ?', array($mac_address));
+		WHERE mac_address = ?',
+		array($mac_address));
 
 	db_execute_prepared('REPLACE INTO mac_track_macauth
 		(mac_address, description, added_by)
 		VALUES (?, ?, ?)',
-		array($mac_address, 'Added from MacView', $_SESSION['sess_user_id']));
+		array($mac_address, 'Added from MacView:' . $ip_address, $_SESSION['sess_user_id']));
 }
 
 function api_mactrack_revoke_mac_addresses($mac_address){
 	db_execute_prepared('UPDATE mac_track_ports
+		SET authorized=0
+		WHERE mac_address = ?',
+		array($mac_address));
+
+	db_execute_prepared('UPDATE mac_track_aggregated_ports
 		SET authorized=0
 		WHERE mac_address = ?',
 		array($mac_address));
@@ -357,7 +369,7 @@ function mactrack_view_macs_validate_request_vars() {
             'filter' => FILTER_VALIDATE_INT,
             'default' => '1'
             ),
-		'authorized' => array(
+	'authorized' => array(
             'filter' => FILTER_VALIDATE_INT,
             'default' => '-1',
 			'pageset' => true
@@ -571,7 +583,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = true, $rows)
 		$query_string = "SELECT
 			row_id, site_name, device_id, device_name, hostname, mtp.mac_address,
 			vendor_name, ip_address, dns_hostname, port_number,
-			port_name, vlan_id, vlan_name, MAX(date_last) AS scan_date, COUNT(count_rec) AS count_rec, active_last, mtm.mac_id
+			port_name, vlan_id, vlan_name, MAX(date_last) AS scan_date, count_rec, active_last, mtm.mac_id
 			FROM mac_track_aggregated_ports AS mtp
 			LEFT JOIN mac_track_sites AS mts
 			ON mtp.site_id = mts.site_id
@@ -775,7 +787,7 @@ function mactrack_view_macs() {
 			}
 
 			$key =  str_replace($delim, '_', $port_result['mac_address']) . '-' . $port_result['ip_address'] . '-' . $port_result['device_id'] .
-				$port_result['port_number'] . '-' . strtotime($scan_date);
+				'-' . $port_result['port_number'] . '-' . strtotime($scan_date);
 
 			form_alternate_row('line' . $key, true);
 			form_selectable_cell(mactrack_interface_actions($port_result['device_id'], $port_result['port_number'], false), $key, '1%');
