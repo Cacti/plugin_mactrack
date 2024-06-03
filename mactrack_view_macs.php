@@ -295,7 +295,7 @@ function form_aggregated_actions() {
 	bottom_footer();
 }
 
-function api_mactrack_authorize_mac_addresses($mac_address, $ip_address){
+function api_mactrack_authorize_mac_addresses($mac_address, $ip_address) {
 	db_execute_prepared('UPDATE mac_track_ports
 		SET authorized=1
 		WHERE mac_address = ?',
