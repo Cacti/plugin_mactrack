@@ -35,14 +35,14 @@ $mactrack_view_macs_actions = array(
 );
 
 $mactrack_view_agg_macs_actions = array(
-	'3' => __('Delete', 'mactrack')
+	3 => __('Delete', 'mactrack')
 );
 
 set_default_action();
 
 switch (get_request_var('action')) {
 case 'actions':
-	if (get_nfilter_request_var('drp_action') !== '01') {
+	if (get_nfilter_request_var('drp_action') !== '3') {
 		form_actions();
 	} else {
 		form_aggregated_actions();
@@ -262,7 +262,7 @@ function form_aggregated_actions() {
 	if (!cacti_sizeof($row_array)) {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one Row.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = "";
-	} elseif (api_plugin_user_realm_auth('mactrack_macauth.php')) {
+	} elseif (!api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		print "<tr><td class='even'><span class='textError'>" . __('You are not permitted to delete rows.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = "";
 	} else {
@@ -583,7 +583,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = true, $rows)
 		$query_string = "SELECT
 			row_id, site_name, device_id, device_name, hostname, mtp.mac_address,
 			vendor_name, ip_address, dns_hostname, port_number,
-			port_name, vlan_id, vlan_name, MAX(date_last) AS scan_date, count_rec, active_last, mtm.mac_id
+			port_name, vlan_id, vlan_name, MAX(date_last) AS scan_date, COUNT(count_rec) AS count_rec, active_last, mtm.mac_id
 			FROM mac_track_aggregated_ports AS mtp
 			LEFT JOIN mac_track_sites AS mts
 			ON mtp.site_id = mts.site_id
@@ -786,8 +786,8 @@ function mactrack_view_macs() {
 				$scan_date = $port_result['scan_date'];
 			}
 
-			$key =  str_replace($delim, '_', $port_result['mac_address']) . '-' . $port_result['ip_address'] . '-' . $port_result['device_id'] .
-				'-' . $port_result['port_number'] . '-' . strtotime($scan_date);
+			$key =  str_replace($delim, '_', $port_result['mac_address']) . '-' . $port_result['ip_address'] . '-' .
+				$port_result['device_id'] . '-' . $port_result['port_number'] . '-' . strtotime($scan_date);
 
 			form_alternate_row('line' . $key, true);
 			form_selectable_cell(mactrack_interface_actions($port_result['device_id'], $port_result['port_number'], false), $key, '1%');
@@ -967,6 +967,10 @@ function mactrack_view_aggregated_macs() {
 	}
 
 	$nav = html_nav_bar('mactrack_view_macs.php?report=macs&scan_date=3', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('MAC Addresses', 'mactrack'), 'page', 'main');
+	
+	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
+		form_start('mactrack_view_macs.php');
+	}
 
 	print $nav;
 
@@ -1042,6 +1046,8 @@ function mactrack_view_aggregated_macs() {
 	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		/* draw the dropdown containing a list of available actions for this form */
 		draw_actions_dropdown($mactrack_view_agg_macs_actions);
+
+		form_end();
 	}
 }
 
