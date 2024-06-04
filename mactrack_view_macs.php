@@ -583,7 +583,7 @@ function mactrack_view_get_mac_records(&$sql_where, $apply_limits = true, $rows)
 		$query_string = "SELECT
 			row_id, site_name, device_id, device_name, hostname, mtp.mac_address,
 			vendor_name, ip_address, dns_hostname, port_number,
-			port_name, vlan_id, vlan_name, MAX(date_last) AS scan_date, COUNT(count_rec) AS count_rec, active_last, mtm.mac_id
+			port_name, vlan_id, vlan_name, MAX(date_last) AS scan_date, count_rec, active_last, mtm.mac_id
 			FROM mac_track_aggregated_ports AS mtp
 			LEFT JOIN mac_track_sites AS mts
 			ON mtp.site_id = mts.site_id
