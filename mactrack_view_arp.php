@@ -348,17 +348,17 @@ function mactrack_view_ips() {
 		),
 		'port_number' => array(
 			'display' => __('Port Number', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'DESC'
 		),
 		'ifName' => array(
 			'display' => __('Port Name', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'ASC'
 		),
 		'scan_date' => array(
 			'display' => __('Last Scan Date', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'DESC'
 		)
 	);
@@ -392,9 +392,9 @@ function mactrack_view_ips() {
 
 			form_selectable_cell(filter_value($port_result['mac_address'], get_request_var('filter')), $i);
 			form_selectable_cell(filter_value($port_result['vendor_name'], get_request_var('filter')), $i);
-			form_selectable_cell($port_result['port_number'], $i, '', 'right');
-			form_selectable_cell($port_result['ifName'], $i, '', 'right');
-			form_selectable_cell($port_result['scan_date'], $i, '', 'right');
+			form_selectable_cell($port_result['port_number'], $i, '', 'left');
+			form_selectable_cell($port_result['ifName'], $i, '', 'left');
+			form_selectable_cell($port_result['scan_date'], $i, '', 'left');
 
 			form_end_row();
 
