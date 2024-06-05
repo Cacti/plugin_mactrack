@@ -3086,7 +3086,7 @@ function mactrack_create_sql_filter($filter, $fields) {
 }
 
 function mactrack_display_hours($value) {
-	if ($value == '' || $value == 'disabled')  {
+	if ($value == '' || $value == 'disabled') {
 		return __('N/A', 'mactrack');
 	} elseif ($value < 60) {
 		return __('%d Minutes', round($value,0), 'mactrack');
