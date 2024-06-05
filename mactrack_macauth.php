@@ -197,6 +197,10 @@ function api_mactrack_maca_remove($mac_id) {
 	db_execute('UPDATE mac_track_ports
 		SET authorized=0
 		WHERE mac_address LIKE "' . $mac_address . '%"');
+
+	db_execute('UPDATE mac_track_aggregated_ports
+		SET authorized=0
+		WHERE mac_address LIKE "' . $mac_address . '%"');
 }
 
 /* ---------------------
