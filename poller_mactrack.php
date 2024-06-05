@@ -398,7 +398,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			FROM mac_track_devices
 			WHERE site_id = ?
 			AND disabled = ""
-   			ORDER BY last_runduration DESC',
+			ORDER BY last_runduration DESC',
 			array($site_id));
 	} else {
 		$device_ids = db_fetch_assoc('SELECT device_id

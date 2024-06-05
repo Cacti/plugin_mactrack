@@ -144,7 +144,7 @@ function form_actions() {
 				$matches = sanitize_search_string($matches);
 				$parts   = explode('-', $matches);
 				$mac     = str_replace('_', $delim, $parts[0]);
-				$ip      = str_replace('_', $delim, $parts[1]);
+				$ip      = str_replace('_', '.', $parts[1]);
 			}
 
 			if (!isset($mac_address_array[$mac])) {
@@ -212,9 +212,9 @@ function form_aggregated_actions() {
 
 	/* if we are to save this form, instead of display it */
 	if (isset_request_var('selected_items')) {
-        	$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
+		$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
 
-        	if ($selected_items != false) {
+		if ($selected_items != false) {
 			if (get_request_var('drp_action') == '3') { /* Delete */
 				if (cacti_sizeof($selected_items)) {
 					db_execute('DELETE FROM mac_track_aggregated_ports WHERE row_id IN (' . implode(',', $selected_items) . ')');
@@ -314,7 +314,7 @@ function api_mactrack_authorize_mac_addresses($mac_address, $ip_address) {
 	db_execute_prepared('REPLACE INTO mac_track_macauth
 		(mac_address, description, added_by)
 		VALUES (?, ?, ?)',
-		array($mac_address, 'Added from MacView:' . $ip_address, $_SESSION['sess_user_id']));
+		array($mac_address, 'Added from MacView: ' . $ip_address, $_SESSION['sess_user_id']));
 }
 
 function api_mactrack_revoke_mac_addresses($mac_address){
