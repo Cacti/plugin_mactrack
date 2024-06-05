@@ -287,12 +287,12 @@ function mactrack_maca() {
 			),
 		'sort_column' => array(
 			'filter' => FILTER_CALLBACK,
-			'default' => 'mac_address',
+			'default' => 'added_date',
 			'options' => array('options' => 'sanitize_search_string')
 			),
 		'sort_direction' => array(
 			'filter' => FILTER_CALLBACK,
-			'default' => 'ASC',
+			'default' => 'DESC',
 			'options' => array('options' => 'sanitize_search_string')
 			)
 	);
