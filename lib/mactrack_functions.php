@@ -152,7 +152,7 @@ function valid_snmp_device(&$device) {
 	$snmp_sysObjectID = str_replace('.iso', '.1', $snmp_sysObjectID);
 
 	if ((strlen($snmp_sysObjectID) > 0) &&
-	    	$snmp_sysObjectID != 'U' &&
+		$snmp_sysObjectID != 'U' &&
 		(!substr_count($snmp_sysObjectID, 'No Such Object')) &&
 		(!substr_count($snmp_sysObjectID, 'Error In'))) {
 		$snmp_sysObjectID = trim(str_replace('"','', $snmp_sysObjectID));
@@ -190,7 +190,7 @@ function valid_snmp_device(&$device) {
 				$snmp_sysObjectID = str_replace('.iso', '.1', $snmp_sysObjectID);
 
 				if ((strlen($snmp_sysObjectID) > 0) &&
-				    	$snmp_sysObjectID != 'U' &&
+					$snmp_sysObjectID != 'U' &&
 					(!substr_count($snmp_sysObjectID, 'No Such Object')) &&
 					(!substr_count($snmp_sysObjectID, 'Error In'))) {
 					$snmp_sysObjectID = trim(str_replace("'", '', $snmp_sysObjectID));
@@ -401,13 +401,10 @@ function port_list_to_array($port_list, $delimiter = ':') {
 function get_standard_arp_table($site, &$device) {
 	global $debug, $scan_date;
 
-	/* get the atifIndexes for the device */
-	$atifIndexes = xform_stripped_oid('.1.3.6.1.2.1.3.1.1.1', $device);
 	$atEntries   = array();
 
-	$atifNames = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.1', $device);
-	mactrack_debug('ifNames data collection complete. \'' . cacti_sizeof($atifNames) . '\' rows found!');
-
+	/* get the atifIndexes for the device */
+	$atifIndexes = xform_stripped_oid('.1.3.6.1.2.1.3.1.1.1', $device);
 	if (cacti_sizeof($atifIndexes)) {
 		mactrack_debug('atifIndexes data collection complete');
 		$atPhysAddress = xform_stripped_oid('.1.3.6.1.2.1.3.1.1.2', $device);
@@ -423,6 +420,9 @@ function get_standard_arp_table($site, &$device) {
 		$atNetAddress = xform_stripped_oid('.1.3.6.1.2.1.4.22.1.3', $device);
 		mactrack_debug('atNetAddress data collection complete');
 	}
+
+	$atifNames = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.1', $device);
+	mactrack_debug('ifNames data collection complete. \'' . cacti_sizeof($atifNames) . '\' rows found!');
 
 	/* convert the mac address if necessary */
 	$keys = array_keys($atPhysAddress);
