@@ -399,7 +399,7 @@ function mactrack_view_macs_validate_request_vars() {
             ),
         'sort_column' => array(
             'filter' => FILTER_CALLBACK,
-            'default' => 'device_name',
+            'default' => 'ip_address',
             'options' => array('options' => 'sanitize_search_string')
             ),
         'sort_direction' => array(
@@ -728,27 +728,27 @@ function mactrack_view_macs() {
 		),
 		'port_number' => array(
 			'display' => __('Port Number', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'DESC'
 		),
 		'port_name' => array(
 			'display' => __('Port Name', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'ASC'
 		),
 		'vlan_id' => array(
 			'display' => __('VLAN ID', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'DESC'
 		),
 		'vlan_name' => array(
 			'display' => __('VLAN Name', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'ASC'
 		),
 		'scan_date' => array(
 			'display' => __('Last Scan Date', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'DESC'
 		)
 	);
@@ -808,11 +808,11 @@ function mactrack_view_macs() {
 			form_selectable_cell(filter_value($port_result['mac_address'], get_request_var('filter')), $key);
 			form_selectable_cell($auth, $key);
 			form_selectable_cell(filter_value($port_result['vendor_name'], get_request_var('filter')), $key);
-			form_selectable_cell($port_result['port_number'], $key, '', 'right');
-			form_selectable_cell(filter_value($port_result['port_name'], get_request_var('filter')), $key, '', 'right');
-			form_selectable_cell($port_result['vlan_id'], $key, '', 'right');
-			form_selectable_cell(filter_value($port_result['vlan_name'], get_request_var('filter')), $key, '', 'right');
-			form_selectable_cell($scan_date, $key, '', 'right');
+			form_selectable_cell($port_result['port_number'], $key, '', 'left');
+			form_selectable_cell(filter_value($port_result['port_name'], get_request_var('filter')), $key, '', 'left');
+			form_selectable_cell($port_result['vlan_id'], $key, '', 'left');
+			form_selectable_cell(filter_value($port_result['vlan_name'], get_request_var('filter')), $key, '', 'left');
+			form_selectable_cell($scan_date, $key, '', 'left');
 
 			if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 				form_checkbox_cell($port_result['mac_address'], $key);
@@ -918,22 +918,22 @@ function mactrack_view_aggregated_macs() {
 		),
 		'port_number' => array(
 			'display' => __('Port Number', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'DESC'
 		),
 		'port_name'   => array(
 			'display' => __('Port Name', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'ASC'
 		),
 		'vlan_id'     => array(
 			'display' => __('VLAN ID', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'DESC'
 		),
 		'vlan_name'   => array(
 			'display' => __('VLAN Name', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'ASC'
 		)
 	));
@@ -941,13 +941,13 @@ function mactrack_view_aggregated_macs() {
 	if (get_request_var('rows') == 1) {
 		$display_text['scan_date'] = array(
 			'display' => __('Last Scan Date', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'DESC'
 		);
 	} else {
 		$display_text['scan_date'] = array(
 			'display' => __('Last Scan Date', 'mactrack'),
-			'align'   => 'right',
+			'align'   => 'left',
 			'sort'    => 'DESC'
 		);
 	}
@@ -967,7 +967,7 @@ function mactrack_view_aggregated_macs() {
 	}
 
 	$nav = html_nav_bar('mactrack_view_macs.php?report=macs&scan_date=3', MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('MAC Addresses', 'mactrack'), 'page', 'main');
-	
+
 	if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
 		form_start('mactrack_view_macs.php');
 	}
@@ -1015,11 +1015,11 @@ function mactrack_view_aggregated_macs() {
 			form_selectable_cell(filter_value($port_result['mac_address'], get_request_var('filter')), $key);
 			form_selectable_cell($auth, $key);
 			form_selectable_cell(filter_value($port_result['vendor_name'], get_request_var('filter')), $key);
-			form_selectable_cell($port_result['port_number'], $key, '', 'right');
-			form_selectable_cell(filter_value($port_result['port_name'], get_request_var('filter')), $key, '', 'right');
-			form_selectable_cell($port_result['vlan_id'], $key, '', 'right');
-			form_selectable_cell(filter_value($port_result['vlan_name'], get_request_var('filter')), $key, '', 'right');
-			form_selectable_cell($color_line_date . $port_result['scan_date'], $key, '', 'right');
+			form_selectable_cell($port_result['port_number'], $key, '', 'left');
+			form_selectable_cell(filter_value($port_result['port_name'], get_request_var('filter')), $key, '', 'left');
+			form_selectable_cell($port_result['vlan_id'], $key, '', 'left');
+			form_selectable_cell(filter_value($port_result['vlan_name'], get_request_var('filter')), $key, '', 'left');
+			form_selectable_cell($color_line_date . $port_result['scan_date'], $key, '', 'left');
 			form_selectable_cell($port_result['count_rec'], $key, '', 'right');
 
 			if (api_plugin_user_realm_auth('mactrack_macauth.php')) {
