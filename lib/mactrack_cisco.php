@@ -280,6 +280,11 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
+	$ifIndexes = array();
+
+	/* get and store the interfaces table */
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, true);
+
 	/* initialize port counters */
 	$device['ports_total']  = 0;
 	$device['ports_active'] = 0;
@@ -295,10 +300,10 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 	mactrack_debug('There are ' . (cacti_sizeof($vlan_ids)-4) . ' VLANS.');
 
 	/* get the ifIndexes for the device */
-	$ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);
-	mactrack_debug('ifIndexes data collection complete');
+	//$ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);
+	//mactrack_debug('ifIndexes data collection complete');
 
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, true);
+	//$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, true);
 
 	/* get the Voice VLAN information if it exists */
 	$portVoiceVLANs = xform_standard_indexed_data('.1.3.6.1.4.1.9.9.87.1.4.1.1.37.0', $device);
