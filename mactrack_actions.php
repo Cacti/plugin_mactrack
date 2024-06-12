@@ -28,7 +28,7 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 	$snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context,
 	$snmp_engine_id, $snmp_port, $snmp_timeout, $snmp_retries, $max_oids,
 	$ignorePorts, $notes, $user_name, $user_password, $term_type,
-	$private_key_path, $disabled) {
+	$private_key_path, $disabled, $scan_trunk_port, $device_type_id) {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
@@ -60,6 +60,8 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 	$save['term_type']            = form_input_validate($term_type, 'term_type', '', true, 3);
 	$save['private_key_path']     = form_input_validate($private_key_path, 'private_key_path', '', true, 3);
 	$save['disabled']             = form_input_validate($disabled, 'disabled', '', true, 3);
+	$save['scan_trunk_port']      = form_input_validate($scan_trunk_port, 'scan_trunk_port', '', true, 3);
+	$save['device_type_id']       = form_input_validate($device_type_id, 'device_type_id', '', true, 3);
 
 	$device_id = 0;
 	if (!is_error_message()) {
@@ -92,13 +94,15 @@ function api_mactrack_device_remove($device_id){
 	db_execute('DELETE FROM mac_track_interface_graphs WHERE device_id=' . $device_id);
 }
 
-function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops_contact, $facilities_contact, $site_info) {
+function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops_contact, $facilities_contact, $site_info, $skip_vlans, $scan_vlans) {
 	$save['site_id']            = $site_id;
 	$save['site_name']          = form_input_validate($site_name, 'site_name', '', false, 3);
 	$save['site_info']          = form_input_validate($site_info, 'site_info', '', true, 3);
 	$save['customer_contact']   = form_input_validate($customer_contact, 'customer_contact', '', true, 3);
 	$save['netops_contact']     = form_input_validate($netops_contact, 'netops_contact', '', true, 3);
 	$save['facilities_contact'] = form_input_validate($facilities_contact, 'facilities_contact', '', true, 3);
+	$save['skip_vlans']         = form_input_validate($skip_vlans, 'skip_vlans', '', true, 3);
+	$save['scan_vlans']         = form_input_validate($scan_vlans, 'scan_vlans', '', true, 3);
 
 	$site_id = 0;
 	if (!is_error_message()) {
@@ -209,7 +213,8 @@ function sync_cacti_to_mactrack($device) {
 				$mt_device['user_password'],		# not a host column
 				$mt_device['term_type'],
 				$mt_device['private_key_path'],
-				(isset($mt_device['disabled']) ? $mt_device['disabled'] : '') # not a host column
+				(isset($mt_device['disabled']) ? $mt_device['disabled'] : ''), # not a host column
+				$mt_device['scan_trunk_port']
 			);
 
 			mactrack_debug(__('Device Tracking Device: (%s) successfully updated', $mt_device['device_id'], 'mactrack'));
