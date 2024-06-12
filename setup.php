@@ -1335,7 +1335,7 @@ function mactrack_config_form () {
 	'scan_trunk_port' => array(
 		'method' => 'textarea',
 		'friendly_name' => 'Trunk Ports to Scan',
-		'description' => 'Some VMware network port will be configured with 802.1Q',
+		'description' => 'A comma delimited list of Port Number to be scanned.  Some VMware network port will be configured with 802.1Q',
 		'value' => '|arg1:scan_trunk_port|',
 		'default' => '',
 		'class' => 'textAreaNotes',
@@ -1491,7 +1491,7 @@ function mactrack_config_form () {
 		'class' => 'textAreaNotes',
 		'textarea_rows' => '5',
 		'textarea_cols' => '80',
-		'description' => 'VLAN ID always forced to be skipped scanning',
+		'description' => 'A comma delimited list of VLAN ID always forced to be skipped scanning.',
 		'value' => '|arg1:skip_vlans|',
 		'max_length' => '1024'
 		),
@@ -1501,7 +1501,7 @@ function mactrack_config_form () {
 		'class' => 'textAreaNotes',
 		'textarea_rows' => '5',
 		'textarea_cols' => '80',
-		'description' => 'VLAN ID to be scaned',
+		'description' => 'A comma delimited list of VLAN ID to be scaned',
 		'value' => '|arg1:scan_vlans|',
 		'max_length' => '1024'
 	),
