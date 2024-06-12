@@ -1259,6 +1259,8 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 			if (isset($indexes[$i]) && isset($ifInterfaces[$indexes[$i]]['ifType'])) {
 				if ((($ifInterfaces[$indexes[$i]]['ifType'] >= 6) &&
 				     ($ifInterfaces[$indexes[$i]]['ifType'] <= 9)) ||
+				    ($ifInterfaces[$indexes[$i]]['ifType'] == 53)  || #vlan
+				    ($ifInterfaces[$indexes[$i]]['ifType'] == 161) || #port-channel
 				    ($ifInterfaces[$indexes[$i]]['ifType'] == 71)) {
 					if ($port_info == 1) {
 						$ports_active++;
