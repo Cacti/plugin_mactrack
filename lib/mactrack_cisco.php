@@ -348,9 +348,46 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 	$j = 0;
 	$active_vlans = array();
 
+	$skip_vlans = array();
+	$sql_result = db_fetch_cell("SELECT skip_vlans FROM mac_track_sites WHERE site_name ='" . $site . "'");
+	if (strlen($sql_result)) {
+		$skip_vlans = explode(",", $sql_result);
+	}
+
+	$scan_vlans = array();
+	$sql_result = db_fetch_cell("SELECT scan_vlans FROM mac_track_sites WHERE site_name ='" . $site . "'");
+	if (strlen($sql_result)) {
+		$scan_vlans = explode(",", $sql_result);
+		$scan_vlans = array_merge(array_diff($scan_vlans, $skip_vlans));
+	}
+
+	$scan_trunk_port = array();
+	if (strlen($device["scan_trunk_port"])) {
+		$scan_trunk_port = explode(",", $device["scan_trunk_port"]);
+	}
+
 	if (cacti_sizeof($vlan_ids)) {
 		foreach ($vlan_ids as $vlan_number => $vlanStatus) {
 			$vlanName = mactrack_arr_key($vlan_names, $vlan_number);
+
+			if ($vlanName == "") {
+				cacti_log("Empty VLAN Name: " . $device["device_name"]);
+				continue;
+			}
+
+			// VLAN-ID to skip
+			if (in_array($vlan_number, $skip_vlans)) {
+				mactrack_debug("VLAN Analysis for VLAN: " . $vlan_number . "/" . $vlanName . " is skipped. *** ALWAYS FORCED ***");
+				continue;
+			}
+
+			// VLAN-ID to scan
+			if (count($scan_vlans) > 0) {
+        			if (!in_array($vlan_number, $scan_vlans)) {
+					mactrack_debug("VLAN Analysis for VLAN: " . $vlan_number . "/" . $vlanName . " is skipped. *** NOT CONFIGURED ***");
+					continue;
+				}
+			}
 
 			if ($vlanStatus == 1) { /* vlan is operatinal */
 				switch ($vlan_number) {
@@ -454,15 +491,18 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 						$portTrunkStatus = (isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '');
 
 						/* only output legitimate end user ports */
-						if ($ifType == 6) {
+						if ($ifType == 6 || $ifType == 53 || $ifType == 161) {
 							if (($portTrunkStatus == '2') ||
 								(empty($portTrunkStatus)) ||
+							    	(in_array($portNumber, $scan_trunk_port)) ||
 								(($vVlanID > 0) && ($vVlanID <= 1000))) {
 								$port_array[$i]['vlan_id']     = $active_vlan['vlan_id'];
 								$port_array[$i]['vlan_name']   = $active_vlan['vlan_name'];
 								$port_array[$i]['port_number'] = $portNumber;
 								$port_array[$i]['port_name']   = $portName;
 								$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
+								$port_array[$i]['ifType']      = $ifType;
+								$port_array[$i]['portTrunkStatus'] = $portTrunkStatus;
 								$i++;
 
 								mactrack_debug('VLAN: ' . $active_vlan['vlan_id'] . ', ' .
