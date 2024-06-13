@@ -315,6 +315,9 @@ function api_mactrack_authorize_mac_addresses($mac_address, $ip_address) {
 		(mac_address, description, added_by)
 		VALUES (?, ?, ?)',
 		array($mac_address, 'Added from MacView: ' . $ip_address, $_SESSION['sess_user_id']));
+
+	cacti_log('AUDIT: MAC Address `' . $mac_address . '` is authorized by ' .
+		db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])), false, 'MACTRACK');
 }
 
 function api_mactrack_revoke_mac_addresses($mac_address){
@@ -331,6 +334,9 @@ function api_mactrack_revoke_mac_addresses($mac_address){
 	db_execute_prepared('DELETE FROM mac_track_macauth
 		WHERE mac_address = ?',
 		array($mac_address));
+
+	cacti_log('AUDIT: MAC Address `' . $mac_address . '` is revoked by ' .
+		db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])), false, 'MACTRACK');
 }
 
 function mactrack_view_macs_validate_request_vars() {
