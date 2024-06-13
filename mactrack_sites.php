@@ -68,7 +68,8 @@ function form_save() {
 	if ((isset_request_var('save_component_site')) && (isempty_request_var('add_dq_y'))) {
 		$site_id = api_mactrack_site_save(get_filter_request_var('site_id'), get_nfilter_request_var('site_name'),
 			get_nfilter_request_var('customer_contact'), get_nfilter_request_var('netops_contact'),
-			get_nfilter_request_var('facilities_contact'), get_nfilter_request_var('site_info'));
+			get_nfilter_request_var('facilities_contact'), get_nfilter_request_var('site_info'),
+			get_nfilter_request_var('skip_vlans'), get_nfilter_request_var('scan_vlans'));
 
 		if ($site_id) {
 			raise_message(1);

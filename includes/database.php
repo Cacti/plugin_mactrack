@@ -76,6 +76,7 @@ function mactrack_database_upgrade() {
 	mactrack_add_column('mac_track_interfaces',
 		'int_ifOutErrors',
 		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutErrors` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutDiscards`");
+
 	mactrack_add_column('mac_track_devices',
 		'host_id',
 		"ALTER TABLE `mac_track_devices` ADD COLUMN `host_id` int(10) unsigned NOT NULL default '0' AFTER `device_id`");
@@ -348,6 +349,14 @@ function mactrack_database_upgrade() {
 		'site_info',
 		"ALTER TABLE `mac_track_sites` ADD COLUMN `site_info` text AFTER `facilities_contact`");
 
+	mactrack_add_column('mac_track_sites',
+		'skip_vlans',
+		"ALTER TABLE `mac_track_sites` ADD COLUMN `skip_vlans` text DEFAULT NULL");
+
+	mactrack_add_column('mac_track_sites',
+		'scan_vlans',
+		"ALTER TABLE `mac_track_sites` ADD COLUMN `scan_vlans` text DEFAULT NULL");
+	
 	mactrack_add_column('mac_track_devices',
 		'device_name',
 		"ALTER TABLE `mac_track_devices` ADD COLUMN `device_name` varchar(100) default '' AFTER `host_id`");
@@ -355,6 +364,10 @@ function mactrack_database_upgrade() {
 	mactrack_add_column('mac_track_devices',
 		'notes',
 		"ALTER TABLE `mac_track_devices` ADD COLUMN `notes` text AFTER `hostname`");
+
+	mactrack_add_column('mac_track_devices',
+		'scan_trunk_port',
+		"ALTER TABLE `mac_track_devices` ADD COLUMN `scan_trunk_port` text DEFAULT NULL");
 
 	mactrack_add_column('mac_track_scanning_functions',
 		'type',
@@ -766,6 +779,7 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'last_runmessage', 'type' => 'varchar(100)', 'NULL' => true);
 	$data['columns'][] = array('name' => 'last_rundate', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
 	$data['columns'][] = array('name' => 'last_runduration', 'type' => 'decimal(10,5)', 'NULL' => false, 'default' => '0.00000');
+	$data['columns'][] = array('name' => 'scan_trunk_port', 'type' => 'text', 'NULL' => true);
 	$data['primary'] = 'device_id';
 	$data['unique_keys'] = array('name' => 'hostname_snmp_port_site_id', 'columns' => 'hostname`,`snmp_port`,`site_id');
 	$data['keys'][] = array('name' => 'site_id', 'columns' => 'site_id');
@@ -1048,6 +1062,8 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'total_user_ports', 'type' => 'int(11)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'total_oper_ports', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'total_trunk_ports', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
+	$data['columns'][] = array('name' => 'skip_vlans', 'type' => 'text', 'NULL' => true);
+	$data['columns'][] = array('name' => 'scan_vlans', 'type' => 'text', 'NULL' => true);
 	$data['primary'] = 'site_id';
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';

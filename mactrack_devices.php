@@ -93,7 +93,8 @@ function form_mactrack_save() {
 			get_nfilter_request_var('snmp_timeout'), get_nfilter_request_var('snmp_retries'),
 			get_nfilter_request_var('max_oids'), get_nfilter_request_var('ignorePorts'), get_nfilter_request_var('notes'),
 			get_nfilter_request_var('user_name'), get_nfilter_request_var('user_password'), get_nfilter_request_var('term_type'),
-			get_nfilter_request_var('private_key_path'), (isset_request_var('disabled') ? get_nfilter_request_var('disabled') : ''));
+			get_nfilter_request_var('private_key_path'), (isset_request_var('disabled') ? get_nfilter_request_var('disabled') : ''),
+			get_nfilter_request_var('scan_trunk_port'), get_nfilter_request_var('device_type_id'));
 
 		header('Location: mactrack_devices.php?action=edit&header=false&device_id=' . (empty($device_id) ? get_filter_request_var('device_id') : $device_id));
 	}

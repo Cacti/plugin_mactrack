@@ -925,6 +925,7 @@ function mactrack_config_arrays() {
 
 	$mactrack_poller_frequencies = array(
 		'disabled' => __('Disabled', 'mactrack'),
+		'5'        => __('Every %d Minutes', 5, 'mactrack'),
 		'10'       => __('Every %d Minutes', 10, 'mactrack'),
 		'15'       => __('Every %d Minutes', 15, 'mactrack'),
 		'20'       => __('Every %d Minutes', 20, 'mactrack'),
@@ -1273,6 +1274,15 @@ function mactrack_config_form () {
 		'none_value' => __('None', 'mactrack'),
 		'sql' => 'select id,CONCAT_WS("",description," (",hostname,")") as name from host order by description,hostname'
 		),
+	'device_type_id' => array(
+		'method' => 'drop_sql',
+		'friendly_name' => 'Device Type',
+		'description' => 'Choose the type of device.',
+		'value' => '|arg1:device_type_id|',
+		'default' => 0,
+		'none_value' => 'Not Detected',
+		'sql' => 'select device_type_id as id,description as name from mac_track_device_types order by description'
+		),
 	'scan_type' => array(
 		'method' => 'drop_array',
 		'friendly_name' => __('Scan Type', 'mactrack'),
@@ -1316,6 +1326,17 @@ function mactrack_config_form () {
 		'friendly_name' => __('Ports to Ignore', 'mactrack'),
 		'description' => __('Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space \':\', \'|\', \' \'.  For example, \'Fa0/1: Fa1/23\' or \'Fa0/1 Fa1/23\' would be acceptable for some manufacturers switch types.', 'mactrack'),
 		'value' => '|arg1:ignorePorts|',
+		'default' => '',
+		'class' => 'textAreaNotes',
+		'textarea_rows' => '3',
+		'textarea_cols' => '80',
+		'max_length' => '255'
+		),
+	'scan_trunk_port' => array(
+		'method' => 'textarea',
+		'friendly_name' => 'Trunk Ports to Scan',
+		'description' => 'A comma delimited list of Port Number to be scanned.  Some VMware network port will be configured with 802.1Q',
+		'value' => '|arg1:scan_trunk_port|',
 		'default' => '',
 		'class' => 'textAreaNotes',
 		'textarea_rows' => '3',
@@ -1464,6 +1485,26 @@ function mactrack_config_form () {
 		'value' => '|arg1:site_info|',
 		'max_length' => '255'
 		),
+	'skip_vlans' => array(
+		'method' => 'textarea',
+		'friendly_name' => 'VLAN ID to Skipped Scan',
+		'class' => 'textAreaNotes',
+		'textarea_rows' => '5',
+		'textarea_cols' => '80',
+		'description' => 'A comma delimited list of VLAN ID always forced to be skipped scanning.',
+		'value' => '|arg1:skip_vlans|',
+		'max_length' => '1024'
+		),
+	'scan_vlans' => array(
+		'method' => 'textarea',
+		'friendly_name' => 'VLAN ID to Scan',
+		'class' => 'textAreaNotes',
+		'textarea_rows' => '5',
+		'textarea_cols' => '80',
+		'description' => 'A comma delimited list of VLAN ID to be scaned',
+		'value' => '|arg1:scan_vlans|',
+		'max_length' => '1024'
+	),
 	'site_id' => array(
 		'method' => 'hidden_zero',
 		'value' => '|arg1:site_id|'
