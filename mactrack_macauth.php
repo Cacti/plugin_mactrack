@@ -90,7 +90,7 @@ function form_actions() {
 		$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
 
 		if ($selected_items != false) {
-			if (get_request_var('drp_action') == '1') { /* delete */
+			if (get_request_var('drp_action') == '1') { /* Delete */
 				for ($i=0; $i<cacti_sizeof($selected_items); $i++) {
 					api_mactrack_maca_remove($selected_items[$i]);
 				}
@@ -134,7 +134,7 @@ function form_actions() {
 	} else {
 		$save_html = "<input type='submit' name='save' value='" . __esc('Continue', 'mactrack') . "'>";
 
-		if (get_request_var('drp_action') == '1') { /* delete */
+		if (get_request_var('drp_action') == '1') { /* Delete */
 			print "<tr>
 				<td class='textArea'>
 					<p>" . __('Click \'Continue\' to delete the following Authorized Mac\'s?', 'mactrack') . "</p>
@@ -194,13 +194,17 @@ function api_mactrack_maca_remove($mac_id) {
 		WHERE mac_id = ?',
 		array($mac_id));
 
-	db_execute('UPDATE mac_track_ports
-		SET authorized=0
-		WHERE mac_address LIKE "' . $mac_address . '%"');
+	db_execute_prepared('DELETE FROM mac_track_ips
+		WHERE mac_address="' . $mac_address . '"');
 
-	db_execute('UPDATE mac_track_aggregated_ports
-		SET authorized=0
-		WHERE mac_address LIKE "' . $mac_address . '%"');
+	db_execute_prepared('DELETE FROM mac_track_ports
+		WHERE mac_address="' . $mac_address . '"');
+
+	db_execute_prepared('DELETE FROM mac_track_aggregated_ports
+		WHERE mac_address="' . $mac_address . '"');
+
+	cacti_log('AUDIT: MAC Address `' . $mac_address . '` is deleted from MacAuth by ' .
+		db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])), false, 'MACTRACK');
 }
 
 /* ---------------------
