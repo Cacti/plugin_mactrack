@@ -118,23 +118,34 @@ if (!$test_mode) {
 }
 
 /* get device information */
-$device = db_fetch_row_prepared('SELECT * FROM mac_track_devices WHERE device_id = ?', array($device_id));
-if (cacti_sizeof($device) == 0) {
+$device = db_fetch_row_prepared('SELECT *
+	FROM mac_track_devices
+	WHERE device_id = ?',
+	array($device_id));
+
+if (!cacti_sizeof($device)) {
 	mactrack_debug("ERROR: Device with Id of '$device_id' not found in database.  Can not continue.");
 	db_process_remove($device_id);
 	exit;
 }
 
 /* get the site name */
-$site = db_fetch_cell_prepared('SELECT site_name FROM mac_track_sites WHERE site_id = ?', array($device['site_id']));
-if ($site != '') {
+$site = db_fetch_cell_prepared('SELECT site_name
+	FROM mac_track_sites
+	WHERE site_id = ?',
+	array($device['site_id']));
+
+if ($site == '') {
 	mactrack_debug('ERROR: Site not found in database. Can not continue.');
 	db_process_remove($device_id);
 	exit;
 }
 
 /* get device types */
-$device_types = db_fetch_assoc("SELECT * FROM mac_track_device_types where disabled !='on'");
+$device_types = db_fetch_assoc("SELECT *
+	FROM mac_track_device_types
+	WHERE disabled != 'on'");
+
 if (cacti_sizeof($device_types) == 0) {
 	mactrack_debug('ERROR: No device types have been found.');
 	db_process_remove($device_id);
