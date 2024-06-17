@@ -206,7 +206,7 @@ function form_mactrack_actions() {
 							}
 						}
 
-						if (strlen($updates)) {
+						if ($updates != '') {
 							db_execute_prepared('UPDATE mac_track_devices
 								SET ' . $updates . '
 								WHERE device_id=?',
@@ -361,7 +361,7 @@ function form_mactrack_actions() {
 		<td colspan='2' align='right' class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($device_array) ? serialize($device_array) : '') . "'>
-			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . (strlen($save_html) ? "
+			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . ($save_html != '' ? "
 			<input type='button' name='cancel' onClick='cactiReturnTo()' value='" . __esc('Cancel', 'mactrack') . "'>
 			$save_html" : "<input type='button' onClick='cactiReturnTo()' name='cancel' value='" . __esc('Return', 'mactrack') . "'>") . "
 		</td>
@@ -631,7 +631,7 @@ function mactrack_device_import_processor(&$devices) {
 								$insert_columns[] = $j;
 								$first_column = false;
 
-								if (strlen($update_suffix)) {
+								if ($update_suffix != '') {
 									$update_suffix .= ", $line_item=VALUES($line_item)";
 								} else {
 									$update_suffix .= " ON DUPLICATE KEY UPDATE $line_item=VALUES($line_item)";
@@ -650,7 +650,7 @@ function mactrack_device_import_processor(&$devices) {
 								$insert_columns[] = $j;
 								$first_column = false;
 
-								if (strlen($update_suffix)) {
+								if ($update_suffix != '') {
 									$update_suffix .= ", $line_item=VALUES($line_item)";
 								} else {
 									$update_suffix .= " ON DUPLICATE KEY UPDATE $line_item=VALUES($line_item)";
@@ -669,7 +669,7 @@ function mactrack_device_import_processor(&$devices) {
 								$insert_columns[] = $j;
 								$first_column = false;
 
-								if (strlen($update_suffix)) {
+								if ($update_suffix != '') {
 									$update_suffix .= ", $line_item=VALUES($line_item)";
 								} else {
 									$update_suffix .= " ON DUPLICATE KEY UPDATE $line_item=VALUES($line_item)";
@@ -688,7 +688,7 @@ function mactrack_device_import_processor(&$devices) {
 								$insert_columns[] = $j;
 								$first_column = false;
 
-								if (strlen($update_suffix)) {
+								if ($update_suffix != '') {
 									$update_suffix .= ", $line_item=VALUES($line_item)";
 								} else {
 									$update_suffix .= " ON DUPLICATE KEY UPDATE $line_item=VALUES($line_item)";
@@ -706,7 +706,7 @@ function mactrack_device_import_processor(&$devices) {
 								$insert_columns[] = $j;
 								$first_column = false;
 
-								if (strlen($update_suffix)) {
+								if ($update_suffix != '') {
 									$update_suffix .= ", $line_item=VALUES($line_item)";
 								} else {
 									$update_suffix .= " ON DUPLICATE KEY UPDATE $line_item=VALUES($line_item)";
@@ -749,7 +749,7 @@ function mactrack_device_import_processor(&$devices) {
 							}
 
 							if ($j == $save_site_id_id || $j == $save_snmp_port_id || $j == $save_host_id ) {
-								if (strlen($sql_where)) {
+								if ($sql_where != '') {
 									switch($j) {
 									case $save_site_id_id:
 										$sql_where .= " AND site_id='$line_item'";
@@ -897,7 +897,7 @@ function mactrack_device_edit() {
 							$device['snmp_timeout'] != $old_device['snmp_timeout'] ||
 							$device['snmp_retries'] != $old_device['snmp_retries']
 							) {
-							
+
 							db_execute_prepared('UPDATE mac_track_devices
 								SET device_type_id = ?, scan_type = ?, snmp_version = ?,
 								snmp_readstring = ?, snmp_port = ?, snmp_timeout = ?, snmp_retries = ?,
@@ -961,7 +961,7 @@ function mactrack_device_edit() {
 function mactrack_get_devices(&$sql_where, $rows, $apply_limits = true) {
 	/* form the 'where' clause for our main sql query */
 	if (get_request_var('filter') != '') {
-		$sql_where = (strlen($sql_where) ? ' AND ': 'WHERE ') . "(mtd.hostname like '%" . get_request_var('filter') . "%'
+		$sql_where = ($sql_where != '' ? ' AND ': 'WHERE ') . "(mtd.hostname like '%" . get_request_var('filter') . "%'
 			OR mtd.device_name like '%" . get_request_var('filter') . "%'
 			OR mtd.notes like '%" . get_request_var('filter') . "%')";
 	}
@@ -969,33 +969,33 @@ function mactrack_get_devices(&$sql_where, $rows, $apply_limits = true) {
 	if (get_request_var('status') == '-1') {
 		/* Show all items */
 	} elseif (get_request_var('status') == '-2') {
-		$sql_where .= (strlen($sql_where) ? ' AND ': 'WHERE ') . "(mtd.disabled='on')";
+		$sql_where .= ($sql_where != '' ? ' AND ': 'WHERE ') . "(mtd.disabled='on')";
 	} elseif (get_request_var('status') == '5') {
-		$sql_where .= (strlen($sql_where) ? ' AND ': 'WHERE ') . '(mtd.host_id=0)';
+		$sql_where .= ($sql_where != '' ? ' AND ': 'WHERE ') . '(mtd.host_id=0)';
 	} else {
-		$sql_where .= (strlen($sql_where) ? ' AND ': 'WHERE ') . '(mtd.snmp_status=' . get_request_var('status') . " AND mtd.disabled = '')";
+		$sql_where .= ($sql_where != '' ? ' AND ': 'WHERE ') . '(mtd.snmp_status=' . get_request_var('status') . " AND mtd.disabled = '')";
 	}
 
 	if (get_request_var('type_id') == '-1') {
 		/* Show all items */
 	} else {
-		$sql_where .= (strlen($sql_where) ? ' AND ': 'WHERE ') . '(mtd.scan_type=' . get_request_var('type_id') . ')';
+		$sql_where .= ($sql_where != '' ? ' AND ': 'WHERE ') . '(mtd.scan_type=' . get_request_var('type_id') . ')';
 	}
 
 	if (get_request_var('device_type_id') == '-1') {
 		/* Show all items */
 	} elseif (get_request_var('device_type_id') == '-2') {
-		$sql_where .= (strlen($sql_where) ? ' AND ': 'WHERE ') . "(mtdt.description='')";
+		$sql_where .= ($sql_where != '' ? ' AND ': 'WHERE ') . "(mtdt.description='')";
 	} else {
-		$sql_where .= (strlen($sql_where) ? ' AND ': 'WHERE ') . '(mtd.device_type_id=' . get_request_var('device_type_id') . ')';
+		$sql_where .= ($sql_where != '' ? ' AND ': 'WHERE ') . '(mtd.device_type_id=' . get_request_var('device_type_id') . ')';
 	}
 
 	if (get_request_var('site_id') == '-1') {
 		/* Show all items */
 	} elseif (get_request_var('site_id') == '-2') {
-		$sql_where .= (strlen($sql_where) ? ' AND ': 'WHERE ') . '(mts.site_id IS NULL)';
+		$sql_where .= ($sql_where != '' ? ' AND ': 'WHERE ') . '(mts.site_id IS NULL)';
 	} elseif (!isempty_request_var('site_id')) {
-		$sql_where .= (strlen($sql_where) ? ' AND ': 'WHERE ') . '(mtd.site_id=' . get_request_var('site_id') . ')';
+		$sql_where .= ($sql_where != '' ? ' AND ': 'WHERE ') . '(mtd.site_id=' . get_request_var('site_id') . ')';
 	}
 
 	$sql_order = get_order_string();

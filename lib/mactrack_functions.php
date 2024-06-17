@@ -151,7 +151,7 @@ function valid_snmp_device(&$device) {
 	$snmp_sysObjectID = str_replace('OID: ', '', $snmp_sysObjectID);
 	$snmp_sysObjectID = str_replace('.iso', '.1', $snmp_sysObjectID);
 
-	if ((strlen($snmp_sysObjectID) > 0) &&
+	if ($snmp_sysObjectID != '' &&
 		$snmp_sysObjectID != 'U' &&
 		(!substr_count($snmp_sysObjectID, 'No Such Object')) &&
 		(!substr_count($snmp_sysObjectID, 'Error In'))) {
@@ -189,7 +189,7 @@ function valid_snmp_device(&$device) {
 				$snmp_sysObjectID = str_replace('OID: ', '', $snmp_sysObjectID);
 				$snmp_sysObjectID = str_replace('.iso', '.1', $snmp_sysObjectID);
 
-				if ((strlen($snmp_sysObjectID) > 0) &&
+				if ($snmp_sysObjectID != '' &&
 					$snmp_sysObjectID != 'U' &&
 					(!substr_count($snmp_sysObjectID, 'No Such Object')) &&
 					(!substr_count($snmp_sysObjectID, 'Error In'))) {
@@ -223,7 +223,7 @@ function valid_snmp_device(&$device) {
 			$device['snmp_priv_protocol'], $device['snmp_context'],
 			$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
 
-		if (strlen($snmp_sysName) > 0) {
+		if ($snmp_sysName != '') {
 			$snmp_sysName = trim(strtr($snmp_sysName,'"',' '));
 			$device['snmp_sysName'] = $snmp_sysName;
 		}
@@ -236,7 +236,7 @@ function valid_snmp_device(&$device) {
 			$device['snmp_priv_protocol'], $device['snmp_context'],
 			$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
 
-		if (strlen($snmp_sysLocation) > 0) {
+		if ($snmp_sysLocation != '') {
 			$snmp_sysLocation = trim(strtr($snmp_sysLocation,'"',' '));
 			$device['snmp_sysLocation'] = $snmp_sysLocation;
 		}
@@ -249,7 +249,7 @@ function valid_snmp_device(&$device) {
 			$device['snmp_priv_protocol'], $device['snmp_context'],
 			$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
 
-		if (strlen($snmp_sysContact) > 0) {
+		if ($snmp_sysContact != '') {
 			$snmp_sysContact = trim(strtr($snmp_sysContact,'"',' '));
 			$device['snmp_sysContact'] = $snmp_sysContact;
 		}
@@ -262,7 +262,7 @@ function valid_snmp_device(&$device) {
 			$device['snmp_priv_protocol'], $device['snmp_context'],
 			$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
 
-		if (strlen($snmp_sysDescr) > 0) {
+		if ($snmp_sysDescr != '') {
 			$snmp_sysDescr = trim(strtr($snmp_sysDescr,'"',' '));
 			$device['snmp_sysDescr'] = $snmp_sysDescr;
 		}
@@ -275,7 +275,7 @@ function valid_snmp_device(&$device) {
 			$device['snmp_priv_protocol'], $device['snmp_context'],
 			$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
 
-		if (strlen($snmp_sysUptime) > 0) {
+		if ($snmp_sysUptime != '') {
 			$snmp_sysUptime = trim(strtr($snmp_sysUptime,'"',' '));
 			$device['snmp_sysUptime'] = $snmp_sysUptime;
 		}
@@ -302,7 +302,7 @@ function find_scanning_function(&$device, &$device_types) {
 				$parts = explode('*', $device_type['sysDescr_match']);
 				if (cacti_sizeof($parts)) {
 					foreach($parts as $part) {
-						if (strlen($part) > 0) {
+						if ($part != '') {
 							if (substr_count($device['snmp_sysDescr'],$part) > 0) {
 								$sysDescr_match = true;
 							} else {
@@ -312,7 +312,7 @@ function find_scanning_function(&$device, &$device_types) {
 					}
 				}
 			} else {
-				if (strlen($device_type['sysDescr_match']) == 0) {
+				if ($device_type['sysDescr_match'] != '') {
 					$sysDescr_match = true;
 				} else {
 					if (substr_count($device['snmp_sysDescr'], $device_type['sysDescr_match'])) {
@@ -329,7 +329,7 @@ function find_scanning_function(&$device, &$device_types) {
 				$parts = explode('*', $device_type['sysObjectID_match']);
 				if (cacti_sizeof($parts)) {
 					foreach($parts as $part) {
-						if (strlen($part) > 0) {
+						if ($part != '') {
 							if (substr_count($device['snmp_sysObjectID'],$part) > 0) {
 								$sysObjectID_match = true;
 							} else {
@@ -339,7 +339,7 @@ function find_scanning_function(&$device, &$device_types) {
 					}
 				}
 			} else {
-				if (strlen($device_type['sysObjectID_match']) == 0) {
+				if ($device_type['sysObjectID_match'] != '') {
 					$sysObjectID_match = true;
 				} else {
 					if (substr_count($device['snmp_sysObjectID'], $device_type['sysObjectID_match'])) {
@@ -939,7 +939,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 
 	mactrack_debug('ifInterfaces assembly complete: ' . strlen($insert_prefix . $insert_vals . $insert_suffix));
 
-	if (strlen($insert_vals)) {
+	if ($insert_vals != '') {
 		/* add/update records in the database */
 		db_execute($insert_prefix . $insert_vals . $insert_suffix);
 
@@ -1044,7 +1044,7 @@ function mactrack_find_host_graphs($device_id, $host_id) {
 			foreach($interfaces as $key => $data) {
 				if (isset($output_array[$key])) {
 					foreach($output_array[$key] as $local_graph_id => $graph_details) {
-						$sql .= (strlen($sql) ? ', (' : '(') .
+						$sql .= ($sql != '' ? ', (' : '(') .
 							$data['ifIndex']   . ",'" .
 							$key               . "'," .
 							$local_graph_id    . ','  .
@@ -1410,7 +1410,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 function get_ios_vrf_arp_table($oid, &$device, $snmp_readstring = '', $hex = false) {
 	$return_array = array();
 
-	if (!strlen($snmp_readstring)) {
+	if ($snmp_readstring == '') {
 		$snmp_readstring = $device['snmp_readstring'];
 	}
 
@@ -1807,15 +1807,15 @@ function mactrack_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 
 	/* needs a byte to indicate the length of each segment of the request */
 	for ($x=3; $x>=0; $x--) {
-		switch (strlen($octets[$x])) {
-		case 1: // 1 byte long segment
-			$data .= "\1"; break;
-		case 2: // 2 byte long segment
-			$data .= "\2"; break;
-		case 3: // 3 byte long segment
-			$data .= "\3"; break;
-		default: // segment is too big, invalid IP
-			return 'ERROR';
+		switch ($octets[$x] != '') {
+			case 1: // 1 byte long segment
+				$data .= "\1"; break;
+			case 2: // 2 byte long segment
+				$data .= "\2"; break;
+			case 3: // 3 byte long segment
+				$data .= "\3"; break;
+			default: // segment is too big, invalid IP
+				return 'ERROR';
 		}
 
 		/* and the segment itself */
@@ -1919,7 +1919,7 @@ function get_link_port_status(&$device) {
 function xform_stripped_oid($oid, &$device, $snmp_readstring = '', $hex = false) {
 	$return_array = array();
 
-	if (!strlen($snmp_readstring)) {
+	if ($snmp_readstring == '') {
 		$snmp_readstring = $device['snmp_readstring'];
 	}
 
@@ -2004,7 +2004,7 @@ function xform_mac_address($mac_address) {
 
 	$separator = read_config_option('mt_mac_delim');
 
-	if (strlen($mac_address) == 0) {
+	if ($mac_address == '') {
 		$mac_address = 'NOT USER';
 	} elseif (strlen($mac_address) > 10) { /* return is in ascii */
 		$max_address = str_replace(
@@ -2275,13 +2275,12 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 	/* output details to database */
 	if (cacti_sizeof($port_array)) {
 		foreach($port_array as $port_value) {
-			if (($port_value['port_number'] <> 'NOT USER') &&
-				(($port_value['mac_address'] <> 'NOT USER') && (strlen($port_value['mac_address']) > 0))){
-
+			if ($port_value['port_number'] <> 'NOT USER' && $port_value['mac_address'] <> 'NOT USER' && $port_value['mac_address'] != '') {
 				$mac_authorized = db_check_auth($port_value['mac_address']);
-				mactrack_debug('MAC Address \'' . $port_value['mac_address'] . '\' on device \'' . $device['device_name'] . '\' is ' . (strlen($mac_authorized) ? '':'NOT') . ' Authorized');
 
-				if (strlen($mac_authorized)) {
+				mactrack_debug('MAC Address \'' . $port_value['mac_address'] . '\' on device \'' . $device['device_name'] . '\' is ' . ($mac_authorized != '' ? '':'NOT') . ' Authorized');
+
+				if ($mac_authorized != '') {
 					$authorized_mac = 1;
 				} else {
 					$authorized_mac = 0;
@@ -2496,7 +2495,7 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 		if (cacti_sizeof($oui_database)) {
 			foreach ($oui_database as $row) {
 				$row = str_replace("\t", ' ', $row);
-				if (($begin_vendor) && (strlen(trim($row)) == 0)) {
+				if ($begin_vendor && trim($row) == '') {
 					if (substr($vendor_address,0,1) == ',') $vendor_address = substr($vendor_address,1);
 					if (substr($vendor_name,0,1) == ',')    $vendor_name    = substr($vendor_name,1);
 
@@ -2693,7 +2692,7 @@ function mactrack_interface_actions($device_id, $ifIndex, $show_rescan = true) {
 			$url  = $config['url_path'] . 'plugins/mactrack/mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=';
 			$list = '';
 			foreach($graphs as $graph) {
-				$list .= (strlen($list) ? ',': '') . $graph['local_graph_id'];
+				$list .= ($list != '' ? ',': '') . $graph['local_graph_id'];
 			}
 
 			$row .= "<a class='pic' href='" . htmlspecialchars($url . $list . '&page=1') . "' title='" .  __esc('View Non Interface Graphs', 'mactrack') . "'><i class='mtChart fas fa-chart-line'></i></a>";
@@ -2712,7 +2711,7 @@ function mactrack_interface_actions($device_id, $ifIndex, $show_rescan = true) {
 			$url  = $config['url_path'] . 'plugins/mactrack/mactrack_view_graphs.php?action=preview&report=graphs&style=selective&graph_list=';
 			$list = '';
 			foreach($graphs as $graph) {
-				$list .= (strlen($list) ? ',': '') . $graph['local_graph_id'];
+				$list .= ($list != '' ? ',': '') . $graph['local_graph_id'];
 			}
 
 			$row .= "<a class='pic' href='" . htmlspecialchars($url . $list . '&page=1') . "' title='" . __esc('View Interface Graphs', 'mactrack') . "'><i class='mtChart fas fa-chart-line'></i></a>";
@@ -3055,7 +3054,9 @@ function mactrack_create_sql_filter($filter, $fields) {
 	if (!cacti_sizeof($fields)) return;
 
 	/* the filter must be non-blank */
-	if (!strlen($filter)) return;
+	if ($filter == '') {
+		return;
+	}
 
 	$elements = explode(' ', $filter);
 
@@ -3072,7 +3073,7 @@ function mactrack_create_sql_filter($filter, $fields) {
 
 		$field_no = 1;
 		foreach ($fields as $field) {
-			if (($field_no == 1) && (strlen($query) > 0)) {
+			if ($field_no == 1 && $query != '') {
 				$query .= ') AND (';
 			} elseif ($field_no == 1) {
 				$query .= '(';
@@ -3275,7 +3276,7 @@ function mactrack_get_vendor_name($mac) {
 
 	$vendor_name = db_fetch_cell_prepared('SELECT vendor_name FROM mac_track_oui_database WHERE vendor_mac = ?', array($vendor_mac));
 
-	if (strlen($vendor_name)) {
+	if ($vendor_name != '') {
 		return $vendor_name;
 	} else {
 		return __('Unknown', 'mactrack');

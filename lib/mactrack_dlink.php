@@ -231,21 +231,24 @@ function dlink_convert_macs ($oldmac){
 	if ($oldmac[0] != '.') {
 		$oldmac = '.' . $oldmac;
 	}
-	$oldmac=substr($oldmac,stripos($oldmac,'.')+1);
-	$oldmac=substr($oldmac,stripos($oldmac,'.')+1);
-	$piece = explode('.', $oldmac);
+
+	$oldmac =substr($oldmac,stripos($oldmac,'.')+1);
+	$oldmac =substr($oldmac,stripos($oldmac,'.')+1);
+	$piece  = explode('.', $oldmac);
 	$newmac = '';
+
 	for ($i = 0; $i < 6; $i++){
 		$newmac = $newmac . dec2hex($piece[$i],2) . ':';
 	}
-	$newmac = substr($newmac,0,strlen($newmac)-1);
+
+	$newmac = substr($newmac, 0, strlen($newmac)-1);
 
 	return $newmac;
-
-	}
+}
 
 function dec2hex($number, $length) {
-	$hexval='';
+	$hexval = '';
+
 	while ($number>0) {
 		$remainder=$number%16;
 		if ($remainder<10)
@@ -264,8 +267,12 @@ function dec2hex($number, $length) {
 			$hexval='f'.$hexval;
 		$number=floor($number/16);
 	}
-	while (strlen($hexval)<$length) $hexval='0'.$hexval;
-//this is just to add zero's at the beginning to make hexval a certain length
+
+	while (strlen($hexval) < $length) {
+		$hexval = '0' . $hexval;
+	}
+
+	//this is just to add zero's at the beginning to make hexval a certain length
 	return $hexval;
 }
 

@@ -127,7 +127,7 @@ if (cacti_sizeof($device) == 0) {
 
 /* get the site name */
 $site = db_fetch_cell_prepared('SELECT site_name FROM mac_track_sites WHERE site_id = ?', array($device['site_id']));
-if (strlen($site) == 0) {
+if ($site != '') {
 	mactrack_debug('ERROR: Site not found in database. Can not continue.');
 	db_process_remove($device_id);
 	exit;

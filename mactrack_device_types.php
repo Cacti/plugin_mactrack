@@ -310,7 +310,7 @@ function form_actions() {
 		<td colspan='2' align='right' class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($device_types_array) ? serialize($device_types_array) : '') . "'>
-			<input type='hidden' name='drp_action' value='" . get_nfilter_request_var('drp_action') . "'>" . (strlen($save_html) ? "
+			<input type='hidden' name='drp_action' value='" . get_nfilter_request_var('drp_action') . "'>" . ($save_html != '' ? "
 			<input type='button' onClick='cactiReturnTo()' name='cancel' value='" . __esc('Cancel', 'mactrack') . "'>
 			$save_html" : "<input type='submit' onClick='cactiReturnTo()' name='cancel' value='" . __esc('Return') . "'>") . "
 		</td>
@@ -609,7 +609,7 @@ function mactrack_device_type_import_processor(&$device_types) {
 						$insert_columns[] = $j;
 						$first_column = false;
 
-						if (strlen($update_suffix)) {
+						if ($update_suffix != '') {
 							$update_suffix .= ", $line_item=VALUES($line_item)";
 						} else {
 							$update_suffix .= " ON DUPLICATE KEY UPDATE $line_item=VALUES($line_item)";
@@ -629,7 +629,7 @@ function mactrack_device_type_import_processor(&$device_types) {
 						$insert_columns[] = $j;
 						$first_column = false;
 
-						if (strlen($update_suffix)) {
+						if ($update_suffix != '') {
 							$update_suffix .= ", $line_item=VALUES($line_item)";
 						} else {
 							$update_suffix .= " ON DUPLICATE KEY UPDATE $line_item=VALUES($line_item)";
@@ -649,7 +649,7 @@ function mactrack_device_type_import_processor(&$device_types) {
 						$insert_columns[] = $j;
 						$first_column = false;
 
-						if (strlen($update_suffix)) {
+						if ($update_suffix != '') {
 							$update_suffix .= ", $line_item=VALUES($line_item)";
 						} else {
 							$update_suffix .= " ON DUPLICATE KEY UPDATE $line_item=VALUES($line_item)";
@@ -670,7 +670,7 @@ function mactrack_device_type_import_processor(&$device_types) {
 						$insert_columns[] = $j;
 						$first_column = false;
 
-						if (strlen($update_suffix)) {
+						if ($update_suffix != '') {
 							$update_suffix .= ", $line_item=VALUES($line_item)";
 						} else {
 							$update_suffix .= " ON DUPLICATE KEY UPDATE $line_item=VALUES($line_item)";
@@ -687,7 +687,7 @@ function mactrack_device_type_import_processor(&$device_types) {
 						$save_vendor_id = $j;
 						$first_column = false;
 
-						if (strlen($update_suffix)) {
+						if ($update_suffix != '') {
 							$update_suffix .= ", $line_item=VALUES($line_item)";
 						} else {
 							$update_suffix .= " ON DUPLICATE KEY UPDATE $line_item=VALUES($line_item)";
@@ -704,7 +704,7 @@ function mactrack_device_type_import_processor(&$device_types) {
 						$save_description_id = $j;
 						$first_column = false;
 
-						if (strlen($update_suffix)) {
+						if ($update_suffix != '') {
 							$update_suffix .= ", $line_item=VALUES($line_item)";
 						} else {
 							$update_suffix .= " ON DUPLICATE KEY UPDATE $line_item=VALUES($line_item)";
@@ -744,7 +744,7 @@ function mactrack_device_type_import_processor(&$device_types) {
 					}
 
 					if ($j == $device_type_id || $j == $sysDescr_match_id || $j == $sysObjectID_match_id ) {
-						if (strlen($sql_where)) {
+						if ($sql_where != '') {
 							switch($j) {
 							case $device_type_id:
 								$sql_where .= " AND device_type='$line_item'";
@@ -889,19 +889,19 @@ function mactrack_get_device_types(&$sql_where, $rows, $apply_limits = true) {
 	if (get_request_var('vendor') == 'All') {
 		/* Show all items */
 	} else {
-		$sql_where .= (strlen($sql_where) ? ' AND ': ' WHERE ') . "(mtdt.vendor='" . get_request_var('vendor') . "')";
+		$sql_where .= ($sql_where != '' ? ' AND ': ' WHERE ') . "(mtdt.vendor='" . get_request_var('vendor') . "')";
 	}
 
 	if (get_request_var('type_id') == '-1') {
 		/* Show all items */
 	} else {
-		$sql_where .= (strlen($sql_where) ? ' AND ': ' WHERE ') . "(mtdt.device_type=" . get_request_var('type_id') . ")";
+		$sql_where .= ($sql_where != '' ? ' AND ': ' WHERE ') . "(mtdt.device_type=" . get_request_var('type_id') . ")";
 	}
 
 	if (get_request_var('enabled') == '-1') {
 		/* Show all items */
 	} else {
-		$sql_where .= (strlen($sql_where) ? ' AND ': ' WHERE ') . "(mtdt.disabled=" . (get_request_var('enabled') == 1 ? "''" : "'on'") . ")";
+		$sql_where .= ($sql_where != '' ? ' AND ': ' WHERE ') . "(mtdt.disabled=" . (get_request_var('enabled') == 1 ? "''" : "'on'") . ")";
 	}
 
 	$sql_order = get_order_string();
@@ -1099,7 +1099,7 @@ function mactrack_device_type_filter() {
 						<select id='enabled' onChange='applyFilter()'>
 							<option value='-1'<?php if (get_request_var('enabled') == '-1') print ' selected';?>><?php print __('All', 'mactrack');?></option>
 							<option value='1'<?php if (get_request_var('enabled') == '1') print ' selected';?>><?php print __('Yes', 'mactrack');?></option>
-							<option value='2'<?php if (get_request_var('enabled') == '2') print ' selected';?>><?php print __('No', 'mactrack');?></option>							
+							<option value='2'<?php if (get_request_var('enabled') == '2') print ' selected';?>><?php print __('No', 'mactrack');?></option>
 						</select>
 					</td>
 

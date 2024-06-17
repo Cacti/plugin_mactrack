@@ -244,7 +244,7 @@ function get_base_dell_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp_rea
 }
 
 function dell_mac_address_convert($mac_address) {
-	if (strlen($mac_address) == 0) {
+	if ($mac_address == '') {
 		$mac_address = 'NOT USER';
 	} elseif (strlen($mac_address) > 10) { /* return is in ascii */
 		$mac_address = trim(str_replace('"', '', $mac_address));

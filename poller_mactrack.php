@@ -442,9 +442,10 @@ function collect_mactrack_data($start, $site_id = 0) {
 							$line = explode ('	', $line);
 
 							$mac_ad = explode(':',$line[0]);
-							for ($k=0;$k<6;$k++) {
+							for ($k = 0; $k < 6; $k++) {
 								$mac_ad[$k] = strtoupper($mac_ad[$k]);
-								if (1 == strlen($mac_ad[$k])) {
+
+								if (strlen($mac_ad[$k]) == 1) {
 									$mac_ad[$k] = '0' . $mac_ad[$k];
 								}
 							}

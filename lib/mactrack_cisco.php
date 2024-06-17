@@ -343,42 +343,50 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 	$active_vlans = array();
 
 	$skip_vlans = array();
-	$sql_result = db_fetch_cell("SELECT skip_vlans FROM mac_track_sites WHERE site_name ='" . $site . "'");
-	if (strlen($sql_result)) {
-		$skip_vlans = explode(",", $sql_result);
+	$sql_result = db_fetch_cell_prepared('SELECT skip_vlans
+		FROM mac_track_sites
+		WHERE site_name = ?',
+		array($site));
+
+	if ($sql_result != '') {
+		$skip_vlans = explode(',', $sql_result);
 	}
 
 	$scan_vlans = array();
-	$sql_result = db_fetch_cell("SELECT scan_vlans FROM mac_track_sites WHERE site_name ='" . $site . "'");
-	if (strlen($sql_result)) {
-		$scan_vlans = explode(",", $sql_result);
+	$sql_result = db_fetch_cell_prepared('SELECT scan_vlans
+		FROM mac_track_sites
+		WHERE site_name = ?',
+		array($site));
+
+	if ($sql_result != '') {
+		$scan_vlans = explode(',', $sql_result);
 		$scan_vlans = array_merge(array_diff($scan_vlans, $skip_vlans));
 	}
 
 	$scan_trunk_port = array();
-	if (strlen($device["scan_trunk_port"])) {
-		$scan_trunk_port = explode(",", $device["scan_trunk_port"]);
+	if ($device['scan_trunk_port'] != '') {
+		$scan_trunk_port = explode(',', $device['scan_trunk_port']);
 	}
 
 	if (cacti_sizeof($vlan_ids)) {
 		foreach ($vlan_ids as $vlan_number => $vlanStatus) {
 			$vlanName = mactrack_arr_key($vlan_names, $vlan_number);
 
-			if ($vlanName == "") {
-				cacti_log("Empty VLAN Name: " . $device["device_name"]);
+			if ($vlanName == '') {
+				cacti_log('Empty VLAN Name: ' . $device['device_name']);
 				continue;
 			}
 
 			// VLAN-ID to skip
 			if (in_array($vlan_number, $skip_vlans)) {
-				mactrack_debug("VLAN Analysis for VLAN: " . $vlan_number . "/" . $vlanName . " is skipped. *** ALWAYS FORCED ***");
+				mactrack_debug('VLAN Analysis for VLAN: ' . $vlan_number . '/' . $vlanName . ' is skipped. *** ALWAYS FORCED ***');
 				continue;
 			}
 
 			// VLAN-ID to scan
 			if (count($scan_vlans) > 0) {
 				if (!in_array($vlan_number, $scan_vlans)) {
-					mactrack_debug("VLAN Analysis for VLAN: " . $vlan_number . "/" . $vlanName . " is skipped. *** NOT CONFIGURED ***");
+					mactrack_debug('VLAN Analysis for VLAN: ' . $vlan_number . '/' . $vlanName . ' is skipped. *** NOT CONFIGURED ***');
 					continue;
 				}
 			}

@@ -156,7 +156,7 @@ function get_repeater_snmp_readstring(&$device) {
 		$device['snmp_priv_protocol'], $device['snmp_context'],
 		$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
 
-	if (strlen($active_ports) > 0) {
+	if ($active_ports != '') {
 		mactrack_debug('Repeater readstring is: ' . $device['snmp_readstring']);
 		return $device['snmp_readstring'];
 	} else {
@@ -172,7 +172,7 @@ function get_repeater_snmp_readstring(&$device) {
 					$device['snmp_priv_protocol'], $device['snmp_context'],
 					$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']);
 
-				if (strlen($active_ports) > 0) {
+				if ($active_ports != '') {
 					mactrack_debug('Repeater readstring is: ' . $snmp_readstring);
 					return $snmp_readstring;
 				}
@@ -188,7 +188,7 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 
 	$snmp_readstring = get_repeater_snmp_readstring($device);
 
-	if (strlen($snmp_readstring) > 0) {
+	if ($snmp_readstring != '') {
 		$ports_active = @cacti_snmp_get($device['hostname'], $snmp_readstring,
 			'.1.3.6.1.4.1.52.4.1.1.1.4.1.1.5.0', $device['snmp_version'],
 			$device['snmp_username'], $device['snmp_password'],

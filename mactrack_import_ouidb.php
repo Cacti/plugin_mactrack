@@ -74,9 +74,9 @@ if (cacti_sizeof($parms)) {
 	}
 }
 
-if (strlen($oui_file)) {
+if ($oui_file != '') {
 	if (!file_exists($oui_file)) {
-		echo "ERROR: OUI Database file does not exist\n";
+		print "ERROR: OUI Database file does not exist\n";
 	} else {
 		import_oui_database('ui', $oui_file);
 	}
