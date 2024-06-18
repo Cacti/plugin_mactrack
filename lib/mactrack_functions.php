@@ -1807,7 +1807,7 @@ function mactrack_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 
 	/* needs a byte to indicate the length of each segment of the request */
 	for ($x=3; $x>=0; $x--) {
-		switch ($octets[$x] != '') {
+		switch (strlen($octets[$x])) {
 			case 1: // 1 byte long segment
 				$data .= "\1"; break;
 			case 2: // 2 byte long segment
