@@ -312,7 +312,7 @@ function find_scanning_function(&$device, &$device_types) {
 					}
 				}
 			} else {
-				if ($device_type['sysDescr_match'] != '') {
+				if ($device_type['sysDescr_match'] == '') {
 					$sysDescr_match = true;
 				} else {
 					if (substr_count($device['snmp_sysDescr'], $device_type['sysDescr_match'])) {
@@ -339,7 +339,7 @@ function find_scanning_function(&$device, &$device_types) {
 					}
 				}
 			} else {
-				if ($device_type['sysObjectID_match'] != '') {
+				if ($device_type['sysObjectID_match'] == '') {
 					$sysObjectID_match = true;
 				} else {
 					if (substr_count($device['snmp_sysObjectID'], $device_type['sysObjectID_match'])) {

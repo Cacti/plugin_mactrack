@@ -1504,7 +1504,7 @@ function mactrack_config_form () {
 		'description' => 'A comma delimited list of VLAN ID to be scaned',
 		'value' => '|arg1:scan_vlans|',
 		'max_length' => '1024'
-	),
+		),
 	'site_id' => array(
 		'method' => 'hidden_zero',
 		'value' => '|arg1:site_id|'
