@@ -245,7 +245,7 @@ function mactrack_display_run_status() {
 	form_alternate_row();
 	print '<td width=200>' . __('Last Time Poller Started:', 'mactrack') . '</td><td>' . read_config_option('mt_scan_date', true) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Poller Frequency:', 'mactrack') . '</td><td>' . ($seconds_offset == 'disabled' ? __('N/A', 'mactrack') : $mactrack_poller_frequencies[$seconds_offset/60]) . '</td>';
+	print '<td width=200>' . __('Poller Frequency:', 'mactrack') . '</td><td>' . ($seconds_offset == 'disabled' ? __('N/A', 'mactrack') : $mactrack_poller_frequencies[$seconds_offset]) . '</td>';
 	form_alternate_row();
 	print '<td width=200>' . __('Approx. Next Runtime:', 'mactrack') . '</td><td>' . (empty($next_run_time) ? __('N/A', 'mactrack') : date('Y-m-d G:i:s', $next_run_time)) . '</td>';
 	form_alternate_row();
