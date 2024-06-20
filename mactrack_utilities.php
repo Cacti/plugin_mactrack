@@ -105,10 +105,10 @@ switch (get_request_var('action')) {
 function mactrack_display_run_status() {
 	global $config, $refresh_interval, $mactrack_poller_frequencies;
 
-	$seconds_offset = read_config_option('mt_collection_timing', true);
+	$collection_timing = read_config_option('mt_collection_timing', true);
 
-	if ($seconds_offset != 'disabled') {
-		$seconds_offset = $seconds_offset * 60;
+	if ($collection_timing != 'disabled') {
+		$seconds_offset = $collection_timing * 60;
 		/* find out if it's time to collect device information */
 		$base_start_time = read_config_option('mt_base_time', true);
 		$database_maint_time = read_config_option('mt_maint_time', true);
@@ -237,7 +237,7 @@ function mactrack_display_run_status() {
 
 	html_header(array(__('Current Process Status', 'mactrack')), 2);
 	form_alternate_row();
-	print '<td>' . __('The Device Tracking Poller is:', 'mactrack') . '</td><td>' . ($total_processes > 0 ? __('Running', 'mactrack') : ($seconds_offset == 'disabled' ? __('Disabled', 'mactrack') : __('Idle', 'mactrack'))) . '</td>';
+	print '<td>' . __('The Device Tracking Poller is:', 'mactrack') . '</td><td>' . ($total_processes > 0 ? __('Running', 'mactrack') : ($collection_timing == 'disabled' ? __('Disabled', 'mactrack') : __('Idle', 'mactrack'))) . '</td>';
 	if ($total_processes > 0) {
 		form_alternate_row();
 		print '<td>' . __('Running Processes:', 'mactrack') . '</td><td>' . $total_processes . '</td>';
@@ -245,7 +245,7 @@ function mactrack_display_run_status() {
 	form_alternate_row();
 	print '<td width=200>' . __('Last Time Poller Started:', 'mactrack') . '</td><td>' . read_config_option('mt_scan_date', true) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Poller Frequency:', 'mactrack') . '</td><td>' . ($seconds_offset == 'disabled' ? __('N/A', 'mactrack') : $mactrack_poller_frequencies[$seconds_offset]) . '</td>';
+	print '<td width=200>' . __('Poller Frequency:', 'mactrack') . '</td><td>' . ($collection_timing == 'disabled' ? __('N/A', 'mactrack') : $mactrack_poller_frequencies[$collection_timing]) . '</td>';
 	form_alternate_row();
 	print '<td width=200>' . __('Approx. Next Runtime:', 'mactrack') . '</td><td>' . (empty($next_run_time) ? __('N/A', 'mactrack') : date('Y-m-d G:i:s', $next_run_time)) . '</td>';
 	form_alternate_row();
