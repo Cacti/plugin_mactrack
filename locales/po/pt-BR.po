@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2024-04-20 17:08-0400\n"
-"PO-Revision-Date: 2024-04-20 17:38-0400\n"
-"Last-Translator: Ede Willians dos Santos Cavalcante <edewillians10@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) <http://translate.cacti.net/projects/cacti/mactrack/pt_BR/>\n"
-"Language: pt_BR\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Poedit 3.4.2\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-04-20 17:08-0400\nPO-Revision-Date: 2024-06-25 16:31+0000\nLast-Translator: fabricio tavares maciel <fabricio.tavares@gmail.com>\nLanguage-Team: Portuguese (Brazil) <http://translate.cacti.net/projects/cacti/mactrack/pt_BR/>\nLanguage: pt-BR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 4.8.1\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -1586,7 +1574,7 @@ msgstr "IP"
 #: mactrack_view_arp.php:518 mactrack_view_dot1x.php:633
 #: mactrack_view_macs.php:1165
 msgid "Show"
-msgstr "Mostrar"
+msgstr "Exibir"
 
 #: mactrack_view_arp.php:523 mactrack_view_dot1x.php:638
 #: mactrack_view_macs.php:1170
