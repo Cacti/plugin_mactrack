@@ -1,5 +1,9 @@
 ## ChangeLog
 
+--- develop ---
+
+* issue#232: Not working adding devices to Cacti
+
 --- 4.7 ---
 
 * issue#206: Improve PHP8.x - undefined variables, array keys, ... 

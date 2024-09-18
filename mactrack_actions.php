@@ -214,7 +214,8 @@ function sync_cacti_to_mactrack($device) {
 				$mt_device['term_type'],
 				$mt_device['private_key_path'],
 				(isset($mt_device['disabled']) ? $mt_device['disabled'] : ''), # not a host column
-				$mt_device['scan_trunk_port']
+				$mt_device['scan_trunk_port'],
+				$mt_device['device_type_id']
 			);
 
 			mactrack_debug(__('Device Tracking Device: (%s) successfully updated', $mt_device['device_id'], 'mactrack'));
