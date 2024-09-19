@@ -329,8 +329,8 @@ function mactrack_device_action_execute($action) {
 							get_request_var('term_type'),
 							get_request_var('private_key_path'),
 							(isset_request_var('disabled') ? get_request_var('disabled') : ''),
-							$mt_device['scan_trunk_port'],
-							$mt_device['device_type_id']
+							(isset($mt_device['scan_trunk_port']) ? $mt_device['scan_trunk_port'] : ''),
+							(isset($mt_device['device_type_id']) ? $mt_device['device_type_id'] : 0)
 						);
 					}
 				}
