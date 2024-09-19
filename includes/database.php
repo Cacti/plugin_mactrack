@@ -659,6 +659,7 @@ function mactrack_database_upgrade() {
 	db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
 	db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
 	db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
+	db_execute("ALTER TABLE mac_track_devices MODIFY COLUMN scan_trunk_port text NULL default ''");
 
 
 
@@ -779,7 +780,7 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'last_runmessage', 'type' => 'varchar(100)', 'NULL' => true);
 	$data['columns'][] = array('name' => 'last_rundate', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
 	$data['columns'][] = array('name' => 'last_runduration', 'type' => 'decimal(10,5)', 'NULL' => false, 'default' => '0.00000');
-	$data['columns'][] = array('name' => 'scan_trunk_port', 'type' => 'text', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'scan_trunk_port', 'type' => 'text', 'NULL' => true, 'default' => '');
 	$data['primary'] = 'device_id';
 	$data['unique_keys'] = array('name' => 'hostname_snmp_port_site_id', 'columns' => 'hostname`,`snmp_port`,`site_id');
 	$data['keys'][] = array('name' => 'site_id', 'columns' => 'site_id');
