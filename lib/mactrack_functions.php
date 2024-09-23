@@ -1758,8 +1758,12 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 			if (cacti_sizeof($new_port_key_array)) {
 				foreach ($new_port_key_array as $key => $port_key) {
-					$new_port_key_array[$key]['mac_address'] = @$port_macs[$port_key['key']];
-					mactrack_debug("INDEX: '". $key . "' MAC ADDRESS: " . $new_port_key_array[$key]['mac_address']);
+					if (isset($port_macs[$port_key['key']])) {
+						$new_port_key_array[$key]['mac_address'] = @$port_macs[$port_key['key']];
+						mactrack_debug("INDEX: '". $key . "' MAC ADDRESS: " . $new_port_key_array[$key]['mac_address']);
+					} else {
+						mactrack_debug("INDEX: '". $key . "' not found in port_macs array, skipping");
+					}
 				}
 			}
 
