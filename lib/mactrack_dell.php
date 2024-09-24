@@ -253,11 +253,13 @@ function dell_mac_address_convert($mac_address) {
 		$mac = explode(read_config_option('mt_mac_delim'),$mac_address);
 
 		foreach ($mac as $key => $mac_item) {
-			$mac_item = dechex($mac_item);
-			if (strlen($mac_item) < 2) {
-				$mac_item = '0'.$mac_item;
+			if (!empty($mac_item)) {
+				$mac_item = dechex($mac_item);
+				if (strlen($mac_item) < 2) {
+					$mac_item = '0'.$mac_item;
+				}
+				$mac[$key] = strtoupper($mac_item);
 			}
-			$mac[$key] = strtoupper($mac_item);
 		}
 
 		$new_mac = '';
