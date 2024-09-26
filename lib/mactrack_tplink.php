@@ -110,6 +110,8 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	mactrack_debug('ports total : ' . $device['ports_total'] . ', ports_trunk: ' . $device['ports_trunk']);
 	mactrack_debug('ifInterfaces assembly complete.');
 
+	$active_vlans = array();
+
 	foreach ($vlan_ids as $vlan_id => $vlan_num) {
 		$active_vlans[$vlan_id]['vlan_id'] = $vlan_num;
 		$active_vlans[$vlan_id]['vlan_name'] = $vlan_names[$vlan_id];
