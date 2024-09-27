@@ -1699,7 +1699,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 					($bridge_root_port != $port_number))) {
 
 					if (!in_array($port_number, $ignore_ports)) {
-						if ((@$port_status[$key] == '3') || (@$port_status[$key] == '5')) {
+						if ((isset($port_status[$key]) && $port_status[$key] == '3') || (isset($port_status[$key]) && $port_status[$key] == '5')) {
 							$port_key_array[$i]['key']         = $key;
 							$port_key_array[$i]['port_number'] = $port_number;
 
@@ -1719,11 +1719,17 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 				/* map bridge port to interface port and check type */
 				if ($port_key['port_number'] > 0) {
 					if (cacti_sizeof($bridgePortIfIndexes)) {
-						$brPortIfIndex = @$bridgePortIfIndexes[$port_key['port_number']];
-						$brPortIfType = @$ifInterfaces[$brPortIfIndex]['ifType'];
+						if (isset ($bridgePortIfIndexes[$port_key['port_number']])) {
+							$brPortIfIndex = $bridgePortIfIndexes[$port_key['port_number']];
+						}
+						if (isset($ifInterfaces[$brPortIfIndex]['ifType'])) {
+							$brPortIfType = $ifInterfaces[$brPortIfIndex]['ifType'];
+						}
 					} else {
 						$brPortIfIndex = $port_key['port_number'];
-						$brPortIfType = @$ifInterfaces[$port_key['port_number']]['ifType'];
+						if (isset($ifInterfaces[$port_key['port_number']]['ifType'])) {
+							$brPortIfType = $ifInterfaces[$port_key['port_number']]['ifType'];
+						}
 					}
 
 					if ((($brPortIfType >= 6) && ($brPortIfType <= 9)) || ($brPortIfType == 71)) {
