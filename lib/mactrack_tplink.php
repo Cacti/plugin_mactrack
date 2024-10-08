@@ -146,19 +146,30 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 
 				/* only output legitimate end user ports */
 				if ( $portName != '' and $portName != '1' ) {
-					$port_array[$i]['vlan_id'] = $active_vlans[$Xvlanid]['vlan_id'];//@$vlan_ids[$Xvlanid];
-					$port_array[$i]['vlan_name'] = $active_vlans[$Xvlanid]['vlan_name'];//@$vlan_names[$Xvlandid];
-					$port_array[$i]['port_number'] = $mac_result;
-					$port_array[$i]['port_name'] = trim ( $ifName );
-					$port_array[$i]['mac_address'] = xform_mac_address($Xmac);
+					if (isset($active_vlans[$Xvlanid]['vlan_id']) && $active_vlans[$Xvlanid]['vlan_id'] != '') {
+						$port_array[$i]['vlan_id'] = $active_vlans[$Xvlanid]['vlan_id'];//@$vlan_ids[$Xvlanid];
+						
+						if (isset($active_vlans[$Xvlanid]['vlan_name']) && $active_vlans[$Xvlanid]['vlan_name'] != '') {
+							$port_array[$i]['vlan_name'] = $active_vlans[$Xvlanid]['vlan_name'];//@$vlan_names[$Xvlandid];
+						} else {
+							$port_array[$i]['vlan_name'] = 'N/A';
+						}
+						
+						$port_array[$i]['vlan_name'] = $active_vlans[$Xvlanid]['vlan_name'];//@$vlan_names[$Xvlandid];
+						$port_array[$i]['port_number'] = $mac_result;
+						$port_array[$i]['port_name'] = trim ( $ifName );
+						$port_array[$i]['mac_address'] = xform_mac_address($Xmac);
 
-					mactrack_debug('VLAN: ' . $port_array[$i]['vlan_id'] . ', ' .
-						'NAME: ' . $port_array[$i]['vlan_name'] . ', ' .
-						'PORT: ' . $ifIndex . ', ' .
-						'NAME: ' . $port_array[$i]['port_name'] . ', ' .
-						'MAC: ' . $port_array[$i]['mac_address']);
+						mactrack_debug('VLAN: ' . $port_array[$i]['vlan_id'] . ', ' .
+							'NAME: ' . $port_array[$i]['vlan_name'] . ', ' .
+							'PORT: ' . $ifIndex . ', ' .
+							'NAME: ' . $port_array[$i]['port_name'] . ', ' .
+							'MAC: ' . $port_array[$i]['mac_address']);
 
-					$i++;
+						$i++;
+					} else {
+						mactrack_debug('Cannot find VLAN ID for mac address ' . $xmac);
+					}
 				}
 				$j++;
 			}
@@ -179,5 +190,16 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	}
 
 	return $device;
+}
+
+function mach($macd, $del = ':') {
+	$result = '';
+	$macsd  = explode ('.', $macd);
+	foreach ($macsd as $d) {
+		$hex     = strtoupper(sprintf("%02x$del", $d));
+		$result .= $hex;
+	}
+	$result = substr ($result, 0, -1);
+	return ($result);
 }
 

@@ -2296,6 +2296,10 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 					$authorized_mac = 0;
 				}
 
+				if (!isset($port_value['vlan_id'])) {
+					$port_value['vlan_id'] = 'N/A';
+				}
+
 				if (!isset($port_value['vlan_name'])) {
 					$port_value['vlan_name'] = 'N/A';
 				}
