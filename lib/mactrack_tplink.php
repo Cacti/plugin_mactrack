@@ -168,7 +168,7 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 
 						$i++;
 					} else {
-						mactrack_debug('Cannot find VLAN ID for mac address ' . $xmac);
+						mactrack_debug('Cannot find VLAN ID for mac address ' . $Xmac);
 					}
 				}
 				$j++;
