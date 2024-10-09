@@ -136,7 +136,7 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		foreach ($mac_results as $num => $mac_result) {
 			if ( $mac_result != 0 ) {
 				$Xvlanid = substr ($num, 0, strpos($num, '.'));
-				$Xmac    = mach(substr($num, strpos($num, '.') + 1));
+				$Xmac    = tp_mach(substr($num, strpos($num, '.') + 1));
 
 				$ifIndex = $nport_results[$mac_result];
 				$ifType = $ifInterfaces[$ifIndex]['ifType'];
@@ -192,7 +192,7 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	return $device;
 }
 
-function mach($macd, $del = ':') {
+function tp_mach($macd, $del = ':') {
 	$result = '';
 	$macsd  = explode ('.', $macd);
 	foreach ($macsd as $d) {
