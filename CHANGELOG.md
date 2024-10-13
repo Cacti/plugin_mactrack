@@ -4,7 +4,7 @@
 
 * issue#232: Not working adding devices to Cacti
 * issue#236: Fix TPlink active vlan gathering
-
+* feature#242: Rename "Device Tracking" to "Mactrack"
 
 --- 4.7 ---
 
