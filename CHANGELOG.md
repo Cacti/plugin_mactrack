@@ -5,6 +5,7 @@
 * issue#232: Not working adding devices to Cacti
 * issue#236: Fix TPlink active vlan gathering
 
+
 --- 4.7 ---
 
 * issue#206: Improve PHP8.x - undefined variables, array keys, ... 

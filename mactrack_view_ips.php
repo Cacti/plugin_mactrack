@@ -27,7 +27,7 @@ chdir('../../');
 include('./include/auth.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
-$title = __('Device Tracking - Site IP Range Report View', 'mactrack');
+$title = __('Mactrack - Site IP Range Report View', 'mactrack');
 
 if (isset_request_var('export')) {
 	mactrack_view_export_ip_ranges();
@@ -274,7 +274,7 @@ function mactrack_view_ip_ranges() {
 			$i++;
 		}
 	} else {
-		print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Site IP Ranges Found', 'mactrack') . '</em></td></tr>';
+		print '<tr><td colspan="' . $columns . '"><em>' . __('No Mactrack Site IP Ranges Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);

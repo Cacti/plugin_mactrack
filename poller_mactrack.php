@@ -111,7 +111,7 @@ if (cacti_sizeof($parms)) {
 clear_old_processes($site_id);
 
 if ($collect_frequency == 'disabled') {
-	echo "WARNING: Device Tracking is disabled, exiting\n";
+	echo "WARNING: Mactrack is disabled, exiting\n";
 	exit(1);
 } else {
 	/* for manual scans, verify if we should run or not */
@@ -121,13 +121,13 @@ if ($collect_frequency == 'disabled') {
 		$start_date = db_fetch_cell('SELECT MIN(start_date) FROM mac_track_processes');
 
 		if (time() < (strtotime($start_date) + $max_run_duration) && !$forcerun) {
-			echo "NOTE: Device Tracking currently running and max run duration not eclipsed.\n";
+			echo "NOTE: Mactrack currently running and max run duration not eclipsed.\n";
 			exit(0);
 		} elseif ($forcerun) {
 			mactrack_debug('WARNING: Forcing Collection although Collection Appears in Process', true, 'MACTRACK');
 			db_execute('TRUNCATE mac_track_processes');
 		} else {
-			mactrack_debug('WARNING: Stale data found in Device Tracking process table', true, 'MACTRACK');
+			mactrack_debug('WARNING: Stale data found in Matrack process table', true, 'MACTRACK');
 			db_execute('TRUNCATE mac_track_processes');
 		}
 	}
@@ -136,14 +136,14 @@ if ($collect_frequency == 'disabled') {
 	errors_disable();
 
 	if ($site_id > 0) {
-		mactrack_debug('About to enter Device Tracking Site Scan Processing');
+		mactrack_debug('About to enter Mactrack Site Scan Processing');
 
 		/* take time and log performance data */
 		$start = microtime(true);
 
 		collect_mactrack_data($start, $site_id);
 	} else {
-		mactrack_debug('About to enter Device Tracking poller processing');
+		mactrack_debug('About to enter Mactrack poller processing');
 		if ($forcerun || $collect_frequency > 0) {
 			mactrack_debug('Into Processing.  Checking to determine if it\'s time to run.');
 			$collect_frequency        = $collect_frequency * 60;
@@ -316,7 +316,7 @@ function display_version() {
 	global $config;
 
 	$info = plugin_mactrack_version();
-	print 'Device Tracking Master Poller, Version ' . $info['version'] . ', ' .  COPYRIGHT_YEARS . "\n";
+	print 'Mactrack Master Poller, Version ' . $info['version'] . ', ' .  COPYRIGHT_YEARS . "\n";
 }
 
 /*	display_help - displays the usage of the function */
@@ -352,9 +352,9 @@ function clear_old_processes($site_id) {
 					exec('kill ' . $p['process_id']);
 				}
 
-				cacti_log("WARNING: Removing Hung Device Tracking Process for Device '" . $p['device_id'] . "' With Status '" . $p['status'] . "'");
+				cacti_log("WARNING: Removing Hung Mactrack Process for Device '" . $p['device_id'] . "' With Status '" . $p['status'] . "'");
 			} else {
-				cacti_log("WARNING: Removing Hung Device Tracking Process Entry for Device '" . $p['device_id'] . "' With Status '" . $p['status'] . "'");
+				cacti_log("WARNING: Removing Hung Mactrack Process Entry for Device '" . $p['device_id'] . "' With Status '" . $p['status'] . "'");
 			}
 
 			db_execute_prepared('DELETE FROM mac_track_processes
@@ -539,7 +539,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			/* exit if we've run too long */
 			if (($current - $start) > $max_run_duration) {
 				$exit_mactrack = true;
-				cacti_log('ERROR: Device Tracking timed out during main script processing.');
+				cacti_log('ERROR: Mactrack timed out during main script processing.');
 				db_execute("DELETE FROM settings WHERE name='mactrack_process_status'");
 				db_process_remove('-1');
 				break;
@@ -590,7 +590,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			/* exit if we've run too long */
 			if (($current - $start) > $max_run_duration) {
 				$exit_mactrack = true;
-				cacti_log('ERROR: Device Tracking timed out during main script processing.');
+				cacti_log('ERROR: Mactrack timed out during main script processing.');
 				break;
 			}
 
@@ -733,7 +733,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			/* exit if we've run too long */
 			if (($current - $start) > $max_run_duration) {
 				$exit_mactrack = true;
-				cacti_log('ERROR: Device Tracking timed out during main script processing.');
+				cacti_log('ERROR: Mactrack timed out during main script processing.');
 				break;
 			}
 		}

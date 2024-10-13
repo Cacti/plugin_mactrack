@@ -27,7 +27,7 @@ chdir('../../');
 include('./include/auth.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
-$title = __('Device Tracking - ARP/IP View', 'mactrack');
+$title = __('Mactrack - ARP/IP View', 'mactrack');
 
 set_default_action();
 
@@ -404,7 +404,7 @@ function mactrack_view_ips() {
 		if (get_request_var('site_id') == -1 && get_request_var('device_id') == -1) {
 			print '<tr><td colspan="10"><em>' . __('You must first choose a Site, Device or other search criteria.', 'mactrack') . '</em></td></tr>';
 		} else {
-			print '<tr><td colspan="10"><em>' . __('No Device Tracking IP Results Found', 'mactrack') . '</em></td></tr>';
+			print '<tr><td colspan="10"><em>' . __('No Mactrack IP Results Found', 'mactrack') . '</em></td></tr>';
 		}
 	}
 

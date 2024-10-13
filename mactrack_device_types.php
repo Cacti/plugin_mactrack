@@ -504,7 +504,7 @@ function mactrack_device_type_import() {
 		kill_session_var('import_debug_info');
 	}
 
-	html_start_box(__('Import Device Tracking Device Types', 'mactrack'), '100%', '', '3', 'center', '');
+	html_start_box(__('Import Mactrack Device Types', 'mactrack'), '100%', '', '3', 'center', '');
 
 	form_alternate_row();?>
 		<td width='50%'><font class='textEditTitle'><?php print __('Import Device Types from Local File', 'mactrack');?></font><br>
@@ -554,7 +554,7 @@ function mactrack_device_type_import() {
 			<?php print __('2 - Switch/Router', 'mactrack');?><br>
 			<?php print __('3 - Router', 'mactrack');?><br>
 			<br>
-			<strong><?php print __('The devices device type is determined by scanning it\'s snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used direct Device Tracking as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices.', 'mactrack');?></strong>
+			<strong><?php print __('The devices device type is determined by scanning it\'s snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices.', 'mactrack');?></strong>
 			<br>
 		</td>
 	</tr><?php
@@ -857,9 +857,9 @@ function mactrack_device_type_edit() {
 			WHERE device_type_id = ?',
 			array(get_request_var('device_type_id')));
 
-		$header_label = __('Device Tracking Device Types [edit: %s]', $device_type['description'], 'mactrack');
+		$header_label = __('Mactrack Device Types [edit: %s]', $device_type['description'], 'mactrack');
 	} else {
-		$header_label = __('Device Tracking Device Types [new]', 'mactrack');
+		$header_label = __('Mactrack Device Types [new]', 'mactrack');
 	}
 
 	form_start('mactrack_device_types.php', 'chk');
@@ -933,7 +933,7 @@ function mactrack_device_type() {
 		$rows = get_request_var('rows');
 	}
 
-	html_start_box(__('Device Tracking Device Type Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_device_types.php?action=edit');
+	html_start_box(__('Mactrack Device Type Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_device_types.php?action=edit');
 	mactrack_device_type_filter();
 	html_end_box();
 
@@ -1004,7 +1004,7 @@ function mactrack_device_type() {
 			form_end_row();
 		}
 	} else {
-		print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Device Types Found', 'mactrack') . '</em></td></tr>';
+		print '<tr><td colspan="' . $columns . '"><em>' . __('No Mactrack Device Types Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);

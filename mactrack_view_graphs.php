@@ -29,7 +29,7 @@ include('./lib/html_tree.php');
 include('./plugins/mactrack/lib/mactrack_functions.php');
 include('./lib/timespan_settings.php');
 
-$title = __('Device Tracking - Monitored Device Graph View', 'mactrack');
+$title = __('Mactrack - Monitored Device Graph View', 'mactrack');
 
 set_default_action();
 

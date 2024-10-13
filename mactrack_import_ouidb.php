@@ -88,7 +88,7 @@ function display_version() {
 	global $config;
 
 	$info = plugin_mactrack_version();
-	print "Device Tracking Import OUI Database, Version " . $info["version"] . ", " . COPYRIGHT_YEARS . "\n";
+	print "Mactrack import OUI Database, Version " . $info["version"] . ", " . COPYRIGHT_YEARS . "\n";
 }
 
 /*	display_help - displays the usage of the function */

@@ -27,7 +27,7 @@ chdir('../../');
 include('./include/auth.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
-$title = __('Device Tracking - Site Report View', 'mactrack');
+$title = __('Mactrack - Site Report View', 'mactrack');
 
 if (isset_request_var('export')) {
 	mactrack_view_export_sites();
@@ -321,7 +321,7 @@ function mactrack_view_sites() {
 				form_end_row();
 			}
 		} else {
-			print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Sites Found', 'mactrack') . '</em></td></tr>';
+			print '<tr><td colspan="' . $columns . '"><em>' . __('No Mactrack Sites Found', 'mactrack') . '</em></td></tr>';
 		}
 
 		html_end_box(false);
@@ -419,7 +419,7 @@ function mactrack_view_sites() {
 				form_end_row();
 			}
 		} else {
-			print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Sites Found', 'mactrack') . '</em></td></tr>';
+			print '<tr><td colspan="' . $columns . '"><em>' . __('No Mactrack Sites Found', 'mactrack') . '</em></td></tr>';
 		}
 
 		html_end_box(false);

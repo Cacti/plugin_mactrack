@@ -164,7 +164,7 @@ function mactrack_display_run_status() {
 		$time_till_next_db_maint = $next_db_maint_time - $current_time;
 	}
 
-	html_start_box(__('Device Tracking Process Status', 'mactrack'), '100%', '', '1', 'center', '');
+	html_start_box(__('Mactrack Process Status', 'mactrack'), '100%', '', '1', 'center', '');
 	?>
 	<script type='text/javascript'>
 	function applyFilter() {
@@ -237,7 +237,7 @@ function mactrack_display_run_status() {
 
 	html_header(array(__('Current Process Status', 'mactrack')), 2);
 	form_alternate_row();
-	print '<td>' . __('The Device Tracking Poller is:', 'mactrack') . '</td><td>' . ($total_processes > 0 ? __('Running', 'mactrack') : ($collection_timing == 'disabled' ? __('Disabled', 'mactrack') : __('Idle', 'mactrack'))) . '</td>';
+	print '<td>' . __('The Mactrack Poller is:', 'mactrack') . '</td><td>' . ($total_processes > 0 ? __('Running', 'mactrack') : ($collection_timing == 'disabled' ? __('Disabled', 'mactrack') : __('Idle', 'mactrack'))) . '</td>';
 	if ($total_processes > 0) {
 		form_alternate_row();
 		print '<td>' . __('Running Processes:', 'mactrack') . '</td><td>' . $total_processes . '</td>';
@@ -393,7 +393,7 @@ function mactrack_utilities_ports_clear() {
 		top_header();
 		mactrack_utilities();
 
-		html_start_box(__('Device Tracking Database Results', 'mactrack'), '100%', '', '3', 'center', '');
+		html_start_box(__('Mactrack Database Results', 'mactrack'), '100%', '', '3', 'center', '');
 		print '<td>' . __('The following number of records have been removed from the database: %s', $rows, 'mactrack') . '</td>';
 		html_end_box();
 	}
@@ -416,7 +416,7 @@ function mactrack_utilities_purge_aggregated_data() {
 		top_header();
 		mactrack_utilities();
 
-		html_start_box(__('Device Tracking Database Results', 'mactrack'), '100%', '', '3', 'center', '');
+		html_start_box(__('Mactrack Database Results', 'mactrack'), '100%', '', '3', 'center', '');
 		print '<td>' . __('The following number of records have been removed from the aggergated table: %s', $rows, 'mactrack') . '</td>';
 		html_end_box();
 	}
@@ -452,7 +452,7 @@ function mactrack_utilities_recreate_aggregated_data() {
 		top_header();
 		mactrack_utilities();
 
-		html_start_box('Device Tracking Database Results', '100%', '', '3', 'center', '');
+		html_start_box('Mactrack Database Results', '100%', '', '3', 'center', '');
 		print '<td>' . __('The following number of records have been removed from the aggergated table: %s.  And %s records will be added.', $old_rows, $new_rows, 'mactrack') . '</td>';
 		html_end_box();
 	}
@@ -463,7 +463,7 @@ function mactrack_utilities_db_maint() {
 	perform_mactrack_db_maint();
 	$end_rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_ports');
 
-	html_start_box('Device Tracking Database Results', '100%', '', '3', 'center', '');
+	html_start_box('Mactrack Database Results', '100%', '', '3', 'center', '');
 	print '<td>' . __('The following number of records have been removed from the database: %s', $begin_rows-$end_rows, 'mactrack') . '</td>';
 	html_end_box();
 }
@@ -473,13 +473,13 @@ function mactrack_utilities_purge_scanning_funcs() {
 
 	mactrack_rebuild_scanning_funcs();
 
-	html_start_box('Device Tracking Scanning Function Refresh Results', '100%', '', '3', 'center', '');
-	print '<td>' . __('The Device Tracking scanning functions have been purged.  They will be recreated once you either edit a device or device type.', 'mactrack') . '</td>';
+	html_start_box('Mactrack Scanning Function Refresh Results', '100%', '', '3', 'center', '');
+	print '<td>' . __('Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type.', 'mactrack') . '</td>';
 	html_end_box();
 }
 
 function mactrack_utilities() {
-	html_start_box(__('Cacti Device Tracking System Utilities', 'mactrack'), '100%', '', '3', 'center', '');
+	html_start_box(__('Cacti Mactrack System Utilities', 'mactrack'), '100%', '', '3', 'center', '');
 
 	html_header(array(__('Process Status Information', 'mactrack')), 2);
 
@@ -490,10 +490,10 @@ function mactrack_utilities() {
 	</colgroup>
 	<tr class='even'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_proc_status'><?php print __('View Device Tracking Process Status', 'mactrack');?></a>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_proc_status'><?php print __('View Mactrack Process Status', 'mactrack');?></a>
 		</td>
 		<td class='textArea'>
-			<?php print __('This option will let you show and set process information associated with the Device Tracking polling process.', 'mactrack');?>
+			<?php print __('This option will let you show and set process information associated with the Mactrack polling process.', 'mactrack');?>
 		</td>
 	</tr>
 
@@ -522,7 +522,7 @@ function mactrack_utilities() {
 			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_purge_scanning_funcs'><?php print __('Refresh Scanning Functions', 'mactrack');?></a>
 		</td>
 		<td class='textArea'>
-			<?php print __('Deletes old and potentially stale Device Tracking scanning functions from the drop-down you receive when you edit a device type.', 'mactrack');?>
+			<?php print __('Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type.', 'mactrack');?>
 		</td>
 	</tr>
 

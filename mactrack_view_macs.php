@@ -27,7 +27,7 @@ chdir('../../');
 include('./include/auth.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
-$title = __('Device Tracking - MAC to IP Report View', 'mactrack');
+$title = __('Mactrack - MAC to IP Report View', 'mactrack');
 
 $mactrack_view_macs_actions = array(
 	1 => __('Authorize', 'mactrack'),
@@ -830,7 +830,7 @@ function mactrack_view_macs() {
 		if (get_request_var('site_id') == -1 && get_request_var('device_id') == -1) {
 			print "<tr><td colspan='$columns'><em>" . __('You must choose a Site, Device or other search criteria.', 'mactrack') . "</em></td></tr>";
 		} else {
-			print "<tr><td colspan='$columns'><em>" . __('No Device Tracking Port Results Found', 'mactrack') . "</em></td></tr>";
+			print "<tr><td colspan='$columns'><em>" . __('No Mactrack Port Results Found', 'mactrack') . "</em></td></tr>";
 		}
 	}
 
@@ -1038,7 +1038,7 @@ function mactrack_view_aggregated_macs() {
 		if (get_request_var('site_id') == -1 && get_request_var('device_id') == -1) {
 			print "<tr><td colspan='10'><em>" . __('You must first choose a Site, Device or other search criteria.', 'mactrack') . "</em></td></tr>";
 		} else {
-			print "<tr><td colspan='10'><em>" . __('No Device Tracking Port Results Found', 'mactrack') . "</em></td></tr>";
+			print "<tr><td colspan='10'><em>" . __('No Mactrack Port Results Found', 'mactrack') . "</em></td></tr>";
 		}
 	}
 

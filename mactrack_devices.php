@@ -343,7 +343,7 @@ function form_mactrack_actions() {
 		} elseif (get_request_var('drp_action') == '7') { /* Copy SNMP Settings */
 			print "<tr>
 				<td colspan='2' class='textArea'>
-					<p>" . __('Click \'Continue\' to copy SNMP Settings from connected Cacti Device to Device Tracking Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries.', 'mactrack') . "</p>
+					<p>" . __('Click \'Continue\' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries.', 'mactrack') . "</p>
 					<ul>$device_list</ul>
 				</td>
 			</tr>";
@@ -510,7 +510,7 @@ function mactrack_device_import() {
 		kill_session_var('import_debug_info');
 	}
 
-	html_start_box(__('Import Device Tracking Devices', 'mactrack'), '100%', '', '3', 'center', '');
+	html_start_box(__('Import Mactrack Devices', 'mactrack'), '100%', '', '3', 'center', '');
 
 	form_alternate_row();?>
 		<td width='50%'><font class='textEditTitle'><?php print __('Import Devices from Local File', 'mactrack');?></font><br>
@@ -535,7 +535,7 @@ function mactrack_device_import() {
 	form_alternate_row();?>
 		<td><strong><?php print __('The file must contain a header row with the following column headings.', 'mactrack');?></strong>
 			<br><br>
-			<strong>site_id</strong><?php print __(' - The SiteID known to Device Tracking for this device', 'mactrack');?><br>
+			<strong>site_id</strong><?php print __(' - The SiteID known to Mactrack for this device', 'mactrack');?><br>
 			<strong>device_name</strong><?php print __(' - A simple name for the device.  For example Cisco 6509 Switch', 'mactrack');?><br>
 			<strong>hostname</strong><?php print __(' - The IP Address or DNS Name for the device', 'mactrack');?><br>
 			<strong>notes</strong><?php print __(' - More detailed information about the device, including location, environmental conditions, etc.', 'mactrack');?><br>
@@ -855,11 +855,11 @@ function mactrack_device_edit() {
 			WHERE device_id = ?',
 			array(get_request_var('device_id')));
 
-		$header_label = __('Device Tracking Devices [edit: %s]', $device['device_name'], 'mactrack');
+		$header_label = __('Mactrack Devices [edit: %s]', $device['device_name'], 'mactrack');
 	} else {
 		$device = array();
 
-		$header_label = __('Device Tracking Devices [new]', 'mactrack');
+		$header_label = __('Mactrack Devices [new]', 'mactrack');
 	}
 
 	if (!empty($device['device_id'])) {
@@ -1031,7 +1031,7 @@ function mactrack_device() {
 		$rows = get_request_var('rows');
 	}
 
-	html_start_box(__('Device Tracking Device Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_devices.php?action=edit&status=' . get_request_var('status'));
+	html_start_box(__('Mactrack Device Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_devices.php?action=edit&status=' . get_request_var('status'));
 	mactrack_device_filter();
 	html_end_box();
 
@@ -1119,7 +1119,7 @@ function mactrack_device() {
 			mactrack_format_device_row($device);
 		}
 	} else {
-		print '<tr><td colspan="' . $columns  . '"><em>' . __('No Device Tracking Devices', 'mactrack') . '</em></td></tr>';
+		print '<tr><td colspan="' . $columns  . '"><em>' . __('No Mactrack Devices', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);

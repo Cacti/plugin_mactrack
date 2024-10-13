@@ -136,7 +136,7 @@ function mactrack_vmacs() {
 		$rows = get_request_var('rows');
 	}
 
-	html_start_box(__('Device Tracking Vendor Mac Filter', 'mactrack'), '100%', '', '3', 'center', '');
+	html_start_box(__('Mactrack Vendor Mac Filter', 'mactrack'), '100%', '', '3', 'center', '');
 	mactrack_vmac_filter();
 	html_end_box();
 
@@ -176,7 +176,7 @@ function mactrack_vmacs() {
 			<?php
 		}
 	} else {
-		print '<tr><td colspen="' . $columns . '"><em>' . __('No Device Tracking Vendor MACS Found', 'mactrack') . '</em></td></tr>';
+		print '<tr><td colspen="' . $columns . '"><em>' . __('No Mactrack Vendor MACS Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);
