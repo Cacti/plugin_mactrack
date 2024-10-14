@@ -27,7 +27,7 @@ chdir('../../');
 include('./include/auth.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
-$title = __('Device Tracking - Network Interfaces View', 'mactrack');
+$title = __('Mactrack - Network Interfaces View', 'mactrack');
 
 /* check actions */
 if (isset_request_var('export')) {
@@ -321,7 +321,7 @@ function mactrack_view() {
 			form_end_row();
 		}
 	} else {
-		print '<tr><td colspan="7"><em>' . __('No Device Tracking Interfaces Found', 'mactrack') . '</em></td></tr>';
+		print '<tr><td colspan="7"><em>' . __('No Mactrack Interfaces Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);

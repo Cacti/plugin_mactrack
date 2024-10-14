@@ -245,7 +245,7 @@ function display_version() {
 	global $config;
 
 	$info = plugin_mactrack_version();
-	print "Network Device Tracking, Version " . $info['version'] .", " . COPYRIGHT_YEARS . "\n";
+	print "Network Mactrack, Version " . $info['version'] .", " . COPYRIGHT_YEARS . "\n";
 }
 
 /*	display_help - displays the usage of the function */

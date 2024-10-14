@@ -27,7 +27,7 @@ chdir('../../');
 include('./include/auth.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
-$title = __('Device Tracking - Device Report View', 'macktrack');
+$title = __('Mactrack - Device Report View', 'macktrack');
 
 if (isset_request_var('export')) {
 	mactrack_view_export_devices();
@@ -394,7 +394,7 @@ function mactrack_view_devices() {
 			form_end_row();
 		}
 	} else {
-		print '<tr><td colspan="10"><em>' . __('No Device Tracking Devices Found', 'mactrack') . '</em></td></tr>';
+		print '<tr><td colspan="10"><em>' . __('No Mactrack Devices Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);

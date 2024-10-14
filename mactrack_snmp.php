@@ -432,7 +432,7 @@ function mactrack_snmp_edit() {
 			ORDER BY sequence',
 			array(get_request_var('id')));
 
-		html_start_box(__('Device Tracking SNMP Options', 'mactrack'), '100%', '', '3', 'center', 'mactrack_snmp.php?action=item_edit&id=' . get_request_var('id'));
+		html_start_box(__('Mactrack SNMP Options', 'mactrack'), '100%', '', '3', 'center', 'mactrack_snmp.php?action=item_edit&id=' . get_request_var('id'));
 
 		print "<tr class='tableHeader'>";
 		DrawMatrixHeaderItem(__('Item', 'mactrack'),'',1);
@@ -526,7 +526,7 @@ function mactrack_snmp() {
 
 	form_start('mactrack_snmp.php', 'mactrack');
 
-	html_start_box(__('Device Tracking SNMP Options', 'mactrack'), '100%', '', '3', 'center', 'mactrack_snmp.php?action=edit');
+	html_start_box(__('Mactrack SNMP Options', 'mactrack'), '100%', '', '3', 'center', 'mactrack_snmp.php?action=edit');
 	snmp_options_filter();
 	html_end_box();
 

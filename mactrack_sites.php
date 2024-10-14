@@ -356,9 +356,9 @@ function mactrack_site_edit() {
 			WHERE site_id = ?',
 			array(get_request_var('site_id')));
 
-		$header_label = __('Device Tracking Site [edit: %s]', $site['site_name'], 'mactrack');
+		$header_label = __('Mactrack Site [edit: %s]', $site['site_name'], 'mactrack');
 	} else {
-		$header_label = __('Device Tracking Site [new]', 'mactrack');
+		$header_label = __('Mactrack Site [new]', 'mactrack');
 	}
 
 	form_start('mactrack_sites.php');
@@ -390,7 +390,7 @@ function mactrack_site() {
 		$rows = get_request_var('rows');
 	}
 
-	html_start_box(__('Device Tracking Site Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_sites.php?action=edit');
+	html_start_box(__('Mactrack Site Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_sites.php?action=edit');
 
 	mactrack_site_filter();
 
@@ -481,7 +481,7 @@ function mactrack_site() {
 				form_end_row();
 			}
 		} else {
-			print '<tr><td><em>' . __('No Device Tracking Sites Found', 'mactrack') . '</em></td></tr>';
+			print '<tr><td><em>' . __('No Mactrack Sites Found', 'mactrack') . '</em></td></tr>';
 		}
 
 		html_end_box(false);
@@ -561,7 +561,7 @@ function mactrack_site() {
 				form_end_row();
 			}
 		} else {
-			print '<tr><td><em>' . __('No Device Tracking Sites Found', 'mactrack') . '</em></td></tr>';
+			print '<tr><td><em>' . __('No Mactrack Sites Found', 'mactrack') . '</em></td></tr>';
 		}
 
 		html_end_box(false);

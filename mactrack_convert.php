@@ -200,7 +200,7 @@ function display_version() {
 
 	$info = plugin_mactrack_version();
 
-	print 'Device Tracking Convert Partitioned, Version ' . $info['version'] . ", " . COPYRIGHT_YEARS . "\n";
+	print 'Mactrack Convert Partitioned, Version ' . $info['version'] . ", " . COPYRIGHT_YEARS . "\n";
 }
 
 /*	display_help - displays the usage of the function */

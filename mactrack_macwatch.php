@@ -235,9 +235,9 @@ function mactrack_macw_edit() {
 			WHERE mac_id = ?',
 			array(get_request_var('mac_id')));
 
-		$header_label = __('Device Tracking MacWatch [edit: %s]', $mac_record['name'], 'mactrack');
+		$header_label = __('Mactrack MacWatch [edit: %s]', $mac_record['name'], 'mactrack');
 	} else {
-		$header_label = __('Device Tracking MacWatch [new]', 'mactrack');
+		$header_label = __('Mactrack MacWatch [new]', 'mactrack');
 	}
 
 	form_start('mactrack_macwatch.php', 'mactrack_macwatch');
@@ -299,7 +299,7 @@ function mactrack_macw() {
 		$rows = get_request_var('rows');
 	}
 
-	html_start_box(__('Device Tracking MacWatch Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_macwatch.php?action=edit');
+	html_start_box(__('Mactrack MacWatch Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_macwatch.php?action=edit');
 	mactrack_macw_filter();
 	html_end_box();
 
@@ -359,7 +359,7 @@ function mactrack_macw() {
 			form_end_row();
 		}
 	} else {
-		print '<tr><td colspan="' . $columns . '"><em>' . __('No Device Tracking Watched Macs Found', 'mactrack') . '</em></td></tr>';
+		print '<tr><td colspan="' . $columns . '"><em>' . __('No Mactrack Watched Macs Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);

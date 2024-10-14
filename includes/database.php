@@ -653,7 +653,6 @@ function mactrack_database_upgrade() {
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 		VALUES ('92xx Switch-default','Cisco','1','*CAT9K_LITE_IOSXE*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-
 	db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
 	db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
 	db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
@@ -661,7 +660,13 @@ function mactrack_database_upgrade() {
 	db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
 	db_execute("ALTER TABLE mac_track_devices MODIFY COLUMN scan_trunk_port text NULL default ''");
 
-
+	// Change old realm names
+	if (db_fetch_cell("SELECT count(*) FROM plugin_realms WHERE plugin = 'mactrack' and display='Device Tracking Viewer'")) {
+		db_fetch_cell("UPDATE plugin_realms set display='Mactrack Viewer' WHERE plugin = 'mactrack' and display='Device Tracking Viewer'");
+	}
+	if (db_fetch_cell("SELECT count(*) FROM plugin_realms WHERE plugin = 'mactrack' and display='Device Tracking Administrator'")) {
+		db_fetch_cell("UPDATE plugin_realms set display='Mactrack Administrator' WHERE plugin = 'mactrack' and display='Device Tracking Administrator'");
+	}
 
 }
 

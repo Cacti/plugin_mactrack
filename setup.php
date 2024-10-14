@@ -107,10 +107,18 @@ function mactrack_check_upgrade() {
 		if (!db_fetch_cell("SELECT id FROM plugin_realms WHERE plugin = 'mactrack'")) {
 			db_execute("INSERT INTO plugin_realms
 				(id, plugin, file, display)
-				VALUES (2020, 'mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_dot1x.php,mactrack_view_graphs.php,mactrack_ajax.php', 'Device Tracking Viewer')");
+				VALUES (2020, 'mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_dot1x.php,mactrack_view_graphs.php,mactrack_ajax.php', 'Mactrack Viewer')");
 			db_execute("INSERT INTO plugin_realms
 				(id, plugin, file, display)
-				VALUES (2021, 'mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'Device Tracking Administrator')");
+				VALUES (2021, 'mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'Mactrack Administrator')");
+		}
+
+		// Change old names
+		if (db_fetch_cell("SELECT count(*) FROM plugin_realms WHERE plugin = 'mactrack' and display='Device Tracking Viewer'")) {
+			db_fetch_cell("UPDATE plugin_realms set display='Mactrack Viewer' WHERE plugin = 'mactrack' and display='Device Tracking Viewer'");
+		}
+		if (db_fetch_cell("SELECT count(*) FROM plugin_realms WHERE plugin = 'mactrack' and display='Device Tracking Administrator'")) {
+			db_fetch_cell("UPDATE plugin_realms set display='Mactrack Administrator' WHERE plugin = 'mactrack' and display='Device Tracking Administrator'");
 		}
 
 		/* rebuild the scanning functions */
@@ -241,7 +249,7 @@ function mactrack_config_settings() {
 	global $tabs, $settings, $settings_user, $tabs_graphs, $snmp_versions, $mactrack_poller_frequencies,
 	$mactrack_data_retention, $mactrack_macauth_frequencies, $mactrack_update_policies;
 
-	$tabs['mactrack'] = __('Device Tracking', 'mactrack');
+	$tabs['mactrack'] = __('Mactrack', 'mactrack');
 
 	$settings['mactrack'] = array(
 		'mactrack_hdr_timing' => array(
@@ -309,7 +317,7 @@ function mactrack_config_settings() {
 			),
 		'mt_ignorePorts_delim' => array(
 			'friendly_name' => __('Switch Level Ignore Ports Delimiter', 'mactrack'),
-			'description' => __('What delimiter should Device Tracking use when parsing the Ignore Ports string for each switch.', 'mactrack'),
+			'description' => __('What delimiter should Mactrack use when parsing the Ignore Ports string for each switch.', 'mactrack'),
 			'method' => 'drop_array',
 			'default' => '-1',
 			'array' => array(
@@ -359,7 +367,7 @@ function mactrack_config_settings() {
 			),
 		'mt_reverse_dns' => array(
 			'friendly_name' => __('Perform Reverse DNS Name Resolution', 'mactrack'),
-			'description' => __('Should Device Tracking perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly.', 'mactrack'),
+			'description' => __('Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly.', 'mactrack'),
 			'default' => '',
 			'method' => 'checkbox'
 			),
@@ -381,7 +389,7 @@ function mactrack_config_settings() {
 			),
 		'mt_dns_timeout' => array(
 			'friendly_name' => __('DNS Timeout', 'mactrack'),
-			'description' => __('Please enter the DNS timeout in milliseconds.  Device Tracking uses a PHP based DNS resolver.', 'mactrack'),
+			'description' => __('Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver.', 'mactrack'),
 			'method' => 'textbox',
 			'default' => '500',
 			'max_length' => '10',
@@ -389,7 +397,7 @@ function mactrack_config_settings() {
 			),
 		'mt_dns_prime_interval' => array(
 			'friendly_name' => __('DNS Prime Interval', 'mactrack'),
-			'description' => __('How often, in seconds do Device Tracking scanning IP\'s need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance.', 'mactrack'),
+			'description' => __('How often, in seconds do Mactrack scanning IP\'s need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance.', 'mactrack'),
 			'method' => 'textbox',
 			'default' => '120',
 			'max_length' => '10',
@@ -401,7 +409,7 @@ function mactrack_config_settings() {
 			),
 		'mt_from_email' => array(
 			'friendly_name' => __('Source Address', 'mactrack'),
-			'description' => __('The source Email address for Device Tracking Emails.', 'mactrack'),
+			'description' => __('The source Email address for Mactrack Emails.', 'mactrack'),
 			'method' => 'textbox',
 			'default' => '',
 			'max_length' => '100',
@@ -409,7 +417,7 @@ function mactrack_config_settings() {
 			),
 		'mt_from_name' => array(
 			'friendly_name' => __('Source Email Name', 'mactrack'),
-			'description' => __('The Source Email name for Device Tracking Emails.', 'mactrack'),
+			'description' => __('The Source Email name for Mactrack Emails.', 'mactrack'),
 			'method' => 'textbox',
 			'default' => __('MACTrack Administrator', 'mactrack'),
 			'max_length' => '100',
@@ -417,7 +425,7 @@ function mactrack_config_settings() {
 			),
 		'mt_macwatch_description' => array(
 			'friendly_name' => __('MacWatch Default Body', 'mactrack'),
-			'description' => htmlspecialchars(__('The Email body preset for Device Tracking MacWatch Emails.  The body can contain ' .
+			'description' => htmlspecialchars(__('The Email body preset for Mactrack MacWatch Emails.  The body can contain ' .
 			'any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  ' .
 			'Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>.', 'mactrack')),
 			'method' => 'textarea',
@@ -445,12 +453,12 @@ function mactrack_config_settings() {
 			'array' => $mactrack_macauth_frequencies,
 			),
 		'mactrack_hdr_arpwatch' => array(
-			'friendly_name' => __('Device Tracking ArpWatch Settings', 'mactrack'),
+			'friendly_name' => __('Mactrack ArpWatch Settings', 'mactrack'),
 			'method' => 'spacer',
 			),
 		'mt_arpwatch' => array(
 			'friendly_name' => __('Enable ArpWatch', 'mactrack'),
-			'description' => __('Should Device Tracking also use ArpWatch data to supplement Mac to IP/DNS resolution?', 'mactrack'),
+			'description' => __('Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?', 'mactrack'),
 			'default' => '',
 			'method' => 'checkbox'
 			),
@@ -468,7 +476,7 @@ function mactrack_config_settings() {
 			),
 		'mt_update_policy' => array(
 			'friendly_name' => __('Update Policy for SNMP Options', 'mactrack'),
-			'description' => __('Policy for synchronization of SNMP Options between Cacti devices and Device Tracking Devices.', 'mactrack'),
+			'description' => __('Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices.', 'mactrack'),
 			'method' => 'drop_array',
 			'default' => 1,
 			'array' => $mactrack_update_policies,
@@ -561,7 +569,7 @@ function mactrack_config_settings() {
 
 function mactrack_draw_navigation_text($nav) {
 	$nav['mactrack_devices.php:'] = array(
-		'title' => __('Device Tracking Devices', 'mactrack'),
+		'title' => __('Mactrack Devices', 'mactrack'),
 		'mapping' => 'index.php:',
 		'url' => 'mactrack_devices.php',
 		'level' => '1'
@@ -589,7 +597,7 @@ function mactrack_draw_navigation_text($nav) {
 	);
 
 	$nav['mactrack_snmp.php:'] = array(
-		'title' => __('Device Tracking SNMP Options', 'mactrack'),
+		'title' => __('Mactrack SNMP Options', 'mactrack'),
 		'mapping' => 'index.php:',
 		'url' => 'mactrack_snmp.php',
 		'level' => '1'
@@ -617,7 +625,7 @@ function mactrack_draw_navigation_text($nav) {
 	);
 
 	$nav['mactrack_device_types.php:'] = array(
-		'title' => __('Device Tracking Device Types', 'mactrack'),
+		'title' => __('Mactrack Device Types', 'mactrack'),
 		'mapping' => 'index.php:',
 		'url' => 'mactrack_device_types.php',
 		'level' => '1'
@@ -645,7 +653,7 @@ function mactrack_draw_navigation_text($nav) {
 	);
 
 	$nav['mactrack_sites.php:'] = array(
-		'title' => __('Device Tracking Sites', 'mactrack'),
+		'title' => __('Mactrack Sites', 'mactrack'),
 		'mapping' => 'index.php:',
 		'url' => 'mactrack_sites.php',
 		'level' => '1'
@@ -708,14 +716,14 @@ function mactrack_draw_navigation_text($nav) {
 	);
 
 	$nav['mactrack_vendormacs.php:'] = array(
-		'title' => __('Device Tracking Vendor Macs', 'mactrack'),
+		'title' => __('Mactrack Vendor Macs', 'mactrack'),
 		'mapping' => 'index.php:',
 		'url' => 'mactrack_vendormacs.php',
 		'level' => '1'
 	);
 
 	$nav['mactrack_view_macs.php:'] = array(
-		'title' => __('Device Tracking View Macs', 'mactrack'),
+		'title' => __('Mactrack View Macs', 'mactrack'),
 		'mapping' => '',
 		'url' => 'mactrack_view_macs.php',
 		'level' => '0'
@@ -729,49 +737,49 @@ function mactrack_draw_navigation_text($nav) {
 	);
 
 	$nav['mactrack_view_dot1x.php:'] = array(
-		'title' => __('Device Tracking Dot1x View', 'mactrack'),
+		'title' => __('Mactrack Dot1x View', 'mactrack'),
 		'mapping' => '',
 		'url' => 'mactrack_view_dot1x.php',
 		'level' => '0'
 	);
 
 	$nav['mactrack_view_arp.php:'] = array(
-		'title' => __('Device Tracking IP Address Viewer', 'mactrack'),
+		'title' => __('Mactrack IP Address Viewer', 'mactrack'),
 		'mapping' => '',
 		'url' => 'mactrack_view_arp.php',
 		'level' => '0'
 	);
 
 	$nav['mactrack_view_interfaces.php:'] = array(
-		'title' => __('Device Tracking View Interfaces', 'mactrack'),
+		'title' => __('Mactrack View Interfaces', 'mactrack'),
 		'mapping' => '',
 		'url' => 'mactrack_view_interfaces.php',
 		'level' => '0'
 	);
 
 	$nav['mactrack_view_sites.php:'] = array(
-		'title' => __('Device Tracking View Sites', 'mactrack'),
+		'title' => __('Mactrack View Sites', 'mactrack'),
 		'mapping' => '',
 		'url' => 'mactrack_view_sites.php',
 		'level' => '0'
 	);
 
 	$nav['mactrack_view_ips.php:'] = array(
-		'title' => __('Device Tracking View IP Ranges', 'mactrack'),
+		'title' => __('Mactrack View IP Ranges', 'mactrack'),
 		'mapping' => '',
 		'url' => 'mactrack_view_ips.php',
 		'level' => '0'
 	);
 
 	$nav['mactrack_view_devices.php:'] = array(
-		'title' => __('Device Tracking View Devices', 'mactrack'),
+		'title' => __('Mactrack View Devices', 'mactrack'),
 		'mapping' => '',
 		'url' => 'mactrack_view_devices.php',
 		'level' => '0'
 	);
 
 	$nav['mactrack_utilities.php:'] = array(
-		'title' => __('Device Tracking Utilities', 'mactrack'),
+		'title' => __('Mactrack Utilities', 'mactrack'),
 		'mapping' => 'index.php:',
 		'url' => 'mactrack_utilities.php',
 		'level' => '1'
@@ -813,7 +821,7 @@ function mactrack_draw_navigation_text($nav) {
 	);
 
 	$nav['mactrack_utilities.php:mactrack_proc_status'] = array(
-		'title' => __('View Device Tracking Process Status', 'mactrack'),
+		'title' => __('View Mactrack Process Status', 'mactrack'),
 		'mapping' => 'index.php:,mactrack_utilities.php:',
 		'url' => 'mactrack_utilities.php',
 		'level' => '2'
@@ -827,14 +835,14 @@ function mactrack_draw_navigation_text($nav) {
 	);
 
 	$nav['mactrack_view_graphs.php:'] = array(
-		'title' => __('Device Tracking Graph Viewer', 'mactrack'),
+		'title' => __('Mactrack Graph Viewer', 'mactrack'),
 		'mapping' => '',
 		'url' => 'mactrack_view_graphs.php',
 		'level' => '0'
 	);
 
 	$nav['mactrack_view_graphs.php:preview'] = array(
-		'title' => __('Device Tracking Graph Viewer', 'mactrack'),
+		'title' => __('Mactrack Graph Viewer', 'mactrack'),
 		'mapping' => '',
 		'url' => 'mactrack_view_graphs.php',
 		'level' => '0'
@@ -906,8 +914,8 @@ function mactrack_config_arrays() {
 
 	$mactrack_update_policies = array(
 		1 => __('None', 'mactrack'),
-		2 => __('Sync Cacti Device to Device Tracking Device', 'mactrack'),
-		3 => __('Sync Device Tracking Device to Cacti Device', 'mactrack')
+		2 => __('Sync Cacti Device to Mactrack Device', 'mactrack'),
+		3 => __('Sync Mactrack Device to Cacti Device', 'mactrack')
 	);
 
 	$rows_selector = array(
@@ -964,24 +972,24 @@ function mactrack_config_arrays() {
 	foreach ($menu as $temp => $temp2 ) {
 		$menu2[$temp] = $temp2;
 		if ($temp == __('Management')) {
-			$menu2[__('Device Tracking', 'mactrack')]['plugins/mactrack/mactrack_sites.php']        = __('Sites', 'mactrack');
-			$menu2[__('Device Tracking', 'mactrack')]['plugins/mactrack/mactrack_devices.php']      = __('Devices', 'mactrack');
-			$menu2[__('Device Tracking', 'mactrack')]['plugins/mactrack/mactrack_snmp.php']         = __('SNMP Options', 'mactrack');
-			$menu2[__('Device Tracking', 'mactrack')]['plugins/mactrack/mactrack_device_types.php'] = __('Device Types', 'mactrack');
-			$menu2[__('Device Tracking', 'mactrack')]['plugins/mactrack/mactrack_vendormacs.php']   = __('Vendor Macs', 'mactrack');
-			$menu2[__('Tracking Tools', 'mactrack')]['plugins/mactrack/mactrack_macwatch.php']      = __('Mac Watch', 'mactrack');
-			$menu2[__('Tracking Tools', 'mactrack')]['plugins/mactrack/mactrack_macauth.php']       = __('Mac Authorizations', 'mactrack');
-			$menu2[__('Tracking Tools', 'mactrack')]['plugins/mactrack/mactrack_utilities.php']     = __('Tracking Utilities', 'mactrack');
+			$menu2[__('Mactrack', 'mactrack')]['plugins/mactrack/mactrack_sites.php']        = __('Sites', 'mactrack');
+			$menu2[__('Mactrack', 'mactrack')]['plugins/mactrack/mactrack_devices.php']      = __('Devices', 'mactrack');
+			$menu2[__('Mactrack', 'mactrack')]['plugins/mactrack/mactrack_snmp.php']         = __('SNMP Options', 'mactrack');
+			$menu2[__('Mactrack', 'mactrack')]['plugins/mactrack/mactrack_device_types.php'] = __('Device Types', 'mactrack');
+			$menu2[__('Mactrack', 'mactrack')]['plugins/mactrack/mactrack_vendormacs.php']   = __('Vendor Macs', 'mactrack');
+			$menu2[__('Mactrack Tools', 'mactrack')]['plugins/mactrack/mactrack_macwatch.php']      = __('Mac Watch', 'mactrack');
+			$menu2[__('Mactrack Tools', 'mactrack')]['plugins/mactrack/mactrack_macauth.php']       = __('Mac Authorizations', 'mactrack');
+			$menu2[__('Mactrack Tools', 'mactrack')]['plugins/mactrack/mactrack_utilities.php']     = __('Tracking Utilities', 'mactrack');
 		}
 	}
 	$menu = $menu2;
 
 	if (cacti_version_compare(CACTI_VERSION, '1.2', '<')) {
-		$menu_glyphs[__('Device Tracking', 'mactrack')] = 'fa fa-shield';
+		$menu_glyphs[__('Mactrack', 'mactrack')] = 'fa fa-shield';
 	} else {
-		$menu_glyphs[__('Device Tracking', 'mactrack')] = 'fa fa-shield-alt';
+		$menu_glyphs[__('Mactrack', 'mactrack')] = 'fa fa-shield-alt';
 	}
-	$menu_glyphs[__('Tracking Tools', 'mactrack')] = 'fa fa-bullhorn';
+	$menu_glyphs[__('Mactrack Tools', 'mactrack')] = 'fa fa-bullhorn';
 }
 
 function mactrack_config_form () {
@@ -1021,21 +1029,21 @@ function mactrack_config_form () {
 	'sysDescr_match' => array(
 		'method' => 'textbox',
 		'friendly_name' => __('System Description Match', 'mactrack'),
-		'description' => __('Provide key information to help Device Tracking detect the type of device.  The wildcard character is the \'&#42;\' sign.', 'mactrack'),
+		'description' => __('Provide key information to help Mactrack detect the type of device.  The wildcard character is the \'&#42;\' sign.', 'mactrack'),
 		'value' => '|arg1:sysDescr_match|',
 		'max_length' => '250'
 		),
 	'sysObjectID_match' => array(
 		'method' => 'textbox',
 		'friendly_name' => __('Vendor SNMP Object ID Match', 'mactrack'),
-		'description' => __('Provide key information to help Device Tracking detect the type of device.  The wildcard character is the \'&#42;\' sign.', 'mactrack'),
+		'description' => __('Provide key information to help Mactrack detect the type of device.  The wildcard character is the \'&#42;\' sign.', 'mactrack'),
 		'value' => '|arg1:sysObjectID_match|',
 		'max_length' => '250'
 		),
 	'scanning_function' => array(
 		'method' => 'drop_sql',
 		'friendly_name' => __('MAC Address Scanning Function', 'mactrack'),
-		'description' => __('The Device Tracking scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: \'my_function($site, &$device, $lowport, $highport)\'.  There is no function required for a pure router.', 'mactrack'),
+		'description' => __('Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: \'my_function($site, &$device, $lowport, $highport)\'.  There is no function required for a pure router.', 'mactrack'),
 		'value' => '|arg1:scanning_function|',
 		'default' => 0,
 		'none_value' => __('None', 'mactrack'),
@@ -1044,7 +1052,7 @@ function mactrack_config_form () {
 	'ip_scanning_function' => array(
 		'method' => 'drop_sql',
 		'friendly_name' => __('IP Address Scanning Function', 'mactrack'),
-		'description' => __('The Device Tracking scanning function specific to Layer3 devices that track IP Addresses.', 'mactrack'),
+		'description' => __('Mactrack scanning function specific to Layer3 devices that track IP Addresses.', 'mactrack'),
 		'value' => '|arg1:ip_scanning_function|',
 		'default' => 0,
 		'none_value' => __('None', 'mactrack'),
@@ -1053,7 +1061,7 @@ function mactrack_config_form () {
 	'dot1x_scanning_function' => array(
 		'method' => 'drop_sql',
 		'friendly_name' => __('802.1x Scanning Function', 'mactrack'),
-		'description' => __('The Device Tracking scanning function specific to Switches with dot1x enabled.', 'mactrack'),
+		'description' => __('Mactrack scanning function specific to Switches with dot1x enabled.', 'mactrack'),
 		'value' => '|arg1:dot1x_scanning_function|',
 		'default' => '',
 		'none_value' => __('None', 'mactrack'),
@@ -1062,7 +1070,7 @@ function mactrack_config_form () {
 	'serial_number_oid' => array(
 		'method' => 'textbox',
 		'friendly_name' => __('Serial Number Base OID', 'mactrack'),
-		'description' => __('The SNMP OID used to obtain this device types serial number to be stored in the Device Tracking Asset Information table.', 'mactrack'),
+		'description' => __('The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table.', 'mactrack'),
 		'value' => '|arg1:serial_number_oid|',
 		'max_length' => '100',
 		'default' => ''
@@ -1267,7 +1275,7 @@ function mactrack_config_form () {
 		),
 	'host_id' => array(
 		'friendly_name' => __('Related Cacti Host', 'mactrack'),
-		'description' => __('Given Device Tracking Host is connected to this Cacti Host.', 'mactrack'),
+		'description' => __('Given Mactrack Host is connected to this Cacti Host.', 'mactrack'),
 		#'method' => 'view',
 		'method' => 'drop_sql',
 		'value' => '|arg1:host_id|',
@@ -1543,7 +1551,7 @@ function mactrack_config_form () {
 		),
 	'description' => array(
 		'friendly_name' => __('MacWatch Default Body', 'mactrack'),
-		'description' => htmlspecialchars(__('The Email body preset for Device Tracking MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>.', 'mactrack')),
+		'description' => htmlspecialchars(__('The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>.', 'mactrack')),
 		'method' => 'textarea',
 		'class' => 'textAreaNotes',
 		'value' => '|arg1:description|',

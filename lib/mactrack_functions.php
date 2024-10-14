@@ -2427,7 +2427,7 @@ function perform_mactrack_db_maint() {
 			$last_day = db_fetch_row("SELECT TO_DAYS('$lnow') AS today");
 			$last_day = $last_day['today'];
 
-			mactrack_debug("There are currently '" . cacti_sizeof($number_of_partitions) . "' Device Tracking Partitions, We will keep '$days' of them.");
+			mactrack_debug("There are currently '" . cacti_sizeof($number_of_partitions) . "' Mactrack Partitions, We will keep '$days' of them.");
 			mactrack_debug("The current day is '$cur_day', the last day is '$last_day'");
 
 			if ($cur_day != $last_day) {
@@ -2475,7 +2475,7 @@ function perform_mactrack_db_maint() {
 function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.ieee.org/oui.txt') {
 	$oui_alternate = 'https://services13.ieee.org/RST/standards-ra-web/rest/assignments/download/?registry=MA-L&format=txt';
 	if ($type != 'ui') {
-		html_start_box(__('Device Tracking OUI Database Import Results', 'mactrack'), '100%', '', '1', 'center', '');
+		html_start_box(__('Mactrack Device Tracking OUI Database Import Results', 'mactrack'), '100%', '', '1', 'center', '');
 		print '<tr><td>' . __('Getting OUI Database from IEEE', 'mactrack') . '</td></tr>';
 	} else {
 		print __('Getting OUI Database from the IEEE', 'mactrack') . PHP_EOL;

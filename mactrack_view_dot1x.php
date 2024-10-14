@@ -28,7 +28,7 @@ include('./include/auth.php');
 include_once('./include/global_arrays.php');
 include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
-$title = __('Device Tracking - 802.1x View', 'mactrack');
+$title = __('Mactrack - 802.1x View', 'mactrack');
 
 set_default_action();
 
@@ -469,7 +469,7 @@ function mactrack_view_dot1x() {
 			print mactrack_format_dot1x_row($port_result);
 		}
 	} else {
-		print '<tr><td colspan="7"><em>' . __('No Device Tracking 802.1x Sessions Found', 'mactrack') . '</em></td></tr>';
+		print '<tr><td colspan="7"><em>' . __('No Mactrack 802.1x Sessions Found', 'mactrack') . '</em></td></tr>';
 	}
 
 	html_end_box(false);

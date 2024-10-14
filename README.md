@@ -45,10 +45,10 @@ Wiki](https://github.com/Cacti/plugin_mactrack/wiki)!
 
 ## Workflow
 
-Configure mactrack - Console -> Settings -> Device Tracking tab
-Add Mactrack Site - Console -> Device Tracking -> Sites
-Add/import devices - Console -> Device Tracking -> Devices -> Add device or Management -> Choose host -> Import into Device Tracking Database
-Create new or enable prepared Device Types - Console -> Device Tracking -> Device Types
+Configure mactrack - Console -> Settings -> Mactrack tab
+Add Mactrack Site - Console -> Mactrack -> Sites
+Add/import devices - Console -> Mactrack -> Devices -> Add device or Management -> Choose host -> Import into Mactrack Database
+Create new or enable prepared Device Types - Console -> Mactrack -> Device Types
 
 ## Bugs and Feature Enhancements
 
