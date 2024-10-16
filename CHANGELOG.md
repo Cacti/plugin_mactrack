@@ -2,8 +2,12 @@
 
 --- develop ---
 
+--- 4.8 ---
+
 * issue#232: Not working adding devices to Cacti
 * issue#236: Fix TPlink active vlan gathering
+* issue#243: Fix incorrect variable in Aruba OS-CX functions
+* issue#244: Nonresponding devices in debug mode can cause PHP errors
 * feature#242: Rename "Device Tracking" to "Mactrack"
 
 --- 4.7 ---
