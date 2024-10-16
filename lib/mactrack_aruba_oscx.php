@@ -365,7 +365,7 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 					/* now set the real data */
 					$new_port_key_array[$i]['key'] = mactrack_arr_key($port_key, 'key');
 					$new_port_key_array[$i]['port_number'] = isset($brPortIfIndex) ? $brPortIfIndex : '';
-					$new_port_key_array[$i]['port_name'] = mactrack_arr_key(ifInterfaces, $port_key['port_number']);
+					$new_port_key_array[$i]['port_name'] = mactrack_arr_key($ifInterfaces, $port_key['port_number']);
 					$new_port_key_array[$i]['mac_address'] = oscx_mac($port_key['key']);
 					$new_port_key_array[$i]['vlan_id'] = mactrack_arr_key($port_vlan_data, $brPortIfIndex);
 					$new_port_key_array[$i]['vlan_name'] = isset ($brPortIfIndex) ? mactrack_arr_key($vlan_names, $port_vlan_data[$brPortIfIndex]) : '';
