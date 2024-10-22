@@ -2,6 +2,10 @@
 
 --- develop ---
 
+* issue#248: Cacti process control, terminate dns resolvet when is nothing to do
+
+--- 4.8 ---
+
 * issue#232: Not working adding devices to Cacti
 * issue#236: Fix TPlink active vlan gathering
 * feature#242: Rename "Device Tracking" to "Mactrack"
