@@ -2,6 +2,10 @@
 
 --- develop ---
 
+* issue#246: Fix Cisco device collection
+
+--- 4.8 ---
+
 * issue#232: Not working adding devices to Cacti
 * issue#236: Fix TPlink active vlan gathering
 * feature#242: Rename "Device Tracking" to "Mactrack"
