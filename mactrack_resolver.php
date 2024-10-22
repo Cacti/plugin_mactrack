@@ -152,6 +152,9 @@ while (1) {
 		WHERE device_id != 0');
 
 	if ((($now - $start) > ($max_script_runtime)) && ($processes_running == 0) || $nothing > 5) {
+		if ($nothing > 5) {
+			mactrack_debug('Terminating DNS resolving, nothing to do');
+		}
 		$break = true;
 	} else {
 		$break = false;
