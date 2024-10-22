@@ -50,7 +50,7 @@ putenv('MIBS=RFC-1215');
 /* Allow Mactrack to Use Memory */
 ini_set('memory_limit', '-1');
 
-global $debug, $web, $track_errors;
+global $config, $debug, $web, $track_errors;
 
 /* initialize variables */
 $site_id  = 0;
@@ -106,6 +106,15 @@ if (cacti_sizeof($parms)) {
 		}
 	}
 }
+
+/* silently end if the registered process is still running, or process table missing */
+if (function_exists('register_process_start')) {
+	if (!register_process_start('mactrack', 'master', $config['poller_id'], $max_run_duration)) {
+		intropage_debug('Another Mactrack Process Still Running');
+		exit(0);
+	}
+}
+
 
 // Get rid of old/hung processes
 clear_old_processes($site_id);
@@ -241,10 +250,14 @@ if ($collect_frequency == 'disabled') {
 			}
 		}
 	}
-
 	/* show errors now */
 	errors_restore();
 }
+
+if (function_exists('unregister_process')) {
+	unregister_process('matrack', 'master', $config['poller_id']);
+}
+
 
 function errors_disable() {
 	global $track_errors;

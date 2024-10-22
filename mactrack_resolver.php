@@ -37,10 +37,10 @@ $max_script_runtime = read_config_option('mt_script_runtime') * 60;
 
 if (is_numeric($max_run_duration)) {
 	/* let PHP a 5 minutes less than the rerun frequency */
-	$max_run_duration = ($max_run_duration * 60) - 300;
+	$max_run_duration = ($max_run_duration * 60) - 270;
 	ini_set('max_execution_time', $max_run_duration);
 } else {
-	$max_run_duration = 3300;
+	$max_run_duration = 3270;
 	ini_set('max_execution_time', $max_run_duration);
 }
 
@@ -139,6 +139,9 @@ if (cacti_sizeof($nameservers)) {
 	$resolver = new Net_DNS2_Resolver(array('nameservers' => $nameservers));
 }
 
+// if more than 15 second is nothing to do, ending
+$nothing = 0;
+
 /* loop until you are it */
 while (1) {
 
@@ -148,7 +151,7 @@ while (1) {
 		FROM mac_track_processes
 		WHERE device_id != 0');
 
-	if ((($now - $start) > ($max_script_runtime)) && ($processes_running == 0)) {
+	if ((($now - $start) > ($max_script_runtime)) && ($processes_running == 0) || $nothing > 5) {
 		$break = true;
 	} else {
 		$break = false;
@@ -161,8 +164,10 @@ while (1) {
 
 	if (cacti_sizeof($unresolved_ips) == 0) {
 		mactrack_debug('No IP\'s require resolving this pass');
+		$nothing++;
 		sleep(3);
 	} else {
+		$nothing = 0;
 		mactrack_debug(cacti_sizeof($unresolved_ips) . ' IP\'s require resolving this pass');
 
 		foreach($unresolved_ips as $key => $unresolved_ip) {
