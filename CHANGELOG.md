@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue#246: Fix Cisco device collection
 * issue#248: Cacti process control, terminate dns resolvet when is nothing to do
 
 --- 4.8 ---

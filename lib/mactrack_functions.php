@@ -501,8 +501,12 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 		foreach($ifTypes as $key => $value) {
 			if (!is_numeric($value)) {
 				$parts = explode('(', $value);
-				$piece = $parts[1];
-				$ifTypes[$key] = str_replace(')', '', trim($piece));
+				if (!empty($parts)) {
+					$piece = $parts[1];
+					$ifTypes[$key] = str_replace(')', '', trim($piece));
+				} else {
+					$ifTypes[$key] = 'N/A';
+				}
 			}
 		}
 	}
