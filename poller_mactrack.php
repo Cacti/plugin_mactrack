@@ -45,7 +45,7 @@ if (is_numeric($collect_frequency)) {
 }
 
 /* Disable Mib File Loading */
-putenv('MIBS=RFC-1215');
+putenv('MIBS=:');
 
 /* Allow Mactrack to Use Memory */
 ini_set('memory_limit', '-1');
