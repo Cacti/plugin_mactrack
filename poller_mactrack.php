@@ -110,7 +110,7 @@ if (cacti_sizeof($parms)) {
 /* silently end if the registered process is still running, or process table missing */
 if (function_exists('register_process_start')) {
 	if (!register_process_start('mactrack', 'master', $config['poller_id'], $max_run_duration)) {
-		intropage_debug('Another Mactrack Process Still Running');
+		mactrack_debug('Another Mactrack Process Still Running');
 		exit(0);
 	}
 }
@@ -121,6 +121,11 @@ clear_old_processes($site_id);
 
 if ($collect_frequency == 'disabled') {
 	echo "WARNING: Mactrack is disabled, exiting\n";
+
+	if (function_exists('unregister_process')) {
+		unregister_process('matrack', 'master', $config['poller_id']);
+	}
+
 	exit(1);
 } else {
 	/* for manual scans, verify if we should run or not */
@@ -131,6 +136,11 @@ if ($collect_frequency == 'disabled') {
 
 		if (time() < (strtotime($start_date) + $max_run_duration) && !$forcerun) {
 			echo "NOTE: Mactrack currently running and max run duration not eclipsed.\n";
+
+			if (function_exists('unregister_process')) {
+				unregister_process('matrack', 'master', $config['poller_id']);
+			}
+
 			exit(0);
 		} elseif ($forcerun) {
 			mactrack_debug('WARNING: Forcing Collection although Collection Appears in Process', true, 'MACTRACK');
@@ -255,7 +265,7 @@ if ($collect_frequency == 'disabled') {
 }
 
 if (function_exists('unregister_process')) {
-	unregister_process('matrack', 'master', $config['poller_id']);
+	unregister_process('mactrack', 'master', $config['poller_id']);
 }
 
 
@@ -475,7 +485,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 					mactrack_debug('ARPWATCH: IP, DNS & MAC collection complete with ArpWatch');
 				} else {
-					cacti_log("ERROR: cannot open file ArpWatch database '$arp_db'");exit;
+					cacti_log("ERROR: cannot open file ArpWatch database '$arp_db'");
 				}
 			}
 		}
