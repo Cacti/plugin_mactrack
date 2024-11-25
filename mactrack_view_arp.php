@@ -124,7 +124,7 @@ function mactrack_view_export_ips() {
 
 			array_push($xport_array,'"' . $port_result['site_name'] . '","' .
 			$port_result['hostname'] . '","' . $port_result['device_name'] . '","' .
-			$port_result['mac_address'] . '","' . $port_result['vendor_name'] . '","' .
+			format_mac_address($port_result['mac_address']) . '","' . $port_result['vendor_name'] . '","' .
 			$port_result['ip_address'] . '","' . $port_result['dns_hostname'] . '","' .
 			$port_result['port_number'] . '","' . $port_result['ifName'] . '","' .
 			$scan_date . '"');
@@ -254,8 +254,6 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = true, $rows) 
 		$sql_where
 		$sql_order
 		$sql_limit";
-
-//	echo $query_string;
 
 	return db_fetch_assoc($query_string);
 }
@@ -390,7 +388,7 @@ function mactrack_view_ips() {
 				form_selectable_cell(filter_value($port_result['dns_hostname'], get_request_var('filter')), $i);
 			}
 
-			form_selectable_cell(filter_value($port_result['mac_address'], get_request_var('filter')), $i);
+			form_selectable_cell(filter_value(mactrack_format_mac($port_result['mac_address']), get_request_var('filter')), $i);
 			form_selectable_cell(filter_value($port_result['vendor_name'], get_request_var('filter')), $i);
 			form_selectable_cell($port_result['port_number'], $i, '', 'left');
 			form_selectable_cell($port_result['ifName'], $i, '', 'left');

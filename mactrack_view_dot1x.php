@@ -149,7 +149,7 @@ function mactrack_view_export_dot1x() {
 			array_push($xport_array,'"' . $port_result['site_name'] . '","' .
 			$port_result['hostname'] . '","' . $port_result['device_name'] . '","' .
 			$port_result['domain'] . '","' . $port_result['status'] . '","' .
-			$port_result['mac_address'] . '","' . $port_result['ip_address'] . '","' .
+			mactrack_format_mac($port_result['mac_address']) . '","' . $port_result['ip_address'] . '","' .
 			$port_result['dns_hostname'] . '","' . $port_result['port_number'] . '","' .
 			$port_result['ifName'] . '","' . $port_result['username'] . '","' .
 			$scan_date . '"');

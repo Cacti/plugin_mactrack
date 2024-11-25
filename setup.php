@@ -327,9 +327,22 @@ function mactrack_config_settings() {
 				' ' => __('Space [ ]', 'mactrack')
 				)
 			),
+		'mt_mac_format' => array(
+			'friendly_name' => __('Mac Address Output Format', 'mactrack'),
+			'description' => __('Format used for display.', 'mactrack'),
+			'method' => 'drop_array',
+			'default' => 'aa:bb:cc:dd:ee:ff',
+			'array' => array(
+				'aa:bb:cc:dd:ee:ff' => 'aa:bb:cc:dd:ee:ff', 
+				'aa-bb-cc-dd-ee-ff' => 'aa-bb-cc-dd-ee-ff',
+				'aabb-ccdd-eeff' => 'aabb-ccdd-eeff',
+				'aabbccddeeff' => 'aabbccddeeff',
+				'aabb.ccdd.eeff' => 'aabb.ccdd.eeff'
+				)
+			),
 		'mt_mac_delim' => array(
 			'friendly_name' => __('Mac Address Delimiter', 'mactrack'),
-			'description' => __('How should each octet of the MAC address be delimited.', 'mactrack'),
+			'description' => __('DB format, not visible in GUI. How should each octet of the MAC address be delimited.', 'mactrack'),
 			'method' => 'drop_array',
 			'default' => ':',
 			'array' => array(':' => __('Colon [:]', 'mactrack'), '-' => __('Dash [-]', 'mactrack'))

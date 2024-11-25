@@ -2827,7 +2827,7 @@ function mactrack_format_dot1x_row($port_result) {
 		$row .= '<td>' . $port_result['dns_hostname']  . '</td>';
 	}
 
-	$row .= '<td>'    . $port_result['mac_address'] . '</td>';
+	$row .= '<td>'    . mactrack_format_mac($port_result['mac_address']) . '</td>';
 	$row .= '<td>'    . $port_result['ifName']      . '</td>';
 	$row .= '<td><b>' . ($port_result['domain'] == 2 ? __('Data', 'mactrack'):__('Voice', 'mactrack')) . '</b></td>';
 	$row .= '<td><b>' . $status . '</b></td>';
@@ -3467,5 +3467,45 @@ function mactrack_arr_key ($array, $key, $default = '') {
 		return $array[$key];
 	} else {
 		return $default;
+	}
+}
+
+/*
+ * Older mactrack versions use separator for store
+ * and display mac addresses.
+ * Now it is possible to display mac addresses in multiple formats,
+ * the db format remains the same (using the delimiter).
+ * aa:bb:cc:dd:ee:ff
+ * aa-bb-cc-dd-ee-ff
+ * aabb-ccdd-eeff
+ * aabbccddeeff
+ * aabb.ccdd.eeff
+ */
+
+function mactrack_format_mac($mac) {
+
+	$format = read_config_option('mt_mac_format');
+	$separator = read_config_option('mt_mac_delim');
+
+	if ($format == 'aa:bb:cc:dd:ee:dd' && $separator = ':') {
+		return $mac;
+	}
+
+	if ($format == 'aa-bb-cc-dd-ee-dd' && $separator = '-') {
+		return $mac;
+	}
+
+	if ($format == 'aabbccddeeff') {
+		return strtr($mac, $separator, '');
+	}
+
+	if ($format == 'aabb-ccdd-eeff') {
+		$items = str_split($mac, 4);
+		return  implode('-', $items);
+	}
+
+	if ($format == 'aabb.ccdd.eeff') {
+		$items = str_split($mac, 4);
+		return  implode('.', $items);
 	}
 }
