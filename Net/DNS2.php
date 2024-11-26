@@ -120,7 +120,7 @@ class Net_DNS2
 	 * record in the response and restarts the query at the domain name
 	 * specified in the data field of the CNAME record.
 	 *
-	 * this can cause "unexpected" behavious, since i'm sure *most* people
+	 * this can cause "unexpected" behaviours, since i'm sure *most* people
 	 * don't know DNS does this; there may be cases where Net_DNS2 returns a
 	 * positive response, even though the hostname the user looked up did not
 	 * actually exist.
@@ -174,7 +174,7 @@ class Net_DNS2
 	 * the EDNS(0) UDP payload size to use when making DNSSEC requests
 	 * see RFC 4035 section 4.1 - EDNS Support.
 	 *
-	 * there is some different ideas on the suggest size to supprt; but it seems to
+	 * there is some different ideas on the suggest size to support; but it seems to
 	 * be "at least 1220 bytes, but SHOULD support 4000 bytes.
 	 *
 	 * we'll just support 4000
@@ -183,7 +183,7 @@ class Net_DNS2
 	public $dnssec_payload_size = 4000;
 
 	/*
-	 * the last exeception that was generated
+	 * the last exception that was generated
 	 */
 	public $last_exception = null;
 
@@ -706,7 +706,7 @@ class Net_DNS2
 	 *
 	 * @param string $_type the RR type string
 	 *
-	 * @return bool returns true/false if the RR type if cachable
+	 * @return bool returns true/false if the RR type if cacheable
 	 * @access public
 	 *
 	 */
@@ -942,7 +942,7 @@ class Net_DNS2
 					$response = $this->sendUDPRequest($ns, $data);
 
 					//
-					// check the packet header for a trucated bit; if it was truncated,
+					// check the packet header for a truncated bit; if it was truncated,
 					// then re-send the request as TCP.
 					//
 					if ($response->header->tc == 1) {
@@ -1063,7 +1063,7 @@ class Net_DNS2
 	 * @param string  $_data the raw DNS packet data
 	 * @param boolean $_axfr if this is a zone transfer request
 	 *
-	 * @return Net_DNS2_Packet_Response the reponse object
+	 * @return Net_DNS2_Packet_Response the response object
 	 * @throws Net_DNS2_Exception
 	 * @access private
 	 *
@@ -1273,7 +1273,7 @@ class Net_DNS2
 	 * @param string  $_ns	 the name server to use for the request
 	 * @param string  $_data the raw DNS packet data
 	 *
-	 * @return Net_DNS2_Packet_Response the reponse object
+	 * @return Net_DNS2_Packet_Response the response object
 	 * @throws Net_DNS2_Exception
 	 * @access private
 	 *

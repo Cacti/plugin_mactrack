@@ -63,7 +63,7 @@ abstract class Net_DNS2_RR
 	public $type;
 
 	/*
-	 * The resouce record class
+	 * The resource record class
 	 */
 	public $class;
 
@@ -292,7 +292,7 @@ abstract class Net_DNS2_RR
 		$this->type		= Net_DNS2_Lookups::$rr_types_by_id[$rr['type']];
 
 		//
-		// for RR OPT (41), the class value includes the requestors UDP payload size,
+		// for RR OPT (41), the class value includes the requesters UDP payload size,
 		// and not a class value
 		//
 		if ($this->type == 'OPT') {

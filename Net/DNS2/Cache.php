@@ -68,7 +68,7 @@ class Net_DNS2_Cache
 	 *
 	 * @param string $key the key to lookup in the local cache
 	 *
-	 * @return mixed returns the cache data on sucess, false on error
+	 * @return mixed returns the cache data on success, false on error
 	 * @access public
 	 *
 	 */
@@ -110,7 +110,7 @@ class Net_DNS2_Cache
 		//
 		// find the lowest TTL, and use that as the TTL for the whole cached
 		// object. The downside to using one TTL for the whole object, is that
-		// we'll invalidate entries before they actuall expire, causing a
+		// we'll invalidate entries before they actually expire, causing a
 		// real lookup to happen.
 		//
 		// The upside is that we don't need to require() each RR type in the

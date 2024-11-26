@@ -1509,7 +1509,7 @@ function mactrack_config_form () {
 		'class' => 'textAreaNotes',
 		'textarea_rows' => '5',
 		'textarea_cols' => '80',
-		'description' => 'A comma delimited list of VLAN ID to be scaned',
+		'description' => 'A comma delimited list of VLAN ID to be scanned',
 		'value' => '|arg1:scan_vlans|',
 		'max_length' => '1024'
 		),
