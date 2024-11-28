@@ -2485,6 +2485,29 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 		print __('Getting OUI Database from the IEEE', 'mactrack') . PHP_EOL;
 	}
 
+	$proxy          = read_config_option('settings_proxy_server');
+	$proxy_user     = read_config_option('settings_proxy_user');
+	$proxy_password = read_config_option('settings_proxy_password');
+
+	if ($proxy != '') {
+		$default_opts = array(
+			'http' => array(
+				'proxy'  => $proxy,
+				'method' => 'GET',
+			)
+		);
+
+		if ($proxy_user != '') {
+			$default_opts = array(
+				'http' => array(
+					'header' => 'Proxy-Authorization: Basic ' . base64_encode("$proxy_user:$proxy_password")
+				)
+			);
+		}
+
+		$default = stream_context_set_default($default_opts);
+	}
+
 	$oui_database = file($oui_file);
 
 	if ($type != 'ui') print '<tr><td>';

@@ -5,6 +5,7 @@
 * issue#246: Fix Cisco device collection
 * issue#248: Cacti process control, terminate dns resolvet when is nothing to do
 * issue#250: Disable automatic MIBs load
+* feature#68: Proxy Option for downloading MAC/OUI Database
 
 --- 4.8 ---
 

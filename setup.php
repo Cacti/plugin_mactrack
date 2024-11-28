@@ -255,14 +255,14 @@ function mactrack_config_settings() {
 		'mactrack_hdr_timing' => array(
 			'friendly_name' => __('General Settings', 'mactrack'),
 			'method' => 'spacer',
-			),
+		),
 		'mt_collection_timing' => array(
 			'friendly_name' => __('Scanning Frequency', 'mactrack'),
 			'description' => __('Choose when to collect MAC and IP Addresses and Interface statistics from your network devices.', 'mactrack'),
 			'method' => 'drop_array',
 			'default' => 'disabled',
 			'array' => $mactrack_poller_frequencies,
-			),
+		),
 		'mt_processes' => array(
 			'friendly_name' => __('Concurrent Processes', 'mactrack'),
 			'description' => __('Specify how many devices will be polled simultaneously until all devices have been polled.', 'mactrack'),
@@ -270,7 +270,7 @@ function mactrack_config_settings() {
 			'method' => 'textbox',
 			'max_length' => '10',
 			'size' => '4'
-			),
+		),
 		'mt_script_runtime' => array(
 			'friendly_name' => __('Scanner Max Runtime', 'mactrack'),
 			'description' => __('Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs.', 'mactrack'),
@@ -278,7 +278,7 @@ function mactrack_config_settings() {
 			'method' => 'textbox',
 			'max_length' => '10',
 			'size' => '4'
-			),
+		),
 		'mt_base_time' => array(
 			'friendly_name' => __('Start Time for Data Collection', 'mactrack'),
 			'description' => __('When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM.', 'mactrack'),
@@ -286,7 +286,7 @@ function mactrack_config_settings() {
 			'method' => 'textbox',
 			'max_length' => '10',
 			'size' => '8'
-			),
+		),
 		'mt_maint_time' => array(
 			'friendly_name' => __('Database Maintenance Time', 'mactrack'),
 			'description' => __('When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place.', 'mactrack'),
@@ -294,27 +294,27 @@ function mactrack_config_settings() {
 			'method' => 'textbox',
 			'max_length' => '10',
 			'size' => '8'
-			),
+		),
 		'mt_maint_confirm' => array(
 			'friendly_name' => __('Confirm Utilities Prompt', 'mactrack'),
 			'description' => __('When using utilities, prompt for verification', 'mactrack'),
 			'default' => read_config_option('deletion_verification'),
 			'method' => 'checkbox',
-			),
+		),
 		'mt_data_retention' => array(
 			'friendly_name' => __('Data Retention', 'mactrack'),
 			'description' => __('How long should port MAC details be retained in the database.', 'mactrack'),
 			'method' => 'drop_array',
 			'default' => '14',
 			'array' => $mactrack_data_retention,
-			),
+		),
 		'mt_data_retention_ip' => array(
 			'friendly_name' => __('Data Retention IPs', 'mactrack'),
 			'description' => __('How long should discovered IPs details be retained in the database.', 'mactrack'),
 			'method' => 'drop_array',
 			'default' => '3',
 			'array' => $mactrack_data_retention,
-			),
+		),
 		'mt_ignorePorts_delim' => array(
 			'friendly_name' => __('Switch Level Ignore Ports Delimiter', 'mactrack'),
 			'description' => __('What delimiter should Mactrack use when parsing the Ignore Ports string for each switch.', 'mactrack'),
@@ -325,15 +325,15 @@ function mactrack_config_settings() {
 				':' => __('Colon [:]', 'mactrack'),
 				'|' => __('Pipe [|]', 'mactrack'),
 				' ' => __('Space [ ]', 'mactrack')
-				)
-			),
+			)
+		),
 		'mt_mac_delim' => array(
 			'friendly_name' => __('Mac Address Delimiter', 'mactrack'),
 			'description' => __('How should each octet of the MAC address be delimited.', 'mactrack'),
 			'method' => 'drop_array',
 			'default' => ':',
 			'array' => array(':' => __('Colon [:]', 'mactrack'), '-' => __('Dash [-]', 'mactrack'))
-			),
+		),
 		'mt_ignorePorts' => array(
 			'method' => 'textbox',
 			'friendly_name' => __('Ports to Ignore', 'mactrack'),
@@ -342,7 +342,7 @@ function mactrack_config_settings() {
 			'defaults' => '(Vlan|Loopback|Null)',
 			'max_length' => '255',
 			'size' => '80'
-			),
+		),
 		'mt_interface_high' => array(
 			'friendly_name' => __('Bandwidth Usage Threshold', 'mactrack'),
 			'description' => __('When reviewing network interface statistics, what bandwidth threshold do you want to view by default.', 'mactrack'),
@@ -359,18 +359,18 @@ function mactrack_config_settings() {
 				'70' => __('%d Percent', 70, 'mactrack'),
 				'80' => __('%d Percent', 80, 'mactrack'),
 				'90' => __('%d Percent', 90, 'mactrack')
-				)
-			),
+			)
+		),
 		'mt_hdr_rdns' => array(
 			'friendly_name' => __('DNS Settings', 'mactrack'),
 			'method' => 'spacer',
-			),
+		),
 		'mt_reverse_dns' => array(
 			'friendly_name' => __('Perform Reverse DNS Name Resolution', 'mactrack'),
 			'description' => __('Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly.', 'mactrack'),
 			'default' => '',
 			'method' => 'checkbox'
-			),
+		),
 		'mt_dns_primary' => array(
 			'friendly_name' => __('Primary DNS IP Address', 'mactrack'),
 			'description' => __('Enter the primary DNS IP Address to utilize for reverse lookups.', 'mactrack'),
@@ -378,7 +378,7 @@ function mactrack_config_settings() {
 			'default' => '',
 			'max_length' => '30',
 			'size' => '18'
-			),
+		),
 		'mt_dns_secondary' => array(
 			'friendly_name' => __('Secondary DNS IP Address', 'mactrack'),
 			'description' => __('Enter the secondary DNS IP Address to utilize for reverse lookups.', 'mactrack'),
@@ -386,7 +386,7 @@ function mactrack_config_settings() {
 			'default' => '',
 			'max_length' => '30',
 			'size' => '18'
-			),
+		),
 		'mt_dns_timeout' => array(
 			'friendly_name' => __('DNS Timeout', 'mactrack'),
 			'description' => __('Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver.', 'mactrack'),
@@ -394,7 +394,7 @@ function mactrack_config_settings() {
 			'default' => '500',
 			'max_length' => '10',
 			'size' => '4'
-			),
+		),
 		'mt_dns_prime_interval' => array(
 			'friendly_name' => __('DNS Prime Interval', 'mactrack'),
 			'description' => __('How often, in seconds do Mactrack scanning IP\'s need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance.', 'mactrack'),
@@ -402,11 +402,11 @@ function mactrack_config_settings() {
 			'default' => '120',
 			'max_length' => '10',
 			'size' => '4'
-			),
+		),
 		'mactrack_hdr_notification' => array(
 			'friendly_name' => __('Notification Settings', 'mactrack'),
 			'method' => 'spacer',
-			),
+		),
 		'mt_from_email' => array(
 			'friendly_name' => __('Source Address', 'mactrack'),
 			'description' => __('The source Email address for Mactrack Emails.', 'mactrack'),
@@ -414,7 +414,7 @@ function mactrack_config_settings() {
 			'default' => '',
 			'max_length' => '100',
 			'size' => '30'
-			),
+		),
 		'mt_from_name' => array(
 			'friendly_name' => __('Source Email Name', 'mactrack'),
 			'description' => __('The Source Email name for Mactrack Emails.', 'mactrack'),
@@ -422,7 +422,7 @@ function mactrack_config_settings() {
 			'default' => __('MACTrack Administrator', 'mactrack'),
 			'max_length' => '100',
 			'size' => '30'
-			),
+		),
 		'mt_macwatch_description' => array(
 			'friendly_name' => __('MacWatch Default Body', 'mactrack'),
 			'description' => htmlspecialchars(__('The Email body preset for Mactrack MacWatch Emails.  The body can contain ' .
@@ -434,7 +434,7 @@ function mactrack_config_settings() {
 			'max_length' => '512',
 			'textarea_rows' => '5',
 			'textarea_cols' => '80',
-			),
+		),
 		'mt_macauth_emails' => array(
 			'friendly_name' => __('MacAuth Report Email Addresses', 'mactrack'),
 			'description' => __('A comma delimited list of users to receive the MacAuth Email notifications.', 'mactrack'),
@@ -444,24 +444,24 @@ function mactrack_config_settings() {
 			'max_length' => '255',
 			'textarea_rows' => '5',
 			'textarea_cols' => '80',
-			),
+		),
 		'mt_macauth_email_frequency' => array(
 			'friendly_name' => __('MacAuth Report Frequency', 'mactrack'),
 			'description' => __('How often will the MacAuth Reports be Emailed.', 'mactrack'),
 			'method' => 'drop_array',
 			'default' => 'disabled',
 			'array' => $mactrack_macauth_frequencies,
-			),
+		),
 		'mactrack_hdr_arpwatch' => array(
 			'friendly_name' => __('Mactrack ArpWatch Settings', 'mactrack'),
 			'method' => 'spacer',
-			),
+		),
 		'mt_arpwatch' => array(
 			'friendly_name' => __('Enable ArpWatch', 'mactrack'),
 			'description' => __('Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?', 'mactrack'),
 			'default' => '',
 			'method' => 'checkbox'
-			),
+		),
 		'mt_arpwatch_path' => array(
 			'friendly_name' => __('ArpWatch Database Path', 'mactrack'),
 			'description' => __('The location of the ArpWatch Database file on the Cacti server.', 'mactrack'),
@@ -469,25 +469,25 @@ function mactrack_config_settings() {
 			'default' => '',
 			'max_length' => '255',
 			'size' => '60'
-			),
+		),
 		'mactrack_hdr_general' => array(
 			'friendly_name' => __('SNMP Presets', 'mactrack'),
 			'method' => 'spacer',
-			),
+		),
 		'mt_update_policy' => array(
 			'friendly_name' => __('Update Policy for SNMP Options', 'mactrack'),
 			'description' => __('Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices.', 'mactrack'),
 			'method' => 'drop_array',
 			'default' => 1,
 			'array' => $mactrack_update_policies,
-			),
+		),
 		'mt_snmp_ver' => array(
 			'friendly_name' => __('Version', 'mactrack'),
 			'description' => __('Default SNMP version for all new hosts.', 'mactrack'),
 			'method' => 'drop_array',
 			'default' => '2',
 			'array' => $snmp_versions,
-			),
+		),
 		'mt_snmp_community' => array(
 			'friendly_name' => __('Community', 'mactrack'),
 			'description' => __('Default SNMP read community for all new hosts.', 'mactrack'),
@@ -495,14 +495,14 @@ function mactrack_config_settings() {
 			'default' => 'public',
 			'max_length' => '100',
 			'size' => '20'
-			),
+		),
 		'mt_snmp_communities' => array(
 			'friendly_name' => __('Communities', 'mactrack'),
 			'description' => __('Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon \':\'.  These read strings will be tested sequentially if the primary read string is invalid.', 'mactrack'),
 			'method' => 'textbox',
 			'default' => 'public:private:secret',
 			'max_length' => '255'
-			),
+		),
 		'mt_snmp_port' => array(
 			'friendly_name' => __('Port', 'mactrack'),
 			'description' => __('The UDP/TCP Port to poll the SNMP agent on.', 'mactrack'),
@@ -510,7 +510,7 @@ function mactrack_config_settings() {
 			'default' => '161',
 			'max_length' => '10',
 			'size' => '4'
-			),
+		),
 		'mt_snmp_timeout' => array(
 			'friendly_name' => __('Timeout', 'mactrack'),
 			'description' => __('Default SNMP timeout in milli-seconds.', 'mactrack'),
@@ -518,7 +518,7 @@ function mactrack_config_settings() {
 			'default' => '500',
 			'max_length' => '10',
 			'size' => '4'
-			),
+		),
 		'mt_snmp_retries' => array(
 			'friendly_name' => __('Retries', 'mactrack'),
 			'description' => __('The number times the SNMP poller will attempt to reach the host before failing.', 'mactrack'),
@@ -526,8 +526,8 @@ function mactrack_config_settings() {
 			'default' => '3',
 			'max_length' => '10',
 			'size' => '4'
-			)
-		);
+		)
+	);
 
 	$ts = array();
 	foreach ($settings['path'] as $t => $ta) {
@@ -562,6 +562,38 @@ function mactrack_config_settings() {
 				)
 			)
 		)
+	);
+
+	$settings['mail'] += array(
+		'settings_proxy_header' => array(
+			'friendly_name' => __('Internet Proxy Settings'),
+			'collapsible'   => 'true',
+			'method'        => 'spacer',
+		),
+		'settings_proxy_server' => array(
+			'friendly_name' => __('Internet Proxy Address'),
+			'description'   => __('For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080.'),
+			'method'        => 'textbox',
+			'default'       => '',
+			'max_length'    => '30',
+			'size'          => '30'
+		),
+		'settings_proxy_user' => array(
+			'friendly_name' => __('Internet Proxy User'),
+			'description'   => __('If your Internet Proxy requires a username, enter it here.'),
+			'method'        => 'textbox',
+			'default'       => '',
+			'max_length'    => '30',
+			'size'          => '10'
+		),
+		'settings_proxy_password' => array(
+			'friendly_name' => __('Internet Proxy Password'),
+			'description'   => __('If your Internet Proxy requires a password, enter it here.'),
+			'method'        => 'textbox_password',
+			'default'       => '',
+			'max_length'    => '30',
+			'size'          => '10'
+		),
 	);
 
 	mactrack_check_upgrade();
