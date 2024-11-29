@@ -6,6 +6,7 @@
 * issue#248: Cacti process control, terminate dns resolvet when is nothing to do
 * issue#250: Disable automatic MIBs load
 * feature#68: Proxy Option for downloading MAC/OUI Database
+* feature#228: Add more MAC address formats
 
 --- 4.8 ---
 

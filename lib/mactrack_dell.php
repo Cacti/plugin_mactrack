@@ -248,9 +248,9 @@ function dell_mac_address_convert($mac_address) {
 		$mac_address = 'NOT USER';
 	} elseif (strlen($mac_address) > 10) { /* return is in ascii */
 		$mac_address = trim(str_replace('"', '', $mac_address));
-		$mac_address = str_replace('.', read_config_option('mt_mac_delim'), $mac_address);
-		$mac_address = str_replace(':', read_config_option('mt_mac_delim'), $mac_address);
-		$mac = explode(read_config_option('mt_mac_delim'),$mac_address);
+		$mac_address = str_replace('.', ':', $mac_address);
+		$mac_address = str_replace('-', ':', $mac_address);
+		$mac = explode(':', $mac_address);
 
 		foreach ($mac as $key => $mac_item) {
 			if (!empty($mac_item)) {
@@ -262,12 +262,7 @@ function dell_mac_address_convert($mac_address) {
 			}
 		}
 
-		$new_mac = '';
-		for($i = 1; $i < 6; $i++) {
-			$new_mac .= $mac[$i].read_config_option('mt_mac_delim');
-		}
-		$new_mac .= $mac[$i];
-		$mac_address = $new_mac;
+		$mac_address = implode('', $mac);
 	}
 
 	return $mac_address;

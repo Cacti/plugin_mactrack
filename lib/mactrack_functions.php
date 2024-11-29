@@ -2016,8 +2016,6 @@ function xform_net_address($ip_address) {
 function xform_mac_address($mac_address) {
 	$max_address = trim($mac_address);
 
-	$separator = read_config_option('mt_mac_delim');
-
 	if ($mac_address == '') {
 		$mac_address = 'NOT USER';
 	} elseif (strlen($mac_address) > 10) { /* return is in ascii */
@@ -2036,7 +2034,7 @@ function xform_mac_address($mac_address) {
 		$mac_address = $mac;
 	}
 
-	$mac_address = str_replace(':', $separator, $max_address);
+	$mac_address = str_replace(':', '', $max_address);
 
 	return strtoupper($mac_address);
 }
@@ -2850,7 +2848,7 @@ function mactrack_format_dot1x_row($port_result) {
 		$row .= '<td>' . $port_result['dns_hostname']  . '</td>';
 	}
 
-	$row .= '<td>'    . $port_result['mac_address'] . '</td>';
+	$row .= '<td>'    . mactrack_format_mac($port_result['mac_address']) . '</td>';
 	$row .= '<td>'    . $port_result['ifName']      . '</td>';
 	$row .= '<td><b>' . ($port_result['domain'] == 2 ? __('Data', 'mactrack'):__('Voice', 'mactrack')) . '</b></td>';
 	$row .= '<td><b>' . $status . '</b></td>';
@@ -3492,3 +3490,49 @@ function mactrack_arr_key ($array, $key, $default = '') {
 		return $default;
 	}
 }
+
+/*
+ * Older mactrack versions use separator for store
+ * and display mac addresses.
+ * Now it is possible to display mac addresses in multiple formats,
+ * the db format remains the same (using the delimiter).
+ * aa:bb:cc:dd:ee:ff
+ * aa-bb-cc-dd-ee-ff
+ * aabb-ccdd-eeff
+ * aabbccddeeff
+ * aabb.ccdd.eeff
+ */
+
+function mactrack_format_mac($mac) {
+
+	if (is_null($mac) || strlen($mac) < 10) {
+		return $mac;
+	}
+
+	$format = read_config_option('mt_mac_format');
+
+	if ($format == 'aa:bb:cc:dd:ee:dd') {
+		$items = str_split($mac, 2);
+		return  implode(':', $items);
+	}
+
+	if ($format == 'aa-bb-cc-dd-ee-dd') {
+		$items = str_split($mac, 2);
+		return  implode('-', $items);
+	}
+
+	if ($format == 'aabbccddeeff') {
+		return strtr($mac, $separator, '');
+	}
+
+	if ($format == 'aabb-ccdd-eeff') {
+		$items = str_split($mac, 4);
+		return  implode('-', $items);
+	}
+
+	if ($format == 'aabb.ccdd.eeff') {
+		$items = str_split($mac, 4);
+		return  implode('.', $items);
+	}
+}
+
