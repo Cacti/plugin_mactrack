@@ -27,7 +27,7 @@
  * protocol is the same, the functionality is completely different.
  *
  * Generally, query (recursive) lookups are done against caching server, while
- * update requests are done against authoratative servers.
+ * update requests are done against authoritative servers.
  *
  */
 class Net_DNS2_Updater extends Net_DNS2
@@ -270,7 +270,7 @@ class Net_DNS2_Updater extends Net_DNS2
 	 *	 At least one RR with a specified NAME and TYPE (in the zone and class
 	 *	 specified in the Zone Section) must exist.
 	 *
-	 *	 For this prerequisite, a requestor adds to the section a single RR
+	 *	 For this prerequisite, a requester adds to the section a single RR
 	 *	 whose NAME and TYPE are equal to that of the zone RRset whose
 	 *	 existence is required.	 RDLENGTH is zero and RDATA is therefore
 	 *	 empty.	 CLASS must be specified as ANY to differentiate this
@@ -327,7 +327,7 @@ class Net_DNS2_Updater extends Net_DNS2
 	 *	 significant to this comparison, the sets be identical in their
 	 *	 extent.
 	 *
-	 *	 For this prerequisite, a requestor adds to the section an entire
+	 *	 For this prerequisite, a requester adds to the section an entire
 	 *	 RRset whose preexistence is required.	NAME and TYPE are that of the
 	 *	 RRset being denoted.  CLASS is that of the zone.  TTL must be
 	 *	 specified as zero (0) and is ignored when comparing RRsets for
@@ -362,7 +362,7 @@ class Net_DNS2_Updater extends Net_DNS2
 	 *	 No RRs with a specified NAME and TYPE (in the zone and class denoted
 	 *	 by the Zone Section) can exist.
 	 *
-	 *	 For this prerequisite, a requestor adds to the section a single RR
+	 *	 For this prerequisite, a requester adds to the section a single RR
 	 *	 whose NAME and TYPE are equal to that of the RRset whose nonexistence
 	 *	 is required.  The RDLENGTH of this record is zero (0), and RDATA
 	 *	 field is therefore empty.	CLASS must be specified as NONE in order
@@ -418,7 +418,7 @@ class Net_DNS2_Updater extends Net_DNS2
 	 *	 and class specified by the Zone Section) must exist.  Note that this
 	 *	 prerequisite is NOT satisfied by empty nonterminals.
 	 *
-	 *	 For this prerequisite, a requestor adds to the section a single RR
+	 *	 For this prerequisite, a requester adds to the section a single RR
 	 *	 whose NAME is equal to that of the name whose ownership of an RR is
 	 *	 required.	RDLENGTH is zero and RDATA is therefore empty.	CLASS must
 	 *	 be specified as ANY to differentiate this condition from that of an
@@ -466,7 +466,7 @@ class Net_DNS2_Updater extends Net_DNS2
 	 *	 Name is not in use.  No RR of any type is owned by a specified NAME.
 	 *	 Note that this prerequisite IS satisfied by empty nonterminals.
 	 *
-	 *	 For this prerequisite, a requestor adds to the section a single RR
+	 *	 For this prerequisite, a requester adds to the section a single RR
 	 *	 whose NAME is equal to that of the name whose nonownership of any RRs
 	 *	 is required.  RDLENGTH is zero and RDATA is therefore empty.  CLASS
 	 *	 must be specified as NONE.	 TYPE must be specified as ANY.	 TTL must
@@ -541,7 +541,7 @@ class Net_DNS2_Updater extends Net_DNS2
 	}
 
 	/**
-	 * executes the update request with the object informaton
+	 * executes the update request with the object information
 	 *
 	 * @param Net_DNS2_Packet_Response &$response ref to the response object
 	 *
@@ -598,7 +598,7 @@ class Net_DNS2_Updater extends Net_DNS2
 		$this->_packet->reset();
 
 		//
-		// for updates, we just need to know it worked- we don't actualy need to
+		// for updates, we just need to know it worked- we don't actually need to
 		// return the response object
 		//
 		return true;

@@ -26,7 +26,7 @@
  * protocol is the same, the functionality is completely different.
  *
  * Generally, query (recursive) lookups are done against caching server, while
- * notify requests are done against authoratative servers.
+ * notify requests are done against authoritative servers.
  *
  */
 class Net_DNS2_Notifier extends Net_DNS2
@@ -212,7 +212,7 @@ class Net_DNS2_Notifier extends Net_DNS2
 		$this->_packet->reset();
 
 		//
-		// for notifies, we just need to know it worked- we don't actualy need to
+		// for notifies, we just need to know it worked- we don't actually need to
 		// return the response object
 		//
 		return true;

@@ -48,7 +48,7 @@ class Net_DNS2_Header
     public $qr;         //  1 bit - 0 = query, 1 = response
     public $opcode;     //  4 bit - op code
     public $aa;         //  1 bit - Authoritative Answer
-    public $tc;         //  1 bit - TrunCation
+    public $tc;         //  1 bit - Truncation
     public $rd;         //  1 bit - Recursion Desired
     public $ra;         //  1 bit - Recursion Available
     public $z;          //  1 bit - Reserved

@@ -41,7 +41,7 @@ $scan_date  = read_config_option('mt_scan_date');
 $start_time = microtime(true);
 
 /* drop a few environment variables to minimize net-snmp load times */
-putenv('MIBS=RFC-1215');
+putenv('MIBS=:');
 ini_set('max_execution_time', '0');
 ini_set('memory_limit', '-1');
 

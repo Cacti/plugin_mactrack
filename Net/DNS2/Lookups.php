@@ -18,7 +18,7 @@
  */
 
 //
-// initalize the packet id value
+// initialize the packet id value
 //
 Net_DNS2_Lookups::$next_packet_id   = mt_rand(0, 65535);
 
@@ -36,7 +36,7 @@ Net_DNS2_Lookups::$rr_metatypes_by_id   = array_flip(Net_DNS2_Lookups::$rr_metat
 Net_DNS2_Lookups::$protocol_by_id       = array_flip(Net_DNS2_Lookups::$protocol_by_name);
 
 /**
- * This class provides simple lookups used througout the Net_DNS2 code
+ * This class provides simple lookups used throughout the Net_DNS2 code
  * 
  */
 class Net_DNS2_Lookups

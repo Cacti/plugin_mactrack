@@ -75,7 +75,7 @@ class Net_DNS2_Packet
     public $authority = [];
 
     /*
-     * array of Net_DNS2_RR Objects for Addtitional
+     * array of Net_DNS2_RR Objects for Additional
      */
     public $additional = [];
 
