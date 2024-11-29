@@ -672,6 +672,32 @@ function mactrack_database_upgrade() {
 		db_fetch_cell("UPDATE plugin_realms set display='Mactrack Administrator' WHERE plugin = 'mactrack' and display='Device Tracking Administrator'");
 	}
 
+	// 4.9
+	db_execute("ALTER TABLE mac_track_aggregated_ports DROP INDEX port_number");
+	db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, ':', '')");
+	db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, '-', '')");
+	db_execute("CREATE INDEX `port_number` on mac_track_aggregated_ports (`port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized`)");
+
+	db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, ':', '')");
+	db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, '-', '')");
+
+	db_execute("UPDATE mac_track_ips SET mac_address = REPLACE(mac_address, ':', '')");
+	db_execute("UPDATE mac_track_ips SET mac_address = REPLACE(mac_address, '-', '')");
+
+	db_execute("UPDATE mac_track_macauth SET mac_address = REPLACE(mac_address, ':', '')");
+	db_execute("UPDATE mac_track_macauth SET mac_address = REPLACE(mac_address, '-', '')");
+
+	db_execute("UPDATE mac_track_macwatch SET mac_address = REPLACE(mac_address, ':', '')");
+	db_execute("UPDATE mac_track_macwatch SET mac_address = REPLACE(mac_address, '-', '')");
+
+	db_execute("UPDATE mac_track_ports SET mac_address = REPLACE(mac_address, ':', '')");
+	db_execute("UPDATE mac_track_ports SET mac_address = REPLACE(mac_address, '-', '')");
+
+	db_execute("UPDATE mac_track_temp_ports SET mac_address = REPLACE(mac_address, ':', '')");
+	db_execute("UPDATE mac_track_temp_ports SET mac_address = REPLACE(mac_address, '-', '')");
+
+	db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, ':', '')");
+	db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, '-', '')");
 }
 
 function mactrack_setup_database() {
@@ -737,7 +763,7 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'highPort', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'disabled', 'type' => 'varchar(2)', 'NULL' => false, 'default' => '');
 	$data['primary'] = 'device_type_id';
-	$data['unique_keys'] = array('name' => 'snmp_info', 'columns' => 'sysDescr_match`,`sysObjectID_match`,`device_type');
+	$data['unique_keys'][] = array('name' => 'snmp_info', 'columns' => 'sysDescr_match`,`sysObjectID_match`,`device_type');
 	$data['keys'][] = array('name' => 'device_type', 'columns' => 'device_type');
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
@@ -791,7 +817,7 @@ function mactrack_setup_database() {
 	$data['columns'][] = array('name' => 'last_runduration', 'type' => 'decimal(10,5)', 'NULL' => false, 'default' => '0.00000');
 	$data['columns'][] = array('name' => 'scan_trunk_port', 'type' => 'text', 'NULL' => true, 'default' => '');
 	$data['primary'] = 'device_id';
-	$data['unique_keys'] = array('name' => 'hostname_snmp_port_site_id', 'columns' => 'hostname`,`snmp_port`,`site_id');
+	$data['unique_keys'][] = array('name' => 'hostname_snmp_port_site_id', 'columns' => 'hostname`,`snmp_port`,`site_id');
 	$data['keys'][] = array('name' => 'site_id', 'columns' => 'site_id');
 	$data['keys'][] = array('name' => 'host_id', 'columns' => 'host_id');
 	$data['keys'][] = array('name' => 'snmp_sysDescr', 'columns' => 'snmp_sysDescr');
@@ -1162,6 +1188,7 @@ function mactrack_setup_database() {
 	$data['type'] = 'InnoDB';
 	$data['comment'] = 'Table for VRF ARP translation';
 	api_plugin_db_table_create('mactrack', 'mac_track_arp', $data);
+
 
 	db_execute("INSERT INTO mac_track_device_types
 		(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)

@@ -42,7 +42,11 @@ if (is_numeric($collect_frequency)) {
 	/* let PHP a 5 minutes less than the rerun frequency */
 	$max_run_duration = ($collect_frequency * 60) - $poller_interval;
 	ini_set('max_execution_time', $max_run_duration);
+} else {
+	// default for force
+	$max_run_duration = 1800;
 }
+
 
 /* Disable Mib File Loading */
 putenv('MIBS=:');
