@@ -3522,7 +3522,7 @@ function mactrack_format_mac($mac) {
 	}
 
 	if ($format == 'aabbccddeeff') {
-		return strtr($mac, $separator, '');
+		return $mac;
 	}
 
 	if ($format == 'aabb-ccdd-eeff') {
