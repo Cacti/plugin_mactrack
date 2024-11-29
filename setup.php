@@ -340,13 +340,6 @@ function mactrack_config_settings() {
 				'aabb.ccdd.eeff' => 'aabb.ccdd.eeff'
 				)
 			),
-		'mt_mac_delim' => array(
-			'friendly_name' => __('Mac Address Delimiter', 'mactrack'),
-			'description' => __('DB format, not visible in GUI. How should each octet of the MAC address be delimited.', 'mactrack'),
-			'method' => 'drop_array',
-			'default' => ':',
-			'array' => array(':' => __('Colon [:]', 'mactrack'), '-' => __('Dash [-]', 'mactrack'))
-			),
 		'mt_ignorePorts' => array(
 			'method' => 'textbox',
 			'friendly_name' => __('Ports to Ignore', 'mactrack'),

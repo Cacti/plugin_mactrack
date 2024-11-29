@@ -42,6 +42,9 @@ if (is_numeric($collect_frequency)) {
 	/* let PHP a 5 minutes less than the rerun frequency */
 	$max_run_duration = ($collect_frequency * 60) - $poller_interval;
 	ini_set('max_execution_time', $max_run_duration);
+} else {
+	// default for force
+	$max_run_duration = 1800;
 }
 
 /* Disable Mib File Loading */
@@ -441,7 +444,6 @@ function collect_mactrack_data($start, $site_id = 0) {
 		/* grab arpwatch data */
 		if (read_config_option('mt_arpwatch') == 'on') {
 			$arp_db     = read_config_option('mt_arpwatch_path');
-			$delim      = read_config_option('mt_mac_delim');
 			$mac_ip_dns = array();
 
 			if (file_exists($arp_db)) {
@@ -464,7 +466,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 							}
 
 							/* create the mac address */
-							$mac = $mac_ad[0] . $delim . $mac_ad[1] . $delim . $mac_ad[2] . $delim . $mac_ad[3] . $delim . $mac_ad[4] . $delim . $mac_ad[5];
+							$mac = $mac_ad[0] . $mac_ad[1] . $mac_ad[2] . $mac_ad[3] . $mac_ad[4] . $mac_ad[5];
 
 							/* update the array */
 							$mac_ip_dns[$mac]['ip']  = $line[1];

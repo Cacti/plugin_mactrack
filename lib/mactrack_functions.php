@@ -2016,8 +2016,6 @@ function xform_net_address($ip_address) {
 function xform_mac_address($mac_address) {
 	$max_address = trim($mac_address);
 
-	$separator = read_config_option('mt_mac_delim');
-
 	if ($mac_address == '') {
 		$mac_address = 'NOT USER';
 	} elseif (strlen($mac_address) > 10) { /* return is in ascii */
@@ -2036,7 +2034,7 @@ function xform_mac_address($mac_address) {
 		$mac_address = $mac;
 	}
 
-	$mac_address = str_replace(':', $separator, $max_address);
+	$mac_address = str_replace(':', '', $max_address);
 
 	return strtoupper($mac_address);
 }
@@ -3484,15 +3482,20 @@ function mactrack_arr_key ($array, $key, $default = '') {
 
 function mactrack_format_mac($mac) {
 
-	$format = read_config_option('mt_mac_format');
-	$separator = read_config_option('mt_mac_delim');
-
-	if ($format == 'aa:bb:cc:dd:ee:dd' && $separator = ':') {
+	if (is_null($mac) || strlen($mac) < 10) {
 		return $mac;
 	}
 
-	if ($format == 'aa-bb-cc-dd-ee-dd' && $separator = '-') {
-		return $mac;
+	$format = read_config_option('mt_mac_format');
+
+	if ($format == 'aa:bb:cc:dd:ee:dd') {
+		$items = str_split($mac, 2);
+		return  implode(':', $items);
+	}
+
+	if ($format == 'aa-bb-cc-dd-ee-dd') {
+		$items = str_split($mac, 2);
+		return  implode('-', $items);
 	}
 
 	if ($format == 'aabbccddeeff') {
