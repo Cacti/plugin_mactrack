@@ -455,7 +455,7 @@ function mactrack_view_export_macs() {
 	}
 }
 
-function mactrack_view_get_mac_records(&$sql_where, $apply_limits = true, $rows) {
+function mactrack_view_get_mac_records(&$sql_where, $rows, $apply_limits = true) {
 	/* form the 'where' clause for our main sql query */
 	if (get_request_var('mac_filter') != '') {
 
@@ -665,7 +665,7 @@ function mactrack_view_macs() {
 		$rows = get_request_var('rows');
 	}
 
-	$port_results = mactrack_view_get_mac_records($sql_where, true, $rows);
+	$port_results = mactrack_view_get_mac_records($sql_where, $rows, true);
 
 	/* prevent table scans, either a device or site must be selected */
 	if ($sql_where == '') {
@@ -871,7 +871,7 @@ function mactrack_view_aggregated_macs() {
 		$rows = get_request_var('rows');
 	}
 
-	$port_results = mactrack_view_get_mac_records($sql_where, true, $rows);
+	$port_results = mactrack_view_get_mac_records($sql_where, $rows, true);
 
 	/* prevent table scans, either a device or site must be selected */
 	if ($sql_where == '') {
