@@ -356,7 +356,7 @@ function mactrack_database_upgrade() {
 	mactrack_add_column('mac_track_sites',
 		'scan_vlans',
 		"ALTER TABLE `mac_track_sites` ADD COLUMN `scan_vlans` text DEFAULT ''");
-	
+
 	mactrack_add_column('mac_track_devices',
 		'device_name',
 		"ALTER TABLE `mac_track_devices` ADD COLUMN `device_name` varchar(100) default '' AFTER `host_id`");
@@ -673,10 +673,14 @@ function mactrack_database_upgrade() {
 	}
 
 	// 4.9
-	db_execute("ALTER TABLE mac_track_aggregated_ports DROP INDEX port_number");
+	if (db_index_exists('mac_track_aggregated_ports', 'port_number')) {
+		db_execute("ALTER TABLE mac_track_aggregated_ports DROP INDEX port_number");
+	}
+
 	db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, ':', '')");
 	db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, '-', '')");
-	db_execute("CREATE INDEX `port_number` on mac_track_aggregated_ports (`port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized`)");
+
+	db_execute("ALTER TABLE mac_track_aggregated_ports CREATE INDEX `port_number` (`port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized`)");
 
 	db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, ':', '')");
 	db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, '-', '')");
