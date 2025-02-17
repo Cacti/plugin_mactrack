@@ -2599,7 +2599,7 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 		db_execute('DELETE FROM mac_track_oui_database WHERE present=0');
 
 		/* set correct format */
-		db_execute("UPDATE mac_track_oui_database SET mac_address = REPLACE(mac_address, ':', '')");
+		db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(vendor_mac, ':', '')");
 
 		/* report some information */
 		if ($type != 'ui') print '<tr><td>';
