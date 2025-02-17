@@ -482,11 +482,12 @@ function mactrack_database_upgrade() {
 
 	// new for 4.6
 	mactrack_add_column('mac_track_device_types',
-	'disabled',
-	"ALTER TABLE `mac_track_device_types` ADD COLUMN `disabled` varchar(2) default '' AFTER `highPort`");
+		'disabled',
+		"ALTER TABLE `mac_track_device_types` ADD COLUMN `disabled` varchar(2) default '' AFTER `highPort`");
 
 	// add few device types examples if does not exist
-	$count = db_fetch_cell("SELECT count(*) FROM mac_track_device_types WHERE description LIKE '%-default'");
+	$count = db_fetch_cell("SELECT COUNT(*) FROM mac_track_device_types WHERE description LIKE '%-default'");
+
 	if ($count == 0) {
 		db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
@@ -673,37 +674,39 @@ function mactrack_database_upgrade() {
 	}
 
 	// 4.9
-	if (db_index_exists('mac_track_aggregated_ports', 'port_number')) {
+	$keys = db_fetch_assoc('SHOW INDEXES FROM mac_track_aggregated_ports WHERE KEY_NAME="port_number"');
+
+	if ($keys != 7) {
 		db_execute("ALTER TABLE mac_track_aggregated_ports DROP INDEX port_number");
+
+		db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, ':', '')");
+		db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, '-', '')");
+
+		db_execute("ALTER TABLE mac_track_aggregated_ports ADD INDEX `port_number` (`port_number`, `mac_address`, `ip_address`, `device_id`, `site_id`, `vlan_id`, `authorized`)");
+
+		db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, ':', '')");
+		db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, '-', '')");
+
+		db_execute("UPDATE mac_track_ips SET mac_address = REPLACE(mac_address, ':', '')");
+		db_execute("UPDATE mac_track_ips SET mac_address = REPLACE(mac_address, '-', '')");
+
+		db_execute("UPDATE mac_track_macauth SET mac_address = REPLACE(mac_address, ':', '')");
+		db_execute("UPDATE mac_track_macauth SET mac_address = REPLACE(mac_address, '-', '')");
+
+		db_execute("UPDATE mac_track_macwatch SET mac_address = REPLACE(mac_address, ':', '')");
+		db_execute("UPDATE mac_track_macwatch SET mac_address = REPLACE(mac_address, '-', '')");
+
+		db_execute("UPDATE mac_track_ports SET mac_address = REPLACE(mac_address, ':', '')");
+		db_execute("UPDATE mac_track_ports SET mac_address = REPLACE(mac_address, '-', '')");
+
+		db_execute("UPDATE mac_track_temp_ports SET mac_address = REPLACE(mac_address, ':', '')");
+		db_execute("UPDATE mac_track_temp_ports SET mac_address = REPLACE(mac_address, '-', '')");
+
+		db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, ':', '')");
+		db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, '-', '')");
+
+		db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(vendor_mac, ':', '')");
 	}
-
-	db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, ':', '')");
-	db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, '-', '')");
-
-	db_execute("ALTER TABLE mac_track_aggregated_ports ADD INDEX `port_number` (`port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized`)");
-
-	db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, ':', '')");
-	db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, '-', '')");
-
-	db_execute("UPDATE mac_track_ips SET mac_address = REPLACE(mac_address, ':', '')");
-	db_execute("UPDATE mac_track_ips SET mac_address = REPLACE(mac_address, '-', '')");
-
-	db_execute("UPDATE mac_track_macauth SET mac_address = REPLACE(mac_address, ':', '')");
-	db_execute("UPDATE mac_track_macauth SET mac_address = REPLACE(mac_address, '-', '')");
-
-	db_execute("UPDATE mac_track_macwatch SET mac_address = REPLACE(mac_address, ':', '')");
-	db_execute("UPDATE mac_track_macwatch SET mac_address = REPLACE(mac_address, '-', '')");
-
-	db_execute("UPDATE mac_track_ports SET mac_address = REPLACE(mac_address, ':', '')");
-	db_execute("UPDATE mac_track_ports SET mac_address = REPLACE(mac_address, '-', '')");
-
-	db_execute("UPDATE mac_track_temp_ports SET mac_address = REPLACE(mac_address, ':', '')");
-	db_execute("UPDATE mac_track_temp_ports SET mac_address = REPLACE(mac_address, '-', '')");
-
-	db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, ':', '')");
-	db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, '-', '')");
-
-	db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(vendor_mac, ':', '')");
 }
 
 function mactrack_setup_database() {
