@@ -680,7 +680,7 @@ function mactrack_database_upgrade() {
 	db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, ':', '')");
 	db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, '-', '')");
 
-	db_execute("ALTER TABLE mac_track_aggregated_ports CREATE INDEX `port_number` (`port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized`)");
+	db_execute("ALTER TABLE mac_track_aggregated_ports ADD INDEX `port_number` (`port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized`)");
 
 	db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, ':', '')");
 	db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, '-', '')");
@@ -703,7 +703,7 @@ function mactrack_database_upgrade() {
 	db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, ':', '')");
 	db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, '-', '')");
 
-	db_execute("UPDATE mac_track_oui_database SET mac_address = REPLACE(mac_address, ':', '')");
+	db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(vendor_mac, ':', '')");
 }
 
 function mactrack_setup_database() {

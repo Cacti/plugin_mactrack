@@ -2577,7 +2577,7 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 
 				if (substr_count($row, '(hex)')) {
 					$begin_vendor = true;
-					$vendor_mac = str_replace('-', ':', substr(trim($row), 0, 8));
+					$vendor_mac = str_replace('-', '', substr(trim($row), 0, 8));
 					$hex_end = strpos($row, '(hex)') + 5;
 					$vendor_name= trim(substr($row,$hex_end));
 				}
