@@ -721,7 +721,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 		/* populate the vendor_macs for this pass */
 		db_execute('UPDATE mac_track_temp_ports
-			SET vendor_mac=SUBSTRING(mac_address,1,8)');
+			SET vendor_mac=SUBSTRING(mac_address,1,6)');
 
 		mactrack_debug('MAC addresses to Vendor MACS association pass complete.');
 

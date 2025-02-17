@@ -703,7 +703,7 @@ function mactrack_database_upgrade() {
 	db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, ':', '')");
 	db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, '-', '')");
 
-	db_execute("UPDATE mac_track_oui_database SET mac_address = REPLACE(mac_address, ':', '')");
+	db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(vendor_mac, ':', '')");
 }
 
 function mactrack_setup_database() {

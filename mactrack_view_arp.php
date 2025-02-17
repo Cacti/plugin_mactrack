@@ -252,7 +252,7 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = true, $rows) 
 		LEFT JOIN mac_track_sites AS mts
 		ON mti.site_id = mts.site_id
 		LEFT JOIN mac_track_oui_database AS mtod
-		ON mtod.vendor_mac=SUBSTRING(mti.mac_address, 1, 8)
+		ON mtod.vendor_mac=SUBSTRING(mti.mac_address, 1, 6)
 		LEFT JOIN mac_track_interfaces AS mtin
 		ON mtin.device_id=mti.device_id
 		AND mtin.ifIndex=mti.port_number
@@ -298,7 +298,7 @@ function mactrack_view_ips() {
 			LEFT JOIN mac_track_sites AS mts
 			ON mti.site_id=mts.site_id
 			LEFT JOIN mac_track_oui_database AS mtod
-			ON mtod.vendor_mac=SUBSTRING(mti.mac_address,1,8)
+			ON mtod.vendor_mac=SUBSTRING(mti.mac_address,1,6)
 			$sql_where";
 
 		$total_rows = db_fetch_cell($rows_query_string);
@@ -309,7 +309,7 @@ function mactrack_view_ips() {
 			LEFT JOIN mac_track_sites AS mts
 			ON mti.site_id=mts.site_id
 			LEFT JOIN mac_track_oui_database AS mtod
-			ON mtod.vendor_mac=SUBSTRING(mti.mac_address,1,8)
+			ON mtod.vendor_mac=SUBSTRING(mti.mac_address,1,6)
 			$sql_where";
 
 		$total_rows = db_fetch_cell($rows_query_string);
