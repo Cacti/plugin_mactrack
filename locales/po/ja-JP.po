@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-04-20 17:08-0400\nPO-Revision-Date: 2024-11-22 14:58+0000\nLast-Translator: Nakayama Kito <nakayamakito@icloud.com>\nLanguage-Team: Japanese <http://translate.cacti.net/projects/cacti/mactrack/ja/>\nLanguage: ja-JP\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 4.8.1\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-04-20 17:08-0400\nPO-Revision-Date: 2025-03-08 08:26+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Japanese <http://translate.cacti.net/projects/cacti/mactrack/ja/>\nLanguage: ja-JP\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.4.3\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -177,13 +177,13 @@ msgid "%d Minutes"
 msgstr "%d 分ごと"
 
 #: lib/mactrack_functions.php:3091
-#, fuzzy, php-format
+#, php-format
 msgid "%d Hours"
 msgstr "%d 時間"
 
 #: lib/mactrack_functions.php:3095 setup.php:941 setup.php:942 setup.php:943
 #: setup.php:944 setup.php:945
-#, fuzzy, php-format
+#, php-format
 msgid "%d Days"
 msgstr "%d 日"
 
