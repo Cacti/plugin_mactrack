@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-04-20 17:08-0400\nPO-Revision-Date: 2025-03-18 07:08+0000\nLast-Translator: Daniel Nylander <weblate@danielnylander.se>\nLanguage-Team: Swedish <http://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 4.8.1\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-04-20 17:08-0400\nPO-Revision-Date: 2025-03-18 09:57+0000\nLast-Translator: Daniel Nylander <weblate@danielnylander.se>\nLanguage-Team: Swedish <http://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 4.8.1\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -64,16 +64,16 @@ msgstr "OUI Database Download från IEEE FAILED"
 #: lib/mactrack_functions.php:2558
 #, php-format
 msgid "There were '%d' Entries Added/Updated in the database."
-msgstr "Det fanns \"% d\" Inlägg tillagda / uppdaterade i databasen."
+msgstr "Det lades till / uppdaterades \"%d\" poster i databasen."
 
 #: lib/mactrack_functions.php:2560
 #, php-format
 msgid "There were '%d' Records Removed from the database."
-msgstr "Det fanns \"% d\" poster borttagna från databasen."
+msgstr "Det togs bort \"%d\" poster från databasen."
 
 #: lib/mactrack_functions.php:2582
 msgid "atifIndexes data collection complete"
-msgstr "AtifIndexes datainsamling slutförd"
+msgstr "atifIndexes datainsamling slutförd"
 
 #: lib/mactrack_functions.php:2600
 msgid "atPhysAddress data collection complete"
@@ -152,7 +152,7 @@ msgstr "Enhet Aktivera ' %s'"
 #: lib/mactrack_functions.php:2969
 #, php-format
 msgid "Device Disable '%d'"
-msgstr "Enhet Inaktivera \"% d\""
+msgstr "Enhet inaktivera \"%d\""
 
 #: lib/mactrack_functions.php:3085 lib/mactrack_functions.php:3117
 #: lib/mactrack_functions.php:3118 lib/mactrack_functions.php:3180
@@ -179,7 +179,7 @@ msgstr "%d minuter"
 #: lib/mactrack_functions.php:3091
 #, php-format
 msgid "%d Hours"
-msgstr "% d timmar"
+msgstr "%d timmar"
 
 #: lib/mactrack_functions.php:3095 setup.php:941 setup.php:942 setup.php:943
 #: setup.php:944 setup.php:945
@@ -190,7 +190,7 @@ msgstr "%d Dagar"
 #: lib/mactrack_functions.php:3098
 #, php-format
 msgid "%d Weeks"
-msgstr "% d veckor"
+msgstr "%d veckor"
 
 #: lib/mactrack_functions.php:3116
 msgid "Not Recorded"
@@ -199,12 +199,12 @@ msgstr "Inte inspelat"
 #: lib/mactrack_functions.php:3136
 #, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
-msgstr "Status: Löpande, Processer:% d, Framsteg: %s, LastRuntime:% f"
+msgstr "Status: Körande, Processer: %d, Förlopp: %s, LastRuntime: %2.1f"
 
 #: lib/mactrack_functions.php:3138
 #, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
-msgstr "Status: Inaktiv, LastRuntime:% f sekunder, Processer:% d processer, Enheter:% d, Nästa körtid: %s"
+msgstr "Status: Inaktiv, LastRuntime: %2.1f sekunder, Processer: %d processer, Enheter: %d, Nästa körtid: %s"
 
 #: lib/mactrack_functions.php:3140 mactrack_device_types.php:959
 #: mactrack_devices.php:1244 mactrack_utilities.php:240
@@ -257,7 +257,7 @@ msgstr "MAC-adress"
 #: lib/mactrack_functions.php:3238 mactrack_view_interfaces.php:291
 #: mactrack_view_interfaces.php:607 setup.php:552
 msgid "Interfaces"
-msgstr "gränssnitt"
+msgstr "Gränssnitt"
 
 #: lib/mactrack_functions.php:3239
 msgid "Dot1x"
@@ -424,7 +424,7 @@ msgstr "Cisco"
 #: mactrack_device_types.php:482
 #, php-format
 msgid "There were %d Device Types Added!"
-msgstr "Det fanns% d Enhetstyper tillagda!"
+msgstr "Det lades till %d enhetstyper!"
 
 #: mactrack_device_types.php:484
 msgid "No New Device Types Found!"
@@ -472,51 +472,51 @@ msgstr "Filen måste innehålla en rubrikrad med följande kolumnrubriker."
 
 #: mactrack_device_types.php:532
 msgid " - A common name for the device.  For example Cisco 6509 Switch"
-msgstr "- Ett vanligt namn på enheten. Till exempel Cisco 6509 Switch"
+msgstr " - Ett vanligt namn på enheten. Till exempel Cisco 6509 Switch"
 
 #: mactrack_device_types.php:533
 msgid " - The vendor who produces this device"
-msgstr "- Säljaren som producerar denna enhet"
+msgstr " - Tillverkaren som producerar denna enhet"
 
 #: mactrack_device_types.php:534
 msgid " - The type of device this is.  See the notes below for this integer value"
-msgstr "- Typ av enhet som detta är. Se anteckningarna nedan för detta heltal värde"
+msgstr " - Typ av enhet som detta är.  Se anteckningarna nedan för detta heltalsvärde"
 
 #: mactrack_device_types.php:535
 msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
-msgstr "- En unik uppsättning tecken från snmp sysDescr som unikt identifierar den här enheten"
+msgstr " - En unik uppsättning tecken från snmp sysDescr som unikt identifierar den här enheten"
 
 #: mactrack_device_types.php:536
 msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
-msgstr "- Säljaren specifika snmp sysObjectID som särskiljer denna enhet från nästa"
+msgstr " - Tillverkarens specifika snmp sysObjectID som särskiljer denna enhet från nästa"
 
 #: mactrack_device_types.php:537
 msgid " - The scanning function that will be used to scan this device type"
-msgstr "- Skanningsfunktionen som ska användas för att skanna denna enhetstyp"
+msgstr " - Skanningsfunktionen som ska användas för att skanna denna enhetstyp"
 
 #: mactrack_device_types.php:538
 msgid " - The IP scanning function that will be used to scan this device type"
-msgstr "- IP-skanningsfunktionen som ska användas för att skanna denna enhetstyp"
+msgstr " - IP-skanningsfunktionen som ska användas för att skanna denna enhetstyp"
 
 #: mactrack_device_types.php:539
 msgid " - The 802.1x scanning function that will be used to scan this device type"
-msgstr "- Funktionen 802.1x-skanning som ska användas för att skanna den här enhetstypen"
+msgstr " - Funktionen 802.1x-skanning som ska användas för att skanna den här enhetstypen"
 
 #: mactrack_device_types.php:540
 msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
-msgstr "- Om serienummeret för denna enhetstyp kan erhållas via en SNMP-fråga lägger du till det är OID här"
+msgstr " - Om serienummeret för denna enhetstyp kan erhållas via en SNMP-fråga lägger du till det är OID här"
 
 #: mactrack_device_types.php:541
 msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
-msgstr "- Om din skanningsfunktion inte har möjlighet att isolera trunkportar eller länkportar, är detta startportnumret för användarportar"
+msgstr " - Om din skanningsfunktion inte har möjlighet att isolera trunkportar eller länkportar, är detta startportnumret för användarportar"
 
 #: mactrack_device_types.php:542
 msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
-msgstr "- Samma som lowPort med undantag för att detta är det högnummererade användarportnumret"
+msgstr " - Samma som lowPort med undantag för att detta är det högnummererade användarportnumret"
 
 #: mactrack_device_types.php:543
 msgid " - Disabled type is not used"
-msgstr "- Inaktiverad typ används inte"
+msgstr " - Inaktiverad typ används inte"
 
 #: mactrack_device_types.php:545 mactrack_devices.php:558
 msgid "The primary key for this table is a combination of the following three fields:"
@@ -528,7 +528,7 @@ msgstr "Om du försöker importera dubbla enhetstyper uppdateras de befintliga u
 
 #: mactrack_device_types.php:551 mactrack_devices.php:564
 msgid " is an integer field and must be one of the following:"
-msgstr "är ett heltal och måste vara ett av följande:"
+msgstr " är ett heltal och måste vara ett av följande:"
 
 #: mactrack_device_types.php:553 mactrack_devices.php:566
 msgid "1 - Switch/Hub"
@@ -559,7 +559,7 @@ msgstr "Switch / router"
 #: mactrack_device_types.php:576 mactrack_device_types.php:1092
 #: mactrack_devices.php:1188 mactrack_view_devices.php:459 setup.php:887
 msgid "Router"
-msgstr "router"
+msgstr "Router"
 
 #: mactrack_device_types.php:724
 #, php-format
@@ -776,83 +776,83 @@ msgstr "Ange platsen för CSV-filen som innehåller din enhetinformation."
 
 #: mactrack_devices.php:537
 msgid " - The SiteID known to Device Tracking for this device"
-msgstr "- SiteID känt för Device Tracking för den här enheten"
+msgstr " - SiteID känt för Enhetsspårning för den här enheten"
 
 #: mactrack_devices.php:538
 msgid " - A simple name for the device.  For example Cisco 6509 Switch"
-msgstr "- Ett enkelt namn för enheten. Till exempel Cisco 6509 Switch"
+msgstr " - Ett enkelt namn för enheten. Till exempel Cisco 6509 Switch"
 
 #: mactrack_devices.php:539
 msgid " - The IP Address or DNS Name for the device"
-msgstr "- IP-adressen eller DNS-namnet för enheten"
+msgstr " - IP-adressen eller DNS-namnet för enheten"
 
 #: mactrack_devices.php:540
 msgid " - More detailed information about the device, including location, environmental conditions, etc."
-msgstr "- Mer detaljerad information om enheten, inklusive plats, miljöförhållanden etc."
+msgstr " - Mer detaljerad information om enheten, inklusive plats, miljöförhållanden etc."
 
 #: mactrack_devices.php:541
 msgid " - A list of ports that should not be scanned for user devices"
-msgstr "- En lista över portar som inte ska skannas för användaranordningar"
+msgstr " - En lista över portar som inte ska skannas för användarenheter"
 
 #: mactrack_devices.php:542
 msgid " - Redundant information indicating the intended device type.  See below for valid values."
-msgstr "- Överflödig information som anger den avsedda enhetstypen. Se nedan för giltiga värden."
+msgstr " - Överflödig information som anger den avsedda enhetstypen.  Se nedan för giltiga värden."
 
 #: mactrack_devices.php:543
 msgid " - Id of a set of SNMP options"
-msgstr "- Id för en uppsättning SNMP-alternativ"
+msgstr " - Id för en uppsättning SNMP-alternativ"
 
 #: mactrack_devices.php:544
 msgid " - The current snmp read string for the device"
-msgstr "- Den aktuella snmp-lässträngen för enheten"
+msgstr " - Den aktuella snmp-lässträngen för enheten"
 
 #: mactrack_devices.php:545
 msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
-msgstr "- Den snmpversion du vill skanna den här enheten med. Giltiga värden är 1, 2 och 3"
+msgstr " - Den snmp-version du vill skanna den här enheten med. Giltiga värden är 1, 2 och 3"
 
 #: mactrack_devices.php:546
 msgid " - The UDP port that the snmp agent is running on"
-msgstr "- UDP-porten som snmp-agenten körs på"
+msgstr " - UDP-porten som snmp-agenten körs på"
 
 #: mactrack_devices.php:547
 msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
-msgstr "- Timeout i millisekunder för att vänta på ett snmp-svar innan du försöker igen"
+msgstr " - Timeout i millisekunder för att vänta på ett snmp-svar innan du försöker igen"
 
 #: mactrack_devices.php:548
 msgid " - The number of times to retry a snmp request before giving up"
-msgstr "- Antalet gånger för att försöka igen en snmp-förfrågan innan du ger upp"
+msgstr " - Antalet gånger för att försöka igen en snmp-förfrågan innan du ger upp"
 
 #: mactrack_devices.php:549
 msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
-msgstr "- Specificerat antalet OID: er som kan erhållas i en enda SNMP-förfrågan"
+msgstr " - Specificerat antalet OID: er som kan erhållas i en enda SNMP-förfrågan"
 
 #: mactrack_devices.php:550
 msgid " - SNMP V3: SNMP username"
-msgstr "- SNMP V3: SNMP användarnamn"
+msgstr " - SNMP V3: SNMP användarnamn"
 
 #: mactrack_devices.php:551
 msgid " - SNMP V3: SNMP password"
-msgstr "- SNMP V3: SNMP-lösenord"
+msgstr " - SNMP V3: SNMP-lösenord"
 
 #: mactrack_devices.php:552
 msgid " - SNMP V3: SNMP authentication protocol"
-msgstr "- SNMP V3: SNMP-autentiseringsprotokoll"
+msgstr " - SNMP V3: SNMP-autentiseringsprotokoll"
 
 #: mactrack_devices.php:553
 msgid " - SNMP V3: SNMP privacy passphrase"
-msgstr "- SNMP V3: SNMP sekretess lösenfras"
+msgstr " - SNMP V3: SNMP sekretess lösenfras"
 
 #: mactrack_devices.php:554
 msgid " - SNMP V3: SNMP privacy protocol"
-msgstr "- SNMP V3: SNMP sekretessprotokoll"
+msgstr " - SNMP V3: SNMP sekretessprotokoll"
 
 #: mactrack_devices.php:555
 msgid " - SNMP V3: SNMP context"
-msgstr "SNMP V3: SNMP-kontext"
+msgstr " - SNMP V3: SNMP-kontext"
 
 #: mactrack_devices.php:556
 msgid " - SNMP V3: SNMP engine id"
-msgstr "- SNMP V3: SNMP-motor ID"
+msgstr " - SNMP V3: SNMP-motor ID"
 
 #: mactrack_devices.php:562
 msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
@@ -893,7 +893,7 @@ msgstr "SNMP Information"
 
 #: mactrack_devices.php:925
 msgid "System:"
-msgstr "System"
+msgstr "System:"
 
 #: mactrack_devices.php:926
 msgid "Uptime:"
@@ -1144,7 +1144,7 @@ msgstr "<name> (1)"
 
 #: mactrack_snmp.php:264
 msgid "Name Format:"
-msgstr "Namnformat"
+msgstr "Namnformat:"
 
 #: mactrack_snmp.php:338
 #, php-format
@@ -1292,7 +1292,7 @@ msgstr "Maximala samtidiga processer:"
 
 #: mactrack_utilities.php:260
 msgid "processes"
-msgstr "Processer"
+msgstr "processer"
 
 #: mactrack_utilities.php:262
 msgid "Maximum Per Device Scan Time:"
@@ -1979,7 +1979,7 @@ msgstr "Antal"
 
 #: mactrack_view_macs.php:1171
 msgid "Aggregated"
-msgstr "aggregerade"
+msgstr "Aggregerad"
 
 #: mactrack_view_sites.php:30
 msgid "Device Tracking - Site Report View"
@@ -2134,7 +2134,7 @@ msgstr "När du granskar nätverksgränssnittsstatistik, vilken bandbreddströsk
 #: setup.php:350 setup.php:351 setup.php:352 setup.php:353
 #, php-format
 msgid "%d Percent"
-msgstr "% d Procent"
+msgstr "%d procent"
 
 #: setup.php:357
 msgid "DNS Settings"
@@ -2274,7 +2274,7 @@ msgstr "Standard SNMP läs community för alla nya värdar."
 
 #: setup.php:492
 msgid "Communities"
-msgstr "gemenskaperna"
+msgstr "Communities"
 
 #: setup.php:493
 msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
@@ -2421,7 +2421,7 @@ msgstr "%d sekunder"
 #: setup.php:880
 #, php-format
 msgid "%d Minute"
-msgstr "% d minut"
+msgstr "%d minut"
 
 #: setup.php:892
 msgid "Matches"
@@ -2433,11 +2433,11 @@ msgstr "Innehåller"
 
 #: setup.php:894
 msgid "Begins With"
-msgstr "börjar med"
+msgstr "Börjar med"
 
 #: setup.php:895
 msgid "Does Not Contain"
-msgstr "innehåller inte"
+msgstr "Innehåller inte"
 
 #: setup.php:896
 msgid "Does Not Begin With"
@@ -2475,13 +2475,13 @@ msgstr "Var %d minut"
 #: setup.php:932
 #, php-format
 msgid "Every %d Hour"
-msgstr "Varje% d timme"
+msgstr "Varje %d timme"
 
 #: setup.php:933 setup.php:934 setup.php:935 setup.php:936 setup.php:956
 #: setup.php:1532 setup.php:1533
 #, php-format
 msgid "Every %d Hours"
-msgstr "Varje% d timmar"
+msgstr "Varje %d timmar"
 
 #: setup.php:937 setup.php:957 setup.php:1534
 msgid "Every Day"
@@ -2490,17 +2490,17 @@ msgstr "Varje dag"
 #: setup.php:946
 #, php-format
 msgid "%d Month"
-msgstr "% d månad"
+msgstr "%d månad"
 
 #: setup.php:947 setup.php:948 setup.php:949
 #, php-format
 msgid "%d Months"
-msgstr "% d månader"
+msgstr "%d månader"
 
 #: setup.php:950
 #, php-format
 msgid "%d Year"
-msgstr "% d år"
+msgstr "%d år"
 
 #: setup.php:955
 msgid "On Scan Completion"
@@ -2509,7 +2509,7 @@ msgstr "På Scan-slutförandet"
 #: setup.php:958
 #, php-format
 msgid "Every %d Days"
-msgstr "Varje% d dagar"
+msgstr "Varje %d dagar"
 
 #: setup.php:959
 msgid "Every Week"
