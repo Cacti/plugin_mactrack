@@ -3514,12 +3514,12 @@ function mactrack_format_mac($mac) {
 
 	$format = read_config_option('mt_mac_format');
 
-	if ($format == 'aa:bb:cc:dd:ee:dd') {
+	if ($format == 'aa:bb:cc:dd:ee:ff') {
 		$items = str_split($mac, 2);
 		return  implode(':', $items);
 	}
 
-	if ($format == 'aa-bb-cc-dd-ee-dd') {
+	if ($format == 'aa-bb-cc-dd-ee-ff') {
 		$items = str_split($mac, 2);
 		return  implode('-', $items);
 	}
