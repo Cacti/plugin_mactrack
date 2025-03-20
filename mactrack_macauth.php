@@ -346,7 +346,7 @@ function mactrack_maca() {
 	if (cacti_sizeof($maca)) {
 		foreach ($maca as $mac) {
 			form_alternate_row('line' . $mac['mac_id'], true);
-			form_selectable_cell(filter_value(mactrack_format_mac$mac['mac_address']), get_request_var('filter'), 'mactrack_macauth.php?action=edit&mac_id=' . $mac['mac_id']), $mac['mac_id']);
+			form_selectable_cell(filter_value(mactrack_format_mac($mac['mac_address']), get_request_var('filter'), 'mactrack_macauth.php?action=edit&mac_id=' . $mac['mac_id']), $mac['mac_id']);
 			form_selectable_cell(filter_value($mac['description'], get_request_var('filter')), $mac['mac_id']);
 			form_selectable_cell($mac['added_date'], $mac['mac_id']);
 			form_selectable_cell(db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', array($mac['added_by'])), $mac['mac_id']);
