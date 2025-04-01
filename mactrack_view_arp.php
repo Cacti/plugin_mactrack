@@ -382,7 +382,6 @@ function mactrack_view_ips() {
 
 	if (cacti_sizeof($port_results)) {
 		foreach ($port_results as $port_result) {
-
 			form_alternate_row('line' . $i, true);
 
 			form_selectable_cell($port_result['device_name'], $i, '1%');
@@ -396,7 +395,7 @@ function mactrack_view_ips() {
 			form_selectable_cell(filter_value(mactrack_format_mac($port_result['mac_address']), get_request_var('filter')), $i);
 			form_selectable_cell(filter_value($port_result['vendor_name'], get_request_var('filter')), $i);
 			form_selectable_cell($port_result['port_number'], $i, '', 'left');
-			form_selectable_cell($port_result['ifName'], $i, '', 'left');
+			form_selectable_cell($port_result['ifName'] ?? '', $i, '', 'left');
 			form_selectable_cell($port_result['scan_date'], $i, '', 'left');
 
 			form_end_row();
