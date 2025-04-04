@@ -136,7 +136,13 @@ function mactrack_view_graphs() {
 		$sql_where .= ($sql_where != '' ? ' AND':'') . ' gl.graph_template_id=' . get_request_var('graph_template_id');
 	}
 
-	$limit  = (get_request_var('graphs')*(get_request_var('page')-1)) . ',' . get_request_var('graphs');
+	if (get_request_var('graphs') == '-1') {
+		$rows = read_config_option('num_rows_table');
+	} else {
+		$rows = get_request_var('rows');
+	}
+
+	$limit  = (get_request_var('graphs')*(get_request_var('page')-1)) . ',' . $rows;
 	$order  = 'gtg.title_cache';
 
 	$graphs = get_allowed_graphs($sql_where, $order, $limit, $total_graphs);
