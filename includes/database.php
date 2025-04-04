@@ -707,6 +707,11 @@ function mactrack_database_upgrade() {
 
 		db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(vendor_mac, ':', '')");
 	}
+
+	// default site must exist
+	if (!db_fetch_cell("SELECT count(*) FROM mac_track_sites")) {
+		db_execute("INSERT INTO mac_track_sites (site_name, site_info) VALUES ('Default','Default site')");
+	}
 }
 
 function mactrack_setup_database() {
@@ -1113,6 +1118,10 @@ function mactrack_setup_database() {
 	$data['type'] = 'InnoDB';
 	$data['comment'] = '';
 	api_plugin_db_table_create('mactrack', 'mac_track_sites', $data);
+
+	// default site must exist
+	db_execute("INSERT INTO mac_track_sites (site_name, site_info) VALUES ('Default','Default site')");
+
 
 	$data = array();
 	$data['columns'][] = array('name' => 'id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);

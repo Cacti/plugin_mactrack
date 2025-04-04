@@ -124,7 +124,7 @@ if (function_exists('register_process_start')) {
 clear_old_processes($site_id);
 
 if ($collect_frequency == 'disabled') {
-	echo "WARNING: Mactrack is disabled, exiting\n";
+	echo "WARNING: Mactrack scanning frequency is disabled, exiting. You have to enable it in settings.\n";
 
 	if (function_exists('unregister_process')) {
 		unregister_process('matrack', 'master', $config['poller_id']);

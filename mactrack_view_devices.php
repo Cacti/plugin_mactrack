@@ -382,7 +382,7 @@ function mactrack_view_devices() {
 			form_selectable_cell(filter_value($device['site_name'], get_request_var('filter')), $device['device_id']);
 			form_selectable_cell(get_colored_device_status(($device['disabled'] == 'on' ? true : false), $device['snmp_status']), $device['device_id'], '', 'center');
 			form_selectable_cell(filter_value($device['hostname'], get_request_var('filter')), $device['device_id']);
-			form_selectable_cell($device['device_type'], $device['device_id']);
+			form_selectable_cell(is_null($device['device_type']) ? '' : $device['device_type'] , $device['device_id']);
 			form_selectable_cell($st == '1' ? $na : number_format_i18n($device['ips_total']), $device['device_id'], '', 'right');
 			form_selectable_cell($st == '3' ? $na : number_format_i18n($device['ports_total']), $device['device_id'], '', 'right');
 			form_selectable_cell($st == '3' ? $na : number_format_i18n($device['ports_active']), $device['device_id'], '', 'right');
