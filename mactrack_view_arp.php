@@ -395,7 +395,7 @@ function mactrack_view_ips() {
 			form_selectable_cell(filter_value(mactrack_format_mac($port_result['mac_address']), get_request_var('filter')), $i);
 			form_selectable_cell(filter_value($port_result['vendor_name'], get_request_var('filter')), $i);
 			form_selectable_cell($port_result['port_number'], $i, '', 'left');
-			form_selectable_cell($port_result['ifName'] ?? '', $i, '', 'left');
+			form_selectable_cell(!is_null($port_result['ifName']) ? $port_result['ifName'] : '', $i, '', 'left');
 			form_selectable_cell($port_result['scan_date'], $i, '', 'left');
 
 			form_end_row();
