@@ -497,7 +497,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 		/* scan through all devices */
 		$j = 0;
 		$i = 0;
-		$last_time = strtotime('now');
+		$last_time = strtotime('now') - 7200;
 		$processes_available = $concurrent_processes;
 
 		while ($j < $total_devices) {

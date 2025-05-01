@@ -83,7 +83,7 @@ if (cacti_sizeof($parms)) {
 				break;
 			case '-t':
 				$test_mode = true;
-				exit;
+				break;
 			case '--version':
 			case '-V':
 			case '-v':

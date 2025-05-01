@@ -160,7 +160,9 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 					$active_vlans[$j]['vlan_id'] = $vlan_number;
 					$active_vlans[$j]['vlan_name'] = $vlanName;
 					$active_vlans[$j]['active_ports'] = $active_vlan_ports;
-					$active_vlans++;
+
+					// Commented out because why wuuld you increment an array!!
+					// $active_vlans++;
 
 					$j++;
 				}
@@ -601,7 +603,9 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 						$active_vlans[$j]['vlan_id'] = $vlan_number;
 						$active_vlans[$j]['vlan_name'] = $vlanName;
 						$active_vlans[$j]['active_ports'] = $active_vlan_ports;
-						$active_vlans++;
+
+						// Commented out because why wuuld you increment an array!!
+						// $active_vlans++;
 
 						$j++;
 					}
