@@ -60,4 +60,4 @@ Pre-Beta:
 -feature: Modify the "mac_track_temp_ports" and "mac_track_ips" tables to be HEAP Type, meaning they only reside in memory
 
 -----------------------------------------------
-Copyright (c) 2004-2023 - The Cacti Group, Inc.
+Copyright (c) 2004-2025 - The Cacti Group, Inc.
