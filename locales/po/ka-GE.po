@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-04-20 17:08-0400\nPO-Revision-Date: 2025-06-30 09:30+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-04-20 17:08-0400\nPO-Revision-Date: 2025-07-01 15:51+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -119,7 +119,7 @@ msgstr ""
 #: lib/mactrack_functions.php:2772 mactrack_devices.php:1245
 #: mactrack_view_devices.php:512
 msgid "Down"
-msgstr "გამორთულია"
+msgstr "გამორთ"
 
 #: lib/mactrack_functions.php:2772 mactrack_devices.php:1243
 #: mactrack_view_devices.php:510
@@ -132,7 +132,7 @@ msgstr "მონაცემები"
 
 #: lib/mactrack_functions.php:2808
 msgid "Voice"
-msgstr ""
+msgstr "ხმა"
 
 #: lib/mactrack_functions.php:2860
 #, php-format
@@ -194,7 +194,7 @@ msgstr "%d კვირა"
 
 #: lib/mactrack_functions.php:3116
 msgid "Not Recorded"
-msgstr ""
+msgstr "ჩაწერილი არაა"
 
 #: lib/mactrack_functions.php:3136
 #, php-format
@@ -221,7 +221,7 @@ msgstr ""
 #: lib/mactrack_functions.php:3161 mactrack_view_devices.php:373
 #: mactrack_view_sites.php:310 mactrack_view_sites.php:404
 msgid "View Interfaces"
-msgstr ""
+msgstr "ინტერფეისების ნახვა"
 
 #: lib/mactrack_functions.php:3179 mactrack_devices.php:1197
 #: mactrack_view_devices.php:468
@@ -257,11 +257,11 @@ msgstr ""
 #: lib/mactrack_functions.php:3238 mactrack_view_interfaces.php:291
 #: mactrack_view_interfaces.php:607 setup.php:552
 msgid "Interfaces"
-msgstr ""
+msgstr "ინტერფეისები"
 
 #: lib/mactrack_functions.php:3239
 msgid "Dot1x"
-msgstr ""
+msgstr "Dot1X"
 
 #: lib/mactrack_functions.php:3240 mactrack_view_graphs.php:153
 msgid "Graphs"
@@ -297,7 +297,7 @@ msgstr ""
 #: mactrack_view_devices.php:442 mactrack_view_dot1x.php:585
 #: mactrack_view_interfaces.php:542 mactrack_view_macs.php:1107
 msgid "Go"
-msgstr "გადასვლა"
+msgstr "მიდი"
 
 #: lib/mactrack_functions.php:3318 mactrack_device_types.php:1054
 #: mactrack_devices.php:1171 mactrack_macauth.php:393 mactrack_macwatch.php:410
@@ -334,7 +334,7 @@ msgstr "ნებისმიერი"
 #: lib/mactrack_functions.php:3346 mactrack_devices.php:1192
 #: mactrack_view_devices.php:463
 msgid "SubType"
-msgstr ""
+msgstr "ქვეტიპი"
 
 #: mactrack_actions.php:215
 #, php-format
@@ -373,7 +373,7 @@ msgstr "დუბლირება"
 
 #: mactrack_device_types.php:214 mactrack_device_types.php:215
 msgid "--dup--"
-msgstr ""
+msgstr "--dup--"
 
 #: mactrack_device_types.php:286
 msgid "You must select at least one device type."
@@ -419,7 +419,7 @@ msgstr ""
 
 #: mactrack_device_types.php:457
 msgid "Cisco"
-msgstr ""
+msgstr "Cisco"
 
 #: mactrack_device_types.php:482
 #, php-format
@@ -549,17 +549,17 @@ msgstr ""
 #: mactrack_device_types.php:574 mactrack_device_types.php:1090
 #: mactrack_devices.php:1186 setup.php:885
 msgid "Switch/Hub"
-msgstr ""
+msgstr "კომუტატორი/ჰაბი"
 
 #: mactrack_device_types.php:575 mactrack_device_types.php:1091
 #: mactrack_devices.php:1187 mactrack_view_devices.php:458 setup.php:886
 msgid "Switch/Router"
-msgstr ""
+msgstr "კომუტატორი/რაუტერი"
 
 #: mactrack_device_types.php:576 mactrack_device_types.php:1092
 #: mactrack_devices.php:1188 mactrack_view_devices.php:459 setup.php:887
 msgid "Router"
-msgstr ""
+msgstr "რაუტერი"
 
 #: mactrack_device_types.php:724
 #, php-format
@@ -611,11 +611,11 @@ msgstr ""
 #: mactrack_sites.php:502 mactrack_view_devices.php:283
 #: mactrack_view_sites.php:348 setup.php:1014
 msgid "Device Type"
-msgstr ""
+msgstr "მოწყობილობის ტიპი"
 
 #: mactrack_device_types.php:954
 msgid "Port Scanner"
-msgstr ""
+msgstr "პორტების სკანერი"
 
 #: mactrack_device_types.php:955
 msgid "IP Scanner"
@@ -623,7 +623,7 @@ msgstr ""
 
 #: mactrack_device_types.php:956
 msgid "Dot1x Scanner"
-msgstr ""
+msgstr "Dot1x-ის სკანერი"
 
 #: mactrack_device_types.php:957
 msgid "sysDescription Match"
@@ -682,7 +682,7 @@ msgstr ""
 #: mactrack_device_types.php:1068 mactrack_sites.php:498
 #: mactrack_view_sites.php:344 setup.php:1007
 msgid "Vendor"
-msgstr ""
+msgstr "მომწოდებელი"
 
 #: mactrack_device_types.php:1072 mactrack_device_types.php:1089
 #: mactrack_device_types.php:1100 mactrack_devices.php:1156
@@ -889,7 +889,7 @@ msgstr ""
 
 #: mactrack_devices.php:874
 msgid "SNMP Information"
-msgstr ""
+msgstr "SNMP-ის ინფორმაცია"
 
 #: mactrack_devices.php:925
 msgid "System:"
@@ -905,7 +905,7 @@ msgstr "ჰოსტის სახელი:"
 
 #: mactrack_devices.php:928
 msgid "ObjectID:"
-msgstr ""
+msgstr "ObjectID:"
 
 #: mactrack_devices.php:1033
 msgid "Device Tracking Device Filters"
@@ -1006,15 +1006,15 @@ msgstr ""
 
 #: mactrack_macauth.php:320 setup.php:1574
 msgid "Reason"
-msgstr ""
+msgstr "მიზეზი"
 
 #: mactrack_macauth.php:321
 msgid "Added/Modified"
-msgstr ""
+msgstr "დამატებული/შეცვლილი"
 
 #: mactrack_macauth.php:322
 msgid "By"
-msgstr ""
+msgstr "ავტორი"
 
 #: mactrack_macauth.php:327
 msgid "Authorized Mac Addresses"
@@ -1027,7 +1027,7 @@ msgstr ""
 #: mactrack_macauth.php:376 mactrack_vendormacs.php:205
 #: mactrack_view_macs.php:1092
 msgid "MAC's"
-msgstr ""
+msgstr "MAC-ები"
 
 #: mactrack_macwatch.php:143
 msgid "Click 'Continue' to delete the following watched Mac's?"
@@ -1064,7 +1064,7 @@ msgstr ""
 
 #: mactrack_macwatch.php:337 mactrack_macwatch.php:393
 msgid "Watches"
-msgstr ""
+msgstr "საათები"
 
 #: mactrack_macwatch.php:362
 msgid "No Device Tracking Watched Macs Found"
@@ -1236,7 +1236,7 @@ msgstr ""
 
 #: mactrack_snmp.php:606
 msgid "Options"
-msgstr ""
+msgstr "მორგება"
 
 #: mactrack_utilities.php:167
 msgid "Device Tracking Process Status"
@@ -1292,7 +1292,7 @@ msgstr ""
 
 #: mactrack_utilities.php:260
 msgid "processes"
-msgstr ""
+msgstr "პროცესები"
 
 #: mactrack_utilities.php:262
 msgid "Maximum Per Device Scan Time:"
@@ -1324,7 +1324,7 @@ msgstr ""
 
 #: mactrack_utilities.php:272
 msgid "milliseconds"
-msgstr ""
+msgstr "მილიწამი"
 
 #: mactrack_utilities.php:276
 msgid "Running Process Summary"
@@ -1344,11 +1344,11 @@ msgstr ""
 
 #: mactrack_utilities.php:314
 msgid "Completed"
-msgstr ""
+msgstr "დასრულდა"
 
 #: mactrack_utilities.php:326
 msgid "Waiting"
-msgstr ""
+msgstr "მოლოდინი"
 
 #: mactrack_utilities.php:333
 msgid "Other"
@@ -1476,11 +1476,11 @@ msgstr ""
 
 #: mactrack_vendormacs.php:154
 msgid "Corporation"
-msgstr ""
+msgstr "კორპორაცია"
 
 #: mactrack_vendormacs.php:155
 msgid "Address"
-msgstr ""
+msgstr "მისამართი"
 
 #: mactrack_vendormacs.php:160 setup.php:970
 msgid "Vendor Macs"
@@ -1564,7 +1564,7 @@ msgstr "მოწყობილობა"
 
 #: mactrack_view_arp.php:478 mactrack_view_ips.php:314
 msgid "IP's"
-msgstr ""
+msgstr "IP-ები"
 
 #: mactrack_view_arp.php:503 mactrack_view_dot1x.php:595
 #: mactrack_view_macs.php:1117
@@ -1584,7 +1584,7 @@ msgstr ""
 #: mactrack_view_arp.php:538 mactrack_view_dot1x.php:656
 #: mactrack_view_macs.php:1186
 msgid "MAC"
-msgstr ""
+msgstr "MAC"
 
 #: mactrack_view_devices.php:30
 msgid "Device Tracking - Device Report View"
@@ -1621,7 +1621,7 @@ msgstr ""
 
 #: mactrack_view_devices.php:457
 msgid "Hub/Switch"
-msgstr ""
+msgstr "კომუტატორი"
 
 #: mactrack_view_dot1x.php:31
 msgid "Device Tracking - 802.1x View"
@@ -1646,7 +1646,7 @@ msgstr ""
 
 #: mactrack_view_dot1x.php:570
 msgid "Sessions"
-msgstr ""
+msgstr "სესიები"
 
 #: mactrack_view_dot1x.php:616
 msgid "Any Status"
@@ -1658,15 +1658,15 @@ msgstr ""
 
 #: mactrack_view_dot1x.php:676
 msgid "DATA"
-msgstr ""
+msgstr "მონაცემები"
 
 #: mactrack_view_dot1x.php:677
 msgid "VOICE"
-msgstr ""
+msgstr "ხმა"
 
 #: mactrack_view_dot1x.php:683 mactrack_view_macs.php:1213
 msgid "Portname"
-msgstr ""
+msgstr "პორტის სახელი"
 
 #: mactrack_view_graphs.php:32
 msgid "Device Tracking - Monitored Device Graph View"
@@ -1698,7 +1698,7 @@ msgstr ""
 
 #: mactrack_view_interfaces.php:340
 msgid "Discards Present"
-msgstr ""
+msgstr "მოაცილებს აწმყოს"
 
 #: mactrack_view_interfaces.php:341
 msgid "No Graphs"
@@ -1722,7 +1722,7 @@ msgstr "აღწერა"
 
 #: mactrack_view_interfaces.php:380
 msgid "Alias"
-msgstr ""
+msgstr "ფსევდონიმი"
 
 #: mactrack_view_interfaces.php:384
 msgid "InBound %%%"
@@ -1786,11 +1786,11 @@ msgstr ""
 
 #: mactrack_view_interfaces.php:475
 msgid "Last Scanned"
-msgstr ""
+msgstr "ბოლოს დასკანირებული"
 
 #: mactrack_view_interfaces.php:510
 msgid "Filters"
-msgstr ""
+msgstr "ფილტრები"
 
 #: mactrack_view_interfaces.php:514
 msgid "All Interfaces"
@@ -1837,7 +1837,7 @@ msgstr ""
 
 #: mactrack_view_interfaces.php:524
 msgid "Discards Accumulating"
-msgstr ""
+msgstr "მოაცილებს დაგროვებულებს"
 
 #: mactrack_view_interfaces.php:525
 msgid "Changed in Last Day"
@@ -1845,7 +1845,7 @@ msgstr ""
 
 #: mactrack_view_interfaces.php:528
 msgid "Bandwidth"
-msgstr ""
+msgstr "გამტარობა"
 
 #: mactrack_view_interfaces.php:634
 msgid "Show Totals"
@@ -1898,11 +1898,11 @@ msgstr ""
 
 #: mactrack_view_macs.php:33
 msgid "Authorize"
-msgstr ""
+msgstr "ნების დართვა"
 
 #: mactrack_view_macs.php:34
 msgid "Revoke"
-msgstr ""
+msgstr "გაბათილება"
 
 #: mactrack_view_macs.php:122
 #, php-format
@@ -1946,7 +1946,7 @@ msgstr ""
 #: mactrack_view_macs.php:897 mactrack_view_macs.php:991
 #: mactrack_view_macs.php:1201
 msgid "Authorized"
-msgstr ""
+msgstr "ავტორიზებულია"
 
 #: mactrack_view_macs.php:725 mactrack_view_macs.php:915
 msgid "VLAN ID"
@@ -1959,7 +1959,7 @@ msgstr ""
 
 #: mactrack_view_macs.php:749 mactrack_view_macs.php:954
 msgid "MAC Addresses"
-msgstr ""
+msgstr "MAC მისამართები"
 
 #: mactrack_view_macs.php:790 mactrack_view_macs.php:993
 msgid "Not Authorized"
@@ -1975,11 +1975,11 @@ msgstr ""
 
 #: mactrack_view_macs.php:942
 msgid "Count"
-msgstr ""
+msgstr "რაოდენობა"
 
 #: mactrack_view_macs.php:1171
 msgid "Aggregated"
-msgstr ""
+msgstr "აგრეგირებული"
 
 #: mactrack_view_sites.php:30
 msgid "Device Tracking - Site Report View"
@@ -2274,7 +2274,7 @@ msgstr ""
 
 #: setup.php:492
 msgid "Communities"
-msgstr ""
+msgstr "საზოგადოებები"
 
 #: setup.php:493
 msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
@@ -2302,7 +2302,7 @@ msgstr ""
 
 #: setup.php:538
 msgid "MacTrack Settings"
-msgstr ""
+msgstr "MacTrack-ის მორგება"
 
 #: setup.php:543
 msgid "Default Tab"
@@ -2318,7 +2318,7 @@ msgstr ""
 
 #: setup.php:551
 msgid "Mac Addresses"
-msgstr ""
+msgstr "MAC მისამართები"
 
 #: setup.php:553
 msgid "dot1x Deta"
@@ -2335,7 +2335,7 @@ msgstr "(ჩასწორება)"
 
 #: setup.php:578 setup.php:634
 msgid "(Import)"
-msgstr ""
+msgstr "(შემოტანა)"
 
 #: setup.php:620
 msgid "Device Tracking Device Types"
@@ -2411,7 +2411,7 @@ msgstr ""
 
 #: setup.php:857 setup.php:859
 msgid "MacTrack"
-msgstr ""
+msgstr "MacTrack"
 
 #: setup.php:876 setup.php:877 setup.php:878 setup.php:879
 #, php-format
@@ -2429,7 +2429,7 @@ msgstr "დამთხვევები"
 
 #: setup.php:893
 msgid "Contains"
-msgstr ""
+msgstr "შეიცავს"
 
 #: setup.php:894
 msgid "Begins With"
@@ -2453,7 +2453,7 @@ msgstr ""
 
 #: setup.php:903
 msgid "Half"
-msgstr ""
+msgstr "ნახევარი"
 
 #: setup.php:904
 msgid "Full"
@@ -2613,7 +2613,7 @@ msgstr "SNMP Get"
 
 #: setup.php:1075
 msgid "SNMP Walk"
-msgstr ""
+msgstr "SNMP-ით გავლა"
 
 #: setup.php:1079
 msgid "Low User Port Number"
@@ -2653,7 +2653,7 @@ msgstr ""
 
 #: setup.php:1150
 msgid "SNMP Port"
-msgstr ""
+msgstr "SNMP-ის პორტი"
 
 #: setup.php:1159
 msgid "SNMP Timeout"
@@ -2821,19 +2821,19 @@ msgstr ""
 
 #: setup.php:1364
 msgid "Telnet"
-msgstr ""
+msgstr "Telnet"
 
 #: setup.php:1365
 msgid "SSH"
-msgstr ""
+msgstr "SSH"
 
 #: setup.php:1366
 msgid "HTTP"
-msgstr ""
+msgstr "HTTP"
 
 #: setup.php:1367
 msgid "HTTPS"
-msgstr ""
+msgstr "HTTPS"
 
 #: setup.php:1371
 msgid "User Name"
