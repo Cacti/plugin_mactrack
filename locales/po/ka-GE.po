@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-04-20 17:08-0400\nPO-Revision-Date: 2025-07-07 04:26+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-04-20 17:08-0400\nPO-Revision-Date: 2025-07-07 12:51+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -1674,7 +1674,7 @@ msgstr ""
 
 #: mactrack_view_graphs.php:70
 msgid "Custom Graph List Applied - Filtering from List"
-msgstr ""
+msgstr "გამოყენებულია მომხმარებლის გრაფიკების სია - გაფილტვრა სიიდან"
 
 #: mactrack_view_interfaces.php:30
 msgid "Device Tracking - Network Interfaces View"
@@ -1710,7 +1710,7 @@ msgstr "ინტერფეისი გამორთულია"
 
 #: mactrack_view_interfaces.php:352
 msgid "Interface Scan Results"
-msgstr ""
+msgstr "ინტერფეისის სკანირების შედეგები"
 
 #: mactrack_view_interfaces.php:372 setup.php:1120
 msgid "Name"
@@ -1877,7 +1877,7 @@ msgstr "მაქს. თარიღი"
 
 #: mactrack_view_ips.php:229
 msgid "IP Address Ranges"
-msgstr ""
+msgstr "IP მისამართის შუალედები"
 
 #: mactrack_view_ips.php:244 mactrack_view_sites.php:296
 #: mactrack_view_sites.php:396
@@ -2116,7 +2116,7 @@ msgstr "ტირე [-]"
 
 #: setup.php:331 setup.php:1316
 msgid "Ports to Ignore"
-msgstr ""
+msgstr "გამოსატოვებელი პორტები"
 
 #: setup.php:332
 msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
