@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-04-20 17:08-0400\nPO-Revision-Date: 2025-07-06 03:26+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-04-20 17:08-0400\nPO-Revision-Date: 2025-07-07 04:26+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -289,7 +289,7 @@ msgstr "ნაგულისხმევი"
 
 #: lib/mactrack_functions.php:3312
 msgid "Show Device Details"
-msgstr ""
+msgstr "მოწყობილობის დეტალების ჩვენება"
 
 #: lib/mactrack_functions.php:3315 mactrack_device_types.php:1053
 #: mactrack_devices.php:1170 mactrack_macauth.php:392 mactrack_macwatch.php:409
@@ -399,7 +399,7 @@ msgstr "<აღწერა> (1)"
 
 #: mactrack_device_types.php:303
 msgid "Device Type Prefix:"
-msgstr ""
+msgstr "მოწყობილობის ტიპის პრეფიქსი:"
 
 #: mactrack_device_types.php:314 mactrack_devices.php:364
 #: mactrack_macauth.php:152 mactrack_macwatch.php:155 mactrack_sites.php:157
@@ -540,7 +540,7 @@ msgstr ""
 
 #: mactrack_device_types.php:555 mactrack_devices.php:568
 msgid "3 - Router"
-msgstr ""
+msgstr "3 - რაუტერი"
 
 #: mactrack_device_types.php:557
 msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used direct Device Tracking as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
@@ -573,7 +573,7 @@ msgstr ""
 
 #: mactrack_device_types.php:782
 msgid "Unknown Assume \"Switch/Hub\""
-msgstr ""
+msgstr "უცნობი ჩათვლა \"კომუტატორი\""
 
 #: mactrack_device_types.php:817 mactrack_device_types.php:832
 #, php-format
@@ -657,7 +657,7 @@ msgstr "მოთხოვნის გადაცემა"
 
 #: mactrack_device_types.php:1054
 msgid "Clear Filtered Results"
-msgstr ""
+msgstr "გაფილტრული შედეგების გასუფთავება"
 
 #: mactrack_device_types.php:1055
 msgid "Rescan"
@@ -977,7 +977,7 @@ msgstr "შეცდომა"
 
 #: mactrack_devices.php:1248 mactrack_view_devices.php:515
 msgid "No Cacti Link"
-msgstr ""
+msgstr "Cacti-ის ბმულის გარეშე"
 
 #: mactrack_macauth.php:132
 msgid "You must select at least one Authorized Mac to delete."
@@ -1018,7 +1018,7 @@ msgstr "ავტორი"
 
 #: mactrack_macauth.php:327
 msgid "Authorized Mac Addresses"
-msgstr ""
+msgstr "ავტორიზებული MAC მისამართები"
 
 #: mactrack_macauth.php:348
 msgid "No Authorized Mac Addresses Found"
@@ -1153,7 +1153,7 @@ msgstr ""
 
 #: mactrack_snmp.php:340
 msgid "SNMP Options [new]"
-msgstr ""
+msgstr "SNMP-ის პარამეტრები [ახალი]"
 
 #: mactrack_snmp.php:408
 #, php-format
@@ -1248,7 +1248,7 @@ msgstr "განახლება"
 
 #: mactrack_utilities.php:238
 msgid "Current Process Status"
-msgstr ""
+msgstr "მიმდინარე პროცესის სტატუსი"
 
 #: mactrack_utilities.php:240
 msgid "The Device Tracking Poller is:"
@@ -1268,7 +1268,7 @@ msgstr "მომთხოვის სიხშირე:"
 
 #: mactrack_utilities.php:250
 msgid "Approx. Next Runtime:"
-msgstr ""
+msgstr "შემდეგი გაშვების დაახლ. დრო:"
 
 #: mactrack_utilities.php:252
 msgid "Approx. Next DB Maintenance:"
@@ -1276,11 +1276,11 @@ msgstr ""
 
 #: mactrack_utilities.php:254
 msgid "Run Time Details"
-msgstr ""
+msgstr "გაშვების დროის დეტალები"
 
 #: mactrack_utilities.php:256
 msgid "Last Poller Runtime:"
-msgstr ""
+msgstr "გამომთხოვის ბოლო გაშვების დრო:"
 
 #: mactrack_utilities.php:258
 msgid "Last Poller Maintenance Runtime:"
@@ -1400,7 +1400,7 @@ msgstr ""
 
 #: mactrack_utilities.php:484
 msgid "Process Status Information"
-msgstr ""
+msgstr "პროცესის სტატუსის ინფორმაცია"
 
 #: mactrack_utilities.php:493 setup.php:816
 msgid "View Device Tracking Process Status"
@@ -1416,7 +1416,7 @@ msgstr "მონაცემთა ბაზის ადმინისტრ�
 
 #: mactrack_utilities.php:504 setup.php:781
 msgid "Perform Database Maintenance"
-msgstr ""
+msgstr "მონაცემთა ბაზის რემონტი"
 
 #: mactrack_utilities.php:507
 msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
@@ -1432,7 +1432,7 @@ msgstr ""
 
 #: mactrack_utilities.php:522 setup.php:788
 msgid "Refresh Scanning Functions"
-msgstr ""
+msgstr "სკანირების ფუნქციების განახლება"
 
 #: mactrack_utilities.php:525
 msgid "Deletes old and potentially stale Device Tracking scanning functions from the drop-down you receive when you edit a device type."
@@ -1448,7 +1448,7 @@ msgstr ""
 
 #: mactrack_utilities.php:538
 msgid "Aggregated Table Administration"
-msgstr ""
+msgstr "აგრეგირებული ცხრილის ადმინისტრირება"
 
 #: mactrack_utilities.php:542
 msgid "Remove All Aggregated Results"
@@ -1543,7 +1543,7 @@ msgstr "პორტის სახელი"
 #: mactrack_view_dot1x.php:429 mactrack_view_macs.php:735
 #: mactrack_view_macs.php:928 mactrack_view_macs.php:934
 msgid "Last Scan Date"
-msgstr ""
+msgstr "ბოლო სკანირების თარიღი"
 
 #: mactrack_view_arp.php:370
 msgid "ARP Cache"
@@ -1592,7 +1592,7 @@ msgstr ""
 
 #: mactrack_view_devices.php:157
 msgid "Unknown Device Type"
-msgstr ""
+msgstr "უცნობი მოწყობილობის ტიპი"
 
 #: mactrack_view_devices.php:312
 msgid "Total VLAN's"
@@ -1742,11 +1742,11 @@ msgstr "გამავალი (ბ/წმ)"
 
 #: mactrack_view_interfaces.php:408
 msgid "In Err Total"
-msgstr ""
+msgstr "შემ. შეცდ სულ"
 
 #: mactrack_view_interfaces.php:413
 msgid "In Disc Total"
-msgstr ""
+msgstr "დისკზე სულ"
 
 #: mactrack_view_interfaces.php:418
 msgid "UProto Total"
@@ -1766,7 +1766,7 @@ msgstr ""
 
 #: mactrack_view_interfaces.php:441
 msgid "In Disc (D/S)"
-msgstr ""
+msgstr "დისკში (D/S)"
 
 #: mactrack_view_interfaces.php:446
 msgid "UProto (UP/S)"
@@ -1774,7 +1774,7 @@ msgstr "UProto (UP/S)"
 
 #: mactrack_view_interfaces.php:451
 msgid "Out Err (OE/S)"
-msgstr ""
+msgstr "გამ შეცდ (OE/S)"
 
 #: mactrack_view_interfaces.php:456
 msgid "Out Disc (OD/S)"
@@ -1861,7 +1861,7 @@ msgstr "IP შუალედი"
 
 #: mactrack_view_ips.php:206
 msgid "Current IP Addresses"
-msgstr ""
+msgstr "მიმდინარე IP მისამართები"
 
 #: mactrack_view_ips.php:211
 msgid "Current Date"
@@ -2003,7 +2003,7 @@ msgstr ""
 
 #: mactrack_view_sites.php:434
 msgid "Site Scan Results"
-msgstr ""
+msgstr "საიტის სკანირების შედეგები"
 
 #: setup.php:244 setup.php:966 setup.php:967 setup.php:968 setup.php:969
 #: setup.php:970 setup.php:979 setup.php:981
@@ -2056,7 +2056,7 @@ msgstr ""
 
 #: setup.php:291
 msgid "Confirm Utilities Prompt"
-msgstr ""
+msgstr "ხელსაწყოების კითხვის დადასტურება"
 
 #: setup.php:292
 msgid "When using utilities, prompt for verification"
@@ -2072,7 +2072,7 @@ msgstr ""
 
 #: setup.php:304
 msgid "Data Retention IPs"
-msgstr ""
+msgstr "მონაცემების შენარჩუნების IP-ები"
 
 #: setup.php:305
 msgid "How long should discovered IPs details be retained in the database."
@@ -2124,7 +2124,7 @@ msgstr ""
 
 #: setup.php:339
 msgid "Bandwidth Usage Threshold"
-msgstr ""
+msgstr "გამტარობის გამოყენების ზღვარი"
 
 #: setup.php:340
 msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
@@ -2174,7 +2174,7 @@ msgstr ""
 
 #: setup.php:391
 msgid "DNS Prime Interval"
-msgstr ""
+msgstr "DNS-ის ძირითადი ინტერვალი"
 
 #: setup.php:392
 msgid "How often, in seconds do Device Tracking scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
@@ -2194,7 +2194,7 @@ msgstr ""
 
 #: setup.php:411
 msgid "Source Email Name"
-msgstr ""
+msgstr "წყარო ელფოსტის სახელი"
 
 #: setup.php:412
 msgid "The Source Email name for Device Tracking Emails."
@@ -2206,7 +2206,7 @@ msgstr "MACTrack-ის ადმინისტრატორი"
 
 #: setup.php:419 setup.php:1504
 msgid "MacWatch Default Body"
-msgstr ""
+msgstr "MacWatch-ის ნაგულისხმევი სხეული"
 
 #: setup.php:420 setup.php:1505
 msgid "The Email body preset for Device Tracking MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
@@ -2226,7 +2226,7 @@ msgstr ""
 
 #: setup.php:441
 msgid "MacAuth Report Frequency"
-msgstr ""
+msgstr "MacAuth-ის ანგარიშების სიხშირე"
 
 #: setup.php:442
 msgid "How often will the MacAuth Reports be Emailed."
@@ -2509,7 +2509,7 @@ msgstr ""
 #: setup.php:958
 #, php-format
 msgid "Every %d Days"
-msgstr ""
+msgstr "ყოველ %d დღეში"
 
 #: setup.php:959
 msgid "Every Week"
@@ -2681,7 +2681,7 @@ msgstr ""
 
 #: setup.php:1186
 msgid "SNMP Username (v3)"
-msgstr ""
+msgstr "SNMP-ის მომხმარებლის სახელი (v3)"
 
 #: setup.php:1187
 msgid "SNMP v3 username for this device."
@@ -2721,7 +2721,7 @@ msgstr ""
 
 #: setup.php:1229
 msgid "SNMP Context (v3)"
-msgstr ""
+msgstr "SNMP-ის კონტექსტი (v3)"
 
 #: setup.php:1230
 msgid "Enter the SNMP v3 Context to use for this device."
@@ -2805,7 +2805,7 @@ msgstr ""
 
 #: setup.php:1345
 msgid "Specific SNMP Settings"
-msgstr ""
+msgstr "SNMP-ის სპეციფიკური პარამეტრები"
 
 #: setup.php:1354
 msgid "Connectivity Options"
@@ -2937,7 +2937,7 @@ msgstr ""
 
 #: setup.php:1529
 msgid "First Occurrence Only"
-msgstr ""
+msgstr "მხოლოდ პირველი შემთხვევა"
 
 #: setup.php:1530
 msgid "All Occurrences"
@@ -2961,7 +2961,7 @@ msgstr ""
 
 #: setup.php:1566
 msgid "MAC Address Match"
-msgstr ""
+msgstr "MAC მისამართის დამთხვევა"
 
 #: setup.php:1567
 msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
