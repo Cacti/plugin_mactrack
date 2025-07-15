@@ -362,8 +362,8 @@ function form_mactrack_actions() {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($device_array) ? serialize($device_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . ($save_html != '' ? "
-			<input type='button' name='cancel' onClick='cactiReturnTo()' value='" . __esc('Cancel', 'mactrack') . "'>
-			$save_html" : "<input type='button' onClick='cactiReturnTo()' name='cancel' value='" . __esc('Return', 'mactrack') . "'>") . "
+			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'mactrack') . "</button>
+			$save_html" : "<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Return', 'mactrack') . "'>") . "</button>
 		</td>
 	</tr>";
 
@@ -1168,10 +1168,10 @@ function mactrack_device_filter() {
 					</td>
 					<td>
 						<span class='nowrap'>
-							<input type='submit' id='go' value='<?php print __esc('Go', 'mactrack');?>'>
-							<input type='button' id='clear' value='<?php print __esc('Clear', 'mactrack');?>'>
-							<input type='button' id='import' value='<?php print __esc('Import', 'mactrack');?>'>
-							<input type='submit' id='export' value='<?php print __esc('Export', 'mactrack');?>'>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __esc('Go', 'mactrack');?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php print __esc('Clear', 'mactrack');?></button>
+							<button type='button' id='import' class='ui-button ui-corner-all ui-widget'><?php print __esc('Import', 'mactrack');?></button>
+							<button type='button' id='export' class='ui-button ui-corner-all ui-widget'><?php print __esc('Export', 'mactrack');?></button>
 						</span>
 					</td>
 				</tr>

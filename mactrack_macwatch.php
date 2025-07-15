@@ -135,7 +135,7 @@ function form_actions() {
 		header('Location: mactrack_macwatch.php');
 		exit;
 	} else {
-		$save_html = "<input type='submit' name='save' value='" . __esc('Continue', 'mactrack') . "'>";
+		$save_html = "<button type='submit' name='save' class='ui-button ui-corner-all ui-widget ui-state-active'>" . __esc('Continue', 'mactrack') . "</button>";
 
 		if (get_request_var('drp_action') == '1') { /* delete */
 			print "<tr>
@@ -152,8 +152,8 @@ function form_actions() {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($macw_array) ? serialize($macw_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . ($save_html != '' ? "
-			<input type='button' name='cancel' onClick='cactiReturnTo()' value='" . __esc('Cancel', 'mactrack') . "'>
-			$save_html" : "<input type='button' onClick='cactiReturnTo()' name='cancel' value='" . __esc('Return', 'mactrack') . "'>") . "
+			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'mactrack') . "</button>
+			$save_html" : "<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Return', 'mactrack') . "</button>") . "
 		</td>
 	</tr>";
 
@@ -406,8 +406,8 @@ function mactrack_macw_filter() {
 					</td>
 					<td>
 						<span class='nowrap'>
-							<input type='submit' id='go' value='<?php print __esc('Go', 'mactrack');?>'>
-							<input type='button' id='clear' value='<?php print __esc('Clear', 'mactrack');?>'>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __esc('Go', 'mactrack');?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php print __esc('Clear', 'mactrack');?></button>
 						</span>
 					</td>
 				</tr>

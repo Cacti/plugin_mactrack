@@ -3347,11 +3347,11 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 						<select id='rows' onChange='applyFilter()'>
 							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack');?></option>
 							<?php
-								if (cacti_sizeof($item_rows) > 0) {
+							if (cacti_sizeof($item_rows)) {
 								foreach ($item_rows as $key => $value) {
 									print '<option value="' . $key . '"'; if (get_request_var('rows') == $key) { print ' selected'; } print '>' . $value . "</option>\n";
 								}
-								}
+							}
 							?>
 						</select>
 					</td>
@@ -3362,13 +3362,11 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 						<label for='detail'><?php print __('Show Device Details', 'mactrack');?></label>
 					</td>
 					<td>
-						<input type='submit' id='go' value='<?php print __('Go', 'mactrack');?>'>
-					</td>
-					<td>
-						<input type='button' id='clear' value='<?php print __('Clear', 'mactrack');?>'>
-					</td>
-					<td>
-						<input type='button' id='export' value='<?php print __('Export', 'mactrack');?>'>
+						<span>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __('Go', 'mactrack');?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php print __('Clear', 'mactrack');?></button>
+							<button type='button' id='export' class='ui-button ui-corner-all ui-widget'><?php print __('Export', 'mactrack');?></button>
+						</span>
 					</td>
 				</tr>
 			<?php
@@ -3384,10 +3382,10 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack');?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT * FROM mac_track_sites ORDER BY site_name');
-							if (cacti_sizeof($sites) > 0) {
-							foreach ($sites as $site) {
-								print '<option value="' . $site['site_id'] . '"'; if (get_request_var('site_id') == $site['site_id']) { print ' selected'; } print '>' . $site['site_name'] . '</option>';
-							}
+							if (cacti_sizeof($sites)) {
+								foreach ($sites as $site) {
+									print '<option value="' . $site['site_id'] . '"'; if (get_request_var('site_id') == $site['site_id']) { print ' selected'; } print '>' . $site['site_name'] . '</option>';
+								}
 							}
 							?>
 						</select>
@@ -3407,9 +3405,9 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 								ORDER BY mac_track_device_types.description');
 
 							if (cacti_sizeof($device_types)) {
-							foreach ($device_types as $device_type) {
-								print '<option value="' . $device_type['device_type_id'] . '"'; if (get_request_var('device_type_id') == $device_type['device_type_id']) { print ' selected'; } print '>' . $device_type['description'] . ' (' . $device_type['sysDescr_match'] . ')</option>';
-							}
+								foreach ($device_types as $device_type) {
+									print '<option value="' . $device_type['device_type_id'] . '"'; if (get_request_var('device_type_id') == $device_type['device_type_id']) { print ' selected'; } print '>' . $device_type['description'] . ' (' . $device_type['sysDescr_match'] . ')</option>';
+								}
 							}
 							?>
 						</select>

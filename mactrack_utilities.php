@@ -197,7 +197,7 @@ function mactrack_display_run_status() {
 						?>
 					</td>
 					<td>
-						<input type='button' value='<?php print __esc('Refresh', 'mactrack');?>' onClick='applyFilter()'>
+						<button type='button' class='ui-button ui-corner-all ui-widget' onClick='applyFilter()'><?php print __esc('Refresh', 'mactrack');?></button>
 					</td>
 				</tr>
 			</table>

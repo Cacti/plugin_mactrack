@@ -538,10 +538,10 @@ function mactrack_filter_table() {
 						</select>
 					</td>
 					<td>
-						<span class='nowrap'>
-							<input type='submit' id='go' value='<?php print __esc('Go', 'mactrack');?>'>
-							<input type='button' id='clear' value='<?php print __esc('Clear', 'mactrack');?>'>
-							<input type='button' id='export' value='<?php print __esc('Export', 'mactrack');?>'>
+						<span>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __esc('Go', 'mactrack');?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php print __esc('Clear', 'mactrack');?></button>
+							<button type='button' id='export' class='ui-button ui-corner-all ui-widget'><?php print __esc('Export', 'mactrack');?></button>
 						</span>
 					</td>
 				</tr>

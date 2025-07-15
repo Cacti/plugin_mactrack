@@ -247,7 +247,7 @@ function form_mactrack_snmp_actions() {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one SNMP Option.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = "";
 	} else {
-		$save_html = "<input type='submit' value='" . __esc('Continue', 'mactrack') . "' name='save'>";
+		$save_html = "<button type='submit' name='save' class='ui-button ui-corner-all ui-widget ui-state-active'>" . __esc('Continue', 'mactrack') . "'></button>";
 
 		if (get_nfilter_request_var("drp_action") == '1') { /* delete */
 			print "<tr>
@@ -271,8 +271,8 @@ function form_mactrack_snmp_actions() {
 		<td align='right' class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($mactrack_array) ? serialize($mactrack_array) : '') . "'>
-			<input type='hidden' name='drp_action' value='" . get_nfilter_request_var("drp_action") . "'>
-			<input type='button' onClick='goTo(\"" . "mactrack_snmp.php" . "\")' value='" . ($save_html == '' ? __esc('Return', 'mactrack'):__esc('Cancel', 'mactrack')) . "' name='cancel'>
+			<input type='hidden' name='drp_action' class='ui-button ui-corner-all ui-widget'>" . get_nfilter_request_var("drp_action") . "'>
+			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='goTo(\"" . "mactrack_snmp.php" . "\")'>" . ($save_html == '' ? __esc('Return', 'mactrack'):__esc('Cancel', 'mactrack')) . "</button>
 			$save_html
 		</td>
 	</tr>";
@@ -620,9 +620,9 @@ function snmp_options_filter() {
 						</select>
 					</td>
 					<td>
-						<span class='nowrap'>
-							<input type='button' value='<?php print __esc('Go', 'mactrack');?>' id='go'>
-							<input type='button' value='<?php print __esc('Clear', 'mactrack');?>' id='clear'>
+						<span>
+							<button type='button' id='go' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __esc('Go', 'mactrack');?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php print __esc('Clear', 'mactrack');?></button>
 						</span>
 					</td>
 				</tr>

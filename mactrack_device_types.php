@@ -286,7 +286,7 @@ function form_actions() {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one device type.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = '';
 	} else {
-		$save_html = "<input type='submit' value='" . __esc('Continue', 'mactrack') . "' name='save'>";
+		$save_html = "<button type='submit' name='save' class='ui-button ui-corner-all ui-widget ui-state-active'>" . __esc('Continue', 'mactrack') . "</button>";
 
 		if (get_request_var('drp_action') == '1') { /* delete */
 			print "<tr>
@@ -311,8 +311,8 @@ function form_actions() {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($device_types_array) ? serialize($device_types_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_nfilter_request_var('drp_action') . "'>" . ($save_html != '' ? "
-			<input type='button' onClick='cactiReturnTo()' name='cancel' value='" . __esc('Cancel', 'mactrack') . "'>
-			$save_html" : "<input type='submit' onClick='cactiReturnTo()' name='cancel' value='" . __esc('Return') . "'>") . "
+			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()' name='cancel'>" . __esc('Cancel', 'mactrack') . "</button>
+			$save_html" : "<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()' name='cancel'>" . __esc('Return') . "</button>") . "
 		</td>
 	</tr>";
 
@@ -1050,11 +1050,11 @@ function mactrack_device_type_filter() {
 					</td>
 					<td>
 						<span class='nowrap'>
-							<input type='submit' id='go' title='<?php print __esc('Submit Query');?>' value='<?php print __esc('Go');?>'>
-							<input type='button' id='clear' title='<?php print __esc('Clear Filtered Results');?>' value='<?php print __esc('Clear');?>'>
-							<input type='button' id='scan' title='<?php print __esc('Scan Active Devices for Unknown Device Types');?>' value='<?php print __esc('Rescan');?>'>
-							<input type='button' id='import' title='<?php print __esc('Import Device Types from a CSV File');?>' value='<?php print __esc('Import');?>'>
-							<input type='button' id='export' title='<?php print __esc('Export Device Types to Share with Others');?>' value='<?php print __esc('Export');?>'>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active' title='<?php print __esc('Submit Query');?>'><?php print __esc('Go');?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Clear Filtered Results');?>'><?php print __esc('Clear');?></button>
+							<button type='button' id='scan' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Scan Active Devices for Unknown Device Types');?>'><?php print __esc('Rescan');?></button>
+							<button type='button' id='import' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Import Device Types from a CSV File');?>'><?php print __esc('Import');?></button>
+							<button type='button' id='export' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Export Device Types to Share with Others');?>'><?php print __esc('Export');?></button>
 						</span>
 					</td>
 					<td>

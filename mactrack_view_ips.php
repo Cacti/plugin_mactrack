@@ -326,9 +326,9 @@ function mactrack_ips_filter() {
 						</select>
 					</td>
 					<td>
-						<span class='nowrap'>
-							<input type='button' id='export' value='<?php print __esc('Export', 'mactrack');?>'>
-							<input type='button' id='clear' value='<?php print __esc('Clear', 'mactrack');?>'>
+						<span>
+							<button type='submit' id='export' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __esc('Export', 'mactrack');?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php print __esc('Clear', 'mactrack');?></button>
 						</span>
 					</td>
 				</tr>
@@ -360,7 +360,8 @@ function mactrack_ips_filter() {
 					clearFilter();
 				});
 
-				$('#export').click(function() {
+				$('#export').submit(function(event) {
+					event.preventDefault()
 					exportRows();
 				});
 			});

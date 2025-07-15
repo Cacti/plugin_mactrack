@@ -132,7 +132,7 @@ function form_actions() {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one Authorized Mac to delete.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = '';
 	} else {
-		$save_html = "<input type='submit' name='save' value='" . __esc('Continue', 'mactrack') . "'>";
+		$save_html = "<button type='submit' name='save' class='ui-button ui-corner-all ui-widget ui-state-active'>" . __esc('Continue', 'mactrack') . "</button>";
 
 		if (get_request_var('drp_action') == '1') { /* Delete */
 			print "<tr>
@@ -149,8 +149,8 @@ function form_actions() {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($maca_array) ? serialize($maca_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . ($save_html != '' ? "
-			<input type='button' onClick='cactiReturnTo()' value='" . __esc('Cancel', 'mactrack') . "'>
-			$save_html" : "<input type='button' onClick='cactiReturnTo()' value='" . __esc('Return', 'mactrack') . "'>") . "
+			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'mactrack') . "'></button>
+			$save_html" : "<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Return', 'mactrack') . "</button>") . "
 		</td>
 	</tr>";
 
@@ -398,8 +398,8 @@ function mactrack_maca_filter() {
 					</td>
 					<td>
 						<span class='nowrap'>
-							<input type='submit' id='go' value='<?php print __esc('Go');?>'>
-							<input type='button' id='clear' value='<?php print __esc('Clear');?>'>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget'><?php print __esc('Go');?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php print __esc('Clear');?></button>
 						</span>
 					</td>
 				</tr>

@@ -147,7 +147,7 @@ function form_actions() {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one site.', 'mactrack') . "</span></td></tr>\n";
 		$save_html = '';
 	} else {
-		$save_html = "<input type='submit' name='save_x' value='" . __esc('Continue', 'mactrack') . "'>";
+		$save_html = "<button type='submit' name='save_x' class='ui-button ui-corner-all ui-widget ui-state-active'>" . __esc('Continue', 'mactrack') . "</button>";
 	}
 
 	print "<tr>
@@ -155,8 +155,8 @@ function form_actions() {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($site_array) ? serialize($site_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . ($save_html != '' ? "
-			<input type='button' onClick='cactiReturnTo()' value='" . __esc('Cancel', 'mactrack') . "'>
-			$save_html" : "<input type='button' onClick='cactiReturnTo()' value='" . __esc('Return', 'mactrack') . "'>") . "
+			<button type='button' onClick='cactiReturnTo()' class='ui-button ui-corner-all ui-widget'>" . __esc('Cancel', 'mactrack') . "</button>
+			$save_html" : "<button type='button' onClick='cactiReturnTo()' class='ui-button ui-corner-all ui-widget'>" . __esc('Return', 'mactrack') . "</button>") . "
 		</td>
 	</tr>";
 
