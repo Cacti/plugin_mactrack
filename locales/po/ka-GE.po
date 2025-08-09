@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-04-20 17:08-0400\nPO-Revision-Date: 2025-07-07 12:51+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-04-20 17:08-0400\nPO-Revision-Date: 2025-08-09 09:57+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
@@ -536,7 +536,7 @@ msgstr ""
 
 #: mactrack_device_types.php:554 mactrack_devices.php:567
 msgid "2 - Switch/Router"
-msgstr ""
+msgstr "2 - კომუტატორი/რაუტერი"
 
 #: mactrack_device_types.php:555 mactrack_devices.php:568
 msgid "3 - Router"
@@ -1288,7 +1288,7 @@ msgstr ""
 
 #: mactrack_utilities.php:260
 msgid "Maximum Concurrent Processes:"
-msgstr ""
+msgstr "მაქს. ერთდროული პროცესი:"
 
 #: mactrack_utilities.php:260
 msgid "processes"
@@ -1798,7 +1798,7 @@ msgstr "ყველა ინტერფეისი"
 
 #: mactrack_view_interfaces.php:515
 msgid "All Non-Ignored Interfaces"
-msgstr ""
+msgstr "ყველა არადაიგნორებული ინტერფეისი"
 
 #: mactrack_view_interfaces.php:516
 msgid "All Ignored Interfaces"
@@ -2557,7 +2557,7 @@ msgstr ""
 
 #: setup.php:1022
 msgid "System Description Match"
-msgstr ""
+msgstr "სოსტემის აღწერის დამთხვევა"
 
 #: setup.php:1023 setup.php:1030
 msgid "Provide key information to help Device Tracking detect the type of device.  The wildcard character is the '&#42;' sign."
