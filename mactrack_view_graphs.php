@@ -122,17 +122,17 @@ function mactrack_view_graphs() {
 	$total_graphs = 0;
 
 	// Filter sql_where
-	$sql_where  = (get_request_var('filter') != '' ? "gtg.title_cache LIKE '%" . get_request_var('filter') . "%'":'');
+	$sql_where  = (get_request_var('filter') != '' ? "gtg.title_cache LIKE " . db_qstr('%' . get_request_var('filter') . '%'):'');
 	$sql_where .= ($sql_or != '' && $sql_where != '' ? ' AND ':'') . $sql_or;
 	$sql_where .= ($sql_or != '' && $sql_where != '' ? ' AND ':'') . $hq . ' AND ' . $gq;
 
 	// Host Id sql_where
-	if (get_request_var('host_id') > 0) {
+	if (get_filter_request_var('host_id') > 0) {
 		$sql_where .= ($sql_where != '' ? ' AND':'') . ' gl.host_id=' . get_request_var('host_id');
 	}
 
 	// Graph Template Id sql_where
-	if (get_request_var('graph_template_id') > 0) {
+	if (get_filter_request_var('graph_template_id') > 0) {
 		$sql_where .= ($sql_where != '' ? ' AND':'') . ' gl.graph_template_id=' . get_request_var('graph_template_id');
 	}
 

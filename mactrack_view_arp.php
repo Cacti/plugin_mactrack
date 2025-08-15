@@ -236,7 +236,7 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = true, $rows) 
 	if ((get_request_var('scan_date') == '2')) {
 		$last = db_fetch_cell('SELECT MAX(scan_date) FROM mac_track_scan_dates');
 		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . " mti.scan_date = '" . $last . "'";
-	} elseif ((get_request_var('scan_date') != '1')) {
+	} elseif ((get_request_var('scan_date') != '1') && strtotime(get_request_var('scan_date')) !== false) {
 		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mti.scan_date = ' . db_qstr(get_request_var('scan_date'));
 	}
 
