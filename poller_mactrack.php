@@ -41,18 +41,17 @@ $poller_interval   = read_config_option('poller_interval');
 if (is_numeric($collect_frequency)) {
 	/* let PHP a 5 minutes less than the rerun frequency */
 	$max_run_duration = ($collect_frequency * 60) - $poller_interval;
-	ini_set('max_execution_time', $max_run_duration);
 } else {
 	// default for force
 	$max_run_duration = 1800;
 }
-
 
 /* Disable Mib File Loading */
 putenv('MIBS=:');
 
 /* Allow Mactrack to Use Memory */
 ini_set('memory_limit', '-1');
+ini_set('max_execution_time', $max_run_duration);
 
 global $config, $debug, $web, $track_errors;
 
@@ -264,6 +263,7 @@ if ($collect_frequency == 'disabled') {
 			}
 		}
 	}
+
 	/* show errors now */
 	errors_restore();
 }
@@ -271,7 +271,6 @@ if ($collect_frequency == 'disabled') {
 if (function_exists('unregister_process')) {
 	unregister_process('mactrack', 'master', $config['poller_id']);
 }
-
 
 function errors_disable() {
 	global $track_errors;
