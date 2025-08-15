@@ -23,6 +23,21 @@
  +-------------------------------------------------------------------------+
 */
 
+if (function_exists('pcntl_async_signals')) {
+    pcntl_async_signals(true);
+} else {
+    declare(ticks = 100);
+}
+
+ini_set('output_buffering', 'Off');
+ini_set('max_runtime', '-1');
+ini_set('memory_limit', '-1');
+
+ini_set('max_execution_time', '-1');
+
+set_time_limit(0);
+ob_implicit_flush();
+
 $dir = dirname(__FILE__);
 chdir($dir);
 
@@ -33,6 +48,12 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 include('./include/cli_check.php');
 include_once($config['base_path'] . '/lib/poller.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+
+/* install signal handlers for UNIX only */
+if (function_exists('pcntl_signal')) {
+    pcntl_signal(SIGTERM, 'sig_handler');
+    pcntl_signal(SIGINT, 'sig_handler');
+}
 
 /* get the mactrack polling cycle */
 $collect_frequency = read_config_option('mt_collection_timing');
@@ -49,17 +70,13 @@ if (is_numeric($collect_frequency)) {
 /* Disable Mib File Loading */
 putenv('MIBS=:');
 
-/* Allow Mactrack to Use Memory */
-ini_set('memory_limit', '-1');
-ini_set('max_execution_time', $max_run_duration);
-
 global $config, $debug, $web, $track_errors;
 
 /* initialize variables */
-$site_id  = 0;
-$debug    = false;
-$forcerun = false;
-$web      = false;
+$site_id = 0;
+$debug   = false;
+$force   = false;
+$web     = false;
 
 $track_errors = 0;
 
@@ -86,7 +103,7 @@ if (cacti_sizeof($parms)) {
 				break;
 			case '-f':
 			case '--force':
-				$forcerun = true;
+				$force = true;
 				break;
 			case '-w':
 			case '--web':
@@ -103,7 +120,7 @@ if (cacti_sizeof($parms)) {
 				display_help();
 				exit;
 			default:
-				print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
+				print 'ERROR: Invalid Parameter ' . $parameter . PHP_EOL . PHP_EOL;
 				display_help();
 				exit;
 		}
@@ -123,10 +140,10 @@ if (function_exists('register_process_start')) {
 clear_old_processes($site_id);
 
 if ($collect_frequency == 'disabled') {
-	echo "WARNING: Mactrack scanning frequency is disabled, exiting. You have to enable it in settings.\n";
+	print "WARNING: Mactrack scanning frequency is disabled, exiting. You have to enable it in settings." . PHP_EOL;
 
 	if (function_exists('unregister_process')) {
-		unregister_process('matrack', 'master', $config['poller_id']);
+		unregister_process('matrack', 'master', $config['poller_id'], getmypid());
 	}
 
 	exit(1);
@@ -137,15 +154,15 @@ if ($collect_frequency == 'disabled') {
 	if ($running_processes) {
 		$start_date = db_fetch_cell('SELECT MIN(start_date) FROM mac_track_processes');
 
-		if (time() < (strtotime($start_date) + $max_run_duration) && !$forcerun) {
-			echo "NOTE: Mactrack currently running and max run duration not eclipsed.\n";
+		if (time() < (strtotime($start_date) + $max_run_duration) && !$force) {
+			print "NOTE: Mactrack currently running and max run duration not eclipsed." . PHP_EOL;
 
 			if (function_exists('unregister_process')) {
-				unregister_process('matrack', 'master', $config['poller_id']);
+				unregister_process('matrack', 'master', $config['poller_id'], getmypid());
 			}
 
 			exit(0);
-		} elseif ($forcerun) {
+		} elseif ($force) {
 			mactrack_debug('WARNING: Forcing Collection although Collection Appears in Process', true, 'MACTRACK');
 			db_execute('TRUNCATE mac_track_processes');
 		} else {
@@ -166,7 +183,7 @@ if ($collect_frequency == 'disabled') {
 		collect_mactrack_data($start, $site_id);
 	} else {
 		mactrack_debug('About to enter Mactrack poller processing');
-		if ($forcerun || $collect_frequency > 0) {
+		if ($force || $collect_frequency > 0) {
 			mactrack_debug('Into Processing.  Checking to determine if it\'s time to run.');
 			$collect_frequency        = $collect_frequency * 60;
 
@@ -240,7 +257,7 @@ if ($collect_frequency == 'disabled') {
 				mactrack_debug("The next database maintenance run time has been determined to be at '" . date('Y-m-d G:i:s', $next_db_maint_time) . "'");
 			}
 
-			if ($time_till_next_run < 0 || $forcerun == true) {
+			if ($time_till_next_run < 0 || $force == true) {
 				mactrack_debug('Either a scan has been forced, or it\'s time to check for macs');
 
 				/* take time and log performance data */
@@ -269,7 +286,7 @@ if ($collect_frequency == 'disabled') {
 }
 
 if (function_exists('unregister_process')) {
-	unregister_process('mactrack', 'master', $config['poller_id']);
+	unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
 }
 
 function errors_disable() {
@@ -336,24 +353,6 @@ function mactrack_error_handler($level, $message, $file, $line, $context) {
 	}
 
 	return false;
-}
-
-function display_version() {
-	global $config;
-
-	$info = plugin_mactrack_version();
-	print 'Mactrack Master Poller, Version ' . $info['version'] . ', ' .  COPYRIGHT_YEARS . "\n";
-}
-
-/*	display_help - displays the usage of the function */
-function display_help () {
-	display_version();
-
-	print "\nusage: poller_mactrack.php [-sid=site_id] [--web] [--force] [--debug]\n\n";
-	print "-sid=site_id  - The mac_track_sites site_id to scan\n";
-	print "-w | --web    - Display output suitable for the web\n";
-	print "-f | --force  - Force the execution of a collection process\n";
-	print "-d | --debug  - Display verbose output during execution\n";
 }
 
 function clear_old_processes($site_id) {
@@ -1066,3 +1065,47 @@ function log_mactrack_statistics($type = 'collect') {
 	}
 }
 
+/**
+ * sig_handler - provides a generic means to catch exceptions to the Cacti log.
+ *
+ * @param  (int) $signo - the signal that was thrown by the interface.
+ *
+ * @return (void)
+ */
+function sig_handler($signo) {
+    global $force, $config;
+
+    switch ($signo) {
+        case SIGTERM:
+        case SIGINT:
+            cacti_log("WARNING: Flowview Listener 'master' is shutting down by signal!", false, 'FLOWVIEW');
+
+            if (!$force) {
+                unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
+            }
+
+            exit(1);
+            break;
+        default:
+            /* ignore all other signals */
+    }
+}
+
+function display_version() {
+	global $config;
+
+	$info = plugin_mactrack_version();
+	print 'Mactrack Master Poller, Version ' . $info['version'] . ', ' .  COPYRIGHT_YEARS . PHP_EOL;
+}
+
+/*	display_help - displays the usage of the function */
+function display_help () {
+	display_version();
+
+	print PHP_EOL;
+	print "usage: poller_mactrack.php [-sid=site_id] [--web] [--force] [--debug]" . PHP_EOL . PHP_EOL;
+	print "-sid=site_id  - The mac_track_sites site_id to scan" . PHP_EOL;
+	print "-w | --web    - Display output suitable for the web" . PHP_EOL;
+	print "-f | --force  - Force the execution of a collection process" . PHP_EOL;
+	print "-d | --debug  - Display verbose output during execution" . PHP_EOL;
+}
