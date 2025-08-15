@@ -260,6 +260,8 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = true, $rows) 
 		$sql_order
 		$sql_limit";
 
+	cacti_log("SQL: $query_string");
+
 	return db_fetch_assoc($query_string);
 }
 

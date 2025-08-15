@@ -145,6 +145,8 @@ function mactrack_view_graphs() {
 	$limit  = (get_request_var('graphs')*(get_request_var('page')-1)) . ',' . $rows;
 	$order  = 'gtg.title_cache';
 
+	cacti_log("SQL Where: $sql_where, Order: $order, Limit: $limit");
+
 	$graphs = get_allowed_graphs($sql_where, $order, $limit, $total_graphs);
 
 	/* do some fancy navigation url construction so we don't have to try and rebuild the url string */
