@@ -236,7 +236,7 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = true, $rows) 
 	if ((get_request_var('scan_date') == '2')) {
 		$last = db_fetch_cell('SELECT MAX(scan_date) FROM mac_track_scan_dates');
 		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . " mti.scan_date = '" . $last . "'";
-	} elseif ((get_request_var('scan_date') != '1') && strtotime(get_request_var('scan_date')) !== false) {
+	} elseif ((get_request_var('scan_date') != '1') && get_request_var('scan_date') != '') {
 		$sql_where .= ($sql_where != '' ? ' AND':'WHERE') . ' mti.scan_date = ' . db_qstr(get_request_var('scan_date'));
 	}
 
@@ -260,7 +260,7 @@ function mactrack_view_get_ip_records(&$sql_where, $apply_limits = true, $rows) 
 		$sql_order
 		$sql_limit";
 
-	cacti_log("SQL: $query_string");
+	//cacti_log("SQL: $query_string");
 
 	return db_fetch_assoc($query_string);
 }

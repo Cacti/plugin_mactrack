@@ -139,13 +139,13 @@ function mactrack_view_graphs() {
 	if (get_request_var('graphs') == '-1') {
 		$rows = read_config_option('num_rows_table');
 	} else {
-		$rows = get_request_var('rows');
+		$rows = get_request_var('graphs');
 	}
 
 	$limit  = (get_request_var('graphs')*(get_request_var('page')-1)) . ',' . $rows;
 	$order  = 'gtg.title_cache';
 
-	cacti_log("SQL Where: $sql_where, Order: $order, Limit: $limit");
+	//cacti_log("SQL Where: $sql_where, Order: $order, Limit: $limit");
 
 	$graphs = get_allowed_graphs($sql_where, $order, $limit, $total_graphs);
 
