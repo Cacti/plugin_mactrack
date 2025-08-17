@@ -550,7 +550,7 @@ function mactrack_device_import() {
 			<strong>max_oids</strong><?php print __(' - Specified the number of OID\'s that can be obtained in a single SNMP Get request', 'mactrack');?><br>
 			<strong>snmp_username</strong><?php print __(' - SNMP V3: SNMP username', 'mactrack');?><br>
 			<strong>snmp_password</strong><?php print __(' - SNMP V3: SNMP password', 'mactrack');?><br>
-			<strong>snmp_auth_protocol</strong><?php print __(' - SNMP V3: SNMP authentication protocol', 'matrack');?><br>
+			<strong>snmp_auth_protocol</strong><?php print __(' - SNMP V3: SNMP authentication protocol', 'mactrack');?><br>
 			<strong>snmp_priv_passphrase</strong><?php print __(' - SNMP V3: SNMP privacy passphrase', 'mactrack');?><br>
 			<strong>snmp_priv_protocol</strong><?php print __(' - SNMP V3: SNMP privacy protocol', 'mactrack');?><br>
 			<strong>snmp_context</strong><?php print __(' - SNMP V3: SNMP context', 'mactrack');?><br>
@@ -1144,18 +1144,18 @@ function mactrack_device_filter() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Search', 'matrack');?>
+						<?php print __('Search', 'mactrack');?>
 					</td>
 					<td>
 						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter');?>'>
 					</td>
 					<td>
-						<?php print __('Site', 'matrack');?>
+						<?php print __('Site', 'mactrack');?>
 					</td>
 					<td>
 						<select id='site_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('All', 'matrack');?></option>
-							<option value='-2'<?php if (get_request_var('site_id') == '-2') {?> selected<?php }?>><?php print __('None', 'matrack');?></option>
+							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack');?></option>
+							<option value='-2'<?php if (get_request_var('site_id') == '-2') {?> selected<?php }?>><?php print __('None', 'mactrack');?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT site_id, site_name FROM mac_track_sites ORDER BY site_name');
 							if (cacti_sizeof($sites)) {
@@ -1179,23 +1179,23 @@ function mactrack_device_filter() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Type', 'matrack');?>
+						<?php print __('Type', 'mactrack');?>
 					</td>
 					<td>
 						<select id='type_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('type_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'matrack');?></option>
-							<option value='1'<?php if (get_request_var('type_id') == '1') {?> selected<?php }?>><?php print __('Switch/Hub', 'matrack');?></option>
-							<option value='2'<?php if (get_request_var('type_id') == '2') {?> selected<?php }?>><?php print __('Switch/Router', 'matrack');?></option>
-							<option value='3'<?php if (get_request_var('type_id') == '3') {?> selected<?php }?>><?php print __('Router', 'matrack');?></option>
+							<option value='-1'<?php if (get_request_var('type_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack');?></option>
+							<option value='1'<?php if (get_request_var('type_id') == '1') {?> selected<?php }?>><?php print __('Switch/Hub', 'mactrack');?></option>
+							<option value='2'<?php if (get_request_var('type_id') == '2') {?> selected<?php }?>><?php print __('Switch/Router', 'mactrack');?></option>
+							<option value='3'<?php if (get_request_var('type_id') == '3') {?> selected<?php }?>><?php print __('Router', 'mactrack');?></option>
 						</select>
 					</td>
 					<td>
-						<?php print __('SubType', 'matrack');?>
+						<?php print __('SubType', 'mactrack');?>
 					</td>
 					<td>
 						<select id='device_type_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('device_type_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'matrack');?></option>
-							<option value='-2'<?php if (get_request_var('device_type_id') == '-2') {?> selected<?php }?>><?php print __('Not Detected', 'matrack');?></option>
+							<option value='-1'<?php if (get_request_var('device_type_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack');?></option>
+							<option value='-2'<?php if (get_request_var('device_type_id') == '-2') {?> selected<?php }?>><?php print __('Not Detected', 'mactrack');?></option>
 							<?php
 							if (get_request_var('type_id') != -1) {
 								$device_types = db_fetch_assoc_prepared('SELECT DISTINCT
@@ -1236,25 +1236,25 @@ function mactrack_device_filter() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Status', 'matrack');?>
+						<?php print __('Status', 'mactrack');?>
 					</td>
 					<td>
 						<select id='status' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('status') == '-1') {?> selected<?php }?>><?php print __('Any', 'matrack');?></option>
-							<option value='3'<?php if (get_request_var('status') == '3') {?> selected<?php }?>><?php print __('Up', 'matrack');?></option>
-							<option value='-2'<?php if (get_request_var('status') == '-2') {?> selected<?php }?>><?php print __('Disabled', 'matrack');?></option>
-							<option value='1'<?php if (get_request_var('status') == '1') {?> selected<?php }?>><?php print __('Down', 'matrack');?></option>
-							<option value='0'<?php if (get_request_var('status') == '0') {?> selected<?php }?>><?php print __('Unknown', 'matrack');?></option>
-							<option value='4'<?php if (get_request_var('status') == '4') {?> selected<?php }?>><?php print __('Error', 'matrack');?></option>
-							<option value='5'<?php if (get_request_var('status') == '5') {?> selected<?php }?>><?php print __('No Cacti Link', 'matrack');?></option>
+							<option value='-1'<?php if (get_request_var('status') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack');?></option>
+							<option value='3'<?php if (get_request_var('status') == '3') {?> selected<?php }?>><?php print __('Up', 'mactrack');?></option>
+							<option value='-2'<?php if (get_request_var('status') == '-2') {?> selected<?php }?>><?php print __('Disabled', 'mactrack');?></option>
+							<option value='1'<?php if (get_request_var('status') == '1') {?> selected<?php }?>><?php print __('Down', 'mactrack');?></option>
+							<option value='0'<?php if (get_request_var('status') == '0') {?> selected<?php }?>><?php print __('Unknown', 'mactrack');?></option>
+							<option value='4'<?php if (get_request_var('status') == '4') {?> selected<?php }?>><?php print __('Error', 'mactrack');?></option>
+							<option value='5'<?php if (get_request_var('status') == '5') {?> selected<?php }?>><?php print __('No Cacti Link', 'mactrack');?></option>
 						</select>
 					</td>
 					<td>
-						<?php print __('Devices', 'matrack');?>
+						<?php print __('Devices', 'mactrack');?>
 					</td>
 					<td>
 						<select id='rows' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'matrack');?></option>
+							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack');?></option>
 							<?php
 							if (cacti_sizeof($item_rows)) {
 								foreach ($item_rows as $key => $value) {

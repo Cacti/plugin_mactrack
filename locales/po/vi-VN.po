@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2024-04-20 17:08-0400\n"
+"POT-Creation-Date: 2025-08-17 09:27-0400\n"
 "PO-Revision-Date: 2024-04-20 17:45-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,13 +18,13 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
-#: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:617
+#: mactrack_view_dot1x.php:495 mactrack_view_dot1x.php:622
 msgid "Idle"
 msgstr "Rảnh rỗi"
 
 #: lib/mactrack_functions.php:38 mactrack_utilities.php:240
-#: mactrack_utilities.php:320 mactrack_view_dot1x.php:489
-#: mactrack_view_dot1x.php:618
+#: mactrack_utilities.php:320 mactrack_view_dot1x.php:494
+#: mactrack_view_dot1x.php:623
 msgid "Running"
 msgstr "Đang chạy"
 
@@ -32,336 +32,340 @@ msgstr "Đang chạy"
 msgid "No method"
 msgstr "Phương thức"
 
-#: lib/mactrack_functions.php:40 mactrack_view_dot1x.php:486
-#: mactrack_view_dot1x.php:620
+#: lib/mactrack_functions.php:40 mactrack_view_dot1x.php:491
+#: mactrack_view_dot1x.php:625
 msgid "Authentication Success"
 msgstr "Xác thực thành công"
 
-#: lib/mactrack_functions.php:41 mactrack_view_dot1x.php:488
-#: mactrack_view_dot1x.php:621
+#: lib/mactrack_functions.php:41 mactrack_view_dot1x.php:493
+#: mactrack_view_dot1x.php:626
 msgid "Authentication Failed"
 msgstr "Quá trình xác thực đã thất bại"
 
-#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:485
-#: mactrack_view_dot1x.php:622
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:490
+#: mactrack_view_dot1x.php:627
 msgid "Authorization Success"
 msgstr "Ủy quyền thành công"
 
-#: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:487
-#: mactrack_view_dot1x.php:623
+#: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:492
+#: mactrack_view_dot1x.php:628
 msgid "Authorization Failed"
 msgstr "Ủy quyển thất bại"
 
-#: lib/mactrack_functions.php:2458
-msgid "Device Tracking OUI Database Import Results"
+#: lib/mactrack_functions.php:2500
+#, fuzzy
+msgid "Mactrack Device Tracking OUI Database Import Results"
 msgstr "Theo dõi thiết bị Kết quả nhập cơ sở dữ liệu OUI"
 
-#: lib/mactrack_functions.php:2459
+#: lib/mactrack_functions.php:2501
 msgid "Getting OUI Database from IEEE"
 msgstr "Lấy cơ sở dữ liệu OUI từ IEEE"
 
-#: lib/mactrack_functions.php:2461
+#: lib/mactrack_functions.php:2503
 msgid "Getting OUI Database from the IEEE"
 msgstr "Lấy cơ sở dữ liệu OUI từ IEEE"
 
-#: lib/mactrack_functions.php:2469
+#: lib/mactrack_functions.php:2534
 msgid "OUI Database Download from IEEE Complete"
 msgstr "Tải xuống cơ sở dữ liệu OUI từ IEEE Complete"
 
-#: lib/mactrack_functions.php:2471
+#: lib/mactrack_functions.php:2536
 msgid "OUI Database Download from IEEE FAILED"
 msgstr "Tải xuống cơ sở dữ liệu OUI từ IEEE FAILED"
 
-#: lib/mactrack_functions.php:2558
+#: lib/mactrack_functions.php:2626
 #, php-format
 msgid "There were '%d' Entries Added/Updated in the database."
 msgstr "Đã có '% d' Mục nhập được thêm / Cập nhật trong cơ sở dữ liệu."
 
-#: lib/mactrack_functions.php:2560
+#: lib/mactrack_functions.php:2628
 #, php-format
 msgid "There were '%d' Records Removed from the database."
 msgstr "Đã có '% d' Bản ghi bị xóa khỏi cơ sở dữ liệu."
 
-#: lib/mactrack_functions.php:2582
+#: lib/mactrack_functions.php:2650
 msgid "atifIndexes data collection complete"
 msgstr "hoàn thành thu thập dữ liệu"
 
-#: lib/mactrack_functions.php:2600
+#: lib/mactrack_functions.php:2668
 msgid "atPhysAddress data collection complete"
 msgstr "hoàn thành việc thu thập dữ liệu tạiPhysAddress"
 
-#: lib/mactrack_functions.php:2608
+#: lib/mactrack_functions.php:2676
 msgid "atNetAddress data collection complete"
 msgstr "hoàn thành việc thu thập dữ liệu atNetAddress"
 
-#: lib/mactrack_functions.php:2621
+#: lib/mactrack_functions.php:2689
 msgid "atEntries assembly complete."
 msgstr "lắp ráp atEntries hoàn tất."
 
-#: lib/mactrack_functions.php:2652
+#: lib/mactrack_functions.php:2720
 #, php-format
 msgid "HOST: %s, IP address information collection complete"
 msgstr "HOST: %s, hoàn tất thu thập thông tin địa chỉ IP"
 
-#: lib/mactrack_functions.php:2669 lib/mactrack_functions.php:3166
+#: lib/mactrack_functions.php:2737 lib/mactrack_functions.php:3236
 msgid "Rescan Device"
 msgstr "Thiết bị quét lại"
 
-#: lib/mactrack_functions.php:2692
+#: lib/mactrack_functions.php:2760
 msgid "View Non Interface Graphs"
 msgstr "Xem giao diện"
 
-#: lib/mactrack_functions.php:2694
+#: lib/mactrack_functions.php:2762
 msgid "No Non Interface Graphs in Cacti"
 msgstr "Không có đồ thị không giao diện trong xương rồng"
 
-#: lib/mactrack_functions.php:2711
+#: lib/mactrack_functions.php:2779
 msgid "View Interface Graphs"
 msgstr "Xem giao diện"
 
-#: lib/mactrack_functions.php:2713
+#: lib/mactrack_functions.php:2781
 msgid "No Interface Graphs in Cacti"
 msgstr "Xem giao diện"
 
-#: lib/mactrack_functions.php:2730 lib/mactrack_functions.php:2733
+#: lib/mactrack_functions.php:2798 lib/mactrack_functions.php:2801
 msgid "Since Restart"
 msgstr "Kể từ khi khởi động lại"
 
-#: lib/mactrack_functions.php:2772 mactrack_devices.php:1245
+#: lib/mactrack_functions.php:2840 mactrack_devices.php:1246
 #: mactrack_view_devices.php:512
 msgid "Down"
 msgstr "Xuống"
 
-#: lib/mactrack_functions.php:2772 mactrack_devices.php:1243
+#: lib/mactrack_functions.php:2840 mactrack_devices.php:1244
 #: mactrack_view_devices.php:510
 msgid "Up"
 msgstr "Lên trên"
 
-#: lib/mactrack_functions.php:2808
+#: lib/mactrack_functions.php:2876
 msgid "Data"
 msgstr "Dữ liệu"
 
-#: lib/mactrack_functions.php:2808
+#: lib/mactrack_functions.php:2876
 msgid "Voice"
 msgstr "音声"
 
-#: lib/mactrack_functions.php:2860
+#: lib/mactrack_functions.php:2928
 #, php-format
 msgid "Device Rescan '%s'"
 msgstr "Quét lại thiết bị ' %s'"
 
-#: lib/mactrack_functions.php:2900
+#: lib/mactrack_functions.php:2968
 #, php-format
 msgid "Site scan '%s'"
 msgstr "Quét trang web ' %s'"
 
-#: lib/mactrack_functions.php:2937
+#: lib/mactrack_functions.php:3005
 #, php-format
 msgid "Device Enable '%s'"
 msgstr "Thiết bị kích hoạt ' %s'"
 
-#: lib/mactrack_functions.php:2969
+#: lib/mactrack_functions.php:3037
 #, php-format
 msgid "Device Disable '%d'"
 msgstr "Vô hiệu hóa thiết bị '% d'"
 
-#: lib/mactrack_functions.php:3085 lib/mactrack_functions.php:3117
-#: lib/mactrack_functions.php:3118 lib/mactrack_functions.php:3180
-#: lib/mactrack_functions.php:3181 lib/mactrack_functions.php:3182
-#: lib/mactrack_functions.php:3183 lib/mactrack_functions.php:3184
+#: lib/mactrack_functions.php:3155 lib/mactrack_functions.php:3187
+#: lib/mactrack_functions.php:3188 lib/mactrack_functions.php:3250
+#: lib/mactrack_functions.php:3251 lib/mactrack_functions.php:3252
+#: lib/mactrack_functions.php:3253 lib/mactrack_functions.php:3254
 #: mactrack_device_types.php:982 mactrack_device_types.php:989
 #: mactrack_device_types.php:996 mactrack_macwatch.php:355
 #: mactrack_macwatch.php:356 mactrack_snmp.php:457 mactrack_snmp.php:462
 #: mactrack_snmp.php:463 mactrack_snmp.php:464 mactrack_utilities.php:248
 #: mactrack_utilities.php:250 mactrack_utilities.php:252
-#: mactrack_view_arp.php:439 mactrack_view_devices.php:376
-#: mactrack_view_dot1x.php:522 mactrack_view_interfaces.php:532
-#: mactrack_view_macs.php:1053 mactrack_view_sites.php:414
+#: mactrack_view_arp.php:446 mactrack_view_devices.php:376
+#: mactrack_view_dot1x.php:527 mactrack_view_interfaces.php:532
+#: mactrack_view_macs.php:1084 mactrack_view_sites.php:414
 #: mactrack_view_sites.php:415 mactrack_view_sites.php:416
-#: mactrack_view_sites.php:417 mactrack_view_sites.php:418 setup.php:344
+#: mactrack_view_sites.php:417 mactrack_view_sites.php:418 setup.php:358
 msgid "N/A"
 msgstr "N/A"
 
-#: lib/mactrack_functions.php:3087 setup.php:881
+#: lib/mactrack_functions.php:3157 setup.php:927
 #, php-format
 msgid "%d Minutes"
 msgstr "%d phút"
 
-#: lib/mactrack_functions.php:3091
+#: lib/mactrack_functions.php:3161
 #, php-format
 msgid "%d Hours"
 msgstr "% d giờ"
 
-#: lib/mactrack_functions.php:3095 setup.php:941 setup.php:942 setup.php:943
-#: setup.php:944 setup.php:945
+#: lib/mactrack_functions.php:3165 setup.php:988 setup.php:989 setup.php:990
+#: setup.php:991 setup.php:992
 #, php-format
 msgid "%d Days"
 msgstr "% d ngày"
 
-#: lib/mactrack_functions.php:3098
+#: lib/mactrack_functions.php:3168
 #, php-format
 msgid "%d Weeks"
 msgstr "% d tuần"
 
-#: lib/mactrack_functions.php:3116
+#: lib/mactrack_functions.php:3186
 msgid "Not Recorded"
 msgstr "Không được ghi lại"
 
-#: lib/mactrack_functions.php:3136
+#: lib/mactrack_functions.php:3206
 #, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
 msgstr "Trạng thái: Đang chạy, Quá trình:% d, Tiến trình: %s, Lần cuối:% f"
 
-#: lib/mactrack_functions.php:3138
+#: lib/mactrack_functions.php:3208
 #, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
 msgstr "Trạng thái: Không hoạt động, Lần cuối:% f giây, Quá trình:% d quy trình, Thiết bị:% d, Thời gian chạy tiếp theo: %s"
 
-#: lib/mactrack_functions.php:3140 mactrack_device_types.php:959
-#: mactrack_devices.php:1244 mactrack_utilities.php:240
-#: mactrack_utilities.php:266 mactrack_view_devices.php:511 setup.php:927
-#: setup.php:954 setup.php:1097
+#: lib/mactrack_functions.php:3210 mactrack_device_types.php:959
+#: mactrack_devices.php:1245 mactrack_utilities.php:240
+#: mactrack_utilities.php:266 mactrack_view_devices.php:511 setup.php:973
+#: setup.php:1001 setup.php:1144
 msgid "Disabled"
 msgstr "Vô hiệu hóa"
 
-#: lib/mactrack_functions.php:3146
+#: lib/mactrack_functions.php:3216
 #, php-format
 msgid "Scanning Rate: Every %s"
 msgstr "Tốc độ quét: Mỗi %s"
 
-#: lib/mactrack_functions.php:3161 mactrack_view_devices.php:373
+#: lib/mactrack_functions.php:3231 mactrack_view_devices.php:373
 #: mactrack_view_sites.php:310 mactrack_view_sites.php:404
 msgid "View Interfaces"
 msgstr "Xem giao diện"
 
-#: lib/mactrack_functions.php:3179 mactrack_devices.php:1197
+#: lib/mactrack_functions.php:3249 mactrack_devices.php:1198
 #: mactrack_view_devices.php:468
 msgid "Not Detected"
 msgstr "Không được phát hiện"
 
-#: lib/mactrack_functions.php:3233 lib/mactrack_functions.php:3294
-#: mactrack_sites.php:460 mactrack_sites.php:540 mactrack_view_sites.php:285
-#: setup.php:548 setup.php:966
+#: lib/mactrack_functions.php:3303 lib/mactrack_functions.php:3364
+#: mactrack_sites.php:461 mactrack_sites.php:541 mactrack_view_sites.php:285
+#: setup.php:562 setup.php:1013
 msgid "Sites"
 msgstr "Websites"
 
-#: lib/mactrack_functions.php:3234 mactrack_device_types.php:952
-#: mactrack_devices.php:1105 mactrack_devices.php:1252 mactrack_sites.php:427
+#: lib/mactrack_functions.php:3304 mactrack_device_types.php:952
+#: mactrack_devices.php:1106 mactrack_devices.php:1253 mactrack_sites.php:428
 #: mactrack_utilities.php:280 mactrack_view_devices.php:325
-#: mactrack_view_devices.php:519 mactrack_view_sites.php:252 setup.php:549
-#: setup.php:967
+#: mactrack_view_devices.php:519 mactrack_view_sites.php:252 setup.php:563
+#: setup.php:1014
 msgid "Devices"
 msgstr "Thiết bị"
 
-#: lib/mactrack_functions.php:3235
+#: lib/mactrack_functions.php:3305
 msgid "IP Ranges"
 msgstr "Phạm vi IP"
 
-#: lib/mactrack_functions.php:3236
+#: lib/mactrack_functions.php:3306
 msgid "IP Address"
 msgstr "Địa chỉ IP"
 
-#: lib/mactrack_functions.php:3237 setup.php:1489
+#: lib/mactrack_functions.php:3307 setup.php:1576
 msgid "MAC Address"
 msgstr "Địa chỉ MAC"
 
-#: lib/mactrack_functions.php:3238 mactrack_view_interfaces.php:291
-#: mactrack_view_interfaces.php:607 setup.php:552
+#: lib/mactrack_functions.php:3308 mactrack_view_interfaces.php:291
+#: mactrack_view_interfaces.php:607 setup.php:566
 msgid "Interfaces"
 msgstr "Giao thức kết nối"
 
-#: lib/mactrack_functions.php:3239
+#: lib/mactrack_functions.php:3309
 msgid "Dot1x"
 msgstr "Dot1x"
 
-#: lib/mactrack_functions.php:3240 mactrack_view_graphs.php:153
+#: lib/mactrack_functions.php:3310 mactrack_view_graphs.php:161
 msgid "Graphs"
 msgstr "Đồ thị"
 
-#: lib/mactrack_functions.php:3274 mactrack_device_types.php:469
-#: mactrack_devices.php:1246 mactrack_view_devices.php:513 setup.php:902
+#: lib/mactrack_functions.php:3344 mactrack_device_types.php:469
+#: mactrack_devices.php:1247 mactrack_view_devices.php:513 setup.php:948
 msgid "Unknown"
 msgstr "Không xác định"
 
-#: lib/mactrack_functions.php:3288 mactrack_device_types.php:1031
-#: mactrack_devices.php:1146 mactrack_macauth.php:370 mactrack_macwatch.php:387
-#: mactrack_snmp.php:600 mactrack_vendormacs.php:199 mactrack_view_arp.php:429
-#: mactrack_view_devices.php:418 mactrack_view_dot1x.php:512
-#: mactrack_view_interfaces.php:625 mactrack_view_macs.php:1043
+#: lib/mactrack_functions.php:3358 mactrack_device_types.php:1031
+#: mactrack_devices.php:1147 mactrack_macauth.php:379 mactrack_macwatch.php:387
+#: mactrack_snmp.php:600 mactrack_vendormacs.php:199 mactrack_view_arp.php:436
+#: mactrack_view_devices.php:418 mactrack_view_dot1x.php:517
+#: mactrack_view_interfaces.php:625 mactrack_view_macs.php:1074
 msgid "Search"
 msgstr "Tìm kiếm"
 
-#: lib/mactrack_functions.php:3298 mactrack_device_types.php:1041
-#: mactrack_devices.php:1256 mactrack_macauth.php:380 mactrack_macwatch.php:397
+#: lib/mactrack_functions.php:3368 mactrack_device_types.php:1041
+#: mactrack_devices.php:1257 mactrack_macauth.php:389 mactrack_macwatch.php:397
 #: mactrack_snmp.php:610 mactrack_vendormacs.php:209
-#: mactrack_view_devices.php:523 mactrack_view_ips.php:318 setup.php:914
+#: mactrack_view_devices.php:523 mactrack_view_ips.php:318 setup.php:960
 msgid "Default"
 msgstr "Mặc định"
 
-#: lib/mactrack_functions.php:3312
+#: lib/mactrack_functions.php:3382
 msgid "Show Device Details"
 msgstr "Hiển thị chi tiết thiết bị"
 
-#: lib/mactrack_functions.php:3315 mactrack_device_types.php:1053
-#: mactrack_devices.php:1170 mactrack_macauth.php:392 mactrack_macwatch.php:409
-#: mactrack_snmp.php:624 mactrack_vendormacs.php:221 mactrack_view_arp.php:493
-#: mactrack_view_devices.php:442 mactrack_view_dot1x.php:585
-#: mactrack_view_interfaces.php:542 mactrack_view_macs.php:1107
+#: lib/mactrack_functions.php:3386 mactrack_device_types.php:1053
+#: mactrack_devices.php:1171 mactrack_macauth.php:401 mactrack_macwatch.php:409
+#: mactrack_snmp.php:624 mactrack_vendormacs.php:221 mactrack_view_arp.php:500
+#: mactrack_view_devices.php:442 mactrack_view_dot1x.php:590
+#: mactrack_view_interfaces.php:542 mactrack_view_macs.php:1138
 msgid "Go"
 msgstr "Đi"
 
-#: lib/mactrack_functions.php:3318 mactrack_device_types.php:1054
-#: mactrack_devices.php:1171 mactrack_macauth.php:393 mactrack_macwatch.php:410
-#: mactrack_snmp.php:625 mactrack_vendormacs.php:222 mactrack_view_arp.php:494
-#: mactrack_view_devices.php:443 mactrack_view_dot1x.php:586
+#: lib/mactrack_functions.php:3387 mactrack_device_types.php:1054
+#: mactrack_devices.php:1172 mactrack_macauth.php:402 mactrack_macwatch.php:410
+#: mactrack_snmp.php:625 mactrack_vendormacs.php:222 mactrack_view_arp.php:501
+#: mactrack_view_devices.php:443 mactrack_view_dot1x.php:591
 #: mactrack_view_interfaces.php:543 mactrack_view_ips.php:331
-#: mactrack_view_macs.php:1108
+#: mactrack_view_macs.php:1139
 msgid "Clear"
 msgstr "Xóa"
 
-#: lib/mactrack_functions.php:3321 mactrack_device_types.php:1057
-#: mactrack_devices.php:1173 mactrack_vendormacs.php:223
-#: mactrack_view_arp.php:495 mactrack_view_devices.php:444
-#: mactrack_view_dot1x.php:587 mactrack_view_interfaces.php:544
-#: mactrack_view_ips.php:330 mactrack_view_macs.php:1109
+#: lib/mactrack_functions.php:3388 mactrack_device_types.php:1057
+#: mactrack_devices.php:1174 mactrack_vendormacs.php:223
+#: mactrack_view_arp.php:502 mactrack_view_devices.php:444
+#: mactrack_view_dot1x.php:592 mactrack_view_interfaces.php:544
+#: mactrack_view_ips.php:330 mactrack_view_macs.php:1140
 msgid "Export"
 msgstr "Xuất ra"
 
-#: lib/mactrack_functions.php:3330 mactrack_devices.php:1152
-#: mactrack_view_arp.php:435 mactrack_view_devices.php:424
-#: mactrack_view_dot1x.php:518 mactrack_view_interfaces.php:494
-#: mactrack_view_ips.php:298 mactrack_view_macs.php:1049
+#: lib/mactrack_functions.php:3398 mactrack_devices.php:1153
+#: mactrack_view_arp.php:442 mactrack_view_devices.php:424
+#: mactrack_view_dot1x.php:523 mactrack_view_interfaces.php:494
+#: mactrack_view_ips.php:298 mactrack_view_macs.php:1080
 msgid "Site"
 msgstr "Trang"
 
-#: lib/mactrack_functions.php:3334 lib/mactrack_functions.php:3350
-#: mactrack_devices.php:1185 mactrack_devices.php:1196
-#: mactrack_devices.php:1242 mactrack_view_devices.php:456
+#: lib/mactrack_functions.php:3402 lib/mactrack_functions.php:3418
+#: mactrack_devices.php:1186 mactrack_devices.php:1197
+#: mactrack_devices.php:1243 mactrack_view_devices.php:456
 #: mactrack_view_devices.php:467 mactrack_view_devices.php:509
 #: mactrack_view_ips.php:302
 msgid "Any"
 msgstr "Bất kỳ"
 
-#: lib/mactrack_functions.php:3346 mactrack_devices.php:1192
+#: lib/mactrack_functions.php:3414 mactrack_devices.php:1193
 #: mactrack_view_devices.php:463
 msgid "SubType"
 msgstr "Loại phụ"
 
-#: mactrack_actions.php:215
-#, php-format
-msgid "Device Tracking Device: (%s) successfully updated"
+#: mactrack_actions.php:221
+#, fuzzy, php-format
+msgid "Mactrack Device: (%s) successfully updated"
 msgstr "Thiết bị theo dõi thiết bị: ( %s) được cập nhật thành công"
 
-#: mactrack_actions.php:228
-msgid "Import into Device Tracking Database"
+#: mactrack_actions.php:234
+#, fuzzy
+msgid "Import into Mactrack Database"
 msgstr "Nhập vào cơ sở dữ liệu theo dõi thiết bị"
 
-#: mactrack_actions.php:241
-msgid "Click 'Continue' to import the following Device to Device Tracking?  Please specify additional Device Tracking device options as given below."
+#: mactrack_actions.php:247
+#, fuzzy
+msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
 msgstr "Nhấp vào 'Tiếp tục' để nhập Thiết bị sau vào Theo dõi thiết bị? Vui lòng chỉ định các tùy chọn thiết bị Theo dõi Thiết bị bổ sung như được đưa ra dưới đây."
 
-#: mactrack_actions.php:265
-msgid "We will use these devices SNMP options for the Device Tracking device as well."
+#: mactrack_actions.php:271
+#, fuzzy
+msgid "We will use these devices SNMP options for the Mactrack Device as well."
 msgstr "Chúng tôi cũng sẽ sử dụng các tùy chọn SNMP cho các thiết bị này cho thiết bị Theo dõi thiết bị."
 
 #: mactrack_device_types.php:38
@@ -390,9 +394,9 @@ msgstr "-"
 msgid "You must select at least one device type."
 msgstr "Bạn phải chọn ít nhất một loại thiết bị."
 
-#: mactrack_device_types.php:289 mactrack_devices.php:259
-#: mactrack_macauth.php:135 mactrack_macwatch.php:138 mactrack_sites.php:149
-#: mactrack_snmp.php:250 mactrack_view_macs.php:183 mactrack_view_macs.php:266
+#: mactrack_device_types.php:289 mactrack_devices.php:260
+#: mactrack_macauth.php:135 mactrack_macwatch.php:138 mactrack_sites.php:150
+#: mactrack_snmp.php:250 mactrack_view_macs.php:185 mactrack_view_macs.php:268
 msgid "Continue"
 msgstr "Tiếp tục"
 
@@ -412,15 +416,15 @@ msgstr "<description> (1)"
 msgid "Device Type Prefix:"
 msgstr "Tiền tố loại thiết bị:"
 
-#: mactrack_device_types.php:314 mactrack_devices.php:364
-#: mactrack_macauth.php:152 mactrack_macwatch.php:155 mactrack_sites.php:157
-#: mactrack_snmp.php:275 mactrack_view_macs.php:191 mactrack_view_macs.php:283
+#: mactrack_device_types.php:314 mactrack_devices.php:365
+#: mactrack_macauth.php:152 mactrack_macwatch.php:155 mactrack_sites.php:158
+#: mactrack_snmp.php:275 mactrack_view_macs.php:193 mactrack_view_macs.php:285
 msgid "Cancel"
 msgstr "Hủy"
 
-#: mactrack_device_types.php:315 mactrack_devices.php:365
-#: mactrack_macauth.php:153 mactrack_macwatch.php:156 mactrack_sites.php:158
-#: mactrack_snmp.php:275 mactrack_view_macs.php:192 mactrack_view_macs.php:284
+#: mactrack_device_types.php:315 mactrack_devices.php:366
+#: mactrack_macauth.php:153 mactrack_macwatch.php:156 mactrack_sites.php:159
+#: mactrack_snmp.php:275 mactrack_view_macs.php:194 mactrack_view_macs.php:286
 msgid "Return"
 msgstr "Trở về trang cài đặt bắt buộc Plugins"
 
@@ -441,16 +445,17 @@ msgstr "Đã có% d Loại thiết bị được thêm vào!"
 msgid "No New Device Types Found!"
 msgstr "Không tìm thấy loại thiết bị mới!"
 
-#: mactrack_device_types.php:494 mactrack_devices.php:496
+#: mactrack_device_types.php:494 mactrack_devices.php:497
 msgid "Import Results"
 msgstr "Nhập khẩu kết quả"
 
-#: mactrack_device_types.php:496 mactrack_devices.php:498
+#: mactrack_device_types.php:496 mactrack_devices.php:499
 msgid "Cacti has imported the following items:"
 msgstr "Cacti đã nhập các mặt hàng sau:"
 
 #: mactrack_device_types.php:507
-msgid "Import Device Tracking Device Types"
+#, fuzzy
+msgid "Import Mactrack Device Types"
 msgstr "Nhập các loại thiết bị theo dõi thiết bị"
 
 #: mactrack_device_types.php:510
@@ -461,23 +466,23 @@ msgstr "Nhập loại thiết bị từ tệp cục bộ"
 msgid "Please specify the location of the CSV file containing your device type information."
 msgstr "Vui lòng chỉ định vị trí của tệp CSV chứa thông tin loại thiết bị của bạn."
 
-#: mactrack_device_types.php:518 mactrack_devices.php:523
+#: mactrack_device_types.php:518 mactrack_devices.php:524
 msgid "Overwrite Existing Data?"
 msgstr "Ghi đè dữ liệu hiện có?"
 
-#: mactrack_device_types.php:519 mactrack_devices.php:524
+#: mactrack_device_types.php:519 mactrack_devices.php:525
 msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
 msgstr "Có nên cho phép quá trình nhập ghi đè lên dữ liệu hiện có? Xin lưu ý, điều này không có nghĩa là xóa hàng cũ, chỉ thay thế các hàng trùng lặp."
 
-#: mactrack_device_types.php:522 mactrack_devices.php:527
+#: mactrack_device_types.php:522 mactrack_devices.php:528
 msgid "Allow Existing Rows to be Updated?"
 msgstr "Cho phép hàng hiện tại được cập nhật?"
 
-#: mactrack_device_types.php:527 mactrack_devices.php:532
+#: mactrack_device_types.php:527 mactrack_devices.php:533
 msgid "Required File Format Notes"
 msgstr "Ghi chú định dạng tệp yêu cầu"
 
-#: mactrack_device_types.php:530 mactrack_devices.php:535
+#: mactrack_device_types.php:530 mactrack_devices.php:536
 msgid "The file must contain a header row with the following column headings."
 msgstr "Tệp phải chứa một hàng tiêu đề với các tiêu đề cột sau."
 
@@ -529,7 +534,7 @@ msgstr "- Giống như lowPort với ngoại lệ rằng đây là số cổng n
 msgid " - Disabled type is not used"
 msgstr ""
 
-#: mactrack_device_types.php:545 mactrack_devices.php:558
+#: mactrack_device_types.php:545 mactrack_devices.php:559
 msgid "The primary key for this table is a combination of the following three fields:"
 msgstr "Khóa chính cho bảng này là sự kết hợp của ba trường sau:"
 
@@ -537,38 +542,39 @@ msgstr "Khóa chính cho bảng này là sự kết hợp của ba trường sau
 msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
 msgstr "Do đó, nếu bạn cố gắng nhập các loại thiết bị trùng lặp, dữ liệu hiện tại sẽ được cập nhật với thông tin mới."
 
-#: mactrack_device_types.php:551 mactrack_devices.php:564
+#: mactrack_device_types.php:551 mactrack_devices.php:565
 msgid " is an integer field and must be one of the following:"
 msgstr "là một trường số nguyên và phải là một trong những điều sau đây:"
 
-#: mactrack_device_types.php:553 mactrack_devices.php:566
+#: mactrack_device_types.php:553 mactrack_devices.php:567
 msgid "1 - Switch/Hub"
 msgstr "1 - Chuyển đổi / Hub"
 
-#: mactrack_device_types.php:554 mactrack_devices.php:567
+#: mactrack_device_types.php:554 mactrack_devices.php:568
 msgid "2 - Switch/Router"
 msgstr "2 - Chuyển đổi / Bộ định tuyến"
 
-#: mactrack_device_types.php:555 mactrack_devices.php:568
+#: mactrack_device_types.php:555 mactrack_devices.php:569
 msgid "3 - Router"
 msgstr "3 - Bộ định tuyến"
 
 #: mactrack_device_types.php:557
-msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used direct Device Tracking as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
+#, fuzzy
+msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
 msgstr "Loại thiết bị của thiết bị được xác định bằng cách quét tác nhân snmp cho sysObjectID và sysDes mô tả và so sánh nó với các giá trị trong cơ sở dữ liệu loại thiết bị. Trận đấu đầu tiên được tìm thấy trong cơ sở dữ liệu được sử dụng Theo dõi thiết bị trực tiếp như cách quét nó. Do đó, điều rất quan trọng là bạn chọn sysObjectID_match, sysDescr_match hợp lệ và chức năng quét cho các thiết bị của bạn."
 
 #: mactrack_device_types.php:574 mactrack_device_types.php:1090
-#: mactrack_devices.php:1186 setup.php:885
+#: mactrack_devices.php:1187 setup.php:931
 msgid "Switch/Hub"
 msgstr "Chuyển đổi / Hub"
 
 #: mactrack_device_types.php:575 mactrack_device_types.php:1091
-#: mactrack_devices.php:1187 mactrack_view_devices.php:458 setup.php:886
+#: mactrack_devices.php:1188 mactrack_view_devices.php:458 setup.php:932
 msgid "Switch/Router"
 msgstr "Chuyển đổi / Bộ định tuyến"
 
 #: mactrack_device_types.php:576 mactrack_device_types.php:1092
-#: mactrack_devices.php:1188 mactrack_view_devices.php:459 setup.php:887
+#: mactrack_devices.php:1189 mactrack_view_devices.php:459 setup.php:933
 msgid "Router"
 msgstr "Bộ định tuyến"
 
@@ -577,7 +583,7 @@ msgstr "Bộ định tuyến"
 msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
 msgstr "TIẾNG VIỆT LINE TIẾN HÀNH OK: <br> Các cột được tìm thấy trong đó: %s"
 
-#: mactrack_device_types.php:726 mactrack_devices.php:729
+#: mactrack_device_types.php:726 mactrack_devices.php:730
 #, php-format
 msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
 msgstr "LRI QUY TRÌNH TÌM KIẾM LINE: Thiếu trường bắt buộc <br> Các cột được tìm thấy trong đó: %s"
@@ -602,25 +608,27 @@ msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr
 msgstr "XÁC NHẬN, HIỆN TẠI: Nhà cung cấp: %s, Mô tả: %s, Loại: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php:860
-#, php-format
-msgid "Device Tracking Device Types [edit: %s]"
+#, fuzzy, php-format
+msgid "Mactrack Device Types [edit: %s]"
 msgstr "Loại thiết bị theo dõi thiết bị [chỉnh sửa: %s]"
 
 #: mactrack_device_types.php:862
-msgid "Device Tracking Device Types [new]"
+#, fuzzy
+msgid "Mactrack Device Types [new]"
 msgstr "Loại thiết bị theo dõi thiết bị [mới]"
 
 #: mactrack_device_types.php:936
-msgid "Device Tracking Device Type Filters"
+#, fuzzy
+msgid "Mactrack Device Type Filters"
 msgstr "Theo dõi thiết bị Bộ lọc loại thiết bị"
 
 #: mactrack_device_types.php:951
 msgid "Device Type Description"
 msgstr "Mô tả loại thiết bị"
 
-#: mactrack_device_types.php:953 mactrack_devices.php:1068
-#: mactrack_sites.php:502 mactrack_view_devices.php:283
-#: mactrack_view_sites.php:348 setup.php:1014
+#: mactrack_device_types.php:953 mactrack_devices.php:1069
+#: mactrack_sites.php:503 mactrack_view_devices.php:283
+#: mactrack_view_sites.php:348 setup.php:1061
 msgid "Device Type"
 msgstr "Loại thiết bị"
 
@@ -644,22 +652,23 @@ msgstr "sysDes mô tả phù hợp"
 msgid "Vendor OID Match"
 msgstr "Nhà cung cấp OID Match"
 
-#: mactrack_device_types.php:964 mactrack_device_types.php:1037 setup.php:969
+#: mactrack_device_types.php:964 mactrack_device_types.php:1037 setup.php:1016
 msgid "Device Types"
 msgstr "Các loại thiết bị"
 
 #: mactrack_device_types.php:1002 mactrack_device_types.php:1102
-#: mactrack_view_macs.php:1207
+#: mactrack_view_macs.php:1238
 msgid "No"
 msgstr "Không"
 
 #: mactrack_device_types.php:1002 mactrack_device_types.php:1101
-#: mactrack_view_macs.php:1206
+#: mactrack_view_macs.php:1237
 msgid "Yes"
 msgstr "Có"
 
 #: mactrack_device_types.php:1007
-msgid "No Device Tracking Device Types Found"
+#, fuzzy
+msgid "No Mactrack Device Types Found"
 msgstr "Không tìm thấy loại thiết bị theo dõi thiết bị"
 
 #: mactrack_device_types.php:1053
@@ -678,7 +687,7 @@ msgstr "Quét lại"
 msgid "Scan Active Devices for Unknown Device Types"
 msgstr "Thiết bị theo dõi loại thiết bị"
 
-#: mactrack_device_types.php:1056 mactrack_devices.php:1172
+#: mactrack_device_types.php:1056 mactrack_devices.php:1173
 msgid "Import"
 msgstr "Nhập"
 
@@ -690,24 +699,24 @@ msgstr "Nhập loại thiết bị từ tệp cục bộ"
 msgid "Export Device Types to Share with Others"
 msgstr "Nhập loại thiết bị từ tệp cục bộ"
 
-#: mactrack_device_types.php:1068 mactrack_sites.php:498
-#: mactrack_view_sites.php:344 setup.php:1007
+#: mactrack_device_types.php:1068 mactrack_sites.php:499
+#: mactrack_view_sites.php:344 setup.php:1054
 msgid "Vendor"
 msgstr "Nhà cung cấp"
 
 #: mactrack_device_types.php:1072 mactrack_device_types.php:1089
-#: mactrack_device_types.php:1100 mactrack_devices.php:1156
-#: mactrack_view_arp.php:455 mactrack_view_arp.php:522
-#: mactrack_view_devices.php:428 mactrack_view_dot1x.php:541
-#: mactrack_view_dot1x.php:637 mactrack_view_dot1x.php:675
+#: mactrack_device_types.php:1100 mactrack_devices.php:1157
+#: mactrack_view_arp.php:462 mactrack_view_arp.php:529
+#: mactrack_view_devices.php:428 mactrack_view_dot1x.php:546
+#: mactrack_view_dot1x.php:642 mactrack_view_dot1x.php:680
 #: mactrack_view_interfaces.php:498 mactrack_view_interfaces.php:556
-#: mactrack_view_interfaces.php:586 mactrack_view_macs.php:1069
-#: mactrack_view_macs.php:1136 mactrack_view_macs.php:1169
-#: mactrack_view_macs.php:1205 setup.php:923
+#: mactrack_view_interfaces.php:586 mactrack_view_macs.php:1100
+#: mactrack_view_macs.php:1167 mactrack_view_macs.php:1200
+#: mactrack_view_macs.php:1236 setup.php:969
 msgid "All"
 msgstr "Tất cả"
 
-#: mactrack_device_types.php:1085 mactrack_devices.php:1181
+#: mactrack_device_types.php:1085 mactrack_devices.php:1182
 #: mactrack_view_devices.php:452 mactrack_view_interfaces.php:368
 #: mactrack_view_interfaces.php:552
 msgid "Type"
@@ -741,252 +750,258 @@ msgstr "Kết nối với Cacti Host thông qua Tên máy chủ"
 msgid "Copy SNMP Settings from Cacti Host"
 msgstr "Sao chép cài đặt SNMP từ máy chủ Cacti"
 
-#: mactrack_devices.php:256
+#: mactrack_devices.php:257
 msgid "You must select at least one device."
 msgstr "Bạn phải chọn ít nhất một thiết bị."
 
-#: mactrack_devices.php:264
+#: mactrack_devices.php:265
 msgid "Click 'Continue' to enable the following devices."
 msgstr "Nhấp vào 'Tiếp tục' để bật các thiết bị sau."
 
-#: mactrack_devices.php:271
+#: mactrack_devices.php:272
 msgid "Click 'Continue' to disable the following devices."
 msgstr "Nhấp vào 'Tiếp tục' để tắt các thiết bị sau."
 
-#: mactrack_devices.php:278
+#: mactrack_devices.php:279
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
 msgstr "Nhấp vào 'Tiếp tục' để thay đổi thông số SNMP cho các thiết bị sau, chọn hộp bên cạnh các trường bạn muốn cập nhật và điền vào giá trị mới."
 
-#: mactrack_devices.php:308
+#: mactrack_devices.php:309
 msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
 msgstr "Nhấp vào 'Tiếp tục' để thay đổi tham số cổng trên hoặc dưới cho các thiết bị sau, chọn hộp bên cạnh các trường bạn muốn cập nhật và điền vào giá trị mới."
 
-#: mactrack_devices.php:338
+#: mactrack_devices.php:339
 msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
 msgstr "Nhấp vào 'Tiếp tục' để kết nối các thiết bị sau với Thiết bị Cacti tương ứng của chúng. Mối quan hệ sẽ được xây dựng trên tên máy chủ bằng nhau. Mô tả sẽ được cập nhật là tốt."
 
-#: mactrack_devices.php:345
-msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Device Tracking Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
+#: mactrack_devices.php:346
+#, fuzzy
+msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
 msgstr "Nhấp vào 'Tiếp tục' để sao chép Cài đặt SNMP từ Thiết bị Cacti được kết nối sang Thiết bị theo dõi thiết bị. Tất cả các thiết bị không được kết nối sẽ âm thầm bị bỏ qua. Thử lại SNMP sẽ được lấy từ thử lại Ping."
 
-#: mactrack_devices.php:352
+#: mactrack_devices.php:353
 msgid "Click 'Continue' to delete the following Devices"
 msgstr "Nhấp vào 'Tiếp tục' để xóa các Thiết bị sau"
 
-#: mactrack_devices.php:512
-msgid "Import Device Tracking Devices"
+#: mactrack_devices.php:513
+#, fuzzy
+msgid "Import Mactrack Devices"
 msgstr "Nhập thiết bị theo dõi thiết bị"
 
-#: mactrack_devices.php:515
+#: mactrack_devices.php:516
 msgid "Import Devices from Local File"
 msgstr "Nhập thiết bị từ tệp cục bộ"
 
-#: mactrack_devices.php:516
+#: mactrack_devices.php:517
 msgid "Please specify the location of the CSV file containing your device information."
 msgstr "Vui lòng chỉ định vị trí của tệp CSV chứa thông tin thiết bị của bạn."
 
-#: mactrack_devices.php:537
-msgid " - The SiteID known to Device Tracking for this device"
+#: mactrack_devices.php:538
+#, fuzzy
+msgid " - The SiteID known to Mactrack for this device"
 msgstr "- SiteID được biết đến theo dõi thiết bị cho thiết bị này"
 
-#: mactrack_devices.php:538
+#: mactrack_devices.php:539
 msgid " - A simple name for the device.  For example Cisco 6509 Switch"
 msgstr "- Một tên đơn giản cho thiết bị. Ví dụ: Chuyển mạch Cisco 6509"
 
-#: mactrack_devices.php:539
+#: mactrack_devices.php:540
 msgid " - The IP Address or DNS Name for the device"
 msgstr "- Địa chỉ IP hoặc Tên DNS cho thiết bị"
 
-#: mactrack_devices.php:540
+#: mactrack_devices.php:541
 msgid " - More detailed information about the device, including location, environmental conditions, etc."
 msgstr "- Thông tin chi tiết hơn về thiết bị, bao gồm vị trí, điều kiện môi trường, v.v."
 
-#: mactrack_devices.php:541
+#: mactrack_devices.php:542
 msgid " - A list of ports that should not be scanned for user devices"
 msgstr "- Danh sách các cổng không nên quét cho thiết bị người dùng"
 
-#: mactrack_devices.php:542
+#: mactrack_devices.php:543
 msgid " - Redundant information indicating the intended device type.  See below for valid values."
 msgstr "- Thông tin dư thừa cho biết loại thiết bị dự định. Xem dưới đây cho các giá trị hợp lệ."
 
-#: mactrack_devices.php:543
+#: mactrack_devices.php:544
 msgid " - Id of a set of SNMP options"
 msgstr "- Id của một tập hợp các tùy chọn SNMP"
 
-#: mactrack_devices.php:544
+#: mactrack_devices.php:545
 msgid " - The current snmp read string for the device"
 msgstr "- Chuỗi đọc snmp hiện tại cho thiết bị"
 
-#: mactrack_devices.php:545
+#: mactrack_devices.php:546
 msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
 msgstr "- Phiên bản snmp bạn muốn quét thiết bị này. Các giá trị hợp lệ là 1, 2 và 3"
 
-#: mactrack_devices.php:546
+#: mactrack_devices.php:547
 msgid " - The UDP port that the snmp agent is running on"
 msgstr "- Cổng UDP mà tác nhân snmp đang chạy"
 
-#: mactrack_devices.php:547
+#: mactrack_devices.php:548
 msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
 msgstr "- Thời gian chờ tính bằng mili giây để chờ phản hồi snmp trước khi thử lại"
 
-#: mactrack_devices.php:548
+#: mactrack_devices.php:549
 msgid " - The number of times to retry a snmp request before giving up"
 msgstr "- Số lần thử lại yêu cầu snmp trước khi từ bỏ"
 
-#: mactrack_devices.php:549
+#: mactrack_devices.php:550
 msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
 msgstr "- Đã chỉ định số lượng OID có thể nhận được trong một yêu cầu Nhận SNMP"
 
-#: mactrack_devices.php:550
+#: mactrack_devices.php:551
 msgid " - SNMP V3: SNMP username"
 msgstr "- SNMP V3: tên người dùng SNMP"
 
-#: mactrack_devices.php:551
+#: mactrack_devices.php:552
 msgid " - SNMP V3: SNMP password"
 msgstr "- SNMP V3: Mật khẩu SNMP"
 
-#: mactrack_devices.php:552
+#: mactrack_devices.php:553
 msgid " - SNMP V3: SNMP authentication protocol"
 msgstr "- SNMP V3: Giao thức xác thực SNMP"
 
-#: mactrack_devices.php:553
+#: mactrack_devices.php:554
 msgid " - SNMP V3: SNMP privacy passphrase"
 msgstr "- SNMP V3: Cụm mật khẩu riêng tư SNMP"
 
-#: mactrack_devices.php:554
+#: mactrack_devices.php:555
 msgid " - SNMP V3: SNMP privacy protocol"
 msgstr "- SNMP V3: Giao thức bảo mật SNMP"
 
-#: mactrack_devices.php:555
+#: mactrack_devices.php:556
 msgid " - SNMP V3: SNMP context"
 msgstr "- SNMP V3: bối cảnh SNMP"
 
-#: mactrack_devices.php:556
+#: mactrack_devices.php:557
 msgid " - SNMP V3: SNMP engine id"
 msgstr "- SNMP V3: Id động cơ SNMP"
 
-#: mactrack_devices.php:562
+#: mactrack_devices.php:563
 msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
 msgstr "Do đó, nếu bạn cố gắng nhập các thiết bị trùng lặp, chỉ dữ liệu bạn chỉ định sẽ được cập nhật."
 
-#: mactrack_devices.php:727
+#: mactrack_devices.php:728
 #, php-format
 msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
 msgstr "TIẾNG VIỆT LINE TIẾN HÀNH OK: <br> Các cột được tìm thấy trong đó: %s"
 
-#: mactrack_devices.php:813 mactrack_devices.php:828
+#: mactrack_devices.php:814 mactrack_devices.php:829
 #, php-format
 msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
 msgstr "Đã xác nhận thành công: Tên máy chủ: SiteID: %s, Tên thiết bị: %s, Tên máy chủ %s, Cổng SNMP: %s"
 
-#: mactrack_devices.php:815 mactrack_devices.php:830
+#: mactrack_devices.php:816 mactrack_devices.php:831
 #, php-format
 msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
 msgstr "CHỨNG MINH FAILED: SiteID: %s, Tên thiết bị: %s, Tên máy chủ %s, Cổng SNMP: %s"
 
-#: mactrack_devices.php:822
+#: mactrack_devices.php:823
 #, php-format
 msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
 msgstr "XÁC NHẬN, XÁC NHẬN: SiteID: %s, Tên thiết bị: %s, Tên máy chủ %s, Cổng SNMP: %s"
 
-#: mactrack_devices.php:857
-#, php-format
-msgid "Device Tracking Devices [edit: %s]"
+#: mactrack_devices.php:858
+#, fuzzy, php-format
+msgid "Mactrack Devices [edit: %s]"
 msgstr "Thiết bị theo dõi thiết bị [chỉnh sửa: %s]"
 
-#: mactrack_devices.php:861
-msgid "Device Tracking Devices [new]"
+#: mactrack_devices.php:862
+#, fuzzy
+msgid "Mactrack Devices [new]"
 msgstr "Thiết bị theo dõi thiết bị [mới]"
 
-#: mactrack_devices.php:874
+#: mactrack_devices.php:875
 msgid "SNMP Information"
 msgstr "Thông tin SNMP"
 
-#: mactrack_devices.php:925
+#: mactrack_devices.php:926
 msgid "System:"
 msgstr "Hệ thống:"
 
-#: mactrack_devices.php:926
+#: mactrack_devices.php:927
 msgid "Uptime:"
 msgstr "Thời gian hoạt động"
 
-#: mactrack_devices.php:927
+#: mactrack_devices.php:928
 msgid "Hostname:"
 msgstr "Tên máy:"
 
-#: mactrack_devices.php:928
+#: mactrack_devices.php:929
 msgid "ObjectID:"
 msgstr "ID đối tượng:"
 
-#: mactrack_devices.php:1033
-msgid "Device Tracking Device Filters"
+#: mactrack_devices.php:1034
+#, fuzzy
+msgid "Mactrack Device Filters"
 msgstr "Theo dõi thiết bị Bộ lọc thiết bị"
 
-#: mactrack_devices.php:1052 mactrack_view_devices.php:267 setup.php:1255
+#: mactrack_devices.php:1053 mactrack_view_devices.php:267 setup.php:1302
 msgid "Device Name"
 msgstr "Tên thiết bị"
 
-#: mactrack_devices.php:1056 mactrack_sites.php:423 mactrack_sites.php:494
+#: mactrack_devices.php:1057 mactrack_sites.php:424 mactrack_sites.php:495
 #: mactrack_view_devices.php:271 mactrack_view_ips.php:198
-#: mactrack_view_sites.php:248 mactrack_view_sites.php:340 setup.php:1286
-#: setup.php:1427
+#: mactrack_view_sites.php:248 mactrack_view_sites.php:340 setup.php:1342
+#: setup.php:1494
 msgid "Site Name"
 msgstr "Tên trang web"
 
-#: mactrack_devices.php:1060 mactrack_devices.php:1238
+#: mactrack_devices.php:1061 mactrack_devices.php:1239
 #: mactrack_utilities.php:280 mactrack_view_devices.php:275
-#: mactrack_view_devices.php:505 mactrack_view_dot1x.php:415
-#: mactrack_view_dot1x.php:428 mactrack_view_dot1x.php:610
+#: mactrack_view_devices.php:505 mactrack_view_dot1x.php:420
+#: mactrack_view_dot1x.php:433 mactrack_view_dot1x.php:615
 #: mactrack_view_interfaces.php:465
 msgid "Status"
 msgstr "Trạng thái"
 
-#: mactrack_devices.php:1064 mactrack_view_devices.php:279
-#: mactrack_view_interfaces.php:364 setup.php:1262
+#: mactrack_devices.php:1065 mactrack_view_devices.php:279
+#: mactrack_view_interfaces.php:364 setup.php:1309
 msgid "Hostname"
 msgstr "Tên máy chủ"
 
-#: mactrack_devices.php:1072
+#: mactrack_devices.php:1073
 msgid "Total IPs"
 msgstr "Tổng số IP"
 
-#: mactrack_devices.php:1077 mactrack_sites.php:437
+#: mactrack_devices.php:1078 mactrack_sites.php:438
 #: mactrack_view_devices.php:292 mactrack_view_sites.php:262
 msgid "User Ports"
 msgstr "Cổng người dùng"
 
-#: mactrack_devices.php:1082 mactrack_sites.php:442
+#: mactrack_devices.php:1083 mactrack_sites.php:443
 #: mactrack_view_devices.php:297 mactrack_view_sites.php:267
 msgid "User Ports Up"
 msgstr "Cổng người dùng lên"
 
-#: mactrack_devices.php:1087 mactrack_view_devices.php:302
+#: mactrack_devices.php:1088 mactrack_view_devices.php:302
 msgid "Trunk Ports"
 msgstr "Cổng trung kế"
 
-#: mactrack_devices.php:1092 mactrack_view_devices.php:307
+#: mactrack_devices.php:1093 mactrack_view_devices.php:307
 msgid "Active Macs"
 msgstr "Máy Mac hoạt động"
 
-#: mactrack_devices.php:1097 mactrack_view_devices.php:317
+#: mactrack_devices.php:1098 mactrack_view_devices.php:317
 msgid "Last Duration"
 msgstr "Thời lượng cuối cùng"
 
-#: mactrack_devices.php:1121
-msgid "No Device Tracking Devices"
+#: mactrack_devices.php:1122
+#, fuzzy
+msgid "No Mactrack Devices"
 msgstr "Không có thiết bị theo dõi thiết bị"
 
-#: mactrack_devices.php:1157 mactrack_view_devices.php:429 setup.php:908
-#: setup.php:1040 setup.php:1049 setup.php:1058 setup.php:1273 setup.php:1289
-#: setup.php:1334 setup.php:1363
+#: mactrack_devices.php:1158 mactrack_view_devices.php:429 setup.php:954
+#: setup.php:1087 setup.php:1096 setup.php:1105 setup.php:1320 setup.php:1345
+#: setup.php:1401 setup.php:1430
 msgid "None"
 msgstr "Không"
 
-#: mactrack_devices.php:1247 mactrack_view_devices.php:514
+#: mactrack_devices.php:1248 mactrack_view_devices.php:514
 msgid "Error"
 msgstr "Lỗi"
 
-#: mactrack_devices.php:1248 mactrack_view_devices.php:515
+#: mactrack_devices.php:1249 mactrack_view_devices.php:515
 msgid "No Cacti Link"
 msgstr "Không có liên kết xương rồng"
 
@@ -998,45 +1013,47 @@ msgstr "Bạn phải chọn ít nhất một máy Mac được ủy quyền đ�
 msgid "Click 'Continue' to delete the following Authorized Mac's?"
 msgstr "Nhấp vào 'Tiếp tục' để xóa Mac được ủy quyền sau đây?"
 
-#: mactrack_macauth.php:242
-#, php-format
-msgid "Device Tracking MacAuth [edit: %s]"
+#: mactrack_macauth.php:251
+#, fuzzy, php-format
+msgid "Mactrack MacAuth [edit: %s]"
 msgstr "Theo dõi thiết bị MacAuth [chỉnh sửa: %s]"
 
-#: mactrack_macauth.php:244
-msgid "Device Tracking MacAuth [new]"
+#: mactrack_macauth.php:253
+#, fuzzy
+msgid "Mactrack MacAuth [new]"
 msgstr "Theo dõi thiết bị MacAuth [mới]"
 
-#: mactrack_macauth.php:306
-msgid "Device Tracking MacAuth Filters"
+#: mactrack_macauth.php:315
+#, fuzzy
+msgid "Mactrack MacAuth Filters"
 msgstr "Theo dõi thiết bị Bộ lọc MacAuth"
 
-#: mactrack_macauth.php:319 mactrack_macwatch.php:318
+#: mactrack_macauth.php:328 mactrack_macwatch.php:318
 msgid "Mac Address"
 msgstr "Địa chỉ MAC"
 
-#: mactrack_macauth.php:320 setup.php:1574
+#: mactrack_macauth.php:329 setup.php:1661
 msgid "Reason"
 msgstr "Lý do"
 
-#: mactrack_macauth.php:321
+#: mactrack_macauth.php:330
 msgid "Added/Modified"
 msgstr "Đã thêm / Sửa đổi"
 
-#: mactrack_macauth.php:322
+#: mactrack_macauth.php:331
 msgid "By"
 msgstr "Bởi"
 
-#: mactrack_macauth.php:327
+#: mactrack_macauth.php:336
 msgid "Authorized Mac Addresses"
 msgstr "Địa chỉ Mac được ủy quyền"
 
-#: mactrack_macauth.php:348
+#: mactrack_macauth.php:357
 msgid "No Authorized Mac Addresses Found"
 msgstr "Không tìm thấy địa chỉ Mac được ủy quyền"
 
-#: mactrack_macauth.php:376 mactrack_vendormacs.php:205
-#: mactrack_view_macs.php:1092
+#: mactrack_macauth.php:385 mactrack_vendormacs.php:205
+#: mactrack_view_macs.php:1123
 msgid "MAC's"
 msgstr "MAC"
 
@@ -1045,23 +1062,25 @@ msgid "Click 'Continue' to delete the following watched Mac's?"
 msgstr "Nhấp vào 'Tiếp tục' để xóa các máy Mac đã xem sau đây?"
 
 #: mactrack_macwatch.php:238
-#, php-format
-msgid "Device Tracking MacWatch [edit: %s]"
+#, fuzzy, php-format
+msgid "Mactrack MacWatch [edit: %s]"
 msgstr "Theo dõi thiết bị MacWatch [chỉnh sửa: %s]"
 
 #: mactrack_macwatch.php:240
-msgid "Device Tracking MacWatch [new]"
+#, fuzzy
+msgid "Mactrack MacWatch [new]"
 msgstr "Theo dõi thiết bị MacWatch [mới]"
 
 #: mactrack_macwatch.php:302
-msgid "Device Tracking MacWatch Filters"
+#, fuzzy
+msgid "Mactrack MacWatch Filters"
 msgstr "Theo dõi thiết bị Bộ lọc MacWatch"
 
 #: mactrack_macwatch.php:314
 msgid "Watch Name"
 msgstr "Tên xem"
 
-#: mactrack_macwatch.php:322 setup.php:1516
+#: mactrack_macwatch.php:322 setup.php:1603
 msgid "Ticket Number"
 msgstr "Vé số"
 
@@ -1078,62 +1097,66 @@ msgid "Watches"
 msgstr "Đồng hồ"
 
 #: mactrack_macwatch.php:362
-msgid "No Device Tracking Watched Macs Found"
+#, fuzzy
+msgid "No Mactrack Watched Macs Found"
 msgstr "Không tìm thấy Mac theo dõi thiết bị"
 
-#: mactrack_sites.php:139
+#: mactrack_sites.php:140
 msgid "Click 'Continue' to delete the following Site(s)?"
 msgstr "Nhấp vào 'Tiếp tục' để xóa (các) Trang web sau?"
 
-#: mactrack_sites.php:146
+#: mactrack_sites.php:147
 msgid "You must select at least one site."
 msgstr "Bạn phải chọn ít nhất một trang web."
 
-#: mactrack_sites.php:358
-#, php-format
-msgid "Device Tracking Site [edit: %s]"
+#: mactrack_sites.php:359
+#, fuzzy, php-format
+msgid "Mactrack Site [edit: %s]"
 msgstr "Trang web theo dõi thiết bị [chỉnh sửa: %s]"
 
-#: mactrack_sites.php:360
-msgid "Device Tracking Site [new]"
+#: mactrack_sites.php:361
+#, fuzzy
+msgid "Mactrack Site [new]"
 msgstr "Trang web theo dõi thiết bị [mới]"
 
-#: mactrack_sites.php:392
-msgid "Device Tracking Site Filters"
+#: mactrack_sites.php:393
+#, fuzzy
+msgid "Mactrack Site Filters"
 msgstr "Bộ lọc trang web theo dõi thiết bị"
 
-#: mactrack_sites.php:432 mactrack_sites.php:512 mactrack_view_devices.php:287
+#: mactrack_sites.php:433 mactrack_sites.php:513 mactrack_view_devices.php:287
 #: mactrack_view_sites.php:257 mactrack_view_sites.php:357
 msgid "Total IP's"
 msgstr "Tổng số IP"
 
-#: mactrack_sites.php:447 mactrack_sites.php:532 mactrack_view_sites.php:272
+#: mactrack_sites.php:448 mactrack_sites.php:533 mactrack_view_sites.php:272
 #: mactrack_view_sites.php:377
 msgid "MACS Found"
 msgstr "Đã tìm thấy MACS"
 
-#: mactrack_sites.php:452 mactrack_view_sites.php:277
+#: mactrack_sites.php:453 mactrack_view_sites.php:277
 msgid "Device Errors"
 msgstr "Lỗi thiết bị"
 
-#: mactrack_sites.php:483 mactrack_sites.php:563 mactrack_view_sites.php:324
+#: mactrack_sites.php:484 mactrack_sites.php:564 mactrack_view_sites.php:324
 #: mactrack_view_sites.php:422
-msgid "No Device Tracking Sites Found"
+#, fuzzy
+msgid "No Mactrack Sites Found"
 msgstr "Không tìm thấy trang web theo dõi thiết bị"
 
-#: mactrack_sites.php:507 mactrack_view_sites.php:352
+#: mactrack_sites.php:508 mactrack_view_sites.php:352
 msgid "Total Devices"
 msgstr "Tổng số thiết bị"
 
-#: mactrack_sites.php:517 mactrack_view_sites.php:362
+#: mactrack_sites.php:518 mactrack_view_sites.php:362
 msgid "Total User Ports"
 msgstr "Tổng số cổng người dùng"
 
-#: mactrack_sites.php:522 mactrack_view_sites.php:367
+#: mactrack_sites.php:523 mactrack_view_sites.php:367
 msgid "Total Oper Ports"
 msgstr "Tổng số cổng hoạt động"
 
-#: mactrack_sites.php:527 mactrack_view_sites.php:372
+#: mactrack_sites.php:528 mactrack_view_sites.php:372
 msgid "Total Trunks"
 msgstr "Tổng số thân cây"
 
@@ -1175,31 +1198,32 @@ msgstr "Tùy chọn SNMP Đặt [chỉnh sửa: %s]"
 msgid "SNMP Option Set [new]"
 msgstr "Tùy chọn SNMP Đặt [mới]"
 
-#: mactrack_snmp.php:435 mactrack_snmp.php:529 setup.php:592
-msgid "Device Tracking SNMP Options"
+#: mactrack_snmp.php:435 mactrack_snmp.php:529 setup.php:638
+#, fuzzy
+msgid "Mactrack SNMP Options"
 msgstr "Tùy chọn SNMP theo dõi thiết bị"
 
 #: mactrack_snmp.php:438
 msgid "Item"
 msgstr "Mục"
 
-#: mactrack_snmp.php:439 setup.php:477
+#: mactrack_snmp.php:439 setup.php:491
 msgid "Version"
 msgstr "Phiên bản"
 
-#: mactrack_snmp.php:440 setup.php:484
+#: mactrack_snmp.php:440 setup.php:498
 msgid "Community"
 msgstr "Cộng đồng"
 
-#: mactrack_snmp.php:441 setup.php:499
+#: mactrack_snmp.php:441 setup.php:513
 msgid "Port"
 msgstr "Cổng"
 
-#: mactrack_snmp.php:442 setup.php:507
+#: mactrack_snmp.php:442 setup.php:521
 msgid "Timeout"
 msgstr "Hết giờ"
 
-#: mactrack_snmp.php:443 setup.php:515
+#: mactrack_snmp.php:443 setup.php:529
 msgid "Retries"
 msgstr "Thử lại"
 
@@ -1207,8 +1231,8 @@ msgstr "Thử lại"
 msgid "Max OIDs"
 msgstr "OID tối đa"
 
-#: mactrack_snmp.php:445 mactrack_view_dot1x.php:409
-#: mactrack_view_dot1x.php:423
+#: mactrack_snmp.php:445 mactrack_view_dot1x.php:414
+#: mactrack_view_dot1x.php:428
 msgid "Username"
 msgstr "Tên đăng nhập"
 
@@ -1221,11 +1245,11 @@ msgid "Priv Proto"
 msgstr "Đặc quyền"
 
 #: mactrack_snmp.php:448 mactrack_view_devices.php:264
-#: mactrack_view_dot1x.php:406 mactrack_view_dot1x.php:420
+#: mactrack_view_dot1x.php:411 mactrack_view_dot1x.php:425
 #: mactrack_view_interfaces.php:360 mactrack_view_ips.php:195
-#: mactrack_view_macs.php:674 mactrack_view_sites.php:245
-#: mactrack_view_sites.php:337 setup.php:585 setup.php:599 setup.php:641
-#: setup.php:662 setup.php:683 setup.php:704 setup.php:725
+#: mactrack_view_macs.php:699 mactrack_view_sites.php:245
+#: mactrack_view_sites.php:337 setup.php:631 setup.php:645 setup.php:687
+#: setup.php:708 setup.php:729 setup.php:750 setup.php:771
 msgid "Actions"
 msgstr "Hành động"
 
@@ -1250,7 +1274,8 @@ msgid "Options"
 msgstr "Tùy chọn"
 
 #: mactrack_utilities.php:167
-msgid "Device Tracking Process Status"
+#, fuzzy
+msgid "Mactrack Process Status"
 msgstr "Tình trạng quá trình theo dõi thiết bị"
 
 #: mactrack_utilities.php:187 mactrack_utilities.php:200
@@ -1262,7 +1287,8 @@ msgid "Current Process Status"
 msgstr "Tình trạng quy trình hiện tại"
 
 #: mactrack_utilities.php:240
-msgid "The Device Tracking Poller is:"
+#, fuzzy
+msgid "The Mactrack Poller is:"
 msgstr "Thiết bị theo dõi thiết bị là:"
 
 #: mactrack_utilities.php:243
@@ -1375,7 +1401,8 @@ msgid "Are you sure you want to delete all the Port to MAC to IP results from th
 msgstr "Bạn có chắc chắn muốn xóa tất cả các kết quả từ Cổng sang MAC sang IP khỏi hệ thống không?"
 
 #: mactrack_utilities.php:396 mactrack_utilities.php:419
-msgid "Device Tracking Database Results"
+#, fuzzy
+msgid "Mactrack Database Results"
 msgstr "Kết quả cơ sở dữ liệu theo dõi thiết bị"
 
 #: mactrack_utilities.php:397 mactrack_utilities.php:467
@@ -1402,30 +1429,34 @@ msgid "The following number of records have been removed from the aggergated tab
 msgstr "Số lượng các bản ghi sau đây đã bị xóa khỏi bảng tổng hợp: %s. Và hồ sơ %s sẽ được thêm vào."
 
 #: mactrack_utilities.php:477
-msgid "The Device Tracking scanning functions have been purged.  They will be recreated once you either edit a device or device type."
+#, fuzzy
+msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
 msgstr "Các chức năng quét Theo dõi thiết bị đã bị xóa. Chúng sẽ được tạo lại sau khi bạn chỉnh sửa một loại thiết bị hoặc loại thiết bị."
 
 #: mactrack_utilities.php:482
-msgid "Cacti Device Tracking System Utilities"
+#, fuzzy
+msgid "Cacti Mactrack System Utilities"
 msgstr "Tiện ích hệ thống theo dõi thiết bị Cacti"
 
 #: mactrack_utilities.php:484
 msgid "Process Status Information"
 msgstr "Thông tin trạng thái quá trình"
 
-#: mactrack_utilities.php:493 setup.php:816
-msgid "View Device Tracking Process Status"
+#: mactrack_utilities.php:493 setup.php:862
+#, fuzzy
+msgid "View Mactrack Process Status"
 msgstr "Xem trạng thái quá trình theo dõi thiết bị"
 
 #: mactrack_utilities.php:496
-msgid "This option will let you show and set process information associated with the Device Tracking polling process."
+#, fuzzy
+msgid "This option will let you show and set process information associated with the Mactrack polling process."
 msgstr "Tùy chọn này sẽ cho phép bạn hiển thị và thiết lập thông tin quy trình liên quan đến quá trình bỏ phiếu Theo dõi thiết bị."
 
 #: mactrack_utilities.php:500
 msgid "Database Administration"
 msgstr "Quản lý cơ sở dữ liệu"
 
-#: mactrack_utilities.php:504 setup.php:781
+#: mactrack_utilities.php:504 setup.php:827
 msgid "Perform Database Maintenance"
 msgstr "Thực hiện bảo trì cơ sở dữ liệu"
 
@@ -1441,12 +1472,13 @@ msgstr "Làm mới cơ sở dữ liệu MAC / OUI của nhà cung cấp IEEE"
 msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
 msgstr "Chức năng này sẽ tải xuống và cài đặt cơ sở dữ liệu OIU mới nhất từ Trang web của IEEE. Mỗi thẻ giao diện mạng (NIC) có một địa chỉ MAC. Địa chỉ MAC có thể được chia thành hai phần. Phần đầu tiên của MAC Addess chứa MAC của nhà cung cấp. Nhà cung cấp MAC xác định người sản xuất phần này. Điều này sẽ hữu ích trong việc kiểm tra tại chỗ cho các thiết bị giả mạo trên mạng của bạn."
 
-#: mactrack_utilities.php:522 setup.php:788
+#: mactrack_utilities.php:522 setup.php:834
 msgid "Refresh Scanning Functions"
 msgstr "Làm mới chức năng quét"
 
 #: mactrack_utilities.php:525
-msgid "Deletes old and potentially stale Device Tracking scanning functions from the drop-down you receive when you edit a device type."
+#, fuzzy
+msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
 msgstr "Xóa các chức năng quét Theo dõi thiết bị cũ và có khả năng cũ khỏi trình đơn thả xuống mà bạn nhận được khi chỉnh sửa loại thiết bị."
 
 #: mactrack_utilities.php:531
@@ -1478,7 +1510,8 @@ msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to
 msgstr "Xóa TẤT CẢ Cổng <strong>tổng hợp</strong> (Không quét kết quả) sang MAC để liên kết IP khỏi cơ sở dữ liệu và tạo lại dựa trên <strong>Tất cả dữ liệu được</strong> quét ngay bây giờ."
 
 #: mactrack_vendormacs.php:139
-msgid "Device Tracking Vendor Mac Filter"
+#, fuzzy
+msgid "Mactrack Vendor Mac Filter"
 msgstr "Bộ lọc theo dõi nhà cung cấp thiết bị Mac"
 
 #: mactrack_vendormacs.php:153
@@ -1493,112 +1526,116 @@ msgstr "Tổ chức"
 msgid "Address"
 msgstr "Địa chỉ"
 
-#: mactrack_vendormacs.php:160 setup.php:970
+#: mactrack_vendormacs.php:160 setup.php:1017
 msgid "Vendor Macs"
 msgstr "Mac nhà cung cấp"
 
 #: mactrack_vendormacs.php:179
-msgid "No Device Tracking Vendor MACS Found"
+#, fuzzy
+msgid "No Mactrack Vendor MACS Found"
 msgstr "Không tìm thấy MACS nhà cung cấp theo dõi thiết bị"
 
 #: mactrack_view_arp.php:30
-msgid "Device Tracking - ARP/IP View"
+#, fuzzy
+msgid "Mactrack - ARP/IP View"
 msgstr "Theo dõi thiết bị - Chế độ xem ARP / IP"
 
-#: mactrack_view_arp.php:317 mactrack_view_dot1x.php:407
-#: mactrack_view_dot1x.php:421 mactrack_view_macs.php:677
-#: mactrack_view_macs.php:871
+#: mactrack_view_arp.php:325 mactrack_view_dot1x.php:412
+#: mactrack_view_dot1x.php:426 mactrack_view_macs.php:702
+#: mactrack_view_macs.php:896
 msgid "Switch Name"
 msgstr "Tên chuyển đổi"
 
-#: mactrack_view_arp.php:321 mactrack_view_dot1x.php:408
-#: mactrack_view_dot1x.php:422 mactrack_view_macs.php:681
-#: mactrack_view_macs.php:875
+#: mactrack_view_arp.php:329 mactrack_view_dot1x.php:413
+#: mactrack_view_dot1x.php:427 mactrack_view_macs.php:706
+#: mactrack_view_macs.php:900
 msgid "Switch Hostname"
 msgstr "Đổi tên máy chủ"
 
-#: mactrack_view_arp.php:325 mactrack_view_dot1x.php:410
-#: mactrack_view_dot1x.php:424 mactrack_view_macs.php:685
-#: mactrack_view_macs.php:879
+#: mactrack_view_arp.php:333 mactrack_view_dot1x.php:415
+#: mactrack_view_dot1x.php:429 mactrack_view_macs.php:710
+#: mactrack_view_macs.php:904
 msgid "ED IP Address"
 msgstr "Địa chỉ IP ED"
 
-#: mactrack_view_arp.php:334 mactrack_view_dot1x.php:411
-#: mactrack_view_macs.php:695 mactrack_view_macs.php:886
+#: mactrack_view_arp.php:342 mactrack_view_dot1x.php:416
+#: mactrack_view_macs.php:720 mactrack_view_macs.php:911
 msgid "ED DNS Hostname"
 msgstr "Tên máy chủ ED ED"
 
-#: mactrack_view_arp.php:342 mactrack_view_dot1x.php:412
-#: mactrack_view_dot1x.php:425 mactrack_view_macs.php:703
-#: mactrack_view_macs.php:893
+#: mactrack_view_arp.php:350 mactrack_view_dot1x.php:417
+#: mactrack_view_dot1x.php:430 mactrack_view_macs.php:728
+#: mactrack_view_macs.php:918
 msgid "ED MAC Address"
 msgstr "Địa chỉ MAC ED"
 
-#: mactrack_view_arp.php:346 mactrack_view_macs.php:711
-#: mactrack_view_macs.php:901
+#: mactrack_view_arp.php:354 mactrack_view_macs.php:736
+#: mactrack_view_macs.php:926
 msgid "Vendor Name"
 msgstr "Tên nhà cung cấp"
 
-#: mactrack_view_arp.php:350 mactrack_view_macs.php:715
-#: mactrack_view_macs.php:905
+#: mactrack_view_arp.php:358 mactrack_view_macs.php:740
+#: mactrack_view_macs.php:930
 msgid "Port Number"
 msgstr "Mã cổng"
 
-#: mactrack_view_arp.php:355 mactrack_view_dot1x.php:413
-#: mactrack_view_dot1x.php:426 mactrack_view_macs.php:720
-#: mactrack_view_macs.php:910
+#: mactrack_view_arp.php:363 mactrack_view_dot1x.php:418
+#: mactrack_view_dot1x.php:431 mactrack_view_macs.php:745
+#: mactrack_view_macs.php:935
 msgid "Port Name"
 msgstr "Tên cổng"
 
-#: mactrack_view_arp.php:360 mactrack_view_dot1x.php:416
-#: mactrack_view_dot1x.php:429 mactrack_view_macs.php:735
-#: mactrack_view_macs.php:928 mactrack_view_macs.php:934
+#: mactrack_view_arp.php:368 mactrack_view_dot1x.php:421
+#: mactrack_view_dot1x.php:434 mactrack_view_macs.php:760
+#: mactrack_view_macs.php:953 mactrack_view_macs.php:959
 msgid "Last Scan Date"
 msgstr "Ngày quét lần cuối"
 
-#: mactrack_view_arp.php:370
+#: mactrack_view_arp.php:378
 msgid "ARP Cache"
 msgstr "Bộ nhớ cache ARP"
 
-#: mactrack_view_arp.php:405 mactrack_view_macs.php:1014
+#: mactrack_view_arp.php:412 mactrack_view_macs.php:1043
 msgid "You must first choose a Site, Device or other search criteria."
 msgstr "Trước tiên, bạn phải chọn Trang web, Thiết bị hoặc các tiêu chí tìm kiếm khác."
 
-#: mactrack_view_arp.php:407
-msgid "No Device Tracking IP Results Found"
+#: mactrack_view_arp.php:414
+#, fuzzy
+msgid "No Mactrack IP Results Found"
 msgstr "Không tìm thấy kết quả IP theo dõi thiết bị"
 
-#: mactrack_view_arp.php:451 mactrack_view_dot1x.php:537
-#: mactrack_view_interfaces.php:582 mactrack_view_macs.php:1065
+#: mactrack_view_arp.php:458 mactrack_view_dot1x.php:542
+#: mactrack_view_interfaces.php:582 mactrack_view_macs.php:1096
 msgid "Device"
 msgstr "Thiết bị"
 
-#: mactrack_view_arp.php:478 mactrack_view_ips.php:314
+#: mactrack_view_arp.php:485 mactrack_view_ips.php:314
 msgid "IP's"
 msgstr "IP"
 
-#: mactrack_view_arp.php:503 mactrack_view_dot1x.php:595
-#: mactrack_view_macs.php:1117
+#: mactrack_view_arp.php:510 mactrack_view_dot1x.php:600
+#: mactrack_view_macs.php:1148
 msgid "IP"
 msgstr "IP"
 
-#: mactrack_view_arp.php:518 mactrack_view_dot1x.php:633
-#: mactrack_view_macs.php:1165
+#: mactrack_view_arp.php:525 mactrack_view_dot1x.php:638
+#: mactrack_view_macs.php:1196
 msgid "Show"
 msgstr "Hiển thị"
 
-#: mactrack_view_arp.php:523 mactrack_view_dot1x.php:638
-#: mactrack_view_macs.php:1170
+#: mactrack_view_arp.php:530 mactrack_view_dot1x.php:643
+#: mactrack_view_macs.php:1201
 msgid "Most Recent"
 msgstr "Gần đây nhất"
 
-#: mactrack_view_arp.php:538 mactrack_view_dot1x.php:656
-#: mactrack_view_macs.php:1186
+#: mactrack_view_arp.php:545 mactrack_view_dot1x.php:661
+#: mactrack_view_macs.php:1217
 msgid "MAC"
 msgstr "MAC"
 
 #: mactrack_view_devices.php:30
-msgid "Device Tracking - Device Report View"
+#, fuzzy
+msgid "Mactrack - Device Report View"
 msgstr "Theo dõi thiết bị - Xem báo cáo thiết bị"
 
 #: mactrack_view_devices.php:157
@@ -1627,7 +1664,8 @@ msgid "View MAC Addresses"
 msgstr "Địa chỉ MAC"
 
 #: mactrack_view_devices.php:397
-msgid "No Device Tracking Devices Found"
+#, fuzzy
+msgid "No Mactrack Devices Found"
 msgstr "Không tìm thấy thiết bị theo dõi thiết bị"
 
 #: mactrack_view_devices.php:457
@@ -1635,52 +1673,55 @@ msgid "Hub/Switch"
 msgstr "Hub / Switch"
 
 #: mactrack_view_dot1x.php:31
-msgid "Device Tracking - 802.1x View"
+#, fuzzy
+msgid "Mactrack - 802.1x View"
 msgstr "Theo dõi thiết bị - Chế độ xem 802.1x"
 
-#: mactrack_view_dot1x.php:414 mactrack_view_dot1x.php:427
-#: mactrack_view_dot1x.php:671
+#: mactrack_view_dot1x.php:419 mactrack_view_dot1x.php:432
+#: mactrack_view_dot1x.php:676
 msgid "Domain"
 msgstr "Tên miền"
 
-#: mactrack_view_dot1x.php:439
+#: mactrack_view_dot1x.php:444
 msgid "802.1x Sessions"
 msgstr "Phiên 802.1x"
 
-#: mactrack_view_dot1x.php:472
-msgid "No Device Tracking 802.1x Sessions Found"
+#: mactrack_view_dot1x.php:477
+#, fuzzy
+msgid "No Mactrack 802.1x Sessions Found"
 msgstr "Không tìm thấy thiết bị theo dõi 802.1x"
 
-#: mactrack_view_dot1x.php:496
+#: mactrack_view_dot1x.php:501
 msgid "Dot1x Scan Results"
 msgstr "Máy quét Dot1x"
 
-#: mactrack_view_dot1x.php:570
+#: mactrack_view_dot1x.php:575
 msgid "Sessions"
 msgstr "Tiết học"
 
-#: mactrack_view_dot1x.php:616
+#: mactrack_view_dot1x.php:621
 msgid "Any Status"
 msgstr "Bất kỳ trạng thái"
 
-#: mactrack_view_dot1x.php:619
+#: mactrack_view_dot1x.php:624
 msgid "No Method"
 msgstr "Phương thức"
 
-#: mactrack_view_dot1x.php:676
+#: mactrack_view_dot1x.php:681
 msgid "DATA"
 msgstr "Dữ liệu"
 
-#: mactrack_view_dot1x.php:677
+#: mactrack_view_dot1x.php:682
 msgid "VOICE"
 msgstr "TIẾNG NÓI"
 
-#: mactrack_view_dot1x.php:683 mactrack_view_macs.php:1213
+#: mactrack_view_dot1x.php:688 mactrack_view_macs.php:1244
 msgid "Portname"
 msgstr "Tên cổng"
 
 #: mactrack_view_graphs.php:32
-msgid "Device Tracking - Monitored Device Graph View"
+#, fuzzy
+msgid "Mactrack - Monitored Device Graph View"
 msgstr "Theo dõi thiết bị - Xem đồ thị thiết bị được theo dõi"
 
 #: mactrack_view_graphs.php:70
@@ -1688,11 +1729,13 @@ msgid "Custom Graph List Applied - Filtering from List"
 msgstr "Danh sách đồ thị tùy chỉnh được áp dụng - Lọc từ danh sách"
 
 #: mactrack_view_interfaces.php:30
-msgid "Device Tracking - Network Interfaces View"
+#, fuzzy
+msgid "Mactrack - Network Interfaces View"
 msgstr "Theo dõi thiết bị - Giao diện mạng"
 
 #: mactrack_view_interfaces.php:324
-msgid "No Device Tracking Interfaces Found"
+#, fuzzy
+msgid "No Mactrack Interfaces Found"
 msgstr "Không tìm thấy giao diện theo dõi thiết bị"
 
 #: mactrack_view_interfaces.php:337
@@ -1723,11 +1766,11 @@ msgstr "Giao diện xuống"
 msgid "Interface Scan Results"
 msgstr "Xóa tất cả kết quả quét"
 
-#: mactrack_view_interfaces.php:372 setup.php:1120
+#: mactrack_view_interfaces.php:372 setup.php:1167
 msgid "Name"
 msgstr "Tên"
 
-#: mactrack_view_interfaces.php:376 setup.php:1000
+#: mactrack_view_interfaces.php:376 setup.php:1047
 msgid "Description"
 msgstr "Mô tả"
 
@@ -1863,7 +1906,8 @@ msgid "Show Totals"
 msgstr "Hiển thị tổng số"
 
 #: mactrack_view_ips.php:30
-msgid "Device Tracking - Site IP Range Report View"
+#, fuzzy
+msgid "Mactrack - Site IP Range Report View"
 msgstr "Theo dõi thiết bị - Xem báo cáo phạm vi IP của trang web"
 
 #: mactrack_view_ips.php:202
@@ -1900,11 +1944,13 @@ msgid "View IP Addresses"
 msgstr "Địa chỉ IP hiện tại"
 
 #: mactrack_view_ips.php:277
-msgid "No Device Tracking Site IP Ranges Found"
+#, fuzzy
+msgid "No Mactrack Site IP Ranges Found"
 msgstr "Không tìm thấy dải IP của trang web theo dõi thiết bị"
 
 #: mactrack_view_macs.php:30
-msgid "Device Tracking - MAC to IP Report View"
+#, fuzzy
+msgid "Mactrack - MAC to IP Report View"
 msgstr "Theo dõi thiết bị - Xem báo cáo MAC sang IP"
 
 #: mactrack_view_macs.php:33
@@ -1915,85 +1961,87 @@ msgstr "Authorize"
 msgid "Revoke"
 msgstr "Thu hồi"
 
-#: mactrack_view_macs.php:122
+#: mactrack_view_macs.php:124
 #, php-format
 msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
 msgstr "Không thể thu hồi các Địa chỉ MAC sau vì chúng là thành viên của Ủy quyền nhóm %s"
 
-#: mactrack_view_macs.php:163
+#: mactrack_view_macs.php:165
 msgid "Click 'Continue' to Authorize the following MAC Addresses."
 msgstr "Nhấp vào 'Tiếp tục' để Cấp phép cho các Địa chỉ MAC sau."
 
-#: mactrack_view_macs.php:170
+#: mactrack_view_macs.php:172
 msgid "Click 'Continue' to Revoke the following MAC Addresses."
 msgstr "Nhấp vào 'Tiếp tục' để Thu hồi các Địa chỉ MAC sau."
 
-#: mactrack_view_macs.php:177
+#: mactrack_view_macs.php:179
 msgid "You must select at least one MAC Address."
 msgstr "Bạn phải chọn ít nhất một Địa chỉ MAC."
 
-#: mactrack_view_macs.php:180
+#: mactrack_view_macs.php:182
 msgid "You are not permitted to change Mac Authorizations."
 msgstr "Bạn không được phép thay đổi Ủy quyền Mac."
 
-#: mactrack_view_macs.php:248
+#: mactrack_view_macs.php:250
 #, php-format
 msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
 msgstr "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [ %s]"
 
-#: mactrack_view_macs.php:260
+#: mactrack_view_macs.php:262
 msgid "You must select at least one Row."
 msgstr "Bạn phải chọn ít nhất một Hàng."
 
-#: mactrack_view_macs.php:263
+#: mactrack_view_macs.php:265
 msgid "You are not permitted to delete rows."
 msgstr "Bạn không được phép xóa hàng."
 
-#: mactrack_view_macs.php:271
+#: mactrack_view_macs.php:273
 msgid "Click 'Continue' to Delete the following rows from Aggregated table."
 msgstr "Nhấp vào 'Tiếp tục' để xóa các hàng sau khỏi bảng Tổng hợp."
 
-#: mactrack_view_macs.php:707 mactrack_view_macs.php:788
-#: mactrack_view_macs.php:897 mactrack_view_macs.php:991
-#: mactrack_view_macs.php:1201
+#: mactrack_view_macs.php:732 mactrack_view_macs.php:812
+#: mactrack_view_macs.php:922 mactrack_view_macs.php:1020
+#: mactrack_view_macs.php:1232
 msgid "Authorized"
 msgstr "Trao quyền"
 
-#: mactrack_view_macs.php:725 mactrack_view_macs.php:915
+#: mactrack_view_macs.php:750 mactrack_view_macs.php:940
 msgid "VLAN ID"
 msgstr "VLAN ID"
 
-#: mactrack_view_macs.php:730 mactrack_view_macs.php:920
-#: mactrack_view_macs.php:1132
+#: mactrack_view_macs.php:755 mactrack_view_macs.php:945
+#: mactrack_view_macs.php:1163
 msgid "VLAN Name"
 msgstr "Tên Vlan"
 
-#: mactrack_view_macs.php:749 mactrack_view_macs.php:954
+#: mactrack_view_macs.php:774 mactrack_view_macs.php:979
 msgid "MAC Addresses"
 msgstr "Địa chỉ MAC"
 
-#: mactrack_view_macs.php:790 mactrack_view_macs.php:993
+#: mactrack_view_macs.php:814 mactrack_view_macs.php:1022
 msgid "Not Authorized"
 msgstr "Trao quyền"
 
-#: mactrack_view_macs.php:810
+#: mactrack_view_macs.php:835
 msgid "You must choose a Site, Device or other search criteria."
 msgstr "Bạn phải chọn Trang web, Thiết bị hoặc tiêu chí tìm kiếm khác."
 
-#: mactrack_view_macs.php:812 mactrack_view_macs.php:1016
-msgid "No Device Tracking Port Results Found"
+#: mactrack_view_macs.php:837 mactrack_view_macs.php:1045
+#, fuzzy
+msgid "No Mactrack Port Results Found"
 msgstr "Không tìm thấy kết quả cổng theo dõi thiết bị"
 
-#: mactrack_view_macs.php:942
+#: mactrack_view_macs.php:967
 msgid "Count"
 msgstr "Đếm"
 
-#: mactrack_view_macs.php:1171
+#: mactrack_view_macs.php:1202
 msgid "Aggregated"
 msgstr "Tổng hợp"
 
 #: mactrack_view_sites.php:30
-msgid "Device Tracking - Site Report View"
+#, fuzzy
+msgid "Mactrack - Site Report View"
 msgstr "Theo dõi thiết bị - Xem báo cáo trang web"
 
 #: mactrack_view_sites.php:297
@@ -2016,968 +2064,1055 @@ msgstr "Các loại thiết bị"
 msgid "Site Scan Results"
 msgstr "Xóa tất cả kết quả quét"
 
-#: setup.php:244 setup.php:966 setup.php:967 setup.php:968 setup.php:969
-#: setup.php:970 setup.php:979 setup.php:981
-msgid "Device Tracking"
-msgstr "Theo dõi thiết bị"
+#: setup.php:252 setup.php:1013 setup.php:1014 setup.php:1015 setup.php:1016
+#: setup.php:1017 setup.php:1026 setup.php:1028
+#, fuzzy
+msgid "Mactrack"
+msgstr "MacTrack"
 
-#: setup.php:248
+#: setup.php:256
 msgid "General Settings"
 msgstr "Cài đặt chung"
 
-#: setup.php:252
+#: setup.php:260
 msgid "Scanning Frequency"
 msgstr "Tần số quét"
 
-#: setup.php:253
+#: setup.php:261
 msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
 msgstr "Chọn thời điểm thu thập Địa chỉ MAC và IP và thống kê Giao diện từ các thiết bị mạng của bạn."
 
-#: setup.php:259
+#: setup.php:267
 msgid "Concurrent Processes"
 msgstr "Quy trình đồng thời"
 
-#: setup.php:260
+#: setup.php:268
 msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
 msgstr "Chỉ định số lượng thiết bị sẽ được bỏ phiếu đồng thời cho đến khi tất cả các thiết bị đã được thăm dò."
 
-#: setup.php:267
+#: setup.php:275
 msgid "Scanner Max Runtime"
 msgstr "Máy quét Max Runtime"
 
-#: setup.php:268
+#: setup.php:276
 msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
 msgstr "Chỉ định số phút mà chức năng quét thiết bị sẽ được phép chạy trước khi hệ thống cho rằng nó đã được hoàn thành. Cài đặt này sẽ chính xác cho các công việc quét bị lạm dụng."
 
-#: setup.php:275
+#: setup.php:283
 msgid "Start Time for Data Collection"
 msgstr "Thời gian bắt đầu để thu thập dữ liệu"
 
-#: setup.php:276
+#: setup.php:284
 msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
 msgstr "Khi nào bạn muốn thu thập dữ liệu đầu tiên diễn ra. Tất cả thời gian thu thập dữ liệu trong tương lai sẽ dựa trên thời gian bắt đầu này. Một ví dụ điển hình là 12:00 AM."
 
-#: setup.php:283
+#: setup.php:291
 msgid "Database Maintenance Time"
 msgstr "Thời gian bảo trì cơ sở dữ liệu"
 
-#: setup.php:284
+#: setup.php:292
 msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
 msgstr "Khi nào nên ghi lại cơ sở dữ liệu cũ khỏi cơ sở dữ liệu. Xin lưu ý rằng không có quyền truy cập sẽ được phép vào cơ sở dữ liệu cổng trong khi hành động này đang diễn ra."
 
-#: setup.php:291
+#: setup.php:299
 msgid "Confirm Utilities Prompt"
 msgstr "Xác nhận Nhắc nhở về Tiện ích"
 
-#: setup.php:292
+#: setup.php:300
 msgid "When using utilities, prompt for verification"
 msgstr "Khi sử dụng các tiện ích, hãy nhắc xác minh"
 
-#: setup.php:297
+#: setup.php:305
 msgid "Data Retention"
 msgstr "Lưu trữ dữ liệu"
 
-#: setup.php:298
+#: setup.php:306
 msgid "How long should port MAC details be retained in the database."
 msgstr "Các chi tiết MAC cổng nên được giữ lại trong cơ sở dữ liệu."
 
-#: setup.php:304
+#: setup.php:312
 msgid "Data Retention IPs"
 msgstr "Lưu trữ dữ liệu"
 
-#: setup.php:305
+#: setup.php:313
 msgid "How long should discovered IPs details be retained in the database."
 msgstr "Các chi tiết MAC cổng nên được giữ lại trong cơ sở dữ liệu."
 
-#: setup.php:311
+#: setup.php:319
 msgid "Switch Level Ignore Ports Delimiter"
 msgstr "Chuyển đổi cấp độ Bỏ qua cổng Delimiter"
 
-#: setup.php:312
-msgid "What delimiter should Device Tracking use when parsing the Ignore Ports string for each switch."
+#: setup.php:320
+#, fuzzy
+msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
 msgstr "Bộ theo dõi thiết bị nào nên sử dụng khi phân tích chuỗi Bỏ qua Cổng cho mỗi công tắc."
 
-#: setup.php:316
+#: setup.php:324
 msgid "Auto Detect"
 msgstr "Tự động phát hiện"
 
-#: setup.php:317 setup.php:327
+#: setup.php:325
 msgid "Colon [:]"
 msgstr "Đại tá [:]"
 
-#: setup.php:318
+#: setup.php:326
 msgid "Pipe [|]"
 msgstr "Ống [|]"
 
-#: setup.php:319
+#: setup.php:327
 msgid "Space [ ]"
 msgstr "Không gian [ ]"
 
-#: setup.php:323
-msgid "Mac Address Delimiter"
-msgstr "Dấu phân cách địa chỉ Mac"
+#: setup.php:331
+#, fuzzy
+msgid "Mac Address Output Format"
+msgstr "Tiện ích ủy quyền địa chỉ Mac"
 
-#: setup.php:324
-msgid "How should each octet of the MAC address be delimited."
-msgstr "Làm thế nào mỗi octet của địa chỉ MAC được phân định."
+#: setup.php:332
+msgid "Format used for display."
+msgstr ""
 
-#: setup.php:327
-msgid "Dash [-]"
-msgstr "Dấu gạch ngang [-]"
-
-#: setup.php:331 setup.php:1316
+#: setup.php:345 setup.php:1372
 msgid "Ports to Ignore"
 msgstr "Cổng để bỏ qua"
 
-#: setup.php:332
+#: setup.php:346
 msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
 msgstr "Cung cấp một biểu thức chính quy của ifNames hoặc ifDes mô tả các cổng để bỏ qua trong danh sách giao diện. Ví dụ: (Vlan | Loopback | Null)."
 
-#: setup.php:339
+#: setup.php:353
 msgid "Bandwidth Usage Threshold"
 msgstr "Ngưỡng sử dụng băng thông"
 
-#: setup.php:340
+#: setup.php:354
 msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
 msgstr "Khi xem xét thống kê giao diện mạng, bạn muốn xem ngưỡng băng thông nào theo mặc định."
 
-#: setup.php:345 setup.php:346 setup.php:347 setup.php:348 setup.php:349
-#: setup.php:350 setup.php:351 setup.php:352 setup.php:353
+#: setup.php:359 setup.php:360 setup.php:361 setup.php:362 setup.php:363
+#: setup.php:364 setup.php:365 setup.php:366 setup.php:367
 #, php-format
 msgid "%d Percent"
 msgstr "% d Phần trăm"
 
-#: setup.php:357
+#: setup.php:371
 msgid "DNS Settings"
 msgstr "Cài đặt DNS"
 
-#: setup.php:361
+#: setup.php:375
 msgid "Perform Reverse DNS Name Resolution"
 msgstr "Thực hiện phân giải tên DNS ngược"
 
-#: setup.php:362
-msgid "Should Device Tracking perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
+#: setup.php:376
+#, fuzzy
+msgid "Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
 msgstr "Theo dõi thiết bị nên thực hiện tra cứu DNS ngược các địa chỉ IP được liên kết với các cổng. THẬN TRỌNG: Nếu DNS không được thiết lập đúng, điều này sẽ làm chậm đáng kể thời gian quét."
 
-#: setup.php:367
+#: setup.php:381
 msgid "Primary DNS IP Address"
 msgstr "Địa chỉ IP DNS chính"
 
-#: setup.php:368
+#: setup.php:382
 msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
 msgstr "Nhập Địa chỉ IP DNS chính để sử dụng cho tra cứu ngược."
 
-#: setup.php:375
+#: setup.php:389
 msgid "Secondary DNS IP Address"
 msgstr "Địa chỉ IP DNS phụ"
 
-#: setup.php:376
+#: setup.php:390
 msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
 msgstr "Nhập Địa chỉ IP DNS thứ cấp để sử dụng cho tra cứu ngược."
 
-#: setup.php:383
+#: setup.php:397
 msgid "DNS Timeout"
 msgstr "Hết thời gian chờ DNS"
 
-#: setup.php:384
-msgid "Please enter the DNS timeout in milliseconds.  Device Tracking uses a PHP based DNS resolver."
+#: setup.php:398
+#, fuzzy
+msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
 msgstr "Vui lòng nhập thời gian chờ DNS tính bằng mili giây. Theo dõi thiết bị sử dụng trình phân giải DNS dựa trên PHP."
 
-#: setup.php:391
+#: setup.php:405
 msgid "DNS Prime Interval"
 msgstr "Khoảng thời gian chính của DNS"
 
-#: setup.php:392
-msgid "How often, in seconds do Device Tracking scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
+#: setup.php:406
+#, fuzzy
+msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
 msgstr "Tần suất, tính theo giây của IP quét Theo dõi thiết bị cần được phân giải thành các địa chỉ MAC để phân giải DNS. Sử dụng số lượng lớn hơn khi bạn có vài nghìn thiết bị sẽ tăng hiệu suất."
 
-#: setup.php:399
+#: setup.php:413
 msgid "Notification Settings"
 msgstr "Thiết lập Thông báo"
 
-#: setup.php:403
+#: setup.php:417
 msgid "Source Address"
 msgstr "Địa chỉ nguồn"
 
-#: setup.php:404
-msgid "The source Email address for Device Tracking Emails."
+#: setup.php:418
+#, fuzzy
+msgid "The source Email address for Mactrack Emails."
 msgstr "Địa chỉ Email nguồn cho Email theo dõi thiết bị."
 
-#: setup.php:411
+#: setup.php:425
 msgid "Source Email Name"
 msgstr "Tên Email nguồn"
 
-#: setup.php:412
-msgid "The Source Email name for Device Tracking Emails."
+#: setup.php:426
+#, fuzzy
+msgid "The Source Email name for Mactrack Emails."
 msgstr "Tên Email Nguồn cho Email Theo dõi Thiết bị."
 
-#: setup.php:414
+#: setup.php:428
 msgid "MACTrack Administrator"
 msgstr "Quản trị viên MACTrack"
 
-#: setup.php:419 setup.php:1504
+#: setup.php:433 setup.php:1591
 msgid "MacWatch Default Body"
 msgstr "Thân máy mặc định của MacWatch"
 
-#: setup.php:420 setup.php:1505
-msgid "The Email body preset for Device Tracking MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+#: setup.php:434 setup.php:1592
+#, fuzzy
+msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
 msgstr "Phần cài đặt trước của Email cho Email theo dõi thiết bị MacWatch. Phần thân có thể chứa bất kỳ thẻ html hợp lệ nào. Nó cũng hỗ trợ các thẻ thay thế sẽ được xử lý khi gửi Email. Thẻ hợp lệ bao gồm <IP> , <MAC> , <TICKET> , <SITENAME> , <DEVICEIP> , <PORTNAME> , <PORTNUMBER> , <DEVICENAME> ."
 
-#: setup.php:424 setup.php:1509
+#: setup.php:438 setup.php:1596
 msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
 msgstr "Địa chỉ MAC <MAC> tìm thấy tại địa chỉ IP <IP> cho số vé: <TICKET> . <br> Thiết bị được đặt tại <br> Trang web: <SITENAME> , Thiết bị <DEVICENAME> , IP <DEVICEIP> , Hải cảng <PORTNUMBER> và Tên cổng <PORTNAME>"
 
-#: setup.php:431
+#: setup.php:445
 msgid "MacAuth Report Email Addresses"
 msgstr "Địa chỉ email báo cáo MacAuth"
 
-#: setup.php:432
+#: setup.php:446
 msgid "A comma delimited list of users to receive the MacAuth Email notifications."
 msgstr "Danh sách người dùng được phân cách bằng dấu phẩy để nhận thông báo Email MacAuth."
 
-#: setup.php:441
+#: setup.php:455
 msgid "MacAuth Report Frequency"
 msgstr "Tần suất báo cáo MacAuth"
 
-#: setup.php:442
+#: setup.php:456
 msgid "How often will the MacAuth Reports be Emailed."
 msgstr "Các báo cáo MacAuth sẽ được gửi qua email thường xuyên như thế nào."
 
-#: setup.php:448
-msgid "Device Tracking ArpWatch Settings"
+#: setup.php:462
+#, fuzzy
+msgid "Mactrack ArpWatch Settings"
 msgstr "Cài đặt ArpWatch Theo dõi thiết bị"
 
-#: setup.php:452
+#: setup.php:466
 msgid "Enable ArpWatch"
 msgstr "Kích hoạt ArpWatch"
 
-#: setup.php:453
-msgid "Should Device Tracking also use ArpWatch data to supplement Mac to IP/DNS resolution?"
+#: setup.php:467
+#, fuzzy
+msgid "Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
 msgstr "Theo dõi thiết bị cũng nên sử dụng dữ liệu ArpWatch để bổ sung cho Mac độ phân giải IP / DNS?"
 
-#: setup.php:458
+#: setup.php:472
 msgid "ArpWatch Database Path"
 msgstr "Đường dẫn cơ sở dữ liệu ArpWatch"
 
-#: setup.php:459
+#: setup.php:473
 msgid "The location of the ArpWatch Database file on the Cacti server."
 msgstr "Vị trí của tệp Cơ sở dữ liệu ArpWatch trên máy chủ Cacti."
 
-#: setup.php:466
+#: setup.php:480
 msgid "SNMP Presets"
 msgstr "Cài đặt trước SNMP"
 
-#: setup.php:470
+#: setup.php:484
 msgid "Update Policy for SNMP Options"
 msgstr "Chính sách cập nhật cho các tùy chọn SNMP"
 
-#: setup.php:471
-msgid "Policy for synchronization of SNMP Options between Cacti devices and Device Tracking Devices."
+#: setup.php:485
+#, fuzzy
+msgid "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices."
 msgstr "Chính sách đồng bộ hóa Tùy chọn SNMP giữa các thiết bị Cacti và Thiết bị theo dõi thiết bị."
 
-#: setup.php:478
+#: setup.php:492
 msgid "Default SNMP version for all new hosts."
 msgstr "Phiên bản SNMP mặc định cho tất cả các máy chủ mới."
 
-#: setup.php:485
+#: setup.php:499
 msgid "Default SNMP read community for all new hosts."
 msgstr "Cộng đồng đọc SNMP mặc định cho tất cả các máy chủ mới."
 
-#: setup.php:492
+#: setup.php:506
 msgid "Communities"
 msgstr "Cộng đồng"
 
-#: setup.php:493
+#: setup.php:507
 msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
 msgstr "Điền vào danh sách các chuỗi đọc SNMP có sẵn để kiểm tra cho thiết bị này. Mỗi chuỗi đọc phải được phân tách bằng dấu hai chấm ':'. Các chuỗi đọc này sẽ được kiểm tra tuần tự nếu chuỗi đọc chính không hợp lệ."
 
-#: setup.php:500 setup.php:1151
+#: setup.php:514 setup.php:1198
 msgid "The UDP/TCP Port to poll the SNMP agent on."
 msgstr "Cổng UDP / TCP để thăm dò tác nhân SNMP trên."
 
-#: setup.php:508
+#: setup.php:522
 msgid "Default SNMP timeout in milli-seconds."
 msgstr "Thời gian chờ SNMP mặc định tính bằng mili giây."
 
-#: setup.php:516
+#: setup.php:530
 msgid "The number times the SNMP poller will attempt to reach the host before failing."
 msgstr "Số lần nhân viên đẩy SNMP sẽ cố gắng tiếp cận máy chủ trước khi thất bại."
 
-#: setup.php:529
+#: setup.php:543
 msgid "snmpbulkwalk Binary Path"
 msgstr "Đường dẫn nhị phân snmpbulkwalk"
 
-#: setup.php:530
+#: setup.php:544
 msgid "The path to your snmpbulkwalk binary."
 msgstr "Đường dẫn đến nhị phân snmpbulkwalk của bạn."
 
-#: setup.php:538
+#: setup.php:552
 msgid "MacTrack Settings"
 msgstr "Cài đặt SNMP"
 
-#: setup.php:543
+#: setup.php:557
 msgid "Default Tab"
 msgstr "Tab mặc định"
 
-#: setup.php:544
+#: setup.php:558
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr "Bạn muốn tab MacTrack nào làm tab Mặc định của mình mỗi khi bạn truy cập MacTrack thứ hai."
 
-#: setup.php:550
+#: setup.php:564
 msgid "IP Addresses"
 msgstr "Địa chỉ IP"
 
-#: setup.php:551
+#: setup.php:565
 msgid "Mac Addresses"
 msgstr "Địa chỉ MAC"
 
-#: setup.php:553
+#: setup.php:567
 msgid "dot1x Deta"
 msgstr "dot1x Deta"
 
-#: setup.php:564
-msgid "Device Tracking Devices"
-msgstr "Thiết bị theo dõi thiết bị"
+#: setup.php:575
+#, fuzzy
+msgid "Internet Proxy Settings"
+msgstr "Cài đặt chung"
 
-#: setup.php:571 setup.php:606 setup.php:613 setup.php:627 setup.php:655
-#: setup.php:676 setup.php:697
+#: setup.php:580
+#, fuzzy
+msgid "Internet Proxy Address"
+msgstr "Địa chỉ IP"
+
+#: setup.php:581
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr ""
+
+#: setup.php:588
+msgid "Internet Proxy User"
+msgstr ""
+
+#: setup.php:589
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr ""
+
+#: setup.php:596
+msgid "Internet Proxy Password"
+msgstr ""
+
+#: setup.php:597
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr ""
+
+#: setup.php:610
+#, fuzzy
+msgid "Mactrack Devices"
+msgstr "Tổng số thiết bị"
+
+#: setup.php:617 setup.php:652 setup.php:659 setup.php:673 setup.php:701
+#: setup.php:722 setup.php:743
 msgid "(Edit)"
 msgstr "(Sửa)"
 
-#: setup.php:578 setup.php:634
+#: setup.php:624 setup.php:680
 msgid "(Import)"
 msgstr "Nhập"
 
-#: setup.php:620
-msgid "Device Tracking Device Types"
+#: setup.php:666
+#, fuzzy
+msgid "Mactrack Device Types"
 msgstr "Thiết bị theo dõi loại thiết bị"
 
-#: setup.php:648
-msgid "Device Tracking Sites"
-msgstr "Trang web theo dõi thiết bị"
+#: setup.php:694
+#, fuzzy
+msgid "Mactrack Sites"
+msgstr "Cài đặt SNMP"
 
-#: setup.php:669
+#: setup.php:715
 msgid "Mac Address Tracking Utility"
 msgstr "Tiện ích theo dõi địa chỉ Mac"
 
-#: setup.php:690
+#: setup.php:736
 msgid "Mac Address Authorization Utility"
 msgstr "Tiện ích ủy quyền địa chỉ Mac"
 
-#: setup.php:711
-msgid "Device Tracking Vendor Macs"
+#: setup.php:757
+#, fuzzy
+msgid "Mactrack Vendor Macs"
 msgstr "Mac theo dõi nhà cung cấp thiết bị"
 
-#: setup.php:718
-msgid "Device Tracking View Macs"
+#: setup.php:764
+#, fuzzy
+msgid "Mactrack View Macs"
 msgstr "Theo dõi thiết bị Mac"
 
-#: setup.php:732
-msgid "Device Tracking Dot1x View"
+#: setup.php:778
+#, fuzzy
+msgid "Mactrack Dot1x View"
 msgstr "Theo dõi thiết bị Dot1x"
 
-#: setup.php:739
-msgid "Device Tracking IP Address Viewer"
+#: setup.php:785
+#, fuzzy
+msgid "Mactrack IP Address Viewer"
 msgstr "Thiết bị theo dõi địa chỉ IP"
 
-#: setup.php:746
-msgid "Device Tracking View Interfaces"
-msgstr "Theo dõi giao diện thiết bị"
+#: setup.php:792
+#, fuzzy
+msgid "Mactrack View Interfaces"
+msgstr "Xem giao diện"
 
-#: setup.php:753
-msgid "Device Tracking View Sites"
+#: setup.php:799
+#, fuzzy
+msgid "Mactrack View Sites"
 msgstr "Theo dõi thiết bị Xem trang web"
 
-#: setup.php:760
-msgid "Device Tracking View IP Ranges"
-msgstr "Theo dõi thiết bị Phạm vi IP"
+#: setup.php:806
+#, fuzzy
+msgid "Mactrack View IP Ranges"
+msgstr "Phạm vi IP"
 
-#: setup.php:767
-msgid "Device Tracking View Devices"
+#: setup.php:813
+#, fuzzy
+msgid "Mactrack View Devices"
 msgstr "Theo dõi thiết bị Xem thiết bị"
 
-#: setup.php:774
-msgid "Device Tracking Utilities"
-msgstr "Tiện ích theo dõi thiết bị"
+#: setup.php:820
+#, fuzzy
+msgid "Mactrack Utilities"
+msgstr "Theo dõi tiện ích"
 
-#: setup.php:795
+#: setup.php:841
 msgid "Truncate Port Results Table"
 msgstr "Bảng kết quả cổng cắt"
 
-#: setup.php:802
+#: setup.php:848
 msgid "Truncate Aggregated Port Results Table"
 msgstr "Bảng kết quả cảng tổng hợp cắt ngắn"
 
-#: setup.php:809
+#: setup.php:855
 msgid "Truncate and Re-create Aggregated Port Results Table"
 msgstr "Cắt ngắn và tạo lại bảng kết quả cảng tổng hợp"
 
-#: setup.php:823
+#: setup.php:869
 msgid "Refresh/Update Vendor MAC Database from IEEE"
 msgstr "Làm mới / Cập nhật cơ sở dữ liệu MAC của nhà cung cấp từ IEEE"
 
-#: setup.php:830 setup.php:837
-msgid "Device Tracking Graph Viewer"
+#: setup.php:876 setup.php:883
+#, fuzzy
+msgid "Mactrack Graph Viewer"
 msgstr "Trình xem đồ thị theo dõi thiết bị"
 
-#: setup.php:857 setup.php:859
+#: setup.php:903 setup.php:905
 msgid "MacTrack"
 msgstr "MacTrack"
 
-#: setup.php:876 setup.php:877 setup.php:878 setup.php:879
+#: setup.php:922 setup.php:923 setup.php:924 setup.php:925
 #, php-format
 msgid "%d Seconds"
 msgstr "% d Giây"
 
-#: setup.php:880
+#: setup.php:926
 #, php-format
 msgid "%d Minute"
 msgstr "%d phút"
 
-#: setup.php:892
+#: setup.php:938
 msgid "Matches"
 msgstr "Phù hợp"
 
-#: setup.php:893
+#: setup.php:939
 msgid "Contains"
 msgstr "có chứa"
 
-#: setup.php:894
+#: setup.php:940
 msgid "Begins With"
 msgstr "bắt đầu là"
 
-#: setup.php:895
+#: setup.php:941
 msgid "Does Not Contain"
 msgstr "không chứa"
 
-#: setup.php:896
+#: setup.php:942
 msgid "Does Not Begin With"
 msgstr "Không bắt đầu với"
 
-#: setup.php:897
+#: setup.php:943
 msgid "Is Null"
 msgstr "Là không"
 
-#: setup.php:898
+#: setup.php:944
 msgid "Is Not Null"
 msgstr "Không phải là không"
 
-#: setup.php:903
+#: setup.php:949
 msgid "Half"
 msgstr "Một nửa"
 
-#: setup.php:904
+#: setup.php:950
 msgid "Full"
 msgstr "Đầy đủ"
 
-#: setup.php:909
-msgid "Sync Cacti Device to Device Tracking Device"
+#: setup.php:955
+#, fuzzy
+msgid "Sync Cacti Device to Mactrack Device"
 msgstr "Đồng bộ hóa thiết bị Cacti với thiết bị theo dõi thiết bị"
 
-#: setup.php:910
-msgid "Sync Device Tracking Device to Cacti Device"
+#: setup.php:956
+#, fuzzy
+msgid "Sync Mactrack Device to Cacti Device"
 msgstr "Đồng bộ hóa thiết bị theo dõi thiết bị với thiết bị Cacti"
 
-#: setup.php:928 setup.php:929 setup.php:930 setup.php:931
+#: setup.php:974 setup.php:975 setup.php:976 setup.php:977 setup.php:978
 #, php-format
 msgid "Every %d Minutes"
 msgstr "Mỗi% d Phút"
 
-#: setup.php:932
+#: setup.php:979
 #, php-format
 msgid "Every %d Hour"
 msgstr "Mỗi% d giờ"
 
-#: setup.php:933 setup.php:934 setup.php:935 setup.php:936 setup.php:956
-#: setup.php:1532 setup.php:1533
+#: setup.php:980 setup.php:981 setup.php:982 setup.php:983 setup.php:1003
+#: setup.php:1619 setup.php:1620
 #, php-format
 msgid "Every %d Hours"
 msgstr "Mỗi% d giờ"
 
-#: setup.php:937 setup.php:957 setup.php:1534
+#: setup.php:984 setup.php:1004 setup.php:1621
 msgid "Every Day"
 msgstr "Hàng Ngày"
 
-#: setup.php:946
+#: setup.php:993
 #, php-format
 msgid "%d Month"
 msgstr "% d tháng"
 
-#: setup.php:947 setup.php:948 setup.php:949
+#: setup.php:994 setup.php:995 setup.php:996
 #, php-format
 msgid "%d Months"
 msgstr "% d tháng"
 
-#: setup.php:950
+#: setup.php:997
 #, php-format
 msgid "%d Year"
 msgstr "% d Năm"
 
-#: setup.php:955
+#: setup.php:1002
 msgid "On Scan Completion"
 msgstr "Khi hoàn thành quét"
 
-#: setup.php:958
+#: setup.php:1005
 #, php-format
 msgid "Every %d Days"
 msgstr "Mỗi% d ngày"
 
-#: setup.php:959
+#: setup.php:1006
 msgid "Every Week"
 msgstr "Mỗi tuần"
 
-#: setup.php:965
+#: setup.php:1012
 msgid "Management"
 msgstr "Sự quản lý"
 
-#: setup.php:968 setup.php:1327 setup.php:1331
+#: setup.php:1015 setup.php:1394 setup.php:1398
 msgid "SNMP Options"
 msgstr "Tùy chọn SNMP"
 
-#: setup.php:971
+#: setup.php:1018
 msgid "Mac Watch"
 msgstr "Đồng hồ Mac"
 
-#: setup.php:971 setup.php:972 setup.php:973 setup.php:983
-msgid "Tracking Tools"
+#: setup.php:1018 setup.php:1019 setup.php:1020 setup.php:1030
+#, fuzzy
+msgid "Mactrack Tools"
 msgstr "Công cụ theo dõi"
 
-#: setup.php:972
+#: setup.php:1019
 msgid "Mac Authorizations"
 msgstr "Ủy quyền Mac"
 
-#: setup.php:973
+#: setup.php:1020
 msgid "Tracking Utilities"
 msgstr "Theo dõi tiện ích"
 
-#: setup.php:996
+#: setup.php:1043
 msgid "Device Scanning Function Options"
 msgstr "Tùy chọn chức năng quét thiết bị"
 
-#: setup.php:1001
+#: setup.php:1048
 msgid "Give this device type a meaningful description."
 msgstr "Cung cấp cho loại thiết bị này một mô tả có ý nghĩa."
 
-#: setup.php:1008
+#: setup.php:1055
 msgid "Fill in the name for the vendor of this device type."
 msgstr "Điền vào tên cho nhà cung cấp loại thiết bị này."
 
-#: setup.php:1015
+#: setup.php:1062
 msgid "Choose the type of device."
 msgstr "Chọn loại thiết bị."
 
-#: setup.php:1022
+#: setup.php:1069
 msgid "System Description Match"
 msgstr "Mô tả hệ thống phù hợp"
 
-#: setup.php:1023 setup.php:1030
-msgid "Provide key information to help Device Tracking detect the type of device.  The wildcard character is the '&#42;' sign."
+#: setup.php:1070 setup.php:1077
+#, fuzzy
+msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
 msgstr "Cung cấp thông tin chính để giúp Theo dõi thiết bị phát hiện loại thiết bị. Ký tự đại diện là ký hiệu '%'."
 
-#: setup.php:1029
+#: setup.php:1076
 msgid "Vendor SNMP Object ID Match"
 msgstr "Kết hợp ID đối tượng SNMP của nhà cung cấp"
 
-#: setup.php:1036
+#: setup.php:1083
 msgid "MAC Address Scanning Function"
 msgstr "Chức năng quét địa chỉ MAC"
 
-#: setup.php:1037
-msgid "The Device Tracking scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
+#: setup.php:1084
+#, fuzzy
+msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
 msgstr "Chức năng quét Theo dõi thiết bị để gọi để lấy và lưu trữ chi tiết cổng. Tên chức năng là tất cả những gì được yêu cầu. Bốn tham số sau đây được giả định và sẽ luôn được thêm vào: &#39;my_feft ($ site, &amp; $ device, $ lowport, $ highport)&#39;. Không có chức năng cần thiết cho một bộ định tuyến thuần túy."
 
-#: setup.php:1045
+#: setup.php:1092
 msgid "IP Address Scanning Function"
 msgstr "Chức năng quét địa chỉ IP"
 
-#: setup.php:1046
-msgid "The Device Tracking scanning function specific to Layer3 devices that track IP Addresses."
+#: setup.php:1093
+#, fuzzy
+msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
 msgstr "Chức năng quét Theo dõi Thiết bị dành riêng cho các thiết bị Lớp 3 theo dõi Địa chỉ IP."
 
-#: setup.php:1054
+#: setup.php:1101
 msgid "802.1x Scanning Function"
 msgstr "Chức năng quét 802.1x"
 
-#: setup.php:1055
-msgid "The Device Tracking scanning function specific to Switches with dot1x enabled."
+#: setup.php:1102
+#, fuzzy
+msgid "Mactrack scanning function specific to Switches with dot1x enabled."
 msgstr "Chức năng quét Theo dõi thiết bị dành riêng cho Công tắc có bật dot1x."
 
-#: setup.php:1063
+#: setup.php:1110
 msgid "Serial Number Base OID"
 msgstr "Số sê-ri cơ sở OID"
 
-#: setup.php:1064
-msgid "The SNMP OID used to obtain this device types serial number to be stored in the Device Tracking Asset Information table."
+#: setup.php:1111
+#, fuzzy
+msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
 msgstr "OID SNMP được sử dụng để lấy số sê-ri loại thiết bị này được lưu trữ trong bảng Thông tin tài sản theo dõi thiết bị."
 
-#: setup.php:1071
+#: setup.php:1118
 msgid "Serial Number Collection Method"
 msgstr "Phương pháp thu thập số sê-ri"
 
-#: setup.php:1072
+#: setup.php:1119
 msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
 msgstr "Số sê-ri được thu thập cho OID này như thế nào. Nếu 'SNMP Walk', chúng tôi giả sử nhiều số sê-ri. Nếu 'Nhận', nó sẽ chỉ là một .."
 
-#: setup.php:1075
+#: setup.php:1122
 msgid "SNMP Get"
 msgstr "Nhận SNMP"
 
-#: setup.php:1075
+#: setup.php:1122
 msgid "SNMP Walk"
 msgstr "Đi bộ SNMP"
 
-#: setup.php:1079
+#: setup.php:1126
 msgid "Low User Port Number"
 msgstr "Số cổng người dùng thấp"
 
-#: setup.php:1080 setup.php:1089
+#: setup.php:1127 setup.php:1136
 msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
 msgstr "Cung cấp số cổng người dùng thấp trên công tắc này. Để lại 0 để cho phép hệ thống tính toán nó."
 
-#: setup.php:1088
+#: setup.php:1135
 msgid "High User Port Number"
 msgstr "Số cổng người dùng cao"
 
-#: setup.php:1098
+#: setup.php:1145
 msgid "Disabled device type is not used."
 msgstr ""
 
-#: setup.php:1121
+#: setup.php:1168
 msgid "Fill in the name of this SNMP option set."
 msgstr "Điền vào tên của bộ tùy chọn SNMP này."
 
-#: setup.php:1133
+#: setup.php:1180
 msgid "SNMP Version"
 msgstr "Phiên bản SNMP"
 
-#: setup.php:1134
+#: setup.php:1181
 msgid "Choose the SNMP version for this host."
 msgstr "Chọn phiên bản SNMP cho máy chủ này."
 
-#: setup.php:1141
+#: setup.php:1188
 msgid "SNMP Community String"
 msgstr "Chuỗi cộng đồng SNMP"
 
-#: setup.php:1142
+#: setup.php:1189
 msgid "Fill in the SNMP read community for this device."
 msgstr "Điền vào cộng đồng đọc SNMP cho thiết bị này."
 
-#: setup.php:1150
+#: setup.php:1197
 msgid "SNMP Port"
 msgstr "Cổng SNMP"
 
-#: setup.php:1159
+#: setup.php:1206
 msgid "SNMP Timeout"
 msgstr "Hết thời gian chờ"
 
-#: setup.php:1160
+#: setup.php:1207
 msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
 msgstr "Số mili giây tối đa Cacti sẽ chờ phản hồi SNMP (không hoạt động với hỗ trợ php-snmp)."
 
-#: setup.php:1168
+#: setup.php:1215
 msgid "SNMP Retries"
 msgstr "Thử lại SNMP"
 
-#: setup.php:1169
+#: setup.php:1216
 msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
 msgstr "Số lần thử tối đa để tiếp cận thiết bị thông qua chuỗi đọc SNMP trước khi từ bỏ."
 
-#: setup.php:1177
+#: setup.php:1224
 msgid "Maximum OID's Per Get Request"
 msgstr "Yêu cầu tối đa cho mỗi OID"
 
-#: setup.php:1178
+#: setup.php:1225
 msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
 msgstr "Đã chỉ định số lượng OID có thể nhận được trong một yêu cầu Nhận SNMP."
 
-#: setup.php:1186
+#: setup.php:1233
 msgid "SNMP Username (v3)"
 msgstr "Tên người dùng SNMP (v3)"
 
-#: setup.php:1187
+#: setup.php:1234
 msgid "SNMP v3 username for this device."
 msgstr "Tên người dùng SNMP v3 cho thiết bị này."
 
-#: setup.php:1195
+#: setup.php:1242
 msgid "SNMP Password (v3)"
 msgstr "Mật khẩu SNMP (v3)"
 
-#: setup.php:1196
+#: setup.php:1243
 msgid "SNMP v3 password for this device."
 msgstr "Mật khẩu SNMP v3 cho thiết bị này."
 
-#: setup.php:1204
+#: setup.php:1251
 msgid "SNMP Auth Protocol (v3)"
 msgstr "Giao thức xác thực SNMP (v3)"
 
-#: setup.php:1205
+#: setup.php:1252
 msgid "Choose the SNMPv3 Authorization Protocol."
 msgstr "Chọn Giao thức ủy quyền SNMPv3."
 
-#: setup.php:1212
+#: setup.php:1259
 msgid "SNMP Privacy Passphrase (v3)"
 msgstr "Cụm mật khẩu riêng tư SNMP (v3)"
 
-#: setup.php:1213
+#: setup.php:1260
 msgid "Choose the SNMPv3 Privacy Passphrase."
 msgstr "Chọn cụm mật khẩu riêng tư SNMPv3."
 
-#: setup.php:1221
+#: setup.php:1268
 msgid "SNMP Privacy Protocol (v3)"
 msgstr "Giao thức bảo mật SNMP (v3)"
 
-#: setup.php:1222
+#: setup.php:1269
 msgid "Choose the SNMPv3 Privacy Protocol."
 msgstr "Chọn Giao thức bảo mật SNMPv3."
 
-#: setup.php:1229
+#: setup.php:1276
 msgid "SNMP Context (v3)"
 msgstr "Bối cảnh SNMP (v3)"
 
-#: setup.php:1230
+#: setup.php:1277
 msgid "Enter the SNMP v3 Context to use for this device."
 msgstr "Nhập Bối cảnh SNMP v3 để sử dụng cho thiết bị này."
 
-#: setup.php:1238
+#: setup.php:1285
 msgid "SNMP Engine ID (v3)"
 msgstr "ID động cơ SNMP (v3)"
 
-#: setup.php:1239
+#: setup.php:1286
 msgid "Enter the SNMP v3 Engine ID to use for this device."
 msgstr "Nhập ID động cơ SNMP v3 để sử dụng cho thiết bị này."
 
-#: setup.php:1251
+#: setup.php:1298
 msgid "General Device Settings"
 msgstr "Cài đặt thiết bị chung"
 
-#: setup.php:1256
+#: setup.php:1303
 msgid "Give this device a meaningful name."
 msgstr "Đặt tên cho thiết bị này."
 
-#: setup.php:1263
+#: setup.php:1310
 msgid "Fill in the fully qualified hostname for this device."
 msgstr "Điền vào tên máy chủ đủ điều kiện cho thiết bị này."
 
-#: setup.php:1268
+#: setup.php:1315
 msgid "Related Cacti Host"
 msgstr "Máy chủ Cacti liên quan"
 
-#: setup.php:1269
-msgid "Given Device Tracking Host is connected to this Cacti Host."
+#: setup.php:1316
+#, fuzzy
+msgid "Given Mactrack Host is connected to this Cacti Host."
 msgstr "Máy chủ theo dõi thiết bị đã cho được kết nối với máy chủ Cacti này."
 
-#: setup.php:1278
+#: setup.php:1334
 msgid "Scan Type"
 msgstr "Loại quét"
 
-#: setup.php:1279
+#: setup.php:1335
 msgid "Choose the scan type you wish to perform on this device."
 msgstr "Chọn loại quét bạn muốn thực hiện trên thiết bị này."
 
-#: setup.php:1287
+#: setup.php:1343
 msgid "Choose the site to associate with this device."
 msgstr "Chọn trang web để liên kết với thiết bị này."
 
-#: setup.php:1294
+#: setup.php:1350
 msgid "Device Notes"
 msgstr "Ghi chú thiết bị"
 
-#: setup.php:1295
+#: setup.php:1351
 msgid "This field value is useful to save general information about a specific device."
 msgstr "Giá trị trường này rất hữu ích để lưu thông tin chung về một thiết bị cụ thể."
 
-#: setup.php:1304
+#: setup.php:1360
 msgid "Disable Device"
 msgstr "Vô hiệu hóa thiết bị"
 
-#: setup.php:1305
+#: setup.php:1361
 msgid "Check this box to disable all checks for this host."
 msgstr "Chọn hộp này để vô hiệu hóa tất cả các kiểm tra cho máy chủ này."
 
-#: setup.php:1312
+#: setup.php:1368
 msgid "Switch/Hub, Switch/Router Settings"
 msgstr "Cài đặt Switch / Hub, Switch / Router"
 
-#: setup.php:1317
+#: setup.php:1373
 msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
 msgstr "Cung cấp danh sách các cổng trên một công tắc / trung tâm cụ thể có kết quả MAC nên được bỏ qua. Các cổng như cổng liên kết / trung kế không thể phân biệt được với các cổng người dùng khác là ví dụ. Mỗi số cổng phải được phân tách bằng dấu hai chấm, đường ống hoặc khoảng trắng ':', '|', ''. Ví dụ: 'Fa0 / 1: Fa1 / 23' hoặc 'Fa0 / 1 Fa1 / 23' sẽ được chấp nhận đối với một số loại chuyển đổi của nhà sản xuất."
 
-#: setup.php:1332
+#: setup.php:1399
 msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
 msgstr ""
 
-#: setup.php:1339
+#: setup.php:1406
 msgid "Read Strings"
 msgstr "Đọc chuỗi"
 
-#: setup.php:1340
+#: setup.php:1407
 msgid "<strong>DEPRECATED:</strong> SNMP community strings"
 msgstr "<strong>ĐẠI DIỆN:</strong> Chuỗi cộng đồng SNMP"
 
-#: setup.php:1345
+#: setup.php:1412
 msgid "Specific SNMP Settings"
 msgstr "Cài đặt SNMP cụ thể"
 
-#: setup.php:1354
+#: setup.php:1421
 msgid "Connectivity Options"
 msgstr "Tùy chọn kết nối"
 
-#: setup.php:1358
+#: setup.php:1425
 msgid "Terminal Type"
 msgstr "Kiểu cuối"
 
-#: setup.php:1359
+#: setup.php:1426
 msgid "Choose the terminal type that you use to connect to this device."
 msgstr "Chọn loại thiết bị đầu cuối mà bạn sử dụng để kết nối với thiết bị này."
 
-#: setup.php:1364
+#: setup.php:1431
 msgid "Telnet"
 msgstr "Telnet"
 
-#: setup.php:1365
+#: setup.php:1432
 msgid "SSH"
 msgstr "SSH"
 
-#: setup.php:1366
+#: setup.php:1433
 msgid "HTTP"
 msgstr "HTTP"
 
-#: setup.php:1367
+#: setup.php:1434
 msgid "HTTPS"
 msgstr "HTTPS"
 
-#: setup.php:1371
+#: setup.php:1438
 msgid "User Name"
 msgstr "Tên người dùng"
 
-#: setup.php:1372
+#: setup.php:1439
 msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
 msgstr "Tên người dùng sẽ được sử dụng cho phương thức xác thực tùy chỉnh của bạn. Ví dụ bao gồm SSH, RSH, HTML, v.v."
 
-#: setup.php:1380
+#: setup.php:1447
 msgid "Password"
 msgstr "Mật khẩu"
 
-#: setup.php:1381
+#: setup.php:1448
 msgid "The password to be used for your custom authentication."
 msgstr "Mật khẩu được sử dụng để xác thực tùy chỉnh của bạn."
 
-#: setup.php:1389
+#: setup.php:1456
 msgid "Private Key Path"
 msgstr "Đường dẫn khóa riêng"
 
-#: setup.php:1390
+#: setup.php:1457
 msgid "The path to the private key used for SSH authentication."
 msgstr "Đường dẫn đến khóa riêng được sử dụng để xác thực SSH."
 
-#: setup.php:1414
+#: setup.php:1481
 msgid "Sequence"
 msgstr "Thứ tự"
 
-#: setup.php:1415
+#: setup.php:1482
 msgid "Sequence of Item."
 msgstr "Trình tự của vật phẩm."
 
-#: setup.php:1423
+#: setup.php:1490
 msgid "General Site Settings"
 msgstr "Cài đặt trang web chung"
 
-#: setup.php:1428
+#: setup.php:1495
 msgid "Please enter a reasonable name for this site."
 msgstr "Vui lòng nhập một tên hợp lý cho trang web này."
 
-#: setup.php:1435
+#: setup.php:1502
 msgid "Primary Customer Contact"
 msgstr "Liên hệ khách hàng chính"
 
-#: setup.php:1436
+#: setup.php:1503
 msgid "The principal customer contact name and number for this site."
 msgstr "Tên và số liên lạc chính của khách hàng cho trang web này."
 
-#: setup.php:1443
+#: setup.php:1510
 msgid "NetOps Contact"
 msgstr "Liên hệ NetOps"
 
-#: setup.php:1444
+#: setup.php:1511
 msgid "Please principal network support contact name and number for this site."
 msgstr "Vui lòng hỗ trợ mạng và số liên lạc chính cho trang web này."
 
-#: setup.php:1451
+#: setup.php:1518
 msgid "Facilities Contact"
 msgstr "Cơ sở vật chất Liên hệ"
 
-#: setup.php:1452
+#: setup.php:1519
 msgid "Please principal facilities/security contact name and number for this site."
 msgstr "Xin vui lòng cơ sở chính / tên và số liên lạc an ninh cho trang web này."
 
-#: setup.php:1459
+#: setup.php:1526
 msgid "Site Information"
 msgstr "Thông tin trang web"
 
-#: setup.php:1463
+#: setup.php:1530
 msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
 msgstr "Cung cấp bất kỳ thông tin cụ thể về trang web, ở dạng miễn phí, cho phép bạn quản lý tốt hơn vị trí này."
 
-#: setup.php:1485
+#: setup.php:1572
 msgid "General Mac Address Tracking Settings"
 msgstr "Cài đặt theo dõi địa chỉ Mac chung"
 
-#: setup.php:1490
+#: setup.php:1577
 msgid "Please enter the MAC Address to be watched for."
 msgstr "Vui lòng nhập Địa chỉ MAC để được theo dõi."
 
-#: setup.php:1497
+#: setup.php:1584
 msgid "MAC Tracking Name/Email Subject"
 msgstr "Tên theo dõi MAC / Tiêu đề email"
 
-#: setup.php:1498
+#: setup.php:1585
 msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
 msgstr "Vui lòng nhập tên hợp lý cho mục MAC Theo dõi này. Thông tin này sẽ có trong dòng chủ đề của Email của bạn"
 
-#: setup.php:1517
+#: setup.php:1604
 msgid "Ticket number for cross referencing with your corporate help desk system(s)."
 msgstr "Số vé để tham khảo chéo với (các) hệ thống bàn trợ giúp của công ty bạn."
 
-#: setup.php:1524
+#: setup.php:1611
 msgid "Notification Schedule"
 msgstr "Lịch trình thông báo"
 
-#: setup.php:1525
+#: setup.php:1612
 msgid "Choose how often an Email should be generated for this Mac Watch item."
 msgstr "Chọn tần suất tạo Email cho mục Mac Watch này."
 
-#: setup.php:1529
+#: setup.php:1616
 msgid "First Occurrence Only"
 msgstr "Lần xuất hiện đầu tiên"
 
-#: setup.php:1530
+#: setup.php:1617
 msgid "All Occurrences"
 msgstr "Tất cả các lần xuất hiện"
 
-#: setup.php:1531
+#: setup.php:1618
 msgid "Every Hour"
 msgstr "Mỗi tiếng"
 
-#: setup.php:1538
+#: setup.php:1625
 msgid "Email Addresses"
 msgstr "Địa chỉ Email"
 
-#: setup.php:1539
+#: setup.php:1626
 msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
 msgstr "Nhập một dấu chấm phẩy được phân tách bằng các địa chỉ Email sẽ được thông báo nơi có địa chỉ MAC này."
 
-#: setup.php:1562
+#: setup.php:1649
 msgid "General Mac Address Authorization Settings"
 msgstr "Cài đặt ủy quyền địa chỉ Mac chung"
 
-#: setup.php:1566
+#: setup.php:1653
 msgid "MAC Address Match"
 msgstr "Kết hợp địa chỉ MAC"
 
-#: setup.php:1567
+#: setup.php:1654
 msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
 msgstr "Vui lòng nhập chuỗi Địa chỉ MAC hoặc Chuỗi Địa chỉ Mac để được ủy quyền tự động. Nếu bạn muốn ủy quyền cho một nhóm Địa chỉ MAC, bạn có thể sử dụng ký tự đại diện '%' ở bất cứ đâu trong Địa chỉ MAC."
 
-#: setup.php:1576
+#: setup.php:1663
 msgid "Please add a reason for this entry."
 msgstr "Vui lòng thêm một lý do cho mục này."
+
+#~ msgid "Dash [-]"
+#~ msgstr "Dấu gạch ngang [-]"
+
+#~ msgid "Device Tracking"
+#~ msgstr "Theo dõi thiết bị"
+
+#~ msgid "Device Tracking Devices"
+#~ msgstr "Thiết bị theo dõi thiết bị"
+
+#~ msgid "Device Tracking Sites"
+#~ msgstr "Trang web theo dõi thiết bị"
+
+#~ msgid "Device Tracking Utilities"
+#~ msgstr "Tiện ích theo dõi thiết bị"
+
+#~ msgid "Device Tracking View IP Ranges"
+#~ msgstr "Theo dõi thiết bị Phạm vi IP"
+
+#~ msgid "Device Tracking View Interfaces"
+#~ msgstr "Theo dõi giao diện thiết bị"
+
+#~ msgid "How should each octet of the MAC address be delimited."
+#~ msgstr "Làm thế nào mỗi octet của địa chỉ MAC được phân định."
+
+#~ msgid "Mac Address Delimiter"
+#~ msgstr "Dấu phân cách địa chỉ Mac"

@@ -24,9 +24,9 @@
 */
 
 if (function_exists('pcntl_async_signals')) {
-    pcntl_async_signals(true);
+	pcntl_async_signals(true);
 } else {
-    declare(ticks = 100);
+	declare(ticks = 100);
 }
 
 ini_set('output_buffering', 'Off');
@@ -51,8 +51,8 @@ include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.ph
 
 /* install signal handlers for UNIX only */
 if (function_exists('pcntl_signal')) {
-    pcntl_signal(SIGTERM, 'sig_handler');
-    pcntl_signal(SIGINT, 'sig_handler');
+	pcntl_signal(SIGTERM, 'sig_handler');
+	pcntl_signal(SIGINT, 'sig_handler');
 }
 
 /* get the mactrack polling cycle */
@@ -135,7 +135,6 @@ if (function_exists('register_process_start')) {
 	}
 }
 
-
 // Get rid of old/hung processes
 clear_old_processes($site_id);
 
@@ -143,7 +142,7 @@ if ($collect_frequency == 'disabled') {
 	print "WARNING: Mactrack scanning frequency is disabled, exiting. You have to enable it in settings." . PHP_EOL;
 
 	if (function_exists('unregister_process')) {
-		unregister_process('matrack', 'master', $config['poller_id'], getmypid());
+		unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
 	}
 
 	exit(1);
@@ -158,7 +157,7 @@ if ($collect_frequency == 'disabled') {
 			print "NOTE: Mactrack currently running and max run duration not eclipsed." . PHP_EOL;
 
 			if (function_exists('unregister_process')) {
-				unregister_process('matrack', 'master', $config['poller_id'], getmypid());
+				unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
 			}
 
 			exit(0);
@@ -289,6 +288,8 @@ if (function_exists('unregister_process')) {
 	unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
 }
 
+exit(0);
+
 function errors_disable() {
 	global $track_errors;
 	$track_errors = ini_get('track_errors');
@@ -348,7 +349,7 @@ function mactrack_error_handler($level, $message, $file, $line, $context) {
 			cacti_debug_backtrace('PHP ERROR STRICT');
 			break;
 		default:
-       		cacti_log($error, false, 'ERROR');
+			cacti_log($error, false, 'ERROR');
 			cacti_debug_backtrace('PHP ERROR');
 	}
 
@@ -499,6 +500,9 @@ function collect_mactrack_data($start, $site_id = 0) {
 		$processes_available = $concurrent_processes;
 
 		while ($j < $total_devices) {
+			/* check for pending signals */
+			pcntl_signal_dispatch();
+
 			/**
 			 * retrieve the number of concurrent mac_track processes to run
 			 * default to 10 for now
@@ -518,8 +522,11 @@ function collect_mactrack_data($start, $site_id = 0) {
 			/* launch the dns resolver if it hasn't been yet */
 			if (($dns_resolver_required) && (!$resolver_launched)) {
 				sleep(2);
+
 				exec_background($command_string, ' -q ' . $config['base_path'] . '/plugins/mactrack/mactrack_resolver.php' . $e_debug . $e_site);
+
 				$resolver_launched = true;
+
 				mactrack_debug('DNS Resolver process launched');
 			}
 
@@ -1073,22 +1080,22 @@ function log_mactrack_statistics($type = 'collect') {
  * @return (void)
  */
 function sig_handler($signo) {
-    global $force, $config;
+	global $force, $config;
 
-    switch ($signo) {
-        case SIGTERM:
-        case SIGINT:
-            cacti_log("WARNING: MacTrack Poller 'master' is shutting down by signal!", false, 'MACTRACK');
+	switch ($signo) {
+		case SIGTERM:
+		case SIGINT:
+			cacti_log("WARNING: MacTrack Poller 'master' is shutting down by signal!", false, 'MACTRACK');
 
-            if (!$force) {
-                unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
-            }
+			if (!$force) {
+				unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
+			}
 
-            exit(1);
-            break;
-        default:
-            /* ignore all other signals */
-    }
+			exit(1);
+			break;
+		default:
+			/* ignore all other signals */
+	}
 }
 
 function display_version() {

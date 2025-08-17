@@ -22,12 +22,33 @@
  +-------------------------------------------------------------------------+
 */
 
+if (function_exists('pcntl_async_signals')) {
+	pcntl_async_signals(true);
+} else {
+	declare(ticks = 100);
+}
+
+ini_set('output_buffering', 'Off');
+ini_set('max_runtime', '-1');
+ini_set('memory_limit', '-1');
+
+ini_set('max_execution_time', '-1');
+
+set_time_limit(0);
+ob_implicit_flush();
+
 $dir = dirname(__FILE__);
 chdir($dir);
 
 include('../../include/cli_check.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 include_once($config['base_path'] . '/plugins/mactrack/Net/DNS2.php');
+
+/* install signal handlers for UNIX only */
+if (function_exists('pcntl_signal')) {
+	pcntl_signal(SIGTERM, 'sig_handler');
+	pcntl_signal(SIGINT, 'sig_handler');
+}
 
 /* get the mactrack polling cycle */
 $max_run_duration = read_config_option('mt_collection_timing');
@@ -85,7 +106,7 @@ if (cacti_sizeof($parms)) {
 				display_help();
 				exit;
 			default:
-				print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
+				print 'ERROR: Invalid Parameter ' . $parameter . PHP_EOL . PHP_EOL;
 				display_help();
 				exit;
 		}
@@ -106,11 +127,9 @@ if (read_config_option('mt_reverse_dns') == 'on') {
 
 /* silently end if the registered process is still running  */
 if (!register_process_start('mactrack_resolver', 'master', 0, $max_run_duration-300)) {
-	print "FATAL: Detected an already running process." . PHP_EOL;
+	print 'FATAL: Detected an already running process.' . PHP_EOL;
 	exit(0);
 }
-
-
 
 /* place a process marker in the database for the ip resolver */
 db_process_add(0, true);
@@ -144,6 +163,8 @@ $nothing = 0;
 
 /* loop until you are it */
 while (1) {
+	/* check for pending signals */
+	pcntl_signal_dispatch();
 
 	$now = time();
 
@@ -155,6 +176,7 @@ while (1) {
 		if ($nothing > 5) {
 			mactrack_debug('Terminating DNS resolving, nothing to do');
 		}
+
 		$break = true;
 	} else {
 		$break = false;
@@ -247,26 +269,52 @@ while (1) {
 
 unregister_process('mactrack_resolver', 'master');
 
-
 /* allow parent to close by removing process and then exit */
 db_process_remove(0);
+
 exit;
+
+/**
+ * sig_handler - provides a generic means to catch exceptions to the Cacti log.
+ *
+ * @param  (int) $signo - the signal that was thrown by the interface.
+ *
+ * @return (void)
+ */
+function sig_handler($signo) {
+	global $config;
+
+	switch ($signo) {
+		case SIGTERM:
+		case SIGINT:
+			cacti_log("WARNING: MacTrack Resolver 'master' is shutting down by signal!", false, 'MACTRACK');
+
+			unregister_process('mactrack_resolver', 'master');
+
+			exit(1);
+			break;
+		default:
+            /* ignore all other signals */
+	}
+}
 
 function display_version() {
 	global $config;
 
 	$info = plugin_mactrack_version();
-	print "Network Mactrack IP Resolver, Version " . $info['version'] . ", " . COPYRIGHT_YEARS . "\n";
+	print 'Network Mactrack IP Resolver, Version ' . $info['version'] . ', ' . COPYRIGHT_YEARS . PHP_EOL;
 }
 
 /*	display_help - displays the usage of the function */
 function display_help () {
 	display_version();
 
-	print "\nusage: mactrack_resolver.php [-sid=ID] [-d] [-h] [--help] [-v] [--version]\n\n";
-	print "-sid=ID       - The site id to resolve for\n";
-	print "-d | --debug  - Display verbose output during execution\n";
-	print "-v --version  - Display this help message\n";
-	print "-h --help     - display this help message\n";
+	print PHP_EOL;
+	print 'usage: mactrack_resolver.php [-sid=ID] [-d] [-h] [--help] [-v] [--version]' . PHP_EOL . PHP_EOL;
+
+	print '-sid=ID       - The site id to resolve for' . PHP_EOL;
+	print '-d | --debug  - Display verbose output during execution' . PHP_EOL;
+	print '-v --version  - Display this help message' . PHP_EOL;
+	print '-h --help     - display this help message' . PHP_EOL;
 }
 

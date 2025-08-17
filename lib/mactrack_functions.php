@@ -284,10 +284,11 @@ function valid_snmp_device(&$device) {
 	return $host_up;
 }
 
-/*	find_scanning_function - This function scans the mac_track_device_type database
-  for a valid scanning function and then returns an array with the current device
-  type and it's characteristics for the main mac_track_scanner function to call.
-*/
+/**
+ * find_scanning_function - This function scans the mac_track_device_type database
+ * for a valid scanning function and then returns an array with the current device
+ * type and it's characteristics for the main mac_track_scanner function to call.
+ */
 function find_scanning_function(&$device, &$device_types) {
 	/* scan all device_types to determine the function to call */
 	if (cacti_sizeof($device_types)) {
@@ -361,9 +362,10 @@ function find_scanning_function(&$device, &$device_types) {
 	return array();
 }
 
-/*	port_list_to_array - Takes a text list of ports and builds a trimmed array of
-  the resulting array.  Returns the array
-*/
+/**
+ * port_list_to_array - Takes a text list of ports and builds a trimmed array of
+ * the resulting array.  Returns the array
+ */
 function port_list_to_array($port_list, $delimiter = ':') {
 	$port_array = array();
 
@@ -395,9 +397,10 @@ function port_list_to_array($port_list, $delimiter = ':') {
 	return $port_array;
 }
 
-/*	get_standard_arp_table - This function reads a devices ARP table for a site and stores
-  the IP address and MAC address combinations in the mac_track_ips table.
-*/
+/**
+ * get_standard_arp_table - This function reads a devices ARP table for a site and stores
+ * the IP address and MAC address combinations in the mac_track_ips table.
+ */
 function get_standard_arp_table($site, &$device) {
 	global $debug, $scan_date;
 
@@ -484,10 +487,11 @@ function get_standard_arp_table($site, &$device) {
 	mactrack_debug('HOST: ' . $device['hostname'] . ', IP address information collection complete');
 }
 
-/*	build_InterfacesTable - This is a basic function that will scan Interfaces table
-  and return data.  It also stores data in the mac_track_interfaces table.  Some of the
-  data is also used for scanning purposes.
-*/
+/**
+ * build_InterfacesTable - This is a basic function that will scan Interfaces table
+ * and return data.  It also stores data in the mac_track_interfaces table.  Some of the
+ * data is also used for scanning purposes.
+ */
 function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $getAlias = false) {
 	/* initialize the interfaces array */
 	$ifInterfaces = array();
@@ -1158,11 +1162,12 @@ function get_link_int_value($snmp_oid, $ifIndex, &$snmp_array, &$db_interface, $
 	}
 }
 
-/*	get_generic_switch_ports - This is a basic function that will scan the dot1d
-  OID tree for all switch port to MAC address association and stores in the
-  mac_track_temp_ports table for future processing in the finalization steps of the
-  scanning process.
-*/
+/**
+ * get_generic_switch_ports - This is a basic function that will scan the dot1d
+ * OID tree for all switch port to MAC address association and stores in the
+ * mac_track_temp_ports table for future processing in the finalization steps of the
+ * scanning process.
+ */
 function get_generic_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
@@ -1182,11 +1187,12 @@ function get_generic_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 	return $device;
 }
 
-/*	get_generic_dot1q_switch_ports - This is a basic function that will scan the dot1d
-  OID tree for all switch port to MAC address association and stores in the
-  mac_track_temp_ports table for future processing in the finalization steps of the
-  scanning process.
-*/
+/**
+ * get_generic_dot1q_switch_ports - This is a basic function that will scan the dot1d
+ * OID tree for all switch port to MAC address association and stores in the
+ * mac_track_temp_ports table for future processing in the finalization steps of the
+ * scanning process.
+ */
 function get_generic_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
@@ -1206,11 +1212,12 @@ function get_generic_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort
 	return $device;
 }
 
-/*	get_generic_wireless_ports - This is a basic function that will scan the dot1d
-  OID tree for all switch port to MAC address association and stores in the
-  mac_track_temp_ports table for future processing in the finalization steps of the
-  scanning process.
-*/
+/**
+ * get_generic_wireless_ports - This is a basic function that will scan the dot1d
+ * OID tree for all switch port to MAC address association and stores in the
+ * mac_track_temp_ports table for future processing in the finalization steps of the
+ * scanning process.
+ */
 function get_generic_wireless_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
@@ -1230,10 +1237,11 @@ function get_generic_wireless_ports($site, &$device, $lowPort = 0, $highPort = 0
 	return $device;
 }
 
-/*	get_base_dot1dTpFdbEntry_ports - This function will grab information from the
-  port bridge snmp table and return it to the calling progrem for further processing.
-  This is a foundational function for all vendor data collection functions.
-*/
+/**
+ * get_base_dot1dTpFdbEntry_ports - This function will grab information from the
+ * port bridge snmp table and return it to the calling progrem for further processing.
+ * This is a foundational function for all vendor data collection functions.
+ */
 function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 
@@ -1452,10 +1460,11 @@ function get_ios_vrf_arp_table($oid, &$device, $snmp_readstring = '', $hex = fal
 }
 
 
-/*	get_base_wireless_dot1dTpFdbEntry_ports - This function will grab information from the
-  port bridge snmp table and return it to the calling progrem for further processing.
-  This is a foundational function for all vendor data collection functions.
-*/
+/**
+ * get_base_wireless_dot1dTpFdbEntry_ports - This function will grab information from the
+ * port bridge snmp table and return it to the calling progrem for further processing.
+ * This is a foundational function for all vendor data collection functions.
+ */
 function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 
@@ -1621,10 +1630,11 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 	}
 }
 
-/*	get_base_dot1qTpFdbEntry_ports - This function will grab information from the
-  port bridge snmp table and return it to the calling progrem for further processing.
-  This is a foundational function for all vendor data collection functions.
-*/
+/**
+ * get_base_dot1qTpFdbEntry_ports - This function will grab information from the
+ * port bridge snmp table and return it to the calling progrem for further processing.
+ * This is a foundational function for all vendor data collection functions.
+ */
 function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 
@@ -1800,9 +1810,10 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 	}
 }
 
-/*	gethostbyaddr_wtimeout - This function provides a good method of performing
-  a rapid lookup of a DNS entry for a host so long as you don't have to look far.
-*/
+/**
+ * gethostbyaddr_wtimeout - This function provides a good method of performing
+ * a rapid lookup of a DNS entry for a host so long as you don't have to look far.
+ */
 function mactrack_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 	/* random transaction number (for routers etc to get the reply back) */
 	$data = rand(10, 99);
@@ -2009,10 +2020,10 @@ function xform_net_address($ip_address) {
 	}
 }
 
-/*	xform_mac_address - This function will take a variable that is either formatted as
-  hex or as a string representing hex and convert it to what the mactrack scanning
-  function expects.
-*/
+/** xform_mac_address - This function will take a variable that is either formatted as
+ * hex or as a string representing hex and convert it to what the mactrack scanning
+ * function expects.
+ */
 function xform_mac_address($mac_address) {
 	$max_address = trim($mac_address);
 
@@ -2039,10 +2050,11 @@ function xform_mac_address($mac_address) {
 	return strtoupper($mac_address);
 }
 
-/*	xform_standard_indexed_data - This function takes an oid, and a device, and
-  optionally an alternate snmp_readstring as input parameters and then walks the
-  oid and returns the data in array[index] = value format.
-*/
+/**
+ * xform_standard_indexed_data - This function takes an oid, and a device, and
+ * optionally an alternate snmp_readstring as input parameters and then walks the
+ * oid and returns the data in array[index] = value format.
+ */
 function xform_standard_indexed_data($xformOID, &$device, $snmp_readstring = '', $hex = false) {
 	/* get raw index data */
 	if ($snmp_readstring == '') {
@@ -2078,10 +2090,11 @@ function xform_standard_indexed_data($xformOID, &$device, $snmp_readstring = '',
 	return array_rekey($xformArray, 'oid', 'value');
 }
 
-/*	xform_dot1q_vlan_associations - This function takes an OID, and a device, and
-  optionally an alternate snmp_readstring as input parameters and then walks the
-  OID and returns the data in array[index] = value format.
-*/
+/**
+ * xform_dot1q_vlan_associations - This function takes an OID, and a device, and
+ * optionally an alternate snmp_readstring as input parameters and then walks the
+ * OID and returns the data in array[index] = value format.
+ */
 function xform_dot1q_vlan_associations(&$device, $snmp_readstring = '') {
 	/* get raw index data */
 	if ($snmp_readstring == '') {
@@ -2122,10 +2135,11 @@ function xform_dot1q_vlan_associations(&$device, $snmp_readstring = '') {
 	return array_rekey($output_array, 'key', 'vlan_id');
 }
 
-/*	xform_cisco_workgroup_port_data - This function is specific to Cisco devices that
-  use the last two OID values from each complete OID string to represent the switch
-  card and port.  The function returns data in the format array[card.port] = value.
-*/
+/**
+ * xform_cisco_workgroup_port_data - This function is specific to Cisco devices that
+ * use the last two OID values from each complete OID string to represent the switch
+ * card and port.  The function returns data in the format array[card.port] = value.
+ */
 function xform_cisco_workgroup_port_data($xformOID, &$device) {
 	/* get raw index data */
 	$xformArray = cacti_snmp_walk($device['hostname'], $device['snmp_readstring'],
@@ -2153,11 +2167,12 @@ function xform_cisco_workgroup_port_data($xformOID, &$device) {
 	return array_rekey($xformArray, 'oid', 'value');
 }
 
-/*	xform_indexed_data - This function is similar to other the other xform_* functions
-  in that it takes the end of each OID and uses the last $xformLevel positions as the
-  index.  Therefore, if $xformLevel = 3, the return value would be as follows:
-  array[1.2.3] = value.
-*/
+/**
+ * xform_indexed_data - This function is similar to other the other xform_* functions
+ * in that it takes the end of each OID and uses the last $xformLevel positions as the
+ * index.  Therefore, if $xformLevel = 3, the return value would be as follows:
+ * array[1.2.3] = value.
+ */
 function xform_indexed_data($xformOID, &$device, $xformLevel = 1, $hex = false) {
 	/* get raw index data */
 	$xformArray = cacti_snmp_walk($device['hostname'], $device['snmp_readstring'],
@@ -2201,8 +2216,9 @@ function xform_indexed_data($xformOID, &$device, $xformLevel = 1, $hex = false) 
 	return array_rekey($output_array, 'key', 'value');
 }
 
-/*	db_process_add - This function adds a process to the process table with the entry
-  with the device_id as key.
+/**
+ * db_process_add - This function adds a process to the process table with the entry
+ * with the device_id as key.
 */
 function db_process_add($device_id, $storepid = false) {
     /* store the PID if required */
@@ -2219,18 +2235,20 @@ function db_process_add($device_id, $storepid = false) {
 		array($device_id, $pid));
 }
 
-/*	db_process_remove - This function removes a devices entry from the processes
-  table indicating that the device is done processing and the next device may start.
-*/
+/**
+ * db_process_remove - This function removes a devices entry from the processes
+ * table indicating that the device is done processing and the next device may start.
+ */
 function db_process_remove($device_id) {
 	db_execute_prepared('DELETE FROM mac_track_processes
-		WHERE device_id= ?',
+		WHERE device_id = ?',
 		array($device_id));
 }
 
-/*	db_update_device_status - This function is used by the scanner to save the status
-  of the current device including the number of ports, it's readstring, etc.
-*/
+/**
+ * db_update_device_status - This function is used by the scanner to save the status
+ * of the current device including the number of ports, it's readstring, etc.
+ */
 function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
 	global $debug;
 
@@ -2277,10 +2295,11 @@ function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
 	}
 }
 
-/*	db_store_device_results - This function stores each of the port results into
-  the temporary port results table for future processes once all devices have been
-  scanned.
-*/
+/**
+ * db_store_device_results - This function stores each of the port results into
+ * the temporary port results table for future processes once all devices have been
+ * scanned.
+ */
 function db_store_device_port_results(&$device, $port_array, $scan_date) {
 	global $debug;
 
@@ -2352,8 +2371,9 @@ function db_check_for_ip($mac_address) {
 	return $query;
 }
 
-/*	perform_mactrack_db_maint - This utility removes stale records from the database.
-*/
+/**
+ * perform_mactrack_db_maint - This utility removes stale records from the database.
+ */
 function perform_mactrack_db_maint() {
 	global $database_default;
 

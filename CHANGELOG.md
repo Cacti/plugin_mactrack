@@ -6,6 +6,8 @@
 * issue#248: Cacti process control, terminate dns resolvet when is nothing to do
 * issue#250: Disable automatic MIBs load
 * issue: Uncaught type error in mactrack_view_arp.php for ifName
+* issue: Mactrack does not shutdown properly due to incorrect use of unregister_process
+* issue: Fixing some internationalization (i18n) issues
 * feature#68: Proxy Option for downloading MAC/OUI Database
 * feature#228: Add more MAC address formats
 
