@@ -1078,7 +1078,7 @@ function sig_handler($signo) {
     switch ($signo) {
         case SIGTERM:
         case SIGINT:
-            cacti_log("WARNING: Flowview Listener 'master' is shutting down by signal!", false, 'FLOWVIEW');
+            cacti_log("WARNING: MacTrack Poller 'master' is shutting down by signal!", false, 'MACTRACK');
 
             if (!$force) {
                 unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
