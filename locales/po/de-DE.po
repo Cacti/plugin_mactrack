@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2025-08-17 09:27-0400\n"
-"PO-Revision-Date: 2024-04-20 17:25-0400\n"
-"Last-Translator: The Cacti Group <weblate@cacti.net>\n"
-"Language-Team: German <http://translate.cacti.net/projects/cacti/mactrack/de-DE/>\n"
-"Language: de_DE\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.4.2\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-08-18 14:26+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: German <https://translate.cacti.net/projects/cacti/mactrack/de/>\nLanguage: de-DE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:495 mactrack_view_dot1x.php:622
@@ -2393,34 +2381,32 @@ msgid "dot1x Deta"
 msgstr "dot1x Deta"
 
 #: setup.php:575
-#, fuzzy
 msgid "Internet Proxy Settings"
-msgstr "Basis Einstellungen"
+msgstr "Internet-Proxy-Einstellungen"
 
 #: setup.php:580
-#, fuzzy
 msgid "Internet Proxy Address"
-msgstr "IP Adresse"
+msgstr "Internet-Proxy-Adresse"
 
 #: setup.php:581
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
-msgstr ""
+msgstr "Geben Sie für Cacti-Kerndienste oder Plugins, die Internetzugang benötigen, hier den Proxyserver und den Port im folgenden Format ein: IP:PORT. Zum Beispiel 192.168.1.1:8080."
 
 #: setup.php:588
 msgid "Internet Proxy User"
-msgstr ""
+msgstr "Internet-Proxy-Benutzer"
 
 #: setup.php:589
 msgid "If your Internet Proxy requires a username, enter it here."
-msgstr ""
+msgstr "Wenn Ihr Internet-Proxy einen Benutzernamen erfordert, geben Sie ihn hier ein."
 
 #: setup.php:596
 msgid "Internet Proxy Password"
-msgstr ""
+msgstr "Internet-Proxy-Passwort"
 
 #: setup.php:597
 msgid "If your Internet Proxy requires a password, enter it here."
-msgstr ""
+msgstr "Wenn Ihr Internet-Proxy ein Passwort erfordert, geben Sie es hier ein."
 
 #: setup.php:610
 #, fuzzy
