@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-08-18 14:26+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-08-19 17:26+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:495 mactrack_view_dot1x.php:622
@@ -439,9 +439,8 @@ msgid "Cacti has imported the following items:"
 msgstr ""
 
 #: mactrack_device_types.php:507
-#, fuzzy
 msgid "Import Mactrack Device Types"
-msgstr "მოწყობილობის ტიპები"
+msgstr "Mactrack-ის მოწყობილობის ტიპების შემოტანა"
 
 #: mactrack_device_types.php:510
 msgid "Import Device Types from Local File"
@@ -597,14 +596,12 @@ msgid "Mactrack Device Types [edit: %s]"
 msgstr ""
 
 #: mactrack_device_types.php:862
-#, fuzzy
 msgid "Mactrack Device Types [new]"
-msgstr "მოწყობილობის ტიპები"
+msgstr "Mactrack-ის მოწყობილობის ტიპები [ახალი]"
 
 #: mactrack_device_types.php:936
-#, fuzzy
 msgid "Mactrack Device Type Filters"
-msgstr "მოწყობილობის ტიპები"
+msgstr "Mactrack-ის მოწყობილობის ტიპის ფილტრები"
 
 #: mactrack_device_types.php:951
 msgid "Device Type Description"
@@ -766,9 +763,8 @@ msgid "Click 'Continue' to delete the following Devices"
 msgstr ""
 
 #: mactrack_devices.php:513
-#, fuzzy
 msgid "Import Mactrack Devices"
-msgstr "სულ მოწყობილობები"
+msgstr "Mactrack-ის მოწყობილობების შემოტანა"
 
 #: mactrack_devices.php:516
 msgid "Import Devices from Local File"
@@ -913,7 +909,7 @@ msgstr "ObjectID:"
 
 #: mactrack_devices.php:1034
 msgid "Mactrack Device Filters"
-msgstr ""
+msgstr "Mactrack-ის მოწყობილობის ფილტრები"
 
 #: mactrack_devices.php:1053 mactrack_view_devices.php:267 setup.php:1302
 msgid "Device Name"
@@ -966,9 +962,8 @@ msgid "Last Duration"
 msgstr "ბოლო ხანგრძლივობა"
 
 #: mactrack_devices.php:1122
-#, fuzzy
 msgid "No Mactrack Devices"
-msgstr "სულ მოწყობილობები"
+msgstr "Mactrack-ის მოწყობილობების გარეშე"
 
 #: mactrack_devices.php:1158 mactrack_view_devices.php:429 setup.php:954
 #: setup.php:1087 setup.php:1096 setup.php:1105 setup.php:1320 setup.php:1345
@@ -1089,14 +1084,12 @@ msgid "Mactrack Site [edit: %s]"
 msgstr ""
 
 #: mactrack_sites.php:361
-#, fuzzy
 msgid "Mactrack Site [new]"
-msgstr "MacTrack-ის მორგება"
+msgstr "MacTrack-ის საიტი [ახალი]"
 
 #: mactrack_sites.php:393
-#, fuzzy
 msgid "Mactrack Site Filters"
-msgstr "MacTrack-ის მორგება"
+msgstr "MacTrack-ის საიტის ფილტრები"
 
 #: mactrack_sites.php:433 mactrack_sites.php:513 mactrack_view_devices.php:287
 #: mactrack_view_sites.php:257 mactrack_view_sites.php:357
@@ -1172,9 +1165,8 @@ msgid "SNMP Option Set [new]"
 msgstr ""
 
 #: mactrack_snmp.php:435 mactrack_snmp.php:529 setup.php:638
-#, fuzzy
 msgid "Mactrack SNMP Options"
-msgstr "SNMP-ის მორგება"
+msgstr "Mactrack SNMP-ის მორგება"
 
 #: mactrack_snmp.php:438
 msgid "Item"
@@ -1247,9 +1239,8 @@ msgid "Options"
 msgstr "მორგება"
 
 #: mactrack_utilities.php:167
-#, fuzzy
 msgid "Mactrack Process Status"
-msgstr "მიმდინარე პროცესის სტატუსი"
+msgstr "Mactrack-ის პროცესის სტატუსი"
 
 #: mactrack_utilities.php:187 mactrack_utilities.php:200
 msgid "Refresh"
@@ -1337,7 +1328,7 @@ msgstr "მილიწამი"
 
 #: mactrack_utilities.php:276
 msgid "Running Process Summary"
-msgstr ""
+msgstr "გაშვებული პროცესის შეჯამება"
 
 #: mactrack_utilities.php:278
 msgid "The DNS Resolver is Not Running"
@@ -1412,9 +1403,8 @@ msgid "Process Status Information"
 msgstr "პროცესის სტატუსის ინფორმაცია"
 
 #: mactrack_utilities.php:493 setup.php:862
-#, fuzzy
 msgid "View Mactrack Process Status"
-msgstr "მიმდინარე პროცესის სტატუსი"
+msgstr "Mactrack-ის პროცესის სტატუსის ნახვა"
 
 #: mactrack_utilities.php:496
 msgid "This option will let you show and set process information associated with the Mactrack polling process."
@@ -1647,9 +1637,8 @@ msgid "802.1x Sessions"
 msgstr "802.1x სესიები"
 
 #: mactrack_view_dot1x.php:477
-#, fuzzy
 msgid "No Mactrack 802.1x Sessions Found"
-msgstr "802.1x სესიები"
+msgstr "Mactrack-ის 802.1x სესიები აღმოჩენილი არაა"
 
 #: mactrack_view_dot1x.php:501
 msgid "Dot1x Scan Results"
@@ -2018,7 +2007,6 @@ msgstr "საიტის სკანირების შედეგებ�
 
 #: setup.php:252 setup.php:1013 setup.php:1014 setup.php:1015 setup.php:1016
 #: setup.php:1017 setup.php:1026 setup.php:1028
-#, fuzzy
 msgid "Mactrack"
 msgstr "MacTrack"
 
@@ -2115,9 +2103,8 @@ msgid "Space [ ]"
 msgstr ""
 
 #: setup.php:331
-#, fuzzy
 msgid "Mac Address Output Format"
-msgstr "MAC მისამართი"
+msgstr "MAC მისამართი გამოტანის ფორმატი"
 
 #: setup.php:332
 msgid "Format used for display."
@@ -2242,9 +2229,8 @@ msgid "How often will the MacAuth Reports be Emailed."
 msgstr ""
 
 #: setup.php:462
-#, fuzzy
 msgid "Mactrack ArpWatch Settings"
-msgstr "MacTrack-ის მორგება"
+msgstr "Mactrack ArpWatch-ის მორგება"
 
 #: setup.php:466
 msgid "Enable ArpWatch"
@@ -2304,7 +2290,7 @@ msgstr ""
 
 #: setup.php:543
 msgid "snmpbulkwalk Binary Path"
-msgstr ""
+msgstr "snmpbulkwalk პროგრამის ბილიკი"
 
 #: setup.php:544
 msgid "The path to your snmpbulkwalk binary."
@@ -2363,9 +2349,8 @@ msgid "If your Internet Proxy requires a password, enter it here."
 msgstr ""
 
 #: setup.php:610
-#, fuzzy
 msgid "Mactrack Devices"
-msgstr "სულ მოწყობილობები"
+msgstr "Mactrack-ის მოწყობილობები"
 
 #: setup.php:617 setup.php:652 setup.php:659 setup.php:673 setup.php:701
 #: setup.php:722 setup.php:743
@@ -2377,14 +2362,12 @@ msgid "(Import)"
 msgstr "(შემოტანა)"
 
 #: setup.php:666
-#, fuzzy
 msgid "Mactrack Device Types"
-msgstr "მოწყობილობის ტიპები"
+msgstr "Mactrack-ის მოწყობილობის ტიპები"
 
 #: setup.php:694
-#, fuzzy
 msgid "Mactrack Sites"
-msgstr "MacTrack-ის მორგება"
+msgstr "MacTrack-ის საიტები"
 
 #: setup.php:715
 msgid "Mac Address Tracking Utility"
@@ -2395,48 +2378,40 @@ msgid "Mac Address Authorization Utility"
 msgstr ""
 
 #: setup.php:757
-#, fuzzy
 msgid "Mactrack Vendor Macs"
-msgstr "მომწოდებლის MAC-ები"
+msgstr "Mactrack-ის მომწოდებლის MAC-ები"
 
 #: setup.php:764
-#, fuzzy
 msgid "Mactrack View Macs"
-msgstr "აქტიური MAC-ები"
+msgstr "Mactrack-ის MAC-ების ნახვა"
 
 #: setup.php:778
 msgid "Mactrack Dot1x View"
 msgstr ""
 
 #: setup.php:785
-#, fuzzy
 msgid "Mactrack IP Address Viewer"
-msgstr "MAC მისამართის გამყოფი"
+msgstr "Mactrack-ის IP მისამართის ნახვა"
 
 #: setup.php:792
-#, fuzzy
 msgid "Mactrack View Interfaces"
-msgstr "ინტერფეისების ნახვა"
+msgstr "Mactrack-ის ინტერფეისების ნახვა"
 
 #: setup.php:799
-#, fuzzy
 msgid "Mactrack View Sites"
-msgstr "MacTrack-ის მორგება"
+msgstr "MacTrack-ის საიტების ხედი"
 
 #: setup.php:806
-#, fuzzy
 msgid "Mactrack View IP Ranges"
-msgstr "IP შუალედების ნახვა"
+msgstr "Mactrack IP შუალედების ნახვა"
 
 #: setup.php:813
-#, fuzzy
 msgid "Mactrack View Devices"
-msgstr "მოწყობილობების ნახვა"
+msgstr "Mactrack მოწყობილობების ნახვა"
 
 #: setup.php:820
-#, fuzzy
 msgid "Mactrack Utilities"
-msgstr "ტრეკინგის ხელსაწყოები"
+msgstr "Mactrack-ის პროგრამები"
 
 #: setup.php:841
 msgid "Truncate Port Results Table"
@@ -2577,9 +2552,8 @@ msgid "Mac Watch"
 msgstr "Mac Watch"
 
 #: setup.php:1018 setup.php:1019 setup.php:1020 setup.php:1030
-#, fuzzy
 msgid "Mactrack Tools"
-msgstr "ტრეკინგის ხელსაწყოები"
+msgstr "Mactrack-ის ხელსაწყოები"
 
 #: setup.php:1019
 msgid "Mac Authorizations"
@@ -2635,7 +2609,7 @@ msgstr ""
 
 #: setup.php:1101
 msgid "802.1x Scanning Function"
-msgstr ""
+msgstr "802.1x სკანირების ფუნქცია"
 
 #: setup.php:1102
 msgid "Mactrack scanning function specific to Switches with dot1x enabled."
@@ -2919,7 +2893,7 @@ msgstr "ელემენტის მიმდევრობა."
 
 #: setup.php:1490
 msgid "General Site Settings"
-msgstr ""
+msgstr "საიტის ზოგადი პარამეტრები"
 
 #: setup.php:1495
 msgid "Please enter a reasonable name for this site."
