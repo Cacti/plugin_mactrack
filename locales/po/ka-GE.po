@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-08-19 17:26+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-08-25 12:26+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:495 mactrack_view_dot1x.php:622
@@ -1044,7 +1044,7 @@ msgstr ""
 
 #: mactrack_macwatch.php:302
 msgid "Mactrack MacWatch Filters"
-msgstr ""
+msgstr "Mactrack MacWatch ფილტრები"
 
 #: mactrack_macwatch.php:314
 msgid "Watch Name"
@@ -1120,7 +1120,7 @@ msgstr "მომხმარებლის პორტები სულ"
 
 #: mactrack_sites.php:523 mactrack_view_sites.php:367
 msgid "Total Oper Ports"
-msgstr ""
+msgstr "სულ ოპერაციული პორტები"
 
 #: mactrack_sites.php:528 mactrack_view_sites.php:372
 msgid "Total Trunks"
