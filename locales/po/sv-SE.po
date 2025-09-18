@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-09-18 15:33+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-09-18 16:07+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:495 mactrack_view_dot1x.php:622
@@ -42,9 +42,8 @@ msgid "Authorization Failed"
 msgstr "Auktorisering misslyckades"
 
 #: lib/mactrack_functions.php:2500
-#, fuzzy
 msgid "Mactrack Device Tracking OUI Database Import Results"
-msgstr "Enhetsspårning av OUI-databasimportresultat"
+msgstr "Mactrack Device Tracking OUI Database Importresultat"
 
 #: lib/mactrack_functions.php:2501
 msgid "Getting OUI Database from IEEE"
@@ -338,24 +337,21 @@ msgid "SubType"
 msgstr "SubType"
 
 #: mactrack_actions.php:221
-#, fuzzy, php-format
+#, php-format
 msgid "Mactrack Device: (%s) successfully updated"
-msgstr "Enhetsspårningsenhet: ( %s) uppdaterad"
+msgstr "Mactrack Device: (%s) framgångsrikt uppdaterad"
 
 #: mactrack_actions.php:234
-#, fuzzy
 msgid "Import into Mactrack Database"
-msgstr "Importera till Enhetsspårningsdatabas"
+msgstr "Importera till Mactrack-databasen"
 
 #: mactrack_actions.php:247
-#, fuzzy
 msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
-msgstr "Klicka på \"Fortsätt\" för att importera följande enhet till enhetsspårning? Ange ytterligare alternativ för Enhetsspårningsenhet enligt nedan."
+msgstr "Klicka på \"Fortsätt\" för att importera följande enhet till Mactrack?  Vänligen ange ytterligare Mactrack Device-alternativ enligt nedan."
 
 #: mactrack_actions.php:271
-#, fuzzy
 msgid "We will use these devices SNMP options for the Mactrack Device as well."
-msgstr "Vi använder dessa enheter SNMP-alternativ för enhetens enhet för enhetens spårning."
+msgstr "Vi kommer att använda dessa enheters SNMP-alternativ även för Mactrack-enheten."
 
 #: mactrack_device_types.php:38
 msgid "Not Applicable - Router"
@@ -443,9 +439,8 @@ msgid "Cacti has imported the following items:"
 msgstr "Cacti har importerat följande:"
 
 #: mactrack_device_types.php:507
-#, fuzzy
 msgid "Import Mactrack Device Types"
-msgstr "Importera enhetens spårningsenhetstyper"
+msgstr "Importera Mactrack-enhetstyper"
 
 #: mactrack_device_types.php:510
 msgid "Import Device Types from Local File"
@@ -548,9 +543,8 @@ msgid "3 - Router"
 msgstr "3 - Router"
 
 #: mactrack_device_types.php:557
-#, fuzzy
 msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
-msgstr "Apparatets enhetstyp bestäms genom att skanna det är snmp-agenten för sysObjectID och sysDescription och jämföra det med värden i enhetstypdatabasen. Den första matchningen som finns i databasen använder direkt Enhetsspårning om hur man skannar den. Därför är det mycket viktigt att du väljer giltig sysObjectID_match, sysDescr_match och scanningsfunktion för dina enheter."
+msgstr "Enhetens enhetstyp bestäms genom att skanna dess snmp-agent efter sysObjectID och sysDescription och jämföra dem med värden i databasen för enhetstyper.  Den första matchningen som hittas i databasen används för att bestämma hur den ska skannas.  Därför är det mycket viktigt att du väljer giltig sysObjectID_match, sysDescr_match och skanningsfunktion för dina enheter."
 
 #: mactrack_device_types.php:574 mactrack_device_types.php:1090
 #: mactrack_devices.php:1187 setup.php:931
@@ -597,19 +591,17 @@ msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr
 msgstr "INSERT SKIPPED, EXISTING: Leverantör: %s, Beskrivning: %s, Typ: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php:860
-#, fuzzy, php-format
+#, php-format
 msgid "Mactrack Device Types [edit: %s]"
-msgstr "Enhetsspårningsenhetstyper [redigera: %s]"
+msgstr "Mactrack enhetstyper [redigera: %s]"
 
 #: mactrack_device_types.php:862
-#, fuzzy
 msgid "Mactrack Device Types [new]"
-msgstr "Enhetsspårningsenhetstyper [ny]"
+msgstr "Mactrack-enhetstyper [ny]"
 
 #: mactrack_device_types.php:936
-#, fuzzy
 msgid "Mactrack Device Type Filters"
-msgstr "Device Tracking Device Type Filters"
+msgstr "Mactrack Filter för enhetstyp"
 
 #: mactrack_device_types.php:951
 msgid "Device Type Description"
@@ -656,9 +648,8 @@ msgid "Yes"
 msgstr "Ja"
 
 #: mactrack_device_types.php:1007
-#, fuzzy
 msgid "No Mactrack Device Types Found"
-msgstr "Inga enheter för enhetsspårningsenheter hittades"
+msgstr "Inga Mactrack-enhetstyper hittades"
 
 #: mactrack_device_types.php:1053
 msgid "Submit Query"
@@ -764,18 +755,16 @@ msgid "Click 'Continue' to connect the following devices to their respective Cac
 msgstr "Klicka på \"Fortsätt\" för att ansluta följande enheter till respektive Cacti Device. Relationen kommer att byggas på lika värdnamn. Beskrivning kommer också att uppdateras."
 
 #: mactrack_devices.php:346
-#, fuzzy
 msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
-msgstr "Klicka på \"Fortsätt\" för att kopiera SNMP-inställningar från den anslutna Cacti-enheten till Enhetsspårningsenheten. Alla enheter som inte är anslutna kommer tyst att hoppa över. SNMP-retries kommer att tas från Ping Retries."
+msgstr "Klicka på \"Fortsätt\" för att kopiera SNMP-inställningar från ansluten Cacti-enhet till Mactrack-enhet.  Alla enheter som inte är anslutna hoppas över i tysthet. SNMP-försök kommer att tas från Ping-försök."
 
 #: mactrack_devices.php:353
 msgid "Click 'Continue' to delete the following Devices"
 msgstr "Klicka på \"Fortsätt\" för att radera följande enheter"
 
 #: mactrack_devices.php:513
-#, fuzzy
 msgid "Import Mactrack Devices"
-msgstr "Importera enhetens spårningsenheter"
+msgstr "Importera Mactrack-enheter"
 
 #: mactrack_devices.php:516
 msgid "Import Devices from Local File"
@@ -786,9 +775,8 @@ msgid "Please specify the location of the CSV file containing your device inform
 msgstr "Ange platsen för CSV-filen som innehåller din enhetinformation."
 
 #: mactrack_devices.php:538
-#, fuzzy
 msgid " - The SiteID known to Mactrack for this device"
-msgstr " - SiteID känt för Enhetsspårning för den här enheten"
+msgstr " - Det SiteID som Mactrack känner till för den här enheten"
 
 #: mactrack_devices.php:539
 msgid " - A simple name for the device.  For example Cisco 6509 Switch"
@@ -891,14 +879,13 @@ msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP 
 msgstr "INSERT SKIPPED, EXISTING: SiteID: %s, Enhetsnamn: %s, Värdnamn %s, SNMP-port: %s"
 
 #: mactrack_devices.php:858
-#, fuzzy, php-format
+#, php-format
 msgid "Mactrack Devices [edit: %s]"
-msgstr "Enhetsspårningsenheter [redigera: %s]"
+msgstr "Mactrack Devices [redigera: %s]"
 
 #: mactrack_devices.php:862
-#, fuzzy
 msgid "Mactrack Devices [new]"
-msgstr "Enhetsspårningsenheter [ny]"
+msgstr "Mactrack Devices [ny]"
 
 #: mactrack_devices.php:875
 msgid "SNMP Information"
@@ -921,9 +908,8 @@ msgid "ObjectID:"
 msgstr "ObjectId:"
 
 #: mactrack_devices.php:1034
-#, fuzzy
 msgid "Mactrack Device Filters"
-msgstr "Device Tracking Device Filters"
+msgstr "Filter för Mactrack-enheter"
 
 #: mactrack_devices.php:1053 mactrack_view_devices.php:267 setup.php:1302
 msgid "Device Name"
@@ -976,9 +962,8 @@ msgid "Last Duration"
 msgstr "Senaste varaktighet"
 
 #: mactrack_devices.php:1122
-#, fuzzy
 msgid "No Mactrack Devices"
-msgstr "Inga enheter för spårning av enheter"
+msgstr "Inga Mactrack-enheter"
 
 #: mactrack_devices.php:1158 mactrack_view_devices.php:429 setup.php:954
 #: setup.php:1087 setup.php:1096 setup.php:1105 setup.php:1320 setup.php:1345
@@ -1003,19 +988,17 @@ msgid "Click 'Continue' to delete the following Authorized Mac's?"
 msgstr "Klicka på \"Fortsätt\" för att radera följande behöriga Mac: s?"
 
 #: mactrack_macauth.php:251
-#, fuzzy, php-format
+#, php-format
 msgid "Mactrack MacAuth [edit: %s]"
-msgstr "Enhetsspårning MacAuth [redigera: %s]"
+msgstr "Mactrack MacAuth [redigera: %s]"
 
 #: mactrack_macauth.php:253
-#, fuzzy
 msgid "Mactrack MacAuth [new]"
-msgstr "Enhetsspårning MacAuth [ny]"
+msgstr "Mactrack MacAuth [ny]"
 
 #: mactrack_macauth.php:315
-#, fuzzy
 msgid "Mactrack MacAuth Filters"
-msgstr "Enhetsspårning av MacAuth-filter"
+msgstr "Mactrack MacAuth-filter"
 
 #: mactrack_macauth.php:328 mactrack_macwatch.php:318
 msgid "Mac Address"
@@ -1051,19 +1034,17 @@ msgid "Click 'Continue' to delete the following watched Mac's?"
 msgstr "Klicka på \"Fortsätt\" för att radera följande Mac-ser?"
 
 #: mactrack_macwatch.php:238
-#, fuzzy, php-format
+#, php-format
 msgid "Mactrack MacWatch [edit: %s]"
-msgstr "Enhetsspårning MacWatch [redigera: %s]"
+msgstr "Mactrack MacWatch [redigera: %s]"
 
 #: mactrack_macwatch.php:240
-#, fuzzy
 msgid "Mactrack MacWatch [new]"
-msgstr "Enhetsspårning MacWatch [ny]"
+msgstr "Mactrack MacWatch [ny]"
 
 #: mactrack_macwatch.php:302
-#, fuzzy
 msgid "Mactrack MacWatch Filters"
-msgstr "Enhetsspårning av MacWatch-filter"
+msgstr "Mactrack MacWatch-filter"
 
 #: mactrack_macwatch.php:314
 msgid "Watch Name"
@@ -1086,9 +1067,8 @@ msgid "Watches"
 msgstr "Klockor"
 
 #: mactrack_macwatch.php:362
-#, fuzzy
 msgid "No Mactrack Watched Macs Found"
-msgstr "Det gick inte att hitta enhetsspårning på Mac-datorer"
+msgstr "Inga Mac-datorer som övervakats av Mactrack hittades"
 
 #: mactrack_sites.php:140
 msgid "Click 'Continue' to delete the following Site(s)?"
@@ -1099,19 +1079,17 @@ msgid "You must select at least one site."
 msgstr "Du måste välja minst en plats."
 
 #: mactrack_sites.php:359
-#, fuzzy, php-format
+#, php-format
 msgid "Mactrack Site [edit: %s]"
-msgstr "Enhetsspårningsplats [redigera: %s]"
+msgstr "Mactrack-webbplats [redigera: %s]"
 
 #: mactrack_sites.php:361
-#, fuzzy
 msgid "Mactrack Site [new]"
-msgstr "Enhetsspårningsplats [ny]"
+msgstr "Mactrack Site [ny]"
 
 #: mactrack_sites.php:393
-#, fuzzy
 msgid "Mactrack Site Filters"
-msgstr "Device Tracking Site Filters"
+msgstr "Filter för Mactrack-anläggningar"
 
 #: mactrack_sites.php:433 mactrack_sites.php:513 mactrack_view_devices.php:287
 #: mactrack_view_sites.php:257 mactrack_view_sites.php:357
@@ -1187,9 +1165,8 @@ msgid "SNMP Option Set [new]"
 msgstr "SNMP Option Set [ny]"
 
 #: mactrack_snmp.php:435 mactrack_snmp.php:529 setup.php:638
-#, fuzzy
 msgid "Mactrack SNMP Options"
-msgstr "Enhet som spårar SNMP-alternativ"
+msgstr "Mactrack SNMP-alternativ"
 
 #: mactrack_snmp.php:438
 msgid "Item"
@@ -1201,7 +1178,7 @@ msgstr "Version"
 
 #: mactrack_snmp.php:440 setup.php:498
 msgid "Community"
-msgstr "Gemenskaphet"
+msgstr "Gemenskap"
 
 #: mactrack_snmp.php:441 setup.php:513
 msgid "Port"
@@ -1262,9 +1239,8 @@ msgid "Options"
 msgstr "Alternativ"
 
 #: mactrack_utilities.php:167
-#, fuzzy
 msgid "Mactrack Process Status"
-msgstr "Enhetsspårningsprocessstatus"
+msgstr "Status för Mactrack-processen"
 
 #: mactrack_utilities.php:187 mactrack_utilities.php:200
 msgid "Refresh"
@@ -1275,9 +1251,8 @@ msgid "Current Process Status"
 msgstr "Aktuell processstatus"
 
 #: mactrack_utilities.php:240
-#, fuzzy
 msgid "The Mactrack Poller is:"
-msgstr "Device Tracking Poller är:"
+msgstr "Mactrack Poller är det:"
 
 #: mactrack_utilities.php:243
 msgid "Running Processes:"
@@ -1389,9 +1364,8 @@ msgid "Are you sure you want to delete all the Port to MAC to IP results from th
 msgstr "Är du säker på att du vill radera all port till MAC till IP-resultat från systemet?"
 
 #: mactrack_utilities.php:396 mactrack_utilities.php:419
-#, fuzzy
 msgid "Mactrack Database Results"
-msgstr "Enhetsspårningsdatabasresultat"
+msgstr "Resultat från Mactrack-databasen"
 
 #: mactrack_utilities.php:397 mactrack_utilities.php:467
 #, php-format
@@ -1417,28 +1391,24 @@ msgid "The following number of records have been removed from the aggergated tab
 msgstr "Följande antal poster har tagits bort från det aggregerade tabellen: %s. Och %s poster läggs till."
 
 #: mactrack_utilities.php:477
-#, fuzzy
 msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
-msgstr "Enhetsspårningsfunktionerna har rensats. De kommer att återskapas när du antingen redigerar en enhet eller enhets typ."
+msgstr "Mactracks skanningsfunktioner har rensats bort.  De kommer att återskapas när du antingen redigerar en enhet eller en enhetstyp."
 
 #: mactrack_utilities.php:482
-#, fuzzy
 msgid "Cacti Mactrack System Utilities"
-msgstr "Cacti Device Tracking System Utilities"
+msgstr "Cactis systemverktyg Mactrack"
 
 #: mactrack_utilities.php:484
 msgid "Process Status Information"
 msgstr "Processstatusinformation"
 
 #: mactrack_utilities.php:493 setup.php:862
-#, fuzzy
 msgid "View Mactrack Process Status"
-msgstr "Visa status för enhetsspårningsprocess"
+msgstr "Visa status för Mactrack-processen"
 
 #: mactrack_utilities.php:496
-#, fuzzy
 msgid "This option will let you show and set process information associated with the Mactrack polling process."
-msgstr "Med det här alternativet får du visa och ställa in processinformation som är kopplad till pollningsprocessen för Enhetsspårning."
+msgstr "Med det här alternativet kan du visa och ställa in processinformation som är kopplad till Mactracks pollingprocess."
 
 #: mactrack_utilities.php:500
 msgid "Database Administration"
@@ -1465,9 +1435,8 @@ msgid "Refresh Scanning Functions"
 msgstr "Uppdatera skanningsfunktioner"
 
 #: mactrack_utilities.php:525
-#, fuzzy
 msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
-msgstr "Tar bort gamla och eventuellt vanliga Skanningsfunktioner för Enhetsspårning från den nedrullning du får när du redigerar en enhetstyp."
+msgstr "Tar bort gamla och potentiellt inaktuella Mactrack-skanningsfunktioner från rullgardinsmenyn som du får när du redigerar en enhetstyp."
 
 #: mactrack_utilities.php:531
 msgid "Remove All Scan Results"
@@ -1498,9 +1467,8 @@ msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to
 msgstr "Raderar alla <strong>Aggregerad</strong> (Ej Scan Resultat) Port till MAC till IP-föreningar från databasen och deras återskapas baserat på <strong>alla scaned data</strong> nu."
 
 #: mactrack_vendormacs.php:139
-#, fuzzy
 msgid "Mactrack Vendor Mac Filter"
-msgstr "Enhetsspårningsleverantör Mac-filter"
+msgstr "Mactrack leverantör Mac-filter"
 
 #: mactrack_vendormacs.php:153
 msgid "Vendor MAC"
@@ -1519,14 +1487,12 @@ msgid "Vendor Macs"
 msgstr "Säljare Macs"
 
 #: mactrack_vendormacs.php:179
-#, fuzzy
 msgid "No Mactrack Vendor MACS Found"
-msgstr "Ingen Device Tracking-leverantör MACS hittades"
+msgstr "Ingen Mactrack-leverantör MACS hittades"
 
 #: mactrack_view_arp.php:30
-#, fuzzy
 msgid "Mactrack - ARP/IP View"
-msgstr "Enhetsspårning - ARP / IP-visning"
+msgstr "Mactrack - ARP/IP-visning"
 
 #: mactrack_view_arp.php:325 mactrack_view_dot1x.php:412
 #: mactrack_view_dot1x.php:426 mactrack_view_macs.php:702
@@ -1588,9 +1554,8 @@ msgid "You must first choose a Site, Device or other search criteria."
 msgstr "Du måste först välja en plats, enhet eller andra sökkriterier."
 
 #: mactrack_view_arp.php:414
-#, fuzzy
 msgid "No Mactrack IP Results Found"
-msgstr "Inga IP-resultat hittades för enhetsspårning"
+msgstr "Inga Mactrack IP-resultat hittades"
 
 #: mactrack_view_arp.php:458 mactrack_view_dot1x.php:542
 #: mactrack_view_interfaces.php:582 mactrack_view_macs.php:1096
@@ -1622,9 +1587,8 @@ msgid "MAC"
 msgstr "MAC"
 
 #: mactrack_view_devices.php:30
-#, fuzzy
 msgid "Mactrack - Device Report View"
-msgstr "Enhetsspårning - Enhetsrapportering"
+msgstr "Mactrack - visning av enhetsrapport"
 
 #: mactrack_view_devices.php:157
 msgid "Unknown Device Type"
@@ -1652,18 +1616,16 @@ msgid "View MAC Addresses"
 msgstr "MAC-adresser"
 
 #: mactrack_view_devices.php:397
-#, fuzzy
 msgid "No Mactrack Devices Found"
-msgstr "Inga enheter för enhetsspårning hittades"
+msgstr "Inga Mactrack-enheter hittades"
 
 #: mactrack_view_devices.php:457
 msgid "Hub/Switch"
 msgstr "Nav / Byt"
 
 #: mactrack_view_dot1x.php:31
-#, fuzzy
 msgid "Mactrack - 802.1x View"
-msgstr "Enhetsspårning - 802.1x View"
+msgstr "Mactrack - 802.1x vy"
 
 #: mactrack_view_dot1x.php:419 mactrack_view_dot1x.php:432
 #: mactrack_view_dot1x.php:676
@@ -1675,9 +1637,8 @@ msgid "802.1x Sessions"
 msgstr "802.1x sessioner"
 
 #: mactrack_view_dot1x.php:477
-#, fuzzy
 msgid "No Mactrack 802.1x Sessions Found"
-msgstr "Ingen enhetsspårning hittades 802.1x sessioner"
+msgstr "Inga Mactrack 802.1x-sessioner hittades"
 
 #: mactrack_view_dot1x.php:501
 msgid "Dot1x Scan Results"
@@ -1708,23 +1669,20 @@ msgid "Portname"
 msgstr "Port"
 
 #: mactrack_view_graphs.php:32
-#, fuzzy
 msgid "Mactrack - Monitored Device Graph View"
-msgstr "Enhetsspårning - Övervakad enhetens grafvy"
+msgstr "Mactrack - Grafvy för övervakad enhet"
 
 #: mactrack_view_graphs.php:70
 msgid "Custom Graph List Applied - Filtering from List"
 msgstr "Anpassad graflista tillämpad - Filtrering från lista"
 
 #: mactrack_view_interfaces.php:30
-#, fuzzy
 msgid "Mactrack - Network Interfaces View"
-msgstr "Enhetsspårning - Visa nätverksgränssnitt"
+msgstr "Mactrack - vy över nätverksgränssnitt"
 
 #: mactrack_view_interfaces.php:324
-#, fuzzy
 msgid "No Mactrack Interfaces Found"
-msgstr "Inga Device Tracking-gränssnitt hittades"
+msgstr "Inga Mactrack-gränssnitt hittades"
 
 #: mactrack_view_interfaces.php:337
 msgid "Interface Up"
@@ -1894,9 +1852,8 @@ msgid "Show Totals"
 msgstr "Visa Totals"
 
 #: mactrack_view_ips.php:30
-#, fuzzy
 msgid "Mactrack - Site IP Range Report View"
-msgstr "Enhetsspårning - Rapport för rapportintervaller för webbsidor"
+msgstr "Mactrack - Visning av rapport om IP-sortiment på plats"
 
 #: mactrack_view_ips.php:202
 msgid "IP Range"
@@ -1932,14 +1889,12 @@ msgid "View IP Addresses"
 msgstr "Nuvarande IP-adresser"
 
 #: mactrack_view_ips.php:277
-#, fuzzy
 msgid "No Mactrack Site IP Ranges Found"
-msgstr "Inga IP-spår för enhetsspårningssite hittades"
+msgstr "Inga IP-områden för Mactrack-platsen hittades"
 
 #: mactrack_view_macs.php:30
-#, fuzzy
 msgid "Mactrack - MAC to IP Report View"
-msgstr "Enhetsspårning - MAC till IP Rapportvy"
+msgstr "Mactrack - MAC till IP-rapportvy"
 
 #: mactrack_view_macs.php:33
 msgid "Authorize"
@@ -2015,9 +1970,8 @@ msgid "You must choose a Site, Device or other search criteria."
 msgstr "Du måste välja en plats, enhet eller andra sökkriterier."
 
 #: mactrack_view_macs.php:837 mactrack_view_macs.php:1045
-#, fuzzy
 msgid "No Mactrack Port Results Found"
-msgstr "Inga felsökningsportresultat hittades"
+msgstr "Inga resultat för Mactrack Port hittades"
 
 #: mactrack_view_macs.php:967
 msgid "Count"
@@ -2028,9 +1982,8 @@ msgid "Aggregated"
 msgstr "Aggregerad"
 
 #: mactrack_view_sites.php:30
-#, fuzzy
 msgid "Mactrack - Site Report View"
-msgstr "Enhetsspårning - Platsrapport"
+msgstr "Mactrack - Visning av webbplatsrapport"
 
 #: mactrack_view_sites.php:297
 msgid "Rescan Site"
@@ -2130,9 +2083,8 @@ msgid "Switch Level Ignore Ports Delimiter"
 msgstr "Switch Level Ignorera Ports Delimiter"
 
 #: setup.php:320
-#, fuzzy
 msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
-msgstr "Vilken avgränsare ska Device Tracking använda när man analyserar strängen Ignorera portar för varje strömbrytare."
+msgstr "Vilken avgränsare ska Mactrack använda när strängen Ignore Ports analyseras för varje switch."
 
 #: setup.php:324
 msgid "Auto Detect"
@@ -2151,13 +2103,12 @@ msgid "Space [ ]"
 msgstr "Rymden [ ]"
 
 #: setup.php:331
-#, fuzzy
 msgid "Mac Address Output Format"
-msgstr "Verktyg för Mac-adressbehörighet"
+msgstr "Mac-adress Utmatningsformat"
 
 #: setup.php:332
 msgid "Format used for display."
-msgstr ""
+msgstr "Format som används för visning."
 
 #: setup.php:345 setup.php:1372
 msgid "Ports to Ignore"
@@ -2190,9 +2141,8 @@ msgid "Perform Reverse DNS Name Resolution"
 msgstr "Utför omvänd DNS-namnupplösning"
 
 #: setup.php:376
-#, fuzzy
 msgid "Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
-msgstr "Ska Device Tracking utföra omvänd DNS-sökning av IP-adresserna som är associerade med portar. FÖRSIKTIGHET: Om DNS inte är korrekt inställd, kommer det att sakta ner skanningstiden avsevärt."
+msgstr "Ska Mactrack utföra omvänd DNS-uppslagning av IP-adresserna som är associerade med portar. OBSERVERA: Om DNS inte är korrekt konfigurerad kommer detta att göra skanningstiden betydligt långsammare."
 
 #: setup.php:381
 msgid "Primary DNS IP Address"
@@ -2215,18 +2165,16 @@ msgid "DNS Timeout"
 msgstr "DNS Timeout"
 
 #: setup.php:398
-#, fuzzy
 msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
-msgstr "Ange DNS-timeout i millisekunder. Enhetsspårning använder en PHP-baserad DNS-resolver."
+msgstr "Ange DNS-timeout i millisekunder. Mactrack använder en PHP-baserad DNS-resolver."
 
 #: setup.php:405
 msgid "DNS Prime Interval"
 msgstr "DNS Prime Interval"
 
 #: setup.php:406
-#, fuzzy
 msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
-msgstr "Hur ofta, i sekunder gör att Enhetsspårnings-skanning IP måste lösas till MAC-adresser för DNS-upplösning. Att använda ett större antal när du har flera tusen enheter ökar prestandan."
+msgstr "Hur ofta, i sekunder, behöver IP:er för Mactrack-skanning omvandlas till MAC-adresser för DNS-upplösning.  Om du använder ett större tal när du har flera tusen enheter ökar prestandan."
 
 #: setup.php:413
 msgid "Notification Settings"
@@ -2237,18 +2185,16 @@ msgid "Source Address"
 msgstr "Käll adress"
 
 #: setup.php:418
-#, fuzzy
 msgid "The source Email address for Mactrack Emails."
-msgstr "Källan E-postadress för Device Tracking Emails."
+msgstr "E-postadressen för Mactracks e-postmeddelanden."
 
 #: setup.php:425
 msgid "Source Email Name"
 msgstr "Källa E-postnamn"
 
 #: setup.php:426
-#, fuzzy
 msgid "The Source Email name for Mactrack Emails."
-msgstr "Källans E-postnamn för Device Tracking Emails."
+msgstr "Källans e-postnamn för Mactrack-e-postmeddelanden."
 
 #: setup.php:428
 msgid "MACTrack Administrator"
@@ -2259,9 +2205,8 @@ msgid "MacWatch Default Body"
 msgstr "MacWatch Standard Body"
 
 #: setup.php:434 setup.php:1592
-#, fuzzy
 msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
-msgstr "E-postkroppen förinställd för Device Tracking MacWatch-e-post. Kroppen kan innehålla alla giltiga HTML-taggar. Den stöder också ersättningstaggar som behandlas när du skickar en e-postadress. Giltiga taggar inkluderar <IP> , <MAC> , <TICKET> , <SITENAME> , <DEVICEIP> , <PORTNAME> , <PORTNUMBER> , <DEVICENAME> ."
+msgstr "Förinställd e-posttext för Mactrack MacWatch-e-postmeddelanden.  Texten kan innehålla alla giltiga html-taggar.  Den stöder också ersättningstaggar som kommer att behandlas när du skickar ett e-postmeddelande.  Giltiga taggar inkluderar <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
 
 #: setup.php:438 setup.php:1596
 msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
@@ -2284,18 +2229,16 @@ msgid "How often will the MacAuth Reports be Emailed."
 msgstr "Hur ofta kommer MacAuth-rapporterna att skickas."
 
 #: setup.php:462
-#, fuzzy
 msgid "Mactrack ArpWatch Settings"
-msgstr "Enhetsspårning ArpWatch-inställningar"
+msgstr "Mactrack ArpKlockinställningar"
 
 #: setup.php:466
 msgid "Enable ArpWatch"
 msgstr "Aktivera ArpWatch"
 
 #: setup.php:467
-#, fuzzy
 msgid "Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
-msgstr "Ska Device Tracking också använda ArpWatch-data för att komplettera Mac till IP / DNS-upplösning?"
+msgstr "Bör Mactrack också använda ArpWatch-data för att komplettera Mac till IP/DNS-upplösning?"
 
 #: setup.php:472
 msgid "ArpWatch Database Path"
@@ -2314,9 +2257,8 @@ msgid "Update Policy for SNMP Options"
 msgstr "Uppdateringspolicy för SNMP-alternativ"
 
 #: setup.php:485
-#, fuzzy
 msgid "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices."
-msgstr "Policy för synkronisering av SNMP-alternativ mellan Cacti-enheter och Device Tracking Devices."
+msgstr "Policy för synkronisering av SNMP-alternativ mellan Cacti-enheter och Mactrack-enheter."
 
 #: setup.php:492
 msgid "Default SNMP version for all new hosts."
@@ -2328,7 +2270,7 @@ msgstr "Standard SNMP läs community för alla nya värdar."
 
 #: setup.php:506
 msgid "Communities"
-msgstr "Communities"
+msgstr "Gemenskaper"
 
 #: setup.php:507
 msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
@@ -2407,9 +2349,8 @@ msgid "If your Internet Proxy requires a password, enter it here."
 msgstr "Om din Internet Proxy kräver ett lösenord, ange det här."
 
 #: setup.php:610
-#, fuzzy
 msgid "Mactrack Devices"
-msgstr "Totala enheter"
+msgstr "Mactrack-enheter"
 
 #: setup.php:617 setup.php:652 setup.php:659 setup.php:673 setup.php:701
 #: setup.php:722 setup.php:743
@@ -2421,9 +2362,8 @@ msgid "(Import)"
 msgstr "Importera"
 
 #: setup.php:666
-#, fuzzy
 msgid "Mactrack Device Types"
-msgstr "Enhetsspårningsenhetstyper"
+msgstr "Typer av Mactrack-enheter"
 
 #: setup.php:694
 msgid "Mactrack Sites"
@@ -2438,49 +2378,40 @@ msgid "Mac Address Authorization Utility"
 msgstr "Verktyg för Mac-adressbehörighet"
 
 #: setup.php:757
-#, fuzzy
 msgid "Mactrack Vendor Macs"
-msgstr "Enhetsspårningsleverantörer Macs"
+msgstr "Mactrack Säljare Mac-datorer"
 
 #: setup.php:764
-#, fuzzy
 msgid "Mactrack View Macs"
-msgstr "Enhetsspårning Visa Macar"
+msgstr "Mactrack View Mac-datorer"
 
 #: setup.php:778
-#, fuzzy
 msgid "Mactrack Dot1x View"
-msgstr "Enhetsspårning Dot1x View"
+msgstr "Mactrack Dot1x Visa"
 
 #: setup.php:785
-#, fuzzy
 msgid "Mactrack IP Address Viewer"
-msgstr "Enhetsspårning av IP-adressvisare"
+msgstr "Mactrack IP-adressvisare"
 
 #: setup.php:792
-#, fuzzy
 msgid "Mactrack View Interfaces"
-msgstr "Visa gränssnitt"
+msgstr "Gränssnitt för Mactrack View"
 
 #: setup.php:799
-#, fuzzy
 msgid "Mactrack View Sites"
-msgstr "Enhetsspårning Visa platser"
+msgstr "Mactrack Visa platser"
 
 #: setup.php:806
-#, fuzzy
 msgid "Mactrack View IP Ranges"
-msgstr "IP-områden"
+msgstr "Mactrack ser IP-sortiment"
 
 #: setup.php:813
-#, fuzzy
 msgid "Mactrack View Devices"
-msgstr "Enhetsspårning Visa enheter"
+msgstr "Mactrack Visa enheter"
 
 #: setup.php:820
-#, fuzzy
 msgid "Mactrack Utilities"
-msgstr "Spårningsverktyg"
+msgstr "Mactrack Verktyg"
 
 #: setup.php:841
 msgid "Truncate Port Results Table"
@@ -2499,9 +2430,8 @@ msgid "Refresh/Update Vendor MAC Database from IEEE"
 msgstr "Uppdatera / uppdatera leverantör MAC databas från IEEE"
 
 #: setup.php:876 setup.php:883
-#, fuzzy
 msgid "Mactrack Graph Viewer"
-msgstr "Enhetsspårning Graph Viewer"
+msgstr "Mactrack grafvisare"
 
 #: setup.php:903 setup.php:905
 msgid "MacTrack"
@@ -2554,14 +2484,12 @@ msgid "Full"
 msgstr "Full"
 
 #: setup.php:955
-#, fuzzy
 msgid "Sync Cacti Device to Mactrack Device"
-msgstr "Sync Cacti Device till Device Tracking Device"
+msgstr "Synkronisera Cacti-enhet med Mactrack-enhet"
 
 #: setup.php:956
-#, fuzzy
 msgid "Sync Mactrack Device to Cacti Device"
-msgstr "Synkroniser Enhetsspårningsenhet till Cacti Device"
+msgstr "Synkronisera Mactrack-enhet till Cacti-enhet"
 
 #: setup.php:974 setup.php:975 setup.php:976 setup.php:977 setup.php:978
 #, php-format
@@ -2624,9 +2552,8 @@ msgid "Mac Watch"
 msgstr "Mac Watch"
 
 #: setup.php:1018 setup.php:1019 setup.php:1020 setup.php:1030
-#, fuzzy
 msgid "Mactrack Tools"
-msgstr "Spårningsverktyg"
+msgstr "Mactrack Verktyg"
 
 #: setup.php:1019
 msgid "Mac Authorizations"
@@ -2657,9 +2584,8 @@ msgid "System Description Match"
 msgstr "Systembeskrivning Match"
 
 #: setup.php:1070 setup.php:1077
-#, fuzzy
 msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
-msgstr "Ange nyckelinformation för att hjälpa Enhetsspårning upptäcka typen av enhet. Wildcard-tecknet är \"%\" -tecknet."
+msgstr "Ange nyckelinformation som hjälper Mactrack att upptäcka enhetstypen.  Jokertecknet är tecknet \"*\"."
 
 #: setup.php:1076
 msgid "Vendor SNMP Object ID Match"
@@ -2670,36 +2596,32 @@ msgid "MAC Address Scanning Function"
 msgstr "MAC-adressskanning Funktion"
 
 #: setup.php:1084
-#, fuzzy
 msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
-msgstr "Funktionen Enhetsspårningsfunktion för att ringa för att få och lagra portdetaljer. Funktionsnamnet är allt som krävs. Följande fyra parametrar antas och kommer alltid att läggas till: &#39;my_function ($ site, &amp; $ device, $ lowport, $ highport)&#39;. Det finns ingen funktion som krävs för en ren router."
+msgstr "Mactracks skanningsfunktion som ska anropas för att hämta och lagra portinformation.  Funktionsnamnet är allt som krävs.  Följande fyra parametrar förutsätts och kommer alltid att läggas till: \"my_function($site, &$device, $lowport, $highport)\".  Det krävs ingen funktion för en ren router."
 
 #: setup.php:1092
 msgid "IP Address Scanning Function"
 msgstr "IP-adressskanning Funktion"
 
 #: setup.php:1093
-#, fuzzy
 msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
-msgstr "Enhetsspårningsfunktionen som är specifik för Layer3-enheter som spårar IP-adresser."
+msgstr "Mactracks skanningsfunktion som är specifik för Layer3-enheter som spårar IP-adresser."
 
 #: setup.php:1101
 msgid "802.1x Scanning Function"
 msgstr "802.1x Skanning Funktion"
 
 #: setup.php:1102
-#, fuzzy
 msgid "Mactrack scanning function specific to Switches with dot1x enabled."
-msgstr "Enhetsspårningsfunktionen som är specifik för växlar med dot1x aktiverad."
+msgstr "Mactrack-skanningsfunktion som är specifik för switchar med dot1x aktiverat."
 
 #: setup.php:1110
 msgid "Serial Number Base OID"
 msgstr "Serienummerbas OID"
 
 #: setup.php:1111
-#, fuzzy
 msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
-msgstr "SNMP OID användes för att få det här serienummer för serienummer som ska lagras i tabellen Device Tracking Asset Information."
+msgstr "SNMP OID som används för att hämta serienumret för denna enhetstyp som ska lagras i tabellen Mactrack Asset Information."
 
 #: setup.php:1118
 msgid "Serial Number Collection Method"
@@ -2854,9 +2776,8 @@ msgid "Related Cacti Host"
 msgstr "Relaterad Cacti Host"
 
 #: setup.php:1316
-#, fuzzy
 msgid "Given Mactrack Host is connected to this Cacti Host."
-msgstr "Givet Device Tracking Host är ansluten till denna Cacti Host."
+msgstr "Given Mactrack Host är ansluten till denna Cacti Host."
 
 #: setup.php:1334
 msgid "Scan Type"
