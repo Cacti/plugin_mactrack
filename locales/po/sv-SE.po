@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-08-18 14:26+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-09-18 15:33+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:495 mactrack_view_dot1x.php:622
@@ -1125,17 +1125,16 @@ msgstr "MACS Found"
 
 #: mactrack_sites.php:453 mactrack_view_sites.php:277
 msgid "Device Errors"
-msgstr "Enhetsfel"
+msgstr "Fel på enheten"
 
 #: mactrack_sites.php:484 mactrack_sites.php:564 mactrack_view_sites.php:324
 #: mactrack_view_sites.php:422
-#, fuzzy
 msgid "No Mactrack Sites Found"
-msgstr "Inga enhetsspårningsplatser hittades"
+msgstr "Inga mactrack-platser hittades"
 
 #: mactrack_sites.php:508 mactrack_view_sites.php:352
 msgid "Total Devices"
-msgstr "Totala enheter"
+msgstr "Totalt antal enheter"
 
 #: mactrack_sites.php:518 mactrack_view_sites.php:362
 msgid "Total User Ports"
@@ -2055,7 +2054,6 @@ msgstr "Ta bort alla scanningsresultat"
 
 #: setup.php:252 setup.php:1013 setup.php:1014 setup.php:1015 setup.php:1016
 #: setup.php:1017 setup.php:1026 setup.php:1028
-#, fuzzy
 msgid "Mactrack"
 msgstr "MacTrack"
 
@@ -2428,9 +2426,8 @@ msgid "Mactrack Device Types"
 msgstr "Enhetsspårningsenhetstyper"
 
 #: setup.php:694
-#, fuzzy
 msgid "Mactrack Sites"
-msgstr "SNMP-inställningar"
+msgstr "MacTrack-platser"
 
 #: setup.php:715
 msgid "Mac Address Tracking Utility"
