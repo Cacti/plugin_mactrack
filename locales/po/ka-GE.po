@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-09-23 05:09+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-10-13 01:26+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:495 mactrack_view_dot1x.php:622
@@ -998,7 +998,7 @@ msgstr ""
 
 #: mactrack_macauth.php:315
 msgid "Mactrack MacAuth Filters"
-msgstr ""
+msgstr "Mactrack-ის MacAuth ფილტრები"
 
 #: mactrack_macauth.php:328 mactrack_macwatch.php:318
 msgid "Mac Address"
@@ -2100,7 +2100,7 @@ msgstr "გადაცემის არხი [|]"
 
 #: setup.php:327
 msgid "Space [ ]"
-msgstr ""
+msgstr "სივრცე []"
 
 #: setup.php:331
 msgid "Mac Address Output Format"
@@ -2461,7 +2461,7 @@ msgstr "იწყება"
 
 #: setup.php:941
 msgid "Does Not Contain"
-msgstr ""
+msgstr "არ შეიცავს"
 
 #: setup.php:942
 msgid "Does Not Begin With"
