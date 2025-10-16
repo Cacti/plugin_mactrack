@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-09-18 16:07+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-10-16 18:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:495 mactrack_view_dot1x.php:622
@@ -169,7 +169,7 @@ msgstr "Enhet inaktivera \"%d\""
 #: mactrack_view_sites.php:415 mactrack_view_sites.php:416
 #: mactrack_view_sites.php:417 mactrack_view_sites.php:418 setup.php:358
 msgid "N/A"
-msgstr "N/A"
+msgstr "Inte tillgänglig"
 
 #: lib/mactrack_functions.php:3157 setup.php:927
 #, php-format
@@ -211,7 +211,7 @@ msgstr "Status: Inaktiv, LastRuntime: %2.1f sekunder, Processer: %d processer, E
 #: mactrack_utilities.php:266 mactrack_view_devices.php:511 setup.php:973
 #: setup.php:1001 setup.php:1144
 msgid "Disabled"
-msgstr "Inaktiverad"
+msgstr "Inaktiverat"
 
 #: lib/mactrack_functions.php:3216
 #, php-format
@@ -306,7 +306,7 @@ msgstr "Start"
 #: mactrack_view_interfaces.php:543 mactrack_view_ips.php:331
 #: mactrack_view_macs.php:1139
 msgid "Clear"
-msgstr "Rensa"
+msgstr "Töm"
 
 #: lib/mactrack_functions.php:3388 mactrack_device_types.php:1057
 #: mactrack_devices.php:1174 mactrack_vendormacs.php:223
@@ -329,7 +329,7 @@ msgstr "Plats"
 #: mactrack_view_devices.php:467 mactrack_view_devices.php:509
 #: mactrack_view_ips.php:302
 msgid "Any"
-msgstr "Vilken som helst"
+msgstr "Alla"
 
 #: lib/mactrack_functions.php:3414 mactrack_devices.php:1193
 #: mactrack_view_devices.php:463
@@ -365,7 +365,7 @@ msgstr "Ej tillämpligt - Switch / Hub"
 #: mactrack_macwatch.php:30 mactrack_sites.php:32 mactrack_snmp.php:31
 #: mactrack_view_macs.php:38
 msgid "Delete"
-msgstr "Radera"
+msgstr "Ta bort"
 
 #: mactrack_device_types.php:71 mactrack_snmp.php:32
 msgid "Duplicate"
@@ -661,7 +661,7 @@ msgstr "Rensa filtrerade resultat"
 
 #: mactrack_device_types.php:1055
 msgid "Rescan"
-msgstr "Omsökning"
+msgstr "Sök igen"
 
 #: mactrack_device_types.php:1055
 msgid "Scan Active Devices for Unknown Device Types"
@@ -704,7 +704,7 @@ msgstr "Typ"
 
 #: mactrack_device_types.php:1096 mactrack_utilities.php:266
 msgid "Enabled"
-msgstr "Aktiverad"
+msgstr "Aktiverat"
 
 #: mactrack_devices.php:33
 msgid "Enable"
@@ -1186,7 +1186,7 @@ msgstr "Port"
 
 #: mactrack_snmp.php:442 setup.php:521
 msgid "Timeout"
-msgstr "Timeout"
+msgstr "Tidsgräns"
 
 #: mactrack_snmp.php:443 setup.php:529
 msgid "Retries"
