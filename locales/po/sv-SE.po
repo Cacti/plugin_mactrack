@@ -4,12 +4,12 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-10-20 08:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-10-20 20:27+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:495 mactrack_view_dot1x.php:622
 msgid "Idle"
-msgstr "Sysslolös"
+msgstr "Overksam"
 
 #: lib/mactrack_functions.php:38 mactrack_utilities.php:240
 #: mactrack_utilities.php:320 mactrack_view_dot1x.php:494
@@ -265,7 +265,7 @@ msgstr "Dot1x"
 
 #: lib/mactrack_functions.php:3310 mactrack_view_graphs.php:161
 msgid "Graphs"
-msgstr "Grafer"
+msgstr "Diagram"
 
 #: lib/mactrack_functions.php:3344 mactrack_device_types.php:469
 #: mactrack_devices.php:1247 mactrack_view_devices.php:513 setup.php:948
@@ -2330,23 +2330,23 @@ msgstr "Proxy-adress för Internet"
 
 #: setup.php:581
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
-msgstr "För antingen Cacti Core Services eller Plugins som kräver internetåtkomst anger du proxyservern och porten här i följande format IP:PORT.  Till exempel 192.168.1.1:8080."
+msgstr "För antingen Cactis kärntjänster eller tillägg som kräver internetåtkomst anger du proxyservern och porten här i följande format IP:PORT.  Till exempel 192.168.1.1:8080."
 
 #: setup.php:588
 msgid "Internet Proxy User"
-msgstr "Internet Proxy-användare"
+msgstr "Användare för internetproxy"
 
 #: setup.php:589
 msgid "If your Internet Proxy requires a username, enter it here."
-msgstr "Om din Internet Proxy kräver ett användarnamn, ange det här."
+msgstr "Om din internetproxy kräver ett användarnamn, ange det här."
 
 #: setup.php:596
 msgid "Internet Proxy Password"
-msgstr "Internet Proxy Lösenord"
+msgstr "Lösenord för internetproxy"
 
 #: setup.php:597
 msgid "If your Internet Proxy requires a password, enter it here."
-msgstr "Om din Internet Proxy kräver ett lösenord, ange det här."
+msgstr "Om din internetproxy kräver ett lösenord, ange det här."
 
 #: setup.php:610
 msgid "Mactrack Devices"
@@ -2877,7 +2877,7 @@ msgstr "Lösenordet som ska användas för din anpassade autentisering."
 
 #: setup.php:1456
 msgid "Private Key Path"
-msgstr "Privat nyckelväg"
+msgstr "Sökväg för privat nyckel"
 
 #: setup.php:1457
 msgid "The path to the private key used for SSH authentication."
