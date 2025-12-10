@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-10-15 06:26+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-12-10 15:18+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:495 mactrack_view_dot1x.php:622
@@ -152,7 +152,7 @@ msgstr "მოწყობილობის ჩართვა '%s'"
 #: lib/mactrack_functions.php:3037
 #, php-format
 msgid "Device Disable '%d'"
-msgstr ""
+msgstr "მოწყობილობა გამორთვა '%d'"
 
 #: lib/mactrack_functions.php:3155 lib/mactrack_functions.php:3187
 #: lib/mactrack_functions.php:3188 lib/mactrack_functions.php:3250
@@ -732,7 +732,7 @@ msgstr ""
 
 #: mactrack_devices.php:257
 msgid "You must select at least one device."
-msgstr ""
+msgstr "უნდა მონიშნოთ, სულ ცოტა, ერთი მოწყობილობა."
 
 #: mactrack_devices.php:265
 msgid "Click 'Continue' to enable the following devices."
@@ -994,7 +994,7 @@ msgstr ""
 
 #: mactrack_macauth.php:253
 msgid "Mactrack MacAuth [new]"
-msgstr ""
+msgstr "Mactrack MacAuth [ახალი]"
 
 #: mactrack_macauth.php:315
 msgid "Mactrack MacAuth Filters"
@@ -2242,7 +2242,7 @@ msgstr ""
 
 #: setup.php:472
 msgid "ArpWatch Database Path"
-msgstr ""
+msgstr "ბილიკი ArpWatch-ის მონაცემთა ბაზამდე"
 
 #: setup.php:473
 msgid "The location of the ArpWatch Database file on the Cacti server."
@@ -2342,7 +2342,7 @@ msgstr ""
 
 #: setup.php:596
 msgid "Internet Proxy Password"
-msgstr ""
+msgstr "ინერნეტ-პროქსის პაროლი"
 
 #: setup.php:597
 msgid "If your Internet Proxy requires a password, enter it here."
@@ -2499,7 +2499,7 @@ msgstr "ყოველ %d წუთში"
 #: setup.php:979
 #, php-format
 msgid "Every %d Hour"
-msgstr ""
+msgstr "ყოველ %d საათში"
 
 #: setup.php:980 setup.php:981 setup.php:982 setup.php:983 setup.php:1003
 #: setup.php:1619 setup.php:1620
