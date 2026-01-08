@@ -163,7 +163,7 @@ function api_mactrack_maca_save($mac_id, $mac_address, $description) {
 	$save['mac_id']      = $mac_id;
 	$save['mac_address'] = form_input_validate($mac_address, 'mac_address', '', false, 3);
 	$save['description'] = form_input_validate($description, 'description', '', false, 3);
-	$save['added_date']  = date('Y-m-d h:i:s');
+	$save['added_date']  = date('Y-m-d H:i:s');
 	$save['added_by']    = $_SESSION['sess_user_id'];
 
 	$mac_id = 0;
