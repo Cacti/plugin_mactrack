@@ -106,11 +106,11 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 
 	/* calculate the number of end user ports */
 	if (cacti_sizeof($portTrunking)) {
-	foreach ($portTrunking as $portTrunk) {
-		if ($portTrunk == 1) {
-			$device['ports_trunk']++;
+		foreach ($portTrunking as $portTrunk) {
+			if ($portTrunk == 1) {
+				$device['ports_trunk']++;
+			}
 		}
-	}
 	}
 
 	/* build VLAN array from results */
@@ -301,6 +301,16 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 	$device['vlans_total'] = cacti_sizeof($vlan_ids) - 4;
 	mactrack_debug('There are ' . (cacti_sizeof($vlan_ids)-4) . ' VLANS.');
 
+	if (cacti_sizeof($vlan_names) == 0) {
+		cacti_log('No VLANs Name found: ' . $device['device_name']);
+		return $device;
+	}
+
+	if (cacti_sizeof($vlan_trunkstatus) == 0) {
+		cacti_log('No VLANs Trunk Status found: ' . $device['device_name']);
+		return $device;
+	}
+	
 	/* get the Voice VLAN information if it exists */
 	$portVoiceVLANs = xform_standard_indexed_data('.1.3.6.1.4.1.9.9.87.1.4.1.1.37.0', $device);
 	if (cacti_sizeof($portVoiceVLANs) > 0) {
@@ -485,6 +495,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 						$portNumber = (isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '');
 						$portName   = (isset($ifInterfaces[$ifIndex]['ifAlias']) ? $ifInterfaces[$ifIndex]['ifAlias'] : '');
 						$portTrunk  = (isset($portTrunking[$ifName]) ? $portTrunking[$ifName] : '');
+						$portTrunkStatus = (isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '');
 
 						if ($vvlans) {
 							$vVlanID = (isset($portVoiceVLANs[$ifIndex]) ? $portVoiceVLANs[$ifIndex] : '');
@@ -492,12 +503,14 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 							$vVlanID = -1;
 						}
 
-						$portTrunkStatus = (isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '');
-
 						/* only output legitimate end user ports */
+						/* ifType: 6   = ethernetCsmacd
+								   53  = propVirtual
+								   161 = ieee8023adLag
+						*/
 						if ($ifType == 6 || $ifType == 53 || $ifType == 161) {
 							if (($portTrunkStatus == '2') ||
-								(empty($portTrunkStatus)) ||
+								//(empty($portTrunkStatus)) ||
 								(in_array($portNumber, $scan_trunk_port)) ||
 								(($vVlanID > 0) && ($vVlanID <= 1000))) {
 								$port_array[$i]['vlan_id']     = $active_vlan['vlan_id'];
