@@ -1352,9 +1352,10 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 					$brPortIfType = @$ifInterfaces[$port_key['port_number']]['ifType'];
 				}
 
-				if (($brPortIfType >= 6) &&
-					($brPortIfType <= 9) &&
-					(!isset($ifInterfaces[$brPortIfIndex]['portLink']))) {
+				if ((($brPortIfType >= 6 && $brPortIfType <= 9) ||
+					  $brPortIfType == 53 || $brPortIfType == 161) &&
+					(!isset($ifInterfaces[$brPortIfIndex]["portLink"]))) {
+
 					/* set some defaults  */
 					$new_port_key_array[$i]['vlan_id']     = 'N/A';
 					$new_port_key_array[$i]['vlan_name']   = 'N/A';
@@ -2309,7 +2310,7 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 			if ($port_value['port_number'] <> 'NOT USER' && $port_value['mac_address'] <> 'NOT USER' && $port_value['mac_address'] != '') {
 				$mac_authorized = db_check_auth($port_value['mac_address']);
 
-				mactrack_debug('MAC Address \'' . $port_value['mac_address'] . '\' on device \'' . $device['device_name'] . '\' is ' . ($mac_authorized != '' ? '':'NOT') . ' Authorized');
+				mactrack_debug('MAC Address \'' . $port_value['mac_address'] . '\' on device \'' . $device['device_name'] . '\' is ' . ($mac_authorized != '' ? '':'NOT ') . ' Authorized');
 
 				if ($mac_authorized != '') {
 					$authorized_mac = 1;

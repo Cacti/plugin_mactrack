@@ -321,6 +321,10 @@ function mactrack_view_ips() {
 	}
 
 	$display_text1 = array(
+		'site_name' => array(
+			'display' => __('Site Name', 'mactrack'),
+			'sort' => 'ASC'
+		),
 		'device_name' => array(
 			'display' => __('Switch Name', 'mactrack'),
 			'sort'    => 'ASC'
@@ -389,7 +393,8 @@ function mactrack_view_ips() {
 		foreach ($port_results as $port_result) {
 			form_alternate_row('line' . $i, true);
 
-			form_selectable_cell($port_result['device_name'], $i, '1%');
+			form_selectable_cell($port_result['site_name'], $i);
+			form_selectable_cell($port_result['device_name'], $i, '10%');
 			form_selectable_cell($port_result['hostname'], $i);
 			form_selectable_cell(filter_value($port_result['ip_address'], get_request_var('filter')), $i);
 
