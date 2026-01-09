@@ -522,8 +522,11 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 								$port_array[$i]['portTrunkStatus'] = $portTrunkStatus;
 								$i++;
 
-								mactrack_debug('VLAN: ' . $active_vlan['vlan_id'] . ', ' .
+								mactrack_debug('HOST: ' . $device['hostname'] . ', ' .
+									'VLAN: ' . $active_vlan['vlan_id'] . ', ' .
 									'NAME: ' . $active_vlan['vlan_name'] . ', ' .
+									'TRUNK: ' . $portTrunkStatus . ', ' .
+									'TYPE: ' . $ifType . ', ' .
 									'PORT: ' . $portNumber . ', ' .
 									'NAME: ' . $portName . ', ' .
 									'MAC: ' . $port_result['mac_address']);
