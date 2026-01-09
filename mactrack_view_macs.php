@@ -404,7 +404,7 @@ function mactrack_view_macs_validate_request_vars() {
             ),
         'sort_column' => array(
             'filter' => FILTER_CALLBACK,
-            'default' => 'ip_address',
+            'default' => 'site_name',
             'options' => array('options' => 'sanitize_search_string')
             ),
         'sort_direction' => array(
@@ -698,6 +698,10 @@ function mactrack_view_macs() {
 		'nosort' => array(
 			'display' => __('Actions', 'mactrack'),
 		),
+		'site_name' => array(
+			'display' => __('Site Name', 'mactrack'),
+			'sort' => 'ASC'
+		),
 		'device_name' => array(
 			'display' => __('Switch Name', 'mactrack'),
 			'sort' => 'ASC'
@@ -800,6 +804,7 @@ function mactrack_view_macs() {
 
 			form_alternate_row('line' . $key, true);
 			form_selectable_cell(mactrack_interface_actions($port_result['device_id'], $port_result['port_number'], false), $key, '1%');
+			form_selectable_cell($port_result['site_name'], $key);
 			form_selectable_cell($port_result['device_name'], $key);
 			form_selectable_cell($port_result['hostname'], $key);
 			form_selectable_cell(filter_value($port_result['ip_address'], get_request_var('filter')), $key);
@@ -892,6 +897,10 @@ function mactrack_view_aggregated_macs() {
 	}
 
 	$display_text = array(
+		'site_name' => array(
+			'display' => __('Site Name', 'mactrack'),
+			'sort' => 'ASC'
+		),
 		'device_name' => array(
 			'display' => __('Switch Name', 'mactrack'),
 			'sort'    => 'ASC'
