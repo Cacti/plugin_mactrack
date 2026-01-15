@@ -2438,6 +2438,7 @@ function perform_mactrack_db_maint() {
 				ORDER BY partition_ordinal_position',
 				array($database_default));
 
+			/*
 			$time     = time();
 			$now      = date('Y-m-d', $time);
 			$format   = date('Ymd', $time);
@@ -2449,12 +2450,25 @@ function perform_mactrack_db_maint() {
 			$lformat  = date('Ymd', $lday_ts);
 			$last_day = db_fetch_row("SELECT TO_DAYS('$lnow') AS today");
 			$last_day = $last_day['today'];
+			*/
+
+			$tday_ts  = strtotime('Today');
+			$tday     = date('Y-m-d', $tday_ts);
+			$tdformat = date('Ymd', $tday_ts);
+			$cur_day  = db_fetch_row("SELECT TO_DAYS('$tday') AS today");
+			$cur_day  = $cur_day['today'];
+
+			$lday_ts  = strtotime('Yesterday');
+			$lday     = date('Y-m-d', $lday_ts);
+			$ldformat = date('Ymd', $lday_ts);
+			$last_day = db_fetch_row("SELECT TO_DAYS('$lday') AS today");
+			$last_day = $last_day['today'];
 
 			mactrack_debug("There are currently '" . cacti_sizeof($number_of_partitions) . "' Mactrack Partitions, We will keep '$days' of them.");
-			mactrack_debug("The current day is '$cur_day', the last day is '$last_day'");
+			mactrack_debug("The current day is '$tday($cur_day)', the last day is '$lday($last_day)'");
 
 			if ($cur_day != $last_day) {
-				set_config_option('mactrack_lastday_timestamp', $time);
+				//set_config_option('mactrack_lastday_timestamp', $time); //no use
 
 				if ($lday_ts != '') {
 					cacti_log("MACTRACK: Creating new partition 'd" . $lformat . "'", false, "SYSTEM");
@@ -2464,6 +2478,7 @@ function perform_mactrack_db_maint() {
 						PARTITION dMaxValue VALUES LESS THAN MAXVALUE)");
 
 					if ($days > 0) {
+						/*
 						$user_partitions = cacti_sizeof($number_of_partitions) - 1;
 						if ($user_partitions >= $days) {
 							$i = 0;
@@ -2477,11 +2492,34 @@ function perform_mactrack_db_maint() {
 								$mactrack_deleted++;
 							}
 						}
+						*/
+
+                        $old_day = date('Ymd', strtotime("- $days Days"));
+                        $old_partitions = db_fetch_assoc_prepared('SELECT PARTITION_NAME
+                            FROM `information_schema`.`partitions`
+                            WHERE table_schema = ?
+                            AND table_name="mac_track_ports"
+                            AND partition_name < ?
+                            ORDER BY partition_ordinal_position',
+                            array($database_default, 'd' . $old_day));
+
+                        if (cacti_sizeof($old_partitions) > 0) {
+                            foreach ($old_partitions as $old_partition) {
+                                cacti_log("MACTRACK: Removing old partition '" . $old_partition['PARTITION_NAME'] . "'", false, "SYSTEM");
+                                mactrack_debug("Removing partition '" . $old_partition['PARTITION_NAME'] . "'");
+                                db_execute("ALTER TABLE mac_track_ports DROP PARTITION " . $old_partition['PARTITION_NAME']);
+                            }
+                        }
 					}
 				}
 			}
 		}
 	}
+
+	db_execute_prepared('DELETE FROM mac_track_ips
+		WHERE scan_date < DATE_FORMAT(CURDATE() - ?,"%Y-%m-%d")',
+		array(read_config_option('mt_data_retention_ip')));
+	db_execute('OPTIMIZE TABLE mac_track_ips');
 
 	db_execute('REPLACE INTO mac_track_scan_dates
 		(SELECT DISTINCT scan_date FROM mac_track_ports)');
