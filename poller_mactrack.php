@@ -205,6 +205,7 @@ if ($collect_frequency == 'disabled') {
 			}
 
 			/* see if the user desires a new db maintenance time */
+			/*
 			mactrack_debug('Checking if user changed the maintenance time');
 			if (!empty($previous_db_maint_time)) {
 				if ($database_maint_time <> $previous_db_maint_time) {
@@ -213,6 +214,7 @@ if ($collect_frequency == 'disabled') {
 					db_execute("DELETE FROM settings WHERE name='mt_last_db_maint_time'");
 				}
 			}
+			*/
 
 			/* set to detect if the user cleared the time between polling cycles */
 			set_config_option('mt_prev_base_time', $base_start_time);
@@ -243,10 +245,19 @@ if ($collect_frequency == 'disabled') {
 				mactrack_debug("The next run time has been determined to be at '" . date('Y-m-d G:i:s', $next_run_time) . "'");
 			}
 
+			/*
 			if (empty($last_db_maint_time)) {
 				$next_db_maint_time = strtotime(date('Y-m-d') . ' ' . $database_maint_time);
 			} else {
 				$next_db_maint_time = $last_db_maint_time + 24*3600;
+			}
+			*/
+
+			$db_maint_time = strtotime($database_maint_time);
+			if ($last_db_maint_time < $db_maint_time) {
+				$next_db_maint_time = $db_maint_time;
+			} else {
+				$next_db_maint_time = strtotime('Tomorrow '. $database_maint_time);
 			}
 
 			$time_till_next_db_maint = $next_db_maint_time - $current_time;
@@ -990,11 +1001,14 @@ function collect_mactrack_data($start, $site_id = 0) {
 		/* purge the ip address and temp port table */
 		db_execute('TRUNCATE TABLE mac_track_temp_ports');
 
+		/*
 		db_execute_prepared('DELETE FROM mac_track_ips
 			WHERE scan_date < NOW() - interval ? DAY',
 			array(read_config_option('mt_data_retention_ip')));
 
 		db_execute('OPTIMIZE TABLE mac_track_ips');
+		*/
+
 		db_execute('TRUNCATE TABLE mac_track_scan_dates');
 		db_execute('REPLACE INTO mac_track_scan_dates (SELECT DISTINCT scan_date from mac_track_ports)');
 
