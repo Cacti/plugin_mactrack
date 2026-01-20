@@ -1042,7 +1042,7 @@ function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_tim
 		$subject = 'MACAUTH Report ' . date('Y-m-d H:i:s') ;
 		
 		$message = 'Not Authorized devices found:<br><br>';
-		$message .= '<table><tr><td>Site Name</td><td>Switch Name</td><td>Switch IP Address</td><td>ED IP Address</td><td>ED MAC Address</td><td>Port Number</td><td>Port Name</td><td>Scan Date</td></tr>';
+		$message .= '<table><tr><td>Site Name</td><td>Switch Name</td><td>Switch Hostname</td><td>ED IP Address</td><td>ED MAC Address</td><td>Port Number</td><td>Port Name</td><td>Scan Date</td></tr>';
 
 		foreach($ports as $port) {
 			/* create the report */
