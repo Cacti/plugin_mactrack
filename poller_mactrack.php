@@ -1033,15 +1033,49 @@ function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_tim
 			WHERE authorized = 0');
 	}
 
+	$from     = read_config_option('mt_from_email');
+	$fromname = read_config_option('mt_from_name');
+	$to       = read_config_option('mt_macauth_emails');
+
 	if (cacti_sizeof($ports)) {
+		/* set the subject */
+		$subject = 'MACAUTH Report ' . date('Y-m-d H:i:s') ;
+		
+		$message = 'Not Authorized devices found:<br><br>';
+		$message .= '<table><tr><td>Site Name</td><td>Switch Name</td><td>Switch IP Address</td><td>ED IP Address</td><td>ED MAC Address</td><td>Port Number</td><td>Port Name</td><td>Scan Date</td></tr>';
+
 		foreach($ports as $port) {
 			/* create the report */
+			$message .= '<tr>';
+			$message .= '<td>' . $port['site_name'] . '</td>';
+			$message .= '<td>' . $port['device_name'] . '</td>';
+			$message .= '<td>' . $port['hostname'] . '</td>';
+			$message .= '<td>' . $port['ip_address'] . '</td>';
+			$message .= '<td>' . $port['mac_address'] . '</td>';
+			$message .= '<td>' . $port['port_number'] . '</td>';
+			$message .= '<td>' . $port['port_name'] . '</td>';
+			$message .= '<td>' . $port['scan_date'] . '</td>';
+			$message .= '</tr>';
 		}
+		$message .= '</table>';
+
+		/* email the report */
+		mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '');
+		mactrack_debug('MACAUTH Report eMail sent.');
 	} else {
 		/* email the report */
 
 		if ($mac_auth_frequency > 0) {
 			/* send out an empty report */
+
+			/* set the subject */
+			$subject = 'MACAUTH Report OK ' . date('Y-m-d H:i:s') ;
+
+			$message = 'Unauthorized devices not found.';
+
+			/* email the report */
+			mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '');
+			mactrack_debug('MACAUTH Report empty eMail sent.');
 		}
 	}
 }
