@@ -110,12 +110,12 @@ function mactrack_display_run_status() {
 	if ($collection_timing != 'disabled') {
 		$seconds_offset = $collection_timing * 60;
 		/* find out if it's time to collect device information */
-		$base_start_time = read_config_option('mt_base_time', true);
-		$database_maint_time = read_config_option('mt_maint_time', true);
-		$last_run_time = read_config_option('mt_last_run_time', true);
-		$last_db_maint_time = read_config_option('mt_last_db_maint_time', true);
+		$base_start_time          = read_config_option('mt_base_time', true);
+		$database_maint_time      = read_config_option('mt_maint_time', true);
+		$last_run_time            = read_config_option('mt_last_run_time', true);
+		$last_db_maint_time       = read_config_option('mt_last_db_maint_time', true);
 		$previous_base_start_time = read_config_option('mt_prev_base_time', true);
-		$previous_db_maint_time = read_config_option('mt_prev_db_maint_time', true);
+		$previous_db_maint_time   = read_config_option('mt_prev_db_maint_time', true);
 
 		/* see if the user desires a new start time */
 		if (!empty($previous_base_start_time)) {
@@ -125,11 +125,13 @@ function mactrack_display_run_status() {
 		}
 
 		/* see if the user desires a new db maintenance time */
+		/*
 		if (!empty($previous_db_maint_time)) {
 			if ($database_maint_time <> $previous_db_maint_time) {
 				unset($last_db_maint_time);
 			}
 		}
+		*/
 
 		/* determine the next start time */
 		$current_time = strtotime('now');
@@ -150,6 +152,8 @@ function mactrack_display_run_status() {
 			$next_run_time = $last_run_time + $seconds_offset;
 		}
 
+		/* determine the next db maintenance time */
+		/*
 		if (empty($last_db_maint_time)) {
 			if (strtotime($base_start_time) < $current_time) {
 				$next_db_maint_time = strtotime(date('Y-m-d') . ' ' . $database_maint_time) + 3600*24;
@@ -158,6 +162,14 @@ function mactrack_display_run_status() {
 			}
 		} else {
 			$next_db_maint_time = $last_db_maint_time + 24*3600;
+		}
+		*/
+
+		$db_maint_time = strtotime($database_maint_time);
+		if ($last_db_maint_time < $db_maint_time) {
+			$next_db_maint_time = $db_maint_time;
+		} else {
+			$next_db_maint_time = strtotime('Tomorrow '. $database_maint_time);
 		}
 
 		$time_till_next_run = $next_run_time - $current_time;
@@ -247,9 +259,13 @@ function mactrack_display_run_status() {
 	form_alternate_row();
 	print '<td width=200>' . __('Poller Frequency:', 'mactrack') . '</td><td>' . ($collection_timing == 'disabled' ? __('N/A', 'mactrack') : $mactrack_poller_frequencies[$collection_timing]) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Approx. Next Runtime:', 'mactrack') . '</td><td>' . (empty($next_run_time) ? __('N/A', 'mactrack') : date('Y-m-d G:i:s', $next_run_time)) . '</td>';
+	print '<td width=200>' . __('Approx. Next Runtime:', 'mactrack') . '</td><td>' . (empty($next_run_time) ? __('N/A', 'mactrack') : date('Y-m-d H:i:s', $next_run_time)) . '</td>';
+
+	html_header(array(__('Database Maintenance Information', 'mactrack')), 2);
 	form_alternate_row();
-	print '<td width=200>' . __('Approx. Next DB Maintenance:', 'mactrack') . '</td><td>' . (empty($next_db_maint_time) ? __('N/A', 'mactrack') : date('Y-m-d G:i:s', $next_db_maint_time)) . '</td>';
+	print '<td width=200>' . __('Last DB Maintenance Time:', 'mactrack') . '</td><td>' . (empty($last_db_maint_time) ? __('N/A', 'mactrack') : date('Y-m-d H:i:s', $last_db_maint_time)) . '</td>';
+	form_alternate_row();
+	print '<td width=200>' . __('Next DB Maintenance Time:', 'mactrack') . '</td><td>' . (empty($next_db_maint_time) ? __('N/A', 'mactrack') : date('Y-m-d H:i:s', $next_db_maint_time)) . '</td>';
 
 	html_header(array(__('Run Time Details', 'mactrack')), 2);
 	form_alternate_row();
