@@ -227,7 +227,7 @@ function display_help() {
 	print "--engine=N    - Database Engine.  Value are 'MyISAM' or 'InnoDB' (Default:InnoDB)\n";
 	print "--charset=N   - Database Character Sets\n";
 	print "--collate=N   - Database Collation\n";
-	print "--days=N     - Days to Retain.  Valid Range is 10-360 (Default:30)\n";
+	print "--days=N      - Days to Retain.  Valid Range is 10-360 (Default:30)\n";
 	print "-d | --debug  - Display verbose output during execution\n";
 	print "-v --version  - Display this help message\n";
 	print "-h --help     - Display this help message\n";
