@@ -242,7 +242,7 @@ if ($collect_frequency == 'disabled') {
 			if ($time_till_next_run < 0) {
 				mactrack_debug('The next run time has been determined to be NOW');
 			} else {
-				mactrack_debug("The next run time has been determined to be at '" . date('Y-m-d G:i:s', $next_run_time) . "'");
+				mactrack_debug("The next run time has been determined to be at '" . date('Y-m-d H:i:s', $next_run_time) . "'");
 			}
 
 			/*
@@ -264,7 +264,7 @@ if ($collect_frequency == 'disabled') {
 			if ($time_till_next_db_maint < 0) {
 				mactrack_debug('The next database maintenance run time has been determined to be NOW');
 			} else {
-				mactrack_debug("The next database maintenance run time has been determined to be at '" . date('Y-m-d G:i:s', $next_db_maint_time) . "'");
+				mactrack_debug("The next database maintenance run time has been determined to be at '" . date('Y-m-d H:i:s', $next_db_maint_time) . "'");
 			}
 
 			if ($time_till_next_run < 0 || $force == true) {
