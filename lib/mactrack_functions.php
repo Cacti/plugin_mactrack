@@ -1284,7 +1284,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 			$i++;
 		}
 	}
-    $device['ports_active'] = $ports_active;
+	$device['ports_active'] = $ports_active;
 
 	if ($store_to_db) {
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $ports_total . ', OPER PORTS: ' . $ports_active);
@@ -2310,7 +2310,7 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 			if ($port_value['port_number'] <> 'NOT USER' && $port_value['mac_address'] <> 'NOT USER' && $port_value['mac_address'] != '') {
 				$mac_authorized = db_check_auth($port_value['mac_address']);
 
-				mactrack_debug('MAC Address \'' . $port_value['mac_address'] . '\' on device \'' . $device['device_name'] . '\' is ' . ($mac_authorized != '' ? '':'NOT ') . ' Authorized');
+				mactrack_debug('MAC Address \'' . $port_value['mac_address'] . '\' on device \'' . $device['device_name'] . '\' is ' . ($mac_authorized != '' ? '':'NOT ') . 'Authorized');
 
 				if ($mac_authorized != '') {
 					$authorized_mac = 1;
@@ -2471,10 +2471,10 @@ function perform_mactrack_db_maint() {
 				//set_config_option('mactrack_lastday_timestamp', $time); //no use
 
 				if ($lday_ts != '') {
-					cacti_log("MACTRACK: Creating new partition 'd" . $lformat . "'", false, "SYSTEM");
-					mactrack_debug("Creating new partition 'd" . $lformat . "'");
+					cacti_log("MACTRACK: Creating new partition 'd" . $ldformat . "'", false, "SYSTEM");
+					mactrack_debug("Creating new partition 'd" . $ldformat . "'");
 					db_execute("ALTER TABLE mac_track_ports REORGANIZE PARTITION dMaxValue INTO (
-						PARTITION d" . $lformat . " VALUES LESS THAN (TO_DAYS('$lnow')),
+						PARTITION d" . $ldformat . " VALUES LESS THAN ($cur_day),
 						PARTITION dMaxValue VALUES LESS THAN MAXVALUE)");
 
 					if ($days > 0) {
@@ -2494,22 +2494,22 @@ function perform_mactrack_db_maint() {
 						}
 						*/
 
-                        $old_day = date('Ymd', strtotime("- $days Days"));
-                        $old_partitions = db_fetch_assoc_prepared('SELECT PARTITION_NAME
-                            FROM `information_schema`.`partitions`
-                            WHERE table_schema = ?
-                            AND table_name="mac_track_ports"
-                            AND partition_name < ?
-                            ORDER BY partition_ordinal_position',
-                            array($database_default, 'd' . $old_day));
+						$old_day = date('Ymd', strtotime("- $days Days"));
+						$old_partitions = db_fetch_assoc_prepared('SELECT PARTITION_NAME
+							FROM `information_schema`.`partitions`
+							WHERE table_schema = ?
+							AND table_name="mac_track_ports"
+							AND partition_name < ?
+							ORDER BY partition_ordinal_position',
+							array($database_default, 'd' . $old_day));
 
-                        if (cacti_sizeof($old_partitions) > 0) {
-                            foreach ($old_partitions as $old_partition) {
-                                cacti_log("MACTRACK: Removing old partition '" . $old_partition['PARTITION_NAME'] . "'", false, "SYSTEM");
-                                mactrack_debug("Removing partition '" . $old_partition['PARTITION_NAME'] . "'");
-                                db_execute("ALTER TABLE mac_track_ports DROP PARTITION " . $old_partition['PARTITION_NAME']);
-                            }
-                        }
+						if (cacti_sizeof($old_partitions) > 0) {
+							foreach ($old_partitions as $old_partition) {
+								cacti_log("MACTRACK: Removing old partition '" . $old_partition['PARTITION_NAME'] . "'", false, "SYSTEM");
+								mactrack_debug("Removing partition '" . $old_partition['PARTITION_NAME'] . "'");
+								db_execute("ALTER TABLE mac_track_ports DROP PARTITION " . $old_partition['PARTITION_NAME']);
+							}
+						}
 					}
 				}
 			}
