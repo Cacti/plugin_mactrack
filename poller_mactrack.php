@@ -993,9 +993,10 @@ function collect_mactrack_data($start, $site_id = 0) {
 			t1.port_number, t1.port_name, t1.scan_date, t1.scan_date, 1, 1, authorized
 			FROM mac_track_temp_ports t1
 			INNER JOIN mac_track_ips t2
-			ON (t1.mac_address=t2.mac_address
-			AND t1.site_id    =t2.site_id
-			AND t2.scan_date  ="' . $scan_date .'")
+			ON (t1.mac_address = t2.mac_address
+			AND t1.site_id     = t2.site_id
+			AND t1.port_number <> ""
+			AND t2.scan_date   = "' . $scan_date .'")
 			ON DUPLICATE KEY UPDATE count_rec=count_rec+1, active_last=1, date_last=t1.scan_date,port_name=t1.port_name');
 
 		/* purge the ip address and temp port table */
@@ -1020,17 +1021,37 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_time) {
 	if ($mac_auth_frequency == 0) {
+		/*
 		$ports = db_fetch_assoc('SELECT mac_track_temp_ports.*, mac_track_sites.site_name
 			FROM mac_track_temp_ports
 			LEFT JOIN mac_track_sites
 			ON mac_track_sites.site_id = mac_track_temp_ports.site_id
 			WHERE authorized = 0');
+		*/
+		$ports = db_fetch_assoc('SELECT mac_track_temp_ports.*, mac_track_sites.site_name
+			FROM mac_track_temp_ports
+			LEFT JOIN mac_track_sites
+			ON mac_track_sites.site_id = mac_track_temp_ports.site_id
+			WHERE authorized = 0
+			AND ip_address <> ""
+			AND ip_address IS NOT NULL
+			ORDER BY mac_track_temp_ports.device_name, mac_track_temp_ports.port_number, mac_track_temp_ports.scan_date, mac_track_temp_ports.mac_address');
 	} else {
+		/*
 		$ports = db_fetch_assoc('SELECT mac_track_ports.*, mac_track_sites.site_name
 			FROM mac_track_ports
 			LEFT JOIN mac_track_sites
 			ON mac_track_sites.site_id = mac_track_temp_ports.site_id
 			WHERE authorized = 0');
+		*/
+		$ports = db_fetch_assoc('SELECT mac_track_ports.*, mac_track_sites.site_name
+			FROM mac_track_ports
+			LEFT JOIN mac_track_sites
+			ON mac_track_sites.site_id = mac_track_ports.site_id
+			WHERE authorized = 0
+			AND ip_address <> ""
+			AND ip_address IS NOT NULL
+			ORDER BY mac_track_ports.device_name, mac_track_ports.port_number, mac_track_ports.scan_date, mac_track_ports.mac_address');
 	}
 
 	$from     = read_config_option('mt_from_email');
@@ -1040,7 +1061,7 @@ function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_tim
 	if (cacti_sizeof($ports)) {
 		/* set the subject */
 		$subject = 'MACAUTH Report ' . date('Y-m-d H:i:s') ;
-		
+
 		$message = 'Not Authorized devices found:<br><br>';
 		$message .= '<table><tr><td>Site Name</td><td>Switch Name</td><td>Switch Hostname</td><td>ED IP Address</td><td>ED MAC Address</td><td>Port Number</td><td>Port Name</td><td>Scan Date</td></tr>';
 
@@ -1158,13 +1179,13 @@ function display_version() {
 }
 
 /*	display_help - displays the usage of the function */
-function display_help () {
+function display_help() {
 	display_version();
 
 	print PHP_EOL;
-	print "usage: poller_mactrack.php [-sid=site_id] [--web] [--force] [--debug]" . PHP_EOL . PHP_EOL;
-	print "-sid=site_id  - The mac_track_sites site_id to scan" . PHP_EOL;
-	print "-w | --web    - Display output suitable for the web" . PHP_EOL;
-	print "-f | --force  - Force the execution of a collection process" . PHP_EOL;
-	print "-d | --debug  - Display verbose output during execution" . PHP_EOL;
+	print 'usage: poller_mactrack.php [-sid=site_id] [--web] [--force] [--debug]' . PHP_EOL . PHP_EOL;
+	print '-sid=site_id  - The mac_track_sites site_id to scan' . PHP_EOL;
+	print '-w | --web    - Display output suitable for the web' . PHP_EOL;
+	print '-f | --force  - Force the execution of a collection process' . PHP_EOL;
+	print '-d | --debug  - Display verbose output during execution' . PHP_EOL;
 }
