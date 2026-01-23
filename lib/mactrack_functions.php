@@ -748,7 +748,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 
 		/* update the last up/down status */
 		if (!isset($db_interface[$ifIndex])) {
-			if ($ifOperStatus[$ifIndex] == 1) {
+			if (isset($ifOperStatus[$ifIndex]) && $ifOperStatus[$ifIndex] == 1) {
 				$last_up_time = date('Y-m-d H:i:s');
 				$stateChanges = 0;
 				$last_down_time = 0;
@@ -818,14 +818,14 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 		/* accommodate values in high speed octets for interfaces that don't support 64 bit */
 		if (isset($ifInOctets[$ifIndex])) {
 			if (!isset($ifHCInOctets[$ifIndex])) {
-				$ifHCInOctets[$ifIndex] = $ifInOctets[$ifIndex];
+				$ifHCInOctets[$ifIndex] = isset($ifInOctets[$ifIndex]) ? $ifInOctets[$ifIndex] : '';
 				$int_ifHCInOctets = $int_ifInOctets;
 			}
 		}
 
 		if (isset($ifOutOctets[$ifIndex])) {
 			if (!isset($ifHCOutOctets[$ifIndex])) {
-				$ifHCOutOctets[$ifIndex] = $ifOutOctets[$ifIndex];
+				$ifHCOutOctets[$ifIndex] = isset($ifOutOctets[$ifIndex]) ? $ifOutOctets[$ifIndex] : '';
 				$int_ifHCOutOctets = $int_ifOutOctets;
 			}
 		}
