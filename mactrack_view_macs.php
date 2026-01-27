@@ -1017,6 +1017,7 @@ function mactrack_view_aggregated_macs() {
 			$key = $port_result['row_id'];
 
 			form_alternate_row('line' . $key, true);
+			form_selectable_cell(filter_value($port_result['site_name'], get_request_var('filter')), $key);
 			form_selectable_cell(filter_value($port_result['device_name'], get_request_var('filter')), $key);
 			form_selectable_cell(filter_value($port_result['hostname'], get_request_var('filter')), $key);
 			form_selectable_cell(filter_value($port_result['ip_address'], get_request_var('filter')), $key);
