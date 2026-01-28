@@ -361,7 +361,7 @@ function mactrack_ips_filter() {
 				});
 
 				$('#export').submit(function(event) {
-					event.preventDefault()
+					event.preventDefault();
 					exportRows();
 				});
 			});
