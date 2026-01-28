@@ -179,7 +179,7 @@ function form_actions() {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one MAC Address.', 'mactrack') . '</span></td></tr>';
 		$save_html = '';
 	} elseif (!api_plugin_user_realm_auth('mactrack_macauth.php')) {
-		print "<tr><td clsas='even'><span class='textError'>" . __('You are not permitted to change Mac Authorizations.', 'mactrack') . '</span></td></tr>';
+		print "<tr><td class='even'><span class='textError'>" . __('You are not permitted to change Mac Authorizations.', 'mactrack') . '</span></td></tr>';
 		$save_html = '';
 	} else {
 		$save_html = "<button type='submit' name='save' class='ui-button ui-corner-all ui-widget ui-state-active'>" . __esc('Continue', 'mactrack') . "</button>";
