@@ -282,7 +282,7 @@ function form_aggregated_actions() {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($row_array) ? serialize($row_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . ($save_html != '' ? "
-			<button type='button' onClick='cactiReturnTo()' class='ui-button ui-corner-all ui-widget'>" . __esc('Cancel', 'macktrack') . "'></button>
+			<button type='button' onClick='cactiReturnTo()' class='ui-button ui-corner-all ui-widget'>" . __esc('Cancel', 'macktrack') . "</button>
 			$save_html" : "<button type='button' onClick='cactiReturnTo()' class='ui-button ui-corner-all ui-widget'>" . __esc('Return', 'mactrack') . '</button>') . "
 		</td>
 	</tr>";

@@ -398,7 +398,7 @@ function mactrack_maca_filter() {
 					</td>
 					<td>
 						<span class='nowrap'>
-							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget'><?php print __esc('Go');?></button>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __esc('Go');?></button>
 							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php print __esc('Clear');?></button>
 						</span>
 					</td>
