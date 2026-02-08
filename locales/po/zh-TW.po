@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2026-01-16 03:18+0000\nLast-Translator: sucharlie <su.charlie@gmail.com>\nLanguage-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\nLanguage: zh-TW\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2026-02-08 07:18+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\nLanguage: zh-TW\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:495 mactrack_view_dot1x.php:622
@@ -712,7 +712,6 @@ msgid "Scan Active Devices for Unknown Device Types"
 msgstr "設備跟踪設備類型"
 
 #: mactrack_device_types.php:1056 mactrack_devices.php:1173
-#, fuzzy
 msgid "Import"
 msgstr "匯入"
 
