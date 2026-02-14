@@ -44,52 +44,37 @@
  *	+-+-+-+-+-+-+-+
  *
  */
-class Net_DNS2_RR_HIP extends Net_DNS2_RR
-{
-	/*
-	 * The length of the HIT field
-	 */
+class Net_DNS2_RR_HIP extends Net_DNS2_RR {
+	// The length of the HIT field
 	public $hit_length;
 
-	/*
-	 * the public key cryptographic algorithm
-	 */
+	// the public key cryptographic algorithm
 	public $pk_algorithm;
 
-	/*
-	 * the length of the public key field
-	 */
+	// the length of the public key field
 	public $pk_length;
 
-	/*
-	 * The HIT is stored as a binary value in network byte order.
-	 */
+	// The HIT is stored as a binary value in network byte order.
 	public $hit;
 
-	/*
-	 * The public key
-	 */
+	// The public key
 	public $public_key;
 
-	/*
-	 * a list of rendezvous servers
-	 */
+	// a list of rendezvous servers
 	public $rendezvous_servers = [];
 
 	/**
 	 * method to return the rdata portion of the packet as a string
 	 *
-	 * @return	string
+	 * @return string
 	 * @access	protected
 	 *
 	 */
-	protected function rrToString()
-	{
+	protected function rrToString() {
 		$out = $this->pk_algorithm . ' ' .
 			$this->hit . ' ' . $this->public_key . ' ';
 
 		foreach ($this->rendezvous_servers as $index => $server) {
-
 			$out .= $server . '. ';
 		}
 
@@ -105,26 +90,24 @@ class Net_DNS2_RR_HIP extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrFromString(array $rdata)
-	{
-		$this->pk_algorithm		= array_shift($rdata);
-		$this->hit				= strtoupper(array_shift($rdata));
-		$this->public_key		= array_shift($rdata);
+	protected function rrFromString(array $rdata) {
+		$this->pk_algorithm		 = array_shift($rdata);
+		$this->hit				        = strtoupper(array_shift($rdata));
+		$this->public_key		   = array_shift($rdata);
 
 		//
 		// anything left on the array, must be one or more rendezevous servers. add
 		// them and strip off the trailing dot
 		//
 		if (cacti_sizeof($rdata) > 0) {
-
 			$this->rendezvous_servers = preg_replace('/\.$/', '', $rdata);
 		}
 
 		//
 		// store the lengths;
 		//
-		$this->hit_length		= strlen(pack('H*', $this->hit));
-		$this->pk_length		= strlen(base64_decode($this->public_key));
+		$this->hit_length		 = strlen(pack('H*', $this->hit));
+		$this->pk_length		  = strlen(base64_decode($this->public_key, true));
 
 		return true;
 	}
@@ -138,18 +121,16 @@ class Net_DNS2_RR_HIP extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrSet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrSet(Net_DNS2_Packet &$packet) {
 		if ($this->rdlength > 0) {
-
 			//
 			// unpack the algorithm and length values
 			//
 			$x = unpack('Chit_length/Cpk_algorithm/npk_length', $this->rdata);
 
-			$this->hit_length	= $x['hit_length'];
+			$this->hit_length	  = $x['hit_length'];
 			$this->pk_algorithm = $x['pk_algorithm'];
-			$this->pk_length	= $x['pk_length'];
+			$this->pk_length	   = $x['pk_length'];
 
 			$offset = 4;
 
@@ -174,8 +155,7 @@ class Net_DNS2_RR_HIP extends Net_DNS2_RR
 			//
 			$offset = $packet->offset + $offset;
 
-			while ( ($offset - $packet->offset) < $this->rdlength) {
-
+			while (($offset - $packet->offset) < $this->rdlength) {
 				$this->rendezvous_servers[] = Net_DNS2_Packet::expand(
 					$packet, $offset
 				);
@@ -191,17 +171,15 @@ class Net_DNS2_RR_HIP extends Net_DNS2_RR
 	 * returns the rdata portion of the DNS packet
 	 *
 	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-	 *								   compressed names
+	 *                                 compressed names
 	 *
-	 * @return mixed				   either returns a binary packed
-	 *								   string or null on failure
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
 	 * @access protected
 	 *
 	 */
-	protected function rrGet(Net_DNS2_Packet &$packet)
-	{
-		if ( (strlen($this->hit) > 0) && (strlen($this->public_key) > 0) ) {
-
+	protected function rrGet(Net_DNS2_Packet &$packet) {
+		if ((strlen($this->hit) > 0) && (strlen($this->public_key) > 0)) {
 			//
 			// pack the length, algorithm and HIT values
 			//
@@ -216,7 +194,7 @@ class Net_DNS2_RR_HIP extends Net_DNS2_RR
 			//
 			// add the public key
 			//
-			$data .= base64_decode($this->public_key);
+			$data .= base64_decode($this->public_key, true);
 
 			//
 			// add the offset
@@ -227,7 +205,6 @@ class Net_DNS2_RR_HIP extends Net_DNS2_RR
 			// add each rendezvous server
 			//
 			foreach ($this->rendezvous_servers as $index => $server) {
-
 				$data .= $packet->compress($server, $packet->offset);
 			}
 

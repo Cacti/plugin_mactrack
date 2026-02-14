@@ -32,6 +32,5 @@
  * class like this is fine.
  *
  */
-class Net_DNS2_RR_KEY extends Net_DNS2_RR_DNSKEY
-{
+class Net_DNS2_RR_KEY extends Net_DNS2_RR_DNSKEY {
 }

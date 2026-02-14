@@ -32,8 +32,7 @@
  *	  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  *
  */
-class Net_DNS2_RR_AAAA extends Net_DNS2_RR
-{
+class Net_DNS2_RR_AAAA extends Net_DNS2_RR {
 	/*
 	 * the IPv6 address in the preferred hexadecimal values of the eight
 	 * 16-bit pieces
@@ -45,12 +44,11 @@ class Net_DNS2_RR_AAAA extends Net_DNS2_RR
 	/**
 	 * method to return the rdata portion of the packet as a string
 	 *
-	 * @return	string
+	 * @return string
 	 * @access	protected
 	 *
 	 */
-	protected function rrToString()
-	{
+	protected function rrToString() {
 		return $this->address;
 	}
 
@@ -63,15 +61,15 @@ class Net_DNS2_RR_AAAA extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrFromString(array $rdata)
-	{
+	protected function rrFromString(array $rdata) {
 		//
 		// expand out compressed formats
 		//
 		$value = array_shift($rdata);
-		if (Net_DNS2::isIPv6($value) == true) {
 
+		if (Net_DNS2::isIPv6($value) == true) {
 			$this->address = $value;
+
 			return true;
 		}
 
@@ -87,22 +85,21 @@ class Net_DNS2_RR_AAAA extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrSet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrSet(Net_DNS2_Packet &$packet) {
 		//
 		// must be 8 x 16bit chunks, or 16 x 8bit
 		//
 		if ($this->rdlength == 16) {
-
 			//
 			// PHP's inet_ntop returns IPv6 addresses in their compressed form,
 			// but we want to keep with the preferred standard, so we'll parse
 			// it manually.
 			//
 			$x = unpack('n8', $this->rdata);
-			if (cacti_sizeof($x) == 8) {
 
+			if (cacti_sizeof($x) == 8) {
 				$this->address = vsprintf('%x:%x:%x:%x:%x:%x:%x:%x', $x);
+
 				return true;
 			}
 		}
@@ -114,16 +111,16 @@ class Net_DNS2_RR_AAAA extends Net_DNS2_RR
 	 * returns the rdata portion of the DNS packet
 	 *
 	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-	 *								   compressed names
+	 *                                 compressed names
 	 *
-	 * @return mixed				   either returns a binary packed
-	 *								   string or null on failure
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
 	 * @access protected
 	 *
 	 */
-	protected function rrGet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrGet(Net_DNS2_Packet &$packet) {
 		$packet->offset += 16;
+
 		return inet_pton($this->address);
 	}
 }

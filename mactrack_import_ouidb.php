@@ -23,7 +23,7 @@
  +-------------------------------------------------------------------------+
 */
 
-$dir = dirname(__FILE__);
+$dir = __DIR__;
 chdir($dir);
 
 if (substr_count(strtolower($dir), 'mactrack')) {
@@ -33,28 +33,29 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 include('./include/cli_check.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
-/* process calling arguments */
+// process calling arguments
 $parms = $_SERVER['argv'];
 array_shift($parms);
 
 $debug    = false;
 $oui_file = '';
 
-/* add more memory for import */
+// add more memory for import
 ini_set('memory_limit', '-1');
 
 if (cacti_sizeof($parms)) {
-	foreach($parms as $parameter) {
+	foreach ($parms as $parameter) {
 		if (strpos($parameter, '=')) {
-			list($arg, $value) = explode('=', $parameter);
+			[$arg, $value] = explode('=', $parameter);
 		} else {
-			$arg = $parameter;
+			$arg   = $parameter;
 			$value = '';
 		}
 
 		switch ($arg) {
 			case '-f':
 				$oui_file = trim($value);
+
 				break;
 			case '--version':
 			case '-V':
@@ -88,11 +89,11 @@ function display_version() {
 	global $config;
 
 	$info = plugin_mactrack_version();
-	print "Mactrack import OUI Database, Version " . $info["version"] . ", " . COPYRIGHT_YEARS . "\n";
+	print 'Mactrack import OUI Database, Version ' . $info['version'] . ', ' . COPYRIGHT_YEARS . "\n";
 }
 
-/*	display_help - displays the usage of the function */
-function display_help () {
+// display_help - displays the usage of the function
+function display_help() {
 	display_version();
 
 	print "\nusage: mactrack_import_ouidb.php [-f=ouifile] [-h] [--help] [-v] [-V] [--version]\n\n";
@@ -102,4 +103,3 @@ function display_help () {
 	print "-v -V --version  - Display this help message\n";
 	print "-h --help        - Display this help message\n";
 }
-

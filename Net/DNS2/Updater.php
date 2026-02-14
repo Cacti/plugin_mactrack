@@ -30,26 +30,22 @@
  * update requests are done against authoritative servers.
  *
  */
-class Net_DNS2_Updater extends Net_DNS2
-{
-	/*
-	 * a Net_DNS2_Packet_Request object used for the update request
-	 */
+class Net_DNS2_Updater extends Net_DNS2 {
+	// a Net_DNS2_Packet_Request object used for the update request
 	private $_packet;
 
 	/**
 	 * Constructor - builds a new Net_DNS2_Updater objected used for doing
 	 * dynamic DNS updates
 	 *
-	 * @param string $zone	  the domain name to use for DNS updates
-	 * @param mixed	 $options an array of config options or null
+	 * @param string $zone    the domain name to use for DNS updates
+	 * @param mixed  $options an array of config options or null
 	 *
 	 * @throws Net_DNS2_Exception
 	 * @access public
 	 *
 	 */
-	public function __construct($zone, array $options = null)
-	{
+	public function __construct($zone, array $options = null) {
 		parent::__construct($options);
 
 		//
@@ -75,10 +71,8 @@ class Net_DNS2_Updater extends Net_DNS2
 	 * @access private
 	 *
 	 */
-	private function _checkName($name)
-	{
+	private function _checkName($name) {
 		if (!preg_match('/' . $this->_packet->question[0]->qname . '$/', $name)) {
-
 			throw new Net_DNS2_Exception(
 				'name provided (' . $name . ') does not match zone name (' .
 				$this->_packet->question[0]->qname . ')',
@@ -92,17 +86,16 @@ class Net_DNS2_Updater extends Net_DNS2
 	/**
 	 * add a signature to the request for authentication
 	 *
-	 * @param string $keyname	the key name to use for the TSIG RR
+	 * @param string $keyname   the key name to use for the TSIG RR
 	 * @param string $signature the key to sign the request.
 	 *
-	 * @return	   boolean
+	 * @return boolean
 	 * @access	   public
 	 * @see		   Net_DNS2::signTSIG()
 	 * @deprecated function deprecated in 1.1.0
 	 *
 	 */
-	public function signature($keyname, $signature)
-	{
+	public function signature($keyname, $signature) {
 		return $this->signTSIG($keyname, $signature);
 	}
 
@@ -121,14 +114,13 @@ class Net_DNS2_Updater extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function add(Net_DNS2_RR $rr)
-	{
+	public function add(Net_DNS2_RR $rr) {
 		$this->_checkName($rr->name);
 
 		//
 		// add the RR to the "update" section
 		//
-		if (!in_array($rr, $this->_packet->authority)) {
+		if (!in_array($rr, $this->_packet->authority, true)) {
 			$this->_packet->authority[] = $rr;
 		}
 
@@ -152,17 +144,16 @@ class Net_DNS2_Updater extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function delete(Net_DNS2_RR $rr)
-	{
+	public function delete(Net_DNS2_RR $rr) {
 		$this->_checkName($rr->name);
 
-		$rr->ttl	= 0;
-		$rr->class	= 'NONE';
+		$rr->ttl	   = 0;
+		$rr->class	 = 'NONE';
 
 		//
 		// add the RR to the "update" section
 		//
-		if (!in_array($rr, $this->_packet->authority)) {
+		if (!in_array($rr, $this->_packet->authority, true)) {
 			$this->_packet->authority[] = $rr;
 		}
 
@@ -187,15 +178,14 @@ class Net_DNS2_Updater extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function deleteAny($name, $type)
-	{
+	public function deleteAny($name, $type) {
 		$this->_checkName($name);
 
 		$class = Net_DNS2_Lookups::$rr_types_id_to_class[
 			Net_DNS2_Lookups::$rr_types_by_name[$type]
 		];
-		if (!isset($class)) {
 
+		if (!isset($class)) {
 			throw new Net_DNS2_Exception(
 				'unknown or un-supported resource record type: ' . $type,
 				Net_DNS2_Lookups::E_RR_INVALID
@@ -204,16 +194,16 @@ class Net_DNS2_Updater extends Net_DNS2
 
 		$rr = new $class;
 
-		$rr->name		= $name;
-		$rr->ttl		= 0;
-		$rr->class		= 'ANY';
-		$rr->rdlength	= -1;
-		$rr->rdata		= '';
+		$rr->name		    = $name;
+		$rr->ttl		     = 0;
+		$rr->class		   = 'ANY';
+		$rr->rdlength	 = -1;
+		$rr->rdata		   = '';
 
 		//
 		// add the RR to the "update" section
 		//
-		if (!in_array($rr, $this->_packet->authority)) {
+		if (!in_array($rr, $this->_packet->authority, true)) {
 			$this->_packet->authority[] = $rr;
 		}
 
@@ -237,8 +227,7 @@ class Net_DNS2_Updater extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function deleteAll($name)
-	{
+	public function deleteAll($name) {
 		$this->_checkName($name);
 
 		//
@@ -247,17 +236,17 @@ class Net_DNS2_Updater extends Net_DNS2
 		//
 		$rr = new Net_DNS2_RR_ANY;
 
-		$rr->name		= $name;
-		$rr->ttl		= 0;
-		$rr->type		= 'ANY';
-		$rr->class		= 'ANY';
-		$rr->rdlength	= -1;
-		$rr->rdata		= '';
+		$rr->name		    = $name;
+		$rr->ttl		     = 0;
+		$rr->type		    = 'ANY';
+		$rr->class		   = 'ANY';
+		$rr->rdlength	 = -1;
+		$rr->rdata		   = '';
 
 		//
 		// add the RR to the "update" section
 		//
-		if (!in_array($rr, $this->_packet->authority)) {
+		if (!in_array($rr, $this->_packet->authority, true)) {
 			$this->_packet->authority[] = $rr;
 		}
 
@@ -285,15 +274,14 @@ class Net_DNS2_Updater extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function checkExists($name, $type)
-	{
+	public function checkExists($name, $type) {
 		$this->_checkName($name);
 
 		$class = Net_DNS2_Lookups::$rr_types_id_to_class[
 			Net_DNS2_Lookups::$rr_types_by_name[$type]
 		];
-		if (!isset($class)) {
 
+		if (!isset($class)) {
 			throw new Net_DNS2_Exception(
 				'unknown or un-supported resource record type: ' . $type,
 				Net_DNS2_Lookups::E_RR_INVALID
@@ -302,16 +290,16 @@ class Net_DNS2_Updater extends Net_DNS2
 
 		$rr = new $class;
 
-		$rr->name		= $name;
-		$rr->ttl		= 0;
-		$rr->class		= 'ANY';
-		$rr->rdlength	= -1;
-		$rr->rdata		= '';
+		$rr->name		    = $name;
+		$rr->ttl		     = 0;
+		$rr->class		   = 'ANY';
+		$rr->rdlength	 = -1;
+		$rr->rdata		   = '';
 
 		//
 		// add the RR to the "prerequisite" section
 		//
-		if (!in_array($rr, $this->_packet->answer)) {
+		if (!in_array($rr, $this->_packet->answer, true)) {
 			$this->_packet->answer[] = $rr;
 		}
 
@@ -340,8 +328,7 @@ class Net_DNS2_Updater extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function checkValueExists(Net_DNS2_RR $rr)
-	{
+	public function checkValueExists(Net_DNS2_RR $rr) {
 		$this->_checkName($rr->name);
 
 		$rr->ttl = 0;
@@ -349,7 +336,7 @@ class Net_DNS2_Updater extends Net_DNS2
 		//
 		// add the RR to the "prerequisite" section
 		//
-		if (!in_array($rr, $this->_packet->answer)) {
+		if (!in_array($rr, $this->_packet->answer, true)) {
 			$this->_packet->answer[] = $rr;
 		}
 
@@ -378,15 +365,14 @@ class Net_DNS2_Updater extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function checkNotExists($name, $type)
-	{
+	public function checkNotExists($name, $type) {
 		$this->_checkName($name);
 
 		$class = Net_DNS2_Lookups::$rr_types_id_to_class[
 			Net_DNS2_Lookups::$rr_types_by_name[$type]
 		];
-		if (!isset($class)) {
 
+		if (!isset($class)) {
 			throw new Net_DNS2_Exception(
 				'unknown or un-supported resource record type: ' . $type,
 				Net_DNS2_Lookups::E_RR_INVALID
@@ -395,16 +381,16 @@ class Net_DNS2_Updater extends Net_DNS2
 
 		$rr = new $class;
 
-		$rr->name		= $name;
-		$rr->ttl		= 0;
-		$rr->class		= 'NONE';
-		$rr->rdlength	= -1;
-		$rr->rdata		= '';
+		$rr->name		    = $name;
+		$rr->ttl		     = 0;
+		$rr->class		   = 'NONE';
+		$rr->rdlength	 = -1;
+		$rr->rdata		   = '';
 
 		//
 		// add the RR to the "prerequisite" section
 		//
-		if (!in_array($rr, $this->_packet->answer)) {
+		if (!in_array($rr, $this->_packet->answer, true)) {
 			$this->_packet->answer[] = $rr;
 		}
 
@@ -433,8 +419,7 @@ class Net_DNS2_Updater extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function checkNameInUse($name)
-	{
+	public function checkNameInUse($name) {
 		$this->_checkName($name);
 
 		//
@@ -443,17 +428,17 @@ class Net_DNS2_Updater extends Net_DNS2
 		//
 		$rr = new Net_DNS2_RR_ANY;
 
-		$rr->name		= $name;
-		$rr->ttl		= 0;
-		$rr->type		= 'ANY';
-		$rr->class		= 'ANY';
-		$rr->rdlength	= -1;
-		$rr->rdata		= '';
+		$rr->name		    = $name;
+		$rr->ttl		     = 0;
+		$rr->type		    = 'ANY';
+		$rr->class		   = 'ANY';
+		$rr->rdlength	 = -1;
+		$rr->rdata		   = '';
 
 		//
 		// add the RR to the "prerequisite" section
 		//
-		if (!in_array($rr, $this->_packet->answer)) {
+		if (!in_array($rr, $this->_packet->answer, true)) {
 			$this->_packet->answer[] = $rr;
 		}
 
@@ -479,8 +464,7 @@ class Net_DNS2_Updater extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function checkNameNotInUse($name)
-	{
+	public function checkNameNotInUse($name) {
 		$this->_checkName($name);
 
 		//
@@ -489,17 +473,17 @@ class Net_DNS2_Updater extends Net_DNS2
 		//
 		$rr = new Net_DNS2_RR_ANY;
 
-		$rr->name		= $name;
-		$rr->ttl		= 0;
-		$rr->type		= 'ANY';
-		$rr->class		= 'NONE';
-		$rr->rdlength	= -1;
-		$rr->rdata		= '';
+		$rr->name		    = $name;
+		$rr->ttl		     = 0;
+		$rr->type		    = 'ANY';
+		$rr->class		   = 'NONE';
+		$rr->rdlength	 = -1;
+		$rr->rdata		   = '';
 
 		//
 		// add the RR to the "prerequisite" section
 		//
-		if (!in_array($rr, $this->_packet->answer)) {
+		if (!in_array($rr, $this->_packet->answer, true)) {
 			$this->_packet->answer[] = $rr;
 		}
 
@@ -511,10 +495,9 @@ class Net_DNS2_Updater extends Net_DNS2
 	 *
 	 * @return Net_DNS2_Packet_Request
 	 * @access public
-	 #
+	 * #
 	 */
-	public function packet()
-	{
+	public function packet() {
 		//
 		// take a copy
 		//
@@ -523,7 +506,7 @@ class Net_DNS2_Updater extends Net_DNS2
 		//
 		// check for an authentication method; either TSIG or SIG
 		//
-		if (   ($this->auth_signature instanceof Net_DNS2_RR_TSIG)
+		if (($this->auth_signature instanceof Net_DNS2_RR_TSIG)
 			|| ($this->auth_signature instanceof Net_DNS2_RR_SIG)
 		) {
 			$p->additional[] = $this->auth_signature;
@@ -550,8 +533,7 @@ class Net_DNS2_Updater extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function update(&$response = null)
-	{
+	public function update(&$response = null) {
 		//
 		// make sure we have some name servers set
 		//
@@ -560,7 +542,7 @@ class Net_DNS2_Updater extends Net_DNS2
 		//
 		// check for an authentication method; either TSIG or SIG
 		//
-		if (   ($this->auth_signature instanceof Net_DNS2_RR_TSIG)
+		if (($this->auth_signature instanceof Net_DNS2_RR_TSIG)
 			|| ($this->auth_signature instanceof Net_DNS2_RR_SIG)
 		) {
 			$this->_packet->additional[] = $this->auth_signature;
@@ -577,7 +559,7 @@ class Net_DNS2_Updater extends Net_DNS2
 		//
 		// make sure we have some data to send
 		//
-		if (   ($this->_packet->header->qdcount == 0)
+		if (($this->_packet->header->qdcount == 0)
 			|| ($this->_packet->header->nscount == 0)
 		) {
 			throw new Net_DNS2_Exception(

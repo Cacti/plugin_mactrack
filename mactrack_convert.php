@@ -23,7 +23,7 @@
  +-------------------------------------------------------------------------+
 */
 
-$dir = dirname(__FILE__);
+$dir = __DIR__;
 chdir($dir);
 
 if (substr_count(strtolower($dir), 'mactrack')) {
@@ -36,23 +36,23 @@ include($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 if (read_config_option('mt_collection_timing') != 'disabled') {
 	global $debug;
 
-	/* initialize variables */
+	// initialize variables
 	$debug    = false;
 	$engine   = 'InnoDB';
 	$charset  = '';
 	$collate  = '';
 	$days     = 30;
 
-	/* process calling arguments */
+	// process calling arguments
 	$parms = $_SERVER['argv'];
 	array_shift($parms);
 
 	if (cacti_sizeof($parms)) {
 		foreach ($parms as $parameter) {
 			if (strpos($parameter, '=')) {
-				list($arg, $value) = explode('=', $parameter);
+				[$arg, $value] = explode('=', $parameter);
 			} else {
-				$arg = $parameter;
+				$arg   = $parameter;
 				$value = '';
 			}
 
@@ -60,19 +60,24 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 				case '-d':
 				case '--debug':
 					$debug = true;
+
 					break;
 				case '--days':
 					$days = $value;
+
 					break;
 				case '-e':
 				case '--engine':
 					$engine = $value;
+
 					break;
 				case '--charset':
 					$charset = $value;
+
 					break;
 				case '--collate':
 					$collate = $value;
+
 					break;
 				case '--version':
 				case '-V':
@@ -105,6 +110,7 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 	}
 
 	$partitioning = db_fetch_cell("SHOW GLOBAL VARIABLES LIKE 'have_partitioning'");
+
 	if ($partitioning == '') {
 		$partitioning = db_fetch_cell("SELECT PLUGIN_STATUS FROM INFORMATION_SCHEMA.ALL_PLUGINS WHERE PLUGIN_NAME='partition'");
 	}
@@ -112,14 +118,14 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 	if ($partitioning == 'YES' || $partitioning == 'ACTIVE') {
 		mactrack_create_partitioned_table($engine, $days, true);
 	} else {
-		echo "FATAL: Partitioning Not Available, Exiting!\n";
+		print "FATAL: Partitioning Not Available, Exiting!\n";
 	}
 }
 
 function mactrack_create_partitioned_table($engine = 'InnoDB', $charset, $collate, $days = 30, $migrate = false) {
 	global $config;
 
-	/* rename the original table */
+	// rename the original table
 	db_execute('RENAME TABLE `mac_track_ports` TO `mac_track_ports_backup`');
 
 	$sql = "CREATE TABLE `mac_track_ports` (
@@ -164,9 +170,9 @@ function mactrack_create_partitioned_table($engine = 'InnoDB', $charset, $collat
 
 	for ($i = $days; $i > 0; $i--) {
 		$timestamp = $now - ($i * 86400);
-		$date     = date('Y-m-d', $timestamp);
-		$format   = date('Ymd', $timestamp);
-		$parts .= ($parts != '' ? ",\n":'(') . ' PARTITION d' . $format . " VALUES LESS THAN (TO_DAYS('" . $date . "')+1)";
+		$date      = date('Y-m-d', $timestamp);
+		$format    = date('Ymd', $timestamp);
+		$parts .= ($parts != '' ? ",\n" : '(') . ' PARTITION d' . $format . " VALUES LESS THAN (TO_DAYS('" . $date . "')+1)";
 	}
 
 	$parts .= ",\nPARTITION dMaxValue VALUES LESS THAN MAXVALUE);";
@@ -202,11 +208,11 @@ function mactrack_create_partitioned_table($engine = 'InnoDB', $charset, $collat
 
 		db_execute('REPLACE INTO `settings`
 			SET name = "mt_data_retention", value = ?',
-			array($days));
+			[$days]);
 	} else {
 		print "FATAL: Conversion to Partitioned Table Failed\n";
 
-		/* rename the original table */
+		// rename the original table
 		db_execute('RENAME TABLE `mac_track_ports_backup` TO `mac_track_ports`');
 	}
 }
@@ -216,10 +222,10 @@ function display_version() {
 
 	$info = plugin_mactrack_version();
 
-	print 'Mactrack Convert Partitioned, Version ' . $info['version'] . ", " . COPYRIGHT_YEARS . "\n";
+	print 'Mactrack Convert Partitioned, Version ' . $info['version'] . ', ' . COPYRIGHT_YEARS . "\n";
 }
 
-/*	display_help - displays the usage of the function */
+// display_help - displays the usage of the function
 function display_help() {
 	display_version();
 
@@ -232,4 +238,3 @@ function display_help() {
 	print "-v --version  - Display this help message\n";
 	print "-h --help     - Display this help message\n";
 }
-

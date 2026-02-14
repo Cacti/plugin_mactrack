@@ -22,6 +22,5 @@
  * class, and use all of it's methods
  *
  */
-class Net_DNS2_RR_DLV extends Net_DNS2_RR_DS
-{
+class Net_DNS2_RR_DLV extends Net_DNS2_RR_DS {
 }

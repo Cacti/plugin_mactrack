@@ -65,67 +65,45 @@
  *	 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
  *
  */
-class Net_DNS2_RR_SIG extends Net_DNS2_RR
-{
-	/*
-	 * and instance of a Net_DNS2_PrivateKey object
-	 */
+class Net_DNS2_RR_SIG extends Net_DNS2_RR {
+	// and instance of a Net_DNS2_PrivateKey object
 	public $private_key = null;
 
-	/*
-	 * the RR type covered by this signature
-	 */
+	// the RR type covered by this signature
 	public $typecovered;
 
-	/*
-	 * the algorithm used for the signature
-	 */
+	// the algorithm used for the signature
 	public $algorithm;
 
-	/*
-	 * the number of labels in the name
-	 */
+	// the number of labels in the name
 	public $labels;
 
-	/*
-	 * the original TTL
-	 */
+	// the original TTL
 	public $origttl;
 
-	/*
-	 * the signature expiration
-	 */
+	// the signature expiration
 	public $sigexp;
 
-	/*
-	 * the inception of the signature
-	*/
+	// the inception of the signature
 	public $sigincep;
 
-	/*
-	 * the keytag used
-	 */
+	// the keytag used
 	public $keytag;
 
-	/*
-	 * the signer's name
-	 */
+	// the signer's name
 	public $signname;
 
-	/*
-	 * the signature
-	 */
+	// the signature
 	public $signature;
 
 	/**
 	 * method to return the rdata portion of the packet as a string
 	 *
-	 * @return	string
+	 * @return string
 	 * @access	protected
 	 *
 	 */
-	protected function rrToString()
-	{
+	protected function rrToString() {
 		return $this->typecovered . ' ' . $this->algorithm . ' ' .
 			$this->labels . ' ' . $this->origttl . ' ' .
 			$this->sigexp . ' ' . $this->sigincep . ' ' .
@@ -142,19 +120,17 @@ class Net_DNS2_RR_SIG extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrFromString(array $rdata)
-	{
-		$this->typecovered	= strtoupper(array_shift($rdata));
-		$this->algorithm	= array_shift($rdata);
-		$this->labels		= array_shift($rdata);
-		$this->origttl		= array_shift($rdata);
-		$this->sigexp		= array_shift($rdata);
-		$this->sigincep		= array_shift($rdata);
-		$this->keytag		= array_shift($rdata);
-		$this->signname		= $this->cleanString(array_shift($rdata));
+	protected function rrFromString(array $rdata) {
+		$this->typecovered	 = strtoupper(array_shift($rdata));
+		$this->algorithm	   = array_shift($rdata);
+		$this->labels		     = array_shift($rdata);
+		$this->origttl		    = array_shift($rdata);
+		$this->sigexp		     = array_shift($rdata);
+		$this->sigincep		   = array_shift($rdata);
+		$this->keytag		     = array_shift($rdata);
+		$this->signname		   = $this->cleanString(array_shift($rdata));
 
 		foreach ($rdata as $line) {
-
 			$this->signature .= $line;
 		}
 
@@ -172,10 +148,8 @@ class Net_DNS2_RR_SIG extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrSet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrSet(Net_DNS2_Packet &$packet) {
 		if ($this->rdlength > 0) {
-
 			//
 			// unpack
 			//
@@ -184,32 +158,32 @@ class Net_DNS2_RR_SIG extends Net_DNS2_RR
 				$this->rdata
 			);
 
-			$this->typecovered	= Net_DNS2_Lookups::$rr_types_by_id[$x['tc']];
-			$this->algorithm	= $x['algorithm'];
-			$this->labels		= $x['labels'];
-			$this->origttl		= Net_DNS2::expandUint32($x['origttl']);
+			$this->typecovered	 = Net_DNS2_Lookups::$rr_types_by_id[$x['tc']];
+			$this->algorithm	   = $x['algorithm'];
+			$this->labels		     = $x['labels'];
+			$this->origttl		    = Net_DNS2::expandUint32($x['origttl']);
 
 			//
 			// the dates are in GM time
 			//
-			$this->sigexp		= gmdate('YmdHis', $x['sigexp']);
-			$this->sigincep		= gmdate('YmdHis', $x['sigincep']);
+			$this->sigexp		   = gmdate('YmdHis', $x['sigexp']);
+			$this->sigincep		 = gmdate('YmdHis', $x['sigincep']);
 
 			//
 			// get the keytag
 			//
-			$this->keytag		= $x['keytag'];
+			$this->keytag		 = $x['keytag'];
 
 			//
 			// get teh signers name and signature
 			//
-			$offset				= $packet->offset + 18;
-			$sigoffset			= $offset;
+			$offset				   = $packet->offset + 18;
+			$sigoffset			 = $offset;
 
-			$this->signname		= strtolower(
+			$this->signname		 = strtolower(
 				Net_DNS2_Packet::expand($packet, $sigoffset)
 			);
-			$this->signature	= base64_encode(
+			$this->signature	 = base64_encode(
 				substr($this->rdata, 18 + ($sigoffset - $offset))
 			);
 
@@ -223,15 +197,14 @@ class Net_DNS2_RR_SIG extends Net_DNS2_RR
 	 * returns the rdata portion of the DNS packet
 	 *
 	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-	 *								   compressed names
+	 *                                 compressed names
 	 *
-	 * @return mixed				   either returns a binary packed
-	 *								   string or null on failure
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
 	 * @access protected
 	 *
 	 */
-	protected function rrGet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrGet(Net_DNS2_Packet &$packet) {
 		//
 		// parse the values out of the dates
 		//
@@ -261,8 +234,8 @@ class Net_DNS2_RR_SIG extends Net_DNS2_RR
 		// (see section 3.1.7)
 		//
 		$names = explode('.', strtolower($this->signname));
-		foreach ($names as $name) {
 
+		foreach ($names as $name) {
 			$data .= chr(strlen($name));
 			$data .= $name;
 		}
@@ -274,11 +247,10 @@ class Net_DNS2_RR_SIG extends Net_DNS2_RR
 		// private key object, and we have access to openssl, then assume this
 		// is a SIG(0), and generate a new signature
 		//
-		if ( (strlen($this->signature) == 0)
+		if ((strlen($this->signature) == 0)
 			&& ($this->private_key instanceof Net_DNS2_PrivateKey)
 			&& (extension_loaded('openssl') === true)
 		) {
-
 			//
 			// create a new packet for the signature-
 			//
@@ -306,74 +278,67 @@ class Net_DNS2_RR_SIG extends Net_DNS2_RR
 			$algorithm = 0;
 
 			switch($this->algorithm) {
-
 			//
-			// MD5
+				// MD5
 			//
-			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSAMD5:
+				case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSAMD5:
+					$algorithm = OPENSSL_ALGO_MD5;
 
-				$algorithm = OPENSSL_ALGO_MD5;
-				break;
-
+					break;
 			//
-			// SHA1
+					// SHA1
 			//
-			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA1:
+				case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA1:
+					$algorithm = OPENSSL_ALGO_SHA1;
 
-				$algorithm = OPENSSL_ALGO_SHA1;
-				break;
-
+					break;
 			//
-			// SHA256 (PHP 5.4.8 or higher)
+					// SHA256 (PHP 5.4.8 or higher)
 			//
-			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA256:
+				case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA256:
+					if (version_compare(PHP_VERSION, '5.4.8', '<') == true) {
+						throw new Net_DNS2_Exception(
+							'SHA256 support is only available in PHP >= 5.4.8',
+							Net_DNS2_Lookups::E_OPENSSL_INV_ALGO
+						);
+					}
 
-				if (version_compare(PHP_VERSION, '5.4.8', '<') == true) {
+					$algorithm = OPENSSL_ALGO_SHA256;
 
+					break;
+			//
+					// SHA512 (PHP 5.4.8 or higher)
+			//
+				case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA512:
+					if (version_compare(PHP_VERSION, '5.4.8', '<') == true) {
+						throw new Net_DNS2_Exception(
+							'SHA512 support is only available in PHP >= 5.4.8',
+							Net_DNS2_Lookups::E_OPENSSL_INV_ALGO
+						);
+					}
+
+					$algorithm = OPENSSL_ALGO_SHA512;
+
+					break;
+			//
+					// unsupported at the moment
+			//
+				case Net_DNS2_Lookups::DNSSEC_ALGORITHM_DSA:
+				case Net_DNS2_Lookups::DSNSEC_ALGORITHM_RSASHA1NSEC3SHA1:
+				case Net_DNS2_Lookups::DNSSEC_ALGORITHM_DSANSEC3SHA1:
+				default:
 					throw new Net_DNS2_Exception(
-						'SHA256 support is only available in PHP >= 5.4.8',
+						'invalid or unsupported algorithm',
 						Net_DNS2_Lookups::E_OPENSSL_INV_ALGO
 					);
-				}
 
-				$algorithm = OPENSSL_ALGO_SHA256;
-				break;
-
-			//
-			// SHA512 (PHP 5.4.8 or higher)
-			//
-			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA512:
-
-				if (version_compare(PHP_VERSION, '5.4.8', '<') == true) {
-
-					throw new Net_DNS2_Exception(
-						'SHA512 support is only available in PHP >= 5.4.8',
-						Net_DNS2_Lookups::E_OPENSSL_INV_ALGO
-					);
-				}
-
-				$algorithm = OPENSSL_ALGO_SHA512;
-				break;
-
-			//
-			// unsupported at the moment
-			//
-			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_DSA:
-			case Net_DNS2_Lookups::DSNSEC_ALGORITHM_RSASHA1NSEC3SHA1:
-			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_DSANSEC3SHA1:
-			default:
-				throw new Net_DNS2_Exception(
-					'invalid or unsupported algorithm',
-					Net_DNS2_Lookups::E_OPENSSL_INV_ALGO
-				);
-				break;
+					break;
 			}
 
 			//
 			// sign the data
 			//
 			if (openssl_sign($sigdata, $this->signature, $this->private_key->instance, $algorithm) == false) {
-
 				throw new Net_DNS2_Exception(
 					openssl_error_string(),
 					Net_DNS2_Lookups::E_OPENSSL_ERROR
@@ -384,24 +349,23 @@ class Net_DNS2_RR_SIG extends Net_DNS2_RR
 			// build the signature value based
 			//
 			switch($this->algorithm) {
-
 			//
-			// RSA- add it directly
+				// RSA- add it directly
 			//
-			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSAMD5:
-			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA1:
-			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA256:
-			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA512:
+				case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSAMD5:
+				case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA1:
+				case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA256:
+				case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA512:
+					$this->signature = base64_encode($this->signature);
 
-				$this->signature = base64_encode($this->signature);
-				break;
+					break;
 			}
 		}
 
 		//
 		// add the signature
 		//
-		$data .= base64_decode($this->signature);
+		$data .= base64_decode($this->signature, true);
 
 		$packet->offset += strlen($data);
 

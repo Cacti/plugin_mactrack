@@ -22,11 +22,15 @@
  +-------------------------------------------------------------------------+
 */
 
-/* register this functions scanning functions */
-if (!isset($mactrack_scanning_functions)) { $mactrack_scanning_functions = array(); }
+// register this functions scanning functions
+if (!isset($mactrack_scanning_functions)) {
+	$mactrack_scanning_functions = [];
+}
 array_push($mactrack_scanning_functions, 'get_enterasys_N7_switch_ports');
 
-if (!isset($mactrack_scanning_functions_ip)) { $mactrack_scanning_functions_ip = array(); }
+if (!isset($mactrack_scanning_functions_ip)) {
+	$mactrack_scanning_functions_ip = [];
+}
 array_push($mactrack_scanning_functions_ip, 'get_CTAlias_table');
 
 /*	get_generic_switch_ports - This is a basic function that will scan the dot1d
@@ -37,54 +41,55 @@ array_push($mactrack_scanning_functions_ip, 'get_CTAlias_table');
 function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
-	/* initialize port counters */
+	// initialize port counters
 	$device['ports_total']  = 0;
 	$device['ports_active'] = 0;
 	$device['ports_trunk']  = 0;
 
-	/* get VLAN information */
+	// get VLAN information
 	$vlan_ids = xform_dot1q_vlan_associations($device, $device['snmp_readstring']);
-	#$vlan_ids = xform_enterasys_N7_vlan_associations($device, $device['snmp_readstring']);
-#print_r($vlan_ids);
-	/* get VLAN Trunk status: not (yet) implemented for Enterasys N7 */
-	//$vlan_trunkstatus = xform_standard_indexed_data('.1.3.6.1.4.1.2272.1.3.3.1.4', $device);
+	// $vlan_ids = xform_enterasys_N7_vlan_associations($device, $device['snmp_readstring']);
+	// print_r($vlan_ids);
+	// get VLAN Trunk status: not (yet) implemented for Enterasys N7
+	// $vlan_trunkstatus = xform_standard_indexed_data('.1.3.6.1.4.1.2272.1.3.3.1.4', $device);
 	$device['vlans_total'] = cacti_sizeof($vlan_ids);
 	mactrack_debug('VLAN data collected. There are ' . (cacti_sizeof($vlan_ids)) . ' VLANS.');
 
-	/* get the ifIndexes for the device */
+	// get the ifIndexes for the device
 	$ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);
 	mactrack_debug('ifIndexes data collection complete: ' . cacti_sizeof($ifIndexes));
 
-	/* get and store the interfaces table */
+	// get and store the interfaces table
 	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
-#print_r($ifInterfaces);
+	// print_r($ifInterfaces);
 
-	foreach($ifIndexes as $ifIndex) {
+	foreach ($ifIndexes as $ifIndex) {
 		if (($ifInterfaces[$ifIndex]['ifType'] >= 6) && ($ifInterfaces[$ifIndex]['ifType'] <= 9)) {
 			$device['ports_total']++;
 		}
 	}
 	mactrack_debug('ifInterfaces assembly complete: ' . cacti_sizeof($ifIndexes));
 
-	/* map vlans to bridge ports */
+	// map vlans to bridge ports
 	if (cacti_sizeof($vlan_ids) > 0) {
-		/* get the port status information */
-		#$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $device['snmp_readstring'], false, $lowPort, $highPort);
+		// get the port status information
+		// $port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $device['snmp_readstring'], false, $lowPort, $highPort);
 		$port_results = get_enterasys_N7_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $device['snmp_readstring'], false, $lowPort, $highPort);
-		#print_r($port_results);
-		/* get the ifIndexes for the device */
+		// print_r($port_results);
+		// get the ifIndexes for the device
 		$vlan_names = xform_standard_indexed_data('.1.3.6.1.2.1.17.7.1.4.3.1.1', $device);
-		#print_r($vlan_names);
+		// print_r($vlan_names);
 
-		$i = 0;
-		$j = 0;
-		$port_array = array();
-		foreach($port_results as $port_result) {
+		$i          = 0;
+		$j          = 0;
+		$port_array = [];
+
+		foreach ($port_results as $port_result) {
 			$ifIndex = $port_result['port_number'];
-			#print_r($port_result); print_r($ifInterfaces[$ifIndex]);
+			// print_r($port_result); print_r($ifInterfaces[$ifIndex]);
 			$ifType = $ifInterfaces[$ifIndex]['ifType'];
 
-			/* only output legitimate end user ports */
+			// only output legitimate end user ports
 			if (($ifType >= 6) && ($ifType <= 9)) {
 				$port_array[$i]['vlan_id']     = mactrack_arr_key($vlan_ids, $port_result['key']);
 				$port_array[$i]['vlan_name']   = mactrack_arr_key($vlan_names, $port_array[$i]['vlan_id']);
@@ -104,18 +109,18 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 			$j++;
 		}
 
-		/* display completion message */
+		// display completion message
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . trim(substr($device['snmp_sysDescr'],0,40)) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
-		$device['macs_active'] = cacti_sizeof($port_array);
+		$device['macs_active']     = cacti_sizeof($port_array);
 
 		mactrack_debug('macs active on this switch:' . $device['macs_active']);
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devices on this network device.');
 
-		$device['snmp_status'] = HOST_UP;
+		$device['snmp_status']     = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
 	}
 
@@ -130,28 +135,29 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 	global $debug, $scan_date;
 	mactrack_debug('FUNCTION: get_enterasys_N7_dot1dTpFdbEntry_ports started');
 
-	/* initialize variables */
-	$port_keys = array();
-	$return_array = array();
-	$new_port_key_array = array();
-	$port_key_array = array();
-	$port_number = 0;
-	$ports_active = 0;
-	$active_ports = 0;
-	$ports_total = 0;
+	// initialize variables
+	$port_keys          = [];
+	$return_array       = [];
+	$new_port_key_array = [];
+	$port_key_array     = [];
+	$port_number        = 0;
+	$ports_active       = 0;
+	$active_ports       = 0;
+	$ports_total        = 0;
 
-	/* cisco uses a hybrid read string, if one is not defined, use the default */
+	// cisco uses a hybrid read string, if one is not defined, use the default
 	if ($snmp_readstring == '') {
 		$snmp_readstring = $device['snmp_readstring'];
 	}
 
-	/* get the operational status of the ports */
+	// get the operational status of the ports
 	$active_ports_array = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.8', $device);
 	mactrack_debug('get active ports: ' . cacti_sizeof($active_ports_array));
 	$indexes = array_keys($active_ports_array);
 
 	$i = 0;
-	foreach($active_ports_array as $port_info) {
+
+	foreach ($active_ports_array as $port_info) {
 		if (($ifInterfaces[$indexes[$i]]['ifType'] >= 6) &&
 			($ifInterfaces[$indexes[$i]]['ifType'] <= 9)) {
 			if ($port_info == 1) {
@@ -166,8 +172,8 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'], 0, 40) . ', TOTAL PORTS: ' . $ports_total . ', OPER PORTS: ' . $ports_active);
 
 		$device['ports_active'] = $ports_active;
-		$device['ports_total'] = $ports_total;
-		$device['macs_active'] = 0;
+		$device['ports_total']  = $ports_total;
+		$device['macs_active']  = 0;
 	}
 
 	if ($ports_active > 0) {
@@ -184,7 +190,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 		where
 		table index = bridge port (dot1dBasePort) and
 		table value = ifIndex */
-		/* -------------------------------------------- */
+		// --------------------------------------------
 		$bridgePortIfIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.17.1.4.1.2', $device, $snmp_readstring);
 		mactrack_debug('get bridgePortIfIndexes: ' . cacti_sizeof($bridgePortIfIndexes));
 
@@ -201,7 +207,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 		where
 		table index = MAC Address (dot1dTpFdbAddress e.g. 0.0.94.0.1.1 = 00:00:5E:00:01:01) and
 		table value = port status (other(1), invalid(2), learned(3), self(4), mgmt(5)*/
-		/* -------------------------------------------- */
+		// --------------------------------------------
 		$port_status = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.3', $device, $snmp_readstring);
 		mactrack_debug('get port_status: ' . cacti_sizeof($port_status));
 
@@ -218,39 +224,36 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 		where
 		table index = MAC Address (dot1dTpFdbAddress e.g. 0.0.94.0.1.1 = 00:00:5E:00:01:01) and
 		table value = bridge port */
-		/* -------------------------------------------- */
+		// --------------------------------------------
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.2', $device, $snmp_readstring);
 		mactrack_debug('get port_numbers: ' . cacti_sizeof($port_numbers));
 
-		/* get VLAN information */
-		/* -------------------------------------------- */
-		#$vlan_ids = xform_enterasys_N7_vlan_associations($device, $snmp_readstring);
+		// get VLAN information
+		// --------------------------------------------
+		// $vlan_ids = xform_enterasys_N7_vlan_associations($device, $snmp_readstring);
 		$vlan_ids = xform_dot1q_vlan_associations($device, $snmp_readstring);
 		mactrack_debug('get vlan_ids: ' . cacti_sizeof($vlan_ids));
-#print_r($vlan_ids);
+		// print_r($vlan_ids);
 
-
-
-
-		/* get the ignore ports list from device */
+		// get the ignore ports list from device
 		$ignore_ports = port_list_to_array($device['ignorePorts']);
 
 		/* determine user ports for this device and transfer user ports to
 		   a new array.
 		*/
 		$i = 0;
+
 		foreach ($port_numbers as $key => $port_number) {
-			/* key = MAC Address from dot1dTpFdbTable */
-			/* value = bridge port			  */
+			// key = MAC Address from dot1dTpFdbTable
+			// value = bridge port
 			if (($highPort == 0) ||
 				(($port_number >= $lowPort) &&
 				($port_number <= $highPort))) {
-
-				if (!in_array($port_number, $ignore_ports)) {
-					if (isset($port_status[$key])  && $port_status[$key] == '3') {
-						$port_key_array[$i]['key'] = $key;
+				if (!in_array($port_number, $ignore_ports, true)) {
+					if (isset($port_status[$key]) && $port_status[$key] == '3') {
+						$port_key_array[$i]['key']         = $key;
 						$port_key_array[$i]['port_number'] = $port_number;
-#print('i: $i, Key: ' . $port_key_array[$i]['key'] . ', Number: $port_number\n');
+						// print('i: $i, Key: ' . $port_key_array[$i]['key'] . ', Number: $port_number\n');
 						$i++;
 					}
 				}
@@ -261,8 +264,9 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 		   relevant data about the port.
 		*/
 		$i = 0;
+
 		foreach ($port_key_array as $port_key) {
-			/* map bridge port to interface port and check type */
+			// map bridge port to interface port and check type
 			if ($port_key['port_number'] > 0) {
 				if (cacti_sizeof($bridgePortIfIndexes) != 0) {
 					/* some hubs do not always return a port number in the bridge table.
@@ -270,6 +274,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 					   if it isnt in the bridge table
 					*/
 					mactrack_debug('Searching Bridge Port: ' . $port_key['port_number'] . ', Bridge: ' . $bridgePortIfIndexes[$port_key['port_number']]);
+
 					if (isset($bridgePortIfIndexes[$port_key['port_number']])) {
 						$brPortIfIndex = mactrack_arr_key($bridgePortIfIndexes, $port_key['port_number']);
 					} else {
@@ -278,34 +283,34 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 					$brPortIfType = isset($ifInterfaces[$brPortIfIndex]['ifType']) ? $ifInterfaces[$brPortIfIndex]['ifType'] : '';
 				} else {
 					$brPortIfIndex = $port_key['port_number'];
-					$brPortIfType = isset($ifInterfaces[$port_key['port_number']]['ifType']) ? $ifInterfaces[$port_key['port_number']]['ifType'] : '';
+					$brPortIfType  = isset($ifInterfaces[$port_key['port_number']]['ifType']) ? $ifInterfaces[$port_key['port_number']]['ifType'] : '';
 				}
 
 				if (($brPortIfType >= 6) &&
 					($brPortIfType <= 9) &&
 					(!isset($ifInterfaces[$brPortIfIndex]['portLink']))) {
-					/* set some defaults  */
-					$new_port_key_array[$i]['vlan_id'] = 'N/A';
-					$new_port_key_array[$i]['vlan_name'] = 'N/A';
+					// set some defaults
+					$new_port_key_array[$i]['vlan_id']     = 'N/A';
+					$new_port_key_array[$i]['vlan_name']   = 'N/A';
 					$new_port_key_array[$i]['mac_address'] = 'NOT USER';
 					$new_port_key_array[$i]['port_number'] = 'NOT USER';
-					$new_port_key_array[$i]['port_name'] = 'N/A';
+					$new_port_key_array[$i]['port_name']   = 'N/A';
 
-					/* now set the real data */
-					$new_port_key_array[$i]['key'] = mactrack_arr_key($port_key, 'key');
+					// now set the real data
+					$new_port_key_array[$i]['key']         = mactrack_arr_key($port_key, 'key');
 					$new_port_key_array[$i]['port_number'] = isset($brPortIfIndex) ? $brPortIfIndex : '';
-					$new_port_key_array[$i]['vlan_id'] = mactrack_arr_key($vlan_ids, $port_key['key']);
-#print_r($new_port_key_array[$i]);
+					$new_port_key_array[$i]['vlan_id']     = mactrack_arr_key($vlan_ids, $port_key['key']);
+					// print_r($new_port_key_array[$i]);
 					$i++;
 				}
 			}
 		}
 		mactrack_debug('Port number information collected: ' . cacti_sizeof($new_port_key_array));
 
-		/* map mac address */
-		/* only continue if there were user ports defined */
+		// map mac address
+		// only continue if there were user ports defined
 		if (cacti_sizeof($new_port_key_array) > 0) {
-			/* get the bridges active MAC addresses */
+			// get the bridges active MAC addresses
 			$port_macs = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.1', $device, $snmp_readstring, true);
 
 			foreach ($port_macs as $key => $port_mac) {
@@ -330,7 +335,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} elseif (cacti_sizeof($new_port_key_array) > 0) {
 			$device['last_runmessage'] = 'Data collection completed ok';
-			$device['macs_active'] = cacti_sizeof($new_port_key_array);
+			$device['macs_active']     = cacti_sizeof($new_port_key_array);
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
 			$device['last_runmessage'] = 'WARNING: Poller did not find active ports on this device.';
@@ -338,51 +343,51 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 	} else {
 		return $new_port_key_array;
 	}
-
 }
 
 function enterasys_N7_convert_macs($oldmac) {
-	$oldmac = substr($oldmac,stripos($oldmac,'.')+1);
+	$oldmac = substr($oldmac,stripos($oldmac,'.') + 1);
 	$oldmac = substr($oldmac,stripos($oldmac,'.'));
 	$piece  = explode('.', $oldmac);
 	$newmac = '';
 
 	for ($i = 0; $i < 6; $i++) {
-		$newmac .= ($newmac != '' ? ':':'') . dec2hex($piece[$i],2);
+		$newmac .= ($newmac != '' ? ':' : '') . dec2hex($piece[$i],2);
 	}
 
 	return $newmac;
 }
 
 function xform_enterasys_N7_vlan_associations(&$device, $snmp_readstring = '') {
-	/* get raw index data */
+	// get raw index data
 	if ($snmp_readstring == '') {
 		$snmp_readstring = $device['snmp_readstring'];
 	}
 
-	/* initialize the output array */
-	$output_array = array();
+	// initialize the output array
+	$output_array = [];
 
-	/* obtain vlan associations: dot1qTpFdbStatus from dot1qTpFdbTable */
+	// obtain vlan associations: dot1qTpFdbStatus from dot1qTpFdbTable
 	$xformArray = cacti_snmp_walk($device['hostname'], $snmp_readstring,
-					'.1.3.6.1.2.1.17.7.1.2.2.1.2', $device['snmp_version'], '', '',
-					'', '', '', '', $device['snmp_port'], $device['snmp_timeout']);
+		'.1.3.6.1.2.1.17.7.1.2.2.1.2', $device['snmp_version'], '', '',
+		'', '', '', '', $device['snmp_port'], $device['snmp_timeout']);
 
 	$i = 0;
-	foreach($xformArray as $xformItem) {
-		/* peel off the beginning of the OID */
+
+	foreach ($xformArray as $xformItem) {
+		// peel off the beginning of the OID
 		$key = $xformItem['oid'];
 		$key = str_replace('iso', '1', $key);
 		$key = str_replace('1.3.6.1.2.1.17.7.1.2.2.1.2.', '', $key);
 
-		/* now grab the VLAN Id */
-		$perPos = strpos($key, '.',1);
-		$output_array[$i]['vlan_id'] = substr($key,1,$perPos-1);
+		// now grab the VLAN Id
+		$perPos                      = strpos($key, '.',1);
+		$output_array[$i]['vlan_id'] = substr($key,1,$perPos - 1);
 
-		/* save the key=MAC Address for association with the dot1d table */
+		// save the key=MAC Address for association with the dot1d table
 		$output_array[$i]['key'] = substr($key, $perPos);
 
-		/* get VLAN name, if any: dot1qVlanStaticName from dot1qVlanStaticTable */
+		// get VLAN name, if any: dot1qVlanStaticName from dot1qVlanStaticTable
 		$vlan_name = @cacti_snmp_get($device['hostname'], $snmp_readstring,
 			'.1.3.6.1.2.1.17.7.1.4.3.1.1.' . $output_array[$i]['vlan_id'], $device['snmp_version'], '', '',
 			'', '', '', '', $device['snmp_port'], $device['snmp_timeout']);
@@ -391,15 +396,15 @@ function xform_enterasys_N7_vlan_associations(&$device, $snmp_readstring = '') {
 	}
 
 	return array_rekey($output_array, 'key', 'vlan_id');
-	#return $output_array;
+	// return $output_array;
 }
 
 function get_enterasys_N7_vlan_id($OID) {
-		$perPos = strpos($OID, '.',1);
-		$vlan_id = substr($OID,0,$perPos);
+	$perPos  = strpos($OID, '.',1);
+	$vlan_id = substr($OID,0,$perPos);
+
 	return $vlan_id;
 }
-
 
 /*	get_CTAlias_table - This function reads a devices CTAlias table for a site and stores
   the IP address and MAC address combinations in the mac_track_ips table.
@@ -409,51 +414,52 @@ function get_CTAlias_table($site, &$device) {
 
 	mactrack_debug('FUNCTION: get_CTAlias_table started');
 
-	/* get the CTAlias Table for the device */
+	// get the CTAlias Table for the device
 	$CTAliasInterfaces = xform_indexed_data('.1.3.6.1.4.1.52.4.1.3.7.1.1.1.1.3', $device, 2);
 	mactrack_debug('CTAliasInterfaces data collection complete: ' . cacti_sizeof($CTAliasInterfaces));
 
-	/* get the CTAliasMacAddress for the device */
+	// get the CTAliasMacAddress for the device
 	$CTAliasMacAddress = xform_indexed_data('.1.3.6.1.4.1.52.4.1.3.7.1.1.1.1.4', $device, 2, true);
 	mactrack_debug('CTAliasMacAddress data collection complete: ' . cacti_sizeof($CTAliasMacAddress));
 
-	/* convert the mac address if necessary */
+	// convert the mac address if necessary
 	$keys = array_keys($CTAliasMacAddress);
-	$i = 0;
-	foreach($CTAliasMacAddress as $MacAddress) {
+	$i    = 0;
+
+	foreach ($CTAliasMacAddress as $MacAddress) {
 		$CTAliasMacAddress[$keys[$i]] = xform_mac_address($MacAddress);
 		$i++;
 	}
 
-	/* get the CTAliasProtocol Table for the device */
+	// get the CTAliasProtocol Table for the device
 	$CTAliasProtocol = xform_indexed_data('.1.3.6.1.4.1.52.4.1.3.7.1.1.1.1.6', $device, 2);
 	mactrack_debug('CTAliasProtocol data collection complete: ' . cacti_sizeof($CTAliasProtocol));
 
-	/* get the CTAliasAddressText for the device */
+	// get the CTAliasAddressText for the device
 	$CTAliasAddressText = xform_indexed_data('.1.3.6.1.4.1.52.4.1.3.7.1.1.1.1.9', $device, 2);
 	mactrack_debug('CTAliasAddressText data collection complete: ' . cacti_sizeof($CTAliasAddressText));
 
-	/* get the ifNames for the device */
-	$keys = array_keys($CTAliasInterfaces);
-	$i = 0;
-	$CTAliasEntries = array();
+	// get the ifNames for the device
+	$keys           = array_keys($CTAliasInterfaces);
+	$i              = 0;
+	$CTAliasEntries = [];
 
-	foreach($CTAliasInterfaces as $ifIndex) {
-		$CTAliasEntries[$i]['ifIndex'] = $ifIndex;
-		$CTAliasEntries[$i]['timestamp'] = $keys[$i];
-		$CTAliasEntries[$i]['CTAliasProtocol'] = mactrack_arr_key($CTAliasProtocol, $keys[$i]);
-		$CTAliasEntries[$i]['CTAliasMacAddress'] = mactrack_arr_key($CTAliasMacAddress, $keys[$i]);
+	foreach ($CTAliasInterfaces as $ifIndex) {
+		$CTAliasEntries[$i]['ifIndex']            = $ifIndex;
+		$CTAliasEntries[$i]['timestamp']          = $keys[$i];
+		$CTAliasEntries[$i]['CTAliasProtocol']    = mactrack_arr_key($CTAliasProtocol, $keys[$i]);
+		$CTAliasEntries[$i]['CTAliasMacAddress']  = mactrack_arr_key($CTAliasMacAddress, $keys[$i]);
 		$CTAliasEntries[$i]['CTAliasAddressText'] = mactrack_arr_key($CTAliasAddressText, $keys[$i]);
 		$i++;
 	}
 	mactrack_debug('CTAliasEntries assembly complete: ' . cacti_sizeof($CTAliasEntries));
 
-	/* output details to database */
+	// output details to database
 	if (cacti_sizeof($CTAliasEntries)) {
-		$sql = array();
+		$sql = [];
 
-		foreach($CTAliasEntries as $CTAliasEntry) {
-			/* drop non-IP protocols */
+		foreach ($CTAliasEntries as $CTAliasEntry) {
+			// drop non-IP protocols
 			if ($CTAliasEntry['CTAliasProtocol'] != 1) {
 				continue;
 			}
@@ -474,14 +480,13 @@ function get_CTAlias_table($site, &$device) {
 			VALUES ' . implode(', ', $sql));
 	}
 
-	/* save ip information for the device */
+	// save ip information for the device
 	$device['ips_total'] = cacti_sizeof($CTAliasEntries);
 
 	db_execute_prepared('UPDATE mac_track_devices
 		SET ips_total = ?
 		WHERE device_id= ?',
-		array($device['ips_total'], $device['device_id']));
+		[$device['ips_total'], $device['device_id']]);
 
 	mactrack_debug('HOST: ' . $device['hostname'] . ', IP address information collection complete: ' . $device['ips_total']);
 }
-

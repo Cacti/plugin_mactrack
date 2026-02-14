@@ -29,26 +29,22 @@
  * notify requests are done against authoritative servers.
  *
  */
-class Net_DNS2_Notifier extends Net_DNS2
-{
-	/*
-	 * a Net_DNS2_Packet_Request object used for the notify request
-	 */
+class Net_DNS2_Notifier extends Net_DNS2 {
+	// a Net_DNS2_Packet_Request object used for the notify request
 	private $_packet;
 
 	/**
 	 * Constructor - builds a new Net_DNS2_Notifier objected used for doing
 	 * DNS notification for a changed zone
 	 *
-	 * @param string $zone	  the domain name to use for DNS updates
-	 * @param mixed	 $options an array of config options or null
+	 * @param string $zone    the domain name to use for DNS updates
+	 * @param mixed  $options an array of config options or null
 	 *
 	 * @throws Net_DNS2_Exception
 	 * @access public
 	 *
 	 */
-	public function __construct($zone, array $options = null)
-	{
+	public function __construct($zone, array $options = null) {
 		parent::__construct($options);
 
 		//
@@ -74,10 +70,8 @@ class Net_DNS2_Notifier extends Net_DNS2
 	 * @access private
 	 *
 	 */
-	private function _checkName($name)
-	{
+	private function _checkName($name) {
 		if (!preg_match('/' . $this->_packet->question[0]->qname . '$/', $name)) {
-
 			throw new Net_DNS2_Exception(
 				'name provided (' . $name . ') does not match zone name (' .
 				$this->_packet->question[0]->qname . ')',
@@ -98,32 +92,33 @@ class Net_DNS2_Notifier extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function add(Net_DNS2_RR $rr)
-	{
+	public function add(Net_DNS2_RR $rr) {
 		$this->_checkName($rr->name);
+
 		//
 		// add the RR to the "notify" section
 		//
-		if (!in_array($rr, $this->_packet->answer)) {
+		if (!in_array($rr, $this->_packet->answer, true)) {
 			$this->_packet->answer[] = $rr;
 		}
+
 		return true;
 	}
 
 	/**
 	 * add a signature to the request for authentication
 	 *
-	 * @param string $keyname	the key name to use for the TSIG RR
+	 * @param string $keyname   the key name to use for the TSIG RR
 	 * @param string $signature the key to sign the request.
+	 * @param mixed  $algorithm
 	 *
-	 * @return	   boolean
+	 * @return boolean
 	 * @access	   public
 	 * @see		   Net_DNS2::signTSIG()
 	 * @deprecated function deprecated in 1.1.0
 	 *
 	 */
-	public function signature($keyname, $signature, $algorithm = Net_DNS2_RR_TSIG::HMAC_MD5)
-	{
+	public function signature($keyname, $signature, $algorithm = Net_DNS2_RR_TSIG::HMAC_MD5) {
 		return $this->signTSIG($keyname, $signature, $algorithm);
 	}
 
@@ -132,10 +127,9 @@ class Net_DNS2_Notifier extends Net_DNS2
 	 *
 	 * @return Net_DNS2_Packet_Request
 	 * @access public
-	 #
+	 * #
 	 */
-	public function packet()
-	{
+	public function packet() {
 		//
 		// take a copy
 		//
@@ -144,7 +138,7 @@ class Net_DNS2_Notifier extends Net_DNS2
 		//
 		// check for an authentication method; either TSIG or SIG
 		//
-		if (   ($this->auth_signature instanceof Net_DNS2_RR_TSIG)
+		if (($this->auth_signature instanceof Net_DNS2_RR_TSIG)
 			|| ($this->auth_signature instanceof Net_DNS2_RR_SIG)
 		) {
 			$p->additional[] = $this->auth_signature;
@@ -171,12 +165,11 @@ class Net_DNS2_Notifier extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function notify(&$response = null)
-	{
+	public function notify(&$response = null) {
 		//
 		// check for an authentication method; either TSIG or SIG
 		//
-		if (   ($this->auth_signature instanceof Net_DNS2_RR_TSIG)
+		if (($this->auth_signature instanceof Net_DNS2_RR_TSIG)
 			|| ($this->auth_signature instanceof Net_DNS2_RR_SIG)
 		) {
 			$this->_packet->additional[] = $this->auth_signature;

@@ -27,27 +27,21 @@
  *	  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  *
  */
-class Net_DNS2_RR_HINFO extends Net_DNS2_RR
-{
-	/*
-	 * computer informatino
-	 */
+class Net_DNS2_RR_HINFO extends Net_DNS2_RR {
+	// computer informatino
 	public $cpu;
 
-	/*
-	 * operataing system
-	 */
+	// operataing system
 	public $os;
 
 	/**
 	 * method to return the rdata portion of the packet as a string
 	 *
-	 * @return	string
+	 * @return string
 	 * @access	protected
 	 *
 	 */
-	protected function rrToString()
-	{
+	protected function rrToString() {
 		return $this->formatString($this->cpu) . ' ' . $this->formatString($this->os);
 	}
 
@@ -60,13 +54,12 @@ class Net_DNS2_RR_HINFO extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrFromString(array $rdata)
-	{
+	protected function rrFromString(array $rdata) {
 		$data = $this->buildString($rdata);
-		if (cacti_sizeof($data) == 2) {
 
-			$this->cpu	= trim($data[0], '"');
-			$this->os	= trim($data[1], '"');
+		if (cacti_sizeof($data) == 2) {
+			$this->cpu	 = trim($data[0], '"');
+			$this->os	  = trim($data[1], '"');
 
 			return true;
 		}
@@ -83,14 +76,12 @@ class Net_DNS2_RR_HINFO extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrSet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrSet(Net_DNS2_Packet &$packet) {
 		if ($this->rdlength > 0) {
-
 			$offset = $packet->offset;
 
-			$this->cpu	= Net_DNS2_Packet::label($packet, $offset);
-			$this->os	= Net_DNS2_Packet::label($packet, $offset);
+			$this->cpu	 = Net_DNS2_Packet::label($packet, $offset);
+			$this->os	  = Net_DNS2_Packet::label($packet, $offset);
 
 			return true;
 		}
@@ -102,17 +93,15 @@ class Net_DNS2_RR_HINFO extends Net_DNS2_RR
 	 * returns the rdata portion of the DNS packet
 	 *
 	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-	 *								   compressed names
+	 *                                 compressed names
 	 *
-	 * @return mixed				   either returns a binary packed
-	 *								   string or null on failure
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
 	 * @access protected
 	 *
 	 */
-	protected function rrGet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrGet(Net_DNS2_Packet &$packet) {
 		if (strlen($this->cpu) > 0) {
-
 			$data = pack('Ca*Ca*', strlen($this->cpu), $this->cpu, strlen($this->os), $this->os);
 
 			$packet->offset += strlen($data);

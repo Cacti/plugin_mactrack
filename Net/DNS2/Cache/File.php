@@ -21,179 +21,169 @@
  * File-based caching for the Net_DNS2_Cache class
  *
  */
-class Net_DNS2_Cache_File extends Net_DNS2_Cache
-{
-    /**
-     * open a cache object
-     *
-     * @param string  $cache_file path to a file to use for cache storage
-     * @param integer $size       the size of the shared memory segment to create
-     * @param string  $serializer the name of the cache serialize to use
-     *
-     * @throws Net_DNS2_Exception
-     * @access public
-     * @return void
-     *
-     */
-    public function open($cache_file, $size, $serializer)
-    {
-        $this->cache_size       = $size;
-        $this->cache_file       = $cache_file;
-        $this->cache_serializer = $serializer;
+class Net_DNS2_Cache_File extends Net_DNS2_Cache {
+	/**
+	 * open a cache object
+	 *
+	 * @param string  $cache_file path to a file to use for cache storage
+	 * @param integer $size       the size of the shared memory segment to create
+	 * @param string  $serializer the name of the cache serialize to use
+	 *
+	 * @throws Net_DNS2_Exception
+	 * @access public
+	 * @return void
+	 *
+	 */
+	public function open($cache_file, $size, $serializer) {
+		$this->cache_size       = $size;
+		$this->cache_file       = $cache_file;
+		$this->cache_serializer = $serializer;
 
-        //
-        // check that the file exists first
-        //
-        if ( ($this->cache_opened == false) 
-            && (file_exists($this->cache_file) == true) 
-            && (filesize($this->cache_file) > 0)
-        ) {
-            //
-            // open the file for reading
-            //
-            $fp = @fopen($this->cache_file, 'r');
-            if ($fp !== false) {
-                
-                //
-                // lock the file just in case
-                //
-                flock($fp, LOCK_EX);
+		//
+		// check that the file exists first
+		//
+		if (($this->cache_opened == false)
+			&& (file_exists($this->cache_file) == true)
+			&& (filesize($this->cache_file) > 0)
+		) {
+			//
+			// open the file for reading
+			//
+			$fp = @fopen($this->cache_file, 'r');
 
-                //
-                // read the file contents
-                //
-                $data = fread($fp, filesize($this->cache_file));
+			if ($fp !== false) {
+				//
+				// lock the file just in case
+				//
+				flock($fp, LOCK_EX);
 
-                $decoded = null;
-                    
-                if ($this->cache_serializer == 'json') {
+				//
+				// read the file contents
+				//
+				$data = fread($fp, filesize($this->cache_file));
 
-                    $decoded = json_decode($data, true);         
-                } else {
+				$decoded = null;
 
-                    $decoded = unserialize($data);                
-                }
+				if ($this->cache_serializer == 'json') {
+					$decoded = json_decode($data, true);
+				} else {
+					$decoded = unserialize($data);
+				}
 
-                if (is_array($decoded) == true) {
+				if (is_array($decoded) == true) {
+					$this->cache_data = $decoded;
+				} else {
+					$this->cache_data = [];
+				}
 
-                    $this->cache_data = $decoded;
-                } else {
+				//
+				// unlock
+				//
+				flock($fp, LOCK_UN);
 
-                    $this->cache_data = [];
-                }
+				//
+				// close the file
+				//
+				fclose($fp);
 
-                //
-                // unlock
-                //
-                flock($fp, LOCK_UN);
+				//
+				// clean up the data
+				//
+				$this->clean();
 
-                //
-                // close the file
-                //
-                fclose($fp);
+				//
+				// mark this so we don't read this contents more than once per instance.
+				//
+				$this->cache_opened = true;
+			}
+		}
+	}
 
-                //
-                // clean up the data
-                //
-                $this->clean();
+	/**
+	 * Destructor
+	 *
+	 * @access public
+	 *
+	 */
+	public function __destruct() {
+		//
+		// if there's no cache file set, then there's nothing to do
+		//
+		if (strlen($this->cache_file) == 0) {
+			return;
+		}
 
-                //
-                // mark this so we don't read this contents more than once per instance.
-                //
-                $this->cache_opened = true;
-            }
-        }
-    }
+		//
+		// open the file for reading/writing
+		//
+		$fp = fopen($this->cache_file, 'a+');
 
-    /**
-     * Destructor
-     *
-     * @access public
-     *
-     */
-    public function __destruct()
-    {
-        //
-        // if there's no cache file set, then there's nothing to do
-        //
-        if (strlen($this->cache_file) == 0) {
-            return;
-        }
+		if ($fp !== false) {
+			//
+			// lock the file just in case
+			//
+			flock($fp, LOCK_EX);
 
-        //
-        // open the file for reading/writing
-        //
-        $fp = fopen($this->cache_file, 'a+');
-        if ($fp !== false) {
-                
-            //
-            // lock the file just in case
-            //
-            flock($fp, LOCK_EX);
-        
-            //
-            // seek to the start of the file to read
-            //
-            fseek($fp, 0, SEEK_SET);
+			//
+			// seek to the start of the file to read
+			//
+			fseek($fp, 0, SEEK_SET);
 
-            //
-            // read the file contents
-            //
-            $data = @fread($fp, filesize($this->cache_file));
-            if ( ($data !== false) && (strlen($data) > 0) ) {
+			//
+			// read the file contents
+			//
+			$data = @fread($fp, filesize($this->cache_file));
 
-                //
-                // unserialize and store the data
-                //
-                $c = $this->cache_data;
+			if (($data !== false) && (strlen($data) > 0)) {
+				//
+				// unserialize and store the data
+				//
+				$c = $this->cache_data;
 
-                $decoded = null;
+				$decoded = null;
 
-                if ($this->cache_serializer == 'json') {
+				if ($this->cache_serializer == 'json') {
+					$decoded = json_decode($data, true);
+				} else {
+					$decoded = unserialize($data);
+				}
 
-                    $decoded = json_decode($data, true);
-                } else {
+				if (is_array($decoded) == true) {
+					$this->cache_data = array_merge($c, $decoded);
+				}
+			}
 
-                    $decoded = unserialize($data);
-                }
-                
-                if (is_array($decoded) == true) {
+			//
+			// trucate the file
+			//
+			ftruncate($fp, 0);
 
-                    $this->cache_data = array_merge($c, $decoded);
-                }
-            }
+			//
+			// clean the data
+			//
+			$this->clean();
 
-            //
-            // trucate the file
-            //
-            ftruncate($fp, 0);
+			//
+			// resize the data
+			//
+			$data = $this->resize();
 
-            //
-            // clean the data
-            //
-            $this->clean();
+			if (!is_null($data)) {
+				//
+				// write the file contents
+				//
+				fwrite($fp, $data);
+			}
 
-            //
-            // resize the data
-            //
-            $data = $this->resize();
-            if (!is_null($data)) {
+			//
+			// unlock
+			//
+			flock($fp, LOCK_UN);
 
-                //
-                // write the file contents
-                //
-                fwrite($fp, $data);
-            }
-
-            //
-            // unlock
-            //
-            flock($fp, LOCK_UN);
-
-            //
-            // close the file
-            //
-            fclose($fp);
-        }
-    }
+			//
+			// close the file
+			//
+			fclose($fp);
+		}
+	}
 }

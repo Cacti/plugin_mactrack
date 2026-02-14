@@ -1,5 +1,5 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+// vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4:
 
 /**
  * DNS Library for handling lookups and updates. 
@@ -64,319 +64,307 @@
  * @see      Net_DNS2_Socket
  *
  */
-class Net_DNS2_Socket_Streams extends Net_DNS2_Socket
-{
-    private $_context;
+class Net_DNS2_Socket_Streams extends Net_DNS2_Socket {
+	private $_context;
 
-    /**
-     * opens a socket connection to the DNS server
-     *
-     * @return boolean
-     * @access public
-     *
-     */
-    public function open()
-    {
-        //
-        // create a list of options for the context 
-        //
-        $opts = array('socket' => array());
-        
-        //
-        // bind to a local IP/port if it's set
-        //
-        if (strlen($this->local_host) > 0) {
+	/**
+	 * opens a socket connection to the DNS server
+	 *
+	 * @return boolean
+	 * @access public
+	 *
+	 */
+	public function open() {
+		//
+		// create a list of options for the context
+		//
+		$opts = ['socket' => []];
 
-            $opts['socket']['bindto'] = $this->local_host;
-            if ($this->local_port > 0) {
+		//
+		// bind to a local IP/port if it's set
+		//
+		if (strlen($this->local_host) > 0) {
+			$opts['socket']['bindto'] = $this->local_host;
 
-                $opts['socket']['bindto'] .= ':' . $this->local_port;
-            }
-        }
+			if ($this->local_port > 0) {
+				$opts['socket']['bindto'] .= ':' . $this->local_port;
+			}
+		}
 
-        //
-        // create the context
-        //
-        $this->_context = @stream_context_create($opts);
+		//
+		// create the context
+		//
+		$this->_context = @stream_context_create($opts);
 
-        //
-        // create socket
-        //
-        $errno;
-        $errstr;
+		//
+		// create socket
+		//
 
-        switch($this->type) {
-        case Net_DNS2_Socket::SOCK_STREAM:
+		switch($this->type) {
+			case Net_DNS2_Socket::SOCK_STREAM:
+				if (Net_DNS2::isIPv4($this->host) == true) {
+					$this->sock = @stream_socket_client(
+						'tcp://' . $this->host . ':' . $this->port,
+						$errno, $errstr, $this->timeout,
+						STREAM_CLIENT_CONNECT, $this->_context
+					);
+				} elseif (Net_DNS2::isIPv6($this->host) == true) {
+					$this->sock = @stream_socket_client(
+						'tcp://[' . $this->host . ']:' . $this->port,
+						$errno, $errstr, $this->timeout,
+						STREAM_CLIENT_CONNECT, $this->_context
+					);
+				} else {
+					$this->last_error = 'invalid address type: ' . $this->host;
 
-            if (Net_DNS2::isIPv4($this->host) == true) {
+					return false;
+				}
 
-                $this->sock = @stream_socket_client(
-                    'tcp://' . $this->host . ':' . $this->port, 
-                    $errno, $errstr, $this->timeout, 
-                    STREAM_CLIENT_CONNECT, $this->_context
-                );
-            } else if (Net_DNS2::isIPv6($this->host) == true) {
+				break;
+			case Net_DNS2_Socket::SOCK_DGRAM:
+				if (Net_DNS2::isIPv4($this->host) == true) {
+					$this->sock = @stream_socket_client(
+						'udp://' . $this->host . ':' . $this->port,
+						$errno, $errstr, $this->timeout,
+						STREAM_CLIENT_CONNECT, $this->_context
+					);
+				} elseif (Net_DNS2::isIPv6($this->host) == true) {
+					$this->sock = @stream_socket_client(
+						'udp://[' . $this->host . ']:' . $this->port,
+						$errno, $errstr, $this->timeout,
+						STREAM_CLIENT_CONNECT, $this->_context
+					);
+				} else {
+					$this->last_error = 'invalid address type: ' . $this->host;
 
-                $this->sock = @stream_socket_client(
-                    'tcp://[' . $this->host . ']:' . $this->port, 
-                    $errno, $errstr, $this->timeout, 
-                    STREAM_CLIENT_CONNECT, $this->_context
-                );
-            } else {
+					return false;
+				}
 
-                $this->last_error = 'invalid address type: ' . $this->host;
-                return false;
-            }
+				break;
+			default:
+				$this->last_error = 'Invalid socket type: ' . $this->type;
 
-            break;
-        
-        case Net_DNS2_Socket::SOCK_DGRAM:
+				return false;
+		}
 
-            if (Net_DNS2::isIPv4($this->host) == true) {
+		if ($this->sock === false) {
+			$this->last_error = $errstr;
 
-                $this->sock = @stream_socket_client(
-                    'udp://' . $this->host . ':' . $this->port, 
-                    $errno, $errstr, $this->timeout, 
-                    STREAM_CLIENT_CONNECT, $this->_context
-                );
-            } else if (Net_DNS2::isIPv6($this->host) == true) {
+			return false;
+		}
 
-                $this->sock = @stream_socket_client(
-                    'udp://[' . $this->host . ']:' . $this->port, 
-                    $errno, $errstr, $this->timeout, 
-                    STREAM_CLIENT_CONNECT, $this->_context
-                );
-            } else {
+		//
+		// set it to non-blocking and set the timeout
+		//
+		@stream_set_blocking($this->sock, 0);
+		@stream_set_timeout($this->sock, $this->timeout);
 
-                $this->last_error = 'invalid address type: ' . $this->host;
-                return false;
-            }
+		return true;
+	}
 
-            break;
-            
-        default:
-            $this->last_error = 'Invalid socket type: ' . $this->type;
-            return false;
-        }
+	/**
+	 * closes a socket connection to the DNS server
+	 *
+	 * @return boolean
+	 * @access public
+	 *
+	 */
+	public function close() {
+		if (is_resource($this->sock) === true) {
+			@fclose($this->sock);
+		}
 
-        if ($this->sock === false) {
+		return true;
+	}
 
-            $this->last_error = $errstr;
-            return false;
-        }
+	/**
+	 * writes the given string to the DNS server socket
+	 *
+	 * @param string $data a binary packed DNS packet
+	 *
+	 * @return boolean
+	 * @access public
+	 *
+	 */
+	public function write($data) {
+		$length = strlen($data);
 
-        //
-        // set it to non-blocking and set the timeout
-        //
-        @stream_set_blocking($this->sock, 0);
-        @stream_set_timeout($this->sock, $this->timeout);
+		if ($length == 0) {
+			$this->last_error = 'empty data on write()';
 
-        return true;
-    }
+			return false;
+		}
 
-    /**
-     * closes a socket connection to the DNS server
-     *
-     * @return boolean
-     * @access public
-     *
-     */
-    public function close()
-    {
-        if (is_resource($this->sock) === true) {
+		$read   = null;
+		$write  = [$this->sock];
+		$except = null;
 
-            @fclose($this->sock);
-        }
-        return true;
-    }
+		//
+		// select on write
+		//
+		$result = stream_select($read, $write, $except, $this->timeout);
 
-    /**
-     * writes the given string to the DNS server socket
-     *
-     * @param string $data a binary packed DNS packet
-     *
-     * @return boolean
-     * @access public
-     *
-     */
-    public function write($data)
-    {
-        $length = strlen($data);
-        if ($length == 0) {
+		if ($result === false) {
+			$this->last_error = 'failed on write select()';
 
-            $this->last_error = 'empty data on write()';
-            return false;
-        }
+			return false;
+		}
 
-        $read   = null;
-        $write  = array($this->sock);
-        $except = null;
+		if ($result == 0) {
+			$this->last_error = 'timeout on write select()';
 
-        //
-        // select on write
-        //
-        $result = stream_select($read, $write, $except, $this->timeout);
-        if ($result === false) {
+			return false;
+		}
 
-            $this->last_error = 'failed on write select()';
-            return false;
+		//
+		// if it's a TCP socket, then we need to packet and send the length of the
+		// data as the first 16bit of data.
+		//
+		if ($this->type == Net_DNS2_Socket::SOCK_STREAM) {
+			$s = chr($length >> 8) . chr($length);
 
-        } else if ($result == 0) {
+			if (@fwrite($this->sock, $s) === false) {
+				$this->last_error = 'failed to fwrite() 16bit length';
 
-            $this->last_error = 'timeout on write select()';
-            return false;
-        }
+				return false;
+			}
+		}
 
-        //
-        // if it's a TCP socket, then we need to packet and send the length of the
-        // data as the first 16bit of data.
-        //        
-        if ($this->type == Net_DNS2_Socket::SOCK_STREAM) {
+		//
+		// write the data to the socket
+		//
+		$size = @fwrite($this->sock, $data);
 
-            $s = chr($length >> 8) . chr($length);
+		if (($size === false) || ($size != $length)) {
+			$this->last_error = 'failed to fwrite() packet';
 
-            if (@fwrite($this->sock, $s) === false) {
+			return false;
+		}
 
-                $this->last_error = 'failed to fwrite() 16bit length';
-                return false;
-            }
-        }
+		return true;
+	}
 
-        //
-        // write the data to the socket
-        //
-        $size = @fwrite($this->sock, $data);
-        if ( ($size === false) || ($size != $length) ) {
-        
-            $this->last_error = 'failed to fwrite() packet';
-            return false;
-        }
+	/**
+	 * reads a response from a DNS server
+	 *
+	 * @param integer &$size    the size of the DNS packet read is passed back
+	 * @param mixed   $max_size
+	 *
+	 * @return mixed returns the data on success and false on error
+	 * @access public
+	 *
+	 */
+	public function read(&$size, $max_size) {
+		$read   = [$this->sock];
+		$write  = null;
+		$except = null;
 
-        return true;
-    }
+		//
+		// make sure our socket is non-blocking
+		//
+		@stream_set_blocking($this->sock, 0);
 
-    /**
-     * reads a response from a DNS server
-     *
-     * @param integer &$size the size of the DNS packet read is passed back
-     *
-     * @return mixed         returns the data on success and false on error
-     * @access public
-     *
-     */
-    public function read(&$size, $max_size)
-    {
-        $read   = array($this->sock);
-        $write  = null;
-        $except = null;
+		//
+		// select on read
+		//
+		$result = stream_select($read, $write, $except, $this->timeout);
 
-        //
-        // make sure our socket is non-blocking
-        //
-        @stream_set_blocking($this->sock, 0);
+		if ($result === false) {
+			$this->last_error = 'error on read select()';
 
-        //
-        // select on read
-        //
-        $result = stream_select($read, $write, $except, $this->timeout);
-        if ($result === false) {
+			return false;
+		}
 
-            $this->last_error = 'error on read select()';
-            return false;
+		if ($result == 0) {
+			$this->last_error = 'timeout on read select()';
 
-        } else if ($result == 0) {
+			return false;
+		}
 
-            $this->last_error = 'timeout on read select()';
-            return false;
-        }
+		$data   = '';
+		$length = $max_size;
 
-        $data = '';
-        $length = $max_size;
+		//
+		// if it's a TCP socket, then the first two bytes is the length of the DNS
+		// packet- we need to read that off first, then use that value for the
+		// packet read.
+		//
+		if ($this->type == Net_DNS2_Socket::SOCK_STREAM) {
+			if (($data = fread($this->sock, 2)) === false) {
+				$this->last_error = 'failed on fread() for data length';
 
-        //
-        // if it's a TCP socket, then the first two bytes is the length of the DNS
-        // packet- we need to read that off first, then use that value for the    
-        // packet read.
-        //
-        if ($this->type == Net_DNS2_Socket::SOCK_STREAM) {
-    
-            if (($data = fread($this->sock, 2)) === false) {
-                
-                $this->last_error = 'failed on fread() for data length';
-                return false;
-            }
-        
-            $length = ord($data[0]) << 8 | ord($data[1]);
-            if ($length < Net_DNS2_Lookups::DNS_HEADER_SIZE) {
+				return false;
+			}
 
-                return false;
-            }
-        }
+			$length = ord($data[0]) << 8 | ord($data[1]);
 
-        //
-        // at this point, we know that there is data on the socket to be read,
-        // because we've already extracted the length from the first two bytes.
-        //
-        // so the easiest thing to do, is just turn off socket blocking, and
-        // wait for the data.
-        //
-        @stream_set_blocking($this->sock, 1);
+			if ($length < Net_DNS2_Lookups::DNS_HEADER_SIZE) {
+				return false;
+			}
+		}
 
-        //
-        // read the data from the socket
-        //
-        $data = '';
+		//
+		// at this point, we know that there is data on the socket to be read,
+		// because we've already extracted the length from the first two bytes.
+		//
+		// so the easiest thing to do, is just turn off socket blocking, and
+		// wait for the data.
+		//
+		@stream_set_blocking($this->sock, 1);
 
-        //
-        // the streams socket is weird for TCP sockets; it doesn't seem to always
-        // return all the data properly; but the looping code I added broke UDP
-        // packets- my fault- 
-        //
-        // the sockets library works much better.
-        //
-        if ($this->type == Net_DNS2_Socket::SOCK_STREAM) {
+		//
+		// read the data from the socket
+		//
+		$data = '';
 
-            $chunk = '';
-            $chunk_size = $length;
+		//
+		// the streams socket is weird for TCP sockets; it doesn't seem to always
+		// return all the data properly; but the looping code I added broke UDP
+		// packets- my fault-
+		//
+		// the sockets library works much better.
+		//
+		if ($this->type == Net_DNS2_Socket::SOCK_STREAM) {
+			$chunk      = '';
+			$chunk_size = $length;
 
-            //
-            // loop so we make sure we read all the data
-            //
-            while (1) {
+			//
+			// loop so we make sure we read all the data
+			//
+			while (1) {
+				$chunk = fread($this->sock, $chunk_size);
 
-                $chunk = fread($this->sock, $chunk_size);
-                if ($chunk === false) {
-            
-                    $this->last_error = 'failed on fread() for data';
-                    return false;
-                }
+				if ($chunk === false) {
+					$this->last_error = 'failed on fread() for data';
 
-                $data .= $chunk;
-                $chunk_size -= strlen($chunk);
+					return false;
+				}
 
-                if (strlen($data) >= $length) {
-                    break;
-                }
-            }
+				$data .= $chunk;
+				$chunk_size -= strlen($chunk);
 
-        } else {
+				if (strlen($data) >= $length) {
+					break;
+				}
+			}
+		} else {
+			//
+			// if it's UDP, it's a single fixed-size frame, and the streams library
+			// doesn't seem to have a problem reading it.
+			//
+			$data = fread($this->sock, $length);
 
-            //
-            // if it's UDP, it's a single fixed-size frame, and the streams library
-            // doesn't seem to have a problem reading it.
-            //
-            $data = fread($this->sock, $length);
-            if ($length === false) {
-            
-                $this->last_error = 'failed on fread() for data';
-                return false;
-            }
-        }
-        
-        $size = strlen($data);
+			if ($length === false) {
+				$this->last_error = 'failed on fread() for data';
 
-        return $data;
-    }
+				return false;
+			}
+		}
+
+		$size = strlen($data);
+
+		return $data;
+	}
 }
 
 /*

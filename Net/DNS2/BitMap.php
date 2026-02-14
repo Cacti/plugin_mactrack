@@ -22,8 +22,7 @@
  * and NSEC3 RR's
  *
  */
-class Net_DNS2_BitMap
-{
+class Net_DNS2_BitMap {
 	/**
 	 * parses a RR bitmap field defined in RFC3845, into an array of RR names.
 	 *
@@ -35,8 +34,7 @@ class Net_DNS2_BitMap
 	 * @access public
 	 *
 	 */
-	public static function bitMapToArray($data)
-	{
+	public static function bitMapToArray($data) {
 		if (strlen($data) == 0) {
 			return [];
 		}
@@ -46,7 +44,6 @@ class Net_DNS2_BitMap
 		$length = strlen($data);
 
 		while ($offset < $length) {
-
 			//
 			// unpack the window and length values
 			//
@@ -64,21 +61,20 @@ class Net_DNS2_BitMap
 			// have a 'B' flag for unpack()
 			//
 			$bitstr = '';
+
 			foreach ($bitmap as $r) {
 				$bitstr .= sprintf('%08b', $r);
 			}
 
 			$blen = strlen($bitstr);
-			for ($i=0; $i<$blen; $i++) {
 
+			for ($i = 0; $i < $blen; $i++) {
 				if ($bitstr[$i] == '1') {
 					$type = $x['window'] * 256 + $i;
 
 					if (isset(Net_DNS2_Lookups::$rr_types_by_id[$type])) {
-
 						$output[] = Net_DNS2_Lookups::$rr_types_by_id[$type];
 					} else {
-
 						$output[] = 'TYPE' . $type;
 					}
 				}
@@ -97,8 +93,7 @@ class Net_DNS2_BitMap
 	 * @access public
 	 *
 	 */
-	public static function arrayToBitMap(array $data)
-	{
+	public static function arrayToBitMap(array $data) {
 		if (cacti_sizeof($data) == 0) {
 			return '';
 		}
@@ -109,7 +104,7 @@ class Net_DNS2_BitMap
 		// go through each RR
 		//
 		$max = 0;
-		$bm = [];
+		$bm  = [];
 
 		foreach ($data as $rr) {
 			$rr = strtoupper($rr);
@@ -118,26 +113,24 @@ class Net_DNS2_BitMap
 			// get the type id for the RR
 			//
 			$type = @Net_DNS2_Lookups::$rr_types_by_name[$rr];
-			if (isset($type)) {
 
+			if (isset($type)) {
 				//
 				// skip meta types or qtypes
 				//
-				if ( (isset(Net_DNS2_Lookups::$rr_qtypes_by_id[$type]))
+				if ((isset(Net_DNS2_Lookups::$rr_qtypes_by_id[$type]))
 					|| (isset(Net_DNS2_Lookups::$rr_metatypes_by_id[$type]))
 				) {
 					continue;
 				}
-
 			} else {
-
 				//
 				// if it's not found, then it must be defined as TYPE<id>, per
 				// RFC3845 section 2.2, if it's not, we ignore it.
 				//
-				list($name, $type) = explode('TYPE', $rr);
-				if (!isset($type)) {
+				[$name, $type] = explode('TYPE', $rr);
 
+				if (!isset($type)) {
 					continue;
 				}
 			}
@@ -148,21 +141,21 @@ class Net_DNS2_BitMap
 			$current_window = (int)($type / 256);
 
 			$val = $type - $current_window * 256.0;
+
 			if ($val > $max) {
 				$max = $val;
 			}
 
-			$bm[$current_window][$val] = 1;
+			$bm[$current_window][$val]     = 1;
 			$bm[$current_window]['length'] = ceil(($max + 1) / 8);
 		}
 
 		$output = '';
 
 		foreach ($bm as $window => $bitdata) {
-
 			$bitstr = '';
 
-			for ($i=0; $i<$bm[$window]['length'] * 8; $i++) {
+			for ($i = 0; $i < $bm[$window]['length'] * 8; $i++) {
 				if (isset($bm[$window][$i])) {
 					$bitstr .= '1';
 				} else {
@@ -186,14 +179,13 @@ class Net_DNS2_BitMap
 	 * @access public
 	 *
 	 */
-	public static function bigBaseConvert($number)
-	{
+	public static function bigBaseConvert($number) {
 		$result = '';
 
-		$bin = substr(chunk_split(strrev($number), 4, '-'), 0, -1);
+		$bin  = substr(chunk_split(strrev($number), 4, '-'), 0, -1);
 		$temp = preg_split('[-]', $bin, -1, PREG_SPLIT_DELIM_CAPTURE);
 
-		for ($i = cacti_sizeof($temp)-1;$i >= 0;$i--) {
+		for ($i = cacti_sizeof($temp) - 1; $i >= 0; $i--) {
 			$result = $result . base_convert(strrev($temp[$i]), 2, 16);
 		}
 

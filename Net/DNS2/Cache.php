@@ -21,26 +21,17 @@
  * A class to provide simple dns lookup caching.
  *
  */
-class Net_DNS2_Cache
-{
-	/*
-	 * the filename of the cache file
-	 */
+class Net_DNS2_Cache {
+	// the filename of the cache file
 	protected $cache_file = '';
 
-	/*
-	 * the local data store for the cache
-	 */
+	// the local data store for the cache
 	protected $cache_data = [];
 
-	/*
-	 * the size of the cache to use
-	 */
+	// the size of the cache to use
 	protected $cache_size = 0;
 
-	/*
-	 * the cache serializer
-	 */
+	// the cache serializer
 	protected $cache_serializer;
 
 	/*
@@ -58,8 +49,7 @@ class Net_DNS2_Cache
 	 * @access public
 	 *
 	 */
-	public function has($key)
-	{
+	public function has($key) {
 		return isset($this->cache_data[$key]);
 	}
 
@@ -72,17 +62,14 @@ class Net_DNS2_Cache
 	 * @access public
 	 *
 	 */
-	public function get($key)
-	{
+	public function get($key) {
 		if (isset($this->cache_data[$key])) {
-
 			if ($this->cache_serializer == 'json') {
 				return json_decode($this->cache_data[$key]['object']);
 			} else {
 				return unserialize($this->cache_data[$key]['object']);
 			}
 		} else {
-
 			return false;
 		}
 	}
@@ -91,20 +78,19 @@ class Net_DNS2_Cache
 	 * adds a new key/value pair to the cache
 	 *
 	 * @param string $key  the key for the new cache entry
-	 * @param mixed	 $data the data to store in cache
+	 * @param mixed  $data the data to store in cache
 	 *
 	 * @return void
 	 * @access public
 	 *
 	 */
-	public function put($key, $data)
-	{
+	public function put($key, $data) {
 		$ttl = 86400 * 365;
 
 		//
 		// clear the rdata values
 		//
-		$data->rdata = '';
+		$data->rdata    = '';
 		$data->rdlength = 0;
 
 		//
@@ -118,37 +104,35 @@ class Net_DNS2_Cache
 		// unserialize the actual RR object when it's get() from the cache.
 		//
 		foreach ($data->answer as $index => $rr) {
-
 			if ($rr->ttl < $ttl) {
 				$ttl = $rr->ttl;
 			}
 
-			$rr->rdata = '';
+			$rr->rdata    = '';
 			$rr->rdlength = 0;
 		}
+
 		foreach ($data->authority as $index => $rr) {
-
 			if ($rr->ttl < $ttl) {
 				$ttl = $rr->ttl;
 			}
 
-			$rr->rdata = '';
+			$rr->rdata    = '';
 			$rr->rdlength = 0;
 		}
-		foreach ($data->additional as $index => $rr) {
 
+		foreach ($data->additional as $index => $rr) {
 			if ($rr->ttl < $ttl) {
 				$ttl = $rr->ttl;
 			}
 
-			$rr->rdata = '';
+			$rr->rdata    = '';
 			$rr->rdlength = 0;
 		}
 
 		$this->cache_data[$key] = [
-
 			'cache_date'	=> time(),
-			'ttl'			=> $ttl
+			'ttl'			     => $ttl
 		];
 
 		if ($this->cache_serializer == 'json') {
@@ -165,10 +149,8 @@ class Net_DNS2_Cache
 	 * @access protected
 	 *
 	 */
-	protected function clean()
-	{
+	protected function clean() {
 		if (cacti_sizeof($this->cache_data) > 0) {
-
 			//
 			// go through each entry and adjust their TTL, and remove entries that
 			// have expired
@@ -176,14 +158,11 @@ class Net_DNS2_Cache
 			$now = time();
 
 			foreach ($this->cache_data as $key => $data) {
-
 				$diff = $now - $data['cache_date'];
 
 				if ($data['ttl'] <= $diff) {
-
 					unset($this->cache_data[$key]);
 				} else {
-
 					$this->cache_data[$key]['ttl'] -= $diff;
 					$this->cache_data[$key]['cache_date'] = $now;
 				}
@@ -198,10 +177,8 @@ class Net_DNS2_Cache
 	 * @access protected
 	 *
 	 */
-	protected function resize()
-	{
+	protected function resize() {
 		if (cacti_sizeof($this->cache_data) > 0) {
-
 			//
 			// serialize the cache data
 			//
@@ -216,9 +193,7 @@ class Net_DNS2_Cache
 			// is smaller than the actual cache data
 			//
 			if (strlen($cache) > $this->cache_size) {
-
 				while (strlen($cache) > $this->cache_size) {
-
 					//
 					// go through the data, and remove the entries closed to
 					// their expiration date.
@@ -227,9 +202,7 @@ class Net_DNS2_Cache
 					$smallest_key = null;
 
 					foreach ($this->cache_data as $key => $data) {
-
 						if ($data['ttl'] < $smallest_ttl) {
-
 							$smallest_ttl = $data['ttl'];
 							$smallest_key = $key;
 						}
@@ -251,7 +224,7 @@ class Net_DNS2_Cache
 				}
 			}
 
-			if ( ($cache == 'a:0:{}') || ($cache == '{}') ) {
+			if (($cache == 'a:0:{}') || ($cache == '{}')) {
 				return null;
 			} else {
 				return $cache;

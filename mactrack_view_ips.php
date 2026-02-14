@@ -38,63 +38,63 @@ if (isset_request_var('export')) {
 }
 
 function mactrack_view_ips_validate_request_vars() {
-    /* ================= input validation and session storage ================= */
-    $filters = array(
-        'rows' => array(
-            'filter' => FILTER_VALIDATE_INT,
-            'pageset' => true,
-            'default' => '-1'
-            ),
-        'page' => array(
-            'filter' => FILTER_VALIDATE_INT,
-            'default' => '1'
-            ),
-        'site_id' => array(
-            'filter' => FILTER_VALIDATE_INT,
-            'default' => '-1'
-            ),
-        'device_id' => array(
-            'filter' => FILTER_VALIDATE_INT,
-            'default' => '-1'
-            ),
-        'mac_filter_type_id' => array(
-            'filter' => FILTER_VALIDATE_INT,
-            'default' => '1'
-            ),
-        'ip_filter_type_id' => array(
-            'filter' => FILTER_VALIDATE_INT,
-            'default' => '1'
-            ),
-        'filter' => array(
-            'filter' => FILTER_CALLBACK,
-            'pageset' => true,
-            'default' => '',
-            'options' => array('options' => 'sanitize_search_string')
-            ),
-        'ip_filter' => array(
-            'filter' => FILTER_CALLBACK,
-            'default' => '',
-            'options' => array('options' => 'sanitize_search_string')
-            ),
-        'mac_filter' => array(
-            'filter' => FILTER_CALLBACK,
-            'default' => '',
-            'options' => array('options' => 'sanitize_search_string')
-            ),
-        'sort_column' => array(
-            'filter' => FILTER_CALLBACK,
-            'default' => 'site_name',
-            'options' => array('options' => 'sanitize_search_string')
-            ),
-        'sort_direction' => array(
-            'filter' => FILTER_CALLBACK,
-            'default' => 'ASC',
-            'options' => array('options' => 'sanitize_search_string')
-            )
-    );
+	// ================= input validation and session storage =================
+	$filters = [
+		'rows' => [
+			'filter'  => FILTER_VALIDATE_INT,
+			'pageset' => true,
+			'default' => '-1'
+			],
+		'page' => [
+			'filter'  => FILTER_VALIDATE_INT,
+			'default' => '1'
+			],
+		'site_id' => [
+			'filter'  => FILTER_VALIDATE_INT,
+			'default' => '-1'
+			],
+		'device_id' => [
+			'filter'  => FILTER_VALIDATE_INT,
+			'default' => '-1'
+			],
+		'mac_filter_type_id' => [
+			'filter'  => FILTER_VALIDATE_INT,
+			'default' => '1'
+			],
+		'ip_filter_type_id' => [
+			'filter'  => FILTER_VALIDATE_INT,
+			'default' => '1'
+			],
+		'filter' => [
+			'filter'  => FILTER_CALLBACK,
+			'pageset' => true,
+			'default' => '',
+			'options' => ['options' => 'sanitize_search_string']
+			],
+		'ip_filter' => [
+			'filter'  => FILTER_CALLBACK,
+			'default' => '',
+			'options' => ['options' => 'sanitize_search_string']
+			],
+		'mac_filter' => [
+			'filter'  => FILTER_CALLBACK,
+			'default' => '',
+			'options' => ['options' => 'sanitize_search_string']
+			],
+		'sort_column' => [
+			'filter'  => FILTER_CALLBACK,
+			'default' => 'site_name',
+			'options' => ['options' => 'sanitize_search_string']
+			],
+		'sort_direction' => [
+			'filter'  => FILTER_CALLBACK,
+			'default' => 'ASC',
+			'options' => ['options' => 'sanitize_search_string']
+			]
+	];
 
-    validate_store_request_vars($filters, 'sess_mtv_ips');
-    /* ================= input validation ================= */
+	validate_store_request_vars($filters, 'sess_mtv_ips');
+	// ================= input validation =================
 }
 
 function mactrack_view_export_ip_ranges() {
@@ -104,24 +104,25 @@ function mactrack_view_export_ip_ranges() {
 
 	$ip_ranges = mactrack_view_get_ip_range_records($sql_where, 0, false);
 
-	$xport_array = array();
+	$xport_array = [];
 
 	array_push($xport_array, '"site_id","site_name","ip_range",' .
 			'"ips_current","ips_current_date","ips_max","ips_max_date"');
 
 	if (is_array($ip_ranges)) {
-		foreach($ip_ranges as $ip_range) {
-			array_push($xport_array,'"'   .
-				$ip_range['site_id']     . '","' . $ip_range['site_name']        . '","' .
-				$ip_range['ip_range']    . '","' .
+		foreach ($ip_ranges as $ip_range) {
+			array_push($xport_array,'"' .
+				$ip_range['site_id'] . '","' . $ip_range['site_name'] . '","' .
+				$ip_range['ip_range'] . '","' .
 				$ip_range['ips_current'] . '","' . $ip_range['ips_current_date'] . '","' .
-				$ip_range['ips_max']     . '","' . $ip_range['ips_max_date']     . '"');
+				$ip_range['ips_max'] . '","' . $ip_range['ips_max_date'] . '"');
 		}
 	}
 
 	header('Content-type: application/csv');
 	header('Content-Disposition: attachment; filename=cacti_ip_range_xport.csv');
-	foreach($xport_array as $xport_line) {
+
+	foreach ($xport_array as $xport_line) {
 		print $xport_line . "\n";
 	}
 }
@@ -134,8 +135,9 @@ function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = 
 	}
 
 	$sql_order = get_order_string();
+
 	if ($apply_limits) {
-		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
+		$sql_limit = ' LIMIT ' . ($rows * (get_request_var('page') - 1)) . ', ' . $rows;
 	} else {
 		$sql_limit = '';
 	}
@@ -190,39 +192,39 @@ function mactrack_view_ip_ranges() {
 		ON mtir.site_id = mts.site_id
 		$sql_where");
 
-	$display_text = array(
-		'nosort' => array(
+	$display_text = [
+		'nosort' => [
 			'display' => __('Actions', 'mactrack')
-		),
-		'site_name' => array(
+		],
+		'site_name' => [
 			'display' => __('Site Name', 'mactrack'),
 			'sort'    => 'ASC'
-		),
-		'ip_range' => array(
+		],
+		'ip_range' => [
 			'display' => __('IP Range', 'mactrack'),
 			'sort'    => 'ASC'
-		),
-		'ips_current' => array(
+		],
+		'ips_current' => [
 			'display' => __('Current IP Addresses', 'mactrack'),
 			'align'   => 'right',
 			'sort'    => 'DESC'
-		),
-		'ips_current_date' => array(
+		],
+		'ips_current_date' => [
 			'display' => __('Current Date', 'mactrack'),
 			'align'   => 'right',
 			'sort'    => 'DESC'
-		),
-		'ips_max' => array(
+		],
+		'ips_max' => [
 			'display' => __('Maximum IP Addresses', 'mactrack'),
 			'align'   => 'right',
 			'sort'    => 'DESC'
-		),
-		'ips_max_date' => array(
+		],
+		'ips_max_date' => [
 			'display' => __('Maximum Date', 'mactrack'),
 			'align'   => 'right',
 			'sort'    => 'DESC'
-		)
-	);
+		]
+	];
 
 	$columns = cacti_sizeof($display_text);
 
@@ -295,45 +297,54 @@ function mactrack_ips_filter() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Site', 'mactrack');?>
+						<?php print __('Site', 'mactrack'); ?>
 					</td>
 					<td>
 						<select id='site_id' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack');?></option>
+							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack'); ?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT * FROM mac_track_sites ORDER BY mac_track_sites.site_name');
-							if (cacti_sizeof($sites)) {
-								foreach ($sites as $site) {
-									print '<option value="' . $site['site_id'] . '"'; if (get_request_var('site_id') == $site['site_id']) { print ' selected'; } print '>' . $site['site_name'] . '</option>';
-								}
-							}
-							?>
+
+	if (cacti_sizeof($sites)) {
+		foreach ($sites as $site) {
+			print '<option value="' . $site['site_id'] . '"';
+
+			if (get_request_var('site_id') == $site['site_id']) {
+				print ' selected';
+			} print '>' . $site['site_name'] . '</option>';
+		}
+	}
+	?>
 						</select>
 					</td>
 					<td>
-						<?php print __('IP\'s', 'mactrack');?>
+						<?php print __('IP\'s', 'mactrack'); ?>
 					</td>
 					<td>
 						<select id='rows' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack');?></option>
+							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack'); ?></option>
 							<?php
-							if (cacti_sizeof($item_rows)) {
-								foreach ($item_rows as $key => $value) {
-									print "<option value='" . $key . "'"; if (get_request_var('rows') == $key) { print ' selected'; } print '>' . $value . '</option>';
-								}
-							}
-							?>
+	if (cacti_sizeof($item_rows)) {
+		foreach ($item_rows as $key => $value) {
+			print "<option value='" . $key . "'";
+
+			if (get_request_var('rows') == $key) {
+				print ' selected';
+			} print '>' . $value . '</option>';
+		}
+	}
+	?>
 						</select>
 					</td>
 					<td>
 						<span>
-							<button type='submit' id='export' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __esc('Export', 'mactrack');?></button>
-							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php print __esc('Clear', 'mactrack');?></button>
+							<button type='submit' id='export' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __esc('Export', 'mactrack'); ?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php print __esc('Clear', 'mactrack'); ?></button>
 						</span>
 					</td>
 				</tr>
 			</table>
-			<input type='hidden' id='page' value='<?php print get_request_var('page');?>'>
+			<input type='hidden' id='page' value='<?php print get_request_var('page'); ?>'>
 			<input type='hidden' id='report' value='ips'>
 			</form>
 			<script type='text/javascript'>
@@ -371,4 +382,3 @@ function mactrack_ips_filter() {
 	</tr>
 	<?php
 }
-

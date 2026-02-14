@@ -22,22 +22,27 @@
  +-------------------------------------------------------------------------+
 */
 
-/* register this functions scanning functions */
-if (!isset($mactrack_scanning_functions)) { $mactrack_scanning_functions = array(); }
+// register this functions scanning functions
+if (!isset($mactrack_scanning_functions)) {
+	$mactrack_scanning_functions = [];
+}
 array_push($mactrack_scanning_functions, 'get_aruba_oscx_switch_ports');
 
-if (!isset($mactrack_scanning_functions_ip)) { $mactrack_scanning_functions_ip = array(); }
+if (!isset($mactrack_scanning_functions_ip)) {
+	$mactrack_scanning_functions_ip = [];
+}
 array_push($mactrack_scanning_functions_ip, 'get_aruba_oscx_arp_table');
 
-
-function oscx_mac ($mac) {
-
-	$slabiky = explode ('.', trim($mac));
-	$mac = '';
+function oscx_mac($mac) {
+	$slabiky = explode('.', trim($mac));
+	$mac     = '';
 
 	for ($f = 0; $f < 6; $f++) {
 		$slabiky[$f] = strtoupper(dechex($slabiky[$f]));
-		if (strlen($slabiky[$f]) < 2) $slabiky[$f] = '0' . $slabiky[$f];
+
+		if (strlen($slabiky[$f]) < 2) {
+			$slabiky[$f] = '0' . $slabiky[$f];
+		}
 	}
 
 	return (implode(':', $slabiky));
@@ -53,17 +58,17 @@ function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 
 
 	/*
 	get VLAN information
-	    .1.3.6.1.2.1.47.1.2.1.1.2
+		.1.3.6.1.2.1.47.1.2.1.1.2
 		.1.3.6.1.2.1.47.1.2.1.1.2.1 = STRING: "DEFAULT_VLAN_1"
 		.1.3.6.1.2.1.47.1.2.1.1.2.11 = STRING: "guest"
 		.1.3.6.1.2.1.47.1.2.1.1.2.199 = STRING: "management"
 		.1.3.6.1.2.1.47.1.2.1.1.2.215 = STRING: "x"
 	*/
-	
+
 	$vlan_names   = xform_standard_indexed_data('.1.3.6.1.2.1.47.1.2.1.1.2', $device);
 
 	foreach ($vlan_names as $key=>$value) {
-	    $vlan_ids[$key] = $key;
+		$vlan_ids[$key] = $key;
 	}
 
 	$device['vlans_total'] = cacti_sizeof($vlan_names);
@@ -107,11 +112,12 @@ function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 
 		.1.3.6.1.2.1.17.7.1.2.2.1.2.199.0.80.86.175.58.24 = INTEGER: 52
 	*/
 
-	$xdata = xform_indexed_data('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, 7);
-	$port_vlan_data = array();
+	$xdata          = xform_indexed_data('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, 7);
+	$port_vlan_data = [];
 
 	foreach ($xdata as $key=>$value) {
 		$keys = explode('.', $key);
+
 		// it doesn't work for trunk ports. It  If port has more vlans, last is used
 		if (!isset($port_vlan_data[$value])) {
 			$port_vlan_data[$value] = $keys[0];
@@ -125,7 +131,7 @@ function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 
 	// get and store the interfaces table
 	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
 
-	foreach($ifIndexes as $ifIndex) {
+	foreach ($ifIndexes as $ifIndex) {
 		if (($ifInterfaces[$ifIndex]['ifType'] >= 6) && ($ifInterfaces[$ifIndex]['ifType'] <= 9)) {
 			$device['ports_total']++;
 		}
@@ -139,15 +145,16 @@ function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 
 		$port_results = get_aruba_oscx_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $device['snmp_readstring'], false, $lowPort, $highPort);
 
 		// get the ifIndexes for the device
-		$i = 0;
-		$j = 0;
-		$port_array = array();
-		foreach($port_results as $port_result) {
+		$i          = 0;
+		$j          = 0;
+		$port_array = [];
+
+		foreach ($port_results as $port_result) {
 			$ifIndex = $port_result['port_number'];
 
 			$ifType = $ifInterfaces[$ifIndex]['ifType'];
 
-			/* only output legitimate end user ports */
+			// only output legitimate end user ports
 			if (($ifType >= 6) && ($ifType <= 9)) {
 				$port_array[$i]['vlan_id']     = mactrack_arr_key($port_vlan_data, $port_result['port_number']);
 				$port_array[$i]['vlan_name']   = isset($vlan_names[$port_array[$i]['vlan_id']]) ? $vlan_names[$port_array[$i]['vlan_id']] : '';
@@ -166,18 +173,18 @@ function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 
 			$j++;
 		}
 
-		/* display completion message */
+		// display completion message
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . trim(substr($device['snmp_sysDescr'],0,40)) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
 		$device['last_runmessage'] = 'Data collection completed ok';
-		$device['macs_active'] = cacti_sizeof($port_array);
+		$device['macs_active']     = cacti_sizeof($port_array);
 
 		mactrack_debug('macs active on this switch:' . $device['macs_active']);
 		db_store_device_port_results($device, $port_array, $scan_date);
 	} else {
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', No active devices on this network device.');
 
-		$device['snmp_status'] = HOST_UP;
+		$device['snmp_status']     = HOST_UP;
 		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
 	}
 
@@ -192,28 +199,29 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 	global $debug, $scan_date;
 	mactrack_debug('FUNCTION: get_aruba_oscx_dot1dTpFdbEntry_ports started');
 
-	/* initialize variables */
-	$port_keys = array();
-	$return_array = array();
-	$new_port_key_array = array();
-	$port_key_array = array();
-	$port_number = 0;
-	$ports_active = 0;
-	$active_ports = 0;
-	$ports_total = 0;
+	// initialize variables
+	$port_keys          = [];
+	$return_array       = [];
+	$new_port_key_array = [];
+	$port_key_array     = [];
+	$port_number        = 0;
+	$ports_active       = 0;
+	$active_ports       = 0;
+	$ports_total        = 0;
 
-	/* cisco uses a hybrid read string, if one is not defined, use the default */
+	// cisco uses a hybrid read string, if one is not defined, use the default
 	if ($snmp_readstring == '') {
 		$snmp_readstring = $device['snmp_readstring'];
 	}
 
-	/* get the operational status of the ports */
+	// get the operational status of the ports
 	$active_ports_array = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.8', $device);
 	mactrack_debug('get active ports: ' . cacti_sizeof($active_ports_array));
 	$indexes = array_keys($active_ports_array);
 
 	$i = 0;
-	foreach($active_ports_array as $port_info) {
+
+	foreach ($active_ports_array as $port_info) {
 		if (($ifInterfaces[$indexes[$i]]['ifType'] >= 6) &&
 			($ifInterfaces[$indexes[$i]]['ifType'] <= 9)) {
 			if ($port_info == 1) {
@@ -228,8 +236,8 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'], 0, 40) . ', TOTAL PORTS: ' . $ports_total . ', OPER PORTS: ' . $ports_active);
 
 		$device['ports_active'] = $ports_active;
-		$device['ports_total'] = $ports_total;
-		$device['macs_active'] = 0;
+		$device['ports_total']  = $ports_total;
+		$device['macs_active']  = 0;
 	}
 
 	if ($ports_active > 0) {
@@ -246,7 +254,7 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 		where
 		table index = bridge port (dot1dBasePort) and
 		table value = ifIndex */
-		/* -------------------------------------------- */
+		// --------------------------------------------
 		$bridgePortIfIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.17.1.4.1.2', $device, $snmp_readstring);
 		mactrack_debug('get bridgePortIfIndexes: ' . cacti_sizeof($bridgePortIfIndexes));
 
@@ -263,7 +271,7 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 		where
 		table index = MAC Address (dot1dTpFdbAddress e.g. 0.0.94.0.1.1 = 00:00:5E:00:01:01) and
 		table value = port status (other(1), invalid(2), learned(3), self(4), mgmt(5)*/
-		/* -------------------------------------------- */
+		// --------------------------------------------
 		$port_status = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.3', $device, $snmp_readstring);
 		mactrack_debug('get port_status: ' . cacti_sizeof($port_status));
 
@@ -280,46 +288,47 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 		where
 		table index = MAC Address (dot1dTpFdbAddress e.g. 0.0.94.0.1.1 = 00:00:5E:00:01:01) and
 		table value = bridge port */
-		/* -------------------------------------------- */
+		// --------------------------------------------
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.2', $device, $snmp_readstring);
 		mactrack_debug('get port_numbers: ' . cacti_sizeof($port_numbers));
 
-		/* get VLAN information */
-		/* -------------------------------------------- */
+		// get VLAN information
+		// --------------------------------------------
 
-		$vlan_ids = array();
+		$vlan_ids   = [];
 		$vlan_names = xform_standard_indexed_data('.1.3.6.1.2.1.47.1.2.1.1.2', $device);
+
 		foreach ($vlan_names as $key=>$value) {
-		    $vlan_ids[$key] = $key;
+			$vlan_ids[$key] = $key;
 		}
 
 		mactrack_debug('get vlan_ids: ' . cacti_sizeof($vlan_ids));
 
-		/* get the ignore ports list from device */
+		// get the ignore ports list from device
 		$ignore_ports = port_list_to_array($device['ignorePorts']);
 
-    		$xdata = xform_indexed_data('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, 7);
-		$port_vlan_data = array();
+		$xdata          = xform_indexed_data('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, 7);
+		$port_vlan_data = [];
 
 		foreach ($xdata as $key=>$value) {
-		    $keys = explode('.', $key);
-		    $port_vlan_data[$value] = $keys[0];
+			$keys                   = explode('.', $key);
+			$port_vlan_data[$value] = $keys[0];
 		}
 
 		/* determine user ports for this device and transfer user ports to
 		   a new array.
 		*/
 		$i = 0;
+
 		foreach ($port_numbers as $key => $port_number) {
-			/* key = MAC Address from dot1dTpFdbTable */
-			/* value = bridge port			  */
+			// key = MAC Address from dot1dTpFdbTable
+			// value = bridge port
 			if (($highPort == 0) ||
 				(($port_number >= $lowPort) &&
 				($port_number <= $highPort))) {
-
-				if (!in_array($port_number, $ignore_ports)) {
+				if (!in_array($port_number, $ignore_ports, true)) {
 					if (isset($port_status[$key]) && $port_status[$key] == '3') {
-						$port_key_array[$i]['key'] = substr($key,1);
+						$port_key_array[$i]['key']         = substr($key,1);
 						$port_key_array[$i]['port_number'] = $port_number;
 						$i++;
 					}
@@ -332,8 +341,9 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 		*/
 
 		$i = 0;
+
 		foreach ($port_key_array as $port_key) {
-			/* map bridge port to interface port and check type */
+			// map bridge port to interface port and check type
 			if ($port_key['port_number'] > 0) {
 				if (cacti_sizeof($bridgePortIfIndexes) != 0) {
 					/* some hubs do not always return a port number in the bridge table.
@@ -341,6 +351,7 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 					   if it isnt in the bridge table
 					*/
 					mactrack_debug('Searching Bridge Port: ' . $port_key['port_number'] . ', Bridge: ' . $bridgePortIfIndexes[$port_key['port_number']]);
+
 					if (isset($bridgePortIfIndexes[$port_key['port_number']])) {
 						$brPortIfIndex = mactrack_arr_key($bridgePortIfIndexes, $port_key['port_number']);
 					} else {
@@ -349,26 +360,26 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 					$brPortIfType = isset($ifInterfaces[$brPortIfIndex]['ifType']) ? $ifInterfaces[$brPortIfIndex]['ifType'] : '';
 				} else {
 					$brPortIfIndex = $port_key['port_number'];
-					$brPortIfType = isset($ifInterfaces[$port_key['port_number']]['ifType']) ? $ifInterfaces[$port_key['port_number']]['ifType'] : '';
+					$brPortIfType  = isset($ifInterfaces[$port_key['port_number']]['ifType']) ? $ifInterfaces[$port_key['port_number']]['ifType'] : '';
 				}
 
 				if (($brPortIfType >= 6) &&
 					($brPortIfType <= 9) &&
 					(!isset($ifInterfaces[$brPortIfIndex]['portLink']))) {
-					/* set some defaults  */
-					$new_port_key_array[$i]['vlan_id'] = 'N/A';
-					$new_port_key_array[$i]['vlan_name'] = 'N/A';
+					// set some defaults
+					$new_port_key_array[$i]['vlan_id']     = 'N/A';
+					$new_port_key_array[$i]['vlan_name']   = 'N/A';
 					$new_port_key_array[$i]['mac_address'] = 'NOT USER';
 					$new_port_key_array[$i]['port_number'] = 'NOT USER';
-					$new_port_key_array[$i]['port_name'] = 'N/A';
+					$new_port_key_array[$i]['port_name']   = 'N/A';
 
-					/* now set the real data */
-					$new_port_key_array[$i]['key'] = mactrack_arr_key($port_key, 'key');
+					// now set the real data
+					$new_port_key_array[$i]['key']         = mactrack_arr_key($port_key, 'key');
 					$new_port_key_array[$i]['port_number'] = isset($brPortIfIndex) ? $brPortIfIndex : '';
-					$new_port_key_array[$i]['port_name'] = mactrack_arr_key($ifInterfaces, $port_key['port_number']);
+					$new_port_key_array[$i]['port_name']   = mactrack_arr_key($ifInterfaces, $port_key['port_number']);
 					$new_port_key_array[$i]['mac_address'] = oscx_mac($port_key['key']);
-					$new_port_key_array[$i]['vlan_id'] = mactrack_arr_key($port_vlan_data, $brPortIfIndex);
-					$new_port_key_array[$i]['vlan_name'] = isset ($brPortIfIndex) ? mactrack_arr_key($vlan_names, $port_vlan_data[$brPortIfIndex]) : '';
+					$new_port_key_array[$i]['vlan_id']     = mactrack_arr_key($port_vlan_data, $brPortIfIndex);
+					$new_port_key_array[$i]['vlan_name']   = isset($brPortIfIndex) ? mactrack_arr_key($vlan_names, $port_vlan_data[$brPortIfIndex]) : '';
 
 					$i++;
 				}
@@ -380,12 +391,11 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 	}
 
 	if ($store_to_db) {
-
 		if ($ports_active <= 0) {
 			$device['last_runmessage'] = 'Data collection completed ok';
 		} elseif (cacti_sizeof($new_port_key_array) > 0) {
 			$device['last_runmessage'] = 'Data collection completed ok';
-			$device['macs_active'] = cacti_sizeof($new_port_key_array);
+			$device['macs_active']     = cacti_sizeof($new_port_key_array);
 
 			db_store_device_port_results($device, $new_port_key_array, $scan_date);
 		} else {
@@ -394,9 +404,7 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 	} else {
 		return $new_port_key_array;
 	}
-
 }
-
 
 /*	get_aruba_oscx_arp_table - This function reads a devices CTAlias table for a site and stores
   the IP address and MAC address combinations in the mac_track_ips table.
@@ -406,60 +414,61 @@ function get_aruba_oscx_arp_table($site, &$device) {
 
 	mactrack_debug('FUNCTION: get_aruba_oscx_arp_table started');
 
-/*
-joining mac = port with ip = mac
-1.3.6.1.2.1.17.7.1.2.2.1.2
-.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.2.209.50.110.192 = INTEGER: 28
-.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.9.15.9.0.18 = INTEGER: 28
-.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.11.134.101.90.128 = INTEGER: 28
-.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.12.41.187.210.4 = INTEGER: 28
-.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.16.116.104.90.49 = INTEGER: 28
-.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.17.50.44.9.137 = INTEGER: 28
-.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.22.108.186.185.185 = INTEGER: 28
+	/*
+	joining mac = port with ip = mac
+	1.3.6.1.2.1.17.7.1.2.2.1.2
+	.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.2.209.50.110.192 = INTEGER: 28
+	.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.9.15.9.0.18 = INTEGER: 28
+	.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.11.134.101.90.128 = INTEGER: 28
+	.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.12.41.187.210.4 = INTEGER: 28
+	.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.16.116.104.90.49 = INTEGER: 28
+	.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.17.50.44.9.137 = INTEGER: 28
+	.1.3.6.1.2.1.17.7.1.2.2.1.2.1.0.22.108.186.185.185 = INTEGER: 28
 
-.1.3.6.1.2.1.4.35.1.4
-.1.3.6.1.2.1.4.35.1.4.16777415.1.4.192.168.199.95 = STRING: 4c:ae:a3:64:5a:cb
-.1.3.6.1.2.1.4.35.1.4.16777415.1.4.192.168.199.96 = STRING: 4c:ae:a3:64:50:ab
-.1.3.6.1.2.1.4.35.1.4.16777415.1.4.192.168.199.97 = STRING: 40:b9:3c:4b:9c:de
-.1.3.6.1.2.1.4.35.1.4.16777415.1.4.192.168.199.98 = STRING: ec:9b:8b:78:9b:d7
-*/
+	.1.3.6.1.2.1.4.35.1.4
+	.1.3.6.1.2.1.4.35.1.4.16777415.1.4.192.168.199.95 = STRING: 4c:ae:a3:64:5a:cb
+	.1.3.6.1.2.1.4.35.1.4.16777415.1.4.192.168.199.96 = STRING: 4c:ae:a3:64:50:ab
+	.1.3.6.1.2.1.4.35.1.4.16777415.1.4.192.168.199.97 = STRING: 40:b9:3c:4b:9c:de
+	.1.3.6.1.2.1.4.35.1.4.16777415.1.4.192.168.199.98 = STRING: ec:9b:8b:78:9b:d7
+	*/
 
-	$xdata = xform_indexed_data('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, 6);
-	$port_vlan_data = array();
+	$xdata          = xform_indexed_data('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, 6);
+	$port_vlan_data = [];
 
 	foreach ($xdata as $key=>$value) {
 		$mac_port[oscx_mac($key)] = $value;
 	}
 
 	$xdata = xform_indexed_data('.1.3.6.1.2.1.4.35.1.4', $device, 4);
+
 	foreach ($xdata as $key=>$value) {
 		$ip_mac[$key] = strtr($value, ' ', ':');
 	}
 
-	$result = array();
+	$result = [];
 
-	foreach($ip_mac as $key=>$value) {
+	foreach ($ip_mac as $key=>$value) {
 		if (isset($mac_port[$value])) {
 			$result[$key]['port'] = $mac_port[$value];
-			$result[$key]['mac'] = $value;
+			$result[$key]['mac']  = $value;
 		}
 	}
 
 	mactrack_debug('arp assembly complete.');
 
-	// output details to database 
+	// output details to database
 	if (cacti_sizeof($result)) {
-		$sql = array();
+		$sql = [];
 
-		foreach($result as $key=>$value) {
+		foreach ($result as $key=>$value) {
 			$sql[] = '(' .
-				$device['site_id']   . ', ' .
+				$device['site_id'] . ', ' .
 				$device['device_id'] . ', ' .
-				db_qstr($device['hostname'])       . ', ' .
-				db_qstr($device['device_name'])    . ', ' .
-				db_qstr($value['port'])     . ', ' .
+				db_qstr($device['hostname']) . ', ' .
+				db_qstr($device['device_name']) . ', ' .
+				db_qstr($value['port']) . ', ' .
 				db_qstr($value['mac']) . ', ' .
-				db_qstr($key)  . ', ' .
+				db_qstr($key) . ', ' .
 				db_qstr($scan_date) . ')';
 		}
 
@@ -470,14 +479,13 @@ joining mac = port with ip = mac
 		}
 	}
 
-	// save ip information for the device 
+	// save ip information for the device
 	$device['ips_total'] = cacti_sizeof($result);
 
 	db_execute_prepared('UPDATE mac_track_devices
 		SET ips_total = ?
 		WHERE device_id = ?',
-		array($device['ips_total'], $device['device_id']));
+		[$device['ips_total'], $device['device_id']]);
 
 	mactrack_debug('HOST: ' . $device['hostname'] . ', IP address information collection complete. IP=' . cacti_sizeof($result) . '.');
 }
-

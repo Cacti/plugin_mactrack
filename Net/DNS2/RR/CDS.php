@@ -24,6 +24,5 @@
  * http://www.rfc-editor.org/rfc/rfc7344.txt
  *
  */
-class Net_DNS2_RR_CDS extends Net_DNS2_RR_DS
-{
+class Net_DNS2_RR_CDS extends Net_DNS2_RR_DS {
 }

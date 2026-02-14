@@ -29,110 +29,97 @@
  *    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  *
  */
-class Net_DNS2_RR_CAA extends Net_DNS2_RR
-{
-    /*
-     * The critcal flag
-     */
-    public $flags;
+class Net_DNS2_RR_CAA extends Net_DNS2_RR {
+	// The critcal flag
+	public $flags;
 
-    /*
-     * The property identifier
-     */
-    public $tag;
+	// The property identifier
+	public $tag;
 
-    /*
-      * The property value
-     */
-    public $value;
+	// The property value
+	public $value;
 
-    /**
-     * method to return the rdata portion of the packet as a string
-     *
-     * @return  string
-     * @access  protected
-     *
-     */
-    protected function rrToString()
-    {
-        return $this->flags . ' ' . $this->tag . ' "' . 
-            trim($this->cleanString($this->value), '"') . '"';
-    }
+	/**
+	 * method to return the rdata portion of the packet as a string
+	 *
+	 * @return string
+	 * @access  protected
+	 *
+	 */
+	protected function rrToString() {
+		return $this->flags . ' ' . $this->tag . ' "' .
+			trim($this->cleanString($this->value), '"') . '"';
+	}
 
-    /**
-     * parses the rdata portion from a standard DNS config line
-     *
-     * @param array $rdata a string split line of values for the rdata
-     *
-     * @return boolean
-     * @access protected
-     *
-     */
-    protected function rrFromString(array $rdata)
-    {
-        $this->flags    = array_shift($rdata);
-        $this->tag      = array_shift($rdata);
+	/**
+	 * parses the rdata portion from a standard DNS config line
+	 *
+	 * @param array $rdata a string split line of values for the rdata
+	 *
+	 * @return boolean
+	 * @access protected
+	 *
+	 */
+	protected function rrFromString(array $rdata) {
+		$this->flags    = array_shift($rdata);
+		$this->tag      = array_shift($rdata);
 
-        $this->value    = trim($this->cleanString(implode(' ', $rdata)), '"');
-        
-        return true;
-    }
+		$this->value    = trim($this->cleanString(implode(' ', $rdata)), '"');
 
-    /**
-     * parses the rdata of the Net_DNS2_Packet object
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
-     *
-     * @return boolean
-     * @access protected
-     *
-     */
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        if ($this->rdlength > 0) {
-            
-            //
-            // unpack the flags and tag length
-            //
-            $x = unpack('Cflags/Ctag_length', $this->rdata);
+		return true;
+	}
 
-            $this->flags    = $x['flags'];
-            $offset         = 2;
+	/**
+	 * parses the rdata of the Net_DNS2_Packet object
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
+	 *
+	 * @return boolean
+	 * @access protected
+	 *
+	 */
+	protected function rrSet(Net_DNS2_Packet &$packet) {
+		if ($this->rdlength > 0) {
+			//
+			// unpack the flags and tag length
+			//
+			$x = unpack('Cflags/Ctag_length', $this->rdata);
 
-            $this->tag      = substr($this->rdata, $offset, $x['tag_length']);
-            $offset         += $x['tag_length'];
+			$this->flags    = $x['flags'];
+			$offset         = 2;
 
-            $this->value    = substr($this->rdata, $offset);
+			$this->tag      = substr($this->rdata, $offset, $x['tag_length']);
+			$offset         += $x['tag_length'];
 
-            return true;
-        }
+			$this->value    = substr($this->rdata, $offset);
 
-        return false;
-    }
+			return true;
+		}
 
-    /**
-     * returns the rdata portion of the DNS packet
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-     *                                 compressed names
-     *
-     * @return mixed                   either returns a binary packed
-     *                                 string or null on failure
-     * @access protected
-     *
-     */
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        if (strlen($this->value) > 0) {
+		return false;
+	}
 
-            $data  = chr($this->flags);
-            $data .= chr(strlen($this->tag)) . $this->tag . $this->value;
+	/**
+	 * returns the rdata portion of the DNS packet
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
+	 *                                 compressed names
+	 *
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
+	 * @access protected
+	 *
+	 */
+	protected function rrGet(Net_DNS2_Packet &$packet) {
+		if (strlen($this->value) > 0) {
+			$data  = chr($this->flags);
+			$data .= chr(strlen($this->tag)) . $this->tag . $this->value;
 
-            $packet->offset += strlen($data);
+			$packet->offset += strlen($data);
 
-            return $data;
-        }
+			return $data;
+		}
 
-        return null;
-    }
+		return null;
+	}
 }
