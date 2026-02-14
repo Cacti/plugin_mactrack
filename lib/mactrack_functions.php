@@ -3545,18 +3545,19 @@ function mactrack_dot1x_row_class($port_result) {
 	return 'dot1x_authn_success';
 }
 
-/** mactrack_create_sql_filter - this routine will take a filter string and process it into a
-	 sql where clause that will be returned to the caller with a formatted SQL where clause
-	 that can then be integrated into the overall where clause.
-	 The filter takes the following forms.  The default is to find occurrence that match "all"
-	 Any string prefixed by a "-" will mean "exclude" this search string.  Boolean expressions
-	 are currently not supported.
-   @arg $filter - (string) The filter provided by the user
-   @arg $fields - (array) A list of field names to include in the where clause. They can also
-	 contain the table name in cases where joins are important.
-   * @param mixed $filter
-   * @param mixed $fields
-   @returns - (string) The formatted SQL syntax */
+/**
+ * mactrack_create_sql_filter - this routine will take a filter string and process it into a
+ * sql where clause that will be returned to the caller with a formatted SQL where clause
+ * that can then be integrated into the overall where clause.
+ * The filter takes the following forms. The default is to find occurrences that match "all".
+ * Any string prefixed by a "-" will mean "exclude" this search string. Boolean expressions
+ * are currently not supported.
+ *
+ * @param string $filter The filter provided by the user
+ * @param array  $fields A list of field names to include in the where clause. They can also
+ *                       contain the table name in cases where joins are important.
+ * @return string The formatted SQL syntax
+ */
 function mactrack_create_sql_filter($filter, $fields) {
 	$query = '';
 
