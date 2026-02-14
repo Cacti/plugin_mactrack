@@ -66,7 +66,7 @@ jobs:
         repository: Cacti/cacti
         path: cacti
     
-    - name: Checkout mactrack Plugin
+    - name: Checkout MacTrack Plugin
       uses: actions/checkout@v4
       with:
         path: cacti/plugins/mactrack
@@ -128,7 +128,7 @@ jobs:
       run: |
         cd ${{ github.workspace }}/cacti
         if [ -f composer.json ]; then
-          sudo composer install --dev --no-progress
+          sudo composer install --prefer-dist --no-progress
         fi
     
     - name: Create Cacti config.php
@@ -165,7 +165,7 @@ jobs:
         cd ${{ github.workspace }}/cacti
         sudo php cli/install_cacti.php --accept-eula --install --force
     
-    - name: Install mactrack Plugin
+    - name: Install MacTrack Plugin
       run: |
         cd ${{ github.workspace }}/cacti
         sudo php cli/plugin_manage.php --plugin=mactrack --install --enable
@@ -206,7 +206,7 @@ jobs:
           cat log/cacti.log
           exit 1
         fi
-    
+
     - name: View Cacti Logs
       if: always()
       run: |
