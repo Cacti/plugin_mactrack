@@ -3553,9 +3553,9 @@ function mactrack_dot1x_row_class($port_result) {
  * Any string prefixed by a "-" will mean "exclude" this search string. Boolean expressions
  * are currently not supported.
  *
- * @param string $filter The filter provided by the user
- * @param array  $fields A list of field names to include in the where clause. They can also
- *                       contain the table name in cases where joins are important.
+ * @param  string $filter The filter provided by the user
+ * @param  array  $fields A list of field names to include in the where clause. They can also
+ *                        contain the table name in cases where joins are important.
  * @return string The formatted SQL syntax
  */
 function mactrack_create_sql_filter($filter, $fields) {
