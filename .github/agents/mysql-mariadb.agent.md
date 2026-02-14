@@ -43,7 +43,8 @@ When assisting with tasks, follow these guidelines:
 
 
 
-## Built in Cacti DB functions  are included from the cacti project. Here are some of the commonly used functions:
+## Built in Cacti DB functions
+Built in Cacti DB functions are included from the cacti project. Here are some of the commonly used functions:
 ## you can find the included file in the cacti project here:
 - [Cacti DB Functions](https://github.com/Cacti/cacti/blob/1.2.x/lib/database.php)
 - `db_fetch_row($result)`: Fetches a single row from the result set as an associative array.
