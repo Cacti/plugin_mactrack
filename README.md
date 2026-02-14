@@ -78,4 +78,4 @@ issue in GitHub.
   For just using Cacti.  Thanks for giving me a hobby to live for.
 
 -----------------------------------------------
-Copyright (c) 2004-2025 - The Cacti Group, Inc.
+Copyright (c) 2004-2026 - The Cacti Group, Inc.
