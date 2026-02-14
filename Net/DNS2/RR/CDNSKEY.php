@@ -24,6 +24,5 @@
  * http://www.rfc-editor.org/rfc/rfc7344.txt
  *
  */
-class Net_DNS2_RR_CDNSKEY extends Net_DNS2_RR_DNSKEY
-{
+class Net_DNS2_RR_CDNSKEY extends Net_DNS2_RR_DNSKEY {
 }

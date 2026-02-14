@@ -37,37 +37,37 @@ if (isset_request_var('export')) {
 }
 
 function mactrack_vmacs_validate_request_vars() {
-	/* ================= input validation and session storage ================= */
-	$filters = array(
-		'rows' => array(
-			'filter' => FILTER_VALIDATE_INT,
+	// ================= input validation and session storage =================
+	$filters = [
+		'rows' => [
+			'filter'  => FILTER_VALIDATE_INT,
 			'pageset' => true,
 			'default' => '-1'
-			),
-		'page' => array(
-			'filter' => FILTER_VALIDATE_INT,
+			],
+		'page' => [
+			'filter'  => FILTER_VALIDATE_INT,
 			'default' => '1'
-			),
-		'filter' => array(
-			'filter' => FILTER_CALLBACK,
+			],
+		'filter' => [
+			'filter'  => FILTER_CALLBACK,
 			'pageset' => true,
 			'default' => '',
-			'options' => array('options' => 'sanitize_search_string')
-			),
-		'sort_column' => array(
-			'filter' => FILTER_CALLBACK,
+			'options' => ['options' => 'sanitize_search_string']
+			],
+		'sort_column' => [
+			'filter'  => FILTER_CALLBACK,
 			'default' => 'vendor_mac',
-			'options' => array('options' => 'sanitize_search_string')
-			),
-		'sort_direction' => array(
-			'filter' => FILTER_CALLBACK,
+			'options' => ['options' => 'sanitize_search_string']
+			],
+		'sort_direction' => [
+			'filter'  => FILTER_CALLBACK,
 			'default' => 'ASC',
-			'options' => array('options' => 'sanitize_search_string')
-			)
-	);
+			'options' => ['options' => 'sanitize_search_string']
+			]
+	];
 
 	validate_store_request_vars($filters, 'sess_mt_vmacs');
-	/* ================= input validation ================= */
+	// ================= input validation =================
 }
 
 function mactrack_vmacs_export() {
@@ -79,11 +79,11 @@ function mactrack_vmacs_export() {
 
 	$vmacs = mactrack_vmacs_get_vmac_records($sql_where, 0, false);
 
-	$xport_array = array();
+	$xport_array = [];
 	array_push($xport_array, '"vendor_mac","vendor_name","vendor_address"');
 
 	if (cacti_sizeof($vmacs)) {
-		foreach($vmacs as $vmac) {
+		foreach ($vmacs as $vmac) {
 			array_push($xport_array,'"' . $vmac['vendor_mac'] . '","' .
 			$vmac['vendor_name'] . '","' .
 			mactrack_format_mac($vmac['vendor_address']) . '"');
@@ -92,7 +92,8 @@ function mactrack_vmacs_export() {
 
 	header('Content-type: application/csv');
 	header('Content-Disposition: attachment; filename=cacti_site_xport.csv');
-	foreach($xport_array as $xport_line) {
+
+	foreach ($xport_array as $xport_line) {
 		print $xport_line . "\n";
 	}
 }
@@ -100,7 +101,7 @@ function mactrack_vmacs_export() {
 function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = true) {
 	$sql_where = '';
 
-	/* form the 'where' clause for our main sql query */
+	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
 		$sql_where = "WHERE (mac_track_oui_database.vendor_name LIKE '%" . get_request_var('filter') . "%' OR " .
 			"mac_track_oui_database.vendor_mac LIKE '%" . get_request_var('filter') . "%' OR " .
@@ -108,8 +109,9 @@ function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = tru
 	}
 
 	$sql_order = get_order_string();
+
 	if ($apply_limits) {
-		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
+		$sql_limit = ' LIMIT ' . ($rows * (get_request_var('page') - 1)) . ', ' . $rows;
 	} else {
 		$sql_limit = '';
 	}
@@ -149,11 +151,11 @@ function mactrack_vmacs() {
 		FROM mac_track_oui_database
 		$sql_where");
 
-	$display_text = array(
-		'vendor_mac'     => array(__('Vendor MAC', 'mactrack'), 'ASC'),
-		'vendor_name'    => array(__('Corporation', 'mactrack'), 'ASC'),
-		'vendor_address' => array(__('Address', 'mactrack'), 'ASC')
-	);
+	$display_text = [
+		'vendor_mac'     => [__('Vendor MAC', 'mactrack'), 'ASC'],
+		'vendor_name'    => [__('Corporation', 'mactrack'), 'ASC'],
+		'vendor_address' => [__('Address', 'mactrack'), 'ASC']
+	];
 
 	$columns = cacti_sizeof($display_text);
 
@@ -168,10 +170,10 @@ function mactrack_vmacs() {
 	if (cacti_sizeof($vmacs)) {
 		foreach ($vmacs as $vmac) {
 			form_alternate_row();
-				?>
-				<td class='linkEditMain'><?php print $vmac['vendor_mac'];?></td>
-				<td><?php print filter_value($vmac['vendor_name'], get_request_var('filter'));?></td>
-				<td><?php print filter_value(mactrack_format_mac($vmac['vendor_address']), get_request_var('filter'));?></td>
+			?>
+				<td class='linkEditMain'><?php print $vmac['vendor_mac']; ?></td>
+				<td><?php print filter_value($vmac['vendor_name'], get_request_var('filter')); ?></td>
+				<td><?php print filter_value(mactrack_format_mac($vmac['vendor_address']), get_request_var('filter')); ?></td>
 			</tr>
 			<?php
 		}
@@ -196,31 +198,35 @@ function mactrack_vmac_filter() {
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php print __('Search', 'mactrack');?>
+						<?php print __('Search', 'mactrack'); ?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter');?>'>
+						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter'); ?>'>
 					</td>
 					<td>
-						<?php print __('MAC\'s', 'mactrack');?>
+						<?php print __('MAC\'s', 'mactrack'); ?>
 					</td>
 					<td>
 						<select id='rows' onChange='applyFilter()'>
-							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack');?></option>
+							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack'); ?></option>
 							<?php
 							if (cacti_sizeof($item_rows) > 0) {
-							foreach ($item_rows as $key => $value) {
-								print "<option value='" . $key . "'"; if (get_request_var('rows') == $key) { print ' selected'; } print '>' . $value . '</option>';
+								foreach ($item_rows as $key => $value) {
+									print "<option value='" . $key . "'";
+
+									if (get_request_var('rows') == $key) {
+										print ' selected';
+									} print '>' . $value . '</option>';
+								}
 							}
-							}
-							?>
+	?>
 						</select>
 					</td>
 					<td>
 						<span class='nowrap'>
-							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __esc('Go', 'mactrack');?></button>
-							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php print __esc('Clear', 'mactrack');?></button>
-							<button type='button' id='export' class='ui-button ui-corner-all ui-widget'><?php print __esc('Export', 'mactrack');?></button>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __esc('Go', 'mactrack'); ?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php print __esc('Clear', 'mactrack'); ?></button>
+							<button type='button' id='export' class='ui-button ui-corner-all ui-widget'><?php print __esc('Export', 'mactrack'); ?></button>
 						</span>
 					</td>
 				</tr>
@@ -265,4 +271,3 @@ function mactrack_vmac_filter() {
 	</tr>
 	<?php
 }
-

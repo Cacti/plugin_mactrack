@@ -21,8 +21,7 @@
  * This is the main resolver class, providing DNS query functions.
  *
  */
-class Net_DNS2_Resolver extends Net_DNS2
-{
+class Net_DNS2_Resolver extends Net_DNS2 {
 	/**
 	 * Constructor - creates a new Net_DNS2_Resolver object
 	 *
@@ -31,16 +30,15 @@ class Net_DNS2_Resolver extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function __construct(array $options = null)
-	{
+	public function __construct(array $options = null) {
 		parent::__construct($options);
 	}
 
 	/**
 	 * does a basic DNS lookup query
 	 *
-	 * @param string $name	the DNS name to loookup
-	 * @param string $type	the name of the RR type to lookup
+	 * @param string $name  the DNS name to loookup
+	 * @param string $type  the name of the RR type to lookup
 	 * @param string $class the name of the RR class to lookup
 	 *
 	 * @return Net_DNS2_Packet_Response object
@@ -48,8 +46,7 @@ class Net_DNS2_Resolver extends Net_DNS2
 	 * @access public
 	 *
 	 */
-	public function query($name, $type = 'A', $class = 'IN')
-	{
+	public function query($name, $type = 'A', $class = 'IN') {
 		//
 		// make sure we have some name servers set
 		//
@@ -60,15 +57,13 @@ class Net_DNS2_Resolver extends Net_DNS2
 		// zone transfer can be returned
 		//
 		if ($type == 'IXFR') {
-
 			$type = 'AXFR';
 		}
 
 		//
 		// if the name *looks* too short, then append the domain from the config
 		//
-		if ( (strpos($name, '.') === false) && ($type != 'PTR') ) {
-
+		if ((strpos($name, '.') === false) && ($type != 'PTR')) {
 			$name .= '.' . strtolower($this->domain);
 		}
 
@@ -80,11 +75,11 @@ class Net_DNS2_Resolver extends Net_DNS2
 		//
 		// check for an authentication method; either TSIG or SIG
 		//
-		if (   ($this->auth_signature instanceof Net_DNS2_RR_TSIG)
+		if (($this->auth_signature instanceof Net_DNS2_RR_TSIG)
 			|| ($this->auth_signature instanceof Net_DNS2_RR_SIG)
 		) {
-			$packet->additional[]		= $this->auth_signature;
-			$packet->header->arcount	= cacti_sizeof($packet->additional);
+			$packet->additional[]		   = $this->auth_signature;
+			$packet->header->arcount	 = cacti_sizeof($packet->additional);
 		}
 
 		//
@@ -92,7 +87,6 @@ class Net_DNS2_Resolver extends Net_DNS2
 		// RR to the additional section, and set the DO flag to 1.
 		//
 		if ($this->dnssec == true) {
-
 			//
 			// create a new OPT RR
 			//
@@ -101,13 +95,13 @@ class Net_DNS2_Resolver extends Net_DNS2
 			//
 			// set the DO flag, and the other values
 			//
-			$opt->do = 1;
+			$opt->do    = 1;
 			$opt->class = $this->dnssec_payload_size;
 
 			//
 			// add the RR to the additional section.
 			//
-			$packet->additional[] = $opt;
+			$packet->additional[]    = $opt;
 			$packet->header->arcount = cacti_sizeof($packet->additional);
 		}
 
@@ -115,11 +109,10 @@ class Net_DNS2_Resolver extends Net_DNS2
 		// set the DNSSEC AD or CD bits
 		//
 		if ($this->dnssec_ad_flag == true) {
-
 			$packet->header->ad = 1;
 		}
-		if ($this->dnssec_cd_flag == true) {
 
+		if ($this->dnssec_cd_flag == true) {
 			$packet->header->cd = 1;
 		}
 
@@ -131,8 +124,7 @@ class Net_DNS2_Resolver extends Net_DNS2
 		//
 		$packet_hash = '';
 
-		if ( ($this->use_cache == true) && ($this->cacheable($type) == true) ) {
-
+		if (($this->use_cache == true) && ($this->cacheable($type) == true)) {
 			//
 			// open the cache
 			//
@@ -148,7 +140,6 @@ class Net_DNS2_Resolver extends Net_DNS2
 			);
 
 			if ($this->cache->has($packet_hash)) {
-
 				return $this->cache->get($packet_hash);
 			}
 		}
@@ -179,22 +170,21 @@ class Net_DNS2_Resolver extends Net_DNS2
 		// only do this is strict_query_mode is turned on, AND we've received
 		// some answers; no point doing any else if there were no answers.
 		//
-		if ( ($this->strict_query_mode == true)
+		if (($this->strict_query_mode == true)
 			&& ($response->header->ancount > 0)
 		) {
-
 			$found = false;
 
 			//
 			// look for the requested name/type/class
 			//
 			foreach ($response->answer as $index => $object) {
-
-				if ( (strcasecmp(trim($object->name, '.'), trim($packet->question[0]->qname, '.')) == 0)
+				if ((strcasecmp(trim($object->name, '.'), trim($packet->question[0]->qname, '.')) == 0)
 					&& ($object->type == $packet->question[0]->qtype)
 					&& ($object->class == $packet->question[0]->qclass)
 				) {
 					$found = true;
+
 					break;
 				}
 			}
@@ -209,8 +199,7 @@ class Net_DNS2_Resolver extends Net_DNS2
 			// authority section may still have usual information, like a SOA record.
 			//
 			if ($found == false) {
-
-				$response->answer = [];
+				$response->answer          = [];
 				$response->header->ancount = 0;
 			}
 		}
@@ -218,8 +207,7 @@ class Net_DNS2_Resolver extends Net_DNS2
 		//
 		// cache the response object
 		//
-		if ( ($this->use_cache == true) && ($this->cacheable($type) == true) ) {
-
+		if (($this->use_cache == true) && ($this->cacheable($type) == true)) {
 			$this->cache->put($packet_hash, $response);
 		}
 
@@ -232,13 +220,12 @@ class Net_DNS2_Resolver extends Net_DNS2
 	 *
 	 * @param Net_DNS2_RR $rr the RR object to lookup
 	 *
-	 * @return Net_DNS2_RR object
+	 * @return Net_DNS2_RR        object
 	 * @throws Net_DNS2_Exception
 	 * @access public
 	 *
 	 */
-	public function iquery(Net_DNS2_RR $rr)
-	{
+	public function iquery(Net_DNS2_RR $rr) {
 		//
 		// make sure we have some name servers set
 		//
@@ -252,7 +239,7 @@ class Net_DNS2_Resolver extends Net_DNS2
 		//
 		// unset the question
 		//
-		$packet->question = [];
+		$packet->question        = [];
 		$packet->header->qdcount = 0;
 
 		//
@@ -263,17 +250,17 @@ class Net_DNS2_Resolver extends Net_DNS2
 		//
 		// add the given RR as the answer
 		//
-		$packet->answer[] = $rr;
+		$packet->answer[]        = $rr;
 		$packet->header->ancount = 1;
 
 		//
 		// check for an authentication method; either TSIG or SIG
 		//
-		if (   ($this->auth_signature instanceof Net_DNS2_RR_TSIG)
+		if (($this->auth_signature instanceof Net_DNS2_RR_TSIG)
 			|| ($this->auth_signature instanceof Net_DNS2_RR_SIG)
 		) {
-			$packet->additional[]		= $this->auth_signature;
-			$packet->header->arcount	= cacti_sizeof($packet->additional);
+			$packet->additional[]		   = $this->auth_signature;
+			$packet->header->arcount	 = cacti_sizeof($packet->additional);
 		}
 
 		//

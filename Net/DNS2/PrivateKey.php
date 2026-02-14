@@ -21,101 +21,62 @@
  * SSL Private Key container class
  *
  */
-class Net_DNS2_PrivateKey
-{
-	/*
-	 * the filename that was loaded; stored for reference
-	 */
+class Net_DNS2_PrivateKey {
+	// the filename that was loaded; stored for reference
 	public $filename;
 
-	/*
-	 * the keytag for the signature
-	 */
+	// the keytag for the signature
 	public $keytag;
 
-	/*
-	 * the sign name for the signature
-	 */
+	// the sign name for the signature
 	public $signname;
 
-	/*
-	 * the algorithm used for the signature
-	 */
+	// the algorithm used for the signature
 	public $algorithm;
 
-	/*
-	 * the key format of the signature
-	 */
+	// the key format of the signature
 	public $key_format;
 
-	/*
-	 * the openssl private key id
-	 */
+	// the openssl private key id
 	public $instance;
 
-	/*
-	 * RSA: modulus
-	 */
+	// RSA: modulus
 	private $_modulus;
 
-	/*
-	 * RSA: public exponent
-	 */
+	// RSA: public exponent
 	private $_public_exponent;
 
-	/*
-	 * RSA: rivate exponent
-	 */
+	// RSA: rivate exponent
 	private $_private_exponent;
 
-	/*
-	 * RSA: prime1
-	 */
+	// RSA: prime1
 	private $_prime1;
 
-	/*
-	 * RSA: prime2
-	 */
+	// RSA: prime2
 	private $_prime2;
 
-	/*
-	 * RSA: exponent 1
-	 */
+	// RSA: exponent 1
 	private $_exponent1;
 
-	/*
-	 * RSA: exponent 2
-	 */
+	// RSA: exponent 2
 	private $_exponent2;
 
-	/*
-	 * RSA: coefficient
-	 */
+	// RSA: coefficient
 	private $_coefficient;
 
-	/*
-	 * DSA: prime
-	 */
+	// DSA: prime
 	public $prime;
 
-	/*
-	 * DSA: subprime
-	 */
+	// DSA: subprime
 	public $subprime;
 
-	/*
-	 * DSA: base
-	 */
+	// DSA: base
 	public $base;
 
-	/*
-	 * DSA: private value
-	 */
+	// DSA: private value
 	public $private_value;
 
-	/*
-	 * DSA: public value
-	 */
+	// DSA: public value
 	public $public_value;
 
 	/**
@@ -127,8 +88,7 @@ class Net_DNS2_PrivateKey
 	 * @access public
 	 *
 	 */
-	public function __construct($file = null)
-	{
+	public function __construct($file = null) {
 		if (isset($file)) {
 			$this->parseFile($file);
 		}
@@ -144,13 +104,11 @@ class Net_DNS2_PrivateKey
 	 * @access public
 	 *
 	 */
-	public function parseFile($file)
-	{
+	public function parseFile($file) {
 		//
 		// check for OpenSSL
 		//
 		if (extension_loaded('openssl') === false) {
-
 			throw new Net_DNS2_Exception(
 				'the OpenSSL extension is required to use parse private key.',
 				Net_DNS2_Lookups::E_OPENSSL_UNAVAIL
@@ -161,7 +119,6 @@ class Net_DNS2_PrivateKey
 		// check to make sure the file exists
 		//
 		if (is_readable($file) == false) {
-
 			throw new Net_DNS2_Exception(
 				'invalid private key file: ' . $file,
 				Net_DNS2_Lookups::E_OPENSSL_INV_PKEY
@@ -172,8 +129,8 @@ class Net_DNS2_PrivateKey
 		// get the base filename, and parse it for the local value
 		//
 		$keyname = basename($file);
-		if (strlen($keyname) == 0) {
 
+		if (strlen($keyname) == 0) {
 			throw new Net_DNS2_Exception(
 				'failed to get basename() for: ' . $file,
 				Net_DNS2_Lookups::E_OPENSSL_INV_PKEY
@@ -184,13 +141,10 @@ class Net_DNS2_PrivateKey
 		// parse the keyname
 		//
 		if (preg_match("/K(.*)\.\+(\d{3})\+(\d*)\.private/", $keyname, $matches)) {
-
 			$this->signname	   = $matches[1];
 			$this->algorithm   = intval($matches[2]);
-			$this->keytag	   = intval($matches[3]);
-
+			$this->keytag	     = intval($matches[3]);
 		} else {
-
 			throw new Net_DNS2_Exception(
 				'file ' . $keyname . ' does not look like a private key file!',
 				Net_DNS2_Lookups::E_OPENSSL_INV_PKEY
@@ -200,7 +154,8 @@ class Net_DNS2_PrivateKey
 		//
 		// read all the data from the
 		//
-		$data = file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
+		$data = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
 		if (cacti_sizeof($data) == 0) {
 			throw new Net_DNS2_Exception(
 				'file ' . $keyname . ' is empty!',
@@ -209,91 +164,89 @@ class Net_DNS2_PrivateKey
 		}
 
 		foreach ($data as $line) {
+			[$key, $value] = explode(':', $line);
 
-			list($key, $value) = explode(':', $line);
-
-			$key	= trim($key);
-			$value	= trim($value);
+			$key	   = trim($key);
+			$value	 = trim($value);
 
 			switch(strtolower($key)) {
+				case 'private-key-format':
+					$this->key_format = $value;
 
-			case 'private-key-format':
-				$this->key_format = $value;
-				break;
+					break;
+				case 'algorithm':
+					if ($this->algorithm != $value) {
+						throw new Net_DNS2_Exception(
+							'Algorithm mismatch! filename is ' . $this->algorithm .
+							', contents say ' . $value,
+							Net_DNS2_Lookups::E_OPENSSL_INV_ALGO
+						);
+					}
 
-			case 'algorithm':
-				if ($this->algorithm != $value) {
+					break;
+			//
+					// RSA
+			//
+				case 'modulus':
+					$this->_modulus = $value;
+
+					break;
+				case 'publicexponent':
+					$this->_public_exponent = $value;
+
+					break;
+				case 'privateexponent':
+					$this->_private_exponent = $value;
+
+					break;
+				case 'prime1':
+					$this->_prime1 = $value;
+
+					break;
+				case 'prime2':
+					$this->_prime2 = $value;
+
+					break;
+				case 'exponent1':
+					$this->_exponent1 = $value;
+
+					break;
+				case 'exponent2':
+					$this->_exponent2 = $value;
+
+					break;
+				case 'coefficient':
+					$this->_coefficient = $value;
+
+					break;
+			//
+					// DSA - this won't work in PHP until the OpenSSL extension is better
+			//
+				case 'prime(p)':
+					$this->prime = $value;
+
+					break;
+				case 'subprime(q)':
+					$this->subprime = $value;
+
+					break;
+				case 'base(g)':
+					$this->base = $value;
+
+					break;
+				case 'private_value(x)':
+					$this->private_value = $value;
+
+					break;
+				case 'public_value(y)':
+					$this->public_value = $value;
+
+					break;
+				default:
 					throw new Net_DNS2_Exception(
-						'Algorithm mismatch! filename is ' . $this->algorithm .
-						', contents say ' . $value,
-						Net_DNS2_Lookups::E_OPENSSL_INV_ALGO
+						'unknown private key data: ' . $key . ': ' . $value,
+						Net_DNS2_Lookups::E_OPENSSL_INV_PKEY
 					);
-				}
-				break;
-
-			//
-			// RSA
-			//
-			case 'modulus':
-				$this->_modulus = $value;
-				break;
-
-			case 'publicexponent':
-				$this->_public_exponent = $value;
-				break;
-
-			case 'privateexponent':
-				$this->_private_exponent = $value;
-				break;
-
-			case 'prime1':
-				$this->_prime1 = $value;
-				break;
-
-			case 'prime2':
-				$this->_prime2 = $value;
-				break;
-
-			case 'exponent1':
-				$this->_exponent1 = $value;
-				break;
-
-			case 'exponent2':
-				$this->_exponent2 = $value;
-				break;
-
-			case 'coefficient':
-				$this->_coefficient = $value;
-				break;
-
-			//
-			// DSA - this won't work in PHP until the OpenSSL extension is better
-			//
-			case 'prime(p)':
-				$this->prime = $value;
-				break;
-
-			case 'subprime(q)':
-				$this->subprime = $value;
-				break;
-
-			case 'base(g)':
-				$this->base = $value;
-				break;
-
-			case 'private_value(x)':
-				$this->private_value = $value;
-				break;
-
-			case 'public_value(y)':
-				$this->public_value = $value;
-				break;
-
-			default:
-				throw new Net_DNS2_Exception(
-					'unknown private key data: ' . $key . ': ' . $value,
-					Net_DNS2_Lookups::E_OPENSSL_INV_PKEY
-				);
 			}
 		}
 
@@ -303,62 +256,54 @@ class Net_DNS2_PrivateKey
 		$args = [];
 
 		switch($this->algorithm) {
-
 		//
-		// RSA
+			// RSA
 		//
-		case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSAMD5:
-		case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA1:
-		case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA256:
-		case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA512:
+			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSAMD5:
+			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA1:
+			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA256:
+			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_RSASHA512:
+				$args = [
+					'rsa' => [
+						'n'					  => base64_decode($this->_modulus, true),
+						'e'					  => base64_decode($this->_public_exponent, true),
+						'd'					  => base64_decode($this->_private_exponent, true),
+						'p'					  => base64_decode($this->_prime1, true),
+						'q'					  => base64_decode($this->_prime2, true),
+						'dmp1'				=> base64_decode($this->_exponent1, true),
+						'dmq1'				=> base64_decode($this->_exponent2, true),
+						'iqmp'				=> base64_decode($this->_coefficient, true)
+					]
+				];
 
-			$args = [
-
-				'rsa' => [
-
-					'n'					=> base64_decode($this->_modulus),
-					'e'					=> base64_decode($this->_public_exponent),
-					'd'					=> base64_decode($this->_private_exponent),
-					'p'					=> base64_decode($this->_prime1),
-					'q'					=> base64_decode($this->_prime2),
-					'dmp1'				=> base64_decode($this->_exponent1),
-					'dmq1'				=> base64_decode($this->_exponent2),
-					'iqmp'				=> base64_decode($this->_coefficient)
-				]
-			];
-
-			break;
-
+				break;
 		//
-		// DSA - this won't work in PHP until the OpenSSL extension is better
+				// DSA - this won't work in PHP until the OpenSSL extension is better
 		//
-		case Net_DNS2_Lookups::DNSSEC_ALGORITHM_DSA:
+			case Net_DNS2_Lookups::DNSSEC_ALGORITHM_DSA:
+				$args = [
+					'dsa' => [
+						'p'					     => base64_decode($this->prime, true),
+						'q'					     => base64_decode($this->subprime, true),
+						'g'					     => base64_decode($this->base, true),
+						'priv_key'			=> base64_decode($this->private_value, true),
+						'pub_key'			 => base64_decode($this->public_value, true)
+					]
+				];
 
-			$args = [
-
-				'dsa' => [
-
-					'p'					=> base64_decode($this->prime),
-					'q'					=> base64_decode($this->subprime),
-					'g'					=> base64_decode($this->base),
-					'priv_key'			=> base64_decode($this->private_value),
-					'pub_key'			=> base64_decode($this->public_value)
-				]
-			];
-
-			break;
-
-		default:
-			throw new Net_DNS2_Exception(
-				'we only currently support RSAMD5 and RSASHA1 encryption.',
-				Net_DNS2_Lookups::E_OPENSSL_INV_PKEY
-			);
+				break;
+			default:
+				throw new Net_DNS2_Exception(
+					'we only currently support RSAMD5 and RSASHA1 encryption.',
+					Net_DNS2_Lookups::E_OPENSSL_INV_PKEY
+				);
 		}
 
 		//
 		// generate and store the key
 		//
 		$this->instance = openssl_pkey_new($args);
+
 		if ($this->instance === false) {
 			throw new Net_DNS2_Exception(
 				openssl_error_string(),

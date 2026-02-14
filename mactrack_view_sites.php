@@ -44,52 +44,53 @@ function mactrack_view_export_sites() {
 
 	$sites = mactrack_view_get_site_records($sql_where, 0, false);
 
-	$xport_array = array();
+	$xport_array = [];
 
 	if (get_request_var('detail') == 'false') {
 		array_push($xport_array, '"site_id","site_name","total_devices",' .
 				'"total_device_errors","total_macs","total_ips","total_oper_ports",' .
 				'"total_user_ports"');
 
-		foreach($sites as $site) {
-			array_push($xport_array,'"'   .
-				$site['site_id']          . '","' . $site['site_name']           . '","' .
-				$site['total_devices']    . '","' . $site['total_device_errors'] . '","' .
-				$site['total_macs']       . '","' . $site['total_ips']           . '","' .
-				$site['total_oper_ports'] . '","' . $site['total_user_ports']    . '"');
+		foreach ($sites as $site) {
+			array_push($xport_array,'"' .
+				$site['site_id'] . '","' . $site['site_name'] . '","' .
+				$site['total_devices'] . '","' . $site['total_device_errors'] . '","' .
+				$site['total_macs'] . '","' . $site['total_ips'] . '","' .
+				$site['total_oper_ports'] . '","' . $site['total_user_ports'] . '"');
 		}
 	} else {
 		array_push($xport_array, '"site_name","vendor","device_name","total_devices",' .
 				'"total_ips","total_user_ports","total_oper_ports","total_trunks",' .
 				'"total_macs_found"');
 
-		foreach($sites as $site) {
-			array_push($xport_array,'"'   .
-				$site['site_name']        . '","' . $site['vendor']          . '","' .
-				$site['device_name']      . '","' . $site['total_devices']   . '","' .
-				$site['sum_ips_total']    . '","' . $site['sum_ports_total'] . '","' .
+		foreach ($sites as $site) {
+			array_push($xport_array,'"' .
+				$site['site_name'] . '","' . $site['vendor'] . '","' .
+				$site['device_name'] . '","' . $site['total_devices'] . '","' .
+				$site['sum_ips_total'] . '","' . $site['sum_ports_total'] . '","' .
 				$site['sum_ports_active'] . '","' . $site['sum_ports_trunk'] . '","' .
-				$site['sum_macs_active']  . '"');
+				$site['sum_macs_active'] . '"');
 		}
 	}
 
 	header('Content-type: application/csv');
 	header('Content-Disposition: attachment; filename=cacti_site_xport.csv');
-	foreach($xport_array as $xport_line) {
+
+	foreach ($xport_array as $xport_line) {
 		print $xport_line . "\n";
 	}
 }
 
 function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = true) {
-	/* create SQL where clause */
+	// create SQL where clause
 	$device_type_info = db_fetch_row_prepared('SELECT *
 		FROM mac_track_device_types
 		WHERE device_type_id = ?',
-		array(get_request_var('device_type_id')));
+		[get_request_var('device_type_id')]);
 
 	$sql_where = '';
 
-	/* form the 'where' clause for our main sql query */
+	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
 		if (get_request_var('detail') == 'false') {
 			$sql_where = "WHERE (mac_track_sites.site_name LIKE '%" . get_request_var('filter') . "%')";
@@ -101,16 +102,17 @@ function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = true
 	}
 
 	if (cacti_sizeof($device_type_info)) {
-		$sql_where = ($sql_where != '' ? ' AND ':'WHERE ') . '(mac_track_devices.device_type_id=' . $device_type_info['device_type_id'] . ')';
+		$sql_where = ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.device_type_id=' . $device_type_info['device_type_id'] . ')';
 	}
 
-	if ((get_request_var('site_id') != '-1') && (get_request_var('detail'))){
-		$sql_where = ($sql_where != '' ? ' AND ':'WHERE ') . '(mac_track_devices.site_id=' . get_request_var('site_id') . ')';
+	if ((get_request_var('site_id') != '-1') && (get_request_var('detail'))) {
+		$sql_where = ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.site_id=' . get_request_var('site_id') . ')';
 	}
 
 	$sql_order = get_order_string();
+
 	if ($apply_limits) {
-		$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ', ' . $rows;
+		$sql_limit = ' LIMIT ' . ($rows * (get_request_var('page') - 1)) . ', ' . $rows;
 	} else {
 		$sql_limit = '';
 	}
@@ -122,7 +124,7 @@ function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = true
 			$sql_order
 			$sql_limit";
 	} else {
-		$query_string ="SELECT mac_track_sites.site_name, mac_track_sites.site_id,
+		$query_string = "SELECT mac_track_sites.site_name, mac_track_sites.site_id,
 			COUNT(mac_track_device_types.device_type_id) AS total_devices,
 			mac_track_device_types.device_type_id,
 			mac_track_device_types.device_type,
@@ -149,52 +151,52 @@ function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = true
 }
 
 function mactrack_sites_request_validation() {
-	/* ================= input validation and session storage ================= */
-	$filters = array(
-		'rows' => array(
-			'filter' => FILTER_VALIDATE_INT,
+	// ================= input validation and session storage =================
+	$filters = [
+		'rows' => [
+			'filter'  => FILTER_VALIDATE_INT,
 			'pageset' => true,
 			'default' => '-1'
-			),
-		'page' => array(
-			'filter' => FILTER_VALIDATE_INT,
+			],
+		'page' => [
+			'filter'  => FILTER_VALIDATE_INT,
 			'default' => '1'
-			),
-		'filter' => array(
-			'filter' => FILTER_CALLBACK,
+			],
+		'filter' => [
+			'filter'  => FILTER_CALLBACK,
 			'pageset' => true,
 			'default' => '',
-			'options' => array('options' => 'sanitize_search_string')
-			),
-		'sort_column' => array(
-			'filter' => FILTER_CALLBACK,
+			'options' => ['options' => 'sanitize_search_string']
+			],
+		'sort_column' => [
+			'filter'  => FILTER_CALLBACK,
 			'default' => 'site_name',
-			'options' => array('options' => 'sanitize_search_string')
-			),
-		'sort_direction' => array(
-			'filter' => FILTER_CALLBACK,
+			'options' => ['options' => 'sanitize_search_string']
+			],
+		'sort_direction' => [
+			'filter'  => FILTER_CALLBACK,
 			'default' => 'ASC',
-			'options' => array('options' => 'sanitize_search_string')
-			),
-		'site_id' => array(
-			'filter' => FILTER_VALIDATE_INT,
+			'options' => ['options' => 'sanitize_search_string']
+			],
+		'site_id' => [
+			'filter'  => FILTER_VALIDATE_INT,
 			'default' => '-1',
 			'pageset' => true
-			),
-		'device_type_id' => array(
-			'filter' => FILTER_VALIDATE_INT,
+			],
+		'device_type_id' => [
+			'filter'  => FILTER_VALIDATE_INT,
 			'default' => '-1',
 			'pageset' => true
-			),
-		'detail' => array(
-			'filter' => FILTER_CALLBACK,
+			],
+		'detail' => [
+			'filter'  => FILTER_CALLBACK,
 			'default' => 'false',
-			'options' => array('options' => 'sanitize_search_string')
-			),
-	);
+			'options' => ['options' => 'sanitize_search_string']
+			],
+	];
 
 	validate_store_request_vars($filters, 'sess_mtv_sites');
-	/* ================= input validation ================= */
+	// ================= input validation =================
 }
 
 function mactrack_view_sites() {
@@ -240,45 +242,45 @@ function mactrack_view_sites() {
 	}
 
 	if (get_request_var('detail') == 'false') {
-		$display_text = array(
-			'nosort' => array(
+		$display_text = [
+			'nosort' => [
 				'display' => __('Actions', 'mactrack')
-			),
-			'site_name' => array(
+			],
+			'site_name' => [
 				'display' => __('Site Name', 'mactrack'),
 				'sort'    => 'ASC'
-			),
-			'total_devices' => array(
+			],
+			'total_devices' => [
 				'display' => __('Devices', 'mactrack'),
 				'align'   => 'right',
 				'sort'    => 'DESC'
-			),
-			'total_ips' => array(
+			],
+			'total_ips' => [
 				'display' => __('Total IP\'s', 'mactrack'),
 				'align'   => 'right',
 				'sort'    => 'DESC'
-			),
-			'total_user_ports' => array(
+			],
+			'total_user_ports' => [
 				'display' => __('User Ports', 'mactrack'),
 				'align'   => 'right',
 				'sort'    => 'DESC'
-			),
-			'total_oper_ports' => array(
+			],
+			'total_oper_ports' => [
 				'display' => __('User Ports Up', 'mactrack'),
 				'align'   => 'right',
 				'sort'    => 'DESC'
-			),
-			'total_macs' => array(
+			],
+			'total_macs' => [
 				'display' => __('MACS Found', 'mactrack'),
 				'align'   => 'right',
 				'sort'    => 'DESC'
-			),
-			'total_device_errors' => array(
+			],
+			'total_device_errors' => [
 				'display' => __('Device Errors', 'mactrack'),
 				'align'   => 'right',
 				'sort'    => 'DESC'
-			)
-		);
+			]
+		];
 
 		$columns = cacti_sizeof($display_text);
 
@@ -332,53 +334,53 @@ function mactrack_view_sites() {
 			mactrack_display_stats();
 		}
 	} else {
-		$display_text = array(
-			'nosort' => array(
+		$display_text = [
+			'nosort' => [
 				'display' => __('Actions', 'mactrack')
-			),
-			'site_name' => array(
+			],
+			'site_name' => [
 				'display' => __('Site Name', 'mactrack'),
 				'sort'    => 'ASC'
-			),
-			'vendor' => array(
+			],
+			'vendor' => [
 				'display' => __('Vendor', 'mactrack'),
 				'sort'    => 'ASC'
-			),
-			'description' => array(
+			],
+			'description' => [
 				'display' => __('Device Type', 'mactrack'),
 				'sort'    => 'DESC'
-			),
-			'total_devices' => array(
+			],
+			'total_devices' => [
 				'display' => __('Total Devices', 'mactrack'),
 				'align'   => 'right',
 				'sort'    => 'DESC'
-			),
-			'sum_ips_total' => array(
+			],
+			'sum_ips_total' => [
 				'display' => __('Total IP\'s', 'mactrack'),
 				'align'   => 'right',
 				'sort'    => 'DESC'
-			),
-			'sum_ports_total' => array(
+			],
+			'sum_ports_total' => [
 				'display' => __('Total User Ports', 'mactrack'),
 				'align'   => 'right',
 				'sort'    => 'DESC'
-			),
-			'sum_ports_active' => array(
+			],
+			'sum_ports_active' => [
 				'display' => __('Total Oper Ports', 'mactrack'),
 				'align'   => 'right',
 				'sort'    => 'DESC'
-			),
-			'sum_ports_trunk' => array(
+			],
+			'sum_ports_trunk' => [
 				'display' => __('Total Trunks', 'mactrack'),
 				'align'   => 'right',
 				'sort'    => 'DESC'
-			),
-			'sum_macs_active' => array(
+			],
+			'sum_macs_active' => [
 				'display' => __('MACS Found', 'mactrack'),
 				'align'   => 'right',
 				'sort'    => 'DESC'
-			)
-		);
+			]
+		];
 
 		$columns = cacti_sizeof($display_text);
 
@@ -433,4 +435,3 @@ function mactrack_view_sites() {
 
 	print '<div id="response" title="' . __esc('Site Scan Results', 'mactrack') . '"></div>';
 }
-

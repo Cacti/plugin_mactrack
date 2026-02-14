@@ -29,22 +29,18 @@
  * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
  *
  */
-class Net_DNS2_RR_EUI48 extends Net_DNS2_RR
-{
-	/*
-	 * The EUI48 address, in hex format
-	 */
+class Net_DNS2_RR_EUI48 extends Net_DNS2_RR {
+	// The EUI48 address, in hex format
 	public $address;
 
 	/**
 	 * method to return the rdata portion of the packet as a string
 	 *
-	 * @return	string
+	 * @return string
 	 * @access	protected
 	 *
 	 */
-	protected function rrToString()
-	{
+	protected function rrToString() {
 		return $this->address;
 	}
 
@@ -57,8 +53,7 @@ class Net_DNS2_RR_EUI48 extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrFromString(array $rdata)
-	{
+	protected function rrFromString(array $rdata) {
 		$value = array_shift($rdata);
 
 		//
@@ -66,8 +61,8 @@ class Net_DNS2_RR_EUI48 extends Net_DNS2_RR
 		// separated by hyphens.
 		//
 		$a = explode('-', $value);
-		if (cacti_sizeof($a) != 6) {
 
+		if (cacti_sizeof($a) != 6) {
 			return false;
 		}
 
@@ -97,14 +92,13 @@ class Net_DNS2_RR_EUI48 extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrSet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrSet(Net_DNS2_Packet &$packet) {
 		if ($this->rdlength > 0) {
-
 			$x = unpack('C6', $this->rdata);
-			if (cacti_sizeof($x) == 6) {
 
+			if (cacti_sizeof($x) == 6) {
 				$this->address = vsprintf('%02x-%02x-%02x-%02x-%02x-%02x', $x);
+
 				return true;
 			}
 		}
@@ -116,24 +110,24 @@ class Net_DNS2_RR_EUI48 extends Net_DNS2_RR
 	 * returns the rdata portion of the DNS packet
 	 *
 	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-	 *								   compressed names
+	 *                                 compressed names
 	 *
-	 * @return mixed				   either returns a binary packed
-	 *								   string or null on failure
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
 	 * @access protected
 	 *
 	 */
-	protected function rrGet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrGet(Net_DNS2_Packet &$packet) {
 		$data = '';
 
 		$a = explode('-', $this->address);
-		foreach ($a as $b) {
 
+		foreach ($a as $b) {
 			$data .= chr(hexdec($b));
 		}
 
 		$packet->offset += 6;
+
 		return $data;
 	}
 }

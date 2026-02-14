@@ -30,28 +30,22 @@
  *	   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
  *
  */
-class Net_DNS2_RR_APL extends Net_DNS2_RR
-{
-	/*
-	 * a list of all the address prefix list items
-	 */
+class Net_DNS2_RR_APL extends Net_DNS2_RR {
+	// a list of all the address prefix list items
 	public $apl_items = [];
 
 	/**
 	 * method to return the rdata portion of the packet as a string
 	 *
-	 * @return	string
+	 * @return string
 	 * @access	protected
 	 *
 	 */
-	protected function rrToString()
-	{
+	protected function rrToString() {
 		$out = '';
 
 		foreach ($this->apl_items as $item) {
-
 			if ($item['n'] == 1) {
-
 				$out .= '!';
 			}
 
@@ -71,18 +65,14 @@ class Net_DNS2_RR_APL extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrFromString(array $rdata)
-	{
+	protected function rrFromString(array $rdata) {
 		foreach ($rdata as $item) {
-
 			if (preg_match('/^(!?)([1|2])\:([^\/]*)\/([0-9]{1,3})$/', $item, $m)) {
-
 				$i = [
-
 					'address_family'	=> $m[2],
-					'prefix'			=> $m[4],
-					'n'					=> ($m[1] == '!') ? 1 : 0,
-					'afd_part'			=> strtolower($m[3])
+					'prefix'			      => $m[4],
+					'n'					         => ($m[1] == '!') ? 1 : 0,
+					'afd_part'			    => strtolower($m[3])
 				];
 
 				$address = $this->_trimZeros(
@@ -107,14 +97,11 @@ class Net_DNS2_RR_APL extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrSet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrSet(Net_DNS2_Packet &$packet) {
 		if ($this->rdlength > 0) {
-
 			$offset = 0;
 
 			while ($offset < $this->rdlength) {
-
 				//
 				// unpack the family, prefix, negate and length values
 				//
@@ -123,50 +110,46 @@ class Net_DNS2_RR_APL extends Net_DNS2_RR
 				);
 
 				$item = [
-
 					'address_family'	=> $x['address_family'],
-					'prefix'			=> $x['prefix'],
-					'n'					=> ($x['extra'] >> 7) & 0x1,
-					'afd_length'		=> $x['extra'] & 0xf
+					'prefix'			      => $x['prefix'],
+					'n'					         => ($x['extra'] >> 7) & 0x1,
+					'afd_length'		   => $x['extra'] & 0xf
 				];
 
 				switch($item['address_family']) {
+					case 1:
+						$r = unpack(
+							'C*', substr($this->rdata, $offset + 4, $item['afd_length'])
+						);
 
-				case 1:
-					$r = unpack(
-						'C*', substr($this->rdata, $offset + 4, $item['afd_length'])
-					);
-					if (cacti_sizeof($r) < 4) {
-
-						for ($c=cacti_sizeof($r)+1; $c<4+1; $c++) {
-
-							$r[$c] = 0;
+						if (cacti_sizeof($r) < 4) {
+							for ($c = cacti_sizeof($r) + 1; $c < 4 + 1; $c++) {
+								$r[$c] = 0;
+							}
 						}
-					}
 
-					$item['afd_part'] = implode('.', $r);
+						$item['afd_part'] = implode('.', $r);
 
-					break;
-				case 2:
-					$r = unpack(
-						'C*', substr($this->rdata, $offset + 4, $item['afd_length'])
-					);
-					if (cacti_sizeof($r) < 8) {
+						break;
+					case 2:
+						$r = unpack(
+							'C*', substr($this->rdata, $offset + 4, $item['afd_length'])
+						);
 
-						for ($c=cacti_sizeof($r)+1; $c<8+1; $c++) {
-
-							$r[$c] = 0;
+						if (cacti_sizeof($r) < 8) {
+							for ($c = cacti_sizeof($r) + 1; $c < 8 + 1; $c++) {
+								$r[$c] = 0;
+							}
 						}
-					}
 
-					$item['afd_part'] = sprintf(
-						'%x:%x:%x:%x:%x:%x:%x:%x',
-						$r[1], $r[2], $r[3], $r[4], $r[5], $r[6], $r[7], $r[8]
-					);
+						$item['afd_part'] = sprintf(
+							'%x:%x:%x:%x:%x:%x:%x:%x',
+							$r[1], $r[2], $r[3], $r[4], $r[5], $r[6], $r[7], $r[8]
+						);
 
-					break;
-				default:
-					return false;
+						break;
+					default:
+						return false;
 				}
 
 				$this->apl_items[] = $item;
@@ -184,21 +167,18 @@ class Net_DNS2_RR_APL extends Net_DNS2_RR
 	 * returns the rdata portion of the DNS packet
 	 *
 	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-	 *								   compressed names
+	 *                                 compressed names
 	 *
-	 * @return mixed				   either returns a binary packed
-	 *								   string or null on failure
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
 	 * @access protected
 	 *
 	 */
-	protected function rrGet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrGet(Net_DNS2_Packet &$packet) {
 		if (cacti_sizeof($this->apl_items) > 0) {
-
 			$data = '';
 
 			foreach ($this->apl_items as $item) {
-
 				//
 				// pack the address_family and prefix values
 				//
@@ -210,28 +190,30 @@ class Net_DNS2_RR_APL extends Net_DNS2_RR
 				);
 
 				switch($item['address_family']) {
-				case 1:
-					$address = explode(
-						'.',
-						$this->_trimZeros($item['address_family'], $item['afd_part'])
-					);
+					case 1:
+						$address = explode(
+							'.',
+							$this->_trimZeros($item['address_family'], $item['afd_part'])
+						);
 
-					foreach ($address as $b) {
-						$data .= chr($b);
-					}
-					break;
-				case 2:
-					$address = explode(
-						':',
-						$this->_trimZeros($item['address_family'], $item['afd_part'])
-					);
+						foreach ($address as $b) {
+							$data .= chr($b);
+						}
 
-					foreach ($address as $b) {
-						$data .= pack('H', $b);
-					}
-					break;
-				default:
-					return null;
+						break;
+					case 2:
+						$address = explode(
+							':',
+							$this->_trimZeros($item['address_family'], $item['afd_part'])
+						);
+
+						foreach ($address as $b) {
+							$data .= pack('H', $b);
+						}
+
+						break;
+					default:
+						return null;
 				}
 			}
 
@@ -254,25 +236,24 @@ class Net_DNS2_RR_APL extends Net_DNS2_RR
 	 * @access private
 	 *
 	 */
-	private function _trimZeros($family, $address)
-	{
+	private function _trimZeros($family, $address) {
 		$a = [];
 
 		switch($family) {
-		case 1:
-			$a = array_reverse(explode('.', $address));
-			break;
-		case 2:
-			$a = array_reverse(explode(':', $address));
-			break;
-		default:
-			return '';
+			case 1:
+				$a = array_reverse(explode('.', $address));
+
+				break;
+			case 2:
+				$a = array_reverse(explode(':', $address));
+
+				break;
+			default:
+				return '';
 		}
 
 		foreach ($a as $value) {
-
 			if ($value === '0') {
-
 				array_shift($a);
 			}
 		}
@@ -280,14 +261,16 @@ class Net_DNS2_RR_APL extends Net_DNS2_RR
 		$out = '';
 
 		switch($family) {
-		case 1:
-			$out = implode('.', array_reverse($a));
-			break;
-		case 2:
-			$out = implode(':', array_reverse($a));
-			break;
-		default:
-			return '';
+			case 1:
+				$out = implode('.', array_reverse($a));
+
+				break;
+			case 2:
+				$out = implode(':', array_reverse($a));
+
+				break;
+			default:
+				return '';
 		}
 
 		return $out;

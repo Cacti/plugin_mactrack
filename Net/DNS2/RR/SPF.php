@@ -22,6 +22,5 @@
  * for now we just extend the TXT RR and use it.
  *
  */
-class Net_DNS2_RR_SPF extends Net_DNS2_RR_TXT
-{
+class Net_DNS2_RR_SPF extends Net_DNS2_RR_TXT {
 }

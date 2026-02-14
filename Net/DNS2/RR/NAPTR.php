@@ -37,11 +37,8 @@
  *	 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  *
  */
-class Net_DNS2_RR_NAPTR extends Net_DNS2_RR
-{
-	/*
-	 * the order in which the NAPTR records MUST be processed
-	 */
+class Net_DNS2_RR_NAPTR extends Net_DNS2_RR {
+	// the order in which the NAPTR records MUST be processed
 	public $order;
 
 	/*
@@ -50,19 +47,13 @@ class Net_DNS2_RR_NAPTR extends Net_DNS2_RR
 	 */
 	public $preference;
 
-	/*
-	 * rewrite flags
-	 */
+	// rewrite flags
 	public $flags;
 
-	/*
-	 * Specifies the service(s) available down this rewrite path
-	 */
+	// Specifies the service(s) available down this rewrite path
 	public $services;
 
-	/*
-	 * regular expression
-	 */
+	// regular expression
 	public $regexp;
 
 	/*
@@ -74,12 +65,11 @@ class Net_DNS2_RR_NAPTR extends Net_DNS2_RR
 	/**
 	 * method to return the rdata portion of the packet as a string
 	 *
-	 * @return	string
+	 * @return string
 	 * @access	protected
 	 *
 	 */
-	protected function rrToString()
-	{
+	protected function rrToString() {
 		return $this->order . ' ' . $this->preference . ' ' .
 			$this->formatString($this->flags) . ' ' .
 			$this->formatString($this->services) . ' ' .
@@ -96,18 +86,17 @@ class Net_DNS2_RR_NAPTR extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrFromString(array $rdata)
-	{
-		$this->order		= array_shift($rdata);
-		$this->preference	= array_shift($rdata);
+	protected function rrFromString(array $rdata) {
+		$this->order		     = array_shift($rdata);
+		$this->preference	 = array_shift($rdata);
 
 		$data = $this->buildString($rdata);
-		if (cacti_sizeof($data) == 4) {
 
-			$this->flags		= $data[0];
-			$this->services		= $data[1];
-			$this->regexp		= $data[2];
-			$this->replacement	= $this->cleanString($data[3]);
+		if (cacti_sizeof($data) == 4) {
+			$this->flags		      = $data[0];
+			$this->services		   = $data[1];
+			$this->regexp		     = $data[2];
+			$this->replacement	 = $this->cleanString($data[3]);
 
 			return true;
 		}
@@ -124,25 +113,23 @@ class Net_DNS2_RR_NAPTR extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrSet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrSet(Net_DNS2_Packet &$packet) {
 		if ($this->rdlength > 0) {
-
 			//
 			// unpack the order and preference
 			//
 			$x = unpack('norder/npreference', $this->rdata);
 
-			$this->order		= $x['order'];
-			$this->preference	= $x['preference'];
+			$this->order		     = $x['order'];
+			$this->preference	 = $x['preference'];
 
-			$offset				= $packet->offset + 4;
+			$offset				 = $packet->offset + 4;
 
-			$this->flags		= Net_DNS2_Packet::label($packet, $offset);
-			$this->services		= Net_DNS2_Packet::label($packet, $offset);
-			$this->regexp		= Net_DNS2_Packet::label($packet, $offset);
+			$this->flags		    = Net_DNS2_Packet::label($packet, $offset);
+			$this->services		 = Net_DNS2_Packet::label($packet, $offset);
+			$this->regexp		   = Net_DNS2_Packet::label($packet, $offset);
 
-			$this->replacement	= Net_DNS2_Packet::expand($packet, $offset);
+			$this->replacement	 = Net_DNS2_Packet::expand($packet, $offset);
 
 			return true;
 		}
@@ -154,17 +141,15 @@ class Net_DNS2_RR_NAPTR extends Net_DNS2_RR
 	 * returns the rdata portion of the DNS packet
 	 *
 	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-	 *								   compressed names
+	 *                                 compressed names
 	 *
-	 * @return mixed				   either returns a binary packed
-	 *								   string or null on failure
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
 	 * @access protected
 	 *
 	 */
-	protected function rrGet(Net_DNS2_Packet &$packet)
-	{
-		if ( (isset($this->order)) && (strlen($this->services) > 0) ) {
-
+	protected function rrGet(Net_DNS2_Packet &$packet) {
+		if ((isset($this->order)) && (strlen($this->services) > 0)) {
 			$data = pack('nn', $this->order, $this->preference);
 
 			$data .= chr(strlen($this->flags)) . $this->flags;

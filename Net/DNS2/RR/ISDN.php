@@ -27,27 +27,21 @@
  *	  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  *
  */
-class Net_DNS2_RR_ISDN extends Net_DNS2_RR
-{
-	/*
-	 * ISDN Number
-	 */
+class Net_DNS2_RR_ISDN extends Net_DNS2_RR {
+	// ISDN Number
 	public $isdnaddress;
 
-	/*
-	 * Sub-Address
-	 */
+	// Sub-Address
 	public $sa;
 
 	/**
 	 * method to return the rdata portion of the packet as a string
 	 *
-	 * @return	string
+	 * @return string
 	 * @access	protected
 	 *
 	 */
-	protected function rrToString()
-	{
+	protected function rrToString() {
 		return $this->formatString($this->isdnaddress) . ' ' .
 			$this->formatString($this->sa);
 	}
@@ -61,14 +55,13 @@ class Net_DNS2_RR_ISDN extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrFromString(array $rdata)
-	{
+	protected function rrFromString(array $rdata) {
 		$data = $this->buildString($rdata);
+
 		if (cacti_sizeof($data) >= 1) {
-
 			$this->isdnaddress = $data[0];
-			if (isset($data[1])) {
 
+			if (isset($data[1])) {
 				$this->sa = $data[1];
 			}
 
@@ -87,20 +80,16 @@ class Net_DNS2_RR_ISDN extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrSet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrSet(Net_DNS2_Packet &$packet) {
 		if ($this->rdlength > 0) {
-
 			$this->isdnaddress = Net_DNS2_Packet::label($packet, $packet->offset);
 
 			//
 			// look for a SA (sub address) - it's optional
 			//
-			if ( (strlen($this->isdnaddress) + 1) < $this->rdlength) {
-
+			if ((strlen($this->isdnaddress) + 1) < $this->rdlength) {
 				$this->sa = Net_DNS2_Packet::label($packet, $packet->offset);
 			} else {
-
 				$this->sa = '';
 			}
 
@@ -114,20 +103,18 @@ class Net_DNS2_RR_ISDN extends Net_DNS2_RR
 	 * returns the rdata portion of the DNS packet
 	 *
 	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-	 *								   compressed names
+	 *                                 compressed names
 	 *
-	 * @return mixed				   either returns a binary packed
-	 *								   string or null on failure
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
 	 * @access protected
 	 *
 	 */
-	protected function rrGet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrGet(Net_DNS2_Packet &$packet) {
 		if (strlen($this->isdnaddress) > 0) {
-
 			$data = chr(strlen($this->isdnaddress)) . $this->isdnaddress;
-			if (!empty($this->sa)) {
 
+			if (!empty($this->sa)) {
 				$data .= chr(strlen($this->sa));
 				$data .= $this->sa;
 			}

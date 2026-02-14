@@ -31,157 +31,144 @@
  *   +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  *
  */
-class Net_DNS2_RR_WKS extends Net_DNS2_RR
-{
-    /*
-     * The IP address of the service
-     */
-    public $address;
+class Net_DNS2_RR_WKS extends Net_DNS2_RR {
+	// The IP address of the service
+	public $address;
 
-    /*
-     * The protocol of the service
-     */
-    public $protocol;
+	// The protocol of the service
+	public $protocol;
 
-    /*
-     * bitmap
-     */
-    public $bitmap = [];
+	// bitmap
+	public $bitmap = [];
 
-    /**
-     * method to return the rdata portion of the packet as a string
-     *
-     * @return  string
-     * @access  protected
-     *
-     */
-    protected function rrToString()
-    {
-        $data = $this->address . ' ' . $this->protocol;
+	/**
+	 * method to return the rdata portion of the packet as a string
+	 *
+	 * @return string
+	 * @access  protected
+	 *
+	 */
+	protected function rrToString() {
+		$data = $this->address . ' ' . $this->protocol;
 
-        foreach ($this->bitmap as $port) {
-            $data .= ' ' . $port;
-        }
+		foreach ($this->bitmap as $port) {
+			$data .= ' ' . $port;
+		}
 
-        return $data;
-    }
+		return $data;
+	}
 
-    /**
-     * parses the rdata portion from a standard DNS config line
-     *
-     * @param array $rdata a string split line of values for the rdata
-     *
-     * @return boolean
-     * @access protected
-     *
-     */
-    protected function rrFromString(array $rdata)
-    {
-        $this->address  = strtolower(trim(array_shift($rdata), '.'));
-        $this->protocol = array_shift($rdata);
-        $this->bitmap   = $rdata;
+	/**
+	 * parses the rdata portion from a standard DNS config line
+	 *
+	 * @param array $rdata a string split line of values for the rdata
+	 *
+	 * @return boolean
+	 * @access protected
+	 *
+	 */
+	protected function rrFromString(array $rdata) {
+		$this->address  = strtolower(trim(array_shift($rdata), '.'));
+		$this->protocol = array_shift($rdata);
+		$this->bitmap   = $rdata;
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * parses the rdata of the Net_DNS2_Packet object
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
-     *
-     * @return boolean
-     * @access protected
-     *
-     */
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        if ($this->rdlength > 0) {
+	/**
+	 * parses the rdata of the Net_DNS2_Packet object
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
+	 *
+	 * @return boolean
+	 * @access protected
+	 *
+	 */
+	protected function rrSet(Net_DNS2_Packet &$packet) {
+		if ($this->rdlength > 0) {
+			//
+			// get the address and protocol value
+			//
+			$x = unpack('Naddress/Cprotocol', $this->rdata);
 
-            //
-            // get the address and protocol value
-            //
-            $x = unpack('Naddress/Cprotocol', $this->rdata);
+			$this->address  = long2ip($x['address']);
+			$this->protocol = $x['protocol'];
 
-            $this->address  = long2ip($x['address']);
-            $this->protocol = $x['protocol'];
+			//
+			// unpack the port list bitmap
+			//
+			$port = 0;
 
-            //
-            // unpack the port list bitmap
-            //
-            $port = 0;
-            foreach (unpack('@5/C*', $this->rdata) as $set) {
+			foreach (unpack('@5/C*', $this->rdata) as $set) {
+				$s = sprintf('%08b', $set);
 
-                $s = sprintf('%08b', $set);
+				for ($i = 0; $i < 8; $i++, $port++) {
+					if ($s[$i] == '1') {
+						$this->bitmap[] = $port;
+					}
+				}
+			}
 
-                for ($i=0; $i<8; $i++, $port++) {
-                    if ($s[$i] == '1') {
-                        $this->bitmap[] = $port;
-                    }
-                }
-            }
+			return true;
+		}
 
-            return true;
-        }
+		return false;
+	}
 
-        return false;
-    }
+	/**
+	 * returns the rdata portion of the DNS packet
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
+	 *                                 compressed names
+	 *
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
+	 * @access protected
+	 *
+	 */
+	protected function rrGet(Net_DNS2_Packet &$packet) {
+		if (strlen($this->address) > 0) {
+			$data = pack('NC', ip2long($this->address), $this->protocol);
 
-    /**
-     * returns the rdata portion of the DNS packet
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-     *                                 compressed names
-     *
-     * @return mixed                   either returns a binary packed
-     *                                 string or null on failure
-     * @access protected
-     *
-     */
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        if (strlen($this->address) > 0) {
+			$ports = [];
 
-            $data = pack('NC', ip2long($this->address), $this->protocol);
+			$n = 0;
 
-            $ports = [];
+			foreach ($this->bitmap as $port) {
+				$ports[$port] = 1;
 
-            $n = 0;
-            foreach ($this->bitmap as $port) {
-                $ports[$port] = 1;
+				if ($port > $n) {
+					$n = $port;
+				}
+			}
 
-                if ($port > $n) {
-                    $n = $port;
-                }
-            }
-            for ($i=0; $i<ceil($n/8)*8; $i++) {
-                if (!isset($ports[$i])) {
-                    $ports[$i] = 0;
-                }
-            }
+			for ($i = 0; $i < ceil($n / 8) * 8; $i++) {
+				if (!isset($ports[$i])) {
+					$ports[$i] = 0;
+				}
+			}
 
-            ksort($ports);
+			ksort($ports);
 
-            $string = '';
-            $n = 0;
+			$string = '';
+			$n      = 0;
 
-            foreach ($ports as $s) {
+			foreach ($ports as $s) {
+				$string .= $s;
+				$n++;
 
-                $string .= $s;
-                $n++;
+				if ($n == 8) {
+					$data .= chr(bindec($string));
+					$string = '';
+					$n      = 0;
+				}
+			}
 
-                if ($n == 8) {
+			$packet->offset += strlen($data);
 
-                    $data .= chr(bindec($string));
-                    $string = '';
-                    $n = 0;
-                }
-            }
+			return $data;
+		}
 
-            $packet->offset += strlen($data);
-
-            return $data;
-        }
-
-        return null;
-    }
+		return null;
+	}
 }

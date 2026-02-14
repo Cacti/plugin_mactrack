@@ -33,15 +33,15 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 
 	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
-	$save['device_id'] = $device_id;
-	$save['host_id']   = $host_id;
-	$save['site_id']   = $site_id;
+	$save['device_id']            = $device_id;
+	$save['host_id']              = $host_id;
+	$save['site_id']              = $site_id;
 	$save['hostname']             = form_input_validate($hostname, 'hostname', '', false, 3);
 	$save['device_name']          = form_input_validate($device_name, 'device_name', '', false, 3);
 	$save['notes']                = form_input_validate($notes, 'notes', '', true, 3);
 	$save['scan_type']            = form_input_validate($scan_type, 'scan_type', '', false, 3);
 	$save['snmp_options']         = form_input_validate($snmp_options, 'snmp_options', '^[0-9]+$', true, 3);
-	$save['snmp_readstring']      = form_input_validate($snmp_readstring, 'snmp_readstring', '', true, 3); # for SNMP V3, this is optional
+	$save['snmp_readstring']      = form_input_validate($snmp_readstring, 'snmp_readstring', '', true, 3); // for SNMP V3, this is optional
 	$save['snmp_version']         = form_input_validate($snmp_version, 'snmp_version', '', false, 3);
 	$save['snmp_username']        = form_input_validate($snmp_username, 'snmp_username', '', true, 3);
 	$save['snmp_password']        = form_input_validate($snmp_password, 'snmp_password', '', true, 3);
@@ -64,6 +64,7 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 	$save['device_type_id']       = form_input_validate($device_type_id, 'device_type_id', '', true, 3);
 
 	$device_id = 0;
+
 	if (!is_error_message()) {
 		$device_id = sql_save($save, 'mac_track_devices', 'device_id');
 
@@ -81,7 +82,7 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 	return $device_id;
 }
 
-function api_mactrack_device_remove($device_id){
+function api_mactrack_device_remove($device_id) {
 	db_execute('DELETE FROM mac_track_devices WHERE device_id=' . $device_id);
 	db_execute('DELETE FROM mac_track_aggregated_ports WHERE device_id=' . $device_id);
 	db_execute('DELETE FROM mac_track_interfaces WHERE device_id=' . $device_id);
@@ -105,6 +106,7 @@ function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops
 	$save['scan_vlans']         = form_input_validate($scan_vlans, 'scan_vlans', '', true, 3);
 
 	$site_id = 0;
+
 	if (!is_error_message()) {
 		$site_id = sql_save($save, 'mac_track_sites', 'site_id');
 
@@ -142,16 +144,15 @@ function sync_mactrack_to_cacti($mt_device) {
 	 * (aka: has the device been saved successfully) */
 	if ((read_config_option('mt_update_policy', true) == 3) &&
 		($mt_device['host_id'] > 0)) {
-
 		if (!isset($mt_device['snmp_engine_id'])) {
 			$mt_device['snmp_engine_id'] = '';
 		}
 
-		# fetch current data for cacti device
+		// fetch current data for cacti device
 		$cacti_device = db_fetch_row('SELECT * FROM host WHERE id=' . $mt_device['host_id']);
 
 		if (cacti_sizeof($cacti_device)) {
-			# update cacti device
+			// update cacti device
 			api_device_save($cacti_device['id'], $cacti_device['host_template_id'],
 				$cacti_device['description'], $cacti_device['hostname'],
 				$mt_device['snmp_readstring'], $mt_device['snmp_version'], $mt_device['snmp_username'],
@@ -175,25 +176,24 @@ function sync_cacti_to_mactrack($device) {
 	 * AND has the device already been assigned a 'valid' Mactrack device id
 	 * (aka: has the device been saved successfully) */
 	if ((read_config_option('mt_update_policy', true) == 2) && ($device['id'] > 0)) {
-		# $devices holds the whole row from host table
-		# now fetch the related device from mac_track_devices, if any
+		// $devices holds the whole row from host table
+		// now fetch the related device from mac_track_devices, if any
 		$mt_device = db_fetch_row('SELECT * from mac_track_devices WHERE host_id=' . $device['id']);
 
 		if (is_array($mt_device) && $mt_device) {
-
 			if (!isset($mt_device['snmp_engine_id'])) {
 				$mt_device['snmp_engine_id'] = '';
 			}
-		
-			# update mac_track_device
+
+			// update mac_track_device
 			$device_id = api_mactrack_device_save(
-				$mt_device['device_id'], 			# not a host column
+				$mt_device['device_id'], 			// not a host column
 				$device['id'],
-				$mt_device['site_id'],				# not a host column (wait for 088)
+				$mt_device['site_id'],				// not a host column (wait for 088)
 				$device['hostname'],
 				$device['description'],
-				$mt_device['scan_type'],			# not a host column
-				$mt_device['snmp_options'],			# not a host column
+				$mt_device['scan_type'],			// not a host column
+				$mt_device['snmp_options'],			// not a host column
 				$device['snmp_community'],
 				$device['snmp_version'],
 				$device['snmp_username'],
@@ -207,13 +207,13 @@ function sync_cacti_to_mactrack($device) {
 				$device['snmp_timeout'],
 				$mt_device['snmp_retries'],
 				$device['max_oids'],
-				$mt_device['ignorePorts'],			# not a host column
+				$mt_device['ignorePorts'],			// not a host column
 				$device['notes'],
-				$mt_device['user_name'], 			# not a host column
-				$mt_device['user_password'],		# not a host column
+				$mt_device['user_name'], 			// not a host column
+				$mt_device['user_password'],		// not a host column
 				$mt_device['term_type'],
 				$mt_device['private_key_path'],
-				(isset($mt_device['disabled']) ? $mt_device['disabled'] : ''), # not a host column
+				(isset($mt_device['disabled']) ? $mt_device['disabled'] : ''), // not a host column
 				$mt_device['scan_trunk_port'],
 				$mt_device['device_type_id']
 			);
@@ -222,16 +222,18 @@ function sync_cacti_to_mactrack($device) {
 		}
 	}
 
-	# for use with next hook in chain
+	// for use with next hook in chain
 	return $device;
 }
 
 /**
  * Setup the new dropdown action for Device Management
  * @arg $action		actions to be performed from dropdown
+ * @param mixed $action
  */
 function mactrack_device_action_array($action) {
 	$action['plugin_mactrack_device'] = __('Import into Mactrack Database', 'mactrack');
+
 	return $action;
 }
 
@@ -239,19 +241,20 @@ function mactrack_device_action_prepare($save) {
 	global $config, $fields_mactrack_device_edit;
 
 	if (isset($save['drp_action']) && $save['drp_action'] == 'plugin_mactrack_device') {
-		/* find out which (if any) hosts have been checked, so we can tell the user */
+		// find out which (if any) hosts have been checked, so we can tell the user
 		if (isset($save['host_array'])) {
-			/* list affected hosts */
+			// list affected hosts
 			print '<tr>';
 			print "<td colspan='2' class='textArea'>" .
 				'<p>' . __('Click \'Continue\' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below.', 'mactrack') . '</p>';
 			print '</tr>';
 
-			$form_array = array();
-			foreach($fields_mactrack_device_edit as $field_name => $field_array) {
-				/* show only those fields to the user, that cannot been taken from the device field */
+			$form_array = [];
+
+			foreach ($fields_mactrack_device_edit as $field_name => $field_array) {
+				// show only those fields to the user, that cannot been taken from the device field
 				if (preg_match('(site_id|scan_type|snmp_options|snmp_retries|ignorePorts|user_name|user_password|disabled|term_type|private_key_path)', $field_name)) {
-					$form_array += array($field_name => $fields_mactrack_device_edit[$field_name]);
+					$form_array += [$field_name => $fields_mactrack_device_edit[$field_name]];
 
 					$form_array[$field_name]['value']       = '';
 					$form_array[$field_name]['description'] = '';
@@ -260,10 +263,10 @@ function mactrack_device_action_prepare($save) {
 			}
 
 			draw_edit_form(
-				array(
-					'config' => array('no_form_tag' => true),
+				[
+					'config' => ['no_form_tag' => true],
 					'fields' => $form_array
-				)
+				]
 			);
 
 			print '<tr>';
@@ -281,34 +284,35 @@ function mactrack_device_action_prepare($save) {
  * perform mactrack_device execute action
  * @arg $action				action to be performed
  * return				-
+ * @param mixed $action
  *  */
 function mactrack_device_action_execute($action) {
 	global $config;
 
 	if ($action == 'plugin_mactrack_device') {
-		/* find out which (if any) hosts have been checked, so we can tell the user */
+		// find out which (if any) hosts have been checked, so we can tell the user
 		if (isset_request_var('selected_items')) {
 			$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
 
 			if ($selected_items != false) {
-				/* work on all selected hosts */
-				for ($i=0;($i<cacti_sizeof($selected_items));$i++) {
-					# fetch row from host table
-					$device = db_fetch_row_prepared('SELECT * from host WHERE id = ?', array($selected_items[$i]));
+				// work on all selected hosts
+				for ($i = 0; ($i < cacti_sizeof($selected_items)); $i++) {
+					// fetch row from host table
+					$device = db_fetch_row_prepared('SELECT * from host WHERE id = ?', [$selected_items[$i]]);
 
-					# now fetch the related device from mac_track_devices, if any
-					$mt_device = db_fetch_row_prepared('SELECT * from mac_track_devices WHERE host_id = ?', array($device['id']));
+					// now fetch the related device from mac_track_devices, if any
+					$mt_device = db_fetch_row_prepared('SELECT * from mac_track_devices WHERE host_id = ?', [$device['id']]);
 
 					if (is_array($device)) {
-						# update mac_track_device
+						// update mac_track_device
 						$device_id = api_mactrack_device_save(
-							(isset($mt_device['device_id']) ? $mt_device['device_id'] : '0'), 	# not a host column
+							(isset($mt_device['device_id']) ? $mt_device['device_id'] : '0'), 	// not a host column
 							$device['id'],
-							get_request_var('site_id'),         # not a host column (wait for 088)
+							get_request_var('site_id'),         // not a host column (wait for 088)
 							$device['hostname'],
 							$device['description'],
-							get_request_var('scan_type'),       # not a host column
-							get_request_var('snmp_options'),    # not a host column
+							get_request_var('scan_type'),       // not a host column
+							get_request_var('snmp_options'),    // not a host column
 							$device['snmp_community'],
 							$device['snmp_version'],
 							$device['snmp_username'],
@@ -322,10 +326,10 @@ function mactrack_device_action_execute($action) {
 							$device['snmp_timeout'],
 							get_request_var('snmp_retries'),
 							$device['max_oids'],
-							get_request_var('ignorePorts'),     # not a host column
+							get_request_var('ignorePorts'),     // not a host column
 							$device['notes'],
-							get_request_var('user_name'),       # not a host column
-							get_request_var('user_password'),   # not a host column
+							get_request_var('user_name'),       // not a host column
+							get_request_var('user_password'),   // not a host column
 							get_request_var('term_type'),
 							get_request_var('private_key_path'),
 							(isset_request_var('disabled') ? get_request_var('disabled') : ''),
@@ -340,4 +344,3 @@ function mactrack_device_action_execute($action) {
 
 	return $action;
 }
-

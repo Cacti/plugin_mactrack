@@ -32,20 +32,17 @@
  *	   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|
  *
  */
-class Net_DNS2_RR_IPSECKEY extends Net_DNS2_RR
-{
-	const GATEWAY_TYPE_NONE		= 0;
-	const GATEWAY_TYPE_IPV4		= 1;
-	const GATEWAY_TYPE_IPV6		= 2;
-	const GATEWAY_TYPE_DOMAIN	= 3;
+class Net_DNS2_RR_IPSECKEY extends Net_DNS2_RR {
+	const GATEWAY_TYPE_NONE		  = 0;
+	const GATEWAY_TYPE_IPV4		  = 1;
+	const GATEWAY_TYPE_IPV6		  = 2;
+	const GATEWAY_TYPE_DOMAIN	 = 3;
 
-	const ALGORITHM_NONE		= 0;
-	const ALGORITHM_DSA			= 1;
-	const ALGORITHM_RSA			= 2;
+	const ALGORITHM_NONE		 = 0;
+	const ALGORITHM_DSA			 = 1;
+	const ALGORITHM_RSA			 = 2;
 
-	/*
-	 * Precedence (used the same was as a preference field)
-	 */
+	// Precedence (used the same was as a preference field)
 	public $precedence;
 
 	/*
@@ -72,44 +69,41 @@ class Net_DNS2_RR_IPSECKEY extends Net_DNS2_RR
 	 */
 	public $algorithm;
 
-	/*
-	 * The gatway information
-	 */
+	// The gatway information
 	public $gateway;
 
-	/*
-	 * the public key
-	 */
+	// the public key
 	public $key;
 
 	/**
 	 * method to return the rdata portion of the packet as a string
 	 *
-	 * @return	string
+	 * @return string
 	 * @access	protected
 	 *
 	 */
-	protected function rrToString()
-	{
+	protected function rrToString() {
 		$out = $this->precedence . ' ' . $this->gateway_type . ' ' .
 			$this->algorithm . ' ';
 
 		switch($this->gateway_type) {
-		case self::GATEWAY_TYPE_NONE:
-			$out .= '. ';
-			break;
+			case self::GATEWAY_TYPE_NONE:
+				$out .= '. ';
 
-		case self::GATEWAY_TYPE_IPV4:
-		case self::GATEWAY_TYPE_IPV6:
-			$out .= $this->gateway . ' ';
-			break;
+				break;
+			case self::GATEWAY_TYPE_IPV4:
+			case self::GATEWAY_TYPE_IPV6:
+				$out .= $this->gateway . ' ';
 
-		case self::GATEWAY_TYPE_DOMAIN:
-			$out .= $this->gateway . '. ';
-			break;
+				break;
+			case self::GATEWAY_TYPE_DOMAIN:
+				$out .= $this->gateway . '. ';
+
+				break;
 		}
 
 		$out .= $this->key;
+
 		return $out;
 	}
 
@@ -122,70 +116,67 @@ class Net_DNS2_RR_IPSECKEY extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrFromString(array $rdata)
-	{
+	protected function rrFromString(array $rdata) {
 		//
 		// load the data
 		//
-		$precedence		= array_shift($rdata);
-		$gateway_type	= array_shift($rdata);
-		$algorithm		= array_shift($rdata);
-		$gateway		= trim(strtolower(trim(array_shift($rdata))), '.');
-		$key			= array_shift($rdata);
+		$precedence		  = array_shift($rdata);
+		$gateway_type	 = array_shift($rdata);
+		$algorithm		   = array_shift($rdata);
+		$gateway		     = trim(strtolower(trim(array_shift($rdata))), '.');
+		$key			        = array_shift($rdata);
 
 		//
 		// validate it
 		//
 		switch($gateway_type) {
-		case self::GATEWAY_TYPE_NONE:
-			$gateway = '';
-			break;
+			case self::GATEWAY_TYPE_NONE:
+				$gateway = '';
 
-		case self::GATEWAY_TYPE_IPV4:
-			if (Net_DNS2::isIPv4($gateway) == false) {
+				break;
+			case self::GATEWAY_TYPE_IPV4:
+				if (Net_DNS2::isIPv4($gateway) == false) {
+					return false;
+				}
+
+				break;
+			case self::GATEWAY_TYPE_IPV6:
+				if (Net_DNS2::isIPv6($gateway) == false) {
+					return false;
+				}
+
+				break;
+			case self::GATEWAY_TYPE_DOMAIN:; // do nothing
+
+				break;
+			default:
 				return false;
-			}
-			break;
-
-		case self::GATEWAY_TYPE_IPV6:
-			if (Net_DNS2::isIPv6($gateway) == false) {
-				return false;
-			}
-			break;
-
-		case self::GATEWAY_TYPE_DOMAIN:
-			; // do nothing
-			break;
-
-		default:
-			return false;
 		}
 
 		//
 		// check the algorithm and key
 		//
 		switch($algorithm) {
-		case self::ALGORITHM_NONE:
-			$key = '';
-			break;
+			case self::ALGORITHM_NONE:
+				$key = '';
 
-		case self::ALGORITHM_DSA:
-		case self::ALGORITHM_RSA:
-			; // do nothing
-			break;
+				break;
+			case self::ALGORITHM_DSA:
+			case self::ALGORITHM_RSA:; // do nothing
 
-		default:
-			return false;
+				break;
+			default:
+				return false;
 		}
 
 		//
 		// store the values
 		//
-		$this->precedence	= $precedence;
+		$this->precedence	  = $precedence;
 		$this->gateway_type = $gateway_type;
-		$this->algorithm	= $algorithm;
-		$this->gateway		= $gateway;
-		$this->key			= $key;
+		$this->algorithm	   = $algorithm;
+		$this->gateway		    = $gateway;
+		$this->key			       = $key;
 
 		return true;
 	}
@@ -199,18 +190,16 @@ class Net_DNS2_RR_IPSECKEY extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrSet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrSet(Net_DNS2_Packet &$packet) {
 		if ($this->rdlength > 0) {
-
 			//
 			// parse off the precedence, gateway type and algorithm
 			//
 			$x = unpack('Cprecedence/Cgateway_type/Calgorithm', $this->rdata);
 
-			$this->precedence	= $x['precedence'];
+			$this->precedence	  = $x['precedence'];
 			$this->gateway_type = $x['gateway_type'];
-			$this->algorithm	= $x['algorithm'];
+			$this->algorithm	   = $x['algorithm'];
 
 			$offset = 3;
 
@@ -218,53 +207,51 @@ class Net_DNS2_RR_IPSECKEY extends Net_DNS2_RR
 			// extract the gatway based on the type
 			//
 			switch($this->gateway_type) {
-			case self::GATEWAY_TYPE_NONE:
-				$this->gateway = '';
-				break;
+				case self::GATEWAY_TYPE_NONE:
+					$this->gateway = '';
 
-			case self::GATEWAY_TYPE_IPV4:
-				$this->gateway = inet_ntop(substr($this->rdata, $offset, 4));
-				$offset += 4;
-				break;
+					break;
+				case self::GATEWAY_TYPE_IPV4:
+					$this->gateway = inet_ntop(substr($this->rdata, $offset, 4));
+					$offset += 4;
 
-			case self::GATEWAY_TYPE_IPV6:
-				$ip = unpack('n8', substr($this->rdata, $offset, 16));
-				if (cacti_sizeof($ip) == 8) {
+					break;
+				case self::GATEWAY_TYPE_IPV6:
+					$ip = unpack('n8', substr($this->rdata, $offset, 16));
 
-					$this->gateway = vsprintf('%x:%x:%x:%x:%x:%x:%x:%x', $ip);
-					$offset += 16;
-				} else {
+					if (cacti_sizeof($ip) == 8) {
+						$this->gateway = vsprintf('%x:%x:%x:%x:%x:%x:%x:%x', $ip);
+						$offset += 16;
+					} else {
+						return false;
+					}
 
+					break;
+				case self::GATEWAY_TYPE_DOMAIN:
+					$doffset       = $offset + $packet->offset;
+					$this->gateway = Net_DNS2_Packet::expand($packet, $doffset);
+					$offset        = ($doffset - $packet->offset);
+
+					break;
+				default:
 					return false;
-				}
-				break;
-
-			case self::GATEWAY_TYPE_DOMAIN:
-
-				$doffset = $offset + $packet->offset;
-				$this->gateway = Net_DNS2_Packet::expand($packet, $doffset);
-				$offset = ($doffset - $packet->offset);
-				break;
-
-			default:
-				return false;
 			}
 
 			//
 			// extract the key
 			//
 			switch($this->algorithm) {
-			case self::ALGORITHM_NONE:
-				$this->key = '';
-				break;
+				case self::ALGORITHM_NONE:
+					$this->key = '';
 
-			case self::ALGORITHM_DSA:
-			case self::ALGORITHM_RSA:
-				$this->key = base64_encode(substr($this->rdata, $offset));
-				break;
+					break;
+				case self::ALGORITHM_DSA:
+				case self::ALGORITHM_RSA:
+					$this->key = base64_encode(substr($this->rdata, $offset));
 
-			default:
-				return false;
+					break;
+				default:
+					return false;
 			}
 
 			return true;
@@ -277,15 +264,14 @@ class Net_DNS2_RR_IPSECKEY extends Net_DNS2_RR
 	 * returns the rdata portion of the DNS packet
 	 *
 	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-	 *								   compressed names
+	 *                                 compressed names
 	 *
-	 * @return mixed				   either returns a binary packed
-	 *								   string or null on failure
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
 	 * @access protected
 	 *
 	 */
-	protected function rrGet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrGet(Net_DNS2_Packet &$packet) {
 		//
 		// pack the precedence, gateway type and algorithm
 		//
@@ -297,38 +283,36 @@ class Net_DNS2_RR_IPSECKEY extends Net_DNS2_RR
 		// add the gateway based on the type
 		//
 		switch($this->gateway_type) {
-		case self::GATEWAY_TYPE_NONE:
-			; // add nothing
-			break;
+			case self::GATEWAY_TYPE_NONE:; // add nothing
 
-		case self::GATEWAY_TYPE_IPV4:
-		case self::GATEWAY_TYPE_IPV6:
-			$data .= inet_pton($this->gateway);
-			break;
+				break;
+			case self::GATEWAY_TYPE_IPV4:
+			case self::GATEWAY_TYPE_IPV6:
+				$data .= inet_pton($this->gateway);
 
-		case self::GATEWAY_TYPE_DOMAIN:
-			$data .= chr(strlen($this->gateway))  . $this->gateway;
-			break;
+				break;
+			case self::GATEWAY_TYPE_DOMAIN:
+				$data .= chr(strlen($this->gateway)) . $this->gateway;
 
-		default:
-			return null;
+				break;
+			default:
+				return null;
 		}
 
 		//
 		// add the key if there's one specified
 		//
 		switch($this->algorithm) {
-		case self::ALGORITHM_NONE:
-			; // add nothing
-			break;
+			case self::ALGORITHM_NONE:; // add nothing
 
-		case self::ALGORITHM_DSA:
-		case self::ALGORITHM_RSA:
-			$data .= base64_decode($this->key);
-			break;
+				break;
+			case self::ALGORITHM_DSA:
+			case self::ALGORITHM_RSA:
+				$data .= base64_decode($this->key, true);
 
-		default:
-			return null;
+				break;
+			default:
+				return null;
 		}
 
 		$packet->offset += strlen($data);

@@ -25,22 +25,18 @@
  *	  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  *
  */
-class Net_DNS2_RR_X25 extends Net_DNS2_RR
-{
-	/*
-	 * The PSDN address
-	  */
+class Net_DNS2_RR_X25 extends Net_DNS2_RR {
+	// The PSDN address
 	public $psdnaddress;
 
 	/**
 	 * method to return the rdata portion of the packet as a string
 	 *
-	 * @return	string
+	 * @return string
 	 * @access	protected
 	 *
 	 */
-	protected function rrToString()
-	{
+	protected function rrToString() {
 		return $this->formatString($this->psdnaddress);
 	}
 
@@ -53,12 +49,12 @@ class Net_DNS2_RR_X25 extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrFromString(array $rdata)
-	{
+	protected function rrFromString(array $rdata) {
 		$data = $this->buildString($rdata);
-		if (cacti_sizeof($data) == 1) {
 
+		if (cacti_sizeof($data) == 1) {
 			$this->psdnaddress = $data[0];
+
 			return true;
 		}
 
@@ -74,11 +70,10 @@ class Net_DNS2_RR_X25 extends Net_DNS2_RR
 	 * @access protected
 	 *
 	 */
-	protected function rrSet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrSet(Net_DNS2_Packet &$packet) {
 		if ($this->rdlength > 0) {
-
 			$this->psdnaddress = Net_DNS2_Packet::label($packet, $packet->offset);
+
 			return true;
 		}
 
@@ -89,17 +84,15 @@ class Net_DNS2_RR_X25 extends Net_DNS2_RR
 	 * returns the rdata portion of the DNS packet
 	 *
 	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-	 *								   compressed names
+	 *                                 compressed names
 	 *
-	 * @return mixed				   either returns a binary packed
-	 *								   string or null on failure
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
 	 * @access protected
 	 *
 	 */
-	protected function rrGet(Net_DNS2_Packet &$packet)
-	{
+	protected function rrGet(Net_DNS2_Packet &$packet) {
 		if (strlen($this->psdnaddress) > 0) {
-
 			$data = chr(strlen($this->psdnaddress)) . $this->psdnaddress;
 
 			$packet->offset += strlen($data);

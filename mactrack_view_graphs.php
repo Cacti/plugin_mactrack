@@ -66,8 +66,8 @@ function mactrack_view_graphs() {
 	}
 	$hosts = $_SESSION['sess_mt_hosts'];
 
-	/* include graph view filter selector */
-	html_start_box($title . (isset_request_var('style') && get_request_var('style') != '' ? ' [ ' . __('Custom Graph List Applied - Filtering from List', 'mactrack') . ' ]':''), '100%', '', '3', 'center', '');
+	// include graph view filter selector
+	html_start_box($title . (isset_request_var('style') && get_request_var('style') != '' ? ' [ ' . __('Custom Graph List Applied - Filtering from List', 'mactrack') . ' ]' : ''), '100%', '', '3', 'center', '');
 
 	if ($hosts != '') {
 		$hq = 'h.id IN (' . $hosts . ')';
@@ -85,17 +85,18 @@ function mactrack_view_graphs() {
 
 	html_end_box();
 
-	/* the user select a bunch of graphs of the 'list' view and wants them displayed here */
+	// the user select a bunch of graphs of the 'list' view and wants them displayed here
 	$sql_or = '';
+
 	if (isset_request_var('style')) {
 		if (get_request_var('style') == 'selective') {
-			/* process selected graphs */
+			// process selected graphs
 			if (!isempty_request_var('graph_list')) {
 				foreach (explode(',',get_request_var('graph_list')) as $item) {
 					$graph_list[$item] = 1;
 				}
 			} else {
-				$graph_list = array();
+				$graph_list = [];
 			}
 
 			if (!isempty_request_var('graph_add')) {
@@ -104,7 +105,7 @@ function mactrack_view_graphs() {
 				}
 			}
 
-			/* remove items */
+			// remove items
 			if (!isempty_request_var('graph_remove')) {
 				foreach (explode(',',get_request_var('graph_remove')) as $item) {
 					unset($graph_list[$item]);
@@ -122,18 +123,18 @@ function mactrack_view_graphs() {
 	$total_graphs = 0;
 
 	// Filter sql_where
-	$sql_where  = (get_request_var('filter') != '' ? "gtg.title_cache LIKE " . db_qstr('%' . get_request_var('filter') . '%'):'');
-	$sql_where .= ($sql_or != '' && $sql_where != '' ? ' AND ':'') . $sql_or;
-	$sql_where .= ($sql_or != '' && $sql_where != '' ? ' AND ':'') . $hq . ' AND ' . $gq;
+	$sql_where  = (get_request_var('filter') != '' ? 'gtg.title_cache LIKE ' . db_qstr('%' . get_request_var('filter') . '%') : '');
+	$sql_where .= ($sql_or != '' && $sql_where != '' ? ' AND ' : '') . $sql_or;
+	$sql_where .= ($sql_or != '' && $sql_where != '' ? ' AND ' : '') . $hq . ' AND ' . $gq;
 
 	// Host Id sql_where
 	if (get_filter_request_var('host_id') > 0) {
-		$sql_where .= ($sql_where != '' ? ' AND':'') . ' gl.host_id=' . get_request_var('host_id');
+		$sql_where .= ($sql_where != '' ? ' AND' : '') . ' gl.host_id=' . get_request_var('host_id');
 	}
 
 	// Graph Template Id sql_where
 	if (get_filter_request_var('graph_template_id') > 0) {
-		$sql_where .= ($sql_where != '' ? ' AND':'') . ' gl.graph_template_id=' . get_request_var('graph_template_id');
+		$sql_where .= ($sql_where != '' ? ' AND' : '') . ' gl.graph_template_id=' . get_request_var('graph_template_id');
 	}
 
 	if (get_request_var('graphs') == '-1') {
@@ -142,14 +143,14 @@ function mactrack_view_graphs() {
 		$rows = get_request_var('graphs');
 	}
 
-	$limit  = (get_request_var('graphs')*(get_request_var('page')-1)) . ',' . $rows;
+	$limit  = (get_request_var('graphs') * (get_request_var('page') - 1)) . ',' . $rows;
 	$order  = 'gtg.title_cache';
 
-	//cacti_log("SQL Where: $sql_where, Order: $order, Limit: $limit");
+	// cacti_log("SQL Where: $sql_where, Order: $order, Limit: $limit");
 
 	$graphs = get_allowed_graphs($sql_where, $order, $limit, $total_graphs);
 
-	/* do some fancy navigation url construction so we don't have to try and rebuild the url string */
+	// do some fancy navigation url construction so we don't have to try and rebuild the url string
 	if (preg_match('/page=[0-9]+/',basename($_SERVER['QUERY_STRING']))) {
 		$nav_url = str_replace('&page=' . get_request_var('page'), '', get_browser_query_string());
 	} else {
@@ -176,4 +177,3 @@ function mactrack_view_graphs() {
 		print $nav;
 	}
 }
-
