@@ -106,14 +106,16 @@ jobs:
         cat ~/.my.cnf
     
     - name: Initialize Cacti Database
+      env:
+        MYSQL_AUTH_USR: '--defaults-file=~/.my.cnf'
       run: |
-        mysql --defaults-file="$HOME/.my.cnf" -e 'CREATE DATABASE IF NOT EXISTS cacti;'
-        mysql --defaults-file="$HOME/.my.cnf" -e "CREATE USER IF NOT EXISTS 'cactiuser'@'localhost' IDENTIFIED BY 'cactiuser';"
-        mysql --defaults-file="$HOME/.my.cnf" -e "GRANT ALL PRIVILEGES ON cacti.* TO 'cactiuser'@'localhost';"
-        mysql --defaults-file="$HOME/.my.cnf" -e "GRANT SELECT ON mysql.time_zone_name TO 'cactiuser'@'localhost';"
-        mysql --defaults-file="$HOME/.my.cnf" -e "FLUSH PRIVILEGES;"
-        mysql --defaults-file="$HOME/.my.cnf" cacti < ${{ github.workspace }}/cacti/cacti.sql
-        mysql --defaults-file="$HOME/.my.cnf" -e "INSERT INTO settings (name, value) VALUES ('path_php_binary', '/usr/bin/php')" cacti
+        mysql $MYSQL_AUTH_USR -e 'CREATE DATABASE IF NOT EXISTS cacti;'
+        mysql $MYSQL_AUTH_USR -e "CREATE USER IF NOT EXISTS 'cactiuser'@'localhost' IDENTIFIED BY 'cactiuser';"
+        mysql $MYSQL_AUTH_USR -e "GRANT ALL PRIVILEGES ON cacti.* TO 'cactiuser'@'localhost';"
+        mysql $MYSQL_AUTH_USR -e "GRANT SELECT ON mysql.time_zone_name TO 'cactiuser'@'localhost';"
+        mysql $MYSQL_AUTH_USR -e "FLUSH PRIVILEGES;"
+        mysql $MYSQL_AUTH_USR cacti < ${{ github.workspace }}/cacti/cacti.sql
+        mysql $MYSQL_AUTH_USR -e "INSERT INTO settings (name, value) VALUES ('path_php_binary', '/usr/bin/php')" cacti
     
     - name: Validate composer files
       run: |
@@ -179,6 +181,9 @@ jobs:
     - name: Remove the plugins directory exclusion from the .phpstan.neon
       run: sed '/plugins/d' -i .phpstan.neon
       working-directory: ${{ github.workspace }}/cacti
+
+    - name: Mark composer scripts executable
+      run: sudo chmod +x ${{ github.workspace }}/cacti/include/vendor/bin/*
 
     - name: Run Linter on base code
       run: composer run-script lint ${{ github.workspace }}/cacti/plugins/mactrack
