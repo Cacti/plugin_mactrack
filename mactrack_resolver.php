@@ -1,4 +1,5 @@
 <?php
+
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2025 The Cacti Group                                 |
@@ -23,9 +24,9 @@
 */
 
 if (function_exists('pcntl_async_signals')) {
-	pcntl_async_signals(true);
+    pcntl_async_signals(true);
 } else {
-	declare(ticks = 100);
+    declare(ticks=100);
 }
 
 ini_set('output_buffering', 'Off');
@@ -40,214 +41,227 @@ ob_implicit_flush();
 $dir = dirname(__FILE__);
 chdir($dir);
 
-include('../../include/cli_check.php');
-include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
-include_once($config['base_path'] . '/plugins/mactrack/Net/DNS2.php');
+include '../../include/cli_check.php';
 
-/* install signal handlers for UNIX only */
+include_once $config['base_path'].'/plugins/mactrack/lib/mactrack_functions.php';
+
+include_once $config['base_path'].'/plugins/mactrack/Net/DNS2.php';
+
+// install signal handlers for UNIX only
 if (function_exists('pcntl_signal')) {
-	pcntl_signal(SIGTERM, 'sig_handler');
-	pcntl_signal(SIGINT, 'sig_handler');
+    pcntl_signal(SIGTERM, 'sig_handler');
+    pcntl_signal(SIGINT, 'sig_handler');
 }
 
-/* get the mactrack polling cycle */
+// get the mactrack polling cycle
 $max_run_duration = read_config_option('mt_collection_timing');
 
-/* get the mactrack max script runtime - in minutes */
+// get the mactrack max script runtime - in minutes
 $max_script_runtime = read_config_option('mt_script_runtime') * 60;
 
 if (is_numeric($max_run_duration)) {
-	/* let PHP a 5 minutes less than the rerun frequency */
-	$max_run_duration = ($max_run_duration * 60) - 270;
-	ini_set('max_execution_time', $max_run_duration);
+    // let PHP a 5 minutes less than the rerun frequency
+    $max_run_duration = ($max_run_duration * 60) - 270;
+    ini_set('max_execution_time', $max_run_duration);
 } else {
-	$max_run_duration = 3270;
-	ini_set('max_execution_time', $max_run_duration);
+    $max_run_duration = 3270;
+    ini_set('max_execution_time', $max_run_duration);
 }
 
-/* establish constants */
+// establish constants
 define('DEVICE_HUB_SWITCH', 1);
 define('DEVICE_SWITCH_ROUTER', 2);
 define('DEVICE_ROUTER', 3);
 
-/* process calling arguments */
+// process calling arguments
 $parms = $_SERVER['argv'];
 array_shift($parms);
 
-$debug   = false;
+$debug = false;
 $site_id = '';
 $start = time();
 
 if (cacti_sizeof($parms)) {
-	foreach($parms as $parameter) {
-		if (strpos($parameter, '=')) {
-			list($arg, $value) = explode('=', $parameter);
-		} else {
-			$arg = $parameter;
-			$value = '';
-		}
+    foreach ($parms as $parameter) {
+        if (strpos($parameter, '=')) {
+            list($arg, $value) = explode('=', $parameter);
+        } else {
+            $arg = $parameter;
+            $value = '';
+        }
 
-		switch ($arg) {
-			case '-sid':
-				$site_id = $value;
-				break;
-			case '-d':
-			case '--debug':
-				$debug = true;
-				break;
-			case '--version':
-			case '-V':
-			case '-v':
-				display_version();
-				exit;
-			case '--help':
-			case '-H':
-			case '-h':
-				display_help();
-				exit;
-			default:
-				print 'ERROR: Invalid Parameter ' . $parameter . PHP_EOL . PHP_EOL;
-				display_help();
-				exit;
-		}
-	}
+        switch ($arg) {
+            case '-sid':
+                $site_id = $value;
+
+                break;
+
+            case '-d':
+            case '--debug':
+                $debug = true;
+
+                break;
+
+            case '--version':
+            case '-V':
+            case '-v':
+                display_version();
+
+                exit;
+
+            case '--help':
+            case '-H':
+            case '-h':
+                display_help();
+
+                exit;
+
+            default:
+                print 'ERROR: Invalid Parameter '.$parameter.PHP_EOL.PHP_EOL;
+                display_help();
+
+                exit;
+        }
+    }
 }
 
-/* check if you need to run or not */
-if (read_config_option('mt_reverse_dns') == 'on') {
-	$timeout        = read_config_option('mt_dns_timeout');
-	$dns_primary    = read_config_option('mt_dns_primary');
-	$dns_secondary  = read_config_option('mt_dns_secondary');
-	$primary_down   = false;
-	$secondary_down = false;
+// check if you need to run or not
+if ('on' == read_config_option('mt_reverse_dns')) {
+    $timeout = read_config_option('mt_dns_timeout');
+    $dns_primary = read_config_option('mt_dns_primary');
+    $dns_secondary = read_config_option('mt_dns_secondary');
+    $primary_down = false;
+    $secondary_down = false;
 } else {
-	mactrack_debug('Exiting due to Reverse DNS being disabled');
-	exit;
+    mactrack_debug('Exiting due to Reverse DNS being disabled');
+
+    exit;
 }
 
-/* silently end if the registered process is still running  */
-if (!register_process_start('mactrack_resolver', 'master', 0, $max_run_duration-300)) {
-	print 'FATAL: Detected an already running process.' . PHP_EOL;
-	exit(0);
+// silently end if the registered process is still running
+if (!register_process_start('mactrack_resolver', 'master', 0, $max_run_duration - 300)) {
+    echo 'FATAL: Detected an already running process.'.PHP_EOL;
+
+    exit(0);
 }
 
-/* place a process marker in the database for the ip resolver */
+// place a process marker in the database for the ip resolver
 db_process_add(0, true);
 
-if ($site_id != '') {
-	$sql_where = 'AND site_id=' . $site_id;
+if ('' != $site_id) {
+    $sql_where = 'AND site_id='.$site_id;
 } else {
-	$sql_where = '';
+    $sql_where = '';
 }
 
-$nameservers = array();
+$nameservers = [];
 
-if ($dns_primary != '') {
-	$nameservers[] = $dns_primary;
+if ('' != $dns_primary) {
+    $nameservers[] = $dns_primary;
 }
 
-if ($dns_secondary != '') {
-	$nameservers[] = $dns_secondary;
+if ('' != $dns_secondary) {
+    $nameservers[] = $dns_secondary;
 }
 
 if (cacti_sizeof($nameservers)) {
-	$use_resolver = false;
-	$resolver = false;
+    $use_resolver = false;
+    $resolver = false;
 } else {
-	$use_resolver = true;
-	$resolver = new Net_DNS2_Resolver(array('nameservers' => $nameservers));
+    $use_resolver = true;
+    $resolver = new Net_DNS2_Resolver(['nameservers' => $nameservers]);
 }
 
 // if more than 15 second is nothing to do, ending
 $nothing = 0;
 
-/* loop until you are it */
+// loop until you are it
 while (1) {
-	/* check for pending signals */
-	pcntl_signal_dispatch();
+    // check for pending signals
+    pcntl_signal_dispatch();
 
-	$now = time();
+    $now = time();
 
-	$processes_running = db_fetch_cell('SELECT COUNT(*)
+    $processes_running = db_fetch_cell('SELECT COUNT(*)
 		FROM mac_track_processes
 		WHERE device_id != 0');
 
-	if ((($now - $start) > ($max_script_runtime)) && ($processes_running == 0) || $nothing > 5) {
-		if ($nothing > 5) {
-			mactrack_debug('Terminating DNS resolving, nothing to do');
-		}
+    if ((($now - $start) > $max_script_runtime) && (0 == $processes_running) || $nothing > 5) {
+        if ($nothing > 5) {
+            mactrack_debug('Terminating DNS resolving, nothing to do');
+        }
 
-		$break = true;
-	} else {
-		$break = false;
-	}
+        $break = true;
+    } else {
+        $break = false;
+    }
 
-	$unresolved_ips = db_fetch_assoc("SELECT *
+    $unresolved_ips = db_fetch_assoc("SELECT *
 		FROM mac_track_temp_ports
 		WHERE ip_address != ''
 		AND (dns_hostname = '' OR dns_hostname IS NULL)");
 
-	if (cacti_sizeof($unresolved_ips) == 0) {
-		mactrack_debug('No IP\'s require resolving this pass');
-		$nothing++;
-		sleep(3);
-	} else {
-		$nothing = 0;
-		mactrack_debug(cacti_sizeof($unresolved_ips) . ' IP\'s require resolving this pass');
+    if (0 == cacti_sizeof($unresolved_ips)) {
+        mactrack_debug('No IP\'s require resolving this pass');
+        ++$nothing;
+        sleep(3);
+    } else {
+        $nothing = 0;
+        mactrack_debug(cacti_sizeof($unresolved_ips).' IP\'s require resolving this pass');
 
-		foreach($unresolved_ips as $key => $unresolved_ip) {
-			$dns_hostname = $unresolved_ip['ip_address'];
+        foreach ($unresolved_ips as $key => $unresolved_ip) {
+            $dns_hostname = $unresolved_ip['ip_address'];
 
-			if ($use_resolver) {
-				try {
-					$resp = $resolver->query($dns_hostname, 'PTR');
-					$dns_hostname = $resp->answer[0]->ptrdname;
-				} catch(Net_DNS2_Exception $e) {
-					$dns_hostname = gethostbyaddr($unresolved_ip['ip_address']);
+            if ($use_resolver) {
+                try {
+                    $resp = $resolver->query($dns_hostname, 'PTR');
+                    $dns_hostname = $resp->answer[0]->ptrdname;
+                } catch (Net_DNS2_Exception $e) {
+                    $dns_hostname = gethostbyaddr($unresolved_ip['ip_address']);
 
-					if ($dns_hostname === false) {
-						mactrack_debug('Unable to resolve IP Address: ' . $unresolved_ip['ip_address']);
-					}
-				}
-			} else {
-				$dns_hostname = gethostbyaddr($unresolved_ip['ip_address']);
+                    if (false === $dns_hostname) {
+                        mactrack_debug('Unable to resolve IP Address: '.$unresolved_ip['ip_address']);
+                    }
+                }
+            } else {
+                $dns_hostname = gethostbyaddr($unresolved_ip['ip_address']);
 
-				if ($dns_hostname === false) {
-					$dns_hostname = $unresolved_ip['ip_address'];
-					mactrack_debug('Unable to resolve IP Address: ' . $unresolved_ip['ip_address']);
-				}
-			}
+                if (false === $dns_hostname) {
+                    $dns_hostname = $unresolved_ip['ip_address'];
+                    mactrack_debug('Unable to resolve IP Address: '.$unresolved_ip['ip_address']);
+                }
+            }
 
-			$unresolved_ips[$key]['dns_hostname'] = $dns_hostname;
-		}
+            $unresolved_ips[$key]['dns_hostname'] = $dns_hostname;
+        }
 
-		mactrack_debug('DNS host association complete.');
+        mactrack_debug('DNS host association complete.');
 
-		$sql = array();
+        $sql = [];
 
-		/* output updated details to database */
-		foreach($unresolved_ips as $unresolved_ip) {
-			$sql[] = '(' .
-				$unresolved_ip['site_id']               . ',' .
-				$unresolved_ip['device_id']             . ',' .
-				db_qstr($unresolved_ip['hostname'])     . ',' .
-				db_qstr($unresolved_ip['dns_hostname']) . ',' .
-				db_qstr($unresolved_ip['device_name'])  . ',' .
-				db_qstr($unresolved_ip['vlan_id'])      . ',' .
-				db_qstr($unresolved_ip['vlan_name'])    . ',' .
-				db_qstr($unresolved_ip['mac_address'])  . ',' .
-				db_qstr($unresolved_ip['vendor_mac'])   . ',' .
-				db_qstr($unresolved_ip['ip_address'])   . ',' .
-				db_qstr($unresolved_ip['port_number'])  . ',' .
-				db_qstr($unresolved_ip['port_name'])    . ',' .
-				db_qstr($unresolved_ip['scan_date'])    . ')';
-		}
+        // output updated details to database
+        foreach ($unresolved_ips as $unresolved_ip) {
+            $sql[] = '('
+                .$unresolved_ip['site_id'].','
+                .$unresolved_ip['device_id'].','
+                .db_qstr($unresolved_ip['hostname']).','
+                .db_qstr($unresolved_ip['dns_hostname']).','
+                .db_qstr($unresolved_ip['device_name']).','
+                .db_qstr($unresolved_ip['vlan_id']).','
+                .db_qstr($unresolved_ip['vlan_name']).','
+                .db_qstr($unresolved_ip['mac_address']).','
+                .db_qstr($unresolved_ip['vendor_mac']).','
+                .db_qstr($unresolved_ip['ip_address']).','
+                .db_qstr($unresolved_ip['port_number']).','
+                .db_qstr($unresolved_ip['port_name']).','
+                .db_qstr($unresolved_ip['scan_date']).')';
+        }
 
-		$sql_prefix = 'INSERT INTO mac_track_temp_ports
+        $sql_prefix = 'INSERT INTO mac_track_temp_ports
 			(site_id, device_id, hostname, dns_hostname, device_name, vlan_id, vlan_name,
 			mac_address, vendor_mac, ip_address, port_number, port_name, scan_date) VALUES ';
 
-		$sql_suffix = ' ON DUPLICATE KEY UPDATE
+        $sql_suffix = ' ON DUPLICATE KEY UPDATE
 			site_id = VALUES(site_id),
 			hostname = VALUES(hostname),
 			dns_hostname = VALUES(dns_hostname),
@@ -257,19 +271,19 @@ while (1) {
 			vendor_mac = VALUES(vendor_mac),
 			port_name = VALUES(port_name)';
 
-		db_execute($sql_prefix . implode(', ', $sql) . $sql_suffix);
+        db_execute($sql_prefix.implode(', ', $sql).$sql_suffix);
 
-		mactrack_debug('Records updated with DNS information included.');
-	}
+        mactrack_debug('Records updated with DNS information included.');
+    }
 
-	if ($break) {
-		break;
-	}
+    if ($break) {
+        break;
+    }
 }
 
 unregister_process('mactrack_resolver', 'master');
 
-/* allow parent to close by removing process and then exit */
+// allow parent to close by removing process and then exit
 db_process_remove(0);
 
 exit;
@@ -277,44 +291,48 @@ exit;
 /**
  * sig_handler - provides a generic means to catch exceptions to the Cacti log.
  *
- * @param  (int) $signo - the signal that was thrown by the interface.
+ * @param (int) $signo - the signal that was thrown by the interface
  *
  * @return (void)
  */
-function sig_handler($signo) {
-	global $config;
+function sig_handler($signo)
+{
+    global $config;
 
-	switch ($signo) {
-		case SIGTERM:
-		case SIGINT:
-			cacti_log("WARNING: MacTrack Resolver 'master' is shutting down by signal!", false, 'MACTRACK');
+    switch ($signo) {
+        case SIGTERM:
+        case SIGINT:
+            cacti_log("WARNING: MacTrack Resolver 'master' is shutting down by signal!", false, 'MACTRACK');
 
-			unregister_process('mactrack_resolver', 'master');
+            unregister_process('mactrack_resolver', 'master');
 
-			exit(1);
-			break;
-		default:
-            /* ignore all other signals */
-	}
+            exit(1);
+
+            break;
+
+        default:
+            // ignore all other signals
+    }
 }
 
-function display_version() {
-	global $config;
+function display_version()
+{
+    global $config;
 
-	$info = plugin_mactrack_version();
-	print 'Network Mactrack IP Resolver, Version ' . $info['version'] . ', ' . COPYRIGHT_YEARS . PHP_EOL;
+    $info = plugin_mactrack_version();
+    echo 'Network Mactrack IP Resolver, Version '.$info['version'].', '.COPYRIGHT_YEARS.PHP_EOL;
 }
 
-/*	display_help - displays the usage of the function */
-function display_help () {
-	display_version();
+// display_help - displays the usage of the function
+function display_help()
+{
+    display_version();
 
-	print PHP_EOL;
-	print 'usage: mactrack_resolver.php [-sid=ID] [-d] [-h] [--help] [-v] [--version]' . PHP_EOL . PHP_EOL;
+    echo PHP_EOL;
+    echo 'usage: mactrack_resolver.php [-sid=ID] [-d] [-h] [--help] [-v] [--version]'.PHP_EOL.PHP_EOL;
 
-	print '-sid=ID       - The site id to resolve for' . PHP_EOL;
-	print '-d | --debug  - Display verbose output during execution' . PHP_EOL;
-	print '-v --version  - Display this help message' . PHP_EOL;
-	print '-h --help     - display this help message' . PHP_EOL;
+    echo '-sid=ID       - The site id to resolve for'.PHP_EOL;
+    echo '-d | --debug  - Display verbose output during execution'.PHP_EOL;
+    echo '-v --version  - Display this help message'.PHP_EOL;
+    echo '-h --help     - display this help message'.PHP_EOL;
 }
-

@@ -1,4 +1,5 @@
 <?php
+
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2025 The Cacti Group                                 |
@@ -27,79 +28,88 @@ $dir = dirname(__FILE__);
 chdir($dir);
 
 if (substr_count(strtolower($dir), 'mactrack')) {
-	chdir('../../');
+    chdir('../../');
 }
 
-include('./include/cli_check.php');
-include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+include './include/cli_check.php';
 
-/* process calling arguments */
+include_once $config['base_path'].'/plugins/mactrack/lib/mactrack_functions.php';
+
+// process calling arguments
 $parms = $_SERVER['argv'];
 array_shift($parms);
 
-$debug    = false;
+$debug = false;
 $oui_file = '';
 
-/* add more memory for import */
+// add more memory for import
 ini_set('memory_limit', '-1');
 
 if (cacti_sizeof($parms)) {
-	foreach($parms as $parameter) {
-		if (strpos($parameter, '=')) {
-			list($arg, $value) = explode('=', $parameter);
-		} else {
-			$arg = $parameter;
-			$value = '';
-		}
+    foreach ($parms as $parameter) {
+        if (strpos($parameter, '=')) {
+            list($arg, $value) = explode('=', $parameter);
+        } else {
+            $arg = $parameter;
+            $value = '';
+        }
 
-		switch ($arg) {
-			case '-f':
-				$oui_file = trim($value);
-				break;
-			case '--version':
-			case '-V':
-			case '-v':
-				display_version();
-				exit;
-			case '--help':
-			case '-H':
-			case '-h':
-				display_help();
-				exit;
-			default:
-				print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
-				display_help();
-				exit;
-		}
-	}
+        switch ($arg) {
+            case '-f':
+                $oui_file = trim($value);
+
+                break;
+
+            case '--version':
+            case '-V':
+            case '-v':
+                display_version();
+
+                exit;
+
+            case '--help':
+            case '-H':
+            case '-h':
+                display_help();
+
+                exit;
+
+            default:
+                print 'ERROR: Invalid Parameter '.$parameter."\n\n";
+                display_help();
+
+                exit;
+        }
+    }
 }
 
-if ($oui_file != '') {
-	if (!file_exists($oui_file)) {
-		print "ERROR: OUI Database file does not exist\n";
-	} else {
-		import_oui_database('ui', $oui_file);
-	}
+if ('' != $oui_file) {
+    if (!file_exists($oui_file)) {
+        echo "ERROR: OUI Database file does not exist\n";
+    } else {
+        import_oui_database('ui', $oui_file);
+    }
 } else {
-	import_oui_database();
+    import_oui_database();
 }
 
-function display_version() {
-	global $config;
+function display_version()
+{
+    global $config;
 
-	$info = plugin_mactrack_version();
-	print "Mactrack import OUI Database, Version " . $info["version"] . ", " . COPYRIGHT_YEARS . "\n";
+    $info = plugin_mactrack_version();
+    echo 'Mactrack import OUI Database, Version '.$info['version'].', '.COPYRIGHT_YEARS."\n";
 }
 
-/*	display_help - displays the usage of the function */
-function display_help () {
-	display_version();
+// display_help - displays the usage of the function
+function display_help()
+{
+    display_version();
 
-	print "\nusage: mactrack_import_ouidb.php [-f=ouifile] [-h] [--help] [-v] [-V] [--version]\n\n";
-	print "-f='outdbfile'   - Specify the location of the OUI dataabase file.  If your system\n";
-	print "                   does not allow native access to the IEEE via http, you can manually\n";
-	print "                   download the file, and then import it using this option.\n";
-	print "-v -V --version  - Display this help message\n";
-	print "-h --help        - Display this help message\n";
+    echo "\nusage: mactrack_import_ouidb.php [-f=ouifile] [-h] [--help] [-v] [-V] [--version]\n\n";
+    echo "-f='outdbfile'   - Specify the location of the OUI dataabase file.  If your system\n";
+    echo "                   does not allow native access to the IEEE via http, you can manually\n";
+    echo "                   download the file, and then import it using this option.\n";
+    echo "-v -V --version  - Display this help message\n";
+    echo "-h --help        - Display this help message\n";
 }
-

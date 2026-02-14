@@ -1,4 +1,5 @@
 <?php
+
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2025 The Cacti Group                                 |
@@ -22,1363 +23,1508 @@
  +-------------------------------------------------------------------------+
 */
 
-function mactrack_database_upgrade() {
-	global $database_default;
+function mactrack_database_upgrade()
+{
+    global $database_default;
 
-	if (mactrack_db_key_exists('mac_track_devices', 'device_id_UNIQUE')) {
-		db_execute('ALTER TABLE `mac_track_devices` DROP KEY device_id_UNIQUE');
-	}
+    if (mactrack_db_key_exists('mac_track_devices', 'device_id_UNIQUE')) {
+        db_execute('ALTER TABLE `mac_track_devices` DROP KEY device_id_UNIQUE');
+    }
 
-	if (mactrack_db_key_exists('mac_track_device_types', 'device_type_id_UNIQUE')) {
-		db_execute('ALTER TABLE `mac_track_device_types` DROP KEY `device_type_id_UNIQUE`');
-	}
+    if (mactrack_db_key_exists('mac_track_device_types', 'device_type_id_UNIQUE')) {
+        db_execute('ALTER TABLE `mac_track_device_types` DROP KEY `device_type_id_UNIQUE`');
+    }
 
-	if (mactrack_db_key_exists('mac_track_devices', 'device_id')) {
-		db_execute('ALTER TABLE `mac_track_devices`
+    if (mactrack_db_key_exists('mac_track_devices', 'device_id')) {
+        db_execute('ALTER TABLE `mac_track_devices`
 			DROP PRIMARY KEY,
 			ADD PRIMARY KEY (device_id),
 			DROP INDEX device_id,
 			ADD UNIQUE INDEX hostname_snmp_port (hostname, snmp_port)');
-	}
+    }
 
-	if (mactrack_db_key_exists('mac_track_device_types', 'device_type_id')) {
-		db_execute('ALTER TABLE `mac_track_device_types`
+    if (mactrack_db_key_exists('mac_track_device_types', 'device_type_id')) {
+        db_execute('ALTER TABLE `mac_track_device_types`
 			DROP PRIMARY KEY,
 			ADD PRIMARY KEY (device_type_id),
 			DROP INDEX device_type_id,
 			ADD UNIQUE INDEX snmp_info (`sysDescr_match`,`sysObjectID_match`,`device_type`)');
-	}
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifHighSpeed',
-		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifHighSpeed` int(10) unsigned NOT NULL default '0' AFTER `ifSpeed`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifDuplex',
-		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifDuplex` int(10) unsigned NOT NULL default '0' AFTER `ifHighSpeed`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifInDiscards',
-		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInDiscards` int(10) unsigned NOT NULL default '0' AFTER `ifOutErrors`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifInErrors',
-		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInErrors` int(10) unsigned NOT NULL default '0' AFTER `int_ifInDiscards`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifInUnknownProtos',
-		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInUnknownProtos` int(10) unsigned NOT NULL default '0' AFTER `int_ifInErrors`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifOutDiscards',
-		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutDiscards` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUnknownProtos`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifOutErrors',
-		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutErrors` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutDiscards`");
-
-	mactrack_add_column('mac_track_devices',
-		'host_id',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `host_id` int(10) unsigned NOT NULL default '0' AFTER `device_id`");
-
-	mactrack_add_column('mac_track_macwatch',
-		'date_last_notif',
-		"ALTER TABLE `mac_track_macwatch` ADD COLUMN `date_last_notif` TIMESTAMP DEFAULT '0000-00-00 00:00:00' AFTER `date_last_seen`");
-
-	mactrack_execute_sql('Add length to Device Types Match Fields', "ALTER TABLE `mac_track_device_types` MODIFY COLUMN `sysDescr_match` VARCHAR(100) NOT NULL default '', MODIFY COLUMN `sysObjectID_match` VARCHAR(100) NOT NULL default ''");
-
-	mactrack_execute_sql('Correct a Scanning Function Bug', "DELETE FROM mac_track_scanning_functions WHERE scanning_function='Not Applicable - Hub/Switch'");
-
-	mactrack_add_column('mac_track_devices',
-		'host_id',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `host_id` INTEGER UNSIGNED NOT NULL default '0' AFTER `device_id`");
-
-	mactrack_add_index('mac_track_devices',
-		'host_id',
-		'ALTER TABLE `mac_track_devices` ADD INDEX `host_id`(`host_id`)');
-
-	mactrack_add_index('mac_track_ports',
-		'scan_date',
-		'ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)');
-
-	mactrack_add_column('mac_track_interfaces',
-		'sysUptime',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `sysUptime` int(10) unsigned NOT NULL default '0' AFTER `device_id`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifInOctets',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifInOctets` int(10) unsigned NOT NULL default '0' AFTER `vlan_trunk_status`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifOutOctets',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutOctets` int(10) unsigned NOT NULL default '0' AFTER `ifInOctets`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifHCInOctets',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifHCInOctets` bigint(20) unsigned NOT NULL default '0' AFTER `ifOutOctets`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifHCOutOctets',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifHCOutOctets` bigint(20) unsigned NOT NULL default '0' AFTER `ifHCInOctets`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifInUcastPkts',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifInUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifHCOutOctets`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifOutUcastPkts',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInUcastPkts`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifInMulticastPkts',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifInMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifOutUcastPkts`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifOutMulticastPkts',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInMulticastPkts`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifInBroadcastPkts',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifInBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifOutMulticastPkts`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifOutBroadcastPkts',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInBroadcastPkts`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'inBound',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `inBound` double NOT NULL default '0' AFTER `ifOutErrors`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'outBound',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `outBound` double NOT NULL default '0' AFTER `inBound`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifInOctets',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInOctets` int(10) unsigned NOT NULL default '0' AFTER `outBound`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifOutOctets',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutOctets` int(10) unsigned NOT NULL default '0' AFTER `int_ifInOctets`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifHCInOctets',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifHCInOctets` bigint(20) unsigned NOT NULL default '0' AFTER `int_ifOutOctets`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifHCOutOctets',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifHCOutOctets` bigint(20) unsigned NOT NULL default '0' AFTER `int_ifHCInOctets`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifInUcastPkts',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifHCOutOctets`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifOutUcastPkts',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUcastPkts`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifInMulticastPkts',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutUcastPkts`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifOutMulticastPkts',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInMulticastPkts`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifInBroadcastPkts',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutMulticastPkts`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'int_ifOutBroadcastPkts',
-		"ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInBroadcastPkts`");
-
-	if (!mactrack_db_key_exists('mac_track_ports', 'site_id_device_id')) {
-		db_execute('ALTER TABLE `mac_track_ports` ADD INDEX `site_id_device_id`(`site_id`, `device_id`);');
-	}
-
-	# new for 2.1.2
-	# SNMP V3
-	mactrack_add_column('mac_track_devices',
-		'term_type',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `term_type` tinyint(11) NOT NULL default '1' AFTER `scan_type`");
-
-	mactrack_add_column('mac_track_devices',
-		'user_name',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `user_name` varchar(40) default NULL AFTER `term_type`");
-
-	mactrack_add_column('mac_track_devices',
-		'user_password',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `user_password` varchar(40) default NULL AFTER `user_name`");
-
-	mactrack_add_column('mac_track_devices',
-		'private_key_path',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `private_key_path` varchar(128) default '' AFTER `user_password`");
-
-	mactrack_add_column('mac_track_devices',
-		'snmp_options',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_options` int(10) unsigned NOT NULL default '0' AFTER `private_key_path`");
-
-	mactrack_add_column('mac_track_devices',
-		'snmp_username',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_username` varchar(50) default NULL AFTER `snmp_status`");
-
-	mactrack_add_column('mac_track_devices',
-		'snmp_password',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_password` varchar(50) default NULL AFTER `snmp_username`");
-
-	mactrack_add_column('mac_track_devices',
-		'snmp_auth_protocol',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_auth_protocol` char(5) default '' AFTER `snmp_password`");
-
-	mactrack_add_column('mac_track_devices',
-		'snmp_priv_passphrase',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_priv_passphrase` varchar(200) default '' AFTER `snmp_auth_protocol`");
-
-	mactrack_add_column('mac_track_devices',
-		'snmp_priv_protocol',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_priv_protocol` char(6) default '' AFTER `snmp_priv_passphrase`");
-
-	mactrack_add_column('mac_track_devices',
-		'snmp_context',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_context` varchar(64) default '' AFTER `snmp_priv_protocol`");
-
-	mactrack_add_column('mac_track_devices',
-		'max_oids',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `max_oids` int(12) unsigned default '10' AFTER `snmp_context`");
-
-	mactrack_add_column('mac_track_devices',
-		'snmp_engine_id',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_engine_id` varchar(64) default '' AFTER `snmp_context`");
-
-	mactrack_add_column('mac_track_devices',
-		'term_type',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `term_type` tinyint(11) NOT NULL default '1' AFTER `scan_type`");
-
-	mactrack_add_column('mac_track_devices',
-		'private_key_path',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `private_key_path` varchar(128) default '' AFTER `user_password`");
-
-	if (!db_table_exists('mac_track_snmp')) {
-		$data = array();
-		$data['columns'][] = array('name' => 'id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
-		$data['columns'][] = array('name' => 'name', 'type' => 'varchar(100)', 'NULL' => false);
-		$data['primary'] = 'id';
-		$data['type'] = 'InnoDB';
-		$data['comment'] = 'Group of SNMP Option Sets';
-		api_plugin_db_table_create('mactrack', 'mac_track_snmp', $data);
-	}
-
-	if (!db_table_exists('mac_track_snmp_items')) {
-		$data = array();
-		$data['columns'][] = array('name' => 'id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
-		$data['columns'][] = array('name' => 'snmp_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-		$data['columns'][] = array('name' => 'sequence', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-		$data['columns'][] = array('name' => 'snmp_version', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-		$data['columns'][] = array('name' => 'snmp_readstring', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-		$data['columns'][] = array('name' => 'snmp_port', 'type' => 'int(10)', 'NULL' => false, 'default' => '161');
-		$data['columns'][] = array('name' => 'snmp_timeout', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '500');
-		$data['columns'][] = array('name' => 'snmp_retries', 'unsigned' => true, 'type' => 'tinyint(11)', 'NULL' => false, 'default' => '3');
-		$data['columns'][] = array('name' => 'max_oids', 'unsigned' => true, 'type' => 'int(12)', 'NULL' => true, 'default' => '10');
-		$data['columns'][] = array('name' => 'snmp_username', 'type' => 'varchar(50)', 'NULL' => true);
-		$data['columns'][] = array('name' => 'snmp_password', 'type' => 'varchar(50)', 'NULL' => true);
-		$data['columns'][] = array('name' => 'snmp_auth_protocol', 'type' => 'char(5)', 'NULL' => true);
-		$data['columns'][] = array('name' => 'snmp_priv_passphrase', 'type' => 'varchar(200)', 'NULL' => true);
-		$data['columns'][] = array('name' => 'snmp_priv_protocol', 'type' => 'char(6)', 'NULL' => true);
-		$data['columns'][] = array('name' => 'snmp_context', 'type' => 'varchar(64)', 'NULL' => true);
-		$data['columns'][] = array('name' => 'snmp_engine_id', 'type' => 'varchar(64)', 'NULL' => true);
-		$data['primary'] = 'id`,`snmp_id';
-		$data['type'] = 'InnoDB';
-		$data['comment'] = 'Set of SNMP Options';
-		api_plugin_db_table_create('mactrack', 'mac_track_snmp_items', $data);
-	}
-
-	mactrack_add_column('mac_track_snmp_items',
-		'snmp_engine_id',
-		"ALTER TABLE `mac_track_snmp_items` ADD COLUMN `snmp_engine_id` varchar(64) default '' AFTER `snmp_context`");
-
-	if (!db_table_exists('mac_track_interface_graphs')) {
-		$data = array();
-		$data['columns'][] = array('name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-		$data['columns'][] = array('name' => 'ifIndex', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
-		$data['columns'][] = array('name' => 'ifName', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-		$data['columns'][] = array('name' => 'host_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0');
-		$data['columns'][] = array('name' => 'local_graph_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
-		$data['columns'][] = array('name' => 'snmp_query_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0');
-		$data['columns'][] = array('name' => 'graph_template_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0');
-		$data['columns'][] = array('name' => 'field_name', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-		$data['columns'][] = array('name' => 'field_value', 'type' => 'varchar(25)', 'NULL' => false, 'default' => '');
-		$data['columns'][] = array('name' => 'present', 'type' => 'tinyint(4)', 'NULL' => true, 'default' => '1');
-		$data['primary'] = 'local_graph_id`,`device_id`,`ifIndex`,`host_id';
-		$data['keys'][] = array('name' => 'host_id', 'columns' => 'host_id');
-		$data['keys'][] = array('name' => 'device_id', 'columns' => 'device_id');
-		$data['type'] = 'InnoDB';
-		$data['comment'] = '';
-		api_plugin_db_table_create('mactrack', 'mac_track_interface_graphs', $data);
-	}
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifMauAutoNegAdminStatus',
-		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifMauAutoNegAdminStatus` integer UNSIGNED NOT NULL default '0' AFTER `ifDuplex`");
-
-	mactrack_add_column('mac_track_interfaces',
-		'ifMauAutoNegRemoteSignaling',
-		"ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifMauAutoNegRemoteSignaling` integer UNSIGNED NOT NULL default '0' AFTER `ifMauAutoNegAdminStatus`");
-
-	mactrack_add_column('mac_track_device_types',
-		'dot1x_scanning_function',
-		"ALTER TABLE `mac_track_device_types` ADD COLUMN `dot1x_scanning_function` varchar(100) default '' AFTER `ip_scanning_function`");
-
-	mactrack_add_column('mac_track_device_types',
-		'serial_number_oid',
-		"ALTER TABLE `mac_track_device_types` ADD COLUMN `serial_number_oid` varchar(100) default '' AFTER `dot1x_scanning_function`");
-
-	mactrack_add_column('mac_track_sites',
-		'customer_contact',
-		"ALTER TABLE `mac_track_sites` ADD COLUMN `customer_contact` varchar(150) default '' AFTER `site_name`");
-
-	mactrack_add_column('mac_track_sites',
-		'netops_contact',
-		"ALTER TABLE `mac_track_sites` ADD COLUMN `netops_contact` varchar(150) default '' AFTER `customer_contact`");
-
-	mactrack_add_column('mac_track_sites',
-		'facilities_contact',
-		"ALTER TABLE `mac_track_sites` ADD COLUMN `facilities_contact` varchar(150) default '' AFTER `netops_contact`");
-
-	mactrack_add_column('mac_track_sites',
-		'site_info',
-		"ALTER TABLE `mac_track_sites` ADD COLUMN `site_info` text AFTER `facilities_contact`");
-
-	mactrack_add_column('mac_track_sites',
-		'skip_vlans',
-		"ALTER TABLE `mac_track_sites` ADD COLUMN `skip_vlans` text DEFAULT ''");
-
-	mactrack_add_column('mac_track_sites',
-		'scan_vlans',
-		"ALTER TABLE `mac_track_sites` ADD COLUMN `scan_vlans` text DEFAULT ''");
-
-	mactrack_add_column('mac_track_devices',
-		'device_name',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `device_name` varchar(100) default '' AFTER `host_id`");
-
-	mactrack_add_column('mac_track_devices',
-		'notes',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `notes` text AFTER `hostname`");
-
-	mactrack_add_column('mac_track_devices',
-		'scan_trunk_port',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `scan_trunk_port` text DEFAULT ''");
-
-	mactrack_add_column('mac_track_scanning_functions',
-		'type',
-		"ALTER TABLE `mac_track_scanning_functions` ADD COLUMN `type` int(10) unsigned NOT NULL default '0' AFTER `scanning_function`");
-
-	mactrack_add_column('mac_track_temp_ports',
-		'device_name',
-		"ALTER TABLE `mac_track_temp_ports` ADD COLUMN `device_name` varchar(100) NOT NULL default '' AFTER `hostname`");
-
-	mactrack_add_column('mac_track_temp_ports',
-		'vendor_mac',
-		"ALTER TABLE `mac_track_temp_ports` ADD COLUMN `vendor_mac` varchar(8) default NULL AFTER `mac_address`");
-
-	mactrack_add_column('mac_track_temp_ports',
-		'authorized',
-		"ALTER TABLE `mac_track_temp_ports` ADD COLUMN `authorized` tinyint(3) unsigned NOT NULL default '0' AFTER `updated`");
-
-	mactrack_add_column('mac_track_ports',
-		'device_name',
-		"ALTER TABLE `mac_track_ports` ADD COLUMN `device_name` varchar(100) NOT NULL default '' AFTER `hostname`");
-
-	mactrack_add_column('mac_track_ports',
-		'vendor_mac',
-		"ALTER TABLE `mac_track_ports` ADD COLUMN `vendor_mac` varchar(8) default NULL AFTER `mac_address`");
-
-	mactrack_add_column('mac_track_ports',
-		'authorized',
-		"ALTER TABLE `mac_track_ports` ADD COLUMN `authorized` tinyint(3) unsigned NOT NULL default '0' AFTER `scan_date`");
-
-	mactrack_add_column('mac_track_ips',
-		'device_name',
-		"ALTER TABLE `mac_track_ips` ADD COLUMN `device_name` varchar(100) NOT NULL default '' AFTER `hostname`");
-
-	$columns = array_rekey(
-		db_fetch_assoc('SHOW COLUMNS FROM mac_track_ips'),
-		'Field', 'Type'
-	);
-
-	if (strpos($columns['port_number'], 'int(10)') !== false) {
-		db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
-
-		db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
-
-		db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
-
-		db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
-
-		db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
-	} elseif (strpos($columns['port_number'], 'varchar(20)') !== false) {
-		db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
-	} else {
-		db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN first_scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
-
-		db_execute("ALTER TABLE mac_track_devices MODIFY COLUMN last_rundate TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
-
-		db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
-
-		db_execute("ALTER TABLE mac_track_ip_ranges MODIFY COLUMN ips_max_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
-
-		db_execute("ALTER TABLE mac_track_ip_ranges MODIFY COLUMN ips_current_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
-
-		db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
-
-		db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
-
-		db_execute("ALTER TABLE mac_track_processes MODIFY COLUMN start_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
-
-		db_execute("ALTER TABLE mac_track_scan_dates MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
-
-		db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
-	}
-
-	if (!db_table_exists('mac_track_arp')) {
-		$data = array();
-		$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
-		$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => true, 'default' => '');
-		$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-		$data['columns'][] = array('name' => 'scan_date', 'type' => 'datetime', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-		$data['primary'] = 'mac_address`, `ip_address';
-		$data['type'] = 'InnoDB';
-		$data['comment'] = 'Table for VRF ARP translation';
-		api_plugin_db_table_create('mactrack', 'mac_track_arp', $data);
-	}
-
-	$tables = db_fetch_assoc("SELECT DISTINCT TABLE_NAME
+    }
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifHighSpeed',
+        "ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifHighSpeed` int(10) unsigned NOT NULL default '0' AFTER `ifSpeed`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifDuplex',
+        "ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifDuplex` int(10) unsigned NOT NULL default '0' AFTER `ifHighSpeed`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifInDiscards',
+        "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInDiscards` int(10) unsigned NOT NULL default '0' AFTER `ifOutErrors`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifInErrors',
+        "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInErrors` int(10) unsigned NOT NULL default '0' AFTER `int_ifInDiscards`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifInUnknownProtos',
+        "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifInUnknownProtos` int(10) unsigned NOT NULL default '0' AFTER `int_ifInErrors`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifOutDiscards',
+        "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutDiscards` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUnknownProtos`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifOutErrors',
+        "ALTER TABLE `mac_track_interfaces` ADD COLUMN `int_ifOutErrors` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutDiscards`"
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'host_id',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `host_id` int(10) unsigned NOT NULL default '0' AFTER `device_id`"
+    );
+
+    mactrack_add_column(
+        'mac_track_macwatch',
+        'date_last_notif',
+        "ALTER TABLE `mac_track_macwatch` ADD COLUMN `date_last_notif` TIMESTAMP DEFAULT '0000-00-00 00:00:00' AFTER `date_last_seen`"
+    );
+
+    mactrack_execute_sql('Add length to Device Types Match Fields', "ALTER TABLE `mac_track_device_types` MODIFY COLUMN `sysDescr_match` VARCHAR(100) NOT NULL default '', MODIFY COLUMN `sysObjectID_match` VARCHAR(100) NOT NULL default ''");
+
+    mactrack_execute_sql('Correct a Scanning Function Bug', "DELETE FROM mac_track_scanning_functions WHERE scanning_function='Not Applicable - Hub/Switch'");
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'host_id',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `host_id` INTEGER UNSIGNED NOT NULL default '0' AFTER `device_id`"
+    );
+
+    mactrack_add_index(
+        'mac_track_devices',
+        'host_id',
+        'ALTER TABLE `mac_track_devices` ADD INDEX `host_id`(`host_id`)'
+    );
+
+    mactrack_add_index(
+        'mac_track_ports',
+        'scan_date',
+        'ALTER TABLE `mac_track_ports` ADD INDEX `scan_date` USING BTREE(`scan_date`)'
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'sysUptime',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `sysUptime` int(10) unsigned NOT NULL default '0' AFTER `device_id`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifInOctets',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `ifInOctets` int(10) unsigned NOT NULL default '0' AFTER `vlan_trunk_status`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifOutOctets',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutOctets` int(10) unsigned NOT NULL default '0' AFTER `ifInOctets`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifHCInOctets',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `ifHCInOctets` bigint(20) unsigned NOT NULL default '0' AFTER `ifOutOctets`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifHCOutOctets',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `ifHCOutOctets` bigint(20) unsigned NOT NULL default '0' AFTER `ifHCInOctets`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifInUcastPkts',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `ifInUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifHCOutOctets`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifOutUcastPkts',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInUcastPkts`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifInMulticastPkts',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `ifInMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifOutUcastPkts`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifOutMulticastPkts',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInMulticastPkts`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifInBroadcastPkts',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `ifInBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifOutMulticastPkts`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifOutBroadcastPkts',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `ifOutBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `ifInBroadcastPkts`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'inBound',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `inBound` double NOT NULL default '0' AFTER `ifOutErrors`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'outBound',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `outBound` double NOT NULL default '0' AFTER `inBound`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifInOctets',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInOctets` int(10) unsigned NOT NULL default '0' AFTER `outBound`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifOutOctets',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutOctets` int(10) unsigned NOT NULL default '0' AFTER `int_ifInOctets`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifHCInOctets',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifHCInOctets` bigint(20) unsigned NOT NULL default '0' AFTER `int_ifOutOctets`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifHCOutOctets',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifHCOutOctets` bigint(20) unsigned NOT NULL default '0' AFTER `int_ifHCInOctets`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifInUcastPkts',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifHCOutOctets`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifOutUcastPkts',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutUcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInUcastPkts`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifInMulticastPkts',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutUcastPkts`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifOutMulticastPkts',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutMulticastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInMulticastPkts`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifInBroadcastPkts',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifInBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifOutMulticastPkts`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'int_ifOutBroadcastPkts',
+        "ALTER TABLE mac_track_interfaces ADD COLUMN `int_ifOutBroadcastPkts` int(10) unsigned NOT NULL default '0' AFTER `int_ifInBroadcastPkts`"
+    );
+
+    if (!mactrack_db_key_exists('mac_track_ports', 'site_id_device_id')) {
+        db_execute('ALTER TABLE `mac_track_ports` ADD INDEX `site_id_device_id`(`site_id`, `device_id`);');
+    }
+
+    // new for 2.1.2
+    // SNMP V3
+    mactrack_add_column(
+        'mac_track_devices',
+        'term_type',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `term_type` tinyint(11) NOT NULL default '1' AFTER `scan_type`"
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'user_name',
+        'ALTER TABLE `mac_track_devices` ADD COLUMN `user_name` varchar(40) default NULL AFTER `term_type`'
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'user_password',
+        'ALTER TABLE `mac_track_devices` ADD COLUMN `user_password` varchar(40) default NULL AFTER `user_name`'
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'private_key_path',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `private_key_path` varchar(128) default '' AFTER `user_password`"
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'snmp_options',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_options` int(10) unsigned NOT NULL default '0' AFTER `private_key_path`"
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'snmp_username',
+        'ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_username` varchar(50) default NULL AFTER `snmp_status`'
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'snmp_password',
+        'ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_password` varchar(50) default NULL AFTER `snmp_username`'
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'snmp_auth_protocol',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_auth_protocol` char(5) default '' AFTER `snmp_password`"
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'snmp_priv_passphrase',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_priv_passphrase` varchar(200) default '' AFTER `snmp_auth_protocol`"
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'snmp_priv_protocol',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_priv_protocol` char(6) default '' AFTER `snmp_priv_passphrase`"
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'snmp_context',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_context` varchar(64) default '' AFTER `snmp_priv_protocol`"
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'max_oids',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `max_oids` int(12) unsigned default '10' AFTER `snmp_context`"
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'snmp_engine_id',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `snmp_engine_id` varchar(64) default '' AFTER `snmp_context`"
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'term_type',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `term_type` tinyint(11) NOT NULL default '1' AFTER `scan_type`"
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'private_key_path',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `private_key_path` varchar(128) default '' AFTER `user_password`"
+    );
+
+    if (!db_table_exists('mac_track_snmp')) {
+        $data = [];
+        $data['columns'][] = ['name' => 'id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
+        $data['columns'][] = ['name' => 'name', 'type' => 'varchar(100)', 'NULL' => false];
+        $data['primary'] = 'id';
+        $data['type'] = 'InnoDB';
+        $data['comment'] = 'Group of SNMP Option Sets';
+        api_plugin_db_table_create('mactrack', 'mac_track_snmp', $data);
+    }
+
+    if (!db_table_exists('mac_track_snmp_items')) {
+        $data = [];
+        $data['columns'][] = ['name' => 'id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
+        $data['columns'][] = ['name' => 'snmp_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+        $data['columns'][] = ['name' => 'sequence', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+        $data['columns'][] = ['name' => 'snmp_version', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+        $data['columns'][] = ['name' => 'snmp_readstring', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+        $data['columns'][] = ['name' => 'snmp_port', 'type' => 'int(10)', 'NULL' => false, 'default' => '161'];
+        $data['columns'][] = ['name' => 'snmp_timeout', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '500'];
+        $data['columns'][] = ['name' => 'snmp_retries', 'unsigned' => true, 'type' => 'tinyint(11)', 'NULL' => false, 'default' => '3'];
+        $data['columns'][] = ['name' => 'max_oids', 'unsigned' => true, 'type' => 'int(12)', 'NULL' => true, 'default' => '10'];
+        $data['columns'][] = ['name' => 'snmp_username', 'type' => 'varchar(50)', 'NULL' => true];
+        $data['columns'][] = ['name' => 'snmp_password', 'type' => 'varchar(50)', 'NULL' => true];
+        $data['columns'][] = ['name' => 'snmp_auth_protocol', 'type' => 'char(5)', 'NULL' => true];
+        $data['columns'][] = ['name' => 'snmp_priv_passphrase', 'type' => 'varchar(200)', 'NULL' => true];
+        $data['columns'][] = ['name' => 'snmp_priv_protocol', 'type' => 'char(6)', 'NULL' => true];
+        $data['columns'][] = ['name' => 'snmp_context', 'type' => 'varchar(64)', 'NULL' => true];
+        $data['columns'][] = ['name' => 'snmp_engine_id', 'type' => 'varchar(64)', 'NULL' => true];
+        $data['primary'] = 'id`,`snmp_id';
+        $data['type'] = 'InnoDB';
+        $data['comment'] = 'Set of SNMP Options';
+        api_plugin_db_table_create('mactrack', 'mac_track_snmp_items', $data);
+    }
+
+    mactrack_add_column(
+        'mac_track_snmp_items',
+        'snmp_engine_id',
+        "ALTER TABLE `mac_track_snmp_items` ADD COLUMN `snmp_engine_id` varchar(64) default '' AFTER `snmp_context`"
+    );
+
+    if (!db_table_exists('mac_track_interface_graphs')) {
+        $data = [];
+        $data['columns'][] = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+        $data['columns'][] = ['name' => 'ifIndex', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false];
+        $data['columns'][] = ['name' => 'ifName', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+        $data['columns'][] = ['name' => 'host_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'];
+        $data['columns'][] = ['name' => 'local_graph_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false];
+        $data['columns'][] = ['name' => 'snmp_query_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'];
+        $data['columns'][] = ['name' => 'graph_template_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'];
+        $data['columns'][] = ['name' => 'field_name', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+        $data['columns'][] = ['name' => 'field_value', 'type' => 'varchar(25)', 'NULL' => false, 'default' => ''];
+        $data['columns'][] = ['name' => 'present', 'type' => 'tinyint(4)', 'NULL' => true, 'default' => '1'];
+        $data['primary'] = 'local_graph_id`,`device_id`,`ifIndex`,`host_id';
+        $data['keys'][] = ['name' => 'host_id', 'columns' => 'host_id'];
+        $data['keys'][] = ['name' => 'device_id', 'columns' => 'device_id'];
+        $data['type'] = 'InnoDB';
+        $data['comment'] = '';
+        api_plugin_db_table_create('mactrack', 'mac_track_interface_graphs', $data);
+    }
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifMauAutoNegAdminStatus',
+        "ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifMauAutoNegAdminStatus` integer UNSIGNED NOT NULL default '0' AFTER `ifDuplex`"
+    );
+
+    mactrack_add_column(
+        'mac_track_interfaces',
+        'ifMauAutoNegRemoteSignaling',
+        "ALTER TABLE `mac_track_interfaces` ADD COLUMN `ifMauAutoNegRemoteSignaling` integer UNSIGNED NOT NULL default '0' AFTER `ifMauAutoNegAdminStatus`"
+    );
+
+    mactrack_add_column(
+        'mac_track_device_types',
+        'dot1x_scanning_function',
+        "ALTER TABLE `mac_track_device_types` ADD COLUMN `dot1x_scanning_function` varchar(100) default '' AFTER `ip_scanning_function`"
+    );
+
+    mactrack_add_column(
+        'mac_track_device_types',
+        'serial_number_oid',
+        "ALTER TABLE `mac_track_device_types` ADD COLUMN `serial_number_oid` varchar(100) default '' AFTER `dot1x_scanning_function`"
+    );
+
+    mactrack_add_column(
+        'mac_track_sites',
+        'customer_contact',
+        "ALTER TABLE `mac_track_sites` ADD COLUMN `customer_contact` varchar(150) default '' AFTER `site_name`"
+    );
+
+    mactrack_add_column(
+        'mac_track_sites',
+        'netops_contact',
+        "ALTER TABLE `mac_track_sites` ADD COLUMN `netops_contact` varchar(150) default '' AFTER `customer_contact`"
+    );
+
+    mactrack_add_column(
+        'mac_track_sites',
+        'facilities_contact',
+        "ALTER TABLE `mac_track_sites` ADD COLUMN `facilities_contact` varchar(150) default '' AFTER `netops_contact`"
+    );
+
+    mactrack_add_column(
+        'mac_track_sites',
+        'site_info',
+        'ALTER TABLE `mac_track_sites` ADD COLUMN `site_info` text AFTER `facilities_contact`'
+    );
+
+    mactrack_add_column(
+        'mac_track_sites',
+        'skip_vlans',
+        "ALTER TABLE `mac_track_sites` ADD COLUMN `skip_vlans` text DEFAULT ''"
+    );
+
+    mactrack_add_column(
+        'mac_track_sites',
+        'scan_vlans',
+        "ALTER TABLE `mac_track_sites` ADD COLUMN `scan_vlans` text DEFAULT ''"
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'device_name',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `device_name` varchar(100) default '' AFTER `host_id`"
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'notes',
+        'ALTER TABLE `mac_track_devices` ADD COLUMN `notes` text AFTER `hostname`'
+    );
+
+    mactrack_add_column(
+        'mac_track_devices',
+        'scan_trunk_port',
+        "ALTER TABLE `mac_track_devices` ADD COLUMN `scan_trunk_port` text DEFAULT ''"
+    );
+
+    mactrack_add_column(
+        'mac_track_scanning_functions',
+        'type',
+        "ALTER TABLE `mac_track_scanning_functions` ADD COLUMN `type` int(10) unsigned NOT NULL default '0' AFTER `scanning_function`"
+    );
+
+    mactrack_add_column(
+        'mac_track_temp_ports',
+        'device_name',
+        "ALTER TABLE `mac_track_temp_ports` ADD COLUMN `device_name` varchar(100) NOT NULL default '' AFTER `hostname`"
+    );
+
+    mactrack_add_column(
+        'mac_track_temp_ports',
+        'vendor_mac',
+        'ALTER TABLE `mac_track_temp_ports` ADD COLUMN `vendor_mac` varchar(8) default NULL AFTER `mac_address`'
+    );
+
+    mactrack_add_column(
+        'mac_track_temp_ports',
+        'authorized',
+        "ALTER TABLE `mac_track_temp_ports` ADD COLUMN `authorized` tinyint(3) unsigned NOT NULL default '0' AFTER `updated`"
+    );
+
+    mactrack_add_column(
+        'mac_track_ports',
+        'device_name',
+        "ALTER TABLE `mac_track_ports` ADD COLUMN `device_name` varchar(100) NOT NULL default '' AFTER `hostname`"
+    );
+
+    mactrack_add_column(
+        'mac_track_ports',
+        'vendor_mac',
+        'ALTER TABLE `mac_track_ports` ADD COLUMN `vendor_mac` varchar(8) default NULL AFTER `mac_address`'
+    );
+
+    mactrack_add_column(
+        'mac_track_ports',
+        'authorized',
+        "ALTER TABLE `mac_track_ports` ADD COLUMN `authorized` tinyint(3) unsigned NOT NULL default '0' AFTER `scan_date`"
+    );
+
+    mactrack_add_column(
+        'mac_track_ips',
+        'device_name',
+        "ALTER TABLE `mac_track_ips` ADD COLUMN `device_name` varchar(100) NOT NULL default '' AFTER `hostname`"
+    );
+
+    $columns = array_rekey(
+        db_fetch_assoc('SHOW COLUMNS FROM mac_track_ips'),
+        'Field',
+        'Type'
+    );
+
+    if (false !== strpos($columns['port_number'], 'int(10)')) {
+        db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
+
+        db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
+
+        db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
+
+        db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
+
+        db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN port_number varchar(20) NOT NULL default ''");
+    } elseif (false !== strpos($columns['port_number'], 'varchar(20)')) {
+        db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
+    } else {
+        db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN first_scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+
+        db_execute("ALTER TABLE mac_track_devices MODIFY COLUMN last_rundate TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+
+        db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+
+        db_execute("ALTER TABLE mac_track_ip_ranges MODIFY COLUMN ips_max_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+
+        db_execute("ALTER TABLE mac_track_ip_ranges MODIFY COLUMN ips_current_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+
+        db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+
+        db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+
+        db_execute("ALTER TABLE mac_track_processes MODIFY COLUMN start_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+
+        db_execute("ALTER TABLE mac_track_scan_dates MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+
+        db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN scan_date TIMESTAMP NOT NULL DEFAULT '0000-00-00'");
+    }
+
+    if (!db_table_exists('mac_track_arp')) {
+        $data = [];
+        $data['columns'][] = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false];
+        $data['columns'][] = ['name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => true, 'default' => ''];
+        $data['columns'][] = ['name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+        $data['columns'][] = ['name' => 'scan_date', 'type' => 'datetime', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+        $data['primary'] = 'mac_address`, `ip_address';
+        $data['type'] = 'InnoDB';
+        $data['comment'] = 'Table for VRF ARP translation';
+        api_plugin_db_table_create('mactrack', 'mac_track_arp', $data);
+    }
+
+    $tables = db_fetch_assoc("SELECT DISTINCT TABLE_NAME
 		FROM information_schema.COLUMNS
 		WHERE TABLE_SCHEMA = SCHEMA()
 		AND TABLE_NAME LIKE 'mac_track%'");
 
-	if (cacti_sizeof($tables)) {
-		foreach ($tables as $table) {
-			$columns = db_fetch_assoc("SELECT *
+    if (cacti_sizeof($tables)) {
+        foreach ($tables as $table) {
+            $columns = db_fetch_assoc("SELECT *
 				FROM information_schema.COLUMNS
 				WHERE TABLE_SCHEMA=SCHEMA()
-				AND TABLE_NAME='" . $table['TABLE_NAME'] . "'
+				AND TABLE_NAME='".$table['TABLE_NAME']."'
 				AND DATA_TYPE LIKE '%char%'
 				AND COLUMN_DEFAULT IS NULL");
 
-			if (cacti_sizeof($columns)) {
-				$alter = 'ALTER TABLE `' . $table['TABLE_NAME'] . '` ';
+            if (cacti_sizeof($columns)) {
+                $alter = 'ALTER TABLE `'.$table['TABLE_NAME'].'` ';
 
-				$i = 0;
-				foreach($columns as $column) {
-					$alter .= ($i == 0 ? '': ', ') . ' MODIFY COLUMN `' . $column['COLUMN_NAME'] . '` ' . $column['COLUMN_TYPE'] . ($column['IS_NULLABLE'] == 'NO' ? ' NOT NULL' : '') . ' DEFAULT ""';
-					$i++;
-				}
+                $i = 0;
+                foreach ($columns as $column) {
+                    $alter .= (0 == $i ? '' : ', ').' MODIFY COLUMN `'.$column['COLUMN_NAME'].'` '.$column['COLUMN_TYPE'].('NO' == $column['IS_NULLABLE'] ? ' NOT NULL' : '').' DEFAULT ""';
+                    ++$i;
+                }
 
-				db_execute($alter);
-			}
-		}
-	}
+                db_execute($alter);
+            }
+        }
+    }
 
-	// new for 4.6
-	mactrack_add_column('mac_track_device_types',
-		'disabled',
-		"ALTER TABLE `mac_track_device_types` ADD COLUMN `disabled` varchar(2) default '' AFTER `highPort`");
+    // new for 4.6
+    mactrack_add_column(
+        'mac_track_device_types',
+        'disabled',
+        "ALTER TABLE `mac_track_device_types` ADD COLUMN `disabled` varchar(2) default '' AFTER `highPort`"
+    );
 
-	// add few device types examples if does not exist
-	$count = db_fetch_cell("SELECT COUNT(*) FROM mac_track_device_types WHERE description LIKE '%-default'");
+    // add few device types examples if does not exist
+    $count = db_fetch_cell("SELECT COUNT(*) FROM mac_track_device_types WHERE description LIKE '%-default'");
 
-	if ($count == 0) {
-		db_execute("INSERT INTO mac_track_device_types
+    if (0 == $count) {
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Comware 5130-default','H3C','2','','.1.3.6.1.4.1.25506.11.1.18*','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Aruba 6300-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.109','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Aruba 6200-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.300','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Comware 1920-default','HPE','2','','.1.3.6.1.4.1.25506.11.1.164','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Comware 5140-default','HPE','2','','.1.3.6.1.4.1.25506.11.1.297','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Aruba 2530 8p-default','HPE','2','','.1.3.6.1.4.1.11.2.3.7.11.141','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Aruba 2930 8p-default','Aruba','2','','.1.3.6.1.4.1.11.2.3.7.11.181.16','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C2600 Router-default','Cisco','3','*C2600*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C2960S Switch-default','Cisco','2','*C2960S*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C3550 Switch-default','Cisco','2','*C3550*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C3750 Switch-default','Cisco','2','*C3750*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('45xx Switch-default','Cisco','2','*cat4000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('45xx Switch-default','Cisco','2','*4500*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C2900 Router-default','Cisco','3','*C2900*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('ASR Router-default','Cisco','3','*ASR1000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('6513 Switch/Router-default','Cisco','2','*s72033_rp*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('CE500 Switch-default','Cisco','1','*CE500*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C2950 Switch-default','Cisco','2','*C2950*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C2800 Router-default','Cisco','3','*C2800*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('BladeCenter2 10G-default','Cisco','2','*CBS31X0*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('DellBladeCenter-default','Dell','2','*Ethernet Switch*','','get_dell_dot1q_switch_ports','get_CTAlias_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('VG224-default','Cisco','3','*vg224*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C870 Router-default','Cisco','3','*C870*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Cisco ASA-default','Cisco','3','*Adaptive Security Appliance*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C3x50 Switch-default','Cisco','2','*CAT3K*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C3900 Router-default','Cisco','3','*C3900*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Blade Center 10/100-default','Cisco','2','*CIGESM-I6K2L2Q4-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('CAT4500-default','Cisco','2','*cat4500*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C3560 Switch-default','Cisco','2','*C3560*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('ProCurve Switch-default','HP','2','*ProCurve Switch*','','get_procurve_ngi_switch_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('CAT3K_CAA-UNIVERSALK9-M-default','Cisco','2','*CAT3K_CAA-UNIVERSALK9-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('IBM Flex System Fabric-default','IBM','2','*IBM Flex System Fabric*','','get_generic_dot1q_switch_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C2960X Switch-default','Cisco','2','*C2960X*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('2960 Switch Lite-default','Cisco','2','*C2960-LANLITEK9-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('2960 Switch Base-default','Cisco','2','*C2960-LANBASEK9-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('VG3X0-default','Cisco','3','*VG3X0*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('93xx + 94xx Switch-default','Cisco','2','*CAT9K_IOSXE*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('43xx Router-default','Cisco','3','*ISR Software*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Nexus Generic-default','Cisco','2','*nxos*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Nexus 7K-default','Cisco','2','*n7000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','.1.3.6.1.4.1.9.12.3.1.3.932',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Nexus 5K-default','Cisco','2','*n5000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('92xx Switch-default','Cisco','1','*CAT9K_LITE_IOSXE*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
-	}
+    }
 
-	db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
-	db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
-	db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
-	db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
-	db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
-	db_execute("ALTER TABLE mac_track_devices MODIFY COLUMN scan_trunk_port text NULL default ''");
+    db_execute("ALTER TABLE mac_track_ips MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
+    db_execute("ALTER TABLE mac_track_ports MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
+    db_execute("ALTER TABLE mac_track_temp_ports MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
+    db_execute("ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
+    db_execute("ALTER TABLE mac_track_dot1x MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
+    db_execute("ALTER TABLE mac_track_devices MODIFY COLUMN scan_trunk_port text NULL default ''");
 
-	// Change old realm names
-	if (db_fetch_cell("SELECT count(*) FROM plugin_realms WHERE plugin = 'mactrack' and display='Device Tracking Viewer'")) {
-		db_fetch_cell("UPDATE plugin_realms set display='Mactrack Viewer' WHERE plugin = 'mactrack' and display='Device Tracking Viewer'");
-	}
-	if (db_fetch_cell("SELECT count(*) FROM plugin_realms WHERE plugin = 'mactrack' and display='Device Tracking Administrator'")) {
-		db_fetch_cell("UPDATE plugin_realms set display='Mactrack Administrator' WHERE plugin = 'mactrack' and display='Device Tracking Administrator'");
-	}
+    // Change old realm names
+    if (db_fetch_cell("SELECT count(*) FROM plugin_realms WHERE plugin = 'mactrack' and display='Device Tracking Viewer'")) {
+        db_fetch_cell("UPDATE plugin_realms set display='Mactrack Viewer' WHERE plugin = 'mactrack' and display='Device Tracking Viewer'");
+    }
+    if (db_fetch_cell("SELECT count(*) FROM plugin_realms WHERE plugin = 'mactrack' and display='Device Tracking Administrator'")) {
+        db_fetch_cell("UPDATE plugin_realms set display='Mactrack Administrator' WHERE plugin = 'mactrack' and display='Device Tracking Administrator'");
+    }
 
-	// 4.9
-	$keys = db_fetch_assoc('SHOW INDEXES FROM mac_track_aggregated_ports WHERE KEY_NAME="port_number"');
+    // 4.9
+    $keys = db_fetch_assoc('SHOW INDEXES FROM mac_track_aggregated_ports WHERE KEY_NAME="port_number"');
 
-	if ($keys != 7) {
-		db_execute("ALTER TABLE mac_track_aggregated_ports DROP INDEX port_number");
+    if (7 != $keys) {
+        db_execute('ALTER TABLE mac_track_aggregated_ports DROP INDEX port_number');
 
-		db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, ':', '')");
-		db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, '-', '')");
+        db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, ':', '')");
+        db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, '-', '')");
 
-		db_execute("ALTER TABLE mac_track_aggregated_ports ADD INDEX `port_number` (`port_number`, `mac_address`, `ip_address`, `device_id`, `site_id`, `vlan_id`, `authorized`)");
+        db_execute('ALTER TABLE mac_track_aggregated_ports ADD INDEX `port_number` (`port_number`, `mac_address`, `ip_address`, `device_id`, `site_id`, `vlan_id`, `authorized`)');
 
-		db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, ':', '')");
-		db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, '-', '')");
+        db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, ':', '')");
+        db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, '-', '')");
 
-		db_execute("UPDATE mac_track_ips SET mac_address = REPLACE(mac_address, ':', '')");
-		db_execute("UPDATE mac_track_ips SET mac_address = REPLACE(mac_address, '-', '')");
+        db_execute("UPDATE mac_track_ips SET mac_address = REPLACE(mac_address, ':', '')");
+        db_execute("UPDATE mac_track_ips SET mac_address = REPLACE(mac_address, '-', '')");
 
-		db_execute("UPDATE mac_track_macauth SET mac_address = REPLACE(mac_address, ':', '')");
-		db_execute("UPDATE mac_track_macauth SET mac_address = REPLACE(mac_address, '-', '')");
+        db_execute("UPDATE mac_track_macauth SET mac_address = REPLACE(mac_address, ':', '')");
+        db_execute("UPDATE mac_track_macauth SET mac_address = REPLACE(mac_address, '-', '')");
 
-		db_execute("UPDATE mac_track_macwatch SET mac_address = REPLACE(mac_address, ':', '')");
-		db_execute("UPDATE mac_track_macwatch SET mac_address = REPLACE(mac_address, '-', '')");
+        db_execute("UPDATE mac_track_macwatch SET mac_address = REPLACE(mac_address, ':', '')");
+        db_execute("UPDATE mac_track_macwatch SET mac_address = REPLACE(mac_address, '-', '')");
 
-		db_execute("UPDATE mac_track_ports SET mac_address = REPLACE(mac_address, ':', '')");
-		db_execute("UPDATE mac_track_ports SET mac_address = REPLACE(mac_address, '-', '')");
+        db_execute("UPDATE mac_track_ports SET mac_address = REPLACE(mac_address, ':', '')");
+        db_execute("UPDATE mac_track_ports SET mac_address = REPLACE(mac_address, '-', '')");
 
-		db_execute("UPDATE mac_track_temp_ports SET mac_address = REPLACE(mac_address, ':', '')");
-		db_execute("UPDATE mac_track_temp_ports SET mac_address = REPLACE(mac_address, '-', '')");
+        db_execute("UPDATE mac_track_temp_ports SET mac_address = REPLACE(mac_address, ':', '')");
+        db_execute("UPDATE mac_track_temp_ports SET mac_address = REPLACE(mac_address, '-', '')");
 
-		db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, ':', '')");
-		db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, '-', '')");
+        db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, ':', '')");
+        db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, '-', '')");
 
-		db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(vendor_mac, ':', '')");
-	}
+        db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(vendor_mac, ':', '')");
+    }
 
-	// default site must exist
-	if (!db_fetch_cell("SELECT count(*) FROM mac_track_sites")) {
-		db_execute("INSERT INTO mac_track_sites (site_name, site_info) VALUES ('Default','Default site')");
-	}
+    // default site must exist
+    if (!db_fetch_cell('SELECT count(*) FROM mac_track_sites')) {
+        db_execute("INSERT INTO mac_track_sites (site_name, site_info) VALUES ('Default','Default site')");
+    }
 }
 
-function mactrack_setup_database() {
-	$data = array();
-	$data['columns'][] = array('name' => 'row_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'vlan_id', 'type' => 'varchar(5)', 'NULL' => false, 'default' => 'N/A');
-	$data['columns'][] = array('name' => 'vlan_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'vendor_mac', 'type' => 'varchar(8)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'port_number', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'port_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'date_last', 'type' => 'timestamp', 'NULL' => false, 'default' => 'CURRENT_TIMESTAMP', 'on_update' => 'CURRENT_TIMESTAMP');
-	$data['columns'][] = array('name' => 'first_scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['columns'][] = array('name' => 'count_rec', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'active_last', 'unsigned' => true, 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'authorized', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0');
-	$data['primary'] = 'row_id';
-	$data['unique_keys'][] = array('name' => 'port_number', 'columns' => 'port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized');
-	$data['keys'][] = array('name' => 'site_id', 'columns' => 'site_id');
-	$data['keys'][] = array('name' => 'device_name', 'columns' => 'device_name');
-	$data['keys'][] = array('name' => 'mac', 'columns' => 'mac_address');
-	$data['keys'][] = array('name' => 'hostname', 'columns' => 'hostname');
-	$data['keys'][] = array('name' => 'vlan_name', 'columns' => 'vlan_name');
-	$data['keys'][] = array('name' => 'vlan_id', 'columns' => 'vlan_id');
-	$data['keys'][] = array('name' => 'device_id', 'columns' => 'device_id');
-	$data['keys'][] = array('name' => 'ip_address', 'columns' => 'ip_address');
-	$data['keys'][] = array('name' => 'port_name', 'columns' => 'port_name');
-	$data['keys'][] = array('name' => 'dns_hostname', 'columns' => 'dns_hostname');
-	$data['keys'][] = array('name' => 'vendor_mac', 'columns' => 'vendor_mac');
-	$data['keys'][] = array('name' => 'authorized', 'columns' => 'authorized');
-	$data['keys'][] = array('name' => 'site_id_device_id', 'columns' => 'site_id`,`device_id');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = 'Database for aggregated date for Tracking Device MACs';
-	api_plugin_db_table_create('mactrack', 'mac_track_aggregated_ports', $data);
+function mactrack_setup_database()
+{
+    $data = [];
+    $data['columns'][] = ['name' => 'row_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
+    $data['columns'][] = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'vlan_id', 'type' => 'varchar(5)', 'NULL' => false, 'default' => 'N/A'];
+    $data['columns'][] = ['name' => 'vlan_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'vendor_mac', 'type' => 'varchar(8)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'port_number', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'port_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'date_last', 'type' => 'timestamp', 'NULL' => false, 'default' => 'CURRENT_TIMESTAMP', 'on_update' => 'CURRENT_TIMESTAMP'];
+    $data['columns'][] = ['name' => 'first_scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['columns'][] = ['name' => 'count_rec', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'active_last', 'unsigned' => true, 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'authorized', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0'];
+    $data['primary'] = 'row_id';
+    $data['unique_keys'][] = ['name' => 'port_number', 'columns' => 'port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized'];
+    $data['keys'][] = ['name' => 'site_id', 'columns' => 'site_id'];
+    $data['keys'][] = ['name' => 'device_name', 'columns' => 'device_name'];
+    $data['keys'][] = ['name' => 'mac', 'columns' => 'mac_address'];
+    $data['keys'][] = ['name' => 'hostname', 'columns' => 'hostname'];
+    $data['keys'][] = ['name' => 'vlan_name', 'columns' => 'vlan_name'];
+    $data['keys'][] = ['name' => 'vlan_id', 'columns' => 'vlan_id'];
+    $data['keys'][] = ['name' => 'device_id', 'columns' => 'device_id'];
+    $data['keys'][] = ['name' => 'ip_address', 'columns' => 'ip_address'];
+    $data['keys'][] = ['name' => 'port_name', 'columns' => 'port_name'];
+    $data['keys'][] = ['name' => 'dns_hostname', 'columns' => 'dns_hostname'];
+    $data['keys'][] = ['name' => 'vendor_mac', 'columns' => 'vendor_mac'];
+    $data['keys'][] = ['name' => 'authorized', 'columns' => 'authorized'];
+    $data['keys'][] = ['name' => 'site_id_device_id', 'columns' => 'site_id`,`device_id'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = 'Database for aggregated date for Tracking Device MACs';
+    api_plugin_db_table_create('mactrack', 'mac_track_aggregated_ports', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'mac_prefix', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'vendor', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'description', 'type' => 'varchar(255)', 'NULL' => false, 'default' => '');
-	$data['primary'] = 'mac_prefix';
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_approved_macs', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'mac_prefix', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'vendor', 'type' => 'varchar(50)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'description', 'type' => 'varchar(255)', 'NULL' => false, 'default' => ''];
+    $data['primary'] = 'mac_prefix';
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_approved_macs', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'device_type_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'description', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'vendor', 'type' => 'varchar(40)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'device_type', 'type' => 'varchar(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'sysDescr_match', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'sysObjectID_match', 'type' => 'varchar(40)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'scanning_function', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'ip_scanning_function', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'dot1x_scanning_function', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'serial_number_oid', 'type' => 'varchar(100)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'lowPort', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'highPort', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'disabled', 'type' => 'varchar(2)', 'NULL' => false, 'default' => '');
-	$data['primary'] = 'device_type_id';
-	$data['unique_keys'][] = array('name' => 'snmp_info', 'columns' => 'sysDescr_match`,`sysObjectID_match`,`device_type');
-	$data['keys'][] = array('name' => 'device_type', 'columns' => 'device_type');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_device_types', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'device_type_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
+    $data['columns'][] = ['name' => 'description', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'vendor', 'type' => 'varchar(40)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'device_type', 'type' => 'varchar(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'sysDescr_match', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'sysObjectID_match', 'type' => 'varchar(40)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'scanning_function', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'ip_scanning_function', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'dot1x_scanning_function', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'serial_number_oid', 'type' => 'varchar(100)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'lowPort', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'highPort', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'disabled', 'type' => 'varchar(2)', 'NULL' => false, 'default' => ''];
+    $data['primary'] = 'device_type_id';
+    $data['unique_keys'][] = ['name' => 'snmp_info', 'columns' => 'sysDescr_match`,`sysObjectID_match`,`device_type'];
+    $data['keys'][] = ['name' => 'device_type', 'columns' => 'device_type'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_device_types', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'host_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'device_type_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => true, 'default' => '0');
-	$data['columns'][] = array('name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'notes', 'type' => 'text', 'NULL' => true);
-	$data['columns'][] = array('name' => 'disabled', 'type' => 'char(2)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'ignorePorts', 'type' => 'varchar(255)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'ips_total', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'vlans_total', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ports_total', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ports_active', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ports_trunk', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'macs_active', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'scan_type', 'type' => 'tinyint(11)', 'NULL' => false, 'default' => '1');
-	$data['columns'][] = array('name' => 'term_type', 'type' => 'tinyint(11)', 'NULL' => false, 'default' => '1');
-	$data['columns'][] = array('name' => 'user_name', 'type' => 'varchar(40)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'user_password', 'type' => 'varchar(40)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'private_key_path', 'type' => 'varchar(128)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_options', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'snmp_readstring', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'snmp_readstrings', 'type' => 'varchar(255)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_version', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'snmp_port', 'type' => 'int(10)', 'NULL' => false, 'default' => '161');
-	$data['columns'][] = array('name' => 'snmp_timeout', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '500');
-	$data['columns'][] = array('name' => 'snmp_retries', 'unsigned' => true, 'type' => 'tinyint(11)', 'NULL' => false, 'default' => '3');
-	$data['columns'][] = array('name' => 'snmp_sysName', 'type' => 'varchar(100)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_sysLocation', 'type' => 'varchar(100)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_sysContact', 'type' => 'varchar(100)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_sysObjectID', 'type' => 'varchar(100)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_sysDescr', 'type' => 'varchar(100)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_sysUptime', 'type' => 'varchar(100)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_status', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'snmp_username', 'type' => 'varchar(50)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_password', 'type' => 'varchar(50)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_auth_protocol', 'type' => 'char(5)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_priv_passphrase', 'type' => 'varchar(200)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_priv_protocol', 'type' => 'char(6)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_context', 'type' => 'varchar(64)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_engine_id', 'type' => 'varchar(64)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'max_oids', 'unsigned' => true, 'type' => 'int(12)', 'NULL' => true, 'default' => '10');
-	$data['columns'][] = array('name' => 'last_runmessage', 'type' => 'varchar(100)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'last_rundate', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['columns'][] = array('name' => 'last_runduration', 'type' => 'decimal(10,5)', 'NULL' => false, 'default' => '0.00000');
-	$data['columns'][] = array('name' => 'scan_trunk_port', 'type' => 'text', 'NULL' => true, 'default' => '');
-	$data['primary'] = 'device_id';
-	$data['unique_keys'][] = array('name' => 'hostname_snmp_port_site_id', 'columns' => 'hostname`,`snmp_port`,`site_id');
-	$data['keys'][] = array('name' => 'site_id', 'columns' => 'site_id');
-	$data['keys'][] = array('name' => 'host_id', 'columns' => 'host_id');
-	$data['keys'][] = array('name' => 'snmp_sysDescr', 'columns' => 'snmp_sysDescr');
-	$data['keys'][] = array('name' => 'snmp_sysObjectID', 'columns' => 'snmp_sysObjectID');
-	$data['keys'][] = array('name' => 'device_type_id', 'columns' => 'device_type_id');
-	$data['keys'][] = array('name' => 'device_name', 'columns' => 'device_name');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = 'Devices to be scanned for MAC addresses';
-	api_plugin_db_table_create('mactrack', 'mac_track_devices', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
+    $data['columns'][] = ['name' => 'host_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'device_type_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => true, 'default' => '0'];
+    $data['columns'][] = ['name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'notes', 'type' => 'text', 'NULL' => true];
+    $data['columns'][] = ['name' => 'disabled', 'type' => 'char(2)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'ignorePorts', 'type' => 'varchar(255)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'ips_total', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'vlans_total', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ports_total', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ports_active', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ports_trunk', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'macs_active', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'scan_type', 'type' => 'tinyint(11)', 'NULL' => false, 'default' => '1'];
+    $data['columns'][] = ['name' => 'term_type', 'type' => 'tinyint(11)', 'NULL' => false, 'default' => '1'];
+    $data['columns'][] = ['name' => 'user_name', 'type' => 'varchar(40)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'user_password', 'type' => 'varchar(40)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'private_key_path', 'type' => 'varchar(128)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_options', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'snmp_readstring', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'snmp_readstrings', 'type' => 'varchar(255)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_version', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'snmp_port', 'type' => 'int(10)', 'NULL' => false, 'default' => '161'];
+    $data['columns'][] = ['name' => 'snmp_timeout', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '500'];
+    $data['columns'][] = ['name' => 'snmp_retries', 'unsigned' => true, 'type' => 'tinyint(11)', 'NULL' => false, 'default' => '3'];
+    $data['columns'][] = ['name' => 'snmp_sysName', 'type' => 'varchar(100)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_sysLocation', 'type' => 'varchar(100)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_sysContact', 'type' => 'varchar(100)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_sysObjectID', 'type' => 'varchar(100)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_sysDescr', 'type' => 'varchar(100)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_sysUptime', 'type' => 'varchar(100)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_status', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'snmp_username', 'type' => 'varchar(50)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_password', 'type' => 'varchar(50)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_auth_protocol', 'type' => 'char(5)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_priv_passphrase', 'type' => 'varchar(200)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_priv_protocol', 'type' => 'char(6)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_context', 'type' => 'varchar(64)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_engine_id', 'type' => 'varchar(64)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'max_oids', 'unsigned' => true, 'type' => 'int(12)', 'NULL' => true, 'default' => '10'];
+    $data['columns'][] = ['name' => 'last_runmessage', 'type' => 'varchar(100)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'last_rundate', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['columns'][] = ['name' => 'last_runduration', 'type' => 'decimal(10,5)', 'NULL' => false, 'default' => '0.00000'];
+    $data['columns'][] = ['name' => 'scan_trunk_port', 'type' => 'text', 'NULL' => true, 'default' => ''];
+    $data['primary'] = 'device_id';
+    $data['unique_keys'][] = ['name' => 'hostname_snmp_port_site_id', 'columns' => 'hostname`,`snmp_port`,`site_id'];
+    $data['keys'][] = ['name' => 'site_id', 'columns' => 'site_id'];
+    $data['keys'][] = ['name' => 'host_id', 'columns' => 'host_id'];
+    $data['keys'][] = ['name' => 'snmp_sysDescr', 'columns' => 'snmp_sysDescr'];
+    $data['keys'][] = ['name' => 'snmp_sysObjectID', 'columns' => 'snmp_sysObjectID'];
+    $data['keys'][] = ['name' => 'device_type_id', 'columns' => 'device_type_id'];
+    $data['keys'][] = ['name' => 'device_name', 'columns' => 'device_name'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = 'Devices to be scanned for MAC addresses';
+    api_plugin_db_table_create('mactrack', 'mac_track_devices', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'username', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'domain', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'status', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'port_number', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['primary'] = 'scan_date`,`ip_address`,`mac_address`,`site_id';
-	$data['keys'][] = array('name' => 'ip', 'columns' => 'ip_address');
-	$data['keys'][] = array('name' => 'port_number', 'columns' => 'port_number');
-	$data['keys'][] = array('name' => 'mac', 'columns' => 'mac_address');
-	$data['keys'][] = array('name' => 'device_id', 'columns' => 'device_id');
-	$data['keys'][] = array('name' => 'site_id', 'columns' => 'site_id');
-	$data['keys'][] = array('name' => 'username', 'columns' => 'username');
-	$data['keys'][] = array('name' => 'hostname', 'columns' => 'hostname');
-	$data['keys'][] = array('name' => 'scan_date', 'columns' => 'scan_date');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_dot1x', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'username', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'domain', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'status', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'port_number', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['primary'] = 'scan_date`,`ip_address`,`mac_address`,`site_id';
+    $data['keys'][] = ['name' => 'ip', 'columns' => 'ip_address'];
+    $data['keys'][] = ['name' => 'port_number', 'columns' => 'port_number'];
+    $data['keys'][] = ['name' => 'mac', 'columns' => 'mac_address'];
+    $data['keys'][] = ['name' => 'device_id', 'columns' => 'device_id'];
+    $data['keys'][] = ['name' => 'site_id', 'columns' => 'site_id'];
+    $data['keys'][] = ['name' => 'username', 'columns' => 'username'];
+    $data['keys'][] = ['name' => 'hostname', 'columns' => 'hostname'];
+    $data['keys'][] = ['name' => 'scan_date', 'columns' => 'scan_date'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_dot1x', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifIndex', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'ifName', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'host_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'local_graph_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'snmp_query_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'graph_template_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'field_name', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'field_value', 'type' => 'varchar(25)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'present', 'type' => 'tinyint(4)', 'NULL' => true, 'default' => '1');
-	$data['primary'] = 'local_graph_id`,`device_id`,`ifIndex`,`host_id';
-	$data['keys'][] = array('name' => 'host_id', 'columns' => 'host_id');
-	$data['keys'][] = array('name' => 'device_id', 'columns' => 'device_id');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_interface_graphs', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifIndex', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false];
+    $data['columns'][] = ['name' => 'ifName', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'host_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'local_graph_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false];
+    $data['columns'][] = ['name' => 'snmp_query_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'graph_template_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'field_name', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'field_value', 'type' => 'varchar(25)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'present', 'type' => 'tinyint(4)', 'NULL' => true, 'default' => '1'];
+    $data['primary'] = 'local_graph_id`,`device_id`,`ifIndex`,`host_id';
+    $data['keys'][] = ['name' => 'host_id', 'columns' => 'host_id'];
+    $data['keys'][] = ['name' => 'device_id', 'columns' => 'device_id'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_interface_graphs', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'sysUptime', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifIndex', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifName', 'type' => 'varchar(128)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'ifAlias', 'type' => 'varchar(255)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'ifDescr', 'type' => 'varchar(128)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'ifType', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifMtu', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifSpeed', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifHighSpeed', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifDuplex', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifMauAutoNegAdminStatus', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifMauAutoNegRemoteSignaling', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifPhysAddress', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'ifAdminStatus', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifOperStatus', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifLastChange', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'linkPort', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'vlan_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'vlan_name', 'type' => 'varchar(128)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'vlan_trunk', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'vlan_trunk_status', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'ifInOctets', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifOutOctets', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifHCInOctets', 'unsigned' => true, 'type' => 'bigint(20)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifHCOutOctets', 'unsigned' => true, 'type' => 'bigint(20)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifInMulticastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifOutMulticastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifInBroadcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifOutBroadcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifInUcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifOutUcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifInDiscards', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifInErrors', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifInUnknownProtos', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifOutDiscards', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => true, 'default' => '0');
-	$data['columns'][] = array('name' => 'ifOutErrors', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => true, 'default' => '0');
-	$data['columns'][] = array('name' => 'inBound', 'type' => 'double', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'outBound', 'type' => 'double', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifInOctets', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifOutOctets', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifHCInOctets', 'unsigned' => true, 'type' => 'bigint(20)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifHCOutOctets', 'unsigned' => true, 'type' => 'bigint(20)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifInNUcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifOutNUcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifInMulticastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifOutMulticastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifInBroadcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifOutBroadcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifInUcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifOutUcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifInDiscards', 'unsigned' => true, 'type' => "float", 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifInErrors', 'unsigned' => true, 'type' => "float", 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifInUnknownProtos', 'unsigned' => true, 'type' => "float", 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifOutDiscards', 'unsigned' => true, 'type' => "float", 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_ifOutErrors', 'unsigned' => true, 'type' => "float", 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'last_up_time', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['columns'][] = array('name' => 'last_down_time', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['columns'][] = array('name' => 'stateChanges', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_discards_present', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'int_errors_present', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'present', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0');
-	$data['primary'] = 'site_id`,`device_id`,`ifIndex';
-	$data['keys'][] = array('name' => 'ifDescr', 'columns' => 'ifDescr');
-	$data['keys'][] = array('name' => 'ifType', 'columns' => 'ifType');
-	$data['keys'][] = array('name' => 'ifSpeed', 'columns' => 'ifSpeed');
-	$data['keys'][] = array('name' => 'ifMTU', 'columns' => 'ifMtu');
-	$data['keys'][] = array('name' => 'ifAdminStatus', 'columns' => 'ifAdminStatus');
-	$data['keys'][] = array('name' => 'ifOperStatus', 'columns' => 'ifOperStatus');
-	$data['keys'][] = array('name' => 'ifInDiscards', 'columns' => 'ifInUnknownProtos');
-	$data['keys'][] = array('name' => 'ifInErrors', 'columns' => 'ifInUnknownProtos');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_interfaces', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'sysUptime', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifIndex', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifName', 'type' => 'varchar(128)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'ifAlias', 'type' => 'varchar(255)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'ifDescr', 'type' => 'varchar(128)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'ifType', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifMtu', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifSpeed', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifHighSpeed', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifDuplex', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifMauAutoNegAdminStatus', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifMauAutoNegRemoteSignaling', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifPhysAddress', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'ifAdminStatus', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifOperStatus', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifLastChange', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'linkPort', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'vlan_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false];
+    $data['columns'][] = ['name' => 'vlan_name', 'type' => 'varchar(128)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'vlan_trunk', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false];
+    $data['columns'][] = ['name' => 'vlan_trunk_status', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false];
+    $data['columns'][] = ['name' => 'ifInOctets', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifOutOctets', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifHCInOctets', 'unsigned' => true, 'type' => 'bigint(20)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifHCOutOctets', 'unsigned' => true, 'type' => 'bigint(20)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifInMulticastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifOutMulticastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifInBroadcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifOutBroadcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifInUcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifOutUcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifInDiscards', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifInErrors', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifInUnknownProtos', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifOutDiscards', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => true, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ifOutErrors', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => true, 'default' => '0'];
+    $data['columns'][] = ['name' => 'inBound', 'type' => 'double', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'outBound', 'type' => 'double', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifInOctets', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifOutOctets', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifHCInOctets', 'unsigned' => true, 'type' => 'bigint(20)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifHCOutOctets', 'unsigned' => true, 'type' => 'bigint(20)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifInNUcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifOutNUcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifInMulticastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifOutMulticastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifInBroadcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifOutBroadcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifInUcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifOutUcastPkts', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifInDiscards', 'unsigned' => true, 'type' => 'float', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifInErrors', 'unsigned' => true, 'type' => 'float', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifInUnknownProtos', 'unsigned' => true, 'type' => 'float', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifOutDiscards', 'unsigned' => true, 'type' => 'float', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_ifOutErrors', 'unsigned' => true, 'type' => 'float', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'last_up_time', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['columns'][] = ['name' => 'last_down_time', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['columns'][] = ['name' => 'stateChanges', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_discards_present', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'int_errors_present', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'present', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0'];
+    $data['primary'] = 'site_id`,`device_id`,`ifIndex';
+    $data['keys'][] = ['name' => 'ifDescr', 'columns' => 'ifDescr'];
+    $data['keys'][] = ['name' => 'ifType', 'columns' => 'ifType'];
+    $data['keys'][] = ['name' => 'ifSpeed', 'columns' => 'ifSpeed'];
+    $data['keys'][] = ['name' => 'ifMTU', 'columns' => 'ifMtu'];
+    $data['keys'][] = ['name' => 'ifAdminStatus', 'columns' => 'ifAdminStatus'];
+    $data['keys'][] = ['name' => 'ifOperStatus', 'columns' => 'ifOperStatus'];
+    $data['keys'][] = ['name' => 'ifInDiscards', 'columns' => 'ifInUnknownProtos'];
+    $data['keys'][] = ['name' => 'ifInErrors', 'columns' => 'ifInUnknownProtos'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_interfaces', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'ip_range', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ips_max', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ips_current', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'ips_max_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['columns'][] = array('name' => 'ips_current_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['primary'] = 'ip_range`,`site_id';
-	$data['keys'][] = array('name' => 'site_id', 'columns' => 'site_id');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_ip_ranges', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'ip_range', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ips_max', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ips_current', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'ips_max_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['columns'][] = ['name' => 'ips_current_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['primary'] = 'ip_range`,`site_id';
+    $data['keys'][] = ['name' => 'site_id', 'columns' => 'site_id'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_ip_ranges', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'port_number', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['primary'] = 'scan_date`,`ip_address`,`mac_address`,`site_id';
-	$data['keys'][] = array('name' => 'ip', 'columns' => 'ip_address');
-	$data['keys'][] = array('name' => 'port_number', 'columns' => 'port_number');
-	$data['keys'][] = array('name' => 'mac', 'columns' => 'mac_address');
-	$data['keys'][] = array('name' => 'device_id', 'columns' => 'device_id');
-	$data['keys'][] = array('name' => 'site_id', 'columns' => 'site_id');
-	$data['keys'][] = array('name' => 'hostname', 'columns' => 'hostname');
-	$data['keys'][] = array('name' => 'scan_date', 'columns' => 'scan_date');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_ips', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'port_number', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['primary'] = 'scan_date`,`ip_address`,`mac_address`,`site_id';
+    $data['keys'][] = ['name' => 'ip', 'columns' => 'ip_address'];
+    $data['keys'][] = ['name' => 'port_number', 'columns' => 'port_number'];
+    $data['keys'][] = ['name' => 'mac', 'columns' => 'mac_address'];
+    $data['keys'][] = ['name' => 'device_id', 'columns' => 'device_id'];
+    $data['keys'][] = ['name' => 'site_id', 'columns' => 'site_id'];
+    $data['keys'][] = ['name' => 'hostname', 'columns' => 'hostname'];
+    $data['keys'][] = ['name' => 'scan_date', 'columns' => 'scan_date'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_ips', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'mac_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'description', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'added_date', 'type' => 'timestamp', 'NULL' => false, 'default' => 'CURRENT_TIMESTAMP', 'on_update' => 'CURRENT_TIMESTAMP');
-	$data['columns'][] = array('name' => 'added_by', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['primary'] = 'mac_address';
-	$data['keys'][] = array('name' => 'mac_id', 'columns' => 'mac_id');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_macauth', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'mac_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
+    $data['columns'][] = ['name' => 'description', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'added_date', 'type' => 'timestamp', 'NULL' => false, 'default' => 'CURRENT_TIMESTAMP', 'on_update' => 'CURRENT_TIMESTAMP'];
+    $data['columns'][] = ['name' => 'added_by', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['primary'] = 'mac_address';
+    $data['keys'][] = ['name' => 'mac_id', 'columns' => 'mac_id'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_macauth', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'mac_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(45)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'description', 'type' => 'varchar(255)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'ticket_number', 'type' => 'varchar(45)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'notify_schedule', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'email_addresses', 'type' => 'varchar(255)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'discovered', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'date_first_seen', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['columns'][] = array('name' => 'date_last_seen', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['columns'][] = array('name' => 'date_last_notif', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['primary'] = 'mac_address';
-	$data['keys'][] = array('name' => 'mac_id', 'columns' => 'mac_id');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_macwatch', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'mac_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
+    $data['columns'][] = ['name' => 'name', 'type' => 'varchar(45)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'description', 'type' => 'varchar(255)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'ticket_number', 'type' => 'varchar(45)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'notify_schedule', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false];
+    $data['columns'][] = ['name' => 'email_addresses', 'type' => 'varchar(255)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'discovered', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false];
+    $data['columns'][] = ['name' => 'date_first_seen', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['columns'][] = ['name' => 'date_last_seen', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['columns'][] = ['name' => 'date_last_notif', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['primary'] = 'mac_address';
+    $data['keys'][] = ['name' => 'mac_id', 'columns' => 'mac_id'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_macwatch', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'vendor_mac', 'type' => 'varchar(8)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'vendor_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'vendor_address', 'type' => 'text', 'NULL' => false);
-	$data['columns'][] = array('name' => 'present', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '1');
-	$data['primary'] = 'vendor_mac';
-	$data['keys'][] = array('name' => 'vendor_name', 'columns' => 'vendor_name');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_oui_database', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'vendor_mac', 'type' => 'varchar(8)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'vendor_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'vendor_address', 'type' => 'text', 'NULL' => false];
+    $data['columns'][] = ['name' => 'present', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '1'];
+    $data['primary'] = 'vendor_mac';
+    $data['keys'][] = ['name' => 'vendor_name', 'columns' => 'vendor_name'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_oui_database', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'vlan_id', 'type' => 'varchar(5)', 'NULL' => false, 'default' => 'N/A');
-	$data['columns'][] = array('name' => 'vlan_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'vendor_mac', 'type' => 'varchar(8)', 'NULL' => true, 'default' => '');
-	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'port_number', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'port_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['columns'][] = array('name' => 'authorized', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0');
-	$data['primary'] = 'port_number`,`scan_date`,`mac_address`,`device_id';
-	$data['keys'][] = array('name' => 'site_id', 'columns' => 'site_id');
-	$data['keys'][] = array('name' => 'scan_date', 'columns' => 'scan_date');
-	$data['keys'][] = array('name' => 'description', 'columns' => 'device_name');
-	$data['keys'][] = array('name' => 'mac', 'columns' => 'mac_address');
-	$data['keys'][] = array('name' => 'hostname', 'columns' => 'hostname');
-	$data['keys'][] = array('name' => 'vlan_name', 'columns' => 'vlan_name');
-	$data['keys'][] = array('name' => 'vlan_id', 'columns' => 'vlan_id');
-	$data['keys'][] = array('name' => 'device_id', 'columns' => 'device_id');
-	$data['keys'][] = array('name' => 'ip_address', 'columns' => 'ip_address');
-	$data['keys'][] = array('name' => 'port_name', 'columns' => 'port_name');
-	$data['keys'][] = array('name' => 'dns_hostname', 'columns' => 'dns_hostname');
-	$data['keys'][] = array('name' => 'vendor_mac', 'columns' => 'vendor_mac');
-	$data['keys'][] = array('name' => 'authorized', 'columns' => 'authorized');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = 'Database for Tracking Device MACs';
-	api_plugin_db_table_create('mactrack', 'mac_track_ports', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'vlan_id', 'type' => 'varchar(5)', 'NULL' => false, 'default' => 'N/A'];
+    $data['columns'][] = ['name' => 'vlan_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'vendor_mac', 'type' => 'varchar(8)', 'NULL' => true, 'default' => ''];
+    $data['columns'][] = ['name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'port_number', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'port_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['columns'][] = ['name' => 'authorized', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0'];
+    $data['primary'] = 'port_number`,`scan_date`,`mac_address`,`device_id';
+    $data['keys'][] = ['name' => 'site_id', 'columns' => 'site_id'];
+    $data['keys'][] = ['name' => 'scan_date', 'columns' => 'scan_date'];
+    $data['keys'][] = ['name' => 'description', 'columns' => 'device_name'];
+    $data['keys'][] = ['name' => 'mac', 'columns' => 'mac_address'];
+    $data['keys'][] = ['name' => 'hostname', 'columns' => 'hostname'];
+    $data['keys'][] = ['name' => 'vlan_name', 'columns' => 'vlan_name'];
+    $data['keys'][] = ['name' => 'vlan_id', 'columns' => 'vlan_id'];
+    $data['keys'][] = ['name' => 'device_id', 'columns' => 'device_id'];
+    $data['keys'][] = ['name' => 'ip_address', 'columns' => 'ip_address'];
+    $data['keys'][] = ['name' => 'port_name', 'columns' => 'port_name'];
+    $data['keys'][] = ['name' => 'dns_hostname', 'columns' => 'dns_hostname'];
+    $data['keys'][] = ['name' => 'vendor_mac', 'columns' => 'vendor_mac'];
+    $data['keys'][] = ['name' => 'authorized', 'columns' => 'authorized'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = 'Database for Tracking Device MACs';
+    api_plugin_db_table_create('mactrack', 'mac_track_ports', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'device_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'process_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'status', 'type' => 'varchar(20)', 'NULL' => false, 'default' => 'Queued');
-	$data['columns'][] = array('name' => 'start_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['primary'] = 'device_id';
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_processes', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'device_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'process_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'status', 'type' => 'varchar(20)', 'NULL' => false, 'default' => 'Queued'];
+    $data['columns'][] = ['name' => 'start_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['primary'] = 'device_id';
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_processes', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['primary'] = 'scan_date';
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_scan_dates', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['primary'] = 'scan_date';
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_scan_dates', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'scanning_function', 'type' => 'varchar(100)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'type', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'description', 'type' => 'varchar(200)', 'NULL' => false);
-	$data['primary'] = 'scanning_function';
-	$data['type'] = 'InnoDB';
-	$data['comment'] = 'Registered Scanning Functions';
-	api_plugin_db_table_create('mactrack', 'mac_track_scanning_functions', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'scanning_function', 'type' => 'varchar(100)', 'NULL' => false];
+    $data['columns'][] = ['name' => 'type', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'description', 'type' => 'varchar(200)', 'NULL' => false];
+    $data['primary'] = 'scanning_function';
+    $data['type'] = 'InnoDB';
+    $data['comment'] = 'Registered Scanning Functions';
+    api_plugin_db_table_create('mactrack', 'mac_track_scanning_functions', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'site_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'customer_contact', 'type' => 'varchar(150)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'netops_contact', 'type' => 'varchar(150)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'facilities_contact', 'type' => 'varchar(150)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'site_info', 'type' => 'text', 'NULL' => true);
-	$data['columns'][] = array('name' => 'total_devices', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'total_device_errors', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'total_macs', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'total_ips', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'total_user_ports', 'type' => 'int(11)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'total_oper_ports', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'total_trunk_ports', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'skip_vlans', 'type' => 'text', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'scan_vlans', 'type' => 'text', 'NULL' => false, 'default' => '');
-	$data['primary'] = 'site_id';
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_sites', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
+    $data['columns'][] = ['name' => 'site_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'customer_contact', 'type' => 'varchar(150)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'netops_contact', 'type' => 'varchar(150)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'facilities_contact', 'type' => 'varchar(150)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'site_info', 'type' => 'text', 'NULL' => true];
+    $data['columns'][] = ['name' => 'total_devices', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'total_device_errors', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'total_macs', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'total_ips', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'total_user_ports', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'total_oper_ports', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'total_trunk_ports', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'skip_vlans', 'type' => 'text', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'scan_vlans', 'type' => 'text', 'NULL' => false, 'default' => ''];
+    $data['primary'] = 'site_id';
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_sites', $data);
 
-	// default site must exist
-	db_execute("INSERT INTO mac_track_sites (site_name, site_info) VALUES ('Default','Default site')");
+    // default site must exist
+    db_execute("INSERT INTO mac_track_sites (site_name, site_info) VALUES ('Default','Default site')");
 
+    $data = [];
+    $data['columns'][] = ['name' => 'id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
+    $data['columns'][] = ['name' => 'name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['primary'] = 'id';
+    $data['type'] = 'InnoDB';
+    $data['comment'] = 'Group of SNMP Option Sets';
+    api_plugin_db_table_create('mactrack', 'mac_track_snmp', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['primary'] = 'id';
-	$data['type'] = 'InnoDB';
-	$data['comment'] = 'Group of SNMP Option Sets';
-	api_plugin_db_table_create('mactrack', 'mac_track_snmp', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
+    $data['columns'][] = ['name' => 'snmp_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'sequence', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'snmp_version', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'snmp_readstring', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'snmp_port', 'type' => 'int(10)', 'NULL' => false, 'default' => '161'];
+    $data['columns'][] = ['name' => 'snmp_timeout', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '500'];
+    $data['columns'][] = ['name' => 'snmp_retries', 'unsigned' => true, 'type' => 'tinyint(11)', 'NULL' => false, 'default' => '3'];
+    $data['columns'][] = ['name' => 'max_oids', 'unsigned' => true, 'type' => 'int(12)', 'NULL' => true, 'default' => '10'];
+    $data['columns'][] = ['name' => 'snmp_username', 'type' => 'varchar(50)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_password', 'type' => 'varchar(50)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_auth_protocol', 'type' => 'char(5)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_priv_passphrase', 'type' => 'varchar(200)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_priv_protocol', 'type' => 'char(6)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_context', 'type' => 'varchar(64)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'snmp_engine_id', 'type' => 'varchar(64)', 'NULL' => true];
+    $data['primary'] = 'id`,`snmp_id';
+    $data['type'] = 'InnoDB';
+    $data['comment'] = 'Set of SNMP Options';
+    api_plugin_db_table_create('mactrack', 'mac_track_snmp_items', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'snmp_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'sequence', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'snmp_version', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'snmp_readstring', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'snmp_port', 'type' => 'int(10)', 'NULL' => false, 'default' => '161');
-	$data['columns'][] = array('name' => 'snmp_timeout', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '500');
-	$data['columns'][] = array('name' => 'snmp_retries', 'unsigned' => true, 'type' => 'tinyint(11)', 'NULL' => false, 'default' => '3');
-	$data['columns'][] = array('name' => 'max_oids', 'unsigned' => true, 'type' => 'int(12)', 'NULL' => true, 'default' => '10');
-	$data['columns'][] = array('name' => 'snmp_username', 'type' => 'varchar(50)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_password', 'type' => 'varchar(50)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_auth_protocol', 'type' => 'char(5)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_priv_passphrase', 'type' => 'varchar(200)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_priv_protocol', 'type' => 'char(6)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_context', 'type' => 'varchar(64)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'snmp_engine_id', 'type' => 'varchar(64)', 'NULL' => true);
-	$data['primary'] = 'id`,`snmp_id';
-	$data['type'] = 'InnoDB';
-	$data['comment'] = 'Set of SNMP Options';
-	api_plugin_db_table_create('mactrack', 'mac_track_snmp_items', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'vlan_id', 'type' => 'varchar(5)', 'NULL' => false, 'default' => 'N/A'];
+    $data['columns'][] = ['name' => 'vlan_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'vendor_mac', 'type' => 'varchar(8)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true];
+    $data['columns'][] = ['name' => 'port_number', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'port_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['columns'][] = ['name' => 'updated', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0'];
+    $data['columns'][] = ['name' => 'authorized', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0'];
+    $data['primary'] = 'port_number`,`scan_date`,`mac_address`,`device_id';
+    $data['keys'][] = ['name' => 'site_id', 'columns' => 'site_id'];
+    $data['keys'][] = ['name' => 'device_name', 'columns' => 'device_name'];
+    $data['keys'][] = ['name' => 'ip_address', 'columns' => 'ip_address'];
+    $data['keys'][] = ['name' => 'hostname', 'columns' => 'hostname'];
+    $data['keys'][] = ['name' => 'vlan_name', 'columns' => 'vlan_name'];
+    $data['keys'][] = ['name' => 'vlan_id', 'columns' => 'vlan_id'];
+    $data['keys'][] = ['name' => 'device_id', 'columns' => 'device_id'];
+    $data['keys'][] = ['name' => 'mac', 'columns' => 'mac_address'];
+    $data['keys'][] = ['name' => 'updated', 'columns' => 'updated'];
+    $data['keys'][] = ['name' => 'vendor_mac', 'columns' => 'vendor_mac'];
+    $data['keys'][] = ['name' => 'authorized', 'columns' => 'authorized'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = 'Database for Storing Temporary Results for Tracking Device MACS';
+    api_plugin_db_table_create('mactrack', 'mac_track_temp_ports', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'device_name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'vlan_id', 'type' => 'varchar(5)', 'NULL' => false, 'default' => 'N/A');
-	$data['columns'][] = array('name' => 'vlan_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'vendor_mac', 'type' => 'varchar(8)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'dns_hostname', 'type' => 'varchar(200)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'port_number', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'port_name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'scan_date', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['columns'][] = array('name' => 'updated', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'authorized', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0');
-	$data['primary'] = 'port_number`,`scan_date`,`mac_address`,`device_id';
-	$data['keys'][] = array('name' => 'site_id', 'columns' => 'site_id');
-	$data['keys'][] = array('name' => 'device_name', 'columns' => 'device_name');
-	$data['keys'][] = array('name' => 'ip_address', 'columns' => 'ip_address');
-	$data['keys'][] = array('name' => 'hostname', 'columns' => 'hostname');
-	$data['keys'][] = array('name' => 'vlan_name', 'columns' => 'vlan_name');
-	$data['keys'][] = array('name' => 'vlan_id', 'columns' => 'vlan_id');
-	$data['keys'][] = array('name' => 'device_id', 'columns' => 'device_id');
-	$data['keys'][] = array('name' => 'mac', 'columns' => 'mac_address');
-	$data['keys'][] = array('name' => 'updated', 'columns' => 'updated');
-	$data['keys'][] = array('name' => 'vendor_mac', 'columns' => 'vendor_mac');
-	$data['keys'][] = array('name' => 'authorized', 'columns' => 'authorized');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = 'Database for Storing Temporary Results for Tracking Device MACS';
-	api_plugin_db_table_create('mactrack', 'mac_track_temp_ports', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'vlan_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false];
+    $data['columns'][] = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false];
+    $data['columns'][] = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false];
+    $data['columns'][] = ['name' => 'vlan_name', 'type' => 'varchar(128)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'present', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '1'];
+    $data['primary'] = 'vlan_id`,`site_id`,`device_id';
+    $data['keys'][] = ['name' => 'vlan_name', 'columns' => 'vlan_name'];
+    $data['type'] = 'InnoDB';
+    $data['comment'] = '';
+    api_plugin_db_table_create('mactrack', 'mac_track_vlans', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'vlan_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'vlan_name', 'type' => 'varchar(128)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'present', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '1');
-	$data['primary'] = 'vlan_id`,`site_id`,`device_id';
-	$data['keys'][] = array('name' => 'vlan_name', 'columns' => 'vlan_name');
-	$data['type'] = 'InnoDB';
-	$data['comment'] = '';
-	api_plugin_db_table_create('mactrack', 'mac_track_vlans', $data);
+    $data = [];
+    $data['columns'][] = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false];
+    $data['columns'][] = ['name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => true, 'default' => ''];
+    $data['columns'][] = ['name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
+    $data['columns'][] = ['name' => 'scan_date', 'type' => 'datetime', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];
+    $data['primary'] = 'mac_address`, `ip_address';
+    $data['type'] = 'InnoDB';
+    $data['comment'] = 'Table for VRF ARP translation';
+    api_plugin_db_table_create('mactrack', 'mac_track_arp', $data);
 
-	$data = array();
-	$data['columns'][] = array('name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'ip_address', 'type' => 'varchar(20)', 'NULL' => true, 'default' => '');
-	$data['columns'][] = array('name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'scan_date', 'type' => 'datetime', 'NULL' => false, 'default' => '0000-00-00 00:00:00');
-	$data['primary'] = 'mac_address`, `ip_address';
-	$data['type'] = 'InnoDB';
-	$data['comment'] = 'Table for VRF ARP translation';
-	api_plugin_db_table_create('mactrack', 'mac_track_arp', $data);
-
-
-	// add few device types examples if does not exist
-	$count = db_fetch_cell("SELECT count(*) FROM mac_track_device_types WHERE description LIKE '%-default'");
-	if ($count == 0) {
-
-		db_execute("INSERT INTO mac_track_device_types
+    // add few device types examples if does not exist
+    $count = db_fetch_cell("SELECT count(*) FROM mac_track_device_types WHERE description LIKE '%-default'");
+    if (0 == $count) {
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Comware 5130-default','H3C','2','','.1.3.6.1.4.1.25506.11.1.18*','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Aruba 6300-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.109','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Aruba 6200-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.300','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Comware 1920-default','HPE','2','','.1.3.6.1.4.1.25506.11.1.164','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Comware 5140-default','HPE','2','','.1.3.6.1.4.1.25506.11.1.297','get_h3c_3com_switch_ports','get_h3c_3com_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Aruba 2530 8p-default','HPE','2','','.1.3.6.1.4.1.11.2.3.7.11.141','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Aruba 2930 8p-default','Aruba','2','','.1.3.6.1.4.1.11.2.3.7.11.181.16','get_generic_switch_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C2600 Router-default','Cisco','3','*C2600*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C2960S Switch-default','Cisco','2','*C2960S*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C3550 Switch-default','Cisco','2','*C3550*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C3750 Switch-default','Cisco','2','*C3750*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('45xx Switch-default','Cisco','2','*cat4000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('45xx Switch-default','Cisco','2','*4500*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C2900 Router-default','Cisco','3','*C2900*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('ASR Router-default','Cisco','3','*ASR1000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('6513 Switch/Router-default','Cisco','2','*s72033_rp*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('CE500 Switch-default','Cisco','1','*CE500*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C2950 Switch-default','Cisco','2','*C2950*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C2800 Router-default','Cisco','3','*C2800*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('BladeCenter2 10G-default','Cisco','2','*CBS31X0*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('DellBladeCenter-default','Dell','2','*Ethernet Switch*','','get_dell_dot1q_switch_ports','get_CTAlias_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('VG224-default','Cisco','3','*vg224*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C870 Router-default','Cisco','3','*C870*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Cisco ASA-default','Cisco','3','*Adaptive Security Appliance*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C3x50 Switch-default','Cisco','2','*CAT3K*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C3900 Router-default','Cisco','3','*C3900*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Blade Center 10/100-default','Cisco','2','*CIGESM-I6K2L2Q4-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('CAT4500-default','Cisco','2','*cat4500*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C3560 Switch-default','Cisco','2','*C3560*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('ProCurve Switch-default','HP','2','*ProCurve Switch*','','get_procurve_ngi_switch_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('CAT3K_CAA-UNIVERSALK9-M-default','Cisco','2','*CAT3K_CAA-UNIVERSALK9-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('IBM Flex System Fabric-default','IBM','2','*IBM Flex System Fabric*','','get_generic_dot1q_switch_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('C2960X Switch-default','Cisco','2','*C2960X*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('2960 Switch Lite-default','Cisco','2','*C2960-LANLITEK9-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('2960 Switch Base-default','Cisco','2','*C2960-LANBASEK9-M*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('VG3X0-default','Cisco','3','*VG3X0*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('93xx + 94xx Switch-default','Cisco','2','*CAT9K_IOSXE*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('43xx Router-default','Cisco','3','*ISR Software*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Nexus Generic-default','Cisco','2','*nxos*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Nexus 7K-default','Cisco','2','*n7000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','.1.3.6.1.4.1.9.12.3.1.3.932',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('Nexus 5K-default','Cisco','2','*n5000*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 
-		db_execute("INSERT INTO mac_track_device_types
+        db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('92xx Switch-default','Cisco','1','*CAT9K_LITE_IOSXE*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
-	}
+    }
 }
-

@@ -1,24 +1,24 @@
 <?php
 
 /**
- * DNS Library for handling lookups and updates. 
+ * DNS Library for handling lookups and updates.
  *
  * Copyright (c) 2020, Mike Pultz <mike@mikepultz.com>. All rights reserved.
  *
  * See LICENSE for more details.
  *
  * @category  Networking
- * @package   Net_DNS2
+ *
  * @author    Mike Pultz <mike@mikepultz.com>
  * @copyright 2020 Mike Pultz <mike@mikepultz.com>
  * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @link      https://netdns2.com/
- * @since     File available since Release 0.6.0
  *
+ * @see      https://netdns2.com/
+ * @since     File available since Release 0.6.0
  */
 
 /**
- * PX Resource Record - RFC2163 section 4
+ * PX Resource Record - RFC2163 section 4.
  *
  *    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  *    |                  PREFERENCE                   |
@@ -29,79 +29,65 @@
  *    /                    MAPX400                    /
  *    /                                               /
  *    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--
- *
  */
 class Net_DNS2_RR_PX extends Net_DNS2_RR
 {
-    /*
-     * preference
-     */
+    // preference
     public $preference;
 
-    /* 
-     * the RFC822 part of the MCGAM
-     */
+    // the RFC822 part of the MCGAM
     public $map822;
 
-    /*
-     * the X.400 part of the MCGAM
-     */
+    // the X.400 part of the MCGAM
     public $mapx400;
 
     /**
-     * method to return the rdata portion of the packet as a string
+     * method to return the rdata portion of the packet as a string.
      *
-     * @return  string
-     * @access  protected
-     *
+     * @return string
      */
     protected function rrToString()
     {
-        return $this->preference . ' ' . $this->cleanString($this->map822) . '. ' . 
-            $this->cleanString($this->mapx400) . '.';
+        return $this->preference.' '.$this->cleanString($this->map822).'. '
+            .$this->cleanString($this->mapx400).'.';
     }
 
     /**
-     * parses the rdata portion from a standard DNS config line
+     * parses the rdata portion from a standard DNS config line.
      *
      * @param array $rdata a string split line of values for the rdata
      *
-     * @return boolean
-     * @access protected
-     *
+     * @return bool
      */
     protected function rrFromString(array $rdata)
     {
-        $this->preference   = $rdata[0];
-        $this->map822       = $this->cleanString($rdata[1]);
-        $this->mapx400      = $this->cleanString($rdata[2]);
+        $this->preference = $rdata[0];
+        $this->map822 = $this->cleanString($rdata[1]);
+        $this->mapx400 = $this->cleanString($rdata[2]);
 
         return true;
     }
 
     /**
-     * parses the rdata of the Net_DNS2_Packet object
+     * parses the rdata of the Net_DNS2_Packet object.
      *
      * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
      *
-     * @return boolean
-     * @access protected
-     *
+     * @return bool
      */
     protected function rrSet(Net_DNS2_Packet &$packet)
     {
         if ($this->rdlength > 0) {
-
             //
             // parse the preference
             //
             $x = unpack('npreference', $this->rdata);
             $this->preference = $x['preference'];
 
-            $offset         = $packet->offset + 2;
+            $offset = $packet->offset + 2;
 
-            $this->map822   = Net_DNS2_Packet::expand($packet, $offset);
-            $this->mapx400  = Net_DNS2_Packet::expand($packet, $offset);
+            $this->map822 = Net_DNS2_Packet::expand($packet, $offset);
+            $this->mapx400 = Net_DNS2_Packet::expand($packet, $offset);
 
             return true;
         }
@@ -110,20 +96,17 @@ class Net_DNS2_RR_PX extends Net_DNS2_RR
     }
 
     /**
-     * returns the rdata portion of the DNS packet
+     * returns the rdata portion of the DNS packet.
      *
      * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
      *                                 compressed names
      *
-     * @return mixed                   either returns a binary packed
-     *                                 string or null on failure
-     * @access protected
-     *
+     * @return mixed either returns a binary packed
+     *               string or null on failure
      */
     protected function rrGet(Net_DNS2_Packet &$packet)
     {
         if (strlen($this->map822) > 0) {
-            
             $data = pack('n', $this->preference);
             $packet->offset += 2;
 

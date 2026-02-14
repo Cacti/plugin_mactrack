@@ -1,4 +1,5 @@
 <?php
+
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2025 The Cacti Group                                 |
@@ -23,24 +24,33 @@
 */
 
 chdir('../../');
-include('./include/auth.php');
-include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
-/* check actions */
+include './include/auth.php';
+
+include_once './plugins/mactrack/lib/mactrack_functions.php';
+
+// check actions
 set_default_action();
 cacti_session_close();
-switch (get_request_var('action')) {
-case 'site_scan':
-	mactrack_site_scan(true);
-	break;
-case 'rescan':
-	mactrack_rescan(true);
-	break;
-case 'enable':
-	mactrack_enable();
-	break;
-case 'disable':
-	mactrack_disable();
-	break;
-}
 
+switch (get_request_var('action')) {
+    case 'site_scan':
+        mactrack_site_scan(true);
+
+        break;
+
+    case 'rescan':
+        mactrack_rescan(true);
+
+        break;
+
+    case 'enable':
+        mactrack_enable();
+
+        break;
+
+    case 'disable':
+        mactrack_disable();
+
+        break;
+}

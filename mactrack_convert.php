@@ -1,5 +1,6 @@
 #!/usr/bin/php -q
 <?php
+
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2025 The Cacti Group                                 |
@@ -27,102 +28,121 @@ $dir = dirname(__FILE__);
 chdir($dir);
 
 if (substr_count(strtolower($dir), 'mactrack')) {
-	chdir('../../');
+    chdir('../../');
 }
 
-include('./include/cli_check.php');
-include($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+include './include/cli_check.php';
 
-if (read_config_option('mt_collection_timing') != 'disabled') {
-	global $debug;
+include $config['base_path'].'/plugins/mactrack/lib/mactrack_functions.php';
 
-	/* initialize variables */
-	$debug    = false;
-	$engine   = 'InnoDB';
-	$charset  = '';
-	$collate  = '';
-	$days     = 30;
+if ('disabled' != read_config_option('mt_collection_timing')) {
+    global $debug;
 
-	/* process calling arguments */
-	$parms = $_SERVER['argv'];
-	array_shift($parms);
+    // initialize variables
+    $debug = false;
+    $engine = 'InnoDB';
+    $charset = '';
+    $collate = '';
+    $days = 30;
 
-	if (cacti_sizeof($parms)) {
-		foreach ($parms as $parameter) {
-			if (strpos($parameter, '=')) {
-				list($arg, $value) = explode('=', $parameter);
-			} else {
-				$arg = $parameter;
-				$value = '';
-			}
+    // process calling arguments
+    $parms = $_SERVER['argv'];
+    array_shift($parms);
 
-			switch ($arg) {
-				case '-d':
-				case '--debug':
-					$debug = true;
-					break;
-				case '--days':
-					$days = $value;
-					break;
-				case '-e':
-				case '--engine':
-					$engine = $value;
-					break;
-				case '--charset':
-					$charset = $value;
-					break;
-				case '--collate':
-					$collate = $value;
-					break;
-				case '--version':
-				case '-V':
-				case '-v':
-					display_version();
-					exit;
-				case '--help':
-				case '-H':
-				case '-h':
-					display_help();
-					exit;
-				default:
-					print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
-					display_help();
-					exit;
-			}
-		}
-	}
+    if (cacti_sizeof($parms)) {
+        foreach ($parms as $parameter) {
+            if (strpos($parameter, '=')) {
+                list($arg, $value) = explode('=', $parameter);
+            } else {
+                $arg = $parameter;
+                $value = '';
+            }
 
-	$engine = strtoupper($engine);
+            switch ($arg) {
+                case '-d':
+                case '--debug':
+                    $debug = true;
 
-	if ($engine != 'MYISAM' && $engine != 'INNODB') {
-		print "FATAL: Only MyISAM and InnoDB Available '$engine' not recognized\n";
-		exit -1;
-	}
+                    break;
 
-	if (!is_numeric($days) || $days > 360 || $days < 10) {
-		print "FATAL: Days Range is from 10 - 360, Value '$days' Invalid\n";
-		exit -1;
-	}
+                case '--days':
+                    $days = $value;
 
-	$partitioning = db_fetch_cell("SHOW GLOBAL VARIABLES LIKE 'have_partitioning'");
-	if ($partitioning == '') {
-		$partitioning = db_fetch_cell("SELECT PLUGIN_STATUS FROM INFORMATION_SCHEMA.ALL_PLUGINS WHERE PLUGIN_NAME='partition'");
-	}
+                    break;
 
-	if ($partitioning == 'YES' || $partitioning == 'ACTIVE') {
-		mactrack_create_partitioned_table($engine, $days, true);
-	} else {
-		echo "FATAL: Partitioning Not Available, Exiting!\n";
-	}
+                case '-e':
+                case '--engine':
+                    $engine = $value;
+
+                    break;
+
+                case '--charset':
+                    $charset = $value;
+
+                    break;
+
+                case '--collate':
+                    $collate = $value;
+
+                    break;
+
+                case '--version':
+                case '-V':
+                case '-v':
+                    display_version();
+
+                    exit;
+
+                case '--help':
+                case '-H':
+                case '-h':
+                    display_help();
+
+                    exit;
+
+                default:
+                    print 'ERROR: Invalid Parameter '.$parameter."\n\n";
+                    display_help();
+
+                    exit;
+            }
+        }
+    }
+
+    $engine = strtoupper($engine);
+
+    if ('MYISAM' != $engine && 'INNODB' != $engine) {
+        echo "FATAL: Only MyISAM and InnoDB Available '{$engine}' not recognized\n";
+
+        exit -1;
+    }
+
+    if (!is_numeric($days) || $days > 360 || $days < 10) {
+        echo "FATAL: Days Range is from 10 - 360, Value '{$days}' Invalid\n";
+
+        exit -1;
+    }
+
+    $partitioning = db_fetch_cell("SHOW GLOBAL VARIABLES LIKE 'have_partitioning'");
+    if ('' == $partitioning) {
+        $partitioning = db_fetch_cell("SELECT PLUGIN_STATUS FROM INFORMATION_SCHEMA.ALL_PLUGINS WHERE PLUGIN_NAME='partition'");
+    }
+
+    if ('YES' == $partitioning || 'ACTIVE' == $partitioning) {
+        mactrack_create_partitioned_table($engine, $days, true);
+    } else {
+        echo "FATAL: Partitioning Not Available, Exiting!\n";
+    }
 }
 
-function mactrack_create_partitioned_table($engine = 'InnoDB', $charset, $collate, $days = 30, $migrate = false) {
-	global $config;
+function mactrack_create_partitioned_table($engine = 'InnoDB', $charset, $collate, $days = 30, $migrate = false)
+{
+    global $config;
 
-	/* rename the original table */
-	db_execute('RENAME TABLE `mac_track_ports` TO `mac_track_ports_backup`');
+    // rename the original table
+    db_execute('RENAME TABLE `mac_track_ports` TO `mac_track_ports_backup`');
 
-	$sql = "CREATE TABLE `mac_track_ports` (
+    $sql = "CREATE TABLE `mac_track_ports` (
 		`site_id` int(10) unsigned NOT NULL default '0',
 		`device_id` int(10) unsigned NOT NULL default '0',
 		`hostname` varchar(40) NOT NULL default '',
@@ -152,84 +172,87 @@ function mactrack_create_partitioned_table($engine = 'InnoDB', $charset, $collat
 		KEY `vendor_mac` (`vendor_mac`),
 		KEY `authorized` (`authorized`),
 		KEY `site_id_device_id` (`site_id`,`device_id`))
-		ENGINE=$engine
-		DEFAULT CHARACTER SET = $charset
-		DEFAULT COLLATE = $collate
+		ENGINE={$engine}
+		DEFAULT CHARACTER SET = {$charset}
+		DEFAULT COLLATE = {$collate}
 		COMMENT='Database for Tracking Device MACs'
 		PARTITION BY RANGE (TO_DAYS(scan_date))\n";
 
-	$now = time();
+    $now = time();
 
-	$parts = '';
+    $parts = '';
 
-	for ($i = $days; $i > 0; $i--) {
-		$timestamp = $now - ($i * 86400);
-		$date     = date('Y-m-d', $timestamp);
-		$format   = date('Ymd', $timestamp);
-		$parts .= ($parts != '' ? ",\n":'(') . ' PARTITION d' . $format . " VALUES LESS THAN (TO_DAYS('" . $date . "')+1)";
-	}
+    for ($i = $days; $i > 0; --$i) {
+        $timestamp = $now - ($i * 86400);
+        $date = date('Y-m-d', $timestamp);
+        $format = date('Ymd', $timestamp);
+        $parts .= ('' != $parts ? ",\n" : '(').' PARTITION d'.$format." VALUES LESS THAN (TO_DAYS('".$date."')+1)";
+    }
 
-	$parts .= ",\nPARTITION dMaxValue VALUES LESS THAN MAXVALUE);";
+    $parts .= ",\nPARTITION dMaxValue VALUES LESS THAN MAXVALUE);";
 
-	$return_value = db_execute($sql . $parts);
+    $return_value = db_execute($sql.$parts);
 
-	if ($return_value) {
-		if ($migrate) {
-			print "NOTE: Migrating Old Data to Partitioned Tables\n";
+    if ($return_value) {
+        if ($migrate) {
+            echo "NOTE: Migrating Old Data to Partitioned Tables\n";
 
-			/*
-			$scan_dates = db_fetch_assoc('SELECT DISTINCT scan_date
-				FROM mac_track_ports_backup');
+            /*
+            $scan_dates = db_fetch_assoc('SELECT DISTINCT scan_date
+                FROM mac_track_ports_backup');
 
-			if (cacti_sizeof($scan_dates)) {
-				foreach ($scan_dates as $sd) {
-					db_execute_prepared('INSERT INTO mac_track_ports
-						SELECT *
-						FROM mac_track_ports_backups
-						WHERE scan_date = ?',
-						array($sd['scan_date']));
+            if (cacti_sizeof($scan_dates)) {
+                foreach ($scan_dates as $sd) {
+                    db_execute_prepared('INSERT INTO mac_track_ports
+                        SELECT *
+                        FROM mac_track_ports_backups
+                        WHERE scan_date = ?',
+                        array($sd['scan_date']));
 
-					db_execute_prepared('DELETE FROM mac_track_ports_backup
-						WHERE scan_date = ?',
-						array($sd['scan_date']));
-				}
-			}
-			*/
-			db_execute('INSERT mac_track_ports SELECT * FROM mac_track_ports_backup');
-		}
+                    db_execute_prepared('DELETE FROM mac_track_ports_backup
+                        WHERE scan_date = ?',
+                        array($sd['scan_date']));
+                }
+            }
+            */
+            db_execute('INSERT mac_track_ports SELECT * FROM mac_track_ports_backup');
+        }
 
-		db_execute('DROP TABLE mac_track_ports_backup');
+        db_execute('DROP TABLE mac_track_ports_backup');
 
-		db_execute('REPLACE INTO `settings`
+        db_execute(
+            'REPLACE INTO `settings`
 			SET name = "mt_data_retention", value = ?',
-			array($days));
-	} else {
-		print "FATAL: Conversion to Partitioned Table Failed\n";
+            [$days]
+        );
+    } else {
+        echo "FATAL: Conversion to Partitioned Table Failed\n";
 
-		/* rename the original table */
-		db_execute('RENAME TABLE `mac_track_ports_backup` TO `mac_track_ports`');
-	}
+        // rename the original table
+        db_execute('RENAME TABLE `mac_track_ports_backup` TO `mac_track_ports`');
+    }
 }
 
-function display_version() {
-	global $config;
+function display_version()
+{
+    global $config;
 
-	$info = plugin_mactrack_version();
+    $info = plugin_mactrack_version();
 
-	print 'Mactrack Convert Partitioned, Version ' . $info['version'] . ", " . COPYRIGHT_YEARS . "\n";
+    echo 'Mactrack Convert Partitioned, Version '.$info['version'].', '.COPYRIGHT_YEARS."\n";
 }
 
-/*	display_help - displays the usage of the function */
-function display_help() {
-	display_version();
+// display_help - displays the usage of the function
+function display_help()
+{
+    display_version();
 
-	print "\nusage: mactrack_convert.php [-d] [-h] [--help] [-v] [--version]\n\n";
-	print "--engine=N    - Database Engine.  Value are 'MyISAM' or 'InnoDB' (Default:InnoDB)\n";
-	print "--charset=N   - Database Character Sets\n";
-	print "--collate=N   - Database Collation\n";
-	print "--days=N      - Days to Retain.  Valid Range is 10-360 (Default:30)\n";
-	print "-d | --debug  - Display verbose output during execution\n";
-	print "-v --version  - Display this help message\n";
-	print "-h --help     - Display this help message\n";
+    echo "\nusage: mactrack_convert.php [-d] [-h] [--help] [-v] [--version]\n\n";
+    echo "--engine=N    - Database Engine.  Value are 'MyISAM' or 'InnoDB' (Default:InnoDB)\n";
+    echo "--charset=N   - Database Character Sets\n";
+    echo "--collate=N   - Database Collation\n";
+    echo "--days=N      - Days to Retain.  Valid Range is 10-360 (Default:30)\n";
+    echo "-d | --debug  - Display verbose output during execution\n";
+    echo "-v --version  - Display this help message\n";
+    echo "-h --help     - Display this help message\n";
 }
-

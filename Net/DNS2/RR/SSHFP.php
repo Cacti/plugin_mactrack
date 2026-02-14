@@ -1,24 +1,24 @@
 <?php
 
 /**
- * DNS Library for handling lookups and updates. 
+ * DNS Library for handling lookups and updates.
  *
  * Copyright (c) 2020, Mike Pultz <mike@mikepultz.com>. All rights reserved.
  *
  * See LICENSE for more details.
  *
  * @category  Networking
- * @package   Net_DNS2
+ *
  * @author    Mike Pultz <mike@mikepultz.com>
  * @copyright 2020 Mike Pultz <mike@mikepultz.com>
  * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @link      https://netdns2.com/
- * @since     File available since Release 0.6.0
  *
+ * @see      https://netdns2.com/
+ * @since     File available since Release 0.6.0
  */
 
 /**
- * SSHFP Resource Record - RFC4255 section 3.1
+ * SSHFP Resource Record - RFC4255 section 3.1.
  *
  *       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
  *      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -28,81 +28,64 @@
  *      /                          fingerprint                          /
  *      /                                                               /
  *      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
- *
  */
 class Net_DNS2_RR_SSHFP extends Net_DNS2_RR
 {
-    /*
-     * the algorithm used
-     */
+    // Algorithms
+    public const SSHFP_ALGORITHM_RES = 0;
+    public const SSHFP_ALGORITHM_RSA = 1;
+    public const SSHFP_ALGORITHM_DSS = 2;
+    public const SSHFP_ALGORITHM_ECDSA = 3;
+    public const SSHFP_ALGORITHM_ED25519 = 4;
+
+    // Fingerprint Types
+    public const SSHFP_FPTYPE_RES = 0;
+    public const SSHFP_FPTYPE_SHA1 = 1;
+    public const SSHFP_FPTYPE_SHA256 = 2;
+    // the algorithm used
     public $algorithm;
 
-    /*
-     * The finger print type
-     */
+    // The finger print type
     public $fp_type;
 
-    /*
-     * the finger print data
-     */
+    // the finger print data
     public $fingerprint;
 
-    /*
-     * Algorithms
-     */
-    const SSHFP_ALGORITHM_RES       = 0;
-    const SSHFP_ALGORITHM_RSA       = 1;
-    const SSHFP_ALGORITHM_DSS       = 2;
-    const SSHFP_ALGORITHM_ECDSA     = 3;
-    const SSHFP_ALGORITHM_ED25519   = 4;
-
-    /*
-     * Fingerprint Types
-     */
-    const SSHFP_FPTYPE_RES      = 0;
-    const SSHFP_FPTYPE_SHA1     = 1;
-    const SSHFP_FPTYPE_SHA256   = 2;
-
-
     /**
-     * method to return the rdata portion of the packet as a string
+     * method to return the rdata portion of the packet as a string.
      *
-     * @return  string
-     * @access  protected
-     *
+     * @return string
      */
     protected function rrToString()
     {
-        return $this->algorithm . ' ' . $this->fp_type . ' ' . $this->fingerprint;
+        return $this->algorithm.' '.$this->fp_type.' '.$this->fingerprint;
     }
 
     /**
-     * parses the rdata portion from a standard DNS config line
+     * parses the rdata portion from a standard DNS config line.
      *
      * @param array $rdata a string split line of values for the rdata
      *
-     * @return boolean
-     * @access protected
-     *
+     * @return bool
      */
     protected function rrFromString(array $rdata)
     {
         //
         // "The use of mnemonics instead of numbers is not allowed."
-        // 
+        //
         // RFC4255 section 3.2
         //
-        $algorithm      = array_shift($rdata);
-        $fp_type        = array_shift($rdata);
-        $fingerprint    = strtolower(implode('', $rdata));
+        $algorithm = array_shift($rdata);
+        $fp_type = array_shift($rdata);
+        $fingerprint = strtolower(implode('', $rdata));
 
         //
-        // There are only two algorithm's defined 
+        // There are only two algorithm's defined
         //
-        if ( ($algorithm != self::SSHFP_ALGORITHM_RSA) 
-            && ($algorithm != self::SSHFP_ALGORITHM_DSS) 
-            && ($algorithm != self::SSHFP_ALGORITHM_ECDSA) 
-            && ($algorithm != self::SSHFP_ALGORITHM_ED25519)
+        if ((self::SSHFP_ALGORITHM_RSA != $algorithm)
+            && (self::SSHFP_ALGORITHM_DSS != $algorithm)
+            && (self::SSHFP_ALGORITHM_ECDSA != $algorithm)
+            && (self::SSHFP_ALGORITHM_ED25519 != $algorithm)
         ) {
             return false;
         }
@@ -110,47 +93,44 @@ class Net_DNS2_RR_SSHFP extends Net_DNS2_RR
         //
         // there are only two fingerprints defined
         //
-        if ( ($fp_type != self::SSHFP_FPTYPE_SHA1)
-            && ($fp_type != self::SSHFP_FPTYPE_SHA256) 
+        if ((self::SSHFP_FPTYPE_SHA1 != $fp_type)
+            && (self::SSHFP_FPTYPE_SHA256 != $fp_type)
         ) {
             return false;
         }
 
-        $this->algorithm    = $algorithm;
-        $this->fp_type      = $fp_type;
-        $this->fingerprint  = $fingerprint;
+        $this->algorithm = $algorithm;
+        $this->fp_type = $fp_type;
+        $this->fingerprint = $fingerprint;
 
         return true;
     }
 
     /**
-     * parses the rdata of the Net_DNS2_Packet object
+     * parses the rdata of the Net_DNS2_Packet object.
      *
      * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
      *
-     * @return boolean
-     * @access protected
-     *
+     * @return bool
      */
     protected function rrSet(Net_DNS2_Packet &$packet)
     {
         if ($this->rdlength > 0) {
-
             //
             // unpack the algorithm and finger print type
             //
             $x = unpack('Calgorithm/Cfp_type', $this->rdata);
 
-            $this->algorithm    = $x['algorithm'];
-            $this->fp_type      = $x['fp_type'];
+            $this->algorithm = $x['algorithm'];
+            $this->fp_type = $x['fp_type'];
 
             //
-            // There are only three algorithm's defined 
+            // There are only three algorithm's defined
             //
-            if ( ($this->algorithm != self::SSHFP_ALGORITHM_RSA) 
-                && ($this->algorithm != self::SSHFP_ALGORITHM_DSS)
-                && ($this->algorithm != self::SSHFP_ALGORITHM_ECDSA)
-                && ($this->algorithm != self::SSHFP_ALGORITHM_ED25519)
+            if ((self::SSHFP_ALGORITHM_RSA != $this->algorithm)
+                && (self::SSHFP_ALGORITHM_DSS != $this->algorithm)
+                && (self::SSHFP_ALGORITHM_ECDSA != $this->algorithm)
+                && (self::SSHFP_ALGORITHM_ED25519 != $this->algorithm)
             ) {
                 return false;
             }
@@ -158,12 +138,12 @@ class Net_DNS2_RR_SSHFP extends Net_DNS2_RR
             //
             // there are only two fingerprints defined
             //
-            if ( ($this->fp_type != self::SSHFP_FPTYPE_SHA1)
-                && ($this->fp_type != self::SSHFP_FPTYPE_SHA256)
+            if ((self::SSHFP_FPTYPE_SHA1 != $this->fp_type)
+                && (self::SSHFP_FPTYPE_SHA256 != $this->fp_type)
             ) {
                 return false;
             }
-            
+
             //
             // parse the finger print; this assumes SHA-1
             //
@@ -177,22 +157,22 @@ class Net_DNS2_RR_SSHFP extends Net_DNS2_RR
     }
 
     /**
-     * returns the rdata portion of the DNS packet
+     * returns the rdata portion of the DNS packet.
      *
      * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
      *                                 compressed names
      *
-     * @return mixed                   either returns a binary packed
-     *                                 string or null on failure
-     * @access protected
-     *
+     * @return mixed either returns a binary packed
+     *               string or null on failure
      */
     protected function rrGet(Net_DNS2_Packet &$packet)
     {
         if (strlen($this->fingerprint) > 0) {
-
             $data = pack(
-                'CCH*', $this->algorithm, $this->fp_type, $this->fingerprint
+                'CCH*',
+                $this->algorithm,
+                $this->fp_type,
+                $this->fingerprint
             );
 
             $packet->offset += strlen($data);
