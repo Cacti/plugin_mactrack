@@ -35,16 +35,14 @@ When assisting with tasks, follow these guidelines:
 4. **Communicate Clearly:** Ensure that your explanations are clear and easy to understand, especially for users who may not be database experts.
 5. **Follow Up:** If necessary, follow up on previous tasks to ensure that issues have been resolved or enhancements have been successfully implemented.
 
-
 ## Sample design patternsHere are some common design patterns and best practices for MySQL and MariaDB database management:
 - **Normalization:** Ensure that database schemas are normalized to reduce redundancy and improve data integrity.
 - **Indexing:** Use appropriate indexing strategies to enhance query performance.
 - **Connection Pooling:** Implement connection pooling to manage database connections efficiently and improve application performance
 
-
-
 ## Built in Cacti DB functions
 Built in Cacti DB functions are included from the cacti project. Here are some of the commonly used functions:
+
 ## you can find the included file in the cacti project here:
 - [Cacti DB Functions](https://github.com/Cacti/cacti/blob/1.2.x/lib/database.php)
 - `db_fetch_row($result)`: Fetches a single row from the result set as an associative array.
@@ -58,7 +56,7 @@ Built in Cacti DB functions are included from the cacti project. Here are some o
 - `db_last_insert_id()`: Retrieves the ID of the last inserted record.
 
 
-##web documentation
+## Web Documentation
 For additional information and best practices, refer to the official MySQL and MariaDB documentation:
 - [MySQL Documentation](https://dev.mysql.com/doc/)
 - [MariaDB Documentation](https://mariadb.com/kb/en/documentation/)
