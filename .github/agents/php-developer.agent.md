@@ -24,13 +24,9 @@ You have access to the following tools to assist you in your tasks:
 - **extensions:** Utilize extensions that can enhance your capabilities in PHP development.
 - **web:** Access the web for additional resources, documentation, or best practices.
 
-
-
 ## The project in this repo calls on functions from the cacti project. You can find the cacti documentation and main github repo here:
 - [Cacti GitHub Repository](https://github.com/Cacti/cacti/tree/1.2.x)
 - [Cacti Documentation](https://www.github.com/Cacti/documentation)
-
-
 
 ## Instructions
 When assisting with tasks, follow these guidelines:
