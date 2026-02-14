@@ -34,23 +34,20 @@ set_default_action();
 cacti_session_close();
 
 switch (get_request_var('action')) {
-    case 'site_scan':
-        mactrack_site_scan(true);
+	case 'site_scan':
+		mactrack_site_scan(true);
 
-        break;
+		break;
+	case 'rescan':
+		mactrack_rescan(true);
 
-    case 'rescan':
-        mactrack_rescan(true);
+		break;
+	case 'enable':
+		mactrack_enable();
 
-        break;
+		break;
+	case 'disable':
+		mactrack_disable();
 
-    case 'enable':
-        mactrack_enable();
-
-        break;
-
-    case 'disable':
-        mactrack_disable();
-
-        break;
+		break;
 }

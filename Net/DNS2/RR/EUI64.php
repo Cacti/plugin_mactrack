@@ -27,102 +27,100 @@
  * |															   |
  * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
  */
-class Net_DNS2_RR_EUI64 extends Net_DNS2_RR
-{
-    // The EUI64 address, in hex format
-    public $address;
+class Net_DNS2_RR_EUI64 extends Net_DNS2_RR {
+	// The EUI64 address, in hex format
+	public $address;
 
-    /**
-     * method to return the rdata portion of the packet as a string.
-     *
-     * @return string
-     */
-    protected function rrToString()
-    {
-        return $this->address;
-    }
+	/**
+	 * method to return the rdata portion of the packet as a string.
+	 *
+	 * @return string
+	 */
+	protected function rrToString() {
+		return $this->address;
+	}
 
-    /**
-     * parses the rdata portion from a standard DNS config line.
-     *
-     * @param array $rdata a string split line of values for the rdata
-     *
-     * @return bool
-     */
-    protected function rrFromString(array $rdata)
-    {
-        $value = array_shift($rdata);
+	/**
+	 * parses the rdata portion from a standard DNS config line.
+	 *
+	 * @param array $rdata a string split line of values for the rdata
+	 *
+	 * @return bool
+	 */
+	protected function rrFromString(array $rdata) {
+		$value = array_shift($rdata);
 
-        //
-        // re: RFC 7043, the field must be represented as 8 two-digit hex numbers
-        // separated by hyphens.
-        //
-        $a = explode('-', $value);
-        if (8 != cacti_sizeof($a)) {
-            return false;
-        }
+		//
+		// re: RFC 7043, the field must be represented as 8 two-digit hex numbers
+		// separated by hyphens.
+		//
+		$a = explode('-', $value);
 
-        //
-        // make sure they're all hex values
-        //
-        foreach ($a as $i) {
-            if (false == ctype_xdigit($i)) {
-                return false;
-            }
-        }
+		if (cacti_sizeof($a) != 8) {
+			return false;
+		}
 
-        //
-        // store it
-        //
-        $this->address = strtolower($value);
+		//
+		// make sure they're all hex values
+		//
+		foreach ($a as $i) {
+			if (ctype_xdigit($i) == false) {
+				return false;
+			}
+		}
 
-        return true;
-    }
+		//
+		// store it
+		//
+		$this->address = strtolower($value);
 
-    /**
-     * parses the rdata of the Net_DNS2_Packet object.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
-     *
-     * @return bool
-     */
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        if ($this->rdlength > 0) {
-            $x = unpack('C8', $this->rdata);
-            if (8 == cacti_sizeof($x)) {
-                $this->address = vsprintf(
-                    '%02x-%02x-%02x-%02x-%02x-%02x-%02x-%02x',
-                    $x
-                );
+		return true;
+	}
 
-                return true;
-            }
-        }
+	/**
+	 * parses the rdata of the Net_DNS2_Packet object.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
+	 *
+	 * @return bool
+	 */
+	protected function rrSet(Net_DNS2_Packet &$packet) {
+		if ($this->rdlength > 0) {
+			$x = unpack('C8', $this->rdata);
 
-        return false;
-    }
+			if (cacti_sizeof($x) == 8) {
+				$this->address = vsprintf(
+					'%02x-%02x-%02x-%02x-%02x-%02x-%02x-%02x',
+					$x
+				);
 
-    /**
-     * returns the rdata portion of the DNS packet.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-     *                                 compressed names
-     *
-     * @return mixed either returns a binary packed
-     *               string or null on failure
-     */
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        $data = '';
+				return true;
+			}
+		}
 
-        $a = explode('-', $this->address);
-        foreach ($a as $b) {
-            $data .= chr(hexdec($b));
-        }
+		return false;
+	}
 
-        $packet->offset += 8;
+	/**
+	 * returns the rdata portion of the DNS packet.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
+	 *                                 compressed names
+	 *
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
+	 */
+	protected function rrGet(Net_DNS2_Packet &$packet) {
+		$data = '';
 
-        return $data;
-    }
+		$a = explode('-', $this->address);
+
+		foreach ($a as $b) {
+			$data .= chr(hexdec($b));
+		}
+
+		$packet->offset += 8;
+
+		return $data;
+	}
 }

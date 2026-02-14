@@ -28,185 +28,179 @@
  * Generally, query (recursive) lookups are done against caching server, while
  * notify requests are done against authoritative servers.
  */
-class Net_DNS2_Notifier extends Net_DNS2
-{
-    // a Net_DNS2_Packet_Request object used for the notify request
-    private $_packet;
+class Net_DNS2_Notifier extends Net_DNS2 {
+	// a Net_DNS2_Packet_Request object used for the notify request
+	private $_packet;
 
-    /**
-     * Constructor - builds a new Net_DNS2_Notifier objected used for doing
-     * DNS notification for a changed zone.
-     *
-     * @param string $zone    the domain name to use for DNS updates
-     * @param mixed  $options an array of config options or null
-     *
-     * @throws Net_DNS2_Exception
-     */
-    public function __construct($zone, ?array $options = null)
-    {
-        parent::__construct($options);
+	/**
+	 * Constructor - builds a new Net_DNS2_Notifier objected used for doing
+	 * DNS notification for a changed zone.
+	 *
+	 * @param string $zone    the domain name to use for DNS updates
+	 * @param mixed  $options an array of config options or null
+	 *
+	 * @throws Net_DNS2_Exception
+	 */
+	public function __construct($zone, ?array $options = null) {
+		parent::__construct($options);
 
-        //
-        // create the packet
-        //
-        $this->_packet = new Net_DNS2_Packet_Request(
-            strtolower(trim($zone, " \n\r\t.")),
-            'SOA',
-            'IN'
-        );
+		//
+		// create the packet
+		//
+		$this->_packet = new Net_DNS2_Packet_Request(
+			strtolower(trim($zone, " \n\r\t.")),
+			'SOA',
+			'IN'
+		);
 
-        //
-        // make sure the opcode on the packet is set to NOTIFY
-        //
-        $this->_packet->header->opcode = Net_DNS2_Lookups::OPCODE_NOTIFY;
-    }
+		//
+		// make sure the opcode on the packet is set to NOTIFY
+		//
+		$this->_packet->header->opcode = Net_DNS2_Lookups::OPCODE_NOTIFY;
+	}
 
-    /**
-     *	 3.7 - Add RR to notify.
-     *
-     * @param Net_DNS2_RR $rr the Net_DNS2_RR object to be sent in the notify message
-     *
-     * @return bool
-     *
-     * @throws Net_DNS2_Exception
-     */
-    public function add(Net_DNS2_RR $rr)
-    {
-        $this->_checkName($rr->name);
-        //
-        // add the RR to the "notify" section
-        //
-        if (!in_array($rr, $this->_packet->answer)) {
-            $this->_packet->answer[] = $rr;
-        }
+	/**
+	 *	 3.7 - Add RR to notify.
+	 *
+	 * @param Net_DNS2_RR $rr the Net_DNS2_RR object to be sent in the notify message
+	 *
+	 * @return bool
+	 *
+	 * @throws Net_DNS2_Exception
+	 */
+	public function add(Net_DNS2_RR $rr) {
+		$this->_checkName($rr->name);
 
-        return true;
-    }
+		//
+		// add the RR to the "notify" section
+		//
+		if (!in_array($rr, $this->_packet->answer, true)) {
+			$this->_packet->answer[] = $rr;
+		}
 
-    /**
-     * add a signature to the request for authentication.
-     *
-     * @param string $keyname   the key name to use for the TSIG RR
-     * @param string $signature the key to sign the request
-     * @param mixed  $algorithm
-     *
-     * @return bool
-     *
-     * @see		   Net_DNS2::signTSIG()
-     * @deprecated function deprecated in 1.1.0
-     */
-    public function signature($keyname, $signature, $algorithm = Net_DNS2_RR_TSIG::HMAC_MD5)
-    {
-        return $this->signTSIG($keyname, $signature, $algorithm);
-    }
+		return true;
+	}
 
-    /**
-     * returns the current internal packet object.
-     *
-     * @return Net_DNS2_Packet_Request
-     */
-    public function packet()
-    {
-        //
-        // take a copy
-        //
-        $p = $this->_packet;
+	/**
+	 * add a signature to the request for authentication.
+	 *
+	 * @param string $keyname   the key name to use for the TSIG RR
+	 * @param string $signature the key to sign the request
+	 * @param mixed  $algorithm
+	 *
+	 * @return bool
+	 *
+	 * @see		   Net_DNS2::signTSIG()
+	 * @deprecated function deprecated in 1.1.0
+	 */
+	public function signature($keyname, $signature, $algorithm = Net_DNS2_RR_TSIG::HMAC_MD5) {
+		return $this->signTSIG($keyname, $signature, $algorithm);
+	}
 
-        //
-        // check for an authentication method; either TSIG or SIG
-        //
-        if (($this->auth_signature instanceof Net_DNS2_RR_TSIG)
-            || ($this->auth_signature instanceof Net_DNS2_RR_SIG)
-        ) {
-            $p->additional[] = $this->auth_signature;
-        }
+	/**
+	 * returns the current internal packet object.
+	 *
+	 * @return Net_DNS2_Packet_Request
+	 */
+	public function packet() {
+		//
+		// take a copy
+		//
+		$p = $this->_packet;
 
-        //
-        // update the counts
-        //
-        $p->header->qdcount = cacti_sizeof($p->question);
-        $p->header->ancount = cacti_sizeof($p->answer);
-        $p->header->nscount = cacti_sizeof($p->authority);
-        $p->header->arcount = cacti_sizeof($p->additional);
+		//
+		// check for an authentication method; either TSIG or SIG
+		//
+		if (($this->auth_signature instanceof Net_DNS2_RR_TSIG)
+			|| ($this->auth_signature instanceof Net_DNS2_RR_SIG)
+		) {
+			$p->additional[] = $this->auth_signature;
+		}
 
-        return $p;
-    }
+		//
+		// update the counts
+		//
+		$p->header->qdcount = cacti_sizeof($p->question);
+		$p->header->ancount = cacti_sizeof($p->answer);
+		$p->header->nscount = cacti_sizeof($p->authority);
+		$p->header->arcount = cacti_sizeof($p->additional);
 
-    /**
-     * executes the notify request.
-     *
-     * @param Net_DNS2_Packet_Response &$response ref to the response object
-     *
-     * @return bool
-     *
-     * @throws Net_DNS2_Exception
-     */
-    public function notify(&$response = null)
-    {
-        //
-        // check for an authentication method; either TSIG or SIG
-        //
-        if (($this->auth_signature instanceof Net_DNS2_RR_TSIG)
-            || ($this->auth_signature instanceof Net_DNS2_RR_SIG)
-        ) {
-            $this->_packet->additional[] = $this->auth_signature;
-        }
+		return $p;
+	}
 
-        //
-        // update the counts
-        //
-        $this->_packet->header->qdcount = cacti_sizeof($this->_packet->question);
-        $this->_packet->header->ancount = cacti_sizeof($this->_packet->answer);
-        $this->_packet->header->nscount = cacti_sizeof($this->_packet->authority);
-        $this->_packet->header->arcount = cacti_sizeof($this->_packet->additional);
+	/**
+	 * executes the notify request.
+	 *
+	 * @param Net_DNS2_Packet_Response &$response ref to the response object
+	 *
+	 * @return bool
+	 *
+	 * @throws Net_DNS2_Exception
+	 */
+	public function notify(&$response = null) {
+		//
+		// check for an authentication method; either TSIG or SIG
+		//
+		if (($this->auth_signature instanceof Net_DNS2_RR_TSIG)
+			|| ($this->auth_signature instanceof Net_DNS2_RR_SIG)
+		) {
+			$this->_packet->additional[] = $this->auth_signature;
+		}
 
-        //
-        // make sure we have some data to send
-        //
-        if (0 == $this->_packet->header->qdcount) {
-            throw new Net_DNS2_Exception(
-                'empty headers- nothing to send!',
-                Net_DNS2_Lookups::E_PACKET_INVALID
-            );
-        }
+		//
+		// update the counts
+		//
+		$this->_packet->header->qdcount = cacti_sizeof($this->_packet->question);
+		$this->_packet->header->ancount = cacti_sizeof($this->_packet->answer);
+		$this->_packet->header->nscount = cacti_sizeof($this->_packet->authority);
+		$this->_packet->header->arcount = cacti_sizeof($this->_packet->additional);
 
-        //
-        // send the packet and get back the response
-        //
-        $response = $this->sendPacket($this->_packet, $this->use_tcp);
+		//
+		// make sure we have some data to send
+		//
+		if ($this->_packet->header->qdcount == 0) {
+			throw new Net_DNS2_Exception(
+				'empty headers- nothing to send!',
+				Net_DNS2_Lookups::E_PACKET_INVALID
+			);
+		}
 
-        //
-        // clear the internal packet so if we make another request, we don't have
-        // old data being sent.
-        //
-        $this->_packet->reset();
+		//
+		// send the packet and get back the response
+		//
+		$response = $this->sendPacket($this->_packet, $this->use_tcp);
 
-        //
-        // for notifies, we just need to know it worked- we don't actually need to
-        // return the response object
-        //
-        return true;
-    }
+		//
+		// clear the internal packet so if we make another request, we don't have
+		// old data being sent.
+		//
+		$this->_packet->reset();
 
-    /**
-     * checks that the given name matches the name for the zone we're notifying.
-     *
-     * @param string $name the name to be checked
-     *
-     * @return bool
-     *
-     * @throws Net_DNS2_Exception
-     */
-    private function _checkName($name)
-    {
-        if (!preg_match('/'.$this->_packet->question[0]->qname.'$/', $name)) {
-            throw new Net_DNS2_Exception(
-                'name provided ('.$name.') does not match zone name ('
-                .$this->_packet->question[0]->qname.')',
-                Net_DNS2_Lookups::E_PACKET_INVALID
-            );
-        }
+		//
+		// for notifies, we just need to know it worked- we don't actually need to
+		// return the response object
+		//
+		return true;
+	}
 
-        return true;
-    }
+	/**
+	 * checks that the given name matches the name for the zone we're notifying.
+	 *
+	 * @param string $name the name to be checked
+	 *
+	 * @return bool
+	 *
+	 * @throws Net_DNS2_Exception
+	 */
+	private function _checkName($name) {
+		if (!preg_match('/' . $this->_packet->question[0]->qname . '$/', $name)) {
+			throw new Net_DNS2_Exception(
+				'name provided (' . $name . ') does not match zone name ('
+				. $this->_packet->question[0]->qname . ')',
+				Net_DNS2_Lookups::E_PACKET_INVALID
+			);
+		}
+
+		return true;
+	}
 }

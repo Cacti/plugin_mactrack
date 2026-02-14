@@ -28,76 +28,71 @@
  *    /                                               /
  *    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  */
-class Net_DNS2_RR_RP extends Net_DNS2_RR
-{
-    // mailbox for the responsible person
-    public $mboxdname;
+class Net_DNS2_RR_RP extends Net_DNS2_RR {
+	// mailbox for the responsible person
+	public $mboxdname;
 
-    // is a domain name for which TXT RR's exists
-    public $txtdname;
+	// is a domain name for which TXT RR's exists
+	public $txtdname;
 
-    /**
-     * method to return the rdata portion of the packet as a string.
-     *
-     * @return string
-     */
-    protected function rrToString()
-    {
-        return $this->cleanString($this->mboxdname).'. '.$this->cleanString($this->txtdname).'.';
-    }
+	/**
+	 * method to return the rdata portion of the packet as a string.
+	 *
+	 * @return string
+	 */
+	protected function rrToString() {
+		return $this->cleanString($this->mboxdname) . '. ' . $this->cleanString($this->txtdname) . '.';
+	}
 
-    /**
-     * parses the rdata portion from a standard DNS config line.
-     *
-     * @param array $rdata a string split line of values for the rdata
-     *
-     * @return bool
-     */
-    protected function rrFromString(array $rdata)
-    {
-        $this->mboxdname = $this->cleanString($rdata[0]);
-        $this->txtdname = $this->cleanString($rdata[1]);
+	/**
+	 * parses the rdata portion from a standard DNS config line.
+	 *
+	 * @param array $rdata a string split line of values for the rdata
+	 *
+	 * @return bool
+	 */
+	protected function rrFromString(array $rdata) {
+		$this->mboxdname = $this->cleanString($rdata[0]);
+		$this->txtdname  = $this->cleanString($rdata[1]);
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * parses the rdata of the Net_DNS2_Packet object.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
-     *
-     * @return bool
-     */
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        if ($this->rdlength > 0) {
-            $offset = $packet->offset;
+	/**
+	 * parses the rdata of the Net_DNS2_Packet object.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
+	 *
+	 * @return bool
+	 */
+	protected function rrSet(Net_DNS2_Packet &$packet) {
+		if ($this->rdlength > 0) {
+			$offset = $packet->offset;
 
-            $this->mboxdname = Net_DNS2_Packet::expand($packet, $offset, true);
-            $this->txtdname = Net_DNS2_Packet::expand($packet, $offset);
+			$this->mboxdname = Net_DNS2_Packet::expand($packet, $offset, true);
+			$this->txtdname  = Net_DNS2_Packet::expand($packet, $offset);
 
-            return true;
-        }
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * returns the rdata portion of the DNS packet.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-     *                                 compressed names
-     *
-     * @return mixed either returns a binary packed
-     *               string or null on failure
-     */
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        if (strlen($this->mboxdname) > 0) {
-            return $packet->compress($this->mboxdname, $packet->offset)
-                .$packet->compress($this->txtdname, $packet->offset);
-        }
+	/**
+	 * returns the rdata portion of the DNS packet.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
+	 *                                 compressed names
+	 *
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
+	 */
+	protected function rrGet(Net_DNS2_Packet &$packet) {
+		if (strlen($this->mboxdname) > 0) {
+			return $packet->compress($this->mboxdname, $packet->offset)
+				. $packet->compress($this->txtdname, $packet->offset);
+		}
 
-        return null;
-    }
+		return null;
+	}
 }

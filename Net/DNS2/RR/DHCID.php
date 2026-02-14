@@ -30,111 +30,107 @@
  *    /                                               /
  *    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  */
-class Net_DNS2_RR_DHCID extends Net_DNS2_RR
-{
-    // Identifier type
-    public $id_type;
+class Net_DNS2_RR_DHCID extends Net_DNS2_RR {
+	// Identifier type
+	public $id_type;
 
-    // Digest Type
-    public $digest_type;
+	// Digest Type
+	public $digest_type;
 
-    // The digest
-    public $digest;
+	// The digest
+	public $digest;
 
-    /**
-     * method to return the rdata portion of the packet as a string.
-     *
-     * @return string
-     */
-    protected function rrToString()
-    {
-        $out = pack('nC', $this->id_type, $this->digest_type);
-        $out .= base64_decode($this->digest);
+	/**
+	 * method to return the rdata portion of the packet as a string.
+	 *
+	 * @return string
+	 */
+	protected function rrToString() {
+		$out = pack('nC', $this->id_type, $this->digest_type);
+		$out .= base64_decode($this->digest, true);
 
-        return base64_encode($out);
-    }
+		return base64_encode($out);
+	}
 
-    /**
-     * parses the rdata portion from a standard DNS config line.
-     *
-     * @param array $rdata a string split line of values for the rdata
-     *
-     * @return bool
-     */
-    protected function rrFromString(array $rdata)
-    {
-        $data = base64_decode(array_shift($rdata));
-        if (strlen($data) > 0) {
-            //
-            // unpack the id type and digest type
-            //
-            $x = unpack('nid_type/Cdigest_type', $data);
+	/**
+	 * parses the rdata portion from a standard DNS config line.
+	 *
+	 * @param array $rdata a string split line of values for the rdata
+	 *
+	 * @return bool
+	 */
+	protected function rrFromString(array $rdata) {
+		$data = base64_decode(array_shift($rdata), true);
 
-            $this->id_type = $x['id_type'];
-            $this->digest_type = $x['digest_type'];
+		if (strlen($data) > 0) {
+			//
+			// unpack the id type and digest type
+			//
+			$x = unpack('nid_type/Cdigest_type', $data);
 
-            //
-            // copy out the digest
-            //
-            $this->digest = base64_encode(substr($data, 3, strlen($data) - 3));
+			$this->id_type     = $x['id_type'];
+			$this->digest_type = $x['digest_type'];
 
-            return true;
-        }
+			//
+			// copy out the digest
+			//
+			$this->digest = base64_encode(substr($data, 3, strlen($data) - 3));
 
-        return false;
-    }
+			return true;
+		}
 
-    /**
-     * parses the rdata of the Net_DNS2_Packet object.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
-     *
-     * @return bool
-     */
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        if ($this->rdlength > 0) {
-            //
-            // unpack the id type and digest type
-            //
-            $x = unpack('nid_type/Cdigest_type', $this->rdata);
+		return false;
+	}
 
-            $this->id_type = $x['id_type'];
-            $this->digest_type = $x['digest_type'];
+	/**
+	 * parses the rdata of the Net_DNS2_Packet object.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
+	 *
+	 * @return bool
+	 */
+	protected function rrSet(Net_DNS2_Packet &$packet) {
+		if ($this->rdlength > 0) {
+			//
+			// unpack the id type and digest type
+			//
+			$x = unpack('nid_type/Cdigest_type', $this->rdata);
 
-            //
-            // copy out the digest
-            //
-            $this->digest = base64_encode(
-                substr($this->rdata, 3, $this->rdlength - 3)
-            );
+			$this->id_type     = $x['id_type'];
+			$this->digest_type = $x['digest_type'];
 
-            return true;
-        }
+			//
+			// copy out the digest
+			//
+			$this->digest = base64_encode(
+				substr($this->rdata, 3, $this->rdlength - 3)
+			);
 
-        return false;
-    }
+			return true;
+		}
 
-    /**
-     * returns the rdata portion of the DNS packet.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-     *                                 compressed names
-     *
-     * @return mixed either returns a binary packed
-     *               string or null on failure
-     */
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        if (strlen($this->digest) > 0) {
-            $data = pack('nC', $this->id_type, $this->digest_type)
-                .base64_decode($this->digest);
+		return false;
+	}
 
-            $packet->offset += strlen($data);
+	/**
+	 * returns the rdata portion of the DNS packet.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
+	 *                                 compressed names
+	 *
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
+	 */
+	protected function rrGet(Net_DNS2_Packet &$packet) {
+		if (strlen($this->digest) > 0) {
+			$data = pack('nC', $this->id_type, $this->digest_type)
+				. base64_decode($this->digest, true);
 
-            return $data;
-        }
+			$packet->offset += strlen($data);
 
-        return null;
-    }
+			return $data;
+		}
+
+		return null;
+	}
 }

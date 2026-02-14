@@ -27,91 +27,86 @@
  *  |     Locator32 (16 LSBs)       |
  *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
  */
-class Net_DNS2_RR_L32 extends Net_DNS2_RR
-{
-    // The preference
-    public $preference;
+class Net_DNS2_RR_L32 extends Net_DNS2_RR {
+	// The preference
+	public $preference;
 
-    // The locator32 field
-    public $locator32;
+	// The locator32 field
+	public $locator32;
 
-    /**
-     * method to return the rdata portion of the packet as a string.
-     *
-     * @return string
-     */
-    protected function rrToString()
-    {
-        return $this->preference.' '.$this->locator32;
-    }
+	/**
+	 * method to return the rdata portion of the packet as a string.
+	 *
+	 * @return string
+	 */
+	protected function rrToString() {
+		return $this->preference . ' ' . $this->locator32;
+	}
 
-    /**
-     * parses the rdata portion from a standard DNS config line.
-     *
-     * @param array $rdata a string split line of values for the rdata
-     *
-     * @return bool
-     */
-    protected function rrFromString(array $rdata)
-    {
-        $this->preference = array_shift($rdata);
-        $this->locator32 = array_shift($rdata);
+	/**
+	 * parses the rdata portion from a standard DNS config line.
+	 *
+	 * @param array $rdata a string split line of values for the rdata
+	 *
+	 * @return bool
+	 */
+	protected function rrFromString(array $rdata) {
+		$this->preference = array_shift($rdata);
+		$this->locator32  = array_shift($rdata);
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * parses the rdata of the Net_DNS2_Packet object.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
-     *
-     * @return bool
-     */
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        if ($this->rdlength > 0) {
-            //
-            // unpack the values
-            //
-            $x = unpack('npreference/C4locator', $this->rdata);
+	/**
+	 * parses the rdata of the Net_DNS2_Packet object.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
+	 *
+	 * @return bool
+	 */
+	protected function rrSet(Net_DNS2_Packet &$packet) {
+		if ($this->rdlength > 0) {
+			//
+			// unpack the values
+			//
+			$x = unpack('npreference/C4locator', $this->rdata);
 
-            $this->preference = $x['preference'];
+			$this->preference = $x['preference'];
 
-            //
-            // build the locator value
-            //
-            $this->locator32 = $x['locator1'].'.'.$x['locator2'].'.'
-                .$x['locator3'].'.'.$x['locator4'];
+			//
+			// build the locator value
+			//
+			$this->locator32 = $x['locator1'] . '.' . $x['locator2'] . '.'
+				. $x['locator3'] . '.' . $x['locator4'];
 
-            return true;
-        }
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * returns the rdata portion of the DNS packet.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-     *                                 compressed names
-     *
-     * @return mixed either returns a binary packed
-     *               string or null on failure
-     */
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        if (strlen($this->locator32) > 0) {
-            //
-            // break out the locator value
-            //
-            $n = explode('.', $this->locator32);
+	/**
+	 * returns the rdata portion of the DNS packet.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
+	 *                                 compressed names
+	 *
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
+	 */
+	protected function rrGet(Net_DNS2_Packet &$packet) {
+		if (strlen($this->locator32) > 0) {
+			//
+			// break out the locator value
+			//
+			$n = explode('.', $this->locator32);
 
-            //
-            // pack the data
-            //
-            return pack('nC4', $this->preference, $n[0], $n[1], $n[2], $n[3]);
-        }
+			//
+			// pack the data
+			//
+			return pack('nC4', $this->preference, $n[0], $n[1], $n[2], $n[3]);
+		}
 
-        return null;
-    }
+		return null;
+	}
 }

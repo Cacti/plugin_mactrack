@@ -29,411 +29,404 @@ include './include/auth.php';
 include_once './plugins/mactrack/lib/mactrack_functions.php';
 
 $maca_actions = [
-    1 => __('Delete', 'mactrack'),
+	1 => __('Delete', 'mactrack'),
 ];
 
 set_default_action();
 
 switch (get_request_var('action')) {
-    case 'save':
-        form_save();
+	case 'save':
+		form_save();
 
-        break;
+		break;
+	case 'actions':
+		form_actions();
 
-    case 'actions':
-        form_actions();
+		break;
+	case 'edit':
+		top_header();
+		mactrack_maca_edit();
+		bottom_footer();
 
-        break;
+		break;
+	default:
+		top_header();
+		mactrack_maca();
+		bottom_footer();
 
-    case 'edit':
-        top_header();
-        mactrack_maca_edit();
-        bottom_footer();
-
-        break;
-
-    default:
-        top_header();
-        mactrack_maca();
-        bottom_footer();
-
-        break;
+		break;
 }
 
 /* --------------------------
-    The Save Function
+	The Save Function
    -------------------------- */
 
-function form_save()
-{
-    if (isset_request_var('save_component_maca') && isempty_request_var('add_dq_y')) {
-        $mac_id = api_mactrack_maca_save(
-            get_filter_request_var('mac_id'),
-            get_nfilter_request_var('mac_address'),
-            get_nfilter_request_var('description')
-        );
+function form_save() {
+	if (isset_request_var('save_component_maca') && isempty_request_var('add_dq_y')) {
+		$mac_id = api_mactrack_maca_save(
+			get_filter_request_var('mac_id'),
+			get_nfilter_request_var('mac_address'),
+			get_nfilter_request_var('description')
+		);
 
-        if ($mac_id) {
-            raise_message(1);
-        } else {
-            raise_message(2);
-        }
+		if ($mac_id) {
+			raise_message(1);
+		} else {
+			raise_message(2);
+		}
 
-        header('Location: mactrack_macauth.php?action=edit&id='.(empty($mac_id) ? get_request_var('mac_id') : $mac_id));
-    }
+		header('Location: mactrack_macauth.php?action=edit&id=' . (empty($mac_id) ? get_request_var('mac_id') : $mac_id));
+	}
 }
 
 /* ------------------------
-    The 'actions' function
+	The 'actions' function
    ------------------------ */
 
-function form_actions()
-{
-    global $config, $maca_actions, $fields_mactrack_maca_edit;
+function form_actions() {
+	global $config, $maca_actions, $fields_mactrack_maca_edit;
 
-    // ================= input validation =================
-    get_filter_request_var('drp_action');
-    // ====================================================
+	// ================= input validation =================
+	get_filter_request_var('drp_action');
+	// ====================================================
 
-    // if we are to save this form, instead of display it
-    if (isset_request_var('selected_items')) {
-        $selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
+	// if we are to save this form, instead of display it
+	if (isset_request_var('selected_items')) {
+		$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
 
-        if (false != $selected_items) {
-            if ('1' == get_request_var('drp_action')) { // Delete
-                for ($i = 0; $i < cacti_sizeof($selected_items); ++$i) {
-                    api_mactrack_maca_remove($selected_items[$i]);
-                }
-            }
+		if ($selected_items != false) {
+			if (get_request_var('drp_action') == '1') { // Delete
+				for ($i = 0; $i < cacti_sizeof($selected_items); ++$i) {
+					api_mactrack_maca_remove($selected_items[$i]);
+				}
+			}
 
-            header('Location: mactrack_macauth.php');
+			header('Location: mactrack_macauth.php');
 
-            exit;
-        }
-    }
+			exit;
+		}
+	}
 
-    // setup some variables
-    $maca_list = '';
-    $i = 0;
+	// setup some variables
+	$maca_list = '';
+	$i         = 0;
 
-    // loop through each of the mac authorization items selected on the previous page and get more info about them
-    foreach ($_POST as $var => $val) {
-        if (preg_match('/^chk_([0-9]+)$/', $var, $matches)) {
-            // ================= input validation =================
-            input_validate_input_number($matches[1]);
-            // ====================================================
+	// loop through each of the mac authorization items selected on the previous page and get more info about them
+	foreach ($_POST as $var => $val) {
+		if (preg_match('/^chk_([0-9]+)$/', $var, $matches)) {
+			// ================= input validation =================
+			input_validate_input_number($matches[1]);
+			// ====================================================
 
-            $maca_info = db_fetch_cell_prepared(
-                'SELECT mac_address
+			$maca_info = db_fetch_cell_prepared(
+				'SELECT mac_address
 				FROM mac_track_macauth
 				WHERE mac_id = ?',
-                [$matches[1]]
-            );
+				[$matches[1]]
+			);
 
-            $maca_list .= '<li>'.$maca_info.'</li>';
-            $maca_array[$i] = $matches[1];
-            ++$i;
-        }
-    }
+			$maca_list .= '<li>' . $maca_info . '</li>';
+			$maca_array[$i] = $matches[1];
+			++$i;
+		}
+	}
 
-    top_header();
+	top_header();
 
-    html_start_box($maca_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
+	html_start_box($maca_actions[get_request_var('drp_action')], '60%', '', '3', 'center', '');
 
-    form_start('mactrack_macauth.php');
+	form_start('mactrack_macauth.php');
 
-    if (!isset($maca_array)) {
-        echo "<tr><td class='even'><span class='textError'>".__('You must select at least one Authorized Mac to delete.', 'mactrack')."</span></td></tr>\n";
-        $save_html = '';
-    } else {
-        $save_html = "<button type='submit' name='save' class='ui-button ui-corner-all ui-widget ui-state-active'>".__esc('Continue', 'mactrack').'</button>';
+	if (!isset($maca_array)) {
+		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one Authorized Mac to delete.', 'mactrack') . "</span></td></tr>\n";
+		$save_html = '';
+	} else {
+		$save_html = "<button type='submit' name='save' class='ui-button ui-corner-all ui-widget ui-state-active'>" . __esc('Continue', 'mactrack') . '</button>';
 
-        if ('1' == get_request_var('drp_action')) { // Delete
-            echo "<tr>
+		if (get_request_var('drp_action') == '1') { // Delete
+			print "<tr>
 				<td class='textArea'>
-					<p>".__('Click \'Continue\' to delete the following Authorized Mac\'s?', 'mactrack')."</p>
+					<p>" . __('Click \'Continue\' to delete the following Authorized Mac\'s?', 'mactrack') . "</p>
 					<ul>{$maca_list}</ul>
 				</td>
 			</tr>";
-        }
-    }
+		}
+	}
 
-    echo "<tr>
+	print "<tr>
 		<td colspan='2' align='right' class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
-			<input type='hidden' name='selected_items' value='".(isset($maca_array) ? serialize($maca_array) : '')."'>
-			<input type='hidden' name='drp_action' value='".get_request_var('drp_action')."'>".('' != $save_html ? "
-			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>".__esc('Cancel', 'mactrack')."</button>
-			{$save_html}" : "<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>".__esc('Return', 'mactrack').'</button>').'
+			<input type='hidden' name='selected_items' value='" . (isset($maca_array) ? serialize($maca_array) : '') . "'>
+			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . ($save_html != '' ? "
+			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'mactrack') . "</button>
+			{$save_html}" : "<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Return', 'mactrack') . '</button>') . '
 		</td>
 	</tr>';
 
-    html_end_box();
+	html_end_box();
 
-    bottom_footer();
+	bottom_footer();
 }
 
-function api_mactrack_maca_save($mac_id, $mac_address, $description)
-{
-    $save['mac_id'] = $mac_id;
-    $save['mac_address'] = form_input_validate($mac_address, 'mac_address', '', false, 3);
-    $save['description'] = form_input_validate($description, 'description', '', false, 3);
-    $save['added_date'] = date('Y-m-d H:i:s');
-    $save['added_by'] = $_SESSION['sess_user_id'];
+function api_mactrack_maca_save($mac_id, $mac_address, $description) {
+	$save['mac_id']      = $mac_id;
+	$save['mac_address'] = form_input_validate($mac_address, 'mac_address', '', false, 3);
+	$save['description'] = form_input_validate($description, 'description', '', false, 3);
+	$save['added_date']  = date('Y-m-d H:i:s');
+	$save['added_by']    = $_SESSION['sess_user_id'];
 
-    $mac_id = 0;
-    if (!is_error_message()) {
-        $mac_id = sql_save($save, 'mac_track_macauth', 'mac_address', false);
+	$mac_id = 0;
 
-        if ($mac_id) {
-            db_execute('UPDATE mac_track_ports
+	if (!is_error_message()) {
+		$mac_id = sql_save($save, 'mac_track_macauth', 'mac_address', false);
+
+		if ($mac_id) {
+			db_execute('UPDATE mac_track_ports
 				SET authorized=1
-				WHERE mac_address LIKE "'.$mac_address.'%"');
+				WHERE mac_address LIKE "' . $mac_address . '%"');
 
-            raise_message(1);
-        } else {
-            raise_message(2);
-        }
-    }
+			raise_message(1);
+		} else {
+			raise_message(2);
+		}
+	}
 
-    return $mac_id;
+	return $mac_id;
 }
 
-function api_mactrack_maca_remove($mac_id)
-{
-    $mac_address = db_fetch_cell_prepared(
-        'SELECT mac_address
+function api_mactrack_maca_remove($mac_id) {
+	$mac_address = db_fetch_cell_prepared(
+		'SELECT mac_address
 		FROM mac_track_macauth
 		WHERE mac_id = ?',
-        [$mac_id]
-    );
+		[$mac_id]
+	);
 
-    db_execute_prepared(
-        'DELETE FROM mac_track_macauth
+	db_execute_prepared(
+		'DELETE FROM mac_track_macauth
 		WHERE mac_id = ?',
-        [$mac_id]
-    );
+		[$mac_id]
+	);
 
-    db_execute_prepared('DELETE FROM mac_track_ips
-		WHERE mac_address="'.$mac_address.'"');
+	db_execute_prepared('DELETE FROM mac_track_ips
+		WHERE mac_address="' . $mac_address . '"');
 
-    db_execute_prepared('DELETE FROM mac_track_ports
-		WHERE mac_address="'.$mac_address.'"');
+	db_execute_prepared('DELETE FROM mac_track_ports
+		WHERE mac_address="' . $mac_address . '"');
 
-    db_execute_prepared('DELETE FROM mac_track_aggregated_ports
-		WHERE mac_address="'.$mac_address.'"');
+	db_execute_prepared('DELETE FROM mac_track_aggregated_ports
+		WHERE mac_address="' . $mac_address . '"');
 
-    cacti_log('AUDIT: MAC Address `'.$mac_address.'` is deleted from MacAuth by '
-        .db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', [$_SESSION['sess_user_id']]), false, 'MACTRACK');
+	cacti_log('AUDIT: MAC Address `' . $mac_address . '` is deleted from MacAuth by '
+		. db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', [$_SESSION['sess_user_id']]), false, 'MACTRACK');
 }
 
 /* ---------------------
-    MacAuth Functions
+	MacAuth Functions
    --------------------- */
 
-function mactrack_maca_get_maca_records(&$sql_where, $rows, $apply_limits = true)
-{
-    // form the 'where' clause for our main sql query
-    $sql_where = '';
-    if ('' != get_request_var('filter')) {
-        $sql_where = "WHERE (mac_address LIKE '%".str_replace(['-', '.', ':'], '', get_request_var('filter'))."%' OR "
-            ."description LIKE '%".get_request_var('filter')."%')";
-    }
+function mactrack_maca_get_maca_records(&$sql_where, $rows, $apply_limits = true) {
+	// form the 'where' clause for our main sql query
+	$sql_where = '';
 
-    $sql_order = get_order_string();
-    if ($apply_limits) {
-        $sql_limit = ' LIMIT '.($rows * (get_request_var('page') - 1)).','.$rows;
-    } else {
-        $sql_limit = '';
-    }
+	if (get_request_var('filter') != '') {
+		$sql_where = "WHERE (mac_address LIKE '%" . str_replace(['-', '.', ':'], '', get_request_var('filter')) . "%' OR "
+			. "description LIKE '%" . get_request_var('filter') . "%')";
+	}
 
-    $query_string = "SELECT *
+	$sql_order = get_order_string();
+
+	if ($apply_limits) {
+		$sql_limit = ' LIMIT ' . ($rows * (get_request_var('page') - 1)) . ',' . $rows;
+	} else {
+		$sql_limit = '';
+	}
+
+	$query_string = "SELECT *
 		FROM mac_track_macauth
 		{$sql_where}
 		{$sql_order}
 		{$sql_limit}";
 
-    return db_fetch_assoc($query_string);
+	return db_fetch_assoc($query_string);
 }
 
-function mactrack_maca_edit()
-{
-    global $fields_mactrack_maca_edit;
+function mactrack_maca_edit() {
+	global $fields_mactrack_maca_edit;
 
-    // ================= input validation =================
-    get_filter_request_var('mac_id');
-    // ====================================================
+	// ================= input validation =================
+	get_filter_request_var('mac_id');
+	// ====================================================
 
-    if (!isempty_request_var('mac_id')) {
-        $mac_record = db_fetch_row_prepared(
-            'SELECT *
+	if (!isempty_request_var('mac_id')) {
+		$mac_record = db_fetch_row_prepared(
+			'SELECT *
 			FROM mac_track_macauth
 			WHERE mac_id = ?',
-            [get_request_var('mac_id')]
-        );
+			[get_request_var('mac_id')]
+		);
 
-        $header_label = __('Mactrack MacAuth [edit: %s]', $mac_record['mac_address'], 'mactrack');
-    } else {
-        $header_label = __('Mactrack MacAuth [new]', 'mactrack');
-    }
+		$header_label = __('Mactrack MacAuth [edit: %s]', $mac_record['mac_address'], 'mactrack');
+	} else {
+		$header_label = __('Mactrack MacAuth [new]', 'mactrack');
+	}
 
-    form_start('mactrack_macauth.php', 'mactrack_macauth');
+	form_start('mactrack_macauth.php', 'mactrack_macauth');
 
-    html_start_box($header_label, '100%', '', '3', 'center', '');
+	html_start_box($header_label, '100%', '', '3', 'center', '');
 
-    draw_edit_form(
-        [
-            'config' => ['no_form_tag' => true],
-            'fields' => inject_form_variables($fields_mactrack_maca_edit, isset($mac_record) ? $mac_record : []),
-        ]
-    );
+	draw_edit_form(
+		[
+			'config' => ['no_form_tag' => true],
+			'fields' => inject_form_variables($fields_mactrack_maca_edit, isset($mac_record) ? $mac_record : []),
+		]
+	);
 
-    html_end_box();
+	html_end_box();
 
-    form_save_button('mactrack_macauth.php', 'return');
+	form_save_button('mactrack_macauth.php', 'return');
 }
 
-function mactrack_maca()
-{
-    global $maca_actions, $config, $item_rows;
+function mactrack_maca() {
+	global $maca_actions, $config, $item_rows;
 
-    // ================= input validation and session storage =================
-    $filters = [
-        'rows' => [
-            'filter' => FILTER_VALIDATE_INT,
-            'pageset' => true,
-            'default' => '-1',
-        ],
-        'page' => [
-            'filter' => FILTER_VALIDATE_INT,
-            'default' => '1',
-        ],
-        'filter' => [
-            'filter' => FILTER_CALLBACK,
-            'pageset' => true,
-            'default' => '',
-            'options' => ['options' => 'sanitize_search_string'],
-        ],
-        'sort_column' => [
-            'filter' => FILTER_CALLBACK,
-            'default' => 'added_date',
-            'options' => ['options' => 'sanitize_search_string'],
-        ],
-        'sort_direction' => [
-            'filter' => FILTER_CALLBACK,
-            'default' => 'DESC',
-            'options' => ['options' => 'sanitize_search_string'],
-        ],
-    ];
+	// ================= input validation and session storage =================
+	$filters = [
+		'rows' => [
+			'filter'  => FILTER_VALIDATE_INT,
+			'pageset' => true,
+			'default' => '-1',
+		],
+		'page' => [
+			'filter'  => FILTER_VALIDATE_INT,
+			'default' => '1',
+		],
+		'filter' => [
+			'filter'  => FILTER_CALLBACK,
+			'pageset' => true,
+			'default' => '',
+			'options' => ['options' => 'sanitize_search_string'],
+		],
+		'sort_column' => [
+			'filter'  => FILTER_CALLBACK,
+			'default' => 'added_date',
+			'options' => ['options' => 'sanitize_search_string'],
+		],
+		'sort_direction' => [
+			'filter'  => FILTER_CALLBACK,
+			'default' => 'DESC',
+			'options' => ['options' => 'sanitize_search_string'],
+		],
+	];
 
-    validate_store_request_vars($filters, 'sess_mt_maca');
-    // ================= input validation =================
+	validate_store_request_vars($filters, 'sess_mt_maca');
+	// ================= input validation =================
 
-    if (-1 == get_request_var('rows')) {
-        $rows = read_config_option('num_rows_table');
-    } elseif (-2 == get_request_var('rows')) {
-        $rows = 999999;
-    } else {
-        $rows = get_request_var('rows');
-    }
+	if (get_request_var('rows') == -1) {
+		$rows = read_config_option('num_rows_table');
+	} elseif (get_request_var('rows') == -2) {
+		$rows = 999999;
+	} else {
+		$rows = get_request_var('rows');
+	}
 
-    html_start_box(__('Mactrack MacAuth Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_macauth.php?action=edit');
-    mactrack_maca_filter();
-    html_end_box();
+	html_start_box(__('Mactrack MacAuth Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_macauth.php?action=edit');
+	mactrack_maca_filter();
+	html_end_box();
 
-    $sql_where = '';
+	$sql_where = '';
 
-    $maca = mactrack_maca_get_maca_records($sql_where, $rows);
+	$maca = mactrack_maca_get_maca_records($sql_where, $rows);
 
-    $total_rows = db_fetch_cell("SELECT count(*)
+	$total_rows = db_fetch_cell("SELECT count(*)
 		FROM mac_track_macauth
 		{$sql_where}");
 
-    $display_text = [
-        'mac_address' => [__('Mac Address', 'mactrack'), 'ASC'],
-        'nosort' => [__('Reason', 'mactrack'), 'ASC'],
-        'added_date' => [__('Added/Modified', 'mactrack'), 'ASC'],
-        'date_last_seen' => [__('By', 'mactrack'), 'ASC'],
-    ];
+	$display_text = [
+		'mac_address'    => [__('Mac Address', 'mactrack'), 'ASC'],
+		'nosort'         => [__('Reason', 'mactrack'), 'ASC'],
+		'added_date'     => [__('Added/Modified', 'mactrack'), 'ASC'],
+		'date_last_seen' => [__('By', 'mactrack'), 'ASC'],
+	];
 
-    $columns = cacti_sizeof($display_text) + 1;
+	$columns = cacti_sizeof($display_text) + 1;
 
-    $nav = html_nav_bar('mactrack_macauth.php?filter='.get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Authorized Mac Addresses', 'mactrack'), 'page', 'main');
+	$nav = html_nav_bar('mactrack_macauth.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, $columns, __('Authorized Mac Addresses', 'mactrack'), 'page', 'main');
 
-    form_start('mactrack_macauth.php', 'chk');
+	form_start('mactrack_macauth.php', 'chk');
 
-    echo $nav;
+	print $nav;
 
-    html_start_box('', '100%', '', '3', 'center', '');
+	html_start_box('', '100%', '', '3', 'center', '');
 
-    html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
+	html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 
-    if (cacti_sizeof($maca)) {
-        foreach ($maca as $mac) {
-            form_alternate_row('line'.$mac['mac_id'], true);
-            form_selectable_cell(filter_value(mactrack_format_mac($mac['mac_address']), get_request_var('filter'), 'mactrack_macauth.php?action=edit&mac_id='.$mac['mac_id']), $mac['mac_id']);
-            form_selectable_cell(filter_value($mac['description'], get_request_var('filter')), $mac['mac_id']);
-            form_selectable_cell($mac['added_date'], $mac['mac_id']);
-            form_selectable_cell(db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', [$mac['added_by']]), $mac['mac_id']);
-            form_checkbox_cell($mac['mac_address'], $mac['mac_id']);
-            form_end_row();
-        }
-    } else {
-        echo '<tr><td colspan="'.$columns.'"><em>'.__('No Authorized Mac Addresses Found', 'mactrack').'</em></td></tr>';
-    }
+	if (cacti_sizeof($maca)) {
+		foreach ($maca as $mac) {
+			form_alternate_row('line' . $mac['mac_id'], true);
+			form_selectable_cell(filter_value(mactrack_format_mac($mac['mac_address']), get_request_var('filter'), 'mactrack_macauth.php?action=edit&mac_id=' . $mac['mac_id']), $mac['mac_id']);
+			form_selectable_cell(filter_value($mac['description'], get_request_var('filter')), $mac['mac_id']);
+			form_selectable_cell($mac['added_date'], $mac['mac_id']);
+			form_selectable_cell(db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', [$mac['added_by']]), $mac['mac_id']);
+			form_checkbox_cell($mac['mac_address'], $mac['mac_id']);
+			form_end_row();
+		}
+	} else {
+		print '<tr><td colspan="' . $columns . '"><em>' . __('No Authorized Mac Addresses Found', 'mactrack') . '</em></td></tr>';
+	}
 
-    html_end_box(false);
+	html_end_box(false);
 
-    if (cacti_sizeof($maca)) {
-        echo $nav;
-    }
+	if (cacti_sizeof($maca)) {
+		print $nav;
+	}
 
-    draw_actions_dropdown($maca_actions);
+	draw_actions_dropdown($maca_actions);
 }
 
-function mactrack_maca_filter()
-{
-    global $item_rows;
+function mactrack_maca_filter() {
+	global $item_rows;
 
-    ?>
+	?>
 	<tr class='even'>
 		<td>
 			<form id='mactrack'>
 			<table class='filterTable'>
 				<tr>
 					<td>
-						<?php echo __('Search', 'mactrack'); ?>
+						<?php print __('Search', 'mactrack'); ?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='25' value='<?php echo get_request_var('filter'); ?>'>
+						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter'); ?>'>
 					</td>
 					<td>
-						<?php echo __('MAC\'s', 'mactrack'); ?>
+						<?php print __('MAC\'s', 'mactrack'); ?>
 					</td>
 					<td>
 						<select id='rows' onChange='applyFilter()'>
-							<option value='-1'<?php if ('-1' == get_request_var('rows')) {?> selected<?php }?>><?php echo __('Default', 'mactrack'); ?></option>
+							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack'); ?></option>
 							<?php
-                            if (cacti_sizeof($item_rows)) {
-                                foreach ($item_rows as $key => $value) {
-                                    echo "<option value='".$key."'";
-                                    if (get_request_var('rows') == $key) {
-                                        echo ' selected';
-                                    } echo '>'.$value.'</option>';
-                                }
-                            }
-    ?>
+							if (cacti_sizeof($item_rows)) {
+								foreach ($item_rows as $key => $value) {
+									print "<option value='" . $key . "'";
+
+									if (get_request_var('rows') == $key) {
+										print ' selected';
+									} print '>' . $value . '</option>';
+								}
+							}
+	?>
 						</select>
 					</td>
 					<td>
 						<span class='nowrap'>
-							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active'><?php echo __esc('Go'); ?></button>
-							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php echo __esc('Clear'); ?></button>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __esc('Go'); ?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget'><?php print __esc('Clear'); ?></button>
 						</span>
 					</td>
 				</tr>
 			</table>
-			<input type='hidden' id='page' value='<?php echo get_request_var('page'); ?>'>
+			<input type='hidden' id='page' value='<?php print get_request_var('page'); ?>'>
 			</form>
 			<script type='text/javascript'>
 

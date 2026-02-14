@@ -29,183 +29,181 @@
  *  /                                                               /
  *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|
  */
-class Net_DNS2_RR_CERT extends Net_DNS2_RR
-{
-    // format's allowed for certificates
-    public const CERT_FORMAT_RES = 0;
-    public const CERT_FORMAT_PKIX = 1;
-    public const CERT_FORMAT_SPKI = 2;
-    public const CERT_FORMAT_PGP = 3;
-    public const CERT_FORMAT_IPKIX = 4;
-    public const CERT_FORMAT_ISPKI = 5;
-    public const CERT_FORMAT_IPGP = 6;
-    public const CERT_FORMAT_ACPKIX = 7;
-    public const CERT_FORMAT_IACPKIX = 8;
-    public const CERT_FORMAT_URI = 253;
-    public const CERT_FORMAT_OID = 254;
+class Net_DNS2_RR_CERT extends Net_DNS2_RR {
+	// format's allowed for certificates
+	public const CERT_FORMAT_RES     = 0;
+	public const CERT_FORMAT_PKIX    = 1;
+	public const CERT_FORMAT_SPKI    = 2;
+	public const CERT_FORMAT_PGP     = 3;
+	public const CERT_FORMAT_IPKIX   = 4;
+	public const CERT_FORMAT_ISPKI   = 5;
+	public const CERT_FORMAT_IPGP    = 6;
+	public const CERT_FORMAT_ACPKIX  = 7;
+	public const CERT_FORMAT_IACPKIX = 8;
+	public const CERT_FORMAT_URI     = 253;
+	public const CERT_FORMAT_OID     = 254;
 
-    public $cert_format_name_to_id = [];
-    public $cert_format_id_to_name = [
-        self::CERT_FORMAT_RES => 'Reserved',
-        self::CERT_FORMAT_PKIX => 'PKIX',
-        self::CERT_FORMAT_SPKI => 'SPKI',
-        self::CERT_FORMAT_PGP => 'PGP',
-        self::CERT_FORMAT_IPKIX => 'IPKIX',
-        self::CERT_FORMAT_ISPKI => 'ISPKI',
-        self::CERT_FORMAT_IPGP => 'IPGP',
-        self::CERT_FORMAT_ACPKIX => 'ACPKIX',
-        self::CERT_FORMAT_IACPKIX => 'IACPKIX',
-        self::CERT_FORMAT_URI => 'URI',
-        self::CERT_FORMAT_OID => 'OID',
-    ];
+	public $cert_format_name_to_id = [];
+	public $cert_format_id_to_name = [
+		self::CERT_FORMAT_RES     => 'Reserved',
+		self::CERT_FORMAT_PKIX    => 'PKIX',
+		self::CERT_FORMAT_SPKI    => 'SPKI',
+		self::CERT_FORMAT_PGP     => 'PGP',
+		self::CERT_FORMAT_IPKIX   => 'IPKIX',
+		self::CERT_FORMAT_ISPKI   => 'ISPKI',
+		self::CERT_FORMAT_IPGP    => 'IPGP',
+		self::CERT_FORMAT_ACPKIX  => 'ACPKIX',
+		self::CERT_FORMAT_IACPKIX => 'IACPKIX',
+		self::CERT_FORMAT_URI     => 'URI',
+		self::CERT_FORMAT_OID     => 'OID',
+	];
 
-    // certificate format
-    public $format;
+	// certificate format
+	public $format;
 
-    // key tag
-    public $keytag;
+	// key tag
+	public $keytag;
 
-    // The algorithm used for the CERt
-    public $algorithm;
+	// The algorithm used for the CERt
+	public $algorithm;
 
-    // certificate
-    public $certificate;
+	// certificate
+	public $certificate;
 
-    /**
-     * we have our own constructor so that we can load our certificate
-     * information for parsing.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
-     * @param array           $rr      a array with parsed RR values
-     */
-    public function __construct(?Net_DNS2_Packet &$packet = null, ?array $rr = null)
-    {
-        parent::__construct($packet, $rr);
+	/**
+	 * we have our own constructor so that we can load our certificate
+	 * information for parsing.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
+	 * @param array           $rr      a array with parsed RR values
+	 */
+	public function __construct(?Net_DNS2_Packet &$packet = null, ?array $rr = null) {
+		parent::__construct($packet, $rr);
 
-        //
-        // load the lookup values
-        //
-        $this->cert_format_name_to_id = array_flip($this->cert_format_id_to_name);
-    }
+		//
+		// load the lookup values
+		//
+		$this->cert_format_name_to_id = array_flip($this->cert_format_id_to_name);
+	}
 
-    /**
-     * method to return the rdata portion of the packet as a string.
-     *
-     * @return string
-     */
-    protected function rrToString()
-    {
-        return $this->format.' '.$this->keytag.' '.$this->algorithm
-            .' '.base64_encode($this->certificate);
-    }
+	/**
+	 * method to return the rdata portion of the packet as a string.
+	 *
+	 * @return string
+	 */
+	protected function rrToString() {
+		return $this->format . ' ' . $this->keytag . ' ' . $this->algorithm
+			. ' ' . base64_encode($this->certificate);
+	}
 
-    /**
-     * parses the rdata portion from a standard DNS config line.
-     *
-     * @param array $rdata a string split line of values for the rdata
-     *
-     * @return bool
-     */
-    protected function rrFromString(array $rdata)
-    {
-        //
-        // load and check the format; can be an int, or a mnemonic symbol
-        //
-        $this->format = array_shift($rdata);
-        if (!is_numeric($this->format)) {
-            $mnemonic = strtoupper(trim($this->format));
-            if (!isset($this->cert_format_name_to_id[$mnemonic])) {
-                return false;
-            }
+	/**
+	 * parses the rdata portion from a standard DNS config line.
+	 *
+	 * @param array $rdata a string split line of values for the rdata
+	 *
+	 * @return bool
+	 */
+	protected function rrFromString(array $rdata) {
+		//
+		// load and check the format; can be an int, or a mnemonic symbol
+		//
+		$this->format = array_shift($rdata);
 
-            $this->format = $this->cert_format_name_to_id[$mnemonic];
-        } else {
-            if (!isset($this->cert_format_id_to_name[$this->format])) {
-                return false;
-            }
-        }
+		if (!is_numeric($this->format)) {
+			$mnemonic = strtoupper(trim($this->format));
 
-        $this->keytag = array_shift($rdata);
+			if (!isset($this->cert_format_name_to_id[$mnemonic])) {
+				return false;
+			}
 
-        //
-        // parse and check the algorithm; can be an int, or a mnemonic symbol
-        //
-        $this->algorithm = array_shift($rdata);
-        if (!is_numeric($this->algorithm)) {
-            $mnemonic = strtoupper(trim($this->algorithm));
-            if (!isset(Net_DNS2_Lookups::$algorithm_name_to_id[$mnemonic])) {
-                return false;
-            }
+			$this->format = $this->cert_format_name_to_id[$mnemonic];
+		} else {
+			if (!isset($this->cert_format_id_to_name[$this->format])) {
+				return false;
+			}
+		}
 
-            $this->algorithm = Net_DNS2_Lookups::$algorithm_name_to_id[
-                $mnemonic
-            ];
-        } else {
-            if (!isset(Net_DNS2_Lookups::$algorithm_id_to_name[$this->algorithm])) {
-                return false;
-            }
-        }
+		$this->keytag = array_shift($rdata);
 
-        //
-        // parse and base64 decode the certificate
-        //
-        // certificates MUST be provided base64 encoded, if not, everything will
-        // be broken after this point, as we assume it's base64 encoded.
-        //
-        $this->certificate = base64_decode(implode(' ', $rdata));
+		//
+		// parse and check the algorithm; can be an int, or a mnemonic symbol
+		//
+		$this->algorithm = array_shift($rdata);
 
-        return true;
-    }
+		if (!is_numeric($this->algorithm)) {
+			$mnemonic = strtoupper(trim($this->algorithm));
 
-    /**
-     * parses the rdata of the Net_DNS2_Packet object.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
-     *
-     * @return bool
-     */
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        if ($this->rdlength > 0) {
-            //
-            // unpack the format, keytag and algorithm
-            //
-            $x = unpack('nformat/nkeytag/Calgorithm', $this->rdata);
+			if (!isset(Net_DNS2_Lookups::$algorithm_name_to_id[$mnemonic])) {
+				return false;
+			}
 
-            $this->format = $x['format'];
-            $this->keytag = $x['keytag'];
-            $this->algorithm = $x['algorithm'];
+			$this->algorithm = Net_DNS2_Lookups::$algorithm_name_to_id[
+				$mnemonic
+			];
+		} else {
+			if (!isset(Net_DNS2_Lookups::$algorithm_id_to_name[$this->algorithm])) {
+				return false;
+			}
+		}
 
-            //
-            // copy the certificate
-            //
-            $this->certificate = substr($this->rdata, 5, $this->rdlength - 5);
+		//
+		// parse and base64 decode the certificate
+		//
+		// certificates MUST be provided base64 encoded, if not, everything will
+		// be broken after this point, as we assume it's base64 encoded.
+		//
+		$this->certificate = base64_decode(implode(' ', $rdata), true);
 
-            return true;
-        }
+		return true;
+	}
 
-        return false;
-    }
+	/**
+	 * parses the rdata of the Net_DNS2_Packet object.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
+	 *
+	 * @return bool
+	 */
+	protected function rrSet(Net_DNS2_Packet &$packet) {
+		if ($this->rdlength > 0) {
+			//
+			// unpack the format, keytag and algorithm
+			//
+			$x = unpack('nformat/nkeytag/Calgorithm', $this->rdata);
 
-    /**
-     * returns the rdata portion of the DNS packet.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-     *                                 compressed names
-     *
-     * @return mixed either returns a binary packed
-     *               string or null on failure
-     */
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        if (strlen($this->certificate) > 0) {
-            $data = pack('nnC', $this->format, $this->keytag, $this->algorithm).$this->certificate;
+			$this->format    = $x['format'];
+			$this->keytag    = $x['keytag'];
+			$this->algorithm = $x['algorithm'];
 
-            $packet->offset += strlen($data);
+			//
+			// copy the certificate
+			//
+			$this->certificate = substr($this->rdata, 5, $this->rdlength - 5);
 
-            return $data;
-        }
+			return true;
+		}
 
-        return null;
-    }
+		return false;
+	}
+
+	/**
+	 * returns the rdata portion of the DNS packet.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
+	 *                                 compressed names
+	 *
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
+	 */
+	protected function rrGet(Net_DNS2_Packet &$packet) {
+		if (strlen($this->certificate) > 0) {
+			$data = pack('nnC', $this->format, $this->keytag, $this->algorithm) . $this->certificate;
+
+			$packet->offset += strlen($data);
+
+			return $data;
+		}
+
+		return null;
+	}
 }

@@ -26,97 +26,95 @@
  *	  /					   SA						  /
  *	  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  */
-class Net_DNS2_RR_ISDN extends Net_DNS2_RR
-{
-    // ISDN Number
-    public $isdnaddress;
+class Net_DNS2_RR_ISDN extends Net_DNS2_RR {
+	// ISDN Number
+	public $isdnaddress;
 
-    // Sub-Address
-    public $sa;
+	// Sub-Address
+	public $sa;
 
-    /**
-     * method to return the rdata portion of the packet as a string.
-     *
-     * @return string
-     */
-    protected function rrToString()
-    {
-        return $this->formatString($this->isdnaddress).' '
-            .$this->formatString($this->sa);
-    }
+	/**
+	 * method to return the rdata portion of the packet as a string.
+	 *
+	 * @return string
+	 */
+	protected function rrToString() {
+		return $this->formatString($this->isdnaddress) . ' '
+			. $this->formatString($this->sa);
+	}
 
-    /**
-     * parses the rdata portion from a standard DNS config line.
-     *
-     * @param array $rdata a string split line of values for the rdata
-     *
-     * @return bool
-     */
-    protected function rrFromString(array $rdata)
-    {
-        $data = $this->buildString($rdata);
-        if (cacti_sizeof($data) >= 1) {
-            $this->isdnaddress = $data[0];
-            if (isset($data[1])) {
-                $this->sa = $data[1];
-            }
+	/**
+	 * parses the rdata portion from a standard DNS config line.
+	 *
+	 * @param array $rdata a string split line of values for the rdata
+	 *
+	 * @return bool
+	 */
+	protected function rrFromString(array $rdata) {
+		$data = $this->buildString($rdata);
 
-            return true;
-        }
+		if (cacti_sizeof($data) >= 1) {
+			$this->isdnaddress = $data[0];
 
-        return false;
-    }
+			if (isset($data[1])) {
+				$this->sa = $data[1];
+			}
 
-    /**
-     * parses the rdata of the Net_DNS2_Packet object.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
-     *
-     * @return bool
-     */
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        if ($this->rdlength > 0) {
-            $this->isdnaddress = Net_DNS2_Packet::label($packet, $packet->offset);
+			return true;
+		}
 
-            //
-            // look for a SA (sub address) - it's optional
-            //
-            if ((strlen($this->isdnaddress) + 1) < $this->rdlength) {
-                $this->sa = Net_DNS2_Packet::label($packet, $packet->offset);
-            } else {
-                $this->sa = '';
-            }
+		return false;
+	}
 
-            return true;
-        }
+	/**
+	 * parses the rdata of the Net_DNS2_Packet object.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
+	 *
+	 * @return bool
+	 */
+	protected function rrSet(Net_DNS2_Packet &$packet) {
+		if ($this->rdlength > 0) {
+			$this->isdnaddress = Net_DNS2_Packet::label($packet, $packet->offset);
 
-        return false;
-    }
+			//
+			// look for a SA (sub address) - it's optional
+			//
+			if ((strlen($this->isdnaddress) + 1) < $this->rdlength) {
+				$this->sa = Net_DNS2_Packet::label($packet, $packet->offset);
+			} else {
+				$this->sa = '';
+			}
 
-    /**
-     * returns the rdata portion of the DNS packet.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-     *                                 compressed names
-     *
-     * @return mixed either returns a binary packed
-     *               string or null on failure
-     */
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        if (strlen($this->isdnaddress) > 0) {
-            $data = chr(strlen($this->isdnaddress)).$this->isdnaddress;
-            if (!empty($this->sa)) {
-                $data .= chr(strlen($this->sa));
-                $data .= $this->sa;
-            }
+			return true;
+		}
 
-            $packet->offset += strlen($data);
+		return false;
+	}
 
-            return $data;
-        }
+	/**
+	 * returns the rdata portion of the DNS packet.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
+	 *                                 compressed names
+	 *
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
+	 */
+	protected function rrGet(Net_DNS2_Packet &$packet) {
+		if (strlen($this->isdnaddress) > 0) {
+			$data = chr(strlen($this->isdnaddress)) . $this->isdnaddress;
 
-        return null;
-    }
+			if (!empty($this->sa)) {
+				$data .= chr(strlen($this->sa));
+				$data .= $this->sa;
+			}
+
+			$packet->offset += strlen($data);
+
+			return $data;
+		}
+
+		return null;
+	}
 }

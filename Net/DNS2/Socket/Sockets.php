@@ -66,280 +66,287 @@
  * @see     http://pear.php.net/package/Net_DNS2
  * @see      Net_DNS2_Socket
  */
-class Net_DNS2_Socket_Sockets extends Net_DNS2_Socket
-{
-    /**
-     * opens a socket connection to the DNS server.
-     *
-     * @return bool
-     */
-    public function open()
-    {
-        //
-        // create the socket
-        //
-        if (true == Net_DNS2::isIPv4($this->host)) {
-            $this->sock = @socket_create(
-                AF_INET,
-                $this->type,
-                (Net_DNS2_Socket::SOCK_STREAM == $this->type) ? SOL_TCP : SOL_UDP
-            );
-        } elseif (true == Net_DNS2::isIPv6($this->host)) {
-            $this->sock = @socket_create(
-                AF_INET6,
-                $this->type,
-                (Net_DNS2_Socket::SOCK_STREAM == $this->type) ? SOL_TCP : SOL_UDP
-            );
-        } else {
-            $this->last_error = 'invalid address type: '.$this->host;
+class Net_DNS2_Socket_Sockets extends Net_DNS2_Socket {
+	/**
+	 * opens a socket connection to the DNS server.
+	 *
+	 * @return bool
+	 */
+	public function open() {
+		//
+		// create the socket
+		//
+		if (Net_DNS2::isIPv4($this->host) == true) {
+			$this->sock = @socket_create(
+				AF_INET,
+				$this->type,
+				($this->type == Net_DNS2_Socket::SOCK_STREAM) ? SOL_TCP : SOL_UDP
+			);
+		} elseif (Net_DNS2::isIPv6($this->host) == true) {
+			$this->sock = @socket_create(
+				AF_INET6,
+				$this->type,
+				($this->type == Net_DNS2_Socket::SOCK_STREAM) ? SOL_TCP : SOL_UDP
+			);
+		} else {
+			$this->last_error = 'invalid address type: ' . $this->host;
 
-            return false;
-        }
+			return false;
+		}
 
-        if (false === $this->sock) {
-            $this->last_error = socket_strerror(socket_last_error());
+		if ($this->sock === false) {
+			$this->last_error = socket_strerror(socket_last_error());
 
-            return false;
-        }
+			return false;
+		}
 
-        @socket_set_option($this->sock, SOL_SOCKET, SO_REUSEADDR, 1);
+		@socket_set_option($this->sock, SOL_SOCKET, SO_REUSEADDR, 1);
 
-        //
-        // bind to a local IP/port if it's set
-        //
-        if (strlen($this->local_host) > 0) {
-            $result = @socket_bind(
-                $this->sock,
-                $this->local_host,
-                ($this->local_port > 0) ? $this->local_port : null
-            );
-            if (false === $result) {
-                $this->last_error = socket_strerror(socket_last_error());
+		//
+		// bind to a local IP/port if it's set
+		//
+		if (strlen($this->local_host) > 0) {
+			$result = @socket_bind(
+				$this->sock,
+				$this->local_host,
+				($this->local_port > 0) ? $this->local_port : null
+			);
 
-                return false;
-            }
-        }
+			if ($result === false) {
+				$this->last_error = socket_strerror(socket_last_error());
 
-        //
-        // mark the socket as non-blocking
-        //
-        if (false === @socket_set_nonblock($this->sock)) {
-            $this->last_error = socket_strerror(socket_last_error());
+				return false;
+			}
+		}
 
-            return false;
-        }
+		//
+		// mark the socket as non-blocking
+		//
+		if (@socket_set_nonblock($this->sock) === false) {
+			$this->last_error = socket_strerror(socket_last_error());
 
-        //
-        // connect to the socket; don't check for status here, we'll check it on the
-        // socket_select() call so we can handle timeouts properly
-        //
-        @socket_connect($this->sock, $this->host, $this->port);
+			return false;
+		}
 
-        $read = null;
-        $write = [$this->sock];
-        $except = null;
+		//
+		// connect to the socket; don't check for status here, we'll check it on the
+		// socket_select() call so we can handle timeouts properly
+		//
+		@socket_connect($this->sock, $this->host, $this->port);
 
-        //
-        // select on write to check if the call to connect worked
-        //
-        $result = @socket_select($read, $write, $except, $this->timeout);
-        if (false === $result) {
-            $this->last_error = socket_strerror(socket_last_error());
+		$read   = null;
+		$write  = [$this->sock];
+		$except = null;
 
-            return false;
-        }
-        if (0 == $result) {
-            $this->last_error = 'timeout on write select for connect()';
+		//
+		// select on write to check if the call to connect worked
+		//
+		$result = @socket_select($read, $write, $except, $this->timeout);
 
-            return false;
-        }
+		if ($result === false) {
+			$this->last_error = socket_strerror(socket_last_error());
 
-        return true;
-    }
+			return false;
+		}
 
-    /**
-     * closes a socket connection to the DNS server.
-     *
-     * @return bool
-     */
-    public function close()
-    {
-        if (true === is_resource($this->sock)) {
-            @socket_close($this->sock);
-        }
+		if ($result == 0) {
+			$this->last_error = 'timeout on write select for connect()';
 
-        return true;
-    }
+			return false;
+		}
 
-    /**
-     * writes the given string to the DNS server socket.
-     *
-     * @param string $data a binary packed DNS packet
-     *
-     * @return bool
-     */
-    public function write($data)
-    {
-        $length = strlen($data);
-        if (0 == $length) {
-            $this->last_error = 'empty data on write()';
+		return true;
+	}
 
-            return false;
-        }
+	/**
+	 * closes a socket connection to the DNS server.
+	 *
+	 * @return bool
+	 */
+	public function close() {
+		if (is_resource($this->sock) === true) {
+			@socket_close($this->sock);
+		}
 
-        $read = null;
-        $write = [$this->sock];
-        $except = null;
+		return true;
+	}
 
-        //
-        // select on write
-        //
-        $result = @socket_select($read, $write, $except, $this->timeout);
-        if (false === $result) {
-            $this->last_error = socket_strerror(socket_last_error());
+	/**
+	 * writes the given string to the DNS server socket.
+	 *
+	 * @param string $data a binary packed DNS packet
+	 *
+	 * @return bool
+	 */
+	public function write($data) {
+		$length = strlen($data);
 
-            return false;
-        }
-        if (0 == $result) {
-            $this->last_error = 'timeout on write select()';
+		if ($length == 0) {
+			$this->last_error = 'empty data on write()';
 
-            return false;
-        }
+			return false;
+		}
 
-        //
-        // if it's a TCP socket, then we need to packet and send the length of the
-        // data as the first 16bit of data.
-        //
-        if (Net_DNS2_Socket::SOCK_STREAM == $this->type) {
-            $s = chr($length >> 8).chr($length);
+		$read   = null;
+		$write  = [$this->sock];
+		$except = null;
 
-            if (false === @socket_write($this->sock, $s)) {
-                $this->last_error = socket_strerror(socket_last_error());
+		//
+		// select on write
+		//
+		$result = @socket_select($read, $write, $except, $this->timeout);
 
-                return false;
-            }
-        }
+		if ($result === false) {
+			$this->last_error = socket_strerror(socket_last_error());
 
-        //
-        // write the data to the socket
-        //
-        $size = @socket_write($this->sock, $data);
-        if ((false === $size) || ($size != $length)) {
-            $this->last_error = socket_strerror(socket_last_error());
+			return false;
+		}
 
-            return false;
-        }
+		if ($result == 0) {
+			$this->last_error = 'timeout on write select()';
 
-        return true;
-    }
+			return false;
+		}
 
-    /**
-     * reads a response from a DNS server.
-     *
-     * @param int   &$size    the size of the DNS packet read is passed back
-     * @param mixed $max_size
-     *
-     * @return mixed returns the data on success and false on error
-     */
-    public function read(&$size, $max_size)
-    {
-        $read = [$this->sock];
-        $write = null;
-        $except = null;
+		//
+		// if it's a TCP socket, then we need to packet and send the length of the
+		// data as the first 16bit of data.
+		//
+		if ($this->type == Net_DNS2_Socket::SOCK_STREAM) {
+			$s = chr($length >> 8) . chr($length);
 
-        //
-        // make sure our socket is non-blocking
-        //
-        if (false === @socket_set_nonblock($this->sock)) {
-            $this->last_error = socket_strerror(socket_last_error());
+			if (@socket_write($this->sock, $s) === false) {
+				$this->last_error = socket_strerror(socket_last_error());
 
-            return false;
-        }
+				return false;
+			}
+		}
 
-        //
-        // select on read
-        //
-        $result = @socket_select($read, $write, $except, $this->timeout);
-        if (false === $result) {
-            $this->last_error = socket_strerror(socket_last_error());
+		//
+		// write the data to the socket
+		//
+		$size = @socket_write($this->sock, $data);
 
-            return false;
-        }
-        if (0 == $result) {
-            $this->last_error = 'timeout on read select()';
+		if (($size === false) || ($size != $length)) {
+			$this->last_error = socket_strerror(socket_last_error());
 
-            return false;
-        }
+			return false;
+		}
 
-        $data = '';
-        $length = $max_size;
+		return true;
+	}
 
-        //
-        // if it's a TCP socket, then the first two bytes is the length of the DNS
-        // packet- we need to read that off first, then use that value for the
-        // packet read.
-        //
-        if (Net_DNS2_Socket::SOCK_STREAM == $this->type) {
-            if (($size = @socket_recv($this->sock, $data, 2, 0)) === false) {
-                $this->last_error = socket_strerror(socket_last_error());
+	/**
+	 * reads a response from a DNS server.
+	 *
+	 * @param int   &$size    the size of the DNS packet read is passed back
+	 * @param mixed $max_size
+	 *
+	 * @return mixed returns the data on success and false on error
+	 */
+	public function read(&$size, $max_size) {
+		$read   = [$this->sock];
+		$write  = null;
+		$except = null;
 
-                return false;
-            }
+		//
+		// make sure our socket is non-blocking
+		//
+		if (@socket_set_nonblock($this->sock) === false) {
+			$this->last_error = socket_strerror(socket_last_error());
 
-            $length = ord($data[0]) << 8 | ord($data[1]);
-            if ($length < Net_DNS2_Lookups::DNS_HEADER_SIZE) {
-                return false;
-            }
-        }
+			return false;
+		}
 
-        //
-        // at this point, we know that there is data on the socket to be read,
-        // because we've already extracted the length from the first two bytes.
-        //
-        // so the easiest thing to do, is just turn off socket blocking, and
-        // wait for the data.
-        //
-        if (false === @socket_set_block($this->sock)) {
-            $this->last_error = socket_strerror(socket_last_error());
+		//
+		// select on read
+		//
+		$result = @socket_select($read, $write, $except, $this->timeout);
 
-            return false;
-        }
+		if ($result === false) {
+			$this->last_error = socket_strerror(socket_last_error());
 
-        //
-        // read the data from the socket
-        //
-        // loop while reading since some OS's (specifically Win < 2003) don't support
-        // MSG_WAITALL properly, so they may return with less data than is available.
-        //
-        // According to M$, XP and below don't support MSG_WAITALL at all; and there
-        // also seems to be some issue in 2003 and 2008 where the MSG_WAITALL is
-        // defined as 0, but if you actually pass 8 (which is the correct defined
-        // value), it works as it's supposed to- so in these cases, it's just the
-        // define that's incorrect- this is likely a PHP issue.
-        //
-        $data = '';
-        $size = 0;
+			return false;
+		}
 
-        while (1) {
-            $chunk_size = @socket_recv($this->sock, $chunk, $length, MSG_WAITALL);
-            if (false === $chunk_size) {
-                $size = $chunk_size;
-                $this->last_error = socket_strerror(socket_last_error());
+		if ($result == 0) {
+			$this->last_error = 'timeout on read select()';
 
-                return false;
-            }
+			return false;
+		}
 
-            $data .= $chunk;
-            $size += $chunk_size;
+		$data   = '';
+		$length = $max_size;
 
-            $length -= $chunk_size;
-            if (($length <= 0) || (Net_DNS2_Socket::SOCK_DGRAM == $this->type)) {
-                break;
-            }
-        }
+		//
+		// if it's a TCP socket, then the first two bytes is the length of the DNS
+		// packet- we need to read that off first, then use that value for the
+		// packet read.
+		//
+		if ($this->type == Net_DNS2_Socket::SOCK_STREAM) {
+			if (($size = @socket_recv($this->sock, $data, 2, 0)) === false) {
+				$this->last_error = socket_strerror(socket_last_error());
 
-        return $data;
-    }
+				return false;
+			}
+
+			$length = ord($data[0]) << 8 | ord($data[1]);
+
+			if ($length < Net_DNS2_Lookups::DNS_HEADER_SIZE) {
+				return false;
+			}
+		}
+
+		//
+		// at this point, we know that there is data on the socket to be read,
+		// because we've already extracted the length from the first two bytes.
+		//
+		// so the easiest thing to do, is just turn off socket blocking, and
+		// wait for the data.
+		//
+		if (@socket_set_block($this->sock) === false) {
+			$this->last_error = socket_strerror(socket_last_error());
+
+			return false;
+		}
+
+		//
+		// read the data from the socket
+		//
+		// loop while reading since some OS's (specifically Win < 2003) don't support
+		// MSG_WAITALL properly, so they may return with less data than is available.
+		//
+		// According to M$, XP and below don't support MSG_WAITALL at all; and there
+		// also seems to be some issue in 2003 and 2008 where the MSG_WAITALL is
+		// defined as 0, but if you actually pass 8 (which is the correct defined
+		// value), it works as it's supposed to- so in these cases, it's just the
+		// define that's incorrect- this is likely a PHP issue.
+		//
+		$data = '';
+		$size = 0;
+
+		while (1) {
+			$chunk_size = @socket_recv($this->sock, $chunk, $length, MSG_WAITALL);
+
+			if ($chunk_size === false) {
+				$size             = $chunk_size;
+				$this->last_error = socket_strerror(socket_last_error());
+
+				return false;
+			}
+
+			$data .= $chunk;
+			$size += $chunk_size;
+
+			$length -= $chunk_size;
+
+			if (($length <= 0) || ($this->type == Net_DNS2_Socket::SOCK_DGRAM)) {
+				break;
+			}
+		}
+
+		return $data;
+	}
 }
 
 /*

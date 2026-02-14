@@ -28,108 +28,103 @@
  * |                                               |
  * +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  */
-class Net_DNS2_RR_ATMA extends Net_DNS2_RR
-{
-    /*
-     * One octet that indicates the format of ADDRESS. The two possible values
-     * for FORMAT are value 0 indicating ATM End System Address (AESA) format
-     * and value 1 indicating E.164 format
-     */
-    public $format;
+class Net_DNS2_RR_ATMA extends Net_DNS2_RR {
+	/*
+	 * One octet that indicates the format of ADDRESS. The two possible values
+	 * for FORMAT are value 0 indicating ATM End System Address (AESA) format
+	 * and value 1 indicating E.164 format
+	 */
+	public $format;
 
-    // The IPv4 address in quad-dotted notation
-    public $address;
+	// The IPv4 address in quad-dotted notation
+	public $address;
 
-    /**
-     * method to return the rdata portion of the packet as a string.
-     *
-     * @return string
-     */
-    protected function rrToString()
-    {
-        return $this->address;
-    }
+	/**
+	 * method to return the rdata portion of the packet as a string.
+	 *
+	 * @return string
+	 */
+	protected function rrToString() {
+		return $this->address;
+	}
 
-    /**
-     * parses the rdata portion from a standard DNS config line.
-     *
-     * @param array $rdata a string split line of values for the rdata
-     *
-     * @return bool
-     */
-    protected function rrFromString(array $rdata)
-    {
-        $value = array_shift($rdata);
+	/**
+	 * parses the rdata portion from a standard DNS config line.
+	 *
+	 * @param array $rdata a string split line of values for the rdata
+	 *
+	 * @return bool
+	 */
+	protected function rrFromString(array $rdata) {
+		$value = array_shift($rdata);
 
-        if (true == ctype_xdigit($value)) {
-            $this->format = 0;
-            $this->address = $value;
-        } elseif (true == is_numeric($value)) {
-            $this->format = 1;
-            $this->address = $value;
-        } else {
-            return false;
-        }
+		if (ctype_xdigit($value) == true) {
+			$this->format  = 0;
+			$this->address = $value;
+		} elseif (is_numeric($value) == true) {
+			$this->format  = 1;
+			$this->address = $value;
+		} else {
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * parses the rdata of the Net_DNS2_Packet object.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
-     *
-     * @return bool
-     */
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        if ($this->rdlength > 0) {
-            //
-            // unpack the format
-            //
-            $x = unpack('Cformat/N*address', $this->rdata);
+	/**
+	 * parses the rdata of the Net_DNS2_Packet object.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
+	 *
+	 * @return bool
+	 */
+	protected function rrSet(Net_DNS2_Packet &$packet) {
+		if ($this->rdlength > 0) {
+			//
+			// unpack the format
+			//
+			$x = unpack('Cformat/N*address', $this->rdata);
 
-            $this->format = $x['format'];
+			$this->format = $x['format'];
 
-            if (0 == $this->format) {
-                $a = unpack('@1/H*address', $this->rdata);
+			if ($this->format == 0) {
+				$a = unpack('@1/H*address', $this->rdata);
 
-                $this->address = $a['address'];
-            } elseif (1 == $this->format) {
-                $this->address = substr($this->rdata, 1, $this->rdlength - 1);
-            } else {
-                return false;
-            }
+				$this->address = $a['address'];
+			} elseif ($this->format == 1) {
+				$this->address = substr($this->rdata, 1, $this->rdlength - 1);
+			} else {
+				return false;
+			}
 
-            return true;
-        }
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * returns the rdata portion of the DNS packet.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-     *                                 compressed names
-     *
-     * @return mixed either returns a binary packed
-     *               string or null on failure
-     */
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        $data = chr($this->format);
+	/**
+	 * returns the rdata portion of the DNS packet.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
+	 *                                 compressed names
+	 *
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
+	 */
+	protected function rrGet(Net_DNS2_Packet &$packet) {
+		$data = chr($this->format);
 
-        if (0 == $this->format) {
-            $data .= pack('H*', $this->address);
-        } elseif (1 == $this->format) {
-            $data .= $this->address;
-        } else {
-            return null;
-        }
+		if ($this->format == 0) {
+			$data .= pack('H*', $this->address);
+		} elseif ($this->format == 1) {
+			$data .= $this->address;
+		} else {
+			return null;
+		}
 
-        $packet->offset += strlen($data);
+		$packet->offset += strlen($data);
 
-        return $data;
-    }
+		return $data;
+	}
 }

@@ -43,142 +43,142 @@ mactrack_tabs();
 mactrack_view_graphs();
 bottom_footer();
 
-function mactrack_view_graphs()
-{
-    global $title, $current_user, $colors, $config, $host_template_hashes, $graph_template_hashes;
+function mactrack_view_graphs() {
+	global $title, $current_user, $colors, $config, $host_template_hashes, $graph_template_hashes;
 
-    include './lib/html_graph.php';
+	include './lib/html_graph.php';
 
-    html_graph_validate_preview_request_vars();
+	html_graph_validate_preview_request_vars();
 
-    if (!isset($_SESSION['sess_mt_gt'])) {
-        $_SESSION['sess_mt_gt'] = implode(',', array_rekey(db_fetch_assoc('SELECT DISTINCT gl.graph_template_id
+	if (!isset($_SESSION['sess_mt_gt'])) {
+		$_SESSION['sess_mt_gt'] = implode(',', array_rekey(db_fetch_assoc('SELECT DISTINCT gl.graph_template_id
 			FROM graph_local AS gl
 			WHERE gl.host_id IN(
 				SELECT host_id
 				FROM mac_track_devices
 			)'), 'graph_template_id', 'graph_template_id'));
-    }
-    $gt = $_SESSION['sess_mt_gt'];
+	}
+	$gt = $_SESSION['sess_mt_gt'];
 
-    if (!isset($_SESSION['sess_mt_hosts'])) {
-        $_SESSION['sess_mt_hosts'] = implode(',', array_rekey(db_fetch_assoc('SELECT h.id
+	if (!isset($_SESSION['sess_mt_hosts'])) {
+		$_SESSION['sess_mt_hosts'] = implode(',', array_rekey(db_fetch_assoc('SELECT h.id
 			FROM host AS h
 			WHERE h.id IN (
 				SELECT host_id
 				FROM mac_track_devices
 			)
 			ORDER BY id DESC'), 'id', 'id'));
-    }
-    $hosts = $_SESSION['sess_mt_hosts'];
+	}
+	$hosts = $_SESSION['sess_mt_hosts'];
 
-    // include graph view filter selector
-    html_start_box($title.(isset_request_var('style') && '' != get_request_var('style') ? ' [ '.__('Custom Graph List Applied - Filtering from List', 'mactrack').' ]' : ''), '100%', '', '3', 'center', '');
+	// include graph view filter selector
+	html_start_box($title . (isset_request_var('style') && get_request_var('style') != '' ? ' [ ' . __('Custom Graph List Applied - Filtering from List', 'mactrack') . ' ]' : ''), '100%', '', '3', 'center', '');
 
-    if ('' != $hosts) {
-        $hq = 'h.id IN ('.$hosts.')';
-    } else {
-        $hq = 'h.id = 0';
-    }
+	if ($hosts != '') {
+		$hq = 'h.id IN (' . $hosts . ')';
+	} else {
+		$hq = 'h.id = 0';
+	}
 
-    if ('' != $gt) {
-        $gq = 'gt.id IN ('.$gt.')';
-    } else {
-        $gq = 'gt.id = 0';
-    }
+	if ($gt != '') {
+		$gq = 'gt.id IN (' . $gt . ')';
+	} else {
+		$gq = 'gt.id = 0';
+	}
 
-    html_graph_preview_filter('mactrack_view_graphs.php', 'graphs', $hq, $gq);
+	html_graph_preview_filter('mactrack_view_graphs.php', 'graphs', $hq, $gq);
 
-    html_end_box();
+	html_end_box();
 
-    // the user select a bunch of graphs of the 'list' view and wants them displayed here
-    $sql_or = '';
-    if (isset_request_var('style')) {
-        if ('selective' == get_request_var('style')) {
-            // process selected graphs
-            if (!isempty_request_var('graph_list')) {
-                foreach (explode(',', get_request_var('graph_list')) as $item) {
-                    $graph_list[$item] = 1;
-                }
-            } else {
-                $graph_list = [];
-            }
+	// the user select a bunch of graphs of the 'list' view and wants them displayed here
+	$sql_or = '';
 
-            if (!isempty_request_var('graph_add')) {
-                foreach (explode(',', get_request_var('graph_add')) as $item) {
-                    $graph_list[$item] = 1;
-                }
-            }
+	if (isset_request_var('style')) {
+		if (get_request_var('style') == 'selective') {
+			// process selected graphs
+			if (!isempty_request_var('graph_list')) {
+				foreach (explode(',', get_request_var('graph_list')) as $item) {
+					$graph_list[$item] = 1;
+				}
+			} else {
+				$graph_list = [];
+			}
 
-            // remove items
-            if (!isempty_request_var('graph_remove')) {
-                foreach (explode(',', get_request_var('graph_remove')) as $item) {
-                    unset($graph_list[$item]);
-                }
-            }
+			if (!isempty_request_var('graph_add')) {
+				foreach (explode(',', get_request_var('graph_add')) as $item) {
+					$graph_list[$item] = 1;
+				}
+			}
 
-            $graph_array = array_keys($graph_list);
+			// remove items
+			if (!isempty_request_var('graph_remove')) {
+				foreach (explode(',', get_request_var('graph_remove')) as $item) {
+					unset($graph_list[$item]);
+				}
+			}
 
-            if (cacti_sizeof($graph_array)) {
-                $sql_or = array_to_sql_or($graph_array, 'gl.id');
-            }
-        }
-    }
+			$graph_array = array_keys($graph_list);
 
-    $total_graphs = 0;
+			if (cacti_sizeof($graph_array)) {
+				$sql_or = array_to_sql_or($graph_array, 'gl.id');
+			}
+		}
+	}
 
-    // Filter sql_where
-    $sql_where = ('' != get_request_var('filter') ? 'gtg.title_cache LIKE '.db_qstr('%'.get_request_var('filter').'%') : '');
-    $sql_where .= ('' != $sql_or && '' != $sql_where ? ' AND ' : '').$sql_or;
-    $sql_where .= ('' != $sql_or && '' != $sql_where ? ' AND ' : '').$hq.' AND '.$gq;
+	$total_graphs = 0;
 
-    // Host Id sql_where
-    if (get_filter_request_var('host_id') > 0) {
-        $sql_where .= ('' != $sql_where ? ' AND' : '').' gl.host_id='.get_request_var('host_id');
-    }
+	// Filter sql_where
+	$sql_where = (get_request_var('filter') != '' ? 'gtg.title_cache LIKE ' . db_qstr('%' . get_request_var('filter') . '%') : '');
+	$sql_where .= ($sql_or != '' && $sql_where != '' ? ' AND ' : '') . $sql_or;
+	$sql_where .= ($sql_or != '' && $sql_where != '' ? ' AND ' : '') . $hq . ' AND ' . $gq;
 
-    // Graph Template Id sql_where
-    if (get_filter_request_var('graph_template_id') > 0) {
-        $sql_where .= ('' != $sql_where ? ' AND' : '').' gl.graph_template_id='.get_request_var('graph_template_id');
-    }
+	// Host Id sql_where
+	if (get_filter_request_var('host_id') > 0) {
+		$sql_where .= ($sql_where != '' ? ' AND' : '') . ' gl.host_id=' . get_request_var('host_id');
+	}
 
-    if ('-1' == get_request_var('graphs')) {
-        $rows = read_config_option('num_rows_table');
-    } else {
-        $rows = get_request_var('graphs');
-    }
+	// Graph Template Id sql_where
+	if (get_filter_request_var('graph_template_id') > 0) {
+		$sql_where .= ($sql_where != '' ? ' AND' : '') . ' gl.graph_template_id=' . get_request_var('graph_template_id');
+	}
 
-    $limit = (get_request_var('graphs') * (get_request_var('page') - 1)).','.$rows;
-    $order = 'gtg.title_cache';
+	if (get_request_var('graphs') == '-1') {
+		$rows = read_config_option('num_rows_table');
+	} else {
+		$rows = get_request_var('graphs');
+	}
 
-    // cacti_log("SQL Where: $sql_where, Order: $order, Limit: $limit");
+	$limit = (get_request_var('graphs') * (get_request_var('page') - 1)) . ',' . $rows;
+	$order = 'gtg.title_cache';
 
-    $graphs = get_allowed_graphs($sql_where, $order, $limit, $total_graphs);
+	// cacti_log("SQL Where: $sql_where, Order: $order, Limit: $limit");
 
-    // do some fancy navigation url construction so we don't have to try and rebuild the url string
-    if (preg_match('/page=[0-9]+/', basename($_SERVER['QUERY_STRING']))) {
-        $nav_url = str_replace('&page='.get_request_var('page'), '', get_browser_query_string());
-    } else {
-        $nav_url = get_browser_query_string().'&host_id='.get_request_var('host_id');
-    }
+	$graphs = get_allowed_graphs($sql_where, $order, $limit, $total_graphs);
 
-    $nav_url = preg_replace('/((\?|&)host_id=[0-9]+|(\?|&)filter=[a-zA-Z0-9]*)/', '', $nav_url);
+	// do some fancy navigation url construction so we don't have to try and rebuild the url string
+	if (preg_match('/page=[0-9]+/', basename($_SERVER['QUERY_STRING']))) {
+		$nav_url = str_replace('&page=' . get_request_var('page'), '', get_browser_query_string());
+	} else {
+		$nav_url = get_browser_query_string() . '&host_id=' . get_request_var('host_id');
+	}
 
-    $nav = html_nav_bar($nav_url, MAX_DISPLAY_PAGES, get_request_var('page'), get_request_var('graphs'), $total_graphs, get_request_var('columns'), __('Graphs', 'mactrack'), 'page', 'main');
+	$nav_url = preg_replace('/((\?|&)host_id=[0-9]+|(\?|&)filter=[a-zA-Z0-9]*)/', '', $nav_url);
 
-    echo $nav;
+	$nav = html_nav_bar($nav_url, MAX_DISPLAY_PAGES, get_request_var('page'), get_request_var('graphs'), $total_graphs, get_request_var('columns'), __('Graphs', 'mactrack'), 'page', 'main');
 
-    html_start_box('', '100%', '', '3', 'center', '');
+	print $nav;
 
-    if ('true' == get_request_var('thumbnails')) {
-        html_graph_thumbnail_area($graphs, '', 'graph_start='.get_current_graph_start().'&graph_end='.get_current_graph_end(), '', get_request_var('columns'));
-    } else {
-        html_graph_area($graphs, '', 'graph_start='.get_current_graph_start().'&graph_end='.get_current_graph_end(), '', get_request_var('columns'));
-    }
+	html_start_box('', '100%', '', '3', 'center', '');
 
-    html_end_box();
+	if (get_request_var('thumbnails') == 'true') {
+		html_graph_thumbnail_area($graphs, '', 'graph_start=' . get_current_graph_start() . '&graph_end=' . get_current_graph_end(), '', get_request_var('columns'));
+	} else {
+		html_graph_area($graphs, '', 'graph_start=' . get_current_graph_start() . '&graph_end=' . get_current_graph_end(), '', get_request_var('columns'));
+	}
 
-    if ($total_graphs > 0) {
-        echo $nav;
-    }
+	html_end_box();
+
+	if ($total_graphs > 0) {
+		print $nav;
+	}
 }

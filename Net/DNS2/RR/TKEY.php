@@ -42,201 +42,198 @@
  *    /                   OTHER DATA                  /
  *    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  */
-class Net_DNS2_RR_TKEY extends Net_DNS2_RR
-{
-    // TSIG Modes
-    public const TSIG_MODE_RES = 0;
-    public const TSIG_MODE_SERV_ASSIGN = 1;
-    public const TSIG_MODE_DH = 2;
-    public const TSIG_MODE_GSS_API = 3;
-    public const TSIG_MODE_RESV_ASSIGN = 4;
-    public const TSIG_MODE_KEY_DELE = 5;
-    public $algorithm;
-    public $inception;
-    public $expiration;
-    public $mode;
-    public $error;
-    public $key_size;
-    public $key_data;
-    public $other_size;
-    public $other_data;
+class Net_DNS2_RR_TKEY extends Net_DNS2_RR {
+	// TSIG Modes
+	public const TSIG_MODE_RES         = 0;
+	public const TSIG_MODE_SERV_ASSIGN = 1;
+	public const TSIG_MODE_DH          = 2;
+	public const TSIG_MODE_GSS_API     = 3;
+	public const TSIG_MODE_RESV_ASSIGN = 4;
+	public const TSIG_MODE_KEY_DELE    = 5;
+	public $algorithm;
+	public $inception;
+	public $expiration;
+	public $mode;
+	public $error;
+	public $key_size;
+	public $key_data;
+	public $other_size;
+	public $other_data;
 
-    // map the mod id's to names so we can validate
-    public $tsgi_mode_id_to_name = [
-        self::TSIG_MODE_RES => 'Reserved',
-        self::TSIG_MODE_SERV_ASSIGN => 'Server Assignment',
-        self::TSIG_MODE_DH => 'Diffie-Hellman',
-        self::TSIG_MODE_GSS_API => 'GSS-API',
-        self::TSIG_MODE_RESV_ASSIGN => 'Resolver Assignment',
-        self::TSIG_MODE_KEY_DELE => 'Key Deletion',
-    ];
+	// map the mod id's to names so we can validate
+	public $tsgi_mode_id_to_name = [
+		self::TSIG_MODE_RES         => 'Reserved',
+		self::TSIG_MODE_SERV_ASSIGN => 'Server Assignment',
+		self::TSIG_MODE_DH          => 'Diffie-Hellman',
+		self::TSIG_MODE_GSS_API     => 'GSS-API',
+		self::TSIG_MODE_RESV_ASSIGN => 'Resolver Assignment',
+		self::TSIG_MODE_KEY_DELE    => 'Key Deletion',
+	];
 
-    /**
-     * method to return the rdata portion of the packet as a string.
-     *
-     * @return string
-     */
-    protected function rrToString()
-    {
-        $out = $this->cleanString($this->algorithm).'. '.$this->mode;
-        if ($this->key_size > 0) {
-            $out .= ' '.trim($this->key_data, '.').'.';
-        } else {
-            $out .= ' .';
-        }
+	/**
+	 * method to return the rdata portion of the packet as a string.
+	 *
+	 * @return string
+	 */
+	protected function rrToString() {
+		$out = $this->cleanString($this->algorithm) . '. ' . $this->mode;
 
-        return $out;
-    }
+		if ($this->key_size > 0) {
+			$out .= ' ' . trim($this->key_data, '.') . '.';
+		} else {
+			$out .= ' .';
+		}
 
-    /**
-     * parses the rdata portion from a standard DNS config line.
-     *
-     * @param array $rdata a string split line of values for the rdata
-     *
-     * @return bool
-     */
-    protected function rrFromString(array $rdata)
-    {
-        //
-        // data passed in is assumed: <algorithm> <mode> <key>
-        //
-        $this->algorithm = $this->cleanString(array_shift($rdata));
-        $this->mode = array_shift($rdata);
-        $this->key_data = trim(array_shift($rdata), '.');
+		return $out;
+	}
 
-        //
-        // the rest of the data is set manually
-        //
-        $this->inception = time();
-        $this->expiration = time() + 86400; // 1 day
-        $this->error = 0;
-        $this->key_size = strlen($this->key_data);
-        $this->other_size = 0;
-        $this->other_data = '';
+	/**
+	 * parses the rdata portion from a standard DNS config line.
+	 *
+	 * @param array $rdata a string split line of values for the rdata
+	 *
+	 * @return bool
+	 */
+	protected function rrFromString(array $rdata) {
+		//
+		// data passed in is assumed: <algorithm> <mode> <key>
+		//
+		$this->algorithm = $this->cleanString(array_shift($rdata));
+		$this->mode      = array_shift($rdata);
+		$this->key_data  = trim(array_shift($rdata), '.');
 
-        return true;
-    }
+		//
+		// the rest of the data is set manually
+		//
+		$this->inception  = time();
+		$this->expiration = time() + 86400; // 1 day
+		$this->error      = 0;
+		$this->key_size   = strlen($this->key_data);
+		$this->other_size = 0;
+		$this->other_data = '';
 
-    /**
-     * parses the rdata of the Net_DNS2_Packet object.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
-     *
-     * @return bool
-     */
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        if ($this->rdlength > 0) {
-            //
-            // expand the algorithm
-            //
-            $offset = $packet->offset;
-            $this->algorithm = Net_DNS2_Packet::expand($packet, $offset);
+		return true;
+	}
 
-            //
-            // unpack inception, expiration, mode, error and key size
-            //
-            $x = unpack(
-                '@'.$offset.'/Ninception/Nexpiration/nmode/nerror/nkey_size',
-                $packet->rdata
-            );
+	/**
+	 * parses the rdata of the Net_DNS2_Packet object.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
+	 *
+	 * @return bool
+	 */
+	protected function rrSet(Net_DNS2_Packet &$packet) {
+		if ($this->rdlength > 0) {
+			//
+			// expand the algorithm
+			//
+			$offset          = $packet->offset;
+			$this->algorithm = Net_DNS2_Packet::expand($packet, $offset);
 
-            $this->inception = Net_DNS2::expandUint32($x['inception']);
-            $this->expiration = Net_DNS2::expandUint32($x['expiration']);
-            $this->mode = $x['mode'];
-            $this->error = $x['error'];
-            $this->key_size = $x['key_size'];
+			//
+			// unpack inception, expiration, mode, error and key size
+			//
+			$x = unpack(
+				'@' . $offset . '/Ninception/Nexpiration/nmode/nerror/nkey_size',
+				$packet->rdata
+			);
 
-            $offset += 14;
+			$this->inception  = Net_DNS2::expandUint32($x['inception']);
+			$this->expiration = Net_DNS2::expandUint32($x['expiration']);
+			$this->mode       = $x['mode'];
+			$this->error      = $x['error'];
+			$this->key_size   = $x['key_size'];
 
-            //
-            // if key_size > 0, then copy out the key
-            //
-            if ($this->key_size > 0) {
-                $this->key_data = substr($packet->rdata, $offset, $this->key_size);
-                $offset += $this->key_size;
-            }
+			$offset += 14;
 
-            //
-            // unpack the other length
-            //
-            $x = unpack('@'.$offset.'/nother_size', $packet->rdata);
+			//
+			// if key_size > 0, then copy out the key
+			//
+			if ($this->key_size > 0) {
+				$this->key_data = substr($packet->rdata, $offset, $this->key_size);
+				$offset += $this->key_size;
+			}
 
-            $this->other_size = $x['other_size'];
-            $offset += 2;
+			//
+			// unpack the other length
+			//
+			$x = unpack('@' . $offset . '/nother_size', $packet->rdata);
 
-            //
-            // if other_size > 0, then copy out the data
-            //
-            if ($this->other_size > 0) {
-                $this->other_data = substr(
-                    $packet->rdata,
-                    $offset,
-                    $this->other_size
-                );
-            }
+			$this->other_size = $x['other_size'];
+			$offset += 2;
 
-            return true;
-        }
+			//
+			// if other_size > 0, then copy out the data
+			//
+			if ($this->other_size > 0) {
+				$this->other_data = substr(
+					$packet->rdata,
+					$offset,
+					$this->other_size
+				);
+			}
 
-        return false;
-    }
+			return true;
+		}
 
-    /**
-     * returns the rdata portion of the DNS packet.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-     *                                 compressed names
-     *
-     * @return mixed either returns a binary packed
-     *               string or null on failure
-     */
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        if (strlen($this->algorithm) > 0) {
-            //
-            // make sure the size values are correct
-            //
-            $this->key_size = strlen($this->key_data);
-            $this->other_size = strlen($this->other_data);
+		return false;
+	}
 
-            //
-            // add the algorithm without compression
-            //
-            $data = Net_DNS2_Packet::pack($this->algorithm);
+	/**
+	 * returns the rdata portion of the DNS packet.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
+	 *                                 compressed names
+	 *
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
+	 */
+	protected function rrGet(Net_DNS2_Packet &$packet) {
+		if (strlen($this->algorithm) > 0) {
+			//
+			// make sure the size values are correct
+			//
+			$this->key_size   = strlen($this->key_data);
+			$this->other_size = strlen($this->other_data);
 
-            //
-            // pack in the inception, expiration, mode, error and key size
-            //
-            $data .= pack(
-                'NNnnn',
-                $this->inception,
-                $this->expiration,
-                $this->mode,
-                0,
-                $this->key_size
-            );
+			//
+			// add the algorithm without compression
+			//
+			$data = Net_DNS2_Packet::pack($this->algorithm);
 
-            //
-            // if the key_size > 0, then add the key
-            //
-            if ($this->key_size > 0) {
-                $data .= $this->key_data;
-            }
+			//
+			// pack in the inception, expiration, mode, error and key size
+			//
+			$data .= pack(
+				'NNnnn',
+				$this->inception,
+				$this->expiration,
+				$this->mode,
+				0,
+				$this->key_size
+			);
 
-            //
-            // pack in the other size
-            //
-            $data .= pack('n', $this->other_size);
-            if ($this->other_size > 0) {
-                $data .= $this->other_data;
-            }
+			//
+			// if the key_size > 0, then add the key
+			//
+			if ($this->key_size > 0) {
+				$data .= $this->key_data;
+			}
 
-            $packet->offset += strlen($data);
+			//
+			// pack in the other size
+			//
+			$data .= pack('n', $this->other_size);
 
-            return $data;
-        }
+			if ($this->other_size > 0) {
+				$data .= $this->other_data;
+			}
 
-        return null;
-    }
+			$packet->offset += strlen($data);
+
+			return $data;
+		}
+
+		return null;
+	}
 }

@@ -21,4 +21,5 @@
  * The TA RR is implemented exactly like the DS record, so
  * for now we just extend the DS RR and use it.
  */
-class Net_DNS2_RR_TA extends Net_DNS2_RR_DS {}
+class Net_DNS2_RR_TA extends Net_DNS2_RR_DS {
+}

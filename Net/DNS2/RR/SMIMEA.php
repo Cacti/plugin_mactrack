@@ -21,4 +21,5 @@
  * The SMIMEA RR is implemented exactly like the TLSA record, so
  * for now we just extend the TLSA RR and use it.
  */
-class Net_DNS2_RR_SMIMEA extends Net_DNS2_RR_TLSA {}
+class Net_DNS2_RR_SMIMEA extends Net_DNS2_RR_TLSA {
+}

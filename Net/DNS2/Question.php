@@ -36,149 +36,145 @@
  *    |                     QCLASS                    |
  *    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  */
-class Net_DNS2_Question
-{
-    /*
-     * The name of the question
-     *
-     * referred to as "zname" for updates per RFC2136
-     *
-     */
-    public $qname;
+class Net_DNS2_Question {
+	/*
+	 * The name of the question
+	 *
+	 * referred to as "zname" for updates per RFC2136
+	 *
+	 */
+	public $qname;
 
-    /*
-     * The RR type for the questino
-     *
-     * referred to as "ztype" for updates per RFC2136
-     *
-     */
-    public $qtype;
+	/*
+	 * The RR type for the questino
+	 *
+	 * referred to as "ztype" for updates per RFC2136
+	 *
+	 */
+	public $qtype;
 
-    /*
-     * The RR class for the questino
-     *
-     * referred to as "zclass" for updates per RFC2136
-     *
-     */
-    public $qclass;
+	/*
+	 * The RR class for the questino
+	 *
+	 * referred to as "zclass" for updates per RFC2136
+	 *
+	 */
+	public $qclass;
 
-    /**
-     * Constructor - builds a new Net_DNS2_Question object.
-     *
-     * @param mixed &$packet either a Net_DNS2_Packet object, or null to
-     *                       build an empty object
-     *
-     * @throws Net_DNS2_Exception
-     */
-    public function __construct(?Net_DNS2_Packet &$packet = null)
-    {
-        if (!is_null($packet)) {
-            $this->set($packet);
-        } else {
-            $this->qname = '';
-            $this->qtype = 'A';
-            $this->qclass = 'IN';
-        }
-    }
+	/**
+	 * Constructor - builds a new Net_DNS2_Question object.
+	 *
+	 * @param mixed &$packet either a Net_DNS2_Packet object, or null to
+	 *                       build an empty object
+	 *
+	 * @throws Net_DNS2_Exception
+	 */
+	public function __construct(?Net_DNS2_Packet &$packet = null) {
+		if (!is_null($packet)) {
+			$this->set($packet);
+		} else {
+			$this->qname  = '';
+			$this->qtype  = 'A';
+			$this->qclass = 'IN';
+		}
+	}
 
-    /**
-     * magic __toString() function to return the Net_DNS2_Question object as a string.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return ";;\n;; Question:\n;;\t ".$this->qname.'. '
-            .$this->qtype.' '.$this->qclass."\n";
-    }
+	/**
+	 * magic __toString() function to return the Net_DNS2_Question object as a string.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		return ";;\n;; Question:\n;;\t " . $this->qname . '. '
+			. $this->qtype . ' ' . $this->qclass . "\n";
+	}
 
-    /**
-     * builds a new Net_DNS2_Header object from a Net_DNS2_Packet object.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet object
-     *
-     * @return bool
-     *
-     * @throws Net_DNS2_Exception
-     */
-    public function set(Net_DNS2_Packet &$packet)
-    {
-        //
-        // expand the name
-        //
-        $this->qname = $packet->expand($packet, $packet->offset);
-        if ($packet->rdlength < ($packet->offset + 4)) {
-            throw new Net_DNS2_Exception(
-                'invalid question section: to small',
-                Net_DNS2_Lookups::E_QUESTION_INVALID
-            );
-        }
+	/**
+	 * builds a new Net_DNS2_Header object from a Net_DNS2_Packet object.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet object
+	 *
+	 * @return bool
+	 *
+	 * @throws Net_DNS2_Exception
+	 */
+	public function set(Net_DNS2_Packet &$packet) {
+		//
+		// expand the name
+		//
+		$this->qname = $packet->expand($packet, $packet->offset);
 
-        //
-        // unpack the type and class
-        //
-        $type = ord($packet->rdata[$packet->offset++]) << 8
-            | ord($packet->rdata[$packet->offset++]);
-        $class = ord($packet->rdata[$packet->offset++]) << 8
-            | ord($packet->rdata[$packet->offset++]);
+		if ($packet->rdlength < ($packet->offset + 4)) {
+			throw new Net_DNS2_Exception(
+				'invalid question section: to small',
+				Net_DNS2_Lookups::E_QUESTION_INVALID
+			);
+		}
 
-        //
-        // validate it
-        //
-        $type_name = Net_DNS2_Lookups::$rr_types_by_id[$type];
-        $class_name = Net_DNS2_Lookups::$classes_by_id[$class];
+		//
+		// unpack the type and class
+		//
+		$type = ord($packet->rdata[$packet->offset++]) << 8
+			| ord($packet->rdata[$packet->offset++]);
+		$class = ord($packet->rdata[$packet->offset++]) << 8
+			| ord($packet->rdata[$packet->offset++]);
 
-        if ((!isset($type_name)) || (!isset($class_name))) {
-            throw new Net_DNS2_Exception(
-                'invalid question section: invalid type ('.$type
-                .') or class ('.$class.') specified.',
-                Net_DNS2_Lookups::E_QUESTION_INVALID
-            );
-        }
+		//
+		// validate it
+		//
+		$type_name  = Net_DNS2_Lookups::$rr_types_by_id[$type];
+		$class_name = Net_DNS2_Lookups::$classes_by_id[$class];
 
-        //
-        // store it
-        //
-        $this->qtype = $type_name;
-        $this->qclass = $class_name;
+		if ((!isset($type_name)) || (!isset($class_name))) {
+			throw new Net_DNS2_Exception(
+				'invalid question section: invalid type (' . $type
+				. ') or class (' . $class . ') specified.',
+				Net_DNS2_Lookups::E_QUESTION_INVALID
+			);
+		}
 
-        return true;
-    }
+		//
+		// store it
+		//
+		$this->qtype  = $type_name;
+		$this->qclass = $class_name;
 
-    /**
-     * returns a binary packed Net_DNS2_Question object.
-     *
-     * @param Net_DNS2_Packet &$packet the Net_DNS2_Packet object this question is
-     *                                 part of. This needs to be passed in so that
-     *                                 the compressed qname value can be packed in
-     *                                 with the names of the other parts of the
-     *                                 packet.
-     *
-     * @return string
-     *
-     * @throws Net_DNS2_Exception
-     */
-    public function get(Net_DNS2_Packet &$packet)
-    {
-        //
-        // validate the type and class
-        //
-        $type = Net_DNS2_Lookups::$rr_types_by_name[$this->qtype];
-        $class = Net_DNS2_Lookups::$classes_by_name[$this->qclass];
+		return true;
+	}
 
-        if ((!isset($type)) || (!isset($class))) {
-            throw new Net_DNS2_Exception(
-                'invalid question section: invalid type ('.$this->qtype
-                .') or class ('.$this->qclass.') specified.',
-                Net_DNS2_Lookups::E_QUESTION_INVALID
-            );
-        }
+	/**
+	 * returns a binary packed Net_DNS2_Question object.
+	 *
+	 * @param Net_DNS2_Packet &$packet the Net_DNS2_Packet object this question is
+	 *                                 part of. This needs to be passed in so that
+	 *                                 the compressed qname value can be packed in
+	 *                                 with the names of the other parts of the
+	 *                                 packet.
+	 *
+	 * @return string
+	 *
+	 * @throws Net_DNS2_Exception
+	 */
+	public function get(Net_DNS2_Packet &$packet) {
+		//
+		// validate the type and class
+		//
+		$type  = Net_DNS2_Lookups::$rr_types_by_name[$this->qtype];
+		$class = Net_DNS2_Lookups::$classes_by_name[$this->qclass];
 
-        $data = $packet->compress($this->qname, $packet->offset);
+		if ((!isset($type)) || (!isset($class))) {
+			throw new Net_DNS2_Exception(
+				'invalid question section: invalid type (' . $this->qtype
+				. ') or class (' . $this->qclass . ') specified.',
+				Net_DNS2_Lookups::E_QUESTION_INVALID
+			);
+		}
 
-        $data .= chr($type >> 8).chr($type).chr($class >> 8).chr($class);
-        $packet->offset += 4;
+		$data = $packet->compress($this->qname, $packet->offset);
 
-        return $data;
-    }
+		$data .= chr($type >> 8) . chr($type) . chr($class >> 8) . chr($class);
+		$packet->offset += 4;
+
+		return $data;
+	}
 }

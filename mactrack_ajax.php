@@ -33,8 +33,8 @@ include_once './plugins/mactrack/lib/mactrack_functions.php';
 set_default_action();
 
 switch (get_request_var('action')) {
-    case 'save_graph_settings':
-        mactrack_save_graph_settings();
+	case 'save_graph_settings':
+		mactrack_save_graph_settings();
 
-        break;
+		break;
 }

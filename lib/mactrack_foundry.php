@@ -25,190 +25,191 @@
 
 // register this functions scanning functions
 if (!isset($mactrack_scanning_functions)) {
-    $mactrack_scanning_functions = [];
+	$mactrack_scanning_functions = [];
 }
 array_push($mactrack_scanning_functions, 'get_foundry_switch_ports');
 
-function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
-{
-    global $debug, $scan_date;
+function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+	global $debug, $scan_date;
 
-    // initialize port counters
-    $device['ports_total'] = 0;
-    $device['ports_active'] = 0;
-    $device['ports_trunk'] = 0;
-    $device['vlans_total'] = 0;
-    $device['ports_dual_mode'] = 0;
+	// initialize port counters
+	$device['ports_total']     = 0;
+	$device['ports_active']    = 0;
+	$device['ports_trunk']     = 0;
+	$device['vlans_total']     = 0;
+	$device['ports_dual_mode'] = 0;
 
-    // get VLAN information
-    $vlan_ids = xform_standard_indexed_data('.1.3.6.1.4.1.1991.1.1.3.2.7.1.21', $device);
+	// get VLAN information
+	$vlan_ids = xform_standard_indexed_data('.1.3.6.1.4.1.1991.1.1.3.2.7.1.21', $device);
 
-    // get VLAN Trunk status
-    $vlan_trunkstatus = xform_standard_indexed_data('.1.3.6.1.4.1.1991.1.1.3.3.5.1.4', $device);
-    $device['vlans_total'] = cacti_sizeof($vlan_trunkstatus);
-    mactrack_debug('VLAN data collected. There are '.cacti_sizeof($vlan_ids).' VLANS.');
+	// get VLAN Trunk status
+	$vlan_trunkstatus      = xform_standard_indexed_data('.1.3.6.1.4.1.1991.1.1.3.3.5.1.4', $device);
+	$device['vlans_total'] = cacti_sizeof($vlan_trunkstatus);
+	mactrack_debug('VLAN data collected. There are ' . cacti_sizeof($vlan_ids) . ' VLANS.');
 
-    // get the ifIndexes for the device
-    $ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);
-    mactrack_debug('ifIndexes data collection complete');
+	// get the ifIndexes for the device
+	$ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);
+	mactrack_debug('ifIndexes data collection complete');
 
-    // get the ifTypes for the device
-    $ifTypes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.3', $device);
-    mactrack_debug('ifTypes data collection complete.');
+	// get the ifTypes for the device
+	$ifTypes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.3', $device);
+	mactrack_debug('ifTypes data collection complete.');
 
-    // get the ifNames for the device
-    $ifNames = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.1', $device);
-    mactrack_debug('ifNames data collection complete.');
+	// get the ifNames for the device
+	$ifNames = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.1', $device);
+	mactrack_debug('ifNames data collection complete.');
 
-    // get ports that happen to be link ports
-    $link_ports = get_link_port_status($device);
-    mactrack_debug('ipAddrTable scanning for link ports data collection complete.');
+	// get ports that happen to be link ports
+	$link_ports = get_link_port_status($device);
+	mactrack_debug('ipAddrTable scanning for link ports data collection complete.');
 
-    // get ports that have no vlan id (non dual-mode)
-    $port_dualmode = xform_standard_indexed_data('.1.3.6.1.4.1.1991.1.1.3.3.5.1.24', $device);
-    mactrack_debug('ifVlanId data collection complete.');
+	// get ports that have no vlan id (non dual-mode)
+	$port_dualmode = xform_standard_indexed_data('.1.3.6.1.4.1.1991.1.1.3.3.5.1.24', $device);
+	mactrack_debug('ifVlanId data collection complete.');
 
-    if (cacti_sizeof($ifIndexes)) {
-        foreach ($ifIndexes as $ifIndex) {
-            $ifInterfaces[$ifIndex]['ifIndex'] = $ifIndex;
-            $ifInterfaces[$ifIndex]['ifName'] = mactrack_arr_key($ifNames, $ifIndex);
-            $ifInterfaces[$ifIndex]['ifType'] = $ifTypes[$ifIndex];
-            $ifInterfaces[$ifIndex]['linkPort'] = mactrack_arr_key($link_ports, $ifIndex);
-            $ifInterfaces[$ifIndex]['trunkPortState'] = mactrack_arr_key($vlan_trunkstatus, $ifIndex);
-            $ifInterfaces[$ifIndex]['ifVlanId'] = mactrack_arr_key($port_dualmode, $ifIndex);
-        }
-    }
-    mactrack_debug('ifInterfaces assembly complete.');
+	if (cacti_sizeof($ifIndexes)) {
+		foreach ($ifIndexes as $ifIndex) {
+			$ifInterfaces[$ifIndex]['ifIndex']        = $ifIndex;
+			$ifInterfaces[$ifIndex]['ifName']         = mactrack_arr_key($ifNames, $ifIndex);
+			$ifInterfaces[$ifIndex]['ifType']         = $ifTypes[$ifIndex];
+			$ifInterfaces[$ifIndex]['linkPort']       = mactrack_arr_key($link_ports, $ifIndex);
+			$ifInterfaces[$ifIndex]['trunkPortState'] = mactrack_arr_key($vlan_trunkstatus, $ifIndex);
+			$ifInterfaces[$ifIndex]['ifVlanId']       = mactrack_arr_key($port_dualmode, $ifIndex);
+		}
+	}
+	mactrack_debug('ifInterfaces assembly complete.');
 
-    // calculate the number of end user ports
-    if (cacti_sizeof($ifTypes)) {
-        foreach ($ifTypes as $ifType) {
-            if (($ifType >= 6) && ($ifType <= 9)) {
-                ++$device['ports_total'];
-            }
-        }
-    }
-    mactrack_debug('Total Ports = '.$device['ports_total']);
+	// calculate the number of end user ports
+	if (cacti_sizeof($ifTypes)) {
+		foreach ($ifTypes as $ifType) {
+			if (($ifType >= 6) && ($ifType <= 9)) {
+				++$device['ports_total'];
+			}
+		}
+	}
+	mactrack_debug('Total Ports = ' . $device['ports_total']);
 
-    // calculate the number of trunk ports
-    if (cacti_sizeof($ifIndexes)) {
-        foreach ($ifIndexes as $ifIndex) {
-            if ((1 == $ifInterfaces[$ifIndex]['trunkPortState'])
-                && (0 == $ifInterfaces[$ifIndex]['ifVlanId'])) {
-                ++$device['ports_trunk'];
-            }
-        }
-    }
-    mactrack_debug('Total Trunk Ports = '.$device['ports_trunk']);
+	// calculate the number of trunk ports
+	if (cacti_sizeof($ifIndexes)) {
+		foreach ($ifIndexes as $ifIndex) {
+			if (($ifInterfaces[$ifIndex]['trunkPortState'] == 1)
+				&& ($ifInterfaces[$ifIndex]['ifVlanId'] == 0)) {
+				++$device['ports_trunk'];
+			}
+		}
+	}
+	mactrack_debug('Total Trunk Ports = ' . $device['ports_trunk']);
 
-    // get VLAN details
-    $i = 0;
-    if (cacti_sizeof($vlan_ids)) {
-        foreach ($vlan_ids as $vlan_id => $vlan_name) {
-            $active_vlans[$i]['vlan_id'] = $vlan_id;
-            $active_vlans[$i]['vlan_name'] = $vlan_name;
-            ++$active_vlans;
-            mactrack_debug('VLAN ID = '.$active_vlans[$i]['vlan_id'].' VLAN Name = '.$active_vlans[$i]['vlan_name']);
-            ++$i;
-        }
-    }
+	// get VLAN details
+	$i = 0;
 
-    if (cacti_sizeof($active_vlans)) {
-        // get the port status information
-        $port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, '', '', false);
-        $port_vlan_data = xform_standard_indexed_data('.1.3.6.1.4.1.1991.1.1.3.2.6.1.1', $device);
+	if (cacti_sizeof($vlan_ids)) {
+		foreach ($vlan_ids as $vlan_id => $vlan_name) {
+			$active_vlans[$i]['vlan_id']   = $vlan_id;
+			$active_vlans[$i]['vlan_name'] = $vlan_name;
+			++$active_vlans;
+			mactrack_debug('VLAN ID = ' . $active_vlans[$i]['vlan_id'] . ' VLAN Name = ' . $active_vlans[$i]['vlan_name']);
+			++$i;
+		}
+	}
 
-        $i = 0;
-        $j = 0;
-        $port_array = [];
+	if (cacti_sizeof($active_vlans)) {
+		// get the port status information
+		$port_results   = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, '', '', false);
+		$port_vlan_data = xform_standard_indexed_data('.1.3.6.1.4.1.1991.1.1.3.2.6.1.1', $device);
 
-        if (cacti_sizeof($port_results)) {
-            foreach ($port_results as $port_result) {
-                $ifIndex = $port_result['port_number'];
-                $ifType = $ifTypes[$ifIndex];
-                $ifName = $ifNames[$ifIndex];
-                $portName = $ifName;
-                $portTrunkStatus = isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '';
-                mactrack_debug('Port Number = '.$ifIndex.' Type = '.$ifType.' Name = '.$ifName.' Port Name = '.$portName.' Trunk Status = '.$portTrunkStatus);
+		$i          = 0;
+		$j          = 0;
+		$port_array = [];
 
-                // only output legitimate end user ports
-                if (($ifType >= 6) && ($ifType <= 9)) {
-                    $port_array[$i]['vlan_id'] = mactrack_arr_key($port_vlan_data, $port_result['port_number']);
-                    $port_array[$i]['vlan_name'] = mactrack_arr_key($vlan_ids, $port_array[$i]['vlan_id']);
-                    $port_array[$i]['port_number'] = mactrack_arr_key($port_result, 'port_number');
-                    $port_array[$i]['port_name'] = $portName;
-                    $port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
+		if (cacti_sizeof($port_results)) {
+			foreach ($port_results as $port_result) {
+				$ifIndex         = $port_result['port_number'];
+				$ifType          = $ifTypes[$ifIndex];
+				$ifName          = $ifNames[$ifIndex];
+				$portName        = $ifName;
+				$portTrunkStatus = isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '';
+				mactrack_debug('Port Number = ' . $ifIndex . ' Type = ' . $ifType . ' Name = ' . $ifName . ' Port Name = ' . $portName . ' Trunk Status = ' . $portTrunkStatus);
 
-                    mactrack_debug('VLAN: '.$port_array[$i]['vlan_id'].', '
-                        .'NAME: '.$port_array[$i]['vlan_name'].', '
-                        .'PORT: '.$ifIndex.', '
-                        .'NAME: '.$port_array[$i]['port_name'].', '
-                        .'MAC: '.$port_array[$i]['mac_address']);
+				// only output legitimate end user ports
+				if (($ifType >= 6) && ($ifType <= 9)) {
+					$port_array[$i]['vlan_id']     = mactrack_arr_key($port_vlan_data, $port_result['port_number']);
+					$port_array[$i]['vlan_name']   = mactrack_arr_key($vlan_ids, $port_array[$i]['vlan_id']);
+					$port_array[$i]['port_number'] = mactrack_arr_key($port_result, 'port_number');
+					$port_array[$i]['port_name']   = $portName;
+					$port_array[$i]['mac_address'] = xform_mac_address($port_result['mac_address']);
 
-                    ++$i;
-                }
+					mactrack_debug('VLAN: ' . $port_array[$i]['vlan_id'] . ', '
+						. 'NAME: ' . $port_array[$i]['vlan_name'] . ', '
+						. 'PORT: ' . $ifIndex . ', '
+						. 'NAME: ' . $port_array[$i]['port_name'] . ', '
+						. 'MAC: ' . $port_array[$i]['mac_address']);
 
-                ++$j;
-            }
+					++$i;
+				}
 
-            $active_ports_array = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.8', $device);
-            $indexes = array_keys($active_ports_array);
+				++$j;
+			}
 
-            $i = 0;
-            if (cacti_sizeof($active_ports_array)) {
-                foreach ($active_ports_array as $port_info) {
-                    $port_info = mactrack_strip_alpha($port_info);
-                    $ifInterfaces[$indexes[$i]]['ifType'] = mactrack_strip_alpha($ifInterfaces[$indexes[$i]]['ifType']);
+			$active_ports_array = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.8', $device);
+			$indexes            = array_keys($active_ports_array);
 
-                    mactrack_debug($ifInterfaces[$indexes[$i]]['ifType']);
+			$i = 0;
 
-                    if ((($ifInterfaces[$indexes[$i]]['ifType'] >= 6)
-                        && ($ifInterfaces[$indexes[$i]]['ifType'] <= 9))
-                        || (71 == $ifInterfaces[$indexes[$i]]['ifType'])) {
-                        if (1 == $port_info) {
-                            ++$device['ports_active'];
-                        }
+			if (cacti_sizeof($active_ports_array)) {
+				foreach ($active_ports_array as $port_info) {
+					$port_info                            = mactrack_strip_alpha($port_info);
+					$ifInterfaces[$indexes[$i]]['ifType'] = mactrack_strip_alpha($ifInterfaces[$indexes[$i]]['ifType']);
 
-                        ++$i;
-                    }
-                }
-            }
+					mactrack_debug($ifInterfaces[$indexes[$i]]['ifType']);
 
-            $device['ports_active'] = $device['ports_active'] - $device['ports_trunk'];
+					if ((($ifInterfaces[$indexes[$i]]['ifType'] >= 6)
+						&& ($ifInterfaces[$indexes[$i]]['ifType'] <= 9))
+						|| ($ifInterfaces[$indexes[$i]]['ifType'] == 71)) {
+						if ($port_info == 1) {
+							++$device['ports_active'];
+						}
 
-            // get IP Addresses
-            $gateway = cacti_snmp_get(
-                $device['hostname'],
-                $device['snmp_readstring'],
-                '.1.3.6.1.4.1.1991.1.1.2.1.10.0',
-                $device['snmp_version'],
-                $device['snmp_username'],
-                $device['snmp_password'],
-                $device['snmp_auth_protocol'],
-                $device['snmp_priv_passphrase'],
-                $device['snmp_priv_protocol'],
-                $device['snmp_context'],
-                $device['snmp_port'],
-                $device['snmp_timeout'],
-                $device['snmp_retries']
-            );
+						++$i;
+					}
+				}
+			}
 
-            mactrack_debug('INFO: GATEWAY: '.$gateway);
+			$device['ports_active'] = $device['ports_active'] - $device['ports_trunk'];
 
-            // display completion message
-            mactrack_debug('INFO: HOST: '.$device['hostname'].', TYPE: '.substr($device['snmp_sysDescr'], 0, 40).', TOTAL PORTS: '.$device['ports_total'].', ACTIVE PORTS: '.$device['ports_active']);
+			// get IP Addresses
+			$gateway = cacti_snmp_get(
+				$device['hostname'],
+				$device['snmp_readstring'],
+				'.1.3.6.1.4.1.1991.1.1.2.1.10.0',
+				$device['snmp_version'],
+				$device['snmp_username'],
+				$device['snmp_password'],
+				$device['snmp_auth_protocol'],
+				$device['snmp_priv_passphrase'],
+				$device['snmp_priv_protocol'],
+				$device['snmp_context'],
+				$device['snmp_port'],
+				$device['snmp_timeout'],
+				$device['snmp_retries']
+			);
 
-            $device['last_runmessage'] = 'Data collection completed ok';
-            $device['macs_active'] = cacti_sizeof($port_array);
+			mactrack_debug('INFO: GATEWAY: ' . $gateway);
 
-            db_store_device_port_results($device, $port_array, $scan_date);
-        }
-    } else {
-        mactrack_debug('INFO: HOST: '.$device['hostname'].', TYPE: '.substr($device['snmp_sysDescr'], 0, 40).', No active devices on this network device.');
+			// display completion message
+			mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'], 0, 40) . ', TOTAL PORTS: ' . $device['ports_total'] . ', ACTIVE PORTS: ' . $device['ports_active']);
 
-        $device['snmp_status'] = HOST_UP;
-        $device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
-    }
+			$device['last_runmessage'] = 'Data collection completed ok';
+			$device['macs_active']     = cacti_sizeof($port_array);
 
-    return $device;
+			db_store_device_port_results($device, $port_array, $scan_date);
+		}
+	} else {
+		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'], 0, 40) . ', No active devices on this network device.');
+
+		$device['snmp_status']     = HOST_UP;
+		$device['last_runmessage'] = 'Data collection completed ok. No active devices on this network device.';
+	}
+
+	return $device;
 }

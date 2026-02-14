@@ -27,126 +27,122 @@
  *  |  Salt Length  |                     Salt                      /
  *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
  */
-class Net_DNS2_RR_NSEC3PARAM extends Net_DNS2_RR
-{
-    /*
-     * Algorithm to use
-     *
-     * TODO: same as the NSEC3
-     */
-    public $algorithm;
+class Net_DNS2_RR_NSEC3PARAM extends Net_DNS2_RR {
+	/*
+	 * Algorithm to use
+	 *
+	 * TODO: same as the NSEC3
+	 */
+	public $algorithm;
 
-    // flags
-    public $flags;
+	// flags
+	public $flags;
 
-    // defines the number of additional times the hash is performed.
-    public $iterations;
+	// defines the number of additional times the hash is performed.
+	public $iterations;
 
-    // the length of the salt- not displayed
-    public $salt_length;
+	// the length of the salt- not displayed
+	public $salt_length;
 
-    // the salt
-    public $salt;
+	// the salt
+	public $salt;
 
-    /**
-     * method to return the rdata portion of the packet as a string.
-     *
-     * @return string
-     */
-    protected function rrToString()
-    {
-        $out = $this->algorithm.' '.$this->flags.' '.$this->iterations.' ';
+	/**
+	 * method to return the rdata portion of the packet as a string.
+	 *
+	 * @return string
+	 */
+	protected function rrToString() {
+		$out = $this->algorithm . ' ' . $this->flags . ' ' . $this->iterations . ' ';
 
-        //
-        // per RFC5155, the salt_length value isn't displayed, and if the salt
-        // is empty, the salt is displayed as "-"
-        //
-        if ($this->salt_length > 0) {
-            $out .= $this->salt;
-        } else {
-            $out .= '-';
-        }
+		//
+		// per RFC5155, the salt_length value isn't displayed, and if the salt
+		// is empty, the salt is displayed as "-"
+		//
+		if ($this->salt_length > 0) {
+			$out .= $this->salt;
+		} else {
+			$out .= '-';
+		}
 
-        return $out;
-    }
+		return $out;
+	}
 
-    /**
-     * parses the rdata portion from a standard DNS config line.
-     *
-     * @param array $rdata a string split line of values for the rdata
-     *
-     * @return bool
-     */
-    protected function rrFromString(array $rdata)
-    {
-        $this->algorithm = array_shift($rdata);
-        $this->flags = array_shift($rdata);
-        $this->iterations = array_shift($rdata);
+	/**
+	 * parses the rdata portion from a standard DNS config line.
+	 *
+	 * @param array $rdata a string split line of values for the rdata
+	 *
+	 * @return bool
+	 */
+	protected function rrFromString(array $rdata) {
+		$this->algorithm  = array_shift($rdata);
+		$this->flags      = array_shift($rdata);
+		$this->iterations = array_shift($rdata);
 
-        $salt = array_shift($rdata);
-        if ('-' == $salt) {
-            $this->salt_length = 0;
-            $this->salt = '';
-        } else {
-            $this->salt_length = strlen(pack('H*', $salt));
-            $this->salt = strtoupper($salt);
-        }
+		$salt = array_shift($rdata);
 
-        return true;
-    }
+		if ($salt == '-') {
+			$this->salt_length = 0;
+			$this->salt        = '';
+		} else {
+			$this->salt_length = strlen(pack('H*', $salt));
+			$this->salt        = strtoupper($salt);
+		}
 
-    /**
-     * parses the rdata of the Net_DNS2_Packet object.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
-     *
-     * @return bool
-     */
-    protected function rrSet(Net_DNS2_Packet &$packet)
-    {
-        if ($this->rdlength > 0) {
-            $x = unpack('Calgorithm/Cflags/niterations/Csalt_length', $this->rdata);
+		return true;
+	}
 
-            $this->algorithm = $x['algorithm'];
-            $this->flags = $x['flags'];
-            $this->iterations = $x['iterations'];
-            $this->salt_length = $x['salt_length'];
+	/**
+	 * parses the rdata of the Net_DNS2_Packet object.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet to parse the RR from
+	 *
+	 * @return bool
+	 */
+	protected function rrSet(Net_DNS2_Packet &$packet) {
+		if ($this->rdlength > 0) {
+			$x = unpack('Calgorithm/Cflags/niterations/Csalt_length', $this->rdata);
 
-            if ($this->salt_length > 0) {
-                $x = unpack('H*', substr($this->rdata, 5, $this->salt_length));
-                $this->salt = strtoupper($x[1]);
-            }
+			$this->algorithm   = $x['algorithm'];
+			$this->flags       = $x['flags'];
+			$this->iterations  = $x['iterations'];
+			$this->salt_length = $x['salt_length'];
 
-            return true;
-        }
+			if ($this->salt_length > 0) {
+				$x          = unpack('H*', substr($this->rdata, 5, $this->salt_length));
+				$this->salt = strtoupper($x[1]);
+			}
 
-        return false;
-    }
+			return true;
+		}
 
-    /**
-     * returns the rdata portion of the DNS packet.
-     *
-     * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
-     *                                 compressed names
-     *
-     * @return mixed either returns a binary packed
-     *               string or null on failure
-     */
-    protected function rrGet(Net_DNS2_Packet &$packet)
-    {
-        $salt = pack('H*', $this->salt);
-        $this->salt_length = strlen($salt);
+		return false;
+	}
 
-        $data = pack(
-            'CCnC',
-            $this->algorithm,
-            $this->flags,
-            $this->iterations,
-            $this->salt_length
-        ).$salt;
+	/**
+	 * returns the rdata portion of the DNS packet.
+	 *
+	 * @param Net_DNS2_Packet &$packet a Net_DNS2_Packet packet use for
+	 *                                 compressed names
+	 *
+	 * @return mixed either returns a binary packed
+	 *               string or null on failure
+	 */
+	protected function rrGet(Net_DNS2_Packet &$packet) {
+		$salt              = pack('H*', $this->salt);
+		$this->salt_length = strlen($salt);
 
-        $packet->offset += strlen($data);
+		$data = pack(
+			'CCnC',
+			$this->algorithm,
+			$this->flags,
+			$this->iterations,
+			$this->salt_length
+		) . $salt;
 
-        return $data;
-    }
+		$packet->offset += strlen($data);
+
+		return $data;
+	}
 }
