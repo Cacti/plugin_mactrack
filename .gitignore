@@ -21,5 +21,3 @@
 
 locales/po/*.mo
 vendor/
-composer.lock
-composer.phar
