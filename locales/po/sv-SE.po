@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2025-10-27 10:09+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2026-03-10 07:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:495 mactrack_view_dot1x.php:622
@@ -456,7 +456,7 @@ msgstr "Skriv över befintliga data?"
 
 #: mactrack_device_types.php:519 mactrack_devices.php:525
 msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
-msgstr "Ska importprocessen tillåtas att skriva över befintliga data?  Observera att det här inte betyder att radera gammal rad, bara ersätta dubbletta rader."
+msgstr "Ska importprocessen tillåtas att skriva över befintliga data?  Observera att det här inte betyder att ta bort gammal rad, bara ersätta dubbletta rader."
 
 #: mactrack_device_types.php:522 mactrack_devices.php:528
 msgid "Allow Existing Rows to be Updated?"
@@ -760,7 +760,7 @@ msgstr "Klicka på \"Fortsätt\" för att kopiera SNMP-inställningar från ansl
 
 #: mactrack_devices.php:353
 msgid "Click 'Continue' to delete the following Devices"
-msgstr "Klicka på \"Fortsätt\" för att radera följande enheter"
+msgstr "Klicka på \"Fortsätt\" för att ta bort följande enheter"
 
 #: mactrack_devices.php:513
 msgid "Import Mactrack Devices"
@@ -981,11 +981,11 @@ msgstr "Ingen Cacti Link"
 
 #: mactrack_macauth.php:132
 msgid "You must select at least one Authorized Mac to delete."
-msgstr "Du måste välja minst en auktoriserad Mac för att radera."
+msgstr "Du måste välja minst en auktoriserad Mac för att ta bort."
 
 #: mactrack_macauth.php:140
 msgid "Click 'Continue' to delete the following Authorized Mac's?"
-msgstr "Klicka på \"Fortsätt\" för att radera följande behöriga Mac: s?"
+msgstr "Klicka på \"Fortsätt\" för att ta bort följande behöriga Mac: s?"
 
 #: mactrack_macauth.php:251
 #, php-format
@@ -1031,7 +1031,7 @@ msgstr "MAC: s"
 
 #: mactrack_macwatch.php:143
 msgid "Click 'Continue' to delete the following watched Mac's?"
-msgstr "Klicka på \"Fortsätt\" för att radera följande Mac-ser?"
+msgstr "Klicka på \"Fortsätt\" för att ta bort följande Mac-ser?"
 
 #: mactrack_macwatch.php:238
 #, php-format
@@ -1072,7 +1072,7 @@ msgstr "Inga Mac-datorer som övervakats av Mactrack hittades"
 
 #: mactrack_sites.php:140
 msgid "Click 'Continue' to delete the following Site(s)?"
-msgstr "Klicka på \"Fortsätt\" för att radera följande sajter?"
+msgstr "Klicka på \"Fortsätt\" för att ta bort följande sajter?"
 
 #: mactrack_sites.php:147
 msgid "You must select at least one site."
@@ -1132,7 +1132,7 @@ msgstr "Du måste välja minst ett SNMP-alternativ."
 
 #: mactrack_snmp.php:255
 msgid "Click 'Continue' to delete the following SNMP Option(s)."
-msgstr "Klicka på \"Fortsätt\" för att radera följande SNMP-alternativ (er)."
+msgstr "Klicka på \"Fortsätt\" för att ta bort följande SNMP-alternativ."
 
 #: mactrack_snmp.php:262
 msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
@@ -1361,7 +1361,7 @@ msgstr "Är du säker?"
 
 #: mactrack_utilities.php:349
 msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
-msgstr "Är du säker på att du vill radera all port till MAC till IP-resultat från systemet?"
+msgstr "Är du säker på att du vill ta bort all port till MAC till IP-resultat från systemet?"
 
 #: mactrack_utilities.php:396 mactrack_utilities.php:419
 msgid "Mactrack Database Results"
@@ -1374,7 +1374,7 @@ msgstr "Följande antal poster har tagits bort från databasen: %s"
 
 #: mactrack_utilities.php:407
 msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
-msgstr "Är du säker på att du vill radera all Aggregated Port till MAC till IP-resultat från systemet?"
+msgstr "Är du säker på att du vill ta bort alla Aggregated Port till MAC till IP-resultat från systemet?"
 
 #: mactrack_utilities.php:420
 #, php-format
@@ -1383,7 +1383,7 @@ msgstr "Följande antal poster har tagits bort från det aggregerade tabellen: %
 
 #: mactrack_utilities.php:430
 msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
-msgstr "Är du säker på att du vill radera och återskapa all Aggregated Port till MAC till IP-resultat från systemet?"
+msgstr "Är du säker på att du vill ta bort och återskapa all Aggregated Port till MAC till IP-resultat från systemet?"
 
 #: mactrack_utilities.php:456
 #, php-format
@@ -1702,7 +1702,7 @@ msgstr "Kasta bort Present"
 
 #: mactrack_view_interfaces.php:341
 msgid "No Graphs"
-msgstr "Grafer"
+msgstr "Inga diagram"
 
 #: mactrack_view_interfaces.php:342
 msgid "Interface Down"
@@ -1936,11 +1936,11 @@ msgstr "Du måste välja minst en rad."
 
 #: mactrack_view_macs.php:265
 msgid "You are not permitted to delete rows."
-msgstr "Det är inte tillåtet att radera rader."
+msgstr "Det är inte tillåtet att ta bort rader."
 
 #: mactrack_view_macs.php:273
 msgid "Click 'Continue' to Delete the following rows from Aggregated table."
-msgstr "Klicka på \"Fortsätt\" för att radera följande rader från Aggregated Table."
+msgstr "Klicka på \"Fortsätt\" för att ta bort följande rader från Aggregated Table."
 
 #: mactrack_view_macs.php:732 mactrack_view_macs.php:812
 #: mactrack_view_macs.php:922 mactrack_view_macs.php:1020
