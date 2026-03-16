@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2026-03-14 09:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-08-17 09:27-0400\nPO-Revision-Date: 2026-03-16 13:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: lib/mactrack_functions.php:37 mactrack_utilities.php:240
 #: mactrack_view_dot1x.php:495 mactrack_view_dot1x.php:622
@@ -306,7 +306,7 @@ msgstr "Start"
 #: mactrack_view_interfaces.php:543 mactrack_view_ips.php:331
 #: mactrack_view_macs.php:1139
 msgid "Clear"
-msgstr "Töm"
+msgstr "Rensa"
 
 #: lib/mactrack_functions.php:3388 mactrack_device_types.php:1057
 #: mactrack_devices.php:1174 mactrack_vendormacs.php:223
