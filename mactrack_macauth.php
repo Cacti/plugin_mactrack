@@ -384,7 +384,7 @@ function mactrack_maca_filter() {
 						<?php print __('Search', 'mactrack'); ?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter'); ?>'>
+						<input type='text' id='filter' size='25' value='<?php print html_escape(get_request_var('filter')); ?>'>
 					</td>
 					<td>
 						<?php print __('MAC\'s', 'mactrack'); ?>

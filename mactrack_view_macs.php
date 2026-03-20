@@ -88,7 +88,10 @@ function form_actions() {
 
 	// if we are to save this form, instead of display it
 	if (isset_request_var('selected_items')) {
-		$selected_items = unserialize(get_nfilter_request_var('selected_items'));
+		$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
+		if (!is_array($selected_items)) {
+			$selected_items = [];
+		}
 
 		foreach ($selected_items as $mac=>$ip) {
 			if (!filter_var($mac, FILTER_VALIDATE_MAC)) {
@@ -1106,7 +1109,7 @@ function mactrack_mac_filter() {
 						<?php print __('Search', 'mactrack'); ?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter'); ?>'>
+						<input type='text' id='filter' size='25' value='<?php print html_escape(get_request_var('filter')); ?>'>
 					</td>
 					<td>
 						<?php print __('Site', 'mactrack'); ?>
