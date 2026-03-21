@@ -184,104 +184,16 @@ function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = true, $row
 
 	// form the 'where' clause for our main sql query
 	if (get_request_var('mac_filter') != '') {
-		$mac_filter = str_replace(':', '', get_request_var('mac_filter'));
-		$mac_filter = str_replace('-', '', $mac_filter);
-		$mac_filter = str_replace('.', '', $mac_filter);
-
-		switch (get_request_var('mac_filter_type_id')) {
-			case '1': // do not filter
-				break;
-			case '2': // matches
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.mac_address = ' . db_qstr($mac_filter);
-
-				break;
-			case '3': // contains
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.mac_address LIKE ' . db_qstr('%' . $mac_filter . '%');
-
-				break;
-			case '4': // begins with
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.mac_address LIKE ' . db_qstr($mac_filter . '%');
-
-				break;
-			case '5': // does not contain
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.mac_address NOT LIKE ' . db_qstr('%' . $mac_filter . '%');
-
-				break;
-			case '6': // does not begin with
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.mac_address NOT LIKE ' . db_qstr($mac_filter . '%');
-
-				break;
-		}
+		$mac_filter = mactrack_normalize_mac(get_request_var('mac_filter'));
+		mactrack_typed_filter_clause('mtd.mac_address', $mac_filter, get_request_var('mac_filter_type_id'), $sql_where);
 	}
 
 	if ((get_request_var('ip_filter') != '') || (get_request_var('ip_filter_type_id') > 6)) {
-		switch (get_request_var('ip_filter_type_id')) {
-			case '1': // do not filter
-				break;
-			case '2': // matches
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.ip_address = ' . db_qstr(get_request_var('ip_filter'));
-
-				break;
-			case '3': // contains
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.ip_address LIKE ' . db_qstr('%' . get_request_var('ip_filter') . '%');
-
-				break;
-			case '4': // begins with
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.ip_address LIKE ' . db_qstr(get_request_var('ip_filter') . '%');
-
-				break;
-			case '5': // does not contain
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.ip_address NOT LIKE ' . db_qstr('%' . get_request_var('ip_filter') . '%');
-
-				break;
-			case '6': // does not begin with
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.ip_address NOT LIKE ' . db_qstr(get_request_var('ip_filter') . '%');
-
-				break;
-			case '7': // is null
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.ip_address = ""';
-
-				break;
-			case '8': // is not null
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.ip_address != ""';
-
-				break;
-		}
+		mactrack_typed_filter_clause('mtd.ip_address', get_request_var('ip_filter'), get_request_var('ip_filter_type_id'), $sql_where);
 	}
 
 	if ((get_request_var('port_name_filter') != '') || (get_request_var('port_name_filter_type_id') > 6)) {
-		switch (get_request_var('port_name_filter_type_id')) {
-			case '1': // do not filter
-				break;
-			case '2': // matches
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mti.ifName = ' . db_qstr(get_request_var('port_name_filter'));
-
-				break;
-			case '3': // contains
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mti.ifName LIKE ' . db_qstr('%' . get_request_var('port_name_filter') . '%');
-
-				break;
-			case '4': // begins with
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mti.ifName LIKE ' . db_qstr(get_request_var('port_name_filter') . '%');
-
-				break;
-			case '5': // does not contain
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mti.ifName NOT LIKE ' . db_qstr('%' . get_request_var('port_name_filter') . '%');
-
-				break;
-			case '6': // does not begin with
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mti.ifName NOT LIKE ' . db_qstr(get_request_var('port_name_filter') . '%');
-
-				break;
-			case '7': // is null
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mti.ifName = ""';
-
-				break;
-			case '8': // is not null
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mti.ifName != ""';
-
-				break;
-		}
+		mactrack_typed_filter_clause('mti.ifName', get_request_var('port_name_filter'), get_request_var('port_name_filter_type_id'), $sql_where);
 	}
 
 	if (get_request_var('filter') != '') {

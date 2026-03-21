@@ -3763,6 +3763,72 @@ function mactrack_arr_key($array, $key, $default = '') {
  * aabb.ccdd.eeff
  */
 
+/**
+ * Strip delimiter characters from a MAC address string.
+ *
+ * @param  string $input MAC address in any common format
+ *
+ * @return string Bare hex MAC with no delimiters
+ */
+function mactrack_normalize_mac($input) {
+	return str_replace([':','-','.'], '', $input);
+}
+
+/**
+ * Append a typed filter clause to a WHERE string.
+ *
+ * Supports: 1=none, 2=matches, 3=contains, 4=begins-with,
+ * 5=not-contains, 6=not-begins-with, 7=is-null, 8=is-not-null.
+ *
+ * @param  string $column     The SQL column name to filter on
+ * @param  string $value      The filter value from the request
+ * @param  string $type_id    The filter type identifier (1-8)
+ * @param  string &$sql_where The WHERE clause to append to
+ *
+ * @return void
+ */
+function mactrack_typed_filter_clause($column, $value, $type_id, &$sql_where) {
+	switch ($type_id) {
+		case '1': // do not filter
+			break;
+		case '2': // matches
+			$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
+				" $column = " . db_qstr($value);
+
+			break;
+		case '3': // contains
+			$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
+				" $column LIKE " . db_qstr('%' . $value . '%');
+
+			break;
+		case '4': // begins with
+			$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
+				" $column LIKE " . db_qstr($value . '%');
+
+			break;
+		case '5': // does not contain
+			$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
+				" $column NOT LIKE " . db_qstr('%' . $value . '%');
+
+			break;
+		case '6': // does not begin with
+			$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
+				" $column NOT LIKE " . db_qstr($value . '%');
+
+			break;
+		case '7': // is null
+			$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
+				" $column = \"\"";
+
+			break;
+		case '8': // is not null
+			$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
+				" $column != \"\"";
+
+			break;
+	}
+}
+
 function mactrack_format_mac($mac) {
 	if (is_null($mac) || strlen($mac) < 10) {
 		return $mac;
