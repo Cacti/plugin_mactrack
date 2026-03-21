@@ -144,34 +144,10 @@ function mactrack_check_upgrade() {
 	}
 }
 
-function mactrack_db_table_exists($table) {
-	return cacti_sizeof(db_fetch_assoc("SHOW TABLES LIKE '$table'"));
-}
-
-function mactrack_db_column_exists($table, $column) {
-	$found = false;
-
-	if (mactrack_db_table_exists($table)) {
-		$columns  = db_fetch_assoc("SHOW COLUMNS FROM $table");
-
-		if (cacti_sizeof($columns)) {
-			foreach ($columns as $row) {
-				if ($row['Field'] == $column) {
-					$found = true;
-
-					break;
-				}
-			}
-		}
-	}
-
-	return $found;
-}
-
 function mactrack_db_key_exists($table, $index) {
 	$found = false;
 
-	if (mactrack_db_table_exists($table)) {
+	if (db_table_exists($table)) {
 		$keys  = db_fetch_assoc("SHOW INDEXES FROM $table");
 
 		if (cacti_sizeof($keys)) {
@@ -193,13 +169,13 @@ function mactrack_execute_sql($message, $syntax) {
 }
 
 function mactrack_create_table($table, $syntax) {
-	if (!mactrack_db_table_exists($table)) {
+	if (!db_table_exists($table)) {
 		db_execute($syntax);
 	}
 }
 
 function mactrack_add_column($table, $column, $syntax) {
-	if (!mactrack_db_column_exists($table, $column)) {
+	if (!db_column_exists($table, $column)) {
 		db_execute($syntax);
 	}
 }
@@ -211,13 +187,13 @@ function mactrack_add_index($table, $index, $syntax) {
 }
 
 function mactrack_modify_column($table, $column, $syntax) {
-	if (mactrack_db_column_exists($table, $column)) {
+	if (db_column_exists($table, $column)) {
 		db_execute($syntax);
 	}
 }
 
 function mactrack_delete_column($table, $column, $syntax) {
-	if (mactrack_db_column_exists($table, $column)) {
+	if (db_column_exists($table, $column)) {
 		db_execute($syntax);
 	}
 }
