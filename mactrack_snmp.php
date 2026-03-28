@@ -541,7 +541,7 @@ function mactrack_snmp() {
 	$sql_where = '';
 
 	if (get_request_var('filter') != '') {
-		$sql_where .= "WHERE (mac_track_snmp.name LIKE '%" . get_request_var('filter') . "%')";
+		$sql_where .= "WHERE (mac_track_snmp.name LIKE " . db_qstr('%' . get_request_var('filter') . '%') . ")";
 	}
 
 	$total_rows = db_fetch_cell("SELECT
@@ -607,7 +607,7 @@ function snmp_options_filter() {
 						<?php print __('Search', 'mactrack'); ?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter'); ?>'>
+						<input type='text' id='filter' size='25' value='<?php print html_escape_request_var('filter'); ?>'>
 					</td>
 					<td>
 						<?php print __('Options', 'mactrack'); ?>

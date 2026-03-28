@@ -291,11 +291,11 @@ function mactrack_site_get_site_records(&$sql_where, $rows, $apply_limits = true
 	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
 		if (get_request_var('detail') == 'false') {
-			$sql_where = "WHERE (mts.site_name LIKE '%" . get_request_var('filter') . "%')";
+			$sql_where = "WHERE (mts.site_name LIKE " . db_qstr('%' . get_request_var('filter') . '%') . ")";
 		} else {
-			$sql_where = "WHERE (mts.vendor LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mtdt.description LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mts.site_name LIKE '%" . get_request_var('filter') . "%')";
+			$sql_where = "WHERE (mts.vendor LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
+				"mtdt.description LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
+				"mts.site_name LIKE " . db_qstr('%' . get_request_var('filter') . '%') . ")";
 		}
 	}
 

@@ -3360,7 +3360,7 @@ function mactrack_create_sql_filter($filter, $fields) {
 				$query .= '(';
 			}
 
-			$query .= ($field_no == 1 ? '' : " $operator ") . "($field $type LIKE '%" . $filter . "%')";
+			$query .= ($field_no == 1 ? '' : " $operator ") . "($field $type LIKE " . db_qstr('%' . $filter . '%') . ")";
 
 			$field_no++;
 		}
@@ -3582,7 +3582,7 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 						<?php print __('Search', 'mactrack'); ?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter'); ?>'>
+						<input type='text' id='filter' size='25' value='<?php print html_escape_request_var('filter'); ?>'>
 					</td>
 					<td>
 						<?php print __('Sites', 'mactrack'); ?>
