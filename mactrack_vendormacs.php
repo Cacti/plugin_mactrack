@@ -103,9 +103,9 @@ function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = tru
 
 	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
-		$sql_where = "WHERE (mac_track_oui_database.vendor_name LIKE '%" . get_request_var('filter') . "%' OR " .
-			"mac_track_oui_database.vendor_mac LIKE '%" . get_request_var('filter') . "%' OR " .
-			"mac_track_oui_database.vendor_address LIKE '%" . get_request_var('filter') . "%')";
+		$sql_where = "WHERE (mac_track_oui_database.vendor_name LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
+			"mac_track_oui_database.vendor_mac LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
+			"mac_track_oui_database.vendor_address LIKE " . db_qstr('%' . get_request_var('filter') . '%') . ")";
 	}
 
 	$sql_order = get_order_string();
@@ -201,7 +201,7 @@ function mactrack_vmac_filter() {
 						<?php print __('Search', 'mactrack'); ?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter'); ?>'>
+						<input type='text' id='filter' size='25' value='<?php print html_escape_request_var('filter'); ?>'>
 					</td>
 					<td>
 						<?php print __('MAC\'s', 'mactrack'); ?>

@@ -93,11 +93,11 @@ function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = true
 	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
 		if (get_request_var('detail') == 'false') {
-			$sql_where = "WHERE (mac_track_sites.site_name LIKE '%" . get_request_var('filter') . "%')";
+			$sql_where = "WHERE (mac_track_sites.site_name LIKE " . db_qstr('%' . get_request_var('filter') . '%') . ")";
 		} else {
-			$sql_where = "WHERE (mac_track_device_types.vendor LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mac_track_device_types.description LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mac_track_sites.site_name LIKE '%" . get_request_var('filter') . "%')";
+			$sql_where = "WHERE (mac_track_device_types.vendor LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
+				"mac_track_device_types.description LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
+				"mac_track_sites.site_name LIKE " . db_qstr('%' . get_request_var('filter') . '%') . ")";
 		}
 	}
 
