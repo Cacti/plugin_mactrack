@@ -193,11 +193,11 @@ function mactrack_create_partitioned_table($engine = 'InnoDB', $charset, $collat
 						SELECT *
 						FROM mac_track_ports_backups
 						WHERE scan_date = ?',
-						array($sd['scan_date']));
+						[$sd['scan_date']]);
 
 					db_execute_prepared('DELETE FROM mac_track_ports_backup
 						WHERE scan_date = ?',
-						array($sd['scan_date']));
+						[$sd['scan_date']]);
 				}
 			}
 			*/

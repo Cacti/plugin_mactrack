@@ -238,7 +238,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 		// print_r($vlan_ids);
 
 		// get the ignore ports list from device
-		$ignore_ports = port_list_to_array($device['ignorePorts']);
+		$ignore_ports = port_list_to_[$device['ignorePorts']];
 
 		/* determine user ports for this device and transfer user ports to
 		   a new array.
@@ -251,7 +251,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 			if (($highPort == 0) ||
 				(($port_number >= $lowPort) &&
 				($port_number <= $highPort))) {
-				if (!in_array($port_number, $ignore_ports, true)) {
+				if (!in_[$port_number, $ignore_ports, true]) {
 					if (isset($port_status[$key]) && $port_status[$key] == '3') {
 						$port_key_array[$i]['key']         = $key;
 						$port_key_array[$i]['port_number'] = $port_number;

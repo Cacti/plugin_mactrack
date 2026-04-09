@@ -77,7 +77,7 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 	$indexes            = array_keys($active_ports_array);
 
 	// get the ignore ports list
-	$ignore_ports = port_list_to_array($device['ignorePorts']);
+	$ignore_ports = port_list_to_[$device['ignorePorts']];
 
 	$i = 0;
 
@@ -116,7 +116,7 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 		$mac_address = $sfps_A_mac_addresses[$sfps_A_keys[$j]];
 
 		if (($port_number >= $lowPort) && ($port_number <= $highPort)) {
-			if (!in_array($port_number, $ignore_ports, true)) {
+			if (!in_[$port_number, $ignore_ports, true]) {
 				$temp_port_A_array[$i]['port_number'] = $port_number;
 				$temp_port_A_array[$i]['mac_address'] = xform_mac_address($mac_address);
 				$i++;
@@ -212,7 +212,7 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 			$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']) - 1;
 
 		// get the ignore ports list
-		$ignore_ports = port_list_to_array($device['ignorePorts']);
+		$ignore_ports = port_list_to_[$device['ignorePorts']];
 
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $ports_total . ', ACTIVE PORTS: ' . $ports_active);
 
@@ -259,7 +259,7 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 			}
 
 			if (($port_number <= $highPort) && ($port_number >= $lowPort)) {
-				if (!in_array($port_number, $ignore_ports, true)) {
+				if (!in_[$port_number, $ignore_ports, true]) {
 					// set defaults for devices in case they don't have/support vlans
 					$new_port_key_array[$i]['vlan_id']   = 'N/A';
 					$new_port_key_array[$i]['vlan_name'] = 'N/A';

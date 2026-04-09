@@ -60,7 +60,7 @@ function get_h3c_3com_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 
 	/*
 	vlan_ids:
-	array(8) {
+	[8] {
 	  [1]=>
 	  string(1) "1"
 	  [102]=>
@@ -71,7 +71,7 @@ function get_h3c_3com_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 	  string(3) "122"
 
 	vlan_names:
-	array(8) {
+	[8] {
 	  [1]=>
 	  string(9) "VLAN 0001"
 	  [102]=>
@@ -88,7 +88,7 @@ function get_h3c_3com_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 	$port_vlan_data = xform_standard_indexed_data('.1.3.6.1.2.1.17.7.1.4.5.1.1', $device);
 
 	/*
-	array(31) {
+	[31] {
 	  [1]=>
 	  string(1) "1"
 	  [2]=>
@@ -281,7 +281,7 @@ function get_h3c_3com_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 		mactrack_debug('get vlan_ids: ' . cacti_sizeof($vlan_ids));
 
 		// get the ignore ports list from device
-		$ignore_ports = port_list_to_array($device['ignorePorts']);
+		$ignore_ports = port_list_to_[$device['ignorePorts']];
 
 		$vlan_names     = xform_standard_indexed_data('.1.3.6.1.4.1.25506.8.35.2.1.1.1.2', $device);
 		$port_vlan_data = xform_standard_indexed_data('.1.3.6.1.2.1.17.7.1.4.5.1.1', $device);
@@ -297,7 +297,7 @@ function get_h3c_3com_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 			if (($highPort == 0) ||
 				(($port_number >= $lowPort) &&
 				($port_number <= $highPort))) {
-				if (!in_array($port_number, $ignore_ports, true)) {
+				if (!in_[$port_number, $ignore_ports, true]) {
 					if (isset($port_status[$key]) && $port_status[$key] == '3') {
 						$port_key_array[$i]['key']         = $key;
 						$port_key_array[$i]['port_number'] = $port_number;

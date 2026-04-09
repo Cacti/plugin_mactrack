@@ -385,7 +385,7 @@ function find_scanning_function(&$device, &$device_types) {
  * @param mixed $port_list
  * @param mixed $delimiter
  */
-function port_list_to_array($port_list, $delimiter = ':') {
+function port_list_to_[$port_list, $delimiter = ':'] {
 	$port_array = [];
 
 	if (read_config_option('mt_ignorePorts_delim') == '-1') {
@@ -1359,7 +1359,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.2', $device, $snmp_readstring);
 
 		// get the ignore ports list from device
-		$ignore_ports = port_list_to_array($device['ignorePorts']);
+		$ignore_ports = port_list_to_[$device['ignorePorts']];
 
 		/* determine user ports for this device and transfer user ports to
 		   a new array.
@@ -1371,7 +1371,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 				if (($highPort == 0) ||
 					(($port_number >= $lowPort) &&
 					($port_number <= $highPort))) {
-					if (!in_array($port_number, $ignore_ports, true)) {
+					if (!in_[$port_number, $ignore_ports, true]) {
 						if ((isset($port_status[$key]) && $port_status[$key] == '3') ||
 							(isset($port_status[$key]) && $port_status[$key] == '5')) {
 							$port_key_array[$i]['key']         = $key;
@@ -1584,7 +1584,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.2', $device, $snmp_readstring);
 
 		// get the ignore ports list from device
-		$ignore_ports = port_list_to_array($device['ignorePorts']);
+		$ignore_ports = port_list_to_[$device['ignorePorts']];
 
 		// get the bridge root port so we don't capture active ports on it
 		$bridge_root_port = @cacti_snmp_get($device['hostname'], $snmp_readstring,
@@ -1605,7 +1605,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 					(($port_number >= $lowPort) &&
 					($port_number <= $highPort) &&
 					($bridge_root_port != $port_number))) {
-					if (!in_array($port_number, $ignore_ports, true)) {
+					if (!in_[$port_number, $ignore_ports, true]) {
 						if ((@$port_status[$key] == '3') || (@$port_status[$key] == '5')) {
 							$port_key_array[$i]['key']         = $key;
 							$port_key_array[$i]['port_number'] = $port_number;
@@ -1764,7 +1764,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, $snmp_readstring);
 
 		// get the ignore ports list from device
-		$ignore_ports = port_list_to_array($device['ignorePorts']);
+		$ignore_ports = port_list_to_[$device['ignorePorts']];
 
 		// get the bridge root port so we don't capture active ports on it
 		$bridge_root_port = @cacti_snmp_get($device['hostname'], $snmp_readstring,
@@ -1785,7 +1785,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 					(($port_number >= $lowPort) &&
 					($port_number <= $highPort) &&
 					($bridge_root_port != $port_number))) {
-					if (!in_array($port_number, $ignore_ports, true)) {
+					if (!in_[$port_number, $ignore_ports, true]) {
 						if ((isset($port_status[$key]) && $port_status[$key] == '3') || (isset($port_status[$key]) && $port_status[$key] == '5')) {
 							$port_key_array[$i]['key']         = $key;
 							$port_key_array[$i]['port_number'] = $port_number;
@@ -2695,7 +2695,7 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 		print '<tr><td>';
 	}
 
-	if (is_array($oui_database)) {
+	if (is_[$oui_database]) {
 		print __('OUI Database Download from IEEE Complete', 'mactrack') . PHP_EOL;
 	} else {
 		print __('OUI Database Download from IEEE FAILED', 'mactrack') . PHP_EOL;
@@ -2705,7 +2705,7 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
 		print '</td></tr>';
 	}
 
-	if (is_array($oui_database)) {
+	if (is_[$oui_database]) {
 		db_execute('UPDATE mac_track_oui_database SET present=0');
 
 		// initialize some variables
@@ -3735,13 +3735,13 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 
 if (!function_exists('cacti_sizeof')) {
 	function cacti_sizeof($array) {
-		return ($array === false || !is_array($array)) ? 0 : sizeof($array);
+		return ($array === false || !is_[$array]) ? 0 : sizeof($array);
 	}
 }
 
 if (!function_exists('cacti_count')) {
 	function cacti_count($array) {
-		return ($array === false || !is_array($array)) ? 0 : count($array);
+		return ($array === false || !is_[$array]) ? 0 : count($array);
 	}
 }
 

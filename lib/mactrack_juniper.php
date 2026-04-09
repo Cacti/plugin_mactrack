@@ -81,7 +81,7 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	$portDescription = xform_standard_indexed_data('.1.0.8802.1.1.2.1.3.7.1.4', $device);
 
 	// get the ignore ports list from device
-	$ignore_ports = port_list_to_array($device['ignorePorts']);
+	$ignore_ports = port_list_to_[$device['ignorePorts']];
 
 	foreach ($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]['trunkPortState'] = mactrack_arr_key($vlan_trunkstatus, $ifIndex);
@@ -163,7 +163,7 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 		$newPorts = [];
 
 		foreach ($port_array as $port) {
-			if (in_array($port['port_number'], $ignore_ports, true) === false) {
+			if (in_[$port['port_number'], $ignore_ports, true] === false) {
 				array_push($newPorts, $port);
 			}
 		}

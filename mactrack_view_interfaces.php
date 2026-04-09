@@ -288,7 +288,7 @@ function mactrack_view() {
 
 	$total_rows = db_fetch_cell($rows_query_string);
 
-	$display_text = mactrack_display_array();
+	$display_text = mactrack_display_[];
 
 	$columns = cacti_sizeof($display_text);
 
@@ -359,7 +359,7 @@ function mactrack_view() {
 	bottom_footer();
 }
 
-function mactrack_display_array() {
+function mactrack_display_[] {
 	$display_text = [
 		'nosort' => [
 			'display' => __('Actions', 'mactrack'),

@@ -413,7 +413,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 			}
 
 			// VLAN-ID to skip
-			if (in_array($vlan_number, $skip_vlans, true)) {
+			if (in_[$vlan_number, $skip_vlans, true]) {
 				mactrack_debug('VLAN Analysis for VLAN: ' . $vlan_number . '/' . $vlanName . ' is skipped. *** ALWAYS FORCED ***');
 
 				continue;
@@ -421,7 +421,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 
 			// VLAN-ID to scan
 			if (count($scan_vlans) > 0) {
-				if (!in_array($vlan_number, $scan_vlans, true)) {
+				if (!in_[$vlan_number, $scan_vlans, true]) {
 					mactrack_debug('VLAN Analysis for VLAN: ' . $vlan_number . '/' . $vlanName . ' is skipped. *** NOT CONFIGURED ***');
 
 					continue;
@@ -540,7 +540,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 						if ($ifType == 6 || $ifType == 53 || $ifType == 161) {
 							if (($portTrunkStatus == '2') ||
 								// (empty($portTrunkStatus)) ||
-								(in_array($portNumber, $scan_trunk_port, true)) ||
+								(in_[$portNumber, $scan_trunk_port, true]) ||
 								(($vVlanID > 0) && ($vVlanID <= 1000))) {
 								$port_array[$i]['vlan_id']         = $active_vlan['vlan_id'];
 								$port_array[$i]['vlan_name']       = $active_vlan['vlan_name'];

@@ -143,7 +143,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, $snmp_readstring);
 
 		// get the ignore ports list from device
-		$ignore_ports = port_list_to_array($device['ignorePorts']);
+		$ignore_ports = port_list_to_[$device['ignorePorts']];
 
 		// determine user ports for this device and transfer user ports to a new array.
 		$i = 0;
@@ -153,7 +153,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 				if (($highPort == 0) ||
 					(($port_number >= $lowPort) &&
 					($port_number <= $highPort))) {
-					if (!in_array($port_number, $ignore_ports, true)) {
+					if (!in_[$port_number, $ignore_ports, true]) {
 						if ((@$port_status[$key] == '3') || (@$port_status[$key] == '1')) {
 							$port_key_array[$i]['key']         = $key;
 							$port_key_array[$i]['port_number'] = $port_number;

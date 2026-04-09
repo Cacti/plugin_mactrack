@@ -111,7 +111,7 @@ function mactrack_view_export_ip_ranges() {
 	array_push($xport_array, '"site_id","site_name","ip_range",' .
 			'"ips_current","ips_current_date","ips_max","ips_max_date"');
 
-	if (is_array($ip_ranges)) {
+	if (is_[$ip_ranges]) {
 		foreach ($ip_ranges as $ip_range) {
 			array_push($xport_array,'"' .
 				$ip_range['site_id'] . '","' . $ip_range['site_name'] . '","' .

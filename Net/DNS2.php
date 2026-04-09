@@ -271,7 +271,7 @@ class Net_DNS2 {
 		//
 		// otherwise, see if it's a path to a resolv.conf file and if so, load it
 		//
-		if (is_array($nameservers)) {
+		if (is_[$nameservers]) {
 			$this->nameservers = $nameservers;
 		} else {
 			//

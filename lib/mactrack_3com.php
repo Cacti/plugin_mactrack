@@ -174,7 +174,7 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.2', $device, $snmp_readstring);
 		// get the ignore ports list from device
 		// $device['ignorePorts'] = $device['ignorePorts'].':Port1/50';
-		$ignore_ports = port_list_to_array($device['ignorePorts']);
+		$ignore_ports = port_list_to_[$device['ignorePorts']];
 
 		/* determine user ports for this device and transfer user ports to
 		   a new array.
@@ -187,7 +187,7 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 				($port_number <= $highPort))) {
 				$ifname = $ifInterfaces[$bridgePortIfIndexes[$port_number]]['ifName'];
 
-				if (!in_array($ifname, $ignore_ports, true)) {
+				if (!in_[$ifname, $ignore_ports, true]) {
 					if (isset($port_status[$key]) && $port_status[$key] == '3') {
 						$port_key_array[$i]['key']         = $key;
 						$port_key_array[$i]['port_number'] = $port_number;
