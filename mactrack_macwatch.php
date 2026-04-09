@@ -438,12 +438,12 @@ function mactrack_macw_filter() {
 			}
 
 			$(function() {
-				$('#mactrack').submit(function(event) {
+				$('#mactrack').on('submit', function(event) {
 					event.preventDefault();
 					applyFilter();
 				});
 
-				$('#clear').click(function() {
+				$('#clear').on('click', function() {
 					clearFilter();
 				});
 			});

@@ -367,11 +367,11 @@ function mactrack_ips_filter() {
 			}
 
 			$(function() {
-				$('#clear').click(function() {
+				$('#clear').on('click', function() {
 					clearFilter();
 				});
 
-				$('#export').submit(function(event) {
+				$('#export').on('submit', function(event) {
 					event.preventDefault();
 					exportRows();
 				});

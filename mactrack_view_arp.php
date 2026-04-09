@@ -630,16 +630,16 @@ function mactrack_ip_address_filter() {
 			}
 
 			$(function() {
-				$('#mactrack').submit(function(event) {
+				$('#mactrack').on('submit', function(event) {
 					event.preventDefault();
 					applyFilter();
 				});
 
-				$('#clear').click(function() {
+				$('#clear').on('click', function() {
 					clearFilter();
 				});
 
-				$('#export').click(function() {
+				$('#export').on('click', function() {
 					exportRows();
 				});
 			});
