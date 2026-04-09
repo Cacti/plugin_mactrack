@@ -616,7 +616,7 @@ function mactrack_filter_table() {
 
 			if (get_request_var('device_id') == $device_id) {
 				print ' selected';
-			} print '>' . $device_name . '</option>';
+			} print '>' . html_escape($device_name) . '</option>';
 		}
 	}
 	?>
