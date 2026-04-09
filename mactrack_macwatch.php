@@ -295,13 +295,7 @@ function mactrack_macw() {
 	validate_store_request_vars($filters, 'sess_mt_macw');
 	// ================= input validation =================
 
-	if (get_request_var('rows') == -1) {
-		$rows = read_config_option('num_rows_table');
-	} elseif (get_request_var('rows') == -2) {
-		$rows = 999999;
-	} else {
-		$rows = get_request_var('rows');
-	}
+	$rows = plugin_get_rows_per_page();
 
 	html_start_box(__('Mactrack MacWatch Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_macwatch.php?action=edit');
 	mactrack_macw_filter();

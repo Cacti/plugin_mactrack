@@ -684,13 +684,7 @@ function mactrack_view_macs() {
 
 	$sql_where = '';
 
-	if (get_request_var('rows') == -1) {
-		$rows = read_config_option('num_rows_table');
-	} elseif (get_request_var('rows') == -2) {
-		$rows = 999999;
-	} else {
-		$rows = get_request_var('rows');
-	}
+	$rows = plugin_get_rows_per_page();
 
 	$port_results = mactrack_view_get_mac_records($sql_where, $rows, true);
 
@@ -895,13 +889,7 @@ function mactrack_view_aggregated_macs() {
 
 	$sql_where = '';
 
-	if (get_request_var('rows') == -1) {
-		$rows = read_config_option('num_rows_table');
-	} elseif (get_request_var('rows') == -2) {
-		$rows = 999999;
-	} else {
-		$rows = get_request_var('rows');
-	}
+	$rows = plugin_get_rows_per_page();
 
 	$port_results = mactrack_view_get_mac_records($sql_where, $rows, true);
 

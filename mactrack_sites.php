@@ -386,13 +386,7 @@ function mactrack_site() {
 
 	mactrack_site_validate_req_vars();
 
-	if (get_request_var('rows') == -1) {
-		$rows = read_config_option('num_rows_table');
-	} elseif (get_request_var('rows') == -2) {
-		$rows = 999999;
-	} else {
-		$rows = get_request_var('rows');
-	}
+	$rows = plugin_get_rows_per_page();
 
 	html_start_box(__('Mactrack Site Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_sites.php?action=edit');
 

@@ -45,6 +45,25 @@ $mactrack_device_status ??= [
 		7 => __('Authorization Failed', 'mactrack')
 	];
 
+
+/**
+ * plugin_get_rows_per_page - resolve rows-per-page from request vars
+ *
+ * @return int
+ */
+function plugin_get_rows_per_page() {
+	$rows = get_request_var('rows');
+
+	if ($rows == -1) {
+		return read_config_option('num_rows_table');
+	} elseif ($rows == -2) {
+		return 999999;
+	}
+
+	return $rows;
+}
+
+
 function mactrack_debug($message) {
 	global $debug, $web, $config;
 

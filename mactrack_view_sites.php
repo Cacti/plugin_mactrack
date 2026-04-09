@@ -204,13 +204,7 @@ function mactrack_view_sites() {
 
 	mactrack_sites_request_validation();
 
-	if (get_request_var('rows') == -1) {
-		$rows = read_config_option('num_rows_table');
-	} elseif (get_request_var('rows') == -2) {
-		$rows = 999999;
-	} else {
-		$rows = get_request_var('rows');
-	}
+	$rows = plugin_get_rows_per_page();
 
 	$webroot = $config['url_path'] . 'plugins/mactrack/';
 
