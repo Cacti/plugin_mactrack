@@ -372,7 +372,7 @@ function mactrack_site_edit() {
 	draw_edit_form(
 		[
 			'config' => ['no_form_tag' => true],
-			'fields' => inject_form_variables($fields_mactrack_site_edit, (isset($site) ? $site : []))
+			'fields' => inject_form_variables($fields_mactrack_site_edit, ($site ?? []))
 		]
 	);
 

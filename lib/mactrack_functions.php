@@ -25,22 +25,17 @@
 // register these scanning functions
 global $mactrack_scanning_functions;
 
-if (!isset($mactrack_scanning_functions)) {
-	$mactrack_scanning_functions = [];
-}
+$mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_generic_dot1q_switch_ports', 'get_generic_switch_ports', 'get_generic_wireless_ports');
 
 global $mactrack_scanning_functions_ip;
 
-if (!isset($mactrack_scanning_functions_ip)) {
-	$mactrack_scanning_functions_ip = [];
-}
+$mactrack_scanning_functions_ip ??= [];
 array_push($mactrack_scanning_functions_ip, 'get_standard_arp_table', 'get_netscreen_arp_table');
 
 global $mactrack_device_status;
 
-if (!isset($mactrack_device_status)) {
-	$mactrack_device_status = [
+$mactrack_device_status ??= [
 		1 => __('Idle', 'mactrack'),
 		2 => __('Running', 'mactrack'),
 		3 => __('No method', 'mactrack'),
@@ -49,7 +44,6 @@ if (!isset($mactrack_device_status)) {
 		6 => __('Authorization Success', 'mactrack'),
 		7 => __('Authorization Failed', 'mactrack')
 	];
-}
 
 function mactrack_debug($message) {
 	global $debug, $web, $config;
@@ -2431,13 +2425,9 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 					$authorized_mac = 0;
 				}
 
-				if (!isset($port_value['vlan_id'])) {
-					$port_value['vlan_id'] = 'N/A';
-				}
+				$port_value['vlan_id'] ??= 'N/A';
 
-				if (!isset($port_value['vlan_name'])) {
-					$port_value['vlan_name'] = 'N/A';
-				}
+				$port_value['vlan_name'] ??= 'N/A';
 
 				db_execute_prepared('REPLACE INTO mac_track_temp_ports
 					(site_id,device_id,hostname,device_name,vlan_id,vlan_name,

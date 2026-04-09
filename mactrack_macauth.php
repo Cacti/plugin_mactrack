@@ -265,7 +265,7 @@ function mactrack_maca_edit() {
 	draw_edit_form(
 		[
 			'config' => ['no_form_tag' => true],
-			'fields' => inject_form_variables($fields_mactrack_maca_edit, (isset($mac_record) ? $mac_record : []))
+			'fields' => inject_form_variables($fields_mactrack_maca_edit, ($mac_record ?? []))
 		]
 	);
 

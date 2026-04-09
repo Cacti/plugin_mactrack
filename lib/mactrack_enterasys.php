@@ -24,9 +24,7 @@
 */
 
 // register this functions scanning functions
-if (!isset($mactrack_scanning_functions)) {
-	$mactrack_scanning_functions = [];
-}
+$mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_enterasys_switch_ports');
 
 function get_enterasys_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {

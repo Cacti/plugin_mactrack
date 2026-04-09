@@ -357,14 +357,14 @@ function mactrack_snmp_item_edit() {
 	draw_edit_form(
 		[
 			'config' => ['no_form_tag' => true],
-			'fields' => inject_form_variables($fields_mactrack_snmp_item_edit, (isset($mactrack_snmp_item) ? $mactrack_snmp_item : []))
+			'fields' => inject_form_variables($fields_mactrack_snmp_item_edit, ($mactrack_snmp_item ?? []))
 		]
 	);
 
 	html_end_box();
 
 	form_hidden_box('item_id', (isset_request_var('item_id') ? get_request_var('item_id') : '0'), '');
-	form_hidden_box('id', (isset($mactrack_snmp_item['snmp_id']) ? $mactrack_snmp_item['snmp_id'] : '0'), '');
+	form_hidden_box('id', ($mactrack_snmp_item['snmp_id'] ?? '0'), '');
 	form_hidden_box('save_component_mactrack_snmp_item', '1', '');
 
 	form_save_button(htmlspecialchars('mactrack_snmp.php?action=edit&id=' . get_request_var('id')));

@@ -890,7 +890,7 @@ function mactrack_device_type_edit() {
 	draw_edit_form(
 		[
 			'config' => ['no_form_tag' => 'true'],
-			'fields' => inject_form_variables($fields_mactrack_device_type_edit, (isset($device_type) ? $device_type : []))
+			'fields' => inject_form_variables($fields_mactrack_device_type_edit, ($device_type ?? []))
 		]
 	);
 

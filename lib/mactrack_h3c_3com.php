@@ -23,14 +23,10 @@
 */
 
 // register this functions scanning functions
-if (!isset($mactrack_scanning_functions)) {
-	$mactrack_scanning_functions = [];
-}
+$mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_h3c_3com_switch_ports');
 
-if (!isset($mactrack_scanning_functions_ip)) {
-	$mactrack_scanning_functions_ip = [];
-}
+$mactrack_scanning_functions_ip ??= [];
 array_push($mactrack_scanning_functions_ip, 'get_h3c_3com_arp_table');
 
 function get_h3c_3com_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
@@ -343,7 +339,7 @@ function get_h3c_3com_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 
 					// now set the real data
 					$new_port_key_array[$i]['key']         = mactrack_arr_key($port_key, 'key');
-					$new_port_key_array[$i]['port_number'] = isset($brPortIfIndex) ? $brPortIfIndex : '';
+					$new_port_key_array[$i]['port_number'] = $brPortIfIndex ?? '';
 
 					$new_port_key_array[$i]['vlan_id']   = mactrack_arr_key($port_vlan_data, $brPortIfIndex);
 					$new_port_key_array[$i]['vlan_name'] = mactrack_arr_key($vlan_names, $port_vlan_data[$brPortIfIndex]);
