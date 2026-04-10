@@ -201,7 +201,7 @@ function mactrack_create_partitioned_table($engine = 'InnoDB', $charset, $collat
 				}
 			}
 			*/
-			db_execute('INSERT mac_track_ports SELECT * FROM mac_track_ports_backup');
+			db_execute('INSERT INTO mac_track_ports SELECT * FROM mac_track_ports_backup');
 		}
 
 		db_execute('DROP TABLE mac_track_ports_backup');

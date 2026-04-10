@@ -233,7 +233,7 @@ function sync_cacti_to_mactrack($device) {
  * @arg $action		actions to be performed from dropdown
  * @param mixed $action
  */
-function mactrack_device_action_[$action] {
+function mactrack_device_action_array($action) {
 	$action['plugin_mactrack_device'] = __('Import into Mactrack Database', 'mactrack');
 
 	return $action;

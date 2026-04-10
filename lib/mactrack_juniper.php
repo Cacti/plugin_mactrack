@@ -163,7 +163,7 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 		$newPorts = [];
 
 		foreach ($port_array as $port) {
-			if (in_array($port['port_number'), $ignore_ports, true] === false) {
+			if (in_array($port['port_number'], $ignore_ports, true) === false) {
 				array_push($newPorts, $port);
 			}
 		}
