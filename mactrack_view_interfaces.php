@@ -288,7 +288,7 @@ function mactrack_view() {
 
 	$total_rows = db_fetch_cell($rows_query_string);
 
-	$display_text = mactrack_display_[];
+	$display_text = mactrack_display_array();
 
 	$columns = cacti_sizeof($display_text);
 
