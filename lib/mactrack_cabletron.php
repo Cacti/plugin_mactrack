@@ -77,7 +77,7 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 	$indexes            = array_keys($active_ports_array);
 
 	// get the ignore ports list
-	$ignore_ports = port_list_to_[$device['ignorePorts']];
+	$ignore_ports = port_list_to_array($device['ignorePorts']);
 
 	$i = 0;
 
@@ -212,7 +212,7 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 			$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']) - 1;
 
 		// get the ignore ports list
-		$ignore_ports = port_list_to_[$device['ignorePorts']];
+		$ignore_ports = port_list_to_array($device['ignorePorts']);
 
 		mactrack_debug('INFO: HOST: ' . $device['hostname'] . ', TYPE: ' . substr($device['snmp_sysDescr'],0,40) . ', TOTAL PORTS: ' . $ports_total . ', ACTIVE PORTS: ' . $ports_active);
 

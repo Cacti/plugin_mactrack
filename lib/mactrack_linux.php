@@ -145,7 +145,7 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.4.22.1.1', $device, $snmp_readstring);
 
 		// get the ignore ports list from device
-		$ignore_ports = port_list_to_[$device['ignorePorts']];
+		$ignore_ports = port_list_to_array($device['ignorePorts']);
 
 		/* determine user ports for this device and transfer user ports to
 		   a new array.

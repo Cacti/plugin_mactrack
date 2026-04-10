@@ -162,7 +162,7 @@ function get_base_trendnet_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, $snmp_readstring);
 
 		// get the ignore ports list from device
-		$ignore_ports = port_list_to_[$device['ignorePorts']];
+		$ignore_ports = port_list_to_array($device['ignorePorts']);
 
 		// get the bridge root port so we don't capture active ports on it
 		$bridge_root_port = @cacti_snmp_get($device['hostname'], $snmp_readstring,

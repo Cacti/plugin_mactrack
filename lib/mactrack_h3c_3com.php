@@ -281,7 +281,7 @@ function get_h3c_3com_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 		mactrack_debug('get vlan_ids: ' . cacti_sizeof($vlan_ids));
 
 		// get the ignore ports list from device
-		$ignore_ports = port_list_to_[$device['ignorePorts']];
+		$ignore_ports = port_list_to_array($device['ignorePorts']);
 
 		$vlan_names     = xform_standard_indexed_data('.1.3.6.1.4.1.25506.8.35.2.1.1.1.2', $device);
 		$port_vlan_data = xform_standard_indexed_data('.1.3.6.1.2.1.17.7.1.4.5.1.1', $device);

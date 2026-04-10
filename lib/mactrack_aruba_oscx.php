@@ -307,7 +307,7 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 		mactrack_debug('get vlan_ids: ' . cacti_sizeof($vlan_ids));
 
 		// get the ignore ports list from device
-		$ignore_ports = port_list_to_[$device['ignorePorts']];
+		$ignore_ports = port_list_to_array($device['ignorePorts']);
 
 		$xdata          = xform_indexed_data('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, 7);
 		$port_vlan_data = [];

@@ -385,7 +385,7 @@ function find_scanning_function(&$device, &$device_types) {
  * @param mixed $port_list
  * @param mixed $delimiter
  */
-function port_list_to_[$port_list, $delimiter = ':'] {
+function port_list_to_array($port_list, $delimiter = ':') {
 	$port_array = [];
 
 	if (read_config_option('mt_ignorePorts_delim') == '-1') {
@@ -1359,7 +1359,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.2', $device, $snmp_readstring);
 
 		// get the ignore ports list from device
-		$ignore_ports = port_list_to_[$device['ignorePorts']];
+		$ignore_ports = port_list_to_array($device['ignorePorts']);
 
 		/* determine user ports for this device and transfer user ports to
 		   a new array.
@@ -1584,7 +1584,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.17.4.3.1.2', $device, $snmp_readstring);
 
 		// get the ignore ports list from device
-		$ignore_ports = port_list_to_[$device['ignorePorts']];
+		$ignore_ports = port_list_to_array($device['ignorePorts']);
 
 		// get the bridge root port so we don't capture active ports on it
 		$bridge_root_port = @cacti_snmp_get($device['hostname'], $snmp_readstring,
@@ -1764,7 +1764,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 		$port_numbers = xform_stripped_oid('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, $snmp_readstring);
 
 		// get the ignore ports list from device
-		$ignore_ports = port_list_to_[$device['ignorePorts']];
+		$ignore_ports = port_list_to_array($device['ignorePorts']);
 
 		// get the bridge root port so we don't capture active ports on it
 		$bridge_root_port = @cacti_snmp_get($device['hostname'], $snmp_readstring,
