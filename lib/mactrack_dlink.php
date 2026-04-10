@@ -153,7 +153,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 				if (($highPort == 0) ||
 					(($port_number >= $lowPort) &&
 					($port_number <= $highPort))) {
-					if (!in_[$port_number, $ignore_ports, true]) {
+					if (!in_array($port_number, $ignore_ports, true)) {
 						if ((@$port_status[$key] == '3') || (@$port_status[$key] == '1')) {
 							$port_key_array[$i]['key']         = $key;
 							$port_key_array[$i]['port_number'] = $port_number;

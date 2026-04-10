@@ -827,7 +827,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			WHERE ip_address != ''
 			GROUP BY ip_range, site_id");
 
-		if (is_[$ip_ranges]) {
+		if (is_array($ip_ranges)) {
 			foreach ($ip_ranges as $ip_range) {
 				$range_record = db_fetch_row_prepared('SELECT *
 					FROM mac_track_ip_ranges

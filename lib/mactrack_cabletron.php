@@ -116,7 +116,7 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 		$mac_address = $sfps_A_mac_addresses[$sfps_A_keys[$j]];
 
 		if (($port_number >= $lowPort) && ($port_number <= $highPort)) {
-			if (!in_[$port_number, $ignore_ports, true]) {
+			if (!in_array($port_number, $ignore_ports, true)) {
 				$temp_port_A_array[$i]['port_number'] = $port_number;
 				$temp_port_A_array[$i]['mac_address'] = xform_mac_address($mac_address);
 				$i++;
@@ -259,7 +259,7 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 			}
 
 			if (($port_number <= $highPort) && ($port_number >= $lowPort)) {
-				if (!in_[$port_number, $ignore_ports, true]) {
+				if (!in_array($port_number, $ignore_ports, true)) {
 					// set defaults for devices in case they don't have/support vlans
 					$new_port_key_array[$i]['vlan_id']   = 'N/A';
 					$new_port_key_array[$i]['vlan_name'] = 'N/A';

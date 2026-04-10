@@ -359,7 +359,7 @@ function mactrack_view() {
 	bottom_footer();
 }
 
-function mactrack_display_[] {
+function mactrack_display_array() {
 	$display_text = [
 		'nosort' => [
 			'display' => __('Actions', 'mactrack'),

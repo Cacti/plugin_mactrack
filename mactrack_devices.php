@@ -502,7 +502,7 @@ function mactrack_device_import() {
 
 	?><form method='post' action='mactrack_devices.php?action=import' enctype='multipart/form-data'><?php
 
-	if ((isset($_SESSION['import_debug_info'])) && (is_[$_SESSION['import_debug_info']])) {
+	if ((isset($_SESSION['import_debug_info'])) && (is_array($_SESSION['import_debug_info')])) {
 		html_start_box(__('Import Results', 'mactrack'), '100%', '', '3', 'center', '');
 
 		print "<tr class='even'><td><p class='textArea'>" . __('Cacti has imported the following items:', 'mactrack') . '</p>';
@@ -747,7 +747,7 @@ function mactrack_device_import_processor(&$devices) {
 
 				if (cacti_sizeof($line_array)) {
 					foreach ($line_array as $line_item) {
-						if (in_[$j, $insert_columns, true]) {
+						if (in_array($j, $insert_columns, true)) {
 							$line_item = trim(str_replace("'", '', $line_item));
 							$line_item = trim(str_replace('"', '', $line_item));
 
