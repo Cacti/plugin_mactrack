@@ -1116,7 +1116,7 @@ function mactrack_mac_filter() {
 
 			if (get_request_var('site_id') == $site['site_id']) {
 				print ' selected';
-			} print '>' . $site['site_name'] . '</option>';
+			} print '>' . html_escape($site['site_name']) . '</option>';
 		}
 	}
 	?>
@@ -1147,7 +1147,7 @@ function mactrack_mac_filter() {
 
 			if (get_request_var('device_id') == $filter_device['device_id']) {
 				print ' selected';
-			} print '>' . $filter_device['device_name'] . '(' . $filter_device['hostname'] . ')' . '</option>';
+			} print '>' . html_escape($filter_device['device_name'] . '(' . $filter_device['hostname'] . ')') . '</option>';
 		}
 	}
 	?>

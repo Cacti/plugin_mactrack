@@ -1100,7 +1100,7 @@ function mactrack_device_type_filter() {
 
 			if (get_request_var('vendor') == $type['vendor']) {
 				print ' selected';
-			} print '>' . $type['vendor'] . '</option>';
+			} print '>' . html_escape($type['vendor']) . '</option>';
 		}
 	}
 	?>
