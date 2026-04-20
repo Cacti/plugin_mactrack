@@ -172,7 +172,7 @@ function sync_cacti_to_mactrack($device) {
 
 	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
-	/* do we want to 'Sync Cacti Device to Matrack Device'
+	/* do we want to 'Sync Cacti Device to Mactrack Device'
 	 * AND has the device already been assigned a 'valid' Mactrack device id
 	 * (aka: has the device been saved successfully) */
 	if ((read_config_option('mt_update_policy', true) == 2) && ($device['id'] > 0)) {
