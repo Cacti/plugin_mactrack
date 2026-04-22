@@ -126,7 +126,7 @@ function mactrack_rebuild_scanning_funcs() {
 }
 
 function mactrack_strip_alpha($string = '') {
-	return trim($string, 'abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ()[]{}');
+	return trim($string, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ()[]{}');
 }
 
 function mactrack_check_user_realm($realm_id) {
