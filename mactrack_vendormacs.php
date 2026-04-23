@@ -103,9 +103,9 @@ function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = tru
 
 	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
-		$sql_where = "WHERE (mac_track_oui_database.vendor_name LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
-			"mac_track_oui_database.vendor_mac LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
-			"mac_track_oui_database.vendor_address LIKE " . db_qstr('%' . get_request_var('filter') . '%') . ")";
+		$sql_where = 'WHERE (mac_track_oui_database.vendor_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+			'mac_track_oui_database.vendor_mac LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+			'mac_track_oui_database.vendor_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 	}
 
 	$sql_order = get_order_string();

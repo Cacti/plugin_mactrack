@@ -203,10 +203,10 @@ function mactrack_macw_get_macw_records(&$sql_where, $rows, $apply_limits = true
 
 	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
-		$sql_where = "WHERE (mac_address LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
-			"name LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
-			"ticket_number LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
-			"description LIKE " . db_qstr('%' . get_request_var('filter') . '%') . ")";
+		$sql_where = 'WHERE (mac_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+			'name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+			'ticket_number LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+			'description LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 	}
 
 	$sql_order = get_order_string();

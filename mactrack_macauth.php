@@ -219,8 +219,8 @@ function mactrack_maca_get_maca_records(&$sql_where, $rows, $apply_limits = true
 	$sql_where = '';
 
 	if (get_request_var('filter') != '') {
-		$sql_where = "WHERE (mac_address LIKE " . db_qstr('%' . str_replace(['-', '.', ':'],'',get_request_var('filter')) . '%') . " OR " .
-			"description LIKE " . db_qstr('%' . get_request_var('filter') . '%') . ")";
+		$sql_where = 'WHERE (mac_address LIKE ' . db_qstr('%' . str_replace(['-', '.', ':'],'',get_request_var('filter')) . '%') . ' OR ' .
+			'description LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 	}
 
 	$sql_order = get_order_string();

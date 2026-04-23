@@ -972,9 +972,9 @@ function mactrack_device_edit() {
 function mactrack_get_devices(&$sql_where, $rows, $apply_limits = true) {
 	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
-		$sql_where = ($sql_where != '' ? ' AND ' : 'WHERE ') . "(mtd.hostname LIKE " . db_qstr('%' . get_request_var('filter') . '%') . "
-			OR mtd.device_name LIKE " . db_qstr('%' . get_request_var('filter') . '%') . "
-			OR mtd.notes LIKE " . db_qstr('%' . get_request_var('filter') . '%') . ")";
+		$sql_where = ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mtd.hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . '
+			OR mtd.device_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . '
+			OR mtd.notes LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 	}
 
 	if (get_request_var('status') == '-1') {

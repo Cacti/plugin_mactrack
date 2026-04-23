@@ -541,7 +541,7 @@ function mactrack_snmp() {
 	$sql_where = '';
 
 	if (get_request_var('filter') != '') {
-		$sql_where .= "WHERE (mac_track_snmp.name LIKE " . db_qstr('%' . get_request_var('filter') . '%') . ")";
+		$sql_where .= 'WHERE (mac_track_snmp.name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 	}
 
 	$total_rows = db_fetch_cell("SELECT

@@ -7,15 +7,15 @@
  +-------------------------------------------------------------------------+
 */
 
-$checks = array(
-	__DIR__ . '/../../mactrack_view_macs.php' => array(
+$checks = [
+	__DIR__ . '/../../mactrack_view_macs.php' => [
 		"html_escape(\$site['site_name'])",
 		"html_escape(\$filter_device['device_name'] . '(' . \$filter_device['hostname'] . ')')",
-	),
-	__DIR__ . '/../../mactrack_device_types.php' => array(
+	],
+	__DIR__ . '/../../mactrack_device_types.php' => [
 		"html_escape(\$type['vendor'])",
-	),
-);
+	],
+];
 
 foreach ($checks as $path => $patterns) {
 	$contents = file_get_contents($path);

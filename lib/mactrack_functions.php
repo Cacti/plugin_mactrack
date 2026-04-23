@@ -45,7 +45,6 @@ $mactrack_device_status ??= [
 		7 => __('Authorization Failed', 'mactrack')
 	];
 
-
 /**
  * plugin_get_rows_per_page - resolve rows-per-page from request vars
  *
@@ -56,13 +55,14 @@ function plugin_get_rows_per_page() {
 
 	if ($rows == -1) {
 		return read_config_option('num_rows_table');
-	} elseif ($rows == -2) {
+	}
+
+	if ($rows == -2) {
 		return 999999;
 	}
 
 	return $rows;
 }
-
 
 function mactrack_debug($message) {
 	global $debug, $web, $config;
@@ -3323,17 +3323,17 @@ function mactrack_dot1x_row_class($port_result) {
 }
 
 /** mactrack_create_sql_filter - this routine will take a filter string and process it into a
-	 sql where clause that will be returned to the caller with a formatted SQL where clause
-	 that can then be integrated into the overall where clause.
-	 The filter takes the following forms.  The default is to find occurrence that match "all"
-	 Any string prefixed by a "-" will mean "exclude" this search string.  Boolean expressions
-	 are currently not supported.
-   @arg $filter - (string) The filter provided by the user
-   @arg $fields - (array) A list of field names to include in the where clause. They can also
-	 contain the table name in cases where joins are important.
-   * @param mixed $filter
-   * @param mixed $fields
-   @returns - (string) The formatted SQL syntax */
+ * sql where clause that will be returned to the caller with a formatted SQL where clause
+ * that can then be integrated into the overall where clause.
+ * The filter takes the following forms.  The default is to find occurrence that match "all"
+ * Any string prefixed by a "-" will mean "exclude" this search string.  Boolean expressions
+ * are currently not supported.
+ * @arg $filter - (string) The filter provided by the user
+ * @arg $fields - (array) A list of field names to include in the where clause. They can also
+ * contain the table name in cases where joins are important.
+ * @param mixed $filter
+ * @param mixed $fields
+ * @returns - (string) The formatted SQL syntax */
 function mactrack_create_sql_filter($filter, $fields) {
 	$query = '';
 
@@ -3369,7 +3369,7 @@ function mactrack_create_sql_filter($filter, $fields) {
 				$query .= '(';
 			}
 
-			$query .= ($field_no == 1 ? '' : " $operator ") . "($field $type LIKE " . db_qstr('%' . $filter . '%') . ")";
+			$query .= ($field_no == 1 ? '' : " $operator ") . "($field $type LIKE " . db_qstr('%' . $filter . '%') . ')';
 
 			$field_no++;
 		}

@@ -900,10 +900,10 @@ function mactrack_device_type_edit() {
 
 function mactrack_get_device_types(&$sql_where, $rows, $apply_limits = true) {
 	if (get_request_var('filter') != '') {
-		$sql_where = " WHERE (mtdt.vendor LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR
-			mtdt.description LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR
-			mtdt.sysDescr_match LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR
-			mtdt.sysObjectID_match LIKE " . db_qstr('%' . get_request_var('filter') . '%') . ")";
+		$sql_where = ' WHERE (mtdt.vendor LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR
+			mtdt.description LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR
+			mtdt.sysDescr_match LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR
+			mtdt.sysObjectID_match LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 	}
 
 	if (get_request_var('vendor') == 'All') {

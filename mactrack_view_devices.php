@@ -155,10 +155,10 @@ function mactrack_view_get_device_records(&$sql_where, $rows, $apply_limits = tr
 
 	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . "(mac_track_devices.hostname LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
-			"mac_track_devices.notes LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
-			"mac_track_devices.device_name LIKE " . db_qstr('%' . get_request_var('filter') . '%') . " OR " .
-			"mac_track_sites.site_name LIKE " . db_qstr('%' . get_request_var('filter') . '%') . ")";
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+			'mac_track_devices.notes LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+			'mac_track_devices.device_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+			'mac_track_sites.site_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 	}
 
 	if (cacti_sizeof($device_type_info)) {
