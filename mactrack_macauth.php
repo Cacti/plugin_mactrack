@@ -219,8 +219,8 @@ function mactrack_maca_get_maca_records(&$sql_where, $rows, $apply_limits = true
 	$sql_where = '';
 
 	if (get_request_var('filter') != '') {
-		$sql_where = "WHERE (mac_address LIKE '%" . str_replace(['-', '.', ':'],'',get_request_var('filter')) . "%' OR " .
-			"description LIKE '%" . get_request_var('filter') . "%')";
+		$sql_where = 'WHERE (mac_address LIKE ' . db_qstr('%' . str_replace(['-', '.', ':'],'',get_request_var('filter')) . '%') . ' OR ' .
+			'description LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 	}
 
 	$sql_order = get_order_string();
@@ -265,7 +265,7 @@ function mactrack_maca_edit() {
 	draw_edit_form(
 		[
 			'config' => ['no_form_tag' => true],
-			'fields' => inject_form_variables($fields_mactrack_maca_edit, (isset($mac_record) ? $mac_record : []))
+			'fields' => inject_form_variables($fields_mactrack_maca_edit, ($mac_record ?? []))
 		]
 	);
 
@@ -309,13 +309,7 @@ function mactrack_maca() {
 	validate_store_request_vars($filters, 'sess_mt_maca');
 	// ================= input validation =================
 
-	if (get_request_var('rows') == -1) {
-		$rows = read_config_option('num_rows_table');
-	} elseif (get_request_var('rows') == -2) {
-		$rows = 999999;
-	} else {
-		$rows = get_request_var('rows');
-	}
+	$rows = plugin_get_rows_per_page();
 
 	html_start_box(__('Mactrack MacAuth Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_macauth.php?action=edit');
 	mactrack_maca_filter();

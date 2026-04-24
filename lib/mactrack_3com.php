@@ -23,9 +23,7 @@
 */
 
 // register this functions scanning functions
-if (!isset($mactrack_scanning_functions)) {
-	$mactrack_scanning_functions = [];
-}
+$mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_3Com_dot1dTpFdbEntry_ports');
 
 /* complete_3com_ifName
@@ -210,7 +208,7 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 					if (isset($bridgePortIfIndexes[$port_key['port_number']])) {
 						$brPortIfIndex = mactrack_arr_key($bridgePortIfIndexes, $port_key['port_number']);
 					} else {
-						$brPortIfIndex = isset($port_key['port_number']) ? $port_key['port_number'] : '';
+						$brPortIfIndex = $port_key['port_number'] ?? '';
 					}
 					$brPortIfType = isset($ifInterfaces[$brPortIfIndex]['ifType']) ? $ifInterfaces[$brPortIfIndex]['ifType'] : '';
 				} else {

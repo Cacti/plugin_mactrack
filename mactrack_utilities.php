@@ -336,8 +336,8 @@ function mactrack_display_run_status() {
 
 						break;
 					default:
-					$other_processes += $run['devices'];
-					$other_rundate = $run['last_rundate'];
+						$other_processes += $run['devices'];
+						$other_rundate = $run['last_rundate'];
 				}
 			}
 		}

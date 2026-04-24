@@ -4,7 +4,7 @@ The MacTrack plugin is designed to scan network switches, routers and
 intelligent hubs for connected devices, and record their location either based
 upon the portname or alias of the switch or hub.  It also attempts to discover
 the ip address of the mac address from the routers included in the MacTrack
-database.  MacTrack can also use arpwatch to gether IP to MAC address
+database.  MacTrack can also use arpwatch to gather IP to MAC address
 associations.
 
 MacTrack has the ability to also notify admins or security personnel when the

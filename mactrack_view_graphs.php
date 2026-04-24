@@ -45,25 +45,21 @@ function mactrack_view_graphs() {
 
 	html_graph_validate_preview_request_vars();
 
-	if (!isset($_SESSION['sess_mt_gt'])) {
-		$_SESSION['sess_mt_gt'] = implode(',', array_rekey(db_fetch_assoc('SELECT DISTINCT gl.graph_template_id
+	$_SESSION['sess_mt_gt'] ??= implode(',', array_rekey(db_fetch_assoc('SELECT DISTINCT gl.graph_template_id
 			FROM graph_local AS gl
 			WHERE gl.host_id IN(
 				SELECT host_id
 				FROM mac_track_devices
 			)'), 'graph_template_id', 'graph_template_id'));
-	}
 	$gt = $_SESSION['sess_mt_gt'];
 
-	if (!isset($_SESSION['sess_mt_hosts'])) {
-		$_SESSION['sess_mt_hosts'] = implode(',', array_rekey(db_fetch_assoc('SELECT h.id
+	$_SESSION['sess_mt_hosts'] ??= implode(',', array_rekey(db_fetch_assoc('SELECT h.id
 			FROM host AS h
 			WHERE h.id IN (
 				SELECT host_id
 				FROM mac_track_devices
 			)
 			ORDER BY id DESC'), 'id', 'id'));
-	}
 	$hosts = $_SESSION['sess_mt_hosts'];
 
 	// include graph view filter selector

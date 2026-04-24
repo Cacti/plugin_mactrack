@@ -23,9 +23,7 @@
 */
 
 // register this functions scanning functions
-if (!isset($mactrack_scanning_functions)) {
-	$mactrack_scanning_functions = [];
-}
+$mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_JEX_switch_ports');
 
 function mach($macd, $del = ':') {

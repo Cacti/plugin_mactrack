@@ -23,14 +23,10 @@
 */
 
 // register this functions scanning functions
-if (!isset($mactrack_scanning_functions)) {
-	$mactrack_scanning_functions = [];
-}
+$mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_enterasys_N7_switch_ports');
 
-if (!isset($mactrack_scanning_functions_ip)) {
-	$mactrack_scanning_functions_ip = [];
-}
+$mactrack_scanning_functions_ip ??= [];
 array_push($mactrack_scanning_functions_ip, 'get_CTAlias_table');
 
 /*	get_generic_switch_ports - This is a basic function that will scan the dot1d
@@ -298,7 +294,7 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 
 					// now set the real data
 					$new_port_key_array[$i]['key']         = mactrack_arr_key($port_key, 'key');
-					$new_port_key_array[$i]['port_number'] = isset($brPortIfIndex) ? $brPortIfIndex : '';
+					$new_port_key_array[$i]['port_number'] = $brPortIfIndex ?? '';
 					$new_port_key_array[$i]['vlan_id']     = mactrack_arr_key($vlan_ids, $port_key['key']);
 					// print_r($new_port_key_array[$i]);
 					$i++;

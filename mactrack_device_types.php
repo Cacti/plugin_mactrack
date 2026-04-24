@@ -749,7 +749,6 @@ function mactrack_device_type_import_processor(&$device_types) {
 
 			foreach ($line_array as $line_item) {
 				if (in_array($j, $insert_columns, true)) {
-					$line_item = trim(str_replace("'", '', $line_item));
 					$line_item = trim(str_replace('"', '', $line_item));
 
 					if (!$first_column) {
@@ -762,15 +761,15 @@ function mactrack_device_type_import_processor(&$device_types) {
 						if ($sql_where != '') {
 							switch($j) {
 								case $device_type_id:
-									$sql_where .= " AND device_type='$line_item'";
+									$sql_where .= ' AND device_type=' . db_qstr($line_item);
 
 									break;
 								case $sysDescr_match_id:
-									$sql_where .= " AND sysDescr_match='$line_item'";
+									$sql_where .= ' AND sysDescr_match=' . db_qstr($line_item);
 
 									break;
 								case $sysObjectID_match_id:
-									$sql_where .= " AND sysObjectID_match='$line_item'";
+									$sql_where .= ' AND sysObjectID_match=' . db_qstr($line_item);
 
 									break;
 								default:
@@ -779,15 +778,15 @@ function mactrack_device_type_import_processor(&$device_types) {
 						} else {
 							switch($j) {
 								case $device_type_id:
-									$sql_where .= "WHERE device_type='$line_item'";
+									$sql_where .= 'WHERE device_type=' . db_qstr($line_item);
 
 									break;
 								case $sysDescr_match_id:
-									$sql_where .= "WHERE sysDescr_match='$line_item'";
+									$sql_where .= 'WHERE sysDescr_match=' . db_qstr($line_item);
 
 									break;
 								case $sysObjectID_match_id:
-									$sql_where .= "WHERE sysObjectID_match='$line_item'";
+									$sql_where .= 'WHERE sysObjectID_match=' . db_qstr($line_item);
 
 									break;
 								default:
@@ -821,7 +820,7 @@ function mactrack_device_type_import_processor(&$device_types) {
 						$description = $line_item;
 					}
 
-					$save_value .= "'" . $line_item . "'";
+					$save_value .= db_qstr($line_item);
 				}
 
 				$j++;
@@ -890,7 +889,7 @@ function mactrack_device_type_edit() {
 	draw_edit_form(
 		[
 			'config' => ['no_form_tag' => 'true'],
-			'fields' => inject_form_variables($fields_mactrack_device_type_edit, (isset($device_type) ? $device_type : []))
+			'fields' => inject_form_variables($fields_mactrack_device_type_edit, ($device_type ?? []))
 		]
 	);
 
@@ -901,10 +900,10 @@ function mactrack_device_type_edit() {
 
 function mactrack_get_device_types(&$sql_where, $rows, $apply_limits = true) {
 	if (get_request_var('filter') != '') {
-		$sql_where = " WHERE (mtdt.vendor LIKE '%" . get_request_var('filter') . "%' OR
-			mtdt.description LIKE '%" . get_request_var('filter') . "%' OR
-			mtdt.sysDescr_match LIKE '%" . get_request_var('filter') . "%' OR
-			mtdt.sysObjectID_match LIKE '%" . get_request_var('filter') . "%')";
+		$sql_where = ' WHERE (mtdt.vendor LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR
+			mtdt.description LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR
+			mtdt.sysDescr_match LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR
+			mtdt.sysObjectID_match LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 	}
 
 	if (get_request_var('vendor') == 'All') {
@@ -947,13 +946,7 @@ function mactrack_device_type() {
 
 	mactrack_device_type_request_validation();
 
-	if (get_request_var('rows') == -1) {
-		$rows = read_config_option('num_rows_table');
-	} elseif (get_request_var('rows') == -2) {
-		$rows = 999999;
-	} else {
-		$rows = get_request_var('rows');
-	}
+	$rows = plugin_get_rows_per_page();
 
 	html_start_box(__('Mactrack Device Type Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_device_types.php?action=edit');
 	mactrack_device_type_filter();
@@ -1107,7 +1100,7 @@ function mactrack_device_type_filter() {
 
 			if (get_request_var('vendor') == $type['vendor']) {
 				print ' selected';
-			} print '>' . $type['vendor'] . '</option>';
+			} print '>' . html_escape($type['vendor']) . '</option>';
 		}
 	}
 	?>

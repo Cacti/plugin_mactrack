@@ -144,9 +144,7 @@ function sync_mactrack_to_cacti($mt_device) {
 	 * (aka: has the device been saved successfully) */
 	if ((read_config_option('mt_update_policy', true) == 3) &&
 		($mt_device['host_id'] > 0)) {
-		if (!isset($mt_device['snmp_engine_id'])) {
-			$mt_device['snmp_engine_id'] = '';
-		}
+		$mt_device['snmp_engine_id'] ??= '';
 
 		// fetch current data for cacti device
 		$cacti_device = db_fetch_row('SELECT * FROM host WHERE id=' . $mt_device['host_id']);
@@ -172,7 +170,7 @@ function sync_cacti_to_mactrack($device) {
 
 	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
-	/* do we want to 'Sync Cacti Device to Matrack Device'
+	/* do we want to 'Sync Cacti Device to Mactrack Device'
 	 * AND has the device already been assigned a 'valid' Mactrack device id
 	 * (aka: has the device been saved successfully) */
 	if ((read_config_option('mt_update_policy', true) == 2) && ($device['id'] > 0)) {
@@ -181,9 +179,7 @@ function sync_cacti_to_mactrack($device) {
 		$mt_device = db_fetch_row('SELECT * from mac_track_devices WHERE host_id=' . $device['id']);
 
 		if (is_array($mt_device) && $mt_device) {
-			if (!isset($mt_device['snmp_engine_id'])) {
-				$mt_device['snmp_engine_id'] = '';
-			}
+			$mt_device['snmp_engine_id'] ??= '';
 
 			// update mac_track_device
 			$device_id = api_mactrack_device_save(
@@ -213,7 +209,7 @@ function sync_cacti_to_mactrack($device) {
 				$mt_device['user_password'],		// not a host column
 				$mt_device['term_type'],
 				$mt_device['private_key_path'],
-				(isset($mt_device['disabled']) ? $mt_device['disabled'] : ''), // not a host column
+				($mt_device['disabled'] ?? ''), // not a host column
 				$mt_device['scan_trunk_port'],
 				$mt_device['device_type_id']
 			);
@@ -306,7 +302,7 @@ function mactrack_device_action_execute($action) {
 					if (is_array($device)) {
 						// update mac_track_device
 						$device_id = api_mactrack_device_save(
-							(isset($mt_device['device_id']) ? $mt_device['device_id'] : '0'), 	// not a host column
+							($mt_device['device_id'] ?? '0'), 	// not a host column
 							$device['id'],
 							get_request_var('site_id'),         // not a host column (wait for 088)
 							$device['hostname'],
@@ -333,8 +329,8 @@ function mactrack_device_action_execute($action) {
 							get_request_var('term_type'),
 							get_request_var('private_key_path'),
 							(isset_request_var('disabled') ? get_request_var('disabled') : ''),
-							(isset($mt_device['scan_trunk_port']) ? $mt_device['scan_trunk_port'] : ''),
-							(isset($mt_device['device_type_id']) ? $mt_device['device_type_id'] : 0)
+							($mt_device['scan_trunk_port'] ?? ''),
+							($mt_device['device_type_id'] ?? 0)
 						);
 					}
 				}
