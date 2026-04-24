@@ -78,7 +78,7 @@ function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 
 
 	/*
 	vlan_ids:
-	[8] {
+	array(8) {
 	  [1]=>
 	  string(1) "1"
 	  [102]=>
@@ -89,7 +89,7 @@ function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 
 	  string(3) "122"
 
 	vlan_names:
-	[8] {
+	array(8) {
 	  [1]=>
 	  string(9) "VLAN 0001"
 	  [102]=>

@@ -60,7 +60,7 @@ function get_h3c_3com_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 
 	/*
 	vlan_ids:
-	[8] {
+	array(8) {
 	  [1]=>
 	  string(1) "1"
 	  [102]=>
@@ -71,7 +71,7 @@ function get_h3c_3com_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 	  string(3) "122"
 
 	vlan_names:
-	[8] {
+	array(8) {
 	  [1]=>
 	  string(9) "VLAN 0001"
 	  [102]=>
@@ -88,7 +88,7 @@ function get_h3c_3com_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 	$port_vlan_data = xform_standard_indexed_data('.1.3.6.1.2.1.17.7.1.4.5.1.1', $device);
 
 	/*
-	[31] {
+	array(31) {
 	  [1]=>
 	  string(1) "1"
 	  [2]=>
