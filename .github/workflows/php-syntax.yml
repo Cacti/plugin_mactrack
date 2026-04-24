@@ -39,7 +39,7 @@ jobs:
       - name: Guard against corrupted refactor patterns
         run: |
           set -euo pipefail
-          if rg -n '\b(is_|in_|call_user_func_|port_list_to_|mactrack_display_|mactrack_device_action_)\[' -g '*.php' .; then
+          if grep -R -n -E '\b(is_|in_|call_user_func_|port_list_to_|mactrack_display_|mactrack_device_action_)\[' --include='*.php' .; then
             echo "Detected corrupted call-pattern rewrite(s)." >&2
             exit 1
           fi
@@ -47,6 +47,6 @@ jobs:
       - name: Lint PHP files
         run: |
           set -euo pipefail
-          rg --files -g '*.php' | while IFS= read -r f; do
+          git ls-files '*.php' | while IFS= read -r f; do
             php -l "$f"
           done
