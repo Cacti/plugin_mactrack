@@ -1315,20 +1315,20 @@ function mactrack_device_filter() {
 		}
 
 		$(function() {
-			$('#mactrack').submit(function(event) {
+			$('#mactrack').on('submit', function(event) {
 				event.preventDefault();
 				applyFilter();
 			});
 
-			$('#clear').click(function() {
+			$('#clear').on('click', function() {
 				clearFilter();
 			});
 
-			$('#export').click(function() {
+			$('#export').on('click', function() {
 				exportRows();
 			});
 
-			$('#import').click(function() {
+			$('#import').on('click', function() {
 				importRows();
 			});
 		});

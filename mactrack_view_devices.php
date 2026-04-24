@@ -542,7 +542,7 @@ function mactrack_device_filter2() {
 					</td>
 				</tr>
 			</table>
-			<input type='hidden' id='page' value='<?php print get_request_var('page'); ?>'>
+			<input type='hidden' id='page' value='<?php print html_escape_request_var('page'); ?>'>
 			<input type='hidden' id='report' value='devices'>
 			</form>
 			<script type='text/javascript'>
@@ -569,16 +569,16 @@ function mactrack_device_filter2() {
 			}
 
 			$(function() {
-				$('#mactrack').submit(function(event) {
+				$('#mactrack').on('submit', function(event) {
 					event.preventDefault();
 					applyFilter();
 				});
 
-				$('#clear').click(function() {
+				$('#clear').on('click', function() {
 					clearFilter();
 				});
 
-				$('#export').click(function() {
+				$('#export').on('click', function() {
 					exportRows();
 				});
 			});

@@ -373,7 +373,7 @@ function mactrack_snmp_item_edit() {
 	<script type='text/javascript'>
 	$(function() {
 		setSNMP();
-		$('#snmp_version').change(function() {
+		$('#snmp_version').on('change', function() {
 			setSNMP();
 		});
 	});
@@ -635,7 +635,7 @@ function snmp_options_filter() {
 					</td>
 				</tr>
 			</table>
-			<input type='hidden' name='page' value='<?php print get_request_var('page'); ?>'>
+			<input type='hidden' name='page' value='<?php print html_escape_request_var('page'); ?>'>
 		</td>
 		</form>
 		<script type='text/javascript'>
@@ -653,15 +653,15 @@ function snmp_options_filter() {
 		}
 
 		$(function() {
-			$('#go').click(function() {
+			$('#go').on('click', function() {
 				applyFilter();
 			});
 
-			$('#clear').click(function() {
+			$('#clear').on('click', function() {
 				clearFilter();
 			});
 
-			$('#mactrack_snmp').unbind().submit(function(event) {
+			$('#mactrack_snmp').off().on('submit', function(event) {
 				event.preventDefault();
 				applyFilter();
 			});

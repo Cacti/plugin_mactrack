@@ -88,7 +88,7 @@ function form_actions() {
 
 	// if we are to save this form, instead of display it
 	if (isset_request_var('selected_items')) {
-		$selected_items = cacti_unserialize(stripslashes(get_nfilter_request_var('selected_items')));
+		$selected_items = unserialize(get_nfilter_request_var('selected_items'), ['allowed_classes' => false]);
 
 		if (!is_array($selected_items)) {
 			header('Location: mactrack_view_macs.php');
@@ -1352,16 +1352,16 @@ function mactrack_mac_filter() {
 			}
 
 			$(function() {
-				$('#mactrack').submit(function(event) {
+				$('#mactrack').on('submit', function(event) {
 					event.preventDefault();
 					applyFilter();
 				});
 
-				$('#clear').click(function() {
+				$('#clear').on('click', function() {
 					clearFilter();
 				});
 
-				$('#export').click(function() {
+				$('#export').on('click', function() {
 					exportRows();
 				});
 			});

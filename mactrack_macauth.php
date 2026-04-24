@@ -407,7 +407,7 @@ function mactrack_maca_filter() {
 					</td>
 				</tr>
 			</table>
-			<input type='hidden' id='page' value='<?php print get_request_var('page'); ?>'>
+			<input type='hidden' id='page' value='<?php print html_escape_request_var('page'); ?>'>
 			</form>
 			<script type='text/javascript'>
 
@@ -424,12 +424,12 @@ function mactrack_maca_filter() {
 			}
 
 			$(function() {
-				$('#mactrack').submit(function(event) {
+				$('#mactrack').on('submit', function(event) {
 					event.preventDefault();
 					applyFilter();
 				});
 
-				$('#clear').click(function() {
+				$('#clear').on('click', function() {
 					clearFilter();
 				});
 			});

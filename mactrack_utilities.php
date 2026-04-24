@@ -193,7 +193,7 @@ function mactrack_display_run_status() {
 	}
 
 	$(function() {
-		$('#refresh').click(function() {
+		$('#refresh').on('click', function() {
 			applyFilter();
 		});
 	});
