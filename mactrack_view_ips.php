@@ -165,13 +165,7 @@ function mactrack_view_ip_ranges() {
 
 	mactrack_view_ips_validate_request_vars();
 
-	if (get_request_var('rows') == -1) {
-		$rows = read_config_option('num_rows_table');
-	} elseif (get_request_var('rows') == -2) {
-		$rows = 999999;
-	} else {
-		$rows = get_request_var('rows');
-	}
+	$rows = plugin_get_rows_per_page();
 
 	$webroot = $config['url_path'] . 'plugins/mactrack/';
 

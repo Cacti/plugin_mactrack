@@ -357,14 +357,14 @@ function mactrack_snmp_item_edit() {
 	draw_edit_form(
 		[
 			'config' => ['no_form_tag' => true],
-			'fields' => inject_form_variables($fields_mactrack_snmp_item_edit, (isset($mactrack_snmp_item) ? $mactrack_snmp_item : []))
+			'fields' => inject_form_variables($fields_mactrack_snmp_item_edit, ($mactrack_snmp_item ?? []))
 		]
 	);
 
 	html_end_box();
 
 	form_hidden_box('item_id', (isset_request_var('item_id') ? get_request_var('item_id') : '0'), '');
-	form_hidden_box('id', (isset($mactrack_snmp_item['snmp_id']) ? $mactrack_snmp_item['snmp_id'] : '0'), '');
+	form_hidden_box('id', ($mactrack_snmp_item['snmp_id'] ?? '0'), '');
 	form_hidden_box('save_component_mactrack_snmp_item', '1', '');
 
 	form_save_button(htmlspecialchars('mactrack_snmp.php?action=edit&id=' . get_request_var('id')));
@@ -541,7 +541,7 @@ function mactrack_snmp() {
 	$sql_where = '';
 
 	if (get_request_var('filter') != '') {
-		$sql_where .= "WHERE (mac_track_snmp.name LIKE '%" . get_request_var('filter') . "%')";
+		$sql_where .= 'WHERE (mac_track_snmp.name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 	}
 
 	$total_rows = db_fetch_cell("SELECT
@@ -607,7 +607,7 @@ function snmp_options_filter() {
 						<?php print __('Search', 'mactrack'); ?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter'); ?>'>
+						<input type='text' id='filter' size='25' value='<?php print html_escape_request_var('filter'); ?>'>
 					</td>
 					<td>
 						<?php print __('Options', 'mactrack'); ?>

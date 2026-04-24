@@ -25,22 +25,17 @@
 // register these scanning functions
 global $mactrack_scanning_functions;
 
-if (!isset($mactrack_scanning_functions)) {
-	$mactrack_scanning_functions = [];
-}
+$mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_generic_dot1q_switch_ports', 'get_generic_switch_ports', 'get_generic_wireless_ports');
 
 global $mactrack_scanning_functions_ip;
 
-if (!isset($mactrack_scanning_functions_ip)) {
-	$mactrack_scanning_functions_ip = [];
-}
+$mactrack_scanning_functions_ip ??= [];
 array_push($mactrack_scanning_functions_ip, 'get_standard_arp_table', 'get_netscreen_arp_table');
 
 global $mactrack_device_status;
 
-if (!isset($mactrack_device_status)) {
-	$mactrack_device_status = [
+$mactrack_device_status ??= [
 		1 => __('Idle', 'mactrack'),
 		2 => __('Running', 'mactrack'),
 		3 => __('No method', 'mactrack'),
@@ -49,6 +44,24 @@ if (!isset($mactrack_device_status)) {
 		6 => __('Authorization Success', 'mactrack'),
 		7 => __('Authorization Failed', 'mactrack')
 	];
+
+/**
+ * plugin_get_rows_per_page - resolve rows-per-page from request vars
+ *
+ * @return int
+ */
+function plugin_get_rows_per_page() {
+	$rows = get_request_var('rows');
+
+	if ($rows == -1) {
+		return read_config_option('num_rows_table');
+	}
+
+	if ($rows == -2) {
+		return 999999;
+	}
+
+	return $rows;
 }
 
 function mactrack_debug($message) {
@@ -2431,13 +2444,9 @@ function db_store_device_port_results(&$device, $port_array, $scan_date) {
 					$authorized_mac = 0;
 				}
 
-				if (!isset($port_value['vlan_id'])) {
-					$port_value['vlan_id'] = 'N/A';
-				}
+				$port_value['vlan_id'] ??= 'N/A';
 
-				if (!isset($port_value['vlan_name'])) {
-					$port_value['vlan_name'] = 'N/A';
-				}
+				$port_value['vlan_name'] ??= 'N/A';
 
 				db_execute_prepared('REPLACE INTO mac_track_temp_ports
 					(site_id,device_id,hostname,device_name,vlan_id,vlan_name,
@@ -3314,17 +3323,17 @@ function mactrack_dot1x_row_class($port_result) {
 }
 
 /** mactrack_create_sql_filter - this routine will take a filter string and process it into a
-	 sql where clause that will be returned to the caller with a formatted SQL where clause
-	 that can then be integrated into the overall where clause.
-	 The filter takes the following forms.  The default is to find occurrence that match "all"
-	 Any string prefixed by a "-" will mean "exclude" this search string.  Boolean expressions
-	 are currently not supported.
-   @arg $filter - (string) The filter provided by the user
-   @arg $fields - (array) A list of field names to include in the where clause. They can also
-	 contain the table name in cases where joins are important.
-   * @param mixed $filter
-   * @param mixed $fields
-   @returns - (string) The formatted SQL syntax */
+ * sql where clause that will be returned to the caller with a formatted SQL where clause
+ * that can then be integrated into the overall where clause.
+ * The filter takes the following forms.  The default is to find occurrence that match "all"
+ * Any string prefixed by a "-" will mean "exclude" this search string.  Boolean expressions
+ * are currently not supported.
+ * @arg $filter - (string) The filter provided by the user
+ * @arg $fields - (array) A list of field names to include in the where clause. They can also
+ * contain the table name in cases where joins are important.
+ * @param mixed $filter
+ * @param mixed $fields
+ * @returns - (string) The formatted SQL syntax */
 function mactrack_create_sql_filter($filter, $fields) {
 	$query = '';
 
@@ -3360,7 +3369,7 @@ function mactrack_create_sql_filter($filter, $fields) {
 				$query .= '(';
 			}
 
-			$query .= ($field_no == 1 ? '' : " $operator ") . "($field $type LIKE '%" . $filter . "%')";
+			$query .= ($field_no == 1 ? '' : " $operator ") . "($field $type LIKE " . db_qstr('%' . $filter . '%') . ')';
 
 			$field_no++;
 		}
@@ -3582,7 +3591,7 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 						<?php print __('Search', 'mactrack'); ?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter'); ?>'>
+						<input type='text' id='filter' size='25' value='<?php print html_escape_request_var('filter'); ?>'>
 					</td>
 					<td>
 						<?php print __('Sites', 'mactrack'); ?>

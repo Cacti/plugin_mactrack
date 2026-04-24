@@ -103,9 +103,9 @@ function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = tru
 
 	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
-		$sql_where = "WHERE (mac_track_oui_database.vendor_name LIKE '%" . get_request_var('filter') . "%' OR " .
-			"mac_track_oui_database.vendor_mac LIKE '%" . get_request_var('filter') . "%' OR " .
-			"mac_track_oui_database.vendor_address LIKE '%" . get_request_var('filter') . "%')";
+		$sql_where = 'WHERE (mac_track_oui_database.vendor_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+			'mac_track_oui_database.vendor_mac LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+			'mac_track_oui_database.vendor_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 	}
 
 	$sql_order = get_order_string();
@@ -130,13 +130,7 @@ function mactrack_vmacs() {
 
 	mactrack_vmacs_validate_request_vars();
 
-	if (get_request_var('rows') == -1) {
-		$rows = read_config_option('num_rows_table');
-	} elseif (get_request_var('rows') == -2) {
-		$rows = 999999;
-	} else {
-		$rows = get_request_var('rows');
-	}
+	$rows = plugin_get_rows_per_page();
 
 	html_start_box(__('Mactrack Vendor Mac Filter', 'mactrack'), '100%', '', '3', 'center', '');
 	mactrack_vmac_filter();
@@ -201,7 +195,7 @@ function mactrack_vmac_filter() {
 						<?php print __('Search', 'mactrack'); ?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter'); ?>'>
+						<input type='text' id='filter' size='25' value='<?php print html_escape_request_var('filter'); ?>'>
 					</td>
 					<td>
 						<?php print __('MAC\'s', 'mactrack'); ?>

@@ -93,11 +93,11 @@ function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = true
 	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
 		if (get_request_var('detail') == 'false') {
-			$sql_where = "WHERE (mac_track_sites.site_name LIKE '%" . get_request_var('filter') . "%')";
+			$sql_where = 'WHERE (mac_track_sites.site_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		} else {
-			$sql_where = "WHERE (mac_track_device_types.vendor LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mac_track_device_types.description LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mac_track_sites.site_name LIKE '%" . get_request_var('filter') . "%')";
+			$sql_where = 'WHERE (mac_track_device_types.vendor LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mac_track_device_types.description LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mac_track_sites.site_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		}
 	}
 
@@ -204,13 +204,7 @@ function mactrack_view_sites() {
 
 	mactrack_sites_request_validation();
 
-	if (get_request_var('rows') == -1) {
-		$rows = read_config_option('num_rows_table');
-	} elseif (get_request_var('rows') == -2) {
-		$rows = 999999;
-	} else {
-		$rows = get_request_var('rows');
-	}
+	$rows = plugin_get_rows_per_page();
 
 	$webroot = $config['url_path'] . 'plugins/mactrack/';
 

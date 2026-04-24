@@ -291,11 +291,11 @@ function mactrack_site_get_site_records(&$sql_where, $rows, $apply_limits = true
 	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
 		if (get_request_var('detail') == 'false') {
-			$sql_where = "WHERE (mts.site_name LIKE '%" . get_request_var('filter') . "%')";
+			$sql_where = 'WHERE (mts.site_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		} else {
-			$sql_where = "WHERE (mts.vendor LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mtdt.description LIKE '%" . get_request_var('filter') . "%' OR " .
-				"mts.site_name LIKE '%" . get_request_var('filter') . "%')";
+			$sql_where = 'WHERE (mts.vendor LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mtdt.description LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				'mts.site_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		}
 	}
 
@@ -372,7 +372,7 @@ function mactrack_site_edit() {
 	draw_edit_form(
 		[
 			'config' => ['no_form_tag' => true],
-			'fields' => inject_form_variables($fields_mactrack_site_edit, (isset($site) ? $site : []))
+			'fields' => inject_form_variables($fields_mactrack_site_edit, ($site ?? []))
 		]
 	);
 
@@ -386,13 +386,7 @@ function mactrack_site() {
 
 	mactrack_site_validate_req_vars();
 
-	if (get_request_var('rows') == -1) {
-		$rows = read_config_option('num_rows_table');
-	} elseif (get_request_var('rows') == -2) {
-		$rows = 999999;
-	} else {
-		$rows = get_request_var('rows');
-	}
+	$rows = plugin_get_rows_per_page();
 
 	html_start_box(__('Mactrack Site Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_sites.php?action=edit');
 

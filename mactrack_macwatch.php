@@ -203,10 +203,10 @@ function mactrack_macw_get_macw_records(&$sql_where, $rows, $apply_limits = true
 
 	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
-		$sql_where = "WHERE (mac_address LIKE '%" . get_request_var('filter') . "%' OR " .
-			"name LIKE '%" . get_request_var('filter') . "%' OR " .
-			"ticket_number LIKE '%" . get_request_var('filter') . "%' OR " .
-			"description LIKE '%" . get_request_var('filter') . "%')";
+		$sql_where = 'WHERE (mac_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+			'name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+			'ticket_number LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+			'description LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 	}
 
 	$sql_order = get_order_string();
@@ -251,7 +251,7 @@ function mactrack_macw_edit() {
 	draw_edit_form(
 		[
 			'config' => ['no_form_tag' => true],
-			'fields' => inject_form_variables($fields_mactrack_macw_edit, (isset($mac_record) ? $mac_record : []))
+			'fields' => inject_form_variables($fields_mactrack_macw_edit, ($mac_record ?? []))
 		]
 	);
 
@@ -295,13 +295,7 @@ function mactrack_macw() {
 	validate_store_request_vars($filters, 'sess_mt_macw');
 	// ================= input validation =================
 
-	if (get_request_var('rows') == -1) {
-		$rows = read_config_option('num_rows_table');
-	} elseif (get_request_var('rows') == -2) {
-		$rows = 999999;
-	} else {
-		$rows = get_request_var('rows');
-	}
+	$rows = plugin_get_rows_per_page();
 
 	html_start_box(__('Mactrack MacWatch Filters', 'mactrack'), '100%', '', '3', 'center', 'mactrack_macwatch.php?action=edit');
 	mactrack_macw_filter();
@@ -392,7 +386,7 @@ function mactrack_macw_filter() {
 						<?php print __('Search', 'mactrack'); ?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='25' value='<?php print get_request_var('filter'); ?>'>
+						<input type='text' id='filter' size='25' value='<?php print html_escape_request_var('filter'); ?>'>
 					</td>
 					<td>
 						<?php print __('Watches', 'mactrack'); ?>

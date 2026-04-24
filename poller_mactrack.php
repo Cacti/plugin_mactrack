@@ -336,7 +336,7 @@ function mactrack_error_handler($level, $message, $file, $line, $context) {
 
 	preg_match("/.*\/plugins\/([\w-]*)\/.*/", $file, $output_array);
 
-	$plugin = (isset($output_array[1]) ? $output_array[1] : '');
+	$plugin = ($output_array[1] ?? '');
 	$error  = 'PHP ' . $phperrors[$level] . ($plugin != '' ? " in  Plugin '$plugin'" : '') . ": $message in file: $file  on line: $line";
 
 	switch ($level) {

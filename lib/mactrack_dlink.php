@@ -24,14 +24,10 @@
 */
 
 // register this functions scanning functions
-if (!isset($mactrack_scanning_functions)) {
-	$mactrack_scanning_functions = [];
-}
+$mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_dlink_l2_switch_ports');
 
-if (!isset($mactrack_scanning_functions)) {
-	$mactrack_scanning_functions = [];
-}
+$mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_dlink_l2_dot1dTpFdbEntry_ports');
 
 /*	get_generic_switch_ports - This is a basic function that will scan the dot1d

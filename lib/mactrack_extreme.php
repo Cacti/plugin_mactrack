@@ -23,15 +23,11 @@
 */
 
 // register this functions scanning functions
-if (!isset($mactrack_scanning_functions)) {
-	$mactrack_scanning_functions = [];
-}
+$mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_extreme_switch_ports');
 array_push($mactrack_scanning_functions, 'get_extreme_extremeware_switch_ports');
 
-if (!isset($mactrack_scanning_functions_ip)) {
-	$mactrack_scanning_functions_ip = [];
-}
+$mactrack_scanning_functions_ip ??= [];
 array_push($mactrack_scanning_functions_ip, 'get_extreme_arp_table');
 array_push($mactrack_scanning_functions_ip, 'get_extreme_extremeware_arp_table');
 
