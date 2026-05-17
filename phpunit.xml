@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="tests/bootstrap.php"
+         colors="true"
+         failOnDeprecation="false"
+         failOnNotice="false"
+>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">./tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Handoff">
+            <directory suffix="Test.php">./tests/Handoff</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory suffix="Test.php">./tests/Integration</directory>
+        </testsuite>
+        <testsuite name="Mutation">
+            <directory suffix="Test.php">./tests/Mutation</directory>
+        </testsuite>
+        <testsuite name="Smoke">
+            <directory suffix="Test.php">./tests/Smoke</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <ini name="error_reporting" value="24575"/>
+    </php>
+</phpunit>
