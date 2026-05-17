@@ -3151,7 +3151,8 @@ function mactrack_rescan($web = false) {
 			$data['content'] = ob_get_clean();
 
 			if ($exit_code !== 0) {
-				$data['error'] = 'rescan process exited with code ' . intval($exit_code);
+				$data['error']    = 'rescan process exited with code ' . intval($exit_code);
+				$data['content'] .= '<p class="textError">' . html_escape('Subprocess error: exit code ' . intval($exit_code)) . '</p>';
 			}
 		}
 	}
@@ -3181,7 +3182,7 @@ function mactrack_site_scan($web = false) {
 
 		// create the command script
 		$command_string = $config['base_path'] . '/plugins/mactrack/poller_mactrack.php';
-		$extra_args     = ' --web -sid=' . cacti_escapeshellarg($dbinfo['site_id']);
+		$extra_args     = ' -sid=' . cacti_escapeshellarg($dbinfo['site_id']) . ($web ? ' --web' : '');
 
 		// print out the type, and device_id
 		$data['site_id'] = $site_id;
@@ -3196,7 +3197,8 @@ function mactrack_site_scan($web = false) {
 		$data['content'] = ob_get_clean();
 
 		if ($exit_code !== 0) {
-			$data['error'] = 'site_scan process exited with code ' . intval($exit_code);
+			$data['error']    = 'site_scan process exited with code ' . intval($exit_code);
+			$data['content'] .= '<p class="textError">' . html_escape('Subprocess error: exit code ' . intval($exit_code)) . '</p>';
 		}
 	}
 
