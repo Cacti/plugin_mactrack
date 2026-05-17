@@ -86,7 +86,7 @@ array_shift($parms);
 
 if (cacti_sizeof($parms)) {
 	foreach ($parms as $parameter) {
-		if (strpos($parameter, '=')) {
+		if (strpos($parameter, '=') !== false) {
 			[$arg, $value] = explode('=', $parameter);
 		} else {
 			$arg   = $parameter;
@@ -720,7 +720,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 						WHERE site_id = ?
 						AND device_id = ?
 						AND mac_address = ?',
-						[$macs['ip_address'], $port['site_id'], $port['device_id'] . $port['mac_address']]);
+						[$macs['ip_address'], $port['site_id'], $port['device_id'], $port['mac_address']]);
 				}
 			}
 		}
@@ -998,7 +998,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 			$last_macauth_time = read_config_option('mt_last_macauth_time');
 
 			// if it's time to e-mail
-			if (($last_macauth_time + ($mac_auth_frequency * 60) > time()) ||
+			if (($last_macauth_time + ($mac_auth_frequency * 60) < time()) ||
 				($mac_auth_frequency == 0)) {
 				mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_time);
 			}

@@ -170,7 +170,7 @@ function form_mactrack_actions() {
 						if (isset_request_var("t_$field_name") && preg_match('/^ignorePorts/', $field_name)) {
 							db_execute_prepared("UPDATE mac_track_devices
 								SET $field_name = ?
-								WHERE id = ?",
+								WHERE device_id = ?",
 								[get_request_var($field_name), $selected_items[$i]]);
 						}
 					}

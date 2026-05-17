@@ -89,7 +89,6 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		foreach ($vlan_ids as $vlan_id => $vlan_name) {
 			$active_vlans[$i]['vlan_id']   = $vlan_id;
 			$active_vlans[$i]['vlan_name'] = $vlan_name;
-			$active_vlans++;
 
 			$i++;
 		}
