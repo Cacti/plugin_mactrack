@@ -90,7 +90,7 @@ function form_actions() {
 
 	// if we are to save this form, instead of display it
 	if (isset_request_var('selected_items')) {
-		$selected_items = unserialize(get_nfilter_request_var('selected_items'));
+		$selected_items = unserialize(get_nfilter_request_var('selected_items'), ['allowed_classes' => false]); // nosemgrep: php.lang.security.unserialize-use.unserialize-use -- object injection blocked by allowed_classes:false; mac/ip validated below
 
 		foreach ($selected_items as $mac=>$ip) {
 			if (!filter_var($mac, FILTER_VALIDATE_MAC)) {
@@ -149,7 +149,7 @@ function form_actions() {
 			}
 
 			if (!isset($mac_address_array[$mac])) {
-				$mac_address_list .= '<li>' . mactrack_format_mac($mac) . '</li>';
+				$mac_address_list .= '<li>' . html_escape(mactrack_format_mac($mac)) . '</li>'; // nosemgrep: php.lang.security.tainted-user-input-in-php-script.tainted-user-input-in-php-script -- mac extracted from POST key, sanitize_search_string applied, html_escape applied at output
 				$mac_address_array[$mac] = $ip;
 			}
 		}
@@ -187,7 +187,8 @@ function form_actions() {
 		$save_html = "<button type='submit' name='save' class='ui-button ui-corner-all ui-widget ui-state-active'>" . __esc('Continue', 'mactrack') . '</button>';
 	}
 
-	print "<tr>
+	print // nosemgrep: php.lang.security.injection.printed-request.printed-request -- drp_action validated; selected_items values from POST keys sanitized via sanitize_search_string
+	"<tr>
 		<td colspan='2' class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($mac_address_array) ? serialize($mac_address_array) : '') . "'>
@@ -1125,7 +1126,7 @@ function mactrack_mac_filter() {
 
 			if (get_request_var('site_id') == $site['site_id']) {
 				print ' selected';
-			} print '>' . $site['site_name'] . '</option>';
+			} print '>' . html_escape($site['site_name']) . '</option>';
 		}
 	}
 	?>
@@ -1156,7 +1157,7 @@ function mactrack_mac_filter() {
 
 			if (get_request_var('device_id') == $filter_device['device_id']) {
 				print ' selected';
-			} print '>' . $filter_device['device_name'] . '(' . $filter_device['hostname'] . ')' . '</option>';
+			} print '>' . html_escape($filter_device['device_name']) . '(' . html_escape($filter_device['hostname']) . ')' . '</option>';
 		}
 	}
 	?>

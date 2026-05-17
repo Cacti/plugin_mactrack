@@ -560,7 +560,7 @@ function mactrack_dot1x_filter() {
 
 			if (get_request_var('site_id') == $site['site_id']) {
 				print ' selected';
-			} print '>' . $site['site_name'] . '</option>';
+			} print '>' . html_escape($site['site_name']) . '</option>';
 		}
 	}
 	?>

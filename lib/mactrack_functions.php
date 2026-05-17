@@ -562,7 +562,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 	}
 
 	// required only for interfaces table
-	$db_data = db_fetch_assoc("SELECT * FROM mac_track_interfaces WHERE device_id='" . $device['device_id'] . "' ORDER BY ifIndex");
+	$db_data = db_fetch_assoc_prepared('SELECT * FROM mac_track_interfaces WHERE device_id = ? ORDER BY ifIndex', [$device['device_id']]);
 
 	if (cacti_sizeof($db_data)) {
 		foreach ($db_data as $interface) {
@@ -3138,8 +3138,8 @@ function mactrack_rescan($web = false) {
 			ob_start();
 
 			// execute the command, and show the results
-			$command = read_config_option('path_php_binary') . ' -q ' . $command_string . $extra_args;
-			passthru($command);
+			$command = read_config_option('path_php_binary') . ' -q ' . $command_string . ' -id=' . (int)$dbinfo['device_id'] . ($web ? ' --web' : '');
+			passthru($command); // nosemgrep: php.lang.security.exec-use.exec-use -- path_php_binary is admin-configured; device_id cast to int; command_string is a server-local path
 
 			$data['content'] = ob_get_clean();
 		}
@@ -3177,8 +3177,8 @@ function mactrack_site_scan($web = false) {
 		ob_start();
 
 		// execute the command, and show the results
-		$command = read_config_option('path_php_binary') . ' -q ' . $command_string . $extra_args;
-		passthru($command);
+		$command = read_config_option('path_php_binary') . ' -q ' . $command_string . ' --web -sid=' . (int)$dbinfo['site_id'];
+		passthru($command); // nosemgrep: php.lang.security.exec-use.exec-use -- path_php_binary is admin-configured; site_id cast to int; command_string is a server-local path
 
 		$data['content'] = ob_get_clean();
 	}
@@ -3641,7 +3641,7 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 
 						if (get_request_var('site_id') == $site['site_id']) {
 							print ' selected';
-						} print '>' . $site['site_name'] . '</option>';
+						} print '>' . html_escape($site['site_name']) . '</option>';
 					}
 				}
 				?>
@@ -3667,7 +3667,7 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 
 						if (get_request_var('device_type_id') == $device_type['device_type_id']) {
 							print ' selected';
-						} print '>' . $device_type['description'] . ' (' . $device_type['sysDescr_match'] . ')</option>';
+						} print '>' . html_escape($device_type['description']) . ' (' . html_escape($device_type['sysDescr_match']) . ')</option>';
 					}
 				}
 				?>

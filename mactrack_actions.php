@@ -151,7 +151,7 @@ function sync_mactrack_to_cacti($mt_device) {
 		}
 
 		// fetch current data for cacti device
-		$cacti_device = db_fetch_row('SELECT * FROM host WHERE id=' . $mt_device['host_id']);
+		$cacti_device = db_fetch_row_prepared('SELECT * FROM host WHERE id = ?', [$mt_device['host_id']]);
 
 		if (cacti_sizeof($cacti_device)) {
 			// update cacti device
@@ -180,7 +180,7 @@ function sync_cacti_to_mactrack($device) {
 	if ((read_config_option('mt_update_policy', true) == 2) && ($device['id'] > 0)) {
 		// $devices holds the whole row from host table
 		// now fetch the related device from mac_track_devices, if any
-		$mt_device = db_fetch_row('SELECT * from mac_track_devices WHERE host_id=' . $device['id']);
+		$mt_device = db_fetch_row_prepared('SELECT * FROM mac_track_devices WHERE host_id = ?', [$device['id']]);
 
 		if (is_array($mt_device) && $mt_device) {
 			if (!isset($mt_device['snmp_engine_id'])) {

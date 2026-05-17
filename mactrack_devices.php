@@ -882,7 +882,7 @@ function mactrack_device_edit() {
 		<table class='cactiTable'>
 			<tr>
 				<td class='textInfo' colspan='2'>
-					<?php print $device['device_name']; ?> (<?php print $device['hostname']; ?>)
+					<?php print html_escape($device['device_name']); ?> (<?php print html_escape($device['hostname']); ?>)
 				</td>
 			</tr>
 			<tr>
@@ -1180,7 +1180,7 @@ function mactrack_device_filter() {
 
 			if (get_request_var('site_id') == $site['site_id']) {
 				print ' selected';
-			} print '>' . $site['site_name'] . '</option>';
+			} print '>' . html_escape($site['site_name']) . '</option>';
 		}
 	}
 	?>
