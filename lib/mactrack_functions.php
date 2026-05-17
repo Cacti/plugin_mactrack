@@ -2838,13 +2838,13 @@ function get_netscreen_arp_table($site, &$device) {
 		$ifIntcount = 0;
 	}
 
-	if ($ifIntcount == 0) {
+	if ($ifIntcount != 0) {
 		$atifIndexes = xform_indexed_data('.1.3.6.1.2.1.4.22.1.1', $device, 5);
 	}
 	mactrack_debug(__('atifIndexes data collection complete', 'mactrack'));
 
 	// get the atPhysAddress for the device
-	if ($ifIntcount == 0) {
+	if ($ifIntcount != 0) {
 		$atPhysAddress = xform_indexed_data('.1.3.6.1.2.1.4.22.1.2', $device, 5, true);
 	} else {
 		$atPhysAddress = xform_indexed_data('.1.3.6.1.2.1.3.1.1.2', $device, 6, true);
@@ -2863,7 +2863,7 @@ function get_netscreen_arp_table($site, &$device) {
 	mactrack_debug(__('atPhysAddress data collection complete', 'mactrack'));
 
 	// get the atPhysAddress for the device
-	if ($ifIntcount == 0) {
+	if ($ifIntcount != 0) {
 		$atNetAddress = xform_indexed_data('.1.3.6.1.2.1.4.22.1.3', $device, 5);
 	} else {
 		$atNetAddress = xform_indexed_data('.1.3.6.1.2.1.3.1.1.3', $device, 6);
