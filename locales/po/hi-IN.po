@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-03-09 19:28-0700\n"
+"POT-Creation-Date: 2026-04-24 07:04-0700\n"
 "PO-Revision-Date: 2024-04-20 17:32-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,354 +17,354 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: lib/mactrack_functions.php:44 mactrack_utilities.php:264
-#: mactrack_view_dot1x.php:518 mactrack_view_dot1x.php:648
+#: lib/mactrack_functions.php:39 mactrack_utilities.php:264
+#: mactrack_view_dot1x.php:512 mactrack_view_dot1x.php:642
 msgid "Idle"
 msgstr "आइडल"
 
-#: lib/mactrack_functions.php:45 mactrack_utilities.php:264
-#: mactrack_utilities.php:353 mactrack_view_dot1x.php:517
-#: mactrack_view_dot1x.php:649
+#: lib/mactrack_functions.php:40 mactrack_utilities.php:264
+#: mactrack_utilities.php:353 mactrack_view_dot1x.php:511
+#: mactrack_view_dot1x.php:643
 msgid "Running"
 msgstr "चल रहा है"
 
-#: lib/mactrack_functions.php:46
+#: lib/mactrack_functions.php:41
 msgid "No method"
 msgstr "तरीका"
 
-#: lib/mactrack_functions.php:47 mactrack_view_dot1x.php:514
-#: mactrack_view_dot1x.php:651
+#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:508
+#: mactrack_view_dot1x.php:645
 msgid "Authentication Success"
 msgstr "प्रमाणीकरण सफलता"
 
-#: lib/mactrack_functions.php:48 mactrack_view_dot1x.php:516
-#: mactrack_view_dot1x.php:652
+#: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:510
+#: mactrack_view_dot1x.php:646
 msgid "Authentication Failed"
 msgstr "प्रमाणीकरण विफल होना"
 
-#: lib/mactrack_functions.php:49 mactrack_view_dot1x.php:513
-#: mactrack_view_dot1x.php:653
+#: lib/mactrack_functions.php:44 mactrack_view_dot1x.php:507
+#: mactrack_view_dot1x.php:647
 msgid "Authorization Success"
 msgstr "प्राधिकरण की सफलता"
 
-#: lib/mactrack_functions.php:50 mactrack_view_dot1x.php:515
-#: mactrack_view_dot1x.php:654
+#: lib/mactrack_functions.php:45 mactrack_view_dot1x.php:509
+#: mactrack_view_dot1x.php:648
 msgid "Authorization Failed"
 msgstr "अधिकृतीकरण विफल"
 
-#: lib/mactrack_functions.php:2661
+#: lib/mactrack_functions.php:2670
 #, fuzzy
 msgid "Mactrack Device Tracking OUI Database Import Results"
 msgstr "डिवाइस ट्रैकिंग OUI डेटाबेस आयात परिणाम"
 
-#: lib/mactrack_functions.php:2662
+#: lib/mactrack_functions.php:2671
 msgid "Getting OUI Database from IEEE"
 msgstr "IEEE से OUI डेटाबेस प्राप्त करना"
 
-#: lib/mactrack_functions.php:2664
+#: lib/mactrack_functions.php:2673
 msgid "Getting OUI Database from the IEEE"
 msgstr "IEEE से OUI डेटाबेस प्राप्त करना"
 
-#: lib/mactrack_functions.php:2697
+#: lib/mactrack_functions.php:2706
 msgid "OUI Database Download from IEEE Complete"
 msgstr "आईईई पूरा से OUI डेटाबेस डाउनलोड"
 
-#: lib/mactrack_functions.php:2699
+#: lib/mactrack_functions.php:2708
 msgid "OUI Database Download from IEEE FAILED"
 msgstr "आईईई फेल से OUI डेटाबेस डाउनलोड"
 
-#: lib/mactrack_functions.php:2803
+#: lib/mactrack_functions.php:2812
 #, php-format
 msgid "There were '%d' Entries Added/Updated in the database."
 msgstr "डेटाबेस में '% d' प्रविष्टियाँ जोड़ी गईं / अपडेट की गईं।"
 
-#: lib/mactrack_functions.php:2808
+#: lib/mactrack_functions.php:2817
 #, php-format
 msgid "There were '%d' Records Removed from the database."
 msgstr "डेटाबेस से '% d' रिकॉर्ड्स निकाले गए।"
 
-#: lib/mactrack_functions.php:2835
+#: lib/mactrack_functions.php:2844
 msgid "atifIndexes data collection complete"
 msgstr "atifIndexes डेटा संग्रह पूरा हुआ"
 
-#: lib/mactrack_functions.php:2854
+#: lib/mactrack_functions.php:2863
 msgid "atPhysAddress data collection complete"
 msgstr "atPhysAddress डेटा संग्रह पूरा करें"
 
-#: lib/mactrack_functions.php:2862
+#: lib/mactrack_functions.php:2871
 msgid "atNetAddress data collection complete"
 msgstr "atNetAddress डेटा संग्रह पूरा हुआ"
 
-#: lib/mactrack_functions.php:2876
+#: lib/mactrack_functions.php:2885
 msgid "atEntries assembly complete."
 msgstr "विधानसभा पूरी हो जाती है।"
 
-#: lib/mactrack_functions.php:2907
+#: lib/mactrack_functions.php:2916
 #, php-format
 msgid "HOST: %s, IP address information collection complete"
 msgstr "HOST: %s, IP पता सूचना संग्रह पूर्ण"
 
-#: lib/mactrack_functions.php:2924 lib/mactrack_functions.php:3461
+#: lib/mactrack_functions.php:2933 lib/mactrack_functions.php:3470
 msgid "Rescan Device"
 msgstr "रेसकान डिवाइस"
 
-#: lib/mactrack_functions.php:2948
+#: lib/mactrack_functions.php:2957
 msgid "View Non Interface Graphs"
 msgstr "अंतर देखें"
 
-#: lib/mactrack_functions.php:2950
+#: lib/mactrack_functions.php:2959
 msgid "No Non Interface Graphs in Cacti"
 msgstr "कैक्टि में कोई गैर इंटरफ़ेस ग्राफ़ नहीं"
 
-#: lib/mactrack_functions.php:2968
+#: lib/mactrack_functions.php:2977
 msgid "View Interface Graphs"
 msgstr "अंतर देखें"
 
-#: lib/mactrack_functions.php:2970
+#: lib/mactrack_functions.php:2979
 msgid "No Interface Graphs in Cacti"
 msgstr "अंतर देखें"
 
-#: lib/mactrack_functions.php:2987 lib/mactrack_functions.php:2990
+#: lib/mactrack_functions.php:2996 lib/mactrack_functions.php:2999
 msgid "Since Restart"
 msgstr "रिस्टार्ट के बाद से"
 
-#: lib/mactrack_functions.php:3029 mactrack_devices.php:1268
-#: mactrack_view_devices.php:530
+#: lib/mactrack_functions.php:3038 mactrack_devices.php:1261
+#: mactrack_view_devices.php:518
 msgid "Down"
 msgstr "नीचे"
 
-#: lib/mactrack_functions.php:3029 mactrack_devices.php:1266
-#: mactrack_view_devices.php:528
+#: lib/mactrack_functions.php:3038 mactrack_devices.php:1259
+#: mactrack_view_devices.php:516
 msgid "Up"
 msgstr "ऊपर"
 
-#: lib/mactrack_functions.php:3066
+#: lib/mactrack_functions.php:3075
 msgid "Data"
 msgstr "डाटा"
 
-#: lib/mactrack_functions.php:3066
+#: lib/mactrack_functions.php:3075
 msgid "Voice"
 msgstr "आवाज़"
 
-#: lib/mactrack_functions.php:3125
+#: lib/mactrack_functions.php:3134
 #, php-format
 msgid "Device Rescan '%s'"
 msgstr "डिवाइस Rescan ' %s'"
 
-#: lib/mactrack_functions.php:3165
+#: lib/mactrack_functions.php:3174
 #, php-format
 msgid "Site scan '%s'"
 msgstr "साइट स्कैन ' %s'"
 
-#: lib/mactrack_functions.php:3202
+#: lib/mactrack_functions.php:3211
 #, php-format
 msgid "Device Enable '%s'"
 msgstr "डिवाइस सक्षम ' %s'"
 
-#: lib/mactrack_functions.php:3234
+#: lib/mactrack_functions.php:3243
 #, php-format
 msgid "Device Disable '%d'"
 msgstr "डिवाइस अक्षम '% d'"
 
-#: lib/mactrack_functions.php:3374 lib/mactrack_functions.php:3411
-#: lib/mactrack_functions.php:3412 lib/mactrack_functions.php:3475
-#: lib/mactrack_functions.php:3476 lib/mactrack_functions.php:3477
-#: lib/mactrack_functions.php:3478 lib/mactrack_functions.php:3479
-#: mactrack_device_types.php:1004 mactrack_device_types.php:1011
-#: mactrack_device_types.php:1018 mactrack_macwatch.php:360
-#: mactrack_macwatch.php:361 mactrack_snmp.php:464 mactrack_snmp.php:469
+#: lib/mactrack_functions.php:3383 lib/mactrack_functions.php:3420
+#: lib/mactrack_functions.php:3421 lib/mactrack_functions.php:3484
+#: lib/mactrack_functions.php:3485 lib/mactrack_functions.php:3486
+#: lib/mactrack_functions.php:3487 lib/mactrack_functions.php:3488
+#: mactrack_device_types.php:997 mactrack_device_types.php:1004
+#: mactrack_device_types.php:1011 mactrack_macwatch.php:354
+#: mactrack_macwatch.php:355 mactrack_snmp.php:464 mactrack_snmp.php:469
 #: mactrack_snmp.php:470 mactrack_snmp.php:471 mactrack_utilities.php:273
 #: mactrack_utilities.php:275 mactrack_utilities.php:279
-#: mactrack_utilities.php:281 mactrack_view_arp.php:463
-#: mactrack_view_devices.php:385 mactrack_view_dot1x.php:549
-#: mactrack_view_interfaces.php:540 mactrack_view_macs.php:1116
-#: mactrack_view_sites.php:416 mactrack_view_sites.php:417
-#: mactrack_view_sites.php:418 mactrack_view_sites.php:419
-#: mactrack_view_sites.php:420 setup.php:370
+#: mactrack_utilities.php:281 mactrack_view_arp.php:457
+#: mactrack_view_devices.php:373 mactrack_view_dot1x.php:543
+#: mactrack_view_interfaces.php:540 mactrack_view_macs.php:1109
+#: mactrack_view_sites.php:410 mactrack_view_sites.php:411
+#: mactrack_view_sites.php:412 mactrack_view_sites.php:413
+#: mactrack_view_sites.php:414 setup.php:370
 msgid "N/A"
 msgstr "लागू नहीं"
 
-#: lib/mactrack_functions.php:3378 setup.php:941
+#: lib/mactrack_functions.php:3387 setup.php:941
 #, php-format
 msgid "%d Minutes"
 msgstr "% d मिनट"
 
-#: lib/mactrack_functions.php:3383
+#: lib/mactrack_functions.php:3392
 #, php-format
 msgid "%d Hours"
 msgstr "% d घंटे"
 
-#: lib/mactrack_functions.php:3388 setup.php:1002 setup.php:1003 setup.php:1004
+#: lib/mactrack_functions.php:3397 setup.php:1002 setup.php:1003 setup.php:1004
 #: setup.php:1005 setup.php:1006
 #, php-format
 msgid "%d Days"
 msgstr "%d दिन"
 
-#: lib/mactrack_functions.php:3392
+#: lib/mactrack_functions.php:3401
 #, php-format
 msgid "%d Weeks"
 msgstr "%d सप्ताह"
 
-#: lib/mactrack_functions.php:3410
+#: lib/mactrack_functions.php:3419
 msgid "Not Recorded"
 msgstr "दर्ज नहीं है"
 
-#: lib/mactrack_functions.php:3431
+#: lib/mactrack_functions.php:3440
 #, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
 msgstr "स्थिति: चल रहा है, प्रक्रियाएँ:% d, प्रगति: %s, अंतिम समय:% f"
 
-#: lib/mactrack_functions.php:3433
+#: lib/mactrack_functions.php:3442
 #, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
 msgstr "स्थिति: निष्क्रिय, अंतिम समय:% f सेकंड, प्रक्रियाएँ:% d प्रक्रियाएँ, उपकरण:% d, अगला रन समय: %s"
 
-#: lib/mactrack_functions.php:3435 mactrack_device_types.php:981
-#: mactrack_devices.php:1267 mactrack_utilities.php:264
-#: mactrack_utilities.php:295 mactrack_view_devices.php:529 setup.php:987
+#: lib/mactrack_functions.php:3444 mactrack_device_types.php:974
+#: mactrack_devices.php:1260 mactrack_utilities.php:264
+#: mactrack_utilities.php:295 mactrack_view_devices.php:517 setup.php:987
 #: setup.php:1015 setup.php:1160
 msgid "Disabled"
 msgstr "अक्षम"
 
-#: lib/mactrack_functions.php:3441
+#: lib/mactrack_functions.php:3450
 #, php-format
 msgid "Scanning Rate: Every %s"
 msgstr "स्कैनिंग दर: हर %s"
 
-#: lib/mactrack_functions.php:3456 mactrack_view_devices.php:382
-#: mactrack_view_sites.php:312 mactrack_view_sites.php:406
+#: lib/mactrack_functions.php:3465 mactrack_view_devices.php:370
+#: mactrack_view_sites.php:306 mactrack_view_sites.php:400
 msgid "View Interfaces"
 msgstr "अंतर देखें"
 
-#: lib/mactrack_functions.php:3474 mactrack_devices.php:1216
-#: mactrack_view_devices.php:482
+#: lib/mactrack_functions.php:3483 mactrack_devices.php:1209
+#: mactrack_view_devices.php:470
 msgid "Not Detected"
 msgstr "पता नहीं लगा"
 
-#: lib/mactrack_functions.php:3527 lib/mactrack_functions.php:3588
-#: mactrack_sites.php:465 mactrack_sites.php:546 mactrack_view_sites.php:287
+#: lib/mactrack_functions.php:3536 lib/mactrack_functions.php:3597
+#: mactrack_sites.php:459 mactrack_sites.php:540 mactrack_view_sites.php:281
 #: setup.php:576 setup.php:1029
 msgid "Sites"
 msgstr "साइटां"
 
-#: lib/mactrack_functions.php:3528 mactrack_device_types.php:974
-#: mactrack_devices.php:1119 mactrack_devices.php:1275 mactrack_sites.php:432
-#: mactrack_utilities.php:309 mactrack_view_devices.php:327
-#: mactrack_view_devices.php:537 mactrack_view_sites.php:254 setup.php:577
+#: lib/mactrack_functions.php:3537 mactrack_device_types.php:967
+#: mactrack_devices.php:1112 mactrack_devices.php:1268 mactrack_sites.php:426
+#: mactrack_utilities.php:309 mactrack_view_devices.php:315
+#: mactrack_view_devices.php:525 mactrack_view_sites.php:248 setup.php:577
 #: setup.php:1030
 msgid "Devices"
 msgstr "डिवाइस"
 
-#: lib/mactrack_functions.php:3529
+#: lib/mactrack_functions.php:3538
 msgid "IP Ranges"
 msgstr "आईपी रेंज"
 
-#: lib/mactrack_functions.php:3530
+#: lib/mactrack_functions.php:3539
 msgid "IP Address"
 msgstr "IP सिरनामा"
 
-#: lib/mactrack_functions.php:3531 setup.php:1592
+#: lib/mactrack_functions.php:3540 setup.php:1592
 msgid "MAC Address"
 msgstr "मैक पते"
 
-#: lib/mactrack_functions.php:3532 mactrack_view_interfaces.php:293
+#: lib/mactrack_functions.php:3541 mactrack_view_interfaces.php:293
 #: mactrack_view_interfaces.php:626 setup.php:580
 msgid "Interfaces"
 msgstr "इंटरफेस"
 
-#: lib/mactrack_functions.php:3533
+#: lib/mactrack_functions.php:3542
 msgid "Dot1x"
 msgstr "Dot1x"
 
-#: lib/mactrack_functions.php:3534 mactrack_view_graphs.php:162
+#: lib/mactrack_functions.php:3543 mactrack_view_graphs.php:158
 msgid "Graphs"
 msgstr "रेखांकन"
 
-#: lib/mactrack_functions.php:3568 mactrack_device_types.php:484
-#: mactrack_devices.php:1269 mactrack_view_devices.php:531 setup.php:962
+#: lib/mactrack_functions.php:3577 mactrack_device_types.php:484
+#: mactrack_devices.php:1262 mactrack_view_devices.php:519 setup.php:962
 msgid "Unknown"
 msgstr "अज्ञात"
 
-#: lib/mactrack_functions.php:3582 mactrack_device_types.php:1053
-#: mactrack_devices.php:1160 mactrack_macauth.php:384 mactrack_macwatch.php:392
-#: mactrack_snmp.php:607 mactrack_vendormacs.php:201 mactrack_view_arp.php:453
-#: mactrack_view_devices.php:427 mactrack_view_dot1x.php:539
-#: mactrack_view_interfaces.php:648 mactrack_view_macs.php:1106
+#: lib/mactrack_functions.php:3591 mactrack_device_types.php:1046
+#: mactrack_devices.php:1153 mactrack_macauth.php:378 mactrack_macwatch.php:386
+#: mactrack_snmp.php:607 mactrack_vendormacs.php:195 mactrack_view_arp.php:447
+#: mactrack_view_devices.php:415 mactrack_view_dot1x.php:533
+#: mactrack_view_interfaces.php:648 mactrack_view_macs.php:1099
 msgid "Search"
 msgstr "खोजें"
 
-#: lib/mactrack_functions.php:3592 mactrack_device_types.php:1063
-#: mactrack_devices.php:1279 mactrack_macauth.php:394 mactrack_macwatch.php:402
-#: mactrack_snmp.php:617 mactrack_vendormacs.php:211
-#: mactrack_view_devices.php:541 mactrack_view_ips.php:325 setup.php:974
+#: lib/mactrack_functions.php:3601 mactrack_device_types.php:1056
+#: mactrack_devices.php:1272 mactrack_macauth.php:388 mactrack_macwatch.php:396
+#: mactrack_snmp.php:617 mactrack_vendormacs.php:205
+#: mactrack_view_devices.php:529 mactrack_view_ips.php:319 setup.php:974
 msgid "Default"
 msgstr "डिफ़ॉल्ट"
 
-#: lib/mactrack_functions.php:3612
+#: lib/mactrack_functions.php:3621
 msgid "Show Device Details"
 msgstr "डिवाइस का विवरण दिखाएं"
 
-#: lib/mactrack_functions.php:3616 mactrack_device_types.php:1079
-#: mactrack_devices.php:1189 mactrack_macauth.php:410 mactrack_macwatch.php:418
-#: mactrack_snmp.php:632 mactrack_vendormacs.php:227 mactrack_view_arp.php:530
-#: mactrack_view_devices.php:456 mactrack_view_dot1x.php:616
-#: mactrack_view_interfaces.php:550 mactrack_view_macs.php:1183
+#: lib/mactrack_functions.php:3625 mactrack_device_types.php:1072
+#: mactrack_devices.php:1182 mactrack_macauth.php:404 mactrack_macwatch.php:412
+#: mactrack_snmp.php:632 mactrack_vendormacs.php:221 mactrack_view_arp.php:524
+#: mactrack_view_devices.php:444 mactrack_view_dot1x.php:610
+#: mactrack_view_interfaces.php:550 mactrack_view_macs.php:1176
 msgid "Go"
 msgstr "जाएं"
 
-#: lib/mactrack_functions.php:3617 mactrack_device_types.php:1080
-#: mactrack_devices.php:1190 mactrack_macauth.php:411 mactrack_macwatch.php:419
-#: mactrack_snmp.php:633 mactrack_vendormacs.php:228 mactrack_view_arp.php:531
-#: mactrack_view_devices.php:457 mactrack_view_dot1x.php:617
-#: mactrack_view_interfaces.php:551 mactrack_view_ips.php:342
-#: mactrack_view_macs.php:1184
+#: lib/mactrack_functions.php:3626 mactrack_device_types.php:1073
+#: mactrack_devices.php:1183 mactrack_macauth.php:405 mactrack_macwatch.php:413
+#: mactrack_snmp.php:633 mactrack_vendormacs.php:222 mactrack_view_arp.php:525
+#: mactrack_view_devices.php:445 mactrack_view_dot1x.php:611
+#: mactrack_view_interfaces.php:551 mactrack_view_ips.php:336
+#: mactrack_view_macs.php:1177
 msgid "Clear"
 msgstr "明确"
 
-#: lib/mactrack_functions.php:3618 mactrack_device_types.php:1083
-#: mactrack_devices.php:1192 mactrack_vendormacs.php:229
-#: mactrack_view_arp.php:532 mactrack_view_devices.php:458
-#: mactrack_view_dot1x.php:618 mactrack_view_interfaces.php:552
-#: mactrack_view_ips.php:341 mactrack_view_macs.php:1185
+#: lib/mactrack_functions.php:3627 mactrack_device_types.php:1076
+#: mactrack_devices.php:1185 mactrack_vendormacs.php:223
+#: mactrack_view_arp.php:526 mactrack_view_devices.php:446
+#: mactrack_view_dot1x.php:612 mactrack_view_interfaces.php:552
+#: mactrack_view_ips.php:335 mactrack_view_macs.php:1178
 msgid "Export"
 msgstr "एक्सपोर्ट"
 
-#: lib/mactrack_functions.php:3628 mactrack_devices.php:1166
-#: mactrack_view_arp.php:459 mactrack_view_devices.php:433
-#: mactrack_view_dot1x.php:545 mactrack_view_interfaces.php:497
-#: mactrack_view_ips.php:300 mactrack_view_macs.php:1112
+#: lib/mactrack_functions.php:3637 mactrack_devices.php:1159
+#: mactrack_view_arp.php:453 mactrack_view_devices.php:421
+#: mactrack_view_dot1x.php:539 mactrack_view_interfaces.php:497
+#: mactrack_view_ips.php:294 mactrack_view_macs.php:1105
 msgid "Site"
 msgstr "साइट"
 
-#: lib/mactrack_functions.php:3632 lib/mactrack_functions.php:3653
-#: mactrack_devices.php:1204 mactrack_devices.php:1215
-#: mactrack_devices.php:1265 mactrack_view_devices.php:470
-#: mactrack_view_devices.php:481 mactrack_view_devices.php:527
-#: mactrack_view_ips.php:304
+#: lib/mactrack_functions.php:3641 lib/mactrack_functions.php:3662
+#: mactrack_devices.php:1197 mactrack_devices.php:1208
+#: mactrack_devices.php:1258 mactrack_view_devices.php:458
+#: mactrack_view_devices.php:469 mactrack_view_devices.php:515
+#: mactrack_view_ips.php:298
 msgid "Any"
 msgstr "कोई भी@ label"
 
-#: lib/mactrack_functions.php:3649 mactrack_devices.php:1211
-#: mactrack_view_devices.php:477
+#: lib/mactrack_functions.php:3658 mactrack_devices.php:1204
+#: mactrack_view_devices.php:465
 msgid "SubType"
 msgstr "उपप्रकार"
 
-#: mactrack_actions.php:221
+#: mactrack_actions.php:217
 #, fuzzy, php-format
 msgid "Mactrack Device: (%s) successfully updated"
 msgstr "डिवाइस ट्रैकिंग डिवाइस: ( %s) सफलतापूर्वक अपडेट किया गया"
 
-#: mactrack_actions.php:235
+#: mactrack_actions.php:231
 #, fuzzy
 msgid "Import into Mactrack Database"
 msgstr "डिवाइस ट्रैकिंग डेटाबेस में आयात करें"
 
-#: mactrack_actions.php:249
+#: mactrack_actions.php:245
 #, fuzzy
 msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
 msgstr "डिवाइस ट्रैकिंग के लिए निम्न डिवाइस आयात करने के लिए 'जारी रखें' पर क्लिक करें? कृपया नीचे दिए गए अनुसार अतिरिक्त डिवाइस ट्रैकिंग डिवाइस विकल्प निर्दिष्ट करें।"
 
-#: mactrack_actions.php:274
+#: mactrack_actions.php:270
 #, fuzzy
 msgid "We will use these devices SNMP options for the Mactrack Device as well."
 msgstr "हम डिवाइस ट्रैकिंग डिवाइस के लिए भी इन उपकरणों SNMP विकल्पों का उपयोग करेंगे।"
@@ -397,7 +397,7 @@ msgstr "आपको कम से कम एक डिवाइस प्रक
 
 #: mactrack_device_types.php:297 mactrack_devices.php:265
 #: mactrack_macauth.php:137 mactrack_macwatch.php:140 mactrack_sites.php:153
-#: mactrack_snmp.php:254 mactrack_view_macs.php:185 mactrack_view_macs.php:272
+#: mactrack_snmp.php:254 mactrack_view_macs.php:190 mactrack_view_macs.php:277
 msgid "Continue"
 msgstr "जारी रखें"
 
@@ -419,13 +419,13 @@ msgstr "<description> (1)"
 
 #: mactrack_device_types.php:324 mactrack_devices.php:372
 #: mactrack_macauth.php:154 mactrack_macwatch.php:157 mactrack_sites.php:161
-#: mactrack_snmp.php:281 mactrack_view_macs.php:193 mactrack_view_macs.php:289
+#: mactrack_snmp.php:281 mactrack_view_macs.php:198 mactrack_view_macs.php:294
 msgid "Cancel"
 msgstr "कैंसिल करें"
 
 #: mactrack_device_types.php:325 mactrack_devices.php:373
 #: mactrack_macauth.php:155 mactrack_macwatch.php:158 mactrack_sites.php:162
-#: mactrack_snmp.php:281 mactrack_view_macs.php:194 mactrack_view_macs.php:290
+#: mactrack_snmp.php:281 mactrack_view_macs.php:199 mactrack_view_macs.php:295
 msgid "Return"
 msgstr "वापसी"
 
@@ -564,18 +564,18 @@ msgstr "3 - राउटर"
 msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
 msgstr "डिवाइस डिवाइस का प्रकार sysObjectID और sysDescription के लिए यह snmp एजेंट को स्कैन करके और डिवाइस प्रकार डेटाबेस में मूल्यों के खिलाफ तुलना करके निर्धारित किया जाता है। डेटाबेस में पाया जाने वाला पहला मैच प्रत्यक्ष डिवाइस ट्रैकिंग का उपयोग किया जाता है कि इसे कैसे स्कैन किया जाए। इसलिए, यह बहुत महत्वपूर्ण है कि आप अपने उपकरणों के लिए वैध sysObjectID_match, sysDescr_match और स्कैनिंग फ़ंक्शन का चयन करें।"
 
-#: mactrack_device_types.php:590 mactrack_device_types.php:1126
-#: mactrack_devices.php:1205 setup.php:945
+#: mactrack_device_types.php:590 mactrack_device_types.php:1119
+#: mactrack_devices.php:1198 setup.php:945
 msgid "Switch/Hub"
 msgstr "स्विच / हब"
 
-#: mactrack_device_types.php:591 mactrack_device_types.php:1129
-#: mactrack_devices.php:1206 mactrack_view_devices.php:472 setup.php:946
+#: mactrack_device_types.php:591 mactrack_device_types.php:1122
+#: mactrack_devices.php:1199 mactrack_view_devices.php:460 setup.php:946
 msgid "Switch/Router"
 msgstr "स्विच / रूटर"
 
-#: mactrack_device_types.php:592 mactrack_device_types.php:1132
-#: mactrack_devices.php:1207 mactrack_view_devices.php:473 setup.php:947
+#: mactrack_device_types.php:592 mactrack_device_types.php:1125
+#: mactrack_devices.php:1200 mactrack_view_devices.php:461 setup.php:947
 msgid "Router"
 msgstr "रूटर"
 
@@ -589,141 +589,141 @@ msgstr "हेड लाइन की प्रक्रिया ठीक ह�
 msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
 msgstr "हेडर लाइन प्रसंस्करण ERROR: आवश्यक फ़ील्ड गुम है <br> कॉलम मिले जहां: %s"
 
-#: mactrack_device_types.php:803
+#: mactrack_device_types.php:802
 msgid "Unknown Assume \"Switch/Hub\""
 msgstr "अज्ञात मान लें \"स्विच / हब\""
 
-#: mactrack_device_types.php:838 mactrack_device_types.php:853
+#: mactrack_device_types.php:837 mactrack_device_types.php:852
 #, php-format
 msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
 msgstr "INSERT स्वीकृत: विक्रेता: %s, विवरण: %s, प्रकार: %s, sysDescr: %s, sysObjectID: %s"
 
-#: mactrack_device_types.php:840 mactrack_device_types.php:855
+#: mactrack_device_types.php:839 mactrack_device_types.php:854
 #, php-format
 msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
 msgstr "सम्मिलित किया गया: विक्रेता: %s, विवरण: %s, प्रकार: %s, sysDescr: %s, sysObjectID: %s"
 
-#: mactrack_device_types.php:847
+#: mactrack_device_types.php:846
 #, php-format
 msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
 msgstr "INSERT SKIPPED, EXISTING: विक्रेता: %s, विवरण: %s, प्रकार: %s, sysDescr: %s, sysObjectID: %s"
 
-#: mactrack_device_types.php:881
+#: mactrack_device_types.php:880
 #, fuzzy, php-format
 msgid "Mactrack Device Types [edit: %s]"
 msgstr "डिवाइस ट्रैकिंग डिवाइस के प्रकार [संपादित करें: %s]"
 
-#: mactrack_device_types.php:883
+#: mactrack_device_types.php:882
 #, fuzzy
 msgid "Mactrack Device Types [new]"
 msgstr "डिवाइस ट्रैकिंग डिवाइस प्रकार [नया]"
 
-#: mactrack_device_types.php:958
+#: mactrack_device_types.php:951
 #, fuzzy
 msgid "Mactrack Device Type Filters"
 msgstr "डिवाइस ट्रैकिंग डिवाइस प्रकार फ़िल्टर"
 
-#: mactrack_device_types.php:973
+#: mactrack_device_types.php:966
 msgid "Device Type Description"
 msgstr "डिवाइस प्रकार विवरण"
 
-#: mactrack_device_types.php:975 mactrack_devices.php:1082
-#: mactrack_sites.php:508 mactrack_view_devices.php:285
-#: mactrack_view_sites.php:350 setup.php:1077
+#: mactrack_device_types.php:968 mactrack_devices.php:1075
+#: mactrack_sites.php:502 mactrack_view_devices.php:273
+#: mactrack_view_sites.php:344 setup.php:1077
 msgid "Device Type"
 msgstr "उपकरण का प्रकार"
 
-#: mactrack_device_types.php:976
+#: mactrack_device_types.php:969
 msgid "Port Scanner"
 msgstr "पोर्ट स्कैनर"
 
-#: mactrack_device_types.php:977
+#: mactrack_device_types.php:970
 msgid "IP Scanner"
 msgstr "आईपी स्कैनर"
 
-#: mactrack_device_types.php:978
+#: mactrack_device_types.php:971
 msgid "Dot1x Scanner"
 msgstr "डॉट 1 एक्स स्कैनर"
 
-#: mactrack_device_types.php:979
+#: mactrack_device_types.php:972
 msgid "sysDescription Match"
 msgstr "sysDescription मिलान"
 
-#: mactrack_device_types.php:980
+#: mactrack_device_types.php:973
 msgid "Vendor OID Match"
 msgstr "विक्रेता OID मैच"
 
-#: mactrack_device_types.php:986 mactrack_device_types.php:1059 setup.php:1032
+#: mactrack_device_types.php:979 mactrack_device_types.php:1052 setup.php:1032
 msgid "Device Types"
 msgstr "डिवाइस के प्रकार"
 
-#: mactrack_device_types.php:1024 mactrack_device_types.php:1148
-#: mactrack_view_macs.php:1301
+#: mactrack_device_types.php:1017 mactrack_device_types.php:1141
+#: mactrack_view_macs.php:1294
 msgid "No"
 msgstr "नहीं"
 
-#: mactrack_device_types.php:1024 mactrack_device_types.php:1145
-#: mactrack_view_macs.php:1300
+#: mactrack_device_types.php:1017 mactrack_device_types.php:1138
+#: mactrack_view_macs.php:1293
 msgid "Yes"
 msgstr "हाँ"
 
-#: mactrack_device_types.php:1029
+#: mactrack_device_types.php:1022
 #, fuzzy
 msgid "No Mactrack Device Types Found"
 msgstr "कोई डिवाइस ट्रैकिंग डिवाइस प्रकार नहीं मिला"
 
-#: mactrack_device_types.php:1079
+#: mactrack_device_types.php:1072
 msgid "Submit Query"
 msgstr "जिज्ञासा दर्ज करें"
 
-#: mactrack_device_types.php:1080
+#: mactrack_device_types.php:1073
 msgid "Clear Filtered Results"
 msgstr "फ़िल्टर किए गए परिणाम साफ़ करें"
 
-#: mactrack_device_types.php:1081
+#: mactrack_device_types.php:1074
 msgid "Rescan"
 msgstr "री- स्कैन"
 
-#: mactrack_device_types.php:1081
+#: mactrack_device_types.php:1074
 msgid "Scan Active Devices for Unknown Device Types"
 msgstr "डिवाइस ट्रैकिंग डिवाइस के प्रकार"
 
-#: mactrack_device_types.php:1082 mactrack_devices.php:1191
+#: mactrack_device_types.php:1075 mactrack_devices.php:1184
 msgid "Import"
 msgstr "आयात करें"
 
-#: mactrack_device_types.php:1082
+#: mactrack_device_types.php:1075
 msgid "Import Device Types from a CSV File"
 msgstr "स्थानीय फ़ाइल से डिवाइस प्रकार आयात करें"
 
-#: mactrack_device_types.php:1083
+#: mactrack_device_types.php:1076
 msgid "Export Device Types to Share with Others"
 msgstr "स्थानीय फ़ाइल से डिवाइस प्रकार आयात करें"
 
-#: mactrack_device_types.php:1094 mactrack_sites.php:504
-#: mactrack_view_sites.php:346 setup.php:1070
+#: mactrack_device_types.php:1087 mactrack_sites.php:498
+#: mactrack_view_sites.php:340 setup.php:1070
 msgid "Vendor"
 msgstr "विक्रेता"
 
-#: mactrack_device_types.php:1100 mactrack_device_types.php:1123
-#: mactrack_device_types.php:1142 mactrack_devices.php:1170
-#: mactrack_view_arp.php:484 mactrack_view_arp.php:563
-#: mactrack_view_devices.php:437 mactrack_view_dot1x.php:572
-#: mactrack_view_dot1x.php:668 mactrack_view_dot1x.php:706
+#: mactrack_device_types.php:1093 mactrack_device_types.php:1116
+#: mactrack_device_types.php:1135 mactrack_devices.php:1163
+#: mactrack_view_arp.php:478 mactrack_view_arp.php:557
+#: mactrack_view_devices.php:425 mactrack_view_dot1x.php:566
+#: mactrack_view_dot1x.php:662 mactrack_view_dot1x.php:700
 #: mactrack_view_interfaces.php:501 mactrack_view_interfaces.php:564
-#: mactrack_view_interfaces.php:599 mactrack_view_macs.php:1137
-#: mactrack_view_macs.php:1216 mactrack_view_macs.php:1254
-#: mactrack_view_macs.php:1299 setup.php:983
+#: mactrack_view_interfaces.php:599 mactrack_view_macs.php:1130
+#: mactrack_view_macs.php:1209 mactrack_view_macs.php:1247
+#: mactrack_view_macs.php:1292 setup.php:983
 msgid "All"
 msgstr "所有"
 
-#: mactrack_device_types.php:1117 mactrack_devices.php:1200
-#: mactrack_view_devices.php:466 mactrack_view_interfaces.php:371
+#: mactrack_device_types.php:1110 mactrack_devices.php:1193
+#: mactrack_view_devices.php:454 mactrack_view_interfaces.php:371
 #: mactrack_view_interfaces.php:560
 msgid "Type"
 msgstr "प्रकार"
 
-#: mactrack_device_types.php:1136 mactrack_utilities.php:295
+#: mactrack_device_types.php:1129 mactrack_utilities.php:295
 msgid "Enabled"
 msgstr "सक्षम"
 
@@ -887,123 +887,123 @@ msgstr "इसलिए, यदि आप डुप्लिकेट डिव�
 msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
 msgstr "हेड लाइन की प्रक्रिया ठीक है: <br> कॉलम मिले जहां: %s"
 
-#: mactrack_devices.php:827 mactrack_devices.php:842
+#: mactrack_devices.php:826 mactrack_devices.php:841
 #, php-format
 msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
 msgstr "INSERT SUCCEEDED: Hostname: SiteID: %s, डिवाइस नाम: %s, Hostname %s, SNMP पोर्ट: %s"
 
-#: mactrack_devices.php:829 mactrack_devices.php:844
+#: mactrack_devices.php:828 mactrack_devices.php:843
 #, php-format
 msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
 msgstr "INSERT विफल: साइटआईडी: %s, डिवाइस नाम: %s, होस्टनाम %s, SNMP पोर्ट: %s"
 
-#: mactrack_devices.php:836
+#: mactrack_devices.php:835
 #, php-format
 msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
 msgstr "INSERT SKIPPED, EXISTING: SiteID: %s, डिवाइस नाम: %s, होस्टनाम %s, SNMP पोर्ट: %s"
 
-#: mactrack_devices.php:871
+#: mactrack_devices.php:870
 #, fuzzy, php-format
 msgid "Mactrack Devices [edit: %s]"
 msgstr "डिवाइस ट्रैकिंग डिवाइस [संपादित करें: %s]"
 
-#: mactrack_devices.php:875
+#: mactrack_devices.php:874
 #, fuzzy
 msgid "Mactrack Devices [new]"
 msgstr "डिवाइस ट्रैकिंग डिवाइस [नया]"
 
-#: mactrack_devices.php:888
+#: mactrack_devices.php:887
 msgid "SNMP Information"
 msgstr "एसएनएमपी सूचना"
 
-#: mactrack_devices.php:938
+#: mactrack_devices.php:937
 msgid "System:"
 msgstr "तंत्रः"
 
-#: mactrack_devices.php:939
+#: mactrack_devices.php:938
 msgid "Uptime:"
 msgstr "चालू रहने का समय"
 
-#: mactrack_devices.php:940
+#: mactrack_devices.php:939
 msgid "Hostname:"
 msgstr "#-#-#-#-# balsa.HEAD.hi.po (Balsa 2.x) #-#-#-#-# उपयोगकर्ता का नाम #-#-#-#-# eel.HEAD.hi.po (eel VERSION) #-#-#-#-# उपयोगकर्ता का नाम: (_U)"
 
-#: mactrack_devices.php:941
+#: mactrack_devices.php:940
 msgid "ObjectID:"
 msgstr "ObjectID:"
 
-#: mactrack_devices.php:1047
+#: mactrack_devices.php:1040
 #, fuzzy
 msgid "Mactrack Device Filters"
 msgstr "डिवाइस ट्रैकिंग डिवाइस फ़िल्टर"
 
-#: mactrack_devices.php:1066 mactrack_view_devices.php:269 setup.php:1318
+#: mactrack_devices.php:1059 mactrack_view_devices.php:257 setup.php:1318
 msgid "Device Name"
 msgstr "उपकरण नामः% 1"
 
-#: mactrack_devices.php:1070 mactrack_sites.php:428 mactrack_sites.php:500
-#: mactrack_view_arp.php:336 mactrack_view_devices.php:273
-#: mactrack_view_ips.php:200 mactrack_view_macs.php:724
-#: mactrack_view_macs.php:923 mactrack_view_sites.php:250
-#: mactrack_view_sites.php:342 setup.php:1358 setup.php:1510
+#: mactrack_devices.php:1063 mactrack_sites.php:422 mactrack_sites.php:494
+#: mactrack_view_arp.php:330 mactrack_view_devices.php:261
+#: mactrack_view_ips.php:194 mactrack_view_macs.php:723
+#: mactrack_view_macs.php:916 mactrack_view_sites.php:244
+#: mactrack_view_sites.php:336 setup.php:1358 setup.php:1510
 msgid "Site Name"
 msgstr "साइट नाम"
 
-#: mactrack_devices.php:1074 mactrack_devices.php:1261
-#: mactrack_utilities.php:309 mactrack_view_devices.php:277
-#: mactrack_view_devices.php:523 mactrack_view_dot1x.php:440
-#: mactrack_view_dot1x.php:453 mactrack_view_dot1x.php:641
+#: mactrack_devices.php:1067 mactrack_devices.php:1254
+#: mactrack_utilities.php:309 mactrack_view_devices.php:265
+#: mactrack_view_devices.php:511 mactrack_view_dot1x.php:434
+#: mactrack_view_dot1x.php:447 mactrack_view_dot1x.php:635
 #: mactrack_view_interfaces.php:468
 msgid "Status"
 msgstr "ऑर्डर स्थिति"
 
-#: mactrack_devices.php:1078 mactrack_view_devices.php:281
+#: mactrack_devices.php:1071 mactrack_view_devices.php:269
 #: mactrack_view_interfaces.php:367 setup.php:1325
 msgid "Hostname"
 msgstr "होस्टनांऽ"
 
-#: mactrack_devices.php:1086
+#: mactrack_devices.php:1079
 msgid "Total IPs"
 msgstr "कुल आईपी"
 
-#: mactrack_devices.php:1091 mactrack_sites.php:442
-#: mactrack_view_devices.php:294 mactrack_view_sites.php:264
+#: mactrack_devices.php:1084 mactrack_sites.php:436
+#: mactrack_view_devices.php:282 mactrack_view_sites.php:258
 msgid "User Ports"
 msgstr "उपयोगकर्ता पोर्ट"
 
-#: mactrack_devices.php:1096 mactrack_sites.php:447
-#: mactrack_view_devices.php:299 mactrack_view_sites.php:269
+#: mactrack_devices.php:1089 mactrack_sites.php:441
+#: mactrack_view_devices.php:287 mactrack_view_sites.php:263
 msgid "User Ports Up"
 msgstr "उपयोगकर्ता पोर्ट्स अप"
 
-#: mactrack_devices.php:1101 mactrack_view_devices.php:304
+#: mactrack_devices.php:1094 mactrack_view_devices.php:292
 msgid "Trunk Ports"
 msgstr "ट्रंक पोर्ट"
 
-#: mactrack_devices.php:1106 mactrack_view_devices.php:309
+#: mactrack_devices.php:1099 mactrack_view_devices.php:297
 msgid "Active Macs"
 msgstr "सक्रिय मैक"
 
-#: mactrack_devices.php:1111 mactrack_view_devices.php:319
+#: mactrack_devices.php:1104 mactrack_view_devices.php:307
 msgid "Last Duration"
 msgstr "अंतिम अवधि"
 
-#: mactrack_devices.php:1135
+#: mactrack_devices.php:1128
 #, fuzzy
 msgid "No Mactrack Devices"
 msgstr "कोई डिवाइस ट्रैकिंग डिवाइस नहीं"
 
-#: mactrack_devices.php:1171 mactrack_view_devices.php:438 setup.php:968
+#: mactrack_devices.php:1164 mactrack_view_devices.php:426 setup.php:968
 #: setup.php:1103 setup.php:1112 setup.php:1121 setup.php:1336 setup.php:1361
 #: setup.php:1417 setup.php:1446
 msgid "None"
 msgstr "कोई नहीं"
 
-#: mactrack_devices.php:1270 mactrack_view_devices.php:532
+#: mactrack_devices.php:1263 mactrack_view_devices.php:520
 msgid "Error"
 msgstr "त्रुटि"
 
-#: mactrack_devices.php:1271 mactrack_view_devices.php:533
+#: mactrack_devices.php:1264 mactrack_view_devices.php:521
 msgid "No Cacti Link"
 msgstr "कोई कैक्टि लिंक नहीं"
 
@@ -1025,37 +1025,37 @@ msgstr "डिवाइस ट्रैकिंग MacAuth [संपादि�
 msgid "Mactrack MacAuth [new]"
 msgstr "डिवाइस ट्रैकिंग MacAuth [नया]"
 
-#: mactrack_macauth.php:320
+#: mactrack_macauth.php:314
 #, fuzzy
 msgid "Mactrack MacAuth Filters"
 msgstr "डिवाइस ट्रैकिंग Macuth फिल्टर"
 
-#: mactrack_macauth.php:333 mactrack_macwatch.php:322
+#: mactrack_macauth.php:327 mactrack_macwatch.php:316
 msgid "Mac Address"
 msgstr "मैक पते"
 
-#: mactrack_macauth.php:334 setup.php:1677
+#: mactrack_macauth.php:328 setup.php:1677
 msgid "Reason"
 msgstr "कारण:"
 
-#: mactrack_macauth.php:335
+#: mactrack_macauth.php:329
 msgid "Added/Modified"
 msgstr "जोड़ा गया / संशोधित"
 
-#: mactrack_macauth.php:336
+#: mactrack_macauth.php:330
 msgid "By"
 msgstr "在"
 
-#: mactrack_macauth.php:341
+#: mactrack_macauth.php:335
 msgid "Authorized Mac Addresses"
 msgstr "अधिकृत मैक पते"
 
-#: mactrack_macauth.php:362
+#: mactrack_macauth.php:356
 msgid "No Authorized Mac Addresses Found"
 msgstr "कोई अधिकृत मैक पते नहीं मिले"
 
-#: mactrack_macauth.php:390 mactrack_vendormacs.php:207
-#: mactrack_view_macs.php:1164
+#: mactrack_macauth.php:384 mactrack_vendormacs.php:201
+#: mactrack_view_macs.php:1157
 msgid "MAC's"
 msgstr "मैक के"
 
@@ -1073,32 +1073,32 @@ msgstr "डिवाइस ट्रैकिंग MacWatch [संपादि
 msgid "Mactrack MacWatch [new]"
 msgstr "डिवाइस ट्रैकिंग मैकवाच [नया]"
 
-#: mactrack_macwatch.php:306
+#: mactrack_macwatch.php:300
 #, fuzzy
 msgid "Mactrack MacWatch Filters"
 msgstr "डिवाइस ट्रैकिंग MacWatch फ़िल्टर"
 
-#: mactrack_macwatch.php:318
+#: mactrack_macwatch.php:312
 msgid "Watch Name"
 msgstr "नाम देखो"
 
-#: mactrack_macwatch.php:326 setup.php:1619
+#: mactrack_macwatch.php:320 setup.php:1619
 msgid "Ticket Number"
 msgstr "टिकट नंबर"
 
-#: mactrack_macwatch.php:330
+#: mactrack_macwatch.php:324
 msgid "First Seen"
 msgstr "पहले देखा"
 
-#: mactrack_macwatch.php:334
+#: mactrack_macwatch.php:328
 msgid "Last Seen"
 msgstr "अंतिम बार देखा गया"
 
-#: mactrack_macwatch.php:341 mactrack_macwatch.php:398
+#: mactrack_macwatch.php:335 mactrack_macwatch.php:392
 msgid "Watches"
 msgstr "घड़ियों"
 
-#: mactrack_macwatch.php:367
+#: mactrack_macwatch.php:361
 #, fuzzy
 msgid "No Mactrack Watched Macs Found"
 msgstr "कोई डिवाइस ट्रैकिंग देखा मैक मिला"
@@ -1121,44 +1121,44 @@ msgstr "डिवाइस ट्रैकिंग साइट [संपा�
 msgid "Mactrack Site [new]"
 msgstr "डिवाइस ट्रैकिंग साइट [नया]"
 
-#: mactrack_sites.php:397
+#: mactrack_sites.php:391
 #, fuzzy
 msgid "Mactrack Site Filters"
 msgstr "डिवाइस ट्रैकिंग साइट फ़िल्टर"
 
-#: mactrack_sites.php:437 mactrack_sites.php:518 mactrack_view_devices.php:289
-#: mactrack_view_sites.php:259 mactrack_view_sites.php:359
+#: mactrack_sites.php:431 mactrack_sites.php:512 mactrack_view_devices.php:277
+#: mactrack_view_sites.php:253 mactrack_view_sites.php:353
 msgid "Total IP's"
 msgstr "कुल आईपी"
 
-#: mactrack_sites.php:452 mactrack_sites.php:538 mactrack_view_sites.php:274
-#: mactrack_view_sites.php:379
+#: mactrack_sites.php:446 mactrack_sites.php:532 mactrack_view_sites.php:268
+#: mactrack_view_sites.php:373
 msgid "MACS Found"
 msgstr "एमएसीएस मिला"
 
-#: mactrack_sites.php:457 mactrack_view_sites.php:279
+#: mactrack_sites.php:451 mactrack_view_sites.php:273
 msgid "Device Errors"
 msgstr "डिवाइस त्रुटियां"
 
-#: mactrack_sites.php:489 mactrack_sites.php:569 mactrack_view_sites.php:326
-#: mactrack_view_sites.php:424
+#: mactrack_sites.php:483 mactrack_sites.php:563 mactrack_view_sites.php:320
+#: mactrack_view_sites.php:418
 #, fuzzy
 msgid "No Mactrack Sites Found"
 msgstr "कोई उपकरण ट्रैकिंग साइटें नहीं मिलीं"
 
-#: mactrack_sites.php:513 mactrack_view_sites.php:354
+#: mactrack_sites.php:507 mactrack_view_sites.php:348
 msgid "Total Devices"
 msgstr "कुल उपकरण"
 
-#: mactrack_sites.php:523 mactrack_view_sites.php:364
+#: mactrack_sites.php:517 mactrack_view_sites.php:358
 msgid "Total User Ports"
 msgstr "कुल उपयोगकर्ता पोर्ट"
 
-#: mactrack_sites.php:528 mactrack_view_sites.php:369
+#: mactrack_sites.php:522 mactrack_view_sites.php:363
 msgid "Total Oper Ports"
 msgstr "कुल परिचालन बंदरगाह"
 
-#: mactrack_sites.php:533 mactrack_view_sites.php:374
+#: mactrack_sites.php:527 mactrack_view_sites.php:368
 msgid "Total Trunks"
 msgstr "कुल चड्डी"
 
@@ -1233,8 +1233,8 @@ msgstr "पुनर्प्रयास"
 msgid "Max OIDs"
 msgstr "मैक्स ओआईडी"
 
-#: mactrack_snmp.php:451 mactrack_view_dot1x.php:434
-#: mactrack_view_dot1x.php:448
+#: mactrack_snmp.php:451 mactrack_view_dot1x.php:428
+#: mactrack_view_dot1x.php:442
 msgid "Username"
 msgstr "उपयोगकर्ता नाम"
 
@@ -1246,11 +1246,11 @@ msgstr "प्रामाणिक प्रोटो"
 msgid "Priv Proto"
 msgstr "प्रिवी प्रोटो"
 
-#: mactrack_snmp.php:454 mactrack_view_devices.php:266
-#: mactrack_view_dot1x.php:431 mactrack_view_dot1x.php:445
-#: mactrack_view_interfaces.php:363 mactrack_view_ips.php:197
-#: mactrack_view_macs.php:721 mactrack_view_sites.php:247
-#: mactrack_view_sites.php:339 setup.php:645 setup.php:659 setup.php:701
+#: mactrack_snmp.php:454 mactrack_view_devices.php:254
+#: mactrack_view_dot1x.php:425 mactrack_view_dot1x.php:439
+#: mactrack_view_interfaces.php:363 mactrack_view_ips.php:191
+#: mactrack_view_macs.php:720 mactrack_view_sites.php:241
+#: mactrack_view_sites.php:333 setup.php:645 setup.php:659 setup.php:701
 #: setup.php:722 setup.php:743 setup.php:764 setup.php:785
 msgid "Actions"
 msgstr "कार्रवाइयाँ"
@@ -1522,28 +1522,28 @@ msgstr "एग्रीगेट टेबल का पुनर्निर्
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
 msgstr "डेटाबेस से आईपी संघों को मैक और आईपी स्कैन के लिए सभी <strong>एकत्र</strong> (नहीं स्कैन परिणाम) <strong>पोर्ट्स और</strong> अब <strong>सभी स्कैन किए गए डेटा के</strong> आधार पर उनका पुनः निर्माण।"
 
-#: mactrack_vendormacs.php:141
+#: mactrack_vendormacs.php:135
 #, fuzzy
 msgid "Mactrack Vendor Mac Filter"
 msgstr "डिवाइस ट्रैकिंग विक्रेता मैक फ़िल्टर"
 
-#: mactrack_vendormacs.php:155
+#: mactrack_vendormacs.php:149
 msgid "Vendor MAC"
 msgstr "विक्रेता मैक"
 
-#: mactrack_vendormacs.php:156
+#: mactrack_vendormacs.php:150
 msgid "Corporation"
 msgstr "निगम"
 
-#: mactrack_vendormacs.php:157
+#: mactrack_vendormacs.php:151
 msgid "Address"
 msgstr "IP सिरनामा"
 
-#: mactrack_vendormacs.php:162 setup.php:1033
+#: mactrack_vendormacs.php:156 setup.php:1033
 msgid "Vendor Macs"
 msgstr "वेंडर मैक"
 
-#: mactrack_vendormacs.php:181
+#: mactrack_vendormacs.php:175
 #, fuzzy
 msgid "No Mactrack Vendor MACS Found"
 msgstr "कोई डिवाइस ट्रैकिंग विक्रेता मैक नहीं मिला"
@@ -1553,96 +1553,96 @@ msgstr "कोई डिवाइस ट्रैकिंग विक्रे
 msgid "Mactrack - ARP/IP View"
 msgstr "डिवाइस ट्रैकिंग - एआरपी / आईपी व्यू"
 
-#: mactrack_view_arp.php:340 mactrack_view_dot1x.php:432
-#: mactrack_view_dot1x.php:446 mactrack_view_macs.php:728
-#: mactrack_view_macs.php:927
+#: mactrack_view_arp.php:334 mactrack_view_dot1x.php:426
+#: mactrack_view_dot1x.php:440 mactrack_view_macs.php:727
+#: mactrack_view_macs.php:920
 msgid "Switch Name"
 msgstr "नाम स्विच करें"
 
-#: mactrack_view_arp.php:344 mactrack_view_dot1x.php:433
-#: mactrack_view_dot1x.php:447 mactrack_view_macs.php:732
-#: mactrack_view_macs.php:931
+#: mactrack_view_arp.php:338 mactrack_view_dot1x.php:427
+#: mactrack_view_dot1x.php:441 mactrack_view_macs.php:731
+#: mactrack_view_macs.php:924
 msgid "Switch Hostname"
 msgstr "होस्टनाम स्विच करें"
 
-#: mactrack_view_arp.php:348 mactrack_view_dot1x.php:435
-#: mactrack_view_dot1x.php:449 mactrack_view_macs.php:736
-#: mactrack_view_macs.php:935
+#: mactrack_view_arp.php:342 mactrack_view_dot1x.php:429
+#: mactrack_view_dot1x.php:443 mactrack_view_macs.php:735
+#: mactrack_view_macs.php:928
 msgid "ED IP Address"
 msgstr "ईडी आईपी एड्रेस"
 
-#: mactrack_view_arp.php:358 mactrack_view_dot1x.php:436
-#: mactrack_view_macs.php:746 mactrack_view_macs.php:942
+#: mactrack_view_arp.php:352 mactrack_view_dot1x.php:430
+#: mactrack_view_macs.php:745 mactrack_view_macs.php:935
 msgid "ED DNS Hostname"
 msgstr "ED DNS होस्टनाम"
 
-#: mactrack_view_arp.php:366 mactrack_view_dot1x.php:437
-#: mactrack_view_dot1x.php:450 mactrack_view_macs.php:754
-#: mactrack_view_macs.php:949
+#: mactrack_view_arp.php:360 mactrack_view_dot1x.php:431
+#: mactrack_view_dot1x.php:444 mactrack_view_macs.php:753
+#: mactrack_view_macs.php:942
 msgid "ED MAC Address"
 msgstr "ईडी मैक एड्रेस"
 
-#: mactrack_view_arp.php:370 mactrack_view_macs.php:762
-#: mactrack_view_macs.php:957
+#: mactrack_view_arp.php:364 mactrack_view_macs.php:761
+#: mactrack_view_macs.php:950
 msgid "Vendor Name"
 msgstr "विक्रेता का नाम"
 
-#: mactrack_view_arp.php:374 mactrack_view_macs.php:766
-#: mactrack_view_macs.php:961
+#: mactrack_view_arp.php:368 mactrack_view_macs.php:765
+#: mactrack_view_macs.php:954
 msgid "Port Number"
 msgstr "पोर्ट संख्या"
 
-#: mactrack_view_arp.php:379 mactrack_view_dot1x.php:438
-#: mactrack_view_dot1x.php:451 mactrack_view_macs.php:771
-#: mactrack_view_macs.php:966
+#: mactrack_view_arp.php:373 mactrack_view_dot1x.php:432
+#: mactrack_view_dot1x.php:445 mactrack_view_macs.php:770
+#: mactrack_view_macs.php:959
 msgid "Port Name"
 msgstr "पोर्ट नाम"
 
-#: mactrack_view_arp.php:384 mactrack_view_dot1x.php:441
-#: mactrack_view_dot1x.php:454 mactrack_view_macs.php:786
-#: mactrack_view_macs.php:984 mactrack_view_macs.php:990
+#: mactrack_view_arp.php:378 mactrack_view_dot1x.php:435
+#: mactrack_view_dot1x.php:448 mactrack_view_macs.php:785
+#: mactrack_view_macs.php:977 mactrack_view_macs.php:983
 msgid "Last Scan Date"
 msgstr "अंतिम स्कैन तिथि"
 
-#: mactrack_view_arp.php:394
+#: mactrack_view_arp.php:388
 msgid "ARP Cache"
 msgstr "एआरपी कैश"
 
-#: mactrack_view_arp.php:429 mactrack_view_macs.php:1075
+#: mactrack_view_arp.php:423 mactrack_view_macs.php:1068
 msgid "You must first choose a Site, Device or other search criteria."
 msgstr "आपको पहले एक साइट, उपकरण या अन्य खोज मापदंड चुनना होगा।"
 
-#: mactrack_view_arp.php:431
+#: mactrack_view_arp.php:425
 #, fuzzy
 msgid "No Mactrack IP Results Found"
 msgstr "कोई डिवाइस ट्रैकिंग आईपी परिणाम नहीं मिला"
 
-#: mactrack_view_arp.php:480 mactrack_view_dot1x.php:568
-#: mactrack_view_interfaces.php:595 mactrack_view_macs.php:1133
+#: mactrack_view_arp.php:474 mactrack_view_dot1x.php:562
+#: mactrack_view_interfaces.php:595 mactrack_view_macs.php:1126
 msgid "Device"
 msgstr "डिवाइस"
 
-#: mactrack_view_arp.php:511 mactrack_view_ips.php:321
+#: mactrack_view_arp.php:505 mactrack_view_ips.php:315
 msgid "IP's"
 msgstr "आईपी के"
 
-#: mactrack_view_arp.php:540 mactrack_view_dot1x.php:626
-#: mactrack_view_macs.php:1193
+#: mactrack_view_arp.php:534 mactrack_view_dot1x.php:620
+#: mactrack_view_macs.php:1186
 msgid "IP"
 msgstr "IP"
 
-#: mactrack_view_arp.php:559 mactrack_view_dot1x.php:664
-#: mactrack_view_macs.php:1250
+#: mactrack_view_arp.php:553 mactrack_view_dot1x.php:658
+#: mactrack_view_macs.php:1243
 msgid "Show"
 msgstr "दिखाना"
 
-#: mactrack_view_arp.php:564 mactrack_view_dot1x.php:669
-#: mactrack_view_macs.php:1255
+#: mactrack_view_arp.php:558 mactrack_view_dot1x.php:663
+#: mactrack_view_macs.php:1248
 msgid "Most Recent"
 msgstr "सबसे हाल का"
 
-#: mactrack_view_arp.php:584 mactrack_view_dot1x.php:687
-#: mactrack_view_macs.php:1276
+#: mactrack_view_arp.php:578 mactrack_view_dot1x.php:681
+#: mactrack_view_macs.php:1269
 msgid "MAC"
 msgstr "मैक"
 
@@ -1651,37 +1651,37 @@ msgstr "मैक"
 msgid "Mactrack - Device Report View"
 msgstr "डिवाइस ट्रैकिंग - डिवाइस रिपोर्ट दृश्य"
 
-#: mactrack_view_devices.php:158
+#: mactrack_view_devices.php:152
 msgid "Unknown Device Type"
 msgstr "अज्ञात डिवाइस प्रकार"
 
-#: mactrack_view_devices.php:314
+#: mactrack_view_devices.php:302
 msgid "Total VLAN's"
 msgstr "कुल वीएलएएन का"
 
-#: mactrack_view_devices.php:366
+#: mactrack_view_devices.php:354
 msgid "Edit Device"
 msgstr "डिवाइस स्विच करें"
 
-#: mactrack_view_devices.php:372
+#: mactrack_view_devices.php:360
 msgid "View Graphs"
 msgstr "रेखांकन"
 
-#: mactrack_view_devices.php:374
+#: mactrack_view_devices.php:362
 msgid "Device Not Mapped to Cacti Device"
 msgstr "डिवाइस डिवाइस को Cacti डिवाइस पर सिंक करें"
 
-#: mactrack_view_devices.php:380 mactrack_view_ips.php:255
-#: mactrack_view_sites.php:310 mactrack_view_sites.php:405
+#: mactrack_view_devices.php:368 mactrack_view_ips.php:249
+#: mactrack_view_sites.php:304 mactrack_view_sites.php:399
 msgid "View MAC Addresses"
 msgstr "मैक पते"
 
-#: mactrack_view_devices.php:406
+#: mactrack_view_devices.php:394
 #, fuzzy
 msgid "No Mactrack Devices Found"
 msgstr "कोई उपकरण ट्रैकिंग उपकरण नहीं मिला"
 
-#: mactrack_view_devices.php:471
+#: mactrack_view_devices.php:459
 msgid "Hub/Switch"
 msgstr "हब / स्विच"
 
@@ -1690,45 +1690,45 @@ msgstr "हब / स्विच"
 msgid "Mactrack - 802.1x View"
 msgstr "डिवाइस ट्रैकिंग - 802.1x देखें"
 
-#: mactrack_view_dot1x.php:439 mactrack_view_dot1x.php:452
-#: mactrack_view_dot1x.php:702
+#: mactrack_view_dot1x.php:433 mactrack_view_dot1x.php:446
+#: mactrack_view_dot1x.php:696
 msgid "Domain"
 msgstr "डोमेन"
 
-#: mactrack_view_dot1x.php:464
+#: mactrack_view_dot1x.php:458
 msgid "802.1x Sessions"
 msgstr "802.1x सत्र"
 
-#: mactrack_view_dot1x.php:500
+#: mactrack_view_dot1x.php:494
 #, fuzzy
 msgid "No Mactrack 802.1x Sessions Found"
 msgstr "कोई डिवाइस ट्रैकिंग 802.1x सत्र नहीं मिला"
 
-#: mactrack_view_dot1x.php:524
+#: mactrack_view_dot1x.php:518
 msgid "Dot1x Scan Results"
 msgstr "डॉट 1 एक्स स्कैनर"
 
-#: mactrack_view_dot1x.php:601
+#: mactrack_view_dot1x.php:595
 msgid "Sessions"
 msgstr "सत्र"
 
-#: mactrack_view_dot1x.php:647
+#: mactrack_view_dot1x.php:641
 msgid "Any Status"
 msgstr "कोई भी स्थिति"
 
-#: mactrack_view_dot1x.php:650
+#: mactrack_view_dot1x.php:644
 msgid "No Method"
 msgstr "तरीका"
 
-#: mactrack_view_dot1x.php:707
+#: mactrack_view_dot1x.php:701
 msgid "DATA"
 msgstr "डाटा"
 
-#: mactrack_view_dot1x.php:708
+#: mactrack_view_dot1x.php:702
 msgid "VOICE"
 msgstr "आवाज़"
 
-#: mactrack_view_dot1x.php:714 mactrack_view_macs.php:1307
+#: mactrack_view_dot1x.php:708 mactrack_view_macs.php:1300
 msgid "Portname"
 msgstr "PORTNAME"
 
@@ -1737,7 +1737,7 @@ msgstr "PORTNAME"
 msgid "Mactrack - Monitored Device Graph View"
 msgstr "डिवाइस ट्रैकिंग - मॉनिटर किया गया डिवाइस ग्राफ़ दृश्य"
 
-#: mactrack_view_graphs.php:70
+#: mactrack_view_graphs.php:66
 msgid "Custom Graph List Applied - Filtering from List"
 msgstr "कस्टम ग्राफ़ सूची लागू - सूची से फ़िल्टरिंग"
 
@@ -1923,40 +1923,40 @@ msgstr "टोटल दिखाओ"
 msgid "Mactrack - Site IP Range Report View"
 msgstr "डिवाइस ट्रैकिंग - साइट आईपी रेंज रिपोर्ट देखें"
 
-#: mactrack_view_ips.php:204
+#: mactrack_view_ips.php:198
 msgid "IP Range"
 msgstr "आईपी रेंज"
 
-#: mactrack_view_ips.php:208
+#: mactrack_view_ips.php:202
 msgid "Current IP Addresses"
 msgstr "वर्तमान आईपी पते"
 
-#: mactrack_view_ips.php:213
+#: mactrack_view_ips.php:207
 msgid "Current Date"
 msgstr "आज की तारीख"
 
-#: mactrack_view_ips.php:218
+#: mactrack_view_ips.php:212
 msgid "Maximum IP Addresses"
 msgstr "अधिकतम आईपी पते"
 
-#: mactrack_view_ips.php:223
+#: mactrack_view_ips.php:217
 msgid "Maximum Date"
 msgstr "अधिकतम तिथि"
 
-#: mactrack_view_ips.php:231
+#: mactrack_view_ips.php:225
 msgid "IP Address Ranges"
 msgstr "आईपी पता सीमाओं"
 
-#: mactrack_view_ips.php:246 mactrack_view_sites.php:298
-#: mactrack_view_sites.php:398
+#: mactrack_view_ips.php:240 mactrack_view_sites.php:292
+#: mactrack_view_sites.php:392
 msgid "Edit Site"
 msgstr "साइट"
 
-#: mactrack_view_ips.php:264 mactrack_view_sites.php:308
+#: mactrack_view_ips.php:258 mactrack_view_sites.php:302
 msgid "View IP Addresses"
 msgstr "वर्तमान आईपी पते"
 
-#: mactrack_view_ips.php:279
+#: mactrack_view_ips.php:273
 #, fuzzy
 msgid "No Mactrack Site IP Ranges Found"
 msgstr "कोई डिवाइस ट्रैकिंग साइट आईपी रेंजेज़ नहीं मिली"
@@ -1974,81 +1974,81 @@ msgstr "अधिकृत करें"
 msgid "Revoke"
 msgstr "वापस लेना"
 
-#: mactrack_view_macs.php:124
+#: mactrack_view_macs.php:129
 #, php-format
 msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
 msgstr "निम्न मैक पते निरस्त नहीं किए जा सकते क्योंकि वे समूह प्राधिकरण %s के सदस्य हैं"
 
-#: mactrack_view_macs.php:165
+#: mactrack_view_macs.php:170
 msgid "Click 'Continue' to Authorize the following MAC Addresses."
 msgstr "निम्नलिखित मैक पते को अधिकृत करने के लिए 'जारी रखें' पर क्लिक करें।"
 
-#: mactrack_view_macs.php:172
+#: mactrack_view_macs.php:177
 msgid "Click 'Continue' to Revoke the following MAC Addresses."
 msgstr "निम्नलिखित मैक पते को निरस्त करने के लिए 'जारी रखें' पर क्लिक करें।"
 
-#: mactrack_view_macs.php:179
+#: mactrack_view_macs.php:184
 msgid "You must select at least one MAC Address."
 msgstr "आपको कम से कम एक मैक पते का चयन करना होगा।"
 
-#: mactrack_view_macs.php:182
+#: mactrack_view_macs.php:187
 msgid "You are not permitted to change Mac Authorizations."
 msgstr "आपको मैक प्राधिकरण बदलने की अनुमति नहीं है।"
 
-#: mactrack_view_macs.php:254
+#: mactrack_view_macs.php:259
 #, php-format
 msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
 msgstr "Dev..:%s IP .:%s MAC .:%s PORT .:%s Count .:[%s]"
 
-#: mactrack_view_macs.php:266
+#: mactrack_view_macs.php:271
 msgid "You must select at least one Row."
 msgstr "आपको कम से कम एक पंक्ति का चयन करना होगा।"
 
-#: mactrack_view_macs.php:269
+#: mactrack_view_macs.php:274
 msgid "You are not permitted to delete rows."
 msgstr "आपको पंक्तियों को हटाने की अनुमति नहीं है।"
 
-#: mactrack_view_macs.php:277
+#: mactrack_view_macs.php:282
 msgid "Click 'Continue' to Delete the following rows from Aggregated table."
 msgstr "एग्रीगेटेड टेबल से निम्नलिखित पंक्तियों को हटाने के लिए 'जारी रखें' पर क्लिक करें।"
 
-#: mactrack_view_macs.php:758 mactrack_view_macs.php:839
-#: mactrack_view_macs.php:953 mactrack_view_macs.php:1052
-#: mactrack_view_macs.php:1295
+#: mactrack_view_macs.php:757 mactrack_view_macs.php:838
+#: mactrack_view_macs.php:946 mactrack_view_macs.php:1045
+#: mactrack_view_macs.php:1288
 msgid "Authorized"
 msgstr "अधिकार दिया गया"
 
-#: mactrack_view_macs.php:776 mactrack_view_macs.php:971
+#: mactrack_view_macs.php:775 mactrack_view_macs.php:964
 msgid "VLAN ID"
 msgstr "वीएलएन आईडी"
 
-#: mactrack_view_macs.php:781 mactrack_view_macs.php:976
-#: mactrack_view_macs.php:1212
+#: mactrack_view_macs.php:780 mactrack_view_macs.php:969
+#: mactrack_view_macs.php:1205
 msgid "VLAN Name"
 msgstr "VLAN का नाम"
 
-#: mactrack_view_macs.php:800 mactrack_view_macs.php:1010
+#: mactrack_view_macs.php:799 mactrack_view_macs.php:1003
 msgid "MAC Addresses"
 msgstr "मैक पते"
 
-#: mactrack_view_macs.php:841 mactrack_view_macs.php:1054
+#: mactrack_view_macs.php:840 mactrack_view_macs.php:1047
 msgid "Not Authorized"
 msgstr "अधिकार दिया गया"
 
-#: mactrack_view_macs.php:862
+#: mactrack_view_macs.php:861
 msgid "You must choose a Site, Device or other search criteria."
 msgstr "आपको एक साइट, उपकरण या अन्य खोज मापदंड चुनना होगा।"
 
-#: mactrack_view_macs.php:864 mactrack_view_macs.php:1077
+#: mactrack_view_macs.php:863 mactrack_view_macs.php:1070
 #, fuzzy
 msgid "No Mactrack Port Results Found"
 msgstr "कोई डिवाइस ट्रैकिंग पोर्ट परिणाम नहीं मिला"
 
-#: mactrack_view_macs.php:998
+#: mactrack_view_macs.php:991
 msgid "Count"
 msgstr "गिनती"
 
-#: mactrack_view_macs.php:1256
+#: mactrack_view_macs.php:1249
 msgid "Aggregated"
 msgstr "एकत्रित"
 
@@ -2057,23 +2057,23 @@ msgstr "एकत्रित"
 msgid "Mactrack - Site Report View"
 msgstr "डिवाइस ट्रैकिंग - साइट रिपोर्ट दृश्य"
 
-#: mactrack_view_sites.php:299
+#: mactrack_view_sites.php:293
 msgid "Rescan Site"
 msgstr "रेसकान डिवाइस"
 
-#: mactrack_view_sites.php:304 mactrack_view_sites.php:403
+#: mactrack_view_sites.php:298 mactrack_view_sites.php:397
 msgid "View Devices"
 msgstr "उपकरण"
 
-#: mactrack_view_sites.php:306 mactrack_view_sites.php:404
+#: mactrack_view_sites.php:300 mactrack_view_sites.php:398
 msgid "View IP Ranges"
 msgstr "आईपी रेंज"
 
-#: mactrack_view_sites.php:387
+#: mactrack_view_sites.php:381
 msgid "Sites / Device Types"
 msgstr "डिवाइस के प्रकार"
 
-#: mactrack_view_sites.php:436
+#: mactrack_view_sites.php:430
 msgid "Site Scan Results"
 msgstr "सभी स्कैन परिणाम निकालें"
 
