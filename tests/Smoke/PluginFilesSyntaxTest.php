@@ -12,6 +12,7 @@ describe('plugin PHP files syntax', function () {
         foreach ($rootFiles as $file) {
             $output     = [];
             $returnCode = 0;
+            // bare escapeshellarg(): cacti_escapeshellarg() requires the full Cacti bootstrap (DB connection, config); $file is a glob-returned server-local path, not user input
             exec("$phpBin -l " . escapeshellarg($file) . ' 2>&1', $output, $returnCode); // nosemgrep: php.lang.security.exec-use.exec-use -- phpBin is PHP_BINARY (constant); file is escapeshellarg'd glob result
             if ($returnCode !== 0) {
                 $failures[] = basename($file) . ': ' . implode(' ', $output);
@@ -30,6 +31,7 @@ describe('plugin PHP files syntax', function () {
         foreach ($libFiles as $file) {
             $output     = [];
             $returnCode = 0;
+            // bare escapeshellarg(): cacti_escapeshellarg() requires the full Cacti bootstrap (DB connection, config); $file is a glob-returned server-local path, not user input
             exec("$phpBin -l " . escapeshellarg($file) . ' 2>&1', $output, $returnCode); // nosemgrep: php.lang.security.exec-use.exec-use -- phpBin is PHP_BINARY (constant); file is escapeshellarg'd glob result
             if ($returnCode !== 0) {
                 $failures[] = basename($file) . ': ' . implode(' ', $output);

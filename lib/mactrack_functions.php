@@ -3138,8 +3138,8 @@ function mactrack_rescan($web = false) {
 			ob_start();
 
 			// execute the command, and show the results
-			$command = read_config_option('path_php_binary') . ' -q ' . $command_string . ' -id=' . (int)$dbinfo['device_id'] . ($web ? ' --web' : '');
-			passthru($command); // nosemgrep: php.lang.security.exec-use.exec-use -- path_php_binary is admin-configured; device_id cast to int; command_string is a server-local path
+			$command = cacti_escapeshellarg(read_config_option('path_php_binary')) . ' -q ' . cacti_escapeshellarg($command_string) . ' -id=' . (int)$dbinfo['device_id'] . ($web ? ' --web' : '');
+			passthru($command); // nosemgrep: php.lang.security.exec-use.exec-use -- php binary and script path are admin-configured and cacti_escapeshellarg'd; device_id cast to int
 
 			$data['content'] = ob_get_clean();
 		}
@@ -3177,8 +3177,8 @@ function mactrack_site_scan($web = false) {
 		ob_start();
 
 		// execute the command, and show the results
-		$command = read_config_option('path_php_binary') . ' -q ' . $command_string . ' --web -sid=' . (int)$dbinfo['site_id'];
-		passthru($command); // nosemgrep: php.lang.security.exec-use.exec-use -- path_php_binary is admin-configured; site_id cast to int; command_string is a server-local path
+		$command = cacti_escapeshellarg(read_config_option('path_php_binary')) . ' -q ' . cacti_escapeshellarg($command_string) . ' --web -sid=' . (int)$dbinfo['site_id'];
+		passthru($command); // nosemgrep: php.lang.security.exec-use.exec-use -- php binary and script path are admin-configured and cacti_escapeshellarg'd; site_id cast to int
 
 		$data['content'] = ob_get_clean();
 	}
