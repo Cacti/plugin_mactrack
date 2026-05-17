@@ -3162,7 +3162,9 @@ function mactrack_rescan($web = false) {
 }
 
 function mactrack_site_scan($web = false) {
-	global $config, $web;
+	global $config;
+
+	get_filter_request_var('site_id');
 
 	$site_id = get_filter_request_var('site_id');
 
