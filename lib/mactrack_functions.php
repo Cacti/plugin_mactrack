@@ -3135,7 +3135,7 @@ function mactrack_rescan($web = false) {
 
 			// create the command script
 			$command_string = $config['base_path'] . '/plugins/mactrack/mactrack_scanner.php';
-			$extra_args     = ' -id=' . $dbinfo['device_id'] . ($web ? ' --web' : '');
+			$extra_args     = ' -id=' . cacti_escapeshellarg($dbinfo['device_id']) . ($web ? ' --web' : '');
 
 			// print out the type, and device_id
 			$data['device_id'] = $device_id;
@@ -3146,9 +3146,13 @@ function mactrack_rescan($web = false) {
 
 			// execute the command, and show the results
 			$command = cacti_escapeshellcmd(read_config_option('path_php_binary')) . ' -q ' . cacti_escapeshellarg($command_string) . $extra_args;
-			passthru($command);
+			passthru($command, $exit_code);
 
 			$data['content'] = ob_get_clean();
+
+			if ($exit_code !== 0) {
+				$data['error'] = 'rescan process exited with code ' . intval($exit_code);
+			}
 		}
 	}
 
@@ -3175,7 +3179,7 @@ function mactrack_site_scan($web = false) {
 
 		// create the command script
 		$command_string = $config['base_path'] . '/plugins/mactrack/poller_mactrack.php';
-		$extra_args     = ' --web -sid=' . $dbinfo['site_id'];
+		$extra_args     = ' --web -sid=' . cacti_escapeshellarg($dbinfo['site_id']);
 
 		// print out the type, and device_id
 		$data['site_id'] = $site_id;
@@ -3185,9 +3189,13 @@ function mactrack_site_scan($web = false) {
 
 		// execute the command, and show the results
 		$command = cacti_escapeshellcmd(read_config_option('path_php_binary')) . ' -q ' . cacti_escapeshellarg($command_string) . $extra_args;
-		passthru($command);
+		passthru($command, $exit_code);
 
 		$data['content'] = ob_get_clean();
+
+		if ($exit_code !== 0) {
+			$data['error'] = 'site_scan process exited with code ' . intval($exit_code);
+		}
 	}
 
 	header('Content-Type: application/json; charset=utf-8');
