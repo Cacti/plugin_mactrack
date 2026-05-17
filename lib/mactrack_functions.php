@@ -573,7 +573,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 	}
 
 	// required only for interfaces table
-	$db_data = db_fetch_assoc("SELECT * FROM mac_track_interfaces WHERE device_id='" . $device['device_id'] . "' ORDER BY ifIndex");
+	$db_data = db_fetch_assoc_prepared('SELECT * FROM mac_track_interfaces WHERE device_id = ? ORDER BY ifIndex', [$device['device_id']]);
 
 	if (cacti_sizeof($db_data)) {
 		foreach ($db_data as $interface) {

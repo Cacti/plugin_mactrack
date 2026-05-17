@@ -886,7 +886,7 @@ function mactrack_device_edit() {
 		<table class='cactiTable'>
 			<tr>
 				<td class='textInfo' colspan='2'>
-					<?php print $device['device_name']; ?> (<?php print $device['hostname']; ?>)
+					<?php print html_escape($device['device_name']); ?> (<?php print html_escape($device['hostname']); ?>)
 				</td>
 			</tr>
 			<tr>
