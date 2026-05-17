@@ -27,4 +27,15 @@ describe('passthru command injection hardening', function () {
         preg_match_all('/passthru\(\$command\);.*/', $funcs, $passthruLines);
         expect(count($passthruLines[0]))->toBe(2);
     });
+
+    it('site scan always passes --web flag (AJAX-only entry point by design)', function () use ($funcs) {
+        // mactrack_site_scan() is only reached via AJAX; --web is unconditional, unlike device rescan
+        expect($funcs)->toContain("' --web -sid=' . (int)\$dbinfo['site_id']");
+    });
+
+    it('script paths are bare filesystem paths with no embedded arguments', function () use ($funcs) {
+        // cacti_escapeshellarg() quotes the entire value as one token; embedded flags would break the command
+        expect($funcs)->toContain("\$script_path = \$config['base_path'] . '/plugins/mactrack/mactrack_scanner.php'");
+        expect($funcs)->toContain("\$script_path = \$config['base_path'] . '/plugins/mactrack/poller_mactrack.php'");
+    });
 });

@@ -3127,8 +3127,7 @@ function mactrack_rescan($web = false) {
 			mactrack_log_action(__('Device Rescan \'%s\'', $dbinfo['hostname'], 'mactrack'));
 
 			// create the command script
-			$command_string = $config['base_path'] . '/plugins/mactrack/mactrack_scanner.php';
-			$extra_args     = ' -id=' . $dbinfo['device_id'] . ($web ? ' --web' : '');
+			$script_path = $config['base_path'] . '/plugins/mactrack/mactrack_scanner.php';
 
 			// print out the type, and device_id
 			$data['device_id'] = get_request_var('device_id');
@@ -3138,8 +3137,8 @@ function mactrack_rescan($web = false) {
 			ob_start();
 
 			// execute the command, and show the results
-			$command = cacti_escapeshellarg(read_config_option('path_php_binary')) . ' -q ' . cacti_escapeshellarg($command_string) . ' -id=' . (int)$dbinfo['device_id'] . ($web ? ' --web' : '');
-			passthru($command); // nosemgrep: php.lang.security.exec-use.exec-use -- php binary and script path are admin-configured and cacti_escapeshellarg'd; device_id cast to int
+			$command = cacti_escapeshellarg(read_config_option('path_php_binary')) . ' -q ' . cacti_escapeshellarg($script_path) . ' -id=' . (int)$dbinfo['device_id'] . ($web ? ' --web' : '');
+			passthru($command); // nosemgrep: php.lang.security.exec-use.exec-use -- php binary and script_path are admin-configured bare paths, cacti_escapeshellarg'd; device_id cast to int
 
 			$data['content'] = ob_get_clean();
 		}
@@ -3167,8 +3166,7 @@ function mactrack_site_scan($web = false) {
 		mactrack_log_action(__('Site scan \'%s\'', $dbinfo['site_name'], 'mactrack'));
 
 		// create the command script
-		$command_string = $config['base_path'] . '/plugins/mactrack/poller_mactrack.php';
-		$extra_args     = ' --web -sid=' . $dbinfo['site_id'];
+		$script_path = $config['base_path'] . '/plugins/mactrack/poller_mactrack.php';
 
 		// print out the type, and device_id
 		$data['site_id'] = $site_id;
@@ -3177,8 +3175,9 @@ function mactrack_site_scan($web = false) {
 		ob_start();
 
 		// execute the command, and show the results
-		$command = cacti_escapeshellarg(read_config_option('path_php_binary')) . ' -q ' . cacti_escapeshellarg($command_string) . ' --web -sid=' . (int)$dbinfo['site_id'];
-		passthru($command); // nosemgrep: php.lang.security.exec-use.exec-use -- php binary and script path are admin-configured and cacti_escapeshellarg'd; site_id cast to int
+		// --web is unconditional here: mactrack_site_scan() is only reached via AJAX (mactrack_ajax.php), never from CLI
+		$command = cacti_escapeshellarg(read_config_option('path_php_binary')) . ' -q ' . cacti_escapeshellarg($script_path) . ' --web -sid=' . (int)$dbinfo['site_id'];
+		passthru($command); // nosemgrep: php.lang.security.exec-use.exec-use -- php binary and script_path are admin-configured bare paths, cacti_escapeshellarg'd; site_id cast to int
 
 		$data['content'] = ob_get_clean();
 	}
