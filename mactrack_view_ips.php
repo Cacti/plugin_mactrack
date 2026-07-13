@@ -129,7 +129,7 @@ function mactrack_view_export_ip_ranges() {
 
 function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = true) {
 	if (get_request_var('site_id') != '-1') {
-		$sql_where = 'WHERE mtir.site_id = ' . get_request_var('site_id');
+		$sql_where = 'WHERE mtir.site_id = ' . (int) get_request_var('site_id');
 	} else {
 		$sql_where = '';
 	}

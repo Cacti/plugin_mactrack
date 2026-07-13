@@ -587,19 +587,19 @@ function mactrack_view_get_mac_records(&$sql_where, $rows, $apply_limits = true)
 	}
 
 	if (get_request_var('authorized') != '-1') {
-		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.authorized = ' . get_request_var('authorized');
+		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.authorized = ' . (int) get_request_var('authorized');
 	}
 
 	if (get_request_var('site_id') != '-1') {
-		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.site_id = ' . get_request_var('site_id');
+		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.site_id = ' . (int) get_request_var('site_id');
 	}
 
 	if (get_request_var('vlan') != '-1') {
-		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.vlan_id = ' . get_request_var('vlan');
+		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.vlan_id = ' . (int) get_request_var('vlan');
 	}
 
 	if (get_request_var('device_id') != '-1') {
-		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.device_id = ' . get_request_var('device_id');
+		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.device_id = ' . (int) get_request_var('device_id');
 	}
 
 	if ((get_request_var('scan_date') != '1') && (get_request_var('scan_date') != '2') && (get_request_var('scan_date') != '3')) {
@@ -1216,14 +1216,14 @@ function mactrack_mac_filter() {
 	$sql_where = '';
 
 	if (get_request_var('device_id') != '-1') {
-		$sql_where = 'WHERE device_id=' . get_request_var('device_id');
+		$sql_where = 'WHERE device_id=' . (int) get_request_var('device_id');
 	}
 
 	if (get_request_var('site_id') != '-1') {
 		if ($sql_where != '') {
-			$sql_where .= ' AND site_id=' . get_request_var('site_id');
+			$sql_where .= ' AND site_id=' . (int) get_request_var('site_id');
 		} else {
-			$sql_where = 'WHERE site_id=' . get_request_var('site_id');
+			$sql_where = 'WHERE site_id=' . (int) get_request_var('site_id');
 		}
 	}
 

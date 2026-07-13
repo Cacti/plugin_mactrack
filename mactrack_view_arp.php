@@ -228,12 +228,12 @@ function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true) 
 
 	if ((get_request_var('site_id') != '-1')) {
 		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
-			' mti.site_id = ' . get_request_var('site_id');
+			' mti.site_id = ' . (int) get_request_var('site_id');
 	}
 
 	if ((get_request_var('device_id') != '-1')) {
 		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
-			' mti.device_id = ' . get_request_var('device_id');
+			' mti.device_id = ' . (int) get_request_var('device_id');
 	}
 
 	// prevent table scans, either a device or site must be selected

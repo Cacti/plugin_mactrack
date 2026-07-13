@@ -567,7 +567,7 @@ function mactrack_filter_table() {
 	$sql_where = '';
 
 	if (get_request_var('site_id') != -1) {
-		$sql_where .= ' WHERE mac_track_devices.site_id=' . get_request_var('site_id');
+		$sql_where .= ' WHERE mac_track_devices.site_id=' . (int) get_request_var('site_id');
 	} else {
 		$sql_where  = '';
 	}
@@ -602,11 +602,11 @@ function mactrack_filter_table() {
 	$sql_where = '';
 
 	if (get_request_var('site_id') != -1) {
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'site_id=' . get_request_var('site_id');
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'site_id=' . (int) get_request_var('site_id');
 	}
 
 	if (get_request_var('device_type_id') != '-1') {
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'device_type_id=' . get_request_var('device_type_id');
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'device_type_id=' . (int) get_request_var('device_type_id');
 	}
 
 	$devices = array_rekey(db_fetch_assoc("SELECT device_id, device_name FROM mac_track_devices $sql_where ORDER BY device_name"), 'device_id', 'device_name');
