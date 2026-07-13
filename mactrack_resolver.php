@@ -42,7 +42,12 @@ chdir($dir);
 
 include('../../include/cli_check.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
-include_once($config['base_path'] . '/plugins/mactrack/Net/DNS2.php');
+require_once $config['base_path'] . '/plugins/mactrack/vendor/autoload.php';
+
+if (!class_exists('Net_DNS2_Resolver')) {
+	fwrite(STDERR, "Mactrack DNS dependency is unavailable. Run composer install --no-dev in the plugin directory.\n");
+	exit(1);
+}
 
 // install signal handlers for UNIX only
 if (function_exists('pcntl_signal')) {

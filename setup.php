@@ -60,6 +60,16 @@ function plugin_mactrack_version() {
 }
 
 function plugin_mactrack_check_config() {
+	global $config;
+
+	$autoload = $config['base_path'] . '/plugins/mactrack/vendor/autoload.php';
+
+	if (!is_file($autoload)) {
+		cacti_log('ERROR: Mactrack requires Composer dependencies. Run composer install --no-dev in plugins/mactrack before enabling the plugin.', false, 'MACTRACK');
+
+		return false;
+	}
+
 	// Here we will check to ensure everything is configured
 	mactrack_check_upgrade();
 

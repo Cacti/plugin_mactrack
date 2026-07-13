@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="4"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    findUnusedBaselineEntry="true"
+    findUnusedCode="true"
+>
+    <projectFiles>
+        <file name="mactrack_view_sites.php" />
+        <file name="mactrack_view_dot1x.php" />
+        <file name="mactrack_scanner.php" />
+        <file name="mactrack_import_ouidb.php" />
+        <file name="mactrack_ajax_admin.php" />
+        <file name="index.php" />
+        <file name="mactrack_macauth.php" />
+        <file name="mactrack_ajax.php" />
+        <file name="mactrack_view_devices.php" />
+        <file name="mactrack_utilities.php" />
+        <file name="mactrack_convert.php" />
+        <file name="poller_mactrack.php" />
+        <file name="mactrack_vendormacs.php" />
+        <file name="mactrack_sites.php" />
+        <file name="mactrack_actions.php" />
+        <file name="mactrack_view_interfaces.php" />
+        <file name="mactrack_view_graphs.php" />
+        <file name="setup.php" />
+        <file name="mactrack_view_macs.php" />
+        <file name="mactrack_view_ips.php" />
+        <file name="mactrack_macwatch.php" />
+        <file name="mactrack_resolver.php" />
+        <file name="mactrack_devices.php" />
+        <file name="mactrack_snmp.php" />
+        <file name="mactrack_device_types.php" />
+        <file name="mactrack_view_arp.php" />
+        <directory name="lib" />
+        <ignoreFiles>
+			<directory name="Net" />
+			<directory name="locales" />
+			<directory name="images" />
+			<directory name="includes" />
+			<directory name="tests" />
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+	<stubs>
+		<file name="tests/Support/CactiStubs.php" />
+	</stubs>
+</psalm>

@@ -125,4 +125,22 @@ if ($convertSource === false || $arpSource === false || $dot1xSource === false |
 	exit(1);
 }
 
+$resolverSource = file_get_contents(__DIR__ . '/../../mactrack_resolver.php');
+
+if ($resolverSource === false ||
+	strpos($resolverSource, 'require_once $config[\'base_path\'] . \'/plugins/mactrack/vendor/autoload.php\'') === false ||
+	strpos($resolverSource, "class_exists('Net_DNS2_Resolver')") === false) {
+	fwrite(STDERR, "DNS resolver must load and verify the Composer-managed NetDNS2 dependency\n");
+	exit(1);
+}
+
+$setupSource = file_get_contents(__DIR__ . '/../../setup.php');
+
+if ($setupSource === false ||
+	strpos($setupSource, "/plugins/mactrack/vendor/autoload.php") === false ||
+	strpos($setupSource, 'return false;') === false) {
+	fwrite(STDERR, "Mactrack configuration checks must block enablement without Composer dependencies\n");
+	exit(1);
+}
+
 print "OK\n";

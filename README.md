@@ -29,13 +29,20 @@ utilization is, where there are errors, etc within their network.
 
 ## Prerequisites
 
-The MacTrack on GitHub requires Cacti 1.2.14 as a minimum.
+Mactrack requires Cacti 1.2.31 or later and PHP 8.2 for its supported runtime and toolchain.
 
 ## Installation
 
-Just like any Cacti plugin, untar the package to the Cacti plugins directory,
-rename the directory to 'mactrack', and then from Cacti's Plugin Management
-interface, Install and Enable the plugin.
+Just like any Cacti plugin, untar the package to the Cacti plugins directory
+and rename the directory to `mactrack`. Install production dependencies before
+enabling the plugin:
+
+```sh
+cd plugins/mactrack
+composer install --no-dev --optimize-autoloader
+```
+
+Then use Cacti's Plugin Management interface to install and enable Mactrack.
 
 ## Documentation
 
