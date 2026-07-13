@@ -26,6 +26,6 @@
         "sort-packages": true
     },
     "require": {
-        "mikepultz/netdns2": "^2.0"
+        "mikepultz/netdns2": "^1.5"
     }
 }

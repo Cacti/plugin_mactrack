@@ -8,15 +8,15 @@
 require_once __DIR__ . '/../../../../include/cli_check.php';
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$plugin = db_fetch_row_prepared(
+$status = db_fetch_cell_prepared(
 	'SELECT status
 	FROM plugin_config
 	WHERE directory = ?',
 	['mactrack']
 );
 
-if (!is_array($plugin) || !isset($plugin['status']) || $plugin['status'] != 1) {
-	fwrite(STDERR, "Mactrack plugin is not enabled\n");
+if (!api_plugin_is_enabled('mactrack')) {
+	fwrite(STDERR, "Mactrack plugin is not enabled (status: {$status})\n");
 	exit(1);
 }
 

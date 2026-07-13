@@ -2,7 +2,7 @@
 
 --- develop ---
 
-* compat: Replace vendored Net_DNS2 with Composer-managed mikepultz/netdns2
+* compat: Replace vendored Net_DNS2 with Composer-managed mikepultz/netdns2 1.5, retaining the established resolver API
 * issue: Harden device-type vendor filtering against SQL injection
 * issue: Validate aggregated MAC bulk-action IDs and use prepared deletion SQL
 * security: Replace MAC action request deserialization with escaped JSON payloads

@@ -18,6 +18,15 @@ sed -i \
 	"$CACTI_PATH/include/config.php"
 
 test -f "$CACTI_PATH/plugins/mactrack/vendor/autoload.php"
-php "$CACTI_PATH/cli/install_cacti.php" --accept-eula --install --force
+
+# The plugin lifecycle does not need Cacti's optional device-template imports.
+# Explicitly skip them to keep this disposable install focused and fast enough
+# for CI while preserving the normal core install and plugin-management paths.
+template_args=()
+for template in "$CACTI_PATH"/install/templates/*.xml.gz; do
+	template_args+=("--template=$(basename "$template"):0")
+done
+
+php "$CACTI_PATH/cli/install_cacti.php" --accept-eula --install --force "${template_args[@]}"
 php "$CACTI_PATH/cli/plugin_manage.php" --plugin=mactrack --install --enable --allperms
 php "$CACTI_PATH/plugins/mactrack/tests/e2e/mactrack_smoke.php"
