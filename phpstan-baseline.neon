@@ -1,0 +1,5431 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Function mactrack_database_upgrade\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: includes/database.php
+
+		-
+			message: '#^Function mactrack_setup_database\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: includes/database.php
+
+		-
+			message: '#^Function complete_3com_ifName\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function complete_3com_ifName\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function complete_3com_ifName\(\) has parameter \$ifIndexes with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_3Com_base_dot1dTpFdbEntry_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_3Com_base_dot1dTpFdbEntry_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_3Com_base_dot1dTpFdbEntry_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_3Com_base_dot1dTpFdbEntry_ports\(\) has parameter \$ifInterfaces with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_3Com_base_dot1dTpFdbEntry_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_3Com_base_dot1dTpFdbEntry_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_3Com_base_dot1dTpFdbEntry_ports\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_3Com_base_dot1dTpFdbEntry_ports\(\) has parameter \$store_to_db with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_3Com_dot1dTpFdbEntry_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_3Com_dot1dTpFdbEntry_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_3Com_dot1dTpFdbEntry_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_3Com_dot1dTpFdbEntry_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_3Com_dot1dTpFdbEntry_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Offset ''port_number'' on array\{key\: mixed, port_number\: mixed\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Parameter \#2 \$log of function db_execute expects bool, array\<int, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/mactrack_3com.php
+
+		-
+			message: '#^Function get_aruba_oscx_arp_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_arp_table\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_arp_table\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_dot1dTpFdbEntry_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_dot1dTpFdbEntry_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_dot1dTpFdbEntry_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_dot1dTpFdbEntry_ports\(\) has parameter \$ifInterfaces with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_dot1dTpFdbEntry_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_dot1dTpFdbEntry_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_dot1dTpFdbEntry_ports\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_dot1dTpFdbEntry_ports\(\) has parameter \$store_to_db with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function get_aruba_oscx_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function oscx_mac\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Function oscx_mac\(\) has parameter \$mac with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Parameter \#1 \$num of function dechex expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Variable \$ip_mac might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Variable \$vlan_ids might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_aruba_oscx.php
+
+		-
+			message: '#^Binary operation "\-" between string and 1 results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_base_sfps_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_base_sfps_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_base_sfps_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_base_sfps_ports\(\) has parameter \$ifInterfaces with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_base_sfps_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_base_sfps_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_base_sfps_ports\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_base_sfps_ports\(\) has parameter \$store_to_db with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_cabletron_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_cabletron_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_cabletron_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_cabletron_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_cabletron_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_repeater_rev4_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_repeater_rev4_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_repeater_rev4_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_repeater_rev4_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_repeater_rev4_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_repeater_snmp_readstring\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Function get_repeater_snmp_readstring\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Variable \$new_port_key_array might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Variable \$ports_active might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Variable \$temp_port_A_array might not be defined\.$#'
+			identifier: variable.undefined
+			count: 8
+			path: lib/mactrack_cabletron.php
+
+		-
+			message: '#^Comparison operation "\>" between int\<1, max\> and 0 is always true\.$#'
+			identifier: greater.alwaysTrue
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_IOS_dot1dTpFdbEntry_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_IOS_dot1dTpFdbEntry_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_IOS_dot1dTpFdbEntry_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_IOS_dot1dTpFdbEntry_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_IOS_dot1dTpFdbEntry_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_catalyst_dot1dTpFdbEntry_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_catalyst_dot1dTpFdbEntry_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_catalyst_dot1dTpFdbEntry_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_catalyst_dot1dTpFdbEntry_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_catalyst_dot1dTpFdbEntry_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_cisco_dhcpsnooping_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_cisco_dhcpsnooping_table\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_cisco_dhcpsnooping_table\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_cisco_dot1x_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_cisco_dot1x_table\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_cisco_dot1x_table\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_cisco_vrf_arp_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_cisco_vrf_arp_table\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function get_cisco_vrf_arp_table\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Undefined variable\: \$portTrunking$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Variable \$portTrunking in isset\(\) is never defined\.$#'
+			identifier: isset.variable
+			count: 1
+			path: lib/mactrack_cisco.php
+
+		-
+			message: '#^Function dell_mac_address_convert\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function dell_mac_address_convert\(\) has parameter \$mac_address with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function get_base_dell_dot1qFdb_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function get_base_dell_dot1qFdb_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function get_base_dell_dot1qFdb_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function get_base_dell_dot1qFdb_ports\(\) has parameter \$ifInterfaces with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function get_base_dell_dot1qFdb_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function get_base_dell_dot1qFdb_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function get_base_dell_dot1qFdb_ports\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function get_base_dell_dot1qFdb_ports\(\) has parameter \$store_to_db with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function get_dell_dot1q_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function get_dell_dot1q_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function get_dell_dot1q_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function get_dell_dot1q_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function get_dell_dot1q_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Parameter \#1 \$num of function dechex expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/mactrack_dell.php
+
+		-
+			message: '#^Function convert_dlink_data\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function convert_dlink_data\(\) has parameter \$old_port_type with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function dec2hex\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function dec2hex\(\) has parameter \$length with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function dec2hex\(\) has parameter \$number with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function dlink_convert_macs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function dlink_convert_macs\(\) has parameter \$oldmac with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_l2_dot1dTpFdbEntry_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_l2_dot1dTpFdbEntry_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_l2_dot1dTpFdbEntry_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_l2_dot1dTpFdbEntry_ports\(\) has parameter \$ifInterfaces with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_l2_dot1dTpFdbEntry_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_l2_dot1dTpFdbEntry_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_l2_dot1dTpFdbEntry_ports\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_l2_dot1dTpFdbEntry_ports\(\) has parameter \$store_to_db with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_l2_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_l2_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_l2_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_l2_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_l2_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_vlan_id\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_dlink_vlan_id\(\) has parameter \$OID with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function stripos\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function stripos\(\) has parameter \$needle with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function stripos\(\) has parameter \$str with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function xform_dlink_vlan_associations\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function xform_dlink_vlan_associations\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function xform_dlink_vlan_associations\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: lib/mactrack_dlink.php
+
+		-
+			message: '#^Function get_enterasys_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_enterasys.php
+
+		-
+			message: '#^Function get_enterasys_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys.php
+
+		-
+			message: '#^Function get_enterasys_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys.php
+
+		-
+			message: '#^Function get_enterasys_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys.php
+
+		-
+			message: '#^Function get_enterasys_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys.php
+
+		-
+			message: '#^Variable \$active_vlans might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_enterasys.php
+
+		-
+			message: '#^Variable \$ifInterfaces might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_enterasys.php
+
+		-
+			message: '#^Function enterasys_N7_convert_macs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function enterasys_N7_convert_macs\(\) has parameter \$oldmac with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_CTAlias_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_CTAlias_table\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_CTAlias_table\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_dot1dTpFdbEntry_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_dot1dTpFdbEntry_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_dot1dTpFdbEntry_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_dot1dTpFdbEntry_ports\(\) has parameter \$ifInterfaces with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_dot1dTpFdbEntry_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_dot1dTpFdbEntry_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_dot1dTpFdbEntry_ports\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_dot1dTpFdbEntry_ports\(\) has parameter \$store_to_db with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_vlan_id\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function get_enterasys_N7_vlan_id\(\) has parameter \$OID with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function xform_enterasys_N7_vlan_associations\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function xform_enterasys_N7_vlan_associations\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Function xform_enterasys_N7_vlan_associations\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_enterasys_N7.php
+
+		-
+			message: '#^Cannot access offset int\<0, max\> on \(float\|int\)\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_arp_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_arp_table\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_arp_table\(\) has parameter \$extremeware with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_arp_table\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_extremeware_arp_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_extremeware_arp_table\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_extremeware_arp_table\(\) has parameter \$extremeware with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_extremeware_arp_table\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_extremeware_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_extremeware_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_extremeware_switch_ports\(\) has parameter \$extremeware with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_extremeware_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_extremeware_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_extremeware_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_switch_ports\(\) has parameter \$extremeware with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Function get_extreme_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Variable \$active_vlans might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_extreme.php
+
+		-
+			message: '#^Cannot access offset int\<0, max\> on \(float\|int\)\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: lib/mactrack_foundry.php
+
+		-
+			message: '#^Function get_foundry_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_foundry.php
+
+		-
+			message: '#^Function get_foundry_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_foundry.php
+
+		-
+			message: '#^Function get_foundry_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_foundry.php
+
+		-
+			message: '#^Function get_foundry_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_foundry.php
+
+		-
+			message: '#^Function get_foundry_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_foundry.php
+
+		-
+			message: '#^Variable \$active_vlans might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_foundry.php
+
+		-
+			message: '#^Variable \$ifInterfaces might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: lib/mactrack_foundry.php
+
+		-
+			message: '#^Binary operation "\*" between string and 3600 results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Binary operation "\*" between string and 60 results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Binary operation "\*" between string and 86400 results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Comparison operation "\!\=" between non\-empty\-array and 0 results in an error\.$#'
+			identifier: notEqual.invalid
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Comparison operation "\=\=" between non\-empty\-list\<string\> and 3 results in an error\.$#'
+			identifier: equal.invalid
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function build_InterfacesTable\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function cacti_count\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function cacti_count\(\) has parameter \$array with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function cacti_sizeof\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function cacti_sizeof\(\) has parameter \$array with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function db_check_auth\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function db_check_auth\(\) has parameter \$mac_address with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function db_check_for_ip\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function db_check_for_ip\(\) has parameter \$mac_address with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function db_process_add\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function db_process_remove\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function db_store_device_port_results\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function db_update_device_status\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function find_scanning_function\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_base_dot1dTpFdbEntry_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_base_dot1qTpFdbEntry_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_base_wireless_dot1dTpFdbEntry_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_generic_dot1q_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_generic_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_generic_wireless_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_ios_vrf_arp_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_ios_vrf_arp_table\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_ios_vrf_arp_table\(\) has parameter \$hex with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_ios_vrf_arp_table\(\) has parameter \$oid with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_ios_vrf_arp_table\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_link_int_value\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_link_int_value\(\) has parameter \$bits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_link_int_value\(\) has parameter \$db_interface with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_link_int_value\(\) has parameter \$divisor with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_link_int_value\(\) has parameter \$ifIndex with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_link_int_value\(\) has parameter \$snmp_array with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_link_int_value\(\) has parameter \$snmp_oid with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_link_int_value\(\) has parameter \$type with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_link_port_status\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_link_port_status\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_netscreen_arp_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_netscreen_arp_table\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_netscreen_arp_table\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_standard_arp_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function import_oui_database\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function import_oui_database\(\) has parameter \$oui_file with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function import_oui_database\(\) has parameter \$type with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_arr_key\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_arr_key\(\) has parameter \$array with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_arr_key\(\) has parameter \$default with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_arr_key\(\) has parameter \$key with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_check_user_realm\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_check_user_realm\(\) has parameter \$realm_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_create_sql_filter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_date\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_date\(\) has parameter \$date with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_debug\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_debug\(\) has parameter \$message with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_disable\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_display_Octets\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_display_Octets\(\) has parameter \$octets with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_display_hours\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_display_hours\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_display_stats\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_dot1x_row_class\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_dot1x_row_class\(\) has parameter \$port_result with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_enable\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_find_host_graphs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_find_host_graphs\(\) has parameter \$device_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_find_host_graphs\(\) has parameter \$host_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_format_device_row\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_format_device_row\(\) has parameter \$actions with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_format_device_row\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_format_dot1x_row\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_format_dot1x_row\(\) has parameter \$port_result with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_format_interface_row\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_format_interface_row\(\) has parameter \$stat with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_format_mac\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_format_mac\(\) has parameter \$mac with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_get_dns_from_ip\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_get_vendor_name\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_get_vendor_name\(\) has parameter \$mac with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_int_row_class\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_int_row_class\(\) has parameter \$stat with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_interface_actions\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_interface_actions\(\) has parameter \$device_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_interface_actions\(\) has parameter \$ifIndex with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_interface_actions\(\) has parameter \$show_rescan with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_legend_row\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_legend_row\(\) has parameter \$class with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_legend_row\(\) has parameter \$text with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_log_action\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_log_action\(\) has parameter \$message with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_mail\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_mail\(\) has parameter \$fromemail with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_mail\(\) has parameter \$fromname with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_mail\(\) has parameter \$headers with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_mail\(\) has parameter \$message with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_mail\(\) has parameter \$subject with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_mail\(\) has parameter \$to with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_rebuild_scanning_funcs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_rescan\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_rescan\(\) has parameter \$web with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_sanitize_load_report\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_site_filter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_site_filter\(\) has parameter \$page with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_site_scan\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_site_scan\(\) has parameter \$web with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_strip_alpha\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_strip_alpha\(\) has parameter \$string with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_tabs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_timetics_to_seconds\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function mactrack_timetics_to_seconds\(\) has parameter \$timetics with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function perform_mactrack_db_maint\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function port_list_to_array\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function valid_snmp_device\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function valid_snmp_device\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function xform_cisco_workgroup_port_data\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function xform_dot1q_vlan_associations\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function xform_indexed_data\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function xform_mac_address\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function xform_net_address\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function xform_net_address\(\) has parameter \$ip_address with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function xform_standard_indexed_data\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function xform_stripped_oid\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function xform_stripped_oid\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function xform_stripped_oid\(\) has parameter \$hex with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function xform_stripped_oid\(\) has parameter \$oid with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function xform_stripped_oid\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Loose comparison using \=\= between non\-empty\-list\<string\> and 3 will always evaluate to false\.$#'
+			identifier: equal.alwaysFalse
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Parameter \#1 \$num of function round expects float\|int, string given\.$#'
+			identifier: argument.type
+			count: 3
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Parameter \#1 \$string of function substr expects string, float given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Parameter \#1 \$string of function substr expects string, int\<10, 99\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Parameter \#2 \$enable of function stream_set_blocking expects bool, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Parameter \#2 \$seconds of function stream_set_timeout expects int, float given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Undefined variable\: \$stat$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Variable \$atEntries might not be defined\.$#'
+			identifier: variable.undefined
+			count: 3
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Variable \$brPortIfIndex might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Variable \$brPortIfType might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Variable \$int_ifHCInOctets might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Variable \$int_ifHCOutOctets might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Variable \$parts in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Variable \$xformItem_piece might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_functions.php
+
+		-
+			message: '#^Function get_h3c_3com_arp_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_arp_table\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_arp_table\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_dot1dTpFdbEntry_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_dot1dTpFdbEntry_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_dot1dTpFdbEntry_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_dot1dTpFdbEntry_ports\(\) has parameter \$ifInterfaces with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_dot1dTpFdbEntry_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_dot1dTpFdbEntry_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_dot1dTpFdbEntry_ports\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_dot1dTpFdbEntry_ports\(\) has parameter \$store_to_db with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_h3c_3com_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_h3c_3com.php
+
+		-
+			message: '#^Function get_procurve_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_hp.php
+
+		-
+			message: '#^Function get_procurve_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp.php
+
+		-
+			message: '#^Function get_procurve_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp.php
+
+		-
+			message: '#^Function get_procurve_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp.php
+
+		-
+			message: '#^Function get_procurve_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp.php
+
+		-
+			message: '#^Function get_procurve_ng_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_hp_ng.php
+
+		-
+			message: '#^Function get_procurve_ng_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp_ng.php
+
+		-
+			message: '#^Function get_procurve_ng_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp_ng.php
+
+		-
+			message: '#^Function get_procurve_ng_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp_ng.php
+
+		-
+			message: '#^Function get_procurve_ng_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp_ng.php
+
+		-
+			message: '#^Variable \$active_vlans might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_hp_ng.php
+
+		-
+			message: '#^Function get_base_dot1dTpFdbEntry_ports invoked with 8 parameters, 3\-7 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: lib/mactrack_hp_ngi.php
+
+		-
+			message: '#^Function get_procurve_ngi_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_hp_ngi.php
+
+		-
+			message: '#^Function get_procurve_ngi_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp_ngi.php
+
+		-
+			message: '#^Function get_procurve_ngi_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp_ngi.php
+
+		-
+			message: '#^Function get_procurve_ngi_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp_ngi.php
+
+		-
+			message: '#^Function get_procurve_ngi_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp_ngi.php
+
+		-
+			message: '#^Function local_xform_indexed_data\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_hp_ngi.php
+
+		-
+			message: '#^Function local_xform_indexed_data\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp_ngi.php
+
+		-
+			message: '#^Function local_xform_indexed_data\(\) has parameter \$xformLevel with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp_ngi.php
+
+		-
+			message: '#^Function local_xform_indexed_data\(\) has parameter \$xformOID with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_hp_ngi.php
+
+		-
+			message: '#^Variable \$active_vlans might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_hp_ngi.php
+
+		-
+			message: '#^Variable \$xformItem_piece might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_hp_ngi.php
+
+		-
+			message: '#^Cannot access offset string on \(float\|int\)\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: lib/mactrack_juniper.php
+
+		-
+			message: '#^Function get_JEX_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_juniper.php
+
+		-
+			message: '#^Function get_JEX_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_juniper.php
+
+		-
+			message: '#^Function get_JEX_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_juniper.php
+
+		-
+			message: '#^Function get_JEX_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_juniper.php
+
+		-
+			message: '#^Function get_JEX_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_juniper.php
+
+		-
+			message: '#^Function mach\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_juniper.php
+
+		-
+			message: '#^Function mach\(\) has parameter \$del with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_juniper.php
+
+		-
+			message: '#^Function mach\(\) has parameter \$macd with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_juniper.php
+
+		-
+			message: '#^Variable \$active_vlans might not be defined\.$#'
+			identifier: variable.undefined
+			count: 3
+			path: lib/mactrack_juniper.php
+
+		-
+			message: '#^Variable \$ifDesc in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: lib/mactrack_juniper.php
+
+		-
+			message: '#^Function convert_port_state_data\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function convert_port_state_data\(\) has parameter \$old_port_type with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_linux_dot1dTpFdbEntry_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_linux_dot1dTpFdbEntry_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_linux_dot1dTpFdbEntry_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_linux_dot1dTpFdbEntry_ports\(\) has parameter \$ifInterfaces with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_linux_dot1dTpFdbEntry_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_linux_dot1dTpFdbEntry_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_linux_dot1dTpFdbEntry_ports\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_linux_dot1dTpFdbEntry_ports\(\) has parameter \$store_to_db with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_linux_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_linux_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_linux_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_linux_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_linux_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Variable \$ifVlan might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_linux.php
+
+		-
+			message: '#^Function get_norbay_accelar_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_norbay.php
+
+		-
+			message: '#^Function get_norbay_accelar_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_norbay.php
+
+		-
+			message: '#^Function get_norbay_accelar_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_norbay.php
+
+		-
+			message: '#^Function get_norbay_accelar_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_norbay.php
+
+		-
+			message: '#^Function get_norbay_accelar_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_norbay.php
+
+		-
+			message: '#^Function get_norbay_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_norbay.php
+
+		-
+			message: '#^Function get_norbay_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_norbay.php
+
+		-
+			message: '#^Function get_norbay_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_norbay.php
+
+		-
+			message: '#^Function get_norbay_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_norbay.php
+
+		-
+			message: '#^Function get_norbay_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_norbay.php
+
+		-
+			message: '#^Undefined variable\: \$ifindex$#'
+			identifier: variable.undefined
+			count: 2
+			path: lib/mactrack_norbay.php
+
+		-
+			message: '#^Variable \$active_vlans might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: lib/mactrack_norbay.php
+
+		-
+			message: '#^Function get_norbay_ng_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_norbay_ng.php
+
+		-
+			message: '#^Function get_norbay_ng_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_norbay_ng.php
+
+		-
+			message: '#^Function get_norbay_ng_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_norbay_ng.php
+
+		-
+			message: '#^Function get_norbay_ng_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_norbay_ng.php
+
+		-
+			message: '#^Function get_norbay_ng_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_norbay_ng.php
+
+		-
+			message: '#^Variable \$active_vlans might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_norbay_ng.php
+
+		-
+			message: '#^Function get_tplink_dot1q_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_tplink.php
+
+		-
+			message: '#^Function get_tplink_dot1q_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_tplink.php
+
+		-
+			message: '#^Function get_tplink_dot1q_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_tplink.php
+
+		-
+			message: '#^Function get_tplink_dot1q_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_tplink.php
+
+		-
+			message: '#^Function get_tplink_dot1q_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_tplink.php
+
+		-
+			message: '#^Function tp_mach\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_tplink.php
+
+		-
+			message: '#^Function tp_mach\(\) has parameter \$del with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_tplink.php
+
+		-
+			message: '#^Function tp_mach\(\) has parameter \$macd with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_tplink.php
+
+		-
+			message: '#^Variable \$nport_results might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: lib/mactrack_tplink.php
+
+		-
+			message: '#^Function get_base_trendnet_dot1qFdb_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_trendnet.php
+
+		-
+			message: '#^Function get_base_trendnet_dot1qFdb_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_trendnet.php
+
+		-
+			message: '#^Function get_base_trendnet_dot1qFdb_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_trendnet.php
+
+		-
+			message: '#^Function get_base_trendnet_dot1qFdb_ports\(\) has parameter \$ifInterfaces with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_trendnet.php
+
+		-
+			message: '#^Function get_base_trendnet_dot1qFdb_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_trendnet.php
+
+		-
+			message: '#^Function get_base_trendnet_dot1qFdb_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_trendnet.php
+
+		-
+			message: '#^Function get_base_trendnet_dot1qFdb_ports\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_trendnet.php
+
+		-
+			message: '#^Function get_base_trendnet_dot1qFdb_ports\(\) has parameter \$store_to_db with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_trendnet.php
+
+		-
+			message: '#^Function get_trendnet_dot1q_switch_ports\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/mactrack_trendnet.php
+
+		-
+			message: '#^Function get_trendnet_dot1q_switch_ports\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_trendnet.php
+
+		-
+			message: '#^Function get_trendnet_dot1q_switch_ports\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_trendnet.php
+
+		-
+			message: '#^Function get_trendnet_dot1q_switch_ports\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_trendnet.php
+
+		-
+			message: '#^Function get_trendnet_dot1q_switch_ports\(\) has parameter \$site with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/mactrack_trendnet.php
+
+		-
+			message: '#^Function api_mactrack_device_remove\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_remove\(\) has parameter \$device_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$device_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$device_name with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$device_type_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$disabled with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$host_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$hostname with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$ignorePorts with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$max_oids with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$notes with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$private_key_path with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$scan_trunk_port with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$scan_type with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$site_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$snmp_auth_protocol with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$snmp_context with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$snmp_engine_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$snmp_options with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$snmp_password with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$snmp_port with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$snmp_priv_passphrase with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$snmp_priv_protocol with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$snmp_readstring with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$snmp_retries with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$snmp_timeout with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$snmp_username with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$snmp_version with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$term_type with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$user_name with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_device_save\(\) has parameter \$user_password with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_site_remove\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_site_remove\(\) has parameter \$site_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_site_save\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_site_save\(\) has parameter \$customer_contact with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_site_save\(\) has parameter \$facilities_contact with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_site_save\(\) has parameter \$netops_contact with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_site_save\(\) has parameter \$scan_vlans with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_site_save\(\) has parameter \$site_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_site_save\(\) has parameter \$site_info with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_site_save\(\) has parameter \$site_name with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function api_mactrack_site_save\(\) has parameter \$skip_vlans with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function mactrack_device_action_array\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function mactrack_device_action_execute\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function mactrack_device_action_prepare\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function mactrack_device_action_prepare\(\) has parameter \$save with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function sync_cacti_to_mactrack\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function sync_cacti_to_mactrack\(\) has parameter \$device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function sync_mactrack_to_cacti\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function sync_mactrack_to_cacti\(\) has parameter \$mt_device with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_actions.php
+
+		-
+			message: '#^Function mactrack_save_graph_settings not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: mactrack_ajax.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_ajax.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_ajax.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_ajax_admin.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_ajax_admin.php
+
+		-
+			message: '#^Function display_help\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_convert.php
+
+		-
+			message: '#^Function display_version\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_convert.php
+
+		-
+			message: '#^Function mactrack_create_partitioned_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_convert.php
+
+		-
+			message: '#^Function mactrack_create_partitioned_table\(\) has parameter \$charset with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_convert.php
+
+		-
+			message: '#^Function mactrack_create_partitioned_table\(\) has parameter \$collate with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_convert.php
+
+		-
+			message: '#^Function mactrack_create_partitioned_table\(\) has parameter \$days with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_convert.php
+
+		-
+			message: '#^Function mactrack_create_partitioned_table\(\) has parameter \$engine with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_convert.php
+
+		-
+			message: '#^Function mactrack_create_partitioned_table\(\) has parameter \$migrate with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_convert.php
+
+		-
+			message: '#^Parameter \#2 \$log of function db_execute expects bool, array\<int, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: mactrack_convert.php
+
+		-
+			message: '#^Path in include\(\) "\./include/cli_check\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_convert.php
+
+		-
+			message: '#^Variable \$config might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_convert.php
+
+		-
+			message: '#^Call to function in_array\(\) with arguments int\<0, max\>, array\{\} and true will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Comparison operation "\>" between int\<1, max\> and 0 is always true\.$#'
+			identifier: greater.alwaysTrue
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_remove\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_remove\(\) has parameter \$device_type_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has parameter \$description with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has parameter \$device_type with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has parameter \$device_type_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has parameter \$disabled with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has parameter \$dot1x_scanning_function with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has parameter \$highPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has parameter \$ip_scanning_function with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has parameter \$lowPort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has parameter \$scanning_function with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has parameter \$serial_number_oid with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has parameter \$sysDescr_match with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has parameter \$sysObjectID_match with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_device_type_save\(\) has parameter \$vendor with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_duplicate_device_type\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_duplicate_device_type\(\) has parameter \$device_type_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_duplicate_device_type\(\) has parameter \$device_type_title with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function api_mactrack_duplicate_device_type\(\) has parameter \$dup_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function form_actions\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function form_save\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function mactrack_device_type\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function mactrack_device_type_edit\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function mactrack_device_type_export\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function mactrack_device_type_filter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function mactrack_device_type_import\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function mactrack_device_type_import_processor\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function mactrack_device_type_import_processor\(\) has parameter \$device_types with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function mactrack_device_type_request_validation\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function mactrack_get_device_types\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function mactrack_get_device_types\(\) has parameter \$apply_limits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function mactrack_get_device_types\(\) has parameter \$rows with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function mactrack_get_device_types\(\) has parameter \$sql_where with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function mactrack_rescan_device_types\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 6
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 7
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Path in include_once\(\) "\./lib/snmp\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 2
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_vendors\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Undefined variable\: \$description$#'
+			identifier: variable.undefined
+			count: 5
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Undefined variable\: \$device_type_id$#'
+			identifier: variable.undefined
+			count: 3
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Undefined variable\: \$save_description_id$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Undefined variable\: \$save_order$#'
+			identifier: variable.undefined
+			count: 2
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Undefined variable\: \$save_vendor_id$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Undefined variable\: \$sysDescr_match$#'
+			identifier: variable.undefined
+			count: 5
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Undefined variable\: \$sysDescr_match_id$#'
+			identifier: variable.undefined
+			count: 3
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Undefined variable\: \$sysObjectID_match$#'
+			identifier: variable.undefined
+			count: 5
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Undefined variable\: \$sysObjectID_match_id$#'
+			identifier: variable.undefined
+			count: 3
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Undefined variable\: \$update_suffix$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Undefined variable\: \$vendor$#'
+			identifier: variable.undefined
+			count: 5
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Variable \$device_type_id might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Variable \$sysDescr_match_id might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Variable \$sysObjectID_match_id might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_device_types.php
+
+		-
+			message: '#^Function form_mactrack_actions\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function form_mactrack_save\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function mactrack_device\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function mactrack_device_edit\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function mactrack_device_export\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function mactrack_device_filter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function mactrack_device_import\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function mactrack_device_import_processor\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function mactrack_device_import_processor\(\) has parameter \$devices with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function mactrack_device_request_validation\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function mactrack_get_devices\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function mactrack_get_devices\(\) has parameter \$apply_limits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function mactrack_get_devices\(\) has parameter \$rows with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function mactrack_get_devices\(\) has parameter \$sql_where with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 6
+			path: mactrack_devices.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 7
+			path: mactrack_devices.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Path in include_once\(\) "\./lib/snmp\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/mactrack_actions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Undefined variable\: \$save_order$#'
+			identifier: variable.undefined
+			count: 2
+			path: mactrack_devices.php
+
+		-
+			message: '#^Undefined variable\: \$update_suffix$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Variable \$device_array might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Variable \$device_name might not be defined\.$#'
+			identifier: variable.undefined
+			count: 5
+			path: mactrack_devices.php
+
+		-
+			message: '#^Variable \$hostname might not be defined\.$#'
+			identifier: variable.undefined
+			count: 5
+			path: mactrack_devices.php
+
+		-
+			message: '#^Variable \$insert_columns might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Variable \$save_device_name_id might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_devices.php
+
+		-
+			message: '#^Variable \$save_host_id might not be defined\.$#'
+			identifier: variable.undefined
+			count: 4
+			path: mactrack_devices.php
+
+		-
+			message: '#^Variable \$save_site_id_id might not be defined\.$#'
+			identifier: variable.undefined
+			count: 4
+			path: mactrack_devices.php
+
+		-
+			message: '#^Variable \$save_snmp_port_id might not be defined\.$#'
+			identifier: variable.undefined
+			count: 4
+			path: mactrack_devices.php
+
+		-
+			message: '#^Variable \$site_id might not be defined\.$#'
+			identifier: variable.undefined
+			count: 5
+			path: mactrack_devices.php
+
+		-
+			message: '#^Variable \$snmp_port might not be defined\.$#'
+			identifier: variable.undefined
+			count: 5
+			path: mactrack_devices.php
+
+		-
+			message: '#^Function display_help\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_import_ouidb.php
+
+		-
+			message: '#^Function display_version\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_import_ouidb.php
+
+		-
+			message: '#^Path in include\(\) "\./include/cli_check\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_import_ouidb.php
+
+		-
+			message: '#^Variable \$config might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_import_ouidb.php
+
+		-
+			message: '#^Function api_mactrack_maca_remove\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function api_mactrack_maca_remove\(\) has parameter \$mac_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function api_mactrack_maca_save\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function api_mactrack_maca_save\(\) has parameter \$description with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function api_mactrack_maca_save\(\) has parameter \$mac_address with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function api_mactrack_maca_save\(\) has parameter \$mac_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function form_actions\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function form_save\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function mactrack_maca\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function mactrack_maca_edit\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function mactrack_maca_filter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function mactrack_maca_get_maca_records\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function mactrack_maca_get_maca_records\(\) has parameter \$apply_limits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function mactrack_maca_get_maca_records\(\) has parameter \$rows with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function mactrack_maca_get_maca_records\(\) has parameter \$sql_where with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 4
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 4
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_macauth.php
+
+		-
+			message: '#^Function api_mactrack_macw_remove\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function api_mactrack_macw_remove\(\) has parameter \$mac_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function api_mactrack_macw_save\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function api_mactrack_macw_save\(\) has parameter \$description with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function api_mactrack_macw_save\(\) has parameter \$email_addresses with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function api_mactrack_macw_save\(\) has parameter \$mac_address with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function api_mactrack_macw_save\(\) has parameter \$mac_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function api_mactrack_macw_save\(\) has parameter \$name with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function api_mactrack_macw_save\(\) has parameter \$notify_schedule with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function api_mactrack_macw_save\(\) has parameter \$ticket_number with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function form_actions\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function form_save\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function mactrack_macw\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function mactrack_macw_edit\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function mactrack_macw_filter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function mactrack_macw_get_macw_records\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function mactrack_macw_get_macw_records\(\) has parameter \$apply_limits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function mactrack_macw_get_macw_records\(\) has parameter \$rows with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Function mactrack_macw_get_macw_records\(\) has parameter \$sql_where with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 4
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 4
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Variable \$macw_array in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: mactrack_macwatch.php
+
+		-
+			message: '#^Caught class Net_DNS2_Exception not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: mactrack_resolver.php
+
+		-
+			message: '#^Function display_help\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_resolver.php
+
+		-
+			message: '#^Function display_version\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_resolver.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: mactrack_resolver.php
+
+		-
+			message: '#^Variable \$config might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: mactrack_resolver.php
+
+		-
+			message: '#^Binary operation "\." between ''802\.1x Scanning…'' and callable\(\)\: mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: mactrack_scanner.php
+
+		-
+			message: '#^Binary operation "\." between ''IP Scanning…'' and callable\(\)\: mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: mactrack_scanner.php
+
+		-
+			message: '#^Binary operation "\." between ''Scanning function…'' and callable\(\)\: mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: mactrack_scanner.php
+
+		-
+			message: '#^Function display_help\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_scanner.php
+
+		-
+			message: '#^Function display_version\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_scanner.php
+
+		-
+			message: '#^Path in include\(\) "\./include/cli_check\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_scanner.php
+
+		-
+			message: '#^Variable \$config might not be defined\.$#'
+			identifier: variable.undefined
+			count: 5
+			path: mactrack_scanner.php
+
+		-
+			message: '#^Variable \$device_id might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_scanner.php
+
+		-
+			message: '#^Function form_actions\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Function form_save\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Function mactrack_site\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Function mactrack_site_edit\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Function mactrack_site_export\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Function mactrack_site_get_site_records\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Function mactrack_site_get_site_records\(\) has parameter \$apply_limits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Function mactrack_site_get_site_records\(\) has parameter \$rows with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Function mactrack_site_get_site_records\(\) has parameter \$sql_where with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Function mactrack_site_validate_req_vars\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 5
+			path: mactrack_sites.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 5
+			path: mactrack_sites.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Path in include_once\(\) "\./lib/snmp\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/mactrack_actions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_sites.php
+
+		-
+			message: '#^Function duplicate_mactrack\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Function duplicate_mactrack\(\) has parameter \$new_name with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Function duplicate_mactrack\(\) has parameter \$snmp_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Function form_mactrack_snmp_actions\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Function form_mactrack_snmp_save\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Function mactrack_snmp\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Function mactrack_snmp_edit\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Function mactrack_snmp_item_edit\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Function mactrack_snmp_item_movedown\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Function mactrack_snmp_item_moveup\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Function mactrack_snmp_item_remove\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Function snmp_options_filter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 6
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 6
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Path in include_once\(\) "\./lib/snmp\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Undefined variable\: \$item_id$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Variable \$item_id in empty\(\) is never defined\.$#'
+			identifier: empty.variable
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Variable \$mactrack_snmp_item on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.variable
+			count: 1
+			path: mactrack_snmp.php
+
+		-
+			message: '#^Function mactrack_display_run_status\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Function mactrack_utilities\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Function mactrack_utilities_db_maint\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Function mactrack_utilities_ports_clear\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Function mactrack_utilities_purge_aggregated_data\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Function mactrack_utilities_purge_scanning_funcs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Function mactrack_utilities_recreate_aggregated_data\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 9
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 9
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 3
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Variable \$completed_date might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Variable \$completed_processes might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Variable \$running_date might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Variable \$waiting_date might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Variable \$waiting_processes might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: mactrack_utilities.php
+
+		-
+			message: '#^Function mactrack_vmac_filter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_vendormacs.php
+
+		-
+			message: '#^Function mactrack_vmacs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_vendormacs.php
+
+		-
+			message: '#^Function mactrack_vmacs_export\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_vendormacs.php
+
+		-
+			message: '#^Function mactrack_vmacs_get_vmac_records\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_vendormacs.php
+
+		-
+			message: '#^Function mactrack_vmacs_get_vmac_records\(\) has parameter \$apply_limits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_vendormacs.php
+
+		-
+			message: '#^Function mactrack_vmacs_get_vmac_records\(\) has parameter \$rows with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_vendormacs.php
+
+		-
+			message: '#^Function mactrack_vmacs_get_vmac_records\(\) has parameter \$sql_where with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_vendormacs.php
+
+		-
+			message: '#^Function mactrack_vmacs_validate_request_vars\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_vendormacs.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: mactrack_vendormacs.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: mactrack_vendormacs.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_vendormacs.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_vendormacs.php
+
+		-
+			message: '#^Function format_mac_address not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: mactrack_view_arp.php
+
+		-
+			message: '#^Function mactrack_ip_address_filter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_arp.php
+
+		-
+			message: '#^Function mactrack_view_export_ips\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_arp.php
+
+		-
+			message: '#^Function mactrack_view_get_ip_records\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_arp.php
+
+		-
+			message: '#^Function mactrack_view_get_ip_records\(\) has parameter \$apply_limits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_arp.php
+
+		-
+			message: '#^Function mactrack_view_get_ip_records\(\) has parameter \$rows with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_arp.php
+
+		-
+			message: '#^Function mactrack_view_get_ip_records\(\) has parameter \$sql_where with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_arp.php
+
+		-
+			message: '#^Function mactrack_view_ips\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_arp.php
+
+		-
+			message: '#^Function mactrack_view_ips_validate_request_vars\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_arp.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: mactrack_view_arp.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: mactrack_view_arp.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_view_arp.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_view_arp.php
+
+		-
+			message: '#^Function mactrack_device_filter2\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_devices.php
+
+		-
+			message: '#^Function mactrack_device_request_validation\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_devices.php
+
+		-
+			message: '#^Function mactrack_view_devices\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_devices.php
+
+		-
+			message: '#^Function mactrack_view_export_devices\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_devices.php
+
+		-
+			message: '#^Function mactrack_view_get_device_records\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_devices.php
+
+		-
+			message: '#^Function mactrack_view_get_device_records\(\) has parameter \$apply_limits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_devices.php
+
+		-
+			message: '#^Function mactrack_view_get_device_records\(\) has parameter \$rows with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_devices.php
+
+		-
+			message: '#^Function mactrack_view_get_device_records\(\) has parameter \$sql_where with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_devices.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: mactrack_view_devices.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: mactrack_view_devices.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_view_devices.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_view_devices.php
+
+		-
+			message: '#^Function mactrack_dot1x_filter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_dot1x.php
+
+		-
+			message: '#^Function mactrack_view_dot1x\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_dot1x.php
+
+		-
+			message: '#^Function mactrack_view_dot1x_validate_request_vars\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_dot1x.php
+
+		-
+			message: '#^Function mactrack_view_export_dot1x\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_dot1x.php
+
+		-
+			message: '#^Function mactrack_view_get_dot1x_records\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_dot1x.php
+
+		-
+			message: '#^Function mactrack_view_get_dot1x_records\(\) has parameter \$apply_limits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_dot1x.php
+
+		-
+			message: '#^Function mactrack_view_get_dot1x_records\(\) has parameter \$rows with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_dot1x.php
+
+		-
+			message: '#^Function mactrack_view_get_dot1x_records\(\) has parameter \$sql_where with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_dot1x.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 3
+			path: mactrack_view_dot1x.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 3
+			path: mactrack_view_dot1x.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_view_dot1x.php
+
+		-
+			message: '#^Path in include_once\(\) "\./include/global_arrays\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_view_dot1x.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_view_dot1x.php
+
+		-
+			message: '#^Function mactrack_view_graphs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_graphs.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: mactrack_view_graphs.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: mactrack_view_graphs.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_view_graphs.php
+
+		-
+			message: '#^Path in include\(\) "\./lib/html_graph\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_view_graphs.php
+
+		-
+			message: '#^Path in include\(\) "\./lib/html_tree\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_view_graphs.php
+
+		-
+			message: '#^Path in include\(\) "\./lib/timespan_settings\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_view_graphs.php
+
+		-
+			message: '#^Path in include\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_view_graphs.php
+
+		-
+			message: '#^Function db_qstr_rlike not found\.$#'
+			identifier: function.notFound
+			count: 2
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Function mactrack_display_array\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Function mactrack_export_records\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Function mactrack_filter_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Function mactrack_get_records\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Function mactrack_get_records\(\) has parameter \$apply_limits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Function mactrack_get_records\(\) has parameter \$rows with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Function mactrack_get_records\(\) has parameter \$sql_where with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Function mactrack_interfaces_request_validation\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Function mactrack_view\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 3
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 3
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_view_interfaces.php
+
+		-
+			message: '#^Function mactrack_ips_filter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_ips.php
+
+		-
+			message: '#^Function mactrack_view_export_ip_ranges\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_ips.php
+
+		-
+			message: '#^Function mactrack_view_get_ip_range_records\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_ips.php
+
+		-
+			message: '#^Function mactrack_view_get_ip_range_records\(\) has parameter \$apply_limits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_ips.php
+
+		-
+			message: '#^Function mactrack_view_get_ip_range_records\(\) has parameter \$rows with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_ips.php
+
+		-
+			message: '#^Function mactrack_view_get_ip_range_records\(\) has parameter \$sql_where with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_ips.php
+
+		-
+			message: '#^Function mactrack_view_ip_ranges\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_ips.php
+
+		-
+			message: '#^Function mactrack_view_ips_validate_request_vars\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_ips.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: mactrack_view_ips.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: mactrack_view_ips.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_view_ips.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_view_ips.php
+
+		-
+			message: '#^Function api_mactrack_authorize_mac_addresses\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function api_mactrack_authorize_mac_addresses\(\) has parameter \$ip_address with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function api_mactrack_authorize_mac_addresses\(\) has parameter \$mac_address with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function api_mactrack_revoke_mac_addresses\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function api_mactrack_revoke_mac_addresses\(\) has parameter \$mac_address with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function form_actions\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function form_aggregated_actions\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function mactrack_mac_filter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function mactrack_view_aggregated_macs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function mactrack_view_export_macs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function mactrack_view_get_mac_records\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function mactrack_view_get_mac_records\(\) has parameter \$apply_limits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function mactrack_view_get_mac_records\(\) has parameter \$rows with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function mactrack_view_get_mac_records\(\) has parameter \$sql_where with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function mactrack_view_macs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function mactrack_view_macs_validate_request_vars\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 6
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 6
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Variable \$matches in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Variable \$row_array in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Variable \$rows_info in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: mactrack_view_macs.php
+
+		-
+			message: '#^Function mactrack_sites_request_validation\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_sites.php
+
+		-
+			message: '#^Function mactrack_view_export_sites\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_sites.php
+
+		-
+			message: '#^Function mactrack_view_get_site_records\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_sites.php
+
+		-
+			message: '#^Function mactrack_view_get_site_records\(\) has parameter \$apply_limits with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_sites.php
+
+		-
+			message: '#^Function mactrack_view_get_site_records\(\) has parameter \$rows with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_sites.php
+
+		-
+			message: '#^Function mactrack_view_get_site_records\(\) has parameter \$sql_where with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: mactrack_view_sites.php
+
+		-
+			message: '#^Function mactrack_view_sites\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: mactrack_view_sites.php
+
+		-
+			message: '#^Parameter \#3 \$div of function html_start_box expects bool, string given\.$#'
+			identifier: argument.type
+			count: 3
+			path: mactrack_view_sites.php
+
+		-
+			message: '#^Parameter \#4 \$cell_padding of function html_start_box expects int, string given\.$#'
+			identifier: argument.type
+			count: 3
+			path: mactrack_view_sites.php
+
+		-
+			message: '#^Path in include\(\) "\./include/auth\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: mactrack_view_sites.php
+
+		-
+			message: '#^Path in include_once\(\) "\./plugins/mactrack/lib/mactrack_functions\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 1
+			path: mactrack_view_sites.php
+
+		-
+			message: '#^Function clear_old_processes\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function clear_old_processes\(\) has parameter \$site_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function collect_mactrack_data\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function collect_mactrack_data\(\) has parameter \$site_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function collect_mactrack_data\(\) has parameter \$start with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function display_help\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function display_version\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function errors_disable\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function errors_restore\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function log_mactrack_statistics\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function log_mactrack_statistics\(\) has parameter \$type with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function mactrack_debug invoked with 3 parameters, 1 required\.$#'
+			identifier: arguments.count
+			count: 2
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function mactrack_error_handler\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function mactrack_error_handler\(\) has parameter \$context with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function mactrack_error_handler\(\) has parameter \$file with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function mactrack_error_handler\(\) has parameter \$level with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function mactrack_error_handler\(\) has parameter \$line with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function mactrack_error_handler\(\) has parameter \$message with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function mactrack_process_mac_auth_report\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function mactrack_process_mac_auth_report\(\) has parameter \$last_macauth_time with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function mactrack_process_mac_auth_report\(\) has parameter \$mac_auth_frequency with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function set_error_handler expects \(callable\(int, string, string, int\)\: bool\)\|null, ''mactrack_error…'' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Path in include\(\) "\./include/cli_check\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Variable \$config might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: poller_mactrack.php
+
+		-
+			message: '#^Variable \$error_count might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Variable \$mac_ip_dns might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: poller_mactrack.php
+
+		-
+			message: '#^Function convert_readstrings\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_add_column\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_add_column\(\) has parameter \$column with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_add_column\(\) has parameter \$syntax with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_add_column\(\) has parameter \$table with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_add_index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_add_index\(\) has parameter \$index with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_add_index\(\) has parameter \$syntax with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_add_index\(\) has parameter \$table with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_check_dependencies\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_check_upgrade\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_config_arrays\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_config_form\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_config_settings\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_create_table\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_create_table\(\) has parameter \$syntax with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_create_table\(\) has parameter \$table with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_db_column_exists\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_db_column_exists\(\) has parameter \$column with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_db_column_exists\(\) has parameter \$table with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_db_key_exists\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_db_key_exists\(\) has parameter \$index with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_db_key_exists\(\) has parameter \$table with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_db_table_exists\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_db_table_exists\(\) has parameter \$table with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_delete_column\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_delete_column\(\) has parameter \$column with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_delete_column\(\) has parameter \$syntax with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_delete_column\(\) has parameter \$table with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_draw_navigation_text\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_draw_navigation_text\(\) has parameter \$nav with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_execute_sql\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_execute_sql\(\) has parameter \$message with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_execute_sql\(\) has parameter \$syntax with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_modify_column\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_modify_column\(\) has parameter \$column with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_modify_column\(\) has parameter \$syntax with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_modify_column\(\) has parameter \$table with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_page_head\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_poller_bottom\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_setup_table_new\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function mactrack_show_tab\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function plugin_mactrack_check_config\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function plugin_mactrack_install\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function plugin_mactrack_uninstall\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function plugin_mactrack_upgrade\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
+
+		-
+			message: '#^Function plugin_mactrack_version\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: setup.php
