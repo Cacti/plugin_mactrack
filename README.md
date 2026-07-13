@@ -42,6 +42,9 @@ cd plugins/mactrack
 composer install --no-dev --optimize-autoloader
 ```
 
+The plugin refuses to enable when its Composer dependencies are absent. This
+prevents asynchronous DNS resolution from failing later in the poller.
+
 Then use Cacti's Plugin Management interface to install and enable Mactrack.
 
 ## Documentation

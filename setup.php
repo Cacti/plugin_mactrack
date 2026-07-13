@@ -70,6 +70,14 @@ function plugin_mactrack_check_config() {
 		return false;
 	}
 
+	require_once $autoload;
+
+	if (!class_exists('Net_DNS2_Resolver')) {
+		cacti_log('ERROR: Mactrack DNS dependency is unavailable. Run composer install --no-dev in plugins/mactrack before enabling the plugin.', false, 'MACTRACK');
+
+		return false;
+	}
+
 	// Here we will check to ensure everything is configured
 	mactrack_check_upgrade();
 

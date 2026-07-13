@@ -138,8 +138,10 @@ $setupSource = file_get_contents(__DIR__ . '/../../setup.php');
 
 if ($setupSource === false ||
 	strpos($setupSource, "/plugins/mactrack/vendor/autoload.php") === false ||
+	strpos($setupSource, 'require_once $autoload;') === false ||
+	strpos($setupSource, "class_exists('Net_DNS2_Resolver')") === false ||
 	strpos($setupSource, 'return false;') === false) {
-	fwrite(STDERR, "Mactrack configuration checks must block enablement without Composer dependencies\n");
+	fwrite(STDERR, "Mactrack configuration checks must block enablement without a usable Composer dependency\n");
 	exit(1);
 }
 

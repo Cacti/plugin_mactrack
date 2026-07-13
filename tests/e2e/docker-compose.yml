@@ -1,0 +1,47 @@
+services:
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-mactrack-test-root}
+      MARIADB_DATABASE: ${DB_NAME:-cacti}
+      MARIADB_USER: ${DB_USER:-cacti}
+      MARIADB_PASSWORD: ${DB_PASSWORD:-mactrack-test}
+      TZ: UTC
+    volumes:
+      - ${CACTI_SOURCE:?Set CACTI_SOURCE to a Cacti checkout}/cacti.sql:/docker-entrypoint-initdb.d/cacti.sql:ro
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+
+  web:
+    build:
+      context: ${CACTI_SOURCE:?Set CACTI_SOURCE to a Cacti checkout}
+      dockerfile: ${MACTRACK_SOURCE:?Set MACTRACK_SOURCE to this plugin checkout}/tests/e2e/Dockerfile
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-cacti}
+      DB_USER: ${DB_USER:-cacti}
+      DB_PASS: ${DB_PASSWORD:-mactrack-test}
+      TIMEZONE: UTC
+    ports:
+      - "${MACTRACK_E2E_PORT:-18082}:80"
+    volumes:
+      - ${CACTI_SOURCE}:/var/www/html/cacti
+      - ../..:/var/www/html/cacti/plugins/mactrack
+      - mactrack_cache:/var/www/html/cacti/cache
+      - mactrack_log:/var/www/html/cacti/log
+      - mactrack_rra:/var/www/html/cacti/rra
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  mactrack_cache:
+  mactrack_log:
+  mactrack_rra:
