@@ -226,8 +226,10 @@ function form_aggregated_actions() {
 
 		if (cacti_sizeof($selected_items)) {
 			if (get_request_var('drp_action') == '3') { // Delete
-				$placeholders = implode(',', array_fill(0, cacti_sizeof($selected_items), '?'));
-				db_execute_prepared('DELETE FROM mac_track_aggregated_ports WHERE row_id IN(' . $placeholders . ')', $selected_items);
+				if (cacti_sizeof($selected_items)) {
+					$placeholders = implode(',', array_fill(0, cacti_sizeof($selected_items), '?'));
+					db_execute_prepared('DELETE FROM mac_track_aggregated_ports WHERE row_id IN (' . $placeholders . ')', $selected_items);
+				}
 			}
 
 			header('Location: mactrack_view_macs.php');
@@ -255,9 +257,10 @@ function form_aggregated_actions() {
 
 	if (cacti_sizeof($row_array)) {
 		$row_ids   = implode(',', $row_array);
-		$rows_info = db_fetch_assoc('SELECT device_name, mac_address, ip_address, port_number, count_rec
+		$row_placeholders = implode(',', array_fill(0, cacti_sizeof($row_array), '?'));
+		$rows_info = db_fetch_assoc_prepared('SELECT device_name, mac_address, ip_address, port_number, count_rec
 			FROM mac_track_aggregated_ports
-			WHERE row_id IN (' . implode(',', $row_array) . ')');
+			WHERE row_id IN (' . $row_placeholders . ')', $row_array);
 
 		if (isset($rows_info)) {
 			foreach ($rows_info as $row_info) {
