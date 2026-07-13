@@ -235,8 +235,8 @@ while (1) {
 		// output updated details to database
 		foreach ($unresolved_ips as $unresolved_ip) {
 			$sql[] = '(' .
-				$unresolved_ip['site_id'] . ',' .
-				$unresolved_ip['device_id'] . ',' .
+				(int) $unresolved_ip['site_id'] . ',' .
+				(int) $unresolved_ip['device_id'] . ',' .
 				db_qstr($unresolved_ip['hostname']) . ',' .
 				db_qstr($unresolved_ip['dns_hostname']) . ',' .
 				db_qstr($unresolved_ip['device_name']) . ',' .
