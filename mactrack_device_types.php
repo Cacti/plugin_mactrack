@@ -915,7 +915,7 @@ function mactrack_get_device_types(&$sql_where, $rows, $apply_limits = true) {
 	if (get_request_var('type_id') == '-1') {
 		// Show all items
 	} else {
-		$sql_where .= ($sql_where != '' ? ' AND ' : ' WHERE ') . '(mtdt.device_type=' . get_request_var('type_id') . ')';
+		$sql_where .= ($sql_where != '' ? ' AND ' : ' WHERE ') . '(mtdt.device_type=' . (int) get_request_var('type_id') . ')';
 	}
 
 	if (get_request_var('enabled') == '-1') {

@@ -202,19 +202,26 @@ function form_mactrack_actions() {
 
 					if (isset($cacti_host['id'])) {
 						reset($fields_mactrack_snmp_item);
-						$updates = '';
+						$set_clauses = [];
+						$set_params  = [];
 
 						foreach ($fields_mactrack_snmp_item as $field_name => $field_array) {
 							if (isset($cacti_host[$field_name])) {
-								$updates .= ($updates != '' ? ', ' : '') . $field_name . "='" . $cacti_host[$field_name] . "'";
+								// $field_name is a trusted key from the static $fields_mactrack_snmp_item
+								// definition; the host-table value is bound as a parameter to avoid
+								// second-order SQL injection when it contains a quote.
+								$set_clauses[] = $field_name . ' = ?';
+								$set_params[]  = $cacti_host[$field_name];
 							}
 						}
 
-						if ($updates != '') {
+						if (cacti_sizeof($set_clauses)) {
+							$set_params[] = $selected_items[$i];
+
 							db_execute_prepared('UPDATE mac_track_devices
-								SET ' . $updates . '
-								WHERE device_id=?',
-								[$selected_items[$i]]);
+								SET ' . implode(', ', $set_clauses) . '
+								WHERE device_id = ?',
+								$set_params);
 						}
 					} else {
 						// skip silently; possible enhancement: tell the user what we did
