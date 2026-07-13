@@ -386,22 +386,31 @@ function clear_old_processes($site_id) {
 	// get the max script runtime and kill old scripts
 	$max_script_runtime = read_config_option('mt_script_runtime');
 	$delete_time        = date('Y-m-d H:i:s', strtotime('-' . $max_script_runtime . ' Minutes'));
-
-	// remove old processes from the system if they exist
-	$old_procs = db_fetch_assoc_prepared('SELECT mtp.*
+	$site_id            = intval($site_id);
+	$sql                = 'SELECT mtp.*
 		FROM mac_track_processes AS mtp
 		INNER JOIN mac_track_devices AS mtd
 		ON mtp.device_id=mtd.device_id
-		WHERE start_date < ?' . ($site_id > 0 ? ' AND site_id=' . $site_id : ''),
-		[$delete_time]);
+		WHERE start_date < ?';
+	$params             = [$delete_time];
+
+	if ($site_id > 0) {
+		$sql     .= ' AND mtp.site_id = ?';
+		$params[] = $site_id;
+	}
+
+	// remove old processes from the system if they exist
+	$old_procs = db_fetch_assoc_prepared($sql, $params);
 
 	if (cacti_sizeof($old_procs)) {
 		foreach ($old_procs as $p) {
-			if ($p['process_id'] > 0) {
+			$process_id = intval($p['process_id']);
+
+			if ($process_id > 0) {
 				if (strstr(PHP_OS, 'WIN')) {
-					exec('taskkill /pid ' . $p['process_id']);
+					exec('taskkill /pid ' . $process_id);
 				} else {
-					exec('kill ' . $p['process_id']);
+					exec('kill ' . $process_id);
 				}
 
 				cacti_log("WARNING: Removing Hung Mactrack Process for Device '" . $p['device_id'] . "' With Status '" . $p['status'] . "'");
@@ -411,7 +420,7 @@ function clear_old_processes($site_id) {
 
 			db_execute_prepared('DELETE FROM mac_track_processes
 				WHERE process_id = ?',
-				[$p['process_id']]);
+				[$process_id]);
 		}
 	}
 }

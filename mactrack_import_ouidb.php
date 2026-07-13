@@ -76,13 +76,29 @@ if (cacti_sizeof($parms)) {
 }
 
 if ($oui_file != '') {
-	if (!file_exists($oui_file)) {
-		print "ERROR: OUI Database file does not exist\n";
+	$oui_file = mactrack_validate_oui_file($oui_file);
+
+	if ($oui_file == '') {
+		print "ERROR: OUI Database file must be a readable regular file\n";
 	} else {
 		import_oui_database('ui', $oui_file);
 	}
 } else {
 	import_oui_database();
+}
+
+function mactrack_validate_oui_file(string $path): string {
+	if ($path === '' || strpos($path, "\0") !== false) {
+		return '';
+	}
+
+	$resolved = realpath($path);
+
+	if ($resolved === false || !is_file($resolved) || !is_readable($resolved)) {
+		return '';
+	}
+
+	return $resolved;
 }
 
 function display_version() {

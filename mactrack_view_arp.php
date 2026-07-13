@@ -139,7 +139,7 @@ function mactrack_view_export_ips() {
 	}
 }
 
-function mactrack_view_get_ip_records(&$sql_where, $apply_limits = true, $rows) {
+function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true) {
 	// form the 'where' clause for our main sql query
 	if (get_request_var('mac_filter') != '') {
 		$mac_filter = str_replace(':', '', get_request_var('mac_filter'));
@@ -295,7 +295,7 @@ function mactrack_view_ips() {
 
 	$rows = plugin_get_rows_per_page();
 
-	$port_results = mactrack_view_get_ip_records($sql_where, true, $rows);
+	$port_results = mactrack_view_get_ip_records($sql_where, $rows, true);
 
 	// prevent table scans, either a device or site must be selected
 

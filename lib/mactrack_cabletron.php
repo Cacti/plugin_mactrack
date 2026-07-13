@@ -238,13 +238,13 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 		$previous_port = 0;
 
 		while (1) {
-			$exec_string = trim(read_config_option('path_snmpgetnext') .
-				' -c ' . $snmp_readstring .
-				' -OnUQ -v ' . $snmp_version .
-				' -r ' . $device['snmp_retries'] .
-				' -t ' . $to . ' ' .
-				$device['hostname'] . ':' . $device['snmp_port'] . ' ' .
-				$nextOID);
+			$exec_string = trim(cacti_escapeshellcmd(read_config_option('path_snmpgetnext')) .
+				' -c ' . cacti_escapeshellarg($snmp_readstring) .
+				' -OnUQ -v ' . cacti_escapeshellarg($snmp_version) .
+				' -r ' . intval($device['snmp_retries']) .
+				' -t ' . intval($to) . ' ' .
+				cacti_escapeshellarg($device['hostname'] . ':' . intval($device['snmp_port'])) . ' ' .
+				cacti_escapeshellarg($nextOID));
 
 			exec($exec_string, $return_array, $return_code);
 

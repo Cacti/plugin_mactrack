@@ -3118,8 +3118,8 @@ function mactrack_display_Octets($octets) {
 function mactrack_rescan($web = false) {
 	global $config;
 
-	$device_id = get_request_var('device_id');
-	$ifIndex   = get_request_var('ifIndex');
+	$device_id = get_filter_request_var('device_id');
+	$ifIndex   = get_filter_request_var('ifIndex');
 
 	$dbinfo = db_fetch_row_prepared('SELECT *
 		FROM mac_track_devices
@@ -3138,14 +3138,14 @@ function mactrack_rescan($web = false) {
 			$extra_args     = ' -id=' . $dbinfo['device_id'] . ($web ? ' --web' : '');
 
 			// print out the type, and device_id
-			$data['device_id'] = get_request_var('device_id');
+			$data['device_id'] = $device_id;
 			$data['ifIndex']   = $ifIndex;
 
 			// add the cacti header
 			ob_start();
 
 			// execute the command, and show the results
-			$command = read_config_option('path_php_binary') . ' -q ' . $command_string . $extra_args;
+			$command = cacti_escapeshellcmd(read_config_option('path_php_binary')) . ' -q ' . cacti_escapeshellarg($command_string) . $extra_args;
 			passthru($command);
 
 			$data['content'] = ob_get_clean();
@@ -3160,7 +3160,7 @@ function mactrack_rescan($web = false) {
 function mactrack_site_scan($web = false) {
 	global $config, $web;
 
-	$site_id = get_request_var('site_id');
+	$site_id = get_filter_request_var('site_id');
 
 	$dbinfo  = db_fetch_row_prepared('SELECT *
 		FROM mac_track_sites
@@ -3184,7 +3184,7 @@ function mactrack_site_scan($web = false) {
 		ob_start();
 
 		// execute the command, and show the results
-		$command = read_config_option('path_php_binary') . ' -q ' . $command_string . $extra_args;
+		$command = cacti_escapeshellcmd(read_config_option('path_php_binary')) . ' -q ' . cacti_escapeshellarg($command_string) . $extra_args;
 		passthru($command);
 
 		$data['content'] = ob_get_clean();

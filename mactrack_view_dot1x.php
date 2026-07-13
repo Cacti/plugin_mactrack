@@ -164,7 +164,7 @@ function mactrack_view_export_dot1x() {
 	}
 }
 
-function mactrack_view_get_dot1x_records(&$sql_where, $apply_limits = true, $rows) {
+function mactrack_view_get_dot1x_records(&$sql_where, $rows, $apply_limits = true) {
 	// status sql where
 	if (get_request_var('status') == '1') { // Idle
 		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 1';
@@ -389,7 +389,7 @@ function mactrack_view_dot1x() {
 
 	$rows = plugin_get_rows_per_page();
 
-	$port_results = mactrack_view_get_dot1x_records($sql_where, true, $rows);
+	$port_results = mactrack_view_get_dot1x_records($sql_where, $rows, true);
 
 	// prevent table scans, either a device or site must be selected
 	if ($sql_where == '') {

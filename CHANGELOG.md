@@ -2,6 +2,18 @@
 
 --- develop ---
 
+* issue: Harden device-type vendor filtering against SQL injection
+* issue: Validate aggregated MAC bulk-action IDs and use prepared deletion SQL
+* security: Replace MAC action request deserialization with escaped JSON payloads
+* security: Validate and escape MAC bulk-action form values before rendering
+* security: Escape rescan executable and script paths before command execution
+* security: Parameterize stale-process site filtering and validate process IDs before termination
+* security: Escape Cabletron SNMP command arguments and normalize numeric options
+* security: Safely quote ignored-interface regexes and normalize interface report filters
+* security: Normalize device report SQL filters before query construction
+* security: Normalize administrative device list SQL filters before query construction
+* security: Validate canonical local-file paths for OUI database imports
+* compat: Fix PHP 8 parameter ordering and partition conversion arguments
 * issue#246: Fix Cisco device collection
 * issue#248: Cacti process control, terminate dns resolvet when is nothing to do
 * issue#250: Disable automatic MIBs load
