@@ -37,7 +37,6 @@
         <file name="mactrack_view_arp.php" />
         <directory name="lib" />
         <ignoreFiles>
-			<directory name="Net" />
 			<directory name="locales" />
 			<directory name="images" />
 			<directory name="includes" />

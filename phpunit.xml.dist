@@ -10,7 +10,6 @@
             <directory suffix=".php">.</directory>
         </include>
         <exclude>
-            <directory>Net</directory>
             <directory>tests</directory>
             <directory>vendor</directory>
         </exclude>
