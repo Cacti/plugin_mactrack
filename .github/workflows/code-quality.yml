@@ -85,6 +85,15 @@ jobs:
         working-directory: cacti
         run: composer install --no-dev --no-interaction --no-progress
 
+      # release/1.2.31 does not ship .phpstan-bootstrap.php (develop does).
+      # Provide a no-op stub so the plugin config can load either core tree.
+      - name: Ensure PHPStan bootstrap exists
+        working-directory: cacti
+        run: |
+          if [ ! -f .phpstan-bootstrap.php ]; then
+            printf '%s\n' '<?php' '// Stub bootstrap for Cacti trees without a core PHPStan entrypoint' > .phpstan-bootstrap.php
+          fi
+
       # Analysis runs against the plugin's own code only; the config excludes
       # Net/ and vendor/. The committed baseline pins the accepted findings.
       - name: Run PHPStan
