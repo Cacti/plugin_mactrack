@@ -183,24 +183,40 @@ jobs:
     - name: Check PHP Syntax for Plugin
       run: |
         cd ${{ github.workspace }}/cacti/plugins/mactrack
-        if find . -name '*.php' -exec php -l {} 2>&1 \; | grep -iv 'no syntax errors detected'; then
-          echo "Syntax errors found!"
-          exit 1
-        fi
-    
+        find . -path './vendor' -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l
+
+    # Cacti 1.2.31 has no .phpstan.neon / lint scripts; only touch them when present.
     - name: Remove the plugins directory exclusion from the .phpstan.neon
-      run: sed '/plugins/d' -i .phpstan.neon
+      run: |
+        if [ -f .phpstan.neon ]; then
+          sed '/plugins/d' -i .phpstan.neon
+        else
+          echo '.phpstan.neon not present; skipping'
+        fi
       working-directory: ${{ github.workspace }}/cacti
 
     - name: Mark composer scripts executable
-      run: sudo chmod +x ${{ github.workspace }}/cacti/include/vendor/bin/*
+      run: |
+        if [ -d "${{ github.workspace }}/cacti/include/vendor/bin" ]; then
+          sudo find "${{ github.workspace }}/cacti/include/vendor/bin" -maxdepth 1 -type f -exec chmod +x {} +
+        fi
 
     - name: Run Linter on base code
-      run: composer run-script lint ${{ github.workspace }}/cacti/plugins/mactrack
+      run: |
+        if composer run-script --list | grep -qE '^  lint'; then
+          composer run-script lint ${{ github.workspace }}/cacti/plugins/mactrack
+        else
+          echo 'Composer lint script is not defined; skipping.'
+        fi
       working-directory: ${{ github.workspace }}/cacti
 
     - name: Checking coding standards on base code
-      run: composer run-script phpcsfixer ${{ github.workspace }}/cacti/plugins/mactrack
+      run: |
+        if composer run-script --list | grep -qE '^  phpcsfixer'; then
+          composer run-script phpcsfixer ${{ github.workspace }}/cacti/plugins/mactrack
+        else
+          echo 'Composer phpcsfixer script is not defined; skipping.'
+        fi
       working-directory: ${{ github.workspace }}/cacti
 
 #    - name: Run PHPStan at Level 6 on base code outside of Composer due to technical issues
