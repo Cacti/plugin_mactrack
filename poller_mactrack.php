@@ -395,7 +395,7 @@ function clear_old_processes($site_id) {
 	$params             = [$delete_time];
 
 	if ($site_id > 0) {
-		$sql     .= ' AND mtp.site_id = ?';
+		$sql .= ' AND mtp.site_id = ?';
 		$params[] = $site_id;
 	}
 

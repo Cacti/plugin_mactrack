@@ -140,10 +140,10 @@ function mactrack_view_export_devices() {
 }
 
 function mactrack_view_get_device_records(&$sql_where, $rows, $apply_limits = true) {
-	$status         = intval(get_filter_request_var('status'));
-	$type_id        = intval(get_filter_request_var('type_id'));
-	$device_type_id = intval(get_filter_request_var('device_type_id'));
-	$site_id        = intval(get_filter_request_var('site_id'));
+	$status           = intval(get_filter_request_var('status'));
+	$type_id          = intval(get_filter_request_var('type_id'));
+	$device_type_id   = intval(get_filter_request_var('device_type_id'));
+	$site_id          = intval(get_filter_request_var('site_id'));
 	$device_type_info = db_fetch_row_prepared('SELECT * FROM mac_track_device_types WHERE device_type_id = ?', [$device_type_id]);
 
 	// if the device type is not the same as the type_id, then reset it

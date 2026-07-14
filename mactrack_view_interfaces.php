@@ -45,7 +45,7 @@ function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = '30') {
 		$match = '(Vlan|Loopback|Null)';
 		db_execute_prepared('REPLACE INTO settings SET name="mt_ignorePorts", value = ?', [$match]);
 	}
-	$ignore = '(ifName NOT ' . db_qstr_rlike($match) . ' AND ifDescr NOT ' . db_qstr_rlike($match) . ')';
+	$ignore  = '(ifName NOT ' . db_qstr_rlike($match) . ' AND ifDescr NOT ' . db_qstr_rlike($match) . ')';
 	$bwusage = intval(get_filter_request_var('bwusage'));
 
 	// issues sql where
