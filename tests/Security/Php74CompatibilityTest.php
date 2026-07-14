@@ -13,7 +13,7 @@
  */
 
 describe('PHP 7.4 compatibility in mactrack', function () {
-	$files = array(
+	$files = [
 		'mactrack_devices.php',
 		'mactrack_device_types.php',
 		'mactrack_interfaces.php',
@@ -24,7 +24,7 @@ describe('PHP 7.4 compatibility in mactrack', function () {
 		'mactrack_view_macs.php',
 		'mactrack_view_sites.php',
 		'setup.php',
-	);
+	];
 
 	it('does not use str_contains (PHP 8.0)', function () use ($files) {
 		foreach ($files as $relativeFile) {
