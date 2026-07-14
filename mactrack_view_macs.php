@@ -256,9 +256,9 @@ function form_aggregated_actions() {
 	}
 
 	if (cacti_sizeof($row_array)) {
-		$row_ids   = implode(',', $row_array);
+		$row_ids          = implode(',', $row_array);
 		$row_placeholders = implode(',', array_fill(0, cacti_sizeof($row_array), '?'));
-		$rows_info = db_fetch_assoc_prepared('SELECT device_name, mac_address, ip_address, port_number, count_rec
+		$rows_info        = db_fetch_assoc_prepared('SELECT device_name, mac_address, ip_address, port_number, count_rec
 			FROM mac_track_aggregated_ports
 			WHERE row_id IN (' . $row_placeholders . ')', $row_array);
 

@@ -7,9 +7,7 @@
  +-------------------------------------------------------------------------+
 */
 
-/*
- * Verify setup.php defines required plugin hooks and info function.
- */
+// Verify setup.php defines required plugin hooks and info function.
 
 describe('mactrack setup.php structure', function () {
 	$source = file_get_contents(realpath(__DIR__ . '/../../setup.php'));
