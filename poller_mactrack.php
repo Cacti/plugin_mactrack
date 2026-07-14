@@ -998,6 +998,9 @@ function collect_mactrack_data($start, $site_id = 0) {
 			$last_macauth_time = read_config_option('mt_last_macauth_time');
 
 			// if it's time to e-mail
+			$last_macauth_time   = (int) $last_macauth_time;
+			$mac_auth_frequency  = (int) $mac_auth_frequency;
+
 			if (($last_macauth_time + ($mac_auth_frequency * 60) < time()) ||
 				($mac_auth_frequency == 0)) {
 				mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_time);
@@ -1106,6 +1109,11 @@ function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_tim
 		// email the report
 		mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '');
 		mactrack_debug('MACAUTH Report eMail sent.');
+
+		// Persist last-run so the schedule gate does not re-fire every poll.
+		if ($mac_auth_frequency > 0) {
+			set_config_option('mt_last_macauth_time', (string) time());
+		}
 	} else {
 		// email the report
 
@@ -1120,6 +1128,7 @@ function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_tim
 			// email the report
 			mactrack_mail($to, $from, $fromname, $subject, $message, $headers = '');
 			mactrack_debug('MACAUTH Report empty eMail sent.');
+			set_config_option('mt_last_macauth_time', (string) time());
 		}
 	}
 }
