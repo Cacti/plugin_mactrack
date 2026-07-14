@@ -189,7 +189,7 @@ jobs:
     - name: Check PHP Syntax for Plugin
       run: |
         cd ${{ github.workspace }}/cacti/plugins/mactrack
-        if find . -name '*.php' -exec php -l {} 2>&1 \; | grep -iv 'no syntax errors detected'; then
+        if find . -path './vendor' -prune -o -name '*.php' -exec php -l {} 2>&1 \; | grep -iv 'no syntax errors detected'; then
           echo "Syntax errors found!"
           exit 1
         fi
