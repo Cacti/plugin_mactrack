@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2026-04-24 07:04-0700\n"
-"PO-Revision-Date: 2025-12-10 15:18+0000\n"
+"PO-Revision-Date: 2026-08-04 11:18+0000\n"
 "Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\n"
 "Language: ka-GE\n"
@@ -2456,7 +2456,7 @@ msgstr ""
 
 #: setup.php:890 setup.php:897
 msgid "Mactrack Graph Viewer"
-msgstr ""
+msgstr "Mactrack-ის გრაფიკების დათვალიერება"
 
 #: setup.php:917 setup.php:919
 msgid "MacTrack"
@@ -2926,7 +2926,7 @@ msgstr ""
 
 #: setup.php:1518
 msgid "Primary Customer Contact"
-msgstr ""
+msgstr "კლიენტის ძირითადი კონტაქტი"
 
 #: setup.php:1519
 msgid "The principal customer contact name and number for this site."
