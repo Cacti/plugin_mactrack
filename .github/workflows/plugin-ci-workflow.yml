@@ -85,7 +85,7 @@ jobs:
       run: sudo apt-get update
     
     - name: Install System Dependencies
-      run: sudo apt-get install -y apache2 snmp snmpd rrdtool fping
+      run: sudo apt-get install -y apache2 snmp snmpd rrdtool fping libapache2-mod-php${{ matrix.php }}
     
     - name: Start SNMPD Agent and Test
       run: |
@@ -164,14 +164,7 @@ jobs:
       run: |
         cd ${{ github.workspace }}/cacti
         sudo php cli/install_cacti.php --accept-eula --install --force
-
-    - name: Install Mactrack Composer Dependencies
-      run: |
-        cd ${{ github.workspace }}/cacti/plugins/mactrack
-        if [ -f composer.json ]; then
-          sudo composer install --no-dev --prefer-dist --no-progress --no-interaction
-        fi
-
+    
     - name: Install mactrack Plugin
       run: |
         cd ${{ github.workspace }}/cacti
