@@ -386,22 +386,31 @@ function clear_old_processes($site_id) {
 	// get the max script runtime and kill old scripts
 	$max_script_runtime = read_config_option('mt_script_runtime');
 	$delete_time        = date('Y-m-d H:i:s', strtotime('-' . $max_script_runtime . ' Minutes'));
-
-	// remove old processes from the system if they exist
-	$old_procs = db_fetch_assoc_prepared('SELECT mtp.*
+	$site_id            = intval($site_id);
+	$sql                = 'SELECT mtp.*
 		FROM mac_track_processes AS mtp
 		INNER JOIN mac_track_devices AS mtd
 		ON mtp.device_id=mtd.device_id
-		WHERE start_date < ?' . ($site_id > 0 ? ' AND site_id=' . $site_id : ''),
-		[$delete_time]);
+		WHERE start_date < ?';
+	$params             = [$delete_time];
+
+	if ($site_id > 0) {
+		$sql .= ' AND mtd.site_id = ?';
+		$params[] = $site_id;
+	}
+
+	// remove old processes from the system if they exist
+	$old_procs = db_fetch_assoc_prepared($sql, $params);
 
 	if (cacti_sizeof($old_procs)) {
 		foreach ($old_procs as $p) {
-			if ($p['process_id'] > 0) {
+			$process_id = intval($p['process_id']);
+
+			if ($process_id > 0) {
 				if (strstr(PHP_OS, 'WIN')) {
-					exec('taskkill /pid ' . $p['process_id']);
+					exec('taskkill /pid ' . $process_id);
 				} else {
-					exec('kill ' . $p['process_id']);
+					exec('kill ' . $process_id);
 				}
 
 				cacti_log("WARNING: Removing Hung Mactrack Process for Device '" . $p['device_id'] . "' With Status '" . $p['status'] . "'");
@@ -411,7 +420,7 @@ function clear_old_processes($site_id) {
 
 			db_execute_prepared('DELETE FROM mac_track_processes
 				WHERE process_id = ?',
-				[$p['process_id']]);
+				[$process_id]);
 		}
 	}
 }
@@ -1007,7 +1016,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 		// process aggregated data
 		db_execute('UPDATE mac_track_aggregated_ports SET active_last=0');
 
-		db_execute('INSERT INTO mac_track_aggregated_ports
+		db_execute_prepared('INSERT INTO mac_track_aggregated_ports
 			(site_id, device_id, hostname, device_name,
 			vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
 			port_number, port_name, date_last, first_scan_date, count_rec, active_last, authorized)
@@ -1019,8 +1028,9 @@ function collect_mactrack_data($start, $site_id = 0) {
 			ON (t1.mac_address = t2.mac_address
 			AND t1.site_id     = t2.site_id
 			AND t1.port_number <> ""
-			AND t2.scan_date   = "' . $scan_date . '")
-			ON DUPLICATE KEY UPDATE count_rec=count_rec+1, active_last=1, date_last=t1.scan_date,port_name=t1.port_name');
+			AND t2.scan_date   = ?)
+			ON DUPLICATE KEY UPDATE count_rec=count_rec+1, active_last=1, date_last=t1.scan_date,port_name=t1.port_name',
+			[$scan_date]);
 
 		// purge the ip address and temp port table
 		db_execute('TRUNCATE TABLE mac_track_temp_ports');

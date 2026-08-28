@@ -297,7 +297,7 @@ function mactrack_snmp_item_movedown() {
 	get_filter_request_var('id');
 	// ====================================================
 
-	move_item_down('mac_track_snmp_items', get_request_var('item_id'), 'snmp_id=' . get_request_var('id'));
+	move_item_down('mac_track_snmp_items', get_request_var('item_id'), 'snmp_id=' . (int) get_request_var('id'));
 }
 
 function mactrack_snmp_item_moveup() {
@@ -306,7 +306,7 @@ function mactrack_snmp_item_moveup() {
 	get_filter_request_var('id');
 	// ====================================================
 
-	move_item_up('mac_track_snmp_items', get_request_var('item_id'), 'snmp_id=' . get_request_var('id'));
+	move_item_up('mac_track_snmp_items', get_request_var('item_id'), 'snmp_id=' . (int) get_request_var('id'));
 }
 
 function mactrack_snmp_item_remove() {
@@ -347,7 +347,7 @@ function mactrack_snmp_item_edit() {
 
 		$mactrack_snmp_item             = [];
 		$mactrack_snmp_item['snmp_id']  = get_request_var('id');
-		$mactrack_snmp_item['sequence'] = get_sequence('', 'sequence', 'mac_track_snmp_items', 'snmp_id=' . get_request_var('id'));
+		$mactrack_snmp_item['sequence'] = get_sequence('', 'sequence', 'mac_track_snmp_items', 'snmp_id=' . (int) get_request_var('id'));
 	}
 
 	form_start(get_current_page(), 'mactrack_item_edit');

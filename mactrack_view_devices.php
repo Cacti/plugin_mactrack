@@ -140,15 +140,19 @@ function mactrack_view_export_devices() {
 }
 
 function mactrack_view_get_device_records(&$sql_where, $rows, $apply_limits = true) {
-	$device_type_info = db_fetch_row_prepared('SELECT * FROM mac_track_device_types WHERE device_type_id = ?', [get_request_var('device_type_id')]);
+	$status           = intval(get_filter_request_var('status'));
+	$type_id          = intval(get_filter_request_var('type_id'));
+	$device_type_id   = intval(get_filter_request_var('device_type_id'));
+	$site_id          = intval(get_filter_request_var('site_id'));
+	$device_type_info = db_fetch_row_prepared('SELECT * FROM mac_track_device_types WHERE device_type_id = ?', [$device_type_id]);
 
 	// if the device type is not the same as the type_id, then reset it
-	if ((cacti_sizeof($device_type_info)) && (get_request_var('type_id') != -1)) {
-		if ($device_type_info['device_type'] != get_request_var('type_id')) {
+	if ((cacti_sizeof($device_type_info)) && ($type_id != -1)) {
+		if ($device_type_info['device_type'] != $type_id) {
 			$device_type_info = [];
 		}
 	} else {
-		if (get_request_var('device_type_id') == 0) {
+		if ($device_type_id == 0) {
 			$device_type_info = ['device_type_id' => 0, 'description' => __('Unknown Device Type', 'mactrack')];
 		}
 	}
@@ -165,38 +169,38 @@ function mactrack_view_get_device_records(&$sql_where, $rows, $apply_limits = tr
 		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.device_type_id=' . $device_type_info['device_type_id'] . ')';
 	}
 
-	if (get_request_var('status') == '-1') {
+	if ($status == -1) {
 		// Show all items
-	} elseif (get_request_var('status') == '-2') {
+	} elseif ($status == -2) {
 		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.disabled="on")';
-	} elseif (get_request_var('status') == '5') {
+	} elseif ($status == 5) {
 		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.host_id=0)';
 	} else {
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.snmp_status=' . get_request_var('status') . ') AND (mac_track_devices.disabled = "")';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.snmp_status=' . $status . ') AND (mac_track_devices.disabled = "")';
 	}
 
 	// scan types matching
-	if (get_request_var('type_id') == '-1') {
+	if ($type_id == -1) {
 		// Show all items
 	} else {
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.scan_type=' . get_request_var('type_id') . ')';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.scan_type=' . $type_id . ')';
 	}
 
 	// device types matching
-	if (get_request_var('device_type_id') == '-1') {
+	if ($device_type_id == -1) {
 		// Show all items
-	} elseif (get_request_var('device_type_id') == '-2') {
+	} elseif ($device_type_id == -2) {
 		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_device_types.description="")';
 	} else {
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.device_type_id=' . get_request_var('device_type_id') . ')';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.device_type_id=' . $device_type_id . ')';
 	}
 
-	if (get_request_var('site_id') == '-1') {
+	if ($site_id == -1) {
 		// Show all items
-	} elseif (get_request_var('site_id') == '-2') {
+	} elseif ($site_id == -2) {
 		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_sites.site_id IS NULL)';
 	} elseif (!isempty_request_var('site_id')) {
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.site_id=' . get_request_var('site_id') . ')';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.site_id=' . $site_id . ')';
 	}
 
 	$sql_order = get_order_string();

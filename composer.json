@@ -1,0 +1,31 @@
+{
+    "name": "cacti/plugin-mactrack",
+    "description": "Cacti Mactrack plugin test tooling",
+    "type": "cacti-plugin",
+    "license": "GPL-2.0-or-later",
+    "require-dev": {
+        "pestphp/pest": "^1.23",
+        "phpunit/phpunit": "^9.6",
+        "vimeo/psalm": "^5"
+    },
+    "scripts": {
+        "test": "pest",
+        "test:unit": "pest tests/Pest/Unit",
+        "test:integration": "pest tests/Pest/Integration",
+        "test:e2e:static": "pest tests/Pest/E2E",
+        "test:coverage": "pest --coverage",
+        "analyse": "psalm --no-progress"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "platform": {
+            "php": "8.2.0"
+        },
+        "sort-packages": true
+    },
+    "require": {
+        "mikepultz/netdns2": "^1.5"
+    }
+}

@@ -304,7 +304,7 @@ function mactrack_site_get_site_records(&$sql_where, $rows, $apply_limits = true
 	}
 
 	if ((get_request_var('site_id') != '-1') && (get_request_var('detail'))) {
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mtd.site_id=' . get_request_var('site_id') . ')';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mtd.site_id=' . (int) get_request_var('site_id') . ')';
 	}
 
 	$sql_order = get_order_string();

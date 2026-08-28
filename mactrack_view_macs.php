@@ -88,7 +88,7 @@ function form_actions() {
 
 	// if we are to save this form, instead of display it
 	if (isset_request_var('selected_items')) {
-		$selected_items = unserialize(get_nfilter_request_var('selected_items'), ['allowed_classes' => false]);
+		$selected_items = json_decode(get_nfilter_request_var('selected_items'), true);
 
 		if (!is_array($selected_items)) {
 			header('Location: mactrack_view_macs.php');
@@ -151,8 +151,8 @@ function form_actions() {
 				$ip      = str_replace('_', '.', $parts[1]);
 			}
 
-			if (!isset($mac_address_array[$mac])) {
-				$mac_address_list .= '<li>' . mactrack_format_mac($mac) . '</li>';
+			if (filter_var($mac, FILTER_VALIDATE_MAC) && filter_var($ip, FILTER_VALIDATE_IP) && !isset($mac_address_array[$mac])) {
+				$mac_address_list .= '<li>' . html_escape(mactrack_format_mac($mac)) . '</li>';
 				$mac_address_array[$mac] = $ip;
 			}
 		}
@@ -193,8 +193,8 @@ function form_actions() {
 	print "<tr>
 		<td colspan='2' class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
-			<input type='hidden' name='selected_items' value='" . (isset($mac_address_array) ? serialize($mac_address_array) : '') . "'>
-			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . ($save_html != '' ? "
+			<input type='hidden' name='selected_items' value='" . (isset($mac_address_array) ? html_escape(json_encode($mac_address_array)) : '') . "'>
+			<input type='hidden' name='drp_action' value='" . html_escape((string) get_request_var('drp_action')) . "'>" . ($save_html != '' ? "
 			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'mactrack') . "</button>
 			$save_html" : "<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Return', 'mactrack') . '</button>') . '
 		</td>
@@ -207,6 +207,12 @@ function form_actions() {
 	bottom_footer();
 }
 
+function mactrack_normalize_ids(array $ids): array {
+	return array_values(array_filter(array_map('intval', $ids), static function ($id) {
+		return $id > 0;
+	}));
+}
+
 function form_aggregated_actions() {
 	global $config, $mactrack_view_agg_macs_actions;
 
@@ -216,13 +222,12 @@ function form_aggregated_actions() {
 
 	// if we are to save this form, instead of display it
 	if (isset_request_var('selected_items')) {
-		$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
+		$selected_items = mactrack_normalize_ids((array) json_decode(get_nfilter_request_var('selected_items'), true));
 
-		if ($selected_items != false) {
+		if (cacti_sizeof($selected_items)) {
 			if (get_request_var('drp_action') == '3') { // Delete
-				if (cacti_sizeof($selected_items)) {
-					db_execute('DELETE FROM mac_track_aggregated_ports WHERE row_id IN (' . implode(',', $selected_items) . ')');
-				}
+				$placeholders = implode(',', array_fill(0, cacti_sizeof($selected_items), '?'));
+				db_execute_prepared('DELETE FROM mac_track_aggregated_ports WHERE row_id IN(' . $placeholders . ')', $selected_items);
 			}
 
 			header('Location: mactrack_view_macs.php');
@@ -289,8 +294,8 @@ function form_aggregated_actions() {
 	print "<tr>
 		<td colspan='2' align='right' class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
-			<input type='hidden' name='selected_items' value='" . (isset($row_array) ? serialize($row_array) : '') . "'>
-			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . ($save_html != '' ? "
+			<input type='hidden' name='selected_items' value='" . (isset($row_array) ? html_escape(json_encode($row_array)) : '') . "'>
+			<input type='hidden' name='drp_action' value='" . html_escape((string) get_request_var('drp_action')) . "'>" . ($save_html != '' ? "
 			<button type='button' onClick='cactiReturnTo()' class='ui-button ui-corner-all ui-widget'>" . __esc('Cancel', 'mactrack') . "</button>
 			$save_html" : "<button type='button' onClick='cactiReturnTo()' class='ui-button ui-corner-all ui-widget'>" . __esc('Return', 'mactrack') . '</button>') . '
 		</td>
@@ -582,19 +587,19 @@ function mactrack_view_get_mac_records(&$sql_where, $rows, $apply_limits = true)
 	}
 
 	if (get_request_var('authorized') != '-1') {
-		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.authorized = ' . get_request_var('authorized');
+		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.authorized = ' . (int) get_request_var('authorized');
 	}
 
 	if (get_request_var('site_id') != '-1') {
-		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.site_id = ' . get_request_var('site_id');
+		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.site_id = ' . (int) get_request_var('site_id');
 	}
 
 	if (get_request_var('vlan') != '-1') {
-		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.vlan_id = ' . get_request_var('vlan');
+		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.vlan_id = ' . (int) get_request_var('vlan');
 	}
 
 	if (get_request_var('device_id') != '-1') {
-		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.device_id = ' . get_request_var('device_id');
+		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.device_id = ' . (int) get_request_var('device_id');
 	}
 
 	if ((get_request_var('scan_date') != '1') && (get_request_var('scan_date') != '2') && (get_request_var('scan_date') != '3')) {
@@ -1211,14 +1216,14 @@ function mactrack_mac_filter() {
 	$sql_where = '';
 
 	if (get_request_var('device_id') != '-1') {
-		$sql_where = 'WHERE device_id=' . get_request_var('device_id');
+		$sql_where = 'WHERE device_id=' . (int) get_request_var('device_id');
 	}
 
 	if (get_request_var('site_id') != '-1') {
 		if ($sql_where != '') {
-			$sql_where .= ' AND site_id=' . get_request_var('site_id');
+			$sql_where .= ' AND site_id=' . (int) get_request_var('site_id');
 		} else {
-			$sql_where = 'WHERE site_id=' . get_request_var('site_id');
+			$sql_where = 'WHERE site_id=' . (int) get_request_var('site_id');
 		}
 	}
 

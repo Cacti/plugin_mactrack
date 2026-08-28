@@ -202,19 +202,26 @@ function form_mactrack_actions() {
 
 					if (isset($cacti_host['id'])) {
 						reset($fields_mactrack_snmp_item);
-						$updates = '';
+						$set_clauses = [];
+						$set_params  = [];
 
 						foreach ($fields_mactrack_snmp_item as $field_name => $field_array) {
 							if (isset($cacti_host[$field_name])) {
-								$updates .= ($updates != '' ? ', ' : '') . $field_name . "='" . $cacti_host[$field_name] . "'";
+								// $field_name is a trusted key from the static $fields_mactrack_snmp_item
+								// definition; the host-table value is bound as a parameter to avoid
+								// second-order SQL injection when it contains a quote.
+								$set_clauses[] = $field_name . ' = ?';
+								$set_params[]  = $cacti_host[$field_name];
 							}
 						}
 
-						if ($updates != '') {
+						if (cacti_sizeof($set_clauses)) {
+							$set_params[] = $selected_items[$i];
+
 							db_execute_prepared('UPDATE mac_track_devices
-								SET ' . $updates . '
-								WHERE device_id=?',
-								[$selected_items[$i]]);
+								SET ' . implode(', ', $set_clauses) . '
+								WHERE device_id = ?',
+								$set_params);
 						}
 					} else {
 						// skip silently; possible enhancement: tell the user what we did
@@ -970,6 +977,11 @@ function mactrack_device_edit() {
 }
 
 function mactrack_get_devices(&$sql_where, $rows, $apply_limits = true) {
+	$status         = intval(get_filter_request_var('status'));
+	$type_id        = intval(get_filter_request_var('type_id'));
+	$device_type_id = intval(get_filter_request_var('device_type_id'));
+	$site_id        = intval(get_filter_request_var('site_id'));
+
 	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
 		$sql_where = ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mtd.hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . '
@@ -977,36 +989,36 @@ function mactrack_get_devices(&$sql_where, $rows, $apply_limits = true) {
 			OR mtd.notes LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 	}
 
-	if (get_request_var('status') == '-1') {
+	if ($status == -1) {
 		// Show all items
-	} elseif (get_request_var('status') == '-2') {
+	} elseif ($status == -2) {
 		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . "(mtd.disabled='on')";
-	} elseif (get_request_var('status') == '5') {
+	} elseif ($status == 5) {
 		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mtd.host_id=0)';
 	} else {
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mtd.snmp_status=' . get_request_var('status') . " AND mtd.disabled = '')";
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mtd.snmp_status=' . $status . " AND mtd.disabled = '')";
 	}
 
-	if (get_request_var('type_id') == '-1') {
+	if ($type_id == -1) {
 		// Show all items
 	} else {
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mtd.scan_type=' . get_request_var('type_id') . ')';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mtd.scan_type=' . $type_id . ')';
 	}
 
-	if (get_request_var('device_type_id') == '-1') {
+	if ($device_type_id == -1) {
 		// Show all items
-	} elseif (get_request_var('device_type_id') == '-2') {
+	} elseif ($device_type_id == -2) {
 		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . "(mtdt.description='')";
 	} else {
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mtd.device_type_id=' . get_request_var('device_type_id') . ')';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mtd.device_type_id=' . $device_type_id . ')';
 	}
 
-	if (get_request_var('site_id') == '-1') {
+	if ($site_id == -1) {
 		// Show all items
-	} elseif (get_request_var('site_id') == '-2') {
+	} elseif ($site_id == -2) {
 		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mts.site_id IS NULL)';
 	} elseif (!isempty_request_var('site_id')) {
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mtd.site_id=' . get_request_var('site_id') . ')';
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mtd.site_id=' . $site_id . ')';
 	}
 
 	$sql_order = get_order_string();
