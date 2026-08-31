@@ -226,10 +226,8 @@ function form_aggregated_actions() {
 
 		if (cacti_sizeof($selected_items)) {
 			if (get_request_var('drp_action') == '3') { // Delete
-				if (cacti_sizeof($selected_items)) {
-					$placeholders = implode(',', array_fill(0, cacti_sizeof($selected_items), '?'));
-					db_execute_prepared('DELETE FROM mac_track_aggregated_ports WHERE row_id IN (' . $placeholders . ')', $selected_items);
-				}
+				$placeholders = implode(',', array_fill(0, cacti_sizeof($selected_items), '?'));
+				db_execute_prepared('DELETE FROM mac_track_aggregated_ports WHERE row_id IN(' . $placeholders . ')', $selected_items);
 			}
 
 			header('Location: mactrack_view_macs.php');
@@ -242,6 +240,7 @@ function form_aggregated_actions() {
 	$mac_address_list = '';
 	$row_list         = '';
 	$i                = 0;
+	$row_ids          = '';
 
 	// loop through each of the ports selected on the previous page and get more info about them
 	foreach ($_POST as $var => $val) {
@@ -255,20 +254,14 @@ function form_aggregated_actions() {
 	}
 
 	if (cacti_sizeof($row_array)) {
-		$row_placeholders = implode(',', array_fill(0, cacti_sizeof($row_array), '?'));
-		$rows_info        = db_fetch_assoc_prepared('SELECT device_name, mac_address, ip_address, port_number, count_rec
+		$row_ids   = implode(',', $row_array);
+		$rows_info = db_fetch_assoc('SELECT device_name, mac_address, ip_address, port_number, count_rec
 			FROM mac_track_aggregated_ports
-			WHERE row_id IN (' . $row_placeholders . ')', $row_array);
+			WHERE row_id IN (' . implode(',', $row_array) . ')');
 
 		if (isset($rows_info)) {
 			foreach ($rows_info as $row_info) {
-				$row_list .= '<li>' . __('Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]',
-					html_escape($row_info['device_name']),
-					html_escape($row_info['ip_address']),
-					html_escape(mactrack_format_mac($row_info['mac_address'])),
-					html_escape((string) $row_info['port_number']),
-					html_escape((string) $row_info['count_rec']),
-					'mactrack') . '</li>';
+				$row_list .= '<li>' . __('Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]', $row_info['device_name'], $row_info['ip_address'], mactrack_format_mac($row_info['mac_address']),  $row_info['port_number'], $row_info['count_rec'], 'mactrack') . '</li>';
 			}
 		}
 	}
@@ -407,16 +400,19 @@ function mactrack_view_macs_validate_request_vars() {
 			'options' => ['options' => 'sanitize_search_string']
 			],
 		'ip_filter' => [
-			'filter'  => FILTER_DEFAULT,
+			'filter'  => FILTER_CALLBACK,
 			'default' => '',
+			'options' => ['options' => 'sanitize_search_string']
 			],
 		'mac_filter' => [
-			'filter'  => FILTER_DEFAULT,
+			'filter'  => FILTER_CALLBACK,
 			'default' => '',
+			'options' => ['options' => 'sanitize_search_string']
 			],
 		'port_name_filter' => [
-			'filter'  => FILTER_DEFAULT,
+			'filter'  => FILTER_CALLBACK,
 			'default' => '',
+			'options' => ['options' => 'sanitize_search_string']
 			],
 		'scan_date' => [
 			'filter'  => FILTER_CALLBACK,

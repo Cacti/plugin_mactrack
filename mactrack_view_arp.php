@@ -78,12 +78,14 @@ function mactrack_view_ips_validate_request_vars() {
 			'options' => ['options' => 'sanitize_search_string']
 			],
 		'ip_filter' => [
-			'filter'  => FILTER_DEFAULT,
+			'filter'  => FILTER_CALLBACK,
 			'default' => '',
+			'options' => ['options' => 'sanitize_search_string']
 			],
 		'mac_filter' => [
-			'filter'  => FILTER_DEFAULT,
+			'filter'  => FILTER_CALLBACK,
 			'default' => '',
+			'options' => ['options' => 'sanitize_search_string']
 			],
 		'sort_column' => [
 			'filter'  => FILTER_CALLBACK,
