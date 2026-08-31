@@ -573,7 +573,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 	}
 
 	// required only for interfaces table
-	$db_data = db_fetch_assoc("SELECT * FROM mac_track_interfaces WHERE device_id='" . $device['device_id'] . "' ORDER BY ifIndex");
+	$db_data = db_fetch_assoc_prepared('SELECT * FROM mac_track_interfaces WHERE device_id = ? ORDER BY ifIndex', [$device['device_id']]);
 
 	if (cacti_sizeof($db_data)) {
 		foreach ($db_data as $interface) {
@@ -3135,7 +3135,7 @@ function mactrack_rescan($web = false) {
 
 			// create the command script
 			$command_string = $config['base_path'] . '/plugins/mactrack/mactrack_scanner.php';
-			$extra_args     = ' -id=' . $dbinfo['device_id'] . ($web ? ' --web' : '');
+			$extra_args     = ' -id=' . cacti_escapeshellarg($dbinfo['device_id']) . ($web ? ' --web' : '');
 
 			// print out the type, and device_id
 			$data['device_id'] = $device_id;
@@ -3146,9 +3146,14 @@ function mactrack_rescan($web = false) {
 
 			// execute the command, and show the results
 			$command = cacti_escapeshellcmd(read_config_option('path_php_binary')) . ' -q ' . cacti_escapeshellarg($command_string) . $extra_args;
-			passthru($command);
+			passthru($command, $exit_code);
 
 			$data['content'] = ob_get_clean();
+
+			if ($exit_code !== 0) {
+				$data['error']    = 'rescan process exited with code ' . intval($exit_code);
+				$data['content'] .= '<p class="textError">' . html_escape('Subprocess error: exit code ' . intval($exit_code)) . '</p>';
+			}
 		}
 	}
 
@@ -3158,7 +3163,9 @@ function mactrack_rescan($web = false) {
 }
 
 function mactrack_site_scan($web = false) {
-	global $config, $web;
+	global $config;
+
+	get_filter_request_var('site_id');
 
 	$site_id = get_filter_request_var('site_id');
 
@@ -3175,7 +3182,7 @@ function mactrack_site_scan($web = false) {
 
 		// create the command script
 		$command_string = $config['base_path'] . '/plugins/mactrack/poller_mactrack.php';
-		$extra_args     = ' --web -sid=' . $dbinfo['site_id'];
+		$extra_args     = ' -sid=' . cacti_escapeshellarg($dbinfo['site_id']) . ($web ? ' --web' : '');
 
 		// print out the type, and device_id
 		$data['site_id'] = $site_id;
@@ -3185,9 +3192,14 @@ function mactrack_site_scan($web = false) {
 
 		// execute the command, and show the results
 		$command = cacti_escapeshellcmd(read_config_option('path_php_binary')) . ' -q ' . cacti_escapeshellarg($command_string) . $extra_args;
-		passthru($command);
+		passthru($command, $exit_code);
 
 		$data['content'] = ob_get_clean();
+
+		if ($exit_code !== 0) {
+			$data['error']    = 'site_scan process exited with code ' . intval($exit_code);
+			$data['content'] .= '<p class="textError">' . html_escape('Subprocess error: exit code ' . intval($exit_code)) . '</p>';
+		}
 	}
 
 	header('Content-Type: application/json; charset=utf-8');

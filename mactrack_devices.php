@@ -253,7 +253,7 @@ function form_mactrack_actions() {
 							FROM mac_track_devices
 							WHERE device_id = ?',
 				[$matches[1]]);
-			$device_list .= '<li>' . $device_info['device_name'] . ' (' . $device_info['hostname'] . ')</li>';
+			$device_list .= '<li>' . html_escape($device_info['device_name']) . ' (' . html_escape($device_info['hostname']) . ')</li>';
 			$device_array[$i] = $matches[1];
 			$i++;
 		}
@@ -886,7 +886,7 @@ function mactrack_device_edit() {
 		<table class='cactiTable'>
 			<tr>
 				<td class='textInfo' colspan='2'>
-					<?php print $device['device_name']; ?> (<?php print $device['hostname']; ?>)
+					<?php print html_escape($device['device_name']); ?> (<?php print html_escape($device['hostname']); ?>)
 				</td>
 			</tr>
 			<tr>

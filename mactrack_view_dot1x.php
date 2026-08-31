@@ -94,16 +94,19 @@ function mactrack_view_dot1x_validate_request_vars() {
 			'options' => ['options' => 'sanitize_search_string']
 			],
 		'ip_filter' => [
-			'filter'  => FILTER_DEFAULT,
+			'filter'  => FILTER_CALLBACK,
 			'default' => '',
+			'options' => ['options' => 'sanitize_search_string']
 			],
 		'mac_filter' => [
-			'filter'  => FILTER_DEFAULT,
+			'filter'  => FILTER_CALLBACK,
 			'default' => '',
+			'options' => ['options' => 'sanitize_search_string']
 			],
 		'port_name_filter' => [
-			'filter'  => FILTER_DEFAULT,
+			'filter'  => FILTER_CALLBACK,
 			'default' => '',
+			'options' => ['options' => 'sanitize_search_string']
 			],
 		'scan_date' => [
 			'filter'  => FILTER_CALLBACK,
