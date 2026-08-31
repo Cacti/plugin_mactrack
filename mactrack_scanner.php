@@ -62,7 +62,7 @@ $test_mode = false;
 
 if (cacti_sizeof($parms)) {
 	foreach ($parms as $parameter) {
-		if (strpos($parameter, '=')) {
+		if (strpos($parameter, '=') !== false) {
 			[$arg, $value] = explode('=', $parameter);
 		} else {
 			$arg   = $parameter;

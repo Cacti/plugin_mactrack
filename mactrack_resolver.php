@@ -85,7 +85,7 @@ $start   = time();
 
 if (cacti_sizeof($parms)) {
 	foreach ($parms as $parameter) {
-		if (strpos($parameter, '=')) {
+		if (strpos($parameter, '=') !== false) {
 			[$arg, $value] = explode('=', $parameter);
 		} else {
 			$arg   = $parameter;
@@ -158,11 +158,11 @@ if ($dns_secondary != '') {
 }
 
 if (cacti_sizeof($nameservers)) {
-	$use_resolver = false;
-	$resolver     = false;
-} else {
 	$use_resolver = true;
 	$resolver     = new Net_DNS2_Resolver(['nameservers' => $nameservers]);
+} else {
+	$use_resolver = false;
+	$resolver     = false;
 }
 
 // if more than 15 second is nothing to do, ending
