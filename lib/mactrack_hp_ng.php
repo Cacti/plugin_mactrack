@@ -72,7 +72,6 @@ function get_procurve_ng_switch_ports($site, &$device, $lowPort = 0, $highPort =
 	foreach ($vlan_ids as $vlan_id => $vlan_name) {
 		$active_vlans[$i]['vlan_id']   = $vlan_id;
 		$active_vlans[$i]['vlan_name'] = $vlan_name;
-		$active_vlans++;
 
 		$i++;
 	}
@@ -91,7 +90,7 @@ function get_procurve_ng_switch_ports($site, &$device, $lowPort = 0, $highPort =
 		foreach ($port_results as $port_result) {
 			$ifIndex         = $port_result['port_number'];
 			$ifType          = isset($ifInterfaces[$ifIndex]['ifType']) ? $ifInterfaces[$ifIndex]['ifType'] : '';
-			$ifName          = isset($ifInterfaces['ifAlias'][$ifIndex]) ? $ifInterfaces['ifAlias'][$ifIndex] : '';
+			$ifName          = isset($ifInterfaces[$ifIndex]['ifAlias']) ? $ifInterfaces[$ifIndex]['ifAlias'] : '';
 			$portName        = $ifName;
 			$portTrunkStatus = isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '';
 

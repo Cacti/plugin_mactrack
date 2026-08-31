@@ -80,7 +80,6 @@ function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPor
 		foreach ($vlan_ids as $vlan_id => $vlan_name) {
 			$active_vlans[$i]['vlan_id']   = $vlan_id;
 			$active_vlans[$i]['vlan_name'] = $vlan_name;
-			$active_vlans++;
 			$i++;
 		}
 	}
@@ -199,7 +198,6 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 		foreach ($vlan_ids as $vlan_id => $vlan_name) {
 			$active_vlans[$i]['vlan_id']   = $vlan_id;
 			$active_vlans[$i]['vlan_name'] = $vlan_name;
-			$active_vlans++;
 
 			$i++;
 		}

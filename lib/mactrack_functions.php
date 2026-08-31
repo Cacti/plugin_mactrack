@@ -2127,17 +2127,21 @@ function xform_net_address($ip_address) {
  * @param mixed $mac_address
  */
 function xform_mac_address($mac_address) {
-	$max_address = trim($mac_address);
+	$mac_address = trim((string) $mac_address);
 
-	if ($mac_address == '') {
-		$mac_address = 'NOT USER';
-	} elseif (strlen($mac_address) > 10) { // return is in ascii
-		$max_address = str_replace(
+	if ($mac_address === '') {
+		return 'NOT USER';
+	}
+
+	if (strlen($mac_address) > 10) {
+		// ASCII / HEX- form (e.g. "HEX-00:aa:bb:...", "aa-bb-cc-dd-ee-ff")
+		$mac_address = str_replace(
 			['HEX-00:', 'HEX-:', 'HEX-', '"', ' ', '-'],
 			['',        '',      '',     '',  ':', ':'],
 			$mac_address
 		);
-	} else { // return is hex
+	} else {
+		// Binary hex bytes from SNMP
 		$mac = '';
 
 		for ($j = 0; $j < strlen($mac_address); $j++) {
@@ -2147,7 +2151,7 @@ function xform_mac_address($mac_address) {
 		$mac_address = $mac;
 	}
 
-	$mac_address = str_replace(':', '', $max_address);
+	$mac_address = str_replace(':', '', $mac_address);
 
 	return strtoupper($mac_address);
 }
