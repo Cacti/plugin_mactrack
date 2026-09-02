@@ -62,18 +62,17 @@ function plugin_mactrack_version() {
 function plugin_mactrack_check_config() {
 	global $config;
 
-	$autoload = $config['base_path'] . '/plugins/mactrack/vendor/autoload.php';
+	require_once $config['base_path'] . '/plugins/mactrack/src/Runtime/DependencyBootstrap.php';
 
-	if (!is_file($autoload)) {
-		cacti_log('ERROR: Mactrack requires Composer dependencies. Run composer install --no-dev in plugins/mactrack before enabling the plugin.', false, 'MACTRACK');
+	$loaded = \Cacti\Mactrack\Runtime\DependencyBootstrap::load(
+		$config['base_path'] . '/plugins/mactrack/vendor/autoload.php',
+		['Net_DNS2_Resolver'],
+		static function (string $message): void {
+			cacti_log('ERROR: ' . $message, false, 'MACTRACK');
+		}
+	);
 
-		return false;
-	}
-
-	require_once $autoload;
-
-	if (!class_exists('Net_DNS2_Resolver')) {
-		cacti_log('ERROR: Mactrack DNS dependency is unavailable. Run composer install --no-dev in plugins/mactrack before enabling the plugin.', false, 'MACTRACK');
+	if (!$loaded) {
 
 		return false;
 	}

@@ -40,6 +40,21 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      snmp-agent:
+        condition: service_healthy
+
+  snmp-agent:
+    build:
+      context: ${CACTI_SOURCE:?Set CACTI_SOURCE to a Cacti checkout}
+      dockerfile: ${MACTRACK_SOURCE:?Set MACTRACK_SOURCE to this plugin checkout}/tests/e2e/Dockerfile
+    command: ["snmpd", "-f", "-Lo", "-C", "-c", "/etc/snmp/mactrack-snmpd.conf"]
+    volumes:
+      - ./snmpd.conf:/etc/snmp/mactrack-snmpd.conf:ro
+    healthcheck:
+      test: ["CMD", "snmpget", "-v2c", "-c", "public", "-On", "localhost", ".1.3.6.1.2.1.1.2.0"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
 
 volumes:
   mactrack_cache:

@@ -42,10 +42,17 @@ chdir($dir);
 
 include('../../include/cli_check.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
-require_once $config['base_path'] . '/plugins/mactrack/vendor/autoload.php';
+require_once $config['base_path'] . '/plugins/mactrack/src/Runtime/DependencyBootstrap.php';
 
-if (!class_exists('Net_DNS2_Resolver')) {
-	fwrite(STDERR, "Mactrack DNS dependency is unavailable. Run composer install --no-dev in the plugin directory.\n");
+$dependenciesLoaded = \Cacti\Mactrack\Runtime\DependencyBootstrap::load(
+	$config['base_path'] . '/plugins/mactrack/vendor/autoload.php',
+	['Net_DNS2_Resolver'],
+	static function (string $message): void {
+		fwrite(STDERR, $message . "\n");
+	}
+);
+
+if (!$dependenciesLoaded) {
 	exit(1);
 }
 

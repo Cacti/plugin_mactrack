@@ -3,6 +3,11 @@
     "description": "Cacti Mactrack plugin test tooling",
     "type": "cacti-plugin",
     "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Cacti\\Mactrack\\": "src/"
+        }
+    },
     "require-dev": {
         "pestphp/pest": "^1.23",
         "phpunit/phpunit": "^9.6",
@@ -14,6 +19,7 @@
         "test:integration": "pest tests/Pest/Integration",
         "test:e2e:static": "pest tests/Pest/E2E",
         "test:coverage": "pest --coverage",
+        "test:coverage:runtime": "pest --configuration=phpunit.runtime.xml --coverage --min=100",
         "analyse": "psalm --no-progress"
     },
     "config": {

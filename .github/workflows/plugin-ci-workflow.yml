@@ -32,6 +32,28 @@ on:
       - develop
 
 jobs:
+  production-path:
+    name: Production scanner path
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Cacti develop
+      uses: actions/checkout@v7
+      with:
+        repository: Cacti/cacti
+        ref: develop
+        path: cacti
+
+    - name: Checkout mactrack plugin
+      uses: actions/checkout@v7
+      with:
+        path: cacti/plugins/mactrack
+
+    - name: Run installed Cacti, MariaDB, SNMP, scanner, and poller
+      env:
+        CACTI_SOURCE: ${{ github.workspace }}/cacti
+        MACTRACK_SOURCE: ${{ github.workspace }}/cacti/plugins/mactrack
+      run: cacti/plugins/mactrack/tests/e2e/run-mactrack-e2e.sh
+
   integration-test:
     runs-on: ${{ matrix.os }}
     
@@ -107,16 +129,14 @@ jobs:
         cat ~/.my.cnf
     
     - name: Initialize Cacti Database
-      env:
-        MYSQL_AUTH_USR: '--defaults-file=~/.my.cnf'
       run: |
-        mysql $MYSQL_AUTH_USR -e 'CREATE DATABASE IF NOT EXISTS cacti;'
-        mysql $MYSQL_AUTH_USR -e "CREATE USER IF NOT EXISTS 'cactiuser'@'localhost' IDENTIFIED BY 'cactiuser';"
-        mysql $MYSQL_AUTH_USR -e "GRANT ALL PRIVILEGES ON cacti.* TO 'cactiuser'@'localhost';"
-        mysql $MYSQL_AUTH_USR -e "GRANT SELECT ON mysql.time_zone_name TO 'cactiuser'@'localhost';"
-        mysql $MYSQL_AUTH_USR -e "FLUSH PRIVILEGES;"
-        mysql $MYSQL_AUTH_USR cacti < ${{ github.workspace }}/cacti/cacti.sql
-        mysql $MYSQL_AUTH_USR -e "INSERT INTO settings (name, value) VALUES ('path_php_binary', '/usr/bin/php')" cacti
+        mysql --defaults-file="$HOME/.my.cnf" -e 'CREATE DATABASE IF NOT EXISTS cacti;'
+        mysql --defaults-file="$HOME/.my.cnf" -e "CREATE USER IF NOT EXISTS 'cactiuser'@'localhost' IDENTIFIED BY 'cactiuser';"
+        mysql --defaults-file="$HOME/.my.cnf" -e "GRANT ALL PRIVILEGES ON cacti.* TO 'cactiuser'@'localhost';"
+        mysql --defaults-file="$HOME/.my.cnf" -e "GRANT SELECT ON mysql.time_zone_name TO 'cactiuser'@'localhost';"
+        mysql --defaults-file="$HOME/.my.cnf" -e "FLUSH PRIVILEGES;"
+        mysql --defaults-file="$HOME/.my.cnf" cacti < "${{ github.workspace }}/cacti/cacti.sql"
+        mysql --defaults-file="$HOME/.my.cnf" -e "INSERT INTO settings (name, value) VALUES ('path_php_binary', '/usr/bin/php')" cacti
     
     - name: Validate composer files
       run: |

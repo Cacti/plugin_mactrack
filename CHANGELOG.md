@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue#343: Fail closed when Composer dependencies are missing and test the production scanner path against live SNMP
 * compat: Replace vendored Net_DNS2 with Composer-managed mikepultz/netdns2 1.5, retaining the established resolver API
 * issue: Harden device-type vendor filtering against SQL injection
 * issue: Validate aggregated MAC bulk-action IDs and use prepared deletion SQL

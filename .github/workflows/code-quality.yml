@@ -25,6 +25,16 @@ permissions:
   contents: read
 
 jobs:
+  runtime-coverage:
+    name: Docker tests and runtime coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout plugin
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Run tests and enforce 100% runtime coverage in PHP 8.3
+        run: tests/docker/run-tests.sh
+
   lint:
     name: PHP Lint (PHP ${{ matrix.php }})
     runs-on: ubuntu-latest

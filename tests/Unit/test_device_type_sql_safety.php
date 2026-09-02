@@ -127,20 +127,19 @@ if ($convertSource                                                              
 
 $resolverSource = file_get_contents(__DIR__ . '/../../mactrack_resolver.php');
 
-if ($resolverSource                                                                                         === false ||
-	strpos($resolverSource, 'require_once $config[\'base_path\'] . \'/plugins/mactrack/vendor/autoload.php\'') === false ||
-	strpos($resolverSource, "class_exists('Net_DNS2_Resolver')")                                               === false) {
+if ($resolverSource === false ||
+	strpos($resolverSource, '\\Cacti\\Mactrack\\Runtime\\DependencyBootstrap::load(') === false ||
+	strpos($resolverSource, 'if (!$dependenciesLoaded)') === false) {
 	fwrite(STDERR, "DNS resolver must load and verify the Composer-managed NetDNS2 dependency\n");
 	exit(1);
 }
 
 $setupSource = file_get_contents(__DIR__ . '/../../setup.php');
 
-if ($setupSource                                               === false ||
+if ($setupSource === false ||
 	strpos($setupSource, '/plugins/mactrack/vendor/autoload.php') === false ||
-	strpos($setupSource, 'require_once $autoload;')               === false ||
-	strpos($setupSource, "class_exists('Net_DNS2_Resolver')")     === false ||
-	strpos($setupSource, 'return false;')                         === false) {
+	strpos($setupSource, '\\Cacti\\Mactrack\\Runtime\\DependencyBootstrap::load(') === false ||
+	strpos($setupSource, 'if (!$loaded)') === false) {
 	fwrite(STDERR, "Mactrack configuration checks must block enablement without a usable Composer dependency\n");
 	exit(1);
 }

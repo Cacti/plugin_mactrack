@@ -17,16 +17,51 @@ sed -i \
 	-e "s/\$database_password *=.*/\$database_password = 'mactrack-test';/" \
 	"$CACTI_PATH/include/config.php"
 
+composer install \
+	--working-dir="$CACTI_PATH/plugins/mactrack" \
+	--no-dev \
+	--prefer-dist \
+	--no-progress \
+	--no-interaction
 test -f "$CACTI_PATH/plugins/mactrack/vendor/autoload.php"
 
-# The plugin lifecycle does not need Cacti's optional device-template imports.
-# Explicitly skip them to keep this disposable install focused and fast enough
-# for CI while preserving the normal core install and plugin-management paths.
-template_args=()
-for template in "$CACTI_PATH"/install/templates/*.xml.gz; do
-	template_args+=("--template=$(basename "$template"):0")
-done
-
-php "$CACTI_PATH/cli/install_cacti.php" --accept-eula --install --force "${template_args[@]}"
+php "$CACTI_PATH/cli/install_cacti.php" --accept-eula --install --force
 php "$CACTI_PATH/cli/plugin_manage.php" --plugin=mactrack --install --enable --allperms
 php "$CACTI_PATH/plugins/mactrack/tests/e2e/mactrack_smoke.php"
+
+# Prove the installed plugin can reach a real SNMP agent through the same
+# scanner entry point launched by the Mactrack poller in production.
+snmpget -v2c -c public -On snmp-agent .1.3.6.1.2.1.1.2.0
+device_id="$(php "$CACTI_PATH/plugins/mactrack/tests/e2e/mactrack_production_probe.php" seed)"
+php "$CACTI_PATH/plugins/mactrack/mactrack_scanner.php" "-id=$device_id" --debug -t
+php "$CACTI_PATH/plugins/mactrack/tests/e2e/mactrack_production_probe.php" assert "$device_id"
+
+# The master poller must launch the scanner successfully too; this checks the
+# actual scheduler-to-worker boundary rather than a test-only function call.
+php "$CACTI_PATH/plugins/mactrack/poller_mactrack.php" -sid=1 --force --debug
+php "$CACTI_PATH/plugins/mactrack/tests/e2e/mactrack_production_probe.php" assert "$device_id"
+
+# Exercise the resolver entry point from an installed-tree copy without
+# Composer output. It must fail closed with an actionable error, never fatal.
+missing_tree=/tmp/cacti-mactrack-missing-dependencies
+cp -a "$CACTI_PATH" "$missing_tree"
+rm -rf "$missing_tree/plugins/mactrack/vendor"
+set +e
+resolver_output="$(cd "$missing_tree/plugins/mactrack" && php mactrack_resolver.php 2>&1)"
+resolver_status=$?
+set -e
+
+if [ "$resolver_status" -ne 1 ]; then
+	printf 'Resolver returned %s instead of 1 without Composer dependencies\n%s\n' "$resolver_status" "$resolver_output" >&2
+	exit 1
+fi
+
+if ! grep -q 'requires Composer dependencies' <<<"$resolver_output"; then
+	printf 'Resolver did not emit the dependency remediation message\n%s\n' "$resolver_output" >&2
+	exit 1
+fi
+
+if grep -q 'Fatal error' <<<"$resolver_output"; then
+	printf 'Resolver fatally crashed without Composer dependencies\n%s\n' "$resolver_output" >&2
+	exit 1
+fi
