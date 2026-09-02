@@ -18,6 +18,12 @@ sed -i \
 	"$CACTI_PATH/include/config.php"
 
 composer install \
+	--working-dir="$CACTI_PATH" \
+	--no-dev \
+	--prefer-dist \
+	--no-progress \
+	--no-interaction
+composer install \
 	--working-dir="$CACTI_PATH/plugins/mactrack" \
 	--no-dev \
 	--prefer-dist \
