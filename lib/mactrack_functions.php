@@ -22,6 +22,23 @@
  +-------------------------------------------------------------------------+
 */
 
+// db_qstr_rlike() was added by a 1.2.x security backport and has no equivalent
+// on develop, so supply it where core does not.  Dropping the call instead
+// would reintroduce the injection that backport closed.
+if (!function_exists('db_qstr_rlike')) {
+	function db_qstr_rlike($s, $db_conn = false) {
+		$s = (string) $s;
+
+		if (strlen($s) > 255) {
+			$s = substr($s, 0, 255);
+		}
+
+		$s = str_replace(array("\0", '|', '{', '}'), '', $s);
+
+		return 'RLIKE ' . db_qstr($s, $db_conn);
+	}
+}
+
 // register these scanning functions
 global $mactrack_scanning_functions;
 

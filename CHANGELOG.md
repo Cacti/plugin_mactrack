@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* compat: Supply db_qstr_rlike() where Cacti core does not define it, keeping interface filtering safe on 1.3
 * issue: Harden device-type vendor filtering against SQL injection
 * issue: Validate aggregated MAC bulk-action IDs and use prepared deletion SQL
 * security: Replace MAC action request deserialization with escaped JSON payloads
