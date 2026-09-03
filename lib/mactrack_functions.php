@@ -33,7 +33,7 @@ if (!function_exists('db_qstr_rlike')) {
 			$s = substr($s, 0, 255);
 		}
 
-		$s = str_replace(array("\0", '|', '{', '}'), '', $s);
+		$s = str_replace(["\0", '|', '{', '}'], '', $s);
 
 		return 'RLIKE ' . db_qstr($s, $db_conn);
 	}

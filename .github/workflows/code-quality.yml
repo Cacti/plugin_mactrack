@@ -52,6 +52,25 @@ jobs:
             -o -name '*.php' -print0 \
           | xargs -0 -n1 -P4 php -l
 
+  coding-standards:
+    name: Coding standards
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout plugin
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          coverage: none
+          tools: composer:v2, php-cs-fixer
+
+      # The ruleset is Cacti core's. Bundled Net_DNS2 and the test tree are
+      # excluded by .php-cs-fixer.php, so only the plugin's own code is checked.
+      - name: Check coding standards
+        run: php-cs-fixer check --config=.php-cs-fixer.php --diff --show-progress=none
+
   phpstan:
     name: PHPStan level 6 (PHP ${{ matrix.php }})
     runs-on: ubuntu-latest
