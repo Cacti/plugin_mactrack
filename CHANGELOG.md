@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* issue: Call mactrack_format_mac() from the ARP export instead of a function that does not exist
+* issue: Drop the mactrack_ajax.php graph-settings action, whose handler was removed in 2016
 * compat: Supply db_qstr_rlike() where Cacti core does not define it, keeping interface filtering safe on 1.3
 * issue: Harden device-type vendor filtering against SQL injection
 * issue: Validate aggregated MAC bulk-action IDs and use prepared deletion SQL

@@ -126,7 +126,7 @@ function mactrack_view_export_ips() {
 
 			array_push($xport_array,'"' . $port_result['site_name'] . '","' .
 			$port_result['hostname'] . '","' . $port_result['device_name'] . '","' .
-			format_mac_address($port_result['mac_address']) . '","' . $port_result['vendor_name'] . '","' .
+			mactrack_format_mac($port_result['mac_address']) . '","' . $port_result['vendor_name'] . '","' .
 			$port_result['ip_address'] . '","' . $port_result['dns_hostname'] . '","' .
 			$port_result['port_number'] . '","' . $port_result['ifName'] . '","' .
 			$scan_date . '"');
