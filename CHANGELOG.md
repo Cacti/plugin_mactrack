@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue: Return the unformatted MAC when mt_mac_format is unset rather than a null address
 * issue: Call mactrack_format_mac() from the ARP export instead of a function that does not exist
 * issue: Drop the mactrack_ajax.php graph-settings action, whose handler was removed in 2016
 * compat: Supply db_qstr_rlike() where Cacti core does not define it, keeping interface filtering safe on 1.3
