@@ -17,7 +17,7 @@ sed -i \
 	-e "s/\$database_password *=.*/\$database_password = 'mactrack-test';/" \
 	"$CACTI_PATH/include/config.php"
 
-test -f "$CACTI_PATH/plugins/mactrack/vendor/autoload.php"
+test -f "$CACTI_PATH/plugins/mactrack/Net/DNS2.php"
 
 # The plugin lifecycle does not need Cacti's optional device-template imports.
 # Explicitly skip them to keep this disposable install focused and fast enough

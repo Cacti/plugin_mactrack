@@ -29,23 +29,17 @@ utilization is, where there are errors, etc within their network.
 
 ## Prerequisites
 
-Mactrack requires Cacti 1.2.31 or later and PHP 8.2 for its supported runtime and toolchain.
+Mactrack requires Cacti 1.2.31 or later and PHP 8.1 or greater, matching the
+floor Cacti 1.2 itself requires.
 
 ## Installation
 
 Just like any Cacti plugin, untar the package to the Cacti plugins directory
-and rename the directory to `mactrack`. Install production dependencies before
-enabling the plugin:
+and rename the directory to `mactrack`. Then use Cacti's Plugin Management
+interface to install and enable Mactrack.
 
-```sh
-cd plugins/mactrack
-composer install --no-dev --optimize-autoloader
-```
-
-The plugin refuses to enable when its Composer dependencies are absent. This
-prevents asynchronous DNS resolution from failing later in the poller.
-
-Then use Cacti's Plugin Management interface to install and enable Mactrack.
+Net_DNS2 ships with the plugin under `Net/`, so there is nothing else to
+install.
 
 ## Documentation
 
