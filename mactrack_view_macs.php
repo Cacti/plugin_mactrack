@@ -410,9 +410,11 @@ function mactrack_view_macs_validate_request_vars() {
 			'options' => ['options' => 'sanitize_search_string']
 			],
 		'port_name_filter' => [
-			'filter'  => FILTER_CALLBACK,
+			// Port descriptions carry punctuation that sanitize_search_string()
+			// deletes, so an exact match on one could never succeed.  Every
+			// consumer below binds this through db_qstr().
+			'filter'  => FILTER_DEFAULT,
 			'default' => '',
-			'options' => ['options' => 'sanitize_search_string']
 			],
 		'scan_date' => [
 			'filter'  => FILTER_CALLBACK,
@@ -1341,7 +1343,9 @@ function mactrack_mac_filter() {
 				strURL += '&ip_filter_type_id=' + $('#ip_filter_type_id').val();
 				strURL += '&ip_filter=' + $('#ip_filter').val();
 				strURL += '&port_name_filter_type_id=' + $('#port_name_filter_type_id').val();
-				strURL += '&port_name_filter=' + $('#port_name_filter').val();
+				// Port descriptions carry '#' and '&', which truncate or extend the query
+				// string when concatenated raw.
+				strURL += '&port_name_filter=' + encodeURIComponent($('#port_name_filter').val());
 				strURL += '&scan_date=' + $('#scan_date').val();
 				strURL += '&authorized=' + $('#authorized').val();
 				strURL += '&vlan=' + $('#vlan').val();

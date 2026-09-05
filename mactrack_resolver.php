@@ -207,22 +207,30 @@ while (1) {
 
 			if ($use_resolver) {
 				try {
-					$resp         = $resolver->query($dns_hostname, 'PTR');
-					$dns_hostname = $resp->answer[0]->ptrdname;
-				} catch (Net_DNS2_Exception $e) {
-					$dns_hostname = gethostbyaddr($unresolved_ip['ip_address']);
+					$resp = $resolver->query($dns_hostname, 'PTR');
 
-					if ($dns_hostname === false) {
-						mactrack_debug('Unable to resolve IP Address: ' . $unresolved_ip['ip_address']);
-					}
+					// An address with no PTR record answers NOERROR with an empty
+					// answer section, so the record cannot be dereferenced blind.
+					$dns_hostname = isset($resp->answer[0]->ptrdname) ? $resp->answer[0]->ptrdname : '';
+				} catch (Net_DNS2_Exception $e) {
+					$dns_hostname = '';
+				}
+
+				if ($dns_hostname == '') {
+					$dns_hostname = gethostbyaddr($unresolved_ip['ip_address']);
 				}
 			} else {
 				$dns_hostname = gethostbyaddr($unresolved_ip['ip_address']);
+			}
 
-				if ($dns_hostname === false) {
-					$dns_hostname = $unresolved_ip['ip_address'];
-					mactrack_debug('Unable to resolve IP Address: ' . $unresolved_ip['ip_address']);
-				}
+			// gethostbyaddr() hands back the address unchanged when there is no PTR
+			// record, and false only for malformed input, so all three cases have to
+			// be tested to log the failure.  Storing the address itself also keeps
+			// the row out of the selection query above, which picks up every row
+			// with an empty dns_hostname.
+			if ($dns_hostname === false || $dns_hostname === '' || $dns_hostname === $unresolved_ip['ip_address']) {
+				$dns_hostname = $unresolved_ip['ip_address'];
+				mactrack_debug('Unable to resolve IP Address: ' . $unresolved_ip['ip_address']);
 			}
 
 			$unresolved_ips[$key]['dns_hostname'] = $dns_hostname;

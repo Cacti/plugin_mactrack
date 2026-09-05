@@ -2129,8 +2129,10 @@ function xform_net_address($ip_address) {
 function xform_mac_address($mac_address) {
 	$mac_address = trim((string) $mac_address);
 
+	// An interface with no hardware address stores an empty string, not the
+	// placeholder the dead branch below used to build and throw away.
 	if ($mac_address === '') {
-		return 'NOT USER';
+		return '';
 	}
 
 	if (strlen($mac_address) > 10) {
