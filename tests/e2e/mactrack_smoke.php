@@ -6,6 +6,8 @@
 */
 
 require_once __DIR__ . '/../../../../include/cli_check.php';
+
+set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/../..');
 require_once __DIR__ . '/../../Net/DNS2.php';
 
 $status = db_fetch_cell_prepared(

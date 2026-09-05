@@ -42,7 +42,15 @@ chdir($dir);
 
 include('../../include/cli_check.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
-require_once($config['base_path'] . '/plugins/mactrack/Net/DNS2.php');
+// Net_DNS2 autoloads its own classes with include paths relative to the library
+// root, so that root has to be reachable independently of the current directory.
+set_include_path(get_include_path() . PATH_SEPARATOR . $config['base_path'] . '/plugins/mactrack');
+
+$dns2 = $config['base_path'] . '/plugins/mactrack/Net/DNS2.php';
+
+if (is_file($dns2)) {
+	require_once($dns2);
+}
 
 if (!class_exists('Net_DNS2_Resolver')) {
 	fwrite(STDERR, "Mactrack is missing its bundled Net_DNS2 library.  Reinstall the plugin.\n");

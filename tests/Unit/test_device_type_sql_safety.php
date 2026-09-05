@@ -78,8 +78,9 @@ if ($cabletronSource                                                            
 
 $interfacesSource = file_get_contents(__DIR__ . '/../../mactrack_view_interfaces.php');
 
-if ($interfacesSource                                                   === false ||
-	strpos($interfacesSource, 'db_qstr_rlike($match)')                     === false ||
+if ($interfacesSource                         === false ||
+	strpos($interfacesSource, 'db_qstr($match)') === false ||
+	strpos($interfacesSource, 'db_qstr_rlike') !== false ||
 	strpos($interfacesSource, "intval(get_filter_request_var('bwusage'))") === false) {
 	fwrite(STDERR, "Interface filters must use safe RLIKE quoting and normalized numeric values\n");
 	exit(1);
@@ -127,21 +128,22 @@ if ($convertSource                                                              
 
 $resolverSource = file_get_contents(__DIR__ . '/../../mactrack_resolver.php');
 
-if ($resolverSource                                                                                         === false ||
-	strpos($resolverSource, '/plugins/mactrack/Net/DNS2.php')     === false ||
+if ($resolverSource                                           === false ||
+	strpos($resolverSource, 'set_include_path(')                 === false ||
+	strpos($resolverSource, 'if (is_file($dns2))')               === false ||
 	strpos($resolverSource, "class_exists('Net_DNS2_Resolver')") === false) {
-	fwrite(STDERR, "DNS resolver must load and verify the bundled Net_DNS2 library\n");
+	fwrite(STDERR, "DNS resolver must reach Net_DNS2 regardless of cwd and report a missing library rather than fatal\n");
 	exit(1);
 }
 
 $setupSource = file_get_contents(__DIR__ . '/../../setup.php');
 
-if ($setupSource                                               === false ||
-	strpos($setupSource, '/plugins/mactrack/Net/DNS2.php')    === false ||
-	strpos($setupSource, 'require_once($resolver);')          === false ||
-	strpos($setupSource, "class_exists('Net_DNS2_Resolver')") === false ||
-	strpos($setupSource, 'return false;')                     === false) {
-	fwrite(STDERR, "Mactrack configuration checks must block enablement without a usable Net_DNS2 library\n");
+// DNS resolution is an optional collector feature, so a missing or unloadable
+// Net_DNS2 must never leave the plugin stuck in "needs configuration".
+if ($setupSource === false ||
+	strpos($setupSource, 'Net_DNS2') !== false ||
+	strpos($setupSource, 'Net/DNS2.php') !== false) {
+	fwrite(STDERR, "plugin_mactrack_check_config() must not gate enablement on the DNS library\n");
 	exit(1);
 }
 

@@ -60,24 +60,6 @@ function plugin_mactrack_version() {
 }
 
 function plugin_mactrack_check_config() {
-	global $config;
-
-	$resolver = $config['base_path'] . '/plugins/mactrack/Net/DNS2.php';
-
-	if (!is_file($resolver)) {
-		cacti_log('ERROR: Mactrack is missing its bundled Net_DNS2 library.  Reinstall the plugin.', false, 'MACTRACK');
-
-		return false;
-	}
-
-	require_once($resolver);
-
-	if (!class_exists('Net_DNS2_Resolver')) {
-		cacti_log('ERROR: Mactrack could not load its bundled Net_DNS2 library.', false, 'MACTRACK');
-
-		return false;
-	}
-
 	// Here we will check to ensure everything is configured
 	mactrack_check_upgrade();
 
