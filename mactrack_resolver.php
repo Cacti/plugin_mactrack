@@ -53,7 +53,10 @@ if (is_file($dns2)) {
 }
 
 if (!class_exists('Net_DNS2_Resolver')) {
+	// The poller starts this script with exec_background(), so stderr goes nowhere.
+	cacti_log('ERROR: Mactrack is missing its bundled Net_DNS2 library.  Reinstall the plugin.', false, 'MACTRACK');
 	fwrite(STDERR, "Mactrack is missing its bundled Net_DNS2 library.  Reinstall the plugin.\n");
+
 	exit(1);
 }
 
