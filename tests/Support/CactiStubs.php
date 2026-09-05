@@ -34,9 +34,6 @@ function db_fetch_row_prepared($sql, array $params = []) {
 function db_qstr($value) {
 	return "''";
 }
-function db_qstr_rlike($value) {
-	return "RLIKE ''";
-}
 function read_config_option($name, $force = false) {
 	return '';
 }

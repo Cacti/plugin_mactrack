@@ -45,8 +45,12 @@ function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = '30') {
 		$match = '(Vlan|Loopback|Null)';
 		db_execute_prepared('REPLACE INTO settings SET name="mt_ignorePorts", value = ?', [$match]);
 	}
-	$ignore  = '(ifName NOT ' . db_qstr_rlike($match) . ' AND ifDescr NOT ' . db_qstr_rlike($match) . ')';
-	$bwusage = intval(get_filter_request_var('bwusage'));
+	// Quote the pattern but leave it intact.  Core's RLIKE helper strips |, { and }
+	// to bound backtracking, which would destroy the documented default of
+	// (Vlan|Loopback|Null) that this setting ships with.
+	$match_sql = db_qstr($match);
+	$ignore    = '(ifName NOT RLIKE ' . $match_sql . ' AND ifDescr NOT RLIKE ' . $match_sql . ')';
+	$bwusage   = intval(get_filter_request_var('bwusage'));
 
 	// issues sql where
 	if (get_request_var('issues') == '-2') { // All Interfaces
