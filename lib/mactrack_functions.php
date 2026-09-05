@@ -3822,4 +3822,7 @@ function mactrack_format_mac($mac) {
 
 		return implode('.', $items);
 	}
+
+	// An unset or unrecognised mt_mac_format must not blank the address out.
+	return $mac;
 }

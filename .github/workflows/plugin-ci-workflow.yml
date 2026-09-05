@@ -240,6 +240,18 @@ jobs:
           exit 1
         fi
     
+    # The e2e scripts need the live Cacti and database this job already built.
+    - name: Run plugin e2e tests
+      run: |
+        rc=0
+        for f in tests/e2e/*.php; do
+          [ -f "$f" ] || continue
+          printf '%s: ' "$f"
+          php "$f" || rc=1
+        done
+        exit $rc
+      working-directory: ${{ github.workspace }}/cacti/plugins/mactrack
+
     - name: View Cacti Logs
       if: always()
       run: |
