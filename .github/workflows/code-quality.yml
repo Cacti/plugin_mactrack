@@ -42,15 +42,26 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
 
-      # Lint only the plugin's own PHP. Vendored code (Net/, vendor/) is pruned
-      # so third-party sources never gate the plugin.
+      # Lint everything, vendored code included, so a corrupt import fails on
+      # arrival. php-cs-fixer and PHPStan still skip Net/, where reformatting
+      # would destroy the provenance recorded in Net/README.md.
       - name: Lint plugin PHP
         run: |
           find . -path ./.git -prune \
-            -o -path ./Net -prune \
-            -o -path ./vendor -prune \
             -o -name '*.php' -print0 \
           | xargs -0 -n1 -P4 php -l
+
+      # The standalone tests need no dependencies. Without this step the
+      # regression guards in tests/ are decorative.
+      - name: Run standalone tests
+        run: |
+          rc=0
+          for f in tests/Unit/*.php tests/Integration/*.php; do
+            [ -f "$f" ] || continue
+            printf '%s: ' "$f"
+            php "$f" || rc=1
+          done
+          exit $rc
 
   coding-standards:
     name: Coding standards

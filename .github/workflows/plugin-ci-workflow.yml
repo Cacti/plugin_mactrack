@@ -190,7 +190,7 @@ jobs:
     - name: Check PHP Syntax for Plugin
       run: |
         cd ${{ github.workspace }}/cacti/plugins/mactrack
-        find . -path './vendor' -prune -o -path './Net' -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l
+        find . -path './vendor' -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l
 
     # Cacti 1.2.31 has no .phpstan.neon / lint scripts; only touch them when present.
     - name: Remove the plugins directory exclusion from the .phpstan.neon
@@ -240,6 +240,18 @@ jobs:
           exit 1
         fi
     
+    # The e2e scripts need the live Cacti and database this job already built.
+    - name: Run plugin e2e tests
+      run: |
+        rc=0
+        for f in tests/e2e/*.php; do
+          [ -f "$f" ] || continue
+          printf '%s: ' "$f"
+          php "$f" || rc=1
+        done
+        exit $rc
+      working-directory: ${{ github.workspace }}/cacti/plugins/mactrack
+
     - name: View Cacti Logs
       if: always()
       run: |
