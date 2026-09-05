@@ -223,10 +223,12 @@ while (1) {
 				$dns_hostname = gethostbyaddr($unresolved_ip['ip_address']);
 			}
 
-			// Falling back to the address itself matters: the selection query above
-			// picks up every row with an empty dns_hostname, so leaving it empty
-			// re-queries the same unresolvable address on every pass.
-			if ($dns_hostname === false || $dns_hostname == '') {
+			// gethostbyaddr() hands back the address unchanged when there is no PTR
+			// record, and false only for malformed input, so all three cases have to
+			// be tested to log the failure.  Storing the address itself also keeps
+			// the row out of the selection query above, which picks up every row
+			// with an empty dns_hostname.
+			if ($dns_hostname === false || $dns_hostname === '' || $dns_hostname === $unresolved_ip['ip_address']) {
 				$dns_hostname = $unresolved_ip['ip_address'];
 				mactrack_debug('Unable to resolve IP Address: ' . $unresolved_ip['ip_address']);
 			}

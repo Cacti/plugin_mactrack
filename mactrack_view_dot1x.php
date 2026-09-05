@@ -742,7 +742,9 @@ function mactrack_dot1x_filter() {
 				strURL += '&ip_filter_type_id=' + $('#ip_filter_type_id').val();
 				strURL += '&ip_filter=' + $('#ip_filter').val();
 				strURL += '&port_name_filter_type_id=' + $('#port_name_filter_type_id').val();
-				strURL += '&port_name_filter=' + $('#port_name_filter').val();
+				// Port descriptions carry '#' and '&', which truncate or extend the query
+				// string when concatenated raw.
+				strURL += '&port_name_filter=' + encodeURIComponent($('#port_name_filter').val());
 				strURL += '&scan_date=' + $('#scan_date').val();
 				strURL += '&domain=' + $('#domain').val();
 				strURL += '&status=' + $('#status').val();

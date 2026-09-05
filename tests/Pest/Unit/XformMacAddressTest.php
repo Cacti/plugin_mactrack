@@ -5,61 +5,52 @@
  +-------------------------------------------------------------------------+
 */
 
-// Mirror of xform_mac_address() for unit testing without loading full Cacti.
-function test_xform_mac_address($mac_address) {
-	$mac_address = trim((string) $mac_address);
+/*
+ * These exercise the real xform_mac_address(). An earlier version of this file
+ * carried a hand-copied mirror of the function, which kept passing after the
+ * production behaviour changed and certified the old contract instead of the
+ * new one. The function touches neither the database nor settings, so it can be
+ * exercised directly.
+ */
 
-	if ($mac_address === '') {
-		return 'NOT USER';
-	}
+// tests/bootstrap.php is loaded by PHPUnit before any test file and declares
+// the Cacti helpers behind function_exists() guards, so nothing else is needed
+// here.  Support/CactiStubs.php is a Psalm stub, declares the same names
+// unguarded, and fatals the whole suite if it is loaded at runtime.
+require_once dirname(__DIR__, 3) . '/lib/mactrack_functions.php';
 
-	if (strlen($mac_address) > 10) {
-		$mac_address = str_replace(
-			['HEX-00:', 'HEX-:', 'HEX-', '"', ' ', '-'],
-			['',        '',      '',     '',  ':', ':'],
-			$mac_address
-		);
-	} else {
-		$mac = '';
+test('an interface with no hardware address stays empty', function ($input) {
+	// mac_track_interfaces.ifPhysAddress is a MAC column. A VLAN SVI, loopback
+	// or tunnel reports an empty address and must not pick up a placeholder.
+	expect(xform_mac_address($input))->toBe('');
+})->with([
+	[''],
+	['   '],
+	[null],
+]);
 
-		for ($j = 0; $j < strlen($mac_address); $j++) {
-			$mac .= bin2hex($mac_address[$j]) . ':';
-		}
+test('ASCII and HEX- forms strip delimiters', function ($input) {
+	expect(xform_mac_address($input))->toBe('AABBCCDDEEFF');
+})->with([
+	['aa-bb-cc-dd-ee-ff'],
+	['HEX-00:aa:bb:cc:dd:ee:ff'],
+	['aa:bb:cc:dd:ee:ff'],
+	['AA:BB:CC:DD:EE:FF'],
+]);
 
-		$mac_address = $mac;
-	}
-
-	$mac_address = str_replace(':', '', $mac_address);
-
-	return strtoupper($mac_address);
-}
-
-test('empty MAC becomes NOT USER', function () {
-	expect(test_xform_mac_address(''))->toBe('NOT USER');
-	expect(test_xform_mac_address('   '))->toBe('NOT USER');
+test('binary hex bytes convert to an uppercase hex string', function () {
+	expect(xform_mac_address(hex2bin('aabbccddeeff')))->toBe('AABBCCDDEEFF');
 });
 
-test('ASCII and HEX- forms strip delimiters', function () {
-	expect(test_xform_mac_address('aa-bb-cc-dd-ee-ff'))->toBe('AABBCCDDEEFF');
-	expect(test_xform_mac_address('HEX-00:aa:bb:cc:dd:ee:ff'))->toBe('AABBCCDDEEFF');
-	expect(test_xform_mac_address('aa:bb:cc:dd:ee:ff'))->toBe('AABBCCDDEEFF');
-});
-
-test('binary hex bytes convert to uppercase hex string', function () {
-	$binary = hex2bin('aabbccddeeff');
-	expect(test_xform_mac_address($binary))->toBe('AABBCCDDEEFF');
-});
-
-test('production xform_mac_address keeps a single working variable', function () {
-	$src = file_get_contents(dirname(__DIR__, 3) . '/lib/mactrack_functions.php');
-	// The max_address typo path must not reappear.
-	expect($src)->not->toContain("str_replace(':', '', \$max_address)");
-	expect($src)->toContain("str_replace(':', '', \$mac_address)");
-	expect($src)->toContain("return 'NOT USER'");
+test('the transformed value is returned, not the trimmed input', function () {
+	// The historical $max_address typo discarded the transform and returned the
+	// input instead. Any of the cases above would catch it; this states it.
+	expect(xform_mac_address(' aa-bb-cc-dd-ee-ff '))->toBe('AABBCCDDEEFF');
 });
 
 test('macauth schedule persists last-run time', function () {
 	$src = file_get_contents(dirname(__DIR__, 3) . '/poller_mactrack.php');
+
 	expect($src)->toContain("set_config_option('mt_last_macauth_time'");
 	expect($src)->toContain('$last_macauth_time + ($mac_auth_frequency * 60) < time()');
 });

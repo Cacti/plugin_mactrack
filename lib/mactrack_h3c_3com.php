@@ -417,10 +417,12 @@ function get_h3c_3com_arp_table($site, &$device) {
 
 	if (cacti_sizeof($atifIndexes)) {
 		foreach ($atifIndexes as $key => $atifIndex) {
-			$tmpmac = xform_mac_address($mac_address[$key]);
+			// The two walks are keyed independently, so this index can be absent.
+			// An empty MAC is the column default, so it must not be looked up.
+			$tmpmac = xform_mac_address($mac_address[$key] ?? '');
 
-			$port = db_fetch_cell_prepared('SELECT port_number FROM mac_track_ports 
-				WHERE mac_address=? ORDER BY scan_date DESC LIMIT 1', [$tmpmac]);
+			$port = $tmpmac !== '' ? db_fetch_cell_prepared('SELECT port_number FROM mac_track_ports 
+				WHERE mac_address=? ORDER BY scan_date DESC LIMIT 1', [$tmpmac]) : false;
 
 			if ($port) {
 				$atEntries[$i]['atifIndex'] = $port;
