@@ -410,9 +410,11 @@ function mactrack_view_macs_validate_request_vars() {
 			'options' => ['options' => 'sanitize_search_string']
 			],
 		'port_name_filter' => [
-			'filter'  => FILTER_CALLBACK,
+			// Port descriptions carry punctuation that sanitize_search_string()
+			// deletes, so an exact match on one could never succeed.  Every
+			// consumer below binds this through db_qstr().
+			'filter'  => FILTER_DEFAULT,
 			'default' => '',
-			'options' => ['options' => 'sanitize_search_string']
 			],
 		'scan_date' => [
 			'filter'  => FILTER_CALLBACK,
