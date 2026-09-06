@@ -13,6 +13,7 @@
  */
 
 $GLOBALS['__test_db_calls'] = [];
+$GLOBALS['__test_db_fetch_cell_result'] = '';
 
 if (!function_exists('db_execute')) {
 	function db_execute($sql) {
@@ -62,7 +63,9 @@ if (!function_exists('db_fetch_cell')) {
 
 if (!function_exists('db_fetch_cell_prepared')) {
 	function db_fetch_cell_prepared($sql, $params = []) {
-		return '';
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'db_fetch_cell_prepared', 'sql' => $sql, 'params' => $params];
+
+		return $GLOBALS['__test_db_fetch_cell_result'];
 	}
 }
 

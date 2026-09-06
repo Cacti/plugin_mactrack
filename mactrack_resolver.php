@@ -42,6 +42,7 @@ chdir($dir);
 
 include('../../include/cli_check.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_dns_resolution.php');
 require_once $config['base_path'] . '/plugins/mactrack/vendor/autoload.php';
 
 if (!class_exists('Net_DNS2_Resolver')) {
@@ -203,26 +204,10 @@ while (1) {
 		mactrack_debug(cacti_sizeof($unresolved_ips) . ' IP\'s require resolving this pass');
 
 		foreach ($unresolved_ips as $key => $unresolved_ip) {
-			$dns_hostname = $unresolved_ip['ip_address'];
+			$dns_hostname = mactrack_resolve_hostname($resolver, $use_resolver, $unresolved_ip['ip_address']);
 
-			if ($use_resolver) {
-				try {
-					$resp         = $resolver->query($dns_hostname, 'PTR');
-					$dns_hostname = $resp->answer[0]->ptrdname;
-				} catch (Net_DNS2_Exception $e) {
-					$dns_hostname = gethostbyaddr($unresolved_ip['ip_address']);
-
-					if ($dns_hostname === false) {
-						mactrack_debug('Unable to resolve IP Address: ' . $unresolved_ip['ip_address']);
-					}
-				}
-			} else {
-				$dns_hostname = gethostbyaddr($unresolved_ip['ip_address']);
-
-				if ($dns_hostname === false) {
-					$dns_hostname = $unresolved_ip['ip_address'];
-					mactrack_debug('Unable to resolve IP Address: ' . $unresolved_ip['ip_address']);
-				}
+			if ($dns_hostname === $unresolved_ip['ip_address']) {
+				mactrack_debug('Unable to resolve IP Address: ' . $unresolved_ip['ip_address']);
 			}
 
 			$unresolved_ips[$key]['dns_hostname'] = $dns_hostname;

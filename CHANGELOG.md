@@ -2,6 +2,9 @@
 
 --- develop ---
 
+* issue#349: Keep punctuation in the port name filter
+* issue#350: Leave an empty hardware address empty
+* issue#353: Stop re-querying addresses that have no PTR record
 * compat: Replace vendored Net_DNS2 with Composer-managed mikepultz/netdns2 1.5, retaining the established resolver API
 * issue: Harden device-type vendor filtering against SQL injection
 * issue: Validate aggregated MAC bulk-action IDs and use prepared deletion SQL

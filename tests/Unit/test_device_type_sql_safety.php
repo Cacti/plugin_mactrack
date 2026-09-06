@@ -120,7 +120,7 @@ $dot1xSource   = file_get_contents(__DIR__ . '/../../mactrack_view_dot1x.php');
 if ($convertSource                                                                                          === false || $arpSource === false || $dot1xSource === false ||
 	strpos($convertSource, 'mactrack_create_partitioned_table($engine, $charset, $collate, $days, true)')      === false ||
 	strpos($arpSource, 'function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true)')      === false ||
-	strpos($dot1xSource, 'function mactrack_view_get_dot1x_records(&$sql_where, $rows, $apply_limits = true)') === false) {
+	strpos($dot1xSource, 'function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $apply_limits = true)') === false) {
 	fwrite(STDERR, "Cacti 1.2.31 PHP 8 compatibility signatures must preserve argument order\n");
 	exit(1);
 }
