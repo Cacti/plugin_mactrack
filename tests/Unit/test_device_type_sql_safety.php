@@ -1,22 +1,30 @@
 <?php
+
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
  +-------------------------------------------------------------------------+
 */
 
+$assertions = 0;
 $source = file_get_contents(__DIR__ . '/../../mactrack_device_types.php');
 
+$assertions++;
 if ($source === false) {
 	fwrite(STDERR, "Unable to read mactrack_device_types.php\n");
 	exit(1);
 }
 
+$assertions++;
 if (strpos($source, "(mtdt.vendor='\" . get_request_var('vendor')") !== false) {
 	fwrite(STDERR, "Device-type vendor filter must not concatenate request input into SQL\n");
 	exit(1);
 }
 
+$assertions++;
 if (strpos($source, "mtdt.vendor = ' . db_qstr(get_request_var('vendor'))") === false) {
 	fwrite(STDERR, "Device-type vendor filter must use Cacti SQL quoting\n");
 	exit(1);
@@ -24,17 +32,20 @@ if (strpos($source, "mtdt.vendor = ' . db_qstr(get_request_var('vendor'))") === 
 
 $macSource = file_get_contents(__DIR__ . '/../../mactrack_view_macs.php');
 
+$assertions++;
 if ($macSource === false) {
 	fwrite(STDERR, "Unable to read mactrack_view_macs.php\n");
 	exit(1);
 }
 
+$assertions++;
 if (strpos($macSource, 'function mactrack_normalize_ids(array $ids): array')                         === false ||
 	strpos($macSource, "db_execute_prepared('DELETE FROM mac_track_aggregated_ports WHERE row_id IN('") === false) {
 	fwrite(STDERR, "Aggregated MAC deletion must normalize IDs and use prepared SQL\n");
 	exit(1);
 }
 
+$assertions++;
 if (strpos($macSource, "unserialize(get_nfilter_request_var('selected_items')") !== false ||
 	strpos($macSource, "json_decode(get_nfilter_request_var('selected_items'), true)") === false ||
 	strpos($macSource, 'html_escape(json_encode($mac_address_array))')                 === false) {
@@ -42,6 +53,7 @@ if (strpos($macSource, "unserialize(get_nfilter_request_var('selected_items')") 
 	exit(1);
 }
 
+$assertions++;
 if (strpos($macSource, "sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'))") !== false ||
 	strpos($macSource, 'html_escape(json_encode($row_array))')                === false ||
 	strpos($macSource, "html_escape((string) get_request_var('drp_action'))") === false) {
@@ -51,6 +63,7 @@ if (strpos($macSource, "sanitize_unserialize_selected_items(get_nfilter_request_
 
 $functionsSource = file_get_contents(__DIR__ . '/../../lib/mactrack_functions.php');
 
+$assertions++;
 if ($functionsSource                                                                     === false ||
 	strpos($functionsSource, "cacti_escapeshellcmd(read_config_option('path_php_binary'))") === false ||
 	strpos($functionsSource, 'cacti_escapeshellarg($command_string)')                       === false) {
@@ -60,6 +73,7 @@ if ($functionsSource                                                            
 
 $pollerSource = file_get_contents(__DIR__ . '/../../poller_mactrack.php');
 
+$assertions++;
 if ($pollerSource                                   === false ||
 	strpos($pollerSource, 'site_id = ?')               === false ||
 	strpos($pollerSource, "intval(\$p['process_id'])") === false) {
@@ -69,6 +83,7 @@ if ($pollerSource                                   === false ||
 
 $cabletronSource = file_get_contents(__DIR__ . '/../../lib/mactrack_cabletron.php');
 
+$assertions++;
 if ($cabletronSource                                                                                              === false ||
 	strpos($cabletronSource, "cacti_escapeshellcmd(read_config_option('path_snmpgetnext'))")                         === false ||
 	strpos($cabletronSource, 'cacti_escapeshellarg($device[\'hostname\'] . \':\' . intval($device[\'snmp_port\']))') === false) {
@@ -78,6 +93,7 @@ if ($cabletronSource                                                            
 
 $interfacesSource = file_get_contents(__DIR__ . '/../../mactrack_view_interfaces.php');
 
+$assertions++;
 if ($interfacesSource                                                   === false ||
 	strpos($interfacesSource, 'db_qstr_rlike($match)')                     === false ||
 	strpos($interfacesSource, "intval(get_filter_request_var('bwusage'))") === false) {
@@ -87,6 +103,7 @@ if ($interfacesSource                                                   === fals
 
 $devicesSource = file_get_contents(__DIR__ . '/../../mactrack_view_devices.php');
 
+$assertions++;
 if ($devicesSource                                                   === false ||
 	strpos($devicesSource, "intval(get_filter_request_var('status'))")  === false ||
 	strpos($devicesSource, "intval(get_filter_request_var('site_id'))") === false) {
@@ -96,6 +113,7 @@ if ($devicesSource                                                   === false |
 
 $adminDevicesSource = file_get_contents(__DIR__ . '/../../mactrack_devices.php');
 
+$assertions++;
 if ($adminDevicesSource                                                   === false ||
 	strpos($adminDevicesSource, "intval(get_filter_request_var('status'))")  === false ||
 	strpos($adminDevicesSource, "intval(get_filter_request_var('site_id'))") === false) {
@@ -105,6 +123,7 @@ if ($adminDevicesSource                                                   === fa
 
 $ouiImportSource = file_get_contents(__DIR__ . '/../../mactrack_import_ouidb.php');
 
+$assertions++;
 if ($ouiImportSource                                                                   === false ||
 	strpos($ouiImportSource, 'function mactrack_validate_oui_file(string $path): string') === false ||
 	strpos($ouiImportSource, 'is_file($resolved)')                                        === false ||
@@ -117,6 +136,7 @@ $convertSource = file_get_contents(__DIR__ . '/../../mactrack_convert.php');
 $arpSource     = file_get_contents(__DIR__ . '/../../mactrack_view_arp.php');
 $dot1xSource   = file_get_contents(__DIR__ . '/../../mactrack_view_dot1x.php');
 
+$assertions++;
 if ($convertSource                                                                                          === false || $arpSource === false || $dot1xSource === false ||
 	strpos($convertSource, 'mactrack_create_partitioned_table($engine, $charset, $collate, $days, true)')      === false ||
 	strpos($arpSource, 'function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true)')      === false ||
@@ -127,6 +147,7 @@ if ($convertSource                                                              
 
 $resolverSource = file_get_contents(__DIR__ . '/../../mactrack_resolver.php');
 
+$assertions++;
 if ($resolverSource                                                                                         === false ||
 	strpos($resolverSource, 'require_once $config[\'base_path\'] . \'/plugins/mactrack/vendor/autoload.php\'') === false ||
 	strpos($resolverSource, "class_exists('Net_DNS2_Resolver')")                                               === false) {
@@ -136,6 +157,7 @@ if ($resolverSource                                                             
 
 $setupSource = file_get_contents(__DIR__ . '/../../setup.php');
 
+$assertions++;
 if ($setupSource                                               === false ||
 	strpos($setupSource, '/plugins/mactrack/vendor/autoload.php') === false ||
 	strpos($setupSource, 'require_once $autoload;')               === false ||
@@ -145,4 +167,4 @@ if ($setupSource                                               === false ||
 	exit(1);
 }
 
-print "OK\n";
+print "MacTrack security contracts: $assertions assertions passed\n";

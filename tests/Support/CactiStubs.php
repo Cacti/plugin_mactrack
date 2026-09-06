@@ -1,4 +1,8 @@
 <?php
+
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
 // Cacti 1.2.31 API declarations used only by static analysis.
 
 function __($text, ...$args) {
@@ -46,8 +50,8 @@ function set_config_option($name, $value) {
 function get_request_var($name, $default = null) {
 	return $default;
 }
-function get_filter_request_var($name, $default = null) {
-	return $default;
+function get_filter_request_var($name, $filter = FILTER_VALIDATE_INT, $options = []) {
+	return null;
 }
 function get_nfilter_request_var($name, $default = null) {
 	return $default;

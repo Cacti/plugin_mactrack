@@ -710,13 +710,138 @@ function mactrack_database_upgrade() {
 		db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(vendor_mac, ':', '')");
 	}
 
-	// default site must exist
-	if (!db_fetch_cell('SELECT count(*) FROM mac_track_sites')) {
-		db_execute("INSERT INTO mac_track_sites (site_name, site_info) VALUES ('Default','Default site')");
+	mactrack_ensure_default_site();
+}
+
+function mactrack_site_configuration_exists(): bool {
+	$site_count = db_fetch_cell_prepared('SELECT COUNT(*) FROM mac_track_sites');
+
+	return is_numeric($site_count) && (int) $site_count > 0;
+}
+
+function mactrack_seed_default_site(?int $lock_timeout = null): bool {
+	global $database_default;
+
+	if (mactrack_site_configuration_exists()) {
+		return true;
+	}
+
+	$lock_timeout = $lock_timeout ?? (PHP_SAPI === 'cli' ? 10 : 2);
+	$lock_timeout = max(0, $lock_timeout);
+	// This advisory lock improves the legacy check-then-insert behavior, but a
+	// reconnect can release it. Database-enforced name uniqueness needs the
+	// duplicate-safe legacy migration tracked in #360.
+	$lock_name = 'mactrack.default.' . sha1((string) $database_default);
+	$locked    = db_fetch_cell_prepared('SELECT GET_LOCK(?, ?)', [$lock_name, $lock_timeout]);
+
+	if ((string) $locked !== '1') {
+		if (mactrack_site_configuration_exists()) {
+			return true;
+		}
+
+		cacti_log('Unable to acquire the MacTrack Default-site setup lock', false, 'MACTRACK');
+
+		return false;
+	}
+
+	try {
+		$inserted = (bool) db_execute_prepared(
+			'INSERT INTO mac_track_sites (site_name, site_info)
+			SELECT ?, ? FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM mac_track_sites)',
+			['Default', 'Default site']
+		);
+
+		if (mactrack_site_configuration_exists()) {
+			return true;
+		}
+
+		cacti_log($inserted ? 'MacTrack site seeding completed without creating a site' : 'Unable to insert the default MacTrack site', false, 'MACTRACK');
+
+		return false;
+	} finally {
+		$released = db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [$lock_name]);
+
+		if ((string) $released !== '1') {
+			cacti_log('MacTrack Default-site setup lock was not owned when release was attempted', false, 'MACTRACK');
+		}
 	}
 }
 
-function mactrack_setup_database() {
+function mactrack_reset_default_site_retry(): void {
+	set_config_option('mt_default_site_seed_pending', 'off');
+	set_config_option('mt_default_site_seed_attempts', '0');
+	set_config_option('mt_default_site_seed_next_retry', '0');
+}
+
+function mactrack_raise_default_site_error(int $attempts): void {
+	if ($attempts >= 5) {
+		$message = __('MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing.', 'mactrack');
+	} else {
+		$message = __('MacTrack could not initialize its Default site. Review the Cacti log before continuing.', 'mactrack');
+	}
+
+	raise_message('mactrack_default_site_seed_failed', $message, MESSAGE_LEVEL_ERROR);
+}
+
+function mactrack_ensure_default_site(?bool $notify_operator = null, bool $notify_immediately = false): bool {
+	$notify_operator = $notify_operator ?? (PHP_SAPI !== 'cli');
+	$pending = read_config_option('mt_default_site_seed_pending', true) === 'on';
+	$attempts = max(0, (int) read_config_option('mt_default_site_seed_attempts', true));
+	$next_retry = max(0, (int) read_config_option('mt_default_site_seed_next_retry', true));
+
+	if ($pending && $next_retry > time()) {
+		// Another request or an administrator may have repaired the site while
+		// this worker was throttled. Clear stale retry state without taking the
+		// seed lock or attempting another insert.
+		if (mactrack_site_configuration_exists()) {
+			mactrack_reset_default_site_retry();
+
+			return true;
+		}
+
+		if ($notify_operator && ($notify_immediately || $attempts >= 5)) {
+			mactrack_raise_default_site_error($attempts);
+		}
+
+		return false;
+	}
+
+	try {
+		$seeded = mactrack_seed_default_site();
+	} catch (Throwable $exception) {
+		cacti_log('MacTrack Default-site initialization failed: ' . $exception->getMessage(), false, 'MACTRACK');
+		$seeded = false;
+	}
+
+	if ($seeded) {
+		mactrack_reset_default_site_retry();
+
+		return true;
+	}
+
+	$retry_delays = [60, 300, 900, 1800, 3600];
+	$attempts = min(5, $attempts + 1);
+	$delay = $retry_delays[$attempts - 1];
+	set_config_option('mt_default_site_seed_pending', 'on');
+	set_config_option('mt_default_site_seed_attempts', (string) $attempts);
+	set_config_option('mt_default_site_seed_next_retry', (string) (time() + $delay));
+
+	if ($notify_operator && ($notify_immediately || $attempts >= 5)) {
+		mactrack_raise_default_site_error($attempts);
+	}
+
+	return false;
+}
+
+function mactrack_retry_default_site(): bool {
+	if (read_config_option('mt_default_site_seed_pending', true) !== 'on') {
+		return true;
+	}
+
+	return mactrack_ensure_default_site();
+}
+
+function mactrack_setup_database(bool $notify_seed_failure = false) {
 	$data                  = [];
 	$data['columns'][]     = ['name' => 'row_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
 	$data['columns'][]     = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
@@ -1121,9 +1246,6 @@ function mactrack_setup_database() {
 	$data['comment']   = '';
 	api_plugin_db_table_create('mactrack', 'mac_track_sites', $data);
 
-	// default site must exist
-	db_execute("INSERT INTO mac_track_sites (site_name, site_info) VALUES ('Default','Default site')");
-
 	$data              = [];
 	$data['columns'][] = ['name' => 'id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
 	$data['columns'][] = ['name' => 'name', 'type' => 'varchar(100)', 'NULL' => false, 'default' => ''];
@@ -1380,4 +1502,7 @@ function mactrack_setup_database() {
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('92xx Switch-default','Cisco','1','*CAT9K_LITE_IOSXE*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
 	}
+
+	// Seed only after the complete schema and built-in device types exist.
+	return mactrack_ensure_default_site($notify_seed_failure, $notify_seed_failure);
 }

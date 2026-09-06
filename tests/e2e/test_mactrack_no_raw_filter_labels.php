@@ -1,4 +1,8 @@
 <?php
+
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
@@ -16,9 +20,11 @@ $checks = [
 		". '>' . \$type['vendor'] . '</option>';",
 	],
 ];
+$assertions = 0;
 
 foreach ($checks as $path => $patterns) {
 	$contents = file_get_contents($path);
+	$assertions++;
 
 	if ($contents === false) {
 		fwrite(STDERR, "Unable to read {$path}\n");
@@ -26,6 +32,8 @@ foreach ($checks as $path => $patterns) {
 	}
 
 	foreach ($patterns as $pattern) {
+		$assertions++;
+
 		if (strpos($contents, $pattern) !== false) {
 			fwrite(STDERR, "Raw filter label output remains: {$pattern}\n");
 			exit(1);
@@ -33,4 +41,4 @@ foreach ($checks as $path => $patterns) {
 	}
 }
 
-print "OK\n";
+print "Rendered filter labels: $assertions assertions passed\n";

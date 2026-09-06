@@ -53,6 +53,28 @@ Some basic documentation and steps to follow as well as some troubleshooting
 tips you can find on the [MacTrack
 Wiki](https://github.com/Cacti/plugin_mactrack/wiki)!
 
+## Testing
+
+The standalone suite runs without Composer and groups the fast checks by scope:
+
+```sh
+php tests/run.php all
+php tests/run.php unit integration security e2e-static
+```
+
+The clean-install integration test installs Cacti and MacTrack in disposable
+Docker containers, validates the plugin lifecycle and database schema, and
+loads a real MacTrack page:
+
+```sh
+CACTI_SOURCE=/path/to/cacti \
+	MACTRACK_SOURCE="$PWD" \
+	bash tests/e2e/run-mactrack-e2e.sh
+```
+
+Pull requests run the standalone suite across the PHP CI matrix and the
+clean-install Docker test against the minimum supported Cacti release.
+
 ## Workflow
 
 Configure mactrack - Console -> Settings -> Mactrack tab

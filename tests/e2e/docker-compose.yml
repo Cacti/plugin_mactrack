@@ -1,19 +1,22 @@
 services:
   db:
-    image: mariadb:10.11
+    image: ${DB_IMAGE:-mariadb:10.11}
     environment:
       MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-mactrack-test-root}
-      MARIADB_DATABASE: ${DB_NAME:-cacti}
+      MARIADB_DATABASE: ${DB_NAME:-mactrack_e2e}
       MARIADB_USER: ${DB_USER:-cacti}
       MARIADB_PASSWORD: ${DB_PASSWORD:-mactrack-test}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-mactrack-test-root}
+      MYSQL_DATABASE: ${DB_NAME:-mactrack_e2e}
+      MYSQL_USER: ${DB_USER:-cacti}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-mactrack-test}
       TZ: UTC
-    volumes:
-      - ${CACTI_SOURCE:?Set CACTI_SOURCE to a Cacti checkout}/cacti.sql:/docker-entrypoint-initdb.d/cacti.sql:ro
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
+      - --transaction-isolation=READ-COMMITTED
     healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      test: ["CMD-SHELL", 'MYSQL_PWD="$${MYSQL_PASSWORD}" mysql --protocol=tcp -h 127.0.0.1 --user="$${MYSQL_USER}" --execute="SELECT 1" --silent']
       interval: 5s
       timeout: 5s
       retries: 24
@@ -25,7 +28,7 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 3306
-      DB_NAME: ${DB_NAME:-cacti}
+      DB_NAME: ${DB_NAME:-mactrack_e2e}
       DB_USER: ${DB_USER:-cacti}
       DB_PASS: ${DB_PASSWORD:-mactrack-test}
       TIMEZONE: UTC

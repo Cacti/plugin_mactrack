@@ -1,4 +1,8 @@
 <?php
+
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
@@ -7,28 +11,22 @@
  +-------------------------------------------------------------------------+
 */
 
-// Verify setup.php defines required plugin hooks and info function.
+require_once __DIR__ . '/../Support/StandaloneTest.php';
 
-describe('mactrack setup.php structure', function () {
-	$source = file_get_contents(realpath(__DIR__ . '/../../setup.php'));
+$source = file_get_contents(realpath(__DIR__ . '/../../setup.php'));
+$contracts = [
+	'function plugin_mactrack_install',
+	'function plugin_mactrack_version',
+	'function plugin_mactrack_uninstall',
+	"parse_ini_file(\$config['base_path'] . '/plugins/mactrack/INFO', true)",
+	"return \$info['info']",
+	'mactrack_setup_table_new($operator_initiated)',
+	"mactrack_setup_database(PHP_SAPI !== 'cli')",
+	'plugin_mactrack_install(false)',
+];
 
-	it('defines plugin_mactrack_install function', function () use ($source) {
-		expect($source)->toContain('function plugin_mactrack_install');
-	});
+foreach ($contracts as $contract) {
+	MactrackStandaloneTest::assertContains($contract, $source, "setup.php contains $contract");
+}
 
-	it('defines plugin_mactrack_version function', function () use ($source) {
-		expect($source)->toContain('function plugin_mactrack_version');
-	});
-
-	it('defines plugin_mactrack_uninstall function', function () use ($source) {
-		expect($source)->toContain('function plugin_mactrack_uninstall');
-	});
-
-	it('returns version array with name key', function () use ($source) {
-		expect($source)->toMatch('/[\'\""]name[\'\""]\s*=>/');
-	});
-
-	it('returns version array with version key', function () use ($source) {
-		expect($source)->toMatch('/[\'\""]version[\'\""]\s*=>/');
-	});
-});
+MactrackStandaloneTest::finish('MacTrack setup structure');

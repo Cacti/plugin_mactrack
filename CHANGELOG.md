@@ -18,6 +18,7 @@
 * issue#246: Fix Cisco device collection
 * issue#248: Cacti process control, terminate dns resolvet when is nothing to do
 * issue#250: Disable automatic MIBs load
+* issue#357: Prevent repeated database setup from duplicating the Default site
 * issue: Uncaught type error in mactrack_view_arp.php for ifName
 * issue: Mactrack does not shutdown properly due to incorrect use of unregister_process
 * issue: Fixing some internationalization (i18n) issues
