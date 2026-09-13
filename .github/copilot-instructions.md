@@ -15,9 +15,12 @@ This is a Cacti plugin. It integrates with the Cacti monitoring platform via the
 - Use cacti_escapeshellarg() for ALL shell command arguments
 - No PHP 8.0+ features (str_contains, match, union types, named args) - target PHP 7.4
 - Use ?? and ??= operators (PHP 7.4) instead of isset() ternary patterns
-- All unserialize() calls must use allowed_classes => false
+- Metadata-only unserialize() calls must use `allowed_classes => false`;
+  object payloads must use a minimal explicit class allowlist and validate the
+  resulting type.
 
 ## Testing
-- Tests in tests/ directory
-- Use Pest PHP or PHPUnit
-- php -l lint check required before commit
+- Put executable standalone tests in `tests/Unit/` or `tests/Integration/`;
+  `.github/workflows/code-quality.yml` runs every PHP file in those directories.
+- Keep tests dependency-free so they run without Composer.
+- Run `php -l` before committing.

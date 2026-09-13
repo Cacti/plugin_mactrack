@@ -14,6 +14,10 @@ function db_execute($sql) {
 	return true;
 }
 function db_execute_prepared($sql, array $params = []) {
+	global $mactrack_test_db_calls;
+
+	$mactrack_test_db_calls[] = ['sql' => $sql, 'params' => $params];
+
 	return true;
 }
 function db_fetch_assoc($sql) {
@@ -34,13 +38,16 @@ function db_fetch_row_prepared($sql, array $params = []) {
 function db_qstr($value) {
 	return "''";
 }
-function db_qstr_rlike($value) {
-	return "RLIKE ''";
-}
 function read_config_option($name, $force = false) {
-	return '';
+	global $mactrack_test_config_options;
+
+	return $mactrack_test_config_options[$name] ?? '';
 }
 function set_config_option($name, $value) {
+	global $mactrack_test_config_options;
+
+	$mactrack_test_config_options[$name] = $value;
+
 	return true;
 }
 function get_request_var($name, $default = null) {

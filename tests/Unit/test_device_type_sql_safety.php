@@ -78,8 +78,12 @@ if ($cabletronSource                                                            
 
 $interfacesSource = file_get_contents(__DIR__ . '/../../mactrack_view_interfaces.php');
 
-if ($interfacesSource                                                   === false ||
-	strpos($interfacesSource, 'db_qstr_rlike($match)')                     === false ||
+if ($interfacesSource                         === false ||
+	strpos($interfacesSource, 'mactrack_get_ignore_ports_predicate($sql_params)') === false ||
+	strpos($interfacesSource, 'db_fetch_assoc_prepared($sql_query, $sql_params)') === false ||
+	strpos($interfacesSource, 'db_fetch_cell_prepared($rows_query_string, $sql_params)') === false ||
+	strpos($interfacesSource, 'db_qstr($match)') !== false ||
+	strpos($interfacesSource, 'db_qstr_rlike') !== false ||
 	strpos($interfacesSource, "intval(get_filter_request_var('bwusage'))") === false) {
 	fwrite(STDERR, "Interface filters must use safe RLIKE quoting and normalized numeric values\n");
 	exit(1);
@@ -116,8 +120,9 @@ if ($ouiImportSource                                                            
 $convertSource = file_get_contents(__DIR__ . '/../../mactrack_convert.php');
 $arpSource     = file_get_contents(__DIR__ . '/../../mactrack_view_arp.php');
 $dot1xSource   = file_get_contents(__DIR__ . '/../../mactrack_view_dot1x.php');
+$ajaxSource    = file_get_contents(__DIR__ . '/../../mactrack_ajax.php');
 
-if ($convertSource                                                                                          === false || $arpSource === false || $dot1xSource === false ||
+if ($convertSource                                                                                          === false || $arpSource === false || $dot1xSource === false || $ajaxSource === false ||
 	strpos($convertSource, 'mactrack_create_partitioned_table($engine, $charset, $collate, $days, true)')      === false ||
 	strpos($arpSource, 'function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true)')      === false ||
 	strpos($dot1xSource, 'function mactrack_view_get_dot1x_records(&$sql_where, $rows, $apply_limits = true)') === false) {
@@ -125,23 +130,31 @@ if ($convertSource                                                              
 	exit(1);
 }
 
+if (strpos($arpSource, 'mactrack_format_mac(') === false ||
+	strpos($arpSource, 'format_mac_address(') !== false ||
+	strpos($ajaxSource, 'mactrack_save_graph_settings') !== false) {
+	fwrite(STDERR, "ARP export and AJAX dispatch must not call undefined compatibility handlers\n");
+	exit(1);
+}
+
 $resolverSource = file_get_contents(__DIR__ . '/../../mactrack_resolver.php');
 
-if ($resolverSource                                                                                         === false ||
-	strpos($resolverSource, 'require_once $config[\'base_path\'] . \'/plugins/mactrack/vendor/autoload.php\'') === false ||
-	strpos($resolverSource, "class_exists('Net_DNS2_Resolver')")                                               === false) {
-	fwrite(STDERR, "DNS resolver must load and verify the Composer-managed NetDNS2 dependency\n");
+if ($resolverSource                                           === false ||
+	strpos($resolverSource, "'/plugins/mactrack' . PATH_SEPARATOR . get_include_path()") === false ||
+	strpos($resolverSource, 'if (is_file($dns2))')               === false ||
+	strpos($resolverSource, "class_exists('Net_DNS2_Resolver')") === false) {
+	fwrite(STDERR, "DNS resolver must reach Net_DNS2 regardless of cwd and report a missing library rather than fatal\n");
 	exit(1);
 }
 
 $setupSource = file_get_contents(__DIR__ . '/../../setup.php');
 
-if ($setupSource                                               === false ||
-	strpos($setupSource, '/plugins/mactrack/vendor/autoload.php') === false ||
-	strpos($setupSource, 'require_once $autoload;')               === false ||
-	strpos($setupSource, "class_exists('Net_DNS2_Resolver')")     === false ||
-	strpos($setupSource, 'return false;')                         === false) {
-	fwrite(STDERR, "Mactrack configuration checks must block enablement without a usable Composer dependency\n");
+// DNS resolution is an optional collector feature, so a missing or unloadable
+// Net_DNS2 must never leave the plugin stuck in "needs configuration".
+if ($setupSource === false ||
+	strpos($setupSource, 'Net_DNS2') !== false ||
+	strpos($setupSource, 'Net/DNS2.php') !== false) {
+	fwrite(STDERR, "plugin_mactrack_check_config() must not gate enablement on the DNS library\n");
 	exit(1);
 }
 
