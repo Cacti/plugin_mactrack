@@ -239,13 +239,13 @@ function mactrack_setup_table_new() {
 function mactrack_page_head() {
 	global $config;
 
-	print "<script type='text/javascript' src='" . $config['url_path'] . "plugins/mactrack/mactrack.js'></script>\n";
-	print "<script type='text/javascript' src='" . $config['url_path'] . "plugins/mactrack/mactrack_snmp.js'></script>\n";
+	print "<script type='text/javascript' src='" . $config['url_path'] . "plugins/mactrack/js/mactrack.js'></script>\n";
+	print "<script type='text/javascript' src='" . $config['url_path'] . "plugins/mactrack/js/mactrack_snmp.js'></script>\n";
 
 	if (file_exists($config['base_path'] . '/plugins/mactrack/themes/' . get_selected_theme() . '/mactrack.css')) {
 		print "<link type='text/css' href='" . $config['url_path'] . 'plugins/mactrack/themes/' . get_selected_theme() . "/mactrack.css' rel='stylesheet'>\n";
 	} else {
-		print "<link type='text/css' href='" . $config['url_path'] . "plugins/mactrack/mactrack.css' rel='stylesheet'>\n";
+		print "<link type='text/css' href='" . $config['url_path'] . "plugins/mactrack/css/mactrack.css' rel='stylesheet'>\n";
 	}
 }
 
