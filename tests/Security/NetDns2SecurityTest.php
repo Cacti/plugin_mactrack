@@ -14,6 +14,10 @@
  +-------------------------------------------------------------------------+
 */
 
+// Net_DNS2.php's own internal requires are include-path relative (see
+// mactrack_resolver.php), so Pest running from Cacti's root (not this
+// plugin's directory) needs the same include-path prefix production uses.
+set_include_path(realpath(__DIR__ . '/../..') . PATH_SEPARATOR . get_include_path());
 require_once __DIR__ . '/../../Net/DNS2.php';
 
 class MactrackNetDns2TestCache extends Net_DNS2_Cache {
