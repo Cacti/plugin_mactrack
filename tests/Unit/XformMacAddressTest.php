@@ -13,11 +13,11 @@
  * exercised directly.
  */
 
-// tests/bootstrap.php is loaded by PHPUnit before any test file and declares
-// the Cacti helpers behind function_exists() guards, so nothing else is needed
-// here.  Support/CactiStubs.php is a Psalm stub, declares the same names
-// unguarded, and fatals the whole suite if it is loaded at runtime.
-require_once dirname(__DIR__, 3) . '/lib/mactrack_functions.php';
+// tests/bootstrap-unit.php is loaded by PHPUnit before any test file and
+// declares the Cacti helpers behind function_exists() guards, so nothing else
+// is needed here. Support/CactiStubs.php is a Psalm stub, declares the same
+// names unguarded, and fatals the whole suite if it is loaded at runtime.
+require_once dirname(__DIR__, 2) . '/lib/mactrack_functions.php';
 
 test('an interface with no hardware address stays empty', function ($input) {
 	// mac_track_interfaces.ifPhysAddress is a MAC column. A VLAN SVI, loopback

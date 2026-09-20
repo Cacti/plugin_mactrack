@@ -5,7 +5,7 @@
  +-------------------------------------------------------------------------+
  */
 
-require_once dirname(__DIR__, 3) . '/lib/mactrack_functions.php';
+require_once dirname(__DIR__, 2) . '/lib/mactrack_functions.php';
 
 test('empty MAC addresses cannot become wildcard lookups', function () {
 	$GLOBALS['__test_db_calls'] = [];
