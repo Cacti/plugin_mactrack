@@ -13,6 +13,11 @@
  * classes, never arbitrary objects (PHP Object Injection hardening).
  */
 
+// Net_DNS2 autoloads its own classes with include paths relative to the
+// library root (see mactrack_resolver.php), so that root has to be reachable
+// independently of the current working directory Pest runs from.
+set_include_path(dirname(__DIR__, 2) . PATH_SEPARATOR . get_include_path());
+
 require_once dirname(__DIR__, 2) . '/Net/DNS2.php';
 
 class Mactrack_Net_DNS2_Test_Cache extends Net_DNS2_Cache {

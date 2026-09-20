@@ -139,6 +139,11 @@ jobs:
           sudo composer install --dev --no-progress
         fi
 
+    - name: Restore vendor ownership for Pest
+      run: |
+        cd ${{ github.workspace }}/cacti
+        sudo chown -R runner:runner include/vendor composer.lock
+
     - name: Create Cacti config.php
       run: |
         cat ${{ github.workspace }}/cacti/include/config.php.dist | \
