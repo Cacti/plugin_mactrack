@@ -7,6 +7,14 @@
 
 require_once dirname(__DIR__, 2) . '/lib/mactrack_dns_resolution.php';
 
+// mactrack_dns_resolution.php catches Net_DNS2_Exception, but only loads
+// lib/mactrack_dns_resolution.php above; production reaches the class via
+// mactrack_resolver.php's Net/DNS2.php require, which this standalone test
+// does not perform.
+if (!class_exists('Net_DNS2_Exception')) {
+	require_once dirname(__DIR__, 2) . '/Net/DNS2/Exception.php';
+}
+
 test('configured resolver returns a PTR without invoking fallback', function () {
 	$resolver = new class {
 		public function query($ip_address, $type) {
