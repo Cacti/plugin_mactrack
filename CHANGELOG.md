@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue#357: Prevent repeated database setup from duplicating the Default site
 * security: Restrict Net_DNS2 cache deserialization to DNS response classes
 * docs: Align the documented PHP floor with the PHP 7.4 compatibility contract
 * issue: Return the unformatted MAC when mt_mac_format is unset rather than a null address
