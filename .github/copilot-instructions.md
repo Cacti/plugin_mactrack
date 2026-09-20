@@ -4,7 +4,7 @@
 
 When generating code for this repository:
 
-1. **Version Compatibility**: This is a Cacti plugin (`mactrack`, "Device Tracking", version 4.9) targeting Cacti 1.2.14+; `tests/Security/Php74CompatibilityTest.php` guards `setup.php` against PHP 8.0+-only syntax as a legacy regression check.
+1. **Version Compatibility**: This is a Cacti plugin (`mactrack`, "Device Tracking", version 4.9) targeting Cacti 1.2.14+; `tests/Security/Php82CompatibilityTest.php` guards production sources against PHP 8.3+-only syntax as a regression check.
 2. **Context Files**: Prioritize patterns and standards defined in this file (`.github/copilot-instructions.md`)
 3. **Codebase Patterns**: When context files don't provide specific guidance, scan the codebase for established patterns
 4. **Architectural Consistency**: Maintain plugin-based architecture extending Cacti core
@@ -13,7 +13,7 @@ When generating code for this repository:
 ## Technology Stack
 
 ### Core Technologies
-- **PHP**: 7.4+ syntax floor (guarded by `tests/Security/Php74CompatibilityTest.php`); CI integration matrix runs against a pinned Cacti release
+- **PHP**: 8.2+ syntax floor (guarded by `tests/Security/Php82CompatibilityTest.php`); CI integration matrix runs PHP 8.2/8.3/8.4 against a pinned Cacti release
 - **Platform**: Cacti Plugin Architecture (Cacti 1.2.14+)
 - **Database**: MySQL/MariaDB via Cacti's DB abstraction layer
 - **SNMP**: Bulk MAC/ARP/interface/VLAN discovery via Cacti's SNMP library
@@ -97,7 +97,7 @@ Use `html_escape()` / `htmlspecialchars()` for ALL output of DB/user values in H
 Use `cacti_escapeshellarg()` for ALL shell command arguments.
 
 ### PHP Version Floor
-No PHP 8.0+ features (`str_contains()`, `match`, union types, named args) — target PHP 7.4. Use `??`/`??=` operators (PHP 7.4) instead of `isset()` ternary patterns.
+No PHP 8.3+ features (typed class constants, dynamic class constant fetch, the `#[Override]` attribute, `json_validate()`) — target PHP 8.2.
 
 ### Deserialization Safety
 Metadata-only `unserialize()` calls must use `allowed_classes => false`; object payloads must use a minimal explicit class allowlist and validate the resulting type.
@@ -120,11 +120,15 @@ Register hooks in `plugin_mactrack_install()` (`setup.php`), including `top_head
 
 ## Testing
 
-Put executable standalone tests in `tests/Unit/` or `tests/Integration/`; the code-quality workflow runs every PHP file in those directories. Keep tests dependency-free so they run without Composer. Run `php -l` before committing.
+Pest tests live under `tests/Security/`, `tests/Unit/`, and `tests/Integration/` in PascalCase
+(e.g. `MacFormattingTest.php`) and run via `phpunit.xml`/`tests/Pest.php`, bootstrapped by
+`tests/bootstrap-unit.php` against the Cacti core checked out alongside the plugin in CI.
+Standalone, dependency-free scripts belong in `tests/e2e/` and are invoked directly with `php`
+against a live install. Run `php -l` before committing.
 
 ## Best Practices
 
-1. Never introduce PHP 8.0+-only syntax; the 7.4 floor is enforced by a dedicated regression test.
+1. Never introduce PHP 8.3+-only syntax; the 8.2 floor is enforced by a dedicated regression test.
 2. Always use the `_prepared` DB helper variants for any query with variable input.
 3. Validate/allowlist classes for any `unserialize()` call.
 4. Wrap all user-facing strings with `__('text', 'mactrack')`.
@@ -132,11 +136,15 @@ Put executable standalone tests in `tests/Unit/` or `tests/Integration/`; the co
 ## Common Pitfalls to Avoid
 
 ```php
-// WRONG - PHP 8.0+ only syntax
-if (str_contains($haystack, $needle)) { }
+// WRONG - PHP 8.3+ only syntax
+class Foo {
+    const string BAR = 'baz';
+}
 
-// CORRECT - PHP 7.4-compatible
-if (strpos($haystack, $needle) !== false) { }
+// CORRECT - PHP 8.2-compatible
+class Foo {
+    const BAR = 'baz';
+}
 
 // WRONG - unsafe unserialize
 $data = unserialize($raw);

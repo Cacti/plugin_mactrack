@@ -47,7 +47,10 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 
 include('./include/cli_check.php');
 include_once($config['base_path'] . '/lib/poller.php');
+include_once($config['base_path'] . '/plugins/mactrack/includes/database.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+
+mactrack_retry_default_site();
 
 // install signal handlers for UNIX only
 if (function_exists('pcntl_signal')) {
