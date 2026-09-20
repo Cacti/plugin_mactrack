@@ -12,10 +12,10 @@
  * including a successful response with no PTR records. The system resolver is
  * only a fallback when the configured resolver cannot answer the query.
  *
- * @param mixed         $resolver
- * @param bool          $use_resolver
- * @param string        $ip_address
- * @param callable|null $system_resolver
+ * @param  mixed         $resolver
+ * @param  bool          $use_resolver
+ * @param  string        $ip_address
+ * @param  callable|null $system_resolver
  * @return string
  */
 function mactrack_resolve_hostname($resolver, $use_resolver, $ip_address, $system_resolver = null) {

@@ -2176,7 +2176,7 @@ function xform_mac_address($mac_address) {
  * Preserve printable port-description punctuation used by switches while
  * rejecting control characters and unbounded request values.
  *
- * @param mixed $value
+ * @param  mixed  $value
  * @return string
  */
 function mactrack_sanitize_port_name_filter($value) {
@@ -2188,9 +2188,9 @@ function mactrack_sanitize_port_name_filter($value) {
 /**
  * Build the parameterized port-name predicate used by viewer queries.
  *
- * @param string $column
- * @param int    $filter_type
- * @param string $value
+ * @param  string $column
+ * @param  int    $filter_type
+ * @param  string $value
  * @return array
  */
 function mactrack_port_name_filter_clause($column, $filter_type, $value) {

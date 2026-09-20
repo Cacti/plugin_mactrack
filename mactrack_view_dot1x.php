@@ -132,7 +132,7 @@ function mactrack_view_dot1x_validate_request_vars() {
 function mactrack_view_export_dot1x() {
 	mactrack_view_dot1x_validate_request_vars();
 
-	$sql_where = '';
+	$sql_where  = '';
 	$sql_params = [];
 
 	$port_results = mactrack_view_get_dot1x_records($sql_where, $sql_params, 0, false);
@@ -369,7 +369,7 @@ function mactrack_view_dot1x() {
 	mactrack_dot1x_filter();
 	html_end_box();
 
-	$sql_where = '';
+	$sql_where  = '';
 	$sql_params = [];
 
 	$rows = plugin_get_rows_per_page();

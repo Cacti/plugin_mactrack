@@ -438,7 +438,7 @@ function mactrack_view_macs_validate_request_vars() {
 function mactrack_view_export_macs() {
 	mactrack_view_macs_validate_request_vars();
 
-	$sql_where = '';
+	$sql_where  = '';
 	$sql_params = [];
 
 	$port_results = mactrack_view_get_mac_records($sql_where, $sql_params, 0, false);
@@ -476,6 +476,7 @@ function mactrack_view_export_macs() {
 
 function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_limits = true) {
 	$sql_params = [];
+
 	// form the 'where' clause for our main sql query
 	if (get_request_var('mac_filter') != '') {
 		$mac_filter = str_replace(':', '', get_request_var('mac_filter'));
@@ -670,7 +671,7 @@ function mactrack_view_macs() {
 	mactrack_mac_filter();
 	html_end_box();
 
-	$sql_where = '';
+	$sql_where  = '';
 	$sql_params = [];
 
 	$rows = plugin_get_rows_per_page();
@@ -876,7 +877,7 @@ function mactrack_view_aggregated_macs() {
 	mactrack_mac_filter();
 	html_end_box();
 
-	$sql_where = '';
+	$sql_where  = '';
 	$sql_params = [];
 
 	$rows = plugin_get_rows_per_page();
