@@ -72,7 +72,20 @@ final class IgnorePortsPatternTest extends TestCase {
 	 * @return void
 	 */
 	public function testInvalidPatternsFallBackToTheDefault($invalid): void {
-		$this->assertSame('(Vlan|Loopback|Null)', mactrack_validate_ignore_ports_pattern($invalid));
+		// A malformed pattern here deliberately makes preg_match() emit a
+		// compilation-failure E_WARNING; mactrack_validate_ignore_ports_pattern()
+		// already suppresses it with @, but PHPUnit's own error handler (this
+		// file's phpunit.xml sets failOnWarning="true") still turns it into a
+		// test failure unless we suspend it for the duration of this call.
+		set_error_handler(static function () {
+			return true;
+		}, E_WARNING);
+
+		try {
+			$this->assertSame('(Vlan|Loopback|Null)', mactrack_validate_ignore_ports_pattern($invalid));
+		} finally {
+			restore_error_handler();
+		}
 	}
 
 	/**

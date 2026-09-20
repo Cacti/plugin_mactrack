@@ -103,11 +103,7 @@ describe('PHP 8.2 compatibility in mactrack', function () {
 		}
 	});
 
-	it('parses under the running PHP version', function () use ($files) {
-		foreach ($files as $f) {
-			$path = realpath(__DIR__ . '/../../' . $f);
-			$result = shell_exec(escapeshellarg(PHP_BINARY) . ' -l ' . escapeshellarg($path) . ' 2>&1');
-			expect($result)->toContain('No syntax errors detected', "{$f} failed to parse: {$result}");
-		}
-	});
+	// Every tracked file's syntax is already gated by the CI workflow's
+	// dedicated "Check PHP Syntax for Plugin" step (php -l over every file),
+	// so it isn't duplicated here.
 });
