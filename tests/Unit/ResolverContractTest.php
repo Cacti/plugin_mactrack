@@ -32,7 +32,7 @@ test('configured resolver returns a PTR without invoking fallback', function () 
 	expect($fallback_calls)->toBeEmpty();
 });
 
-test('authoritative empty PTR answer does not invoke system fallback', function () {
+test('a NODATA PTR answer falls through to the system resolver', function () {
 	$resolver = new class {
 		public function query($ip_address, $type) {
 			return (object) ['answer' => []];
@@ -45,8 +45,21 @@ test('authoritative empty PTR answer does not invoke system fallback', function 
 		return 'system.example';
 	};
 
+	expect(mactrack_resolve_hostname($resolver, true, '192.0.2.2', $fallback))->toBe('system.example');
+	expect($fallback_calls)->toBe(['192.0.2.2']);
+});
+
+test('a NODATA PTR answer normalizes to the address when the system resolver also fails', function () {
+	$resolver = new class {
+		public function query($ip_address, $type) {
+			return (object) ['answer' => []];
+		}
+	};
+	$fallback = function ($ip_address) {
+		return false;
+	};
+
 	expect(mactrack_resolve_hostname($resolver, true, '192.0.2.2', $fallback))->toBe('192.0.2.2');
-	expect($fallback_calls)->toBeEmpty();
 });
 
 test('resolver finds PTR after a CNAME in a classless delegation answer', function () {

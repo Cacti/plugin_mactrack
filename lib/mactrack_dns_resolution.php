@@ -8,9 +8,9 @@
 /**
  * Resolve one address according to the configured DNS policy.
  *
- * The configured resolver is authoritative when it returns successfully,
- * including a successful response with no PTR records. The system resolver is
- * only a fallback when the configured resolver cannot answer the query.
+ * A NOERROR/NODATA response (no PTR records, but not an exception) falls
+ * through to the system resolver the same as a query failure does; only a
+ * PTR record actually found in the answer is used without falling back.
  *
  * @param  mixed         $resolver
  * @param  bool          $use_resolver
@@ -35,6 +35,10 @@ function mactrack_resolve_hostname($resolver, $use_resolver, $ip_address, $syste
 
 					break;
 				}
+			}
+
+			if ($dns_hostname === '') {
+				$dns_hostname = call_user_func($system_resolver, $ip_address);
 			}
 		} catch (Net_DNS2_Exception $e) {
 			$dns_hostname = call_user_func($system_resolver, $ip_address);
