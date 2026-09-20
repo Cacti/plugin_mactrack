@@ -30,6 +30,7 @@
             <file>setup.php</file>
             <file>includes/database.php</file>
             <file>lib/mactrack_functions.php</file>
+            <file>lib/mactrack_dns_resolution.php</file>
         </include>
     </source>
 </phpunit>

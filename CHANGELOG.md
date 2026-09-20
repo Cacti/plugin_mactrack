@@ -2,6 +2,9 @@
 
 --- develop ---
 
+* issue#349: Keep punctuation in the port name filter
+* issue#350: Leave an empty hardware address empty
+* issue#353: Stop re-querying addresses that have no PTR record
 * issue#357: Prevent repeated database setup from duplicating the Default site
 * security: Restrict Net_DNS2 cache deserialization to DNS response classes
 * docs: Align the documented PHP floor with the PHP 8.2 CI/test contract

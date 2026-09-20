@@ -412,7 +412,7 @@ function mactrack_view_macs_validate_request_vars() {
 		'port_name_filter' => [
 			'filter'  => FILTER_CALLBACK,
 			'default' => '',
-			'options' => ['options' => 'sanitize_search_string']
+			'options' => ['options' => 'mactrack_sanitize_port_name_filter']
 			],
 		'scan_date' => [
 			'filter'  => FILTER_CALLBACK,
@@ -438,9 +438,10 @@ function mactrack_view_macs_validate_request_vars() {
 function mactrack_view_export_macs() {
 	mactrack_view_macs_validate_request_vars();
 
-	$sql_where = '';
+	$sql_where  = '';
+	$sql_params = [];
 
-	$port_results = mactrack_view_get_mac_records($sql_where, 0, false);
+	$port_results = mactrack_view_get_mac_records($sql_where, $sql_params, 0, false);
 
 	$xport_array = [];
 	array_push($xport_array, '"site_name","hostname","device_name",' .
@@ -473,7 +474,9 @@ function mactrack_view_export_macs() {
 	}
 }
 
-function mactrack_view_get_mac_records(&$sql_where, $rows, $apply_limits = true) {
+function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_limits = true) {
+	$sql_params = [];
+
 	// form the 'where' clause for our main sql query
 	if (get_request_var('mac_filter') != '') {
 		$mac_filter = str_replace(':', '', get_request_var('mac_filter'));
@@ -538,37 +541,15 @@ function mactrack_view_get_mac_records(&$sql_where, $rows, $apply_limits = true)
 	}
 
 	if ((get_request_var('port_name_filter') != '') || (get_request_var('port_name_filter_type_id') > 6)) {
-		switch (get_request_var('port_name_filter_type_id')) {
-			case '1': // do not filter
-				break;
-			case '2': // matches
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.port_name = ' . db_qstr(get_request_var('port_name_filter'));
+		[$port_clause, $port_params] = mactrack_port_name_filter_clause(
+			'mtp.port_name',
+			get_request_var('port_name_filter_type_id'),
+			get_request_var('port_name_filter')
+		);
 
-				break;
-			case '3': // contains
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.port_name LIKE ' . db_qstr('%' . get_request_var('port_name_filter') . '%');
-
-				break;
-			case '4': // begins with
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.port_name LIKE ' . db_qstr(get_request_var('port_name_filter') . '%');
-
-				break;
-			case '5': // does not contain
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.port_name NOT LIKE ' . db_qstr('%' . get_request_var('port_name_filter') . '%');
-
-				break;
-			case '6': // does not begin with
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.port_name NOT LIKE ' . db_qstr(get_request_var('port_name_filter') . '%');
-
-				break;
-			case '7': // is null
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.port_name = ""';
-
-				break;
-			case '8': // is not null
-				$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtp.port_name != ""';
-
-				break;
+		if ($port_clause !== '') {
+			$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . $port_clause;
+			$sql_params = array_merge($sql_params, $port_params);
 		}
 	}
 
@@ -676,7 +657,7 @@ function mactrack_view_get_mac_records(&$sql_where, $rows, $apply_limits = true)
 	if ($sql_where == '') {
 		return [];
 	} else {
-		return db_fetch_assoc($query_string);
+		return db_fetch_assoc_prepared($query_string, $sql_params);
 	}
 }
 
@@ -690,11 +671,12 @@ function mactrack_view_macs() {
 	mactrack_mac_filter();
 	html_end_box();
 
-	$sql_where = '';
+	$sql_where  = '';
+	$sql_params = [];
 
 	$rows = plugin_get_rows_per_page();
 
-	$port_results = mactrack_view_get_mac_records($sql_where, $rows, true);
+	$port_results = mactrack_view_get_mac_records($sql_where, $sql_params, $rows, true);
 
 	// prevent table scans, either a device or site must be selected
 	if ($sql_where == '') {
@@ -709,7 +691,7 @@ function mactrack_view_macs() {
 			ON mtod.vendor_mac = mtp.vendor_mac
 			$sql_where";
 
-		$total_rows = db_fetch_cell($rows_query_string);
+		$total_rows = db_fetch_cell_prepared($rows_query_string, $sql_params);
 	} else {
 		$rows_query_string = "SELECT
 			COUNT(DISTINCT device_id, mac_address, port_number, ip_address)
@@ -720,7 +702,7 @@ function mactrack_view_macs() {
 			ON mtod.vendor_mac = mtp.vendor_mac
 			$sql_where";
 
-		$total_rows = db_fetch_cell($rows_query_string);
+		$total_rows = db_fetch_cell_prepared($rows_query_string, $sql_params);
 	}
 
 	$display_text1 = [
@@ -895,11 +877,12 @@ function mactrack_view_aggregated_macs() {
 	mactrack_mac_filter();
 	html_end_box();
 
-	$sql_where = '';
+	$sql_where  = '';
+	$sql_params = [];
 
 	$rows = plugin_get_rows_per_page();
 
-	$port_results = mactrack_view_get_mac_records($sql_where, $rows, true);
+	$port_results = mactrack_view_get_mac_records($sql_where, $sql_params, $rows, true);
 
 	// prevent table scans, either a device or site must be selected
 	if ($sql_where == '') {
@@ -916,7 +899,7 @@ function mactrack_view_aggregated_macs() {
 			ON mtod.vendor_mac = mtp.vendor_mac
 			$sql_where";
 
-		$total_rows = db_fetch_cell($rows_query_string);
+		$total_rows = db_fetch_cell_prepared($rows_query_string, $sql_params);
 	}
 
 	$display_text = [
@@ -1341,7 +1324,9 @@ function mactrack_mac_filter() {
 				strURL += '&ip_filter_type_id=' + $('#ip_filter_type_id').val();
 				strURL += '&ip_filter=' + $('#ip_filter').val();
 				strURL += '&port_name_filter_type_id=' + $('#port_name_filter_type_id').val();
-				strURL += '&port_name_filter=' + $('#port_name_filter').val();
+				// Port descriptions carry '#' and '&', which truncate or extend the query
+				// string when concatenated raw.
+				strURL += '&port_name_filter=' + encodeURIComponent($('#port_name_filter').val());
 				strURL += '&scan_date=' + $('#scan_date').val();
 				strURL += '&authorized=' + $('#authorized').val();
 				strURL += '&vlan=' + $('#vlan').val();

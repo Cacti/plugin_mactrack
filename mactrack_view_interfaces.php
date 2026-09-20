@@ -510,7 +510,7 @@ function mactrack_filter_table() {
 
 			if (get_request_var('site_id') == $site['site_id']) {
 				print ' selected';
-			} print '>' . $site['site_name'] . '</option>';
+			} print '>' . html_escape($site['site_name']) . '</option>';
 		}
 	}
 	?>
@@ -587,7 +587,7 @@ function mactrack_filter_table() {
 
 			if (get_request_var('device_type_id') == $type['device_type_id']) {
 				print ' selected';
-			} print '>' . $type['device_type'] . '</option>';
+			} print '>' . html_escape($type['device_type']) . '</option>';
 		}
 	}
 	?>
@@ -618,7 +618,7 @@ function mactrack_filter_table() {
 
 			if (get_request_var('device_id') == $device_id) {
 				print ' selected';
-			} print '>' . $device_name . '</option>';
+			} print '>' . html_escape($device_name) . '</option>';
 		}
 	}
 	?>
