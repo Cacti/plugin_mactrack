@@ -16,18 +16,17 @@
 
 /*
  * mactrack_test_production_php_files() is defined in tests/bootstrap-unit.php
- * so this file, Php74CompatibilityTest.php, and PreparedStatementConsistencyTest.php
- * can share it.
+ * so this file and PreparedStatementConsistencyTest.php can share it.
  */
 
 describe('PHP 8.2+ CI matrix compatibility in mactrack', function () {
 	$files = mactrack_test_production_php_files();
 
-	// README.md documents a PHP 7.4 support floor for production code (see
-	// Php74CompatibilityTest.php), so 8.0/8.1-only syntax is out of scope here.
-	// These checks instead guard against syntax/functions that require PHP 8.3
-	// or 8.4, which would break the 8.2/8.3 legs of the CI matrix, plus
-	// functions removed well before 8.2 that would break every leg.
+	// README.md documents a PHP 8.2 support floor for production code, so
+	// 8.0/8.1-only syntax is in scope and allowed. These checks instead guard
+	// against syntax/functions that require PHP 8.3 or 8.4, which would break
+	// the 8.2/8.3 legs of the CI matrix, plus functions removed well before
+	// 8.2 that would break every leg.
 	it('does not use each() (removed in PHP 8.0)', function () use ($files) {
 		foreach ($files as $f) {
 			$c = file_get_contents(__DIR__ . '/../../' . $f);

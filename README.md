@@ -29,8 +29,7 @@ utilization is, where there are errors, etc within their network.
 
 ## Prerequisites
 
-Mactrack requires Cacti 1.2.14 or later and PHP 7.4 or greater. The plugin
-retains the PHP 7.4 compatibility contract used by the Cacti 1.2 line.
+Mactrack requires Cacti 1.2.14 or later and PHP 8.2 for its supported runtime and toolchain.
 
 ## Installation
 
