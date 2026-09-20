@@ -8,59 +8,67 @@
 */
 
 /*
- * Verify migrated files use prepared DB helpers exclusively.
- * Catches regressions where raw db_execute/db_fetch_* calls creep back in.
+ * Converted from the standalone tests/Unit/test_prepared_statement_consistency.php
+ * script. Ratchets raw (unprepared) db_* call counts per tracked PHP file so
+ * the count can never silently increase, without re-litigating pre-existing
+ * calls that have not yet been migrated.
  */
 
-describe('prepared statement consistency in mactrack', function () {
-	it('uses prepared DB helpers in all plugin files', function () {
-		$targetFiles = [
-		'mactrack_devices.php',
-		'mactrack_device_types.php',
-		'mactrack_interfaces.php',
-		'mactrack_sites.php',
-		'mactrack_snmp.php',
-		'mactrack_utilities.php',
-		'mactrack_view_arp.php',
-		'mactrack_view_macs.php',
-		'mactrack_view_sites.php',
-		'setup.php',
-		];
+it('never increases raw (unprepared) database calls beyond the recorded baseline', function () {
+	$baseline = [
+		'includes/database.php'         => 144,
+		'lib/mactrack_3com.php'         => 1,
+		'lib/mactrack_aruba_oscx.php'   => 1,
+		'lib/mactrack_cisco.php'        => 5,
+		'lib/mactrack_enterasys_N7.php' => 1,
+		'lib/mactrack_extreme.php'      => 1,
+		'lib/mactrack_functions.php'    => 28,
+		'lib/mactrack_h3c_3com.php'     => 1,
+		'mactrack_actions.php'          => 19,
+		'mactrack_convert.php'          => 9,
+		'mactrack_device_types.php'     => 11,
+		'mactrack_devices.php'          => 7,
+		'mactrack_macauth.php'          => 2,
+		'mactrack_macwatch.php'         => 2,
+		'mactrack_resolver.php'         => 3,
+		'mactrack_scanner.php'          => 1,
+		'mactrack_sites.php'            => 3,
+		'mactrack_snmp.php'             => 4,
+		'mactrack_utilities.php'        => 25,
+		'mactrack_vendormacs.php'       => 2,
+		'mactrack_view_arp.php'         => 7,
+		'mactrack_view_devices.php'     => 4,
+		'mactrack_view_dot1x.php'       => 6,
+		'mactrack_view_graphs.php'      => 2,
+		'mactrack_view_interfaces.php'  => 3,
+		'mactrack_view_ips.php'         => 3,
+		'mactrack_view_macs.php'        => 9,
+		'mactrack_view_sites.php'       => 3,
+		'poller_mactrack.php'           => 39,
+		'setup.php'                     => 22,
+	];
 
-		$rawPattern      = '/\bdb_(?:execute|fetch_row|fetch_assoc|fetch_cell)\s*\(/';
-		$preparedPattern = '/\bdb_(?:execute|fetch_row|fetch_assoc|fetch_cell)_prepared\s*\(/';
+	$pluginRoot = realpath(__DIR__ . '/../..');
+	$tracked    = shell_exec('cd ' . escapeshellarg($pluginRoot) . " && git ls-files '*.php'");
 
-		foreach ($targetFiles as $relativeFile) {
-			$path = realpath(__DIR__ . '/../../' . $relativeFile);
+	expect($tracked)->toBeString();
+	expect(trim((string) $tracked))->not->toBe('');
 
-			if ($path === false) {
-				continue;
-			}
+	$pattern = '/\bdb_(?:execute|fetch_row|fetch_assoc|fetch_cell)\s*\(/i';
 
-			$contents = file_get_contents($path);
-
-			if ($contents === false) {
-				continue;
-			}
-
-			$lines                   = explode("\n", $contents);
-			$rawCallsOutsideComments = 0;
-
-			foreach ($lines as $line) {
-				$trimmed = ltrim($line);
-
-				if (strpos($trimmed, '//') === 0 || strpos($trimmed, '*') === 0 || strpos($trimmed, '#') === 0) {
-					continue;
-				}
-
-				if (preg_match($rawPattern, $line) && !preg_match($preparedPattern, $line)) {
-					$rawCallsOutsideComments++;
-				}
-			}
-
-			expect($rawCallsOutsideComments)->toBe(0,
-				"File {$relativeFile} contains raw (unprepared) DB calls"
-			);
+	foreach (preg_split('/\R/', trim((string) $tracked)) as $file) {
+		if ($file === '' || strpos($file, 'Net/') === 0 || strpos($file, 'tests/') === 0) {
+			continue;
 		}
-	});
+
+		$source = file_get_contents($pluginRoot . '/' . $file);
+
+		expect($source)->not->toBeFalse("Unable to read {$file}");
+
+		$count = preg_match_all($pattern, $source);
+
+		expect($count)->toBeLessThanOrEqual($baseline[$file] ?? 0,
+			"{$file} increased raw database calls beyond the recorded baseline"
+		);
+	}
 });

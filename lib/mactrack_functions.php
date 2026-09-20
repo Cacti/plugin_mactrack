@@ -3886,4 +3886,62 @@ function mactrack_format_mac($mac) {
 
 		return implode('.', $items);
 	}
+
+	// An unset or unrecognised mt_mac_format must not blank the address out.
+	return $mac;
+}
+
+function mactrack_validate_ignore_ports_pattern($pattern) {
+	$default = '(Vlan|Loopback|Null)';
+	$pattern = is_string($pattern) ? $pattern : '';
+
+	if ($pattern === '') {
+		return $default;
+	}
+
+	// MySQL and PCRE are not identical engines, but compiling the configured
+	// expression here catches malformed groups before they can break every
+	// Network Interfaces query. SOH cannot occur in this text setting and avoids
+	// changing valid pattern characters solely to construct a PCRE delimiter.
+	$validation_pattern = "\x01" . $pattern . "\x01";
+
+	$stress_input = str_repeat('a', 255) . '!';
+
+	if (strpos($pattern, "\x01") !== false ||
+		@preg_match($validation_pattern, '')            === false ||
+		@preg_match($validation_pattern, $stress_input) === false) {
+		cacti_log('Invalid MacTrack Ports to Ignore regular expression; using the default pattern', false, 'MACTRACK');
+
+		return $default;
+	}
+
+	return $pattern;
+}
+
+function mactrack_get_ignore_ports_pattern() {
+	$stored_pattern = read_config_option('mt_ignorePorts', true);
+	$pattern        = mactrack_validate_ignore_ports_pattern($stored_pattern);
+
+	// Preserve the historical initialization of an empty setting, but never let
+	// a read-only page view overwrite a non-empty administrator-supplied value.
+	if ($stored_pattern === '') {
+		db_execute_prepared('REPLACE INTO settings SET name="mt_ignorePorts", value = ?', [$pattern]);
+	}
+
+	return $pattern;
+}
+
+function mactrack_get_ignore_ports_predicate(&$params) {
+	$pattern  = mactrack_get_ignore_ports_pattern();
+	$params[] = $pattern;
+	$params[] = $pattern;
+
+	return '(ifName NOT RLIKE ? AND ifDescr NOT RLIKE ?)';
+}
+
+function mactrack_interface_filter_needs_ignore($issues, $bwusage) {
+	$issues = (string) $issues;
+
+	return in_array($issues, ['-3', '-4', '-1', '0', '1', '2', '3'], true) ||
+		(in_array($issues, ['9', '10', '11'], true) && (int) $bwusage !== -1);
 }

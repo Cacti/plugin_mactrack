@@ -36,6 +36,10 @@
 			continue;
 		}
 
+		if (strpos($relativeFile, 'Net/') === 0) {
+			continue;
+		}
+
 		$files[] = $relativeFile;
 	}
 

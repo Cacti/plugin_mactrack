@@ -5,7 +5,11 @@
 * issue#349: Keep punctuation in the port name filter
 * issue#350: Leave an empty hardware address empty
 * issue#353: Stop re-querying addresses that have no PTR record
-* compat: Replace vendored Net_DNS2 with Composer-managed mikepultz/netdns2 1.5, retaining the established resolver API
+* security: Restrict Net_DNS2 cache deserialization to DNS response classes
+* issue: Return the unformatted MAC when mt_mac_format is unset rather than a null address
+* issue: Call mactrack_format_mac() from the ARP export instead of a function that does not exist
+* issue: Drop the mactrack_ajax.php graph-settings action, whose handler was removed in 2016
+* issue: Stop stripping regular expression characters from the Ports to Ignore setting
 * issue: Harden device-type vendor filtering against SQL injection
 * issue: Validate aggregated MAC bulk-action IDs and use prepared deletion SQL
 * security: Replace MAC action request deserialization with escaped JSON payloads

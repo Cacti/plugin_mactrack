@@ -82,6 +82,7 @@ $GLOBALS['config'] = array(
 
 $GLOBALS['__test_db_calls']             = array();
 $GLOBALS['__test_db_fetch_cell_result'] = '';
+$GLOBALS['__test_config_options']       = array();
 
 if (!function_exists('db_execute')) {
 	function db_execute($sql) {
@@ -173,12 +174,13 @@ if (!function_exists('api_plugin_db_table_create')) {
 
 if (!function_exists('read_config_option')) {
 	function read_config_option($name, $force = false) {
-		return '';
+		return $GLOBALS['__test_config_options'][$name] ?? '';
 	}
 }
 
 if (!function_exists('set_config_option')) {
 	function set_config_option($name, $value) {
+		$GLOBALS['__test_config_options'][$name] = $value;
 	}
 }
 

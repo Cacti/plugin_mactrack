@@ -67,7 +67,11 @@ it('escapes the executable and device endpoint values in the Cabletron SNMP comm
 it('uses safe RLIKE quoting and normalized numeric values for interface filters', function () {
 	$source = plugin_test_read_source('mactrack_view_interfaces.php');
 
-	expect($source)->toContain('db_qstr_rlike($match)');
+	expect($source)->toContain('mactrack_get_ignore_ports_predicate($sql_params)');
+	expect($source)->toContain('db_fetch_assoc_prepared($sql_query, $sql_params)');
+	expect($source)->toContain('db_fetch_cell_prepared($rows_query_string, $sql_params)');
+	expect($source)->not->toContain('db_qstr($match)');
+	expect($source)->not->toContain('db_qstr_rlike');
 	expect($source)->toContain("intval(get_filter_request_var('bwusage'))");
 });
 
@@ -97,21 +101,28 @@ it('preserves PHP 8 compatible argument order for the 1.2.31 signatures', functi
 	$convertSource = plugin_test_read_source('mactrack_convert.php');
 	$arpSource     = plugin_test_read_source('mactrack_view_arp.php');
 	$dot1xSource   = plugin_test_read_source('mactrack_view_dot1x.php');
+	$ajaxSource    = plugin_test_read_source('mactrack_ajax.php');
 
 	expect($convertSource)->toContain('mactrack_create_partitioned_table($engine, $charset, $collate, $days, true)');
 	expect($arpSource)->toContain('function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true)');
-	expect($dot1xSource)->toContain('function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $apply_limits = true)');
+	expect($dot1xSource)->toContain('function mactrack_view_get_dot1x_records(&$sql_where, $rows, $apply_limits = true)');
+
+	expect($arpSource)->toContain('mactrack_format_mac(');
+	expect($arpSource)->not->toContain('format_mac_address(');
+	expect($ajaxSource)->not->toContain('mactrack_save_graph_settings');
 });
 
-it('loads and verifies the Net_DNS2 dependency in the DNS resolver', function () {
+it('loads Net_DNS2 from the bundled Net/ directory and reports rather than fatals when missing', function () {
 	$source = plugin_test_read_source('mactrack_resolver.php');
 
+	expect($source)->toContain("'/plugins/mactrack' . PATH_SEPARATOR . get_include_path()");
+	expect($source)->toContain('if (is_file($dns2))');
 	expect($source)->toContain("class_exists('Net_DNS2_Resolver')");
 });
 
-it('blocks plugin enablement without a usable Net_DNS2 dependency', function () {
+it('never gates plugin enablement on the optional DNS library', function () {
 	$source = plugin_test_read_source('setup.php');
 
-	expect($source)->toContain("class_exists('Net_DNS2_Resolver')");
-	expect($source)->toContain('return false;');
+	expect($source)->not->toContain('Net_DNS2');
+	expect($source)->not->toContain('Net/DNS2.php');
 });

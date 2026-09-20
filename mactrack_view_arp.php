@@ -126,7 +126,7 @@ function mactrack_view_export_ips() {
 
 			array_push($xport_array,'"' . $port_result['site_name'] . '","' .
 			$port_result['hostname'] . '","' . $port_result['device_name'] . '","' .
-			format_mac_address($port_result['mac_address']) . '","' . $port_result['vendor_name'] . '","' .
+			mactrack_format_mac($port_result['mac_address']) . '","' . $port_result['vendor_name'] . '","' .
 			$port_result['ip_address'] . '","' . $port_result['dns_hostname'] . '","' .
 			$port_result['port_number'] . '","' . $port_result['ifName'] . '","' .
 			$scan_date . '"');
@@ -230,12 +230,12 @@ function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true) 
 
 	if ((get_request_var('site_id') != '-1')) {
 		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
-			' mti.site_id = ' . (int) get_request_var('site_id');
+			' mti.site_id = ' . get_filter_request_var('site_id');
 	}
 
 	if ((get_request_var('device_id') != '-1')) {
 		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
-			' mti.device_id = ' . (int) get_request_var('device_id');
+			' mti.device_id = ' . get_filter_request_var('device_id');
 	}
 
 	// prevent table scans, either a device or site must be selected

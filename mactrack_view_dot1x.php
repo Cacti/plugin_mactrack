@@ -293,15 +293,15 @@ function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $appl
 	}
 
 	if (get_request_var('site_id') != '-1') {
-		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.site_id = ' . (int) get_request_var('site_id');
+		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.site_id = ' . get_filter_request_var('site_id');
 	}
 
 	if (get_request_var('status') != '0') {
-		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.status = ' . (int) get_request_var('status');
+		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.status = ' . get_filter_request_var('status');
 	}
 
 	if (get_request_var('device_id') != '-1') {
-		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.device_id = ' . (int) get_request_var('device_id');
+		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.device_id = ' . get_filter_request_var('device_id');
 	}
 
 	if ((get_request_var('scan_date') != '1') && (get_request_var('scan_date') != '2')) {
