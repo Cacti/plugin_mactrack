@@ -17,11 +17,13 @@
 /*
  * Test bootstrap.
  *
- * Mactrack's sources expect to be included by Cacti, which has already
+ * MacTrack's sources expect to be included by Cacti, which has already
  * defined the db_*, request-variable, and logging helpers as plain global
  * functions. Nothing here talks to a database or a network: each Cacti
  * function is declared as a stub that records the call in
- * $GLOBALS['__test_db_calls'] and hands back a safe default.
+ * $GLOBALS['__test_db_calls'] and hands back a safe default (or a
+ * per-test-programmed value; see mactrack_test_next_return()/
+ * mactrack_test_queue_return() below).
  *
  * The CI workflow checks out a pinned Cacti release next to this plugin so
  * Pest runs against Cacti's own Composer-managed vendor tree (Pest/PHPUnit)
@@ -33,12 +35,6 @@
  * if a future integration suite loads real Cacti first.
  */
 
-// This file lives at .../cacti/plugins/mactrack/tests/bootstrap-unit.php in CI
-// (see .github/workflows/plugin-ci-workflow.yml's "Checkout Cacti"/"Checkout
-// mactrack Plugin" steps), so three levels up from __DIR__ (tests -> mactrack
-// -> plugins) lands on the checked-out Cacti root, independent of the CWD
-// Pest/PHPUnit happen to be invoked from or how phpunit.xml's own relative
-// paths are resolved.
 $cacti_root = dirname(__DIR__, 3);
 $autoload   = $cacti_root . '/include/vendor/autoload.php';
 $version    = $cacti_root . '/include/cacti_version';
@@ -56,8 +52,8 @@ if (!is_readable($expected)) {
 	throw new RuntimeException("Expected Cacti version file is not readable: $expected");
 }
 
-$cacti_version     = trim((string) file_get_contents($version));
-$expected_version  = trim((string) file_get_contents($expected));
+$cacti_version    = trim((string) file_get_contents($version));
+$expected_version = trim((string) file_get_contents($expected));
 
 if ($cacti_version === '') {
 	throw new RuntimeException("Cacti version file is empty: $version");
@@ -86,51 +82,126 @@ $GLOBALS['config'] = array(
 	'cacti_server_os' => 'unix',
 );
 
-$GLOBALS['__test_db_calls']             = array();
-$GLOBALS['__test_db_fetch_cell_result'] = '';
-$GLOBALS['__test_config_options']       = array();
+$GLOBALS['__test_db_calls']       = array();
+$GLOBALS['__test_config_options'] = array();
+$GLOBALS['__test_next_returns']   = array();
+$GLOBALS['__test_matched_returns'] = array();
+
+// mactrack_seed_default_site() reads this to scope its advisory lock name.
+$GLOBALS['database_default'] = 'cacti';
+
+/**
+ * Queue the next value a stub named $fn will return (FIFO per name).
+ * Falls back to the stub's own built-in default once the queue is empty.
+ *
+ * @param string $fn    Cacti function name.
+ * @param mixed  $value Value to hand back on the next call.
+ *
+ * @return void
+ */
+function mactrack_test_queue_return($fn, $value) {
+	$GLOBALS['__test_next_returns'][$fn][] = $value;
+}
+
+/**
+ * Answer any call to $fn whose SQL contains $fragment with $value.
+ *
+ * A stub such as db_fetch_cell_prepared() is called with many different
+ * queries in one test (e.g. a site-count check, GET_LOCK, RELEASE_LOCK all
+ * go through it), so a positional FIFO queue breaks as soon as the code
+ * under test reorders a lookup. Matching on the query keeps the fixture
+ * readable and order-independent. Checked before the FIFO queue.
+ *
+ * @param string $fn       Cacti function name.
+ * @param string $fragment Distinctive substring of the SQL.
+ * @param mixed  $value    Value to hand back.
+ *
+ * @return void
+ */
+function mactrack_test_queue_return_for($fn, $fragment, $value) {
+	$GLOBALS['__test_matched_returns'][$fn][] = array($fragment, $value);
+}
+
+/**
+ * Take the queued return value for $fn, or $default if nothing is queued.
+ *
+ * @param string $fn      Cacti function name.
+ * @param mixed  $default Fallback when nothing is queued.
+ * @param string $sql     SQL the caller passed, for matching.
+ *
+ * @return mixed
+ */
+function mactrack_test_next_return($fn, $default, $sql = '') {
+	if ($sql !== '' && !empty($GLOBALS['__test_matched_returns'][$fn])) {
+		$flat = preg_replace('/\s+/', ' ', $sql);
+
+		foreach ($GLOBALS['__test_matched_returns'][$fn] as $entry) {
+			if (strpos($flat, preg_replace('/\s+/', ' ', $entry[0])) !== false) {
+				return $entry[1];
+			}
+		}
+	}
+
+	if (!empty($GLOBALS['__test_next_returns'][$fn])) {
+		return array_shift($GLOBALS['__test_next_returns'][$fn]);
+	}
+
+	return $default;
+}
 
 if (!function_exists('db_execute')) {
 	function db_execute($sql) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute', 'sql' => $sql, 'params' => array());
-		return true;
+
+		return mactrack_test_next_return('db_execute', true);
 	}
 }
 
 if (!function_exists('db_execute_prepared')) {
 	function db_execute_prepared($sql, $params = array()) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute_prepared', 'sql' => $sql, 'params' => $params);
-		return true;
+
+		return mactrack_test_next_return('db_execute_prepared', true);
 	}
 }
 
 if (!function_exists('db_fetch_assoc')) {
 	function db_fetch_assoc($sql) {
-		return array();
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_assoc', 'sql' => $sql, 'params' => array());
+
+		return mactrack_test_next_return('db_fetch_assoc', array());
 	}
 }
 
 if (!function_exists('db_fetch_assoc_prepared')) {
 	function db_fetch_assoc_prepared($sql, $params = array()) {
-		return array();
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_assoc_prepared', 'sql' => $sql, 'params' => $params);
+
+		return mactrack_test_next_return('db_fetch_assoc_prepared', array());
 	}
 }
 
 if (!function_exists('db_fetch_row')) {
 	function db_fetch_row($sql) {
-		return array();
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_row', 'sql' => $sql, 'params' => array());
+
+		return mactrack_test_next_return('db_fetch_row', array());
 	}
 }
 
 if (!function_exists('db_fetch_row_prepared')) {
 	function db_fetch_row_prepared($sql, $params = array()) {
-		return array();
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_row_prepared', 'sql' => $sql, 'params' => $params);
+
+		return mactrack_test_next_return('db_fetch_row_prepared', array());
 	}
 }
 
 if (!function_exists('db_fetch_cell')) {
 	function db_fetch_cell($sql) {
-		return '';
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_cell', 'sql' => $sql, 'params' => array());
+
+		return mactrack_test_next_return('db_fetch_cell', '');
 	}
 }
 
@@ -138,31 +209,19 @@ if (!function_exists('db_fetch_cell_prepared')) {
 	function db_fetch_cell_prepared($sql, $params = array()) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_cell_prepared', 'sql' => $sql, 'params' => $params);
 
-		return $GLOBALS['__test_db_fetch_cell_result'];
+		return mactrack_test_next_return('db_fetch_cell_prepared', '', $sql);
 	}
 }
 
 if (!function_exists('db_index_exists')) {
 	function db_index_exists($table, $index) {
-		return false;
+		return mactrack_test_next_return('db_index_exists', false);
 	}
 }
 
 if (!function_exists('db_column_exists')) {
 	function db_column_exists($table, $column) {
-		return false;
-	}
-}
-
-if (!function_exists('db_qstr')) {
-	function db_qstr($value) {
-		return "'" . addslashes((string) $value) . "'";
-	}
-}
-
-if (!function_exists('db_qstr_rlike')) {
-	function db_qstr_rlike($value) {
-		return "RLIKE '" . addslashes((string) $value) . "'";
+		return mactrack_test_next_return('db_column_exists', false);
 	}
 }
 
@@ -178,9 +237,46 @@ if (!function_exists('api_plugin_db_table_create')) {
 	}
 }
 
+if (!function_exists('api_plugin_register_hook')) {
+	function api_plugin_register_hook($plugin, $hook, $function, $file, $inline = '') {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'api_plugin_register_hook', 'sql' => $hook, 'params' => array($function, $file));
+
+		return true;
+	}
+}
+
+if (!function_exists('api_plugin_register_realm')) {
+	function api_plugin_register_realm($plugin, $files, $name, $alone = 0) {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'api_plugin_register_realm', 'sql' => $name, 'params' => array($files));
+
+		return true;
+	}
+}
+
+if (!function_exists('api_plugin_is_enabled')) {
+	function api_plugin_is_enabled($plugin) {
+		return mactrack_test_next_return('api_plugin_is_enabled', true);
+	}
+}
+
+if (!function_exists('api_plugin_enable_hooks')) {
+	function api_plugin_enable_hooks($plugin) {
+	}
+}
+
+/*
+ * A minimal in-memory config-option store: MacTrack's Default-site retry
+ * logic (mactrack_ensure_default_site() and friends) round-trips its state
+ * entirely through read_config_option()/set_config_option(), so tests need
+ * these to actually persist per-test rather than always returning ''.
+ */
 if (!function_exists('read_config_option')) {
 	function read_config_option($name, $force = false) {
-		return $GLOBALS['__test_config_options'][$name] ?? '';
+		if (array_key_exists($name, $GLOBALS['__test_config_options'])) {
+			return $GLOBALS['__test_config_options'][$name];
+		}
+
+		return '';
 	}
 }
 
@@ -192,7 +288,7 @@ if (!function_exists('set_config_option')) {
 
 if (!function_exists('html_escape')) {
 	function html_escape($string) {
-		return htmlspecialchars($string, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+		return htmlspecialchars((string) $string, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	}
 }
 
@@ -210,24 +306,13 @@ if (!function_exists('__esc')) {
 
 if (!function_exists('cacti_log')) {
 	function cacti_log($message, $also_print = false, $log_type = '', $level = 0) {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'cacti_log', 'sql' => $message, 'params' => array());
 	}
 }
 
 if (!function_exists('cacti_sizeof')) {
 	function cacti_sizeof($array) {
 		return is_array($array) ? count($array) : 0;
-	}
-}
-
-if (!function_exists('cacti_escapeshellcmd')) {
-	function cacti_escapeshellcmd($command) {
-		return escapeshellcmd($command);
-	}
-}
-
-if (!function_exists('cacti_escapeshellarg')) {
-	function cacti_escapeshellarg($argument) {
-		return escapeshellarg($argument);
 	}
 }
 
@@ -239,6 +324,13 @@ if (!function_exists('is_realm_allowed')) {
 
 if (!function_exists('raise_message')) {
 	function raise_message($id, $text = '', $level = 0) {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'raise_message', 'sql' => $id, 'params' => array($text, $level));
+	}
+}
+
+if (!function_exists('get_current_page')) {
+	function get_current_page() {
+		return mactrack_test_next_return('get_current_page', '');
 	}
 }
 
@@ -305,11 +397,13 @@ if (!defined('MESSAGE_LEVEL_ERROR')) {
 if (!function_exists('plugin_test_read_source')) {
 	function plugin_test_read_source($relative_file) {
 		$path = realpath(__DIR__ . '/../' . $relative_file);
+
 		if ($path === false) {
 			throw new RuntimeException("Unable to resolve required file: {$relative_file}");
 		}
 
 		$contents = file_get_contents($path);
+
 		if ($contents === false) {
 			throw new RuntimeException("Unable to read required file: {$relative_file}");
 		}
@@ -344,3 +438,37 @@ function mactrack_test_load($path) {
 		}
 	}
 }
+
+/**
+ * Enumerate every tracked production PHP file (everything except tests/
+ * and the vendored Net/DNS2 library, which isn't ours to gate).
+ *
+ * @return array<int, string>
+ */
+function mactrack_test_production_php_files() {
+	$root  = realpath(__DIR__ . '/..');
+	$files = [];
+
+	$iterator = new RecursiveIteratorIterator(
+		new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS)
+	);
+
+	foreach ($iterator as $file) {
+		if ($file->getExtension() !== 'php') {
+			continue;
+		}
+
+		$relative = str_replace('\\', '/', substr($file->getPathname(), strlen($root) + 1));
+
+		if (strpos($relative, 'tests/') === 0 || strpos($relative, 'Net/') === 0) {
+			continue;
+		}
+
+		$files[] = $relative;
+	}
+
+	sort($files);
+
+	return $files;
+}
+

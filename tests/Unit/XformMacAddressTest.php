@@ -2,6 +2,15 @@
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
 
@@ -15,8 +24,7 @@
 
 // tests/bootstrap-unit.php is loaded by PHPUnit before any test file and
 // declares the Cacti helpers behind function_exists() guards, so nothing else
-// is needed here. Support/CactiStubs.php is a Psalm stub, declares the same
-// names unguarded, and fatals the whole suite if it is loaded at runtime.
+// is needed here.
 require_once dirname(__DIR__, 2) . '/lib/mactrack_functions.php';
 
 test('an interface with no hardware address stays empty', function ($input) {
@@ -36,7 +44,9 @@ test('ASCII and HEX- forms strip delimiters', function ($input) {
 	['HEX-00:aa:bb:cc:dd:ee:ff'],
 	['aa:bb:cc:dd:ee:ff'],
 	['AA:BB:CC:DD:EE:FF'],
+	['"aa bb cc dd ee ff"'],
 ]);
+
 
 test('binary hex bytes convert to an uppercase hex string', function () {
 	expect(xform_mac_address(hex2bin('aabbccddeeff')))->toBe('AABBCCDDEEFF');

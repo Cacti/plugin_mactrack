@@ -29,15 +29,12 @@ test('non-empty MAC lookups use bound parameters', function () {
 });
 
 test('MAC lookup helpers return database matches', function () {
-	$GLOBALS['__test_db_calls']              = [];
-	$GLOBALS['__test_db_fetch_cell_result'] = '192.0.2.25';
+	$GLOBALS['__test_db_calls'] = [];
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'mac_track_arp', '192.0.2.25');
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'mac_track_macauth', '192.0.2.25');
 
-	try {
-		expect(db_check_for_ip('AABBCCDDEEFF'))->toBe('192.0.2.25');
-		expect(db_check_auth('AABBCCDDEEFF'))->toBe('192.0.2.25');
-	} finally {
-		$GLOBALS['__test_db_fetch_cell_result'] = '';
-	}
+	expect(db_check_for_ip('AABBCCDDEEFF'))->toBe('192.0.2.25');
+	expect(db_check_auth('AABBCCDDEEFF'))->toBe('192.0.2.25');
 });
 
 test('authorization uses exact MAC matching without wildcard expansion', function () {

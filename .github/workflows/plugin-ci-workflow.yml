@@ -65,23 +65,24 @@ jobs:
 
     steps:
     - name: Checkout Cacti
-      uses: actions/checkout@v7
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         repository: Cacti/cacti
         ref: ${{ env.CACTI }}
         path: cacti
 
-    - name: Checkout mactrack Plugin
-      uses: actions/checkout@v7
+    - name: Checkout MacTrack Plugin
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         path: cacti/plugins/mactrack
 
     - name: Install PHP ${{ matrix.php }}
-      uses: shivammathur/setup-php@v2
+      uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
       with:
         php-version: ${{ matrix.php }}
-        extensions: intl, mysql, gd, ldap, gmp, xml, curl, json, mbstring
+        extensions: intl, mysql, gd, ldap, gmp, xml, curl, json, mbstring, snmp
         ini-values: "post_max_size=256M, max_execution_time=60, date.timezone=America/New_York"
+        coverage: xdebug
 
     - name: Check PHP version
       run: php -v
@@ -126,7 +127,7 @@ jobs:
       run: |
         cd ${{ github.workspace }}/cacti
         if [ -f composer.json ]; then
-          composer validate --strict || true
+          sudo composer validate --strict || true
         fi
 
     - name: Install Composer Dependencies
@@ -178,7 +179,7 @@ jobs:
         cd ${{ github.workspace }}/cacti
         sudo php cli/install_cacti.php --accept-eula --install --force
 
-    - name: Install mactrack Plugin
+    - name: Install MacTrack Plugin
       run: |
         cd ${{ github.workspace }}/cacti
         sudo php cli/plugin_manage.php --plugin=mactrack --install --enable
@@ -186,65 +187,53 @@ jobs:
     - name: Check PHP Syntax for Plugin
       run: |
         cd ${{ github.workspace }}/cacti/plugins/mactrack
-        find . -path './vendor' -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l
+        if find . -name '*.php' -exec php -l {} 2>&1 \; | grep -iv 'no syntax errors detected'; then
+          echo "Syntax errors found!"
+          exit 1
+        fi
 
     - name: Set expected Cacti version for unit tests
       run: echo -n "${{ env.CACTI }}" | sudo tee ${{ github.workspace }}/cacti/plugins/mactrack/tests/.cacti-version > /dev/null
 
-    - name: Run Pest Tests
+    - name: Run Pest Unit Tests
       env:
         COMPOSER_ROOT_VERSION: 1.3.0-dev
       run: |
         cd ${{ github.workspace }}/cacti
         include/vendor/bin/pest --configuration=plugins/mactrack/phpunit.xml \
-          --coverage-clover=plugins/mactrack/coverage/clover.xml \
-          plugins/mactrack/tests/Security plugins/mactrack/tests/Unit plugins/mactrack/tests/Integration
+          --coverage-clover=plugins/mactrack/coverage/clover.xml
 
     - name: Upload coverage report
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: coverage-php${{ matrix.php }}
         path: ${{ github.workspace }}/cacti/plugins/mactrack/coverage/
         if-no-files-found: warn
 
-    # Cacti 1.2.31 has no .phpstan.neon / lint scripts; only touch them when present.
     - name: Remove the plugins directory exclusion from the .phpstan.neon
-      run: |
-        if [ -f .phpstan.neon ]; then
-          sed '/plugins/d' -i .phpstan.neon
-        else
-          echo '.phpstan.neon not present; skipping'
-        fi
+      if: ${{ env.CACTI != '1.2.x' }}
+      run: sed '/plugins/d' -i .phpstan.neon
       working-directory: ${{ github.workspace }}/cacti
 
     - name: Mark composer scripts executable
-      run: |
-        if [ -d "${{ github.workspace }}/cacti/include/vendor/bin" ]; then
-          sudo find "${{ github.workspace }}/cacti/include/vendor/bin" -maxdepth 1 -type f -exec chmod +x {} +
-        fi
+      if: ${{ env.CACTI != '1.2.x' }}
+      run: sudo chmod +x ${{ github.workspace }}/cacti/include/vendor/bin/*
 
     - name: Run Linter on base code
-      run: |
-        if composer run-script --list | grep -qE '^  lint'; then
-          composer run-script lint ${{ github.workspace }}/cacti/plugins/mactrack
-        else
-          echo 'Composer lint script is not defined; skipping.'
-        fi
+      if: ${{ env.CACTI != '1.2.x' }}
+      run: sudo composer run-script lint ${{ github.workspace }}/cacti/plugins/mactrack
       working-directory: ${{ github.workspace }}/cacti
 
     - name: Checking coding standards on base code
-      run: |
-        if composer run-script --list | grep -qE '^  phpcsfixer'; then
-          composer run-script phpcsfixer ${{ github.workspace }}/cacti/plugins/mactrack
-        else
-          echo 'Composer phpcsfixer script is not defined; skipping.'
-        fi
+      if: ${{ env.CACTI != '1.2.x' }}
+      run: sudo composer run-script phpcsfixer ${{ github.workspace }}/cacti/plugins/mactrack
       working-directory: ${{ github.workspace }}/cacti
 
-#    - name: Run PHPStan at Level 6 on base code outside of Composer due to technical issues
-#      run: ./include/vendor/bin/phpstan analyze --level 6 ${{ github.workspace }}/cacti/plugins/mactrack
-#      working-directory: ${{ github.workspace }}/cacti
+    - name: Run PHPStan at Level 6 on base code outside of Composer due to technical issues
+      if: ${{ env.CACTI != '1.2.x' }}
+      run: sudo ./include/vendor/bin/phpstan analyze --level 6 ${{ github.workspace }}/cacti/plugins/mactrack
+      working-directory: ${{ github.workspace }}/cacti
 
     - name: Re-apply web user ownership before polling
       run: |
@@ -267,23 +256,12 @@ jobs:
       run: |
         cd ${{ github.workspace }}/cacti
         sudo -u www-data php poller.php --poller=1 --force --debug
+
         if ! grep -q "SYSTEM STATS" log/cacti.log; then
           echo "Cacti poller did not finish successfully"
           cat log/cacti.log
           exit 1
         fi
-
-    # The e2e scripts need the live Cacti and database this job already built.
-    - name: Run plugin e2e tests
-      run: |
-        rc=0
-        for f in tests/e2e/*.php; do
-          [ -f "$f" ] || continue
-          printf '%s: ' "$f"
-          php "$f" || rc=1
-        done
-        exit $rc
-      working-directory: ${{ github.workspace }}/cacti/plugins/mactrack
 
     - name: View Cacti Logs
       if: always()

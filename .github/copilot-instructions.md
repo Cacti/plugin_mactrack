@@ -121,7 +121,7 @@ Register hooks in `plugin_mactrack_install()` (`setup.php`), including `top_head
 ## Testing
 
 Pest tests live under `tests/Security/`, `tests/Unit/`, and `tests/Integration/` in PascalCase
-(e.g. `MacLookupSafetyTest.php`) and run via `phpunit.xml`/`tests/Pest.php`, bootstrapped by
+(e.g. `MacFormattingTest.php`) and run via `phpunit.xml`/`tests/Pest.php`, bootstrapped by
 `tests/bootstrap-unit.php` against the Cacti core checked out alongside the plugin in CI.
 Standalone, dependency-free scripts belong in `tests/e2e/` and are invoked directly with `php`
 against a live install. Run `php -l` before committing.

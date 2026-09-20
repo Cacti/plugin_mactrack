@@ -2,18 +2,24 @@
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
  +-------------------------------------------------------------------------+
  | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
 
 /*
- * Converted from the standalone tests/Integration/test_mactrack_filter_output_wiring.php
- * script (and its tests/Pest/Integration/FilterOutputWiringTest.php exec wrapper).
- * Keeps the filter-output escaping wiring intact across the viewer files.
+ * Confirms the filter-driven views actually wire their labels through
+ * html_escape() before rendering, rather than only asserting that
+ * html_escape() exists somewhere in the plugin.
  */
-
-it('keeps the filter-output security wiring intact', function () {
+describe('filter output escaping wiring in mactrack', function () {
 	$checks = [
 		'mactrack_view_macs.php' => [
 			"html_escape(\$site['site_name'])",
@@ -24,11 +30,13 @@ it('keeps the filter-output security wiring intact', function () {
 		],
 	];
 
-	foreach ($checks as $relativeFile => $patterns) {
-		$source = plugin_test_read_source($relativeFile);
-
+	foreach ($checks as $file => $patterns) {
 		foreach ($patterns as $pattern) {
-			expect($source)->toContain($pattern);
+			it("renders {$pattern} in {$file}", function () use ($file, $pattern) {
+				$source = plugin_test_read_source($file);
+
+				expect($source)->toContain($pattern);
+			});
 		}
 	}
 });

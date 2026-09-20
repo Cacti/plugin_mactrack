@@ -15,11 +15,12 @@
 */
 
 /**
- * Base class for Mactrack tests.
+ * Base class for MacTrack tests.
  *
  * Pest's functional tests do not need this directly, but any test that
  * prefers a class-based fixture can `uses(TestCase::class)` to get a clean
- * stub-call log per test and a helper for loading plugin source once.
+ * stub-call log and config-option store per test, plus a helper for loading
+ * plugin source once.
  */
 abstract class TestCase extends PHPUnit\Framework\TestCase {
 	/**
@@ -28,7 +29,10 @@ abstract class TestCase extends PHPUnit\Framework\TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$GLOBALS['__test_db_calls'] = array();
+		$GLOBALS['__test_db_calls']        = array();
+		$GLOBALS['__test_config_options']  = array();
+		$GLOBALS['__test_next_returns']    = array();
+		$GLOBALS['__test_matched_returns'] = array();
 	}
 
 	/**
