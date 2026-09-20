@@ -6,7 +6,6 @@
 */
 
 require_once __DIR__ . '/../../../../include/cli_check.php';
-require_once __DIR__ . '/../../vendor/autoload.php';
 
 $status = db_fetch_cell_prepared(
 	'SELECT status
@@ -28,7 +27,7 @@ foreach (['mac_track_sites', 'mac_track_devices', 'mac_track_ports'] as $table) 
 }
 
 if (!class_exists('Net_DNS2_Resolver')) {
-	fwrite(STDERR, "Mactrack Composer DNS dependency is unavailable\n");
+	fwrite(STDERR, "Mactrack DNS dependency is unavailable; Cacti 1.2.32+ is required\n");
 	exit(1);
 }
 

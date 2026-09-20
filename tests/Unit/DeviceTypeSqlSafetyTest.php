@@ -103,18 +103,15 @@ it('preserves PHP 8 compatible argument order for the 1.2.31 signatures', functi
 	expect($dot1xSource)->toContain('function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $apply_limits = true)');
 });
 
-it('loads and verifies the Composer-managed NetDNS2 dependency in the DNS resolver', function () {
+it('loads and verifies the Net_DNS2 dependency in the DNS resolver', function () {
 	$source = plugin_test_read_source('mactrack_resolver.php');
 
-	expect($source)->toContain('require_once $config[\'base_path\'] . \'/plugins/mactrack/vendor/autoload.php\'');
 	expect($source)->toContain("class_exists('Net_DNS2_Resolver')");
 });
 
-it('blocks plugin enablement without a usable Composer dependency', function () {
+it('blocks plugin enablement without a usable Net_DNS2 dependency', function () {
 	$source = plugin_test_read_source('setup.php');
 
-	expect($source)->toContain('/plugins/mactrack/vendor/autoload.php');
-	expect($source)->toContain('require_once $autoload;');
 	expect($source)->toContain("class_exists('Net_DNS2_Resolver')");
 	expect($source)->toContain('return false;');
 });

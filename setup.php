@@ -60,20 +60,9 @@ function plugin_mactrack_version() {
 }
 
 function plugin_mactrack_check_config() {
-	global $config;
-
-	$autoload = $config['base_path'] . '/plugins/mactrack/vendor/autoload.php';
-
-	if (!is_file($autoload)) {
-		cacti_log('ERROR: Mactrack requires Composer dependencies. Run composer install --no-dev in plugins/mactrack before enabling the plugin.', false, 'MACTRACK');
-
-		return false;
-	}
-
-	require_once $autoload;
-
+	// Net_DNS2 ships with Cacti core (1.2.32+) and autoloads via include/global.php.
 	if (!class_exists('Net_DNS2_Resolver')) {
-		cacti_log('ERROR: Mactrack DNS dependency is unavailable. Run composer install --no-dev in plugins/mactrack before enabling the plugin.', false, 'MACTRACK');
+		cacti_log('ERROR: Mactrack requires Cacti 1.2.32 or later for its DNS dependency.', false, 'MACTRACK');
 
 		return false;
 	}

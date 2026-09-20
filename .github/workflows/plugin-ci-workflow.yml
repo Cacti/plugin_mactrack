@@ -173,13 +173,6 @@ jobs:
         cd ${{ github.workspace }}/cacti
         sudo php cli/install_cacti.php --accept-eula --install --force
 
-    - name: Install Mactrack Composer Dependencies
-      run: |
-        cd ${{ github.workspace }}/cacti/plugins/mactrack
-        if [ -f composer.json ]; then
-          sudo composer install --no-dev --prefer-dist --no-progress --no-interaction
-        fi
-
     - name: Install mactrack Plugin
       run: |
         cd ${{ github.workspace }}/cacti

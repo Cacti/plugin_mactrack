@@ -5,7 +5,6 @@
  +-------------------------------------------------------------------------+
  */
 
-require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
 require_once dirname(__DIR__, 2) . '/lib/mactrack_dns_resolution.php';
 
 test('configured resolver returns a PTR without invoking fallback', function () {
