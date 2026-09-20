@@ -33,6 +33,12 @@
  * if a future integration suite loads real Cacti first.
  */
 
+// This file lives at .../cacti/plugins/mactrack/tests/bootstrap-unit.php in CI
+// (see .github/workflows/plugin-ci-workflow.yml's "Checkout Cacti"/"Checkout
+// mactrack Plugin" steps), so three levels up from __DIR__ (tests -> mactrack
+// -> plugins) lands on the checked-out Cacti root, independent of the CWD
+// Pest/PHPUnit happen to be invoked from or how phpunit.xml's own relative
+// paths are resolved.
 $cacti_root = dirname(__DIR__, 3);
 $autoload   = $cacti_root . '/include/vendor/autoload.php';
 $version    = $cacti_root . '/include/cacti_version';
