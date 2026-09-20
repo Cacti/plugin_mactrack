@@ -100,7 +100,7 @@ test('non-hex printable MAC values are rejected', function ($input) {
 ]);
 
 test('macauth schedule persists last-run time', function () {
-	$src = file_get_contents(dirname(__DIR__, 3) . '/poller_mactrack.php');
+	$src = file_get_contents(dirname(__DIR__, 2) . '/poller_mactrack.php');
 
 	expect($src)->toContain("set_config_option('mt_last_macauth_time'");
 	expect($src)->toContain('$last_macauth_time + ($mac_auth_frequency * 60) < time()');
