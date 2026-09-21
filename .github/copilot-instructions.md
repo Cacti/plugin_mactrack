@@ -4,7 +4,7 @@
 
 When generating code for this repository:
 
-1. **Version Compatibility**: This is a Cacti plugin (`mactrack`, "Device Tracking", version 4.9) targeting Cacti 1.2.14+; `tests/Security/Php82CompatibilityTest.php` guards production sources against PHP 8.3+-only syntax as a regression check.
+1. **Version Compatibility**: This is a Cacti plugin (`mactrack`, "Device Tracking", version 4.9) targeting Cacti 1.2.14+; `tests/Security/PhpCompatibilityTest.php` guards production sources against PHP 8.3+-only syntax as a regression check.
 2. **Context Files**: Prioritize patterns and standards defined in this file (`.github/copilot-instructions.md`)
 3. **Codebase Patterns**: When context files don't provide specific guidance, scan the codebase for established patterns
 4. **Architectural Consistency**: Maintain plugin-based architecture extending Cacti core
@@ -13,7 +13,7 @@ When generating code for this repository:
 ## Technology Stack
 
 ### Core Technologies
-- **PHP**: 8.2+ syntax floor (guarded by `tests/Security/Php82CompatibilityTest.php`); CI integration matrix runs PHP 8.2/8.3/8.4 against a pinned Cacti release
+- **PHP**: 8.2+ syntax floor (guarded by `tests/Security/PhpCompatibilityTest.php`); CI integration matrix runs PHP 8.2/8.3/8.4 against a pinned Cacti release
 - **Platform**: Cacti Plugin Architecture (Cacti 1.2.14+)
 - **Database**: MySQL/MariaDB via Cacti's DB abstraction layer
 - **SNMP**: Bulk MAC/ARP/interface/VLAN discovery via Cacti's SNMP library
