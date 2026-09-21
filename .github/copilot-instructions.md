@@ -4,7 +4,7 @@
 
 When generating code for this repository:
 
-1. **Version Compatibility**: This is a Cacti plugin (`mactrack`, "Device Tracking", version 4.9) targeting Cacti 1.2.14+; `tests/Security/Php82CompatibilityTest.php` guards production sources against PHP 8.3+-only syntax as a regression check.
+1. **Version Compatibility**: This is a Cacti plugin (`mactrack`, "Device Tracking", version 4.9) targeting Cacti 1.2.14+; `tests/Security/PhpCompatibilityTest.php` guards production sources against PHP 8.3+-only syntax as a regression check.
 2. **Context Files**: Prioritize patterns and standards defined in this file (`.github/copilot-instructions.md`)
 3. **Codebase Patterns**: When context files don't provide specific guidance, scan the codebase for established patterns
 4. **Architectural Consistency**: Maintain plugin-based architecture extending Cacti core
@@ -13,7 +13,7 @@ When generating code for this repository:
 ## Technology Stack
 
 ### Core Technologies
-- **PHP**: 8.2+ syntax floor (guarded by `tests/Security/Php82CompatibilityTest.php`); CI integration matrix runs PHP 8.2/8.3/8.4 against a pinned Cacti release
+- **PHP**: 8.2+ syntax floor (guarded by `tests/Security/PhpCompatibilityTest.php`); CI integration matrix runs PHP 8.2/8.3/8.4 against a pinned Cacti release
 - **Platform**: Cacti Plugin Architecture (Cacti 1.2.14+)
 - **Database**: MySQL/MariaDB via Cacti's DB abstraction layer
 - **SNMP**: Bulk MAC/ARP/interface/VLAN discovery via Cacti's SNMP library
@@ -156,6 +156,17 @@ $data = unserialize($raw, array('allowed_classes' => false));
 ## Version Control
 
 Document all changes in `CHANGELOG.md`; use descriptive commit messages referencing issue/PR numbers when applicable.
+
+## CI & Dependency Baselines
+
+- Do not commit a `composer.json` or `composer.lock` in this plugin's own repo root — the shared CI workflow installs Pest/dev dependencies into Cacti's own Composer-managed vendor tree (checked out alongside the plugin). Use Cacti's `composer.json`, not a plugin-local one.
+- Do not add a plugin-local `.phpstan.neon`/`phpstan.neon` or `.php-cs-fixer.php`/`.php-cs-fixer.dist.php` — lint/static-analysis steps run against Cacti's own config from the Cacti core checkout, targeting this plugin's directory. Use the Cacti version, not a plugin-local config.
+- Prefer Cacti's `cacti_count()`/`cacti_sizeof()` wrappers over the raw `count()`/`sizeof()` builtins in new or edited code.
+
+## Internationalization (i18n)
+
+- Translatable strings are managed with GNU gettext via `locales/build_gettext.sh`. `locales/po/cacti.pot` is the source template; Weblate owns syncing the per-language `.po`/`.mo` files from it.
+- When a pull request adds or changes a string wrapped in `__()`/`__n()`/`__esc()`/`__x()`/`__xn()`/`__gettext()`, run `locales/build_gettext.sh` before pushing and add the resulting change to `locales/po/cacti.pot` only. Do not commit the regenerated per-language `.po`/`.mo` files in the same PR — Weblate takes care of the rest.
 
 ## References
 
