@@ -259,6 +259,12 @@ if (!function_exists('api_plugin_is_enabled')) {
 	}
 }
 
+if (!function_exists('exec_background')) {
+	function exec_background($command, $args = '') {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'exec_background', 'sql' => $command, 'params' => array($args));
+	}
+}
+
 if (!function_exists('api_plugin_enable_hooks')) {
 	function api_plugin_enable_hooks($plugin) {
 	}
