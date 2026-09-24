@@ -182,10 +182,10 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 						} else {
 							$brPortIfIndex = @$port_key['port_number'];
 						}
-						$brPortIfType = @$ifInterfaces[$brPortIfIndex]['ifType'];
+						$brPortIfType = isset($ifInterfaces[$brPortIfIndex]['ifType']) ? $ifInterfaces[$brPortIfIndex]['ifType'] : '';
 					} else {
 						$brPortIfIndex = $port_key['port_number'];
-						$brPortIfType  = @$ifInterfaces[$port_key['port_number']]['ifType'];
+						$brPortIfType  = isset($ifInterfaces[$port_key['port_number']]['ifType']) ? $ifInterfaces[$port_key['port_number']]['ifType'] : '';
 					}
 
 					if ((((convert_dlink_data($brPortIfType) >= 6) &&
