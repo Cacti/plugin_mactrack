@@ -79,6 +79,19 @@ switch (get_request_var('action')) {
 	The Save Function
    -------------------------- */
 
+/**
+ * Validates and saves the device edit form's submitted fields via
+ * api_mactrack_device_save() (redirecting back to the edit form for
+ * the saved/original device id), or, when a CSV import file was
+ * uploaded instead, processes it via mactrack_device_import_processor()
+ * and stashes any resulting debug info in the session. Called from
+ * this script's main request-dispatch switch when action=save.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function form_mactrack_save() {
 	global $config;
 
@@ -123,6 +136,35 @@ function form_mactrack_save() {
 	The 'actions' function
    ------------------------ */
 
+/**
+ * Handles the bulk-action confirmation page/submission for the devices
+ * list: on confirmed submission with selected_items set, performs the
+ * requested action for each selected device (delete, enable/disable,
+ * bulk SNMP option or ignore-port changes, connect to a matching Cacti
+ * device by hostname, or copy SNMP settings from the connected Cacti
+ * device); on first display, renders the appropriate confirmation box
+ * and/or bulk-edit form fields. Called from this script's main
+ * request-dispatch switch when action=actions.
+ *
+ * @return void
+ *
+ * @global array $config                      Cacti global
+ *                                            configuration array
+ *                                            (declared but not used
+ *                                            directly here).
+ * @global array $device_actions              Map of drp_action value =>
+ *                                            action label, used for the
+ *                                            bulk-actions confirmation
+ *                                            display.
+ * @global array $fields_mactrack_device_edit The device edit form's
+ *                                            field definitions, used as
+ *                                            a template for bulk-edit
+ *                                            fields.
+ * @global array $fields_mactrack_snmp_item   The SNMP item field
+ *                                            definitions, used when
+ *                                            copying SNMP settings from
+ *                                            a connected Cacti device.
+ */
 function form_mactrack_actions() {
 	global $config, $device_actions, $fields_mactrack_device_edit, $fields_mactrack_snmp_item;
 
@@ -392,6 +434,14 @@ function form_mactrack_actions() {
 	Mactrack Device Functions
    --------------------- */
 
+/**
+ * Validates and stores this view's filter request variables (rows,
+ * page, filter text, sort column/direction, site id, scan type id,
+ * status, device type id, detail flag) into the session for the
+ * devices list view.
+ *
+ * @return void
+ */
 function mactrack_device_request_validation() {
 	// ================= input validation and session storage =================
 	$filters = [
@@ -451,6 +501,13 @@ function mactrack_device_request_validation() {
 	// ================= input validation =================
 }
 
+/**
+ * Exports the current filtered devices list (with full SNMP and
+ * scan-result details) as a downloaded CSV file. Called from this
+ * script's main request-dispatch switch when action=export.
+ *
+ * @return void
+ */
 function mactrack_device_export() {
 	mactrack_device_request_validation();
 
@@ -502,6 +559,18 @@ function mactrack_device_export() {
 	}
 }
 
+/**
+ * Renders the device CSV import page: displays results from a
+ * previous import attempt (if any, stashed in the session by
+ * form_mactrack_save()), the file upload form, and documentation of
+ * the expected CSV column format. Called from this script's main
+ * request-dispatch switch when action=import.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function mactrack_device_import() {
 	global $config;
 
@@ -592,6 +661,19 @@ function mactrack_device_import() {
 	form_save_button('return', 'import');
 }
 
+/**
+ * Parses an uploaded CSV file's rows (device_name, hostname, notes,
+ * SNMP settings, etc.) and saves each as a MacTrack device via
+ * api_mactrack_device_save(), matching existing devices by site id,
+ * hostname, and SNMP port to decide whether to insert or (when
+ * allow_update is set) update.
+ *
+ * @param array &$devices The raw CSV file lines (first line is the
+ *                       header row).
+ *
+ * @return array A list of human-readable per-row result messages
+ *               describing what was imported/updated/skipped.
+ */
 function mactrack_device_import_processor(&$devices) {
 	$i            = 0;
 	$return_array = [];
@@ -861,6 +943,22 @@ function mactrack_device_import_processor(&$devices) {
 	return $return_array;
 }
 
+/**
+ * Renders the add/edit form for a MacTrack device (hostname, SNMP
+ * settings, scan type, ignore ports, notes, and its detected flow/mac
+ * scan status), showing scan-status details only for existing devices.
+ * Called from this script's main request-dispatch switch when
+ * action=edit.
+ *
+ * @return void
+ *
+ * @global array $config                      Cacti global
+ *                                            configuration array
+ *                                            (declared but not used
+ *                                            directly here).
+ * @global array $fields_mactrack_device_edit The device edit form's
+ *                                            field definitions.
+ */
 function mactrack_device_edit() {
 	global $config, $fields_mactrack_device_edit;
 
@@ -976,6 +1074,21 @@ function mactrack_device_edit() {
 	form_save_button('mactrack_devices.php', 'return', 'device_id');
 }
 
+/**
+ * Builds and executes the SQL query for the devices list view,
+ * applying the current filter text, status, scan type, device type,
+ * and site request variables, sort order, and optional row limits.
+ *
+ * @param string &$sql_where   Receives the generated SQL WHERE clause.
+ * @param int    $rows         Number of rows per page, used to compute
+ *                            the SQL LIMIT clause when $apply_limits
+ *                            is true.
+ * @param bool   $apply_limits Whether to apply a SQL LIMIT clause
+ *                            (default true).
+ *
+ * @return array The matching device records, joined with their site
+ *               name and device type description.
+ */
 function mactrack_get_devices(&$sql_where, $rows, $apply_limits = true) {
 	$status         = intval(get_filter_request_var('status'));
 	$type_id        = intval(get_filter_request_var('type_id'));
@@ -1042,6 +1155,26 @@ function mactrack_get_devices(&$sql_where, $rows, $apply_limits = true) {
 	return db_fetch_assoc($query_string);
 }
 
+/**
+ * Renders the main devices list page: validates/stores this view's
+ * filter request variables, displays the devices filter form, then
+ * displays a filtered, sorted, paginated table of devices with a
+ * bulk-actions dropdown. Called from this script's main
+ * request-dispatch switch as the default view.
+ *
+ * @return void
+ *
+ * @global array $device_actions          Map of drp_action value =>
+ *                                       action label, used for the
+ *                                       bulk-actions dropdown.
+ * @global array $mactrack_device_types  Device type option list used
+ *                                       by the device filter form.
+ * @global array $config                Cacti global configuration
+ *                                       array (declared but not used
+ *                                       directly here).
+ * @global array $item_rows              Default number of rows per
+ *                                       page from Cacti settings.
+ */
 function mactrack_device() {
 	global $device_actions, $mactrack_device_types, $config, $item_rows;
 
@@ -1152,6 +1285,15 @@ function mactrack_device() {
 	form_end();
 }
 
+/**
+ * Renders the search/site/status/scan-type/device-type filter form
+ * controls for the devices list view.
+ *
+ * @return void
+ *
+ * @global array $item_rows Rows-per-page option list used to populate
+ *                         the rows dropdown.
+ */
 function mactrack_device_filter() {
 	global $item_rows;
 
