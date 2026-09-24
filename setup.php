@@ -22,6 +22,22 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Registers this plugin's hooks and permission realms with Cacti, then
+ * creates/verifies its database schema and default site. Cacti plugin
+ * API entry point invoked when the plugin is installed or
+ * re-registered during an upgrade.
+ *
+ * @param bool $operator_initiated Whether this install is being run by
+ *                                an operator interactively (true,
+ *                                default) versus automatically during
+ *                                an upgrade (false); affects
+ *                                default-site seeding retry-state
+ *                                handling and CLI warning output.
+ *
+ * @return bool True if a default site exists after setup completes,
+ *              false otherwise.
+ */
 function plugin_mactrack_install($operator_initiated = true) {
 	api_plugin_register_hook('mactrack', 'top_header_tabs',       'mactrack_show_tab',             'setup.php');
 	api_plugin_register_hook('mactrack', 'top_graph_header_tabs', 'mactrack_show_tab',             'setup.php');
@@ -54,6 +70,12 @@ function plugin_mactrack_install($operator_initiated = true) {
 	return $site_ready;
 }
 
+/**
+ * Removes this plugin's default-site seeding retry-state settings.
+ * Cacti plugin API entry point invoked when the plugin is uninstalled.
+ *
+ * @return bool Always true.
+ */
 function plugin_mactrack_uninstall() {
 	db_execute_prepared(
 		'DELETE FROM settings WHERE name IN (?, ?, ?)',
@@ -63,6 +85,17 @@ function plugin_mactrack_uninstall() {
 	return true;
 }
 
+/**
+ * Reads this plugin's version and metadata from its INFO file. Cacti
+ * plugin API entry point used throughout the plugin to display version
+ * information.
+ *
+ * @return array The parsed INFO file's 'info' section (name, author,
+ *               homepage, version, etc.).
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate the plugin's INFO file.
+ */
 function plugin_mactrack_version() {
 	global $config;
 	$info = parse_ini_file($config['base_path'] . '/plugins/mactrack/INFO', true);
@@ -70,6 +103,13 @@ function plugin_mactrack_version() {
 	return $info['info'];
 }
 
+/**
+ * Ensures the plugin's configuration/schema is up to date by delegating
+ * to mactrack_check_upgrade(). Cacti plugin API entry point invoked on
+ * relevant page loads to catch pending upgrades.
+ *
+ * @return bool Always true.
+ */
 function plugin_mactrack_check_config() {
 	// Here we will check to ensure everything is configured
 	mactrack_check_upgrade();
@@ -77,6 +117,13 @@ function plugin_mactrack_check_config() {
 	return true;
 }
 
+/**
+ * Ensures the plugin's configuration/schema is up to date by delegating
+ * to mactrack_check_upgrade(). Cacti plugin API entry point invoked
+ * when the plugin is upgraded.
+ *
+ * @return bool Always false.
+ */
 function plugin_mactrack_upgrade() {
 	// Here we will upgrade to the newest version
 	mactrack_check_upgrade();
@@ -84,6 +131,21 @@ function plugin_mactrack_upgrade() {
 	return false;
 }
 
+/**
+ * Detects a version mismatch between the running plugin code and the
+ * version recorded in plugin_config, and when found (and only on a
+ * small set of pages, to limit overhead), re-registers hooks, runs the
+ * database upgrade, migrates legacy SNMP read strings, recreates
+ * missing permission realms, renames legacy realm display names,
+ * rebuilds cached scanning functions, and updates the stored plugin
+ * version metadata. Always retries any pending default-site seeding at
+ * the end.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate library files to include.
+ */
 function mactrack_check_upgrade() {
 	global $config;
 
@@ -158,10 +220,26 @@ function mactrack_check_upgrade() {
 	mactrack_retry_default_site();
 }
 
+/**
+ * Checks whether a database table exists.
+ *
+ * @param string $table The table name to check.
+ *
+ * @return bool True if the table exists, false otherwise.
+ */
 function mactrack_db_table_exists($table) {
 	return cacti_sizeof(db_fetch_assoc("SHOW TABLES LIKE '$table'"));
 }
 
+/**
+ * Checks whether a column exists in a database table.
+ *
+ * @param string $table  The table name to check.
+ * @param string $column The column name to check for.
+ *
+ * @return bool True if the table exists and has the given column,
+ *              false otherwise.
+ */
 function mactrack_db_column_exists($table, $column) {
 	$found = false;
 
@@ -182,6 +260,15 @@ function mactrack_db_column_exists($table, $column) {
 	return $found;
 }
 
+/**
+ * Checks whether a named index/key exists on a database table.
+ *
+ * @param string $table The table name to check.
+ * @param string $index The index/key name to check for.
+ *
+ * @return bool True if the table exists and has the given index, false
+ *              otherwise.
+ */
 function mactrack_db_key_exists($table, $index) {
 	$found = false;
 
@@ -202,46 +289,136 @@ function mactrack_db_key_exists($table, $index) {
 	return $found;
 }
 
+/**
+ * Executes an arbitrary SQL statement, discarding its result. Thin
+ * wrapper used by the schema setup routines; $message is currently
+ * unused but kept for call-site self-documentation.
+ *
+ * @param string $message Human-readable description of the operation
+ *                        (unused).
+ * @param string $syntax  The SQL statement to execute.
+ *
+ * @return void
+ */
 function mactrack_execute_sql($message, $syntax) {
 	$result = db_execute($syntax);
 }
 
+/**
+ * Creates a database table if it doesn't already exist.
+ *
+ * @param string $table  The table name to check/create.
+ * @param string $syntax The CREATE TABLE SQL statement to execute if
+ *                      the table doesn't exist.
+ *
+ * @return void
+ */
 function mactrack_create_table($table, $syntax) {
 	if (!mactrack_db_table_exists($table)) {
 		db_execute($syntax);
 	}
 }
 
+/**
+ * Adds a column to a database table if it doesn't already exist.
+ *
+ * @param string $table  The table name to check.
+ * @param string $column The column name to check for.
+ * @param string $syntax The ALTER TABLE SQL statement to execute if the
+ *                      column doesn't exist.
+ *
+ * @return void
+ */
 function mactrack_add_column($table, $column, $syntax) {
 	if (!mactrack_db_column_exists($table, $column)) {
 		db_execute($syntax);
 	}
 }
 
+/**
+ * Adds an index/key to a database table if it doesn't already exist.
+ *
+ * @param string $table  The table name to check.
+ * @param string $index  The index/key name to check for.
+ * @param string $syntax The ALTER TABLE SQL statement to execute if the
+ *                      index doesn't exist.
+ *
+ * @return void
+ */
 function mactrack_add_index($table, $index, $syntax) {
 	if (!mactrack_db_key_exists($table, $index)) {
 		db_execute($syntax);
 	}
 }
 
+/**
+ * Modifies an existing column in a database table (e.g. changing its
+ * type/default), only if the column currently exists.
+ *
+ * @param string $table  The table name to check.
+ * @param string $column The column name to check for.
+ * @param string $syntax The ALTER TABLE SQL statement to execute if the
+ *                      column exists.
+ *
+ * @return void
+ */
 function mactrack_modify_column($table, $column, $syntax) {
 	if (mactrack_db_column_exists($table, $column)) {
 		db_execute($syntax);
 	}
 }
 
+/**
+ * Deletes a column from a database table, only if the column currently
+ * exists.
+ *
+ * @param string $table  The table name to check.
+ * @param string $column The column name to check for.
+ * @param string $syntax The ALTER TABLE SQL statement to execute if the
+ *                      column exists.
+ *
+ * @return void
+ */
 function mactrack_delete_column($table, $column, $syntax) {
 	if (mactrack_db_column_exists($table, $column)) {
 		db_execute($syntax);
 	}
 }
 
+/**
+ * Checks whether this plugin's dependencies are satisfied. Cacti
+ * plugin API hook point; currently always reports dependencies as
+ * satisfied.
+ *
+ * @return bool Always true.
+ *
+ * @global array $plugins Cacti global list of installed plugins
+ *                       (declared but not used directly here).
+ * @global array $config  Cacti global configuration array (declared
+ *                       but not used directly here).
+ */
 function mactrack_check_dependencies() {
 	global $plugins, $config;
 
 	return true;
 }
 
+/**
+ * Creates/updates the plugin's database tables and ensures a default
+ * site exists, preserving any prior default-site seeding backoff state
+ * across incomplete-upgrade re-entries into this hook (unless the
+ * install is operator-initiated).
+ *
+ * @param bool $operator_initiated Whether this call is operator-
+ *                                initiated (true, default) versus an
+ *                                automatic upgrade re-entry (false).
+ *
+ * @return bool True if a default site exists after setup completes,
+ *              false otherwise.
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate the database include file.
+ */
 function mactrack_setup_table_new($operator_initiated = true) {
 	global $config;
 
@@ -256,6 +433,18 @@ function mactrack_setup_table_new($operator_initiated = true) {
 	return mactrack_setup_database(PHP_SAPI !== 'cli');
 }
 
+/**
+ * Emits this plugin's JavaScript and CSS `<script>`/`<link>` tags into
+ * the page head, using a theme-specific stylesheet when one exists for
+ * the currently selected theme. Registered as the 'page_head' Cacti
+ * hook.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       build asset URLs and check for a theme-specific
+ *                       stylesheet.
+ */
 function mactrack_page_head() {
 	global $config;
 
@@ -269,6 +458,16 @@ function mactrack_page_head() {
 	}
 }
 
+/**
+ * Launches the MacTrack poller script (poller_mactrack.php) as a
+ * background process. Registered as the 'poller_bottom' Cacti hook,
+ * invoked at the end of each Cacti poller cycle.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       build the poller script's path.
+ */
 function mactrack_poller_bottom() {
 	global $config;
 
@@ -277,6 +476,41 @@ function mactrack_poller_bottom() {
 	exec_background($command_string, $extra_args);
 }
 
+/**
+ * Builds this plugin's Console "Settings > Mactrack" configuration
+ * tab's field definitions (scanning frequency, concurrent processes,
+ * data retention, notification policies, etc.). Registered as the
+ * 'config_settings' Cacti hook.
+ *
+ * @return void
+ *
+ * @global array $tabs                          Cacti settings tabs
+ *                                              registry; a 'mactrack'
+ *                                              entry is added.
+ * @global array $settings                      Cacti settings field
+ *                                              registry; a 'mactrack'
+ *                                              section is added.
+ * @global array $settings_user                 Reserved/declared for
+ *                                              parity with other
+ *                                              functions in this file;
+ *                                              not used directly here.
+ * @global array $tabs_graphs                   Reserved/declared for
+ *                                              parity with other
+ *                                              functions in this file;
+ *                                              not used directly here.
+ * @global array $snmp_versions                 SNMP version option
+ *                                              list used by SNMP-
+ *                                              related settings
+ *                                              fields.
+ * @global array $mactrack_poller_frequencies   Scanning frequency
+ *                                              option list.
+ * @global array $mactrack_data_retention        Data retention option
+ *                                              list.
+ * @global array $mactrack_macauth_frequencies   MAC auth report
+ *                                              frequency option list.
+ * @global array $mactrack_update_policies       Cacti/MacTrack sync
+ *                                              policy option list.
+ */
 function mactrack_config_settings() {
 	global $tabs, $settings, $settings_user, $tabs_graphs, $snmp_versions, $mactrack_poller_frequencies,
 	$mactrack_data_retention, $mactrack_macauth_frequencies, $mactrack_update_policies;
@@ -639,6 +873,18 @@ function mactrack_config_settings() {
 	mactrack_check_upgrade();
 }
 
+/**
+ * Registers this plugin's pages (devices, SNMP options, sites, device
+ * types, utilities, mac watch, mac auth, vendor macs, and their
+ * sub-actions/edit views) into Cacti's breadcrumb navigation array.
+ * Registered as the 'draw_navigation_text' Cacti hook.
+ *
+ * @param array $nav The existing navigation entries array, keyed by
+ *                   "file.php:action".
+ *
+ * @return array The navigation entries array with this plugin's pages
+ *               added.
+ */
 function mactrack_draw_navigation_text($nav) {
 	$nav['mactrack_devices.php:'] = [
 		'title'   => __('Mactrack Devices', 'mactrack'),
@@ -923,6 +1169,22 @@ function mactrack_draw_navigation_text($nav) {
 	return $nav;
 }
 
+/**
+ * Renders this plugin's tab icon/link in the graph/console header tab
+ * bar (linking to the currently selected MacTrack report view), shown
+ * only to users with view permission. Registered as the
+ * 'top_header_tabs' and 'top_graph_header_tabs' Cacti hooks.
+ *
+ * @return void
+ *
+ * @global array $config                     Cacti global configuration
+ *                                          array; used to build asset
+ *                                          and page URLs.
+ * @global array $user_auth_realm_filenames Reserved/declared for parity
+ *                                          with other functions in this
+ *                                          file; not used directly
+ *                                          here.
+ */
 function mactrack_show_tab() {
 	global $config, $user_auth_realm_filenames;
 
@@ -941,6 +1203,52 @@ function mactrack_show_tab() {
 	}
 }
 
+/**
+ * Populates the various global lookup/option arrays used throughout
+ * this plugin (device types, search filter types, poller frequencies,
+ * data retention options, MAC auth report frequencies, duplex/update
+ * policy options, refresh intervals) and registers this plugin's
+ * Console menu entries and icon glyphs. Registered as the
+ * 'config_arrays' Cacti hook.
+ *
+ * @return void
+ *
+ * @global array  $mactrack_device_types        Device type option
+ *                                              list; populated here.
+ * @global array  $mactrack_search_types        Filter-type option
+ *                                              list; populated here.
+ * @global array  $messages                     Cacti flash-message
+ *                                              registry; a pending
+ *                                              session message is
+ *                                              surfaced here.
+ * @global array  $menu                         Cacti Console menu
+ *                                              registry; this plugin's
+ *                                              entries are added.
+ * @global array  $menu_glyphs                  Cacti Console menu icon
+ *                                              registry; this plugin's
+ *                                              icons are added.
+ * @global array  $config                       Cacti global
+ *                                              configuration array.
+ * @global array  $rows_selector                Reserved/declared for
+ *                                              parity with other
+ *                                              functions in this file;
+ *                                              not used directly here.
+ * @global array  $mactrack_poller_frequencies  Scanning frequency
+ *                                              option list; populated
+ *                                              here.
+ * @global array  $mactrack_data_retention      Data retention option
+ *                                              list; populated here.
+ * @global int    $refresh_interval             Refresh interval option
+ *                                              list; populated here.
+ * @global array  $mactrack_macauth_frequencies MAC auth report
+ *                                              frequency option list;
+ *                                              populated here.
+ * @global array  $mactrack_duplexes            Duplex option list;
+ *                                              populated here.
+ * @global array  $mactrack_update_policies     Cacti/MacTrack sync
+ *                                              policy option list;
+ *                                              populated here.
+ */
 function mactrack_config_arrays() {
 	global $mactrack_device_types, $mactrack_search_types, $messages;
 	global $menu, $menu_glyphs, $config, $rows_selector;
@@ -1066,6 +1374,59 @@ function mactrack_config_arrays() {
 	$menu_glyphs[__('Mactrack Tools', 'mactrack')] = 'fa fa-bullhorn';
 }
 
+/**
+ * Populates the field definition arrays for all of this plugin's
+ * add/edit forms (device types, devices, sites, SNMP option sets and
+ * items, MAC watch, MAC auth). Registered as the 'config_form' Cacti
+ * hook.
+ *
+ * @return void
+ *
+ * @global array $fields_mactrack_device_type_edit The device type edit
+ *                                                form's field
+ *                                                definitions;
+ *                                                populated here.
+ * @global array $fields_mactrack_device_edit      The device edit
+ *                                                form's field
+ *                                                definitions;
+ *                                                populated here.
+ * @global array $fields_mactrack_site_edit        The site edit form's
+ *                                                field definitions;
+ *                                                populated here.
+ * @global array $fields_mactrack_snmp_edit        The SNMP option set
+ *                                                edit form's field
+ *                                                definitions;
+ *                                                populated here.
+ * @global array $fields_mactrack_snmp_item        The SNMP item field
+ *                                                definitions;
+ *                                                populated here.
+ * @global array $fields_mactrack_snmp_item_edit   The SNMP item edit
+ *                                                form's field
+ *                                                definitions;
+ *                                                populated here.
+ * @global array $mactrack_device_types            Device type option
+ *                                                list, used to build
+ *                                                the device type
+ *                                                dropdown.
+ * @global array $snmp_versions                    SNMP version option
+ *                                                list, used by SNMP-
+ *                                                related fields.
+ * @global array $fields_mactrack_macw_edit        The MAC watch edit
+ *                                                form's field
+ *                                                definitions;
+ *                                                populated here.
+ * @global array $fields_mactrack_maca_edit        The MAC auth edit
+ *                                                form's field
+ *                                                definitions;
+ *                                                populated here.
+ * @global array $snmp_priv_protocols              SNMP privacy
+ *                                                protocol option list,
+ *                                                used by SNMP v3
+ *                                                fields.
+ * @global array $snmp_auth_protocols              SNMP auth protocol
+ *                                                option list, used by
+ *                                                SNMP v3 fields.
+ */
 function mactrack_config_form() {
 	global $fields_mactrack_device_type_edit, $fields_mactrack_device_edit, $fields_mactrack_site_edit;
 	global $fields_mactrack_snmp_edit, $fields_mactrack_snmp_item, $fields_mactrack_snmp_item_edit;
@@ -1716,6 +2077,19 @@ function mactrack_config_form() {
 	];
 }
 
+/**
+ * Migrates legacy per-device colon-delimited snmp_readstrings values
+ * into the newer SNMP option set model: for each distinct combination
+ * of read strings/version/port/timeout/retries found across existing
+ * devices, creates a new named SNMP option set with one item per read
+ * string. Invoked once from mactrack_check_upgrade() and guarded by
+ * the mt_convert_readstrings setting so it only runs a single time.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function convert_readstrings() {
 	global $config;
 
