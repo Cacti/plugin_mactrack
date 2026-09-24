@@ -79,6 +79,26 @@ switch (get_request_var('action')) {
 	The 'actions' function
    ------------------------ */
 
+/**
+ * Handles the bulk-action confirmation page/submission for the MACs
+ * list (Authorize/Revoke): on confirmed submission with selected_items
+ * set, validates each selected MAC/IP pair and performs the requested
+ * action via api_mactrack_authorize_mac_addresses() or
+ * api_mactrack_revoke_mac_addresses(); on first display, renders a
+ * confirmation box listing the selected MAC addresses. Called from
+ * this script's main request-dispatch switch when action=actions.
+ *
+ * @return void
+ *
+ * @global array $config                      Cacti global
+ *                                            configuration array
+ *                                            (declared but not used
+ *                                            directly here).
+ * @global array $mactrack_view_macs_actions  Map of drp_action value =>
+ *                                            action label, used for the
+ *                                            bulk-actions confirmation
+ *                                            display.
+ */
 function form_actions() {
 	global $config, $mactrack_view_macs_actions;
 
@@ -207,12 +227,41 @@ function form_actions() {
 	bottom_footer();
 }
 
+/**
+ * Normalizes a list of raw id values (e.g. from decoded JSON) to a
+ * re-indexed array of positive integers, discarding any non-positive
+ * or non-numeric entries.
+ *
+ * @param array $ids The raw id values to normalize.
+ *
+ * @return array The filtered, re-indexed list of positive integer ids.
+ */
 function mactrack_normalize_ids(array $ids): array {
 	return array_values(array_filter(array_map('intval', $ids), static function ($id) {
 		return $id > 0;
 	}));
 }
 
+/**
+ * Handles the bulk-action confirmation page/submission for the
+ * aggregated MACs list (currently only Delete): on confirmed
+ * submission with selected_items set, deletes the selected
+ * mac_track_aggregated_ports rows; on first display, renders a
+ * confirmation box listing the selected rows' details. Called from
+ * this script's main request-dispatch switch when action=actions.
+ *
+ * @return void
+ *
+ * @global array $config                          Cacti global
+ *                                                configuration array
+ *                                                (declared but not used
+ *                                                directly here).
+ * @global array $mactrack_view_agg_macs_actions  Map of drp_action
+ *                                                value => action
+ *                                                label, used for the
+ *                                                bulk-actions
+ *                                                confirmation display.
+ */
 function form_aggregated_actions() {
 	global $config, $mactrack_view_agg_macs_actions;
 
@@ -308,6 +357,19 @@ function form_aggregated_actions() {
 	bottom_footer();
 }
 
+/**
+ * Marks a MAC address as authorized: flags all matching
+ * mac_track_ports, mac_track_aggregated_ports, and mac_track_temp_ports
+ * rows as authorized, and adds/updates a corresponding
+ * mac_track_macauth entry, logging the action (with the acting user's
+ * name) to the Cacti log for audit purposes.
+ *
+ * @param string $mac_address The MAC address to authorize.
+ * @param string $ip_address  The IP address associated with this MAC,
+ *                           recorded in the macauth description.
+ *
+ * @return void
+ */
 function api_mactrack_authorize_mac_addresses($mac_address, $ip_address) {
 	db_execute_prepared('UPDATE mac_track_ports
 		SET authorized=1
@@ -333,6 +395,17 @@ function api_mactrack_authorize_mac_addresses($mac_address, $ip_address) {
 		db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', [$_SESSION['sess_user_id']]), false, 'MACTRACK');
 }
 
+/**
+ * Marks a MAC address as revoked (unauthorized): flags all matching
+ * mac_track_ports and mac_track_aggregated_ports rows as
+ * unauthorized, and removes its mac_track_macauth entry, logging the
+ * action (with the acting user's name) to the Cacti log for audit
+ * purposes.
+ *
+ * @param string $mac_address The MAC address to revoke.
+ *
+ * @return void
+ */
 function api_mactrack_revoke_mac_addresses($mac_address) {
 	db_execute_prepared('UPDATE mac_track_ports
 		SET authorized=0
@@ -352,6 +425,14 @@ function api_mactrack_revoke_mac_addresses($mac_address) {
 		db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', [$_SESSION['sess_user_id']]), false, 'MACTRACK');
 }
 
+/**
+ * Validates and stores this view's filter request variables (rows,
+ * page, site id, device id, VLAN, MAC/port-name/IP filter type and
+ * text, authorized flag, scan date, sort column/direction) into the
+ * session for the MACs list view.
+ *
+ * @return void
+ */
 function mactrack_view_macs_validate_request_vars() {
 	// ================= input validation and session storage =================
 	$filters = [
@@ -435,6 +516,14 @@ function mactrack_view_macs_validate_request_vars() {
 	// ================= input validation =================
 }
 
+/**
+ * Exports the current filtered MAC results (site, hostname, device,
+ * VLAN, MAC, vendor, IP, DNS hostname, port, scan date) as a
+ * downloaded CSV file. Called from this script's main
+ * request-dispatch switch when action=export.
+ *
+ * @return void
+ */
 function mactrack_view_export_macs() {
 	mactrack_view_macs_validate_request_vars();
 
@@ -474,6 +563,24 @@ function mactrack_view_export_macs() {
 	}
 }
 
+/**
+ * Builds and executes the prepared SQL query for the MACs list view,
+ * applying the current VLAN, MAC/port-name/IP filters, authorized
+ * flag, site, device, and scan date request variables, sort order, and
+ * optional row limits. Returns an empty result set if no WHERE clause
+ * could be constructed (avoiding an unfiltered full table scan).
+ *
+ * @param string &$sql_where   Receives the generated SQL WHERE clause.
+ * @param array  &$sql_params  Receives the bound parameter values for
+ *                            the prepared statement.
+ * @param int    $rows         Number of rows per page, used to compute
+ *                            the SQL LIMIT clause when $apply_limits
+ *                            is true.
+ * @param bool   $apply_limits Whether to apply a SQL LIMIT clause
+ *                            (default true).
+ *
+ * @return array The matching MAC/port records.
+ */
 function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_limits = true) {
 	$sql_params = [];
 
@@ -661,6 +768,38 @@ function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_
 	}
 }
 
+/**
+ * Renders the main MAC results list page: displays the tab bar and MAC
+ * filter form, then displays a filtered, sorted, paginated table of
+ * MAC/port records with an authorize/revoke bulk-actions dropdown
+ * (shown only to permitted users). Called from this script's main
+ * request-dispatch switch as the default view.
+ *
+ * @return void
+ *
+ * @global string $title                      The page title, set for
+ *                                            the surrounding page
+ *                                            chrome.
+ * @global string $report                     Reserved/declared for
+ *                                            parity with other
+ *                                            functions in this file;
+ *                                            not used directly here.
+ * @global array  $mactrack_search_types      Filter-type option list
+ *                                            used by the MAC filter
+ *                                            form.
+ * @global array  $rows_selector              Reserved/declared for
+ *                                            parity with other
+ *                                            functions in this file;
+ *                                            not used directly here.
+ * @global array  $config                     Cacti global configuration
+ *                                            array.
+ * @global array  $mactrack_view_macs_actions Map of drp_action value =>
+ *                                            action label, used for the
+ *                                            bulk-actions dropdown.
+ * @global array  $item_rows                  Default number of rows
+ *                                            per page from Cacti
+ *                                            settings.
+ */
 function mactrack_view_macs() {
 	global $title, $report, $mactrack_search_types, $rows_selector, $config;
 	global $mactrack_view_macs_actions, $item_rows;
@@ -867,6 +1006,39 @@ function mactrack_view_macs() {
 	}
 }
 
+/**
+ * Renders the aggregated MAC results list page: displays the tab bar
+ * and MAC filter form, then displays a filtered, sorted, paginated
+ * table of aggregated MAC/port records with a delete bulk-actions
+ * dropdown (shown only to permitted users). Called from this script's
+ * main request-dispatch switch when action=aggregated.
+ *
+ * @return void
+ *
+ * @global string $title                         The page title, set
+ *                                               for the surrounding
+ *                                               page chrome.
+ * @global string $report                        Reserved/declared for
+ *                                               parity with other
+ *                                               functions in this file;
+ *                                               not used directly here.
+ * @global array  $mactrack_search_types         Filter-type option
+ *                                               list used by the MAC
+ *                                               filter form.
+ * @global array  $rows_selector                 Reserved/declared for
+ *                                               parity with other
+ *                                               functions in this file;
+ *                                               not used directly here.
+ * @global array  $config                        Cacti global
+ *                                               configuration array.
+ * @global array  $mactrack_view_agg_macs_actions Map of drp_action
+ *                                               value => action label,
+ *                                               used for the
+ *                                               bulk-actions dropdown.
+ * @global array  $item_rows                     Default number of rows
+ *                                               per page from Cacti
+ *                                               settings.
+ */
 function mactrack_view_aggregated_macs() {
 	global $title, $report, $mactrack_search_types, $rows_selector, $config;
 	global $mactrack_view_agg_macs_actions, $item_rows;
@@ -1077,6 +1249,22 @@ function mactrack_view_aggregated_macs() {
 	}
 }
 
+/**
+ * Renders the search/site/device/VLAN/MAC/port-name/IP/authorized/
+ * scan-date filter form controls for the MACs list view.
+ *
+ * @return void
+ *
+ * @global array $item_rows              Rows-per-page option list used
+ *                                       to populate the rows dropdown.
+ * @global array $rows_selector          Reserved/declared for parity
+ *                                       with other functions in this
+ *                                       file; not used directly here.
+ * @global array $mactrack_search_types  Filter-type option list (e.g.
+ *                                       matches/contains/begins with)
+ *                                       used to populate the MAC/port
+ *                                       name/IP filter type dropdowns.
+ */
 function mactrack_mac_filter() {
 	global $item_rows, $rows_selector, $mactrack_search_types;
 
