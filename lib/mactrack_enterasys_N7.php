@@ -29,11 +29,25 @@ array_push($mactrack_scanning_functions, 'get_enterasys_N7_switch_ports');
 $mactrack_scanning_functions_ip ??= [];
 array_push($mactrack_scanning_functions_ip, 'get_CTAlias_table');
 
-/*	get_generic_switch_ports - This is a basic function that will scan the dot1d
-  OID tree for all switch port to MAC address association and stores in the
-  mac_track_temp_ports table for future processing in the finalization steps of the
-  scanning process.
-*/
+/**
+ * SNMP-scans an Enterasys N7-series switch for its port, VLAN, and MAC
+ * address table data, populating $device with counts and details.
+ * Registered in $mactrack_scanning_functions for dispatch by the
+ * MacTrack poller against devices of this vendor's device type.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port/VLAN/MAC scan results.
+ * @param int   $lowPort  Optional lowest port number to include in the
+ *                        scan (0 means no lower bound).
+ * @param int   $highPort Optional highest port number to include in
+ *                        the scan (0 means no upper bound).
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
@@ -123,10 +137,35 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	return $device;
 }
 
-/*	get_base_dot1dTpFdbEntry_ports - This function will grab information from the
-  port bridge snmp table and return it to the calling progrem for further processing.
-  This is a foundational function for all vendor data collection functions.
-*/
+/**
+ * Retrieves port-to-MAC-address association data from the standard
+ * dot1d bridge-port SNMP table for an Enterasys N7-series switch,
+ * optionally storing results to the database. Foundational function
+ * reused by vendor data collection functions.
+ *
+ * @param array $site            The site record the device belongs to.
+ * @param array &$device         The device record being scanned.
+ * @param array &$ifInterfaces   The device's built interfaces table
+ *                               (from build_InterfacesTable()).
+ * @param string $snmp_readstring Optional SNMP read community string;
+ *                               falls back to
+ *                               $device['snmp_readstring'] when empty.
+ * @param bool  $store_to_db     Whether to persist the collected port
+ *                               results to the database; when false,
+ *                               the port results array is returned
+ *                               instead.
+ * @param int   $lowPort         Optional lowest port number to include
+ *                               in the scan (default 1).
+ * @param int   $highPort        Optional highest port number to
+ *                               include in the scan (default 9999).
+ *
+ * @return array|void The collected port results array when
+ *                     $store_to_db is false; otherwise no explicit
+ *                     return value ($device is updated in place).
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 	mactrack_debug('FUNCTION: get_enterasys_N7_dot1dTpFdbEntry_ports started');
@@ -341,6 +380,15 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
 	}
 }
 
+/**
+ * Converts a dotted-decimal MAC address OID suffix (as returned by
+ * Enterasys N7-series SNMP OIDs, with a leading index component to
+ * strip) into a colon-delimited hex MAC address.
+ *
+ * @param string $oldmac The raw dotted-decimal OID suffix.
+ *
+ * @return string The formatted colon-delimited hex MAC address.
+ */
 function enterasys_N7_convert_macs($oldmac) {
 	$oldmac = substr($oldmac,stripos($oldmac,'.') + 1);
 	$oldmac = substr($oldmac,stripos($oldmac,'.'));
@@ -354,6 +402,20 @@ function enterasys_N7_convert_macs($oldmac) {
 	return $newmac;
 }
 
+/**
+ * Walks an Enterasys N7-series switch's dot1q bridge-port-to-VLAN
+ * association OID (dot1qTpFdbStatus) and resolves each entry's VLAN
+ * name (dot1qVlanStaticName), returning the results re-keyed by MAC
+ * address key to VLAN id.
+ *
+ * @param array  &$device         The device record being queried.
+ * @param string $snmp_readstring Optional SNMP read community string;
+ *                                falls back to
+ *                                $device['snmp_readstring'] when empty.
+ *
+ * @return array Array of MAC-address key => VLAN id, re-keyed via
+ *               array_rekey().
+ */
 function xform_enterasys_N7_vlan_associations(&$device, $snmp_readstring = '') {
 	// get raw index data
 	if ($snmp_readstring == '') {
@@ -395,6 +457,15 @@ function xform_enterasys_N7_vlan_associations(&$device, $snmp_readstring = '') {
 	// return $output_array;
 }
 
+/**
+ * Extracts the VLAN id from an Enterasys N7-series dot1q-related SNMP
+ * OID string (the portion up to and including the second dotted
+ * segment).
+ *
+ * @param string $OID The raw OID string.
+ *
+ * @return string The extracted VLAN id portion of the OID.
+ */
 function get_enterasys_N7_vlan_id($OID) {
 	$perPos  = strpos($OID, '.',1);
 	$vlan_id = substr($OID,0,$perPos);
@@ -402,9 +473,21 @@ function get_enterasys_N7_vlan_id($OID) {
 	return $vlan_id;
 }
 
-/*	get_CTAlias_table - This function reads a devices CTAlias table for a site and stores
-  the IP address and MAC address combinations in the mac_track_ips table.
-*/
+/**
+ * Reads an Enterasys N7-series device's CTAlias table (interfaces,
+ * MAC addresses, protocol, and address text) for a site and stores the
+ * IP address and MAC address combinations in the mac_track_ips table.
+ * Registered in $mactrack_scanning_functions_ip for dispatch by the
+ * MacTrack poller against devices of this vendor's device type.
+ *
+ * @param array $site    The site record the device belongs to.
+ * @param array &$device The device record being scanned.
+ *
+ * @return void
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_CTAlias_table($site, &$device) {
 	global $debug, $scan_date;
 
