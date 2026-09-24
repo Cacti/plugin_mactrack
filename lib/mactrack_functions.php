@@ -4111,6 +4111,18 @@ function mactrack_get_vendor_name($mac) {
 	}
 }
 
+/**
+ * Renders the search/rows filter form controls for the sites list
+ * view.
+ *
+ * @param string $page The form action target page (default
+ *                     'mactrack_sites.php').
+ *
+ * @return void
+ *
+ * @global array $item_rows Rows-per-page option list used to populate
+ *                         the rows dropdown.
+ */
 function mactrack_site_filter($page = 'mactrack_sites.php') {
 	global $item_rows;
 
@@ -4274,17 +4286,46 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 }
 
 if (!function_exists('cacti_sizeof')) {
-	function cacti_sizeof($array) {
+	/**
+ * Polyfill for Cacti's cacti_sizeof() helper, defined only when not
+ * already available: a null/false/non-array-safe wrapper around
+ * sizeof().
+ *
+ * @param mixed $array The value to measure.
+ *
+ * @return int The array's element count, or 0 if not a valid array.
+ */
+function cacti_sizeof($array) {
 		return ($array === false || !is_array($array)) ? 0 : sizeof($array);
 	}
 }
 
 if (!function_exists('cacti_count')) {
-	function cacti_count($array) {
+	/**
+ * Polyfill for Cacti's cacti_count() helper, defined only when not
+ * already available: a null/false/non-array-safe wrapper around
+ * count().
+ *
+ * @param mixed $array The value to measure.
+ *
+ * @return int The array's element count, or 0 if not a valid array.
+ */
+function cacti_count($array) {
 		return ($array === false || !is_array($array)) ? 0 : count($array);
 	}
 }
 
+/**
+ * Safely retrieves a value from an array by key, returning a default
+ * value instead of a warning/notice when the key doesn't exist.
+ *
+ * @param array  $array   The array to read from.
+ * @param string $key     The key to look up.
+ * @param mixed  $default The value to return when the key doesn't
+ *                        exist (default '').
+ *
+ * @return mixed The value at $key, or $default if not present.
+ */
 function mactrack_arr_key($array, $key, $default = '') {
 	if (array_key_exists($key, $array)) {
 		return $array[$key];
@@ -4305,6 +4346,17 @@ function mactrack_arr_key($array, $key, $default = '') {
  * aabb.ccdd.eeff
  */
 
+/**
+ * Reformats a MAC address for display according to the configured
+ * mt_mac_format setting (colon, hyphen, dotted-quad, or unseparated),
+ * leaving the value unchanged when null, too short to be a MAC
+ * address, or the configured format is unset/unrecognized.
+ *
+ * @param string|null $mac The stored (unseparated) MAC address.
+ *
+ * @return string|null The reformatted MAC address, or the original
+ *                     value if it can't be reformatted.
+ */
 function mactrack_format_mac($mac) {
 	if (is_null($mac) || strlen($mac) < 10) {
 		return $mac;
@@ -4344,6 +4396,20 @@ function mactrack_format_mac($mac) {
 	return $mac;
 }
 
+/**
+ * Validates a user-supplied "ignore ports" regular expression pattern
+ * by test-compiling it as a PCRE pattern (using a SOH delimiter, which
+ * cannot occur in valid input, to avoid altering the pattern's
+ * characters), falling back to a safe default when the input is empty
+ * or fails to compile.
+ *
+ * @param mixed $pattern The candidate regex pattern (only strings are
+ *                       considered; non-strings are treated as empty).
+ *
+ * @return string The validated pattern, or the default
+ *                '(Vlan|Loopback|Null)' pattern when the input is
+ *                empty or invalid.
+ */
 function mactrack_validate_ignore_ports_pattern($pattern) {
 	$default = '(Vlan|Loopback|Null)';
 	$pattern = is_string($pattern) ? $pattern : '';
@@ -4371,6 +4437,16 @@ function mactrack_validate_ignore_ports_pattern($pattern) {
 	return $pattern;
 }
 
+/**
+ * Retrieves the configured "ignore ports" regex pattern (used to
+ * exclude interfaces like VLANs/loopbacks from interface-issue
+ * filters), validating it via mactrack_validate_ignore_ports_pattern()
+ * and persisting the default back to settings if it was previously
+ * unset (without ever overwriting a non-empty administrator-supplied
+ * value).
+ *
+ * @return string The validated "ignore ports" regex pattern.
+ */
 function mactrack_get_ignore_ports_pattern() {
 	$stored_pattern = read_config_option('mt_ignorePorts', true);
 	$pattern        = mactrack_validate_ignore_ports_pattern($stored_pattern);
@@ -4384,6 +4460,18 @@ function mactrack_get_ignore_ports_pattern() {
 	return $pattern;
 }
 
+/**
+ * Builds a SQL predicate fragment that excludes interfaces matching
+ * the configured "ignore ports" pattern (by ifName or ifDescr),
+ * appending the pattern twice to the given bound-parameters array for
+ * use with a prepared statement.
+ *
+ * @param array &$params The prepared-statement parameter list to
+ *                       append the ignore-pattern value(s) to.
+ *
+ * @return string The SQL predicate fragment (using `?` placeholders)
+ *                to AND into a WHERE clause.
+ */
 function mactrack_get_ignore_ports_predicate(&$params) {
 	$pattern  = mactrack_get_ignore_ports_pattern();
 	$params[] = $pattern;
@@ -4392,6 +4480,20 @@ function mactrack_get_ignore_ports_predicate(&$params) {
 	return '(ifName NOT RLIKE ? AND ifDescr NOT RLIKE ?)';
 }
 
+/**
+ * Determines whether the current interfaces-list "issues" filter
+ * selection requires applying the "ignore ports" exclusion predicate
+ * (true for filters that are ignore-aware, such as non-ignored/ignored/
+ * with-issues/up/up-without-alias/errors/discards, and for the
+ * bandwidth-usage filters when a threshold is actually set).
+ *
+ * @param string|int $issues  The current 'issues' filter value.
+ * @param string|int $bwusage The current bandwidth-usage threshold
+ *                           filter value.
+ *
+ * @return bool True if the ignore-ports predicate should be applied,
+ *              false otherwise.
+ */
 function mactrack_interface_filter_needs_ignore($issues, $bwusage) {
 	$issues = (string) $issues;
 

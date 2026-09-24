@@ -38,6 +38,38 @@ mactrack_tabs();
 mactrack_view_graphs();
 bottom_footer();
 
+/**
+ * Renders the MacTrack graphs preview page: validates the standard
+ * Cacti graph-preview filter request variables, restricting the
+ * initial graph template selection (when not already set in session)
+ * to only those graph templates actually used by hosts linked to
+ * MacTrack devices, then delegates to Cacti's standard graph preview
+ * rendering. Called from this script's main flow after the tab bar.
+ *
+ * @return void
+ *
+ * @global string $title                  The page title, set for the
+ *                                        surrounding page chrome.
+ * @global array  $current_user           Reserved/declared for parity
+ *                                        with Cacti's graph preview
+ *                                        library; not used directly
+ *                                        here.
+ * @global array  $colors                 Reserved/declared for parity
+ *                                        with Cacti's graph preview
+ *                                        library; not used directly
+ *                                        here.
+ * @global array  $config                 Cacti global configuration
+ *                                        array (declared but not used
+ *                                        directly here).
+ * @global array  $host_template_hashes   Reserved/declared for parity
+ *                                        with Cacti's graph preview
+ *                                        library; not used directly
+ *                                        here.
+ * @global array  $graph_template_hashes  Reserved/declared for parity
+ *                                        with Cacti's graph preview
+ *                                        library; not used directly
+ *                                        here.
+ */
 function mactrack_view_graphs() {
 	global $title, $current_user, $colors, $config, $host_template_hashes, $graph_template_hashes;
 
