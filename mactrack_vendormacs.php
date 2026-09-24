@@ -36,6 +36,13 @@ if (isset_request_var('export')) {
 	bottom_footer();
 }
 
+/**
+ * Validates and stores this view's filter request variables (rows,
+ * page, filter text, sort column/direction) into the session for the
+ * vendor MACs list view.
+ *
+ * @return void
+ */
 function mactrack_vmacs_validate_request_vars() {
 	// ================= input validation and session storage =================
 	$filters = [
@@ -70,6 +77,19 @@ function mactrack_vmacs_validate_request_vars() {
 	// ================= input validation =================
 }
 
+/**
+ * Exports the current filtered OUI vendor MAC database entries as a
+ * downloaded CSV file. Called from this script's main
+ * request-dispatch switch when action=export.
+ *
+ * @return void
+ *
+ * @global array $site_actions Reserved/declared for parity with other
+ *                            functions in this file; not used directly
+ *                            here.
+ * @global array $config      Cacti global configuration array (declared
+ *                            but not used directly here).
+ */
 function mactrack_vmacs_export() {
 	global $site_actions, $config;
 
@@ -98,6 +118,22 @@ function mactrack_vmacs_export() {
 	}
 }
 
+/**
+ * Builds and executes the SQL query for the OUI vendor MAC database
+ * list view, applying the current filter request variable, sort
+ * order, and optional row limits.
+ *
+ * @param string &$sql_where   Receives the generated SQL WHERE clause
+ *                            for reuse by the caller (e.g. for a
+ *                            matching COUNT query).
+ * @param int    $rows         Number of rows per page, used to compute
+ *                            the SQL LIMIT clause when $apply_limits
+ *                            is true.
+ * @param bool   $apply_limits Whether to apply a SQL LIMIT clause
+ *                            (default true).
+ *
+ * @return array The matching vendor MAC (OUI) database records.
+ */
 function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = true) {
 	$sql_where = '';
 
@@ -125,6 +161,23 @@ function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = tru
 	return db_fetch_assoc($query_string);
 }
 
+/**
+ * Renders the main OUI vendor MAC database list page: displays the
+ * vendor MAC filter form, validates/stores this view's filter request
+ * variables, then displays a filtered, sorted, paginated table of
+ * vendor MAC entries. Called from this script's main request-dispatch
+ * switch as the default view.
+ *
+ * @return void
+ *
+ * @global array $site_actions Reserved/declared for parity with other
+ *                            functions in this file; not used directly
+ *                            here.
+ * @global array $config      Cacti global configuration array (declared
+ *                            but not used directly here).
+ * @global int   $item_rows   Default number of rows per page from
+ *                            Cacti settings.
+ */
 function mactrack_vmacs() {
 	global $site_actions, $config, $item_rows;
 
@@ -182,6 +235,15 @@ function mactrack_vmacs() {
 	}
 }
 
+/**
+ * Renders the search/rows filter form controls for the vendor MAC
+ * database list view.
+ *
+ * @return void
+ *
+ * @global array $item_rows Rows-per-page option list used to populate
+ *                         the rows dropdown.
+ */
 function mactrack_vmac_filter() {
 	global $item_rows;
 

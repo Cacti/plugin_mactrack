@@ -22,6 +22,20 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Applies incremental schema migrations to bring an existing MacTrack
+ * installation's tables up to the current expected structure (e.g.
+ * replacing legacy auto-increment/unique-key definitions on
+ * mac_track_devices and mac_track_device_types with the current
+ * primary key/unique index layout). Idempotent: each change is guarded
+ * by a check for the old structure via mactrack_db_key_exists().
+ *
+ * @return void
+ *
+ * @global string $database_default Reserved/declared for parity with
+ *                                 other functions in this file; not
+ *                                 used directly here.
+ */
 function mactrack_database_upgrade() {
 	global $database_default;
 
@@ -713,12 +727,35 @@ function mactrack_database_upgrade() {
 	mactrack_ensure_default_site();
 }
 
+/**
+ * Checks whether at least one MacTrack site record already exists.
+ *
+ * @return bool True if one or more sites exist, false otherwise.
+ */
 function mactrack_site_configuration_exists(): bool {
 	$site_count = db_fetch_cell_prepared('SELECT COUNT(*) FROM mac_track_sites');
 
 	return is_numeric($site_count) && (int) $site_count > 0;
 }
 
+/**
+ * Seeds a single "Default" MacTrack site when none exist yet, using a
+ * MySQL advisory lock (GET_LOCK/RELEASE_LOCK) plus a NOT EXISTS guard
+ * on the insert to reduce (though not fully eliminate, per issue #360)
+ * the risk of a duplicate-site race between concurrent requests. A
+ * no-op that returns true immediately if a site already exists.
+ *
+ * @param int|null $lock_timeout Seconds to wait for the advisory lock;
+ *                              defaults to 10 for CLI callers or 2 for
+ *                              web requests.
+ *
+ * @return bool True if a default site exists (either already present
+ *              or successfully seeded), false if seeding failed (e.g.
+ *              the lock could not be acquired or the insert failed).
+ *
+ * @global string $database_default Used to namespace the advisory lock
+ *                                 name per database.
+ */
 function mactrack_seed_default_site(?int $lock_timeout = null): bool {
 	global $database_default;
 
@@ -767,12 +804,28 @@ function mactrack_seed_default_site(?int $lock_timeout = null): bool {
 	}
 }
 
+/**
+ * Clears the persisted default-site seeding retry state (pending flag,
+ * attempt count, and next-retry timestamp settings), used once seeding
+ * has succeeded or the site is otherwise confirmed to exist.
+ *
+ * @return void
+ */
 function mactrack_reset_default_site_retry(): void {
 	set_config_option('mt_default_site_seed_pending', 'off');
 	set_config_option('mt_default_site_seed_attempts', '0');
 	set_config_option('mt_default_site_seed_next_retry', '0');
 }
 
+/**
+ * Raises a Cacti operator-facing error message about a failed default
+ * MacTrack site initialization, with wording that escalates after
+ * repeated failed attempts.
+ *
+ * @param int $attempts Number of seeding attempts made so far.
+ *
+ * @return void
+ */
 function mactrack_raise_default_site_error(int $attempts): void {
 	if ($attempts >= 5) {
 		$message = __('MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing.', 'mactrack');
@@ -783,6 +836,25 @@ function mactrack_raise_default_site_error(int $attempts): void {
 	raise_message('mactrack_default_site_seed_failed', $message, MESSAGE_LEVEL_ERROR);
 }
 
+/**
+ * Ensures a default MacTrack site exists, seeding one via
+ * mactrack_seed_default_site() if needed, with exponential backoff
+ * retry throttling (60s, 5m, 15m, 30m, 1h) tracked in Cacti settings
+ * across repeated calls, and optional operator notification on
+ * failure.
+ *
+ * @param bool|null $notify_operator    Whether to raise an operator
+ *                                     error message on failure;
+ *                                     defaults to true for web
+ *                                     requests, false for CLI.
+ * @param bool      $notify_immediately Whether to notify on the very
+ *                                     first failure rather than only
+ *                                     after repeated failures (default
+ *                                     false).
+ *
+ * @return bool True if a default site exists (already present or
+ *              successfully seeded), false otherwise.
+ */
 function mactrack_ensure_default_site(?bool $notify_operator = null, bool $notify_immediately = false): bool {
 	$notify_operator = $notify_operator ?? (PHP_SAPI !== 'cli');
 	$pending = read_config_option('mt_default_site_seed_pending', true) === 'on';
@@ -833,6 +905,15 @@ function mactrack_ensure_default_site(?bool $notify_operator = null, bool $notif
 	return false;
 }
 
+/**
+ * Retries default-site seeding if a previous attempt is still marked
+ * pending in Cacti settings; a no-op returning true if no retry is
+ * pending.
+ *
+ * @return bool True if no retry was pending or the retry succeeded in
+ *              confirming/seeding a default site, false if the retry
+ *              attempt failed.
+ */
 function mactrack_retry_default_site(): bool {
 	if (read_config_option('mt_default_site_seed_pending', true) !== 'on') {
 		return true;
@@ -841,6 +922,19 @@ function mactrack_retry_default_site(): bool {
 	return mactrack_ensure_default_site();
 }
 
+/**
+ * Creates (or updates, via Cacti's schema installer) all MacTrack
+ * database tables, migrates legacy vendor MAC address formatting, and
+ * ensures a default site exists. Invoked during plugin
+ * installation/upgrade.
+ *
+ * @param bool $notify_seed_failure Whether to immediately raise an
+ *                                 operator-facing error message if
+ *                                 default-site seeding fails (default
+ *                                 false).
+ *
+ * @return void
+ */
 function mactrack_setup_database(bool $notify_seed_failure = false) {
 	$data                  = [];
 	$data['columns'][]     = ['name' => 'row_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];

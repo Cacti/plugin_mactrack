@@ -107,6 +107,27 @@ switch (get_request_var('action')) {
 	Utilities Functions
    ----------------------- */
 
+/**
+ * Computes and displays the MacTrack device-scanning process status:
+ * whether a scan has ever completed, and the calculated time until the
+ * next scheduled collection run and database maintenance run, based on
+ * the configured collection timing and base/maintenance start times.
+ *
+ * @return void
+ *
+ * @global array  $config                      Cacti global
+ *                                             configuration array
+ *                                             (declared but not used
+ *                                             directly here).
+ * @global int    $refresh_interval            Reserved/declared for
+ *                                             parity with other
+ *                                             functions in this file;
+ *                                             not used directly here.
+ * @global array  $mactrack_poller_frequencies Reserved/declared for
+ *                                             parity with other
+ *                                             functions in this file;
+ *                                             not used directly here.
+ */
 function mactrack_display_run_status() {
 	global $config, $refresh_interval, $mactrack_poller_frequencies;
 
@@ -374,6 +395,18 @@ function mactrack_display_run_status() {
 	}
 }
 
+/**
+ * Truncates all MacTrack port/MAC/IP result tables (ports, scan dates,
+ * IPs, IP ranges, VLANs, aggregated ports, dot1x) and resets the
+ * corresponding summary counters on every device and site record.
+ * Prompts for confirmation first when the mt_maint_confirm setting is
+ * enabled. Called from this script's main request-dispatch switch.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function mactrack_utilities_ports_clear() {
 	global $config;
 
@@ -433,6 +466,16 @@ function mactrack_utilities_ports_clear() {
 	}
 }
 
+/**
+ * Truncates the mac_track_aggregated_ports table. Prompts for
+ * confirmation first when the mt_maint_confirm setting is enabled.
+ * Called from this script's main request-dispatch switch.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function mactrack_utilities_purge_aggregated_data() {
 	global $config;
 
@@ -456,6 +499,17 @@ function mactrack_utilities_purge_aggregated_data() {
 	}
 }
 
+/**
+ * Truncates and rebuilds the mac_track_aggregated_ports table by
+ * re-aggregating (grouping and counting) the raw mac_track_ports data.
+ * Prompts for confirmation first when the mt_maint_confirm setting is
+ * enabled. Called from this script's main request-dispatch switch.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function mactrack_utilities_recreate_aggregated_data() {
 	global $config;
 
@@ -491,6 +545,14 @@ function mactrack_utilities_recreate_aggregated_data() {
 	}
 }
 
+/**
+ * Runs the standard MacTrack database maintenance routine
+ * (perform_mactrack_db_maint()) and displays the number of rows
+ * removed from mac_track_ports as a result. Called from this script's
+ * main request-dispatch switch.
+ *
+ * @return void
+ */
 function mactrack_utilities_db_maint() {
 	$begin_rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_ports');
 	perform_mactrack_db_maint();
@@ -501,6 +563,16 @@ function mactrack_utilities_db_maint() {
 	html_end_box();
 }
 
+/**
+ * Purges and rebuilds the cached list of registered vendor scanning
+ * functions (mactrack_rebuild_scanning_funcs()). Called from this
+ * script's main request-dispatch switch.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function mactrack_utilities_purge_scanning_funcs() {
 	global $config;
 
@@ -511,6 +583,14 @@ function mactrack_utilities_purge_scanning_funcs() {
 	html_end_box();
 }
 
+/**
+ * Renders the main MacTrack System Utilities page: displays the
+ * process status information box (with a refresh-interval selector)
+ * and the database/scanning-function maintenance action links. Called
+ * from this script's main request-dispatch switch as the default view.
+ *
+ * @return void
+ */
 function mactrack_utilities() {
 	html_start_box(__('Cacti Mactrack System Utilities', 'mactrack'), '100%', '', '3', 'center', '');
 

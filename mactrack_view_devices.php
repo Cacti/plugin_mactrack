@@ -37,6 +37,14 @@ if (isset_request_var('export')) {
 	bottom_footer();
 }
 
+/**
+ * Validates and stores this view's filter request variables (rows,
+ * page, filter text, sort column/direction, site id, scan type id,
+ * status, device type id, detail flag) into the session for the
+ * devices list view.
+ *
+ * @return void
+ */
 function mactrack_device_request_validation() {
 	// ================= input validation and session storage =================
 	$filters = [
@@ -96,6 +104,13 @@ function mactrack_device_request_validation() {
 	// ================= input validation =================
 }
 
+/**
+ * Exports the current filtered devices list (with full SNMP and
+ * scan-result details) as a downloaded CSV file. Called from this
+ * script's main request-dispatch switch when action=export.
+ *
+ * @return void
+ */
 function mactrack_view_export_devices() {
 	mactrack_device_request_validation();
 
@@ -139,6 +154,23 @@ function mactrack_view_export_devices() {
 	}
 }
 
+/**
+ * Builds and executes the SQL query for the devices list view,
+ * applying the current filter text, status, scan type, device type,
+ * and site request variables, sort order, and optional row limits.
+ *
+ * @param string &$sql_where   Receives the generated SQL WHERE clause
+ *                            for reuse by the caller (e.g. for a
+ *                            matching COUNT query).
+ * @param int    $rows         Number of rows per page, used to compute
+ *                            the SQL LIMIT clause when $apply_limits
+ *                            is true.
+ * @param bool   $apply_limits Whether to apply a SQL LIMIT clause
+ *                            (default true).
+ *
+ * @return array The matching device records, joined with their site
+ *               name and device type description.
+ */
 function mactrack_view_get_device_records(&$sql_where, $rows, $apply_limits = true) {
 	$status           = intval(get_filter_request_var('status'));
 	$type_id          = intval(get_filter_request_var('type_id'));
@@ -225,6 +257,33 @@ function mactrack_view_get_device_records(&$sql_where, $rows, $apply_limits = tr
 	return db_fetch_assoc($sql_query);
 }
 
+/**
+ * Renders the main devices list page: displays the devices filter
+ * form, validates/stores this view's filter request variables, then
+ * displays a filtered, sorted, paginated table of devices with summary
+ * statistics. Called from this script's main request-dispatch switch
+ * as the default view.
+ *
+ * @return void
+ *
+ * @global string $title                  The page title, set for the
+ *                                        surrounding page chrome.
+ * @global string $report                 Reserved/declared for parity
+ *                                        with other functions in this
+ *                                        file; not used directly here.
+ * @global array  $mactrack_search_types  Filter-type option list used
+ *                                        by the device filter form.
+ * @global array  $mactrack_device_types  Device type option list used
+ *                                        by the device filter form.
+ * @global array  $rows_selector          Reserved/declared for parity
+ *                                        with other functions in this
+ *                                        file; not used directly here.
+ * @global array  $config                 Cacti global configuration
+ *                                        array; used to build the
+ *                                        plugin webroot path.
+ * @global array  $item_rows              Default number of rows per
+ *                                        page from Cacti settings.
+ */
 function mactrack_view_devices() {
 	global $title, $report, $mactrack_search_types, $mactrack_device_types, $rows_selector, $config, $item_rows;
 
@@ -406,6 +465,15 @@ function mactrack_view_devices() {
 	}
 }
 
+/**
+ * Renders the search/status/site/scan-type/device-type filter form
+ * controls for the devices list view.
+ *
+ * @return void
+ *
+ * @global array $item_rows Rows-per-page option list used to populate
+ *                         the rows dropdown.
+ */
 function mactrack_device_filter2() {
 	global $item_rows;
 

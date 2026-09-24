@@ -37,6 +37,13 @@ if (isset_request_var('export')) {
 	bottom_footer();
 }
 
+/**
+ * Validates and stores this view's filter request variables (rows,
+ * page, site id, device id, MAC/IP filter type and text, sort
+ * column/direction) into the session for the IP ranges list view.
+ *
+ * @return void
+ */
 function mactrack_view_ips_validate_request_vars() {
 	// ================= input validation and session storage =================
 	$filters = [
@@ -97,6 +104,13 @@ function mactrack_view_ips_validate_request_vars() {
 	// ================= input validation =================
 }
 
+/**
+ * Exports the current filtered IP ranges list (site, range, current
+ * and max IP counts with dates) as a downloaded CSV file. Called from
+ * this script's main request-dispatch switch when action=export.
+ *
+ * @return void
+ */
 function mactrack_view_export_ip_ranges() {
 	mactrack_view_ips_validate_request_vars();
 
@@ -127,6 +141,22 @@ function mactrack_view_export_ip_ranges() {
 	}
 }
 
+/**
+ * Builds and executes the SQL query for the IP ranges list view,
+ * applying the current site request variable, sort order, and optional
+ * row limits.
+ *
+ * @param string &$sql_where   Receives the generated SQL WHERE clause
+ *                            for reuse by the caller.
+ * @param int    $rows         Number of rows per page, used to compute
+ *                            the SQL LIMIT clause when $apply_limits
+ *                            is true.
+ * @param bool   $apply_limits Whether to apply a SQL LIMIT clause
+ *                            (default true).
+ *
+ * @return array The matching IP range records, joined with their site
+ *               name.
+ */
 function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = true) {
 	if (get_request_var('site_id') != '-1') {
 		$sql_where = 'WHERE mtir.site_id = ' . get_filter_request_var('site_id');
@@ -160,6 +190,22 @@ function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = 
 	return db_fetch_assoc($ip_ranges);
 }
 
+/**
+ * Renders the main IP ranges list page: validates/stores this view's
+ * filter request variables, then displays a filtered, sorted,
+ * paginated table of configured IP ranges with summary statistics.
+ * Called from this script's main request-dispatch switch as the
+ * default view.
+ *
+ * @return void
+ *
+ * @global string $title     The page title, set for the surrounding
+ *                           page chrome.
+ * @global array  $config    Cacti global configuration array; used to
+ *                           build the plugin webroot path.
+ * @global array  $item_rows Default number of rows per page from Cacti
+ *                           settings.
+ */
 function mactrack_view_ip_ranges() {
 	global $title, $config, $item_rows;
 
@@ -281,6 +327,15 @@ function mactrack_view_ip_ranges() {
 	}
 }
 
+/**
+ * Renders the site filter form control for the IP ranges list view.
+ *
+ * @return void
+ *
+ * @global array $item_rows Rows-per-page option list (declared for
+ *                         parity with other filter functions; not used
+ *                         directly here).
+ */
 function mactrack_ips_filter() {
 	global $item_rows;
 
