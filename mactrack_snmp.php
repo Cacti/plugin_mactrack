@@ -82,6 +82,18 @@ switch (get_request_var('action')) {
 		break;
 }
 
+/**
+ * Duplicates an SNMP option set (mac_track_snmp) and all of its
+ * ordered SNMP items (mac_track_snmp_items), substituting the literal
+ * '<name>' token in $new_name with the original set's name.
+ *
+ * @param int    $snmp_id The SNMP option set id to duplicate.
+ * @param string $new_name The new set's name template; occurrences of
+ *                        '<name>' are replaced with the original set's
+ *                        name.
+ *
+ * @return void
+ */
 function duplicate_mactrack($snmp_id, $new_name) {
 	$snmp_opt       = db_fetch_row_prepared('SELECT * FROM mac_track_snmp WHERE id = ?', [$snmp_id]);
 	$snmp_opt_items = db_fetch_assoc_prepared('SELECT * FROM mac_track_snmp_items WHERE snmp_id = ?', [$snmp_id]);
@@ -121,6 +133,15 @@ function duplicate_mactrack($snmp_id, $new_name) {
 	}
 }
 
+/**
+ * Validates and saves either an SNMP option set's name or one of its
+ * SNMP items' connection settings, depending on which save marker
+ * request variable is present, then redirects back to the appropriate
+ * edit form. Called from this script's main request-dispatch switch
+ * when action=save.
+ *
+ * @return void This function calls exit() and never returns normally.
+ */
 function form_mactrack_snmp_save() {
 	if (isset_request_var('save_component_mactrack_snmp')) {
 		// ================= input validation =================
@@ -190,6 +211,20 @@ function form_mactrack_snmp_save() {
 /* ------------------------
  The 'actions' function
  ------------------------ */
+/**
+ * Handles the bulk-action confirmation page/submission for the SNMP
+ * option sets list (delete and duplicate). Called from this script's
+ * main request-dispatch switch when action=actions.
+ *
+ * @return void
+ *
+ * @global array $config                Cacti global configuration
+ *                                      array.
+ * @global array $mactrack_snmp_actions Map of drp_action value =>
+ *                                      action label, used for the
+ *                                      bulk-actions confirmation
+ *                                      display.
+ */
 function form_mactrack_snmp_actions() {
 	global $config, $mactrack_snmp_actions;
 
@@ -291,6 +326,13 @@ function form_mactrack_snmp_actions() {
 /* --------------------------
  mactrack Item Functions
  -------------------------- */
+/**
+ * Moves an SNMP option set item one position down in its set's
+ * sequence order. Called from this script's main request-dispatch
+ * switch when action=item_movedown.
+ *
+ * @return void
+ */
 function mactrack_snmp_item_movedown() {
 	// ================= input validation =================
 	get_filter_request_var('item_id');
@@ -300,6 +342,13 @@ function mactrack_snmp_item_movedown() {
 	move_item_down('mac_track_snmp_items', get_request_var('item_id'), 'snmp_id=' . get_filter_request_var('id'));
 }
 
+/**
+ * Moves an SNMP option set item one position up in its set's sequence
+ * order. Called from this script's main request-dispatch switch when
+ * action=item_moveup.
+ *
+ * @return void
+ */
 function mactrack_snmp_item_moveup() {
 	// ================= input validation =================
 	get_filter_request_var('item_id');
@@ -309,6 +358,12 @@ function mactrack_snmp_item_moveup() {
 	move_item_up('mac_track_snmp_items', get_request_var('item_id'), 'snmp_id=' . get_filter_request_var('id'));
 }
 
+/**
+ * Deletes a single SNMP option set item. Called from this script's
+ * main request-dispatch switch when action=item_remove.
+ *
+ * @return void
+ */
 function mactrack_snmp_item_remove() {
 	// ================= input validation =================
 	get_filter_request_var('item_id');
@@ -319,6 +374,22 @@ function mactrack_snmp_item_remove() {
 		[get_request_var('item_id')]);
 }
 
+/**
+ * Renders the add/edit form for a single SNMP option set item (SNMP
+ * version, community/credentials, port, timeout, retries, max OIDs).
+ * Called from this script's main request-dispatch switch when
+ * action=item_edit.
+ *
+ * @return void
+ *
+ * @global array $config                         Cacti global
+ *                                               configuration array
+ *                                               (declared but not used
+ *                                               directly here).
+ * @global array $fields_mactrack_snmp_item_edit The SNMP item edit
+ *                                               form's field
+ *                                               definitions.
+ */
 function mactrack_snmp_item_edit() {
 	global $config;
 	global $fields_mactrack_snmp_item_edit;
@@ -385,6 +456,20 @@ function mactrack_snmp_item_edit() {
  mactrack Functions
  --------------------- */
 
+/**
+ * Renders the add/edit form for an SNMP option set (name) along with
+ * its ordered list of SNMP items, including move up/down/remove
+ * actions for each item. Called from this script's main
+ * request-dispatch switch when action=edit.
+ *
+ * @return void
+ *
+ * @global array $config                    Cacti global configuration
+ *                                          array; used to build item
+ *                                          action URLs.
+ * @global array $fields_mactrack_snmp_edit The SNMP option set edit
+ *                                          form's field definitions.
+ */
 function mactrack_snmp_edit() {
 	global $config, $fields_mactrack_snmp_edit;
 
@@ -489,6 +574,23 @@ function mactrack_snmp_edit() {
 	form_save_button('mactrack_snmp.php');
 }
 
+/**
+ * Renders the main SNMP option sets list page: validates/stores this
+ * view's filter request variables, displays the filter form, then
+ * displays a filtered, sorted, paginated table of SNMP option sets
+ * with a bulk-actions dropdown. Called from this script's main
+ * request-dispatch switch as the default view.
+ *
+ * @return void
+ *
+ * @global array $config                Cacti global configuration
+ *                                      array.
+ * @global array $item_rows             Default number of rows per page
+ *                                      from Cacti settings.
+ * @global array $mactrack_snmp_actions Map of drp_action value =>
+ *                                      action label, used for the
+ *                                      bulk-actions dropdown.
+ */
 function mactrack_snmp() {
 	global $config, $item_rows;
 	global $mactrack_snmp_actions;
@@ -594,6 +696,15 @@ function mactrack_snmp() {
 	form_end();
 }
 
+/**
+ * Renders the search/rows filter form controls for the SNMP option
+ * sets list view.
+ *
+ * @return void
+ *
+ * @global array $item_rows Rows-per-page option list used to populate
+ *                         the rows dropdown.
+ */
 function snmp_options_filter() {
 	global $item_rows;
 

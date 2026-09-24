@@ -27,6 +27,25 @@
 $mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_enterasys_switch_ports');
 
+/**
+ * SNMP-scans an Enterasys switch for its port, VLAN, and MAC address
+ * table data, populating $device with counts and details. Registered
+ * in $mactrack_scanning_functions for dispatch by the MacTrack poller
+ * against devices of this vendor's device type.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port/VLAN/MAC scan results.
+ * @param int   $lowPort  Optional lowest port number to include in the
+ *                        scan (0 means no lower bound).
+ * @param int   $highPort Optional highest port number to include in
+ *                        the scan (0 means no upper bound).
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_enterasys_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 

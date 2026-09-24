@@ -29,6 +29,15 @@ array_push($mactrack_scanning_functions, 'get_aruba_oscx_switch_ports');
 $mactrack_scanning_functions_ip ??= [];
 array_push($mactrack_scanning_functions_ip, 'get_aruba_oscx_arp_table');
 
+/**
+ * Converts a dotted-decimal MAC address (as returned by Aruba
+ * AOS-CX SNMP OIDs) into a colon-delimited uppercase hex MAC address.
+ *
+ * @param string $mac The dotted-decimal MAC address (6 octets).
+ *
+ * @return string The formatted colon-delimited uppercase hex MAC
+ *                address.
+ */
 function oscx_mac($mac) {
 	$slabiky = explode('.', trim($mac));
 	$mac     = '';
@@ -44,6 +53,25 @@ function oscx_mac($mac) {
 	return (implode(':', $slabiky));
 }
 
+/**
+ * SNMP-scans an Aruba AOS-CX switch for its port, VLAN, and MAC
+ * address table data, populating $device with counts and details.
+ * Registered in $mactrack_scanning_functions for dispatch by the
+ * MacTrack poller against devices of this vendor's device type.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port/VLAN/MAC scan results.
+ * @param int   $lowPort  Optional lowest port number to include in the
+ *                        scan (0 means no lower bound).
+ * @param int   $highPort Optional highest port number to include in
+ *                        the scan (0 means no upper bound).
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
@@ -187,10 +215,33 @@ function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 
 	return $device;
 }
 
-/*	get_base_dot1dTpFdbEntry_ports - This function will grab information from the
-  port bridge snmp table and return it to the calling progrem for further processing.
-  This is a foundational function for all vendor data collection functions.
-*/
+/**
+ * Retrieves port-to-MAC-address association data from the standard
+ * dot1d bridge-port SNMP table for an Aruba AOS-CX switch, optionally
+ * storing results to the database. Foundational function reused by
+ * vendor data collection functions.
+ *
+ * @param array $site            The site record the device belongs to.
+ * @param array &$device         The device record being scanned.
+ * @param array &$ifInterfaces   The device's built interfaces table
+ *                               (from build_InterfacesTable()).
+ * @param string $snmp_readstring Optional SNMP read community string;
+ *                               falls back to
+ *                               $device['snmp_readstring'] when empty.
+ * @param bool  $store_to_db     Whether to persist the collected port
+ *                               results to the database.
+ * @param int   $lowPort         Optional lowest port number to include
+ *                               in the scan (default 1).
+ * @param int   $highPort        Optional highest port number to
+ *                               include in the scan (default 9999).
+ *
+ * @return array|void The collected $new_port_key_array when
+ *                    $store_to_db is false; otherwise no explicit
+ *                    return (results are persisted to the database).
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 	mactrack_debug('FUNCTION: get_aruba_oscx_dot1dTpFdbEntry_ports started');
@@ -402,9 +453,20 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 	}
 }
 
-/*	get_aruba_oscx_arp_table - This function reads a devices CTAlias table for a site and stores
-  the IP address and MAC address combinations in the mac_track_ips table.
-*/
+/**
+ * Reads an Aruba AOS-CX device's CTAlias table for a site and stores
+ * the IP address and MAC address combinations in the mac_track_ips
+ * table. Registered in $mactrack_scanning_functions_ip for dispatch by
+ * the MacTrack poller against devices of this vendor's device type.
+ *
+ * @param array $site    The site record the device belongs to.
+ * @param array &$device The device record being scanned.
+ *
+ * @return void
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_aruba_oscx_arp_table($site, &$device) {
 	global $debug, $scan_date;
 

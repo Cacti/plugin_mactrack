@@ -87,6 +87,19 @@ if ($oui_file != '') {
 	import_oui_database();
 }
 
+/**
+ * Validates and resolves a user-supplied OUI database file path,
+ * rejecting empty paths, paths containing NUL bytes, and paths that
+ * don't resolve to an existing, readable regular file. Note this only
+ * canonicalizes the path and confirms it is readable - it does not
+ * confine the result to any particular directory, so it does not by
+ * itself prevent a path from traversing outside an intended location.
+ *
+ * @param string $path The candidate file path to validate.
+ *
+ * @return string The resolved absolute path if valid, or an empty
+ *                string if the path is invalid/unreadable.
+ */
 function mactrack_validate_oui_file(string $path): string {
 	if ($path === '' || strpos($path, "\0") !== false) {
 		return '';
@@ -101,6 +114,14 @@ function mactrack_validate_oui_file(string $path): string {
 	return $resolved;
 }
 
+/**
+ * Prints this script's name, version, and copyright banner to stdout.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function display_version() {
 	global $config;
 
@@ -108,7 +129,12 @@ function display_version() {
 	print 'Mactrack import OUI Database, Version ' . $info['version'] . ', ' . COPYRIGHT_YEARS . "\n";
 }
 
-// display_help - displays the usage of the function
+/**
+ * Prints this script's version banner followed by its command-line
+ * usage instructions to stdout.
+ *
+ * @return void
+ */
 function display_help() {
 	display_version();
 

@@ -31,13 +31,66 @@ $mactrack_scanning_functions_ip ??= [];
 array_push($mactrack_scanning_functions_ip, 'get_extreme_arp_table');
 array_push($mactrack_scanning_functions_ip, 'get_extreme_extremeware_arp_table');
 
+/**
+ * Thin wrapper that scans an ExtremeWare (legacy firmware) switch's
+ * ports by delegating to get_extreme_switch_ports() with the
+ * ExtremeWare-specific MIB flag forced on. Registered in
+ * $mactrack_scanning_functions for dispatch by the MacTrack poller.
+ *
+ * @param array $site        The site record the device belongs to.
+ * @param array &$device     The device record being scanned.
+ * @param int   $lowPort     Optional lowest port number to include in
+ *                           the scan (0 means no lower bound).
+ * @param int   $highPort    Optional highest port number to include in
+ *                           the scan (0 means no upper bound).
+ * @param bool  $extremeware Unused parameter; ExtremeWare mode is
+ *                           always forced on regardless of this value.
+ *
+ * @return array The updated $device record.
+ */
 function get_extreme_extremeware_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false) {
 	return get_extreme_switch_ports($site, $device, $lowPort, $highPort , true);
 }
+/**
+ * Thin wrapper that reads an ExtremeWare (legacy firmware) switch's
+ * ARP table by delegating to get_extreme_arp_table() with the
+ * ExtremeWare-specific MIB flag forced on. Registered in
+ * $mactrack_scanning_functions_ip for dispatch by the MacTrack poller.
+ *
+ * @param array $site        The site record the device belongs to.
+ * @param array &$device     The device record being scanned.
+ * @param bool  $extremeware Unused parameter; ExtremeWare mode is
+ *                           always forced on regardless of this value.
+ *
+ * @return void
+ */
 function get_extreme_extremeware_arp_table($site, &$device, $extremeware = false) {
 	get_extreme_arp_table($site, $device, true);
 }
 
+/**
+ * SNMP-scans an Extreme Networks switch (EXOS or, when $extremeware
+ * is true, legacy ExtremeWare firmware) for its port, VLAN, and MAC
+ * address table data, populating $device with counts and details.
+ * Registered in $mactrack_scanning_functions for dispatch by the
+ * MacTrack poller against devices of this vendor's device type.
+ *
+ * @param array $site        The site record the device belongs to.
+ * @param array &$device     The device record being scanned; updated
+ *                           in place with port/VLAN/MAC scan results.
+ * @param int   $lowPort     Optional lowest port number to include in
+ *                           the scan (0 means no lower bound).
+ * @param int   $highPort    Optional highest port number to include in
+ *                           the scan (0 means no upper bound).
+ * @param bool  $extremeware Whether to use the legacy ExtremeWare
+ *                           MIB OIDs instead of the current EXOS MIB
+ *                           OIDs.
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false) {
 	global $debug, $scan_date;
 
@@ -189,9 +242,25 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 	return $device;
 }
 
-/*	get_extreme_arp_table - This function reads a devices ARP table for a site and stores
-  the IP address and MAC address combinations in the mac_track_ips table.
-*/
+/**
+ * Reads an Extreme Networks device's ARP table for a site and stores
+ * the IP address and MAC address combinations in the mac_track_ips
+ * table. Uses the standard RFC1213 ARP table plus ifDescr for
+ * ExtremeWare devices, or vendor-specific FDB-MIB OIDs otherwise.
+ * Registered in $mactrack_scanning_functions_ip for dispatch by the
+ * MacTrack poller against devices of this vendor's device type.
+ *
+ * @param array $site        The site record the device belongs to.
+ * @param array &$device     The device record being scanned.
+ * @param bool  $extremeware Whether to use the legacy ExtremeWare ARP
+ *                           collection method instead of the current
+ *                           EXOS FDB-MIB method.
+ *
+ * @return void
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_extreme_arp_table($site, &$device, $extremeware = false) {
 	global $debug, $scan_date;
 

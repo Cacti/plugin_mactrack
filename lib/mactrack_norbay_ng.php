@@ -31,6 +31,22 @@ array_push($mactrack_scanning_functions, 'get_norbay_ng_switch_ports');
 	ERS5520 & BS420 [adapted from mactrack_hp_ng.php]
 
 */
+/**
+ * SNMP-scans a newer-generation Norbay switch for its port, VLAN, and
+ * MAC address table data, populating $device with counts and details.
+ * Registered in $mactrack_scanning_functions for dispatch by the
+ * MacTrack poller against devices of this vendor's device type.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port/VLAN/MAC scan results.
+ * @param int   $lowPort  Optional lowest port number to include in the
+ *                        scan (0 means no lower bound).
+ * @param int   $highPort Optional highest port number to include in
+ *                        the scan (0 means no upper bound).
+ *
+ * @return array The updated $device record.
+ */
 function get_norbay_ng_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 

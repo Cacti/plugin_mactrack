@@ -26,6 +26,17 @@
 $mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_JEX_switch_ports');
 
+/**
+ * Converts a dotted-decimal MAC address fragment (as returned by some
+ * Juniper SNMP OIDs, e.g. "0.12.219") into an uppercase hex string
+ * joined by the given delimiter.
+ *
+ * @param string $macd The dotted-decimal MAC address fragment.
+ * @param string $del  Delimiter to join each hex octet with (default
+ *                     ':').
+ *
+ * @return string The formatted uppercase hex MAC address.
+ */
 function mach($macd, $del = ':') {
 	$result = '';
 	$macsd  = explode('.', $macd);
@@ -39,9 +50,25 @@ function mach($macd, $del = ':') {
 	return ($result);
 }
 
-/* get_JEX_switch_ports
-		obtains port associations for Juniper Ex Switches.
-*/
+/**
+ * SNMP-scans a Juniper EX-series switch for its port, VLAN, and MAC
+ * address table data, populating $device with counts and details.
+ * Registered in $mactrack_scanning_functions for dispatch by the
+ * MacTrack poller against devices of this vendor's device type.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port/VLAN/MAC scan results.
+ * @param int   $lowPort  Optional lowest port number to include in the
+ *                        scan (0 means no lower bound).
+ * @param int   $highPort Optional highest port number to include in
+ *                        the scan (0 means no upper bound).
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 

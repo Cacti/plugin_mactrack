@@ -36,6 +36,34 @@ if (isset_request_var('export')) {
 	mactrack_view();
 }
 
+/**
+ * Builds and executes the prepared SQL query for the interfaces list
+ * view, applying the current issues/bandwidth-usage filter, text
+ * filter, device/site/device-type request variables, sort order, and
+ * optional row limits.
+ *
+ * @param string &$sql_where   Receives the generated SQL WHERE clause.
+ * @param bool   $apply_limits Whether to apply a SQL LIMIT clause
+ *                            (default true).
+ * @param int    $rows         Number of rows per page, used to compute
+ *                            the SQL LIMIT clause when $apply_limits
+ *                            is true (default '30').
+ * @param array  &$sql_params  Receives the bound parameter values for
+ *                            the prepared statement.
+ *
+ * @return array The matching interface records, joined with their
+ *               device and device type details.
+ *
+ * @global int   $timespan       Reserved/declared for parity with
+ *                               other functions in this file; not used
+ *                               directly here.
+ * @global string $group_function Reserved/declared for parity with
+ *                               other functions in this file; not used
+ *                               directly here.
+ * @global array $summary_stats  Reserved/declared for parity with
+ *                               other functions in this file; not used
+ *                               directly here.
+ */
 function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = '30', &$sql_params = []) {
 	global $timespan, $group_function, $summary_stats;
 
@@ -131,6 +159,14 @@ function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = '30', &
 	return db_fetch_assoc_prepared($sql_query, $sql_params);
 }
 
+/**
+ * Validates and stores this view's filter request variables (rows,
+ * page, filter text, sort column/direction, site id, device id, device
+ * type id, issues filter, period, bandwidth usage threshold, totals
+ * flag) into the session for the interfaces list view.
+ *
+ * @return void
+ */
 function mactrack_interfaces_request_validation() {
 	// ================= input validation and session storage =================
 	$filters = [
@@ -200,6 +236,14 @@ function mactrack_interfaces_request_validation() {
 	// ================= input validation =================
 }
 
+/**
+ * Exports the current filtered interfaces list (with SNMP interface
+ * counters and status details, up to 10000 rows) as a downloaded CSV
+ * file. Called from this script's main request-dispatch switch when
+ * action=export.
+ *
+ * @return void
+ */
 function mactrack_export_records() {
 	mactrack_interfaces_request_validation();
 
@@ -252,6 +296,22 @@ function mactrack_export_records() {
 	}
 }
 
+/**
+ * Renders the main interfaces list page: validates/stores this view's
+ * filter request variables, displays the interfaces filter form, then
+ * displays a filtered, sorted, paginated table of interfaces with a
+ * modal response area for scan actions. Called from this script's main
+ * request-dispatch switch as the default view.
+ *
+ * @return void
+ *
+ * @global string $title         The page title, set for the
+ *                               surrounding page chrome.
+ * @global array  $mactrack_rows Reserved/declared for parity with
+ *                               other functions in this file; not used
+ *                               directly here.
+ * @global array  $config        Cacti global configuration array.
+ */
 function mactrack_view() {
 	global $title, $mactrack_rows, $config;
 
@@ -359,6 +419,15 @@ function mactrack_view() {
 	bottom_footer();
 }
 
+/**
+ * Builds the column display-text/sort-order definition array for the
+ * interfaces list table, switching between per-second rate columns and
+ * running-total columns depending on the current 'totals' filter
+ * setting.
+ *
+ * @return array The column definitions, keyed by column name, each
+ *               with 'display', optional 'align', and 'sort' entries.
+ */
 function mactrack_display_array() {
 	$display_text = [
 		'nosort' => [
@@ -486,6 +555,18 @@ function mactrack_display_array() {
 	return $display_text;
 }
 
+/**
+ * Renders the site/device/device-type/issues/bandwidth-usage filter
+ * form controls for the interfaces list view.
+ *
+ * @return void
+ *
+ * @global array $config        Cacti global configuration array
+ *                              (declared but not used directly here).
+ * @global array $rows_selector Reserved/declared for parity with other
+ *                              functions in this file; not used
+ *                              directly here.
+ */
 function mactrack_filter_table() {
 	global $config, $rows_selector;
 

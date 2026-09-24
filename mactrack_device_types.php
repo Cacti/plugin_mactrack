@@ -122,6 +122,17 @@ switch (get_request_var('action')) {
 	The Save Function
    -------------------------- */
 
+/**
+ * Validates and saves the device type edit form's submitted fields via
+ * api_mactrack_device_type_save() (redirecting back to the edit form
+ * for the saved/original device type id), or, when a CSV import file
+ * was uploaded instead, processes it via
+ * mactrack_device_type_import_processor() and stashes any resulting
+ * debug info in the session. Called from this script's main
+ * request-dispatch switch when action=save.
+ *
+ * @return void
+ */
 function form_save() {
 	if ((isset_request_var('save_component_device_type')) && (isempty_request_var('add_dq_y'))) {
 		$device_type_id = api_mactrack_device_type_save(get_nfilter_request_var('device_type_id'),
@@ -162,12 +173,59 @@ function form_save() {
 	}
 }
 
+/**
+ * Deletes a MacTrack device type record.
+ *
+ * @param int $device_type_id The device type id to remove.
+ *
+ * @return void
+ */
 function api_mactrack_device_type_remove($device_type_id) {
 	db_execute_prepared('DELETE FROM mac_track_device_types
 		WHERE device_type_id = ?',
 		[$device_type_id]);
 }
 
+/**
+ * Validates and saves a MacTrack device type record's fields
+ * (description, vendor, device type, sysDescr/sysObjectID detection
+ * patterns, scanning function names, serial number OID, port range,
+ * disabled flag).
+ *
+ * @param int    $device_type_id          The device type id (0 for a
+ *                                       new record).
+ * @param string $description             The device type's display
+ *                                       description.
+ * @param string $vendor                  The vendor name.
+ * @param string $device_type             The vendor-specific device
+ *                                       type identifier.
+ * @param string $sysDescr_match          Regex pattern to match against
+ *                                       a device's sysDescr for
+ *                                       auto-detection.
+ * @param string $sysObjectID_match       Regex pattern to match against
+ *                                       a device's sysObjectID for
+ *                                       auto-detection.
+ * @param string $scanning_function       Name of the port-scanning
+ *                                       function to use for this
+ *                                       device type.
+ * @param string $ip_scanning_function    Name of the ARP/IP-scanning
+ *                                       function to use for this
+ *                                       device type.
+ * @param string $dot1x_scanning_function Name of the 802.1x-scanning
+ *                                       function to use for this
+ *                                       device type.
+ * @param string $serial_number_oid       SNMP OID used to retrieve the
+ *                                       device's serial number.
+ * @param string $lowPort                 Lowest port number to include
+ *                                       when scanning.
+ * @param string $highPort                Highest port number to
+ *                                       include when scanning.
+ * @param string $disabled                Whether this device type is
+ *                                       disabled.
+ *
+ * @return int The saved device_type_id, or 0 if validation/save
+ *             failed.
+ */
 function api_mactrack_device_type_save($device_type_id, $description,
 	$vendor, $device_type, $sysDescr_match, $sysObjectID_match, $scanning_function,
 	$ip_scanning_function, $dot1x_scanning_function, $serial_number_oid, $lowPort, $highPort, $disabled) {
@@ -200,6 +258,25 @@ function api_mactrack_device_type_save($device_type_id, $description,
 	return $device_type_id;
 }
 
+/**
+ * Duplicates a device type record, prefixing its sysDescr/sysObjectID
+ * match patterns with a '--dup--' marker (so the copy won't
+ * auto-match devices until edited) and building a new description from
+ * the given title template.
+ *
+ * @param int    $device_type_id     The device type id to duplicate; a
+ *                                  no-op if empty.
+ * @param int    $dup_id             A numeric suffix used to build the
+ *                                  new description when
+ *                                  $device_type_title doesn't contain
+ *                                  the '<description>' token.
+ * @param string $device_type_title  The new description, or a template
+ *                                  containing the literal
+ *                                  '<description>' token to be replaced
+ *                                  with "{original description}(1)".
+ *
+ * @return void
+ */
 function api_mactrack_duplicate_device_type($device_type_id, $dup_id, $device_type_title) {
 	if (!empty($device_type_id)) {
 		$device_type = db_fetch_row_prepared('SELECT *
@@ -235,6 +312,35 @@ function api_mactrack_duplicate_device_type($device_type_id, $dup_id, $device_ty
 	The 'actions' function
    ------------------------ */
 
+/**
+ * Handles the bulk-action confirmation page/submission for the device
+ * types list (delete and duplicate): on confirmed submission with
+ * selected_items set, performs the requested action for each selected
+ * device type; on first display, renders a confirmation box listing
+ * the selected device types (with an optional description prefix
+ * field for the duplicate action). Called from this script's main
+ * request-dispatch switch when action=actions.
+ *
+ * @return void
+ *
+ * @global array $config                              Cacti global
+ *                                                    configuration
+ *                                                    array (declared
+ *                                                    but not used
+ *                                                    directly here).
+ * @global array $device_types_actions                Map of drp_action
+ *                                                    value => action
+ *                                                    label, used for
+ *                                                    the bulk-actions
+ *                                                    confirmation
+ *                                                    display.
+ * @global array $fields_mactrack_device_types_edit   Reserved/declared
+ *                                                    for parity with
+ *                                                    other functions in
+ *                                                    this file; not
+ *                                                    used directly
+ *                                                    here.
+ */
 function form_actions() {
 	global $config, $device_types_actions, $fields_mactrack_device_types_edit;
 
@@ -337,6 +443,13 @@ function form_actions() {
 	Mactrack Device Type Functions
    --------------------- */
 
+/**
+ * Validates and stores this view's filter request variables (rows,
+ * page, scan type id, enabled flag, vendor, filter text, sort
+ * column/direction) into the session for the device types list view.
+ *
+ * @return void
+ */
 function mactrack_device_type_request_validation() {
 	// ================= input validation and session storage =================
 	$filters = [
@@ -386,6 +499,24 @@ function mactrack_device_type_request_validation() {
 	validate_store_request_vars($filters, 'sess_mt_devicet');
 }
 
+/**
+ * Exports the current filtered device types list (with detection
+ * patterns, scanning functions, port range, and disabled flag) as a
+ * downloaded CSV file. Called from this script's main
+ * request-dispatch switch when action=export.
+ *
+ * @return void
+ *
+ * @global array $device_actions          Reserved/declared for parity
+ *                                       with other functions in this
+ *                                       file; not used directly here.
+ * @global array $mactrack_device_types  Reserved/declared for parity
+ *                                       with other functions in this
+ *                                       file; not used directly here.
+ * @global array $config                 Cacti global configuration
+ *                                       array (declared but not used
+ *                                       directly here).
+ */
 function mactrack_device_type_export() {
 	global $device_actions, $mactrack_device_types, $config;
 
@@ -425,6 +556,16 @@ function mactrack_device_type_export() {
 	}
 }
 
+/**
+ * Scans all known devices' SNMP sysDescr/sysObjectID values for
+ * combinations not matched by any existing device type, and creates
+ * new (initially generic/"Unknown") device type records for each
+ * distinct unmatched combination found, with basic Cisco-specific name
+ * extraction when applicable. Prints a summary of how many new device
+ * types were added.
+ *
+ * @return void
+ */
 function mactrack_rescan_device_types() {
 	global $cnn_id;
 
@@ -500,6 +641,17 @@ function mactrack_rescan_device_types() {
 	}
 }
 
+/**
+ * Renders the device type CSV import page: displays results from a
+ * previous import attempt (if any, stashed in the session by
+ * form_save()), and the file upload form. Called from this script's
+ * main request-dispatch switch when action=import.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function mactrack_device_type_import() {
 	global $config;
 
@@ -582,6 +734,18 @@ function mactrack_device_type_import() {
 	form_save_button('return', 'import');
 }
 
+/**
+ * Parses an uploaded CSV file's rows (vendor, description, device
+ * type, detection patterns, scanning functions, port range, disabled
+ * flag) and saves each as a MacTrack device type via
+ * api_mactrack_device_type_save().
+ *
+ * @param array &$device_types The raw CSV file lines (first line is
+ *                            the header row).
+ *
+ * @return array A list of human-readable per-row result messages
+ *               describing what was imported.
+ */
 function mactrack_device_type_import_processor(&$device_types) {
 	$i              = 0;
 	$return_array   = [];
@@ -864,6 +1028,22 @@ function mactrack_device_type_import_processor(&$device_types) {
 	return $return_array;
 }
 
+/**
+ * Renders the add/edit form for a device type (description, vendor,
+ * detection patterns, scanning functions, port range, disabled flag).
+ * Called from this script's main request-dispatch switch when
+ * action=edit.
+ *
+ * @return void
+ *
+ * @global array $config                            Cacti global
+ *                                                  configuration array
+ *                                                  (declared but not
+ *                                                  used directly here).
+ * @global array $fields_mactrack_device_type_edit  The device type
+ *                                                  edit form's field
+ *                                                  definitions.
+ */
 function mactrack_device_type_edit() {
 	global $config, $fields_mactrack_device_type_edit;
 
@@ -898,6 +1078,20 @@ function mactrack_device_type_edit() {
 	form_save_button('mactrack_device_types.php', 'return', 'device_type_id');
 }
 
+/**
+ * Builds and executes the SQL query for the device types list view,
+ * applying the current scan type, enabled flag, vendor, and filter
+ * text request variables, sort order, and optional row limits.
+ *
+ * @param string &$sql_where   Receives the generated SQL WHERE clause.
+ * @param int    $rows         Number of rows per page, used to compute
+ *                            the SQL LIMIT clause when $apply_limits
+ *                            is true.
+ * @param bool   $apply_limits Whether to apply a SQL LIMIT clause
+ *                            (default true).
+ *
+ * @return array The matching device type records.
+ */
 function mactrack_get_device_types(&$sql_where, $rows, $apply_limits = true) {
 	if (get_request_var('filter') != '') {
 		$sql_where = ' WHERE (mtdt.vendor LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR
@@ -941,6 +1135,27 @@ function mactrack_get_device_types(&$sql_where, $rows, $apply_limits = true) {
 	return db_fetch_assoc($query_string);
 }
 
+/**
+ * Renders the main device types list page: validates/stores this
+ * view's filter request variables, displays the device type filter
+ * form, then displays a filtered, sorted, paginated table of device
+ * types with a bulk-actions dropdown. Called from this script's main
+ * request-dispatch switch as the default view.
+ *
+ * @return void
+ *
+ * @global array $device_types_actions   Map of drp_action value =>
+ *                                      action label, used for the
+ *                                      bulk-actions dropdown.
+ * @global array $mactrack_device_types  Reserved/declared for parity
+ *                                      with other functions in this
+ *                                      file; not used directly here.
+ * @global array $config                 Cacti global configuration
+ *                                      array (declared but not used
+ *                                      directly here).
+ * @global array $item_rows              Default number of rows per
+ *                                      page from Cacti settings.
+ */
 function mactrack_device_type() {
 	global $device_types_actions, $mactrack_device_types, $config, $item_rows;
 
@@ -1033,6 +1248,15 @@ function mactrack_device_type() {
 	form_end();
 }
 
+/**
+ * Renders the search/vendor/scan-type/enabled filter form controls for
+ * the device types list view.
+ *
+ * @return void
+ *
+ * @global array $item_rows Cacti's standard row-count option list,
+ *                         used to populate the rows dropdown.
+ */
 function mactrack_device_type_filter() {
 	global $item_rows;
 

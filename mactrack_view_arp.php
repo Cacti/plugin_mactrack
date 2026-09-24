@@ -43,6 +43,14 @@ if (isset_request_var('export')) {
 	The 'actions' function
    ------------------------ */
 
+/**
+ * Validates and stores this view's filter request variables (rows,
+ * page, site id, device id, MAC/IP filter type and text, sort
+ * column/direction, scan date) into the session for the ARP/IP list
+ * view.
+ *
+ * @return void
+ */
 function mactrack_view_ips_validate_request_vars() {
 	// ================= input validation and session storage =================
 	$filters = [
@@ -108,6 +116,14 @@ function mactrack_view_ips_validate_request_vars() {
 	// ================= input validation =================
 }
 
+/**
+ * Exports the current filtered ARP/IP results (site, hostname, device,
+ * MAC, vendor, IP, DNS hostname, port, interface, scan date) as a
+ * downloaded CSV file. Called from this script's main dispatch when
+ * the export request variable is set.
+ *
+ * @return void
+ */
 function mactrack_view_export_ips() {
 	mactrack_view_ips_validate_request_vars();
 
@@ -141,6 +157,24 @@ function mactrack_view_export_ips() {
 	}
 }
 
+/**
+ * Builds and executes the SQL query for the ARP/IP list view, applying
+ * the current MAC filter, IP filter, text filter, site, device, and
+ * scan date request variables (defaulting to the most recent scan
+ * date), sort order, and optional row limits. Requires a site or
+ * device filter (or a non-empty WHERE clause) to avoid a full table
+ * scan; returns an empty result set otherwise.
+ *
+ * @param string &$sql_where   Receives the generated SQL WHERE clause
+ *                            for reuse by the caller.
+ * @param int    $rows         Number of rows per page, used to compute
+ *                            the SQL LIMIT clause when $apply_limits
+ *                            is true.
+ * @param bool   $apply_limits Whether to apply a SQL LIMIT clause
+ *                            (default true).
+ *
+ * @return array The matching ARP/IP records.
+ */
 function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true) {
 	// form the 'where' clause for our main sql query
 	if (get_request_var('mac_filter') != '') {
@@ -281,6 +315,30 @@ function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true) 
 	return db_fetch_assoc($query_string);
 }
 
+/**
+ * Renders the main ARP/IP list page: displays the IP address filter
+ * form, validates/stores this view's filter request variables, then
+ * displays a filtered, sorted, paginated table of ARP/IP entries with
+ * summary statistics. Called from this script's main dispatch as the
+ * default view.
+ *
+ * @return void
+ *
+ * @global string $title                  The page title, set for the
+ *                                        surrounding page chrome.
+ * @global string $report                 Reserved/declared for parity
+ *                                        with other functions in this
+ *                                        file; not used directly here.
+ * @global array  $mactrack_search_types  Filter-type option list used
+ *                                        by the address filter form.
+ * @global array  $rows_selector          Reserved/declared for parity
+ *                                        with other functions in this
+ *                                        file; not used directly here.
+ * @global array  $config                 Cacti global configuration
+ *                                        array.
+ * @global array  $item_rows              Default number of rows per
+ *                                        page from Cacti settings.
+ */
 function mactrack_view_ips() {
 	global $title, $report, $mactrack_search_types, $rows_selector, $config;
 	global $item_rows;
@@ -436,6 +494,22 @@ function mactrack_view_ips() {
 	}
 }
 
+/**
+ * Renders the search/site/device/MAC/IP/scan-date filter form controls
+ * for the ARP/IP list view.
+ *
+ * @return void
+ *
+ * @global array $item_rows              Rows-per-page option list used
+ *                                       to populate the rows dropdown.
+ * @global array $rows_selector          Reserved/declared for parity
+ *                                       with other functions in this
+ *                                       file; not used directly here.
+ * @global array $mactrack_search_types  Filter-type option list (e.g.
+ *                                       matches/contains/begins with)
+ *                                       used to populate the MAC/IP
+ *                                       filter type dropdowns.
+ */
 function mactrack_ip_address_filter() {
 	global $item_rows, $rows_selector, $mactrack_search_types;
 

@@ -46,6 +46,14 @@ if (isset_request_var('export')) {
 	bottom_footer();
 }
 
+/**
+ * Validates and stores this view's filter request variables (rows,
+ * page, site id, device id, status, MAC/port-name/IP filter type and
+ * text, domain, scan date, sort column/direction) into the session for
+ * the 802.1x list view.
+ *
+ * @return void
+ */
 function mactrack_view_dot1x_validate_request_vars() {
 	// ================= input validation and session storage =================
 	$filters = [
@@ -129,6 +137,14 @@ function mactrack_view_dot1x_validate_request_vars() {
 	// ================= input validation =================
 }
 
+/**
+ * Exports the current filtered 802.1x authentication results (site,
+ * hostname, device, domain, status, MAC, IP, DNS hostname, port,
+ * interface, username, scan date) as a downloaded CSV file. Called
+ * from this script's main request-dispatch switch when action=export.
+ *
+ * @return void
+ */
 function mactrack_view_export_dot1x() {
 	mactrack_view_dot1x_validate_request_vars();
 
@@ -168,6 +184,24 @@ function mactrack_view_export_dot1x() {
 	}
 }
 
+/**
+ * Builds and executes the prepared SQL query for the 802.1x list view,
+ * applying the current status, MAC/port-name/IP filters, domain, site,
+ * device, and scan date request variables, sort order, and optional
+ * row limits. Returns an empty result set if no WHERE clause could be
+ * constructed (avoiding an unfiltered full table scan).
+ *
+ * @param string &$sql_where   Receives the generated SQL WHERE clause.
+ * @param array  &$sql_params  Receives the bound parameter values for
+ *                            the prepared statement.
+ * @param int    $rows         Number of rows per page, used to compute
+ *                            the SQL LIMIT clause when $apply_limits
+ *                            is true.
+ * @param bool   $apply_limits Whether to apply a SQL LIMIT clause
+ *                            (default true).
+ *
+ * @return array The matching 802.1x authentication records.
+ */
 function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $apply_limits = true) {
 	$sql_params = [];
 
@@ -359,6 +393,30 @@ function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $appl
 	}
 }
 
+/**
+ * Renders the main 802.1x authentication results list page: displays
+ * the tab bar and 802.1x filter form, then displays a filtered,
+ * sorted, paginated table of 802.1x records with a modal response area
+ * for scan actions. Called from this script's main request-dispatch
+ * switch as the default view.
+ *
+ * @return void
+ *
+ * @global string $title                  The page title, set for the
+ *                                        surrounding page chrome.
+ * @global string $report                 Reserved/declared for parity
+ *                                        with other functions in this
+ *                                        file; not used directly here.
+ * @global array  $mactrack_search_types  Filter-type option list used
+ *                                        by the 802.1x filter form.
+ * @global array  $rows_selector          Reserved/declared for parity
+ *                                        with other functions in this
+ *                                        file; not used directly here.
+ * @global array  $config                 Cacti global configuration
+ *                                        array.
+ * @global array  $item_rows              Default number of rows per
+ *                                        page from Cacti settings.
+ */
 function mactrack_view_dot1x() {
 	global $title, $report, $mactrack_search_types, $rows_selector, $config;
 	global $item_rows;
@@ -505,6 +563,22 @@ function mactrack_view_dot1x() {
 	bottom_footer();
 }
 
+/**
+ * Renders the search/status/site/device/domain/MAC/port-name/IP/
+ * scan-date filter form controls for the 802.1x list view.
+ *
+ * @return void
+ *
+ * @global array $item_rows              Rows-per-page option list used
+ *                                       to populate the rows dropdown.
+ * @global array $rows_selector          Reserved/declared for parity
+ *                                       with other functions in this
+ *                                       file; not used directly here.
+ * @global array $mactrack_search_types  Filter-type option list (e.g.
+ *                                       matches/contains/begins with)
+ *                                       used to populate the MAC/port
+ *                                       name/IP filter type dropdowns.
+ */
 function mactrack_dot1x_filter() {
 	global $item_rows, $rows_selector, $mactrack_search_types;
 

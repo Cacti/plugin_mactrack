@@ -30,11 +30,27 @@ array_push($mactrack_scanning_functions, 'get_dlink_l2_switch_ports');
 $mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_dlink_l2_dot1dTpFdbEntry_ports');
 
-/*	get_generic_switch_ports - This is a basic function that will scan the dot1d
-  OID tree for all switch port to MAC address association and stores in the
-  mac_track_temp_ports table for future processing in the finalization steps of the
-  scanning process.
-*/
+/**
+ * Scans the dot1d OID tree of a D-Link L2 switch for all switch
+ * port-to-MAC-address associations, storing results in the
+ * mac_track_temp_ports table for later processing during the
+ * finalization step of the scanning process. Registered in
+ * $mactrack_scanning_functions for dispatch by the MacTrack poller
+ * against devices of this vendor's device type.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port scan results.
+ * @param int   $lowPort  Optional lowest port number to include in the
+ *                        scan (0 means no lower bound).
+ * @param int   $highPort Optional highest port number to include in
+ *                        the scan (0 means no upper bound).
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_dlink_l2_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
@@ -75,10 +91,35 @@ function get_dlink_l2_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 	mactrack_debug('Finish function get_dlink_l2_switch_ports for dev=: ' . ' dev=' . $device['hostname']);
 }
 
-/*	get_base_dot1dTpFdbEntry_ports - This function will grab information from the
-  port bridge snmp table and return it to the calling progrem for further processing.
-  This is a foundational function for all vendor data collection functions.
-*/
+/**
+ * Retrieves port-to-MAC-address association data from the standard
+ * dot1d bridge-port SNMP table for a D-Link L2 switch, optionally
+ * storing results to the database. Foundational function reused by
+ * vendor data collection functions.
+ *
+ * @param array $site            The site record the device belongs to.
+ * @param array &$device         The device record being scanned.
+ * @param array &$ifInterfaces   The device's built interfaces table
+ *                               (from build_InterfacesTable()).
+ * @param string $snmp_readstring Optional SNMP read community string;
+ *                               falls back to
+ *                               $device['snmp_readstring'] when empty.
+ * @param bool  $store_to_db     Whether to persist the collected port
+ *                               results to the database; when false,
+ *                               the port results array is returned
+ *                               instead.
+ * @param int   $lowPort         Optional lowest port number to include
+ *                               in the scan (default 1).
+ * @param int   $highPort        Optional highest port number to
+ *                               include in the scan (default 9999).
+ *
+ * @return array|void The collected port results array when
+ *                     $store_to_db is false; otherwise no explicit
+ *                     return value ($device is updated in place).
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 
@@ -227,6 +268,15 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 	}
 }
 
+/**
+ * Converts a D-Link bridge-port MAC address OID suffix (dotted-decimal,
+ * prefixed with two extra index components to strip) into a
+ * colon-delimited hex MAC address.
+ *
+ * @param string $oldmac The raw dotted-decimal OID suffix.
+ *
+ * @return string The formatted colon-delimited hex MAC address.
+ */
 function dlink_convert_macs($oldmac) {
 	if ($oldmac[0] != '.') {
 		$oldmac = '.' . $oldmac;
@@ -246,6 +296,15 @@ function dlink_convert_macs($oldmac) {
 	return $newmac;
 }
 
+/**
+ * Converts a decimal number to a hexadecimal string, left-padded with
+ * zeros to the given length.
+ *
+ * @param int $number The decimal number to convert.
+ * @param int $length The minimum output length to zero-pad to.
+ *
+ * @return string The zero-padded lowercase hexadecimal string.
+ */
 function dec2hex($number, $length) {
 	$hexval = '';
 
@@ -279,11 +338,34 @@ function dec2hex($number, $length) {
 }
 
 if (!function_exists('stripos')) {
-	function stripos($str,$needle) {
+	/**
+ * Polyfill for PHP's built-in stripos(), defined only when not already
+ * available, providing a case-insensitive substring search.
+ *
+ * @param string $str    The string to search in.
+ * @param string $needle The substring to search for.
+ *
+ * @return int|false The position of the first case-insensitive match,
+ *                   or false if not found.
+ */
+function stripos($str,$needle) {
 		return strpos(strtolower($str),strtolower($needle));
 	}
 }
 
+/**
+ * Walks a D-Link switch's dot1q bridge-port-to-VLAN association OID
+ * and resolves each entry's VLAN name, returning the raw vlan
+ * id/name/bridge-port-key tuples (not re-keyed by the caller).
+ *
+ * @param array  &$device         The device record being queried.
+ * @param string $snmp_readstring Optional SNMP read community string;
+ *                                falls back to
+ *                                $device['snmp_readstring'] when empty.
+ *
+ * @return array Indexed array of ['vlan_id' => ..., 'key' => ...,
+ *               'vlan_name' => ...] entries.
+ */
 function xform_dlink_vlan_associations(&$device, $snmp_readstring = '') {
 	// get raw index data
 	if ($snmp_readstring == '') {
@@ -329,6 +411,14 @@ function xform_dlink_vlan_associations(&$device, $snmp_readstring = '') {
 	return $output_array;
 }
 
+/**
+ * Extracts the VLAN id from a D-Link dot1q-related SNMP OID string
+ * (the first dotted segment after an optional leading '.').
+ *
+ * @param string $OID The raw OID string.
+ *
+ * @return string The extracted VLAN id.
+ */
 function get_dlink_vlan_id($OID) {
 	if ($OID[0] != '.') {
 		$OID = '.' . $OID;
@@ -340,6 +430,17 @@ function get_dlink_vlan_id($OID) {
 	return $vlan_id;
 }
 
+/**
+ * Extracts a normalized interface/port type from a D-Link SNMP agent's
+ * raw type-like string when it's wrapped in parentheses (e.g.
+ * "ethernetCsmacd(6)" becomes "6"); returns the input unchanged
+ * otherwise.
+ *
+ * @param mixed $old_port_type The raw port/interface type value.
+ *
+ * @return mixed The extracted value between parentheses, or the
+ *               original value if no parentheses are present.
+ */
 function convert_dlink_data($old_port_type) {
 	$result = $old_port_type;
 

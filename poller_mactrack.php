@@ -315,6 +315,18 @@ if (function_exists('unregister_process')) {
 
 exit(0);
 
+/**
+ * Disables PHP's track_errors ini setting and installs
+ * mactrack_error_handler() as the active error handler, so that
+ * subsequent errors are routed through MacTrack's own logging instead
+ * of the default handler.
+ *
+ * @return void
+ *
+ * @global bool|string &$track_errors Receives the previous
+ *                                   track_errors ini value, for later
+ *                                   restoration by errors_restore().
+ */
 function errors_disable() {
 	global $track_errors;
 	$track_errors = ini_get('track_errors');
@@ -323,6 +335,15 @@ function errors_disable() {
 	set_error_handler('mactrack_error_handler');
 }
 
+/**
+ * Restores the track_errors ini setting saved by errors_disable() and
+ * reinstates PHP's previous error handler.
+ *
+ * @return void
+ *
+ * @global bool|string $track_errors The previous track_errors ini
+ *                                  value saved by errors_disable().
+ */
 function errors_restore() {
 	global $track_errors;
 	ini_set('track_errors', $track_errors);
@@ -330,6 +351,27 @@ function errors_restore() {
 	restore_error_handler();
 }
 
+/**
+ * Custom PHP error handler installed by errors_disable(): logs the
+ * error (with the originating plugin name extracted from the file
+ * path when applicable) to the Cacti log, and for fatal-class errors
+ * originating in a plugin, disables that plugin to prevent repeated
+ * crashes.
+ *
+ * @param int    $level   The PHP error level constant (e.g. E_ERROR).
+ * @param string $message The error message.
+ * @param string $file    The file the error occurred in.
+ * @param int    $line    The line number the error occurred on.
+ * @param array  $context Unused; retained for error handler signature
+ *                       compatibility.
+ *
+ * @return bool False to allow PHP's normal error handling to continue
+ *              (except when IgnoreErrorHandler() suppresses the error
+ *              entirely, in which case true is returned).
+ *
+ * @global array $phperrors Map of PHP error level constants to
+ *                         human-readable labels.
+ */
 function mactrack_error_handler($level, $message, $file, $line, $context) {
 	global $phperrors;
 
@@ -385,6 +427,16 @@ function mactrack_error_handler($level, $message, $file, $line, $context) {
 	return false;
 }
 
+/**
+ * Deletes stale mac_track_processes rows (and cleans up their scan
+ * locks) for scans that have exceeded the configured maximum script
+ * runtime, for the given site (or all sites when $site_id is 0).
+ *
+ * @param int $site_id The MacTrack site id to limit cleanup to, or 0
+ *                     for all sites.
+ *
+ * @return void
+ */
 function clear_old_processes($site_id) {
 	// get the max script runtime and kill old scripts
 	$max_script_runtime = read_config_option('mt_script_runtime');
@@ -428,6 +480,26 @@ function clear_old_processes($site_id) {
 	}
 }
 
+/**
+ * Main MacTrack data collection routine: launches parallel scanning
+ * worker processes for each enabled device (or the devices of a
+ * specific site) to collect port/MAC/VLAN/ARP/802.1x data, waiting for
+ * all workers to finish or the maximum run duration to elapse.
+ *
+ * @param float $start   The collection run's start time
+ *                      (microtime(true)), used to enforce
+ *                      $max_run_duration.
+ * @param int   $site_id The MacTrack site id to scan, or 0 to scan all
+ *                      sites (default 0).
+ *
+ * @return void
+ *
+ * @global int    $max_run_duration Maximum allowed collection run
+ *                                 duration in seconds.
+ * @global array  $config           Cacti global configuration array.
+ * @global bool   $debug            Whether debug output is enabled.
+ * @global string $scan_date        The current scan timestamp.
+ */
 function collect_mactrack_data($start, $site_id = 0) {
 	global $max_run_duration, $config, $debug, $scan_date;
 
@@ -1058,6 +1130,19 @@ function collect_mactrack_data($start, $site_id = 0) {
 	}
 }
 
+/**
+ * Builds and emails the periodic MAC authentication (802.1x) report,
+ * listing newly discovered unauthorized ports/MAC addresses, when the
+ * configured report frequency interval has elapsed since the last run
+ * (or immediately when $mac_auth_frequency is 0).
+ *
+ * @param int $mac_auth_frequency Report frequency in seconds (0 means
+ *                               always run/report immediately).
+ * @param int $last_macauth_time Unix timestamp of the last time this
+ *                               report was sent.
+ *
+ * @return void
+ */
 function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_time) {
 	if ($mac_auth_frequency == 0) {
 		/*
@@ -1146,6 +1231,23 @@ function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_tim
 	}
 }
 
+/**
+ * Logs MacTrack collection or maintenance run performance statistics
+ * (elapsed time, concurrent process count, device count) to both the
+ * Cacti settings table (for display in the UI) and the Cacti log.
+ *
+ * @param string $type Either 'collect' (default) to log a data
+ *                     collection run's stats, or any other value to
+ *                     log a database maintenance run's stats.
+ *
+ * @return void
+ *
+ * @global float $start   The run's start time (microtime(true)), used
+ *                        to compute elapsed time.
+ * @global int   $site_id The MacTrack site id the run was scoped to (0
+ *                        for all sites), used to compute the device
+ *                        count.
+ */
 function log_mactrack_statistics($type = 'collect') {
 	global $start, $site_id;
 
@@ -1217,6 +1319,14 @@ function sig_handler($signo) {
 	}
 }
 
+/**
+ * Prints this script's name, version, and copyright banner to stdout.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function display_version() {
 	global $config;
 
@@ -1224,7 +1334,12 @@ function display_version() {
 	print 'Mactrack Master Poller, Version ' . $info['version'] . ', ' . COPYRIGHT_YEARS . PHP_EOL;
 }
 
-// display_help - displays the usage of the function
+/**
+ * Prints this script's version banner followed by its command-line
+ * usage instructions to stdout.
+ *
+ * @return void
+ */
 function display_help() {
 	display_version();
 

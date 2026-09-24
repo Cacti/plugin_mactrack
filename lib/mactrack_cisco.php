@@ -34,11 +34,26 @@ array_push($mactrack_scanning_functions_ip, 'get_cisco_vrf_arp_table');
 $mactrack_scanning_functions_dot1x ??= [];
 array_push($mactrack_scanning_functions_dot1x, 'get_cisco_dot1x_table');
 
-/* get_catalyst_doet1dTpFdbEntry_ports
-	obtains port associations for Cisco Catalyst Switches.  Catalyst
-	switches are unique in that they support a different snmp_readstring for
-	every VLAN interface on the switch.
-*/
+/**
+ * Obtains port-to-MAC-address associations for Cisco Catalyst
+ * switches. Catalyst switches are unique in that they support a
+ * different SNMP read string per VLAN interface, so this iterates
+ * each known VLAN with its own community string suffix to collect the
+ * full bridge-port table.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port/VLAN/MAC scan results.
+ * @param int   $lowPort  Optional lowest port number to include in the
+ *                        scan (0 means no lower bound).
+ * @param int   $highPort Optional highest port number to include in
+ *                        the scan (0 means no upper bound).
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
@@ -281,11 +296,25 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 	return $device;
 }
 
-/* get_IOS_dot1dTpFdbEntry_ports
-	obtains port associations for Cisco Catalyst Switches.  Catalyst
-	switches are unique in that they support a different snmp_readstring for
-	every VLAN interface on the switch.
-*/
+/**
+ * Obtains port-to-MAC-address associations for Cisco IOS-based
+ * switches (as opposed to CatOS Catalyst switches handled by
+ * get_catalyst_dot1dTpFdbEntry_ports()), which use a single SNMP read
+ * string across all VLANs.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port/VLAN/MAC scan results.
+ * @param int   $lowPort  Optional lowest port number to include in the
+ *                        scan (0 means no lower bound).
+ * @param int   $highPort Optional highest port number to include in
+ *                        the scan (0 means no upper bound).
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
@@ -577,11 +606,22 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 	return $device;
 }
 
-/*	get_cisco_dhcpsnooping_table - This function reads a devices DHCP Snooping table for a site and stores
-  the IP address and MAC address combinations in the mac_track_ips table. Since CISCO-DHCP-SNOOPING-MIB is not
-  fully implemented we match MACs from dot1dTpFdbEntry so some IPs won't get the MAC populated.
-  Send an email to mii@external.cisco.com with the word 'help' in the subject to get MIBs supported per IOS Image.
-*/
+/**
+ * Reads a Cisco device's DHCP snooping binding table for a site and
+ * stores the IP address and MAC address combinations in the
+ * mac_track_ips table, cross-referencing dot1d bridge-port data since
+ * CISCO-DHCP-SNOOPING-MIB is not fully implemented on all platforms
+ * (so some IPs may not get a MAC address populated). Registered in
+ * $mactrack_scanning_functions_ip for dispatch by the MacTrack poller.
+ *
+ * @param array $site    The site record the device belongs to.
+ * @param array &$device The device record being scanned.
+ *
+ * @return void
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_cisco_dhcpsnooping_table($site, &$device) {
 	global $debug, $scan_date;
 
@@ -740,9 +780,20 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 	mactrack_debug('HOST: ' . $device['hostname'] . ', IP address information collection complete');
 }
 
-/*	get_cisco_vrf_arp_table - This function reads a devices ARP table for a site with VRF/MPLS and stores
-  the IP address and MAC address combinations in the mac_track_ips table.
-*/
+/**
+ * Reads a Cisco device's ARP table for a site, including VRF/MPLS
+ * routing instances, and stores the IP address and MAC address
+ * combinations in the mac_track_arp table. Registered in
+ * $mactrack_scanning_functions_ip for dispatch by the MacTrack poller.
+ *
+ * @param array $site    The site record the device belongs to.
+ * @param array &$device The device record being scanned.
+ *
+ * @return void
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_cisco_vrf_arp_table($site, &$device) {
 	global $debug, $scan_date;
 
@@ -776,9 +827,21 @@ function get_cisco_vrf_arp_table($site, &$device) {
 	mactrack_debug('HOST: ' . $device['hostname'] . ', IP address information collection complete');
 }
 
-/*	get_cisco_dot1x_table - This function reads a devices Dot1x table for a site and stores
-  the IP address, MAC address, Username, Domain and Status combinations in the mac_track_dot1x table.
-*/
+/**
+ * Reads a Cisco device's 802.1x (CAF session) table for a site and
+ * stores the IP address, MAC address, username, domain, and status
+ * combinations in the mac_track_dot1x table. Registered in
+ * $mactrack_scanning_functions_dot1x for dispatch by the MacTrack
+ * poller.
+ *
+ * @param array $site    The site record the device belongs to.
+ * @param array &$device The device record being scanned.
+ *
+ * @return void
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_cisco_dot1x_table($site, &$device) {
 	global $debug, $scan_date;
 

@@ -27,6 +27,26 @@ $mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_cabletron_switch_ports');
 array_push($mactrack_scanning_functions, 'get_repeater_rev4_ports');
 
+/**
+ * SNMP-scans a Cabletron switch for its port and MAC address table
+ * data, populating $device with counts and details. Detects whether
+ * the device is running SecureFast (via a marker OID) and delegates
+ * to get_base_sfps_ports() or the standard
+ * get_base_dot1dTpFdbEntry_ports() accordingly. Registered in
+ * $mactrack_scanning_functions for dispatch by the MacTrack poller
+ * against devices of this vendor's device type.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port/MAC scan results.
+ * @param int   $lowPort  Lowest port number to include in the scan.
+ * @param int   $highPort Highest port number to include in the scan.
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_cabletron_switch_ports($site, &$device, $lowPort, $highPort) {
 	global $debug, $scan_date;
 
@@ -60,6 +80,35 @@ function get_cabletron_switch_ports($site, &$device, $lowPort, $highPort) {
 	return $device;
 }
 
+/**
+ * Retrieves port-to-MAC-address association data for a Cabletron
+ * switch running SecureFast (SFPS), using the SecureFast-specific
+ * bridge/MAC table OIDs rather than the standard dot1d bridge-port
+ * table, optionally storing results to the database.
+ *
+ * @param array $site            The site record the device belongs to.
+ * @param array &$device         The device record being scanned.
+ * @param array &$ifInterfaces   The device's built interfaces table
+ *                               (from build_InterfacesTable()).
+ * @param string $snmp_readstring Unused parameter; retained for
+ *                               signature parity with other vendor
+ *                               port-collection functions.
+ * @param bool  $store_to_db     Whether to persist the collected port
+ *                               results to the database; when false,
+ *                               the port results array is returned
+ *                               instead.
+ * @param int   $lowPort         Lowest port number to include in the
+ *                               scan.
+ * @param int   $highPort        Highest port number to include in the
+ *                               scan.
+ *
+ * @return array|void The collected port results array when
+ *                     $store_to_db is false; otherwise no explicit
+ *                     return value ($device is updated in place).
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, $store_to_db, $lowPort, $highPort) {
 	global $debug, $scan_date;
 
@@ -145,11 +194,19 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 	}
 }
 
-/*	get_repeater_snmp_readstring - Cabletron SEHI's are quite odd.  They have potentially
-	5 distinct snmp_readstrings for each of 5 agent structures.  If the read_string
-	for the port information is different than sysObjectID, then let's find it and
-	set it.
-*/
+/**
+ * Cabletron SEHI repeaters are quite odd: they have potentially 5
+ * distinct SNMP read strings, one for each of 5 agent structures. If
+ * the read string for port information differs from the device's
+ * primary sysObjectID read string, this probes each configured
+ * candidate read string in turn to find the one that successfully
+ * queries port data.
+ *
+ * @param array &$device The device record being probed.
+ *
+ * @return string The working SNMP read string for port data, or an
+ *                empty string if none of the candidates worked.
+ */
 function get_repeater_snmp_readstring(&$device) {
 	$active_ports = @cacti_snmp_get($device['hostname'], $device['snmp_readstring'],
 		'.1.3.6.1.4.1.52.4.1.1.1.4.1.1.4.0', $device['snmp_version'],
@@ -187,6 +244,25 @@ function get_repeater_snmp_readstring(&$device) {
 	return '';
 }
 
+/**
+ * SNMP-scans a Cabletron rev4 repeater for its active/total port
+ * counts, first resolving the correct SNMP read string via
+ * get_repeater_snmp_readstring() since these devices may use a
+ * different read string per agent structure. Registered in
+ * $mactrack_scanning_functions for dispatch by the MacTrack poller
+ * against devices of this vendor's device type.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port count results.
+ * @param int   $lowPort  Lowest port number to include in the scan.
+ * @param int   $highPort Highest port number to include in the scan.
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
 	global $debug, $scan_date;
 

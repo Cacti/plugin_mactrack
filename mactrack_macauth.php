@@ -59,6 +59,14 @@ switch (get_request_var('action')) {
 	The Save Function
    -------------------------- */
 
+/**
+ * Validates and saves the MAC authorization edit form's submitted
+ * fields via api_mactrack_maca_save(), then redirects back to the edit
+ * form for the saved (or original) mac id. Called from this script's
+ * main request-dispatch switch when action=save.
+ *
+ * @return void
+ */
 function form_save() {
 	if ((isset_request_var('save_component_maca')) && (isempty_request_var('add_dq_y'))) {
 		$mac_id = api_mactrack_maca_save(get_filter_request_var('mac_id'),
@@ -79,6 +87,28 @@ function form_save() {
 	The 'actions' function
    ------------------------ */
 
+/**
+ * Handles the bulk-action confirmation page/submission for the MAC
+ * authorization list: on confirmed submission with selected_items set,
+ * performs the requested action (currently delete) for each selected
+ * entry; on first display, renders a confirmation box listing the
+ * selected entries. Called from this script's main request-dispatch
+ * switch when action=actions.
+ *
+ * @return void
+ *
+ * @global array $config                     Cacti global configuration
+ *                                           array (declared but not
+ *                                           used directly here).
+ * @global array $maca_actions               Map of drp_action value =>
+ *                                           action label, used for the
+ *                                           bulk-actions confirmation
+ *                                           display.
+ * @global array $fields_mactrack_maca_edit  Reserved/declared for
+ *                                           parity with other functions
+ *                                           in this file; not used
+ *                                           directly here.
+ */
 function form_actions() {
 	global $config, $maca_actions, $fields_mactrack_maca_edit;
 
@@ -161,6 +191,20 @@ function form_actions() {
 	bottom_footer();
 }
 
+/**
+ * Validates and saves a MAC authorization record's fields (MAC address
+ * and description), stamping the current user and timestamp as the
+ * added_by/added_date, and marks all matching mac_track_ports rows
+ * (matched by MAC prefix) as authorized.
+ *
+ * @param int    $mac_id       The mac authorization record id (0 for a
+ *                             new record).
+ * @param string $mac_address  The MAC address (or prefix) to
+ *                             authorize.
+ * @param string $description  A free-form description for the entry.
+ *
+ * @return int The saved mac_id, or 0 if validation/save failed.
+ */
 function api_mactrack_maca_save($mac_id, $mac_address, $description) {
 	$save['mac_id']      = $mac_id;
 	$save['mac_address'] = form_input_validate($mac_address, 'mac_address', '', false, 3);
@@ -188,6 +232,16 @@ function api_mactrack_maca_save($mac_id, $mac_address, $description) {
 	return $mac_id;
 }
 
+/**
+ * Deletes a MAC authorization record and its dependent MAC-matched
+ * records (mac_track_ips, mac_track_ports, mac_track_aggregated_ports),
+ * logging the removal (including the acting user's name) to the Cacti
+ * log for audit purposes.
+ *
+ * @param int $mac_id The mac authorization record id to remove.
+ *
+ * @return void
+ */
 function api_mactrack_maca_remove($mac_id) {
 	$mac_address = db_fetch_cell_prepared('SELECT mac_address
 		FROM mac_track_macauth
@@ -218,6 +272,20 @@ function api_mactrack_maca_remove($mac_id) {
 	MacAuth Functions
    --------------------- */
 
+/**
+ * Builds and executes the SQL query for the MAC authorization list
+ * view, applying the current filter text request variable, sort order,
+ * and optional row limits.
+ *
+ * @param string &$sql_where   Receives the generated SQL WHERE clause.
+ * @param int    $rows         Number of rows per page, used to compute
+ *                            the SQL LIMIT clause when $apply_limits
+ *                            is true.
+ * @param bool   $apply_limits Whether to apply a SQL LIMIT clause
+ *                            (default true).
+ *
+ * @return array The matching MAC authorization records.
+ */
 function mactrack_maca_get_maca_records(&$sql_where, $rows, $apply_limits = true) {
 	// form the 'where' clause for our main sql query
 	$sql_where = '';
@@ -244,6 +312,15 @@ function mactrack_maca_get_maca_records(&$sql_where, $rows, $apply_limits = true
 	return db_fetch_assoc($query_string);
 }
 
+/**
+ * Renders the add/edit form for a MAC authorization record (MAC
+ * address, description).
+ *
+ * @return void
+ *
+ * @global array $fields_mactrack_maca_edit The MAC authorization edit
+ *                                         form's field definitions.
+ */
 function mactrack_maca_edit() {
 	global $fields_mactrack_maca_edit;
 
@@ -278,6 +355,22 @@ function mactrack_maca_edit() {
 	form_save_button('mactrack_macauth.php', 'return');
 }
 
+/**
+ * Renders the main MAC authorization list page: validates/stores this
+ * view's filter request variables, displays the filter form, then
+ * displays a filtered, sorted, paginated table of authorized MAC
+ * addresses with a bulk-actions dropdown. Called from this script's
+ * main request-dispatch switch as the default view.
+ *
+ * @return void
+ *
+ * @global array $maca_actions Map of drp_action value => action label,
+ *                            used for the bulk-actions dropdown.
+ * @global array $config      Cacti global configuration array (declared
+ *                            but not used directly here).
+ * @global int   $item_rows   Default number of rows per page from
+ *                            Cacti settings.
+ */
 function mactrack_maca() {
 	global $maca_actions, $config, $item_rows;
 
@@ -369,6 +462,15 @@ function mactrack_maca() {
 	draw_actions_dropdown($maca_actions);
 }
 
+/**
+ * Renders the search/rows filter form controls for the MAC
+ * authorization list view.
+ *
+ * @return void
+ *
+ * @global array $item_rows Rows-per-page option list used to populate
+ *                         the rows dropdown.
+ */
 function mactrack_maca_filter() {
 	global $item_rows;
 

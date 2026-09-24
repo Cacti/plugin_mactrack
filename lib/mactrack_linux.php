@@ -27,11 +27,27 @@
 $mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_linux_switch_ports');
 
-/*	get_generic_switch_ports - This is a basic function that will scan the dot1d
-  OID tree for all switch port to MAC address association and stores in the
-  mac_track_temp_ports table for future processing in the finalization steps of the
-  scanning process.
-*/
+/**
+ * Scans the dot1d OID tree of a Linux host (e.g. a Linux bridge or
+ * managed device running SNMP) for all switch port-to-MAC-address
+ * associations, storing results in the mac_track_temp_ports table for
+ * later processing during the finalization step of the scanning
+ * process. Registered in $mactrack_scanning_functions for dispatch by
+ * the MacTrack poller against devices of this vendor's device type.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port scan results.
+ * @param int   $lowPort  Optional lowest port number to include in the
+ *                        scan (0 means no lower bound).
+ * @param int   $highPort Optional highest port number to include in
+ *                        the scan (0 means no upper bound).
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_linux_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
@@ -78,10 +94,35 @@ function get_linux_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	return $device;
 }
 
-/*	get_base_dot1dTpFdbEntry_ports - This function will grab information from the
-  port bridge snmp table and return it to the calling progrem for further processing.
-  This is a foundational function for all vendor data collection functions.
-*/
+/**
+ * Retrieves port-to-MAC-address association data from the standard
+ * dot1d bridge-port SNMP table for a Linux host, optionally storing
+ * results to the database. Foundational function reused by vendor
+ * data collection functions.
+ *
+ * @param array $site            The site record the device belongs to.
+ * @param array &$device         The device record being scanned.
+ * @param array &$ifInterfaces   The device's built interfaces table
+ *                               (from build_InterfacesTable()).
+ * @param string $snmp_readstring Optional SNMP read community string;
+ *                               falls back to
+ *                               $device['snmp_readstring'] when empty.
+ * @param bool  $store_to_db     Whether to persist the collected port
+ *                               results to the database; when false,
+ *                               the port results array is returned
+ *                               instead.
+ * @param int   $lowPort         Optional lowest port number to include
+ *                               in the scan (default 1).
+ * @param int   $highPort        Optional highest port number to
+ *                               include in the scan (default 9999).
+ *
+ * @return array|void The collected port results array when
+ *                     $store_to_db is false; otherwise no explicit
+ *                     return value ($device is updated in place).
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 
@@ -245,6 +286,17 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 	}
 }
 
+/**
+ * Extracts a normalized interface type from a Linux SNMP agent's raw
+ * ifType-like string when it's wrapped in parentheses (e.g.
+ * "ethernetCsmacd(6)" becomes "6"); returns the input unchanged
+ * otherwise.
+ *
+ * @param mixed $old_port_type The raw port/interface type value.
+ *
+ * @return mixed The extracted value between parentheses, or the
+ *               original value if no parentheses are present.
+ */
 function convert_port_state_data($old_port_type) {
 	$result = $old_port_type;
 
