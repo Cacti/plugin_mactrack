@@ -22,6 +22,55 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Validates and saves a MacTrack device record's fields, then triggers
+ * a one-way sync of the saved device data back to its linked Cacti
+ * device (when configured to do so). Cacti hook/API function invoked
+ * when saving a device via the MacTrack device edit form or API.
+ *
+ * @param int    $device_id            The MacTrack device id (0 for a
+ *                                     new device).
+ * @param int    $host_id              The linked Cacti host id.
+ * @param int    $site_id              The MacTrack site id this device
+ *                                     belongs to.
+ * @param string $hostname             The device's hostname/IP.
+ * @param string $device_name          The device's display name.
+ * @param string $scan_type            The scan type to use for this
+ *                                     device.
+ * @param string $snmp_options         SNMP scan options bitmask.
+ * @param string $snmp_readstring      SNMP v1/v2 read community
+ *                                     string.
+ * @param string $snmp_version         SNMP protocol version.
+ * @param string $snmp_username        SNMP v3 username.
+ * @param string $snmp_password        SNMP v3 password.
+ * @param string $snmp_auth_protocol   SNMP v3 authentication protocol.
+ * @param string $snmp_priv_passphrase SNMP v3 privacy passphrase.
+ * @param string $snmp_priv_protocol   SNMP v3 privacy protocol.
+ * @param string $snmp_context         SNMP v3 context.
+ * @param string $snmp_engine_id       SNMP v3 engine id.
+ * @param string $snmp_port            SNMP port number.
+ * @param string $snmp_timeout         SNMP timeout in milliseconds.
+ * @param string $snmp_retries         SNMP retry count.
+ * @param string $max_oids             Max OIDs per SNMP get-bulk
+ *                                     request.
+ * @param string $ignorePorts          Ports to ignore during scanning.
+ * @param string $notes                Free-form notes for the device.
+ * @param string $user_name            Optional CLI/telnet username for
+ *                                     supplemental data collection.
+ * @param string $user_password        Optional CLI/telnet password.
+ * @param string $term_type            Optional terminal type for CLI
+ *                                     collection.
+ * @param string $private_key_path     Optional SSH private key path
+ *                                     for CLI collection.
+ * @param string $disabled             Whether the device is disabled.
+ * @param string $scan_trunk_port      Whether to scan trunk ports.
+ * @param string $device_type_id       The MacTrack device type id.
+ *
+ * @return int The saved device_id, or 0 if validation/save failed.
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate the MacTrack library to include.
+ */
 function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 	$device_name, $scan_type, $snmp_options, $snmp_readstring,
 	$snmp_version, $snmp_username, $snmp_password, $snmp_auth_protocol,
@@ -82,6 +131,15 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 	return $device_id;
 }
 
+/**
+ * Deletes a MacTrack device and all of its dependent records (ports,
+ * interfaces, IPs, aggregated ports, processes, temp ports, VLANs, and
+ * interface graphs) from the database.
+ *
+ * @param int $device_id The MacTrack device id to remove.
+ *
+ * @return void
+ */
 function api_mactrack_device_remove($device_id) {
 	db_execute('DELETE FROM mac_track_devices WHERE device_id=' . $device_id);
 	db_execute('DELETE FROM mac_track_aggregated_ports WHERE device_id=' . $device_id);
@@ -95,6 +153,21 @@ function api_mactrack_device_remove($device_id) {
 	db_execute('DELETE FROM mac_track_interface_graphs WHERE device_id=' . $device_id);
 }
 
+/**
+ * Validates and saves a MacTrack site record's fields.
+ *
+ * @param int    $site_id            The site id (0 for a new site).
+ * @param string $site_name          The site's display name.
+ * @param string $customer_contact   Customer contact info for the
+ *                                  site.
+ * @param string $netops_contact     Network operations contact info.
+ * @param string $facilities_contact Facilities contact info.
+ * @param string $site_info          Free-form site notes.
+ * @param string $skip_vlans         VLANs to skip during scanning.
+ * @param string $scan_vlans         VLANs to scan.
+ *
+ * @return int The saved site_id, or 0 if validation/save failed.
+ */
 function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops_contact, $facilities_contact, $site_info, $skip_vlans, $scan_vlans) {
 	$save['site_id']            = $site_id;
 	$save['site_name']          = form_input_validate($site_name, 'site_name', '', false, 3);
@@ -120,6 +193,15 @@ function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops
 	return $site_id;
 }
 
+/**
+ * Deletes a MacTrack site and all of its dependent records (devices,
+ * aggregated ports, interfaces, IPs, IP ranges, ports, temp ports, and
+ * VLANs) from the database.
+ *
+ * @param int $site_id The MacTrack site id to remove.
+ *
+ * @return void
+ */
 function api_mactrack_site_remove($site_id) {
 	db_execute('DELETE FROM mac_track_sites WHERE site_id=' . $site_id);
 	db_execute('DELETE FROM mac_track_devices WHERE site_id=' . $site_id);
@@ -132,6 +214,20 @@ function api_mactrack_site_remove($site_id) {
 	db_execute('DELETE FROM mac_track_vlans WHERE site_id=' . $site_id);
 }
 
+/**
+ * Pushes a MacTrack device's SNMP and connection settings to its
+ * linked Cacti device record via api_device_save(), when the
+ * mt_update_policy setting is configured to sync MacTrack-to-Cacti and
+ * the device has a valid linked host_id.
+ *
+ * @param array $mt_device The MacTrack device record providing the
+ *                        settings to sync.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate library files to include.
+ */
 function sync_mactrack_to_cacti($mt_device) {
 	global $config;
 
@@ -165,6 +261,20 @@ function sync_mactrack_to_cacti($mt_device) {
 	}
 }
 
+/**
+ * Pushes a Cacti device's SNMP and connection settings to its linked
+ * MacTrack device record via api_mactrack_device_save(), when the
+ * mt_update_policy setting is configured to sync Cacti-to-MacTrack and
+ * a matching MacTrack device record exists. Registered as a Cacti hook
+ * called after a Cacti device is saved.
+ *
+ * @param array $device The Cacti host record that was just saved.
+ *
+ * @return array The unmodified $device record, for hook chaining.
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate library files to include.
+ */
 function sync_cacti_to_mactrack($device) {
 	global $config;
 
@@ -233,6 +343,27 @@ function mactrack_device_action_array($action) {
 	return $action;
 }
 
+/**
+ * Renders the confirmation form fields for the "Import into Mactrack
+ * Database" bulk device action, prompting for the MacTrack-specific
+ * device settings (site, scan type, SNMP options, etc.) that cannot be
+ * inferred from the existing Cacti device record.
+ *
+ * @param array $save The bulk-action form submission data, including
+ *                   'drp_action' and 'host_array' when hosts were
+ *                   selected.
+ *
+ * @return void
+ *
+ * @global array $config                      Cacti global
+ *                                            configuration array
+ *                                            (declared but not used
+ *                                            directly here).
+ * @global array $fields_mactrack_device_edit The MacTrack device edit
+ *                                            form's field definitions,
+ *                                            used as a template for
+ *                                            the prompted fields.
+ */
 function mactrack_device_action_prepare($save) {
 	global $config, $fields_mactrack_device_edit;
 

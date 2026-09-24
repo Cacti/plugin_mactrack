@@ -32,6 +32,22 @@ array_push($mactrack_scanning_functions, 'get_3Com_dot1dTpFdbEntry_ports');
 	so transform it in PortN/M where N is stackId and M portnumber
 */
 
+/**
+ * Works around buggy 3Com SSII 1100 switches that don't populate
+ * ifName (using ifDescr instead, which contains ':' making it unusable
+ * for the 'ignore port' feature) by reformatting each interface's
+ * ifDescr into a "PortN/M" (stack/port number) form and persisting the
+ * corrected ifName back to the mac_track_interfaces and
+ * mac_track_interface_graphs tables. No-ops if any interface already
+ * has an ifName.
+ *
+ * @param array &$device    The device record being processed.
+ * @param array &$ifIndexes The device's interfaces table (from
+ *                         build_InterfacesTable()); updated in place
+ *                         with the corrected ifName values.
+ *
+ * @return void
+ */
 function complete_3com_ifName(&$device, &$ifIndexes) {
 	mactrack_debug('Start complete_3com_ifName');
 
@@ -90,9 +106,26 @@ function complete_3com_ifName(&$device, &$ifIndexes) {
 	}
 }
 
-/* get_3Com_dot1dTpFdbEntry_ports
-   same as get_dot1dTpFdbEntry_ports with small modification for 3com devices
-*/
+/**
+ * Same as get_dot1dTpFdbEntry_ports(), with small modifications for
+ * 3Com devices: also repairs missing ifName values via
+ * complete_3com_ifName() before delegating to
+ * get_3Com_base_dot1dTpFdbEntry_ports() for the actual port-to-MAC
+ * association scan.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port scan results.
+ * @param int   $lowPort  Optional lowest port number to include in the
+ *                        scan (0 means no lower bound).
+ * @param int   $highPort Optional highest port number to include in
+ *                        the scan (0 means no upper bound).
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_3Com_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
@@ -114,9 +147,30 @@ function get_3Com_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort
 	return $device;
 }
 
-/* same as get_base_dot1dTpFdbEntry_ports -
-   but add iftype 117 gbit ethernet.
-*/
+/**
+ * Same as get_base_dot1dTpFdbEntry_ports(), but also recognizes
+ * ifType 117 (gigabit Ethernet) as a valid port type when collecting
+ * dot1d bridge-port-to-MAC-address association data.
+ *
+ * @param array $site            The site record the device belongs to.
+ * @param array &$device         The device record being scanned.
+ * @param array &$ifInterfaces   The device's built interfaces table
+ *                               (from build_InterfacesTable()).
+ * @param string $snmp_readstring Optional SNMP read community string;
+ *                               falls back to
+ *                               $device['snmp_readstring'] when empty.
+ * @param bool  $store_to_db     Whether to persist the collected port
+ *                               results to the database.
+ * @param int   $lowPort         Optional lowest port number to include
+ *                               in the scan (default 1).
+ * @param int   $highPort        Optional highest port number to
+ *                               include in the scan (default 9999).
+ *
+ * @return void
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 	mactrack_debug('Start get_3Com_base_dot1dTpFdbEntry_ports');

@@ -66,6 +66,14 @@ switch (get_request_var('action')) {
 	The Save Function
    -------------------------- */
 
+/**
+ * Validates and saves the site edit form's submitted fields via
+ * api_mactrack_site_save(), then redirects back to the edit form for
+ * the saved (or original) site id. Called from this script's main
+ * request-dispatch switch when action=save.
+ *
+ * @return void
+ */
 function form_save() {
 	if ((isset_request_var('save_component_site')) && (isempty_request_var('add_dq_y'))) {
 		$site_id = api_mactrack_site_save(get_filter_request_var('site_id'), get_nfilter_request_var('site_name'),
@@ -86,6 +94,28 @@ function form_save() {
 	The 'actions' function
    ------------------------ */
 
+/**
+ * Handles the bulk-action confirmation page/submission for the sites
+ * list: on confirmed submission with selected_items set, performs the
+ * requested action (currently delete) for each selected site; on first
+ * display, renders a confirmation box listing the selected sites.
+ * Called from this script's main request-dispatch switch when
+ * action=actions.
+ *
+ * @return void
+ *
+ * @global array $config                     Cacti global configuration
+ *                                           array (declared but not
+ *                                           used directly here).
+ * @global array $site_actions               Map of drp_action value =>
+ *                                           action label, used for the
+ *                                           bulk-actions confirmation
+ *                                           display.
+ * @global array $fields_mactrack_site_edit  Reserved/declared for
+ *                                           parity with other functions
+ *                                           in this file; not used
+ *                                           directly here.
+ */
 function form_actions() {
 	global $config, $site_actions, $fields_mactrack_site_edit;
 
@@ -170,6 +200,13 @@ function form_actions() {
 	bottom_footer();
 }
 
+/**
+ * Validates and stores this view's filter request variables (rows,
+ * page, site id, device type id, filter text, sort column/direction,
+ * detail flag) into the session for the sites list view.
+ *
+ * @return void
+ */
 function mactrack_site_validate_req_vars() {
 	// ================= input validation and session storage =================
 	$filters = [
@@ -220,6 +257,19 @@ function mactrack_site_validate_req_vars() {
 	// ================= input validation =================
 }
 
+/**
+ * Exports the current filtered sites list (or, in detail mode, the
+ * per-device-type site summary) as a downloaded CSV file. Called from
+ * this script's main request-dispatch switch when action=export.
+ *
+ * @return void
+ *
+ * @global array $site_actions Reserved/declared for parity with other
+ *                            functions in this file; not used directly
+ *                            here.
+ * @global array $config      Cacti global configuration array (declared
+ *                            but not used directly here).
+ */
 function mactrack_site_export() {
 	global $site_actions, $config;
 
@@ -279,6 +329,23 @@ function mactrack_site_export() {
 	Site Functions
    --------------------- */
 
+/**
+ * Builds and executes the SQL query for the sites list view (or, in
+ * detail mode, a per-site/device-type summary joined against devices),
+ * applying the current filter/site/device-type request variables,
+ * sort order, and optional row limits.
+ *
+ * @param string &$sql_where   Receives the generated SQL WHERE clause
+ *                            for reuse by the caller (e.g. for a
+ *                            matching COUNT query).
+ * @param int    $rows         Number of rows per page, used to compute
+ *                            the SQL LIMIT clause when $apply_limits
+ *                            is true.
+ * @param bool   $apply_limits Whether to apply a SQL LIMIT clause
+ *                            (default true).
+ *
+ * @return array The matching site records.
+ */
 function mactrack_site_get_site_records(&$sql_where, $rows, $apply_limits = true) {
 	// create SQL where clause
 	$device_type_info = db_fetch_row_prepared('SELECT *
@@ -347,6 +414,15 @@ function mactrack_site_get_site_records(&$sql_where, $rows, $apply_limits = true
 	return db_fetch_assoc($query_string);
 }
 
+/**
+ * Renders the add/edit form for a MacTrack site (name, info, contacts,
+ * VLAN scan settings).
+ *
+ * @return void
+ *
+ * @global array $fields_mactrack_site_edit The site edit form's field
+ *                                         definitions.
+ */
 function mactrack_site_edit() {
 	global $fields_mactrack_site_edit;
 
@@ -381,6 +457,21 @@ function mactrack_site_edit() {
 	form_save_button('mactrack_sites.php', 'return', 'site_id');
 }
 
+/**
+ * Renders the main sites list page: displays the site filter form,
+ * validates/stores this view's filter request variables, then displays
+ * a filtered, sorted, paginated table of sites. Called from this
+ * script's main request-dispatch switch as the default view.
+ *
+ * @return void
+ *
+ * @global array $site_actions Map of drp_action value => action label,
+ *                            used for the bulk-actions dropdown.
+ * @global array $config      Cacti global configuration array (declared
+ *                            but not used directly here).
+ * @global int   $item_rows   Default number of rows per page from
+ *                            Cacti settings.
+ */
 function mactrack_site() {
 	global $site_actions, $config, $item_rows;
 

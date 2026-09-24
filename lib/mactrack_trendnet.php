@@ -32,11 +32,27 @@
 $mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_trendnet_dot1q_switch_ports');
 
-/*	get_trendnet_dot1q_switch_ports - This is a basic function that will scan the dot1d
-  OID tree for all switch port to MAC address association and stores in the
-  mac_track_temp_ports table for future processing in the finalization steps of the
-  scanning process.
-*/
+/**
+ * Scans the dot1d OID tree of a TRENDnet switch for all switch
+ * port-to-MAC-address associations, storing results in the
+ * mac_track_temp_ports table for later processing during the
+ * finalization step of the scanning process. Registered in
+ * $mactrack_scanning_functions for dispatch by the MacTrack poller
+ * against devices of this vendor's device type.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port/VLAN/MAC scan results.
+ * @param int   $lowPort  Optional lowest port number to include in the
+ *                        scan (0 means no lower bound).
+ * @param int   $highPort Optional highest port number to include in
+ *                        the scan (0 means no upper bound).
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_trendnet_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
@@ -63,12 +79,33 @@ function get_trendnet_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPor
 
 	return $device;
 }
-/*	get_base_trendnet_dot1qFdb_ports - This function will grab information from the
-  port bridge snmp table and return it to the calling progrem for further processing.
-  This is a foundational function for all vendor data collection functions.
-  This was mainly copied from the default dot1q function in mactrack_functions.php
-  but was modified to work with Dell switches
-*/
+/**
+ * Retrieves port-to-MAC-address association data from the standard
+ * dot1d bridge-port SNMP table for a TRENDnet switch, optionally
+ * storing results to the database. Foundational function reused by
+ * vendor data collection functions; originally copied from the
+ * default dot1q function in mactrack_functions.php and modified for
+ * this vendor.
+ *
+ * @param array $site            The site record the device belongs to.
+ * @param array &$device         The device record being scanned.
+ * @param array &$ifInterfaces   The device's built interfaces table
+ *                               (from build_InterfacesTable()).
+ * @param string $snmp_readstring Overridden internally with
+ *                               $device['snmp_readstring']; the
+ *                               parameter value passed in is unused.
+ * @param bool  $store_to_db     Whether to persist the collected port
+ *                               results to the database.
+ * @param int   $lowPort         Optional lowest port number to include
+ *                               in the scan (default 1).
+ * @param int   $highPort        Optional highest port number to
+ *                               include in the scan (default 9999).
+ *
+ * @return void
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_base_trendnet_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999) {
 	global $debug, $scan_date;
 

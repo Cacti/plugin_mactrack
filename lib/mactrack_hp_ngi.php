@@ -32,6 +32,25 @@
 $mactrack_scanning_functions ??= [];
 array_push($mactrack_scanning_functions, 'get_procurve_ngi_switch_ports');
 
+/**
+ * SNMP-scans an HP ProCurve NGI-series switch for its port, VLAN, and
+ * MAC address table data, populating $device with counts and details.
+ * Registered in $mactrack_scanning_functions for dispatch by the
+ * MacTrack poller against devices of this vendor's device type.
+ *
+ * @param array $site     The site record the device belongs to.
+ * @param array &$device  The device record being scanned; updated in
+ *                        place with port/VLAN/MAC scan results.
+ * @param int   $lowPort  Optional lowest port number to include in the
+ *                        scan (0 means no lower bound).
+ * @param int   $highPort Optional highest port number to include in
+ *                        the scan (0 means no upper bound).
+ *
+ * @return array The updated $device record.
+ *
+ * @global bool   $debug     Whether debug output is enabled.
+ * @global string $scan_date The current scan timestamp.
+ */
 function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;
 
@@ -165,12 +184,23 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	return $device;
 }
 
-/* local_xform_indexed_data - copy of xform_indexed_data without array_rekey before return
-  This function is similar to other the other xform_* functions
-  in that it takes the end of each OID and uses the last $xformLevel positions as the
-  index.  Therefore, if $xformLevel = 3, the return value would be as follows:
-  array[1.2.3] = value.
-*/
+/**
+ * Copy of xform_indexed_data() without the array_rekey() call before
+ * return. Walks an SNMP OID and uses the last $xformLevel positions of
+ * each returned OID as the array key, e.g. for $xformLevel = 3 the
+ * result would be structured as array[1.2.3] = value.
+ *
+ * @param string $xformOID   The base SNMP OID to walk.
+ * @param array  &$device    The device record providing SNMP
+ *                           connection details.
+ * @param int    $xformLevel Number of trailing OID positions to use as
+ *                           the composite index (default 1).
+ *
+ * @return array Indexed array of key => value pairs, and also each
+ *               entry's raw 'key'/'value' when accessed positionally.
+ *
+ * @global bool $debug Whether debug output is enabled.
+ */
 function local_xform_indexed_data($xformOID, &$device, $xformLevel = 1) {
 	global $debug;
 

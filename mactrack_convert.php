@@ -122,6 +122,29 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 	}
 }
 
+/**
+ * Converts the mac_track_ports table to a date-range-partitioned
+ * table (partitioned by day over the given retention window, plus a
+ * catch-all MAXVALUE partition), optionally migrating existing data
+ * from the pre-partitioned backup table, then persists the retention
+ * period to the mt_data_retention setting. On failure, restores the
+ * original table from its backup.
+ *
+ * @param string $engine  The MySQL/MariaDB storage engine to use (e.g.
+ *                        'InnoDB' or 'MyISAM').
+ * @param string $charset The default character set for the new table.
+ * @param string $collate The default collation for the new table.
+ * @param int    $days    Number of daily partitions to pre-create
+ *                        (default 30).
+ * @param bool   $migrate Whether to copy existing rows from the
+ *                        renamed backup table into the new partitioned
+ *                        table (default false).
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function mactrack_create_partitioned_table($engine, $charset, $collate, $days = 30, $migrate = false) {
 	global $config;
 
@@ -217,6 +240,14 @@ function mactrack_create_partitioned_table($engine, $charset, $collate, $days = 
 	}
 }
 
+/**
+ * Prints this script's name, version, and copyright banner to stdout.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function display_version() {
 	global $config;
 
@@ -225,7 +256,12 @@ function display_version() {
 	print 'Mactrack Convert Partitioned, Version ' . $info['version'] . ', ' . COPYRIGHT_YEARS . "\n";
 }
 
-// display_help - displays the usage of the function
+/**
+ * Prints this script's version banner followed by its command-line
+ * usage instructions to stdout.
+ *
+ * @return void
+ */
 function display_help() {
 	display_version();
 
