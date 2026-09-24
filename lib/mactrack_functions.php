@@ -3203,6 +3203,25 @@ function get_netscreen_arp_table($site, &$device) {
 	mactrack_debug(__('HOST: %s, IP address information collection complete', $device['hostname'], 'mactrack'));
 }
 
+/**
+ * Builds the per-row action icons/links for an interface list row:
+ * links to view the device's non-interface and interface-specific
+ * Cacti graphs (or a disabled icon when none exist), and an optional
+ * rescan trigger icon when the user is permitted and the device isn't
+ * disabled.
+ *
+ * @param int  $device_id   The MacTrack device id the interface
+ *                         belongs to.
+ * @param mixed $ifIndex     The interface index (or composite key) to
+ *                          build the rescan action for.
+ * @param bool $show_rescan Whether to include the rescan action icon
+ *                         (default true).
+ *
+ * @return string The HTML markup for the row's action icons/links.
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       build graph preview URLs.
+ */
 function mactrack_interface_actions($device_id, $ifIndex, $show_rescan = true) {
 	global $config;
 
@@ -3272,6 +3291,21 @@ function mactrack_interface_actions($device_id, $ifIndex, $show_rescan = true) {
 	return $row;
 }
 
+/**
+ * Renders a single interfaces-list table row (action icons, device
+ * name/type, interface name/description/alias, bandwidth percentages,
+ * octet counters, error/discard counters or rates depending on the
+ * 'totals' filter setting, operational status, uptime since last
+ * change, and last scan date) as a sequence of `<td>` cells.
+ *
+ * @param array $stat The interface record to render (joined device and
+ *                    SNMP interface counter fields).
+ *
+ * @return string The HTML markup for the table row's cells.
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function mactrack_format_interface_row($stat) {
 	global $config;
 
@@ -3329,6 +3363,23 @@ function mactrack_format_interface_row($stat) {
 	return ob_get_clean();
 }
 
+/**
+ * Renders a single 802.1x results-list table row (action icons, device
+ * name/hostname, username, IP address, optional DNS hostname, MAC
+ * address, interface name, domain, authorization status, scan date) as
+ * a sequence of `<td>` cells.
+ *
+ * @param array $port_result The 802.1x record to render.
+ *
+ * @return string The HTML markup for the table row's cells.
+ *
+ * @global array $config                 Cacti global configuration
+ *                                       array (declared but not used
+ *                                       directly here).
+ * @global array $mactrack_device_status Map of status code => label
+ *                                       used to render the
+ *                                       authorization status column.
+ */
 function mactrack_format_dot1x_row($port_result) {
 	global $config,$mactrack_device_status;
 
@@ -3366,6 +3417,16 @@ function mactrack_format_dot1x_row($port_result) {
 	return $row;
 }
 
+/**
+ * Formats a raw octet count into a human-readable string with a
+ * k/M/G/P magnitude suffix (dividing by 1024 repeatedly), truncated to
+ * a fixed display width.
+ *
+ * @param float $octets The raw octet count.
+ *
+ * @return string The formatted value with its magnitude suffix (e.g.
+ *                "1.234 k").
+ */
 function mactrack_display_Octets($octets) {
 	$suffix = '';
 
@@ -3402,6 +3463,21 @@ function mactrack_display_Octets($octets) {
 	return $octets . ' ' . $suffix;
 }
 
+/**
+ * Triggers an ad hoc rescan of a single device (invoked via AJAX from
+ * the interface/device views), logging the action and running the
+ * poller script as a synchronous subprocess for just that device,
+ * then returns the captured output as a JSON response.
+ *
+ * @param bool $web Whether to pass the --web flag to the poller
+ *                  subprocess so its output is formatted for browser
+ *                  display (default false).
+ *
+ * @return void Prints a JSON response and does not return a value.
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       build the poller script's command line.
+ */
 function mactrack_rescan($web = false) {
 	global $config;
 
@@ -3449,6 +3525,21 @@ function mactrack_rescan($web = false) {
 	print json_encode($data);
 }
 
+/**
+ * Triggers an ad hoc rescan of an entire site (invoked via AJAX from
+ * the sites view), logging the action and running the poller script as
+ * a subprocess scoped to that site, then returns the captured output
+ * as a JSON response.
+ *
+ * @param bool $web Whether to pass the --web flag to the poller
+ *                  subprocess so its output is formatted for browser
+ *                  display (default false).
+ *
+ * @return void Prints a JSON response and does not return a value.
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       build the poller script's command line.
+ */
 function mactrack_site_scan($web = false) {
 	global $config;
 
@@ -3494,6 +3585,13 @@ function mactrack_site_scan($web = false) {
 	print json_encode($data);
 }
 
+/**
+ * Re-enables a previously disabled device (invoked via AJAX from the
+ * devices view), logging the action, clearing its disabled flag, and
+ * returning the device row's re-rendered HTML as a JSON response.
+ *
+ * @return void Prints a JSON response and does not return a value.
+ */
 function mactrack_enable() {
 	// ================= input validation =================
 	get_filter_request_var('device_id');
@@ -3526,6 +3624,13 @@ function mactrack_enable() {
 	print json_encode($data);
 }
 
+/**
+ * Disables a device (invoked via AJAX from the devices view), logging
+ * the action, setting its disabled flag, and returning the device
+ * row's re-rendered HTML as a JSON response.
+ *
+ * @return void Prints a JSON response and does not return a value.
+ */
 function mactrack_disable() {
 	// ================= input validation =================
 	get_filter_request_var('device_id');
@@ -3558,6 +3663,14 @@ function mactrack_disable() {
 	print json_encode($data);
 }
 
+/**
+ * Logs a MacTrack administrative action (e.g. rescan, enable/disable)
+ * to the Cacti log, attributing it to the currently logged-in user.
+ *
+ * @param string $message The action description to log.
+ *
+ * @return void
+ */
 function mactrack_log_action($message) {
 	$user = db_fetch_row_prepared('SELECT username, full_name
 		FROM user_auth
@@ -3567,12 +3680,30 @@ function mactrack_log_action($message) {
 	cacti_log('MACTRACK: ' . $message . ", by '" . $user['full_name'] . '(' . $user['username'] . ")'", false, 'SYSTEM');
 }
 
+/**
+ * Shortens a date string by dropping its leading year portion when the
+ * year matches the current year (e.g. "2026-01-02 03:04:05" becomes
+ * "01-02 03:04:05" in the current year).
+ *
+ * @param string $date The date string to shorten.
+ *
+ * @return string The shortened (or unmodified) date string.
+ */
 function mactrack_date($date) {
 	$year = date('Y');
 
 	return (substr_count($date, $year) ? substr($date,5) : $date);
 }
 
+/**
+ * Determines the CSS row-highlight class for an interfaces-list row
+ * based on its error/discard/up-without-alias/operational-status
+ * flags.
+ *
+ * @param array $stat The interface record to classify.
+ *
+ * @return string The CSS class name for the row.
+ */
 function mactrack_int_row_class($stat) {
 	if ($stat['int_errors_present'] == '1') {
 		return 'int_errors';
@@ -3593,6 +3724,14 @@ function mactrack_int_row_class($stat) {
 	}
 }
 
+/**
+ * Determines the CSS row-highlight class for an 802.1x results-list
+ * row based on its authorization status code.
+ *
+ * @param array $port_result The 802.1x record to classify.
+ *
+ * @return string The CSS class name for the row.
+ */
 function mactrack_dot1x_row_class($port_result) {
 	if ($port_result['status'] == '7') {
 		return 'dot1x_authn_failed';
@@ -3677,6 +3816,16 @@ function mactrack_create_sql_filter($filter, $fields) {
 	return $query . ')';
 }
 
+/**
+ * Formats a duration given in minutes into a human-readable string
+ * using the largest applicable unit (minutes, hours, days, or weeks).
+ *
+ * @param int|string $value The duration in minutes, or '' /
+ *                         'disabled' for not-applicable.
+ *
+ * @return string The formatted duration string (e.g. "3 Hours"), or
+ *                'N/A' when disabled/empty.
+ */
 function mactrack_display_hours($value) {
 	if ($value == '' || $value == 'disabled') {
 		return __('N/A', 'mactrack');
@@ -3703,6 +3852,14 @@ function mactrack_display_hours($value) {
 	}
 }
 
+/**
+ * Renders a summary status box showing whether MacTrack scanning is
+ * currently running (with process count and progress) or idle (with
+ * last run duration, process/device counts from the last recorded run,
+ * and the next scheduled run time).
+ *
+ * @return void
+ */
 function mactrack_display_stats() {
 	// check if scanning is running
 	$processes = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes');
@@ -3752,10 +3909,40 @@ function mactrack_display_stats() {
 	html_end_box();
 }
 
+/**
+ * Prints a single legend swatch cell (used in the interfaces/dot1x list
+ * legends to explain each row-highlight color/class).
+ *
+ * @param string $class The CSS class to apply to the cell (matching a
+ *                      row-highlight class).
+ * @param string $text  The label text to display in the cell.
+ *
+ * @return void
+ */
 function mactrack_legend_row($class, $text) {
 	print "<td width='16.67%' class='$class' style='text-align:center;;'>$text</td>";
 }
 
+/**
+ * Renders a single devices-list table row (optional action icons for
+ * viewing interfaces/rescanning, device name/site/status/hostname/
+ * type, IP/port/trunk/MAC counts or 'N/A' depending on scan type, last
+ * run duration, and a selection checkbox) directly to output.
+ *
+ * @param array $device  The device record to render.
+ * @param bool  $actions Whether to render the leading actions cell
+ *                      (view interfaces / rescan icons) (default
+ *                      false).
+ *
+ * @return void
+ *
+ * @global array $config                Cacti global configuration
+ *                                      array; used to build action
+ *                                      icon URLs.
+ * @global array $mactrack_device_types Reserved/declared for parity
+ *                                      with other functions in this
+ *                                      file; not used directly here.
+ */
 function mactrack_format_device_row($device, $actions = false) {
 	global $config, $mactrack_device_types;
 
@@ -3790,6 +3977,26 @@ function mactrack_format_device_row($device, $actions = false) {
 	form_end_row();
 }
 
+/**
+ * Sends an email notification (e.g. a MAC authorization report) via
+ * Cacti's mailer() API, setting standard X-Mailer/User-Agent headers
+ * and splitting a semicolon-delimited recipient list into multiple
+ * recipients.
+ *
+ * @param string $to        Recipient email address(es), semicolon-
+ *                         delimited for multiple recipients.
+ * @param string $fromemail The sender's email address.
+ * @param string $fromname  The sender's display name.
+ * @param string $subject   The email subject.
+ * @param string $message   The email body.
+ * @param string $headers   Unused parameter; headers are always built
+ *                         internally (default '').
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
+ */
 function mactrack_mail($to, $fromemail, $fromname, $subject, $message, $headers = '') {
 	global $config;
 
@@ -3809,6 +4016,14 @@ function mactrack_mail($to, $fromemail, $fromname, $subject, $message, $headers 
 	mailer($from, $to, '', '', '', $subject, $message, '', '', $headers);
 }
 
+/**
+ * Determines and validates the currently selected MacTrack report tab
+ * ('report' request variable), falling back to the session's last-used
+ * tab, then the user's default tab setting, then 'sites', and persists
+ * the resolved value back to the session.
+ *
+ * @return void
+ */
 function mactrack_sanitize_load_report() {
 	if (!isset_request_var('report')) {
 		if (isset($_SESSION['sess_mt_tab']) && $_SESSION['sess_mt_tab'] != '') {
@@ -3827,6 +4042,16 @@ function mactrack_sanitize_load_report() {
 	$_SESSION['sess_mt_tab'] = get_request_var('report');
 }
 
+/**
+ * Renders the top-level MacTrack tab bar (Sites, Devices, IP Ranges, IP
+ * Address, MAC Address, Interfaces, Dot1x, Graphs), highlighting the
+ * currently selected tab as resolved by mactrack_sanitize_load_report().
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       build each tab's URL.
+ */
 function mactrack_tabs() {
 	global $config;
 
@@ -3865,6 +4090,15 @@ function mactrack_tabs() {
 	print '</script></div>';
 }
 
+/**
+ * Looks up a MAC address's vendor name from the OUI database using its
+ * first 3 octets (vendor prefix).
+ *
+ * @param string $mac The MAC address (or at least its first 3 octets)
+ *                    to look up.
+ *
+ * @return string The vendor name, or 'Unknown' if no match is found.
+ */
 function mactrack_get_vendor_name($mac) {
 	$vendor_mac = substr($mac,0,8);
 
