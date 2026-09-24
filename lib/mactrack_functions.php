@@ -1538,7 +1538,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 						$brPortIfType = (isset($ifInterfaces[$brPortIfIndex]['ifType']) ? $ifInterfaces[$brPortIfIndex]['ifType'] : '');
 					} else {
 						$brPortIfIndex = $port_key['port_number'];
-						$brPortIfType  = @$ifInterfaces[$port_key['port_number']]['ifType'];
+						$brPortIfType  = (isset($ifInterfaces[$brPortIfIndex]['ifType']) ? $ifInterfaces[$brPortIfIndex]['ifType'] : '');
 					}
 
 					if ((($brPortIfType >= 6 && $brPortIfType <= 9) ||
@@ -1777,10 +1777,10 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 				if ($port_key['port_number'] > 0) {
 					if (cacti_sizeof($bridgePortIfIndexes)) {
 						$brPortIfIndex = @$bridgePortIfIndexes[$port_key['port_number']];
-						$brPortIfType  = @$ifInterfaces[$brPortIfIndex]['ifType'];
+						$brPortIfType  = (isset($ifInterfaces[$brPortIfIndex]['ifType']) ? $ifInterfaces[$brPortIfIndex]['ifType'] : '');
 					} else {
 						$brPortIfIndex = $port_key['port_number'];
-						$brPortIfType  = @$ifInterfaces[$port_key['port_number']]['ifType'];
+						$brPortIfType  = (isset($ifInterfaces[$brPortIfIndex]['ifType']) ? $ifInterfaces[$brPortIfIndex]['ifType'] : '');
 					}
 
 					if ((($brPortIfType >= 6) && ($brPortIfType <= 9)) || ($brPortIfType == 71)) {
