@@ -45,7 +45,7 @@ array_push($mactrack_scanning_functions, 'get_procurve_ng_switch_ports');
  * @param int   $highPort Optional highest port number to include in
  *                        the scan (0 means no upper bound).
  *
- * @return void
+ * @return array The updated $device record.
  */
 function get_procurve_ng_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	global $debug, $scan_date;

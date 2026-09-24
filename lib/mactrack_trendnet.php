@@ -101,7 +101,9 @@ function get_trendnet_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPor
  * @param int   $highPort        Optional highest port number to
  *                               include in the scan (default 9999).
  *
- * @return void
+ * @return array|void The collected $new_port_key_array when
+ *                    $store_to_db is false; otherwise no explicit
+ *                    return (results are persisted to the database).
  *
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.

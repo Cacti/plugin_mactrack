@@ -90,8 +90,10 @@ if ($oui_file != '') {
 /**
  * Validates and resolves a user-supplied OUI database file path,
  * rejecting empty paths, paths containing NUL bytes, and paths that
- * don't resolve to an existing, readable file (guards against path
- * traversal/injection via the -f command-line option).
+ * don't resolve to an existing, readable regular file. Note this only
+ * canonicalizes the path and confirms it is readable - it does not
+ * confine the result to any particular directory, so it does not by
+ * itself prevent a path from traversing outside an intended location.
  *
  * @param string $path The candidate file path to validate.
  *

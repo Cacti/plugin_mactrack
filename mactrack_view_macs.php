@@ -229,8 +229,10 @@ function form_actions() {
 
 /**
  * Normalizes a list of raw id values (e.g. from decoded JSON) to a
- * re-indexed array of positive integers, discarding any non-positive
- * or non-numeric entries.
+ * re-indexed array of positive integers via intval() conversion,
+ * discarding any entry that converts to zero or a negative number
+ * (note: a value like '1abc' converts to the positive int 1 and is
+ * kept, since intval() is not strict numeric validation).
  *
  * @param array $ids The raw id values to normalize.
  *

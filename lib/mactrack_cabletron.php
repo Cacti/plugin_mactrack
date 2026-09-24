@@ -258,7 +258,7 @@ function get_repeater_snmp_readstring(&$device) {
  * @param int   $lowPort  Lowest port number to include in the scan.
  * @param int   $highPort Highest port number to include in the scan.
  *
- * @return void
+ * @return array The updated $device record.
  *
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.

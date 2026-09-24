@@ -41,7 +41,7 @@ array_push($mactrack_scanning_functions, 'get_enterasys_switch_ports');
  * @param int   $highPort Optional highest port number to include in
  *                        the scan (0 means no upper bound).
  *
- * @return void
+ * @return array The updated $device record.
  *
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.

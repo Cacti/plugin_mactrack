@@ -1253,6 +1253,9 @@ function mactrack_device_type() {
  * the device types list view.
  *
  * @return void
+ *
+ * @global array $item_rows Cacti's standard row-count option list,
+ *                         used to populate the rows dropdown.
  */
 function mactrack_device_type_filter() {
 	global $item_rows;

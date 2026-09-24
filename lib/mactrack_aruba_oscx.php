@@ -67,7 +67,7 @@ function oscx_mac($mac) {
  * @param int   $highPort Optional highest port number to include in
  *                        the scan (0 means no upper bound).
  *
- * @return void
+ * @return array The updated $device record.
  *
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
@@ -235,7 +235,9 @@ function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 
  * @param int   $highPort        Optional highest port number to
  *                               include in the scan (default 9999).
  *
- * @return void
+ * @return array|void The collected $new_port_key_array when
+ *                    $store_to_db is false; otherwise no explicit
+ *                    return (results are persisted to the database).
  *
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.

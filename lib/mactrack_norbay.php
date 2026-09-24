@@ -42,7 +42,7 @@ array_push($mactrack_scanning_functions, 'get_norbay_accelar_switch_ports');
  * @param int   $highPort Optional highest port number to include in
  *                        the scan (0 means no upper bound).
  *
- * @return void
+ * @return array The updated $device record.
  *
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
@@ -175,7 +175,7 @@ function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPor
  * @param int   $highPort Optional highest port number to include in
  *                        the scan (0 means no upper bound).
  *
- * @return void
+ * @return array The updated $device record.
  *
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
