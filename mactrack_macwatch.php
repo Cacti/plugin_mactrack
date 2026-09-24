@@ -60,6 +60,14 @@ switch (get_request_var('action')) {
 	The Save Function
    -------------------------- */
 
+/**
+ * Validates and saves the MAC watch edit form's submitted fields via
+ * api_mactrack_macw_save(), then redirects back to the edit form for
+ * the saved (or original) mac id. Called from this script's main
+ * request-dispatch switch when action=save.
+ *
+ * @return void
+ */
 function form_save() {
 	if ((isset_request_var('save_component_macw')) && (isempty_request_var('add_dq_y'))) {
 		$mac_id = api_mactrack_macw_save(get_nfilter_request_var('mac_id'),
@@ -81,6 +89,28 @@ function form_save() {
 	The 'actions' function
    ------------------------ */
 
+/**
+ * Handles the bulk-action confirmation page/submission for the MAC
+ * watch list: on confirmed submission with selected_items set,
+ * performs the requested action (currently delete) for each selected
+ * entry; on first display, renders a confirmation box listing the
+ * selected entries. Called from this script's main request-dispatch
+ * switch when action=actions.
+ *
+ * @return void
+ *
+ * @global array $config                     Cacti global configuration
+ *                                           array (declared but not
+ *                                           used directly here).
+ * @global array $macw_actions               Map of drp_action value =>
+ *                                           action label, used for the
+ *                                           bulk-actions confirmation
+ *                                           display.
+ * @global array $fields_mactrack_macw_edit  Reserved/declared for
+ *                                           parity with other functions
+ *                                           in this file; not used
+ *                                           directly here.
+ */
 function form_actions() {
 	global $config, $macw_actions, $fields_mactrack_macw_edit;
 
@@ -166,6 +196,27 @@ function form_actions() {
 	bottom_footer();
 }
 
+/**
+ * Validates and saves a MAC watch record's fields (MAC address, name,
+ * ticket number, description, notification schedule, and notification
+ * email addresses).
+ *
+ * @param int    $mac_id           The mac watch record id (0 for a new
+ *                                record).
+ * @param string $mac_address      The MAC address (or prefix) to
+ *                                watch.
+ * @param string $name             A display name for the watch entry.
+ * @param string $ticket_number    An associated ticket/reference
+ *                                number.
+ * @param string $description      A free-form description for the
+ *                                entry.
+ * @param string $notify_schedule  The notification schedule setting.
+ * @param string $email_addresses  Comma/semicolon-delimited email
+ *                                addresses to notify when the watched
+ *                                MAC is seen.
+ *
+ * @return int The saved mac_id, or 0 if validation/save failed.
+ */
 function api_mactrack_macw_save($mac_id, $mac_address, $name, $ticket_number, $description, $notify_schedule, $email_addresses) {
 	$save['mac_id']          = $mac_id;
 	$save['mac_address']     = form_input_validate($mac_address, 'mac_address', '', false, 3);
@@ -190,6 +241,13 @@ function api_mactrack_macw_save($mac_id, $mac_address, $name, $ticket_number, $d
 	return $mac_id;
 }
 
+/**
+ * Deletes a MAC watch record.
+ *
+ * @param int $mac_id The mac watch record id to remove.
+ *
+ * @return void
+ */
 function api_mactrack_macw_remove($mac_id) {
 	db_execute_prepared('DELETE FROM mac_track_macwatch WHERE mac_id = ?', [$mac_id]);
 }
@@ -198,6 +256,20 @@ function api_mactrack_macw_remove($mac_id) {
 	MacWatch Functions
    --------------------- */
 
+/**
+ * Builds and executes the SQL query for the MAC watch list view,
+ * applying the current filter text request variable, sort order, and
+ * optional row limits.
+ *
+ * @param string &$sql_where   Receives the generated SQL WHERE clause.
+ * @param int    $rows         Number of rows per page, used to compute
+ *                            the SQL LIMIT clause when $apply_limits
+ *                            is true.
+ * @param bool   $apply_limits Whether to apply a SQL LIMIT clause
+ *                            (default true).
+ *
+ * @return array The matching MAC watch records.
+ */
 function mactrack_macw_get_macw_records(&$sql_where, $rows, $apply_limits = true) {
 	$sql_where = '';
 
@@ -226,6 +298,16 @@ function mactrack_macw_get_macw_records(&$sql_where, $rows, $apply_limits = true
 	return db_fetch_assoc($query_string);
 }
 
+/**
+ * Renders the add/edit form for a MAC watch record (MAC address, name,
+ * ticket number, description, notification schedule, notification
+ * email addresses).
+ *
+ * @return void
+ *
+ * @global array $fields_mactrack_macw_edit The MAC watch edit form's
+ *                                         field definitions.
+ */
 function mactrack_macw_edit() {
 	global $fields_mactrack_macw_edit;
 
@@ -260,6 +342,22 @@ function mactrack_macw_edit() {
 	form_save_button('mactrack_macwatch.php', 'return');
 }
 
+/**
+ * Renders the main MAC watch list page: validates/stores this view's
+ * filter request variables, displays the filter form, then displays a
+ * filtered, sorted, paginated table of watched MAC addresses with a
+ * bulk-actions dropdown. Called from this script's main
+ * request-dispatch switch as the default view.
+ *
+ * @return void
+ *
+ * @global array $macw_actions Map of drp_action value => action label,
+ *                            used for the bulk-actions dropdown.
+ * @global array $config      Cacti global configuration array (declared
+ *                            but not used directly here).
+ * @global int   $item_rows   Default number of rows per page from
+ *                            Cacti settings.
+ */
 function mactrack_macw() {
 	global $macw_actions, $config, $item_rows;
 
@@ -373,6 +471,15 @@ function mactrack_macw() {
 	form_end();
 }
 
+/**
+ * Renders the search/rows filter form controls for the MAC watch list
+ * view.
+ *
+ * @return void
+ *
+ * @global array $item_rows Rows-per-page option list used to populate
+ *                         the rows dropdown.
+ */
 function mactrack_macw_filter() {
 	global $item_rows;
 
