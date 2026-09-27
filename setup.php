@@ -452,9 +452,9 @@ function mactrack_page_head() {
 	print get_md5_include_js('plugins/mactrack/js/mactrack_snmp.js');
 
 	if (file_exists($config['base_path'] . '/plugins/mactrack/themes/' . get_selected_theme() . '/mactrack.css')) {
-		print "<link type='text/css' href='" . $config['url_path'] . 'plugins/mactrack/themes/' . get_selected_theme() . "/mactrack.css' rel='stylesheet'>\n";
+		print get_md5_include_css('plugins/mactrack/themes/' . get_selected_theme() . '/mactrack.css');
 	} else {
-		print "<link type='text/css' href='" . $config['url_path'] . "plugins/mactrack/css/mactrack.css' rel='stylesheet'>\n";
+		print get_md5_include_css('plugins/mactrack/css/mactrack.css');
 	}
 }
 
