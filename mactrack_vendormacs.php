@@ -288,7 +288,7 @@ function mactrack_vmac_filter() {
 				</tr>
 			</table>
 			</form>
-			<script type='text/javascript'>
+			<script type='text/javascript' <?php print plugin_mactrack_csp_nonce(); ?>>
 
 			function applyFilter() {
 				strURL  = urlPath+'plugins/mactrack/mactrack_vendormacs.php?header=false';

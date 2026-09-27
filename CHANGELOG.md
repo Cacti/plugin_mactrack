@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* security: Add a version-safe CSP nonce (`plugin_mactrack_csp_nonce()`) to every inline `<script>` tag so pages stay compatible with Cacti's Content-Security-Policy nonce enforcement, while falling back to no attribute on older Cacti releases that lack the `CactiSecureHeaders` class
 * issue#349: Keep punctuation in the port name filter
 * issue#350: Leave an empty hardware address empty
 * issue#353: Stop re-querying addresses that have no PTR record

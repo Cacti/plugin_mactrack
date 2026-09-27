@@ -22,6 +22,22 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Return the CSP nonce attribute for inline <script> tags, safely across
+ * Cacti versions. Newer Cacti releases enforce a Content-Security-Policy that
+ * requires a per-request nonce on parser-inserted scripts; older releases lack
+ * the CactiSecureHeaders class, so this returns an empty string there.
+ *
+ * @return string The `nonce="..."` attribute when supported, otherwise ''.
+ */
+function plugin_mactrack_csp_nonce() {
+	if (class_exists('CactiSecureHeaders')) {
+		return CactiSecureHeaders::getNonceAttribute();
+	}
+
+	return '';
+}
+
 // register these scanning functions
 global $mactrack_scanning_functions;
 
@@ -4084,7 +4100,7 @@ function mactrack_tabs() {
 		}
 	}
 
-	print "</ul></nav><script type='text/javascript'>\n";
+	print "</ul></nav><script type='text/javascript' " . plugin_mactrack_csp_nonce() . ">\n";
 
 	print "$(function() { if (pageName.indexOf('mactrack_view') >= 0) { $('.maintabs a.selected').attr('href', urlPath+'plugins/mactrack/'+pageName); } });";
 	print '</script></div>';
@@ -4234,7 +4250,7 @@ function mactrack_site_filter($page = 'mactrack_sites.php') {
 			<input type='hidden' id='site_id' value='-1'>
 			<?php }?>
 			</form>
-			<script type='text/javascript'>
+			<script type='text/javascript' <?php print plugin_mactrack_csp_nonce(); ?>>
 
 			function applyFilter() {
 				strURL  = urlPath+'plugins/mactrack/<?php print $page; ?>?header=false';

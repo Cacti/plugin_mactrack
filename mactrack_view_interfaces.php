@@ -742,7 +742,7 @@ function mactrack_filter_table() {
 				</tr>
 			</table>
 			</form>
-			<script type='text/javascript'>
+			<script type='text/javascript' <?php print plugin_mactrack_csp_nonce(); ?>>
 
 			function applyFilter() {
 				strURL  = urlPath+'plugins/mactrack/mactrack_view_interfaces.php?report=interfaces&header=false';

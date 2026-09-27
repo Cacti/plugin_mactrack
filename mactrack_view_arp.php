@@ -672,7 +672,7 @@ function mactrack_ip_address_filter() {
 				</tr>
 			</table>
 			</form>
-			<script type='text/javascript'>
+			<script type='text/javascript' <?php print plugin_mactrack_csp_nonce(); ?>>
 
 			function applyFilter() {
 				strURL  = urlPath+'plugins/mactrack/mactrack_view_arp.php?report=arp&header=false';

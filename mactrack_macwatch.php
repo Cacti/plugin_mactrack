@@ -524,7 +524,7 @@ function mactrack_macw_filter() {
 			</table>
 			<input type='hidden' id='page' value='<?php print html_escape_request_var('page'); ?>'>
 			</form>
-			<script type='text/javascript'>
+			<script type='text/javascript' <?php print plugin_mactrack_csp_nonce(); ?>>
 
 			function applyFilter() {
 				strURL  = urlPath+'plugins/mactrack/mactrack_macwatch.php?header=false';
