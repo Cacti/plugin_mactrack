@@ -30,7 +30,7 @@
  *
  * @return string The `nonce="..."` attribute when supported, otherwise ''.
  */
-function plugin_mactrack_csp_nonce() {
+function plugin_mactrack_csp_nonce(): string {
 	if (class_exists('CactiSecureHeaders')) {
 		return CactiSecureHeaders::getNonceAttribute();
 	}
