@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-24 10:34-0400\n"
+"POT-Creation-Date: 2026-09-27 10:19-0400\n"
 "PO-Revision-Date: 2024-04-20 17:45-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -25,165 +25,165 @@ msgstr ""
 msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
 msgstr ""
 
-#: lib/mactrack_functions.php:39 mactrack_utilities.php:285
+#: lib/mactrack_functions.php:55 mactrack_utilities.php:286
 #: mactrack_view_dot1x.php:555 mactrack_view_dot1x.php:701
 msgid "Idle"
 msgstr "Rảnh rỗi"
 
-#: lib/mactrack_functions.php:40 mactrack_utilities.php:285
-#: mactrack_utilities.php:374 mactrack_view_dot1x.php:554
+#: lib/mactrack_functions.php:56 mactrack_utilities.php:286
+#: mactrack_utilities.php:375 mactrack_view_dot1x.php:554
 #: mactrack_view_dot1x.php:702
 msgid "Running"
 msgstr "Đang chạy"
 
-#: lib/mactrack_functions.php:41
+#: lib/mactrack_functions.php:57
 msgid "No method"
 msgstr "Phương thức"
 
-#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:551
+#: lib/mactrack_functions.php:58 mactrack_view_dot1x.php:551
 #: mactrack_view_dot1x.php:704
 msgid "Authentication Success"
 msgstr "Xác thực thành công"
 
-#: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:553
+#: lib/mactrack_functions.php:59 mactrack_view_dot1x.php:553
 #: mactrack_view_dot1x.php:705
 msgid "Authentication Failed"
 msgstr "Quá trình xác thực đã thất bại"
 
-#: lib/mactrack_functions.php:44 mactrack_view_dot1x.php:550
+#: lib/mactrack_functions.php:60 mactrack_view_dot1x.php:550
 #: mactrack_view_dot1x.php:706
 msgid "Authorization Success"
 msgstr "Ủy quyền thành công"
 
-#: lib/mactrack_functions.php:45 mactrack_view_dot1x.php:552
+#: lib/mactrack_functions.php:61 mactrack_view_dot1x.php:552
 #: mactrack_view_dot1x.php:707
 msgid "Authorization Failed"
 msgstr "Ủy quyển thất bại"
 
-#: lib/mactrack_functions.php:2943
+#: lib/mactrack_functions.php:2959
 #, fuzzy
 msgid "Mactrack Device Tracking OUI Database Import Results"
 msgstr "Theo dõi thiết bị Kết quả nhập cơ sở dữ liệu OUI"
 
-#: lib/mactrack_functions.php:2944
+#: lib/mactrack_functions.php:2960
 msgid "Getting OUI Database from IEEE"
 msgstr "Lấy cơ sở dữ liệu OUI từ IEEE"
 
-#: lib/mactrack_functions.php:2946
+#: lib/mactrack_functions.php:2962
 msgid "Getting OUI Database from the IEEE"
 msgstr "Lấy cơ sở dữ liệu OUI từ IEEE"
 
-#: lib/mactrack_functions.php:2979
+#: lib/mactrack_functions.php:2995
 msgid "OUI Database Download from IEEE Complete"
 msgstr "Tải xuống cơ sở dữ liệu OUI từ IEEE Complete"
 
-#: lib/mactrack_functions.php:2981
+#: lib/mactrack_functions.php:2997
 msgid "OUI Database Download from IEEE FAILED"
 msgstr "Tải xuống cơ sở dữ liệu OUI từ IEEE FAILED"
 
-#: lib/mactrack_functions.php:3085
+#: lib/mactrack_functions.php:3101
 #, php-format
 msgid "There were '%d' Entries Added/Updated in the database."
 msgstr "Đã có '% d' Mục nhập được thêm / Cập nhật trong cơ sở dữ liệu."
 
-#: lib/mactrack_functions.php:3090
+#: lib/mactrack_functions.php:3106
 #, php-format
 msgid "There were '%d' Records Removed from the database."
 msgstr "Đã có '% d' Bản ghi bị xóa khỏi cơ sở dữ liệu."
 
-#: lib/mactrack_functions.php:3131
+#: lib/mactrack_functions.php:3147
 msgid "atifIndexes data collection complete"
 msgstr "hoàn thành thu thập dữ liệu"
 
-#: lib/mactrack_functions.php:3150
+#: lib/mactrack_functions.php:3166
 msgid "atPhysAddress data collection complete"
 msgstr "hoàn thành việc thu thập dữ liệu tạiPhysAddress"
 
-#: lib/mactrack_functions.php:3158
+#: lib/mactrack_functions.php:3174
 msgid "atNetAddress data collection complete"
 msgstr "hoàn thành việc thu thập dữ liệu atNetAddress"
 
-#: lib/mactrack_functions.php:3172
+#: lib/mactrack_functions.php:3188
 msgid "atEntries assembly complete."
 msgstr "lắp ráp atEntries hoàn tất."
 
-#: lib/mactrack_functions.php:3203
+#: lib/mactrack_functions.php:3219
 #, php-format
 msgid "HOST: %s, IP address information collection complete"
 msgstr "HOST: %s, hoàn tất thu thập thông tin địa chỉ IP"
 
-#: lib/mactrack_functions.php:3239 lib/mactrack_functions.php:3956
+#: lib/mactrack_functions.php:3255 lib/mactrack_functions.php:3972
 msgid "Rescan Device"
 msgstr "Thiết bị quét lại"
 
-#: lib/mactrack_functions.php:3263
+#: lib/mactrack_functions.php:3279
 msgid "View Non Interface Graphs"
 msgstr "Xem giao diện"
 
-#: lib/mactrack_functions.php:3265
+#: lib/mactrack_functions.php:3281
 msgid "No Non Interface Graphs in Cacti"
 msgstr "Không có đồ thị không giao diện trong xương rồng"
 
-#: lib/mactrack_functions.php:3283
+#: lib/mactrack_functions.php:3299
 msgid "View Interface Graphs"
 msgstr "Xem giao diện"
 
-#: lib/mactrack_functions.php:3285
+#: lib/mactrack_functions.php:3301
 msgid "No Interface Graphs in Cacti"
 msgstr "Xem giao diện"
 
-#: lib/mactrack_functions.php:3317 lib/mactrack_functions.php:3320
+#: lib/mactrack_functions.php:3333 lib/mactrack_functions.php:3336
 msgid "Since Restart"
 msgstr "Kể từ khi khởi động lại"
 
-#: lib/mactrack_functions.php:3359 mactrack_devices.php:1415
+#: lib/mactrack_functions.php:3375 mactrack_devices.php:1415
 #: mactrack_view_devices.php:590
 msgid "Down"
 msgstr "Xuống"
 
-#: lib/mactrack_functions.php:3359 mactrack_devices.php:1413
+#: lib/mactrack_functions.php:3375 mactrack_devices.php:1413
 #: mactrack_view_devices.php:588
 msgid "Up"
 msgstr "Lên trên"
 
-#: lib/mactrack_functions.php:3413
+#: lib/mactrack_functions.php:3429
 msgid "Data"
 msgstr "Dữ liệu"
 
-#: lib/mactrack_functions.php:3413
+#: lib/mactrack_functions.php:3429
 msgid "Voice"
 msgstr "音声"
 
-#: lib/mactrack_functions.php:3497
+#: lib/mactrack_functions.php:3513
 #, php-format
 msgid "Device Rescan '%s'"
 msgstr "Quét lại thiết bị ' %s'"
 
-#: lib/mactrack_functions.php:3559
+#: lib/mactrack_functions.php:3575
 #, php-format
 msgid "Site scan '%s'"
 msgstr "Quét trang web ' %s'"
 
-#: lib/mactrack_functions.php:3608
+#: lib/mactrack_functions.php:3624
 #, php-format
 msgid "Device Enable '%s'"
 msgstr "Thiết bị kích hoạt ' %s'"
 
-#: lib/mactrack_functions.php:3647
+#: lib/mactrack_functions.php:3663
 #, php-format
 msgid "Device Disable '%d'"
 msgstr "Vô hiệu hóa thiết bị '% d'"
 
-#: lib/mactrack_functions.php:3831 lib/mactrack_functions.php:3876
-#: lib/mactrack_functions.php:3877 lib/mactrack_functions.php:3970
-#: lib/mactrack_functions.php:3971 lib/mactrack_functions.php:3972
-#: lib/mactrack_functions.php:3973 lib/mactrack_functions.php:3974
+#: lib/mactrack_functions.php:3847 lib/mactrack_functions.php:3892
+#: lib/mactrack_functions.php:3893 lib/mactrack_functions.php:3986
+#: lib/mactrack_functions.php:3987 lib/mactrack_functions.php:3988
+#: lib/mactrack_functions.php:3989 lib/mactrack_functions.php:3990
 #: mactrack_device_types.php:1212 mactrack_device_types.php:1219
 #: mactrack_device_types.php:1226 mactrack_macwatch.php:452
 #: mactrack_macwatch.php:453 mactrack_snmp.php:549 mactrack_snmp.php:554
-#: mactrack_snmp.php:555 mactrack_snmp.php:556 mactrack_utilities.php:294
-#: mactrack_utilities.php:296 mactrack_utilities.php:300
-#: mactrack_utilities.php:302 mactrack_view_arp.php:533
+#: mactrack_snmp.php:555 mactrack_snmp.php:556 mactrack_utilities.php:295
+#: mactrack_utilities.php:297 mactrack_utilities.php:301
+#: mactrack_utilities.php:303 mactrack_view_arp.php:533
 #: mactrack_view_devices.php:436 mactrack_view_dot1x.php:602
 #: mactrack_view_interfaces.php:623 mactrack_view_macs.php:1290
 #: mactrack_view_sites.php:456 mactrack_view_sites.php:457
@@ -192,108 +192,108 @@ msgstr "Vô hiệu hóa thiết bị '% d'"
 msgid "N/A"
 msgstr "N/A"
 
-#: lib/mactrack_functions.php:3835 setup.php:1269
+#: lib/mactrack_functions.php:3851 setup.php:1269
 #, php-format
 msgid "%d Minutes"
 msgstr "%d phút"
 
-#: lib/mactrack_functions.php:3840
+#: lib/mactrack_functions.php:3856
 #, php-format
 msgid "%d Hours"
 msgstr "% d giờ"
 
-#: lib/mactrack_functions.php:3845 setup.php:1330 setup.php:1331 setup.php:1332
+#: lib/mactrack_functions.php:3861 setup.php:1330 setup.php:1331 setup.php:1332
 #: setup.php:1333 setup.php:1334
 #, php-format
 msgid "%d Days"
 msgstr "% d ngày"
 
-#: lib/mactrack_functions.php:3849
+#: lib/mactrack_functions.php:3865
 #, php-format
 msgid "%d Weeks"
 msgstr "% d tuần"
 
-#: lib/mactrack_functions.php:3875
+#: lib/mactrack_functions.php:3891
 msgid "Not Recorded"
 msgstr "Không được ghi lại"
 
-#: lib/mactrack_functions.php:3896
+#: lib/mactrack_functions.php:3912
 #, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
 msgstr "Trạng thái: Đang chạy, Quá trình:% d, Tiến trình: %s, Lần cuối:% f"
 
-#: lib/mactrack_functions.php:3898
+#: lib/mactrack_functions.php:3914
 #, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
 msgstr "Trạng thái: Không hoạt động, Lần cuối:% f giây, Quá trình:% d quy trình, Thiết bị:% d, Thời gian chạy tiếp theo: %s"
 
-#: lib/mactrack_functions.php:3900 mactrack_device_types.php:1189
-#: mactrack_devices.php:1414 mactrack_utilities.php:285
-#: mactrack_utilities.php:316 mactrack_view_devices.php:589 setup.php:1315
+#: lib/mactrack_functions.php:3916 mactrack_device_types.php:1189
+#: mactrack_devices.php:1414 mactrack_utilities.php:286
+#: mactrack_utilities.php:317 mactrack_view_devices.php:589 setup.php:1315
 #: setup.php:1343 setup.php:1541
 msgid "Disabled"
 msgstr "Vô hiệu hóa"
 
-#: lib/mactrack_functions.php:3906
+#: lib/mactrack_functions.php:3922
 #, php-format
 msgid "Scanning Rate: Every %s"
 msgstr "Tốc độ quét: Mỗi %s"
 
-#: lib/mactrack_functions.php:3951 mactrack_view_devices.php:433
+#: lib/mactrack_functions.php:3967 mactrack_view_devices.php:433
 #: mactrack_view_sites.php:352 mactrack_view_sites.php:446
 msgid "View Interfaces"
 msgstr "Xem giao diện"
 
-#: lib/mactrack_functions.php:3969 mactrack_devices.php:1363
+#: lib/mactrack_functions.php:3985 mactrack_devices.php:1363
 #: mactrack_view_devices.php:542
 msgid "Not Detected"
 msgstr "Không được phát hiện"
 
-#: lib/mactrack_functions.php:4060 lib/mactrack_functions.php:4142
+#: lib/mactrack_functions.php:4076 lib/mactrack_functions.php:4158
 #: mactrack_sites.php:550 mactrack_sites.php:631 mactrack_view_sites.php:327
 #: setup.php:830 setup.php:1357
 msgid "Sites"
 msgstr "Websites"
 
-#: lib/mactrack_functions.php:4061 mactrack_device_types.php:1182
+#: lib/mactrack_functions.php:4077 mactrack_device_types.php:1182
 #: mactrack_devices.php:1257 mactrack_devices.php:1422 mactrack_sites.php:517
-#: mactrack_utilities.php:330 mactrack_view_devices.php:378
+#: mactrack_utilities.php:331 mactrack_view_devices.php:378
 #: mactrack_view_devices.php:597 mactrack_view_sites.php:294 setup.php:831
 #: setup.php:1358
 msgid "Devices"
 msgstr "Thiết bị"
 
-#: lib/mactrack_functions.php:4062
+#: lib/mactrack_functions.php:4078
 msgid "IP Ranges"
 msgstr "Phạm vi IP"
 
-#: lib/mactrack_functions.php:4063
+#: lib/mactrack_functions.php:4079
 msgid "IP Address"
 msgstr "Địa chỉ IP"
 
-#: lib/mactrack_functions.php:4064 setup.php:1973
+#: lib/mactrack_functions.php:4080 setup.php:1973
 msgid "MAC Address"
 msgstr "Địa chỉ MAC"
 
-#: lib/mactrack_functions.php:4065 mactrack_view_interfaces.php:355
+#: lib/mactrack_functions.php:4081 mactrack_view_interfaces.php:355
 #: mactrack_view_interfaces.php:709 setup.php:834
 msgid "Interfaces"
 msgstr "Giao thức kết nối"
 
-#: lib/mactrack_functions.php:4066
+#: lib/mactrack_functions.php:4082
 msgid "Dot1x"
 msgstr "Dot1x"
 
-#: lib/mactrack_functions.php:4067 mactrack_view_graphs.php:190
+#: lib/mactrack_functions.php:4083 mactrack_view_graphs.php:190
 msgid "Graphs"
 msgstr "Đồ thị"
 
-#: lib/mactrack_functions.php:4110 mactrack_device_types.php:625
+#: lib/mactrack_functions.php:4126 mactrack_device_types.php:625
 #: mactrack_devices.php:1416 mactrack_view_devices.php:591 setup.php:1290
 msgid "Unknown"
 msgstr "Không xác định"
 
-#: lib/mactrack_functions.php:4136 mactrack_device_types.php:1270
+#: lib/mactrack_functions.php:4152 mactrack_device_types.php:1270
 #: mactrack_devices.php:1307 mactrack_macauth.php:484 mactrack_macwatch.php:493
 #: mactrack_snmp.php:718 mactrack_vendormacs.php:257 mactrack_view_arp.php:523
 #: mactrack_view_devices.php:487 mactrack_view_dot1x.php:592
@@ -301,18 +301,18 @@ msgstr "Không xác định"
 msgid "Search"
 msgstr "Tìm kiếm"
 
-#: lib/mactrack_functions.php:4146 mactrack_device_types.php:1280
+#: lib/mactrack_functions.php:4162 mactrack_device_types.php:1280
 #: mactrack_devices.php:1426 mactrack_macauth.php:494 mactrack_macwatch.php:503
 #: mactrack_snmp.php:728 mactrack_vendormacs.php:267
 #: mactrack_view_devices.php:601 mactrack_view_ips.php:374 setup.php:1302
 msgid "Default"
 msgstr "Mặc định"
 
-#: lib/mactrack_functions.php:4166
+#: lib/mactrack_functions.php:4182
 msgid "Show Device Details"
 msgstr "Hiển thị chi tiết thiết bị"
 
-#: lib/mactrack_functions.php:4170 mactrack_device_types.php:1296
+#: lib/mactrack_functions.php:4186 mactrack_device_types.php:1296
 #: mactrack_devices.php:1336 mactrack_macauth.php:510 mactrack_macwatch.php:519
 #: mactrack_snmp.php:743 mactrack_vendormacs.php:283 mactrack_view_arp.php:600
 #: mactrack_view_devices.php:516 mactrack_view_dot1x.php:669
@@ -320,7 +320,7 @@ msgstr "Hiển thị chi tiết thiết bị"
 msgid "Go"
 msgstr "Đi"
 
-#: lib/mactrack_functions.php:4171 mactrack_device_types.php:1297
+#: lib/mactrack_functions.php:4187 mactrack_device_types.php:1297
 #: mactrack_devices.php:1337 mactrack_macauth.php:511 mactrack_macwatch.php:520
 #: mactrack_snmp.php:744 mactrack_vendormacs.php:284 mactrack_view_arp.php:601
 #: mactrack_view_devices.php:517 mactrack_view_dot1x.php:670
@@ -329,7 +329,7 @@ msgstr "Đi"
 msgid "Clear"
 msgstr "Xóa"
 
-#: lib/mactrack_functions.php:4172 mactrack_device_types.php:1300
+#: lib/mactrack_functions.php:4188 mactrack_device_types.php:1300
 #: mactrack_devices.php:1339 mactrack_vendormacs.php:285
 #: mactrack_view_arp.php:602 mactrack_view_devices.php:518
 #: mactrack_view_dot1x.php:671 mactrack_view_interfaces.php:635
@@ -337,14 +337,14 @@ msgstr "Xóa"
 msgid "Export"
 msgstr "Xuất ra"
 
-#: lib/mactrack_functions.php:4182 mactrack_devices.php:1313
+#: lib/mactrack_functions.php:4198 mactrack_devices.php:1313
 #: mactrack_view_arp.php:529 mactrack_view_devices.php:493
 #: mactrack_view_dot1x.php:598 mactrack_view_interfaces.php:580
 #: mactrack_view_ips.php:349 mactrack_view_macs.php:1286
 msgid "Site"
 msgstr "Trang"
 
-#: lib/mactrack_functions.php:4186 lib/mactrack_functions.php:4207
+#: lib/mactrack_functions.php:4202 lib/mactrack_functions.php:4223
 #: mactrack_devices.php:1351 mactrack_devices.php:1362
 #: mactrack_devices.php:1412 mactrack_view_devices.php:530
 #: mactrack_view_devices.php:541 mactrack_view_devices.php:587
@@ -352,7 +352,7 @@ msgstr "Trang"
 msgid "Any"
 msgstr "Bất kỳ"
 
-#: lib/mactrack_functions.php:4203 mactrack_devices.php:1358
+#: lib/mactrack_functions.php:4219 mactrack_devices.php:1358
 #: mactrack_view_devices.php:537
 msgid "SubType"
 msgstr "Loại phụ"
@@ -731,7 +731,7 @@ msgstr "Tất cả"
 msgid "Type"
 msgstr "Loại"
 
-#: mactrack_device_types.php:1353 mactrack_utilities.php:316
+#: mactrack_device_types.php:1353 mactrack_utilities.php:317
 msgid "Enabled"
 msgstr "Bật"
 
@@ -958,7 +958,7 @@ msgid "Site Name"
 msgstr "Tên trang web"
 
 #: mactrack_devices.php:1212 mactrack_devices.php:1408
-#: mactrack_utilities.php:330 mactrack_view_devices.php:328
+#: mactrack_utilities.php:331 mactrack_view_devices.php:328
 #: mactrack_view_devices.php:583 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:694
 #: mactrack_view_interfaces.php:539
@@ -1283,250 +1283,250 @@ msgstr "Không tìm thấy bộ tùy chọn SNMP"
 msgid "Options"
 msgstr "Tùy chọn"
 
-#: mactrack_utilities.php:208
+#: mactrack_utilities.php:209
 #, fuzzy
 msgid "Mactrack Process Status"
 msgstr "Tình trạng quá trình theo dõi thiết bị"
 
-#: mactrack_utilities.php:228 mactrack_utilities.php:245
+#: mactrack_utilities.php:229 mactrack_utilities.php:246
 msgid "Refresh"
 msgstr "Làm mới"
 
-#: mactrack_utilities.php:283
+#: mactrack_utilities.php:284
 msgid "Current Process Status"
 msgstr "Tình trạng quy trình hiện tại"
 
-#: mactrack_utilities.php:285
+#: mactrack_utilities.php:286
 #, fuzzy
 msgid "The Mactrack Poller is:"
 msgstr "Thiết bị theo dõi thiết bị là:"
 
-#: mactrack_utilities.php:289
+#: mactrack_utilities.php:290
 msgid "Running Processes:"
 msgstr "Chạy quy trình:"
 
-#: mactrack_utilities.php:292
+#: mactrack_utilities.php:293
 msgid "Last Time Poller Started:"
 msgstr "Lần cuối đẩy xe bắt đầu:"
 
-#: mactrack_utilities.php:294
+#: mactrack_utilities.php:295
 msgid "Poller Frequency:"
 msgstr "Tần số đẩy:"
 
-#: mactrack_utilities.php:296
+#: mactrack_utilities.php:297
 msgid "Approx. Next Runtime:"
 msgstr "Xấp xỉ Thời gian chạy tiếp theo:"
 
-#: mactrack_utilities.php:298
+#: mactrack_utilities.php:299
 #, fuzzy
 msgid "Database Maintenance Information"
 msgstr "Thời gian bảo trì cơ sở dữ liệu"
 
-#: mactrack_utilities.php:300
+#: mactrack_utilities.php:301
 #, fuzzy
 msgid "Last DB Maintenance Time:"
 msgstr "Thời gian bảo trì cuối cùng của Poller:"
 
-#: mactrack_utilities.php:302
+#: mactrack_utilities.php:303
 #, fuzzy
 msgid "Next DB Maintenance Time:"
 msgstr "Xấp xỉ Bảo trì DB tiếp theo:"
 
-#: mactrack_utilities.php:304
+#: mactrack_utilities.php:305
 msgid "Run Time Details"
 msgstr "Chi tiết thời gian chạy"
 
-#: mactrack_utilities.php:306
+#: mactrack_utilities.php:307
 msgid "Last Poller Runtime:"
 msgstr "Thời gian chạy cuối cùng của Poller:"
 
-#: mactrack_utilities.php:308
+#: mactrack_utilities.php:309
 msgid "Last Poller Maintenance Runtime:"
 msgstr "Thời gian bảo trì cuối cùng của Poller:"
 
-#: mactrack_utilities.php:310
+#: mactrack_utilities.php:311
 msgid "Maximum Concurrent Processes:"
 msgstr "Các quy trình đồng thời tối đa:"
 
-#: mactrack_utilities.php:310
+#: mactrack_utilities.php:311
 msgid "processes"
 msgstr "Quy trình"
 
-#: mactrack_utilities.php:312
+#: mactrack_utilities.php:313
 msgid "Maximum Per Device Scan Time:"
 msgstr "Thời gian quét tối đa trên mỗi thiết bị:"
 
-#: mactrack_utilities.php:312
+#: mactrack_utilities.php:313
 msgid "minutes"
 msgstr "phút"
 
-#: mactrack_utilities.php:314
+#: mactrack_utilities.php:315
 msgid "DNS Configuration Information"
 msgstr "Thông tin cấu hình DNS"
 
-#: mactrack_utilities.php:316
+#: mactrack_utilities.php:317
 msgid "Reverse DNS Resolution is"
 msgstr "Độ phân giải DNS ngược là"
 
-#: mactrack_utilities.php:318
+#: mactrack_utilities.php:319
 msgid "Primary DNS Server:"
 msgstr "Máy chủ DNS chính:"
 
-#: mactrack_utilities.php:320
+#: mactrack_utilities.php:321
 msgid "Secondary DNS Server:"
 msgstr "Máy chủ DNS phụ:"
 
-#: mactrack_utilities.php:322
+#: mactrack_utilities.php:323
 msgid "DNS Resolution Timeout:"
 msgstr "Hết thời gian giải quyết DNS:"
 
-#: mactrack_utilities.php:322
+#: mactrack_utilities.php:323
 msgid "milliseconds"
 msgstr "mini giây"
 
-#: mactrack_utilities.php:326
+#: mactrack_utilities.php:327
 msgid "Running Process Summary"
 msgstr "Chạy tóm tắt quá trình"
 
-#: mactrack_utilities.php:328
+#: mactrack_utilities.php:329
 msgid "The DNS Resolver is Not Running"
 msgstr "Trình giải quyết DNS không chạy"
 
-#: mactrack_utilities.php:328
+#: mactrack_utilities.php:329
 msgid "The DNS Resolver is Running"
 msgstr "Trình giải quyết DNS đang chạy"
 
-#: mactrack_utilities.php:330
+#: mactrack_utilities.php:331
 msgid "Date Started"
 msgstr "Ngày bắt đầu"
 
-#: mactrack_utilities.php:368
+#: mactrack_utilities.php:369
 msgid "Completed"
 msgstr "Đã hoàn thành"
 
-#: mactrack_utilities.php:380
+#: mactrack_utilities.php:381
 msgid "Waiting"
 msgstr "Đang đợi"
 
-#: mactrack_utilities.php:388
+#: mactrack_utilities.php:389
 msgid "Other"
 msgstr "Khác"
 
-#: mactrack_utilities.php:415 mactrack_utilities.php:484
-#: mactrack_utilities.php:518
+#: mactrack_utilities.php:416 mactrack_utilities.php:485
+#: mactrack_utilities.php:519
 msgid "Are You Sure?"
 msgstr "Bạn có chắc không?"
 
-#: mactrack_utilities.php:415
+#: mactrack_utilities.php:416
 msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
 msgstr "Bạn có chắc chắn muốn xóa tất cả các kết quả từ Cổng sang MAC sang IP khỏi hệ thống không?"
 
-#: mactrack_utilities.php:463 mactrack_utilities.php:496
+#: mactrack_utilities.php:464 mactrack_utilities.php:497
 #, fuzzy
 msgid "Mactrack Database Results"
 msgstr "Kết quả cơ sở dữ liệu theo dõi thiết bị"
 
-#: mactrack_utilities.php:464 mactrack_utilities.php:562
+#: mactrack_utilities.php:465 mactrack_utilities.php:563
 #, php-format
 msgid "The following number of records have been removed from the database: %s"
 msgstr "Số lượng bản ghi sau đây đã bị xóa khỏi cơ sở dữ liệu: %s"
 
-#: mactrack_utilities.php:484
+#: mactrack_utilities.php:485
 msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
 msgstr "Bạn có chắc chắn muốn xóa tất cả các kết quả Cổng tổng hợp sang MAC sang IP khỏi hệ thống không?"
 
-#: mactrack_utilities.php:497
+#: mactrack_utilities.php:498
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s"
 msgstr "Số lượng các bản ghi sau đây đã bị xóa khỏi bảng tổng hợp: %s"
 
-#: mactrack_utilities.php:518
+#: mactrack_utilities.php:519
 msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
 msgstr "Bạn có chắc chắn muốn xóa và tạo lại tất cả các kết quả Cổng tổng hợp sang MAC sang IP từ hệ thống không?"
 
-#: mactrack_utilities.php:543
+#: mactrack_utilities.php:544
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
 msgstr "Số lượng các bản ghi sau đây đã bị xóa khỏi bảng tổng hợp: %s. Và hồ sơ %s sẽ được thêm vào."
 
-#: mactrack_utilities.php:582
+#: mactrack_utilities.php:583
 #, fuzzy
 msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
 msgstr "Các chức năng quét Theo dõi thiết bị đã bị xóa. Chúng sẽ được tạo lại sau khi bạn chỉnh sửa một loại thiết bị hoặc loại thiết bị."
 
-#: mactrack_utilities.php:595
+#: mactrack_utilities.php:596
 #, fuzzy
 msgid "Cacti Mactrack System Utilities"
 msgstr "Tiện ích hệ thống theo dõi thiết bị Cacti"
 
-#: mactrack_utilities.php:597
+#: mactrack_utilities.php:598
 msgid "Process Status Information"
 msgstr "Thông tin trạng thái quá trình"
 
-#: mactrack_utilities.php:606 setup.php:1142
+#: mactrack_utilities.php:607 setup.php:1142
 #, fuzzy
 msgid "View Mactrack Process Status"
 msgstr "Xem trạng thái quá trình theo dõi thiết bị"
 
-#: mactrack_utilities.php:609
+#: mactrack_utilities.php:610
 #, fuzzy
 msgid "This option will let you show and set process information associated with the Mactrack polling process."
 msgstr "Tùy chọn này sẽ cho phép bạn hiển thị và thiết lập thông tin quy trình liên quan đến quá trình bỏ phiếu Theo dõi thiết bị."
 
-#: mactrack_utilities.php:613
+#: mactrack_utilities.php:614
 msgid "Database Administration"
 msgstr "Quản lý cơ sở dữ liệu"
 
-#: mactrack_utilities.php:617 setup.php:1107
+#: mactrack_utilities.php:618 setup.php:1107
 msgid "Perform Database Maintenance"
 msgstr "Thực hiện bảo trì cơ sở dữ liệu"
 
-#: mactrack_utilities.php:620
+#: mactrack_utilities.php:621
 msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
 msgstr "Xóa các cổng kết nối đã hết hạn với MAC sang IP khỏi cơ sở dữ liệu. Chỉ các hồ sơ đã hết hạn, dựa trên tiêu chí của bạn được xóa."
 
-#: mactrack_utilities.php:626
+#: mactrack_utilities.php:627
 msgid "Refresh IEEE Vendor MAC/OUI Database"
 msgstr "Làm mới cơ sở dữ liệu MAC / OUI của nhà cung cấp IEEE"
 
-#: mactrack_utilities.php:629
+#: mactrack_utilities.php:630
 msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
 msgstr "Chức năng này sẽ tải xuống và cài đặt cơ sở dữ liệu OIU mới nhất từ Trang web của IEEE. Mỗi thẻ giao diện mạng (NIC) có một địa chỉ MAC. Địa chỉ MAC có thể được chia thành hai phần. Phần đầu tiên của MAC Addess chứa MAC của nhà cung cấp. Nhà cung cấp MAC xác định người sản xuất phần này. Điều này sẽ hữu ích trong việc kiểm tra tại chỗ cho các thiết bị giả mạo trên mạng của bạn."
 
-#: mactrack_utilities.php:635 setup.php:1114
+#: mactrack_utilities.php:636 setup.php:1114
 msgid "Refresh Scanning Functions"
 msgstr "Làm mới chức năng quét"
 
-#: mactrack_utilities.php:638
+#: mactrack_utilities.php:639
 #, fuzzy
 msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
 msgstr "Xóa các chức năng quét Theo dõi thiết bị cũ và có khả năng cũ khỏi trình đơn thả xuống mà bạn nhận được khi chỉnh sửa loại thiết bị."
 
-#: mactrack_utilities.php:644
+#: mactrack_utilities.php:645
 msgid "Remove All Scan Results"
 msgstr "Xóa tất cả kết quả quét"
 
-#: mactrack_utilities.php:647
+#: mactrack_utilities.php:648
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
 msgstr "Xóa <strong>TẤT CẢ các</strong> cổng kết nối MAC sang IP khỏi cơ sở dữ liệu tất cả các Địa chỉ IP, Phạm vi IP và VLans. Tiện ích này là tốt khi bạn muốn bắt đầu lại. <strong>NGUY HIỂM: Tất cả dữ liệu trước đó sẽ bị xóa.</strong>"
 
-#: mactrack_utilities.php:651
+#: mactrack_utilities.php:652
 msgid "Aggregated Table Administration"
 msgstr "Quản trị bảng tổng hợp"
 
-#: mactrack_utilities.php:655
+#: mactrack_utilities.php:656
 msgid "Remove All Aggregated Results"
 msgstr "Xóa tất cả kết quả tổng hợp"
 
-#: mactrack_utilities.php:658
+#: mactrack_utilities.php:659
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
 msgstr "Xóa TẤT CẢ Cổng <strong>tổng hợp</strong> (Không quét kết quả) sang MAC để liên kết IP khỏi cơ sở dữ liệu. Dữ liệu sẽ một lần nữa được thu thập trên cơ sở <strong>chỉ có</strong> dữ liệu được quét <strong>mới</strong> trong lần chạy pact mactrack tiếp theo."
 
-#: mactrack_utilities.php:664
+#: mactrack_utilities.php:665
 msgid "Perform Aggregate Table Rebuild"
 msgstr "Thực hiện xây dựng lại bảng tổng hợp"
 
-#: mactrack_utilities.php:667
+#: mactrack_utilities.php:668
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
 msgstr "Xóa TẤT CẢ Cổng <strong>tổng hợp</strong> (Không quét kết quả) sang MAC để liên kết IP khỏi cơ sở dữ liệu và tạo lại dựa trên <strong>Tất cả dữ liệu được</strong> quét ngay bây giờ."
 
