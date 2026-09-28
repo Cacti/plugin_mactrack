@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-24 10:34-0400\n"
+"POT-Creation-Date: 2026-09-27 10:19-0400\n"
 "PO-Revision-Date: 2025-08-18 14:26+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Korean <https://translate.cacti.net/projects/cacti/mactrack/ko/>\n"
@@ -26,165 +26,165 @@ msgstr ""
 msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
 msgstr ""
 
-#: lib/mactrack_functions.php:39 mactrack_utilities.php:285
+#: lib/mactrack_functions.php:55 mactrack_utilities.php:286
 #: mactrack_view_dot1x.php:555 mactrack_view_dot1x.php:701
 msgid "Idle"
 msgstr "게으른"
 
-#: lib/mactrack_functions.php:40 mactrack_utilities.php:285
-#: mactrack_utilities.php:374 mactrack_view_dot1x.php:554
+#: lib/mactrack_functions.php:56 mactrack_utilities.php:286
+#: mactrack_utilities.php:375 mactrack_view_dot1x.php:554
 #: mactrack_view_dot1x.php:702
 msgid "Running"
 msgstr "실행 중"
 
-#: lib/mactrack_functions.php:41
+#: lib/mactrack_functions.php:57
 msgid "No method"
 msgstr "방법"
 
-#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:551
+#: lib/mactrack_functions.php:58 mactrack_view_dot1x.php:551
 #: mactrack_view_dot1x.php:704
 msgid "Authentication Success"
 msgstr "인증 성공"
 
-#: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:553
+#: lib/mactrack_functions.php:59 mactrack_view_dot1x.php:553
 #: mactrack_view_dot1x.php:705
 msgid "Authentication Failed"
 msgstr "인증 실패"
 
-#: lib/mactrack_functions.php:44 mactrack_view_dot1x.php:550
+#: lib/mactrack_functions.php:60 mactrack_view_dot1x.php:550
 #: mactrack_view_dot1x.php:706
 msgid "Authorization Success"
 msgstr "승인 성공"
 
-#: lib/mactrack_functions.php:45 mactrack_view_dot1x.php:552
+#: lib/mactrack_functions.php:61 mactrack_view_dot1x.php:552
 #: mactrack_view_dot1x.php:707
 msgid "Authorization Failed"
 msgstr "인증 실패"
 
-#: lib/mactrack_functions.php:2943
+#: lib/mactrack_functions.php:2959
 #, fuzzy
 msgid "Mactrack Device Tracking OUI Database Import Results"
 msgstr "장치 추적 OUI 데이터베이스 가져 오기 결과"
 
-#: lib/mactrack_functions.php:2944
+#: lib/mactrack_functions.php:2960
 msgid "Getting OUI Database from IEEE"
 msgstr "IEEE에서 OUI 데이터베이스 가져 오기"
 
-#: lib/mactrack_functions.php:2946
+#: lib/mactrack_functions.php:2962
 msgid "Getting OUI Database from the IEEE"
 msgstr "IEEE에서 OUI 데이터베이스 가져 오기"
 
-#: lib/mactrack_functions.php:2979
+#: lib/mactrack_functions.php:2995
 msgid "OUI Database Download from IEEE Complete"
 msgstr "IEEE 완료에서 OUI 데이터베이스 다운로드"
 
-#: lib/mactrack_functions.php:2981
+#: lib/mactrack_functions.php:2997
 msgid "OUI Database Download from IEEE FAILED"
 msgstr "IEEE FAILED에서 OUI 데이터베이스 다운로드"
 
-#: lib/mactrack_functions.php:3085
+#: lib/mactrack_functions.php:3101
 #, php-format
 msgid "There were '%d' Entries Added/Updated in the database."
 msgstr "데이터베이스에 '% d'개의 항목이 추가 / 업데이트되었습니다."
 
-#: lib/mactrack_functions.php:3090
+#: lib/mactrack_functions.php:3106
 #, php-format
 msgid "There were '%d' Records Removed from the database."
 msgstr "'% d'개의 레코드가 데이터베이스에서 제거되었습니다."
 
-#: lib/mactrack_functions.php:3131
+#: lib/mactrack_functions.php:3147
 msgid "atifIndexes data collection complete"
 msgstr "atifIndexes 데이터 수집 완료"
 
-#: lib/mactrack_functions.php:3150
+#: lib/mactrack_functions.php:3166
 msgid "atPhysAddress data collection complete"
 msgstr "atPhysAddress 데이터 수집 완료"
 
-#: lib/mactrack_functions.php:3158
+#: lib/mactrack_functions.php:3174
 msgid "atNetAddress data collection complete"
 msgstr "atNetAddress 데이터 수집 완료"
 
-#: lib/mactrack_functions.php:3172
+#: lib/mactrack_functions.php:3188
 msgid "atEntries assembly complete."
 msgstr "atEntries 어셈블리가 완료되었습니다."
 
-#: lib/mactrack_functions.php:3203
+#: lib/mactrack_functions.php:3219
 #, php-format
 msgid "HOST: %s, IP address information collection complete"
 msgstr "호스트 :  %s, IP 주소 정보 수집 완료"
 
-#: lib/mactrack_functions.php:3239 lib/mactrack_functions.php:3956
+#: lib/mactrack_functions.php:3255 lib/mactrack_functions.php:3972
 msgid "Rescan Device"
 msgstr "장치 재검색"
 
-#: lib/mactrack_functions.php:3263
+#: lib/mactrack_functions.php:3279
 msgid "View Non Interface Graphs"
 msgstr "인터페이스보기"
 
-#: lib/mactrack_functions.php:3265
+#: lib/mactrack_functions.php:3281
 msgid "No Non Interface Graphs in Cacti"
 msgstr "Cacti에 비 인터페이스 그래프 없음"
 
-#: lib/mactrack_functions.php:3283
+#: lib/mactrack_functions.php:3299
 msgid "View Interface Graphs"
 msgstr "인터페이스보기"
 
-#: lib/mactrack_functions.php:3285
+#: lib/mactrack_functions.php:3301
 msgid "No Interface Graphs in Cacti"
 msgstr "인터페이스보기"
 
-#: lib/mactrack_functions.php:3317 lib/mactrack_functions.php:3320
+#: lib/mactrack_functions.php:3333 lib/mactrack_functions.php:3336
 msgid "Since Restart"
 msgstr "재시작 이후"
 
-#: lib/mactrack_functions.php:3359 mactrack_devices.php:1415
+#: lib/mactrack_functions.php:3375 mactrack_devices.php:1415
 #: mactrack_view_devices.php:590
 msgid "Down"
 msgstr "아래로"
 
-#: lib/mactrack_functions.php:3359 mactrack_devices.php:1413
+#: lib/mactrack_functions.php:3375 mactrack_devices.php:1413
 #: mactrack_view_devices.php:588
 msgid "Up"
 msgstr "위로"
 
-#: lib/mactrack_functions.php:3413
+#: lib/mactrack_functions.php:3429
 msgid "Data"
 msgstr "데이터"
 
-#: lib/mactrack_functions.php:3413
+#: lib/mactrack_functions.php:3429
 msgid "Voice"
 msgstr "Voice"
 
-#: lib/mactrack_functions.php:3497
+#: lib/mactrack_functions.php:3513
 #, php-format
 msgid "Device Rescan '%s'"
 msgstr "장치 재검색 ' %s'"
 
-#: lib/mactrack_functions.php:3559
+#: lib/mactrack_functions.php:3575
 #, php-format
 msgid "Site scan '%s'"
 msgstr "사이트 검사 ' %s'"
 
-#: lib/mactrack_functions.php:3608
+#: lib/mactrack_functions.php:3624
 #, php-format
 msgid "Device Enable '%s'"
 msgstr "장치 활성화 ' %s'"
 
-#: lib/mactrack_functions.php:3647
+#: lib/mactrack_functions.php:3663
 #, php-format
 msgid "Device Disable '%d'"
 msgstr "장치 비활성화 '% d'"
 
-#: lib/mactrack_functions.php:3831 lib/mactrack_functions.php:3876
-#: lib/mactrack_functions.php:3877 lib/mactrack_functions.php:3970
-#: lib/mactrack_functions.php:3971 lib/mactrack_functions.php:3972
-#: lib/mactrack_functions.php:3973 lib/mactrack_functions.php:3974
+#: lib/mactrack_functions.php:3847 lib/mactrack_functions.php:3892
+#: lib/mactrack_functions.php:3893 lib/mactrack_functions.php:3986
+#: lib/mactrack_functions.php:3987 lib/mactrack_functions.php:3988
+#: lib/mactrack_functions.php:3989 lib/mactrack_functions.php:3990
 #: mactrack_device_types.php:1212 mactrack_device_types.php:1219
 #: mactrack_device_types.php:1226 mactrack_macwatch.php:452
 #: mactrack_macwatch.php:453 mactrack_snmp.php:549 mactrack_snmp.php:554
-#: mactrack_snmp.php:555 mactrack_snmp.php:556 mactrack_utilities.php:294
-#: mactrack_utilities.php:296 mactrack_utilities.php:300
-#: mactrack_utilities.php:302 mactrack_view_arp.php:533
+#: mactrack_snmp.php:555 mactrack_snmp.php:556 mactrack_utilities.php:295
+#: mactrack_utilities.php:297 mactrack_utilities.php:301
+#: mactrack_utilities.php:303 mactrack_view_arp.php:533
 #: mactrack_view_devices.php:436 mactrack_view_dot1x.php:602
 #: mactrack_view_interfaces.php:623 mactrack_view_macs.php:1290
 #: mactrack_view_sites.php:456 mactrack_view_sites.php:457
@@ -193,108 +193,108 @@ msgstr "장치 비활성화 '% d'"
 msgid "N/A"
 msgstr "N/A"
 
-#: lib/mactrack_functions.php:3835 setup.php:1269
+#: lib/mactrack_functions.php:3851 setup.php:1269
 #, php-format
 msgid "%d Minutes"
 msgstr "%d 분"
 
-#: lib/mactrack_functions.php:3840
+#: lib/mactrack_functions.php:3856
 #, php-format
 msgid "%d Hours"
 msgstr "%d 시간"
 
-#: lib/mactrack_functions.php:3845 setup.php:1330 setup.php:1331 setup.php:1332
+#: lib/mactrack_functions.php:3861 setup.php:1330 setup.php:1331 setup.php:1332
 #: setup.php:1333 setup.php:1334
 #, php-format
 msgid "%d Days"
 msgstr "%d일"
 
-#: lib/mactrack_functions.php:3849
+#: lib/mactrack_functions.php:3865
 #, php-format
 msgid "%d Weeks"
 msgstr "% d 주"
 
-#: lib/mactrack_functions.php:3875
+#: lib/mactrack_functions.php:3891
 msgid "Not Recorded"
 msgstr "녹음되지 않음"
 
-#: lib/mactrack_functions.php:3896
+#: lib/mactrack_functions.php:3912
 #, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
 msgstr "상태 : 실행 중, 프로세스 : % d, 진행률 :  %s, LastRuntime : % f"
 
-#: lib/mactrack_functions.php:3898
+#: lib/mactrack_functions.php:3914
 #, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
 msgstr "상태 : 유휴, LastRuntime : % f 초, 프로세스 : % d 프로세스, 장치 : % d, 다음 실행 시간 :  %s"
 
-#: lib/mactrack_functions.php:3900 mactrack_device_types.php:1189
-#: mactrack_devices.php:1414 mactrack_utilities.php:285
-#: mactrack_utilities.php:316 mactrack_view_devices.php:589 setup.php:1315
+#: lib/mactrack_functions.php:3916 mactrack_device_types.php:1189
+#: mactrack_devices.php:1414 mactrack_utilities.php:286
+#: mactrack_utilities.php:317 mactrack_view_devices.php:589 setup.php:1315
 #: setup.php:1343 setup.php:1541
 msgid "Disabled"
 msgstr "비활성화"
 
-#: lib/mactrack_functions.php:3906
+#: lib/mactrack_functions.php:3922
 #, php-format
 msgid "Scanning Rate: Every %s"
 msgstr "스캔 속도 :  %s마다"
 
-#: lib/mactrack_functions.php:3951 mactrack_view_devices.php:433
+#: lib/mactrack_functions.php:3967 mactrack_view_devices.php:433
 #: mactrack_view_sites.php:352 mactrack_view_sites.php:446
 msgid "View Interfaces"
 msgstr "인터페이스보기"
 
-#: lib/mactrack_functions.php:3969 mactrack_devices.php:1363
+#: lib/mactrack_functions.php:3985 mactrack_devices.php:1363
 #: mactrack_view_devices.php:542
 msgid "Not Detected"
 msgstr "감지되지 않음"
 
-#: lib/mactrack_functions.php:4060 lib/mactrack_functions.php:4142
+#: lib/mactrack_functions.php:4076 lib/mactrack_functions.php:4158
 #: mactrack_sites.php:550 mactrack_sites.php:631 mactrack_view_sites.php:327
 #: setup.php:830 setup.php:1357
 msgid "Sites"
 msgstr "사이트"
 
-#: lib/mactrack_functions.php:4061 mactrack_device_types.php:1182
+#: lib/mactrack_functions.php:4077 mactrack_device_types.php:1182
 #: mactrack_devices.php:1257 mactrack_devices.php:1422 mactrack_sites.php:517
-#: mactrack_utilities.php:330 mactrack_view_devices.php:378
+#: mactrack_utilities.php:331 mactrack_view_devices.php:378
 #: mactrack_view_devices.php:597 mactrack_view_sites.php:294 setup.php:831
 #: setup.php:1358
 msgid "Devices"
 msgstr "장치"
 
-#: lib/mactrack_functions.php:4062
+#: lib/mactrack_functions.php:4078
 msgid "IP Ranges"
 msgstr "IP 범위"
 
-#: lib/mactrack_functions.php:4063
+#: lib/mactrack_functions.php:4079
 msgid "IP Address"
 msgstr "IP 주소"
 
-#: lib/mactrack_functions.php:4064 setup.php:1973
+#: lib/mactrack_functions.php:4080 setup.php:1973
 msgid "MAC Address"
 msgstr "MAC 주소"
 
-#: lib/mactrack_functions.php:4065 mactrack_view_interfaces.php:355
+#: lib/mactrack_functions.php:4081 mactrack_view_interfaces.php:355
 #: mactrack_view_interfaces.php:709 setup.php:834
 msgid "Interfaces"
 msgstr "인터페이스"
 
-#: lib/mactrack_functions.php:4066
+#: lib/mactrack_functions.php:4082
 msgid "Dot1x"
 msgstr "점 1x"
 
-#: lib/mactrack_functions.php:4067 mactrack_view_graphs.php:190
+#: lib/mactrack_functions.php:4083 mactrack_view_graphs.php:190
 msgid "Graphs"
 msgstr "그래프 "
 
-#: lib/mactrack_functions.php:4110 mactrack_device_types.php:625
+#: lib/mactrack_functions.php:4126 mactrack_device_types.php:625
 #: mactrack_devices.php:1416 mactrack_view_devices.php:591 setup.php:1290
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: lib/mactrack_functions.php:4136 mactrack_device_types.php:1270
+#: lib/mactrack_functions.php:4152 mactrack_device_types.php:1270
 #: mactrack_devices.php:1307 mactrack_macauth.php:484 mactrack_macwatch.php:493
 #: mactrack_snmp.php:718 mactrack_vendormacs.php:257 mactrack_view_arp.php:523
 #: mactrack_view_devices.php:487 mactrack_view_dot1x.php:592
@@ -302,18 +302,18 @@ msgstr "알 수 없음"
 msgid "Search"
 msgstr "검색"
 
-#: lib/mactrack_functions.php:4146 mactrack_device_types.php:1280
+#: lib/mactrack_functions.php:4162 mactrack_device_types.php:1280
 #: mactrack_devices.php:1426 mactrack_macauth.php:494 mactrack_macwatch.php:503
 #: mactrack_snmp.php:728 mactrack_vendormacs.php:267
 #: mactrack_view_devices.php:601 mactrack_view_ips.php:374 setup.php:1302
 msgid "Default"
 msgstr "기본값"
 
-#: lib/mactrack_functions.php:4166
+#: lib/mactrack_functions.php:4182
 msgid "Show Device Details"
 msgstr "장치 세부 정보 표시"
 
-#: lib/mactrack_functions.php:4170 mactrack_device_types.php:1296
+#: lib/mactrack_functions.php:4186 mactrack_device_types.php:1296
 #: mactrack_devices.php:1336 mactrack_macauth.php:510 mactrack_macwatch.php:519
 #: mactrack_snmp.php:743 mactrack_vendormacs.php:283 mactrack_view_arp.php:600
 #: mactrack_view_devices.php:516 mactrack_view_dot1x.php:669
@@ -321,7 +321,7 @@ msgstr "장치 세부 정보 표시"
 msgid "Go"
 msgstr "가기"
 
-#: lib/mactrack_functions.php:4171 mactrack_device_types.php:1297
+#: lib/mactrack_functions.php:4187 mactrack_device_types.php:1297
 #: mactrack_devices.php:1337 mactrack_macauth.php:511 mactrack_macwatch.php:520
 #: mactrack_snmp.php:744 mactrack_vendormacs.php:284 mactrack_view_arp.php:601
 #: mactrack_view_devices.php:517 mactrack_view_dot1x.php:670
@@ -330,7 +330,7 @@ msgstr "가기"
 msgid "Clear"
 msgstr "지우기"
 
-#: lib/mactrack_functions.php:4172 mactrack_device_types.php:1300
+#: lib/mactrack_functions.php:4188 mactrack_device_types.php:1300
 #: mactrack_devices.php:1339 mactrack_vendormacs.php:285
 #: mactrack_view_arp.php:602 mactrack_view_devices.php:518
 #: mactrack_view_dot1x.php:671 mactrack_view_interfaces.php:635
@@ -338,14 +338,14 @@ msgstr "지우기"
 msgid "Export"
 msgstr "내보내기"
 
-#: lib/mactrack_functions.php:4182 mactrack_devices.php:1313
+#: lib/mactrack_functions.php:4198 mactrack_devices.php:1313
 #: mactrack_view_arp.php:529 mactrack_view_devices.php:493
 #: mactrack_view_dot1x.php:598 mactrack_view_interfaces.php:580
 #: mactrack_view_ips.php:349 mactrack_view_macs.php:1286
 msgid "Site"
 msgstr "사이트"
 
-#: lib/mactrack_functions.php:4186 lib/mactrack_functions.php:4207
+#: lib/mactrack_functions.php:4202 lib/mactrack_functions.php:4223
 #: mactrack_devices.php:1351 mactrack_devices.php:1362
 #: mactrack_devices.php:1412 mactrack_view_devices.php:530
 #: mactrack_view_devices.php:541 mactrack_view_devices.php:587
@@ -353,7 +353,7 @@ msgstr "사이트"
 msgid "Any"
 msgstr "일부"
 
-#: lib/mactrack_functions.php:4203 mactrack_devices.php:1358
+#: lib/mactrack_functions.php:4219 mactrack_devices.php:1358
 #: mactrack_view_devices.php:537
 msgid "SubType"
 msgstr "하위 유형"
@@ -732,7 +732,7 @@ msgstr "모두"
 msgid "Type"
 msgstr "유형"
 
-#: mactrack_device_types.php:1353 mactrack_utilities.php:316
+#: mactrack_device_types.php:1353 mactrack_utilities.php:317
 msgid "Enabled"
 msgstr "활성화"
 
@@ -959,7 +959,7 @@ msgid "Site Name"
 msgstr "사이트 이름"
 
 #: mactrack_devices.php:1212 mactrack_devices.php:1408
-#: mactrack_utilities.php:330 mactrack_view_devices.php:328
+#: mactrack_utilities.php:331 mactrack_view_devices.php:328
 #: mactrack_view_devices.php:583 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:694
 #: mactrack_view_interfaces.php:539
@@ -1284,250 +1284,250 @@ msgstr "SNMP 옵션 세트를 찾을 수 없음"
 msgid "Options"
 msgstr "옵션"
 
-#: mactrack_utilities.php:208
+#: mactrack_utilities.php:209
 #, fuzzy
 msgid "Mactrack Process Status"
 msgstr "장치 추적 프로세스 상태"
 
-#: mactrack_utilities.php:228 mactrack_utilities.php:245
+#: mactrack_utilities.php:229 mactrack_utilities.php:246
 msgid "Refresh"
 msgstr "새로고침"
 
-#: mactrack_utilities.php:283
+#: mactrack_utilities.php:284
 msgid "Current Process Status"
 msgstr "현재 프로세스 상태"
 
-#: mactrack_utilities.php:285
+#: mactrack_utilities.php:286
 #, fuzzy
 msgid "The Mactrack Poller is:"
 msgstr "장치 추적 폴러는 다음과 같습니다."
 
-#: mactrack_utilities.php:289
+#: mactrack_utilities.php:290
 msgid "Running Processes:"
 msgstr "실행중인 프로세스 :"
 
-#: mactrack_utilities.php:292
+#: mactrack_utilities.php:293
 msgid "Last Time Poller Started:"
 msgstr "마지막으로 Poller Started :"
 
-#: mactrack_utilities.php:294
+#: mactrack_utilities.php:295
 msgid "Poller Frequency:"
 msgstr "폴러 빈도 :"
 
-#: mactrack_utilities.php:296
+#: mactrack_utilities.php:297
 msgid "Approx. Next Runtime:"
 msgstr "약. 다음 런타임 :"
 
-#: mactrack_utilities.php:298
+#: mactrack_utilities.php:299
 #, fuzzy
 msgid "Database Maintenance Information"
 msgstr "데이터베이스 유지 보수 시간"
 
-#: mactrack_utilities.php:300
+#: mactrack_utilities.php:301
 #, fuzzy
 msgid "Last DB Maintenance Time:"
 msgstr "마지막 폴러 유지 관리 런타임 :"
 
-#: mactrack_utilities.php:302
+#: mactrack_utilities.php:303
 #, fuzzy
 msgid "Next DB Maintenance Time:"
 msgstr "약. 다음 DB 유지 관리 :"
 
-#: mactrack_utilities.php:304
+#: mactrack_utilities.php:305
 msgid "Run Time Details"
 msgstr "실행 시간 세부 정보"
 
-#: mactrack_utilities.php:306
+#: mactrack_utilities.php:307
 msgid "Last Poller Runtime:"
 msgstr "마지막 폴러 런타임 :"
 
-#: mactrack_utilities.php:308
+#: mactrack_utilities.php:309
 msgid "Last Poller Maintenance Runtime:"
 msgstr "마지막 폴러 유지 관리 런타임 :"
 
-#: mactrack_utilities.php:310
+#: mactrack_utilities.php:311
 msgid "Maximum Concurrent Processes:"
 msgstr "최대 동시 프로세스 수 :"
 
-#: mactrack_utilities.php:310
+#: mactrack_utilities.php:311
 msgid "processes"
 msgstr "프로세스"
 
-#: mactrack_utilities.php:312
+#: mactrack_utilities.php:313
 msgid "Maximum Per Device Scan Time:"
 msgstr "최대 장치 스캔 시간 :"
 
-#: mactrack_utilities.php:312
+#: mactrack_utilities.php:313
 msgid "minutes"
 msgstr "분"
 
-#: mactrack_utilities.php:314
+#: mactrack_utilities.php:315
 msgid "DNS Configuration Information"
 msgstr "DNS 구성 정보"
 
-#: mactrack_utilities.php:316
+#: mactrack_utilities.php:317
 msgid "Reverse DNS Resolution is"
 msgstr "반대 DNS 해상도"
 
-#: mactrack_utilities.php:318
+#: mactrack_utilities.php:319
 msgid "Primary DNS Server:"
 msgstr "기본 DNS 서버 :"
 
-#: mactrack_utilities.php:320
+#: mactrack_utilities.php:321
 msgid "Secondary DNS Server:"
 msgstr "보조 DNS 서버 :"
 
-#: mactrack_utilities.php:322
+#: mactrack_utilities.php:323
 msgid "DNS Resolution Timeout:"
 msgstr "DNS 확인 제한 시간 :"
 
-#: mactrack_utilities.php:322
+#: mactrack_utilities.php:323
 msgid "milliseconds"
 msgstr "밀리 초"
 
-#: mactrack_utilities.php:326
+#: mactrack_utilities.php:327
 msgid "Running Process Summary"
 msgstr "프로세스 요약 실행 중"
 
-#: mactrack_utilities.php:328
+#: mactrack_utilities.php:329
 msgid "The DNS Resolver is Not Running"
 msgstr "DNS 확인자가 실행되고 있지 않습니다."
 
-#: mactrack_utilities.php:328
+#: mactrack_utilities.php:329
 msgid "The DNS Resolver is Running"
 msgstr "DNS 확인 프로그램이 실행 중입니다."
 
-#: mactrack_utilities.php:330
+#: mactrack_utilities.php:331
 msgid "Date Started"
 msgstr "시작일"
 
-#: mactrack_utilities.php:368
+#: mactrack_utilities.php:369
 msgid "Completed"
 msgstr "완료됨"
 
-#: mactrack_utilities.php:380
+#: mactrack_utilities.php:381
 msgid "Waiting"
 msgstr "기다리는"
 
-#: mactrack_utilities.php:388
+#: mactrack_utilities.php:389
 msgid "Other"
 msgstr "기타"
 
-#: mactrack_utilities.php:415 mactrack_utilities.php:484
-#: mactrack_utilities.php:518
+#: mactrack_utilities.php:416 mactrack_utilities.php:485
+#: mactrack_utilities.php:519
 msgid "Are You Sure?"
 msgstr "정말 계속하시겠습니까?"
 
-#: mactrack_utilities.php:415
+#: mactrack_utilities.php:416
 msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
 msgstr "시스템에서 모든 포트를 MAC에서 IP 결과로 삭제 하시겠습니까?"
 
-#: mactrack_utilities.php:463 mactrack_utilities.php:496
+#: mactrack_utilities.php:464 mactrack_utilities.php:497
 #, fuzzy
 msgid "Mactrack Database Results"
 msgstr "장치 추적 데이터베이스 결과"
 
-#: mactrack_utilities.php:464 mactrack_utilities.php:562
+#: mactrack_utilities.php:465 mactrack_utilities.php:563
 #, php-format
 msgid "The following number of records have been removed from the database: %s"
 msgstr "다음 레코드 수가 데이터베이스에서 제거되었습니다.  %s"
 
-#: mactrack_utilities.php:484
+#: mactrack_utilities.php:485
 msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
 msgstr "시스템에서 모든 집계 포트를 MAC에서 IP 결과로 삭제 하시겠습니까?"
 
-#: mactrack_utilities.php:497
+#: mactrack_utilities.php:498
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s"
 msgstr "병합 된 테이블에서 다음 레코드 수가 제거되었습니다.  %s"
 
-#: mactrack_utilities.php:518
+#: mactrack_utilities.php:519
 msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
 msgstr "시스템에서 모든 집계 포트를 MAC에서 IP 결과로 삭제하고 다시 만들고 싶습니까?"
 
-#: mactrack_utilities.php:543
+#: mactrack_utilities.php:544
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
 msgstr "병합 된 테이블에서 제거 된 레코드 수는  %s 개입니다.  %s 개의 레코드가 추가됩니다."
 
-#: mactrack_utilities.php:582
+#: mactrack_utilities.php:583
 #, fuzzy
 msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
 msgstr "장치 추적 검색 기능이 제거되었습니다. 장치 또는 장치 유형을 편집하면 다시 만들어집니다."
 
-#: mactrack_utilities.php:595
+#: mactrack_utilities.php:596
 #, fuzzy
 msgid "Cacti Mactrack System Utilities"
 msgstr "선인장 장치 추적 시스템 유틸리티"
 
-#: mactrack_utilities.php:597
+#: mactrack_utilities.php:598
 msgid "Process Status Information"
 msgstr "프로세스 상태 정보"
 
-#: mactrack_utilities.php:606 setup.php:1142
+#: mactrack_utilities.php:607 setup.php:1142
 #, fuzzy
 msgid "View Mactrack Process Status"
 msgstr "장치 추적 프로세스 상태보기"
 
-#: mactrack_utilities.php:609
+#: mactrack_utilities.php:610
 #, fuzzy
 msgid "This option will let you show and set process information associated with the Mactrack polling process."
 msgstr "이 옵션을 사용하면 장치 추적 폴링 프로세스와 관련된 프로세스 정보를 표시하고 설정할 수 있습니다."
 
-#: mactrack_utilities.php:613
+#: mactrack_utilities.php:614
 msgid "Database Administration"
 msgstr "데이터베이스 관리"
 
-#: mactrack_utilities.php:617 setup.php:1107
+#: mactrack_utilities.php:618 setup.php:1107
 msgid "Perform Database Maintenance"
 msgstr "데이터베이스 유지 관리 수행"
 
-#: mactrack_utilities.php:620
+#: mactrack_utilities.php:621
 msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
 msgstr "만료 된 포트를 MAC에서 IP 로의 연결을 데이터베이스에서 삭제합니다. 기준에 따라 만기 된 레코드 만 제거됩니다."
 
-#: mactrack_utilities.php:626
+#: mactrack_utilities.php:627
 msgid "Refresh IEEE Vendor MAC/OUI Database"
 msgstr "IEEE 공급 업체 MAC / OUI 데이터베이스 새로 고침"
 
-#: mactrack_utilities.php:629
+#: mactrack_utilities.php:630
 msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
 msgstr "이 기능은 IEEE 웹 사이트에서 최신 OIU 데이터베이스를 다운로드하고 설치합니다. 각 네트워크 인터페이스 카드 (NIC)에는 MAC 주소가 있습니다. MAC 주소는 두 부분으로 나눌 수 있습니다. MAC Addess의 첫 부분은 Vendor MAC을 포함합니다. 공급 업체 MAC은 누가 부품을 제조했는지 식별합니다. 이것은 네트워크상의 악성 장치에 대한 현장 확인에 유용 할 것입니다."
 
-#: mactrack_utilities.php:635 setup.php:1114
+#: mactrack_utilities.php:636 setup.php:1114
 msgid "Refresh Scanning Functions"
 msgstr "스캔 기능 새로 고침"
 
-#: mactrack_utilities.php:638
+#: mactrack_utilities.php:639
 #, fuzzy
 msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
 msgstr "장치 유형을 편집 할 때 수신되는 드롭 다운에서 오래되거나 잠재적으로 유효하지 않은 장치 추적 검색 기능을 삭제합니다."
 
-#: mactrack_utilities.php:644
+#: mactrack_utilities.php:645
 msgid "Remove All Scan Results"
 msgstr "모든 스캔 결과 제거"
 
-#: mactrack_utilities.php:647
+#: mactrack_utilities.php:648
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
 msgstr "모든 IP 주소, IP 범위 데이터베이스 및 VLANS에서 IP 협회에 MAC <strong>모든</strong> 포트를 삭제합니다. 이 유틸리티는 처음부터 다시 시작하고자 할 때 유용합니다. <strong>위험 : 모든 이전 데이터가 h 제됩니다.</strong>"
 
-#: mactrack_utilities.php:651
+#: mactrack_utilities.php:652
 msgid "Aggregated Table Administration"
 msgstr "집계 된 테이블 관리"
 
-#: mactrack_utilities.php:655
+#: mactrack_utilities.php:656
 msgid "Remove All Aggregated Results"
 msgstr "모든 집계 된 결과 제거"
 
-#: mactrack_utilities.php:658
+#: mactrack_utilities.php:659
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
 msgstr "모든 <strong>집계 된</strong> (검색 결과 아님) 포트를 데이터베이스에서 MAC 대 IP 연결로 삭제합니다. 데이터는 다음 mactrack 폴러 러닝에서 <strong>새로운</strong> 스캔 된 데이터 <strong>만을</strong> 기반으로 다시 수집됩니다."
 
-#: mactrack_utilities.php:664
+#: mactrack_utilities.php:665
 msgid "Perform Aggregate Table Rebuild"
 msgstr "집계 테이블 재 작성 수행"
 
-#: mactrack_utilities.php:667
+#: mactrack_utilities.php:668
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
 msgstr "모든 <strong>집계 된</strong> (검색 결과 아님) 포트를 MAC에서 IP 로의 연결을 데이터베이스에서 삭제하고 모든 스캔 된 <strong>데이터를</strong> 기반으로 재 작성합니다."
 
