@@ -1368,7 +1368,7 @@ function mactrack_device_type_filter() {
 
 				</tr>
 			</table>
-			<script type='text/javascript'>
+			<script type='text/javascript' <?php print plugin_mactrack_csp_nonce(); ?>>
 			function applyFilter(myFunc) {
 				strURL  = urlPath+'plugins/mactrack/mactrack_device_types.php?header=false';
 				strURL += '&vendor=' + $('#vendor').val();

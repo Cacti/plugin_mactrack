@@ -24,6 +24,7 @@
 
 chdir('../../');
 include('./include/auth.php');
+include_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 // set default action
 set_default_action();
@@ -207,7 +208,7 @@ function mactrack_display_run_status() {
 
 	html_start_box(__('Mactrack Process Status', 'mactrack'), '100%', '', '1', 'center', '');
 	?>
-	<script type='text/javascript'>
+	<script type='text/javascript' <?php print plugin_mactrack_csp_nonce(); ?>>
 	function applyFilter() {
 		strURL = 'mactrack_utilities.php?action=mactrack_proc_status&header=false&refresh=' + $('#refresh').val();
 		loadPageNoHeader(strURL);

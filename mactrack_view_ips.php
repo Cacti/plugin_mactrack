@@ -396,7 +396,7 @@ function mactrack_ips_filter() {
 			<input type='hidden' id='page' value='<?php print html_escape_request_var('page'); ?>'>
 			<input type='hidden' id='report' value='ips'>
 			</form>
-			<script type='text/javascript'>
+			<script type='text/javascript' <?php print plugin_mactrack_csp_nonce(); ?>>
 
 			function applyFilter() {
 				strURL  = urlPath+'plugins/mactrack/mactrack_view_ips.php?report=ips&header=false';

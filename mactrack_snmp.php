@@ -271,7 +271,7 @@ function form_mactrack_snmp_actions() {
 	general_header();
 
 	?>
-	<script type='text/javascript'>
+	<script type='text/javascript' <?php print plugin_mactrack_csp_nonce(); ?>>
 	function goTo(strURL) {
 		loadPageNoHeader(strURL);
 	}
@@ -441,7 +441,7 @@ function mactrack_snmp_item_edit() {
 	form_save_button(htmlspecialchars('mactrack_snmp.php?action=edit&id=' . get_request_var('id')));
 
 	?>
-	<script type='text/javascript'>
+	<script type='text/javascript' <?php print plugin_mactrack_csp_nonce(); ?>>
 	$(function() {
 		setSNMP();
 		$('#snmp_version').on('change', function() {
@@ -749,7 +749,7 @@ function snmp_options_filter() {
 			<input type='hidden' name='page' value='<?php print html_escape_request_var('page'); ?>'>
 		</td>
 		</form>
-		<script type='text/javascript'>
+		<script type='text/javascript' <?php print plugin_mactrack_csp_nonce(); ?>>
 		function applyFilter() {
 			strURL  = 'mactrack_snmp.php?header=false';
 			strURL += '&filter='+$('#filter').val();

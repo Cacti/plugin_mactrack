@@ -617,7 +617,7 @@ function mactrack_device_filter2() {
 			<input type='hidden' id='page' value='<?php print html_escape_request_var('page'); ?>'>
 			<input type='hidden' id='report' value='devices'>
 			</form>
-			<script type='text/javascript'>
+			<script type='text/javascript' <?php print plugin_mactrack_csp_nonce(); ?>>
 
 			function applyFilter() {
 				strURL  = urlPath+'plugins/mactrack/mactrack_view_devices.php?report=devices&header=false';
