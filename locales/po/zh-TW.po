@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-24 10:34-0400\n"
+"POT-Creation-Date: 2026-09-27 10:19-0400\n"
 "PO-Revision-Date: 2026-02-08 07:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\n"
@@ -26,171 +26,171 @@ msgstr ""
 msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
 msgstr ""
 
-#: lib/mactrack_functions.php:39 mactrack_utilities.php:285
+#: lib/mactrack_functions.php:55 mactrack_utilities.php:286
 #: mactrack_view_dot1x.php:555 mactrack_view_dot1x.php:701
 #, fuzzy
 msgid "Idle"
 msgstr "閒置"
 
-#: lib/mactrack_functions.php:40 mactrack_utilities.php:285
-#: mactrack_utilities.php:374 mactrack_view_dot1x.php:554
+#: lib/mactrack_functions.php:56 mactrack_utilities.php:286
+#: mactrack_utilities.php:375 mactrack_view_dot1x.php:554
 #: mactrack_view_dot1x.php:702
 #, fuzzy
 msgid "Running"
 msgstr "運行"
 
-#: lib/mactrack_functions.php:41
+#: lib/mactrack_functions.php:57
 msgid "No method"
 msgstr "方法"
 
-#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:551
+#: lib/mactrack_functions.php:58 mactrack_view_dot1x.php:551
 #: mactrack_view_dot1x.php:704
 #, fuzzy
 msgid "Authentication Success"
 msgstr "認證成功"
 
-#: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:553
+#: lib/mactrack_functions.php:59 mactrack_view_dot1x.php:553
 #: mactrack_view_dot1x.php:705
 msgid "Authentication Failed"
 msgstr "身份驗證失敗"
 
-#: lib/mactrack_functions.php:44 mactrack_view_dot1x.php:550
+#: lib/mactrack_functions.php:60 mactrack_view_dot1x.php:550
 #: mactrack_view_dot1x.php:706
 msgid "Authorization Success"
 msgstr "授權成功"
 
-#: lib/mactrack_functions.php:45 mactrack_view_dot1x.php:552
+#: lib/mactrack_functions.php:61 mactrack_view_dot1x.php:552
 #: mactrack_view_dot1x.php:707
 msgid "Authorization Failed"
 msgstr "授權失敗"
 
-#: lib/mactrack_functions.php:2943
+#: lib/mactrack_functions.php:2959
 #, fuzzy
 msgid "Mactrack Device Tracking OUI Database Import Results"
 msgstr "設備跟踪OUI數據庫導入結果"
 
-#: lib/mactrack_functions.php:2944
+#: lib/mactrack_functions.php:2960
 msgid "Getting OUI Database from IEEE"
 msgstr "從IEEE獲取OUI數據庫"
 
-#: lib/mactrack_functions.php:2946
+#: lib/mactrack_functions.php:2962
 msgid "Getting OUI Database from the IEEE"
 msgstr "從IEEE獲取OUI數據庫"
 
-#: lib/mactrack_functions.php:2979
+#: lib/mactrack_functions.php:2995
 msgid "OUI Database Download from IEEE Complete"
 msgstr "從IEEE Complete下載OUI數據庫"
 
-#: lib/mactrack_functions.php:2981
+#: lib/mactrack_functions.php:2997
 msgid "OUI Database Download from IEEE FAILED"
 msgstr "從FAILED下載OUI數據庫"
 
-#: lib/mactrack_functions.php:3085
+#: lib/mactrack_functions.php:3101
 #, php-format
 msgid "There were '%d' Entries Added/Updated in the database."
 msgstr "資料庫中新增/更新了'%d'個條目。"
 
-#: lib/mactrack_functions.php:3090
+#: lib/mactrack_functions.php:3106
 #, php-format
 msgid "There were '%d' Records Removed from the database."
 msgstr "已從資料庫中移除'%d'個記錄。"
 
-#: lib/mactrack_functions.php:3131
+#: lib/mactrack_functions.php:3147
 msgid "atifIndexes data collection complete"
 msgstr "atifIndexes數據收集完成"
 
-#: lib/mactrack_functions.php:3150
+#: lib/mactrack_functions.php:3166
 msgid "atPhysAddress data collection complete"
 msgstr "atPhysAddress數據收集完成"
 
-#: lib/mactrack_functions.php:3158
+#: lib/mactrack_functions.php:3174
 msgid "atNetAddress data collection complete"
 msgstr "atNetAddress數據收集完成"
 
-#: lib/mactrack_functions.php:3172
+#: lib/mactrack_functions.php:3188
 msgid "atEntries assembly complete."
 msgstr "atEntries裝配完成。"
 
-#: lib/mactrack_functions.php:3203
+#: lib/mactrack_functions.php:3219
 #, php-format
 msgid "HOST: %s, IP address information collection complete"
 msgstr "主機： %s ， IP地址信息收集完成"
 
-#: lib/mactrack_functions.php:3239 lib/mactrack_functions.php:3956
+#: lib/mactrack_functions.php:3255 lib/mactrack_functions.php:3972
 msgid "Rescan Device"
 msgstr "重新掃描設備"
 
-#: lib/mactrack_functions.php:3263
+#: lib/mactrack_functions.php:3279
 msgid "View Non Interface Graphs"
 msgstr "查看接口"
 
-#: lib/mactrack_functions.php:3265
+#: lib/mactrack_functions.php:3281
 msgid "No Non Interface Graphs in Cacti"
 msgstr "仙人掌中沒有非接口圖"
 
-#: lib/mactrack_functions.php:3283
+#: lib/mactrack_functions.php:3299
 msgid "View Interface Graphs"
 msgstr "查看接口"
 
-#: lib/mactrack_functions.php:3285
+#: lib/mactrack_functions.php:3301
 msgid "No Interface Graphs in Cacti"
 msgstr "查看接口"
 
-#: lib/mactrack_functions.php:3317 lib/mactrack_functions.php:3320
+#: lib/mactrack_functions.php:3333 lib/mactrack_functions.php:3336
 msgid "Since Restart"
 msgstr "自重啟以來"
 
-#: lib/mactrack_functions.php:3359 mactrack_devices.php:1415
+#: lib/mactrack_functions.php:3375 mactrack_devices.php:1415
 #: mactrack_view_devices.php:590
 #, fuzzy
 msgid "Down"
 msgstr "向下"
 
-#: lib/mactrack_functions.php:3359 mactrack_devices.php:1413
+#: lib/mactrack_functions.php:3375 mactrack_devices.php:1413
 #: mactrack_view_devices.php:588
 #, fuzzy
 msgid "Up"
 msgstr "向上"
 
-#: lib/mactrack_functions.php:3413
+#: lib/mactrack_functions.php:3429
 #, fuzzy
 msgid "Data"
 msgstr "數據"
 
-#: lib/mactrack_functions.php:3413
+#: lib/mactrack_functions.php:3429
 msgid "Voice"
 msgstr "語音"
 
-#: lib/mactrack_functions.php:3497
+#: lib/mactrack_functions.php:3513
 #, php-format
 msgid "Device Rescan '%s'"
 msgstr "裝置重新掃描'%s'"
 
-#: lib/mactrack_functions.php:3559
+#: lib/mactrack_functions.php:3575
 #, php-format
 msgid "Site scan '%s'"
 msgstr "網站掃描'%s'"
 
-#: lib/mactrack_functions.php:3608
+#: lib/mactrack_functions.php:3624
 #, php-format
 msgid "Device Enable '%s'"
 msgstr "裝置啟用'%s'"
 
-#: lib/mactrack_functions.php:3647
+#: lib/mactrack_functions.php:3663
 #, php-format
 msgid "Device Disable '%d'"
 msgstr "裝置停用'%d'"
 
-#: lib/mactrack_functions.php:3831 lib/mactrack_functions.php:3876
-#: lib/mactrack_functions.php:3877 lib/mactrack_functions.php:3970
-#: lib/mactrack_functions.php:3971 lib/mactrack_functions.php:3972
-#: lib/mactrack_functions.php:3973 lib/mactrack_functions.php:3974
+#: lib/mactrack_functions.php:3847 lib/mactrack_functions.php:3892
+#: lib/mactrack_functions.php:3893 lib/mactrack_functions.php:3986
+#: lib/mactrack_functions.php:3987 lib/mactrack_functions.php:3988
+#: lib/mactrack_functions.php:3989 lib/mactrack_functions.php:3990
 #: mactrack_device_types.php:1212 mactrack_device_types.php:1219
 #: mactrack_device_types.php:1226 mactrack_macwatch.php:452
 #: mactrack_macwatch.php:453 mactrack_snmp.php:549 mactrack_snmp.php:554
-#: mactrack_snmp.php:555 mactrack_snmp.php:556 mactrack_utilities.php:294
-#: mactrack_utilities.php:296 mactrack_utilities.php:300
-#: mactrack_utilities.php:302 mactrack_view_arp.php:533
+#: mactrack_snmp.php:555 mactrack_snmp.php:556 mactrack_utilities.php:295
+#: mactrack_utilities.php:297 mactrack_utilities.php:301
+#: mactrack_utilities.php:303 mactrack_view_arp.php:533
 #: mactrack_view_devices.php:436 mactrack_view_dot1x.php:602
 #: mactrack_view_interfaces.php:623 mactrack_view_macs.php:1290
 #: mactrack_view_sites.php:456 mactrack_view_sites.php:457
@@ -200,115 +200,115 @@ msgstr "裝置停用'%d'"
 msgid "N/A"
 msgstr "不适用"
 
-#: lib/mactrack_functions.php:3835 setup.php:1269
+#: lib/mactrack_functions.php:3851 setup.php:1269
 #, fuzzy, php-format
 msgid "%d Minutes"
 msgstr "%d 分鐘"
 
-#: lib/mactrack_functions.php:3840
+#: lib/mactrack_functions.php:3856
 #, fuzzy, php-format
 msgid "%d Hours"
 msgstr "%d 小時"
 
-#: lib/mactrack_functions.php:3845 setup.php:1330 setup.php:1331 setup.php:1332
+#: lib/mactrack_functions.php:3861 setup.php:1330 setup.php:1331 setup.php:1332
 #: setup.php:1333 setup.php:1334
 #, fuzzy, php-format
 msgid "%d Days"
 msgstr "%d 天"
 
-#: lib/mactrack_functions.php:3849
+#: lib/mactrack_functions.php:3865
 #, fuzzy, php-format
 msgid "%d Weeks"
 msgstr "%d週"
 
-#: lib/mactrack_functions.php:3875
+#: lib/mactrack_functions.php:3891
 msgid "Not Recorded"
 msgstr "沒有記錄"
 
-#: lib/mactrack_functions.php:3896
+#: lib/mactrack_functions.php:3912
 #, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
 msgstr "狀態：正在執行，處理程序： %d ，進度： %s ， LastRuntime ： %2.1f"
 
-#: lib/mactrack_functions.php:3898
+#: lib/mactrack_functions.php:3914
 #, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
 msgstr "狀態：閒置，上次執行時間： %2.1f秒，處理程序： %d個處理程序，裝置： %d ，下次執行時間： %s"
 
-#: lib/mactrack_functions.php:3900 mactrack_device_types.php:1189
-#: mactrack_devices.php:1414 mactrack_utilities.php:285
-#: mactrack_utilities.php:316 mactrack_view_devices.php:589 setup.php:1315
+#: lib/mactrack_functions.php:3916 mactrack_device_types.php:1189
+#: mactrack_devices.php:1414 mactrack_utilities.php:286
+#: mactrack_utilities.php:317 mactrack_view_devices.php:589 setup.php:1315
 #: setup.php:1343 setup.php:1541
 #, fuzzy
 msgid "Disabled"
 msgstr "停用"
 
-#: lib/mactrack_functions.php:3906
+#: lib/mactrack_functions.php:3922
 #, php-format
 msgid "Scanning Rate: Every %s"
 msgstr "掃描速率：每%s"
 
-#: lib/mactrack_functions.php:3951 mactrack_view_devices.php:433
+#: lib/mactrack_functions.php:3967 mactrack_view_devices.php:433
 #: mactrack_view_sites.php:352 mactrack_view_sites.php:446
 msgid "View Interfaces"
 msgstr "查看接口"
 
-#: lib/mactrack_functions.php:3969 mactrack_devices.php:1363
+#: lib/mactrack_functions.php:3985 mactrack_devices.php:1363
 #: mactrack_view_devices.php:542
 #, fuzzy
 msgid "Not Detected"
 msgstr "沒有檢測到"
 
-#: lib/mactrack_functions.php:4060 lib/mactrack_functions.php:4142
+#: lib/mactrack_functions.php:4076 lib/mactrack_functions.php:4158
 #: mactrack_sites.php:550 mactrack_sites.php:631 mactrack_view_sites.php:327
 #: setup.php:830 setup.php:1357
 #, fuzzy
 msgid "Sites"
 msgstr "網站"
 
-#: lib/mactrack_functions.php:4061 mactrack_device_types.php:1182
+#: lib/mactrack_functions.php:4077 mactrack_device_types.php:1182
 #: mactrack_devices.php:1257 mactrack_devices.php:1422 mactrack_sites.php:517
-#: mactrack_utilities.php:330 mactrack_view_devices.php:378
+#: mactrack_utilities.php:331 mactrack_view_devices.php:378
 #: mactrack_view_devices.php:597 mactrack_view_sites.php:294 setup.php:831
 #: setup.php:1358
 #, fuzzy
 msgid "Devices"
 msgstr "設備"
 
-#: lib/mactrack_functions.php:4062
+#: lib/mactrack_functions.php:4078
 msgid "IP Ranges"
 msgstr "IP 範圍"
 
-#: lib/mactrack_functions.php:4063
+#: lib/mactrack_functions.php:4079
 #, fuzzy
 msgid "IP Address"
 msgstr "IP 位址"
 
-#: lib/mactrack_functions.php:4064 setup.php:1973
+#: lib/mactrack_functions.php:4080 setup.php:1973
 msgid "MAC Address"
 msgstr "MAC 位址"
 
-#: lib/mactrack_functions.php:4065 mactrack_view_interfaces.php:355
+#: lib/mactrack_functions.php:4081 mactrack_view_interfaces.php:355
 #: mactrack_view_interfaces.php:709 setup.php:834
 msgid "Interfaces"
 msgstr "介面卡"
 
-#: lib/mactrack_functions.php:4066
+#: lib/mactrack_functions.php:4082
 msgid "Dot1x"
 msgstr "DOT1X"
 
-#: lib/mactrack_functions.php:4067 mactrack_view_graphs.php:190
+#: lib/mactrack_functions.php:4083 mactrack_view_graphs.php:190
 #, fuzzy
 msgid "Graphs"
 msgstr "圖表"
 
-#: lib/mactrack_functions.php:4110 mactrack_device_types.php:625
+#: lib/mactrack_functions.php:4126 mactrack_device_types.php:625
 #: mactrack_devices.php:1416 mactrack_view_devices.php:591 setup.php:1290
 #, fuzzy
 msgid "Unknown"
 msgstr "未知"
 
-#: lib/mactrack_functions.php:4136 mactrack_device_types.php:1270
+#: lib/mactrack_functions.php:4152 mactrack_device_types.php:1270
 #: mactrack_devices.php:1307 mactrack_macauth.php:484 mactrack_macwatch.php:493
 #: mactrack_snmp.php:718 mactrack_vendormacs.php:257 mactrack_view_arp.php:523
 #: mactrack_view_devices.php:487 mactrack_view_dot1x.php:592
@@ -317,7 +317,7 @@ msgstr "未知"
 msgid "Search"
 msgstr "搜尋"
 
-#: lib/mactrack_functions.php:4146 mactrack_device_types.php:1280
+#: lib/mactrack_functions.php:4162 mactrack_device_types.php:1280
 #: mactrack_devices.php:1426 mactrack_macauth.php:494 mactrack_macwatch.php:503
 #: mactrack_snmp.php:728 mactrack_vendormacs.php:267
 #: mactrack_view_devices.php:601 mactrack_view_ips.php:374 setup.php:1302
@@ -325,11 +325,11 @@ msgstr "搜尋"
 msgid "Default"
 msgstr "默认"
 
-#: lib/mactrack_functions.php:4166
+#: lib/mactrack_functions.php:4182
 msgid "Show Device Details"
 msgstr "顯示設備細節"
 
-#: lib/mactrack_functions.php:4170 mactrack_device_types.php:1296
+#: lib/mactrack_functions.php:4186 mactrack_device_types.php:1296
 #: mactrack_devices.php:1336 mactrack_macauth.php:510 mactrack_macwatch.php:519
 #: mactrack_snmp.php:743 mactrack_vendormacs.php:283 mactrack_view_arp.php:600
 #: mactrack_view_devices.php:516 mactrack_view_dot1x.php:669
@@ -338,7 +338,7 @@ msgstr "顯示設備細節"
 msgid "Go"
 msgstr "送出"
 
-#: lib/mactrack_functions.php:4171 mactrack_device_types.php:1297
+#: lib/mactrack_functions.php:4187 mactrack_device_types.php:1297
 #: mactrack_devices.php:1337 mactrack_macauth.php:511 mactrack_macwatch.php:520
 #: mactrack_snmp.php:744 mactrack_vendormacs.php:284 mactrack_view_arp.php:601
 #: mactrack_view_devices.php:517 mactrack_view_dot1x.php:670
@@ -348,7 +348,7 @@ msgstr "送出"
 msgid "Clear"
 msgstr "清除"
 
-#: lib/mactrack_functions.php:4172 mactrack_device_types.php:1300
+#: lib/mactrack_functions.php:4188 mactrack_device_types.php:1300
 #: mactrack_devices.php:1339 mactrack_vendormacs.php:285
 #: mactrack_view_arp.php:602 mactrack_view_devices.php:518
 #: mactrack_view_dot1x.php:671 mactrack_view_interfaces.php:635
@@ -357,7 +357,7 @@ msgstr "清除"
 msgid "Export"
 msgstr "匯出"
 
-#: lib/mactrack_functions.php:4182 mactrack_devices.php:1313
+#: lib/mactrack_functions.php:4198 mactrack_devices.php:1313
 #: mactrack_view_arp.php:529 mactrack_view_devices.php:493
 #: mactrack_view_dot1x.php:598 mactrack_view_interfaces.php:580
 #: mactrack_view_ips.php:349 mactrack_view_macs.php:1286
@@ -365,7 +365,7 @@ msgstr "匯出"
 msgid "Site"
 msgstr "網站"
 
-#: lib/mactrack_functions.php:4186 lib/mactrack_functions.php:4207
+#: lib/mactrack_functions.php:4202 lib/mactrack_functions.php:4223
 #: mactrack_devices.php:1351 mactrack_devices.php:1362
 #: mactrack_devices.php:1412 mactrack_view_devices.php:530
 #: mactrack_view_devices.php:541 mactrack_view_devices.php:587
@@ -374,7 +374,7 @@ msgstr "網站"
 msgid "Any"
 msgstr "任何"
 
-#: lib/mactrack_functions.php:4203 mactrack_devices.php:1358
+#: lib/mactrack_functions.php:4219 mactrack_devices.php:1358
 #: mactrack_view_devices.php:537
 msgid "SubType"
 msgstr "子類型"
@@ -769,7 +769,7 @@ msgstr "全部"
 msgid "Type"
 msgstr "類型"
 
-#: mactrack_device_types.php:1353 mactrack_utilities.php:316
+#: mactrack_device_types.php:1353 mactrack_utilities.php:317
 #, fuzzy
 msgid "Enabled"
 msgstr "啟用"
@@ -1005,7 +1005,7 @@ msgid "Site Name"
 msgstr "網站名稱"
 
 #: mactrack_devices.php:1212 mactrack_devices.php:1408
-#: mactrack_utilities.php:330 mactrack_view_devices.php:328
+#: mactrack_utilities.php:331 mactrack_view_devices.php:328
 #: mactrack_view_devices.php:583 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:694
 #: mactrack_view_interfaces.php:539
@@ -1348,255 +1348,255 @@ msgstr "找不到SNMP選項集"
 msgid "Options"
 msgstr "選項"
 
-#: mactrack_utilities.php:208
+#: mactrack_utilities.php:209
 #, fuzzy
 msgid "Mactrack Process Status"
 msgstr "設備跟踪流程狀態"
 
-#: mactrack_utilities.php:228 mactrack_utilities.php:245
+#: mactrack_utilities.php:229 mactrack_utilities.php:246
 #, fuzzy
 msgid "Refresh"
 msgstr "重新整理"
 
-#: mactrack_utilities.php:283
+#: mactrack_utilities.php:284
 msgid "Current Process Status"
 msgstr "當前流程狀態"
 
-#: mactrack_utilities.php:285
+#: mactrack_utilities.php:286
 #, fuzzy
 msgid "The Mactrack Poller is:"
 msgstr "設備跟踪輪詢器是："
 
-#: mactrack_utilities.php:289
+#: mactrack_utilities.php:290
 #, fuzzy
 msgid "Running Processes:"
 msgstr "並發進程"
 
-#: mactrack_utilities.php:292
+#: mactrack_utilities.php:293
 msgid "Last Time Poller Started:"
 msgstr "上一次Poller開始："
 
-#: mactrack_utilities.php:294
+#: mactrack_utilities.php:295
 msgid "Poller Frequency:"
 msgstr "輪詢頻率："
 
-#: mactrack_utilities.php:296
+#: mactrack_utilities.php:297
 msgid "Approx. Next Runtime:"
 msgstr "約。下次運行時："
 
-#: mactrack_utilities.php:298
+#: mactrack_utilities.php:299
 #, fuzzy
 msgid "Database Maintenance Information"
 msgstr "數據庫維護時間"
 
-#: mactrack_utilities.php:300
+#: mactrack_utilities.php:301
 #, fuzzy
 msgid "Last DB Maintenance Time:"
 msgstr "最後輪詢維護運行時間："
 
-#: mactrack_utilities.php:302
+#: mactrack_utilities.php:303
 #, fuzzy
 msgid "Next DB Maintenance Time:"
 msgstr "約。下一個DB維護："
 
-#: mactrack_utilities.php:304
+#: mactrack_utilities.php:305
 msgid "Run Time Details"
 msgstr "運行時詳細信息"
 
-#: mactrack_utilities.php:306
+#: mactrack_utilities.php:307
 msgid "Last Poller Runtime:"
 msgstr "最後輪詢運行時："
 
-#: mactrack_utilities.php:308
+#: mactrack_utilities.php:309
 msgid "Last Poller Maintenance Runtime:"
 msgstr "最後輪詢維護運行時間："
 
-#: mactrack_utilities.php:310
+#: mactrack_utilities.php:311
 msgid "Maximum Concurrent Processes:"
 msgstr "最大並發進程："
 
-#: mactrack_utilities.php:310
+#: mactrack_utilities.php:311
 #, fuzzy
 msgid "processes"
 msgstr "商品/物料的流動程序"
 
-#: mactrack_utilities.php:312
+#: mactrack_utilities.php:313
 msgid "Maximum Per Device Scan Time:"
 msgstr "每設備掃描時間最大值："
 
-#: mactrack_utilities.php:312
+#: mactrack_utilities.php:313
 #, fuzzy
 msgid "minutes"
 msgstr "分鐘"
 
-#: mactrack_utilities.php:314
+#: mactrack_utilities.php:315
 msgid "DNS Configuration Information"
 msgstr "DNS配置信息"
 
-#: mactrack_utilities.php:316
+#: mactrack_utilities.php:317
 msgid "Reverse DNS Resolution is"
 msgstr "反向DNS解析是"
 
-#: mactrack_utilities.php:318
+#: mactrack_utilities.php:319
 msgid "Primary DNS Server:"
 msgstr "主DNS服務器："
 
-#: mactrack_utilities.php:320
+#: mactrack_utilities.php:321
 msgid "Secondary DNS Server:"
 msgstr "輔助DNS服務器："
 
-#: mactrack_utilities.php:322
+#: mactrack_utilities.php:323
 msgid "DNS Resolution Timeout:"
 msgstr "DNS解析超時："
 
-#: mactrack_utilities.php:322
+#: mactrack_utilities.php:323
 msgid "milliseconds"
 msgstr "毫秒"
 
-#: mactrack_utilities.php:326
+#: mactrack_utilities.php:327
 msgid "Running Process Summary"
 msgstr "運行流程摘要"
 
-#: mactrack_utilities.php:328
+#: mactrack_utilities.php:329
 msgid "The DNS Resolver is Not Running"
 msgstr "DNS解析器未運行"
 
-#: mactrack_utilities.php:328
+#: mactrack_utilities.php:329
 msgid "The DNS Resolver is Running"
 msgstr "DNS解析器正在運行"
 
-#: mactrack_utilities.php:330
+#: mactrack_utilities.php:331
 msgid "Date Started"
 msgstr "開始日期"
 
-#: mactrack_utilities.php:368
+#: mactrack_utilities.php:369
 msgid "Completed"
 msgstr "已完成"
 
-#: mactrack_utilities.php:380
+#: mactrack_utilities.php:381
 msgid "Waiting"
 msgstr "等候"
 
-#: mactrack_utilities.php:388
+#: mactrack_utilities.php:389
 #, fuzzy
 msgid "Other"
 msgstr "其他"
 
-#: mactrack_utilities.php:415 mactrack_utilities.php:484
-#: mactrack_utilities.php:518
+#: mactrack_utilities.php:416 mactrack_utilities.php:485
+#: mactrack_utilities.php:519
 msgid "Are You Sure?"
 msgstr "確定嗎？"
 
-#: mactrack_utilities.php:415
+#: mactrack_utilities.php:416
 msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
 msgstr "您確定要從系統中刪除所有端口到MAC到IP的結果嗎？"
 
-#: mactrack_utilities.php:463 mactrack_utilities.php:496
+#: mactrack_utilities.php:464 mactrack_utilities.php:497
 #, fuzzy
 msgid "Mactrack Database Results"
 msgstr "設備跟踪數據庫結果"
 
-#: mactrack_utilities.php:464 mactrack_utilities.php:562
+#: mactrack_utilities.php:465 mactrack_utilities.php:563
 #, php-format
 msgid "The following number of records have been removed from the database: %s"
 msgstr "已從資料庫中刪除以下數量的記錄： %s"
 
-#: mactrack_utilities.php:484
+#: mactrack_utilities.php:485
 msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
 msgstr "您確定要從系統中刪除所有聚合端口到MAC到IP的結果嗎？"
 
-#: mactrack_utilities.php:497
+#: mactrack_utilities.php:498
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s"
 msgstr "已從綜合表中刪除以下數量的記錄： %s"
 
-#: mactrack_utilities.php:518
+#: mactrack_utilities.php:519
 msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
 msgstr "您確定要從系統中刪除並重新創建所有聚合端口到MAC到IP的結果嗎？"
 
-#: mactrack_utilities.php:543
+#: mactrack_utilities.php:544
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
 msgstr "已從綜合表中刪除以下數量的記錄： %s。將新增%s個記錄。"
 
-#: mactrack_utilities.php:582
+#: mactrack_utilities.php:583
 #, fuzzy
 msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
 msgstr "設備跟踪掃描功能已被清除。編輯設備或設備類型後，將重新創建它們。"
 
-#: mactrack_utilities.php:595
+#: mactrack_utilities.php:596
 #, fuzzy
 msgid "Cacti Mactrack System Utilities"
 msgstr "仙人掌裝置跟踪系統實用程序"
 
-#: mactrack_utilities.php:597
+#: mactrack_utilities.php:598
 msgid "Process Status Information"
 msgstr "流程狀態信息"
 
-#: mactrack_utilities.php:606 setup.php:1142
+#: mactrack_utilities.php:607 setup.php:1142
 #, fuzzy
 msgid "View Mactrack Process Status"
 msgstr "查看設備跟踪流程狀態"
 
-#: mactrack_utilities.php:609
+#: mactrack_utilities.php:610
 #, fuzzy
 msgid "This option will let you show and set process information associated with the Mactrack polling process."
 msgstr "此選項將允許您顯示和設置與設備跟踪輪詢過程關聯的過程信息。"
 
-#: mactrack_utilities.php:613
+#: mactrack_utilities.php:614
 msgid "Database Administration"
 msgstr "數據庫管理"
 
-#: mactrack_utilities.php:617 setup.php:1107
+#: mactrack_utilities.php:618 setup.php:1107
 msgid "Perform Database Maintenance"
 msgstr "執行數據庫維護"
 
-#: mactrack_utilities.php:620
+#: mactrack_utilities.php:621
 msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
 msgstr "從數據庫中刪除過期的端口到MAC到IP關聯。僅刪除基於您的條件已過期的記錄。"
 
-#: mactrack_utilities.php:626
+#: mactrack_utilities.php:627
 msgid "Refresh IEEE Vendor MAC/OUI Database"
 msgstr "刷新IEEE供應商MAC / OUI數據庫"
 
-#: mactrack_utilities.php:629
+#: mactrack_utilities.php:630
 msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
 msgstr "此功能將從IEEE網站下載並安裝最新的OIU數據庫。每個網絡接口卡（NIC）都有一個MAC地址。 MAC地址可以分為兩部分。 MAC Addess的第一部分包含供應商MAC。供應商MAC識別製造零件的人員。這有助於對網絡上的惡意設備進行抽查。"
 
-#: mactrack_utilities.php:635 setup.php:1114
+#: mactrack_utilities.php:636 setup.php:1114
 msgid "Refresh Scanning Functions"
 msgstr "刷新掃描功能"
 
-#: mactrack_utilities.php:638
+#: mactrack_utilities.php:639
 #, fuzzy
 msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
 msgstr "從編輯設備類型時收到的下拉列表中刪除舊的和可能過時的設備跟踪掃描功能。"
 
-#: mactrack_utilities.php:644
+#: mactrack_utilities.php:645
 msgid "Remove All Scan Results"
 msgstr "刪除所有掃描結果"
 
-#: mactrack_utilities.php:647
+#: mactrack_utilities.php:648
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
 msgstr "從數據庫中刪除<strong>所有</strong>端口，IP範圍和VLAN的<strong>所有</strong>端口到MAC到IP關聯。當您想重新開始時，此實用程序很好。 <strong>危險：刪除所有先前的數據。</strong>"
 
-#: mactrack_utilities.php:651
+#: mactrack_utilities.php:652
 msgid "Aggregated Table Administration"
 msgstr "聚合表管理"
 
-#: mactrack_utilities.php:655
+#: mactrack_utilities.php:656
 msgid "Remove All Aggregated Results"
 msgstr "刪除所有聚合結果"
 
-#: mactrack_utilities.php:658
+#: mactrack_utilities.php:659
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
 msgstr "從數據庫中刪除所有<strong>聚合</strong> （非掃描結果）端口到MAC到IP關聯。將在下一個mactrack輪詢器運行中<strong>僅</strong>基於<strong>新</strong>掃描數據再次收集數據。"
 
-#: mactrack_utilities.php:664
+#: mactrack_utilities.php:665
 msgid "Perform Aggregate Table Rebuild"
 msgstr "執行聚合表重建"
 
-#: mactrack_utilities.php:667
+#: mactrack_utilities.php:668
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
 msgstr "從數據庫中刪除所有<strong>聚合</strong> （非掃描結果）端口到MAC到IP關聯，並立即根據<strong>所有掃描數據</strong>重新創建它們。"
 
