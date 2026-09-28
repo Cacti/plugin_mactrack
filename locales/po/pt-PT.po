@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-24 10:34-0400\n"
+"POT-Creation-Date: 2026-09-27 10:19-0400\n"
 "PO-Revision-Date: 2024-04-20 17:39-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -25,165 +25,165 @@ msgstr ""
 msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
 msgstr ""
 
-#: lib/mactrack_functions.php:39 mactrack_utilities.php:285
+#: lib/mactrack_functions.php:55 mactrack_utilities.php:286
 #: mactrack_view_dot1x.php:555 mactrack_view_dot1x.php:701
 msgid "Idle"
 msgstr "Inativo"
 
-#: lib/mactrack_functions.php:40 mactrack_utilities.php:285
-#: mactrack_utilities.php:374 mactrack_view_dot1x.php:554
+#: lib/mactrack_functions.php:56 mactrack_utilities.php:286
+#: mactrack_utilities.php:375 mactrack_view_dot1x.php:554
 #: mactrack_view_dot1x.php:702
 msgid "Running"
 msgstr "Em execução"
 
-#: lib/mactrack_functions.php:41
+#: lib/mactrack_functions.php:57
 msgid "No method"
 msgstr "Método"
 
-#: lib/mactrack_functions.php:42 mactrack_view_dot1x.php:551
+#: lib/mactrack_functions.php:58 mactrack_view_dot1x.php:551
 #: mactrack_view_dot1x.php:704
 msgid "Authentication Success"
 msgstr "Sucesso de Autenticação"
 
-#: lib/mactrack_functions.php:43 mactrack_view_dot1x.php:553
+#: lib/mactrack_functions.php:59 mactrack_view_dot1x.php:553
 #: mactrack_view_dot1x.php:705
 msgid "Authentication Failed"
 msgstr "Falha na autenticação"
 
-#: lib/mactrack_functions.php:44 mactrack_view_dot1x.php:550
+#: lib/mactrack_functions.php:60 mactrack_view_dot1x.php:550
 #: mactrack_view_dot1x.php:706
 msgid "Authorization Success"
 msgstr "Sucesso da autorização"
 
-#: lib/mactrack_functions.php:45 mactrack_view_dot1x.php:552
+#: lib/mactrack_functions.php:61 mactrack_view_dot1x.php:552
 #: mactrack_view_dot1x.php:707
 msgid "Authorization Failed"
 msgstr "Autorização falhou"
 
-#: lib/mactrack_functions.php:2943
+#: lib/mactrack_functions.php:2959
 #, fuzzy
 msgid "Mactrack Device Tracking OUI Database Import Results"
 msgstr "Rastreamento de Dispositivos OUI Resultados de Importação de Banco de Dados OUI"
 
-#: lib/mactrack_functions.php:2944
+#: lib/mactrack_functions.php:2960
 msgid "Getting OUI Database from IEEE"
 msgstr "Obtendo banco de dados OUI do IEEE"
 
-#: lib/mactrack_functions.php:2946
+#: lib/mactrack_functions.php:2962
 msgid "Getting OUI Database from the IEEE"
 msgstr "Obtendo banco de dados OUI do IEEE"
 
-#: lib/mactrack_functions.php:2979
+#: lib/mactrack_functions.php:2995
 msgid "OUI Database Download from IEEE Complete"
 msgstr "Download do banco de dados OUI do IEEE Completo"
 
-#: lib/mactrack_functions.php:2981
+#: lib/mactrack_functions.php:2997
 msgid "OUI Database Download from IEEE FAILED"
 msgstr "Download da Base de Dados OUI do IEEE FAILED"
 
-#: lib/mactrack_functions.php:3085
+#: lib/mactrack_functions.php:3101
 #, php-format
 msgid "There were '%d' Entries Added/Updated in the database."
 msgstr "Havia entradas '%d' adicionadas/atualizadas no banco de dados."
 
-#: lib/mactrack_functions.php:3090
+#: lib/mactrack_functions.php:3106
 #, php-format
 msgid "There were '%d' Records Removed from the database."
 msgstr "Houve registros '%d' removidos do banco de dados."
 
-#: lib/mactrack_functions.php:3131
+#: lib/mactrack_functions.php:3147
 msgid "atifIndexes data collection complete"
 msgstr "atifIndexes recolha de dados completa"
 
-#: lib/mactrack_functions.php:3150
+#: lib/mactrack_functions.php:3166
 msgid "atPhysAddress data collection complete"
 msgstr "atPhysAddress recolha de dados completa"
 
-#: lib/mactrack_functions.php:3158
+#: lib/mactrack_functions.php:3174
 msgid "atNetAddress data collection complete"
 msgstr "atNetAddress recolha de dados completa"
 
-#: lib/mactrack_functions.php:3172
+#: lib/mactrack_functions.php:3188
 msgid "atEntries assembly complete."
 msgstr "Montagem de atentries completa."
 
-#: lib/mactrack_functions.php:3203
+#: lib/mactrack_functions.php:3219
 #, php-format
 msgid "HOST: %s, IP address information collection complete"
 msgstr "HOST: %s, coleta de informações sobre o endereço IP completa"
 
-#: lib/mactrack_functions.php:3239 lib/mactrack_functions.php:3956
+#: lib/mactrack_functions.php:3255 lib/mactrack_functions.php:3972
 msgid "Rescan Device"
 msgstr "Dispositivo Rescan"
 
-#: lib/mactrack_functions.php:3263
+#: lib/mactrack_functions.php:3279
 msgid "View Non Interface Graphs"
 msgstr "Ver Interfaces"
 
-#: lib/mactrack_functions.php:3265
+#: lib/mactrack_functions.php:3281
 msgid "No Non Interface Graphs in Cacti"
 msgstr "Nenhum gráfico sem interface no Cacti"
 
-#: lib/mactrack_functions.php:3283
+#: lib/mactrack_functions.php:3299
 msgid "View Interface Graphs"
 msgstr "Ver Interfaces"
 
-#: lib/mactrack_functions.php:3285
+#: lib/mactrack_functions.php:3301
 msgid "No Interface Graphs in Cacti"
 msgstr "Ver Interfaces"
 
-#: lib/mactrack_functions.php:3317 lib/mactrack_functions.php:3320
+#: lib/mactrack_functions.php:3333 lib/mactrack_functions.php:3336
 msgid "Since Restart"
 msgstr "Desde o reinício"
 
-#: lib/mactrack_functions.php:3359 mactrack_devices.php:1415
+#: lib/mactrack_functions.php:3375 mactrack_devices.php:1415
 #: mactrack_view_devices.php:590
 msgid "Down"
 msgstr "Widget movido para baixo"
 
-#: lib/mactrack_functions.php:3359 mactrack_devices.php:1413
+#: lib/mactrack_functions.php:3375 mactrack_devices.php:1413
 #: mactrack_view_devices.php:588
 msgid "Up"
 msgstr "Procure"
 
-#: lib/mactrack_functions.php:3413
+#: lib/mactrack_functions.php:3429
 msgid "Data"
 msgstr "Dados"
 
-#: lib/mactrack_functions.php:3413
+#: lib/mactrack_functions.php:3429
 msgid "Voice"
 msgstr "Voz"
 
-#: lib/mactrack_functions.php:3497
+#: lib/mactrack_functions.php:3513
 #, php-format
 msgid "Device Rescan '%s'"
 msgstr "Dispositivo Rescan '%s' do Device Rescan"
 
-#: lib/mactrack_functions.php:3559
+#: lib/mactrack_functions.php:3575
 #, php-format
 msgid "Site scan '%s'"
 msgstr "Verificação do site '%s'"
 
-#: lib/mactrack_functions.php:3608
+#: lib/mactrack_functions.php:3624
 #, php-format
 msgid "Device Enable '%s'"
 msgstr "Ativar dispositivo '%s'"
 
-#: lib/mactrack_functions.php:3647
+#: lib/mactrack_functions.php:3663
 #, php-format
 msgid "Device Disable '%d'"
 msgstr "Desativar dispositivo '%d'"
 
-#: lib/mactrack_functions.php:3831 lib/mactrack_functions.php:3876
-#: lib/mactrack_functions.php:3877 lib/mactrack_functions.php:3970
-#: lib/mactrack_functions.php:3971 lib/mactrack_functions.php:3972
-#: lib/mactrack_functions.php:3973 lib/mactrack_functions.php:3974
+#: lib/mactrack_functions.php:3847 lib/mactrack_functions.php:3892
+#: lib/mactrack_functions.php:3893 lib/mactrack_functions.php:3986
+#: lib/mactrack_functions.php:3987 lib/mactrack_functions.php:3988
+#: lib/mactrack_functions.php:3989 lib/mactrack_functions.php:3990
 #: mactrack_device_types.php:1212 mactrack_device_types.php:1219
 #: mactrack_device_types.php:1226 mactrack_macwatch.php:452
 #: mactrack_macwatch.php:453 mactrack_snmp.php:549 mactrack_snmp.php:554
-#: mactrack_snmp.php:555 mactrack_snmp.php:556 mactrack_utilities.php:294
-#: mactrack_utilities.php:296 mactrack_utilities.php:300
-#: mactrack_utilities.php:302 mactrack_view_arp.php:533
+#: mactrack_snmp.php:555 mactrack_snmp.php:556 mactrack_utilities.php:295
+#: mactrack_utilities.php:297 mactrack_utilities.php:301
+#: mactrack_utilities.php:303 mactrack_view_arp.php:533
 #: mactrack_view_devices.php:436 mactrack_view_dot1x.php:602
 #: mactrack_view_interfaces.php:623 mactrack_view_macs.php:1290
 #: mactrack_view_sites.php:456 mactrack_view_sites.php:457
@@ -192,108 +192,108 @@ msgstr "Desativar dispositivo '%d'"
 msgid "N/A"
 msgstr "N/D"
 
-#: lib/mactrack_functions.php:3835 setup.php:1269
+#: lib/mactrack_functions.php:3851 setup.php:1269
 #, php-format
 msgid "%d Minutes"
 msgstr "%d minutos"
 
-#: lib/mactrack_functions.php:3840
+#: lib/mactrack_functions.php:3856
 #, php-format
 msgid "%d Hours"
 msgstr "%d Horas"
 
-#: lib/mactrack_functions.php:3845 setup.php:1330 setup.php:1331 setup.php:1332
+#: lib/mactrack_functions.php:3861 setup.php:1330 setup.php:1331 setup.php:1332
 #: setup.php:1333 setup.php:1334
 #, php-format
 msgid "%d Days"
 msgstr "%d Dias"
 
-#: lib/mactrack_functions.php:3849
+#: lib/mactrack_functions.php:3865
 #, php-format
 msgid "%d Weeks"
 msgstr "%d Semanas"
 
-#: lib/mactrack_functions.php:3875
+#: lib/mactrack_functions.php:3891
 msgid "Not Recorded"
 msgstr "Não Gravado"
 
-#: lib/mactrack_functions.php:3896
+#: lib/mactrack_functions.php:3912
 #, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
 msgstr "Estado: Corrida, Processos: %d, Progresso: %s, LastRuntime: %f"
 
-#: lib/mactrack_functions.php:3898
+#: lib/mactrack_functions.php:3914
 #, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
 msgstr "Estado: Idle, LastRuntime: %f seconds, Processos: %d processes, Devices: %d, Next Run Time: %s"
 
-#: lib/mactrack_functions.php:3900 mactrack_device_types.php:1189
-#: mactrack_devices.php:1414 mactrack_utilities.php:285
-#: mactrack_utilities.php:316 mactrack_view_devices.php:589 setup.php:1315
+#: lib/mactrack_functions.php:3916 mactrack_device_types.php:1189
+#: mactrack_devices.php:1414 mactrack_utilities.php:286
+#: mactrack_utilities.php:317 mactrack_view_devices.php:589 setup.php:1315
 #: setup.php:1343 setup.php:1541
 msgid "Disabled"
 msgstr "Desativado"
 
-#: lib/mactrack_functions.php:3906
+#: lib/mactrack_functions.php:3922
 #, php-format
 msgid "Scanning Rate: Every %s"
 msgstr "Taxa de digitalização: Cada %s"
 
-#: lib/mactrack_functions.php:3951 mactrack_view_devices.php:433
+#: lib/mactrack_functions.php:3967 mactrack_view_devices.php:433
 #: mactrack_view_sites.php:352 mactrack_view_sites.php:446
 msgid "View Interfaces"
 msgstr "Ver Interfaces"
 
-#: lib/mactrack_functions.php:3969 mactrack_devices.php:1363
+#: lib/mactrack_functions.php:3985 mactrack_devices.php:1363
 #: mactrack_view_devices.php:542
 msgid "Not Detected"
 msgstr "Não Detetado"
 
-#: lib/mactrack_functions.php:4060 lib/mactrack_functions.php:4142
+#: lib/mactrack_functions.php:4076 lib/mactrack_functions.php:4158
 #: mactrack_sites.php:550 mactrack_sites.php:631 mactrack_view_sites.php:327
 #: setup.php:830 setup.php:1357
 msgid "Sites"
 msgstr "Sites"
 
-#: lib/mactrack_functions.php:4061 mactrack_device_types.php:1182
+#: lib/mactrack_functions.php:4077 mactrack_device_types.php:1182
 #: mactrack_devices.php:1257 mactrack_devices.php:1422 mactrack_sites.php:517
-#: mactrack_utilities.php:330 mactrack_view_devices.php:378
+#: mactrack_utilities.php:331 mactrack_view_devices.php:378
 #: mactrack_view_devices.php:597 mactrack_view_sites.php:294 setup.php:831
 #: setup.php:1358
 msgid "Devices"
 msgstr "Dispositivos"
 
-#: lib/mactrack_functions.php:4062
+#: lib/mactrack_functions.php:4078
 msgid "IP Ranges"
 msgstr "Intervalos de IP"
 
-#: lib/mactrack_functions.php:4063
+#: lib/mactrack_functions.php:4079
 msgid "IP Address"
 msgstr "Endereço de IP"
 
-#: lib/mactrack_functions.php:4064 setup.php:1973
+#: lib/mactrack_functions.php:4080 setup.php:1973
 msgid "MAC Address"
 msgstr "Endereço MAC"
 
-#: lib/mactrack_functions.php:4065 mactrack_view_interfaces.php:355
+#: lib/mactrack_functions.php:4081 mactrack_view_interfaces.php:355
 #: mactrack_view_interfaces.php:709 setup.php:834
 msgid "Interfaces"
 msgstr "Interfaces"
 
-#: lib/mactrack_functions.php:4066
+#: lib/mactrack_functions.php:4082
 msgid "Dot1x"
 msgstr "Ponto1x"
 
-#: lib/mactrack_functions.php:4067 mactrack_view_graphs.php:190
+#: lib/mactrack_functions.php:4083 mactrack_view_graphs.php:190
 msgid "Graphs"
 msgstr "Gráficos"
 
-#: lib/mactrack_functions.php:4110 mactrack_device_types.php:625
+#: lib/mactrack_functions.php:4126 mactrack_device_types.php:625
 #: mactrack_devices.php:1416 mactrack_view_devices.php:591 setup.php:1290
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: lib/mactrack_functions.php:4136 mactrack_device_types.php:1270
+#: lib/mactrack_functions.php:4152 mactrack_device_types.php:1270
 #: mactrack_devices.php:1307 mactrack_macauth.php:484 mactrack_macwatch.php:493
 #: mactrack_snmp.php:718 mactrack_vendormacs.php:257 mactrack_view_arp.php:523
 #: mactrack_view_devices.php:487 mactrack_view_dot1x.php:592
@@ -301,18 +301,18 @@ msgstr "Desconhecido"
 msgid "Search"
 msgstr "Pesquisar"
 
-#: lib/mactrack_functions.php:4146 mactrack_device_types.php:1280
+#: lib/mactrack_functions.php:4162 mactrack_device_types.php:1280
 #: mactrack_devices.php:1426 mactrack_macauth.php:494 mactrack_macwatch.php:503
 #: mactrack_snmp.php:728 mactrack_vendormacs.php:267
 #: mactrack_view_devices.php:601 mactrack_view_ips.php:374 setup.php:1302
 msgid "Default"
 msgstr "Padrão"
 
-#: lib/mactrack_functions.php:4166
+#: lib/mactrack_functions.php:4182
 msgid "Show Device Details"
 msgstr "Mostrar detalhes do dispositivo"
 
-#: lib/mactrack_functions.php:4170 mactrack_device_types.php:1296
+#: lib/mactrack_functions.php:4186 mactrack_device_types.php:1296
 #: mactrack_devices.php:1336 mactrack_macauth.php:510 mactrack_macwatch.php:519
 #: mactrack_snmp.php:743 mactrack_vendormacs.php:283 mactrack_view_arp.php:600
 #: mactrack_view_devices.php:516 mactrack_view_dot1x.php:669
@@ -320,7 +320,7 @@ msgstr "Mostrar detalhes do dispositivo"
 msgid "Go"
 msgstr "Ir"
 
-#: lib/mactrack_functions.php:4171 mactrack_device_types.php:1297
+#: lib/mactrack_functions.php:4187 mactrack_device_types.php:1297
 #: mactrack_devices.php:1337 mactrack_macauth.php:511 mactrack_macwatch.php:520
 #: mactrack_snmp.php:744 mactrack_vendormacs.php:284 mactrack_view_arp.php:601
 #: mactrack_view_devices.php:517 mactrack_view_dot1x.php:670
@@ -329,7 +329,7 @@ msgstr "Ir"
 msgid "Clear"
 msgstr "Limpar"
 
-#: lib/mactrack_functions.php:4172 mactrack_device_types.php:1300
+#: lib/mactrack_functions.php:4188 mactrack_device_types.php:1300
 #: mactrack_devices.php:1339 mactrack_vendormacs.php:285
 #: mactrack_view_arp.php:602 mactrack_view_devices.php:518
 #: mactrack_view_dot1x.php:671 mactrack_view_interfaces.php:635
@@ -337,14 +337,14 @@ msgstr "Limpar"
 msgid "Export"
 msgstr "Exportar"
 
-#: lib/mactrack_functions.php:4182 mactrack_devices.php:1313
+#: lib/mactrack_functions.php:4198 mactrack_devices.php:1313
 #: mactrack_view_arp.php:529 mactrack_view_devices.php:493
 #: mactrack_view_dot1x.php:598 mactrack_view_interfaces.php:580
 #: mactrack_view_ips.php:349 mactrack_view_macs.php:1286
 msgid "Site"
 msgstr "Site"
 
-#: lib/mactrack_functions.php:4186 lib/mactrack_functions.php:4207
+#: lib/mactrack_functions.php:4202 lib/mactrack_functions.php:4223
 #: mactrack_devices.php:1351 mactrack_devices.php:1362
 #: mactrack_devices.php:1412 mactrack_view_devices.php:530
 #: mactrack_view_devices.php:541 mactrack_view_devices.php:587
@@ -352,7 +352,7 @@ msgstr "Site"
 msgid "Any"
 msgstr "Qualquer"
 
-#: lib/mactrack_functions.php:4203 mactrack_devices.php:1358
+#: lib/mactrack_functions.php:4219 mactrack_devices.php:1358
 #: mactrack_view_devices.php:537
 msgid "SubType"
 msgstr "Subtipo"
@@ -731,7 +731,7 @@ msgstr "Todos"
 msgid "Type"
 msgstr "Tipo"
 
-#: mactrack_device_types.php:1353 mactrack_utilities.php:316
+#: mactrack_device_types.php:1353 mactrack_utilities.php:317
 msgid "Enabled"
 msgstr "Activado"
 
@@ -958,7 +958,7 @@ msgid "Site Name"
 msgstr "Nome do Local"
 
 #: mactrack_devices.php:1212 mactrack_devices.php:1408
-#: mactrack_utilities.php:330 mactrack_view_devices.php:328
+#: mactrack_utilities.php:331 mactrack_view_devices.php:328
 #: mactrack_view_devices.php:583 mactrack_view_dot1x.php:477
 #: mactrack_view_dot1x.php:490 mactrack_view_dot1x.php:694
 #: mactrack_view_interfaces.php:539
@@ -1283,250 +1283,250 @@ msgstr "Nenhuma Opção SNMP Encontrada"
 msgid "Options"
 msgstr "Opções"
 
-#: mactrack_utilities.php:208
+#: mactrack_utilities.php:209
 #, fuzzy
 msgid "Mactrack Process Status"
 msgstr "Status do processo de rastreamento de dispositivos"
 
-#: mactrack_utilities.php:228 mactrack_utilities.php:245
+#: mactrack_utilities.php:229 mactrack_utilities.php:246
 msgid "Refresh"
 msgstr "Atualizar"
 
-#: mactrack_utilities.php:283
+#: mactrack_utilities.php:284
 msgid "Current Process Status"
 msgstr "Status do processo atual"
 
-#: mactrack_utilities.php:285
+#: mactrack_utilities.php:286
 #, fuzzy
 msgid "The Mactrack Poller is:"
 msgstr "O Poller de Rastreio de Dispositivos é:"
 
-#: mactrack_utilities.php:289
+#: mactrack_utilities.php:290
 msgid "Running Processes:"
 msgstr "Processos em execução:"
 
-#: mactrack_utilities.php:292
+#: mactrack_utilities.php:293
 msgid "Last Time Poller Started:"
 msgstr "A última vez que o Poller começou:"
 
-#: mactrack_utilities.php:294
+#: mactrack_utilities.php:295
 msgid "Poller Frequency:"
 msgstr "Frequência Poller:"
 
-#: mactrack_utilities.php:296
+#: mactrack_utilities.php:297
 msgid "Approx. Next Runtime:"
 msgstr "Aproximadamente. Próximo runtime:"
 
-#: mactrack_utilities.php:298
+#: mactrack_utilities.php:299
 #, fuzzy
 msgid "Database Maintenance Information"
 msgstr "Tempo de manutenção do banco de dados"
 
-#: mactrack_utilities.php:300
+#: mactrack_utilities.php:301
 #, fuzzy
 msgid "Last DB Maintenance Time:"
 msgstr "Último tempo de manutenção da Poller:"
 
-#: mactrack_utilities.php:302
+#: mactrack_utilities.php:303
 #, fuzzy
 msgid "Next DB Maintenance Time:"
 msgstr "Aprox. Próxima Manutenção DB:"
 
-#: mactrack_utilities.php:304
+#: mactrack_utilities.php:305
 msgid "Run Time Details"
 msgstr "Detalhes do tempo de execução"
 
-#: mactrack_utilities.php:306
+#: mactrack_utilities.php:307
 msgid "Last Poller Runtime:"
 msgstr "Último Poller Runtime:"
 
-#: mactrack_utilities.php:308
+#: mactrack_utilities.php:309
 msgid "Last Poller Maintenance Runtime:"
 msgstr "Último tempo de manutenção da Poller:"
 
-#: mactrack_utilities.php:310
+#: mactrack_utilities.php:311
 msgid "Maximum Concurrent Processes:"
 msgstr "Processos Máximos Simultâneos:"
 
-#: mactrack_utilities.php:310
+#: mactrack_utilities.php:311
 msgid "processes"
 msgstr "Processos"
 
-#: mactrack_utilities.php:312
+#: mactrack_utilities.php:313
 msgid "Maximum Per Device Scan Time:"
 msgstr "Tempo máximo de varredura por dispositivo:"
 
-#: mactrack_utilities.php:312
+#: mactrack_utilities.php:313
 msgid "minutes"
 msgstr "minutos"
 
-#: mactrack_utilities.php:314
+#: mactrack_utilities.php:315
 msgid "DNS Configuration Information"
 msgstr "Informações sobre a configuração do DNS"
 
-#: mactrack_utilities.php:316
+#: mactrack_utilities.php:317
 msgid "Reverse DNS Resolution is"
 msgstr "A resolução DNS reversa é"
 
-#: mactrack_utilities.php:318
+#: mactrack_utilities.php:319
 msgid "Primary DNS Server:"
 msgstr "Servidor DNS Primário:"
 
-#: mactrack_utilities.php:320
+#: mactrack_utilities.php:321
 msgid "Secondary DNS Server:"
 msgstr "Servidor DNS secundário:"
 
-#: mactrack_utilities.php:322
+#: mactrack_utilities.php:323
 msgid "DNS Resolution Timeout:"
 msgstr "Tempo limite de resolução DNS:"
 
-#: mactrack_utilities.php:322
+#: mactrack_utilities.php:323
 msgid "milliseconds"
 msgstr "Milissegundos"
 
-#: mactrack_utilities.php:326
+#: mactrack_utilities.php:327
 msgid "Running Process Summary"
 msgstr "Resumo do processo de execução"
 
-#: mactrack_utilities.php:328
+#: mactrack_utilities.php:329
 msgid "The DNS Resolver is Not Running"
 msgstr "O resolvedor DNS não está em execução"
 
-#: mactrack_utilities.php:328
+#: mactrack_utilities.php:329
 msgid "The DNS Resolver is Running"
 msgstr "O resolvedor DNS está em execução"
 
-#: mactrack_utilities.php:330
+#: mactrack_utilities.php:331
 msgid "Date Started"
 msgstr "Data de início"
 
-#: mactrack_utilities.php:368
+#: mactrack_utilities.php:369
 msgid "Completed"
 msgstr "Concluído"
 
-#: mactrack_utilities.php:380
+#: mactrack_utilities.php:381
 msgid "Waiting"
 msgstr "Aguardando"
 
-#: mactrack_utilities.php:388
+#: mactrack_utilities.php:389
 msgid "Other"
 msgstr "Outro"
 
-#: mactrack_utilities.php:415 mactrack_utilities.php:484
-#: mactrack_utilities.php:518
+#: mactrack_utilities.php:416 mactrack_utilities.php:485
+#: mactrack_utilities.php:519
 msgid "Are You Sure?"
 msgstr "Tem certeza?"
 
-#: mactrack_utilities.php:415
+#: mactrack_utilities.php:416
 msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
 msgstr "Tem a certeza de que pretende eliminar todos os resultados de Porta para MAC para IP do sistema?"
 
-#: mactrack_utilities.php:463 mactrack_utilities.php:496
+#: mactrack_utilities.php:464 mactrack_utilities.php:497
 #, fuzzy
 msgid "Mactrack Database Results"
 msgstr "Resultados do Banco de Dados de Rastreamento de Dispositivos"
 
-#: mactrack_utilities.php:464 mactrack_utilities.php:562
+#: mactrack_utilities.php:465 mactrack_utilities.php:563
 #, php-format
 msgid "The following number of records have been removed from the database: %s"
 msgstr "O seguinte número de registos foi retirado da base de dados: %s"
 
-#: mactrack_utilities.php:484
+#: mactrack_utilities.php:485
 msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
 msgstr "Você tem certeza de que deseja excluir todos os resultados de Porta agregada para MAC para IP do sistema?"
 
-#: mactrack_utilities.php:497
+#: mactrack_utilities.php:498
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s"
 msgstr "O seguinte número de registros foi removido da tabela agravada: %s"
 
-#: mactrack_utilities.php:518
+#: mactrack_utilities.php:519
 msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
 msgstr "Você tem certeza de que deseja excluir e recriar todos os resultados da Porta agregada para MAC para IP do sistema?"
 
-#: mactrack_utilities.php:543
+#: mactrack_utilities.php:544
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
 msgstr "O seguinte número de registros foi removido da tabela agravada: %s.  E os registros de %s serão adicionados."
 
-#: mactrack_utilities.php:582
+#: mactrack_utilities.php:583
 #, fuzzy
 msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
 msgstr "As funções de rastreamento de dispositivos foram purgadas.  Eles serão recriados quando você editar um dispositivo ou tipo de dispositivo."
 
-#: mactrack_utilities.php:595
+#: mactrack_utilities.php:596
 #, fuzzy
 msgid "Cacti Mactrack System Utilities"
 msgstr "Utilitários do Sistema de Rastreamento de Dispositivos Cacti"
 
-#: mactrack_utilities.php:597
+#: mactrack_utilities.php:598
 msgid "Process Status Information"
 msgstr "Informações de status do processo"
 
-#: mactrack_utilities.php:606 setup.php:1142
+#: mactrack_utilities.php:607 setup.php:1142
 #, fuzzy
 msgid "View Mactrack Process Status"
 msgstr "Visualizar o status do processo de rastreamento de dispositivos"
 
-#: mactrack_utilities.php:609
+#: mactrack_utilities.php:610
 #, fuzzy
 msgid "This option will let you show and set process information associated with the Mactrack polling process."
 msgstr "Esta opção permitirá que você mostre e defina as informações de processo associadas ao processo de pesquisa de rastreamento de dispositivos."
 
-#: mactrack_utilities.php:613
+#: mactrack_utilities.php:614
 msgid "Database Administration"
 msgstr "Administração de banco de dados"
 
-#: mactrack_utilities.php:617 setup.php:1107
+#: mactrack_utilities.php:618 setup.php:1107
 msgid "Perform Database Maintenance"
 msgstr "Executar atualização de banco de dados"
 
-#: mactrack_utilities.php:620
+#: mactrack_utilities.php:621
 msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
 msgstr "Elimina associações de Porta expirada para MAC para IP a partir da base de dados.  Somente os registros que expiraram, com base em seus critérios, são removidos."
 
-#: mactrack_utilities.php:626
+#: mactrack_utilities.php:627
 msgid "Refresh IEEE Vendor MAC/OUI Database"
 msgstr "Atualize o banco de dados MAC/OUI do fornecedor IEEE"
 
-#: mactrack_utilities.php:629
+#: mactrack_utilities.php:630
 msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
 msgstr "Esta função permite descarregar e instalar a base de dados OIU mais recente a partir do sítio Web da IEEE.  Cada Placa de interface de rede (NIC) tem um endereço MAC.  O endereço MAC pode ser dividido em duas partes.  A primeira parte do MAC Addess contém o Vendor MAC.  O MAC do fornecedor identifica quem fabricou a peça.  Isso será útil na verificação local de dispositivos desonestos em sua rede."
 
-#: mactrack_utilities.php:635 setup.php:1114
+#: mactrack_utilities.php:636 setup.php:1114
 msgid "Refresh Scanning Functions"
 msgstr "Atualizar funções de digitalização"
 
-#: mactrack_utilities.php:638
+#: mactrack_utilities.php:639
 #, fuzzy
 msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
 msgstr "Exclui funções de rastreamento de dispositivos antigas e potencialmente obsoletas do menu suspenso que você recebe ao editar um tipo de dispositivo."
 
-#: mactrack_utilities.php:644
+#: mactrack_utilities.php:645
 msgid "Remove All Scan Results"
 msgstr "Remover todos os resultados da varredura"
 
-#: mactrack_utilities.php:647
+#: mactrack_utilities.php:648
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
 msgstr "Exclui <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  Este utilitário é bom quando você quer começar de novo.  <strong>DANGER: Todos os dados anteriores são eliminados.</strong>"
 
-#: mactrack_utilities.php:651
+#: mactrack_utilities.php:652
 msgid "Aggregated Table Administration"
 msgstr "Administração de tabela agregada"
 
-#: mactrack_utilities.php:655
+#: mactrack_utilities.php:656
 msgid "Remove All Aggregated Results"
 msgstr "Remover todos os resultados agregados"
 
-#: mactrack_utilities.php:658
+#: mactrack_utilities.php:659
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
 msgstr "Exclui TODOS os <forte>Algregado</sforte> (Não verifica resultados) Porta para MAC para associações de IP a partir do banco de dados.  Os dados serão coletados novamente com base em <strong>somente novos</strong> dados escaneados na próxima execução do poller mactrack."
 
-#: mactrack_utilities.php:664
+#: mactrack_utilities.php:665
 msgid "Perform Aggregate Table Rebuild"
 msgstr "Executar a reconstrução da tabela agregada"
 
-#: mactrack_utilities.php:667
+#: mactrack_utilities.php:668
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
 msgstr "Exclui todas as associações de porta para MAC para IP do banco de dados e sua recriação com base em <strong>Todos os dados rastreados</strong>agora."
 
