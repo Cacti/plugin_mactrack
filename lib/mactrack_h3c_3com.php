@@ -48,7 +48,7 @@ array_push($mactrack_scanning_functions_ip, 'get_h3c_3com_arp_table');
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_h3c_3com_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_h3c_3com_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -143,7 +143,7 @@ function get_h3c_3com_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 		$j          = 0;
 		$port_array = [];
 
-		foreach ($port_results as $port_result) {
+		foreach ((array) $port_results as $port_result) {
 			$ifIndex = $port_result['port_number'];
 
 			$ifType = $ifInterfaces[$ifIndex]['ifType'];
@@ -445,7 +445,7 @@ function get_h3c_3com_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_h3c_3com_arp_table($site, &$device) {
+function get_h3c_3com_arp_table($site, &$device): void {
 	global $debug, $scan_date;
 
 	mactrack_debug('FUNCTION: get_h3c_3com_arp_table started');

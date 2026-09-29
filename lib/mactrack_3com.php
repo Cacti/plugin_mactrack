@@ -48,7 +48,7 @@ array_push($mactrack_scanning_functions, 'get_3Com_dot1dTpFdbEntry_ports');
  *
  * @return void
  */
-function complete_3com_ifName(&$device, &$ifIndexes) {
+function complete_3com_ifName(&$device, &$ifIndexes): void {
 	mactrack_debug('Start complete_3com_ifName');
 
 	// device without ifName detection
@@ -80,10 +80,10 @@ function complete_3com_ifName(&$device, &$ifIndexes) {
 	if (cacti_sizeof($device_descr_array)) {
 		foreach ($device_descr_array as $key => $ifd) {
 			if ($ifIndexes[$key]['ifName'] == '') {
-				$ifdesc                    = $device_descr_array[$key];
-				$ifdesc                    = preg_replace($pattern, $replacement, $ifdesc);
-				$ifdesc                    = preg_replace($pattern2, $replacement2, $ifdesc);
-				$ifdesc                    = preg_replace($pattern3, $replacement3, $ifdesc);
+				$ifdesc                    = (string) $device_descr_array[$key];
+				$ifdesc                    = (string) preg_replace($pattern, $replacement, $ifdesc);
+				$ifdesc                    = (string) preg_replace($pattern2, $replacement2, $ifdesc);
+				$ifdesc                    = (string) preg_replace($pattern3, $replacement3, $ifdesc);
 				$ifIndexes[$key]['ifName'] = $ifdesc;
 
 				db_execute_prepared('UPDATE mac_track_interfaces
@@ -93,11 +93,11 @@ function complete_3com_ifName(&$device, &$ifIndexes) {
 					[$ifdesc, $device['device_id'], $key]);
 
 				if ($i < cacti_sizeof($local_graph_id)) {
-					db_execute('UPDATE mac_track_interface_graphs
+					db_execute_prepared('UPDATE mac_track_interface_graphs
 						SET ifIndex = ?, ifName = ?
 						WHERE device_id = ?
 						AND local_graph_id = ?',
-						[$key, $ifdesc, $device['device_id'], $$local_graph_id[$i]['local_graph_id']]);
+						[$key, $ifdesc, $device['device_id'], $local_graph_id[$i]['local_graph_id']]);
 				}
 
 				$i++;
@@ -126,7 +126,7 @@ function complete_3com_ifName(&$device, &$ifIndexes) {
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_3Com_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_3Com_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -264,7 +264,7 @@ function get_3Com_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $s
 					if (isset($bridgePortIfIndexes[$port_key['port_number']])) {
 						$brPortIfIndex = mactrack_arr_key($bridgePortIfIndexes, $port_key['port_number']);
 					} else {
-						$brPortIfIndex = $port_key['port_number'] ?? '';
+						$brPortIfIndex = $port_key['port_number'];
 					}
 					$brPortIfType = isset($ifInterfaces[$brPortIfIndex]['ifType']) ? $ifInterfaces[$brPortIfIndex]['ifType'] : '';
 				} else {

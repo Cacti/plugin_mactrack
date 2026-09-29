@@ -45,7 +45,7 @@ array_push($mactrack_scanning_functions, 'get_foundry_switch_ports');
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -105,6 +105,9 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 	}
 	mactrack_debug('Total Ports = ' . $device['ports_total']);
 
+	/** @var array<int, array<string, mixed>> $ifInterfaces */
+	$ifInterfaces = [];
+
 	// calculate the number of trunk ports
 	if (cacti_sizeof($ifIndexes)) {
 		foreach ($ifIndexes as $ifIndex) {
@@ -118,11 +121,14 @@ function get_foundry_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
 
 	// get VLAN details
 	$i = 0;
+	$active_vlans = [];
 
 	if (cacti_sizeof($vlan_ids)) {
 		foreach ($vlan_ids as $vlan_id => $vlan_name) {
-			$active_vlans[$i]['vlan_id']   = $vlan_id;
-			$active_vlans[$i]['vlan_name'] = $vlan_name;
+			$active_vlans[$i] = [
+				'vlan_id'   => $vlan_id,
+				'vlan_name' => $vlan_name,
+			];
 			mactrack_debug('VLAN ID = ' . $active_vlans[$i]['vlan_id'] . ' VLAN Name = ' . $active_vlans[$i]['vlan_name']);
 			$i++;
 		}

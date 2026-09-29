@@ -48,7 +48,7 @@ array_push($mactrack_scanning_functions_ip, 'get_extreme_extremeware_arp_table')
  *
  * @return array The updated $device record.
  */
-function get_extreme_extremeware_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false) {
+function get_extreme_extremeware_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false): array {
 	return get_extreme_switch_ports($site, $device, $lowPort, $highPort , true);
 }
 /**
@@ -64,7 +64,7 @@ function get_extreme_extremeware_switch_ports($site, &$device, $lowPort = 0, $hi
  *
  * @return void
  */
-function get_extreme_extremeware_arp_table($site, &$device, $extremeware = false) {
+function get_extreme_extremeware_arp_table($site, &$device, $extremeware = false): void {
 	get_extreme_arp_table($site, $device, true);
 }
 
@@ -91,7 +91,7 @@ function get_extreme_extremeware_arp_table($site, &$device, $extremeware = false
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false) {
+function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -135,10 +135,13 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 
 	// get VLAN details
 	$i = 0;
+	$active_vlans = [];
 
 	foreach ($vlan_ids as $vlan_index => $vlan_id) {
-		$active_vlans[$i]['vlan_id']   = $vlan_id;
-		$active_vlans[$i]['vlan_name'] = $vlan_names[$vlan_index];
+		$active_vlans[$i] = [
+			'vlan_id'   => $vlan_id,
+			'vlan_name' => $vlan_names[$vlan_index],
+		];
 		mactrack_debug('VLAN ID = ' . $active_vlans[$i]['vlan_id'] . ' VLAN Name = ' . $active_vlans[$i]['vlan_name']);
 		$i++;
 	}
@@ -191,7 +194,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 				// only output legitimate end user ports
 				if (($ifType >= 6) && ($ifType <= 9)) {
 					if ($extremeware) {
-						$vlanid                      = substr($mac_key,0,strpos($mac_key,'.'));
+						$vlanid                      = substr($mac_key,0,(int) strpos($mac_key,'.'));
 						$new_port_array['vlan_id']   = $vlan_ids[$vlanid];
 						$new_port_array['vlan_name'] = $vlan_names[$vlanid];
 					} else {
@@ -261,7 +264,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_extreme_arp_table($site, &$device, $extremeware = false) {
+function get_extreme_arp_table($site, &$device, $extremeware = false): void {
 	global $debug, $scan_date;
 
 	/*
@@ -291,9 +294,9 @@ function get_extreme_arp_table($site, &$device, $extremeware = false) {
 
 		if (cacti_sizeof($atifIndexes)) {
 			mactrack_debug('atifIndexes data collection complete');
-			$atPhysAddress = xform_stripped_oid('.1.3.6.1.2.1.3.1.1.2', $device, true);
+			$atPhysAddress = xform_stripped_oid('.1.3.6.1.2.1.3.1.1.2', $device, '', true);
 			mactrack_debug('atPhysAddress data collection complete');
-			$atNetAddress  = xform_stripped_oid('.1.3.6.1.2.1.3.1.1.3', $device, true);
+			$atNetAddress  = xform_stripped_oid('.1.3.6.1.2.1.3.1.1.3', $device, '', true);
 			mactrack_debug('atNetAddress data collection complete');
 			$ifDescr  = xform_stripped_oid('.1.3.6.1.2.1.2.2.1.2', $device);
 			mactrack_debug('ifDescr data collection complete');
@@ -315,7 +318,7 @@ function get_extreme_arp_table($site, &$device, $extremeware = false) {
 
 		if (cacti_sizeof($FdbPortIfIndex)) {
 			mactrack_debug('FdbPortIfIndex data collection complete');
-			$FdbMacAddress = xform_stripped_oid('.1.3.6.1.4.1.1916.1.16.2.1.3', $device, true);
+			$FdbMacAddress = xform_stripped_oid('.1.3.6.1.4.1.1916.1.16.2.1.3', $device, '', true);
 			mactrack_debug('FdbMacAddress data collection complete');
 			$FdbIPAddress  = xform_stripped_oid('.1.3.6.1.4.1.1916.1.16.2.1.2', $device);
 			mactrack_debug('FdbIPAddress data collection complete');

@@ -51,7 +51,7 @@ array_push($mactrack_scanning_functions, 'get_dlink_l2_dot1dTpFdbEntry_ports');
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_dlink_l2_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_dlink_l2_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -88,7 +88,6 @@ function get_dlink_l2_switch_ports($site, &$device, $lowPort = 0, $highPort = 0)
 	get_dlink_l2_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, '', true, $lowPort, $highPort);
 
 	return $device;
-	mactrack_debug('Finish function get_dlink_l2_switch_ports for dev=: ' . ' dev=' . $device['hostname']);
 }
 
 /**
@@ -277,7 +276,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
  *
  * @return string The formatted colon-delimited hex MAC address.
  */
-function dlink_convert_macs($oldmac) {
+function dlink_convert_macs($oldmac): string {
 	if ($oldmac[0] != '.') {
 		$oldmac = '.' . $oldmac;
 	}
@@ -288,7 +287,7 @@ function dlink_convert_macs($oldmac) {
 	$newmac = '';
 
 	for ($i = 0; $i < 6; $i++) {
-		$newmac = $newmac . dec2hex($piece[$i],2) . ':';
+		$newmac = $newmac . dec2hex((int) $piece[$i],2) . ':';
 	}
 
 	$newmac = substr($newmac, 0, strlen($newmac) - 1);
@@ -305,7 +304,7 @@ function dlink_convert_macs($oldmac) {
  *
  * @return string The zero-padded lowercase hexadecimal string.
  */
-function dec2hex($number, $length) {
+function dec2hex($number, $length): string {
 	$hexval = '';
 
 	while ($number > 0) {
@@ -366,7 +365,7 @@ function stripos($str,$needle) {
  * @return array Indexed array of ['vlan_id' => ..., 'key' => ...,
  *               'vlan_name' => ...] entries.
  */
-function xform_dlink_vlan_associations(&$device, $snmp_readstring = '') {
+function xform_dlink_vlan_associations(&$device, $snmp_readstring = ''): array {
 	// get raw index data
 	if ($snmp_readstring == '') {
 		$snmp_readstring = $device['snmp_readstring'];
@@ -388,7 +387,7 @@ function xform_dlink_vlan_associations(&$device, $snmp_readstring = '') {
 
 	foreach ($xformArray as $xformItem) {
 		// peel off the beginning of the OID
-		$key = $xformItem['oid'];
+		$key = (string) $xformItem['oid'];
 		$key = str_replace('iso', '1', $key);
 		$key = str_replace('1.3.6.1.2.1.17.7.1.2.2.1.2.', '', $key);
 		// now grab the VLAN
@@ -419,7 +418,7 @@ function xform_dlink_vlan_associations(&$device, $snmp_readstring = '') {
  *
  * @return string The extracted VLAN id.
  */
-function get_dlink_vlan_id($OID) {
+function get_dlink_vlan_id($OID): string {
 	if ($OID[0] != '.') {
 		$OID = '.' . $OID;
 	}

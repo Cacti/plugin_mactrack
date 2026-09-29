@@ -66,7 +66,7 @@ $mactrack_device_status ??= [
  *
  * @return int
  */
-function plugin_get_rows_per_page() {
+function plugin_get_rows_per_page(): int {
 	$rows = get_request_var('rows');
 
 	if ($rows == -1) {
@@ -98,7 +98,7 @@ function plugin_get_rows_per_page() {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function mactrack_debug($message) {
+function mactrack_debug($message): void {
 	global $debug, $web, $config;
 
 	$print_output = !(isset($web) && $web);
@@ -144,7 +144,7 @@ function mactrack_debug($message) {
  *                                                    scanning function
  *                                                    names.
  */
-function mactrack_rebuild_scanning_funcs() {
+function mactrack_rebuild_scanning_funcs(): void {
 	global $config, $mactrack_scanning_functions_ip, $mactrack_scanning_functions, $mactrack_scanning_functions_dot1x;
 
 	if (defined('CACTI_BASE_PATH')) {
@@ -206,7 +206,7 @@ function mactrack_rebuild_scanning_funcs() {
  *
  * @return string The trimmed string.
  */
-function mactrack_strip_alpha($string = '') {
+function mactrack_strip_alpha($string = ''): string {
 	return trim($string, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ()[]{}');
 }
 
@@ -218,7 +218,7 @@ function mactrack_strip_alpha($string = '') {
  *
  * @return bool True if access is allowed, false otherwise.
  */
-function mactrack_check_user_realm($realm_id) {
+function mactrack_check_user_realm($realm_id): bool {
 	return is_realm_allowed($realm_id);
 }
 
@@ -239,7 +239,7 @@ function mactrack_check_user_realm($realm_id) {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function valid_snmp_device(&$device) {
+function valid_snmp_device(&$device): bool {
 	global $config;
 
 	// initialize variable
@@ -402,7 +402,7 @@ function valid_snmp_device(&$device) {
  * @param mixed $device
  * @param mixed $device_types
  */
-function find_scanning_function(&$device, &$device_types) {
+function find_scanning_function(&$device, &$device_types): array {
 	// scan all device_types to determine the function to call
 	if (cacti_sizeof($device_types)) {
 		foreach ($device_types as $device_type) {
@@ -484,7 +484,7 @@ function find_scanning_function(&$device, &$device_types) {
  * @param mixed $port_list
  * @param mixed $delimiter
  */
-function port_list_to_array($port_list, $delimiter = ':') {
+function port_list_to_array($port_list, $delimiter = ':'): array {
 	$port_array = [];
 
 	if (read_config_option('mt_ignorePorts_delim') == '-1') {
@@ -521,7 +521,7 @@ function port_list_to_array($port_list, $delimiter = ':') {
  * @param mixed $site
  * @param mixed $device
  */
-function get_standard_arp_table($site, &$device) {
+function get_standard_arp_table($site, &$device): void {
 	global $debug, $scan_date;
 
 	$atEntries   = [];
@@ -619,7 +619,7 @@ function get_standard_arp_table($site, &$device) {
  * @param mixed $getLinkPorts
  * @param mixed $getAlias
  */
-function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $getAlias = false) {
+function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $getAlias = false): array {
 	// initialize the interfaces array
 	$ifInterfaces = [];
 
@@ -634,7 +634,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 			if (!is_numeric($value)) {
 				$parts = explode('(', $value);
 
-				if (!empty($parts)) {
+				if (isset($parts[1])) {
 					$piece         = $parts[1];
 					$ifTypes[$key] = str_replace(')', '', trim($piece));
 				} else {
@@ -938,6 +938,9 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 		// do the out octets
 		$int_ifOutOctets = get_link_int_value('ifOutOctets', $ifIndex, $ifOutOctets, $db_interface, $divisor, 'traffic');
 
+		$int_ifHCInOctets  = '';
+		$int_ifHCOutOctets = '';
+
 		if ($device['snmp_version'] > 1) {
 			// do the in octets
 			$int_ifHCInOctets = get_link_int_value('ifHCInOctets', $ifIndex, $ifHCInOctets, $db_interface, $divisor, 'traffic', '64');
@@ -1115,19 +1118,19 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
  *
  * @return int The total duration in seconds.
  */
-function mactrack_timetics_to_seconds($timetics) {
+function mactrack_timetics_to_seconds($timetics): int {
 	$time  = 0;
 	$parts = explode(':', $timetics);
 
 	if (cacti_sizeof($parts) == 4) {
-		$time += $parts[0] * 86400;
-		$time += $parts[1] * 3600;
-		$time += $parts[2] * 60;
-		$time += round($parts[3], 0);
+		$time += (int) $parts[0] * 86400;
+		$time += (int) $parts[1] * 3600;
+		$time += (int) $parts[2] * 60;
+		$time += (int) round((float) $parts[3], 0);
 	} elseif (cacti_sizeof($parts) == 3) {
-		$time += $parts[0] * 3600;
-		$time += $parts[1] * 60;
-		$time += round($parts[2],0);
+		$time += (int) $parts[0] * 3600;
+		$time += (int) $parts[1] * 60;
+		$time += (int) round((float) $parts[2],0);
 	}
 
 	return $time;
@@ -1146,7 +1149,7 @@ function mactrack_timetics_to_seconds($timetics) {
  *
  * @return void
  */
-function mactrack_find_host_graphs($device_id, $host_id) {
+function mactrack_find_host_graphs($device_id, $host_id): void {
 	$field_name = 'ifName';
 
 	$local_data_ids = db_fetch_assoc_prepared('SELECT dl.*,
@@ -1265,8 +1268,9 @@ function mactrack_find_host_graphs($device_id, $host_id) {
  *                             by ifIndex.
  * @param array  &$db_interface The previously stored interface values,
  *                             keyed by ifIndex then $snmp_oid.
- * @param float  $divisor       Value to divide the computed delta by
- *                             (e.g. to convert to a per-second rate).
+ * @param int|false $divisor    Value to divide the computed delta by
+ *                             (e.g. to convert to a per-second rate), or
+ *                             false when no interval is available.
  * @param string $type          Either 'errors' (default, counts
  *                             backward from overflow on rollover) or
  *                             any other value (counts forward past
@@ -1277,7 +1281,7 @@ function mactrack_find_host_graphs($device_id, $host_id) {
  * @return float The computed delta value (possibly divided by
  *               $divisor), or 0 when no prior/new value is available.
  */
-function get_link_int_value($snmp_oid, $ifIndex, &$snmp_array, &$db_interface, $divisor, $type = 'errors', $bits = '32') {
+function get_link_int_value($snmp_oid, $ifIndex, &$snmp_array, &$db_interface, $divisor, $type = 'errors', $bits = '32'): float {
 	// 32bit and 64bit Integer Overflow Value
 	if ($bits == '32') {
 		$overflow   = 4294967295;
@@ -1355,7 +1359,7 @@ function get_link_int_value($snmp_oid, $ifIndex, &$snmp_array, &$db_interface, $
  * @param mixed $lowPort
  * @param mixed $highPort
  */
-function get_generic_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_generic_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -1384,7 +1388,7 @@ function get_generic_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) 
  * @param mixed $lowPort
  * @param mixed $highPort
  */
-function get_generic_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_generic_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -1413,7 +1417,7 @@ function get_generic_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort
  * @param mixed $lowPort
  * @param mixed $highPort
  */
-function get_generic_wireless_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_generic_wireless_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -1444,7 +1448,7 @@ function get_generic_wireless_ports($site, &$device, $lowPort = 0, $highPort = 0
  * @param mixed $lowPort
  * @param mixed $highPort
  */
-function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999) {
+function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999): array {
 	global $debug, $scan_date;
 
 	// initialize variables
@@ -1617,6 +1621,8 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 	} else {
 		return $new_port_key_array;
 	}
+
+	return $new_port_key_array;
 }
 
 /**
@@ -1641,7 +1647,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
  *               entries (IP address key, colon-formatted MAC address
  *               value).
  */
-function get_ios_vrf_arp_table($oid, &$device, $snmp_readstring = '', $hex = false) {
+function get_ios_vrf_arp_table($oid, &$device, $snmp_readstring = '', $hex = false): array {
 	$return_array = [];
 
 	if ($snmp_readstring == '') {
@@ -1691,7 +1697,7 @@ function get_ios_vrf_arp_table($oid, &$device, $snmp_readstring = '', $hex = fal
  * @param mixed $lowPort
  * @param mixed $highPort
  */
-function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999) {
+function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999): array {
 	global $debug, $scan_date;
 
 	// initialize variables
@@ -1857,6 +1863,8 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 	} else {
 		return $new_port_key_array;
 	}
+
+	return $new_port_key_array;
 }
 
 /**
@@ -1871,7 +1879,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
  * @param mixed $lowPort
  * @param mixed $highPort
  */
-function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999) {
+function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999): array {
 	global $debug, $scan_date;
 
 	// initialize variables
@@ -1969,6 +1977,9 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 		if (cacti_sizeof($port_key_array)) {
 			foreach ($port_key_array as $port_key) {
+				$brPortIfIndex = 0;
+				$brPortIfType  = 0;
+
 				// map bridge port to interface port and check type
 				if ($port_key['port_number'] > 0) {
 					if (cacti_sizeof($bridgePortIfIndexes)) {
@@ -2049,6 +2060,8 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 	} else {
 		return $new_port_key_array;
 	}
+
+	return $new_port_key_array;
 }
 
 /**
@@ -2058,9 +2071,9 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
  * @param mixed $dns
  * @param mixed $timeout
  */
-function mactrack_get_dns_from_ip($ip, $dns, $timeout = 1000) {
+function mactrack_get_dns_from_ip($ip, $dns, $timeout = 1000): string {
 	// random transaction number (for routers etc to get the reply back)
-	$data = rand(10, 99);
+	$data = (string) rand(10, 99);
 
 	// trim it to 2 bytes
 	$data = substr($data, 0, 2);
@@ -2105,8 +2118,12 @@ function mactrack_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 	// create UDP socket
 	$handle = @fsockopen("udp://$dns", 53);
 
-	@stream_set_timeout($handle, floor($timeout / 1000), ($timeout * 1000) % 1000000);
-	@stream_set_blocking($handle, 1);
+	if ($handle === false) {
+		return $ip;
+	}
+
+	@stream_set_timeout($handle, (int) floor($timeout / 1000), ($timeout * 1000) % 1000000);
+	@stream_set_blocking($handle, true);
 
 	// send our request (and store request size so we can cheat later)
 	$requestsize = @fwrite($handle, $data);
@@ -2130,7 +2147,7 @@ function mactrack_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 	}
 
 	// parse the response and find the response type
-	$type = @unpack('s', substr($response, $requestsize + 2));
+	$type = (array) @unpack('s', substr($response, $requestsize + 2));
 
 	if ($type[1] == 0x0C00) {
 		// set up our variables
@@ -2145,7 +2162,7 @@ function mactrack_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 		// reconstruct the hostname
 		do {
 			// get segment size
-			$len = unpack('c', substr($response, $position));
+			$len = (array) unpack('c', substr($response, $position));
 
 			// null terminated string, so length 0 = finished
 			if ($len[1] == 0) {
@@ -2158,10 +2175,7 @@ function mactrack_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 
 			// move pointer on to the next segment
 			$position += $len[1] + 1;
-		} while ($len != 0);
-
-		// error - return the hostname we constructed (without the . on the end)
-		return $ip;
+		} while (true);
 	}
 
 	// error - return the hostname
@@ -2178,7 +2192,7 @@ function mactrack_get_dns_from_ip($ip, $dns, $timeout = 1000) {
  * @return array Map of ifIndex => true for each interface that has an
  *               IP address, re-keyed via array_rekey().
  */
-function get_link_port_status(&$device) {
+function get_link_port_status(&$device): array {
 	$return_array = [];
 
 	$walk_array = cacti_snmp_walk($device['hostname'], $device['snmp_readstring'],
@@ -2221,7 +2235,7 @@ function get_link_port_status(&$device) {
  * @return array Map of OID suffix => value, re-keyed via
  *               array_rekey().
  */
-function xform_stripped_oid($oid, &$device, $snmp_readstring = '', $hex = false) {
+function xform_stripped_oid($oid, &$device, $snmp_readstring = '', $hex = false): array {
 	$return_array = [];
 
 	if ($snmp_readstring == '') {
@@ -2271,7 +2285,7 @@ function xform_stripped_oid($oid, &$device, $snmp_readstring = '', $hex = false)
  *
  * @return string The normalized dotted-decimal IP address.
  */
-function xform_net_address($ip_address) {
+function xform_net_address($ip_address): string {
 	$ip_address = trim($ip_address);
 
 	if (substr_count($ip_address, 'Network Address:')) {
@@ -2282,7 +2296,7 @@ function xform_net_address($ip_address) {
 	$length = strlen($ip_address);
 
 	if ($length == 4 || $length == 16) {
-		return inet_ntop(pack('A' . $length, $ip_address));
+		return (string) inet_ntop(pack('A' . $length, $ip_address));
 	} else {
 		// Adjust for HEX IP in form "0A 09 15 72"
 		$ip_address = str_replace(' ', ':', $ip_address);
@@ -2311,7 +2325,7 @@ function xform_net_address($ip_address) {
  * function expects.
  * @param mixed $mac_address
  */
-function xform_mac_address($mac_address) {
+function xform_mac_address($mac_address): string {
 	$mac_address = (string) $mac_address;
 
 	// A six-byte SNMP OctetString is binary. Every byte, including whitespace
@@ -2364,7 +2378,7 @@ function xform_mac_address($mac_address) {
  * @param  mixed  $value
  * @return string
  */
-function mactrack_sanitize_port_name_filter($value) {
+function mactrack_sanitize_port_name_filter($value): string {
 	$value = preg_replace('/[\x00-\x1F\x7F]/', '', (string) $value) ?? '';
 
 	return mb_strcut($value, 0, 255, 'UTF-8');
@@ -2378,7 +2392,7 @@ function mactrack_sanitize_port_name_filter($value) {
  * @param  string $value
  * @return array
  */
-function mactrack_port_name_filter_clause($column, $filter_type, $value) {
+function mactrack_port_name_filter_clause($column, $filter_type, $value): array {
 	switch ((int) $filter_type) {
 		case 2:
 			return ["$column = ?", [$value]];
@@ -2408,7 +2422,7 @@ function mactrack_port_name_filter_clause($column, $filter_type, $value) {
  * @param mixed $snmp_readstring
  * @param mixed $hex
  */
-function xform_standard_indexed_data($xformOID, &$device, $snmp_readstring = '', $hex = false) {
+function xform_standard_indexed_data($xformOID, &$device, $snmp_readstring = '', $hex = false): array {
 	// get raw index data
 	if ($snmp_readstring == '') {
 		$snmp_readstring = $device['snmp_readstring'];
@@ -2450,7 +2464,7 @@ function xform_standard_indexed_data($xformOID, &$device, $snmp_readstring = '',
  * @param mixed $device
  * @param mixed $snmp_readstring
  */
-function xform_dot1q_vlan_associations(&$device, $snmp_readstring = '') {
+function xform_dot1q_vlan_associations(&$device, $snmp_readstring = ''): array {
 	// get raw index data
 	if ($snmp_readstring == '') {
 		$snmp_readstring = $device['snmp_readstring'];
@@ -2473,13 +2487,13 @@ function xform_dot1q_vlan_associations(&$device, $snmp_readstring = '') {
 	if (cacti_sizeof($xformArray)) {
 		foreach ($xformArray as $xformItem) {
 			// peel off the beginning of the OID
-			$key = $xformItem['oid'];
+			$key = (string) $xformItem['oid'];
 			$key = str_replace('iso', '1', $key);
 			$key = str_replace('1.3.6.1.2.1.17.7.1.2.2.1.2.', '', $key);
 
 			// now grab the VLAN
 			$perPos                      = strpos($key, '.');
-			$output_array[$i]['vlan_id'] = substr($key,0,$perPos);
+			$output_array[$i]['vlan_id'] = substr($key,0,(int) $perPos);
 
 			// save the key for association with the dot1d table
 			$output_array[$i]['key'] = substr($key, $perPos + 1);
@@ -2497,7 +2511,7 @@ function xform_dot1q_vlan_associations(&$device, $snmp_readstring = '') {
  * @param mixed $xformOID
  * @param mixed $device
  */
-function xform_cisco_workgroup_port_data($xformOID, &$device) {
+function xform_cisco_workgroup_port_data($xformOID, &$device): array {
 	// get raw index data
 	$xformArray = cacti_snmp_walk($device['hostname'], $device['snmp_readstring'],
 		$xformOID, $device['snmp_version'], $device['snmp_username'],
@@ -2512,7 +2526,7 @@ function xform_cisco_workgroup_port_data($xformOID, &$device) {
 		foreach ($xformArray as $xformItem) {
 			$perPos                = strrpos($xformItem['oid'], '.');
 			$xformItem_piece1      = substr($xformItem['oid'], $perPos + 1);
-			$xformItem_remainder   = substr($xformItem['oid'], 0, $perPos);
+			$xformItem_remainder   = substr($xformItem['oid'], 0, (int) $perPos);
 			$perPos                = strrpos($xformItem_remainder, '.');
 			$xformItem_piece2      = substr($xformItem_remainder, $perPos + 1);
 			$xformArray[$i]['oid'] = $xformItem_piece2 . '/' . $xformItem_piece1;
@@ -2534,7 +2548,7 @@ function xform_cisco_workgroup_port_data($xformOID, &$device) {
  * @param mixed $xformLevel
  * @param mixed $hex
  */
-function xform_indexed_data($xformOID, &$device, $xformLevel = 1, $hex = false) {
+function xform_indexed_data($xformOID, &$device, $xformLevel = 1, $hex = false): array {
 	// get raw index data
 	$xformArray = cacti_snmp_walk($device['hostname'], $device['snmp_readstring'],
 		$xformOID, $device['snmp_version'], $device['snmp_username'],
@@ -2551,12 +2565,13 @@ function xform_indexed_data($xformOID, &$device, $xformLevel = 1, $hex = false) 
 	if (cacti_sizeof($xformArray)) {
 		foreach ($xformArray as $xformItem) {
 			// break down key
-			$OID = $xformItem['oid'];
+			$OID             = $xformItem['oid'];
+			$xformItem_piece = [];
 
 			for ($j = 0; $j < $xformLevel; $j++) {
 				$perPos              = strrpos($OID, '.');
 				$xformItem_piece[$j] = substr($OID, $perPos + 1);
-				$OID                 = substr($OID, 0, $perPos);
+				$OID                 = substr($OID, 0, (int) $perPos);
 			}
 
 			// reassemble key
@@ -2586,7 +2601,7 @@ function xform_indexed_data($xformOID, &$device, $xformLevel = 1, $hex = false) 
  * @param mixed $device_id
  * @param mixed $storepid
  */
-function db_process_add($device_id, $storepid = false) {
+function db_process_add($device_id, $storepid = false): void {
 	// store the PID if required
 	if ($storepid) {
 		$pid = getmypid();
@@ -2606,7 +2621,7 @@ function db_process_add($device_id, $storepid = false) {
  * table indicating that the device is done processing and the next device may start.
  * @param mixed $device_id
  */
-function db_process_remove($device_id) {
+function db_process_remove($device_id): void {
 	db_execute_prepared('DELETE FROM mac_track_processes
 		WHERE device_id = ?',
 		[$device_id]);
@@ -2620,7 +2635,7 @@ function db_process_remove($device_id) {
  * @param mixed $scan_date
  * @param mixed $start_time
  */
-function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
+function db_update_device_status(&$device, $host_up, $scan_date, $start_time): void {
 	global $debug;
 
 	$end_time    = microtime(true);
@@ -2674,7 +2689,7 @@ function db_update_device_status(&$device, $host_up, $scan_date, $start_time) {
  * @param mixed $port_array
  * @param mixed $scan_date
  */
-function db_store_device_port_results(&$device, $port_array, $scan_date) {
+function db_store_device_port_results(&$device, $port_array, $scan_date): void {
 	global $debug;
 
 	// output details to database
@@ -2766,14 +2781,14 @@ function db_check_for_ip($mac_address) {
 /**
  * perform_mactrack_db_maint - This utility removes stale records from the database.
  */
-function perform_mactrack_db_maint() {
+function perform_mactrack_db_maint(): void {
 	global $database_default;
 
 	// remove stale records from the poller database
 	$retention = read_config_option('mt_data_retention');
 
 	if (is_numeric($retention)) {
-		$retention_date = date('Y-m-d H:i:s', time() - ($retention * 86400));
+		$retention_date = date('Y-m-d H:i:s', (int) (time() - ($retention * 86400)));
 		$days           = $retention;
 	} else {
 		switch ($retention) {
@@ -2816,7 +2831,7 @@ function perform_mactrack_db_maint() {
 
 	mactrack_debug('Started deleting old records from the main database.');
 
-	$syntax = db_fetch_row('SHOW CREATE TABLE mac_track_ports');
+	$syntax = (array) db_fetch_row('SHOW CREATE TABLE mac_track_ports');
 
 	if (substr_count($syntax['Create Table'], 'PARTITION')) {
 		$partitioned = true;
@@ -2855,13 +2870,13 @@ function perform_mactrack_db_maint() {
 			$tday_ts  = strtotime('Today');
 			$tday     = date('Y-m-d', $tday_ts);
 			$tdformat = date('Ymd', $tday_ts);
-			$cur_day  = db_fetch_row("SELECT TO_DAYS('$tday') AS today");
+			$cur_day  = (array) db_fetch_row("SELECT TO_DAYS('$tday') AS today");
 			$cur_day  = $cur_day['today'];
 
 			$lday_ts  = strtotime('Yesterday');
 			$lday     = date('Y-m-d', $lday_ts);
 			$ldformat = date('Ymd', $lday_ts);
-			$last_day = db_fetch_row("SELECT TO_DAYS('$lday') AS today");
+			$last_day = (array) db_fetch_row("SELECT TO_DAYS('$lday') AS today");
 			$last_day = $last_day['today'];
 
 			mactrack_debug("There are currently '" . cacti_sizeof($number_of_partitions) . "' Mactrack Partitions, We will keep '$days' of them.");
@@ -2894,7 +2909,7 @@ function perform_mactrack_db_maint() {
 						}
 						*/
 
-						$old_day        = date('Ymd', strtotime("- $days Days"));
+						$old_day        = date('Ymd', (int) strtotime("- $days Days"));
 						$old_partitions = db_fetch_assoc_prepared('SELECT PARTITION_NAME
 							FROM `information_schema`.`partitions`
 							WHERE table_schema = ?
@@ -2952,7 +2967,7 @@ function perform_mactrack_db_maint() {
  *
  * @return void
  */
-function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.ieee.org/oui.txt') {
+function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.ieee.org/oui.txt'): void {
 	$oui_alternate = 'https://services13.ieee.org/RST/standards-ra-web/rest/assignments/download/?registry=MA-L&format=txt';
 
 	if ($type != 'ui') {
@@ -3129,7 +3144,7 @@ function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.iee
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_netscreen_arp_table($site, &$device) {
+function get_netscreen_arp_table($site, &$device): void {
 	global $debug, $scan_date;
 
 	// get the atifIndexes for the device
@@ -3176,6 +3191,7 @@ function get_netscreen_arp_table($site, &$device) {
 	// get the ifNames for the device
 	$keys = array_keys($atifIndexes);
 	$i    = 0;
+	$atEntries = [];
 
 	if (cacti_sizeof($atifIndexes)) {
 		foreach ($atifIndexes as $atifIndex) {
@@ -3238,13 +3254,13 @@ function get_netscreen_arp_table($site, &$device) {
  * @global array $config Cacti global configuration array; used to
  *                       build graph preview URLs.
  */
-function mactrack_interface_actions($device_id, $ifIndex, $show_rescan = true) {
+function mactrack_interface_actions($device_id, $ifIndex, $show_rescan = true): string {
 	global $config;
 
 	$row    = '';
 	$rescan = '';
 
-	$device = db_fetch_row_prepared('SELECT host_id, disabled
+	$device = (array) db_fetch_row_prepared('SELECT host_id, disabled
 		FROM mac_track_devices
 		WHERE device_id = ?',
 		[$device_id]);
@@ -3322,7 +3338,7 @@ function mactrack_interface_actions($device_id, $ifIndex, $show_rescan = true) {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function mactrack_format_interface_row($stat) {
+function mactrack_format_interface_row($stat): string {
 	global $config;
 
 	// we will make a row string
@@ -3376,7 +3392,7 @@ function mactrack_format_interface_row($stat) {
 	form_selectable_cell($upTime, $stat['device_id'], '', 'right');
 	form_selectable_cell(mactrack_date($stat['last_rundate']), $stat['device_id'], '', 'right');
 
-	return ob_get_clean();
+	return (string) ob_get_clean();
 }
 
 /**
@@ -3396,7 +3412,7 @@ function mactrack_format_interface_row($stat) {
  *                                       used to render the
  *                                       authorization status column.
  */
-function mactrack_format_dot1x_row($port_result) {
+function mactrack_format_dot1x_row($port_result): string {
 	global $config,$mactrack_device_status;
 
 	// we will make a row string
@@ -3443,7 +3459,7 @@ function mactrack_format_dot1x_row($port_result) {
  * @return string The formatted value with its magnitude suffix (e.g.
  *                "1.234 k").
  */
-function mactrack_display_Octets($octets) {
+function mactrack_display_Octets($octets): string {
 	$suffix = '';
 
 	while ($octets > 1024) {
@@ -3474,7 +3490,7 @@ function mactrack_display_Octets($octets) {
 	}
 
 	$octets = round($octets,4);
-	$octets = substr($octets,0,5);
+	$octets = substr((string) $octets,0,5);
 
 	return $octets . ' ' . $suffix;
 }
@@ -3494,13 +3510,13 @@ function mactrack_display_Octets($octets) {
  * @global array $config Cacti global configuration array; used to
  *                       build the poller script's command line.
  */
-function mactrack_rescan($web = false) {
+function mactrack_rescan($web = false): void {
 	global $config;
 
 	$device_id = get_filter_request_var('device_id');
 	$ifIndex   = get_filter_request_var('ifIndex');
 
-	$dbinfo = db_fetch_row_prepared('SELECT *
+	$dbinfo = (array) db_fetch_row_prepared('SELECT *
 		FROM mac_track_devices
 		WHERE device_id = ?',
 		[$device_id]);
@@ -3556,14 +3572,14 @@ function mactrack_rescan($web = false) {
  * @global array $config Cacti global configuration array; used to
  *                       build the poller script's command line.
  */
-function mactrack_site_scan($web = false) {
+function mactrack_site_scan($web = false): void {
 	global $config;
 
 	get_filter_request_var('site_id');
 
 	$site_id = get_filter_request_var('site_id');
 
-	$dbinfo  = db_fetch_row_prepared('SELECT *
+	$dbinfo  = (array) db_fetch_row_prepared('SELECT *
 		FROM mac_track_sites
 		WHERE site_id = ?',
 		[$site_id]);
@@ -3608,12 +3624,12 @@ function mactrack_site_scan($web = false) {
  *
  * @return void Prints a JSON response and does not return a value.
  */
-function mactrack_enable() {
+function mactrack_enable(): void {
 	// ================= input validation =================
 	get_filter_request_var('device_id');
 	// ====================================================
 
-	$dbinfo = db_fetch_row_prepared('SELECT *
+	$dbinfo = (array) db_fetch_row_prepared('SELECT *
 		FROM mac_track_devices
 		WHERE device_id = ?',
 		[get_request_var('device_id')]);
@@ -3629,7 +3645,9 @@ function mactrack_enable() {
 		[get_request_var('device_id')]);
 
 	// get the new html
-	$html = mactrack_format_device_row($dbinfo);
+	ob_start();
+	mactrack_format_device_row((array) $dbinfo);
+	$html = ob_get_clean();
 
 	// send the response back to the browser
 	$data['device_id'] = get_request_var('device_id');
@@ -3647,12 +3665,12 @@ function mactrack_enable() {
  *
  * @return void Prints a JSON response and does not return a value.
  */
-function mactrack_disable() {
+function mactrack_disable(): void {
 	// ================= input validation =================
 	get_filter_request_var('device_id');
 	// ====================================================
 
-	$dbinfo = db_fetch_row_prepared('SELECT *
+	$dbinfo = (array) db_fetch_row_prepared('SELECT *
 		FROM mactrack_devices
 		WHERE device_id = ?',
 		[get_request_var('device_id')]);
@@ -3668,7 +3686,9 @@ function mactrack_disable() {
 		[get_request_var('device_id')]);
 
 	// get the new html
-	$html = mactrack_format_device_row($stat);
+	ob_start();
+	mactrack_format_device_row((array) $dbinfo);
+	$html = ob_get_clean();
 
 	// send the response back to the browser
 	$data['device_id'] = get_request_var('device_id');
@@ -3687,8 +3707,8 @@ function mactrack_disable() {
  *
  * @return void
  */
-function mactrack_log_action($message) {
-	$user = db_fetch_row_prepared('SELECT username, full_name
+function mactrack_log_action($message): void {
+	$user = (array) db_fetch_row_prepared('SELECT username, full_name
 		FROM user_auth
 		WHERE id = ?',
 		[$_SESSION['sess_user_id']]);
@@ -3705,7 +3725,7 @@ function mactrack_log_action($message) {
  *
  * @return string The shortened (or unmodified) date string.
  */
-function mactrack_date($date) {
+function mactrack_date($date): string {
 	$year = date('Y');
 
 	return (substr_count($date, $year) ? substr($date,5) : $date);
@@ -3720,7 +3740,7 @@ function mactrack_date($date) {
  *
  * @return string The CSS class name for the row.
  */
-function mactrack_int_row_class($stat) {
+function mactrack_int_row_class($stat): string {
 	if ($stat['int_errors_present'] == '1') {
 		return 'int_errors';
 	}
@@ -3748,7 +3768,7 @@ function mactrack_int_row_class($stat) {
  *
  * @return string The CSS class name for the row.
  */
-function mactrack_dot1x_row_class($port_result) {
+function mactrack_dot1x_row_class($port_result): string {
 	if ($port_result['status'] == '7') {
 		return 'dot1x_authn_failed';
 	}
@@ -3788,17 +3808,17 @@ function mactrack_dot1x_row_class($port_result) {
  * @param mixed $filter
  * @param mixed $fields
  * @returns - (string) The formatted SQL syntax */
-function mactrack_create_sql_filter($filter, $fields) {
+function mactrack_create_sql_filter($filter, $fields): string {
 	$query = '';
 
 	// field names are required
 	if (!cacti_sizeof($fields)) {
-		return;
+		return '';
 	}
 
 	// the filter must be non-blank
 	if ($filter == '') {
-		return;
+		return '';
 	}
 
 	$elements = explode(' ', $filter);
@@ -3842,10 +3862,12 @@ function mactrack_create_sql_filter($filter, $fields) {
  * @return string The formatted duration string (e.g. "3 Hours"), or
  *                'N/A' when disabled/empty.
  */
-function mactrack_display_hours($value) {
+function mactrack_display_hours($value): string {
 	if ($value == '' || $value == 'disabled') {
 		return __('N/A', 'mactrack');
 	}
+
+	$value = (float) $value;
 
 	if ($value < 60) {
 		return __('%d Minutes', round($value,0), 'mactrack');
@@ -3876,7 +3898,7 @@ function mactrack_display_hours($value) {
  *
  * @return void
  */
-function mactrack_display_stats() {
+function mactrack_display_stats(): void {
 	// check if scanning is running
 	$processes = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes');
 	$timing    = read_config_option('mt_collection_timing', true);
@@ -3895,10 +3917,10 @@ function mactrack_display_stats() {
 	if ($mactrack_stats != '') {
 		$stats = explode(' ', $mactrack_stats);
 
-		if (cacti_sizeof($stats == 3)) {
+		if (cacti_sizeof($stats) == 3) {
 			$time = explode(':', $stats[0]);
 			$time = $time[1];
-			$time = round($time, 1);
+			$time = round((float) $time, 1);
 
 			$proc = explode(':', $stats[1]);
 			$proc = $proc[1];
@@ -3935,7 +3957,7 @@ function mactrack_display_stats() {
  *
  * @return void
  */
-function mactrack_legend_row($class, $text) {
+function mactrack_legend_row($class, $text): void {
 	print "<td width='16.67%' class='$class' style='text-align:center;;'>$text</td>";
 }
 
@@ -3959,7 +3981,7 @@ function mactrack_legend_row($class, $text) {
  *                                      with other functions in this
  *                                      file; not used directly here.
  */
-function mactrack_format_device_row($device, $actions = false) {
+function mactrack_format_device_row($device, $actions = false): void {
 	global $config, $mactrack_device_types;
 
 	// viewer level
@@ -4013,7 +4035,7 @@ function mactrack_format_device_row($device, $actions = false) {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function mactrack_mail($to, $fromemail, $fromname, $subject, $message, $headers = '') {
+function mactrack_mail($to, $fromemail, $fromname, $subject, $message, $headers = ''): void {
 	global $config;
 
 	$v       = plugin_mactrack_version();
@@ -4040,7 +4062,7 @@ function mactrack_mail($to, $fromemail, $fromname, $subject, $message, $headers 
  *
  * @return void
  */
-function mactrack_sanitize_load_report() {
+function mactrack_sanitize_load_report(): void {
 	if (!isset_request_var('report')) {
 		if (isset($_SESSION['sess_mt_tab']) && $_SESSION['sess_mt_tab'] != '') {
 			set_request_var('report', $_SESSION['sess_mt_tab']);
@@ -4068,7 +4090,7 @@ function mactrack_sanitize_load_report() {
  * @global array $config Cacti global configuration array; used to
  *                       build each tab's URL.
  */
-function mactrack_tabs() {
+function mactrack_tabs(): void {
 	global $config;
 
 	// present a tabbed interface
@@ -4115,7 +4137,7 @@ function mactrack_tabs() {
  *
  * @return string The vendor name, or 'Unknown' if no match is found.
  */
-function mactrack_get_vendor_name($mac) {
+function mactrack_get_vendor_name($mac): string {
 	$vendor_mac = substr($mac,0,8);
 
 	$vendor_name = db_fetch_cell_prepared('SELECT vendor_name FROM mac_track_oui_database WHERE vendor_mac = ?', [$vendor_mac]);
@@ -4139,7 +4161,7 @@ function mactrack_get_vendor_name($mac) {
  * @global array $item_rows Rows-per-page option list used to populate
  *                         the rows dropdown.
  */
-function mactrack_site_filter($page = 'mactrack_sites.php') {
+function mactrack_site_filter($page = 'mactrack_sites.php'): void {
 	global $item_rows;
 
 	?>
@@ -4311,7 +4333,7 @@ if (!function_exists('cacti_sizeof')) {
  *
  * @return int The array's element count, or 0 if not a valid array.
  */
-function cacti_sizeof($array) {
+function cacti_sizeof($array): int {
 		return ($array === false || !is_array($array)) ? 0 : sizeof($array);
 	}
 }
@@ -4326,7 +4348,7 @@ if (!function_exists('cacti_count')) {
  *
  * @return int The array's element count, or 0 if not a valid array.
  */
-function cacti_count($array) {
+function cacti_count($array): int {
 		return ($array === false || !is_array($array)) ? 0 : count($array);
 	}
 }
@@ -4335,10 +4357,10 @@ function cacti_count($array) {
  * Safely retrieves a value from an array by key, returning a default
  * value instead of a warning/notice when the key doesn't exist.
  *
- * @param array  $array   The array to read from.
- * @param string $key     The key to look up.
- * @param mixed  $default The value to return when the key doesn't
- *                        exist (default '').
+ * @param array      $array   The array to read from.
+ * @param int|string $key     The key to look up.
+ * @param mixed      $default The value to return when the key doesn't
+ *                            exist (default '').
  *
  * @return mixed The value at $key, or $default if not present.
  */
@@ -4426,7 +4448,7 @@ function mactrack_format_mac($mac) {
  *                '(Vlan|Loopback|Null)' pattern when the input is
  *                empty or invalid.
  */
-function mactrack_validate_ignore_ports_pattern($pattern) {
+function mactrack_validate_ignore_ports_pattern($pattern): string {
 	$default = '(Vlan|Loopback|Null)';
 	$pattern = is_string($pattern) ? $pattern : '';
 
@@ -4463,7 +4485,7 @@ function mactrack_validate_ignore_ports_pattern($pattern) {
  *
  * @return string The validated "ignore ports" regex pattern.
  */
-function mactrack_get_ignore_ports_pattern() {
+function mactrack_get_ignore_ports_pattern(): string {
 	$stored_pattern = read_config_option('mt_ignorePorts', true);
 	$pattern        = mactrack_validate_ignore_ports_pattern($stored_pattern);
 
@@ -4488,7 +4510,7 @@ function mactrack_get_ignore_ports_pattern() {
  * @return string The SQL predicate fragment (using `?` placeholders)
  *                to AND into a WHERE clause.
  */
-function mactrack_get_ignore_ports_predicate(&$params) {
+function mactrack_get_ignore_ports_predicate(&$params): string {
 	$pattern  = mactrack_get_ignore_ports_pattern();
 	$params[] = $pattern;
 	$params[] = $pattern;
@@ -4510,7 +4532,7 @@ function mactrack_get_ignore_ports_predicate(&$params) {
  * @return bool True if the ignore-ports predicate should be applied,
  *              false otherwise.
  */
-function mactrack_interface_filter_needs_ignore($issues, $bwusage) {
+function mactrack_interface_filter_needs_ignore($issues, $bwusage): bool {
 	$issues = (string) $issues;
 
 	return in_array($issues, ['-3', '-4', '-1', '0', '1', '2', '3'], true) ||

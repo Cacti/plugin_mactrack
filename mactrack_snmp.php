@@ -94,8 +94,8 @@ switch (get_request_var('action')) {
  *
  * @return void
  */
-function duplicate_mactrack($snmp_id, $new_name) {
-	$snmp_opt       = db_fetch_row_prepared('SELECT * FROM mac_track_snmp WHERE id = ?', [$snmp_id]);
+function duplicate_mactrack($snmp_id, $new_name): void {
+	$snmp_opt       = (array) db_fetch_row_prepared('SELECT * FROM mac_track_snmp WHERE id = ?', [$snmp_id]);
 	$snmp_opt_items = db_fetch_assoc_prepared('SELECT * FROM mac_track_snmp_items WHERE snmp_id = ?', [$snmp_id]);
 
 	// substitute the title variable
@@ -142,7 +142,7 @@ function duplicate_mactrack($snmp_id, $new_name) {
  *
  * @return void This function calls exit() and never returns normally.
  */
-function form_mactrack_snmp_save() {
+function form_mactrack_snmp_save(): void {
 	if (isset_request_var('save_component_mactrack_snmp')) {
 		// ================= input validation =================
 		get_filter_request_var('id');
@@ -185,6 +185,8 @@ function form_mactrack_snmp_save() {
 		$save['snmp_retries']         = form_input_validate(get_nfilter_request_var('snmp_retries'), 'snmp_retries', '^[0-9]+$', false, 3);
 		$save['max_oids']             = form_input_validate(get_nfilter_request_var('max_oids'), 'max_oids', '^[0-9]+$', false, 3);
 
+		$item_id = 0;
+
 		if (!is_error_message()) {
 			$item_id = sql_save($save, 'mac_track_snmp_items');
 
@@ -196,7 +198,7 @@ function form_mactrack_snmp_save() {
 		}
 
 		if (is_error_message()) {
-			header('Location: mactrack_snmp.php?header=false&action=item_edit&id=' . get_nfilter_request_var('id') . '&item_id=' . (empty($item_id) ? get_nfilter_request_var('id') : $item_id));
+			header('Location: mactrack_snmp.php?header=false&action=item_edit&id=' . get_nfilter_request_var('id') . '&item_id=' . ($item_id != 0 ? $item_id : get_nfilter_request_var('id')));
 		} else {
 			header('Location: mactrack_snmp.php?header=false&action=edit&id=' . get_nfilter_request_var('id'));
 		}
@@ -225,7 +227,7 @@ function form_mactrack_snmp_save() {
  *                                      bulk-actions confirmation
  *                                      display.
  */
-function form_mactrack_snmp_actions() {
+function form_mactrack_snmp_actions(): void {
 	global $config, $mactrack_snmp_actions;
 
 	// ================= input validation =================
@@ -333,7 +335,7 @@ function form_mactrack_snmp_actions() {
  *
  * @return void
  */
-function mactrack_snmp_item_movedown() {
+function mactrack_snmp_item_movedown(): void {
 	// ================= input validation =================
 	get_filter_request_var('item_id');
 	get_filter_request_var('id');
@@ -349,7 +351,7 @@ function mactrack_snmp_item_movedown() {
  *
  * @return void
  */
-function mactrack_snmp_item_moveup() {
+function mactrack_snmp_item_moveup(): void {
 	// ================= input validation =================
 	get_filter_request_var('item_id');
 	get_filter_request_var('id');
@@ -364,7 +366,7 @@ function mactrack_snmp_item_moveup() {
  *
  * @return void
  */
-function mactrack_snmp_item_remove() {
+function mactrack_snmp_item_remove(): void {
 	// ================= input validation =================
 	get_filter_request_var('item_id');
 	// ====================================================
@@ -390,7 +392,7 @@ function mactrack_snmp_item_remove() {
  *                                               form's field
  *                                               definitions.
  */
-function mactrack_snmp_item_edit() {
+function mactrack_snmp_item_edit(): void {
 	global $config;
 	global $fields_mactrack_snmp_item_edit;
 
@@ -400,14 +402,14 @@ function mactrack_snmp_item_edit() {
 	// ====================================================
 
 	// fetch the current mactrack snmp record
-	$snmp_option = db_fetch_row_prepared('SELECT *
+	$snmp_option = (array) db_fetch_row_prepared('SELECT *
 		FROM mac_track_snmp
 		WHERE id = ?',
 		[get_request_var('id')]);
 
 	// if an existing item was requested, fetch data for it
 	if (get_request_var('item_id', '') !== '') {
-		$mactrack_snmp_item = db_fetch_row_prepared('SELECT *
+		$mactrack_snmp_item = (array) db_fetch_row_prepared('SELECT *
 			FROM mac_track_snmp_items
 			WHERE id = ?',
 			[get_request_var('item_id')]);
@@ -428,7 +430,7 @@ function mactrack_snmp_item_edit() {
 	draw_edit_form(
 		[
 			'config' => ['no_form_tag' => true],
-			'fields' => inject_form_variables($fields_mactrack_snmp_item_edit, ($mactrack_snmp_item ?? []))
+			'fields' => inject_form_variables($fields_mactrack_snmp_item_edit, $mactrack_snmp_item)
 		]
 	);
 
@@ -470,7 +472,7 @@ function mactrack_snmp_item_edit() {
  * @global array $fields_mactrack_snmp_edit The SNMP option set edit
  *                                          form's field definitions.
  */
-function mactrack_snmp_edit() {
+function mactrack_snmp_edit(): void {
 	global $config, $fields_mactrack_snmp_edit;
 
 	// ================= input validation =================
@@ -491,7 +493,7 @@ function mactrack_snmp_edit() {
 	$snmp_group = [];
 
 	if (!isempty_request_var('id')) {
-		$snmp_group = db_fetch_row_prepared('SELECT *
+		$snmp_group = (array) db_fetch_row_prepared('SELECT *
 			FROM mac_track_snmp
 			WHERE id = ?',
 			[get_request_var('id')]);
@@ -591,7 +593,7 @@ function mactrack_snmp_edit() {
  *                                      action label, used for the
  *                                      bulk-actions dropdown.
  */
-function mactrack_snmp() {
+function mactrack_snmp(): void {
 	global $config, $item_rows;
 	global $mactrack_snmp_actions;
 
@@ -705,7 +707,7 @@ function mactrack_snmp() {
  * @global array $item_rows Rows-per-page option list used to populate
  *                         the rows dropdown.
  */
-function snmp_options_filter() {
+function snmp_options_filter(): void {
 	global $item_rows;
 
 	?>

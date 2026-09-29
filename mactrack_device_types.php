@@ -133,7 +133,7 @@ switch (get_request_var('action')) {
  *
  * @return void
  */
-function form_save() {
+function form_save(): void {
 	if ((isset_request_var('save_component_device_type')) && (isempty_request_var('add_dq_y'))) {
 		$device_type_id = api_mactrack_device_type_save(get_nfilter_request_var('device_type_id'),
 			get_nfilter_request_var('description'), get_nfilter_request_var('vendor'),
@@ -155,7 +155,7 @@ function form_save() {
 	if (isset_request_var('save_component_import')) {
 		if (($_FILES['import_file']['tmp_name'] != 'none') && ($_FILES['import_file']['tmp_name'] != '')) {
 			// file upload
-			$csv_data = file($_FILES['import_file']['tmp_name']);
+			$csv_data = (array) file($_FILES['import_file']['tmp_name']);
 
 			// obtain debug information if it's set
 			$debug_data = mactrack_device_type_import_processor($csv_data);
@@ -180,7 +180,7 @@ function form_save() {
  *
  * @return void
  */
-function api_mactrack_device_type_remove($device_type_id) {
+function api_mactrack_device_type_remove($device_type_id): void {
 	db_execute_prepared('DELETE FROM mac_track_device_types
 		WHERE device_type_id = ?',
 		[$device_type_id]);
@@ -228,7 +228,7 @@ function api_mactrack_device_type_remove($device_type_id) {
  */
 function api_mactrack_device_type_save($device_type_id, $description,
 	$vendor, $device_type, $sysDescr_match, $sysObjectID_match, $scanning_function,
-	$ip_scanning_function, $dot1x_scanning_function, $serial_number_oid, $lowPort, $highPort, $disabled) {
+	$ip_scanning_function, $dot1x_scanning_function, $serial_number_oid, $lowPort, $highPort, $disabled): int {
 	$save['device_type_id']          = $device_type_id;
 	$save['description']             = form_input_validate($description, 'description', '', false, 3);
 	$save['vendor']                  = $vendor;
@@ -277,9 +277,9 @@ function api_mactrack_device_type_save($device_type_id, $description,
  *
  * @return void
  */
-function api_mactrack_duplicate_device_type($device_type_id, $dup_id, $device_type_title) {
+function api_mactrack_duplicate_device_type($device_type_id, $dup_id, $device_type_title): void {
 	if (!empty($device_type_id)) {
-		$device_type = db_fetch_row_prepared('SELECT *
+		$device_type = (array) db_fetch_row_prepared('SELECT *
 			FROM mac_track_device_types
 			WHERE device_type_id = ?',
 			[$device_type_id]);
@@ -341,7 +341,7 @@ function api_mactrack_duplicate_device_type($device_type_id, $dup_id, $device_ty
  *                                                    used directly
  *                                                    here.
  */
-function form_actions() {
+function form_actions(): void {
 	global $config, $device_types_actions, $fields_mactrack_device_types_edit;
 
 	// ================= input validation =================
@@ -379,7 +379,7 @@ function form_actions() {
 			input_validate_input_number($matches[1]);
 			// ====================================================
 
-			$device_types_info = db_fetch_row_prepared('SELECT description
+			$device_types_info = (array) db_fetch_row_prepared('SELECT description
 				FROM mac_track_device_types
 				WHERE device_type_id = ?',
 				[$matches[1]]);
@@ -450,7 +450,7 @@ function form_actions() {
  *
  * @return void
  */
-function mactrack_device_type_request_validation() {
+function mactrack_device_type_request_validation(): void {
 	// ================= input validation and session storage =================
 	$filters = [
 		'rows' => [
@@ -517,7 +517,7 @@ function mactrack_device_type_request_validation() {
  *                                       array (declared but not used
  *                                       directly here).
  */
-function mactrack_device_type_export() {
+function mactrack_device_type_export(): void {
 	global $device_actions, $mactrack_device_types, $config;
 
 	mactrack_device_type_request_validation();
@@ -566,7 +566,7 @@ function mactrack_device_type_export() {
  *
  * @return void
  */
-function mactrack_rescan_device_types() {
+function mactrack_rescan_device_types(): void {
 	global $cnn_id;
 
 	// let's allocate an array for results
@@ -652,7 +652,7 @@ function mactrack_rescan_device_types() {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function mactrack_device_type_import() {
+function mactrack_device_type_import(): void {
 	global $config;
 
 	?><form method='post' action='mactrack_device_types.php?action=import' enctype='multipart/form-data'><?php
@@ -746,10 +746,24 @@ function mactrack_device_type_import() {
  * @return array A list of human-readable per-row result messages
  *               describing what was imported.
  */
-function mactrack_device_type_import_processor(&$device_types) {
+function mactrack_device_type_import_processor(&$device_types): array {
 	$i              = 0;
 	$return_array   = [];
+	/** @var list<int> $insert_columns */
 	$insert_columns = [];
+
+	$save_order           = '(';
+	$update_suffix        = '';
+	/** @var int $device_type_id */
+	$device_type_id       = -1;
+	/** @var int $sysDescr_match_id */
+	$sysDescr_match_id    = -1;
+	/** @var int $sysObjectID_match_id */
+	$sysObjectID_match_id = -1;
+	/** @var int $save_vendor_id */
+	$save_vendor_id       = -1;
+	/** @var int $save_description_id */
+	$save_description_id   = -1;
 
 	$device_type_array[1] = __('Switch/Hub', 'mactrack');
 	$device_type_array[2] = __('Switch/Router', 'mactrack');
@@ -906,7 +920,12 @@ function mactrack_device_type_import_processor(&$device_types) {
 				break;
 			}
 		} else {
+			$sysDescr_match    = '';
+			$sysObjectID_match = '';
+			$vendor            = '';
+			$description       = '';
 			$save_value   = '(';
+			/** @var int $j */
 			$j            = 0;
 			$first_column = true;
 			$sql_where    = '';
@@ -1044,7 +1063,7 @@ function mactrack_device_type_import_processor(&$device_types) {
  *                                                  edit form's field
  *                                                  definitions.
  */
-function mactrack_device_type_edit() {
+function mactrack_device_type_edit(): void {
 	global $config, $fields_mactrack_device_type_edit;
 
 	// ================= input validation =================
@@ -1052,7 +1071,7 @@ function mactrack_device_type_edit() {
 	// ====================================================
 
 	if (!isempty_request_var('device_type_id')) {
-		$device_type = db_fetch_row_prepared('SELECT *
+		$device_type = (array) db_fetch_row_prepared('SELECT *
 			FROM mac_track_device_types
 			WHERE device_type_id = ?',
 			[get_request_var('device_type_id')]);
@@ -1092,7 +1111,7 @@ function mactrack_device_type_edit() {
  *
  * @return array The matching device type records.
  */
-function mactrack_get_device_types(&$sql_where, $rows, $apply_limits = true) {
+function mactrack_get_device_types(&$sql_where, $rows, $apply_limits = true): array {
 	if (get_request_var('filter') != '') {
 		$sql_where = ' WHERE (mtdt.vendor LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR
 			mtdt.description LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR
@@ -1156,7 +1175,7 @@ function mactrack_get_device_types(&$sql_where, $rows, $apply_limits = true) {
  * @global array $item_rows              Default number of rows per
  *                                      page from Cacti settings.
  */
-function mactrack_device_type() {
+function mactrack_device_type(): void {
 	global $device_types_actions, $mactrack_device_types, $config, $item_rows;
 
 	mactrack_device_type_request_validation();
@@ -1257,7 +1276,7 @@ function mactrack_device_type() {
  * @global array $item_rows Cacti's standard row-count option list,
  *                         used to populate the rows dropdown.
  */
-function mactrack_device_type_filter() {
+function mactrack_device_type_filter(): void {
 	global $item_rows;
 
 	?>

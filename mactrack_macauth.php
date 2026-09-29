@@ -67,7 +67,7 @@ switch (get_request_var('action')) {
  *
  * @return void
  */
-function form_save() {
+function form_save(): void {
 	if ((isset_request_var('save_component_maca')) && (isempty_request_var('add_dq_y'))) {
 		$mac_id = api_mactrack_maca_save(get_filter_request_var('mac_id'),
 			get_nfilter_request_var('mac_address'),
@@ -109,7 +109,7 @@ function form_save() {
  *                                           in this file; not used
  *                                           directly here.
  */
-function form_actions() {
+function form_actions(): void {
 	global $config, $maca_actions, $fields_mactrack_maca_edit;
 
 	// ================= input validation =================
@@ -205,7 +205,7 @@ function form_actions() {
  *
  * @return int The saved mac_id, or 0 if validation/save failed.
  */
-function api_mactrack_maca_save($mac_id, $mac_address, $description) {
+function api_mactrack_maca_save($mac_id, $mac_address, $description): int {
 	$save['mac_id']      = $mac_id;
 	$save['mac_address'] = form_input_validate($mac_address, 'mac_address', '', false, 3);
 	$save['description'] = form_input_validate($description, 'description', '', false, 3);
@@ -242,7 +242,7 @@ function api_mactrack_maca_save($mac_id, $mac_address, $description) {
  *
  * @return void
  */
-function api_mactrack_maca_remove($mac_id) {
+function api_mactrack_maca_remove($mac_id): void {
 	$mac_address = db_fetch_cell_prepared('SELECT mac_address
 		FROM mac_track_macauth
 		WHERE mac_id = ?',
@@ -286,7 +286,7 @@ function api_mactrack_maca_remove($mac_id) {
  *
  * @return array The matching MAC authorization records.
  */
-function mactrack_maca_get_maca_records(&$sql_where, $rows, $apply_limits = true) {
+function mactrack_maca_get_maca_records(&$sql_where, $rows, $apply_limits = true): array {
 	// form the 'where' clause for our main sql query
 	$sql_where = '';
 
@@ -321,7 +321,7 @@ function mactrack_maca_get_maca_records(&$sql_where, $rows, $apply_limits = true
  * @global array $fields_mactrack_maca_edit The MAC authorization edit
  *                                         form's field definitions.
  */
-function mactrack_maca_edit() {
+function mactrack_maca_edit(): void {
 	global $fields_mactrack_maca_edit;
 
 	// ================= input validation =================
@@ -329,7 +329,7 @@ function mactrack_maca_edit() {
 	// ====================================================
 
 	if (!isempty_request_var('mac_id')) {
-		$mac_record   = db_fetch_row_prepared('SELECT *
+		$mac_record   = (array) db_fetch_row_prepared('SELECT *
 			FROM mac_track_macauth
 			WHERE mac_id = ?',
 			[get_request_var('mac_id')]);
@@ -371,7 +371,7 @@ function mactrack_maca_edit() {
  * @global int   $item_rows   Default number of rows per page from
  *                            Cacti settings.
  */
-function mactrack_maca() {
+function mactrack_maca(): void {
 	global $maca_actions, $config, $item_rows;
 
 	// ================= input validation and session storage =================
@@ -471,7 +471,7 @@ function mactrack_maca() {
  * @global array $item_rows Rows-per-page option list used to populate
  *                         the rows dropdown.
  */
-function mactrack_maca_filter() {
+function mactrack_maca_filter(): void {
 	global $item_rows;
 
 	?>

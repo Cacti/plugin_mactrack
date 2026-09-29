@@ -18,7 +18,7 @@
  * @param  callable|null $system_resolver
  * @return string
  */
-function mactrack_resolve_hostname($resolver, $use_resolver, $ip_address, $system_resolver = null) {
+function mactrack_resolve_hostname($resolver, $use_resolver, $ip_address, $system_resolver = null): string {
 	if ($system_resolver === null) {
 		$system_resolver = 'gethostbyaddr';
 	}

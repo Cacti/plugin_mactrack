@@ -77,7 +77,7 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 	$snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context,
 	$snmp_engine_id, $snmp_port, $snmp_timeout, $snmp_retries, $max_oids,
 	$ignorePorts, $notes, $user_name, $user_password, $term_type,
-	$private_key_path, $disabled, $scan_trunk_port, $device_type_id) {
+	$private_key_path, $disabled, $scan_trunk_port, $device_type_id): int {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
@@ -122,7 +122,7 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 			sync_mactrack_to_cacti($save);
 		} else {
 			raise_message(2);
-			mactrack_debug("ERROR: Cacti Device: ($device_id/$host_id): $hostname, error on save: " . serialize($save));
+			mactrack_debug('ERROR: Cacti Device: (' . (is_scalar($device_id) ? (string) $device_id : '') . "/$host_id): $hostname, error on save: " . serialize($save));
 		}
 	} else {
 		mactrack_debug("ERROR: Cacti Device: ($device_id/$host_id): $hostname, error on verify: " . serialize($save));
@@ -140,7 +140,7 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
  *
  * @return void
  */
-function api_mactrack_device_remove($device_id) {
+function api_mactrack_device_remove($device_id): void {
 	db_execute('DELETE FROM mac_track_devices WHERE device_id=' . $device_id);
 	db_execute('DELETE FROM mac_track_aggregated_ports WHERE device_id=' . $device_id);
 	db_execute('DELETE FROM mac_track_interfaces WHERE device_id=' . $device_id);
@@ -168,7 +168,7 @@ function api_mactrack_device_remove($device_id) {
  *
  * @return int The saved site_id, or 0 if validation/save failed.
  */
-function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops_contact, $facilities_contact, $site_info, $skip_vlans, $scan_vlans) {
+function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops_contact, $facilities_contact, $site_info, $skip_vlans, $scan_vlans): int {
 	$save['site_id']            = $site_id;
 	$save['site_name']          = form_input_validate($site_name, 'site_name', '', false, 3);
 	$save['site_info']          = form_input_validate($site_info, 'site_info', '', true, 3);
@@ -202,7 +202,7 @@ function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops
  *
  * @return void
  */
-function api_mactrack_site_remove($site_id) {
+function api_mactrack_site_remove($site_id): void {
 	db_execute('DELETE FROM mac_track_sites WHERE site_id=' . $site_id);
 	db_execute('DELETE FROM mac_track_devices WHERE site_id=' . $site_id);
 	db_execute('DELETE FROM mac_track_aggregated_ports WHERE site_id=' . $site_id);
@@ -228,7 +228,7 @@ function api_mactrack_site_remove($site_id) {
  * @global array $config Cacti global configuration array; used to
  *                       locate library files to include.
  */
-function sync_mactrack_to_cacti($mt_device) {
+function sync_mactrack_to_cacti($mt_device): void {
 	global $config;
 
 	include_once($config['base_path'] . '/lib/api_device.php');
@@ -243,7 +243,7 @@ function sync_mactrack_to_cacti($mt_device) {
 		$mt_device['snmp_engine_id'] ??= '';
 
 		// fetch current data for cacti device
-		$cacti_device = db_fetch_row_prepared('SELECT * FROM host WHERE id = ?', [$mt_device['host_id']]);
+		$cacti_device = (array) db_fetch_row_prepared('SELECT * FROM host WHERE id = ?', [$mt_device['host_id']]);
 
 		if (cacti_sizeof($cacti_device)) {
 			// update cacti device
@@ -275,7 +275,7 @@ function sync_mactrack_to_cacti($mt_device) {
  * @global array $config Cacti global configuration array; used to
  *                       locate library files to include.
  */
-function sync_cacti_to_mactrack($device) {
+function sync_cacti_to_mactrack($device): array {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
@@ -337,7 +337,7 @@ function sync_cacti_to_mactrack($device) {
  * @arg $action		actions to be performed from dropdown
  * @param mixed $action
  */
-function mactrack_device_action_array($action) {
+function mactrack_device_action_array($action): array {
 	$action['plugin_mactrack_device'] = __('Import into Mactrack Database', 'mactrack');
 
 	return $action;
@@ -353,7 +353,8 @@ function mactrack_device_action_array($action) {
  *                   'drp_action' and 'host_array' when hosts were
  *                   selected.
  *
- * @return void
+ * @return array The $save array, augmented with a rendered host list
+ *               when applicable.
  *
  * @global array $config                      Cacti global
  *                                            configuration array
@@ -364,7 +365,7 @@ function mactrack_device_action_array($action) {
  *                                            used as a template for
  *                                            the prompted fields.
  */
-function mactrack_device_action_prepare($save) {
+function mactrack_device_action_prepare($save): array {
 	global $config, $fields_mactrack_device_edit;
 
 	if (isset($save['drp_action']) && $save['drp_action'] == 'plugin_mactrack_device') {
@@ -413,7 +414,7 @@ function mactrack_device_action_prepare($save) {
  * return				-
  * @param mixed $action
  *  */
-function mactrack_device_action_execute($action) {
+function mactrack_device_action_execute($action): string {
 	global $config;
 
 	if ($action == 'plugin_mactrack_device') {
@@ -425,12 +426,12 @@ function mactrack_device_action_execute($action) {
 				// work on all selected hosts
 				for ($i = 0; ($i < cacti_sizeof($selected_items)); $i++) {
 					// fetch row from host table
-					$device = db_fetch_row_prepared('SELECT * from host WHERE id = ?', [$selected_items[$i]]);
+					$device = (array) db_fetch_row_prepared('SELECT * from host WHERE id = ?', [$selected_items[$i]]);
 
 					// now fetch the related device from mac_track_devices, if any
 					$mt_device = db_fetch_row_prepared('SELECT * from mac_track_devices WHERE host_id = ?', [$device['id']]);
 
-					if (is_array($device)) {
+					if (cacti_sizeof($device)) {
 						// update mac_track_device
 						$device_id = api_mactrack_device_save(
 							($mt_device['device_id'] ?? '0'), 	// not a host column

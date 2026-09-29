@@ -54,7 +54,7 @@ if (isset_request_var('export')) {
  *
  * @return void
  */
-function mactrack_view_dot1x_validate_request_vars() {
+function mactrack_view_dot1x_validate_request_vars(): void {
 	// ================= input validation and session storage =================
 	$filters = [
 		'rows' => [
@@ -145,7 +145,7 @@ function mactrack_view_dot1x_validate_request_vars() {
  *
  * @return void
  */
-function mactrack_view_export_dot1x() {
+function mactrack_view_export_dot1x(): void {
 	mactrack_view_dot1x_validate_request_vars();
 
 	$sql_where  = '';
@@ -202,7 +202,7 @@ function mactrack_view_export_dot1x() {
  *
  * @return array The matching 802.1x authentication records.
  */
-function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $apply_limits = true) {
+function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $apply_limits = true): array {
 	$sql_params = [];
 
 	// status sql where
@@ -224,7 +224,7 @@ function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $appl
 
 	// form the 'where' clause for our main sql query
 	if (get_request_var('mac_filter') != '') {
-		$mac_filter = str_replace(':', '', get_request_var('mac_filter'));
+		$mac_filter = str_replace(':', '', (string) get_request_var('mac_filter'));
 		$mac_filter = str_replace('-', '', $mac_filter);
 		$mac_filter = str_replace('.', '', $mac_filter);
 
@@ -417,7 +417,7 @@ function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $appl
  * @global array  $item_rows              Default number of rows per
  *                                        page from Cacti settings.
  */
-function mactrack_view_dot1x() {
+function mactrack_view_dot1x(): void {
 	global $title, $report, $mactrack_search_types, $rows_selector, $config;
 	global $item_rows;
 
@@ -579,7 +579,7 @@ function mactrack_view_dot1x() {
  *                                       used to populate the MAC/port
  *                                       name/IP filter type dropdowns.
  */
-function mactrack_dot1x_filter() {
+function mactrack_dot1x_filter(): void {
 	global $item_rows, $rows_selector, $mactrack_search_types;
 
 	?>

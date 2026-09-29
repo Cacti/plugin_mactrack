@@ -92,7 +92,7 @@ switch (get_request_var('action')) {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function form_mactrack_save() {
+function form_mactrack_save(): void {
 	global $config;
 
 	if ((isset_request_var('save_component_device')) && (isempty_request_var('add_dq_y'))) {
@@ -115,7 +115,7 @@ function form_mactrack_save() {
 	if (isset_request_var('save_component_import')) {
 		if (($_FILES['import_file']['tmp_name'] != 'none') && ($_FILES['import_file']['tmp_name'] != '')) {
 			// file upload
-			$csv_data = file($_FILES['import_file']['tmp_name']);
+			$csv_data = (array) file($_FILES['import_file']['tmp_name']);
 
 			// obtain debug information if it's set
 			$debug_data = mactrack_device_import_processor($csv_data);
@@ -165,7 +165,7 @@ function form_mactrack_save() {
  *                                            copying SNMP settings from
  *                                            a connected Cacti device.
  */
-function form_mactrack_actions() {
+function form_mactrack_actions(): void {
 	global $config, $device_actions, $fields_mactrack_device_edit, $fields_mactrack_snmp_item;
 
 	// ================= input validation =================
@@ -219,7 +219,7 @@ function form_mactrack_actions() {
 				}
 			} elseif (get_request_var('drp_action') == '6') { // Connect Selected Devices
 				for ($i = 0; ($i < cacti_sizeof($selected_items)); $i++) {
-					$cacti_host = db_fetch_row_prepared('SELECT host.id, host.description
+					$cacti_host = (array) db_fetch_row_prepared('SELECT host.id, host.description
 						FROM mac_track_devices
 						LEFT JOIN host
 						ON mac_track_devices.hostname=host.hostname
@@ -281,8 +281,9 @@ function form_mactrack_actions() {
 	}
 
 	// setup some variables
-	$device_list = '';
-	$i           = 0;
+	$device_list  = '';
+	$device_array = [];
+	$i            = 0;
 
 	// loop through each of the host templates selected on the previous page and get more info about them
 	foreach ($_POST as $var => $val) {
@@ -291,7 +292,7 @@ function form_mactrack_actions() {
 			input_validate_input_number($matches[1]);
 			// ====================================================
 
-			$device_info = db_fetch_row_prepared('SELECT hostname, device_name
+			$device_info = (array) db_fetch_row_prepared('SELECT hostname, device_name
 							FROM mac_track_devices
 							WHERE device_id = ?',
 				[$matches[1]]);
@@ -416,7 +417,7 @@ function form_mactrack_actions() {
 	print "<tr>
 		<td colspan='2' align='right' class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
-			<input type='hidden' name='selected_items' value='" . (isset($device_array) ? serialize($device_array) : '') . "'>
+			<input type='hidden' name='selected_items' value='" . serialize($device_array) . "'>
 			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . ($save_html != '' ? "
 			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'mactrack') . "</button>
 			$save_html" : "<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Return', 'mactrack') . "'>") . '</button>
@@ -442,7 +443,7 @@ function form_mactrack_actions() {
  *
  * @return void
  */
-function mactrack_device_request_validation() {
+function mactrack_device_request_validation(): void {
 	// ================= input validation and session storage =================
 	$filters = [
 		'rows' => [
@@ -508,7 +509,7 @@ function mactrack_device_request_validation() {
  *
  * @return void
  */
-function mactrack_device_export() {
+function mactrack_device_export(): void {
 	mactrack_device_request_validation();
 
 	$sql_where = '';
@@ -571,7 +572,7 @@ function mactrack_device_export() {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function mactrack_device_import() {
+function mactrack_device_import(): void {
 	global $config;
 
 	?><form method='post' action='mactrack_devices.php?action=import' enctype='multipart/form-data'><?php
@@ -674,9 +675,22 @@ function mactrack_device_import() {
  * @return array A list of human-readable per-row result messages
  *               describing what was imported/updated/skipped.
  */
-function mactrack_device_import_processor(&$devices) {
+function mactrack_device_import_processor(&$devices): array {
 	$i            = 0;
 	$return_array = [];
+
+	/** @var list<int> $insert_columns */
+	$insert_columns      = [];
+	$save_order          = '(';
+	/** @var int $save_site_id_id */
+	$save_site_id_id     = -1;
+	/** @var int $save_snmp_port_id */
+	$save_snmp_port_id   = -1;
+	/** @var int $save_host_id */
+	$save_host_id        = -1;
+	/** @var int $save_device_name_id */
+	$save_device_name_id = -1;
+	$update_suffix       = '';
 
 	if (cacti_sizeof($devices)) {
 		foreach ($devices as $device_line) {
@@ -827,6 +841,10 @@ function mactrack_device_import_processor(&$devices) {
 					break;
 				}
 			} else {
+				$device_name  = '';
+				$hostname     = '';
+				$site_id      = '';
+				$snmp_port    = '';
 				$save_value   = '(';
 				$j            = 0;
 				$first_column = true;
@@ -959,7 +977,7 @@ function mactrack_device_import_processor(&$devices) {
  * @global array $fields_mactrack_device_edit The device edit form's
  *                                            field definitions.
  */
-function mactrack_device_edit() {
+function mactrack_device_edit(): void {
 	global $config, $fields_mactrack_device_edit;
 
 	// ================= input validation =================
@@ -967,7 +985,7 @@ function mactrack_device_edit() {
 	// ====================================================
 
 	if (!isempty_request_var('device_id')) {
-		$device = db_fetch_row_prepared('SELECT *
+		$device = (array) db_fetch_row_prepared('SELECT *
 			FROM mac_track_devices
 			WHERE device_id = ?',
 			[get_request_var('device_id')]);
@@ -1065,7 +1083,7 @@ function mactrack_device_edit() {
 	draw_edit_form(
 		[
 			'config' => ['no_form_tag' => true],
-			'fields' => inject_form_variables($fields_mactrack_device_edit, ($device ?? []))
+			'fields' => inject_form_variables($fields_mactrack_device_edit, $device)
 		]
 	);
 
@@ -1089,7 +1107,7 @@ function mactrack_device_edit() {
  * @return array The matching device records, joined with their site
  *               name and device type description.
  */
-function mactrack_get_devices(&$sql_where, $rows, $apply_limits = true) {
+function mactrack_get_devices(&$sql_where, $rows, $apply_limits = true): array {
 	$status         = intval(get_filter_request_var('status'));
 	$type_id        = intval(get_filter_request_var('type_id'));
 	$device_type_id = intval(get_filter_request_var('device_type_id'));
@@ -1175,7 +1193,7 @@ function mactrack_get_devices(&$sql_where, $rows, $apply_limits = true) {
  * @global array $item_rows              Default number of rows per
  *                                       page from Cacti settings.
  */
-function mactrack_device() {
+function mactrack_device(): void {
 	global $device_actions, $mactrack_device_types, $config, $item_rows;
 
 	mactrack_device_request_validation();
@@ -1294,7 +1312,7 @@ function mactrack_device() {
  * @global array $item_rows Rows-per-page option list used to populate
  *                         the rows dropdown.
  */
-function mactrack_device_filter() {
+function mactrack_device_filter(): void {
 	global $item_rows;
 
 	?>

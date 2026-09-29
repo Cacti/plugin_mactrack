@@ -31,6 +31,8 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 }
 
 include('./include/cli_check.php');
+
+global $config;
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 // process calling arguments
@@ -122,7 +124,7 @@ function mactrack_validate_oui_file(string $path): string {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function display_version() {
+function display_version(): void {
 	global $config;
 
 	$info = plugin_mactrack_version();
@@ -135,7 +137,7 @@ function display_version() {
  *
  * @return void
  */
-function display_help() {
+function display_help(): void {
 	display_version();
 
 	print "\nusage: mactrack_import_ouidb.php [-f=ouifile] [-h] [--help] [-v] [-V] [--version]\n\n";

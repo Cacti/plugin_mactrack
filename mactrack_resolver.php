@@ -41,6 +41,9 @@ $dir = __DIR__;
 chdir($dir);
 
 include('../../include/cli_check.php');
+
+global $config;
+
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_dns_resolution.php');
 // Net_DNS2 autoloads its own classes with include paths relative to the library
@@ -295,8 +298,6 @@ function sig_handler($signo) {
 			unregister_process('mactrack_resolver', 'master');
 
 			exit(1);
-
-			break;
 		default:
 			// ignore all other signals
 	}
@@ -310,7 +311,7 @@ function sig_handler($signo) {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function display_version() {
+function display_version(): void {
 	global $config;
 
 	$info = plugin_mactrack_version();
@@ -323,7 +324,7 @@ function display_version() {
  *
  * @return void
  */
-function display_help() {
+function display_help(): void {
 	display_version();
 
 	print PHP_EOL;

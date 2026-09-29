@@ -38,7 +38,7 @@
  * @return bool True if a default site exists after setup completes,
  *              false otherwise.
  */
-function plugin_mactrack_install($operator_initiated = true) {
+function plugin_mactrack_install($operator_initiated = true): bool {
 	api_plugin_register_hook('mactrack', 'top_header_tabs',       'mactrack_show_tab',             'setup.php');
 	api_plugin_register_hook('mactrack', 'top_graph_header_tabs', 'mactrack_show_tab',             'setup.php');
 	api_plugin_register_hook('mactrack', 'config_arrays',         'mactrack_config_arrays',        'setup.php');
@@ -76,7 +76,7 @@ function plugin_mactrack_install($operator_initiated = true) {
  *
  * @return bool Always true.
  */
-function plugin_mactrack_uninstall() {
+function plugin_mactrack_uninstall(): bool {
 	db_execute_prepared(
 		'DELETE FROM settings WHERE name IN (?, ?, ?)',
 		['mt_default_site_seed_pending', 'mt_default_site_seed_attempts', 'mt_default_site_seed_next_retry']
@@ -96,11 +96,11 @@ function plugin_mactrack_uninstall() {
  * @global array $config Cacti global configuration array; used to
  *                       locate the plugin's INFO file.
  */
-function plugin_mactrack_version() {
+function plugin_mactrack_version(): array {
 	global $config;
-	$info = parse_ini_file($config['base_path'] . '/plugins/mactrack/INFO', true);
+	$info = (array) parse_ini_file($config['base_path'] . '/plugins/mactrack/INFO', true);
 
-	return $info['info'];
+	return $info['info'] ?? [];
 }
 
 /**
@@ -110,7 +110,7 @@ function plugin_mactrack_version() {
  *
  * @return bool Always true.
  */
-function plugin_mactrack_check_config() {
+function plugin_mactrack_check_config(): bool {
 	// Here we will check to ensure everything is configured
 	mactrack_check_upgrade();
 
@@ -124,7 +124,7 @@ function plugin_mactrack_check_config() {
  *
  * @return bool Always false.
  */
-function plugin_mactrack_upgrade() {
+function plugin_mactrack_upgrade(): bool {
 	// Here we will upgrade to the newest version
 	mactrack_check_upgrade();
 
@@ -146,7 +146,7 @@ function plugin_mactrack_upgrade() {
  * @global array $config Cacti global configuration array; used to
  *                       locate library files to include.
  */
-function mactrack_check_upgrade() {
+function mactrack_check_upgrade(): void {
 	global $config;
 
 	$files = ['index.php', 'plugins.php', 'mactrack_devices.php'];
@@ -161,7 +161,7 @@ function mactrack_check_upgrade() {
 	$current = plugin_mactrack_version();
 	$current = $current['version'];
 
-	$old     = db_fetch_row("SELECT * FROM plugin_config WHERE directory='mactrack'");
+	$old     = (array) db_fetch_row("SELECT * FROM plugin_config WHERE directory='mactrack'");
 
 	if (!cacti_sizeof($old) || $current != $old['version']) {
 		// if the plugin is installed and/or active
@@ -227,8 +227,8 @@ function mactrack_check_upgrade() {
  *
  * @return bool True if the table exists, false otherwise.
  */
-function mactrack_db_table_exists($table) {
-	return cacti_sizeof(db_fetch_assoc("SHOW TABLES LIKE '$table'"));
+function mactrack_db_table_exists($table): bool {
+	return cacti_sizeof(db_fetch_assoc("SHOW TABLES LIKE '$table'")) > 0;
 }
 
 /**
@@ -240,7 +240,7 @@ function mactrack_db_table_exists($table) {
  * @return bool True if the table exists and has the given column,
  *              false otherwise.
  */
-function mactrack_db_column_exists($table, $column) {
+function mactrack_db_column_exists($table, $column): bool {
 	$found = false;
 
 	if (mactrack_db_table_exists($table)) {
@@ -269,7 +269,7 @@ function mactrack_db_column_exists($table, $column) {
  * @return bool True if the table exists and has the given index, false
  *              otherwise.
  */
-function mactrack_db_key_exists($table, $index) {
+function mactrack_db_key_exists($table, $index): bool {
 	$found = false;
 
 	if (mactrack_db_table_exists($table)) {
@@ -300,7 +300,7 @@ function mactrack_db_key_exists($table, $index) {
  *
  * @return void
  */
-function mactrack_execute_sql($message, $syntax) {
+function mactrack_execute_sql($message, $syntax): void {
 	$result = db_execute($syntax);
 }
 
@@ -313,7 +313,7 @@ function mactrack_execute_sql($message, $syntax) {
  *
  * @return void
  */
-function mactrack_create_table($table, $syntax) {
+function mactrack_create_table($table, $syntax): void {
 	if (!mactrack_db_table_exists($table)) {
 		db_execute($syntax);
 	}
@@ -329,7 +329,7 @@ function mactrack_create_table($table, $syntax) {
  *
  * @return void
  */
-function mactrack_add_column($table, $column, $syntax) {
+function mactrack_add_column($table, $column, $syntax): void {
 	if (!mactrack_db_column_exists($table, $column)) {
 		db_execute($syntax);
 	}
@@ -345,7 +345,7 @@ function mactrack_add_column($table, $column, $syntax) {
  *
  * @return void
  */
-function mactrack_add_index($table, $index, $syntax) {
+function mactrack_add_index($table, $index, $syntax): void {
 	if (!mactrack_db_key_exists($table, $index)) {
 		db_execute($syntax);
 	}
@@ -362,7 +362,7 @@ function mactrack_add_index($table, $index, $syntax) {
  *
  * @return void
  */
-function mactrack_modify_column($table, $column, $syntax) {
+function mactrack_modify_column($table, $column, $syntax): void {
 	if (mactrack_db_column_exists($table, $column)) {
 		db_execute($syntax);
 	}
@@ -379,7 +379,7 @@ function mactrack_modify_column($table, $column, $syntax) {
  *
  * @return void
  */
-function mactrack_delete_column($table, $column, $syntax) {
+function mactrack_delete_column($table, $column, $syntax): void {
 	if (mactrack_db_column_exists($table, $column)) {
 		db_execute($syntax);
 	}
@@ -397,7 +397,7 @@ function mactrack_delete_column($table, $column, $syntax) {
  * @global array $config  Cacti global configuration array (declared
  *                       but not used directly here).
  */
-function mactrack_check_dependencies() {
+function mactrack_check_dependencies(): bool {
 	global $plugins, $config;
 
 	return true;
@@ -419,7 +419,7 @@ function mactrack_check_dependencies() {
  * @global array $config Cacti global configuration array; used to
  *                       locate the database include file.
  */
-function mactrack_setup_table_new($operator_initiated = true) {
+function mactrack_setup_table_new($operator_initiated = true): bool {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/mactrack/includes/database.php');
@@ -1427,7 +1427,7 @@ function mactrack_config_arrays() {
  *                                                option list, used by
  *                                                SNMP v3 fields.
  */
-function mactrack_config_form() {
+function mactrack_config_form(): void {
 	global $fields_mactrack_device_type_edit, $fields_mactrack_device_edit, $fields_mactrack_site_edit;
 	global $fields_mactrack_snmp_edit, $fields_mactrack_snmp_item, $fields_mactrack_snmp_item_edit;
 	global $mactrack_device_types, $snmp_versions, $fields_mactrack_macw_edit, $fields_mactrack_maca_edit;
@@ -2090,7 +2090,7 @@ function mactrack_config_form() {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function convert_readstrings() {
+function convert_readstrings(): void {
 	global $config;
 
 	$sql = 'SELECT DISTINCT ' .

@@ -44,7 +44,7 @@ if (isset_request_var('export')) {
  *
  * @return void
  */
-function mactrack_view_export_sites() {
+function mactrack_view_export_sites(): void {
 	mactrack_sites_request_validation();
 
 	$sql_where = '';
@@ -105,9 +105,9 @@ function mactrack_view_export_sites() {
  *
  * @return array The matching site records.
  */
-function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = true) {
+function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = true): array {
 	// create SQL where clause
-	$device_type_info = db_fetch_row_prepared('SELECT *
+	$device_type_info = (array) db_fetch_row_prepared('SELECT *
 		FROM mac_track_device_types
 		WHERE device_type_id = ?',
 		[get_request_var('device_type_id')]);
@@ -181,7 +181,7 @@ function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = true
  *
  * @return void
  */
-function mactrack_sites_request_validation() {
+function mactrack_sites_request_validation(): void {
 	// ================= input validation and session storage =================
 	$filters = [
 		'rows' => [
@@ -245,7 +245,7 @@ function mactrack_sites_request_validation() {
  * @global int    $item_rows Default number of rows per page from Cacti
  *                           settings.
  */
-function mactrack_view_sites() {
+function mactrack_view_sites(): void {
 	global $title, $config, $item_rows;
 
 	mactrack_sites_request_validation();

@@ -36,7 +36,7 @@
  *                                 other functions in this file; not
  *                                 used directly here.
  */
-function mactrack_database_upgrade() {
+function mactrack_database_upgrade(): void {
 	global $database_default;
 
 	if (mactrack_db_key_exists('mac_track_devices', 'device_id_UNIQUE')) {
@@ -933,9 +933,10 @@ function mactrack_retry_default_site(): bool {
  *                                 default-site seeding fails (default
  *                                 false).
  *
- * @return void
+ * @return bool True when the default site exists (or was seeded),
+ *              false when seeding failed.
  */
-function mactrack_setup_database(bool $notify_seed_failure = false) {
+function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 	$data                  = [];
 	$data['columns'][]     = ['name' => 'row_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
 	$data['columns'][]     = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
