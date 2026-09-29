@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* dev: Enforce patch coverage of changed lines in CI and remove the inert COMPOSER_ROOT_VERSION env from the Pest step
 * chore: Reach PHPStan level 8 with zero errors across all first-party PHP and add native function return type declarations, using no baselines or inline suppressions
 * issue: Use db_execute_prepared() for parameterized UPDATE/REPLACE statements in the 3Com scanner and partition converter, which previously passed a bind-parameter array to db_execute()
 * issue: Fix a variable-variable typo ($$local_graph_id) that broke 3Com interface-graph mac updates
