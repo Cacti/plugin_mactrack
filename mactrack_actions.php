@@ -428,10 +428,10 @@ function mactrack_device_action_execute($action): string {
 					// fetch row from host table
 					$device = (array) db_fetch_row_prepared('SELECT * from host WHERE id = ?', [$selected_items[$i]]);
 
-					// now fetch the related device from mac_track_devices, if any
-					$mt_device = db_fetch_row_prepared('SELECT * from mac_track_devices WHERE host_id = ?', [$device['id']]);
-
 					if (cacti_sizeof($device)) {
+						// now fetch the related device from mac_track_devices, if any
+						$mt_device = db_fetch_row_prepared('SELECT * from mac_track_devices WHERE host_id = ?', [$device['id']]);
+
 						// update mac_track_device
 						$device_id = api_mactrack_device_save(
 							($mt_device['device_id'] ?? '0'), 	// not a host column

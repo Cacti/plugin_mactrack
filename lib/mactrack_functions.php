@@ -2967,7 +2967,7 @@ function perform_mactrack_db_maint(): void {
  *
  * @return void
  */
-function import_oui_database($type = 'ui', $oui_file = 'http://standards-oui.ieee.org/oui.txt'): void {
+function import_oui_database($type = 'ui', $oui_file = 'https://standards-oui.ieee.org/oui.txt'): void {
 	$oui_alternate = 'https://services13.ieee.org/RST/standards-ra-web/rest/assignments/download/?registry=MA-L&format=txt';
 
 	if ($type != 'ui') {
@@ -3644,9 +3644,19 @@ function mactrack_enable(): void {
 		WHERE device_id = ?',
 		[get_request_var('device_id')]);
 
+	// re-fetch the joined row so the rendered status and site reflect the update
+	$dbinfo = (array) db_fetch_row_prepared('SELECT mtdt.description AS device_type, mtd.*, mts.site_name
+		FROM mac_track_sites AS mts
+		RIGHT JOIN mac_track_devices AS mtd
+		ON mtd.site_id = mts.site_id
+		LEFT JOIN mac_track_device_types AS mtdt
+		ON mtd.device_type_id = mtdt.device_type_id
+		WHERE mtd.device_id = ?',
+		[get_request_var('device_id')]);
+
 	// get the new html
 	ob_start();
-	mactrack_format_device_row((array) $dbinfo);
+	mactrack_format_device_row($dbinfo);
 	$html = ob_get_clean();
 
 	// send the response back to the browser
@@ -3670,8 +3680,8 @@ function mactrack_disable(): void {
 	get_filter_request_var('device_id');
 	// ====================================================
 
-	$dbinfo = (array) db_fetch_row_prepared('SELECT *
-		FROM mactrack_devices
+	$dbinfo = (array) db_fetch_row_prepared('SELECT hostname
+		FROM mac_track_devices
 		WHERE device_id = ?',
 		[get_request_var('device_id')]);
 
@@ -3680,14 +3690,24 @@ function mactrack_disable(): void {
 	// log the transaction to the database
 	mactrack_log_action(__('Device Disable \'%d\'', $dbinfo['hostname'], 'mactrack'));
 
-	db_execute_prepared('UPDATE mactack_devices
+	db_execute_prepared('UPDATE mac_track_devices
 		SET disabled="on"
 		WHERE device_id = ?',
 		[get_request_var('device_id')]);
 
+	// re-fetch the joined row so the rendered status and site reflect the update
+	$dbinfo = (array) db_fetch_row_prepared('SELECT mtdt.description AS device_type, mtd.*, mts.site_name
+		FROM mac_track_sites AS mts
+		RIGHT JOIN mac_track_devices AS mtd
+		ON mtd.site_id = mts.site_id
+		LEFT JOIN mac_track_device_types AS mtdt
+		ON mtd.device_type_id = mtdt.device_type_id
+		WHERE mtd.device_id = ?',
+		[get_request_var('device_id')]);
+
 	// get the new html
 	ob_start();
-	mactrack_format_device_row((array) $dbinfo);
+	mactrack_format_device_row($dbinfo);
 	$html = ob_get_clean();
 
 	// send the response back to the browser
