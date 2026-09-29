@@ -37,7 +37,7 @@ array_push($mactrack_scanning_functions, 'get_JEX_switch_ports');
  *
  * @return string The formatted uppercase hex MAC address.
  */
-function mach($macd, $del = ':') {
+function mach($macd, $del = ':'): string {
 	$result = '';
 	$macsd  = explode('.', $macd);
 
@@ -69,7 +69,7 @@ function mach($macd, $del = ':') {
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -120,10 +120,13 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	mactrack_debug('ifInterfaces assembly complete.');
 
 	$i = 0;
+	$active_vlans = [];
 
 	foreach ($vlan_ids as $vlan_id => $vlan_num) {
-		$active_vlans[$vlan_id]['vlan_id']   = $vlan_num;
-		$active_vlans[$vlan_id]['vlan_name'] = mactrack_arr_key($vlan_names, $vlan_id);
+		$active_vlans[$vlan_id] = [
+			'vlan_id'   => $vlan_num,
+			'vlan_name' => mactrack_arr_key($vlan_names, $vlan_id),
+		];
 
 		$i++;
 	}
@@ -162,7 +165,7 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 					// $port_array[$i]['port_number'] = @$port_results[".".strval($mac_result)];
 					$port_array[$i]['port_number'] = trim($ifName);
 
-					if (isset($ifDesc)) {
+					if ($ifDesc != '') {
 						$port_array[$i]['port_name'] = $ifDesc;
 					} else {
 						$port_array[$i]['port_name'] = trim($ifName);

@@ -48,7 +48,7 @@ array_push($mactrack_scanning_functions, 'get_linux_switch_ports');
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_linux_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_linux_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -79,6 +79,9 @@ function get_linux_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	// get ports that happen to be link ports
 	$link_ports = get_link_port_status($device);
 	mactrack_debug('ipAddrTable scanning for link ports data collection complete.');
+
+	/** @var array<int, mixed> $ifVlan */
+	$ifVlan = [];
 
 	foreach ($ifIndexes as $ifIndex) {
 		$ifInterfaces[$ifIndex]['ifIndex'] = $ifIndex;

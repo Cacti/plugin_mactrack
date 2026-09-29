@@ -51,7 +51,7 @@ if (isset_request_var('export')) {
  *
  * @return void
  */
-function mactrack_view_ips_validate_request_vars() {
+function mactrack_view_ips_validate_request_vars(): void {
 	// ================= input validation and session storage =================
 	$filters = [
 		'rows' => [
@@ -124,7 +124,7 @@ function mactrack_view_ips_validate_request_vars() {
  *
  * @return void
  */
-function mactrack_view_export_ips() {
+function mactrack_view_export_ips(): void {
 	mactrack_view_ips_validate_request_vars();
 
 	$sql_where = '';
@@ -175,10 +175,10 @@ function mactrack_view_export_ips() {
  *
  * @return array The matching ARP/IP records.
  */
-function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true) {
+function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true): array {
 	// form the 'where' clause for our main sql query
 	if (get_request_var('mac_filter') != '') {
-		$mac_filter = str_replace(':', '', get_request_var('mac_filter'));
+		$mac_filter = str_replace(':', '', (string) get_request_var('mac_filter'));
 		$mac_filter = str_replace('-', '', $mac_filter);
 		$mac_filter = str_replace('.', '', $mac_filter);
 
@@ -339,7 +339,7 @@ function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true) 
  * @global array  $item_rows              Default number of rows per
  *                                        page from Cacti settings.
  */
-function mactrack_view_ips() {
+function mactrack_view_ips(): void {
 	global $title, $report, $mactrack_search_types, $rows_selector, $config;
 	global $item_rows;
 
@@ -510,7 +510,7 @@ function mactrack_view_ips() {
  *                                       used to populate the MAC/IP
  *                                       filter type dropdowns.
  */
-function mactrack_ip_address_filter() {
+function mactrack_ip_address_filter(): void {
 	global $item_rows, $rows_selector, $mactrack_search_types;
 
 	?>

@@ -30,6 +30,8 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 }
 
 include('./include/cli_check.php');
+
+global $config;
 include_once($config['base_path'] . '/lib/snmp.php');
 include_once($config['base_path'] . '/lib/ping.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
@@ -59,6 +61,7 @@ global $web, $debug;
 $debug     = false;
 $web       = false;
 $test_mode = false;
+$device_id = 0;
 
 if (cacti_sizeof($parms)) {
 	foreach ($parms as $parameter) {
@@ -71,7 +74,7 @@ if (cacti_sizeof($parms)) {
 
 		switch ($arg) {
 			case '-id':
-				$device_id = $value;
+				$device_id = (int) $value;
 
 				break;
 			case '-d':
@@ -122,7 +125,7 @@ if (!$test_mode) {
 }
 
 // get device information
-$device = db_fetch_row_prepared('SELECT *
+$device = (array) db_fetch_row_prepared('SELECT *
 	FROM mac_track_devices
 	WHERE device_id = ?',
 	[$device_id]);
@@ -164,15 +167,17 @@ if (valid_snmp_device($device)) {
 	// locate the device type to obtain scanning function and low and high ports
 	$device_type = find_scanning_function($device, $device_types);
 
-	if (isset($device_type) && cacti_sizeof($device_type) > 0) {
+	if (cacti_sizeof($device_type) > 0) {
 		// for switches/hubs, we need to determine the mac to port mappings
 		if (($device['scan_type'] == DEVICE_HUB_SWITCH) ||
 				($device['scan_type'] == DEVICE_SWITCH_ROUTER)) {
 			// verify that the scanning function is not null and call it as applicable
 			if (isset($device_type['scanning_function'])) {
 				if (!empty($device_type['scanning_function'])) {
+					$scanning_function_name = (string) $device_type['scanning_function'];
+
 					if (function_exists($device_type['scanning_function'])) {
-						mactrack_debug('Scanning function is ' . $device_type['scanning_function']);
+						mactrack_debug('Scanning function is ' . $scanning_function_name);
 						$device['device_type_id'] = $device_type['device_type_id'];
 						$device['scan_type']      = $device_type['device_type'];
 						$device                   = call_user_func_array($device_type['scanning_function'], [$site, &$device, $device_type['lowPort'], $device_type['highPort']]);
@@ -194,8 +199,10 @@ if (valid_snmp_device($device)) {
 			($device['scan_type'] == DEVICE_ROUTER)) {
 			if (isset($device_type['ip_scanning_function'])) {
 				if (!empty($device_type['ip_scanning_function'])) {
+					$ip_scanning_function_name = (string) $device_type['ip_scanning_function'];
+
 					if (function_exists($device_type['ip_scanning_function'])) {
-						mactrack_debug('IP Scanning function is ' . $device_type['ip_scanning_function']);
+						mactrack_debug('IP Scanning function is ' . $ip_scanning_function_name);
 						$device['device_type_id'] = $device_type['device_type_id'];
 						$device['scan_type']      = $device_type['device_type'];
 						call_user_func_array($device_type['ip_scanning_function'], [$site, &$device]);
@@ -213,8 +220,10 @@ if (valid_snmp_device($device)) {
 
 			if (isset($device_type['dot1x_scanning_function'])) {
 				if (!empty($device_type['dot1x_scanning_function'])) {
+					$dot1x_scanning_function_name = (string) $device_type['dot1x_scanning_function'];
+
 					if (function_exists($device_type['dot1x_scanning_function'])) {
-						mactrack_debug('802.1x Scanning function is ' . $device_type['dot1x_scanning_function']);
+						mactrack_debug('802.1x Scanning function is ' . $dot1x_scanning_function_name);
 						$device['device_type_id'] = $device_type['device_type_id'];
 						$device['scan_type']      = $device_type['device_type'];
 						call_user_func_array($device_type['dot1x_scanning_function'], [$site, &$device]);
@@ -251,7 +260,7 @@ exit;
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function display_version() {
+function display_version(): void {
 	global $config;
 
 	$info = plugin_mactrack_version();
@@ -264,7 +273,7 @@ function display_version() {
  *
  * @return void
  */
-function display_help() {
+function display_help(): void {
 	display_version();
 
 	print "\nusage: mactrack_scanner.php -id=host_id [-w] [-d] [-h] [--help] [-v] [--version]\n\n";

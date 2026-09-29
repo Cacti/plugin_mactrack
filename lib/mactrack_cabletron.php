@@ -47,7 +47,7 @@ array_push($mactrack_scanning_functions, 'get_repeater_rev4_ports');
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_cabletron_switch_ports($site, &$device, $lowPort, $highPort) {
+function get_cabletron_switch_ports($site, &$device, $lowPort, $highPort): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -155,6 +155,7 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 
 	$j = 0;
 	$i = 0;
+	$temp_port_A_array = [];
 
 	while ($j < $sfps_A_size) {
 		$port_number = $sfps_A_ports[$sfps_A_keys[$j]];
@@ -162,8 +163,10 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
 
 		if (($port_number >= $lowPort) && ($port_number <= $highPort)) {
 			if (!in_array($port_number, $ignore_ports, true)) {
-				$temp_port_A_array[$i]['port_number'] = $port_number;
-				$temp_port_A_array[$i]['mac_address'] = xform_mac_address($mac_address);
+				$temp_port_A_array[$i] = [
+					'port_number' => $port_number,
+					'mac_address' => xform_mac_address($mac_address),
+				];
 				$i++;
 			}
 		}
@@ -207,7 +210,7 @@ function get_base_sfps_ports($site, &$device, &$ifInterfaces, $snmp_readstring, 
  * @return string The working SNMP read string for port data, or an
  *                empty string if none of the candidates worked.
  */
-function get_repeater_snmp_readstring(&$device) {
+function get_repeater_snmp_readstring(&$device): string {
 	$active_ports = @cacti_snmp_get($device['hostname'], $device['snmp_readstring'],
 		'.1.3.6.1.4.1.52.4.1.1.1.4.1.1.4.0', $device['snmp_version'],
 		$device['snmp_username'], $device['snmp_password'],
@@ -252,7 +255,7 @@ function get_repeater_snmp_readstring(&$device) {
  * $mactrack_scanning_functions for dispatch by the MacTrack poller
  * against devices of this vendor's device type.
  *
- * @param array $site     The site record the device belongs to.
+ * @param string $site    The name of the site the device belongs to.
  * @param array &$device  The device record being scanned; updated in
  *                        place with port count results.
  * @param int   $lowPort  Lowest port number to include in the scan.
@@ -263,20 +266,23 @@ function get_repeater_snmp_readstring(&$device) {
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort) {
+function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort): array {
 	global $debug, $scan_date;
+
+	$ports_active       = 0;
+	$new_port_key_array = [];
 
 	$snmp_readstring = get_repeater_snmp_readstring($device);
 
 	if ($snmp_readstring != '') {
-		$ports_active = @cacti_snmp_get($device['hostname'], $snmp_readstring,
+		$ports_active = (int) @cacti_snmp_get($device['hostname'], $snmp_readstring,
 			'.1.3.6.1.4.1.52.4.1.1.1.4.1.1.5.0', $device['snmp_version'],
 			$device['snmp_username'], $device['snmp_password'],
 			$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],
 			$device['snmp_priv_protocol'], $device['snmp_context'],
 			$device['snmp_port'], $device['snmp_timeout'], $device['snmp_retries']) - 1;
 
-		$ports_total = @cacti_snmp_get($device['hostname'], $snmp_readstring,
+		$ports_total = (int) @cacti_snmp_get($device['hostname'], $snmp_readstring,
 			'.1.3.6.1.4.1.52.4.1.1.1.4.1.1.4.0', $device['snmp_version'],
 			$device['snmp_username'], $device['snmp_password'],
 			$device['snmp_auth_protocol'], $device['snmp_priv_passphrase'],

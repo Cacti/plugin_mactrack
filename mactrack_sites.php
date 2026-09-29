@@ -74,7 +74,7 @@ switch (get_request_var('action')) {
  *
  * @return void
  */
-function form_save() {
+function form_save(): void {
 	if ((isset_request_var('save_component_site')) && (isempty_request_var('add_dq_y'))) {
 		$site_id = api_mactrack_site_save(get_filter_request_var('site_id'), get_nfilter_request_var('site_name'),
 			get_nfilter_request_var('customer_contact'), get_nfilter_request_var('netops_contact'),
@@ -116,7 +116,7 @@ function form_save() {
  *                                           in this file; not used
  *                                           directly here.
  */
-function form_actions() {
+function form_actions(): void {
 	global $config, $site_actions, $fields_mactrack_site_edit;
 
 	// ================= input validation =================
@@ -207,7 +207,7 @@ function form_actions() {
  *
  * @return void
  */
-function mactrack_site_validate_req_vars() {
+function mactrack_site_validate_req_vars(): void {
 	// ================= input validation and session storage =================
 	$filters = [
 		'rows' => [
@@ -270,7 +270,7 @@ function mactrack_site_validate_req_vars() {
  * @global array $config      Cacti global configuration array (declared
  *                            but not used directly here).
  */
-function mactrack_site_export() {
+function mactrack_site_export(): void {
 	global $site_actions, $config;
 
 	mactrack_site_validate_req_vars();
@@ -346,9 +346,9 @@ function mactrack_site_export() {
  *
  * @return array The matching site records.
  */
-function mactrack_site_get_site_records(&$sql_where, $rows, $apply_limits = true) {
+function mactrack_site_get_site_records(&$sql_where, $rows, $apply_limits = true): array {
 	// create SQL where clause
-	$device_type_info = db_fetch_row_prepared('SELECT *
+	$device_type_info = (array) db_fetch_row_prepared('SELECT *
 		FROM mac_track_device_types
 		WHERE device_type_id = ?',
 		[get_request_var('device_type_id')]);
@@ -423,7 +423,7 @@ function mactrack_site_get_site_records(&$sql_where, $rows, $apply_limits = true
  * @global array $fields_mactrack_site_edit The site edit form's field
  *                                         definitions.
  */
-function mactrack_site_edit() {
+function mactrack_site_edit(): void {
 	global $fields_mactrack_site_edit;
 
 	// ================= input validation =================
@@ -431,7 +431,7 @@ function mactrack_site_edit() {
 	// ====================================================
 
 	if (!isempty_request_var('site_id')) {
-		$site = db_fetch_row_prepared('SELECT *
+		$site = (array) db_fetch_row_prepared('SELECT *
 			FROM mac_track_sites
 			WHERE site_id = ?',
 			[get_request_var('site_id')]);
@@ -472,7 +472,7 @@ function mactrack_site_edit() {
  * @global int   $item_rows   Default number of rows per page from
  *                            Cacti settings.
  */
-function mactrack_site() {
+function mactrack_site(): void {
 	global $site_actions, $config, $item_rows;
 
 	mactrack_site_validate_req_vars();

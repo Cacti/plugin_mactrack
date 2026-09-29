@@ -46,6 +46,8 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 }
 
 include('./include/cli_check.php');
+
+global $config;
 include_once($config['base_path'] . '/lib/poller.php');
 include_once($config['base_path'] . '/plugins/mactrack/includes/database.php');
 include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
@@ -98,7 +100,7 @@ if (cacti_sizeof($parms)) {
 
 		switch ($arg) {
 			case '-sid':
-				$site_id = $value;
+				$site_id = (int) $value;
 
 				break;
 			case '-d':
@@ -171,10 +173,10 @@ if ($collect_frequency == 'disabled') {
 		}
 
 		if ($force) {
-			mactrack_debug('WARNING: Forcing Collection although Collection Appears in Process', true, 'MACTRACK');
+			mactrack_debug('WARNING: Forcing Collection although Collection Appears in Process');
 			db_execute('TRUNCATE mac_track_processes');
 		} else {
-			mactrack_debug('WARNING: Stale data found in Matrack process table', true, 'MACTRACK');
+			mactrack_debug('WARNING: Stale data found in Matrack process table');
 			db_execute('TRUNCATE mac_track_processes');
 		}
 	}
@@ -254,7 +256,7 @@ if ($collect_frequency == 'disabled') {
 			if ($time_till_next_run < 0) {
 				mactrack_debug('The next run time has been determined to be NOW');
 			} else {
-				mactrack_debug("The next run time has been determined to be at '" . date('Y-m-d H:i:s', $next_run_time) . "'");
+				mactrack_debug("The next run time has been determined to be at '" . date('Y-m-d H:i:s', (int) $next_run_time) . "'");
 			}
 
 			/*
@@ -278,7 +280,7 @@ if ($collect_frequency == 'disabled') {
 			if ($time_till_next_db_maint < 0) {
 				mactrack_debug('The next database maintenance run time has been determined to be NOW');
 			} else {
-				mactrack_debug("The next database maintenance run time has been determined to be at '" . date('Y-m-d H:i:s', $next_db_maint_time) . "'");
+				mactrack_debug("The next database maintenance run time has been determined to be at '" . date('Y-m-d H:i:s', (int) $next_db_maint_time) . "'");
 			}
 
 			if ($time_till_next_run < 0 || $force == true) {
@@ -327,7 +329,7 @@ exit(0);
  *                                   track_errors ini value, for later
  *                                   restoration by errors_restore().
  */
-function errors_disable() {
+function errors_disable(): void {
 	global $track_errors;
 	$track_errors = ini_get('track_errors');
 	ini_set('track_errors', 0);
@@ -344,7 +346,7 @@ function errors_disable() {
  * @global bool|string $track_errors The previous track_errors ini
  *                                  value saved by errors_disable().
  */
-function errors_restore() {
+function errors_restore(): void {
 	global $track_errors;
 	ini_set('track_errors', $track_errors);
 
@@ -372,7 +374,7 @@ function errors_restore() {
  * @global array $phperrors Map of PHP error level constants to
  *                         human-readable labels.
  */
-function mactrack_error_handler($level, $message, $file, $line, $context) {
+function mactrack_error_handler($level, $message, $file, $line, $context = []) {
 	global $phperrors;
 
 	if (IgnoreErrorHandler($message)) {
@@ -437,10 +439,10 @@ function mactrack_error_handler($level, $message, $file, $line, $context) {
  *
  * @return void
  */
-function clear_old_processes($site_id) {
+function clear_old_processes($site_id): void {
 	// get the max script runtime and kill old scripts
 	$max_script_runtime = read_config_option('mt_script_runtime');
-	$delete_time        = date('Y-m-d H:i:s', strtotime('-' . $max_script_runtime . ' Minutes'));
+	$delete_time        = date('Y-m-d H:i:s', (int) strtotime('-' . $max_script_runtime . ' Minutes'));
 	$site_id            = intval($site_id);
 	$sql                = 'SELECT mtp.*
 		FROM mac_track_processes AS mtp
@@ -500,7 +502,7 @@ function clear_old_processes($site_id) {
  * @global bool   $debug            Whether debug output is enabled.
  * @global string $scan_date        The current scan timestamp.
  */
-function collect_mactrack_data($start, $site_id = 0) {
+function collect_mactrack_data($start, $site_id = 0): void {
 	global $max_run_duration, $config, $debug, $scan_date;
 
 	if (defined('CACTI_BASE_PATH')) {
@@ -561,6 +563,8 @@ function collect_mactrack_data($start, $site_id = 0) {
 	db_process_add('-1');
 
 	if ($total_devices) {
+		$mac_ip_dns = [];
+
 		// grab arpwatch data
 		if (read_config_option('mt_arpwatch') == 'on') {
 			$arp_db     = read_config_option('mt_arpwatch_path');
@@ -913,7 +917,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 		if (is_array($ip_ranges)) {
 			foreach ($ip_ranges as $ip_range) {
-				$range_record = db_fetch_row_prepared('SELECT *
+				$range_record = (array) db_fetch_row_prepared('SELECT *
 					FROM mac_track_ip_ranges
 					WHERE ip_range = ?
 					AND site_id = ?',
@@ -987,6 +991,8 @@ function collect_mactrack_data($start, $site_id = 0) {
 			'site_id', 'total_ips'
 		);
 
+		$error_count = [];
+
 		foreach ($errors as $error) {
 			if (!isset($error_count[$error['site_id']])) {
 				$error_count[$error['site_id']] = 0;
@@ -1031,7 +1037,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 
 			foreach ($macwatches as $record) {
 				// determine if we should check this one
-				$found = db_fetch_row_prepared('SELECT *
+				$found = (array) db_fetch_row_prepared('SELECT *
 					FROM mac_track_temp_ports
 					WHERE mac_address = ?',
 					[$record['mac_address']]);
@@ -1041,7 +1047,7 @@ function collect_mactrack_data($start, $site_id = 0) {
 					$subject = "MACAUTH Notification: Mac Address '" . $record['mac_address'] . "' Found, For: '" . $record['name'] . "'";
 
 					// set the message with replacements
-					$message = str_replace('<IP>', $found['ip_address'], $record['description']);
+					$message = str_replace('<IP>', $found['ip_address'], (string) $record['description']);
 					$message = str_replace('<MAC>', $found['mac_address'], $message);
 					$message = str_replace('<TICKET>', $record['ticket_number'], $message);
 					$message = str_replace('<SITENAME>', db_fetch_cell_prepared('SELECT site_name FROM mac_track_sites WHERE site_id = ?', [$found['site_id']]), $message);
@@ -1143,7 +1149,7 @@ function collect_mactrack_data($start, $site_id = 0) {
  *
  * @return void
  */
-function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_time) {
+function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_time): void {
 	if ($mac_auth_frequency == 0) {
 		/*
 		$ports = db_fetch_assoc('SELECT mac_track_temp_ports.*, mac_track_sites.site_name
@@ -1248,7 +1254,7 @@ function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_tim
  *                        for all sites), used to compute the device
  *                        count.
  */
-function log_mactrack_statistics($type = 'collect') {
+function log_mactrack_statistics($type = 'collect'): void {
 	global $start, $site_id;
 
 	// let's get the number of devices
@@ -1312,8 +1318,6 @@ function sig_handler($signo) {
 			}
 
 			exit(1);
-
-			break;
 		default:
 			// ignore all other signals
 	}
@@ -1327,7 +1331,7 @@ function sig_handler($signo) {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function display_version() {
+function display_version(): void {
 	global $config;
 
 	$info = plugin_mactrack_version();
@@ -1340,7 +1344,7 @@ function display_version() {
  *
  * @return void
  */
-function display_help() {
+function display_help(): void {
 	display_version();
 
 	print PHP_EOL;

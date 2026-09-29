@@ -68,7 +68,7 @@ switch (get_request_var('action')) {
  *
  * @return void
  */
-function form_save() {
+function form_save(): void {
 	if ((isset_request_var('save_component_macw')) && (isempty_request_var('add_dq_y'))) {
 		$mac_id = api_mactrack_macw_save(get_nfilter_request_var('mac_id'),
 			get_nfilter_request_var('mac_address'), get_nfilter_request_var('name'),
@@ -111,7 +111,7 @@ function form_save() {
  *                                           in this file; not used
  *                                           directly here.
  */
-function form_actions() {
+function form_actions(): void {
 	global $config, $macw_actions, $fields_mactrack_macw_edit;
 
 	// ================= input validation =================
@@ -182,7 +182,7 @@ function form_actions() {
 	print "<tr>
 		<td align='right' class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
-			<input type='hidden' name='selected_items' value='" . (isset($macw_array) ? serialize($macw_array) : '') . "'>
+			<input type='hidden' name='selected_items' value='" . serialize($macw_array) . "'>
 			<input type='hidden' name='drp_action' value='" . get_request_var('drp_action') . "'>" . ($save_html != '' ? "
 			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'mactrack') . "</button>
 			$save_html" : "<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Return', 'mactrack') . '</button>') . '
@@ -217,7 +217,7 @@ function form_actions() {
  *
  * @return int The saved mac_id, or 0 if validation/save failed.
  */
-function api_mactrack_macw_save($mac_id, $mac_address, $name, $ticket_number, $description, $notify_schedule, $email_addresses) {
+function api_mactrack_macw_save($mac_id, $mac_address, $name, $ticket_number, $description, $notify_schedule, $email_addresses): int {
 	$save['mac_id']          = $mac_id;
 	$save['mac_address']     = form_input_validate($mac_address, 'mac_address', '', false, 3);
 	$save['name']            = form_input_validate($name, 'name', '', false, 3);
@@ -248,7 +248,7 @@ function api_mactrack_macw_save($mac_id, $mac_address, $name, $ticket_number, $d
  *
  * @return void
  */
-function api_mactrack_macw_remove($mac_id) {
+function api_mactrack_macw_remove($mac_id): void {
 	db_execute_prepared('DELETE FROM mac_track_macwatch WHERE mac_id = ?', [$mac_id]);
 }
 
@@ -270,7 +270,7 @@ function api_mactrack_macw_remove($mac_id) {
  *
  * @return array The matching MAC watch records.
  */
-function mactrack_macw_get_macw_records(&$sql_where, $rows, $apply_limits = true) {
+function mactrack_macw_get_macw_records(&$sql_where, $rows, $apply_limits = true): array {
 	$sql_where = '';
 
 	// form the 'where' clause for our main sql query
@@ -308,7 +308,7 @@ function mactrack_macw_get_macw_records(&$sql_where, $rows, $apply_limits = true
  * @global array $fields_mactrack_macw_edit The MAC watch edit form's
  *                                         field definitions.
  */
-function mactrack_macw_edit() {
+function mactrack_macw_edit(): void {
 	global $fields_mactrack_macw_edit;
 
 	// ================= input validation =================
@@ -316,7 +316,7 @@ function mactrack_macw_edit() {
 	// ====================================================
 
 	if (!isempty_request_var('mac_id')) {
-		$mac_record = db_fetch_row_prepared('SELECT *
+		$mac_record = (array) db_fetch_row_prepared('SELECT *
 			FROM mac_track_macwatch
 			WHERE mac_id = ?',
 			[get_request_var('mac_id')]);
@@ -358,7 +358,7 @@ function mactrack_macw_edit() {
  * @global int   $item_rows   Default number of rows per page from
  *                            Cacti settings.
  */
-function mactrack_macw() {
+function mactrack_macw(): void {
 	global $macw_actions, $config, $item_rows;
 
 	// ================= input validation and session storage =================
@@ -480,7 +480,7 @@ function mactrack_macw() {
  * @global array $item_rows Rows-per-page option list used to populate
  *                         the rows dropdown.
  */
-function mactrack_macw_filter() {
+function mactrack_macw_filter(): void {
 	global $item_rows;
 
 	?>

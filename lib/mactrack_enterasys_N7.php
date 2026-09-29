@@ -48,7 +48,7 @@ array_push($mactrack_scanning_functions_ip, 'get_CTAlias_table');
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -94,7 +94,7 @@ function get_enterasys_N7_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		$j          = 0;
 		$port_array = [];
 
-		foreach ($port_results as $port_result) {
+		foreach ((array) $port_results as $port_result) {
 			$ifIndex = $port_result['port_number'];
 			// print_r($port_result); print_r($ifInterfaces[$ifIndex]);
 			$ifType = $ifInterfaces[$ifIndex]['ifType'];
@@ -389,14 +389,14 @@ function get_enterasys_N7_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces,
  *
  * @return string The formatted colon-delimited hex MAC address.
  */
-function enterasys_N7_convert_macs($oldmac) {
+function enterasys_N7_convert_macs($oldmac): string {
 	$oldmac = substr($oldmac,stripos($oldmac,'.') + 1);
-	$oldmac = substr($oldmac,stripos($oldmac,'.'));
+	$oldmac = substr($oldmac, (int) stripos($oldmac,'.'));
 	$piece  = explode('.', $oldmac);
 	$newmac = '';
 
 	for ($i = 0; $i < 6; $i++) {
-		$newmac .= ($newmac != '' ? ':' : '') . dec2hex($piece[$i],2);
+		$newmac .= ($newmac != '' ? ':' : '') . dec2hex((int) $piece[$i],2);
 	}
 
 	return $newmac;
@@ -416,7 +416,7 @@ function enterasys_N7_convert_macs($oldmac) {
  * @return array Array of MAC-address key => VLAN id, re-keyed via
  *               array_rekey().
  */
-function xform_enterasys_N7_vlan_associations(&$device, $snmp_readstring = '') {
+function xform_enterasys_N7_vlan_associations(&$device, $snmp_readstring = ''): array {
 	// get raw index data
 	if ($snmp_readstring == '') {
 		$snmp_readstring = $device['snmp_readstring'];
@@ -434,7 +434,7 @@ function xform_enterasys_N7_vlan_associations(&$device, $snmp_readstring = '') {
 
 	foreach ($xformArray as $xformItem) {
 		// peel off the beginning of the OID
-		$key = $xformItem['oid'];
+		$key = (string) $xformItem['oid'];
 		$key = str_replace('iso', '1', $key);
 		$key = str_replace('1.3.6.1.2.1.17.7.1.2.2.1.2.', '', $key);
 
@@ -443,7 +443,7 @@ function xform_enterasys_N7_vlan_associations(&$device, $snmp_readstring = '') {
 		$output_array[$i]['vlan_id'] = substr($key,1,$perPos - 1);
 
 		// save the key=MAC Address for association with the dot1d table
-		$output_array[$i]['key'] = substr($key, $perPos);
+		$output_array[$i]['key'] = substr($key, (int) $perPos);
 
 		// get VLAN name, if any: dot1qVlanStaticName from dot1qVlanStaticTable
 		$vlan_name = @cacti_snmp_get($device['hostname'], $snmp_readstring,
@@ -466,9 +466,9 @@ function xform_enterasys_N7_vlan_associations(&$device, $snmp_readstring = '') {
  *
  * @return string The extracted VLAN id portion of the OID.
  */
-function get_enterasys_N7_vlan_id($OID) {
+function get_enterasys_N7_vlan_id($OID): string {
 	$perPos  = strpos($OID, '.',1);
-	$vlan_id = substr($OID,0,$perPos);
+	$vlan_id = substr($OID,0,(int) $perPos);
 
 	return $vlan_id;
 }
@@ -488,7 +488,7 @@ function get_enterasys_N7_vlan_id($OID) {
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_CTAlias_table($site, &$device) {
+function get_CTAlias_table($site, &$device): void {
 	global $debug, $scan_date;
 
 	mactrack_debug('FUNCTION: get_CTAlias_table started');

@@ -47,7 +47,7 @@ array_push($mactrack_scanning_functions, 'get_norbay_accelar_switch_ports');
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -91,11 +91,14 @@ function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPor
 	mactrack_debug('ifInterfaces assembly complete.');
 
 	$i = 0;
+	$active_vlans = [];
 
 	if (cacti_sizeof($vlan_ids)) {
 		foreach ($vlan_ids as $vlan_id => $vlan_name) {
-			$active_vlans[$i]['vlan_id']   = $vlan_id;
-			$active_vlans[$i]['vlan_name'] = $vlan_name;
+			$active_vlans[$i] = [
+				'vlan_id'   => $vlan_id,
+				'vlan_name' => $vlan_name,
+			];
 			$i++;
 		}
 	}
@@ -117,7 +120,7 @@ function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPor
 				$ifName          = $ifInterfaces[$ifIndex]['ifName'];
 				$portName        = '';
 				$portTrunkStatus = isset($ifInterfaces[$ifIndex]['trunkPortState']) ? $ifInterfaces[$ifIndex]['trunkPortState'] : '';
-				$vlannum         = isset($ifInterfaces[$ifindex]['vlannum']) ? $ifInterfaces[$ifindex]['vlannum'] : '';
+				$vlannum         = isset($ifInterfaces[$ifIndex]['vlannum']) ? $ifInterfaces[$ifIndex]['vlannum'] : '';
 
 				// only output legitimate end user ports
 				if ((($ifType == 6) && ($portTrunkStatus == 1))) {
@@ -180,7 +183,7 @@ function get_norbay_accelar_switch_ports($site, &$device, $lowPort = 0, $highPor
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -225,11 +228,14 @@ function get_norbay_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
 	mactrack_debug('ifInterfaces assembly complete.');
 
 	$i = 0;
+	$active_vlans = [];
 
 	if (cacti_sizeof($vlan_ids)) {
 		foreach ($vlan_ids as $vlan_id => $vlan_name) {
-			$active_vlans[$i]['vlan_id']   = $vlan_id;
-			$active_vlans[$i]['vlan_name'] = $vlan_name;
+			$active_vlans[$i] = [
+				'vlan_id'   => $vlan_id,
+				'vlan_name' => $vlan_name,
+			];
 
 			$i++;
 		}

@@ -31,6 +31,8 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 }
 
 include('./include/cli_check.php');
+
+global $config;
 include($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 if (read_config_option('mt_collection_timing') != 'disabled') {
@@ -63,7 +65,7 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
 
 					break;
 				case '--days':
-					$days = $value;
+					$days = (int) $value;
 
 					break;
 				case '-e':
@@ -145,7 +147,7 @@ if (read_config_option('mt_collection_timing') != 'disabled') {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function mactrack_create_partitioned_table($engine, $charset, $collate, $days = 30, $migrate = false) {
+function mactrack_create_partitioned_table($engine, $charset, $collate, $days = 30, $migrate = false): void {
 	global $config;
 
 	// rename the original table
@@ -229,7 +231,7 @@ function mactrack_create_partitioned_table($engine, $charset, $collate, $days = 
 
 		db_execute('DROP TABLE mac_track_ports_backup');
 
-		db_execute('REPLACE INTO `settings`
+		db_execute_prepared('REPLACE INTO `settings`
 			SET name = "mt_data_retention", value = ?',
 			[$days]);
 	} else {
@@ -248,7 +250,7 @@ function mactrack_create_partitioned_table($engine, $charset, $collate, $days = 
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function display_version() {
+function display_version(): void {
 	global $config;
 
 	$info = plugin_mactrack_version();
@@ -262,7 +264,7 @@ function display_version() {
  *
  * @return void
  */
-function display_help() {
+function display_help(): void {
 	display_version();
 
 	print "\nusage: mactrack_convert.php [-d] [-h] [--help] [-v] [--version]\n\n";

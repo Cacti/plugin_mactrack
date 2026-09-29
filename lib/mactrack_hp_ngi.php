@@ -51,7 +51,7 @@ array_push($mactrack_scanning_functions, 'get_procurve_ngi_switch_ports');
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize local variable to store the number of vlans per Interface
@@ -103,11 +103,14 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 	mactrack_debug('ifInterfaces assembly complete.');
 
 	$i = 0;
+	$active_vlans = [];
 
 	if (cacti_sizeof($vlan_ids)) {
 		foreach ($vlan_ids as $vlan_id => $vlan_name) {
-			$active_vlans[$i]['vlan_id']   = $vlan_id;
-			$active_vlans[$i]['vlan_name'] = $vlan_name;
+			$active_vlans[$i] = [
+				'vlan_id'   => $vlan_id,
+				'vlan_name' => $vlan_name,
+			];
 
 			$i++;
 		}
@@ -117,7 +120,7 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		$i = 0;
 		// get the port status information
 		$ifNames      = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.18', $device);
-		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, '', '', false, $lowPort, $highPort);
+		$port_results = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, '', false, $lowPort, $highPort);
 
 		$port_vlan_data = xform_standard_indexed_data('.1.3.6.1.2.1.17.7.1.4.5.1.1', $device);
 		$port_alias     = xform_standard_indexed_data('.1.3.6.1.2.1.31.1.1.1.18', $device);
@@ -201,7 +204,7 @@ function get_procurve_ngi_switch_ports($site, &$device, $lowPort = 0, $highPort 
  *
  * @global bool $debug Whether debug output is enabled.
  */
-function local_xform_indexed_data($xformOID, &$device, $xformLevel = 1) {
+function local_xform_indexed_data($xformOID, &$device, $xformLevel = 1): array {
 	global $debug;
 
 	// get raw index data
@@ -218,12 +221,13 @@ function local_xform_indexed_data($xformOID, &$device, $xformLevel = 1) {
 	if (cacti_sizeof($xformArray)) {
 		foreach ($xformArray as $xformItem) {
 			// break down key
-			$OID = $xformItem['oid'];
+			$OID             = $xformItem['oid'];
+			$xformItem_piece = [];
 
 			for ($j = 0; $j < $xformLevel; $j++) {
 				$perPos              = strrpos($OID, '.');
 				$xformItem_piece[$j] = substr($OID, $perPos + 1);
-				$OID                 = substr($OID, 0, $perPos);
+				$OID                 = substr($OID, 0, (int) $perPos);
 			}
 
 			// reassemble key

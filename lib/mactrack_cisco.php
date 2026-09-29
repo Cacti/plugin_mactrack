@@ -54,7 +54,7 @@ array_push($mactrack_scanning_functions_dot1x, 'get_cisco_dot1x_table');
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -177,9 +177,12 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 						mactrack_debug('VLAN Analysis for VLAN: ' . $vlan_number . '/' . $vlanName . ' is complete. ACTIVE PORTS: ' . $active_vlan_ports);
 
 						if ($active_vlan_ports > 0) { // does the vlan have active ports on it
-							$active_vlans[$j]['vlan_id']      = $vlan_number;
-							$active_vlans[$j]['vlan_name']    = $vlanName;
-							$active_vlans[$j]['active_ports'] = $active_vlan_ports;
+							$active_vlans[$j] = [
+								'vlan_id'      => $vlan_number,
+								'vlan_name'    => $vlanName,
+								'active_ports' => $active_vlan_ports,
+								'port_results' => [],
+							];
 
 							// Commented out because why wuuld you increment an array!!
 							// $active_vlans++;
@@ -197,7 +200,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 		$i = 0;
 
 		// get the port status information
-		foreach ($active_vlans as $active_vlan) {
+		foreach ($active_vlans as $i => $active_vlan) {
 			// ignore empty vlans
 			if ($active_vlan['active_ports'] <= $device['ports_trunk']) {
 				$active_vlans[$i]['port_results'] = [];
@@ -315,10 +318,12 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
-	$ifIndexes = [];
+	$ifIndexes    = [];
+	/** @var array<string, mixed> $portTrunking */
+	$portTrunking = [];
 
 	// get and store the interfaces table
 	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, true);
@@ -485,9 +490,12 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 						mactrack_debug('VLAN Analysis for VLAN: ' . $vlan_number . '/' . $vlanName . ' is complete. ACTIVE PORTS: ' . $active_vlan_ports);
 
 						if ($active_vlan_ports > 0) { // does the vlan have active ports on it
-							$active_vlans[$j]['vlan_id']      = $vlan_number;
-							$active_vlans[$j]['vlan_name']    = $vlanName;
-							$active_vlans[$j]['active_ports'] = $active_vlan_ports;
+							$active_vlans[$j] = [
+								'vlan_id'      => $vlan_number,
+								'vlan_name'    => $vlanName,
+								'active_ports' => $active_vlan_ports,
+								'port_results' => [],
+							];
 
 							$j++;
 						}
@@ -502,7 +510,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 		$i = 0;
 
 		// get the port status information
-		foreach ($active_vlans as $active_vlan) {
+		foreach ($active_vlans as $i => $active_vlan) {
 			if ($device['snmp_version'] < '3') {
 				$snmp_readstring = $device['snmp_readstring'] . '@' . $active_vlan['vlan_id'];
 			} else {
@@ -622,7 +630,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_cisco_dhcpsnooping_table($site, &$device) {
+function get_cisco_dhcpsnooping_table($site, &$device): void {
 	global $debug, $scan_date;
 
 	// get the cdsBindingInterface Index for the device
@@ -695,6 +703,7 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
 	}
 
 	if (cacti_sizeof($active_vlans)) {
+		/** @var int $n */
 		$n                 = 1;
 		$dot1dTpFdbEntry   = [];
 
@@ -794,7 +803,7 @@ function get_cisco_dhcpsnooping_table($site, &$device) {
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_cisco_vrf_arp_table($site, &$device) {
+function get_cisco_vrf_arp_table($site, &$device): void {
 	global $debug, $scan_date;
 
 	// get the cdsBindingInterface Index for the device
@@ -842,7 +851,7 @@ function get_cisco_vrf_arp_table($site, &$device) {
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_cisco_dot1x_table($site, &$device) {
+function get_cisco_dot1x_table($site, &$device): void {
 	global $debug, $scan_date;
 
 	// get the cafSessionAuthUserName from the device
@@ -861,7 +870,7 @@ function get_cisco_dot1x_table($site, &$device) {
 	} else {
 		mactrack_debug(sprintf('The Device: %s does not support dot1x', $device['hostname']));
 
-		return false;
+		return;
 	}
 
 	$ifIndex                 = [];

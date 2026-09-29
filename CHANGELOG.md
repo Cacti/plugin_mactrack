@@ -2,6 +2,13 @@
 
 --- develop ---
 
+* chore: Reach PHPStan level 8 with zero errors across all first-party PHP and add native function return type declarations, using no baselines or inline suppressions
+* issue: Use db_execute_prepared() for parameterized UPDATE/REPLACE statements in the 3Com scanner and partition converter, which previously passed a bind-parameter array to db_execute()
+* issue: Fix a variable-variable typo ($$local_graph_id) that broke 3Com interface-graph mac updates
+* issue: Return the rendered device-row HTML from the enable/disable AJAX handlers, which previously captured an always-null value
+* issue: Decode MAC/IP OIDs as hex in the Extreme scanner by correcting a misplaced xform_stripped_oid() argument
+* issue: Fix an undefined $ifindex reference (should be $ifIndex) in the Nortel Bay scanner
+* issue: Fix a misplaced parenthesis in the running-process stats parser
 * security: Add a version-safe CSP nonce (`plugin_mactrack_csp_nonce()`) to every inline `<script>` tag, and emit external JavaScript includes through Cacti's `get_md5_include_js()` helper so they carry the request nonce automatically; pages stay compatible with Cacti's Content-Security-Policy nonce enforcement while falling back cleanly on older Cacti releases that lack the `CactiSecureHeaders` class
 * issue#349: Keep punctuation in the port name filter
 * issue#350: Leave an empty hardware address empty

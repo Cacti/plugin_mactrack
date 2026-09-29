@@ -43,7 +43,7 @@ if (isset_request_var('export')) {
  *
  * @return void
  */
-function mactrack_vmacs_validate_request_vars() {
+function mactrack_vmacs_validate_request_vars(): void {
 	// ================= input validation and session storage =================
 	$filters = [
 		'rows' => [
@@ -90,7 +90,7 @@ function mactrack_vmacs_validate_request_vars() {
  * @global array $config      Cacti global configuration array (declared
  *                            but not used directly here).
  */
-function mactrack_vmacs_export() {
+function mactrack_vmacs_export(): void {
 	global $site_actions, $config;
 
 	mactrack_vmacs_validate_request_vars();
@@ -134,7 +134,7 @@ function mactrack_vmacs_export() {
  *
  * @return array The matching vendor MAC (OUI) database records.
  */
-function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = true) {
+function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = true): array {
 	$sql_where = '';
 
 	// form the 'where' clause for our main sql query
@@ -178,7 +178,7 @@ function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = tru
  * @global int   $item_rows   Default number of rows per page from
  *                            Cacti settings.
  */
-function mactrack_vmacs() {
+function mactrack_vmacs(): void {
 	global $site_actions, $config, $item_rows;
 
 	mactrack_vmacs_validate_request_vars();
@@ -244,7 +244,7 @@ function mactrack_vmacs() {
  * @global array $item_rows Rows-per-page option list used to populate
  *                         the rows dropdown.
  */
-function mactrack_vmac_filter() {
+function mactrack_vmac_filter(): void {
 	global $item_rows;
 
 	?>

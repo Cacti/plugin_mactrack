@@ -54,7 +54,7 @@ array_push($mactrack_scanning_functions, 'get_tplink_dot1q_switch_ports');
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -143,6 +143,7 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		$mac_results  = xform_stripped_oid('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device);
 
 		$i = 1;
+		$nport_results = [];
 
 		foreach ($port_results as $port) {
 			$nport_results[$i++] = $port;
@@ -153,7 +154,7 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 
 		foreach ($mac_results as $num => $mac_result) {
 			if ($mac_result != 0) {
-				$Xvlanid = substr($num, 0, strpos($num, '.'));
+				$Xvlanid = substr($num, 0, (int) strpos($num, '.'));
 				$Xmac    = tp_mach(substr($num, strpos($num, '.') + 1));
 
 				$ifIndex         = $nport_results[$mac_result];
@@ -221,7 +222,7 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
  *
  * @return string The formatted uppercase hex MAC address.
  */
-function tp_mach($macd, $del = ':') {
+function tp_mach($macd, $del = ':'): string {
 	$result = '';
 	$macsd  = explode('.', $macd);
 

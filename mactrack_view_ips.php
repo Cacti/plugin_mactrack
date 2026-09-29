@@ -44,7 +44,7 @@ if (isset_request_var('export')) {
  *
  * @return void
  */
-function mactrack_view_ips_validate_request_vars() {
+function mactrack_view_ips_validate_request_vars(): void {
 	// ================= input validation and session storage =================
 	$filters = [
 		'rows' => [
@@ -111,7 +111,7 @@ function mactrack_view_ips_validate_request_vars() {
  *
  * @return void
  */
-function mactrack_view_export_ip_ranges() {
+function mactrack_view_export_ip_ranges(): void {
 	mactrack_view_ips_validate_request_vars();
 
 	$sql_where = '';
@@ -157,7 +157,7 @@ function mactrack_view_export_ip_ranges() {
  * @return array The matching IP range records, joined with their site
  *               name.
  */
-function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = true) {
+function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = true): array {
 	if (get_request_var('site_id') != '-1') {
 		$sql_where = 'WHERE mtir.site_id = ' . get_filter_request_var('site_id');
 	} else {
@@ -206,7 +206,7 @@ function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = 
  * @global array  $item_rows Default number of rows per page from Cacti
  *                           settings.
  */
-function mactrack_view_ip_ranges() {
+function mactrack_view_ip_ranges(): void {
 	global $title, $config, $item_rows;
 
 	mactrack_view_ips_validate_request_vars();
@@ -336,7 +336,7 @@ function mactrack_view_ip_ranges() {
  *                         parity with other filter functions; not used
  *                         directly here).
  */
-function mactrack_ips_filter() {
+function mactrack_ips_filter(): void {
 	global $item_rows;
 
 	?>

@@ -99,7 +99,7 @@ switch (get_request_var('action')) {
  *                                            bulk-actions confirmation
  *                                            display.
  */
-function form_actions() {
+function form_actions(): void {
 	global $config, $mactrack_view_macs_actions;
 
 	// ================= input validation =================
@@ -164,16 +164,16 @@ function form_actions() {
 			$matches = substr($var,4);
 
 			// clean up the mac_address
-			if (isset($matches)) {
+			if ($matches != '') {
 				$matches = sanitize_search_string($matches);
 				$parts   = explode('-', $matches);
 				$mac     = str_replace('_', '', $parts[0]);
 				$ip      = str_replace('_', '.', $parts[1]);
-			}
 
-			if (filter_var($mac, FILTER_VALIDATE_MAC) && filter_var($ip, FILTER_VALIDATE_IP) && !isset($mac_address_array[$mac])) {
-				$mac_address_list .= '<li>' . html_escape(mactrack_format_mac($mac)) . '</li>';
-				$mac_address_array[$mac] = $ip;
+				if (filter_var($mac, FILTER_VALIDATE_MAC) && filter_var($ip, FILTER_VALIDATE_IP) && !isset($mac_address_array[$mac])) {
+					$mac_address_list .= '<li>' . html_escape(mactrack_format_mac($mac)) . '</li>';
+					$mac_address_array[$mac] = $ip;
+				}
 			}
 		}
 	}
@@ -264,7 +264,7 @@ function mactrack_normalize_ids(array $ids): array {
  *                                                bulk-actions
  *                                                confirmation display.
  */
-function form_aggregated_actions() {
+function form_aggregated_actions(): void {
 	global $config, $mactrack_view_agg_macs_actions;
 
 	// ================= input validation =================
@@ -345,7 +345,7 @@ function form_aggregated_actions() {
 	print "<tr>
 		<td colspan='2' align='right' class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
-			<input type='hidden' name='selected_items' value='" . (isset($row_array) ? html_escape(json_encode($row_array)) : '') . "'>
+			<input type='hidden' name='selected_items' value='" . html_escape(json_encode($row_array)) . "'>
 			<input type='hidden' name='drp_action' value='" . html_escape((string) get_request_var('drp_action')) . "'>" . ($save_html != '' ? "
 			<button type='button' onClick='cactiReturnTo()' class='ui-button ui-corner-all ui-widget'>" . __esc('Cancel', 'mactrack') . "</button>
 			$save_html" : "<button type='button' onClick='cactiReturnTo()' class='ui-button ui-corner-all ui-widget'>" . __esc('Return', 'mactrack') . '</button>') . '
@@ -372,7 +372,7 @@ function form_aggregated_actions() {
  *
  * @return void
  */
-function api_mactrack_authorize_mac_addresses($mac_address, $ip_address) {
+function api_mactrack_authorize_mac_addresses($mac_address, $ip_address): void {
 	db_execute_prepared('UPDATE mac_track_ports
 		SET authorized=1
 		WHERE mac_address = ?',
@@ -408,7 +408,7 @@ function api_mactrack_authorize_mac_addresses($mac_address, $ip_address) {
  *
  * @return void
  */
-function api_mactrack_revoke_mac_addresses($mac_address) {
+function api_mactrack_revoke_mac_addresses($mac_address): void {
 	db_execute_prepared('UPDATE mac_track_ports
 		SET authorized=0
 		WHERE mac_address = ?',
@@ -435,7 +435,7 @@ function api_mactrack_revoke_mac_addresses($mac_address) {
  *
  * @return void
  */
-function mactrack_view_macs_validate_request_vars() {
+function mactrack_view_macs_validate_request_vars(): void {
 	// ================= input validation and session storage =================
 	$filters = [
 		'rows' => [
@@ -526,7 +526,7 @@ function mactrack_view_macs_validate_request_vars() {
  *
  * @return void
  */
-function mactrack_view_export_macs() {
+function mactrack_view_export_macs(): void {
 	mactrack_view_macs_validate_request_vars();
 
 	$sql_where  = '';
@@ -583,12 +583,12 @@ function mactrack_view_export_macs() {
  *
  * @return array The matching MAC/port records.
  */
-function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_limits = true) {
+function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_limits = true): array {
 	$sql_params = [];
 
 	// form the 'where' clause for our main sql query
 	if (get_request_var('mac_filter') != '') {
-		$mac_filter = str_replace(':', '', get_request_var('mac_filter'));
+		$mac_filter = str_replace(':', '', (string) get_request_var('mac_filter'));
 		$mac_filter = str_replace('-', '', $mac_filter);
 		$mac_filter = str_replace('.', '', $mac_filter);
 
@@ -802,7 +802,7 @@ function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_
  *                                            per page from Cacti
  *                                            settings.
  */
-function mactrack_view_macs() {
+function mactrack_view_macs(): void {
 	global $title, $report, $mactrack_search_types, $rows_selector, $config;
 	global $mactrack_view_macs_actions, $item_rows;
 
@@ -1041,7 +1041,7 @@ function mactrack_view_macs() {
  *                                               per page from Cacti
  *                                               settings.
  */
-function mactrack_view_aggregated_macs() {
+function mactrack_view_aggregated_macs(): void {
 	global $title, $report, $mactrack_search_types, $rows_selector, $config;
 	global $mactrack_view_agg_macs_actions, $item_rows;
 
@@ -1267,7 +1267,7 @@ function mactrack_view_aggregated_macs() {
  *                                       used to populate the MAC/port
  *                                       name/IP filter type dropdowns.
  */
-function mactrack_mac_filter() {
+function mactrack_mac_filter(): void {
 	global $item_rows, $rows_selector, $mactrack_search_types;
 
 	?>

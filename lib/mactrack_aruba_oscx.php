@@ -38,12 +38,12 @@ array_push($mactrack_scanning_functions_ip, 'get_aruba_oscx_arp_table');
  * @return string The formatted colon-delimited uppercase hex MAC
  *                address.
  */
-function oscx_mac($mac) {
+function oscx_mac($mac): string {
 	$slabiky = explode('.', trim($mac));
 	$mac     = '';
 
 	for ($f = 0; $f < 6; $f++) {
-		$slabiky[$f] = strtoupper(dechex($slabiky[$f]));
+		$slabiky[$f] = strtoupper(dechex((int) $slabiky[$f]));
 
 		if (strlen($slabiky[$f]) < 2) {
 			$slabiky[$f] = '0' . $slabiky[$f];
@@ -72,7 +72,7 @@ function oscx_mac($mac) {
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -90,6 +90,7 @@ function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 
 	*/
 
 	$vlan_names   = xform_standard_indexed_data('.1.3.6.1.2.1.47.1.2.1.1.2', $device);
+	$vlan_ids     = [];
 
 	foreach ($vlan_names as $key=>$value) {
 		$vlan_ids[$key] = $key;
@@ -166,7 +167,7 @@ function get_aruba_oscx_switch_ports($site, &$device, $lowPort = 0, $highPort = 
 	if (cacti_sizeof($vlan_ids) > 0) {
 		// get the port status information
 
-		$port_results = get_aruba_oscx_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $device['snmp_readstring'], false, $lowPort, $highPort);
+		$port_results = (array) get_aruba_oscx_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $device['snmp_readstring'], false, $lowPort, $highPort);
 
 		// get the ifIndexes for the device
 		$i          = 0;
@@ -467,7 +468,7 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_aruba_oscx_arp_table($site, &$device) {
+function get_aruba_oscx_arp_table($site, &$device): void {
 	global $debug, $scan_date;
 
 	mactrack_debug('FUNCTION: get_aruba_oscx_arp_table started');
@@ -498,7 +499,7 @@ function get_aruba_oscx_arp_table($site, &$device) {
 	}
 
 	$xdata = xform_indexed_data('.1.3.6.1.2.1.4.35.1.4', $device, 4);
-
+		$ip_mac = [];
 	foreach ($xdata as $key=>$value) {
 		$ip_mac[$key] = strtr($value, ' ', ':');
 	}

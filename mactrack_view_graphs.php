@@ -70,7 +70,7 @@ bottom_footer();
  *                                        library; not used directly
  *                                        here.
  */
-function mactrack_view_graphs() {
+function mactrack_view_graphs(): void {
 	global $title, $current_user, $colors, $config, $host_template_hashes, $graph_template_hashes;
 
 	include('./lib/html_graph.php');
@@ -187,7 +187,7 @@ function mactrack_view_graphs() {
 
 	$nav_url = preg_replace('/((\?|&)host_id=[0-9]+|(\?|&)filter=[a-zA-Z0-9]*)/', '', $nav_url);
 
-	$nav = html_nav_bar($nav_url, MAX_DISPLAY_PAGES, get_request_var('page'), get_request_var('graphs'), $total_graphs, get_request_var('columns'), __('Graphs', 'mactrack'), 'page', 'main');
+	$nav = html_nav_bar((string) $nav_url, MAX_DISPLAY_PAGES, get_request_var('page'), get_request_var('graphs'), $total_graphs, get_request_var('columns'), __('Graphs', 'mactrack'), 'page', 'main');
 
 	print $nav;
 

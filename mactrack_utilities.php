@@ -129,7 +129,7 @@ switch (get_request_var('action')) {
  *                                             functions in this file;
  *                                             not used directly here.
  */
-function mactrack_display_run_status() {
+function mactrack_display_run_status(): void {
 	global $config, $refresh_interval, $mactrack_poller_frequencies;
 
 	$collection_timing = read_config_option('mt_collection_timing', true);
@@ -294,7 +294,7 @@ function mactrack_display_run_status() {
 	form_alternate_row();
 	print '<td width=200>' . __('Poller Frequency:', 'mactrack') . '</td><td>' . ($collection_timing == 'disabled' ? __('N/A', 'mactrack') : $mactrack_poller_frequencies[$collection_timing]) . '</td>';
 	form_alternate_row();
-	print '<td width=200>' . __('Approx. Next Runtime:', 'mactrack') . '</td><td>' . (empty($next_run_time) ? __('N/A', 'mactrack') : date('Y-m-d H:i:s', $next_run_time)) . '</td>';
+	print '<td width=200>' . __('Approx. Next Runtime:', 'mactrack') . '</td><td>' . (empty($next_run_time) ? __('N/A', 'mactrack') : date('Y-m-d H:i:s', (int) $next_run_time)) . '</td>';
 
 	html_header([__('Database Maintenance Information', 'mactrack')], 2);
 	form_alternate_row();
@@ -332,6 +332,13 @@ function mactrack_display_run_status() {
 
 		$other_processes = 0;
 		$other_date      = 0;
+
+		$completed_processes = 0;
+		$completed_date      = '';
+		$running_processes   = 0;
+		$running_date        = '';
+		$waiting_processes   = 0;
+		$waiting_date        = '';
 
 		if (cacti_sizeof($run_status) == 1) {
 			$waiting_processes   = $total_devices - $total_processes;
@@ -408,7 +415,7 @@ function mactrack_display_run_status() {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function mactrack_utilities_ports_clear() {
+function mactrack_utilities_ports_clear(): void {
 	global $config;
 
 	if ((read_config_option('mt_maint_confirm') == 'on') && (!isset_request_var('confirm'))) {
@@ -477,7 +484,7 @@ function mactrack_utilities_ports_clear() {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function mactrack_utilities_purge_aggregated_data() {
+function mactrack_utilities_purge_aggregated_data(): void {
 	global $config;
 
 	if ((read_config_option('mt_maint_confirm') == 'on') && (!isset_request_var('confirm'))) {
@@ -511,7 +518,7 @@ function mactrack_utilities_purge_aggregated_data() {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function mactrack_utilities_recreate_aggregated_data() {
+function mactrack_utilities_recreate_aggregated_data(): void {
 	global $config;
 
 	if ((read_config_option('mt_maint_confirm') == 'on') && (!isset_request_var('confirm'))) {
@@ -554,7 +561,7 @@ function mactrack_utilities_recreate_aggregated_data() {
  *
  * @return void
  */
-function mactrack_utilities_db_maint() {
+function mactrack_utilities_db_maint(): void {
 	$begin_rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_ports');
 	perform_mactrack_db_maint();
 	$end_rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_ports');
@@ -574,7 +581,7 @@ function mactrack_utilities_db_maint() {
  * @global array $config Cacti global configuration array (declared but
  *                       not used directly here).
  */
-function mactrack_utilities_purge_scanning_funcs() {
+function mactrack_utilities_purge_scanning_funcs(): void {
 	global $config;
 
 	mactrack_rebuild_scanning_funcs();
@@ -592,7 +599,7 @@ function mactrack_utilities_purge_scanning_funcs() {
  *
  * @return void
  */
-function mactrack_utilities() {
+function mactrack_utilities(): void {
 	html_start_box(__('Cacti Mactrack System Utilities', 'mactrack'), '100%', '', '3', 'center', '');
 
 	html_header([__('Process Status Information', 'mactrack')], 2);

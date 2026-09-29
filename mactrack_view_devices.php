@@ -45,7 +45,7 @@ if (isset_request_var('export')) {
  *
  * @return void
  */
-function mactrack_device_request_validation() {
+function mactrack_device_request_validation(): void {
 	// ================= input validation and session storage =================
 	$filters = [
 		'rows' => [
@@ -111,7 +111,7 @@ function mactrack_device_request_validation() {
  *
  * @return void
  */
-function mactrack_view_export_devices() {
+function mactrack_view_export_devices(): void {
 	mactrack_device_request_validation();
 
 	$sql_where = '';
@@ -171,12 +171,12 @@ function mactrack_view_export_devices() {
  * @return array The matching device records, joined with their site
  *               name and device type description.
  */
-function mactrack_view_get_device_records(&$sql_where, $rows, $apply_limits = true) {
+function mactrack_view_get_device_records(&$sql_where, $rows, $apply_limits = true): array {
 	$status           = intval(get_filter_request_var('status'));
 	$type_id          = intval(get_filter_request_var('type_id'));
 	$device_type_id   = intval(get_filter_request_var('device_type_id'));
 	$site_id          = intval(get_filter_request_var('site_id'));
-	$device_type_info = db_fetch_row_prepared('SELECT * FROM mac_track_device_types WHERE device_type_id = ?', [$device_type_id]);
+	$device_type_info = (array) db_fetch_row_prepared('SELECT * FROM mac_track_device_types WHERE device_type_id = ?', [$device_type_id]);
 
 	// if the device type is not the same as the type_id, then reset it
 	if ((cacti_sizeof($device_type_info)) && ($type_id != -1)) {
@@ -284,7 +284,7 @@ function mactrack_view_get_device_records(&$sql_where, $rows, $apply_limits = tr
  * @global array  $item_rows              Default number of rows per
  *                                        page from Cacti settings.
  */
-function mactrack_view_devices() {
+function mactrack_view_devices(): void {
 	global $title, $report, $mactrack_search_types, $mactrack_device_types, $rows_selector, $config, $item_rows;
 
 	mactrack_device_request_validation();
@@ -474,7 +474,7 @@ function mactrack_view_devices() {
  * @global array $item_rows Rows-per-page option list used to populate
  *                         the rows dropdown.
  */
-function mactrack_device_filter2() {
+function mactrack_device_filter2(): void {
 	global $item_rows;
 
 	?>

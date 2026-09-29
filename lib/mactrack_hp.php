@@ -46,7 +46,7 @@ array_push($mactrack_scanning_functions, 'get_procurve_switch_ports');
  *
  * @return array The updated $device record.
  */
-function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_procurve_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters

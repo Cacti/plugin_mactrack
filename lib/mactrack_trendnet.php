@@ -53,7 +53,7 @@ array_push($mactrack_scanning_functions, 'get_trendnet_dot1q_switch_ports');
  * @global bool   $debug     Whether debug output is enabled.
  * @global string $scan_date The current scan timestamp.
  */
-function get_trendnet_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort = 0) {
+function get_trendnet_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): array {
 	global $debug, $scan_date;
 
 	// initialize port counters
@@ -71,7 +71,7 @@ function get_trendnet_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPor
 	if (cacti_sizeof($ifInterfaces)) {
 		foreach ($ifInterfaces as $key => $tempInterfaces) {
 			preg_match('/[0-9]{1,3}/', $tempInterfaces['ifType'], $newType);
-			$ifInterfaces[$key]['ifType'] = $newType[0];
+			$ifInterfaces[$key]['ifType'] = $newType[0] ?? '';
 		}
 	}
 
@@ -130,7 +130,7 @@ function get_base_trendnet_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp
 	if (cacti_sizeof($active_ports_array)) {
 		foreach ($active_ports_array as $key => $tempPorts) {
 			preg_match('/[0-9]{1,3}/',$tempPorts,$newStatus);
-			$active_ports_array[$key] = $newStatus[0];
+			$active_ports_array[$key] = $newStatus[0] ?? '';
 		}
 	}
 
@@ -188,7 +188,7 @@ function get_base_trendnet_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp
 		if (cacti_sizeof($port_status)) {
 			foreach ($port_status as $key => $tempStatus) {
 				preg_match('/[0-9]{1,3}/',$tempStatus,$newStatus);
-				$port_status[$key] = $newStatus[0];
+				$port_status[$key] = $newStatus[0] ?? '';
 			}
 		}
 		// print_r($port_status);

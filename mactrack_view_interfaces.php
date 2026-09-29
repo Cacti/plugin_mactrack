@@ -64,7 +64,7 @@ if (isset_request_var('export')) {
  *                               other functions in this file; not used
  *                               directly here.
  */
-function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = '30', &$sql_params = []) {
+function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = 30, &$sql_params = []): array {
 	global $timespan, $group_function, $summary_stats;
 
 	$issues  = (string) get_request_var('issues');
@@ -167,7 +167,7 @@ function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = '30', &
  *
  * @return void
  */
-function mactrack_interfaces_request_validation() {
+function mactrack_interfaces_request_validation(): void {
 	// ================= input validation and session storage =================
 	$filters = [
 		'rows' => [
@@ -244,7 +244,7 @@ function mactrack_interfaces_request_validation() {
  *
  * @return void
  */
-function mactrack_export_records() {
+function mactrack_export_records(): void {
 	mactrack_interfaces_request_validation();
 
 	$sql_where  = '';
@@ -312,7 +312,7 @@ function mactrack_export_records() {
  *                               directly here.
  * @global array  $config        Cacti global configuration array.
  */
-function mactrack_view() {
+function mactrack_view(): void {
 	global $title, $mactrack_rows, $config;
 
 	mactrack_interfaces_request_validation();
@@ -428,7 +428,7 @@ function mactrack_view() {
  * @return array The column definitions, keyed by column name, each
  *               with 'display', optional 'align', and 'sort' entries.
  */
-function mactrack_display_array() {
+function mactrack_display_array(): array {
 	$display_text = [
 		'nosort' => [
 			'display' => __('Actions', 'mactrack'),
@@ -567,7 +567,7 @@ function mactrack_display_array() {
  *                              functions in this file; not used
  *                              directly here.
  */
-function mactrack_filter_table() {
+function mactrack_filter_table(): void {
 	global $config, $rows_selector;
 
 	?>
