@@ -225,6 +225,30 @@ if (!function_exists('db_column_exists')) {
 	}
 }
 
+if (!function_exists('db_table_exists')) {
+	function db_table_exists($table) {
+		return mactrack_test_next_return('db_table_exists', true);
+	}
+}
+
+if (!function_exists('get_selected_theme')) {
+	function get_selected_theme() {
+		return $GLOBALS['__test_selected_theme'] ?? 'modern';
+	}
+}
+
+if (!function_exists('get_md5_include_css')) {
+	function get_md5_include_css($path) {
+		return (string) $path;
+	}
+}
+
+if (!function_exists('get_md5_include_js')) {
+	function get_md5_include_js($path) {
+		return (string) $path;
+	}
+}
+
 if (!function_exists('api_plugin_db_add_column')) {
 	function api_plugin_db_add_column($plugin, $table, $data) {
 		return true;
@@ -312,7 +336,8 @@ if (!function_exists('__esc')) {
 
 if (!function_exists('cacti_log')) {
 	function cacti_log($message, $also_print = false, $log_type = '', $level = 0) {
-		$GLOBALS['__test_db_calls'][] = array('fn' => 'cacti_log', 'sql' => $message, 'params' => array());
+		$GLOBALS['__test_db_calls'][]    = array('fn' => 'cacti_log', 'sql' => $message, 'params' => array());
+		$GLOBALS['__test_cacti_log'][]   = (string) $message;
 	}
 }
 
