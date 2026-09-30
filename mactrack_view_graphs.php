@@ -24,10 +24,10 @@
 
 $guest_account = true;
 chdir('../../');
-include('./include/auth.php');
-include('./lib/html_tree.php');
-include('./plugins/mactrack/lib/mactrack_functions.php');
-include('./lib/timespan_settings.php');
+require('./include/auth.php');
+require('./lib/html_tree.php');
+require('./plugins/mactrack/lib/mactrack_functions.php');
+require('./lib/timespan_settings.php');
 
 $title = __('Mactrack - Monitored Device Graph View', 'mactrack');
 
@@ -73,7 +73,7 @@ bottom_footer();
 function mactrack_view_graphs(): void {
 	global $title, $current_user, $colors, $config, $host_template_hashes, $graph_template_hashes;
 
-	include('./lib/html_graph.php');
+	require('./lib/html_graph.php');
 
 	html_graph_validate_preview_request_vars();
 

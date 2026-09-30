@@ -422,7 +422,7 @@ function mactrack_check_dependencies(): bool {
 function mactrack_setup_table_new($operator_initiated = true): bool {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/mactrack/includes/database.php');
+	require_once($config['base_path'] . '/plugins/mactrack/includes/database.php');
 
 	// Preserve a prior failed seed's backoff when an incomplete upgrade causes
 	// Cacti to re-enter this hook on a later request.

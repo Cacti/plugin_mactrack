@@ -23,8 +23,8 @@
 */
 
 chdir('../../');
-include('./include/auth.php');
-include_once('./plugins/mactrack/lib/mactrack_functions.php');
+require('./include/auth.php');
+require_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 // check actions
 set_default_action();
