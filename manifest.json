@@ -44,7 +44,6 @@
         "manifest.json",
         "mise.toml",
         "phpstan-baseline.neon",
-        "phpunit.xml",
         "poller_mactrack.php",
         "psalm.xml",
         "setup.php"
