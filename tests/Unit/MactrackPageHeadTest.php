@@ -7,7 +7,7 @@
 
 /*
  * Unit coverage for mactrack_page_head()'s stylesheet selection in setup.php,
- * including the per-theme override loaded from css/<theme>/mactrack.css.
+ * including the per-theme override loaded from css/<theme>.css.
  */
 
 beforeAll(function () {
@@ -18,11 +18,11 @@ afterEach(function () {
 	unset($GLOBALS['__test_selected_theme']);
 });
 
-it('links the per-theme stylesheet from css/<theme>/ when it exists', function () {
+it('links the per-theme stylesheet from css/ when it exists', function () {
 	$restore = $GLOBALS['config']['base_path'];
 	$base    = sys_get_temp_dir() . '/mactrack-ph-' . uniqid();
-	mkdir($base . '/plugins/mactrack/css/modern', 0777, true);
-	file_put_contents($base . '/plugins/mactrack/css/modern/mactrack.css', '');
+	mkdir($base . '/plugins/mactrack/css', 0777, true);
+	file_put_contents($base . '/plugins/mactrack/css/modern.css', '');
 	$GLOBALS['__test_selected_theme'] = 'modern';
 	$GLOBALS['config']['base_path']   = $base;
 
@@ -35,7 +35,7 @@ it('links the per-theme stylesheet from css/<theme>/ when it exists', function (
 		$GLOBALS['config']['base_path'] = $restore;
 	}
 
-	expect($output)->toContain('plugins/mactrack/css/modern/mactrack.css');
+	expect($output)->toContain('plugins/mactrack/css/modern.css');
 });
 
 it('falls back to css/mactrack.css when no per-theme stylesheet exists', function () {

@@ -1,5 +1,8 @@
 {
     "tombstones": [
+        "mise.toml",
+        "phpstan-baseline.neon",
+        "psalm.xml",
         "themes/"
     ],
     "expected": [
@@ -42,10 +45,7 @@
         "mactrack_view_macs.php",
         "mactrack_view_sites.php",
         "manifest.json",
-        "mise.toml",
-        "phpstan-baseline.neon",
         "poller_mactrack.php",
-        "psalm.xml",
         "setup.php"
     ],
     "whitelist": []
