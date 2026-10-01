@@ -25,26 +25,26 @@ When generating code for this repository:
 ## Project Structure
 
 ```
-mactrack/                     # Repository root (install to plugins/mactrack/ in Cacti)
-├── docs/                        # Documentation (CactiCheatSheet.md)
-├── includes/                       # Shared functions
-├── lib/ Net/                          # Supporting libraries
-├── tests/                                # Pest/PHPUnit-style test suite (Security, Unit)
-├── themes/                                  # CSS theme overlays
-├── mactrack_devices.php / mactrack_device_types.php   # Device / device-type administration
-├── mactrack_sites.php                                   # Site administration
-├── mactrack_scanner.php / mactrack_resolver.php           # Discovery scanning / hostname resolution
-├── mactrack_view_*.php                                      # Various table views (arp, devices, dot1x, graphs, interfaces, ips, macs, sites)
-├── mactrack_macauth.php / mactrack_macwatch.php               # MAC authorization / watch-list administration
-├── mactrack_snmp.php / mactrack_snmp.js                          # SNMP collection routines + client-side helper
-├── mactrack_utilities.php / mactrack_convert.php                    # Maintenance utilities / data conversion
-├── mactrack_vendormacs.php / mactrack_import_ouidb.php                # Vendor OUI database import/lookup
-├── mactrack_ajax.php / mactrack_ajax_admin.php                          # AJAX endpoints (viewer / admin)
-├── poller_mactrack.php                                                     # Background poller entry point (CLI)
-├── mactrack.sql                                                              # Baseline schema
-├── INFO                                                                        # Plugin metadata (name, version, compat)
+mactrack/                                               # Repository root (install to plugins/mactrack/ in Cacti)
+├── docs/                                               # Documentation (CactiCheatSheet.md)
+├── includes/                                           # Shared functions
+├── lib/ Net/                                           # Supporting libraries
+├── tests/                                              # Pest/PHPUnit-style test suite (Security, Unit)
+├── css/                                                # CSS theme overlays
+├── mactrack_devices.php / mactrack_device_types.php    # Device / device-type administration
+├── mactrack_sites.php                                  # Site administration
+├── mactrack_scanner.php / mactrack_resolver.php        # Discovery scanning / hostname resolution
+├── mactrack_view_*.php                                 # Various table views (arp, devices, dot1x, graphs, interfaces, ips, macs, sites)
+├── mactrack_macauth.php / mactrack_macwatch.php        # MAC authorization / watch-list administration
+├── mactrack_snmp.php / mactrack_snmp.js                # SNMP collection routines + client-side helper
+├── mactrack_utilities.php / mactrack_convert.php       # Maintenance utilities / data conversion
+├── mactrack_vendormacs.php / mactrack_import_ouidb.php # Vendor OUI database import/lookup
+├── mactrack_ajax.php / mactrack_ajax_admin.php         # AJAX endpoints (viewer / admin)
+├── poller_mactrack.php                                 # Background poller entry point (CLI)
+├── mactrack.sql                                        # Baseline schema
+├── INFO                                                # Plugin metadata (name, version, compat)
 ├── README.md
-└── setup.php                                                                      # Plugin install/uninstall/upgrade hooks
+└── setup.php                                           # Plugin install/uninstall/upgrade hooks
 ```
 
 ## Naming Conventions
