@@ -153,7 +153,7 @@ function mactrack_rebuild_scanning_funcs(): void {
 
 	db_execute('TRUNCATE TABLE mac_track_scanning_functions');
 
-	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_vendors.php');
+	require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_vendors.php');
 
 	// store the list of registered mactrack scanning functions
 	db_execute("REPLACE INTO mac_track_scanning_functions

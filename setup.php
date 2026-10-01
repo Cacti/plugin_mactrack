@@ -155,8 +155,8 @@ function mactrack_check_upgrade(): void {
 		return;
 	}
 
-	include_once($config['base_path'] . '/plugins/mactrack/includes/database.php');
-	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+	require_once($config['base_path'] . '/plugins/mactrack/includes/database.php');
+	require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 	$current = plugin_mactrack_version();
 	$current = $current['version'];
@@ -178,8 +178,12 @@ function mactrack_check_upgrade(): void {
 			mactrack_database_upgrade();
 		}
 
-			// Remove files tombstoned in manifest.json plus the dev-only tests/ tree.
-			mactrack_prune_files();
+		if (read_config_option('mt_convert_readstrings', true) != 'on') {
+			convert_readstrings();
+		}
+
+		// Remove files tombstoned in manifest.json plus the dev-only tests/ tree.
+		mactrack_prune_files();
 
 		// If are realms are not present in plugin_realms recreate them with the old realm ids (minus 100) so that upgraded installs are not broken
 		if (!db_fetch_cell("SELECT id FROM plugin_realms WHERE plugin = 'mactrack'")) {
@@ -1187,7 +1191,7 @@ function mactrack_draw_navigation_text($nav) {
 function mactrack_show_tab() {
 	global $config, $user_auth_realm_filenames;
 
-	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+	require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 	if (!isset_request_var('report')) {
 		set_request_var('report', 'sites');
