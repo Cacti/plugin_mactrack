@@ -179,7 +179,7 @@ function mactrack_check_upgrade(): void {
 		}
 
 			// Remove files tombstoned in manifest.json plus the dev-only tests/ tree.
-			plugin_mactrack_prune_files();
+			mactrack_prune_files();
 
 		// If are realms are not present in plugin_realms recreate them with the old realm ids (minus 100) so that upgraded installs are not broken
 		if (!db_fetch_cell("SELECT id FROM plugin_realms WHERE plugin = 'mactrack'")) {
@@ -2172,7 +2172,7 @@ function convert_readstrings(): void {
  * @global array $config Cacti global configuration array; used to resolve
  *                       the plugin directory.
  */
-function plugin_mactrack_prune_files(): void {
+function mactrack_prune_files(): void {
 	global $config;
 
 	$plugin_dir    = $config['base_path'] . '/plugins/mactrack';
@@ -2258,7 +2258,7 @@ function plugin_mactrack_prune_files(): void {
 		}
 
 		if (is_dir($path) && !is_link($path)) {
-			$removed = plugin_mactrack_rmtree($path);
+			$removed = mactrack_rmtree($path);
 		} else {
 			$removed = @unlink($path);
 		}
@@ -2292,14 +2292,14 @@ function plugin_mactrack_prune_files(): void {
 
 /**
  * Recursively deletes a directory and its contents. Symlinks are removed
- * without being followed. Helper for plugin_mactrack_prune_files().
+ * without being followed. Helper for mactrack_prune_files().
  *
  * @param string $dir Absolute path to the directory to remove.
  *
  * @return bool True if the directory and everything under it was removed;
  *              false if any entry could not be deleted.
  */
-function plugin_mactrack_rmtree(string $dir): bool {
+function mactrack_rmtree(string $dir): bool {
 	$entries = scandir($dir);
 	$ok      = true;
 
@@ -2311,7 +2311,7 @@ function plugin_mactrack_rmtree(string $dir): bool {
 		$path = $dir . '/' . $entry;
 
 		if (is_dir($path) && !is_link($path)) {
-			if (!plugin_mactrack_rmtree($path)) {
+			if (!mactrack_rmtree($path)) {
 				$ok = false;
 			}
 		} elseif (!@unlink($path)) {

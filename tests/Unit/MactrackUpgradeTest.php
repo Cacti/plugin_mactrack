@@ -8,7 +8,7 @@
 /*
  * Unit coverage for mactrack_check_upgrade()'s version-drift path in
  * setup.php, including the upgrade-time manifest prune
- * (plugin_mactrack_prune_files()).
+ * (mactrack_prune_files()).
  */
 
 beforeAll(function () {
