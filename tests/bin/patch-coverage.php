@@ -160,6 +160,11 @@ foreach ($clover->xpath('//file') as $file) {
  * Empty by default; add entries per repository as the need arises.
  */
 $unmeasured_allowlist = [
+	// Vendor scanning-function dispatcher: a flat list of require_once()s that
+	// pulls in the per-vendor scanning libraries, loadable only inside a live
+	// Cacti (the vendor files call Cacti/SNMP helpers at include time). Changed
+	// here only by the include_once -> require_once consistency sweep.
+	'lib/mactrack_vendors.php',
 	// Web/CLI entry points (chdir + require auth.php, top-level execution) that
 	// cannot be loaded into the isolated unit process. Changed here only by the
 	// include_once -> require_once consistency sweep.

@@ -383,6 +383,24 @@ if (!function_exists('get_filter_request_var')) {
 	}
 }
 
+if (!function_exists('isset_request_var')) {
+	function isset_request_var($name) {
+		return mactrack_test_next_return('isset_request_var', false);
+	}
+}
+
+if (!function_exists('set_request_var')) {
+	function set_request_var($name, $value) {
+		$GLOBALS['__test_request_vars'][$name] = $value;
+	}
+}
+
+if (!function_exists('api_user_realm_auth')) {
+	function api_user_realm_auth($filename) {
+		return mactrack_test_next_return('api_user_realm_auth', true);
+	}
+}
+
 if (!function_exists('form_input_validate')) {
 	function form_input_validate($value, $name, $regex, $optional, $error) {
 		return $value;
