@@ -23,8 +23,8 @@
 */
 
 chdir('../../');
-include('./include/auth.php');
-include_once('./plugins/mactrack/lib/mactrack_functions.php');
+require('./include/auth.php');
+require_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 // set default action
 set_default_action();
@@ -40,7 +40,7 @@ switch (get_request_var('action')) {
 		break;
 	case 'mactrack_utilities_perform_db_maint':
 		top_header();
-		include_once('./plugins/mactrack/lib/mactrack_functions.php');
+		require_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 		mactrack_utilities();
 		mactrack_utilities_db_maint();
@@ -50,7 +50,7 @@ switch (get_request_var('action')) {
 		break;
 	case 'mactrack_utilities_purge_scanning_funcs':
 		top_header();
-		include_once('./plugins/mactrack/lib/mactrack_functions.php');
+		require_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 		mactrack_utilities();
 		mactrack_utilities_purge_scanning_funcs();
@@ -68,7 +68,7 @@ switch (get_request_var('action')) {
 		break;
 	case 'mactrack_refresh_oui_database':
 		top_header();
-		include_once('./plugins/mactrack/lib/mactrack_functions.php');
+		require_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 		import_oui_database('web');
 

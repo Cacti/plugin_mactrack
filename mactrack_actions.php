@@ -80,7 +80,7 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 	$private_key_path, $disabled, $scan_trunk_port, $device_type_id): int {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+	require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 	$save['device_id']            = $device_id;
 	$save['host_id']              = $host_id;
@@ -231,9 +231,9 @@ function api_mactrack_site_remove($site_id): void {
 function sync_mactrack_to_cacti($mt_device): void {
 	global $config;
 
-	include_once($config['base_path'] . '/lib/api_device.php');
-	include_once($config['base_path'] . '/lib/utility.php');
-	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+	require_once($config['base_path'] . '/lib/api_device.php');
+	require_once($config['base_path'] . '/lib/utility.php');
+	require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 	/* do we want to 'Sync Mactrack Device to Cacti Device'
 	 * AND has the device already been assigned a 'valid' host_id
@@ -278,7 +278,7 @@ function sync_mactrack_to_cacti($mt_device): void {
 function sync_cacti_to_mactrack($device): array {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+	require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 	/* do we want to 'Sync Cacti Device to Mactrack Device'
 	 * AND has the device already been assigned a 'valid' Mactrack device id

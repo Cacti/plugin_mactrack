@@ -24,9 +24,9 @@
 
 $guest_account = true;
 chdir('../../');
-include('./include/auth.php');
-include_once('./include/global_arrays.php');
-include_once('./plugins/mactrack/lib/mactrack_functions.php');
+require('./include/auth.php');
+require_once('./include/global_arrays.php');
+require_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 $title = __('Mactrack - 802.1x View', 'mactrack');
 

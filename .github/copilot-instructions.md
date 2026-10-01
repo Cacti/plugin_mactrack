@@ -25,26 +25,26 @@ When generating code for this repository:
 ## Project Structure
 
 ```
-mactrack/                     # Repository root (install to plugins/mactrack/ in Cacti)
-├── docs/                        # Documentation (CactiCheatSheet.md)
-├── includes/                       # Shared functions
-├── lib/ Net/                          # Supporting libraries
-├── tests/                                # Pest/PHPUnit-style test suite (Security, Unit)
-├── themes/                                  # CSS theme overlays
-├── mactrack_devices.php / mactrack_device_types.php   # Device / device-type administration
-├── mactrack_sites.php                                   # Site administration
-├── mactrack_scanner.php / mactrack_resolver.php           # Discovery scanning / hostname resolution
-├── mactrack_view_*.php                                      # Various table views (arp, devices, dot1x, graphs, interfaces, ips, macs, sites)
-├── mactrack_macauth.php / mactrack_macwatch.php               # MAC authorization / watch-list administration
-├── mactrack_snmp.php / mactrack_snmp.js                          # SNMP collection routines + client-side helper
-├── mactrack_utilities.php / mactrack_convert.php                    # Maintenance utilities / data conversion
-├── mactrack_vendormacs.php / mactrack_import_ouidb.php                # Vendor OUI database import/lookup
-├── mactrack_ajax.php / mactrack_ajax_admin.php                          # AJAX endpoints (viewer / admin)
-├── poller_mactrack.php                                                     # Background poller entry point (CLI)
-├── mactrack.sql                                                              # Baseline schema
-├── INFO                                                                        # Plugin metadata (name, version, compat)
+mactrack/                                               # Repository root (install to plugins/mactrack/ in Cacti)
+├── docs/                                               # Documentation (CactiCheatSheet.md)
+├── includes/                                           # Shared functions
+├── lib/ Net/                                           # Supporting libraries
+├── tests/                                              # Pest/PHPUnit-style test suite (Security, Unit)
+├── css/                                                # CSS theme overlays
+├── mactrack_devices.php / mactrack_device_types.php    # Device / device-type administration
+├── mactrack_sites.php                                  # Site administration
+├── mactrack_scanner.php / mactrack_resolver.php        # Discovery scanning / hostname resolution
+├── mactrack_view_*.php                                 # Various table views (arp, devices, dot1x, graphs, interfaces, ips, macs, sites)
+├── mactrack_macauth.php / mactrack_macwatch.php        # MAC authorization / watch-list administration
+├── mactrack_snmp.php / mactrack_snmp.js                # SNMP collection routines + client-side helper
+├── mactrack_utilities.php / mactrack_convert.php       # Maintenance utilities / data conversion
+├── mactrack_vendormacs.php / mactrack_import_ouidb.php # Vendor OUI database import/lookup
+├── mactrack_ajax.php / mactrack_ajax_admin.php         # AJAX endpoints (viewer / admin)
+├── poller_mactrack.php                                 # Background poller entry point (CLI)
+├── mactrack.sql                                        # Baseline schema
+├── INFO                                                # Plugin metadata (name, version, compat)
 ├── README.md
-└── setup.php                                                                      # Plugin install/uninstall/upgrade hooks
+└── setup.php                                           # Plugin install/uninstall/upgrade hooks
 ```
 
 ## Naming Conventions
@@ -201,3 +201,7 @@ existing code or adding new code, not just in dedicated cleanup passes:
   line, `@param` lines, a blank comment line, then `@return`. Infer parameter/return types from
   actual usage; don't change the function's real type-hints in the same pass (let static analysis
   flag mismatches separately). Skip vendored third-party library files.
+
+## File manifest & upgrade pruning
+
+The plugin ships a root `manifest.json` with three arrays: `tombstones` (files/directories older versions shipped that have since moved or been removed), `expected` (the top-level files and directories that ship today, directories written with a trailing `/`), and `whitelist` (paths holding user data that must never be touched). Keep `expected` current: CI runs `tests/bin/validate-manifest.php`, which fails on any drift between `expected` and the real top-level tree (it ignores `tests/`, `phpunit.xml`, `.git*`, `.md*`, and whitelisted paths). Custom customer CSS/theme files belong in `expected`, and stylesheets live in `css/` (not `themes/`). On upgrade, `mactrack_prune_files()` deletes the tombstoned paths, the dev-only `tests/` tree, and the `phpunit.xml` test config, leaves `whitelist`, `.git*`, and `.md*` alone, and logs (without removing) any top-level entry the manifest does not account for. As a safety measure it refuses any tombstone that resolves outside the plugin directory (a tampered manifest.json) and logs a warning for any file or directory it cannot remove. When you move or delete a shipped file, add its old path to `tombstones` and update `expected` in the same change.

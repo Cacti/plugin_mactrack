@@ -23,9 +23,9 @@
 */
 
 chdir('../../');
-include('./include/auth.php');
-include_once('./lib/snmp.php');
-include_once('./plugins/mactrack/lib/mactrack_functions.php');
+require('./include/auth.php');
+require_once('./lib/snmp.php');
+require_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 $mactrack_snmp_actions = [
 	1 => __('Delete', 'mactrack'),

@@ -45,12 +45,12 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 	chdir('../../');
 }
 
-include('./include/cli_check.php');
+require('./include/cli_check.php');
 
 global $config;
-include_once($config['base_path'] . '/lib/poller.php');
-include_once($config['base_path'] . '/plugins/mactrack/includes/database.php');
-include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+require_once($config['base_path'] . '/lib/poller.php');
+require_once($config['base_path'] . '/plugins/mactrack/includes/database.php');
+require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 mactrack_retry_default_site();
 

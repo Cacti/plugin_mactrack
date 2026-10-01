@@ -24,13 +24,13 @@
 
 chdir('../../');
 // include cacti base functions
-include('./include/auth.php');
-include_once('./lib/snmp.php');
-include_once('./plugins/mactrack/lib/mactrack_functions.php');
+require('./include/auth.php');
+require_once('./lib/snmp.php');
+require_once('./plugins/mactrack/lib/mactrack_functions.php');
 
 // include base and vendor functions to obtain a list of registered scanning functions
-include_once('./plugins/mactrack/lib/mactrack_functions.php');
-include_once('./plugins/mactrack/lib/mactrack_vendors.php');
+require_once('./plugins/mactrack/lib/mactrack_functions.php');
+require_once('./plugins/mactrack/lib/mactrack_vendors.php');
 
 // store the list of registered mactrack scanning functions
 db_execute('REPLACE INTO mac_track_scanning_functions

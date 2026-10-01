@@ -30,10 +30,10 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 	chdir('../../');
 }
 
-include('./include/cli_check.php');
+require('./include/cli_check.php');
 
 global $config;
-include($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+require($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
 if (read_config_option('mt_collection_timing') != 'disabled') {
 	global $debug;

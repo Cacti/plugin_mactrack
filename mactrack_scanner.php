@@ -29,14 +29,14 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 	chdir('../../');
 }
 
-include('./include/cli_check.php');
+require('./include/cli_check.php');
 
 global $config;
-include_once($config['base_path'] . '/lib/snmp.php');
-include_once($config['base_path'] . '/lib/ping.php');
-include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
-include_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_vendors.php');
-include_once($config['base_path'] . '/plugins/mactrack/mactrack_actions.php');
+require_once($config['base_path'] . '/lib/snmp.php');
+require_once($config['base_path'] . '/lib/ping.php');
+require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_vendors.php');
+require_once($config['base_path'] . '/plugins/mactrack/mactrack_actions.php');
 
 // obtain some date/times for later use
 $scan_date  = read_config_option('mt_scan_date');

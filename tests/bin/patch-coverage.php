@@ -160,6 +160,38 @@ foreach ($clover->xpath('//file') as $file) {
  * Empty by default; add entries per repository as the need arises.
  */
 $unmeasured_allowlist = [
+	// Vendor scanning-function dispatcher: a flat list of require_once()s that
+	// pulls in the per-vendor scanning libraries, loadable only inside a live
+	// Cacti (the vendor files call Cacti/SNMP helpers at include time). Changed
+	// here only by the include_once -> require_once consistency sweep.
+	'lib/mactrack_vendors.php',
+	// Web/CLI entry points (chdir + require auth.php, top-level execution) that
+	// cannot be loaded into the isolated unit process. Changed here only by the
+	// include_once -> require_once consistency sweep.
+	'mactrack_actions.php',
+	'mactrack_ajax.php',
+	'mactrack_ajax_admin.php',
+	'mactrack_convert.php',
+	'mactrack_device_types.php',
+	'mactrack_devices.php',
+	'mactrack_import_ouidb.php',
+	'mactrack_macauth.php',
+	'mactrack_macwatch.php',
+	'mactrack_resolver.php',
+	'mactrack_scanner.php',
+	'mactrack_sites.php',
+	'mactrack_snmp.php',
+	'mactrack_utilities.php',
+	'mactrack_vendormacs.php',
+	'mactrack_view_arp.php',
+	'mactrack_view_devices.php',
+	'mactrack_view_dot1x.php',
+	'mactrack_view_graphs.php',
+	'mactrack_view_interfaces.php',
+	'mactrack_view_ips.php',
+	'mactrack_view_macs.php',
+	'mactrack_view_sites.php',
+	'poller_mactrack.php',
 ];
 $unmeasured            = array_values(array_diff(array_keys($changed), array_keys($measured)));
 $unexpected_unmeasured = array_values(array_diff($unmeasured, $unmeasured_allowlist));
