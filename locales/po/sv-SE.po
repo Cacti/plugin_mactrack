@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:06-0400\n"
-"PO-Revision-Date: 2026-09-12 08:18+0000\n"
-"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
-"Language-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\n"
-"Language: sv-SE\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-09-28 16:06-0400\nPO-Revision-Date: 2026-10-05 08:46+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -186,7 +174,7 @@ msgstr "%d timmar"
 #: lib/mactrack_functions.php setup.php
 #, php-format
 msgid "%d Days"
-msgstr "%d Dagar"
+msgstr "%d dygn"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -1319,7 +1307,7 @@ msgstr "Väntar"
 
 #: mactrack_utilities.php
 msgid "Other"
-msgstr "Annat"
+msgstr "Övrigt"
 
 #: mactrack_utilities.php
 msgid "Are You Sure?"
@@ -2570,11 +2558,11 @@ msgstr "Hur samlas serienummeret för denna OID. Om \"SNMP Walk\" antar vi flera
 
 #: setup.php
 msgid "SNMP Get"
-msgstr "SNMP Get"
+msgstr "SNMP-hämtning"
 
 #: setup.php
 msgid "SNMP Walk"
-msgstr "SNMP Walk"
+msgstr "SNMP-genomgång"
 
 #: setup.php
 msgid "Low User Port Number"
@@ -2642,11 +2630,11 @@ msgstr "Specificerat antalet OID: er som kan erhållas i en enda SNMP-förfråga
 
 #: setup.php
 msgid "SNMP Username (v3)"
-msgstr "SNMP Användarnamn (v3)"
+msgstr "SNMP-användarnamn (v3)"
 
 #: setup.php
 msgid "SNMP v3 username for this device."
-msgstr "SNMP v3 användarnamn för den här enheten."
+msgstr "SNMP v3-användarnamn för den här enheten."
 
 #: setup.php
 msgid "SNMP Password (v3)"
@@ -2654,23 +2642,23 @@ msgstr "SNMP-lösenord (v3)"
 
 #: setup.php
 msgid "SNMP v3 password for this device."
-msgstr "SNMP v3 lösenord för den här enheten."
+msgstr "SNMP v3-lösenord för den här enheten."
 
 #: setup.php
 msgid "SNMP Auth Protocol (v3)"
-msgstr "SNMP Auth-protokoll (v3)"
+msgstr "SNMP-autentiseringsprotokoll (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Authorization Protocol."
-msgstr "Välj godkännandeprotokollet SNMPv3."
+msgstr "Välj auktoriseringsprotokoll för SNMPv3."
 
 #: setup.php
 msgid "SNMP Privacy Passphrase (v3)"
-msgstr "SNMP-sekretessfrasfras (v3)"
+msgstr "SNMP-sekretesslösenfras (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Passphrase."
-msgstr "Välj SNMPv3 Privacy Passphrase."
+msgstr "Välj sekretesslösenfras för SNMPv3."
 
 #: setup.php
 msgid "SNMP Privacy Protocol (v3)"
@@ -2678,7 +2666,7 @@ msgstr "SNMP-sekretessprotokoll (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Protocol."
-msgstr "Välj sekretessprotokollet SNMPv3."
+msgstr "Välj sekretessprotokoll för SNMPv3."
 
 #: setup.php
 msgid "SNMP Context (v3)"
