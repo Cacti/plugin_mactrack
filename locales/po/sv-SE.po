@@ -4,15 +4,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-09-28 16:06-0400\nPO-Revision-Date: 2026-10-05 08:46+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-09-28 16:06-0400\nPO-Revision-Date: 2026-10-06 09:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
-msgstr ""
+msgstr "MacTrack kunde inte initiera sin standardwebbplats efter upprepade försök. Granska Cacti-loggen innan du fortsätter."
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
-msgstr ""
+msgstr "MacTrack kunde inte initiera sin standardwebbplats. Granska Cacti-loggen innan du fortsätter."
 
 #: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
 msgid "Idle"
@@ -159,7 +159,7 @@ msgstr "Enhet inaktivera \"%d\""
 #: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
 #: setup.php
 msgid "N/A"
-msgstr "N/A"
+msgstr "Ej tillämpligt"
 
 #: lib/mactrack_functions.php setup.php
 #, php-format
@@ -183,7 +183,7 @@ msgstr "%d veckor"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
-msgstr "Inte inspelat"
+msgstr "Inte registrerad"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -230,7 +230,7 @@ msgstr "IP-områden"
 
 #: lib/mactrack_functions.php
 msgid "IP Address"
-msgstr "IP adress"
+msgstr "IP-adress"
 
 #: lib/mactrack_functions.php setup.php
 msgid "MAC Address"
@@ -276,7 +276,7 @@ msgstr "Visa enhetens detaljer"
 #: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
 #: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
 msgid "Go"
-msgstr "Utför"
+msgstr "Start"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -337,7 +337,7 @@ msgstr "Ej tillämpligt - Switch / Hub"
 #: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
 #: mactrack_view_macs.php
 msgid "Delete"
-msgstr "Ta bort"
+msgstr "Radera"
 
 #: mactrack_device_types.php mactrack_snmp.php
 msgid "Duplicate"
@@ -924,7 +924,7 @@ msgstr "Inga Mactrack-enheter"
 
 #: mactrack_devices.php mactrack_view_devices.php setup.php
 msgid "None"
-msgstr "inget"
+msgstr "Ingen"
 
 #: mactrack_devices.php mactrack_view_devices.php
 msgid "Error"
@@ -1195,7 +1195,7 @@ msgstr "Uppdatera"
 
 #: mactrack_utilities.php
 msgid "Current Process Status"
-msgstr "Aktuell processstatus"
+msgstr "Status för aktuell process"
 
 #: mactrack_utilities.php
 msgid "The Mactrack Poller is:"
@@ -1354,7 +1354,7 @@ msgstr "Cactis systemverktyg Mactrack"
 
 #: mactrack_utilities.php
 msgid "Process Status Information"
-msgstr "Processstatusinformation"
+msgstr "Information om processstatus"
 
 #: mactrack_utilities.php setup.php
 msgid "View Mactrack Process Status"
@@ -1972,7 +1972,7 @@ msgstr "Starttid för datainsamling"
 
 #: setup.php
 msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
-msgstr "När vill du att den första datainsamlingen ska ske. Alla framtida insamlingstider kommer att baseras på denna starttid. Ett bra exempel skulle vara kl 12.00."
+msgstr "När vill du att den första datainsamlingen ska ske? Alla framtida datainsamlingstider baseras på denna starttid. Ett bra exempel är 12:00 AM."
 
 #: setup.php
 msgid "Database Maintenance Time"
@@ -2137,7 +2137,7 @@ msgstr "Förinställd e-posttext för Mactrack MacWatch-e-postmeddelanden.  Text
 
 #: setup.php
 msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
-msgstr "MAC-adress <MAC> hittades på IP-adress <IP> för ärendenummer: <TICKET> . <br> Enheten finns på <br> Plats: <SITENAME> , Enhet <DEVICENAME> , IP <DEVICEIP> , Port <PORTNUMBER> , och portnamn <PORTNAME>"
+msgstr "MAC-adressen <MAC> hittades på IP-adressen <IP> för ärendenummer <TICKET>.<br>Enheten finns på<br>Plats: <SITENAME>, enhet <DEVICENAME>, IP <DEVICEIP>, port <PORTNUMBER> och portnamn <PORTNAME>"
 
 #: setup.php
 msgid "MacAuth Report Email Addresses"
@@ -2297,7 +2297,7 @@ msgstr "MacTrack-platser"
 
 #: setup.php
 msgid "Mac Address Tracking Utility"
-msgstr "Mac-adressspårningsverktyg"
+msgstr "Verktyg för spårning av MAC-adresser"
 
 #: setup.php
 msgid "Mac Address Authorization Utility"
@@ -2510,7 +2510,7 @@ msgstr "Systembeskrivning Match"
 
 #: setup.php
 msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
-msgstr "Ange nyckelinformation som hjälper Mactrack att upptäcka enhetstypen.  Jokertecknet är tecknet \"*\"."
+msgstr "Ange nyckelinformation som hjälper Mactrack att identifiera enhetstypen. Jokertecknet är tecknet ”*”."
 
 #: setup.php
 msgid "Vendor SNMP Object ID Match"
@@ -2518,7 +2518,7 @@ msgstr "Säljare SNMP Object ID Match"
 
 #: setup.php
 msgid "MAC Address Scanning Function"
-msgstr "MAC-adressskanning Funktion"
+msgstr "MAC-adresskanningsfunktion"
 
 #: setup.php
 msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
@@ -2526,7 +2526,7 @@ msgstr "Mactracks skanningsfunktion som ska anropas för att hämta och lagra po
 
 #: setup.php
 msgid "IP Address Scanning Function"
-msgstr "IP-adressskanning Funktion"
+msgstr "IP-adresskanningsfunktion"
 
 #: setup.php
 msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
@@ -2554,7 +2554,7 @@ msgstr "Serienummer samlingsmetod"
 
 #: setup.php
 msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
-msgstr "Hur samlas serienummeret för denna OID. Om \"SNMP Walk\" antar vi flera serienumrar. Om 'Get' blir det bara en .."
+msgstr "Hur samlas serienumret in för denna OID? Vid ”SNMP Walk” förutsätter vi flera serienummer. Vid ”Get” blir det bara ett."
 
 #: setup.php
 msgid "SNMP Get"
@@ -2858,11 +2858,11 @@ msgstr "Ge någon platsspecifik information, i fri form, så att du bättre kan 
 
 #: setup.php
 msgid "General Mac Address Tracking Settings"
-msgstr "Allmänna Mac-adressspårningsinställningar"
+msgstr "Allmänna inställningar för spårning av MAC-adresser"
 
 #: setup.php
 msgid "Please enter the MAC Address to be watched for."
-msgstr "Vänligen ange MAC-adressen som du vill titta på."
+msgstr "Ange MAC-adressen som ska övervakas."
 
 #: setup.php
 msgid "MAC Tracking Name/Email Subject"
@@ -2914,7 +2914,7 @@ msgstr "MAC Adress Match"
 
 #: setup.php
 msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
-msgstr "Vänligen ange MAC-adressen eller Mac-adressen Match-sträng som automatiskt godkänns. Om du vill godkänna en grupp MAC-adresser kan du använda wildcard-tecknet \"%\" någonstans i MAC-adressen."
+msgstr "Ange MAC-adressen eller MAC-adressmatchningssträngen som ska godkännas automatiskt. Om du vill godkänna en grupp MAC-adresser kan du använda jokertecknet ”%” var som helst i MAC-adressen."
 
 #: setup.php
 msgid "Please add a reason for this entry."
