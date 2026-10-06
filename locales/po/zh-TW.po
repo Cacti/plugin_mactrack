@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:06-0400\n"
-"PO-Revision-Date: 2026-02-08 07:18+0000\n"
-"Last-Translator: Anonymous <anonymous@cacti.net>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\n"
-"Language: zh-TW\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-09-28 16:06-0400\nPO-Revision-Date: 2026-10-06 09:18+0000\nLast-Translator: YU HAO HUANG <mix@b51.tw>\nLanguage-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\nLanguage: zh-TW\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -177,9 +165,8 @@ msgstr "裝置停用'%d'"
 #: mactrack_view_devices.php mactrack_view_dot1x.php
 #: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
 #: setup.php
-#, fuzzy
 msgid "N/A"
-msgstr "不适用"
+msgstr "N/A"
 
 #: lib/mactrack_functions.php setup.php
 #, fuzzy, php-format
@@ -253,7 +240,6 @@ msgid "IP Ranges"
 msgstr "IP 範圍"
 
 #: lib/mactrack_functions.php
-#, fuzzy
 msgid "IP Address"
 msgstr "IP 位址"
 
@@ -284,7 +270,6 @@ msgstr "未知"
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
 #: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
 #: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
-#, fuzzy
 msgid "Search"
 msgstr "搜尋"
 
@@ -292,9 +277,8 @@ msgstr "搜尋"
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
 #: mactrack_vendormacs.php mactrack_view_devices.php mactrack_view_ips.php
 #: setup.php
-#, fuzzy
 msgid "Default"
-msgstr "默认"
+msgstr "預設"
 
 #: lib/mactrack_functions.php
 msgid "Show Device Details"
@@ -304,7 +288,6 @@ msgstr "顯示設備細節"
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
 #: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
 #: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
-#, fuzzy
 msgid "Go"
 msgstr "送出"
 
@@ -313,7 +296,6 @@ msgstr "送出"
 #: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
 #: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
 #: mactrack_view_macs.php
-#, fuzzy
 msgid "Clear"
 msgstr "清除"
 
@@ -321,7 +303,6 @@ msgstr "清除"
 #: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
 #: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
 #: mactrack_view_macs.php
-#, fuzzy
 msgid "Export"
 msgstr "匯出"
 
@@ -711,7 +692,6 @@ msgstr "供應商"
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
 #: mactrack_view_interfaces.php mactrack_view_macs.php setup.php
-#, fuzzy
 msgid "All"
 msgstr "全部"
 
@@ -3011,7 +2991,6 @@ msgid "HTTPS"
 msgstr "HTTPS"
 
 #: setup.php
-#, fuzzy
 msgid "User Name"
 msgstr "使用者名稱"
 
