@@ -328,6 +328,16 @@ if (!function_exists('__')) {
 	}
 }
 
+if (!function_exists('html_start_box')) {
+	function html_start_box($title = '', $width = '100%', $div = '', $cell_padding = 3, $align = 'center', $add_text = '') {
+	}
+}
+
+if (!function_exists('html_end_box')) {
+	function html_end_box($trailing_br = true, $resizable = false) {
+	}
+}
+
 if (!function_exists('__esc')) {
 	function __esc($text, $domain = '') {
 		return htmlspecialchars($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');

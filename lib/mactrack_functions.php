@@ -3968,17 +3968,35 @@ function mactrack_display_stats(): void {
 }
 
 /**
- * Prints a single legend swatch cell (used in the interfaces/dot1x list
- * legends to explain each row-highlight color/class).
+ * Renders the status legend as an evenly sized, wrapping row of rounded,
+ * solid-colour chips (one per state). Sizes every chip to the longest label
+ * via a --mactrack-chip-min variable so they stay equal width as the legend
+ * wraps. Used by the interfaces and dot1x list views.
  *
- * @param string $class The CSS class to apply to the cell (matching a
- *                      row-highlight class).
- * @param string $text  The label text to display in the cell.
+ * @param array $items Ordered map of row-highlight CSS class => label text.
  *
  * @return void
  */
-function mactrack_legend_row($class, $text): void {
-	print "<td width='16.67%' class='$class' style='text-align:center;;'>$text</td>";
+function mactrack_legend(array $items): void {
+	html_start_box('', '100%', '', '3', 'center', '');
+
+	$chip_min = 0;
+
+	foreach ($items as $label) {
+		$chip_min = max($chip_min, mb_strlen($label));
+	}
+
+	print '<tr class="tableRow"><td>';
+	print '<div class="mactrackLegend" style="--mactrack-chip-min: calc(' . $chip_min . 'ch + 1.5rem)">';
+
+	foreach ($items as $class => $label) {
+		print '<div class="mactrackLegendItem ' . $class . '">' . html_escape($label) . '</div>';
+	}
+
+	print '</div>';
+	print '</td></tr>';
+
+	html_end_box(false);
 }
 
 /**

@@ -397,16 +397,14 @@ function mactrack_view(): void {
 
 	print '<div class="center" style="position:fixed;left:0;bottom:0;display:table;margin-left:auto;margin-right:auto;width:100%;">';
 
-	html_start_box('', '100%', '', '3', 'center', '');
-	print '<tr>';
-	mactrack_legend_row('int_up', __('Interface Up', 'mactrack'));
-	mactrack_legend_row('int_up_wo_alias', __('No Alias', 'mactrack'));
-	mactrack_legend_row('int_errors', __('Errors Present', 'mactrack'));
-	mactrack_legend_row('int_discards', __('Discards Present', 'mactrack'));
-	mactrack_legend_row('int_no_graph', __('No Graphs', 'mactrack'));
-	mactrack_legend_row('int_down', __('Interface Down', 'mactrack'));
-	print '</tr>';
-	html_end_box(false);
+	mactrack_legend([
+		'int_up'          => __('Interface Up', 'mactrack'),
+		'int_up_wo_alias' => __('No Alias', 'mactrack'),
+		'int_errors'      => __('Errors Present', 'mactrack'),
+		'int_discards'    => __('Discards Present', 'mactrack'),
+		'int_no_graph'    => __('No Graphs', 'mactrack'),
+		'int_down'        => __('Interface Down', 'mactrack'),
+	]);
 
 	print '</div>';
 
