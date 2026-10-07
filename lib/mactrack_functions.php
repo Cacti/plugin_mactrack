@@ -3990,7 +3990,7 @@ function mactrack_legend(array $items): void {
 	print '<div class="mactrackLegend" style="--mactrack-chip-min: calc(' . $chip_min . 'ch + 1.5rem)">';
 
 	foreach ($items as $class => $label) {
-		print '<div class="mactrackLegendItem ' . $class . '">' . $label . '</div>';
+		print '<div class="mactrackLegendItem ' . $class . '">' . html_escape($label) . '</div>';
 	}
 
 	print '</div>';
