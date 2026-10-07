@@ -65,6 +65,43 @@
 	color: #3399FF;
 }
 
+/*
+ * Status legend chips: solid, opaque colours with white text (consistent with
+ * the Thold/Monitor/Syslog legends), sized to the longest label via
+ * --mactrack-chip-min so they stay equal width as the legend wraps. The plain
+ * row-highlight classes below still tint the list rows.
+ */
+.mactrackLegend {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	width: 100%;
+}
+
+.mactrackLegend .mactrackLegendItem {
+	flex: 1 1 0;
+	min-width: var(--mactrack-chip-min, max-content);
+	text-align: center;
+	white-space: nowrap;
+	padding: 4px 6px;
+	border-radius: 3px;
+	color: #ffffff;
+}
+
+.mactrackLegend .int_up { background-color: #2f8f3a; }
+.mactrackLegend .int_up_wo_alias { background-color: #a85712; }
+.mactrackLegend .int_errors { background-color: #93302a; }
+.mactrackLegend .int_discards { background-color: #9a6a1a; }
+.mactrackLegend .int_no_graph { background-color: #5f5f57; }
+.mactrackLegend .int_down { background-color: #a12820; }
+
+.mactrackLegend .authn_success { background-color: #2f8f3a; }
+.mactrackLegend .auth_success { background-color: #3f7a4a; }
+.mactrackLegend .authn_failed { background-color: #a12820; }
+.mactrackLegend .auth_failed { background-color: #93302a; }
+.mactrackLegend .running { background-color: #a85712; }
+.mactrackLegend .idle { background-color: #5f5f57; }
+
 .int_up {
 	background-color: rgba(148, 179, 107, 0.8);
 	color: #eeeeee;
@@ -91,7 +128,7 @@
 }
 
 .int_no_device {
-	background-color: color: rgba(250, 253, 158, 0.8);
+	background-color: rgba(250, 253, 158, 0.8);
 	color: #000000;
 }
 

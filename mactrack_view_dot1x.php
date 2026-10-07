@@ -545,16 +545,14 @@ function mactrack_view_dot1x(): void {
 
 	print '<div class="center" style="position:fixed;left:0;bottom:0;display:table;margin-left:auto;margin-right:auto;width:100%;">';
 
-	html_start_box('', '100%', '', '3', 'center', '');
-	print '<tr class="tableRow">';
-	mactrack_legend_row('authn_success', __('Authorization Success', 'mactrack'));
-	mactrack_legend_row('auth_success', __('Authentication Success', 'mactrack'));
-	mactrack_legend_row('authn_failed', __('Authorization Failed', 'mactrack'));
-	mactrack_legend_row('auth_failed', __('Authentication Failed', 'mactrack'));
-	mactrack_legend_row('running', __('Running', 'mactrack'));
-	mactrack_legend_row('idle', __('Idle', 'mactrack'));
-	print '</tr>';
-	html_end_box(false);
+	mactrack_legend([
+		'authn_success' => __('Authorization Success', 'mactrack'),
+		'auth_success'  => __('Authentication Success', 'mactrack'),
+		'authn_failed'  => __('Authorization Failed', 'mactrack'),
+		'auth_failed'   => __('Authentication Failed', 'mactrack'),
+		'running'       => __('Running', 'mactrack'),
+		'idle'          => __('Idle', 'mactrack'),
+	]);
 
 	print '</div>';
 
