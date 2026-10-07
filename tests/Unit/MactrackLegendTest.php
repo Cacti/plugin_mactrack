@@ -38,7 +38,12 @@ final class MactrackLegendTest extends TestCase {
 			$output = ob_get_clean();
 		}
 
-		$this->assertStringContainsString('<div class="mactrackLegend" style="--mactrack-chip-min: calc(', $output);
+		$expected = 0;
+		foreach ($items as $label) {
+			$expected = max($expected, mb_strlen($label));
+		}
+
+		$this->assertStringContainsString('<div class="mactrackLegend" style="--mactrack-chip-min: calc(' . $expected . 'ch + 1.5rem)">', $output);
 		$this->assertSame(count($items), substr_count($output, 'mactrackLegendItem'));
 
 		foreach ($items as $class => $label) {

@@ -72,15 +72,13 @@
  * as the legend wraps. The plain row-highlight classes below still tint rows.
  */
 .mactrackLegend {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(var(--mactrack-chip-min, 8ch), 1fr));
 	gap: 4px;
 	width: 100%;
 }
 
 .mactrackLegend .mactrackLegendItem {
-	flex: 1 1 0;
-	min-width: var(--mactrack-chip-min, max-content);
 	text-align: center;
 	white-space: nowrap;
 	padding: 4px 6px;
