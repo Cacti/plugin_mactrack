@@ -96,9 +96,9 @@
 .mactrackLegend .authn_success { background-color: #2b8435; }
 .mactrackLegend .auth_success { background-color: #3f7a4a; }
 .mactrackLegend .authn_failed { background-color: #a12820; }
-.mactrackLegend .auth_failed { background-color: #93302a; }
-.mactrackLegend .running { background-color: #a85712; }
-.mactrackLegend .idle { background-color: #5f5f57; }
+.mactrackLegend .auth_failed { background-color: #a85712; }
+.mactrackLegend .running { background-color: #93302a; }
+.mactrackLegend .idle { background-color: #9a6a1a; }
 
 .int_up {
 	background-color: rgba(148, 179, 107, 0.2);
