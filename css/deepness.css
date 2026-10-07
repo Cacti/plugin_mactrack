@@ -1,0 +1,134 @@
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2004-2025 The Cacti Group                                 |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ |                                                                         |
+ | This program is distributed in the hope that it will be useful,         |
+ | but WITHOUT ANY WARRANTY; without even the implied warranty of          |
+ | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           |
+ | GNU General Public License for more details.                            |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | This code is designed, written, and maintained by the Cacti Group. See  |
+ | about.php and/or the AUTHORS file for specific developer information.   |
+ +-------------------------------------------------------------------------+
+ | http://www.cacti.net/                                                   |
+ +-------------------------------------------------------------------------+
+*/
+
+.mtChart {
+	color: #CC6633 !important;
+}
+
+.mtChartDisabled {
+	color: #9999CC !important;
+}
+
+.mtEdit {
+	color: #CCCCCC !important;
+}
+
+.mtSync {
+	color: #3ee6a6 !important;
+}
+
+.mtRanges {
+	color: #18b981 !important;
+}
+
+.mtInterfaces {
+	color: #993300 !important;
+}
+
+.mtNetwork {
+	color: #660033 !important;
+}
+
+.mtMacs {
+	color: #FF9999 !important;
+}
+
+.mtServer {
+	color: #2a8f66 !important;
+}
+
+.mtPorts {
+	color: #993300 !important;
+}
+
+.mtIps {
+	color: #3399FF !important;
+}
+
+.int_up {
+	background-color: rgba(24, 185, 129, 0.2);
+	color: #eeeeee;
+}
+
+.int_up_wo_alias {
+	background-color: rgba(255, 122, 48, 0.2);
+	color: #eeeeee;
+}
+
+.int_errors {
+	background-color: rgba(251, 74, 20, 0.2);
+	color: #eeeeee;
+}
+
+.int_discards {
+	background-color: rgba(250, 253, 158, 0.2);
+	color: #eeeeee;
+}
+
+.int_no_graph {
+	background-color: rgba(205, 207, 196, 0.2);
+	color: #eeeeee;
+}
+
+.int_no_device {
+	background-color: rgba(250, 253, 158, 0.2);
+	color: #eeeeee;
+}
+
+.int_changed {
+	background-color: rgba(242, 25, 36, 0.2);
+	color: #eeeeee;
+}
+
+.int_down {
+	background-color: rgba(242, 23, 33, 0.2);
+	color: #eeeeee;
+}
+.dot1x_authn_success {
+	background-color: rgba(24, 185, 129, 0.2);
+	color: #eeeeee;
+}
+.dot1x_auth_success {
+	background-color: rgba(31, 159, 110, 0.2);
+	color: #eeeeee;
+}
+.dot1x_authn_failed {
+	background-color: rgba(242, 23, 33, 0.2);
+	color: #eeeeee;
+}
+.dot1x_auth_failed {
+	background-color: rgba(255, 122, 48, 0.2);
+	color: #eeeeee;
+}
+.dot1x_running {
+	background-color: rgba(251, 74, 20, 0.2);
+	color: #eeeeee;
+}
+.dot1x_idle {
+	background-color: rgba(250, 253, 158, 0.2);
+	color: #eeeeee;
+}
+.dot1x_auth_no_method {
+	background-color: rgba(205, 207, 196, 0.2);
+	color: #eeeeee;
+}
