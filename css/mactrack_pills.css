@@ -1,0 +1,80 @@
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2004-2026 The Cacti Group                                 |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ |                                                                         |
+ | This program is distributed in the hope that it will be useful,         |
+ | but WITHOUT ANY WARRANTY; without even the implied warranty of          |
+ | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           |
+ | GNU General Public License for more details.                            |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | This code is designed, written, and maintained by the Cacti Group. See  |
+ | about.php and/or the AUTHORS file for specific developer information.   |
+ +-------------------------------------------------------------------------+
+ | http://www.cacti.net/                                                   |
+ +-------------------------------------------------------------------------+
+*/
+
+/*
+ * Status pills for the interfaces "Issues" column and the 802.1x status
+ * column. Loaded on every MacTrack page (in addition to the theme/base
+ * stylesheet) so pills render consistently regardless of the selected
+ * Cacti theme. Each pill carries its colour through a --pill custom
+ * property; active pills fill solid, inactive pills show as a muted
+ * outline so every legend state stays readable at a glance.
+ */
+.mactrackPills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3px;
+	align-items: center;
+}
+
+.mactrackPill {
+	display: inline-block;
+	padding: 1px 7px;
+	border-radius: 10px;
+	font-size: 0.85em;
+	line-height: 1.5;
+	white-space: nowrap;
+	cursor: pointer;
+	user-select: none;
+	color: var(--pill, #666666);
+	background-color: transparent;
+	border: 1px solid var(--pill, #b5b5b5);
+	opacity: 0.5;
+}
+
+.mactrackPill:hover {
+	opacity: 0.85;
+}
+
+.mactrackPillActive {
+	color: #ffffff;
+	background-color: var(--pill, #666666);
+	border-color: var(--pill, #666666);
+	opacity: 1;
+}
+
+/* interface status colours (aligned with the interfaces legend chips) */
+.mactrackPill.int_up { --pill: #2b8435; }
+.mactrackPill.int_up_wo_alias { --pill: #a85712; }
+.mactrackPill.int_errors { --pill: #93302a; }
+.mactrackPill.int_discards { --pill: #9a6a1a; }
+.mactrackPill.int_no_graph { --pill: #5f5f57; }
+.mactrackPill.int_down { --pill: #a12820; }
+
+/* 802.1x status colours (aligned with the dot1x legend chips) */
+.mactrackPill.dot1x_authn_success { --pill: #2b8435; }
+.mactrackPill.dot1x_auth_success { --pill: #3f7a4a; }
+.mactrackPill.dot1x_authn_failed { --pill: #a12820; }
+.mactrackPill.dot1x_auth_failed { --pill: #93302a; }
+.mactrackPill.dot1x_running { --pill: #a85712; }
+.mactrackPill.dot1x_idle { --pill: #9a6a1a; }
+.mactrackPill.dot1x_auth_no_method { --pill: #5f5f57; }
