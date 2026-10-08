@@ -4,6 +4,7 @@
 
 * security: Move every page's inline event handlers to CSP-safe jQuery bindings so the pages no longer trip Cacti's Content-Security-Policy script-src-attr directive: the filter selects/checkboxes and the rescan-device icon (now carrying a `data-device-id`) are bound via delegated handlers in `js/mactrack.js`, and the confirmation Cancel/Return buttons use the `cactiReturnTo` class
 
+* feature: Lay the interfaces and dot1x status legends out as a centered footer in normal document flow via a shared `.mactrackLegendFooter` class, instead of a fixed-position overlay that could cover the last rows at the bottom of the page
 * feature: Restyle the interfaces and dot1x status legends as rounded, evenly-spaced solid-colour chips with theme-appropriate colours (matching the Thold/Monitor/Syslog legends and the Deepness emerald), sized to the longest label and laid out as a CSS grid so they stay equal width across wrapped rows; also fixed a stray `background-color: color:` typo in the `.int_no_device` rule
 * dev: Convert plugin bootstrap include/include_once calls to fail-fast require/require_once across the web, CLI, and hook entry points so a missing dependency halts execution instead of continuing with an undefined API
 * feature: Add a root manifest.json and upgrade-time file pruning (mactrack_prune_files()) that removes tombstoned and dev-only paths, refuses any path resolving outside the plugin directory, warns on paths it cannot remove, and logs top-level entries the manifest does not account for
