@@ -3369,9 +3369,12 @@ function mactrack_format_interface_row($stat): string {
 	form_selectable_cell($stat['ifName'], $stat['device_id']);
 	form_selectable_cell($stat['ifDescr'], $stat['device_id']);
 
+	// View glue: the pill markup itself is unit-tested via mactrack_interface_status_pills().
+	// @codeCoverageIgnoreStart
 	if (mactrack_interfaces_show_issues()) {
 		form_selectable_cell(mactrack_interface_status_pills($stat), $stat['device_id']);
 	}
+	// @codeCoverageIgnoreEnd
 
 	form_selectable_cell($stat['ifAlias'], $stat['device_id']);
 	form_selectable_cell(round($stat['inBound'],1) . ' %', $stat['device_id'], '', 'right');
