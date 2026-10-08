@@ -508,6 +508,19 @@ function mactrack_display_array(): array {
 			'display' => __('Description', 'mactrack'),
 			'sort'    => 'ASC'
 		],
+	];
+
+	if (mactrack_interfaces_show_issues()) {
+		$display_text += [
+			'issues_nosort' => [
+				'display' => __('Issues', 'mactrack'),
+				'align'   => 'left',
+				'sort'    => ''
+			],
+		];
+	}
+
+	$display_text += [
 		'ifAlias' => [
 			'display' => __('Alias', 'mactrack'),
 			'sort'    => 'ASC'
@@ -598,19 +611,6 @@ function mactrack_display_array(): array {
 			'align'   => 'right',
 			'sort'    => 'ASC'
 		],
-	];
-
-	if (mactrack_interfaces_show_issues()) {
-		$display_text += [
-			'issues_nosort' => [
-				'display' => __('Issues', 'mactrack'),
-				'align'   => 'left',
-				'sort'    => ''
-			],
-		];
-	}
-
-	$display_text += [
 		'ifLastChange' => [
 			'display' => __('Last Change', 'mactrack'),
 			'align'   => 'right',

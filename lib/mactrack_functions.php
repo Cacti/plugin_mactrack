@@ -3368,6 +3368,11 @@ function mactrack_format_interface_row($stat): string {
 	form_selectable_cell(strtoupper($stat['device_type']), $stat['device_id']);
 	form_selectable_cell($stat['ifName'], $stat['device_id']);
 	form_selectable_cell($stat['ifDescr'], $stat['device_id']);
+
+	if (mactrack_interfaces_show_issues()) {
+		form_selectable_cell(mactrack_interface_status_pills($stat), $stat['device_id']);
+	}
+
 	form_selectable_cell($stat['ifAlias'], $stat['device_id']);
 	form_selectable_cell(round($stat['inBound'],1) . ' %', $stat['device_id'], '', 'right');
 	form_selectable_cell(round($stat['outBound'],1) . ' %', $stat['device_id'], '', 'right');
@@ -3389,10 +3394,6 @@ function mactrack_format_interface_row($stat): string {
 	}
 
 	form_selectable_cell($stat['ifOperStatus'] == 1 ? __('Up', 'mactrack') : __('Down', 'mactrack'), $stat['device_id'], '', 'right');
-
-	if (mactrack_interfaces_show_issues()) {
-		form_selectable_cell(mactrack_interface_status_pills($stat), $stat['device_id']);
-	}
 
 	form_selectable_cell($upTime, $stat['device_id'], '', 'right');
 	form_selectable_cell(mactrack_date($stat['last_rundate']), $stat['device_id'], '', 'right');
