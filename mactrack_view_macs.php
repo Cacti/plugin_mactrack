@@ -215,8 +215,8 @@ function form_actions(): void {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($mac_address_array) ? html_escape(json_encode($mac_address_array)) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . html_escape((string) get_request_var('drp_action')) . "'>" . ($save_html != '' ? "
-			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'mactrack') . "</button>
-			$save_html" : "<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Return', 'mactrack') . '</button>') . '
+			<button type='button' class='ui-button ui-corner-all ui-widget cactiReturnTo'>" . __esc('Cancel', 'mactrack') . "</button>
+			$save_html" : "<button type='button' class='ui-button ui-corner-all ui-widget cactiReturnTo'>" . __esc('Return', 'mactrack') . '</button>') . '
 		</td>
 	</tr>';
 
@@ -347,8 +347,8 @@ function form_aggregated_actions(): void {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . html_escape(json_encode($row_array)) . "'>
 			<input type='hidden' name='drp_action' value='" . html_escape((string) get_request_var('drp_action')) . "'>" . ($save_html != '' ? "
-			<button type='button' onClick='cactiReturnTo()' class='ui-button ui-corner-all ui-widget'>" . __esc('Cancel', 'mactrack') . "</button>
-			$save_html" : "<button type='button' onClick='cactiReturnTo()' class='ui-button ui-corner-all ui-widget'>" . __esc('Return', 'mactrack') . '</button>') . '
+			<button type='button' class='ui-button ui-corner-all ui-widget cactiReturnTo'>" . __esc('Cancel', 'mactrack') . "</button>
+			$save_html" : "<button type='button' class='ui-button ui-corner-all ui-widget cactiReturnTo'>" . __esc('Return', 'mactrack') . '</button>') . '
 		</td>
 	</tr>';
 
@@ -1286,7 +1286,7 @@ function mactrack_mac_filter(): void {
 						<?php print __('Site', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='site_id' onChange='applyFilter()'>
+						<select id='site_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('N/A', 'mactrack'); ?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT site_id,site_name FROM mac_track_sites ORDER BY site_name');
@@ -1307,7 +1307,7 @@ function mactrack_mac_filter(): void {
 						<?php print __('Device', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='device_id' onChange='applyFilter()'>
+						<select id='device_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('device_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack'); ?></option>
 							<?php
 	if (get_request_var('site_id') == -1) {
@@ -1338,7 +1338,7 @@ function mactrack_mac_filter(): void {
 						<?php print __('MAC\'s', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='rows' onChange='applyFilter()'>
+						<select id='rows' data-onchange='applyFilter'>
 							<?php
 	if (cacti_sizeof($rows_selector)) {
 		foreach ($rows_selector as $key => $value) {
@@ -1386,7 +1386,7 @@ function mactrack_mac_filter(): void {
 						<?php print __('VLAN Name', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='vlan' onChange='applyFilter()'>
+						<select id='vlan' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('vlan') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack'); ?></option>
 							<?php
 	$sql_where = '';
@@ -1424,7 +1424,7 @@ function mactrack_mac_filter(): void {
 						<?php print __('Show', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='scan_date' onChange='applyFilter()'>
+						<select id='scan_date' data-onchange='applyFilter'>
 							<option value='1'<?php if (get_request_var('scan_date') == '1') {?> selected<?php }?>><?php print __('All', 'mactrack'); ?></option>
 							<option value='2'<?php if (get_request_var('scan_date') == '2') {?> selected<?php }?>><?php print __('Most Recent', 'mactrack'); ?></option>
 							<option value='3'<?php if (get_request_var('scan_date') == '3') {?> selected<?php }?>><?php print __('Aggregated', 'mactrack'); ?></option>
@@ -1469,7 +1469,7 @@ function mactrack_mac_filter(): void {
 						<?php print __('Authorized', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='authorized' onChange='applyFilter()'>
+						<select id='authorized' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('authorized') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack'); ?></option>
 							<option value='1'<?php if (get_request_var('authorized') == '1') {?> selected<?php }?>><?php print __('Yes', 'mactrack'); ?></option>
 							<option value='0'<?php if (get_request_var('authorized') == '0') {?> selected<?php }?>><?php print __('No', 'mactrack'); ?></option>

@@ -578,7 +578,7 @@ function mactrack_filter_table(): void {
 						<?php print __('Site', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='site_id' onChange='applyFilter()'>
+						<select id='site_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack'); ?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT site_id, site_name FROM mac_track_sites ORDER BY site_name');
@@ -599,7 +599,7 @@ function mactrack_filter_table(): void {
 						<?php print __('Filters', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='issues' onChange='applyFilter()'>
+						<select id='issues' data-onchange='applyFilter'>
 							<option value='-2'<?php if (get_request_var('issues') == '-2') {?> selected<?php }?>><?php print __('All Interfaces', 'mactrack'); ?></option>
 							<option value='-3'<?php if (get_request_var('issues') == '-3') {?> selected<?php }?>><?php print __('All Non-Ignored Interfaces', 'mactrack'); ?></option>
 							<option value='-4'<?php if (get_request_var('issues') == '-4') {?> selected<?php }?>><?php print __('All Ignored Interfaces', 'mactrack'); ?></option>
@@ -617,7 +617,7 @@ function mactrack_filter_table(): void {
 						<?php print __('Bandwidth', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='bwusage' onChange='applyFilter()'>
+						<select id='bwusage' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('bwusage') == '-1') {?> selected<?php }?>><?php print __('N/A', 'mactrack'); ?></option>
 							<?php
 	for ($bwpercent = 10; $bwpercent < 100; $bwpercent += 10) {
@@ -641,7 +641,7 @@ function mactrack_filter_table(): void {
 						<?php print __('Type', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='device_type_id' onChange='applyFilter()'>
+						<select id='device_type_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('device_type_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack'); ?></option>
 							<?php
 	$sql_where = '';
@@ -676,7 +676,7 @@ function mactrack_filter_table(): void {
 						<?php print __('Device', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='device_id' onChange='applyFilter()'>
+						<select id='device_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('device_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack'); ?></option>
 							<?php
 	$sql_where = '';
@@ -707,7 +707,7 @@ function mactrack_filter_table(): void {
 						<?php print __('Interfaces', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='rows' onChange='applyFilter()'>
+						<select id='rows' data-onchange='applyFilter'>
 							<?php
 	if (cacti_sizeof($rows_selector)) {
 		foreach ($rows_selector as $key => $value) {
@@ -732,7 +732,7 @@ function mactrack_filter_table(): void {
 						<input type='text' id='filter' size='25' value='<?php print html_escape_request_var('filter'); ?>'>
 					</td>
 					<td>
-						<input type='checkbox' id='totals' onChange='applyFilter()' <?php print(get_request_var('totals') == 'true' ? 'checked' : ''); ?>>
+						<input type='checkbox' id='totals' data-onchange='applyFilter' <?php print(get_request_var('totals') == 'true' ? 'checked' : ''); ?>>
 					</td>
 					<td>
 						<label for='totals'><?php print __('Show Totals', 'mactrack'); ?></label>

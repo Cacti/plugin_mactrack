@@ -84,3 +84,28 @@ function enable_device(device_id) {
 		$('#line_' + device_id).html(content);
 	});
 }
+
+jQuery(function() {
+jQuery(document).off('change.mactrack', '[data-onchange]')
+.on('change.mactrack', '[data-onchange]', function() {
+var fn = jQuery(this).data('onchange');
+
+if (fn && typeof window[fn] === 'function') {
+window[fn]();
+}
+});
+
+jQuery(document).off('click.mactrack', '[data-onclick]')
+.on('click.mactrack', '[data-onclick]', function() {
+var fn = jQuery(this).data('onclick');
+
+if (fn && typeof window[fn] === 'function') {
+window[fn]();
+}
+});
+
+jQuery(document).off('click.mactrackScan', '.mactrackScanDevice')
+.on('click.mactrackScan', '.mactrackScanDevice', function() {
+scan_device(jQuery(this).data('device-id'));
+});
+});

@@ -529,7 +529,7 @@ function mactrack_ip_address_filter(): void {
 						<?php print __('Site', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='site_id' onChange='applyFilter()'>
+						<select id='site_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('N/A', 'mactrack'); ?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT site_id,site_name FROM mac_track_sites ORDER BY site_name');
@@ -550,7 +550,7 @@ function mactrack_ip_address_filter(): void {
 						<?php print __('Device', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='device_id' onChange='applyFilter()'>
+						<select id='device_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('device_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack'); ?></option>
 							<?php
 	if (get_request_var('site_id') == -1) {
@@ -581,7 +581,7 @@ function mactrack_ip_address_filter(): void {
 						<?php print __('IP\'s', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='rows' onChange='applyFilter()'>
+						<select id='rows' data-onchange='applyFilter'>
 							<?php
 	if (cacti_sizeof($rows_selector) > 0) {
 		foreach ($rows_selector as $key => $value) {
@@ -629,7 +629,7 @@ function mactrack_ip_address_filter(): void {
 						<?php print __('Show', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='scan_date' onChange='applyFilter()'>
+						<select id='scan_date' data-onchange='applyFilter'>
 							<option value='1'<?php if (get_request_var('scan_date') == '1') {?> selected<?php }?>><?php print __('All', 'mactrack'); ?></option>
 							<option value='2'<?php if (get_request_var('scan_date') == '2') {?> selected<?php }?>><?php print __('Most Recent', 'mactrack'); ?></option>
 							<?php

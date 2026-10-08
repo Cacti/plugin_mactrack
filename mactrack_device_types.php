@@ -427,8 +427,8 @@ function form_actions(): void {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($device_types_array) ? serialize($device_types_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_nfilter_request_var('drp_action') . "'>" . ($save_html != '' ? "
-			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()' name='cancel'>" . __esc('Cancel', 'mactrack') . "</button>
-			$save_html" : "<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()' name='cancel'>" . __esc('Return') . '</button>') . '
+			<button type='button' class='ui-button ui-corner-all ui-widget cactiReturnTo' name='cancel'>" . __esc('Cancel', 'mactrack') . "</button>
+			$save_html" : "<button type='button' class='ui-button ui-corner-all ui-widget cactiReturnTo' name='cancel'>" . __esc('Return') . '</button>') . '
 		</td>
 	</tr>';
 
@@ -1295,7 +1295,7 @@ function mactrack_device_type_filter(): void {
 						<?php print __('Device Types', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='rows' onChange='applyFilter()'>
+						<select id='rows' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack'); ?></option>
 							<?php
 							if (cacti_sizeof($item_rows)) {
@@ -1330,7 +1330,7 @@ function mactrack_device_type_filter(): void {
 						<?php print __('Vendor', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='vendor' onChange='applyFilter()'>
+						<select id='vendor' data-onchange='applyFilter'>
 							<option value='All'<?php if (get_request_var('vendor') == 'All') {
 								print ' selected';
 							}?>><?php print __('All', 'mactrack'); ?></option>
@@ -1353,7 +1353,7 @@ function mactrack_device_type_filter(): void {
 						<?php print __('Type', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='type_id' onChange='applyFilter()'>
+						<select id='type_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('type_id') == '-1') {
 								print ' selected';
 							}?>><?php print __('All', 'mactrack'); ?></option>
@@ -1372,7 +1372,7 @@ function mactrack_device_type_filter(): void {
 						<?php print __('Enabled', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='enabled' onChange='applyFilter()'>
+						<select id='enabled' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('enabled') == '-1') {
 								print ' selected';
 							}?>><?php print __('All', 'mactrack'); ?></option>

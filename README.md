@@ -31,6 +31,20 @@ utilization is, where there are errors, etc within their network.
 
 Mactrack requires Cacti 1.2.14 or later and PHP 8.2 for its supported runtime and toolchain.
 
+## Cacti compatibility
+
+If you are running a version of Cacti below 1.2.31, please add the function
+below to the `applySkin()` function in `include/layout.js` to enable the Cancel
+buttons on forms to work:
+
+```js
+$(document).off('click.cactiReturnTo', '.cactiReturnTo')
+    .on('click.cactiReturnTo', '.cactiReturnTo', function(event) {
+        event.preventDefault();
+        cactiReturnTo($(this).attr('data-url'));
+    });
+```
+
 ## Installation
 
 Just like any Cacti plugin, untar the package to the Cacti plugins directory

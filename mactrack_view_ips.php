@@ -349,7 +349,7 @@ function mactrack_ips_filter(): void {
 						<?php print __('Site', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='site_id' onChange='applyFilter()'>
+						<select id='site_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack'); ?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT * FROM mac_track_sites ORDER BY mac_track_sites.site_name');
@@ -370,7 +370,7 @@ function mactrack_ips_filter(): void {
 						<?php print __('IP\'s', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='rows' onChange='applyFilter()'>
+						<select id='rows' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack'); ?></option>
 							<?php
 	if (cacti_sizeof($item_rows)) {

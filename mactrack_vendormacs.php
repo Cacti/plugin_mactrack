@@ -263,7 +263,7 @@ function mactrack_vmac_filter(): void {
 						<?php print __('MAC\'s', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='rows' onChange='applyFilter()'>
+						<select id='rows' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack'); ?></option>
 							<?php
 							if (cacti_sizeof($item_rows) > 0) {

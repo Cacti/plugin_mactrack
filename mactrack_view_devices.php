@@ -493,7 +493,7 @@ function mactrack_device_filter2(): void {
 						<?php print __('Site', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='site_id' onChange='applyFilter()'>
+						<select id='site_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack'); ?></option>
 							<option value='-2'<?php if (get_request_var('site_id') == '-2') {?> selected<?php }?>><?php print __('None', 'mactrack'); ?></option>
 							<?php
@@ -526,7 +526,7 @@ function mactrack_device_filter2(): void {
 						<?php print __('Type', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='type_id' onChange='applyFilter()'>
+						<select id='type_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('type_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack'); ?></option>
 							<option value='1'<?php if (get_request_var('type_id') == '1') {?> selected<?php }?>><?php print __('Hub/Switch', 'mactrack'); ?></option>
 							<option value='2'<?php if (get_request_var('type_id') == '2') {?> selected<?php }?>><?php print __('Switch/Router', 'mactrack'); ?></option>
@@ -537,7 +537,7 @@ function mactrack_device_filter2(): void {
 						<?php print __('SubType', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='device_type_id' onChange='applyFilter()'>
+						<select id='device_type_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('device_type_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack'); ?></option>
 							<option value='-2'<?php if (get_request_var('device_type_id') == '-2') {?> selected<?php }?>><?php print __('Not Detected', 'mactrack'); ?></option>
 							<?php
@@ -583,7 +583,7 @@ function mactrack_device_filter2(): void {
 						<?php print __('Status', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='status' onChange='applyFilter()'>
+						<select id='status' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('status') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack'); ?></option>
 							<option value='3'<?php if (get_request_var('status') == '3') {?> selected<?php }?>><?php print __('Up', 'mactrack'); ?></option>
 							<option value='-2'<?php if (get_request_var('status') == '-2') {?> selected<?php }?>><?php print __('Disabled', 'mactrack'); ?></option>
@@ -597,7 +597,7 @@ function mactrack_device_filter2(): void {
 						<?php print __('Devices', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='rows' onChange='applyFilter()'>
+						<select id='rows' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack'); ?></option>
 							<?php
 	if (cacti_sizeof($item_rows)) {

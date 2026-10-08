@@ -596,7 +596,7 @@ function mactrack_dot1x_filter(): void {
 						<?php print __('Site', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='site_id' onChange='applyFilter()'>
+						<select id='site_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('N/A', 'mactrack'); ?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT site_id, site_name
@@ -619,7 +619,7 @@ function mactrack_dot1x_filter(): void {
 						<?php print __('Device', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='device_id' onChange='applyFilter()'>
+						<select id='device_id' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('device_id') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack'); ?></option>
 							<?php
 	if (get_request_var('site_id') == -1) {
@@ -652,7 +652,7 @@ function mactrack_dot1x_filter(): void {
 						<?php print __('Sessions', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='rows' onChange='applyFilter()'>
+						<select id='rows' data-onchange='applyFilter'>
 							<?php
 	if (cacti_sizeof($rows_selector)) {
 		foreach ($rows_selector as $key => $value) {
@@ -692,7 +692,7 @@ function mactrack_dot1x_filter(): void {
 						<?php print __('Status', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='status' onChange='applyFilter()'>
+						<select id='status' data-onchange='applyFilter'>
 							<?php
 	$all_status = [
 		0 => __esc('Any Status', 'mactrack'),
@@ -715,7 +715,7 @@ function mactrack_dot1x_filter(): void {
 						<?php print __('Show', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='scan_date' onChange='applyFilter()'>
+						<select id='scan_date' data-onchange='applyFilter'>
 							<option value='1'<?php if (get_request_var('scan_date') == '1') {?> selected<?php }?>><?php print __('All', 'mactrack'); ?></option>
 							<option value='2'<?php if (get_request_var('scan_date') == '2') {?> selected<?php }?>><?php print __('Most Recent', 'mactrack'); ?></option>
 							<?php
@@ -753,7 +753,7 @@ function mactrack_dot1x_filter(): void {
 						<?php print __('Domain', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='domain' onChange='applyFilter()'>
+						<select id='domain' data-onchange='applyFilter'>
 							<option value='-1'<?php if (get_request_var('domain') == '-1') {?> selected<?php }?>><?php print __('All', 'mactrack'); ?></option>
 							<option value='2'<?php if (get_request_var('domain') == '2') {?> selected<?php }?>><?php print __('DATA', 'mactrack'); ?></option>
 							<option value='3'<?php if (get_request_var('domain') == '3') {?> selected<?php }?>><?php print __('VOICE', 'mactrack'); ?></option>
