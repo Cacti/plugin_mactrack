@@ -459,9 +459,6 @@ function mactrack_page_head() {
 	} else {
 		print get_md5_include_css('plugins/mactrack/css/mactrack.css');
 	}
-
-	// status pill styling, loaded on every theme
-	print get_md5_include_css('plugins/mactrack/css/mactrack_pills.css');
 }
 
 /**
