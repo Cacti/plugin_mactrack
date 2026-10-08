@@ -104,7 +104,11 @@ function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = 30, &$s
 	}
 
 	// status legend sql where (multi-select Status filter / Issues pill drill-down)
-	$statuses = mactrack_parse_status_tokens(get_request_var('statuses'));
+	// Only honoured on the enhanced view (Cacti 1.2.32+); on older cores the
+	// Status control and pills are hidden, so a persisted value must not filter.
+	$statuses = mactrack_interfaces_show_issues()
+		? mactrack_parse_status_tokens(get_request_var('statuses'))
+		: [];
 
 	if (cacti_sizeof($statuses)) {
 		$status_clauses = [];
@@ -186,7 +190,10 @@ function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = 30, &$s
 		mac_track_devices.device_name,
 		mac_track_devices.host_id,
 		mac_track_devices.disabled,
-		mac_track_devices.last_rundate
+		mac_track_devices.last_rundate,
+		EXISTS (SELECT 1 FROM mac_track_interface_graphs AS mtig
+			WHERE mtig.host_id = mac_track_devices.host_id
+			AND mtig.ifIndex = mac_track_interfaces.ifIndex) AS has_graphs
 		FROM mac_track_interfaces
 		INNER JOIN mac_track_devices
 		ON mac_track_interfaces.device_id=mac_track_devices.device_id

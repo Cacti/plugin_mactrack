@@ -3509,7 +3509,13 @@ function mactrack_int_statuses($stat): array {
 		$active['int_discards'] = true;
 	}
 
-	if (!mactrack_interface_has_graphs($stat['host_id'], $stat['ifIndex'])) {
+	if (array_key_exists('has_graphs', $stat)) {
+		$has_graphs = (bool) $stat['has_graphs'];
+	} else {
+		$has_graphs = mactrack_interface_has_graphs($stat['host_id'], $stat['ifIndex']);
+	}
+
+	if (!$has_graphs) {
 		$active['int_no_graph'] = true;
 	}
 
@@ -3535,9 +3541,9 @@ function mactrack_interface_status_pills($stat): string {
 	foreach ($legend as $class => $label) {
 		$is_active = isset($active[$class]);
 
-		$pills .= '<span class="mactrackPill ' . $class . ($is_active ? ' mactrackPillActive' : '') . '"' .
+		$pills .= '<button type="button" class="mactrackPill ' . $class . ($is_active ? ' mactrackPillActive' : '') . '"' .
 			' data-status="' . html_escape($class) . '" title="' . html_escape($label) . '">' .
-			html_escape($label) . '</span>';
+			html_escape($label) . '</button>';
 	}
 
 	$pills .= '</div>';
@@ -3547,32 +3553,28 @@ function mactrack_interface_status_pills($stat): string {
 
 /**
  * Renders the 802.1x status pill shown after the username column. The
- * pill is clickable and drills down by setting the Status filter to
- * the clicked status (see mactrack_view_dot1x.php).
+ * pill is a drill-down control that sets the Status filter to the
+ * clicked status (see mactrack_view_dot1x.php).
  *
  * @param array $port_result The 802.1x record being rendered.
  *
  * @return string The HTML markup for the status pill.
+ *
+ * @global array $mactrack_device_status Shared map of status code =>
+ *                                       label (defined once near the
+ *                                       top of this file).
  */
 function mactrack_dot1x_status_pill($port_result): string {
-	$labels = [
-		1 => __('Idle', 'mactrack'),
-		2 => __('Running', 'mactrack'),
-		3 => __('No Method', 'mactrack'),
-		4 => __('Authentication Success', 'mactrack'),
-		5 => __('Authentication Failed', 'mactrack'),
-		6 => __('Authorization Success', 'mactrack'),
-		7 => __('Authorization Failed', 'mactrack'),
-	];
+	global $mactrack_device_status;
 
 	$status = (int) $port_result['status'];
 	$class  = mactrack_dot1x_row_class($port_result);
-	$label  = $labels[$status] ?? __('Unknown', 'mactrack');
+	$label  = $mactrack_device_status[$status] ?? __('Unknown', 'mactrack');
 
 	return '<div class="mactrackPills">' .
-		'<span class="mactrackPill mactrackPillActive ' . $class . '"' .
+		'<button type="button" class="mactrackPill mactrackPillActive ' . $class . '"' .
 		' data-dot1x-status="' . html_escape((string) $status) . '" title="' . html_escape($label) . '">' .
-		html_escape($label) . '</span>' .
+		html_escape($label) . '</button>' .
 		'</div>';
 }
 
@@ -3586,15 +3588,11 @@ function mactrack_dot1x_status_pill($port_result): string {
  *
  * @return string The HTML markup for the table row's cells.
  *
- * @global array $config                 Cacti global configuration
- *                                       array (declared but not used
- *                                       directly here).
- * @global array $mactrack_device_status Map of status code => label
- *                                       used to render the
- *                                       authorization status column.
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
  */
 function mactrack_format_dot1x_row($port_result): string {
-	global $config,$mactrack_device_status;
+	global $config;
 
 	// we will make a row string
 	$row = '';
@@ -3603,12 +3601,6 @@ function mactrack_format_dot1x_row($port_result): string {
 		$scan_date = $port_result['scan_date'];
 	} else {
 		$scan_date = $port_result['max_scan_date'];
-	}
-
-	$status = 'Unknown';
-
-	if (array_key_exists($port_result['status'],$mactrack_device_status)) {
-		$status = $mactrack_device_status[$port_result['status']];
 	}
 
 	$row .= "<td class='nowrap'>" . mactrack_interface_actions($port_result['device_id'], $port_result['port_number']) . '</td>';
@@ -3625,7 +3617,6 @@ function mactrack_format_dot1x_row($port_result): string {
 	$row .= '<td>' . mactrack_format_mac($port_result['mac_address']) . '</td>';
 	$row .= '<td>' . $port_result['ifName'] . '</td>';
 	$row .= '<td><b>' . ($port_result['domain'] == 2 ? __('Data', 'mactrack') : __('Voice', 'mactrack')) . '</b></td>';
-	$row .= '<td><b>' . $status . '</b></td>';
 	$row .= "<td class='nowrap'>" . $scan_date . '</td>';
 
 	return $row;

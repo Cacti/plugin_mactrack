@@ -475,7 +475,6 @@ function mactrack_view_dot1x(): void {
 			'mac_address'  => [__('ED MAC Address', 'mactrack'), 'ASC'],
 			'ifName'       => [__('Port Name', 'mactrack'), 'ASC'],
 			'domain'       => [__('Domain', 'mactrack'), 'DESC'],
-			'status'       => [__('Status', 'mactrack'), 'ASC'],
 			'scan_date'    => [__('Last Scan Date', 'mactrack'), 'DESC']
 		];
 	} else {
@@ -489,7 +488,6 @@ function mactrack_view_dot1x(): void {
 			'mac_address'  => [__('ED MAC Address', 'mactrack'), 'ASC'],
 			'ifName'       => [__('Port Name', 'mactrack'), 'ASC'],
 			'domain'       => [__('Domain', 'mactrack'), 'DESC'],
-			'status'       => [__('Status', 'mactrack'), 'ASC'],
 			'scan_date'    => [__('Last Scan Date', 'mactrack'), 'DESC']
 		];
 	}
