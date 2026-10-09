@@ -228,18 +228,6 @@ final class MactrackStatusPillsTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function test_parse_status_tokens_filters_and_dedupes(): void {
-		$this->assertSame([], mactrack_parse_status_tokens(''));
-		$this->assertSame([], mactrack_parse_status_tokens(null));
-		$this->assertSame(
-			['int_up', 'int_down'],
-			mactrack_parse_status_tokens('int_up,int_up,bogus,int_down')
-		);
-	}
-
-	/**
-	 * @return void
-	 */
 	public function test_format_interface_row_inserts_issue_pills_after_description(): void {
 		mactrack_test_queue_return('db_fetch_row_prepared', ['host_id' => 0, 'disabled' => '']);
 

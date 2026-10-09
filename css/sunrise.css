@@ -190,15 +190,19 @@
 }
 
 .mactrackPill {
+	appearance: none;
+	-webkit-appearance: none;
 	display: inline-block;
+	margin: 0;
 	padding: 1px 7px;
 	border-radius: 10px;
+	font: inherit;
 	font-size: 0.85em;
 	line-height: 1.5;
 	white-space: nowrap;
 	cursor: pointer;
 	user-select: none;
-	color: var(--pill, #666666);
+	color: inherit;
 	background-color: transparent;
 	border: 1px solid var(--pill, #b5b5b5);
 }
@@ -208,11 +212,15 @@
 	color: #ffffff;
 }
 
+.mactrackPill:focus-visible {
+	outline: 2px solid var(--pill, #666666);
+	outline-offset: 1px;
+}
+
 .mactrackPillActive {
 	color: #ffffff;
 	background-color: var(--pill, #666666);
 	border-color: var(--pill, #666666);
-	opacity: 1;
 }
 
 .mactrackPill.int_up { --pill: #2b8435; }
