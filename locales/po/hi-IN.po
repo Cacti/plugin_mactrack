@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:06-0400\n"
+"POT-Creation-Date: 2026-10-08 19:41-0400\n"
 "PO-Revision-Date: 2024-04-20 17:32-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -137,6 +137,35 @@ msgstr "नीचे"
 msgid "Up"
 msgstr "ऊपर"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Up"
+msgstr "इंटरफ़ेस अप"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Alias"
+msgstr "कोई अन्य नहीं"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors Present"
+msgstr "त्रुटियाँ वर्तमान"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards Present"
+msgstr "सादर उपस्थित"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Graphs"
+msgstr "कोई रेखांकन नहीं"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Down"
+msgstr "इंटरफ़ेस नीचे"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "अज्ञात"
+
 #: lib/mactrack_functions.php
 msgid "Data"
 msgstr "डाटा"
@@ -259,11 +288,6 @@ msgstr "Dot1x"
 #: lib/mactrack_functions.php mactrack_view_graphs.php
 msgid "Graphs"
 msgstr "रेखांकन"
-
-#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
-msgid "Unknown"
-msgstr "अज्ञात"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -1675,30 +1699,6 @@ msgid "No Mactrack Interfaces Found"
 msgstr "कोई डिवाइस ट्रैकिंग इंटरफेस नहीं मिला"
 
 #: mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "इंटरफ़ेस अप"
-
-#: mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "कोई अन्य नहीं"
-
-#: mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "त्रुटियाँ वर्तमान"
-
-#: mactrack_view_interfaces.php
-msgid "Discards Present"
-msgstr "सादर उपस्थित"
-
-#: mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr "कोई रेखांकन नहीं"
-
-#: mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "इंटरफ़ेस नीचे"
-
-#: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
 msgstr "सभी स्कैन परिणाम निकालें"
 
@@ -1709,6 +1709,12 @@ msgstr "नाम"
 #: mactrack_view_interfaces.php setup.php
 msgid "Description"
 msgstr "विवरण"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "With Issues"
+msgid "Issues"
+msgstr "मुद्दों के साथ"
 
 #: mactrack_view_interfaces.php
 msgid "Alias"
@@ -1840,6 +1846,16 @@ msgstr "बैंडविड्थ"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "टोटल दिखाओ"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
+msgstr "कोई भी स्थिति"
+
+#: mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_ips.php
 #, fuzzy
