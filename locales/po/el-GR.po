@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:06-0400\n"
+"POT-Creation-Date: 2026-10-08 19:41-0400\n"
 "PO-Revision-Date: 2025-08-18 14:26+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Greek <https://translate.cacti.net/projects/cacti/mactrack/el/>\n"
@@ -138,6 +138,35 @@ msgstr "Πεσμένος"
 msgid "Up"
 msgstr "Πάνω"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Up"
+msgstr "Διασύνδεση προς τα επάνω"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Alias"
+msgstr "Δεν υπάρχει ψευδώνυμο"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors Present"
+msgstr "Προσωπικά σφάλματα"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards Present"
+msgstr "Απορρίμματα Παρόν"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Graphs"
+msgstr "Γραφήματα"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Down"
+msgstr "Διασύνδεση προς τα κάτω"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Άγνωστο"
+
 #: lib/mactrack_functions.php
 msgid "Data"
 msgstr "Ημερομηνία"
@@ -260,11 +289,6 @@ msgstr "Dot1x"
 #: lib/mactrack_functions.php mactrack_view_graphs.php
 msgid "Graphs"
 msgstr "Γραφήματα"
-
-#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
-msgid "Unknown"
-msgstr "Άγνωστο"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -1676,30 +1700,6 @@ msgid "No Mactrack Interfaces Found"
 msgstr "Δεν βρέθηκαν διεπαφές εντοπισμού συσκευών"
 
 #: mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "Διασύνδεση προς τα επάνω"
-
-#: mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "Δεν υπάρχει ψευδώνυμο"
-
-#: mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "Προσωπικά σφάλματα"
-
-#: mactrack_view_interfaces.php
-msgid "Discards Present"
-msgstr "Απορρίμματα Παρόν"
-
-#: mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr "Γραφήματα"
-
-#: mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "Διασύνδεση προς τα κάτω"
-
-#: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
 msgstr "Αφαίρεση όλων των αποτελεσμάτων σάρωσης"
 
@@ -1710,6 +1710,12 @@ msgstr "Όνομα"
 #: mactrack_view_interfaces.php setup.php
 msgid "Description"
 msgstr "Περιγραφή"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "With Issues"
+msgid "Issues"
+msgstr "Με θέματα"
 
 #: mactrack_view_interfaces.php
 msgid "Alias"
@@ -1841,6 +1847,16 @@ msgstr "εύρος ζώνης"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "Εμφάνιση αθροισμάτων"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
+msgstr "Όλες οι καταστάσεις"
+
+#: mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_ips.php
 #, fuzzy
