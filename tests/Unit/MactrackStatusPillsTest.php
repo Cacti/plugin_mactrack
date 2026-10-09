@@ -13,16 +13,6 @@
  * Status filter rely on so a future legend or status-map change surfaces here.
  */
 
-if (!function_exists('cacti_version_compare')) {
-	function cacti_version_compare($v1, $v2, $op) {
-		return version_compare($v1, $v2, $op);
-	}
-}
-
-if (!defined('CACTI_VERSION')) {
-	define('CACTI_VERSION', '1.2.32');
-}
-
 final class MactrackStatusPillsTest extends TestCase {
 	/**
 	 * @return void
@@ -216,5 +206,58 @@ final class MactrackStatusPillsTest extends TestCase {
 
 		$this->assertStringContainsString('data-dot1x-status="2"', $html);
 		$this->assertSame(1, substr_count($html, 'data-dot1x-status='));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function test_parse_status_tokens_filters_and_dedupes(): void {
+		$this->assertSame([], mactrack_parse_status_tokens(''));
+		$this->assertSame([], mactrack_parse_status_tokens(null));
+		$this->assertSame(
+			['int_up', 'int_down'],
+			mactrack_parse_status_tokens('int_up,int_up,bogus,int_down')
+		);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function test_format_interface_row_inserts_issue_pills_after_description(): void {
+		mactrack_test_queue_return('db_fetch_row_prepared', ['host_id' => 0, 'disabled' => '']);
+
+		$html = mactrack_format_interface_row([
+			'device_id'             => 10,
+			'ifIndex'               => 2,
+			'device_name'           => 'switch-a',
+			'device_type'           => 'cisco',
+			'ifName'                => 'Gi1/0/1',
+			'ifDescr'               => 'GigabitEthernet1/0/1',
+			'ifAlias'               => 'uplink',
+			'inBound'               => 5,
+			'outBound'              => 7,
+			'int_ifHCInOctets'      => 0,
+			'int_ifHCOutOctets'     => 0,
+			'int_ifInErrors'        => 0,
+			'int_ifInDiscards'      => 0,
+			'int_ifInUnknownProtos' => 0,
+			'int_ifOutErrors'       => 0,
+			'int_ifOutDiscards'     => 0,
+			'ifOperStatus'          => 1,
+			'ifLastChange'          => 0,
+			'sysUptime'             => 100,
+			'last_rundate'          => '2026-01-01 00:00:00',
+			'int_errors_present'    => 0,
+			'int_discards_present'  => 0,
+			'has_graphs'            => 1,
+		]);
+
+		$pos_descr = strpos($html, 'GigabitEthernet1/0/1');
+		$pos_pill  = strpos($html, 'mactrackPills');
+		$pos_alias = strpos($html, '<td>uplink</td>');
+
+		$this->assertNotFalse($pos_pill);
+		$this->assertGreaterThan($pos_descr, $pos_pill);
+		$this->assertGreaterThan($pos_pill, $pos_alias);
 	}
 }
