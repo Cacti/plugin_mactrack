@@ -469,12 +469,12 @@ function mactrack_view_dot1x(): void {
 			'device_name'  => [__('Switch Name', 'mactrack'), 'ASC'],
 			'hostname'     => [__('Switch Hostname', 'mactrack'), 'ASC'],
 			'username'     => [__('Username', 'mactrack'), 'ASC'],
+			'status'       => [__('Status', 'mactrack'), 'ASC'],
 			'ip_address'   => [__('ED IP Address', 'mactrack'), 'ASC'],
 			'dns_hostname' => [__('ED DNS Hostname', 'mactrack'), 'ASC'],
 			'mac_address'  => [__('ED MAC Address', 'mactrack'), 'ASC'],
 			'ifName'       => [__('Port Name', 'mactrack'), 'ASC'],
 			'domain'       => [__('Domain', 'mactrack'), 'DESC'],
-			'status'       => [__('Status', 'mactrack'), 'ASC'],
 			'scan_date'    => [__('Last Scan Date', 'mactrack'), 'DESC']
 		];
 	} else {
@@ -483,11 +483,11 @@ function mactrack_view_dot1x(): void {
 			'device_name'  => [__('Switch Name', 'mactrack'), 'ASC'],
 			'hostname'     => [__('Switch Hostname', 'mactrack'), 'ASC'],
 			'username'     => [__('Username', 'mactrack'), 'ASC'],
+			'status'       => [__('Status', 'mactrack'), 'ASC'],
 			'ip_address'   => [__('ED IP Address', 'mactrack'), 'ASC'],
 			'mac_address'  => [__('ED MAC Address', 'mactrack'), 'ASC'],
 			'ifName'       => [__('Port Name', 'mactrack'), 'ASC'],
 			'domain'       => [__('Domain', 'mactrack'), 'DESC'],
-			'status'       => [__('Status', 'mactrack'), 'ASC'],
 			'scan_date'    => [__('Last Scan Date', 'mactrack'), 'DESC']
 		];
 	}
@@ -826,6 +826,20 @@ function mactrack_dot1x_filter(): void {
 
 				$('#export').on('click', function() {
 					exportRows();
+				});
+
+				// Status pill drill-down: set the Status filter to the
+				// clicked session status, then re-apply the filter.
+				$('.mactrackPill').off('click').on('click', function() {
+					var status = $(this).attr('data-dot1x-status');
+
+					if (status === undefined || !$('#status').length) {
+						return;
+					}
+
+					$('#status').val(status);
+
+					applyFilter();
 				});
 			});
 

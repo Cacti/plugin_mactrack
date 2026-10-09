@@ -453,6 +453,29 @@ if (!defined('MESSAGE_LEVEL_ERROR')) {
 	define('MESSAGE_LEVEL_ERROR', 1);
 }
 
+/*
+ * MacTrack's list views render cells through Cacti's form_selectable_cell()
+ * and gate the status-pill detail on CACTI_VERSION via cacti_version_compare().
+ * Neither Cacti itself nor its constants are loaded in the isolated unit
+ * process, so stub them here. CACTI_VERSION is pinned to a release that
+ * supports the pill detail so mactrack_interfaces_show_issues() resolves true.
+ */
+if (!function_exists('form_selectable_cell')) {
+	function form_selectable_cell($contents, $id = '', $width = '', $align = '', $title = '') {
+		print '<td>' . $contents . '</td>';
+	}
+}
+
+if (!function_exists('cacti_version_compare')) {
+	function cacti_version_compare($version1, $version2, $operator = '>=') {
+		return version_compare((string) $version1, (string) $version2, $operator);
+	}
+}
+
+if (!defined('CACTI_VERSION')) {
+	define('CACTI_VERSION', '1.2.32');
+}
+
 if (!function_exists('plugin_test_read_source')) {
 	function plugin_test_read_source($relative_file) {
 		$path = realpath(__DIR__ . '/../' . $relative_file);

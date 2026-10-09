@@ -103,6 +103,52 @@ function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = 30, &$s
 	} else {
 	}
 
+	// status legend sql where (multi-select Status filter / Issues pill drill-down)
+	// Only honoured on the enhanced view (Cacti 1.2.32+); on older cores the
+	// Status control and pills are hidden, so a persisted value must not filter.
+	$statuses = mactrack_interfaces_show_issues()
+		? mactrack_parse_status_tokens(get_request_var('statuses'))
+		: [];
+
+	if (cacti_sizeof($statuses)) {
+		$status_clauses = [];
+
+		foreach ($statuses as $status) {
+			switch ($status) {
+				case 'int_up':
+					$status_clauses[] = 'mac_track_interfaces.ifOperStatus = 1';
+
+					break;
+				case 'int_down':
+					$status_clauses[] = 'mac_track_interfaces.ifOperStatus <> 1';
+
+					break;
+				case 'int_up_wo_alias':
+					$status_clauses[] = "(mac_track_interfaces.ifOperStatus = 1 AND mac_track_interfaces.ifAlias = '')";
+
+					break;
+				case 'int_errors':
+					$status_clauses[] = 'mac_track_interfaces.int_errors_present = 1';
+
+					break;
+				case 'int_discards':
+					$status_clauses[] = 'mac_track_interfaces.int_discards_present = 1';
+
+					break;
+				case 'int_no_graph':
+					$status_clauses[] = 'NOT EXISTS (SELECT 1 FROM mac_track_interface_graphs AS mtig
+						WHERE mtig.host_id = mac_track_devices.host_id
+						AND mtig.ifIndex = mac_track_interfaces.ifIndex)';
+
+					break;
+			}
+		}
+
+		if (cacti_sizeof($status_clauses)) {
+			$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(' . implode(' OR ', $status_clauses) . ')';
+		}
+	}
+
 	// filter sql where
 	$filter_where = mactrack_create_sql_filter(get_request_var('filter'), ['ifAlias', 'hostname', 'ifName', 'ifDescr']);
 
@@ -144,7 +190,10 @@ function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = 30, &$s
 		mac_track_devices.device_name,
 		mac_track_devices.host_id,
 		mac_track_devices.disabled,
-		mac_track_devices.last_rundate
+		mac_track_devices.last_rundate,
+		EXISTS (SELECT 1 FROM mac_track_interface_graphs AS mtig
+			WHERE mtig.host_id = mac_track_devices.host_id
+			AND mtig.ifIndex = mac_track_interfaces.ifIndex) AS has_graphs
 		FROM mac_track_interfaces
 		INNER JOIN mac_track_devices
 		ON mac_track_interfaces.device_id=mac_track_devices.device_id
@@ -214,6 +263,12 @@ function mactrack_interfaces_request_validation(): void {
 			'filter'  => FILTER_VALIDATE_INT,
 			'default' => '-2',
 			'pageset' => true
+			],
+		'statuses' => [
+			'filter'  => FILTER_VALIDATE_REGEXP,
+			'pageset' => true,
+			'default' => '',
+			'options' => ['options' => ['regexp' => '/^((int_up|int_down|int_up_wo_alias|int_errors|int_discards|int_no_graph)(,(int_up|int_down|int_up_wo_alias|int_errors|int_discards|int_no_graph))*)?$/']]
 			],
 		'period' => [
 			'filter'  => FILTER_VALIDATE_INT,
@@ -363,20 +418,25 @@ function mactrack_view(): void {
 	$i = 0;
 
 	if (cacti_sizeof($stats)) {
-		foreach ($stats as $stat) {
-			// find the background color and enclose it
-			$class = mactrack_int_row_class($stat);
+		$show_issues = mactrack_interfaces_show_issues();
 
-			if ($class) {
+		foreach ($stats as $stat) {
+			if ($show_issues) {
+				// zebra striped rows, status is conveyed by the Issues pills
+				$class = (($i % 2) == 1) ? 'odd' : 'even';
+
 				print "<tr id='line_" . $stat['device_id'] . '_' . $stat['ifName'] . "' class='tableRow selectable $class'>";
 			} else {
-				if (($i % 2) == 1) {
-					$class = 'odd';
-				} else {
-					$class = 'even';
-				}
+				// find the background color and enclose it
+				$class = mactrack_int_row_class($stat);
 
-				print "<tr id='line_" . $stat['device_id'] . "' class='tableRow selectable $class'>";
+				if ($class) {
+					print "<tr id='line_" . $stat['device_id'] . '_' . $stat['ifName'] . "' class='tableRow selectable $class'>";
+				} else {
+					$class = (($i % 2) == 1) ? 'odd' : 'even';
+
+					print "<tr id='line_" . $stat['device_id'] . "' class='tableRow selectable $class'>";
+				}
 			}
 
 			$i++;
@@ -448,6 +508,19 @@ function mactrack_display_array(): array {
 			'display' => __('Description', 'mactrack'),
 			'sort'    => 'ASC'
 		],
+	];
+
+	if (mactrack_interfaces_show_issues()) {
+		$display_text += [
+			'issues_nosort' => [
+				'display' => __('Issues', 'mactrack'),
+				'align'   => 'left',
+				'sort'    => ''
+			],
+		];
+	}
+
+	$display_text += [
 		'ifAlias' => [
 			'display' => __('Alias', 'mactrack'),
 			'sort'    => 'ASC'
@@ -737,6 +810,22 @@ function mactrack_filter_table(): void {
 					<td>
 						<label for='totals'><?php print __('Show Totals', 'mactrack'); ?></label>
 					</td>
+					<?php if (mactrack_interfaces_show_issues()) {
+						$selected_statuses = mactrack_parse_status_tokens(get_request_var('statuses'));
+					?>
+					<td>
+						<?php print __('Status', 'mactrack'); ?>
+					</td>
+					<td>
+						<select id='statuses' multiple class='select2-multi-count' data-select-all-text='<?php print html_escape(__('All Statuses', 'mactrack')); ?>' data-select-count-text='<?php print html_escape(__('Statuses Selected', 'mactrack')); ?>'>
+							<?php
+						foreach (mactrack_interface_status_legend() as $status_class => $status_label) {
+							print '<option value="' . html_escape($status_class) . '"' . (in_array($status_class, $selected_statuses, true) ? ' selected' : '') . '>' . html_escape($status_label) . '</option>';
+						}
+							?>
+						</select>
+					</td>
+					<?php } ?>
 				</tr>
 			</table>
 			</form>
@@ -752,6 +841,10 @@ function mactrack_filter_table(): void {
 				strURL += '&bwusage=' + $('#bwusage').val();
 				strURL += '&device_type_id=' + $('#device_type_id').val();
 				strURL += '&totals=' + $('#totals').is(':checked');
+
+				var mtStatuses = $('#statuses').length ? ($('#statuses').val() || []) : [];
+				strURL += '&statuses=' + mtStatuses.join(',');
+
 				loadPageNoHeader(strURL);
 			}
 
@@ -785,6 +878,30 @@ function mactrack_filter_table(): void {
 					var parts = $(this).attr('id').split('_');
 
 					scan_device_interface(parts[1], parts[2]);
+				});
+
+				// Issues pill drill-down: toggle the clicked status in the
+				// multi-select Status filter, then re-apply the filter.
+				$('.mactrackPill').off('click').on('click', function() {
+					var status = $(this).attr('data-status');
+					var $sel   = $('#statuses');
+
+					if (status === undefined || !$sel.length) {
+						return;
+					}
+
+					var vals = $sel.val() || [];
+					var idx  = $.inArray(status, vals);
+
+					if (idx > -1) {
+						vals.splice(idx, 1);
+					} else {
+						vals.push(status);
+					}
+
+					$sel.val(vals).trigger('change');
+
+					applyFilter();
 				});
 			});
 

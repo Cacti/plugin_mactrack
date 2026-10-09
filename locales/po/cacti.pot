@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:06-0400\n"
+"POT-Creation-Date: 2026-10-08 19:41-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -136,6 +136,35 @@ msgstr ""
 msgid "Up"
 msgstr ""
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Up"
+msgstr ""
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Alias"
+msgstr ""
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors Present"
+msgstr ""
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards Present"
+msgstr ""
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Graphs"
+msgstr ""
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Down"
+msgstr ""
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr ""
+
 #: lib/mactrack_functions.php
 msgid "Data"
 msgstr ""
@@ -257,11 +286,6 @@ msgstr ""
 
 #: lib/mactrack_functions.php mactrack_view_graphs.php
 msgid "Graphs"
-msgstr ""
-
-#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
-msgid "Unknown"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
@@ -1629,30 +1653,6 @@ msgid "No Mactrack Interfaces Found"
 msgstr ""
 
 #: mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr ""
-
-#: mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr ""
-
-#: mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr ""
-
-#: mactrack_view_interfaces.php
-msgid "Discards Present"
-msgstr ""
-
-#: mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr ""
-
-#: mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr ""
-
-#: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
 msgstr ""
 
@@ -1662,6 +1662,10 @@ msgstr ""
 
 #: mactrack_view_interfaces.php setup.php
 msgid "Description"
+msgstr ""
+
+#: mactrack_view_interfaces.php
+msgid "Issues"
 msgstr ""
 
 #: mactrack_view_interfaces.php
@@ -1793,6 +1797,14 @@ msgstr ""
 
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
+msgstr ""
+
+#: mactrack_view_interfaces.php
+msgid "All Statuses"
+msgstr ""
+
+#: mactrack_view_interfaces.php
+msgid "Statuses Selected"
 msgstr ""
 
 #: mactrack_view_ips.php

@@ -3368,6 +3368,14 @@ function mactrack_format_interface_row($stat): string {
 	form_selectable_cell(strtoupper($stat['device_type']), $stat['device_id']);
 	form_selectable_cell($stat['ifName'], $stat['device_id']);
 	form_selectable_cell($stat['ifDescr'], $stat['device_id']);
+
+	// View glue: the pill markup itself is unit-tested via mactrack_interface_status_pills().
+	// @codeCoverageIgnoreStart
+	if (mactrack_interfaces_show_issues()) {
+		form_selectable_cell(mactrack_interface_status_pills($stat), $stat['device_id']);
+	}
+	// @codeCoverageIgnoreEnd
+
 	form_selectable_cell($stat['ifAlias'], $stat['device_id']);
 	form_selectable_cell(round($stat['inBound'],1) . ' %', $stat['device_id'], '', 'right');
 	form_selectable_cell(round($stat['outBound'],1) . ' %', $stat['device_id'], '', 'right');
@@ -3389,10 +3397,189 @@ function mactrack_format_interface_row($stat): string {
 	}
 
 	form_selectable_cell($stat['ifOperStatus'] == 1 ? __('Up', 'mactrack') : __('Down', 'mactrack'), $stat['device_id'], '', 'right');
+
 	form_selectable_cell($upTime, $stat['device_id'], '', 'right');
 	form_selectable_cell(mactrack_date($stat['last_rundate']), $stat['device_id'], '', 'right');
 
 	return (string) ob_get_clean();
+}
+
+/**
+ * Determines whether the enhanced interface status detail (the Issues
+ * pill column and the multi-select Status filter) should be rendered.
+ * These rely on the select2-multi-count filter widget and pill styling
+ * available in Cacti 1.2.32 and newer, so they are hidden on older
+ * cores.
+ *
+ * @return bool True when running on Cacti 1.2.32 or newer.
+ */
+function mactrack_interfaces_show_issues(): bool {
+	return defined('CACTI_VERSION') && cacti_version_compare(CACTI_VERSION, '1.2.32', '>=');
+}
+
+/**
+ * The ordered map of interface status legend classes to their display
+ * labels, shared by the interfaces legend, the Issues pill column and
+ * the multi-select Status filter so they always stay in sync.
+ *
+ * @return array Ordered map of legend CSS class => label text.
+ */
+function mactrack_interface_status_legend(): array {
+	return [
+		'int_up'          => __('Interface Up', 'mactrack'),
+		'int_up_wo_alias' => __('No Alias', 'mactrack'),
+		'int_errors'      => __('Errors Present', 'mactrack'),
+		'int_discards'    => __('Discards Present', 'mactrack'),
+		'int_no_graph'    => __('No Graphs', 'mactrack'),
+		'int_down'        => __('Interface Down', 'mactrack'),
+	];
+}
+
+/**
+ * Reduces a comma-separated status filter string into a validated,
+ * de-duplicated list of known interface status legend classes.
+ *
+ * @param string|null $value The raw 'statuses' request value.
+ *
+ * @return array The validated status legend classes, in request order.
+ */
+function mactrack_parse_status_tokens($value): array {
+	$valid = array_keys(mactrack_interface_status_legend());
+	$out   = [];
+
+	if ($value === null || $value === '') {
+		return $out;
+	}
+
+	foreach (explode(',', (string) $value) as $token) {
+		$token = trim($token);
+
+		if (in_array($token, $valid, true) && !in_array($token, $out, true)) {
+			$out[] = $token;
+		}
+	}
+
+	return $out;
+}
+
+/**
+ * Determines whether a given interface currently has any associated
+ * Cacti graphs, used to drive the 'No Graphs' status indicator.
+ *
+ * @param int $host_id The linked Cacti host id.
+ * @param int $ifIndex The SNMP interface index.
+ *
+ * @return bool True when at least one interface graph exists.
+ */
+function mactrack_interface_has_graphs($host_id, $ifIndex): bool {
+	if (empty($host_id)) {
+		return false;
+	}
+
+	return (bool) db_fetch_cell_prepared('SELECT COUNT(*)
+		FROM mac_track_interface_graphs
+		WHERE host_id = ?
+		AND ifIndex = ?',
+		[$host_id, $ifIndex]);
+}
+
+/**
+ * Builds the set of interface status legend classes that currently
+ * apply to a single interface record, used to highlight the active
+ * pills in the Issues column.
+ *
+ * @param array $stat The interface record being rendered.
+ *
+ * @return array Map of active legend CSS class => true.
+ */
+function mactrack_int_statuses($stat): array {
+	$active = [];
+
+	if ($stat['ifOperStatus'] == 1) {
+		$active['int_up'] = true;
+
+		if ($stat['ifAlias'] == '') {
+			$active['int_up_wo_alias'] = true;
+		}
+	} else {
+		$active['int_down'] = true;
+	}
+
+	if ($stat['int_errors_present'] == 1) {
+		$active['int_errors'] = true;
+	}
+
+	if ($stat['int_discards_present'] == 1) {
+		$active['int_discards'] = true;
+	}
+
+	if (array_key_exists('has_graphs', $stat)) {
+		$has_graphs = (bool) $stat['has_graphs'];
+	} else {
+		$has_graphs = mactrack_interface_has_graphs($stat['host_id'], $stat['ifIndex']);
+	}
+
+	if (!$has_graphs) {
+		$active['int_no_graph'] = true;
+	}
+
+	return $active;
+}
+
+/**
+ * Renders the Issues column for an interface: one clickable pill per
+ * legend status, with the statuses that currently apply to the
+ * interface highlighted. Clicking a pill toggles that status in the
+ * multi-select Status filter (see mactrack_view_interfaces.php).
+ *
+ * @param array $stat The interface record being rendered.
+ *
+ * @return string The HTML markup for the pill group.
+ */
+function mactrack_interface_status_pills($stat): string {
+	$legend = mactrack_interface_status_legend();
+	$active = mactrack_int_statuses($stat);
+
+	$pills = '<div class="mactrackPills">';
+
+	foreach ($legend as $class => $label) {
+		$is_active = isset($active[$class]);
+
+		$pills .= '<button type="button" class="mactrackPill ' . $class . ($is_active ? ' mactrackPillActive' : '') . '"' .
+			' data-status="' . html_escape($class) . '" title="' . html_escape($label) . '">' .
+			html_escape($label) . '</button>';
+	}
+
+	$pills .= '</div>';
+
+	return $pills;
+}
+
+/**
+ * Renders the 802.1x status pill shown after the username column. The
+ * pill is a drill-down control that sets the Status filter to the
+ * clicked status (see mactrack_view_dot1x.php).
+ *
+ * @param array $port_result The 802.1x record being rendered.
+ *
+ * @return string The HTML markup for the status pill.
+ *
+ * @global array $mactrack_device_status Shared map of status code =>
+ *                                       label (defined once near the
+ *                                       top of this file).
+ */
+function mactrack_dot1x_status_pill($port_result): string {
+	global $mactrack_device_status;
+
+	$status = (int) $port_result['status'];
+	$class  = mactrack_dot1x_row_class($port_result);
+	$label  = $mactrack_device_status[$status] ?? __('Unknown', 'mactrack');
+
+	return '<div class="mactrackPills">' .
+		'<button type="button" class="mactrackPill mactrackPillActive ' . $class . '"' .
+		' data-dot1x-status="' . html_escape((string) $status) . '" title="' . html_escape($label) . '">' .
+		html_escape($label) . '</button>' .
+		'</div>';
 }
 
 /**
@@ -3405,15 +3592,11 @@ function mactrack_format_interface_row($stat): string {
  *
  * @return string The HTML markup for the table row's cells.
  *
- * @global array $config                 Cacti global configuration
- *                                       array (declared but not used
- *                                       directly here).
- * @global array $mactrack_device_status Map of status code => label
- *                                       used to render the
- *                                       authorization status column.
+ * @global array $config Cacti global configuration array (declared but
+ *                       not used directly here).
  */
 function mactrack_format_dot1x_row($port_result): string {
-	global $config,$mactrack_device_status;
+	global $config;
 
 	// we will make a row string
 	$row = '';
@@ -3424,16 +3607,11 @@ function mactrack_format_dot1x_row($port_result): string {
 		$scan_date = $port_result['max_scan_date'];
 	}
 
-	$status = 'Unknown';
-
-	if (array_key_exists($port_result['status'],$mactrack_device_status)) {
-		$status = $mactrack_device_status[$port_result['status']];
-	}
-
 	$row .= "<td class='nowrap'>" . mactrack_interface_actions($port_result['device_id'], $port_result['port_number']) . '</td>';
 	$row .= '<td><b>' . $port_result['device_name'] . '</b></td>';
 	$row .= '<td>' . $port_result['hostname'] . '</td>';
 	$row .= '<td><b>' . $port_result['username'] . '</b></td>';
+	$row .= '<td>' . mactrack_dot1x_status_pill($port_result) . '</td>';
 	$row .= '<td>' . $port_result['ip_address'] . '</td>';
 
 	if (read_config_option('mt_reverse_dns') != '') {
@@ -3443,7 +3621,6 @@ function mactrack_format_dot1x_row($port_result): string {
 	$row .= '<td>' . mactrack_format_mac($port_result['mac_address']) . '</td>';
 	$row .= '<td>' . $port_result['ifName'] . '</td>';
 	$row .= '<td><b>' . ($port_result['domain'] == 2 ? __('Data', 'mactrack') : __('Voice', 'mactrack')) . '</b></td>';
-	$row .= '<td><b>' . $status . '</b></td>';
 	$row .= "<td class='nowrap'>" . $scan_date . '</td>';
 
 	return $row;

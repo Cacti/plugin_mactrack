@@ -175,3 +175,65 @@
 	background-color: rgba(205, 207, 196, 0.2);
 	color: #eeeeee;
 }
+
+/*
+ * Status pills for the interfaces "Issues" column and the 802.1x status
+ * column. Outlined when inactive and solid when active; each pill takes
+ * its colour from the --pill custom property defined below so it matches
+ * this theme's status legend chips.
+ */
+.mactrackPills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3px;
+	align-items: center;
+}
+
+.mactrackPill {
+	appearance: none;
+	-webkit-appearance: none;
+	display: inline-block;
+	margin: 0;
+	padding: 1px 7px;
+	border-radius: 10px;
+	font: inherit;
+	font-size: 0.85em;
+	line-height: 1.5;
+	white-space: nowrap;
+	cursor: pointer;
+	user-select: none;
+	color: inherit;
+	background-color: transparent;
+	border: 1px solid var(--pill, #b5b5b5);
+}
+
+.mactrackPill:hover {
+	background-color: var(--pill, #666666);
+	color: #ffffff;
+}
+
+.mactrackPill:focus-visible {
+	outline: 2px solid var(--pill, #cccccc);
+	outline-offset: 1px;
+}
+
+.mactrackPillActive {
+	color: #ffffff;
+	background-color: var(--pill, #666666);
+	border-color: var(--pill, #666666);
+}
+
+.mactrackPill.int_up { --pill: #2b8435; }
+.mactrackPill.int_up_wo_alias { --pill: #a85712; }
+.mactrackPill.int_errors { --pill: #93302a; }
+.mactrackPill.int_discards { --pill: #9a6a1a; }
+.mactrackPill.int_no_graph { --pill: #5f5f57; }
+.mactrackPill.int_down { --pill: #a12820; }
+
+.mactrackPill.dot1x_authn_success { --pill: #2b8435; }
+.mactrackPill.dot1x_auth_success { --pill: #3f7a4a; }
+.mactrackPill.dot1x_authn_failed { --pill: #a12820; }
+.mactrackPill.dot1x_auth_failed { --pill: #a85712; }
+.mactrackPill.dot1x_running { --pill: #93302a; }
+.mactrackPill.dot1x_idle { --pill: #9a6a1a; }
+.mactrackPill.dot1x_auth_no_method { --pill: #5f5f57; }

@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* feature: On Cacti 1.2.32+, zebra-stripe the interfaces list and add an "Issues" column of clickable status pills (one per legend state, active states highlighted); clicking a pill toggles that state in a new multi-select Status filter styled like Base Cacti's Graph View Graph Templates selector
+* feature: Add a status pill column to the 802.1x view after the username; clicking the pill drills down by setting the Status filter to that session status
 * feature: Lay the interfaces and dot1x status legends out as a centered footer in normal document flow via a shared `.mactrackLegendFooter` class, instead of a fixed-position overlay that could cover the last rows at the bottom of the page
 * feature: Restyle the interfaces and dot1x status legends as rounded, evenly-spaced solid-colour chips with theme-appropriate colours (matching the Thold/Monitor/Syslog legends and the Deepness emerald), sized to the longest label and laid out as a CSS grid so they stay equal width across wrapped rows; also fixed a stray `background-color: color:` typo in the `.int_no_device` rule
 * dev: Convert plugin bootstrap include/include_once calls to fail-fast require/require_once across the web, CLI, and hook entry points so a missing dependency halts execution instead of continuing with an undefined API
