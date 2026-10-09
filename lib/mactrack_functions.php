@@ -3426,12 +3426,12 @@ function mactrack_interfaces_show_issues(): bool {
  */
 function mactrack_interface_status_legend(): array {
 	return [
-		'int_up'          => __('Interface Up', 'mactrack'),
-		'int_up_wo_alias' => __('No Alias', 'mactrack'),
-		'int_errors'      => __('Errors Present', 'mactrack'),
-		'int_discards'    => __('Discards Present', 'mactrack'),
-		'int_no_graph'    => __('No Graphs', 'mactrack'),
-		'int_down'        => __('Interface Down', 'mactrack'),
+		'int_up'          => __('Up', 'mactrack'),
+		'int_up_wo_alias' => __('Alias', 'mactrack'),
+		'int_errors'      => __('Errors', 'mactrack'),
+		'int_discards'    => __('Discards', 'mactrack'),
+		'int_no_graph'    => __('Graphs', 'mactrack'),
+		'int_down'        => __('Down', 'mactrack'),
 	];
 }
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-08 19:41-0400\n"
+"POT-Creation-Date: 2026-10-09 17:36-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -129,35 +129,30 @@ msgid "Since Restart"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 msgid "Down"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 msgid "Up"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Up"
+msgid "Alias"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "No Alias"
+msgid "Errors"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Errors Present"
+msgid "Discards"
 msgstr ""
 
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Discards Present"
-msgstr ""
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr ""
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Down"
+#: lib/mactrack_functions.php mactrack_view_graphs.php
+#: mactrack_view_interfaces.php
+msgid "Graphs"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
@@ -282,10 +277,6 @@ msgstr ""
 
 #: lib/mactrack_functions.php
 msgid "Dot1x"
-msgstr ""
-
-#: lib/mactrack_functions.php mactrack_view_graphs.php
-msgid "Graphs"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
@@ -1666,10 +1657,6 @@ msgstr ""
 
 #: mactrack_view_interfaces.php
 msgid "Issues"
-msgstr ""
-
-#: mactrack_view_interfaces.php
-msgid "Alias"
 msgstr ""
 
 #: mactrack_view_interfaces.php

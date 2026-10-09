@@ -458,12 +458,12 @@ function mactrack_view(): void {
 	print '<div class="center mactrackLegendFooter">';
 
 	mactrack_legend([
-		'int_up'          => __('Interface Up', 'mactrack'),
-		'int_up_wo_alias' => __('No Alias', 'mactrack'),
-		'int_errors'      => __('Errors Present', 'mactrack'),
-		'int_discards'    => __('Discards Present', 'mactrack'),
-		'int_no_graph'    => __('No Graphs', 'mactrack'),
-		'int_down'        => __('Interface Down', 'mactrack'),
+		'int_up'          => __('Up', 'mactrack'),
+		'int_up_wo_alias' => __('Alias', 'mactrack'),
+		'int_errors'      => __('Errors', 'mactrack'),
+		'int_discards'    => __('Discards', 'mactrack'),
+		'int_no_graph'    => __('Graphs', 'mactrack'),
+		'int_down'        => __('Down', 'mactrack'),
 	]);
 
 	print '</div>';
