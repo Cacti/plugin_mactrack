@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-09-28 16:06-0400\nPO-Revision-Date: 2026-10-08 07:18+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\nLanguage: zh-TW\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-08 19:41-0400\n"
+"PO-Revision-Date: 2026-10-08 07:18+0000\n"
+"Last-Translator: Anonymous <anonymous@cacti.net>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\n"
+"Language: zh-TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -130,6 +142,37 @@ msgstr "向下"
 #, fuzzy
 msgid "Up"
 msgstr "向上"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Up"
+msgstr "接口"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Alias"
+msgstr "沒有別名"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors Present"
+msgstr "存在錯誤"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards Present"
+msgstr "丟棄禮物"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+#, fuzzy
+msgid "No Graphs"
+msgstr "圖表"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Down"
+msgstr "接口關閉"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_devices.php setup.php
+#, fuzzy
+msgid "Unknown"
+msgstr "未知"
 
 #: lib/mactrack_functions.php
 #, fuzzy
@@ -259,12 +302,6 @@ msgstr "DOT1X"
 #, fuzzy
 msgid "Graphs"
 msgstr "圖表"
-
-#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
-#, fuzzy
-msgid "Unknown"
-msgstr "未知"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -1732,31 +1769,6 @@ msgid "No Mactrack Interfaces Found"
 msgstr "未找到設備跟踪接口"
 
 #: mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "接口"
-
-#: mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "沒有別名"
-
-#: mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "存在錯誤"
-
-#: mactrack_view_interfaces.php
-msgid "Discards Present"
-msgstr "丟棄禮物"
-
-#: mactrack_view_interfaces.php
-#, fuzzy
-msgid "No Graphs"
-msgstr "圖表"
-
-#: mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "接口關閉"
-
-#: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
 msgstr "刪除所有掃描結果"
 
@@ -1769,6 +1781,12 @@ msgstr "名稱"
 #, fuzzy
 msgid "Description"
 msgstr "描述"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "With Issues"
+msgid "Issues"
+msgstr "沒有發現問題"
 
 #: mactrack_view_interfaces.php
 msgid "Alias"
@@ -1900,6 +1918,16 @@ msgstr "流量"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "顯示總計"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
+msgstr "任何狀態"
+
+#: mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_ips.php
 #, fuzzy
