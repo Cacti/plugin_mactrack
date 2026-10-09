@@ -3427,10 +3427,10 @@ function mactrack_interfaces_show_issues(): bool {
 function mactrack_interface_status_legend(): array {
 	return [
 		'int_up'          => __('Up', 'mactrack'),
-		'int_up_wo_alias' => __('Alias', 'mactrack'),
+		'int_up_wo_alias' => __('Unaliased', 'mactrack'),
 		'int_errors'      => __('Errors', 'mactrack'),
 		'int_discards'    => __('Discards', 'mactrack'),
-		'int_no_graph'    => __('Graphs', 'mactrack'),
+		'int_no_graph'    => __('Graphless', 'mactrack'),
 		'int_down'        => __('Down', 'mactrack'),
 	];
 }

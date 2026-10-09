@@ -459,10 +459,10 @@ function mactrack_view(): void {
 
 	mactrack_legend([
 		'int_up'          => __('Up', 'mactrack'),
-		'int_up_wo_alias' => __('Alias', 'mactrack'),
+		'int_up_wo_alias' => __('Unaliased', 'mactrack'),
 		'int_errors'      => __('Errors', 'mactrack'),
 		'int_discards'    => __('Discards', 'mactrack'),
-		'int_no_graph'    => __('Graphs', 'mactrack'),
+		'int_no_graph'    => __('Graphless', 'mactrack'),
 		'int_down'        => __('Down', 'mactrack'),
 	]);
 
