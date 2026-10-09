@@ -208,11 +208,11 @@
 	color: var(--pill, #666666);
 	background-color: transparent;
 	border: 1px solid var(--pill, #b5b5b5);
-	opacity: 0.5;
 }
 
 .mactrackPill:hover {
-	opacity: 0.85;
+	background-color: var(--pill, #666666);
+	color: #ffffff;
 }
 
 .mactrackPillActive {

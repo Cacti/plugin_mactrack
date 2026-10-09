@@ -201,11 +201,11 @@
 	color: var(--pill, #cccccc);
 	background-color: transparent;
 	border: 1px solid var(--pill, #b5b5b5);
-	opacity: 0.6;
 }
 
 .mactrackPill:hover {
-	opacity: 0.9;
+	background-color: var(--pill, #666666);
+	color: #ffffff;
 }
 
 .mactrackPillActive {
