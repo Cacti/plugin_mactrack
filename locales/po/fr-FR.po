@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:06-0400\n"
+"POT-Creation-Date: 2026-10-08 19:41-0400\n"
 "PO-Revision-Date: 2025-08-18 14:26+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: French <https://translate.cacti.net/projects/cacti/mactrack/fr/>\n"
@@ -138,6 +138,35 @@ msgstr "Down"
 msgid "Up"
 msgstr "Up"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Up"
+msgstr "Interface vers le haut"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Alias"
+msgstr "Pas de pseudonyme"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors Present"
+msgstr "Erreurs présentes"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards Present"
+msgstr "Jette Présent"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Graphs"
+msgstr "Pas de graphiques"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Down"
+msgstr "Interface vers le bas"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Inconnu"
+
 #: lib/mactrack_functions.php
 msgid "Data"
 msgstr "Données"
@@ -260,11 +289,6 @@ msgstr "Dot1x"
 #: lib/mactrack_functions.php mactrack_view_graphs.php
 msgid "Graphs"
 msgstr "Graphiques"
-
-#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
-msgid "Unknown"
-msgstr "Inconnu"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -1676,30 +1700,6 @@ msgid "No Mactrack Interfaces Found"
 msgstr "Aucune interface de suivi de périphérique trouvée"
 
 #: mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "Interface vers le haut"
-
-#: mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "Pas de pseudonyme"
-
-#: mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "Erreurs présentes"
-
-#: mactrack_view_interfaces.php
-msgid "Discards Present"
-msgstr "Jette Présent"
-
-#: mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr "Pas de graphiques"
-
-#: mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "Interface vers le bas"
-
-#: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
 msgstr "Supprimer tous les résultats de numérisation"
 
@@ -1710,6 +1710,12 @@ msgstr "Nom"
 #: mactrack_view_interfaces.php setup.php
 msgid "Description"
 msgstr "Description"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "With Issues"
+msgid "Issues"
+msgstr "Avec des problèmes"
 
 #: mactrack_view_interfaces.php
 msgid "Alias"
@@ -1841,6 +1847,16 @@ msgstr "Bande Passante"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "Afficher les totaux"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
+msgstr "Tout statut"
+
+#: mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_ips.php
 #, fuzzy
