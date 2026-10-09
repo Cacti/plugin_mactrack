@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:06-0400\n"
+"POT-Creation-Date: 2026-10-08 19:41-0400\n"
 "PO-Revision-Date: 2024-12-06 19:24+0000\n"
 "Last-Translator: Anton Zhuravlev <baka109g@gmail.com>\n"
 "Language-Team: Russian <http://translate.cacti.net/projects/cacti/mactrack/ru/>\n"
@@ -138,6 +138,35 @@ msgstr "Выкл"
 msgid "Up"
 msgstr "Вкл"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Up"
+msgstr "Interface Up"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Alias"
+msgstr "Нет псевдонимов"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors Present"
+msgstr "Представленные ошибки"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards Present"
+msgstr "Выбросы Представлено"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Graphs"
+msgstr "Нет графиков"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Down"
+msgstr "Интерфейс вниз"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Неизвестно"
+
 #: lib/mactrack_functions.php
 msgid "Data"
 msgstr "Данные"
@@ -260,11 +289,6 @@ msgstr "Dot1x"
 #: lib/mactrack_functions.php mactrack_view_graphs.php
 msgid "Graphs"
 msgstr "Графики"
-
-#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
-msgid "Unknown"
-msgstr "Неизвестно"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -1676,30 +1700,6 @@ msgid "No Mactrack Interfaces Found"
 msgstr "Интерфейсы отслеживания устройств не обнаружены"
 
 #: mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "Interface Up"
-
-#: mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "Нет псевдонимов"
-
-#: mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "Представленные ошибки"
-
-#: mactrack_view_interfaces.php
-msgid "Discards Present"
-msgstr "Выбросы Представлено"
-
-#: mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr "Нет графиков"
-
-#: mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "Интерфейс вниз"
-
-#: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
 msgstr "Удалить все результаты сканирования"
 
@@ -1710,6 +1710,12 @@ msgstr "Имя"
 #: mactrack_view_interfaces.php setup.php
 msgid "Description"
 msgstr "Описание"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "With Issues"
+msgid "Issues"
+msgstr "С проблемами"
 
 #: mactrack_view_interfaces.php
 msgid "Alias"
@@ -1841,6 +1847,16 @@ msgstr "Полоса пропускания"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "Показать итоги"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
+msgstr "Любой cтатус"
+
+#: mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_ips.php
 #, fuzzy
