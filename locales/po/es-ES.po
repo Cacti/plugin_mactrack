@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti 1\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:06-0400\n"
+"POT-Creation-Date: 2026-10-08 19:41-0400\n"
 "PO-Revision-Date: 2024-04-20 17:27-0400\n"
 "Last-Translator: Tadeo Briceño <tadeobriceno@vencable.com>\n"
 "Language-Team: Spanish <http://translate.cacti.net/projects/cacti/mactrack/es/>\n"
@@ -133,6 +133,35 @@ msgstr "Caído"
 msgid "Up"
 msgstr "Arriba"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Up"
+msgstr "Interface arriba"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Alias"
+msgstr "Sin alias"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors Present"
+msgstr "Errores presente"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards Present"
+msgstr "Descartes presente"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Graphs"
+msgstr "Sin gráficos"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Down"
+msgstr "Interface caída"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Desconocido"
+
 #: lib/mactrack_functions.php
 msgid "Data"
 msgstr "Datos"
@@ -255,11 +284,6 @@ msgstr "Punto1x"
 #: lib/mactrack_functions.php mactrack_view_graphs.php
 msgid "Graphs"
 msgstr "Gráficos"
-
-#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
-msgid "Unknown"
-msgstr "Desconocido"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -1672,30 +1696,6 @@ msgid "No Mactrack Interfaces Found"
 msgstr "No se encontraron interfaces"
 
 #: mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "Interface arriba"
-
-#: mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "Sin alias"
-
-#: mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "Errores presente"
-
-#: mactrack_view_interfaces.php
-msgid "Discards Present"
-msgstr "Descartes presente"
-
-#: mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr "Sin gráficos"
-
-#: mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "Interface caída"
-
-#: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
 msgstr "Estadisticas de interfaz"
 
@@ -1706,6 +1706,12 @@ msgstr "Nombre"
 #: mactrack_view_interfaces.php setup.php
 msgid "Description"
 msgstr "Descripción"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "With Issues"
+msgid "Issues"
+msgstr "Con problemas"
 
 #: mactrack_view_interfaces.php
 msgid "Alias"
@@ -1837,6 +1843,16 @@ msgstr "Ancho de banda"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "Mostrar Totales"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
+msgstr "Cualquier Estado"
+
+#: mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_ips.php
 #, fuzzy
