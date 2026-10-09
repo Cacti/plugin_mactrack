@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-09-28 16:06-0400\nPO-Revision-Date: 2026-10-06 09:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-08 19:41-0400\n"
+"PO-Revision-Date: 2026-10-06 09:18+0000\n"
+"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
+"Language-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\n"
+"Language: sv-SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -124,6 +136,35 @@ msgstr "Nere"
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
 msgid "Up"
 msgstr "Uppe"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Up"
+msgstr "Gränssnitt upp"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Alias"
+msgstr "Inget alias"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors Present"
+msgstr "Fel närvarande"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards Present"
+msgstr "Kasta bort Present"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Graphs"
+msgstr "Grafer"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Down"
+msgstr "Gränssnitt Ned"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Okänd"
 
 #: lib/mactrack_functions.php
 msgid "Data"
@@ -247,11 +288,6 @@ msgstr "Dot1x"
 #: lib/mactrack_functions.php mactrack_view_graphs.php
 msgid "Graphs"
 msgstr "Grafer"
-
-#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
-msgid "Unknown"
-msgstr "Okänd"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -1618,30 +1654,6 @@ msgid "No Mactrack Interfaces Found"
 msgstr "Inga Mactrack-gränssnitt hittades"
 
 #: mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "Gränssnitt upp"
-
-#: mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "Inget alias"
-
-#: mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "Fel närvarande"
-
-#: mactrack_view_interfaces.php
-msgid "Discards Present"
-msgstr "Kasta bort Present"
-
-#: mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr "Grafer"
-
-#: mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "Gränssnitt Ned"
-
-#: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
 msgstr "Ta bort alla scanningsresultat"
 
@@ -1652,6 +1664,12 @@ msgstr "Namn"
 #: mactrack_view_interfaces.php setup.php
 msgid "Description"
 msgstr "Beskrivning"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "With Issues"
+msgid "Issues"
+msgstr "Med problem"
 
 #: mactrack_view_interfaces.php
 msgid "Alias"
@@ -1783,6 +1801,16 @@ msgstr "Bandbredd"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "Visa Totals"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
+msgstr "Vilken status som helst"
+
+#: mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_ips.php
 msgid "Mactrack - Site IP Range Report View"
