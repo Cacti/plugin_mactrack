@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:06-0400\n"
+"POT-Creation-Date: 2026-10-08 19:41-0400\n"
 "PO-Revision-Date: 2024-04-20 17:22-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -137,6 +137,35 @@ msgstr "المرض"
 msgid "Up"
 msgstr "أعلى"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Up"
+msgstr "واجهة لأعلى"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Alias"
+msgstr "لا الاسم المستعار"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors Present"
+msgstr "أخطاء الحاضر"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards Present"
+msgstr "يتجاهل الحاضر"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Graphs"
+msgstr "الرسوم"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Down"
+msgstr "واجهة لأسفل"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "غير معروف"
+
 #: lib/mactrack_functions.php
 msgid "Data"
 msgstr "بيانات"
@@ -259,11 +288,6 @@ msgstr "Dot1x"
 #: lib/mactrack_functions.php mactrack_view_graphs.php
 msgid "Graphs"
 msgstr "الرسوم"
-
-#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
-msgid "Unknown"
-msgstr "غير معروف"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -1675,30 +1699,6 @@ msgid "No Mactrack Interfaces Found"
 msgstr "لم يتم العثور على واجهات تتبع الجهاز"
 
 #: mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "واجهة لأعلى"
-
-#: mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "لا الاسم المستعار"
-
-#: mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "أخطاء الحاضر"
-
-#: mactrack_view_interfaces.php
-msgid "Discards Present"
-msgstr "يتجاهل الحاضر"
-
-#: mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr "الرسوم"
-
-#: mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "واجهة لأسفل"
-
-#: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
 msgstr "إزالة جميع نتائج المسح الضوئي"
 
@@ -1709,6 +1709,12 @@ msgstr "الاسم"
 #: mactrack_view_interfaces.php setup.php
 msgid "Description"
 msgstr "الوصف"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "With Issues"
+msgid "Issues"
+msgstr "مع القضايا"
 
 #: mactrack_view_interfaces.php
 msgid "Alias"
@@ -1840,6 +1846,16 @@ msgstr "عرض النطاق"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "إظهار الإجماليات"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
+msgstr "أي حال أو أية حالة"
+
+#: mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_ips.php
 #, fuzzy
