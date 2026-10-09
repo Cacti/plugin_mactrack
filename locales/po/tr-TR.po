@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:06-0400\n"
+"POT-Creation-Date: 2026-10-08 19:41-0400\n"
 "PO-Revision-Date: 2024-04-20 17:44-0400\n"
 "Last-Translator: San IPE <sanipe1949@krunsea.com>\n"
 "Language-Team: Turkish <http://translate.cacti.net/projects/cacti/mactrack/tr/>\n"
@@ -138,6 +138,35 @@ msgstr "Aşağı"
 msgid "Up"
 msgstr "Yukarı"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Up"
+msgstr "Arayüz Yukarı"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Alias"
+msgstr "Takma Ad Yok"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors Present"
+msgstr "Mevcut Hatalar"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards Present"
+msgstr "Şimdiki Adayları"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Graphs"
+msgstr "Grafikler"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Down"
+msgstr "Arayüz Aşağı"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Bilinmeyen"
+
 #: lib/mactrack_functions.php
 msgid "Data"
 msgstr "Veri"
@@ -260,11 +289,6 @@ msgstr "dot1x"
 #: lib/mactrack_functions.php mactrack_view_graphs.php
 msgid "Graphs"
 msgstr "Grafikler"
-
-#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
-msgid "Unknown"
-msgstr "Bilinmeyen"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -1676,30 +1700,6 @@ msgid "No Mactrack Interfaces Found"
 msgstr "Cihaz İzleme Arabirimi Bulunamadı"
 
 #: mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "Arayüz Yukarı"
-
-#: mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "Takma Ad Yok"
-
-#: mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "Mevcut Hatalar"
-
-#: mactrack_view_interfaces.php
-msgid "Discards Present"
-msgstr "Şimdiki Adayları"
-
-#: mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr "Grafikler"
-
-#: mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "Arayüz Aşağı"
-
-#: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
 msgstr "Tüm Tarama Sonuçlarını Kaldır"
 
@@ -1710,6 +1710,12 @@ msgstr "İsim"
 #: mactrack_view_interfaces.php setup.php
 msgid "Description"
 msgstr "Açıklama"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "With Issues"
+msgid "Issues"
+msgstr "Sorunları"
 
 #: mactrack_view_interfaces.php
 msgid "Alias"
@@ -1841,6 +1847,16 @@ msgstr "Bant genişliği"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "Toplamları Göster"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
+msgstr "Herhangi bir durum"
+
+#: mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_ips.php
 #, fuzzy
