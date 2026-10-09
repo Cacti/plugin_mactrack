@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:06-0400\n"
+"POT-Creation-Date: 2026-10-08 19:41-0400\n"
 "PO-Revision-Date: 2024-04-20 17:36-0400\n"
 "Last-Translator: Edwin Lankamp <edwin.lankamp@gmail.com>\n"
 "Language-Team: Dutch <http://translate.cacti.net/projects/cacti/mactrack/nl/>\n"
@@ -138,6 +138,35 @@ msgstr "Offline"
 msgid "Up"
 msgstr "Online"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Up"
+msgstr "Interface omhoog"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Alias"
+msgstr "Geen Alias"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors Present"
+msgstr "Fouten Aanwezig"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards Present"
+msgstr "Teruggooi Aanwezig"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Graphs"
+msgstr "Grafieken"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Down"
+msgstr "Interface omlaag"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Onbekend"
+
 #: lib/mactrack_functions.php
 msgid "Data"
 msgstr "Data"
@@ -260,11 +289,6 @@ msgstr "Dot1x"
 #: lib/mactrack_functions.php mactrack_view_graphs.php
 msgid "Graphs"
 msgstr "Grafieken"
-
-#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
-msgid "Unknown"
-msgstr "Onbekend"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -1676,30 +1700,6 @@ msgid "No Mactrack Interfaces Found"
 msgstr "Geen apparaatvolgsystemen gevonden"
 
 #: mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "Interface omhoog"
-
-#: mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "Geen Alias"
-
-#: mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "Fouten Aanwezig"
-
-#: mactrack_view_interfaces.php
-msgid "Discards Present"
-msgstr "Teruggooi Aanwezig"
-
-#: mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr "Grafieken"
-
-#: mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "Interface omlaag"
-
-#: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
 msgstr "Alle scanresultaten verwijderen"
 
@@ -1710,6 +1710,12 @@ msgstr "Naam"
 #: mactrack_view_interfaces.php setup.php
 msgid "Description"
 msgstr "Omschrijving"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "With Issues"
+msgid "Issues"
+msgstr "Met problemen"
 
 #: mactrack_view_interfaces.php
 msgid "Alias"
@@ -1841,6 +1847,16 @@ msgstr "Bandbreedte"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "Toon totalen"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
+msgstr "Volgens status"
+
+#: mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_ips.php
 #, fuzzy
