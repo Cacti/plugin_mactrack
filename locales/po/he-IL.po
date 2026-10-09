@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:06-0400\n"
+"POT-Creation-Date: 2026-10-08 19:41-0400\n"
 "PO-Revision-Date: 2025-08-18 14:26+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Hebrew (Israel) <https://translate.cacti.net/projects/cacti/mactrack/he_IL/>\n"
@@ -138,6 +138,35 @@ msgstr "למטה"
 msgid "Up"
 msgstr "למעלה"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Up"
+msgstr "ממשק למעלה"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Alias"
+msgstr "אין כינוי"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors Present"
+msgstr "שגיאות הנוכחי"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards Present"
+msgstr "מתנת הדיסק"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "No Graphs"
+msgstr "גרפים"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Interface Down"
+msgstr "ממשק למטה"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "לא ידוע"
+
 #: lib/mactrack_functions.php
 msgid "Data"
 msgstr "נתונים"
@@ -260,11 +289,6 @@ msgstr "Dot1x"
 #: lib/mactrack_functions.php mactrack_view_graphs.php
 msgid "Graphs"
 msgstr "גרפים"
-
-#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
-msgid "Unknown"
-msgstr "לא ידוע"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -1676,30 +1700,6 @@ msgid "No Mactrack Interfaces Found"
 msgstr "לא נמצאו ממשקי מעקב התקנים"
 
 #: mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "ממשק למעלה"
-
-#: mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "אין כינוי"
-
-#: mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "שגיאות הנוכחי"
-
-#: mactrack_view_interfaces.php
-msgid "Discards Present"
-msgstr "מתנת הדיסק"
-
-#: mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr "גרפים"
-
-#: mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "ממשק למטה"
-
-#: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
 msgstr "הסר את כל תוצאות הסריקה"
 
@@ -1710,6 +1710,12 @@ msgstr "שם"
 #: mactrack_view_interfaces.php setup.php
 msgid "Description"
 msgstr "תיאור"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "With Issues"
+msgid "Issues"
+msgstr "עם בעיות"
 
 #: mactrack_view_interfaces.php
 msgid "Alias"
@@ -1841,6 +1847,16 @@ msgstr "רוחב פס"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "הצג סיכומים"
+
+#: mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
+msgstr "כל הסטטוסים"
+
+#: mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_ips.php
 #, fuzzy
