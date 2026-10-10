@@ -965,11 +965,10 @@ function mactrack_view_macs(): void {
 				form_selectable_cell(filter_value($port_result['dns_hostname'], get_request_var('filter')), $key);
 			}
 
-			if ($port_result['mac_id'] > 0) {
-				$auth = '<span class="deviceUp">' . __('Authorized', 'mactrack');
-			} else {
-				$auth = '<span class="deviceDown">' . __('Not Authorized', 'mactrack');
-			}
+			// View glue: pill markup is unit-tested via mactrack_mac_auth_pill().
+			// @codeCoverageIgnoreStart
+			$auth = mactrack_mac_auth_pill($port_result['mac_id'] > 0);
+			// @codeCoverageIgnoreEnd
 
 			// echo get_request_var('filter') . "<br/>";
 			form_selectable_cell(filter_value(mactrack_format_mac($port_result['mac_address']), get_request_var('filter')), $key);
@@ -1206,11 +1205,10 @@ function mactrack_view_aggregated_macs(): void {
 				form_selectable_cell(filter_value($port_result['dns_hostname'], get_request_var('filter')), $key);
 			}
 
-			if ($port_result['mac_id'] > 0) {
-				$auth = '<span class="deviceUp">' . __('Authorized', 'mactrack');
-			} else {
-				$auth = '<span class="deviceDown">' . __('Not Authorized', 'mactrack');
-			}
+			// View glue: pill markup is unit-tested via mactrack_mac_auth_pill().
+			// @codeCoverageIgnoreStart
+			$auth = mactrack_mac_auth_pill($port_result['mac_id'] > 0);
+			// @codeCoverageIgnoreEnd
 
 			form_selectable_cell(filter_value(mactrack_format_mac($port_result['mac_address']), get_request_var('filter')), $key);
 			form_selectable_cell($auth, $key);
@@ -1546,6 +1544,20 @@ function mactrack_mac_filter(): void {
 
 				$('#export').on('click', function() {
 					exportRows();
+				});
+
+				// Authorization pill drill-down: set the Authorized filter to the
+				// clicked state, then re-apply the filter.
+				$('.mactrackPill').off('click').on('click', function() {
+					var authorized = $(this).attr('data-mac-authorized');
+
+					if (authorized === undefined || !$('#authorized').length) {
+						return;
+					}
+
+					$('#authorized').val(authorized);
+
+					applyFilter();
 				});
 			});
 

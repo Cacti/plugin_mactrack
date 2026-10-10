@@ -405,6 +405,18 @@ if (!function_exists('set_request_var')) {
 	}
 }
 
+if (!function_exists('read_user_setting')) {
+	function read_user_setting($name, $default = false, $force = false, $user_id = 0) {
+		return $default;
+	}
+}
+
+if (!function_exists('sanitize_search_string')) {
+	function sanitize_search_string($string) {
+		return $string;
+	}
+}
+
 if (!function_exists('api_user_realm_auth')) {
 	function api_user_realm_auth($filename) {
 		return mactrack_test_next_return('api_user_realm_auth', true);

@@ -43,6 +43,7 @@ describe('prepared statement consistency in mactrack', function () {
 		'mactrack_utilities.php'       => 25,
 		'mactrack_vendormacs.php'      => 2,
 		'mactrack_view_arp.php'        => 7,
+		'mactrack_view_dashboard.php'  => 6,
 		'mactrack_view_devices.php'    => 4,
 		'mactrack_view_dot1x.php'      => 3,
 		'mactrack_view_graphs.php'     => 2,

@@ -1,0 +1,276 @@
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2004-2026 The Cacti Group                                 |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+*/
+
+/*
+ * MacTrack Dashboard card chrome. A grid of status cards with a draggable
+ * header, per-card tools and optional expand. Colours derive from currentColor
+ * (the active theme's text colour) via color-mix, so the cards follow every
+ * theme without per-theme overrides. See js/cards.js for the behaviour and
+ * mactrack_view_dashboard.php for the markup.
+ */
+
+.mtdashToolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin: 10px 4px 0;
+}
+
+.mtdashToolbarLabel {
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.mtdashAdd {
+	box-sizing: border-box;
+	min-width: 220px;
+	padding: 4px 8px;
+	border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+	border-radius: 7px;
+	background: color-mix(in srgb, currentColor 4%, transparent);
+	color: inherit;
+	font-size: 12px;
+}
+
+#mactrack_dashboard.mtdashGrid {
+	display: grid;
+	grid-template-columns: repeat(8, minmax(0, 1fr));
+	align-items: start;
+	gap: 14px;
+	margin: 10px 4px;
+	font-variant-numeric: tabular-nums;
+}
+
+.mtdashSpan1 { grid-column: span 2; }
+.mtdashSpan2 { grid-column: span 2; }
+.mtdashSpan3 { grid-column: span 4; }
+.mtdashSpan4 { grid-column: span 4; }
+
+@media (min-width: 1200px) {
+	.mtdashSpan1 { grid-column: span 1; }
+	.mtdashSpan2 { grid-column: span 2; }
+	.mtdashSpan3 { grid-column: span 3; }
+	.mtdashSpan4 { grid-column: span 4; }
+}
+
+.mtdashCard {
+	box-sizing: border-box;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+	background: color-mix(in srgb, currentColor 5%, transparent);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.mtdashCardDragging {
+	opacity: 0.5;
+}
+
+.mtdashCardHeader {
+	box-sizing: border-box;
+	/* fixed row height so a tool/handle hover highlight never reflows the header */
+	min-height: 34px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 7px 10px;
+	border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+	background: color-mix(in srgb, currentColor 9%, transparent);
+}
+
+.mtdashCardDrag {
+	flex: 0 0 auto;
+	box-sizing: border-box;
+	padding: 2px 5px;
+	/* reserve the border so a hover/focus highlight recolours it instead of resizing the header */
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background: transparent;
+	color: color-mix(in srgb, currentColor 50%, transparent);
+	font-size: 13px;
+	line-height: 1;
+	cursor: grab;
+}
+
+.mtdashCardDrag:hover,
+.mtdashCardDrag:focus-visible {
+	color: currentColor;
+	border-color: transparent;
+	background: color-mix(in srgb, currentColor 12%, transparent);
+	outline: none;
+}
+
+.mtdashCardDrag:active {
+	cursor: grabbing;
+}
+
+.mtdashCardTitle {
+	flex: 1 1 auto;
+	min-width: 0;
+	margin: 0;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1.3;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.mtdashCardTools {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 1px;
+}
+
+.mtdashCardTool {
+	box-sizing: border-box;
+	padding: 2px 5px;
+	/* reserve the border so a hover/focus highlight recolours it instead of resizing the header */
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background: transparent;
+	color: color-mix(in srgb, currentColor 50%, transparent);
+	font-size: 12px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.mtdashCardTool:hover,
+.mtdashCardTool:focus-visible {
+	color: currentColor;
+	border-color: transparent;
+	background: color-mix(in srgb, currentColor 12%, transparent);
+	outline: none;
+}
+
+/* Only the control matching the card's current state is shown. */
+.mtdashCard:not(.mtdashCardExpanded) .mtdashCardTool[data-tool="collapse"],
+.mtdashCardExpanded .mtdashCardTool[data-tool="expand"] {
+	display: none;
+}
+
+.mtdashCardBody {
+	padding: 6px 12px 10px;
+	overflow-x: auto;
+}
+
+/* Expandable cards clip to a fixed height until "show more"; a fade hints at the
+   clipped content. */
+.mtdashCardExpandable:not(.mtdashCardExpanded) .mtdashCardBody {
+	position: relative;
+	max-height: 220px;
+	overflow: hidden;
+}
+
+.mtdashCardExpandable:not(.mtdashCardExpanded) .mtdashCardBody::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 30px;
+	pointer-events: none;
+	background: linear-gradient(transparent, color-mix(in srgb, currentColor 5%, transparent));
+}
+
+.mtdashTable {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 12px;
+}
+
+.mtdashTable th,
+.mtdashTable td {
+	padding: 6px 8px;
+	text-align: left;
+	vertical-align: top;
+	overflow-wrap: anywhere;
+}
+
+.mtdashTable thead th {
+	font-weight: 600;
+	border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+}
+
+.mtdashKv tbody th {
+	font-weight: normal;
+	color: color-mix(in srgb, currentColor 75%, transparent);
+}
+
+.mtdashKv td {
+	text-align: right;
+	font-weight: 600;
+}
+
+.mtdashTable tbody tr + tr > th,
+.mtdashTable tbody tr + tr > td {
+	border-top: 1px solid color-mix(in srgb, currentColor 9%, transparent);
+}
+
+.mtdashEmpty {
+	color: color-mix(in srgb, currentColor 60%, transparent);
+	font-style: italic;
+}
+
+/* Proportion bars (device status, table sizes). */
+.mtdashBars {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.mtdashBarRow {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.mtdashBarHead {
+	display: flex;
+	justify-content: space-between;
+	font-size: 12px;
+}
+
+.mtdashBar,
+.mtdashInlineBar {
+	position: relative;
+	height: 8px;
+	border-radius: 4px;
+	background: color-mix(in srgb, currentColor 12%, transparent);
+	overflow: hidden;
+}
+
+.mtdashInlineBar {
+	display: block;
+	margin-bottom: 2px;
+}
+
+.mtdashBarFill {
+	display: block;
+	height: 100%;
+	border-radius: 4px;
+	background: color-mix(in srgb, currentColor 45%, transparent);
+}
+
+.mtdashBarFill.mtdash-up   { background: #2b8435; }
+.mtdashBarFill.mtdash-warn { background: #a85712; }
+.mtdashBarFill.mtdash-down { background: #a12820; }
+.mtdashBarFill.mtdash-none { background: color-mix(in srgb, currentColor 40%, transparent); }
+
+.mtdashDialogBody {
+	font-variant-numeric: tabular-nums;
+}
+
+.mtdashDialogBody .mtdashTable {
+	font-size: 13px;
+}
