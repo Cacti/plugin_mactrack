@@ -4317,8 +4317,9 @@ function mactrack_sanitize_load_report(): void {
 }
 
 /**
- * Renders the top-level MacTrack tab bar (Sites, Devices, IP Ranges, IP
- * Address, MAC Address, Interfaces, Dot1x, Graphs), highlighting the
+ * Renders the top-level MacTrack tab bar (Dashboard, Sites, Devices, IP
+ * Ranges, IP Address, MAC Address, Interfaces, Dot1x, Graphs),
+ * highlighting the
  * currently selected tab as resolved by mactrack_sanitize_load_report().
  *
  * @return void
@@ -4331,6 +4332,7 @@ function mactrack_tabs(): void {
 
 	// present a tabbed interface
 	$tabs_mactrack = [
+		'dashboard'  => __('Dashboard', 'mactrack'),
 		'sites'      => __('Sites', 'mactrack'),
 		'devices'    => __('Devices', 'mactrack'),
 		'ips'        => __('IP Ranges', 'mactrack'),
