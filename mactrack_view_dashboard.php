@@ -199,15 +199,14 @@ function mactrack_dashboard_counts(): array {
 		SUM(ports_active) AS ports_active,
 		SUM(ports_trunk) AS ports_trunk,
 		SUM(macs_active) AS macs_active,
-		SUM(ips_total) AS ips_total
+		SUM(ips_total) AS ips_total,
+		(SELECT COUNT(*) FROM mac_track_sites) AS sites,
+		(SELECT COUNT(*) FROM mac_track_device_types) AS device_types,
+		(SELECT COUNT(*) FROM mac_track_interfaces) AS interfaces,
+		(SELECT COUNT(*) FROM mac_track_oui_database) AS oui
 		FROM mac_track_devices');
 
 	$counts = array_map('intval', is_array($row) ? $row : []);
-
-	$counts['sites']        = (int) db_fetch_cell('SELECT COUNT(*) FROM mac_track_sites');
-	$counts['device_types'] = (int) db_fetch_cell('SELECT COUNT(*) FROM mac_track_device_types');
-	$counts['interfaces']   = (int) db_fetch_cell('SELECT COUNT(*) FROM mac_track_interfaces');
-	$counts['oui']          = (int) db_fetch_cell('SELECT COUNT(*) FROM mac_track_oui_database');
 
 	return $counts;
 }
