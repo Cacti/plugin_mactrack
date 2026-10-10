@@ -1,5 +1,17 @@
 msgid ""
-msgstr "Project-Id-Version: Cacti 1\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-08 19:41-0400\nPO-Revision-Date: 2026-10-10 01:18+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Spanish <https://translate.cacti.net/projects/cacti/mactrack/es/>\nLanguage: es-ES\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: Cacti 1\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-09 17:42-0400\n"
+"PO-Revision-Date: 2026-10-10 01:18+0000\n"
+"Last-Translator: Anonymous <anonymous@cacti.net>\n"
+"Language-Team: Spanish <https://translate.cacti.net/projects/cacti/mactrack/es/>\n"
+"Language: es-ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -114,36 +126,36 @@ msgid "Since Restart"
 msgstr "Desde reinicio"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 msgid "Down"
 msgstr "Caído"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 msgid "Up"
 msgstr "Arriba"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "Interface arriba"
+msgid "Unaliased"
+msgstr ""
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "Sin alias"
+#, fuzzy
+#| msgid "Error"
+msgid "Errors"
+msgstr "Error"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "Errores presente"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Discards Present"
+#, fuzzy
+#| msgid "Discards Present"
+msgid "Discards"
 msgstr "Descartes presente"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr "Sin gráficos"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "Interface caída"
+#, fuzzy
+#| msgid "Graphs"
+msgid "Graphless"
+msgstr "Gráficos"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_view_devices.php setup.php
@@ -3016,6 +3028,21 @@ msgstr "Introduzca la dirección MAC o el texto de coincidencia de dirección MA
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Agregar un motivo para esta entrada."
+
+#~ msgid "Interface Up"
+#~ msgstr "Interface arriba"
+
+#~ msgid "No Alias"
+#~ msgstr "Sin alias"
+
+#~ msgid "Errors Present"
+#~ msgstr "Errores presente"
+
+#~ msgid "No Graphs"
+#~ msgstr "Sin gráficos"
+
+#~ msgid "Interface Down"
+#~ msgstr "Interface caída"
 
 #~ msgid "Dash [-]"
 #~ msgstr "Guión medio [-]"
