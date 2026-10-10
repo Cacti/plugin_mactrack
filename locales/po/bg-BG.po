@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-08 19:41-0400\nPO-Revision-Date: 2026-10-10 01:18+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Bulgarian <https://translate.cacti.net/projects/cacti/mactrack/bg/>\nLanguage: bg-BG\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-09 17:42-0400\n"
+"PO-Revision-Date: 2026-10-10 01:18+0000\n"
+"Last-Translator: Anonymous <anonymous@cacti.net>\n"
+"Language-Team: Bulgarian <https://translate.cacti.net/projects/cacti/mactrack/bg/>\n"
+"Language: bg-BG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -119,36 +131,36 @@ msgid "Since Restart"
 msgstr "От рестартиране"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 msgid "Down"
 msgstr "Надолу"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 msgid "Up"
 msgstr "Нагоре"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "Интерфейс нагоре"
+msgid "Unaliased"
+msgstr ""
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "Няма псевдоним"
+#, fuzzy
+#| msgid "Error"
+msgid "Errors"
+msgstr "Грешка"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "Представени грешки"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Discards Present"
+#, fuzzy
+#| msgid "Discards Present"
+msgid "Discards"
 msgstr "Изхвърлянията присъстват"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "No Graphs"
+#, fuzzy
+#| msgid "Graphs"
+msgid "Graphless"
 msgstr "Графики"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "Интерфейс надолу"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_view_devices.php setup.php
@@ -3020,6 +3032,21 @@ msgstr "Моля, въведете низа за MAC адрес или Mac Addre
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Моля, добавете причина за това вписване."
+
+#~ msgid "Interface Up"
+#~ msgstr "Интерфейс нагоре"
+
+#~ msgid "No Alias"
+#~ msgstr "Няма псевдоним"
+
+#~ msgid "Errors Present"
+#~ msgstr "Представени грешки"
+
+#~ msgid "No Graphs"
+#~ msgstr "Графики"
+
+#~ msgid "Interface Down"
+#~ msgstr "Интерфейс надолу"
 
 #~ msgid "Dash [-]"
 #~ msgstr "Dash [-]"
