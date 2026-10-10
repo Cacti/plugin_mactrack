@@ -3583,6 +3583,27 @@ function mactrack_dot1x_status_pill($port_result): string {
 }
 
 /**
+ * Renders the authorization status of a MAC address (the MAC Addresses
+ * tab) as a themed status pill: green when authorized, red when not,
+ * mirroring the 802.1x status pill styling so the two tabs stay
+ * visually consistent.
+ *
+ * @param bool $authorized Whether the MAC address is authorized.
+ *
+ * @return string The HTML markup for the status pill.
+ */
+function mactrack_mac_auth_pill($authorized): string {
+	$class = $authorized ? 'mac_authorized' : 'mac_unauthorized';
+	$label = $authorized ? __('Authorized', 'mactrack') : __('Unauthorized', 'mactrack');
+
+	return '<div class="mactrackPills">' .
+		'<button type="button" class="mactrackPill mactrackPillActive ' . $class . '"' .
+		' title="' . html_escape($label) . '">' .
+		html_escape($label) . '</button>' .
+		'</div>';
+}
+
+/**
  * Renders a single 802.1x results-list table row (action icons, device
  * name/hostname, username, IP address, optional DNS hostname, MAC
  * address, interface name, domain, authorization status, scan date) as

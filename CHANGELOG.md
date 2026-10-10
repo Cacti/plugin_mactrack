@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* feature: On the MAC Addresses tab, show the authorization state as a themed status pill (green "Authorized" / red "Unauthorized") consistent with the interface and 802.1x pills, instead of plain coloured text
 * feature: On Cacti 1.2.32+, zebra-stripe the interfaces list and add an "Issues" column of clickable status pills (one per legend state, active states highlighted); clicking a pill toggles that state in a new multi-select Status filter styled like Base Cacti's Graph View Graph Templates selector
 * feature: Add a status pill column to the 802.1x view after the username; clicking the pill drills down by setting the Status filter to that session status
 * feature: Lay the interfaces and dot1x status legends out as a centered footer in normal document flow via a shared `.mactrackLegendFooter` class, instead of a fixed-position overlay that could cover the last rows at the bottom of the page
