@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-08 19:41-0400\nPO-Revision-Date: 2026-10-10 01:18+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Turkish <https://translate.cacti.net/projects/cacti/mactrack/tr/>\nLanguage: tr-TR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-09 17:42-0400\n"
+"PO-Revision-Date: 2026-10-10 01:18+0000\n"
+"Last-Translator: Anonymous <anonymous@cacti.net>\n"
+"Language-Team: Turkish <https://translate.cacti.net/projects/cacti/mactrack/tr/>\n"
+"Language: tr-TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -119,36 +131,36 @@ msgid "Since Restart"
 msgstr "Yeniden Başlatıldığından beri"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 msgid "Down"
 msgstr "Aşağı"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 msgid "Up"
 msgstr "Yukarı"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "Arayüz Yukarı"
+msgid "Unaliased"
+msgstr ""
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "Takma Ad Yok"
+#, fuzzy
+#| msgid "Error"
+msgid "Errors"
+msgstr "Hata"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "Mevcut Hatalar"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Discards Present"
+#, fuzzy
+#| msgid "Discards Present"
+msgid "Discards"
 msgstr "Şimdiki Adayları"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "No Graphs"
+#, fuzzy
+#| msgid "Graphs"
+msgid "Graphless"
 msgstr "Grafikler"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "Arayüz Aşağı"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_view_devices.php setup.php
@@ -3020,6 +3032,21 @@ msgstr "Lütfen otomatik olarak yetkilendirilmek için MAC Adresini veya Mac Adr
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Lütfen bu giriş için bir sebep ekleyin."
+
+#~ msgid "Interface Up"
+#~ msgstr "Arayüz Yukarı"
+
+#~ msgid "No Alias"
+#~ msgstr "Takma Ad Yok"
+
+#~ msgid "Errors Present"
+#~ msgstr "Mevcut Hatalar"
+
+#~ msgid "No Graphs"
+#~ msgstr "Grafikler"
+
+#~ msgid "Interface Down"
+#~ msgstr "Arayüz Aşağı"
 
 #~ msgid "Dash [-]"
 #~ msgstr "Çizgi [-]"
