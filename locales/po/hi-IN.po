@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-08 19:41-0400\n"
+"POT-Creation-Date: 2026-10-09 17:42-0400\n"
 "PO-Revision-Date: 2024-04-20 17:32-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -130,36 +130,36 @@ msgid "Since Restart"
 msgstr "रिस्टार्ट के बाद से"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 msgid "Down"
 msgstr "नीचे"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 msgid "Up"
 msgstr "ऊपर"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "इंटरफ़ेस अप"
+msgid "Unaliased"
+msgstr ""
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "कोई अन्य नहीं"
+#, fuzzy
+#| msgid "Error"
+msgid "Errors"
+msgstr "त्रुटि"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "त्रुटियाँ वर्तमान"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Discards Present"
+#, fuzzy
+#| msgid "Discards Present"
+msgid "Discards"
 msgstr "सादर उपस्थित"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr "कोई रेखांकन नहीं"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "इंटरफ़ेस नीचे"
+#, fuzzy
+#| msgid "Graphs"
+msgid "Graphless"
+msgstr "रेखांकन"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_view_devices.php setup.php
@@ -3033,6 +3033,21 @@ msgstr "कृपया स्वचालित रूप से अधिक�
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "कृपया इस प्रविष्टि के लिए एक कारण जोड़ें।"
+
+#~ msgid "Interface Up"
+#~ msgstr "इंटरफ़ेस अप"
+
+#~ msgid "No Alias"
+#~ msgstr "कोई अन्य नहीं"
+
+#~ msgid "Errors Present"
+#~ msgstr "त्रुटियाँ वर्तमान"
+
+#~ msgid "No Graphs"
+#~ msgstr "कोई रेखांकन नहीं"
+
+#~ msgid "Interface Down"
+#~ msgstr "इंटरफ़ेस नीचे"
 
 #~ msgid "Dash [-]"
 #~ msgstr "पानी का छींटा [-]"
