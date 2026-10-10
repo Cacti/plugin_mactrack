@@ -58,7 +58,7 @@ function plugin_mactrack_install($operator_initiated = true): bool {
 	api_plugin_register_hook('mactrack', 'device_action_execute', 'mactrack_device_action_execute', 'mactrack_actions.php');
 
 	// Register our realms
-	api_plugin_register_realm('mactrack', 'mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_dot1x.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_graphs.php,mactrack_ajax.php', 'Mactrack Viewer', 1);
+	api_plugin_register_realm('mactrack', 'mactrack_view_dashboard.php,mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_dot1x.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_graphs.php,mactrack_ajax.php', 'Mactrack Viewer', 1);
 	api_plugin_register_realm('mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'Mactrack Administrator', 1);
 
 	$site_ready = mactrack_setup_table_new($operator_initiated);
@@ -453,6 +453,9 @@ function mactrack_page_head() {
 
 	print get_md5_include_js('plugins/mactrack/js/mactrack.js');
 	print get_md5_include_js('plugins/mactrack/js/mactrack_snmp.js');
+	print get_md5_include_js('plugins/mactrack/js/cards.js');
+
+	print get_md5_include_css('plugins/mactrack/css/cards.css');
 
 	if (file_exists($config['base_path'] . '/plugins/mactrack/css/' . get_selected_theme() . '.css')) {
 		print get_md5_include_css('plugins/mactrack/css/' . get_selected_theme() . '.css');
@@ -889,6 +892,13 @@ function mactrack_config_settings() {
  *               added.
  */
 function mactrack_draw_navigation_text($nav) {
+	$nav['mactrack_view_dashboard.php:'] = [
+		'title'   => __('Mactrack Dashboard', 'mactrack'),
+		'mapping' => '',
+		'url'     => 'mactrack_view_dashboard.php',
+		'level'   => '0'
+	];
+
 	$nav['mactrack_devices.php:'] = [
 		'title'   => __('Mactrack Devices', 'mactrack'),
 		'mapping' => 'index.php:',

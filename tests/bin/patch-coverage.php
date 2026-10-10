@@ -184,6 +184,7 @@ $unmeasured_allowlist = [
 	'mactrack_utilities.php',
 	'mactrack_vendormacs.php',
 	'mactrack_view_arp.php',
+	'mactrack_view_dashboard.php',
 	'mactrack_view_devices.php',
 	'mactrack_view_dot1x.php',
 	'mactrack_view_graphs.php',

@@ -265,4 +265,28 @@ final class MactrackStatusPillsTest extends TestCase {
 		$this->assertGreaterThan($pos_descr, $pos_pill);
 		$this->assertGreaterThan($pos_pill, $pos_alias);
 	}
+
+	/**
+	 * @return void
+	 */
+	public function test_mac_auth_pill_authorized_uses_green_class_and_label(): void {
+		$html = mactrack_mac_auth_pill(true);
+
+		$this->assertStringContainsString('class="mactrackPills"', $html);
+		$this->assertStringContainsString('mactrackPill mactrackPillActive mac_authorized', $html);
+		$this->assertStringContainsString('data-mac-authorized="1"', $html);
+		$this->assertStringContainsString('Authorized', $html);
+		$this->assertStringNotContainsString('mac_unauthorized', $html);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function test_mac_auth_pill_unauthorized_uses_red_class_and_label(): void {
+		$html = mactrack_mac_auth_pill(false);
+
+		$this->assertStringContainsString('mac_unauthorized', $html);
+		$this->assertStringContainsString('data-mac-authorized="0"', $html);
+		$this->assertStringContainsString('Unauthorized', $html);
+	}
 }

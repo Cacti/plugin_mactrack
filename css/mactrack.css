@@ -165,4 +165,6 @@
 .mactrackPill.dot1x_running { --pill: #a85712; }
 .mactrackPill.dot1x_idle { --pill: #5f5f57; }
 .mactrackPill.dot1x_auth_no_method { --pill: #5f5f57; }
+.mactrackPill.mac_authorized { --pill: #2b8435; }
+.mactrackPill.mac_unauthorized { --pill: #a12820; }
 

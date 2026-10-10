@@ -3583,6 +3583,29 @@ function mactrack_dot1x_status_pill($port_result): string {
 }
 
 /**
+ * Renders the authorization status of a MAC address (the MAC Addresses
+ * tab) as a themed status pill: green when authorized, red when not,
+ * mirroring the 802.1x status pill styling so the two tabs stay
+ * visually consistent. Clicking it drills the Authorized filter down to
+ * the clicked state (see mactrack_view_macs.php).
+ *
+ * @param bool $authorized Whether the MAC address is authorized.
+ *
+ * @return string The HTML markup for the status pill.
+ */
+function mactrack_mac_auth_pill($authorized): string {
+	$class = $authorized ? 'mac_authorized' : 'mac_unauthorized';
+	$label = $authorized ? __('Authorized', 'mactrack') : __('Unauthorized', 'mactrack');
+	$value = $authorized ? '1' : '0';
+
+	return '<div class="mactrackPills">' .
+		'<button type="button" class="mactrackPill mactrackPillActive ' . $class . '"' .
+		' data-mac-authorized="' . $value . '" title="' . html_escape($label) . '">' .
+		html_escape($label) . '</button>' .
+		'</div>';
+}
+
+/**
  * Renders a single 802.1x results-list table row (action icons, device
  * name/hostname, username, IP address, optional DNS hostname, MAC
  * address, interface name, domain, authorization status, scan date) as
@@ -4296,8 +4319,9 @@ function mactrack_sanitize_load_report(): void {
 }
 
 /**
- * Renders the top-level MacTrack tab bar (Sites, Devices, IP Ranges, IP
- * Address, MAC Address, Interfaces, Dot1x, Graphs), highlighting the
+ * Renders the top-level MacTrack tab bar (Dashboard, Sites, Devices, IP
+ * Ranges, IP Address, MAC Address, Interfaces, Dot1x, Graphs),
+ * highlighting the
  * currently selected tab as resolved by mactrack_sanitize_load_report().
  *
  * @return void
@@ -4310,6 +4334,7 @@ function mactrack_tabs(): void {
 
 	// present a tabbed interface
 	$tabs_mactrack = [
+		'dashboard'  => __('Dashboard', 'mactrack'),
 		'sites'      => __('Sites', 'mactrack'),
 		'devices'    => __('Devices', 'mactrack'),
 		'ips'        => __('IP Ranges', 'mactrack'),

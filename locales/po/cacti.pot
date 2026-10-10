@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-09 17:42-0400\n"
+"POT-Creation-Date: 2026-10-10 17:52-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -128,13 +128,13 @@ msgstr ""
 msgid "Since Restart"
 msgstr ""
 
-#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
-#: mactrack_view_interfaces.php
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Down"
 msgstr ""
 
-#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
-#: mactrack_view_interfaces.php
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Up"
 msgstr ""
 
@@ -155,8 +155,16 @@ msgid "Graphless"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
 msgid "Unknown"
+msgstr ""
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr ""
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
 msgstr ""
 
 #: lib/mactrack_functions.php
@@ -230,7 +238,8 @@ msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Device
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_utilities.php mactrack_view_devices.php setup.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
 msgid "Disabled"
 msgstr ""
 
@@ -247,14 +256,18 @@ msgstr ""
 msgid "Not Detected"
 msgstr ""
 
-#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_sites.php
-#: setup.php
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr ""
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
 msgid "Sites"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_sites.php mactrack_utilities.php mactrack_view_devices.php
-#: mactrack_view_sites.php setup.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
 msgid "Devices"
 msgstr ""
 
@@ -676,8 +689,8 @@ msgstr ""
 msgid "Export Device Types to Share with Others"
 msgstr ""
 
-#: mactrack_device_types.php mactrack_sites.php mactrack_view_sites.php
-#: setup.php
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
 msgid "Vendor"
 msgstr ""
 
@@ -692,7 +705,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: mactrack_device_types.php mactrack_utilities.php
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Enabled"
 msgstr ""
 
@@ -955,7 +968,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: mactrack_devices.php mactrack_view_devices.php
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
 msgid "Error"
 msgstr ""
 
@@ -1218,7 +1231,7 @@ msgstr ""
 msgid "Mactrack Process Status"
 msgstr ""
 
-#: mactrack_utilities.php
+#: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Refresh"
 msgstr ""
 
@@ -1282,7 +1295,7 @@ msgstr ""
 msgid "Maximum Per Device Scan Time:"
 msgstr ""
 
-#: mactrack_utilities.php
+#: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "minutes"
 msgstr ""
 
@@ -1548,6 +1561,214 @@ msgstr ""
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "MAC"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Device status"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Collection settings"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Scan runtimes"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "MacWatch activity"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Vendors"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Enabled devices"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Disabled devices"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Device types"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Interfaces tracked"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Active MACs"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "IP addresses"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Total ports"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Active ports"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Trunk ports"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Scanning frequency"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Concurrent processes"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Scanner max runtime"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "MAC retention"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "IP retention"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Reverse DNS"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Most recent scan"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Average duration"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Longest duration"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Scanned in last hour"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Duration"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Last scan"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Slowest devices"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Table"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Watched MACs"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Discovered"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Last match"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Show more"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Show less"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Unknown card."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
 msgstr ""
 
 #: mactrack_view_devices.php
@@ -1892,10 +2113,6 @@ msgid "Click 'Continue' to Delete the following rows from Aggregated table."
 msgstr ""
 
 #: mactrack_view_macs.php
-msgid "Authorized"
-msgstr ""
-
-#: mactrack_view_macs.php
 msgid "VLAN ID"
 msgstr ""
 
@@ -1905,10 +2122,6 @@ msgstr ""
 
 #: mactrack_view_macs.php
 msgid "MAC Addresses"
-msgstr ""
-
-#: mactrack_view_macs.php
-msgid "Not Authorized"
 msgstr ""
 
 #: mactrack_view_macs.php
@@ -2290,6 +2503,10 @@ msgstr ""
 
 #: setup.php
 msgid "If your Internet Proxy requires a password, enter it here."
+msgstr ""
+
+#: setup.php
+msgid "Mactrack Dashboard"
 msgstr ""
 
 #: setup.php
