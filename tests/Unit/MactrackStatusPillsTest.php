@@ -274,6 +274,7 @@ final class MactrackStatusPillsTest extends TestCase {
 
 		$this->assertStringContainsString('class="mactrackPills"', $html);
 		$this->assertStringContainsString('mactrackPill mactrackPillActive mac_authorized', $html);
+		$this->assertStringContainsString('data-mac-authorized="1"', $html);
 		$this->assertStringContainsString('Authorized', $html);
 		$this->assertStringNotContainsString('mac_unauthorized', $html);
 	}
@@ -285,6 +286,7 @@ final class MactrackStatusPillsTest extends TestCase {
 		$html = mactrack_mac_auth_pill(false);
 
 		$this->assertStringContainsString('mac_unauthorized', $html);
+		$this->assertStringContainsString('data-mac-authorized="0"', $html);
 		$this->assertStringContainsString('Unauthorized', $html);
 	}
 }

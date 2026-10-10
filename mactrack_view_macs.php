@@ -1545,6 +1545,20 @@ function mactrack_mac_filter(): void {
 				$('#export').on('click', function() {
 					exportRows();
 				});
+
+				// Authorization pill drill-down: set the Authorized filter to the
+				// clicked state, then re-apply the filter.
+				$('.mactrackPill').off('click').on('click', function() {
+					var authorized = $(this).attr('data-mac-authorized');
+
+					if (authorized === undefined || !$('#authorized').length) {
+						return;
+					}
+
+					$('#authorized').val(authorized);
+
+					applyFilter();
+				});
 			});
 
 			</script>
