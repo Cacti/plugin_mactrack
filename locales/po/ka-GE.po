@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-08 19:41-0400\nPO-Revision-Date: 2026-10-10 01:18+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-09 17:42-0400\n"
+"PO-Revision-Date: 2026-10-10 01:18+0000\n"
+"Last-Translator: Anonymous <anonymous@cacti.net>\n"
+"Language-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\n"
+"Language: ka-GE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -118,36 +130,36 @@ msgid "Since Restart"
 msgstr "გადატვირთვის შემდეგ"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 msgid "Down"
 msgstr "გამორთ"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 msgid "Up"
 msgstr "ჩართ"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "ინტერფეისი ჩართულია"
+msgid "Unaliased"
+msgstr ""
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "ფსევდონიმების გარეშე"
+#, fuzzy
+#| msgid "Error"
+msgid "Errors"
+msgstr "შეცდომა"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "არსებული შეცდომები"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Discards Present"
+#, fuzzy
+#| msgid "Discards Present"
+msgid "Discards"
 msgstr "მოაცილებს აწმყოს"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "No Graphs"
-msgstr "გრაფიკების გარეშე"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "ინტერფეისი გამორთულია"
+#, fuzzy
+#| msgid "Graphs"
+msgid "Graphless"
+msgstr "გრაფიკები"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_view_devices.php setup.php
@@ -2934,6 +2946,21 @@ msgstr ""
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr ""
+
+#~ msgid "Interface Up"
+#~ msgstr "ინტერფეისი ჩართულია"
+
+#~ msgid "No Alias"
+#~ msgstr "ფსევდონიმების გარეშე"
+
+#~ msgid "Errors Present"
+#~ msgstr "არსებული შეცდომები"
+
+#~ msgid "No Graphs"
+#~ msgstr "გრაფიკების გარეშე"
+
+#~ msgid "Interface Down"
+#~ msgstr "ინტერფეისი გამორთულია"
 
 #~ msgid "Dash [-]"
 #~ msgstr "ტირე [-]"
