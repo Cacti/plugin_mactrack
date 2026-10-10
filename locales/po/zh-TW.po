@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-08 19:41-0400\n"
+"POT-Creation-Date: 2026-10-09 17:42-0400\n"
 "PO-Revision-Date: 2026-10-08 07:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\n"
@@ -134,39 +134,37 @@ msgid "Since Restart"
 msgstr "自重啟以來"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 #, fuzzy
 msgid "Down"
 msgstr "向下"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
 #, fuzzy
 msgid "Up"
 msgstr "向上"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Up"
-msgstr "接口"
+msgid "Unaliased"
+msgstr ""
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "No Alias"
-msgstr "沒有別名"
+#, fuzzy
+#| msgid "Error"
+msgid "Errors"
+msgstr "錯誤"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Errors Present"
-msgstr "存在錯誤"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Discards Present"
+#, fuzzy
+#| msgid "Discards Present"
+msgid "Discards"
 msgstr "丟棄禮物"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
 #, fuzzy
-msgid "No Graphs"
+msgid "Graphless"
 msgstr "圖表"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php
-msgid "Interface Down"
-msgstr "接口關閉"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_view_devices.php setup.php
@@ -3157,6 +3155,22 @@ msgstr "請輸入要自動授權的MAC地址或Mac地址匹配字符串。如果
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "請為此條目添加原因。"
+
+#~ msgid "Interface Up"
+#~ msgstr "接口"
+
+#~ msgid "No Alias"
+#~ msgstr "沒有別名"
+
+#~ msgid "Errors Present"
+#~ msgstr "存在錯誤"
+
+#, fuzzy
+#~ msgid "No Graphs"
+#~ msgstr "圖表"
+
+#~ msgid "Interface Down"
+#~ msgstr "接口關閉"
 
 #~ msgid "Dash [-]"
 #~ msgstr "短劃線[ - ]"
