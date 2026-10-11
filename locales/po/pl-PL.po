@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-09 17:42-0400\n"
-"PO-Revision-Date: 2026-10-10 01:18+0000\n"
-"Last-Translator: Anonymous <anonymous@cacti.net>\n"
-"Language-Team: Polish <https://translate.cacti.net/projects/cacti/mactrack/pl/>\n"
-"Language: pl-PL\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-11 23:18+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Polish <https://translate.cacti.net/projects/cacti/mactrack/pl/>\nLanguage: pl-PL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -130,13 +118,13 @@ msgstr "Interfejsy widokowe"
 msgid "Since Restart"
 msgstr "Od czasu ponownego uruchomienia"
 
-#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
-#: mactrack_view_interfaces.php
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Down"
 msgstr "W dół"
 
-#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
-#: mactrack_view_interfaces.php
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Up"
 msgstr "Do góry"
 
@@ -145,10 +133,8 @@ msgid "Unaliased"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-#, fuzzy
-#| msgid "Error"
 msgid "Errors"
-msgstr "Błąd"
+msgstr "Błędy"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
 #, fuzzy
@@ -163,9 +149,17 @@ msgid "Graphless"
 msgstr "Wykresy"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
 msgid "Unknown"
 msgstr "Nieznany"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr "Autoryzowana"
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
+msgstr "Brak autoryzacji"
 
 #: lib/mactrack_functions.php
 msgid "Data"
@@ -238,7 +232,8 @@ msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Device
 msgstr "Status: Idle, LastRuntime: %f sekund, Procesy: %d procesy, Urządzenia: %d, Next Run Time: %s"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_utilities.php mactrack_view_devices.php setup.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
 msgid "Disabled"
 msgstr "Wyłączone"
 
@@ -255,14 +250,18 @@ msgstr "Interfejsy widokowe"
 msgid "Not Detected"
 msgstr "Nie wykryto"
 
-#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_sites.php
-#: setup.php
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr "Tablica"
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
 msgid "Sites"
 msgstr "Lokalizacje"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_sites.php mactrack_utilities.php mactrack_view_devices.php
-#: mactrack_view_sites.php setup.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
 msgid "Devices"
 msgstr "Urządzenia"
 
@@ -692,8 +691,8 @@ msgstr "Importowanie typów urządzeń z pliku lokalnego"
 msgid "Export Device Types to Share with Others"
 msgstr "Importowanie typów urządzeń z pliku lokalnego"
 
-#: mactrack_device_types.php mactrack_sites.php mactrack_view_sites.php
-#: setup.php
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
 msgid "Vendor"
 msgstr "Sprzedawca"
 
@@ -708,7 +707,7 @@ msgstr "Wszystkie"
 msgid "Type"
 msgstr "Typ"
 
-#: mactrack_device_types.php mactrack_utilities.php
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Enabled"
 msgstr "Włączone"
 
@@ -977,7 +976,7 @@ msgstr "Brak urządzeń śledzących"
 msgid "None"
 msgstr "Brak"
 
-#: mactrack_devices.php mactrack_view_devices.php
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
 msgid "Error"
 msgstr "Błąd"
 
@@ -1250,7 +1249,7 @@ msgstr "Opcje"
 msgid "Mactrack Process Status"
 msgstr "Status procesu monitorowania urządzenia"
 
-#: mactrack_utilities.php
+#: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Refresh"
 msgstr "Odśwież"
 
@@ -1318,7 +1317,7 @@ msgstr "Procesy"
 msgid "Maximum Per Device Scan Time:"
 msgstr "Maksymalny czas skanowania urządzenia:"
 
-#: mactrack_utilities.php
+#: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "minutes"
 msgstr "minut"
 
@@ -1595,6 +1594,278 @@ msgstr "Najnowsze"
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "MAC"
 msgstr "MAC"
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr "Magazyn"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Device Notes"
+msgid "Device status"
+msgstr "Wskazówki dotyczące urządzeń"
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Notification Settings"
+msgid "Collection settings"
+msgstr "Ustawienia powiadomień"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Scanner Max Runtime"
+msgid "Scan runtimes"
+msgstr "Skaner Maks. czas pracy"
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "MacWatch Default Body"
+msgid "MacWatch activity"
+msgstr "Domyślny korpus MacWatch"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Vendor"
+msgid "Vendors"
+msgstr "Sprzedawca"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Disable Device"
+msgid "Enabled devices"
+msgstr "Urządzenie wyłączane"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Disable Device"
+msgid "Disabled devices"
+msgstr "Urządzenie wyłączane"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Device Types"
+msgid "Device types"
+msgstr "Typy urządzeń"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Interfaces"
+msgid "Interfaces tracked"
+msgstr "Interfejsy sieciowe"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Active Macs"
+msgid "Active MACs"
+msgstr "Aktywne komputery Mac"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "IP Addresses"
+msgid "IP addresses"
+msgstr "Adres IP"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Total Oper Ports"
+msgid "Total ports"
+msgstr "Porty operacyjne ogółem"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Active Macs"
+msgid "Active ports"
+msgstr "Aktywne komputery Mac"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Trunk Ports"
+msgid "Trunk ports"
+msgstr "Porty bagażowe"
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Scanning Frequency"
+msgid "Scanning frequency"
+msgstr "Częstotliwość skanowania"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Concurrent Processes"
+msgid "Concurrent processes"
+msgstr "Procesy równoległe"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Scanner Max Runtime"
+msgid "Scanner max runtime"
+msgstr "Skaner Maks. czas pracy"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Data Retention"
+msgid "MAC retention"
+msgstr "Zatrzymanie wskazania"
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr "dni"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Data Retention"
+msgid "IP retention"
+msgstr "Zatrzymanie wskazania"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Reverse DNS Resolution is"
+msgid "Reverse DNS"
+msgstr "Odwrotna rozdzielczość DNS wynosi"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Most Recent"
+msgid "Most recent scan"
+msgstr "Najnowsze"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Last Duration"
+msgid "Average duration"
+msgstr "Czas trwania pomocy Ostatni czas trwania pomocy"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Last Duration"
+msgid "Longest duration"
+msgstr "Czas trwania pomocy Ostatni czas trwania pomocy"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Changed in Last Day"
+msgid "Scanned in last hour"
+msgstr "Zmieniony w ostatnim dniu"
+
+#: mactrack_view_dashboard.php
+msgid "Duration"
+msgstr "Czas trwania"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Last Scanned"
+msgid "Last scan"
+msgstr "Ostatnie skanowanie"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Total Devices"
+msgid "Slowest devices"
+msgstr "Urządzenia ogółem"
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr "Wiersze"
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr "Rozmiar"
+
+#: mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Tabela"
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Watches"
+msgid "Watched MACs"
+msgstr "Zegarki"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Discards Present"
+msgid "Discovered"
+msgstr "Obecność odrzutów"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Mac Watch"
+msgid "Last match"
+msgstr "Mac Watch"
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Show"
+msgid "Show more"
+msgstr "Pokaż"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Show Totals"
+msgid "Show less"
+msgstr "Pokaż sumę"
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Unknown"
+msgid "Unknown card."
+msgstr "Nieznany"
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
+msgstr ""
 
 #: mactrack_view_devices.php
 #, fuzzy
@@ -1950,10 +2221,6 @@ msgid "Click 'Continue' to Delete the following rows from Aggregated table."
 msgstr "Kliknij 'Kontynuuj', aby usunąć następujące wiersze z tabeli zbiorczej."
 
 #: mactrack_view_macs.php
-msgid "Authorized"
-msgstr "Autoryzowana"
-
-#: mactrack_view_macs.php
 msgid "VLAN ID"
 msgstr "VLAN ID"
 
@@ -1964,10 +2231,6 @@ msgstr "Nazwa VLAN"
 #: mactrack_view_macs.php
 msgid "MAC Addresses"
 msgstr "Adresy MAC"
-
-#: mactrack_view_macs.php
-msgid "Not Authorized"
-msgstr "Autoryzowana"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2363,6 +2626,11 @@ msgstr "Hasło internetowego serwera proxy"
 #: setup.php
 msgid "If your Internet Proxy requires a password, enter it here."
 msgstr "Jeśli Twój internetowy serwer proxy wymaga hasła, wprowadź je tutaj."
+
+#: setup.php
+#, fuzzy
+msgid "Mactrack Dashboard"
+msgstr "Urządzenia ogółem"
 
 #: setup.php
 #, fuzzy
@@ -3030,6 +3298,9 @@ msgstr "Wprowadź adres MAC lub łańcuch Mac Address Match, aby uzyskać automa
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Proszę podać powód tego wpisu."
+
+#~ msgid "Not Authorized"
+#~ msgstr "Autoryzowana"
 
 #~ msgid "Interface Up"
 #~ msgstr "Interfejs do góry"
