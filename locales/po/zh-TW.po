@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-09 17:42-0400\n"
-"PO-Revision-Date: 2026-10-08 07:18+0000\n"
-"Last-Translator: Anonymous <anonymous@cacti.net>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\n"
-"Language: zh-TW\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-11 23:18+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\nLanguage: zh-TW\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -133,14 +121,14 @@ msgstr "查看接口"
 msgid "Since Restart"
 msgstr "自重啟以來"
 
-#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
-#: mactrack_view_interfaces.php
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
 #, fuzzy
 msgid "Down"
 msgstr "向下"
 
-#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
-#: mactrack_view_interfaces.php
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
 #, fuzzy
 msgid "Up"
 msgstr "向上"
@@ -167,10 +155,18 @@ msgid "Graphless"
 msgstr "圖表"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
 #, fuzzy
 msgid "Unknown"
 msgstr "未知"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr "授權的"
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
+msgstr "未經授權"
 
 #: lib/mactrack_functions.php
 #, fuzzy
@@ -244,7 +240,8 @@ msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Device
 msgstr "狀態：閒置，上次執行時間： %2.1f秒，處理程序： %d個處理程序，裝置： %d ，下次執行時間： %s"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_utilities.php mactrack_view_devices.php setup.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
 #, fuzzy
 msgid "Disabled"
 msgstr "停用"
@@ -263,15 +260,19 @@ msgstr "查看接口"
 msgid "Not Detected"
 msgstr "沒有檢測到"
 
-#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_sites.php
-#: setup.php
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr "控制台"
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
 #, fuzzy
 msgid "Sites"
 msgstr "網站"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_sites.php mactrack_utilities.php mactrack_view_devices.php
-#: mactrack_view_sites.php setup.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
 #, fuzzy
 msgid "Devices"
 msgstr "設備"
@@ -719,8 +720,8 @@ msgstr "從本地文件導入設備類型"
 msgid "Export Device Types to Share with Others"
 msgstr "從本地文件導入設備類型"
 
-#: mactrack_device_types.php mactrack_sites.php mactrack_view_sites.php
-#: setup.php
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
 msgid "Vendor"
 msgstr "供應商"
 
@@ -736,7 +737,7 @@ msgstr "全部"
 msgid "Type"
 msgstr "類型"
 
-#: mactrack_device_types.php mactrack_utilities.php
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
 #, fuzzy
 msgid "Enabled"
 msgstr "啟用"
@@ -1018,7 +1019,7 @@ msgstr "沒有設備跟踪設備"
 msgid "None"
 msgstr "無"
 
-#: mactrack_devices.php mactrack_view_devices.php
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
 msgid "Error"
 msgstr "錯誤"
 
@@ -1304,7 +1305,7 @@ msgstr "選項"
 msgid "Mactrack Process Status"
 msgstr "設備跟踪流程狀態"
 
-#: mactrack_utilities.php
+#: mactrack_utilities.php mactrack_view_dashboard.php
 #, fuzzy
 msgid "Refresh"
 msgstr "重新整理"
@@ -1375,7 +1376,7 @@ msgstr "商品/物料的流動程序"
 msgid "Maximum Per Device Scan Time:"
 msgstr "每設備掃描時間最大值："
 
-#: mactrack_utilities.php
+#: mactrack_utilities.php mactrack_view_dashboard.php
 #, fuzzy
 msgid "minutes"
 msgstr "分鐘"
@@ -1658,6 +1659,272 @@ msgstr "最近的"
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "MAC"
 msgstr "MAC"
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr "在庫"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Device Notes"
+msgid "Device status"
+msgstr "設備說明"
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+msgid "Collection settings"
+msgstr "通知設定"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Scanner Max Runtime"
+msgid "Scan runtimes"
+msgstr "掃描儀最大運行時間"
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "MacWatch Default Body"
+msgid "MacWatch activity"
+msgstr "MacWatch默認正文"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Vendor"
+msgid "Vendors"
+msgstr "供應商"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+msgid "Enabled devices"
+msgstr "禁用設備"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+msgid "Disabled devices"
+msgstr "禁用設備"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Device Types"
+msgid "Device types"
+msgstr "設備類型"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Interfaces"
+msgid "Interfaces tracked"
+msgstr "介面卡"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Active Macs"
+msgid "Active MACs"
+msgstr "有源Mac"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "IP Addresses"
+msgid "IP addresses"
+msgstr "匿名IP地址。根據國家隱私法，在某些國家/地區設置此選項是強制性的。 <a href=\"https://support.google.com/analytics/answer/2763052\" target=\"_blank\">詳細了解IP匿名化</a> 。"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Total Oper Ports"
+msgid "Total ports"
+msgstr "總操作端口"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Active Macs"
+msgid "Active ports"
+msgstr "有源Mac"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Trunk Ports"
+msgid "Trunk ports"
+msgstr "中繼端口"
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Scanning Frequency"
+msgid "Scanning frequency"
+msgstr "掃描頻率"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+msgid "Concurrent processes"
+msgstr "並發進程"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Scanner Max Runtime"
+msgid "Scanner max runtime"
+msgstr "掃描儀最大運行時間"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+msgid "MAC retention"
+msgstr "數據保留"
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+msgid "IP retention"
+msgstr "數據保留"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Reverse DNS Resolution is"
+msgid "Reverse DNS"
+msgstr "反向DNS解析是"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Most Recent"
+msgid "Most recent scan"
+msgstr "最近的"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Last Duration"
+msgid "Average duration"
+msgstr "上次持續時間"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Last Duration"
+msgid "Longest duration"
+msgstr "上次持續時間"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Changed in Last Day"
+msgid "Scanned in last hour"
+msgstr "在最後一天改變了"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Last Duration"
+msgid "Duration"
+msgstr "上次持續時間"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Last Scanned"
+msgid "Last scan"
+msgstr "上次掃描"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Total Devices"
+msgid "Slowest devices"
+msgstr "設備總數"
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Table"
+msgstr "表格"
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Watches"
+msgid "Watched MACs"
+msgstr "手錶"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Discards Present"
+msgid "Discovered"
+msgstr "丟棄禮物"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Mac Watch"
+msgid "Last match"
+msgstr "Mac Watch"
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+msgid "Show more"
+msgstr "顯示"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Show Totals"
+msgid "Show less"
+msgstr "顯示總計"
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+msgid "Unknown card."
+msgstr "未知"
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
+msgstr ""
 
 #: mactrack_view_devices.php
 #, fuzzy
@@ -2021,10 +2288,6 @@ msgid "Click 'Continue' to Delete the following rows from Aggregated table."
 msgstr "單擊“繼續”以從“聚合表”中刪除以下行。"
 
 #: mactrack_view_macs.php
-msgid "Authorized"
-msgstr "授權的"
-
-#: mactrack_view_macs.php
 msgid "VLAN ID"
 msgstr "VLAN ID"
 
@@ -2035,10 +2298,6 @@ msgstr "VLAN 名稱"
 #: mactrack_view_macs.php
 msgid "MAC Addresses"
 msgstr "MAC地址"
-
-#: mactrack_view_macs.php
-msgid "Not Authorized"
-msgstr "授權的"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2447,6 +2706,11 @@ msgstr ""
 #: setup.php
 msgid "If your Internet Proxy requires a password, enter it here."
 msgstr ""
+
+#: setup.php
+#, fuzzy
+msgid "Mactrack Dashboard"
+msgstr "設備總數"
 
 #: setup.php
 #, fuzzy
@@ -3155,6 +3419,9 @@ msgstr "請輸入要自動授權的MAC地址或Mac地址匹配字符串。如果
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "請為此條目添加原因。"
+
+#~ msgid "Not Authorized"
+#~ msgstr "授權的"
 
 #~ msgid "Interface Up"
 #~ msgstr "接口"
