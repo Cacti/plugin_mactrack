@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-09 17:42-0400\n"
-"PO-Revision-Date: 2026-10-10 01:18+0000\n"
-"Last-Translator: Anonymous <anonymous@cacti.net>\n"
-"Language-Team: Bulgarian <https://translate.cacti.net/projects/cacti/mactrack/bg/>\n"
-"Language: bg-BG\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-11 23:18+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Bulgarian <https://translate.cacti.net/projects/cacti/mactrack/bg/>\nLanguage: bg-BG\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -130,13 +118,13 @@ msgstr "Преглед на интерфейси"
 msgid "Since Restart"
 msgstr "От рестартиране"
 
-#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
-#: mactrack_view_interfaces.php
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Down"
 msgstr "Надолу"
 
-#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
-#: mactrack_view_interfaces.php
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Up"
 msgstr "Нагоре"
 
@@ -145,10 +133,8 @@ msgid "Unaliased"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-#, fuzzy
-#| msgid "Error"
 msgid "Errors"
-msgstr "Грешка"
+msgstr "Грешки"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
 #, fuzzy
@@ -163,9 +149,17 @@ msgid "Graphless"
 msgstr "Графики"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
 msgid "Unknown"
 msgstr "알려지지 않음"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr "Упълномощен"
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
+msgstr "Неупълномощен"
 
 #: lib/mactrack_functions.php
 msgid "Data"
@@ -238,7 +232,8 @@ msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Device
 msgstr "Статус: неактивен, LastRuntime: %2.1f секунди, Процеси: %d процеси, Устройства: %d, Следващо време на изпълнение: %s"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_utilities.php mactrack_view_devices.php setup.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
 msgid "Disabled"
 msgstr "Изключен"
 
@@ -255,14 +250,18 @@ msgstr "Преглед на интерфейси"
 msgid "Not Detected"
 msgstr "Не е открит"
 
-#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_sites.php
-#: setup.php
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr "Табло"
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
 msgid "Sites"
 msgstr "за инжектиране e предната страна на бедрата"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_sites.php mactrack_utilities.php mactrack_view_devices.php
-#: mactrack_view_sites.php setup.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
 msgid "Devices"
 msgstr "Устройства"
 
@@ -692,8 +691,8 @@ msgstr "Импортирайте типове устройства от лока
 msgid "Export Device Types to Share with Others"
 msgstr "Импортирайте типове устройства от локален файл"
 
-#: mactrack_device_types.php mactrack_sites.php mactrack_view_sites.php
-#: setup.php
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
 msgid "Vendor"
 msgstr "Производител"
 
@@ -708,7 +707,7 @@ msgstr "Всички"
 msgid "Type"
 msgstr "Тип"
 
-#: mactrack_device_types.php mactrack_utilities.php
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Enabled"
 msgstr "Разрешен"
 
@@ -977,7 +976,7 @@ msgstr "Няма устройства за проследяване на уст�
 msgid "None"
 msgstr "Няма"
 
-#: mactrack_devices.php mactrack_view_devices.php
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
 msgid "Error"
 msgstr "Грешка"
 
@@ -1250,7 +1249,7 @@ msgstr "Опции"
 msgid "Mactrack Process Status"
 msgstr "Състояние на процеса на проследяване на устройството"
 
-#: mactrack_utilities.php
+#: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Refresh"
 msgstr "Обновяване"
 
@@ -1318,7 +1317,7 @@ msgstr "Процеси"
 msgid "Maximum Per Device Scan Time:"
 msgstr "Максимално време за сканиране на устройство:"
 
-#: mactrack_utilities.php
+#: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "minutes"
 msgstr "минути"
 
@@ -1595,6 +1594,278 @@ msgstr "Най-нови"
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "MAC"
 msgstr "MAC"
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr "Инвентар"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Device Notes"
+msgid "Device status"
+msgstr "Бележки за устройството"
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Notification Settings"
+msgid "Collection settings"
+msgstr "Настройки за известията"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Scanner Max Runtime"
+msgid "Scan runtimes"
+msgstr "Максимално време на работа на скенера"
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "MacWatch Default Body"
+msgid "MacWatch activity"
+msgstr "Тялото по подразбиране на MacWatch"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Vendor"
+msgid "Vendors"
+msgstr "Производител"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Disable Device"
+msgid "Enabled devices"
+msgstr "Деактивиране на устройството"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Disable Device"
+msgid "Disabled devices"
+msgstr "Деактивиране на устройството"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Device Types"
+msgid "Device types"
+msgstr "Типове устройства"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Interfaces"
+msgid "Interfaces tracked"
+msgstr "Интерфейси"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Active Macs"
+msgid "Active MACs"
+msgstr "Активни компютри"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "IP Addresses"
+msgid "IP addresses"
+msgstr "IP адреси"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Total Oper Ports"
+msgid "Total ports"
+msgstr "Общо операционни портове"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Active Macs"
+msgid "Active ports"
+msgstr "Активни компютри"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Trunk Ports"
+msgid "Trunk ports"
+msgstr "Магистрални портове"
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Scanning Frequency"
+msgid "Scanning frequency"
+msgstr "Честота на сканиране"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Concurrent Processes"
+msgid "Concurrent processes"
+msgstr "Съвместни процеси"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Scanner Max Runtime"
+msgid "Scanner max runtime"
+msgstr "Максимално време на работа на скенера"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Data Retention"
+msgid "MAC retention"
+msgstr "Запазване на данни"
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr "дни"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Data Retention"
+msgid "IP retention"
+msgstr "Запазване на данни"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Reverse DNS Resolution is"
+msgid "Reverse DNS"
+msgstr "Обратната DNS резолюция е"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Most Recent"
+msgid "Most recent scan"
+msgstr "Най-нови"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Last Duration"
+msgid "Average duration"
+msgstr "Последна продължителност"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Last Duration"
+msgid "Longest duration"
+msgstr "Последна продължителност"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Changed in Last Day"
+msgid "Scanned in last hour"
+msgstr "Променен в последния ден"
+
+#: mactrack_view_dashboard.php
+msgid "Duration"
+msgstr "Продължителност"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Last Scanned"
+msgid "Last scan"
+msgstr "Последно сканирано"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Total Devices"
+msgid "Slowest devices"
+msgstr "Общо устройства"
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr "Редове"
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr "Размер"
+
+#: mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Таблица"
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Watches"
+msgid "Watched MACs"
+msgstr "Часовници"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Discards Present"
+msgid "Discovered"
+msgstr "Изхвърлянията присъстват"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Mac Watch"
+msgid "Last match"
+msgstr "Mac Watch"
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Show"
+msgid "Show more"
+msgstr "Покажи"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Show Totals"
+msgid "Show less"
+msgstr "Показване на общите стойности"
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Unknown"
+msgid "Unknown card."
+msgstr "알려지지 않음"
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
+msgstr ""
 
 #: mactrack_view_devices.php
 #, fuzzy
@@ -1950,10 +2221,6 @@ msgid "Click 'Continue' to Delete the following rows from Aggregated table."
 msgstr "Кликнете върху „Напред“, за да изтриете следните редове от „Агрегирана таблица“."
 
 #: mactrack_view_macs.php
-msgid "Authorized"
-msgstr "Упълномощен"
-
-#: mactrack_view_macs.php
 msgid "VLAN ID"
 msgstr "VLAN ID"
 
@@ -1964,10 +2231,6 @@ msgstr "Име на VLAN"
 #: mactrack_view_macs.php
 msgid "MAC Addresses"
 msgstr "MAC адреси"
-
-#: mactrack_view_macs.php
-msgid "Not Authorized"
-msgstr "Упълномощен"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2365,6 +2628,11 @@ msgstr ""
 #: setup.php
 msgid "If your Internet Proxy requires a password, enter it here."
 msgstr ""
+
+#: setup.php
+#, fuzzy
+msgid "Mactrack Dashboard"
+msgstr "Общо устройства"
 
 #: setup.php
 #, fuzzy
@@ -3032,6 +3300,9 @@ msgstr "Моля, въведете низа за MAC адрес или Mac Addre
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Моля, добавете причина за това вписване."
+
+#~ msgid "Not Authorized"
+#~ msgstr "Упълномощен"
 
 #~ msgid "Interface Up"
 #~ msgstr "Интерфейс нагоре"
