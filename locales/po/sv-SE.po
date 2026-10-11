@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-09 17:42-0400\n"
-"PO-Revision-Date: 2026-10-10 01:18+0000\n"
-"Last-Translator: Anonymous <anonymous@cacti.net>\n"
-"Language-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\n"
-"Language: sv-SE\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-11 23:18+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -129,13 +117,13 @@ msgstr "Visa gränssnitt"
 msgid "Since Restart"
 msgstr "Sedan omstart"
 
-#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
-#: mactrack_view_interfaces.php
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Down"
 msgstr "Nere"
 
-#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
-#: mactrack_view_interfaces.php
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Up"
 msgstr "Uppe"
 
@@ -144,8 +132,6 @@ msgid "Unaliased"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-#, fuzzy
-#| msgid "Error"
 msgid "Errors"
 msgstr "Fel"
 
@@ -162,9 +148,17 @@ msgid "Graphless"
 msgstr "Grafer"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_view_devices.php setup.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
 msgid "Unknown"
 msgstr "Okänd"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr "Auktoriserad"
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
+msgstr "Obehörig"
 
 #: lib/mactrack_functions.php
 msgid "Data"
@@ -237,7 +231,8 @@ msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Device
 msgstr "Status: Inaktiv, LastRuntime: %2.1f sekunder, Processer: %d processer, Enheter: %d, Nästa körtid: %s"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_utilities.php mactrack_view_devices.php setup.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
 msgid "Disabled"
 msgstr "Inaktiverad"
 
@@ -254,14 +249,18 @@ msgstr "Visa gränssnitt"
 msgid "Not Detected"
 msgstr "Hittades inte"
 
-#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_sites.php
-#: setup.php
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr "Instrumentpanel"
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
 msgid "Sites"
 msgstr "Webbsidor"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
-#: mactrack_sites.php mactrack_utilities.php mactrack_view_devices.php
-#: mactrack_view_sites.php setup.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
 msgid "Devices"
 msgstr "Enheter"
 
@@ -683,8 +682,8 @@ msgstr "Importera enhetstyper från lokal fil"
 msgid "Export Device Types to Share with Others"
 msgstr "Importera enhetstyper från lokal fil"
 
-#: mactrack_device_types.php mactrack_sites.php mactrack_view_sites.php
-#: setup.php
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
 msgid "Vendor"
 msgstr "Säljare"
 
@@ -699,7 +698,7 @@ msgstr "Alla"
 msgid "Type"
 msgstr "Typ"
 
-#: mactrack_device_types.php mactrack_utilities.php
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Enabled"
 msgstr "Aktiverad"
 
@@ -962,7 +961,7 @@ msgstr "Inga Mactrack-enheter"
 msgid "None"
 msgstr "Ingen"
 
-#: mactrack_devices.php mactrack_view_devices.php
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
 msgid "Error"
 msgstr "Fel"
 
@@ -1225,7 +1224,7 @@ msgstr "Alternativ"
 msgid "Mactrack Process Status"
 msgstr "Status för Mactrack-processen"
 
-#: mactrack_utilities.php
+#: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Refresh"
 msgstr "Uppdatera"
 
@@ -1289,7 +1288,7 @@ msgstr "processer"
 msgid "Maximum Per Device Scan Time:"
 msgstr "Maximal per enhetens skanningstid:"
 
-#: mactrack_utilities.php
+#: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "minutes"
 msgstr "minuter"
 
@@ -1556,6 +1555,278 @@ msgstr "Senaste"
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "MAC"
 msgstr "MAC"
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr "Lager"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Device Notes"
+msgid "Device status"
+msgstr "Enhetsanvisningar"
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Notification Settings"
+msgid "Collection settings"
+msgstr "Inställningar för aviseringar"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Scanner Max Runtime"
+msgid "Scan runtimes"
+msgstr "Scanner Max Runtime"
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "MacWatch Default Body"
+msgid "MacWatch activity"
+msgstr "MacWatch Standard Body"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Vendor"
+msgid "Vendors"
+msgstr "Säljare"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Disable Device"
+msgid "Enabled devices"
+msgstr "Inaktivera enhet"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Disable Device"
+msgid "Disabled devices"
+msgstr "Inaktivera enhet"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Device Types"
+msgid "Device types"
+msgstr "Enhetstyper"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Interfaces"
+msgid "Interfaces tracked"
+msgstr "Gränssnitt"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Active Macs"
+msgid "Active MACs"
+msgstr "Aktiva Mac-datorer"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "IP Addresses"
+msgid "IP addresses"
+msgstr "IP adress"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Total Oper Ports"
+msgid "Total ports"
+msgstr "Totalt operatörsportar"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Active Macs"
+msgid "Active ports"
+msgstr "Aktiva Mac-datorer"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Trunk Ports"
+msgid "Trunk ports"
+msgstr "Stamportar"
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Scanning Frequency"
+msgid "Scanning frequency"
+msgstr "Skanningsfrekvens"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Concurrent Processes"
+msgid "Concurrent processes"
+msgstr "Samtidiga processer"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Scanner Max Runtime"
+msgid "Scanner max runtime"
+msgstr "Scanner Max Runtime"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Data Retention"
+msgid "MAC retention"
+msgstr "Datalagring"
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr "dagar"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Data Retention"
+msgid "IP retention"
+msgstr "Datalagring"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Reverse DNS Resolution is"
+msgid "Reverse DNS"
+msgstr "Omvänd DNS-upplösning är"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Most Recent"
+msgid "Most recent scan"
+msgstr "Senaste"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Last Duration"
+msgid "Average duration"
+msgstr "Senaste varaktighet"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Last Duration"
+msgid "Longest duration"
+msgstr "Senaste varaktighet"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Changed in Last Day"
+msgid "Scanned in last hour"
+msgstr "Ändrad i förra dagen"
+
+#: mactrack_view_dashboard.php
+msgid "Duration"
+msgstr "Varaktighet"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Last Scanned"
+msgid "Last scan"
+msgstr "Senast skannad"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Total Devices"
+msgid "Slowest devices"
+msgstr "Totalt antal enheter"
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr "Rader"
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr "Storlek"
+
+#: mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Tabell"
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Watches"
+msgid "Watched MACs"
+msgstr "Klockor"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Discards Present"
+msgid "Discovered"
+msgstr "Kasta bort Present"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Mac Watch"
+msgid "Last match"
+msgstr "Mac Watch"
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr ""
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Show"
+msgid "Show more"
+msgstr "Visa"
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Show Totals"
+msgid "Show less"
+msgstr "Visa Totals"
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr "Ogiltig begäran. Försök igen."
+
+#: mactrack_view_dashboard.php
+#, fuzzy
+#| msgid "Unknown"
+msgid "Unknown card."
+msgstr "Okänd"
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr ""
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
+msgstr ""
 
 #: mactrack_view_devices.php
 msgid "Mactrack - Device Report View"
@@ -1901,10 +2172,6 @@ msgid "Click 'Continue' to Delete the following rows from Aggregated table."
 msgstr "Klicka på \"Fortsätt\" för att radera följande rader från Aggregated Table."
 
 #: mactrack_view_macs.php
-msgid "Authorized"
-msgstr "Auktoriserad"
-
-#: mactrack_view_macs.php
 msgid "VLAN ID"
 msgstr "VLAN ID"
 
@@ -1915,10 +2182,6 @@ msgstr "VLAN-namn"
 #: mactrack_view_macs.php
 msgid "MAC Addresses"
 msgstr "MAC-adresser"
-
-#: mactrack_view_macs.php
-msgid "Not Authorized"
-msgstr "Auktoriserad"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2300,6 +2563,12 @@ msgstr "Internet Proxy Lösenord"
 #: setup.php
 msgid "If your Internet Proxy requires a password, enter it here."
 msgstr "Om din Internet Proxy kräver ett lösenord, ange det här."
+
+#: setup.php
+#, fuzzy
+#| msgid "Mactrack Devices"
+msgid "Mactrack Dashboard"
+msgstr "Mactrack-enheter"
 
 #: setup.php
 msgid "Mactrack Devices"
@@ -2945,6 +3214,9 @@ msgstr "Ange MAC-adressen eller MAC-adressmatchningssträngen som ska godkännas
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Lägg till en anledning till denna post."
+
+#~ msgid "Not Authorized"
+#~ msgstr "Auktoriserad"
 
 #~ msgid "Interface Up"
 #~ msgstr "Gränssnitt upp"
