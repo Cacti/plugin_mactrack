@@ -166,41 +166,43 @@
  * The 0.2 status tints above sit legibly on both of Midwinter's mode
  * backgrounds, but the row text colour must follow the mode: light text
  * in dark mode, dark text in light mode (otherwise the light-mode rows
- * render white-on-white). Scoped overrides win on specificity.
+ * render white-on-white). Scoped to the status <tr> rows only so the
+ * pills and legend chips (which carry the same status classes) keep
+ * their own white-on-colour text.
  */
-[data-theme-color='dark'] .int_up,
-[data-theme-color='dark'] .int_up_wo_alias,
-[data-theme-color='dark'] .int_errors,
-[data-theme-color='dark'] .int_discards,
-[data-theme-color='dark'] .int_no_graph,
-[data-theme-color='dark'] .int_no_device,
-[data-theme-color='dark'] .int_changed,
-[data-theme-color='dark'] .int_down,
-[data-theme-color='dark'] .dot1x_authn_success,
-[data-theme-color='dark'] .dot1x_auth_success,
-[data-theme-color='dark'] .dot1x_authn_failed,
-[data-theme-color='dark'] .dot1x_auth_failed,
-[data-theme-color='dark'] .dot1x_running,
-[data-theme-color='dark'] .dot1x_idle,
-[data-theme-color='dark'] .dot1x_auth_no_method {
+[data-theme-color='dark'] tr.int_up,
+[data-theme-color='dark'] tr.int_up_wo_alias,
+[data-theme-color='dark'] tr.int_errors,
+[data-theme-color='dark'] tr.int_discards,
+[data-theme-color='dark'] tr.int_no_graph,
+[data-theme-color='dark'] tr.int_no_device,
+[data-theme-color='dark'] tr.int_changed,
+[data-theme-color='dark'] tr.int_down,
+[data-theme-color='dark'] tr.dot1x_authn_success,
+[data-theme-color='dark'] tr.dot1x_auth_success,
+[data-theme-color='dark'] tr.dot1x_authn_failed,
+[data-theme-color='dark'] tr.dot1x_auth_failed,
+[data-theme-color='dark'] tr.dot1x_running,
+[data-theme-color='dark'] tr.dot1x_idle,
+[data-theme-color='dark'] tr.dot1x_auth_no_method {
 	color: #eeeeee;
 }
 
-[data-theme-color='light'] .int_up,
-[data-theme-color='light'] .int_up_wo_alias,
-[data-theme-color='light'] .int_errors,
-[data-theme-color='light'] .int_discards,
-[data-theme-color='light'] .int_no_graph,
-[data-theme-color='light'] .int_no_device,
-[data-theme-color='light'] .int_changed,
-[data-theme-color='light'] .int_down,
-[data-theme-color='light'] .dot1x_authn_success,
-[data-theme-color='light'] .dot1x_auth_success,
-[data-theme-color='light'] .dot1x_authn_failed,
-[data-theme-color='light'] .dot1x_auth_failed,
-[data-theme-color='light'] .dot1x_running,
-[data-theme-color='light'] .dot1x_idle,
-[data-theme-color='light'] .dot1x_auth_no_method {
+[data-theme-color='light'] tr.int_up,
+[data-theme-color='light'] tr.int_up_wo_alias,
+[data-theme-color='light'] tr.int_errors,
+[data-theme-color='light'] tr.int_discards,
+[data-theme-color='light'] tr.int_no_graph,
+[data-theme-color='light'] tr.int_no_device,
+[data-theme-color='light'] tr.int_changed,
+[data-theme-color='light'] tr.int_down,
+[data-theme-color='light'] tr.dot1x_authn_success,
+[data-theme-color='light'] tr.dot1x_auth_success,
+[data-theme-color='light'] tr.dot1x_authn_failed,
+[data-theme-color='light'] tr.dot1x_auth_failed,
+[data-theme-color='light'] tr.dot1x_running,
+[data-theme-color='light'] tr.dot1x_idle,
+[data-theme-color='light'] tr.dot1x_auth_no_method {
 	color: #1a1a1a;
 }
 
