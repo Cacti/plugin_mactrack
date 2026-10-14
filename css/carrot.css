@@ -34,7 +34,7 @@
 }
 
 .mtSync {
-	color: #ffb347 !important;
+	color: #c2410c !important;
 }
 
 .mtRanges {
@@ -50,11 +50,11 @@
 }
 
 .mtMacs {
-	color: #FF9999 !important;
+	color: #c0392b !important;
 }
 
 .mtServer {
-	color: #ff9d00 !important;
+	color: #b5531a !important;
 }
 
 .mtPorts {
@@ -62,7 +62,7 @@
 }
 
 .mtIps {
-	color: #3399FF !important;
+	color: #2277dd !important;
 }
 
 /*

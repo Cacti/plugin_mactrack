@@ -21,49 +21,35 @@
  +-------------------------------------------------------------------------+
 */
 
-.mtChart {
-	color: #CC6633 !important;
-}
+/*
+ * MacTrack action-icon palette. Midwinter toggles light/dark via the
+ * [data-theme-color] attribute, so provide a legible palette (>= 3:1
+ * non-text contrast against each mode's content background) per mode
+ * rather than one dark-only set.
+ */
+[data-theme-color='dark'] .mtChart         { color: #e0905a !important; }
+[data-theme-color='dark'] .mtChartDisabled { color: #9fa6d8 !important; }
+[data-theme-color='dark'] .mtEdit          { color: #cccccc !important; }
+[data-theme-color='dark'] .mtSync          { color: #4fc3f7 !important; }
+[data-theme-color='dark'] .mtRanges        { color: #6aa9e0 !important; }
+[data-theme-color='dark'] .mtInterfaces    { color: #e0795a !important; }
+[data-theme-color='dark'] .mtNetwork       { color: #d98cae !important; }
+[data-theme-color='dark'] .mtMacs          { color: #ff9999 !important; }
+[data-theme-color='dark'] .mtServer        { color: #7fb0e0 !important; }
+[data-theme-color='dark'] .mtPorts         { color: #e0795a !important; }
+[data-theme-color='dark'] .mtIps           { color: #5aa9ff !important; }
 
-.mtChartDisabled {
-	color: #9999CC !important;
-}
-
-.mtEdit {
-	color: #CCCCCC !important;
-}
-
-.mtSync {
-	color: #4fc3f7 !important;
-}
-
-.mtRanges {
-	color: #4a90d9 !important;
-}
-
-.mtInterfaces {
-	color: #993300 !important;
-}
-
-.mtNetwork {
-	color: #660033 !important;
-}
-
-.mtMacs {
-	color: #FF9999 !important;
-}
-
-.mtServer {
-	color: #5a9bd4 !important;
-}
-
-.mtPorts {
-	color: #993300 !important;
-}
-
-.mtIps {
-	color: #3399FF !important;
-}
+[data-theme-color='light'] .mtChart         { color: #b5531a !important; }
+[data-theme-color='light'] .mtChartDisabled { color: #5a5fb0 !important; }
+[data-theme-color='light'] .mtEdit          { color: #333333 !important; }
+[data-theme-color='light'] .mtSync          { color: #1f6fd0 !important; }
+[data-theme-color='light'] .mtRanges        { color: #2a5fa8 !important; }
+[data-theme-color='light'] .mtInterfaces    { color: #993300 !important; }
+[data-theme-color='light'] .mtNetwork       { color: #660033 !important; }
+[data-theme-color='light'] .mtMacs          { color: #c0392b !important; }
+[data-theme-color='light'] .mtServer        { color: #2277dd !important; }
+[data-theme-color='light'] .mtPorts         { color: #993300 !important; }
+[data-theme-color='light'] .mtIps           { color: #2277dd !important; }
 
 /*
  * Status legend chips: solid, opaque colours with white text (consistent with
@@ -174,6 +160,48 @@
 .dot1x_auth_no_method {
 	background-color: rgba(205, 207, 196, 0.2);
 	color: #eeeeee;
+}
+
+/*
+ * The 0.2 status tints above sit legibly on both of Midwinter's mode
+ * backgrounds, but the row text colour must follow the mode: light text
+ * in dark mode, dark text in light mode (otherwise the light-mode rows
+ * render white-on-white). Scoped overrides win on specificity.
+ */
+[data-theme-color='dark'] .int_up,
+[data-theme-color='dark'] .int_up_wo_alias,
+[data-theme-color='dark'] .int_errors,
+[data-theme-color='dark'] .int_discards,
+[data-theme-color='dark'] .int_no_graph,
+[data-theme-color='dark'] .int_no_device,
+[data-theme-color='dark'] .int_changed,
+[data-theme-color='dark'] .int_down,
+[data-theme-color='dark'] .dot1x_authn_success,
+[data-theme-color='dark'] .dot1x_auth_success,
+[data-theme-color='dark'] .dot1x_authn_failed,
+[data-theme-color='dark'] .dot1x_auth_failed,
+[data-theme-color='dark'] .dot1x_running,
+[data-theme-color='dark'] .dot1x_idle,
+[data-theme-color='dark'] .dot1x_auth_no_method {
+	color: #eeeeee;
+}
+
+[data-theme-color='light'] .int_up,
+[data-theme-color='light'] .int_up_wo_alias,
+[data-theme-color='light'] .int_errors,
+[data-theme-color='light'] .int_discards,
+[data-theme-color='light'] .int_no_graph,
+[data-theme-color='light'] .int_no_device,
+[data-theme-color='light'] .int_changed,
+[data-theme-color='light'] .int_down,
+[data-theme-color='light'] .dot1x_authn_success,
+[data-theme-color='light'] .dot1x_auth_success,
+[data-theme-color='light'] .dot1x_authn_failed,
+[data-theme-color='light'] .dot1x_auth_failed,
+[data-theme-color='light'] .dot1x_running,
+[data-theme-color='light'] .dot1x_idle,
+[data-theme-color='light'] .dot1x_auth_no_method {
+	color: #1a1a1a;
 }
 
 /*
