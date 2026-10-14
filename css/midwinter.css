@@ -96,115 +96,79 @@
 
 .int_up {
 	background-color: rgba(24, 185, 129, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 
 .int_up_wo_alias {
 	background-color: rgba(255, 122, 48, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 
 .int_errors {
 	background-color: rgba(251, 74, 20, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 
 .int_discards {
 	background-color: rgba(250, 253, 158, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 
 .int_no_graph {
 	background-color: rgba(205, 207, 196, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 
 .int_no_device {
 	background-color: rgba(250, 253, 158, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 
 .int_changed {
 	background-color: rgba(242, 25, 36, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 
 .int_down {
 	background-color: rgba(242, 23, 33, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 .dot1x_authn_success {
 	background-color: rgba(24, 185, 129, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 .dot1x_auth_success {
 	background-color: rgba(31, 159, 110, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 .dot1x_authn_failed {
 	background-color: rgba(242, 23, 33, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 .dot1x_auth_failed {
 	background-color: rgba(255, 122, 48, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 .dot1x_running {
 	background-color: rgba(251, 74, 20, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 .dot1x_idle {
 	background-color: rgba(250, 253, 158, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 .dot1x_auth_no_method {
 	background-color: rgba(205, 207, 196, 0.2);
-	color: #eeeeee;
+	color: var(--text-color-lighter);
 }
 
 /*
- * The 0.2 status tints above sit legibly on both of Midwinter's mode
- * backgrounds, but the row text colour must follow the mode: light text
- * in dark mode, dark text in light mode (otherwise the light-mode rows
- * render white-on-white). Scoped to the status <tr> rows only so the
- * pills and legend chips (which carry the same status classes) keep
- * their own white-on-colour text.
+ * Row text colour follows Midwinter's light/dark mode automatically via
+ * --text-color-lighter (light text in dark mode, near-black in light
+ * mode) so the 0.2 status tints stay legible in both modes. The pills
+ * and legend chips carry the same status classes but set their own white
+ * text in later rules, so they are unaffected.
  */
-[data-theme-color='dark'] tr.int_up,
-[data-theme-color='dark'] tr.int_up_wo_alias,
-[data-theme-color='dark'] tr.int_errors,
-[data-theme-color='dark'] tr.int_discards,
-[data-theme-color='dark'] tr.int_no_graph,
-[data-theme-color='dark'] tr.int_no_device,
-[data-theme-color='dark'] tr.int_changed,
-[data-theme-color='dark'] tr.int_down,
-[data-theme-color='dark'] tr.dot1x_authn_success,
-[data-theme-color='dark'] tr.dot1x_auth_success,
-[data-theme-color='dark'] tr.dot1x_authn_failed,
-[data-theme-color='dark'] tr.dot1x_auth_failed,
-[data-theme-color='dark'] tr.dot1x_running,
-[data-theme-color='dark'] tr.dot1x_idle,
-[data-theme-color='dark'] tr.dot1x_auth_no_method {
-	color: #eeeeee;
-}
-
-[data-theme-color='light'] tr.int_up,
-[data-theme-color='light'] tr.int_up_wo_alias,
-[data-theme-color='light'] tr.int_errors,
-[data-theme-color='light'] tr.int_discards,
-[data-theme-color='light'] tr.int_no_graph,
-[data-theme-color='light'] tr.int_no_device,
-[data-theme-color='light'] tr.int_changed,
-[data-theme-color='light'] tr.int_down,
-[data-theme-color='light'] tr.dot1x_authn_success,
-[data-theme-color='light'] tr.dot1x_auth_success,
-[data-theme-color='light'] tr.dot1x_authn_failed,
-[data-theme-color='light'] tr.dot1x_auth_failed,
-[data-theme-color='light'] tr.dot1x_running,
-[data-theme-color='light'] tr.dot1x_idle,
-[data-theme-color='light'] tr.dot1x_auth_no_method {
-	color: #1a1a1a;
-}
 
 /*
  * Status pills for the interfaces "Issues" column and the 802.1x status
