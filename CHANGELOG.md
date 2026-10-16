@@ -1,6 +1,7 @@
-﻿## ChangeLog
+## ChangeLog
 
 --- develop ---
+* security: Pin CI fixtures and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
 
 * feature: Add a Dashboard tab (the first MacTrack tab) presenting admin status cards in a draggable, add/remove grid like the syslog Status tab: inventory and device status, address/port totals, collection settings, scan runtimes (with slowest devices), database table sizes, MacWatch activity and vendor breakdown; card layout persists per user
 * feature: On the MAC Addresses tab, show the authorization state as a themed status pill (green "Authorized" / red "Unauthorized") consistent with the interface and 802.1x pills, instead of plain coloured text
