@@ -38,6 +38,28 @@ function plugin_mactrack_csp_nonce(): string {
 	return '';
 }
 
+if (!function_exists('graph_view_has_untemplated_graphs')) {
+	/**
+	 * Polyfill for the helper Cacti 1.2.x defines in graph_view.php and calls
+	 * from html_graph_preview_filter() (lib/html_graph.php). Plugin pages such
+	 * as the MacTrack Graphs tab render that filter without loading
+	 * graph_view.php, so the call would otherwise be a fatal "undefined
+	 * function". Declared only when core has not already defined it.
+	 *
+	 * @param string $templates_where Device restriction for the current filter.
+	 *
+	 * @return bool True when an allowed graph without a Graph Template exists.
+	 */
+	function graph_view_has_untemplated_graphs(string $templates_where = ''): bool {
+		$sql_where  = '(gl.graph_template_id = 0)' . ($templates_where != '' ? ' AND ' . $templates_where : '');
+		$total_rows = 0;
+
+		get_allowed_graphs($sql_where, '', '1', $total_rows);
+
+		return ($total_rows > 0);
+	}
+}
+
 // register these scanning functions
 global $mactrack_scanning_functions;
 
@@ -4364,7 +4386,7 @@ function mactrack_tabs(): void {
 
 	print "</ul></nav><script type='text/javascript' " . plugin_mactrack_csp_nonce() . ">\n";
 
-	print "$(function() { if (pageName.indexOf('mactrack_view') >= 0) { $('.maintabs a.selected').attr('href', urlPath+'plugins/mactrack/'+pageName); } });";
+	print "$(function() { if (pageName.indexOf('mactrack_view') >= 0) { $('.maintabs a[href*=\"plugins/mactrack/mactrack_view_\"]').attr('href', urlPath+'plugins/mactrack/'+pageName); } });";
 	print '</script></div>';
 }
 

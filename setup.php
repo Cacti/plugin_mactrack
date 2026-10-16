@@ -57,9 +57,7 @@ function plugin_mactrack_install($operator_initiated = true): bool {
 	// device hook: Device Management Action dropdown selected: execute list of device
 	api_plugin_register_hook('mactrack', 'device_action_execute', 'mactrack_device_action_execute', 'mactrack_actions.php');
 
-	// Register our realms
-	api_plugin_register_realm('mactrack', 'mactrack_view_dashboard.php,mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_dot1x.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_graphs.php,mactrack_ajax.php', 'Mactrack Viewer', 1);
-	api_plugin_register_realm('mactrack', 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php', 'Mactrack Administrator', 1);
+	mactrack_install_realms(true);
 
 	$site_ready = mactrack_setup_table_new($operator_initiated);
 
@@ -132,6 +130,73 @@ function plugin_mactrack_upgrade(): bool {
 }
 
 /**
+ * Permission realms this plugin registers, keyed by realm display name,
+ * each with its comma-delimited list of protected files. Shared by the
+ * installer and by mactrack_realms_are_stale() so a page added to a realm
+ * (for example the Dashboard) reaches upgraded installs.
+ *
+ * @return array<string, string> Realm display name => comma-delimited files.
+ */
+function mactrack_realm_definitions(): array {
+	return [
+		'Mactrack Viewer'        => 'mactrack_view_dashboard.php,mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_dot1x.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_graphs.php,mactrack_ajax.php',
+		'Mactrack Administrator' => 'mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php',
+	];
+}
+
+/**
+ * Registers this plugin's permission realms with Cacti.
+ *
+ * Cacti's api_plugin_register_realm() maps a realm that has to be created to
+ * the configured admin and to the user making the request when its fourth
+ * argument is true. Repairs that run from an arbitrary Console page pass
+ * false so that a missing realm is never granted to whoever triggered them.
+ *
+ * The name must keep "install": Cacti only honors api_plugin_register_realm()
+ * when the calling function's name contains install, upgrade or setup.
+ *
+ * @param bool $grant_access Whether newly created realms are granted to the
+ *                           admin and current session user.
+ *
+ * @return void
+ */
+function mactrack_install_realms(bool $grant_access): void {
+	foreach (mactrack_realm_definitions() as $display => $files) {
+		api_plugin_register_realm('mactrack', $files, $display, $grant_access);
+	}
+}
+
+/**
+ * Reports whether any file this plugin protects is missing from the realms
+ * stored in plugin_realms. The realm file lists are only written when the
+ * plugin is installed or its version changes, so a file added to a realm
+ * without a version bump stays unmapped on upgraded installs and Cacti
+ * denies it with "401 Permission Denied".
+ *
+ * @return bool True when at least one expected file is not registered.
+ */
+function mactrack_realms_are_stale(): bool {
+	$rows       = db_fetch_assoc_prepared('SELECT file FROM plugin_realms WHERE plugin = ?', ['mactrack']);
+	$registered = [];
+
+	foreach ((array) $rows as $row) {
+		foreach (explode(',', (string) $row['file']) as $file) {
+			$registered[trim($file)] = true;
+		}
+	}
+
+	foreach (mactrack_realm_definitions() as $files) {
+		foreach (explode(',', $files) as $file) {
+			if (!isset($registered[$file])) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+/**
  * Detects a version mismatch between the running plugin code and the
  * version recorded in plugin_config, and when found (and only on a
  * small set of pages, to limit overhead), re-registers hooks, runs the
@@ -163,7 +228,16 @@ function mactrack_check_upgrade(): void {
 
 	$old     = (array) db_fetch_row("SELECT * FROM plugin_config WHERE directory='mactrack'");
 
-	if (!cacti_sizeof($old) || $current != $old['version']) {
+	$version_changed = !cacti_sizeof($old) || $current != $old['version'];
+
+	// A realm file list can drift from the code without a version bump (the
+	// Dashboard was added that way). Repair only the realms in that case; the
+	// full upgrade below rebuilds indexes and rewrites large tables.
+	if (!$version_changed && in_array((int) $old['status'], [1, 4], true) && mactrack_realms_are_stale()) {
+		mactrack_install_realms(false);
+	}
+
+	if ($version_changed) {
 		// if the plugin is installed and/or active
 		if (!cacti_sizeof($old) || $old['status'] == 1 || $old['status'] == 4) {
 			// re-register the hooks
