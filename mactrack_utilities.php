@@ -215,7 +215,11 @@ function mactrack_display_run_status(): void {
 	}
 
 	$(function() {
-		$('#refresh').on('click', function() {
+		$('#refresh').on('change', function() {
+			applyFilter();
+		});
+
+		$('#refreshButton').on('click', function() {
 			applyFilter();
 		});
 	});
@@ -229,7 +233,7 @@ function mactrack_display_run_status(): void {
 						<?php print __('Refresh', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='refresh' onChange='applyFilter()'>
+						<select id='refresh'>
 						<?php
 						if (cacti_sizeof($refresh_interval)) {
 							foreach ($refresh_interval as $key => $interval) {
@@ -243,7 +247,7 @@ function mactrack_display_run_status(): void {
 	?>
 					</td>
 					<td>
-						<button type='button' class='ui-button ui-corner-all ui-widget' onClick='applyFilter()'><?php print __esc('Refresh', 'mactrack'); ?></button>
+						<button type='button' id='refreshButton' class='ui-button ui-corner-all ui-widget'><?php print __esc('Refresh', 'mactrack'); ?></button>
 					</td>
 				</tr>
 			</table>

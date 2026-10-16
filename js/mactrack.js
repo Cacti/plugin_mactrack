@@ -84,3 +84,14 @@ function enable_device(device_id) {
 		$('#line_' + device_id).html(content);
 	});
 }
+
+/* Delegated handlers survive AJAX page loads and rows re-rendered by enable/disable */
+$(function() {
+	$(document).on('click', '.mactrackRescanDevice', function() {
+		scan_device($(this).attr('data-device-id'));
+	});
+
+	$(document).on('click', '.mactrackReturn', function() {
+		cactiReturnTo();
+	});
+});
