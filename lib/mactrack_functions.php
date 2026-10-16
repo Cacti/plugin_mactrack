@@ -4229,7 +4229,7 @@ function mactrack_format_device_row($device, $actions = false): void {
 		// admin level
 		if (api_user_realm_auth('mactrack_sites.php')) {
 			if ($device['disabled'] == '') {
-				$row .= "<img id='r_" . $device['device_id'] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' onClick='scan_device(" . $device['device_id'] . ")' title='" . __('Rescan Device', 'mactrack') . "'>";
+				$row .= "<img id='r_" . $device['device_id'] . "' src='" . $config['url_path'] . "plugins/mactrack/images/rescan_device.gif' alt='' class='mactrackRescanDevice' data-device-id='" . html_escape($device['device_id']) . "' title='" . __('Rescan Device', 'mactrack') . "'>";
 			} else {
 				$row .= "<img src='" . $config['url_path'] . "plugins/mactrack/images/view_none.gif' alt=''>";
 			}
@@ -4420,7 +4420,7 @@ function mactrack_site_filter($page = 'mactrack_sites.php'): void {
 						<?php print __('Sites', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='rows' onChange='applyFilter()'>
+						<select id='rows'>
 							<option value='-1'<?php if (get_request_var('rows') == '-1') {?> selected<?php }?>><?php print __('Default', 'mactrack'); ?></option>
 							<?php
 							if (cacti_sizeof($item_rows)) {
@@ -4438,7 +4438,7 @@ function mactrack_site_filter($page = 'mactrack_sites.php'): void {
 					<td>
 						<input type='checkbox' id='detail' <?php if (get_request_var('detail') == 'true') {
 							print ' checked="true"';
-						}?> onClick='applyFilter()'>
+						}?>>
 					</td>
 					<td>
 						<label for='detail'><?php print __('Show Device Details', 'mactrack'); ?></label>
@@ -4460,7 +4460,7 @@ function mactrack_site_filter($page = 'mactrack_sites.php'): void {
 						<?php print __('Site', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='site_id' onChange='applyFilter()'>
+						<select id='site_id'>
 							<option value='-1'<?php if (get_request_var('site_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack'); ?></option>
 							<?php
 							$sites = db_fetch_assoc('SELECT * FROM mac_track_sites ORDER BY site_name');
@@ -4481,7 +4481,7 @@ function mactrack_site_filter($page = 'mactrack_sites.php'): void {
 						<?php print __('SubType', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='device_type_id' onChange='applyFilter()'>
+						<select id='device_type_id'>
 							<option value='-1'<?php if (get_request_var('device_type_id') == '-1') {?> selected<?php }?>><?php print __('Any', 'mactrack'); ?></option>
 							<?php
 				$device_types = db_fetch_assoc('SELECT DISTINCT mac_track_device_types.device_type_id,
@@ -4538,6 +4538,14 @@ function mactrack_site_filter($page = 'mactrack_sites.php'): void {
 			$(function() {
 				$('#mactrack').on('submit', function(event) {
 					event.preventDefault();
+					applyFilter();
+				});
+
+				$('#rows, #site_id, #device_type_id').on('change', function() {
+					applyFilter();
+				});
+
+				$('#detail').on('click', function() {
 					applyFilter();
 				});
 

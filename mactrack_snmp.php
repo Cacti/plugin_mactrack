@@ -277,6 +277,12 @@ function form_mactrack_snmp_actions(): void {
 	function goTo(strURL) {
 		loadPageNoHeader(strURL);
 	}
+
+	$(function() {
+		$('.mactrackSnmpReturn').on('click', function() {
+			goTo('mactrack_snmp.php');
+		});
+	});
 	</script>
 	<?php
 
@@ -315,7 +321,7 @@ function form_mactrack_snmp_actions(): void {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($mactrack_array) ? serialize($mactrack_array) : '') . "'>
 			<input type='hidden' name='drp_action' class='ui-button ui-corner-all ui-widget' value='" . get_nfilter_request_var('drp_action') . "'>
-			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='goTo(\"" . 'mactrack_snmp.php' . "\")'>" . ($save_html == '' ? __esc('Return', 'mactrack') : __esc('Cancel', 'mactrack')) . "</button>
+			<button type='button' class='ui-button ui-corner-all ui-widget mactrackSnmpReturn'>" . ($save_html == '' ? __esc('Return', 'mactrack') : __esc('Cancel', 'mactrack')) . "</button>
 			$save_html
 		</td>
 	</tr>";
@@ -726,7 +732,7 @@ function snmp_options_filter(): void {
 						<?php print __('Options', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='rows' onChange='applyFilter()'>
+						<select id='rows'>
 							<option value='-1'<?php print(get_request_var('rows') == '-1' ? ' selected' : ''); ?>><?php print __('Default', 'mactrack'); ?></option>
 							<?php if (cacti_sizeof($item_rows)) {
 								foreach ($item_rows as $key => $value) {
@@ -766,6 +772,10 @@ function snmp_options_filter(): void {
 		}
 
 		$(function() {
+			$('#rows').on('change', function() {
+				applyFilter();
+			});
+
 			$('#go').on('click', function() {
 				applyFilter();
 			});
