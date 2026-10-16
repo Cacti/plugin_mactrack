@@ -35,15 +35,6 @@
  *   only its own, which could repoint the Console tab at a MacTrack page.
  */
 
-if (!function_exists('get_allowed_graphs')) {
-	function get_allowed_graphs($sql_where = '', $order_by = '', $limit = '', &$total_rows = 0) {
-		$GLOBALS['__test_graph_calls'][] = [$sql_where, $order_by, $limit];
-		$total_rows = $GLOBALS['__test_graph_total'] ?? 0;
-
-		return [];
-	}
-}
-
 final class MactrackRealmAndGraphViewerTest extends TestCase {
 	/**
 	 * @return void
@@ -54,13 +45,46 @@ final class MactrackRealmAndGraphViewerTest extends TestCase {
 	}
 
 	/**
+	 * Runs mactrack_check_upgrade() from the Console page against a throwaway
+	 * base_path whose INFO reports version 9.9.9 and whose include files are
+	 * empty, so nothing outside the stubs can run.
+	 *
+	 * @param array<string, mixed> $plugin_config The plugin_config row to report.
+	 * @param array<int, array<string, string>> $registered The plugin_realms rows to report.
+	 *
 	 * @return void
 	 */
-	protected function setUp(): void {
-		parent::setUp();
+	private function runCheckUpgrade(array $plugin_config, array $registered): void {
+		mactrack_test_queue_return('get_current_page', 'index.php');
+		mactrack_test_queue_return('db_fetch_row', $plugin_config);
+		mactrack_test_queue_return('db_fetch_assoc_prepared', $registered);
 
-		$GLOBALS['__test_graph_calls'] = [];
-		$GLOBALS['__test_graph_total'] = 0;
+		$restore = $GLOBALS['config']['base_path'];
+		$base    = sys_get_temp_dir() . '/mactrack-realm-' . uniqid();
+
+		mkdir($base . '/plugins/mactrack/includes', 0777, true);
+		mkdir($base . '/plugins/mactrack/lib', 0777, true);
+		file_put_contents($base . '/plugins/mactrack/INFO', "[info]\nversion = 9.9.9\nname = mactrack\nlongname = MacTrack\nauthor = x\nhomepage = x\n");
+		file_put_contents($base . '/plugins/mactrack/includes/database.php', "<?php\n");
+		file_put_contents($base . '/plugins/mactrack/lib/mactrack_functions.php', "<?php\n");
+		$GLOBALS['config']['base_path'] = $base;
+
+		try {
+			mactrack_check_upgrade();
+		} finally {
+			$GLOBALS['config']['base_path'] = $restore;
+		}
+	}
+
+	/**
+	 * @param string $fn The recorded stub function name.
+	 *
+	 * @return array<int, array<string, mixed>>
+	 */
+	private function callsTo(string $fn): array {
+		return array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) use ($fn) {
+			return $call['fn'] === $fn;
+		}));
 	}
 
 	/**
@@ -103,6 +127,63 @@ final class MactrackRealmAndGraphViewerTest extends TestCase {
 		}
 
 		$this->assertSame(mactrack_realm_definitions(), $registered);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function test_install_grants_new_realms(): void {
+		plugin_mactrack_install(false);
+
+		foreach ($this->callsTo('api_plugin_register_realm') as $call) {
+			$this->assertTrue($call['params'][1]);
+		}
+	}
+
+	/**
+	 * @return void
+	 */
+	public function test_same_version_repair_registers_realms_without_granting_access(): void {
+		$this->runCheckUpgrade(['version' => '9.9.9', 'status' => 1], []);
+
+		$realms = $this->callsTo('api_plugin_register_realm');
+
+		$this->assertCount(count(mactrack_realm_definitions()), $realms);
+
+		foreach ($realms as $call) {
+			$this->assertFalse($call['params'][1]);
+		}
+	}
+
+	/**
+	 * @return void
+	 */
+	public function test_same_version_repair_skips_the_full_upgrade(): void {
+		$this->runCheckUpgrade(['version' => '9.9.9', 'status' => 1], []);
+
+		$this->assertSame([], $this->callsTo('api_plugin_register_hook'));
+
+		foreach ($this->callsTo('db_execute_prepared') as $call) {
+			$this->assertStringNotContainsString('UPDATE plugin_config', $call['sql']);
+		}
+	}
+
+	/**
+	 * @return void
+	 */
+	public function test_same_version_with_current_realms_registers_nothing(): void {
+		$this->runCheckUpgrade(['version' => '9.9.9', 'status' => 1], $this->registeredRows());
+
+		$this->assertSame([], $this->callsTo('api_plugin_register_realm'));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function test_same_version_repair_ignores_a_disabled_plugin(): void {
+		$this->runCheckUpgrade(['version' => '9.9.9', 'status' => 0], []);
+
+		$this->assertSame([], $this->callsTo('api_plugin_register_realm'));
 	}
 
 	/**

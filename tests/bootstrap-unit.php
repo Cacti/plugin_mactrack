@@ -271,7 +271,7 @@ if (!function_exists('api_plugin_register_hook')) {
 
 if (!function_exists('api_plugin_register_realm')) {
 	function api_plugin_register_realm($plugin, $files, $name, $alone = 0) {
-		$GLOBALS['__test_db_calls'][] = array('fn' => 'api_plugin_register_realm', 'sql' => $name, 'params' => array($files));
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'api_plugin_register_realm', 'sql' => $name, 'params' => array($files, $alone));
 
 		return true;
 	}
@@ -366,6 +366,20 @@ if (!function_exists('is_realm_allowed')) {
 if (!function_exists('raise_message')) {
 	function raise_message($id, $text = '', $level = 0) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'raise_message', 'sql' => $id, 'params' => array($text, $level));
+	}
+}
+
+/*
+ * Records the (sql_where, order_by, limit) of each call in
+ * $GLOBALS['__test_graph_calls'] and reports $GLOBALS['__test_graph_total']
+ * rows; TestCase::setUp() resets both.
+ */
+if (!function_exists('get_allowed_graphs')) {
+	function get_allowed_graphs($sql_where = '', $order_by = '', $limit = '', &$total_rows = 0) {
+		$GLOBALS['__test_graph_calls'][] = array($sql_where, $order_by, $limit);
+		$total_rows = $GLOBALS['__test_graph_total'] ?? 0;
+
+		return array();
 	}
 }
 

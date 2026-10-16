@@ -33,6 +33,8 @@ abstract class TestCase extends PHPUnit\Framework\TestCase {
 		$GLOBALS['__test_config_options']  = array();
 		$GLOBALS['__test_next_returns']    = array();
 		$GLOBALS['__test_matched_returns'] = array();
+		$GLOBALS['__test_graph_calls']     = array();
+		$GLOBALS['__test_graph_total']     = 0;
 	}
 
 	/**
