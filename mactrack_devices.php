@@ -1036,7 +1036,7 @@ function mactrack_device_edit(): void {
 								SET device_type_id = ?, scan_type = ?, snmp_version = ?,
 								snmp_readstring = ?, snmp_port = ?, snmp_timeout = ?, snmp_retries = ?,
 								max_oids = ?, snmp_username = ?, snmp_password = ?, snmp_auth_protocol = ?,
-								snmp_priv_passphrase = ?, snmp_priv_protocol = ?, snmp_context = ?,
+								snmp_priv_passphrase = ?, snmp_priv_protocol = ?, snmp_context = ?
 								WHERE device_id = ?',
 					[
 						$device['device_type_id'], $device['scan_type'], $device['snmp_version'],

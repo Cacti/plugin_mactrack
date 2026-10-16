@@ -20,6 +20,7 @@
 * issue: Decode MAC/IP OIDs as hex in the Extreme scanner by correcting a misplaced xform_stripped_oid() argument
 * issue: Fix an undefined $ifindex reference (should be $ifIndex) in the Nortel Bay scanner
 * issue: Fix a misplaced parenthesis in the running-process stats parser
+* issue: Remove a trailing comma before WHERE in the device edit page's SNMP settings UPDATE, which caused an SQL syntax error whenever the SNMP settings were auto-corrected
 * issue: Fix "401 Permission Denied" on the Dashboard after upgrading: the Dashboard page was added to the Mactrack Viewer realm without a version bump, so upgraded installs never mapped it to a realm. The upgrade check now also compares the registered realm file lists against the code (`mactrack_realms_are_stale()`) and re-registers them, which carries existing Viewer grants over to the Dashboard. The repair only registers the realms (no schema upgrade) and never grants a newly created realm to the requesting user
 * issue: Fix the Graphs tab fatal error "Call to undefined function graph_view_has_untemplated_graphs()" on Cacti 1.2.x releases whose graph preview filter calls a helper defined in graph_view.php; the plugin now supplies a guarded polyfill, which is a no-op where core already defines it
 * issue: Make the MacTrack tab script repoint only the MacTrack main tab rather than whichever main tab is selected, so it can never retarget the Console tab at a MacTrack page
