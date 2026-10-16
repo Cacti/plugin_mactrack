@@ -20,6 +20,7 @@
 * issue: Decode MAC/IP OIDs as hex in the Extreme scanner by correcting a misplaced xform_stripped_oid() argument
 * issue: Fix an undefined $ifindex reference (should be $ifIndex) in the Nortel Bay scanner
 * issue: Fix a misplaced parenthesis in the running-process stats parser
+* issue: Remove a trailing comma before WHERE in the device edit page's SNMP settings UPDATE, which caused an SQL syntax error whenever the SNMP settings were auto-corrected
 * security: Move every inline `onClick`/`onChange` handler (filter selects, Return/Cancel buttons, the device rescan icon, the utilities refresh controls) into `$(function() {})` handlers, using delegated handlers in `js/mactrack.js` for markup rendered by shared or AJAX-refreshed code, so pages work under a Content-Security-Policy that blocks inline event-handler attributes; all inline `<script>` tags already carry the version-safe nonce, and a regression test now enforces both
 * security: Add a version-safe CSP nonce (`plugin_mactrack_csp_nonce()`) to every inline `<script>` tag, and emit external JavaScript includes through Cacti's `get_md5_include_js()` helper so they carry the request nonce automatically; pages stay compatible with Cacti's Content-Security-Policy nonce enforcement while falling back cleanly on older Cacti releases that lack the `CactiSecureHeaders` class
 * issue#349: Keep punctuation in the port name filter
