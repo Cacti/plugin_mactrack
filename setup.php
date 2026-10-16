@@ -57,7 +57,7 @@ function plugin_mactrack_install($operator_initiated = true): bool {
 	// device hook: Device Management Action dropdown selected: execute list of device
 	api_plugin_register_hook('mactrack', 'device_action_execute', 'mactrack_device_action_execute', 'mactrack_actions.php');
 
-	mactrack_register_realms(true);
+	mactrack_install_realms(true);
 
 	$site_ready = mactrack_setup_table_new($operator_initiated);
 
@@ -152,12 +152,15 @@ function mactrack_realm_definitions(): array {
  * argument is true. Repairs that run from an arbitrary Console page pass
  * false so that a missing realm is never granted to whoever triggered them.
  *
+ * The name must keep "install": Cacti only honors api_plugin_register_realm()
+ * when the calling function's name contains install, upgrade or setup.
+ *
  * @param bool $grant_access Whether newly created realms are granted to the
  *                           admin and current session user.
  *
  * @return void
  */
-function mactrack_register_realms(bool $grant_access): void {
+function mactrack_install_realms(bool $grant_access): void {
 	foreach (mactrack_realm_definitions() as $display => $files) {
 		api_plugin_register_realm('mactrack', $files, $display, $grant_access);
 	}
@@ -231,7 +234,7 @@ function mactrack_check_upgrade(): void {
 	// Dashboard was added that way). Repair only the realms in that case; the
 	// full upgrade below rebuilds indexes and rewrites large tables.
 	if (!$version_changed && in_array((int) $old['status'], [1, 4], true) && mactrack_realms_are_stale()) {
-		mactrack_register_realms(false);
+		mactrack_install_realms(false);
 	}
 
 	if ($version_changed) {

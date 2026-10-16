@@ -132,6 +132,13 @@ final class MactrackRealmAndGraphViewerTest extends TestCase {
 	/**
 	 * @return void
 	 */
+	public function test_realm_helper_name_satisfies_the_cacti_entrypoint_check(): void {
+		$this->assertMatchesRegularExpression('/(install|upgrade|setup)/i', (new ReflectionFunction('mactrack_install_realms'))->getName());
+	}
+
+	/**
+	 * @return void
+	 */
 	public function test_install_grants_new_realms(): void {
 		plugin_mactrack_install(false);
 
