@@ -13,7 +13,7 @@
 * feature: Add a root manifest.json and upgrade-time file pruning (mactrack_prune_files()) that removes tombstoned and dev-only paths, refuses any path resolving outside the plugin directory, warns on paths it cannot remove, and logs top-level entries the manifest does not account for
 * dev: Relocate the per-theme override stylesheets from themes/<theme>/ to css/<theme>/ alongside the base css/mactrack.css
 * dev: Enforce patch coverage of changed lines in CI and remove the inert COMPOSER_ROOT_VERSION env from the Pest step
-* dev: Pin CI fixtures and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
+* dev: Pin the CI database image and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
 * chore: Reach PHPStan level 8 with zero errors across all first-party PHP and add native function return type declarations, using no baselines or inline suppressions
 * issue: Use db_execute_prepared() for parameterized UPDATE/REPLACE statements in the 3Com scanner and partition converter, which previously passed a bind-parameter array to db_execute()
 * issue: Fix a variable-variable typo ($$local_graph_id) that broke 3Com interface-graph mac updates
