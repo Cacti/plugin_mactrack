@@ -2,43 +2,6 @@
 
 --- develop ---
 
-* feature: Add a Dashboard tab (the first MacTrack tab) presenting admin status cards in a draggable, add/remove grid like the syslog Status tab: inventory and device status, address/port totals, collection settings, scan runtimes (with slowest devices), database table sizes, MacWatch activity and vendor breakdown; card layout persists per user
-* feature: On the MAC Addresses tab, show the authorization state as a themed status pill (green "Authorized" / red "Unauthorized") consistent with the interface and 802.1x pills, instead of plain coloured text
-* feature: On Cacti 1.2.32+, zebra-stripe the interfaces list and add an "Issues" column of clickable status pills (one per legend state, active states highlighted); clicking a pill toggles that state in a new multi-select Status filter styled like Base Cacti's Graph View Graph Templates selector
-* feature: Add a status pill column to the 802.1x view after the username; clicking the pill drills down by setting the Status filter to that session status
-* feature: Lay the interfaces and dot1x status legends out as a centered footer in normal document flow via a shared `.mactrackLegendFooter` class, instead of a fixed-position overlay that could cover the last rows at the bottom of the page
-* feature: Restyle the interfaces and dot1x status legends as rounded, evenly-spaced solid-colour chips with theme-appropriate colours (matching the Thold/Monitor/Syslog legends and the Deepness emerald), sized to the longest label and laid out as a CSS grid so they stay equal width across wrapped rows; also fixed a stray `background-color: color:` typo in the `.int_no_device` rule
-* feature: Ship a dedicated per-theme stylesheet for every Cacti theme (adding cacti, carrot, hollyberry, raspberry and midwinter alongside the existing dark, deepness, modern, paper-plane, paw and sunrise) so the Issues/802.1x status pills, the status legend and the action icons stay legible and theme-appropriate in every theme instead of falling back to the generic stylesheet; action-icon colours meet the 3:1 non-text contrast guideline and the Midwinter stylesheet adapts to its light/dark colour-mode toggle
-* dev: Convert plugin bootstrap include/include_once calls to fail-fast require/require_once across the web, CLI, and hook entry points so a missing dependency halts execution instead of continuing with an undefined API
-* feature: Add a root manifest.json and upgrade-time file pruning (mactrack_prune_files()) that removes tombstoned and dev-only paths, refuses any path resolving outside the plugin directory, warns on paths it cannot remove, and logs top-level entries the manifest does not account for
-* dev: Relocate the per-theme override stylesheets from themes/<theme>/ to css/<theme>/ alongside the base css/mactrack.css
-* dev: Enforce patch coverage of changed lines in CI and remove the inert COMPOSER_ROOT_VERSION env from the Pest step
-* dev: Pin the CI database image and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
-* chore: Reach PHPStan level 8 with zero errors across all first-party PHP and add native function return type declarations, using no baselines or inline suppressions
-* issue: Use db_execute_prepared() for parameterized UPDATE/REPLACE statements in the 3Com scanner and partition converter, which previously passed a bind-parameter array to db_execute()
-* issue: Fix a variable-variable typo ($$local_graph_id) that broke 3Com interface-graph mac updates
-* issue: Return the rendered device-row HTML from the enable/disable AJAX handlers, which previously captured an always-null value
-* issue: Decode MAC/IP OIDs as hex in the Extreme scanner by correcting a misplaced xform_stripped_oid() argument
-* issue: Fix an undefined $ifindex reference (should be $ifIndex) in the Nortel Bay scanner
-* issue: Fix a misplaced parenthesis in the running-process stats parser
-* issue: Remove a trailing comma before WHERE in the device edit page's SNMP settings UPDATE, which caused an SQL syntax error whenever the SNMP settings were auto-corrected
-* issue: Fix "401 Permission Denied" on the Dashboard after upgrading: the Dashboard page was added to the Mactrack Viewer realm without a version bump, so upgraded installs never mapped it to a realm. The upgrade check now also compares the registered realm file lists against the code (`mactrack_realms_are_stale()`) and re-registers them, which carries existing Viewer grants over to the Dashboard. The repair only registers the realms (no schema upgrade) and never grants a newly created realm to the requesting user
-* issue: Fix the Graphs tab fatal error "Call to undefined function graph_view_has_untemplated_graphs()" on Cacti 1.2.x releases whose graph preview filter calls a helper defined in graph_view.php; the plugin now supplies a guarded polyfill, which is a no-op where core already defines it
-* issue: Make the MacTrack tab script repoint only the MacTrack main tab rather than whichever main tab is selected, so it can never retarget the Console tab at a MacTrack page
-* security: Move every inline `onClick`/`onChange` handler (filter selects, Return/Cancel buttons, the device rescan icon, the utilities refresh controls) into `$(function() {})` handlers, using delegated handlers in `js/mactrack.js` for markup rendered by shared or AJAX-refreshed code, so pages work under a Content-Security-Policy that blocks inline event-handler attributes; all inline `<script>` tags already carry the version-safe nonce, and a regression test now enforces both
-* security: Add a version-safe CSP nonce (`plugin_mactrack_csp_nonce()`) to every inline `<script>` tag, and emit external JavaScript includes through Cacti's `get_md5_include_js()` helper so they carry the request nonce automatically; pages stay compatible with Cacti's Content-Security-Policy nonce enforcement while falling back cleanly on older Cacti releases that lack the `CactiSecureHeaders` class
-* issue#349: Keep punctuation in the port name filter
-* issue#350: Leave an empty hardware address empty
-* issue#353: Stop re-querying addresses that have no PTR record
-* issue#357: Prevent repeated database setup from duplicating the Default site
-* security: Restrict Net_DNS2 cache deserialization to DNS response classes
-* docs: Align the documented PHP floor with the PHP 8.2 CI/test contract
-* issue: Return the unformatted MAC when mt_mac_format is unset rather than a null address
-* issue: Call mactrack_format_mac() from the ARP export instead of a function that does not exist
-* issue: Drop the mactrack_ajax.php graph-settings action, whose handler was removed in 2016
-* issue: Stop stripping regular expression characters from the Ports to Ignore setting
-* issue: Harden device-type vendor filtering against SQL injection
-* issue: Validate aggregated MAC bulk-action IDs and use prepared deletion SQL
 * security: Replace MAC action request deserialization with escaped JSON payloads
 * security: Validate and escape MAC bulk-action form values before rendering
 * security: Escape rescan executable and script paths before command execution
@@ -48,15 +11,52 @@
 * security: Normalize device report SQL filters before query construction
 * security: Normalize administrative device list SQL filters before query construction
 * security: Validate canonical local-file paths for OUI database imports
-* compat: Fix PHP 8 parameter ordering and partition conversion arguments
+* security: Restrict Net_DNS2 cache deserialization to DNS response classes
+* security: Remove all inline JavaScript handlers like onClick, onChange
+* security: Add a version-safe CSP nonce (`plugin_mactrack_csp_nonce()`) to every inline `<script>` tag
 * issue#246: Fix Cisco device collection
 * issue#248: Cacti process control, terminate dns resolvet when is nothing to do
 * issue#250: Disable automatic MIBs load
+* issue#349: Keep punctuation in the port name filter
+* issue#350: Leave an empty hardware address empty
+* issue#353: Stop re-querying addresses that have no PTR record
+* issue#357: Prevent repeated database setup from duplicating the Default site
+* issue: Convert plugin bootstrap include/include_once calls to fail-fast require/require_once across the web, CLI, and hook entry points
+* issue: Relocate the per-theme override stylesheets from themes/<theme>/ to css/<theme>/ alongside the base css/mactrack.css
+* issue: Enforce patch coverage of changed lines in CI and remove the inert COMPOSER_ROOT_VERSION env from the Pest step
+* issue: Pin the CI database image and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
+* issue: Reach PHPStan level 8 with zero errors across all first-party PHP and add native function return type declarations, using no baselines or inline suppressions
+* issue: Use prepared statements for all vendor collection
+* issue: Fix a variable-variable typo that broke 3Com interface-graph mac updates
+* issue: Return the rendered device-row HTML from the enable/disable AJAX handlers, which previously captured an always-null value
+* issue: Decode MAC/IP OIDs as hex in the Extreme scanner by correcting a misplaced xform_stripped_oid() argument
+* issue: Fix an undefined $ifindex reference (should be $ifIndex) in the Nortel Bay scanner
+* issue: Fix a misplaced parenthesis in the running-process stats parser
+* issue: Remove a trailing comma before WHERE in the device edit page's SNMP settings UPDATE, which caused an SQL syntax error whenever the SNMP settings were auto-corrected
+* issue: Fix the Graphs tab fatal error "Call to undefined function graph_view_has_untemplated_graphs()" on Cacti 1.2.x
+* issue: Make the MacTrack tab script repoint only the MacTrack main tab rather than whichever main tab is selected
+* issue: Align the documented PHP floor with the PHP 8.2 CI/test contract
+* issue: Return the unformatted MAC when mt_mac_format is unset rather than a null address
+* issue: Call mactrack_format_mac() from the ARP export instead of a function that does not exist
+* issue: Drop the mactrack_ajax.php graph-settings action, whose handler was removed in 2016
+* issue: Stop stripping regular expression characters from the Ports to Ignore setting
+* issue: Harden device-type vendor filtering against SQL injection
+* issue: Validate aggregated MAC bulk-action IDs and use prepared deletion SQL
+* issue: Fix PHP 8 parameter ordering and partition conversion arguments
 * issue: Uncaught type error in mactrack_view_arp.php for ifName
 * issue: Mactrack does not shutdown properly due to incorrect use of unregister_process
 * issue: Fixing some internationalization (i18n) issues
+* issue: Mac Addresses are not displaying correctly
 * feature#68: Proxy Option for downloading MAC/OUI Database
 * feature#228: Add more MAC address formats
+* feature: Add a root manifest.json and upgrade-time file pruning (mactrack_prune_files()) that removes tombstoned and dev-only paths
+* feature: Add a Dashboard tab (the first MacTrack tab) presenting admin status cards in a draggable, add/remove
+* feature: On the MAC Addresses tab, show the authorization state as a themed status pill consistent with the interface and 802.1x pills
+* feature: On Cacti 1.2.32+, zebra-stripe the interfaces list and add an "Issues" column of clickable status pills
+* feature: Add a status pill column to the 802.1x view after the username; clicking the pill drills down by setting the Status filter to that session status
+* feature: Lay the interfaces and dot1x status legends out as a centered footer in normal document flow via a shared `.mactrackLegendFooter` class
+* feature: Restyle the interfaces and dot1x status legends as rounded, evenly-spaced solid-colour chips with theme-appropriate colours 
+* feature: Ship a dedicated per-theme stylesheet for every Cacti theme
 
 --- 4.8 ---
 

@@ -104,9 +104,9 @@ function mactrack_vmacs_export(): void {
 
 	if (cacti_sizeof($vmacs)) {
 		foreach ($vmacs as $vmac) {
-			array_push($xport_array,'"' . $vmac['vendor_mac'] . '","' .
+			array_push($xport_array,'"' . mactrack_format_mac($vmac['vendor_mac']) . '","' .
 			$vmac['vendor_name'] . '","' .
-			mactrack_format_mac($vmac['vendor_address']) . '"');
+			$vmac['vendor_address'] . '"');
 		}
 	}
 
@@ -139,9 +139,11 @@ function mactrack_vmacs_get_vmac_records(&$sql_where, $rows, $apply_limits = tru
 
 	// form the 'where' clause for our main sql query
 	if (get_request_var('filter') != '') {
-		$sql_where = 'WHERE (mac_track_oui_database.vendor_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
-			'mac_track_oui_database.vendor_mac LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
-			'mac_track_oui_database.vendor_address LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
+		$filter = str_replace(['.','-',':'], ['','',''], get_request_var('filter'));
+
+		$sql_where = 'WHERE (mac_track_oui_database.vendor_name LIKE ' . db_qstr('%' . $filter . '%') . ' OR ' .
+			'mac_track_oui_database.vendor_mac LIKE ' . db_qstr('%' . $filter . '%') . ' OR ' .
+			'mac_track_oui_database.vendor_address LIKE ' . db_qstr('%' . $filter . '%') . ')';
 	}
 
 	$sql_order = get_order_string();
@@ -218,9 +220,9 @@ function mactrack_vmacs(): void {
 		foreach ($vmacs as $vmac) {
 			form_alternate_row();
 			?>
-				<td class='linkEditMain'><?php print $vmac['vendor_mac']; ?></td>
+				<td class='linkEditMain'><?php print mactrack_format_mac($vmac['vendor_mac']); ?></td>
 				<td><?php print filter_value($vmac['vendor_name'], get_request_var('filter')); ?></td>
-				<td><?php print filter_value(mactrack_format_mac($vmac['vendor_address']), get_request_var('filter')); ?></td>
+				<td><?php print filter_value($vmac['vendor_address'], get_request_var('filter')); ?></td>
 			</tr>
 			<?php
 		}

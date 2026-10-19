@@ -4666,7 +4666,7 @@ function mactrack_arr_key($array, $key, $default = '') {
  *                     value if it can't be reformatted.
  */
 function mactrack_format_mac($mac) {
-	if (is_null($mac) || strlen($mac) < 10) {
+	if (is_null($mac) || strlen($mac) < 6) {
 		return $mac;
 	}
 
