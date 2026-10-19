@@ -104,9 +104,9 @@ function mactrack_vmacs_export(): void {
 
 	if (cacti_sizeof($vmacs)) {
 		foreach ($vmacs as $vmac) {
-			array_push($xport_array,'"' . $vmac['vendor_mac'] . '","' .
+			array_push($xport_array,'"' . mactrack_format_mac($vmac['vendor_mac']) . '","' .
 			$vmac['vendor_name'] . '","' .
-			mactrack_format_mac($vmac['vendor_address']) . '"');
+			$vmac['vendor_address'] . '"');
 		}
 	}
 
@@ -218,9 +218,9 @@ function mactrack_vmacs(): void {
 		foreach ($vmacs as $vmac) {
 			form_alternate_row();
 			?>
-				<td class='linkEditMain'><?php print $vmac['vendor_mac']; ?></td>
+				<td class='linkEditMain'><?php print mactrack_format_mac($vmac['vendor_mac']); ?></td>
 				<td><?php print filter_value($vmac['vendor_name'], get_request_var('filter')); ?></td>
-				<td><?php print filter_value(mactrack_format_mac($vmac['vendor_address']), get_request_var('filter')); ?></td>
+				<td><?php print filter_value($vmac['vendor_address'], get_request_var('filter')); ?></td>
 			</tr>
 			<?php
 		}
