@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-20 16:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-20 16:19+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -628,7 +628,7 @@ msgstr "Dot1x-skanner"
 
 #: mactrack_device_types.php
 msgid "sysDescription Match"
-msgstr "sysDescription Match"
+msgstr "Matchning av sysDescription"
 
 #: mactrack_device_types.php
 msgid "Vendor OID Match"
@@ -1314,7 +1314,7 @@ msgstr "millisekunder"
 
 #: mactrack_utilities.php
 msgid "Running Process Summary"
-msgstr "Sammandrag av körande process"
+msgstr "Sammanfattning av aktiva processer"
 
 #: mactrack_utilities.php
 msgid "The DNS Resolver is Not Running"
@@ -1638,7 +1638,7 @@ msgstr "Samtidiga processer"
 
 #: mactrack_view_dashboard.php
 msgid "Scanner max runtime"
-msgstr "Maximal körtid för skanning"
+msgstr "Maximal körtid för skannern"
 
 #: mactrack_view_dashboard.php
 msgid "MAC retention"
@@ -2179,7 +2179,7 @@ msgstr "Ange hur många enheter som ska pollas samtidigt tills alla enheter har 
 
 #: setup.php
 msgid "Scanner Max Runtime"
-msgstr "Maximal körtid för skanning"
+msgstr "Maximal körtid för skannern"
 
 #: setup.php
 msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
@@ -2564,11 +2564,11 @@ msgstr "Mactrack Verktyg"
 
 #: setup.php
 msgid "Truncate Port Results Table"
-msgstr "Truncate Port Results Table"
+msgstr "Töm tabellen med portresultat"
 
 #: setup.php
 msgid "Truncate Aggregated Port Results Table"
-msgstr "Truncate Aggregated Port Results Table"
+msgstr "Töm tabellen med aggregerade portresultat"
 
 #: setup.php
 msgid "Truncate and Re-create Aggregated Port Results Table"
@@ -2797,7 +2797,7 @@ msgstr "Ange låga användarportnummer på den här omkopplaren. Lämna 0 för a
 
 #: setup.php
 msgid "High User Port Number"
-msgstr "High User Port Number"
+msgstr "Högsta användarportnummer"
 
 #: setup.php
 msgid "Disabled device type is not used."
