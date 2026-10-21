@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-20 16:19+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-21 19:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -1082,7 +1082,7 @@ msgstr "Totala IP: er"
 
 #: mactrack_sites.php mactrack_view_sites.php
 msgid "MACS Found"
-msgstr "MACS Found"
+msgstr "Hittade MAC-adresser"
 
 #: mactrack_sites.php mactrack_view_sites.php
 msgid "Device Errors"
@@ -1184,11 +1184,11 @@ msgstr "Användarnamn"
 
 #: mactrack_snmp.php
 msgid "Auth Proto"
-msgstr "Auth Proto"
+msgstr "Autentiseringsprotokoll"
 
 #: mactrack_snmp.php
 msgid "Priv Proto"
-msgstr "Priv Proto"
+msgstr "Integritetsprotokoll"
 
 #: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
 #: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
@@ -1934,7 +1934,7 @@ msgstr "Ut Disc (OD / S)"
 
 #: mactrack_view_interfaces.php
 msgid "Last Change"
-msgstr "Sista förändringen"
+msgstr "Senaste ändring"
 
 #: mactrack_view_interfaces.php
 msgid "Last Scanned"
@@ -2316,7 +2316,7 @@ msgstr "Ange DNS-timeout i millisekunder. Mactrack använder en PHP-baserad DNS-
 
 #: setup.php
 msgid "DNS Prime Interval"
-msgstr "DNS Prime Interval"
+msgstr "DNS-förberedelseintervall"
 
 #: setup.php
 msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
@@ -2416,7 +2416,7 @@ msgstr "Standard SNMP läs community för alla nya värdar."
 
 #: setup.php
 msgid "Communities"
-msgstr "Communities"
+msgstr "SNMP-gemenskaper"
 
 #: setup.php
 msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
@@ -2476,23 +2476,23 @@ msgstr "Proxy-adress för Internet"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
-msgstr "För antingen Cacti Core Services eller Plugins som kräver internetåtkomst anger du proxyservern och porten här i följande format IP:PORT.  Till exempel 192.168.1.1:8080."
+msgstr "För Cactis kärntjänster eller tillägg som behöver internetåtkomst anger du proxyservern och porten i formatet IP:PORT. Till exempel: 192.168.1.1:8080."
 
 #: setup.php
 msgid "Internet Proxy User"
-msgstr "Internet Proxy-användare"
+msgstr "Användarnamn för internetproxy"
 
 #: setup.php
 msgid "If your Internet Proxy requires a username, enter it here."
-msgstr "Om din Internet Proxy kräver ett användarnamn, ange det här."
+msgstr "Om din internetproxy kräver ett användarnamn anger du det här."
 
 #: setup.php
 msgid "Internet Proxy Password"
-msgstr "Internet Proxy Lösenord"
+msgstr "Lösenord för internetproxy"
 
 #: setup.php
 msgid "If your Internet Proxy requires a password, enter it here."
-msgstr "Om din Internet Proxy kräver ett lösenord, ange det här."
+msgstr "Om din internetproxy kräver ett lösenord anger du det här."
 
 #: setup.php
 msgid "Mactrack Dashboard"
@@ -3057,7 +3057,7 @@ msgstr "Den huvudsakliga kundkontaktens namn och nummer för denna plats."
 
 #: setup.php
 msgid "NetOps Contact"
-msgstr "NetOps Contact"
+msgstr "NetOps-kontakt"
 
 #: setup.php
 msgid "Please principal network support contact name and number for this site."
