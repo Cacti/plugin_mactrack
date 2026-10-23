@@ -455,6 +455,86 @@ if (!function_exists('sql_save')) {
 	}
 }
 
+/*
+ * Row-rendering helpers mactrack_format_device_row() calls, so the device
+ * enable/disable actions can run to completion.
+ */
+if (!function_exists('filter_value')) {
+	function filter_value($value, $filter, $href = '') {
+		return $value;
+	}
+}
+
+if (!function_exists('get_colored_device_status')) {
+	function get_colored_device_status($disabled, $status, $thold_failure_count = -1, $status_event_count = -1) {
+		return '';
+	}
+}
+
+if (!function_exists('number_format_i18n')) {
+	function number_format_i18n($number, $decimals = null, $baseu = 1024) {
+		return (string) $number;
+	}
+}
+
+if (!function_exists('form_checkbox_cell')) {
+	function form_checkbox_cell($title, $id, $disabled = false) {
+		print '<td></td>';
+	}
+}
+
+if (!function_exists('form_end_row')) {
+	function form_end_row() {
+		print '</tr>';
+	}
+}
+
+/*
+ * SNMP answers for the scanner functions. A test stores the rows a walk of
+ * an OID returns in $GLOBALS['__test_snmp_walk'][$oid], in the
+ * array('oid' => ..., 'value' => ...) shape cacti_snmp_walk() returns.
+ */
+if (!function_exists('cacti_snmp_walk')) {
+	function cacti_snmp_walk($hostname, $community, $oid, $version, $auth_user = '', $auth_pass = '',
+		$auth_proto = '', $priv_pass = '', $priv_proto = '', $context = '',
+		$port = 161, $timeout_ms = 500, $retries = 0, $max_oids = 10, $environ = 0,
+		$engineid = '', $value_output_format = 1) {
+		return $GLOBALS['__test_snmp_walk'][$oid] ?? array();
+	}
+}
+
+if (!function_exists('cacti_snmp_get')) {
+	function cacti_snmp_get($hostname, $community, $oid, $version, $auth_user = '', $auth_pass = '',
+		$auth_proto = '', $priv_pass = '', $priv_proto = '', $context = '',
+		$port = 161, $timeout_ms = 500, $retries = 0, $environ = 0,
+		$engineid = '', $value_output_format = 1) {
+		return mactrack_test_next_return('cacti_snmp_get', '');
+	}
+}
+
+// Same body as Cacti's lib/functions.php.
+if (!function_exists('array_rekey')) {
+	function array_rekey($array, $key, $key_value) {
+		$ret_array = array();
+
+		if (is_array($array)) {
+			foreach ($array as $item) {
+				$item_key = $item[$key];
+
+				if (is_array($key_value)) {
+					foreach ($key_value as $value) {
+						$ret_array[$item_key][$value] = $item[$value];
+					}
+				} else {
+					$ret_array[$item_key] = $item[$key_value];
+				}
+			}
+		}
+
+		return $ret_array;
+	}
+}
+
 if (!defined('CACTI_PATH_BASE')) {
 	define('CACTI_PATH_BASE', $GLOBALS['config']['base_path']);
 }
@@ -473,6 +553,26 @@ if (!defined('POLLER_VERBOSITY_DEBUG')) {
 
 if (!defined('POLLER_VERBOSITY_NONE')) {
 	define('POLLER_VERBOSITY_NONE', 6);
+}
+
+if (!defined('POLLER_VERBOSITY_HIGH')) {
+	define('POLLER_VERBOSITY_HIGH', 4);
+}
+
+if (!defined('HOST_UP')) {
+	define('HOST_UP', 3);
+}
+
+if (!defined('SNMP_POLLER')) {
+	define('SNMP_POLLER', 0);
+}
+
+if (!defined('SNMP_STRING_OUTPUT_GUESS')) {
+	define('SNMP_STRING_OUTPUT_GUESS', 1);
+}
+
+if (!defined('SNMP_STRING_OUTPUT_HEX')) {
+	define('SNMP_STRING_OUTPUT_HEX', 3);
 }
 
 if (!defined('MESSAGE_LEVEL_ERROR')) {

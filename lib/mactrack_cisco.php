@@ -764,20 +764,20 @@ function get_cisco_dhcpsnooping_table($site, &$device): void {
 	if (cacti_sizeof($cdsBindingEntries)) {
 		foreach ($cdsBindingEntries as $cdsBindingEntry) {
 			if ($cdsBindingEntry['cdsBindingsIpAddress'] != '') { // It's acceptable to have IPs without a MAC (meaning that MAC is not present but DHCP entry is still present) here but not the other way around.
-				$insert_string = 'REPLACE INTO mac_track_ips
+				db_execute_prepared('REPLACE INTO mac_track_ips
 					(site_id,device_id,hostname,device_name,port_number,
 					mac_address,ip_address,scan_date)
-					VALUES (' .
-					$device['site_id'] . ',' .
-					$device['device_id'] . ',' .
-					db_qstr($device['hostname']) . ',' .
-					db_qstr($device['device_name']) . ',' .
-					db_qstr($cdsBindingEntry['cdsBindingIndex']) . ',' .
-					db_qstr($cdsBindingEntry['dot1dTpFdbEntry']) . ',' .
-					db_qstr($cdsBindingEntry['cdsBindingsIpAddress']) . ',' .
-					db_qstr($scan_date) . ')';
-
-				db_execute($insert_string);
+					VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+					[
+						$device['site_id'],
+						$device['device_id'],
+						$device['hostname'],
+						$device['device_name'],
+						$cdsBindingEntry['cdsBindingIndex'],
+						$cdsBindingEntry['dot1dTpFdbEntry'],
+						$cdsBindingEntry['cdsBindingsIpAddress'],
+						$scan_date
+					]);
 			}
 		}
 	}
@@ -812,20 +812,21 @@ function get_cisco_vrf_arp_table($site, &$device): void {
 	// output details to database
 	if (cacti_sizeof($cdsBindingEntries)) {
 		foreach ($cdsBindingEntries as $cdsBindingEntry) {
-			$insert_string = 'INSERT INTO mac_track_arp
+			db_execute_prepared('INSERT INTO mac_track_arp
 				(site_id,ip_address,mac_address,scan_date)
 				VALUES
-				(' .
-					$device['site_id'] . ',' .
-					db_qstr($cdsBindingEntry['key']) . ',' .
-					db_qstr($cdsBindingEntry['value']) . ',' .
-					db_qstr($scan_date) . '
-				)
+				(?, ?, ?, ?)
 				ON DUPLICATE KEY UPDATE
-				`ip_address` = ' . db_qstr($cdsBindingEntry['key']) . ',
-				`scan_date` = ' . db_qstr($scan_date) . ';';
-
-			db_execute($insert_string);
+				`ip_address` = ?,
+				`scan_date` = ?',
+				[
+					$device['site_id'],
+					$cdsBindingEntry['key'],
+					$cdsBindingEntry['value'],
+					$scan_date,
+					$cdsBindingEntry['key'],
+					$scan_date
+				]);
 		}
 	}
 
@@ -901,6 +902,7 @@ function get_cisco_dot1x_table($site, &$device): void {
 
 	// output details to database
 	$sql    = [];
+	$params = [];
 	$prefix = 'REPLACE INTO mac_track_dot1x
 		(site_id, device_id, hostname, device_name, username, mac_address, ip_address, domain, status, port_number, scan_date)
 		VALUES ';
@@ -908,22 +910,25 @@ function get_cisco_dot1x_table($site, &$device): void {
 	if (cacti_sizeof($entries)) {
 		foreach ($entries as $entry) {
 			if ($entry['UserName'] != '') {
-				$sql[] = '(' . $device['site_id'] . ',' .
-					$device['device_id'] . ',' .
-					db_qstr($device['hostname']) . ',' .
-					db_qstr($device['device_name']) . ',' .
-					db_qstr($entry['UserName']) . ',' .
-					db_qstr($entry['cafSessionClientMacAddress']) . ',' .
-					db_qstr($entry['cafSessionClientAddress']) . ',' .
-					db_qstr($entry['cafSessionDomain']) . ',' .
-					db_qstr($entry['cafSessionStatus']) . ',' .
-					db_qstr($entry['port_number']) . ',' .
-					db_qstr($scan_date) . ')';
+				$sql[] = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+
+				array_push($params,
+					$device['site_id'],
+					$device['device_id'],
+					$device['hostname'],
+					$device['device_name'],
+					$entry['UserName'],
+					$entry['cafSessionClientMacAddress'],
+					$entry['cafSessionClientAddress'],
+					$entry['cafSessionDomain'],
+					$entry['cafSessionStatus'],
+					$entry['port_number'],
+					$scan_date);
 			}
 		}
 
 		if (cacti_sizeof($sql)) {
-			db_execute($prefix . implode(', ', $sql));
+			db_execute_prepared($prefix . implode(', ', $sql), $params);
 		}
 	}
 }

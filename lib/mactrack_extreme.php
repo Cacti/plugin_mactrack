@@ -348,24 +348,27 @@ function get_extreme_arp_table($site, &$device, $extremeware = false): void {
 
 	// output details to database
 	if (cacti_sizeof($atEntries)) {
-		$sql = [];
+		$sql    = [];
+		$params = [];
 
 		foreach ($atEntries as $atEntry) {
-			$sql[] = '(' .
-				$device['site_id'] . ', ' .
-				$device['device_id'] . ', ' .
-				db_qstr($device['hostname']) . ', ' .
-				db_qstr($device['device_name']) . ', ' .
-				db_qstr($atEntry['atifIndex']) . ', ' .
-				db_qstr($atEntry['atPhysAddress']) . ', ' .
-				db_qstr($atEntry['atNetAddress']) . ', ' .
-				db_qstr($scan_date) . ')';
+			$sql[] = '(?, ?, ?, ?, ?, ?, ?, ?)';
+
+			array_push($params,
+				$device['site_id'],
+				$device['device_id'],
+				$device['hostname'],
+				$device['device_name'],
+				$atEntry['atifIndex'],
+				$atEntry['atPhysAddress'],
+				$atEntry['atNetAddress'],
+				$scan_date);
 		}
 
 		if (cacti_sizeof($sql)) {
-			db_execute('REPLACE INTO mac_track_ips
+			db_execute_prepared('REPLACE INTO mac_track_ips
                 (site_id, device_id, hostname, device_name, port_number, mac_address,ip_address,scan_date)
-                VALUES ' . implode(', ', $sql));
+                VALUES ' . implode(', ', $sql), $params);
 		}
 	}
 

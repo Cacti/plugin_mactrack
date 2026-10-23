@@ -535,7 +535,8 @@ function get_CTAlias_table($site, &$device): void {
 
 	// output details to database
 	if (cacti_sizeof($CTAliasEntries)) {
-		$sql = [];
+		$sql    = [];
+		$params = [];
 
 		foreach ($CTAliasEntries as $CTAliasEntry) {
 			// drop non-IP protocols
@@ -543,20 +544,22 @@ function get_CTAlias_table($site, &$device): void {
 				continue;
 			}
 
-			$sql[] = '(' .
-				$device['site_id'] . ', ' .
-				$device['device_id'] . ', ' .
-				db_qstr($device['hostname']) . ', ' .
-				db_qstr($device['device_name']) . ', ' .
-				db_qstr($CTAliasEntry['ifIndex']) . ', ' .
-				db_qstr($CTAliasEntry['CTAliasMacAddress']) . ', ' .
-				db_qstr($CTAliasEntry['CTAliasAddressText']) . ', ' .
-				db_qstr($scan_date) . ')';
+			$sql[] = '(?, ?, ?, ?, ?, ?, ?, ?)';
+
+			array_push($params,
+				$device['site_id'],
+				$device['device_id'],
+				$device['hostname'],
+				$device['device_name'],
+				$CTAliasEntry['ifIndex'],
+				$CTAliasEntry['CTAliasMacAddress'],
+				$CTAliasEntry['CTAliasAddressText'],
+				$scan_date);
 		}
 
-		db_execute('REPLACE INTO mac_track_ips
+		db_execute_prepared('REPLACE INTO mac_track_ips
 			(site_id,device_id,hostname,device_name,port_number, mac_address,ip_address,scan_date)
-			VALUES ' . implode(', ', $sql));
+			VALUES ' . implode(', ', $sql), $params);
 	}
 
 	// save ip information for the device
