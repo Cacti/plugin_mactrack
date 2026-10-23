@@ -14,6 +14,7 @@
 * security: Restrict Net_DNS2 cache deserialization to DNS response classes
 * security: Remove all inline JavaScript handlers like onClick, onChange
 * security: Add a version-safe CSP nonce (`plugin_mactrack_csp_nonce()`) to every inline `<script>` tag
+* security: Require POST for the device rescan, site scan, enable and disable actions
 * issue#246: Fix Cisco device collection
 * issue#248: Cacti process control, terminate dns resolvet when is nothing to do
 * issue#250: Disable automatic MIBs load

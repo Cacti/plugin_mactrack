@@ -456,6 +456,40 @@ if (!function_exists('sql_save')) {
 }
 
 /*
+ * Row-rendering helpers mactrack_format_device_row() calls, so the device
+ * enable/disable actions can run to completion.
+ */
+if (!function_exists('filter_value')) {
+	function filter_value($value, $filter, $href = '') {
+		return $value;
+	}
+}
+
+if (!function_exists('get_colored_device_status')) {
+	function get_colored_device_status($disabled, $status, $thold_failure_count = -1, $status_event_count = -1) {
+		return '';
+	}
+}
+
+if (!function_exists('number_format_i18n')) {
+	function number_format_i18n($number, $decimals = null, $baseu = 1024) {
+		return (string) $number;
+	}
+}
+
+if (!function_exists('form_checkbox_cell')) {
+	function form_checkbox_cell($title, $id, $disabled = false) {
+		print '<td></td>';
+	}
+}
+
+if (!function_exists('form_end_row')) {
+	function form_end_row() {
+		print '</tr>';
+	}
+}
+
+/*
  * SNMP answers for the scanner functions. A test stores the rows a walk of
  * an OID returns in $GLOBALS['__test_snmp_walk'][$oid], in the
  * array('oid' => ..., 'value' => ...) shape cacti_snmp_walk() returns.

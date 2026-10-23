@@ -3728,6 +3728,28 @@ function mactrack_display_Octets($octets): string {
 }
 
 /**
+ * Rejects an admin AJAX action that did not arrive as a POST.
+ *
+ * Cacti's csrf-magic checks the token on POST only, so a state change
+ * reachable over GET would skip that check.
+ *
+ * @return bool True for a POST, false after sending a 405 response.
+ */
+function mactrack_require_post(): bool {
+	if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+		return true;
+	}
+
+	http_response_code(405);
+	header('Allow: POST');
+	header('Content-Type: application/json; charset=utf-8');
+
+	print json_encode(['error' => 'POST required']);
+
+	return false;
+}
+
+/**
  * Triggers an ad hoc rescan of a single device (invoked via AJAX from
  * the interface/device views), logging the action and running the
  * poller script as a synchronous subprocess for just that device,
@@ -3744,6 +3766,10 @@ function mactrack_display_Octets($octets): string {
  */
 function mactrack_rescan($web = false): void {
 	global $config;
+
+	if (!mactrack_require_post()) {
+		return;
+	}
 
 	$device_id = get_filter_request_var('device_id');
 	$ifIndex   = get_filter_request_var('ifIndex');
@@ -3807,6 +3833,10 @@ function mactrack_rescan($web = false): void {
 function mactrack_site_scan($web = false): void {
 	global $config;
 
+	if (!mactrack_require_post()) {
+		return;
+	}
+
 	get_filter_request_var('site_id');
 
 	$site_id = get_filter_request_var('site_id');
@@ -3857,6 +3887,10 @@ function mactrack_site_scan($web = false): void {
  * @return void Prints a JSON response and does not return a value.
  */
 function mactrack_enable(): void {
+	if (!mactrack_require_post()) {
+		return;
+	}
+
 	// ================= input validation =================
 	get_filter_request_var('device_id');
 	// ====================================================
@@ -3908,6 +3942,10 @@ function mactrack_enable(): void {
  * @return void Prints a JSON response and does not return a value.
  */
 function mactrack_disable(): void {
+	if (!mactrack_require_post()) {
+		return;
+	}
+
 	// ================= input validation =================
 	get_filter_request_var('device_id');
 	// ====================================================
