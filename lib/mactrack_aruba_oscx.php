@@ -517,24 +517,27 @@ function get_aruba_oscx_arp_table($site, &$device): void {
 
 	// output details to database
 	if (cacti_sizeof($result)) {
-		$sql = [];
+		$sql    = [];
+		$params = [];
 
 		foreach ($result as $key=>$value) {
-			$sql[] = '(' .
-				$device['site_id'] . ', ' .
-				$device['device_id'] . ', ' .
-				db_qstr($device['hostname']) . ', ' .
-				db_qstr($device['device_name']) . ', ' .
-				db_qstr($value['port']) . ', ' .
-				db_qstr($value['mac']) . ', ' .
-				db_qstr($key) . ', ' .
-				db_qstr($scan_date) . ')';
+			$sql[] = '(?, ?, ?, ?, ?, ?, ?, ?)';
+
+			array_push($params,
+				$device['site_id'],
+				$device['device_id'],
+				$device['hostname'],
+				$device['device_name'],
+				$value['port'],
+				$value['mac'],
+				$key,
+				$scan_date);
 		}
 
 		if (cacti_sizeof($sql)) {
-			db_execute('REPLACE INTO mac_track_ips 
+			db_execute_prepared('REPLACE INTO mac_track_ips
 				(site_id, device_id, hostname, device_name, port_number, mac_address,ip_address,scan_date)
-				VALUES ' . implode(', ', $sql));
+				VALUES ' . implode(', ', $sql), $params);
 		}
 	}
 

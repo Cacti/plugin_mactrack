@@ -27,6 +27,7 @@
 * issue: Pin the CI database image and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
 * issue: Reach PHPStan level 8 with zero errors across all first-party PHP and add native function return type declarations, using no baselines or inline suppressions
 * issue: Use prepared statements for all vendor collection
+* issue: Use prepared statements for device-reported values in the interface, ARP, DHCP snooping and 802.1x scanners
 * issue: Fix a variable-variable typo that broke 3Com interface-graph mac updates
 * issue: Return the rendered device-row HTML from the enable/disable AJAX handlers, which previously captured an always-null value
 * issue: Decode MAC/IP OIDs as hex in the Extreme scanner by correcting a misplaced xform_stripped_oid() argument

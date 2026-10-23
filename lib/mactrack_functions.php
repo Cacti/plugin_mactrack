@@ -766,7 +766,8 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 		stateChanges=VALUES(stateChanges),
 		present="1"';
 
-	$insert_vals = '';
+	$insert_vals   = '';
+	$insert_params = [];
 
 	$ifSpeed = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.5', $device);
 	mactrack_debug("ifSpeed data collection complete. '" . cacti_sizeof($ifSpeed) . "' rows found!");
@@ -1057,46 +1058,51 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 
 		$mac_address = isset($ifPhysAddress[$ifIndex]) ? xform_mac_address($ifPhysAddress[$ifIndex]) : '';
 
-		$insert_vals .= "('" .
-			$device['site_id'] . "', '" . $device['device_id'] . "', '" .
-			$device['snmp_sysUptime'] . "', '" . $ifIndex . "', " .
-			db_qstr($type) . ', ' . db_qstr($name) . ', ' .
-			db_qstr($ifAlias) . ", '" . $linkPort . "', '" .
-			$vlan_id . "', " . db_qstr($vlan_name) . ", '" .
-			$vlan_trunk . "', '" . $speed . "', '" .
-			(isset($ifHighSpeed[$ifIndex]) ? $ifHighSpeed[$ifIndex] : '') . "', '" .
-			(isset($ifDuplex[$ifIndex]) ? $ifDuplex[$ifIndex] : '') . "', " .
-			db_qstr($desc) . ", '" .
-			(isset($ifMtu[$ifIndex]) ? $ifMtu[$ifIndex] : '') . "', " .
-			db_qstr($mac_address) . ", '" .
-			(isset($ifAdminStatus[$ifIndex]) ? $ifAdminStatus[$ifIndex] : '') . "', '" .
-			(isset($ifOperStatus[$ifIndex]) ? $ifOperStatus[$ifIndex] : '') . "', '" .
-			(isset($ifLastChange[$ifIndex]) ? $ifLastChange[$ifIndex] : '') . "', '" .
-			(isset($ifInOctets[$ifIndex]) ? $ifInOctets[$ifIndex] : '') . "', '" .
-			(isset($ifOutOctets[$ifIndex]) ? $ifOutOctets[$ifIndex] : '') . "', '" .
-			(isset($ifHCInOctets[$ifIndex]) ? $ifHCInOctets[$ifIndex] : '') . "', '" .
-			(isset($ifHCOutOctets[$ifIndex]) ? $ifHCOutOctets[$ifIndex] : '') . "', '" .
-			(isset($ifInUcastPkts[$ifIndex]) ? $ifInUcastPkts[$ifIndex] : '') . "', '" .
-			(isset($ifOutUcastPkts[$ifIndex]) ? $ifOutUcastPkts[$ifIndex] : '') . "', '" .
-			(isset($ifInDiscards[$ifIndex]) ? $ifInDiscards[$ifIndex] : '') . "', '" .
-			(isset($ifInErrors[$ifIndex]) ? $ifInErrors[$ifIndex] : '') . "', '" .
-			(isset($ifInUnknownProtos[$ifIndex]) ? $ifInUnknownProtos[$ifIndex] : '') . "', '" .
-			(isset($ifOutDiscards[$ifIndex]) ? $ifOutDiscards[$ifIndex] : '') . "', '" .
-			(isset($ifOutErrors[$ifIndex]) ? $ifOutErrors[$ifIndex] : '') . "', '" .
-			(isset($ifInMulticastPkts[$ifIndex]) ? $ifInMulticastPkts[$ifIndex] : '') . "', '" .
-			(isset($ifOutMulticastPkts[$ifIndex]) ? $ifOutMulticastPkts[$ifIndex] : '') . "', '" .
-			(isset($ifInBroadcastPkts[$ifIndex]) ? $ifInBroadcastPkts[$ifIndex] : '') . "', '" .
-			(isset($ifOutBroadcastPkts[$ifIndex]) ? $ifOutBroadcastPkts[$ifIndex] : '') . "', '" .
-			@$int_ifInOctets . "', '" . @$int_ifOutOctets . "', '" .
-			@$int_ifHCInOctets . "', '" . @$int_ifHCOutOctets . "', '" .
-			@$int_ifInMulticastPkts . "', '" . @$int_ifOutMulticastPkts . "', '" .
-			@$int_ifInBroadcastPkts . "', '" . @$int_ifOutBroadcastPkts . "', '" .
-			@$int_ifInUcastPkts . "', '" . @$int_ifOutUcastPkts . "', '" .
-			@$int_ifInDiscards . "', '" . @$int_ifInErrors . "', '" .
-			@$int_ifInUnknownProtos . "', '" . @$int_ifOutDiscards . "', '" .
-			@$int_ifOutErrors . "', '" . @$int_discards_present . "', '" .
-			$int_errors_present . "', '" . $last_down_time . "', '" .
-			$last_up_time . "', '" . $stateChanges . "', '" . "1')";
+		$insert_row = [
+			$device['site_id'], $device['device_id'],
+			$device['snmp_sysUptime'] ?? '', $ifIndex,
+			$type, $name,
+			$ifAlias, $linkPort,
+			$vlan_id, $vlan_name,
+			$vlan_trunk, $speed,
+			(isset($ifHighSpeed[$ifIndex]) ? $ifHighSpeed[$ifIndex] : ''),
+			(isset($ifDuplex[$ifIndex]) ? $ifDuplex[$ifIndex] : ''),
+			$desc,
+			(isset($ifMtu[$ifIndex]) ? $ifMtu[$ifIndex] : ''),
+			$mac_address,
+			(isset($ifAdminStatus[$ifIndex]) ? $ifAdminStatus[$ifIndex] : ''),
+			(isset($ifOperStatus[$ifIndex]) ? $ifOperStatus[$ifIndex] : ''),
+			(isset($ifLastChange[$ifIndex]) ? $ifLastChange[$ifIndex] : ''),
+			(isset($ifInOctets[$ifIndex]) ? $ifInOctets[$ifIndex] : ''),
+			(isset($ifOutOctets[$ifIndex]) ? $ifOutOctets[$ifIndex] : ''),
+			(isset($ifHCInOctets[$ifIndex]) ? $ifHCInOctets[$ifIndex] : ''),
+			(isset($ifHCOutOctets[$ifIndex]) ? $ifHCOutOctets[$ifIndex] : ''),
+			(isset($ifInUcastPkts[$ifIndex]) ? $ifInUcastPkts[$ifIndex] : ''),
+			(isset($ifOutUcastPkts[$ifIndex]) ? $ifOutUcastPkts[$ifIndex] : ''),
+			(isset($ifInDiscards[$ifIndex]) ? $ifInDiscards[$ifIndex] : ''),
+			(isset($ifInErrors[$ifIndex]) ? $ifInErrors[$ifIndex] : ''),
+			(isset($ifInUnknownProtos[$ifIndex]) ? $ifInUnknownProtos[$ifIndex] : ''),
+			(isset($ifOutDiscards[$ifIndex]) ? $ifOutDiscards[$ifIndex] : ''),
+			(isset($ifOutErrors[$ifIndex]) ? $ifOutErrors[$ifIndex] : ''),
+			(isset($ifInMulticastPkts[$ifIndex]) ? $ifInMulticastPkts[$ifIndex] : ''),
+			(isset($ifOutMulticastPkts[$ifIndex]) ? $ifOutMulticastPkts[$ifIndex] : ''),
+			(isset($ifInBroadcastPkts[$ifIndex]) ? $ifInBroadcastPkts[$ifIndex] : ''),
+			(isset($ifOutBroadcastPkts[$ifIndex]) ? $ifOutBroadcastPkts[$ifIndex] : ''),
+			@$int_ifInOctets, @$int_ifOutOctets,
+			@$int_ifHCInOctets, @$int_ifHCOutOctets,
+			@$int_ifInMulticastPkts, @$int_ifOutMulticastPkts,
+			@$int_ifInBroadcastPkts, @$int_ifOutBroadcastPkts,
+			@$int_ifInUcastPkts, @$int_ifOutUcastPkts,
+			@$int_ifInDiscards, @$int_ifInErrors,
+			@$int_ifInUnknownProtos, @$int_ifOutDiscards,
+			@$int_ifOutErrors, @$int_discards_present,
+			$int_errors_present, $last_down_time,
+			$last_up_time, $stateChanges, '1'
+		];
+
+		$insert_vals .= '(' . implode(', ', array_fill(0, cacti_sizeof($insert_row), '?')) . ')';
+
+		array_push($insert_params, ...$insert_row);
 
 		$i++;
 	}
@@ -1105,7 +1111,7 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 
 	if ($insert_vals != '') {
 		// add/update records in the database
-		db_execute($insert_prefix . $insert_vals . $insert_suffix);
+		db_execute_prepared($insert_prefix . $insert_vals . $insert_suffix, $insert_params);
 
 		// remove all obsolete records from the database
 		db_execute_prepared('DELETE FROM mac_track_interfaces
@@ -1217,8 +1223,9 @@ function mactrack_find_host_graphs($device_id, $host_id): void {
 		}
 	}
 
-	$sql   = '';
-	$found = 0;
+	$sql    = '';
+	$params = [];
+	$found  = 0;
 
 	if (cacti_sizeof($output_array)) {
 		$interfaces = array_rekey(
@@ -1232,15 +1239,18 @@ function mactrack_find_host_graphs($device_id, $host_id): void {
 			foreach ($interfaces as $key => $data) {
 				if (isset($output_array[$key])) {
 					foreach ($output_array[$key] as $local_graph_id => $graph_details) {
-						$sql .= ($sql != '' ? ', (' : '(') .
-							$data['ifIndex'] . ",'" .
-							$key . "'," .
-							$local_graph_id . ',' .
-							$device_id . ',' .
-							$host_id . ',' .
-							$graph_details[0] . ',' .
-							$graph_details[1] . ",'" .
-							$key . "','" . $field_name . "', 1)";
+						$sql .= ($sql != '' ? ', ' : '') . '(?, ?, ?, ?, ?, ?, ?, ?, ?, 1)';
+
+						array_push($params,
+							$data['ifIndex'],
+							$key,
+							$local_graph_id,
+							$device_id,
+							$host_id,
+							$graph_details[0],
+							$graph_details[1],
+							$key,
+							$field_name);
 
 						$found++;
 					}
@@ -1257,7 +1267,7 @@ function mactrack_find_host_graphs($device_id, $host_id): void {
 			AND host_id = ?',
 			[$device_id, $host_id]);
 
-		db_execute("INSERT INTO mac_track_interface_graphs
+		db_execute_prepared("INSERT INTO mac_track_interface_graphs
 			(ifIndex, ifName, local_graph_id, device_id, host_id, snmp_query_id, graph_template_id, field_value, field_name, present)
 			VALUES $sql
 			ON DUPLICATE KEY UPDATE
@@ -1265,7 +1275,7 @@ function mactrack_find_host_graphs($device_id, $host_id): void {
 				graph_template_id=VALUES(graph_template_id),
 				field_value=VALUES(field_value),
 				field_name=VALUES(field_name),
-				present=VALUES(present)");
+				present=VALUES(present)", $params);
 
 		db_execute_prepared('DELETE FROM mac_track_interface_graphs
 			WHERE present = 0
