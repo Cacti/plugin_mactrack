@@ -216,3 +216,25 @@ test('interface counter deltas are stored in the columns named for them', functi
 
 	expect($stored)->toBe($step);
 });
+
+test('interface graph rows keep the graph template and data query ids in their own columns', function () {
+	mactrack_test_queue_return('db_fetch_assoc_prepared', array(
+		array('id' => 11, 'snmp_query_id' => 5, 'field_name' => 'ifName', 'field_value' => 'Gi1/0/1'),
+	));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', array(
+		array('id' => 21, 'graph_template_id' => 9),
+	));
+	mactrack_test_queue_return('db_fetch_assoc', array(
+		array('device_id' => 7, 'ifIndex' => 1, 'ifName' => 'Gi1/0/1'),
+	));
+
+	mactrack_find_host_graphs(7, 3);
+
+	$row = mactrack_test_insert_row(mactrack_test_find_insert('INSERT INTO mac_track_interface_graphs'));
+
+	expect($row['local_graph_id'])->toBe('21');
+	expect($row['device_id'])->toBe('7');
+	expect($row['host_id'])->toBe('3');
+	expect($row['graph_template_id'])->toBe('9');
+	expect($row['snmp_query_id'])->toBe('5');
+});

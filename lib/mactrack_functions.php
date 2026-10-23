@@ -1238,8 +1238,8 @@ function mactrack_find_host_graphs($device_id, $host_id): void {
 							$local_graph_id . ',' .
 							$device_id . ',' .
 							$host_id . ',' .
-							$graph_details[0] . ',' .
-							$graph_details[1] . ",'" .
+							$graph_details[1] . ',' .
+							$graph_details[0] . ",'" .
 							$key . "','" . $field_name . "', 1)";
 
 						$found++;
