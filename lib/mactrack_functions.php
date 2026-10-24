@@ -1090,12 +1090,12 @@ function build_InterfacesTable(&$device, &$ifIndexes, $getLinkPorts = false, $ge
 			(isset($ifOutBroadcastPkts[$ifIndex]) ? $ifOutBroadcastPkts[$ifIndex] : ''),
 			@$int_ifInOctets, @$int_ifOutOctets,
 			@$int_ifHCInOctets, @$int_ifHCOutOctets,
-			@$int_ifInMulticastPkts, @$int_ifOutMulticastPkts,
-			@$int_ifInBroadcastPkts, @$int_ifOutBroadcastPkts,
 			@$int_ifInUcastPkts, @$int_ifOutUcastPkts,
 			@$int_ifInDiscards, @$int_ifInErrors,
 			@$int_ifInUnknownProtos, @$int_ifOutDiscards,
-			@$int_ifOutErrors, @$int_discards_present,
+			@$int_ifOutErrors, @$int_ifInMulticastPkts,
+			@$int_ifOutMulticastPkts, @$int_ifInBroadcastPkts,
+			@$int_ifOutBroadcastPkts, @$int_discards_present,
 			$int_errors_present, $last_down_time,
 			$last_up_time, $stateChanges, '1'
 		];
@@ -1247,8 +1247,8 @@ function mactrack_find_host_graphs($device_id, $host_id): void {
 							$local_graph_id,
 							$device_id,
 							$host_id,
-							$graph_details[0],
 							$graph_details[1],
+							$graph_details[0],
 							$key,
 							$field_name);
 
