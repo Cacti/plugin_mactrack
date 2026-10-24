@@ -31,6 +31,11 @@
             <file>includes/database.php</file>
             <file>lib/mactrack_functions.php</file>
             <file>lib/mactrack_dns_resolution.php</file>
+            <file>lib/mactrack_aruba_oscx.php</file>
+            <file>lib/mactrack_cisco.php</file>
+            <file>lib/mactrack_enterasys_N7.php</file>
+            <file>lib/mactrack_extreme.php</file>
+            <file>lib/mactrack_h3c_3com.php</file>
         </include>
     </source>
 </phpunit>

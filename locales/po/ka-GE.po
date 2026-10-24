@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-11 23:18+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-24 02:18+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -1218,7 +1218,7 @@ msgstr ""
 
 #: mactrack_snmp.php
 msgid "Options"
-msgstr "მორგება"
+msgstr "პარამეტრები"
 
 #: mactrack_utilities.php
 msgid "Mactrack Process Status"
@@ -1566,10 +1566,8 @@ msgid "Inventory"
 msgstr "ინვენტარი"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Device Notes"
 msgid "Device status"
-msgstr "მოწყობილობის შენიშვნები"
+msgstr "მოწყობილობის სტატუსი"
 
 #: mactrack_view_dashboard.php
 msgid "Address and port totals"
@@ -1784,10 +1782,8 @@ msgid "No vendor data available."
 msgstr ""
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Show"
 msgid "Show more"
-msgstr "ჩვენება"
+msgstr "მეტის ჩვენება"
 
 #: mactrack_view_dashboard.php
 #, fuzzy
@@ -1812,10 +1808,8 @@ msgid "Invalid request. Please try again."
 msgstr ""
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Unknown"
 msgid "Unknown card."
-msgstr "უცნობი"
+msgstr "უცნობი ბარათი."
 
 #: mactrack_view_dashboard.php
 msgid "Add card"

@@ -35,54 +35,6 @@ if (!defined('POLLER_VERBOSITY_HIGH')) {
 	define('POLLER_VERBOSITY_HIGH', 4);
 }
 
-if (!function_exists('array_rekey')) {
-	function array_rekey($array, $key, $key_value) {
-		$ret_array = array();
-
-		if (is_array($array)) {
-			foreach ($array as $item) {
-				$item_key = $item[$key];
-
-				if (is_array($key_value)) {
-					foreach ($key_value as $value) {
-						$ret_array[$item_key][$value] = $item[$value];
-					}
-				} else {
-					$ret_array[$item_key] = $item[$key_value];
-				}
-			}
-		}
-
-		return $ret_array;
-	}
-}
-
-if (!function_exists('db_qstr')) {
-	function db_qstr($s, $db_conn = false) {
-		if (is_null($s)) {
-			return 'NULL';
-		}
-
-		$s = str_replace(array('\\', "\0", "\n", "\r", "'", '"', "\x1a"), array('\\\\', '\\0', '\\n', '\\r', "\\'", '\\"', '\\Z'), $s);
-
-		return "'" . $s . "'";
-	}
-}
-
-if (!function_exists('cacti_snmp_walk')) {
-	function cacti_snmp_walk($hostname, $community, $oid, $version, $auth_user = '', $auth_pass = '',
-		$auth_proto = '', $priv_pass = '', $priv_proto = '', $context = '', $port = 161, $timeout = 500,
-		$retries = 0, $max_oids = 10, $environ = SNMP_POLLER, $engineid = '', $value_output_format = SNMP_STRING_OUTPUT_GUESS) {
-		$walk = array();
-
-		foreach ($GLOBALS['__test_snmp_walks'][$oid] ?? array() as $index => $value) {
-			$walk[] = array('oid' => $oid . '.' . $index, 'value' => $value);
-		}
-
-		return $walk;
-	}
-}
-
 beforeAll(function () {
 	require_once dirname(__DIR__, 2) . '/lib/mactrack_functions.php';
 });
@@ -92,40 +44,45 @@ beforeEach(function () {
 	$GLOBALS['__test_next_returns']    = array();
 	$GLOBALS['__test_matched_returns'] = array();
 	$GLOBALS['__test_config_options']  = array('mt_collection_timing' => 'disabled');
-	$GLOBALS['__test_snmp_walks']      = array();
+	$GLOBALS['__test_snmp_walk']       = array();
 });
 
 /**
- * Return the first db_execute() statement that starts with $prefix.
+ * Return the first db_execute_prepared() statement that starts with $prefix.
  *
  * @param string $prefix
  *
- * @return string
+ * @return array
  */
 function mactrack_test_find_insert($prefix) {
 	foreach ($GLOBALS['__test_db_calls'] as $call) {
-		if ($call['fn'] === 'db_execute' && strpos(ltrim($call['sql']), $prefix) === 0) {
-			return $call['sql'];
+		if ($call['fn'] === 'db_execute_prepared' && strpos(ltrim($call['sql']), $prefix) === 0) {
+			return $call;
 		}
 	}
 
-	throw new RuntimeException("No db_execute() call starting with $prefix");
+	throw new RuntimeException("No db_execute_prepared() call starting with $prefix");
 }
 
 /**
  * Split a single-row INSERT into column => value.
  *
- * @param string $sql
+ * @param array $call
  *
  * @return array<string, string>
  */
-function mactrack_test_insert_row($sql) {
-	preg_match('/^\s*INSERT INTO \w+\s*\(([^)]*)\)\s*VALUES\s*\((.*)\)\s*ON DUPLICATE KEY UPDATE/s', $sql, $parts);
-
+function mactrack_test_insert_row($call) {
+	preg_match('/^\s*INSERT INTO \w+\s*\(([^)]*)\)\s*VALUES\s*\((.*?)\)/s', $call['sql'], $parts);
 	$columns = array_map('trim', explode(',', $parts[1]));
-	$values  = array_map('trim', str_getcsv($parts[2], ',', "'", '\\'));
+	$values  = [];
+	$index   = 0;
 
-	expect(count($values))->toBe(count($columns));
+	foreach (array_map('trim', explode(',', $parts[2])) as $value) {
+		$values[] = $value === '?' ? (string) $call['params'][$index++] : $value;
+	}
+
+	expect($index)->toBe(cacti_sizeof($call['params']));
+	expect(cacti_sizeof($values))->toBe(cacti_sizeof($columns));
 
 	return array_combine($columns, $values);
 }
@@ -165,13 +122,13 @@ test('interface counter deltas are stored in the columns named for them', functi
 	foreach ($counters as $name => $oid) {
 		$step[$name]                            = $k;
 		$previous[$name]                        = 50000;
-		$GLOBALS['__test_snmp_walks'][$oid][1] = 50000 + $k * 1000;
+		$GLOBALS['__test_snmp_walk'][$oid] = [['oid' => $oid . '.1', 'value' => 50000 + $k * 1000]];
 		$k++;
 	}
 
-	$GLOBALS['__test_snmp_walks']['.1.3.6.1.2.1.2.2.1.1'][1]    = 1;
-	$GLOBALS['__test_snmp_walks']['.1.3.6.1.2.1.31.1.1.1.1'][1] = 'Gi1/0/1';
-	$GLOBALS['__test_snmp_walks']['.1.3.6.1.2.1.2.2.1.8'][1]    = 1;
+	$GLOBALS['__test_snmp_walk']['.1.3.6.1.2.1.2.2.1.1'] = [['oid' => '.1.3.6.1.2.1.2.2.1.1.1', 'value' => 1]];
+	$GLOBALS['__test_snmp_walk']['.1.3.6.1.2.1.31.1.1.1.1'] = [['oid' => '.1.3.6.1.2.1.31.1.1.1.1.1', 'value' => 'Gi1/0/1']];
+	$GLOBALS['__test_snmp_walk']['.1.3.6.1.2.1.2.2.1.8'] = [['oid' => '.1.3.6.1.2.1.2.2.1.8.1', 'value' => 1]];
 
 	// Only db_fetch_cell_prepared() matches on SQL, so the remaining stubs answer in call order.
 	mactrack_test_queue_return('db_fetch_assoc_prepared', array($previous));
