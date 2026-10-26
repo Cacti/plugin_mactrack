@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-21 19:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-26 10:32+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -16,19 +16,19 @@ msgstr "MacTrack kunde inte initiera sin standardwebbplats. Granska Cacti-loggen
 
 #: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
 msgid "Idle"
-msgstr "Sysslolös"
+msgstr "Vilande"
 
 #: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
 msgid "Running"
-msgstr "Kör"
+msgstr "Pågår"
 
 #: lib/mactrack_functions.php
 msgid "No method"
-msgstr "Metod"
+msgstr "Ingen metod"
 
 #: lib/mactrack_functions.php mactrack_view_dot1x.php
 msgid "Authentication Success"
-msgstr "Autentiseringsframgång"
+msgstr "Autentisering lyckades"
 
 #: lib/mactrack_functions.php mactrack_view_dot1x.php
 msgid "Authentication Failed"
@@ -36,7 +36,7 @@ msgstr "Autentisering misslyckades"
 
 #: lib/mactrack_functions.php mactrack_view_dot1x.php
 msgid "Authorization Success"
-msgstr "Godkännande framgång"
+msgstr "Auktorisering lyckades"
 
 #: lib/mactrack_functions.php mactrack_view_dot1x.php
 msgid "Authorization Failed"
@@ -48,19 +48,19 @@ msgstr "Mactrack Device Tracking OUI Database Importresultat"
 
 #: lib/mactrack_functions.php
 msgid "Getting OUI Database from IEEE"
-msgstr "Få OUI-databas från IEEE"
+msgstr "Hämtar OUI-databasen från IEEE"
 
 #: lib/mactrack_functions.php
 msgid "Getting OUI Database from the IEEE"
-msgstr "Få OUI-databas från IEEE"
+msgstr "Hämtar OUI-databasen från IEEE"
 
 #: lib/mactrack_functions.php
 msgid "OUI Database Download from IEEE Complete"
-msgstr "OUI databas nedladdning från IEEE Complete"
+msgstr "Nedladdningen av OUI-databasen från IEEE är klar"
 
 #: lib/mactrack_functions.php
 msgid "OUI Database Download from IEEE FAILED"
-msgstr "OUI Database Download från IEEE FAILED"
+msgstr "Nedladdningen av OUI-databasen från IEEE misslyckades"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -78,7 +78,7 @@ msgstr "atifIndexes datainsamling slutförd"
 
 #: lib/mactrack_functions.php
 msgid "atPhysAddress data collection complete"
-msgstr "datapaketet AtPhysAddress komplett"
+msgstr "Datainsamlingen för atPhysAddress är klar"
 
 #: lib/mactrack_functions.php
 msgid "atNetAddress data collection complete"
@@ -86,12 +86,12 @@ msgstr "atNetAddress datainsamling slutförd"
 
 #: lib/mactrack_functions.php
 msgid "atEntries assembly complete."
-msgstr "atEntries sammansättning kompletterad."
+msgstr "Sammanställningen av atEntries är klar."
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "HOST: %s, IP address information collection complete"
-msgstr "HOST: %s, IP-adress informationssamling slutförd"
+msgstr "Värd: %s, insamlingen av IP-adressinformation är klar"
 
 #: lib/mactrack_functions.php
 msgid "Rescan Device"
@@ -219,12 +219,12 @@ msgstr "Inte registrerad"
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
-msgstr "Status: Körande, Processer: %d, Förlopp: %s, LastRuntime: %2.1f"
+msgstr "Status: Pågår, processer: %d, förlopp: %s, senaste körtid: %2.1f"
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
-msgstr "Status: Inaktiv, LastRuntime: %2.1f sekunder, Processer: %d processer, Enheter: %d, Nästa körtid: %s"
+msgstr "Status: Vilande, senaste körtid: %2.1f sekunder, processer: %d, enheter: %d, nästa körning: %s"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
@@ -252,7 +252,7 @@ msgstr "Instrumentpanel"
 #: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Sites"
-msgstr "Webbsidor"
+msgstr "Platser"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
@@ -328,7 +328,7 @@ msgstr "Exportera"
 #: mactrack_view_devices.php mactrack_view_dot1x.php
 #: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
 msgid "Site"
-msgstr "Webbplats"
+msgstr "Plats"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
 #: mactrack_view_ips.php
@@ -342,7 +342,7 @@ msgstr "SubType"
 #: mactrack_actions.php
 #, php-format
 msgid "Mactrack Device: (%s) successfully updated"
-msgstr "Mactrack Device: (%s) framgångsrikt uppdaterad"
+msgstr "Mactrack-enheten (%s) har uppdaterats"
 
 #: mactrack_actions.php
 msgid "Import into Mactrack Database"
@@ -350,7 +350,7 @@ msgstr "Importera till Mactrack-databasen"
 
 #: mactrack_actions.php
 msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
-msgstr "Klicka på \"Fortsätt\" för att importera följande enhet till Mactrack?  Vänligen ange ytterligare Mactrack Device-alternativ enligt nedan."
+msgstr "Klicka på ”Fortsätt” för att importera följande enhet till Mactrack. Ange ytterligare alternativ för Mactrack-enheten nedan."
 
 #: mactrack_actions.php
 msgid "We will use these devices SNMP options for the Mactrack Device as well."
@@ -390,15 +390,15 @@ msgstr "Fortsätt"
 
 #: mactrack_device_types.php
 msgid "Click 'Continue' to delete the following Device Type(s)."
-msgstr "Klicka på \"Fortsätt\" för att radera följande enhetstyp (er)."
+msgstr "Klicka på ”Fortsätt” för att ta bort följande enhetstyper."
 
 #: mactrack_device_types.php
 msgid "Click 'Continue' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
-msgstr "Klicka på \"Fortsätt\" för att duplicera följande enhetstyp (er). Du kan valfritt ändra beskrivningen för de nya enhetstyperna. Annars ändras inte värdet under och originalnamnet replikeras med ett nytt suffix."
+msgstr "Klicka på ”Fortsätt” för att duplicera följande enhetstyper. Du kan ändra beskrivningen för de nya enhetstyperna. Låt annars värdet nedan vara oförändrat så kopieras ursprungsnamnet med ett nytt suffix."
 
 #: mactrack_device_types.php
 msgid "Device Type Prefix:"
-msgstr "Enhets typ prefix:"
+msgstr "Enhetstypsprefix:"
 
 #: mactrack_device_types.php
 msgid "<description> (1)"
@@ -459,15 +459,15 @@ msgstr "Skriv över befintliga data?"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
-msgstr "Bör importprocessen tillåtas att skriva över befintliga data? Observera att det här inte betyder att radera gammal rad, bara ersätta dubbla rader."
+msgstr "Ska importen få skriva över befintliga data? Observera att gamla rader inte tas bort; endast dubblettrader ersätts."
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Allow Existing Rows to be Updated?"
-msgstr "Tillåt befintliga rader att uppdateras?"
+msgstr "Tillåt att befintliga rader uppdateras?"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Required File Format Notes"
-msgstr "Anmärkningar om obligatoriskt filformat"
+msgstr "Information om filformatet som krävs"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "The file must contain a header row with the following column headings."
@@ -507,7 +507,7 @@ msgstr " - Funktionen 802.1x-skanning som ska användas för att skanna den här
 
 #: mactrack_device_types.php
 msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
-msgstr " - Om serienummeret för denna enhetstyp kan erhållas via en SNMP-fråga lägger du till det är OID här"
+msgstr " - Om serienumret för den här enhetstypen kan hämtas via en SNMP-fråga, ange dess OID här"
 
 #: mactrack_device_types.php
 msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
@@ -566,12 +566,12 @@ msgstr "Router"
 #: mactrack_device_types.php
 #, php-format
 msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
-msgstr "HEADER LINE PROCESSED OK: <br> Kolumner hittades där: %s"
+msgstr "Rubrikraden har bearbetats utan fel: <br>Kolumner som hittades: %s"
 
 #: mactrack_device_types.php mactrack_devices.php
 #, php-format
 msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
-msgstr "HEADER LINE PROCESSING ERROR: Saknas obligatoriskt fält <br> Kolumner hittades där: %s"
+msgstr "Fel vid bearbetning av rubrikraden: Ett obligatoriskt fält saknas <br>Kolumner som hittades: %s"
 
 #: mactrack_device_types.php
 msgid "Unknown Assume \"Switch/Hub\""
@@ -580,22 +580,22 @@ msgstr "Okänt Antag \"Switch / Hub\""
 #: mactrack_device_types.php
 #, php-format
 msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
-msgstr "INSERT SUCCEEDED: Leverantör: %s, Beskrivning: %s, Typ: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "Infogningen lyckades: leverantör: %s, beskrivning: %s, typ: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php
 #, php-format
 msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
-msgstr "INSERT FAILED: Leverantör: %s, Beskrivning: %s, Typ: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "Infogningen misslyckades: leverantör: %s, beskrivning: %s, typ: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php
 #, php-format
 msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
-msgstr "INSERT SKIPPED, EXISTING: Leverantör: %s, Beskrivning: %s, Typ: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "Infogningen hoppades över, posten finns redan: leverantör: %s, beskrivning: %s, typ: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php
 #, php-format
 msgid "Mactrack Device Types [edit: %s]"
-msgstr "Mactrack enhetstyper [redigera: %s]"
+msgstr "Mactrack-enhetstyper [redigera: %s]"
 
 #: mactrack_device_types.php
 msgid "Mactrack Device Types [new]"
@@ -603,11 +603,11 @@ msgstr "Mactrack-enhetstyper [ny]"
 
 #: mactrack_device_types.php
 msgid "Mactrack Device Type Filters"
-msgstr "Mactrack Filter för enhetstyp"
+msgstr "Filter för Mactrack-enhetstyper"
 
 #: mactrack_device_types.php
 msgid "Device Type Description"
-msgstr "Enhetstyp Beskrivning"
+msgstr "Beskrivning av enhetstyp"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
 #: mactrack_view_devices.php mactrack_view_sites.php setup.php
@@ -660,11 +660,11 @@ msgstr "Rensa filtrerade resultat"
 
 #: mactrack_device_types.php
 msgid "Rescan"
-msgstr "Omsökning"
+msgstr "Sök igen"
 
 #: mactrack_device_types.php
 msgid "Scan Active Devices for Unknown Device Types"
-msgstr "Enhetsspårningsenhetstyper"
+msgstr "Sök efter okända enhetstyper på aktiva enheter"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Import"
@@ -672,16 +672,16 @@ msgstr "Importera"
 
 #: mactrack_device_types.php
 msgid "Import Device Types from a CSV File"
-msgstr "Importera enhetstyper från lokal fil"
+msgstr "Importera enhetstyper från en CSV-fil"
 
 #: mactrack_device_types.php
 msgid "Export Device Types to Share with Others"
-msgstr "Importera enhetstyper från lokal fil"
+msgstr "Exportera enhetstyper för att dela dem med andra"
 
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "Säljare"
+msgstr "Leverantör"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -716,11 +716,11 @@ msgstr "Ändra enhetens portvärden"
 
 #: mactrack_devices.php
 msgid "Connect to Cacti Host via Hostname"
-msgstr "Anslut till Cacti Host via värdnamn"
+msgstr "Anslut till Cacti-värden via värdnamn"
 
 #: mactrack_devices.php
 msgid "Copy SNMP Settings from Cacti Host"
-msgstr "Kopiera SNMP-inställningar från Cacti Host"
+msgstr "Kopiera SNMP-inställningar från Cacti-värden"
 
 #: mactrack_devices.php
 msgid "You must select at least one device."
@@ -744,11 +744,11 @@ msgstr "Klicka på \"Fortsätt\" för att ändra övre eller nedre portparametra
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
-msgstr "Klicka på \"Fortsätt\" för att ansluta följande enheter till respektive Cacti Device. Relationen kommer att byggas på lika värdnamn. Beskrivning kommer också att uppdateras."
+msgstr "Klicka på ”Fortsätt” för att koppla följande enheter till respektive Cacti-enhet. Kopplingen baseras på identiska värdnamn. Beskrivningen uppdateras också."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
-msgstr "Klicka på \"Fortsätt\" för att kopiera SNMP-inställningar från ansluten Cacti-enhet till Mactrack-enhet.  Alla enheter som inte är anslutna hoppas över i tysthet. SNMP-försök kommer att tas från Ping-försök."
+msgstr "Klicka på ”Fortsätt” för att kopiera SNMP-inställningarna från den anslutna Cacti-enheten till Mactrack-enheten. Enheter som inte är anslutna hoppas över utan meddelande. Antalet SNMP-omförsök hämtas från antalet ping-omförsök."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to delete the following Devices"
@@ -764,7 +764,7 @@ msgstr "Importera enheter från lokal fil"
 
 #: mactrack_devices.php
 msgid "Please specify the location of the CSV file containing your device information."
-msgstr "Ange platsen för CSV-filen som innehåller din enhetinformation."
+msgstr "Ange platsen för CSV-filen som innehåller din enhetsinformation."
 
 #: mactrack_devices.php
 msgid " - The SiteID known to Mactrack for this device"
@@ -812,11 +812,11 @@ msgstr " - Timeout i millisekunder för att vänta på ett snmp-svar innan du f�
 
 #: mactrack_devices.php
 msgid " - The number of times to retry a snmp request before giving up"
-msgstr " - Antalet gånger för att försöka igen en snmp-förfrågan innan du ger upp"
+msgstr " - Antalet gånger en SNMP-förfrågan ska upprepas innan försöken avbryts"
 
 #: mactrack_devices.php
 msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
-msgstr " - Specificerat antalet OID: er som kan erhållas i en enda SNMP-förfrågan"
+msgstr " - Antalet OID:er som kan hämtas i en enda SNMP Get-förfrågan"
 
 #: mactrack_devices.php
 msgid " - SNMP V3: SNMP username"
@@ -853,31 +853,31 @@ msgstr "Om du försöker importera dubbla enheter, uppdateras därför endast de
 #: mactrack_devices.php
 #, php-format
 msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
-msgstr "HEADER LINE PROCESSED OK: <br> Kolumner hittades där: %s"
+msgstr "Rubrikraden har bearbetats utan fel: <br>Kolumner som hittades: %s"
 
 #: mactrack_devices.php
 #, php-format
 msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr "INSERT SUCCEEDED: Värdnamn: SiteID: %s, Enhetsnamn: %s, Värdnamn %s, SNMP-port: %s"
+msgstr "Infogningen lyckades: värdnamn: SiteID: %s, enhetsnamn: %s, värdnamn %s, SNMP-port: %s"
 
 #: mactrack_devices.php
 #, php-format
 msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr "INSERT FAILED: SiteID: %s, Enhetsnamn: %s, värdnamn %s, SNMP-port: %s"
+msgstr "Infogningen misslyckades: SiteID: %s, enhetsnamn: %s, värdnamn %s, SNMP-port: %s"
 
 #: mactrack_devices.php
 #, php-format
 msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr "INSERT SKIPPED, EXISTING: SiteID: %s, Enhetsnamn: %s, Värdnamn %s, SNMP-port: %s"
+msgstr "Infogningen hoppades över, posten finns redan: SiteID: %s, enhetsnamn: %s, värdnamn %s, SNMP-port: %s"
 
 #: mactrack_devices.php
 #, php-format
 msgid "Mactrack Devices [edit: %s]"
-msgstr "Mactrack Devices [redigera: %s]"
+msgstr "Mactrack-enheter [redigera: %s]"
 
 #: mactrack_devices.php
 msgid "Mactrack Devices [new]"
-msgstr "Mactrack Devices [ny]"
+msgstr "Mactrack-enheter [ny]"
 
 #: mactrack_devices.php
 msgid "SNMP Information"
@@ -889,11 +889,11 @@ msgstr "System:"
 
 #: mactrack_devices.php
 msgid "Uptime:"
-msgstr "Upptid:"
+msgstr "Drifttid:"
 
 #: mactrack_devices.php
 msgid "Hostname:"
-msgstr "& Värddatornamn:"
+msgstr "Värdnamn:"
 
 #: mactrack_devices.php
 msgid "ObjectID:"
@@ -925,7 +925,7 @@ msgstr "Värdnamn"
 
 #: mactrack_devices.php
 msgid "Total IPs"
-msgstr "Totala IP-adresser"
+msgstr "Totalt antal IP-adresser"
 
 #: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
 #: mactrack_view_sites.php
@@ -967,11 +967,11 @@ msgstr "Ingen Cacti Link"
 
 #: mactrack_macauth.php
 msgid "You must select at least one Authorized Mac to delete."
-msgstr "Du måste välja minst en auktoriserad Mac för att radera."
+msgstr "Du måste välja minst en auktoriserad MAC-adress att ta bort."
 
 #: mactrack_macauth.php
 msgid "Click 'Continue' to delete the following Authorized Mac's?"
-msgstr "Klicka på \"Fortsätt\" för att radera följande behöriga Mac: s?"
+msgstr "Klicka på ”Fortsätt” för att ta bort följande auktoriserade MAC-adresser."
 
 #: mactrack_macauth.php
 #, php-format
@@ -1012,11 +1012,11 @@ msgstr "Inga auktoriserade Mac-adresser hittades"
 
 #: mactrack_macauth.php mactrack_vendormacs.php mactrack_view_macs.php
 msgid "MAC's"
-msgstr "MAC: s"
+msgstr "MAC-adresser"
 
 #: mactrack_macwatch.php
 msgid "Click 'Continue' to delete the following watched Mac's?"
-msgstr "Klicka på \"Fortsätt\" för att radera följande Mac-ser?"
+msgstr "Klicka på ”Fortsätt” för att ta bort följande bevakade MAC-adresser."
 
 #: mactrack_macwatch.php
 #, php-format
@@ -1033,7 +1033,7 @@ msgstr "Mactrack MacWatch-filter"
 
 #: mactrack_macwatch.php
 msgid "Watch Name"
-msgstr "Titta på namn"
+msgstr "Bevakningens namn"
 
 #: mactrack_macwatch.php setup.php
 msgid "Ticket Number"
@@ -1049,11 +1049,11 @@ msgstr "Sågs senast"
 
 #: mactrack_macwatch.php
 msgid "Watches"
-msgstr "Klockor"
+msgstr "Bevakningar"
 
 #: mactrack_macwatch.php
 msgid "No Mactrack Watched Macs Found"
-msgstr "Inga Mac-datorer som övervakats av Mactrack hittades"
+msgstr "Inga bevakade MAC-adresser hittades i Mactrack"
 
 #: mactrack_sites.php
 msgid "Click 'Continue' to delete the following Site(s)?"
@@ -1066,11 +1066,11 @@ msgstr "Du måste välja minst en plats."
 #: mactrack_sites.php
 #, php-format
 msgid "Mactrack Site [edit: %s]"
-msgstr "Mactrack-webbplats [redigera: %s]"
+msgstr "Mactrack-plats [redigera: %s]"
 
 #: mactrack_sites.php
 msgid "Mactrack Site [new]"
-msgstr "Mactrack Site [ny]"
+msgstr "Mactrack-plats [ny]"
 
 #: mactrack_sites.php
 msgid "Mactrack Site Filters"
@@ -1078,7 +1078,7 @@ msgstr "Filter för Mactrack-anläggningar"
 
 #: mactrack_sites.php mactrack_view_devices.php mactrack_view_sites.php
 msgid "Total IP's"
-msgstr "Totala IP: er"
+msgstr "Totalt antal IP-adresser"
 
 #: mactrack_sites.php mactrack_view_sites.php
 msgid "MACS Found"
@@ -1098,7 +1098,7 @@ msgstr "Totalt antal enheter"
 
 #: mactrack_sites.php mactrack_view_sites.php
 msgid "Total User Ports"
-msgstr "Totalt användarportar"
+msgstr "Totalt antal användarportar"
 
 #: mactrack_sites.php mactrack_view_sites.php
 msgid "Total Oper Ports"
@@ -1114,11 +1114,11 @@ msgstr "Du måste välja minst ett SNMP-alternativ."
 
 #: mactrack_snmp.php
 msgid "Click 'Continue' to delete the following SNMP Option(s)."
-msgstr "Klicka på &quot;Fortsätt&quot; för att radera följande SNMP-alternativ (er)."
+msgstr "Klicka på ”Fortsätt” för att ta bort följande SNMP-alternativ."
 
 #: mactrack_snmp.php
 msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
-msgstr "Klicka på \"Fortsätt\" för att duplicera följande SNMP-alternativ (er). Du kan valfritt ändra titelformat för de nya SNMP-alternativen."
+msgstr "Klicka på ”Fortsätt” för att kopiera följande SNMP-alternativ. Du kan ändra titelformatet för de nya SNMP-alternativen."
 
 #: mactrack_snmp.php
 msgid "Name Format:"
@@ -1140,11 +1140,11 @@ msgstr "SNMP-alternativ [ny]"
 #: mactrack_snmp.php
 #, php-format
 msgid "SNMP Option Set [edit: %s]"
-msgstr "SNMP Option Set [redigera: %s]"
+msgstr "Uppsättning SNMP-alternativ [redigera: %s]"
 
 #: mactrack_snmp.php
 msgid "SNMP Option Set [new]"
-msgstr "SNMP Option Set [ny]"
+msgstr "Uppsättning SNMP-alternativ [ny]"
 
 #: mactrack_snmp.php setup.php
 msgid "Mactrack SNMP Options"
@@ -1152,7 +1152,7 @@ msgstr "Mactrack SNMP-alternativ"
 
 #: mactrack_snmp.php
 msgid "Item"
-msgstr "Artikel"
+msgstr "Objekt"
 
 #: mactrack_snmp.php setup.php
 msgid "Version"
@@ -1160,7 +1160,7 @@ msgstr "Version"
 
 #: mactrack_snmp.php setup.php
 msgid "Community"
-msgstr "Gemenskaphet"
+msgstr "Community-sträng"
 
 #: mactrack_snmp.php setup.php
 msgid "Port"
@@ -1198,7 +1198,7 @@ msgstr "Åtgärder"
 
 #: mactrack_snmp.php
 msgid "No SNMP Items Found"
-msgstr "Inga SNMP-föremål hittades"
+msgstr "Inga SNMP-poster hittades"
 
 #: mactrack_snmp.php
 msgid "Title of SNMP Option Set"
@@ -1210,7 +1210,7 @@ msgstr "SNMP-inställningar"
 
 #: mactrack_snmp.php
 msgid "No SNMP Option Sets Found"
-msgstr "Inga SNMP-alternativsatser hittades"
+msgstr "Inga uppsättningar av SNMP-alternativ hittades"
 
 #: mactrack_snmp.php
 msgid "Options"
@@ -1234,7 +1234,7 @@ msgstr "Mactrack Poller är det:"
 
 #: mactrack_utilities.php
 msgid "Running Processes:"
-msgstr "Löpande processer:"
+msgstr "Körande processer:"
 
 #: mactrack_utilities.php
 msgid "Last Time Poller Started:"
@@ -1246,7 +1246,7 @@ msgstr "Poller Frekvens:"
 
 #: mactrack_utilities.php
 msgid "Approx. Next Runtime:"
-msgstr "Ungefär. Nästa Runtime:"
+msgstr "Ungefärlig tid för nästa körning:"
 
 #: mactrack_utilities.php
 msgid "Database Maintenance Information"
@@ -1282,7 +1282,7 @@ msgstr "processer"
 
 #: mactrack_utilities.php
 msgid "Maximum Per Device Scan Time:"
-msgstr "Maximal per enhetens skanningstid:"
+msgstr "Maximal skanningstid per enhet:"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "minutes"
@@ -1318,11 +1318,11 @@ msgstr "Sammanfattning av aktiva processer"
 
 #: mactrack_utilities.php
 msgid "The DNS Resolver is Not Running"
-msgstr "DNS-resolveren körs inte"
+msgstr "DNS-upplösaren körs inte"
 
 #: mactrack_utilities.php
 msgid "The DNS Resolver is Running"
-msgstr "DNS-resolveringen körs"
+msgstr "DNS-upplösaren körs"
 
 #: mactrack_utilities.php
 msgid "Date Started"
@@ -1346,7 +1346,7 @@ msgstr "Är du säker?"
 
 #: mactrack_utilities.php
 msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
-msgstr "Är du säker på att du vill radera all port till MAC till IP-resultat från systemet?"
+msgstr "Är du säker på att du vill ta bort alla resultat som kopplar portar till MAC- och IP-adresser från systemet?"
 
 #: mactrack_utilities.php
 msgid "Mactrack Database Results"
@@ -1359,21 +1359,21 @@ msgstr "Följande antal poster har tagits bort från databasen: %s"
 
 #: mactrack_utilities.php
 msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
-msgstr "Är du säker på att du vill radera all Aggregated Port till MAC till IP-resultat från systemet?"
+msgstr "Är du säker på att du vill ta bort alla aggregerade resultat som kopplar portar till MAC- och IP-adresser från systemet?"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s"
-msgstr "Följande antal poster har tagits bort från det aggregerade tabellen: %s"
+msgstr "Följande antal poster har tagits bort från den aggregerade tabellen: %s"
 
 #: mactrack_utilities.php
 msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
-msgstr "Är du säker på att du vill radera och återskapa all Aggregated Port till MAC till IP-resultat från systemet?"
+msgstr "Är du säker på att du vill ta bort och återskapa alla aggregerade resultat som kopplar portar till MAC- och IP-adresser från systemet?"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
-msgstr "Följande antal poster har tagits bort från det aggregerade tabellen: %s. Och %s poster läggs till."
+msgstr "Följande antal poster har tagits bort från den aggregerade tabellen: %s. Och %s poster kommer att läggas till."
 
 #: mactrack_utilities.php
 msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
@@ -1405,15 +1405,15 @@ msgstr "Utför databasunderhåll"
 
 #: mactrack_utilities.php
 msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
-msgstr "Tar bort Expired Port till MAC till IP-föreningar från databasen. Endast poster som har gått ut, baserat på dina kriterier, tas bort."
+msgstr "Tar bort inaktuella kopplingar mellan portar, MAC-adresser och IP-adresser från databasen. Endast poster som har blivit inaktuella enligt dina kriterier tas bort."
 
 #: mactrack_utilities.php
 msgid "Refresh IEEE Vendor MAC/OUI Database"
-msgstr "Uppdatera IEEE-leverantör MAC / OUI-databasen"
+msgstr "Uppdatera IEEE:s databas över tillverkares MAC-/OUI-prefix"
 
 #: mactrack_utilities.php
 msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
-msgstr "Den här funktionen hämtar och installerar den senaste OIU-databasen från IEEE-webbplatsen. Varje nätverkskort (NIC) har en MAC-adress. MAC-adressen kan delas upp i två delar. Den första delen av MAC Addess innehåller leverantör MAC. Leverantören MAC identifierar vem som tillverkar delen. Detta kommer att vara till hjälp vid kontroll av skrämmande enheter på ditt nätverk."
+msgstr "Den här funktionen hämtar och installerar den senaste OUI-databasen från IEEE:s webbplats. Varje nätverkskort (NIC) har en MAC-adress. MAC-adressen kan delas upp i två delar. Den första delen innehåller tillverkarens MAC-prefix, som visar vem som har tillverkat enheten. Det hjälper dig att upptäcka obehöriga enheter i nätverket."
 
 #: mactrack_utilities.php setup.php
 msgid "Refresh Scanning Functions"
@@ -1425,39 +1425,39 @@ msgstr "Tar bort gamla och potentiellt inaktuella Mactrack-skanningsfunktioner f
 
 #: mactrack_utilities.php
 msgid "Remove All Scan Results"
-msgstr "Ta bort alla scanningsresultat"
+msgstr "Ta bort alla skanningsresultat"
 
 #: mactrack_utilities.php
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
-msgstr "Tar bort <strong>ALL</strong> port till MAC till IP-föreningar från databasen alla IP-adresser, IP-områden och VLANS. Det här verktyget är bra när du vill börja om. <strong>FARA: Alla tidigare uppgifter raderas.</strong>"
+msgstr "Tar bort <strong>ALLA</strong> kopplingar mellan portar, MAC-adresser och IP-adresser ur databasen för alla IP-adresser, IP-intervall och VLAN. Använd verktyget om du vill börja om. <strong>VARNING: Alla tidigare data raderas.</strong>"
 
 #: mactrack_utilities.php
 msgid "Aggregated Table Administration"
-msgstr "Sammanlagd tabelladministration"
+msgstr "Administration av aggregerad tabell"
 
 #: mactrack_utilities.php
 msgid "Remove All Aggregated Results"
-msgstr "Ta bort alla sammanslagna resultat"
+msgstr "Ta bort alla aggregerade resultat"
 
 #: mactrack_utilities.php
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
-msgstr "Raderar alla <strong>Aggregerad</strong> (Ej Scan Resultat) Port till MAC till IP-föreningar från databasen. Data kommer igen att samlas på grundval av <strong>endast ny</strong> skannad data i nästa mactrack poller run."
+msgstr "Tar bort alla <strong>aggregerade</strong> kopplingar mellan portar, MAC-adresser och IP-adresser från databasen, men inte skanningsresultaten. Data samlas in på nytt utifrån <strong>endast nya</strong> skanningsdata nästa gång Mactracks insamlare körs."
 
 #: mactrack_utilities.php
 msgid "Perform Aggregate Table Rebuild"
-msgstr "Utför Aggregate Table Rebuild"
+msgstr "Bygg om den aggregerade tabellen"
 
 #: mactrack_utilities.php
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
-msgstr "Raderar alla <strong>Aggregerad</strong> (Ej Scan Resultat) Port till MAC till IP-föreningar från databasen och deras återskapas baserat på <strong>alla scaned data</strong> nu."
+msgstr "Tar bort alla <strong>aggregerade</strong> kopplingar mellan portar, MAC-adresser och IP-adresser från databasen, men inte skanningsresultaten, och återskapar dem direkt utifrån <strong>alla skanningsdata</strong>."
 
 #: mactrack_vendormacs.php
 msgid "Mactrack Vendor Mac Filter"
-msgstr "Mactrack leverantör Mac-filter"
+msgstr "Filter för tillverkarens MAC-prefix i Mactrack"
 
 #: mactrack_vendormacs.php
 msgid "Vendor MAC"
-msgstr "Leverantör MAC"
+msgstr "Tillverkarens MAC-prefix"
 
 #: mactrack_vendormacs.php
 msgid "Corporation"
@@ -1469,11 +1469,11 @@ msgstr "Adress"
 
 #: mactrack_vendormacs.php setup.php
 msgid "Vendor Macs"
-msgstr "Säljare Macs"
+msgstr "Tillverkares MAC-prefix"
 
 #: mactrack_vendormacs.php
 msgid "No Mactrack Vendor MACS Found"
-msgstr "Ingen Mactrack-leverantör MACS hittades"
+msgstr "Inga MAC-prefix för tillverkare hittades i Mactrack"
 
 #: mactrack_view_arp.php
 msgid "Mactrack - ARP/IP View"
@@ -1481,11 +1481,11 @@ msgstr "Mactrack - ARP/IP-visning"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "Switch Name"
-msgstr "Byt namn"
+msgstr "Switchens namn"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "Switch Hostname"
-msgstr "Byt värdnamn"
+msgstr "Switchens värdnamn"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "ED IP Address"
@@ -1501,7 +1501,7 @@ msgstr "ED MAC-adress"
 
 #: mactrack_view_arp.php mactrack_view_macs.php
 msgid "Vendor Name"
-msgstr "Säljarens namn"
+msgstr "Tillverkarens namn"
 
 #: mactrack_view_arp.php mactrack_view_macs.php
 msgid "Port Number"
@@ -1534,7 +1534,7 @@ msgstr "Enhet"
 
 #: mactrack_view_arp.php mactrack_view_ips.php
 msgid "IP's"
-msgstr "IP: s"
+msgstr "IP-adresser"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "IP"
@@ -1558,7 +1558,7 @@ msgstr "MacTrack – översikt"
 
 #: mactrack_view_dashboard.php
 msgid "Inventory"
-msgstr "Lager"
+msgstr "Inventering"
 
 #: mactrack_view_dashboard.php
 msgid "Device status"
@@ -1566,7 +1566,7 @@ msgstr "Enhetsstatus"
 
 #: mactrack_view_dashboard.php
 msgid "Address and port totals"
-msgstr "Adresser och portantal"
+msgstr "Antal adresser och portar"
 
 #: mactrack_view_dashboard.php
 msgid "Collection settings"
@@ -1678,7 +1678,7 @@ msgstr "Varaktighet"
 
 #: mactrack_view_dashboard.php
 msgid "Last scan"
-msgstr "Föregående skanning"
+msgstr "Senaste skanning"
 
 #: mactrack_view_dashboard.php
 msgid "Slowest devices"
@@ -1770,11 +1770,11 @@ msgstr "Okänd enhetstyp"
 
 #: mactrack_view_devices.php
 msgid "Total VLAN's"
-msgstr "Totalt VLAN: s"
+msgstr "Totalt antal VLAN"
 
 #: mactrack_view_devices.php
 msgid "Edit Device"
-msgstr "Byt enhet"
+msgstr "Redigera enhet"
 
 #: mactrack_view_devices.php
 msgid "View Graphs"
@@ -1782,11 +1782,11 @@ msgstr "Se grafer"
 
 #: mactrack_view_devices.php
 msgid "Device Not Mapped to Cacti Device"
-msgstr "Synkroniser Enhetsspårningsenhet till Cacti Device"
+msgstr "Enheten är inte kopplad till en Cacti-enhet"
 
 #: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
 msgid "View MAC Addresses"
-msgstr "MAC-adresser"
+msgstr "Visa MAC-adresser"
 
 #: mactrack_view_devices.php
 msgid "No Mactrack Devices Found"
@@ -1794,7 +1794,7 @@ msgstr "Inga Mactrack-enheter hittades"
 
 #: mactrack_view_devices.php
 msgid "Hub/Switch"
-msgstr "Nav / Byt"
+msgstr "Hubb/switch"
 
 #: mactrack_view_dot1x.php
 msgid "Mactrack - 802.1x View"
@@ -1814,7 +1814,7 @@ msgstr "Inga Mactrack 802.1x-sessioner hittades"
 
 #: mactrack_view_dot1x.php
 msgid "Dot1x Scan Results"
-msgstr "Dot1x-skanner"
+msgstr "Skanningsresultat för 802.1X"
 
 #: mactrack_view_dot1x.php
 msgid "Sessions"
@@ -1826,7 +1826,7 @@ msgstr "Vilken status som helst"
 
 #: mactrack_view_dot1x.php
 msgid "No Method"
-msgstr "Metod"
+msgstr "Ingen metod"
 
 #: mactrack_view_dot1x.php
 msgid "DATA"
@@ -1858,7 +1858,7 @@ msgstr "Inga Mactrack-gränssnitt hittades"
 
 #: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
-msgstr "Ta bort alla scanningsresultat"
+msgstr "Skanningsresultat för gränssnitt"
 
 #: mactrack_view_interfaces.php setup.php
 msgid "Name"
@@ -1894,11 +1894,11 @@ msgstr "Ut (B / S)"
 
 #: mactrack_view_interfaces.php
 msgid "In Err Total"
-msgstr "I Err Total"
+msgstr "Inkommande fel totalt"
 
 #: mactrack_view_interfaces.php
 msgid "In Disc Total"
-msgstr "I skivan Totalt"
+msgstr "Kasserade inkommande paket totalt"
 
 #: mactrack_view_interfaces.php
 msgid "UProto Total"
@@ -1906,19 +1906,19 @@ msgstr "UProto Totalt"
 
 #: mactrack_view_interfaces.php
 msgid "Out Err Total"
-msgstr "Ut Err Totalt"
+msgstr "Utgående fel totalt"
 
 #: mactrack_view_interfaces.php
 msgid "Out Disc Total"
-msgstr "Ut Disc Total"
+msgstr "Kasserade utgående paket totalt"
 
 #: mactrack_view_interfaces.php
 msgid "In Err (E/S)"
-msgstr "I Err (E / S)"
+msgstr "Inkommande fel/s"
 
 #: mactrack_view_interfaces.php
 msgid "In Disc (D/S)"
-msgstr "I skiva (D / S)"
+msgstr "Kasserade inkommande paket/s"
 
 #: mactrack_view_interfaces.php
 msgid "UProto (UP/S)"
@@ -1926,11 +1926,11 @@ msgstr "UProto (UP / S)"
 
 #: mactrack_view_interfaces.php
 msgid "Out Err (OE/S)"
-msgstr "Ut Err (OE / S)"
+msgstr "Utgående fel/s"
 
 #: mactrack_view_interfaces.php
 msgid "Out Disc (OD/S)"
-msgstr "Ut Disc (OD / S)"
+msgstr "Kasserade utgående paket/s"
 
 #: mactrack_view_interfaces.php
 msgid "Last Change"
@@ -1959,17 +1959,17 @@ msgstr "Alla ignorerade gränssnitt"
 #: mactrack_view_interfaces.php
 #, php-format
 msgid "High In/Out Utilization > %d &#37;"
-msgstr "Hög in-/utanvändning > %d &#37;"
+msgstr "Hög inkommande/utgående belastning > %d &#37;"
 
 #: mactrack_view_interfaces.php
 #, php-format
 msgid "High In Utilization > %d &#37;"
-msgstr "Hög användning > %d &#37;"
+msgstr "Hög inkommande belastning > %d &#37;"
 
 #: mactrack_view_interfaces.php
 #, php-format
 msgid "High Out Utilization > %d &#37;"
-msgstr "Hög användning > %d &#37;"
+msgstr "Hög utgående belastning > %d &#37;"
 
 #: mactrack_view_interfaces.php
 msgid "With Issues"
@@ -1977,11 +1977,11 @@ msgstr "Med problem"
 
 #: mactrack_view_interfaces.php
 msgid "Up Interfaces"
-msgstr "Upp gränssnitt"
+msgstr "Aktiva gränssnitt"
 
 #: mactrack_view_interfaces.php
 msgid "Up Interfaces No Alias"
-msgstr "Upp gränssnitt Inga alias"
+msgstr "Aktiva gränssnitt utan alias"
 
 #: mactrack_view_interfaces.php
 msgid "Errors Accumulating"
@@ -1989,11 +1989,11 @@ msgstr "Fel ackumuleras"
 
 #: mactrack_view_interfaces.php
 msgid "Discards Accumulating"
-msgstr "Kassera ackumulering"
+msgstr "Antalet kasserade paket ökar"
 
 #: mactrack_view_interfaces.php
 msgid "Changed in Last Day"
-msgstr "Ändrad i förra dagen"
+msgstr "Ändrade under det senaste dygnet"
 
 #: mactrack_view_interfaces.php
 msgid "Bandwidth"
@@ -2001,7 +2001,7 @@ msgstr "Bandbredd"
 
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
-msgstr "Visa Totals"
+msgstr "Visa totalsummor"
 
 #: mactrack_view_interfaces.php
 msgid "All Statuses"
@@ -2013,7 +2013,7 @@ msgstr "Valda statusar"
 
 #: mactrack_view_ips.php
 msgid "Mactrack - Site IP Range Report View"
-msgstr "Mactrack - Visning av rapport om IP-sortiment på plats"
+msgstr "Mactrack – rapport över platsens IP-intervall"
 
 #: mactrack_view_ips.php
 msgid "IP Range"
@@ -2029,7 +2029,7 @@ msgstr "Aktuellt datum"
 
 #: mactrack_view_ips.php
 msgid "Maximum IP Addresses"
-msgstr "Maximal IP-adresser"
+msgstr "Maximalt antal IP-adresser"
 
 #: mactrack_view_ips.php
 msgid "Maximum Date"
@@ -2045,7 +2045,7 @@ msgstr "Redigera plats"
 
 #: mactrack_view_ips.php mactrack_view_sites.php
 msgid "View IP Addresses"
-msgstr "Nuvarande IP-adresser"
+msgstr "Visa IP-adresser"
 
 #: mactrack_view_ips.php
 msgid "No Mactrack Site IP Ranges Found"
@@ -2082,12 +2082,12 @@ msgstr "Du måste välja minst en MAC-adress."
 
 #: mactrack_view_macs.php
 msgid "You are not permitted to change Mac Authorizations."
-msgstr "Det är inte tillåtet att ändra Mac-auktorisationer."
+msgstr "Du har inte behörighet att ändra auktoriseringar för MAC-adresser."
 
 #: mactrack_view_macs.php
 #, php-format
 msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
-msgstr "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count: [ %s]"
+msgstr "Enhet: %s IP: %s MAC: %s Port: %s Antal: [%s]"
 
 #: mactrack_view_macs.php
 msgid "You must select at least one Row."
@@ -2099,7 +2099,7 @@ msgstr "Det är inte tillåtet att radera rader."
 
 #: mactrack_view_macs.php
 msgid "Click 'Continue' to Delete the following rows from Aggregated table."
-msgstr "Klicka på \"Fortsätt\" för att radera följande rader från Aggregated Table."
+msgstr "Klicka på ”Fortsätt” för att ta bort följande rader från den aggregerade tabellen."
 
 #: mactrack_view_macs.php
 msgid "VLAN ID"
@@ -2135,7 +2135,7 @@ msgstr "Mactrack - Visning av webbplatsrapport"
 
 #: mactrack_view_sites.php
 msgid "Rescan Site"
-msgstr "Återcan-enhet"
+msgstr "Skanna platsen igen"
 
 #: mactrack_view_sites.php
 msgid "View Devices"
@@ -2151,7 +2151,7 @@ msgstr "Platser / Enhetstyper"
 
 #: mactrack_view_sites.php
 msgid "Site Scan Results"
-msgstr "Ta bort alla scanningsresultat"
+msgstr "Skanningsresultat för platsen"
 
 #: setup.php
 msgid "Mactrack"
@@ -2183,7 +2183,7 @@ msgstr "Maximal körtid för skannern"
 
 #: setup.php
 msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
-msgstr "Ange hur många minuter en enhet för skanning av en enhet ska kunna köra innan systemet antas att det har slutförts. Den här inställningen kommer att korrigeras för misslyckade skanningsjobb."
+msgstr "Ange hur många minuter en enhetsskanning får köras innan systemet antar att den är klar. Inställningen hanterar skanningsjobb som har avbrutits med fel."
 
 #: setup.php
 msgid "Start Time for Data Collection"
@@ -2199,7 +2199,7 @@ msgstr "Databasunderhållstid"
 
 #: setup.php
 msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
-msgstr "När ska gamla databasposter tas bort från databasen. Observera att porten inte tillåter åtkomst när den här åtgärden äger rum."
+msgstr "När ska gamla poster tas bort från databasen? Observera att portdatabasen inte kan nås medan detta pågår."
 
 #: setup.php
 msgid "Confirm Utilities Prompt"
@@ -2219,19 +2219,19 @@ msgstr "Hur länge ska port MAC-detaljer behållas i databasen."
 
 #: setup.php
 msgid "Data Retention IPs"
-msgstr "Datalagring"
+msgstr "Lagringstid för IP-adresser"
 
 #: setup.php
 msgid "How long should discovered IPs details be retained in the database."
-msgstr "Hur länge ska port MAC-detaljer behållas i databasen."
+msgstr "Hur länge ska uppgifter om upptäckta IP-adresser sparas i databasen?"
 
 #: setup.php
 msgid "Switch Level Ignore Ports Delimiter"
-msgstr "Switch Level Ignorera Ports Delimiter"
+msgstr "Avgränsare för ignorerade portar per switch"
 
 #: setup.php
 msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
-msgstr "Vilken avgränsare ska Mactrack använda när strängen Ignore Ports analyseras för varje switch."
+msgstr "Vilken avgränsare ska Mactrack använda när listan över ignorerade portar för varje switch tolkas?"
 
 #: setup.php
 msgid "Auto Detect"
@@ -2243,15 +2243,15 @@ msgstr "Kolon [:]"
 
 #: setup.php
 msgid "Pipe [|]"
-msgstr "Rör [|]"
+msgstr "Vertikalstreck [|]"
 
 #: setup.php
 msgid "Space [ ]"
-msgstr "Rymden [ ]"
+msgstr "Mellanslag [ ]"
 
 #: setup.php
 msgid "Mac Address Output Format"
-msgstr "Mac-adress Utmatningsformat"
+msgstr "Visningsformat för MAC-adresser"
 
 #: setup.php
 msgid "Format used for display."
@@ -2263,15 +2263,15 @@ msgstr "Portar att ignorera"
 
 #: setup.php
 msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
-msgstr "Ge ett regelbundet uttryck för ifNames eller ifDescriptions of ports att ignorera i gränssnittslistan. Till exempel (Vlan | Loopback | Null)."
+msgstr "Ange ett reguljärt uttryck för ifName eller ifDescription för portar som ska ignoreras i gränssnittslistan. Exempel: (Vlan|Loopback|Null)."
 
 #: setup.php
 msgid "Bandwidth Usage Threshold"
-msgstr "Bandbredd Användningsgräns"
+msgstr "Tröskel för bandbreddsanvändning"
 
 #: setup.php
 msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
-msgstr "När du granskar nätverksgränssnittsstatistik, vilken bandbreddströskel du vill visa som standard."
+msgstr "Vilken bandbreddströskel ska visas som standard när du granskar statistik för nätverksgränssnitt?"
 
 #: setup.php
 #, php-format
@@ -2292,19 +2292,19 @@ msgstr "Ska Mactrack utföra omvänd DNS-uppslagning av IP-adresserna som är as
 
 #: setup.php
 msgid "Primary DNS IP Address"
-msgstr "Primär DNS IP-adress"
+msgstr "Primär DNS-servers IP-adress"
 
 #: setup.php
 msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
-msgstr "Ange den primära DNS-IP-adressen för att använda för omvända sökningar."
+msgstr "Ange IP-adressen till den primära DNS-servern för omvända uppslagningar."
 
 #: setup.php
 msgid "Secondary DNS IP Address"
-msgstr "Sekundär DNS IP-adress"
+msgstr "Sekundär DNS-servers IP-adress"
 
 #: setup.php
 msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
-msgstr "Ange den sekundära DNS-IP-adressen för att använda för omvända sökningar."
+msgstr "Ange IP-adressen till den sekundära DNS-servern för omvända uppslagningar."
 
 #: setup.php
 msgid "DNS Timeout"
@@ -2328,7 +2328,7 @@ msgstr "Inställningar för aviseringar"
 
 #: setup.php
 msgid "Source Address"
-msgstr "Käll adress"
+msgstr "Avsändaradress"
 
 #: setup.php
 msgid "The source Email address for Mactrack Emails."
@@ -2336,11 +2336,11 @@ msgstr "E-postadressen för Mactracks e-postmeddelanden."
 
 #: setup.php
 msgid "Source Email Name"
-msgstr "Källa E-postnamn"
+msgstr "Avsändarnamn"
 
 #: setup.php
 msgid "The Source Email name for Mactrack Emails."
-msgstr "Källans e-postnamn för Mactrack-e-postmeddelanden."
+msgstr "Avsändarnamnet för e-postmeddelanden från Mactrack."
 
 #: setup.php
 msgid "MACTrack Administrator"
@@ -2376,7 +2376,7 @@ msgstr "Hur ofta kommer MacAuth-rapporterna att skickas."
 
 #: setup.php
 msgid "Mactrack ArpWatch Settings"
-msgstr "Mactrack ArpKlockinställningar"
+msgstr "ArpWatch-inställningar för Mactrack"
 
 #: setup.php
 msgid "Enable ArpWatch"
@@ -2412,39 +2412,39 @@ msgstr "Standard SNMP-version för alla nya värdar."
 
 #: setup.php
 msgid "Default SNMP read community for all new hosts."
-msgstr "Standard SNMP läs community för alla nya värdar."
+msgstr "SNMP-lässträng som standard för alla nya värdar."
 
 #: setup.php
 msgid "Communities"
-msgstr "SNMP-gemenskaper"
+msgstr "SNMP-lässträngar"
 
 #: setup.php
 msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
-msgstr "Fyll i listan över tillgängliga SNMP-lässträngar för att testa för den här enheten. Varje lässträng måste separeras med ett kolon ':'. Dessa lässträngar testas i följd om den primära lässträngen är ogiltig."
+msgstr "Ange de SNMP-lässträngar som ska testas för den här enheten. Separera strängarna med kolon (:). Om den primära lässträngen är ogiltig testas dessa strängar i tur och ordning."
 
 #: setup.php
 msgid "The UDP/TCP Port to poll the SNMP agent on."
-msgstr "UDP / TCP-porten för att undersöka SNMP-agenten på."
+msgstr "UDP/TCP-porten som används för att polla SNMP-agenten."
 
 #: setup.php
 msgid "Default SNMP timeout in milli-seconds."
-msgstr "Standard SNMP-timeout i millisekunder."
+msgstr "SNMP-tidsgräns som standard, i millisekunder."
 
 #: setup.php
 msgid "The number times the SNMP poller will attempt to reach the host before failing."
-msgstr "Antalet gånger SNMP pollen kommer att försöka nå värden innan de misslyckas."
+msgstr "Antalet försök som SNMP-pollaren gör för att nå värden innan den ger upp."
 
 #: setup.php
 msgid "snmpbulkwalk Binary Path"
-msgstr "snmpbulkwalk binär sökväg"
+msgstr "Sökväg till snmpbulkwalk"
 
 #: setup.php
 msgid "The path to your snmpbulkwalk binary."
-msgstr "Vägen till din snmpbulkwalk binära."
+msgstr "Sökvägen till programmet snmpbulkwalk."
 
 #: setup.php
 msgid "MacTrack Settings"
-msgstr "SNMP-inställningar"
+msgstr "MacTrack-inställningar"
 
 #: setup.php
 msgid "Default Tab"
@@ -2452,7 +2452,7 @@ msgstr "Standardflik"
 
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
-msgstr "Vilken MacTrack-flik vill du vara din standardflik varje gång du går till MacTrack-sekunden."
+msgstr "Vilken flik ska visas som standard när du öppnar MacTrack?"
 
 #: setup.php
 msgid "IP Addresses"
@@ -2460,7 +2460,7 @@ msgstr "IP-adresser"
 
 #: setup.php
 msgid "Mac Addresses"
-msgstr "MAC-adress"
+msgstr "MAC-adresser"
 
 #: setup.php
 msgid "dot1x Deta"
@@ -2468,11 +2468,11 @@ msgstr "dot1x Deta"
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "Inställningar för Internet-proxy"
+msgstr "Inställningar för internetproxy"
 
 #: setup.php
 msgid "Internet Proxy Address"
-msgstr "Proxy-adress för Internet"
+msgstr "Adress till internetproxy"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
@@ -2528,15 +2528,15 @@ msgstr "Verktyg för Mac-adressbehörighet"
 
 #: setup.php
 msgid "Mactrack Vendor Macs"
-msgstr "Mactrack Säljare Mac-datorer"
+msgstr "Mactrack: MAC-adresser per tillverkare"
 
 #: setup.php
 msgid "Mactrack View Macs"
-msgstr "Mactrack View Mac-datorer"
+msgstr "Mactrack: visa MAC-adresser"
 
 #: setup.php
 msgid "Mactrack Dot1x View"
-msgstr "Mactrack Dot1x Visa"
+msgstr "Mactrack: visa 802.1X"
 
 #: setup.php
 msgid "Mactrack IP Address Viewer"
@@ -2544,23 +2544,23 @@ msgstr "Mactrack IP-adressvisare"
 
 #: setup.php
 msgid "Mactrack View Interfaces"
-msgstr "Gränssnitt för Mactrack View"
+msgstr "Mactrack: visa gränssnitt"
 
 #: setup.php
 msgid "Mactrack View Sites"
-msgstr "Mactrack Visa platser"
+msgstr "Mactrack: visa platser"
 
 #: setup.php
 msgid "Mactrack View IP Ranges"
-msgstr "Mactrack ser IP-sortiment"
+msgstr "Mactrack: visa IP-intervall"
 
 #: setup.php
 msgid "Mactrack View Devices"
-msgstr "Mactrack Visa enheter"
+msgstr "Mactrack: visa enheter"
 
 #: setup.php
 msgid "Mactrack Utilities"
-msgstr "Mactrack Verktyg"
+msgstr "Mactrack-verktyg"
 
 #: setup.php
 msgid "Truncate Port Results Table"
@@ -2572,15 +2572,15 @@ msgstr "Töm tabellen med aggregerade portresultat"
 
 #: setup.php
 msgid "Truncate and Re-create Aggregated Port Results Table"
-msgstr "Avkorta och återskapa Aggregated Port Results Table"
+msgstr "Töm och återskapa tabellen med aggregerade portresultat"
 
 #: setup.php
 msgid "Refresh/Update Vendor MAC Database from IEEE"
-msgstr "Uppdatera / uppdatera leverantör MAC databas från IEEE"
+msgstr "Uppdatera databasen med MAC-tillverkare från IEEE"
 
 #: setup.php
 msgid "Mactrack Graph Viewer"
-msgstr "Mactrack grafvisare"
+msgstr "Mactrack: visa grafer"
 
 #: setup.php
 msgid "MacTrack"
@@ -2598,7 +2598,7 @@ msgstr "%d minut"
 
 #: setup.php
 msgid "Matches"
-msgstr "Matcher"
+msgstr "Matchar"
 
 #: setup.php
 msgid "Contains"
@@ -2618,11 +2618,11 @@ msgstr "Börjar inte med"
 
 #: setup.php
 msgid "Is Null"
-msgstr "Är inget"
+msgstr "Är null"
 
 #: setup.php
 msgid "Is Not Null"
-msgstr "Är inte noll"
+msgstr "Är inte null"
 
 #: setup.php
 msgid "Half"
@@ -2643,17 +2643,17 @@ msgstr "Synkronisera Mactrack-enhet till Cacti-enhet"
 #: setup.php
 #, php-format
 msgid "Every %d Minutes"
-msgstr "Var %d:e minut"
+msgstr "Med %d minuters mellanrum"
 
 #: setup.php
 #, php-format
 msgid "Every %d Hour"
-msgstr "Varje %d timme"
+msgstr "Var %d:e timme"
 
 #: setup.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "Var %d:e timme"
+msgstr "Med %d timmars mellanrum"
 
 #: setup.php
 msgid "Every Day"
@@ -2676,7 +2676,7 @@ msgstr "%d år"
 
 #: setup.php
 msgid "On Scan Completion"
-msgstr "På Scan-slutförandet"
+msgstr "När avsökningen är klar"
 
 #: setup.php
 #, php-format
@@ -2701,7 +2701,7 @@ msgstr "Mac Watch"
 
 #: setup.php
 msgid "Mactrack Tools"
-msgstr "Mactrack Verktyg"
+msgstr "Mactrack-verktyg"
 
 #: setup.php
 msgid "Mac Authorizations"
@@ -2721,7 +2721,7 @@ msgstr "Ge denna typ av enhet en meningsfull beskrivning."
 
 #: setup.php
 msgid "Fill in the name for the vendor of this device type."
-msgstr "Fyll i namnet på säljaren av denna enhetstyp."
+msgstr "Ange namnet på tillverkaren av denna enhetstyp."
 
 #: setup.php
 msgid "Choose the type of device."
@@ -2737,11 +2737,11 @@ msgstr "Ange nyckelinformation som hjälper Mactrack att identifiera enhetstypen
 
 #: setup.php
 msgid "Vendor SNMP Object ID Match"
-msgstr "Säljare SNMP Object ID Match"
+msgstr "Matchning av tillverkarens SNMP-objektidentifierare"
 
 #: setup.php
 msgid "MAC Address Scanning Function"
-msgstr "MAC-adresskanningsfunktion"
+msgstr "Funktion för avsökning av MAC-adresser"
 
 #: setup.php
 msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
@@ -2749,35 +2749,35 @@ msgstr "Mactracks skanningsfunktion som ska anropas för att hämta och lagra po
 
 #: setup.php
 msgid "IP Address Scanning Function"
-msgstr "IP-adresskanningsfunktion"
+msgstr "Funktion för avsökning av IP-adresser"
 
 #: setup.php
 msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
-msgstr "Mactracks skanningsfunktion som är specifik för Layer3-enheter som spårar IP-adresser."
+msgstr "Mactracks avsökningsfunktion för lager 3-enheter som spårar IP-adresser."
 
 #: setup.php
 msgid "802.1x Scanning Function"
-msgstr "802.1x Skanning Funktion"
+msgstr "Funktion för 802.1X-avsökning"
 
 #: setup.php
 msgid "Mactrack scanning function specific to Switches with dot1x enabled."
-msgstr "Mactrack-skanningsfunktion som är specifik för switchar med dot1x aktiverat."
+msgstr "Mactracks avsökningsfunktion för switchar med 802.1X aktiverat."
 
 #: setup.php
 msgid "Serial Number Base OID"
-msgstr "Serienummerbas OID"
+msgstr "Bas-OID för serienummer"
 
 #: setup.php
 msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
-msgstr "SNMP OID som används för att hämta serienumret för denna enhetstyp som ska lagras i tabellen Mactrack Asset Information."
+msgstr "SNMP-OID som används för att hämta enhetstypens serienummer och lagra det i Mactracks tabell för tillgångsinformation."
 
 #: setup.php
 msgid "Serial Number Collection Method"
-msgstr "Serienummer samlingsmetod"
+msgstr "Metod för insamling av serienummer"
 
 #: setup.php
 msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
-msgstr "Hur samlas serienumret in för denna OID? Vid ”SNMP Walk” förutsätter vi flera serienummer. Vid ”Get” blir det bara ett."
+msgstr "Hur samlas serienumret in för denna OID? Vid ”SNMP-genomgång” förutsätts flera serienummer. Vid ”SNMP-hämtning” finns bara ett."
 
 #: setup.php
 msgid "SNMP Get"
@@ -2789,11 +2789,11 @@ msgstr "SNMP-genomgång"
 
 #: setup.php
 msgid "Low User Port Number"
-msgstr "Låg användarportnummer"
+msgstr "Lägsta användarportnummer"
 
 #: setup.php
 msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
-msgstr "Ange låga användarportnummer på den här omkopplaren. Lämna 0 för att låta systemet beräkna det."
+msgstr "Ange det lägsta användarportnumret på den här switchen. Lämna värdet 0 för att låta systemet beräkna det."
 
 #: setup.php
 msgid "High User Port Number"
@@ -2805,11 +2805,11 @@ msgstr "Inaktiverad enhetstyp används inte."
 
 #: setup.php
 msgid "Fill in the name of this SNMP option set."
-msgstr "Fyll i namnet på denna SNMP-alternativsats."
+msgstr "Ange namnet på den här uppsättningen SNMP-alternativ."
 
 #: setup.php
 msgid "SNMP Version"
-msgstr "SNMP-versionen"
+msgstr "SNMP-version"
 
 #: setup.php
 msgid "Choose the SNMP version for this host."
@@ -2821,11 +2821,11 @@ msgstr "SNMP-communitysträng"
 
 #: setup.php
 msgid "Fill in the SNMP read community for this device."
-msgstr "Fyll i SNMP-läsgemenskapen för den här enheten."
+msgstr "Ange SNMP-communitysträngen för läsåtkomst till den här enheten."
 
 #: setup.php
 msgid "SNMP Port"
-msgstr "SNMP-porten"
+msgstr "SNMP-port"
 
 #: setup.php
 msgid "SNMP Timeout"
@@ -2841,15 +2841,15 @@ msgstr "SNMP-försök"
 
 #: setup.php
 msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
-msgstr "Det maximala antalet försök att nå en enhet via en SNMP-läsning innan du ger upp."
+msgstr "Det maximala antalet försök att nå en enhet med SNMP-communitysträngen för läsåtkomst innan försöken avbryts."
 
 #: setup.php
 msgid "Maximum OID's Per Get Request"
-msgstr "Högsta OID: s Per Get-förfrågan"
+msgstr "Högsta antal OID:er per Get-förfrågan"
 
 #: setup.php
 msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
-msgstr "Specificerat antalet OID: er som kan erhållas i en enda SNMP-förfrågan."
+msgstr "Ange antalet OID:er som kan hämtas i en enskild SNMP Get-förfrågan."
 
 #: setup.php
 msgid "SNMP Username (v3)"
@@ -2877,19 +2877,19 @@ msgstr "Välj auktoriseringsprotokoll för SNMPv3."
 
 #: setup.php
 msgid "SNMP Privacy Passphrase (v3)"
-msgstr "SNMP-sekretesslösenfras (v3)"
+msgstr "SNMP-lösenfras för kryptering (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Passphrase."
-msgstr "Välj sekretesslösenfras för SNMPv3."
+msgstr "Välj lösenfras för SNMPv3-kryptering."
 
 #: setup.php
 msgid "SNMP Privacy Protocol (v3)"
-msgstr "SNMP-sekretessprotokoll (v3)"
+msgstr "SNMP-krypteringsprotokoll (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Protocol."
-msgstr "Välj sekretessprotokoll för SNMPv3."
+msgstr "Välj krypteringsprotokoll för SNMPv3."
 
 #: setup.php
 msgid "SNMP Context (v3)"
@@ -2905,11 +2905,11 @@ msgstr "SNMP-motor-ID (v3)"
 
 #: setup.php
 msgid "Enter the SNMP v3 Engine ID to use for this device."
-msgstr "Ange SNMP v3 Engine ID som ska användas för den här enheten."
+msgstr "Ange SNMP v3-motor-ID som ska användas för den här enheten."
 
 #: setup.php
 msgid "General Device Settings"
-msgstr "Allmänna enhetens inställningar"
+msgstr "Allmänna enhetsinställningar"
 
 #: setup.php
 msgid "Give this device a meaningful name."
@@ -2921,19 +2921,19 @@ msgstr "Fyll i det fullt kvalificerade värdnamnet för den här enheten."
 
 #: setup.php
 msgid "Related Cacti Host"
-msgstr "Relaterad Cacti Host"
+msgstr "Tillhörande Cacti-värd"
 
 #: setup.php
 msgid "Given Mactrack Host is connected to this Cacti Host."
-msgstr "Given Mactrack Host är ansluten till denna Cacti Host."
+msgstr "Den angivna Mactrack-värden är ansluten till den här Cacti-värden."
 
 #: setup.php
 msgid "Scan Type"
-msgstr "Skanningstyp"
+msgstr "Avsökningstyp"
 
 #: setup.php
 msgid "Choose the scan type you wish to perform on this device."
-msgstr "Välj den skanningstyp du vill utföra på den här enheten."
+msgstr "Välj vilken typ av avsökning som ska utföras på den här enheten."
 
 #: setup.php
 msgid "Choose the site to associate with this device."
@@ -2941,11 +2941,11 @@ msgstr "Välj platsen som ska associeras med den här enheten."
 
 #: setup.php
 msgid "Device Notes"
-msgstr "Enhetsanvisningar"
+msgstr "Anteckningar om enheten"
 
 #: setup.php
 msgid "This field value is useful to save general information about a specific device."
-msgstr "Detta fältvärde är användbart för att spara allmän information om en viss enhet."
+msgstr "Använd det här fältet för att spara allmän information om enheten."
 
 #: setup.php
 msgid "Disable Device"
@@ -2957,11 +2957,11 @@ msgstr "Markera den här rutan för att inaktivera alla kontroller för den här
 
 #: setup.php
 msgid "Switch/Hub, Switch/Router Settings"
-msgstr "Switch / Hub, Switch / Router Settings"
+msgstr "Inställningar för switch/hubb och switch/router"
 
 #: setup.php
 msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
-msgstr "Ange en lista över portar på en specifik switch / nav, vars MAC-resultat ska ignoreras. Portar som länk / trunkportar som inte kan särskiljas från andra användarportar är exempel. Varje portnummer måste separeras med ett kolon, ett rör eller ett mellanslag ':', '|', ''. Till exempel skulle \"Fa0 / 1: Fa1 / 23\" eller \"Fa0 / 1 Fa1 / 23\" vara acceptabelt för vissa tillverkares switch-typer."
+msgstr "Ange en lista över portar på en viss switch eller hubb vars MAC-resultat ska ignoreras. Det kan till exempel vara länkportar eller trunkportar som inte kan skiljas från andra användarportar. Portnumren ska separeras med kolon ':', lodstreck '|' eller mellanslag ' '. För vissa tillverkares switchar fungerar exempelvis 'Fa0/1: Fa1/23' eller 'Fa0/1 Fa1/23'."
 
 #: setup.php
 msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
@@ -2969,11 +2969,11 @@ msgstr "Du kan använda specifika SNMP-inställningar eller välja SNMP-uppsätt
 
 #: setup.php
 msgid "Read Strings"
-msgstr "Läs strängar"
+msgstr "Communitysträngar för läsåtkomst"
 
 #: setup.php
 msgid "<strong>DEPRECATED:</strong> SNMP community strings"
-msgstr "<strong>DEPRECATED:</strong> SNMP community strängar"
+msgstr "<strong>FÖRÅLDRAD:</strong> SNMP-communitysträngar"
 
 #: setup.php
 msgid "Specific SNMP Settings"
@@ -2985,7 +2985,7 @@ msgstr "Anslutningsalternativ"
 
 #: setup.php
 msgid "Terminal Type"
-msgstr "Terminal typ"
+msgstr "Terminaltyp"
 
 #: setup.php
 msgid "Choose the terminal type that you use to connect to this device."
@@ -3025,11 +3025,11 @@ msgstr "Lösenordet som ska användas för din anpassade autentisering."
 
 #: setup.php
 msgid "Private Key Path"
-msgstr "Privat nyckelväg"
+msgstr "Sökväg till privat nyckel"
 
 #: setup.php
 msgid "The path to the private key used for SSH authentication."
-msgstr "Vägen till den privata nyckeln som används för SSH-autentisering."
+msgstr "Sökvägen till den privata nyckeln som används för SSH-autentisering."
 
 #: setup.php
 msgid "Sequence"
@@ -3037,7 +3037,7 @@ msgstr "Sekvens"
 
 #: setup.php
 msgid "Sequence of Item."
-msgstr "Sekvens av föremålet."
+msgstr "Postens ordningsföljd."
 
 #: setup.php
 msgid "General Site Settings"
@@ -3045,7 +3045,7 @@ msgstr "Allmänna platsinställningar"
 
 #: setup.php
 msgid "Please enter a reasonable name for this site."
-msgstr "Var god ange ett rimligt namn på den här sidan."
+msgstr "Ange ett lämpligt namn för den här platsen."
 
 #: setup.php
 msgid "Primary Customer Contact"
@@ -3061,23 +3061,23 @@ msgstr "NetOps-kontakt"
 
 #: setup.php
 msgid "Please principal network support contact name and number for this site."
-msgstr "Huvudkontorets kontaktnamn och nummer för nätverkssupport för den här platsen."
+msgstr "Ange namn och telefonnummer till den huvudsakliga kontaktpersonen för nätverkssupport på den här platsen."
 
 #: setup.php
 msgid "Facilities Contact"
-msgstr "Faciliteter Kontakt"
+msgstr "Kontaktperson för lokaler"
 
 #: setup.php
 msgid "Please principal facilities/security contact name and number for this site."
-msgstr "Huvudkontor / säkerhet kontaktnamn och nummer för denna plats."
+msgstr "Ange namn och telefonnummer till den huvudsakliga kontaktpersonen för lokaler och säkerhet på den här platsen."
 
 #: setup.php
 msgid "Site Information"
-msgstr "Sidinformation"
+msgstr "Platsinformation"
 
 #: setup.php
 msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
-msgstr "Ge någon platsspecifik information, i fri form, så att du bättre kan hantera den här platsen."
+msgstr "Ange information om platsen i fritext som hjälper dig att hantera den."
 
 #: setup.php
 msgid "General Mac Address Tracking Settings"
@@ -3089,23 +3089,23 @@ msgstr "Ange MAC-adressen som ska övervakas."
 
 #: setup.php
 msgid "MAC Tracking Name/Email Subject"
-msgstr "MAC-spårningsnamn / e-post ämne"
+msgstr "MAC-spårningsnamn/e-postämne"
 
 #: setup.php
 msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
-msgstr "Var god ange ett rimligt namn för denna MAC Tracking-post. Denna information kommer att finnas i ämnesraden i din e-postadress"
+msgstr "Ange ett lämpligt namn för den här MAC-spårningsposten. Namnet kommer att finnas i e-postmeddelandets ämnesrad"
 
 #: setup.php
 msgid "Ticket number for cross referencing with your corporate help desk system(s)."
-msgstr "Biljettnummer för korsreferens med ditt företags helpdesksystem (er)."
+msgstr "Ärendenummer för korsreferens till företagets ärendehanteringssystem."
 
 #: setup.php
 msgid "Notification Schedule"
-msgstr "Meddelande Schema"
+msgstr "Aviseringsschema"
 
 #: setup.php
 msgid "Choose how often an Email should be generated for this Mac Watch item."
-msgstr "Välj hur ofta en e-post ska genereras för detta Mac Watch-objekt."
+msgstr "Välj hur ofta ett e-postmeddelande ska skapas för den här MAC-övervakningsposten."
 
 #: setup.php
 msgid "First Occurrence Only"
@@ -3125,19 +3125,19 @@ msgstr "E-postadresser"
 
 #: setup.php
 msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
-msgstr "Ange en semikolon separerad av E-postadresser som kommer att meddelas var denna MAC-adress är."
+msgstr "Ange en lista med e-postadresser, separerade med semikolon, som ska meddelas om var MAC-adressen finns."
 
 #: setup.php
 msgid "General Mac Address Authorization Settings"
-msgstr "Allmänna Mac-adressbehörighetsinställningar"
+msgstr "Allmänna inställningar för auktorisering av MAC-adresser"
 
 #: setup.php
 msgid "MAC Address Match"
-msgstr "MAC Adress Match"
+msgstr "MAC-adressmönster"
 
 #: setup.php
 msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
-msgstr "Ange MAC-adressen eller MAC-adressmatchningssträngen som ska godkännas automatiskt. Om du vill godkänna en grupp MAC-adresser kan du använda jokertecknet ”%” var som helst i MAC-adressen."
+msgstr "Ange den MAC-adress eller det MAC-adressmönster som ska auktoriseras automatiskt. Om du vill auktorisera en grupp MAC-adresser kan du använda jokertecknet ”%” var som helst i adressen."
 
 #: setup.php
 msgid "Please add a reason for this entry."
