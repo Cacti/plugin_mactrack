@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-26 10:32+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-26 10:51+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -368,7 +368,7 @@ msgstr "Ej tillämpligt - Switch / Hub"
 #: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
 #: mactrack_view_macs.php
 msgid "Delete"
-msgstr "Radera"
+msgstr "Ta bort"
 
 #: mactrack_device_types.php mactrack_snmp.php
 msgid "Duplicate"
@@ -1230,7 +1230,7 @@ msgstr "Status för aktuell process"
 
 #: mactrack_utilities.php
 msgid "The Mactrack Poller is:"
-msgstr "Mactrack Poller är det:"
+msgstr "Mactracks insamlingsprocess är:"
 
 #: mactrack_utilities.php
 msgid "Running Processes:"
@@ -1238,11 +1238,11 @@ msgstr "Körande processer:"
 
 #: mactrack_utilities.php
 msgid "Last Time Poller Started:"
-msgstr "Senaste gången Poller startade:"
+msgstr "Insamlingsprocessen startade senast:"
 
 #: mactrack_utilities.php
 msgid "Poller Frequency:"
-msgstr "Poller Frekvens:"
+msgstr "Insamlingsintervall:"
 
 #: mactrack_utilities.php
 msgid "Approx. Next Runtime:"
@@ -1266,11 +1266,11 @@ msgstr "Körtidens detaljer"
 
 #: mactrack_utilities.php
 msgid "Last Poller Runtime:"
-msgstr "Senaste Poller Runtime:"
+msgstr "Senaste insamlingskörningens längd:"
 
 #: mactrack_utilities.php
 msgid "Last Poller Maintenance Runtime:"
-msgstr "Last Poller Underhåll Runtime:"
+msgstr "Senaste underhållskörningens längd:"
 
 #: mactrack_utilities.php
 msgid "Maximum Concurrent Processes:"
@@ -2432,7 +2432,7 @@ msgstr "SNMP-tidsgräns som standard, i millisekunder."
 
 #: setup.php
 msgid "The number times the SNMP poller will attempt to reach the host before failing."
-msgstr "Antalet försök som SNMP-pollaren gör för att nå värden innan den ger upp."
+msgstr "Antalet försök som SNMP-insamlaren gör för att nå värden innan den ger upp."
 
 #: setup.php
 msgid "snmpbulkwalk Binary Path"
