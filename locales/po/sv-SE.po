@@ -4,15 +4,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-26 10:51+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-26 11:44+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
-msgstr "MacTrack kunde inte initiera sin standardwebbplats efter upprepade försök. Granska Cacti-loggen innan du fortsätter."
+msgstr "MacTrack kunde inte initiera sin standardplats efter upprepade försök. Granska Cacti-loggen innan du fortsätter."
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
-msgstr "MacTrack kunde inte initiera sin standardwebbplats. Granska Cacti-loggen innan du fortsätter."
+msgstr "MacTrack kunde inte initiera sin standardplats. Granska Cacti-loggen innan du fortsätter."
 
 #: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
 msgid "Idle"
@@ -99,19 +99,19 @@ msgstr "Skanna om enhet"
 
 #: lib/mactrack_functions.php
 msgid "View Non Interface Graphs"
-msgstr "Visa diagram utan gränssnitt"
+msgstr "Visa grafer som inte gäller gränssnitt"
 
 #: lib/mactrack_functions.php
 msgid "No Non Interface Graphs in Cacti"
-msgstr "Det finns inga diagram utan gränssnitt i Cacti"
+msgstr "Det finns inga grafer som inte gäller gränssnitt i Cacti"
 
 #: lib/mactrack_functions.php
 msgid "View Interface Graphs"
-msgstr "Visa gränssnittsdiagram"
+msgstr "Visa gränssnittsgrafer"
 
 #: lib/mactrack_functions.php
 msgid "No Interface Graphs in Cacti"
-msgstr "Det finns inga gränssnittsdiagram i Cacti"
+msgstr "Det finns inga gränssnittsgrafer i Cacti"
 
 #: lib/mactrack_functions.php
 msgid "Since Restart"
@@ -141,7 +141,7 @@ msgstr "Kasseringar"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
 msgid "Graphless"
-msgstr "Utan diagram"
+msgstr "Utan grafer"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
@@ -503,7 +503,7 @@ msgstr " - IP-skanningsfunktionen som ska användas för att skanna denna enhets
 
 #: mactrack_device_types.php
 msgid " - The 802.1x scanning function that will be used to scan this device type"
-msgstr " - Funktionen 802.1x-skanning som ska användas för att skanna den här enhetstypen"
+msgstr " - 802.1X-skanningsfunktionen som ska användas för att skanna den här enhetstypen"
 
 #: mactrack_device_types.php
 msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
@@ -996,7 +996,7 @@ msgstr "Orsak"
 
 #: mactrack_macauth.php
 msgid "Added/Modified"
-msgstr "Inkom / Ändrad"
+msgstr "Tillagd/ändrad"
 
 #: mactrack_macauth.php
 msgid "By"
@@ -1004,11 +1004,11 @@ msgstr "Av"
 
 #: mactrack_macauth.php
 msgid "Authorized Mac Addresses"
-msgstr "Auktoriserade Mac-adresser"
+msgstr "Auktoriserade MAC-adresser"
 
 #: mactrack_macauth.php
 msgid "No Authorized Mac Addresses Found"
-msgstr "Inga auktoriserade Mac-adresser hittades"
+msgstr "Inga auktoriserade MAC-adresser hittades"
 
 #: mactrack_macauth.php mactrack_vendormacs.php mactrack_view_macs.php
 msgid "MAC's"
@@ -1037,7 +1037,7 @@ msgstr "Bevakningens namn"
 
 #: mactrack_macwatch.php setup.php
 msgid "Ticket Number"
-msgstr "Biljettnummer"
+msgstr "Ärendenummer"
 
 #: mactrack_macwatch.php
 msgid "First Seen"
@@ -1057,7 +1057,7 @@ msgstr "Inga bevakade MAC-adresser hittades i Mactrack"
 
 #: mactrack_sites.php
 msgid "Click 'Continue' to delete the following Site(s)?"
-msgstr "Klicka på \"Fortsätt\" för att radera följande sajter?"
+msgstr "Klicka på ”Fortsätt” för att ta bort följande platser."
 
 #: mactrack_sites.php
 msgid "You must select at least one site."
@@ -1074,7 +1074,7 @@ msgstr "Mactrack-plats [ny]"
 
 #: mactrack_sites.php
 msgid "Mactrack Site Filters"
-msgstr "Filter för Mactrack-anläggningar"
+msgstr "Filter för Mactrack-platser"
 
 #: mactrack_sites.php mactrack_view_devices.php mactrack_view_sites.php
 msgid "Total IP's"
@@ -1202,7 +1202,7 @@ msgstr "Inga SNMP-poster hittades"
 
 #: mactrack_snmp.php
 msgid "Title of SNMP Option Set"
-msgstr "Titel för SNMP-alternativsats"
+msgstr "Titel för uppsättningen SNMP-alternativ"
 
 #: mactrack_snmp.php
 msgid "SNMP Settings"
@@ -1262,7 +1262,7 @@ msgstr "Nästa underhållstid för databas:"
 
 #: mactrack_utilities.php
 msgid "Run Time Details"
-msgstr "Körtidens detaljer"
+msgstr "Körtidsinformation"
 
 #: mactrack_utilities.php
 msgid "Last Poller Runtime:"
@@ -1306,7 +1306,7 @@ msgstr "Sekundär DNS-server:"
 
 #: mactrack_utilities.php
 msgid "DNS Resolution Timeout:"
-msgstr "DNS-upplösningstidsavbrott:"
+msgstr "Tidsgräns för DNS-upplösning:"
 
 #: mactrack_utilities.php
 msgid "milliseconds"
@@ -1326,7 +1326,7 @@ msgstr "DNS-upplösaren körs"
 
 #: mactrack_utilities.php
 msgid "Date Started"
-msgstr "Datum startat"
+msgstr "Startdatum"
 
 #: mactrack_utilities.php
 msgid "Completed"
@@ -1393,7 +1393,7 @@ msgstr "Visa status för Mactrack-processen"
 
 #: mactrack_utilities.php
 msgid "This option will let you show and set process information associated with the Mactrack polling process."
-msgstr "Med det här alternativet kan du visa och ställa in processinformation som är kopplad till Mactracks pollingprocess."
+msgstr "Med det här alternativet kan du visa och ställa in processinformation som är kopplad till Mactracks insamlingsprocess."
 
 #: mactrack_utilities.php
 msgid "Database Administration"
@@ -1513,7 +1513,7 @@ msgstr "Portnamn"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "Last Scan Date"
-msgstr "Sista skanningsdatum"
+msgstr "Senaste skanningsdatum"
 
 #: mactrack_view_arp.php
 msgid "ARP Cache"
@@ -1778,7 +1778,7 @@ msgstr "Redigera enhet"
 
 #: mactrack_view_devices.php
 msgid "View Graphs"
-msgstr "Se grafer"
+msgstr "Visa grafer"
 
 #: mactrack_view_devices.php
 msgid "Device Not Mapped to Cacti Device"
@@ -1798,7 +1798,7 @@ msgstr "Hubb/switch"
 
 #: mactrack_view_dot1x.php
 msgid "Mactrack - 802.1x View"
-msgstr "Mactrack - 802.1x vy"
+msgstr "Mactrack – 802.1X-vy"
 
 #: mactrack_view_dot1x.php
 msgid "Domain"
@@ -1806,11 +1806,11 @@ msgstr "Domän"
 
 #: mactrack_view_dot1x.php
 msgid "802.1x Sessions"
-msgstr "802.1x sessioner"
+msgstr "802.1X-sessioner"
 
 #: mactrack_view_dot1x.php
 msgid "No Mactrack 802.1x Sessions Found"
-msgstr "Inga Mactrack 802.1x-sessioner hittades"
+msgstr "Inga Mactrack 802.1X-sessioner hittades"
 
 #: mactrack_view_dot1x.php
 msgid "Dot1x Scan Results"
@@ -2049,7 +2049,7 @@ msgstr "Visa IP-adresser"
 
 #: mactrack_view_ips.php
 msgid "No Mactrack Site IP Ranges Found"
-msgstr "Inga IP-områden för Mactrack-platsen hittades"
+msgstr "Inga IP-intervall för Mactrack-platsen hittades"
 
 #: mactrack_view_macs.php
 msgid "Mactrack - MAC to IP Report View"
@@ -2131,7 +2131,7 @@ msgstr "Aggregerad"
 
 #: mactrack_view_sites.php
 msgid "Mactrack - Site Report View"
-msgstr "Mactrack - Visning av webbplatsrapport"
+msgstr "Mactrack – platsrapport"
 
 #: mactrack_view_sites.php
 msgid "Rescan Site"
@@ -2175,7 +2175,7 @@ msgstr "Samtidiga processer"
 
 #: setup.php
 msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
-msgstr "Ange hur många enheter som ska pollas samtidigt tills alla enheter har blivit pollade."
+msgstr "Ange hur många enheter som ska avfrågas samtidigt tills alla enheter har avfrågats."
 
 #: setup.php
 msgid "Scanner Max Runtime"
@@ -2424,7 +2424,7 @@ msgstr "Ange de SNMP-lässträngar som ska testas för den här enheten. Separer
 
 #: setup.php
 msgid "The UDP/TCP Port to poll the SNMP agent on."
-msgstr "UDP/TCP-porten som används för att polla SNMP-agenten."
+msgstr "UDP- eller TCP-porten som används för att avfråga SNMP-agenten."
 
 #: setup.php
 msgid "Default SNMP timeout in milli-seconds."
@@ -2845,7 +2845,7 @@ msgstr "Det maximala antalet försök att nå en enhet med SNMP-communitysträng
 
 #: setup.php
 msgid "Maximum OID's Per Get Request"
-msgstr "Högsta antal OID:er per Get-förfrågan"
+msgstr "Högsta antal OID:er per GET-förfrågan"
 
 #: setup.php
 msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
