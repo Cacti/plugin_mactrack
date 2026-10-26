@@ -49,6 +49,8 @@
 * issue: Mactrack does not shutdown properly due to incorrect use of unregister_process
 * issue: Fixing some internationalization (i18n) issues
 * issue: Mac Addresses are not displaying correctly
+* issue: Store interface packet, error and discard rates in their own columns instead of shifted ones
+* issue: Store the graph template and data query of each interface graph in their own columns instead of swapped
 * feature#68: Proxy Option for downloading MAC/OUI Database
 * feature#228: Add more MAC address formats
 * feature: Add a root manifest.json and upgrade-time file pruning (mactrack_prune_files()) that removes tombstoned and dev-only paths

@@ -171,7 +171,7 @@ test('interface graph links bind the interface name read back from the device', 
 
 	mactrack_test_expect_bound($call, ['Gi1/0/5-lab']);
 
-	expect($call['params'])->toBe([5, 'Gi1/0/5-lab', 41, 9, 12, 7, 2, 'Gi1/0/5-lab', 'ifName']);
+	expect($call['params'])->toBe([5, 'Gi1/0/5-lab', 41, 9, 12, 2, 7, 'Gi1/0/5-lab', 'ifName']);
 });
 
 test('Cisco DHCP snooping rows bind the port, MAC and IP the device reports', function () {
