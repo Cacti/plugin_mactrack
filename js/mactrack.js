@@ -41,7 +41,7 @@ function mactrackScanToast(message) {
 		return;
 	}
 
-	sessionMessage = {
+	window.sessionMessage = {
 		message: message,
 		level:   (typeof MESSAGE_LEVEL_INFO !== 'undefined') ? MESSAGE_LEVEL_INFO : 1
 	};

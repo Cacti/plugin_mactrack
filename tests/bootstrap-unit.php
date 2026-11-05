@@ -323,8 +323,13 @@ if (!function_exists('html_escape')) {
 }
 
 if (!function_exists('__')) {
-	function __($text, $domain = '') {
-		return $text;
+	// Mirror Cacti's variadic __(): a format string plus optional sprintf
+	// arguments and a trailing text domain. Declared with func_get_args() so
+	// static analysis treats it as variadic rather than a fixed 2-arg function.
+	function __() {
+		$args = func_get_args();
+
+		return $args[0] ?? '';
 	}
 }
 
