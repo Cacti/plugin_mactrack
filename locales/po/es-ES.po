@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti 1\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 11:52-0500\n"
+"POT-Creation-Date: 2026-11-05 14:55-0500\n"
 "PO-Revision-Date: 2026-10-11 23:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Spanish <https://translate.cacti.net/projects/cacti/mactrack/es/>\n"
@@ -2142,6 +2142,10 @@ msgstr "Cambió en el último día"
 #: mactrack_view_interfaces.php
 msgid "Bandwidth"
 msgstr "Ancho de banda"
+
+#: mactrack_view_interfaces.php
+msgid "When checked, the Errors, Discards and Unknown Protocol columns show each interface's cumulative SNMP counter totals instead of the average per-second rate."
+msgstr ""
 
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
