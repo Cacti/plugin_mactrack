@@ -415,6 +415,11 @@ function mactrack_view_devices(): void {
 
 			if (api_user_realm_auth('mactrack_sites.php')) {
 				$actions = "<a class='pic' href='" . html_escape($webroot . 'mactrack_devices.php?action=edit&device_id=' . $device['device_id']) . "' title='" . __esc('Edit Device', 'mactrack') . "'><i class='mtEdit fas fa-edit'></i></a>";
+
+				if ($device['disabled'] != 'on') {
+					$actions .= "<a class='pic mactrackRescanDevice' id='r_" . $device['device_id'] . "' data-device-id='" . html_escape($device['device_id']) . "' href='#' title='" . __esc('Rescan Device', 'mactrack') . "'><i class='mtSync fa fa-sync'></i></a>";
+				}
+
 				ob_start();
 				api_plugin_hook_function('remote_link', $hostinfo);
 				$actions .= ob_get_clean();
@@ -463,6 +468,8 @@ function mactrack_view_devices(): void {
 		print $nav;
 		mactrack_display_stats();
 	}
+
+	print '<div id="response" title="' . __esc('Device Scan Results', 'mactrack') . '"></div>';
 }
 
 /**

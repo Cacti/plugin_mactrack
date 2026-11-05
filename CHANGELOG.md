@@ -2,6 +2,9 @@
 
 --- develop ---
 
+* issue: Restore the device-level Rescan action to the Device report view and show a completion/timing toast when a device, interface or site scan finishes
+* issue: Stop the interface/device rescan icon from spinning forever by bounding the request and always clearing the spinner
+* issue: Reorder the MacTrack tabs to Dashboard, Sites, Devices, Interfaces, IP Ranges, IP Addresses, MAC Addresses, Dot1x, Graphs
 * security: Replace MAC action request deserialization with escaped JSON payloads
 * security: Validate and escape MAC bulk-action form values before rendering
 * security: Escape rescan executable and script paths before command execution

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"POT-Creation-Date: 2026-11-05 11:52-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -104,7 +104,7 @@ msgstr ""
 msgid "HOST: %s, IP address information collection complete"
 msgstr ""
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_view_devices.php
 msgid "Rescan Device"
 msgstr ""
 
@@ -181,8 +181,22 @@ msgid "Device Rescan '%s'"
 msgstr ""
 
 #: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr ""
+
+#: lib/mactrack_functions.php
 #, php-format
 msgid "Site scan '%s'"
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
 msgstr ""
 
 #: lib/mactrack_functions.php
@@ -271,20 +285,20 @@ msgstr ""
 msgid "Devices"
 msgstr ""
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr ""
+
 #: lib/mactrack_functions.php
 msgid "IP Ranges"
 msgstr ""
 
-#: lib/mactrack_functions.php
-msgid "IP Address"
-msgstr ""
-
 #: lib/mactrack_functions.php setup.php
-msgid "MAC Address"
+msgid "IP Addresses"
 msgstr ""
 
-#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
-msgid "Interfaces"
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
 msgstr ""
 
 #: lib/mactrack_functions.php
@@ -1804,6 +1818,10 @@ msgid "No Mactrack Devices Found"
 msgstr ""
 
 #: mactrack_view_devices.php
+msgid "Device Scan Results"
+msgstr ""
+
+#: mactrack_view_devices.php
 msgid "Hub/Switch"
 msgstr ""
 
@@ -2110,10 +2128,6 @@ msgstr ""
 
 #: mactrack_view_macs.php
 msgid "VLAN Name"
-msgstr ""
-
-#: mactrack_view_macs.php
-msgid "MAC Addresses"
 msgstr ""
 
 #: mactrack_view_macs.php
@@ -2455,10 +2469,6 @@ msgstr ""
 
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
-msgstr ""
-
-#: setup.php
-msgid "IP Addresses"
 msgstr ""
 
 #: setup.php
@@ -3084,6 +3094,10 @@ msgstr ""
 
 #: setup.php
 msgid "General Mac Address Tracking Settings"
+msgstr ""
+
+#: setup.php
+msgid "MAC Address"
 msgstr ""
 
 #: setup.php

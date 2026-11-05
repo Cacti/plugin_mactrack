@@ -3886,6 +3886,9 @@ function mactrack_rescan($web = false): void {
 			$data['device_id'] = $device_id;
 			$data['ifIndex']   = $ifIndex;
 
+			// time the scan so the completion message can report duration
+			$scan_start = microtime(true);
+
 			// add the cacti header
 			ob_start();
 
@@ -3893,18 +3896,29 @@ function mactrack_rescan($web = false): void {
 			$command = cacti_escapeshellcmd(read_config_option('path_php_binary')) . ' -q ' . cacti_escapeshellarg($command_string) . $extra_args;
 			passthru($command, $exit_code);
 
-			$data['content'] = ob_get_clean();
+			$output  = (string) ob_get_clean();
+			$elapsed = microtime(true) - $scan_start;
+
+			if (trim($output) == '') {
+				$output = '<p>' . __esc('The rescan produced no output.', 'mactrack') . '</p>';
+			}
 
 			if ($exit_code !== 0) {
-				$data['error']    = 'rescan process exited with code ' . intval($exit_code);
-				$data['content'] .= '<p class="textError">' . html_escape('Subprocess error: exit code ' . intval($exit_code)) . '</p>';
+				$data['error'] = 'rescan process exited with code ' . intval($exit_code);
+				$output .= '<p class="textError">' . html_escape('Subprocess error: exit code ' . intval($exit_code)) . '</p>';
 			}
+
+			$data['content'] = $output;
+
+			// short completion/timing summary surfaced as an auto-fading Cacti
+			// toast by the AJAX caller (see mactrackRunScan() in js/mactrack.js)
+			$data['message'] = __('Device \'%s\' rescan completed in %0.2f seconds.', html_escape($dbinfo['hostname']), round($elapsed, 2), 'mactrack');
 		}
 	}
 
 	header('Content-Type: application/json; charset=utf-8');
 
-	print json_encode($data);
+	print json_encode($data, JSON_INVALID_UTF8_SUBSTITUTE);
 }
 
 /**
@@ -3951,6 +3965,9 @@ function mactrack_site_scan($web = false): void {
 		// print out the type, and device_id
 		$data['site_id'] = $site_id;
 
+		// time the scan so the completion message can report duration
+		$scan_start = microtime(true);
+
 		// add the cacti header
 		ob_start();
 
@@ -3960,15 +3977,21 @@ function mactrack_site_scan($web = false): void {
 
 		$data['content'] = ob_get_clean();
 
+		$elapsed = microtime(true) - $scan_start;
+
 		if ($exit_code !== 0) {
 			$data['error']    = 'site_scan process exited with code ' . intval($exit_code);
 			$data['content'] .= '<p class="textError">' . html_escape('Subprocess error: exit code ' . intval($exit_code)) . '</p>';
 		}
+
+		// short completion/timing summary surfaced as an auto-fading Cacti
+		// toast by the AJAX caller (see mactrackRunScan() in js/mactrack.js)
+		$data['message'] = __('Site \'%s\' scan completed in %0.2f seconds.', html_escape($dbinfo['site_name']), round($elapsed, 2), 'mactrack');
 	}
 
 	header('Content-Type: application/json; charset=utf-8');
 
-	print json_encode($data);
+	print json_encode($data, JSON_INVALID_UTF8_SUBSTITUTE);
 }
 
 /**
@@ -4499,10 +4522,10 @@ function mactrack_tabs(): void {
 		'dashboard'  => __('Dashboard', 'mactrack'),
 		'sites'      => __('Sites', 'mactrack'),
 		'devices'    => __('Devices', 'mactrack'),
-		'ips'        => __('IP Ranges', 'mactrack'),
-		'arp'        => __('IP Address', 'mactrack'),
-		'macs'       => __('MAC Address', 'mactrack'),
 		'interfaces' => __('Interfaces', 'mactrack'),
+		'ips'        => __('IP Ranges', 'mactrack'),
+		'arp'        => __('IP Addresses', 'mactrack'),
+		'macs'       => __('MAC Addresses', 'mactrack'),
 		'dot1x'      => __('Dot1x', 'mactrack'),
 		'graphs'     => __('Graphs', 'mactrack')
 	];
