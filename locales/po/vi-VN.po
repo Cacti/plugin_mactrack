@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"POT-Creation-Date: 2026-11-05 11:52-0500\n"
 "PO-Revision-Date: 2026-10-11 23:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Vietnamese <https://translate.cacti.net/projects/cacti/mactrack/vi/>\n"
@@ -106,7 +106,7 @@ msgstr "lắp ráp atEntries hoàn tất."
 msgid "HOST: %s, IP address information collection complete"
 msgstr "HOST: %s, hoàn tất thu thập thông tin địa chỉ IP"
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_view_devices.php
 msgid "Rescan Device"
 msgstr "Thiết bị quét lại"
 
@@ -187,9 +187,23 @@ msgid "Device Rescan '%s'"
 msgstr "Quét lại thiết bị ' %s'"
 
 #: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr ""
+
+#: lib/mactrack_functions.php
 #, php-format
 msgid "Site scan '%s'"
 msgstr "Quét trang web ' %s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr ""
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -277,21 +291,21 @@ msgstr "Websites"
 msgid "Devices"
 msgstr "Thiết bị"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "Giao thức kết nối"
+
 #: lib/mactrack_functions.php
 msgid "IP Ranges"
 msgstr "Phạm vi IP"
 
-#: lib/mactrack_functions.php
-msgid "IP Address"
+#: lib/mactrack_functions.php setup.php
+msgid "IP Addresses"
 msgstr "Địa chỉ IP"
 
-#: lib/mactrack_functions.php setup.php
-msgid "MAC Address"
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
 msgstr "Địa chỉ MAC"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
-msgid "Interfaces"
-msgstr "Giao thức kết nối"
 
 #: lib/mactrack_functions.php
 msgid "Dot1x"
@@ -1914,6 +1928,12 @@ msgid "No Mactrack Devices Found"
 msgstr "Không tìm thấy thiết bị theo dõi thiết bị"
 
 #: mactrack_view_devices.php
+#, fuzzy
+#| msgid "Site Scan Results"
+msgid "Device Scan Results"
+msgstr "Xóa tất cả kết quả quét"
+
+#: mactrack_view_devices.php
 msgid "Hub/Switch"
 msgstr "Hub / Switch"
 
@@ -2231,10 +2251,6 @@ msgstr "VLAN ID"
 #: mactrack_view_macs.php
 msgid "VLAN Name"
 msgstr "Tên Vlan"
-
-#: mactrack_view_macs.php
-msgid "MAC Addresses"
-msgstr "Địa chỉ MAC"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2590,10 +2606,6 @@ msgstr "Tab mặc định"
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr "Bạn muốn tab MacTrack nào làm tab Mặc định của mình mỗi khi bạn truy cập MacTrack thứ hai."
-
-#: setup.php
-msgid "IP Addresses"
-msgstr "Địa chỉ IP"
 
 #: setup.php
 msgid "Mac Addresses"
@@ -3246,6 +3258,10 @@ msgid "General Mac Address Tracking Settings"
 msgstr "Cài đặt theo dõi địa chỉ Mac chung"
 
 #: setup.php
+msgid "MAC Address"
+msgstr "Địa chỉ MAC"
+
+#: setup.php
 msgid "Please enter the MAC Address to be watched for."
 msgstr "Vui lòng nhập Địa chỉ MAC để được theo dõi."
 
@@ -3304,6 +3320,9 @@ msgstr "Vui lòng nhập chuỗi Địa chỉ MAC hoặc Chuỗi Địa chỉ Ma
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Vui lòng thêm một lý do cho mục này."
+
+#~ msgid "IP Address"
+#~ msgstr "Địa chỉ IP"
 
 #~ msgid "Any Status"
 #~ msgstr "Bất kỳ trạng thái"
