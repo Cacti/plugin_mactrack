@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-27 16:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"PO-Revision-Date: 2026-10-27 16:18+0000\n"
+"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
+"Language-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\n"
+"Language: sv-SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -1820,13 +1832,13 @@ msgstr "Skanningsresultat för 802.1X"
 msgid "Sessions"
 msgstr "Sessioner"
 
-#: mactrack_view_dot1x.php
-msgid "Any Status"
-msgstr "Vilken status som helst"
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "All Statuses"
+msgstr "Alla statusar"
 
-#: mactrack_view_dot1x.php
-msgid "No Method"
-msgstr "Ingen metod"
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr "Valda statusar"
 
 #: mactrack_view_dot1x.php
 msgid "DATA"
@@ -2002,14 +2014,6 @@ msgstr "Bandbredd"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "Visa totalsummor"
-
-#: mactrack_view_interfaces.php
-msgid "All Statuses"
-msgstr "Alla statusar"
-
-#: mactrack_view_interfaces.php
-msgid "Statuses Selected"
-msgstr "Valda statusar"
 
 #: mactrack_view_ips.php
 msgid "Mactrack - Site IP Range Report View"
@@ -3142,6 +3146,12 @@ msgstr "Ange den MAC-adress eller det MAC-adressmönster som ska auktoriseras au
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Lägg till en anledning till denna post."
+
+#~ msgid "Any Status"
+#~ msgstr "Vilken status som helst"
+
+#~ msgid "No Method"
+#~ msgstr "Ingen metod"
 
 #~ msgid "Not Authorized"
 #~ msgstr "Auktoriserad"
