@@ -821,10 +821,10 @@ function mactrack_filter_table(): void {
 					</td>
 					<?php } ?>
 					<td>
-						<input type='checkbox' id='totals' title='<?php print __esc('When checked, the Errors, Discards and Unknown Protocol columns show each interface\'s cumulative SNMP counter totals instead of the change recorded since the previous poll.', 'mactrack'); ?>' <?php print(get_request_var('totals') == 'true' ? 'checked' : ''); ?>>
+						<input type='checkbox' id='totals' title='<?php print __esc('When checked, the Errors, Discards and Unknown Protocol columns show each interface\'s cumulative SNMP counter totals instead of the average per-second rate.', 'mactrack'); ?>' <?php print(get_request_var('totals') == 'true' ? 'checked' : ''); ?>>
 					</td>
 					<td>
-						<label for='totals' title='<?php print __esc('When checked, the Errors, Discards and Unknown Protocol columns show each interface\'s cumulative SNMP counter totals instead of the change recorded since the previous poll.', 'mactrack'); ?>'><?php print __('Show Totals', 'mactrack'); ?></label>
+						<label for='totals' title='<?php print __esc('When checked, the Errors, Discards and Unknown Protocol columns show each interface\'s cumulative SNMP counter totals instead of the average per-second rate.', 'mactrack'); ?>'><?php print __('Show Totals', 'mactrack'); ?></label>
 					</td>
 				</tr>
 			</table>
