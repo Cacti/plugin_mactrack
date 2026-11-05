@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"POT-Creation-Date: 2026-11-05 11:52-0500\n"
 "PO-Revision-Date: 2026-10-11 23:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Hebrew (Israel) <https://translate.cacti.net/projects/cacti/mactrack/he_IL/>\n"
@@ -106,7 +106,7 @@ msgstr "atEntries הושלמה."
 msgid "HOST: %s, IP address information collection complete"
 msgstr "HOST: %s, אוסף פרטי כתובת IP הושלם"
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_view_devices.php
 msgid "Rescan Device"
 msgstr "מכשיר Rescan"
 
@@ -187,9 +187,23 @@ msgid "Device Rescan '%s'"
 msgstr "מנתק מחדש את המכשיר ' %s'"
 
 #: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr ""
+
+#: lib/mactrack_functions.php
 #, php-format
 msgid "Site scan '%s'"
 msgstr "סריקה של האתר ' %s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr ""
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -277,21 +291,21 @@ msgstr "אתרים"
 msgid "Devices"
 msgstr "ניתן להתנתק מכל ההתקנים האחרים, כגון טלפון נייד או מחשב ציבורי, על ידי לחיצה על כפתור התנתקות מכל ההתקנים האחרים."
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "ממשקים"
+
 #: lib/mactrack_functions.php
 msgid "IP Ranges"
 msgstr "IP טווחים"
 
-#: lib/mactrack_functions.php
-msgid "IP Address"
-msgstr "כתובת IP"
-
 #: lib/mactrack_functions.php setup.php
-msgid "MAC Address"
-msgstr "כתובת MAC"
+msgid "IP Addresses"
+msgstr "כתובות IP"
 
-#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
-msgid "Interfaces"
-msgstr "ממשקים"
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "כתובות MAC"
 
 #: lib/mactrack_functions.php
 msgid "Dot1x"
@@ -1914,6 +1928,12 @@ msgid "No Mactrack Devices Found"
 msgstr "לא נמצאו מכשירים למעקב אחר מכשירים"
 
 #: mactrack_view_devices.php
+#, fuzzy
+#| msgid "Site Scan Results"
+msgid "Device Scan Results"
+msgstr "הסר את כל תוצאות הסריקה"
+
+#: mactrack_view_devices.php
 msgid "Hub/Switch"
 msgstr "רכזת / מתג"
 
@@ -2231,10 +2251,6 @@ msgstr "מזהה VLAN"
 #: mactrack_view_macs.php
 msgid "VLAN Name"
 msgstr "שם VLAN"
-
-#: mactrack_view_macs.php
-msgid "MAC Addresses"
-msgstr "כתובות MAC"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2590,10 +2606,6 @@ msgstr "ברירת מחדל"
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr "איזו כרטיסיית MacTrack תרצה להיות כרטיסיית ברירת המחדל שלך בכל פעם שאתה עובר לשנייה של MacTrack."
-
-#: setup.php
-msgid "IP Addresses"
-msgstr "כתובות IP"
 
 #: setup.php
 msgid "Mac Addresses"
@@ -3244,6 +3256,10 @@ msgid "General Mac Address Tracking Settings"
 msgstr "כללי מעקב כתובת כתובת"
 
 #: setup.php
+msgid "MAC Address"
+msgstr "כתובת MAC"
+
+#: setup.php
 msgid "Please enter the MAC Address to be watched for."
 msgstr "הזן את כתובת ה- MAC כדי לצפות בה."
 
@@ -3302,6 +3318,9 @@ msgstr "הזן את מחרוזת ההתאמה של כתובת MAC או כתוב�
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "הוסף סיבה לערך זה."
+
+#~ msgid "IP Address"
+#~ msgstr "כתובת IP"
 
 #~ msgid "Any Status"
 #~ msgstr "כל הסטטוסים"
