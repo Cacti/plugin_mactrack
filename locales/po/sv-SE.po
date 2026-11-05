@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"POT-Creation-Date: 2026-11-05 11:52-0500\n"
 "PO-Revision-Date: 2026-10-27 16:18+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\n"
@@ -105,7 +105,7 @@ msgstr "Sammanställningen av atEntries är klar."
 msgid "HOST: %s, IP address information collection complete"
 msgstr "Värd: %s, insamlingen av IP-adressinformation är klar"
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_view_devices.php
 msgid "Rescan Device"
 msgstr "Skanna om enhet"
 
@@ -182,9 +182,23 @@ msgid "Device Rescan '%s'"
 msgstr "Skanna om enhet ”%s”"
 
 #: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr ""
+
+#: lib/mactrack_functions.php
 #, php-format
 msgid "Site scan '%s'"
 msgstr "Skanna plats ”%s”"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr ""
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -272,21 +286,21 @@ msgstr "Platser"
 msgid "Devices"
 msgstr "Enheter"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "Gränssnitt"
+
 #: lib/mactrack_functions.php
 msgid "IP Ranges"
 msgstr "IP-områden"
 
-#: lib/mactrack_functions.php
-msgid "IP Address"
-msgstr "IP-adress"
-
 #: lib/mactrack_functions.php setup.php
-msgid "MAC Address"
-msgstr "MAC-adress"
+msgid "IP Addresses"
+msgstr "IP-adresser"
 
-#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
-msgid "Interfaces"
-msgstr "Gränssnitt"
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "MAC-adresser"
 
 #: lib/mactrack_functions.php
 msgid "Dot1x"
@@ -1805,6 +1819,12 @@ msgid "No Mactrack Devices Found"
 msgstr "Inga Mactrack-enheter hittades"
 
 #: mactrack_view_devices.php
+#, fuzzy
+#| msgid "Site Scan Results"
+msgid "Device Scan Results"
+msgstr "Skanningsresultat för platsen"
+
+#: mactrack_view_devices.php
 msgid "Hub/Switch"
 msgstr "Hubb/switch"
 
@@ -2112,10 +2132,6 @@ msgstr "VLAN-ID"
 #: mactrack_view_macs.php
 msgid "VLAN Name"
 msgstr "VLAN-namn"
-
-#: mactrack_view_macs.php
-msgid "MAC Addresses"
-msgstr "MAC-adresser"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2457,10 +2473,6 @@ msgstr "Standardflik"
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr "Vilken flik ska visas som standard när du öppnar MacTrack?"
-
-#: setup.php
-msgid "IP Addresses"
-msgstr "IP-adresser"
 
 #: setup.php
 msgid "Mac Addresses"
@@ -3088,6 +3100,10 @@ msgid "General Mac Address Tracking Settings"
 msgstr "Allmänna inställningar för spårning av MAC-adresser"
 
 #: setup.php
+msgid "MAC Address"
+msgstr "MAC-adress"
+
+#: setup.php
 msgid "Please enter the MAC Address to be watched for."
 msgstr "Ange MAC-adressen som ska övervakas."
 
@@ -3146,6 +3162,9 @@ msgstr "Ange den MAC-adress eller det MAC-adressmönster som ska auktoriseras au
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Lägg till en anledning till denna post."
+
+#~ msgid "IP Address"
+#~ msgstr "IP-adress"
 
 #~ msgid "Any Status"
 #~ msgstr "Vilken status som helst"
