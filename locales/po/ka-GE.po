@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-24 02:18+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"PO-Revision-Date: 2026-10-24 02:18+0000\n"
+"Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
+"Language-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\n"
+"Language: ka-GE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -1879,13 +1891,15 @@ msgstr "Dot1x სკანირების შედეგები"
 msgid "Sessions"
 msgstr "სესიები"
 
-#: mactrack_view_dot1x.php
-msgid "Any Status"
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
 msgstr "ნებისმიერი სტატუსი"
 
-#: mactrack_view_dot1x.php
-msgid "No Method"
-msgstr "მეთოდის გარეშე"
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_dot1x.php
 msgid "DATA"
@@ -2061,16 +2075,6 @@ msgstr "გამტარობა"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "ჯამების ჩვენება"
-
-#: mactrack_view_interfaces.php
-#, fuzzy
-#| msgid "Any Status"
-msgid "All Statuses"
-msgstr "ნებისმიერი სტატუსი"
-
-#: mactrack_view_interfaces.php
-msgid "Statuses Selected"
-msgstr ""
 
 #: mactrack_view_ips.php
 msgid "Mactrack - Site IP Range Report View"
@@ -3205,6 +3209,12 @@ msgstr ""
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr ""
+
+#~ msgid "Any Status"
+#~ msgstr "ნებისმიერი სტატუსი"
+
+#~ msgid "No Method"
+#~ msgstr "მეთოდის გარეშე"
 
 #~ msgid "Not Authorized"
 #~ msgstr "ავტორიზებული არაა"
