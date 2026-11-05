@@ -804,12 +804,6 @@ function mactrack_filter_table(): void {
 					<td>
 						<input type='text' id='filter' size='25' value='<?php print html_escape_request_var('filter'); ?>'>
 					</td>
-					<td>
-						<input type='checkbox' id='totals' <?php print(get_request_var('totals') == 'true' ? 'checked' : ''); ?>>
-					</td>
-					<td>
-						<label for='totals'><?php print __('Show Totals', 'mactrack'); ?></label>
-					</td>
 					<?php if (mactrack_interfaces_show_issues()) {
 						$selected_statuses = mactrack_parse_status_tokens(get_request_var('statuses'));
 					?>
@@ -826,6 +820,12 @@ function mactrack_filter_table(): void {
 						</select>
 					</td>
 					<?php } ?>
+					<td>
+						<input type='checkbox' id='totals' <?php print(get_request_var('totals') == 'true' ? 'checked' : ''); ?>>
+					</td>
+					<td>
+						<label for='totals'><?php print __('Show Totals', 'mactrack'); ?></label>
+					</td>
 				</tr>
 			</table>
 			</form>
@@ -860,6 +860,12 @@ function mactrack_filter_table(): void {
 
 			$(function() {
 				$('#site_id, #issues, #bwusage, #device_type_id, #device_id, #rows, #totals').on('change', function() {
+					applyFilter();
+				});
+
+				// Re-run the filter when the multi-select Status dropdown is
+				// closed so a changed selection is applied without needing Go.
+				$('#statuses').on('select2:close', function() {
 					applyFilter();
 				});
 
