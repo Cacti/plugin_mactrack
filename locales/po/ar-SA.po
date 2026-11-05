@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"POT-Creation-Date: 2026-11-05 11:52-0500\n"
 "PO-Revision-Date: 2026-10-11 23:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Arabic (Saudi Arabia) <https://translate.cacti.net/projects/cacti/mactrack/ar_SA/>\n"
@@ -106,7 +106,7 @@ msgstr "اكتمال التجميع atEntries."
 msgid "HOST: %s, IP address information collection complete"
 msgstr "المضيف: %s، اكتمال جمع معلومات عنوان IP"
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_view_devices.php
 msgid "Rescan Device"
 msgstr "إعادة تفحص الجهاز"
 
@@ -187,9 +187,23 @@ msgid "Device Rescan '%s'"
 msgstr "إعادة فحص الجهاز '{ 0 }'"
 
 #: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr ""
+
+#: lib/mactrack_functions.php
 #, php-format
 msgid "Site scan '%s'"
 msgstr "مسح الموقع '{ 0 }'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr ""
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -277,21 +291,21 @@ msgstr "المواقع"
 msgid "Devices"
 msgstr "الأجهزة"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "واجهات"
+
 #: lib/mactrack_functions.php
 msgid "IP Ranges"
 msgstr "نطاقات IP"
 
-#: lib/mactrack_functions.php
-msgid "IP Address"
-msgstr "عنوان الIP"
-
 #: lib/mactrack_functions.php setup.php
-msgid "MAC Address"
-msgstr "عنوان ماك"
+msgid "IP Addresses"
+msgstr "عنوان IP"
 
-#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
-msgid "Interfaces"
-msgstr "واجهات"
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "عناوين MAC"
 
 #: lib/mactrack_functions.php
 msgid "Dot1x"
@@ -1914,6 +1928,12 @@ msgid "No Mactrack Devices Found"
 msgstr "لم يتم العثور على أجهزة تتبع الأجهزة"
 
 #: mactrack_view_devices.php
+#, fuzzy
+#| msgid "Site Scan Results"
+msgid "Device Scan Results"
+msgstr "إزالة جميع نتائج المسح الضوئي"
+
+#: mactrack_view_devices.php
 msgid "Hub/Switch"
 msgstr "محور / مفتاح"
 
@@ -2231,10 +2251,6 @@ msgstr "معرف شبكة محلية ظاهرية"
 #: mactrack_view_macs.php
 msgid "VLAN Name"
 msgstr "اسم شبكة محلية ظاهرية"
-
-#: mactrack_view_macs.php
-msgid "MAC Addresses"
-msgstr "عناوين MAC"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2590,10 +2606,6 @@ msgstr "الافتراضي"
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr "أي علامة تبويب MacTrack تريد أن تكون علامة التبويب الافتراضية الخاصة بك في كل مرة تصل فيها إلى MacTrack ثانيًا."
-
-#: setup.php
-msgid "IP Addresses"
-msgstr "عنوان IP"
 
 #: setup.php
 msgid "Mac Addresses"
@@ -3246,6 +3258,10 @@ msgid "General Mac Address Tracking Settings"
 msgstr "إعدادات تعقب عنوان Mac العامة"
 
 #: setup.php
+msgid "MAC Address"
+msgstr "عنوان ماك"
+
+#: setup.php
 msgid "Please enter the MAC Address to be watched for."
 msgstr "الرجاء إدخال عنوان MAC المراد مراقبته."
 
@@ -3304,6 +3320,9 @@ msgstr "يرجى إدخال عنوان MAC أو سلسلة مطابقة عنوا
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "الرجاء إضافة سبب لهذا الإدخال."
+
+#~ msgid "IP Address"
+#~ msgstr "عنوان الIP"
 
 #~ msgid "Any Status"
 #~ msgstr "أي حال أو أية حالة"
