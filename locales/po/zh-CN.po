@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: macktrack on cacti 1.1.34\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"POT-Creation-Date: 2026-11-05 11:52-0500\n"
 "PO-Revision-Date: 2026-10-11 23:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Chinese (Simplified Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hans/>\n"
@@ -107,7 +107,7 @@ msgstr "atEntries程序集完成。"
 msgid "HOST: %s, IP address information collection complete"
 msgstr "主机：%s，IP地址信息收集完成"
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_view_devices.php
 msgid "Rescan Device"
 msgstr "重新扫描设备"
 
@@ -188,9 +188,23 @@ msgid "Device Rescan '%s'"
 msgstr "设备重新扫描'%s'"
 
 #: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr ""
+
+#: lib/mactrack_functions.php
 #, php-format
 msgid "Site scan '%s'"
 msgstr "网站扫描'%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr ""
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -278,21 +292,21 @@ msgstr "网站"
 msgid "Devices"
 msgstr "设备"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "接口"
+
 #: lib/mactrack_functions.php
 msgid "IP Ranges"
 msgstr "IP范围"
 
-#: lib/mactrack_functions.php
-msgid "IP Address"
+#: lib/mactrack_functions.php setup.php
+msgid "IP Addresses"
 msgstr "IP地址"
 
-#: lib/mactrack_functions.php setup.php
-msgid "MAC Address"
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
 msgstr "MAC地址"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
-msgid "Interfaces"
-msgstr "接口"
 
 #: lib/mactrack_functions.php
 msgid "Dot1x"
@@ -1915,6 +1929,12 @@ msgid "No Mactrack Devices Found"
 msgstr "设备跟踪 - 设备报告视图"
 
 #: mactrack_view_devices.php
+#, fuzzy
+#| msgid "Site Scan Results"
+msgid "Device Scan Results"
+msgstr "网站扫描结果"
+
+#: mactrack_view_devices.php
 msgid "Hub/Switch"
 msgstr "集线器/交换机"
 
@@ -2232,10 +2252,6 @@ msgstr "VLAN ID"
 #: mactrack_view_macs.php
 msgid "VLAN Name"
 msgstr "VLAN名称"
-
-#: mactrack_view_macs.php
-msgid "MAC Addresses"
-msgstr "MAC地址"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2591,10 +2607,6 @@ msgstr "默认标签"
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr "每次您进入MacTrack时，您希望将哪个MacTrack选项卡作为“默认”选项卡。"
-
-#: setup.php
-msgid "IP Addresses"
-msgstr "IP地址"
 
 #: setup.php
 msgid "Mac Addresses"
@@ -3250,6 +3262,10 @@ msgid "General Mac Address Tracking Settings"
 msgstr "一般Mac地址跟踪设置"
 
 #: setup.php
+msgid "MAC Address"
+msgstr "MAC地址"
+
+#: setup.php
 msgid "Please enter the MAC Address to be watched for."
 msgstr "请输入要监视的MAC地址。"
 
@@ -3308,6 +3324,9 @@ msgstr "请输入MAC地址或MAC地址匹配字符串以自动授权。 如果�
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "请为此条目添加一个原因。"
+
+#~ msgid "IP Address"
+#~ msgstr "IP地址"
 
 #~ msgid "Any Status"
 #~ msgstr "任何状态"
