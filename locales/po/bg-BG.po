@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"POT-Creation-Date: 2026-11-05 11:52-0500\n"
 "PO-Revision-Date: 2026-10-11 23:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Bulgarian <https://translate.cacti.net/projects/cacti/mactrack/bg/>\n"
@@ -106,7 +106,7 @@ msgstr "при въвеждане в комплекта."
 msgid "HOST: %s, IP address information collection complete"
 msgstr "HOST: завършено е събирането на информация за IP адреса на %s"
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_view_devices.php
 msgid "Rescan Device"
 msgstr "Сканиране на устройството"
 
@@ -187,9 +187,23 @@ msgid "Device Rescan '%s'"
 msgstr "Сканиране на устройството „ %s“"
 
 #: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr ""
+
+#: lib/mactrack_functions.php
 #, php-format
 msgid "Site scan '%s'"
 msgstr "Сканиране на сайта „ %s“"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr ""
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -277,21 +291,21 @@ msgstr "за инжектиране e предната страна на бед�
 msgid "Devices"
 msgstr "Устройства"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "Интерфейси"
+
 #: lib/mactrack_functions.php
 msgid "IP Ranges"
 msgstr "IP диапазони"
 
-#: lib/mactrack_functions.php
-msgid "IP Address"
-msgstr "IP Адрес"
-
 #: lib/mactrack_functions.php setup.php
-msgid "MAC Address"
-msgstr "Мак адрес"
+msgid "IP Addresses"
+msgstr "IP адреси"
 
-#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
-msgid "Interfaces"
-msgstr "Интерфейси"
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "MAC адреси"
 
 #: lib/mactrack_functions.php
 msgid "Dot1x"
@@ -1914,6 +1928,12 @@ msgid "No Mactrack Devices Found"
 msgstr "Не са намерени устройства за проследяване на устройства"
 
 #: mactrack_view_devices.php
+#, fuzzy
+#| msgid "Site Scan Results"
+msgid "Device Scan Results"
+msgstr "Премахване на всички резултати от сканирането"
+
+#: mactrack_view_devices.php
 msgid "Hub/Switch"
 msgstr "Hub / Switch"
 
@@ -2231,10 +2251,6 @@ msgstr "VLAN ID"
 #: mactrack_view_macs.php
 msgid "VLAN Name"
 msgstr "Име на VLAN"
-
-#: mactrack_view_macs.php
-msgid "MAC Addresses"
-msgstr "MAC адреси"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2590,10 +2606,6 @@ msgstr "По подразбиране"
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr "Кой раздел MacTrack бихте искали да бъде вашият раздел по подразбиране всеки път, когато отидете на MacTrack втори."
-
-#: setup.php
-msgid "IP Addresses"
-msgstr "IP адреси"
 
 #: setup.php
 msgid "Mac Addresses"
@@ -3246,6 +3258,10 @@ msgid "General Mac Address Tracking Settings"
 msgstr "Общи настройки за проследяване на адреси на Mac"
 
 #: setup.php
+msgid "MAC Address"
+msgstr "Мак адрес"
+
+#: setup.php
 msgid "Please enter the MAC Address to be watched for."
 msgstr "Моля, въведете MAC адреса, за който да гледате."
 
@@ -3304,6 +3320,9 @@ msgstr "Моля, въведете низа за MAC адрес или Mac Addre
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Моля, добавете причина за това вписване."
+
+#~ msgid "IP Address"
+#~ msgstr "IP Адрес"
 
 #~ msgid "Any Status"
 #~ msgstr "Всяко състояние"
