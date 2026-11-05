@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-11 23:18+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: German <https://translate.cacti.net/projects/cacti/mactrack/de/>\nLanguage: de-DE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"PO-Revision-Date: 2026-10-11 23:18+0000\n"
+"Last-Translator: Anonymous <anonymous@cacti.net>\n"
+"Language-Team: German <https://translate.cacti.net/projects/cacti/mactrack/de/>\n"
+"Language: de-DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -1931,13 +1943,15 @@ msgstr "Dot1x Scanner"
 msgid "Sessions"
 msgstr "Sitzungen"
 
-#: mactrack_view_dot1x.php
-msgid "Any Status"
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
 msgstr "Alle Status"
 
-#: mactrack_view_dot1x.php
-msgid "No Method"
-msgstr "Methode"
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_dot1x.php
 msgid "DATA"
@@ -2116,16 +2130,6 @@ msgstr "Bandbreite"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "Gesamtbetrag anzeigen"
-
-#: mactrack_view_interfaces.php
-#, fuzzy
-#| msgid "Any Status"
-msgid "All Statuses"
-msgstr "Alle Status"
-
-#: mactrack_view_interfaces.php
-msgid "Statuses Selected"
-msgstr ""
 
 #: mactrack_view_ips.php
 #, fuzzy
@@ -3298,6 +3302,12 @@ msgstr "Bitte geben Sie die MAC-Adresse oder die Zeichenfolge Mac Address Match 
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Bitte geben Sie einen Grund für diesen Eintrag an."
+
+#~ msgid "Any Status"
+#~ msgstr "Alle Status"
+
+#~ msgid "No Method"
+#~ msgstr "Methode"
 
 #~ msgid "Not Authorized"
 #~ msgstr "Autorisiert"
