@@ -805,6 +805,19 @@ function mactrack_dot1x_filter(): void {
 					applyFilter();
 				});
 
+				// Fallback for cores without Select2 (pre 1.2.32): a native
+				// multi-select fires 'change' but never 'select2:close'. Apply
+				// on change only when Select2 is not active, and skip
+				// programmatic changes (e.g. the pill drill-down applies the
+				// filter itself) so the filter is not applied twice.
+				$('#statuses').on('change', function(event) {
+					if ($(this).hasClass('select2-hidden-accessible') || event.isTrigger) {
+						return;
+					}
+
+					applyFilter();
+				});
+
 				$('#mactrack').on('submit', function(event) {
 					event.preventDefault();
 					applyFilter();
