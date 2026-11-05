@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-10 17:52-0400\nPO-Revision-Date: 2026-10-11 23:18+0000\nLast-Translator: Anonymous <anonymous@cacti.net>\nLanguage-Team: Hindi <https://translate.cacti.net/projects/cacti/mactrack/hi/>\nLanguage: hi-IN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"PO-Revision-Date: 2026-10-11 23:18+0000\n"
+"Last-Translator: Anonymous <anonymous@cacti.net>\n"
+"Language-Team: Hindi <https://translate.cacti.net/projects/cacti/mactrack/hi/>\n"
+"Language: hi-IN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -1935,13 +1947,15 @@ msgstr "डॉट 1 एक्स स्कैनर"
 msgid "Sessions"
 msgstr "सत्र"
 
-#: mactrack_view_dot1x.php
-msgid "Any Status"
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+#, fuzzy
+#| msgid "Any Status"
+msgid "All Statuses"
 msgstr "कोई भी स्थिति"
 
-#: mactrack_view_dot1x.php
-msgid "No Method"
-msgstr "तरीका"
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr ""
 
 #: mactrack_view_dot1x.php
 msgid "DATA"
@@ -2122,16 +2136,6 @@ msgstr "बैंडविड्थ"
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "टोटल दिखाओ"
-
-#: mactrack_view_interfaces.php
-#, fuzzy
-#| msgid "Any Status"
-msgid "All Statuses"
-msgstr "कोई भी स्थिति"
-
-#: mactrack_view_interfaces.php
-msgid "Statuses Selected"
-msgstr ""
 
 #: mactrack_view_ips.php
 #, fuzzy
@@ -3306,6 +3310,12 @@ msgstr "कृपया स्वचालित रूप से अधिक�
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "कृपया इस प्रविष्टि के लिए एक कारण जोड़ें।"
+
+#~ msgid "Any Status"
+#~ msgstr "कोई भी स्थिति"
+
+#~ msgid "No Method"
+#~ msgstr "तरीका"
 
 #~ msgid "Not Authorized"
 #~ msgstr "अधिकार दिया गया"
