@@ -5,6 +5,7 @@
 * issue: Show scan results in a single scrollable dialog (with the completion time appended) instead of stacking a separate toast on top of the results dialog
 * issue: Format the interface Errors, Discards and Unknown Protocol columns with number_format_i18n() for readability
 * issue: Add a tooltip to the interfaces 'Show Totals' control explaining what the totals columns show
+* issue: Detect device types that specify only a sysDescr match or only a sysObjectID match, and require both only when both are provided
 * issue: Restore the device-level Rescan action to the Device report view and show a completion/timing toast when a device, interface or site scan finishes
 * issue: Stop the interface/device rescan icon from spinning forever by bounding the request and always clearing the spinner
 * issue: Reorder the MacTrack tabs to Dashboard, Sites, Devices, Interfaces, IP Ranges, IP Addresses, MAC Addresses, Dot1x, Graphs
