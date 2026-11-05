@@ -28,30 +28,13 @@ var url
    spinning forever. */
 var mactrackScanTimeout = 300000;
 
-/* Render the JSON scan results in the shared response dialog. */
-function mactrackShowScanResults(data) {
-	var content = (data && data.content) ? data.content : '<em>No scan results were returned.</em>';
-	$('#response').hide().html(content).dialog({ width: 800, maxHeight: 500 });
-}
+/* Show the detailed scan output in the shared response dialog. The results
+   are wrapped in a scrollable container so long output gets a vertical
+   scrollbar instead of overflowing the dialog. */
+function mactrackShowScanResults(content) {
+	var body = '<div class="mactrackScanResults">' + (content || '<em>No scan results were returned.</em>') + '</div>';
 
-/* Surface a short Cacti toast using the 1.2.x session-message mechanism
-   (what raise_message_javascript() emits). Pass isError to show it at the
-   error level so a failure is never reported as a success. */
-function mactrackScanToast(message, isError) {
-	if (!message || typeof displayMessages !== 'function') {
-		return;
-	}
-
-	var level = isError
-		? ((typeof MESSAGE_LEVEL_ERROR !== 'undefined') ? MESSAGE_LEVEL_ERROR : 3)
-		: ((typeof MESSAGE_LEVEL_INFO !== 'undefined') ? MESSAGE_LEVEL_INFO : 1);
-
-	window.sessionMessage = {
-		message: message,
-		level:   level
-	};
-
-	displayMessages();
+	$('#response').hide().html(body).dialog({ width: 800, maxHeight: 500 });
 }
 
 /* Run an admin scan action, spinning the passed icon until the request
@@ -66,22 +49,15 @@ function mactrackRunScan(url, icon) {
 		dataType: 'json',
 		timeout:  mactrackScanTimeout
 	}).done(function(data) {
-		mactrackShowScanResults(data);
-
-		// A nonzero subprocess exit comes back as HTTP 200 with an error flag
-		// and its detail already in the results dialog, so only toast real
-		// successes rather than reporting a failure as completed.
-		if (data && !data.error) {
-			mactrackScanToast(data.message, false);
-		}
+		mactrackShowScanResults(data ? data.content : '');
 	}).fail(function(data) {
 		// getPresentHTTPError() renders nothing when the failure carries no
-		// response body (e.g. the request timed out), which would otherwise
-		// clear the spinner with no feedback, so report those explicitly.
+		// response body (e.g. the request timed out), so show those in the
+		// same results dialog instead of clearing the spinner with no feedback.
 		if (data && data.responseText) {
 			getPresentHTTPError(data);
 		} else {
-			mactrackScanToast('The scan request timed out or did not complete.', true);
+			mactrackShowScanResults('<p class="textError">The scan request timed out or did not complete.</p>');
 		}
 	}).always(function() {
 		icon.removeClass('fa-spin');

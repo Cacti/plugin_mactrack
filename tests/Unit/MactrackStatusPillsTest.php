@@ -45,6 +45,50 @@ final class MactrackStatusPillsTest extends TestCase {
 		$GLOBALS['__test_next_returns']    = array();
 		$GLOBALS['__test_matched_returns'] = array();
 		$GLOBALS['__test_db_calls']        = array();
+		$GLOBALS['__test_request_vars']    = array();
+		$GLOBALS['__test_number_format_i18n'] = array();
+	}
+
+	/**
+	 * A complete, healthy interface stat row, with overrides merged in. Shared
+	 * by the interface-row rendering tests so they do not duplicate the field
+	 * list.
+	 *
+	 * @param array $over
+	 *
+	 * @return array
+	 */
+	private function interfaceRow(array $over = array()): array {
+		return array_merge([
+			'device_id'             => 10,
+			'ifIndex'               => 2,
+			'device_name'           => 'switch-a',
+			'device_type'           => 'cisco',
+			'ifName'                => 'Gi1/0/1',
+			'ifDescr'               => 'GigabitEthernet1/0/1',
+			'ifAlias'               => 'uplink',
+			'inBound'               => 5,
+			'outBound'              => 7,
+			'int_ifHCInOctets'      => 0,
+			'int_ifHCOutOctets'     => 0,
+			'int_ifInErrors'        => 0,
+			'int_ifInDiscards'      => 0,
+			'int_ifInUnknownProtos' => 0,
+			'int_ifOutErrors'       => 0,
+			'int_ifOutDiscards'     => 0,
+			'ifInErrors'            => 0,
+			'ifInDiscards'          => 0,
+			'ifInUnknownProtos'     => 0,
+			'ifOutErrors'           => 0,
+			'ifOutDiscards'         => 0,
+			'ifOperStatus'          => 1,
+			'ifLastChange'          => 0,
+			'sysUptime'             => 100,
+			'last_rundate'          => '2026-01-01 00:00:00',
+			'int_errors_present'    => 0,
+			'int_discards_present'  => 0,
+			'has_graphs'            => 1,
+		], $over);
 	}
 
 	/**
@@ -257,31 +301,7 @@ final class MactrackStatusPillsTest extends TestCase {
 	public function test_format_interface_row_inserts_issue_pills_after_description(): void {
 		mactrack_test_queue_return('db_fetch_row_prepared', ['host_id' => 0, 'disabled' => '']);
 
-		$html = mactrack_format_interface_row([
-			'device_id'             => 10,
-			'ifIndex'               => 2,
-			'device_name'           => 'switch-a',
-			'device_type'           => 'cisco',
-			'ifName'                => 'Gi1/0/1',
-			'ifDescr'               => 'GigabitEthernet1/0/1',
-			'ifAlias'               => 'uplink',
-			'inBound'               => 5,
-			'outBound'              => 7,
-			'int_ifHCInOctets'      => 0,
-			'int_ifHCOutOctets'     => 0,
-			'int_ifInErrors'        => 0,
-			'int_ifInDiscards'      => 0,
-			'int_ifInUnknownProtos' => 0,
-			'int_ifOutErrors'       => 0,
-			'int_ifOutDiscards'     => 0,
-			'ifOperStatus'          => 1,
-			'ifLastChange'          => 0,
-			'sysUptime'             => 100,
-			'last_rundate'          => '2026-01-01 00:00:00',
-			'int_errors_present'    => 0,
-			'int_discards_present'  => 0,
-			'has_graphs'            => 1,
-		]);
+		$html = mactrack_format_interface_row($this->interfaceRow());
 
 		$pos_descr = strpos($html, 'GigabitEthernet1/0/1');
 		$pos_pill  = strpos($html, 'mactrackPills');
@@ -290,6 +310,35 @@ final class MactrackStatusPillsTest extends TestCase {
 		$this->assertNotFalse($pos_pill);
 		$this->assertGreaterThan($pos_descr, $pos_pill);
 		$this->assertGreaterThan($pos_pill, $pos_alias);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function test_format_interface_row_totals_render_through_number_format_i18n(): void {
+		$GLOBALS['__test_request_vars']['totals'] = 'true';
+
+		mactrack_test_queue_return('db_fetch_row_prepared', ['host_id' => 0, 'disabled' => '']);
+
+		$totals = [
+			'ifInErrors'        => 12345,
+			'ifInDiscards'      => 23456,
+			'ifInUnknownProtos' => 34567,
+			'ifOutErrors'       => 45678,
+			'ifOutDiscards'     => 56789,
+		];
+
+		mactrack_format_interface_row($this->interfaceRow($totals));
+
+		// Assert the five total counters were routed through number_format_i18n()
+		// at integer precision, so dropping the formatter (or changing precision)
+		// fails the test even though the stub echoes the raw value.
+		$calls = array_column($GLOBALS['__test_number_format_i18n'], 'decimals', 'number');
+
+		foreach ($totals as $value) {
+			$this->assertArrayHasKey($value, $calls, "number_format_i18n() not called for $value");
+			$this->assertNull($calls[$value], "total $value should be formatted at integer precision");
+		}
 	}
 
 	/**

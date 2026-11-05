@@ -3415,17 +3415,17 @@ function mactrack_format_interface_row($stat): string {
 	form_selectable_cell(mactrack_display_Octets($stat['int_ifHCOutOctets']), $stat['device_id'], '', 'right');
 
 	if (get_request_var('totals') == 'true' || get_request_var('totals') == 'on') {
-		form_selectable_cell($stat['ifInErrors'], $stat['device_id'], '', 'right');
-		form_selectable_cell($stat['ifInDiscards'], $stat['device_id'], '', 'right');
-		form_selectable_cell($stat['ifInUnknownProtos'], $stat['device_id'], '', 'right');
-		form_selectable_cell($stat['ifOutErrors'], $stat['device_id'], '', 'right');
-		form_selectable_cell($stat['ifOutDiscards'], $stat['device_id'], '', 'right');
+		form_selectable_cell(number_format_i18n($stat['ifInErrors']), $stat['device_id'], '', 'right');
+		form_selectable_cell(number_format_i18n($stat['ifInDiscards']), $stat['device_id'], '', 'right');
+		form_selectable_cell(number_format_i18n($stat['ifInUnknownProtos']), $stat['device_id'], '', 'right');
+		form_selectable_cell(number_format_i18n($stat['ifOutErrors']), $stat['device_id'], '', 'right');
+		form_selectable_cell(number_format_i18n($stat['ifOutDiscards']), $stat['device_id'], '', 'right');
 	} else {
-		form_selectable_cell(round($stat['int_ifInErrors'],1), $stat['device_id'], '', 'right');
-		form_selectable_cell(round($stat['int_ifInDiscards'],1), $stat['device_id'], '', 'right');
-		form_selectable_cell(round($stat['int_ifInUnknownProtos'],1), $stat['device_id'], '', 'right');
-		form_selectable_cell(round($stat['int_ifOutErrors'],1), $stat['device_id'], '', 'right');
-		form_selectable_cell(round($stat['int_ifOutDiscards'],1), $stat['device_id'], '', 'right');
+		form_selectable_cell(number_format_i18n($stat['int_ifInErrors'], 1), $stat['device_id'], '', 'right');
+		form_selectable_cell(number_format_i18n($stat['int_ifInDiscards'], 1), $stat['device_id'], '', 'right');
+		form_selectable_cell(number_format_i18n($stat['int_ifInUnknownProtos'], 1), $stat['device_id'], '', 'right');
+		form_selectable_cell(number_format_i18n($stat['int_ifOutErrors'], 1), $stat['device_id'], '', 'right');
+		form_selectable_cell(number_format_i18n($stat['int_ifOutDiscards'], 1), $stat['device_id'], '', 'right');
 	}
 
 	form_selectable_cell($stat['ifOperStatus'] == 1 ? __('Up', 'mactrack') : __('Down', 'mactrack'), $stat['device_id'], '', 'right');
@@ -3886,7 +3886,7 @@ function mactrack_rescan($web = false): void {
 			$data['device_id'] = $device_id;
 			$data['ifIndex']   = $ifIndex;
 
-			// time the scan so the completion message can report duration
+			// time the scan so the results can report how long it took
 			$scan_start = microtime(true);
 
 			// add the cacti header
@@ -3906,13 +3906,12 @@ function mactrack_rescan($web = false): void {
 			if ($exit_code !== 0) {
 				$data['error'] = 'rescan process exited with code ' . intval($exit_code);
 				$output .= '<p class="textError">' . html_escape('Subprocess error: exit code ' . intval($exit_code)) . '</p>';
+			} else {
+				// close the detailed results with a completion/timing summary
+				$output .= '<p class="textInfo">' . __('Device \'%s\' rescan completed in %0.2f seconds.', html_escape($dbinfo['hostname']), round($elapsed, 2), 'mactrack') . '</p>';
 			}
 
 			$data['content'] = $output;
-
-			// short completion/timing summary surfaced as an auto-fading Cacti
-			// toast by the AJAX caller (see mactrackRunScan() in js/mactrack.js)
-			$data['message'] = __('Device \'%s\' rescan completed in %0.2f seconds.', html_escape($dbinfo['hostname']), round($elapsed, 2), 'mactrack');
 		}
 	}
 
@@ -3965,7 +3964,7 @@ function mactrack_site_scan($web = false): void {
 		// print out the type, and device_id
 		$data['site_id'] = $site_id;
 
-		// time the scan so the completion message can report duration
+		// time the scan so the results can report how long it took
 		$scan_start = microtime(true);
 
 		// add the cacti header
@@ -3982,11 +3981,10 @@ function mactrack_site_scan($web = false): void {
 		if ($exit_code !== 0) {
 			$data['error']    = 'site_scan process exited with code ' . intval($exit_code);
 			$data['content'] .= '<p class="textError">' . html_escape('Subprocess error: exit code ' . intval($exit_code)) . '</p>';
+		} else {
+			// close the detailed results with a completion/timing summary
+			$data['content'] .= '<p class="textInfo">' . __('Site \'%s\' scan completed in %0.2f seconds.', html_escape($dbinfo['site_name']), round($elapsed, 2), 'mactrack') . '</p>';
 		}
-
-		// short completion/timing summary surfaced as an auto-fading Cacti
-		// toast by the AJAX caller (see mactrackRunScan() in js/mactrack.js)
-		$data['message'] = __('Site \'%s\' scan completed in %0.2f seconds.', html_escape($dbinfo['site_name']), round($elapsed, 2), 'mactrack');
 	}
 
 	header('Content-Type: application/json; charset=utf-8');

@@ -408,7 +408,7 @@ if (!function_exists('get_current_page')) {
 
 if (!function_exists('get_request_var')) {
 	function get_request_var($name) {
-		return '';
+		return $GLOBALS['__test_request_vars'][$name] ?? '';
 	}
 }
 
@@ -490,6 +490,8 @@ if (!function_exists('get_colored_device_status')) {
 
 if (!function_exists('number_format_i18n')) {
 	function number_format_i18n($number, $decimals = null, $baseu = 1024) {
+		$GLOBALS['__test_number_format_i18n'][] = array('number' => $number, 'decimals' => $decimals);
+
 		return (string) $number;
 	}
 }

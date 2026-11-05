@@ -124,42 +124,30 @@ test('a POST rescan and site scan look up their target', function ($action, $tab
 	['mactrack_site_scan', 'mac_track_sites'],
 ]);
 
-test('a POST rescan runs the scan subprocess and returns results with a completion message', function () {
+test('a POST scan runs the subprocess and reports the outcome in the results dialog', function ($action, $lookup, $binary, $needle, $has_error) {
 	$_SERVER['REQUEST_METHOD'] = 'POST';
 
-	// A no-op binary so passthru() produces no output and a non-zero exit,
-	// exercising both the empty-output and subprocess-error branches without
-	// launching the real scanner.
-	$GLOBALS['__test_config_options']['path_php_binary'] = '/bin/false';
+	// A controlled no-op binary: /bin/true exits 0 (success path) and
+	// /bin/false exits nonzero (subprocess-error path), both without launching
+	// the real scanner.
+	$GLOBALS['__test_config_options']['path_php_binary'] = $binary;
 
-	// device lookup (enabled), then the user lookup inside mactrack_log_action()
-	mactrack_test_queue_return('db_fetch_row_prepared', [
-		'device_id' => 5,
-		'hostname'  => 'sw1.example.com',
-		'disabled'  => '',
-	]);
+	// target lookup (device or site), then the user lookup inside mactrack_log_action()
+	mactrack_test_queue_return('db_fetch_row_prepared', $lookup);
 	mactrack_test_queue_return('db_fetch_row_prepared', ['username' => 'admin', 'full_name' => 'Administrator']);
 
-	$data = json_decode(mactrack_test_run_admin_action('mactrack_rescan'), true);
+	$data = json_decode(mactrack_test_run_admin_action($action), true);
 
 	expect($data)->toHaveKey('content');
-	expect($data)->toHaveKey('message');
-});
-
-test('a POST site scan runs the scan subprocess and returns results with a completion message', function () {
-	$_SERVER['REQUEST_METHOD'] = 'POST';
-
-	$GLOBALS['__test_config_options']['path_php_binary'] = '/bin/false';
-
-	// site lookup, then the user lookup inside mactrack_log_action()
-	mactrack_test_queue_return('db_fetch_row_prepared', ['site_id' => 3, 'site_name' => 'HQ']);
-	mactrack_test_queue_return('db_fetch_row_prepared', ['username' => 'admin', 'full_name' => 'Administrator']);
-
-	$data = json_decode(mactrack_test_run_admin_action('mactrack_site_scan'), true);
-
-	expect($data)->toHaveKey('content');
-	expect($data)->toHaveKey('message');
-});
+	expect($data)->not->toHaveKey('message');
+	expect($data['content'])->toContain($needle);
+	expect(array_key_exists('error', $data))->toBe($has_error);
+})->with([
+	'rescan success'    => ['mactrack_rescan', ['device_id' => 5, 'hostname' => 'sw1.example.com', 'disabled' => ''], '/bin/true', 'rescan completed', false],
+	'rescan failure'    => ['mactrack_rescan', ['device_id' => 5, 'hostname' => 'sw1.example.com', 'disabled' => ''], '/bin/false', 'Subprocess error', true],
+	'site scan success' => ['mactrack_site_scan', ['site_id' => 3, 'site_name' => 'HQ'], '/bin/true', 'scan completed', false],
+	'site scan failure' => ['mactrack_site_scan', ['site_id' => 3, 'site_name' => 'HQ'], '/bin/false', 'Subprocess error', true],
+]);
 
 test('the admin actions are sent as POST with the CSRF token and report failures', function () {
 	$js = plugin_test_read_source('js/mactrack.js');
