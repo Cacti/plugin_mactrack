@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"POT-Creation-Date: 2026-11-05 11:52-0500\n"
 "PO-Revision-Date: 2026-10-11 23:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: German <https://translate.cacti.net/projects/cacti/mactrack/de/>\n"
@@ -106,7 +106,7 @@ msgstr "atEntries Montage abgeschlossen."
 msgid "HOST: %s, IP address information collection complete"
 msgstr "HOST: %s, IP-Adressdatenerfassung abgeschlossen"
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_view_devices.php
 msgid "Rescan Device"
 msgstr "Rescan-Gerät"
 
@@ -187,9 +187,23 @@ msgid "Device Rescan '%s'"
 msgstr "Geräte-Neuscan'%s' durchführen"
 
 #: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr ""
+
+#: lib/mactrack_functions.php
 #, php-format
 msgid "Site scan '%s'"
 msgstr "Standortsuche '%s''."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr ""
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -277,21 +291,21 @@ msgstr "Standorte"
 msgid "Devices"
 msgstr "Zielsysteme"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "Schnittstellen"
+
 #: lib/mactrack_functions.php
 msgid "IP Ranges"
 msgstr "IP-Bereiche"
 
-#: lib/mactrack_functions.php
-msgid "IP Address"
-msgstr "IP Adresse"
-
 #: lib/mactrack_functions.php setup.php
-msgid "MAC Address"
-msgstr "MAC-Adresse"
+msgid "IP Addresses"
+msgstr "IP-Adressen"
 
-#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
-msgid "Interfaces"
-msgstr "Schnittstellen"
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "MAC-Adressen"
 
 #: lib/mactrack_functions.php
 msgid "Dot1x"
@@ -1914,6 +1928,12 @@ msgid "No Mactrack Devices Found"
 msgstr "Keine Geräteverfolgungsgeräte gefunden"
 
 #: mactrack_view_devices.php
+#, fuzzy
+#| msgid "Site Scan Results"
+msgid "Device Scan Results"
+msgstr "Website Scan-Ergebnisse"
+
+#: mactrack_view_devices.php
 msgid "Hub/Switch"
 msgstr "Hub/Switch"
 
@@ -2231,10 +2251,6 @@ msgstr "VLAN-ID"
 #: mactrack_view_macs.php
 msgid "VLAN Name"
 msgstr "VLAN-Name"
-
-#: mactrack_view_macs.php
-msgid "MAC Addresses"
-msgstr "MAC-Adressen"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2590,10 +2606,6 @@ msgstr "Standard Tab"
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr "Welche MacTrack-Registerkarte möchten Sie jedes Mal als Standard-Registerkarte verwenden, wenn Sie zur zweiten MacTrack-Registerkarte gelangen?"
-
-#: setup.php
-msgid "IP Addresses"
-msgstr "IP-Adressen"
 
 #: setup.php
 msgid "Mac Addresses"
@@ -3244,6 +3256,10 @@ msgid "General Mac Address Tracking Settings"
 msgstr "Allgemeine Mac-Adressverfolgungseinstellungen"
 
 #: setup.php
+msgid "MAC Address"
+msgstr "MAC-Adresse"
+
+#: setup.php
 msgid "Please enter the MAC Address to be watched for."
 msgstr "Bitte geben Sie die MAC-Adresse ein, auf die Sie achten müssen."
 
@@ -3302,6 +3318,9 @@ msgstr "Bitte geben Sie die MAC-Adresse oder die Zeichenfolge Mac Address Match 
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Bitte geben Sie einen Grund für diesen Eintrag an."
+
+#~ msgid "IP Address"
+#~ msgstr "IP Adresse"
 
 #~ msgid "Any Status"
 #~ msgstr "Alle Status"
