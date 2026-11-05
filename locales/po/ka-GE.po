@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"POT-Creation-Date: 2026-11-05 11:52-0500\n"
 "PO-Revision-Date: 2026-10-24 02:18+0000\n"
 "Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\n"
@@ -105,7 +105,7 @@ msgstr "atEntries-ის აწყობა დასრულდა."
 msgid "HOST: %s, IP address information collection complete"
 msgstr ""
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_view_devices.php
 msgid "Rescan Device"
 msgstr "მოწყობილობის თავიდან სკანირება"
 
@@ -186,9 +186,23 @@ msgid "Device Rescan '%s'"
 msgstr "მოწყობილობის '%s' თავიდან სკანირება"
 
 #: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr ""
+
+#: lib/mactrack_functions.php
 #, php-format
 msgid "Site scan '%s'"
 msgstr "'%s' საიტის სკანირება"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr ""
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -276,21 +290,21 @@ msgstr "საიტები"
 msgid "Devices"
 msgstr "მოწყობილობები"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "ინტერფეისები"
+
 #: lib/mactrack_functions.php
 msgid "IP Ranges"
 msgstr "IP დიაპაზონები"
 
-#: lib/mactrack_functions.php
-msgid "IP Address"
-msgstr "IP მისამართი"
-
 #: lib/mactrack_functions.php setup.php
-msgid "MAC Address"
-msgstr "MAC მისამართი"
+msgid "IP Addresses"
+msgstr "IP მისამართები"
 
-#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
-msgid "Interfaces"
-msgstr "ინტერფეისები"
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "MAC მისამართები"
 
 #: lib/mactrack_functions.php
 msgid "Dot1x"
@@ -1864,6 +1878,12 @@ msgid "No Mactrack Devices Found"
 msgstr ""
 
 #: mactrack_view_devices.php
+#, fuzzy
+#| msgid "Site Scan Results"
+msgid "Device Scan Results"
+msgstr "საიტის სკანირების შედეგები"
+
+#: mactrack_view_devices.php
 msgid "Hub/Switch"
 msgstr "კომუტატორი"
 
@@ -2173,10 +2193,6 @@ msgstr "VLAN ID"
 #: mactrack_view_macs.php
 msgid "VLAN Name"
 msgstr "VLAN-ის სახელი"
-
-#: mactrack_view_macs.php
-msgid "MAC Addresses"
-msgstr "MAC მისამართები"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2518,10 +2534,6 @@ msgstr "ნაგულისხმევი ჩანართი"
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr ""
-
-#: setup.php
-msgid "IP Addresses"
-msgstr "IP მისამართები"
 
 #: setup.php
 msgid "Mac Addresses"
@@ -3151,6 +3163,10 @@ msgid "General Mac Address Tracking Settings"
 msgstr ""
 
 #: setup.php
+msgid "MAC Address"
+msgstr "MAC მისამართი"
+
+#: setup.php
 msgid "Please enter the MAC Address to be watched for."
 msgstr ""
 
@@ -3209,6 +3225,9 @@ msgstr ""
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr ""
+
+#~ msgid "IP Address"
+#~ msgstr "IP მისამართი"
 
 #~ msgid "Any Status"
 #~ msgstr "ნებისმიერი სტატუსი"
