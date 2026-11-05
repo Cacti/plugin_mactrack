@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"POT-Creation-Date: 2026-11-05 11:52-0500\n"
 "PO-Revision-Date: 2026-10-11 23:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\n"
@@ -109,7 +109,7 @@ msgstr "atEntries裝配完成。"
 msgid "HOST: %s, IP address information collection complete"
 msgstr "主機： %s ， IP地址信息收集完成"
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_view_devices.php
 msgid "Rescan Device"
 msgstr "重新掃描設備"
 
@@ -195,9 +195,23 @@ msgid "Device Rescan '%s'"
 msgstr "裝置重新掃描'%s'"
 
 #: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr ""
+
+#: lib/mactrack_functions.php
 #, php-format
 msgid "Site scan '%s'"
 msgstr "網站掃描'%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr ""
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -289,21 +303,21 @@ msgstr "網站"
 msgid "Devices"
 msgstr "設備"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "介面卡"
+
 #: lib/mactrack_functions.php
 msgid "IP Ranges"
 msgstr "IP 範圍"
 
-#: lib/mactrack_functions.php
-msgid "IP Address"
-msgstr "IP 位址"
-
 #: lib/mactrack_functions.php setup.php
-msgid "MAC Address"
-msgstr "MAC 位址"
+msgid "IP Addresses"
+msgstr "匿名IP地址。根據國家隱私法，在某些國家/地區設置此選項是強制性的。 <a href=\"https://support.google.com/analytics/answer/2763052\" target=\"_blank\">詳細了解IP匿名化</a> 。"
 
-#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
-msgid "Interfaces"
-msgstr "介面卡"
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "MAC地址"
 
 #: lib/mactrack_functions.php
 msgid "Dot1x"
@@ -1975,6 +1989,12 @@ msgid "No Mactrack Devices Found"
 msgstr "找不到設備跟踪設備"
 
 #: mactrack_view_devices.php
+#, fuzzy
+#| msgid "Site Scan Results"
+msgid "Device Scan Results"
+msgstr "刪除所有掃描結果"
+
+#: mactrack_view_devices.php
 msgid "Hub/Switch"
 msgstr "集線器/交換機"
 
@@ -2298,10 +2318,6 @@ msgstr "VLAN ID"
 #: mactrack_view_macs.php
 msgid "VLAN Name"
 msgstr "VLAN 名稱"
-
-#: mactrack_view_macs.php
-msgid "MAC Addresses"
-msgstr "MAC地址"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2668,10 +2684,6 @@ msgstr "預設頁面"
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr "每次您進入MacTrack時，您希望將哪個MacTrack選項卡作為“默認”選項卡。"
-
-#: setup.php
-msgid "IP Addresses"
-msgstr "匿名IP地址。根據國家隱私法，在某些國家/地區設置此選項是強制性的。 <a href=\"https://support.google.com/analytics/answer/2763052\" target=\"_blank\">詳細了解IP匿名化</a> 。"
 
 #: setup.php
 msgid "Mac Addresses"
@@ -3364,6 +3376,10 @@ msgid "General Mac Address Tracking Settings"
 msgstr "常規Mac地址跟踪設置"
 
 #: setup.php
+msgid "MAC Address"
+msgstr "MAC 位址"
+
+#: setup.php
 msgid "Please enter the MAC Address to be watched for."
 msgstr "請輸入要觀看的MAC地址。"
 
@@ -3423,6 +3439,9 @@ msgstr "請輸入要自動授權的MAC地址或Mac地址匹配字符串。如果
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "請為此條目添加原因。"
+
+#~ msgid "IP Address"
+#~ msgstr "IP 位址"
 
 #~ msgid "Any Status"
 #~ msgstr "任何狀態"
