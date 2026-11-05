@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"POT-Creation-Date: 2026-11-05 11:52-0500\n"
 "PO-Revision-Date: 2026-10-11 23:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Korean <https://translate.cacti.net/projects/cacti/mactrack/ko/>\n"
@@ -106,7 +106,7 @@ msgstr "atEntries 어셈블리가 완료되었습니다."
 msgid "HOST: %s, IP address information collection complete"
 msgstr "호스트 :  %s, IP 주소 정보 수집 완료"
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_view_devices.php
 msgid "Rescan Device"
 msgstr "장치 재검색"
 
@@ -187,9 +187,23 @@ msgid "Device Rescan '%s'"
 msgstr "장치 재검색 ' %s'"
 
 #: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr ""
+
+#: lib/mactrack_functions.php
 #, php-format
 msgid "Site scan '%s'"
 msgstr "사이트 검사 ' %s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr ""
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -277,21 +291,21 @@ msgstr "사이트"
 msgid "Devices"
 msgstr "장치"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "인터페이스"
+
 #: lib/mactrack_functions.php
 msgid "IP Ranges"
 msgstr "IP 범위"
 
-#: lib/mactrack_functions.php
-msgid "IP Address"
+#: lib/mactrack_functions.php setup.php
+msgid "IP Addresses"
 msgstr "IP 주소"
 
-#: lib/mactrack_functions.php setup.php
-msgid "MAC Address"
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
 msgstr "MAC 주소"
-
-#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
-msgid "Interfaces"
-msgstr "인터페이스"
 
 #: lib/mactrack_functions.php
 msgid "Dot1x"
@@ -1914,6 +1928,12 @@ msgid "No Mactrack Devices Found"
 msgstr "장치 추적 장치를 찾을 수 없음"
 
 #: mactrack_view_devices.php
+#, fuzzy
+#| msgid "Site Scan Results"
+msgid "Device Scan Results"
+msgstr "모든 스캔 결과 제거"
+
+#: mactrack_view_devices.php
 msgid "Hub/Switch"
 msgstr "허브 / 스위치"
 
@@ -2231,10 +2251,6 @@ msgstr "VLAN ID"
 #: mactrack_view_macs.php
 msgid "VLAN Name"
 msgstr "VLAN 이름"
-
-#: mactrack_view_macs.php
-msgid "MAC Addresses"
-msgstr "MAC 주소"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2590,10 +2606,6 @@ msgstr "기본 탭"
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr "MacTrack으로 이동할 때마다 기본 탭이 될 MacTrack 탭은 무엇입니까?"
-
-#: setup.php
-msgid "IP Addresses"
-msgstr "IP 주소"
 
 #: setup.php
 msgid "Mac Addresses"
@@ -3244,6 +3256,10 @@ msgid "General Mac Address Tracking Settings"
 msgstr "일반 Mac 주소 추적 설정"
 
 #: setup.php
+msgid "MAC Address"
+msgstr "MAC 주소"
+
+#: setup.php
 msgid "Please enter the MAC Address to be watched for."
 msgstr "감시 할 MAC 주소를 입력하십시오."
 
@@ -3302,6 +3318,9 @@ msgstr "자동 승인을 받으려면 MAC 주소 또는 MAC 주소 일치 문자
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "이 항목에 대한 이유를 추가하십시오."
+
+#~ msgid "IP Address"
+#~ msgstr "IP 주소"
 
 #~ msgid "Any Status"
 #~ msgstr "모든 상태"
