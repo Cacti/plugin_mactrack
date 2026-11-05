@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 09:25-0500\n"
+"POT-Creation-Date: 2026-11-05 11:52-0500\n"
 "PO-Revision-Date: 2026-10-11 23:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Hindi <https://translate.cacti.net/projects/cacti/mactrack/hi/>\n"
@@ -106,7 +106,7 @@ msgstr "विधानसभा पूरी हो जाती है।"
 msgid "HOST: %s, IP address information collection complete"
 msgstr "HOST: %s, IP पता सूचना संग्रह पूर्ण"
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_view_devices.php
 msgid "Rescan Device"
 msgstr "रेसकान डिवाइस"
 
@@ -189,9 +189,23 @@ msgid "Device Rescan '%s'"
 msgstr "डिवाइस Rescan ' %s'"
 
 #: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr ""
+
+#: lib/mactrack_functions.php
 #, php-format
 msgid "Site scan '%s'"
 msgstr "साइट स्कैन ' %s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr ""
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -279,21 +293,21 @@ msgstr "साइटां"
 msgid "Devices"
 msgstr "डिवाइस"
 
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "इंटरफेस"
+
 #: lib/mactrack_functions.php
 msgid "IP Ranges"
 msgstr "आईपी रेंज"
 
-#: lib/mactrack_functions.php
-msgid "IP Address"
-msgstr "IP सिरनामा"
-
 #: lib/mactrack_functions.php setup.php
-msgid "MAC Address"
-msgstr "मैक पते"
+msgid "IP Addresses"
+msgstr "आईपी पता"
 
-#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
-msgid "Interfaces"
-msgstr "इंटरफेस"
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "मैक पते"
 
 #: lib/mactrack_functions.php
 msgid "Dot1x"
@@ -1918,6 +1932,12 @@ msgid "No Mactrack Devices Found"
 msgstr "कोई उपकरण ट्रैकिंग उपकरण नहीं मिला"
 
 #: mactrack_view_devices.php
+#, fuzzy
+#| msgid "Site Scan Results"
+msgid "Device Scan Results"
+msgstr "सभी स्कैन परिणाम निकालें"
+
+#: mactrack_view_devices.php
 msgid "Hub/Switch"
 msgstr "हब / स्विच"
 
@@ -2237,10 +2257,6 @@ msgstr "वीएलएन आईडी"
 #: mactrack_view_macs.php
 msgid "VLAN Name"
 msgstr "VLAN का नाम"
-
-#: mactrack_view_macs.php
-msgid "MAC Addresses"
-msgstr "मैक पते"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
@@ -2596,10 +2612,6 @@ msgstr "चूक"
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
 msgstr "हर बार जब आप MacTrack सेकंड के दौरान अपने मैक टैब को अपने डिफ़ॉल्ट टैब के रूप में देखना चाहेंगे।"
-
-#: setup.php
-msgid "IP Addresses"
-msgstr "आईपी पता"
 
 #: setup.php
 msgid "Mac Addresses"
@@ -3252,6 +3264,10 @@ msgid "General Mac Address Tracking Settings"
 msgstr "सामान्य मैक एड्रेस ट्रैकिंग सेटिंग्स"
 
 #: setup.php
+msgid "MAC Address"
+msgstr "मैक पते"
+
+#: setup.php
 msgid "Please enter the MAC Address to be watched for."
 msgstr "कृपया देखे जाने के लिए मैक एड्रेस दर्ज करें।"
 
@@ -3310,6 +3326,9 @@ msgstr "कृपया स्वचालित रूप से अधिक�
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "कृपया इस प्रविष्टि के लिए एक कारण जोड़ें।"
+
+#~ msgid "IP Address"
+#~ msgstr "IP सिरनामा"
 
 #~ msgid "Any Status"
 #~ msgstr "कोई भी स्थिति"
