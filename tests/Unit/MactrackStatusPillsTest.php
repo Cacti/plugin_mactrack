@@ -45,6 +45,7 @@ final class MactrackStatusPillsTest extends TestCase {
 		$GLOBALS['__test_next_returns']    = array();
 		$GLOBALS['__test_matched_returns'] = array();
 		$GLOBALS['__test_db_calls']        = array();
+		$GLOBALS['__test_request_vars']    = array();
 	}
 
 	/**
@@ -290,6 +291,47 @@ final class MactrackStatusPillsTest extends TestCase {
 		$this->assertNotFalse($pos_pill);
 		$this->assertGreaterThan($pos_descr, $pos_pill);
 		$this->assertGreaterThan($pos_pill, $pos_alias);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function test_format_interface_row_totals_render_through_number_format_i18n(): void {
+		$GLOBALS['__test_request_vars']['totals'] = 'true';
+
+		mactrack_test_queue_return('db_fetch_row_prepared', ['host_id' => 0, 'disabled' => '']);
+
+		$html = mactrack_format_interface_row([
+			'device_id'             => 11,
+			'ifIndex'               => 3,
+			'device_name'           => 'switch-b',
+			'device_type'           => 'cisco',
+			'ifName'                => 'Gi1/0/2',
+			'ifDescr'               => 'GigabitEthernet1/0/2',
+			'ifAlias'               => 'uplink',
+			'inBound'               => 5,
+			'outBound'              => 7,
+			'int_ifHCInOctets'      => 0,
+			'int_ifHCOutOctets'     => 0,
+			'ifInErrors'            => 12345,
+			'ifInDiscards'          => 23456,
+			'ifInUnknownProtos'     => 34567,
+			'ifOutErrors'           => 45678,
+			'ifOutDiscards'         => 56789,
+			'ifOperStatus'          => 1,
+			'ifLastChange'          => 0,
+			'sysUptime'             => 100,
+			'last_rundate'          => '2026-01-01 00:00:00',
+			'int_errors_present'    => 0,
+			'int_discards_present'  => 0,
+			'has_graphs'            => 1,
+		]);
+
+		// The number_format_i18n() stub returns the raw value, so each total
+		// column must render its value through the formatter (not be dropped).
+		foreach (['12345', '23456', '34567', '45678', '56789'] as $total) {
+			$this->assertStringContainsString($total, $html);
+		}
 	}
 
 	/**

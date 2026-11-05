@@ -274,3 +274,11 @@
 .mtdashDialogBody .mtdashTable {
 	font-size: 13px;
 }
+
+
+/* Scan results dialog (device/site/interface rescan): keep long scanner
+   output inside the dialog with a vertical scrollbar instead of overflowing. */
+.mactrackScanResults {
+	max-height: 60vh;
+	overflow-y: auto;
+}
