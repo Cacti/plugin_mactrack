@@ -3560,9 +3560,11 @@ function mactrack_int_statuses($stat): array {
 
 /**
  * Renders the Issues column for an interface: one clickable pill per
- * legend status, with the statuses that currently apply to the
- * interface highlighted. Clicking a pill toggles that status in the
- * multi-select Status filter (see mactrack_view_interfaces.php).
+ * exception status that currently applies to the interface
+ * (Unaliased, Errors, Discards, Graphless, Down). Healthy interfaces
+ * with no exceptions render an empty pill group. Clicking a pill
+ * toggles that status in the multi-select Status filter (see
+ * mactrack_view_interfaces.php).
  *
  * @param array $stat The interface record being rendered.
  *
@@ -3572,12 +3574,19 @@ function mactrack_interface_status_pills($stat): string {
 	$legend = mactrack_interface_status_legend();
 	$active = mactrack_int_statuses($stat);
 
+	// Only exception statuses are surfaced as pills, and only when they
+	// currently apply to the interface. 'Up' is a healthy state rather
+	// than an exception, so it is never shown.
+	unset($active['int_up']);
+
 	$pills = '<div class="mactrackPills">';
 
 	foreach ($legend as $class => $label) {
-		$is_active = isset($active[$class]);
+		if (!isset($active[$class])) {
+			continue;
+		}
 
-		$pills .= '<button type="button" class="mactrackPill ' . $class . ($is_active ? ' mactrackPillActive' : '') . '"' .
+		$pills .= '<button type="button" class="mactrackPill ' . $class . ' mactrackPillActive"' .
 			' data-status="' . html_escape($class) . '" title="' . html_escape($label) . '">' .
 			html_escape($label) . '</button>';
 	}
@@ -3588,13 +3597,17 @@ function mactrack_interface_status_pills($stat): string {
 }
 
 /**
- * Renders the 802.1x status pill shown after the username column. The
- * pill is a drill-down control that sets the Status filter to the
- * clicked status (see mactrack_view_dot1x.php).
+ * Renders the 802.1x status pill shown after the username column. Only
+ * failure statuses (Authentication Failed, Authorization Failed) are
+ * surfaced as pills so the list highlights exceptions only; every other
+ * status renders nothing. The pill is a drill-down control that toggles
+ * the clicked status in the multi-select Status filter (see
+ * mactrack_view_dot1x.php).
  *
  * @param array $port_result The 802.1x record being rendered.
  *
- * @return string The HTML markup for the status pill.
+ * @return string The HTML markup for the status pill, or an empty
+ *                string when the status is not a failure.
  *
  * @global array $mactrack_device_status Shared map of status code =>
  *                                       label (defined once near the
@@ -3604,6 +3617,12 @@ function mactrack_dot1x_status_pill($port_result): string {
 	global $mactrack_device_status;
 
 	$status = (int) $port_result['status'];
+
+	// Only failure statuses are surfaced as pills.
+	if (!mactrack_dot1x_status_is_failure($status)) {
+		return '';
+	}
+
 	$class  = mactrack_dot1x_row_class($port_result);
 	$label  = $mactrack_device_status[$status] ?? __('Unknown', 'mactrack');
 
@@ -3612,6 +3631,79 @@ function mactrack_dot1x_status_pill($port_result): string {
 		' data-dot1x-status="' . html_escape((string) $status) . '" title="' . html_escape($label) . '">' .
 		html_escape($label) . '</button>' .
 		'</div>';
+}
+
+/**
+ * The ordered map of 802.1x status codes to their display labels,
+ * shared by the multi-select Status filter and the status pill
+ * drill-down so they always stay in sync with the poller status codes.
+ *
+ * @return array Ordered map of status code => label text.
+ *
+ * @global array $mactrack_device_status Shared map of status code =>
+ *                                       label (defined once near the
+ *                                       top of this file).
+ */
+function mactrack_dot1x_status_legend(): array {
+	global $mactrack_device_status;
+
+	return $mactrack_device_status;
+}
+
+/**
+ * The 802.1x status codes that represent an authentication or
+ * authorization failure, used to decide which rows get a status pill
+ * and which statuses count as exceptions.
+ *
+ * @return array The failure status codes.
+ */
+function mactrack_dot1x_failure_statuses(): array {
+	return [5, 7];
+}
+
+/**
+ * Determines whether an 802.1x status code represents a failure.
+ *
+ * @param int|string $status The 802.1x status code.
+ *
+ * @return bool True when the status is a failure status.
+ */
+function mactrack_dot1x_status_is_failure($status): bool {
+	return in_array((int) $status, mactrack_dot1x_failure_statuses(), true);
+}
+
+/**
+ * Reduces a comma-separated 802.1x status filter string into a
+ * validated, de-duplicated list of known status codes, mirroring
+ * mactrack_parse_status_tokens() for the interfaces view.
+ *
+ * @param string|null $value The raw 'statuses' request value.
+ *
+ * @return array The validated status codes (ints), in request order.
+ */
+function mactrack_parse_dot1x_status_tokens($value): array {
+	$valid = array_map('intval', array_keys(mactrack_dot1x_status_legend()));
+	$out   = [];
+
+	if ($value === null || $value === '') {
+		return $out;
+	}
+
+	foreach (explode(',', (string) $value) as $token) {
+		$token = trim($token);
+
+		if ($token === '' || !ctype_digit($token)) {
+			continue;
+		}
+
+		$code = (int) $token;
+
+		if (in_array($code, $valid, true) && !in_array($code, $out, true)) {
+			$out[] = $code;
+		}
+	}
+
+	return $out;
 }
 
 /**

@@ -48,7 +48,7 @@ if (isset_request_var('export')) {
 
 /**
  * Validates and stores this view's filter request variables (rows,
- * page, site id, device id, status, MAC/port-name/IP filter type and
+ * page, site id, device id, statuses, MAC/port-name/IP filter type and
  * text, domain, scan date, sort column/direction) into the session for
  * the 802.1x list view.
  *
@@ -74,9 +74,11 @@ function mactrack_view_dot1x_validate_request_vars(): void {
 			'filter'  => FILTER_VALIDATE_INT,
 			'default' => '-1'
 			],
-		'status' => [
-			'filter'  => FILTER_VALIDATE_INT,
-			'default' => '0'
+		'statuses' => [
+			'filter'  => FILTER_VALIDATE_REGEXP,
+			'pageset' => true,
+			'default' => '',
+			'options' => ['options' => ['regexp' => '/^([1-7](,[1-7])*)?$/']]
 			],
 		'mac_filter_type_id' => [
 			'filter'  => FILTER_VALIDATE_INT,
@@ -186,7 +188,7 @@ function mactrack_view_export_dot1x(): void {
 
 /**
  * Builds and executes the prepared SQL query for the 802.1x list view,
- * applying the current status, MAC/port-name/IP filters, domain, site,
+ * applying the selected statuses, MAC/port-name/IP filters, domain, site,
  * device, and scan date request variables, sort order, and optional
  * row limits. Returns an empty result set if no WHERE clause could be
  * constructed (avoiding an unfiltered full table scan).
@@ -205,21 +207,11 @@ function mactrack_view_export_dot1x(): void {
 function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $apply_limits = true): array {
 	$sql_params = [];
 
-	// status sql where
-	if (get_request_var('status') == '1') { // Idle
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 1';
-	} elseif (get_request_var('status') == '2') { // Running
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 2';
-	} elseif (get_request_var('status') == '3') { // No Method
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 3';
-	} elseif (get_request_var('status') == '4') { // Authentication Success
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 4';
-	} elseif (get_request_var('status') == '5') { // Authentication Failed
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 5';
-	} elseif (get_request_var('status') == '6') { // Authorization Success
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 6';
-	} elseif (get_request_var('status') == '7') { // Authorization Failed
-		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status = 7';
+	// status sql where (multi-select Status filter / status pill drill-down)
+	$statuses = mactrack_parse_dot1x_status_tokens(get_request_var('statuses'));
+
+	if (cacti_sizeof($statuses)) {
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'mtd.status IN (' . implode(',', $statuses) . ')';
 	}
 
 	// form the 'where' clause for our main sql query
@@ -328,10 +320,6 @@ function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $appl
 
 	if (get_request_var('site_id') != '-1') {
 		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.site_id = ' . get_filter_request_var('site_id');
-	}
-
-	if (get_request_var('status') != '0') {
-		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mtd.status = ' . get_filter_request_var('status');
 	}
 
 	if (get_request_var('device_id') != '-1') {
@@ -692,21 +680,11 @@ function mactrack_dot1x_filter(): void {
 						<?php print __('Status', 'mactrack'); ?>
 					</td>
 					<td>
-						<select id='status'>
+						<?php $selected_dot1x_statuses = mactrack_parse_dot1x_status_tokens(get_request_var('statuses')); ?>
+						<select id='statuses' multiple class='select2-multi-count' data-select-all-text='<?php print html_escape(__('All Statuses', 'mactrack')); ?>' data-select-count-text='<?php print html_escape(__('Statuses Selected', 'mactrack')); ?>'>
 							<?php
-	$all_status = [
-		0 => __esc('Any Status', 'mactrack'),
-		1 => __esc('Idle', 'mactrack'),
-		2 => __esc('Running', 'mactrack'),
-		3 => __esc('No Method', 'mactrack'),
-		4 => __esc('Authentication Success', 'mactrack'),
-		5 => __esc('Authentication Failed', 'mactrack'),
-		6 => __esc('Authorization Success', 'mactrack'),
-		7 => __esc('Authorization Failed', 'mactrack'),
-	];
-
-	foreach ($all_status as $i => $status) {
-		print "<option value='$i'" . (get_request_var('status') == $i ? ' selected' : '') . '>' . $status . '</option>';
+	foreach (mactrack_dot1x_status_legend() as $status_code => $status_label) {
+		print '<option value="' . html_escape((string) $status_code) . '"' . (in_array((int) $status_code, $selected_dot1x_statuses, true) ? ' selected' : '') . '>' . html_escape($status_label) . '</option>';
 	}
 	?>
 						</select>
@@ -799,7 +777,9 @@ function mactrack_dot1x_filter(): void {
 				strURL += '&port_name_filter=' + encodeURIComponent($('#port_name_filter').val());
 				strURL += '&scan_date=' + $('#scan_date').val();
 				strURL += '&domain=' + $('#domain').val();
-				strURL += '&status=' + $('#status').val();
+
+				var mtStatuses = $('#statuses').length ? ($('#statuses').val() || []) : [];
+				strURL += '&statuses=' + mtStatuses.join(',');
 
 				loadPageNoHeader(strURL);
 			}
@@ -815,7 +795,26 @@ function mactrack_dot1x_filter(): void {
 			}
 
 			$(function() {
-				$('#site_id, #device_id, #rows, #status, #scan_date, #domain').on('change', function() {
+				$('#site_id, #device_id, #rows, #scan_date, #domain').on('change', function() {
+					applyFilter();
+				});
+
+				// Re-run the filter when the multi-select Status dropdown is
+				// closed so a changed selection is applied without needing Go.
+				$('#statuses').on('select2:close', function() {
+					applyFilter();
+				});
+
+				// Fallback for cores without Select2 (pre 1.2.32): a native
+				// multi-select fires 'change' but never 'select2:close'. Apply
+				// on change only when Select2 is not active, and skip
+				// programmatic changes (e.g. the pill drill-down applies the
+				// filter itself) so the filter is not applied twice.
+				$('#statuses').on('change', function(event) {
+					if ($(this).hasClass('select2-hidden-accessible') || event.isTrigger) {
+						return;
+					}
+
 					applyFilter();
 				});
 
@@ -832,16 +831,26 @@ function mactrack_dot1x_filter(): void {
 					exportRows();
 				});
 
-				// Status pill drill-down: set the Status filter to the
-				// clicked session status, then re-apply the filter.
+				// Status pill drill-down: toggle the clicked session status
+				// in the multi-select Status filter, then re-apply the filter.
 				$('.mactrackPill').off('click').on('click', function() {
 					var status = $(this).attr('data-dot1x-status');
+					var $sel   = $('#statuses');
 
-					if (status === undefined || !$('#status').length) {
+					if (status === undefined || !$sel.length) {
 						return;
 					}
 
-					$('#status').val(status);
+					var vals = $sel.val() || [];
+					var idx  = $.inArray(status, vals);
+
+					if (idx > -1) {
+						vals.splice(idx, 1);
+					} else {
+						vals.push(status);
+					}
+
+					$sel.val(vals).trigger('change');
 
 					applyFilter();
 				});

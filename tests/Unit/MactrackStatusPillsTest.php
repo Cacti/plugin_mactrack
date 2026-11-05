@@ -167,36 +167,62 @@ final class MactrackStatusPillsTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function test_interface_pills_render_every_class_and_mark_active(): void {
+	public function test_interface_pills_render_only_active_exception_statuses(): void {
+		$html = mactrack_interface_status_pills($this->stat([
+			'ifAlias'              => '',
+			'int_errors_present'   => 1,
+			'int_discards_present' => 0,
+			'has_graphs'           => 1,
+		]));
+
+		$this->assertStringContainsString('class="mactrackPills"', $html);
+
+		// Only the active exception statuses render, each marked active.
+		$this->assertStringContainsString('data-status="int_up_wo_alias"', $html);
+		$this->assertStringContainsString('data-status="int_errors"', $html);
+		$this->assertStringContainsString('mactrackPillActive', $html);
+
+		// 'Up' is never a pill, and inactive exceptions are omitted.
+		$this->assertStringNotContainsString('data-status="int_up"', $html);
+		$this->assertStringNotContainsString('data-status="int_discards"', $html);
+		$this->assertStringNotContainsString('data-status="int_no_graph"', $html);
+		$this->assertStringNotContainsString('data-status="int_down"', $html);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function test_interface_pills_empty_for_healthy_interface(): void {
 		$html = mactrack_interface_status_pills($this->stat([]));
 
 		$this->assertStringContainsString('class="mactrackPills"', $html);
-		$this->assertStringContainsString('data-status="int_up"', $html);
-		$this->assertStringContainsString('mactrackPillActive', $html);
-
-		foreach (array_keys(mactrack_interface_status_legend()) as $class) {
-			$this->assertStringContainsString($class, $html);
-		}
+		$this->assertStringNotContainsString('mactrackPill ', $html);
+		$this->assertStringNotContainsString('data-status=', $html);
 	}
 
 	/**
 	 * @return void
 	 */
-	public function test_dot1x_pill_uses_row_class_and_status_hook(): void {
-		$html = mactrack_dot1x_status_pill(['status' => 2]);
+	public function test_dot1x_pill_renders_for_failure_status(): void {
+		$html = mactrack_dot1x_status_pill(['status' => 5]);
 
 		$this->assertStringContainsString('mactrackPill', $html);
-		$this->assertStringContainsString('data-dot1x-status="2"', $html);
-		$this->assertStringContainsString('dot1x_running', $html);
+		$this->assertStringContainsString('data-dot1x-status="5"', $html);
+		$this->assertStringContainsString('dot1x_auth_failed', $html);
 	}
 
 	/**
 	 * @return void
 	 */
-	public function test_dot1x_pill_unknown_status_uses_default_class(): void {
-		$html = mactrack_dot1x_status_pill(['status' => 99]);
+	public function test_dot1x_pill_empty_for_non_failure_status(): void {
+		$this->assertSame('', mactrack_dot1x_status_pill(['status' => 2]));
+	}
 
-		$this->assertStringContainsString('dot1x_authn_success', $html);
+	/**
+	 * @return void
+	 */
+	public function test_dot1x_pill_empty_for_unknown_status(): void {
+		$this->assertSame('', mactrack_dot1x_status_pill(['status' => 99]));
 	}
 
 	/**
@@ -214,14 +240,14 @@ final class MactrackStatusPillsTest extends TestCase {
 			'device_name'   => 'switch-a',
 			'hostname'      => 'switch-a.example.net',
 			'username'      => 'jdoe',
-			'status'        => 2,
+			'status'        => 7,
 			'ip_address'    => '10.0.0.5',
 			'mac_address'   => '001122334455',
 			'ifName'        => 'Gi1/0/1',
 			'domain'        => 2,
 		]);
 
-		$this->assertStringContainsString('data-dot1x-status="2"', $html);
+		$this->assertStringContainsString('data-dot1x-status="7"', $html);
 		$this->assertSame(1, substr_count($html, 'data-dot1x-status='));
 	}
 
