@@ -323,8 +323,13 @@ if (!function_exists('html_escape')) {
 }
 
 if (!function_exists('__')) {
-	function __($text, $domain = '') {
-		return $text;
+	// Mirror Cacti's variadic __(): a format string plus optional sprintf
+	// arguments and a trailing text domain. Declared with func_get_args() so
+	// static analysis treats it as variadic rather than a fixed 2-arg function.
+	function __() {
+		$args = func_get_args();
+
+		return $args[0] ?? '';
 	}
 }
 
@@ -354,6 +359,18 @@ if (!function_exists('cacti_log')) {
 if (!function_exists('cacti_sizeof')) {
 	function cacti_sizeof($array) {
 		return is_array($array) ? count($array) : 0;
+	}
+}
+
+if (!function_exists('cacti_escapeshellarg')) {
+	function cacti_escapeshellarg($string, $quote = true) {
+		return escapeshellarg((string) $string);
+	}
+}
+
+if (!function_exists('cacti_escapeshellcmd')) {
+	function cacti_escapeshellcmd($string) {
+		return escapeshellcmd((string) $string);
 	}
 }
 

@@ -124,13 +124,63 @@ test('a POST rescan and site scan look up their target', function ($action, $tab
 	['mactrack_site_scan', 'mac_track_sites'],
 ]);
 
+test('a POST rescan runs the scan subprocess and returns results with a completion message', function () {
+	$_SERVER['REQUEST_METHOD'] = 'POST';
+
+	// A no-op binary so passthru() produces no output and a non-zero exit,
+	// exercising both the empty-output and subprocess-error branches without
+	// launching the real scanner.
+	$GLOBALS['__test_config_options']['path_php_binary'] = '/bin/false';
+
+	// device lookup (enabled), then the user lookup inside mactrack_log_action()
+	mactrack_test_queue_return('db_fetch_row_prepared', [
+		'device_id' => 5,
+		'hostname'  => 'sw1.example.com',
+		'disabled'  => '',
+	]);
+	mactrack_test_queue_return('db_fetch_row_prepared', ['username' => 'admin', 'full_name' => 'Administrator']);
+
+	$data = json_decode(mactrack_test_run_admin_action('mactrack_rescan'), true);
+
+	expect($data)->toHaveKey('content');
+	expect($data)->toHaveKey('message');
+});
+
+test('a POST site scan runs the scan subprocess and returns results with a completion message', function () {
+	$_SERVER['REQUEST_METHOD'] = 'POST';
+
+	$GLOBALS['__test_config_options']['path_php_binary'] = '/bin/false';
+
+	// site lookup, then the user lookup inside mactrack_log_action()
+	mactrack_test_queue_return('db_fetch_row_prepared', ['site_id' => 3, 'site_name' => 'HQ']);
+	mactrack_test_queue_return('db_fetch_row_prepared', ['username' => 'admin', 'full_name' => 'Administrator']);
+
+	$data = json_decode(mactrack_test_run_admin_action('mactrack_site_scan'), true);
+
+	expect($data)->toHaveKey('content');
+	expect($data)->toHaveKey('message');
+});
+
 test('the admin actions are sent as POST with the CSRF token and report failures', function () {
 	$js = plugin_test_read_source('js/mactrack.js');
 
+	// five AJAX admin actions: three scans plus enable and disable
 	expect(substr_count($js, 'mactrack_ajax_admin.php'))->toBe(5);
 	expect($js)->not->toContain('getJSON');
-	expect(substr_count($js, '$.post(url, { __csrf_magic: csrfMagicToken }'))->toBe(5);
-	expect(substr_count($js, "}, 'json').fail(function(data) {"))->toBe(5);
-	expect(substr_count($js, 'getPresentHTTPError(data);'))->toBe(5);
-	expect(substr_count($js, "removeClass('fa-spin')"))->toBe(6);
+
+	// the three scans share one helper that POSTs with the CSRF token, bounds
+	// the request with a timeout and always clears the spinner, so a stalled
+	// subprocess can never leave the rescan icon spinning forever
+	expect($js)->toContain('function mactrackRunScan(');
+	expect(substr_count($js, "type:     'POST'"))->toBe(1);
+	expect($js)->toContain('timeout:  mactrackScanTimeout');
+	expect(substr_count($js, '.always(function() {'))->toBe(1);
+	expect(substr_count($js, "removeClass('fa-spin')"))->toBe(1);
+
+	// enable and disable also POST with the CSRF token
+	expect(substr_count($js, '$.post(url, { __csrf_magic: csrfMagicToken }'))->toBe(2);
+
+	// every path carries the CSRF token and reports failures to the user
+	expect(substr_count($js, '__csrf_magic: csrfMagicToken'))->toBe(3);
+	expect(substr_count($js, 'getPresentHTTPError(data);'))->toBe(3);
 });
