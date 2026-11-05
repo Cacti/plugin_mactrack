@@ -418,6 +418,44 @@ function valid_snmp_device(&$device): bool {
 }
 
 /**
+ * mactrack_snmp_pattern_match - Return true when $value satisfies the device
+ * type match $pattern.
+ *
+ * A '*' in the pattern is treated as a wildcard that splits it into tokens;
+ * every non-empty token must appear somewhere in $value (logical AND). Without
+ * a '*' the whole pattern must appear in $value as a substring. An empty
+ * pattern imposes no requirement and returns true.
+ *
+ * @param string $pattern Device type match string (sysDescr_match or sysObjectID_match).
+ * @param string $value   The value read from the device (snmp_sysDescr or snmp_sysObjectID).
+ *
+ * @return bool
+ */
+function mactrack_snmp_pattern_match(string $pattern, string $value): bool {
+	if ($pattern === '') {
+		return true;
+	}
+
+	if (strpos($pattern, '*') !== false) {
+		$parts = explode('*', $pattern);
+
+		foreach ($parts as $part) {
+			if ($part === '') {
+				continue;
+			}
+
+			if (substr_count($value, $part) === 0) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	return (substr_count($value, $pattern) > 0);
+}
+
+/**
  * find_scanning_function - This function scans the mac_track_device_type database
  * for a valid scanning function and then returns an array with the current device
  * type and it's characteristics for the main mac_track_scanner function to call.
@@ -428,67 +466,36 @@ function find_scanning_function(&$device, &$device_types): array {
 	// scan all device_types to determine the function to call
 	if (cacti_sizeof($device_types)) {
 		foreach ($device_types as $device_type) {
-			// by default none match
-			$sysDescr_match    = false;
-			$sysObjectID_match = false;
+			$sysDescr_pattern    = (string) $device_type['sysDescr_match'];
+			$sysObjectID_pattern = (string) $device_type['sysObjectID_match'];
 
-			// search for a matching snmp_sysDescr
-			if (substr_count($device_type['sysDescr_match'], '*') > 0) {
-				// need to assume mixed string
-				$parts = explode('*', $device_type['sysDescr_match']);
+			$has_sysDescr    = ($sysDescr_pattern !== '');
+			$has_sysObjectID = ($sysObjectID_pattern !== '');
 
-				if (cacti_sizeof($parts)) {
-					foreach ($parts as $part) {
-						if ($part != '') {
-							if (substr_count($device['snmp_sysDescr'],$part) > 0) {
-								$sysDescr_match = true;
-							} else {
-								$sysDescr_match = false;
-							}
-						}
-					}
-				}
-			} else {
-				if ($device_type['sysDescr_match'] == '') {
-					$sysDescr_match = true;
-				} else {
-					if (substr_count($device['snmp_sysDescr'], $device_type['sysDescr_match'])) {
-						$sysDescr_match = true;
-					} else {
-						$sysDescr_match = false;
-					}
-				}
+			// A device type that supplies neither a sysDescr nor a sysObjectID
+			// match has no criteria to identify a device, so it can never be a
+			// positive match. Skipping it also prevents such an "empty" type
+			// from acting as a catch-all that steals devices from more specific
+			// device types later in the list.
+			if (!$has_sysDescr && !$has_sysObjectID) {
+				continue;
 			}
 
-			// search for a matching snmp_sysObjectID
-			// need to assume mixed string
-			if (substr_count($device_type['sysObjectID_match'], '*') > 0) {
-				$parts = explode('*', $device_type['sysObjectID_match']);
+			$sysDescr_match    = $has_sysDescr ? mactrack_snmp_pattern_match($sysDescr_pattern, (string) $device['snmp_sysDescr']) : false;
+			$sysObjectID_match = $has_sysObjectID ? mactrack_snmp_pattern_match($sysObjectID_pattern, (string) $device['snmp_sysObjectID']) : false;
 
-				if (cacti_sizeof($parts)) {
-					foreach ($parts as $part) {
-						if ($part != '') {
-							if (substr_count($device['snmp_sysObjectID'],$part) > 0) {
-								$sysObjectID_match = true;
-							} else {
-								$sysObjectID_match = false;
-							}
-						}
-					}
-				}
+			// When both match patterns are supplied the device must satisfy
+			// both of them. When only one is supplied the device only has to
+			// satisfy that one.
+			if ($has_sysDescr && $has_sysObjectID) {
+				$matched = ($sysDescr_match && $sysObjectID_match);
+			} elseif ($has_sysDescr) {
+				$matched = $sysDescr_match;
 			} else {
-				if ($device_type['sysObjectID_match'] == '') {
-					$sysObjectID_match = true;
-				} else {
-					if (substr_count($device['snmp_sysObjectID'], $device_type['sysObjectID_match'])) {
-						$sysObjectID_match = true;
-					} else {
-						$sysObjectID_match = false;
-					}
-				}
+				$matched = $sysObjectID_match;
 			}
 
-			if (($sysObjectID_match == true) && ($sysDescr_match == true)) {
+			if ($matched) {
 				$device['device_type_id'] = $device_type['device_type_id'];
 				$device['scan_type']      = $device_type['device_type'];
 
