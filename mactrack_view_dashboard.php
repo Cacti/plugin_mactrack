@@ -306,7 +306,7 @@ function mactrack_dashboard_card_body(string $key): string {
 
 			break;
 		case 'table_sizes':
-			$tables = db_fetch_assoc('SELECT TABLE_NAME AS name, TABLE_ROWS AS rows,
+			$tables = db_fetch_assoc('SELECT TABLE_NAME AS name, TABLE_ROWS AS `rows`,
 				(DATA_LENGTH + INDEX_LENGTH) AS bytes
 				FROM information_schema.TABLES
 				WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME LIKE "mac\\_track%"
