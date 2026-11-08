@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* dev: Run the CI poller with the shared runner group so RRD files and structured directories pass permission verification
 * issue: Show scan results in a single scrollable dialog (with the completion time appended) instead of stacking a separate toast on top of the results dialog
 * issue: Format the interface Errors, Discards and Unknown Protocol columns with number_format_i18n() for readability
 * issue: Add a tooltip to the interfaces 'Show Totals' control explaining what the totals columns show
