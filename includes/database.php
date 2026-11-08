@@ -510,11 +510,11 @@ function mactrack_database_upgrade(): void {
 
 		db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-			VALUES ('Aruba 6300-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.109','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
+			VALUES ('Aruba 6300-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.109','get_aruba_oscx_switch_ports','get_aruba_oscx_arp_table','0','',0,0,'on')");
 
 		db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-			VALUES ('Aruba 6200-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.300','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
+			VALUES ('Aruba 6200-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.300','get_aruba_oscx_switch_ports','get_aruba_oscx_arp_table','0','',0,0,'on')");
 
 		db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
@@ -724,7 +724,29 @@ function mactrack_database_upgrade(): void {
 		db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(vendor_mac, ':', '')");
 	}
 
+	mactrack_fix_aruba_oscx_device_type_functions();
 	mactrack_ensure_default_site();
+}
+
+/**
+ * Replaces the obsolete callback names on the built-in Aruba AOS-CX types.
+ *
+ * @return void
+ */
+function mactrack_fix_aruba_oscx_device_type_functions(): void {
+	$types = ['Aruba 6300-default', 'Aruba 6200-default'];
+
+	foreach ($types as $description) {
+		db_execute_prepared('UPDATE mac_track_device_types
+			SET scanning_function = ?
+			WHERE description = ? AND scanning_function = ?',
+			['get_aruba_oscx_switch_ports', $description, 'get_oscx_switch_ports']);
+
+		db_execute_prepared('UPDATE mac_track_device_types
+			SET ip_scanning_function = ?
+			WHERE description = ? AND ip_scanning_function = ?',
+			['get_aruba_oscx_arp_table', $description, 'get_oscx_arp_table']);
+	}
 }
 
 /**
@@ -1435,11 +1457,11 @@ function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 
 		db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-			VALUES ('Aruba 6300-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.109','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
+			VALUES ('Aruba 6300-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.109','get_aruba_oscx_switch_ports','get_aruba_oscx_arp_table','0','',0,0,'on')");
 
 		db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
-			VALUES ('Aruba 6200-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.300','get_oscx_switch_ports','get_oscx_arp_table','0','',0,0,'on')");
+			VALUES ('Aruba 6200-default','Aruba','2','','.1.3.6.1.4.1.47196.4.1.1.1.300','get_aruba_oscx_switch_ports','get_aruba_oscx_arp_table','0','',0,0,'on')");
 
 		db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
