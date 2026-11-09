@@ -1,0 +1,138 @@
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2004-2026 The Cacti Group                                 |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+*/
+
+/*
+ * MacTrack dashboard: theme bindings + content widgets for the shared card
+ * chrome (css/cards.css). The chrome stylesheet is byte-identical across every
+ * plugin and draws its colours from --cc-* custom properties; this file maps
+ * those to MacTrack's currentColor-derived palette and styles the MacTrack
+ * specific card bodies (tables, key/value lists, proportion bars). See
+ * js/cards.js for behaviour and mactrack_view_dashboard.php for the markup.
+ */
+
+/* Bind the shared chrome variables to MacTrack's theme-agnostic palette.
+   Everything derives from currentColor (the active theme's text colour) so the
+   cards follow every Cacti theme without per-theme overrides. The grid is 8
+   columns wide. */
+#mactrack_dashboard.ccGrid {
+	--cc-cols: 8;
+	--cc-card: transparent;
+	--cc-text: currentColor;
+	--cc-border: color-mix(in srgb, currentColor 22%, transparent);
+	--cc-header-bg: color-mix(in srgb, currentColor 9%, transparent);
+}
+
+/* Below 1200px, widen the narrow spans so cards stay legible (mirrors the
+   previous MacTrack responsive behaviour). */
+@media (max-width: 1199px) {
+	#mactrack_dashboard .ccW1 { grid-column: span 2; }
+	#mactrack_dashboard .ccW2 { grid-column: span 2; }
+	#mactrack_dashboard .ccW3 { grid-column: span 4; }
+	#mactrack_dashboard .ccW4 { grid-column: span 4; }
+}
+
+/* ---- MacTrack card-body content widgets ---- */
+
+.mtdashTable {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 12px;
+}
+
+.mtdashTable th,
+.mtdashTable td {
+	padding: 6px 8px;
+	text-align: left;
+	vertical-align: top;
+	overflow-wrap: anywhere;
+}
+
+.mtdashTable thead th {
+	font-weight: 600;
+	border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+}
+
+.mtdashKv tbody th {
+	font-weight: normal;
+	color: color-mix(in srgb, currentColor 75%, transparent);
+}
+
+.mtdashKv td {
+	text-align: right;
+	font-weight: 600;
+}
+
+.mtdashTable tbody tr + tr > th,
+.mtdashTable tbody tr + tr > td {
+	border-top: 1px solid color-mix(in srgb, currentColor 9%, transparent);
+}
+
+.mtdashEmpty {
+	color: color-mix(in srgb, currentColor 60%, transparent);
+	font-style: italic;
+}
+
+/* Proportion bars (device status, table sizes). */
+.mtdashBars {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.mtdashBarRow {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.mtdashBarHead {
+	display: flex;
+	justify-content: space-between;
+	font-size: 12px;
+}
+
+.mtdashBar,
+.mtdashInlineBar {
+	position: relative;
+	height: 8px;
+	border-radius: 4px;
+	background: color-mix(in srgb, currentColor 12%, transparent);
+	overflow: hidden;
+}
+
+.mtdashInlineBar {
+	display: block;
+	margin-bottom: 2px;
+}
+
+.mtdashBarFill {
+	display: block;
+	height: 100%;
+	border-radius: 4px;
+	background: color-mix(in srgb, currentColor 45%, transparent);
+}
+
+.mtdashBarFill.mtdash-up   { background: #2b8435; }
+.mtdashBarFill.mtdash-warn { background: #a85712; }
+.mtdashBarFill.mtdash-down { background: #a12820; }
+.mtdashBarFill.mtdash-none { background: color-mix(in srgb, currentColor 40%, transparent); }
+
+.ccDialogBody {
+	font-variant-numeric: tabular-nums;
+}
+
+.ccDialogBody .mtdashTable {
+	font-size: 13px;
+}
+
+/* Scan results dialog (device/site/interface rescan): keep long scanner
+   output inside the dialog with a vertical scrollbar instead of overflowing. */
+.mactrackScanResults {
+	max-height: 60vh;
+	overflow-y: auto;
+}

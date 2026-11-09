@@ -528,8 +528,10 @@ function mactrack_page_head() {
 	print get_md5_include_js('plugins/mactrack/js/mactrack.js');
 	print get_md5_include_js('plugins/mactrack/js/mactrack_snmp.js');
 	print get_md5_include_js('plugins/mactrack/js/cards.js');
+	print get_md5_include_js('plugins/mactrack/js/mactrack_dashboard.js');
 
 	print get_md5_include_css('plugins/mactrack/css/cards.css');
+	print get_md5_include_css('plugins/mactrack/css/mactrack-dashboard.css');
 
 	if (file_exists($config['base_path'] . '/plugins/mactrack/css/' . get_selected_theme() . '.css')) {
 		print get_md5_include_css('plugins/mactrack/css/' . get_selected_theme() . '.css');
