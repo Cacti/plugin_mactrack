@@ -201,7 +201,7 @@ if (!function_exists('db_fetch_cell')) {
 	function db_fetch_cell($sql) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_cell', 'sql' => $sql, 'params' => array());
 
-		return mactrack_test_next_return('db_fetch_cell', '');
+		return mactrack_test_next_return('db_fetch_cell', '', $sql);
 	}
 }
 

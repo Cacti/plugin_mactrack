@@ -81,6 +81,9 @@ final class ArubaOscxDispatchTest extends TestCase {
 	 * @return void
 	 */
 	public function testSetupDatabaseSeedsArubaOscxCallbacks(): void {
+		// The COUNT(*) gate uses == 0; PHP 8 treats '' == 0 as false, so the
+		// stub must return the string '0' rather than its empty-string default.
+		mactrack_test_queue_return('db_fetch_cell', '0');
 		mactrack_test_queue_return_for('db_fetch_cell', "description LIKE '%-default'", '0');
 		mactrack_setup_database();
 
