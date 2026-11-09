@@ -57,6 +57,38 @@ function mactrackDashboardMaximize(card) {
 	});
 }
 
+/*
+ * Persist the layout, serialized so a reorder started after an earlier one can
+ * never be overwritten by that earlier request completing last. The dash_layout
+ * endpoint replaces the entire saved layout, so write order must be preserved;
+ * chaining each POST after the previous one settles keeps the newest layout
+ * authoritative (the shared controller only debounces bursts within 250 ms).
+ */
+function mactrackDashboardSaveLayout(grid, state) {
+	var expanded = {};
+
+	state.order.forEach(function(id) {
+		if (state.cards[id] && state.cards[id].expanded) {
+			expanded[id] = true;
+		}
+	});
+
+	var data = {
+		action: 'dash_layout',
+		layout: JSON.stringify({order: state.order, expanded: expanded}),
+		__csrf_magic: csrfMagicToken
+	};
+
+	var post = function() {
+		return $.post('mactrack_view_dashboard.php', data, null, 'json');
+	};
+
+	var pending = grid.__mtLayoutSave || $.Deferred().resolve().promise();
+
+	/* Continue the chain whether the previous save resolved or rejected. */
+	grid.__mtLayoutSave = pending.then(post, post);
+}
+
 /** Wire the MacTrack dashboard grid to the shared card chrome. */
 function initMactrackDashboard() {
 	$(function() {
@@ -94,20 +126,7 @@ function initMactrackDashboard() {
 
 			/* Persist order + expanded state and resync the "Add" catalogue. */
 			onLayoutChange: function(state) {
-				var expanded = {};
-
-				state.order.forEach(function(id) {
-					if (state.cards[id] && state.cards[id].expanded) {
-						expanded[id] = true;
-					}
-				});
-
-				$.post('mactrack_view_dashboard.php', {
-					action: 'dash_layout',
-					layout: JSON.stringify({order: state.order, expanded: expanded}),
-					__csrf_magic: csrfMagicToken
-				}, null, 'json');
-
+				mactrackDashboardSaveLayout(grid, state);
 				mactrackDashboardSyncAddOptions(grid);
 			},
 

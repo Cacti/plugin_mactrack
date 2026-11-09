@@ -17,14 +17,22 @@
 
 /* Bind the shared chrome variables to MacTrack's theme-agnostic palette.
    Everything derives from currentColor (the active theme's text colour) so the
-   cards follow every Cacti theme without per-theme overrides. The grid is 8
-   columns wide. */
-#mactrack_dashboard.ccGrid {
-	--cc-cols: 8;
+   cards follow every Cacti theme without per-theme overrides. These are bound
+   to the whole dashboard panel and to the maximize dialog (which jQuery UI moves
+   under <body>), not just the grid, so the Add toolbar (a sibling of the grid)
+   and the maximized content inherit the active theme instead of the shared
+   chrome's light-theme fallbacks. */
+#mactrack_dashboard_panel,
+#mactrack_dashboard_dialog {
 	--cc-card: transparent;
 	--cc-text: currentColor;
 	--cc-border: color-mix(in srgb, currentColor 22%, transparent);
 	--cc-header-bg: color-mix(in srgb, currentColor 9%, transparent);
+}
+
+/* The grid is 8 columns wide. */
+#mactrack_dashboard.ccGrid {
+	--cc-cols: 8;
 }
 
 /* Below 1200px, widen the narrow spans so cards stay legible (mirrors the
