@@ -4,6 +4,7 @@
 
 * issue#399: Use the registered Aruba AOS-CX callback names in the built-in 6200/6300 device types and repair existing defaults during upgrade
 * dev: Adopt the shared, byte-identical dashboarding card chrome used across the Cacti plugins: the MacTrack dashboard now drives its card grid through the shared `js/cards.js` (`CactiCards`) controller plus a thin `js/mactrack_dashboard.js` adapter, and the card markup/CSS use the shared `.cc*` contract (`css/cards.css`), with MacTrack's `--cc-*` theme bindings and card-body widgets kept in `css/mactrack-dashboard.css`. No functional change to the dashboard; this aligns MacTrack with the other plugins so the chrome can be promoted to Cacti core unchanged
+* dev: Load the shared card chrome from Cacti core on 1.2.32+ (`include/js/cards.js` + `include/css/cards.css`) and only bundle the plugin's own copy on older cores
 * dev: Run the CI poller with the shared runner group so RRD files and structured directories pass permission verification
 * issue: Show scan results in a single scrollable dialog (with the completion time appended) instead of stacking a separate toast on top of the results dialog
 * issue: Format the interface Errors, Discards and Unknown Protocol columns with number_format_i18n() for readability

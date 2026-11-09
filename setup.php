@@ -527,10 +527,15 @@ function mactrack_page_head() {
 
 	print get_md5_include_js('plugins/mactrack/js/mactrack.js');
 	print get_md5_include_js('plugins/mactrack/js/mactrack_snmp.js');
-	print get_md5_include_js('plugins/mactrack/js/cards.js');
+	if (cacti_version_compare(CACTI_VERSION, '1.2.32', '<')) {
+		// Cacti 1.2.32+ ships the shared card chrome in core; only bundle it on older cores.
+		print get_md5_include_js('plugins/mactrack/js/cards.js');
+	}
 	print get_md5_include_js('plugins/mactrack/js/mactrack_dashboard.js');
 
-	print get_md5_include_css('plugins/mactrack/css/cards.css');
+	if (cacti_version_compare(CACTI_VERSION, '1.2.32', '<')) {
+		print get_md5_include_css('plugins/mactrack/css/cards.css');
+	}
 	print get_md5_include_css('plugins/mactrack/css/mactrack-dashboard.css');
 
 	if (file_exists($config['base_path'] . '/plugins/mactrack/css/' . get_selected_theme() . '.css')) {
