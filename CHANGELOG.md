@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue#399: Use the registered Aruba AOS-CX callback names in the built-in 6200/6300 device types and repair existing defaults during upgrade
 * dev: Run the CI poller with the shared runner group so RRD files and structured directories pass permission verification
 * issue: Show scan results in a single scrollable dialog (with the completion time appended) instead of stacking a separate toast on top of the results dialog
 * issue: Format the interface Errors, Discards and Unknown Protocol columns with number_format_i18n() for readability
