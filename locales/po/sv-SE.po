@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 14:55-0500\n"
-"PO-Revision-Date: 2026-10-27 16:18+0000\n"
-"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
-"Language-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\n"
-"Language: sv-SE\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-05 14:55-0500\nPO-Revision-Date: 2026-11-09 22:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -183,12 +171,12 @@ msgstr "Skanna om enhet ”%s”"
 
 #: lib/mactrack_functions.php
 msgid "The rescan produced no output."
-msgstr ""
+msgstr "Den nya skanningen gav inga resultat."
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Device '%s' rescan completed in %0.2f seconds."
-msgstr ""
+msgstr "Den nya skanningen av enheten '%s' slutfördes på %0.2f sekunder."
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -198,7 +186,7 @@ msgstr "Skanna plats ”%s”"
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Site '%s' scan completed in %0.2f seconds."
-msgstr ""
+msgstr "Skanningen av platsen '%s' slutfördes på %0.2f sekunder."
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -333,7 +321,7 @@ msgstr "Visa enhetens detaljer"
 #: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
 #: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
 msgid "Go"
-msgstr "Start"
+msgstr "Gå"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -359,7 +347,7 @@ msgstr "Plats"
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
 #: mactrack_view_ips.php
 msgid "Any"
-msgstr "Vilken som helst"
+msgstr "Valfri"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
 msgid "SubType"
@@ -1819,10 +1807,8 @@ msgid "No Mactrack Devices Found"
 msgstr "Inga Mactrack-enheter hittades"
 
 #: mactrack_view_devices.php
-#, fuzzy
-#| msgid "Site Scan Results"
 msgid "Device Scan Results"
-msgstr "Skanningsresultat för platsen"
+msgstr "Resultat av enhetsskanning"
 
 #: mactrack_view_devices.php
 msgid "Hub/Switch"
@@ -2033,7 +2019,7 @@ msgstr "Bandbredd"
 
 #: mactrack_view_interfaces.php
 msgid "When checked, the Errors, Discards and Unknown Protocol columns show each interface's cumulative SNMP counter totals instead of the average per-second rate."
-msgstr ""
+msgstr "När kryssrutan är markerad visar kolumnerna Fel, Kasseringar och Okänt protokoll de ackumulerade SNMP-räknarvärdena för varje gränssnitt i stället för den genomsnittliga hastigheten per sekund."
 
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
@@ -2673,7 +2659,7 @@ msgstr "Med %d timmes mellanrum"
 #: setup.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "Med %d timmars mellanrum"
+msgstr "Var %d:e timme"
 
 #: setup.php
 msgid "Every Day"
