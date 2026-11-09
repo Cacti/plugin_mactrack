@@ -528,9 +528,7 @@ function mactrack_page_head() {
 	// Cacti 1.2.32+ ships the shared card chrome in core (include/js/cards.js +
 	// include/css/cards.css); bundle the plugin's own copy only when core does
 	// not provide it.
-	$core_cards = defined('CACTI_VERSION') && function_exists('cacti_version_compare')
-		&& cacti_version_compare(CACTI_VERSION, '1.2.32', '>=')
-		&& file_exists($config['base_path'] . '/include/js/cards.js');
+	$core_cards = file_exists($config['base_path'] . '/include/js/cards.js');
 
 	print get_md5_include_js('plugins/mactrack/js/mactrack.js');
 	print get_md5_include_js('plugins/mactrack/js/mactrack_snmp.js');
