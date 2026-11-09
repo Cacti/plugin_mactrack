@@ -73,4 +73,23 @@ final class ArubaOscxDispatchTest extends TestCase {
 		$source = file_get_contents(dirname(__DIR__, 2) . '/includes/database.php');
 		$this->assertSame(4, substr_count($source, "'get_aruba_oscx_switch_ports','get_aruba_oscx_arp_table'"));
 	}
+
+	/**
+	 * Fresh install seeds live in mactrack_setup_database(), a second copy of
+	 * the default-type INSERTs. Cover that path so both copies stay in sync.
+	 *
+	 * @return void
+	 */
+	public function testSetupDatabaseSeedsArubaOscxCallbacks(): void {
+		mactrack_test_queue_return_for('db_fetch_cell', "description LIKE '%-default'", '0');
+		mactrack_setup_database();
+
+		$inserts = array_values(array_filter($GLOBALS['__test_db_calls'], static function ($call) {
+			return $call['fn'] === 'db_execute' && (strpos($call['sql'], "'Aruba 6300-default'") !== false || strpos($call['sql'], "'Aruba 6200-default'") !== false) && strpos($call['sql'], 'INSERT INTO mac_track_device_types') !== false;
+		}));
+		$this->assertCount(2, $inserts);
+		$callbacks = "'get_aruba_oscx_switch_ports','get_aruba_oscx_arp_table'";
+		$this->assertStringContainsString($callbacks, $inserts[0]['sql']);
+		$this->assertStringContainsString($callbacks, $inserts[1]['sql']);
+	}
 }
