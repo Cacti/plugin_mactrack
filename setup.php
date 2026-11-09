@@ -525,11 +525,22 @@ function mactrack_setup_table_new($operator_initiated = true): bool {
 function mactrack_page_head() {
 	global $config;
 
+	// Cacti 1.2.32+ ships the shared card chrome in core (include/js/cards.js +
+	// include/css/cards.css); bundle the plugin's own copy only when core does
+	// not provide it.
+	$core_cards = file_exists($config['base_path'] . '/include/js/cards.js');
+
 	print get_md5_include_js('plugins/mactrack/js/mactrack.js');
 	print get_md5_include_js('plugins/mactrack/js/mactrack_snmp.js');
-	print get_md5_include_js('plugins/mactrack/js/cards.js');
+	if (!$core_cards) {
+		print get_md5_include_js('plugins/mactrack/js/cards.js');
+	}
+	print get_md5_include_js('plugins/mactrack/js/mactrack_dashboard.js');
 
-	print get_md5_include_css('plugins/mactrack/css/cards.css');
+	if (!$core_cards) {
+		print get_md5_include_css('plugins/mactrack/css/cards.css');
+	}
+	print get_md5_include_css('plugins/mactrack/css/mactrack-dashboard.css');
 
 	if (file_exists($config['base_path'] . '/plugins/mactrack/css/' . get_selected_theme() . '.css')) {
 		print get_md5_include_css('plugins/mactrack/css/' . get_selected_theme() . '.css');

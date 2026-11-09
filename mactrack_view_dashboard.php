@@ -400,31 +400,33 @@ function mactrack_dashboard_render_card(string $key, bool $expanded = false): st
 	$tools = '';
 
 	if ($def['expandable']) {
-		$tools .= '<button type="button" class="mtdashCardTool" data-tool="expand" aria-label="' . __esc('Show more', 'mactrack') . '" title="' . __esc('Show more', 'mactrack') . '"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>';
-		$tools .= '<button type="button" class="mtdashCardTool" data-tool="collapse" aria-label="' . __esc('Show less', 'mactrack') . '" title="' . __esc('Show less', 'mactrack') . '"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>';
+		$tools .= '<button type="button" class="ccTool" data-tool="expand" aria-label="' . __esc('Show more', 'mactrack') . '" title="' . __esc('Show more', 'mactrack') . '"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>';
+		$tools .= '<button type="button" class="ccTool" data-tool="collapse" aria-label="' . __esc('Show less', 'mactrack') . '" title="' . __esc('Show less', 'mactrack') . '"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>';
 	}
 
-	$tools .= '<button type="button" class="mtdashCardTool" data-tool="maximize" aria-label="' . __esc('Open in a dialog', 'mactrack') . '" title="' . __esc('Open in a dialog', 'mactrack') . '"><i class="fa fa-window-maximize" aria-hidden="true"></i></button>';
-	$tools .= '<button type="button" class="mtdashCardTool" data-tool="refresh" aria-label="' . __esc('Refresh', 'mactrack') . '" title="' . __esc('Refresh', 'mactrack') . '"><i class="fa fa-sync-alt" aria-hidden="true"></i></button>';
-	$tools .= '<button type="button" class="mtdashCardTool" data-tool="remove" aria-label="' . __esc('Remove from page', 'mactrack') . '" title="' . __esc('Remove from page', 'mactrack') . '"><i class="fa fa-times" aria-hidden="true"></i></button>';
+	$tools .= '<button type="button" class="ccTool" data-tool="maximize" aria-label="' . __esc('Open in a dialog', 'mactrack') . '" title="' . __esc('Open in a dialog', 'mactrack') . '"><i class="fa fa-window-maximize" aria-hidden="true"></i></button>';
+	$tools .= '<button type="button" class="ccTool" data-tool="refresh" aria-label="' . __esc('Refresh', 'mactrack') . '" title="' . __esc('Refresh', 'mactrack') . '"><i class="fa fa-sync-alt" aria-hidden="true"></i></button>';
+	$tools .= '<button type="button" class="ccTool" data-tool="remove" aria-label="' . __esc('Remove from page', 'mactrack') . '" title="' . __esc('Remove from page', 'mactrack') . '"><i class="fa fa-times" aria-hidden="true"></i></button>';
 
-	$classes = 'mtdashCard mtdashSpan' . (int) $def['span'];
+	$classes = 'ccCard ccW' . (int) $def['span'];
 
 	if ($def['expandable']) {
-		$classes .= ' mtdashCardExpandable';
+		$classes .= ' ccCardExpandable';
 	}
 
 	if ($expanded) {
-		$classes .= ' mtdashCardExpanded';
+		$classes .= ' ccCardExpanded';
 	}
 
-	return '<section class="' . $classes . '" data-card="' . html_escape($key) . '">'
-		. '<header class="mtdashCardHeader">'
-		. '<button type="button" class="mtdashCardDrag" aria-label="' . __esc('Drag to reorder card', 'mactrack') . '"><i class="fa fa-bars" aria-hidden="true"></i></button>'
-		. '<h2 class="mtdashCardTitle">' . html_escape($def['title']) . '</h2>'
-		. '<span class="mtdashCardTools">' . $tools . '</span>'
+	return '<section class="' . $classes . '" data-card="' . html_escape($key) . '"'
+		. ($def['expandable'] ? ' data-expandable="1"' : '')
+		. ' data-expanded="' . ($expanded ? '1' : '0') . '">'
+		. '<header class="ccCardHeader">'
+		. '<button type="button" class="ccDrag" aria-label="' . __esc('Drag to reorder card', 'mactrack') . '"><i class="fa fa-bars" aria-hidden="true"></i></button>'
+		. '<h2 class="ccTitle">' . html_escape($def['title']) . '</h2>'
+		. '<span class="ccTools">' . $tools . '</span>'
 		. '</header>'
-		. '<div class="mtdashCardBody">' . mactrack_dashboard_card_body($key) . '</div>'
+		. '<div class="ccCardBody">' . mactrack_dashboard_card_body($key) . '</div>'
 		. '</section>';
 }
 
@@ -540,9 +542,9 @@ function mactrack_dashboard(): void {
 
 	print '<div id="mactrack_dashboard_panel" class="mtdashPanel">';
 
-	print '<div class="mtdashToolbar">';
-	print '<label class="mtdashToolbarLabel" for="mactrack_dashboard_add">' . __esc('Add card', 'mactrack') . '</label>';
-	print '<select id="mactrack_dashboard_add" class="mtdashAdd"><option value="">' . __esc('Add a dashboard card…', 'mactrack') . '</option>';
+	print '<div class="ccToolbar">';
+	print '<label class="ccToolbarLabel" for="mactrack_dashboard_add">' . __esc('Add card', 'mactrack') . '</label>';
+	print '<select id="mactrack_dashboard_add" class="ccAdd"><option value="">' . __esc('Add a dashboard card…', 'mactrack') . '</option>';
 
 	foreach ($absent as $key) {
 		print '<option value="' . html_escape($key) . '">' . html_escape($meta[$key]['title']) . '</option>';
@@ -551,7 +553,7 @@ function mactrack_dashboard(): void {
 	print '</select>';
 	print '</div>';
 
-	print '<div id="mactrack_dashboard" class="mtdashGrid">';
+	print '<div id="mactrack_dashboard" class="ccGrid">';
 
 	foreach ($layout['order'] as $key) {
 		print mactrack_dashboard_render_card($key, !empty($layout['expanded'][$key]));

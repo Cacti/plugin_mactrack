@@ -7,75 +7,89 @@
 */
 
 /*
- * MacTrack Dashboard card chrome. A grid of status cards with a draggable
- * header, per-card tools and optional expand. Colours derive from currentColor
- * (the active theme's text colour) via color-mix, so the cards follow every
- * theme without per-theme overrides. See js/cards.js for the behaviour and
- * mactrack_view_dashboard.php for the markup.
+ * cacti-cards vX.Y - shared "card chrome" (presentation layer).
+ *
+ * This file is bundled per-plugin (no cross-plugin or core dependency) and is
+ * kept byte-identical between the plugins that use it. It styles a grid of
+ * cards with a draggable header, per-card tools and optional expand/resize.
+ * All colours come from CSS custom properties the host sets, so it inherits
+ * the active Cacti theme without baking any palette in.
+ *
+ * HTML contract (emitted by the host's PHP):
+ *
+ *   <div class="ccGrid" style="--cc-cols:4">
+ *     <section class="ccCard ccW2 ccH1" data-card="ID"
+ *              data-severity="none|up|warn|down"
+ *              data-size-model="expand|steps"
+ *              data-expandable="0|1" data-expanded="0|1"
+ *              data-height="1" data-height-max="3"
+ *              data-maximize="body|details">
+ *       <header class="ccCardHeader">
+ *         <button class="ccDrag" ...><i class="fa fa-bars"></i></button>
+ *         <h2 class="ccTitle">Title</h2>
+ *         <span class="ccTools">
+ *           <button class="ccTool" data-tool="expand|collapse|shrink|grow|maximize|refresh|remove">...</button>
+ *         </span>
+ *       </header>
+ *       <div class="ccCardBody">...</div>
+ *     </section>
+ *   </div>
+ *
+ * Host theme variables (all optional, sensible fallbacks provided):
+ *   --cc-cols          grid column count (default 4)
+ *   --cc-surface       page surface behind the cards
+ *   --cc-card          card background
+ *   --cc-text          card foreground
+ *   --cc-border        card / divider border
+ *   --cc-header-bg     header background colour
+ *   --cc-header-image  header background image (gradient themes)
+ *   --cc-header-fg     header foreground
+ *   --cc-sev-up/-warn/-down/-none  severity hues (used as a translucent wash
+ *                                  over the header + its bottom border)
  */
 
-.mtdashToolbar {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 8px;
-	margin: 10px 4px 0;
-}
-
-.mtdashToolbarLabel {
-	font-size: 12px;
-	font-weight: 600;
-}
-
-.mtdashAdd {
-	box-sizing: border-box;
-	min-width: 220px;
-	padding: 4px 8px;
-	border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
-	border-radius: 7px;
-	background: color-mix(in srgb, currentColor 4%, transparent);
-	color: inherit;
-	font-size: 12px;
-}
-
-#mactrack_dashboard.mtdashGrid {
+.ccGrid {
 	display: grid;
-	grid-template-columns: repeat(8, minmax(0, 1fr));
+	grid-template-columns: repeat(var(--cc-cols, 4), minmax(0, 1fr));
 	align-items: start;
 	gap: 14px;
 	margin: 10px 4px;
 	font-variant-numeric: tabular-nums;
 }
 
-.mtdashSpan1 { grid-column: span 2; }
-.mtdashSpan2 { grid-column: span 2; }
-.mtdashSpan3 { grid-column: span 4; }
-.mtdashSpan4 { grid-column: span 4; }
+/* Column span (width). */
+.ccW1 { grid-column: span 1; }
+.ccW2 { grid-column: span 2; }
+.ccW3 { grid-column: span 3; }
+.ccW4 { grid-column: span 4; }
+.ccW5 { grid-column: span 5; }
+.ccW6 { grid-column: span 6; }
+.ccW7 { grid-column: span 7; }
+.ccW8 { grid-column: span 8; }
 
-@media (min-width: 1200px) {
-	.mtdashSpan1 { grid-column: span 1; }
-	.mtdashSpan2 { grid-column: span 2; }
-	.mtdashSpan3 { grid-column: span 3; }
-	.mtdashSpan4 { grid-column: span 4; }
-}
+/* Row span (height) for the "steps" size model. */
+.ccH1 { grid-row: span 1; }
+.ccH2 { grid-row: span 2; }
+.ccH3 { grid-row: span 3; }
 
-.mtdashCard {
+.ccCard {
 	box-sizing: border-box;
 	min-width: 0;
 	display: flex;
 	flex-direction: column;
-	border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
-	background: color-mix(in srgb, currentColor 5%, transparent);
+	border: 1px solid var(--cc-border, #cbd8d1);
+	/* lift the card off the page surface on both light and dark themes */
+	background: color-mix(in srgb, var(--cc-text, #23362f) 4%, var(--cc-card, #fff));
+	color: var(--cc-text, #23362f);
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-	border-radius: 4px;
 	overflow: hidden;
 }
 
-.mtdashCardDragging {
+.ccCardDragging {
 	opacity: 0.5;
 }
 
-.mtdashCardHeader {
+.ccCardHeader {
 	box-sizing: border-box;
 	/* fixed row height so a tool/handle hover highlight never reflows the header */
 	min-height: 34px;
@@ -83,11 +97,17 @@
 	align-items: center;
 	gap: 8px;
 	padding: 7px 10px;
-	border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
-	background: color-mix(in srgb, currentColor 9%, transparent);
+	border-bottom: 1px solid var(--cc-border, #cbd8d1);
+	/* paint like the active theme's native html_start_box title bar */
+	background-color: var(--cc-header-bg, #e5ece8);
+	background-image: var(--cc-header-image, none);
+	background-repeat: repeat-x;
+	color: var(--cc-header-fg, var(--cc-text, #23362f));
 }
 
-.mtdashCardDrag {
+/* Drag handle: lives on the LEFT of the header; grab it to reorder the card. */
+.ccDrag {
+	order: -1;
 	flex: 0 0 auto;
 	box-sizing: border-box;
 	padding: 2px 5px;
@@ -101,19 +121,24 @@
 	cursor: grab;
 }
 
-.mtdashCardDrag:hover,
-.mtdashCardDrag:focus-visible {
+.ccDrag:hover,
+.ccDrag:focus-visible {
 	color: currentColor;
 	border-color: transparent;
 	background: color-mix(in srgb, currentColor 12%, transparent);
 	outline: none;
 }
 
-.mtdashCardDrag:active {
+.ccDrag:active {
 	cursor: grabbing;
 }
 
-.mtdashCardTitle {
+/* Host toggle to lock reordering (e.g. a "select text" mode): hide the handles. */
+.ccNoDrag .ccDrag {
+	display: none;
+}
+
+.ccTitle {
 	flex: 1 1 auto;
 	min-width: 0;
 	margin: 0;
@@ -125,14 +150,14 @@
 	white-space: nowrap;
 }
 
-.mtdashCardTools {
+.ccTools {
 	flex: 0 0 auto;
 	display: flex;
 	align-items: center;
 	gap: 1px;
 }
 
-.mtdashCardTool {
+.ccTool {
 	box-sizing: border-box;
 	padding: 2px 5px;
 	/* reserve the border so a hover/focus highlight recolours it instead of resizing the header */
@@ -145,8 +170,8 @@
 	cursor: pointer;
 }
 
-.mtdashCardTool:hover,
-.mtdashCardTool:focus-visible {
+.ccTool:hover,
+.ccTool:focus-visible {
 	color: currentColor;
 	border-color: transparent;
 	background: color-mix(in srgb, currentColor 12%, transparent);
@@ -154,25 +179,37 @@
 }
 
 /* Only the control matching the card's current state is shown. */
-.mtdashCard:not(.mtdashCardExpanded) .mtdashCardTool[data-tool="collapse"],
-.mtdashCardExpanded .mtdashCardTool[data-tool="expand"] {
+.ccCard:not(.ccCardExpanded) .ccTool[data-tool="collapse"],
+.ccCardExpanded .ccTool[data-tool="expand"] {
 	display: none;
 }
 
-.mtdashCardBody {
-	padding: 6px 12px 10px;
+/* Expand/collapse is only meaningful on expandable cards. */
+.ccCard:not([data-expandable="1"]) .ccTool[data-tool="expand"],
+.ccCard:not([data-expandable="1"]) .ccTool[data-tool="collapse"] {
+	display: none;
+}
+
+/* Resize tools only apply to the "steps" size model, and clamp at the ends. */
+.ccCard:not([data-size-model="steps"]) .ccTool[data-tool="shrink"],
+.ccCard:not([data-size-model="steps"]) .ccTool[data-tool="grow"] {
+	display: none;
+}
+
+.ccCardBody {
+	padding: 4px 12px 10px;
 	overflow-x: auto;
 }
 
 /* Expandable cards clip to a fixed height until "show more"; a fade hints at the
    clipped content. */
-.mtdashCardExpandable:not(.mtdashCardExpanded) .mtdashCardBody {
+.ccCardExpandable:not(.ccCardExpanded) .ccCardBody {
 	position: relative;
-	max-height: 220px;
+	max-height: 210px;
 	overflow: hidden;
 }
 
-.mtdashCardExpandable:not(.mtdashCardExpanded) .mtdashCardBody::after {
+.ccCardExpandable:not(.ccCardExpanded) .ccCardBody::after {
 	content: '';
 	position: absolute;
 	left: 0;
@@ -180,105 +217,82 @@
 	bottom: 0;
 	height: 30px;
 	pointer-events: none;
-	background: linear-gradient(transparent, color-mix(in srgb, currentColor 5%, transparent));
+	background: linear-gradient(transparent, color-mix(in srgb, var(--cc-text, #23362f) 4%, var(--cc-card, #fff)));
 }
 
-.mtdashTable {
-	width: 100%;
-	border-collapse: collapse;
-	font-size: 12px;
+/*
+ * Severity wash. Every card carries exactly one data-severity. A single
+ * translucent colour layer is drawn over the sampled native theme header so the
+ * strength stays consistent on solid and gradient themes, light and dark. The
+ * hue comes from a host variable so it follows the theme's colour family.
+ */
+.ccCard[data-severity="none"] .ccCardHeader {
+	background-image:
+		linear-gradient(var(--cc-sev-none, rgba(140, 149, 159, 0.20)), var(--cc-sev-none, rgba(140, 149, 159, 0.20))),
+		var(--cc-header-image, none);
+	border-bottom-color: color-mix(in srgb, var(--cc-sev-none-border, #8c959f) 45%, transparent);
 }
 
-.mtdashTable th,
-.mtdashTable td {
-	padding: 6px 8px;
-	text-align: left;
-	vertical-align: top;
-	overflow-wrap: anywhere;
+.ccCard[data-severity="up"] .ccCardHeader {
+	background-image:
+		linear-gradient(var(--cc-sev-up, rgba(148, 179, 107, 0.32)), var(--cc-sev-up, rgba(148, 179, 107, 0.32))),
+		var(--cc-header-image, none);
+	border-bottom-color: color-mix(in srgb, var(--cc-sev-up-border, #94b36b) 60%, transparent);
 }
 
-.mtdashTable thead th {
-	font-weight: 600;
-	border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+.ccCard[data-severity="warn"] .ccCardHeader {
+	background-image:
+		linear-gradient(var(--cc-sev-warn, rgba(255, 143, 30, 0.32)), var(--cc-sev-warn, rgba(255, 143, 30, 0.32))),
+		var(--cc-header-image, none);
+	border-bottom-color: color-mix(in srgb, var(--cc-sev-warn-border, #ff8f1e) 60%, transparent);
 }
 
-.mtdashKv tbody th {
-	font-weight: normal;
-	color: color-mix(in srgb, currentColor 75%, transparent);
+.ccCard[data-severity="down"] .ccCardHeader {
+	background-image:
+		linear-gradient(var(--cc-sev-down, rgba(204, 0, 0, 0.34)), var(--cc-sev-down, rgba(204, 0, 0, 0.34))),
+		var(--cc-header-image, none);
+	border-bottom-color: color-mix(in srgb, var(--cc-sev-down-border, #cc0000) 60%, transparent);
 }
 
-.mtdashKv td {
-	text-align: right;
-	font-weight: 600;
-}
-
-.mtdashTable tbody tr + tr > th,
-.mtdashTable tbody tr + tr > td {
-	border-top: 1px solid color-mix(in srgb, currentColor 9%, transparent);
-}
-
-.mtdashEmpty {
-	color: color-mix(in srgb, currentColor 60%, transparent);
-	font-style: italic;
-}
-
-/* Proportion bars (device status, table sizes). */
-.mtdashBars {
+/* "Add card" toolbar above the grid. */
+.ccToolbar {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
 	gap: 8px;
+	margin: 10px 4px 0;
 }
 
-.mtdashBarRow {
-	display: flex;
-	flex-direction: column;
-	gap: 3px;
+.ccToolbarLabel {
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--cc-text, #23362f);
 }
 
-.mtdashBarHead {
-	display: flex;
-	justify-content: space-between;
+.ccAdd,
+.ccRefreshInterval {
+	box-sizing: border-box;
+	padding: 4px 8px;
+	border: 1px solid var(--cc-border, #cbd8d1);
+	border-radius: 7px;
+	background: var(--cc-card, #fff);
+	color: var(--cc-text, #23362f);
 	font-size: 12px;
 }
 
-.mtdashBar,
-.mtdashInlineBar {
-	position: relative;
-	height: 8px;
-	border-radius: 4px;
-	background: color-mix(in srgb, currentColor 12%, transparent);
-	overflow: hidden;
+.ccAdd {
+	min-width: 220px;
 }
 
-.mtdashInlineBar {
-	display: block;
-	margin-bottom: 2px;
+.ccRefresh {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-left: auto;
 }
 
-.mtdashBarFill {
-	display: block;
-	height: 100%;
-	border-radius: 4px;
-	background: color-mix(in srgb, currentColor 45%, transparent);
-}
-
-.mtdashBarFill.mtdash-up   { background: #2b8435; }
-.mtdashBarFill.mtdash-warn { background: #a85712; }
-.mtdashBarFill.mtdash-down { background: #a12820; }
-.mtdashBarFill.mtdash-none { background: color-mix(in srgb, currentColor 40%, transparent); }
-
-.mtdashDialogBody {
+/* Maximize dialog: reuse the card body typography on the themed dialog surface. */
+.ccDialogBody {
+	color: var(--cc-text, #23362f);
 	font-variant-numeric: tabular-nums;
-}
-
-.mtdashDialogBody .mtdashTable {
-	font-size: 13px;
-}
-
-
-/* Scan results dialog (device/site/interface rescan): keep long scanner
-   output inside the dialog with a vertical scrollbar instead of overflowing. */
-.mactrackScanResults {
-	max-height: 60vh;
-	overflow-y: auto;
 }
