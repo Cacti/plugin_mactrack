@@ -2988,6 +2988,60 @@ function perform_mactrack_db_maint(): void {
 }
 
 /**
+ * Attempts to download the IEEE OUI (vendor MAC prefix) database text
+ * file, tolerating transient connectivity problems (for example a
+ * refused connection) instead of surfacing them as a raw PHP warning.
+ *
+ * PHP's file() emits an E_WARNING when it cannot open the stream, which
+ * Cacti's error handler records as an "ERROR PHP WARNING" log entry.
+ * Those entries fail CI and raise an alert on every transient IEEE
+ * hiccup, so the warning is suppressed here (Cacti's error handler
+ * honors the @ operator) and replaced with a single informational log
+ * message. Each supplied URL is retried, and callers can pass an
+ * alternate IEEE endpoint as a fallback.
+ *
+ * @param array $urls    Ordered list of candidate URLs to try.
+ * @param int   $retries Number of attempts per URL (minimum 1).
+ * @param int   $delay   Seconds to wait between attempts on the same URL.
+ *
+ * @return array|false Array of file lines on success, or false when
+ *                     every attempt failed.
+ */
+function mactrack_download_oui_database(array $urls, int $retries = 2, int $delay = 3) {
+	$urls    = array_values(array_filter($urls, static function($url): bool {
+		return is_string($url) && $url !== '';
+	}));
+	$retries = max(1, $retries);
+
+	foreach ($urls as $url) {
+		for ($attempt = 1; $attempt <= $retries; $attempt++) {
+			// Suppress file()'s E_WARNING: a refused or otherwise transient
+			// connection should not be logged as an "ERROR PHP WARNING".
+			// Cacti's error handler honors the @ operator, so no error entry
+			// is written and the outcome is reported at INFO level below.
+			error_clear_last();
+			$oui_database = @file($url);
+
+			if (is_array($oui_database) && cacti_sizeof($oui_database)) {
+				return $oui_database;
+			}
+
+			$last_error = error_get_last();
+			$reason     = is_array($last_error) ? trim($last_error['message']) : 'no data returned';
+
+			cacti_log(sprintf('INFO: MacTrack could not download the OUI database from %s (attempt %d of %d): %s. This is usually a transient IEEE connectivity issue.',
+				$url, $attempt, $retries, $reason), false, 'MACTRACK', POLLER_VERBOSITY_LOW);
+
+			if ($attempt < $retries && $delay > 0) {
+				sleep($delay);
+			}
+		}
+	}
+
+	return false;
+}
+
+/**
  * Downloads the IEEE OUI (vendor MAC prefix) database text file and
  * imports its vendor/MAC-prefix/address records into the
  * mac_track_oui_database table (marking all existing rows absent
@@ -3039,7 +3093,7 @@ function import_oui_database($type = 'ui', $oui_file = 'https://standards-oui.ie
 		$default = stream_context_set_default($default_opts);
 	}
 
-	$oui_database = file($oui_file);
+	$oui_database = mactrack_download_oui_database([$oui_file, $oui_alternate]);
 
 	if ($type != 'ui') {
 		print '<tr><td>';
