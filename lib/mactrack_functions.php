@@ -2995,10 +2995,12 @@ function perform_mactrack_db_maint(): void {
  * PHP's file() emits an E_WARNING when it cannot open the stream, which
  * Cacti's error handler records as an "ERROR PHP WARNING" log entry.
  * Those entries fail CI and raise an alert on every transient IEEE
- * hiccup, so the warning is suppressed here (Cacti's error handler
- * honors the @ operator) and replaced with a single informational log
- * message. Each supplied URL is retried, and callers can pass an
- * alternate IEEE endpoint as a fallback.
+ * hiccup, so the warning is captured by a local error handler here
+ * (rather than relying on the @ operator, which Cacti 1.2.x does not
+ * honor on PHP 8.0+ because it checks error_reporting() == 0) and
+ * replaced with a single informational log message. Each supplied URL
+ * is retried, and callers can pass an alternate IEEE endpoint as a
+ * fallback.
  *
  * @param array $urls    Ordered list of candidate URLs to try.
  * @param int   $retries Number of attempts per URL (minimum 1).
@@ -3015,19 +3017,31 @@ function mactrack_download_oui_database(array $urls, int $retries = 2, int $dela
 
 	foreach ($urls as $url) {
 		for ($attempt = 1; $attempt <= $retries; $attempt++) {
-			// Suppress file()'s E_WARNING: a refused or otherwise transient
-			// connection should not be logged as an "ERROR PHP WARNING".
-			// Cacti's error handler honors the @ operator, so no error entry
-			// is written and the outcome is reported at INFO level below.
-			error_clear_last();
-			$oui_database = @file($url);
+			$captured_error = '';
+
+			// Capture file()'s E_WARNING with a local handler so a refused or
+			// otherwise transient connection is never recorded as an
+			// "ERROR PHP WARNING" by Cacti's error handler. A local handler
+			// works on every supported Cacti branch and PHP version; the @
+			// operator does not, because Cacti 1.2.x checks for
+			// error_reporting() == 0, which @ never produces on PHP 8.0+.
+			set_error_handler(static function($errno, $errstr) use (&$captured_error): bool {
+				$captured_error = $errstr;
+
+				return true;
+			}, E_WARNING);
+
+			try {
+				$oui_database = file($url);
+			} finally {
+				restore_error_handler();
+			}
 
 			if (is_array($oui_database) && cacti_sizeof($oui_database)) {
 				return $oui_database;
 			}
 
-			$last_error = error_get_last();
-			$reason     = is_array($last_error) ? trim($last_error['message']) : 'no data returned';
+			$reason = ($captured_error !== '') ? trim($captured_error) : 'no data returned';
 
 			cacti_log(sprintf('INFO: MacTrack could not download the OUI database from %s (attempt %d of %d): %s. This is usually a transient IEEE connectivity issue.',
 				$url, $attempt, $retries, $reason), false, 'MACTRACK', POLLER_VERBOSITY_LOW);
