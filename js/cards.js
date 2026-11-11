@@ -165,12 +165,34 @@ window.CactiCards = window.CactiCards || (function() {
 		if (!target || !target.parentNode) {
 			return null;
 		}
+		// The in-flight response carries the expansion state captured when the
+		// request started, but the user may have expanded/collapsed the live
+		// card since. Carry the live state onto the fresh markup so the swap
+		// (refresh, resize or refresh-all) does not undo that toggle; bindCard's
+		// normalizeState applies the class from this data-expanded value.
+		fresh.setAttribute('data-expanded', target.classList.contains('ccCardExpanded') ? '1' : '0');
 		target.parentNode.replaceChild(fresh, target);
 		bindCard(grid, adapter, fresh);
 		if (typeof adapter.applyTheme === 'function') {
 			adapter.applyTheme(grid);
 		}
 		return fresh;
+	}
+
+	/* A per-card-id request generation shared by refresh and resize so a slow
+	 * response cannot overwrite the markup of a newer request for the same card
+	 * (for example a refresh that lands after a later grow). The most recently
+	 * started request for an id wins; earlier in-flight responses are discarded. */
+	function startRequest(grid, id) {
+		if (!grid.__ccReq) {
+			grid.__ccReq = {};
+		}
+		grid.__ccReq[id] = (grid.__ccReq[id] || 0) + 1;
+		return grid.__ccReq[id];
+	}
+
+	function requestSuperseded(grid, id, token) {
+		return !!grid.__ccReq && grid.__ccReq[id] !== token;
 	}
 
 	function refreshCard(grid, adapter, card) {
@@ -188,8 +210,11 @@ window.CactiCards = window.CactiCards || (function() {
 			expanded: card.classList.contains('ccCardExpanded'),
 			height:   Number.parseInt(card.getAttribute('data-height') || '1', 10)
 		};
+		var token = startRequest(grid, id);
 		Promise.resolve(adapter.fetchCard(id, state)).then(function(html) {
-			if (html != null) {
+			// A newer refresh/resize for this card superseded us; discard the
+			// stale markup instead of reverting the card to an older state.
+			if (html != null && !requestSuperseded(grid, id, token)) {
 				replaceCard(grid, adapter, card, html);
 			}
 		}).catch(function() { /* fire-and-forget: the host surfaces adapter errors */ });
@@ -197,17 +222,35 @@ window.CactiCards = window.CactiCards || (function() {
 
 	function removeCard(grid, adapter, card) {
 		var id = cardId(card, adapter);
+		// Only drop the live card and persist the new layout once the host has
+		// confirmed the deletion. Re-resolve by id so an overlapping refresh that
+		// swapped the node does not leave a detached reference behind.
+		var commit = function() {
+			var target = grid.contains(card) ? card : findCard(grid, adapter, id);
+			if (target && target.parentNode) {
+				target.parentNode.removeChild(target);
+				saveLayout(grid, adapter);
+			}
+		};
 		if (typeof adapter.onRemoveCard === 'function') {
-			adapter.onRemoveCard(id, card);
+			Promise.resolve(adapter.onRemoveCard(id, card)).then(commit).catch(function() {
+				/* rejected: leave the card and its saved layout untouched */
+			});
+		} else {
+			commit();
 		}
-		card.parentNode.removeChild(card);
-		saveLayout(grid, adapter);
 	}
 
 	function resizeCard(grid, adapter, card, dir) {
 		var id = cardId(card, adapter);
 		if (typeof adapter.onResize === 'function') {
+			var token = startRequest(grid, id);
 			Promise.resolve(adapter.onResize(id, dir, card)).then(function(html) {
+				// A newer refresh/resize for this card has superseded us; leave
+				// its markup and layout in place rather than reverting them.
+				if (requestSuperseded(grid, id, token)) {
+					return;
+				}
 				if (typeof html === 'string') {
 					replaceCard(grid, adapter, card, html);
 				}
@@ -215,6 +258,19 @@ window.CactiCards = window.CactiCards || (function() {
 			}).catch(function() { /* fire-and-forget: the host surfaces adapter errors */ });
 		} else {
 			saveLayout(grid, adapter);
+		}
+	}
+
+	/* After expand/collapse hides the button that was activated (see cards.css),
+	 * move keyboard focus to the now-visible counterpart so the control is not
+	 * lost when the card is toggled from the keyboard. */
+	function refocusToolCounterpart(card, tool, counterpart) {
+		if (document.activeElement !== tool) {
+			return;
+		}
+		var next = card.querySelector('.ccTool[data-tool="' + counterpart + '"]');
+		if (next) {
+			next.focus();
 		}
 	}
 
@@ -348,11 +404,13 @@ window.CactiCards = window.CactiCards || (function() {
 				case 'expand':
 					card.classList.add('ccCardExpanded');
 					card.setAttribute('data-expanded', '1');
+					refocusToolCounterpart(card, tool, 'collapse');
 					saveLayout(grid, adapter);
 					break;
 				case 'collapse':
 					card.classList.remove('ccCardExpanded');
 					card.setAttribute('data-expanded', '0');
+					refocusToolCounterpart(card, tool, 'expand');
 					saveLayout(grid, adapter);
 					break;
 				case 'grow':   resizeCard(grid, adapter, card, 'grow'); break;
