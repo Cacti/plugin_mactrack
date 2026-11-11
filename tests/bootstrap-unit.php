@@ -213,6 +213,12 @@ if (!function_exists('db_fetch_cell_prepared')) {
 	}
 }
 
+if (!function_exists('db_qstr')) {
+	function db_qstr($value) {
+		return "'" . str_replace("'", "''", (string) $value) . "'";
+	}
+}
+
 if (!function_exists('db_index_exists')) {
 	function db_index_exists($table, $index) {
 		return mactrack_test_next_return('db_index_exists', false);
