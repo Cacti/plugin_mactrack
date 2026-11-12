@@ -848,7 +848,9 @@ function mactrack_rebuild_aggregated_ports(): bool {
 	$live   = 'mac_track_aggregated_ports';
 	$source = 'mac_track_aggregated_ports_upgrade';
 
-	if (read_config_option('mt_aggregated_ports_rebuilt', true) == 'on') {
+	// Older upgrades recorded completion even when dropping the source failed.
+	// Its presence remains authoritative, including when the flag is already on.
+	if (read_config_option('mt_aggregated_ports_rebuilt', true) == 'on' && !mactrack_db_table_exists($source)) {
 		// The rebuild is recorded, but a later schema refresh on a Cacti core
 		// that rewrites existing tables can drop the unique key. Repair it
 		// idempotently so the web hook does not relaunch the upgrade forever.
@@ -879,7 +881,7 @@ function mactrack_rebuild_aggregated_ports(): bool {
 
 	try {
 		// Another process may have finished the rebuild before the lock was free.
-		if (read_config_option('mt_aggregated_ports_rebuilt', true) == 'on') {
+		if (read_config_option('mt_aggregated_ports_rebuilt', true) == 'on' && !mactrack_db_table_exists($source)) {
 			return true;
 		}
 
@@ -1027,9 +1029,27 @@ function mactrack_background_upgrade_running(): bool {
 		return false;
 	}
 
-	// A registration that has outlived its timeout is stale; let the caller
-	// replace or ignore a crashed upgrade.
-	return ((int) $process['now'] - (int) $process['started']) <= (int) $process['timeout'];
+	if (((int) $process['now'] - (int) $process['started']) > (int) $process['timeout']) {
+		return false;
+	}
+
+	// A crashed CLI can leave a fresh registration for a full day. Let the
+	// CLI's registration guard replace it; the web request must not delete it.
+	$pid = (int) $process['pid'];
+
+	if ($pid <= 0 || $pid > (PHP_OS_FAMILY === 'Windows' ? 4294967295 : 2147483647)) {
+		return false;
+	}
+
+	if (function_exists('posix_kill') && !posix_kill($pid, 0)) {
+		// Only ESRCH proves exit. EPERM can mean the web server does not
+		// own the CLI process; an unavailable probe is inconclusive too.
+		$esrch = defined('SOCKET_ESRCH') ? SOCKET_ESRCH : 3;
+
+		return !function_exists('posix_get_last_error') || posix_get_last_error() !== $esrch;
+	}
+
+	return true;
 }
 
 /**

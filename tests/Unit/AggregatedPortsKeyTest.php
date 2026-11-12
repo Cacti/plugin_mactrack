@@ -362,7 +362,7 @@ final class AggregatedPortsKeyTest extends TestCase {
 		mactrack_test_queue_return('get_current_page', 'index.php');
 		mactrack_test_queue_return('db_fetch_row', ['version' => '4.8', 'status' => 1]);
 		// A registered upgrade process that has not outlived its timeout.
-		mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', ['pid' => 1234, 'started' => 100, 'now' => 150, 'timeout' => 86400]);
+		mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', ['pid' => getmypid(), 'started' => 100, 'now' => 150, 'timeout' => 86400]);
 
 		mactrack_check_upgrade();
 
@@ -461,5 +461,45 @@ final class AggregatedPortsKeyTest extends TestCase {
 		mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', ['pid' => 7, 'started' => 0, 'now' => 100000, 'timeout' => 300]);
 
 		$this->assertFalse(mactrack_background_upgrade_running());
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testBackgroundUpgradeDetectsADeadWorkerBeforeItsTimeout(): void {
+		if (!function_exists('posix_kill')) {
+			$this->markTestSkipped('Process liveness requires POSIX support.');
+		}
+
+		$child = proc_open([PHP_BINARY, '-r', 'usleep(100000);'], [], $pipes);
+		$this->assertIsResource($child);
+		$pid = proc_get_status($child)['pid'];
+		proc_close($child);
+		mactrack_test_queue_return('db_table_exists', true);
+		mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', ['pid' => $pid, 'started' => 100, 'now' => 101, 'timeout' => 86400]);
+
+		$this->assertFalse(mactrack_background_upgrade_running());
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testBackgroundUpgradeKeepsALiveWorkerRegistered(): void {
+		mactrack_test_queue_return('db_table_exists', true);
+		mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', ['pid' => getmypid(), 'started' => 100, 'now' => 101, 'timeout' => 86400]);
+
+		$this->assertTrue(mactrack_background_upgrade_running());
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testBackgroundUpgradeRejectsInvalidProcessIdentifiers(): void {
+		foreach ([0, -1, PHP_INT_MAX] as $pid) {
+			mactrack_test_queue_return('db_table_exists', true);
+			mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', ['pid' => $pid, 'started' => 100, 'now' => 101, 'timeout' => 86400]);
+
+			$this->assertFalse(mactrack_background_upgrade_running());
+		}
 	}
 }
