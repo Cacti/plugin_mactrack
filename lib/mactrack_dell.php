@@ -296,27 +296,15 @@ function get_base_dell_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp_rea
  *                'NOT USER' when the input is empty.
  */
 function dell_mac_address_convert($mac_address): string {
-	if ($mac_address == '') {
-		$mac_address = 'NOT USER';
-	} elseif (strlen($mac_address) > 10) { // return is in ascii
-		$mac_address = trim(str_replace('"', '', $mac_address));
-		$mac_address = str_replace('.', ':', $mac_address);
-		$mac_address = str_replace('-', ':', $mac_address);
-		$mac         = explode(':', $mac_address);
+	$mac_address = trim((string) $mac_address);
 
-		foreach ($mac as $key => $mac_item) {
-			if (!empty($mac_item)) {
-				$mac_item = dechex((int) $mac_item);
-
-				if (strlen($mac_item) < 2) {
-					$mac_item = '0' . $mac_item;
-				}
-				$mac[$key] = strtoupper($mac_item);
-			}
-		}
-
-		$mac_address = implode('', $mac);
+	if ($mac_address === '') {
+		return 'NOT USER';
 	}
 
-	return $mac_address;
+	// The dot1q index is vlan.m1.m2.m3.m4.m5.m6, so the MAC is its last
+	// six parts; a zero octet must still give two digits.
+	$mac = mactrack_index_to_mac(str_replace(['-', ':'], '.', str_replace('"', '', $mac_address)));
+
+	return $mac !== '' ? $mac : $mac_address;
 }
