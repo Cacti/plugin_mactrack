@@ -2211,6 +2211,10 @@ msgid "Revoke"
 msgstr "İptal Et"
 
 #: mactrack_view_macs.php
+msgid "None of the selected MAC Addresses were valid, so no action was taken."
+msgstr ""
+
+#: mactrack_view_macs.php
 #, php-format
 msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
 msgstr "Aşağıdaki MAC Adresleri, %s Grup Yetkileri üyesi oldukları için iptal edilemedi."
