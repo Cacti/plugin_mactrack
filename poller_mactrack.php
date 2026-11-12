@@ -217,6 +217,7 @@ if ($collect_frequency == 'disabled') {
 		$start = microtime(true);
 
 		collect_mactrack_data($start, $site_id);
+		log_mactrack_statistics('collect');
 	} else {
 		mactrack_debug('About to enter Mactrack poller processing');
 
@@ -299,6 +300,15 @@ if ($collect_frequency == 'disabled') {
 			*/
 
 			$db_maint_time = strtotime($database_maint_time);
+
+			// An unreadable time is false, which is less than any last run
+			// and would run maintenance every cycle; use the default.
+			if ($db_maint_time === false) {
+				cacti_log("WARNING: MacTrack maintenance time '" . $database_maint_time . "' is not a time; using 12:00am", false, 'MACTRACK');
+
+				$database_maint_time = '12:00am';
+				$db_maint_time       = strtotime($database_maint_time);
+			}
 
 			if ($last_db_maint_time < $db_maint_time) {
 				$next_db_maint_time = $db_maint_time;
@@ -519,7 +529,8 @@ function mactrack_stop_scanners(): void {
 
 /**
  * Terminates a MacTrack worker by process id; 0 means it has not
- * registered a PID yet.
+ * registered a PID yet. On Linux a process whose command line does not
+ * name MacTrack is left alone.
  *
  * @param int $process_id The worker's process id.
  *
@@ -527,6 +538,14 @@ function mactrack_stop_scanners(): void {
  */
 function mactrack_kill_process(int $process_id): void {
 	if ($process_id <= 0) {
+		return;
+	}
+
+	// A stored PID may have been reused, after a reboot for instance. Where
+	// the command line is readable, signal only a MacTrack worker.
+	$cmdline = @file_get_contents('/proc/' . $process_id . '/cmdline');
+
+	if ($cmdline !== false && strpos($cmdline, 'mactrack') === false) {
 		return;
 	}
 
@@ -542,9 +561,11 @@ function clear_old_processes($site_id): void {
 	$max_script_runtime = read_config_option('mt_script_runtime');
 	$delete_time        = date('Y-m-d H:i:s', (int) strtotime('-' . $max_script_runtime . ' Minutes'));
 	$site_id            = intval($site_id);
+	// LEFT JOIN: the poller (-1) and resolver (0) rows have no device, and
+	// a run for all sites must clear them too
 	$sql                = 'SELECT mtp.*
 		FROM mac_track_processes AS mtp
-		INNER JOIN mac_track_devices AS mtd
+		LEFT JOIN mac_track_devices AS mtd
 		ON mtp.device_id=mtd.device_id
 		WHERE start_date < ?';
 	$params             = [$delete_time];

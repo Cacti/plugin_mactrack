@@ -64,8 +64,8 @@ it('stops the scanners before loading the ports after a timeout', function () {
 });
 
 it('removes every scanner row when it stops the scanners', function () {
-	if (!function_exists('mactrack_stop_scanners')) {
-		foreach (array('mactrack_kill_process', 'mactrack_stop_scanners') as $fn) {
+	foreach (array('mactrack_kill_process', 'mactrack_stop_scanners') as $fn) {
+		if (!function_exists($fn)) {
 			$at = strpos($this->src, "function $fn(");
 			eval(substr($this->src, $at, strpos($this->src, "\n}\n", $at) - $at + 2));
 		}
