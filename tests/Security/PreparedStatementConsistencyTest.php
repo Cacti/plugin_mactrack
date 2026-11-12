@@ -22,7 +22,7 @@
  */
 describe('prepared statement consistency in mactrack', function () {
 	$baseline = [
-		'includes/database.php'        => 141,
+		'includes/database.php'        => 145,
 		'lib/mactrack_3com.php'        => 1,
 		'lib/mactrack_aruba_oscx.php'  => 1,
 		'lib/mactrack_cisco.php'       => 5,
@@ -52,7 +52,7 @@ describe('prepared statement consistency in mactrack', function () {
 		'mactrack_view_macs.php'       => 5,
 		'mactrack_view_sites.php'      => 3,
 		'poller_mactrack.php'          => 39,
-		'setup.php'                    => 20,
+		'setup.php'                    => 21,
 	];
 
 	$root    = realpath(__DIR__ . '/../..');

@@ -160,6 +160,12 @@ foreach ($clover->xpath('//file') as $file) {
  * Empty by default; add entries per repository as the need arises.
  */
 $unmeasured_allowlist = [
+	// Background database-upgrade CLI: chdir + include cli_check.php, pcntl
+	// signal handling, and top-level execution make it unloadable in the
+	// isolated unit process. Its orchestration (mactrack_perform_upgrade() and
+	// mactrack_rebuild_aggregated_ports()) is covered through setup.php and
+	// includes/database.php.
+	'cli/upgrade_database.php',
 	// Vendor scanning-function dispatcher: a flat list of require_once()s that
 	// pulls in the per-vendor scanning libraries, loadable only inside a live
 	// Cacti (the vendor files call Cacti/SNMP helpers at include time). Changed

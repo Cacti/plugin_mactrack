@@ -689,17 +689,12 @@ function mactrack_database_upgrade(): void {
 		db_fetch_cell("UPDATE plugin_realms set display='Mactrack Administrator' WHERE plugin = 'mactrack' and display='Device Tracking Administrator'");
 	}
 
-	// 4.9: MAC addresses are stored without separators. Stripping them can
-	// turn two aggregated rows into one key, so the unique key is dropped
-	// first and rebuilt, duplicates merged, by the repair call below. Run once.
+	// 4.9: MAC addresses are stored without separators. The satellite tables
+	// have no unique MAC key, so a plain full-table rewrite is safe; the
+	// aggregated-ports table is handled separately by the rebuild below
+	// because stripping the separators collapses rows onto one unique key.
+	// Run once, gated by a persistent flag.
 	if (read_config_option('mt_mac_separators_removed', true) != 'on') {
-		if (mactrack_db_key_exists('mac_track_aggregated_ports', 'port_number')) {
-			db_execute('ALTER TABLE mac_track_aggregated_ports DROP INDEX port_number');
-		}
-
-		db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, ':', '')");
-		db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, '-', '')");
-
 		db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, ':', '')");
 		db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, '-', '')");
 
@@ -726,17 +721,12 @@ function mactrack_database_upgrade(): void {
 		set_config_option('mt_mac_separators_removed', 'on');
 	}
 
-	mactrack_repair_aggregated_ports_key();
-
-	// 4.11: the poller's INSERT ... ON DUPLICATE KEY UPDATE consumes an
-	// auto-increment value for every row it offers, even ones it merges, so
-	// an int(10) row_id can run out on large installs. Cacti cores before
-	// 1.2.32 do not refresh existing tables, so widen it here.
-	$row_id = db_fetch_row_prepared('SHOW COLUMNS FROM mac_track_aggregated_ports LIKE ?', ['row_id']);
-
-	if (cacti_sizeof($row_id) && stripos($row_id['Type'], 'bigint') === false) {
-		db_execute_prepared('ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN row_id bigint(20) unsigned NOT NULL auto_increment');
-	}
+	// Rebuild mac_track_aggregated_ports (rename, recreate, copy per scan date,
+	// drop the old table). This normalizes its MAC addresses, merges the rows
+	// that normalization collapses, widens row_id to bigint, and restores the
+	// unique key -- all in bite-sized per-scan-date statements so it can
+	// complete inside the background upgrade and resume if interrupted.
+	mactrack_rebuild_aggregated_ports();
 
 	mactrack_fix_aruba_oscx_device_type_functions();
 	mactrack_ensure_default_site();
@@ -754,13 +744,16 @@ function mactrack_aggregated_ports_key_columns(): array {
 }
 
 /**
- * Checks whether mac_track_aggregated_ports has its `port_number` key as a
- * unique index over exactly the expected columns.
+ * Checks whether a mac_track_aggregated_ports table has its `port_number`
+ * key as a unique index over exactly the expected columns.
+ *
+ * @param string $table Table to inspect; defaults to the live table so
+ *                      existing callers are unaffected.
  *
  * @return bool
  */
-function mactrack_aggregated_ports_key_is_unique(): bool {
-	$rows = db_fetch_assoc_prepared('SHOW INDEX FROM mac_track_aggregated_ports WHERE Key_name = ?', ['port_number']);
+function mactrack_aggregated_ports_key_is_unique(string $table = 'mac_track_aggregated_ports'): bool {
+	$rows = db_fetch_assoc_prepared("SHOW INDEX FROM $table WHERE Key_name = ?", ['port_number']);
 
 	if (!cacti_sizeof($rows)) {
 		return false;
@@ -779,6 +772,167 @@ function mactrack_aggregated_ports_key_is_unique(): bool {
 	ksort($columns);
 
 	return array_values($columns) === mactrack_aggregated_ports_key_columns();
+}
+
+/**
+ * Brings a freshly created aggregated-ports destination table up to the
+ * current target structure: a bigint row_id (the poller's ON DUPLICATE KEY
+ * UPDATE consumes an auto-increment value per offered row, so int(10) runs
+ * out on large installs), a varchar(30) port_number, and the `port_number`
+ * key as UNIQUE so the per-scan-date copy below merges the rows that MAC
+ * normalization collapses. Every change is guarded so a resumed run is cheap.
+ *
+ * @param string $table Destination table name.
+ *
+ * @return void
+ */
+function mactrack_normalize_aggregated_ports_schema(string $table): void {
+	$row_id = db_fetch_row_prepared("SHOW COLUMNS FROM $table LIKE ?", ['row_id']);
+
+	if (cacti_sizeof($row_id) && stripos((string) $row_id['Type'], 'bigint') === false) {
+		db_execute("ALTER TABLE $table MODIFY COLUMN row_id bigint(20) unsigned NOT NULL auto_increment");
+	}
+
+	$port_number = db_fetch_row_prepared("SHOW COLUMNS FROM $table LIKE ?", ['port_number']);
+
+	if (cacti_sizeof($port_number) && stripos((string) $port_number['Type'], 'varchar(30)') === false) {
+		db_execute("ALTER TABLE $table MODIFY COLUMN port_number varchar(30) NOT NULL default ''");
+	}
+
+	if (!mactrack_aggregated_ports_key_is_unique($table)) {
+		if (mactrack_db_key_exists($table, 'port_number')) {
+			db_execute("ALTER TABLE $table DROP INDEX port_number");
+		}
+
+		db_execute("ALTER TABLE $table ADD UNIQUE INDEX `port_number` (`" . implode('`, `', mactrack_aggregated_ports_key_columns()) . '`)');
+	}
+}
+
+/**
+ * Rebuilds mac_track_aggregated_ports so its MAC addresses are stored
+ * without separators, without the table-wide rewrite that was being killed
+ * at the web-request timeout on large installs.
+ *
+ * The table is renamed aside, a modified copy is created with a bigint
+ * row_id and a UNIQUE `port_number` key, and each distinct scan date
+ * (date_last) is copied back with normalized MAC addresses using
+ * INSERT ... SELECT ... ON DUPLICATE KEY UPDATE, which merges the rows that
+ * normalization collapses onto one key (summed count_rec, earliest
+ * first_scan_date, latest date_last/active_last). Each processed scan date
+ * is deleted from the source table inside the same transaction, so the
+ * migration is resumable and the per-row count_rec totals stay correct if
+ * the background upgrade restarts. When the source table is drained it is
+ * dropped. The whole rebuild runs once, gated by a persistent flag and an
+ * advisory lock.
+ *
+ * @return bool True when the rebuild has completed (or there was nothing to
+ *              rebuild), false when it could not finish this pass.
+ */
+function mactrack_rebuild_aggregated_ports(): bool {
+	global $database_default;
+
+	if (read_config_option('mt_aggregated_ports_rebuilt', true) == 'on') {
+		return true;
+	}
+
+	$live   = 'mac_track_aggregated_ports';
+	$source = 'mac_track_aggregated_ports_upgrade';
+
+	// Nothing to migrate: let a fresh install (table already in its target
+	// shape) or an install with no aggregated table record completion.
+	if (!mactrack_db_table_exists($live) && !mactrack_db_table_exists($source)) {
+		set_config_option('mt_aggregated_ports_rebuilt', 'on');
+
+		return true;
+	}
+
+	$lock_name = 'mactrack.aggregated_rebuild.' . sha1((string) $database_default);
+
+	if ((string) db_fetch_cell_prepared('SELECT GET_LOCK(?, ?)', [$lock_name, 0]) !== '1') {
+		return false;
+	}
+
+	try {
+		// Another process may have finished the rebuild before the lock was free.
+		if (read_config_option('mt_aggregated_ports_rebuilt', true) == 'on') {
+			return true;
+		}
+
+		// (a) Rename the live table aside. A prior interrupted run leaves the
+		// source table in place, so only rename when it is not there yet.
+		if (!mactrack_db_table_exists($source)) {
+			db_execute("RENAME TABLE $live TO $source");
+		}
+
+		// An index on the batching column keeps the per-scan-date lookups and
+		// copies from scanning the whole source table each pass.
+		if (!mactrack_db_key_exists($source, 'date_last')) {
+			db_execute("ALTER TABLE $source ADD INDEX `date_last` (`date_last`)");
+		}
+
+		// (b) Create the modified destination table and bring it to the target
+		// structure (bigint row_id, varchar(30) port_number, UNIQUE key).
+		if (!mactrack_db_table_exists($live)) {
+			db_execute("CREATE TABLE $live LIKE $source");
+		}
+
+		mactrack_normalize_aggregated_ports_schema($live);
+
+		$insert_columns = 'site_id, device_id, hostname, device_name, vlan_id, vlan_name,
+			mac_address, vendor_mac, ip_address, dns_hostname, port_number, port_name,
+			date_last, first_scan_date, count_rec, active_last, authorized';
+
+		// REPLACE strips both separators from the stored MAC address.
+		$select_columns = "site_id, device_id, hostname, device_name, vlan_id, vlan_name,
+			REPLACE(REPLACE(mac_address, ':', ''), '-', ''), vendor_mac, ip_address, dns_hostname, port_number, port_name,
+			date_last, first_scan_date, count_rec, active_last, authorized";
+
+		// (c + d) Copy each distinct scan date in turn, merging normalized
+		// duplicates, then drain that date from the source table.
+		while (true) {
+			$scan_date = db_fetch_cell("SELECT date_last FROM $source ORDER BY date_last LIMIT 1");
+
+			if ($scan_date === false || $scan_date === null || $scan_date === '') {
+				break;
+			}
+
+			$copied = db_begin_transaction()
+				&& db_execute_prepared("INSERT INTO $live ($insert_columns)
+					SELECT $select_columns
+					FROM $source
+					WHERE date_last = ?
+					ON DUPLICATE KEY UPDATE
+						count_rec       = count_rec + VALUES(count_rec),
+						first_scan_date = LEAST(first_scan_date, VALUES(first_scan_date)),
+						date_last       = GREATEST(date_last, VALUES(date_last)),
+						active_last     = GREATEST(active_last, VALUES(active_last))",
+					[$scan_date])
+				&& db_execute_prepared("DELETE FROM $source WHERE date_last = ?", [$scan_date])
+				&& db_commit_transaction();
+
+			if (!$copied) {
+				db_rollback_transaction();
+
+				cacti_log("MACTRACK: Could not rebuild $live for scan date $scan_date", false, 'SYSTEM');
+
+				return false;
+			}
+
+			// Keep the process registry alive during a long rebuild.
+			heartbeat_process('mtupgrade', 'database');
+		}
+
+		// (e) The source table is drained; drop it and record completion.
+		db_execute("DROP TABLE IF EXISTS $source");
+
+		set_config_option('mt_aggregated_ports_rebuilt', 'on');
+
+		cacti_log("MACTRACK: Rebuilt $live with normalized MAC addresses", false, 'SYSTEM');
+
+		return true;
+	} finally {
+		db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [$lock_name]);
+	}
 }
 
 /**
