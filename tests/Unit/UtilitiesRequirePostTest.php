@@ -29,6 +29,9 @@ const MT_UP_ACTIONS = array(
 	'mactrack_utilities_purge_aggregated_data',
 	'mactrack_utilities_recreate_aggregated_data',
 	'mactrack_refresh_oui_database',
+	'mactrack_utilities_rebuild_scan_dates',
+	'mactrack_utilities_optimize_ports',
+	'mactrack_utilities_convert_ports',
 );
 
 it('lists every Utilities action that changes data', function () {

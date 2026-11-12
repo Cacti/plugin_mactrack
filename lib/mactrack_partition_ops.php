@@ -73,6 +73,18 @@ function mactrack_partition_scan_begin(): bool {
 }
 
 /**
+ * Releases the scan lock taken by mactrack_partition_scan_begin(). The
+ * poller never calls it: its lock ends with its connection. A web request
+ * that took the lock for one action releases it at once, because Cacti
+ * may keep the connection open.
+ *
+ * @return void
+ */
+function mactrack_partition_scan_end(): void {
+	db_fetch_cell_prepared("SELECT RELEASE_LOCK('mactrack_scan')");
+}
+
+/**
  * Runs one statement on Cacti's own connection without Cacti's retries.
  *
  * Cacti's database layer retries lock-wait timeouts (error 1205) up to 30

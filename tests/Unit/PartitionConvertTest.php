@@ -329,6 +329,19 @@ describe('conversion', function () {
 		'scan running'       => array(array('scan_lock' => '0'), 'A scan is running'),
 	));
 
+	it('leaves the running conversion\'s status alone when a second one starts', function () {
+		$GLOBALS['__test_config_options']['mt_partition_converting'] = '1794464107';
+		mt_pc_db(array('scan_lock' => '0'));
+
+		$r = mactrack_partition_convert();
+
+		expect($r['ok'])->toBeFalse();
+		expect($r['reason'])->toBe('Another conversion is running.');
+		expect($GLOBALS['__test_config_options'])->not->toHaveKey('mt_partition_status');
+		expect($GLOBALS['__test_config_options']['mt_partition_converting'])->toBe('1794464107');
+		expect(mt_pc_statements())->toBe(array());
+	});
+
 	it('releases the scan lock when partition maintenance holds its lock', function () {
 		mt_pc_db(array('partition_lock' => '0'));
 
@@ -352,6 +365,12 @@ describe('scan lock', function () {
 
 		expect(mactrack_partition_scan_begin())->toBeFalse();
 		expect($GLOBALS['__test_config_options']['mt_partition_converting'])->toBe('1794464107');
+	});
+
+	it('is released by a web action that took it', function () {
+		mactrack_partition_scan_end();
+
+		expect(array_column($GLOBALS['__test_db_calls'], 'sql'))->toBe(array("SELECT RELEASE_LOCK('mactrack_scan')"));
 	});
 
 	it('clears the flag of a conversion that died', function () {
@@ -422,12 +441,10 @@ describe('fresh install', function () {
 describe('entry points', function () {
 	it('starts the conversion from Utilities only on a POST', function () {
 		$src = file_get_contents(dirname(__DIR__, 2) . '/mactrack_utilities.php');
-		$fn  = substr($src, strpos($src, 'function mactrack_utilities_convert_ports(): void {'));
-		$fn  = substr($fn, 0, strpos($fn, "\n}\n"));
 
-		expect($fn)->toContain("} elseif ((\$_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {");
-		expect(strpos($fn, "!== 'POST'"))->toBeLessThan(strpos($fn, 'exec_background('));
-		expect($fn)->toContain('<form method="post" action="mactrack_utilities.php">');
+		expect(mactrack_utilities_may_run('mactrack_utilities_convert_ports', 'GET'))->toBeFalse();
+		expect(mactrack_utilities_may_run('mactrack_utilities_convert_ports', 'POST'))->toBeTrue();
+		expect($src)->toContain("mactrack_utilities_action_link('mactrack_utilities_convert_ports'");
 	});
 
 	it('runs the conversion from the CLI and exits 1 when it fails', function () {
