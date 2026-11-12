@@ -24,13 +24,9 @@
  * mactrack_devices.php handles the request when it is included, so load only
  * the export function from its source, with its two helpers stubbed.
  */
-if (!function_exists('mactrack_device_export')) {
-	$source = (string) file_get_contents(dirname(__DIR__, 2) . '/mactrack_devices.php');
-	$start  = strpos($source, 'function mactrack_device_export(');
-	$end    = strpos($source, "\n}\n", $start);
+require_once dirname(__DIR__) . '/Support/load_function.php';
 
-	eval(substr($source, $start, $end - $start + 2));
-}
+mactrack_test_load_function('mactrack_devices.php', 'mactrack_device_export');
 
 if (!function_exists('mactrack_device_request_validation')) {
 	function mactrack_device_request_validation(): void {
