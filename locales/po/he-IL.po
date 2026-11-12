@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-05 14:55-0500\n"
+"POT-Creation-Date: 2026-11-12 11:35-0500\n"
 "PO-Revision-Date: 2026-10-11 23:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Hebrew (Israel) <https://translate.cacti.net/projects/cacti/mactrack/he_IL/>\n"
@@ -2297,6 +2297,10 @@ msgstr "סוגי מכשירים"
 #: mactrack_view_sites.php
 msgid "Site Scan Results"
 msgstr "הסר את כל תוצאות הסריקה"
+
+#: setup.php
+msgid "MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes."
+msgstr ""
 
 #: setup.php
 #, fuzzy
