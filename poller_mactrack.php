@@ -497,7 +497,7 @@ function mactrack_error_handler($level, $message, $file, $line, $context = []) {
  * @param string $delim The separator to put between MAC octets.
  *
  * @return array{mac: string, ip: string, dns: string}|null The entry, or
- *         null for a blank or malformed line.
+ *                                                          null for a blank or malformed line.
  */
 function mactrack_parse_arpwatch_line(string $line, string $delim): ?array {
 	$fields = explode("\t", trim($line));

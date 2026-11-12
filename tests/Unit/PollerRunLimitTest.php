@@ -64,16 +64,16 @@ it('stops the scanners before loading the ports after a timeout', function () {
 });
 
 it('removes every scanner row when it stops the scanners', function () {
-	foreach (array('mactrack_kill_process', 'mactrack_stop_scanners') as $fn) {
+	foreach (['mactrack_kill_process', 'mactrack_stop_scanners'] as $fn) {
 		if (!function_exists($fn)) {
 			$at = strpos($this->src, "function $fn(");
 			eval(substr($this->src, $at, strpos($this->src, "\n}\n", $at) - $at + 2));
 		}
 	}
 
-	$GLOBALS['__test_db_calls'] = array();
+	$GLOBALS['__test_db_calls'] = [];
 	// PID 0: launched but not started, so nothing to signal
-	mactrack_test_queue_return('db_fetch_assoc', array(array('device_id' => 7, 'process_id' => 0)));
+	mactrack_test_queue_return('db_fetch_assoc', [['device_id' => 7, 'process_id' => 0]]);
 
 	mactrack_stop_scanners();
 

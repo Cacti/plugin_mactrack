@@ -22,9 +22,7 @@
  +-------------------------------------------------------------------------+
 */
 
-/*
- * Before 4.9 vendor_mac held '00:11:22'; the OUI table now holds '001122'.
- */
+// Before 4.9 vendor_mac held '00:11:22'; the OUI table now holds '001122'.
 it('derives vendor_mac from the stripped MAC when rebuilding', function () {
 	$src = file_get_contents(dirname(__DIR__, 2) . '/includes/database.php');
 

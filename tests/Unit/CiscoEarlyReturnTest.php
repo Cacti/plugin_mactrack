@@ -26,15 +26,15 @@ require_once dirname(__DIR__, 2) . '/lib/mactrack_functions.php';
 require_once dirname(__DIR__, 2) . '/lib/mactrack_cisco.php';
 
 it('clears the previous scan when no VLAN names come back', function () {
-	$device = array(
-		'device_id' => 1, 'host_id' => 0, 'site_id' => 1, 'device_name' => 'sw1', 'hostname' => '192.0.2.1',
-		'snmp_readstring' => 'x', 'snmp_version' => 2, 'snmp_username' => '', 'snmp_password' => '',
+	$device = [
+		'device_id'          => 1, 'host_id' => 0, 'site_id' => 1, 'device_name' => 'sw1', 'hostname' => '192.0.2.1',
+		'snmp_readstring'    => 'x', 'snmp_version' => 2, 'snmp_username' => '', 'snmp_password' => '',
 		'snmp_auth_protocol' => '', 'snmp_priv_passphrase' => '', 'snmp_priv_protocol' => '',
-		'snmp_context' => '', 'snmp_engine_id' => '', 'snmp_port' => 161, 'snmp_timeout' => 500,
-		'snmp_retries' => 1, 'max_oids' => 10, 'ignorePorts' => '', 'snmp_sysObjectID' => '',
-		'snmp_sysDescr' => '', 'scan_type' => 1, 'macs_active' => 42,
-		'last_runmessage' => 'Data collection completed ok', 'last_rundate' => '2026-11-12 00:00:00',
-	);
+		'snmp_context'       => '', 'snmp_engine_id' => '', 'snmp_port' => 161, 'snmp_timeout' => 500,
+		'snmp_retries'       => 1, 'max_oids' => 10, 'ignorePorts' => '', 'snmp_sysObjectID' => '',
+		'snmp_sysDescr'      => '', 'scan_type' => 1, 'macs_active' => 42,
+		'last_runmessage'    => 'Data collection completed ok', 'last_rundate' => '2026-11-12 00:00:00',
+	];
 
 	$result = get_IOS_dot1dTpFdbEntry_ports('site', $device);
 

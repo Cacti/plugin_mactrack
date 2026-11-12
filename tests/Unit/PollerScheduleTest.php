@@ -58,7 +58,7 @@ it('schedules tomorrow with strtotime, not plus 86400', function () use ($src) {
 it('lands each 10-minute run on its slot over a day of poller jitter', function () {
 	// poller every 300 s, firing up to 2 s early or late; base slot 0
 	$last = 0;
-	$runs = array();
+	$runs = [];
 
 	for ($k = 1; $k <= 288; $k++) {
 		$now  = $k * 300 + (($k % 3) - 1) * 2;

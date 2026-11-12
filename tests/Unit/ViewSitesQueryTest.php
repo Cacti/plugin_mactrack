@@ -22,7 +22,6 @@
  +-------------------------------------------------------------------------+
 */
 
-
 if (!function_exists('get_order_string')) {
 	function get_order_string() {
 		return 'ORDER BY site_name ASC';
@@ -39,7 +38,7 @@ if (!function_exists('mactrack_view_get_site_records')) {
 }
 
 beforeEach(function () {
-	$GLOBALS['__test_db_calls'] = array();
+	$GLOBALS['__test_db_calls'] = [];
 	set_request_var('page', '1');
 });
 
@@ -53,7 +52,7 @@ function mt_vs_sql(string $detail, string $filter, string $site, string $type): 
 	set_request_var('device_type_id', $type);
 
 	if ($type !== '-1') {
-		mactrack_test_queue_return('db_fetch_row_prepared', array('device_type_id' => $type));
+		mactrack_test_queue_return('db_fetch_row_prepared', ['device_type_id' => $type]);
 	}
 
 	$where = '';

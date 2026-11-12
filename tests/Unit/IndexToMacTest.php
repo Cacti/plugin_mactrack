@@ -35,7 +35,7 @@ it('matches the format xform_mac_address() returns', function () {
 
 it('rejects an index that does not end in six octets', function (string $index) {
 	expect(mactrack_index_to_mac($index))->toBe('');
-})->with(array('too short' => '1.2.3.4.5', 'not a byte' => '1.0.12.41.5.138.256', 'not digits' => '1.0.12.41.5.a.209', 'empty' => ''));
+})->with(['too short' => '1.2.3.4.5', 'not a byte' => '1.0.12.41.5.138.256', 'not digits' => '1.0.12.41.5.a.209', 'empty' => '']);
 
 it('falls back to the index when the dot1q address column is not returned', function () {
 	$src = file_get_contents(dirname(__DIR__, 2) . '/lib/mactrack_functions.php');
