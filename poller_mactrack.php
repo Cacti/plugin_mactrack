@@ -1042,50 +1042,20 @@ function collect_mactrack_data($start, $site_id = 0): void {
 
 		mactrack_debug('Finished transferring scan results to main table.');
 
-		// transfer the subnet information, although primitive, into the ip_ranges table
-		$ip_ranges = db_fetch_assoc("SELECT SUBSTRING_INDEX(`ip_address`,'.',3) AS ip_range,
-			site_id,
-			COUNT(DISTINCT ip_address) AS ips_current,
-			scan_date AS ips_current_date
+		// Transfer the subnet information, although primitive, into the
+		// ip_ranges table. A range this scan did not see has no current
+		// addresses; one statement replaces a read and a write per range.
+		db_execute_prepared("UPDATE mac_track_ip_ranges SET ips_current = 0 WHERE 1=1$site_where", $site_params);
+
+		db_execute("INSERT INTO mac_track_ip_ranges
+			(ip_range, site_id, ips_current, ips_current_date)
+			SELECT SUBSTRING_INDEX(ip_address, '.', 3) AS ip_range, site_id,
+			COUNT(DISTINCT ip_address), MAX(scan_date)
 			FROM mac_track_temp_ports
 			WHERE ip_address != ''
-			GROUP BY ip_range, site_id");
-
-		if (is_array($ip_ranges)) {
-			foreach ($ip_ranges as $ip_range) {
-				$range_record = (array) db_fetch_row_prepared('SELECT *
-					FROM mac_track_ip_ranges
-					WHERE ip_range = ?
-					AND site_id = ?',
-					[$ip_range['ip_range'], $ip_range['site_id']]);
-
-				if (cacti_sizeof($range_record) == 0) {
-					db_execute_prepared('REPLACE INTO `mac_track_ip_ranges`
-						(ip_range, site_id, ips_current, ips_current_date)
-						VALUES (?, ?, ?, ?)',
-						[
-							$ip_range['ip_range'],
-							$ip_range['site_id'],
-							$ip_range['ips_current'],
-							$ip_range['ips_current_date']
-						]
-					);
-				} else {
-					db_execute_prepared('UPDATE mac_track_ip_ranges
-						SET ips_current = ?,
-						ips_current_date = ?
-						WHERE ip_range = ?
-						AND site_id = ?',
-						[
-							$ip_range['ips_current'],
-							$ip_range['ips_current_date'],
-							$range_record['ip_range'],
-							$range_record['site_id']
-						]
-					);
-				}
-			}
-		}
+			GROUP BY ip_range, site_id
+			ON DUPLICATE KEY UPDATE ips_current = VALUES(ips_current),
+			ips_current_date = VALUES(ips_current_date)");
 
 		// update the max values if required
 		db_execute('UPDATE `mac_track_ip_ranges`
