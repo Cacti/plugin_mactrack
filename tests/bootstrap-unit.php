@@ -589,6 +589,9 @@ if (!function_exists('cacti_snmp_walk')) {
 		$auth_proto = '', $priv_pass = '', $priv_proto = '', $context = '',
 		$port = 161, $timeout_ms = 500, $retries = 0, $max_oids = 10, $environ = 0,
 		$engineid = '', $value_output_format = 1) {
+		// recorded so a test can count the walks a scan makes
+		$GLOBALS['__test_snmp_walk_calls'][] = $oid;
+
 		return $GLOBALS['__test_snmp_walk'][$oid] ?? array();
 	}
 }
