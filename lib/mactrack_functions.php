@@ -5496,3 +5496,36 @@ function mactrack_interface_filter_needs_ignore($issues, $bwusage): bool {
 	return in_array($issues, ['-3', '-4', '-1', '0', '1', '2', '3'], true) ||
 		(in_array($issues, ['9', '10', '11'], true) && (int) $bwusage !== -1);
 }
+
+/**
+ * The Utilities actions that change data, each with the question its
+ * confirmation form asks.
+ *
+ * @return array<string, string> Action name => confirmation message.
+ */
+function mactrack_utilities_post_actions(): array {
+	return [
+		'mactrack_utilities_truncate_ports_table'     => __('Are you sure you want to delete all the Port to MAC to IP results from the system?', 'mactrack'),
+		'mactrack_utilities_perform_db_maint'         => __('Are you sure you want to delete the expired Port to MAC to IP results now?', 'mactrack'),
+		'mactrack_utilities_purge_scanning_funcs'     => __('Are you sure you want to purge the cached Mactrack scanning functions?', 'mactrack'),
+		'mactrack_utilities_purge_aggregated_data'    => __('Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?', 'mactrack'),
+		'mactrack_utilities_recreate_aggregated_data' => __('Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?', 'mactrack'),
+		'mactrack_refresh_oui_database'               => __('Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?', 'mactrack'),
+	];
+}
+
+/**
+ * Whether a Utilities action may run for a request with this method.
+ *
+ * Cacti checks the CSRF token on POST requests only, so an action that
+ * changes data runs only on a POST. Any other request, including a link
+ * followed by the browser, gets a confirmation form instead.
+ *
+ * @param string $action Requested action.
+ * @param string $method The request's REQUEST_METHOD.
+ *
+ * @return bool True when the action may run now.
+ */
+function mactrack_utilities_may_run(string $action, string $method): bool {
+	return !array_key_exists($action, mactrack_utilities_post_actions()) || $method === 'POST';
+}

@@ -33,6 +33,14 @@ set_default_action();
 ini_set('memory_limit', '-1');
 ini_set('max_execution_time', '300');
 
+// Actions that change data run only on a POST, which Cacti checks for its
+// CSRF token; a GET gets a form that posts the action back.
+if (!mactrack_utilities_may_run(get_request_var('action'), $_SERVER['REQUEST_METHOD'] ?? '')) {
+	mactrack_utilities_confirm(get_request_var('action'));
+
+	exit;
+}
+
 switch (get_request_var('action')) {
 	case 'mactrack_utilities_truncate_ports_table':
 		mactrack_utilities_ports_clear();
@@ -438,8 +446,8 @@ function mactrack_display_run_status(): void {
  * Truncates all MacTrack port/MAC/IP result tables (ports, scan dates,
  * IPs, IP ranges, VLANs, aggregated ports, dot1x) and resets the
  * corresponding summary counters on every device and site record.
- * Prompts for confirmation first when the mt_maint_confirm setting is
- * enabled. Called from this script's main request-dispatch switch.
+ * Runs only on a POST (see mactrack_utilities_may_run()). Called from
+ * this script's main request-dispatch switch.
  *
  * @return void
  *
@@ -449,66 +457,57 @@ function mactrack_display_run_status(): void {
 function mactrack_utilities_ports_clear(): void {
 	global $config;
 
-	if ((read_config_option('mt_maint_confirm') == 'on') && (!isset_request_var('confirm'))) {
-		top_header();
-		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete all the Port to MAC to IP results from the system?', 'mactrack'), 'plugins/mactrack/mactrack_utilities.php', 'plugins/mactrack/mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table');
-		bottom_footer();
-		exit;
+	$rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_ports');
+
+	db_execute('TRUNCATE TABLE mac_track_ports');
+	db_execute('TRUNCATE TABLE mac_track_scan_dates');
+	db_execute('TRUNCATE TABLE mac_track_ips');
+	db_execute('TRUNCATE TABLE mac_track_ip_ranges');
+	db_execute('TRUNCATE TABLE mac_track_vlans');
+	db_execute('TRUNCATE TABLE mac_track_aggregated_ports');
+	db_execute('TRUNCATE TABLE mac_track_dot1x');
+	db_execute('UPDATE mac_track_sites SET total_macs=0, total_ips=0, total_user_ports=0, total_oper_ports=0, total_trunk_ports=0');
+	db_execute('UPDATE mac_track_devices SET ips_total=0, ports_total=0, ports_active=0, ports_trunk=0, macs_active=0, vlans_total=0, last_runduration=0.0000');
+
+	$device_rows = db_fetch_assoc('SELECT device_id FROM mac_track_devices');
+
+	if (cacti_sizeof($device_rows)) {
+		foreach ($device_rows as $device_row) {
+			db_execute_prepared('UPDATE mac_track_devices SET ips_total=0 WHERE device_id = ?',    [$device_row['device_id']]);
+			db_execute_prepared('UPDATE mac_track_devices SET ports_total=0 WHERE device_id = ?',  [$device_row['device_id']]);
+			db_execute_prepared('UPDATE mac_track_devices SET ports_active=0 WHERE device_id = ?', [$device_row['device_id']]);
+			db_execute_prepared('UPDATE mac_track_devices SET ports_trunk=0 WHERE device_id = ?',  [$device_row['device_id']]);
+			db_execute_prepared('UPDATE mac_track_devices SET macs_active=0 WHERE device_id = ?',  [$device_row['device_id']]);
+			db_execute_prepared('UPDATE mac_track_devices SET vlans_total=0 WHERE device_id = ?',  [$device_row['device_id']]);
+			db_execute_prepared('UPDATE mac_track_devices SET last_runduration=0.00000 WHERE device_id = ?', [$device_row['device_id']]);
+		}
 	}
 
-	if ((read_config_option('mt_maint_confirm') == '') || (isset_request_var('confirm'))) {
-		$rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_ports');
+	$site_rows = db_fetch_assoc('SELECT site_id FROM mac_track_sites');
 
-		db_execute('TRUNCATE TABLE mac_track_ports');
-		db_execute('TRUNCATE TABLE mac_track_scan_dates');
-		db_execute('TRUNCATE TABLE mac_track_ips');
-		db_execute('TRUNCATE TABLE mac_track_ip_ranges');
-		db_execute('TRUNCATE TABLE mac_track_vlans');
-		db_execute('TRUNCATE TABLE mac_track_aggregated_ports');
-		db_execute('TRUNCATE TABLE mac_track_dot1x');
-		db_execute('UPDATE mac_track_sites SET total_macs=0, total_ips=0, total_user_ports=0, total_oper_ports=0, total_trunk_ports=0');
-		db_execute('UPDATE mac_track_devices SET ips_total=0, ports_total=0, ports_active=0, ports_trunk=0, macs_active=0, vlans_total=0, last_runduration=0.0000');
-
-		$device_rows = db_fetch_assoc('SELECT device_id FROM mac_track_devices');
-
-		if (cacti_sizeof($device_rows)) {
-			foreach ($device_rows as $device_row) {
-				db_execute_prepared('UPDATE mac_track_devices SET ips_total=0 WHERE device_id = ?',    [$device_row['device_id']]);
-				db_execute_prepared('UPDATE mac_track_devices SET ports_total=0 WHERE device_id = ?',  [$device_row['device_id']]);
-				db_execute_prepared('UPDATE mac_track_devices SET ports_active=0 WHERE device_id = ?', [$device_row['device_id']]);
-				db_execute_prepared('UPDATE mac_track_devices SET ports_trunk=0 WHERE device_id = ?',  [$device_row['device_id']]);
-				db_execute_prepared('UPDATE mac_track_devices SET macs_active=0 WHERE device_id = ?',  [$device_row['device_id']]);
-				db_execute_prepared('UPDATE mac_track_devices SET vlans_total=0 WHERE device_id = ?',  [$device_row['device_id']]);
-				db_execute_prepared('UPDATE mac_track_devices SET last_runduration=0.00000 WHERE device_id = ?', [$device_row['device_id']]);
-			}
+	if (cacti_sizeof($site_rows)) {
+		foreach ($site_rows as $site_row) {
+			db_execute_prepared('UPDATE mac_track_sites SET total_devices=0 WHERE site_id = ?',     [$site_row['site_id']]);
+			db_execute_prepared('UPDATE mac_track_sites SET total_macs=0 WHERE site_id = ?',        [$site_row['site_id']]);
+			db_execute_prepared('UPDATE mac_track_sites SET total_ips=0 WHERE site_id = ?',         [$site_row['site_id']]);
+			db_execute_prepared('UPDATE mac_track_sites SET total_user_ports=0 WHERE site_id = ?',  [$site_row['site_id']]);
+			db_execute_prepared('UPDATE mac_track_sites SET total_oper_ports=0 WHERE site_id = ?',  [$site_row['site_id']]);
+			db_execute_prepared('UPDATE mac_track_sites SET total_trunk_ports=0 WHERE site_id = ?', [$site_row['site_id']]);
 		}
-
-		$site_rows = db_fetch_assoc('SELECT site_id FROM mac_track_sites');
-
-		if (cacti_sizeof($site_rows)) {
-			foreach ($site_rows as $site_row) {
-				db_execute_prepared('UPDATE mac_track_sites SET total_devices=0 WHERE site_id = ?',     [$site_row['site_id']]);
-				db_execute_prepared('UPDATE mac_track_sites SET total_macs=0 WHERE site_id = ?',        [$site_row['site_id']]);
-				db_execute_prepared('UPDATE mac_track_sites SET total_ips=0 WHERE site_id = ?',         [$site_row['site_id']]);
-				db_execute_prepared('UPDATE mac_track_sites SET total_user_ports=0 WHERE site_id = ?',  [$site_row['site_id']]);
-				db_execute_prepared('UPDATE mac_track_sites SET total_oper_ports=0 WHERE site_id = ?',  [$site_row['site_id']]);
-				db_execute_prepared('UPDATE mac_track_sites SET total_trunk_ports=0 WHERE site_id = ?', [$site_row['site_id']]);
-			}
-		}
-
-		top_header();
-		mactrack_utilities();
-
-		html_start_box(__('Mactrack Database Results', 'mactrack'), '100%', '', '3', 'center', '');
-		print '<td>' . __('The following number of records have been removed from the database: %s', $rows, 'mactrack') . '</td>';
-		html_end_box();
 	}
+
+	top_header();
+	mactrack_utilities();
+
+	html_start_box(__('Mactrack Database Results', 'mactrack'), '100%', '', '3', 'center', '');
+	print '<td>' . __('The following number of records have been removed from the database: %s', $rows, 'mactrack') . '</td>';
+	html_end_box();
 }
 
 /**
- * Truncates the mac_track_aggregated_ports table. Prompts for
- * confirmation first when the mt_maint_confirm setting is enabled.
- * Called from this script's main request-dispatch switch.
+ * Truncates the mac_track_aggregated_ports table. Runs only on a POST
+ * (see mactrack_utilities_may_run()). Called from this script's main
+ * request-dispatch switch.
  *
  * @return void
  *
@@ -518,31 +517,22 @@ function mactrack_utilities_ports_clear(): void {
 function mactrack_utilities_purge_aggregated_data(): void {
 	global $config;
 
-	if ((read_config_option('mt_maint_confirm') == 'on') && (!isset_request_var('confirm'))) {
-		top_header();
-		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?', 'mactrack'), 'plugins/mactrack/mactrack_utilities.php', 'plugins/mactrack/mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data');
-		bottom_footer();
-		exit;
-	}
+	$rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_aggregated_ports');
+	db_execute('TRUNCATE TABLE mac_track_aggregated_ports');
 
-	if ((read_config_option('mt_maint_confirm') == '') || (isset_request_var('confirm'))) {
-		$rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_aggregated_ports');
-		db_execute('TRUNCATE TABLE mac_track_aggregated_ports');
+	top_header();
+	mactrack_utilities();
 
-		top_header();
-		mactrack_utilities();
-
-		html_start_box(__('Mactrack Database Results', 'mactrack'), '100%', '', '3', 'center', '');
-		print '<td>' . __('The following number of records have been removed from the aggergated table: %s', $rows, 'mactrack') . '</td>';
-		html_end_box();
-	}
+	html_start_box(__('Mactrack Database Results', 'mactrack'), '100%', '', '3', 'center', '');
+	print '<td>' . __('The following number of records have been removed from the aggergated table: %s', $rows, 'mactrack') . '</td>';
+	html_end_box();
 }
 
 /**
  * Truncates and rebuilds the mac_track_aggregated_ports table by
  * re-aggregating (grouping and counting) the raw mac_track_ports data.
- * Prompts for confirmation first when the mt_maint_confirm setting is
- * enabled. Called from this script's main request-dispatch switch.
+ * Runs only on a POST (see mactrack_utilities_may_run()). Called from
+ * this script's main request-dispatch switch.
  *
  * @return void
  *
@@ -552,36 +542,27 @@ function mactrack_utilities_purge_aggregated_data(): void {
 function mactrack_utilities_recreate_aggregated_data(): void {
 	global $config;
 
-	if ((read_config_option('mt_maint_confirm') == 'on') && (!isset_request_var('confirm'))) {
-		top_header();
-		form_confirm(__('Are You Sure?', 'mactrack'), __('Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?', 'mactrack'), 'plugins/mactrack/mactrack_utilities.php', 'plugins/mactrack/mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data');
-		bottom_footer();
-		exit;
-	}
+	$old_rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_aggregated_ports');
+	db_execute('TRUNCATE TABLE mac_track_aggregated_ports');
 
-	if ((read_config_option('mt_maint_confirm') == '') || (isset_request_var('confirm'))) {
-		$old_rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_aggregated_ports');
-		db_execute('TRUNCATE TABLE mac_track_aggregated_ports');
+	db_execute('INSERT INTO mac_track_aggregated_ports
+		(site_id, device_id, hostname, device_name,
+		vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
+		port_number, port_name, date_last, first_scan_date, count_rec, authorized)
+		SELECT site_id, device_id, hostname, device_name,
+		vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
+		port_number, port_name, max(scan_date), min(scan_date), count(*), authorized
+		FROM mac_track_ports
+		GROUP BY site_id,device_id, mac_address, port_number, ip_address, vlan_id, authorized');
 
-		db_execute('INSERT INTO mac_track_aggregated_ports
-			(site_id, device_id, hostname, device_name,
-			vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
-			port_number, port_name, date_last, first_scan_date, count_rec, authorized)
-			SELECT site_id, device_id, hostname, device_name,
-			vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
-			port_number, port_name, max(scan_date), min(scan_date), count(*), authorized
-			FROM mac_track_ports
-			GROUP BY site_id,device_id, mac_address, port_number, ip_address, vlan_id, authorized');
+	$new_rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_aggregated_ports');
 
-		$new_rows = db_fetch_cell('SELECT COUNT(*) FROM mac_track_aggregated_ports');
+	top_header();
+	mactrack_utilities();
 
-		top_header();
-		mactrack_utilities();
-
-		html_start_box('Mactrack Database Results', '100%', '', '3', 'center', '');
-		print '<td>' . __('The following number of records have been removed from the aggergated table: %s.  And %s records will be added.', $old_rows, $new_rows, 'mactrack') . '</td>';
-		html_end_box();
-	}
+	html_start_box('Mactrack Database Results', '100%', '', '3', 'center', '');
+	print '<td>' . __('The following number of records have been removed from the aggergated table: %s.  And %s records will be added.', $old_rows, $new_rows, 'mactrack') . '</td>';
+	html_end_box();
 }
 
 /**
@@ -816,6 +797,62 @@ function mactrack_utilities_purge_scanning_funcs(): void {
 }
 
 /**
+ * Returns a form that posts a Utilities action. Cacti's output filter adds
+ * the CSRF token to every form with method="post".
+ *
+ * @param string $action Action to post.
+ * @param string $label  Button label.
+ *
+ * @return string
+ */
+function mactrack_utilities_post_form(string $action, string $label): string {
+	return '<form method="post" action="mactrack_utilities.php">'
+		. '<input type="hidden" name="action" value="' . html_escape($action) . '">'
+		. '<input type="submit" class="ui-button ui-corner-all ui-widget" value="' . html_escape($label) . '">'
+		. '</form>';
+}
+
+/**
+ * Returns the Utilities page entry for an action that changes data: a link
+ * to its confirmation form when Confirm Utilities Prompt is on, otherwise a
+ * button that posts the action at once.
+ *
+ * @param string $action Action from mactrack_utilities_post_actions().
+ * @param string $label  Link or button text.
+ *
+ * @return string
+ */
+function mactrack_utilities_action_link(string $action, string $label): string {
+	if (read_config_option('mt_maint_confirm') == 'on') {
+		return "<a class='hyperLink' href='mactrack_utilities.php?action=" . html_escape($action) . "'>" . html_escape($label) . '</a>';
+	}
+
+	return mactrack_utilities_post_form($action, $label);
+}
+
+/**
+ * Shows the confirmation form for an action that changes data, reached by
+ * a GET. Continue posts the action back; nothing runs until then.
+ *
+ * @param string $action Action from mactrack_utilities_post_actions().
+ *
+ * @return void
+ */
+function mactrack_utilities_confirm(string $action): void {
+	$message = mactrack_utilities_post_actions()[$action];
+
+	top_header();
+
+	html_start_box(__('Are You Sure?', 'mactrack'), '60%', '', '3', 'center', '');
+	print '<tr><td class="textArea">' . html_escape($message) . '</td></tr>';
+	print '<tr><td class="right"><a class="ui-button ui-corner-all ui-widget" href="mactrack_utilities.php">' . html_escape(__('Cancel', 'mactrack')) . '</a> '
+		. mactrack_utilities_post_form($action, __('Continue', 'mactrack')) . '</td></tr>';
+	html_end_box();
+
+	bottom_footer();
+}
+
+/**
  * Renders the main MacTrack System Utilities page: displays the
  * process status information box (with a refresh-interval selector)
  * and the database/scanning-function maintenance action links. Called
@@ -846,7 +883,7 @@ function mactrack_utilities(): void {
 
 	<tr class='odd'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_perform_db_maint'><?php print __('Perform Database Maintenance', 'mactrack'); ?></a>
+			<?php print mactrack_utilities_action_link('mactrack_utilities_perform_db_maint', __('Perform Database Maintenance', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
 			<?php print __('Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed.', 'mactrack'); ?>
@@ -855,7 +892,7 @@ function mactrack_utilities(): void {
 
 	<tr class='even'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_refresh_oui_database'><?php print __('Refresh IEEE Vendor MAC/OUI Database', 'mactrack'); ?></a>
+			<?php print mactrack_utilities_action_link('mactrack_refresh_oui_database', __('Refresh IEEE Vendor MAC/OUI Database', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
 			<?php print __('This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network.', 'mactrack'); ?>
@@ -864,7 +901,7 @@ function mactrack_utilities(): void {
 
 	<tr class='odd'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_purge_scanning_funcs'><?php print __('Refresh Scanning Functions', 'mactrack'); ?></a>
+			<?php print mactrack_utilities_action_link('mactrack_utilities_purge_scanning_funcs', __('Refresh Scanning Functions', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
 			<?php print __('Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type.', 'mactrack'); ?>
@@ -873,7 +910,7 @@ function mactrack_utilities(): void {
 
 	<tr class='even'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_truncate_ports_table'><?php print __('Remove All Scan Results', 'mactrack'); ?></a>
+			<?php print mactrack_utilities_action_link('mactrack_utilities_truncate_ports_table', __('Remove All Scan Results', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
 			<?php print __('Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>', 'mactrack'); ?>
@@ -920,7 +957,7 @@ function mactrack_utilities(): void {
 
 	<tr class='even'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_purge_aggregated_data'><?php print __('Remove All Aggregated Results', 'mactrack'); ?></a>
+			<?php print mactrack_utilities_action_link('mactrack_utilities_purge_aggregated_data', __('Remove All Aggregated Results', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
 			<?php print __('Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run.', 'mactrack'); ?>
@@ -929,7 +966,7 @@ function mactrack_utilities(): void {
 
 	<tr class='odd'>
 		<td class='textArea'>
-			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_recreate_aggregated_data'><?php print __('Perform Aggregate Table Rebuild', 'mactrack'); ?></a>
+			<?php print mactrack_utilities_action_link('mactrack_utilities_recreate_aggregated_data', __('Perform Aggregate Table Rebuild', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
 			<?php print __('Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now.', 'mactrack'); ?>
