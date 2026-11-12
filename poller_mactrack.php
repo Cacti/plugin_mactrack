@@ -490,6 +490,44 @@ function mactrack_error_handler($level, $message, $file, $line, $context = []) {
  * @return void
  */
 /**
+ * Parses one arp.dat line: MAC, IP address, timestamp and, when known,
+ * the host name, separated by tabs.
+ *
+ * @param string $line  The line as read, with its newline.
+ * @param string $delim The separator to put between MAC octets.
+ *
+ * @return array{mac: string, ip: string, dns: string}|null The entry, or
+ *         null for a blank or malformed line.
+ */
+function mactrack_parse_arpwatch_line(string $line, string $delim): ?array {
+	$fields = explode("\t", trim($line));
+
+	if (count($fields) < 2) {
+		return null;
+	}
+
+	$octets = explode(':', $fields[0]);
+
+	if (count($octets) !== 6) {
+		return null;
+	}
+
+	foreach ($octets as $k => $octet) {
+		if (!ctype_xdigit($octet) || strlen($octet) > 2) {
+			return null;
+		}
+
+		$octets[$k] = str_pad(strtoupper($octet), 2, '0', STR_PAD_LEFT);
+	}
+
+	return [
+		'mac' => implode($delim, $octets),
+		'ip'  => $fields[1],
+		'dns' => trim($fields[3] ?? ''),
+	];
+}
+
+/**
  * Returns the schedule slot a due collection run belongs to: the slot it
  * was due at, or after missed runs the latest slot that has passed.
  *
@@ -699,25 +737,11 @@ function collect_mactrack_data($start, $site_id = 0): void {
 					while (!feof($arp_dat)) {
 						$line = fgets($arp_dat, 4096);
 
-						if ($line != null) {
-							$line = explode('	', $line);
+						$entry = $line === false ? null : mactrack_parse_arpwatch_line($line, (string) $delim);
 
-							$mac_ad = explode(':',$line[0]);
-
-							for ($k = 0; $k < 6; $k++) {
-								$mac_ad[$k] = strtoupper($mac_ad[$k]);
-
-								if (strlen($mac_ad[$k]) == 1) {
-									$mac_ad[$k] = '0' . $mac_ad[$k];
-								}
-							}
-
-							// create the mac address
-							$mac = $mac_ad[0] . $delim . $mac_ad[1] . $delim . $mac_ad[2] . $delim . $mac_ad[3] . $delim . $mac_ad[4] . $delim . $mac_ad[5];
-
-							// update the array
-							$mac_ip_dns[$mac]['ip']  = $line[1];
-							$mac_ip_dns[$mac]['dns'] = $line[3];
+						if ($entry !== null) {
+							$mac_ip_dns[$entry['mac']]['ip']  = $entry['ip'];
+							$mac_ip_dns[$entry['mac']]['dns'] = $entry['dns'];
 						}
 					}
 					fclose($arp_dat);
