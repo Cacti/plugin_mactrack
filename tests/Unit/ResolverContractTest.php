@@ -17,6 +17,13 @@ if (!class_exists('Net_DNS2_Exception')) {
 
 test('configured resolver returns a PTR without invoking fallback', function () {
 	$resolver = new class {
+		/**
+		 * Returns a response whose answer holds a single PTR record, "host.example".
+		 *
+		 * @param string $ip_address Address being resolved.
+		 * @param string $type Record type requested.
+		 * @return object
+		 */
 		public function query($ip_address, $type) {
 			return (object) ['answer' => [(object) ['ptrdname' => 'host.example']]];
 		}
@@ -34,6 +41,13 @@ test('configured resolver returns a PTR without invoking fallback', function () 
 
 test('a NODATA PTR answer falls through to the system resolver', function () {
 	$resolver = new class {
+		/**
+		 * Returns a NODATA response with an empty answer list.
+		 *
+		 * @param string $ip_address Address being resolved.
+		 * @param string $type Record type requested.
+		 * @return object
+		 */
 		public function query($ip_address, $type) {
 			return (object) ['answer' => []];
 		}
@@ -51,6 +65,13 @@ test('a NODATA PTR answer falls through to the system resolver', function () {
 
 test('a NODATA PTR answer normalizes to the address when the system resolver also fails', function () {
 	$resolver = new class {
+		/**
+		 * Returns a NODATA response with an empty answer list.
+		 *
+		 * @param string $ip_address Address being resolved.
+		 * @param string $type Record type requested.
+		 * @return object
+		 */
 		public function query($ip_address, $type) {
 			return (object) ['answer' => []];
 		}
@@ -64,6 +85,13 @@ test('a NODATA PTR answer normalizes to the address when the system resolver als
 
 test('resolver finds PTR after a CNAME in a classless delegation answer', function () {
 	$resolver = new class {
+		/**
+		 * Returns an answer with a CNAME record followed by a PTR record, as in a classless delegation.
+		 *
+		 * @param string $ip_address Address being resolved.
+		 * @param string $type Record type requested.
+		 * @return object
+		 */
 		public function query($ip_address, $type) {
 			return (object) ['answer' => [
 				(object) ['cname' => '1.0/25.2.0.192.in-addr.arpa'],
@@ -84,6 +112,13 @@ test('resolver finds PTR after a CNAME in a classless delegation answer', functi
 
 test('resolver exceptions use system fallback', function () {
 	$resolver = new class {
+		/**
+		 * Always throws Net_DNS2_Exception to simulate an unavailable resolver.
+		 *
+		 * @param string $ip_address Address being resolved.
+		 * @param string $type Record type requested.
+		 * @return object
+		 */
 		public function query($ip_address, $type) {
 			throw new Net_DNS2_Exception('unavailable');
 		}

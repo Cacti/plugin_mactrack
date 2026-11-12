@@ -886,6 +886,17 @@ function mactrack_config_settings() {
 			'default'       => '3',
 			'array'         => $mactrack_data_retention,
 		],
+		'mt_partition_granularity' => [
+			'friendly_name' => __('Port Partition Size', 'mactrack'),
+			'description'   => __('How finely the port table is partitioned when it uses the scan-date layout. MacTrack uses a coarser size when the finer one would exceed the partition limit.', 'mactrack'),
+			'method'        => 'drop_array',
+			'default'       => 'scan',
+			'array'         => [
+				'scan' => __('One per Scan', 'mactrack'),
+				'hour' => __('Hourly', 'mactrack'),
+				'day'  => __('Daily', 'mactrack'),
+			],
+		],
 		'mt_ignorePorts_delim' => [
 			'friendly_name' => __('Switch Level Ignore Ports Delimiter', 'mactrack'),
 			'description'   => __('What delimiter should Mactrack use when parsing the Ignore Ports string for each switch.', 'mactrack'),

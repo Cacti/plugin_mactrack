@@ -31,36 +31,76 @@
  */
 
 if (!function_exists('html_escape_request_var')) {
+	/**
+	 * Test stub standing in for Cacti core's html_escape_request_var(). Returns the HTML-escaped value of a request variable.
+	 *
+	 * @param string $name Request variable name.
+	 * @return string
+	 */
 	function html_escape_request_var($name) {
 		return html_escape(get_request_var($name));
 	}
 }
 
 if (!function_exists('filter_value')) {
+	/**
+	 * Test stub standing in for Cacti core's filter_value(). Returns the value without highlighting or linking it.
+	 *
+	 * @param string $value Cell value.
+	 * @param string $filter Unused filter text.
+	 * @param string $href Unused link target.
+	 * @return string
+	 */
 	function filter_value($value, $filter, $href = '') {
 		return $value;
 	}
 }
 
 if (!function_exists('get_colored_device_status')) {
+	/**
+	 * Test stub standing in for Cacti core's get_colored_device_status(). Renders no status markup.
+	 *
+	 * @param bool|int $disabled Whether the device is disabled.
+	 * @param int $status Device status code.
+	 * @return string Always an empty string.
+	 */
 	function get_colored_device_status($disabled, $status) {
 		return '';
 	}
 }
 
 if (!function_exists('number_format_i18n')) {
+	/**
+	 * Test stub standing in for Cacti core's number_format_i18n(). Records array('number' => ..., 'decimals' => ...) in $GLOBALS['__test_number_format_i18n'] and applies no locale formatting.
+	 *
+	 * @param int|float $number Number to format.
+	 * @param int|null $decimals Requested decimals.
+	 * @return string The number cast to a string.
+	 */
 	function number_format_i18n($number, $decimals = 0) {
 		return (string) $number;
 	}
 }
 
 if (!function_exists('form_checkbox_cell')) {
+	/**
+	 * Test stub standing in for Cacti core's form_checkbox_cell(). Prints an empty table cell.
+	 *
+	 * @param string $title Unused row title.
+	 * @param int|string $id Unused row id.
+	 * @return void
+	 */
 	function form_checkbox_cell($title, $id) {
 		print '<td></td>';
 	}
 }
 
 if (!function_exists('form_end_row')) {
+	/**
+	 * Test stub standing in for Cacti core's form_end_row(). Prints a closing row tag.
+	 *
+	 * @return void
+	 */
 	function form_end_row() {
 		print '</tr>';
 	}

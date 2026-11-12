@@ -22,6 +22,14 @@
  +-------------------------------------------------------------------------+
 */
 
+// Partition helpers used by the poller and by database maintenance. These
+// run when the file is first loaded, before any test starts measuring.
+// @codeCoverageIgnoreStart
+include_once(__DIR__ . '/mactrack_partitions.php');
+include_once(__DIR__ . '/mactrack_partition_ops.php');
+include_once(__DIR__ . '/mactrack_partition_convert.php');
+// @codeCoverageIgnoreEnd
+
 /**
  * Return the CSP nonce attribute for inline <script> tags, safely across
  * Cacti versions. Newer Cacti releases enforce a Content-Security-Policy that
@@ -2947,9 +2955,21 @@ function mactrack_delete_batched(string $sql, array $params, int $batch = 10000)
 
 /**
  * perform_mactrack_db_maint - This utility removes stale records from the database.
+ *
+ * Does nothing while a port table conversion runs: it copies
+ * mac_track_ports scan by scan, and rows removed meanwhile would make the
+ * row counts differ and the conversion abort.
+ *
+ * @return void
  */
 function perform_mactrack_db_maint(): void {
 	global $database_default;
+
+	if ((string) read_config_option('mt_partition_converting', true) !== '') {
+		cacti_log('MACTRACK: Database maintenance skipped while the port table is converted.', false, 'MACTRACK');
+
+		return;
+	}
 
 	// remove stale records from the poller database
 	$retention = read_config_option('mt_data_retention');
@@ -2998,101 +3018,117 @@ function perform_mactrack_db_maint(): void {
 
 	mactrack_debug('Started deleting old records from the main database.');
 
-	$syntax = (array) db_fetch_row('SHOW CREATE TABLE mac_track_ports');
+	$layout = mactrack_partition_state()['layout'];
 
-	if (substr_count($syntax['Create Table'], 'PARTITION')) {
-		$partitioned = true;
-	} else {
-		$partitioned = false;
-	}
+	if ($layout['state'] === 'range') {
+		// Scan-date layout: whole partitions expire, no rows are deleted.
+		$result = mactrack_partition_maintain((int) $days);
 
-	// delete old syslog and syslog soft messages
-	if ($retention > 0 || $partitioned) {
-		if (!$partitioned) {
-			// In batches: one DELETE of a day of scans holds its locks and undo
-			// until it finishes. No OPTIMIZE: it rebuilds the whole table every
-			// day, and InnoDB reuses the freed pages for the next scans.
+		mactrack_debug('Dropped ' . count($result['dropped']) . ' and created ' . count($result['created']) . ' partitions' . ($result['reason'] !== '' ? " ({$result['reason']})" : '') . '.');
+	} elseif ($layout['state'] !== 'legacy') {
+		if ($layout['state'] === 'invalid') {
+			mactrack_partition_status(['maintenance' => ['dropped' => [], 'created' => [],
+				'reason' => "layout invalid {$layout['reason']}; rows deleted by date", 'time' => time()]]);
+		}
+
+		// OPTIMIZE no longer runs here; Utilities has it as its own action.
+		if ($retention > 0) {
 			mactrack_delete_batched('DELETE QUICK FROM mac_track_ports WHERE scan_date < ? ORDER BY scan_date', [$retention_date]);
-		} else {
-			$syslog_deleted       = 0;
-			$number_of_partitions = db_fetch_assoc_prepared('SELECT *
-				FROM `information_schema`.`partitions`
-				WHERE table_schema = ?
-				AND table_name="mac_track_ports"
-				ORDER BY partition_ordinal_position',
-				[$database_default]);
 
-			/*
-			$time     = time();
-			$now      = date('Y-m-d', $time);
-			$format   = date('Ymd', $time);
-			$cur_day  = db_fetch_row("SELECT TO_DAYS('$now') AS today");
-			$cur_day  = $cur_day['today'];
+			mactrack_scan_dates_prune($retention_date);
+		}
+	} else {
+		$syslog_deleted       = 0;
+		$number_of_partitions = db_fetch_assoc_prepared('SELECT *
+			FROM `information_schema`.`partitions`
+			WHERE table_schema = ?
+			AND table_name="mac_track_ports"
+			ORDER BY partition_ordinal_position',
+			[$database_default]);
 
-			$lday_ts  = read_config_option('mactrack_lastday_timestamp');
-			$lnow     = date('Y-m-d', $lday_ts);
-			$lformat  = date('Ymd', $lday_ts);
-			$last_day = db_fetch_row("SELECT TO_DAYS('$lnow') AS today");
-			$last_day = $last_day['today'];
-			*/
+		/*
+		$time     = time();
+		$now      = date('Y-m-d', $time);
+		$format   = date('Ymd', $time);
+		$cur_day  = db_fetch_row("SELECT TO_DAYS('$now') AS today");
+		$cur_day  = $cur_day['today'];
 
-			$tday_ts  = strtotime('Today');
-			$tday     = date('Y-m-d', $tday_ts);
-			$tdformat = date('Ymd', $tday_ts);
-			$cur_day  = (array) db_fetch_row("SELECT TO_DAYS('$tday') AS today");
-			$cur_day  = $cur_day['today'];
+		$lday_ts  = read_config_option('mactrack_lastday_timestamp');
+		$lnow     = date('Y-m-d', $lday_ts);
+		$lformat  = date('Ymd', $lday_ts);
+		$last_day = db_fetch_row("SELECT TO_DAYS('$lnow') AS today");
+		$last_day = $last_day['today'];
+		*/
 
-			$lday_ts  = strtotime('Yesterday');
-			$lday     = date('Y-m-d', $lday_ts);
-			$ldformat = date('Ymd', $lday_ts);
-			$last_day = (array) db_fetch_row("SELECT TO_DAYS('$lday') AS today");
-			$last_day = $last_day['today'];
+		$tday_ts  = strtotime('Today');
+		$tday     = date('Y-m-d', $tday_ts);
+		$tdformat = date('Ymd', $tday_ts);
+		$cur_day  = (array) db_fetch_row("SELECT TO_DAYS('$tday') AS today");
+		$cur_day  = $cur_day['today'];
 
-			mactrack_debug("There are currently '" . cacti_sizeof($number_of_partitions) . "' Mactrack Partitions, We will keep '$days' of them.");
-			mactrack_debug("The current day is '$tday($cur_day)', the last day is '$lday($last_day)'");
+		$lday_ts  = strtotime('Yesterday');
+		$lday     = date('Y-m-d', $lday_ts);
+		$ldformat = date('Ymd', $lday_ts);
+		$last_day = (array) db_fetch_row("SELECT TO_DAYS('$lday') AS today");
+		$last_day = $last_day['today'];
 
-			if ($cur_day != $last_day) {
-				// set_config_option('mactrack_lastday_timestamp', $time); //no use
+		mactrack_debug("There are currently '" . cacti_sizeof($number_of_partitions) . "' Mactrack Partitions, We will keep '$days' of them.");
+		mactrack_debug("The current day is '$tday($cur_day)', the last day is '$lday($last_day)'");
 
-				if ($lday_ts != '') {
-					cacti_log("MACTRACK: Creating new partition 'd" . $ldformat . "'", false, 'SYSTEM');
-					mactrack_debug("Creating new partition 'd" . $ldformat . "'");
-					db_execute('ALTER TABLE mac_track_ports REORGANIZE PARTITION dMaxValue INTO (
-						PARTITION d' . $ldformat . " VALUES LESS THAN ($cur_day),
-						PARTITION dMaxValue VALUES LESS THAN MAXVALUE)");
+		if ($cur_day != $last_day) {
+			// set_config_option('mactrack_lastday_timestamp', $time); //no use
 
-					if ($days > 0) {
-						/*
-						$user_partitions = cacti_sizeof($number_of_partitions) - 1;
-						if ($user_partitions >= $days) {
-							$i = 0;
-							while ($user_partitions > $days) {
-								$oldest = $number_of_partitions[$i];
-								cacti_log("MACTRACK: Removing old partition 'd" . $oldest["PARTITION_NAME"] . "'", false, "SYSTEM");
-								mactrack_debug("Removing partition '" . $oldest['PARTITION_NAME'] . "'");
-								db_execute("ALTER TABLE mac_track_ports DROP PARTITION " . $oldest['PARTITION_NAME']);
-								$i++;
-								$user_partitions--;
-								$mactrack_deleted++;
+			if ($lday_ts != '') {
+				cacti_log("MACTRACK: Creating new partition 'd" . $ldformat . "'", false, 'SYSTEM');
+				mactrack_debug("Creating new partition 'd" . $ldformat . "'");
+				db_execute('ALTER TABLE mac_track_ports REORGANIZE PARTITION dMaxValue INTO (
+					PARTITION d' . $ldformat . " VALUES LESS THAN ($cur_day),
+					PARTITION dMaxValue VALUES LESS THAN MAXVALUE)");
+
+				if ($days > 0) {
+					/*
+					$user_partitions = cacti_sizeof($number_of_partitions) - 1;
+					if ($user_partitions >= $days) {
+						$i = 0;
+						while ($user_partitions > $days) {
+							$oldest = $number_of_partitions[$i];
+							cacti_log("MACTRACK: Removing old partition 'd" . $oldest["PARTITION_NAME"] . "'", false, "SYSTEM");
+							mactrack_debug("Removing partition '" . $oldest['PARTITION_NAME'] . "'");
+							db_execute("ALTER TABLE mac_track_ports DROP PARTITION " . $oldest['PARTITION_NAME']);
+							$i++;
+							$user_partitions--;
+							$mactrack_deleted++;
+						}
+					}
+					*/
+
+					$old_day        = date('Ymd', (int) strtotime("- $days Days"));
+					$old_partitions = db_fetch_assoc_prepared('SELECT PARTITION_NAME, PARTITION_DESCRIPTION
+						FROM `information_schema`.`partitions`
+						WHERE table_schema = ?
+						AND table_name="mac_track_ports"
+						AND partition_name < ?
+						ORDER BY partition_ordinal_position',
+						[$database_default, 'd' . $old_day]);
+
+					if (cacti_sizeof($old_partitions) > 0) {
+						// Highest TO_DAYS() bound among the dropped partitions:
+						// every row below it is gone, every row at or above it stays.
+						$dropped_below = 0;
+
+						foreach ($old_partitions as $old_partition) {
+							cacti_log("MACTRACK: Removing old partition '" . $old_partition['PARTITION_NAME'] . "'", false, 'SYSTEM');
+							mactrack_debug("Removing partition '" . $old_partition['PARTITION_NAME'] . "'");
+							db_execute('ALTER TABLE mac_track_ports DROP PARTITION ' . $old_partition['PARTITION_NAME']);
+
+							if (ctype_digit((string) ($old_partition['PARTITION_DESCRIPTION'] ?? ''))) {
+								$dropped_below = max($dropped_below, (int) $old_partition['PARTITION_DESCRIPTION']);
 							}
 						}
-						*/
 
-						$old_day        = date('Ymd', (int) strtotime("- $days Days"));
-						$old_partitions = db_fetch_assoc_prepared('SELECT PARTITION_NAME
-							FROM `information_schema`.`partitions`
-							WHERE table_schema = ?
-							AND table_name="mac_track_ports"
-							AND partition_name < ?
-							ORDER BY partition_ordinal_position',
-							[$database_default, 'd' . $old_day]);
-
-						if (cacti_sizeof($old_partitions) > 0) {
-							foreach ($old_partitions as $old_partition) {
-								cacti_log("MACTRACK: Removing old partition '" . $old_partition['PARTITION_NAME'] . "'", false, 'SYSTEM');
-								mactrack_debug("Removing partition '" . $old_partition['PARTITION_NAME'] . "'");
-								db_execute('ALTER TABLE mac_track_ports DROP PARTITION ' . $old_partition['PARTITION_NAME']);
-							}
+						if ($dropped_below > 0) {
+							// 719528 is TO_DAYS('1970-01-01').
+							mactrack_scan_dates_prune(gmdate('Y-m-d H:i:s', ($dropped_below - 719528) * 86400));
 						}
 					}
 				}
@@ -3123,15 +3159,6 @@ function perform_mactrack_db_maint(): void {
 			ORDER BY scan_date',
 			[$retention_date]);
 	}
-
-	db_execute('REPLACE INTO mac_track_scan_dates
-		(SELECT DISTINCT scan_date FROM mac_track_ports)');
-
-	db_execute('DELETE FROM mac_track_scan_dates
-		WHERE scan_date NOT IN (
-			SELECT DISTINCT scan_date
-			FROM mac_track_ports
-		)');
 
 	mactrack_debug('Finished deleting old records from the main database.');
 }
@@ -3303,6 +3330,201 @@ function mactrack_parse_oui_database(array $lines): array {
 	}
 
 	return $records;
+}
+
+/**
+ * Adds the current scan's date to mac_track_scan_dates. A scan that
+ * collected no rows adds nothing, so the list only names scans with
+ * results. Call it before mac_track_temp_ports is truncated.
+ *
+ * @param string $scan_date The scan's 'Y-m-d H:i:s' timestamp.
+ *
+ * @return bool True when the date was recorded.
+ */
+function mactrack_scan_dates_record(string $scan_date): bool {
+	if (!db_fetch_cell('SELECT 1 FROM mac_track_temp_ports LIMIT 1')) {
+		return false;
+	}
+
+	db_execute_prepared('INSERT IGNORE INTO mac_track_scan_dates (scan_date) VALUES (?)', [$scan_date]);
+
+	return true;
+}
+
+/**
+ * Removes scan dates older than the cutoff that retention just applied
+ * to mac_track_ports.
+ *
+ * @param string $before 'Y-m-d H:i:s'; dates strictly earlier are removed.
+ *
+ * @return void
+ */
+function mactrack_scan_dates_prune(string $before): void {
+	db_execute_prepared('DELETE FROM mac_track_scan_dates
+		WHERE scan_date < ?',
+		[$before]);
+}
+
+/**
+ * The table expression for reading mac_track_ports under the MAC view's
+ * scan date filter: one partition when a single scan date is selected and
+ * the table uses the scan-date layout, otherwise the whole table.
+ *
+ * @param string $scan_date_filter The view's scan_date request value: 1
+ *                                 (all), 2 (most recent), 3 (aggregated) or
+ *                                 one scan date.
+ *
+ * @return string For use as "FROM <expression> AS mtp".
+ */
+function mactrack_ports_table_for(string $scan_date_filter): string {
+	if (in_array($scan_date_filter, ['', '1', '2', '3'], true)) {
+		return 'mac_track_ports';
+	}
+
+	$name = mactrack_partition_for_scan($scan_date_filter);
+
+	return $name !== null && mactrack_partition_name_valid($name) ? "mac_track_ports PARTITION (`$name`)" : 'mac_track_ports';
+}
+
+/**
+ * Rebuilds mac_track_scan_dates from mac_track_ports, reading one
+ * partition at a time when the table is partitioned (MariaDB has no
+ * global index, so one DISTINCT over the table reads every partition's
+ * index in a single statement). Only missing dates are inserted and
+ * only stale ones deleted, so the list is never empty while it runs.
+ *
+ * @return int The number of scan dates after the rebuild.
+ */
+function mactrack_scan_dates_rebuild(): int {
+	global $database_default;
+
+	$partitions = db_fetch_assoc_prepared('SELECT PARTITION_NAME
+		FROM information_schema.PARTITIONS
+		WHERE TABLE_SCHEMA = ?
+		AND TABLE_NAME = "mac_track_ports"
+		ORDER BY PARTITION_ORDINAL_POSITION',
+		[$database_default]);
+
+	$names = array_filter(array_column($partitions, 'PARTITION_NAME'), 'is_string');
+	$found = [];
+
+	if (!cacti_sizeof($names)) {
+		$names = [null];
+	}
+
+	foreach ($names as $name) {
+		if ($name === null) {
+			$sql = 'SELECT DISTINCT scan_date FROM mac_track_ports';
+		} elseif (preg_match('/^[A-Za-z][A-Za-z0-9_]{0,63}$/', $name)) {
+			$sql = 'SELECT DISTINCT scan_date FROM mac_track_ports PARTITION (`' . $name . '`)';
+		} else {
+			cacti_log("MACTRACK: Skipping partition '$name' while rebuilding scan dates: not a plain identifier", false, 'MACTRACK');
+
+			continue;
+		}
+
+		foreach (db_fetch_assoc($sql) as $row) {
+			$found[$row['scan_date']] = true;
+		}
+	}
+
+	$existing = array_fill_keys(array_column(db_fetch_assoc('SELECT scan_date FROM mac_track_scan_dates'), 'scan_date'), true);
+
+	foreach (array_chunk(array_keys(array_diff_key($found, $existing)), 1000) as $chunk) {
+		db_execute_prepared('INSERT IGNORE INTO mac_track_scan_dates (scan_date) VALUES ' .
+			implode(', ', array_fill(0, count($chunk), '(?)')),
+			$chunk);
+	}
+
+	foreach (array_chunk(array_keys(array_diff_key($existing, $found)), 1000) as $chunk) {
+		db_execute_prepared('DELETE FROM mac_track_scan_dates WHERE scan_date IN (' .
+			implode(', ', array_fill(0, count($chunk), '?')) . ')',
+			$chunk);
+	}
+
+	return count($found);
+}
+
+/**
+ * Copies the current scan from mac_track_temp_ports into a ports table
+ * with multi-row INSERT IGNORE statements.
+ *
+ * The temp table is read in primary-key order one page at a time on
+ * Cacti's own connection, each page continuing after the last key of the
+ * previous one, so memory stays flat however large the scan is and no
+ * statement reads and writes in one go (no INSERT ... SELECT). The
+ * continuation condition is written out instead of as a row comparison,
+ * which MariaDB does not always turn into an index range. The temp table
+ * and the target share the primary key (port_number, scan_date,
+ * mac_address, device_id), so IGNORE only skips rows of a scan that was
+ * already loaded; those rows are left as they are.
+ *
+ * @param string $table Target table: mac_track_ports, or
+ *                      mac_track_ports_stage for a partition exchange.
+ * @param int    $batch Rows per read and per INSERT.
+ *
+ * @throws InvalidArgumentException For an unknown table or a batch below 1.
+ *
+ * @return int Number of temp rows read.
+ */
+function mactrack_ports_load(string $table = 'mac_track_ports', int $batch = 1000): int {
+	if (!in_array($table, ['mac_track_ports', 'mac_track_ports_stage'], true)) {
+		throw new InvalidArgumentException("Unknown load target '$table'");
+	}
+
+	if ($batch < 1) {
+		throw new InvalidArgumentException('Batch size must be at least 1');
+	}
+
+	$columns = ['site_id', 'device_id', 'hostname', 'dns_hostname', 'device_name',
+		'vlan_id', 'vlan_name', 'mac_address', 'vendor_mac', 'ip_address',
+		'port_number', 'port_name', 'scan_date', 'authorized'];
+
+	$select = 'SELECT ' . implode(', ', $columns) . ' FROM mac_track_temp_ports';
+	$order  = ' ORDER BY port_number, scan_date, mac_address, device_id LIMIT ' . $batch;
+	$after  = ' WHERE port_number > ? OR (port_number = ? AND (scan_date > ? OR (scan_date = ?
+		AND (mac_address > ? OR (mac_address = ? AND device_id > ?)))))';
+	$tuple  = '(' . implode(', ', array_fill(0, count($columns), '?')) . ')';
+	$insert = 'INSERT IGNORE INTO `' . $table . '` (' . implode(', ', $columns) . ') VALUES ';
+
+	$read = 0;
+	$last = null;
+
+	while (true) {
+		if ($last === null) {
+			$rows = db_fetch_assoc_prepared($select . $order, []);
+		} else {
+			$rows = db_fetch_assoc_prepared($select . $after . $order, [
+				$last['port_number'], $last['port_number'],
+				$last['scan_date'], $last['scan_date'],
+				$last['mac_address'], $last['mac_address'],
+				$last['device_id'],
+			]);
+		}
+
+		if (!is_array($rows) || $rows === []) {
+			break;
+		}
+
+		$params = [];
+
+		foreach ($rows as $row) {
+			foreach ($columns as $column) {
+				$params[] = $row[$column];
+			}
+		}
+
+		db_execute_prepared($insert . implode(', ', array_fill(0, count($rows), $tuple)), $params);
+
+		$read += count($rows);
+		$last  = end($rows);
+
+		if (count($rows) < $batch) {
+			break;
+		}
+	}
+
+	return $read;
 }
 
 /**
