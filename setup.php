@@ -237,6 +237,14 @@ function mactrack_check_upgrade(): void {
 		mactrack_install_realms(false);
 	}
 
+	// Merge duplicate aggregated rows before plugin_mactrack_install()
+	// refreshes the table: Cacti cannot restore the unique key while they
+	// exist. Also runs without a version change, for installs that recorded
+	// the new version after a failed refresh.
+	if (cacti_sizeof($old) && in_array((int) $old['status'], [1, 4], true)) {
+		mactrack_repair_aggregated_ports_key();
+	}
+
 	if ($version_changed) {
 		// if the plugin is installed and/or active
 		if (!cacti_sizeof($old) || $old['status'] == 1 || $old['status'] == 4) {
