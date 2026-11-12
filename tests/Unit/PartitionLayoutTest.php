@@ -27,9 +27,9 @@ beforeAll(function () {
 /**
  * Builds information_schema.PARTITIONS rows as the server returns them.
  *
- * @param array<int, array{0: string, 1: string, 2?: string}> $parts [name, description, rows].
- * @param string $expression PARTITION_EXPRESSION.
- * @param string $method PARTITION_METHOD.
+ * @param  array<int, array{0: string, 1: string, 2?: string}> $parts      [name, description, rows].
+ * @param  string                                              $expression PARTITION_EXPRESSION.
+ * @param  string                                              $method     PARTITION_METHOD.
  * @return array<int, array<string, string|null>>
  */
 function mt_layout_rows(array $parts, string $expression = 'unix_timestamp(`scan_date`)', string $method = 'RANGE'): array {
@@ -53,7 +53,7 @@ it('reports an unpartitioned table as none', function () {
 	expect(mactrack_partition_layout([])['state'])->toBe('none');
 
 	$plain = [['PARTITION_NAME' => null, 'PARTITION_ORDINAL_POSITION' => null, 'PARTITION_METHOD' => null,
-		'PARTITION_EXPRESSION' => null, 'PARTITION_DESCRIPTION' => null, 'TABLE_ROWS' => '120']];
+		'PARTITION_EXPRESSION'     => null, 'PARTITION_DESCRIPTION' => null, 'TABLE_ROWS' => '120']];
 	expect(mactrack_partition_layout($plain))->toBe(['state' => 'none', 'reason' => '', 'partitions' => []]);
 });
 
@@ -87,7 +87,7 @@ it('ignores case, spaces and backticks in the expression', function () {
 });
 
 it('sorts rows by ordinal position before checking them', function () {
-	$rows = mt_layout_rows([['h2026111206', '1794466800'], ['h2026111207', '1794470400'], ['dMaxValue', 'MAXVALUE']]);
+	$rows   = mt_layout_rows([['h2026111206', '1794466800'], ['h2026111207', '1794470400'], ['dMaxValue', 'MAXVALUE']]);
 	$layout = mactrack_partition_layout(array_reverse($rows));
 
 	expect($layout['state'])->toBe('range');
@@ -95,7 +95,7 @@ it('sorts rows by ordinal position before checking them', function () {
 });
 
 it('treats a null row count as zero', function () {
-	$rows = mt_layout_rows([['dMaxValue', 'MAXVALUE']]);
+	$rows                  = mt_layout_rows([['dMaxValue', 'MAXVALUE']]);
 	$rows[0]['TABLE_ROWS'] = null;
 
 	expect(mactrack_partition_layout($rows)['partitions'][0]['rows'])->toBe(0);

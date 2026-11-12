@@ -25,22 +25,22 @@ beforeAll(function () {
 });
 
 beforeEach(function () {
-	$GLOBALS['__test_db_calls']        = array();
-	$GLOBALS['__test_next_returns']    = array();
-	$GLOBALS['__test_matched_returns'] = array();
-	$GLOBALS['__test_config_options']  = array();
-	$GLOBALS['__test_cacti_log']       = array();
+	$GLOBALS['__test_db_calls']        = [];
+	$GLOBALS['__test_next_returns']    = [];
+	$GLOBALS['__test_matched_returns'] = [];
+	$GLOBALS['__test_config_options']  = [];
+	$GLOBALS['__test_cacti_log']       = [];
 });
 
 /**
  * Builds one temp-table row with the 14 columns the loader copies.
  *
- * @param int $n Distinguishes rows; used in the key columns.
- * @param array<string, mixed> $override Column values to replace.
+ * @param  int                  $n        Distinguishes rows; used in the key columns.
+ * @param  array<string, mixed> $override Column values to replace.
  * @return array<string, mixed>
  */
-function mt_load_row(int $n, array $override = array()): array {
-	return $override + array(
+function mt_load_row(int $n, array $override = []): array {
+	return $override + [
 		'site_id'      => 1,
 		'device_id'    => $n,
 		'hostname'     => "switch-$n.example.net",
@@ -55,13 +55,13 @@ function mt_load_row(int $n, array $override = array()): array {
 		'port_name'    => "Gi0/$n",
 		'scan_date'    => '2026-11-12 06:00:00',
 		'authorized'   => 0,
-	);
+	];
 }
 
 /**
  * Returns the recorded calls of one stubbed function.
  *
- * @param string $fn Function name.
+ * @param  string $fn Function name.
  * @return array
  */
 function mt_load_calls(string $fn): array {
@@ -78,16 +78,16 @@ function mt_load_inserts(): array {
 }
 
 it('loads nothing from an empty temp table', function () {
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array());
+	mactrack_test_queue_return('db_fetch_assoc_prepared', []);
 
 	expect(mactrack_ports_load())->toBe(0);
-	expect(mt_load_inserts())->toBe(array());
+	expect(mt_load_inserts())->toBe([]);
 	expect(mt_load_calls('db_fetch_assoc_prepared'))->toHaveCount(1);
 });
 
 it('reads in primary-key order and writes one INSERT IGNORE per page', function () {
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array(mt_load_row(1), mt_load_row(2)));
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array(mt_load_row(3)));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', [mt_load_row(1), mt_load_row(2)]);
+	mactrack_test_queue_return('db_fetch_assoc_prepared', [mt_load_row(3)]);
 
 	expect(mactrack_ports_load('mac_track_ports', 2))->toBe(3);
 
@@ -106,7 +106,7 @@ it('reads in primary-key order and writes one INSERT IGNORE per page', function 
 });
 
 it('writes the columns in the target table order', function () {
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array(mt_load_row(7)));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', [mt_load_row(7)]);
 
 	mactrack_ports_load();
 
@@ -117,20 +117,20 @@ it('writes the columns in the target table order', function () {
 
 it('continues after the last key of the previous page', function () {
 	$last = mt_load_row(2);
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array(mt_load_row(1), $last));
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array());
+	mactrack_test_queue_return('db_fetch_assoc_prepared', [mt_load_row(1), $last]);
+	mactrack_test_queue_return('db_fetch_assoc_prepared', []);
 
 	mactrack_ports_load('mac_track_ports', 2);
 
 	$reads = mt_load_calls('db_fetch_assoc_prepared');
 	expect($reads)->toHaveCount(2);
-	expect($reads[0]['params'])->toBe(array());
-	expect($reads[1]['params'])->toBe(array(
+	expect($reads[0]['params'])->toBe([]);
+	expect($reads[1]['params'])->toBe([
 		$last['port_number'], $last['port_number'],
 		$last['scan_date'], $last['scan_date'],
 		$last['mac_address'], $last['mac_address'],
 		$last['device_id'],
-	));
+	]);
 	expect(preg_replace('/\s+/', ' ', $reads[1]['sql']))->toContain(
 		'WHERE (port_number > ? OR (port_number = ? AND (scan_date > ? OR (scan_date = ? AND (mac_address > ? OR (mac_address = ? AND device_id > ?))))))'
 	);
@@ -138,13 +138,13 @@ it('continues after the last key of the previous page', function () {
 
 it('rejects an unknown source, or a source that is the target', function (string $table, string $source) {
 	expect(fn () => mactrack_ports_load($table, 1000, null, true, $source))->toThrow(InvalidArgumentException::class);
-})->with(array(
-	'unknown'     => array('mac_track_ports', 'mac_track_ips'),
-	'same table'  => array('mac_track_ports_stage', 'mac_track_ports_stage'),
-));
+})->with([
+	'unknown'     => ['mac_track_ports', 'mac_track_ips'],
+	'same table'  => ['mac_track_ports_stage', 'mac_track_ports_stage'],
+]);
 
 it('counts the INSERTs that fail', function () {
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array(mt_load_row(1)));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', [mt_load_row(1)]);
 	mactrack_test_queue_return('db_execute_prepared', false);
 	$failed = null;
 
@@ -153,39 +153,39 @@ it('counts the INSERTs that fail', function () {
 });
 
 it('copies only one scan date, or only the other dates', function (bool $match, string $where) {
-	$first = array(mt_load_row(1), mt_load_row(2));
+	$first = [mt_load_row(1), mt_load_row(2)];
 	mactrack_test_queue_return('db_fetch_assoc_prepared', $first);
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array());
+	mactrack_test_queue_return('db_fetch_assoc_prepared', []);
 
 	mactrack_ports_load('mac_track_ports', 2, '2026-11-12 06:15:07', $match);
 
 	$reads = mt_load_calls('db_fetch_assoc_prepared');
 	$last  = $first[1];
-	expect($reads[0]['params'])->toBe(array('2026-11-12 06:15:07'));
+	expect($reads[0]['params'])->toBe(['2026-11-12 06:15:07']);
 	expect(preg_replace('/\s+/', ' ', $reads[0]['sql']))->toContain("FROM `mac_track_temp_ports` WHERE $where ORDER BY");
-	expect($reads[1]['params'])->toBe(array(
+	expect($reads[1]['params'])->toBe([
 		'2026-11-12 06:15:07',
 		$last['port_number'], $last['port_number'],
 		$last['scan_date'], $last['scan_date'],
 		$last['mac_address'], $last['mac_address'],
 		$last['device_id'],
-	));
+	]);
 	expect(preg_replace('/\s+/', ' ', $reads[1]['sql']))->toContain("WHERE $where AND (port_number > ?");
-})->with(array(
-	'this scan'   => array(true, 'scan_date = ?'),
-	'other dates' => array(false, 'scan_date <> ?'),
-));
+})->with([
+	'this scan'   => [true, 'scan_date = ?'],
+	'other dates' => [false, 'scan_date <> ?'],
+]);
 
 it('stops after a short page without another read', function () {
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array(mt_load_row(1)));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', [mt_load_row(1)]);
 
 	expect(mactrack_ports_load('mac_track_ports', 2))->toBe(1);
 	expect(mt_load_calls('db_fetch_assoc_prepared'))->toHaveCount(1);
 });
 
 it('stops after an empty page that follows a full one', function () {
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array(mt_load_row(1), mt_load_row(2)));
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array());
+	mactrack_test_queue_return('db_fetch_assoc_prepared', [mt_load_row(1), mt_load_row(2)]);
+	mactrack_test_queue_return('db_fetch_assoc_prepared', []);
 
 	expect(mactrack_ports_load('mac_track_ports', 2))->toBe(2);
 	expect(mt_load_calls('db_fetch_assoc_prepared'))->toHaveCount(2);
@@ -193,8 +193,8 @@ it('stops after an empty page that follows a full one', function () {
 });
 
 it('passes values only as bound parameters', function () {
-	$row = mt_load_row(1, array('port_name' => "Gi0/1'; DROP TABLE x; --"));
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array($row));
+	$row = mt_load_row(1, ['port_name' => "Gi0/1'; DROP TABLE x; --"]);
+	mactrack_test_queue_return('db_fetch_assoc_prepared', [$row]);
 
 	mactrack_ports_load();
 
@@ -204,7 +204,7 @@ it('passes values only as bound parameters', function () {
 });
 
 it('uses INSERT IGNORE and never ON DUPLICATE KEY or INSERT ... SELECT', function () {
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array(mt_load_row(1)));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', [mt_load_row(1)]);
 
 	mactrack_ports_load();
 
@@ -215,7 +215,7 @@ it('uses INSERT IGNORE and never ON DUPLICATE KEY or INSERT ... SELECT', functio
 });
 
 it('writes to the stage table when asked', function () {
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array(mt_load_row(1)));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', [mt_load_row(1)]);
 
 	mactrack_ports_load('mac_track_ports_stage');
 
@@ -224,12 +224,12 @@ it('writes to the stage table when asked', function () {
 
 it('refuses an unknown target table', function () {
 	expect(fn () => mactrack_ports_load('mac_track_ips'))->toThrow(InvalidArgumentException::class);
-	expect($GLOBALS['__test_db_calls'])->toBe(array());
+	expect($GLOBALS['__test_db_calls'])->toBe([]);
 });
 
 it('refuses a batch size below one', function () {
 	expect(fn () => mactrack_ports_load('mac_track_ports', 0))->toThrow(InvalidArgumentException::class);
-	expect($GLOBALS['__test_db_calls'])->toBe(array());
+	expect($GLOBALS['__test_db_calls'])->toBe([]);
 });
 
 it('transfers scan results with the batch loader', function () {

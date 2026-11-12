@@ -30,9 +30,9 @@
  * failure leaves the original in use.
  */
 
-// @codeCoverageIgnoreStart
+/** @codeCoverageIgnoreStart */
 include_once(__DIR__ . '/../includes/database.php');
-// @codeCoverageIgnoreEnd
+/** @codeCoverageIgnoreEnd */
 
 /**
  * Tells whether the server can partition tables.
@@ -78,6 +78,8 @@ function mactrack_partition_fresh_install(): bool {
 /**
  * Chooses the partitions that hold an existing history: the wanted
  * granularity, or a coarser one when the history would pass the cap.
+ * The bounds come in increasing order; when even daily partitions pass
+ * the cap, granularity is empty and reason says why.
  *
  * @param array<int, int|string> $epochs      The history's scan dates as epoch
  *                                            seconds; values below 1 (zero
@@ -86,8 +88,6 @@ function mactrack_partition_fresh_install(): bool {
  * @param int                    $cap         Most partitions allowed, dMaxValue included.
  *
  * @return array{granularity: string, bounds: array<string, int>, reason: string}
- *         Bounds in increasing order; granularity is empty, with the reason,
- *         when even daily partitions pass the cap.
  */
 function mactrack_partition_convert_bounds(array $epochs, string $granularity, int $cap): array {
 	$order  = ['scan', 'hour', 'day'];

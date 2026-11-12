@@ -28,20 +28,20 @@ beforeAll(function () {
 });
 
 beforeEach(function () {
-	$GLOBALS['__test_db_calls']        = array();
-	$GLOBALS['__test_next_returns']    = array();
-	$GLOBALS['__test_matched_returns'] = array();
-	$GLOBALS['__test_config_options']  = array();
-	$GLOBALS['__test_cacti_log']       = array();
+	$GLOBALS['__test_db_calls']        = [];
+	$GLOBALS['__test_next_returns']    = [];
+	$GLOBALS['__test_matched_returns'] = [];
+	$GLOBALS['__test_config_options']  = [];
+	$GLOBALS['__test_cacti_log']       = [];
 	$GLOBALS['database_default']       = 'cacti';
-	$GLOBALS['database_sessions']      = array();
+	$GLOBALS['database_sessions']      = [];
 
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', '10.5.29-MariaDB');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK', '1');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'lock_wait_timeout', '50');
 });
 
-const MT_LS_PLAN = array('mode' => 'exchange', 'partition' => 's20261112061507', 'reason' => '', 'granularity' => 'scan', 'scan_date' => '2026-11-12 06:15:07');
+const MT_LS_PLAN = ['mode' => 'exchange', 'partition' => 's20261112061507', 'reason' => '', 'granularity' => 'scan', 'scan_date' => '2026-11-12 06:15:07'];
 
 /**
  * Returns the SQL of every db_execute_prepared call, in order.
@@ -55,7 +55,7 @@ function mt_ls_executed(): array {
 /**
  * Returns the index of the first executed statement containing $fragment.
  *
- * @param string $fragment Text to look for.
+ * @param  string   $fragment Text to look for.
  * @return int|null
  */
 function mt_ls_pos(string $fragment): ?int {
@@ -72,31 +72,31 @@ function mt_ls_pos(string $fragment): ?int {
  * Queues information_schema answers for the stage check: columns and
  * indexes of mac_track_ports, then of the stage table.
  *
- * @param array|null $stage_cols Stage columns; null for a missing table.
- * @param array|null $stage_idx  Stage indexes; defaults to the main table's.
+ * @param  array|null $stage_cols Stage columns; null for a missing table.
+ * @param  array|null $stage_idx  Stage indexes; defaults to the main table's.
  * @return void
  */
 function mt_ls_stage(?array $stage_cols, ?array $stage_idx = null, ?array $stage_tbl = null): void {
-	$cols = array(
-		array('COLUMN_NAME' => 'site_id', 'COLUMN_TYPE' => 'int(10) unsigned', 'IS_NULLABLE' => 'NO', 'COLUMN_DEFAULT' => '0'),
-		array('COLUMN_NAME' => 'scan_date', 'COLUMN_TYPE' => 'timestamp', 'IS_NULLABLE' => 'NO', 'COLUMN_DEFAULT' => 'current_timestamp()'),
-	);
-	$idx  = array(
-		array('INDEX_NAME' => 'PRIMARY', 'SEQ_IN_INDEX' => '1', 'COLUMN_NAME' => 'scan_date', 'NON_UNIQUE' => '0'),
-	);
+	$cols = [
+		['COLUMN_NAME' => 'site_id', 'COLUMN_TYPE' => 'int(10) unsigned', 'IS_NULLABLE' => 'NO', 'COLUMN_DEFAULT' => '0'],
+		['COLUMN_NAME' => 'scan_date', 'COLUMN_TYPE' => 'timestamp', 'IS_NULLABLE' => 'NO', 'COLUMN_DEFAULT' => 'current_timestamp()'],
+	];
+	$idx  = [
+		['INDEX_NAME' => 'PRIMARY', 'SEQ_IN_INDEX' => '1', 'COLUMN_NAME' => 'scan_date', 'NON_UNIQUE' => '0'],
+	];
 
-	$tbl  = array(array('ENGINE' => 'InnoDB', 'TABLE_COLLATION' => 'utf8mb4_unicode_ci'));
+	$tbl  = [['ENGINE' => 'InnoDB', 'TABLE_COLLATION' => 'utf8mb4_unicode_ci']];
 
 	mactrack_test_queue_return('db_fetch_assoc_prepared', $cols);
 	mactrack_test_queue_return('db_fetch_assoc_prepared', $idx);
 	mactrack_test_queue_return('db_fetch_assoc_prepared', $tbl);
-	mactrack_test_queue_return('db_fetch_assoc_prepared', $stage_cols === null ? array() : ($stage_cols === array('same') ? $cols : $stage_cols));
-	mactrack_test_queue_return('db_fetch_assoc_prepared', $stage_cols === null ? array() : ($stage_idx ?? $idx));
-	mactrack_test_queue_return('db_fetch_assoc_prepared', $stage_cols === null ? array() : ($stage_tbl ?? $tbl));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', $stage_cols === null ? [] : ($stage_cols === ['same'] ? $cols : $stage_cols));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', $stage_cols === null ? [] : ($stage_idx ?? $idx));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', $stage_cols === null ? [] : ($stage_tbl ?? $tbl));
 }
 
 it('loads a direct scan straight into mac_track_ports', function () {
-	$rows = mactrack_partition_load_scan(array('mode' => 'direct', 'partition' => null, 'reason' => 'layout none', 'granularity' => null, 'scan_date' => '2026-11-12 06:15:07'));
+	$rows = mactrack_partition_load_scan(['mode' => 'direct', 'partition' => null, 'reason' => 'layout none', 'granularity' => null, 'scan_date' => '2026-11-12 06:15:07']);
 
 	expect($rows)->toBe(0);
 	expect(mt_ls_pos('EXCHANGE'))->toBeNull();
@@ -105,8 +105,8 @@ it('loads a direct scan straight into mac_track_ports', function () {
 });
 
 it('loads into the stage table and exchanges it into the scan partition', function () {
-	mt_ls_stage(array('same'));
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array(mt_ls_row(1), mt_ls_row(2)));
+	mt_ls_stage(['same']);
+	mactrack_test_queue_return('db_fetch_assoc_prepared', [mt_ls_row(1), mt_ls_row(2)]);
 
 	$rows = mactrack_partition_load_scan(MT_LS_PLAN);
 
@@ -119,9 +119,9 @@ it('loads into the stage table and exchanges it into the scan partition', functi
 });
 
 it('puts only this scan into its partition and older leftovers where their dates belong', function () {
-	mt_ls_stage(array('same'));
-	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'WHERE scan_date = ?', array(mt_ls_row(1), mt_ls_row(2)));
-	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'WHERE scan_date <> ?', array(mt_ls_row(3)));
+	mt_ls_stage(['same']);
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'WHERE scan_date = ?', [mt_ls_row(1), mt_ls_row(2)]);
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'WHERE scan_date <> ?', [mt_ls_row(3)]);
 
 	$rows = mactrack_partition_load_scan(MT_LS_PLAN);
 
@@ -131,13 +131,13 @@ it('puts only this scan into its partition and older leftovers where their dates
 
 	$reads = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_fetch_assoc_prepared' && strpos($c['sql'], 'FROM `mac_track_temp_ports`') !== false));
 	expect($reads)->toHaveCount(2);
-	expect($reads[0]['params'])->toBe(array('2026-11-12 06:15:07'));
-	expect($reads[1]['params'])->toBe(array('2026-11-12 06:15:07'));
+	expect($reads[0]['params'])->toBe(['2026-11-12 06:15:07']);
+	expect($reads[1]['params'])->toBe(['2026-11-12 06:15:07']);
 });
 
 it('exchanges without validation where the server supports it', function () {
-	$GLOBALS['__test_matched_returns']['db_fetch_cell_prepared'][0] = array('VERSION()', '11.8.9-MariaDB');
-	mt_ls_stage(array('same'));
+	$GLOBALS['__test_matched_returns']['db_fetch_cell_prepared'][0] = ['VERSION()', '11.8.9-MariaDB'];
+	mt_ls_stage(['same']);
 
 	mactrack_partition_load_scan(MT_LS_PLAN);
 
@@ -161,25 +161,25 @@ it('recreates a stage table whose columns, indexes or collation differ', functio
 	mactrack_partition_load_scan(MT_LS_PLAN);
 
 	expect(mt_ls_pos('CREATE TABLE `mac_track_ports_stage`'))->not->toBeNull();
-})->with(array(
-	'column type' => array(array(
-		array('COLUMN_NAME' => 'site_id', 'COLUMN_TYPE' => 'int(11)', 'IS_NULLABLE' => 'NO', 'COLUMN_DEFAULT' => '0'),
-		array('COLUMN_NAME' => 'scan_date', 'COLUMN_TYPE' => 'timestamp', 'IS_NULLABLE' => 'NO', 'COLUMN_DEFAULT' => 'current_timestamp()'),
-	), null),
-	'column missing' => array(array(
-		array('COLUMN_NAME' => 'site_id', 'COLUMN_TYPE' => 'int(10) unsigned', 'IS_NULLABLE' => 'NO', 'COLUMN_DEFAULT' => '0'),
-	), null),
-	'index' => array(array('same'), array(
-		array('INDEX_NAME' => 'PRIMARY', 'SEQ_IN_INDEX' => '1', 'COLUMN_NAME' => 'site_id', 'NON_UNIQUE' => '0'),
-	)),
-	'table collation' => array(array('same'), null, array(array('ENGINE' => 'InnoDB', 'TABLE_COLLATION' => 'utf8mb3_general_ci'))),
-));
+})->with([
+	'column type' => [[
+		['COLUMN_NAME' => 'site_id', 'COLUMN_TYPE' => 'int(11)', 'IS_NULLABLE' => 'NO', 'COLUMN_DEFAULT' => '0'],
+		['COLUMN_NAME' => 'scan_date', 'COLUMN_TYPE' => 'timestamp', 'IS_NULLABLE' => 'NO', 'COLUMN_DEFAULT' => 'current_timestamp()'],
+	], null],
+	'column missing' => [[
+		['COLUMN_NAME' => 'site_id', 'COLUMN_TYPE' => 'int(10) unsigned', 'IS_NULLABLE' => 'NO', 'COLUMN_DEFAULT' => '0'],
+	], null],
+	'index' => [['same'], [
+		['INDEX_NAME' => 'PRIMARY', 'SEQ_IN_INDEX' => '1', 'COLUMN_NAME' => 'site_id', 'NON_UNIQUE' => '0'],
+	]],
+	'table collation' => [['same'], null, [['ENGINE' => 'InnoDB', 'TABLE_COLLATION' => 'utf8mb3_general_ci']]],
+]);
 
 it('falls back to a direct load when the stage table cannot be made', function () {
 	mt_ls_stage(null);
 	mactrack_test_queue_return('db_execute_prepared', true);  // DROP
 	mactrack_test_queue_return('db_execute_prepared', false); // CREATE
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array(mt_ls_row(1)));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', [mt_ls_row(1)]);
 
 	expect(mactrack_partition_load_scan(MT_LS_PLAN))->toBe(1);
 
@@ -191,8 +191,8 @@ it('falls back to a direct load when the stage table cannot be made', function (
 });
 
 it('leaves a failed exchange pending with its rows in the stage table', function () {
-	$GLOBALS['__test_matched_returns']['db_fetch_cell_prepared'][1] = array('GET_LOCK', '0');
-	mt_ls_stage(array('same'));
+	$GLOBALS['__test_matched_returns']['db_fetch_cell_prepared'][1] = ['GET_LOCK', '0'];
+	mt_ls_stage(['same']);
 
 	mactrack_partition_load_scan(MT_LS_PLAN);
 
@@ -206,7 +206,7 @@ it('leaves a failed exchange pending with its rows in the stage table', function
 
 it('retries a pending exchange before it touches the stage table', function () {
 	$GLOBALS['__test_config_options']['mt_partition_pending'] = 's20261112060007';
-	mt_ls_stage(array('same'));
+	mt_ls_stage(['same']);
 
 	mactrack_partition_load_scan(MT_LS_PLAN);
 
@@ -217,10 +217,10 @@ it('retries a pending exchange before it touches the stage table', function () {
 });
 
 it('moves the stage rows in directly when the retry fails too', function () {
-	$GLOBALS['__test_config_options']['mt_partition_pending'] = 's20261112060007';
-	$GLOBALS['__test_matched_returns']['db_fetch_cell_prepared'][1] = array('GET_LOCK', '0');
-	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM `mac_track_ports_stage`', array(mt_ls_row(1)));
-	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM `mac_track_temp_ports`', array(mt_ls_row(2)));
+	$GLOBALS['__test_config_options']['mt_partition_pending']       = 's20261112060007';
+	$GLOBALS['__test_matched_returns']['db_fetch_cell_prepared'][1] = ['GET_LOCK', '0'];
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM `mac_track_ports_stage`', [mt_ls_row(1)]);
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM `mac_track_temp_ports`', [mt_ls_row(2)]);
 
 	$rows = mactrack_partition_load_scan(MT_LS_PLAN);
 
@@ -232,9 +232,9 @@ it('moves the stage rows in directly when the retry fails too', function () {
 });
 
 it('keeps the stage rows pending when moving them in fails', function () {
-	$GLOBALS['__test_config_options']['mt_partition_pending'] = 's20261112060007';
-	$GLOBALS['__test_matched_returns']['db_fetch_cell_prepared'][1] = array('GET_LOCK', '0');
-	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM `mac_track_ports_stage`', array(mt_ls_row(1)));
+	$GLOBALS['__test_config_options']['mt_partition_pending']       = 's20261112060007';
+	$GLOBALS['__test_matched_returns']['db_fetch_cell_prepared'][1] = ['GET_LOCK', '0'];
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM `mac_track_ports_stage`', [mt_ls_row(1)]);
 	mactrack_test_queue_return_for('db_execute_prepared', 'INSERT IGNORE INTO `mac_track_ports` (', false);
 
 	mactrack_partition_load_scan(MT_LS_PLAN);
@@ -247,7 +247,7 @@ it('keeps the stage rows pending when moving them in fails', function () {
 it('retries a pending exchange even when this scan loads direct', function () {
 	$GLOBALS['__test_config_options']['mt_partition_pending'] = 's20261112060007';
 
-	mactrack_partition_load_scan(array('mode' => 'direct', 'partition' => 'h2026111206', 'reason' => '', 'granularity' => 'hour', 'scan_date' => '2026-11-12 06:15:07'));
+	mactrack_partition_load_scan(['mode' => 'direct', 'partition' => 'h2026111206', 'reason' => '', 'granularity' => 'hour', 'scan_date' => '2026-11-12 06:15:07']);
 
 	expect(mt_ls_executed())->toContain(mactrack_partition_exchange_sql('s20261112060007', false));
 	expect($GLOBALS['__test_config_options']['mt_partition_pending'])->toBe('');
@@ -256,7 +256,7 @@ it('retries a pending exchange even when this scan loads direct', function () {
 it('drops a pending value that is not a partition name', function () {
 	$GLOBALS['__test_config_options']['mt_partition_pending'] = 's1;DROP';
 
-	mactrack_partition_load_scan(array('mode' => 'direct', 'partition' => null, 'reason' => '', 'granularity' => null, 'scan_date' => '2026-11-12 06:15:07'));
+	mactrack_partition_load_scan(['mode' => 'direct', 'partition' => null, 'reason' => '', 'granularity' => null, 'scan_date' => '2026-11-12 06:15:07']);
 
 	expect(mt_ls_pos('EXCHANGE'))->toBeNull();
 	expect($GLOBALS['__test_config_options']['mt_partition_pending'])->toBe('');
@@ -291,13 +291,13 @@ it('wires the poller to prepare the partition before scanning and load through i
 /**
  * Builds one temp-table row.
  *
- * @param int $n Distinguishes rows.
+ * @param  int                  $n Distinguishes rows.
  * @return array<string, mixed>
  */
 function mt_ls_row(int $n): array {
-	return array(
-		'site_id' => 1, 'device_id' => $n, 'hostname' => "sw$n", 'dns_hostname' => '', 'device_name' => "sw$n",
-		'vlan_id' => '10', 'vlan_name' => 'V10', 'mac_address' => sprintf('00:11:22:33:44:%02X', $n), 'vendor_mac' => '00:11:22',
+	return [
+		'site_id'    => 1, 'device_id' => $n, 'hostname' => "sw$n", 'dns_hostname' => '', 'device_name' => "sw$n",
+		'vlan_id'    => '10', 'vlan_name' => 'V10', 'mac_address' => sprintf('00:11:22:33:44:%02X', $n), 'vendor_mac' => '00:11:22',
 		'ip_address' => "10.0.0.$n", 'port_number' => (string) $n, 'port_name' => "Gi0/$n", 'scan_date' => '2026-11-12 06:15:07', 'authorized' => 0,
-	);
+	];
 }

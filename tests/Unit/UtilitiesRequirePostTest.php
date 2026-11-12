@@ -22,7 +22,7 @@
 
 require_once dirname(__DIR__, 2) . '/lib/mactrack_functions.php';
 
-const MT_UP_ACTIONS = array(
+const MT_UP_ACTIONS = [
 	'mactrack_utilities_truncate_ports_table',
 	'mactrack_utilities_perform_db_maint',
 	'mactrack_utilities_purge_scanning_funcs',
@@ -32,7 +32,7 @@ const MT_UP_ACTIONS = array(
 	'mactrack_utilities_rebuild_scan_dates',
 	'mactrack_utilities_optimize_ports',
 	'mactrack_utilities_convert_ports',
-);
+];
 
 it('lists every Utilities action that changes data', function () {
 	expect(array_keys(mactrack_utilities_post_actions()))->toEqualCanonicalizing(MT_UP_ACTIONS);
@@ -48,17 +48,17 @@ it('runs a data-changing action only on a POST', function (string $method, bool 
 	foreach (MT_UP_ACTIONS as $action) {
 		expect(mactrack_utilities_may_run($action, $method))->toBe($runs);
 	}
-})->with(array(
-	'POST'      => array('POST', true),
-	'GET'       => array('GET', false),
-	'HEAD'      => array('HEAD', false),
-	'no method' => array('', false),
-	'lowercase' => array('post', false),
-));
+})->with([
+	'POST'      => ['POST', true],
+	'GET'       => ['GET', false],
+	'HEAD'      => ['HEAD', false],
+	'no method' => ['', false],
+	'lowercase' => ['post', false],
+]);
 
 it('lets read-only pages through on any method', function (string $action) {
 	expect(mactrack_utilities_may_run($action, 'GET'))->toBeTrue();
-})->with(array('mactrack_proc_status', '', 'unknown'));
+})->with(['mactrack_proc_status', '', 'unknown']);
 
 it('gates the dispatcher before any action runs', function () {
 	$src  = file_get_contents(dirname(__DIR__, 2) . '/mactrack_utilities.php');
