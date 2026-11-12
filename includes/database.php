@@ -846,7 +846,11 @@ function mactrack_rebuild_aggregated_ports(): bool {
 		return true;
 	}
 
-	$lock_name = 'mactrack.aggregated_rebuild.' . sha1((string) $database_default);
+	// Namespace the advisory lock per database. SHA-256 (truncated) keeps the
+	// name well under MySQL's 64-character GET_LOCK limit and avoids the weak
+	// hashing that SonarCloud flags; the value only has to be stable, not
+	// cryptographically strong.
+	$lock_name = 'mactrack.aggregated_rebuild.' . substr(hash('sha256', (string) $database_default), 0, 32);
 
 	if ((string) db_fetch_cell_prepared('SELECT GET_LOCK(?, ?)', [$lock_name, 0]) !== '1') {
 		return false;
