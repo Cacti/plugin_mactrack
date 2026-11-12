@@ -97,6 +97,25 @@ it('prunes scan dates before the cutoff', function () {
 	expect($writes[0]['params'])->toBe(array('2026-11-01 00:00:00'));
 });
 
+it('removes scan dates left with no port rows', function () {
+	mactrack_scan_dates_prune_empty();
+
+	$sql = preg_replace('/\s+/', ' ', $GLOBALS['__test_db_calls'][0]['sql']);
+	expect($sql)->toBe('DELETE FROM mac_track_scan_dates WHERE NOT EXISTS (SELECT 1 FROM mac_track_ports AS p WHERE p.scan_date = mac_track_scan_dates.scan_date)');
+});
+
+it('removes empty scan dates after device, site and MAC deletes', function (string $page, string $remove) {
+	$src  = file_get_contents(dirname(__DIR__, 2) . "/$page");
+	$loop = strpos($src, "$remove(\$selected_items[\$i]);");
+
+	expect($loop)->not->toBeFalse();
+	expect(strpos($src, 'mactrack_scan_dates_prune_empty();', $loop))->toBeGreaterThan($loop);
+})->with(array(
+	'devices' => array('mactrack_devices.php', 'api_mactrack_device_remove'),
+	'sites'   => array('mactrack_sites.php', 'api_mactrack_site_remove'),
+	'macauth' => array('mactrack_macauth.php', 'api_mactrack_maca_remove'),
+));
+
 it('rebuilds from each partition and syncs the table', function () {
 	mactrack_test_queue_return('db_fetch_assoc_prepared', mt_scan_dates_partition_rows(array('d20261110', 'd20261111', 'dMaxValue')));
 	mactrack_test_queue_return_for('db_fetch_assoc', 'PARTITION (`d20261110`)', array(array('scan_date' => '2026-11-10 10:00:00')));

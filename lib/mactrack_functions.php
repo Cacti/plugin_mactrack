@@ -3366,6 +3366,18 @@ function mactrack_scan_dates_prune(string $before): void {
 }
 
 /**
+ * Removes scan dates that no longer have a row in mac_track_ports, after a
+ * delete by device, site or MAC address. Each date costs one lookup on the
+ * scan_date index, in that date's partition when the table is partitioned.
+ *
+ * @return void
+ */
+function mactrack_scan_dates_prune_empty(): void {
+	db_execute_prepared('DELETE FROM mac_track_scan_dates
+		WHERE NOT EXISTS (SELECT 1 FROM mac_track_ports AS p WHERE p.scan_date = mac_track_scan_dates.scan_date)');
+}
+
+/**
  * The table expression for reading mac_track_ports under the MAC view's
  * scan date filter: one partition when a single scan date is selected and
  * the table uses the scan-date layout, otherwise the whole table.
