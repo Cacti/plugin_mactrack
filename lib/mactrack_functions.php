@@ -2809,9 +2809,12 @@ function db_check_for_ip($mac_address) {
 		return false;
 	}
 
+	// the newest translation, not whichever row the server reads first
 	$query = db_fetch_cell_prepared('SELECT ip_address
 		FROM mac_track_arp
-		WHERE mac_address = ?',
+		WHERE mac_address = ?
+		ORDER BY scan_date DESC
+		LIMIT 1',
 		[$mac_address]);
 
 	return $query;
@@ -2976,6 +2979,18 @@ function perform_mactrack_db_maint(): void {
 		WHERE scan_date < CURDATE() - INTERVAL ? DAY',
 		[(int) read_config_option('mt_data_retention_ip')]);
 	db_execute('OPTIMIZE TABLE mac_track_ips');
+
+	// The ARP translations follow the IP retention and the 802.1x sessions
+	// the port retention; nothing else ever removed them.
+	db_execute_prepared('DELETE FROM mac_track_arp
+		WHERE scan_date < CURDATE() - INTERVAL ? DAY',
+		[(int) read_config_option('mt_data_retention_ip')]);
+
+	if ($days > 0) {
+		db_execute_prepared('DELETE FROM mac_track_dot1x
+			WHERE scan_date < ?',
+			[$retention_date]);
+	}
 
 	db_execute('REPLACE INTO mac_track_scan_dates
 		(SELECT DISTINCT scan_date FROM mac_track_ports)');

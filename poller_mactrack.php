@@ -821,28 +821,24 @@ function collect_mactrack_data($start, $site_id = 0): void {
 			}
 		}
 
-		// check the arp table for entries
-		$ports = db_fetch_assoc('SELECT site_id, device_id, mac_address, ip_address
-			FROM mac_track_temp_ports
-			WHERE updated = 0');
-
-		if (cacti_sizeof($ports)) {
-			foreach ($ports as $port) {
-				$macs = db_fetch_row_prepared('SELECT mac_address,ip_address
+		// Fill the rest from each MAC's newest ARP translation, in one
+		// statement rather than a lookup per row.
+		db_execute('UPDATE mac_track_temp_ports AS tp
+			INNER JOIN (
+				SELECT arp.mac_address, MAX(arp.ip_address) AS ip_address
+				FROM mac_track_arp AS arp
+				INNER JOIN (
+					SELECT mac_address, MAX(scan_date) AS scan_date
 					FROM mac_track_arp
-					WHERE mac_address = ?',
-					[$port['mac_address']]);
-
-				if (isset($macs['ip_address'])) {
-					db_execute_prepared('UPDATE mac_track_temp_ports
-						SET updated=1, ip_address = ?
-						WHERE site_id = ?
-						AND device_id = ?
-						AND mac_address = ?',
-						[$macs['ip_address'], $port['site_id'], $port['device_id'], $port['mac_address']]);
-				}
-			}
-		}
+					GROUP BY mac_address
+				) AS newest
+				ON arp.mac_address = newest.mac_address
+				AND arp.scan_date = newest.scan_date
+				GROUP BY arp.mac_address
+			) AS arp
+			ON tp.mac_address = arp.mac_address
+			SET tp.updated = 1, tp.ip_address = arp.ip_address
+			WHERE tp.updated = 0');
 
 		// resolve some ip's to mac addresses to let the resolver knock them out
 		db_execute_prepared('UPDATE mac_track_temp_ports

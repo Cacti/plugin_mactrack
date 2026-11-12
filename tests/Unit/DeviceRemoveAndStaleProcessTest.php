@@ -41,7 +41,8 @@ test('removing a device binds the device id in every delete', function () {
 
 	$calls = $GLOBALS['__test_db_calls'];
 
-	expect($calls)->toHaveCount(9);
+	expect($calls)->toHaveCount(10);
+	expect(implode(' ', array_column($calls, 'sql')))->toContain('DELETE FROM mac_track_dot1x WHERE device_id = ?');
 
 	foreach ($calls as $call) {
 		expect($call['fn'])->toBe('db_execute_prepared')
@@ -55,7 +56,9 @@ test('removing a site binds the site id in every delete', function () {
 
 	$calls = $GLOBALS['__test_db_calls'];
 
-	expect($calls)->toHaveCount(9)
+	expect($calls)->toHaveCount(11)
+		->and(implode(' ', array_column($calls, 'sql')))->toContain('DELETE FROM mac_track_dot1x WHERE site_id = ?')
+		->and(implode(' ', array_column($calls, 'sql')))->toContain('DELETE FROM mac_track_arp WHERE site_id = ?')
 		->and(array_column($calls, 'fn'))->each->toBe('db_execute_prepared')
 		->and(array_column($calls, 'params'))->each->toBe([3]);
 });
