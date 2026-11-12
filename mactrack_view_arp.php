@@ -297,6 +297,8 @@ function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true):
 		$sql_limit = '';
 	}
 
+	// Scanners store either an ifIndex or an ifName as the port; a name
+	// compared as a number is 0 and matched nothing.
 	$query_string = "SELECT mti.*, mts.site_name, mtod.*, mtin.ifName
 		FROM mac_track_ips AS mti
 		LEFT JOIN mac_track_sites AS mts
@@ -305,7 +307,7 @@ function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true):
 		ON mtod.vendor_mac=SUBSTRING(mti.mac_address, 1, 6)
 		LEFT JOIN mac_track_interfaces AS mtin
 		ON mtin.device_id=mti.device_id
-		AND mtin.ifIndex=mti.port_number
+		AND IF(mti.port_number REGEXP '^[0-9]+$', mtin.ifIndex = mti.port_number, mtin.ifName = mti.port_number)
 		$sql_where
 		$sql_order
 		$sql_limit";
