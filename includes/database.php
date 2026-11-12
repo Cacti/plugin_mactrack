@@ -979,7 +979,16 @@ function mactrack_rebuild_aggregated_ports(): bool {
 			return false;
 		}
 
-		db_execute("DROP TABLE IF EXISTS $source");
+		// (e) Drop the drained source and record completion. Check the drop:
+		// if it fails, the leftover table would keep the poller paused and the
+		// web hook launching, yet the rebuilt flag would make every retry take
+		// the early return and never drop it again. Returning false here (before
+		// setting the flag) keeps the cleanup retryable.
+		if (!db_execute("DROP TABLE IF EXISTS $source")) {
+			cacti_log("MACTRACK: Could not drop the drained $source; the rebuild will be retried", false, 'SYSTEM');
+
+			return false;
+		}
 
 		set_config_option('mt_aggregated_ports_rebuilt', 'on');
 
