@@ -26,13 +26,9 @@ require_once dirname(__DIR__, 2) . '/mactrack_actions.php';
  * poller_mactrack.php runs the poller when it is included, so load only the
  * function under test from its source.
  */
-if (!function_exists('clear_old_processes')) {
-	$source = (string) file_get_contents(dirname(__DIR__, 2) . '/poller_mactrack.php');
-	$start  = strpos($source, 'function clear_old_processes(');
-	$end    = strpos($source, "\n}\n", $start);
+require_once dirname(__DIR__) . '/Support/load_function.php';
 
-	eval(substr($source, $start, $end - $start + 2));
-}
+mactrack_test_load_function('poller_mactrack.php', 'clear_old_processes');
 
 beforeEach(function () {
 	$GLOBALS['__test_db_calls']       = [];
