@@ -276,6 +276,45 @@ final class AggregatedPortsKeyTest extends TestCase {
 	}
 
 	/**
+	 * @return void
+	 */
+	public function testUpgradeWidensAnIntRowIdToBigint(): void {
+		self::givenUpgradeFixtures();
+		self::givenKey(self::keyRows(0));
+		mactrack_test_queue_return_for('db_fetch_row_prepared', 'SHOW COLUMNS FROM mac_track_aggregated_ports LIKE ?', ['Field' => 'row_id', 'Type' => 'int(10) unsigned']);
+
+		mactrack_database_upgrade();
+
+		$this->assertSame(
+			['ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN row_id bigint(20) unsigned NOT NULL auto_increment'],
+			self::callsMatching('MODIFY COLUMN row_id')
+		);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testUpgradeLeavesABigintRowIdAlone(): void {
+		self::givenUpgradeFixtures();
+		self::givenKey(self::keyRows(0));
+		mactrack_test_queue_return_for('db_fetch_row_prepared', 'SHOW COLUMNS FROM mac_track_aggregated_ports LIKE ?', ['Field' => 'row_id', 'Type' => 'bigint(20) unsigned']);
+
+		mactrack_database_upgrade();
+
+		$this->assertSame([], self::callsMatching('MODIFY COLUMN row_id'));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testFreshSchemaUsesABigintRowId(): void {
+		$source = (string) file_get_contents(dirname(__DIR__, 2) . '/includes/database.php');
+
+		$this->assertStringContainsString("['name' => 'row_id', 'unsigned' => true, 'type' => 'bigint(20)'", $source);
+		$this->assertStringNotContainsString("['name' => 'row_id', 'unsigned' => true, 'type' => 'int(10)'", $source);
+	}
+
+	/**
 	 * An install that recorded the new version after a failed refresh never
 	 * re-enters the upgrade, so the repair must also run without a drift.
 	 *

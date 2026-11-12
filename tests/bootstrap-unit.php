@@ -217,7 +217,7 @@ if (!function_exists('db_fetch_row_prepared')) {
 	function db_fetch_row_prepared($sql, $params = array()) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_row_prepared', 'sql' => $sql, 'params' => $params);
 
-		return mactrack_test_next_return('db_fetch_row_prepared', array());
+		return mactrack_test_next_return('db_fetch_row_prepared', array(), $sql);
 	}
 }
 

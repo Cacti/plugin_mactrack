@@ -728,6 +728,16 @@ function mactrack_database_upgrade(): void {
 
 	mactrack_repair_aggregated_ports_key();
 
+	// 4.11: the poller's INSERT ... ON DUPLICATE KEY UPDATE consumes an
+	// auto-increment value for every row it offers, even ones it merges, so
+	// an int(10) row_id can run out on large installs. Cacti cores before
+	// 1.2.32 do not refresh existing tables, so widen it here.
+	$row_id = db_fetch_row_prepared('SHOW COLUMNS FROM mac_track_aggregated_ports LIKE ?', ['row_id']);
+
+	if (cacti_sizeof($row_id) && stripos($row_id['Type'], 'bigint') === false) {
+		db_execute_prepared('ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN row_id bigint(20) unsigned NOT NULL auto_increment');
+	}
+
 	mactrack_fix_aruba_oscx_device_type_functions();
 	mactrack_ensure_default_site();
 }
@@ -1091,7 +1101,7 @@ function mactrack_retry_default_site(): bool {
  */
 function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 	$data                  = [];
-	$data['columns'][]     = ['name' => 'row_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
+	$data['columns'][]     = ['name' => 'row_id', 'unsigned' => true, 'type' => 'bigint(20)', 'NULL' => false, 'auto_increment' => true];
 	$data['columns'][]     = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
 	$data['columns'][]     = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
 	$data['columns'][]     = ['name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => ''];
