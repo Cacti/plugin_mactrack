@@ -1,0 +1,50 @@
+<?php
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2004-2026 The Cacti Group                                 |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ |                                                                         |
+ | This program is distributed in the hope that it will be useful,         |
+ | but WITHOUT ANY WARRANTY; without even the implied warranty of          |
+ | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           |
+ | GNU General Public License for more details.                            |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | This code is designed, written, and maintained by the Cacti Group. See  |
+ | about.php and/or the AUTHORS file for specific developer information.   |
+ +-------------------------------------------------------------------------+
+ | http://www.cacti.net/                                                   |
+ +-------------------------------------------------------------------------+
+*/
+
+/*
+ * The MacWatch schedule is the minutes between mails; the column must
+ * hold a day (1440), and each mail records when it went out.
+ */
+it('offers the schedules in minutes', function () {
+	$src = file_get_contents(dirname(__DIR__, 2) . '/setup.php');
+
+	expect($src)->toContain("720  => __('Every %d Hours', 12, 'mactrack'),");
+	expect($src)->toContain("1440 => __('Every Day', 'mactrack')]");
+	expect($src)->not->toContain("1800 => __('Every %d Hours', 12, 'mactrack'),");
+});
+
+it('stores a day in the schedule column and widens old installs', function () {
+	$src = file_get_contents(dirname(__DIR__, 2) . '/includes/database.php');
+
+	expect($src)->toContain("['name' => 'notify_schedule', 'unsigned' => true, 'type' => 'smallint(5)'");
+	expect($src)->toContain("MODIFY COLUMN notify_schedule smallint(5) unsigned NOT NULL default '1'");
+	expect($src)->toContain('UPDATE mac_track_macwatch SET notify_schedule = 1440 WHERE notify_schedule = 255');
+});
+
+it('waits the schedule in minutes and records each mail', function () {
+	$src = preg_replace('/\s+/', ' ', file_get_contents(dirname(__DIR__, 2) . '/poller_mactrack.php'));
+
+	expect($src)->toContain("(int) strtotime(\$record['date_last_notif']) + \$record['notify_schedule'] * 60 > time()");
+	expect($src)->toContain("mactrack_mail(\$record['email_addresses'], \$from, \$fromname, \$subject, \$message); db_execute_prepared('UPDATE mac_track_macwatch SET date_last_notif = NOW() WHERE mac_id = ?', [\$record['mac_id']]);");
+});

@@ -2328,10 +2328,11 @@ function mactrack_config_form(): void {
 		'array'         => [
 			1    => __('First Occurrence Only', 'mactrack'),
 			2    => __('All Occurrences', 'mactrack'),
+			// minutes between mails
 			60   => __('Every Hour', 'mactrack'),
 			240  => __('Every %d Hours', 4, 'mactrack'),
-			1800 => __('Every %d Hours', 12, 'mactrack'),
-			3600 => __('Every Day', 'mactrack')]
+			720  => __('Every %d Hours', 12, 'mactrack'),
+			1440 => __('Every Day', 'mactrack')]
 		],
 	'email_addresses' => [
 		'method'        => 'textbox',
