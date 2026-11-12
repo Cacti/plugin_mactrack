@@ -154,7 +154,7 @@ function mactrack_partition_convert(bool $keep_old = false, ?callable $progress 
 				$result['reason'] = 'A MacTrack database upgrade is running. Convert again when it has finished.';
 			} elseif (db_table_exists('mac_track_ports_old')) {
 				$result['reason'] = 'mac_track_ports_old is left from an earlier conversion. Drop it, then convert again.';
-			} elseif ((string) db_fetch_cell_prepared("SELECT GET_LOCK('mactrack_scan', 0)") !== '1') {
+			} elseif ((string) db_fetch_cell_prepared('SELECT GET_LOCK(?, 0)', [mactrack_lock_name('scan')]) !== '1') {
 				if ((string) read_config_option('mt_partition_converting', true) !== '') {
 					// Another conversion holds the lock; its own result is the
 					// one the status page should show.
@@ -180,7 +180,7 @@ function mactrack_partition_convert(bool $keep_old = false, ?callable $progress 
 					}
 				}
 
-				db_fetch_cell_prepared("SELECT RELEASE_LOCK('mactrack_scan')");
+				db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [mactrack_lock_name('scan')]);
 			}
 	}
 

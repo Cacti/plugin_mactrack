@@ -30,13 +30,28 @@
  */
 
 /**
+ * Names a MacTrack advisory lock for this database. GET_LOCK names are
+ * shared by every database on the server, so two Cacti installs on one
+ * server would otherwise block each other.
+ *
+ * @param string $purpose scan or partitions.
+ *
+ * @return string At most 52 characters, under the 64-character limit.
+ */
+function mactrack_lock_name(string $purpose): string {
+	global $database_default;
+
+	return 'mactrack.' . $purpose . '.' . substr(hash('sha256', (string) $database_default), 0, 32);
+}
+
+/**
  * Takes the named lock that serializes partition DDL between the poller,
  * maintenance and Utilities.
  *
  * @return bool True when the lock was taken within 10 seconds.
  */
 function mactrack_partition_lock(): bool {
-	return (string) db_fetch_cell_prepared("SELECT GET_LOCK('mactrack_partitions', 10)") === '1';
+	return (string) db_fetch_cell_prepared('SELECT GET_LOCK(?, 10)', [mactrack_lock_name('partitions')]) === '1';
 }
 
 /**
@@ -45,7 +60,7 @@ function mactrack_partition_lock(): bool {
  * @return void
  */
 function mactrack_partition_unlock(): void {
-	db_fetch_cell_prepared("SELECT RELEASE_LOCK('mactrack_partitions')");
+	db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [mactrack_lock_name('partitions')]);
 }
 
 /**
@@ -60,7 +75,7 @@ function mactrack_partition_unlock(): void {
  * @return bool False when another process holds the lock.
  */
 function mactrack_partition_scan_begin(): bool {
-	if ((string) db_fetch_cell_prepared("SELECT GET_LOCK('mactrack_scan', 0)") !== '1') {
+	if ((string) db_fetch_cell_prepared('SELECT GET_LOCK(?, 0)', [mactrack_lock_name('scan')]) !== '1') {
 		return false;
 	}
 
@@ -81,7 +96,7 @@ function mactrack_partition_scan_begin(): bool {
  * @return void
  */
 function mactrack_partition_scan_end(): void {
-	db_fetch_cell_prepared("SELECT RELEASE_LOCK('mactrack_scan')");
+	db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [mactrack_lock_name('scan')]);
 }
 
 /**

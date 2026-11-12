@@ -69,8 +69,8 @@ function mt_pc_db(array $opts = []): void {
 	mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', isset($opts['upgrade_started']) ? ['pid' => '99', 'started' => $opts['upgrade_started'], 'now' => '100000', 'timeout' => '86400'] : []);
 	mactrack_test_queue_return_for('db_table_exists', 'mac_track_aggregated_ports_upgrade', $opts['upgrade_table'] ?? false);
 	mactrack_test_queue_return_for('db_table_exists', 'mac_track_ports_old', $opts['old_exists'] ?? false);
-	mactrack_test_queue_return_for('db_fetch_cell_prepared', "GET_LOCK('mactrack_scan'", $opts['scan_lock'] ?? '1');
-	mactrack_test_queue_return_for('db_fetch_cell_prepared', "GET_LOCK('mactrack_partitions'", $opts['partition_lock'] ?? '1');
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 0)', $opts['scan_lock'] ?? '1');
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 10)', $opts['partition_lock'] ?? '1');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'DATA_TYPE', $opts['type'] ?? 'timestamp');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', '@@SESSION.time_zone', 'SYSTEM');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'lock_wait_timeout', '50');
@@ -101,7 +101,12 @@ function mt_pc_statements(): array {
  * @return string[]
  */
 function mt_pc_locks(): array {
-	return array_values(array_map(fn ($c) => $c['sql'], array_filter($GLOBALS['__test_db_calls'], fn ($c) => strpos($c['sql'], '_LOCK(') !== false)));
+	$short = [mactrack_lock_name('scan') => 'mactrack_scan', mactrack_lock_name('partitions') => 'mactrack_partitions'];
+
+	return array_values(array_map(
+		fn ($c) => preg_replace('/\?/', "'" . ($short[$c['params'][0] ?? ''] ?? '?') . "'", $c['sql'], 1),
+		array_filter($GLOBALS['__test_db_calls'], fn ($c) => strpos($c['sql'], '_LOCK(') !== false)
+	));
 }
 
 describe('bounds', function () {
@@ -353,7 +358,7 @@ describe('conversion', function () {
 
 describe('scan lock', function () {
 	it('lets a scan start when no conversion holds the lock', function () {
-		mactrack_test_queue_return_for('db_fetch_cell_prepared', "GET_LOCK('mactrack_scan'", '1');
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 0)', '1');
 
 		expect(mactrack_partition_scan_begin())->toBeTrue();
 		expect($GLOBALS['__test_cacti_log'])->toBe([]);
@@ -361,7 +366,7 @@ describe('scan lock', function () {
 
 	it('stops a scan while the lock is held', function () {
 		$GLOBALS['__test_config_options']['mt_partition_converting'] = '1794464107';
-		mactrack_test_queue_return_for('db_fetch_cell_prepared', "GET_LOCK('mactrack_scan'", '0');
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 0)', '0');
 
 		expect(mactrack_partition_scan_begin())->toBeFalse();
 		expect($GLOBALS['__test_config_options']['mt_partition_converting'])->toBe('1794464107');
@@ -370,12 +375,24 @@ describe('scan lock', function () {
 	it('is released by a web action that took it', function () {
 		mactrack_partition_scan_end();
 
-		expect(array_column($GLOBALS['__test_db_calls'], 'sql'))->toBe(["SELECT RELEASE_LOCK('mactrack_scan')"]);
+		expect(mt_pc_locks())->toBe(["SELECT RELEASE_LOCK('mactrack_scan')"]);
+	});
+
+	it('names each lock for its own database', function () {
+		$GLOBALS['database_default'] = 'cacti_a';
+		$a                           = mactrack_lock_name('partitions');
+		$GLOBALS['database_default'] = 'cacti_b';
+
+		expect(mactrack_lock_name('partitions'))->not->toBe($a);
+		expect(strlen($a))->toBeLessThanOrEqual(64);
+		expect($a)->toStartWith('mactrack.partitions.');
+
+		unset($GLOBALS['database_default']);
 	});
 
 	it('clears the flag of a conversion that died', function () {
 		$GLOBALS['__test_config_options']['mt_partition_converting'] = '1794464107';
-		mactrack_test_queue_return_for('db_fetch_cell_prepared', "GET_LOCK('mactrack_scan'", '1');
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 0)', '1');
 
 		expect(mactrack_partition_scan_begin())->toBeTrue();
 		expect($GLOBALS['__test_config_options']['mt_partition_converting'])->toBe('');

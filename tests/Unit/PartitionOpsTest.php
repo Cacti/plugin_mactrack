@@ -106,9 +106,11 @@ it('takes and releases the named partition lock', function () {
 	expect(mactrack_partition_lock())->toBeTrue();
 	mactrack_partition_unlock();
 
-	$sql = array_column(array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] !== 'cacti_log')), 'sql');
-	expect($sql[0])->toBe("SELECT GET_LOCK('mactrack_partitions', 10)");
-	expect($sql[1])->toBe("SELECT RELEASE_LOCK('mactrack_partitions')");
+	$calls = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] !== 'cacti_log'));
+	expect($calls[0]['sql'])->toBe('SELECT GET_LOCK(?, 10)');
+	expect($calls[1]['sql'])->toBe('SELECT RELEASE_LOCK(?)');
+	expect($calls[0]['params'])->toBe([mactrack_lock_name('partitions')]);
+	expect($calls[1]['params'])->toBe([mactrack_lock_name('partitions')]);
 });
 
 it('reports a lock it could not take', function ($result) {
