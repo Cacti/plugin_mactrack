@@ -28,6 +28,7 @@ require_once dirname(__DIR__, 2) . '/mactrack_actions.php';
  */
 require_once dirname(__DIR__) . '/Support/load_function.php';
 
+mactrack_test_load_function('poller_mactrack.php', 'mactrack_kill_process');
 mactrack_test_load_function('poller_mactrack.php', 'clear_old_processes');
 
 beforeEach(function () {
@@ -87,4 +88,29 @@ test('no delete runs when there are no stale processes', function () {
 	$fns = array_column($GLOBALS['__test_db_calls'], 'fn');
 
 	expect($fns)->toBe(['db_fetch_assoc_prepared']);
+});
+
+test('stale process cleanup also clears the poller and resolver rows', function () {
+	mactrack_test_queue_return('db_fetch_assoc_prepared', []);
+
+	clear_old_processes(0);
+
+	expect(preg_replace('/\s+/', ' ', $GLOBALS['__test_db_calls'][0]['sql']))->toContain('LEFT JOIN mac_track_devices AS mtd');
+});
+
+test('a reused PID that is not a MacTrack worker is not signalled', function () {
+	if (!is_dir('/proc/self')) {
+		$this->markTestSkipped('needs /proc');
+	}
+
+	$child = proc_open(['sleep', '30'], [], $pipes);
+	$pid   = proc_get_status($child)['pid'];
+
+	mactrack_kill_process($pid);
+	usleep(200000);
+
+	expect(proc_get_status($child)['running'])->toBeTrue();
+
+	proc_terminate($child);
+	proc_close($child);
 });
