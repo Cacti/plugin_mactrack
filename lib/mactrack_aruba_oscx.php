@@ -376,7 +376,7 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 				($port_number <= $highPort))) {
 				if (!in_array($port_number, $ignore_ports, true)) {
 					if (isset($port_status[$key]) && $port_status[$key] == '3') {
-						$port_key_array[$i]['key']         = substr($key,1);
+						$port_key_array[$i]['key']         = $key;
 						$port_key_array[$i]['port_number'] = $port_number;
 						$i++;
 					}
