@@ -1494,7 +1494,7 @@ function get_generic_wireless_ports($site, &$device, $lowPort = 0, $highPort = 0
  * @param mixed $lowPort
  * @param mixed $highPort
  */
-function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999): array {
+function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999, ?array $active_ports_array = null): array {
 	global $debug, $scan_date;
 
 	// initialize variables
@@ -1512,8 +1512,9 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 		$snmp_readstring = $device['snmp_readstring'];
 	}
 
-	// get the operational status of the ports
-	$active_ports_array = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.8', $device);
+	// get the operational status of the ports; a caller scanning one VLAN
+	// at a time walks it once and passes it in
+	$active_ports_array ??= xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.8', $device);
 	$indexes            = array_keys($active_ports_array);
 
 	$i = 0;
@@ -1620,6 +1621,8 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 						// now set the real data
 						$new_port_key_array[$i]['key']         = $port_key['key'];
 						$new_port_key_array[$i]['port_number'] = $port_key['port_number'];
+						// the mapped interface, so callers need not walk the map again
+						$new_port_key_array[$i]['ifIndex']     = $bridgePortIfIndexes[$port_key['port_number']] ?? '';
 						$i++;
 					}
 				}

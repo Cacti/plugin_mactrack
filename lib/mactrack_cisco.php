@@ -200,6 +200,9 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 	if (cacti_sizeof($active_vlans)) {
 		$i = 0;
 
+		// interface status does not depend on the VLAN context; walk it once
+		$ifOperStatus = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.8', $device);
+
 		// get the port status information
 		foreach ($active_vlans as $i => $active_vlan) {
 			// ignore empty vlans
@@ -218,21 +221,11 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 
 			mactrack_debug('Processing has begun for VLAN: ' . $active_vlan['vlan_id']);
 
-			if ($highPort == 0) {
-				$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, false);
-			} else {
-				$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, false, $lowPort, $highPort);
-			}
+			// 1 to 9999 is the function's own default range
+			$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, false,
+				($highPort == 0 ? 1 : $lowPort), ($highPort == 0 ? 9999 : $highPort), $ifOperStatus);
 
-			// get bridge port mappings
-			// get bridge port to ifIndex mappings
-			mactrack_debug('Bridge port information about to be collected.');
 			mactrack_debug('VLAN_ID: ' . $active_vlans[$i]['vlan_id'] . ', VLAN_NAME: ' . $active_vlans[$i]['vlan_name'] . ', ACTIVE PORTS: ' . cacti_sizeof($active_vlans[$i]['port_results']));
-
-			if (cacti_sizeof($active_vlans[$i]['port_results']) > 0) {
-				$brPorttoifIndexes[$i] = xform_standard_indexed_data('.1.3.6.1.2.1.17.1.4.1.2', $device, $snmp_readstring);
-				mactrack_debug('Bridge port information collection complete.');
-			}
 
 			$i++;
 		}
@@ -246,7 +239,7 @@ function get_catalyst_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $high
 			foreach ($active_vlans as $active_vlan) {
 				if (cacti_sizeof($active_vlan['port_results'])) {
 					foreach ($active_vlan['port_results'] as $port_result) {
-						$ifIndex         = isset($brPorttoifIndexes[$j][$port_result['port_number']]) ? $brPorttoifIndexes[$j][$port_result['port_number']] : '';
+						$ifIndex         = $port_result['ifIndex'] ?? '';
 						$ifType          = (isset($ifInterfaces[$ifIndex]['ifType']) ? $ifInterfaces[$ifIndex]['ifType'] : '');
 						$ifName          = (isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '');
 						$portName        = (isset($portNames[$ifName]) ? $portNames[$ifName] : '');
@@ -519,6 +512,9 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 	if (cacti_sizeof($active_vlans)) {
 		$i = 0;
 
+		// interface status does not depend on the VLAN context; walk it once
+		$ifOperStatus = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.8', $device);
+
 		// get the port status information
 		foreach ($active_vlans as $i => $active_vlan) {
 			if ($device['snmp_version'] < '3') {
@@ -529,21 +525,11 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 
 			mactrack_debug('Processing has begun for VLAN: ' . $active_vlan['vlan_id']);
 
-			if ($highPort == 0) {
-				$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, false);
-			} else {
-				$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, false, $lowPort, $highPort);
-			}
+			// 1 to 9999 is the function's own default range
+			$active_vlans[$i]['port_results'] = get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, $snmp_readstring, false,
+				($highPort == 0 ? 1 : $lowPort), ($highPort == 0 ? 9999 : $highPort), $ifOperStatus);
 
-			// get bridge port mappings
-			// get bridge port to ifIndex mappings
-			mactrack_debug('Bridge port information about to be collected.');
 			mactrack_debug('VLAN_ID: ' . $active_vlans[$i]['vlan_id'] . ', VLAN_NAME: ' . $active_vlans[$i]['vlan_name'] . ', ACTIVE PORTS: ' . cacti_sizeof($active_vlans[$i]['port_results']));
-
-			if (cacti_sizeof($active_vlans[$i]['port_results']) > 0) {
-				$brPorttoifIndexes[$i] = xform_standard_indexed_data('.1.3.6.1.2.1.17.1.4.1.2', $device, $snmp_readstring);
-				mactrack_debug('Bridge port information collection complete.');
-			}
 			$i++;
 		}
 
@@ -557,7 +543,7 @@ function get_IOS_dot1dTpFdbEntry_ports($site, &$device, $lowPort = 0, $highPort 
 			foreach ($active_vlans as $active_vlan) {
 				if (cacti_sizeof($active_vlan['port_results'])) {
 					foreach ($active_vlan['port_results'] as $port_result) {
-						$ifIndex         = (isset($brPorttoifIndexes[$j][$port_result['port_number']]) ? $brPorttoifIndexes[$j][$port_result['port_number']] : '');
+						$ifIndex         = $port_result['ifIndex'] ?? '';
 						$ifType          = (isset($ifInterfaces[$ifIndex]['ifType']) ? $ifInterfaces[$ifIndex]['ifType'] : '');
 						$ifName          = (isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '');
 						$portNumber      = (isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '');
