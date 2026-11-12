@@ -65,8 +65,9 @@ $collect_frequency = read_config_option('mt_collection_timing');
 $poller_interval   = read_config_option('poller_interval');
 
 if (is_numeric($collect_frequency)) {
-	// let PHP a 5 minutes less than the rerun frequency
-	$max_run_duration = ($collect_frequency * 60) - $poller_interval;
+	// Leave a poller interval before the next run, but at least 80% of the
+	// frequency: at 5 minutes on a 5-minute poller the difference is zero.
+	$max_run_duration = max(($collect_frequency * 60) - $poller_interval, (int) ($collect_frequency * 48));
 } else {
 	// default for force
 	$max_run_duration = 1800;
@@ -464,6 +465,46 @@ function mactrack_error_handler($level, $message, $file, $line, $context = []) {
  *
  * @return void
  */
+/**
+ * Stops the scanners still registered when a run reaches its time limit
+ * and removes their process rows.
+ *
+ * @return void
+ */
+function mactrack_stop_scanners(): void {
+	$scanners = db_fetch_assoc('SELECT device_id, process_id
+		FROM mac_track_processes
+		WHERE device_id > 0');
+
+	foreach ($scanners as $scanner) {
+		mactrack_kill_process((int) $scanner['process_id']);
+
+		cacti_log("WARNING: Stopping Mactrack Scanner for Device '" . $scanner['device_id'] . "' at the run time limit", false, 'MACTRACK');
+	}
+
+	db_execute('DELETE FROM mac_track_processes WHERE device_id > 0');
+}
+
+/**
+ * Terminates a MacTrack worker by process id; 0 means it has not
+ * registered a PID yet.
+ *
+ * @param int $process_id The worker's process id.
+ *
+ * @return void
+ */
+function mactrack_kill_process(int $process_id): void {
+	if ($process_id <= 0) {
+		return;
+	}
+
+	if (strstr(PHP_OS, 'WIN')) {
+		exec('taskkill /pid ' . $process_id);
+	} else {
+		exec('kill ' . $process_id);
+	}
+}
+
 function clear_old_processes($site_id): void {
 	// get the max script runtime and kill old scripts
 	$max_script_runtime = read_config_option('mt_script_runtime');
@@ -492,11 +533,7 @@ function clear_old_processes($site_id): void {
 			$device_ids[] = intval($p['device_id']);
 
 			if ($process_id > 0) {
-				if (strstr(PHP_OS, 'WIN')) {
-					exec('taskkill /pid ' . $process_id);
-				} else {
-					exec('kill ' . $process_id);
-				}
+				mactrack_kill_process($process_id);
 
 				cacti_log("WARNING: Removing Hung Mactrack Process for Device '" . $p['device_id'] . "' With Status '" . $p['status'] . "'");
 			} else {
@@ -660,6 +697,11 @@ function collect_mactrack_data($start, $site_id = 0): void {
 					break;
 				}
 
+				// Register the device before launching it, so the counts below
+				// include scanners that have not started yet; the scanner adds
+				// its PID to this row.
+				db_process_add($device_ids[$i + $j]['device_id']);
+
 				$extra_args = ' -q ' . $config['base_path'] . '/plugins/mactrack/mactrack_scanner.php -id=' . $device_ids[$i + $j]['device_id'] . $e_debug;
 				mactrack_debug('CMD: ' . $command_string . $extra_args);
 				exec_background($command_string, $extra_args);
@@ -705,13 +747,12 @@ function collect_mactrack_data($start, $site_id = 0): void {
 				$last_time = $current_time;
 			}
 
-			$processes_running = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes');
+			// scanners only; the parent (-1) and resolver (0) rows do not count
+			$processes_running = db_fetch_cell('SELECT COUNT(*)
+				FROM mac_track_processes
+				WHERE device_id > 0');
 
-			if ($dns_resolver_required) {
-				$processes_available = $concurrent_processes - $processes_running + 1;
-			} else {
-				$processes_available = $concurrent_processes - $processes_running;
-			}
+			$processes_available = $concurrent_processes - $processes_running;
 
 			// take time to check for an exit condition
 			$current = microtime(true);
@@ -777,6 +818,13 @@ function collect_mactrack_data($start, $site_id = 0): void {
 			}
 
 			mactrack_debug('Waiting on ' . $processes_running . ' with id = [' . $devices_running . '] to complete prior to exiting.');
+		}
+
+		// Scanners still running would write after the load and the TRUNCATE
+		// below, so their rows would land in the next run under this run's
+		// scan date. Stop them first.
+		if ($exit_mactrack) {
+			mactrack_stop_scanners();
 		}
 
 		// if arpwatch is enabled, let's let it pick up the stragglers, based upon IP address first
