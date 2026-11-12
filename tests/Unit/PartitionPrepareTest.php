@@ -176,7 +176,7 @@ it('assumes 15-minute scans and 14 days when the settings are not numbers', func
 	mactrack_partition_prepare_scan(MT_PP_DATE);
 
 	$status = json_decode($GLOBALS['__test_config_options']['mt_partition_status'], true);
-	expect($status['projected'])->toBe(337); // hourly: 24 x 14 + 1, after 96 x 14 + 1 exceeds 1024
+	expect($status['projected'])->toBe(362); // hourly: 24 x 15 + 2, after 96 x 15 + 2 exceeds 1024
 });
 
 it('loads straight into a partition that already covers the scan', function () {
@@ -251,6 +251,23 @@ it('loads straight in when the split fails, and releases the lock', function () 
 	expect($plan['mode'])->toBe('direct');
 	expect($plan['reason'])->toContain('split');
 	expect(mt_pp_locks())->toBe(array(1, 1));
+});
+
+it('stops at the cap when a recovery split takes the last free partition', function () {
+	$parts = array();
+
+	for ($i = 0; $i < 1022; $i++) {
+		$parts[] = array('s' . gmdate('YmdHis', 1794000000 + $i * 300), (string) (1794000001 + $i * 300));
+	}
+
+	$parts[] = array('dMaxValue', 'MAXVALUE');
+	mt_pp_db($parts, array('stranded' => '1794400000'));
+
+	$plan = mactrack_partition_prepare_scan(MT_PP_DATE);
+
+	expect(mt_pp_ddl())->toBe(array(mactrack_partition_split_sql('r20261111122640', 1794400001)));
+	expect($plan['mode'])->toBe('direct');
+	expect($plan['reason'])->toBe('partition cap 1024 reached');
 });
 
 it('loads straight in when the partition cap is reached', function () {

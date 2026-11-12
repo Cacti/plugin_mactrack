@@ -277,7 +277,9 @@ function mactrack_partition_prepare_scan(string $scan_date): array {
 	mactrack_partition_status(['layout' => 'range', 'granularity' => $size,
 		'fell_back' => $choice['fell_back'], 'projected' => $choice['projected'], 'reason' => '']);
 
-	if (count($layout['partitions']) >= $cap) {
+	$count = count($layout['partitions']);
+
+	if ($count >= $cap) {
 		return $direct("partition cap $cap reached", $size);
 	}
 
@@ -308,6 +310,8 @@ function mactrack_partition_prepare_scan(string $scan_date): array {
 				return $direct('recovery split failed', $size);
 			}
 
+			$count++;
+
 			$last     = (int) $stranded + 1;
 			$covering = $covering ?? ($last > $epoch ? $name : null);
 		}
@@ -315,6 +319,11 @@ function mactrack_partition_prepare_scan(string $scan_date): array {
 		if ($last > $epoch) {
 			// A partition already covers this scan and may hold other rows.
 			return $direct('', $size, $covering);
+		}
+
+		// Each split adds a partition, so the cap is checked before each one.
+		if ($count >= $cap) {
+			return $direct("partition cap $cap reached", $size);
 		}
 
 		$name   = mactrack_partition_name($size, $epoch);
