@@ -4534,6 +4534,11 @@ function mactrack_format_device_row($device, $actions = false): void {
 function mactrack_mail($to, $fromemail, $fromname, $subject, $message, $headers = ''): void {
 	global $config;
 
+	if ($to == '' || is_null($to)) {
+		cacti_log('Mactrack Report Email Address is not set', false, 'MACTRACK');
+		return;
+	}
+
 	$v       = plugin_mactrack_version();
 	$headers = [
 		'X-Mailer'   => 'Cacti-MacTrack-v' . $v['version'],
