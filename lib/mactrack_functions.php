@@ -2970,9 +2970,11 @@ function perform_mactrack_db_maint(): void {
 		}
 	}
 
+	// CURDATE() - n is integer arithmetic on YYYYMMDD (20261112 - 60 is no
+	// date at all), so the cutoff needs INTERVAL.
 	db_execute_prepared('DELETE FROM mac_track_ips
-		WHERE scan_date < DATE_FORMAT(CURDATE() - ?,"%Y-%m-%d")',
-		[read_config_option('mt_data_retention_ip')]);
+		WHERE scan_date < CURDATE() - INTERVAL ? DAY',
+		[(int) read_config_option('mt_data_retention_ip')]);
 	db_execute('OPTIMIZE TABLE mac_track_ips');
 
 	db_execute('REPLACE INTO mac_track_scan_dates
