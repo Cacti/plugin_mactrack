@@ -4992,27 +4992,6 @@ function mactrack_tabs(): void {
 }
 
 /**
- * Looks up a MAC address's vendor name from the OUI database using its
- * first 3 octets (vendor prefix).
- *
- * @param string $mac The MAC address (or at least its first 3 octets)
- *                    to look up.
- *
- * @return string The vendor name, or 'Unknown' if no match is found.
- */
-function mactrack_get_vendor_name($mac): string {
-	$vendor_mac = substr($mac,0,8);
-
-	$vendor_name = db_fetch_cell_prepared('SELECT vendor_name FROM mac_track_oui_database WHERE vendor_mac = ?', [$vendor_mac]);
-
-	if ($vendor_name != '') {
-		return $vendor_name;
-	} else {
-		return __('Unknown', 'mactrack');
-	}
-}
-
-/**
  * Renders the search/rows filter form controls for the sites list
  * view.
  *
