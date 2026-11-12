@@ -719,7 +719,7 @@ function mactrack_filter_table(): void {
 							<?php
 	$sql_where = '';
 
-	if (get_request_var('site_id') != -1) {
+	if (get_request_var('site_id') != '-1') {
 		$sql_where .= ' WHERE mac_track_devices.site_id=' . get_filter_request_var('site_id');
 	} else {
 		$sql_where  = '';
@@ -754,7 +754,7 @@ function mactrack_filter_table(): void {
 							<?php
 	$sql_where = '';
 
-	if (get_request_var('site_id') != -1) {
+	if (get_request_var('site_id') != '-1') {
 		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . 'site_id=' . get_filter_request_var('site_id');
 	}
 

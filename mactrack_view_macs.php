@@ -123,31 +123,33 @@ function form_actions(): void {
 			}
 		}
 
-		if (cacti_sizeof($selected_items)) {
-			if (get_request_var('drp_action') == '1') { // Authorize
-				if (cacti_sizeof($selected_items)) {
-					foreach ($selected_items as $mac=>$ip) {
-						api_mactrack_authorize_mac_addresses($mac, $ip);
-					}
-				}
-			} elseif (get_request_var('drp_action') == '2') { // Revoke
-				$errors = '';
+		if (!cacti_sizeof($selected_items)) {
+			raise_message('mactrack_macs_invalid', __('None of the selected MAC Addresses were valid, so no action was taken.', 'mactrack'), MESSAGE_LEVEL_ERROR);
+		} elseif (get_request_var('drp_action') == '1') { // Authorize
+			foreach ($selected_items as $mac=>$ip) {
+				api_mactrack_authorize_mac_addresses($mac, $ip);
+			}
+		} elseif (get_request_var('drp_action') == '2') { // Revoke
+			// one lookup for the whole selection instead of one per MAC; the
+			// column compares case-insensitively, so the lookup keys do too
+			$macs       = array_map('strval', array_keys($selected_items));
+			$authorized = array_flip(array_map('strtoupper', array_column(db_fetch_assoc_prepared('SELECT mac_address
+				FROM mac_track_macauth
+				WHERE mac_address IN (' . implode(',', array_fill(0, count($macs), '?')) . ')',
+				$macs), 'mac_address')));
 
-				if (cacti_sizeof($selected_items)) {
-					foreach ($selected_items as $mac=>$ip) {
-						$mac_found = db_fetch_cell_prepared('SELECT mac_address FROM mac_track_macauth WHERE mac_address = ?', [$mac]);
+			$errors = [];
 
-						if ($mac_found) {
-							api_mactrack_revoke_mac_addresses($mac);
-						} else {
-							$errors .= ', ' . mactrack_format_mac($mac);
-						}
-					}
+			foreach ($macs as $mac) {
+				if (isset($authorized[strtoupper($mac)])) {
+					api_mactrack_revoke_mac_addresses($mac);
+				} else {
+					$errors[] = mactrack_format_mac($mac);
 				}
+			}
 
-				if ($errors) {
-					$_SESSION['sess_messages'] = __('The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s', $errors, 'mactrack');
-				}
+			if (cacti_sizeof($errors)) {
+				raise_message('mactrack_macs_revoke', __('The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s', implode(', ', $errors), 'mactrack'), MESSAGE_LEVEL_WARN);
 			}
 		}
 

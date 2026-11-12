@@ -687,6 +687,25 @@ function mactrack_poller_bottom() {
 }
 
 /**
+ * Settings filter for the DNS server fields: an empty value (no server) or a
+ * valid IPv4 or IPv6 address is accepted, anything else fails the save.
+ *
+ * @param mixed $value The submitted value.
+ *
+ * @return false|string The value, or false to reject it.
+ */
+function mactrack_validate_dns_address($value): false|string {
+	// settings.php stores the raw request value, so validate it untrimmed
+	$value = (string) $value;
+
+	if ($value === '' || filter_var($value, FILTER_VALIDATE_IP) !== false) {
+		return $value;
+	}
+
+	return false;
+}
+
+/**
  * Builds this plugin's Console "Settings > Mactrack" configuration
  * tab's field definitions (scanning frequency, concurrent processes,
  * data retention, notification policies, etc.). Registered as the
@@ -858,16 +877,20 @@ function mactrack_config_settings() {
 			'description'   => __('Enter the primary DNS IP Address to utilize for reverse lookups.', 'mactrack'),
 			'method'        => 'textbox',
 			'default'       => '',
-			'max_length'    => '30',
-			'size'          => '18'
+			'max_length'    => '45',
+			'size'          => '18',
+			'filter'        => FILTER_CALLBACK,
+			'options'       => ['options' => 'mactrack_validate_dns_address']
 		],
 		'mt_dns_secondary' => [
 			'friendly_name' => __('Secondary DNS IP Address', 'mactrack'),
 			'description'   => __('Enter the secondary DNS IP Address to utilize for reverse lookups.', 'mactrack'),
 			'method'        => 'textbox',
 			'default'       => '',
-			'max_length'    => '30',
-			'size'          => '18'
+			'max_length'    => '45',
+			'size'          => '18',
+			'filter'        => FILTER_CALLBACK,
+			'options'       => ['options' => 'mactrack_validate_dns_address']
 		],
 		'mt_dns_timeout' => [
 			'friendly_name' => __('DNS Timeout', 'mactrack'),

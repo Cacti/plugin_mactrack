@@ -30,9 +30,18 @@
 * issue#246: Fix Cisco device collection
 * issue#248: Cacti process control, terminate dns resolvet when is nothing to do
 * issue#250: Disable automatic MIBs load
+* issue#285: Reject DNS server settings that are not empty or an IP address
+* issue#288: Bind the device and site id in device and site removal
+* issue#290: Report when none of the selected MAC addresses is valid
+* issue#292: Compare the interfaces report site filter with '-1'
+* issue#293: Look up a MAC revoke selection in one query
+* issue#295: Remove stale scanner process entries in one delete keyed on the device
+* issue#317: Leave the SNMP community string, auth password and privacy passphrase out of the device export; an import keeps the stored values, and a new install needs them entered
 * issue#349: Keep punctuation in the port name filter
 * issue#350: Leave an empty hardware address empty
 * issue#353: Stop re-querying addresses that have no PTR record
+* issue#355: Keep compressed IPv6 text intact instead of reading it as hexadecimal IPv4
+* issue#356: Convert binary IP addresses before trimming, so a final whitespace byte is kept
 * issue#357: Prevent repeated database setup from duplicating the Default site
 * issue: Convert plugin bootstrap include/include_once calls to fail-fast require/require_once across the web, CLI, and hook entry points
 * issue: Relocate the per-theme override stylesheets from themes/<theme>/ to css/<theme>/ alongside the base css/mactrack.css

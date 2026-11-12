@@ -485,8 +485,11 @@ function clear_old_processes($site_id): void {
 	$old_procs = db_fetch_assoc_prepared($sql, $params);
 
 	if (cacti_sizeof($old_procs)) {
+		$device_ids = [];
+
 		foreach ($old_procs as $p) {
-			$process_id = intval($p['process_id']);
+			$process_id   = intval($p['process_id']);
+			$device_ids[] = intval($p['device_id']);
 
 			if ($process_id > 0) {
 				if (strstr(PHP_OS, 'WIN')) {
@@ -499,11 +502,14 @@ function clear_old_processes($site_id): void {
 			} else {
 				cacti_log("WARNING: Removing Hung Mactrack Process Entry for Device '" . $p['device_id'] . "' With Status '" . $p['status'] . "'");
 			}
-
-			db_execute_prepared('DELETE FROM mac_track_processes
-				WHERE process_id = ?',
-				[$process_id]);
 		}
+
+		// device_id is the key; a PID of 0 would also match every entry still
+		// waiting for one, and the age check spares an entry re-queued meanwhile
+		db_execute_prepared('DELETE FROM mac_track_processes
+			WHERE device_id IN (' . implode(',', array_fill(0, count($device_ids), '?')) . ')
+			AND start_date < ?',
+			array_merge($device_ids, [$delete_time]));
 	}
 }
 
