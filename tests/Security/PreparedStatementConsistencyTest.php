@@ -30,7 +30,7 @@ describe('prepared statement consistency in mactrack', function () {
 		'lib/mactrack_extreme.php'     => 1,
 		'lib/mactrack_functions.php'   => 28,
 		'lib/mactrack_h3c_3com.php'    => 1,
-		'mactrack_actions.php'         => 19,
+		'mactrack_actions.php'         => 0,
 		'mactrack_convert.php'         => 9,
 		'mactrack_device_types.php'    => 11,
 		'mactrack_devices.php'         => 7,
