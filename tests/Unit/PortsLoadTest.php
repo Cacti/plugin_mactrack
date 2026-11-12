@@ -101,7 +101,7 @@ it('reads in primary-key order and writes one INSERT IGNORE per page', function 
 	foreach (mt_load_calls('db_fetch_assoc_prepared') as $read) {
 		expect(preg_replace('/\s+/', ' ', $read['sql']))->toContain('ORDER BY port_number, scan_date, mac_address, device_id');
 		expect($read['sql'])->toContain('LIMIT 2');
-		expect($read['sql'])->toContain('FROM mac_track_temp_ports');
+		expect($read['sql'])->toContain('FROM `mac_track_temp_ports`');
 	}
 });
 
@@ -136,6 +136,22 @@ it('continues after the last key of the previous page', function () {
 	);
 });
 
+it('rejects an unknown source, or a source that is the target', function (string $table, string $source) {
+	expect(fn () => mactrack_ports_load($table, 1000, null, true, $source))->toThrow(InvalidArgumentException::class);
+})->with(array(
+	'unknown'     => array('mac_track_ports', 'mac_track_ips'),
+	'same table'  => array('mac_track_ports_stage', 'mac_track_ports_stage'),
+));
+
+it('counts the INSERTs that fail', function () {
+	mactrack_test_queue_return('db_fetch_assoc_prepared', array(mt_load_row(1)));
+	mactrack_test_queue_return('db_execute_prepared', false);
+	$failed = null;
+
+	expect(mactrack_ports_load('mac_track_ports', 2, null, true, 'mac_track_temp_ports', $failed))->toBe(1);
+	expect($failed)->toBe(1);
+});
+
 it('copies only one scan date, or only the other dates', function (bool $match, string $where) {
 	$first = array(mt_load_row(1), mt_load_row(2));
 	mactrack_test_queue_return('db_fetch_assoc_prepared', $first);
@@ -146,7 +162,7 @@ it('copies only one scan date, or only the other dates', function (bool $match, 
 	$reads = mt_load_calls('db_fetch_assoc_prepared');
 	$last  = $first[1];
 	expect($reads[0]['params'])->toBe(array('2026-11-12 06:15:07'));
-	expect(preg_replace('/\s+/', ' ', $reads[0]['sql']))->toContain("FROM mac_track_temp_ports WHERE $where ORDER BY");
+	expect(preg_replace('/\s+/', ' ', $reads[0]['sql']))->toContain("FROM `mac_track_temp_ports` WHERE $where ORDER BY");
 	expect($reads[1]['params'])->toBe(array(
 		'2026-11-12 06:15:07',
 		$last['port_number'], $last['port_number'],
