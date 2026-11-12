@@ -241,20 +241,19 @@ final class AggregatedPortsKeyTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function testSeparatorMigrationRunsOnceAndRestoresTheUniqueKey(): void {
+	public function testSeparatorMigrationNormalizesSatelliteTablesAndDelegatesTheAggregatedTable(): void {
 		self::givenUpgradeFixtures();
 		self::givenKey(self::keyRows(0));
 
 		mactrack_database_upgrade();
 
 		$this->assertSame('on', read_config_option('mt_mac_separators_removed'));
-		$this->assertCount(1, self::callsMatching('ALTER TABLE mac_track_aggregated_ports DROP INDEX port_number'));
 		$this->assertCount(2, self::callsMatching('UPDATE mac_track_ports SET mac_address = REPLACE'));
-		$this->assertLessThan(
-			self::callIndex('UPDATE mac_track_aggregated_ports SET mac_address'),
-			self::callIndex('ALTER TABLE mac_track_aggregated_ports DROP INDEX port_number'),
-			'The unique key must be gone before separators are stripped'
-		);
+
+		// The aggregated-ports table is no longer rewritten in place; the
+		// dedicated rebuild renames it aside and repopulates it per scan date.
+		$this->assertSame([], self::callsMatching('UPDATE mac_track_aggregated_ports SET mac_address'));
+		$this->assertCount(1, self::callsMatching('RENAME TABLE mac_track_aggregated_ports TO mac_track_aggregated_ports_upgrade'));
 	}
 
 	/**
@@ -316,19 +315,25 @@ final class AggregatedPortsKeyTest extends TestCase {
 
 	/**
 	 * An install that recorded the new version after a failed refresh never
-	 * re-enters the upgrade, so the repair must also run without a drift.
+	 * re-enters the upgrade on a version drift, so a non-unique key still has
+	 * to hand the rebuild to the background upgrade.
 	 *
 	 * @return void
 	 */
-	public function testCheckUpgradeRepairsTheKeyWithoutAVersionChange(): void {
+	public function testCheckUpgradeLaunchesTheBackgroundUpgradeWhenTheKeyIsNotUnique(): void {
 		$info = plugin_mactrack_version();
+		set_config_option('path_php_binary', '/usr/bin/php');
 		mactrack_test_queue_return('get_current_page', 'index.php');
 		mactrack_test_queue_return('db_fetch_row', ['version' => $info['version'], 'status' => 1]);
 		self::givenKey(self::keyRows(1));
 
 		mactrack_check_upgrade();
 
-		$this->assertCount(1, self::callsMatching('ADD UNIQUE INDEX `port_number`'));
+		$launches = array_values(array_filter($GLOBALS['__test_db_calls'], static fn ($c) => $c['fn'] === 'exec_background'));
+
+		$this->assertCount(1, $launches);
+		$this->assertStringContainsString('upgrade_database.php', $launches[0]['params'][0]);
+		$this->assertSame('on', read_config_option('mt_db_upgrade_notified'));
 		$this->assertNull(self::callIndex('UPDATE plugin_config'));
 	}
 
@@ -347,64 +352,114 @@ final class AggregatedPortsKeyTest extends TestCase {
 	}
 
 	/**
-	 * A second page load that sees the old version while another request
-	 * holds the upgrade lock must not run any part of the upgrade.
+	 * A page load that sees a registered, non-stale upgrade process must not
+	 * launch a second copy.
 	 *
 	 * @return void
 	 */
-	public function testCheckUpgradeSkipsWhileAnotherRequestIsUpgrading(): void {
+	public function testCheckUpgradeDoesNotRelaunchWhileTheUpgradeIsRunning(): void {
+		set_config_option('path_php_binary', '/usr/bin/php');
 		mactrack_test_queue_return('get_current_page', 'index.php');
 		mactrack_test_queue_return('db_fetch_row', ['version' => '4.8', 'status' => 1]);
-		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK', '0');
-		self::givenKey(self::keyRows(1));
+		// A registered upgrade process that has not outlived its timeout.
+		mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', ['pid' => 1234, 'started' => 100, 'now' => 150, 'timeout' => 86400]);
 
 		mactrack_check_upgrade();
 
-		$this->assertSame(1, count(self::callsMatching('GET_LOCK')));
-		$this->assertNull(self::callIndex('SHOW INDEX FROM'));
-		$this->assertNull(self::callIndex('ALTER TABLE'));
-		$this->assertNull(self::callIndex('UPDATE plugin_config'));
-		$this->assertNull(self::callIndex('RELEASE_LOCK'));
+		$launches = array_filter($GLOBALS['__test_db_calls'], static fn ($c) => $c['fn'] === 'exec_background');
+
+		$this->assertCount(0, $launches);
 	}
 
 	/**
-	 * A request that waited out another's upgrade sees the recorded version
-	 * once it holds the lock and does not run the upgrade again.
+	 * Once the background upgrade has recorded the new version and a unique
+	 * key, the hook stops launching it and stops touching the schema.
 	 *
 	 * @return void
 	 */
-	public function testCheckUpgradeDoesNotRepeatAnUpgradeThatJustFinished(): void {
+	public function testCheckUpgradeDoesNothingOnceTheUpgradeHasFinished(): void {
 		$info = plugin_mactrack_version();
+		set_config_option('path_php_binary', '/usr/bin/php');
 		mactrack_test_queue_return('get_current_page', 'index.php');
-		mactrack_test_queue_return('db_fetch_row', ['version' => '4.8', 'status' => 1]);
-		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'SELECT version FROM plugin_config', $info['version']);
+		mactrack_test_queue_return('db_fetch_row', ['version' => $info['version'], 'status' => 1]);
+		// Realms already cover every file, so the inline realm repair is skipped.
+		mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM plugin_realms', [
+			['file' => 'mactrack_view_dashboard.php,mactrack_view_ips.php,mactrack_view_arp.php,mactrack_view_macs.php,mactrack_view_dot1x.php,mactrack_view_sites.php,mactrack_view_devices.php,mactrack_view_interfaces.php,mactrack_view_graphs.php,mactrack_ajax.php,mactrack_ajax_admin.php,mactrack_devices.php,mactrack_snmp.php,mactrack_sites.php,mactrack_device_types.php,mactrack_utilities.php,mactrack_macwatch.php,mactrack_macauth.php,mactrack_vendormacs.php'],
+		]);
 		self::givenKey(self::keyRows(0));
 
 		mactrack_check_upgrade();
 
+		$launches = array_filter($GLOBALS['__test_db_calls'], static fn ($c) => $c['fn'] === 'exec_background');
+
+		$this->assertCount(0, $launches);
 		$this->assertNull(self::callIndex('UPDATE plugin_config'));
-		$this->assertSame(['SELECT RELEASE_LOCK(?)'], self::callsMatching('RELEASE_LOCK'));
-		$this->assertLessThan(
-			self::callIndex('RELEASE_LOCK'),
-			self::callIndex('SELECT GET_LOCK')
-		);
 	}
 
 	/**
-	 * plugin_mactrack_install() refreshes the table through Cacti, which
-	 * fails while duplicates exist, so the repair has to come first.
+	 * An interrupted rebuild restores the destination's unique key before it
+	 * finishes copying, so a healthy key at the current version is not proof
+	 * the upgrade is done: the leftover work table must keep it launching.
 	 *
 	 * @return void
 	 */
-	public function testCheckUpgradeRepairsBeforeReinstalling(): void {
-		$source = (string) file_get_contents(dirname(__DIR__, 2) . '/setup.php');
-		$body   = substr($source, (int) strpos($source, 'function mactrack_check_upgrade('));
+	public function testCheckUpgradeLaunchesWhileTheRebuildWorkTableRemains(): void {
+		$info = plugin_mactrack_version();
+		set_config_option('path_php_binary', '/usr/bin/php');
+		mactrack_test_queue_return('get_current_page', 'index.php');
+		mactrack_test_queue_return('db_fetch_row', ['version' => $info['version'], 'status' => 1]);
+		// The aggregated table is healthy (unique key)...
+		self::givenKey(self::keyRows(0));
+		// ...but the renamed rebuild work table is still present.
+		mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_aggregated_ports_upgrade'", [['t' => 'mac_track_aggregated_ports_upgrade']]);
 
-		$repair  = strpos($body, 'mactrack_repair_aggregated_ports_key();');
+		mactrack_check_upgrade();
+
+		$launches = array_filter($GLOBALS['__test_db_calls'], static fn ($c) => $c['fn'] === 'exec_background');
+
+		$this->assertCount(1, $launches);
+	}
+
+	/**
+	 * plugin_mactrack_install() refreshes the aggregated-ports table through
+	 * Cacti, which fails while the pre-normalization duplicates and non-unique
+	 * key exist, so the rebuild has to come first.
+	 *
+	 * @return void
+	 */
+	public function testPerformUpgradeRebuildsAggregatedPortsBeforeReinstalling(): void {
+		$source = (string) file_get_contents(dirname(__DIR__, 2) . '/setup.php');
+		$body   = substr($source, (int) strpos($source, 'function mactrack_perform_upgrade('));
+
+		$rebuild = strpos($body, 'mactrack_rebuild_aggregated_ports(');
 		$install = strpos($body, 'plugin_mactrack_install(false);');
 
-		$this->assertNotFalse($repair);
+		$this->assertNotFalse($rebuild);
 		$this->assertNotFalse($install);
-		$this->assertLessThan($install, $repair);
+		$this->assertLessThan($install, $rebuild);
+	}
+
+	/**
+	 * With no processes table, the launcher treats the upgrade as not running.
+	 *
+	 * @return void
+	 */
+	public function testBackgroundUpgradeNotRunningWithoutAProcessesTable(): void {
+		mactrack_test_queue_return('db_table_exists', false);
+
+		$this->assertFalse(mactrack_background_upgrade_running());
+	}
+
+	/**
+	 * A registration that has outlived its timeout is treated as stale so a
+	 * crashed upgrade can be relaunched.
+	 *
+	 * @return void
+	 */
+	public function testBackgroundUpgradeTreatsAnExpiredRegistrationAsStale(): void {
+		mactrack_test_queue_return('db_table_exists', true);
+		mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', ['pid' => 7, 'started' => 0, 'now' => 100000, 'timeout' => 300]);
+
+		$this->assertFalse(mactrack_background_upgrade_running());
 	}
 }

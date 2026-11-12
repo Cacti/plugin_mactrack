@@ -319,6 +319,34 @@ if (!function_exists('exec_background')) {
 	}
 }
 
+/*
+ * Process-registry helpers used by the background database upgrade. Tests only
+ * need them to record the call and hand back a programmable result.
+ */
+if (!function_exists('register_process_start')) {
+	function register_process_start($tasktype, $taskname, $taskid = 0, $timeout = 300) {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'register_process_start', 'sql' => "$tasktype:$taskname:$taskid", 'params' => array($timeout));
+
+		return mactrack_test_next_return('register_process_start', true);
+	}
+}
+
+if (!function_exists('unregister_process')) {
+	function unregister_process($tasktype, $taskname, $taskid = 0, $pid = -1) {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'unregister_process', 'sql' => "$tasktype:$taskname:$taskid", 'params' => array($pid));
+
+		return true;
+	}
+}
+
+if (!function_exists('heartbeat_process')) {
+	function heartbeat_process($tasktype, $taskname, $taskid = 0) {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'heartbeat_process', 'sql' => "$tasktype:$taskname:$taskid", 'params' => array());
+
+		return true;
+	}
+}
+
 if (!function_exists('api_plugin_enable_hooks')) {
 	function api_plugin_enable_hooks($plugin) {
 	}
@@ -332,6 +360,13 @@ if (!function_exists('api_plugin_enable_hooks')) {
  */
 if (!function_exists('read_config_option')) {
 	function read_config_option($name, $force = false) {
+		// Allow a test to program successive return values (FIFO) so a
+		// concurrency re-check that reads the same option twice can be driven
+		// to differ between calls. Falls back to the persistent store.
+		if (!empty($GLOBALS['__test_next_returns']['read_config_option'])) {
+			return array_shift($GLOBALS['__test_next_returns']['read_config_option']);
+		}
+
 		if (array_key_exists($name, $GLOBALS['__test_config_options'])) {
 			return $GLOBALS['__test_config_options'][$name];
 		}
@@ -626,6 +661,10 @@ if (!defined('SNMP_STRING_OUTPUT_HEX')) {
 
 if (!defined('MESSAGE_LEVEL_ERROR')) {
 	define('MESSAGE_LEVEL_ERROR', 1);
+}
+
+if (!defined('MESSAGE_LEVEL_WARN')) {
+	define('MESSAGE_LEVEL_WARN', 2);
 }
 
 /*

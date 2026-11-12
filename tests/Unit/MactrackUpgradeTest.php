@@ -6,9 +6,10 @@
 */
 
 /*
- * Unit coverage for mactrack_check_upgrade()'s version-drift path in
- * setup.php, including the upgrade-time manifest prune
- * (mactrack_prune_files()).
+ * Unit coverage for the version-drift housekeeping in
+ * mactrack_perform_upgrade() (setup.php), including the upgrade-time manifest
+ * prune (mactrack_prune_files()). The background CLI runs this routine; the
+ * web hook only launches that CLI.
  */
 
 beforeAll(function () {
@@ -29,14 +30,11 @@ it('runs the upgrade housekeeping and prune on a version drift', function () {
 	require_once $GLOBALS['config']['base_path'] . '/plugins/mactrack/includes/database.php';
 	require_once $GLOBALS['config']['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php';
 
-	mactrack_test_queue_return('get_current_page', 'plugins.php');
 	// Stored row present but disabled (status 0): drifts, yet skips the inner
 	// install/schema-upgrade block (which depends on unstubbed Cacti core).
 	mactrack_test_queue_return('db_fetch_row', array('version' => '1.0.0', 'status' => 0));
 	// Permission realms already present -> the realm-insert branch is skipped.
 	mactrack_test_queue_return('db_fetch_cell', '1');
-	// This request wins the upgrade lock.
-	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK', '1');
 
 	// Sandbox base_path (with empty include stubs + a minimal INFO) so the
 	// upgrade-time prune runs against a throwaway tree, never the real checkout.
@@ -51,7 +49,7 @@ it('runs the upgrade housekeeping and prune on a version drift', function () {
 	$GLOBALS['config']['base_path'] = $base;
 
 	try {
-		mactrack_check_upgrade();
+		mactrack_perform_upgrade();
 	} finally {
 		$GLOBALS['config']['base_path'] = $restore;
 	}
@@ -64,3 +62,74 @@ it('runs the upgrade housekeeping and prune on a version drift', function () {
 	expect($updates)->not->toBeEmpty();
 });
 
+it('reinstalls hooks and upgrades the schema when the plugin is not yet recorded', function () {
+	require_once $GLOBALS['config']['base_path'] . '/plugins/mactrack/includes/database.php';
+	require_once $GLOBALS['config']['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php';
+
+	// No stored plugin_config row: the install/schema-upgrade block runs.
+	mactrack_test_queue_return('db_fetch_row', array());
+	// Lookups mactrack_database_upgrade() makes outside the aggregated rebuild.
+	mactrack_test_queue_return('db_fetch_cell', '0');
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'COUNT(*) FROM mac_track_sites', '1');
+	mactrack_test_queue_return_for('db_fetch_assoc', 'SHOW COLUMNS FROM mac_track_ips', array(
+		array('Field' => 'port_number', 'Type' => 'varchar(30)'),
+	));
+	// The aggregated table is absent, so the rebuild records completion quickly.
+	mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_aggregated_ports'", array());
+
+	$restore = $GLOBALS['config']['base_path'];
+	$base    = sys_get_temp_dir() . '/mactrack-upg-' . uniqid();
+	mkdir($base . '/plugins/mactrack/includes', 0777, true);
+	mkdir($base . '/plugins/mactrack/lib', 0777, true);
+	file_put_contents($base . '/plugins/mactrack/INFO', "[info]\nversion = 9.9.9\nname = mactrack\nlongname = MacTrack\nauthor = x\nhomepage = x\n");
+	file_put_contents($base . '/plugins/mactrack/includes/database.php', "<?php\n");
+	file_put_contents($base . '/plugins/mactrack/lib/mactrack_functions.php', "<?php\n");
+	file_put_contents($base . '/plugins/mactrack/lib/mactrack_vendors.php', "<?php\n");
+	$GLOBALS['config']['base_path'] = $base;
+
+	try {
+		mactrack_perform_upgrade();
+	} finally {
+		$GLOBALS['config']['base_path'] = $restore;
+	}
+
+	// The install block ran (hooks re-registered) and the version was recorded.
+	$hooks = array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'api_plugin_register_hook';
+	});
+
+	$updates = array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && stripos($call['sql'], 'UPDATE plugin_config') !== false;
+	});
+
+	expect($hooks)->not->toBeEmpty();
+	expect($updates)->not->toBeEmpty();
+});
+
+it('leaves the version unrecorded when the aggregated-ports rebuild cannot finish', function () {
+	require_once $GLOBALS['config']['base_path'] . '/plugins/mactrack/includes/database.php';
+	require_once $GLOBALS['config']['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php';
+
+	// No stored row: the install block runs and the rebuild is attempted first.
+	mactrack_test_queue_return('db_fetch_row', array());
+	// The aggregated table exists but the advisory lock is held, so the rebuild
+	// cannot start and returns failure.
+	mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_aggregated_ports'", array(array('t' => 'mac_track_aggregated_ports')));
+	mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_aggregated_ports_upgrade'", array());
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK', '0');
+
+	$completed = mactrack_perform_upgrade();
+
+	expect($completed)->toBeFalse();
+
+	// Neither the hooks were re-registered nor the version recorded.
+	$hooks = array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'api_plugin_register_hook';
+	});
+	$updates = array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && stripos($call['sql'], 'UPDATE plugin_config') !== false;
+	});
+
+	expect($hooks)->toBeEmpty();
+	expect($updates)->toBeEmpty();
+});

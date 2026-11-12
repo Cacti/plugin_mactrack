@@ -144,6 +144,31 @@ if (function_exists('register_process_start')) {
 	}
 }
 
+// Defer while a background database upgrade is in progress, or while the
+// aggregated-ports rebuild has left its work table (mac_track_aggregated_ports_upgrade)
+// in place after an interrupted run. The rebuild renames the live table aside
+// and repopulates it per scan date, so the poller's aggregate writes and
+// scan-buffer truncation would otherwise race with it and lose or restore
+// rows. The upgrade runs once per version change and resumes on its own, so a
+// few skipped cycles are harmless.
+if (function_exists('mactrack_background_upgrade_running')) {
+	$upgrade_active = mactrack_background_upgrade_running();
+
+	if (!$upgrade_active && function_exists('mactrack_db_table_exists')) {
+		$upgrade_active = mactrack_db_table_exists('mac_track_aggregated_ports_upgrade');
+	}
+
+	if ($upgrade_active) {
+		mactrack_debug('Deferring the Mactrack poller run while a database upgrade is in progress');
+
+		if (function_exists('unregister_process')) {
+			unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
+		}
+
+		exit(0);
+	}
+}
+
 // Get rid of old/hung processes
 clear_old_processes($site_id);
 

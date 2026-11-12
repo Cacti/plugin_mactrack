@@ -197,14 +197,12 @@ function mactrack_realms_are_stale(): bool {
 }
 
 /**
- * Detects a version mismatch between the running plugin code and the
- * version recorded in plugin_config, and when found (and only on a
- * small set of pages, to limit overhead), re-registers hooks, runs the
- * database upgrade, migrates legacy SNMP read strings, recreates
- * missing permission realms, renames legacy realm display names,
- * rebuilds cached scanning functions, and updates the stored plugin
- * version metadata. Always retries any pending default-site seeding at
- * the end.
+ * Detects pending upgrade work on a small set of pages and, when found,
+ * hands it to the background CLI (cli/upgrade_database.php) rather than
+ * running the long schema migration inline on the web request, which was
+ * being killed at the request timeout. Repairs a drifted realm file list
+ * inline (that is instant) and always retries any pending default-site
+ * seeding at the end.
  *
  * @return void
  *
@@ -212,7 +210,7 @@ function mactrack_realms_are_stale(): bool {
  *                       locate library files to include.
  */
 function mactrack_check_upgrade(): void {
-	global $config, $database_default;
+	global $config;
 
 	$files = ['index.php', 'plugins.php', 'mactrack_devices.php'];
 
@@ -228,58 +226,148 @@ function mactrack_check_upgrade(): void {
 
 	$old     = (array) db_fetch_row("SELECT * FROM plugin_config WHERE directory='mactrack'");
 
-	$version_changed = !cacti_sizeof($old) || $current != $old['version'];
-
-	// Every page load that sees the old version would otherwise run the
-	// upgrade at once and race on the same ALTERs. One request takes the
-	// lock and upgrades; the others skip this hook until it is recorded.
-	// The lock is session-scoped, so it is freed if the request dies.
-	$upgrade_lock   = 'mactrack.upgrade.' . sha1((string) $database_default);
-	$upgrade_locked = false;
-
-	if ($version_changed) {
-		if ((string) db_fetch_cell_prepared('SELECT GET_LOCK(?, ?)', [$upgrade_lock, 0]) !== '1') {
-			return;
-		}
-
-		$upgrade_locked = true;
-
-		// Another request may have finished the upgrade before the lock was free.
-		if (cacti_sizeof($old) && (string) db_fetch_cell_prepared('SELECT version FROM plugin_config WHERE directory = ?', ['mactrack']) === (string) $current) {
-			$version_changed = false;
-		}
-	}
+	$installed = !cacti_sizeof($old) || in_array((int) ($old['status'] ?? -1), [1, 4], true);
 
 	// A realm file list can drift from the code without a version bump (the
-	// Dashboard was added that way). Repair only the realms in that case; the
-	// full upgrade below rebuilds indexes and rewrites large tables.
-	if (!$version_changed && in_array((int) $old['status'], [1, 4], true) && mactrack_realms_are_stale()) {
+	// Dashboard was added that way). Repair only the realms in that case; it is
+	// instant and does not need the background database upgrade.
+	if ($installed && cacti_sizeof($old) && $current == ($old['version'] ?? '') && mactrack_realms_are_stale()) {
 		mactrack_install_realms(false);
 	}
 
-	// Merge duplicate aggregated rows before plugin_mactrack_install()
-	// refreshes the table: Cacti cannot restore the unique key while they
-	// exist. Also runs without a version change, for installs that recorded
-	// the new version after a failed refresh.
-	if (cacti_sizeof($old) && in_array((int) $old['status'], [1, 4], true)) {
-		mactrack_repair_aggregated_ports_key();
+	// The schema migration (index rebuilds, MAC normalization, and the
+	// mac_track_aggregated_ports rebuild) runs 30-60 minutes on large installs
+	// and was being killed at the web-request timeout, leaving the version
+	// unrecorded so every page re-ran it. Hand it to a background CLI and tell
+	// the operator once; the CLI records the new version when it finishes,
+	// which stops this hook from relaunching it.
+	if ($installed && mactrack_database_upgrade_pending($current, $old)) {
+		mactrack_launch_background_upgrade();
+	}
+
+	mactrack_retry_default_site();
+}
+
+/**
+ * Reports whether the background database upgrade still has work to do: the
+ * recorded plugin version differs from the running code, or a previous run
+ * recorded the new version but left the mac_track_aggregated_ports unique key
+ * unrestored.
+ *
+ * @param string               $current The running plugin code version.
+ * @param array<string, mixed> $old     The plugin_config row, or an empty
+ *                                       array when the plugin is not recorded.
+ *
+ * @return bool True when a background upgrade should run.
+ */
+function mactrack_database_upgrade_pending(string $current, array $old): bool {
+	if (!cacti_sizeof($old) || $current != ($old['version'] ?? '')) {
+		return true;
+	}
+
+	if (mactrack_db_table_exists('mac_track_aggregated_ports') && !mactrack_aggregated_ports_key_is_unique()) {
+		return true;
+	}
+
+	// An interrupted rebuild leaves the renamed work table behind with rows
+	// still to copy. Recreating the destination restores the unique key before
+	// the copy finishes, so the checks above can look healthy while history is
+	// still stranded; keep launching the upgrade until that table is drained.
+	if (mactrack_db_table_exists('mac_track_aggregated_ports_upgrade')) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * Launches the background database-upgrade CLI once and raises a single
+ * operator notice while it runs. The CLI's register_process_start() is the
+ * authoritative double-run guard; this only avoids a needless relaunch and
+ * keeps the notice from repeating on every page load.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to locate the
+ *                       CLI script.
+ */
+function mactrack_launch_background_upgrade(): void {
+	global $config;
+
+	if (!mactrack_background_upgrade_running()) {
+		$php_binary = read_config_option('path_php_binary');
+		$script     = $config['base_path'] . '/plugins/mactrack/cli/upgrade_database.php';
+
+		if ($php_binary != '' && file_exists($script)) {
+			exec_background($php_binary, '-q ' . cacti_escapeshellarg($script));
+		}
+	}
+
+	// Raise the notice only once. The CLI clears this flag when it finishes, so
+	// a future upgrade notifies again.
+	if (read_config_option('mt_db_upgrade_notified', true) != 'on') {
+		raise_message('mactrack_db_upgrade',
+			__('MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes.', 'mactrack'),
+			MESSAGE_LEVEL_WARN);
+
+		set_config_option('mt_db_upgrade_notified', 'on');
+	}
+}
+
+/**
+ * Runs the full MacTrack upgrade: re-registers hooks, applies the database
+ * schema migration, migrates legacy SNMP read strings, prunes tombstoned
+ * files, recreates and renames permission realms, rebuilds cached scanning
+ * functions, and records the new plugin version last so an interrupted run
+ * re-runs cleanly. Invoked by the background CLI (cli/upgrade_database.php),
+ * never inline on a web request.
+ *
+ * @return bool True when the upgrade completed, false when the database
+ *              migration could not finish (the plugin version is then left
+ *              unrecorded so the CLI retries on its next launch).
+ *
+ * @global array $config Cacti global configuration array; used to locate
+ *                       library files to include.
+ */
+function mactrack_perform_upgrade(): bool {
+	global $config;
+
+	require_once($config['base_path'] . '/plugins/mactrack/includes/database.php');
+	require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+
+	$current = plugin_mactrack_version();
+	$current = $current['version'];
+
+	$old     = (array) db_fetch_row("SELECT * FROM plugin_config WHERE directory='mactrack'");
+
+	$version_changed = !cacti_sizeof($old) || $current != ($old['version'] ?? '');
+
+	// if the plugin is installed and/or active
+	if (!cacti_sizeof($old) || $old['status'] == 1 || $old['status'] == 4) {
+		// Rebuild the aggregated-ports table first: plugin_mactrack_install()
+		// refreshes it through Cacti, which fails while the pre-normalization
+		// duplicates and non-unique key still exist. If the rebuild could not
+		// finish, leave the version unrecorded so the upgrade is retried rather
+		// than marked complete with rows still sitting in the renamed table.
+		if (!mactrack_rebuild_aggregated_ports()) {
+			return false;
+		}
+
+		// re-register the hooks
+		plugin_mactrack_install(false);
+
+		if (api_plugin_is_enabled('mactrack')) {
+			// may sound ridiculous, but enables new hooks
+			api_plugin_enable_hooks('mactrack');
+		}
+
+		// perform the remaining database migrations (the aggregated-ports
+		// rebuild above is the one that can defer the upgrade; the rest are
+		// idempotent guarded ALTERs)
+		mactrack_database_upgrade();
 	}
 
 	if ($version_changed) {
-		// if the plugin is installed and/or active
-		if (!cacti_sizeof($old) || $old['status'] == 1 || $old['status'] == 4) {
-			// re-register the hooks
-			plugin_mactrack_install(false);
-
-			if (api_plugin_is_enabled('mactrack')) {
-				// may sound ridiculous, but enables new hooks
-				api_plugin_enable_hooks('mactrack');
-			}
-
-			// perform a database upgrade
-			mactrack_database_upgrade();
-		}
-
 		if (read_config_option('mt_convert_readstrings', true) != 'on') {
 			convert_readstrings();
 		}
@@ -309,7 +397,8 @@ function mactrack_check_upgrade(): void {
 		// rebuild the scanning functions
 		mactrack_rebuild_scanning_funcs();
 
-		// update the plugin information
+		// update the plugin information (recorded last so a crash before this
+		// point re-runs the upgrade)
 		$info = plugin_mactrack_version();
 		$id   = db_fetch_cell_prepared('SELECT id FROM plugin_config WHERE directory = ?', ['mactrack']);
 
@@ -322,11 +411,9 @@ function mactrack_check_upgrade(): void {
 			[$info['longname'], $info['author'], $info['homepage'], $info['version'], $id]);
 	}
 
-	if ($upgrade_locked) {
-		db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [$upgrade_lock]);
-	}
-
 	mactrack_retry_default_site();
+
+	return true;
 }
 
 /**
