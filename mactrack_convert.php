@@ -33,226 +33,85 @@ if (substr_count(strtolower($dir), 'mactrack')) {
 require('./include/cli_check.php');
 
 global $config;
-require($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
 
-if (read_config_option('mt_collection_timing') != 'disabled') {
-	global $debug;
+$keep_old = false;
+$debug    = false;
 
-	// initialize variables
-	$debug    = false;
-	$engine   = 'InnoDB';
-	$charset  = '';
-	$collate  = '';
-	$days     = 30;
+$parms = $_SERVER['argv'];
+array_shift($parms);
 
-	// process calling arguments
-	$parms = $_SERVER['argv'];
-	array_shift($parms);
+foreach ($parms as $parameter) {
+	[$arg] = explode('=', $parameter, 2);
 
-	if (cacti_sizeof($parms)) {
-		foreach ($parms as $parameter) {
-			if (strpos($parameter, '=')) {
-				[$arg, $value] = explode('=', $parameter);
-			} else {
-				$arg   = $parameter;
-				$value = '';
-			}
+	switch ($arg) {
+		case '-d':
+		case '--debug':
+			$debug = true;
 
-			switch ($arg) {
-				case '-d':
-				case '--debug':
-					$debug = true;
+			break;
+		case '--keep-old':
+			$keep_old = true;
 
-					break;
-				case '--days':
-					$days = (int) $value;
+			break;
+		case '--days':
+		case '-e':
+		case '--engine':
+		case '--charset':
+		case '--collate':
+			// The new table copies the engine, character set and collation of
+			// the old one, and retention comes from the MacTrack settings.
+			print "NOTE: $arg is no longer used and is ignored.\n";
 
-					break;
-				case '-e':
-				case '--engine':
-					$engine = $value;
+			break;
+		case '--version':
+		case '-V':
+		case '-v':
+			display_version();
 
-					break;
-				case '--charset':
-					$charset = $value;
+			exit(0);
+		case '--help':
+		case '-H':
+		case '-h':
+			display_help();
 
-					break;
-				case '--collate':
-					$collate = $value;
+			exit(0);
+		default:
+			print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
+			display_help();
 
-					break;
-				case '--version':
-				case '-V':
-				case '-v':
-					display_version();
-					exit;
-				case '--help':
-				case '-H':
-				case '-h':
-					display_help();
-					exit;
-				default:
-					print 'ERROR: Invalid Parameter ' . $parameter . "\n\n";
-					display_help();
-					exit;
-			}
-		}
-	}
-
-	$engine = strtoupper($engine);
-
-	if ($engine != 'MYISAM' && $engine != 'INNODB') {
-		print "FATAL: Only MyISAM and InnoDB Available '$engine' not recognized\n";
-		exit -1;
-	}
-
-	if (!is_numeric($days) || $days > 360 || $days < 10) {
-		print "FATAL: Days Range is from 10 - 360, Value '$days' Invalid\n";
-		exit -1;
-	}
-
-	$partitioning = db_fetch_cell("SHOW GLOBAL VARIABLES LIKE 'have_partitioning'");
-
-	if ($partitioning == '') {
-		$partitioning = db_fetch_cell("SELECT PLUGIN_STATUS FROM INFORMATION_SCHEMA.ALL_PLUGINS WHERE PLUGIN_NAME='partition'");
-	}
-
-	if ($partitioning == 'YES' || $partitioning == 'ACTIVE') {
-		mactrack_create_partitioned_table($engine, $charset, $collate, $days, true);
-	} else {
-		print "FATAL: Partitioning Not Available, Exiting!\n";
+			exit(1);
 	}
 }
 
-/**
- * Converts the mac_track_ports table to a date-range-partitioned
- * table (partitioned by day over the given retention window, plus a
- * catch-all MAXVALUE partition), optionally migrating existing data
- * from the pre-partitioned backup table, then persists the retention
- * period to the mt_data_retention setting. On failure, restores the
- * original table from its backup.
- *
- * @param string $engine  The MySQL/MariaDB storage engine to use (e.g.
- *                        'InnoDB' or 'MyISAM').
- * @param string $charset The default character set for the new table.
- * @param string $collate The default collation for the new table.
- * @param int    $days    Number of daily partitions to pre-create
- *                        (default 30).
- * @param bool   $migrate Whether to copy existing rows from the
- *                        renamed backup table into the new partitioned
- *                        table (default false).
- *
- * @return void
- *
- * @global array $config Cacti global configuration array (declared but
- *                       not used directly here).
- */
-function mactrack_create_partitioned_table($engine, $charset, $collate, $days = 30, $migrate = false): void {
-	global $config;
+print "NOTE: Converting mac_track_ports to the scan-date layout. Scans wait until this finishes.\n";
 
-	// rename the original table
-	db_execute('RENAME TABLE `mac_track_ports` TO `mac_track_ports_backup`');
-
-	$sql = "CREATE TABLE `mac_track_ports` (
-		`site_id` int(10) unsigned NOT NULL default '0',
-		`device_id` int(10) unsigned NOT NULL default '0',
-		`hostname` varchar(40) NOT NULL default '',
-		`device_name` varchar(100) NOT NULL default '',
-		`vlan_id` varchar(5) NOT NULL default 'N/A',
-		`vlan_name` varchar(50) NOT NULL default '',
-		`mac_address` varchar(20) NOT NULL default '',
-		`vendor_mac` varchar(8) default NULL,
-		`ip_address` varchar(20) NOT NULL default '',
-		`dns_hostname` varchar(200) default '',
-		`port_number` varchar(30) NOT NULL default '',
-		`port_name` varchar(50) NOT NULL default '',
-		`scan_date` datetime NOT NULL default '0000-00-00 00:00:00',
-		`authorized` tinyint(3) unsigned NOT NULL default '0',
-		PRIMARY KEY  (`port_number`,`scan_date`,`mac_address`,`device_id`),
-		KEY `site_id` (`site_id`),
-		KEY `scan_date` USING BTREE (`scan_date`),
-		KEY `description` (`device_name`),
-		KEY `mac` (`mac_address`),
-		KEY `hostname` (`hostname`),
-		KEY `vlan_name` (`vlan_name`),
-		KEY `vlan_id` (`vlan_id`),
-		KEY `device_id` (`device_id`),
-		KEY `ip_address` (`ip_address`),
-		KEY `port_name` (`port_name`),
-		KEY `dns_hostname` (`dns_hostname`),
-		KEY `vendor_mac` (`vendor_mac`),
-		KEY `authorized` (`authorized`),
-		KEY `site_id_device_id` (`site_id`,`device_id`))
-		ENGINE=$engine
-		DEFAULT CHARACTER SET = $charset
-		DEFAULT COLLATE = $collate
-		COMMENT='Database for Tracking Device MACs'
-		PARTITION BY RANGE (TO_DAYS(scan_date))\n";
-
-	$now = time();
-
-	$parts = '';
-
-	for ($i = $days; $i > 0; $i--) {
-		$timestamp = $now - ($i * 86400);
-		$date      = date('Y-m-d', $timestamp);
-		$format    = date('Ymd', $timestamp);
-		$parts .= ($parts != '' ? ",\n" : '(') . ' PARTITION d' . $format . " VALUES LESS THAN (TO_DAYS('" . $date . "')+1)";
+$result = mactrack_partition_convert($keep_old, function (int $done, int $total, string $scan_date) use ($debug): void {
+	if ($debug || $done === $total || $done % 100 === 0) {
+		print "NOTE: Copied scan $done of $total ($scan_date)\n";
 	}
+});
 
-	$parts .= ",\nPARTITION dMaxValue VALUES LESS THAN MAXVALUE);";
+if (!$result['ok']) {
+	print 'FATAL: ' . $result['reason'] . "\n";
 
-	$return_value = db_execute($sql . $parts);
-
-	if ($return_value) {
-		if ($migrate) {
-			print "NOTE: Migrating Old Data to Partitioned Tables\n";
-
-			/*
-			$scan_dates = db_fetch_assoc('SELECT DISTINCT scan_date
-				FROM mac_track_ports_backup');
-
-			if (cacti_sizeof($scan_dates)) {
-				foreach ($scan_dates as $sd) {
-					db_execute_prepared('INSERT INTO mac_track_ports
-						SELECT *
-						FROM mac_track_ports_backups
-						WHERE scan_date = ?',
-						array($sd['scan_date']));
-
-					db_execute_prepared('DELETE FROM mac_track_ports_backup
-						WHERE scan_date = ?',
-						array($sd['scan_date']));
-				}
-			}
-			*/
-			db_execute('INSERT mac_track_ports SELECT * FROM mac_track_ports_backup');
-		}
-
-		db_execute('DROP TABLE mac_track_ports_backup');
-
-		db_execute_prepared('REPLACE INTO `settings`
-			SET name = "mt_data_retention", value = ?',
-			[$days]);
-	} else {
-		print "FATAL: Conversion to Partitioned Table Failed\n";
-
-		// rename the original table
-		db_execute('RENAME TABLE `mac_track_ports_backup` TO `mac_track_ports`');
-	}
+	exit(1);
 }
+
+printf("NOTE: Converted %d rows into %d %s partitions.\n", $result['rows'], $result['partitions'], $result['granularity']);
+
+if ($result['reason'] !== '') {
+	print 'WARNING: ' . $result['reason'] . "\n";
+}
+
+exit(0);
 
 /**
  * Prints this script's name, version, and copyright banner to stdout.
  *
  * @return void
- *
- * @global array $config Cacti global configuration array (declared but
- *                       not used directly here).
  */
 function display_version(): void {
-	global $config;
-
 	$info = plugin_mactrack_version();
 
 	print 'Mactrack Convert Partitioned, Version ' . $info['version'] . ', ' . COPYRIGHT_YEARS . "\n";
@@ -267,12 +126,12 @@ function display_version(): void {
 function display_help(): void {
 	display_version();
 
-	print "\nusage: mactrack_convert.php [-d] [-h] [--help] [-v] [--version]\n\n";
-	print "--engine=N    - Database Engine.  Value are 'MyISAM' or 'InnoDB' (Default:InnoDB)\n";
-	print "--charset=N   - Database Character Sets\n";
-	print "--collate=N   - Database Collation\n";
-	print "--days=N      - Days to Retain.  Valid Range is 10-360 (Default:30)\n";
-	print "-d | --debug  - Display verbose output during execution\n";
-	print "-v --version  - Display this help message\n";
+	print "\nusage: mactrack_convert.php [--keep-old] [-d] [-h] [-v]\n\n";
+	print "Converts mac_track_ports to the scan-date partition layout. The data is\n";
+	print "copied into a new table, which then replaces the old one; until then the\n";
+	print "old table stays in use. Scans wait while this runs.\n\n";
+	print "--keep-old    - Keep the original table as mac_track_ports_old\n";
+	print "-d | --debug  - Report every copied scan\n";
+	print "-v --version  - Display the version\n";
 	print "-h --help     - Display this help message\n";
 }

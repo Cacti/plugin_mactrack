@@ -206,6 +206,17 @@ if ($collect_frequency == 'disabled') {
 		}
 	}
 
+	// A port table conversion holds this lock for hours; scans wait for it.
+	if (!mactrack_partition_scan_begin()) {
+		print 'NOTE: A port table conversion or another scan is running, exiting.' . PHP_EOL;
+
+		if (function_exists('unregister_process')) {
+			unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
+		}
+
+		exit(0);
+	}
+
 	// we don't want to see errors in the cacti log
 	errors_disable();
 
@@ -555,6 +566,9 @@ function collect_mactrack_data($start, $site_id = 0): void {
 	// save the scan date information
 	$scan_date = date('Y-m-d H:i:s');
 	set_config_option('mt_scan_date', $scan_date);
+
+	// create this scan's partition before any of its rows are written
+	$partition_plan = mactrack_partition_prepare_scan($scan_date);
 
 	// just in case we've run too long
 	$exit_mactrack = false;
@@ -919,19 +933,14 @@ function collect_mactrack_data($start, $site_id = 0): void {
 			}
 		}
 
-		// transfer temp port results into permanent table
-		db_execute('INSERT INTO mac_track_ports
-			(site_id, device_id, hostname, dns_hostname, device_name,
-			vlan_id, vlan_name, mac_address, vendor_mac, ip_address,
-			port_number, port_name, scan_date, authorized)
-			SELECT site_id, device_id, hostname, dns_hostname, device_name,
-			vlan_id, vlan_name, mac_address, vendor_mac, ip_address,
-			port_number, port_name, scan_date, authorized
-			FROM mac_track_temp_ports
-			ON DUPLICATE KEY UPDATE site_id=VALUES(site_id), hostname=VALUES(hostname),
-			device_name=VALUES(device_name), vlan_id=VALUES(vlan_id), vlan_name=VALUES(vlan_name),
-			vendor_mac=VALUES(vendor_mac), ip_address=VALUES(ip_address), dns_hostname=VALUES(dns_hostname),
-			port_name=VALUES(port_name), authorized=VALUES(authorized)');
+		// transfer temp port results into permanent table, in batches: no
+		// INSERT ... SELECT, which locks the temp rows under mixed binlogs.
+		// A per-scan partition is filled through the stage table.
+		$loaded = mactrack_partition_load_scan($partition_plan);
+
+		mactrack_debug("Loaded $loaded scan rows ({$partition_plan['mode']}).");
+
+		mactrack_scan_dates_record($scan_date);
 
 		mactrack_debug('Finished transferring scan results to main table.');
 
@@ -1142,9 +1151,6 @@ function collect_mactrack_data($start, $site_id = 0): void {
 
 		db_execute('OPTIMIZE TABLE mac_track_ips');
 		*/
-
-		db_execute('TRUNCATE TABLE mac_track_scan_dates');
-		db_execute('REPLACE INTO mac_track_scan_dates (SELECT DISTINCT scan_date from mac_track_ports)');
 
 		api_plugin_hook_function('mac_track_finish_scan');
 	} else {

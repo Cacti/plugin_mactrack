@@ -48,6 +48,33 @@ switch (get_request_var('action')) {
 		bottom_footer();
 
 		break;
+	case 'mactrack_utilities_rebuild_scan_dates':
+		top_header();
+		require_once('./plugins/mactrack/lib/mactrack_functions.php');
+
+		mactrack_utilities();
+		mactrack_utilities_rebuild_scan_dates();
+
+		bottom_footer();
+
+		break;
+	case 'mactrack_partition_status':
+		top_header();
+
+		mactrack_utilities();
+		mactrack_utilities_partition_status();
+
+		bottom_footer();
+
+		break;
+	case 'mactrack_utilities_optimize_ports':
+		mactrack_utilities_optimize_ports();
+
+		break;
+	case 'mactrack_utilities_convert_ports':
+		mactrack_utilities_convert_ports();
+
+		break;
 	case 'mactrack_utilities_purge_scanning_funcs':
 		top_header();
 		require_once('./plugins/mactrack/lib/mactrack_functions.php');
@@ -576,6 +603,199 @@ function mactrack_utilities_db_maint(): void {
 }
 
 /**
+ * Rebuilds the scan date list from the stored port results
+ * (mactrack_scan_dates_rebuild()) and displays how many dates it holds.
+ * Called from this script's main request-dispatch switch.
+ *
+ * @return void
+ */
+function mactrack_utilities_rebuild_scan_dates(): void {
+	$dates = mactrack_scan_dates_rebuild();
+
+	html_start_box(__('Mactrack Scan Date Rebuild Results', 'mactrack'), '100%', '', '3', 'center', '');
+	print '<td>' . __('Scan dates rebuilt: %d', $dates, 'mactrack') . '</td>';
+	html_end_box();
+}
+
+/**
+ * Shows how mac_track_ports is partitioned: the layout, the partition
+ * count against the server's limit, the effective partition size and why,
+ * a pending exchange, and the outcome of the last maintenance run.
+ *
+ * @return void
+ */
+function mactrack_utilities_partition_status(): void {
+	$r     = mactrack_partition_report();
+	$none  = __('None', 'mactrack');
+	$sizes = [
+		'scan' => __('One per Scan', 'mactrack'),
+		'hour' => __('Hourly', 'mactrack'),
+		'day'  => __('Daily', 'mactrack'),
+	];
+	$layouts = [
+		'none'    => __('Not partitioned', 'mactrack'),
+		'legacy'  => __('Daily partitions from an earlier MacTrack release. Conversion is needed.', 'mactrack'),
+		'range'   => __('Partitioned by scan date', 'mactrack'),
+		'invalid' => __('Unrecognized partitions. MacTrack makes no partition changes.', 'mactrack'),
+	];
+	$i   = 0;
+	$row = function (string $label, string $value) use (&$i): void {
+		form_alternate_row('line' . $i++);
+		print '<td>' . html_escape($label) . '</td><td>' . html_escape($value) . '</td>';
+		form_end_row();
+	};
+
+	html_start_box(__('Port Table Partitions', 'mactrack'), '100%', '', '3', 'center', '');
+
+	$row(__('Layout', 'mactrack'), trim($layouts[$r['layout']] . ' ' . $r['reason']));
+
+	if ($r['layout'] !== 'none') {
+		$row(__('Partitions', 'mactrack'), __('%d of at most %d', $r['partitions'], $r['cap'], 'mactrack'));
+		$row(__('Oldest Partition', 'mactrack'), $r['oldest'] ?? $none);
+		$row(__('Newest Partition', 'mactrack'), $r['newest'] ?? $none);
+
+		if ($r['covered_until'] !== null) {
+			$row(__('Partitions Cover Scans Before', 'mactrack'), date('Y-m-d H:i:s', $r['covered_until']));
+		}
+	}
+
+	$size = $sizes[$r['granularity']];
+
+	if ($r['fell_back']) {
+		$size = __('%s, coarser than the setting because %d partitions would exceed the limit', $size, $r['projected'], 'mactrack');
+	}
+
+	$row(__('Port Partition Size', 'mactrack'), $size);
+	$row(__('Pending Exchange', 'mactrack'), $r['pending'] !== '' ? $r['pending'] : $none);
+	$row(__('Load Path', 'mactrack'), __('PHP batches', 'mactrack'));
+	$row(__('Last Scan Note', 'mactrack'), $r['last_scan_reason'] !== '' ? $r['last_scan_reason'] : $none);
+
+	if ($r['converting'] !== null) {
+		$row(__('Conversion', 'mactrack'), __('Running since %s', date('Y-m-d H:i:s', $r['converting']), 'mactrack'));
+	} elseif ($r['conversion'] !== null) {
+		$c = $r['conversion'];
+
+		$row(__('Last Conversion', 'mactrack'), $c['ok']
+			? trim(__('%s: %d rows into %d partitions', date('Y-m-d H:i:s', (int) $c['time']), $c['rows'], $c['partitions'], 'mactrack') . ' ' . $c['reason'])
+			: __('%s: failed. %s', date('Y-m-d H:i:s', (int) $c['time']), $c['reason'], 'mactrack'));
+	}
+
+	$m = $r['maintenance'];
+
+	if ($m === null) {
+		$row(__('Last Maintenance', 'mactrack'), $none);
+	} else {
+		$row(__('Last Maintenance', 'mactrack'), trim(__('%s: %d partitions dropped, %d created', date('Y-m-d H:i:s', (int) $m['time']), count($m['dropped']), count($m['created']), 'mactrack') . ' ' . $m['reason']));
+	}
+
+	html_end_box();
+}
+
+/**
+ * Runs OPTIMIZE TABLE on mac_track_ports, which routine maintenance no
+ * longer does because it rebuilds the whole table.
+ *
+ * Cacti checks the CSRF token on POST requests only, so a GET just shows a
+ * form that posts back here; nothing a link or a GET parameter carries can
+ * start the rebuild.
+ *
+ * @return void
+ */
+function mactrack_utilities_optimize_ports(): void {
+	if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+		top_header();
+
+		html_start_box(__('Are You Sure?', 'mactrack'), '60%', '', '3', 'center', '');
+		print '<tr><td class="textArea">' . html_escape(__('OPTIMIZE rebuilds the whole port table and can take a long time on a large table. Continue?', 'mactrack')) . '</td></tr>';
+		print '<tr><td class="right"><form method="post" action="mactrack_utilities.php">'
+			. '<input type="hidden" name="action" value="' . html_escape('mactrack_utilities_optimize_ports') . '">'
+			. '<a class="ui-button ui-corner-all ui-widget" href="mactrack_utilities.php">' . html_escape(__('Cancel', 'mactrack')) . '</a> '
+			. '<input type="submit" class="ui-button ui-corner-all ui-widget" value="' . html_escape(__('Optimize Port Table', 'mactrack')) . '">'
+			. '</form></td></tr>';
+		html_end_box();
+
+		bottom_footer();
+
+		return;
+	}
+
+	$result = db_fetch_assoc_prepared('OPTIMIZE TABLE mac_track_ports');
+
+	top_header();
+	mactrack_utilities();
+
+	html_start_box(__('Mactrack Database Results', 'mactrack'), '100%', '', '3', 'center', '');
+
+	foreach ((array) $result as $line) {
+		form_alternate_row();
+		print '<td>' . html_escape(($line['Msg_type'] ?? '') . ': ' . ($line['Msg_text'] ?? '')) . '</td>';
+		form_end_row();
+	}
+
+	html_end_box();
+	bottom_footer();
+}
+
+/**
+ * Starts the conversion of mac_track_ports to the scan-date layout in the
+ * background (mactrack_convert.php), because it can take hours.
+ *
+ * Like the OPTIMIZE action, it starts only on a POST, where Cacti checks
+ * the CSRF token; a GET shows a form that posts back here.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to build
+ *                       the conversion script's path.
+ */
+function mactrack_utilities_convert_ports(): void {
+	global $config;
+
+	$layout = mactrack_partition_state()['layout']['state'];
+	$busy   = (string) read_config_option('mt_partition_converting', true) !== '';
+
+	if ($busy) {
+		$message = __('A conversion is already running. The partition status page shows when it has finished.', 'mactrack');
+	} elseif ($layout === 'range') {
+		$message = __('The port table already uses the scan-date layout.', 'mactrack');
+	} elseif ($layout === 'invalid') {
+		$message = __('The port table has partitions MacTrack does not recognize, so it cannot be converted. The partition status page shows why.', 'mactrack');
+	} elseif (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+		top_header();
+
+		html_start_box(__('Are You Sure?', 'mactrack'), '60%', '', '3', 'center', '');
+		print '<tr><td class="textArea">' . html_escape(__('The conversion copies the whole port table into a new partitioned table and can take hours on a large table. Scans and database maintenance wait until it finishes. The database needs free space for a second copy of the table. Continue?', 'mactrack')) . '</td></tr>';
+		print '<tr><td class="right"><form method="post" action="mactrack_utilities.php">'
+			. '<input type="hidden" name="action" value="' . html_escape('mactrack_utilities_convert_ports') . '">'
+			. '<a class="ui-button ui-corner-all ui-widget" href="mactrack_utilities.php">' . html_escape(__('Cancel', 'mactrack')) . '</a> '
+			. '<input type="submit" class="ui-button ui-corner-all ui-widget" value="' . html_escape(__('Convert Port Table', 'mactrack')) . '">'
+			. '</form></td></tr>';
+		html_end_box();
+
+		bottom_footer();
+
+		return;
+	} else {
+		// The same command the poller hook builds: the configured PHP binary
+		// and a fixed script path, with nothing taken from the request.
+		exec_background(read_config_option('path_php_binary'), '-q ' . cacti_escapeshellarg($config['base_path'] . '/plugins/mactrack/mactrack_convert.php'));
+
+		$message = __('The conversion has started in the background. The partition status page shows its progress and result.', 'mactrack');
+	}
+
+	top_header();
+	mactrack_utilities();
+
+	html_start_box(__('Mactrack Database Results', 'mactrack'), '100%', '', '3', 'center', '');
+	form_alternate_row();
+	print '<td>' . html_escape($message) . '</td>';
+	form_end_row();
+	html_end_box();
+
+	bottom_footer();
+}
+
+/**
  * Purges and rebuilds the cached list of registered vendor scanning
  * functions (mactrack_rebuild_scanning_funcs()). Called from this
  * script's main request-dispatch switch.
@@ -657,6 +877,42 @@ function mactrack_utilities(): void {
 		</td>
 		<td class='textArea'>
 			<?php print __('Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>', 'mactrack'); ?>
+		</td>
+	</tr>
+
+	<tr class='odd'>
+		<td class='textArea'>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_rebuild_scan_dates'><?php print __('Rebuild Scan Dates', 'mactrack'); ?></a>
+		</td>
+		<td class='textArea'>
+			<?php print __('Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices.', 'mactrack'); ?>
+		</td>
+	</tr>
+
+	<tr class='even'>
+		<td class='textArea'>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_partition_status'><?php print __('View Partition Status', 'mactrack'); ?></a>
+		</td>
+		<td class='textArea'>
+			<?php print __('Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did.', 'mactrack'); ?>
+		</td>
+	</tr>
+
+	<tr class='odd'>
+		<td class='textArea'>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_optimize_ports'><?php print __('Optimize Port Table', 'mactrack'); ?></a>
+		</td>
+		<td class='textArea'>
+			<?php print __('Rebuilds the Port to MAC to IP results table to reclaim the space of deleted rows. Database maintenance no longer does this, because the rebuild can take a long time on a large table. Partitioned tables rarely need it.', 'mactrack'); ?>
+		</td>
+	</tr>
+
+	<tr class='even'>
+		<td class='textArea'>
+			<a class='hyperLink' href='mactrack_utilities.php?action=mactrack_utilities_convert_ports'><?php print __('Convert Port Table', 'mactrack'); ?></a>
+		</td>
+		<td class='textArea'>
+			<?php print __('Converts the Port to MAC to IP results table to partitions by scan date, so maintenance drops old scans instead of deleting rows. It copies the table, which can take hours; scans wait meanwhile.', 'mactrack'); ?>
 		</td>
 	</tr>
 
