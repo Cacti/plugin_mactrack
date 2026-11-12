@@ -920,6 +920,9 @@ function collect_mactrack_data($start, $site_id = 0): void {
 
 				break;
 			}
+
+			// wait between checks instead of querying back to back
+			sleep(1);
 		}
 
 		// transfer temp port results into permanent table
