@@ -1092,14 +1092,20 @@ function collect_mactrack_data($start, $site_id = 0): void {
 					if (!$record['discovered'] || $record['notify_schedule'] >= '2') {
 						$mail = true;
 
+						// above 2 the schedule is the minutes between mails
 						if ($record['notify_schedule'] > 2) {
-							if (strtotime($record['date_last_notif']) + $record['notify_schedule'] > time()) {
+							if ((int) strtotime($record['date_last_notif']) + $record['notify_schedule'] * 60 > time()) {
 								$mail = false;
 							}
 						}
 
 						if ($mail) {
 							mactrack_mail($record['email_addresses'], $from, $fromname, $subject, $message);
+
+							db_execute_prepared('UPDATE mac_track_macwatch
+								SET date_last_notif = NOW()
+								WHERE mac_id = ?',
+								[$record['mac_id']]);
 						}
 					}
 
