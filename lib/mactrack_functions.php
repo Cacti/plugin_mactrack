@@ -2069,8 +2069,13 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 			if (cacti_sizeof($new_port_key_array)) {
 				foreach ($new_port_key_array as $key => $port_key) {
-					if (isset($port_macs[$port_key['key']])) {
-						$new_port_key_array[$key]['mac_address'] = @$port_macs[$port_key['key']];
+					// dot1qTpFdbAddress is not-accessible in Q-BRIDGE-MIB, so
+					// most agents return nothing for it; the MAC is also the
+					// last six parts of the index.
+					$mac = $port_macs[$port_key['key']] ?? mactrack_index_to_mac((string) $port_key['key']);
+
+					if ($mac !== '') {
+						$new_port_key_array[$key]['mac_address'] = $mac;
 						mactrack_debug("INDEX: '" . $key . "' MAC ADDRESS: " . $new_port_key_array[$key]['mac_address']);
 					} else {
 						mactrack_debug("INDEX: '" . $key . "' not found in port_macs array, skipping");
@@ -2376,6 +2381,32 @@ function xform_net_address($ip_address): string {
  * function expects.
  * @param mixed $mac_address
  */
+/**
+ * Reads the MAC address at the end of a bridge table index, such as the
+ * fdbId.m1.m2.m3.m4.m5.m6 index of dot1qTpFdbTable.
+ *
+ * @param string $index The dotted-decimal index.
+ *
+ * @return string The MAC as twelve uppercase hex digits, as
+ *                xform_mac_address() returns it, or '' if the index does
+ *                not end in six octets.
+ */
+function mactrack_index_to_mac(string $index): string {
+	$parts = array_slice(explode('.', trim($index, '.')), -6);
+
+	if (count($parts) !== 6) {
+		return '';
+	}
+
+	foreach ($parts as $part) {
+		if (!ctype_digit($part) || (int) $part > 255) {
+			return '';
+		}
+	}
+
+	return implode('', array_map(fn ($part) => sprintf('%02X', (int) $part), $parts));
+}
+
 function xform_mac_address($mac_address): string {
 	$mac_address = (string) $mac_address;
 
