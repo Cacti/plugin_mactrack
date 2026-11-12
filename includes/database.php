@@ -689,10 +689,11 @@ function mactrack_database_upgrade(): void {
 		db_fetch_cell("UPDATE plugin_realms set display='Mactrack Administrator' WHERE plugin = 'mactrack' and display='Device Tracking Administrator'");
 	}
 
-	// 4.9/4.11: normalize the legacy MAC-address formatting, convert the
+	// 4.9/4.11: normalize the legacy MAC-address formatting and convert the
 	// aggregated-ports `port_number` key from the old UNIQUE index to a plain
-	// index (enforcing uniqueness crashed upgrades on installs holding
-	// duplicate rows), and prune the duplicates that index now tolerates.
+	// index. Aggregated ports intentionally keep multiple rows per MAC (the
+	// MAC view counts them), so the table must not enforce uniqueness on that
+	// composite -- enforcing it crashed upgrades on installs holding such rows.
 	// db_update_table() reconciles indexes by column set only, so it never
 	// drops a UNIQUE key on its own; do it explicitly here. Gated by a
 	// persistent flag so the table-wide rewrites run only once.
@@ -714,8 +715,6 @@ function mactrack_database_upgrade(): void {
 		}
 
 		db_execute('ALTER TABLE mac_track_aggregated_ports ADD INDEX `port_number` (`port_number`, `mac_address`, `ip_address`, `device_id`, `site_id`, `vlan_id`, `authorized`)');
-
-		mactrack_dedupe_aggregated_ports();
 
 		set_config_option('mt_mac_separators_stripped', 'on');
 	}
@@ -938,41 +937,6 @@ function mactrack_retry_default_site(): bool {
 	}
 
 	return mactrack_ensure_default_site();
-}
-
-/**
- * Removes duplicate rows from mac_track_aggregated_ports, keeping the
- * lowest row_id per (port_number, mac_address, ip_address, device_id,
- * site_id, vlan_id, authorized) tuple.
- *
- * `port_number` is a plain (non-unique) index, so nothing stops duplicate
- * aggregated rows from accumulating; this one-time cleanup prunes the rows
- * an earlier non-unique schema left behind. A self-join DELETE lets the
- * composite index drive the match rather than materializing a large
- * NOT IN set, which scales better on big tables.
- *
- * Safe to call repeatedly: it is a no-op when the table is absent or
- * already deduplicated. Callers should normalize MAC formatting first so
- * rows that differ only by separators collapse into genuine duplicates.
- *
- * @return void
- */
-function mactrack_dedupe_aggregated_ports(): void {
-	if (!db_table_exists('mac_track_aggregated_ports')) {
-		return;
-	}
-
-	db_execute('DELETE agg
-		FROM mac_track_aggregated_ports AS agg
-		INNER JOIN mac_track_aggregated_ports AS keep
-			ON  agg.port_number = keep.port_number
-			AND agg.mac_address = keep.mac_address
-			AND agg.ip_address  = keep.ip_address
-			AND agg.device_id   = keep.device_id
-			AND agg.site_id     = keep.site_id
-			AND agg.vlan_id     = keep.vlan_id
-			AND agg.authorized  = keep.authorized
-			AND keep.row_id     < agg.row_id');
 }
 
 /**

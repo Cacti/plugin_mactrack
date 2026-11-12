@@ -2,7 +2,7 @@
 
 --- develop ---
 
-* bug: Fix a fatal upgrade regression that crashed Cacti on every page load: make the mac_track_aggregated_ports `port_number` key a plain (non-unique) index so the upgrade no longer rejects the duplicate rows a non-unique index had allowed, widen `row_id` to bigint unsigned, and prune the duplicate rows during upgrade
+* bug: Fix a fatal upgrade regression that crashed Cacti on every page load: the mac_track_aggregated_ports `port_number` key is now a plain (non-unique) index and `row_id` is bigint unsigned, so the upgrade no longer rejects the multiple rows per MAC this table keeps by design; the aggregated-ports poller insert no longer uses ON DUPLICATE KEY UPDATE (row_id is the only key, so there is nothing to collide on)
 * issue#399: Use the registered Aruba AOS-CX callback names in the built-in 6200/6300 device types and repair existing defaults during upgrade
 * dev: Adopt the shared, byte-identical dashboarding card chrome used across the Cacti plugins: the MacTrack dashboard now drives its card grid through the shared `js/cards.js` (`CactiCards`) controller plus a thin `js/mactrack_dashboard.js` adapter, and the card markup/CSS use the shared `.cc*` contract (`css/cards.css`), with MacTrack's `--cc-*` theme bindings and card-body widgets kept in `css/mactrack-dashboard.css`. No functional change to the dashboard; this aligns MacTrack with the other plugins so the chrome can be promoted to Cacti core unchanged
 * dev: Load the shared card chrome from Cacti core on 1.2.32+ (`include/js/cards.js` + `include/css/cards.css`) and only bundle the plugin's own copy on older cores

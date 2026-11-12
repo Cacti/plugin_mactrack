@@ -1100,6 +1100,10 @@ function collect_mactrack_data($start, $site_id = 0): void {
 		// process aggregated data
 		db_execute('UPDATE mac_track_aggregated_ports SET active_last=0');
 
+		// Aggregated ports keep one row per observation (the MAC view counts
+		// them to show how often a MAC has been seen). row_id is the only
+		// unique/primary key, so there is no composite key to collide on; this
+		// is a plain append, not an upsert.
 		db_execute_prepared('INSERT INTO mac_track_aggregated_ports
 			(site_id, device_id, hostname, device_name,
 			vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
@@ -1112,8 +1116,7 @@ function collect_mactrack_data($start, $site_id = 0): void {
 			ON (t1.mac_address = t2.mac_address
 			AND t1.site_id     = t2.site_id
 			AND t1.port_number <> ""
-			AND t2.scan_date   = ?)
-			ON DUPLICATE KEY UPDATE count_rec=count_rec+1, active_last=1, date_last=t1.scan_date,port_name=t1.port_name',
+			AND t2.scan_date   = ?)',
 			[$scan_date]);
 
 		// purge the ip address and temp port table

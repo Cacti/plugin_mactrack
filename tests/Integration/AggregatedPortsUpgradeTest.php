@@ -17,19 +17,19 @@
 /**
  * Regression coverage for the mac_track_aggregated_ports upgrade crash.
  *
- * The schema used to declare `port_number` as a UNIQUE composite key, but
- * older installs carried it as a non-unique index that let duplicate
- * aggregated rows accumulate. When a version bump re-entered the upgrade
- * path, api_plugin_db_table_create() tried to apply the UNIQUE key and
- * aborted with "Duplicate entry ... for key 'port_number'", cascading into
- * a fatal "could not update table" plugin error on every Cacti page load.
+ * The schema used to declare `port_number` as a UNIQUE composite key, but the
+ * aggregated-ports table keeps multiple rows per MAC by design (the MAC view
+ * counts them to show how often a MAC has been seen). When a version bump
+ * re-entered the upgrade path, api_plugin_db_table_create() tried to apply the
+ * UNIQUE key and aborted with "Duplicate entry ... for key 'port_number'",
+ * cascading into a fatal "could not update table" plugin error on every Cacti
+ * page load.
  *
  * The fix makes `port_number` a plain (non-unique) index and widens `row_id`
- * to bigint unsigned, so the upgrade no longer rejects the duplicate rows.
- * mactrack_database_upgrade() drops the legacy UNIQUE index (db_update_table
- * reconciles indexes by column set only and will not do it on its own) and
- * mactrack_dedupe_aggregated_ports() prunes the duplicates the non-unique
- * index now tolerates.
+ * to bigint unsigned. The upgrade drops any legacy UNIQUE index and re-adds it
+ * non-unique (db_update_table reconciles indexes by column set only and will
+ * not do it on its own), and the poller inserts aggregated rows as a plain
+ * append rather than an ON DUPLICATE KEY UPDATE upsert.
  */
 final class AggregatedPortsUpgradeTest extends TestCase {
 	/**
@@ -58,41 +58,6 @@ final class AggregatedPortsUpgradeTest extends TestCase {
 		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'COUNT(*) FROM mac_track_sites', '1');
 		mactrack_test_queue_return_for('db_fetch_assoc', 'SHOW COLUMNS FROM mac_track_ips',
 			array(array('Field' => 'port_number', 'Type' => 'varchar(30)')));
-	}
-
-	/**
-	 * @return void
-	 */
-	public function testDedupeIsANoOpWhenTheTableIsAbsent(): void {
-		mactrack_test_queue_return('db_table_exists', false);
-
-		mactrack_dedupe_aggregated_ports();
-
-		$aggCalls = array_filter($this->sqlCalls(), static fn ($sql) =>
-			strpos($sql, 'mac_track_aggregated_ports') !== false
-		);
-		$this->assertSame(array(), $aggCalls, 'Absent table must not be touched');
-	}
-
-	/**
-	 * @return void
-	 */
-	public function testDedupePrunesDuplicatesWithASelfJoinNotInSubquery(): void {
-		// db_table_exists() defaults to true in the stub environment.
-		mactrack_dedupe_aggregated_ports();
-
-		$deletes = array_values(array_filter($this->sqlCalls(), static fn ($sql) =>
-			strpos($sql, 'DELETE agg') !== false &&
-			strpos($sql, 'mac_track_aggregated_ports') !== false
-		));
-		$this->assertCount(1, $deletes, 'Duplicate rows should be pruned exactly once');
-
-		// A self-join keyed on the full tuple, keeping the lowest row_id; not a
-		// NOT IN / derived-table subquery.
-		$this->assertStringContainsString('INNER JOIN mac_track_aggregated_ports AS keep', $deletes[0]);
-		$this->assertStringContainsString('keep.row_id', $deletes[0]);
-		$this->assertStringContainsString('agg.row_id', $deletes[0]);
-		$this->assertStringNotContainsString('NOT IN', $deletes[0]);
 	}
 
 	/**
@@ -192,5 +157,16 @@ final class AggregatedPortsUpgradeTest extends TestCase {
 			$this->assertStringNotContainsString('UPDATE mac_track_dot1x SET mac_address', $sql);
 			$this->assertStringNotContainsString('ADD INDEX `port_number`', $sql);
 		}
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testPollerAppendsAggregatedPortsWithoutAnUpsert(): void {
+		$src = file_get_contents(dirname(__DIR__, 2) . '/poller_mactrack.php');
+
+		$this->assertStringContainsString('INSERT INTO mac_track_aggregated_ports', $src);
+		$this->assertStringNotContainsString('ON DUPLICATE KEY UPDATE count_rec', $src,
+			'The aggregated-ports insert must be a plain append, not an upsert');
 	}
 }
