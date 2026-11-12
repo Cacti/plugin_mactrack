@@ -128,7 +128,7 @@ it('splits the scan its own partition and asks for an exchange', function () {
 
 	$plan = mactrack_partition_prepare_scan(MT_PP_DATE);
 
-	expect($plan)->toBe(array('mode' => 'exchange', 'partition' => 's20261112061507', 'reason' => '', 'granularity' => 'scan'));
+	expect($plan)->toBe(array('mode' => 'exchange', 'partition' => 's20261112061507', 'reason' => '', 'granularity' => 'scan', 'scan_date' => '2026-11-12 06:15:07'));
 	expect(mt_pp_ddl())->toBe(array(mactrack_partition_split_sql('s20261112061507', 1794464108)));
 	expect(mt_pp_locks())->toBe(array(1, 1));
 });

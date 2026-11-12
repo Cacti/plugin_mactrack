@@ -132,9 +132,33 @@ it('continues after the last key of the previous page', function () {
 		$last['device_id'],
 	));
 	expect(preg_replace('/\s+/', ' ', $reads[1]['sql']))->toContain(
-		'WHERE port_number > ? OR (port_number = ? AND (scan_date > ? OR (scan_date = ? AND (mac_address > ? OR (mac_address = ? AND device_id > ?)))))'
+		'WHERE (port_number > ? OR (port_number = ? AND (scan_date > ? OR (scan_date = ? AND (mac_address > ? OR (mac_address = ? AND device_id > ?))))))'
 	);
 });
+
+it('copies only one scan date, or only the other dates', function (bool $match, string $where) {
+	$first = array(mt_load_row(1), mt_load_row(2));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', $first);
+	mactrack_test_queue_return('db_fetch_assoc_prepared', array());
+
+	mactrack_ports_load('mac_track_ports', 2, '2026-11-12 06:15:07', $match);
+
+	$reads = mt_load_calls('db_fetch_assoc_prepared');
+	$last  = $first[1];
+	expect($reads[0]['params'])->toBe(array('2026-11-12 06:15:07'));
+	expect(preg_replace('/\s+/', ' ', $reads[0]['sql']))->toContain("FROM mac_track_temp_ports WHERE $where ORDER BY");
+	expect($reads[1]['params'])->toBe(array(
+		'2026-11-12 06:15:07',
+		$last['port_number'], $last['port_number'],
+		$last['scan_date'], $last['scan_date'],
+		$last['mac_address'], $last['mac_address'],
+		$last['device_id'],
+	));
+	expect(preg_replace('/\s+/', ' ', $reads[1]['sql']))->toContain("WHERE $where AND (port_number > ?");
+})->with(array(
+	'this scan'   => array(true, 'scan_date = ?'),
+	'other dates' => array(false, 'scan_date <> ?'),
+));
 
 it('stops after a short page without another read', function () {
 	mactrack_test_queue_return('db_fetch_assoc_prepared', array(mt_load_row(1)));

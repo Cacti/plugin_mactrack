@@ -3459,15 +3459,20 @@ function mactrack_scan_dates_rebuild(): int {
  * mac_address, device_id), so IGNORE only skips rows of a scan that was
  * already loaded; those rows are left as they are.
  *
- * @param string $table Target table: mac_track_ports, or
- *                      mac_track_ports_stage for a partition exchange.
- * @param int    $batch Rows per read and per INSERT.
+ * @param string      $table     Target table: mac_track_ports, or
+ *                               mac_track_ports_stage for a partition
+ *                               exchange.
+ * @param int         $batch     Rows per read and per INSERT.
+ * @param string|null $scan_date Copy only rows of this scan date (with
+ *                               $match true) or only rows of other dates
+ *                               (with $match false); null copies all.
+ * @param bool        $match     See $scan_date.
  *
  * @throws InvalidArgumentException For an unknown table or a batch below 1.
  *
  * @return int Number of temp rows read.
  */
-function mactrack_ports_load(string $table = 'mac_track_ports', int $batch = 1000): int {
+function mactrack_ports_load(string $table = 'mac_track_ports', int $batch = 1000, ?string $scan_date = null, bool $match = true): int {
 	if (!in_array($table, ['mac_track_ports', 'mac_track_ports_stage'], true)) {
 		throw new InvalidArgumentException("Unknown load target '$table'");
 	}
@@ -3480,10 +3485,12 @@ function mactrack_ports_load(string $table = 'mac_track_ports', int $batch = 100
 		'vlan_id', 'vlan_name', 'mac_address', 'vendor_mac', 'ip_address',
 		'port_number', 'port_name', 'scan_date', 'authorized'];
 
+	$filter = $scan_date === null ? [] : [$scan_date];
+	$where  = $scan_date === null ? '' : ($match ? 'scan_date = ?' : 'scan_date <> ?');
 	$select = 'SELECT ' . implode(', ', $columns) . ' FROM mac_track_temp_ports';
 	$order  = ' ORDER BY port_number, scan_date, mac_address, device_id LIMIT ' . $batch;
-	$after  = ' WHERE port_number > ? OR (port_number = ? AND (scan_date > ? OR (scan_date = ?
-		AND (mac_address > ? OR (mac_address = ? AND device_id > ?)))))';
+	$after  = '(port_number > ? OR (port_number = ? AND (scan_date > ? OR (scan_date = ?
+		AND (mac_address > ? OR (mac_address = ? AND device_id > ?))))))';
 	$tuple  = '(' . implode(', ', array_fill(0, count($columns), '?')) . ')';
 	$insert = 'INSERT IGNORE INTO `' . $table . '` (' . implode(', ', $columns) . ') VALUES ';
 
@@ -3492,14 +3499,14 @@ function mactrack_ports_load(string $table = 'mac_track_ports', int $batch = 100
 
 	while (true) {
 		if ($last === null) {
-			$rows = db_fetch_assoc_prepared($select . $order, []);
+			$rows = db_fetch_assoc_prepared($select . ($where !== '' ? " WHERE $where" : '') . $order, $filter);
 		} else {
-			$rows = db_fetch_assoc_prepared($select . $after . $order, [
+			$rows = db_fetch_assoc_prepared($select . ' WHERE ' . ($where !== '' ? "$where AND " : '') . $after . $order, array_merge($filter, [
 				$last['port_number'], $last['port_number'],
 				$last['scan_date'], $last['scan_date'],
 				$last['mac_address'], $last['mac_address'],
 				$last['device_id'],
-			]);
+			]));
 		}
 
 		if (!is_array($rows) || $rows === []) {
