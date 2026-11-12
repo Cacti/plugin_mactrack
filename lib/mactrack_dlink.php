@@ -230,7 +230,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 
 					if ((((convert_dlink_data($brPortIfType) >= 6) &&
 						(convert_dlink_data($brPortIfType) <= 9)) || (convert_dlink_data($brPortIfType) == 117)) &&
-						(!isset($ifInterfaces[$brPortIfIndex]['portLink']))) {
+						empty($ifInterfaces[$brPortIfIndex]['linkPort'])) {
 						// set some defaults
 						$new_port_key_array[$i]['vlan_id']     = get_dlink_vlan_id($port_key['key']);
 						$new_port_key_array[$i]['vlan_name']   = $vlan_names[$new_port_key_array[$i]['vlan_id']];

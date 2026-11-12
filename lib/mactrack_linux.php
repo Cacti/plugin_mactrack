@@ -233,7 +233,7 @@ function get_linux_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_
 
 				if (($brPortIfType >= 6) &&
 					($brPortIfType <= 9) &&
-					(!isset($ifInterfaces[$brPortIfIndex]['portLink']))) {
+					empty($ifInterfaces[$brPortIfIndex]['linkPort'])) {
 					// set some defaults
 					$new_port_key_array[$i]['vlan_id']     = 'N/A';
 					$new_port_key_array[$i]['vlan_name']   = 'N/A';
