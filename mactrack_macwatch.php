@@ -219,7 +219,9 @@ function form_actions(): void {
  */
 function api_mactrack_macw_save($mac_id, $mac_address, $name, $ticket_number, $description, $notify_schedule, $email_addresses): int {
 	$save['mac_id']          = $mac_id;
-	$save['mac_address']     = form_input_validate($mac_address, 'mac_address', '', false, 3);
+	// the poller matches a watch exactly, in the scanners' stored form
+	$mac_address             = mactrack_normalize_mac((string) $mac_address);
+	$save['mac_address']     = form_input_validate($mac_address, 'mac_address', '^[0-9A-F]{12}$', false, 3);
 	$save['name']            = form_input_validate($name, 'name', '', false, 3);
 	$save['ticket_number']   = form_input_validate($ticket_number, 'ticket_number', '', false, 3);
 	$save['description']     = form_input_validate($description, 'description', '', false, 3);
