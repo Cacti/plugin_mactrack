@@ -164,13 +164,12 @@ it('escapes every value the status page prints', function () {
 	}
 });
 
-it('runs OPTIMIZE only on a POST, which Cacti checks for its CSRF token', function () {
+it('runs OPTIMIZE only on a POST, under the scan lock', function () {
 	$src = mt_pr_function_source('mactrack_utilities_optimize_ports');
 
-	$method = strpos($src, "(\$_SERVER['REQUEST_METHOD'] ?? '') !== 'POST'");
-	expect($method)->not->toBeFalse();
-	expect($method)->toBeLessThan(strpos($src, 'OPTIMIZE TABLE mac_track_ports'));
-	expect($src)->toContain('<form method="post" action="mactrack_utilities.php">');
+	expect(mactrack_utilities_may_run('mactrack_utilities_optimize_ports', 'GET'))->toBeFalse();
+	expect(strpos($src, 'mactrack_partition_scan_begin()'))->toBeLessThan(strpos($src, 'OPTIMIZE TABLE mac_track_ports'));
+	expect($src)->toContain('mactrack_partition_scan_end();');
 	expect($src)->not->toContain('form_confirm(');
 	expect($src)->not->toContain("isset_request_var('confirm')");
 });
@@ -181,5 +180,5 @@ it('dispatches the status page and OPTIMIZE from Utilities', function () {
 	expect($src)->toContain("case 'mactrack_partition_status':");
 	expect($src)->toContain("case 'mactrack_utilities_optimize_ports':");
 	expect($src)->toContain("href='mactrack_utilities.php?action=mactrack_partition_status'");
-	expect($src)->toContain("href='mactrack_utilities.php?action=mactrack_utilities_optimize_ports'");
+	expect($src)->toContain("mactrack_utilities_action_link('mactrack_utilities_optimize_ports'");
 });

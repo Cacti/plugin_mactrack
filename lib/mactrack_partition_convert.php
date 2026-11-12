@@ -156,6 +156,16 @@ function mactrack_partition_convert(bool $keep_old = false, ?callable $progress 
 			} elseif (db_table_exists('mac_track_ports_old')) {
 				$result['reason'] = 'mac_track_ports_old is left from an earlier conversion. Drop it, then convert again.';
 			} elseif ((string) db_fetch_cell_prepared("SELECT GET_LOCK('mactrack_scan', 0)") !== '1') {
+				if ((string) read_config_option('mt_partition_converting', true) !== '') {
+					// Another conversion holds the lock; its own result is the
+					// one the status page should show.
+					cacti_log('MACTRACK: Port table conversion not started: another conversion is running.', false, 'MACTRACK');
+
+					$result['reason'] = 'Another conversion is running.';
+
+					return $result;
+				}
+
 				$result['reason'] = 'A scan is running. Convert again when it has finished.';
 			} else {
 				if (!mactrack_partition_lock()) {
