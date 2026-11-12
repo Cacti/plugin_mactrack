@@ -1602,7 +1602,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 					if ((($brPortIfType >= 6 && $brPortIfType <= 9) ||
 						  $brPortIfType == 53 || $brPortIfType == 161) &&
-						(!isset($ifInterfaces[$brPortIfIndex]['portLink']))) {
+						empty($ifInterfaces[$brPortIfIndex]['linkPort'])) {
 						// set some defaults
 						$new_port_key_array[$i]['vlan_id']     = 'N/A';
 						$new_port_key_array[$i]['vlan_name']   = 'N/A';
@@ -1811,10 +1811,11 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 
 		if (cacti_sizeof($port_numbers)) {
 			foreach ($port_numbers as $key => $port_number) {
-				if (($highPort == 0) ||
+				// skip the root port whether or not a port range is set
+				if ((($highPort == 0) ||
 					(($port_number >= $lowPort) &&
-					($port_number <= $highPort) &&
-					($bridge_root_port != $port_number))) {
+					($port_number <= $highPort))) &&
+					($bridge_root_port != $port_number)) {
 					if (!in_array($port_number, $ignore_ports, true)) {
 						if ((@$port_status[$key] == '3') || (@$port_status[$key] == '5')) {
 							$port_key_array[$i]['key']         = $key;
@@ -1993,10 +1994,11 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 		if (cacti_sizeof($port_numbers)) {
 			foreach ($port_numbers as $key => $port_number) {
-				if (($highPort == 0) ||
+				// skip the root port whether or not a port range is set
+				if ((($highPort == 0) ||
 					(($port_number >= $lowPort) &&
-					($port_number <= $highPort) &&
-					($bridge_root_port != $port_number))) {
+					($port_number <= $highPort))) &&
+					($bridge_root_port != $port_number)) {
 					if (!in_array($port_number, $ignore_ports, true)) {
 						if ((isset($port_status[$key]) && $port_status[$key] == '3') || (isset($port_status[$key]) && $port_status[$key] == '5')) {
 							$port_key_array[$i]['key']         = $key;

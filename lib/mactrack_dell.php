@@ -191,10 +191,11 @@ function get_base_dell_dot1qFdb_ports($site, &$device, &$ifInterfaces, $snmp_rea
 
 		if (cacti_sizeof($port_numbers)) {
 			foreach ($port_numbers as $key => $port_number) {
-				if (($highPort == 0) ||
+				// skip the root port whether or not a port range is set
+				if ((($highPort == 0) ||
 					(($port_number >= $lowPort) &&
-					($port_number <= $highPort) &&
-					($bridge_root_port != $port_number))) {
+					($port_number <= $highPort))) &&
+					($bridge_root_port != $port_number)) {
 					if (!in_array($port_number, $ignore_ports, true)) {
 						if ((isset($port_status[$key]) && $port_status[$key] == '3') || (isset($port_status[$key]) && $port_status[$key] == '5')) {
 							$port_key_array[$i]['key']         = $key;
