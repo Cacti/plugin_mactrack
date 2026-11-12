@@ -2968,8 +2968,8 @@ function mactrack_macauth_index(array $entries): array {
  * Reports whether a MAC is a MacAuth entry or starts with one, as
  * db_check_auth() matches it.
  *
- * @param string                            $mac_address The scanned MAC.
- * @param array<int, array<string, true>>   $index       From mactrack_macauth_index().
+ * @param string                          $mac_address The scanned MAC.
+ * @param array<int, array<string, true>> $index       From mactrack_macauth_index().
  *
  * @return bool True when the MAC is authorized.
  */

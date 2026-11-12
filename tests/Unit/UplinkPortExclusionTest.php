@@ -29,28 +29,28 @@ require_once dirname(__DIR__, 2) . '/lib/mactrack_functions.php';
  * address, belong to the rest of the network and are not user ports.
  */
 beforeEach(function () {
-	$GLOBALS['__test_next_returns'] = array();
+	$GLOBALS['__test_next_returns']                           = [];
 	$GLOBALS['__test_config_options']['mt_ignorePorts_delim'] = '-1';
 
-	$this->device = array(
-		'device_id' => 1, 'host_id' => 0, 'site_id' => 1, 'device_name' => 'sw1', 'hostname' => '192.0.2.1',
-		'snmp_readstring' => 'x', 'snmp_version' => 2, 'snmp_username' => '', 'snmp_password' => '',
+	$this->device = [
+		'device_id'          => 1, 'host_id' => 0, 'site_id' => 1, 'device_name' => 'sw1', 'hostname' => '192.0.2.1',
+		'snmp_readstring'    => 'x', 'snmp_version' => 2, 'snmp_username' => '', 'snmp_password' => '',
 		'snmp_auth_protocol' => '', 'snmp_priv_passphrase' => '', 'snmp_priv_protocol' => '',
-		'snmp_context' => '', 'snmp_engine_id' => '', 'snmp_port' => 161, 'snmp_timeout' => 500,
-		'snmp_retries' => 1, 'max_oids' => 10, 'ignorePorts' => '', 'snmp_sysDescr' => '',
-	);
+		'snmp_context'       => '', 'snmp_engine_id' => '', 'snmp_port' => 161, 'snmp_timeout' => 500,
+		'snmp_retries'       => 1, 'max_oids' => 10, 'ignorePorts' => '', 'snmp_sysDescr' => '',
+	];
 
 	$this->walk = function (string $base, array $rows): void {
-		$GLOBALS['__test_snmp_walk'][$base] = array();
+		$GLOBALS['__test_snmp_walk'][$base] = [];
 
 		foreach ($rows as $index => $value) {
-			$GLOBALS['__test_snmp_walk'][$base][] = array('oid' => ltrim($base, '.') . '.' . $index, 'value' => $value);
+			$GLOBALS['__test_snmp_walk'][$base][] = ['oid' => ltrim($base, '.') . '.' . $index, 'value' => $value];
 		}
 	};
 
-	($this->walk)('.1.3.6.1.2.1.17.1.4.1.2', array(1 => '1', 2 => '2'));
+	($this->walk)('.1.3.6.1.2.1.17.1.4.1.2', [1 => '1', 2 => '2']);
 	// both ports up, so the scan reads the bridge tables
-	($this->walk)('.1.3.6.1.2.1.2.2.1.8', array(1 => '1', 2 => '1'));
+	($this->walk)('.1.3.6.1.2.1.2.2.1.8', [1 => '1', 2 => '1']);
 });
 
 afterEach(function () {
@@ -58,23 +58,23 @@ afterEach(function () {
 });
 
 it('skips the root port when no port range is set', function () {
-	($this->walk)('.1.3.6.1.2.1.17.7.1.2.2.1.3', array('1.0.0.0.0.0.1' => '3', '1.0.0.0.0.0.2' => '3'));
-	($this->walk)('.1.3.6.1.2.1.17.7.1.2.2.1.2', array('1.0.0.0.0.0.1' => '1', '1.0.0.0.0.0.2' => '2'));
+	($this->walk)('.1.3.6.1.2.1.17.7.1.2.2.1.3', ['1.0.0.0.0.0.1' => '3', '1.0.0.0.0.0.2' => '3']);
+	($this->walk)('.1.3.6.1.2.1.17.7.1.2.2.1.2', ['1.0.0.0.0.0.1' => '1', '1.0.0.0.0.0.2' => '2']);
 	mactrack_test_queue_return('cacti_snmp_get', '1');
 
-	$ifInterfaces = array(1 => array('ifType' => 6), 2 => array('ifType' => 6));
+	$ifInterfaces = [1 => ['ifType' => 6], 2 => ['ifType' => 6]];
 	$ports        = get_base_dot1qTpFdbEntry_ports('site', $this->device, $ifInterfaces, '', false, 0, 0);
 
-	expect(array_column($ports, 'mac_address'))->toBe(array('000000000002'));
+	expect(array_column($ports, 'mac_address'))->toBe(['000000000002']);
 });
 
 it('skips ports that carry an IP address', function () {
-	($this->walk)('.1.3.6.1.2.1.17.4.3.1.3', array('0.0.0.0.0.1' => '3', '0.0.0.0.0.2' => '3'));
-	($this->walk)('.1.3.6.1.2.1.17.4.3.1.2', array('0.0.0.0.0.1' => '1', '0.0.0.0.0.2' => '2'));
-	($this->walk)('.1.3.6.1.2.1.17.4.3.1.1', array('0.0.0.0.0.1' => "\0\0\0\0\0\1", '0.0.0.0.0.2' => "\0\0\0\0\0\2"));
+	($this->walk)('.1.3.6.1.2.1.17.4.3.1.3', ['0.0.0.0.0.1' => '3', '0.0.0.0.0.2' => '3']);
+	($this->walk)('.1.3.6.1.2.1.17.4.3.1.2', ['0.0.0.0.0.1' => '1', '0.0.0.0.0.2' => '2']);
+	($this->walk)('.1.3.6.1.2.1.17.4.3.1.1', ['0.0.0.0.0.1' => "\0\0\0\0\0\1", '0.0.0.0.0.2' => "\0\0\0\0\0\2"]);
 
-	$ifInterfaces = array(1 => array('ifType' => 6, 'linkPort' => true), 2 => array('ifType' => 6, 'linkPort' => ''));
+	$ifInterfaces = [1 => ['ifType' => 6, 'linkPort' => true], 2 => ['ifType' => 6, 'linkPort' => '']];
 	$ports        = get_base_dot1dTpFdbEntry_ports('site', $this->device, $ifInterfaces, '', false, 0, 0);
 
-	expect(array_column($ports, 'mac_address'))->toBe(array('000000000002'));
+	expect(array_column($ports, 'mac_address'))->toBe(['000000000002']);
 });

@@ -31,12 +31,12 @@ if (!function_exists('mactrack_parse_arpwatch_line')) {
 
 it('reads the MAC, IP and host name from an arp.dat line', function () {
 	expect(mactrack_parse_arpwatch_line("0:11:2a:33:44:5\t192.0.2.10\t1700000000\thost.example\n", ''))
-		->toBe(array('mac' => '00112A334405', 'ip' => '192.0.2.10', 'dns' => 'host.example'));
+		->toBe(['mac' => '00112A334405', 'ip' => '192.0.2.10', 'dns' => 'host.example']);
 });
 
 it('keeps an entry without a host name', function () {
 	expect(mactrack_parse_arpwatch_line("0:11:22:33:44:55\t192.0.2.11\t1700000000\n", ''))
-		->toBe(array('mac' => '001122334455', 'ip' => '192.0.2.11', 'dns' => ''));
+		->toBe(['mac' => '001122334455', 'ip' => '192.0.2.11', 'dns' => '']);
 });
 
 it('keeps the host name when an interface follows it', function () {
@@ -45,4 +45,4 @@ it('keeps the host name when an interface follows it', function () {
 
 it('skips blank and malformed lines', function (string $line) {
 	expect(mactrack_parse_arpwatch_line($line, ''))->toBeNull();
-})->with(array('blank' => "\n", 'no ip' => "0:11:22:33:44:55\n", 'short mac' => "0:11:22\t192.0.2.1\n", 'not hex' => "zz:11:22:33:44:55\t192.0.2.1\n"));
+})->with(['blank' => "\n", 'no ip' => "0:11:22:33:44:55\n", 'short mac' => "0:11:22\t192.0.2.1\n", 'not hex' => "zz:11:22:33:44:55\t192.0.2.1\n"]);
