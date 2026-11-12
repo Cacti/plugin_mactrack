@@ -17,16 +17,19 @@
 /**
  * Regression coverage for the mac_track_aggregated_ports upgrade crash.
  *
- * The schema declares `port_number` as a UNIQUE composite key, but older
- * installs carried it as a non-unique index that let duplicate aggregated
- * rows accumulate. When a version bump re-entered the install/upgrade path,
- * api_plugin_db_table_create() tried to convert that index to UNIQUE and
- * aborted with "Duplicate entry ... for key 'port_number'", cascading into a
- * fatal "could not update table" plugin error on every Cacti page load.
+ * The schema used to declare `port_number` as a UNIQUE composite key, but
+ * older installs carried it as a non-unique index that let duplicate
+ * aggregated rows accumulate. When a version bump re-entered the upgrade
+ * path, api_plugin_db_table_create() tried to apply the UNIQUE key and
+ * aborted with "Duplicate entry ... for key 'port_number'", cascading into
+ * a fatal "could not update table" plugin error on every Cacti page load.
  *
- * mactrack_dedupe_aggregated_ports() now prunes the duplicates before the
- * unique key is applied, and mactrack_database_upgrade() no longer drops and
- * recreates that key as a non-unique index.
+ * The fix makes `port_number` a plain (non-unique) index and widens `row_id`
+ * to bigint unsigned, so the upgrade no longer rejects the duplicate rows.
+ * mactrack_database_upgrade() drops the legacy UNIQUE index (db_update_table
+ * reconciles indexes by column set only and will not do it on its own) and
+ * mactrack_dedupe_aggregated_ports() prunes the duplicates the non-unique
+ * index now tolerates.
  */
 final class AggregatedPortsUpgradeTest extends TestCase {
 	/**
@@ -42,6 +45,19 @@ final class AggregatedPortsUpgradeTest extends TestCase {
 	 */
 	private function sqlCalls(): array {
 		return array_column($GLOBALS['__test_db_calls'], 'sql');
+	}
+
+	/**
+	 * Prime the stubs mactrack_database_upgrade() needs to run cleanly: a
+	 * seeded Default site (so the trailing seed is a no-op) and the port_number
+	 * column type lookup on mac_track_ips.
+	 *
+	 * @return void
+	 */
+	private function primeUpgradeStubs(): void {
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'COUNT(*) FROM mac_track_sites', '1');
+		mactrack_test_queue_return_for('db_fetch_assoc', 'SHOW COLUMNS FROM mac_track_ips',
+			array(array('Field' => 'port_number', 'Type' => 'varchar(30)')));
 	}
 
 	/**
@@ -61,66 +77,98 @@ final class AggregatedPortsUpgradeTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function testDedupeNormalizesAndPrunesDuplicatesWhenPresent(): void {
+	public function testDedupePrunesDuplicatesWithASelfJoinNotInSubquery(): void {
 		// db_table_exists() defaults to true in the stub environment.
 		mactrack_dedupe_aggregated_ports();
 
-		$calls = $this->sqlCalls();
-
-		$normalized = array_filter($calls, static fn ($sql) =>
-			strpos($sql, 'UPDATE mac_track_aggregated_ports') !== false &&
-			strpos($sql, 'REPLACE') !== false
-		);
-		$this->assertCount(1, $normalized, 'MAC separators should be stripped exactly once');
-
-		$deletes = array_values(array_filter($calls, static fn ($sql) =>
-			strpos($sql, 'DELETE FROM mac_track_aggregated_ports') !== false
+		$deletes = array_values(array_filter($this->sqlCalls(), static fn ($sql) =>
+			strpos($sql, 'DELETE agg') !== false &&
+			strpos($sql, 'mac_track_aggregated_ports') !== false
 		));
 		$this->assertCount(1, $deletes, 'Duplicate rows should be pruned exactly once');
-		$this->assertStringContainsString('MIN(row_id)', $deletes[0]);
+
+		// A self-join keyed on the full tuple, keeping the lowest row_id; not a
+		// NOT IN / derived-table subquery.
+		$this->assertStringContainsString('INNER JOIN mac_track_aggregated_ports AS keep', $deletes[0]);
+		$this->assertStringContainsString('keep.row_id', $deletes[0]);
+		$this->assertStringContainsString('agg.row_id', $deletes[0]);
+		$this->assertStringNotContainsString('NOT IN', $deletes[0]);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testAggregatedPortsSchemaIsNonUniqueWithBigintRowId(): void {
+		$src = file_get_contents(dirname(__DIR__, 2) . '/includes/database.php');
+
 		$this->assertStringContainsString(
-			'GROUP BY port_number, mac_address, ip_address, device_id, site_id, vlan_id, authorized',
-			$deletes[0]
+			"['name' => 'row_id', 'unsigned' => true, 'type' => 'bigint(20)'",
+			$src,
+			'row_id should be bigint unsigned'
+		);
+		$this->assertStringContainsString(
+			"\$data['keys'][]        = ['name' => 'port_number'",
+			$src,
+			'port_number should be a plain (non-unique) index'
+		);
+		$this->assertStringNotContainsString(
+			"\$data['unique_keys'][] = ['name' => 'port_number'",
+			$src,
+			'port_number must no longer be a unique key'
 		);
 	}
 
 	/**
 	 * @return void
 	 */
-	public function testSetupDatabaseDedupesBeforeCreatingTheTable(): void {
-		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'COUNT(*) FROM mac_track_sites', '1');
-
-		mactrack_setup_database(false);
-
-		$deletes = array_filter($this->sqlCalls(), static fn ($sql) =>
-			strpos($sql, 'DELETE FROM mac_track_aggregated_ports') !== false
-		);
-		$this->assertCount(1, $deletes, 'Setup must prune duplicates before applying the unique key');
-	}
-
-	/**
-	 * @return void
-	 */
-	public function testUpgradeNeverRecreatesThePortNumberIndex(): void {
-		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'COUNT(*) FROM mac_track_sites', '1');
-		mactrack_test_queue_return_for('db_fetch_assoc', 'SHOW COLUMNS FROM mac_track_ips',
-			array(array('Field' => 'port_number', 'Type' => 'varchar(30)')));
+	public function testUpgradeReaddsPortNumberAsAPlainIndex(): void {
+		$this->primeUpgradeStubs();
 
 		mactrack_database_upgrade();
 
+		$adds = array_values(array_filter($this->sqlCalls(), static fn ($sql) =>
+			strpos($sql, 'ADD INDEX `port_number`') !== false
+		));
+		$this->assertCount(1, $adds, 'The port_number index should be re-added');
+		$this->assertStringNotContainsString('UNIQUE', $adds[0], 'The re-added index must be non-unique');
+
 		foreach ($this->sqlCalls() as $sql) {
-			$this->assertStringNotContainsString('DROP INDEX port_number', $sql);
-			$this->assertStringNotContainsString('ADD INDEX `port_number`', $sql);
+			$this->assertStringNotContainsString('ADD UNIQUE INDEX `port_number`', $sql);
 		}
 	}
 
 	/**
 	 * @return void
 	 */
+	public function testUpgradeDropsAnExistingPortNumberIndexBeforeReadding(): void {
+		$this->primeUpgradeStubs();
+
+		// Make mactrack_db_key_exists() report an existing port_number index.
+		mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_aggregated_ports'",
+			array(array('name' => 'mac_track_aggregated_ports')));
+		mactrack_test_queue_return_for('db_fetch_assoc', 'SHOW INDEXES FROM mac_track_aggregated_ports',
+			array(array('Key_name' => 'port_number')));
+
+		mactrack_database_upgrade();
+
+		$calls = $this->sqlCalls();
+
+		$drops = array_filter($calls, static fn ($sql) =>
+			strpos($sql, 'DROP INDEX port_number') !== false
+		);
+		$this->assertCount(1, $drops, 'An existing port_number index should be dropped first');
+
+		$adds = array_filter($calls, static fn ($sql) =>
+			strpos($sql, 'ADD INDEX `port_number`') !== false
+		);
+		$this->assertCount(1, $adds, 'The index should then be re-added as a plain index');
+	}
+
+	/**
+	 * @return void
+	 */
 	public function testUpgradeStripsMacSeparatorsOnceThenSkips(): void {
-		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'COUNT(*) FROM mac_track_sites', '1');
-		mactrack_test_queue_return_for('db_fetch_assoc', 'SHOW COLUMNS FROM mac_track_ips',
-			array(array('Field' => 'port_number', 'Type' => 'varchar(30)')));
+		$this->primeUpgradeStubs();
 
 		$this->assertNotSame('on', read_config_option('mt_mac_separators_stripped'));
 
@@ -134,14 +182,15 @@ final class AggregatedPortsUpgradeTest extends TestCase {
 		$this->assertCount(1, $firstPass, 'Legacy MAC normalization should run on the first upgrade');
 
 		// A later upgrade with the flag already set must not re-run the heavy
-		// table-wide normalization UPDATEs.
+		// table-wide normalization UPDATEs or re-index the table.
 		$GLOBALS['__test_db_calls'] = array();
-		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'COUNT(*) FROM mac_track_sites', '1');
+		$this->primeUpgradeStubs();
 
 		mactrack_database_upgrade();
 
 		foreach ($this->sqlCalls() as $sql) {
 			$this->assertStringNotContainsString('UPDATE mac_track_dot1x SET mac_address', $sql);
+			$this->assertStringNotContainsString('ADD INDEX `port_number`', $sql);
 		}
 	}
 }

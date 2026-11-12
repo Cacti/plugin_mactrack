@@ -689,13 +689,15 @@ function mactrack_database_upgrade(): void {
 		db_fetch_cell("UPDATE plugin_realms set display='Mactrack Administrator' WHERE plugin = 'mactrack' and display='Device Tracking Administrator'");
 	}
 
-	// 4.9: strip MAC-address separators from the legacy data set. The unique
-	// `port_number` key on mac_track_aggregated_ports is owned by
-	// mactrack_setup_database()/api_plugin_db_table_create() (which also prunes
-	// duplicate rows via mactrack_dedupe_aggregated_ports before applying it);
-	// it must not be dropped or recreated here as a non-unique index. Gated by
-	// a persistent flag so the bulk normalization UPDATEs run only once.
+	// 4.9/4.11: normalize the legacy MAC-address formatting, convert the
+	// aggregated-ports `port_number` key from the old UNIQUE index to a plain
+	// index (enforcing uniqueness crashed upgrades on installs holding
+	// duplicate rows), and prune the duplicates that index now tolerates.
+	// db_update_table() reconciles indexes by column set only, so it never
+	// drops a UNIQUE key on its own; do it explicitly here. Gated by a
+	// persistent flag so the table-wide rewrites run only once.
 	if (read_config_option('mt_mac_separators_stripped') != 'on') {
+		db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(REPLACE(mac_address, ':', ''), '-', '')");
 		db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(REPLACE(mac_address, ':', ''), '-', '')");
 		db_execute("UPDATE mac_track_ips SET mac_address = REPLACE(REPLACE(mac_address, ':', ''), '-', '')");
 		db_execute("UPDATE mac_track_macauth SET mac_address = REPLACE(REPLACE(mac_address, ':', ''), '-', '')");
@@ -704,6 +706,16 @@ function mactrack_database_upgrade(): void {
 		db_execute("UPDATE mac_track_temp_ports SET mac_address = REPLACE(REPLACE(mac_address, ':', ''), '-', '')");
 		db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(REPLACE(mac_address, ':', ''), '-', '')");
 		db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(REPLACE(vendor_mac, ':', ''), '-', '')");
+
+		// Drop any existing `port_number` index (UNIQUE or not) and re-add it
+		// as a plain composite index.
+		if (mactrack_db_key_exists('mac_track_aggregated_ports', 'port_number')) {
+			db_execute('ALTER TABLE mac_track_aggregated_ports DROP INDEX port_number');
+		}
+
+		db_execute('ALTER TABLE mac_track_aggregated_ports ADD INDEX `port_number` (`port_number`, `mac_address`, `ip_address`, `device_id`, `site_id`, `vlan_id`, `authorized`)');
+
+		mactrack_dedupe_aggregated_ports();
 
 		set_config_option('mt_mac_separators_stripped', 'on');
 	}
@@ -929,18 +941,19 @@ function mactrack_retry_default_site(): bool {
 }
 
 /**
- * Normalizes MAC-address formatting and removes duplicate rows from
- * mac_track_aggregated_ports so the unique `port_number` key can be
- * applied cleanly.
+ * Removes duplicate rows from mac_track_aggregated_ports, keeping the
+ * lowest row_id per (port_number, mac_address, ip_address, device_id,
+ * site_id, vlan_id, authorized) tuple.
  *
- * Older schemas carried `port_number` as a non-unique index, which let
- * duplicate aggregated rows accumulate. Converting that index to the
- * UNIQUE key the current schema expects fails with a duplicate-entry
- * error until those rows are pruned, which previously aborted the whole
- * upgrade (and every Cacti page load that re-entered it).
+ * `port_number` is a plain (non-unique) index, so nothing stops duplicate
+ * aggregated rows from accumulating; this one-time cleanup prunes the rows
+ * an earlier non-unique schema left behind. A self-join DELETE lets the
+ * composite index drive the match rather than materializing a large
+ * NOT IN set, which scales better on big tables.
  *
  * Safe to call repeatedly: it is a no-op when the table is absent or
- * already deduplicated.
+ * already deduplicated. Callers should normalize MAC formatting first so
+ * rows that differ only by separators collapse into genuine duplicates.
  *
  * @return void
  */
@@ -949,21 +962,17 @@ function mactrack_dedupe_aggregated_ports(): void {
 		return;
 	}
 
-	// Strip separators first so rows that differ only by MAC formatting
-	// collapse into genuine duplicates.
-	db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(REPLACE(mac_address, ':', ''), '-', '')");
-
-	// Keep the lowest row_id per unique tuple and delete the rest. The
-	// survivor set is wrapped in a derived table so MySQL/MariaDB
-	// materializes it before deleting from the same table.
-	db_execute('DELETE FROM mac_track_aggregated_ports
-		WHERE row_id NOT IN (
-			SELECT keep_id FROM (
-				SELECT MIN(row_id) AS keep_id
-				FROM mac_track_aggregated_ports
-				GROUP BY port_number, mac_address, ip_address, device_id, site_id, vlan_id, authorized
-			) keep
-		)');
+	db_execute('DELETE agg
+		FROM mac_track_aggregated_ports AS agg
+		INNER JOIN mac_track_aggregated_ports AS keep
+			ON  agg.port_number = keep.port_number
+			AND agg.mac_address = keep.mac_address
+			AND agg.ip_address  = keep.ip_address
+			AND agg.device_id   = keep.device_id
+			AND agg.site_id     = keep.site_id
+			AND agg.vlan_id     = keep.vlan_id
+			AND agg.authorized  = keep.authorized
+			AND keep.row_id     < agg.row_id');
 }
 
 /**
@@ -981,14 +990,8 @@ function mactrack_dedupe_aggregated_ports(): void {
  *              false when seeding failed.
  */
 function mactrack_setup_database(bool $notify_seed_failure = false): bool {
-	// Prune duplicate aggregated-port rows before api_plugin_db_table_create()
-	// (re)applies the unique `port_number` key; otherwise the ALTER aborts with
-	// a duplicate-entry error on installs still carrying the legacy non-unique
-	// index, which cascades into a fatal "could not update table" plugin error.
-	mactrack_dedupe_aggregated_ports();
-
 	$data                  = [];
-	$data['columns'][]     = ['name' => 'row_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
+	$data['columns'][]     = ['name' => 'row_id', 'unsigned' => true, 'type' => 'bigint(20)', 'NULL' => false, 'auto_increment' => true];
 	$data['columns'][]     = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
 	$data['columns'][]     = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
 	$data['columns'][]     = ['name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => ''];
@@ -1007,7 +1010,7 @@ function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 	$data['columns'][]     = ['name' => 'active_last', 'unsigned' => true, 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0'];
 	$data['columns'][]     = ['name' => 'authorized', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false, 'default' => '0'];
 	$data['primary']       = 'row_id';
-	$data['unique_keys'][] = ['name' => 'port_number', 'columns' => 'port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized'];
+	$data['keys'][]        = ['name' => 'port_number', 'columns' => 'port_number`,`mac_address`,`ip_address`,`device_id`,`site_id`,`vlan_id`,`authorized'];
 	$data['keys'][]        = ['name' => 'site_id', 'columns' => 'site_id'];
 	$data['keys'][]        = ['name' => 'device_name', 'columns' => 'device_name'];
 	$data['keys'][]        = ['name' => 'mac', 'columns' => 'mac_address'];
