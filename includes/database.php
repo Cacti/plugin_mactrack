@@ -932,9 +932,11 @@ function mactrack_rebuild_aggregated_ports(): bool {
 			mac_address, vendor_mac, ip_address, dns_hostname, port_number, port_name,
 			date_last, first_scan_date, count_rec, active_last, authorized';
 
-		// REPLACE strips both separators from the stored MAC address.
+		// REPLACE strips both separators from the stored MAC address. Before
+		// 4.9 vendor_mac was its first eight characters, '00:11:22', which no
+		// OUI matches now, so derive it from the stripped address.
 		$select_columns = "site_id, device_id, hostname, device_name, vlan_id, vlan_name,
-			REPLACE(REPLACE(mac_address, ':', ''), '-', ''), vendor_mac, ip_address, dns_hostname, port_number, port_name,
+			REPLACE(REPLACE(mac_address, ':', ''), '-', ''), SUBSTRING(REPLACE(REPLACE(mac_address, ':', ''), '-', ''), 1, 6), ip_address, dns_hostname, port_number, port_name,
 			date_last, first_scan_date, count_rec, active_last, authorized";
 
 		// (c + d) Copy each distinct scan date in turn, merging normalized
