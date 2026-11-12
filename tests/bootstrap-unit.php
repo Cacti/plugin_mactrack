@@ -177,7 +177,31 @@ if (!function_exists('db_fetch_assoc_prepared')) {
 	function db_fetch_assoc_prepared($sql, $params = array()) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_assoc_prepared', 'sql' => $sql, 'params' => $params);
 
-		return mactrack_test_next_return('db_fetch_assoc_prepared', array());
+		return mactrack_test_next_return('db_fetch_assoc_prepared', array(), $sql);
+	}
+}
+
+if (!function_exists('db_begin_transaction')) {
+	function db_begin_transaction($db_conn = false) {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_begin_transaction', 'sql' => 'BEGIN', 'params' => array());
+
+		return mactrack_test_next_return('db_begin_transaction', true);
+	}
+}
+
+if (!function_exists('db_commit_transaction')) {
+	function db_commit_transaction($db_conn = false) {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_commit_transaction', 'sql' => 'COMMIT', 'params' => array());
+
+		return mactrack_test_next_return('db_commit_transaction', true);
+	}
+}
+
+if (!function_exists('db_rollback_transaction')) {
+	function db_rollback_transaction($db_conn = false) {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_rollback_transaction', 'sql' => 'ROLLBACK', 'params' => array());
+
+		return mactrack_test_next_return('db_rollback_transaction', true);
 	}
 }
 
@@ -193,7 +217,7 @@ if (!function_exists('db_fetch_row_prepared')) {
 	function db_fetch_row_prepared($sql, $params = array()) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_row_prepared', 'sql' => $sql, 'params' => $params);
 
-		return mactrack_test_next_return('db_fetch_row_prepared', array());
+		return mactrack_test_next_return('db_fetch_row_prepared', array(), $sql);
 	}
 }
 

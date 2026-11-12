@@ -212,7 +212,7 @@ function mactrack_realms_are_stale(): bool {
  *                       locate library files to include.
  */
 function mactrack_check_upgrade(): void {
-	global $config;
+	global $config, $database_default;
 
 	$files = ['index.php', 'plugins.php', 'mactrack_devices.php'];
 
@@ -230,11 +230,39 @@ function mactrack_check_upgrade(): void {
 
 	$version_changed = !cacti_sizeof($old) || $current != $old['version'];
 
+	// Every page load that sees the old version would otherwise run the
+	// upgrade at once and race on the same ALTERs. One request takes the
+	// lock and upgrades; the others skip this hook until it is recorded.
+	// The lock is session-scoped, so it is freed if the request dies.
+	$upgrade_lock   = 'mactrack.upgrade.' . sha1((string) $database_default);
+	$upgrade_locked = false;
+
+	if ($version_changed) {
+		if ((string) db_fetch_cell_prepared('SELECT GET_LOCK(?, ?)', [$upgrade_lock, 0]) !== '1') {
+			return;
+		}
+
+		$upgrade_locked = true;
+
+		// Another request may have finished the upgrade before the lock was free.
+		if (cacti_sizeof($old) && (string) db_fetch_cell_prepared('SELECT version FROM plugin_config WHERE directory = ?', ['mactrack']) === (string) $current) {
+			$version_changed = false;
+		}
+	}
+
 	// A realm file list can drift from the code without a version bump (the
 	// Dashboard was added that way). Repair only the realms in that case; the
 	// full upgrade below rebuilds indexes and rewrites large tables.
 	if (!$version_changed && in_array((int) $old['status'], [1, 4], true) && mactrack_realms_are_stale()) {
 		mactrack_install_realms(false);
+	}
+
+	// Merge duplicate aggregated rows before plugin_mactrack_install()
+	// refreshes the table: Cacti cannot restore the unique key while they
+	// exist. Also runs without a version change, for installs that recorded
+	// the new version after a failed refresh.
+	if (cacti_sizeof($old) && in_array((int) $old['status'], [1, 4], true)) {
+		mactrack_repair_aggregated_ports_key();
 	}
 
 	if ($version_changed) {
@@ -292,6 +320,10 @@ function mactrack_check_upgrade(): void {
 			version = ?
 			WHERE id = ?',
 			[$info['longname'], $info['author'], $info['homepage'], $info['version'], $id]);
+	}
+
+	if ($upgrade_locked) {
+		db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [$upgrade_lock]);
 	}
 
 	mactrack_retry_default_site();

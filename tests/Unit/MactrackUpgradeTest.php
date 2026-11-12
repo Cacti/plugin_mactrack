@@ -35,6 +35,8 @@ it('runs the upgrade housekeeping and prune on a version drift', function () {
 	mactrack_test_queue_return('db_fetch_row', array('version' => '1.0.0', 'status' => 0));
 	// Permission realms already present -> the realm-insert branch is skipped.
 	mactrack_test_queue_return('db_fetch_cell', '1');
+	// This request wins the upgrade lock.
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK', '1');
 
 	// Sandbox base_path (with empty include stubs + a minimal INFO) so the
 	// upgrade-time prune runs against a throwaway tree, never the real checkout.

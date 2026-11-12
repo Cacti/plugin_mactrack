@@ -689,16 +689,16 @@ function mactrack_database_upgrade(): void {
 		db_fetch_cell("UPDATE plugin_realms set display='Mactrack Administrator' WHERE plugin = 'mactrack' and display='Device Tracking Administrator'");
 	}
 
-	// 4.9
-	$keys = db_fetch_assoc('SHOW INDEXES FROM mac_track_aggregated_ports WHERE KEY_NAME="port_number"');
-
-	if ($keys != 7) {
-		db_execute('ALTER TABLE mac_track_aggregated_ports DROP INDEX port_number');
+	// 4.9: MAC addresses are stored without separators. Stripping them can
+	// turn two aggregated rows into one key, so the unique key is dropped
+	// first and rebuilt, duplicates merged, by the repair call below. Run once.
+	if (read_config_option('mt_mac_separators_removed', true) != 'on') {
+		if (mactrack_db_key_exists('mac_track_aggregated_ports', 'port_number')) {
+			db_execute('ALTER TABLE mac_track_aggregated_ports DROP INDEX port_number');
+		}
 
 		db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, ':', '')");
 		db_execute("UPDATE mac_track_aggregated_ports SET mac_address = REPLACE(mac_address, '-', '')");
-
-		db_execute('ALTER TABLE mac_track_aggregated_ports ADD INDEX `port_number` (`port_number`, `mac_address`, `ip_address`, `device_id`, `site_id`, `vlan_id`, `authorized`)');
 
 		db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, ':', '')");
 		db_execute("UPDATE mac_track_dot1x SET mac_address = REPLACE(mac_address, '-', '')");
@@ -722,10 +722,151 @@ function mactrack_database_upgrade(): void {
 		db_execute("UPDATE mac_track_arp SET mac_address = REPLACE(mac_address, '-', '')");
 
 		db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(vendor_mac, ':', '')");
+
+		set_config_option('mt_mac_separators_removed', 'on');
+	}
+
+	mactrack_repair_aggregated_ports_key();
+
+	// 4.11: the poller's INSERT ... ON DUPLICATE KEY UPDATE consumes an
+	// auto-increment value for every row it offers, even ones it merges, so
+	// an int(10) row_id can run out on large installs. Cacti cores before
+	// 1.2.32 do not refresh existing tables, so widen it here.
+	$row_id = db_fetch_row_prepared('SHOW COLUMNS FROM mac_track_aggregated_ports LIKE ?', ['row_id']);
+
+	if (cacti_sizeof($row_id) && stripos($row_id['Type'], 'bigint') === false) {
+		db_execute_prepared('ALTER TABLE mac_track_aggregated_ports MODIFY COLUMN row_id bigint(20) unsigned NOT NULL auto_increment');
 	}
 
 	mactrack_fix_aruba_oscx_device_type_functions();
 	mactrack_ensure_default_site();
+}
+
+/**
+ * Returns the ordered columns of the mac_track_aggregated_ports
+ * `port_number` unique key. The poller's ON DUPLICATE KEY UPDATE
+ * aggregation only merges scans while this key is unique.
+ *
+ * @return array<int, string>
+ */
+function mactrack_aggregated_ports_key_columns(): array {
+	return ['port_number', 'mac_address', 'ip_address', 'device_id', 'site_id', 'vlan_id', 'authorized'];
+}
+
+/**
+ * Checks whether mac_track_aggregated_ports has its `port_number` key as a
+ * unique index over exactly the expected columns.
+ *
+ * @return bool
+ */
+function mactrack_aggregated_ports_key_is_unique(): bool {
+	$rows = db_fetch_assoc_prepared('SHOW INDEX FROM mac_track_aggregated_ports WHERE Key_name = ?', ['port_number']);
+
+	if (!cacti_sizeof($rows)) {
+		return false;
+	}
+
+	$columns = [];
+
+	foreach ($rows as $row) {
+		if ((int) $row['Non_unique'] !== 0) {
+			return false;
+		}
+
+		$columns[(int) $row['Seq_in_index']] = $row['Column_name'];
+	}
+
+	ksort($columns);
+
+	return array_values($columns) === mactrack_aggregated_ports_key_columns();
+}
+
+/**
+ * Restores the mac_track_aggregated_ports `port_number` unique key.
+ *
+ * The 4.9 upgrade recreated it as a plain index, so each poller pass
+ * inserted a new row instead of updating the existing one, and the
+ * Cacti table refresh then fails with a duplicate-entry error. This
+ * merges each duplicate group into its newest row (summed count_rec,
+ * earliest first_scan_date, latest date_last), deletes the rest, and
+ * rebuilds the key as UNIQUE. An advisory lock keeps concurrent page
+ * loads from running it twice.
+ *
+ * @return bool True if the key is unique afterwards or the table does
+ *              not exist yet, false if the repair did not complete.
+ */
+function mactrack_repair_aggregated_ports_key(): bool {
+	global $database_default;
+
+	if (!mactrack_db_table_exists('mac_track_aggregated_ports') || mactrack_aggregated_ports_key_is_unique()) {
+		return true;
+	}
+
+	$lock_name = 'mactrack.aggregated.' . sha1((string) $database_default);
+
+	if ((string) db_fetch_cell_prepared('SELECT GET_LOCK(?, ?)', [$lock_name, 0]) !== '1') {
+		return false;
+	}
+
+	try {
+		// Another request may have finished the repair before the lock was free.
+		if (mactrack_aggregated_ports_key_is_unique()) {
+			return true;
+		}
+
+		$key_columns = mactrack_aggregated_ports_key_columns();
+		$group_by    = implode(', ', $key_columns);
+		$join        = implode(' AND ', array_map(static fn ($c) => "a.$c = d.$c", $key_columns));
+
+		$merge = db_begin_transaction()
+			&& db_execute_prepared("UPDATE mac_track_aggregated_ports AS a
+				INNER JOIN (
+					SELECT MAX(row_id) AS row_id, SUM(count_rec) AS count_rec,
+					MIN(first_scan_date) AS first_scan_date, MAX(date_last) AS date_last,
+					MAX(active_last) AS active_last
+					FROM mac_track_aggregated_ports
+					GROUP BY $group_by
+					HAVING COUNT(*) > 1
+				) AS d
+				ON a.row_id = d.row_id
+				SET a.count_rec = d.count_rec, a.first_scan_date = d.first_scan_date,
+				a.date_last = d.date_last, a.active_last = d.active_last")
+			&& db_execute_prepared("DELETE a FROM mac_track_aggregated_ports AS a
+				INNER JOIN (
+					SELECT MAX(row_id) AS keep_id, $group_by
+					FROM mac_track_aggregated_ports
+					GROUP BY $group_by
+					HAVING COUNT(*) > 1
+				) AS d
+				ON $join
+				AND a.row_id < d.keep_id")
+			&& db_commit_transaction();
+
+		if (!$merge) {
+			db_rollback_transaction();
+			cacti_log('MACTRACK: Could not merge duplicate mac_track_aggregated_ports rows; the unique key was not restored', false, 'SYSTEM');
+
+			return false;
+		}
+
+		$add = 'ADD UNIQUE INDEX `port_number` (`' . implode('`, `', $key_columns) . '`)';
+
+		if (mactrack_db_key_exists('mac_track_aggregated_ports', 'port_number')) {
+			$add = 'DROP INDEX `port_number`, ' . $add;
+		}
+
+		if (!db_execute_prepared('ALTER TABLE mac_track_aggregated_ports ' . $add)) {
+			cacti_log('MACTRACK: Could not restore the mac_track_aggregated_ports unique key', false, 'SYSTEM');
+
+			return false;
+		}
+
+		cacti_log('MACTRACK: Restored the mac_track_aggregated_ports unique key', false, 'SYSTEM');
+
+		return true;
+	} finally {
+		db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [$lock_name]);
+	}
 }
 
 /**
@@ -960,7 +1101,7 @@ function mactrack_retry_default_site(): bool {
  */
 function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 	$data                  = [];
-	$data['columns'][]     = ['name' => 'row_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'auto_increment' => true];
+	$data['columns'][]     = ['name' => 'row_id', 'unsigned' => true, 'type' => 'bigint(20)', 'NULL' => false, 'auto_increment' => true];
 	$data['columns'][]     = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
 	$data['columns'][]     = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
 	$data['columns'][]     = ['name' => 'hostname', 'type' => 'varchar(40)', 'NULL' => false, 'default' => ''];
