@@ -26,17 +26,17 @@ beforeAll(function () {
 });
 
 beforeEach(function () {
-	$GLOBALS['__test_db_calls']        = array();
-	$GLOBALS['__test_next_returns']    = array();
-	$GLOBALS['__test_matched_returns'] = array();
-	$GLOBALS['__test_config_options']  = array();
-	$GLOBALS['__test_cacti_log']       = array();
+	$GLOBALS['__test_db_calls']        = [];
+	$GLOBALS['__test_next_returns']    = [];
+	$GLOBALS['__test_matched_returns'] = [];
+	$GLOBALS['__test_config_options']  = [];
+	$GLOBALS['__test_cacti_log']       = [];
 });
 
 /**
  * Returns the recorded database calls, optionally filtered to one function; with no filter, cacti_log entries are excluded.
  *
- * @param string $fn Function name to keep, or an empty string for all non-log calls.
+ * @param  string $fn Function name to keep, or an empty string for all non-log calls.
  * @return array
  */
 function mt_scan_dates_calls(string $fn = ''): array {
@@ -48,7 +48,7 @@ function mt_scan_dates_calls(string $fn = ''): array {
 /**
  * Returns the recorded non-log database calls whose SQL contains the fragment, case-insensitively.
  *
- * @param string $fragment SQL substring to look for.
+ * @param  string $fragment SQL substring to look for.
  * @return array
  */
 function mt_scan_dates_sql_matching(string $fragment): array {
@@ -60,12 +60,12 @@ function mt_scan_dates_sql_matching(string $fragment): array {
 /**
  * Builds the PARTITION_NAME rows a partition-listing query would return.
  *
- * @param array $names Partition names.
+ * @param  array $names Partition names.
  * @return array
  */
 function mt_scan_dates_partition_rows(array $names): array {
 	return array_map(function ($name) {
-		return array('PARTITION_NAME' => $name);
+		return ['PARTITION_NAME' => $name];
 	}, $names);
 }
 
@@ -73,7 +73,7 @@ it('does not record a scan that collected no rows', function () {
 	mactrack_test_queue_return('db_fetch_cell', false);
 
 	expect(mactrack_scan_dates_record('2026-11-11 10:00:00'))->toBeFalse();
-	expect(mt_scan_dates_calls('db_execute_prepared'))->toBe(array());
+	expect(mt_scan_dates_calls('db_execute_prepared'))->toBe([]);
 });
 
 it('records the scan date once with INSERT IGNORE', function () {
@@ -84,8 +84,8 @@ it('records the scan date once with INSERT IGNORE', function () {
 	$writes = mt_scan_dates_calls('db_execute_prepared');
 	expect($writes)->toHaveCount(1);
 	expect($writes[0]['sql'])->toContain('INSERT IGNORE INTO mac_track_scan_dates');
-	expect($writes[0]['params'])->toBe(array('2026-11-11 10:00:00'));
-	expect(mt_scan_dates_sql_matching('mac_track_ports'))->toBe(array());
+	expect($writes[0]['params'])->toBe(['2026-11-11 10:00:00']);
+	expect(mt_scan_dates_sql_matching('mac_track_ports'))->toBe([]);
 });
 
 it('prunes scan dates before the cutoff', function () {
@@ -94,7 +94,7 @@ it('prunes scan dates before the cutoff', function () {
 	$writes = mt_scan_dates_calls('db_execute_prepared');
 	expect($writes)->toHaveCount(1);
 	expect($writes[0]['sql'])->toMatch('/DELETE FROM mac_track_scan_dates\s+WHERE scan_date < \?/');
-	expect($writes[0]['params'])->toBe(array('2026-11-01 00:00:00'));
+	expect($writes[0]['params'])->toBe(['2026-11-01 00:00:00']);
 });
 
 it('removes scan dates left with no port rows', function () {
@@ -110,18 +110,18 @@ it('removes empty scan dates after device, site and MAC deletes', function (stri
 
 	expect($loop)->not->toBeFalse();
 	expect(strpos($src, 'mactrack_scan_dates_prune_empty();', $loop))->toBeGreaterThan($loop);
-})->with(array(
-	'devices' => array('mactrack_devices.php', 'api_mactrack_device_remove'),
-	'sites'   => array('mactrack_sites.php', 'api_mactrack_site_remove'),
-	'macauth' => array('mactrack_macauth.php', 'api_mactrack_maca_remove'),
-));
+})->with([
+	'devices' => ['mactrack_devices.php', 'api_mactrack_device_remove'],
+	'sites'   => ['mactrack_sites.php', 'api_mactrack_site_remove'],
+	'macauth' => ['mactrack_macauth.php', 'api_mactrack_maca_remove'],
+]);
 
 it('rebuilds from each partition and syncs the table', function () {
-	mactrack_test_queue_return('db_fetch_assoc_prepared', mt_scan_dates_partition_rows(array('d20261110', 'd20261111', 'dMaxValue')));
-	mactrack_test_queue_return_for('db_fetch_assoc', 'PARTITION (`d20261110`)', array(array('scan_date' => '2026-11-10 10:00:00')));
-	mactrack_test_queue_return_for('db_fetch_assoc', 'PARTITION (`d20261111`)', array(array('scan_date' => '2026-11-11 10:00:00'), array('scan_date' => '2026-11-11 11:00:00')));
-	mactrack_test_queue_return_for('db_fetch_assoc', 'PARTITION (`dMaxValue`)', array());
-	mactrack_test_queue_return_for('db_fetch_assoc', 'FROM mac_track_scan_dates', array(array('scan_date' => '2026-11-10 10:00:00'), array('scan_date' => '2026-10-01 10:00:00')));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', mt_scan_dates_partition_rows(['d20261110', 'd20261111', 'dMaxValue']));
+	mactrack_test_queue_return_for('db_fetch_assoc', 'PARTITION (`d20261110`)', [['scan_date' => '2026-11-10 10:00:00']]);
+	mactrack_test_queue_return_for('db_fetch_assoc', 'PARTITION (`d20261111`)', [['scan_date' => '2026-11-11 10:00:00'], ['scan_date' => '2026-11-11 11:00:00']]);
+	mactrack_test_queue_return_for('db_fetch_assoc', 'PARTITION (`dMaxValue`)', []);
+	mactrack_test_queue_return_for('db_fetch_assoc', 'FROM mac_track_scan_dates', [['scan_date' => '2026-11-10 10:00:00'], ['scan_date' => '2026-10-01 10:00:00']]);
 
 	expect(mactrack_scan_dates_rebuild())->toBe(3);
 
@@ -130,44 +130,44 @@ it('rebuilds from each partition and syncs the table', function () {
 
 	$inserts = mt_scan_dates_sql_matching('INSERT IGNORE INTO mac_track_scan_dates');
 	expect($inserts)->toHaveCount(1);
-	expect($inserts[0]['params'])->toBe(array('2026-11-11 10:00:00', '2026-11-11 11:00:00'));
+	expect($inserts[0]['params'])->toBe(['2026-11-11 10:00:00', '2026-11-11 11:00:00']);
 
 	$deletes = mt_scan_dates_sql_matching('DELETE FROM mac_track_scan_dates');
 	expect($deletes)->toHaveCount(1);
-	expect($deletes[0]['params'])->toBe(array('2026-10-01 10:00:00'));
+	expect($deletes[0]['params'])->toBe(['2026-10-01 10:00:00']);
 });
 
 it('skips a partition name that is not a plain identifier', function () {
-	mactrack_test_queue_return('db_fetch_assoc_prepared', mt_scan_dates_partition_rows(array('bad`name', 'd20261111')));
-	mactrack_test_queue_return_for('db_fetch_assoc', 'PARTITION (`d20261111`)', array(array('scan_date' => '2026-11-11 10:00:00')));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', mt_scan_dates_partition_rows(['bad`name', 'd20261111']));
+	mactrack_test_queue_return_for('db_fetch_assoc', 'PARTITION (`d20261111`)', [['scan_date' => '2026-11-11 10:00:00']]);
 
 	expect(mactrack_scan_dates_rebuild())->toBe(1);
 
-	expect(mt_scan_dates_sql_matching('bad`name'))->toBe(array());
+	expect(mt_scan_dates_sql_matching('bad`name'))->toBe([]);
 	expect(implode("\n", $GLOBALS['__test_cacti_log']))->toContain('bad`name');
 });
 
 it('reads an unpartitioned table with one query', function () {
-	mactrack_test_queue_return('db_fetch_assoc_prepared', mt_scan_dates_partition_rows(array(null)));
-	mactrack_test_queue_return_for('db_fetch_assoc', 'FROM mac_track_ports', array(array('scan_date' => '2026-11-11 10:00:00')));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', mt_scan_dates_partition_rows([null]));
+	mactrack_test_queue_return_for('db_fetch_assoc', 'FROM mac_track_ports', [['scan_date' => '2026-11-11 10:00:00']]);
 
 	expect(mactrack_scan_dates_rebuild())->toBe(1);
 
-	expect(mt_scan_dates_sql_matching('PARTITION (`'))->toBe(array());
+	expect(mt_scan_dates_sql_matching('PARTITION (`'))->toBe([]);
 	expect(mt_scan_dates_sql_matching('SELECT DISTINCT scan_date FROM mac_track_ports'))->toHaveCount(1);
-	expect(mt_scan_dates_sql_matching('DELETE FROM mac_track_scan_dates'))->toBe(array());
+	expect(mt_scan_dates_sql_matching('DELETE FROM mac_track_scan_dates'))->toBe([]);
 });
 
 it('writes in batches of 1000 dates', function () {
-	$dates = array();
+	$dates = [];
 
 	for ($i = 0; $i < 1001; $i++) {
-		$dates[] = array('scan_date' => gmdate('Y-m-d H:i:s', 1762819200 + $i * 300));
+		$dates[] = ['scan_date' => gmdate('Y-m-d H:i:s', 1762819200 + $i * 300)];
 	}
 
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array());
+	mactrack_test_queue_return('db_fetch_assoc_prepared', []);
 	mactrack_test_queue_return_for('db_fetch_assoc', 'FROM mac_track_ports', $dates);
-	mactrack_test_queue_return_for('db_fetch_assoc', 'FROM mac_track_scan_dates', array());
+	mactrack_test_queue_return_for('db_fetch_assoc', 'FROM mac_track_scan_dates', []);
 
 	expect(mactrack_scan_dates_rebuild())->toBe(1001);
 
@@ -180,7 +180,7 @@ it('writes in batches of 1000 dates', function () {
 /**
  * Runs perform_mactrack_db_maint() against an unpartitioned mac_track_ports table with the given retention.
  *
- * @param string $retention Value for the mt_data_retention option.
+ * @param  string $retention Value for the mt_data_retention option.
  * @return void
  */
 function mt_scan_dates_maint_unpartitioned(string $retention): void {
@@ -195,15 +195,15 @@ function mt_scan_dates_maint_unpartitioned(string $retention): void {
  */
 function mt_scan_dates_maint_partitioned(array $old_partitions): void {
 	set_config_option('mt_data_retention', '7');
-	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'information_schema.PARTITIONS', array(
-		array('PARTITION_NAME' => 'd20261111', 'PARTITION_ORDINAL_POSITION' => '1', 'PARTITION_METHOD' => 'RANGE',
-			'PARTITION_EXPRESSION' => 'to_days(`scan_date`)', 'PARTITION_DESCRIPTION' => '740297', 'TABLE_ROWS' => '0'),
-		array('PARTITION_NAME' => 'dMaxValue', 'PARTITION_ORDINAL_POSITION' => '2', 'PARTITION_METHOD' => 'RANGE',
-			'PARTITION_EXPRESSION' => 'to_days(`scan_date`)', 'PARTITION_DESCRIPTION' => 'MAXVALUE', 'TABLE_ROWS' => '0'),
-	));
-	mactrack_test_queue_return('db_fetch_row', array('today' => '740296'));
-	mactrack_test_queue_return('db_fetch_row', array('today' => '740295'));
-	mactrack_test_queue_return('db_fetch_assoc_prepared', array());
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'information_schema.PARTITIONS', [
+		['PARTITION_NAME'       => 'd20261111', 'PARTITION_ORDINAL_POSITION' => '1', 'PARTITION_METHOD' => 'RANGE',
+			'PARTITION_EXPRESSION' => 'to_days(`scan_date`)', 'PARTITION_DESCRIPTION' => '740297', 'TABLE_ROWS' => '0'],
+		['PARTITION_NAME'       => 'dMaxValue', 'PARTITION_ORDINAL_POSITION' => '2', 'PARTITION_METHOD' => 'RANGE',
+			'PARTITION_EXPRESSION' => 'to_days(`scan_date`)', 'PARTITION_DESCRIPTION' => 'MAXVALUE', 'TABLE_ROWS' => '0'],
+	]);
+	mactrack_test_queue_return('db_fetch_row', ['today' => '740296']);
+	mactrack_test_queue_return('db_fetch_row', ['today' => '740295']);
+	mactrack_test_queue_return('db_fetch_assoc_prepared', []);
 	mactrack_test_queue_return('db_fetch_assoc_prepared', $old_partitions);
 
 	perform_mactrack_db_maint();
@@ -223,40 +223,40 @@ it('prunes scan dates with the unpartitioned retention cutoff', function () {
 
 	$delete = mt_scan_dates_sql_matching('DELETE QUICK FROM mac_track_ports');
 	expect($delete)->toHaveCount(1);
-	expect(mt_scan_dates_prunes())->toBe(array($delete[0]['params']));
-	expect(mt_scan_dates_sql_matching('SELECT DISTINCT scan_date FROM mac_track_ports'))->toBe(array());
+	expect(mt_scan_dates_prunes())->toBe([$delete[0]['params']]);
+	expect(mt_scan_dates_sql_matching('SELECT DISTINCT scan_date FROM mac_track_ports'))->toBe([]);
 });
 
 it('prunes no scan dates when unpartitioned retention is off', function () {
 	mt_scan_dates_maint_unpartitioned('0');
 
-	expect(mt_scan_dates_sql_matching('DELETE QUICK FROM mac_track_ports'))->toBe(array());
-	expect(mt_scan_dates_prunes())->toBe(array());
+	expect(mt_scan_dates_sql_matching('DELETE QUICK FROM mac_track_ports'))->toBe([]);
+	expect(mt_scan_dates_prunes())->toBe([]);
 });
 
 it('prunes scan dates below the highest dropped partition bound', function () {
-	mt_scan_dates_maint_partitioned(array(
-		array('PARTITION_NAME' => 'd20261101', 'PARTITION_DESCRIPTION' => '740287'),
-		array('PARTITION_NAME' => 'd20261102', 'PARTITION_DESCRIPTION' => '740288'),
-	));
+	mt_scan_dates_maint_partitioned([
+		['PARTITION_NAME' => 'd20261101', 'PARTITION_DESCRIPTION' => '740287'],
+		['PARTITION_NAME' => 'd20261102', 'PARTITION_DESCRIPTION' => '740288'],
+	]);
 
 	expect(mt_scan_dates_sql_matching('DROP PARTITION'))->toHaveCount(2);
-	expect(mt_scan_dates_prunes())->toBe(array(array('2026-11-03 00:00:00')));
-	expect(mt_scan_dates_sql_matching('SELECT DISTINCT scan_date FROM mac_track_ports'))->toBe(array());
+	expect(mt_scan_dates_prunes())->toBe([['2026-11-03 00:00:00']]);
+	expect(mt_scan_dates_sql_matching('SELECT DISTINCT scan_date FROM mac_track_ports'))->toBe([]);
 });
 
 it('prunes no scan dates when no partition is dropped', function () {
-	mt_scan_dates_maint_partitioned(array());
+	mt_scan_dates_maint_partitioned([]);
 
-	expect(mt_scan_dates_sql_matching('DROP PARTITION'))->toBe(array());
-	expect(mt_scan_dates_prunes())->toBe(array());
+	expect(mt_scan_dates_sql_matching('DROP PARTITION'))->toBe([]);
+	expect(mt_scan_dates_prunes())->toBe([]);
 });
 
 it('ignores a non-numeric partition bound for the cutoff', function () {
-	mt_scan_dates_maint_partitioned(array(
-		array('PARTITION_NAME' => 'd20261101', 'PARTITION_DESCRIPTION' => 'MAXVALUE'),
-	));
+	mt_scan_dates_maint_partitioned([
+		['PARTITION_NAME' => 'd20261101', 'PARTITION_DESCRIPTION' => 'MAXVALUE'],
+	]);
 
 	expect(mt_scan_dates_sql_matching('DROP PARTITION'))->toHaveCount(1);
-	expect(mt_scan_dates_prunes())->toBe(array());
+	expect(mt_scan_dates_prunes())->toBe([]);
 });

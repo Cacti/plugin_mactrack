@@ -25,33 +25,33 @@ beforeAll(function () {
 });
 
 beforeEach(function () {
-	$GLOBALS['__test_db_calls']        = array();
-	$GLOBALS['__test_next_returns']    = array();
-	$GLOBALS['__test_matched_returns'] = array();
-	$GLOBALS['__test_config_options']  = array(
+	$GLOBALS['__test_db_calls']        = [];
+	$GLOBALS['__test_next_returns']    = [];
+	$GLOBALS['__test_matched_returns'] = [];
+	$GLOBALS['__test_config_options']  = [
 		'mt_collection_timing' => '15',
 		'mt_data_retention'    => '7',
-	);
-	$GLOBALS['__test_cacti_log']       = array();
+	];
+	$GLOBALS['__test_cacti_log']       = [];
 	$GLOBALS['database_default']       = 'cacti';
 });
 
 /**
  * Queues information_schema rows and VERSION() for the report.
  *
- * @param array  $parts      [name, description] pairs.
- * @param string $expression Partition expression.
- * @param string $version    VERSION() result.
+ * @param  array  $parts      [name, description] pairs.
+ * @param  string $expression Partition expression.
+ * @param  string $version    VERSION() result.
  * @return void
  */
 function mt_pr_db(array $parts, string $expression = 'unix_timestamp(`scan_date`)', string $version = '10.5.29-MariaDB'): void {
-	$rows = array();
+	$rows = [];
 
 	foreach (array_values($parts) as $i => $p) {
-		$rows[] = array(
-			'PARTITION_NAME' => $p[0], 'PARTITION_ORDINAL_POSITION' => (string) ($i + 1), 'PARTITION_METHOD' => 'RANGE',
+		$rows[] = [
+			'PARTITION_NAME'       => $p[0], 'PARTITION_ORDINAL_POSITION' => (string) ($i + 1), 'PARTITION_METHOD' => 'RANGE',
 			'PARTITION_EXPRESSION' => $expression, 'PARTITION_DESCRIPTION' => $p[1], 'TABLE_ROWS' => '0',
-		);
+		];
 	}
 
 	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'information_schema.PARTITIONS', $rows);
@@ -59,16 +59,16 @@ function mt_pr_db(array $parts, string $expression = 'unix_timestamp(`scan_date`
 }
 
 it('reports the scan-date layout, its coverage, and the last maintenance', function () {
-	mt_pr_db(array(
-		array('s20261105061507', '1793859308'),
-		array('s20261112061507', '1794464108'),
-		array('dMaxValue', 'MAXVALUE'),
-	));
+	mt_pr_db([
+		['s20261105061507', '1793859308'],
+		['s20261112061507', '1794464108'],
+		['dMaxValue', 'MAXVALUE'],
+	]);
 	$GLOBALS['__test_config_options']['mt_partition_pending'] = 's20261112060007';
-	$GLOBALS['__test_config_options']['mt_partition_status']  = json_encode(array(
+	$GLOBALS['__test_config_options']['mt_partition_status']  = json_encode([
 		'reason'      => 'exchange failed',
-		'maintenance' => array('dropped' => array('s20261104061507'), 'created' => array(), 'reason' => '', 'time' => 1794460000),
-	));
+		'maintenance' => ['dropped' => ['s20261104061507'], 'created' => [], 'reason' => '', 'time' => 1794460000],
+	]);
 
 	$r = mactrack_partition_report();
 
@@ -84,12 +84,12 @@ it('reports the scan-date layout, its coverage, and the last maintenance', funct
 	expect($r['pending'])->toBe('s20261112060007');
 	expect($r['load_path'])->toBe('php');
 	expect($r['last_scan_reason'])->toBe('exchange failed');
-	expect($r['maintenance']['dropped'])->toBe(array('s20261104061507'));
+	expect($r['maintenance']['dropped'])->toBe(['s20261104061507']);
 	expect($r['conversion_needed'])->toBeFalse();
 });
 
 it('reports the cap fallback on MySQL', function () {
-	mt_pr_db(array(array('dMaxValue', 'MAXVALUE')), 'unix_timestamp(`scan_date`)', '8.4.13');
+	mt_pr_db([['dMaxValue', 'MAXVALUE']], 'unix_timestamp(`scan_date`)', '8.4.13');
 
 	$r = mactrack_partition_report();
 
@@ -101,7 +101,7 @@ it('reports the cap fallback on MySQL', function () {
 });
 
 it('reports an unpartitioned table with nothing else to show', function () {
-	mt_pr_db(array());
+	mt_pr_db([]);
 
 	$r = mactrack_partition_report();
 
@@ -113,7 +113,7 @@ it('reports an unpartitioned table with nothing else to show', function () {
 });
 
 it('flags the legacy daily layout for conversion without reading its bounds as dates', function () {
-	mt_pr_db(array(array('d20261111', '740297'), array('dMaxValue', 'MAXVALUE')), 'to_days(`scan_date`)');
+	mt_pr_db([['d20261111', '740297'], ['dMaxValue', 'MAXVALUE']], 'to_days(`scan_date`)');
 
 	$r = mactrack_partition_report();
 
@@ -124,7 +124,7 @@ it('flags the legacy daily layout for conversion without reading its bounds as d
 });
 
 it('ignores a status record that is not JSON', function () {
-	mt_pr_db(array());
+	mt_pr_db([]);
 	$GLOBALS['__test_config_options']['mt_partition_status'] = 'garbage';
 
 	$r = mactrack_partition_report();
@@ -136,7 +136,7 @@ it('ignores a status record that is not JSON', function () {
 /**
  * Returns the source of one function in mactrack_utilities.php.
  *
- * @param string $name Function name.
+ * @param  string $name Function name.
  * @return string
  */
 function mt_pr_function_source(string $name): string {
@@ -157,7 +157,7 @@ it('escapes every value the status page prints', function () {
 
 	// Each print goes through one helper that escapes label and value.
 	preg_match_all('/print\s+([^;]+);/', $src, $m);
-	expect($m[1])->not->toBe(array());
+	expect($m[1])->not->toBe([]);
 
 	foreach ($m[1] as $expr) {
 		expect($expr)->toMatch('/html_escape\(/');

@@ -209,11 +209,12 @@ function mactrack_partition_choose(string $wanted, int $scan_interval, int $rete
  * range (a layout MacTrack builds: RANGE on UNIX_TIMESTAMP(scan_date),
  * valid names, strictly increasing integer bounds, dMaxValue last with
  * MAXVALUE); invalid, with the first rule broken in reason. Callers run
- * partition DDL only on range.
+ * partition DDL only on range. The rows are the table's
+ * information_schema.PARTITIONS rows (PARTITION_NAME,
+ * PARTITION_ORDINAL_POSITION, PARTITION_METHOD, PARTITION_EXPRESSION,
+ * PARTITION_DESCRIPTION, TABLE_ROWS).
  *
- * @param array<int, array<string, string|null>> $rows information_schema.PARTITIONS
- *        rows for the table (PARTITION_NAME, PARTITION_ORDINAL_POSITION,
- *        PARTITION_METHOD, PARTITION_EXPRESSION, PARTITION_DESCRIPTION, TABLE_ROWS).
+ * @param array<int, array<string, string|null>> $rows The partition rows.
  *
  * @return array{state: string, reason: string, partitions: array<int, array{name: string, bound: int|null, rows: int}>}
  */

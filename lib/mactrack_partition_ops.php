@@ -240,12 +240,12 @@ function mactrack_partition_granularity(array $server): array {
  * their rows are loaded straight into mac_track_ports. Any failure also
  * sends the scan straight into mac_track_ports, where its rows land in the
  * partition that covers them or in dMaxValue, and the reason is recorded.
+ * The plan's mode is exchange (load the stage table and exchange it into
+ * partition) or direct (load into mac_track_ports).
  *
  * @param string $scan_date The scan's scan_date, as the poller stores it.
  *
  * @return array{mode: string, partition: string|null, reason: string, granularity: string|null, scan_date: string}
- *         mode is exchange (load the stage table and exchange it into
- *         partition) or direct (load into mac_track_ports).
  */
 function mactrack_partition_prepare_scan(string $scan_date): array {
 	$direct = function (string $reason, ?string $granularity = null, ?string $partition = null) use ($scan_date): array {
@@ -274,8 +274,13 @@ function mactrack_partition_prepare_scan(string $scan_date): array {
 	$choice = mactrack_partition_granularity($state['server']);
 	$size   = $choice['granularity'];
 
-	mactrack_partition_status(['layout' => 'range', 'granularity' => $size,
-		'fell_back' => $choice['fell_back'], 'projected' => $choice['projected'], 'reason' => '']);
+	mactrack_partition_status([
+		'layout'      => 'range',
+		'granularity' => $size,
+		'fell_back'   => $choice['fell_back'],
+		'projected'   => $choice['projected'],
+		'reason'      => '',
+	]);
 
 	$count = count($layout['partitions']);
 
@@ -535,9 +540,9 @@ function mactrack_partition_maintain(int $days, ?int $now = null): array {
  * The part of mactrack_partition_maintain() that runs under the lock.
  *
  * @param array<int, array{name: string, bound: int|null, rows: int}> $partitions From mactrack_partition_layout().
- * @param array{mariadb: bool, version: string}                        $server     From mactrack_partition_server().
- * @param int                                                          $days       Retention in days.
- * @param int                                                          $now        Current time.
+ * @param array{mariadb: bool, version: string}                       $server     From mactrack_partition_server().
+ * @param int                                                         $days       Retention in days.
+ * @param int                                                         $now        Current time.
  *
  * @return array{dropped: string[], created: string[], reason: string}
  */

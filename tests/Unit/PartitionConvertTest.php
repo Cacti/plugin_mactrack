@@ -26,17 +26,17 @@ beforeAll(function () {
 });
 
 beforeEach(function () {
-	$GLOBALS['__test_db_calls']        = array();
-	$GLOBALS['__test_next_returns']    = array();
-	$GLOBALS['__test_matched_returns'] = array();
-	$GLOBALS['__test_config_options']  = array(
+	$GLOBALS['__test_db_calls']        = [];
+	$GLOBALS['__test_next_returns']    = [];
+	$GLOBALS['__test_matched_returns'] = [];
+	$GLOBALS['__test_config_options']  = [
 		'mt_collection_timing'     => '15',
 		'mt_data_retention'        => '7',
 		'mt_partition_granularity' => 'scan',
-	);
-	$GLOBALS['__test_cacti_log']       = array();
+	];
+	$GLOBALS['__test_cacti_log']       = [];
 	$GLOBALS['database_default']       = 'cacti';
-	$GLOBALS['database_sessions']      = array();
+	$GLOBALS['database_sessions']      = [];
 });
 
 // 2026-11-12 06:15:07 and 06:30:07 UTC.
@@ -46,27 +46,27 @@ const MT_PC_SCAN2 = 1794465007;
 /**
  * Queues the database answers a conversion asks for.
  *
- * @param array $opts layout (none, legacy, range, invalid), type, scan_lock,
- *                    old_exists, rows, copied, scans.
+ * @param  array $opts layout (none, legacy, range, invalid), type, scan_lock,
+ *                     old_exists, rows, copied, scans.
  * @return void
  */
-function mt_pc_db(array $opts = array()): void {
-	$part = fn ($name, $pos, $method, $expr, $desc) => array(
-		'PARTITION_NAME' => $name, 'PARTITION_ORDINAL_POSITION' => $pos, 'PARTITION_METHOD' => $method,
+function mt_pc_db(array $opts = []): void {
+	$part = fn ($name, $pos, $method, $expr, $desc) => [
+		'PARTITION_NAME'       => $name, 'PARTITION_ORDINAL_POSITION' => $pos, 'PARTITION_METHOD' => $method,
 		'PARTITION_EXPRESSION' => $expr, 'PARTITION_DESCRIPTION' => $desc, 'TABLE_ROWS' => '0',
-	);
-	$layouts = array(
-		'none'    => array(),
-		'legacy'  => array($part('d20261111', '1', 'RANGE', 'to_days(`scan_date`)', '740297'), $part('dMaxValue', '2', 'RANGE', 'to_days(`scan_date`)', 'MAXVALUE')),
-		'range'   => array($part('dMaxValue', '1', 'RANGE', 'unix_timestamp(`scan_date`)', 'MAXVALUE')),
-		'invalid' => array($part('p0', '1', 'LIST', 'device_id', '1')),
-	);
+	];
+	$layouts = [
+		'none'    => [],
+		'legacy'  => [$part('d20261111', '1', 'RANGE', 'to_days(`scan_date`)', '740297'), $part('dMaxValue', '2', 'RANGE', 'to_days(`scan_date`)', 'MAXVALUE')],
+		'range'   => [$part('dMaxValue', '1', 'RANGE', 'unix_timestamp(`scan_date`)', 'MAXVALUE')],
+		'invalid' => [$part('p0', '1', 'LIST', 'device_id', '1')],
+	];
 
 	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'information_schema.PARTITIONS', $layouts[$opts['layout'] ?? 'none']);
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', '10.5.29-MariaDB');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'PLUGIN_STATUS', $opts['plugin'] ?? 'ACTIVE');
 	mactrack_test_queue_return_for('db_table_exists', 'processes', isset($opts['upgrade_started']));
-	mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', isset($opts['upgrade_started']) ? array('pid' => '99', 'started' => $opts['upgrade_started'], 'now' => '100000', 'timeout' => '86400') : array());
+	mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', isset($opts['upgrade_started']) ? ['pid' => '99', 'started' => $opts['upgrade_started'], 'now' => '100000', 'timeout' => '86400'] : []);
 	mactrack_test_queue_return_for('db_table_exists', 'mac_track_aggregated_ports_upgrade', $opts['upgrade_table'] ?? false);
 	mactrack_test_queue_return_for('db_table_exists', 'mac_track_ports_old', $opts['old_exists'] ?? false);
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', "GET_LOCK('mactrack_scan'", $opts['scan_lock'] ?? '1');
@@ -74,11 +74,11 @@ function mt_pc_db(array $opts = array()): void {
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'DATA_TYPE', $opts['type'] ?? 'timestamp');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', '@@SESSION.time_zone', 'SYSTEM');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'lock_wait_timeout', '50');
-	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'SELECT DISTINCT scan_date', $opts['scans'] ?? array(
-		array('scan_date' => '0000-00-00 00:00:00', 'epoch' => '0'),
-		array('scan_date' => '2026-11-12 06:15:07', 'epoch' => (string) MT_PC_SCAN1),
-		array('scan_date' => '2026-11-12 06:30:07', 'epoch' => (string) MT_PC_SCAN2),
-	));
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'SELECT DISTINCT scan_date', $opts['scans'] ?? [
+		['scan_date' => '0000-00-00 00:00:00', 'epoch' => '0'],
+		['scan_date' => '2026-11-12 06:15:07', 'epoch' => (string) MT_PC_SCAN1],
+		['scan_date' => '2026-11-12 06:30:07', 'epoch' => (string) MT_PC_SCAN2],
+	]);
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'COUNT(*) FROM `mac_track_ports`', $opts['rows'] ?? '30');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'COUNT(*) FROM `mac_track_ports_new`', $opts['copied'] ?? '30');
 }
@@ -106,33 +106,33 @@ function mt_pc_locks(): array {
 
 describe('bounds', function () {
 	it('gives each scan its own partition, skipping zero dates', function () {
-		expect(mactrack_partition_convert_bounds(array('0', MT_PC_SCAN1, MT_PC_SCAN2), 'scan', 1024))->toBe(array(
+		expect(mactrack_partition_convert_bounds(['0', MT_PC_SCAN1, MT_PC_SCAN2], 'scan', 1024))->toBe([
 			'granularity' => 'scan',
-			'bounds'      => array('s20261112061507' => MT_PC_SCAN1 + 1, 's20261112063007' => MT_PC_SCAN2 + 1),
+			'bounds'      => ['s20261112061507' => MT_PC_SCAN1 + 1, 's20261112063007' => MT_PC_SCAN2 + 1],
 			'reason'      => '',
-		));
+		]);
 	});
 
 	it('uses hourly partitions when one per scan would pass the cap', function () {
-		expect(mactrack_partition_convert_bounds(array(MT_PC_SCAN1, MT_PC_SCAN2), 'scan', 2))->toBe(array(
+		expect(mactrack_partition_convert_bounds([MT_PC_SCAN1, MT_PC_SCAN2], 'scan', 2))->toBe([
 			'granularity' => 'hour',
-			'bounds'      => array('h2026111206' => 1794466800),
+			'bounds'      => ['h2026111206' => 1794466800],
 			'reason'      => '',
-		));
+		]);
 	});
 
 	it('uses daily partitions when hourly ones would pass the cap', function () {
-		$hours = array(MT_PC_SCAN1, MT_PC_SCAN1 + 3600, MT_PC_SCAN1 + 7200);
+		$hours = [MT_PC_SCAN1, MT_PC_SCAN1 + 3600, MT_PC_SCAN1 + 7200];
 
-		expect(mactrack_partition_convert_bounds($hours, 'hour', 2)['bounds'])->toBe(array('d20261112' => 1794528000));
+		expect(mactrack_partition_convert_bounds($hours, 'hour', 2)['bounds'])->toBe(['d20261112' => 1794528000]);
 	});
 
 	it('never goes finer than the setting', function () {
-		expect(mactrack_partition_convert_bounds(array(MT_PC_SCAN1, MT_PC_SCAN2), 'day', 1024)['granularity'])->toBe('day');
+		expect(mactrack_partition_convert_bounds([MT_PC_SCAN1, MT_PC_SCAN2], 'day', 1024)['granularity'])->toBe('day');
 	});
 
 	it('gives the reason when even daily partitions pass the cap', function () {
-		$days = array(MT_PC_SCAN1, MT_PC_SCAN1 + 86400, MT_PC_SCAN1 + 172800);
+		$days = [MT_PC_SCAN1, MT_PC_SCAN1 + 86400, MT_PC_SCAN1 + 172800];
 		$r    = mactrack_partition_convert_bounds($days, 'scan', 3);
 
 		expect($r['granularity'])->toBe('');
@@ -140,7 +140,7 @@ describe('bounds', function () {
 	});
 
 	it('returns the bounds in increasing order', function () {
-		expect(array_values(mactrack_partition_convert_bounds(array(MT_PC_SCAN2, MT_PC_SCAN1), 'scan', 1024)['bounds']))->toBe(array(MT_PC_SCAN1 + 1, MT_PC_SCAN2 + 1));
+		expect(array_values(mactrack_partition_convert_bounds([MT_PC_SCAN2, MT_PC_SCAN1], 'scan', 1024)['bounds']))->toBe([MT_PC_SCAN1 + 1, MT_PC_SCAN2 + 1]);
 	});
 });
 
@@ -150,8 +150,8 @@ describe('conversion', function () {
 
 		$r = mactrack_partition_convert();
 
-		expect($r)->toBe(array('ok' => true, 'reason' => '', 'rows' => 30, 'partitions' => 3, 'granularity' => 'scan'));
-		expect(mt_pc_statements())->toBe(array(
+		expect($r)->toBe(['ok' => true, 'reason' => '', 'rows' => 30, 'partitions' => 3, 'granularity' => 'scan']);
+		expect(mt_pc_statements())->toBe([
 			"SET SESSION time_zone = '+00:00'",
 			'DROP TABLE IF EXISTS `mac_track_ports_new`',
 			'CREATE TABLE `mac_track_ports_new` LIKE `mac_track_ports`',
@@ -162,7 +162,7 @@ describe('conversion', function () {
 			'RENAME TABLE `mac_track_ports` TO `mac_track_ports_old`, `mac_track_ports_new` TO `mac_track_ports`',
 			'SET SESSION time_zone = ?',
 			'DROP TABLE `mac_track_ports_old`',
-		));
+		]);
 	});
 
 	it('copies every scan date, zero dates included, as the server returned it', function () {
@@ -171,7 +171,7 @@ describe('conversion', function () {
 		mactrack_partition_convert();
 
 		$copies = array_filter($GLOBALS['__test_db_calls'], fn ($c) => strpos($c['sql'], 'INSERT INTO `mac_track_ports_new`') === 0);
-		expect(array_values(array_column($copies, 'params')))->toBe(array(array('0000-00-00 00:00:00'), array('2026-11-12 06:15:07'), array('2026-11-12 06:30:07')));
+		expect(array_values(array_column($copies, 'params')))->toBe([['0000-00-00 00:00:00'], ['2026-11-12 06:15:07'], ['2026-11-12 06:30:07']]);
 	});
 
 	it('restores the session time zone', function () {
@@ -180,24 +180,24 @@ describe('conversion', function () {
 		mactrack_partition_convert();
 
 		$restore = current(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['sql'] === 'SET SESSION time_zone = ?'));
-		expect($restore['params'])->toBe(array('SYSTEM'));
+		expect($restore['params'])->toBe(['SYSTEM']);
 	});
 
 	it('removes the legacy partitioning from the copy', function () {
-		mt_pc_db(array('layout' => 'legacy'));
+		mt_pc_db(['layout' => 'legacy']);
 
 		expect(mactrack_partition_convert()['ok'])->toBeTrue();
 		expect(mt_pc_statements())->toContain('ALTER TABLE `mac_track_ports_new` REMOVE PARTITIONING');
 	});
 
 	it('makes a DATETIME scan_date a TIMESTAMP and reads it in the session zone', function () {
-		mt_pc_db(array('type' => 'datetime'));
+		mt_pc_db(['type' => 'datetime']);
 
 		expect(mactrack_partition_convert()['ok'])->toBeTrue();
 
 		$statements = mt_pc_statements();
 		expect($statements)->toContain("ALTER TABLE `mac_track_ports_new` MODIFY `scan_date` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00'");
-		expect(array_filter($statements, fn ($s) => strpos($s, 'time_zone') !== false))->toBe(array());
+		expect(array_filter($statements, fn ($s) => strpos($s, 'time_zone') !== false))->toBe([]);
 	});
 
 	it('keeps the original table when asked', function () {
@@ -210,17 +210,17 @@ describe('conversion', function () {
 
 	it('reports each copied scan', function () {
 		mt_pc_db();
-		$seen = array();
+		$seen = [];
 
 		mactrack_partition_convert(false, function (int $done, int $total, string $scan) use (&$seen) {
 			$seen[] = "$done/$total $scan";
 		});
 
-		expect($seen)->toBe(array('1/3 0000-00-00 00:00:00', '2/3 2026-11-12 06:15:07', '3/3 2026-11-12 06:30:07'));
+		expect($seen)->toBe(['1/3 0000-00-00 00:00:00', '2/3 2026-11-12 06:15:07', '3/3 2026-11-12 06:30:07']);
 	});
 
 	it('aborts without the swap when the row counts differ', function () {
-		mt_pc_db(array('copied' => '29'));
+		mt_pc_db(['copied' => '29']);
 
 		$r = mactrack_partition_convert();
 
@@ -229,7 +229,7 @@ describe('conversion', function () {
 		expect(implode("\n", mt_pc_statements()))->not->toContain('RENAME');
 		expect(end($GLOBALS['__test_db_calls'])['fn'])->not->toBe('db_execute_prepared');
 		expect(mt_pc_statements())->toContain('DROP TABLE IF EXISTS `mac_track_ports_new`');
-		expect(array_slice(mt_pc_statements(), -2))->toBe(array('DROP TABLE IF EXISTS `mac_track_ports_new`', 'SET SESSION time_zone = ?'));
+		expect(array_slice(mt_pc_statements(), -2))->toBe(['DROP TABLE IF EXISTS `mac_track_ports_new`', 'SET SESSION time_zone = ?']);
 	});
 
 	it('aborts without the swap when a copy fails', function () {
@@ -251,11 +251,11 @@ describe('conversion', function () {
 		expect($r['ok'])->toBeFalse();
 		expect($r['reason'])->toContain($reason);
 		expect($GLOBALS['__test_config_options']['mt_partition_converting'])->toBe('');
-	})->with(array(
-		'create'    => array('CREATE TABLE `mac_track_ports_new` LIKE', 'Could not prepare the new table (CREATE TABLE'),
-		'partition' => array('ALTER TABLE `mac_track_ports_new` PARTITION BY', 'Could not partition the new table.'),
-		'swap'      => array('RENAME TABLE', 'Could not swap in the new table'),
-	));
+	})->with([
+		'create'    => ['CREATE TABLE `mac_track_ports_new` LIKE', 'Could not prepare the new table (CREATE TABLE'],
+		'partition' => ['ALTER TABLE `mac_track_ports_new` PARTITION BY', 'Could not partition the new table.'],
+		'swap'      => ['RENAME TABLE', 'Could not swap in the new table'],
+	]);
 
 	it('reports a converted table whose original could not be dropped', function () {
 		mt_pc_db();
@@ -268,13 +268,13 @@ describe('conversion', function () {
 	});
 
 	it('aborts when even daily partitions would pass the cap', function () {
-		$scans = array();
+		$scans = [];
 
 		for ($d = 0; $d < 1100; $d++) {
-			$scans[] = array('scan_date' => gmdate('Y-m-d H:i:s', MT_PC_SCAN1 - $d * 86400), 'epoch' => (string) (MT_PC_SCAN1 - $d * 86400));
+			$scans[] = ['scan_date' => gmdate('Y-m-d H:i:s', MT_PC_SCAN1 - $d * 86400), 'epoch' => (string) (MT_PC_SCAN1 - $d * 86400)];
 		}
 
-		mt_pc_db(array('scans' => $scans));
+		mt_pc_db(['scans' => $scans]);
 
 		$r = mactrack_partition_convert();
 
@@ -284,7 +284,7 @@ describe('conversion', function () {
 	});
 
 	it('records the outcome in the partition status', function () {
-		mt_pc_db(array('copied' => '1'));
+		mt_pc_db(['copied' => '1']);
 
 		mactrack_partition_convert();
 
@@ -299,16 +299,16 @@ describe('conversion', function () {
 		mactrack_partition_convert();
 
 		expect($GLOBALS['__test_config_options']['mt_partition_converting'])->toBe('');
-		expect(mt_pc_locks())->toBe(array(
+		expect(mt_pc_locks())->toBe([
 			"SELECT GET_LOCK('mactrack_scan', 0)",
 			"SELECT GET_LOCK('mactrack_partitions', 10)",
 			"SELECT RELEASE_LOCK('mactrack_partitions')",
 			"SELECT RELEASE_LOCK('mactrack_scan')",
-		));
-	})->with(array(
-		'success'        => array(array()),
-		'count mismatch' => array(array('copied' => '0')),
-	));
+		]);
+	})->with([
+		'success'        => [[]],
+		'count mismatch' => [['copied' => '0']],
+	]);
 
 	it('refuses before taking any lock or changing anything', function (array $opts, string $reason) {
 		mt_pc_db($opts);
@@ -317,21 +317,21 @@ describe('conversion', function () {
 
 		expect($r['ok'])->toBeFalse();
 		expect($r['reason'])->toContain($reason);
-		expect(mt_pc_statements())->toBe(array());
+		expect(mt_pc_statements())->toBe([]);
 		expect($GLOBALS['__test_config_options'])->not->toHaveKey('mt_partition_converting');
-	})->with(array(
-		'already converted'  => array(array('layout' => 'range'), 'already uses the scan-date layout'),
-		'unknown partitions' => array(array('layout' => 'invalid'), 'does not recognize: Partition method is LIST'),
-		'no partitioning'    => array(array('plugin' => 'DISABLED'), 'does not support partitioning'),
-		'upgrade running'    => array(array('upgrade_started' => '90000'), 'database upgrade is running'),
-		'upgrade left work'  => array(array('upgrade_table' => true), 'database upgrade is running'),
-		'kept old table'     => array(array('old_exists' => true), 'mac_track_ports_old is left'),
-		'scan running'       => array(array('scan_lock' => '0'), 'A scan is running'),
-	));
+	})->with([
+		'already converted'  => [['layout' => 'range'], 'already uses the scan-date layout'],
+		'unknown partitions' => [['layout' => 'invalid'], 'does not recognize: Partition method is LIST'],
+		'no partitioning'    => [['plugin' => 'DISABLED'], 'does not support partitioning'],
+		'upgrade running'    => [['upgrade_started' => '90000'], 'database upgrade is running'],
+		'upgrade left work'  => [['upgrade_table' => true], 'database upgrade is running'],
+		'kept old table'     => [['old_exists' => true], 'mac_track_ports_old is left'],
+		'scan running'       => [['scan_lock' => '0'], 'A scan is running'],
+	]);
 
 	it('leaves the running conversion\'s status alone when a second one starts', function () {
 		$GLOBALS['__test_config_options']['mt_partition_converting'] = '1794464107';
-		mt_pc_db(array('scan_lock' => '0'));
+		mt_pc_db(['scan_lock' => '0']);
 
 		$r = mactrack_partition_convert();
 
@@ -339,15 +339,15 @@ describe('conversion', function () {
 		expect($r['reason'])->toBe('Another conversion is running.');
 		expect($GLOBALS['__test_config_options'])->not->toHaveKey('mt_partition_status');
 		expect($GLOBALS['__test_config_options']['mt_partition_converting'])->toBe('1794464107');
-		expect(mt_pc_statements())->toBe(array());
+		expect(mt_pc_statements())->toBe([]);
 	});
 
 	it('releases the scan lock when partition maintenance holds its lock', function () {
-		mt_pc_db(array('partition_lock' => '0'));
+		mt_pc_db(['partition_lock' => '0']);
 
 		expect(mactrack_partition_convert()['reason'])->toContain('Partition maintenance is running');
-		expect(mt_pc_locks())->toBe(array("SELECT GET_LOCK('mactrack_scan', 0)", "SELECT GET_LOCK('mactrack_partitions', 10)", "SELECT RELEASE_LOCK('mactrack_scan')"));
-		expect(mt_pc_statements())->toBe(array());
+		expect(mt_pc_locks())->toBe(["SELECT GET_LOCK('mactrack_scan', 0)", "SELECT GET_LOCK('mactrack_partitions', 10)", "SELECT RELEASE_LOCK('mactrack_scan')"]);
+		expect(mt_pc_statements())->toBe([]);
 	});
 });
 
@@ -356,7 +356,7 @@ describe('scan lock', function () {
 		mactrack_test_queue_return_for('db_fetch_cell_prepared', "GET_LOCK('mactrack_scan'", '1');
 
 		expect(mactrack_partition_scan_begin())->toBeTrue();
-		expect($GLOBALS['__test_cacti_log'])->toBe(array());
+		expect($GLOBALS['__test_cacti_log'])->toBe([]);
 	});
 
 	it('stops a scan while the lock is held', function () {
@@ -370,7 +370,7 @@ describe('scan lock', function () {
 	it('is released by a web action that took it', function () {
 		mactrack_partition_scan_end();
 
-		expect(array_column($GLOBALS['__test_db_calls'], 'sql'))->toBe(array("SELECT RELEASE_LOCK('mactrack_scan')"));
+		expect(array_column($GLOBALS['__test_db_calls'], 'sql'))->toBe(["SELECT RELEASE_LOCK('mactrack_scan')"]);
 	});
 
 	it('clears the flag of a conversion that died', function () {
@@ -395,7 +395,7 @@ describe('scan lock', function () {
 
 		perform_mactrack_db_maint();
 
-		expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] !== 'cacti_log'))->toBe(array());
+		expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] !== 'cacti_log'))->toBe([]);
 		expect($GLOBALS['__test_cacti_log'][0])->toContain('skipped while the port table is converted');
 	});
 });
@@ -406,7 +406,7 @@ describe('fresh install', function () {
 		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'lock_wait_timeout', '50');
 
 		expect(mactrack_partition_fresh_install())->toBeTrue();
-		expect(mt_pc_statements())->toBe(array('ALTER TABLE `mac_track_ports` PARTITION BY RANGE (UNIX_TIMESTAMP(scan_date)) (PARTITION `dMaxValue` VALUES LESS THAN MAXVALUE)'));
+		expect(mt_pc_statements())->toBe(['ALTER TABLE `mac_track_ports` PARTITION BY RANGE (UNIX_TIMESTAMP(scan_date)) (PARTITION `dMaxValue` VALUES LESS THAN MAXVALUE)']);
 	});
 
 	it('leaves the table unpartitioned without partitioning or a readable version', function (string $version, string $plugin) {
@@ -414,11 +414,11 @@ describe('fresh install', function () {
 		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'PLUGIN_STATUS', $plugin);
 
 		expect(mactrack_partition_fresh_install())->toBeFalse();
-		expect(mt_pc_statements())->toBe(array());
-	})->with(array(
-		'MariaDB without the plugin' => array('10.5.29-MariaDB', ''),
-		'unreadable version'         => array('', 'ACTIVE'),
-	));
+		expect(mt_pc_statements())->toBe([]);
+	})->with([
+		'MariaDB without the plugin' => ['10.5.29-MariaDB', ''],
+		'unreadable version'         => ['', 'ACTIVE'],
+	]);
 
 	it('partitions the port table when setup creates it', function () {
 		mactrack_test_load(dirname(__DIR__, 2) . '/includes/database.php');
@@ -458,7 +458,7 @@ describe('entry points', function () {
 	it('accepts and ignores the options of the old CLI', function () {
 		$src = file_get_contents(dirname(__DIR__, 2) . '/mactrack_convert.php');
 
-		foreach (array("case '--days':", "case '--engine':", "case '--charset':", "case '--collate':") as $case) {
+		foreach (["case '--days':", "case '--engine':", "case '--charset':", "case '--collate':"] as $case) {
 			expect($src)->toContain($case);
 		}
 
