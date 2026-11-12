@@ -517,9 +517,11 @@ function mactrack_device_export(): void {
 	$devices = mactrack_get_devices($sql_where, 0, false);
 
 	$xport_array = [];
+	// the community string, auth password and privacy passphrase are not
+	// exported; the import matches columns by name, so it keeps the stored ones
 	array_push($xport_array, 'site_id, site_name, device_id, device_name, notes, ' .
-		'hostname, snmp_options, snmp_readstring, snmp_version, ' .
-		'snmp_username, snmp_password, snmp_auth_protocol, snmp_priv_passphrase, ' .
+		'hostname, snmp_options, snmp_version, ' .
+		'snmp_username, snmp_auth_protocol, ' .
 		'snmp_priv_protocol, snmp_context, snmp_engine_id, ' .
 		'snmp_port, snmp_timeout, snmp_retries, max_oids, snmp_sysName, snmp_sysLocation, ' .
 		'snmp_sysContact, snmp_sysObjectID, snmp_sysDescr, snmp_sysUptime, ' .
@@ -532,10 +534,10 @@ function mactrack_device_export(): void {
 			$device['site_id'] . '","' . $device['site_name'] . '","' .
 			$device['device_id'] . '","' . $device['device_name'] . '","' .
 			$device['notes'] . '","' . $device['hostname'] . '","' .
-			$device['snmp_options'] . '","' . $device['snmp_readstring'] . '","' .
+			$device['snmp_options'] . '","' .
 			$device['snmp_version'] . '","' . $device['snmp_username'] . '","' .
-			$device['snmp_password'] . '","' . $device['snmp_auth_protocol'] . '","' .
-			$device['snmp_priv_passphrase'] . '","' . $device['snmp_priv_protocol'] . '","' .
+			$device['snmp_auth_protocol'] . '","' .
+			$device['snmp_priv_protocol'] . '","' .
 			$device['snmp_context'] . '","' . $device['snmp_engine_id'] . '","' .
 			$device['snmp_port'] . '","' . $device['snmp_timeout'] . '","' .
 			$device['snmp_retries'] . '","' . $device['max_oids'] . '","' .
