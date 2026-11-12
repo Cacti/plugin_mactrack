@@ -22,7 +22,7 @@
  */
 describe('prepared statement consistency in mactrack', function () {
 	$baseline = [
-		'includes/database.php'        => 145,
+		'includes/database.php'        => 147,
 		'lib/mactrack_3com.php'        => 1,
 		'lib/mactrack_aruba_oscx.php'  => 1,
 		'lib/mactrack_cisco.php'       => 5,

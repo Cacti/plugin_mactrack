@@ -307,37 +307,6 @@ function mactrack_launch_background_upgrade(): void {
 }
 
 /**
- * Reports whether a background database-upgrade process is currently
- * registered and has not outlived its timeout, so the launcher does not spawn
- * a second copy.
- *
- * @return bool True when a non-stale upgrade process is registered.
- */
-function mactrack_background_upgrade_running(): bool {
-	if (!db_table_exists('processes')) {
-		return false;
-	}
-
-	$process = db_fetch_row_prepared('SELECT pid,
-		UNIX_TIMESTAMP(started) AS started,
-		UNIX_TIMESTAMP() AS `now`,
-		timeout
-		FROM processes
-		WHERE tasktype = ?
-		AND taskname = ?
-		AND taskid = 0',
-		['mtupgrade', 'database']);
-
-	if (!cacti_sizeof($process)) {
-		return false;
-	}
-
-	// A registration that has outlived its timeout is stale; let the launcher
-	// replace a crashed upgrade.
-	return ((int) $process['now'] - (int) $process['started']) <= (int) $process['timeout'];
-}
-
-/**
  * Runs the full MacTrack upgrade: re-registers hooks, applies the database
  * schema migration, migrates legacy SNMP read strings, prunes tombstoned
  * files, recreates and renames permission realms, rebuilds cached scanning
@@ -345,12 +314,14 @@ function mactrack_background_upgrade_running(): bool {
  * re-runs cleanly. Invoked by the background CLI (cli/upgrade_database.php),
  * never inline on a web request.
  *
- * @return void
+ * @return bool True when the upgrade completed, false when the database
+ *              migration could not finish (the plugin version is then left
+ *              unrecorded so the CLI retries on its next launch).
  *
  * @global array $config Cacti global configuration array; used to locate
  *                       library files to include.
  */
-function mactrack_perform_upgrade(): void {
+function mactrack_perform_upgrade(): bool {
 	global $config;
 
 	require_once($config['base_path'] . '/plugins/mactrack/includes/database.php');
@@ -367,8 +338,12 @@ function mactrack_perform_upgrade(): void {
 	if (!cacti_sizeof($old) || $old['status'] == 1 || $old['status'] == 4) {
 		// Rebuild the aggregated-ports table first: plugin_mactrack_install()
 		// refreshes it through Cacti, which fails while the pre-normalization
-		// duplicates and non-unique key still exist.
-		mactrack_rebuild_aggregated_ports();
+		// duplicates and non-unique key still exist. If the rebuild could not
+		// finish, leave the version unrecorded so the upgrade is retried rather
+		// than marked complete with rows still sitting in the renamed table.
+		if (!mactrack_rebuild_aggregated_ports()) {
+			return false;
+		}
 
 		// re-register the hooks
 		plugin_mactrack_install(false);
@@ -378,7 +353,9 @@ function mactrack_perform_upgrade(): void {
 			api_plugin_enable_hooks('mactrack');
 		}
 
-		// perform a database upgrade
+		// perform the remaining database migrations (the aggregated-ports
+		// rebuild above is the one that can defer the upgrade; the rest are
+		// idempotent guarded ALTERs)
 		mactrack_database_upgrade();
 	}
 
@@ -427,6 +404,8 @@ function mactrack_perform_upgrade(): void {
 	}
 
 	mactrack_retry_default_site();
+
+	return true;
 }
 
 /**

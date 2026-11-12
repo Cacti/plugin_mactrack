@@ -407,7 +407,7 @@ final class AggregatedPortsKeyTest extends TestCase {
 		$source = (string) file_get_contents(dirname(__DIR__, 2) . '/setup.php');
 		$body   = substr($source, (int) strpos($source, 'function mactrack_perform_upgrade('));
 
-		$rebuild = strpos($body, 'mactrack_rebuild_aggregated_ports();');
+		$rebuild = strpos($body, 'mactrack_rebuild_aggregated_ports(');
 		$install = strpos($body, 'plugin_mactrack_install(false);');
 
 		$this->assertNotFalse($rebuild);

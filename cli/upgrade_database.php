@@ -130,22 +130,37 @@ $start = microtime(true);
 
 upgrade_debug('Starting the MacTrack background database upgrade');
 
-mactrack_perform_upgrade();
+$completed = mactrack_perform_upgrade();
 
-// Clear the operator notice flag so a later upgrade can raise it again. The
-// web hook stops relaunching this CLI once plugin_config records the new
-// version in mactrack_perform_upgrade().
-set_config_option('mt_db_upgrade_notified', 'off');
+$end = microtime(true);
 
+if ($completed) {
+	// Clear the operator notice flag so a later upgrade can raise it again. The
+	// web hook stops relaunching this CLI once plugin_config records the new
+	// version in mactrack_perform_upgrade().
+	set_config_option('mt_db_upgrade_notified', 'off');
+
+	if (!$force) {
+		unregister_process('mtupgrade', 'database', 0);
+	}
+
+	upgrade_debug(sprintf('Finished the MacTrack background database upgrade in %0.2f seconds', $end - $start));
+
+	exit(0);
+}
+
+// The upgrade did not finish (for example a large rebuild could not be
+// completed this pass). Leave the operator notice and the recorded version
+// untouched so the web hook relaunches us, and report failure.
 if (!$force) {
 	unregister_process('mtupgrade', 'database', 0);
 }
 
-$end = microtime(true);
+cacti_log('WARNING: The MacTrack background database upgrade did not complete and will be retried', false, 'MACTRACK');
 
-upgrade_debug(sprintf('Finished the MacTrack background database upgrade in %0.2f seconds', $end - $start));
+upgrade_debug(sprintf('MacTrack background database upgrade did not complete after %0.2f seconds; it will be retried', $end - $start));
 
-exit(0);
+exit(1);
 
 /**
  * sig_handler - cleanly stops the upgrade on SIGTERM/SIGINT. The per-scan-date

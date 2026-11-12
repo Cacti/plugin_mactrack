@@ -105,3 +105,31 @@ it('reinstalls hooks and upgrades the schema when the plugin is not yet recorded
 	expect($hooks)->not->toBeEmpty();
 	expect($updates)->not->toBeEmpty();
 });
+
+it('leaves the version unrecorded when the aggregated-ports rebuild cannot finish', function () {
+	require_once $GLOBALS['config']['base_path'] . '/plugins/mactrack/includes/database.php';
+	require_once $GLOBALS['config']['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php';
+
+	// No stored row: the install block runs and the rebuild is attempted first.
+	mactrack_test_queue_return('db_fetch_row', array());
+	// The aggregated table exists but the advisory lock is held, so the rebuild
+	// cannot start and returns failure.
+	mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_aggregated_ports'", array(array('t' => 'mac_track_aggregated_ports')));
+	mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_aggregated_ports_upgrade'", array());
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK', '0');
+
+	$completed = mactrack_perform_upgrade();
+
+	expect($completed)->toBeFalse();
+
+	// Neither the hooks were re-registered nor the version recorded.
+	$hooks = array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'api_plugin_register_hook';
+	});
+	$updates = array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && stripos($call['sql'], 'UPDATE plugin_config') !== false;
+	});
+
+	expect($hooks)->toBeEmpty();
+	expect($updates)->toBeEmpty();
+});
