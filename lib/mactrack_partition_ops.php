@@ -243,17 +243,17 @@ function mactrack_partition_granularity(array $server): array {
  *
  * @param string $scan_date The scan's scan_date, as the poller stores it.
  *
- * @return array{mode: string, partition: string|null, reason: string, granularity: string|null}
+ * @return array{mode: string, partition: string|null, reason: string, granularity: string|null, scan_date: string}
  *         mode is exchange (load the stage table and exchange it into
  *         partition) or direct (load into mac_track_ports).
  */
 function mactrack_partition_prepare_scan(string $scan_date): array {
-	$direct = function (string $reason, ?string $granularity = null, ?string $partition = null): array {
+	$direct = function (string $reason, ?string $granularity = null, ?string $partition = null) use ($scan_date): array {
 		if ($reason !== '') {
 			mactrack_partition_status(['reason' => $reason]);
 		}
 
-		return ['mode' => 'direct', 'partition' => $partition, 'reason' => $reason, 'granularity' => $granularity];
+		return ['mode' => 'direct', 'partition' => $partition, 'reason' => $reason, 'granularity' => $granularity, 'scan_date' => $scan_date];
 	};
 
 	$state  = mactrack_partition_state();
@@ -328,7 +328,7 @@ function mactrack_partition_prepare_scan(string $scan_date): array {
 			return $direct('', $size, $name);
 		}
 
-		return ['mode' => 'exchange', 'partition' => $name, 'reason' => '', 'granularity' => $size];
+		return ['mode' => 'exchange', 'partition' => $name, 'reason' => '', 'granularity' => $size, 'scan_date' => $scan_date];
 	} finally {
 		mactrack_partition_unlock();
 	}
@@ -448,14 +448,18 @@ function mactrack_partition_load_scan(array $plan): int {
 
 	db_execute_prepared('TRUNCATE TABLE `mac_track_ports_stage`');
 
-	$rows = mactrack_ports_load('mac_track_ports_stage');
+	// Only this scan's rows go into its partition. Rows left in the temp
+	// table with an earlier date (a device rescan, or a run that stopped
+	// before the temp table was cleared) go straight into the partitions
+	// that cover their dates, as they do without an exchange.
+	$rows = mactrack_ports_load('mac_track_ports_stage', 1000, $plan['scan_date'], true);
 
 	if (!mactrack_partition_exchange($plan['partition'], $server)) {
 		set_config_option('mt_partition_pending', $plan['partition']);
 		mactrack_partition_status(['pending' => $plan['partition'], 'reason' => 'exchange failed']);
 	}
 
-	return $rows;
+	return $rows + mactrack_ports_load('mac_track_ports', 1000, $plan['scan_date'], false);
 }
 
 /**

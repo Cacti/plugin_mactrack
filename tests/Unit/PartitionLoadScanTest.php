@@ -41,7 +41,7 @@ beforeEach(function () {
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'lock_wait_timeout', '50');
 });
 
-const MT_LS_PLAN = array('mode' => 'exchange', 'partition' => 's20261112061507', 'reason' => '', 'granularity' => 'scan');
+const MT_LS_PLAN = array('mode' => 'exchange', 'partition' => 's20261112061507', 'reason' => '', 'granularity' => 'scan', 'scan_date' => '2026-11-12 06:15:07');
 
 /**
  * Returns the SQL of every db_execute_prepared call, in order.
@@ -92,7 +92,7 @@ function mt_ls_stage(?array $stage_cols, ?array $stage_idx = null): void {
 }
 
 it('loads a direct scan straight into mac_track_ports', function () {
-	$rows = mactrack_partition_load_scan(array('mode' => 'direct', 'partition' => null, 'reason' => 'layout none', 'granularity' => null));
+	$rows = mactrack_partition_load_scan(array('mode' => 'direct', 'partition' => null, 'reason' => 'layout none', 'granularity' => null, 'scan_date' => '2026-11-12 06:15:07'));
 
 	expect($rows)->toBe(0);
 	expect(mt_ls_pos('EXCHANGE'))->toBeNull();
@@ -112,6 +112,23 @@ it('loads into the stage table and exchanges it into the scan partition', functi
 	expect(mt_ls_pos('INSERT IGNORE INTO `mac_track_ports_stage`'))->toBeLessThan(mt_ls_pos('EXCHANGE'));
 	expect(mt_ls_executed())->toContain(mactrack_partition_exchange_sql('s20261112061507', false));
 	expect($GLOBALS['__test_config_options']['mt_partition_pending'] ?? '')->toBe('');
+});
+
+it('puts only this scan into its partition and older leftovers where their dates belong', function () {
+	mt_ls_stage(array('same'));
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'WHERE scan_date = ?', array(mt_ls_row(1), mt_ls_row(2)));
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'WHERE scan_date <> ?', array(mt_ls_row(3)));
+
+	$rows = mactrack_partition_load_scan(MT_LS_PLAN);
+
+	expect($rows)->toBe(3);
+	expect(mt_ls_pos('INSERT IGNORE INTO `mac_track_ports_stage`'))->toBeLessThan(mt_ls_pos('EXCHANGE'));
+	expect(mt_ls_pos('EXCHANGE'))->toBeLessThan(mt_ls_pos('INSERT IGNORE INTO `mac_track_ports` '));
+
+	$reads = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_fetch_assoc_prepared' && strpos($c['sql'], 'FROM mac_track_temp_ports') !== false));
+	expect($reads)->toHaveCount(2);
+	expect($reads[0]['params'])->toBe(array('2026-11-12 06:15:07'));
+	expect($reads[1]['params'])->toBe(array('2026-11-12 06:15:07'));
 });
 
 it('exchanges without validation where the server supports it', function () {
@@ -212,7 +229,7 @@ it('keeps the stage rows and loads direct while the pending exchange still fails
 it('retries a pending exchange even when this scan loads direct', function () {
 	$GLOBALS['__test_config_options']['mt_partition_pending'] = 's20261112060007';
 
-	mactrack_partition_load_scan(array('mode' => 'direct', 'partition' => 'h2026111206', 'reason' => '', 'granularity' => 'hour'));
+	mactrack_partition_load_scan(array('mode' => 'direct', 'partition' => 'h2026111206', 'reason' => '', 'granularity' => 'hour', 'scan_date' => '2026-11-12 06:15:07'));
 
 	expect(mt_ls_executed())->toContain(mactrack_partition_exchange_sql('s20261112060007', false));
 	expect($GLOBALS['__test_config_options']['mt_partition_pending'])->toBe('');
@@ -221,7 +238,7 @@ it('retries a pending exchange even when this scan loads direct', function () {
 it('drops a pending value that is not a partition name', function () {
 	$GLOBALS['__test_config_options']['mt_partition_pending'] = 's1;DROP';
 
-	mactrack_partition_load_scan(array('mode' => 'direct', 'partition' => null, 'reason' => '', 'granularity' => null));
+	mactrack_partition_load_scan(array('mode' => 'direct', 'partition' => null, 'reason' => '', 'granularity' => null, 'scan_date' => '2026-11-12 06:15:07'));
 
 	expect(mt_ls_pos('EXCHANGE'))->toBeNull();
 	expect($GLOBALS['__test_config_options']['mt_partition_pending'])->toBe('');
