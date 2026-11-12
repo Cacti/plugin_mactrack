@@ -3467,15 +3467,24 @@ function mactrack_scan_dates_rebuild(): int {
  *                               $match true) or only rows of other dates
  *                               (with $match false); null copies all.
  * @param bool        $match     See $scan_date.
+ * @param string      $source    mac_track_temp_ports, or mac_track_ports_stage
+ *                               to move a failed exchange's rows in.
+ * @param int|null    $failed    Set to the number of INSERTs that failed.
  *
  * @throws InvalidArgumentException For an unknown table or a batch below 1.
  *
  * @return int Number of temp rows read.
  */
-function mactrack_ports_load(string $table = 'mac_track_ports', int $batch = 1000, ?string $scan_date = null, bool $match = true): int {
+function mactrack_ports_load(string $table = 'mac_track_ports', int $batch = 1000, ?string $scan_date = null, bool $match = true, string $source = 'mac_track_temp_ports', ?int &$failed = null): int {
 	if (!in_array($table, ['mac_track_ports', 'mac_track_ports_stage'], true)) {
 		throw new InvalidArgumentException("Unknown load target '$table'");
 	}
+
+	if (!in_array($source, ['mac_track_temp_ports', 'mac_track_ports_stage'], true) || $source === $table) {
+		throw new InvalidArgumentException("Unknown load source '$source'");
+	}
+
+	$failed = 0;
 
 	if ($batch < 1) {
 		throw new InvalidArgumentException('Batch size must be at least 1');
@@ -3487,7 +3496,7 @@ function mactrack_ports_load(string $table = 'mac_track_ports', int $batch = 100
 
 	$filter = $scan_date === null ? [] : [$scan_date];
 	$where  = $scan_date === null ? '' : ($match ? 'scan_date = ?' : 'scan_date <> ?');
-	$select = 'SELECT ' . implode(', ', $columns) . ' FROM mac_track_temp_ports';
+	$select = 'SELECT ' . implode(', ', $columns) . ' FROM `' . $source . '`';
 	$order  = ' ORDER BY port_number, scan_date, mac_address, device_id LIMIT ' . $batch;
 	$after  = '(port_number > ? OR (port_number = ? AND (scan_date > ? OR (scan_date = ?
 		AND (mac_address > ? OR (mac_address = ? AND device_id > ?))))))';
@@ -3521,7 +3530,9 @@ function mactrack_ports_load(string $table = 'mac_track_ports', int $batch = 100
 			}
 		}
 
-		db_execute_prepared($insert . implode(', ', array_fill(0, count($rows), $tuple)), $params);
+		if (db_execute_prepared($insert . implode(', ', array_fill(0, count($rows), $tuple)), $params) === false) {
+			$failed++;
+		}
 
 		$read += count($rows);
 		$last  = end($rows);

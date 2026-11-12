@@ -349,7 +349,9 @@ function mactrack_partition_stage_ensure(): bool {
 	global $database_default;
 
 	$shape = function (string $table) use ($database_default): array {
-		$columns = db_fetch_assoc_prepared('SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_DEFAULT
+		// EXCHANGE needs identical definitions, collations included.
+		$columns = db_fetch_assoc_prepared('SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_DEFAULT,
+			CHARACTER_SET_NAME, COLLATION_NAME
 			FROM information_schema.COLUMNS
 			WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?
 			ORDER BY ORDINAL_POSITION',
@@ -361,7 +363,12 @@ function mactrack_partition_stage_ensure(): bool {
 			ORDER BY INDEX_NAME, SEQ_IN_INDEX',
 			[$database_default, $table]);
 
-		return [is_array($columns) ? $columns : [], is_array($indexes) ? $indexes : []];
+		$table = db_fetch_assoc_prepared('SELECT ENGINE, TABLE_COLLATION
+			FROM information_schema.TABLES
+			WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
+			[$database_default, $table]);
+
+		return [is_array($columns) ? $columns : [], is_array($indexes) ? $indexes : [], is_array($table) ? $table : []];
 	};
 
 	$want = $shape('mac_track_ports');
@@ -432,7 +439,21 @@ function mactrack_partition_load_scan(array $plan): int {
 			set_config_option('mt_partition_pending', '');
 			mactrack_partition_status(['pending' => '']);
 		} else {
-			mactrack_partition_status(['pending' => $pending, 'reason' => "pending exchange $pending failed"]);
+			// The retry failed too, so the exchange is not going to work: the
+			// table changed, or retention dropped the partition. The rows go
+			// in directly; they leave the stage table only once all are in.
+			$failed = 0;
+
+			mactrack_ports_load('mac_track_ports', 1000, null, true, 'mac_track_ports_stage', $failed);
+
+			if ($failed === 0) {
+				db_execute_prepared('TRUNCATE TABLE `mac_track_ports_stage`');
+				set_config_option('mt_partition_pending', '');
+				mactrack_partition_status(['pending' => '', 'reason' => "pending exchange $pending failed; its rows were inserted directly"]);
+			} else {
+				mactrack_partition_status(['pending' => $pending, 'reason' => "pending exchange $pending failed; its rows are still in the stage table"]);
+			}
+
 			$mode = 'direct';
 		}
 	}
