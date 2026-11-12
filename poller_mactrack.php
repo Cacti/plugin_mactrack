@@ -878,8 +878,11 @@ function collect_mactrack_data($start, $site_id = 0): void {
 
 		mactrack_debug('MAC addresses to Vendor MACS association pass complete.');
 
-		// update the vlan id's table
-		db_execute("UPDATE mac_track_vlans SET present='0'");
+		// update the vlan id's table; a site scan saw only its own site's VLANs
+		$site_where  = $site_id > 0 ? ' AND site_id = ?' : '';
+		$site_params = $site_id > 0 ? [$site_id] : [];
+
+		db_execute_prepared("UPDATE mac_track_vlans SET present='0' WHERE 1=1$site_where", $site_params);
 
 		db_execute("INSERT INTO mac_track_vlans
 			(vlan_id, site_id, device_id, vlan_name, present)
@@ -887,7 +890,7 @@ function collect_mactrack_data($start, $site_id = 0): void {
 			FROM mac_track_temp_ports
 			ON DUPLICATE KEY UPDATE vlan_name=VALUES(vlan_name), present=VALUES(present);");
 
-		db_execute("DELETE FROM mac_track_vlans WHERE present='0'");
+		db_execute_prepared("DELETE FROM mac_track_vlans WHERE present='0'$site_where", $site_params);
 
 		mactrack_debug('MAC VLANs in VLAN Table Updated.');
 
