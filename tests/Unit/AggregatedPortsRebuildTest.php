@@ -212,7 +212,7 @@ final class AggregatedPortsRebuildTest extends TestCase {
 		$this->assertCount(1, self::callsMatching('MODIFY COLUMN row_id bigint(20)'));
 		$this->assertCount(1, self::callsMatching('MODIFY COLUMN port_number varchar(30)'));
 		$this->assertCount(1, self::callsMatching('INSERT INTO mac_track_aggregated_ports'));
-		$this->assertCount(1, self::callsMatching('ON DUPLICATE KEY UPDATE count_rec = count_rec + VALUES(count_rec)'));
+		$this->assertCount(1, self::callsMatching('ON DUPLICATE KEY UPDATE count_rec = mac_track_aggregated_ports.count_rec + VALUES(count_rec)'));
 		// The newer survivor's descriptive fields win on a merge.
 		$this->assertCount(1, self::callsMatching('port_name = VALUES(port_name)'));
 		$this->assertCount(1, self::callsMatching('DELETE FROM mac_track_aggregated_ports_upgrade WHERE date_last = ?'));
@@ -313,5 +313,45 @@ final class AggregatedPortsRebuildTest extends TestCase {
 		$this->assertFalse(mactrack_rebuild_aggregated_ports());
 		$this->assertSame([], self::callsMatching('DROP TABLE IF EXISTS'));
 		$this->assertNotSame('on', read_config_option('mt_aggregated_ports_rebuilt'));
+	}
+
+	/**
+	 * The destructive rename is held off while a poller is mid-run, so the
+	 * rebuild does not race the poller's aggregate writes.
+	 *
+	 * @return void
+	 */
+	public function testRebuildDefersWhileAPollerIsRunning(): void {
+		self::stubTable('mac_track_aggregated_ports', true);
+		self::stubTable('mac_track_aggregated_ports_upgrade', false);
+		self::stubLock();
+		// A non-stale mactrack/master poller process is registered.
+		mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM processes', [['started' => 100, 'now' => 150, 'timeout' => 3600]]);
+
+		$this->assertFalse(mactrack_rebuild_aggregated_ports());
+		$this->assertSame([], self::callsMatching('RENAME TABLE'));
+		$this->assertNotSame('on', read_config_option('mt_aggregated_ports_rebuilt'));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testPollerRunningFalseWithoutAProcessesTable(): void {
+		mactrack_test_queue_return('db_table_exists', false);
+
+		$this->assertFalse(mactrack_poller_running());
+	}
+
+	/**
+	 * A poller registration that has outlived its timeout does not count as
+	 * running.
+	 *
+	 * @return void
+	 */
+	public function testPollerRunningIgnoresStaleRegistrations(): void {
+		mactrack_test_queue_return('db_table_exists', true);
+		mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM processes', [['started' => 0, 'now' => 100000, 'timeout' => 300]]);
+
+		$this->assertFalse(mactrack_poller_running());
 	}
 }

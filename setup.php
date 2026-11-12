@@ -269,6 +269,14 @@ function mactrack_database_upgrade_pending(string $current, array $old): bool {
 		return true;
 	}
 
+	// An interrupted rebuild leaves the renamed work table behind with rows
+	// still to copy. Recreating the destination restores the unique key before
+	// the copy finishes, so the checks above can look healthy while history is
+	// still stranded; keep launching the upgrade until that table is drained.
+	if (mactrack_db_table_exists('mac_track_aggregated_ports_upgrade')) {
+		return true;
+	}
+
 	return false;
 }
 

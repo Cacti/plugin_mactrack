@@ -884,8 +884,17 @@ function mactrack_rebuild_aggregated_ports(): bool {
 		}
 
 		// (a) Rename the live table aside. A prior interrupted run leaves the
-		// source table in place, so only rename when it is not there yet.
+		// source table in place, so only rename when it is not there yet. The
+		// rename is the one destructive step (the live table briefly disappears),
+		// so defer it while a poller is mid-run rather than racing its aggregate
+		// writes; the web hook relaunches us once the poller has finished.
 		if (!mactrack_db_table_exists($source)) {
+			if (mactrack_poller_running()) {
+				cacti_log("MACTRACK: Deferring the $live rebuild while a poller is running", false, 'SYSTEM');
+
+				return false;
+			}
+
 			db_execute("RENAME TABLE $live TO $source");
 		}
 
@@ -934,10 +943,10 @@ function mactrack_rebuild_aggregated_ports(): bool {
 					FROM $source
 					WHERE date_last = ?
 					ON DUPLICATE KEY UPDATE
-						count_rec       = count_rec + VALUES(count_rec),
-						first_scan_date = LEAST(first_scan_date, VALUES(first_scan_date)),
-						date_last       = GREATEST(date_last, VALUES(date_last)),
-						active_last     = GREATEST(active_last, VALUES(active_last)),
+						count_rec       = $live.count_rec + VALUES(count_rec),
+						first_scan_date = LEAST($live.first_scan_date, VALUES(first_scan_date)),
+						date_last       = GREATEST($live.date_last, VALUES(date_last)),
+						active_last     = GREATEST($live.active_last, VALUES(active_last)),
 						hostname        = VALUES(hostname),
 						device_name     = VALUES(device_name),
 						vlan_name       = VALUES(vlan_name),
@@ -1012,6 +1021,36 @@ function mactrack_background_upgrade_running(): bool {
 	// A registration that has outlived its timeout is stale; let the caller
 	// replace or ignore a crashed upgrade.
 	return ((int) $process['now'] - (int) $process['started']) <= (int) $process['timeout'];
+}
+
+/**
+ * Reports whether a MacTrack poller (`mactrack`/`master`) is currently
+ * registered and has not outlived its timeout. The aggregated-ports rebuild
+ * uses it to hold off the destructive table rename until a poller that was
+ * already running finishes, closing the window the poller guard cannot.
+ *
+ * @return bool True when a non-stale poller process is registered.
+ */
+function mactrack_poller_running(): bool {
+	if (!db_table_exists('processes')) {
+		return false;
+	}
+
+	$processes = db_fetch_assoc_prepared('SELECT UNIX_TIMESTAMP(started) AS started,
+		UNIX_TIMESTAMP() AS `now`,
+		timeout
+		FROM processes
+		WHERE tasktype = ?
+		AND taskname = ?',
+		['mactrack', 'master']);
+
+	foreach ((array) $processes as $process) {
+		if (((int) $process['now'] - (int) $process['started']) <= (int) $process['timeout']) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 /**

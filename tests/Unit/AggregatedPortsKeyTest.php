@@ -397,6 +397,30 @@ final class AggregatedPortsKeyTest extends TestCase {
 	}
 
 	/**
+	 * An interrupted rebuild restores the destination's unique key before it
+	 * finishes copying, so a healthy key at the current version is not proof
+	 * the upgrade is done: the leftover work table must keep it launching.
+	 *
+	 * @return void
+	 */
+	public function testCheckUpgradeLaunchesWhileTheRebuildWorkTableRemains(): void {
+		$info = plugin_mactrack_version();
+		set_config_option('path_php_binary', '/usr/bin/php');
+		mactrack_test_queue_return('get_current_page', 'index.php');
+		mactrack_test_queue_return('db_fetch_row', ['version' => $info['version'], 'status' => 1]);
+		// The aggregated table is healthy (unique key)...
+		self::givenKey(self::keyRows(0));
+		// ...but the renamed rebuild work table is still present.
+		mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_aggregated_ports_upgrade'", [['t' => 'mac_track_aggregated_ports_upgrade']]);
+
+		mactrack_check_upgrade();
+
+		$launches = array_filter($GLOBALS['__test_db_calls'], static fn ($c) => $c['fn'] === 'exec_background');
+
+		$this->assertCount(1, $launches);
+	}
+
+	/**
 	 * plugin_mactrack_install() refreshes the aggregated-ports table through
 	 * Cacti, which fails while the pre-normalization duplicates and non-unique
 	 * key exist, so the rebuild has to come first.

@@ -115,15 +115,19 @@ if (cacti_sizeof($parms)) {
 	}
 }
 
-// Prevent two upgrades from colliding on the same ALTERs. The 24h timeout
-// covers the slowest installs; a run that crashes past it is taken over on the
-// next launch. --force bypasses the guard for a manual re-run.
-if (!$force) {
-	if (!register_process_start('mtupgrade', 'database', 0, 86400)) {
-		upgrade_debug('A MacTrack database upgrade is already running; exiting');
+// Register a maintenance entry so the poller and the web launcher can see an
+// upgrade is in progress and pause/skip. register_process_start() also guards
+// against two upgrades colliding on the same ALTERs; the 24h timeout covers the
+// slowest installs, and a run that crashes past it is taken over on the next
+// launch. --force runs even when another entry is present (a manual re-run),
+// but must still register the maintenance signal when it can, so writers still
+// pause for it.
+$registered = register_process_start('mtupgrade', 'database', 0, 86400);
 
-		exit(0);
-	}
+if (!$registered && !$force) {
+	upgrade_debug('A MacTrack database upgrade is already running; exiting');
+
+	exit(0);
 }
 
 $start = microtime(true);
@@ -140,7 +144,7 @@ if ($completed) {
 	// version in mactrack_perform_upgrade().
 	set_config_option('mt_db_upgrade_notified', 'off');
 
-	if (!$force) {
+	if ($registered) {
 		unregister_process('mtupgrade', 'database', 0);
 	}
 
@@ -152,7 +156,7 @@ if ($completed) {
 // The upgrade did not finish (for example a large rebuild could not be
 // completed this pass). Leave the operator notice and the recorded version
 // untouched so the web hook relaunches us, and report failure.
-if (!$force) {
+if ($registered) {
 	unregister_process('mtupgrade', 'database', 0);
 }
 
