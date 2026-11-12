@@ -354,4 +354,31 @@ final class AggregatedPortsRebuildTest extends TestCase {
 
 		$this->assertFalse(mactrack_poller_running());
 	}
+
+	/**
+	 * A failed DROP of the drained source must not record completion: the
+	 * leftover table would keep writers paused while the rebuilt flag made
+	 * every retry skip the drop, so the pass reports failure to stay retryable.
+	 *
+	 * @return void
+	 */
+	public function testRebuildRetriesWhenDroppingTheDrainedSourceFails(): void {
+		// Resume shape (source present, destination missing) keeps the db_execute
+		// sequence to CREATE then DROP, so only the drop is forced to fail.
+		self::stubTable('mac_track_aggregated_ports', false);
+		self::stubTable('mac_track_aggregated_ports_upgrade', true);
+		self::stubLock();
+		self::stubColumnType('bigint(20) unsigned');
+		self::stubUniqueKey('mac_track_aggregated_ports', 0);
+		self::stubShowIndexes('mac_track_aggregated_ports_upgrade', [['Key_name' => 'date_last']]);
+		self::stubSourceCount(0);
+		// CREATE TABLE and the single column MODIFY succeed; DROP TABLE fails.
+		mactrack_test_queue_return('db_execute', true);
+		mactrack_test_queue_return('db_execute', true);
+		mactrack_test_queue_return('db_execute', false);
+
+		$this->assertFalse(mactrack_rebuild_aggregated_ports());
+		$this->assertCount(1, self::callsMatching('DROP TABLE IF EXISTS mac_track_aggregated_ports_upgrade'));
+		$this->assertNotSame('on', read_config_option('mt_aggregated_ports_rebuilt'));
+	}
 }
