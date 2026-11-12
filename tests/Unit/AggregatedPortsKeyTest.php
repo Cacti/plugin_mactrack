@@ -308,6 +308,50 @@ final class AggregatedPortsKeyTest extends TestCase {
 	}
 
 	/**
+	 * A second page load that sees the old version while another request
+	 * holds the upgrade lock must not run any part of the upgrade.
+	 *
+	 * @return void
+	 */
+	public function testCheckUpgradeSkipsWhileAnotherRequestIsUpgrading(): void {
+		mactrack_test_queue_return('get_current_page', 'index.php');
+		mactrack_test_queue_return('db_fetch_row', ['version' => '4.8', 'status' => 1]);
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK', '0');
+		self::givenKey(self::keyRows(1));
+
+		mactrack_check_upgrade();
+
+		$this->assertSame(1, count(self::callsMatching('GET_LOCK')));
+		$this->assertNull(self::callIndex('SHOW INDEX FROM'));
+		$this->assertNull(self::callIndex('ALTER TABLE'));
+		$this->assertNull(self::callIndex('UPDATE plugin_config'));
+		$this->assertNull(self::callIndex('RELEASE_LOCK'));
+	}
+
+	/**
+	 * A request that waited out another's upgrade sees the recorded version
+	 * once it holds the lock and does not run the upgrade again.
+	 *
+	 * @return void
+	 */
+	public function testCheckUpgradeDoesNotRepeatAnUpgradeThatJustFinished(): void {
+		$info = plugin_mactrack_version();
+		mactrack_test_queue_return('get_current_page', 'index.php');
+		mactrack_test_queue_return('db_fetch_row', ['version' => '4.8', 'status' => 1]);
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'SELECT version FROM plugin_config', $info['version']);
+		self::givenKey(self::keyRows(0));
+
+		mactrack_check_upgrade();
+
+		$this->assertNull(self::callIndex('UPDATE plugin_config'));
+		$this->assertSame(['SELECT RELEASE_LOCK(?)'], self::callsMatching('RELEASE_LOCK'));
+		$this->assertLessThan(
+			self::callIndex('RELEASE_LOCK'),
+			self::callIndex('SELECT GET_LOCK')
+		);
+	}
+
+	/**
 	 * plugin_mactrack_install() refreshes the table through Cacti, which
 	 * fails while duplicates exist, so the repair has to come first.
 	 *
