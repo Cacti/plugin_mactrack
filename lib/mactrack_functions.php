@@ -2317,46 +2317,46 @@ function xform_stripped_oid($oid, &$device, $snmp_readstring = '', $hex = false)
 
 /**
  * Normalizes an IP address value returned by SNMP (which may be a
- * binary-encoded string, or prefixed with the literal text "Network
- * Address:") into standard dotted-decimal notation.
+ * binary-encoded string, hexadecimal octets, or prefixed with the literal
+ * text "Network Address:") into standard IPv4 or IPv6 text.
  *
- * @param string $ip_address The raw IP address value from SNMP.
+ * @param mixed $ip_address The raw IP address value from SNMP.
  *
- * @return string The normalized dotted-decimal IP address.
+ * @return string The normalized IP address.
  */
 function xform_net_address($ip_address): string {
-	$ip_address = trim($ip_address);
+	$ip_address = (string) $ip_address;
+	$text       = trim(str_replace('Network Address:', '', $ip_address));
+	$length     = strlen($ip_address);
 
-	if (substr_count($ip_address, 'Network Address:')) {
-		$ip_address = trim(str_replace('Network Address:', '', $ip_address));
+	// A raw 4 or 16 byte OctetString is binary, and any of its bytes may be
+	// whitespace, so it is converted untrimmed. A 16 character value can also
+	// be IPv6 text, or the bare "Network Address:" prefix.
+	if (($length == 4 || $length == 16) && strpos($ip_address, 'Network Address:') === false && filter_var($text, FILTER_VALIDATE_IP) === false) {
+		return (string) inet_ntop($ip_address);
 	}
 
-	// Handle the binary format first
-	$length = strlen($ip_address);
+	$ip_address = $text;
 
-	if ($length == 4 || $length == 16) {
-		return (string) inet_ntop(pack('A' . $length, $ip_address));
-	} else {
-		// Adjust for HEX IP in form "0A 09 15 72"
-		$ip_address = str_replace(' ', ':', $ip_address);
+	// valid IPv4 or IPv6 text, including compressed IPv6, is already done
+	if (filter_var($ip_address, FILTER_VALIDATE_IP) !== false) {
+		return $ip_address;
+	}
 
-		if (substr_count($ip_address, ':') != 0) {
-			if (strlen($ip_address) > 11) {
-				// ipv6, don't alter
-			} else {
-				$newaddr = '';
-				$address = explode(':', $ip_address);
+	// hexadecimal IPv4 octets in the form "0A 09 15 72" or "0A:09:15:72"
+	$octets = explode(':', str_replace(' ', ':', $ip_address));
 
-				foreach ($address as $index => $part) {
-					$newaddr .= ($index == 0 ? '' : '.') . hexdec($part);
-				}
-
-				$ip_address = $newaddr;
+	if (count($octets) == 4) {
+		foreach ($octets as $octet) {
+			if (strlen($octet) < 1 || strlen($octet) > 2 || !ctype_xdigit($octet)) {
+				return $ip_address;
 			}
 		}
 
-		return $ip_address;
+		return implode('.', array_map('hexdec', $octets));
 	}
+
+	return $ip_address;
 }
 
 /** xform_mac_address - This function will take a variable that is either formatted as
