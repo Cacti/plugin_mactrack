@@ -387,12 +387,10 @@ function xform_dlink_vlan_associations(&$device, $snmp_readstring = ''): array {
 
 	foreach ($xformArray as $xformItem) {
 		// peel off the beginning of the OID
-		$key = (string) $xformItem['oid'];
-		$key = str_replace('iso', '1', $key);
-		$key = str_replace('1.3.6.1.2.1.17.7.1.2.2.1.2.', '', $key);
+		$key = mactrack_oid_suffix((string) $xformItem['oid'], '.1.3.6.1.2.1.17.7.1.2.2.1.2');
 		// now grab the VLAN
-		$perPos                      = strpos($key, '.',1);
-		$output_array[$i]['vlan_id'] = substr($key,1,$perPos - 1);
+		$perPos                      = (int) strpos($key, '.');
+		$output_array[$i]['vlan_id'] = substr($key, 0, $perPos);
 		// save the key for association with the dot1d table
 		$output_array[$i]['key'] = substr($key, $perPos + 1);
 		$vlan_name               = @cacti_snmp_get($device['hostname'], $snmp_readstring,

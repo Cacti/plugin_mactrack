@@ -145,10 +145,10 @@ function get_JEX_switch_ports($site, &$device, $lowPort = 0, $highPort = 0): arr
 
 		foreach ($mac_results as $num => $mac_result) {
 			if ($mac_result != 0) {
-				$Xvlanid = substr($num, strpos($num, '.') + 1, strpos($num, '.',1) - 1);
-				$Xmac    = mach(substr($num, strpos($num, '.',1) + 1));
+				$Xvlanid = substr($num, 0, (int) strpos($num, '.'));
+				$Xmac    = mach(substr($num, strpos($num, '.') + 1));
 
-				$ifIndex  = mactrack_arr_key($port_results, '.' . strval($mac_result));
+				$ifIndex  = mactrack_arr_key($port_results, strval($mac_result));
 				$ifType   = isset($ifInterfaces[$ifIndex]['ifType']) ? $ifInterfaces[$ifIndex]['ifType'] : '';
 				$ifName   = isset($ifInterfaces[$ifIndex]['ifName']) ? $ifInterfaces[$ifIndex]['ifName'] : '';
 				$ifDesc   = '';

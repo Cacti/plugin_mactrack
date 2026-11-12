@@ -2274,6 +2274,23 @@ function get_link_port_status(&$device): array {
  * @return array Map of OID suffix => value, re-keyed via
  *               array_rekey().
  */
+/**
+ * Returns the part of a walked OID below $base, without a leading dot.
+ * Core's PHP SNMP walk drops the leading dot and the snmpwalk binary keeps
+ * it, so both must give the same key.
+ *
+ * @param string $oid  The OID as returned by cacti_snmp_walk().
+ * @param string $base The walked table OID, with or without a leading dot.
+ *
+ * @return string The index below $base, or the whole OID if it is not below.
+ */
+function mactrack_oid_suffix(string $oid, string $base): string {
+	$oid  = ltrim(str_replace('iso', '1', $oid), '.');
+	$base = ltrim($base, '.') . '.';
+
+	return strpos($oid, $base) === 0 ? substr($oid, strlen($base)) : $oid;
+}
+
 function xform_stripped_oid($oid, &$device, $snmp_readstring = '', $hex = false): array {
 	$return_array = [];
 
@@ -2296,16 +2313,11 @@ function xform_stripped_oid($oid, &$device, $snmp_readstring = '', $hex = false)
 		SNMP_POLLER, $device['snmp_engine_id'],
 		($hex ? SNMP_STRING_OUTPUT_HEX : SNMP_STRING_OUTPUT_GUESS));
 
-	$oid = preg_replace('/^\./', '', $oid);
-
 	$i = 0;
 
 	if (cacti_sizeof($walk_array)) {
 		foreach ($walk_array as $walk_item) {
-			$key                       = $walk_item['oid'];
-			$key                       = str_replace('iso', '1', $key);
-			$key                       = str_replace($oid . '.', '', $key);
-			$return_array[$i]['key']   = $key;
+			$return_array[$i]['key']   = mactrack_oid_suffix((string) $walk_item['oid'], $oid);
 			$return_array[$i]['value'] = $walk_item['value'];
 
 			$i++;
@@ -2526,9 +2538,7 @@ function xform_dot1q_vlan_associations(&$device, $snmp_readstring = ''): array {
 	if (cacti_sizeof($xformArray)) {
 		foreach ($xformArray as $xformItem) {
 			// peel off the beginning of the OID
-			$key = (string) $xformItem['oid'];
-			$key = str_replace('iso', '1', $key);
-			$key = str_replace('1.3.6.1.2.1.17.7.1.2.2.1.2.', '', $key);
+			$key = mactrack_oid_suffix((string) $xformItem['oid'], '.1.3.6.1.2.1.17.7.1.2.2.1.2');
 
 			// now grab the VLAN
 			$perPos                      = strpos($key, '.');
