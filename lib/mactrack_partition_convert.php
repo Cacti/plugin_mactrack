@@ -30,10 +30,6 @@
  * failure leaves the original in use.
  */
 
-/** @codeCoverageIgnoreStart */
-include_once(__DIR__ . '/../includes/database.php');
-/** @codeCoverageIgnoreEnd */
-
 /**
  * Tells whether the server can partition tables.
  *
@@ -134,6 +130,9 @@ function mactrack_partition_convert_bounds(array $epochs, string $granularity, i
  * @return array{ok: bool, reason: string, rows: int, partitions: int, granularity: string}
  */
 function mactrack_partition_convert(bool $keep_old = false, ?callable $progress = null, int $pause = 1): array {
+	// Defines mactrack_background_upgrade_running().
+	include_once(__DIR__ . '/../includes/database.php');
+
 	$state  = mactrack_partition_state();
 	$result = ['ok' => false, 'reason' => '', 'rows' => 0, 'partitions' => 0, 'granularity' => ''];
 
