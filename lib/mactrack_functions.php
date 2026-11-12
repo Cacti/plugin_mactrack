@@ -2921,14 +2921,33 @@ function db_store_device_port_results(&$device, $port_array, $scan_date): void {
  * @return int|false The matching mac_id, or false if not found or
  *                   $mac_address is null/empty.
  */
+/**
+ * Puts a MAC address typed by a user in the stored form: separators
+ * removed and upper case, as the scanners store it.
+ *
+ * @param string $mac_address The MAC address or prefix as entered.
+ *
+ * @return string The address without separators, in upper case.
+ */
+function mactrack_normalize_mac(string $mac_address): string {
+	return strtoupper(str_replace([':', '-', '.', ' '], '', trim($mac_address)));
+}
+
 function db_check_auth($mac_address) {
 	if ($mac_address === null || $mac_address === '') {
 		return false;
 	}
 
-	$query = db_fetch_cell_prepared('SELECT mac_id
+	// An entry may be a whole MAC or a prefix such as a vendor's OUI, as
+	// the MacAuth save treats it. Compare the leading characters rather
+	// than use LIKE, so a stored % or _ is not a wildcard, and never let an
+	// empty entry match everything. Prefer the longest match.
+	$query = db_fetch_cell_prepared("SELECT mac_id
 		FROM mac_track_macauth
-		WHERE mac_address = ?',
+		WHERE mac_address != ''
+		AND LEFT(?, LENGTH(mac_address)) = mac_address
+		ORDER BY LENGTH(mac_address) DESC
+		LIMIT 1",
 		[$mac_address]);
 
 	return $query;
