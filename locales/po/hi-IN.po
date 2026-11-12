@@ -2217,6 +2217,10 @@ msgid "Revoke"
 msgstr "वापस लेना"
 
 #: mactrack_view_macs.php
+msgid "None of the selected MAC Addresses were valid, so no action was taken."
+msgstr ""
+
+#: mactrack_view_macs.php
 #, php-format
 msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
 msgstr "निम्न मैक पते निरस्त नहीं किए जा सकते क्योंकि वे समूह प्राधिकरण %s के सदस्य हैं"
