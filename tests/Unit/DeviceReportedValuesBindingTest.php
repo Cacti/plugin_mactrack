@@ -248,9 +248,9 @@ test('Aruba AOS-CX ARP rows bind the port, MAC and IP the device reports', funct
 
 	$call = mactrack_test_find_call('REPLACE INTO mac_track_ips');
 
-	mactrack_test_expect_bound($call, ['00:11:22:33:44:55', '192.0.2.40']);
+	mactrack_test_expect_bound($call, ['001122334455', '192.0.2.40']);
 
-	expect($call['params'])->toBe([4, 9, 'sw-lab-01', 'Lab switch', '28', '00:11:22:33:44:55', '192.0.2.40', '2026-10-22 10:00:00']);
+	expect($call['params'])->toBe([4, 9, 'sw-lab-01', 'Lab switch', '28', '001122334455', '192.0.2.40', '2026-10-22 10:00:00']);
 });
 
 test('Enterasys N7 alias rows bind the MAC and IP text the device reports', function () {
