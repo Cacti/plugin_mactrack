@@ -142,26 +142,22 @@ function get_tplink_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort 
 		$port_results = xform_stripped_oid('.1.3.6.1.2.1.17.1.4.1.2', $device);
 		$mac_results  = xform_stripped_oid('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device);
 
-		$i = 1;
-		$nport_results = [];
-
-		foreach ($port_results as $port) {
-			$nport_results[$i++] = $port;
-		}
 		$i          = 0;
 		$j          = 0;
 		$port_array = [];
 
 		foreach ($mac_results as $num => $mac_result) {
-			if ($mac_result != 0) {
+			// dot1dBasePortIfIndex is keyed by bridge port, which need not
+			// run 1..n in walk order
+			if ($mac_result != 0 && isset($port_results[$mac_result])) {
 				$Xvlanid = substr($num, 0, (int) strpos($num, '.'));
 				$Xmac    = tp_mach(substr($num, strpos($num, '.') + 1));
 
-				$ifIndex         = $nport_results[$mac_result];
-				$ifType          = $ifInterfaces[$ifIndex]['ifType'];
-				$ifName          = $ifInterfaces[$ifIndex]['ifName'];
+				$ifIndex         = $port_results[$mac_result];
+				$ifType          = $ifInterfaces[$ifIndex]['ifType'] ?? '';
+				$ifName          = $ifInterfaces[$ifIndex]['ifName'] ?? '';
 				$portName        = $ifName;
-				$portTrunkStatus = $vlan_trunkstatus[$ifIndex];
+				$portTrunkStatus = $vlan_trunkstatus[$ifIndex] ?? '';
 
 				// only output legitimate end user ports
 				if ($portName != '' && $portName != '1') {
