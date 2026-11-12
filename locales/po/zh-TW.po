@@ -2278,6 +2278,10 @@ msgid "Revoke"
 msgstr "撤銷"
 
 #: mactrack_view_macs.php
+msgid "None of the selected MAC Addresses were valid, so no action was taken."
+msgstr ""
+
+#: mactrack_view_macs.php
 #, php-format
 msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
 msgstr "下列MAC位址無法撤銷，因為它們是羣組授權%s的成員"
