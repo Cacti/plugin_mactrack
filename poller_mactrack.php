@@ -265,10 +265,11 @@ if ($collect_frequency == 'disabled') {
 			if (empty($last_run_time)) {
 				if ($current_time > strtotime($base_start_time)) {
 					// if timer expired within a polling interval, then poll
-					if (($current_time - 300) < strtotime($base_start_time)) {
+					if (($current_time - $poller_interval) < strtotime($base_start_time)) {
 						$next_run_time = strtotime(date('Y-m-d') . ' ' . $base_start_time);
 					} else {
-						$next_run_time = strtotime(date('Y-m-d') . ' ' . $base_start_time) + 3600 * 24;
+						// not + 86400, which is an hour off across a DST change
+						$next_run_time = strtotime('tomorrow ' . $base_start_time);
 					}
 				} else {
 					$next_run_time = strtotime(date('Y-m-d') . ' ' . $base_start_time);
@@ -279,7 +280,11 @@ if ($collect_frequency == 'disabled') {
 
 			$time_till_next_run = $next_run_time - $current_time;
 
-			if ($time_till_next_run < 0) {
+			// The poller fires a second or two either side of its interval;
+			// a strict < 0 test let a run due now wait a whole interval.
+			$run_due = $time_till_next_run <= $poller_interval / 2;
+
+			if ($run_due) {
 				mactrack_debug('The next run time has been determined to be NOW');
 			} else {
 				mactrack_debug("The next run time has been determined to be at '" . date('Y-m-d H:i:s', (int) $next_run_time) . "'");
@@ -309,13 +314,22 @@ if ($collect_frequency == 'disabled') {
 				mactrack_debug("The next database maintenance run time has been determined to be at '" . date('Y-m-d H:i:s', (int) $next_db_maint_time) . "'");
 			}
 
-			if ($time_till_next_run < 0 || $force == true) {
+			if ($run_due || $force == true) {
 				mactrack_debug('Either a scan has been forced, or it\'s time to check for macs');
 
 				// take time and log performance data
 				$start = microtime(true);
 
-				set_config_option('mt_last_run_time', $current_time);
+				// Store the slot this run belongs to, not when it started, so
+				// the schedule stays on the base time's grid; after a gap, step
+				// to the latest slot that has passed.
+				if ($run_due && $collect_frequency > 0) {
+					$run_slot = mactrack_run_slot((int) $next_run_time, (int) $current_time, (int) $collect_frequency);
+				} else {
+					$run_slot = $current_time;
+				}
+
+				set_config_option('mt_last_run_time', $run_slot);
 
 				collect_mactrack_data($start, $site_id);
 				log_mactrack_statistics('collect');
@@ -465,6 +479,24 @@ function mactrack_error_handler($level, $message, $file, $line, $context = []) {
  *
  * @return void
  */
+/**
+ * Returns the schedule slot a due collection run belongs to: the slot it
+ * was due at, or after missed runs the latest slot that has passed.
+ *
+ * @param int $next_run_time The slot the run was due at.
+ * @param int $current_time  The time the run starts.
+ * @param int $frequency     Seconds between runs, more than 0.
+ *
+ * @return int The slot to store as the last run time.
+ */
+function mactrack_run_slot(int $next_run_time, int $current_time, int $frequency): int {
+	if ($current_time <= $next_run_time) {
+		return $next_run_time;
+	}
+
+	return $next_run_time + intdiv($current_time - $next_run_time, $frequency) * $frequency;
+}
+
 /**
  * Stops the scanners still registered when a run reaches its time limit
  * and removes their process rows.
