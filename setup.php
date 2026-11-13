@@ -281,6 +281,27 @@ function mactrack_database_upgrade_pending(string $current, array $old): bool {
 }
 
 /**
+ * Loads a core library when a function it defines is not loaded yet. Cacti
+ * runs the config_settings hook from global_settings.php, before global.php
+ * includes lib/poller.php, so exec_background() is undefined there; calling
+ * it anyway is a fatal error that makes Cacti disable the plugin.
+ *
+ * @param string $function Function the caller needs.
+ * @param string $library  File under the Cacti lib directory that defines it.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to locate lib/.
+ */
+function mactrack_require_core_function(string $function, string $library): void {
+	global $config;
+
+	if (!function_exists($function)) {
+		include_once($config['base_path'] . '/lib/' . $library);
+	}
+}
+
+/**
  * Launches the background database-upgrade CLI once and raises a single
  * operator notice while it runs. The CLI's register_process_start() is the
  * authoritative double-run guard; this only avoids a needless relaunch and
@@ -299,6 +320,7 @@ function mactrack_launch_background_upgrade(): void {
 		$script     = $config['base_path'] . '/plugins/mactrack/cli/upgrade_database.php';
 
 		if ($php_binary != '' && file_exists($script)) {
+			mactrack_require_core_function('exec_background', 'poller.php');
 			exec_background($php_binary, '-q ' . cacti_escapeshellarg($script));
 		}
 	}
