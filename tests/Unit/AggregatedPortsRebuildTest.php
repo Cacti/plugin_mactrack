@@ -127,6 +127,61 @@ final class AggregatedPortsRebuildTest extends TestCase {
 	}
 
 	/**
+	 * A failed drop in the original background upgrade recorded completion
+	 * with its drained work table still present. Retrying must finish cleanup.
+	 *
+	 * @return void
+	 */
+	public function testCompletionFlagDoesNotHideADrainedWorkTable(): void {
+		set_config_option('mt_aggregated_ports_rebuilt', 'on');
+		self::stubTable('mac_track_aggregated_ports_upgrade', true);
+		self::stubTable('mac_track_aggregated_ports', true);
+		self::stubUniqueKey('mac_track_aggregated_ports', 0);
+		self::stubLock();
+		self::stubSourceCount(0);
+
+		$this->assertTrue(mactrack_rebuild_aggregated_ports());
+		$this->assertCount(1, self::callsMatching('DROP TABLE IF EXISTS mac_track_aggregated_ports_upgrade'));
+		$this->assertSame([], self::callsMatching('RENAME TABLE'));
+		$this->assertSame([], self::callsMatching('INSERT INTO mac_track_aggregated_ports'));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testCompletedFlagStillDefersWhenCleanupFails(): void {
+		set_config_option('mt_aggregated_ports_rebuilt', 'on');
+		self::stubTable('mac_track_aggregated_ports_upgrade', true);
+		self::stubTable('mac_track_aggregated_ports', true);
+		self::stubUniqueKey('mac_track_aggregated_ports', 0);
+		self::stubLock();
+		self::stubSourceCount(0);
+		self::stubColumnType('bigint(20) unsigned');
+		self::stubShowIndexes('mac_track_aggregated_ports_upgrade', [['Key_name' => 'date_last']]);
+		// The port-number column is widened before the drained table is dropped.
+		mactrack_test_queue_return('db_execute', true);
+		mactrack_test_queue_return('db_execute', false);
+
+		$this->assertFalse(mactrack_rebuild_aggregated_ports());
+		$this->assertCount(1, self::callsMatching('RELEASE_LOCK'));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testCompletedFlagDoesNotDiscardUncopiedRows(): void {
+		set_config_option('mt_aggregated_ports_rebuilt', 'on');
+		self::stubTable('mac_track_aggregated_ports_upgrade', true);
+		self::stubTable('mac_track_aggregated_ports', true);
+		self::stubUniqueKey('mac_track_aggregated_ports', 0);
+		self::stubLock();
+		self::stubSourceCount(7);
+
+		$this->assertFalse(mactrack_rebuild_aggregated_ports());
+		$this->assertSame([], self::callsMatching('DROP TABLE'));
+	}
+
+	/**
 	 * A completed rebuild whose unique key was later dropped (for example by a
 	 * Cacti table refresh) is repaired idempotently rather than rebuilt again.
 	 *
