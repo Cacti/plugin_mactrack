@@ -2978,7 +2978,10 @@ function perform_mactrack_db_maint(): void {
 	db_execute_prepared('DELETE FROM mac_track_ips
 		WHERE scan_date < CURDATE() - INTERVAL ? DAY',
 		[(int) read_config_option('mt_data_retention_ip')]);
-	db_execute('OPTIMIZE TABLE mac_track_ips');
+
+	// No OPTIMIZE: it rebuilds the whole table and blocks writes, which takes
+	// hours at tens of millions of rows, and InnoDB reuses the pages that the
+	// daily DELETE frees.
 
 	// The ARP translations follow the IP retention and the 802.1x sessions
 	// the port retention; nothing else ever removed them.

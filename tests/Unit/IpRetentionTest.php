@@ -41,3 +41,14 @@ it('deletes IP rows older than the retention in days', function () {
 	expect(preg_replace('/\s+/', ' ', $delete[0]['sql']))->toBe('DELETE FROM mac_track_ips WHERE scan_date < CURDATE() - INTERVAL ? DAY');
 	expect($delete[0]['params'])->toBe([60]);
 });
+
+it('does not rebuild the IP table during maintenance', function () {
+	set_config_option('mt_data_retention_ip', '3');
+	mactrack_test_queue_return('db_fetch_row', ['Create Table' => 'CREATE TABLE `mac_track_ports` (`scan_date` timestamp)']);
+
+	perform_mactrack_db_maint();
+
+	$optimize = array_filter($GLOBALS['__test_db_calls'], fn ($c) => stripos($c['sql'], 'OPTIMIZE TABLE mac_track_ips') !== false);
+
+	expect($optimize)->toBe([]);
+});
