@@ -28,6 +28,7 @@
 include_once(__DIR__ . '/mactrack_partitions.php');
 include_once(__DIR__ . '/mactrack_partition_ops.php');
 include_once(__DIR__ . '/mactrack_partition_convert.php');
+include_once(__DIR__ . '/mactrack_activity.php');
 // @codeCoverageIgnoreEnd
 
 /**
@@ -2963,6 +2964,27 @@ function mactrack_delete_batched(string $sql, array $params, int $batch = 10000)
  * @return void
  */
 function perform_mactrack_db_maint(): void {
+	$steps = [];
+
+	try {
+		mactrack_db_maint_run($steps);
+	} finally {
+		// An exception leaves a step open; close it so the status page does
+		// not show maintenance as running, and keep the timings gathered so far.
+		mactrack_maint_step_end($steps);
+		mactrack_maint_steps_save($steps);
+	}
+}
+
+/**
+ * Runs the maintenance steps for perform_mactrack_db_maint(), noting each
+ * heavy step in $steps as it starts.
+ *
+ * @param array $steps Step list that mactrack_maint_step_begin() fills.
+ *
+ * @return void
+ */
+function mactrack_db_maint_run(array &$steps): void {
 	global $database_default;
 
 	if ((string) read_config_option('mt_partition_converting', true) !== '') {
@@ -3022,6 +3044,8 @@ function perform_mactrack_db_maint(): void {
 
 	if ($layout['state'] === 'range') {
 		// Scan-date layout: whole partitions expire, no rows are deleted.
+		mactrack_maint_step_begin($steps, 'partition_maintenance');
+
 		$result = mactrack_partition_maintain((int) $days);
 
 		mactrack_debug('Dropped ' . count($result['dropped']) . ' and created ' . count($result['created']) . ' partitions' . ($result['reason'] !== '' ? " ({$result['reason']})" : '') . '.');
@@ -3033,11 +3057,17 @@ function perform_mactrack_db_maint(): void {
 
 		// OPTIMIZE no longer runs here; Utilities has it as its own action.
 		if ($retention > 0) {
+			mactrack_maint_step_begin($steps, 'delete_ports');
+
 			mactrack_delete_batched('DELETE QUICK FROM mac_track_ports WHERE scan_date < ? ORDER BY scan_date', [$retention_date]);
+
+			mactrack_maint_step_begin($steps, 'prune_scan_dates');
 
 			mactrack_scan_dates_prune($retention_date);
 		}
 	} else {
+		mactrack_maint_step_begin($steps, 'partition_maintenance');
+
 		$syslog_deleted       = 0;
 		$number_of_partitions = db_fetch_assoc_prepared('SELECT *
 			FROM `information_schema`.`partitions`
@@ -3136,6 +3166,8 @@ function perform_mactrack_db_maint(): void {
 		}
 	}
 
+	mactrack_maint_step_begin($steps, 'delete_ips');
+
 	// CURDATE() - n is integer arithmetic on YYYYMMDD (20261112 - 60 is no
 	// date at all), so the cutoff needs INTERVAL.
 	mactrack_delete_batched('DELETE FROM mac_track_ips
@@ -3159,6 +3191,8 @@ function perform_mactrack_db_maint(): void {
 			ORDER BY scan_date',
 			[$retention_date]);
 	}
+
+	mactrack_maint_step_end($steps);
 
 	mactrack_debug('Finished deleting old records from the main database.');
 }

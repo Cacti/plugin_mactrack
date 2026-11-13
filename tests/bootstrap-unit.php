@@ -562,14 +562,21 @@ if (!function_exists('__')) {
 	// arguments and a trailing text domain. Declared with func_get_args() so
 	// static analysis treats it as variadic rather than a fixed 2-arg function.
 	/**
-	 * Test stub standing in for Cacti core's variadic __() translator. Performs no translation or sprintf substitution.
+	 * Test stub standing in for Cacti core's variadic __() translator. Performs no translation; substitutes the format values as core does.
 	 *
-	 * @return string The first argument, or an empty string when none is given.
+	 * @return string The formatted string, or an empty string when no arguments are given.
 	 */
 	function __() {
 		$args = func_get_args();
 
-		return $args[0] ?? '';
+		if (count($args) < 2) {
+			return $args[0] ?? '';
+		}
+
+		// Like core with no MacTrack translations loaded: the domain is not
+		// registered, so every argument after the format, the domain
+		// included, is a format value.
+		return vsprintf((string) array_shift($args), $args);
 	}
 }
 
