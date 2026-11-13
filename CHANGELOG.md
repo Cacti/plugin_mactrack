@@ -4,6 +4,7 @@
 
 * issue: Resume background database upgrades after a worker exits and finish migration-table cleanup when an earlier upgrade recorded completion before a failed drop
 * issue: Keep MacTrack enabled while a database upgrade is pending; the settings hook launched the background upgrade before Cacti had loaded exec_background(), and the resulting error made Cacti disable the plugin
+* issue: Report a background database upgrade that cannot start (PHP binary unset or missing, upgrade script missing, or exec() disabled) in the Cacti log and in the notice, with the manual command, instead of saying the upgrade is running
 
 * issue#359: Restore the unique mac_track_aggregated_ports `port_number` key on upgraded installs, merging the duplicate rows the 4.9 upgrade let accumulate, so the table refresh no longer fails with "Duplicate entry ... for key 'port_number'" and the MAC separator migration runs only once; widen its `row_id` to bigint unsigned and run a version upgrade in only one page load at a time
 * issue#399: Use the registered Aruba AOS-CX callback names in the built-in 6200/6300 device types and repair existing defaults during upgrade

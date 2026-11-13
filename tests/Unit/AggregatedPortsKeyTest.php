@@ -322,7 +322,7 @@ final class AggregatedPortsKeyTest extends TestCase {
 	 */
 	public function testCheckUpgradeLaunchesTheBackgroundUpgradeWhenTheKeyIsNotUnique(): void {
 		$info = plugin_mactrack_version();
-		set_config_option('path_php_binary', '/usr/bin/php');
+		set_config_option('path_php_binary', PHP_BINARY);
 		mactrack_test_queue_return('get_current_page', 'index.php');
 		mactrack_test_queue_return('db_fetch_row', ['version' => $info['version'], 'status' => 1]);
 		self::givenKey(self::keyRows(1));
@@ -358,7 +358,7 @@ final class AggregatedPortsKeyTest extends TestCase {
 	 * @return void
 	 */
 	public function testCheckUpgradeDoesNotRelaunchWhileTheUpgradeIsRunning(): void {
-		set_config_option('path_php_binary', '/usr/bin/php');
+		set_config_option('path_php_binary', PHP_BINARY);
 		mactrack_test_queue_return('get_current_page', 'index.php');
 		mactrack_test_queue_return('db_fetch_row', ['version' => '4.8', 'status' => 1]);
 		// A registered upgrade process that has not outlived its timeout.
@@ -379,7 +379,7 @@ final class AggregatedPortsKeyTest extends TestCase {
 	 */
 	public function testCheckUpgradeDoesNothingOnceTheUpgradeHasFinished(): void {
 		$info = plugin_mactrack_version();
-		set_config_option('path_php_binary', '/usr/bin/php');
+		set_config_option('path_php_binary', PHP_BINARY);
 		mactrack_test_queue_return('get_current_page', 'index.php');
 		mactrack_test_queue_return('db_fetch_row', ['version' => $info['version'], 'status' => 1]);
 		// Realms already cover every file, so the inline realm repair is skipped.
@@ -405,7 +405,7 @@ final class AggregatedPortsKeyTest extends TestCase {
 	 */
 	public function testCheckUpgradeLaunchesWhileTheRebuildWorkTableRemains(): void {
 		$info = plugin_mactrack_version();
-		set_config_option('path_php_binary', '/usr/bin/php');
+		set_config_option('path_php_binary', PHP_BINARY);
 		mactrack_test_queue_return('get_current_page', 'index.php');
 		mactrack_test_queue_return('db_fetch_row', ['version' => $info['version'], 'status' => 1]);
 		// The aggregated table is healthy (unique key)...
