@@ -51,6 +51,7 @@ global $config;
 require_once($config['base_path'] . '/lib/poller.php');
 require_once($config['base_path'] . '/plugins/mactrack/includes/database.php');
 require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_activity.php');
 
 mactrack_retry_default_site();
 
@@ -153,13 +154,18 @@ if (function_exists('register_process_start')) {
 // few skipped cycles are harmless.
 if (function_exists('mactrack_background_upgrade_running')) {
 	$upgrade_active = mactrack_background_upgrade_running();
+	$defer_reason   = 'upgrade';
 
 	if (!$upgrade_active && function_exists('mactrack_db_table_exists')) {
 		$upgrade_active = mactrack_db_table_exists('mac_track_aggregated_ports_upgrade');
+		$defer_reason   = 'rebuild_table';
 	}
 
 	if ($upgrade_active) {
 		mactrack_debug('Deferring the Mactrack poller run while a database upgrade is in progress');
+
+		// the Process Status page shows why no scan ran
+		mactrack_poller_deferred($defer_reason);
 
 		if (function_exists('unregister_process')) {
 			unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
@@ -168,6 +174,9 @@ if (function_exists('mactrack_background_upgrade_running')) {
 		exit(0);
 	}
 }
+
+// not deferring: drop the note the Process Status page shows
+mactrack_poller_deferred_clear();
 
 // Get rid of old/hung processes
 clear_old_processes($site_id);
@@ -654,6 +663,8 @@ function collect_mactrack_data($start, $site_id = 0): void {
 		}
 
 		// scan through all devices
+		mactrack_activity_begin('scanning', ['devices' => $total_devices]);
+
 		$j                   = 0;
 		$i                   = 0;
 		$last_time           = strtotime('now') - 7200;
@@ -911,6 +922,8 @@ function collect_mactrack_data($start, $site_id = 0): void {
 		 */
 		db_process_remove('-1');
 
+		mactrack_activity_begin('dns_resolver');
+
 		while (!$exit_mactrack) {
 			// checking to see if the resolver is running
 			$resolver_running = db_fetch_row('SELECT *
@@ -936,6 +949,8 @@ function collect_mactrack_data($start, $site_id = 0): void {
 		// transfer temp port results into permanent table, in batches: no
 		// INSERT ... SELECT, which locks the temp rows under mixed binlogs.
 		// A per-scan partition is filled through the stage table.
+		mactrack_activity_begin('transferring');
+
 		$loaded = mactrack_partition_load_scan($partition_plan);
 
 		mactrack_debug("Loaded $loaded scan rows ({$partition_plan['mode']}).");
@@ -1153,6 +1168,8 @@ function collect_mactrack_data($start, $site_id = 0): void {
 		*/
 
 		api_plugin_hook_function('mac_track_finish_scan');
+
+		mactrack_activity_end();
 	} else {
 		cacti_log('NOTE: MACTRACK has no devices to process at this time', false, 'MACTRACK');
 	}
