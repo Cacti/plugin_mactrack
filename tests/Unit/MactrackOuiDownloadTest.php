@@ -453,6 +453,22 @@ final class MactrackOuiDownloadTest extends TestCase {
 	}
 
 	/**
+	 * A vendor name or address that starts with a comma loses the comma.
+	 *
+	 * @return void
+	 */
+	public function testParserStripsALeadingComma(): void {
+		$records = mactrack_parse_oui_database([
+			"AA-BB-CC   (hex)\t\t,Leading Comma Ltd\n",
+			"AABBCC     (base 16)\t\t,Main Street\n",
+			"\n",
+		]);
+
+		$this->assertSame('Leading Comma Ltd', $records[0]['vendor_name']);
+		$this->assertSame('Main Street', $records[0]['vendor_address']);
+	}
+
+	/**
 	 * @return void
 	 */
 	public function testDownloadAlwaysHasATimeout(): void {
