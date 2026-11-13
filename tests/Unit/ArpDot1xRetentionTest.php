@@ -30,7 +30,7 @@ it('prunes the ARP and 802.1x tables in maintenance', function () {
 	$src = preg_replace('/\s+/', ' ', file_get_contents(dirname(__DIR__, 2) . '/lib/mactrack_functions.php'));
 
 	expect($src)->toContain("db_execute_prepared('DELETE FROM mac_track_arp WHERE scan_date < CURDATE() - INTERVAL ? DAY', [(int) read_config_option('mt_data_retention_ip')]);");
-	expect($src)->toContain("if (\$days > 0) { db_execute_prepared('DELETE FROM mac_track_dot1x WHERE scan_date < ?', [\$retention_date]); }");
+	expect($src)->toContain("if (\$days > 0) { mactrack_delete_batched('DELETE FROM mac_track_dot1x WHERE scan_date < ? ORDER BY scan_date', [\$retention_date]); }");
 });
 
 it('reads the newest ARP translation for a MAC', function () {

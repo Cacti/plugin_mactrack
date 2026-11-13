@@ -2821,6 +2821,34 @@ function db_check_for_ip($mac_address) {
 }
 
 /**
+ * Runs a DELETE in batches until a batch comes back short, so a large
+ * backlog (tens of millions of rows the first time retention works) never
+ * becomes one transaction that holds locks, undo and replica lag for hours.
+ *
+ * @param string       $sql    A DELETE ending in an ORDER BY on an indexed
+ *                             column, so each batch is a range read and the
+ *                             LIMIT is deterministic for replication.
+ * @param array<mixed> $params Its parameters.
+ * @param int          $batch  Rows per batch.
+ *
+ * @return int The rows deleted.
+ */
+function mactrack_delete_batched(string $sql, array $params, int $batch = 10000): int {
+	$total = 0;
+
+	do {
+		if (!db_execute_prepared($sql . ' LIMIT ' . $batch, $params)) {
+			break;
+		}
+
+		$rows   = (int) db_affected_rows();
+		$total += $rows;
+	} while ($rows >= $batch);
+
+	return $total;
+}
+
+/**
  * perform_mactrack_db_maint - This utility removes stale records from the database.
  */
 function perform_mactrack_db_maint(): void {
@@ -2975,8 +3003,9 @@ function perform_mactrack_db_maint(): void {
 
 	// CURDATE() - n is integer arithmetic on YYYYMMDD (20261112 - 60 is no
 	// date at all), so the cutoff needs INTERVAL.
-	db_execute_prepared('DELETE FROM mac_track_ips
-		WHERE scan_date < CURDATE() - INTERVAL ? DAY',
+	mactrack_delete_batched('DELETE FROM mac_track_ips
+		WHERE scan_date < CURDATE() - INTERVAL ? DAY
+		ORDER BY scan_date',
 		[(int) read_config_option('mt_data_retention_ip')]);
 
 	// No OPTIMIZE: it rebuilds the whole table and blocks writes, which takes
@@ -2990,8 +3019,9 @@ function perform_mactrack_db_maint(): void {
 		[(int) read_config_option('mt_data_retention_ip')]);
 
 	if ($days > 0) {
-		db_execute_prepared('DELETE FROM mac_track_dot1x
-			WHERE scan_date < ?',
+		mactrack_delete_batched('DELETE FROM mac_track_dot1x
+			WHERE scan_date < ?
+			ORDER BY scan_date',
 			[$retention_date]);
 	}
 

@@ -38,7 +38,7 @@ it('deletes IP rows older than the retention in days', function () {
 	$delete = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => strpos($c['sql'], 'DELETE FROM mac_track_ips') !== false));
 
 	expect($delete)->toHaveCount(1);
-	expect(preg_replace('/\s+/', ' ', $delete[0]['sql']))->toBe('DELETE FROM mac_track_ips WHERE scan_date < CURDATE() - INTERVAL ? DAY');
+	expect(preg_replace('/\s+/', ' ', $delete[0]['sql']))->toBe('DELETE FROM mac_track_ips WHERE scan_date < CURDATE() - INTERVAL ? DAY ORDER BY scan_date LIMIT 10000');
 	expect($delete[0]['params'])->toBe([60]);
 });
 
