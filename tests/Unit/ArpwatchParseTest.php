@@ -22,12 +22,10 @@
  +-------------------------------------------------------------------------+
 */
 
-$src = file_get_contents(dirname(__DIR__, 2) . '/poller_mactrack.php');
+require_once dirname(__DIR__) . '/Support/load_function.php';
 
-if (!function_exists('mactrack_parse_arpwatch_line')) {
-	$at = strpos($src, 'function mactrack_parse_arpwatch_line(');
-	eval(substr($src, $at, strpos($src, "\n}\n", $at) - $at + 2));
-}
+// poller_mactrack.php runs the poller when it is included, so load only the parser
+mactrack_test_load_function('poller_mactrack.php', 'mactrack_parse_arpwatch_line');
 
 it('reads the MAC, IP and host name from an arp.dat line', function () {
 	expect(mactrack_parse_arpwatch_line("0:11:2a:33:44:5\t192.0.2.10\t1700000000\thost.example\n", ''))

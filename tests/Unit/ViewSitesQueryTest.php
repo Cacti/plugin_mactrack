@@ -28,14 +28,10 @@ if (!function_exists('get_order_string')) {
 	}
 }
 
-if (!function_exists('mactrack_view_get_site_records')) {
-	// Load only the query builder from the page file.
-	$src = file_get_contents(dirname(__DIR__, 2) . '/mactrack_view_sites.php');
-	$at  = strpos($src, 'function mactrack_view_get_site_records(');
-	$end = strpos($src, "\n}\n", $at);
+require_once dirname(__DIR__) . '/Support/load_function.php';
 
-	eval(substr($src, $at, $end - $at + 2));
-}
+// Load only the query builder from the page file.
+mactrack_test_load_function('mactrack_view_sites.php', 'mactrack_view_get_site_records');
 
 beforeEach(function () {
 	$GLOBALS['__test_db_calls'] = [];
