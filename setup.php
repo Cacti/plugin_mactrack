@@ -281,10 +281,71 @@ function mactrack_database_upgrade_pending(string $current, array $old): bool {
 }
 
 /**
+ * Loads a core library when a function it defines is not loaded yet. Cacti
+ * runs the config_settings hook from global_settings.php, before global.php
+ * includes lib/poller.php, so exec_background() is undefined there; calling
+ * it anyway is a fatal error that makes Cacti disable the plugin.
+ *
+ * @param string $function Function the caller needs.
+ * @param string $library  File under the Cacti lib directory that defines it.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to locate lib/.
+ */
+function mactrack_require_core_function(string $function, string $library): void {
+	global $config;
+
+	if (!function_exists($function)) {
+		include_once($config['base_path'] . '/lib/' . $library);
+	}
+}
+
+/**
+ * Returns why the background upgrade CLI cannot be launched, or an empty
+ * string when nothing is known to stop it. exec_background() returns nothing
+ * and does nothing for a missing binary, so the checks happen here.
+ *
+ * @param string      $php_binary The configured PHP binary (path_php_binary).
+ * @param string      $script     The upgrade CLI script.
+ * @param string|null $spawn      The PHP function exec_background() starts
+ *                                the process with; null picks the one for
+ *                                this platform. Tests pass a missing name.
+ *
+ * @return string The reason, or '' when the launch can be attempted.
+ */
+function mactrack_background_upgrade_launch_problem(string $php_binary, string $script, ?string $spawn = null): string {
+	if ($php_binary == '') {
+		return 'the PHP binary path (path_php_binary) is not set';
+	}
+
+	if (!file_exists($php_binary)) {
+		return sprintf('the PHP binary %s does not exist', $php_binary);
+	}
+
+	if (!file_exists($script)) {
+		return sprintf('the upgrade script %s does not exist', $script);
+	}
+
+	// exec_background() uses popen() on Windows and exec() elsewhere. A
+	// function listed in disable_functions is not defined on PHP 8.
+	if ($spawn === null) {
+		$spawn = PHP_OS_FAMILY === 'Windows' ? 'popen' : 'exec';
+	}
+
+	if (!function_exists($spawn)) {
+		return sprintf('PHP function %s() is disabled', $spawn);
+	}
+
+	return '';
+}
+
+/**
  * Launches the background database-upgrade CLI once and raises a single
  * operator notice while it runs. The CLI's register_process_start() is the
  * authoritative double-run guard; this only avoids a needless relaunch and
- * keeps the notice from repeating on every page load.
+ * keeps the notice from repeating on every page load. When the CLI cannot be
+ * launched, the notice says so and gives the manual command instead.
  *
  * @return void
  *
@@ -294,21 +355,36 @@ function mactrack_database_upgrade_pending(string $current, array $old): bool {
 function mactrack_launch_background_upgrade(): void {
 	global $config;
 
-	if (!mactrack_background_upgrade_running()) {
-		$php_binary = read_config_option('path_php_binary');
-		$script     = $config['base_path'] . '/plugins/mactrack/cli/upgrade_database.php';
+	$problem = '';
 
-		if ($php_binary != '' && file_exists($script)) {
+	if (!mactrack_background_upgrade_running()) {
+		$php_binary = (string) read_config_option('path_php_binary');
+		$script     = $config['base_path'] . '/plugins/mactrack/cli/upgrade_database.php';
+		$problem    = mactrack_background_upgrade_launch_problem($php_binary, $script);
+
+		if ($problem == '') {
+			mactrack_require_core_function('exec_background', 'poller.php');
 			exec_background($php_binary, '-q ' . cacti_escapeshellarg($script));
 		}
 	}
 
 	// Raise the notice only once. The CLI clears this flag when it finishes, so
-	// a future upgrade notifies again.
+	// a future upgrade notifies again. The launch is still retried on every
+	// call, so fixing the cause lets a later page load start the upgrade.
 	if (read_config_option('mt_db_upgrade_notified', true) != 'on') {
-		raise_message('mactrack_db_upgrade',
-			__('MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes.', 'mactrack'),
-			MESSAGE_LEVEL_WARN);
+		if ($problem == '') {
+			raise_message('mactrack_db_upgrade',
+				__('MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes.', 'mactrack'),
+				MESSAGE_LEVEL_WARN);
+		} else {
+			$command = 'php ' . $config['base_path'] . '/plugins/mactrack/cli/upgrade_database.php';
+
+			cacti_log(sprintf('ERROR: MacTrack could not start its background database upgrade because %s. Run it manually: %s', $problem, $command), false, 'MACTRACK');
+
+			raise_message('mactrack_db_upgrade',
+				__('MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s', $command, 'mactrack'),
+				MESSAGE_LEVEL_ERROR);
+		}
 
 		set_config_option('mt_db_upgrade_notified', 'on');
 	}
