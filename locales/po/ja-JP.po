@@ -3336,6 +3336,10 @@ msgstr "自動的に認証されるMACアドレスまたはMacアドレスの一
 msgid "Please add a reason for this entry."
 msgstr "このエントリの理由を追加してください。"
 
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr ""
+
 #~ msgid "IP Address"
 #~ msgstr "IPアドレス"
 
