@@ -3338,6 +3338,10 @@ msgstr "Voer het MAC-adres of Mac Address Match-string in om automatisch geautor
 msgid "Please add a reason for this entry."
 msgstr "Voeg een reden voor deze vermelding toe."
 
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr ""
+
 #~ msgid "IP Address"
 #~ msgstr "IP-adres"
 
