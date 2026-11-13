@@ -3344,6 +3344,10 @@ msgstr "कृपया स्वचालित रूप से अधिक�
 msgid "Please add a reason for this entry."
 msgstr "कृपया इस प्रविष्टि के लिए एक कारण जोड़ें।"
 
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr ""
+
 #~ msgid "IP Address"
 #~ msgstr "IP सिरनामा"
 
