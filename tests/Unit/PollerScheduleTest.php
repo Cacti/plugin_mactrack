@@ -22,12 +22,12 @@
  +-------------------------------------------------------------------------+
 */
 
-$src = file_get_contents(dirname(__DIR__, 2) . '/poller_mactrack.php');
+require_once dirname(__DIR__) . '/Support/load_function.php';
 
-if (!function_exists('mactrack_run_slot')) {
-	$at = strpos($src, 'function mactrack_run_slot(');
-	eval(substr($src, $at, strpos($src, "\n}\n", $at) - $at + 2));
-}
+// poller_mactrack.php runs the poller when it is included, so load only the helper
+mactrack_test_load_function('poller_mactrack.php', 'mactrack_run_slot');
+
+$src = file_get_contents(dirname(__DIR__, 2) . '/poller_mactrack.php');
 
 it('keeps the slot when the run starts on time or a little early', function () {
 	expect(mactrack_run_slot(6000, 6000, 600))->toBe(6000);

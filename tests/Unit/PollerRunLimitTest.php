@@ -27,6 +27,8 @@
  * has launched but that have not started, and must stop its scanners
  * before it loads and truncates their table.
  */
+require_once dirname(__DIR__) . '/Support/load_function.php';
+
 beforeEach(function () {
 	$this->src  = file_get_contents(dirname(__DIR__, 2) . '/poller_mactrack.php');
 	$this->flat = preg_replace('/\s+/', ' ', $this->src);
@@ -65,10 +67,7 @@ it('stops the scanners before loading the ports after a timeout', function () {
 
 it('removes every scanner row when it stops the scanners', function () {
 	foreach (['mactrack_kill_process', 'mactrack_stop_scanners'] as $fn) {
-		if (!function_exists($fn)) {
-			$at = strpos($this->src, "function $fn(");
-			eval(substr($this->src, $at, strpos($this->src, "\n}\n", $at) - $at + 2));
-		}
+		mactrack_test_load_function('poller_mactrack.php', $fn);
 	}
 
 	$GLOBALS['__test_db_calls'] = [];
