@@ -3338,6 +3338,10 @@ msgstr "Por favor, introduza o endereço MAC ou a string Mac Address Match para 
 msgid "Please add a reason for this entry."
 msgstr "Por favor, adicione um motivo para esta entrada."
 
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr ""
+
 #~ msgid "IP Address"
 #~ msgstr "Endereço IP"
 
