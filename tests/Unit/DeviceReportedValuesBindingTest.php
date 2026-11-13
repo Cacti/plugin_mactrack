@@ -198,6 +198,20 @@ test('Cisco DHCP snooping rows bind the port, MAC and IP the device reports', fu
 	expect($call['params'])->toBe([4, 9, 'sw-lab-01', 'Lab switch', 'Gi2/0/7', '001122334455', '192.0.2.10', '2026-10-22 10:00:00']);
 });
 
+test('standard ARP rows missing an IP look up the MAC within the device site', function () {
+	mactrack_test_walk('.1.3.6.1.2.1.3.1.1.1', ['12.1.192.0.2.20' => '12']);
+	mactrack_test_walk('.1.3.6.1.2.1.3.1.1.2', ['12.1.192.0.2.20' => '00 11 22 33 44 66']);
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'mac_track_arp', '192.0.2.20');
+
+	get_standard_arp_table([], $this->device);
+
+	$lookup = mactrack_test_find_call('SELECT ip_address');
+	expect($lookup['params'])->toBe(['001122334466', 4]);
+	expect($lookup['sql'])->toContain('site_id = ?');
+	$insert = mactrack_test_find_call('REPLACE INTO mac_track_ips');
+	expect($insert['params'])->toBe([4, 9, 'sw-lab-01', 'Lab switch', '', '001122334466', '192.0.2.20', '2026-10-22 10:00:00']);
+});
+
 test('Cisco VRF ARP rows bind the IP and MAC the device reports', function () {
 	mactrack_test_walk('.1.3.6.1.2.1.3.1.1.2', ['12.1.192.0.2.20' => '0 11 22 33 44 66']);
 

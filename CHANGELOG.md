@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue: Scope ARP fallback lookups to the device site so reused MAC addresses do not supply translations from another site
 * issue: Resume background database upgrades after a worker exits and finish migration-table cleanup when an earlier upgrade recorded completion before a failed drop
 * issue: Keep MacTrack enabled while a database upgrade is pending; the settings hook launched the background upgrade before Cacti had loaded exec_background(), and the resulting error made Cacti disable the plugin
 * issue: Report a background database upgrade that cannot start (PHP binary unset or missing, upgrade script missing, or exec() disabled) in the Cacti log and in the notice, with the manual command, instead of saying the upgrade is running

@@ -165,6 +165,12 @@ if (!function_exists('db_execute_prepared')) {
 	}
 }
 
+if (!function_exists('db_affected_rows')) {
+	function db_affected_rows($db_conn = false) {
+		return mactrack_test_next_return('db_affected_rows', 0);
+	}
+}
+
 if (!function_exists('db_fetch_assoc')) {
 	function db_fetch_assoc($sql) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_assoc', 'sql' => $sql, 'params' => array());

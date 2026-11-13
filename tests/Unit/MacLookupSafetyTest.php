@@ -19,12 +19,13 @@ test('empty MAC addresses cannot become wildcard lookups', function () {
 
 test('non-empty MAC lookups use bound parameters', function () {
 	$GLOBALS['__test_db_calls'] = [];
-	db_check_for_ip('AABBCCDDEEFF');
+	db_check_for_ip('AABBCCDDEEFF', 35);
 	db_check_auth('AABBCCDDEEFF');
 
 	expect($GLOBALS['__test_db_calls'])->toHaveCount(2);
 	expect($GLOBALS['__test_db_calls'][0]['fn'])->toBe('db_fetch_cell_prepared');
-	expect($GLOBALS['__test_db_calls'][0]['params'])->toBe(['AABBCCDDEEFF']);
+	expect($GLOBALS['__test_db_calls'][0]['params'])->toBe(['AABBCCDDEEFF', 35]);
+	expect($GLOBALS['__test_db_calls'][0]['sql'])->toContain('site_id = ?');
 	expect($GLOBALS['__test_db_calls'][1]['params'])->toBe(['AABBCCDDEEFF']);
 });
 
@@ -33,7 +34,7 @@ test('MAC lookup helpers return database matches', function () {
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'mac_track_arp', '192.0.2.25');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'mac_track_macauth', '192.0.2.25');
 
-	expect(db_check_for_ip('AABBCCDDEEFF'))->toBe('192.0.2.25');
+	expect(db_check_for_ip('AABBCCDDEEFF', 35))->toBe('192.0.2.25');
 	expect(db_check_auth('AABBCCDDEEFF'))->toBe('192.0.2.25');
 });
 
@@ -45,4 +46,10 @@ test('authorization uses exact MAC matching without wildcard expansion', functio
 	expect($GLOBALS['__test_db_calls'][0]['sql'])->toContain('mac_address = ?');
 	expect($GLOBALS['__test_db_calls'][0]['params'])->toBe(['AABBCC']);
 	expect($GLOBALS['__test_db_calls'][1]['params'])->toBe(['AA%_BB']);
+});
+
+test('an ARP lookup without a site cannot use another site translation', function () {
+	$GLOBALS['__test_db_calls'] = [];
+	expect(db_check_for_ip('AABBCCDDEEFF'))->toBeFalse();
+	expect($GLOBALS['__test_db_calls'])->toBeEmpty();
 });

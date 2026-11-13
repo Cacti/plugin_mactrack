@@ -608,7 +608,7 @@ function get_standard_arp_table($site, &$device): void {
 		foreach ($atEntries as $atEntry) {
 			// check the mac_track_arp table if no IP address is found
 			if ($atEntry['atNetAddress'] == '' && $atEntry['atPhysAddress'] !== '') {
-				$atEntry['atNetAddress'] = db_check_for_ip($atEntry['atPhysAddress']);
+				$atEntry['atNetAddress'] = db_check_for_ip($atEntry['atPhysAddress'], $device['site_id']);
 				mactrack_debug('atNetAddress ****:' . $atEntry['atPhysAddress'] . '(' . $atEntry['atNetAddress'] . ')');
 			}
 
@@ -2873,6 +2873,7 @@ function db_store_device_port_results(&$device, $port_array, $scan_date): void {
  * mac_track_macauth authorization table.
  *
  * @param string|null $mac_address The MAC address to check.
+ * @param int|null    $site_id     The site owning the observed device.
  *
  * @return int|false The matching mac_id, or false if not found or
  *                   $mac_address is null/empty.
@@ -2895,21 +2896,53 @@ function db_check_auth($mac_address) {
  * the mac_track_arp table.
  *
  * @param string|null $mac_address The MAC address to check.
+ * @param int|null    $site_id     The site owning the observed device.
  *
  * @return string|false The matching ip_address, or false if not found
- *                      or $mac_address is null/empty.
+ *                      or the MAC address or site is missing.
  */
-function db_check_for_ip($mac_address) {
-	if ($mac_address === null || $mac_address === '') {
+function db_check_for_ip($mac_address, $site_id = null) {
+	if ($mac_address === null || $mac_address === '' || $site_id === null) {
 		return false;
 	}
 
+	// the newest translation, not whichever row the server reads first
 	$query = db_fetch_cell_prepared('SELECT ip_address
 		FROM mac_track_arp
-		WHERE mac_address = ?',
-		[$mac_address]);
+		WHERE mac_address = ? AND site_id = ?
+		ORDER BY scan_date DESC, ip_address DESC
+		LIMIT 1',
+		[$mac_address, (int) $site_id]);
 
 	return $query;
+}
+
+/**
+ * Runs a DELETE in batches until a batch comes back short, so a large
+ * backlog (tens of millions of rows the first time retention works) never
+ * becomes one transaction that holds locks, undo and replica lag for hours.
+ *
+ * @param string       $sql    A DELETE ending in an ORDER BY on an indexed
+ *                             column, so each batch is a range read and the
+ *                             LIMIT is deterministic for replication.
+ * @param array<mixed> $params Its parameters.
+ * @param int          $batch  Rows per batch.
+ *
+ * @return int The rows deleted.
+ */
+function mactrack_delete_batched(string $sql, array $params, int $batch = 10000): int {
+	$total = 0;
+
+	do {
+		if (!db_execute_prepared($sql . ' LIMIT ' . $batch, $params)) {
+			break;
+		}
+
+		$rows   = (int) db_affected_rows();
+		$total += $rows;
+	} while ($rows >= $batch);
+
+	return $total;
 }
 
 /**
@@ -2976,8 +3009,10 @@ function perform_mactrack_db_maint(): void {
 	// delete old syslog and syslog soft messages
 	if ($retention > 0 || $partitioned) {
 		if (!$partitioned) {
-			db_execute_prepared('DELETE QUICK FROM mac_track_ports WHERE scan_date < ?', [$retention_date]);
-			db_execute('OPTIMIZE TABLE mac_track_ports');
+			// In batches: one DELETE of a day of scans holds its locks and undo
+			// until it finishes. No OPTIMIZE: it rebuilds the whole table every
+			// day, and InnoDB reuses the freed pages for the next scans.
+			mactrack_delete_batched('DELETE QUICK FROM mac_track_ports WHERE scan_date < ? ORDER BY scan_date', [$retention_date]);
 		} else {
 			$syslog_deleted       = 0;
 			$number_of_partitions = db_fetch_assoc_prepared('SELECT *
@@ -3065,10 +3100,29 @@ function perform_mactrack_db_maint(): void {
 		}
 	}
 
-	db_execute_prepared('DELETE FROM mac_track_ips
-		WHERE scan_date < DATE_FORMAT(CURDATE() - ?,"%Y-%m-%d")',
-		[read_config_option('mt_data_retention_ip')]);
-	db_execute('OPTIMIZE TABLE mac_track_ips');
+	// CURDATE() - n is integer arithmetic on YYYYMMDD (20261112 - 60 is no
+	// date at all), so the cutoff needs INTERVAL.
+	mactrack_delete_batched('DELETE FROM mac_track_ips
+		WHERE scan_date < CURDATE() - INTERVAL ? DAY
+		ORDER BY scan_date',
+		[(int) read_config_option('mt_data_retention_ip')]);
+
+	// No OPTIMIZE: it rebuilds the whole table and blocks writes, which takes
+	// hours at tens of millions of rows, and InnoDB reuses the pages that the
+	// daily DELETE frees.
+
+	// The ARP translations follow the IP retention and the 802.1x sessions
+	// the port retention; nothing else ever removed them.
+	db_execute_prepared('DELETE FROM mac_track_arp
+		WHERE scan_date < CURDATE() - INTERVAL ? DAY',
+		[(int) read_config_option('mt_data_retention_ip')]);
+
+	if ($days > 0) {
+		mactrack_delete_batched('DELETE FROM mac_track_dot1x
+			WHERE scan_date < ?
+			ORDER BY scan_date',
+			[$retention_date]);
+	}
 
 	db_execute('REPLACE INTO mac_track_scan_dates
 		(SELECT DISTINCT scan_date FROM mac_track_ports)');
