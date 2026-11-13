@@ -821,22 +821,24 @@ function collect_mactrack_data($start, $site_id = 0): void {
 			}
 		}
 
-		// Fill the rest from each MAC's newest ARP translation, in one
+		// Fill the rest from each site's newest ARP translation for a MAC, in one
 		// statement rather than a lookup per row.
 		db_execute('UPDATE mac_track_temp_ports AS tp
 			INNER JOIN (
-				SELECT arp.mac_address, MAX(arp.ip_address) AS ip_address
+				SELECT arp.site_id, arp.mac_address, MAX(arp.ip_address) AS ip_address
 				FROM mac_track_arp AS arp
 				INNER JOIN (
-					SELECT mac_address, MAX(scan_date) AS scan_date
+					SELECT site_id, mac_address, MAX(scan_date) AS scan_date
 					FROM mac_track_arp
-					GROUP BY mac_address
+					GROUP BY site_id, mac_address
 				) AS newest
 				ON arp.mac_address = newest.mac_address
+				AND arp.site_id = newest.site_id
 				AND arp.scan_date = newest.scan_date
-				GROUP BY arp.mac_address
+				GROUP BY arp.site_id, arp.mac_address
 			) AS arp
 			ON tp.mac_address = arp.mac_address
+			AND tp.site_id = arp.site_id
 			SET tp.updated = 1, tp.ip_address = arp.ip_address
 			WHERE tp.updated = 0');
 

@@ -608,7 +608,7 @@ function get_standard_arp_table($site, &$device): void {
 		foreach ($atEntries as $atEntry) {
 			// check the mac_track_arp table if no IP address is found
 			if ($atEntry['atNetAddress'] == '' && $atEntry['atPhysAddress'] !== '') {
-				$atEntry['atNetAddress'] = db_check_for_ip($atEntry['atPhysAddress']);
+				$atEntry['atNetAddress'] = db_check_for_ip($atEntry['atPhysAddress'], $device['site_id']);
 				mactrack_debug('atNetAddress ****:' . $atEntry['atPhysAddress'] . '(' . $atEntry['atNetAddress'] . ')');
 			}
 
@@ -2778,6 +2778,7 @@ function db_store_device_port_results(&$device, $port_array, $scan_date): void {
  * mac_track_macauth authorization table.
  *
  * @param string|null $mac_address The MAC address to check.
+ * @param int|null    $site_id     The site owning the observed device.
  *
  * @return int|false The matching mac_id, or false if not found or
  *                   $mac_address is null/empty.
@@ -2800,22 +2801,23 @@ function db_check_auth($mac_address) {
  * the mac_track_arp table.
  *
  * @param string|null $mac_address The MAC address to check.
+ * @param int|null    $site_id     The site owning the observed device.
  *
  * @return string|false The matching ip_address, or false if not found
- *                      or $mac_address is null/empty.
+ *                      or the MAC address or site is missing.
  */
-function db_check_for_ip($mac_address) {
-	if ($mac_address === null || $mac_address === '') {
+function db_check_for_ip($mac_address, $site_id = null) {
+	if ($mac_address === null || $mac_address === '' || $site_id === null) {
 		return false;
 	}
 
 	// the newest translation, not whichever row the server reads first
 	$query = db_fetch_cell_prepared('SELECT ip_address
 		FROM mac_track_arp
-		WHERE mac_address = ?
-		ORDER BY scan_date DESC
+		WHERE mac_address = ? AND site_id = ?
+		ORDER BY scan_date DESC, ip_address DESC
 		LIMIT 1',
-		[$mac_address]);
+		[$mac_address, (int) $site_id]);
 
 	return $query;
 }
