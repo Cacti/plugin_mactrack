@@ -3338,6 +3338,10 @@ msgstr "Vui lòng nhập chuỗi Địa chỉ MAC hoặc Chuỗi Địa chỉ Ma
 msgid "Please add a reason for this entry."
 msgstr "Vui lòng thêm một lý do cho mục này."
 
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr ""
+
 #~ msgid "IP Address"
 #~ msgstr "Địa chỉ IP"
 
