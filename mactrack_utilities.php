@@ -25,6 +25,7 @@
 chdir('../../');
 require('./include/auth.php');
 require_once('./plugins/mactrack/lib/mactrack_functions.php');
+require_once('./plugins/mactrack/lib/mactrack_activity.php');
 
 // set default action
 set_default_action();
@@ -293,6 +294,8 @@ function mactrack_display_run_status(): void {
 
 	html_end_box(true);
 
+	mactrack_display_activity();
+
 	html_start_box('', '100%', '', '1', 'center', '');
 
 	// get information on running processes
@@ -440,6 +443,83 @@ function mactrack_display_run_status(): void {
 
 		html_end_box(true);
 	}
+}
+
+/**
+ * Prints what MacTrack is doing now, the step timings of the last
+ * maintenance run, and the size of its tables. Every figure comes from a
+ * recorded option or an information_schema estimate; no table is counted.
+ *
+ * @return void
+ */
+function mactrack_display_activity(): void {
+	$activity = mactrack_activity_state();
+
+	html_start_box(__('Current Activity', 'mactrack'), '100%', false, 3, 'center', '');
+	form_alternate_row();
+	print '<td width=200>' . __('State:', 'mactrack') . '</td><td>' . html_escape($activity['text']) . '</td>';
+
+	if ($activity['since']) {
+		form_alternate_row();
+		print '<td>' . __('Since:', 'mactrack') . '</td><td>' . html_escape(date('Y-m-d H:i:s', $activity['since'])) . '</td>';
+	}
+
+	if ($activity['detail'] !== '') {
+		form_alternate_row();
+		print '<td>' . __('Detail:', 'mactrack') . '</td><td>' . html_escape($activity['detail']) . '</td>';
+	}
+
+	if ($activity['deferred']) {
+		form_alternate_row();
+		print '<td>' . __('Last Skipped Poller Run:', 'mactrack') . '</td><td>' . html_escape($activity['deferred']['reason'] . ' (' . date('Y-m-d H:i:s', $activity['deferred']['time']) . ')') . '</td>';
+	}
+
+	html_end_box(true);
+
+	$steps = mactrack_maint_steps_last();
+
+	if (cacti_sizeof($steps)) {
+		html_start_box(__('Last Maintenance Steps', 'mactrack'), '100%', false, 3, 'center', '');
+		html_header([__('Step', 'mactrack'), __('Seconds', 'mactrack')]);
+
+		foreach ($steps as $step) {
+			form_alternate_row();
+			print '<td>' . html_escape(mactrack_activity_step_label((string) $step['step'])) . '</td><td>' . html_escape($step['seconds']) . '</td>';
+			form_end_row();
+		}
+
+		html_end_box(true);
+	}
+
+	$tables = mactrack_table_sizes();
+	$disk   = mactrack_database_disk_free();
+
+	html_start_box(__('Table Sizes', 'mactrack'), '100%', false, 3, 'center', '');
+	html_header([__('Table', 'mactrack'), __('Rows (estimate)', 'mactrack'), __('Data', 'mactrack'), __('Index', 'mactrack'), __('Free', 'mactrack')]);
+
+	foreach ($tables as $table) {
+		form_alternate_row();
+		print '<td>' . html_escape($table['table_name']) . '</td>'
+			. '<td>' . html_escape(number_format((float) $table['table_rows'])) . '</td>'
+			. '<td>' . html_escape(mactrack_activity_bytes($table['data_length'])) . '</td>'
+			. '<td>' . html_escape(mactrack_activity_bytes($table['index_length'])) . '</td>'
+			. '<td>' . html_escape(mactrack_activity_bytes($table['data_free'])) . '</td>';
+		form_end_row();
+	}
+
+	form_alternate_row();
+	if ($disk['reason'] === 'remote') {
+		$free = __('Unknown: the database runs on another host', 'mactrack');
+	} elseif ($disk['bytes'] === null) {
+		$free = __('Unknown: the database data directory cannot be found from this host', 'mactrack');
+	} else {
+		$free = mactrack_activity_bytes($disk['bytes']);
+	}
+
+	print '<td colspan="5">' . __('Database Disk Free:', 'mactrack') . ' ' . html_escape($free) . '</td>';
+	form_end_row();
+
+	html_end_box(true);
 }
 
 /**
