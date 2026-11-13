@@ -3338,6 +3338,10 @@ msgstr "Lütfen otomatik olarak yetkilendirilmek için MAC Adresini veya Mac Adr
 msgid "Please add a reason for this entry."
 msgstr "Lütfen bu giriş için bir sebep ekleyin."
 
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr ""
+
 #~ msgid "IP Address"
 #~ msgstr "IP Adresi"
 
