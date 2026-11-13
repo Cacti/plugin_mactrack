@@ -3457,6 +3457,10 @@ msgstr "請輸入要自動授權的MAC地址或Mac地址匹配字符串。如果
 msgid "Please add a reason for this entry."
 msgstr "請為此條目添加原因。"
 
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr ""
+
 #~ msgid "IP Address"
 #~ msgstr "IP 位址"
 
