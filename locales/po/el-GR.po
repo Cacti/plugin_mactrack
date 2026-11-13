@@ -3336,6 +3336,10 @@ msgstr "Εισαγάγετε τη διεύθυνση MAC ή τη συμβολο�
 msgid "Please add a reason for this entry."
 msgstr "Προσθέστε έναν λόγο για αυτή την καταχώρηση."
 
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr ""
+
 #~ msgid "IP Address"
 #~ msgstr "IP Address"
 
