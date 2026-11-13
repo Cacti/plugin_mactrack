@@ -3245,6 +3245,8 @@ function import_oui_database($type = 'ui', $oui_file = 'https://standards-oui.ie
 		}
 
 		// write in bounded batches for both the CLI and the web import
+		$failed = false;
+
 		foreach (array_chunk($records, 1000) as $chunk) {
 			$values = [];
 
@@ -3252,9 +3254,11 @@ function import_oui_database($type = 'ui', $oui_file = 'https://standards-oui.ie
 				$values[] = '(' . db_qstr($record['vendor_mac']) . ', ' . db_qstr($record['vendor_name']) . ', ' . db_qstr($record['vendor_address']) . ', 1)';
 			}
 
-			db_execute('REPLACE INTO mac_track_oui_database
+			if (db_execute('REPLACE INTO mac_track_oui_database
 				(vendor_mac, vendor_name, vendor_address, present)
-				VALUES ' . implode(',', $values));
+				VALUES ' . implode(',', $values)) === false) {
+				$failed = true;
+			}
 
 			// let the user know you are working
 			if ($type == 'ui') {
@@ -3266,11 +3270,24 @@ function import_oui_database($type = 'ui', $oui_file = 'https://standards-oui.ie
 			print '</td></tr>';
 		}
 
-		// count bogus records
-		$j = db_fetch_cell('SELECT count(*) FROM mac_track_oui_database WHERE present=0');
+		if ($failed) {
+			/*
+			 * A failed batch leaves the vendors it was meant to refresh marked
+			 * absent, so deleting the absent rows would remove them. Keep every
+			 * vendor and mark them present again instead.
+			 */
+			cacti_log('WARNING: MacTrack could not write part of the OUI database, so no vendors were removed', false, 'MACTRACK', POLLER_VERBOSITY_LOW);
 
-		// get rid of old records
-		db_execute('DELETE FROM mac_track_oui_database WHERE present=0');
+			db_execute('UPDATE mac_track_oui_database SET present=1 WHERE present=0');
+
+			$j = 0;
+		} else {
+			// count bogus records
+			$j = db_fetch_cell('SELECT count(*) FROM mac_track_oui_database WHERE present=0');
+
+			// get rid of old records
+			db_execute('DELETE FROM mac_track_oui_database WHERE present=0');
+		}
 
 		// set correct format
 		db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(vendor_mac, ':', '')");

@@ -369,6 +369,47 @@ final class MactrackOuiDownloadTest extends TestCase {
 	}
 
 	/**
+	 * A failed batch must not be followed by deleting the vendors it was
+	 * meant to refresh.
+	 *
+	 * @return void
+	 */
+	public function testFailedBatchKeepsExistingVendors(): void {
+		$fixture = $this->ouiFixtureOf(2000);
+
+		mactrack_test_queue_return('db_execute', true);  // UPDATE ... SET present=0
+		mactrack_test_queue_return('db_execute', false); // first batch
+		mactrack_test_queue_return('db_execute', true);  // second batch
+
+		ob_start();
+		import_oui_database('ui', $fixture, $this->unreachablePath());
+		ob_end_clean();
+
+		$sql = $this->executedSql();
+
+		$this->assertSame(2, $this->replaceBatches(), 'the remaining batches should still be written');
+		$this->assertNotContains('DELETE FROM mac_track_oui_database WHERE present=0', $sql);
+		$this->assertContains('UPDATE mac_track_oui_database SET present=1 WHERE present=0', $sql);
+
+		$warnings = array_filter($this->loggedMessages(), static function ($message): bool {
+			return strpos($message, 'no vendors were removed') !== false;
+		});
+
+		$this->assertCount(1, $warnings);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testFullImportRemovesAbsentVendors(): void {
+		ob_start();
+		import_oui_database('ui', $this->ouiFixtureOf(1000), $this->unreachablePath());
+		ob_end_clean();
+
+		$this->assertContains('DELETE FROM mac_track_oui_database WHERE present=0', $this->executedSql());
+	}
+
+	/**
 	 * @return void
 	 */
 	public function testParsesVendorRecords(): void {
