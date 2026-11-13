@@ -238,4 +238,212 @@ final class MactrackOuiDownloadTest extends TestCase {
 
 		$this->assertTrue($replaced, 'the imported vendor block should be written with a REPLACE');
 	}
+
+	/**
+	 * A two-record OUI fixture in the IEEE oui.txt layout.
+	 *
+	 * @return string Absolute path to the fixture.
+	 */
+	private function ouiFixture() {
+		return $this->writeTempFile(
+			"AA-BB-CC   (hex)\t\tExample Vendor Inc.\n" .
+			"AABBCC     (base 16)\t\tExample Vendor Inc.\n" .
+			"\t\t\t\t123 Example Street\n" .
+			"\n"
+		);
+	}
+
+	/**
+	 * A full-size OUI fixture with $count records.
+	 *
+	 * @param int $count
+	 *
+	 * @return string Absolute path to the fixture.
+	 */
+	private function ouiFixtureOf($count) {
+		$contents = '';
+
+		for ($n = 0; $n < $count; $n++) {
+			$hex       = strtoupper(sprintf('%06x', $n));
+			$contents .= substr($hex, 0, 2) . '-' . substr($hex, 2, 2) . '-' . substr($hex, 4, 2) . "   (hex)\t\tVendor $n\n" .
+				"$hex     (base 16)\t\tVendor $n\n" .
+				"\t\t\t\tStreet $n\n" .
+				"\n";
+		}
+
+		return $this->writeTempFile($contents);
+	}
+
+	/**
+	 * Number of REPLACE batches written during the current test.
+	 *
+	 * @return int
+	 */
+	private function replaceBatches() {
+		return count(array_filter($this->executedSql(), static function ($sql): bool {
+			return strpos($sql, 'REPLACE INTO mac_track_oui_database') !== false;
+		}));
+	}
+
+	/**
+	 * SQL passed to db_execute() during the current test.
+	 *
+	 * @return array<int, string>
+	 */
+	private function executedSql() {
+		$sql = [];
+
+		foreach ($GLOBALS['__test_db_calls'] as $call) {
+			if ($call['fn'] === 'db_execute') {
+				$sql[] = $call['sql'];
+			}
+		}
+
+		return $sql;
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testReportsWhichUrlReturnedTheData(): void {
+		$bad  = $this->unreachablePath();
+		$good = $this->writeTempFile("aa-bb-cc\n");
+
+		$source = 'stale';
+		mactrack_download_oui_database([$bad, $good], 1, 0, $source);
+		$this->assertSame($good, $source);
+
+		$source = 'stale';
+		mactrack_download_oui_database([$bad], 1, 0, $source);
+		$this->assertNull($source, 'a failed download must not report a source');
+	}
+
+	/**
+	 * A full list from the primary URL retires vendors that are missing from it.
+	 *
+	 * @return void
+	 */
+	public function testFullListRetiresMissingVendors(): void {
+		ob_start();
+		import_oui_database('ui', $this->ouiFixtureOf(1000), $this->unreachablePath());
+		ob_end_clean();
+
+		$this->assertContains('UPDATE mac_track_oui_database SET present=0', $this->executedSql());
+	}
+
+	/**
+	 * A download that parses to almost nothing (for example an HTML error page
+	 * served with a 200 status) must not retire the whole vendor table.
+	 *
+	 * @return void
+	 */
+	public function testNearlyEmptyFullListKeepsExistingVendors(): void {
+		$page = $this->writeTempFile("<html><body>Access Denied</body></html>\n");
+
+		ob_start();
+		import_oui_database('ui', $page, $this->unreachablePath());
+		ob_end_clean();
+
+		$this->assertNotContains('UPDATE mac_track_oui_database SET present=0', $this->executedSql());
+
+		$warnings = array_filter($this->loggedMessages(), static function ($message): bool {
+			return strpos($message, 'found only 0 OUI records') !== false;
+		});
+
+		$this->assertCount(1, $warnings);
+	}
+
+	/**
+	 * Both the CLI and the web import write in batches of 1000 records.
+	 *
+	 * @return void
+	 */
+	public function testImportWritesInBatchesForEveryCaller(): void {
+		$fixture = $this->ouiFixtureOf(2500);
+
+		ob_start();
+		import_oui_database('web', $fixture, $this->unreachablePath());
+		ob_end_clean();
+
+		$this->assertSame(3, $this->replaceBatches(), 'the web import must not send every record in one statement');
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testParsesVendorRecords(): void {
+		$records = mactrack_parse_oui_database(file($this->ouiFixture()));
+
+		$this->assertSame([[
+			'vendor_mac'     => 'AABBCC',
+			'vendor_name'    => 'Example Vendor Inc.',
+			'vendor_address' => 'Example Vendor Inc., 123 Example Street',
+		]], $records);
+	}
+
+	/**
+	 * The fallback list is partial, so importing it must keep existing vendors.
+	 *
+	 * @return void
+	 */
+	public function testPartialFallbackListKeepsExistingVendors(): void {
+		ob_start();
+		import_oui_database('ui', $this->unreachablePath(), $this->ouiFixture());
+		$output = ob_get_clean();
+
+		$this->assertStringContainsString('OUI Database Download from IEEE Complete', $output);
+		$this->assertNotContains('UPDATE mac_track_oui_database SET present=0', $this->executedSql());
+
+		$replaced = false;
+
+		foreach ($this->executedSql() as $sql) {
+			if (strpos($sql, 'REPLACE INTO mac_track_oui_database') !== false) {
+				$replaced = true;
+			}
+		}
+
+		$this->assertTrue($replaced, 'the fallback records should still be imported');
+
+		$notes = array_filter($this->loggedMessages(), static function ($message): bool {
+			return strpos($message, 'partial fallback list') !== false;
+		});
+
+		$this->assertCount(1, $notes);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testDownloadAlwaysHasATimeout(): void {
+		$options = mactrack_oui_stream_options('', 'user', 'secret');
+
+		$this->assertSame(30, $options['http']['timeout']);
+		$this->assertArrayNotHasKey('proxy', $options['http']);
+		$this->assertArrayNotHasKey('header', $options['http'], 'a login without a proxy must not be sent anywhere');
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testProxyWithoutLoginSendsNoCredentials(): void {
+		$options = mactrack_oui_stream_options('tcp://proxy.example:3128', '', '');
+
+		$this->assertSame('tcp://proxy.example:3128', $options['http']['proxy']);
+		$this->assertArrayNotHasKey('header', $options['http']);
+	}
+
+	/**
+	 * The login must be added to the proxy settings, not replace them, or the
+	 * download bypasses the proxy and sends the credentials to IEEE.
+	 *
+	 * @return void
+	 */
+	public function testProxyLoginKeepsTheProxy(): void {
+		$options = mactrack_oui_stream_options('tcp://proxy.example:3128', 'user', 'secret');
+
+		$this->assertSame('tcp://proxy.example:3128', $options['http']['proxy']);
+		$this->assertSame('GET', $options['http']['method']);
+		$this->assertSame(30, $options['http']['timeout']);
+		$this->assertSame('Proxy-Authorization: Basic ' . base64_encode('user:secret'), $options['http']['header']);
+	}
 }

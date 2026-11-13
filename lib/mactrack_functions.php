@@ -3002,14 +3002,17 @@ function perform_mactrack_db_maint(): void {
  * is retried, and callers can pass an alternate IEEE endpoint as a
  * fallback.
  *
- * @param array $urls    Ordered list of candidate URLs to try.
- * @param int   $retries Number of attempts per URL (minimum 1).
- * @param int   $delay   Seconds to wait between attempts on the same URL.
+ * @param array         $urls    Ordered list of candidate URLs to try.
+ * @param int           $retries Number of attempts per URL (minimum 1).
+ * @param int           $delay   Seconds to wait between attempts on the same URL.
+ * @param ?string       $source  Set to the URL that returned the data, or null.
+ * @param resource|null $context Stream context for file(), or null for the default.
  *
  * @return array|false Array of file lines on success, or false when
  *                     every attempt failed.
  */
-function mactrack_download_oui_database(array $urls, int $retries = 2, int $delay = 3) {
+function mactrack_download_oui_database(array $urls, int $retries = 2, int $delay = 3, ?string &$source = null, $context = null) {
+	$source  = null;
 	$urls    = array_values(array_filter($urls, static function($url): bool {
 		return is_string($url) && $url !== '';
 	}));
@@ -3032,12 +3035,14 @@ function mactrack_download_oui_database(array $urls, int $retries = 2, int $dela
 			}, E_WARNING);
 
 			try {
-				$oui_database = file($url);
+				$oui_database = ($context === null) ? file($url) : file($url, 0, $context);
 			} finally {
 				restore_error_handler();
 			}
 
 			if (is_array($oui_database) && cacti_sizeof($oui_database)) {
+				$source = $url;
+
 				return $oui_database;
 			}
 
@@ -3056,6 +3061,102 @@ function mactrack_download_oui_database(array $urls, int $retries = 2, int $dela
 }
 
 /**
+ * Builds the stream context options for the OUI download from the Cacti
+ * proxy settings.
+ *
+ * @param string $proxy          Proxy URI (for example tcp://proxy:3128), or '' for none.
+ * @param string $proxy_user     Proxy user name, or '' when the proxy needs no login.
+ * @param string $proxy_password Proxy password.
+ *
+ * @return array Stream context options for the download.
+ */
+function mactrack_oui_stream_options(string $proxy, string $proxy_user, string $proxy_password): array {
+	// bound each attempt so an unresponsive IEEE host does not hold the
+	// import for default_socket_timeout on every retry
+	$options = [
+		'http' => [
+			'method'  => 'GET',
+			'timeout' => 30,
+		]
+	];
+
+	if ($proxy == '') {
+		return $options;
+	}
+
+	$options['http']['proxy'] = $proxy;
+
+	// add the login to the proxy settings rather than replacing them, so the
+	// credentials only ever go to the proxy
+	if ($proxy_user != '') {
+		$options['http']['header'] = 'Proxy-Authorization: Basic ' . base64_encode("$proxy_user:$proxy_password");
+	}
+
+	return $options;
+}
+
+/**
+ * Parses the IEEE OUI text listing into vendor records.
+ *
+ * Each record starts at a "(hex)" line, takes its address from the
+ * "(base 16)" line and the lines after it, and ends at the next blank line.
+ *
+ * @param array $lines Lines of the IEEE oui.txt listing.
+ *
+ * @return array List of records with vendor_mac, vendor_name and vendor_address.
+ */
+function mactrack_parse_oui_database(array $lines): array {
+	$records        = [];
+	$begin_vendor   = false;
+	$vendor_mac     = '';
+	$vendor_name    = '';
+	$vendor_address = '';
+
+	foreach ($lines as $row) {
+		$row = str_replace("\t", ' ', $row);
+
+		if ($begin_vendor && trim($row) == '') {
+			if (substr($vendor_address, 0, 1) == ',') {
+				$vendor_address = substr($vendor_address, 1);
+			}
+
+			if (substr($vendor_name, 0, 1) == ',') {
+				$vendor_name = substr($vendor_name, 1);
+			}
+
+			$records[] = [
+				'vendor_mac'     => $vendor_mac,
+				'vendor_name'    => ucwords(strtolower($vendor_name)),
+				'vendor_address' => str_replace("\n", ', ', ucwords(strtolower(trim($vendor_address)))),
+			];
+
+			$begin_vendor   = false;
+			$vendor_mac     = '';
+			$vendor_name    = '';
+			$vendor_address = '';
+		} elseif ($begin_vendor) {
+			if (strpos($row, '(base 16)')) {
+				$address_start = strpos($row, '(base 16)') + 10;
+				$vendor_address .= trim(substr($row, $address_start)) . "\n";
+			} else {
+				$vendor_address .= trim($row) . "\n";
+			}
+		} else {
+			$vendor_address = '';
+		}
+
+		if (substr_count($row, '(hex)')) {
+			$begin_vendor = true;
+			$vendor_mac   = str_replace('-', '', substr(trim($row), 0, 8));
+			$hex_end      = strpos($row, '(hex)') + 5;
+			$vendor_name  = trim(substr($row, $hex_end));
+		}
+	}
+
+	return $records;
+}
+
+/**
  * Downloads the IEEE OUI (vendor MAC prefix) database text file and
  * imports its vendor/MAC-prefix/address records into the
  * mac_track_oui_database table (marking all existing rows absent
@@ -3064,18 +3165,19 @@ function mactrack_download_oui_database(array $urls, int $retries = 2, int $dela
  * proxy. Prints progress/status messages formatted for either the web
  * UI or CLI output depending on $type.
  *
- * @param string $type     Either 'ui' (default, prints plain-text
- *                        progress lines) or any other value (wraps
- *                        progress lines in HTML table markup for the
- *                        Cacti console).
- * @param string $oui_file The URL (or local path) to fetch the OUI
- *                        database text file from; defaults to the
- *                        official IEEE standards-oui.ieee.org URL.
+ * @param string $type          Either 'ui' (default, prints plain-text
+ *                              progress lines) or any other value (wraps
+ *                              progress lines in HTML table markup for the
+ *                              Cacti console).
+ * @param string $oui_file      The URL (or local path) to fetch the OUI
+ *                              database text file from; defaults to the
+ *                              official IEEE standards-oui.ieee.org URL.
+ * @param string $oui_alternate Fallback URL (or local path), tried when
+ *                              $oui_file fails. Its list is treated as partial.
  *
  * @return void
  */
-function import_oui_database($type = 'ui', $oui_file = 'https://standards-oui.ieee.org/oui.txt'): void {
-	$oui_alternate = 'https://services13.ieee.org/RST/standards-ra-web/rest/assignments/download/?registry=MA-L&format=txt';
+function import_oui_database($type = 'ui', $oui_file = 'https://standards-oui.ieee.org/oui.txt', $oui_alternate = 'https://services13.ieee.org/RST/standards-ra-web/rest/assignments/download/?registry=MA-L&format=txt'): void {
 
 	if ($type != 'ui') {
 		html_start_box(__('Mactrack Device Tracking OUI Database Import Results', 'mactrack'), '100%', '', '1', 'center', '');
@@ -3088,26 +3190,22 @@ function import_oui_database($type = 'ui', $oui_file = 'https://standards-oui.ie
 	$proxy_user     = read_config_option('settings_proxy_user');
 	$proxy_password = read_config_option('settings_proxy_password');
 
-	if ($proxy != '') {
-		$default_opts = [
-			'http' => [
-				'proxy'  => $proxy,
-				'method' => 'GET',
-			]
-		];
+	// use a context for this download only rather than changing the
+	// process-wide default stream context
+	$context      = stream_context_create(mactrack_oui_stream_options((string) $proxy, (string) $proxy_user, (string) $proxy_password));
+	$source       = null;
+	$oui_database = mactrack_download_oui_database([$oui_file, $oui_alternate], 2, 3, $source, $context);
 
-		if ($proxy_user != '') {
-			$default_opts = [
-				'http' => [
-					'header' => 'Proxy-Authorization: Basic ' . base64_encode("$proxy_user:$proxy_password")
-				]
-			];
-		}
+	/*
+	 * The IEEE REST fallback returns at most 10000 assignments, about a
+	 * quarter of the registry. Only a full list may retire vendors that are
+	 * missing from it; a partial list only adds and refreshes entries.
+	 */
+	$complete = ($source !== $oui_alternate);
 
-		$default = stream_context_set_default($default_opts);
+	if (is_array($oui_database) && !$complete) {
+		cacti_log('NOTE: MacTrack could not download the OUI database from the full IEEE list, so it imported the partial fallback list and kept existing vendors', false, 'MACTRACK', POLLER_VERBOSITY_LOW);
 	}
-
-	$oui_database = mactrack_download_oui_database([$oui_file, $oui_alternate]);
 
 	if ($type != 'ui') {
 		print '<tr><td>';
@@ -3124,83 +3222,44 @@ function import_oui_database($type = 'ui', $oui_file = 'https://standards-oui.ie
 	}
 
 	if (is_array($oui_database)) {
-		db_execute('UPDATE mac_track_oui_database SET present=0');
+		$records = mactrack_parse_oui_database($oui_database);
+		$i       = cacti_sizeof($records);
 
-		// initialize some variables
-		$begin_vendor   = false;
-		$vendor_mac     = '';
-		$vendor_name    = '';
-		$vendor_address = '';
-		$i              = 0;
-		$sql            = '';
+		/*
+		 * A full download that parses to almost nothing, such as an HTML
+		 * error page served with a 200 status, must not retire every vendor.
+		 * The IEEE registry holds tens of thousands of assignments.
+		 */
+		$retire = ($complete && $i >= 1000);
+
+		if ($complete && !$retire) {
+			cacti_log(sprintf('WARNING: MacTrack found only %d OUI records in the IEEE download, so it kept existing vendors', $i), false, 'MACTRACK', POLLER_VERBOSITY_LOW);
+		}
+
+		if ($retire) {
+			db_execute('UPDATE mac_track_oui_database SET present=0');
+		}
 
 		if ($type != 'ui') {
 			print '<tr><td>';
 		}
 
-		if (cacti_sizeof($oui_database)) {
-			foreach ($oui_database as $row) {
-				$row = str_replace("\t", ' ', $row);
+		// write in bounded batches for both the CLI and the web import
+		foreach (array_chunk($records, 1000) as $chunk) {
+			$values = [];
 
-				if ($begin_vendor && trim($row) == '') {
-					if (substr($vendor_address,0,1) == ',') {
-						$vendor_address = substr($vendor_address,1);
-					}
-
-					if (substr($vendor_name,0,1) == ',') {
-						$vendor_name    = substr($vendor_name,1);
-					}
-
-					$sql .= ($sql != '' ? ',' : '') .
-						'(' .
-						db_qstr($vendor_mac) . ', ' .
-						db_qstr(ucwords(strtolower($vendor_name))) . ', ' .
-						db_qstr(str_replace("\n", ', ', ucwords(strtolower(trim($vendor_address))))) . ', 1)';
-
-					// let the user know you are working
-					if ((($i % 1000) == 0) && ($type == 'ui')) {
-						print '.';
-
-						db_execute('REPLACE INTO mac_track_oui_database
-							(vendor_mac, vendor_name, vendor_address, present)
-							VALUES ' . $sql);
-
-						$sql = '';
-					}
-
-					$i++;
-
-					// reinitialize variables
-					$begin_vendor   = false;
-					$vendor_mac     = '';
-					$vendor_name    = '';
-					$vendor_address = '';
-				} else {
-					if ($begin_vendor) {
-						if (strpos($row, '(base 16)')) {
-							$address_start = strpos($row, '(base 16)') + 10;
-							$vendor_address .= trim(substr($row,$address_start)) . "\n";
-						} else {
-							$vendor_address .= trim($row) . "\n";
-						}
-					} else {
-						$vendor_address = '';
-					}
-				}
-
-				if (substr_count($row, '(hex)')) {
-					$begin_vendor = true;
-					$vendor_mac   = str_replace('-', '', substr(trim($row), 0, 8));
-					$hex_end      = strpos($row, '(hex)') + 5;
-					$vendor_name  = trim(substr($row,$hex_end));
-				}
+			foreach ($chunk as $record) {
+				$values[] = '(' . db_qstr($record['vendor_mac']) . ', ' . db_qstr($record['vendor_name']) . ', ' . db_qstr($record['vendor_address']) . ', 1)';
 			}
-		}
 
-		if ($sql != '') {
 			db_execute('REPLACE INTO mac_track_oui_database
 				(vendor_mac, vendor_name, vendor_address, present)
-				VALUES ' . $sql);
+				VALUES ' . implode(',', $values));
+
+			// let the user know you are working
+			if ($type == 'ui') {
+				print '.';
+			}
 		}
 
 		if ($type != 'ui') {
