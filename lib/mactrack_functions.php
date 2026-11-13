@@ -2912,8 +2912,10 @@ function perform_mactrack_db_maint(): void {
 	// delete old syslog and syslog soft messages
 	if ($retention > 0 || $partitioned) {
 		if (!$partitioned) {
-			db_execute_prepared('DELETE QUICK FROM mac_track_ports WHERE scan_date < ?', [$retention_date]);
-			db_execute('OPTIMIZE TABLE mac_track_ports');
+			// In batches: one DELETE of a day of scans holds its locks and undo
+			// until it finishes. No OPTIMIZE: it rebuilds the whole table every
+			// day, and InnoDB reuses the freed pages for the next scans.
+			mactrack_delete_batched('DELETE QUICK FROM mac_track_ports WHERE scan_date < ? ORDER BY scan_date', [$retention_date]);
 		} else {
 			$syslog_deleted       = 0;
 			$number_of_partitions = db_fetch_assoc_prepared('SELECT *

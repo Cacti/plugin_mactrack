@@ -52,3 +52,18 @@ it('does not rebuild the IP table during maintenance', function () {
 
 	expect($optimize)->toBe([]);
 });
+
+it('deletes expired port rows in batches without rebuilding the port table', function () {
+	set_config_option('mt_data_retention', '2weeks');
+	mactrack_test_queue_return('db_fetch_row', ['Create Table' => 'CREATE TABLE `mac_track_ports` (`scan_date` timestamp)']);
+
+	perform_mactrack_db_maint();
+
+	$delete   = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => strpos($c['sql'], 'DELETE QUICK FROM mac_track_ports') !== false));
+	$optimize = array_filter($GLOBALS['__test_db_calls'], fn ($c) => stripos($c['sql'], 'OPTIMIZE TABLE mac_track_ports') !== false);
+
+	expect($delete)->toHaveCount(1);
+	expect($delete[0]['sql'])->toBe('DELETE QUICK FROM mac_track_ports WHERE scan_date < ? ORDER BY scan_date LIMIT 10000');
+	expect(abs(strtotime($delete[0]['params'][0]) - strtotime('-2 Week')))->toBeLessThanOrEqual(2);
+	expect($optimize)->toBe([]);
+});
