@@ -3336,6 +3336,10 @@ msgstr "הזן את מחרוזת ההתאמה של כתובת MAC או כתוב�
 msgid "Please add a reason for this entry."
 msgstr "הוסף סיבה לערך זה."
 
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr ""
+
 #~ msgid "IP Address"
 #~ msgstr "כתובת IP"
 
