@@ -169,9 +169,10 @@ if (!function_exists('db_execute_prepared')) {
 	 *
 	 * @param string $sql SQL statement.
 	 * @param array $params Bound parameters.
+	 * @param bool $log Whether core logs a failure; accepted so calls match core's signature.
 	 * @return bool|mixed SQL-matched or queued return for db_execute_prepared, else true.
 	 */
-	function db_execute_prepared($sql, $params = array()) {
+	function db_execute_prepared($sql, $params = array(), $log = true) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute_prepared', 'sql' => $sql, 'params' => $params);
 
 		return mactrack_test_next_return('db_execute_prepared', true, $sql);
