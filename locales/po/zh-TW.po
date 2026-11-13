@@ -2374,6 +2374,11 @@ msgid "MacTrack is upgrading its database in the background. This can take up to
 msgstr ""
 
 #: setup.php
+#, php-format
+msgid "MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s"
+msgstr ""
+
+#: setup.php
 #, fuzzy
 msgid "Mactrack"
 msgstr "MacTrack"
