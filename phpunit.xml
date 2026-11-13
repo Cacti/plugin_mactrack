@@ -33,6 +33,7 @@
             <file>lib/mactrack_partitions.php</file>
             <file>lib/mactrack_partition_ops.php</file>
             <file>lib/mactrack_partition_convert.php</file>
+            <file>lib/mactrack_activity.php</file>
             <file>lib/mactrack_dns_resolution.php</file>
             <file>lib/mactrack_aruba_oscx.php</file>
             <file>lib/mactrack_cisco.php</file>
