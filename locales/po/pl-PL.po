@@ -3336,6 +3336,10 @@ msgstr "Wprowadź adres MAC lub łańcuch Mac Address Match, aby uzyskać automa
 msgid "Please add a reason for this entry."
 msgstr "Proszę podać powód tego wpisu."
 
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr ""
+
 #~ msgid "IP Address"
 #~ msgstr "Adres IP"
 
