@@ -3176,3 +3176,7 @@ msgstr ""
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr ""
+
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr ""
