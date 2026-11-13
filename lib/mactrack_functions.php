@@ -2667,6 +2667,101 @@ function db_process_remove($device_id): void {
 }
 
 /**
+ * Refreshes aggregate sightings without treating a missing scan as a departure.
+ * Only devices with current Layer 2 observations can retire older sightings.
+ * An empty SNMP walk is not proof of an empty forwarding table.
+ *
+ * @param string $scan_date Current poller scan timestamp.
+ * @param int    $site_id   Site being scanned, or zero for all sites.
+ *
+ * @return bool Whether both aggregate writes committed.
+ */
+function mactrack_update_aggregated_ports(string $scan_date, int $site_id = 0): bool {
+	$site_filter = $site_id > 0 ? ' AND p.site_id = ?' : '';
+	$params      = [$scan_date, $scan_date, HOST_UP];
+
+	if ($site_id > 0) {
+		$params[] = $site_id;
+	}
+
+	if (!db_execute_prepared('START TRANSACTION')) {
+		return false;
+	}
+
+	// date_last has ON UPDATE CURRENT_TIMESTAMP. Changing only the flag
+	// must not make an old observation look newly collected.
+	$updated = db_execute_prepared('UPDATE mac_track_aggregated_ports AS a
+		INNER JOIN (
+			SELECT DISTINCT p.device_id, p.site_id
+			FROM mac_track_temp_ports AS p
+			INNER JOIN mac_track_devices AS d
+			ON d.device_id = p.device_id AND d.site_id = p.site_id
+			WHERE p.scan_date = ? AND d.last_rundate = ?
+			AND d.snmp_status = ? AND d.disabled != "on"
+			AND p.port_number != ""' . $site_filter . '
+		) AS scanned ON scanned.device_id = a.device_id AND scanned.site_id = a.site_id
+		SET a.active_last = 0, a.date_last = a.date_last
+		WHERE a.active_last = 1', $params);
+
+	// Keep Layer 2 sightings even when there is no address translation in
+	// this scan. The join retains multiple current addresses for one MAC.
+	$params = [$scan_date, $scan_date];
+
+	if ($site_id > 0) {
+		$params[] = $site_id;
+	}
+
+	if ($updated) {
+		$updated = db_execute_prepared('INSERT INTO mac_track_aggregated_ports
+			(site_id, device_id, hostname, device_name,
+			vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
+			port_number, port_name, date_last, first_scan_date, count_rec, active_last, authorized)
+			SELECT p.site_id, p.device_id, p.hostname, p.device_name,
+			p.vlan_id, p.vlan_name, p.mac_address, p.vendor_mac,
+			COALESCE(ip.ip_address, ""), p.dns_hostname,
+			p.port_number, p.port_name, p.scan_date, p.scan_date, 1, 1, p.authorized
+			FROM mac_track_temp_ports AS p
+			LEFT JOIN (
+				SELECT DISTINCT site_id, mac_address, ip_address
+				FROM mac_track_ips WHERE scan_date = ?
+			) AS ip ON ip.mac_address = p.mac_address AND ip.site_id = p.site_id
+			WHERE p.scan_date = ? AND p.port_number != ""' . $site_filter . '
+			ON DUPLICATE KEY UPDATE
+			count_rec = mac_track_aggregated_ports.count_rec + IF(mac_track_aggregated_ports.date_last < VALUES(date_last), 1, 0),
+			active_last = 1, date_last = VALUES(date_last),
+			port_name = VALUES(port_name), vendor_mac = VALUES(vendor_mac)', $params);
+	}
+
+	if (!$updated || !db_execute_prepared('COMMIT')) {
+		db_execute_prepared('ROLLBACK');
+
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * Render freshness from the observation time, not the retained active flag.
+ * No missing observation establishes that an endpoint has disconnected.
+ *
+ * @param string $last_seen   Timestamp of the last observation.
+ * @param string $scan_date   Latest poller scan timestamp.
+ * @param int    $active_last Whether the last collected sighting was active.
+ *
+ * @return string Escaped date with its observation status.
+ */
+function mactrack_aggregate_last_seen(string $last_seen, string $scan_date, int $active_last): string {
+	$date = html_escape($last_seen);
+
+	if ($active_last == 1 && $last_seen === $scan_date) {
+		return '<strong>' . $date . '</strong>';
+	}
+
+	return $date . ' (' . __esc('Not observed in latest scan', 'mactrack') . ')';
+}
+
+/**
  * db_update_device_status - This function is used by the scanner to save the status
  * of the current device including the number of ports, it's readstring, etc.
  * @param mixed $device

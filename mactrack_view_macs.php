@@ -720,7 +720,7 @@ function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_
 		$query_string = "SELECT
 			row_id, site_name, device_id, device_name, hostname, mtp.mac_address,
 			vendor_name, ip_address, dns_hostname, port_number,
-			port_name, vlan_id, vlan_name, MAX(date_last) AS scan_date, count_rec, active_last, mtm.mac_id
+			port_name, vlan_id, vlan_name, MAX(date_last) AS scan_date, count_rec, MAX(active_last) AS active_last, mtm.mac_id
 			FROM mac_track_aggregated_ports AS mtp
 			LEFT JOIN mac_track_sites AS mts
 			ON mtp.site_id = mts.site_id
@@ -1182,15 +1182,11 @@ function mactrack_view_aggregated_macs(): void {
 		html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'));
 	}
 
-	$i = 0;
+	$i           = 0;
+	$latest_scan = read_config_option('mt_scan_date');
 
 	if (cacti_sizeof($port_results)) {
 		foreach ($port_results as $port_result) {
-			if ($port_result['active_last'] == 1) {
-				$color_line_date = "<span style='font-weight: bold;'>";
-			} else {
-				$color_line_date = '';
-			}
 
 			$key =  $port_result['mac_address'] . '-' . $port_result['device_id'] .
 					$port_result['port_number'] . '-' . $port_result['scan_date'];
@@ -1219,7 +1215,7 @@ function mactrack_view_aggregated_macs(): void {
 			form_selectable_cell(filter_value($port_result['port_name'], get_request_var('filter')), $key, '', 'left');
 			form_selectable_cell($port_result['vlan_id'], $key, '', 'left');
 			form_selectable_cell(filter_value($port_result['vlan_name'], get_request_var('filter')), $key, '', 'left');
-			form_selectable_cell($color_line_date . $port_result['scan_date'], $key, '', 'left');
+			form_selectable_cell(mactrack_aggregate_last_seen($port_result['scan_date'], $latest_scan, (int) $port_result['active_last']), $key, '', 'left');
 			form_selectable_cell($port_result['count_rec'], $key, '', 'right');
 
 			if (api_plugin_user_realm_auth('mactrack_macauth.php')) {

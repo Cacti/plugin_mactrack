@@ -1128,24 +1128,11 @@ function collect_mactrack_data($start, $site_id = 0): void {
 			}
 		}
 
-		// process aggregated data
-		db_execute('UPDATE mac_track_aggregated_ports SET active_last=0');
+		if (!mactrack_update_aggregated_ports($scan_date, (int) $site_id)) {
+			cacti_log('ERROR: Unable to refresh MacTrack aggregate sightings; scan results retained', false, 'MACTRACK');
 
-		db_execute_prepared('INSERT INTO mac_track_aggregated_ports
-			(site_id, device_id, hostname, device_name,
-			vlan_id, vlan_name, mac_address, vendor_mac, ip_address, dns_hostname,
-			port_number, port_name, date_last, first_scan_date, count_rec, active_last, authorized)
-			SELECT t1.site_id, t1.device_id, t1.hostname, t1.device_name,
-			vlan_id, vlan_name, t1.mac_address, vendor_mac, t2.ip_address, t1.dns_hostname,
-			t1.port_number, t1.port_name, t1.scan_date, t1.scan_date, 1, 1, authorized
-			FROM mac_track_temp_ports t1
-			INNER JOIN mac_track_ips t2
-			ON (t1.mac_address = t2.mac_address
-			AND t1.site_id     = t2.site_id
-			AND t1.port_number <> ""
-			AND t2.scan_date   = ?)
-			ON DUPLICATE KEY UPDATE count_rec=count_rec+1, active_last=1, date_last=t1.scan_date,port_name=t1.port_name',
-			[$scan_date]);
+			return;
+		}
 
 		// purge the ip address and temp port table
 		db_execute('TRUNCATE TABLE mac_track_temp_ports');
