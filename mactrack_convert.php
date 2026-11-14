@@ -37,7 +37,7 @@ require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.ph
 
 $keep_old = false;
 $debug    = false;
-$scheme   = 'week';
+$scheme   = null;
 
 $parms = $_SERVER['argv'];
 array_shift($parms);
@@ -113,6 +113,12 @@ if (!$result['ok']) {
 	exit(1);
 }
 
+if ($result['rows'] === 0 && $result['partitions'] === 0 && $result['reason'] !== '') {
+	print 'NOTE: ' . $result['reason'] . "\n";
+
+	exit(0);
+}
+
 printf("NOTE: Converted %d rows; layout: %s; partitions: %d.\n", $result['rows'], $result['granularity'], $result['partitions']);
 
 if ($result['reason'] !== '') {
@@ -143,7 +149,9 @@ function display_help(): void {
 
 	print "\nusage: mactrack_convert.php [--partition=daily|weekly|disabled] [--keep-old] [-d] [-h] [-v]\n\n";
 	print "Converts mac_track_ports between daily, weekly and unpartitioned layouts.\n";
-	print "Weekly is the default. Run off hours with space for a second table copy.\n";
+	print "Without --partition, an unpartitioned table is converted to the Port\n";
+	print "Partition Size setting (weekly by default) and a partitioned table is left\n";
+	print "unchanged. Run off hours with space for a second table copy.\n";
 	print "The full history is copied one range at a time, without deleting source rows.\n";
 	print "If interrupted before the swap, rerun the command to restart the copy. Data is\n";
 	print "copied into a new table, which then replaces the old one; until then the\n";

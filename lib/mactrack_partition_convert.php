@@ -55,10 +55,12 @@ function mactrack_partition_available(array $server): bool {
  * Existing tables are never converted here; that is
  * mactrack_partition_convert(), run by an operator.
  *
+ * @param int|null $now Current time, for tests.
+ *
  * @return bool True when the table was partitioned; false leaves it
  *              unpartitioned, which MacTrack fully supports.
  */
-function mactrack_partition_fresh_install(): bool {
+function mactrack_partition_fresh_install(?int $now = null): bool {
 	try {
 		$server = mactrack_partition_server((string) db_fetch_cell_prepared('SELECT VERSION()'));
 	} catch (InvalidArgumentException $e) {
@@ -70,7 +72,7 @@ function mactrack_partition_fresh_install(): bool {
 	}
 
 	$bounds = [];
-	$period = mactrack_partition_period('week', time());
+	$period = mactrack_partition_period('week', $now ?? time());
 
 	for ($i = 0; $i < 2; $i++) {
 		$bounds[mactrack_partition_name('week', $period['start'])] = $period['bound'];
@@ -129,6 +131,29 @@ function mactrack_partition_convert_bounds(array $epochs, string $granularity, i
 }
 
 /**
+ * Names the conversion scheme a layout already has: disabled for an
+ * unpartitioned table, day or week when every bounded partition of the
+ * scan-date layout is daily or weekly, otherwise null.
+ *
+ * @param array{state: string, partitions: array} $layout From mactrack_partition_layout().
+ *
+ * @return string|null
+ */
+function mactrack_partition_current_scheme(array $layout): ?string {
+	if ($layout['state'] === 'none') {
+		return 'disabled';
+	}
+
+	if ($layout['state'] !== 'range') {
+		return null;
+	}
+
+	$prefixes = array_unique(array_map(fn ($p) => $p['name'][0], array_filter($layout['partitions'], fn ($p) => $p['bound'] !== null)));
+
+	return ['d' => 'day', 'w' => 'week'][count($prefixes) === 1 ? reset($prefixes) : ''] ?? null;
+}
+
+/**
  * Converts mac_track_ports to the scan-date layout.
  *
  * Takes the scan lock, so no scan starts or loads meanwhile, and the
@@ -156,9 +181,25 @@ function mactrack_partition_convert(bool $keep_old = false, ?callable $progress 
 	$state  = mactrack_partition_state();
 	$result = ['ok' => false, 'reason' => '', 'rows' => 0, 'partitions' => 0, 'granularity' => ''];
 
+	if ($scheme !== null && $scheme === mactrack_partition_current_scheme($state['layout'])) {
+		// Copying the whole history into the layout it already has would only
+		// block scans for hours.
+		if ($scheme !== 'disabled') {
+			set_config_option('mt_partition_granularity', $scheme);
+		}
+
+		$result['ok']          = true;
+		$result['reason']      = 'The port table already uses this layout; nothing was copied.';
+		$result['granularity'] = $scheme;
+
+		mactrack_partition_status(['conversion' => $result + ['time' => time()]]);
+
+		return $result;
+	}
+
 	switch ($state['layout']['state'] === 'range' && $scheme !== null ? 'repartition' : $state['layout']['state']) {
 		case 'range':
-			$result['reason'] = 'The port table already uses the scan-date layout.';
+			$result['reason'] = 'The port table already uses the scan-date layout. Choose daily, weekly or disabled partitioning to change it.';
 
 			break;
 		case 'invalid':
@@ -340,7 +381,9 @@ function mactrack_partition_convert_locked(array $state, bool $keep_old, ?callab
 		}
 	}
 
-	if ($scheme !== null) {
+	// An unpartitioned table needs no partition size; the Settings value is
+	// kept for when partitioning is enabled again.
+	if ($scheme !== null && $scheme !== 'disabled') {
 		set_config_option('mt_partition_granularity', $scheme);
 	}
 
@@ -355,7 +398,8 @@ function mactrack_partition_convert_locked(array $state, bool $keep_old, ?callab
 }
 
 /**
- * Plans complete UTC periods, including empty gaps and at least a day ahead.
+ * Plans complete UTC periods, including empty gaps and the partitions
+ * maintenance keeps created ahead (MACTRACK_PARTITION_AHEAD).
  * Copy ranges use the original scan_date strings to preserve legacy DATETIME
  * values in the database session's time zone. Zero dates get their own
  * copy range and remain in the first partition.
@@ -394,7 +438,7 @@ function mactrack_partition_repartition_plan(array $scans, string $scheme, int $
 	}
 
 	$first = min(array_merge($epochs, [$now]));
-	$last  = max(array_merge($epochs, [$now + 86400]));
+	$last  = max(array_merge($epochs, [$now + MACTRACK_PARTITION_AHEAD]));
 
 	for ($ts = $first; $ts <= $last; $ts = $period['bound']) {
 		$period                                                = mactrack_partition_period($size, $ts);
