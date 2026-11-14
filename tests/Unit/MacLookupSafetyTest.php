@@ -38,13 +38,12 @@ test('MAC lookup helpers return database matches', function () {
 	expect(db_check_auth('AABBCCDDEEFF'))->toBe('192.0.2.25');
 });
 
-test('authorization matches whole MACs or prefixes without wildcard expansion', function () {
+test('authorization uses exact MAC matching without wildcard expansion', function () {
 	$GLOBALS['__test_db_calls'] = [];
 	db_check_auth('AABBCC');
 	db_check_auth('AA%_BB');
 
-	expect($GLOBALS['__test_db_calls'][0]['sql'])->toContain('LEFT(?, LENGTH(mac_address)) = mac_address');
-	expect($GLOBALS['__test_db_calls'][0]['sql'])->not->toContain('LIKE');
+	expect($GLOBALS['__test_db_calls'][0]['sql'])->toContain('mac_address = ?');
 	expect($GLOBALS['__test_db_calls'][0]['params'])->toBe(['AABBCC']);
 	expect($GLOBALS['__test_db_calls'][1]['params'])->toBe(['AA%_BB']);
 });

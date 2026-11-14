@@ -22,6 +22,8 @@
  +-------------------------------------------------------------------------+
 */
 
+require_once dirname(__DIR__) . '/Support/load_function.php';
+
 /*
  * The resolver runs while the poller collects, resolves only the scanned
  * site, and writes only the host name back.
@@ -30,10 +32,24 @@ beforeEach(function () {
 	$this->flat = preg_replace('/\s+/', ' ', file_get_contents(dirname(__DIR__, 2) . '/mactrack_resolver.php'));
 });
 
-it('stops only when the poller is done and nothing is left, or at the limit', function () {
-	expect($this->flat)->toContain("\$poller_running = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes WHERE device_id = -1') > 0;");
+it('stops only when the poller is done and nothing is left', function (bool $running, int $left, bool $stop) {
+	mactrack_test_load_function('mactrack_resolver.php', 'mactrack_resolver_idle_stop');
+
+	expect(mactrack_resolver_idle_stop($running, $left))->toBe($stop);
+})->with([
+	'poller done, nothing left'   => [false, 0, true],
+	'poller running, nothing yet' => [true, 0, false],
+	'poller done, work left'      => [false, 3, false],
+	'poller running, work left'   => [true, 3, false],
+]);
+
+it('reads the poller row before the pass and stops at the time limit', function () {
+	$read  = strpos($this->flat, "\$poller_running = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes WHERE device_id = -1') > 0;");
+	$fetch = strpos($this->flat, '$unresolved_ips = db_fetch_assoc_prepared(');
+
+	expect($read)->toBeInt()->toBeLessThan($fetch);
 	expect($this->flat)->toContain('$break = (time() - $start) > $max_script_runtime;');
-	expect($this->flat)->toContain("if (cacti_sizeof(\$unresolved_ips) == 0) { if (!\$poller_running) { mactrack_debug('Terminating DNS resolving, nothing to do'); break; }");
+	expect($this->flat)->toContain('if (mactrack_resolver_idle_stop($poller_running, cacti_sizeof($unresolved_ips))) {');
 	expect($this->flat)->not->toContain('$nothing > 5');
 });
 

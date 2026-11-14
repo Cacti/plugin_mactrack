@@ -206,7 +206,7 @@ while (1) {
 		$sql_where", $sql_params);
 
 	if (cacti_sizeof($unresolved_ips) == 0) {
-		if (!$poller_running) {
+		if (mactrack_resolver_idle_stop($poller_running, cacti_sizeof($unresolved_ips))) {
 			mactrack_debug('Terminating DNS resolving, nothing to do');
 
 			break;
@@ -317,4 +317,19 @@ function display_help(): void {
 	print '-d | --debug  - Display verbose output during execution' . PHP_EOL;
 	print '-v --version  - Display this help message' . PHP_EOL;
 	print '-h --help     - display this help message' . PHP_EOL;
+}
+
+/**
+ * Whether the resolver may stop: only once the poller has finished, which
+ * it shows by removing its row, and no address is left to resolve. Rows the
+ * poller adds while it runs are resolved before the resolver stops,
+ * because $poller_running is read before the pass.
+ *
+ * @param bool $poller_running Whether the poller's row was present.
+ * @param int  $unresolved     Addresses left to resolve in this pass.
+ *
+ * @return bool
+ */
+function mactrack_resolver_idle_stop(bool $poller_running, int $unresolved): bool {
+	return !$poller_running && $unresolved === 0;
 }

@@ -480,16 +480,6 @@ function mactrack_error_handler($level, $message, $file, $line, $context = []) {
 }
 
 /**
- * Deletes stale mac_track_processes rows (and cleans up their scan
- * locks) for scans that have exceeded the configured maximum script
- * runtime, for the given site (or all sites when $site_id is 0).
- *
- * @param int $site_id The MacTrack site id to limit cleanup to, or 0
- *                     for all sites.
- *
- * @return void
- */
-/**
  * Parses one arp.dat line: MAC, IP address, timestamp and, when known,
  * the host name, separated by tabs.
  *
@@ -594,6 +584,16 @@ function mactrack_kill_process(int $process_id): void {
 	}
 }
 
+/**
+ * Deletes stale mac_track_processes rows (and cleans up their scan
+ * locks) for scans that have exceeded the configured maximum script
+ * runtime, for the given site (or all sites when $site_id is 0).
+ *
+ * @param int $site_id The MacTrack site id to limit cleanup to, or 0
+ *                     for all sites.
+ *
+ * @return void
+ */
 function clear_old_processes($site_id): void {
 	// get the max script runtime and kill old scripts
 	$max_script_runtime = read_config_option('mt_script_runtime');
@@ -824,6 +824,8 @@ function collect_mactrack_data($start, $site_id = 0): void {
 				$last_time = $current_time;
 			}
 
+			mactrack_reap_unstarted_scanners();
+
 			// scanners only; the parent (-1) and resolver (0) rows do not count
 			$processes_running = db_fetch_cell('SELECT COUNT(*)
 				FROM mac_track_processes
@@ -853,6 +855,8 @@ function collect_mactrack_data($start, $site_id = 0): void {
 			WHERE device_id > 0');
 
 		while ($processes_running > 0 && !$exit_mactrack) {
+			mactrack_reap_unstarted_scanners();
+
 			$processes_running = db_fetch_cell('SELECT COUNT(*)
 				FROM mac_track_processes
 				WHERE device_id > 0');
@@ -1187,24 +1191,13 @@ function collect_mactrack_data($start, $site_id = 0): void {
 					$message = str_replace('<PORTNAME>', $found['port_name'], $message);
 
 					// send out the email
-					if (!$record['discovered'] || $record['notify_schedule'] >= '2') {
-						$mail = true;
+					if (mactrack_macwatch_should_mail($record, time())) {
+						mactrack_mail($record['email_addresses'], $from, $fromname, $subject, $message);
 
-						// above 2 the schedule is the minutes between mails
-						if ($record['notify_schedule'] > 2) {
-							if ((int) strtotime($record['date_last_notif']) + $record['notify_schedule'] * 60 > time()) {
-								$mail = false;
-							}
-						}
-
-						if ($mail) {
-							mactrack_mail($record['email_addresses'], $from, $fromname, $subject, $message);
-
-							db_execute_prepared('UPDATE mac_track_macwatch
-								SET date_last_notif = NOW()
-								WHERE mac_id = ?',
-								[$record['mac_id']]);
-						}
+						db_execute_prepared('UPDATE mac_track_macwatch
+							SET date_last_notif = NOW()
+							WHERE mac_id = ?',
+							[$record['mac_id']]);
 					}
 
 					// update the the correct information
@@ -1476,4 +1469,49 @@ function display_help(): void {
 	print '-w | --web    - Display output suitable for the web' . PHP_EOL;
 	print '-f | --force  - Force the execution of a collection process' . PHP_EOL;
 	print '-d | --debug  - Display verbose output during execution' . PHP_EOL;
+}
+
+/**
+ * Removes scanner rows the poller registered before launch whose scanner
+ * never started: the scanner replaces its row with its own PID at
+ * startup, so a row still at PID 0 after the grace period belongs to a
+ * launch that failed, for example a wrong PHP path. Without this the
+ * poller would wait for it until the run times out.
+ *
+ * @param int $grace Seconds a launched scanner has to start.
+ *
+ * @return void
+ */
+function mactrack_reap_unstarted_scanners(int $grace = 60): void {
+	$where = 'WHERE device_id > 0 AND process_id = 0 AND start_date < NOW() - INTERVAL ? SECOND';
+	$stale = db_fetch_assoc_prepared("SELECT device_id FROM mac_track_processes $where", [$grace]);
+
+	if (cacti_sizeof($stale)) {
+		cacti_log('WARNING: MacTrack scanner did not start for device id(s) ' . implode(', ', array_column($stale, 'device_id')) . '; check the PHP binary path and the scanner log', false, 'MACTRACK');
+
+		// A scanner that starts meanwhile has set its PID, so it is kept.
+		db_execute_prepared("DELETE FROM mac_track_processes $where", [$grace]);
+	}
+}
+
+/**
+ * Decides whether a MacWatch entry seen in this scan is mailed now.
+ *
+ * Until first discovered it always is. After that, a schedule of 1 mails
+ * only that first time, 2 on every scan, and a larger value is the minutes
+ * that must pass after the last mail.
+ *
+ * @param array $record The mac_track_macwatch row.
+ * @param int   $now    Current epoch seconds.
+ *
+ * @return bool
+ */
+function mactrack_macwatch_should_mail(array $record, int $now): bool {
+	$schedule = (int) $record['notify_schedule'];
+
+	if ($record['discovered'] && $schedule < 2) {
+		return false;
+	}
+
+	return $schedule <= 2 || (int) strtotime((string) $record['date_last_notif']) + $schedule * 60 <= $now;
 }

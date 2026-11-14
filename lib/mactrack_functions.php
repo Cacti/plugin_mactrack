@@ -2272,6 +2272,23 @@ function get_link_port_status(&$device): array {
   value as the value of the resulting array
 */
 /**
+ * Returns the part of a walked OID below $base, without a leading dot.
+ * Core's PHP SNMP walk drops the leading dot and the snmpwalk binary keeps
+ * it, so both must give the same key.
+ *
+ * @param string $oid  The OID as returned by cacti_snmp_walk().
+ * @param string $base The walked table OID, with or without a leading dot.
+ *
+ * @return string The index below $base, or the whole OID if it is not below.
+ */
+function mactrack_oid_suffix(string $oid, string $base): string {
+	$oid  = ltrim(str_replace('iso', '1', $oid), '.');
+	$base = ltrim($base, '.') . '.';
+
+	return strpos($oid, $base) === 0 ? substr($oid, strlen($base)) : $oid;
+}
+
+/**
  * Walks an SNMP OID and returns its results re-keyed by the OID suffix
  * (with the base OID and any 'iso' prefix stripped) to value, using a
  * per-VLAN SNMP context when the read string encodes one (for SNMP
@@ -2291,23 +2308,6 @@ function get_link_port_status(&$device): array {
  * @return array Map of OID suffix => value, re-keyed via
  *               array_rekey().
  */
-/**
- * Returns the part of a walked OID below $base, without a leading dot.
- * Core's PHP SNMP walk drops the leading dot and the snmpwalk binary keeps
- * it, so both must give the same key.
- *
- * @param string $oid  The OID as returned by cacti_snmp_walk().
- * @param string $base The walked table OID, with or without a leading dot.
- *
- * @return string The index below $base, or the whole OID if it is not below.
- */
-function mactrack_oid_suffix(string $oid, string $base): string {
-	$oid  = ltrim(str_replace('iso', '1', $oid), '.');
-	$base = ltrim($base, '.') . '.';
-
-	return strpos($oid, $base) === 0 ? substr($oid, strlen($base)) : $oid;
-}
-
 function xform_stripped_oid($oid, &$device, $snmp_readstring = '', $hex = false): array {
 	$return_array = [];
 
@@ -2388,11 +2388,6 @@ function xform_net_address($ip_address): string {
 	return $ip_address;
 }
 
-/** xform_mac_address - This function will take a variable that is either formatted as
- * hex or as a string representing hex and convert it to what the mactrack scanning
- * function expects.
- * @param mixed $mac_address
- */
 /**
  * Reads the MAC address at the end of a bridge table index, such as the
  * fdbId.m1.m2.m3.m4.m5.m6 index of dot1qTpFdbTable.
@@ -2419,6 +2414,11 @@ function mactrack_index_to_mac(string $index): string {
 	return implode('', array_map(fn ($part) => sprintf('%02X', (int) $part), $parts));
 }
 
+/** xform_mac_address - This function will take a variable that is either formatted as
+ * hex or as a string representing hex and convert it to what the mactrack scanning
+ * function expects.
+ * @param mixed $mac_address
+ */
 function xform_mac_address($mac_address): string {
 	$mac_address = (string) $mac_address;
 
@@ -2965,8 +2965,8 @@ function mactrack_macauth_index(array $entries): array {
 }
 
 /**
- * Reports whether a MAC is a MacAuth entry or starts with one, as
- * db_check_auth() matches it.
+ * Reports whether a MAC is a MacAuth entry or starts with one, as the
+ * MacAuth save allows a whole MAC or a prefix such as a vendor's OUI.
  *
  * @param string                          $mac_address The scanned MAC.
  * @param array<int, array<string, true>> $index       From mactrack_macauth_index().
@@ -2983,17 +2983,6 @@ function mactrack_mac_authorized(string $mac_address, array $index): bool {
 	return false;
 }
 
-// db_check_auth - This function checks whether the mac address exists in the mac_track+macauth table
-/**
- * Checks whether a MAC address has a matching entry in the
- * mac_track_macauth authorization table.
- *
- * @param string|null $mac_address The MAC address to check.
- * @param int|null    $site_id     The site owning the observed device.
- *
- * @return int|false The matching mac_id, or false if not found or
- *                   $mac_address is null/empty.
- */
 /**
  * Puts a MAC address typed by a user in the stored form: separators
  * removed and upper case, as the scanners store it.
@@ -3006,21 +2995,25 @@ function mactrack_normalize_mac(string $mac_address): string {
 	return strtoupper(str_replace([':', '-', '.', ' '], '', trim($mac_address)));
 }
 
+// db_check_auth - This function checks whether the mac address exists in the mac_track+macauth table
+/**
+ * Checks whether a MAC address has a matching entry in the
+ * mac_track_macauth authorization table.
+ *
+ * @param string|null $mac_address The MAC address to check.
+ * @param int|null    $site_id     The site owning the observed device.
+ *
+ * @return int|false The matching mac_id, or false if not found or
+ *                   $mac_address is null/empty.
+ */
 function db_check_auth($mac_address) {
 	if ($mac_address === null || $mac_address === '') {
 		return false;
 	}
 
-	// An entry may be a whole MAC or a prefix such as a vendor's OUI, as
-	// the MacAuth save treats it. Compare the leading characters rather
-	// than use LIKE, so a stored % or _ is not a wildcard, and never let an
-	// empty entry match everything. Prefer the longest match.
-	$query = db_fetch_cell_prepared("SELECT mac_id
+	$query = db_fetch_cell_prepared('SELECT mac_id
 		FROM mac_track_macauth
-		WHERE mac_address != ''
-		AND LEFT(?, LENGTH(mac_address)) = mac_address
-		ORDER BY LENGTH(mac_address) DESC
-		LIMIT 1",
+		WHERE mac_address = ?',
 		[$mac_address]);
 
 	return $query;
@@ -4989,6 +4982,27 @@ function mactrack_tabs(): void {
 
 	print "$(function() { if (pageName.indexOf('mactrack_view') >= 0) { $('.maintabs a[href*=\"plugins/mactrack/mactrack_view_\"]').attr('href', urlPath+'plugins/mactrack/'+pageName); } });";
 	print '</script></div>';
+}
+
+/**
+ * Looks up a MAC address's vendor name from the OUI database using its
+ * first 3 octets (vendor prefix).
+ *
+ * @param string $mac The MAC address (or at least its first 3 octets)
+ *                    to look up.
+ *
+ * @return string The vendor name, or 'Unknown' if no match is found.
+ */
+function mactrack_get_vendor_name($mac): string {
+	$vendor_mac = substr($mac,0,8);
+
+	$vendor_name = db_fetch_cell_prepared('SELECT vendor_name FROM mac_track_oui_database WHERE vendor_mac = ?', [$vendor_mac]);
+
+	if ($vendor_name != '') {
+		return $vendor_name;
+	} else {
+		return __('Unknown', 'mactrack');
+	}
 }
 
 /**
