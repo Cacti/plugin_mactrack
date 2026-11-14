@@ -1756,7 +1756,17 @@ function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 	$data['keys'][]    = ['name' => 'authorized', 'columns' => 'authorized'];
 	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Database for Tracking Device MACs';
+	$ports_existed     = db_table_exists('mac_track_ports');
 	api_plugin_db_table_create('mactrack', 'mac_track_ports', $data);
+
+	if (!$ports_existed) {
+		// Setup loads this file without lib/mactrack_functions.php.
+		include_once(__DIR__ . '/../lib/mactrack_partitions.php');
+		include_once(__DIR__ . '/../lib/mactrack_partition_ops.php');
+		include_once(__DIR__ . '/../lib/mactrack_partition_convert.php');
+
+		mactrack_partition_fresh_install();
+	}
 
 	$data              = [];
 	$data['columns'][] = ['name' => 'device_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'];

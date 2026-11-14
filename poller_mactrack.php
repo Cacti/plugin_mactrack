@@ -51,6 +51,7 @@ global $config;
 require_once($config['base_path'] . '/lib/poller.php');
 require_once($config['base_path'] . '/plugins/mactrack/includes/database.php');
 require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
+require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_activity.php');
 
 mactrack_retry_default_site();
 
@@ -153,13 +154,18 @@ if (function_exists('register_process_start')) {
 // few skipped cycles are harmless.
 if (function_exists('mactrack_background_upgrade_running')) {
 	$upgrade_active = mactrack_background_upgrade_running();
+	$defer_reason   = 'upgrade';
 
 	if (!$upgrade_active && function_exists('mactrack_db_table_exists')) {
 		$upgrade_active = mactrack_db_table_exists('mac_track_aggregated_ports_upgrade');
+		$defer_reason   = 'rebuild_table';
 	}
 
 	if ($upgrade_active) {
 		mactrack_debug('Deferring the Mactrack poller run while a database upgrade is in progress');
+
+		// the Process Status page shows why no scan ran
+		mactrack_poller_deferred($defer_reason);
 
 		if (function_exists('unregister_process')) {
 			unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
@@ -168,6 +174,9 @@ if (function_exists('mactrack_background_upgrade_running')) {
 		exit(0);
 	}
 }
+
+// not deferring: drop the note the Process Status page shows
+mactrack_poller_deferred_clear();
 
 // Get rid of old/hung processes
 clear_old_processes($site_id);
@@ -204,6 +213,17 @@ if ($collect_frequency == 'disabled') {
 			mactrack_debug('WARNING: Stale data found in Matrack process table');
 			db_execute('TRUNCATE mac_track_processes');
 		}
+	}
+
+	// A port table conversion holds this lock for hours; scans are skipped until it ends.
+	if (!mactrack_partition_scan_begin()) {
+		print 'NOTE: A port table conversion or another scan is running, exiting.' . PHP_EOL;
+
+		if (function_exists('unregister_process')) {
+			unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
+		}
+
+		exit(0);
 	}
 
 	// we don't want to see errors in the cacti log
@@ -556,6 +576,9 @@ function collect_mactrack_data($start, $site_id = 0): void {
 	$scan_date = date('Y-m-d H:i:s');
 	set_config_option('mt_scan_date', $scan_date);
 
+	// create this scan's partition before any of its rows are written
+	$partition_plan = mactrack_partition_prepare_scan($scan_date);
+
 	// just in case we've run too long
 	$exit_mactrack = false;
 
@@ -640,6 +663,8 @@ function collect_mactrack_data($start, $site_id = 0): void {
 		}
 
 		// scan through all devices
+		mactrack_activity_begin('scanning', ['devices' => $total_devices]);
+
 		$j                   = 0;
 		$i                   = 0;
 		$last_time           = strtotime('now') - 7200;
@@ -897,6 +922,8 @@ function collect_mactrack_data($start, $site_id = 0): void {
 		 */
 		db_process_remove('-1');
 
+		mactrack_activity_begin('dns_resolver');
+
 		while (!$exit_mactrack) {
 			// checking to see if the resolver is running
 			$resolver_running = db_fetch_row('SELECT *
@@ -919,19 +946,16 @@ function collect_mactrack_data($start, $site_id = 0): void {
 			}
 		}
 
-		// transfer temp port results into permanent table
-		db_execute('INSERT INTO mac_track_ports
-			(site_id, device_id, hostname, dns_hostname, device_name,
-			vlan_id, vlan_name, mac_address, vendor_mac, ip_address,
-			port_number, port_name, scan_date, authorized)
-			SELECT site_id, device_id, hostname, dns_hostname, device_name,
-			vlan_id, vlan_name, mac_address, vendor_mac, ip_address,
-			port_number, port_name, scan_date, authorized
-			FROM mac_track_temp_ports
-			ON DUPLICATE KEY UPDATE site_id=VALUES(site_id), hostname=VALUES(hostname),
-			device_name=VALUES(device_name), vlan_id=VALUES(vlan_id), vlan_name=VALUES(vlan_name),
-			vendor_mac=VALUES(vendor_mac), ip_address=VALUES(ip_address), dns_hostname=VALUES(dns_hostname),
-			port_name=VALUES(port_name), authorized=VALUES(authorized)');
+		// transfer temp port results into permanent table, in batches: no
+		// INSERT ... SELECT, which locks the temp rows under mixed binlogs.
+		// A per-scan partition is filled through the stage table.
+		mactrack_activity_begin('transferring');
+
+		$loaded = mactrack_partition_load_scan($partition_plan);
+
+		mactrack_debug("Loaded $loaded scan rows ({$partition_plan['mode']}).");
+
+		mactrack_scan_dates_record($scan_date);
 
 		mactrack_debug('Finished transferring scan results to main table.');
 
@@ -1143,10 +1167,9 @@ function collect_mactrack_data($start, $site_id = 0): void {
 		db_execute('OPTIMIZE TABLE mac_track_ips');
 		*/
 
-		db_execute('TRUNCATE TABLE mac_track_scan_dates');
-		db_execute('REPLACE INTO mac_track_scan_dates (SELECT DISTINCT scan_date from mac_track_ports)');
-
 		api_plugin_hook_function('mac_track_finish_scan');
+
+		mactrack_activity_end();
 	} else {
 		cacti_log('NOTE: MACTRACK has no devices to process at this time', false, 'MACTRACK');
 	}

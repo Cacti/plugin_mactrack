@@ -273,6 +273,9 @@ function form_mactrack_actions(): void {
 				for ($i = 0; $i < cacti_sizeof($selected_items); $i++) {
 					api_mactrack_device_remove($selected_items[$i]);
 				}
+
+				// The deleted rows may have been the last of some scans.
+				mactrack_scan_dates_prune_empty();
 			}
 
 			header('Location: mactrack_devices.php');

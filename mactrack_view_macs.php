@@ -716,6 +716,8 @@ function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_
 		$sql_limit = '';
 	}
 
+	$ports_table = mactrack_ports_table_for((string) get_request_var('scan_date'));
+
 	if (get_request_var('scan_date') == 3) {
 		$query_string = "SELECT
 			row_id, site_name, device_id, device_name, hostname, mtp.mac_address,
@@ -737,7 +739,7 @@ function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_
 			site_name, device_id, device_name, hostname, mtp.mac_address,
 			vendor_name, ip_address, dns_hostname, port_number,
 			port_name, vlan_id, vlan_name, scan_date, mtm.mac_id
-			FROM mac_track_ports AS mtp
+			FROM $ports_table AS mtp
 			LEFT JOIN mac_track_sites AS mts
 			ON mtp.site_id = mts.site_id
 			LEFT JOIN mac_track_macauth AS mtm
@@ -752,7 +754,7 @@ function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_
 			site_name, device_id, device_name, hostname, mtp.mac_address,
 			vendor_name, ip_address, dns_hostname, port_number,
 			port_name, vlan_id, vlan_name, MAX(scan_date) AS scan_date, mtm.mac_id
-			FROM mac_track_ports AS mtp
+			FROM $ports_table AS mtp
 			LEFT JOIN mac_track_sites AS mts
 			ON mtp.site_id = mts.site_id
 			LEFT JOIN mac_track_macauth AS mtm
@@ -821,13 +823,15 @@ function mactrack_view_macs(): void {
 
 	$port_results = mactrack_view_get_mac_records($sql_where, $sql_params, $rows, true);
 
+	$ports_table = mactrack_ports_table_for((string) get_request_var('scan_date'));
+
 	// prevent table scans, either a device or site must be selected
 	if ($sql_where == '') {
 		$total_rows = 0;
 	} elseif (get_request_var('scan_date') == 1) {
 		$rows_query_string = "SELECT
 			COUNT(mtp.device_id)
-			FROM mac_track_ports AS mtp
+			FROM $ports_table AS mtp
 			LEFT JOIN mac_track_sites AS mts
 			ON mtp.site_id = mts.site_id
 			LEFT JOIN mac_track_oui_database AS mtod
@@ -838,7 +842,7 @@ function mactrack_view_macs(): void {
 	} else {
 		$rows_query_string = "SELECT
 			COUNT(DISTINCT device_id, mac_address, port_number, ip_address)
-			FROM mac_track_ports AS mtp
+			FROM $ports_table AS mtp
 			LEFT JOIN mac_track_sites AS mts
 			ON mtp.site_id = mts.site_id
 			LEFT JOIN mac_track_oui_database AS mtod

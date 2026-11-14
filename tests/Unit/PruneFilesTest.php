@@ -29,6 +29,12 @@
 
 require_once __DIR__ . '/../../setup.php';
 
+/**
+ * Builds a temporary plugin tree under the system temp directory containing stale, protected, and stray files for the prune tests.
+ *
+ * @param array $manifest Manifest of paths the plugin is expected to keep.
+ * @return string Path of the temporary base directory.
+ */
 function mactrack_prune_fixture(array $manifest): string {
 	$base   = sys_get_temp_dir() . '/mactrack-prune-' . uniqid();
 	$plugin = $base . '/plugins/mactrack';
