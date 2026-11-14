@@ -888,13 +888,14 @@ function mactrack_config_settings() {
 		],
 		'mt_partition_granularity' => [
 			'friendly_name' => __('Port Partition Size', 'mactrack'),
-			'description'   => __('How finely the port table is partitioned when it uses the scan-date layout. MacTrack uses a coarser size when the finer one would exceed the partition limit.', 'mactrack'),
+			'description'   => __('Size of new partitions in an already partitioned table. To convert the full history or disable partitioning, use Configure Port Partitioning in MacTrack Utilities.', 'mactrack'),
 			'method'        => 'drop_array',
-			'default'       => 'scan',
+			'default'       => 'week',
 			'array'         => [
 				'scan' => __('One per Scan', 'mactrack'),
 				'hour' => __('Hourly', 'mactrack'),
 				'day'  => __('Daily', 'mactrack'),
+				'week' => __('Weekly', 'mactrack'),
 			],
 		],
 		'mt_ignorePorts_delim' => [

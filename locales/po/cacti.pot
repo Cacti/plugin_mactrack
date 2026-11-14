@@ -470,7 +470,7 @@ msgid "Rebuild and analyze the partition containing the latest port observation.
 msgstr ""
 
 #: lib/mactrack_functions.php
-msgid "The conversion copies the whole port table into a new partitioned table and can take hours on a large table. Scheduled scans are skipped and database maintenance waits until it finishes. The database needs free space for a second copy of the table. Continue?"
+msgid "Run this maintenance off hours. The conversion copies the full port history and can take hours. Scheduled scans are skipped and database maintenance waits until it finishes. Allow free disk space for a second copy of the table and its indexes. The original remains readable until the replacement is verified. Continue?"
 msgstr ""
 
 #: mactrack_actions.php
@@ -1583,6 +1583,10 @@ msgstr ""
 msgid "Daily"
 msgstr ""
 
+#: mactrack_utilities.php setup.php
+msgid "Weekly"
+msgstr ""
+
 #: mactrack_utilities.php
 msgid "Not partitioned"
 msgstr ""
@@ -1686,11 +1690,11 @@ msgid "%s: %d partitions dropped, %d created"
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "A conversion is already running. The partition status page shows when it has finished."
+msgid "Select daily, weekly or disabled partitioning before starting the conversion."
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "The port table already uses the scan-date layout."
+msgid "A conversion is already running. The partition status page shows when it has finished."
 msgstr ""
 
 #: mactrack_utilities.php
@@ -1698,7 +1702,7 @@ msgid "The port table has partitions MacTrack does not recognize, so it cannot b
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "The conversion has started in the background. The partition status page shows its progress and result."
+msgid "The conversion was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another conversion is running."
 msgstr ""
 
 #: mactrack_utilities.php
@@ -1786,11 +1790,11 @@ msgid "Rebuilds and analyzes only the partition containing the latest port obser
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "Convert Port Table"
+msgid "Configure Port Partitioning"
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "Converts the Port to MAC to IP results table to partitions by scan date, so maintenance drops old scans instead of deleting rows. It copies the table, which can take hours; scheduled scans are skipped meanwhile."
+msgid "Choose daily or weekly partitions, or disable partitioning. Converting copies the full port history in the background; scheduled scans are skipped meanwhile. You can keep the original table as a backup."
 msgstr ""
 
 #: mactrack_utilities.php
@@ -1811,6 +1815,14 @@ msgstr ""
 
 #: mactrack_utilities.php
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Partitioning"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Keep the original table as a backup"
 msgstr ""
 
 #: mactrack_vendormacs.php
@@ -2593,7 +2605,7 @@ msgid "How long should discovered IPs details be retained in the database."
 msgstr ""
 
 #: setup.php
-msgid "How finely the port table is partitioned when it uses the scan-date layout. MacTrack uses a coarser size when the finer one would exceed the partition limit."
+msgid "Size of new partitions in an already partitioned table. To convert the full history or disable partitioning, use Configure Port Partitioning in MacTrack Utilities."
 msgstr ""
 
 #: setup.php

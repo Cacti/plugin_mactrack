@@ -713,6 +713,7 @@ function mactrack_utilities_partition_status(): void {
 		'scan' => __('One per Scan', 'mactrack'),
 		'hour' => __('Hourly', 'mactrack'),
 		'day'  => __('Daily', 'mactrack'),
+		'week' => __('Weekly', 'mactrack'),
 	];
 	$layouts = [
 		'none'    => __('Not partitioned', 'mactrack'),
@@ -741,7 +742,7 @@ function mactrack_utilities_partition_status(): void {
 		}
 	}
 
-	$size = $sizes[$r['granularity']];
+	$size = $r['layout'] === 'none' ? __('Disabled', 'mactrack') : $sizes[$r['granularity']];
 
 	if ($r['fell_back']) {
 		$size = __('%s, coarser than the setting because %d partitions would exceed the limit', $size, $r['projected'], 'mactrack');
@@ -832,21 +833,28 @@ function mactrack_utilities_optimize_ports(): void {
 function mactrack_utilities_convert_ports(): void {
 	global $config;
 
+	$scheme = get_request_var('partition_scheme');
 	$layout = mactrack_partition_state()['layout']['state'];
 	$busy   = (string) read_config_option('mt_partition_converting', true) !== '';
 
-	if ($busy) {
+	if (!in_array($scheme, ['daily', 'weekly', 'disabled'], true)) {
+		$message = __('Select daily, weekly or disabled partitioning before starting the conversion.', 'mactrack');
+	} elseif ($busy) {
 		$message = __('A conversion is already running. The partition status page shows when it has finished.', 'mactrack');
-	} elseif ($layout === 'range') {
-		$message = __('The port table already uses the scan-date layout.', 'mactrack');
 	} elseif ($layout === 'invalid') {
 		$message = __('The port table has partitions MacTrack does not recognize, so it cannot be converted. The partition status page shows why.', 'mactrack');
 	} else {
-		// The same command the poller hook builds: the configured PHP binary
-		// and a fixed script path, with nothing taken from the request.
-		exec_background(read_config_option('path_php_binary'), '-q ' . cacti_escapeshellarg($config['base_path'] . '/plugins/mactrack/mactrack_convert.php'));
+		// Only allowlisted schemes reach the CLI, and every argument is quoted.
+		$args = '-q ' . cacti_escapeshellarg($config['base_path'] . '/plugins/mactrack/mactrack_convert.php')
+			. ' ' . cacti_escapeshellarg('--partition=' . $scheme);
 
-		$message = __('The conversion has started in the background. The partition status page shows its progress and result.', 'mactrack');
+		if (get_request_var('keep_old') === 'on') {
+			$args .= ' --keep-old';
+		}
+
+		exec_background(read_config_option('path_php_binary'), $args);
+
+		$message = __('The conversion was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another conversion is running.', 'mactrack');
 	}
 
 	top_header();
@@ -893,6 +901,8 @@ function mactrack_utilities_purge_scanning_funcs(): void {
 function mactrack_utilities_post_form(string $action, string $label): string {
 	return '<form method="post" action="mactrack_utilities.php">'
 		. '<input type="hidden" name="action" value="' . html_escape($action) . '">'
+		. ($action === 'mactrack_utilities_convert_ports' ? mactrack_utilities_conversion_fields()
+			. '<a class="ui-button ui-corner-all ui-widget" href="mactrack_utilities.php">' . html_escape(__('Cancel', 'mactrack')) . '</a> ' : '')
 		. '<input type="submit" class="ui-button ui-corner-all ui-widget" value="' . html_escape($label) . '">'
 		. '</form>';
 }
@@ -908,7 +918,7 @@ function mactrack_utilities_post_form(string $action, string $label): string {
  * @return string
  */
 function mactrack_utilities_action_link(string $action, string $label): string {
-	if (read_config_option('mt_maint_confirm') == 'on') {
+	if ($action === 'mactrack_utilities_convert_ports' || read_config_option('mt_maint_confirm') == 'on') {
 		return "<a class='hyperLink' href='mactrack_utilities.php?action=" . html_escape($action) . "'>" . html_escape($label) . '</a>';
 	}
 
@@ -930,8 +940,14 @@ function mactrack_utilities_confirm(string $action): void {
 
 	html_start_box(__('Are You Sure?', 'mactrack'), '60%', '', '3', 'center', '');
 	print '<tr><td class="textArea">' . html_escape($message) . '</td></tr>';
-	print '<tr><td class="right"><a class="ui-button ui-corner-all ui-widget" href="mactrack_utilities.php">' . html_escape(__('Cancel', 'mactrack')) . '</a> '
-		. mactrack_utilities_post_form($action, __('Continue', 'mactrack')) . '</td></tr>';
+
+	if ($action === 'mactrack_utilities_convert_ports') {
+		print '<tr><td class="textArea">' . mactrack_utilities_post_form($action, __('Continue', 'mactrack')) . '</td></tr>';
+	} else {
+		print '<tr><td class="right"><a class="ui-button ui-corner-all ui-widget" href="mactrack_utilities.php">' . html_escape(__('Cancel', 'mactrack')) . '</a> '
+			. mactrack_utilities_post_form($action, __('Continue', 'mactrack')) . '</td></tr>';
+	}
+
 	html_end_box();
 
 	bottom_footer();
@@ -1031,10 +1047,10 @@ function mactrack_utilities(): void {
 
 	<tr class='even'>
 		<td class='textArea'>
-			<?php print mactrack_utilities_action_link('mactrack_utilities_convert_ports', __('Convert Port Table', 'mactrack')); ?>
+			<?php print mactrack_utilities_action_link('mactrack_utilities_convert_ports', __('Configure Port Partitioning', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
-			<?php print __('Converts the Port to MAC to IP results table to partitions by scan date, so maintenance drops old scans instead of deleting rows. It copies the table, which can take hours; scheduled scans are skipped meanwhile.', 'mactrack'); ?>
+			<?php print __('Choose daily or weekly partitions, or disable partitioning. Converting copies the full port history in the background; scheduled scans are skipped meanwhile. You can keep the original table as a backup.', 'mactrack'); ?>
 		</td>
 	</tr>
 
@@ -1060,4 +1076,24 @@ function mactrack_utilities(): void {
 	<?php
 
 	html_end_box();
+}
+
+/**
+ * Options shared with the conversion CLI, submitted through Cacti's CSRF form.
+ * The setting is saved by the converter only after the table swap succeeds.
+ *
+ * @return string
+ */
+function mactrack_utilities_conversion_fields(): string {
+	$selected = ['day' => 'daily', 'week' => 'weekly', 'disabled' => 'disabled'][(string) read_config_option('mt_partition_granularity')] ?? 'weekly';
+	$options  = ['daily' => __('Daily', 'mactrack'), 'weekly' => __('Weekly', 'mactrack'), 'disabled' => __('Disabled', 'mactrack')];
+	$html     = '<p><label for="partition_scheme">' . html_escape(__('Partitioning', 'mactrack')) . '</label> '
+		. '<select id="partition_scheme" name="partition_scheme">';
+
+	foreach ($options as $value => $label) {
+		$html .= '<option value="' . $value . '"' . ($value === $selected ? ' selected' : '') . '>' . html_escape($label) . '</option>';
+	}
+
+	return $html . '</select></p><p><label><input type="checkbox" name="keep_old" value="on"> '
+		. html_escape(__('Keep the original table as a backup', 'mactrack')) . '</label></p>';
 }
