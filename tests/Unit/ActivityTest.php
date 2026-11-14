@@ -136,13 +136,30 @@ describe('recording', function () {
 });
 
 describe('database maintenance', function () {
+	it('keeps calendar retention days across both DST transitions', function () {
+		$zone = date_default_timezone_get();
+		date_default_timezone_set('America/Los_Angeles');
+
+		try {
+			foreach (['2026-11-12 12:00:00', '2026-03-12 12:00:00'] as $date) {
+				set_config_option('mt_data_retention', '2weeks');
+				$steps = [];
+				mactrack_db_maint_run($steps, strtotime($date));
+				expect($GLOBALS['__test_config_options']['mt_data_retention'])->toBe(14);
+			}
+		} finally {
+			date_default_timezone_set($zone);
+		}
+	});
+
 	it('records the step timings of a run and leaves no activity behind', function () {
 		set_config_option('mt_data_retention_ip', '30');
 
 		perform_mactrack_db_maint();
 
 		$steps = array_column(mactrack_maint_steps_last(), 'step');
-		expect(array_slice($steps, -2))->toBe(['delete_ips', 'optimize_ips']);
+		expect(end($steps))->toBe('delete_ips');
+		expect($steps)->not->toContain('optimize_ips');
 		expect($GLOBALS['__test_config_options']['mt_activity'])->toBe('');
 	});
 
@@ -180,7 +197,8 @@ describe('database maintenance', function () {
 	it('turns each named retention into a number of days', function (string $retention, int $days) {
 		set_config_option('mt_data_retention', $retention);
 
-		perform_mactrack_db_maint();
+		$steps = [];
+		mactrack_db_maint_run($steps, strtotime('2026-11-12 12:00:00'));
 
 		expect((int) $GLOBALS['__test_config_options']['mt_data_retention'])->toBe($days);
 	})->with([
@@ -189,8 +207,8 @@ describe('database maintenance', function () {
 		['1week', 7],
 		['2weeks', 14],
 		['3weeks', 21],
-		['1month', (int) ceil((time() - strtotime('-1 Month')) / 86400)],
-		['2months', (int) ceil((time() - strtotime('-2 Months')) / 86400)],
+		['1month', 31],
+		['2months', 61],
 		['unrecognized', 2],
 	]);
 

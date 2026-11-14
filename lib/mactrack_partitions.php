@@ -189,9 +189,9 @@ function mactrack_partition_choose(string $wanted, int $scan_interval, int $rete
 
 	foreach (array_slice($names, (int) array_search($wanted, $names, true)) as $granularity) {
 		// Expired partitions go only at the daily maintenance run, so up to
-		// one more day builds up; dMaxValue and one partition made ahead
-		// (or a recovery split) come on top.
-		$projected = (int) ceil(86400 / $periods[$granularity]) * ($retention_days + 1) + 2;
+		// one more day builds up. Reserve another day for hourly partitions
+		// created ahead, plus dMaxValue and a partial period.
+		$projected = (int) ceil(86400 / $periods[$granularity]) * ($retention_days + ($granularity === 'hour' ? 2 : 1)) + 2;
 
 		if ($projected <= $cap) {
 			return ['granularity' => $granularity, 'projected' => $projected, 'fell_back' => $granularity !== $wanted];

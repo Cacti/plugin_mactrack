@@ -335,7 +335,7 @@ if (!function_exists('db_table_exists')) {
 	 * @param string $table Table name.
 	 * @return bool|mixed
 	 */
-	function db_table_exists($table) {
+	function db_table_exists($table, $log = true, $db_conn = false) {
 		return mactrack_test_next_return('db_table_exists', true, (string) $table);
 	}
 }

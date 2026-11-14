@@ -66,7 +66,7 @@ function mt_pc_db(array $opts = []): void {
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', '10.5.29-MariaDB');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'PLUGIN_STATUS', $opts['plugin'] ?? 'ACTIVE');
 	mactrack_test_queue_return_for('db_table_exists', 'processes', isset($opts['upgrade_started']));
-	mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', isset($opts['upgrade_started']) ? ['pid' => '99', 'started' => $opts['upgrade_started'], 'now' => '100000', 'timeout' => '86400'] : []);
+	mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', isset($opts['upgrade_started']) ? ['pid' => (string) getmypid(), 'started' => $opts['upgrade_started'], 'now' => '100000', 'timeout' => '86400'] : []);
 	mactrack_test_queue_return_for('db_table_exists', 'mac_track_aggregated_ports_upgrade', $opts['upgrade_table'] ?? false);
 	mactrack_test_queue_return_for('db_table_exists', 'mac_track_ports_old', $opts['old_exists'] ?? false);
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 0)', $opts['scan_lock'] ?? '1');

@@ -64,6 +64,64 @@ function mactrack_partition_unlock(): void {
 }
 
 /**
+ * Reclaims space only in the partition containing the latest observation.
+ * Call while holding the scan lock, so the selected partition stays hot.
+ *
+ * @return array Database result rows for the Utilities action.
+ */
+function mactrack_partition_optimize(): array {
+	if (!mactrack_partition_lock()) {
+		return [['Msg_type' => 'error', 'Msg_text' => 'Partition maintenance is running. Try again later.']];
+	}
+
+	try {
+		$layout = mactrack_partition_state()['layout'];
+
+		if ($layout['state'] === 'none') {
+			return (array) db_fetch_assoc_prepared('OPTIMIZE TABLE mac_track_ports');
+		}
+
+		if ($layout['state'] !== 'range') {
+			return [['Msg_type' => 'error', 'Msg_text' => 'Convert the port table to timestamp partitions before optimizing a partition.']];
+		}
+
+		// MAX(scan_date) can use the date index. Partition ordinals alone are
+		// insufficient: maintenance creates empty future partitions ahead.
+		$latest = db_fetch_cell_prepared('SELECT UNIX_TIMESTAMP(MAX(scan_date)) FROM mac_track_ports');
+
+		if ($latest === null || $latest === '') {
+			return [['Msg_type' => 'status', 'Msg_text' => 'The port table is empty; no partition needs rebuilding.']];
+		}
+
+		if (!is_numeric($latest)) {
+			return [['Msg_type' => 'error', 'Msg_text' => 'Could not read the latest port observation.']];
+		}
+
+		$name = 'dMaxValue';
+
+		foreach ($layout['partitions'] as $partition) {
+			if ($partition['bound'] !== null && (int) $latest >= $partition['bound']) {
+				continue;
+			}
+
+			$name = $partition['name'];
+
+			break;
+		}
+
+		// OPTIMIZE PARTITION rebuilds the entire InnoDB table on both
+		// MySQL and MariaDB. REBUILD and ANALYZE target only this partition.
+		if (!mactrack_partition_ddl("ALTER TABLE `mac_track_ports` REBUILD PARTITION `$name`", 1, 0)) {
+			return [['Msg_type' => 'error', 'Msg_text' => "Could not rebuild partition $name."]];
+		}
+
+		return (array) db_fetch_assoc_prepared("ALTER TABLE `mac_track_ports` ANALYZE PARTITION `$name`");
+	} finally {
+		mactrack_partition_unlock();
+	}
+}
+
+/**
  * Takes the scan lock that keeps a scan and a table conversion apart.
  *
  * The poller calls this before any scan or maintenance and keeps the lock
@@ -444,7 +502,7 @@ function mactrack_partition_exchange(string $partition, array $server): bool {
  * While it keeps failing, scans load straight into mac_track_ports and the
  * stage rows are kept for the next try.
  *
- * @param array{mode: string, partition: string|null} $plan From mactrack_partition_prepare_scan().
+ * @param array{mode?: string, partition: string|null, scan_date: string} $plan From mactrack_partition_prepare_scan().
  *
  * @return int Rows read from mac_track_temp_ports.
  */
@@ -518,7 +576,7 @@ function mactrack_partition_load_scan(array $plan): int {
  * Drops every partition whose upper bound is at or before the retention
  * cutoff, except dMaxValue and the newest bounded partition, then prunes
  * the scan dates below the highest dropped bound. For hourly and daily
- * partitions, also creates the current and the next period, so the poller
+ * partitions, also creates at least a full day ahead, so the poller
  * seldom splits. Per-scan partitions are only created by the poller, and
  * nothing is created while dMaxValue holds rows: the next scan's recovery
  * split moves those first. Other layouts are left to their own maintenance.
@@ -602,7 +660,7 @@ function mactrack_partition_maintain_locked(array $partitions, array $server, in
 	$cap  = mactrack_partition_cap($server);
 	$last = $bounded === [] ? 0 : end($bounded)['bound'];
 
-	for ($i = 0, $ts = $now; $i < 2; $i++) {
+	for ($i = 0, $ts = $now; $i < 2 || $ts <= $now + 86400; $i++) {
 		$period = mactrack_partition_period($size, $ts);
 		$ts     = $period['bound'];
 

@@ -774,8 +774,8 @@ function mactrack_utilities_partition_status(): void {
 }
 
 /**
- * Runs OPTIMIZE TABLE on mac_track_ports, which routine maintenance no
- * longer does because it rebuilds the whole table. Runs only on a POST
+ * Rebuilds and analyzes the hot port partition, or optimizes the whole
+ * table when it is unpartitioned. Runs only on a POST
  * (see mactrack_utilities_may_run()).
  *
  * It holds the scan lock throughout, so it never runs during a scan or a
@@ -789,7 +789,7 @@ function mactrack_utilities_optimize_ports(): void {
 
 	if (mactrack_partition_scan_begin()) {
 		try {
-			$result = db_fetch_assoc_prepared('OPTIMIZE TABLE mac_track_ports');
+			$result = mactrack_partition_optimize();
 		} finally {
 			mactrack_partition_scan_end();
 		}
@@ -1025,7 +1025,7 @@ function mactrack_utilities(): void {
 			<?php print mactrack_utilities_action_link('mactrack_utilities_optimize_ports', __('Optimize Port Table', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
-			<?php print __('Rebuilds the Port to MAC to IP results table to reclaim the space of deleted rows. Database maintenance no longer does this, because the rebuild can take a long time on a large table. Partitioned tables rarely need it.', 'mactrack'); ?>
+			<?php print __('Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space. Unpartitioned tables are optimized in full. Scans wait until it finishes.', 'mactrack'); ?>
 		</td>
 	</tr>
 

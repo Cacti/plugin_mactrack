@@ -176,7 +176,7 @@ it('assumes 15-minute scans and 14 days when the settings are not numbers', func
 	mactrack_partition_prepare_scan(MT_PP_DATE);
 
 	$status = json_decode($GLOBALS['__test_config_options']['mt_partition_status'], true);
-	expect($status['projected'])->toBe(362); // hourly: 24 x 15 + 2, after 96 x 15 + 2 exceeds 1024
+	expect($status['projected'])->toBe(386); // hourly: 24 x 15 + 2, after 96 x 15 + 2 exceeds 1024
 });
 
 it('loads straight into a partition that already covers the scan', function () {
