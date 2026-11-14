@@ -65,8 +65,8 @@ it('chooses the finest granularity that fits under the cap', function (string $w
 	// periods per day x (retention + 1) + 2: a day builds up between the
 	// daily drops, plus dMaxValue and one partition made ahead.
 	'15-min scans, 7 days'    => ['scan', 900, 7, 1024, ['granularity' => 'scan', 'projected' => 770, 'fell_back' => false]],
-	'15-min scans, 10 days'   => ['scan', 900, 10, 1024, ['granularity' => 'hour', 'projected' => 266, 'fell_back' => true]],
-	'5-min scans, 7 days'     => ['scan', 300, 7, 1024, ['granularity' => 'hour', 'projected' => 194, 'fell_back' => true]],
+	'15-min scans, 10 days'   => ['scan', 900, 10, 1024, ['granularity' => 'hour', 'projected' => 290, 'fell_back' => true]],
+	'5-min scans, 7 days'     => ['scan', 300, 7, 1024, ['granularity' => 'hour', 'projected' => 218, 'fell_back' => true]],
 	'5-min scans, 60 days'    => ['scan', 300, 60, 1024, ['granularity' => 'day', 'projected' => 63, 'fell_back' => true]],
 	'hourly, 400 days, MySQL' => ['hour', 900, 400, 512, ['granularity' => 'day', 'projected' => 403, 'fell_back' => true]],
 	'daily asked, fits'       => ['day', 900, 30, 1024, ['granularity' => 'day', 'projected' => 33, 'fell_back' => false]],

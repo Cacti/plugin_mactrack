@@ -2980,12 +2980,14 @@ function perform_mactrack_db_maint(): void {
  * Runs the maintenance steps for perform_mactrack_db_maint(), noting each
  * heavy step in $steps as it starts.
  *
- * @param array $steps Step list that mactrack_maint_step_begin() fills.
+ * @param array    $steps Step list that mactrack_maint_step_begin() fills.
+ * @param int|null $now   Current time; defaults to the start of maintenance.
  *
  * @return void
  */
-function mactrack_db_maint_run(array &$steps): void {
+function mactrack_db_maint_run(array &$steps, ?int $now = null): void {
 	global $database_default;
+	$now = $now ?? time();
 
 	if ((string) read_config_option('mt_partition_converting', true) !== '') {
 		cacti_log('MACTRACK: Database maintenance skipped while the port table is converted.', false, 'MACTRACK');
@@ -2997,43 +2999,45 @@ function mactrack_db_maint_run(array &$steps): void {
 	$retention = read_config_option('mt_data_retention');
 
 	if (is_numeric($retention)) {
-		$retention_date = date('Y-m-d H:i:s', (int) (time() - ($retention * 86400)));
+		$retention_date = date('Y-m-d H:i:s', (int) ($now - ($retention * 86400)));
 		$days           = $retention;
 	} else {
 		switch ($retention) {
 			case '2days':
-				$retention_date = date('Y-m-d H:i:s', strtotime('-2 Days'));
+				$retention_date = date('Y-m-d H:i:s', strtotime('-2 Days', $now));
 
 				break;
 			case '5days':
-				$retention_date = date('Y-m-d H:i:s', strtotime('-5 Days'));
+				$retention_date = date('Y-m-d H:i:s', strtotime('-5 Days', $now));
 
 				break;
 			case '1week':
-				$retention_date = date('Y-m-d H:i:s', strtotime('-1 Week'));
+				$retention_date = date('Y-m-d H:i:s', strtotime('-1 Week', $now));
 
 				break;
 			case '2weeks':
-				$retention_date = date('Y-m-d H:i:s', strtotime('-2 Week'));
+				$retention_date = date('Y-m-d H:i:s', strtotime('-2 Week', $now));
 
 				break;
 			case '3weeks':
-				$retention_date = date('Y-m-d H:i:s', strtotime('-3 Week'));
+				$retention_date = date('Y-m-d H:i:s', strtotime('-3 Week', $now));
 
 				break;
 			case '1month':
-				$retention_date = date('Y-m-d H:i:s', strtotime('-1 Month'));
+				$retention_date = date('Y-m-d H:i:s', strtotime('-1 Month', $now));
 
 				break;
 			case '2months':
-				$retention_date = date('Y-m-d H:i:s', strtotime('-2 Months'));
+				$retention_date = date('Y-m-d H:i:s', strtotime('-2 Months', $now));
 
 				break;
 			default:
-				$retention_date = date('Y-m-d H:i:s', strtotime('-2 Days'));
+				$retention_date = date('Y-m-d H:i:s', strtotime('-2 Days', $now));
 		}
 
-		$days = ceil((time() - strtotime($retention_date)) / 86400);
+		// Calendar weeks can contain 23- or 25-hour days across DST. Rounding
+		// preserves the configured day count instead of adding a retention day.
+		$days = (int) round(($now - strtotime($retention_date)) / 86400);
 	}
 
 	set_config_option('mt_data_retention', $days);
@@ -3516,6 +3520,7 @@ function mactrack_scan_dates_rebuild(): int {
  * @param string      $source    mac_track_temp_ports, or mac_track_ports_stage
  *                               to move a failed exchange's rows in.
  * @param int|null    $failed    Set to the number of INSERTs that failed.
+ * @param-out int $failed
  *
  * @throws InvalidArgumentException For an unknown table or a batch below 1.
  *
@@ -5576,7 +5581,7 @@ function mactrack_utilities_post_actions(): array {
 		'mactrack_utilities_recreate_aggregated_data' => __('Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?', 'mactrack'),
 		'mactrack_refresh_oui_database'               => __('Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?', 'mactrack'),
 		'mactrack_utilities_rebuild_scan_dates'       => __('Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?', 'mactrack'),
-		'mactrack_utilities_optimize_ports'           => __('OPTIMIZE rebuilds the whole port table and can take a long time on a large table. Continue?', 'mactrack'),
+		'mactrack_utilities_optimize_ports'           => __('Rebuild and analyze the partition containing the latest port observation. An unpartitioned table is optimized in full. Scans wait while this runs. Continue?', 'mactrack'),
 		'mactrack_utilities_convert_ports'            => __('The conversion copies the whole port table into a new partitioned table and can take hours on a large table. Scans and database maintenance wait until it finishes. The database needs free space for a second copy of the table. Continue?', 'mactrack'),
 	];
 }

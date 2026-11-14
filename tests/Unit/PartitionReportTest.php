@@ -168,7 +168,7 @@ it('runs OPTIMIZE only on a POST, under the scan lock', function () {
 	$src = mt_pr_function_source('mactrack_utilities_optimize_ports');
 
 	expect(mactrack_utilities_may_run('mactrack_utilities_optimize_ports', 'GET'))->toBeFalse();
-	expect(strpos($src, 'mactrack_partition_scan_begin()'))->toBeLessThan(strpos($src, 'OPTIMIZE TABLE mac_track_ports'));
+	expect(strpos($src, 'mactrack_partition_scan_begin()'))->toBeLessThan(strpos($src, 'mactrack_partition_optimize()'));
 	expect($src)->toContain('mactrack_partition_scan_end();');
 	expect($src)->not->toContain('form_confirm(');
 	expect($src)->not->toContain("isset_request_var('confirm')");

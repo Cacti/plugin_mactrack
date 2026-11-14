@@ -220,7 +220,7 @@ it('leaves other layouts to their own maintenance', function (array $parts, stri
 	'invalid' => [[['d20261112', '1794528000']], 'unix_timestamp(`scan_date`)', 'invalid'],
 ]);
 
-it('creates the current and next hour ahead on the hourly layout', function () {
+it('creates at least a full day ahead on the hourly layout', function () {
 	$GLOBALS['__test_config_options']['mt_partition_granularity'] = 'hour';
 	mt_pm_db([
 		['h2026111205', '1794463200'],
@@ -229,11 +229,10 @@ it('creates the current and next hour ahead on the hourly layout', function () {
 
 	$result = mactrack_partition_maintain(7, MT_PM_NOW);
 
-	expect($result['created'])->toBe(['h2026111206', 'h2026111207']);
-	expect(mt_pm_ddl())->toBe([
-		mactrack_partition_split_sql('h2026111206', 1794466800),
-		mactrack_partition_split_sql('h2026111207', 1794470400),
-	]);
+	expect($result['created'])->toHaveCount(25);
+	expect($result['created'][0])->toBe('h2026111206');
+	expect(end($result['created']))->toBe('h2026111306');
+	expect(array_slice(mt_pm_ddl(), -1)[0])->toBe(mactrack_partition_split_sql('h2026111306', 1794553200));
 });
 
 it('skips periods that already exist', function () {
@@ -243,7 +242,8 @@ it('skips periods that already exist', function () {
 		['dMaxValue', 'MAXVALUE'],
 	]);
 
-	expect(mactrack_partition_maintain(7, MT_PM_NOW)['created'])->toBe(['h2026111207']);
+	expect(mactrack_partition_maintain(7, MT_PM_NOW)['created'])->toHaveCount(24)
+		->not->toContain('h2026111206');
 });
 
 it('creates the current and next day ahead on the daily layout', function () {
@@ -258,7 +258,7 @@ it('falls back to hourly ahead creation when per-scan partitions would pass the 
 	// 15-minute scans for 7 days are 673 partitions, over MySQL's 512.
 	mt_pm_db([['dMaxValue', 'MAXVALUE']], ['version' => '8.4.13']);
 
-	expect(mactrack_partition_maintain(7, MT_PM_NOW)['created'])->toBe(['h2026111206', 'h2026111207']);
+	expect(mactrack_partition_maintain(7, MT_PM_NOW)['created'])->toHaveCount(25);
 });
 
 it('leaves per-scan partitions to the poller', function () {
