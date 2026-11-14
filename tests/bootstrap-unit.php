@@ -777,3 +777,11 @@ function mactrack_test_production_php_files() {
 	return $files;
 }
 
+/** Builds the SNMP walk fixture shared by vendor collection tests. */
+function mactrack_test_snmp_walk(string $base, array $rows): void {
+	$GLOBALS['__test_snmp_walk'][$base] = [];
+
+	foreach ($rows as $index => $value) {
+		$GLOBALS['__test_snmp_walk'][$base][] = ['oid' => ltrim($base, '.') . '.' . $index, 'value' => $value];
+	}
+}

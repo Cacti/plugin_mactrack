@@ -32,26 +32,18 @@ beforeEach(function () {
 	$GLOBALS['__test_config_options']['mt_ignorePorts_delim'] = '-1';
 	$GLOBALS['scan_date']                                     = '2026-11-12 00:00:00';
 
-	$walk = function (string $base, array $rows): void {
-		$GLOBALS['__test_snmp_walk'][$base] = [];
-
-		foreach ($rows as $index => $value) {
-			$GLOBALS['__test_snmp_walk'][$base][] = ['oid' => ltrim($base, '.') . '.' . $index, 'value' => $value];
-		}
-	};
-
 	// two operational VLANs, two access ports; bridge port 1 is ifIndex 2
-	$walk('.1.3.6.1.4.1.9.9.46.1.3.1.1.2', ['1.10' => '1', '1.20' => '1']);
-	$walk('.1.3.6.1.4.1.9.9.46.1.3.1.1.4', ['1.10' => 'users', '1.20' => 'voice']);
-	$walk('.1.3.6.1.4.1.9.9.46.1.6.1.1.14', [1 => '2', 2 => '2']);
-	$walk('.1.3.6.1.2.1.2.2.1.1', [1 => '1', 2 => '2']);
-	$walk('.1.3.6.1.2.1.2.2.1.3', [1 => '6', 2 => '6']);
-	$walk('.1.3.6.1.2.1.2.2.1.8', [1 => '1', 2 => '1']);
-	$walk('.1.3.6.1.2.1.31.1.1.1.1', [1 => 'Gi1/0/1', 2 => 'Gi1/0/2']);
-	$walk('.1.3.6.1.2.1.17.1.4.1.2', [1 => '2']);
-	$walk('.1.3.6.1.2.1.17.4.3.1.3', ['0.0.0.0.0.1' => '3']);
-	$walk('.1.3.6.1.2.1.17.4.3.1.2', ['0.0.0.0.0.1' => '1']);
-	$walk('.1.3.6.1.2.1.17.4.3.1.1', ['0.0.0.0.0.1' => "\0\0\0\0\0\1"]);
+	mactrack_test_snmp_walk('.1.3.6.1.4.1.9.9.46.1.3.1.1.2', ['1.10' => '1', '1.20' => '1']);
+	mactrack_test_snmp_walk('.1.3.6.1.4.1.9.9.46.1.3.1.1.4', ['1.10' => 'users', '1.20' => 'voice']);
+	mactrack_test_snmp_walk('.1.3.6.1.4.1.9.9.46.1.6.1.1.14', [1 => '2', 2 => '2']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.2.2.1.1', [1 => '1', 2 => '2']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.2.2.1.3', [1 => '6', 2 => '6']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.2.2.1.8', [1 => '1', 2 => '1']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.31.1.1.1.1', [1 => 'Gi1/0/1', 2 => 'Gi1/0/2']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.1.4.1.2', [1 => '2']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.3', ['0.0.0.0.0.1' => '3']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.2', ['0.0.0.0.0.1' => '1']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.1', ['0.0.0.0.0.1' => "\0\0\0\0\0\1"]);
 
 	// dot1dBaseNumPorts per VLAN context
 	mactrack_test_queue_return('cacti_snmp_get', '2');

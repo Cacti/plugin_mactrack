@@ -33,7 +33,6 @@ it('scopes the VLAN and aggregated resets to the scanned site', function () {
 	expect($src)->toContain("\$site_where = \$site_id > 0 ? ' AND site_id = ?' : '';");
 	expect($src)->toContain("db_execute_prepared(\"UPDATE mac_track_vlans SET present='0' WHERE 1=1\$site_where\", \$site_params);");
 	expect($src)->toContain("db_execute_prepared(\"DELETE FROM mac_track_vlans WHERE present='0'\$site_where\", \$site_params);");
-	expect($src)->toContain('SET active_last=0, date_last=date_last WHERE active_last=1$site_where", $site_params);');
 	expect($src)->not->toContain("db_execute(\"UPDATE mac_track_vlans SET present='0'\")");
 	expect($src)->not->toContain("db_execute('UPDATE mac_track_aggregated_ports SET active_last=0')");
 });

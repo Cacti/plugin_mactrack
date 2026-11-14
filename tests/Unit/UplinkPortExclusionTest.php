@@ -40,17 +40,9 @@ beforeEach(function () {
 		'snmp_retries'       => 1, 'max_oids' => 10, 'ignorePorts' => '', 'snmp_sysDescr' => '',
 	];
 
-	$this->walk = function (string $base, array $rows): void {
-		$GLOBALS['__test_snmp_walk'][$base] = [];
-
-		foreach ($rows as $index => $value) {
-			$GLOBALS['__test_snmp_walk'][$base][] = ['oid' => ltrim($base, '.') . '.' . $index, 'value' => $value];
-		}
-	};
-
-	($this->walk)('.1.3.6.1.2.1.17.1.4.1.2', [1 => '1', 2 => '2']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.1.4.1.2', [1 => '1', 2 => '2']);
 	// both ports up, so the scan reads the bridge tables
-	($this->walk)('.1.3.6.1.2.1.2.2.1.8', [1 => '1', 2 => '1']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.2.2.1.8', [1 => '1', 2 => '1']);
 });
 
 afterEach(function () {
@@ -58,8 +50,8 @@ afterEach(function () {
 });
 
 it('skips the root port when no port range is set', function () {
-	($this->walk)('.1.3.6.1.2.1.17.7.1.2.2.1.3', ['1.0.0.0.0.0.1' => '3', '1.0.0.0.0.0.2' => '3']);
-	($this->walk)('.1.3.6.1.2.1.17.7.1.2.2.1.2', ['1.0.0.0.0.0.1' => '1', '1.0.0.0.0.0.2' => '2']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.7.1.2.2.1.3', ['1.0.0.0.0.0.1' => '3', '1.0.0.0.0.0.2' => '3']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.7.1.2.2.1.2', ['1.0.0.0.0.0.1' => '1', '1.0.0.0.0.0.2' => '2']);
 	mactrack_test_queue_return('cacti_snmp_get', '1');
 
 	$ifInterfaces = [1 => ['ifType' => 6], 2 => ['ifType' => 6]];
@@ -69,9 +61,9 @@ it('skips the root port when no port range is set', function () {
 });
 
 it('skips ports that carry an IP address', function () {
-	($this->walk)('.1.3.6.1.2.1.17.4.3.1.3', ['0.0.0.0.0.1' => '3', '0.0.0.0.0.2' => '3']);
-	($this->walk)('.1.3.6.1.2.1.17.4.3.1.2', ['0.0.0.0.0.1' => '1', '0.0.0.0.0.2' => '2']);
-	($this->walk)('.1.3.6.1.2.1.17.4.3.1.1', ['0.0.0.0.0.1' => "\0\0\0\0\0\1", '0.0.0.0.0.2' => "\0\0\0\0\0\2"]);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.3', ['0.0.0.0.0.1' => '3', '0.0.0.0.0.2' => '3']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.2', ['0.0.0.0.0.1' => '1', '0.0.0.0.0.2' => '2']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.1', ['0.0.0.0.0.1' => "\0\0\0\0\0\1", '0.0.0.0.0.2' => "\0\0\0\0\0\2"]);
 
 	$ifInterfaces = [1 => ['ifType' => 6, 'linkPort' => true], 2 => ['ifType' => 6, 'linkPort' => '']];
 	$ports        = get_base_dot1dTpFdbEntry_ports('site', $this->device, $ifInterfaces, '', false, 0, 0);
