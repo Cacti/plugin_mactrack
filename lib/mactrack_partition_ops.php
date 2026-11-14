@@ -81,13 +81,16 @@ function mactrack_partition_optimize(): array {
 			return (array) db_fetch_assoc_prepared('OPTIMIZE TABLE mac_track_ports');
 		}
 
-		if ($layout['state'] !== 'range') {
+		if ($layout['state'] !== 'range' && $layout['state'] !== 'legacy') {
 			return [['Msg_type' => 'error', 'Msg_text' => 'Convert the port table to timestamp partitions before optimizing a partition.']];
 		}
 
 		// MAX(scan_date) can use the date index. Partition ordinals alone are
 		// insufficient: maintenance creates empty future partitions ahead.
-		$latest = db_fetch_cell_prepared('SELECT UNIX_TIMESTAMP(MAX(scan_date)) FROM mac_track_ports');
+		// The legacy daily layout is bounded by TO_DAYS(scan_date) instead.
+		$latest = db_fetch_cell_prepared($layout['state'] === 'legacy'
+			? 'SELECT TO_DAYS(MAX(scan_date)) FROM mac_track_ports'
+			: 'SELECT UNIX_TIMESTAMP(MAX(scan_date)) FROM mac_track_ports');
 
 		if ($latest === null || $latest === '') {
 			return [['Msg_type' => 'status', 'Msg_text' => 'The port table is empty; no partition needs rebuilding.']];
@@ -107,6 +110,11 @@ function mactrack_partition_optimize(): array {
 			$name = $partition['name'];
 
 			break;
+		}
+
+		// The range layout checked every name; the legacy one did not.
+		if (!mactrack_partition_name_valid($name)) {
+			return [['Msg_type' => 'error', 'Msg_text' => 'The port table has a partition name MacTrack does not build.']];
 		}
 
 		// OPTIMIZE PARTITION rebuilds the entire InnoDB table on both
@@ -308,7 +316,9 @@ function mactrack_partition_granularity(array $server): array {
  * Runs only on the range layout. Rows that an earlier failure left in
  * dMaxValue are first moved into a recovery partition (named r<newest scan
  * date>), the only split allowed to move rows. Then the scan's period is
- * split off the now empty dMaxValue. Per-scan partitions are filled by
+ * split off the now empty dMaxValue, or, for a per-scan partition, carved
+ * off the front of the empty daily slot created ahead that covers the
+ * scan, so no row moves. Per-scan partitions are filled by
  * exchanging the stage table; hourly and daily ones hold several scans, so
  * their rows are loaded straight into mac_track_ports. Any failure also
  * sends the scan straight into mac_track_ports, where its rows land in the
@@ -394,9 +404,23 @@ function mactrack_partition_prepare_scan(string $scan_date): array {
 			$covering = $covering ?? ($last > $epoch ? $name : null);
 		}
 
+		$from = null;
+
 		if ($last > $epoch) {
-			// A partition already covers this scan and may hold other rows.
-			return $direct('', $size, $covering);
+			foreach ($bounded as $p) {
+				if ($size === 'scan' && $p['name'] === $covering && $p['name'][0] === 'a') {
+					$from = $p;
+
+					break;
+				}
+			}
+
+			// A per-scan partition is carved only from an empty slot created
+			// ahead, so no row moves and the new partition is empty for the
+			// exchange. Otherwise the covering partition may hold other rows.
+			if ($from === null || (int) db_fetch_cell_prepared("SELECT COUNT(*) FROM (SELECT 1 FROM `mac_track_ports` PARTITION (`{$from['name']}`) LIMIT 1) AS used") > 0) {
+				return $direct('', $size, $covering);
+			}
 		}
 
 		// Each split adds a partition, so the cap is checked before each one.
@@ -406,8 +430,11 @@ function mactrack_partition_prepare_scan(string $scan_date): array {
 
 		$name   = mactrack_partition_name($size, $epoch);
 		$period = mactrack_partition_period($size, $epoch);
+		$sql    = $from === null
+			? mactrack_partition_split_sql($name, $period['bound'])
+			: mactrack_partition_carve_sql($from['name'], $from['bound'], $name, $period['bound']);
 
-		if (!mactrack_partition_ddl(mactrack_partition_split_sql($name, $period['bound']))) {
+		if (!mactrack_partition_ddl($sql)) {
 			return $direct('split failed', $size);
 		}
 
@@ -575,11 +602,13 @@ function mactrack_partition_load_scan(array $plan): int {
  *
  * Drops every partition whose upper bound is at or before the retention
  * cutoff, except dMaxValue and the newest bounded partition, then prunes
- * the scan dates below the highest dropped bound. For hourly and daily
- * partitions, also creates at least a full day ahead, so the poller
- * seldom splits. Per-scan partitions are only created by the poller, and
- * nothing is created while dMaxValue holds rows: the next scan's recovery
- * split moves those first. Other layouts are left to their own maintenance.
+ * the scan dates below the highest dropped bound. Then creates partitions
+ * through MACTRACK_PARTITION_AHEAD past now, so a full day stays created
+ * ahead until the next run and the poller never moves rows: hourly or
+ * daily partitions, or, for per-scan partitions, daily slots named
+ * aYYYYMMDD that each scan carves its partition from. Nothing is created
+ * while dMaxValue holds rows: the next scan's recovery split moves those
+ * first. Other layouts are left to their own maintenance.
  *
  * @param int      $days Retention in days; below 1 drops nothing.
  * @param int|null $now  Current time, for tests.
@@ -647,9 +676,10 @@ function mactrack_partition_maintain_locked(array $partitions, array $server, in
 
 	$size = mactrack_partition_granularity($server)['granularity'];
 
-	if ($size === 'scan') {
-		return $result;
-	}
+	// Per-scan partitions cannot be created before their scan_date is
+	// known, so daily slots are created ahead and each scan carves its
+	// partition off the front of the empty slot that covers it.
+	$ahead = $size === 'scan' ? 'day' : $size;
 
 	$stranded = db_fetch_cell_prepared('SELECT MAX(UNIX_TIMESTAMP(scan_date)) FROM `mac_track_ports` PARTITION (`dMaxValue`)');
 
@@ -660,8 +690,8 @@ function mactrack_partition_maintain_locked(array $partitions, array $server, in
 	$cap  = mactrack_partition_cap($server);
 	$last = $bounded === [] ? 0 : end($bounded)['bound'];
 
-	for ($i = 0, $ts = $now; $i < 2 || $ts <= $now + 86400; $i++) {
-		$period = mactrack_partition_period($size, $ts);
+	for ($i = 0, $ts = $now; $i < 2 || $ts <= $now + MACTRACK_PARTITION_AHEAD; $i++) {
+		$period = mactrack_partition_period($ahead, $ts);
 		$ts     = $period['bound'];
 
 		if ($period['bound'] <= $last) {
@@ -672,7 +702,7 @@ function mactrack_partition_maintain_locked(array $partitions, array $server, in
 			return ['reason' => "partition cap $cap reached"] + $result;
 		}
 
-		$name = mactrack_partition_name($size, $period['start']);
+		$name = $size === 'scan' ? 'a' . gmdate('Ymd', $period['start']) : mactrack_partition_name($ahead, $period['start']);
 
 		if (!mactrack_partition_ddl(mactrack_partition_split_sql($name, $period['bound']))) {
 			return ['reason' => 'split failed'] + $result;

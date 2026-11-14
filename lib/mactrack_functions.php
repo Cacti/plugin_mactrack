@@ -5581,8 +5581,8 @@ function mactrack_utilities_post_actions(): array {
 		'mactrack_utilities_recreate_aggregated_data' => __('Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?', 'mactrack'),
 		'mactrack_refresh_oui_database'               => __('Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?', 'mactrack'),
 		'mactrack_utilities_rebuild_scan_dates'       => __('Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?', 'mactrack'),
-		'mactrack_utilities_optimize_ports'           => __('Rebuild and analyze the partition containing the latest port observation. An unpartitioned table is optimized in full. Scans wait while this runs. Continue?', 'mactrack'),
-		'mactrack_utilities_convert_ports'            => __('The conversion copies the whole port table into a new partitioned table and can take hours on a large table. Scans and database maintenance wait until it finishes. The database needs free space for a second copy of the table. Continue?', 'mactrack'),
+		'mactrack_utilities_optimize_ports'           => __('Rebuild and analyze the partition containing the latest port observation. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?', 'mactrack'),
+		'mactrack_utilities_convert_ports'            => __('The conversion copies the whole port table into a new partitioned table and can take hours on a large table. Scheduled scans are skipped and database maintenance waits until it finishes. The database needs free space for a second copy of the table. Continue?', 'mactrack'),
 	];
 }
 

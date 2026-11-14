@@ -80,7 +80,7 @@ it('reports the scan-date layout, its coverage, and the last maintenance', funct
 	expect($r['covered_until'])->toBe(1794464108);
 	expect($r['granularity'])->toBe('scan');
 	expect($r['fell_back'])->toBeFalse();
-	expect($r['projected'])->toBe(770);
+	expect($r['projected'])->toBe(780);
 	expect($r['pending'])->toBe('s20261112060007');
 	expect($r['load_path'])->toBe('php');
 	expect($r['last_scan_reason'])->toBe('exchange failed');

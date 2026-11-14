@@ -215,7 +215,7 @@ if ($collect_frequency == 'disabled') {
 		}
 	}
 
-	// A port table conversion holds this lock for hours; scans wait for it.
+	// A port table conversion holds this lock for hours; scans are skipped until it ends.
 	if (!mactrack_partition_scan_begin()) {
 		print 'NOTE: A port table conversion or another scan is running, exiting.' . PHP_EOL;
 

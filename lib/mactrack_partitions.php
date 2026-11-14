@@ -31,6 +31,13 @@
  */
 
 /**
+ * How far ahead of now the daily maintenance keeps partitions created, in
+ * seconds. Maintenance runs once a day, so two days leave a full day
+ * created ahead at the next run, and some left when that run is late.
+ */
+const MACTRACK_PARTITION_AHEAD = 2 * 86400;
+
+/**
  * Returns the period of a partition granularity that contains a time.
  *
  * Periods are aligned in UTC, so the session time zone and DST cannot
@@ -160,9 +167,13 @@ function mactrack_partition_without_validation(array $server): bool {
  * Chooses the finest granularity, starting at the one asked for, whose
  * projected partition count fits under the cap.
  *
- * The projected count is the periods per day times the retention days,
- * plus dMaxValue. When not even daily partitions fit, daily is returned
- * anyway with fell_back set, and the caller reports it.
+ * The projected count covers the retained days, one more day that builds
+ * up before the daily maintenance drops it, the partitions created ahead
+ * (MACTRACK_PARTITION_AHEAD of them, plus the partial current one), and
+ * dMaxValue. Per-scan partitions are carved out of daily slots created
+ * ahead, so one emptied slot per day is counted too. When not even daily
+ * partitions fit, daily is returned anyway with fell_back set, and the
+ * caller reports it.
  *
  * @param string $wanted         scan, hour or day.
  * @param int    $scan_interval  Seconds between scans (at least 60).
@@ -188,10 +199,11 @@ function mactrack_partition_choose(string $wanted, int $scan_interval, int $rete
 	$projected = 0;
 
 	foreach (array_slice($names, (int) array_search($wanted, $names, true)) as $granularity) {
-		// Expired partitions go only at the daily maintenance run, so up to
-		// one more day builds up. Reserve another day for hourly partitions
-		// created ahead, plus dMaxValue and a partial period.
-		$projected = (int) ceil(86400 / $periods[$granularity]) * ($retention_days + ($granularity === 'hour' ? 2 : 1)) + 2;
+		$ahead     = intdiv(MACTRACK_PARTITION_AHEAD, 86400) + 1;
+		$per_day   = (int) ceil(86400 / $periods[$granularity]);
+		$projected = $granularity === 'scan'
+			? $per_day * ($retention_days + 1) + ($retention_days + 1 + $ahead) + 1
+			: $per_day * ($retention_days + 1 + $ahead) + 1;
 
 		if ($projected <= $cap) {
 			return ['granularity' => $granularity, 'projected' => $projected, 'fell_back' => $granularity !== $wanted];
@@ -350,6 +362,39 @@ function mactrack_partition_split_sql(string $name, int $bound): string {
 	return 'ALTER TABLE `mac_track_ports` REORGANIZE PARTITION `dMaxValue` INTO ('
 		. 'PARTITION `' . $name . '` VALUES LESS THAN (' . $bound . '), '
 		. 'PARTITION `dMaxValue` VALUES LESS THAN MAXVALUE)';
+}
+
+/**
+ * Builds the REORGANIZE that carves a new partition off the front of an
+ * empty partition created ahead. The new partition ends at $bound; the
+ * rest of the range keeps the old name. When $bound reaches the old
+ * partition's own bound, the old partition is only renamed. On an empty
+ * partition it moves no rows.
+ *
+ * @param string $from       Partition to carve from (not dMaxValue).
+ * @param int    $from_bound Its VALUES LESS THAN bound.
+ * @param string $name       New partition's name.
+ * @param int    $bound      Its VALUES LESS THAN bound, at most $from_bound.
+ *
+ * @throws InvalidArgumentException For an invalid name or bound.
+ *
+ * @return string ALTER TABLE statement.
+ */
+function mactrack_partition_carve_sql(string $from, int $from_bound, string $name, int $bound): string {
+	mactrack_partition_assert_name($from);
+	mactrack_partition_assert_name($name);
+
+	if ($bound < 1 || $bound > $from_bound) {
+		throw new InvalidArgumentException('Partition bound must be positive and within the partition carved from');
+	}
+
+	$parts = ['PARTITION `' . $name . '` VALUES LESS THAN (' . $bound . ')'];
+
+	if ($bound < $from_bound) {
+		$parts[] = 'PARTITION `' . $from . '` VALUES LESS THAN (' . $from_bound . ')';
+	}
+
+	return 'ALTER TABLE `mac_track_ports` REORGANIZE PARTITION `' . $from . '` INTO (' . implode(', ', $parts) . ')';
 }
 
 /**

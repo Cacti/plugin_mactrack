@@ -64,14 +64,14 @@ it('chooses the finest granularity that fits under the cap', function (string $w
 })->with([
 	// periods per day x (retention + 1) + 2: a day builds up between the
 	// daily drops, plus dMaxValue and one partition made ahead.
-	'15-min scans, 7 days'    => ['scan', 900, 7, 1024, ['granularity' => 'scan', 'projected' => 770, 'fell_back' => false]],
-	'15-min scans, 10 days'   => ['scan', 900, 10, 1024, ['granularity' => 'hour', 'projected' => 290, 'fell_back' => true]],
-	'5-min scans, 7 days'     => ['scan', 300, 7, 1024, ['granularity' => 'hour', 'projected' => 218, 'fell_back' => true]],
-	'5-min scans, 60 days'    => ['scan', 300, 60, 1024, ['granularity' => 'day', 'projected' => 63, 'fell_back' => true]],
-	'hourly, 400 days, MySQL' => ['hour', 900, 400, 512, ['granularity' => 'day', 'projected' => 403, 'fell_back' => true]],
-	'daily asked, fits'       => ['day', 900, 30, 1024, ['granularity' => 'day', 'projected' => 33, 'fell_back' => false]],
-	'nothing fits'            => ['day', 900, 2000, 1024, ['granularity' => 'day', 'projected' => 2003, 'fell_back' => true]],
-	'exactly at the cap'      => ['scan', 900, 10, 1058, ['granularity' => 'scan', 'projected' => 1058, 'fell_back' => false]],
+	'15-min scans, 7 days'    => ['scan', 900, 7, 1024, ['granularity' => 'scan', 'projected' => 780, 'fell_back' => false]],
+	'15-min scans, 10 days'   => ['scan', 900, 10, 1024, ['granularity' => 'hour', 'projected' => 337, 'fell_back' => true]],
+	'5-min scans, 7 days'     => ['scan', 300, 7, 1024, ['granularity' => 'hour', 'projected' => 265, 'fell_back' => true]],
+	'5-min scans, 60 days'    => ['scan', 300, 60, 1024, ['granularity' => 'day', 'projected' => 65, 'fell_back' => true]],
+	'hourly, 400 days, MySQL' => ['hour', 900, 400, 512, ['granularity' => 'day', 'projected' => 405, 'fell_back' => true]],
+	'daily asked, fits'       => ['day', 900, 30, 1024, ['granularity' => 'day', 'projected' => 35, 'fell_back' => false]],
+	'nothing fits'            => ['day', 900, 2000, 1024, ['granularity' => 'day', 'projected' => 2005, 'fell_back' => true]],
+	'exactly at the cap'      => ['scan', 900, 10, 1071, ['granularity' => 'scan', 'projected' => 1071, 'fell_back' => false]],
 ]);
 
 it('refuses an unknown granularity or an interval below a minute', function (string $wanted, int $interval, int $days) {
