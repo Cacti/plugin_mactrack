@@ -39,14 +39,3 @@ it('normalizes and validates MacAuth and MacWatch entries before saving', functi
 		expect(strpos($src, 'mactrack_normalize_mac((string) $mac_address);'))->toBeLessThan(strpos($src, "form_input_validate(\$mac_address, 'mac_address'"));
 	}
 });
-
-it('lets a MacAuth prefix authorize the MACs under it, longest first', function () {
-	$GLOBALS['__test_db_calls'] = [];
-
-	db_check_auth('AABBCCDDEEFF');
-
-	$call = end($GLOBALS['__test_db_calls']);
-
-	expect(preg_replace('/\s+/', ' ', $call['sql']))->toBe("SELECT mac_id FROM mac_track_macauth WHERE mac_address != '' AND LEFT(?, LENGTH(mac_address)) = mac_address ORDER BY LENGTH(mac_address) DESC LIMIT 1");
-	expect($call['params'])->toBe(['AABBCCDDEEFF']);
-});

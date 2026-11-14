@@ -22,6 +22,8 @@
  +-------------------------------------------------------------------------+
 */
 
+require_once dirname(__DIR__) . '/Support/load_function.php';
+
 /*
  * The MacWatch schedule is the minutes between mails; the column must
  * hold a day (1440), and each mail records when it went out.
@@ -42,9 +44,29 @@ it('stores a day in the schedule column and widens old installs', function () {
 	expect($src)->toContain('UPDATE mac_track_macwatch SET notify_schedule = 1440 WHERE notify_schedule = 255');
 });
 
-it('waits the schedule in minutes and records each mail', function () {
+it('mails new entries, then follows the schedule in minutes', function (array $record, bool $mail) {
+	mactrack_test_load_function('poller_mactrack.php', 'mactrack_macwatch_should_mail');
+
+	$now = strtotime('2026-11-12 12:00:00');
+
+	expect(mactrack_macwatch_should_mail($record + ['date_last_notif' => '2026-11-12 11:30:00'], $now))->toBe($mail);
+})->with([
+	'not yet discovered, mail once'      => [['discovered' => '0', 'notify_schedule' => '1'], true],
+	'discovered, mail once'              => [['discovered' => '1', 'notify_schedule' => '1'], false],
+	'every scan'                         => [['discovered' => '1', 'notify_schedule' => '2'], true],
+	'hourly, 30 minutes after last mail' => [['discovered' => '1', 'notify_schedule' => '60'], false],
+	'half-hourly, at the interval'       => [['discovered' => '1', 'notify_schedule' => '30'], true],
+	'daily, not yet discovered'          => [['discovered' => '0', 'notify_schedule' => '1440'], false],
+]);
+
+it('mails an entry that was never mailed whatever its schedule', function () {
+	mactrack_test_load_function('poller_mactrack.php', 'mactrack_macwatch_should_mail');
+
+	expect(mactrack_macwatch_should_mail(['discovered' => '1', 'notify_schedule' => '1440', 'date_last_notif' => '0000-00-00 00:00:00'], time()))->toBeTrue();
+});
+
+it('records each mail', function () {
 	$src = preg_replace('/\s+/', ' ', file_get_contents(dirname(__DIR__, 2) . '/poller_mactrack.php'));
 
-	expect($src)->toContain("(int) strtotime(\$record['date_last_notif']) + \$record['notify_schedule'] * 60 > time()");
-	expect($src)->toContain("mactrack_mail(\$record['email_addresses'], \$from, \$fromname, \$subject, \$message); db_execute_prepared('UPDATE mac_track_macwatch SET date_last_notif = NOW() WHERE mac_id = ?', [\$record['mac_id']]);");
+	expect($src)->toContain("if (mactrack_macwatch_should_mail(\$record, time())) { mactrack_mail(\$record['email_addresses'], \$from, \$fromname, \$subject, \$message); db_execute_prepared('UPDATE mac_track_macwatch SET date_last_notif = NOW() WHERE mac_id = ?', [\$record['mac_id']]);");
 });
