@@ -63,7 +63,7 @@ it('refuses an unknown granularity or a timestamp below one', function (string $
 	expect(fn () => mactrack_partition_period($granularity, $ts))->toThrow(InvalidArgumentException::class);
 	expect(fn () => mactrack_partition_name($granularity, $ts))->toThrow(InvalidArgumentException::class);
 })->with([
-	'week'     => ['week', MT_PN_TS],
+	'month'    => ['month', MT_PN_TS],
 	'empty'    => ['', MT_PN_TS],
 	'zero ts'  => ['scan', 0],
 	'negative' => ['day', -5],
@@ -85,3 +85,9 @@ it('rejects names that could not have come from a timestamp', function (string $
 	'prefix only'    => ['s'],
 	'newline'        => ["s2026\n"],
 ]);
+
+it('aligns weeks to Monday UTC across year boundaries', function () {
+	$ts = strtotime('2027-01-01 23:59:59 UTC');
+	expect(mactrack_partition_period('week', $ts))->toBe(['start' => strtotime('2026-12-28 UTC'), 'bound' => strtotime('2027-01-04 UTC')]);
+	expect(mactrack_partition_name('week', $ts))->toBe('w20261228');
+});

@@ -303,7 +303,7 @@ function mactrack_partition_state(): array {
  */
 function mactrack_partition_granularity(array $server): array {
 	$wanted   = (string) read_config_option('mt_partition_granularity');
-	$wanted   = in_array($wanted, ['scan', 'hour', 'day'], true) ? $wanted : 'scan';
+	$wanted   = in_array($wanted, ['scan', 'hour', 'day', 'week'], true) ? $wanted : 'week';
 	$interval = (int) read_config_option('mt_collection_timing') * 60;
 	$days     = (int) read_config_option('mt_data_retention');
 

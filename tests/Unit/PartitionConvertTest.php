@@ -59,6 +59,9 @@ function mt_pc_db(array $opts = []): void {
 		'none'    => [],
 		'legacy'  => [$part('d20261111', '1', 'RANGE', 'to_days(`scan_date`)', '740297'), $part('dMaxValue', '2', 'RANGE', 'to_days(`scan_date`)', 'MAXVALUE')],
 		'range'   => [$part('dMaxValue', '1', 'RANGE', 'unix_timestamp(`scan_date`)', 'MAXVALUE')],
+		'daily'   => [$part('d20261112', '1', 'RANGE', 'unix_timestamp(`scan_date`)', '1794528000'), $part('dMaxValue', '2', 'RANGE', 'unix_timestamp(`scan_date`)', 'MAXVALUE')],
+		'weekly'  => [$part('w20261109', '1', 'RANGE', 'unix_timestamp(`scan_date`)', '1794873600'), $part('dMaxValue', '2', 'RANGE', 'unix_timestamp(`scan_date`)', 'MAXVALUE')],
+		'mixed'   => [$part('d20261112', '1', 'RANGE', 'unix_timestamp(`scan_date`)', '1794528000'), $part('w20261109', '2', 'RANGE', 'unix_timestamp(`scan_date`)', '1794873600'), $part('dMaxValue', '3', 'RANGE', 'unix_timestamp(`scan_date`)', 'MAXVALUE')],
 		'invalid' => [$part('p0', '1', 'LIST', 'device_id', '1')],
 	];
 
@@ -161,9 +164,9 @@ describe('conversion', function () {
 			'DROP TABLE IF EXISTS `mac_track_ports_new`',
 			'CREATE TABLE `mac_track_ports_new` LIKE `mac_track_ports`',
 			'ALTER TABLE `mac_track_ports_new` PARTITION BY RANGE (UNIX_TIMESTAMP(scan_date)) (PARTITION `s20261112061507` VALUES LESS THAN (1794464108), PARTITION `s20261112063007` VALUES LESS THAN (1794465008), PARTITION `dMaxValue` VALUES LESS THAN MAXVALUE)',
-			'INSERT INTO `mac_track_ports_new` SELECT * FROM `mac_track_ports` WHERE scan_date = ?',
-			'INSERT INTO `mac_track_ports_new` SELECT * FROM `mac_track_ports` WHERE scan_date = ?',
-			'INSERT INTO `mac_track_ports_new` SELECT * FROM `mac_track_ports` WHERE scan_date = ?',
+			'INSERT INTO `mac_track_ports_new` SELECT * FROM `mac_track_ports` WHERE scan_date >= ? AND scan_date <= ?',
+			'INSERT INTO `mac_track_ports_new` SELECT * FROM `mac_track_ports` WHERE scan_date >= ? AND scan_date <= ?',
+			'INSERT INTO `mac_track_ports_new` SELECT * FROM `mac_track_ports` WHERE scan_date >= ? AND scan_date <= ?',
 			'RENAME TABLE `mac_track_ports` TO `mac_track_ports_old`, `mac_track_ports_new` TO `mac_track_ports`',
 			'SET SESSION time_zone = ?',
 			'DROP TABLE `mac_track_ports_old`',
@@ -176,7 +179,7 @@ describe('conversion', function () {
 		mactrack_partition_convert();
 
 		$copies = array_filter($GLOBALS['__test_db_calls'], fn ($c) => strpos($c['sql'], 'INSERT INTO `mac_track_ports_new`') === 0);
-		expect(array_values(array_column($copies, 'params')))->toBe([['0000-00-00 00:00:00'], ['2026-11-12 06:15:07'], ['2026-11-12 06:30:07']]);
+		expect(array_values(array_column($copies, 'params')))->toBe([['0000-00-00 00:00:00', '0000-00-00 00:00:00'], ['2026-11-12 06:15:07', '2026-11-12 06:15:07'], ['2026-11-12 06:30:07', '2026-11-12 06:30:07']]);
 	});
 
 	it('restores the session time zone', function () {
@@ -243,7 +246,7 @@ describe('conversion', function () {
 
 		$r = mactrack_partition_convert();
 
-		expect($r['reason'])->toBe('Could not copy the scan of 0000-00-00 00:00:00.');
+		expect($r['reason'])->toBe('Could not copy the range 0000-00-00 00:00:00 through 0000-00-00 00:00:00.');
 		expect(implode("\n", mt_pc_statements()))->not->toContain('RENAME');
 	});
 
@@ -418,12 +421,13 @@ describe('scan lock', function () {
 });
 
 describe('fresh install', function () {
-	it('partitions a new table with dMaxValue only', function () {
+	it('partitions a new table with this week and next week', function () {
 		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', '8.4.3');
 		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'lock_wait_timeout', '50');
 
-		expect(mactrack_partition_fresh_install())->toBeTrue();
-		expect(mt_pc_statements())->toBe(['ALTER TABLE `mac_track_ports` PARTITION BY RANGE (UNIX_TIMESTAMP(scan_date)) (PARTITION `dMaxValue` VALUES LESS THAN MAXVALUE)']);
+		expect(mactrack_partition_fresh_install(MT_PC_SCAN1))->toBeTrue();
+		expect(mt_pc_statements()[0])->toContain('PARTITION BY RANGE (UNIX_TIMESTAMP(scan_date))', 'PARTITION `w20261109` VALUES LESS THAN (1794787200)', 'PARTITION `w20261116` VALUES LESS THAN (1795392000)');
+		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe('week');
 	});
 
 	it('leaves the table unpartitioned without partitioning or a readable version', function (string $version, string $plugin) {
@@ -445,7 +449,7 @@ describe('fresh install', function () {
 
 		mactrack_setup_database();
 
-		expect(mt_pc_statements())->toContain('ALTER TABLE `mac_track_ports` PARTITION BY RANGE (UNIX_TIMESTAMP(scan_date)) (PARTITION `dMaxValue` VALUES LESS THAN MAXVALUE)');
+		expect(implode(' ', mt_pc_statements()))->toContain('ALTER TABLE `mac_track_ports` PARTITION BY RANGE (UNIX_TIMESTAMP(scan_date)) (PARTITION `w');
 	});
 
 	it('partitions only a table setup has just created', function () {
@@ -468,6 +472,8 @@ describe('entry points', function () {
 		$src = file_get_contents(dirname(__DIR__, 2) . '/mactrack_convert.php');
 
 		expect($src)->toContain('$result = mactrack_partition_convert($keep_old,');
+		// A bare run must not repartition an already partitioned table.
+		expect($src)->toContain('$scheme   = null;');
 		expect($src)->toContain("if (!\$result['ok']) {\n\tprint 'FATAL: ' . \$result['reason'] . \"\\n\";\n\n\texit(1);");
 		expect($src)->not->toContain('function mactrack_create_partitioned_table');
 	});
@@ -481,4 +487,206 @@ describe('entry points', function () {
 
 		expect($src)->toContain('is no longer used and is ignored.');
 	});
+});
+
+describe('repartitioning', function () {
+	it('copies a day or week at a time and saves the scheme only after swapping', function (string $scheme) {
+		mt_pc_db(['layout' => 'range']);
+		$progress = [];
+
+		$r = mactrack_partition_convert(false, function ($done, $total, $date) use (&$progress) {
+			$progress[] = [$done, $total, $date];
+		}, 0, $scheme);
+
+		expect($r['ok'])->toBeTrue();
+		expect($r['granularity'])->toBe($scheme);
+		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe($scheme);
+		expect($progress)->toHaveCount(2);
+		$copies = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => strpos($c['sql'], 'INSERT INTO `mac_track_ports_new`') === 0));
+		expect($copies[1]['params'])->toBe(['2026-11-12 06:15:07', '2026-11-12 06:30:07']);
+		expect(mt_pc_statements())->toContain('ALTER TABLE `mac_track_ports_new` REMOVE PARTITIONING');
+		expect(implode(' ', mt_pc_statements()))->not->toContain('DELETE ', 'BEGIN', 'COMMIT');
+	})->with(['day', 'week']);
+
+	it('removes partitioning without changing the source or requiring partition support', function () {
+		mt_pc_db(['layout' => 'range', 'plugin' => 'DISABLED']);
+
+		$r = mactrack_partition_convert(false, null, 0, 'disabled');
+
+		expect($r)->toBe(['ok' => true, 'reason' => '', 'rows' => 30, 'partitions' => 0, 'granularity' => 'disabled']);
+		expect(implode(' ', mt_pc_statements()))->not->toContain('PARTITION BY');
+		// The partition size is kept for when partitioning is enabled again.
+		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe('scan');
+	});
+
+	it('keeps DATETIME values when disabling partitioning', function () {
+		mt_pc_db(['layout' => 'range', 'type' => 'datetime']);
+
+		expect(mactrack_partition_convert(false, null, 0, 'disabled')['ok'])->toBeTrue();
+		expect(implode(' ', mt_pc_statements()))->not->toContain('MODIFY `scan_date`');
+	});
+
+	it('leaves the original layout setting when copying fails', function () {
+		mt_pc_db(['layout' => 'range', 'copied' => '1']);
+
+		expect(mactrack_partition_convert(false, null, 0, 'week')['ok'])->toBeFalse();
+		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe('scan');
+		expect(implode(' ', mt_pc_statements()))->not->toContain('RENAME TABLE');
+	});
+
+	it('rejects a pending exchange without discarding staged records', function () {
+		mt_pc_db();
+		$GLOBALS['__test_config_options']['mt_partition_pending'] = 's20261112061507';
+
+		expect(mactrack_partition_convert(false, null, 0, 'week')['reason'])->toContain('exchange is pending');
+		expect(mt_pc_statements())->toBe([]);
+		expect($GLOBALS['__test_config_options']['mt_partition_pending'])->toBe('s20261112061507');
+	});
+
+	it('copies nothing when the table already has the chosen layout', function (string $layout, string $scheme) {
+		mt_pc_db(['layout' => $layout]);
+
+		$r = mactrack_partition_convert(false, null, 0, $scheme);
+
+		expect($r)->toBe(['ok' => true, 'reason' => 'The port table already uses this layout; nothing was copied.', 'rows' => 0, 'partitions' => 0, 'granularity' => $scheme]);
+		expect(mt_pc_statements())->toBe([]);
+		expect(mt_pc_locks())->toBe([]);
+	})->with([
+		'weekly to weekly'          => ['weekly', 'week'],
+		'daily to daily'            => ['daily', 'day'],
+		'disabled on unpartitioned' => ['none', 'disabled'],
+	]);
+
+	it('saves the size when the chosen layout is already in place', function () {
+		mt_pc_db(['layout' => 'weekly']);
+
+		mactrack_partition_convert(false, null, 0, 'week');
+
+		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe('week');
+	});
+
+	it('repartitions a table whose daily and weekly partitions coexist', function () {
+		mt_pc_db(['layout' => 'mixed']);
+
+		expect(mactrack_partition_convert(false, null, 0, 'week')['rows'])->toBe(30);
+		expect(implode(' ', mt_pc_statements()))->toContain('RENAME TABLE');
+	});
+
+	it('names the layout a table already has', function (string $layout, ?string $scheme) {
+		mt_pc_db(['layout' => $layout]);
+
+		expect(mactrack_partition_current_scheme(mactrack_partition_state()['layout']))->toBe($scheme);
+	})->with([
+		'unpartitioned' => ['none', 'disabled'],
+		'daily'         => ['daily', 'day'],
+		'weekly'        => ['weekly', 'week'],
+		'mixed'         => ['mixed', null],
+		'empty range'   => ['range', null],
+		'legacy'        => ['legacy', null],
+		'invalid'       => ['invalid', null],
+	]);
+
+	it('merges the scans of several days into one weekly copy range', function () {
+		$plan = mactrack_partition_repartition_plan([
+			['scan_date' => '2026-11-09 00:00:00', 'epoch' => '1794182400'], // Monday
+			['scan_date' => '2026-11-12 06:15:07', 'epoch' => (string) MT_PC_SCAN1],
+			['scan_date' => '2026-11-15 23:45:00', 'epoch' => '1794786300'], // Sunday
+			['scan_date' => '2026-11-16 00:00:00', 'epoch' => '1794787200'], // next Monday
+		], 'week', 1024, MT_PC_SCAN1);
+
+		expect($plan['ranges'])->toBe([
+			['2026-11-09 00:00:00', '2026-11-15 23:45:00'],
+			['2026-11-16 00:00:00', '2026-11-16 00:00:00'],
+		]);
+		expect($plan['bounds'])->toBe(['w20261109' => 1794787200, 'w20261116' => 1795392000]);
+
+		$daily = mactrack_partition_repartition_plan([
+			['scan_date' => '2026-11-09 00:00:00', 'epoch' => '1794182400'],
+			['scan_date' => '2026-11-12 06:15:07', 'epoch' => (string) MT_PC_SCAN1],
+		], 'day', 1024, MT_PC_SCAN1);
+
+		expect($daily['ranges'])->toHaveCount(2);
+	});
+
+	it('plans partitions through two days ahead', function () {
+		$plan = mactrack_partition_repartition_plan([['scan_date' => '2026-11-12 06:15:07', 'epoch' => (string) MT_PC_SCAN1]], 'day', 1024, MT_PC_SCAN1);
+
+		expect(array_key_last($plan['bounds']))->toBe('d20261114');
+		expect(end($plan['bounds']))->toBeGreaterThanOrEqual(MT_PC_SCAN1 + MACTRACK_PARTITION_AHEAD);
+	});
+
+	it('rejects an invalid scheme before touching the database', function () {
+		expect(mactrack_partition_convert(false, null, 0, 'bad')['ok'])->toBeFalse();
+		expect($GLOBALS['__test_db_calls'])->toBe([]);
+	});
+
+	it('does not swap when scan-date enumeration fails', function () {
+		mt_pc_db(['scans' => false]);
+
+		expect(mactrack_partition_convert(false, null, 0, 'week')['reason'])->toContain('Could not read');
+		expect(implode(' ', mt_pc_statements()))->not->toContain('RENAME TABLE');
+	});
+
+	it('does not treat a failed row count as an empty table', function () {
+		mt_pc_db(['rows' => false, 'copied' => false]);
+
+		expect(mactrack_partition_convert(false, null, 0, 'week')['reason'])->toContain('Could not verify');
+		expect(implode(' ', mt_pc_statements()))->not->toContain('RENAME TABLE');
+	});
+
+	it('releases both locks and restores the time zone after an exception', function () {
+		mt_pc_db();
+
+		expect(fn () => mactrack_partition_convert(false, function () {
+			throw new RuntimeException('interrupted');
+		}, 0, 'week'))->toThrow(RuntimeException::class, 'interrupted');
+		expect(array_slice(mt_pc_locks(), -2))->toBe(["SELECT RELEASE_LOCK('mactrack_partitions')", "SELECT RELEASE_LOCK('mactrack_scan')"]);
+		expect($GLOBALS['__test_config_options']['mt_partition_converting'])->toBe('');
+		expect(array_slice(mt_pc_statements(), -1))->toBe(['SET SESSION time_zone = ?']);
+	});
+
+	it('leaves a failed fresh install unpartitioned without saving a scheme', function () {
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', '8.4.3');
+		mactrack_test_queue_return_for('db_execute_prepared', 'ALTER TABLE', false);
+
+		expect(mactrack_partition_fresh_install())->toBeFalse();
+		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe('scan');
+	});
+
+	it('uses weekly bounds for the legacy conversion entry point too', function () {
+		mt_pc_db();
+		$GLOBALS['__test_config_options']['mt_partition_granularity'] = 'week';
+
+		expect(mactrack_partition_convert(false, null, 0)['granularity'])->toBe('week');
+	});
+
+	it('precreates the full observed range and two days ahead, including empty gaps', function () {
+		$scans = [
+			['scan_date' => '2026-11-10 00:00:00', 'epoch' => strtotime('2026-11-10 UTC')],
+			['scan_date' => '2026-11-12 06:00:00', 'epoch' => strtotime('2026-11-12 06:00:00 UTC')],
+		];
+		$r = mactrack_partition_repartition_plan($scans, 'day', 1024, MT_PC_SCAN1);
+
+		expect(array_keys($r['bounds']))->toBe(['d20261110', 'd20261111', 'd20261112', 'd20261113', 'd20261114']);
+		expect($r['ranges'])->toHaveCount(2);
+		expect(end($r['bounds']))->toBeGreaterThan(MT_PC_SCAN1 + MACTRACK_PARTITION_AHEAD);
+	});
+
+	it('plans an empty table and refuses a history beyond the cap', function () {
+		expect(mactrack_partition_repartition_plan([], 'week', 512, MT_PC_SCAN1)['bounds'])->toHaveCount(1);
+		$r = mactrack_partition_repartition_plan([['scan_date' => '2020-01-01 00:00:00', 'epoch' => 1577836800]], 'day', 512, MT_PC_SCAN1);
+
+		expect($r['granularity'])->toBe('');
+		expect($r['reason'])->toContain('partition limit');
+	});
+});
+
+it('rechecks pending work after acquiring the conversion locks', function () {
+	mt_pc_db();
+	$GLOBALS['__test_config_options']['mt_partition_pending'] = 's20261112061507';
+	$r                                                        = mactrack_partition_convert_locked(mactrack_partition_state(), false, null, 0, 'week');
+
+	expect($r['ok'])->toBeFalse();
+	expect($r['reason'])->toContain('pending exchange or retained backup');
+	expect(mt_pc_statements())->toBe([]);
 });

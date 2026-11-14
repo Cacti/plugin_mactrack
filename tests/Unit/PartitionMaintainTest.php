@@ -34,8 +34,9 @@ beforeEach(function () {
 	$GLOBALS['__test_next_returns']    = [];
 	$GLOBALS['__test_matched_returns'] = [];
 	$GLOBALS['__test_config_options']  = [
-		'mt_collection_timing' => '15',
-		'mt_data_retention'    => '7',
+		'mt_collection_timing'     => '15',
+		'mt_partition_granularity' => 'scan',
+		'mt_data_retention'        => '7',
 	];
 	$GLOBALS['__test_cacti_log']       = [];
 	$GLOBALS['database_default']       = 'cacti';
@@ -268,6 +269,17 @@ it('still covers a full day ahead at the next daily run', function (string $gran
 	expect(max($bounds))->toBeGreaterThanOrEqual($run + 86400 + 86400);
 })->with(['hour', 'day', 'scan']);
 
+it('continues with weekly partitions after daily ones when only the setting changes', function () {
+	$GLOBALS['__test_config_options']['mt_partition_granularity'] = 'week';
+	mt_pm_db([['d20261112', '1794528000'], ['dMaxValue', 'MAXVALUE']]);
+
+	$result = mactrack_partition_maintain(7, MT_PM_NOW);
+
+	// The first weekly partition starts at the last daily bound, mid-week.
+	expect($result['created'])->toBe(['w20261109', 'w20261116']);
+	expect(mt_pm_ddl()[0])->toBe(mactrack_partition_split_sql('w20261109', 1794787200));
+});
+
 it('falls back to hourly ahead creation when per-scan partitions would pass the cap', function () {
 	// 15-minute scans for 7 days are 780 partitions, over MySQL's 512.
 	mt_pm_db([['dMaxValue', 'MAXVALUE']], ['version' => '8.4.13']);
@@ -379,4 +391,19 @@ it('deletes old rows and records why on an invalid layout', function () {
 	expect(array_filter($sql, fn ($s) => strpos($s, 'DELETE QUICK FROM mac_track_ports') !== false))->toHaveCount(1);
 	expect(mt_pm_ddl())->toBe([]);
 	expect(mt_pm_status()['reason'])->toContain('layout invalid');
+});
+
+it('drops expired weeks and creates the next week before data arrives', function () {
+	$GLOBALS['__test_config_options']['mt_partition_granularity'] = 'week';
+	mt_pm_db([
+		['w20261026', (string) strtotime('2026-11-02 UTC')],
+		['w20261102', (string) strtotime('2026-11-09 UTC')],
+		['w20261109', (string) strtotime('2026-11-16 UTC')],
+		['dMaxValue', 'MAXVALUE'],
+	]);
+
+	$r = mactrack_partition_maintain(7, MT_PM_NOW);
+
+	expect($r['dropped'])->toBe(['w20261026']);
+	expect($r['created'])->toBe(['w20261116']);
 });

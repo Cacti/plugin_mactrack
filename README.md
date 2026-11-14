@@ -53,6 +53,44 @@ Add Mactrack Site - Console -> Mactrack -> Sites
 Add/import devices - Console -> Mactrack -> Devices -> Add device or Management -> Choose host -> Import into Mactrack Database
 Create new or enable prepared Device Types - Console -> Mactrack -> Device Types
 
+## Port history partitioning
+
+New installs use weekly partitions, starting Monday at 00:00 UTC. To convert
+an existing history, open **MacTrack Utilities > Configure Port Partitioning**.
+Choose **Daily**, **Weekly**, or **Disabled**, optionally keep the original table
+as a backup, and continue. The conversion runs in the background; **View Partition
+Status** shows whether it ran successfully or could not start.
+
+The same options are available from the Cacti installation directory:
+
+```sh
+php plugins/mactrack/mactrack_convert.php --partition=weekly
+php plugins/mactrack/mactrack_convert.php --partition=daily --keep-old
+php plugins/mactrack/mactrack_convert.php --partition=disabled
+```
+
+Without `--partition`, an unpartitioned table is converted to the Port Partition
+Size setting and an already partitioned table is left unchanged. Choosing the
+layout the table already has copies nothing.
+
+Run conversions off hours. They copy the full history, need disk space for a
+second copy of the table and its indexes, and skip scheduled scans and hold
+database maintenance while running. Readers keep using the original until row counts
+are verified and the tables are swapped. The copy neither deletes source rows
+nor wraps the history in a transaction. If interrupted before the swap, repeat
+the command or web action to restart the copy.
+
+With `--keep-old` (or the web backup checkbox), the original remains as
+`mac_track_ports_old`. Verify the converted data and remove that backup manually
+before another conversion. A failed copy leaves the original table and setting
+unchanged. A pending partition exchange or database upgrade must finish first.
+
+Daily and weekly modes use timestamp range partitions, and maintenance keeps
+two days of partitions created ahead of collection. Retention drops only whole expired partitions, so a weekly
+layout may keep up to one extra week of history. Disabled uses the existing
+unpartitioned retention path. The Port Partition Size setting controls future
+partitions; use the Utilities conversion to change the layout of existing data.
+
 ## Bugs and Feature Enhancements
 
 Bug and feature enhancements for the Mactrack plugin are handled in GitHub. You
