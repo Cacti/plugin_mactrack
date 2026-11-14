@@ -1041,7 +1041,7 @@ function mactrack_utilities(): void {
 			<?php print mactrack_utilities_action_link('mactrack_utilities_optimize_ports', __('Optimize Port Table', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
-			<?php print __('Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes.', 'mactrack'); ?>
+			<?php print __('Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes.', 'mactrack'); ?>
 		</td>
 	</tr>
 
@@ -1085,7 +1085,9 @@ function mactrack_utilities(): void {
  * @return string
  */
 function mactrack_utilities_conversion_fields(): string {
-	$selected = ['day' => 'daily', 'week' => 'weekly', 'disabled' => 'disabled'][(string) read_config_option('mt_partition_granularity')] ?? 'weekly';
+	$selected = mactrack_partition_state()['layout']['state'] === 'none'
+		? 'disabled'
+		: (['day' => 'daily', 'week' => 'weekly'][(string) read_config_option('mt_partition_granularity')] ?? 'weekly');
 	$options  = ['daily' => __('Daily', 'mactrack'), 'weekly' => __('Weekly', 'mactrack'), 'disabled' => __('Disabled', 'mactrack')];
 	$html     = '<p><label for="partition_scheme">' . html_escape(__('Partitioning', 'mactrack')) . '</label> '
 		. '<select id="partition_scheme" name="partition_scheme">';

@@ -466,7 +466,7 @@ msgid "Are you sure you want to rebuild the scan date list from the stored Port 
 msgstr ""
 
 #: lib/mactrack_functions.php
-msgid "Rebuild and analyze the partition containing the latest port observation. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
+msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
 msgstr ""
 
 #: lib/mactrack_functions.php
@@ -1786,7 +1786,7 @@ msgid "Optimize Port Table"
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
 msgstr ""
 
 #: mactrack_utilities.php

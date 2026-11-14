@@ -269,6 +269,17 @@ it('still covers a full day ahead at the next daily run', function (string $gran
 	expect(max($bounds))->toBeGreaterThanOrEqual($run + 86400 + 86400);
 })->with(['hour', 'day', 'scan']);
 
+it('continues with weekly partitions after daily ones when only the setting changes', function () {
+	$GLOBALS['__test_config_options']['mt_partition_granularity'] = 'week';
+	mt_pm_db([['d20261112', '1794528000'], ['dMaxValue', 'MAXVALUE']]);
+
+	$result = mactrack_partition_maintain(7, MT_PM_NOW);
+
+	// The first weekly partition starts at the last daily bound, mid-week.
+	expect($result['created'])->toBe(['w20261109', 'w20261116']);
+	expect(mt_pm_ddl()[0])->toBe(mactrack_partition_split_sql('w20261109', 1794787200));
+});
+
 it('falls back to hourly ahead creation when per-scan partitions would pass the cap', function () {
 	// 15-minute scans for 7 days are 780 partitions, over MySQL's 512.
 	mt_pm_db([['dMaxValue', 'MAXVALUE']], ['version' => '8.4.13']);
