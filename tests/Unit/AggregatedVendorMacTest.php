@@ -30,7 +30,7 @@ it('derives vendor_mac from the stripped MAC when rebuilding', function () {
 });
 
 it('refreshes vendor_mac when the poller updates an aggregated row', function () {
-	$src = preg_replace('/\s+/', ' ', file_get_contents(dirname(__DIR__, 2) . '/poller_mactrack.php'));
+	$src = preg_replace('/\s+/', ' ', file_get_contents(dirname(__DIR__, 2) . '/lib/mactrack_functions.php'));
 
-	expect($src)->toContain('ON DUPLICATE KEY UPDATE count_rec=count_rec+1, active_last=1, date_last=t1.scan_date,port_name=t1.port_name, vendor_mac=VALUES(vendor_mac)');
+	expect($src)->toContain('port_name = VALUES(port_name), vendor_mac = VALUES(vendor_mac)');
 });

@@ -583,7 +583,7 @@ function mactrack_kill_process(int $process_id): void {
 	// the command line is readable, signal only a MacTrack worker.
 	$cmdline = @file_get_contents('/proc/' . $process_id . '/cmdline');
 
-	if ($cmdline !== false && strpos($cmdline, 'mactrack') === false) {
+	if ($cmdline !== false && preg_match('~(?:^|\x00)(?:[^\x00]*/)?(?:poller_mactrack|mactrack_scanner|mactrack_resolver)\.php(?:\x00|$)~', $cmdline) !== 1) {
 		return;
 	}
 

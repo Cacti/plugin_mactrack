@@ -39,14 +39,6 @@ beforeEach(function () {
 		'snmp_context'       => '', 'snmp_engine_id' => '', 'snmp_port' => 161, 'snmp_timeout' => 500,
 		'snmp_retries'       => 1, 'max_oids' => 10, 'ignorePorts' => '', 'snmp_sysDescr' => '',
 	];
-
-	$this->walk = function (string $base, array $rows): void {
-		$GLOBALS['__test_snmp_walk'][$base] = [];
-
-		foreach ($rows as $index => $value) {
-			$GLOBALS['__test_snmp_walk'][$base][] = ['oid' => ltrim($base, '.') . '.' . $index, 'value' => $value];
-		}
-	};
 });
 
 afterEach(function () {
@@ -101,10 +93,10 @@ it('builds the MacWatch form with schedules in minutes', function () {
 it('stores ARP entries in one batch and looks up a missing IP in the ARP history', function () {
 	$GLOBALS['scan_date'] = '2026-11-12 00:00:00';
 
-	($this->walk)('.1.3.6.1.2.1.3.1.1.1', ['1.10.0.0.1' => '1', '1.10.0.0.2' => '1']);
-	($this->walk)('.1.3.6.1.2.1.3.1.1.2', ['1.10.0.0.1' => '00:11:22:33:44:55', '1.10.0.0.2' => 'aa:bb:cc:dd:ee:ff']);
-	($this->walk)('.1.3.6.1.2.1.3.1.1.3', ['1.10.0.0.1' => '10.0.0.1']);
-	($this->walk)('.1.3.6.1.2.1.31.1.1.1.1', [1 => 'Gi1/0/1']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.3.1.1.1', ['1.10.0.0.1' => '1', '1.10.0.0.2' => '1']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.3.1.1.2', ['1.10.0.0.1' => '00:11:22:33:44:55', '1.10.0.0.2' => 'aa:bb:cc:dd:ee:ff']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.3.1.1.3', ['1.10.0.0.1' => '10.0.0.1']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.31.1.1.1.1', [1 => 'Gi1/0/1']);
 	mactrack_test_queue_return('db_fetch_cell_prepared', '10.0.0.2');
 
 	get_standard_arp_table([], $this->device);
@@ -118,7 +110,7 @@ it('stores ARP entries in one batch and looks up a missing IP in the ARP history
 		1, 1, '192.0.2.1', 'sw1', 'Gi1/0/1', '001122334455', '10.0.0.1', '2026-11-12 00:00:00',
 		1, 1, '192.0.2.1', 'sw1', 'Gi1/0/1', 'AABBCCDDEEFF', '10.0.0.2', '2026-11-12 00:00:00',
 	]);
-	expect(array_values($lookups)[0]['params'])->toBe(['AABBCCDDEEFF']);
+	expect(array_values($lookups)[0]['params'])->toBe(['AABBCCDDEEFF', 1]);
 	expect($this->device['ips_total'])->toBe(2);
 });
 
@@ -134,9 +126,9 @@ it('splits a large ARP table into batches of 500', function () {
 		$ips[$key]  = '10.0.' . intdiv($i, 250) . '.' . ($i % 250);
 	}
 
-	($this->walk)('.1.3.6.1.2.1.3.1.1.1', $ifs);
-	($this->walk)('.1.3.6.1.2.1.3.1.1.2', $macs);
-	($this->walk)('.1.3.6.1.2.1.3.1.1.3', $ips);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.3.1.1.1', $ifs);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.3.1.1.2', $macs);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.3.1.1.3', $ips);
 
 	get_standard_arp_table([], $this->device);
 
@@ -148,11 +140,11 @@ it('splits a large ARP table into batches of 500', function () {
 it('skips the bridge root port and ports outside the range of a dot1d scan', function () {
 	$GLOBALS['__test_config_options']['mt_ignorePorts_delim'] = '-1';
 
-	($this->walk)('.1.3.6.1.2.1.17.1.4.1.2', [1 => '1', 2 => '2', 3 => '3', 9 => '9']);
-	($this->walk)('.1.3.6.1.2.1.2.2.1.8', [1 => '1', 2 => '1', 3 => '1', 9 => '1']);
-	($this->walk)('.1.3.6.1.2.1.17.4.3.1.3', ['0.0.0.0.0.1' => '3', '0.0.0.0.0.2' => '3', '0.0.0.0.0.3' => '3', '0.0.0.0.0.9' => '3']);
-	($this->walk)('.1.3.6.1.2.1.17.4.3.1.2', ['0.0.0.0.0.1' => '1', '0.0.0.0.0.2' => '2', '0.0.0.0.0.3' => '3', '0.0.0.0.0.9' => '9']);
-	($this->walk)('.1.3.6.1.2.1.17.4.3.1.1', [
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.1.4.1.2', [1 => '1', 2 => '2', 3 => '3', 9 => '9']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.2.2.1.8', [1 => '1', 2 => '1', 3 => '1', 9 => '1']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.3', ['0.0.0.0.0.1' => '3', '0.0.0.0.0.2' => '3', '0.0.0.0.0.3' => '3', '0.0.0.0.0.9' => '3']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.2', ['0.0.0.0.0.1' => '1', '0.0.0.0.0.2' => '2', '0.0.0.0.0.3' => '3', '0.0.0.0.0.9' => '9']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.1', [
 		'0.0.0.0.0.1' => "\0\0\0\0\0\1", '0.0.0.0.0.2' => "\0\0\0\0\0\2",
 		'0.0.0.0.0.3' => "\0\0\0\0\0\3", '0.0.0.0.0.9' => "\0\0\0\0\0\9",
 	]);

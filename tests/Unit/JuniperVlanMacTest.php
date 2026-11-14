@@ -32,22 +32,14 @@ beforeEach(function () {
 	$GLOBALS['__test_config_options']['mt_ignorePorts_delim'] = '-1';
 	$GLOBALS['scan_date']                                     = '2026-11-12 00:00:00';
 
-	$walk = function (string $base, array $rows): void {
-		$GLOBALS['__test_snmp_walk'][$base] = [];
-
-		foreach ($rows as $index => $value) {
-			$GLOBALS['__test_snmp_walk'][$base][] = ['oid' => ltrim($base, '.') . '.' . $index, 'value' => $value];
-		}
-	};
-
-	$walk('.1.3.6.1.4.1.2636.3.40.1.5.1.5.1.5', [10 => '10']);
-	$walk('.1.3.6.1.4.1.2636.3.40.1.5.1.5.1.2', [10 => 'users']);
-	$walk('.1.3.6.1.2.1.2.2.1.1', [5 => '5']);
-	$walk('.1.3.6.1.2.1.2.2.1.3', [5 => '6']);
-	$walk('.1.3.6.1.2.1.31.1.1.1.1', [5 => 'ge-0/0/5']);
+	mactrack_test_snmp_walk('.1.3.6.1.4.1.2636.3.40.1.5.1.5.1.5', [10 => '10']);
+	mactrack_test_snmp_walk('.1.3.6.1.4.1.2636.3.40.1.5.1.5.1.2', [10 => 'users']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.2.2.1.1', [5 => '5']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.2.2.1.3', [5 => '6']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.31.1.1.1.1', [5 => 'ge-0/0/5']);
 	// MAC 00:11:22:33:44:55 in VLAN 10 sits behind bridge port 1, which is ifIndex 5
-	$walk('.1.3.6.1.2.1.17.7.1.2.2.1.2', ['10.0.17.34.51.68.85' => '1']);
-	$walk('.1.3.6.1.2.1.17.1.4.1.2', [1 => '5']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.7.1.2.2.1.2', ['10.0.17.34.51.68.85' => '1']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.1.4.1.2', [1 => '5']);
 
 	$this->device = [
 		'device_id'          => 1, 'host_id' => 0, 'site_id' => 1, 'device_name' => 'sw1', 'hostname' => '192.0.2.1',

@@ -106,11 +106,13 @@ test('a reused PID that is not a MacTrack worker is not signalled', function () 
 	$child = proc_open(['sleep', '30'], [], $pipes);
 	$pid   = proc_get_status($child)['pid'];
 
-	mactrack_kill_process($pid);
-	usleep(200000);
+	try {
+		mactrack_kill_process($pid);
+		usleep(200000);
 
-	expect(proc_get_status($child)['running'])->toBeTrue();
-
-	proc_terminate($child);
-	proc_close($child);
+		expect(proc_get_status($child)['running'])->toBeTrue();
+	} finally {
+		proc_terminate($child);
+		proc_close($child);
+	}
 });
