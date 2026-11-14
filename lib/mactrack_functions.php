@@ -603,19 +603,22 @@ function get_standard_arp_table($site, &$device): void {
 	}
 	mactrack_debug('atEntries assembly complete.');
 
-	// output details to database
+	// output details to database, in batches rather than a row at a time
 	if (cacti_sizeof($atEntries)) {
-		foreach ($atEntries as $atEntry) {
-			// check the mac_track_arp table if no IP address is found
-			if ($atEntry['atNetAddress'] == '' && $atEntry['atPhysAddress'] !== '') {
-				$atEntry['atNetAddress'] = db_check_for_ip($atEntry['atPhysAddress'], $device['site_id']);
-				mactrack_debug('atNetAddress ****:' . $atEntry['atPhysAddress'] . '(' . $atEntry['atNetAddress'] . ')');
-			}
+		foreach (array_chunk($atEntries, 500) as $batch) {
+			$rows   = [];
+			$params = [];
 
-			db_execute_prepared('REPLACE INTO mac_track_ips
-				(site_id, device_id, hostname, device_name, port_number, mac_address, ip_address, scan_date)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-				[
+			foreach ($batch as $atEntry) {
+				// check the mac_track_arp table if no IP address is found
+				if ($atEntry['atNetAddress'] == '' && $atEntry['atPhysAddress'] !== '') {
+					$atEntry['atNetAddress'] = db_check_for_ip($atEntry['atPhysAddress'], $device['site_id']);
+					mactrack_debug('atNetAddress ****:' . $atEntry['atPhysAddress'] . '(' . $atEntry['atNetAddress'] . ')');
+				}
+
+				$rows[] = '(?, ?, ?, ?, ?, ?, ?, ?)';
+
+				array_push($params,
 					$device['site_id'],
 					$device['device_id'],
 					$device['hostname'],
@@ -623,9 +626,13 @@ function get_standard_arp_table($site, &$device): void {
 					$atEntry['atifName'],
 					$atEntry['atPhysAddress'],
 					$atEntry['atNetAddress'],
-					$scan_date
-				]
-			);
+					$scan_date);
+			}
+
+			db_execute_prepared('REPLACE INTO mac_track_ips
+				(site_id, device_id, hostname, device_name, port_number, mac_address, ip_address, scan_date)
+				VALUES ' . implode(', ', $rows),
+				$params);
 		}
 	}
 
@@ -1487,7 +1494,7 @@ function get_generic_wireless_ports($site, &$device, $lowPort = 0, $highPort = 0
  * @param mixed $lowPort
  * @param mixed $highPort
  */
-function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999): array {
+function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_readstring = '', $store_to_db = true, $lowPort = 1, $highPort = 9999, ?array $active_ports_array = null): array {
 	global $debug, $scan_date;
 
 	// initialize variables
@@ -1505,8 +1512,9 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 		$snmp_readstring = $device['snmp_readstring'];
 	}
 
-	// get the operational status of the ports
-	$active_ports_array = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.8', $device);
+	// get the operational status of the ports; a caller scanning one VLAN
+	// at a time walks it once and passes it in
+	$active_ports_array ??= xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.8', $device);
 	$indexes            = array_keys($active_ports_array);
 
 	$i = 0;
@@ -1602,7 +1610,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 					if ((($brPortIfType >= 6 && $brPortIfType <= 9) ||
 						  $brPortIfType == 53 || $brPortIfType == 161) &&
-						(!isset($ifInterfaces[$brPortIfIndex]['portLink']))) {
+						empty($ifInterfaces[$brPortIfIndex]['linkPort'])) {
 						// set some defaults
 						$new_port_key_array[$i]['vlan_id']     = 'N/A';
 						$new_port_key_array[$i]['vlan_name']   = 'N/A';
@@ -1613,6 +1621,8 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 						// now set the real data
 						$new_port_key_array[$i]['key']         = $port_key['key'];
 						$new_port_key_array[$i]['port_number'] = $port_key['port_number'];
+						// the mapped interface, so callers need not walk the map again
+						$new_port_key_array[$i]['ifIndex']     = $bridgePortIfIndexes[$port_key['port_number']] ?? '';
 						$i++;
 					}
 				}
@@ -1811,10 +1821,11 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 
 		if (cacti_sizeof($port_numbers)) {
 			foreach ($port_numbers as $key => $port_number) {
-				if (($highPort == 0) ||
+				// skip the root port whether or not a port range is set
+				if ((($highPort == 0) ||
 					(($port_number >= $lowPort) &&
-					($port_number <= $highPort) &&
-					($bridge_root_port != $port_number))) {
+					($port_number <= $highPort))) &&
+					($bridge_root_port != $port_number)) {
 					if (!in_array($port_number, $ignore_ports, true)) {
 						if ((@$port_status[$key] == '3') || (@$port_status[$key] == '5')) {
 							$port_key_array[$i]['key']         = $key;
@@ -1993,10 +2004,11 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 		if (cacti_sizeof($port_numbers)) {
 			foreach ($port_numbers as $key => $port_number) {
-				if (($highPort == 0) ||
+				// skip the root port whether or not a port range is set
+				if ((($highPort == 0) ||
 					(($port_number >= $lowPort) &&
-					($port_number <= $highPort) &&
-					($bridge_root_port != $port_number))) {
+					($port_number <= $highPort))) &&
+					($bridge_root_port != $port_number)) {
 					if (!in_array($port_number, $ignore_ports, true)) {
 						if ((isset($port_status[$key]) && $port_status[$key] == '3') || (isset($port_status[$key]) && $port_status[$key] == '5')) {
 							$port_key_array[$i]['key']         = $key;
@@ -2069,8 +2081,13 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 
 			if (cacti_sizeof($new_port_key_array)) {
 				foreach ($new_port_key_array as $key => $port_key) {
-					if (isset($port_macs[$port_key['key']])) {
-						$new_port_key_array[$key]['mac_address'] = @$port_macs[$port_key['key']];
+					// dot1qTpFdbAddress is not-accessible in Q-BRIDGE-MIB, so
+					// most agents return nothing for it; the MAC is also the
+					// last six parts of the index.
+					$mac = $port_macs[$port_key['key']] ?? mactrack_index_to_mac((string) $port_key['key']);
+
+					if ($mac !== '') {
+						$new_port_key_array[$key]['mac_address'] = $mac;
 						mactrack_debug("INDEX: '" . $key . "' MAC ADDRESS: " . $new_port_key_array[$key]['mac_address']);
 					} else {
 						mactrack_debug("INDEX: '" . $key . "' not found in port_macs array, skipping");
@@ -2255,6 +2272,23 @@ function get_link_port_status(&$device): array {
   value as the value of the resulting array
 */
 /**
+ * Returns the part of a walked OID below $base, without a leading dot.
+ * Core's PHP SNMP walk drops the leading dot and the snmpwalk binary keeps
+ * it, so both must give the same key.
+ *
+ * @param string $oid  The OID as returned by cacti_snmp_walk().
+ * @param string $base The walked table OID, with or without a leading dot.
+ *
+ * @return string The index below $base, or the whole OID if it is not below.
+ */
+function mactrack_oid_suffix(string $oid, string $base): string {
+	$oid  = ltrim(str_replace('iso', '1', $oid), '.');
+	$base = ltrim($base, '.') . '.';
+
+	return strpos($oid, $base) === 0 ? substr($oid, strlen($base)) : $oid;
+}
+
+/**
  * Walks an SNMP OID and returns its results re-keyed by the OID suffix
  * (with the base OID and any 'iso' prefix stripped) to value, using a
  * per-VLAN SNMP context when the read string encodes one (for SNMP
@@ -2296,16 +2330,11 @@ function xform_stripped_oid($oid, &$device, $snmp_readstring = '', $hex = false)
 		SNMP_POLLER, $device['snmp_engine_id'],
 		($hex ? SNMP_STRING_OUTPUT_HEX : SNMP_STRING_OUTPUT_GUESS));
 
-	$oid = preg_replace('/^\./', '', $oid);
-
 	$i = 0;
 
 	if (cacti_sizeof($walk_array)) {
 		foreach ($walk_array as $walk_item) {
-			$key                       = $walk_item['oid'];
-			$key                       = str_replace('iso', '1', $key);
-			$key                       = str_replace($oid . '.', '', $key);
-			$return_array[$i]['key']   = $key;
+			$return_array[$i]['key']   = mactrack_oid_suffix((string) $walk_item['oid'], $oid);
 			$return_array[$i]['value'] = $walk_item['value'];
 
 			$i++;
@@ -2357,6 +2386,32 @@ function xform_net_address($ip_address): string {
 	}
 
 	return $ip_address;
+}
+
+/**
+ * Reads the MAC address at the end of a bridge table index, such as the
+ * fdbId.m1.m2.m3.m4.m5.m6 index of dot1qTpFdbTable.
+ *
+ * @param string $index The dotted-decimal index.
+ *
+ * @return string The MAC as twelve uppercase hex digits, as
+ *                xform_mac_address() returns it, or '' if the index does
+ *                not end in six octets.
+ */
+function mactrack_index_to_mac(string $index): string {
+	$parts = array_slice(explode('.', trim($index, '.')), -6);
+
+	if (count($parts) !== 6) {
+		return '';
+	}
+
+	foreach ($parts as $part) {
+		if (!ctype_digit($part) || (int) $part > 255) {
+			return '';
+		}
+	}
+
+	return implode('', array_map(fn ($part) => sprintf('%02X', (int) $part), $parts));
 }
 
 /** xform_mac_address - This function will take a variable that is either formatted as
@@ -2526,9 +2581,7 @@ function xform_dot1q_vlan_associations(&$device, $snmp_readstring = ''): array {
 	if (cacti_sizeof($xformArray)) {
 		foreach ($xformArray as $xformItem) {
 			// peel off the beginning of the OID
-			$key = (string) $xformItem['oid'];
-			$key = str_replace('iso', '1', $key);
-			$key = str_replace('1.3.6.1.2.1.17.7.1.2.2.1.2.', '', $key);
+			$key = mactrack_oid_suffix((string) $xformItem['oid'], '.1.3.6.1.2.1.17.7.1.2.2.1.2');
 
 			// now grab the VLAN
 			$perPos                      = strpos($key, '.');
@@ -2826,45 +2879,120 @@ function db_update_device_status(&$device, $host_up, $scan_date, $start_time): v
 function db_store_device_port_results(&$device, $port_array, $scan_date): void {
 	global $debug;
 
-	// output details to database
-	if (cacti_sizeof($port_array)) {
-		foreach ($port_array as $port_value) {
-			if ($port_value['port_number'] != 'NOT USER' && $port_value['mac_address'] != 'NOT USER' && $port_value['mac_address'] != '') {
-				$mac_authorized = db_check_auth($port_value['mac_address']);
+	if (!cacti_sizeof($port_array)) {
+		return;
+	}
 
-				mactrack_debug('MAC Address \'' . $port_value['mac_address'] . '\' on device \'' . $device['device_name'] . '\' is ' . ($mac_authorized != '' ? '' : 'NOT ') . 'Authorized');
+	// Read the authorized entries once per device instead of querying
+	// for every MAC, and write the rows in batches.
+	$auth = mactrack_macauth_index(array_column(db_fetch_assoc('SELECT mac_address FROM mac_track_macauth'), 'mac_address'));
 
-				if ($mac_authorized != '') {
-					$authorized_mac = 1;
-				} else {
-					$authorized_mac = 0;
-				}
+	$rows   = [];
+	$params = [];
 
-				$port_value['vlan_id'] ??= 'N/A';
+	foreach ($port_array as $port_value) {
+		if ($port_value['port_number'] != 'NOT USER' && $port_value['mac_address'] != 'NOT USER' && $port_value['mac_address'] != '') {
+			$authorized_mac = mactrack_mac_authorized((string) $port_value['mac_address'], $auth) ? 1 : 0;
 
-				$port_value['vlan_name'] ??= 'N/A';
+			mactrack_debug('MAC Address \'' . $port_value['mac_address'] . '\' on device \'' . $device['device_name'] . '\' is ' . ($authorized_mac ? '' : 'NOT ') . 'Authorized');
 
-				db_execute_prepared('REPLACE INTO mac_track_temp_ports
-					(site_id,device_id,hostname,device_name,vlan_id,vlan_name,
-					mac_address,port_number,port_name,scan_date,authorized)
-					VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-					[
-						$device['site_id'],
-						$device['device_id'],
-						$device['hostname'],
-						$device['device_name'],
-						$port_value['vlan_id'],
-						$port_value['vlan_name'],
-						$port_value['mac_address'],
-						$port_value['port_number'],
-						$port_value['port_name'],
-						$scan_date,
-						$authorized_mac
-					]
-				);
+			$rows[] = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+
+			array_push($params,
+				$device['site_id'],
+				$device['device_id'],
+				$device['hostname'],
+				$device['device_name'],
+				$port_value['vlan_id'] ?? 'N/A',
+				$port_value['vlan_name'] ?? 'N/A',
+				$port_value['mac_address'],
+				$port_value['port_number'],
+				$port_value['port_name'],
+				$scan_date,
+				$authorized_mac);
+
+			if (count($rows) == 500) {
+				mactrack_store_temp_port_rows($rows, $params);
+
+				$rows   = [];
+				$params = [];
 			}
 		}
 	}
+
+	if (cacti_sizeof($rows)) {
+		mactrack_store_temp_port_rows($rows, $params);
+	}
+}
+
+/**
+ * Writes a batch of scanned port rows to mac_track_temp_ports.
+ *
+ * @param array<int, string> $rows   One '(?, ...)' placeholder group per row.
+ * @param array<int, mixed>  $params The values for every row, in order.
+ *
+ * @return void
+ */
+function mactrack_store_temp_port_rows(array $rows, array $params): void {
+	db_execute_prepared('REPLACE INTO mac_track_temp_ports
+		(site_id,device_id,hostname,device_name,vlan_id,vlan_name,
+		mac_address,port_number,port_name,scan_date,authorized)
+		VALUES ' . implode(', ', $rows),
+		$params);
+}
+
+/**
+ * Indexes MacAuth entries by length, so a MAC is checked against every
+ * whole-address and prefix entry with one lookup per distinct length.
+ *
+ * @param array<int, string> $entries The mac_address values of mac_track_macauth.
+ *
+ * @return array<int, array<string, true>> Entries keyed by length, then value.
+ */
+function mactrack_macauth_index(array $entries): array {
+	$index = [];
+
+	foreach ($entries as $entry) {
+		$entry = (string) $entry;
+
+		// an empty entry would authorize every MAC
+		if ($entry !== '') {
+			$index[strlen($entry)][$entry] = true;
+		}
+	}
+
+	return $index;
+}
+
+/**
+ * Reports whether a MAC is a MacAuth entry or starts with one, as the
+ * MacAuth save allows a whole MAC or a prefix such as a vendor's OUI.
+ *
+ * @param string                          $mac_address The scanned MAC.
+ * @param array<int, array<string, true>> $index       From mactrack_macauth_index().
+ *
+ * @return bool True when the MAC is authorized.
+ */
+function mactrack_mac_authorized(string $mac_address, array $index): bool {
+	foreach ($index as $length => $entries) {
+		if (isset($entries[substr($mac_address, 0, $length)])) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * Puts a MAC address typed by a user in the stored form: separators
+ * removed and upper case, as the scanners store it.
+ *
+ * @param string $mac_address The MAC address or prefix as entered.
+ *
+ * @return string The address without separators, in upper case.
+ */
+function mactrack_normalize_mac(string $mac_address): string {
+	return strtoupper(str_replace([':', '-', '.', ' '], '', trim($mac_address)));
 }
 
 // db_check_auth - This function checks whether the mac address exists in the mac_track+macauth table

@@ -65,8 +65,9 @@ $collect_frequency = read_config_option('mt_collection_timing');
 $poller_interval   = read_config_option('poller_interval');
 
 if (is_numeric($collect_frequency)) {
-	// let PHP a 5 minutes less than the rerun frequency
-	$max_run_duration = ($collect_frequency * 60) - $poller_interval;
+	// Leave a poller interval before the next run, but at least 80% of the
+	// frequency: at 5 minutes on a 5-minute poller the difference is zero.
+	$max_run_duration = max(($collect_frequency * 60) - $poller_interval, (int) ($collect_frequency * 48));
 } else {
 	// default for force
 	$max_run_duration = 1800;
@@ -216,6 +217,7 @@ if ($collect_frequency == 'disabled') {
 		$start = microtime(true);
 
 		collect_mactrack_data($start, $site_id);
+		log_mactrack_statistics('collect');
 	} else {
 		mactrack_debug('About to enter Mactrack poller processing');
 
@@ -264,10 +266,11 @@ if ($collect_frequency == 'disabled') {
 			if (empty($last_run_time)) {
 				if ($current_time > strtotime($base_start_time)) {
 					// if timer expired within a polling interval, then poll
-					if (($current_time - 300) < strtotime($base_start_time)) {
+					if (($current_time - $poller_interval) < strtotime($base_start_time)) {
 						$next_run_time = strtotime(date('Y-m-d') . ' ' . $base_start_time);
 					} else {
-						$next_run_time = strtotime(date('Y-m-d') . ' ' . $base_start_time) + 3600 * 24;
+						// not + 86400, which is an hour off across a DST change
+						$next_run_time = strtotime('tomorrow ' . $base_start_time);
 					}
 				} else {
 					$next_run_time = strtotime(date('Y-m-d') . ' ' . $base_start_time);
@@ -278,7 +281,11 @@ if ($collect_frequency == 'disabled') {
 
 			$time_till_next_run = $next_run_time - $current_time;
 
-			if ($time_till_next_run < 0) {
+			// The poller fires a second or two either side of its interval;
+			// a strict < 0 test let a run due now wait a whole interval.
+			$run_due = $time_till_next_run <= $poller_interval / 2;
+
+			if ($run_due) {
 				mactrack_debug('The next run time has been determined to be NOW');
 			} else {
 				mactrack_debug("The next run time has been determined to be at '" . date('Y-m-d H:i:s', (int) $next_run_time) . "'");
@@ -294,6 +301,15 @@ if ($collect_frequency == 'disabled') {
 
 			$db_maint_time = strtotime($database_maint_time);
 
+			// An unreadable time is false, which is less than any last run
+			// and would run maintenance every cycle; use the default.
+			if ($db_maint_time === false) {
+				cacti_log("WARNING: MacTrack maintenance time '" . $database_maint_time . "' is not a time; using 12:00am", false, 'MACTRACK');
+
+				$database_maint_time = '12:00am';
+				$db_maint_time       = strtotime($database_maint_time);
+			}
+
 			if ($last_db_maint_time < $db_maint_time) {
 				$next_db_maint_time = $db_maint_time;
 			} else {
@@ -308,13 +324,22 @@ if ($collect_frequency == 'disabled') {
 				mactrack_debug("The next database maintenance run time has been determined to be at '" . date('Y-m-d H:i:s', (int) $next_db_maint_time) . "'");
 			}
 
-			if ($time_till_next_run < 0 || $force == true) {
+			if ($run_due || $force == true) {
 				mactrack_debug('Either a scan has been forced, or it\'s time to check for macs');
 
 				// take time and log performance data
 				$start = microtime(true);
 
-				set_config_option('mt_last_run_time', $current_time);
+				// Store the slot this run belongs to, not when it started, so
+				// the schedule stays on the base time's grid; after a gap, step
+				// to the latest slot that has passed.
+				if ($run_due && $collect_frequency > 0) {
+					$run_slot = mactrack_run_slot((int) $next_run_time, (int) $current_time, (int) $collect_frequency);
+				} else {
+					$run_slot = $current_time;
+				}
+
+				set_config_option('mt_last_run_time', $run_slot);
 
 				collect_mactrack_data($start, $site_id);
 				log_mactrack_statistics('collect');
@@ -455,6 +480,111 @@ function mactrack_error_handler($level, $message, $file, $line, $context = []) {
 }
 
 /**
+ * Parses one arp.dat line: MAC, IP address, timestamp and, when known,
+ * the host name, separated by tabs.
+ *
+ * @param string $line  The line as read, with its newline.
+ * @param string $delim The separator to put between MAC octets.
+ *
+ * @return array{mac: string, ip: string, dns: string}|null The entry, or
+ *                                                          null for a blank or malformed line.
+ */
+function mactrack_parse_arpwatch_line(string $line, string $delim): ?array {
+	$fields = explode("\t", trim($line));
+
+	if (count($fields) < 2) {
+		return null;
+	}
+
+	$octets = explode(':', $fields[0]);
+
+	if (count($octets) !== 6) {
+		return null;
+	}
+
+	foreach ($octets as $k => $octet) {
+		if (!ctype_xdigit($octet) || strlen($octet) > 2) {
+			return null;
+		}
+
+		$octets[$k] = str_pad(strtoupper($octet), 2, '0', STR_PAD_LEFT);
+	}
+
+	return [
+		'mac' => implode($delim, $octets),
+		'ip'  => $fields[1],
+		'dns' => trim($fields[3] ?? ''),
+	];
+}
+
+/**
+ * Returns the schedule slot a due collection run belongs to: the slot it
+ * was due at, or after missed runs the latest slot that has passed.
+ *
+ * @param int $next_run_time The slot the run was due at.
+ * @param int $current_time  The time the run starts.
+ * @param int $frequency     Seconds between runs, more than 0.
+ *
+ * @return int The slot to store as the last run time.
+ */
+function mactrack_run_slot(int $next_run_time, int $current_time, int $frequency): int {
+	if ($current_time <= $next_run_time) {
+		return $next_run_time;
+	}
+
+	return $next_run_time + intdiv($current_time - $next_run_time, $frequency) * $frequency;
+}
+
+/**
+ * Stops the scanners still registered when a run reaches its time limit
+ * and removes their process rows.
+ *
+ * @return void
+ */
+function mactrack_stop_scanners(): void {
+	$scanners = db_fetch_assoc('SELECT device_id, process_id
+		FROM mac_track_processes
+		WHERE device_id > 0');
+
+	foreach ($scanners as $scanner) {
+		mactrack_kill_process((int) $scanner['process_id']);
+
+		cacti_log("WARNING: Stopping Mactrack Scanner for Device '" . $scanner['device_id'] . "' at the run time limit", false, 'MACTRACK');
+	}
+
+	db_execute('DELETE FROM mac_track_processes WHERE device_id > 0');
+}
+
+/**
+ * Terminates a MacTrack worker by process id; 0 means it has not
+ * registered a PID yet. On Linux a process whose command line does not
+ * name MacTrack is left alone.
+ *
+ * @param int $process_id The worker's process id.
+ *
+ * @return void
+ */
+function mactrack_kill_process(int $process_id): void {
+	if ($process_id <= 0) {
+		return;
+	}
+
+	// A stored PID may have been reused, after a reboot for instance. Where
+	// the command line is readable, signal only a MacTrack worker.
+	$cmdline = @file_get_contents('/proc/' . $process_id . '/cmdline');
+
+	if ($cmdline !== false && preg_match('~(?:^|\x00)(?:[^\x00]*/)?(?:poller_mactrack|mactrack_scanner|mactrack_resolver)\.php(?:\x00|$)~', $cmdline) !== 1) {
+		return;
+	}
+
+	if (strstr(PHP_OS, 'WIN')) {
+		exec('taskkill /pid ' . $process_id);
+	} else {
+		exec('kill ' . $process_id);
+	}
+}
+
+/**
  * Deletes stale mac_track_processes rows (and cleans up their scan
  * locks) for scans that have exceeded the configured maximum script
  * runtime, for the given site (or all sites when $site_id is 0).
@@ -469,9 +599,11 @@ function clear_old_processes($site_id): void {
 	$max_script_runtime = read_config_option('mt_script_runtime');
 	$delete_time        = date('Y-m-d H:i:s', (int) strtotime('-' . $max_script_runtime . ' Minutes'));
 	$site_id            = intval($site_id);
+	// LEFT JOIN: the poller (-1) and resolver (0) rows have no device, and
+	// a run for all sites must clear them too
 	$sql                = 'SELECT mtp.*
 		FROM mac_track_processes AS mtp
-		INNER JOIN mac_track_devices AS mtd
+		LEFT JOIN mac_track_devices AS mtd
 		ON mtp.device_id=mtd.device_id
 		WHERE start_date < ?';
 	$params             = [$delete_time];
@@ -492,11 +624,7 @@ function clear_old_processes($site_id): void {
 			$device_ids[] = intval($p['device_id']);
 
 			if ($process_id > 0) {
-				if (strstr(PHP_OS, 'WIN')) {
-					exec('taskkill /pid ' . $process_id);
-				} else {
-					exec('kill ' . $process_id);
-				}
+				mactrack_kill_process($process_id);
 
 				cacti_log("WARNING: Removing Hung Mactrack Process for Device '" . $p['device_id'] . "' With Status '" . $p['status'] . "'");
 			} else {
@@ -609,25 +737,11 @@ function collect_mactrack_data($start, $site_id = 0): void {
 					while (!feof($arp_dat)) {
 						$line = fgets($arp_dat, 4096);
 
-						if ($line != null) {
-							$line = explode('	', $line);
+						$entry = $line === false ? null : mactrack_parse_arpwatch_line($line, (string) $delim);
 
-							$mac_ad = explode(':',$line[0]);
-
-							for ($k = 0; $k < 6; $k++) {
-								$mac_ad[$k] = strtoupper($mac_ad[$k]);
-
-								if (strlen($mac_ad[$k]) == 1) {
-									$mac_ad[$k] = '0' . $mac_ad[$k];
-								}
-							}
-
-							// create the mac address
-							$mac = $mac_ad[0] . $delim . $mac_ad[1] . $delim . $mac_ad[2] . $delim . $mac_ad[3] . $delim . $mac_ad[4] . $delim . $mac_ad[5];
-
-							// update the array
-							$mac_ip_dns[$mac]['ip']  = $line[1];
-							$mac_ip_dns[$mac]['dns'] = $line[3];
+						if ($entry !== null) {
+							$mac_ip_dns[$entry['mac']]['ip']  = $entry['ip'];
+							$mac_ip_dns[$entry['mac']]['dns'] = $entry['dns'];
 						}
 					}
 					fclose($arp_dat);
@@ -659,6 +773,11 @@ function collect_mactrack_data($start, $site_id = 0): void {
 				if (($j + $i) >= $total_devices) {
 					break;
 				}
+
+				// Register the device before launching it, so the counts below
+				// include scanners that have not started yet; the scanner adds
+				// its PID to this row.
+				db_process_add($device_ids[$i + $j]['device_id']);
 
 				$extra_args = ' -q ' . $config['base_path'] . '/plugins/mactrack/mactrack_scanner.php -id=' . $device_ids[$i + $j]['device_id'] . $e_debug;
 				mactrack_debug('CMD: ' . $command_string . $extra_args);
@@ -705,13 +824,14 @@ function collect_mactrack_data($start, $site_id = 0): void {
 				$last_time = $current_time;
 			}
 
-			$processes_running = db_fetch_cell('SELECT COUNT(*) FROM mac_track_processes');
+			mactrack_reap_unstarted_scanners();
 
-			if ($dns_resolver_required) {
-				$processes_available = $concurrent_processes - $processes_running + 1;
-			} else {
-				$processes_available = $concurrent_processes - $processes_running;
-			}
+			// scanners only; the parent (-1) and resolver (0) rows do not count
+			$processes_running = db_fetch_cell('SELECT COUNT(*)
+				FROM mac_track_processes
+				WHERE device_id > 0');
+
+			$processes_available = $concurrent_processes - $processes_running;
 
 			// take time to check for an exit condition
 			$current = microtime(true);
@@ -735,6 +855,8 @@ function collect_mactrack_data($start, $site_id = 0): void {
 			WHERE device_id > 0');
 
 		while ($processes_running > 0 && !$exit_mactrack) {
+			mactrack_reap_unstarted_scanners();
+
 			$processes_running = db_fetch_cell('SELECT COUNT(*)
 				FROM mac_track_processes
 				WHERE device_id > 0');
@@ -777,6 +899,13 @@ function collect_mactrack_data($start, $site_id = 0): void {
 			}
 
 			mactrack_debug('Waiting on ' . $processes_running . ' with id = [' . $devices_running . '] to complete prior to exiting.');
+		}
+
+		// Scanners still running would write after the load and the TRUNCATE
+		// below, so their rows would land in the next run under this run's
+		// scan date. Stop them first.
+		if ($exit_mactrack) {
+			mactrack_stop_scanners();
 		}
 
 		// if arpwatch is enabled, let's let it pick up the stragglers, based upon IP address first
@@ -878,8 +1007,11 @@ function collect_mactrack_data($start, $site_id = 0): void {
 
 		mactrack_debug('MAC addresses to Vendor MACS association pass complete.');
 
-		// update the vlan id's table
-		db_execute("UPDATE mac_track_vlans SET present='0'");
+		// update the vlan id's table; a site scan saw only its own site's VLANs
+		$site_where  = $site_id > 0 ? ' AND site_id = ?' : '';
+		$site_params = $site_id > 0 ? [$site_id] : [];
+
+		db_execute_prepared("UPDATE mac_track_vlans SET present='0' WHERE 1=1$site_where", $site_params);
 
 		db_execute("INSERT INTO mac_track_vlans
 			(vlan_id, site_id, device_id, vlan_name, present)
@@ -887,7 +1019,7 @@ function collect_mactrack_data($start, $site_id = 0): void {
 			FROM mac_track_temp_ports
 			ON DUPLICATE KEY UPDATE vlan_name=VALUES(vlan_name), present=VALUES(present);");
 
-		db_execute("DELETE FROM mac_track_vlans WHERE present='0'");
+		db_execute_prepared("DELETE FROM mac_track_vlans WHERE present='0'$site_where", $site_params);
 
 		mactrack_debug('MAC VLANs in VLAN Table Updated.');
 
@@ -917,6 +1049,9 @@ function collect_mactrack_data($start, $site_id = 0): void {
 
 				break;
 			}
+
+			// wait between checks instead of querying back to back
+			sleep(1);
 		}
 
 		// transfer temp port results into permanent table
@@ -935,50 +1070,20 @@ function collect_mactrack_data($start, $site_id = 0): void {
 
 		mactrack_debug('Finished transferring scan results to main table.');
 
-		// transfer the subnet information, although primitive, into the ip_ranges table
-		$ip_ranges = db_fetch_assoc("SELECT SUBSTRING_INDEX(`ip_address`,'.',3) AS ip_range,
-			site_id,
-			COUNT(DISTINCT ip_address) AS ips_current,
-			scan_date AS ips_current_date
+		// Transfer the subnet information, although primitive, into the
+		// ip_ranges table. A range this scan did not see has no current
+		// addresses; one statement replaces a read and a write per range.
+		db_execute_prepared("UPDATE mac_track_ip_ranges SET ips_current = 0 WHERE 1=1$site_where", $site_params);
+
+		db_execute("INSERT INTO mac_track_ip_ranges
+			(ip_range, site_id, ips_current, ips_current_date)
+			SELECT SUBSTRING_INDEX(ip_address, '.', 3) AS ip_range, site_id,
+			COUNT(DISTINCT ip_address), MAX(scan_date)
 			FROM mac_track_temp_ports
 			WHERE ip_address != ''
-			GROUP BY ip_range, site_id");
-
-		if (is_array($ip_ranges)) {
-			foreach ($ip_ranges as $ip_range) {
-				$range_record = (array) db_fetch_row_prepared('SELECT *
-					FROM mac_track_ip_ranges
-					WHERE ip_range = ?
-					AND site_id = ?',
-					[$ip_range['ip_range'], $ip_range['site_id']]);
-
-				if (cacti_sizeof($range_record) == 0) {
-					db_execute_prepared('REPLACE INTO `mac_track_ip_ranges`
-						(ip_range, site_id, ips_current, ips_current_date)
-						VALUES (?, ?, ?, ?)',
-						[
-							$ip_range['ip_range'],
-							$ip_range['site_id'],
-							$ip_range['ips_current'],
-							$ip_range['ips_current_date']
-						]
-					);
-				} else {
-					db_execute_prepared('UPDATE mac_track_ip_ranges
-						SET ips_current = ?,
-						ips_current_date = ?
-						WHERE ip_range = ?
-						AND site_id = ?',
-						[
-							$ip_range['ips_current'],
-							$ip_range['ips_current_date'],
-							$range_record['ip_range'],
-							$range_record['site_id']
-						]
-					);
-				}
-			}
-		}
+			GROUP BY ip_range, site_id
+			ON DUPLICATE KEY UPDATE ips_current = VALUES(ips_current),
+			ips_current_date = VALUES(ips_current_date)");
 
 		// update the max values if required
 		db_execute('UPDATE `mac_track_ip_ranges`
@@ -1086,18 +1191,13 @@ function collect_mactrack_data($start, $site_id = 0): void {
 					$message = str_replace('<PORTNAME>', $found['port_name'], $message);
 
 					// send out the email
-					if (!$record['discovered'] || $record['notify_schedule'] >= '2') {
-						$mail = true;
+					if (mactrack_macwatch_should_mail($record, time())) {
+						mactrack_mail($record['email_addresses'], $from, $fromname, $subject, $message);
 
-						if ($record['notify_schedule'] > 2) {
-							if (strtotime($record['date_last_notif']) + $record['notify_schedule'] > time()) {
-								$mail = false;
-							}
-						}
-
-						if ($mail) {
-							mactrack_mail($record['email_addresses'], $from, $fromname, $subject, $message);
-						}
+						db_execute_prepared('UPDATE mac_track_macwatch
+							SET date_last_notif = NOW()
+							WHERE mac_id = ?',
+							[$record['mac_id']]);
 					}
 
 					// update the the correct information
@@ -1369,4 +1469,49 @@ function display_help(): void {
 	print '-w | --web    - Display output suitable for the web' . PHP_EOL;
 	print '-f | --force  - Force the execution of a collection process' . PHP_EOL;
 	print '-d | --debug  - Display verbose output during execution' . PHP_EOL;
+}
+
+/**
+ * Removes scanner rows the poller registered before launch whose scanner
+ * never started: the scanner replaces its row with its own PID at
+ * startup, so a row still at PID 0 after the grace period belongs to a
+ * launch that failed, for example a wrong PHP path. Without this the
+ * poller would wait for it until the run times out.
+ *
+ * @param int $grace Seconds a launched scanner has to start.
+ *
+ * @return void
+ */
+function mactrack_reap_unstarted_scanners(int $grace = 60): void {
+	$where = 'WHERE device_id > 0 AND process_id = 0 AND start_date < NOW() - INTERVAL ? SECOND';
+	$stale = db_fetch_assoc_prepared("SELECT device_id FROM mac_track_processes $where", [$grace]);
+
+	if (cacti_sizeof($stale)) {
+		cacti_log('WARNING: MacTrack scanner did not start for device id(s) ' . implode(', ', array_column($stale, 'device_id')) . '; check the PHP binary path and the scanner log', false, 'MACTRACK');
+
+		// A scanner that starts meanwhile has set its PID, so it is kept.
+		db_execute_prepared("DELETE FROM mac_track_processes $where", [$grace]);
+	}
+}
+
+/**
+ * Decides whether a MacWatch entry seen in this scan is mailed now.
+ *
+ * Until first discovered it always is. After that, a schedule of 1 mails
+ * only that first time, 2 on every scan, and a larger value is the minutes
+ * that must pass after the last mail.
+ *
+ * @param array $record The mac_track_macwatch row.
+ * @param int   $now    Current epoch seconds.
+ *
+ * @return bool
+ */
+function mactrack_macwatch_should_mail(array $record, int $now): bool {
+	$schedule = (int) $record['notify_schedule'];
+
+	if ($record['discovered'] && $schedule < 2) {
+		return false;
+	}
+
+	return $schedule <= 2 || (int) strtotime((string) $record['date_last_notif']) + $schedule * 60 <= $now;
 }

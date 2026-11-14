@@ -156,10 +156,13 @@ if (!register_process_start('mactrack_resolver', 'master', 0, $max_run_duration 
 // place a process marker in the database for the ip resolver
 db_process_add(0, true);
 
+// a site scan resolves only that site's rows
 if ($site_id != '') {
-	$sql_where = 'AND site_id=' . $site_id;
+	$sql_where  = 'AND site_id = ?';
+	$sql_params = [(int) $site_id];
 } else {
-	$sql_where = '';
+	$sql_where  = '';
+	$sql_params = [];
 }
 
 $nameservers = [];
@@ -180,41 +183,38 @@ if (cacti_sizeof($nameservers)) {
 	$resolver     = false;
 }
 
-// if more than 15 second is nothing to do, ending
-$nothing = 0;
-
-// loop until you are it
+// Run while the poller is collecting: it fills in IP addresses as the
+// scanners report and removes its own row (device_id -1) once they are
+// done. Stop when that row is gone and nothing is left, or at the time
+// limit.
 while (1) {
 	// check for pending signals
 	pcntl_signal_dispatch();
 
-	$now = time();
-
-	$processes_running = db_fetch_cell('SELECT COUNT(*)
+	// read before the pass, so rows added before the poller finished are
+	// resolved before the resolver stops
+	$poller_running = db_fetch_cell('SELECT COUNT(*)
 		FROM mac_track_processes
-		WHERE device_id != 0');
+		WHERE device_id = -1') > 0;
 
-	if ((($now - $start) > ($max_script_runtime)) && ($processes_running == 0) || $nothing > 5) {
-		if ($nothing > 5) {
-			mactrack_debug('Terminating DNS resolving, nothing to do');
-		}
+	$break = (time() - $start) > $max_script_runtime;
 
-		$break = true;
-	} else {
-		$break = false;
-	}
-
-	$unresolved_ips = db_fetch_assoc("SELECT *
+	$unresolved_ips = db_fetch_assoc_prepared("SELECT *
 		FROM mac_track_temp_ports
 		WHERE ip_address != ''
-		AND (dns_hostname = '' OR dns_hostname IS NULL)");
+		AND (dns_hostname = '' OR dns_hostname IS NULL)
+		$sql_where", $sql_params);
 
 	if (cacti_sizeof($unresolved_ips) == 0) {
+		if (mactrack_resolver_idle_stop($poller_running, cacti_sizeof($unresolved_ips))) {
+			mactrack_debug('Terminating DNS resolving, nothing to do');
+
+			break;
+		}
+
 		mactrack_debug('No IP\'s require resolving this pass');
-		$nothing++;
 		sleep(3);
 	} else {
-		$nothing = 0;
 		mactrack_debug(cacti_sizeof($unresolved_ips) . ' IP\'s require resolving this pass');
 
 		foreach ($unresolved_ips as $key => $unresolved_ip) {
@@ -229,41 +229,24 @@ while (1) {
 
 		mactrack_debug('DNS host association complete.');
 
-		$sql = [];
-
-		// output updated details to database
+		// Write the host name only. The poller fills vendor_mac after this
+		// snapshot was read, so writing the snapshot back would clear it,
+		// and a row the poller has already moved must not be re-created.
 		foreach ($unresolved_ips as $unresolved_ip) {
-			$sql[] = '(' .
-				(int) $unresolved_ip['site_id'] . ',' .
-				(int) $unresolved_ip['device_id'] . ',' .
-				db_qstr($unresolved_ip['hostname']) . ',' .
-				db_qstr($unresolved_ip['dns_hostname']) . ',' .
-				db_qstr($unresolved_ip['device_name']) . ',' .
-				db_qstr($unresolved_ip['vlan_id']) . ',' .
-				db_qstr($unresolved_ip['vlan_name']) . ',' .
-				db_qstr($unresolved_ip['mac_address']) . ',' .
-				db_qstr($unresolved_ip['vendor_mac']) . ',' .
-				db_qstr($unresolved_ip['ip_address']) . ',' .
-				db_qstr($unresolved_ip['port_number']) . ',' .
-				db_qstr($unresolved_ip['port_name']) . ',' .
-				db_qstr($unresolved_ip['scan_date']) . ')';
+			db_execute_prepared('UPDATE mac_track_temp_ports
+				SET dns_hostname = ?
+				WHERE port_number = ?
+				AND scan_date = ?
+				AND mac_address = ?
+				AND device_id = ?',
+				[
+					$unresolved_ip['dns_hostname'],
+					$unresolved_ip['port_number'],
+					$unresolved_ip['scan_date'],
+					$unresolved_ip['mac_address'],
+					$unresolved_ip['device_id'],
+				]);
 		}
-
-		$sql_prefix = 'INSERT INTO mac_track_temp_ports
-			(site_id, device_id, hostname, dns_hostname, device_name, vlan_id, vlan_name,
-			mac_address, vendor_mac, ip_address, port_number, port_name, scan_date) VALUES ';
-
-		$sql_suffix = ' ON DUPLICATE KEY UPDATE
-			site_id = VALUES(site_id),
-			hostname = VALUES(hostname),
-			dns_hostname = VALUES(dns_hostname),
-			device_name = VALUES(device_name),
-			vlan_id = VALUES(vlan_id),
-			vlan_name = VALUES(vlan_name),
-			vendor_mac = VALUES(vendor_mac),
-			port_name = VALUES(port_name)';
-
-		db_execute($sql_prefix . implode(', ', $sql) . $sql_suffix);
 
 		mactrack_debug('Records updated with DNS information included.');
 	}
@@ -334,4 +317,19 @@ function display_help(): void {
 	print '-d | --debug  - Display verbose output during execution' . PHP_EOL;
 	print '-v --version  - Display this help message' . PHP_EOL;
 	print '-h --help     - display this help message' . PHP_EOL;
+}
+
+/**
+ * Whether the resolver may stop: only once the poller has finished, which
+ * it shows by removing its row, and no address is left to resolve. Rows the
+ * poller adds while it runs are resolved before the resolver stops,
+ * because $poller_running is read before the pass.
+ *
+ * @param bool $poller_running Whether the poller's row was present.
+ * @param int  $unresolved     Addresses left to resolve in this pass.
+ *
+ * @return bool
+ */
+function mactrack_resolver_idle_stop(bool $poller_running, int $unresolved): bool {
+	return !$poller_running && $unresolved === 0;
 }

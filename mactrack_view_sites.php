@@ -125,12 +125,16 @@ function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = true
 		}
 	}
 
-	if (cacti_sizeof($device_type_info)) {
-		$sql_where = ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.device_type_id=' . $device_type_info['device_type_id'] . ')';
+	// The summary reads mac_track_sites alone; only the detail view joins
+	// the devices and their types.
+	$detail = get_request_var('detail') != 'false';
+
+	if ($detail && cacti_sizeof($device_type_info)) {
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.device_type_id=' . (int) $device_type_info['device_type_id'] . ')';
 	}
 
-	if ((get_request_var('site_id') != '-1') && (get_request_var('detail'))) {
-		$sql_where = ($sql_where != '' ? ' AND ' : 'WHERE ') . '(mac_track_devices.site_id=' . get_filter_request_var('site_id') . ')';
+	if (get_request_var('site_id') != '-1') {
+		$sql_where .= ($sql_where != '' ? ' AND ' : 'WHERE ') . '(' . ($detail ? 'mac_track_devices' : 'mac_track_sites') . '.site_id=' . (int) get_request_var('site_id') . ')';
 	}
 
 	$sql_order = get_order_string();
@@ -278,7 +282,8 @@ function mactrack_view_sites(): void {
 			RIGHT JOIN mac_track_sites
 			ON mac_track_devices.site_id = mac_track_sites.site_id
 			$sql_where
-			GROUP BY mac_track_sites.site_name, mac_track_device_types.device_type_id"));
+			GROUP BY mac_track_sites.site_name, mac_track_device_types.vendor, mac_track_device_types.description
+			HAVING COUNT(mac_track_device_types.device_type_id) > 0"));
 	}
 
 	if (get_request_var('detail') == 'false') {

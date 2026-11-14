@@ -36,6 +36,13 @@
             <file>lib/mactrack_enterasys_N7.php</file>
             <file>lib/mactrack_extreme.php</file>
             <file>lib/mactrack_h3c_3com.php</file>
+            <file>lib/mactrack_3com.php</file>
+            <file>lib/mactrack_dell.php</file>
+            <file>lib/mactrack_dlink.php</file>
+            <file>lib/mactrack_juniper.php</file>
+            <file>lib/mactrack_linux.php</file>
+            <file>lib/mactrack_tplink.php</file>
+            <file>lib/mactrack_trendnet.php</file>
         </include>
     </source>
 </phpunit>

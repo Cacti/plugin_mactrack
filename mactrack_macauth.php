@@ -207,7 +207,9 @@ function form_actions(): void {
  */
 function api_mactrack_maca_save($mac_id, $mac_address, $description): int {
 	$save['mac_id']      = $mac_id;
-	$save['mac_address'] = form_input_validate($mac_address, 'mac_address', '', false, 3);
+	// stored as the scanners store MACs; a prefix authorizes a range
+	$mac_address         = mactrack_normalize_mac((string) $mac_address);
+	$save['mac_address'] = form_input_validate($mac_address, 'mac_address', '^[0-9A-F]{1,12}$', false, 3);
 	$save['description'] = form_input_validate($description, 'description', '', false, 3);
 	$save['added_date']  = date('Y-m-d H:i:s');
 	$save['added_by']    = $_SESSION['sess_user_id'];

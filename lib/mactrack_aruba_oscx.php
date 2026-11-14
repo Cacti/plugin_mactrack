@@ -30,30 +30,6 @@ $mactrack_scanning_functions_ip ??= [];
 array_push($mactrack_scanning_functions_ip, 'get_aruba_oscx_arp_table');
 
 /**
- * Converts a dotted-decimal MAC address (as returned by Aruba
- * AOS-CX SNMP OIDs) into a colon-delimited uppercase hex MAC address.
- *
- * @param string $mac The dotted-decimal MAC address (6 octets).
- *
- * @return string The formatted colon-delimited uppercase hex MAC
- *                address.
- */
-function oscx_mac($mac): string {
-	$slabiky = explode('.', trim($mac));
-	$mac     = '';
-
-	for ($f = 0; $f < 6; $f++) {
-		$slabiky[$f] = strtoupper(dechex((int) $slabiky[$f]));
-
-		if (strlen($slabiky[$f]) < 2) {
-			$slabiky[$f] = '0' . $slabiky[$f];
-		}
-	}
-
-	return (implode(':', $slabiky));
-}
-
-/**
  * SNMP-scans an Aruba AOS-CX switch for its port, VLAN, and MAC
  * address table data, populating $device with counts and details.
  * Registered in $mactrack_scanning_functions for dispatch by the
@@ -376,7 +352,7 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 				($port_number <= $highPort))) {
 				if (!in_array($port_number, $ignore_ports, true)) {
 					if (isset($port_status[$key]) && $port_status[$key] == '3') {
-						$port_key_array[$i]['key']         = substr($key,1);
+						$port_key_array[$i]['key']         = $key;
 						$port_key_array[$i]['port_number'] = $port_number;
 						$i++;
 					}
@@ -413,7 +389,7 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 
 				if (($brPortIfType >= 6) &&
 					($brPortIfType <= 9) &&
-					(!isset($ifInterfaces[$brPortIfIndex]['portLink']))) {
+					empty($ifInterfaces[$brPortIfIndex]['linkPort'])) {
 					// set some defaults
 					$new_port_key_array[$i]['vlan_id']     = 'N/A';
 					$new_port_key_array[$i]['vlan_name']   = 'N/A';
@@ -425,7 +401,7 @@ function get_aruba_oscx_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $
 					$new_port_key_array[$i]['key']         = mactrack_arr_key($port_key, 'key');
 					$new_port_key_array[$i]['port_number'] = $brPortIfIndex ?? '';
 					$new_port_key_array[$i]['port_name']   = mactrack_arr_key($ifInterfaces, $port_key['port_number']);
-					$new_port_key_array[$i]['mac_address'] = oscx_mac($port_key['key']);
+					$new_port_key_array[$i]['mac_address'] = mactrack_index_to_mac((string) $port_key['key']);
 					$new_port_key_array[$i]['vlan_id']     = mactrack_arr_key($port_vlan_data, $brPortIfIndex);
 					$new_port_key_array[$i]['vlan_name']   = isset($brPortIfIndex) ? mactrack_arr_key($vlan_names, $port_vlan_data[$brPortIfIndex]) : '';
 
@@ -491,17 +467,30 @@ function get_aruba_oscx_arp_table($site, &$device): void {
 	.1.3.6.1.2.1.4.35.1.4.16777415.1.4.192.168.199.98 = STRING: ec:9b:8b:78:9b:d7
 	*/
 
-	$xdata          = xform_indexed_data('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, 6);
-	$port_vlan_data = [];
+	// Both sides use the stored MAC form, twelve hex digits, so they join.
+	$xdata    = xform_indexed_data('.1.3.6.1.2.1.17.7.1.2.2.1.2', $device, 6);
+	$mac_port = [];
 
 	foreach ($xdata as $key=>$value) {
-		$mac_port[oscx_mac($key)] = $value;
+		$mac = mactrack_index_to_mac((string) $key);
+
+		if ($mac !== '') {
+			$mac_port[$mac] = $value;
+		}
 	}
 
-	$xdata = xform_indexed_data('.1.3.6.1.2.1.4.35.1.4', $device, 4);
-		$ip_mac = [];
+	// The index is ifIndex.addressType.length.address; mac_track_ips holds
+	// IPv4 only, so skip the IPv6 rows instead of reading their last four
+	// parts as an address.
+	$xdata  = xform_stripped_oid('.1.3.6.1.2.1.4.35.1.4', $device, '', true);
+	$ip_mac = [];
+
 	foreach ($xdata as $key=>$value) {
-		$ip_mac[$key] = strtr($value, ' ', ':');
+		$parts = explode('.', (string) $key);
+
+		if (count($parts) === 7 && $parts[1] === '1' && $parts[2] === '4') {
+			$ip_mac[implode('.', array_slice($parts, 3))] = xform_mac_address($value);
+		}
 	}
 
 	$result = [];
