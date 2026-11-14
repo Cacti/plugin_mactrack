@@ -59,10 +59,38 @@ it('uses whole-table optimize only for an unpartitioned table', function () {
 	expect(array_column($GLOBALS['__test_db_calls'], 'sql'))->toContain('OPTIMIZE TABLE mac_track_ports');
 });
 
-it('refuses a legacy layout without rebuilding the table', function () {
-	mt_opt_layout('to_days(scan_date)');
+function mt_opt_legacy(array $bounds): void {
+	$rows = [];
+
+	foreach ($bounds as $name => $bound) {
+		$rows[] = ['PARTITION_NAME'   => $name, 'PARTITION_DESCRIPTION' => $bound,
+			'PARTITION_ORDINAL_POSITION' => count($rows) + 1, 'PARTITION_METHOD' => 'RANGE', 'PARTITION_EXPRESSION' => 'to_days(`scan_date`)'];
+	}
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'information_schema.PARTITIONS', $rows);
+}
+
+it('rebuilds only the hot partition of a legacy daily layout', function () {
+	mt_opt_legacy(['d20261112' => '740298', 'd20261113' => '740299', 'd20261114' => '740300', 'dMaxValue' => 'MAXVALUE']);
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'TO_DAYS(MAX(scan_date))', '740298');
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'ANALYZE PARTITION', [['Msg_type' => 'status', 'Msg_text' => 'OK']]);
+	expect(mactrack_partition_optimize()[0]['Msg_text'])->toBe('OK');
+	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
+	expect($sql)->toContain('ALTER TABLE `mac_track_ports` REBUILD PARTITION `d20261113`', 'ALTER TABLE `mac_track_ports` ANALYZE PARTITION `d20261113`');
+	expect($sql)->not->toContain('OPTIMIZE TABLE mac_track_ports');
+	expect(array_filter($sql, fn ($s) => strpos($s, 'UNIX_TIMESTAMP(MAX(scan_date))') !== false))->toBe([]);
+});
+
+it('refuses a legacy partition name MacTrack does not build', function () {
+	mt_opt_legacy(['p_2026' => '740299', 'dMaxValue' => 'MAXVALUE']);
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'TO_DAYS(MAX(scan_date))', '740298');
 	expect(mactrack_partition_optimize()[0]['Msg_type'])->toBe('error');
-	expect(array_column($GLOBALS['__test_db_calls'], 'sql'))->not->toContain('OPTIMIZE TABLE mac_track_ports');
+	expect(array_filter(array_column($GLOBALS['__test_db_calls'], 'sql'), fn ($s) => strpos($s, 'ALTER TABLE') === 0))->toBe([]);
+});
+
+it('refuses a layout MacTrack does not recognize', function () {
+	mt_opt_layout('year(scan_date)');
+	expect(mactrack_partition_optimize()[0]['Msg_type'])->toBe('error');
+	expect(array_filter(array_column($GLOBALS['__test_db_calls'], 'sql'), fn ($s) => strpos($s, 'ALTER TABLE') === 0 || strpos($s, 'OPTIMIZE') === 0))->toBe([]);
 });
 
 it('does not rebuild empty tables or when the latest date cannot be read', function ($latest, $type) {

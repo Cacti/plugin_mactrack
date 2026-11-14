@@ -1025,7 +1025,7 @@ function mactrack_utilities(): void {
 			<?php print mactrack_utilities_action_link('mactrack_utilities_optimize_ports', __('Optimize Port Table', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
-			<?php print __('Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space. Unpartitioned tables are optimized in full. Scans wait until it finishes.', 'mactrack'); ?>
+			<?php print __('Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes.', 'mactrack'); ?>
 		</td>
 	</tr>
 
@@ -1034,7 +1034,7 @@ function mactrack_utilities(): void {
 			<?php print mactrack_utilities_action_link('mactrack_utilities_convert_ports', __('Convert Port Table', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
-			<?php print __('Converts the Port to MAC to IP results table to partitions by scan date, so maintenance drops old scans instead of deleting rows. It copies the table, which can take hours; scans wait meanwhile.', 'mactrack'); ?>
+			<?php print __('Converts the Port to MAC to IP results table to partitions by scan date, so maintenance drops old scans instead of deleting rows. It copies the table, which can take hours; scheduled scans are skipped meanwhile.', 'mactrack'); ?>
 		</td>
 	</tr>
 

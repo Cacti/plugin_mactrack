@@ -42,6 +42,21 @@ it('splits a new partition off dMaxValue', function () {
 	);
 });
 
+it('carves a new partition off the front of a slot created ahead', function () {
+	expect(mactrack_partition_carve_sql('a20261112', 1794528000, 's20261112061507', 1794464108))->toBe(
+		'ALTER TABLE `mac_track_ports` REORGANIZE PARTITION `a20261112` INTO ('
+		. 'PARTITION `s20261112061507` VALUES LESS THAN (1794464108), '
+		. 'PARTITION `a20261112` VALUES LESS THAN (1794528000))'
+	);
+});
+
+it('renames the slot when the new partition reaches its bound', function () {
+	expect(mactrack_partition_carve_sql('a20261112', 1794528000, 's20261112235959', 1794528000))->toBe(
+		'ALTER TABLE `mac_track_ports` REORGANIZE PARTITION `a20261112` INTO ('
+		. 'PARTITION `s20261112235959` VALUES LESS THAN (1794528000))'
+	);
+});
+
 it('exchanges a partition with the stage table, with or without validation', function () {
 	expect(mactrack_partition_exchange_sql('s20261112061507', false))->toBe(
 		'ALTER TABLE `mac_track_ports` EXCHANGE PARTITION `s20261112061507` WITH TABLE `mac_track_ports_stage`'
@@ -62,6 +77,7 @@ it('refuses names that are not valid partition names', function (Closure $build)
 })->with([
 	'create'   => [fn () => mactrack_partition_create_sql(['s1;DROP' => 5])],
 	'split'    => [fn () => mactrack_partition_split_sql('s1`x', 5)],
+	'carve'    => [fn () => mactrack_partition_carve_sql('a1`x', 9, 's1', 5)],
 	'exchange' => [fn () => mactrack_partition_exchange_sql('', false)],
 	'drop'     => [fn () => mactrack_partition_drop_sql(['p_1'])],
 ]);
@@ -71,6 +87,7 @@ it('refuses to name dMaxValue as a bounded partition', function (Closure $build)
 })->with([
 	'create'   => [fn () => mactrack_partition_create_sql(['dMaxValue' => 5])],
 	'split'    => [fn () => mactrack_partition_split_sql('dMaxValue', 5)],
+	'carve'    => [fn () => mactrack_partition_carve_sql('dMaxValue', 9, 's1', 5)],
 	'exchange' => [fn () => mactrack_partition_exchange_sql('dMaxValue', false)],
 ]);
 
@@ -78,6 +95,8 @@ it('refuses bounds below one or out of order', function (Closure $build) {
 	expect($build)->toThrow(InvalidArgumentException::class);
 })->with([
 	'zero bound'      => [fn () => mactrack_partition_split_sql('s1', 0)],
+	'past the slot'   => [fn () => mactrack_partition_carve_sql('a1', 9, 's1', 10)],
+	'zero carve'      => [fn () => mactrack_partition_carve_sql('a1', 9, 's1', 0)],
 	'negative create' => [fn () => mactrack_partition_create_sql(['s1' => -1])],
 	'not increasing'  => [fn () => mactrack_partition_create_sql(['s2' => 20, 's1' => 10])],
 	'equal'           => [fn () => mactrack_partition_create_sql(['s1' => 10, 's2' => 10])],

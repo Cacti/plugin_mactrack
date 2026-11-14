@@ -18,8 +18,9 @@
  * Retention on the scan-date layout drops whole partitions whose upper
  * bound is at or before the cutoff, never dMaxValue and never the newest
  * bounded partition, then prunes the scan dates below the highest dropped
- * bound. Hourly and daily layouts also get the current and next period
- * created ahead, so the poller rarely has to split.
+ * bound. Then partitions are created two days ahead, so a full day stays
+ * created until the next run: hourly or daily partitions, or daily slots
+ * that per-scan partitions are carved from.
  */
 
 beforeAll(function () {
@@ -131,7 +132,7 @@ it('drops partitions at or before the cutoff by their bound, whatever their name
 	$result = mactrack_partition_maintain(7, MT_PM_NOW);
 
 	expect($result['dropped'])->toBe(['s20261101000000', 'r20261103000000', 'h2026110500']);
-	expect(mt_pm_ddl())->toBe([mactrack_partition_drop_sql(['s20261101000000', 'r20261103000000', 'h2026110500'])]);
+	expect(mt_pm_ddl()[0])->toBe(mactrack_partition_drop_sql(['s20261101000000', 'r20261103000000', 'h2026110500']));
 	expect(mt_pm_locks())->toBe([1, 1]);
 });
 
@@ -168,7 +169,7 @@ it('drops nothing without a retention period', function (int $days) {
 	]);
 
 	expect(mactrack_partition_maintain($days, MT_PM_NOW)['dropped'])->toBe([]);
-	expect(mt_pm_ddl())->toBe([]);
+	expect(array_filter(mt_pm_ddl(), fn ($sql) => strpos($sql, 'DROP PARTITION') !== false))->toBe([]);
 	expect(mt_pm_prunes())->toBe([]);
 })->with([0, -1]);
 
@@ -220,7 +221,7 @@ it('leaves other layouts to their own maintenance', function (array $parts, stri
 	'invalid' => [[['d20261112', '1794528000']], 'unix_timestamp(`scan_date`)', 'invalid'],
 ]);
 
-it('creates at least a full day ahead on the hourly layout', function () {
+it('creates two days ahead on the hourly layout', function () {
 	$GLOBALS['__test_config_options']['mt_partition_granularity'] = 'hour';
 	mt_pm_db([
 		['h2026111205', '1794463200'],
@@ -229,10 +230,10 @@ it('creates at least a full day ahead on the hourly layout', function () {
 
 	$result = mactrack_partition_maintain(7, MT_PM_NOW);
 
-	expect($result['created'])->toHaveCount(25);
+	expect($result['created'])->toHaveCount(49);
 	expect($result['created'][0])->toBe('h2026111206');
-	expect(end($result['created']))->toBe('h2026111306');
-	expect(array_slice(mt_pm_ddl(), -1)[0])->toBe(mactrack_partition_split_sql('h2026111306', 1794553200));
+	expect(end($result['created']))->toBe('h2026111406');
+	expect(array_slice(mt_pm_ddl(), -1)[0])->toBe(mactrack_partition_split_sql('h2026111406', 1794639600));
 });
 
 it('skips periods that already exist', function () {
@@ -242,30 +243,43 @@ it('skips periods that already exist', function () {
 		['dMaxValue', 'MAXVALUE'],
 	]);
 
-	expect(mactrack_partition_maintain(7, MT_PM_NOW)['created'])->toHaveCount(24)
+	expect(mactrack_partition_maintain(7, MT_PM_NOW)['created'])->toHaveCount(48)
 		->not->toContain('h2026111206');
 });
 
-it('creates the current and next day ahead on the daily layout', function () {
+it('creates the current and next two days ahead on the daily layout', function () {
 	$GLOBALS['__test_config_options']['mt_partition_granularity'] = 'day';
 	mt_pm_db([['dMaxValue', 'MAXVALUE']]);
 
-	expect(mactrack_partition_maintain(7, MT_PM_NOW)['created'])->toBe(['d20261112', 'd20261113']);
-	expect(mt_pm_ddl()[1])->toBe(mactrack_partition_split_sql('d20261113', 1794614400));
+	expect(mactrack_partition_maintain(7, MT_PM_NOW)['created'])->toBe(['d20261112', 'd20261113', 'd20261114']);
+	expect(mt_pm_ddl()[2])->toBe(mactrack_partition_split_sql('d20261114', 1794700800));
 });
 
-it('falls back to hourly ahead creation when per-scan partitions would pass the cap', function () {
-	// 15-minute scans for 7 days are 673 partitions, over MySQL's 512.
-	mt_pm_db([['dMaxValue', 'MAXVALUE']], ['version' => '8.4.13']);
+it('still covers a full day ahead at the next daily run', function (string $granularity) {
+	// Maintenance at 23:30 UTC, the worst case for daily periods.
+	$run = 1794353400; // 2026-11-10 23:30:00 UTC
 
-	expect(mactrack_partition_maintain(7, MT_PM_NOW)['created'])->toHaveCount(25);
-});
-
-it('leaves per-scan partitions to the poller', function () {
+	$GLOBALS['__test_config_options']['mt_partition_granularity'] = $granularity;
 	mt_pm_db([['dMaxValue', 'MAXVALUE']]);
 
-	expect(mactrack_partition_maintain(7, MT_PM_NOW)['created'])->toBe([]);
-	expect(mt_pm_ddl())->toBe([]);
+	mactrack_partition_maintain(7, $run);
+
+	$bounds = array_map(fn ($sql) => (int) preg_replace('/.*LESS THAN \((\d+)\).*/', '$1', $sql), mt_pm_ddl());
+	expect(max($bounds))->toBeGreaterThanOrEqual($run + 86400 + 86400);
+})->with(['hour', 'day', 'scan']);
+
+it('falls back to hourly ahead creation when per-scan partitions would pass the cap', function () {
+	// 15-minute scans for 7 days are 780 partitions, over MySQL's 512.
+	mt_pm_db([['dMaxValue', 'MAXVALUE']], ['version' => '8.4.13']);
+
+	expect(mactrack_partition_maintain(7, MT_PM_NOW)['created'])->toHaveCount(49);
+});
+
+it('creates daily slots ahead for per-scan partitions to be carved from', function () {
+	mt_pm_db([['dMaxValue', 'MAXVALUE']]);
+
+	expect(mactrack_partition_maintain(7, MT_PM_NOW)['created'])->toBe(['a20261112', 'a20261113', 'a20261114']);
+	expect(mt_pm_ddl()[0])->toBe(mactrack_partition_split_sql('a20261112', 1794528000));
 });
 
 it('creates nothing ahead while dMaxValue holds rows', function () {
@@ -322,7 +336,7 @@ it('records the outcome under maintenance in the status', function () {
 
 	$status = mt_pm_status();
 	expect($status['dropped'])->toBe(['s20261101000000']);
-	expect($status['created'])->toBe([]);
+	expect($status['created'])->toBe(['a20261112', 'a20261113', 'a20261114']);
 	expect($status['reason'])->toBe('');
 	expect($status['time'])->toBeInt();
 });
@@ -338,9 +352,10 @@ it('retires partitions instead of deleting rows on the scan-date layout', functi
 	perform_mactrack_db_maint();
 
 	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
-	expect(mt_pm_ddl())->toBe([mactrack_partition_drop_sql(['s20261101000000'])]);
+	expect(mt_pm_ddl()[0])->toBe(mactrack_partition_drop_sql(['s20261101000000']));
 	expect(array_filter($sql, fn ($s) => strpos($s, 'DELETE QUICK FROM mac_track_ports') !== false))->toBe([]);
-	expect(array_filter($sql, fn ($s) => strpos($s, 'REORGANIZE') !== false))->toBe([]);
+	// Only splits of the empty dMaxValue, which move no rows.
+	expect(array_filter($sql, fn ($s) => strpos($s, 'REORGANIZE') !== false && strpos($s, 'REORGANIZE PARTITION `dMaxValue`') === false))->toBe([]);
 });
 
 it('deletes old rows without OPTIMIZE on an unpartitioned table', function () {

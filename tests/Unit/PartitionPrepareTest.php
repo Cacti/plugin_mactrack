@@ -16,7 +16,8 @@
 
 /*
  * Before a scan writes any rows, its partition is split off an empty
- * dMaxValue, so the split moves nothing. Rows stranded in dMaxValue by an
+ * dMaxValue, or carved off an empty daily slot created ahead, so the split
+ * moves nothing. Rows stranded in dMaxValue by an
  * earlier failure are moved out first by one recovery split. Anything
  * that prevents the split sends the scan straight into mac_track_ports.
  */
@@ -176,7 +177,42 @@ it('assumes 15-minute scans and 14 days when the settings are not numbers', func
 	mactrack_partition_prepare_scan(MT_PP_DATE);
 
 	$status = json_decode($GLOBALS['__test_config_options']['mt_partition_status'], true);
-	expect($status['projected'])->toBe(386); // hourly: 24 x 15 + 2, after 96 x 15 + 2 exceeds 1024
+	expect($status['projected'])->toBe(433); // hourly: 24 x 18 + 1, after 96 x 15 + 18 + 1 exceeds 1024
+});
+
+it('carves the scan its partition from the empty slot created ahead, moving no rows', function () {
+	mt_pp_db([['s20261112060007', '1794463208'], ['a20261112', '1794528000'], ['a20261113', '1794614400'], ['dMaxValue', 'MAXVALUE']]);
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'PARTITION (`a20261112`) LIMIT 1', '0');
+
+	$plan = mactrack_partition_prepare_scan(MT_PP_DATE);
+
+	expect($plan)->toBe(['mode' => 'exchange', 'partition' => 's20261112061507', 'reason' => '', 'granularity' => 'scan', 'scan_date' => '2026-11-12 06:15:07']);
+	expect(mt_pp_ddl())->toBe([mactrack_partition_carve_sql('a20261112', 1794528000, 's20261112061507', 1794464108)]);
+	expect(array_filter(mt_pp_ddl(), fn ($sql) => strpos($sql, 'dMaxValue') !== false))->toBe([]);
+	expect(mt_pp_locks())->toBe([1, 1]);
+});
+
+it('loads straight into a slot created ahead that already holds rows', function () {
+	mt_pp_db([['a20261112', '1794528000'], ['dMaxValue', 'MAXVALUE']]);
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'PARTITION (`a20261112`) LIMIT 1', '1');
+
+	$plan = mactrack_partition_prepare_scan(MT_PP_DATE);
+
+	expect($plan['mode'])->toBe('direct');
+	expect($plan['partition'])->toBe('a20261112');
+	expect(mt_pp_ddl())->toBe([]);
+	expect(mt_pp_locks())->toBe([1, 1]);
+});
+
+it('never carves a per-scan partition out of another scan\'s partition', function () {
+	mt_pp_db([['s20261112063007', '1794465008'], ['dMaxValue', 'MAXVALUE']]);
+
+	$plan = mactrack_partition_prepare_scan(MT_PP_DATE);
+
+	expect($plan['mode'])->toBe('direct');
+	expect($plan['partition'])->toBe('s20261112063007');
+	expect(mt_pp_ddl())->toBe([]);
+	expect(array_filter(array_column($GLOBALS['__test_db_calls'], 'sql'), fn ($sql) => strpos($sql, 'LIMIT 1') !== false))->toBe([]);
 });
 
 it('loads straight into a partition that already covers the scan', function () {

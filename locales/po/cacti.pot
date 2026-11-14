@@ -466,11 +466,11 @@ msgid "Are you sure you want to rebuild the scan date list from the stored Port 
 msgstr ""
 
 #: lib/mactrack_functions.php
-msgid "Rebuild and analyze the partition containing the latest port observation. An unpartitioned table is optimized in full. Scans wait while this runs. Continue?"
+msgid "Rebuild and analyze the partition containing the latest port observation. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
 msgstr ""
 
 #: lib/mactrack_functions.php
-msgid "The conversion copies the whole port table into a new partitioned table and can take hours on a large table. Scans and database maintenance wait until it finishes. The database needs free space for a second copy of the table. Continue?"
+msgid "The conversion copies the whole port table into a new partitioned table and can take hours on a large table. Scheduled scans are skipped and database maintenance waits until it finishes. The database needs free space for a second copy of the table. Continue?"
 msgstr ""
 
 #: mactrack_actions.php
@@ -1782,7 +1782,7 @@ msgid "Optimize Port Table"
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space. Unpartitioned tables are optimized in full. Scans wait until it finishes."
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
 msgstr ""
 
 #: mactrack_utilities.php
@@ -1790,7 +1790,7 @@ msgid "Convert Port Table"
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "Converts the Port to MAC to IP results table to partitions by scan date, so maintenance drops old scans instead of deleting rows. It copies the table, which can take hours; scans wait meanwhile."
+msgid "Converts the Port to MAC to IP results table to partitions by scan date, so maintenance drops old scans instead of deleting rows. It copies the table, which can take hours; scheduled scans are skipped meanwhile."
 msgstr ""
 
 #: mactrack_utilities.php

@@ -84,7 +84,7 @@ foreach ($parms as $parameter) {
 	}
 }
 
-print "NOTE: Converting mac_track_ports to the scan-date layout. Scans wait until this finishes.\n";
+print "NOTE: Converting mac_track_ports to the scan-date layout. Scheduled scans are skipped until this finishes.\n";
 
 $result = mactrack_partition_convert($keep_old, function (int $done, int $total, string $scan_date) use ($debug): void {
 	if ($debug || $done === $total || $done % 100 === 0) {
@@ -129,7 +129,7 @@ function display_help(): void {
 	print "\nusage: mactrack_convert.php [--keep-old] [-d] [-h] [-v]\n\n";
 	print "Converts mac_track_ports to the scan-date partition layout. The data is\n";
 	print "copied into a new table, which then replaces the old one; until then the\n";
-	print "old table stays in use. Scans wait while this runs.\n\n";
+	print "old table stays in use. Scheduled scans are skipped while this runs.\n\n";
 	print "--keep-old    - Keep the original table as mac_track_ports_old\n";
 	print "-d | --debug  - Report every copied scan\n";
 	print "-v --version  - Display the version\n";
