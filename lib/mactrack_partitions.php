@@ -67,6 +67,11 @@ function mactrack_partition_period(string $granularity, int $ts): array {
 			$start = $ts - $ts % 86400;
 
 			return ['start' => $start, 'bound' => $start + 86400];
+		case 'week':
+			// 1970-01-01 was a Thursday; weeks start on Monday in UTC.
+			$start = $ts - ($ts + 259200) % 604800;
+
+			return ['start' => $start, 'bound' => $start + 604800];
 	}
 
 	throw new InvalidArgumentException("Unknown partition granularity '$granularity'");
@@ -91,6 +96,8 @@ function mactrack_partition_name(string $granularity, int $ts): string {
 			return 's' . gmdate('YmdHis', $start);
 		case 'hour':
 			return 'h' . gmdate('YmdH', $start);
+		case 'week':
+			return 'w' . gmdate('Ymd', $start);
 	}
 
 	return 'd' . gmdate('Ymd', $start);
@@ -187,12 +194,18 @@ function mactrack_partition_without_validation(array $server): bool {
 function mactrack_partition_choose(string $wanted, int $scan_interval, int $retention_days, int $cap): array {
 	$periods = ['scan' => $scan_interval, 'hour' => 3600, 'day' => 86400];
 
-	if (!isset($periods[$wanted])) {
+	if ($wanted !== 'week' && !isset($periods[$wanted])) {
 		throw new InvalidArgumentException("Unknown partition granularity '$wanted'");
 	}
 
 	if ($scan_interval < 60 || $retention_days < 1) {
 		throw new InvalidArgumentException('Scan interval must be at least 60 seconds and retention at least 1 day');
+	}
+
+	if ($wanted === 'week') {
+		$projected = (int) ceil(($retention_days + 1) / 7) + 3;
+
+		return ['granularity' => 'week', 'projected' => $projected, 'fell_back' => $projected > $cap];
 	}
 
 	$names     = array_keys($periods);
