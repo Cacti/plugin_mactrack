@@ -51,6 +51,32 @@ array_push($mactrack_scanning_functions_ip, 'get_extreme_extremeware_arp_table')
 function get_extreme_extremeware_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, $extremeware = false): array {
 	return get_extreme_switch_ports($site, $device, $lowPort, $highPort , true);
 }
+
+/**
+ * Builds the list of port names to ignore for an Extreme device.
+ * EXOS stacked switches name ports "slot:port" (for example 1:5), which
+ * contains the default ':' delimiter, so besides the configured
+ * delimiter the list is also split on pipes, commas and whitespace.
+ *
+ * @param string $ignore_list The device's Ignore Ports string.
+ *
+ * @return array The trimmed port names to ignore.
+ */
+function get_extreme_ignore_ports($ignore_list): array {
+	$ignore_list = (string) $ignore_list;
+
+	if (trim($ignore_list) === '') {
+		return [];
+	}
+
+	$ports = array_merge(
+		port_list_to_array($ignore_list),
+		preg_split('/[|,\s]+/', trim($ignore_list))
+	);
+
+	return array_values(array_filter(array_unique($ports), static fn ($port) => $port !== ''));
+}
+
 /**
  * Thin wrapper that reads an ExtremeWare (legacy firmware) switch's
  * ARP table by delegating to get_extreme_arp_table() with the
@@ -184,6 +210,9 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 
 		$port_array = [];
 
+		// get the ignore ports list from device
+		$ignore_ports = get_extreme_ignore_ports($device['ignorePorts'] ?? '');
+
 		foreach ($mac_addr_list as $mac_key => $mac_addr) {
 			// check if mac addr is 'learned'  or 'mgnt'
 			if (isset($mac_status_list[$mac_key]) && (($mac_status_list[$mac_key] == '3') || ($mac_status_list[$mac_key] == '5'))) {
@@ -191,8 +220,9 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 				$ifType  = $ifInterfaces[$ifIndex]['ifType'];
 
 				// $ifType = $ifTypes[$ifIndex];
-				// only output legitimate end user ports
-				if (($ifType >= 6) && ($ifType <= 9)) {
+				// only output legitimate end user ports that are not ignored
+				if (($ifType >= 6) && ($ifType <= 9) &&
+					!in_array(trim((string) $ifInterfaces[$ifIndex]['ifName']), $ignore_ports, true)) {
 					if ($extremeware) {
 						$vlanid                      = substr($mac_key,0,(int) strpos($mac_key,'.'));
 						$new_port_array['vlan_id']   = $vlan_ids[$vlanid];
