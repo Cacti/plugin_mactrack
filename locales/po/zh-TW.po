@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-16 00:40-0800\n"
+"POT-Creation-Date: 2026-11-16 15:12-0500\n"
 "PO-Revision-Date: 2026-11-16 19:39+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\n"
@@ -2877,6 +2877,14 @@ msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ign
 msgstr "在接口列表中提供要忽略的ifNames或ifDescriptions端口的正則表達式。例如，（Vlan | Loopback | Null）。"
 
 #: setup.php
+msgid "Ports to Ignore While Scanning (Regular Expression)"
+msgstr ""
+
+#: setup.php
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
+msgstr ""
+
+#: setup.php
 msgid "Bandwidth Usage Threshold"
 msgstr "帶寬使用閾值"
 
@@ -3363,6 +3371,32 @@ msgstr "Mac授權"
 #: setup.php
 msgid "Tracking Utilities"
 msgstr "跟踪實用程序"
+
+#: setup.php
+msgid "Ports to Ignore (Regular Expression)"
+msgstr ""
+
+#: setup.php
+#, php-format
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  It is applied in addition to the %s expressions."
+msgstr ""
+
+#: setup.php
+msgid "every device in this site"
+msgstr ""
+
+#: setup.php
+#, fuzzy
+msgid "this device"
+msgstr "禁用設備"
+
+#: setup.php
+msgid "device and global"
+msgstr ""
+
+#: setup.php
+msgid "site and global"
+msgstr ""
 
 #: setup.php
 msgid "Device Scanning Function Options"
