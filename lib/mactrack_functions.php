@@ -3519,7 +3519,7 @@ function mactrack_scan_dates_rebuild(): int {
  * @param bool        $match     See $scan_date.
  * @param string      $source    mac_track_temp_ports, or mac_track_ports_stage
  *                               to move a failed exchange's rows in.
- * @param int|null    $failed    Set to the number of INSERTs that failed.
+ * @param int|null    $failed    Set to the number of reads or INSERTs that failed.
  * @param-out int $failed
  *
  * @throws InvalidArgumentException For an unknown table or a batch below 1.
@@ -3569,7 +3569,13 @@ function mactrack_ports_load(string $table = 'mac_track_ports', int $batch = 100
 			]));
 		}
 
-		if (!is_array($rows) || $rows === []) {
+		if (!is_array($rows)) {
+			$failed++;
+
+			break;
+		}
+
+		if ($rows === []) {
 			break;
 		}
 

@@ -514,6 +514,14 @@ function mactrack_partition_exchange(string $partition, array $server): bool {
 	}
 
 	try {
+		// EXCHANGE swaps both ways. A populated destination may be a completed
+		// exchange whose pending flag survived a crash; use the copy fallback.
+		$occupied = db_fetch_cell_prepared("SELECT EXISTS(SELECT 1 FROM `mac_track_ports` PARTITION (`$partition`) LIMIT 1)");
+
+		if (!in_array($occupied, [0, '0'], true)) {
+			return false;
+		}
+
 		return mactrack_partition_ddl($sql);
 	} finally {
 		mactrack_partition_unlock();
@@ -560,8 +568,7 @@ function mactrack_partition_load_scan(array $plan): int {
 
 			mactrack_ports_load('mac_track_ports', 1000, null, true, 'mac_track_ports_stage', $failed);
 
-			if ($failed === 0) {
-				db_execute_prepared('TRUNCATE TABLE `mac_track_ports_stage`');
+			if ($failed === 0 && db_execute_prepared('TRUNCATE TABLE `mac_track_ports_stage`') !== false) {
 				set_config_option('mt_partition_pending', '');
 				mactrack_partition_status(['pending' => '', 'reason' => "pending exchange $pending failed; its rows were inserted directly"]);
 			} else {

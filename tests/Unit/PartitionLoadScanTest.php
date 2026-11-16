@@ -39,6 +39,7 @@ beforeEach(function () {
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', '10.5.29-MariaDB');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK', '1');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'lock_wait_timeout', '50');
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'SELECT EXISTS', '0');
 });
 
 const MT_LS_PLAN = ['mode' => 'exchange', 'partition' => 's20261112061507', 'reason' => '', 'granularity' => 'scan', 'scan_date' => '2026-11-12 06:15:07'];
@@ -261,6 +262,50 @@ it('drops a pending value that is not a partition name', function () {
 	expect(mt_ls_pos('EXCHANGE'))->toBeNull();
 	expect($GLOBALS['__test_config_options']['mt_partition_pending'])->toBe('');
 	expect($GLOBALS['__test_cacti_log'])->toHaveCount(1);
+});
+
+it('does not exchange a populated partition back into staging', function ($occupied) {
+	$GLOBALS['__test_config_options']['mt_partition_pending']       = 's20261112060007';
+	$GLOBALS['__test_matched_returns']['db_fetch_cell_prepared'][3] = ['SELECT EXISTS', $occupied];
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM `mac_track_ports_stage`', []);
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM `mac_track_temp_ports`', [mt_ls_row(2)]);
+
+	expect(mactrack_partition_load_scan(MT_LS_PLAN))->toBe(1);
+	expect(mt_ls_pos('EXCHANGE'))->toBeNull();
+	expect($GLOBALS['__test_config_options']['mt_partition_pending'])->toBe('');
+	expect(mt_ls_pos('INSERT IGNORE INTO `mac_track_ports` ('))->not->toBeNull();
+})->with([1, '1']);
+
+it('does not exchange when the destination read fails', function () {
+	$GLOBALS['__test_matched_returns']['db_fetch_cell_prepared'][3] = ['SELECT EXISTS', false];
+
+	expect(mactrack_partition_exchange('s20261112060007', mactrack_partition_server('8.4.13')))->toBeFalse();
+	expect(mt_ls_pos('EXCHANGE'))->toBeNull();
+	expect(array_column($GLOBALS['__test_db_calls'], 'sql'))->toContain('SELECT RELEASE_LOCK(?)');
+});
+
+it('retains pending staging after a failed recovery read', function () {
+	$GLOBALS['__test_config_options']['mt_partition_pending']       = 's20261112060007';
+	$GLOBALS['__test_matched_returns']['db_fetch_cell_prepared'][3] = ['SELECT EXISTS', '1'];
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM `mac_track_ports_stage`', false);
+
+	mactrack_partition_load_scan(MT_LS_PLAN);
+
+	expect(mt_ls_pos('TRUNCATE'))->toBeNull();
+	expect(mt_ls_pos('EXCHANGE'))->toBeNull();
+	expect($GLOBALS['__test_config_options']['mt_partition_pending'])->toBe('s20261112060007');
+});
+
+it('retains the pending marker when staging cleanup fails', function () {
+	$GLOBALS['__test_config_options']['mt_partition_pending']       = 's20261112060007';
+	$GLOBALS['__test_matched_returns']['db_fetch_cell_prepared'][3] = ['SELECT EXISTS', '1'];
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM `mac_track_ports_stage`', [mt_ls_row(1)]);
+	mactrack_test_queue_return_for('db_execute_prepared', 'TRUNCATE', false);
+
+	mactrack_partition_load_scan(MT_LS_PLAN);
+
+	expect(mt_ls_pos('EXCHANGE'))->toBeNull();
+	expect($GLOBALS['__test_config_options']['mt_partition_pending'])->toBe('s20261112060007');
 });
 
 it('releases the partition lock after an exchange', function () {

@@ -152,6 +152,18 @@ it('counts the INSERTs that fail', function () {
 	expect($failed)->toBe(1);
 });
 
+it('reports a failed read instead of treating it as the end of staging', function (bool $after_page) {
+	if ($after_page) {
+		mactrack_test_queue_return('db_fetch_assoc_prepared', [mt_load_row(1)]);
+	}
+
+	mactrack_test_queue_return('db_fetch_assoc_prepared', false);
+	$failed = null;
+
+	expect(mactrack_ports_load('mac_track_ports', 1, null, true, 'mac_track_ports_stage', $failed))->toBe($after_page ? 1 : 0);
+	expect($failed)->toBe(1);
+})->with([false, true]);
+
 it('copies only one scan date, or only the other dates', function (bool $match, string $where) {
 	$first = [mt_load_row(1), mt_load_row(2)];
 	mactrack_test_queue_return('db_fetch_assoc_prepared', $first);

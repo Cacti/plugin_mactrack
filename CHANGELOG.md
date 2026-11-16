@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* issue#426: Keep completed scans in production when an interrupted partition exchange is retried, and preserve staging after failed recovery reads or cleanup
+
 * issue: Scope ARP fallback lookups to the device site so reused MAC addresses do not supply translations from another site
 * issue: Resume background database upgrades after a worker exits and finish migration-table cleanup when an earlier upgrade recorded completion before a failed drop
 * issue: Keep MacTrack enabled while a database upgrade is pending; the settings hook launched the background upgrade before Cacti had loaded exec_background(), and the resulting error made Cacti disable the plugin
