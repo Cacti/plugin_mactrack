@@ -23,12 +23,14 @@
 */
 
 require_once dirname(__DIR__, 2) . '/lib/mactrack_functions.php';
+require_once dirname(__DIR__, 2) . '/setup.php';
 
 beforeEach(function () {
-	$GLOBALS['__test_db_calls']      = [];
-	$GLOBALS['__test_next_returns']  = [];
-	$GLOBALS['__test_cacti_log']     = [];
-	$GLOBALS['__test_form_validate'] = [];
+	$GLOBALS['__test_matched_returns'] = [];
+	$GLOBALS['__test_db_calls']        = [];
+	$GLOBALS['__test_next_returns']    = [];
+	$GLOBALS['__test_cacti_log']       = [];
+	$GLOBALS['__test_form_validate']   = [];
 
 	$GLOBALS['__test_config_options']['mt_ignorePortsRegex']  = '';
 	$GLOBALS['__test_config_options']['mt_ignorePorts_delim'] = '-1';
@@ -190,3 +192,28 @@ it('keeps an explicit delimiter strict', function () {
 
 	expect(port_list_to_array('1:5|Port 2'))->toBe(['1:5', 'Port 2']);
 });
+
+it('words the shared form field for a device and for a site', function () {
+	$device = mactrack_ignore_regex_field(false);
+	$site   = mactrack_ignore_regex_field(true);
+
+	expect($device['value'])->toBe('|arg1:ignorePortsRegex|');
+	expect($site['value'])->toBe('|arg1:ignorePortsRegex|');
+	expect($device['description'])->toContain('this device')->toContain('site and global');
+	expect($site['description'])->toContain('every device in this site')->toContain('device and global');
+});
+
+it('flags a pending upgrade when an installed version lacks the regular expression columns', function (array $devices, array $sites, bool $pending) {
+	mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_aggregated_ports'", []);
+	mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_aggregated_ports_upgrade'", []);
+	mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_devices'", [['t' => 'mac_track_devices']]);
+	mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_sites'", [['t' => 'mac_track_sites']]);
+	mactrack_test_queue_return_for('db_fetch_assoc', 'SHOW COLUMNS FROM mac_track_devices', $devices);
+	mactrack_test_queue_return_for('db_fetch_assoc', 'SHOW COLUMNS FROM mac_track_sites', $sites);
+
+	expect(mactrack_database_upgrade_pending('4.11', ['version' => '4.11']))->toBe($pending);
+})->with([
+	'devices lack the column' => [[['Field' => 'hostname']], [['Field' => 'ignorePortsRegex']], true],
+	'sites lack the column'   => [[['Field' => 'ignorePortsRegex']], [['Field' => 'site_name']], true],
+	'both have the column'    => [[['Field' => 'ignorePortsRegex']], [['Field' => 'ignorePortsRegex']], false],
+]);

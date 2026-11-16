@@ -383,13 +383,11 @@ function mactrack_database_upgrade(): bool {
 		'scan_vlans',
 		"ALTER TABLE `mac_track_sites` ADD COLUMN `scan_vlans` text DEFAULT ''");
 
-	mactrack_add_column('mac_track_sites',
-		'ignorePortsRegex',
-		"ALTER TABLE `mac_track_sites` ADD COLUMN `ignorePortsRegex` varchar(255) NOT NULL default ''");
-
-	mactrack_add_column('mac_track_devices',
-		'ignorePortsRegex',
-		"ALTER TABLE `mac_track_devices` ADD COLUMN `ignorePortsRegex` varchar(255) NOT NULL default '' AFTER `ignorePorts`");
+	foreach (['mac_track_sites' => '', 'mac_track_devices' => ' AFTER `ignorePorts`'] as $table => $position) {
+		mactrack_add_column($table,
+			'ignorePortsRegex',
+			"ALTER TABLE `$table` ADD COLUMN `ignorePortsRegex` varchar(255) NOT NULL default ''$position");
+	}
 
 	mactrack_add_column('mac_track_devices',
 		'device_name',

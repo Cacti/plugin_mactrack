@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-16 15:09-0500\n"
+"POT-Creation-Date: 2026-11-16 15:12-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -3099,6 +3099,31 @@ msgid "Tracking Utilities"
 msgstr ""
 
 #: setup.php
+msgid "Ports to Ignore (Regular Expression)"
+msgstr ""
+
+#: setup.php
+#, php-format
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  It is applied in addition to the %s expressions."
+msgstr ""
+
+#: setup.php
+msgid "every device in this site"
+msgstr ""
+
+#: setup.php
+msgid "this device"
+msgstr ""
+
+#: setup.php
+msgid "device and global"
+msgstr ""
+
+#: setup.php
+msgid "site and global"
+msgstr ""
+
+#: setup.php
 msgid "Device Scanning Function Options"
 msgstr ""
 
@@ -3351,14 +3376,6 @@ msgid "Provide a list of ports on a specific switch/hub whose MAC results should
 msgstr ""
 
 #: setup.php
-msgid "Ports to Ignore (Regular Expression)"
-msgstr ""
-
-#: setup.php
-msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of this device.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  It is applied in addition to the site and global expressions."
-msgstr ""
-
-#: setup.php
 msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
 msgstr ""
 
@@ -3472,10 +3489,6 @@ msgstr ""
 
 #: setup.php
 msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
-msgstr ""
-
-#: setup.php
-msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every device in this site.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  It is applied in addition to the device and global expressions."
 msgstr ""
 
 #: setup.php

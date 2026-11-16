@@ -1721,6 +1721,28 @@ function mactrack_config_arrays() {
 }
 
 /**
+ * Builds the Ports to Ignore regular expression field shared by the
+ * device and site edit forms.
+ *
+ * @param bool $for_site True for the site form, false for the device form.
+ *
+ * @return array The form field definition.
+ */
+function mactrack_ignore_regex_field(bool $for_site): array {
+	return [
+		'method'        => 'textbox',
+		'friendly_name' => __('Ports to Ignore (Regular Expression)', 'mactrack'),
+		'description'   => __('Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, \'(uplink|trunk)\' ignores every port whose name or alias contains uplink or trunk.  It is applied in addition to the %s expressions.',
+			($for_site ? __('every device in this site', 'mactrack') : __('this device', 'mactrack')),
+			($for_site ? __('device and global', 'mactrack') : __('site and global', 'mactrack')), 'mactrack'),
+		'value'         => '|arg1:ignorePortsRegex|',
+		'default'       => '',
+		'size'          => '70',
+		'max_length'    => '255'
+	];
+}
+
+/**
  * Populates the field definition arrays for all of this plugin's
  * add/edit forms (device types, devices, sites, SNMP option sets and
  * items, MAC watch, MAC auth). Registered as the 'config_form' Cacti
@@ -2121,15 +2143,7 @@ function mactrack_config_form(): void {
 		'textarea_cols' => '80',
 		'max_length'    => '255'
 		],
-	'ignorePortsRegex' => [
-		'method'        => 'textbox',
-		'friendly_name' => __('Ports to Ignore (Regular Expression)', 'mactrack'),
-		'description'   => __('Optional.  A regular expression matched, without regard to case, against the port name and the port alias of this device.  MAC addresses found on a matching port are not collected.  For example, \'(uplink|trunk)\' ignores every port whose name or alias contains uplink or trunk.  It is applied in addition to the site and global expressions.', 'mactrack'),
-		'value'         => '|arg1:ignorePortsRegex|',
-		'default'       => '',
-		'size'          => '70',
-		'max_length'    => '255'
-		],
+	'ignorePortsRegex' => mactrack_ignore_regex_field(false),
 	'scan_trunk_port' => [
 		'method'        => 'textarea',
 		'friendly_name' => 'Trunk Ports to Scan',
@@ -2303,15 +2317,7 @@ function mactrack_config_form(): void {
 		'value'         => '|arg1:scan_vlans|',
 		'max_length'    => '1024'
 		],
-	'ignorePortsRegex' => [
-		'method'        => 'textbox',
-		'friendly_name' => __('Ports to Ignore (Regular Expression)', 'mactrack'),
-		'description'   => __('Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every device in this site.  MAC addresses found on a matching port are not collected.  For example, \'(uplink|trunk)\' ignores every port whose name or alias contains uplink or trunk.  It is applied in addition to the device and global expressions.', 'mactrack'),
-		'value'         => '|arg1:ignorePortsRegex|',
-		'default'       => '',
-		'size'          => '70',
-		'max_length'    => '255'
-		],
+	'ignorePortsRegex' => mactrack_ignore_regex_field(true),
 	'site_id' => [
 		'method' => 'hidden_zero',
 		'value'  => '|arg1:site_id|'
