@@ -945,44 +945,30 @@ function mactrack_rebuild_aggregated_ports(): bool {
 			REPLACE(REPLACE(mac_address, ':', ''), '-', ''), SUBSTRING(REPLACE(REPLACE(mac_address, ':', ''), '-', ''), 1, 6), ip_address, dns_hostname, port_number, port_name,
 			date_last, first_scan_date, count_rec, active_last, authorized";
 
+
+		$scan_dates = array_rekey(db_fetch_assoc("SELECT DISTINCT date_last FROM $source ORDER BY date_last"), 'date_last', 'date_last');
+
 		// (c + d) Copy each distinct scan date in turn, merging normalized
 		// duplicates, then drain that date from the source table. Dates are
 		// processed oldest-first, so on a merge the incoming (VALUES) row is the
 		// newer survivor whose descriptive fields should win.
-		while (true) {
-			$scan_date = db_fetch_cell("SELECT date_last FROM $source ORDER BY date_last LIMIT 1");
-
-			if ($scan_date === false || $scan_date === null || $scan_date === '') {
-				break;
-			}
-
-			$copied = db_begin_transaction()
-				&& db_execute_prepared("INSERT INTO $live ($insert_columns)
-					SELECT $select_columns
-					FROM $source
-					WHERE date_last = ?
-					ON DUPLICATE KEY UPDATE
-						count_rec       = $live.count_rec + VALUES(count_rec),
-						first_scan_date = LEAST($live.first_scan_date, VALUES(first_scan_date)),
-						date_last       = GREATEST($live.date_last, VALUES(date_last)),
-						active_last     = GREATEST($live.active_last, VALUES(active_last)),
-						hostname        = VALUES(hostname),
-						device_name     = VALUES(device_name),
-						vlan_name       = VALUES(vlan_name),
-						port_name       = VALUES(port_name),
-						dns_hostname    = VALUES(dns_hostname),
-						vendor_mac      = VALUES(vendor_mac)",
-					[$scan_date])
-				&& db_execute_prepared("DELETE FROM $source WHERE date_last = ?", [$scan_date])
-				&& db_commit_transaction();
-
-			if (!$copied) {
-				db_rollback_transaction();
-
-				cacti_log("MACTRACK: Could not rebuild $live for scan date $scan_date", false, 'SYSTEM');
-
-				return false;
-			}
+		foreach($scan_dates as $scan_date) {
+			db_execute_prepared("INSERT INTO $live ($insert_columns)
+				SELECT $select_columns
+				FROM $source
+				WHERE date_last = ?
+				ON DUPLICATE KEY UPDATE
+					count_rec       = $live.count_rec + VALUES(count_rec),
+					first_scan_date = LEAST($live.first_scan_date, VALUES(first_scan_date)),
+					date_last       = GREATEST($live.date_last, VALUES(date_last)),
+					active_last     = GREATEST($live.active_last, VALUES(active_last)),
+					hostname        = VALUES(hostname),
+					device_name     = VALUES(device_name),
+					vlan_name       = VALUES(vlan_name),
+					port_name       = VALUES(port_name),
+					dns_hostname    = VALUES(dns_hostname),
+					vendor_mac      = VALUES(vendor_mac)",
+				[$scan_date]);
 
 			// Keep the process registry alive during a long rebuild.
 			heartbeat_process('mtupgrade', 'database');
