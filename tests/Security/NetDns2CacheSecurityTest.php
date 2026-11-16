@@ -21,6 +21,13 @@ set_include_path(dirname(__DIR__, 2) . PATH_SEPARATOR . get_include_path());
 require_once dirname(__DIR__, 2) . '/Net/DNS2.php';
 
 class Mactrack_Net_DNS2_Test_Cache extends Net_DNS2_Cache {
+	/**
+	 * Test helper that places a serialized value directly into the cache so deserialization can be exercised.
+	 *
+	 * @param string $key Cache key.
+	 * @param mixed $value Value to serialize into the cache.
+	 * @return void
+	 */
 	public function seed($key, $value) {
 		$this->cache_serializer = 'serialize';
 		$this->cache_data[$key] = ['object' => serialize($value)];
@@ -30,6 +37,11 @@ class Mactrack_Net_DNS2_Test_Cache extends Net_DNS2_Cache {
 class Mactrack_Net_DNS2_Unserialize_Probe {
 	public static $awakened = false;
 
+	/**
+	 * Records that unserialization invoked this class by setting the static $awakened flag.
+	 *
+	 * @return void
+	 */
 	public function __wakeup() {
 		self::$awakened = true;
 	}

@@ -30,6 +30,11 @@ beforeEach(function () {
 	$GLOBALS['__test_matched_returns'] = array();
 });
 
+/**
+ * Returns the SQL of every db_execute() call recorded in $GLOBALS['__test_db_calls'].
+ *
+ * @return array
+ */
 function mactrack_test_executed_sql() {
 	return array_column(array_filter($GLOBALS['__test_db_calls'], function ($call) {
 		return $call['fn'] === 'db_execute';

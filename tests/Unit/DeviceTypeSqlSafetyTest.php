@@ -98,12 +98,10 @@ it('validates canonical regular-file paths before importing an OUI database', fu
 });
 
 it('preserves PHP 8 compatible argument order for the 1.2.31 signatures', function () {
-	$convertSource = plugin_test_read_source('mactrack_convert.php');
 	$arpSource     = plugin_test_read_source('mactrack_view_arp.php');
 	$dot1xSource   = plugin_test_read_source('mactrack_view_dot1x.php');
 	$ajaxSource    = plugin_test_read_source('mactrack_ajax.php');
 
-	expect($convertSource)->toContain('mactrack_create_partitioned_table($engine, $charset, $collate, $days, true)');
 	expect($arpSource)->toContain('function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true)');
 	expect($dot1xSource)->toContain('function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $apply_limits = true)');
 

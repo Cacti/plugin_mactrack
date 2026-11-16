@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-12 11:35-0500\n"
+"POT-Creation-Date: 2026-11-13 05:40+0000\n"
 "PO-Revision-Date: 2026-10-11 23:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Greek <https://translate.cacti.net/projects/cacti/mactrack/el/>\n"
@@ -26,9 +26,81 @@ msgstr ""
 msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
 msgstr ""
 
-#: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
+#: lib/mactrack_activity.php
+#, fuzzy
+#| msgid "Scanning Rate: Every %s"
+msgid "Scanning devices"
+msgstr "Ρυθμός σάρωσης: Κάθε %s"
+
+#: lib/mactrack_activity.php
+msgid "Waiting for the DNS resolver"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Transferring and aggregating scan results"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Maintaining port table partitions"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired port rows"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Pruning scan dates"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired IP rows"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Optimizing the IP table"
+msgstr ""
+
+#: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
+#: mactrack_view_dot1x.php
 msgid "Idle"
 msgstr "Στροφές βραδυπορίας"
+
+#: lib/mactrack_activity.php
+msgid "Upgrading: rebuilding aggregated ports"
+msgstr ""
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "About %s rows left to copy (estimate)"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Converting the port table to partitions"
+msgstr ""
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "%d devices in this scan"
+msgstr ""
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "The process stopped during: %s"
+msgstr ""
+
+#: lib/mactrack_activity.php
+#, fuzzy, php-format
+#| msgid "Scanning Rate: Every %s"
+msgid "Scanning %d devices"
+msgstr "Ρυθμός σάρωσης: Κάθε %s"
+
+#: lib/mactrack_activity.php
+msgid "A database upgrade is running"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "The aggregated ports rebuild has not finished"
+msgstr ""
 
 #: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
 msgid "Running"
@@ -53,6 +125,10 @@ msgstr "Επιτυχία εξουσιοδότησης"
 #: lib/mactrack_functions.php mactrack_view_dot1x.php
 msgid "Authorization Failed"
 msgstr "Η εξουσιοδότηση απέτυχε"
+
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr ""
 
 #: lib/mactrack_functions.php
 #, fuzzy
@@ -173,7 +249,7 @@ msgstr "Εξουσιοδοτηµένο"
 msgid "Unauthorized"
 msgstr "Μη εξουσιοδοτημένος"
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Data"
 msgstr "Ημερομηνία"
 
@@ -370,6 +446,46 @@ msgstr "Οποιοδήποτε"
 msgid "SubType"
 msgstr "SubType"
 
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε όλα τα αποτελέσματα σύνδεσης Port to MAC to IP από το σύστημα;"
+
+#: lib/mactrack_functions.php
+#, fuzzy
+#| msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε όλα τα αποτελέσματα σύνδεσης Port to MAC to IP από το σύστημα;"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
+msgstr ""
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε όλα τα αποτελέσματα της Συγκεντρωμένης Θύρας σε MAC έως IP από το σύστημα;"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε και να αναδημιουργήσετε όλες τις συγκεντρωτικές θύρες από MAC σε αποτελέσματα IP από το σύστημα;"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, fuzzy
+#| msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε και να αναδημιουργήσετε όλες τις συγκεντρωτικές θύρες από MAC σε αποτελέσματα IP από το σύστημα;"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild and analyze the partition containing the latest port observation. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
+msgstr ""
+
+#: lib/mactrack_functions.php
+msgid "The conversion copies the whole port table into a new partitioned table and can take hours on a large table. Scheduled scans are skipped and database maintenance waits until it finishes. The database needs free space for a second copy of the table. Continue?"
+msgstr ""
+
 #: mactrack_actions.php
 #, fuzzy, php-format
 msgid "Mactrack Device: (%s) successfully updated"
@@ -418,7 +534,7 @@ msgstr "Πρέπει να επιλέξετε τουλάχιστον έναν τ�
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
 #: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
-#: mactrack_view_macs.php
+#: mactrack_utilities.php mactrack_view_macs.php
 msgid "Continue"
 msgstr "Συνέχεια"
 
@@ -440,7 +556,7 @@ msgstr "<description> (1)"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
 #: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
-#: mactrack_view_macs.php
+#: mactrack_utilities.php mactrack_view_macs.php
 msgid "Cancel"
 msgstr "Ακύρωση"
 
@@ -998,7 +1114,8 @@ msgstr "Τελευταία Διάρκεια"
 msgid "No Mactrack Devices"
 msgstr "Δεν υπάρχουν συσκευές παρακολούθησης συσκευών"
 
-#: mactrack_devices.php mactrack_view_devices.php setup.php
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: setup.php
 msgid "None"
 msgstr "Κανένα"
 
@@ -1400,12 +1517,79 @@ msgid "Other"
 msgstr "Άλλο"
 
 #: mactrack_utilities.php
-msgid "Are You Sure?"
-msgstr "Είσαι σίγουρος?"
+#, fuzzy
+#| msgid "Current Date"
+msgid "Current Activity"
+msgstr "Σημερινή ημερομηνία"
 
 #: mactrack_utilities.php
-msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
-msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε όλα τα αποτελέσματα σύνδεσης Port to MAC to IP από το σύστημα;"
+#, fuzzy
+#| msgid "Status"
+msgid "State:"
+msgstr "Κατάσταση"
+
+#: mactrack_utilities.php
+msgid "Since:"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Detail:"
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Last Poller Runtime:"
+msgid "Last Skipped Poller Run:"
+msgstr "Τελευταίος χρόνος εκτέλεσης:"
+
+#: mactrack_utilities.php
+#, fuzzy
+msgid "Last Maintenance Steps"
+msgstr "Τελευταίος χρόνος λειτουργίας συντήρησης:"
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "%d Seconds"
+msgid "Seconds"
+msgstr "%d δευτερόλεπτα"
+
+#: mactrack_utilities.php
+msgid "Step"
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Table"
+msgid "Table Sizes"
+msgstr "Πίνακας"
+
+#: mactrack_utilities.php
+msgid "Free"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Index"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Rows (estimate)"
+msgstr ""
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Πίνακας"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database runs on another host"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Unknown: the database data directory cannot be found from this host"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Database Disk Free:"
+msgstr ""
 
 #: mactrack_utilities.php
 #, fuzzy
@@ -1418,17 +1602,9 @@ msgid "The following number of records have been removed from the database: %s"
 msgstr "Ο ακόλουθος αριθμός εγγραφών έχει αφαιρεθεί από τη βάση δεδομένων: %s"
 
 #: mactrack_utilities.php
-msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
-msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε όλα τα αποτελέσματα της Συγκεντρωμένης Θύρας σε MAC έως IP από το σύστημα;"
-
-#: mactrack_utilities.php
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s"
 msgstr "Ο ακόλουθος αριθμός εγγραφών έχει αφαιρεθεί από τον συγκεντρωτικό πίνακα: %s"
-
-#: mactrack_utilities.php
-msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
-msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε και να αναδημιουργήσετε όλες τις συγκεντρωτικές θύρες από MAC σε αποτελέσματα IP από το σύστημα;"
 
 #: mactrack_utilities.php
 #, php-format
@@ -1437,8 +1613,168 @@ msgstr "Ο ακόλουθος αριθμός εγγραφών έχει αφαι�
 
 #: mactrack_utilities.php
 #, fuzzy
+msgid "Mactrack Scan Date Rebuild Results"
+msgstr "Αποτελέσματα βάσης δεδομένων παρακολούθησης συσκευών"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Scan dates rebuilt: %d"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "A scan or a port table conversion is running. Try again when it has finished."
+msgstr ""
+
+#: mactrack_utilities.php setup.php
+msgid "One per Scan"
+msgstr ""
+
+#: mactrack_utilities.php setup.php
+msgid "Hourly"
+msgstr ""
+
+#: mactrack_utilities.php setup.php
+msgid "Daily"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Not partitioned"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Partitioned by scan date"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Unrecognized partitions. MacTrack makes no partition changes."
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Port Table Partitions"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Layout"
+msgstr ""
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%d of at most %d"
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Data Retention"
+msgid "Partitions"
+msgstr "Διατήρηση Δεδομένων"
+
+#: mactrack_utilities.php
+msgid "Oldest Partition"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Newest Partition"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Partitions Cover Scans Before"
+msgstr ""
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s, coarser than the setting because %d partitions would exceed the limit"
+msgstr ""
+
+#: mactrack_utilities.php setup.php
+msgid "Port Partition Size"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Pending Exchange"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Load Path"
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Watches"
+msgid "PHP batches"
+msgstr "Σημεία Ανίχνευσης"
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Last Scan Date"
+msgid "Last Scan Note"
+msgstr "Τελευταία ημερομηνία σάρωσης"
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Version"
+msgid "Conversion"
+msgstr "Έκδοση"
+
+#: mactrack_utilities.php
+#, fuzzy, php-format
+#| msgid "Running Processes:"
+msgid "Running since %s"
+msgstr "Τρέχουσες διεργασίες:"
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Last Duration"
+msgid "Last Conversion"
+msgstr "Τελευταία Διάρκεια"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d rows into %d partitions"
+msgstr ""
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: failed. %s"
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+msgid "Last Maintenance"
+msgstr "Τελευταίος χρόνος λειτουργίας συντήρησης:"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d partitions dropped, %d created"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "A conversion is already running. The partition status page shows when it has finished."
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "The port table already uses the scan-date layout."
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "The port table has partitions MacTrack does not recognize, so it cannot be converted. The partition status page shows why."
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "The conversion has started in the background. The partition status page shows its progress and result."
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
 msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
 msgstr "Οι λειτουργίες σάρωσης εντοπισμού συσκευής έχουν καθαριστεί. Θα δημιουργηθούν ξανά όταν επεξεργαστείτε μια συσκευή ή έναν τύπο συσκευής."
+
+#: mactrack_utilities.php
+msgid "Are You Sure?"
+msgstr "Είσαι σίγουρος?"
 
 #: mactrack_utilities.php
 #, fuzzy
@@ -1495,6 +1831,43 @@ msgstr "Αφαίρεση όλων των αποτελεσμάτων σάρωση
 #: mactrack_utilities.php
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
 msgstr "Διαγράφει <strong>όλες τις</strong> θύρες σε συνδέσεις MAC σε IP από τη βάση δεδομένων όλες τις διευθύνσεις IP, IP διευθύνσεις και VLANS. Αυτό το βοηθητικό πρόγραμμα είναι καλό όταν θέλετε να ξεκινήσετε πάλι. <strong>ΚΙΝΔΥΝΟΣ: Όλα τα προηγούμενα δεδομένα διαγράφονται.</strong>"
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Last Scan Date"
+msgid "Rebuild Scan Dates"
+msgstr "Τελευταία ημερομηνία σάρωσης"
+
+#: mactrack_utilities.php
+msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+msgid "View Partition Status"
+msgstr "Προβολή κατάστασης διεργασίας παρακολούθησης συσκευής"
+
+#: mactrack_utilities.php
+msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Optimize Port Table"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Change Device Port Values"
+msgid "Convert Port Table"
+msgstr "Αλλαγή τιμών θύρας συσκευής"
+
+#: mactrack_utilities.php
+msgid "Converts the Port to MAC to IP results table to partitions by scan date, so maintenance drops old scans instead of deleting rows. It copies the table, which can take hours; scheduled scans are skipped meanwhile."
+msgstr ""
 
 #: mactrack_utilities.php
 msgid "Aggregated Table Administration"
@@ -1816,10 +2189,6 @@ msgstr "Σειρές"
 #: mactrack_view_dashboard.php
 msgid "Size"
 msgstr "Μέγεθος"
-
-#: mactrack_view_dashboard.php
-msgid "Table"
-msgstr "Πίνακας"
 
 #: mactrack_view_dashboard.php
 msgid "No table statistics available."
@@ -2383,6 +2752,10 @@ msgstr "Διατήρηση Δεδομένων"
 #: setup.php
 msgid "How long should discovered IPs details be retained in the database."
 msgstr "Πόσο καιρό θα πρέπει να διατηρηθούν στη βάση δεδομένων λεπτομέρειες της θύρας MAC."
+
+#: setup.php
+msgid "How finely the port table is partitioned when it uses the scan-date layout. MacTrack uses a coarser size when the finer one would exceed the partition limit."
+msgstr ""
 
 #: setup.php
 msgid "Switch Level Ignore Ports Delimiter"
@@ -3335,10 +3708,6 @@ msgstr "Εισαγάγετε τη διεύθυνση MAC ή τη συμβολο�
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Προσθέστε έναν λόγο για αυτή την καταχώρηση."
-
-#: lib/mactrack_functions.php
-msgid "Not observed in latest scan"
-msgstr ""
 
 #~ msgid "IP Address"
 #~ msgstr "IP Address"
