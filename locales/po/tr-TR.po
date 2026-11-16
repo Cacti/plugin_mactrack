@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-12 11:35-0500\n"
+"POT-Creation-Date: 2026-11-13 05:40+0000\n"
 "PO-Revision-Date: 2026-10-11 23:18+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Turkish <https://translate.cacti.net/projects/cacti/mactrack/tr/>\n"
@@ -26,9 +26,81 @@ msgstr ""
 msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
 msgstr ""
 
-#: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
+#: lib/mactrack_activity.php
+#, fuzzy
+#| msgid "Scanning Rate: Every %s"
+msgid "Scanning devices"
+msgstr "Tarama Hızı: Her %s"
+
+#: lib/mactrack_activity.php
+msgid "Waiting for the DNS resolver"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Transferring and aggregating scan results"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Maintaining port table partitions"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired port rows"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Pruning scan dates"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired IP rows"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Optimizing the IP table"
+msgstr ""
+
+#: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
+#: mactrack_view_dot1x.php
 msgid "Idle"
 msgstr "Boşta"
+
+#: lib/mactrack_activity.php
+msgid "Upgrading: rebuilding aggregated ports"
+msgstr ""
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "About %s rows left to copy (estimate)"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "Converting the port table to partitions"
+msgstr ""
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "%d devices in this scan"
+msgstr ""
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "The process stopped during: %s"
+msgstr ""
+
+#: lib/mactrack_activity.php
+#, fuzzy, php-format
+#| msgid "Scanning Rate: Every %s"
+msgid "Scanning %d devices"
+msgstr "Tarama Hızı: Her %s"
+
+#: lib/mactrack_activity.php
+msgid "A database upgrade is running"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "The aggregated ports rebuild has not finished"
+msgstr ""
 
 #: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
 msgid "Running"
@@ -53,6 +125,10 @@ msgstr "Yetkilendirme Başarısı"
 #: lib/mactrack_functions.php mactrack_view_dot1x.php
 msgid "Authorization Failed"
 msgstr "Yetkilendirme Başarısız"
+
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr ""
 
 #: lib/mactrack_functions.php
 #, fuzzy
@@ -173,7 +249,7 @@ msgstr "Yetkili"
 msgid "Unauthorized"
 msgstr "Yetkisiz"
 
-#: lib/mactrack_functions.php
+#: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Data"
 msgstr "Veri"
 
@@ -370,6 +446,46 @@ msgstr "Herhangi"
 msgid "SubType"
 msgstr "SubType"
 
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgstr "Sistemden tüm Port - MAC - IP sonuçlarını silmek istediğinize emin misiniz?"
+
+#: lib/mactrack_functions.php
+#, fuzzy
+#| msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
+msgstr "Sistemden tüm Port - MAC - IP sonuçlarını silmek istediğinize emin misiniz?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
+msgstr ""
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Tüm Toplanan Bağlantı Noktasını MAC'tan IP'ye sonuçlardan silmek istediğinizden emin misiniz?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Sistemden tüm Toplanan Bağlantı Noktası - MAC - IP sonuçlarını silmek ve yeniden oluşturmak istediğinizden emin misiniz?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
+msgstr ""
+
+#: lib/mactrack_functions.php
+#, fuzzy
+#| msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
+msgstr "Sistemden tüm Toplanan Bağlantı Noktası - MAC - IP sonuçlarını silmek ve yeniden oluşturmak istediğinizden emin misiniz?"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild and analyze the partition containing the latest port observation. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
+msgstr ""
+
+#: lib/mactrack_functions.php
+msgid "The conversion copies the whole port table into a new partitioned table and can take hours on a large table. Scheduled scans are skipped and database maintenance waits until it finishes. The database needs free space for a second copy of the table. Continue?"
+msgstr ""
+
 #: mactrack_actions.php
 #, fuzzy, php-format
 msgid "Mactrack Device: (%s) successfully updated"
@@ -418,7 +534,7 @@ msgstr "En az bir cihaz tipi seçmelisiniz."
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
 #: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
-#: mactrack_view_macs.php
+#: mactrack_utilities.php mactrack_view_macs.php
 msgid "Continue"
 msgstr "Devam et"
 
@@ -440,7 +556,7 @@ msgstr "<description> (1)"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
 #: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
-#: mactrack_view_macs.php
+#: mactrack_utilities.php mactrack_view_macs.php
 msgid "Cancel"
 msgstr "İptal"
 
@@ -998,7 +1114,8 @@ msgstr "Son Süre"
 msgid "No Mactrack Devices"
 msgstr "Cihaz İzleme Cihazı Yok"
 
-#: mactrack_devices.php mactrack_view_devices.php setup.php
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: setup.php
 msgid "None"
 msgstr "Yok"
 
@@ -1400,12 +1517,79 @@ msgid "Other"
 msgstr "Diğer"
 
 #: mactrack_utilities.php
-msgid "Are You Sure?"
-msgstr "Emin misiniz?"
+#, fuzzy
+#| msgid "Current Date"
+msgid "Current Activity"
+msgstr "Geçerli tarih"
 
 #: mactrack_utilities.php
-msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
-msgstr "Sistemden tüm Port - MAC - IP sonuçlarını silmek istediğinize emin misiniz?"
+#, fuzzy
+#| msgid "Status"
+msgid "State:"
+msgstr "Durum"
+
+#: mactrack_utilities.php
+msgid "Since:"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Detail:"
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Last Poller Runtime:"
+msgid "Last Skipped Poller Run:"
+msgstr "Son Poller Çalışma Zamanı:"
+
+#: mactrack_utilities.php
+#, fuzzy
+msgid "Last Maintenance Steps"
+msgstr "Son Poller Bakım Çalışma Zamanı:"
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "%d Seconds"
+msgid "Seconds"
+msgstr "%d saniye"
+
+#: mactrack_utilities.php
+msgid "Step"
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Table"
+msgid "Table Sizes"
+msgstr "Tablo"
+
+#: mactrack_utilities.php
+msgid "Free"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Index"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Rows (estimate)"
+msgstr ""
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Tablo"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database runs on another host"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Unknown: the database data directory cannot be found from this host"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Database Disk Free:"
+msgstr ""
 
 #: mactrack_utilities.php
 #, fuzzy
@@ -1418,17 +1602,9 @@ msgid "The following number of records have been removed from the database: %s"
 msgstr "Aşağıdaki kayıt sayısı veritabanından kaldırıldı: %s"
 
 #: mactrack_utilities.php
-msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
-msgstr "Tüm Toplanan Bağlantı Noktasını MAC'tan IP'ye sonuçlardan silmek istediğinizden emin misiniz?"
-
-#: mactrack_utilities.php
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s"
 msgstr "Aşağıdaki tablo, birleştirilen tablodan kaldırıldı: %s"
-
-#: mactrack_utilities.php
-msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
-msgstr "Sistemden tüm Toplanan Bağlantı Noktası - MAC - IP sonuçlarını silmek ve yeniden oluşturmak istediğinizden emin misiniz?"
 
 #: mactrack_utilities.php
 #, php-format
@@ -1437,8 +1613,168 @@ msgstr "Aşağıdaki tablo, birleştirilen tablodan kaldırıldı: %s. Ve %s kay
 
 #: mactrack_utilities.php
 #, fuzzy
+msgid "Mactrack Scan Date Rebuild Results"
+msgstr "Cihaz İzleme Veritabanı Sonuçları"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Scan dates rebuilt: %d"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "A scan or a port table conversion is running. Try again when it has finished."
+msgstr ""
+
+#: mactrack_utilities.php setup.php
+msgid "One per Scan"
+msgstr ""
+
+#: mactrack_utilities.php setup.php
+msgid "Hourly"
+msgstr ""
+
+#: mactrack_utilities.php setup.php
+msgid "Daily"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Not partitioned"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Partitioned by scan date"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Unrecognized partitions. MacTrack makes no partition changes."
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Port Table Partitions"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Layout"
+msgstr ""
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%d of at most %d"
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Data Retention"
+msgid "Partitions"
+msgstr "Verilerin Saklanması"
+
+#: mactrack_utilities.php
+msgid "Oldest Partition"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Newest Partition"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Partitions Cover Scans Before"
+msgstr ""
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s, coarser than the setting because %d partitions would exceed the limit"
+msgstr ""
+
+#: mactrack_utilities.php setup.php
+msgid "Port Partition Size"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Pending Exchange"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Load Path"
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Watches"
+msgid "PHP batches"
+msgstr "Saatler"
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Last Scan Date"
+msgid "Last Scan Note"
+msgstr "Son Tarama Tarihi"
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Version"
+msgid "Conversion"
+msgstr "Versiyon"
+
+#: mactrack_utilities.php
+#, fuzzy, php-format
+#| msgid "Running Processes:"
+msgid "Running since %s"
+msgstr "Çalışan İşlemler:"
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Last Duration"
+msgid "Last Conversion"
+msgstr "Son Süre"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d rows into %d partitions"
+msgstr ""
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: failed. %s"
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+msgid "Last Maintenance"
+msgstr "Son Poller Bakım Çalışma Zamanı:"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d partitions dropped, %d created"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "A conversion is already running. The partition status page shows when it has finished."
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "The port table already uses the scan-date layout."
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "The port table has partitions MacTrack does not recognize, so it cannot be converted. The partition status page shows why."
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "The conversion has started in the background. The partition status page shows its progress and result."
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
 msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
 msgstr "Cihaz İzleme tarama işlevleri temizlendi. Bir cihazı veya cihaz türünü düzenlediğinizde bunlar yeniden oluşturulur."
+
+#: mactrack_utilities.php
+msgid "Are You Sure?"
+msgstr "Emin misiniz?"
 
 #: mactrack_utilities.php
 #, fuzzy
@@ -1495,6 +1831,43 @@ msgstr "Tüm Tarama Sonuçlarını Kaldır"
 #: mactrack_utilities.php
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
 msgstr "Tüm IP Adreslerini, IP Aralıklarını ve VLANS'ı veritabanından <strong>TÜM</strong> Bağlantı Noktasından MAC'a IP ilişkilerine siler. Başlamak istediğinizde bu yardımcı program iyidir. <strong>TEHLİKE: Önceki tüm veriler silinir.</strong>"
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Last Scan Date"
+msgid "Rebuild Scan Dates"
+msgstr "Son Tarama Tarihi"
+
+#: mactrack_utilities.php
+msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+msgid "View Partition Status"
+msgstr "Cihaz İzleme Süreci Durumunu Görüntüleyin"
+
+#: mactrack_utilities.php
+msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Optimize Port Table"
+msgstr ""
+
+#: mactrack_utilities.php
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Change Device Port Values"
+msgid "Convert Port Table"
+msgstr "Aygıt Bağlantı Noktası Değerlerini Değiştirme"
+
+#: mactrack_utilities.php
+msgid "Converts the Port to MAC to IP results table to partitions by scan date, so maintenance drops old scans instead of deleting rows. It copies the table, which can take hours; scheduled scans are skipped meanwhile."
+msgstr ""
 
 #: mactrack_utilities.php
 msgid "Aggregated Table Administration"
@@ -1816,10 +2189,6 @@ msgstr "Satırlar"
 #: mactrack_view_dashboard.php
 msgid "Size"
 msgstr "Boyut"
-
-#: mactrack_view_dashboard.php
-msgid "Table"
-msgstr "Tablo"
 
 #: mactrack_view_dashboard.php
 msgid "No table statistics available."
@@ -2383,6 +2752,10 @@ msgstr "Verilerin Saklanması"
 #: setup.php
 msgid "How long should discovered IPs details be retained in the database."
 msgstr "Port MAC detayları veritabanında ne kadar süreyle saklanmalıdır?"
+
+#: setup.php
+msgid "How finely the port table is partitioned when it uses the scan-date layout. MacTrack uses a coarser size when the finer one would exceed the partition limit."
+msgstr ""
 
 #: setup.php
 msgid "Switch Level Ignore Ports Delimiter"
@@ -3337,10 +3710,6 @@ msgstr "Lütfen otomatik olarak yetkilendirilmek için MAC Adresini veya Mac Adr
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Lütfen bu giriş için bir sebep ekleyin."
-
-#: lib/mactrack_functions.php
-msgid "Not observed in latest scan"
-msgstr ""
 
 #~ msgid "IP Address"
 #~ msgstr "IP Adresi"
