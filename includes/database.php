@@ -383,6 +383,14 @@ function mactrack_database_upgrade(): bool {
 		'scan_vlans',
 		"ALTER TABLE `mac_track_sites` ADD COLUMN `scan_vlans` text DEFAULT ''");
 
+	mactrack_add_column('mac_track_sites',
+		'ignorePortsRegex',
+		"ALTER TABLE `mac_track_sites` ADD COLUMN `ignorePortsRegex` varchar(255) NOT NULL default ''");
+
+	mactrack_add_column('mac_track_devices',
+		'ignorePortsRegex',
+		"ALTER TABLE `mac_track_devices` ADD COLUMN `ignorePortsRegex` varchar(255) NOT NULL default '' AFTER `ignorePorts`");
+
 	mactrack_add_column('mac_track_devices',
 		'device_name',
 		"ALTER TABLE `mac_track_devices` ADD COLUMN `device_name` varchar(100) default '' AFTER `host_id`");
@@ -1490,6 +1498,7 @@ function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 	$data['columns'][]     = ['name' => 'notes', 'type' => 'text', 'NULL' => true];
 	$data['columns'][]     = ['name' => 'disabled', 'type' => 'char(2)', 'NULL' => true];
 	$data['columns'][]     = ['name' => 'ignorePorts', 'type' => 'varchar(255)', 'NULL' => true];
+	$data['columns'][]     = ['name' => 'ignorePortsRegex', 'type' => 'varchar(255)', 'NULL' => false, 'default' => ''];
 	$data['columns'][]     = ['name' => 'ips_total', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
 	$data['columns'][]     = ['name' => 'vlans_total', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
 	$data['columns'][]     = ['name' => 'ports_total', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
@@ -1821,6 +1830,7 @@ function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 	$data['columns'][] = ['name' => 'total_trunk_ports', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
 	$data['columns'][] = ['name' => 'skip_vlans', 'type' => 'text', 'NULL' => false, 'default' => ''];
 	$data['columns'][] = ['name' => 'scan_vlans', 'type' => 'text', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'ignorePortsRegex', 'type' => 'varchar(255)', 'NULL' => false, 'default' => ''];
 	$data['primary']   = 'site_id';
 	$data['type']      = 'InnoDB';
 	$data['comment']   = '';

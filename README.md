@@ -91,6 +91,30 @@ layout may keep up to one extra week of history. Disabled uses the existing
 unpartitioned retention path. The Port Partition Size setting controls future
 partitions; use the Utilities conversion to change the layout of existing data.
 
+## Ignoring ports while scanning
+
+Ports that carry many MAC addresses, such as uplinks and trunks, can be kept out
+of the collected data instead of hidden in the views, which keeps the database
+smaller. There are three ways to do it, and a port is ignored when any of them
+matches:
+
+- **Ports to Ignore** on a device: an exact list of port names, separated by
+  colons, pipes, commas or spaces. With the delimiter setting on Auto Detect,
+  names that contain a colon, such as `1:5` on a stacked Extreme switch, work
+  when the list is separated by pipes, commas or spaces.
+- **Ports to Ignore (Regular Expression)** on a device or a site (Console >
+  MacTrack > Devices or Sites).
+- **Ports to Ignore While Scanning (Regular Expression)** in Console > Settings
+  > MacTrack, for every device.
+
+A regular expression is matched without regard to case against both the port
+name and the port alias, for example `(uplink|trunk)` or `^Po[0-9]+$`. Leave it
+empty to collect every port. An invalid expression is logged and skipped, so a
+typo never stops a scan. The run message of a device shows how many MACs were
+skipped, and the new settings apply to new scans only; existing history is not
+removed. The global **Ports to Ignore** setting is unrelated: it only filters the
+interface list.
+
 ## Bugs and Feature Enhancements
 
 Bug and feature enhancements for the Mactrack plugin are handled in GitHub. You

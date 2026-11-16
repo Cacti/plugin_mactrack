@@ -79,7 +79,8 @@ function form_save(): void {
 		$site_id = api_mactrack_site_save(get_filter_request_var('site_id'), get_nfilter_request_var('site_name'),
 			get_nfilter_request_var('customer_contact'), get_nfilter_request_var('netops_contact'),
 			get_nfilter_request_var('facilities_contact'), get_nfilter_request_var('site_info'),
-			get_nfilter_request_var('skip_vlans'), get_nfilter_request_var('scan_vlans'));
+			get_nfilter_request_var('skip_vlans'), get_nfilter_request_var('scan_vlans'),
+			get_nfilter_request_var('ignorePortsRegex'));
 
 		if ($site_id) {
 			raise_message(1);

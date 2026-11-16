@@ -269,6 +269,15 @@ function mactrack_database_upgrade_pending(string $current, array $old): bool {
 		return true;
 	}
 
+	// The Ignore Ports regular expression columns arrived without a version
+	// bump, so an install already recorded at this version still lacks them
+	// and could not save a device or site until the upgrade ran.
+	foreach (['mac_track_devices', 'mac_track_sites'] as $table) {
+		if (mactrack_db_table_exists($table) && !mactrack_db_column_exists($table, 'ignorePortsRegex')) {
+			return true;
+		}
+	}
+
 	// An interrupted rebuild leaves the renamed work table behind with rows
 	// still to copy. Recreating the destination restores the unique key before
 	// the copy finishes, so the checks above can look healthy while history is
@@ -929,6 +938,15 @@ function mactrack_config_settings() {
 			'description'   => __('Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null).', 'mactrack'),
 			'class'         => 'textAreaNotes',
 			'defaults'      => '(Vlan|Loopback|Null)',
+			'max_length'    => '255',
+			'size'          => '80'
+		],
+		'mt_ignorePortsRegex' => [
+			'method'        => 'textbox',
+			'friendly_name' => __('Ports to Ignore While Scanning (Regular Expression)', 'mactrack'),
+			'description'   => __('Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only.', 'mactrack'),
+			'class'         => 'textAreaNotes',
+			'default'       => '',
 			'max_length'    => '255',
 			'size'          => '80'
 		],
@@ -2103,6 +2121,15 @@ function mactrack_config_form(): void {
 		'textarea_cols' => '80',
 		'max_length'    => '255'
 		],
+	'ignorePortsRegex' => [
+		'method'        => 'textbox',
+		'friendly_name' => __('Ports to Ignore (Regular Expression)', 'mactrack'),
+		'description'   => __('Optional.  A regular expression matched, without regard to case, against the port name and the port alias of this device.  MAC addresses found on a matching port are not collected.  For example, \'(uplink|trunk)\' ignores every port whose name or alias contains uplink or trunk.  It is applied in addition to the site and global expressions.', 'mactrack'),
+		'value'         => '|arg1:ignorePortsRegex|',
+		'default'       => '',
+		'size'          => '70',
+		'max_length'    => '255'
+		],
 	'scan_trunk_port' => [
 		'method'        => 'textarea',
 		'friendly_name' => 'Trunk Ports to Scan',
@@ -2275,6 +2302,15 @@ function mactrack_config_form(): void {
 		'description'   => 'A comma delimited list of VLAN ID to be scanned',
 		'value'         => '|arg1:scan_vlans|',
 		'max_length'    => '1024'
+		],
+	'ignorePortsRegex' => [
+		'method'        => 'textbox',
+		'friendly_name' => __('Ports to Ignore (Regular Expression)', 'mactrack'),
+		'description'   => __('Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every device in this site.  MAC addresses found on a matching port are not collected.  For example, \'(uplink|trunk)\' ignores every port whose name or alias contains uplink or trunk.  It is applied in addition to the device and global expressions.', 'mactrack'),
+		'value'         => '|arg1:ignorePortsRegex|',
+		'default'       => '',
+		'size'          => '70',
+		'max_length'    => '255'
 		],
 	'site_id' => [
 		'method' => 'hidden_zero',

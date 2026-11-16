@@ -137,11 +137,15 @@ if (!cacti_sizeof($device)) {
 	exit;
 }
 
-// get the site name
-$site = db_fetch_cell_prepared('SELECT site_name
+// get the site name and its Ignore Ports regular expression
+$site_row = (array) db_fetch_row_prepared('SELECT site_name, ignorePortsRegex
 	FROM mac_track_sites
 	WHERE site_id = ?',
 	[$device['site_id']]);
+
+$site = $site_row['site_name'] ?? '';
+
+$device['site_ignorePortsRegex'] = $site_row['ignorePortsRegex'] ?? '';
 
 if ($site == '') {
 	mactrack_debug('ERROR: Site not found in database. Can not continue.');
