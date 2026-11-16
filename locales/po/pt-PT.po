@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-13 05:40+0000\n"
-"PO-Revision-Date: 2026-10-11 23:18+0000\n"
+"POT-Creation-Date: 2026-11-16 00:40-0800\n"
+"PO-Revision-Date: 2026-11-16 19:46+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Portuguese (Portugal) <https://translate.cacti.net/projects/cacti/mactrack/pt_PT/>\n"
 "Language: pt-PT\n"
@@ -289,8 +289,9 @@ msgid "Device Enable '%s'"
 msgstr "Ativar dispositivo '%s'"
 
 #: lib/mactrack_functions.php
-#, php-format
-msgid "Device Disable '%d'"
+#, fuzzy, php-format
+#| msgid "Device Disable '%d'"
+msgid "Device Disable '%s'"
 msgstr "Desativar dispositivo '%d'"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_macwatch.php
@@ -481,11 +482,11 @@ msgid "Are you sure you want to rebuild the scan date list from the stored Port 
 msgstr "Você tem certeza de que deseja excluir e recriar todos os resultados da Porta agregada para MAC para IP do sistema?"
 
 #: lib/mactrack_functions.php
-msgid "Rebuild and analyze the partition containing the latest port observation. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
+msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
 msgstr ""
 
 #: lib/mactrack_functions.php
-msgid "The conversion copies the whole port table into a new partitioned table and can take hours on a large table. Scheduled scans are skipped and database maintenance waits until it finishes. The database needs free space for a second copy of the table. Continue?"
+msgid "Run this maintenance off hours. The conversion copies the full port history and can take hours. Scheduled scans are skipped and database maintenance waits until it finishes. Allow free disk space for a second copy of the table and its indexes. The original remains readable until the replacement is verified. Continue?"
 msgstr ""
 
 #: mactrack_actions.php
@@ -1639,7 +1640,11 @@ msgstr ""
 
 #: mactrack_utilities.php setup.php
 msgid "Daily"
-msgstr ""
+msgstr "Diariamente"
+
+#: mactrack_utilities.php setup.php
+msgid "Weekly"
+msgstr "Semanalmente"
 
 #: mactrack_utilities.php
 msgid "Not partitioned"
@@ -1663,7 +1668,7 @@ msgstr ""
 
 #: mactrack_utilities.php
 msgid "Layout"
-msgstr ""
+msgstr "Layout"
 
 #: mactrack_utilities.php
 #, php-format
@@ -1756,11 +1761,11 @@ msgid "%s: %d partitions dropped, %d created"
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "A conversion is already running. The partition status page shows when it has finished."
+msgid "Select daily, weekly or disabled partitioning before starting the conversion."
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "The port table already uses the scan-date layout."
+msgid "A conversion is already running. The partition status page shows when it has finished."
 msgstr ""
 
 #: mactrack_utilities.php
@@ -1768,7 +1773,7 @@ msgid "The port table has partitions MacTrack does not recognize, so it cannot b
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "The conversion has started in the background. The partition status page shows its progress and result."
+msgid "The conversion was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another conversion is running."
 msgstr ""
 
 #: mactrack_utilities.php
@@ -1860,17 +1865,15 @@ msgid "Optimize Port Table"
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
 msgstr ""
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Change Device Port Values"
-msgid "Convert Port Table"
-msgstr "Alterar os valores da porta do dispositivo"
+msgid "Configure Port Partitioning"
+msgstr ""
 
 #: mactrack_utilities.php
-msgid "Converts the Port to MAC to IP results table to partitions by scan date, so maintenance drops old scans instead of deleting rows. It copies the table, which can take hours; scheduled scans are skipped meanwhile."
+msgid "Choose daily or weekly partitions, or disable partitioning. Converting copies the full port history in the background; scheduled scans are skipped meanwhile. You can keep the original table as a backup."
 msgstr ""
 
 #: mactrack_utilities.php
@@ -1892,6 +1895,16 @@ msgstr "Executar a reconstrução da tabela agregada"
 #: mactrack_utilities.php
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
 msgstr "Exclui todas as associações de porta para MAC para IP do banco de dados e sua recriação com base em <strong>Todos os dados rastreados</strong>agora."
+
+#: mactrack_utilities.php
+#, fuzzy
+#| msgid "Data Retention"
+msgid "Partitioning"
+msgstr "Retenção de dados"
+
+#: mactrack_utilities.php
+msgid "Keep the original table as a backup"
+msgstr ""
 
 #: mactrack_vendormacs.php
 #, fuzzy
@@ -2760,7 +2773,7 @@ msgid "How long should discovered IPs details be retained in the database."
 msgstr "Por quanto tempo os detalhes do MAC da porta devem ser retidos na base de dados."
 
 #: setup.php
-msgid "How finely the port table is partitioned when it uses the scan-date layout. MacTrack uses a coarser size when the finer one would exceed the partition limit."
+msgid "Size of new partitions in an already partitioned table. To convert the full history or disable partitioning, use Configure Port Partitioning in MacTrack Utilities."
 msgstr ""
 
 #: setup.php
@@ -3716,6 +3729,11 @@ msgstr "Por favor, introduza o endereço MAC ou a string Mac Address Match para 
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Por favor, adicione um motivo para esta entrada."
+
+#, fuzzy
+#~| msgid "Change Device Port Values"
+#~ msgid "Convert Port Table"
+#~ msgstr "Alterar os valores da porta do dispositivo"
 
 #~ msgid "IP Address"
 #~ msgstr "Endereço de IP"
