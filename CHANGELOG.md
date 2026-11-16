@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* issue#443: Honor a device's Ignore Ports list when scanning Extreme Networks EXOS and ExtremeWare switches, including stacked port names such as 1:5 that contain the default colon delimiter
+
 * issue#426: Keep completed scans in production when an interrupted partition exchange is retried, and preserve staging after failed recovery reads or cleanup
 
 * issue: Scope ARP fallback lookups to the device site so reused MAC addresses do not supply translations from another site
