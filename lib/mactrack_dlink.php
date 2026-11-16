@@ -230,7 +230,7 @@ function get_dlink_l2_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $sn
 
 					if ((((convert_dlink_data($brPortIfType) >= 6) &&
 						(convert_dlink_data($brPortIfType) <= 9)) || (convert_dlink_data($brPortIfType) == 117)) &&
-						(!isset($ifInterfaces[$brPortIfIndex]['portLink']))) {
+						empty($ifInterfaces[$brPortIfIndex]['linkPort'])) {
 						// set some defaults
 						$new_port_key_array[$i]['vlan_id']     = get_dlink_vlan_id($port_key['key']);
 						$new_port_key_array[$i]['vlan_name']   = $vlan_names[$new_port_key_array[$i]['vlan_id']];
@@ -387,12 +387,10 @@ function xform_dlink_vlan_associations(&$device, $snmp_readstring = ''): array {
 
 	foreach ($xformArray as $xformItem) {
 		// peel off the beginning of the OID
-		$key = (string) $xformItem['oid'];
-		$key = str_replace('iso', '1', $key);
-		$key = str_replace('1.3.6.1.2.1.17.7.1.2.2.1.2.', '', $key);
+		$key = mactrack_oid_suffix((string) $xformItem['oid'], '.1.3.6.1.2.1.17.7.1.2.2.1.2');
 		// now grab the VLAN
-		$perPos                      = strpos($key, '.',1);
-		$output_array[$i]['vlan_id'] = substr($key,1,$perPos - 1);
+		$perPos                      = (int) strpos($key, '.');
+		$output_array[$i]['vlan_id'] = substr($key, 0, $perPos);
 		// save the key for association with the dot1d table
 		$output_array[$i]['key'] = substr($key, $perPos + 1);
 		$vlan_name               = @cacti_snmp_get($device['hostname'], $snmp_readstring,

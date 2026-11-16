@@ -89,7 +89,7 @@ function disable_device(device_id) {
 		var type      = data.type;
 		var device_id = data.device_id;
 		var content   = data.content;
-		$('#line_' + device_id).html(content);
+		$('#line' + device_id).html(content);
 	}, 'json').fail(function(data) {
 		getPresentHTTPError(data);
 	});
@@ -101,7 +101,7 @@ function enable_device(device_id) {
 		var type      = data.type;
 		var device_id = data.device_id;
 		var content   = data.content;
-		$('#line_' + device_id).html(content);
+		$('#line' + device_id).html(content);
 	}, 'json').fail(function(data) {
 		getPresentHTTPError(data);
 	});

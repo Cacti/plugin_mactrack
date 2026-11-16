@@ -102,6 +102,15 @@ function mactrack_database_upgrade(): bool {
 		'date_last_notif',
 		"ALTER TABLE `mac_track_macwatch` ADD COLUMN `date_last_notif` TIMESTAMP DEFAULT '0000-00-00 00:00:00' AFTER `date_last_seen`");
 
+	// The MacWatch schedule is in minutes. tinyint held neither 12 hours nor
+	// a day, which were stored as 255; read those as daily.
+	$macwatch_columns = array_rekey(db_fetch_assoc_prepared('SHOW COLUMNS FROM mac_track_macwatch'), 'Field', 'Type');
+
+	if (isset($macwatch_columns['notify_schedule']) && stripos($macwatch_columns['notify_schedule'], 'tinyint') !== false) {
+		db_execute_prepared("ALTER TABLE mac_track_macwatch MODIFY COLUMN notify_schedule smallint(5) unsigned NOT NULL default '1'");
+		db_execute_prepared('UPDATE mac_track_macwatch SET notify_schedule = 1440 WHERE notify_schedule = 255');
+	}
+
 	mactrack_execute_sql('Add length to Device Types Match Fields', "ALTER TABLE `mac_track_device_types` MODIFY COLUMN `sysDescr_match` VARCHAR(100) NOT NULL default '', MODIFY COLUMN `sysObjectID_match` VARCHAR(100) NOT NULL default ''");
 
 	mactrack_execute_sql('Correct a Scanning Function Bug', "DELETE FROM mac_track_scanning_functions WHERE scanning_function='Not Applicable - Hub/Switch'");
@@ -923,9 +932,11 @@ function mactrack_rebuild_aggregated_ports(): bool {
 			mac_address, vendor_mac, ip_address, dns_hostname, port_number, port_name,
 			date_last, first_scan_date, count_rec, active_last, authorized';
 
-		// REPLACE strips both separators from the stored MAC address.
+		// REPLACE strips both separators from the stored MAC address. Before
+		// 4.9 vendor_mac was its first eight characters, '00:11:22', which no
+		// OUI matches now, so derive it from the stripped address.
 		$select_columns = "site_id, device_id, hostname, device_name, vlan_id, vlan_name,
-			REPLACE(REPLACE(mac_address, ':', ''), '-', ''), vendor_mac, ip_address, dns_hostname, port_number, port_name,
+			REPLACE(REPLACE(mac_address, ':', ''), '-', ''), SUBSTRING(REPLACE(REPLACE(mac_address, ':', ''), '-', ''), 1, 6), ip_address, dns_hostname, port_number, port_name,
 			date_last, first_scan_date, count_rec, active_last, authorized";
 
 		// (c + d) Copy each distinct scan date in turn, merging normalized
@@ -1702,7 +1713,7 @@ function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 	$data['columns'][] = ['name' => 'name', 'type' => 'varchar(45)', 'NULL' => false, 'default' => ''];
 	$data['columns'][] = ['name' => 'description', 'type' => 'varchar(255)', 'NULL' => false, 'default' => ''];
 	$data['columns'][] = ['name' => 'ticket_number', 'type' => 'varchar(45)', 'NULL' => false, 'default' => ''];
-	$data['columns'][] = ['name' => 'notify_schedule', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false];
+	$data['columns'][] = ['name' => 'notify_schedule', 'unsigned' => true, 'type' => 'smallint(5)', 'NULL' => false, 'default' => '1'];
 	$data['columns'][] = ['name' => 'email_addresses', 'type' => 'varchar(255)', 'NULL' => false, 'default' => ''];
 	$data['columns'][] = ['name' => 'discovered', 'unsigned' => true, 'type' => 'tinyint(3)', 'NULL' => false];
 	$data['columns'][] = ['name' => 'date_first_seen', 'type' => 'timestamp', 'NULL' => false, 'default' => '0000-00-00 00:00:00'];

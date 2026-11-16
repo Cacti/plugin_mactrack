@@ -468,6 +468,19 @@ final class MactrackOuiDownloadTest extends TestCase {
 		$this->assertSame('Main Street', $records[0]['vendor_address']);
 	}
 
+	public function testParserFlushesAnUnterminatedFinalVendorOnce(): void {
+		$lines = [
+			"AA-BB-CC   (hex)\t\tExample Ltd\n",
+			"AABBCC     (base 16)\t\tMain Street\n",
+		];
+		$records = mactrack_parse_oui_database($lines);
+		$this->assertCount(1, $records);
+		$this->assertSame('AABBCC', $records[0]['vendor_mac']);
+		$this->assertSame('Main Street', $records[0]['vendor_address']);
+		$this->assertSame($records, mactrack_parse_oui_database(array_merge($lines, ["\n"])));
+		$this->assertSame([], mactrack_parse_oui_database([]));
+	}
+
 	/**
 	 * @return void
 	 */
