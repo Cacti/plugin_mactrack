@@ -770,7 +770,7 @@ function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_
 	if ($sql_where == '') {
 		return [];
 	} else {
-		return db_fetch_assoc_prepared($query_string, $sql_params);
+		return db_fetch_assoc_prepared($query_string, $sql_params) ?: [];
 	}
 }
 

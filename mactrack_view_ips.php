@@ -187,7 +187,7 @@ function mactrack_view_get_ip_range_records(&$sql_where, $rows, $apply_limits = 
 		$sql_order
 		$sql_limit";
 
-	return db_fetch_assoc($ip_ranges);
+	return db_fetch_assoc($ip_ranges) ?: [];
 }
 
 /**

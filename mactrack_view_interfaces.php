@@ -205,7 +205,7 @@ function mactrack_get_records(&$sql_where, $apply_limits = true, $rows = 30, &$s
 
 	// echo $sql_query;
 
-	return db_fetch_assoc_prepared($sql_query, $sql_params);
+	return db_fetch_assoc_prepared($sql_query, $sql_params) ?: [];
 }
 
 /**

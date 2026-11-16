@@ -254,7 +254,7 @@ function mactrack_view_get_device_records(&$sql_where, $rows, $apply_limits = tr
 		$sql_order
 		$sql_limit";
 
-	return db_fetch_assoc($sql_query);
+	return db_fetch_assoc($sql_query) ?: [];
 }
 
 /**
