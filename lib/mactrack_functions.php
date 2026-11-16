@@ -1441,7 +1441,7 @@ function get_generic_switch_ports($site, &$device, $lowPort = 0, $highPort = 0):
 	$ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);
 	mactrack_debug('ifIndexes data collection complete');
 
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, mactrack_port_ignore_configured($device));
 
 	get_base_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, '', true, $lowPort, $highPort);
 
@@ -1470,7 +1470,7 @@ function get_generic_dot1q_switch_ports($site, &$device, $lowPort = 0, $highPort
 	$ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);
 	mactrack_debug('ifIndexes data collection complete');
 
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, false);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, true, mactrack_port_ignore_configured($device));
 
 	get_base_dot1qTpFdbEntry_ports($site, $device, $ifInterfaces, '', true, $lowPort, $highPort);
 
@@ -1499,7 +1499,7 @@ function get_generic_wireless_ports($site, &$device, $lowPort = 0, $highPort = 0
 	$ifIndexes = xform_standard_indexed_data('.1.3.6.1.2.1.2.2.1.1', $device);
 	mactrack_debug('ifIndexes data collection complete');
 
-	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, false, false);
+	$ifInterfaces = build_InterfacesTable($device, $ifIndexes, false, mactrack_port_ignore_configured($device));
 
 	get_base_wireless_dot1dTpFdbEntry_ports($site, $device, $ifInterfaces, '', true, $lowPort, $highPort);
 
@@ -1647,6 +1647,7 @@ function get_base_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 						$new_port_key_array[$i]['port_number'] = $port_key['port_number'];
 						// the mapped interface, so callers need not walk the map again
 						$new_port_key_array[$i]['ifIndex']     = $bridgePortIfIndexes[$port_key['port_number']] ?? '';
+						$new_port_key_array[$i]             += mactrack_interface_names($ifInterfaces, $brPortIfIndex);
 						$i++;
 					}
 				}
@@ -1890,6 +1891,7 @@ function get_base_wireless_dot1dTpFdbEntry_ports($site, &$device, &$ifInterfaces
 						// now set the real data
 						$new_port_key_array[$i]['key']         = $port_key['key'];
 						$new_port_key_array[$i]['port_number'] = $port_key['port_number'];
+						$new_port_key_array[$i]             += mactrack_interface_names($ifInterfaces, $brPortIfIndex);
 						$i++;
 					}
 				}
@@ -2084,6 +2086,7 @@ function get_base_dot1qTpFdbEntry_ports($site, &$device, &$ifInterfaces, $snmp_r
 						// now set the real data
 						$new_port_key_array[$i]['key']         = $port_key['key'];
 						$new_port_key_array[$i]['port_number'] = $port_key['port_number'];
+						$new_port_key_array[$i]             += mactrack_interface_names($ifInterfaces, $brPortIfIndex);
 						$i++;
 					}
 				}
@@ -2956,10 +2959,12 @@ function db_store_device_port_results(&$device, $port_array, $scan_date): void {
 	foreach ($port_array as $port_value) {
 		if ($port_value['port_number'] != 'NOT USER' && $port_value['mac_address'] != 'NOT USER' && $port_value['mac_address'] != '') {
 			if (cacti_sizeof($ignore_patterns)) {
-				$port_key = $port_value['port_number'] . "\0" . ($port_value['port_name'] ?? '');
+				// scanners that store bridge port numbers also pass the interface name and alias
+				$names    = [$port_value['port_number'], $port_value['port_name'] ?? '', $port_value['ifName'] ?? '', $port_value['ifAlias'] ?? ''];
+				$port_key = implode("\0", $names);
 
 				if (!isset($ignored_ports[$port_key])) {
-					$ignored_ports[$port_key] = mactrack_port_is_ignored($ignore_patterns, $port_value['port_number'], $port_value['port_name'] ?? '');
+					$ignored_ports[$port_key] = mactrack_port_is_ignored($ignore_patterns, $names);
 				}
 
 				if ($ignored_ports[$port_key]) {
@@ -3004,6 +3009,10 @@ function db_store_device_port_results(&$device, $port_array, $scan_date): void {
 	if ($skipped > 0) {
 		mactrack_debug('Skipped ' . $skipped . ' MAC address(es) on device \'' . ($device['device_name'] ?? '') . '\' because their port matches an Ignore Ports regular expression');
 
+		// scanners count MACs before storing them, and the count feeds the device and site totals
+		if (isset($device['macs_active'])) {
+			$device['macs_active'] = max(0, (int) $device['macs_active'] - $skipped);
+		}
 		// the run message column holds 100 characters
 		if (strpos((string) ($device['last_runmessage'] ?? ''), 'Data collection completed ok') === 0) {
 			$device['last_runmessage'] = 'Data collection completed ok (' . $skipped . ' MACs skipped on ignored ports)';
@@ -5865,24 +5874,60 @@ function mactrack_get_port_ignore_patterns(array $device): array {
 
 /**
  * Reports whether a port matches any of the compiled Ignore Ports
- * regular expressions, by port number (the interface name) or by port
- * name (the alias).
+ * regular expressions. Any of the given names can match: the stored
+ * port number and port name, plus the interface name and alias that
+ * scanners which store bridge port numbers attach to each row.
  *
- * @param array<string, string> $patterns    Compiled patterns from
- *                                           mactrack_get_port_ignore_patterns().
- * @param mixed                 $port_number The stored port number.
- * @param mixed                 $port_name   The stored port name.
+ * @param array<string, string> $patterns Compiled patterns from
+ *                                        mactrack_get_port_ignore_patterns().
+ * @param array<int, mixed>     $names    The names to test.
  *
  * @return bool True when the port should be left out of the scan.
  */
-function mactrack_port_is_ignored(array $patterns, $port_number, $port_name): bool {
+function mactrack_port_is_ignored(array $patterns, array $names): bool {
 	foreach ($patterns as $pattern) {
-		foreach ([$port_number, $port_name] as $value) {
-			$value = (string) $value;
+		foreach ($names as $name) {
+			$name = (string) $name;
 
-			if ($value !== '' && preg_match($pattern, $value) === 1) {
+			if ($name !== '' && preg_match($pattern, $name) === 1) {
 				return true;
 			}
+		}
+	}
+
+	return false;
+}
+
+/**
+ * Returns the name and alias of an interface, for rows whose stored port
+ * number is a bridge port number. They are attached to each scanned row
+ * so the Ignore Ports expressions can match the interface they belong to.
+ *
+ * @param array $ifInterfaces The interfaces table keyed by ifIndex.
+ * @param mixed $ifIndex      The interface the bridge port maps to.
+ *
+ * @return array{ifName: string, ifAlias: string}
+ */
+function mactrack_interface_names(array $ifInterfaces, $ifIndex): array {
+	return [
+		'ifName'  => (string) ($ifInterfaces[$ifIndex]['ifName'] ?? ''),
+		'ifAlias' => (string) ($ifInterfaces[$ifIndex]['ifAlias'] ?? ''),
+	];
+}
+
+/**
+ * Reports whether any Ignore Ports regular expression is set for a
+ * device (global, site or device), without compiling it. Scanners use
+ * it to decide whether the interface aliases are worth collecting.
+ *
+ * @param array $device The device row being scanned.
+ *
+ * @return bool True when at least one expression is not empty.
+ */
+function mactrack_port_ignore_configured(array $device): bool {
+	foreach ([read_config_option('mt_ignorePortsRegex'), $device['site_ignorePortsRegex'] ?? '', $device['ignorePortsRegex'] ?? ''] as $pattern) {
+		if (is_string($pattern) && trim($pattern) !== '') {
+			return true;
 		}
 	}
 

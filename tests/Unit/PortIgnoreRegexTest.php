@@ -217,3 +217,102 @@ it('flags a pending upgrade when an installed version lacks the regular expressi
 	'sites lack the column'   => [[['Field' => 'ignorePortsRegex']], [['Field' => 'site_name']], true],
 	'both have the column'    => [[['Field' => 'ignorePortsRegex']], [['Field' => 'ignorePortsRegex']], false],
 ]);
+
+it('matches the interface name and alias of rows that store a bridge port number', function (string $field) {
+	$this->device['ignorePortsRegex'] = 'uplink';
+
+	$ports = [
+		['mac_address' => '001122000001', 'port_number' => '1', 'port_name' => 'N/A', 'ifName' => 'Gi1/0/1', 'ifAlias' => 'desk 12'],
+		['mac_address' => '001122000002', 'port_number' => '2', 'port_name' => 'N/A', 'ifName' => 'Gi1/0/2', 'ifAlias' => 'desk 13'],
+	];
+	$ports[1][$field] = 'core uplink';
+
+	db_store_device_port_results($this->device, $ports, '2026-11-12 00:00:00');
+
+	expect(port_regex_stored_macs())->toBe(['001122000001']);
+})->with(['ifName', 'ifAlias']);
+
+it('keeps rows with the same bridge port number apart when their interface names differ', function () {
+	$this->device['ignorePortsRegex'] = 'uplink';
+
+	$ports = [
+		['mac_address' => '001122000001', 'port_number' => '1', 'port_name' => 'N/A', 'ifName' => 'Gi1/0/1', 'ifAlias' => 'uplink'],
+		['mac_address' => '001122000002', 'port_number' => '1', 'port_name' => 'N/A', 'ifName' => 'Gi1/0/1', 'ifAlias' => 'desk'],
+	];
+
+	db_store_device_port_results($this->device, $ports, '2026-11-12 00:00:00');
+
+	expect(port_regex_stored_macs())->toBe(['001122000002']);
+});
+
+it('takes skipped MACs out of the device MAC count that feeds the site totals', function () {
+	$this->device['ignorePortsRegex'] = 'uplink';
+	$this->device['macs_active']      = 4;
+
+	db_store_device_port_results($this->device, $this->ports, '2026-11-12 00:00:00');
+
+	expect($this->device['macs_active'])->toBe(2);
+});
+
+it('never lets the MAC count go below zero', function () {
+	$this->device['ignorePortsRegex'] = '.';
+	$this->device['macs_active']      = 1;
+
+	db_store_device_port_results($this->device, $this->ports, '2026-11-12 00:00:00');
+
+	expect($this->device['macs_active'])->toBe(0);
+});
+
+it('leaves the MAC count alone when nothing is skipped', function () {
+	$this->device['macs_active'] = 4;
+
+	db_store_device_port_results($this->device, $this->ports, '2026-11-12 00:00:00');
+
+	expect($this->device['macs_active'])->toBe(4);
+});
+
+it('attaches the interface name and alias, and tolerates an unknown interface', function () {
+	$interfaces = [7 => ['ifName' => 'Gi1/0/7', 'ifAlias' => 'core uplink'], 8 => ['ifName' => 'Gi1/0/8']];
+
+	expect(mactrack_interface_names($interfaces, 7))->toBe(['ifName' => 'Gi1/0/7', 'ifAlias' => 'core uplink']);
+	expect(mactrack_interface_names($interfaces, 8))->toBe(['ifName' => 'Gi1/0/8', 'ifAlias' => '']);
+	expect(mactrack_interface_names($interfaces, 99))->toBe(['ifName' => '', 'ifAlias' => '']);
+});
+
+it('reports whether any expression is configured without compiling it', function () {
+	expect(mactrack_port_ignore_configured($this->device))->toBeFalse();
+
+	$this->device['site_ignorePortsRegex'] = '(unclosed';
+	expect(mactrack_port_ignore_configured($this->device))->toBeTrue();
+
+	$this->device['site_ignorePortsRegex'] = '   ';
+	$GLOBALS['__test_config_options']['mt_ignorePortsRegex'] = 'uplink';
+	expect(mactrack_port_ignore_configured($this->device))->toBeTrue();
+});
+
+it('skips MACs on an uplink found through the bridge tables, by interface alias', function () {
+	$GLOBALS['__test_snmp_walk'] = [];
+	$this->device += [
+		'snmp_readstring'    => 'x', 'snmp_version' => 2, 'snmp_username' => '', 'snmp_password' => '',
+		'snmp_auth_protocol' => '', 'snmp_priv_passphrase' => '', 'snmp_priv_protocol' => '',
+		'snmp_context'       => '', 'snmp_engine_id' => '', 'snmp_port' => 161, 'snmp_timeout' => 500,
+		'snmp_retries'       => 1, 'max_oids' => 10, 'ignorePorts' => '', 'snmp_sysDescr' => '',
+	];
+	$this->device['ignorePortsRegex'] = 'uplink';
+
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.1.4.1.2', [1 => '1', 2 => '2']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.2.2.1.8', [1 => '1', 2 => '1']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.3', ['0.0.0.0.0.1' => '3', '0.0.0.0.0.2' => '3']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.2', ['0.0.0.0.0.1' => '1', '0.0.0.0.0.2' => '2']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.1', ['0.0.0.0.0.1' => "\0\0\0\0\0\1", '0.0.0.0.0.2' => "\0\0\0\0\0\2"]);
+
+	$ifInterfaces = [
+		1 => ['ifType' => 6, 'ifName' => 'Gi1/0/1', 'ifAlias' => 'core uplink'],
+		2 => ['ifType' => 6, 'ifName' => 'Gi1/0/2', 'ifAlias' => 'desk 13'],
+	];
+
+	get_base_dot1dTpFdbEntry_ports('site', $this->device, $ifInterfaces, '', true, 0, 0);
+
+	expect(port_regex_stored_macs())->toBe(['000000000002']);
+	expect($this->device['macs_active'])->toBe(1);
+});
