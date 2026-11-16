@@ -45,30 +45,34 @@ beforeEach(function () {
 	mactrack_test_snmp_walk('.1.3.6.1.4.1.1916.1.16.4.1.4', ['a' => '3', 'b' => '3']);
 
 	$this->device = [
-		'device_id'          => 1, 'host_id' => 0, 'site_id' => 1, 'device_name' => 'sw1', 'hostname' => '192.0.2.1',
-		'snmp_readstring'    => 'x', 'snmp_version' => 2, 'snmp_username' => '', 'snmp_password' => '',
-		'snmp_auth_protocol' => '', 'snmp_priv_passphrase' => '', 'snmp_priv_protocol' => '',
-		'snmp_context'       => '', 'snmp_engine_id' => '', 'snmp_port' => 161, 'snmp_timeout' => 500,
-		'snmp_retries'       => 1, 'max_oids' => 10, 'ignorePorts' => '', 'snmp_sysDescr' => '',
-		'last_rundate'       => '2026-11-12 00:00:00',
-	];
+		'device_id'   => 1, 'host_id' => 0, 'site_id' => 1, 'device_name' => 'sw1', 'hostname' => '192.0.2.1',
+		'ignorePorts' => '', 'snmp_sysDescr' => '', 'last_rundate' => '2026-11-12 00:00:00',
+		'snmp_readstring' => 'x', 'snmp_version' => 2, 'snmp_port' => 161, 'snmp_timeout' => 500,
+		'snmp_retries' => 1, 'max_oids' => 10,
+	] + array_fill_keys([
+		'snmp_username', 'snmp_password', 'snmp_auth_protocol', 'snmp_priv_passphrase',
+		'snmp_priv_protocol', 'snmp_context', 'snmp_engine_id',
+	], '');
 });
 
 afterEach(function () {
 	unset($GLOBALS['__test_snmp_walk'], $GLOBALS['__test_config_options']['mt_ignorePorts_delim']);
 });
 
+// Port numbers written to mac_track_temp_ports, read from the 11 bound values per row.
 function extreme_stored_ports(): array {
-	$ports = [];
+	$columns = 11;
+	$ports   = [];
 
 	foreach ($GLOBALS['__test_db_calls'] as $call) {
 		if (strpos($call['sql'], 'REPLACE INTO mac_track_temp_ports') !== false) {
-			// vlan_id, vlan_name, mac_address, port_number per row
-			for ($i = 4; $i + 3 < count($call['params']); $i += 8) {
-				$ports[] = $call['params'][$i + 3];
+			foreach (array_chunk($call['params'], $columns) as $row) {
+				$ports[] = $row[7];
 			}
 		}
 	}
+
+	sort($ports);
 
 	return $ports;
 }
@@ -78,6 +82,7 @@ it('stores every learned port when no ports are ignored', function () {
 
 	expect($result['macs_active'])->toBe(2);
 	expect($result['ports_active'])->toBe(2);
+	expect(extreme_stored_ports())->toBe(['1:5', '1:6']);
 });
 
 it('skips ignored ports, including stacked names that contain a colon', function (string $ignore) {
@@ -87,7 +92,7 @@ it('skips ignored ports, including stacked names that contain a colon', function
 
 	expect($result['macs_active'])->toBe(1);
 	expect($result['ports_active'])->toBe(1);
-	expect(extreme_stored_ports())->not->toContain('1:5');
+	expect(extreme_stored_ports())->toBe(['1:6']);
 })->with([
 	'single port'  => ['1:5'],
 	'pipe list'    => ['1:5|3:9'],
@@ -102,6 +107,7 @@ it('honours an explicitly configured delimiter', function () {
 	$result = get_extreme_switch_ports('site', $this->device);
 
 	expect($result['macs_active'])->toBe(0);
+	expect(extreme_stored_ports())->toBe([]);
 });
 
 it('applies the ignore list to ExtremeWare devices as well', function () {
@@ -113,5 +119,5 @@ it('applies the ignore list to ExtremeWare devices as well', function () {
 	$result = get_extreme_extremeware_switch_ports('site', $this->device);
 
 	expect($result['macs_active'])->toBe(1);
-	expect(extreme_stored_ports())->not->toContain('1:6');
+	expect(extreme_stored_ports())->toBe(['1:5']);
 });
