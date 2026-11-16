@@ -58,6 +58,12 @@ foreach ($iterator as $file) {
 
 sort($files);
 
+/**
+ * Reads a plugin source file for the PHP-compatibility scans.
+ *
+ * @param string $relativeFile Path relative to the plugin root.
+ * @return string File contents. Throws RuntimeException when the path cannot be resolved or read.
+ */
 function plugin_test_read_source_file($relativeFile) {
         $path = realpath(__DIR__ . '/../../' . $relativeFile);
 

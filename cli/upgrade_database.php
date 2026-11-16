@@ -130,6 +130,20 @@ if (!$registered && !$force) {
 	exit(0);
 }
 
+// The scan lock keeps the upgrade apart from a scan and from a port table
+// conversion (mactrack_convert.php): both write mac_track_ports, which the
+// upgrade rewrites in place. Held until exit; the server frees it if the
+// process dies. The console relaunches the upgrade once the lock is free.
+if ((string) db_fetch_cell_prepared('SELECT GET_LOCK(?, 0)', [mactrack_lock_name('scan')]) !== '1') {
+	upgrade_debug('A MacTrack scan or port table conversion is running; the upgrade will be retried');
+
+	if ($registered) {
+		unregister_process('mtupgrade', 'database', 0);
+	}
+
+	exit(0);
+}
+
 $start = microtime(true);
 
 upgrade_debug('Starting the MacTrack background database upgrade');
