@@ -53,31 +53,6 @@ function get_extreme_extremeware_switch_ports($site, &$device, $lowPort = 0, $hi
 }
 
 /**
- * Builds the list of port names to ignore for an Extreme device.
- * EXOS stacked switches name ports "slot:port" (for example 1:5), which
- * contains the default ':' delimiter, so besides the configured
- * delimiter the list is also split on pipes, commas and whitespace.
- *
- * @param string $ignore_list The device's Ignore Ports string.
- *
- * @return array The trimmed port names to ignore.
- */
-function get_extreme_ignore_ports($ignore_list): array {
-	$ignore_list = (string) $ignore_list;
-
-	if (trim($ignore_list) === '') {
-		return [];
-	}
-
-	$ports = array_merge(
-		port_list_to_array($ignore_list),
-		preg_split('/[|,\s]+/', trim($ignore_list))
-	);
-
-	return array_values(array_filter(array_unique($ports), static fn ($port) => $port !== ''));
-}
-
-/**
  * Thin wrapper that reads an ExtremeWare (legacy firmware) switch's
  * ARP table by delegating to get_extreme_arp_table() with the
  * ExtremeWare-specific MIB flag forced on. Registered in
@@ -211,7 +186,7 @@ function get_extreme_switch_ports($site, &$device, $lowPort = 0, $highPort = 0, 
 		$port_array = [];
 
 		// get the ignore ports list from device
-		$ignore_ports = get_extreme_ignore_ports($device['ignorePorts'] ?? '');
+		$ignore_ports = port_list_to_array($device['ignorePorts'] ?? '');
 
 		foreach ($mac_addr_list as $mac_key => $mac_addr) {
 			// check if mac addr is 'learned'  or 'mgnt'

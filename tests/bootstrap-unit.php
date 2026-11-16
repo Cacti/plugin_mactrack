@@ -836,16 +836,18 @@ if (!function_exists('api_user_realm_auth')) {
 
 if (!function_exists('form_input_validate')) {
 	/**
-	 * Test stub standing in for Cacti core's form_input_validate(). Performs no validation and returns the value unchanged.
+	 * Test stub standing in for Cacti core's form_input_validate(). Performs no validation and returns the value unchanged; each call is recorded in $GLOBALS['__test_form_validate'] as name => pattern.
 	 *
 	 * @param mixed $value Submitted value.
 	 * @param string $name Field name.
-	 * @param string $regex Unused validation pattern.
+	 * @param string $regex Validation pattern, recorded only.
 	 * @param bool $optional Unused.
 	 * @param int $error Unused error id.
 	 * @return mixed
 	 */
 	function form_input_validate($value, $name, $regex, $optional, $error) {
+		$GLOBALS['__test_form_validate'][$name] = $regex;
+
 		return $value;
 	}
 }

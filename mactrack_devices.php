@@ -107,7 +107,8 @@ function form_mactrack_save(): void {
 			get_nfilter_request_var('max_oids'), get_nfilter_request_var('ignorePorts'), get_nfilter_request_var('notes'),
 			get_nfilter_request_var('user_name'), get_nfilter_request_var('user_password'), get_nfilter_request_var('term_type'),
 			get_nfilter_request_var('private_key_path'), (isset_request_var('disabled') ? get_nfilter_request_var('disabled') : ''),
-			get_nfilter_request_var('scan_trunk_port'), get_nfilter_request_var('device_type_id'));
+			get_nfilter_request_var('scan_trunk_port'), get_nfilter_request_var('device_type_id'),
+			get_nfilter_request_var('ignorePortsRegex'));
 
 		header('Location: mactrack_devices.php?action=edit&header=false&device_id=' . (empty($device_id) ? get_filter_request_var('device_id') : $device_id));
 	}
@@ -210,10 +211,18 @@ function form_mactrack_actions(): void {
 
 					foreach ($fields_mactrack_device_edit as $field_name => $field_array) {
 						if (isset_request_var("t_$field_name") && preg_match('/^ignorePorts/', $field_name)) {
+							$value = ($field_name == 'ignorePortsRegex') ?
+								mactrack_validate_port_regex_field(get_nfilter_request_var($field_name), $field_name) :
+								get_request_var($field_name);
+
+							if ($field_name == 'ignorePortsRegex' && is_error_message()) {
+								continue;
+							}
+
 							db_execute_prepared("UPDATE mac_track_devices
 								SET $field_name = ?
 								WHERE device_id = ?",
-								[get_request_var($field_name), $selected_items[$i]]);
+								[$value, $selected_items[$i]]);
 						}
 					}
 				}

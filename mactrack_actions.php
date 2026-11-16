@@ -65,6 +65,8 @@
  * @param string $disabled             Whether the device is disabled.
  * @param string $scan_trunk_port      Whether to scan trunk ports.
  * @param string $device_type_id       The MacTrack device type id.
+ * @param string|null $ignorePortsRegex Regular expression of ports to ignore while
+ *                                     scanning, or null to keep the stored value.
  *
  * @return int The saved device_id, or 0 if validation/save failed.
  *
@@ -77,7 +79,7 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 	$snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context,
 	$snmp_engine_id, $snmp_port, $snmp_timeout, $snmp_retries, $max_oids,
 	$ignorePorts, $notes, $user_name, $user_password, $term_type,
-	$private_key_path, $disabled, $scan_trunk_port, $device_type_id): int {
+	$private_key_path, $disabled, $scan_trunk_port, $device_type_id, $ignorePortsRegex = null): int {
 	global $config;
 
 	require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.php');
@@ -111,6 +113,10 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
 	$save['disabled']             = form_input_validate($disabled, 'disabled', '', true, 3);
 	$save['scan_trunk_port']      = form_input_validate($scan_trunk_port, 'scan_trunk_port', '', true, 3);
 	$save['device_type_id']       = form_input_validate($device_type_id, 'device_type_id', '', true, 3);
+
+	if ($ignorePortsRegex !== null) {
+		$save['ignorePortsRegex'] = mactrack_validate_port_regex_field($ignorePortsRegex, 'ignorePortsRegex');
+	}
 
 	$device_id = 0;
 
@@ -165,10 +171,12 @@ function api_mactrack_device_remove($device_id): void {
  * @param string $site_info          Free-form site notes.
  * @param string $skip_vlans         VLANs to skip during scanning.
  * @param string $scan_vlans         VLANs to scan.
+ * @param string|null $ignorePortsRegex Regular expression of ports to ignore while
+ *                                   scanning, or null to keep the stored value.
  *
  * @return int The saved site_id, or 0 if validation/save failed.
  */
-function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops_contact, $facilities_contact, $site_info, $skip_vlans, $scan_vlans): int {
+function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops_contact, $facilities_contact, $site_info, $skip_vlans, $scan_vlans, $ignorePortsRegex = null): int {
 	$save['site_id']            = $site_id;
 	$save['site_name']          = form_input_validate($site_name, 'site_name', '', false, 3);
 	$save['site_info']          = form_input_validate($site_info, 'site_info', '', true, 3);
@@ -177,6 +185,10 @@ function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops
 	$save['facilities_contact'] = form_input_validate($facilities_contact, 'facilities_contact', '', true, 3);
 	$save['skip_vlans']         = form_input_validate($skip_vlans, 'skip_vlans', '', true, 3);
 	$save['scan_vlans']         = form_input_validate($scan_vlans, 'scan_vlans', '', true, 3);
+
+	if ($ignorePortsRegex !== null) {
+		$save['ignorePortsRegex'] = mactrack_validate_port_regex_field($ignorePortsRegex, 'ignorePortsRegex');
+	}
 
 	$site_id = 0;
 
@@ -323,7 +335,8 @@ function sync_cacti_to_mactrack($device): array {
 				$mt_device['private_key_path'],
 				($mt_device['disabled'] ?? ''), // not a host column
 				$mt_device['scan_trunk_port'],
-				$mt_device['device_type_id']
+				$mt_device['device_type_id'],
+				($mt_device['ignorePortsRegex'] ?? null)
 			);
 
 			mactrack_debug(__('Mactrack Device: (%s) successfully updated', $mt_device['device_id'], 'mactrack'));
@@ -464,7 +477,8 @@ function mactrack_device_action_execute($action): string {
 							get_request_var('private_key_path'),
 							(isset_request_var('disabled') ? get_request_var('disabled') : ''),
 							($mt_device['scan_trunk_port'] ?? ''),
-							($mt_device['device_type_id'] ?? 0)
+							($mt_device['device_type_id'] ?? 0),
+							(isset_request_var('ignorePortsRegex') ? get_nfilter_request_var('ignorePortsRegex') : null)
 						);
 					}
 				}
