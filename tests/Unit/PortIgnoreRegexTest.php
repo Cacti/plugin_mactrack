@@ -36,7 +36,7 @@ beforeEach(function () {
 	$GLOBALS['__test_config_options']['mt_ignorePorts_delim'] = '-1';
 
 	$this->device = [
-		'site_id'          => 1, 'device_id' => 2, 'hostname' => '192.0.2.1', 'device_name' => 'sw1',
+		'site_id'          => 1, 'device_id' => 2, 'host_id' => 0, 'hostname' => '192.0.2.1', 'device_name' => 'sw1',
 		'ignorePortsRegex' => '', 'site_ignorePortsRegex' => '', 'last_runmessage' => 'Data collection completed ok',
 	];
 
@@ -316,3 +316,58 @@ it('skips MACs on an uplink found through the bridge tables, by interface alias'
 	expect(port_regex_stored_macs())->toBe(['000000000002']);
 	expect($this->device['macs_active'])->toBe(1);
 });
+
+// Walks a switch through one of the generic scanners: two ports up, MACs 1 and 2 behind them,
+// and the first port's alias is "core uplink".
+function port_regex_generic_scan(string $scanner, array $device, string $bridge): array {
+	$GLOBALS['__test_snmp_walk']       = [];
+	$GLOBALS['__test_snmp_walk_calls'] = [];
+
+	$device += [
+		'snmp_readstring'    => 'x', 'snmp_version' => 2, 'snmp_username' => '', 'snmp_password' => '',
+		'snmp_auth_protocol' => '', 'snmp_priv_passphrase' => '', 'snmp_priv_protocol' => '',
+		'snmp_context'       => '', 'snmp_engine_id' => '', 'snmp_port' => 161, 'snmp_timeout' => 500,
+		'snmp_retries'       => 1, 'max_oids' => 10, 'ignorePorts' => '', 'snmp_sysDescr' => '',
+		'last_rundate'       => '2026-11-12 00:00:00',
+	];
+
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.2.2.1.1', [1 => '1', 2 => '2']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.2.2.1.3', [1 => '6', 2 => '6']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.2.2.1.8', [1 => '1', 2 => '1']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.31.1.1.1.1', [1 => 'Gi1/0/1', 2 => 'Gi1/0/2']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.31.1.1.1.18', [1 => 'core uplink', 2 => 'desk 13']);
+	mactrack_test_snmp_walk('.1.3.6.1.2.1.17.1.4.1.2', [1 => '1', 2 => '2']);
+
+	if ($bridge === 'dot1q') {
+		mactrack_test_snmp_walk('.1.3.6.1.2.1.17.7.1.2.2.1.3', ['1.0.0.0.0.0.1' => '3', '1.0.0.0.0.0.2' => '3']);
+		mactrack_test_snmp_walk('.1.3.6.1.2.1.17.7.1.2.2.1.2', ['1.0.0.0.0.0.1' => '1', '1.0.0.0.0.0.2' => '2']);
+	} else {
+		mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.3', ['0.0.0.0.0.1' => '3', '0.0.0.0.0.2' => '3']);
+		mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.2', ['0.0.0.0.0.1' => '1', '0.0.0.0.0.2' => '2']);
+		mactrack_test_snmp_walk('.1.3.6.1.2.1.17.4.3.1.1', ['0.0.0.0.0.1' => "\0\0\0\0\0\1", '0.0.0.0.0.2' => "\0\0\0\0\0\2"]);
+	}
+
+	$scanner('site', $device, 0, 0);
+
+	return $device;
+}
+
+it('reads interface aliases in each generic scanner only when an expression is configured', function (string $scanner, string $bridge) {
+	port_regex_generic_scan($scanner, $this->device, $bridge);
+
+	expect($GLOBALS['__test_snmp_walk_calls'])->not->toContain('.1.3.6.1.2.1.31.1.1.1.18');
+	expect(port_regex_stored_macs())->toBe(['000000000001', '000000000002']);
+
+	$GLOBALS['__test_db_calls'] = [];
+	$this->device['ignorePortsRegex'] = 'uplink';
+
+	$device = port_regex_generic_scan($scanner, $this->device, $bridge);
+
+	expect($GLOBALS['__test_snmp_walk_calls'])->toContain('.1.3.6.1.2.1.31.1.1.1.18');
+	expect(port_regex_stored_macs())->toBe(['000000000002']);
+	expect($device['macs_active'])->toBe(1);
+})->with([
+	'dot1d'    => ['get_generic_switch_ports', 'dot1d'],
+	'dot1q'    => ['get_generic_dot1q_switch_ports', 'dot1q'],
+	'wireless' => ['get_generic_wireless_ports', 'dot1d'],
+]);
