@@ -37,14 +37,27 @@ require_once($config['base_path'] . '/plugins/mactrack/lib/mactrack_functions.ph
 
 $keep_old = false;
 $debug    = false;
+$scheme   = null;
 
 $parms = $_SERVER['argv'];
 array_shift($parms);
 
 foreach ($parms as $parameter) {
-	[$arg] = explode('=', $parameter, 2);
+	[$arg, $value] = array_pad(explode('=', $parameter, 2), 2, '');
 
 	switch ($arg) {
+		case '--partition':
+			$schemes = ['daily' => 'day', 'weekly' => 'week', 'disabled' => 'disabled'];
+
+			if (!isset($schemes[$value])) {
+				print "ERROR: --partition must be daily, weekly or disabled.\n";
+
+				exit(1);
+			}
+
+			$scheme = $schemes[$value];
+
+			break;
 		case '-d':
 		case '--debug':
 			$debug = true;
@@ -84,13 +97,15 @@ foreach ($parms as $parameter) {
 	}
 }
 
-print "NOTE: Converting mac_track_ports to the scan-date layout. Scheduled scans are skipped until this finishes.\n";
+print "WARNING: Run this maintenance off hours. It copies the full port history and may take a long time.\n";
+print "WARNING: Allow disk space for a second copy of the table and its indexes.\n";
+print "NOTE: Scheduled scans are skipped while this runs. The original table remains readable until the final swap.\n";
 
 $result = mactrack_partition_convert($keep_old, function (int $done, int $total, string $scan_date) use ($debug): void {
 	if ($debug || $done === $total || $done % 100 === 0) {
-		print "NOTE: Copied scan $done of $total ($scan_date)\n";
+		print "NOTE: Copied range $done of $total (starting $scan_date)\n";
 	}
-});
+}, 1, $scheme);
 
 if (!$result['ok']) {
 	print 'FATAL: ' . $result['reason'] . "\n";
@@ -98,7 +113,13 @@ if (!$result['ok']) {
 	exit(1);
 }
 
-printf("NOTE: Converted %d rows into %d %s partitions.\n", $result['rows'], $result['partitions'], $result['granularity']);
+if ($result['rows'] === 0 && $result['partitions'] === 0 && $result['reason'] !== '') {
+	print 'NOTE: ' . $result['reason'] . "\n";
+
+	exit(0);
+}
+
+printf("NOTE: Converted %d rows; layout: %s; partitions: %d.\n", $result['rows'], $result['granularity'], $result['partitions']);
 
 if ($result['reason'] !== '') {
 	print 'WARNING: ' . $result['reason'] . "\n";
@@ -126,12 +147,17 @@ function display_version(): void {
 function display_help(): void {
 	display_version();
 
-	print "\nusage: mactrack_convert.php [--keep-old] [-d] [-h] [-v]\n\n";
-	print "Converts mac_track_ports to the scan-date partition layout. The data is\n";
+	print "\nusage: mactrack_convert.php [--partition=daily|weekly|disabled] [--keep-old] [-d] [-h] [-v]\n\n";
+	print "Converts mac_track_ports between daily, weekly and unpartitioned layouts.\n";
+	print "Without --partition, an unpartitioned table is converted to the Port\n";
+	print "Partition Size setting (weekly by default) and a partitioned table is left\n";
+	print "unchanged. Run off hours with space for a second table copy.\n";
+	print "The full history is copied one range at a time, without deleting source rows.\n";
+	print "If interrupted before the swap, rerun the command to restart the copy. Data is\n";
 	print "copied into a new table, which then replaces the old one; until then the\n";
 	print "old table stays in use. Scheduled scans are skipped while this runs.\n\n";
 	print "--keep-old    - Keep the original table as mac_track_ports_old\n";
-	print "-d | --debug  - Report every copied scan\n";
+	print "-d | --debug  - Report every copied range\n";
 	print "-v --version  - Display the version\n";
 	print "-h --help     - Display this help message\n";
 }

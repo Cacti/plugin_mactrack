@@ -77,7 +77,11 @@ it('chooses the finest granularity that fits under the cap', function (string $w
 it('refuses an unknown granularity or an interval below a minute', function (string $wanted, int $interval, int $days) {
 	expect(fn () => mactrack_partition_choose($wanted, $interval, $days, 1024))->toThrow(InvalidArgumentException::class);
 })->with([
-	['week', 900, 7],
+	['month', 900, 7],
 	['scan', 59, 7],
 	['scan', 900, 0],
 ]);
+
+it('projects weekly retention with room for a partial week and advance partitions', function () {
+	expect(mactrack_partition_choose('week', 900, 14, 512))->toBe(['granularity' => 'week', 'projected' => 6, 'fell_back' => false]);
+});

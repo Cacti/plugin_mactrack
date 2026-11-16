@@ -32,8 +32,9 @@ beforeEach(function () {
 	$GLOBALS['__test_next_returns']    = [];
 	$GLOBALS['__test_matched_returns'] = [];
 	$GLOBALS['__test_config_options']  = [
-		'mt_collection_timing' => '15',
-		'mt_data_retention'    => '7',
+		'mt_collection_timing'     => '15',
+		'mt_partition_granularity' => 'scan',
+		'mt_data_retention'        => '7',
 	];
 	$GLOBALS['__test_cacti_log']       = [];
 	$GLOBALS['database_default']       = 'cacti';
@@ -166,7 +167,7 @@ it('uses the configured size and ignores an unknown one', function (string $sett
 })->with([
 	['day', 'day'],
 	['hour', 'hour'],
-	['weekly', 'scan'],
+	['weekly', 'week'],
 ]);
 
 it('assumes 15-minute scans and 14 days when the settings are not numbers', function () {
