@@ -847,12 +847,10 @@ function mactrack_normalize_aggregated_ports_schema(string $table): bool {
  * INSERT ... SELECT ... ON DUPLICATE KEY UPDATE, which merges the rows that
  * normalization collapses onto one key. Scan dates are copied oldest-first,
  * so a merge's incoming row is the newer survivor: count_rec is summed, the
- * date bounds widen, and the descriptive fields take the newer values. Each
- * processed scan date is deleted from the source table inside the same
- * transaction, so the migration is resumable and the per-row count_rec
- * totals stay correct if the background upgrade restarts. When the source
- * table is confirmed empty it is dropped. The whole rebuild runs once, gated
- * by a persistent flag and an advisory lock.
+ * date bounds widen, and the descriptive fields take the newer values. No
+ * transaction is used and no source rows are deleted; once every scan date
+ * has been copied the source table is dropped. The whole rebuild runs once,
+ * gated by a persistent flag and an advisory lock.
  *
  * @return bool True when the rebuild has completed (or there was nothing to
  *              rebuild), false when it could not finish this pass.
@@ -945,15 +943,22 @@ function mactrack_rebuild_aggregated_ports(): bool {
 			REPLACE(REPLACE(mac_address, ':', ''), '-', ''), SUBSTRING(REPLACE(REPLACE(mac_address, ':', ''), '-', ''), 1, 6), ip_address, dns_hostname, port_number, port_name,
 			date_last, first_scan_date, count_rec, active_last, authorized";
 
-
 		$scan_dates = array_rekey(db_fetch_assoc("SELECT DISTINCT date_last FROM $source ORDER BY date_last"), 'date_last', 'date_last');
 
-		// (c + d) Copy each distinct scan date in turn, merging normalized
-		// duplicates, then drain that date from the source table. Dates are
-		// processed oldest-first, so on a merge the incoming (VALUES) row is the
-		// newer survivor whose descriptive fields should win.
-		foreach($scan_dates as $scan_date) {
-			db_execute_prepared("INSERT INTO $live ($insert_columns)
+		// A failed lookup also yields no dates. Never fall through to dropping
+		// a source that still holds rows that were not copied.
+		if (!cacti_sizeof($scan_dates) && (string) db_fetch_cell("SELECT COUNT(*) FROM $source") !== '0') {
+			cacti_log("MACTRACK: Could not read the scan dates of $source; deferring the rebuild", false, 'SYSTEM');
+
+			return false;
+		}
+
+		// (c) Copy each distinct scan date in turn, merging normalized
+		// duplicates. Dates are processed oldest-first, so on a merge the
+		// incoming (VALUES) row is the newer survivor whose descriptive fields
+		// should win. No transaction is used and no source rows are deleted.
+		foreach ($scan_dates as $scan_date) {
+			$copied = db_execute_prepared("INSERT INTO $live ($insert_columns)
 				SELECT $select_columns
 				FROM $source
 				WHERE date_last = ?
@@ -970,21 +975,17 @@ function mactrack_rebuild_aggregated_ports(): bool {
 					vendor_mac      = VALUES(vendor_mac)",
 				[$scan_date]);
 
+			if (!$copied) {
+				cacti_log("MACTRACK: Could not rebuild $live for scan date $scan_date", false, 'SYSTEM');
+
+				return false;
+			}
+
 			// Keep the process registry alive during a long rebuild.
 			heartbeat_process('mtupgrade', 'database');
 		}
 
-		// (e) Only drop the source once it is confirmed empty. db_fetch_cell()
-		// returns false for both an empty result and a failed query, so the
-		// loop above can exit early on a transient error; this COUNT makes sure
-		// a non-empty or unreadable source is never discarded.
-		if ((string) db_fetch_cell("SELECT COUNT(*) FROM $source") !== '0') {
-			cacti_log("MACTRACK: $source is not empty after the copy; deferring the drop", false, 'SYSTEM');
-
-			return false;
-		}
-
-		// (e) Drop the drained source and record completion. Check the drop:
+		// (e) Drop the copied source and record completion. Check the drop:
 		// if it fails, the leftover table would keep the poller paused and the
 		// web hook launching, yet the rebuilt flag would make every retry take
 		// the early return and never drop it again. Returning false here (before

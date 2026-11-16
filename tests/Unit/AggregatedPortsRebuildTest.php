@@ -9,7 +9,7 @@
  * Covers mactrack_rebuild_aggregated_ports() and its schema helper, which
  * rename mac_track_aggregated_ports aside, recreate the modified table, copy
  * it back one scan date at a time with normalized MAC addresses, and drop the
- * old table only once it is confirmed empty.
+ * old table once every date has been copied.
  */
 final class AggregatedPortsRebuildTest extends TestCase {
 	private const KEY_COLUMNS = ['port_number', 'mac_address', 'ip_address', 'device_id', 'site_id', 'vlan_id', 'authorized'];
@@ -244,7 +244,8 @@ final class AggregatedPortsRebuildTest extends TestCase {
 
 	/**
 	 * The live table is renamed aside, the destination columns are widened,
-	 * each scan date is copied and drained, and the drained source is dropped.
+	 * each scan date is copied, and the copied source is dropped without any
+	 * row deletes.
 	 *
 	 * @return void
 	 */
@@ -256,9 +257,8 @@ final class AggregatedPortsRebuildTest extends TestCase {
 		self::stubColumnType('int(10) unsigned');
 		// The destination key is already unique, so normalization passes.
 		self::stubUniqueKey('mac_track_aggregated_ports', 0);
-		// One scan date to copy, then the drain loop ends and the source is empty.
-		mactrack_test_queue_return('db_fetch_cell', '2024-01-01 00:00:00');
-		self::stubSourceCount(0);
+		// One scan date to copy.
+		mactrack_test_queue_return_for('db_fetch_assoc', 'SELECT DISTINCT date_last', [['date_last' => '2024-01-01 00:00:00']]);
 
 		$this->assertTrue(mactrack_rebuild_aggregated_ports());
 
@@ -270,7 +270,8 @@ final class AggregatedPortsRebuildTest extends TestCase {
 		$this->assertCount(1, self::callsMatching('ON DUPLICATE KEY UPDATE count_rec = mac_track_aggregated_ports.count_rec + VALUES(count_rec)'));
 		// The newer survivor's descriptive fields win on a merge.
 		$this->assertCount(1, self::callsMatching('port_name = VALUES(port_name)'));
-		$this->assertCount(1, self::callsMatching('DELETE FROM mac_track_aggregated_ports_upgrade WHERE date_last = ?'));
+		$this->assertSame([], self::callsMatching('DELETE FROM'));
+		$this->assertSame([], self::callsMatching('TRANSACTION'));
 		$this->assertCount(1, self::callsMatching('DROP TABLE IF EXISTS mac_track_aggregated_ports_upgrade'));
 		$this->assertSame('on', read_config_option('mt_aggregated_ports_rebuilt'));
 	}
@@ -328,40 +329,40 @@ final class AggregatedPortsRebuildTest extends TestCase {
 	}
 
 	/**
-	 * A failed copy transaction rolls back and reports the pass did not finish.
+	 * A failed copy reports the pass did not finish and keeps the source.
 	 *
 	 * @return void
 	 */
-	public function testRebuildRollsBackAndReturnsFalseOnACopyFailure(): void {
+	public function testRebuildReturnsFalseOnACopyFailure(): void {
 		self::stubTable('mac_track_aggregated_ports', true);
 		self::stubTable('mac_track_aggregated_ports_upgrade', false);
 		self::stubLock();
 		self::stubColumnType('bigint(20) unsigned');
 		self::stubUniqueKey('mac_track_aggregated_ports', 0);
-		mactrack_test_queue_return('db_fetch_cell', '2024-01-01 00:00:00');
-		// The commit fails, forcing a rollback.
-		mactrack_test_queue_return('db_commit_transaction', false);
+		mactrack_test_queue_return_for('db_fetch_assoc', 'SELECT DISTINCT date_last', [['date_last' => '2024-01-01 00:00:00']]);
+		mactrack_test_queue_return_for('db_execute_prepared', 'INSERT INTO mac_track_aggregated_ports', false);
 
 		$this->assertFalse(mactrack_rebuild_aggregated_ports());
-		$this->assertCount(1, self::callsMatching('ROLLBACK'));
+		$this->assertSame([], self::callsMatching('ROLLBACK'));
 		$this->assertSame([], self::callsMatching('DROP TABLE IF EXISTS'));
 		$this->assertNotSame('on', read_config_option('mt_aggregated_ports_rebuilt'));
 	}
 
 	/**
-	 * db_fetch_cell() returns false for both an empty result and a failed
-	 * query, so a non-empty or unreadable source must never be dropped: the
-	 * COUNT guard keeps the rebuild from discarding remaining history.
+	 * db_fetch_assoc() returns an empty array for both an empty result and a
+	 * failed query, so a source that still has rows but yields no scan dates
+	 * must never be dropped: the COUNT guard keeps the rebuild from discarding
+	 * remaining history.
 	 *
 	 * @return void
 	 */
-	public function testRebuildDefersWhenTheSourceIsNotEmptyAfterCopying(): void {
+	public function testRebuildDefersWhenScanDatesCannotBeReadFromANonEmptySource(): void {
 		self::stubTable('mac_track_aggregated_ports', true);
 		self::stubTable('mac_track_aggregated_ports_upgrade', false);
 		self::stubLock();
 		self::stubColumnType('bigint(20) unsigned');
 		self::stubUniqueKey('mac_track_aggregated_ports', 0);
-		// The scan-date lookup returns empty immediately (default ''), but the
+		// The scan-date lookup returns no dates (default), but the
 		// COUNT still reports rows, so the source is not dropped.
 		self::stubSourceCount(5);
 
