@@ -175,7 +175,7 @@ function mactrack_view_get_site_records(&$sql_where, $rows, $apply_limits = true
 			$sql_limit";
 	}
 
-	return db_fetch_assoc($query_string);
+	return db_fetch_assoc($query_string) ?: [];
 }
 
 /**

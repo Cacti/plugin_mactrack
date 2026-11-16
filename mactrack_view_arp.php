@@ -298,7 +298,9 @@ function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true):
 	}
 
 	// Scanners store either an ifIndex or an ifName as the port; a name
-	// compared as a number is 0 and matched nothing.
+	// compared as a number is 0 and matched nothing. The interface table
+	// has no device_id index (its primary key leads with site_id), so the
+	// join must include site_id or every row scans the whole table.
 	$query_string = "SELECT mti.*, mts.site_name, mtod.*, mtin.ifName
 		FROM mac_track_ips AS mti
 		LEFT JOIN mac_track_sites AS mts
@@ -306,7 +308,8 @@ function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true):
 		LEFT JOIN mac_track_oui_database AS mtod
 		ON mtod.vendor_mac=SUBSTRING(mti.mac_address, 1, 6)
 		LEFT JOIN mac_track_interfaces AS mtin
-		ON mtin.device_id=mti.device_id
+		ON mtin.site_id=mti.site_id
+		AND mtin.device_id=mti.device_id
 		AND IF(mti.port_number REGEXP '^[0-9]+$', mtin.ifIndex = mti.port_number, mtin.ifName = mti.port_number)
 		$sql_where
 		$sql_order
@@ -314,7 +317,8 @@ function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true):
 
 	// cacti_log("SQL: $query_string");
 
-	return db_fetch_assoc($query_string);
+	// the fetch returns false when the query fails or times out
+	return db_fetch_assoc($query_string) ?: [];
 }
 
 /**
