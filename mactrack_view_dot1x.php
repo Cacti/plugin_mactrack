@@ -377,7 +377,7 @@ function mactrack_view_get_dot1x_records(&$sql_where, &$sql_params, $rows, $appl
 	if ($sql_where == '') {
 		return [];
 	} else {
-		return db_fetch_assoc_prepared($query_string, $sql_params);
+		return db_fetch_assoc_prepared($query_string, $sql_params) ?: [];
 	}
 }
 

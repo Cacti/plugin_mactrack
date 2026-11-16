@@ -28,3 +28,17 @@ it('joins an ARP port to its interface by ifIndex or by ifName', function () {
 	expect($src)->toContain("AND IF(mti.port_number REGEXP '^[0-9]+$', mtin.ifIndex = mti.port_number, mtin.ifName = mti.port_number)");
 	expect($src)->not->toContain('AND mtin.ifIndex=mti.port_number');
 });
+
+it('joins interfaces on the site_id/device_id primary key prefix so the ARP view does not scan per row', function () {
+	$src = preg_replace('/\s+/', ' ', file_get_contents(dirname(__DIR__, 2) . '/mactrack_view_arp.php'));
+
+	expect($src)->toContain('ON mtin.site_id=mti.site_id AND mtin.device_id=mti.device_id');
+});
+
+it('returns an empty array rather than false when a view record query fails', function () {
+	foreach (['arp', 'sites', 'devices', 'ips', 'dot1x', 'macs', 'interfaces'] as $view) {
+		$src = file_get_contents(dirname(__DIR__, 2) . "/mactrack_view_{$view}.php");
+
+		expect($src)->toMatch('/return db_fetch_assoc(_prepared)?\(.*\) \?: \[\];/');
+	}
+});

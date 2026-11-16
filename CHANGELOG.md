@@ -2,6 +2,9 @@
 
 --- develop ---
 
+* issue#64914: Keep MacTrack enabled when an ARP/IP, site, device, IP range, 802.1x, MAC or interface view query fails or times out; the record functions returned false from a typed array return and the resulting TypeError made Cacti disable the plugin
+* issue#64914: Join interfaces on site_id and device_id in the ARP/IP view so the query uses the primary key instead of scanning the interface table for every row
+
 * issue#443: Honor a device's Ignore Ports list when scanning Extreme Networks EXOS and ExtremeWare switches, including stacked port names such as 1:5 that contain the default colon delimiter
 
 * issue#426: Keep completed scans in production when an interrupted partition exchange is retried, and preserve staging after failed recovery reads or cleanup
