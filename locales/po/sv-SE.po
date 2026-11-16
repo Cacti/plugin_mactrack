@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-12 11:35-0500\n"
-"PO-Revision-Date: 2026-11-09 22:18+0000\n"
-"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
-"Language-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\n"
-"Language: sv-SE\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-12 11:35-0500\nPO-Revision-Date: 2026-11-16 08:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -2091,7 +2079,7 @@ msgstr "Återkalla"
 
 #: mactrack_view_macs.php
 msgid "None of the selected MAC Addresses were valid, so no action was taken."
-msgstr ""
+msgstr "Ingen av de valda MAC-adresserna var giltig, så ingen åtgärd vidtogs."
 
 #: mactrack_view_macs.php
 #, php-format
@@ -2181,12 +2169,12 @@ msgstr "Skanningsresultat för platsen"
 
 #: setup.php
 msgid "MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes."
-msgstr ""
+msgstr "MacTrack uppgraderar sin databas i bakgrunden. Det kan ta upp till en timme i stora installationer och en del MacTrack-data kan vara ofullständiga tills uppgraderingen är klar."
 
 #: setup.php
 #, php-format
 msgid "MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s"
-msgstr ""
+msgstr "MacTrack kunde inte starta databasuppgraderingen i bakgrunden. Se Cacti-loggen för orsaken. Kör den manuellt från kommandoraden: %s"
 
 #: setup.php
 msgid "Mactrack"
@@ -3180,7 +3168,7 @@ msgstr "Lägg till en anledning till denna post."
 
 #: lib/mactrack_functions.php
 msgid "Not observed in latest scan"
-msgstr ""
+msgstr "Observerades inte vid den senaste genomsökningen"
 
 #~ msgid "IP Address"
 #~ msgstr "IP-adress"
