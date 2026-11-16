@@ -2448,6 +2448,16 @@ function xform_mac_address($mac_address): string {
 			['',        '',      '',     '',  ':', ':'],
 			$mac_address
 		);
+
+		if (preg_match('/^[0-9a-f]{1,2}(?::[0-9a-f]{1,2}){5}$/iD', $mac_address)) {
+			$octets = explode(':', $mac_address);
+
+			foreach ($octets as &$octet) {
+				$octet = str_pad($octet, 2, '0', STR_PAD_LEFT);
+			}
+			unset($octet);
+			$mac_address = implode('', $octets);
+		}
 	} else {
 		// Binary hex bytes from SNMP
 		$mac = '';
@@ -2692,8 +2702,10 @@ function xform_indexed_data($xformOID, &$device, $xformLevel = 1, $hex = false):
  * with the device_id as key.
  * @param mixed $device_id
  * @param mixed $storepid
+ *
+ * @return bool Whether the queue write succeeded or the scanner owns the row.
  */
-function db_process_add($device_id, $storepid = false): void {
+function db_process_add($device_id, $storepid = false): bool {
 	// store the PID if required
 	if ($storepid) {
 		$pid = getmypid();
@@ -2701,8 +2713,22 @@ function db_process_add($device_id, $storepid = false): void {
 		$pid = 0;
 	}
 
-	// store pseudo process id in the database
-	db_execute_prepared('REPLACE INTO mac_track_processes
+	if ($device_id > 0) {
+		// A queued row may be claimed once. A rescan must not replace a
+		// running scanner's PID, and queueing must not erase that ownership.
+		if (!db_execute_prepared('INSERT INTO mac_track_processes
+			(device_id, process_id, status, start_date)
+			VALUES (?, ?, "Running", NOW())
+			ON DUPLICATE KEY UPDATE process_id = IF(process_id = 0, VALUES(process_id), process_id)',
+			[$device_id, $pid])) {
+			return false;
+		}
+
+		return !$storepid || (int) db_fetch_cell_prepared('SELECT process_id
+			FROM mac_track_processes WHERE device_id = ?', [$device_id]) === $pid;
+	}
+
+	return db_execute_prepared('REPLACE INTO mac_track_processes
 		(device_id, process_id, status, start_date)
 		VALUES (?, ?, "Running", NOW())',
 		[$device_id, $pid]);
@@ -2714,6 +2740,14 @@ function db_process_add($device_id, $storepid = false): void {
  * @param mixed $device_id
  */
 function db_process_remove($device_id): void {
+	if ($device_id >= 0) {
+		// Test scans and losing concurrent scans do not own another PID's row.
+		db_execute_prepared('DELETE FROM mac_track_processes
+			WHERE device_id = ? AND process_id = ?', [$device_id, getmypid()]);
+
+		return;
+	}
+
 	db_execute_prepared('DELETE FROM mac_track_processes
 		WHERE device_id = ?',
 		[$device_id]);
@@ -3388,6 +3422,8 @@ function mactrack_parse_oui_database(array $lines): array {
 	$vendor_mac     = '';
 	$vendor_name    = '';
 	$vendor_address = '';
+	// Flush the final vendor through the same path as a separator in the file.
+	$lines[] = '';
 
 	foreach ($lines as $row) {
 		$row = str_replace("\t", ' ', $row);
@@ -4499,7 +4535,7 @@ function mactrack_disable(): void {
 	$data = [];
 
 	// log the transaction to the database
-	mactrack_log_action(__('Device Disable \'%d\'', $dbinfo['hostname'], 'mactrack'));
+	mactrack_log_action(__('Device Disable \'%s\'', $dbinfo['hostname'], 'mactrack'));
 
 	db_execute_prepared('UPDATE mac_track_devices
 		SET disabled="on"

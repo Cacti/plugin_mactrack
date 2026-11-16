@@ -6,6 +6,19 @@
  */
 
 require_once dirname(__DIR__, 2) . '/lib/mactrack_dns_resolution.php';
+require_once dirname(__DIR__, 2) . '/Net/DNS2.php';
+
+test('the configured timeout reaches the resolver in seconds', function ($milliseconds, $seconds) {
+	$resolver = mactrack_create_dns_resolver(['192.0.2.53'], $milliseconds);
+	expect($resolver->timeout)->toBe($seconds);
+})->with([
+	['500', 0.5],
+	['1500', 1.5],
+	['', 0.5],
+	['invalid', 0.5],
+	['0', 0.5],
+	['-1', 0.5],
+]);
 
 // mactrack_dns_resolution.php catches Net_DNS2_Exception, but only loads
 // lib/mactrack_dns_resolution.php above; production reaches the class via

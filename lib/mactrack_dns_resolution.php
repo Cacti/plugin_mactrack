@@ -6,6 +6,19 @@
  */
 
 /**
+ * Build the configured resolver, converting the settings value from milliseconds.
+ *
+ * @param string[] $nameservers Configured DNS server addresses.
+ * @param mixed    $timeout     Timeout setting in milliseconds.
+ */
+function mactrack_create_dns_resolver(array $nameservers, $timeout): Net_DNS2_Resolver {
+	return new Net_DNS2_Resolver([
+		'nameservers' => $nameservers,
+		'timeout'     => is_numeric($timeout) && $timeout > 0 ? $timeout / 1000 : 0.5
+	]);
+}
+
+/**
  * Resolve one address according to the configured DNS policy.
  *
  * A NOERROR/NODATA response (no PTR records, but not an exception) falls

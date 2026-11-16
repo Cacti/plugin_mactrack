@@ -120,8 +120,9 @@ if (!$device_id) {
 }
 
 // place a process marker in the database
-if (!$test_mode) {
-	db_process_add($device_id, true);
+if (!$test_mode && !db_process_add($device_id, true)) {
+	mactrack_debug("Device '$device_id' is already being scanned or its process row could not be claimed.");
+	exit;
 }
 
 // get device information

@@ -27,6 +27,17 @@
 // is needed here.
 require_once dirname(__DIR__, 2) . '/lib/mactrack_functions.php';
 
+test('unpadded SNMP display-hint octets retain their byte positions', function ($input, $expected) {
+	expect(xform_mac_address($input))->toBe($expected);
+})->with([
+	['0:c:29:1a:2b:3c', '000C291A2B3C'],
+	['0:0:0:0:0:1', '000000000001'],
+	['a-b-c-d-e-f', '0A0B0C0D0E0F'],
+	['"a b c d e f"', '0A0B0C0D0E0F'],
+	['aa:bb:cc:dd:ee', ''],
+	['aaa:b:c:d:e:f', ''],
+]);
+
 test('an interface with no hardware address stays empty', function ($input) {
 	// mac_track_interfaces.ifPhysAddress is a MAC column. A VLAN SVI, loopback
 	// or tunnel reports an empty address and must not pick up a placeholder.

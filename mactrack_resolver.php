@@ -77,8 +77,8 @@ $max_run_duration = read_config_option('mt_collection_timing');
 $max_script_runtime = read_config_option('mt_script_runtime') * 60;
 
 if (is_numeric($max_run_duration)) {
-	// let PHP a 5 minutes less than the rerun frequency
-	$max_run_duration = ($max_run_duration * 60) - 270;
+	// Match the poller's budget, including short collection intervals.
+	$max_run_duration = max(($max_run_duration * 60) - read_config_option('poller_interval'), (int) ($max_run_duration * 48));
 	ini_set('max_execution_time', $max_run_duration);
 } else {
 	$max_run_duration = 3270;
@@ -148,7 +148,7 @@ if (read_config_option('mt_reverse_dns') == 'on') {
 }
 
 // silently end if the registered process is still running
-if (!register_process_start('mactrack_resolver', 'master', 0, $max_run_duration - 300)) {
+if (!register_process_start('mactrack_resolver', 'master', 0, $max_run_duration)) {
 	print 'FATAL: Detected an already running process.' . PHP_EOL;
 	exit(0);
 }
@@ -177,7 +177,7 @@ if ($dns_secondary != '') {
 
 if (cacti_sizeof($nameservers)) {
 	$use_resolver = true;
-	$resolver     = new Net_DNS2_Resolver(['nameservers' => $nameservers]);
+	$resolver     = mactrack_create_dns_resolver($nameservers, $timeout);
 } else {
 	$use_resolver = false;
 	$resolver     = false;
@@ -189,7 +189,9 @@ if (cacti_sizeof($nameservers)) {
 // limit.
 while (1) {
 	// check for pending signals
-	pcntl_signal_dispatch();
+	if (function_exists('pcntl_signal_dispatch')) {
+		pcntl_signal_dispatch();
+	}
 
 	// read before the pass, so rows added before the poller finished are
 	// resolved before the resolver stops

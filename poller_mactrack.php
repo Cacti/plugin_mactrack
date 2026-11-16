@@ -761,7 +761,9 @@ function collect_mactrack_data($start, $site_id = 0): void {
 
 		while ($j < $total_devices) {
 			// check for pending signals
-			pcntl_signal_dispatch();
+			if (function_exists('pcntl_signal_dispatch')) {
+				pcntl_signal_dispatch();
+			}
 
 			/**
 			 * retrieve the number of concurrent mac_track processes to run

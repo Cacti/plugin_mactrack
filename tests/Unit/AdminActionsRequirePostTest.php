@@ -167,6 +167,8 @@ test('the admin actions are sent as POST with the CSRF token and report failures
 
 	// enable and disable also POST with the CSRF token
 	expect(substr_count($js, '$.post(url, { __csrf_magic: csrfMagicToken }'))->toBe(2);
+	expect(substr_count($js, "$('#line' + device_id).html(content);"))->toBe(2);
+	expect($js)->not->toContain("$('#line_' + device_id)");
 
 	// every path carries the CSRF token and reports failures to the user
 	expect(substr_count($js, '__csrf_magic: csrfMagicToken'))->toBe(3);

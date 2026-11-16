@@ -9,6 +9,9 @@
 
 * issue#359: Restore the unique mac_track_aggregated_ports `port_number` key on upgraded installs, merging the duplicate rows the 4.9 upgrade let accumulate, so the table refresh no longer fails with "Duplicate entry ... for key 'port_number'" and the MAC separator migration runs only once; widen its `row_id` to bigint unsigned and run a version upgrade in only one page load at a time
 * issue#399: Use the registered Aruba AOS-CX callback names in the built-in 6200/6300 device types and repair existing defaults during upgrade
+* issue#399: Preserve unpadded SNMP MAC octets and the final OUI vendor record, apply the DNS timeout in milliseconds, keep a positive resolver lease, and tolerate CLI builds without pcntl
+* issue#399: Claim scanner process rows without replacing a running scan, remove only the owning scanner's row, refresh enable/disable rows, and retain hostnames in disable logs
+* issue#399: MacAuth report mail now honors its configured frequency; binary SNMP MACs are decoded as hexadecimal, so old incorrectly formatted sightings no longer match new scans
 * issue#430: Preserve aggregate sighting timestamps and unscanned devices, retain Layer 2 sightings without current ARP data, and identify older observations in the MAC report
 * issue#432: Correct device collection, poller scheduling and process cleanup, MAC and ARP views, OUI prefixes and MacWatch notification handling
 * dev: Adopt the shared, byte-identical dashboarding card chrome used across the Cacti plugins: the MacTrack dashboard now drives its card grid through the shared `js/cards.js` (`CactiCards`) controller plus a thin `js/mactrack_dashboard.js` adapter, and the card markup/CSS use the shared `.cc*` contract (`css/cards.css`), with MacTrack's `--cc-*` theme bindings and card-body widgets kept in `css/mactrack-dashboard.css`. No functional change to the dashboard; this aligns MacTrack with the other plugins so the chrome can be promoted to Cacti core unchanged
