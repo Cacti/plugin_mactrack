@@ -5473,7 +5473,9 @@ function mactrack_tabs(): void {
  *                address the OUI database does not name, or 'Unknown'.
  */
 function mactrack_get_vendor_name($mac): string {
-	$vendor_mac = substr($mac,0,8);
+	// The OUI table keys vendors by the first six hex digits, without separators.
+	$mac        = str_replace([':', '-', '.'], '', (string) $mac);
+	$vendor_mac = substr($mac, 0, 6);
 
 	$vendor_name = db_fetch_cell_prepared('SELECT vendor_name FROM mac_track_oui_database WHERE vendor_mac = ?', [$vendor_mac]);
 
@@ -5481,7 +5483,7 @@ function mactrack_get_vendor_name($mac): string {
 		return $vendor_name;
 	}
 
-	return mactrack_locally_administered_label(str_replace([':', '-', '.'], '', (string) $mac)) ?: __('Unknown', 'mactrack');
+	return mactrack_locally_administered_label($mac) ?: __('Unknown', 'mactrack');
 }
 
 /**

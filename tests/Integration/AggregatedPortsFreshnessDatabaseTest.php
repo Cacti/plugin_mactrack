@@ -224,4 +224,39 @@ final class AggregatedPortsFreshnessDatabaseTest extends TestCase {
 		$this->assertSame(1, (int) $this->db->query('SELECT COUNT(*) FROM mac_track_aggregated_ports')->fetchColumn());
 		$this->assertSame(self::PREVIOUS, $this->db->query('SELECT date_last FROM mac_track_aggregated_ports')->fetchColumn());
 	}
+
+	/**
+	 * @param string $filter Text the vendor name must contain, or empty for all rows.
+	 *
+	 * @return array<string, string> MAC address => vendor name, with no vendor as an empty string.
+	 */
+	private function vendorNames(string $filter = ''): array {
+		$vendor = mactrack_vendor_name_sql('mti.mac_address');
+		$where  = $filter === '' ? '' : ' WHERE ' . $vendor . ' LIKE ' . $this->db->quote('%' . $filter . '%');
+		$rows   = $this->db->query("SELECT mti.mac_address, $vendor AS vendor_name
+			FROM (SELECT '525400AABBCC' AS mac_address UNION ALL SELECT '520000000001'
+				UNION ALL SELECT '001122334455' UNION ALL SELECT 'AABBCCDDEEFF') AS mti
+			LEFT JOIN mac_track_oui_database AS mtod ON mtod.vendor_mac = SUBSTRING(mti.mac_address, 1, 6)
+			$where")->fetchAll(PDO::FETCH_KEY_PAIR);
+		ksort($rows);
+
+		return array_map('strval', $rows);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testEveryFiftyTwoAddressIsNamedExceptTheRegisteredKvmPrefix(): void {
+		$this->db->exec('CREATE TEMPORARY TABLE mac_track_oui_database (vendor_mac VARCHAR(8) NOT NULL, vendor_name VARCHAR(100) NOT NULL DEFAULT "", PRIMARY KEY (vendor_mac)) ENGINE=InnoDB');
+		$this->db->exec("INSERT INTO mac_track_oui_database VALUES ('525400', 'Virtual/KVM Host'), ('001122', 'Acme')");
+
+		$this->assertSame([
+			'001122334455' => 'Acme',
+			'520000000001' => 'Locally Admined MAC',
+			'525400AABBCC' => 'Virtual/KVM Host',
+			'AABBCCDDEEFF' => '',
+		], $this->vendorNames());
+		$this->assertSame(['520000000001' => 'Locally Admined MAC'], $this->vendorNames('Locally Admin'));
+		$this->assertSame(['525400AABBCC' => 'Virtual/KVM Host'], $this->vendorNames('KVM'));
+	}
 }

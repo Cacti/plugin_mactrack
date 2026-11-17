@@ -49,6 +49,14 @@ it('names an unknown 52 address in the lookup helper only when the OUI table has
 	expect(mactrack_get_vendor_name('00:11:22:aa:bb:cc'))->toBe('Unknown');
 });
 
+it('looks a full MAC address up by its six character OUI', function (string $mac) {
+	$GLOBALS['__test_db_calls'] = [];
+	mactrack_get_vendor_name($mac);
+
+	$call = end($GLOBALS['__test_db_calls']);
+	expect($call['params'])->toBe(['525400']);
+})->with(['52:54:00:aa:bb:cc', '525400aabbcc', '52-54-00-aa-bb-cc', '5254.00aa.bbcc']);
+
 it('uses the expression for the MAC and IP address views and their search', function (string $file, string $column) {
 	$src = file_get_contents(dirname(__DIR__, 2) . '/' . $file);
 
