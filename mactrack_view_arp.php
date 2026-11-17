@@ -255,10 +255,10 @@ function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true):
 		if (read_config_option('mt_reverse_dns') != '') {
 			$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
 				' (mti.dns_hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
-				'mtod.vendor_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
+				mactrack_vendor_name_sql('mti.mac_address') . ' LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		} else {
 			$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
-				' (mtod.vendor_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
+				' (' . mactrack_vendor_name_sql('mti.mac_address') . ' LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		}
 	}
 
@@ -289,7 +289,8 @@ function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true):
 		$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') . ' mti.scan_date = ' . db_qstr(get_request_var('scan_date'));
 	}
 
-	$sql_order = get_order_string();
+	$sql_order  = get_order_string();
+	$vendor_sql = mactrack_vendor_name_sql('mti.mac_address');
 
 	if ($apply_limits && $rows != 999999) {
 		$sql_limit = ' LIMIT ' . ($rows * (get_request_var('page') - 1)) . ', ' . $rows;
@@ -301,7 +302,7 @@ function mactrack_view_get_ip_records(&$sql_where, $rows, $apply_limits = true):
 	// compared as a number is 0 and matched nothing. The interface table
 	// has no device_id index (its primary key leads with site_id), so the
 	// join must include site_id or every row scans the whole table.
-	$query_string = "SELECT mti.*, mts.site_name, mtod.*, mtin.ifName
+	$query_string = "SELECT mti.*, mts.site_name, $vendor_sql AS vendor_name, mtin.ifName
 		FROM mac_track_ips AS mti
 		LEFT JOIN mac_track_sites AS mts
 		ON mti.site_id = mts.site_id
