@@ -71,7 +71,7 @@ partitions created ahead of collection. Nothing needs to be done.
 **Existing installs** keep their tables as they are until you rebuild them. Pick
 the size, then run the rebuild once:
 
-1. Open **Console > Settings > Mactrack** and set **Port Partition Size**:
+1. Open **Console > Settings > Mactrack** and set **Port and IP Address Partition Size**:
    *Weekly* (the default, fewest partitions), *Daily*, *Hourly* or *One per
    Scan* (maintained by the poller; the rebuild script cannot build these two),
    or *Disabled* for unpartitioned tables. It sets the size of the partitions
@@ -81,7 +81,7 @@ the size, then run the rebuild once:
    maintenance, so with weekly partitions up to one extra week of history can
    stay.
 3. Rebuild the existing history to match, either with **MacTrack Utilities >
-   Configure Port Partitioning** or from the Cacti installation directory:
+   Configure Port and IP Address Partitioning** or from the Cacti installation directory:
 
 ```sh
 php plugins/mactrack/cli/upgrade_partitioning.php
@@ -97,11 +97,11 @@ Run it as the user that runs the Cacti poller, off hours (see below).
 `cli/upgrade_partitioning.php` checks both tables against the scheme and rebuilds
 only the ones that have drifted:
 
-- Without `--partition` the scheme is the **Port Partition Size** setting. This
+- Without `--partition` the scheme is the **Port and IP Address Partition Size** setting. This
   is the command to run after changing the setting, after an upgrade, or from
   time to time to make sure the tables are as they should be.
 - With `--partition=daily|weekly|disabled` that scheme is used and saved as the
-  **Port Partition Size** setting.
+  **Port and IP Address Partition Size** setting.
 - `--debug` prints every scan date copied. `--version` and `--help` print the
   version and the usage (`-v` and `-h` still work).
 
