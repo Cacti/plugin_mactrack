@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti 1\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-17 09:32-0500\n"
+"POT-Creation-Date: 2026-11-17 11:55-0500\n"
 "PO-Revision-Date: 2026-11-16 19:46+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Spanish <https://translate.cacti.net/projects/cacti/mactrack/es/>\n"
@@ -484,6 +484,46 @@ msgstr ""
 
 #: lib/mactrack_functions.php
 msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address) and IP address tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC and IP address searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
+msgstr ""
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Scan Results"
+msgstr "Eliminar todos los resultados de escaneo"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Perform Database Maintenance"
+msgstr "Realizar mantenimiento de la base de datos"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Refresh Scanning Functions"
+msgstr "Actualizar las funciones de escaneo"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Aggregated Results"
+msgstr "Eliminar todos los resultados Agregados"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Perform Aggregate Table Rebuild"
+msgstr "Reconstruir la tabla de Agregados"
+
+#: lib/mactrack_functions.php
+#, fuzzy
+#| msgid "Refresh IEEE Vendor MAC/OUI Database"
+msgid "Rebuild IEEE Vendor MAC/OUI Database"
+msgstr "Actualizar base de datos de fabricantes IEEE de MAC/OUI"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+#, fuzzy
+#| msgid "Last Scan Date"
+msgid "Rebuild Scan Dates"
+msgstr "Fecha de la última escaneo"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Optimize Port Table"
+msgstr ""
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Configure Port and IP Address Partitioning"
 msgstr ""
 
 #: lib/mactrack_partition_rebuild.php
@@ -1714,7 +1754,7 @@ msgid "%s, coarser than the setting because %d partitions would exceed the limit
 msgstr ""
 
 #: mactrack_utilities.php setup.php
-msgid "Port Partition Size"
+msgid "Port and IP Address Partition Size"
 msgstr ""
 
 #: mactrack_utilities.php
@@ -1799,10 +1839,6 @@ msgid "Mactrack scanning functions have been purged.  They will be recreated onc
 msgstr "Las funciones de escaneo de MacTrack han sido purgadas. Serán recreadas una vez que edites un dispositivo o un tipo de dispositivo."
 
 #: mactrack_utilities.php
-msgid "Are You Sure?"
-msgstr "Estas seguro?"
-
-#: mactrack_utilities.php
 #, fuzzy
 msgid "Cacti Mactrack System Utilities"
 msgstr "Utilidades de MacTrack"
@@ -1825,10 +1861,6 @@ msgstr "Esta opción te permitirá ver y definir información del proceso asocia
 msgid "Database Administration"
 msgstr "Administración de la Base de datos"
 
-#: mactrack_utilities.php setup.php
-msgid "Perform Database Maintenance"
-msgstr "Realizar mantenimiento de la base de datos"
-
 #: mactrack_utilities.php
 msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
 msgstr "Elimina asociaciones expiradas de Puerto a MAC a IP de la base de datos. Solamente registros que han expirado, basados en tu criterio son eliminados."
@@ -1841,28 +1873,14 @@ msgstr "Actualizar base de datos de fabricantes IEEE de MAC/OUI"
 msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
 msgstr "Esta función descargará e instalará la última base de datos OUI desde el sitio web de IEEE. Cada Placa de interfaz de Red (NIC) tiene una Dirección MAC. La dirección MAC puede ser separada en 2 partes. La primera parte de la dirección MAC contiene el Fabricante de la MAC. El Fabricante de la MAC identifica quien fabrica la parte. Esto será util en la comprobación de dispositivos desconocidos en tu red."
 
-#: mactrack_utilities.php setup.php
-msgid "Refresh Scanning Functions"
-msgstr "Actualizar las funciones de escaneo"
-
 #: mactrack_utilities.php
 #, fuzzy
 msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
 msgstr "Elimina funciones de escaneo antiguas y viciadas del menu de funciones cuando editas un tipo de dispositivo."
 
 #: mactrack_utilities.php
-msgid "Remove All Scan Results"
-msgstr "Eliminar todos los resultados de escaneo"
-
-#: mactrack_utilities.php
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
 msgstr "Elimina <strong>TODAS</strong> las asociaciones de Puerto a MAC a IP de la base de datos, todas las direcciones IP, Rangos de IP y VLANS. Esta función es útil cuando quieres empezar de cero. <strong>PELIGRO: todos los datos anteriores son borrados.</strong>"
-
-#: mactrack_utilities.php
-#, fuzzy
-#| msgid "Last Scan Date"
-msgid "Rebuild Scan Dates"
-msgstr "Fecha de la última escaneo"
 
 #: mactrack_utilities.php
 msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
@@ -1878,15 +1896,7 @@ msgid "Shows how the Port to MAC to IP results are partitioned, the partition si
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "Optimize Port Table"
-msgstr ""
-
-#: mactrack_utilities.php
 msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
-msgstr ""
-
-#: mactrack_utilities.php
-msgid "Configure Port Partitioning"
 msgstr ""
 
 #: mactrack_utilities.php
@@ -1898,16 +1908,8 @@ msgid "Aggregated Table Administration"
 msgstr "Administración de la tabla de Agregados"
 
 #: mactrack_utilities.php
-msgid "Remove All Aggregated Results"
-msgstr "Eliminar todos los resultados Agregados"
-
-#: mactrack_utilities.php
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
 msgstr "Elimina TODAS las asociaciones de Puerto a MAC a IP <strong>Agregadas</strong> (No resultados de escaneo) de la base de dataos. Los datos serán recolectados de nuevo, <strong>solo nuevo</strong> de los datos escaneados en la próxima ejecución de MacTrack."
-
-#: mactrack_utilities.php
-msgid "Perform Aggregate Table Rebuild"
-msgstr "Reconstruir la tabla de Agregados"
 
 #: mactrack_utilities.php
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
@@ -2784,7 +2786,7 @@ msgid "How long should discovered IPs details be retained in the database."
 msgstr "Por cuanto tiempo debería conservar los detalles de Puerto MAC en la base de datos."
 
 #: setup.php
-msgid "Size of the partitions of the port and IP tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
+msgid "Size of the partitions of the port and IP tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
 msgstr ""
 
 #: setup.php
@@ -3775,6 +3777,9 @@ msgstr "Introduzca la dirección MAC o el texto de coincidencia de dirección MA
 #: setup.php
 msgid "Please add a reason for this entry."
 msgstr "Agregar un motivo para esta entrada."
+
+#~ msgid "Are You Sure?"
+#~ msgstr "Estas seguro?"
 
 #, fuzzy
 #~| msgid "Version"
