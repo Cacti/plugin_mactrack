@@ -3661,6 +3661,10 @@ msgstr ""
 msgid "Please add a reason for this entry."
 msgstr ""
 
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr ""
+
 #~ msgid "IP Address"
 #~ msgstr "IP მისამართი"
 
