@@ -32,22 +32,25 @@ mactrack_test_load_function('poller_mactrack.php', 'mactrack_kill_process');
 mactrack_test_load_function('poller_mactrack.php', 'clear_old_processes');
 
 beforeEach(function () {
-	$GLOBALS['__test_db_calls']       = [];
-	$GLOBALS['__test_next_returns']   = [];
-	$GLOBALS['__test_config_options'] = ['mt_script_runtime' => '10'];
+	$GLOBALS['__test_db_calls']        = [];
+	$GLOBALS['__test_next_returns']    = [];
+	$GLOBALS['__test_matched_returns'] = [];
+	$GLOBALS['__test_config_options']  = ['mt_script_runtime' => '10'];
+
+	// No partitioning rebuild is running, so the history may be changed.
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 2)', '1');
 });
 
 test('removing a device binds the device id in every delete', function () {
 	api_mactrack_device_remove('7 OR 1=1');
 
-	$calls = $GLOBALS['__test_db_calls'];
+	$calls = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared'));
 
 	expect($calls)->toHaveCount(10);
 	expect(implode(' ', array_column($calls, 'sql')))->toContain('DELETE FROM mac_track_dot1x WHERE device_id = ?');
 
 	foreach ($calls as $call) {
-		expect($call['fn'])->toBe('db_execute_prepared')
-			->and($call['sql'])->toEndWith('WHERE device_id = ?')
+		expect($call['sql'])->toEndWith('WHERE device_id = ?')
 			->and($call['params'])->toBe(['7 OR 1=1']);
 	}
 });
@@ -55,12 +58,11 @@ test('removing a device binds the device id in every delete', function () {
 test('removing a site binds the site id in every delete', function () {
 	api_mactrack_site_remove(3);
 
-	$calls = $GLOBALS['__test_db_calls'];
+	$calls = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared'));
 
 	expect($calls)->toHaveCount(11)
 		->and(implode(' ', array_column($calls, 'sql')))->toContain('DELETE FROM mac_track_dot1x WHERE site_id = ?')
 		->and(implode(' ', array_column($calls, 'sql')))->toContain('DELETE FROM mac_track_arp WHERE site_id = ?')
-		->and(array_column($calls, 'fn'))->each->toBe('db_execute_prepared')
 		->and(array_column($calls, 'params'))->each->toBe([3]);
 });
 

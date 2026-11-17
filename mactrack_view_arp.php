@@ -352,6 +352,7 @@ function mactrack_view_ips(): void {
 	mactrack_view_ips_validate_request_vars();
 
 	mactrack_tabs();
+	mactrack_partition_rebuild_notice();
 
 	html_start_box($title, '100%', '', '3', 'center', '');
 	mactrack_ip_address_filter();

@@ -897,14 +897,15 @@ function mactrack_config_settings() {
 		],
 		'mt_partition_granularity' => [
 			'friendly_name' => __('Port Partition Size', 'mactrack'),
-			'description'   => __('Size of new partitions in an already partitioned table. To convert the full history or disable partitioning, use Configure Port Partitioning in MacTrack Utilities.', 'mactrack'),
+			'description'   => __('Size of the partitions of the port and IP tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php.', 'mactrack'),
 			'method'        => 'drop_array',
 			'default'       => 'week',
 			'array'         => [
-				'scan' => __('One per Scan', 'mactrack'),
-				'hour' => __('Hourly', 'mactrack'),
-				'day'  => __('Daily', 'mactrack'),
-				'week' => __('Weekly', 'mactrack'),
+				'scan'     => __('One per Scan', 'mactrack'),
+				'hour'     => __('Hourly', 'mactrack'),
+				'day'      => __('Daily', 'mactrack'),
+				'week'     => __('Weekly', 'mactrack'),
+				'disabled' => __('Disabled', 'mactrack'),
 			],
 		],
 		'mt_ignorePorts_delim' => [
@@ -942,13 +943,14 @@ function mactrack_config_settings() {
 			'size'          => '80'
 		],
 		'mt_ignorePortsRegex' => [
-			'method'        => 'textbox',
+			'method'        => 'textarea',
 			'friendly_name' => __('Ports to Ignore While Scanning (Regular Expression)', 'mactrack'),
-			'description'   => __('Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only.', 'mactrack'),
+			'description'   => __('Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only.', 'mactrack'),
 			'class'         => 'textAreaNotes',
 			'default'       => '',
-			'max_length'    => '255',
-			'size'          => '80'
+			'textarea_rows' => '3',
+			'textarea_cols' => '80',
+			'max_length'    => '255'
 		],
 		'mt_interface_high' => [
 			'friendly_name' => __('Bandwidth Usage Threshold', 'mactrack'),
@@ -1730,14 +1732,16 @@ function mactrack_config_arrays() {
  */
 function mactrack_ignore_regex_field(bool $for_site): array {
 	return [
-		'method'        => 'textbox',
+		'method'        => 'textarea',
 		'friendly_name' => __('Ports to Ignore (Regular Expression)', 'mactrack'),
-		'description'   => __('Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, \'(uplink|trunk)\' ignores every port whose name or alias contains uplink or trunk.  It is applied in addition to the %s expressions.',
+		'description'   => __('Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, \'(uplink|trunk)\' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions.',
 			($for_site ? __('every device in this site', 'mactrack') : __('this device', 'mactrack')),
 			($for_site ? __('device and global', 'mactrack') : __('site and global', 'mactrack')), 'mactrack'),
 		'value'         => '|arg1:ignorePortsRegex|',
 		'default'       => '',
-		'size'          => '70',
+		'class'         => 'textAreaNotes',
+		'textarea_rows' => '3',
+		'textarea_cols' => '80',
 		'max_length'    => '255'
 	];
 }

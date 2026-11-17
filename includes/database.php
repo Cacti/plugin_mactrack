@@ -1045,6 +1045,19 @@ function mactrack_rebuild_aggregated_ports(): bool {
  * @return bool True when a non-stale upgrade process is registered.
  */
 function mactrack_background_upgrade_running(): bool {
+	return mactrack_registered_process_running('mtupgrade', 'database');
+}
+
+/**
+ * Reports whether a process is registered under Cacti's process registry
+ * (taskid 0), has not outlived its timeout, and is still alive.
+ *
+ * @param string $tasktype Registry task type.
+ * @param string $taskname Registry task name.
+ *
+ * @return bool True when a non-stale process is registered.
+ */
+function mactrack_registered_process_running(string $tasktype, string $taskname): bool {
 	if (!db_table_exists('processes')) {
 		return false;
 	}
@@ -1057,7 +1070,7 @@ function mactrack_background_upgrade_running(): bool {
 		WHERE tasktype = ?
 		AND taskname = ?
 		AND taskid = 0',
-		['mtupgrade', 'database']);
+		[$tasktype, $taskname]);
 
 	if (!cacti_sizeof($process)) {
 		return false;
@@ -1717,7 +1730,17 @@ function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 	$data['keys'][]    = ['name' => 'scan_date', 'columns' => 'scan_date'];
 	$data['type']      = 'InnoDB';
 	$data['comment']   = '';
+	$ips_existed       = db_table_exists('mac_track_ips');
 	api_plugin_db_table_create('mactrack', 'mac_track_ips', $data);
+
+	if (!$ips_existed) {
+		// Setup loads this file without lib/mactrack_functions.php.
+		include_once(__DIR__ . '/../lib/mactrack_partitions.php');
+		include_once(__DIR__ . '/../lib/mactrack_partition_ops.php');
+		include_once(__DIR__ . '/../lib/mactrack_partition_rebuild.php');
+
+		mactrack_partition_fresh_install(null, 'mac_track_ips');
+	}
 
 	$data              = [];
 	$data['columns'][] = ['name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
@@ -1798,7 +1821,7 @@ function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 		// Setup loads this file without lib/mactrack_functions.php.
 		include_once(__DIR__ . '/../lib/mactrack_partitions.php');
 		include_once(__DIR__ . '/../lib/mactrack_partition_ops.php');
-		include_once(__DIR__ . '/../lib/mactrack_partition_convert.php');
+		include_once(__DIR__ . '/../lib/mactrack_partition_rebuild.php');
 
 		mactrack_partition_fresh_install();
 	}

@@ -230,7 +230,7 @@ function mactrack_partition_choose(string $wanted, int $scan_interval, int $rete
  * Reads and checks the partition layout of mac_track_ports.
  *
  * States: none (not partitioned); legacy (the daily TO_DAYS layout that
- * mactrack_convert.php builds, which is reported but never altered here);
+ * cli/upgrade_partitioning.php can rebuild, which is reported but never altered here);
  * range (a layout MacTrack builds: RANGE on UNIX_TIMESTAMP(scan_date),
  * valid names, strictly increasing integer bounds, dMaxValue last with
  * MAXVALUE); invalid, with the first rule broken in reason. Callers run
@@ -307,6 +307,27 @@ function mactrack_partition_layout(array $rows): array {
 }
 
 /**
+ * Tables MacTrack partitions by scan date.
+ */
+const MACTRACK_PARTITION_TABLES = ['mac_track_ports', 'mac_track_ips'];
+
+/**
+ * Throws unless a table is one MacTrack partitions by scan date. Table names
+ * cannot be bound as parameters, so every statement builder checks them here.
+ *
+ * @param string $table Table name.
+ *
+ * @throws InvalidArgumentException
+ *
+ * @return void
+ */
+function mactrack_partition_assert_table(string $table): void {
+	if (!in_array($table, MACTRACK_PARTITION_TABLES, true)) {
+		throw new InvalidArgumentException("Table '$table' is not partitioned by MacTrack");
+	}
+}
+
+/**
  * Throws unless a name may be used for a bounded partition: valid, and not
  * dMaxValue.
  *
@@ -360,19 +381,21 @@ function mactrack_partition_create_sql(array $bounds): string {
  *
  * @param string $name  New partition's name.
  * @param int    $bound Its VALUES LESS THAN bound.
+ * @param string $table Table to alter; mac_track_ports or mac_track_ips.
  *
- * @throws InvalidArgumentException For an invalid name or a bound below 1.
+ * @throws InvalidArgumentException For an invalid name, table or a bound below 1.
  *
  * @return string ALTER TABLE statement.
  */
-function mactrack_partition_split_sql(string $name, int $bound): string {
+function mactrack_partition_split_sql(string $name, int $bound, string $table = 'mac_track_ports'): string {
 	mactrack_partition_assert_name($name);
+	mactrack_partition_assert_table($table);
 
 	if ($bound < 1) {
 		throw new InvalidArgumentException('Partition bound must be positive');
 	}
 
-	return 'ALTER TABLE `mac_track_ports` REORGANIZE PARTITION `dMaxValue` INTO ('
+	return 'ALTER TABLE `' . $table . '` REORGANIZE PARTITION `dMaxValue` INTO ('
 		. 'PARTITION `' . $name . '` VALUES LESS THAN (' . $bound . '), '
 		. 'PARTITION `dMaxValue` VALUES LESS THAN MAXVALUE)';
 }
@@ -433,19 +456,22 @@ function mactrack_partition_exchange_sql(string $name, bool $without_validation)
  * dropped.
  *
  * @param string[] $names Partitions to drop.
+ * @param string   $table Table to alter; mac_track_ports or mac_track_ips.
  *
- * @throws InvalidArgumentException For an empty list or an invalid name.
+ * @throws InvalidArgumentException For an empty list, an invalid name or table.
  *
  * @return string ALTER TABLE statement.
  */
-function mactrack_partition_drop_sql(array $names): string {
+function mactrack_partition_drop_sql(array $names, string $table = 'mac_track_ports'): string {
 	if ($names === []) {
 		throw new InvalidArgumentException('No partitions to drop');
 	}
+
+	mactrack_partition_assert_table($table);
 
 	foreach ($names as $name) {
 		mactrack_partition_assert_name((string) $name);
 	}
 
-	return 'ALTER TABLE `mac_track_ports` DROP PARTITION `' . implode('`, `', $names) . '`';
+	return 'ALTER TABLE `' . $table . '` DROP PARTITION `' . implode('`, `', $names) . '`';
 }

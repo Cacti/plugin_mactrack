@@ -407,3 +407,116 @@ it('drops expired weeks and creates the next week before data arrives', function
 	expect($r['dropped'])->toBe(['w20261026']);
 	expect($r['created'])->toBe(['w20261116']);
 });
+
+it('drops expired IP partitions from the IP table without touching scan dates', function () {
+	mt_pm_db([
+		['d20261101', '1793491201'],
+		['d20261112', '1794528000'],
+		['dMaxValue', 'MAXVALUE'],
+	]);
+
+	$r = mactrack_partition_maintain(7, MT_PM_NOW, 'mac_track_ips');
+
+	expect($r['dropped'])->toBe(['d20261101']);
+	expect(mt_pm_ddl()[0])->toBe(mactrack_partition_drop_sql(['d20261101'], 'mac_track_ips'));
+	expect(mt_pm_prunes())->toBe([]);
+	expect(json_decode($GLOBALS['__test_config_options']['mt_partition_status'], true)['maintenance_ips']['dropped'])->toBe(['d20261101']);
+});
+
+it('creates daily IP partitions ahead even when the port size is per scan', function () {
+	mt_pm_db([
+		['d20261112', '1794528000'],
+		['dMaxValue', 'MAXVALUE'],
+	]);
+
+	$r = mactrack_partition_maintain(7, MT_PM_NOW, 'mac_track_ips');
+
+	expect($r['created'])->not->toBe([]);
+
+	foreach ($r['created'] as $name) {
+		expect($name)->toStartWith('d');
+	}
+
+	expect(mt_pm_ddl()[0])->toContain('ALTER TABLE `mac_track_ips` REORGANIZE PARTITION `dMaxValue`');
+});
+
+it('recovers IP rows stranded in dMaxValue instead of waiting for a scan to move them', function () {
+	mt_pm_db([
+		['d20261112', '1794528000'],
+		['dMaxValue', 'MAXVALUE'],
+	], ['stranded' => '1794600000']);
+
+	$r = mactrack_partition_maintain(7, MT_PM_NOW, 'mac_track_ips');
+
+	$name = 'r' . gmdate('YmdHis', 1794600000);
+
+	expect($r['reason'])->toBe('');
+	expect($r['created'][0])->toBe($name);
+	expect(mt_pm_ddl()[0])->toBe(mactrack_partition_split_sql($name, 1794600001, 'mac_track_ips'));
+});
+
+it('stops the IP maintenance when the recovery split fails', function () {
+	mt_pm_db([
+		['d20261112', '1794528000'],
+		['dMaxValue', 'MAXVALUE'],
+	], ['stranded' => '1794600000']);
+	mactrack_test_queue_return('db_execute_prepared', true);
+	mactrack_test_queue_return('db_execute_prepared', false);
+	mactrack_test_queue_return('db_execute_prepared', false);
+	mactrack_test_queue_return('db_execute_prepared', false);
+
+	expect(mactrack_partition_maintain(7, MT_PM_NOW, 'mac_track_ips')['reason'])->toBe('recovery split failed');
+});
+
+it('leaves an unpartitioned IP table to the row-deleting retention', function () {
+	mt_pm_db([]);
+
+	$r = mactrack_partition_maintain(7, MT_PM_NOW, 'mac_track_ips');
+
+	expect($r['reason'])->toBe('layout none');
+	expect(mt_pm_ddl())->toBe([]);
+});
+
+it('only maintains the tables MacTrack partitions', function () {
+	expect(fn () => mactrack_partition_maintain(7, MT_PM_NOW, 'mac_track_devices'))->toThrow(InvalidArgumentException::class);
+});
+
+it('maintains the IP table by partition when it uses the scan-date layout', function () {
+	set_config_option('mt_data_retention', '7');
+	set_config_option('mt_data_retention_ip', '3');
+	mt_pm_db([
+		['d20261101', '1793491201'],
+		['d20261112', '1794528000'],
+		['dMaxValue', 'MAXVALUE'],
+	]);
+
+	perform_mactrack_db_maint();
+
+	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
+	expect(array_filter($sql, fn ($s) => strpos($s, 'DELETE FROM mac_track_ips') !== false))->toBe([]);
+	expect(array_filter($sql, fn ($s) => strpos($s, 'ALTER TABLE `mac_track_ips`') !== false))->not->toBe([]);
+});
+
+it('forgets a maintenance window missed during a rebuild once the maintenance runs', function () {
+	set_config_option('mt_data_retention', '7');
+	set_config_option('mt_data_retention_ip', '3');
+	set_config_option('mt_db_maint_missed', 'on');
+	mt_pm_db([]);
+
+	perform_mactrack_db_maint();
+
+	expect($GLOBALS['__test_config_options']['mt_db_maint_missed'])->toBe('');
+	expect(array_filter(array_column($GLOBALS['__test_db_calls'], 'sql'), fn ($s) => strpos($s, 'DELETE FROM mac_track_ips') !== false))->not->toBe([]);
+});
+
+it('keeps deleting IP rows by date while the IP table is not partitioned', function () {
+	set_config_option('mt_data_retention', '7');
+	set_config_option('mt_data_retention_ip', '3');
+	mt_pm_db([]);
+
+	perform_mactrack_db_maint();
+
+	$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => strpos($c['sql'], 'DELETE FROM mac_track_ips') !== false));
+	expect($deletes)->toHaveCount(1);
+	expect($deletes[0]['params'][0])->toBe(3);
+});

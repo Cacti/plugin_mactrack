@@ -375,28 +375,31 @@ function form_aggregated_actions(): void {
  * @return void
  */
 function api_mactrack_authorize_mac_addresses($mac_address, $ip_address): void {
-	db_execute_prepared('UPDATE mac_track_ports
-		SET authorized=1
-		WHERE mac_address = ?',
-		[$mac_address]);
+	// History is not changed while the port and IP tables are being rebuilt.
+	mactrack_partition_history_run(function () use ($mac_address, $ip_address): void {
+		db_execute_prepared('UPDATE mac_track_ports
+			SET authorized=1
+			WHERE mac_address = ?',
+			[$mac_address]);
 
-	db_execute_prepared('UPDATE mac_track_aggregated_ports
-		SET authorized=1
-		WHERE mac_address = ?',
-		[$mac_address]);
+		db_execute_prepared('UPDATE mac_track_aggregated_ports
+			SET authorized=1
+			WHERE mac_address = ?',
+			[$mac_address]);
 
-	db_execute_prepared('UPDATE mac_track_temp_ports
-		SET authorized=1
-		WHERE mac_address = ?',
-		[$mac_address]);
+		db_execute_prepared('UPDATE mac_track_temp_ports
+			SET authorized=1
+			WHERE mac_address = ?',
+			[$mac_address]);
 
-	db_execute_prepared('REPLACE INTO mac_track_macauth
-		(mac_address, description, added_by)
-		VALUES (?, ?, ?)',
-		[$mac_address, 'Added from MacView: ' . $ip_address, $_SESSION['sess_user_id']]);
+		db_execute_prepared('REPLACE INTO mac_track_macauth
+			(mac_address, description, added_by)
+			VALUES (?, ?, ?)',
+			[$mac_address, 'Added from MacView: ' . $ip_address, $_SESSION['sess_user_id']]);
 
-	cacti_log('AUDIT: MAC Address `' . $mac_address . '` is authorized by ' .
-		db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', [$_SESSION['sess_user_id']]), false, 'MACTRACK');
+		cacti_log('AUDIT: MAC Address `' . $mac_address . '` is authorized by ' .
+			db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', [$_SESSION['sess_user_id']]), false, 'MACTRACK');
+	});
 }
 
 /**
@@ -411,22 +414,25 @@ function api_mactrack_authorize_mac_addresses($mac_address, $ip_address): void {
  * @return void
  */
 function api_mactrack_revoke_mac_addresses($mac_address): void {
-	db_execute_prepared('UPDATE mac_track_ports
-		SET authorized=0
-		WHERE mac_address = ?',
-		[$mac_address]);
+	// History is not changed while the port and IP tables are being rebuilt.
+	mactrack_partition_history_run(function () use ($mac_address): void {
+		db_execute_prepared('UPDATE mac_track_ports
+			SET authorized=0
+			WHERE mac_address = ?',
+			[$mac_address]);
 
-	db_execute_prepared('UPDATE mac_track_aggregated_ports
-		SET authorized=0
-		WHERE mac_address = ?',
-		[$mac_address]);
+		db_execute_prepared('UPDATE mac_track_aggregated_ports
+			SET authorized=0
+			WHERE mac_address = ?',
+			[$mac_address]);
 
-	db_execute_prepared('DELETE FROM mac_track_macauth
-		WHERE mac_address = ?',
-		[$mac_address]);
+		db_execute_prepared('DELETE FROM mac_track_macauth
+			WHERE mac_address = ?',
+			[$mac_address]);
 
-	cacti_log('AUDIT: MAC Address `' . $mac_address . '` is revoked by ' .
-		db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', [$_SESSION['sess_user_id']]), false, 'MACTRACK');
+		cacti_log('AUDIT: MAC Address `' . $mac_address . '` is revoked by ' .
+			db_fetch_cell_prepared('SELECT full_name FROM user_auth WHERE id = ?', [$_SESSION['sess_user_id']]), false, 'MACTRACK');
+	});
 }
 
 /**
@@ -811,6 +817,7 @@ function mactrack_view_macs(): void {
 	global $mactrack_view_macs_actions, $item_rows;
 
 	mactrack_tabs();
+	mactrack_partition_rebuild_notice();
 
 	html_start_box($title, '100%', '', '3', 'center', '');
 	mactrack_mac_filter();
@@ -1051,6 +1058,7 @@ function mactrack_view_aggregated_macs(): void {
 	global $mactrack_view_agg_macs_actions, $item_rows;
 
 	mactrack_tabs();
+	mactrack_partition_rebuild_notice();
 
 	html_start_box($title, '100%', '', '3', 'center', '');
 	mactrack_mac_filter();

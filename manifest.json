@@ -1,5 +1,6 @@
 {
     "tombstones": [
+        "mactrack_convert.php",
         "mise.toml",
         "phpstan-baseline.neon",
         "psalm.xml",
@@ -25,7 +26,6 @@
         "mactrack_actions.php",
         "mactrack_ajax.php",
         "mactrack_ajax_admin.php",
-        "mactrack_convert.php",
         "mactrack_device_types.php",
         "mactrack_devices.php",
         "mactrack_import_ouidb.php",

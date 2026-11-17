@@ -131,11 +131,25 @@ if (!$registered && !$force) {
 }
 
 // The scan lock keeps the upgrade apart from a scan and from a port table
-// conversion (mactrack_convert.php): both write mac_track_ports, which the
+// conversion (cli/upgrade_partitioning.php): both write mac_track_ports, which the
 // upgrade rewrites in place. Held until exit; the server frees it if the
 // process dies. The console relaunches the upgrade once the lock is free.
 if ((string) db_fetch_cell_prepared('SELECT GET_LOCK(?, 0)', [mactrack_lock_name('scan')]) !== '1') {
 	upgrade_debug('A MacTrack scan or port table conversion is running; the upgrade will be retried');
+
+	if ($registered) {
+		unregister_process('mtupgrade', 'database', 0);
+	}
+
+	exit(0);
+}
+
+// A partitioning rebuild that stopped leaves the live port and IP tables
+// partial and its <table>_rebuild tables holding the rest. An upgrade that
+// rewrites them now (MAC normalization, for example) would be marked complete
+// before the copy restores the rows it never saw, so wait for the rebuild.
+if (function_exists('mactrack_partition_rebuild_pending') && mactrack_partition_rebuild_pending() !== []) {
+	upgrade_debug('A MacTrack partitioning rebuild is unfinished; the upgrade will be retried');
 
 	if ($registered) {
 		unregister_process('mtupgrade', 'database', 0);

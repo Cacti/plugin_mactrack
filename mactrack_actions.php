@@ -147,16 +147,19 @@ function api_mactrack_device_save($device_id, $host_id, $site_id, $hostname,
  * @return void
  */
 function api_mactrack_device_remove($device_id): void {
-	db_execute_prepared('DELETE FROM mac_track_devices WHERE device_id = ?', [$device_id]);
-	db_execute_prepared('DELETE FROM mac_track_aggregated_ports WHERE device_id = ?', [$device_id]);
-	db_execute_prepared('DELETE FROM mac_track_interfaces WHERE device_id = ?', [$device_id]);
-	db_execute_prepared('DELETE FROM mac_track_ips WHERE device_id = ?', [$device_id]);
-	db_execute_prepared('DELETE FROM mac_track_dot1x WHERE device_id = ?', [$device_id]);
-	db_execute_prepared('DELETE FROM mac_track_ports WHERE device_id = ?', [$device_id]);
-	db_execute_prepared('DELETE FROM mac_track_processes WHERE device_id = ?', [$device_id]);
-	db_execute_prepared('DELETE FROM mac_track_temp_ports WHERE device_id = ?', [$device_id]);
-	db_execute_prepared('DELETE FROM mac_track_vlans WHERE device_id = ?', [$device_id]);
-	db_execute_prepared('DELETE FROM mac_track_interface_graphs WHERE device_id = ?', [$device_id]);
+	// History is not changed while the port and IP tables are being rebuilt.
+	mactrack_partition_history_run(function () use ($device_id): void {
+		db_execute_prepared('DELETE FROM mac_track_devices WHERE device_id = ?', [$device_id]);
+		db_execute_prepared('DELETE FROM mac_track_aggregated_ports WHERE device_id = ?', [$device_id]);
+		db_execute_prepared('DELETE FROM mac_track_interfaces WHERE device_id = ?', [$device_id]);
+		db_execute_prepared('DELETE FROM mac_track_ips WHERE device_id = ?', [$device_id]);
+		db_execute_prepared('DELETE FROM mac_track_dot1x WHERE device_id = ?', [$device_id]);
+		db_execute_prepared('DELETE FROM mac_track_ports WHERE device_id = ?', [$device_id]);
+		db_execute_prepared('DELETE FROM mac_track_processes WHERE device_id = ?', [$device_id]);
+		db_execute_prepared('DELETE FROM mac_track_temp_ports WHERE device_id = ?', [$device_id]);
+		db_execute_prepared('DELETE FROM mac_track_vlans WHERE device_id = ?', [$device_id]);
+		db_execute_prepared('DELETE FROM mac_track_interface_graphs WHERE device_id = ?', [$device_id]);
+	});
 }
 
 /**
@@ -215,17 +218,20 @@ function api_mactrack_site_save($site_id, $site_name, $customer_contact, $netops
  * @return void
  */
 function api_mactrack_site_remove($site_id): void {
-	db_execute_prepared('DELETE FROM mac_track_sites WHERE site_id = ?', [$site_id]);
-	db_execute_prepared('DELETE FROM mac_track_devices WHERE site_id = ?', [$site_id]);
-	db_execute_prepared('DELETE FROM mac_track_aggregated_ports WHERE site_id = ?', [$site_id]);
-	db_execute_prepared('DELETE FROM mac_track_interfaces WHERE site_id = ?', [$site_id]);
-	db_execute_prepared('DELETE FROM mac_track_ips WHERE site_id = ?', [$site_id]);
-	db_execute_prepared('DELETE FROM mac_track_dot1x WHERE site_id = ?', [$site_id]);
-	db_execute_prepared('DELETE FROM mac_track_arp WHERE site_id = ?', [$site_id]);
-	db_execute_prepared('DELETE FROM mac_track_ip_ranges WHERE site_id = ?', [$site_id]);
-	db_execute_prepared('DELETE FROM mac_track_ports WHERE site_id = ?', [$site_id]);
-	db_execute_prepared('DELETE FROM mac_track_temp_ports WHERE site_id = ?', [$site_id]);
-	db_execute_prepared('DELETE FROM mac_track_vlans WHERE site_id = ?', [$site_id]);
+	// History is not changed while the port and IP tables are being rebuilt.
+	mactrack_partition_history_run(function () use ($site_id): void {
+		db_execute_prepared('DELETE FROM mac_track_sites WHERE site_id = ?', [$site_id]);
+		db_execute_prepared('DELETE FROM mac_track_devices WHERE site_id = ?', [$site_id]);
+		db_execute_prepared('DELETE FROM mac_track_aggregated_ports WHERE site_id = ?', [$site_id]);
+		db_execute_prepared('DELETE FROM mac_track_interfaces WHERE site_id = ?', [$site_id]);
+		db_execute_prepared('DELETE FROM mac_track_ips WHERE site_id = ?', [$site_id]);
+		db_execute_prepared('DELETE FROM mac_track_dot1x WHERE site_id = ?', [$site_id]);
+		db_execute_prepared('DELETE FROM mac_track_arp WHERE site_id = ?', [$site_id]);
+		db_execute_prepared('DELETE FROM mac_track_ip_ranges WHERE site_id = ?', [$site_id]);
+		db_execute_prepared('DELETE FROM mac_track_ports WHERE site_id = ?', [$site_id]);
+		db_execute_prepared('DELETE FROM mac_track_temp_ports WHERE site_id = ?', [$site_id]);
+		db_execute_prepared('DELETE FROM mac_track_vlans WHERE site_id = ?', [$site_id]);
+	});
 }
 
 /**

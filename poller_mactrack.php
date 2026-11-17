@@ -176,6 +176,24 @@ if (function_exists('mactrack_background_upgrade_running')) {
 	}
 }
 
+// A partitioning rebuild renames mac_track_ports and mac_track_ips aside and
+// copies them back (cli/upgrade_partitioning.php). Until it finishes the live
+// tables are incomplete, so a scan would store its results in a partial table.
+if (function_exists('mactrack_partition_rebuild_pending') && mactrack_partition_rebuild_pending() !== []) {
+	mactrack_debug('Deferring the Mactrack poller run while the port and IP tables are repartitioned');
+
+	mactrack_poller_deferred('partition_rebuild');
+
+	// A maintenance window that passes meanwhile is run after the rebuild.
+	mactrack_partition_rebuild_note_maintenance();
+
+	if (function_exists('unregister_process')) {
+		unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
+	}
+
+	exit(0);
+}
+
 // not deferring: drop the note the Process Status page shows
 mactrack_poller_deferred_clear();
 
@@ -365,7 +383,10 @@ if ($collect_frequency == 'disabled') {
 				log_mactrack_statistics('collect');
 			}
 
-			if ($time_till_next_db_maint < 0) {
+			// A window that passed during a partitioning rebuild runs now.
+			$maint_missed = (string) read_config_option('mt_db_maint_missed', true) === 'on';
+
+			if ($time_till_next_db_maint < 0 || $maint_missed) {
 				// take time and log performance data
 				$start = microtime(true);
 

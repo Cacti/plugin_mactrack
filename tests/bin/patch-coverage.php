@@ -177,7 +177,6 @@ $unmeasured_allowlist = [
 	'mactrack_actions.php',
 	'mactrack_ajax.php',
 	'mactrack_ajax_admin.php',
-	'mactrack_convert.php',
 	'mactrack_device_types.php',
 	'mactrack_devices.php',
 	'mactrack_import_ouidb.php',

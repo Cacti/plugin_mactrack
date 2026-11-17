@@ -203,6 +203,45 @@ it('words the shared form field for a device and for a site', function () {
 	expect($site['description'])->toContain('every device in this site')->toContain('device and global');
 });
 
+it('uses a text area like the Ports to Ignore of a device in every form', function () {
+	global $settings, $settings_user, $tabs_graphs;
+
+	$settings      = ['mail' => [], 'path' => []];
+	$settings_user = [];
+	$tabs_graphs   = [];
+	mactrack_config_settings();
+
+	foreach ([mactrack_ignore_regex_field(false), mactrack_ignore_regex_field(true), $settings['mactrack']['mt_ignorePortsRegex']] as $field) {
+		expect($field['method'])->toBe('textarea');
+		expect($field['class'])->toBe('textAreaNotes');
+		expect($field['textarea_rows'])->toBe('3');
+		expect($field['textarea_cols'])->toBe('80');
+		expect($field['max_length'])->toBe('255');
+		expect($field)->not->toHaveKey('size');
+		expect($field['description'])->toContain('own line');
+	}
+});
+
+it('treats each line of an expression as its own', function () {
+	$compiled = mactrack_compile_port_regex("uplink\r\n  ^Po[0-9]+\$ \n\n");
+
+	expect(preg_match($compiled, 'UPLINK-1'))->toBe(1);
+	expect(preg_match($compiled, 'Po12'))->toBe(1);
+	expect(preg_match($compiled, 'Gi1/1'))->toBe(0);
+	expect(mactrack_compile_port_regex("uplink\n"))->toBe("\x01uplink\x01i");
+	expect(port_regex_quiet(fn () => mactrack_compile_port_regex("uplink\n(bad")))->toBe('');
+	expect(mactrack_port_regex_is_valid("uplink\ntrunk"))->toBeTrue();
+	expect(mactrack_validate_port_regex_field("  uplink\ntrunk\n", 'ignorePortsRegex'))->toBe("uplink\ntrunk");
+});
+
+it('skips the ports of any line of a device expression', function () {
+	$this->device['ignorePortsRegex'] = "uplink\n^Po[0-9]+\$";
+
+	db_store_device_port_results($this->device, $this->ports, '2026-11-12 00:00:00');
+
+	expect(port_regex_stored_macs())->toBe(['001122000001']);
+});
+
 it('flags a pending upgrade when an installed version lacks the regular expression columns', function (array $devices, array $sites, bool $pending) {
 	mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_aggregated_ports'", []);
 	mactrack_test_queue_return_for('db_fetch_assoc', "SHOW TABLES LIKE 'mac_track_aggregated_ports_upgrade'", []);

@@ -42,6 +42,34 @@ if (!mactrack_utilities_may_run(get_request_var('action'), $_SERVER['REQUEST_MET
 	exit;
 }
 
+// Actions that change or reconcile the history hold the partition lock, which a
+// rebuild of the port and IP tables holds for its whole run, and are refused
+// while one is running or unfinished.
+$history_locked = false;
+
+if (in_array(get_request_var('action'), [
+	'mactrack_utilities_truncate_ports_table',
+	'mactrack_utilities_rebuild_scan_dates',
+	'mactrack_utilities_purge_aggregated_data',
+	'mactrack_utilities_recreate_aggregated_data',
+], true)) {
+	if (!mactrack_partition_history_begin()) {
+		top_header();
+
+		mactrack_utilities();
+
+		html_start_box(__('Mactrack Database Results', 'mactrack'), '100%', '', '3', 'center', '');
+		print '<td>' . html_escape(mactrack_partition_history_message()) . '</td>';
+		html_end_box();
+
+		bottom_footer();
+
+		exit;
+	}
+
+	$history_locked = true;
+}
+
 switch (get_request_var('action')) {
 	case 'mactrack_utilities_truncate_ports_table':
 		mactrack_utilities_ports_clear();
@@ -138,6 +166,10 @@ switch (get_request_var('action')) {
 		bottom_footer();
 
 		break;
+}
+
+if ($history_locked) {
+	mactrack_partition_history_end();
 }
 
 /* -----------------------
@@ -758,11 +790,11 @@ function mactrack_utilities_partition_status(): void {
 	$row(__('Last Scan Note', 'mactrack'), $r['last_scan_reason'] !== '' ? $r['last_scan_reason'] : $none);
 
 	if ($r['converting'] !== null) {
-		$row(__('Conversion', 'mactrack'), __('Running since %s', date('Y-m-d H:i:s', $r['converting']), 'mactrack'));
+		$row(__('Rebuild', 'mactrack'), __('Running since %s', date('Y-m-d H:i:s', $r['converting']), 'mactrack'));
 	} elseif ($r['conversion'] !== null) {
 		$c = $r['conversion'];
 
-		$row(__('Last Conversion', 'mactrack'), $c['ok']
+		$row(__('Last Rebuild', 'mactrack'), $c['ok']
 			? trim(__('%s: %d rows into %d partitions', date('Y-m-d H:i:s', (int) $c['time']), $c['rows'], $c['partitions'], 'mactrack') . ' ' . $c['reason'])
 			: __('%s: failed. %s', date('Y-m-d H:i:s', (int) $c['time']), $c['reason'], 'mactrack'));
 	}
@@ -773,6 +805,14 @@ function mactrack_utilities_partition_status(): void {
 		$row(__('Last Maintenance', 'mactrack'), $none);
 	} else {
 		$row(__('Last Maintenance', 'mactrack'), trim(__('%s: %d partitions dropped, %d created', date('Y-m-d H:i:s', (int) $m['time']), count($m['dropped']), count($m['created']), 'mactrack') . ' ' . $m['reason']));
+	}
+
+	$ips = mactrack_partition_state('mac_track_ips')['layout'];
+
+	$row(__('IP Table Layout', 'mactrack'), trim($layouts[$ips['state']] . ' ' . $ips['reason']));
+
+	if ($ips['state'] === 'range') {
+		$row(__('IP Table Partitions', 'mactrack'), (string) count($ips['partitions']));
 	}
 
 	html_end_box();
@@ -822,43 +862,36 @@ function mactrack_utilities_optimize_ports(): void {
 }
 
 /**
- * Starts the conversion of mac_track_ports to the scan-date layout in the
- * background (mactrack_convert.php), because it can take hours.
+ * Starts the partitioning rebuild of the port and IP tables in the
+ * background (cli/upgrade_partitioning.php), because it can take hours.
  *
- * Runs only on a POST (see mactrack_utilities_may_run()). The conversion
- * itself refuses to start when a scan or another conversion holds the
+ * Runs only on a POST (see mactrack_utilities_may_run()). The rebuild
+ * itself refuses to start when a scan or another rebuild holds the
  * scan lock.
  *
  * @return void
  *
  * @global array $config Cacti global configuration array; used to build
- *                       the conversion script's path.
+ *                       the script's path.
  */
 function mactrack_utilities_convert_ports(): void {
 	global $config;
 
 	$scheme = get_request_var('partition_scheme');
-	$layout = mactrack_partition_state()['layout']['state'];
-	$busy   = (string) read_config_option('mt_partition_converting', true) !== '';
+	$busy   = mactrack_partition_rebuild_state() === 'running';
 
 	if (!in_array($scheme, ['daily', 'weekly', 'disabled'], true)) {
-		$message = __('Select daily, weekly or disabled partitioning before starting the conversion.', 'mactrack');
+		$message = __('Select daily, weekly or disabled partitioning before starting the rebuild.', 'mactrack');
 	} elseif ($busy) {
-		$message = __('A conversion is already running. The partition status page shows when it has finished.', 'mactrack');
-	} elseif ($layout === 'invalid') {
-		$message = __('The port table has partitions MacTrack does not recognize, so it cannot be converted. The partition status page shows why.', 'mactrack');
+		$message = __('A rebuild is already running. The partition status page shows when it has finished.', 'mactrack');
 	} else {
 		// Only allowlisted schemes reach the CLI, and every argument is quoted.
-		$args = '-q ' . cacti_escapeshellarg($config['base_path'] . '/plugins/mactrack/mactrack_convert.php')
+		$args = '-q ' . cacti_escapeshellarg($config['base_path'] . '/plugins/mactrack/cli/upgrade_partitioning.php')
 			. ' ' . cacti_escapeshellarg('--partition=' . $scheme);
-
-		if (get_request_var('keep_old') === 'on') {
-			$args .= ' --keep-old';
-		}
 
 		exec_background(read_config_option('path_php_binary'), $args);
 
-		$message = __('The conversion was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another conversion is running.', 'mactrack');
+		$message = __('The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running.', 'mactrack');
 	}
 
 	top_header();
@@ -1054,7 +1087,7 @@ function mactrack_utilities(): void {
 			<?php print mactrack_utilities_action_link('mactrack_utilities_convert_ports', __('Configure Port Partitioning', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
-			<?php print __('Choose daily or weekly partitions, or disable partitioning. Converting copies the full port history in the background; scheduled scans are skipped meanwhile. You can keep the original table as a backup.', 'mactrack'); ?>
+			<?php print __('Choose daily or weekly partitions, or disable partitioning, for the port (MAC address) and IP address tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC and IP address searching shows a maintenance message meanwhile.', 'mactrack'); ?>
 		</td>
 	</tr>
 
@@ -1083,15 +1116,13 @@ function mactrack_utilities(): void {
 }
 
 /**
- * Options shared with the conversion CLI, submitted through Cacti's CSRF form.
- * The setting is saved by the converter only after the table swap succeeds.
+ * Options shared with the rebuild CLI, submitted through Cacti's CSRF form.
+ * The CLI saves the choice as the Port Partition Size setting.
  *
  * @return string
  */
 function mactrack_utilities_conversion_fields(): string {
-	$selected = mactrack_partition_state()['layout']['state'] === 'none'
-		? 'disabled'
-		: (['day' => 'daily', 'week' => 'weekly'][(string) read_config_option('mt_partition_granularity')] ?? 'weekly');
+	$selected = ['day' => 'daily', 'week' => 'weekly', 'disabled' => 'disabled'][(string) read_config_option('mt_partition_granularity')] ?? 'weekly';
 	$options  = ['daily' => __('Daily', 'mactrack'), 'weekly' => __('Weekly', 'mactrack'), 'disabled' => __('Disabled', 'mactrack')];
 	$html     = '<p><label for="partition_scheme">' . html_escape(__('Partitioning', 'mactrack')) . '</label> '
 		. '<select id="partition_scheme" name="partition_scheme">';
@@ -1100,6 +1131,5 @@ function mactrack_utilities_conversion_fields(): string {
 		$html .= '<option value="' . $value . '"' . ($value === $selected ? ' selected' : '') . '>' . html_escape($label) . '</option>';
 	}
 
-	return $html . '</select></p><p><label><input type="checkbox" name="keep_old" value="on"> '
-		. html_escape(__('Keep the original table as a backup', 'mactrack')) . '</label></p>';
+	return $html . '</select></p>';
 }
