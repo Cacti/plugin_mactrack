@@ -3871,6 +3871,10 @@ msgstr "請輸入要自動授權的MAC地址或Mac地址匹配字符串。如果
 msgid "Please add a reason for this entry."
 msgstr "請為此條目添加原因。"
 
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr ""
+
 #, fuzzy
 #~| msgid "Change Device Port Values"
 #~ msgid "Convert Port Table"
