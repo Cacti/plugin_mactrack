@@ -31,7 +31,7 @@ function mactrack_recovery_scenario(string $scenario): array {
 	$error = stream_get_contents($pipes[2]);
 	fclose($pipes[1]);
 	fclose($pipes[2]);
-	expect(proc_close($process), $error)->toBe(0);
+	expect(proc_close($process))->toBe(0, $error);
 
 	return json_decode($output, true, 512, JSON_THROW_ON_ERROR);
 }

@@ -224,9 +224,9 @@ function heartbeat_process(...$args) {
 function cacti_log(...$args) {
 }
 
-$db->exec("CREATE DATABASE $database_default");
+fixture_query("CREATE DATABASE `$database_default`");
 try {
-	$db->exec("USE $database_default");
+	fixture_query("USE `$database_default`");
 	$db->exec("SET time_zone = '+00:00'");
 	$scenario = $argv[1];
 	if (str_starts_with($scenario, 'aggregate-')) {
@@ -266,7 +266,7 @@ try {
 		$scan = '2026-11-16 12:00:00';
 		$epoch = strtotime($scan . ' UTC');
 		$partition = mactrack_partition_name('scan', $epoch);
-		$db->exec('ALTER TABLE mac_track_ports ' . mactrack_partition_create_sql([$partition => $epoch + 1]));
+		fixture_query('ALTER TABLE mac_track_ports ' . mactrack_partition_create_sql([$partition => $epoch + 1]));
 		$insert = $db->prepare('INSERT INTO mac_track_temp_ports (site_id, device_id, mac_address, port_number, scan_date) VALUES (1, 1, ?, ?, ?)');
 		$db->beginTransaction();
 		for ($i = 0; $i < 1001; $i++) {
@@ -297,5 +297,5 @@ try {
 	}
 	print json_encode($result, JSON_THROW_ON_ERROR) . PHP_EOL;
 } finally {
-	$db->exec("DROP DATABASE $database_default");
+	fixture_query("DROP DATABASE `$database_default`");
 }
