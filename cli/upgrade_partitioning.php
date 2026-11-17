@@ -201,7 +201,7 @@ function display_help(): void {
 	mactrack_upart_out('usage: upgrade_partitioning.php [--partition=daily|weekly|disabled] [--debug] [--version] [--help]');
 	mactrack_upart_out('');
 	mactrack_upart_out('Checks how the MAC address (mac_track_ports) and IP address (mac_track_ips)');
-	mactrack_upart_out('tables are partitioned. Without --partition, the Port Partition Size setting');
+	mactrack_upart_out('tables are partitioned. Without --partition, the Port and IP Address Partition Size setting');
 	mactrack_upart_out('is the scheme; a table that already follows it is left alone and reported.');
 	mactrack_upart_out('A table that has drifted from the scheme, or is not partitioned as asked, is');
 	mactrack_upart_out('rebuilt: renamed aside, created again with the retention and partitioning');
@@ -212,7 +212,7 @@ function display_help(): void {
 	mactrack_upart_out('until it finishes, which can take hours on a large history. Run it off hours.');
 	mactrack_upart_out('');
 	mactrack_upart_out('--partition=SCHEME - Rebuild to daily, weekly or disabled (unpartitioned) and');
-	mactrack_upart_out('                     save it as the Port Partition Size setting');
+	mactrack_upart_out('                     save it as the Port and IP Address Partition Size setting');
 	mactrack_upart_out('--debug            - Report every scan date copied');
 	mactrack_upart_out('--version          - Display the version');
 	mactrack_upart_out('--help             - Display this help message');
@@ -240,7 +240,7 @@ function mactrack_upart_signal(int $signo): void {
 // @codeCoverageIgnoreEnd
 
 /**
- * Maps the Port Partition Size setting to a rebuild scheme.
+ * Maps the Port and IP Address Partition Size setting to a rebuild scheme.
  *
  * @return string|null day, week or disabled; null for the per-scan and hourly
  *                     sizes, which the poller maintains and this tool cannot build.
@@ -298,7 +298,7 @@ function mactrack_upart_main(array $argv): int {
 	$scheme = $options['scheme'] ?? mactrack_upart_setting_scheme();
 
 	if ($scheme === null) {
-		mactrack_upart_out('NOTE: The Port Partition Size setting is one per scan or hourly, which the poller maintains and this tool does not build. Nothing was changed; use --partition to choose daily, weekly or disabled.');
+		mactrack_upart_out('NOTE: The Port and IP Address Partition Size setting is one per scan or hourly, which the poller maintains and this tool does not build. Nothing was changed; use --partition to choose daily, weekly or disabled.');
 
 		return 0;
 	}
@@ -334,7 +334,7 @@ function mactrack_upart_upgrade_active(): bool {
  *
  * @param string $scheme   day, week or disabled.
  * @param bool   $explicit True when --partition chose it, so it is saved as
- *                         the Port Partition Size setting.
+ *                         the Port and IP Address Partition Size setting.
  * @param int    $pause    Seconds between DDL retries; tests pass 0.
  *
  * @return int Exit status.
@@ -398,7 +398,7 @@ function mactrack_upart_run(string $scheme, bool $explicit, int $pause = 1): int
 }
 
 /**
- * Saves the scheme as the Port Partition Size setting.
+ * Saves the scheme as the Port and IP Address Partition Size setting.
  *
  * @param string $scheme day, week or disabled.
  *
@@ -406,7 +406,7 @@ function mactrack_upart_run(string $scheme, bool $explicit, int $pause = 1): int
  */
 function mactrack_upart_save_setting(string $scheme): void {
 	if (mactrack_upart_setting_scheme() !== $scheme) {
-		mactrack_upart_out('NOTE: Saving the Port Partition Size setting as ' . mactrack_upart_scheme_name($scheme) . '.');
+		mactrack_upart_out('NOTE: Saving the Port and IP Address Partition Size setting as ' . mactrack_upart_scheme_name($scheme) . '.');
 	}
 
 	set_config_option('mt_partition_granularity', $scheme);

@@ -31,7 +31,7 @@ const MT_UP_ACTIONS = [
 	'mactrack_refresh_oui_database',
 	'mactrack_utilities_rebuild_scan_dates',
 	'mactrack_utilities_optimize_ports',
-	'mactrack_utilities_convert_ports',
+	'mactrack_utilities_convert_partitions',
 ];
 
 it('lists every Utilities action that changes data', function () {
@@ -41,6 +41,17 @@ it('lists every Utilities action that changes data', function () {
 it('gives each such action a confirmation message', function () {
 	foreach (mactrack_utilities_post_actions() as $message) {
 		expect($message)->toBeString()->not->toBe('');
+	}
+});
+
+it('gives each such action its own heading instead of a generic question', function () {
+	$titles = mactrack_utilities_post_titles();
+
+	expect(array_keys($titles))->toEqualCanonicalizing(MT_UP_ACTIONS);
+	expect($titles['mactrack_refresh_oui_database'])->toBe('Rebuild IEEE Vendor MAC/OUI Database');
+
+	foreach ($titles as $title) {
+		expect($title)->toBeString()->not->toBe('')->not->toBe('Are You Sure?');
 	}
 });
 

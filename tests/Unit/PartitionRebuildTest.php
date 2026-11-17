@@ -697,7 +697,7 @@ describe('run', function () {
 		[$rc, $out] = mt_ur_capture(fn () => mactrack_upart_run('disabled', true, 0));
 
 		expect($rc)->toBe(0);
-		expect($out)->toContain('Saving the Port Partition Size setting as disabled');
+		expect($out)->toContain('Saving the Port and IP Address Partition Size setting as disabled');
 		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe('disabled');
 	});
 
@@ -708,7 +708,7 @@ describe('run', function () {
 
 		[, $out] = mt_ur_capture(fn () => mactrack_upart_run('disabled', true, 0));
 
-		expect($out)->not->toContain('Saving the Port Partition Size');
+		expect($out)->not->toContain('Saving the Port and IP Address Partition Size');
 		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe('disabled');
 	});
 

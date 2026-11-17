@@ -20,7 +20,7 @@ beforeAll(function () {
 	mactrack_test_load(dirname(__DIR__, 2) . '/lib/mactrack_functions.php');
 });
 
-foreach (['conversion_fields', 'post_form', 'action_link', 'convert_ports', 'confirm', 'rebuild_scan_dates', 'busy_message'] as $function) {
+foreach (['conversion_fields', 'post_form', 'action_link', 'convert_partitions', 'confirm', 'rebuild_scan_dates', 'busy_message'] as $function) {
 	mactrack_test_load_function('mactrack_utilities.php', 'mactrack_utilities_' . $function);
 }
 mactrack_test_load_function('mactrack_utilities.php', 'mactrack_utilities');
@@ -48,7 +48,7 @@ afterEach(function () {
 });
 
 it('offers daily weekly and disabled in a POST form without a backup option', function () {
-	$html = mactrack_utilities_post_form('mactrack_utilities_convert_ports', 'Continue');
+	$html = mactrack_utilities_post_form('mactrack_utilities_convert_partitions', 'Continue');
 	$dom  = new DOMDocument();
 	$dom->loadHTML($html);
 	$xpath = new DOMXPath($dom);
@@ -65,18 +65,35 @@ it('preselects the saved setting, disabled included', function (string $saved, s
 	expect(mactrack_utilities_post_form('mactrack_utilities_perform_db_maint', 'Continue'))->not->toContain('partition_scheme');
 })->with([['day', 'daily'], ['week', 'weekly'], ['disabled', 'disabled'], ['hour', 'weekly']]);
 
+it('puts Cancel and Continue in the one form so they sit side by side', function () {
+	ob_start();
+	mactrack_utilities_confirm('mactrack_refresh_oui_database');
+	$html = ob_get_clean();
+
+	$dom = new DOMDocument();
+	$dom->loadHTML($html);
+	$xpath = new DOMXPath($dom);
+
+	expect($xpath->query('//form//a[@href="mactrack_utilities.php"]'))->toHaveCount(1);
+	expect($xpath->query('//form//input[@type="submit"]'))->toHaveCount(1);
+});
+
+it('offers no Cancel link on the direct action button', function () {
+	expect(mactrack_utilities_post_form('mactrack_utilities_perform_db_maint', 'Run'))->not->toContain('Cancel');
+});
+
 it('always opens partition options even when routine confirmations are disabled', function () {
 	$GLOBALS['__test_config_options']['mt_maint_confirm'] = '';
-	$link                                                 = mactrack_utilities_action_link('mactrack_utilities_convert_ports', 'Configure');
+	$link                                                 = mactrack_utilities_action_link('mactrack_utilities_convert_partitions', 'Configure');
 
-	expect($link)->toContain('<a ', 'action=mactrack_utilities_convert_ports');
+	expect($link)->toContain('<a ', 'action=mactrack_utilities_convert_partitions');
 	expect($link)->not->toContain('<form');
 });
 
 it('launches the rebuild CLI with the chosen scheme from the web', function (string $scheme) {
 	$GLOBALS['__test_request_vars'] = ['partition_scheme' => $scheme];
 	ob_start();
-	mactrack_utilities_convert_ports();
+	mactrack_utilities_convert_partitions();
 	$html     = ob_get_clean();
 	$launches = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'exec_background'));
 
@@ -91,7 +108,7 @@ it('does not launch a second rebuild while one is running', function () {
 	$GLOBALS['__test_request_vars'] = ['partition_scheme' => 'weekly'];
 	mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', ['pid' => (string) getmypid(), 'started' => '99000', 'now' => '100000', 'timeout' => '86400']);
 	ob_start();
-	mactrack_utilities_convert_ports();
+	mactrack_utilities_convert_partitions();
 	$html = ob_get_clean();
 
 	expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'exec_background'))->toBe([]);
@@ -102,7 +119,7 @@ it('resumes a rebuild whose process died and left the converting flag behind', f
 	$GLOBALS['__test_request_vars']                              = ['partition_scheme' => 'weekly'];
 	$GLOBALS['__test_config_options']['mt_partition_converting'] = (string) time();
 	ob_start();
-	mactrack_utilities_convert_ports();
+	mactrack_utilities_convert_partitions();
 	$html = ob_get_clean();
 
 	expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'exec_background'))->toHaveCount(1);
@@ -113,7 +130,7 @@ it('resumes a rebuild whose process died and left the converting flag behind', f
 it('rejects missing or unrecognized schemes without launching a process', function ($scheme) {
 	$GLOBALS['__test_request_vars'] = ['partition_scheme' => $scheme];
 	ob_start();
-	mactrack_utilities_convert_ports();
+	mactrack_utilities_convert_partitions();
 	$html = ob_get_clean();
 
 	expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'exec_background'))->toBe([]);
@@ -122,7 +139,7 @@ it('rejects missing or unrecognized schemes without launching a process', functi
 
 it('warns about the maintenance window and offers a cancel link before launching', function () {
 	ob_start();
-	mactrack_utilities_confirm('mactrack_utilities_convert_ports');
+	mactrack_utilities_confirm('mactrack_utilities_convert_partitions');
 	$html = ob_get_clean();
 
 	expect($html)->toContain('off hours', 'disk space', 'Scheduled scans are skipped', 'maintenance message', 'href="mactrack_utilities.php"', 'name="partition_scheme"');
