@@ -2,44 +2,19 @@
 
 --- 5.0 ---
 
-* security: Replace MAC action request deserialization with escaped JSON payloads
-* security: Validate and escape MAC bulk-action form values before rendering
-* security: Escape rescan executable and script paths before command execution
-* security: Parameterize stale-process site filtering and validate process IDs before termination
-* security: Escape Cabletron SNMP command arguments and normalize numeric options
-* security: Safely quote ignored-interface regexes and normalize interface report filters
-* security: Normalize device report SQL filters before query construction
-* security: Normalize administrative device list SQL filters before query construction
-* security: Validate canonical local-file paths for OUI database imports
-* security: Restrict Net_DNS2 cache deserialization to DNS response classes
-* security: Remove all inline JavaScript handlers like onClick, onChange
 * security: Add a version-safe CSP nonce (`plugin_mactrack_csp_nonce()`) to every inline `<script>` tag
+* security: Escape Cabletron SNMP command arguments and normalize numeric options
+* security: Escape rescan executable and script paths before command execution
+* security: Normalize administrative device list SQL filters before query construction
+* security: Normalize device report SQL filters before query construction
+* security: Parameterize stale-process site filtering and validate process IDs before termination
+* security: Remove all inline JavaScript handlers like onClick, onChange
+* security: Replace MAC action request deserialization with escaped JSON payloads
 * security: Require POST for the device rescan, site scan, enable and disable actions
-* issue#448: Retain failed scan loads, stop incomplete scan-date reconciliation, and restart aggregate rebuilds without replaying counts; preserve ambiguous legacy rebuild tables for recovery
-* issue#64914: Keep MacTrack enabled when an ARP/IP, site, device, IP range, 802.1x, MAC or interface view query fails or times out; the record functions returned false from a typed array return and the resulting TypeError made Cacti disable the plugin
-* issue#64914: Join interfaces on site_id and device_id in the ARP/IP view so the query uses the primary key instead of scanning the interface table for every row
-* issue#443: Honor a device's Ignore Ports list when scanning Extreme Networks EXOS and ExtremeWare switches, including stacked port names such as 1:5 that contain the default colon delimiter
-* issue#443: With the Ignore Ports delimiter on Auto Detect, accept pipe, comma and space separated lists for every vendor so port names that contain a colon, such as 1:5, are matched, and drop empty entries from the list
-* issue#426: Keep completed scans in production when an interrupted partition exchange is retried, and preserve staging after failed recovery reads or cleanup
-* issue: Scope ARP fallback lookups to the device site so reused MAC addresses do not supply translations from another site
-* issue: Resume background database upgrades after a worker exits and finish migration-table cleanup when an earlier upgrade recorded completion before a failed drop
-* issue: Keep MacTrack enabled while a database upgrade is pending; the settings hook launched the background upgrade before Cacti had loaded exec_background(), and the resulting error made Cacti disable the plugin
-* issue: Report a background database upgrade that cannot start (PHP binary unset or missing, upgrade script missing, or exec() disabled) in the Cacti log and in the notice, with the manual command, instead of saying the upgrade is running
-* issue#359: Restore the unique mac_track_aggregated_ports `port_number` key on upgraded installs, merging the duplicate rows the 4.9 upgrade let accumulate, so the table refresh no longer fails with "Duplicate entry ... for key 'port_number'" and the MAC separator migration runs only once; widen its `row_id` to bigint unsigned and run a version upgrade in only one page load at a time
-* issue#399: Use the registered Aruba AOS-CX callback names in the built-in 6200/6300 device types and repair existing defaults during upgrade
-* issue#399: Preserve unpadded SNMP MAC octets and the final OUI vendor record, apply the DNS timeout in milliseconds, keep a positive resolver lease, and tolerate CLI builds without pcntl
-* issue#399: Claim scanner process rows without replacing a running scan, remove only the owning scanner's row, refresh enable/disable rows, and retain hostnames in disable logs
-* issue#399: MacAuth report mail now honors its configured frequency; binary SNMP MACs are decoded as hexadecimal, so old incorrectly formatted sightings no longer match new scans
-* issue#430: Preserve aggregate sighting timestamps and unscanned devices, retain Layer 2 sightings without current ARP data, and identify older observations in the MAC report
-* issue#432: Correct device collection, poller scheduling and process cleanup, MAC and ARP views, OUI prefixes and MacWatch notification handling
-* issue: Confirm the Utilities actions that change data through one shared step, and hold the scan lock while the port table is rebuilt or optimized
-* issue: Show scan results in a single scrollable dialog (with the completion time appended) instead of stacking a separate toast on top of the results dialog
-* issue: Format the interface Errors, Discards and Unknown Protocol columns with number_format_i18n() for readability
-* issue: Add a tooltip to the interfaces 'Show Totals' control explaining what the totals columns show
-* issue: Detect device types that specify only a sysDescr match or only a sysObjectID match, and require both only when both are provided
-* issue: Restore the device-level Rescan action to the Device report view and show a completion/timing toast when a device, interface or site scan finishes
-* issue: Stop the interface/device rescan icon from spinning forever by bounding the request and always clearing the spinner
-* issue: Reorder the MacTrack tabs to Dashboard, Sites, Devices, Interfaces, IP Ranges, IP Addresses, MAC Addresses, Dot1x, Graphs
+* security: Restrict Net_DNS2 cache deserialization to DNS response classes
+* security: Safely quote ignored-interface regexes and normalize interface report filters
+* security: Validate and escape MAC bulk-action form values before rendering
+* security: Validate canonical local-file paths for OUI database imports
 * issue#246: Fix Cisco device collection
 * issue#248: Cacti process control, terminate dns resolvet when is nothing to do
 * issue#250: Disable automatic MIBs load
@@ -56,53 +31,74 @@
 * issue#355: Keep compressed IPv6 text intact instead of reading it as hexadecimal IPv4
 * issue#356: Convert binary IP addresses before trimming, so a final whitespace byte is kept
 * issue#357: Prevent repeated database setup from duplicating the Default site
+* issue#359: Restore the unique mac_track_aggregated_ports `port_number` key on upgraded installs, merging the duplicate rows the 4.9 upgrade let accumulate, so the table refresh no longer fails with "Duplicate entry ... for key 'port_number'" and the MAC separator migration runs only once; widen its `row_id` to bigint unsigned and run a version upgrade in only one page load at a time
+* issue#399: Use the registered Aruba AOS-CX callback names in the built-in 6200/6300 device types and repair existing defaults during upgrade
+* issue#399: Preserve unpadded SNMP MAC octets and the final OUI vendor record, apply the DNS timeout in milliseconds, keep a positive resolver lease, and tolerate CLI builds without pcntl
+* issue#399: Claim scanner process rows without replacing a running scan, remove only the owning scanner's row, refresh enable/disable rows, and retain hostnames in disable logs
+* issue#399: MacAuth report mail now honors its configured frequency; binary SNMP MACs are decoded as hexadecimal, so old incorrectly formatted sightings no longer match new scans
+* issue#426: Keep completed scans in production when an interrupted partition exchange is retried, and preserve staging after failed recovery reads or cleanup
+* issue#430: Preserve aggregate sighting timestamps and unscanned devices, retain Layer 2 sightings without current ARP data, and identify older observations in the MAC report
+* issue#432: Correct device collection, poller scheduling and process cleanup, MAC and ARP views, OUI prefixes and MacWatch notification handling
+* issue#443: Honor a device's Ignore Ports list when scanning Extreme Networks EXOS and ExtremeWare switches, including stacked port names such as 1:5 that contain the default colon delimiter
+* issue#443: With the Ignore Ports delimiter on Auto Detect, accept pipe, comma and space separated lists for every vendor so port names that contain a colon, such as 1:5, are matched, and drop empty entries from the list
+* issue#446: Keep MacTrack enabled when an ARP/IP, site, device, IP range, 802.1x, MAC or interface view query fails or times out; the record functions returned false from a typed array return and the resulting TypeError made Cacti disable the plugin
+* issue#446: Join interfaces on site_id and device_id in the ARP/IP view so the query uses the primary key instead of scanning the interface table for every row
+* issue#448: Retain failed scan loads, stop incomplete scan-date reconciliation, and restart aggregate rebuilds without replaying counts; preserve ambiguous legacy rebuild tables for recovery
+* issue: Add a tooltip to the interfaces 'Show Totals' control explaining what the totals columns show
+* issue: Align the documented PHP floor with the PHP 8.2 CI/test contract
+* issue: Call mactrack_format_mac() from the ARP export instead of a function that does not exist
+* issue: Confirm the Utilities actions that change data through one shared step, and hold the scan lock while the port table is rebuilt or optimized
 * issue: Convert plugin bootstrap include/include_once calls to fail-fast require/require_once across the web, CLI, and hook entry points
-* issue: Relocate the per-theme override stylesheets from themes/<theme>/ to css/<theme>/ alongside the base css/mactrack.css
+* issue: Decode MAC/IP OIDs as hex in the Extreme scanner by correcting a misplaced xform_stripped_oid() argument
+* issue: Detect device types that specify only a sysDescr match or only a sysObjectID match, and require both only when both are provided
+* issue: Drop the mactrack_ajax.php graph-settings action, whose handler was removed in 2016
 * issue: Enforce patch coverage of changed lines in CI and remove the inert COMPOSER_ROOT_VERSION env from the Pest step
+* issue: Fix a misplaced parenthesis in the running-process stats parser
+* issue: Fix a variable-variable typo that broke 3Com interface-graph mac updates
+* issue: Fix an undefined $ifindex reference (should be $ifIndex) in the Nortel Bay scanner
+* issue: Fix PHP 8 parameter ordering and partition conversion arguments
+* issue: Fix the Graphs tab fatal error "Call to undefined function graph_view_has_untemplated_graphs()" on Cacti 1.2.x
+* issue: Fixing some internationalization (i18n) issues
+* issue: Format the interface Errors, Discards and Unknown Protocol columns with number_format_i18n() for readability
+* issue: Harden device-type vendor filtering against SQL injection
+* issue: Keep MacTrack enabled while a database upgrade is pending; the settings hook launched the background upgrade before Cacti had loaded exec_background(), and the resulting error made Cacti disable the plugin
+* issue: Mac Addresses are not displaying correctly
+* issue: Mactrack does not shutdown properly due to incorrect use of unregister_process
+* issue: Make the MacTrack tab script repoint only the MacTrack main tab rather than whichever main tab is selected
 * issue: Pin the CI database image and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
 * issue: Reach PHPStan level 8 with zero errors across all first-party PHP and add native function return type declarations, using no baselines or inline suppressions
-* issue: Use prepared statements for all vendor collection
-* issue: Use prepared statements for device-reported values in the interface, ARP, DHCP snooping and 802.1x scanners
-* issue: Fix a variable-variable typo that broke 3Com interface-graph mac updates
-* issue: Return the rendered device-row HTML from the enable/disable AJAX handlers, which previously captured an always-null value
-* issue: Decode MAC/IP OIDs as hex in the Extreme scanner by correcting a misplaced xform_stripped_oid() argument
-* issue: Fix an undefined $ifindex reference (should be $ifIndex) in the Nortel Bay scanner
-* issue: Fix a misplaced parenthesis in the running-process stats parser
+* issue: Relocate the per-theme override stylesheets from themes/<theme>/ to css/<theme>/ alongside the base css/mactrack.css
 * issue: Remove a trailing comma before WHERE in the device edit page's SNMP settings UPDATE, which caused an SQL syntax error whenever the SNMP settings were auto-corrected
-* issue: Fix the Graphs tab fatal error "Call to undefined function graph_view_has_untemplated_graphs()" on Cacti 1.2.x
-* issue: Make the MacTrack tab script repoint only the MacTrack main tab rather than whichever main tab is selected
-* issue: Align the documented PHP floor with the PHP 8.2 CI/test contract
+* issue: Reorder the MacTrack tabs to Dashboard, Sites, Devices, Interfaces, IP Ranges, IP Addresses, MAC Addresses, Dot1x, Graphs
+* issue: Report a background database upgrade that cannot start (PHP binary unset or missing, upgrade script missing, or exec() disabled) in the Cacti log and in the notice, with the manual command, instead of saying the upgrade is running
+* issue: Restore the device-level Rescan action to the Device report view and show a completion/timing toast when a device, interface or site scan finishes
+* issue: Resume background database upgrades after a worker exits and finish migration-table cleanup when an earlier upgrade recorded completion before a failed drop
+* issue: Return the rendered device-row HTML from the enable/disable AJAX handlers, which previously captured an always-null value
 * issue: Return the unformatted MAC when mt_mac_format is unset rather than a null address
-* issue: Call mactrack_format_mac() from the ARP export instead of a function that does not exist
-* issue: Drop the mactrack_ajax.php graph-settings action, whose handler was removed in 2016
+* issue: Scope ARP fallback lookups to the device site so reused MAC addresses do not supply translations from another site
+* issue: Show scan results in a single scrollable dialog (with the completion time appended) instead of stacking a separate toast on top of the results dialog
 * issue: Stop stripping regular expression characters from the Ports to Ignore setting
-* issue: Harden device-type vendor filtering against SQL injection
-* issue: Validate aggregated MAC bulk-action IDs and use prepared deletion SQL
-* issue: Fix PHP 8 parameter ordering and partition conversion arguments
-* issue: Uncaught type error in mactrack_view_arp.php for ifName
-* issue: Mactrack does not shutdown properly due to incorrect use of unregister_process
-* issue: Fixing some internationalization (i18n) issues
-* issue: Mac Addresses are not displaying correctly
+* issue: Stop the interface/device rescan icon from spinning forever by bounding the request and always clearing the spinner
 * issue: Store interface packet, error and discard rates in their own columns instead of shifted ones
 * issue: Store the graph template and data query of each interface graph in their own columns instead of swapped
+* issue: Uncaught type error in mactrack_view_arp.php for ifName
+* issue: Use prepared statements for all vendor collection
+* issue: Use prepared statements for device-reported values in the interface, ARP, DHCP snooping and 802.1x scanners
+* issue: Validate aggregated MAC bulk-action IDs and use prepared deletion SQL
 * feature#68: Proxy Option for downloading MAC/OUI Database
 * feature#228: Add more MAC address formats
 * feature#426: Partition mac_track_ports by scan date, weekly by default, with daily and legacy per-scan or hourly sizes, so retention drops expired partitions instead of deleting rows; new installs are partitioned and existing tables can be converted between daily, weekly and unpartitioned layouts from Utilities or cli/upgrade_partitioning.php; Utilities rebuilds and analyzes only the latest populated partition (also on the legacy daily layout), maintenance keeps two days of partitions created ahead (daily slots that per-scan partitions are carved from) so scans move no rows in normal operation, and named retention settings keep their day count across DST
 * feature#435: Leave MACs on ports matching a regular expression out of a scan, so uplink and trunk ports stay out of the database: a new Ports to Ignore While Scanning setting for all devices plus a regular expression on each site and device, matched without regard to case against the port name and alias. The filter runs where every scanner stores its results, an invalid expression is logged and skipped, and the device run message reports how many MACs were skipped; the regular expression fields are text areas like the device Ports to Ignore, and each line is its own expression
 * feature#451: Partition the IP address table (mac_track_ips) by scan date like the port table, and replace mactrack_convert.php with cli/upgrade_partitioning.php. It checks both tables against the Port Partition Size setting (or --partition=daily|weekly|disabled, which it saves as the setting; Disabled is now a setting value), reports when there is no drift, and rebuilds each drifted table in turn: rename it to <table>_rebuild, create it again with the retention and partitioning scheme, copy each scan date, then drop the original. The run is registered in the process registry, pauses scanning and database maintenance (a maintenance window that passes meanwhile is run by the poller as soon as the rebuild ends), shows a maintenance message on the MAC and IP address views, refuses changes to the history and defers the background database upgrade until it has finished, prints progress, and resumes after an interruption; new installs partition the IP table (following the saved Port Partition Size) and its retention drops whole partitions; --keep-old is removed; the README describes setting up and maintaining partitioning
-* feature: Add a root manifest.json and upgrade-time file pruning (mactrack_prune_files()) that removes tombstoned and dev-only paths
 * feature: Add a Dashboard tab (the first MacTrack tab) presenting admin status cards in a draggable, add/remove
-* feature: On the MAC Addresses tab, show the authorization state as a themed status pill consistent with the interface and 802.1x pills
-* feature: On Cacti 1.2.32+, zebra-stripe the interfaces list and add an "Issues" column of clickable status pills
+* feature: Add a root manifest.json and upgrade-time file pruning (mactrack_prune_files()) that removes tombstoned and dev-only paths
 * feature: Add a status pill column to the 802.1x view after the username; clicking the pill drills down by setting the Status filter to that session status
 * feature: Lay the interfaces and dot1x status legends out as a centered footer in normal document flow via a shared `.mactrackLegendFooter` class
+* feature: On Cacti 1.2.32+, zebra-stripe the interfaces list and add an "Issues" column of clickable status pills
+* feature: On the MAC Addresses tab, show the authorization state as a themed status pill consistent with the interface and 802.1x pills
 * feature: Restyle the interfaces and dot1x status legends as rounded, evenly-spaced solid-colour chips with theme-appropriate colours 
 * feature: Ship a dedicated per-theme stylesheet for every Cacti theme
 * feature: Show on the Process Status page what MacTrack is doing now (scan phase, maintenance step, upgrade rebuild or conversion), why the poller last skipped a run, how long each step of the last maintenance took, and the size of each MacTrack table
-* dev: Run the issue#448 database recovery scenarios in CI and use the prepared-query adapter for their disposable schema setup and cleanup
-* dev: Adopt the shared, byte-identical dashboarding card chrome used across the Cacti plugins: the MacTrack dashboard now drives its card grid through the shared `js/cards.js` (`CactiCards`) controller plus a thin `js/mactrack_dashboard.js` adapter, and the card markup/CSS use the shared `.cc*` contract (`css/cards.css`), with MacTrack's `--cc-*` theme bindings and card-body widgets kept in `css/mactrack-dashboard.css`. No functional change to the dashboard; this aligns MacTrack with the other plugins so the chrome can be promoted to Cacti core unchanged
-* dev: Load the shared card chrome from Cacti core on 1.2.32+ (`include/js/cards.js` + `include/css/cards.css`) and only bundle the plugin's own copy on older cores
-* dev: Run the CI poller with the shared runner group so RRD files and structured directories pass permission verification
 
 --- 4.8 ---
 

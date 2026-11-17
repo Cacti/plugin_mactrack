@@ -4,7 +4,7 @@
 
 When generating code for this repository:
 
-1. **Version Compatibility**: This is a Cacti plugin (`mactrack`, "Device Tracking", version 4.9) targeting Cacti 1.2.14+; `tests/Security/PhpCompatibilityTest.php` guards production sources against PHP 8.3+-only syntax as a regression check.
+1. **Version Compatibility**: This is a Cacti plugin (`mactrack`, "Device Tracking", version 5.0) targeting Cacti 1.2.29+; `tests/Security/PhpCompatibilityTest.php` guards production sources against PHP 8.3+-only syntax as a regression check.
 2. **Context Files**: Prioritize patterns and standards defined in this file (`.github/copilot-instructions.md`)
 3. **Codebase Patterns**: When context files don't provide specific guidance, scan the codebase for established patterns
 4. **Architectural Consistency**: Maintain plugin-based architecture extending Cacti core
@@ -14,7 +14,7 @@ When generating code for this repository:
 
 ### Core Technologies
 - **PHP**: 8.2+ syntax floor (guarded by `tests/Security/PhpCompatibilityTest.php`); CI integration matrix runs PHP 8.2/8.3/8.4 against a pinned Cacti release
-- **Platform**: Cacti Plugin Architecture (Cacti 1.2.14+)
+- **Platform**: Cacti Plugin Architecture (Cacti 1.2.29+)
 - **Database**: MySQL/MariaDB via Cacti's DB abstraction layer
 - **SNMP**: Bulk MAC/ARP/interface/VLAN discovery via Cacti's SNMP library
 
@@ -156,7 +156,17 @@ $data = unserialize($raw, array('allowed_classes' => false));
 
 ## Version Control
 
-Document all changes in `CHANGELOG.md`; use descriptive commit messages referencing issue/PR numbers when applicable.
+Document all changes in `CHANGELOG.md`; use descriptive commit messages referencing issue/PR numbers when applicable. `INFO` carries the plugin version (5.0) and the Cacti floor (`compat = 1.2.29`); keep the README and these instructions in step with them.
+
+### CHANGELOG.md format
+
+The pending release has one section headed `--- 5.0 ---`, followed by a blank line, one `* type: text` line per entry with no blank lines between entries, and a blank line before the next release heading. Only three entry types are allowed for the pending release, in this order:
+
+1. `security`: entries with a number first, ascending (`security#12:`), then entries without a number, alphabetical by their text.
+2. `issue`: numbered entries ascending (`issue#443:`), then unnumbered entries (`issue:`), alphabetical by their text.
+3. `feature`: numbered entries ascending (`feature#451:`), then unnumbered entries (`feature:`), alphabetical by their text.
+
+There are no other types (no `dev`, `compat`, or similar) in the pending release. The number is the GitHub issue (or, for a feature or fix without one, pull request) number in `Cacti/plugin_mactrack`, never a forum topic id or another tracker's number. Entries of one number keep the order they were added in. When you add an entry, place it where these rules put it instead of appending it.
 
 ## CI & Dependency Baselines
 
