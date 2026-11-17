@@ -53,43 +53,63 @@ Add Mactrack Site - Console -> Mactrack -> Sites
 Add/import devices - Console -> Mactrack -> Devices -> Add device or Management -> Choose host -> Import into Mactrack Database
 Create new or enable prepared Device Types - Console -> Mactrack -> Device Types
 
-## Port history partitioning
+## Port and IP history partitioning
 
-New installs use weekly partitions, starting Monday at 00:00 UTC. To convert
-an existing history, open **MacTrack Utilities > Configure Port Partitioning**.
-Choose **Daily**, **Weekly**, or **Disabled**, optionally keep the original table
-as a backup, and continue. The conversion runs in the background; **View Partition
-Status** shows whether it ran successfully or could not start.
+The MAC address history (`mac_track_ports`) and the IP address history
+(`mac_track_ips`) are partitioned by scan date. New installs use weekly
+partitions, starting Monday at 00:00 UTC. The **Port Partition Size** setting
+(One per Scan, Hourly, Daily, Weekly or Disabled) sets the size of the
+partitions created from now on; it never rewrites partitions that already exist.
+Retention then drops whole expired partitions instead of deleting rows.
 
-The same options are available from the Cacti installation directory:
+Changing the size, or upgrading an existing install, can leave a table that
+does not follow the setting. `cli/upgrade_partitioning.php` checks both tables
+against the scheme, tells you when there is no drift, and rebuilds the tables
+that have drifted. From the Cacti installation directory:
 
 ```sh
-php plugins/mactrack/mactrack_convert.php --partition=weekly
-php plugins/mactrack/mactrack_convert.php --partition=daily --keep-old
-php plugins/mactrack/mactrack_convert.php --partition=disabled
+php plugins/mactrack/cli/upgrade_partitioning.php
+php plugins/mactrack/cli/upgrade_partitioning.php --partition=weekly
+php plugins/mactrack/cli/upgrade_partitioning.php --partition=daily --debug
+php plugins/mactrack/cli/upgrade_partitioning.php --partition=disabled
 ```
 
-Without `--partition`, an unpartitioned table is converted to the Port Partition
-Size setting and an already partitioned table is left unchanged. Choosing the
-layout the table already has copies nothing.
+Without `--partition`, the Port Partition Size setting is the scheme. With
+`--partition=daily|weekly|disabled`, that scheme is rebuilt to and saved as the
+Port Partition Size setting. The per-scan and hourly sizes are maintained by the
+poller and are not built by this tool. **MacTrack Utilities > Configure Port
+Partitioning** starts the same command in the background, and **View Partition
+Status** shows its last result.
 
-Run conversions off hours. They copy the full history, need disk space for a
-second copy of the table and its indexes, and skip scheduled scans and hold
-database maintenance while running. Readers keep using the original until row counts
-are verified and the tables are swapped. The copy neither deletes source rows
-nor wraps the history in a transaction. If interrupted before the swap, repeat
-the command or web action to restart the copy.
+A table is rebuilt when it is not partitioned, uses the earlier daily layout, has
+partitions MacTrack does not recognize, mixes sizes, keeps rows outside every
+partition, or is not the selected size. A table that already follows the scheme
+is left alone and reported. The tables are rebuilt one after the other, ports
+first, with the same steps for each:
 
-With `--keep-old` (or the web backup checkbox), the original remains as
-`mac_track_ports_old`. Verify the converted data and remove that backup manually
-before another conversion. A failed copy leaves the original table and setting
-unchanged. A pending partition exchange or database upgrade must finish first.
+1. The table is renamed to `<table>_rebuild`.
+2. The table is created again with the partitions for the retention period and
+   the two days kept ahead of collection. History older than the retention
+   period is copied into the first partition, which retention drops once it has
+   expired.
+3. Each distinct scan date is copied from the renamed table, oldest first.
+4. When every scan date is copied and the row counts match, the renamed table is
+   dropped.
+
+While it runs, scheduled scans and database maintenance are paused, MAC and IP
+address searching shows a maintenance message, and the command prints progress
+at least every 30 seconds (`--debug` prints every scan date). Run it off hours:
+it needs disk space for a second copy of each table and its indexes, and a large
+history can take hours. The run is registered with Cacti's process registry for
+24 hours so two runs cannot overlap. If it stops, the renamed table and the
+partly filled new table stay as they are, the poller stays paused, and running
+the command again resumes from the last scan date copied. A pending partition
+exchange or database upgrade must finish first.
 
 Daily and weekly modes use timestamp range partitions, and maintenance keeps
-two days of partitions created ahead of collection. Retention drops only whole expired partitions, so a weekly
-layout may keep up to one extra week of history. Disabled uses the existing
-unpartitioned retention path. The Port Partition Size setting controls future
-partitions; use the Utilities conversion to change the layout of existing data.
+two days of partitions created ahead of collection. Retention drops only whole
+expired partitions, so a weekly layout may keep up to one extra week of history.
+Disabled uses the existing unpartitioned retention path (rows are deleted).
 
 ## Ignoring ports while scanning
 

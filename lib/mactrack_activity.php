@@ -168,8 +168,9 @@ function mactrack_maint_steps_last(): array {
 /**
  * Records why the poller exited without scanning this cycle.
  *
- * @param string $reason 'upgrade' for a running database upgrade, or
- *                       'rebuild_table' for a leftover aggregated-ports work table.
+ * @param string $reason 'upgrade' for a running database upgrade,
+ *                       'rebuild_table' for a leftover aggregated-ports work table, or
+ *                       'partition_rebuild' for a partitioning rebuild that has not finished.
  *
  * @return void
  */
@@ -262,11 +263,11 @@ function mactrack_activity_state(?int $now = null): array {
 
 	$converting = (string) read_config_option('mt_partition_converting', true);
 
-	if ($converting !== '') {
+	if ($converting !== '' || mactrack_partition_rebuild_pending() !== []) {
 		return array_merge($state, [
 			'state' => 'converting',
-			'text'  => __('Converting the port table to partitions', 'mactrack'),
-			'since' => (int) $converting,
+			'text'  => __('Repartitioning the port and IP tables', 'mactrack'),
+			'since' => $converting === '' ? null : (int) $converting,
 		]);
 	}
 
@@ -323,9 +324,11 @@ function mactrack_activity_deferred(int $now): ?array {
 		return null;
 	}
 
-	$reason = ($note['reason'] ?? '') === 'upgrade'
-		? __('A database upgrade is running', 'mactrack')
-		: __('The aggregated ports rebuild has not finished', 'mactrack');
+	$labels = [
+		'upgrade'           => __('A database upgrade is running', 'mactrack'),
+		'partition_rebuild' => __('The port and IP table partitioning has not finished', 'mactrack'),
+	];
+	$reason = $labels[$note['reason'] ?? ''] ?? __('The aggregated ports rebuild has not finished', 'mactrack');
 
 	return ['reason' => $reason, 'time' => (int) $note['time']];
 }

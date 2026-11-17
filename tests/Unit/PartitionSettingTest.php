@@ -26,7 +26,7 @@ beforeEach(function () {
 	$GLOBALS['__test_cacti_log']       = [];
 });
 
-it('offers per-scan, hourly and daily partitions, weekly by default', function () {
+it('offers per-scan, hourly, daily and weekly partitions or disabled, weekly by default', function () {
 	global $settings, $settings_user, $tabs_graphs;
 
 	// The hook extends core's settings arrays, so they must exist.
@@ -40,6 +40,6 @@ it('offers per-scan, hourly and daily partitions, weekly by default', function (
 	expect($setting)->not->toBeNull();
 	expect($setting['method'])->toBe('drop_array');
 	expect($setting['default'])->toBe('week');
-	expect(array_keys($setting['array']))->toBe(['scan', 'hour', 'day', 'week']);
+	expect(array_keys($setting['array']))->toBe(['scan', 'hour', 'day', 'week', 'disabled']);
 	expect(array_keys($settings['mactrack']))->toContain('mt_data_retention_ip');
 });

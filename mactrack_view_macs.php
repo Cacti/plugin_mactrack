@@ -811,6 +811,7 @@ function mactrack_view_macs(): void {
 	global $mactrack_view_macs_actions, $item_rows;
 
 	mactrack_tabs();
+	mactrack_partition_rebuild_notice();
 
 	html_start_box($title, '100%', '', '3', 'center', '');
 	mactrack_mac_filter();
@@ -1051,6 +1052,7 @@ function mactrack_view_aggregated_macs(): void {
 	global $mactrack_view_agg_macs_actions, $item_rows;
 
 	mactrack_tabs();
+	mactrack_partition_rebuild_notice();
 
 	html_start_box($title, '100%', '', '3', 'center', '');
 	mactrack_mac_filter();

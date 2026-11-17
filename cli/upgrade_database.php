@@ -131,7 +131,7 @@ if (!$registered && !$force) {
 }
 
 // The scan lock keeps the upgrade apart from a scan and from a port table
-// conversion (mactrack_convert.php): both write mac_track_ports, which the
+// conversion (cli/upgrade_partitioning.php): both write mac_track_ports, which the
 // upgrade rewrites in place. Held until exit; the server frees it if the
 // process dies. The console relaunches the upgrade once the lock is free.
 if ((string) db_fetch_cell_prepared('SELECT GET_LOCK(?, 0)', [mactrack_lock_name('scan')]) !== '1') {

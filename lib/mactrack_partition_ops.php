@@ -133,7 +133,7 @@ function mactrack_partition_optimize(): array {
  * Takes the scan lock that keeps a scan and a table conversion apart.
  *
  * The poller calls this before any scan or maintenance and keeps the lock
- * until it exits; mactrack_partition_convert() holds it for its whole run.
+ * until it exits; cli/upgrade_partitioning.php holds it for its whole run.
  * The server releases a named lock when its connection ends, so when the
  * lock is free while mt_partition_converting is still set, the conversion
  * died, and the flag is cleared.
@@ -146,7 +146,7 @@ function mactrack_partition_scan_begin(): bool {
 	}
 
 	if ((string) read_config_option('mt_partition_converting', true) !== '') {
-		cacti_log('MACTRACK: A port table conversion stopped without finishing; the original table is in use.', false, 'MACTRACK');
+		cacti_log('MACTRACK: A partitioning rebuild stopped without finishing; run cli/upgrade_partitioning.php again to resume it.', false, 'MACTRACK');
 		set_config_option('mt_partition_converting', '');
 	}
 
@@ -264,18 +264,22 @@ function mactrack_partition_status(array $fields): void {
 }
 
 /**
- * Reads the partition layout of mac_track_ports and the server version.
+ * Reads the partition layout of a scan-date table and the server version.
+ *
+ * @param string $table mac_track_ports or mac_track_ips.
  *
  * @return array{layout: array, server: array{mariadb: bool, version: string}}
  */
-function mactrack_partition_state(): array {
+function mactrack_partition_state(string $table = 'mac_track_ports'): array {
 	global $database_default;
+
+	mactrack_partition_assert_table($table);
 
 	$rows = db_fetch_assoc_prepared('SELECT PARTITION_NAME, PARTITION_ORDINAL_POSITION, PARTITION_METHOD,
 		PARTITION_EXPRESSION, PARTITION_DESCRIPTION, TABLE_ROWS
 		FROM information_schema.PARTITIONS
 		WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
-		[$database_default, 'mac_track_ports']);
+		[$database_default, $table]);
 
 	$layout = mactrack_partition_layout(is_array($rows) ? $rows : []);
 
@@ -629,17 +633,20 @@ function mactrack_partition_load_scan(array $plan): int|false {
  * daily partitions, or, for per-scan partitions, daily slots named
  * aYYYYMMDD that each scan carves its partition from. Nothing is created
  * while dMaxValue holds rows: the next scan's recovery split moves those
- * first. Other layouts are left to their own maintenance.
+ * first. The IP table has no scan to move them, so maintenance splits them
+ * into a recovery partition itself. Other layouts are left to their own
+ * maintenance.
  *
- * @param int      $days Retention in days; below 1 drops nothing.
- * @param int|null $now  Current time, for tests.
+ * @param int      $days  Retention in days; below 1 drops nothing.
+ * @param int|null $now   Current time, for tests.
+ * @param string   $table mac_track_ports or mac_track_ips.
  *
  * @return array{dropped: string[], created: string[], reason: string}
  */
-function mactrack_partition_maintain(int $days, ?int $now = null): array {
+function mactrack_partition_maintain(int $days, ?int $now = null, string $table = 'mac_track_ports'): array {
 	$now    = $now ?? time();
 	$result = ['dropped' => [], 'created' => [], 'reason' => ''];
-	$state  = mactrack_partition_state();
+	$state  = mactrack_partition_state($table);
 	$layout = $state['layout'];
 
 	if ($layout['state'] !== 'range') {
@@ -648,13 +655,13 @@ function mactrack_partition_maintain(int $days, ?int $now = null): array {
 		$result['reason'] = 'partition lock busy';
 	} else {
 		try {
-			$result = mactrack_partition_maintain_locked($layout['partitions'], $state['server'], $days, $now);
+			$result = mactrack_partition_maintain_locked($layout['partitions'], $state['server'], $days, $now, $table);
 		} finally {
 			mactrack_partition_unlock();
 		}
 	}
 
-	mactrack_partition_status(['maintenance' => $result + ['time' => time()]]);
+	mactrack_partition_status([($table === 'mac_track_ports' ? 'maintenance' : 'maintenance_ips') => $result + ['time' => time()]]);
 
 	return $result;
 }
@@ -666,10 +673,14 @@ function mactrack_partition_maintain(int $days, ?int $now = null): array {
  * @param array{mariadb: bool, version: string}                       $server     From mactrack_partition_server().
  * @param int                                                         $days       Retention in days.
  * @param int                                                         $now        Current time.
+ * @param string                                                      $table      mac_track_ports or mac_track_ips.
  *
  * @return array{dropped: string[], created: string[], reason: string}
  */
-function mactrack_partition_maintain_locked(array $partitions, array $server, int $days, int $now): array {
+function mactrack_partition_maintain_locked(array $partitions, array $server, int $days, int $now, string $table = 'mac_track_ports'): array {
+	mactrack_partition_assert_table($table);
+
+	$ports   = $table === 'mac_track_ports';
 	$result  = ['dropped' => [], 'created' => [], 'reason' => ''];
 	$bounded = array_values(array_filter($partitions, fn ($p) => $p['bound'] !== null));
 	$count   = count($partitions);
@@ -681,17 +692,19 @@ function mactrack_partition_maintain_locked(array $partitions, array $server, in
 		if ($expired !== []) {
 			$names = array_column($expired, 'name');
 
-			if (!mactrack_partition_ddl(mactrack_partition_drop_sql($names))) {
+			if (!mactrack_partition_ddl(mactrack_partition_drop_sql($names, $table))) {
 				return ['reason' => 'drop failed'] + $result;
 			}
 
-			cacti_log('MACTRACK: Dropped expired partitions ' . implode(', ', $names), false, 'SYSTEM');
+			cacti_log("MACTRACK: Dropped expired $table partitions " . implode(', ', $names), false, 'SYSTEM');
 
 			$result['dropped'] = $names;
 			$count -= count($names);
 
-			// The server's own reading of the bound, as scan_date was stored.
-			mactrack_scan_dates_prune((string) db_fetch_cell_prepared('SELECT FROM_UNIXTIME(?)', [max(array_column($expired, 'bound'))]));
+			if ($ports) {
+				// The server's own reading of the bound, as scan_date was stored.
+				mactrack_scan_dates_prune((string) db_fetch_cell_prepared('SELECT FROM_UNIXTIME(?)', [max(array_column($expired, 'bound'))]));
+			}
 		}
 	}
 
@@ -699,17 +712,35 @@ function mactrack_partition_maintain_locked(array $partitions, array $server, in
 
 	// Per-scan partitions cannot be created before their scan_date is
 	// known, so daily slots are created ahead and each scan carves its
-	// partition off the front of the empty slot that covers it.
-	$ahead = $size === 'scan' ? 'day' : $size;
+	// partition off the front of the empty slot that covers it. The IP
+	// table only has daily and weekly partitions.
+	$ahead = $size === 'scan' || ($size === 'hour' && !$ports) ? 'day' : $size;
 
-	$stranded = db_fetch_cell_prepared('SELECT MAX(UNIX_TIMESTAMP(scan_date)) FROM `mac_track_ports` PARTITION (`dMaxValue`)');
-
-	if (is_numeric($stranded) && (int) $stranded > 0) {
-		return ['reason' => 'dMaxValue holds rows'] + $result;
+	if (!$ports) {
+		$size = $ahead;
 	}
 
-	$cap  = mactrack_partition_cap($server);
-	$last = $bounded === [] ? 0 : end($bounded)['bound'];
+	$stranded = db_fetch_cell_prepared('SELECT MAX(UNIX_TIMESTAMP(scan_date)) FROM `' . $table . '` PARTITION (`dMaxValue`)');
+	$cap      = mactrack_partition_cap($server);
+	$last     = $bounded === [] ? 0 : end($bounded)['bound'];
+
+	if (is_numeric($stranded) && (int) $stranded > 0) {
+		if ($ports) {
+			return ['reason' => 'dMaxValue holds rows'] + $result;
+		}
+
+		$name = 'r' . gmdate('YmdHis', (int) $stranded);
+
+		if ($count >= $cap || !mactrack_partition_ddl(mactrack_partition_split_sql($name, (int) $stranded + 1, $table))) {
+			return ['reason' => 'recovery split failed'] + $result;
+		}
+
+		cacti_log("MACTRACK: Recovered $table rows in dMaxValue into partition '$name'", false, 'SYSTEM');
+
+		$result['created'][] = $name;
+		$last                = (int) $stranded + 1;
+		$count++;
+	}
 
 	for ($i = 0, $ts = $now; $i < 2 || $ts <= $now + MACTRACK_PARTITION_AHEAD; $i++) {
 		$period = mactrack_partition_period($ahead, $ts);
@@ -725,7 +756,7 @@ function mactrack_partition_maintain_locked(array $partitions, array $server, in
 
 		$name = $size === 'scan' ? 'a' . gmdate('Ymd', $period['start']) : mactrack_partition_name($ahead, $period['start']);
 
-		if (!mactrack_partition_ddl(mactrack_partition_split_sql($name, $period['bound']))) {
+		if (!mactrack_partition_ddl(mactrack_partition_split_sql($name, $period['bound'], $table))) {
 			return ['reason' => 'split failed'] + $result;
 		}
 
@@ -753,7 +784,7 @@ function mactrack_partition_report(): array {
 	$choice  = mactrack_partition_granularity($state['server']);
 	$status  = json_decode((string) read_config_option('mt_partition_status', true), true);
 	$status  = is_array($status) ? $status : [];
-	// Set to the start time while mactrack_partition_convert() runs.
+	// Set to the start time while cli/upgrade_partitioning.php runs.
 	$converting = (string) read_config_option('mt_partition_converting', true);
 
 	return [

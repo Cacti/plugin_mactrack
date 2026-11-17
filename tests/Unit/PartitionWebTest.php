@@ -16,6 +16,10 @@
 
 require_once dirname(__DIR__) . '/Support/load_function.php';
 
+beforeAll(function () {
+	mactrack_test_load(dirname(__DIR__, 2) . '/lib/mactrack_functions.php');
+});
+
 foreach (['conversion_fields', 'post_form', 'action_link', 'convert_ports', 'confirm', 'rebuild_scan_dates', 'busy_message'] as $function) {
 	mactrack_test_load_function('mactrack_utilities.php', 'mactrack_utilities_' . $function);
 }
@@ -43,16 +47,7 @@ afterEach(function () {
 	$GLOBALS['__test_request_vars']    = [];
 });
 
-function mt_pw_layout(bool $partitioned): void {
-	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', '10.5.29-MariaDB');
-	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'information_schema.PARTITIONS', $partitioned ? [[
-		'PARTITION_NAME'       => 'dMaxValue', 'PARTITION_ORDINAL_POSITION' => '1', 'PARTITION_METHOD' => 'RANGE',
-		'PARTITION_EXPRESSION' => 'unix_timestamp(`scan_date`)', 'PARTITION_DESCRIPTION' => 'MAXVALUE', 'TABLE_ROWS' => '0',
-	]] : []);
-}
-
-it('offers daily weekly disabled and the backup option in a POST form', function () {
-	mt_pw_layout(true);
+it('offers daily weekly and disabled in a POST form without a backup option', function () {
 	$html = mactrack_utilities_post_form('mactrack_utilities_convert_ports', 'Continue');
 	$dom  = new DOMDocument();
 	$dom->loadHTML($html);
@@ -61,21 +56,14 @@ it('offers daily weekly disabled and the backup option in a POST form', function
 	expect($xpath->query('//form[@method="post"]'))->toHaveCount(1);
 	expect($xpath->query('//select[@name="partition_scheme"]/option'))->toHaveCount(3);
 	expect($xpath->query('//option[@selected]')->item(0)->getAttribute('value'))->toBe('weekly');
-	expect($xpath->query('//input[@name="keep_old"]'))->toHaveCount(1);
+	expect($xpath->query('//input[@name="keep_old"]'))->toHaveCount(0);
 });
 
-it('preselects disabled for an unpartitioned table whatever the size setting says', function () {
-	mt_pw_layout(false);
-	$GLOBALS['__test_config_options']['mt_partition_granularity'] = 'day';
-	expect(mactrack_utilities_conversion_fields())->toContain('value="disabled" selected');
+it('preselects the saved setting, disabled included', function (string $saved, string $selected) {
+	$GLOBALS['__test_config_options']['mt_partition_granularity'] = $saved;
+	expect(mactrack_utilities_conversion_fields())->toContain('value="' . $selected . '" selected');
 	expect(mactrack_utilities_post_form('mactrack_utilities_perform_db_maint', 'Continue'))->not->toContain('partition_scheme');
-});
-
-it('preselects the saved size for a partitioned table', function () {
-	mt_pw_layout(true);
-	$GLOBALS['__test_config_options']['mt_partition_granularity'] = 'day';
-	expect(mactrack_utilities_conversion_fields())->toContain('value="daily" selected');
-});
+})->with([['day', 'daily'], ['week', 'weekly'], ['disabled', 'disabled'], ['hour', 'weekly']]);
 
 it('always opens partition options even when routine confirmations are disabled', function () {
 	$GLOBALS['__test_config_options']['mt_maint_confirm'] = '';
@@ -85,9 +73,8 @@ it('always opens partition options even when routine confirmations are disabled'
 	expect($link)->not->toContain('<form');
 });
 
-it('launches the same CLI options from the web', function (string $scheme, bool $keep) {
-	$GLOBALS['__test_request_vars'] = ['partition_scheme' => $scheme, 'keep_old' => $keep ? 'on' : ''];
-	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', '8.4.3');
+it('launches the rebuild CLI with the chosen scheme from the web', function (string $scheme) {
+	$GLOBALS['__test_request_vars'] = ['partition_scheme' => $scheme];
 	ob_start();
 	mactrack_utilities_convert_ports();
 	$html     = ob_get_clean();
@@ -95,14 +82,36 @@ it('launches the same CLI options from the web', function (string $scheme, bool 
 
 	expect($launches)->toHaveCount(1);
 	expect($launches[0]['sql'])->toBe('/usr/bin/php');
-	expect($launches[0]['params'][0])->toContain(escapeshellarg('--partition=' . $scheme));
-	expect(str_contains($launches[0]['params'][0], '--keep-old'))->toBe($keep);
+	expect($launches[0]['params'][0])->toContain('cli/upgrade_partitioning.php', escapeshellarg('--partition=' . $scheme));
+	expect($launches[0]['params'][0])->not->toContain('--keep-old');
 	expect($html)->toContain('requested in the background');
-})->with([['daily', false], ['weekly', true], ['disabled', true]]);
+})->with(['daily', 'weekly', 'disabled']);
+
+it('does not launch a second rebuild while one is running', function () {
+	$GLOBALS['__test_request_vars'] = ['partition_scheme' => 'weekly'];
+	mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', ['pid' => (string) getmypid(), 'started' => '99000', 'now' => '100000', 'timeout' => '86400']);
+	ob_start();
+	mactrack_utilities_convert_ports();
+	$html = ob_get_clean();
+
+	expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'exec_background'))->toBe([]);
+	expect($html)->toContain('already running');
+});
+
+it('resumes a rebuild whose process died and left the converting flag behind', function () {
+	$GLOBALS['__test_request_vars']                              = ['partition_scheme' => 'weekly'];
+	$GLOBALS['__test_config_options']['mt_partition_converting'] = (string) time();
+	ob_start();
+	mactrack_utilities_convert_ports();
+	$html = ob_get_clean();
+
+	expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'exec_background'))->toHaveCount(1);
+	expect($GLOBALS['__test_config_options']['mt_partition_converting'])->toBe('');
+	expect($html)->toContain('requested in the background');
+});
 
 it('rejects missing or unrecognized schemes without launching a process', function ($scheme) {
 	$GLOBALS['__test_request_vars'] = ['partition_scheme' => $scheme];
-	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', '8.4.3');
 	ob_start();
 	mactrack_utilities_convert_ports();
 	$html = ob_get_clean();
@@ -116,7 +125,7 @@ it('warns about the maintenance window and offers a cancel link before launching
 	mactrack_utilities_confirm('mactrack_utilities_convert_ports');
 	$html = ob_get_clean();
 
-	expect($html)->toContain('off hours', 'disk space', 'Scheduled scans are skipped and database maintenance waits', 'href="mactrack_utilities.php"', 'name="partition_scheme"');
+	expect($html)->toContain('off hours', 'disk space', 'Scheduled scans are skipped', 'maintenance message', 'href="mactrack_utilities.php"', 'name="partition_scheme"');
 	expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'exec_background'))->toBe([]);
 });
 

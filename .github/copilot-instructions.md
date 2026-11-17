@@ -37,7 +37,8 @@ mactrack/                                               # Repository root (insta
 ├── mactrack_view_*.php                                 # Various table views (arp, devices, dot1x, graphs, interfaces, ips, macs, sites)
 ├── mactrack_macauth.php / mactrack_macwatch.php        # MAC authorization / watch-list administration
 ├── mactrack_snmp.php / mactrack_snmp.js                # SNMP collection routines + client-side helper
-├── mactrack_utilities.php / mactrack_convert.php       # Maintenance utilities / data conversion
+├── mactrack_utilities.php                              # Maintenance utilities
+├── cli/                                                # Background CLI scripts (upgrade_database.php, upgrade_partitioning.php)
 ├── mactrack_vendormacs.php / mactrack_import_ouidb.php # Vendor OUI database import/lookup
 ├── mactrack_ajax.php / mactrack_ajax_admin.php         # AJAX endpoints (viewer / admin)
 ├── poller_mactrack.php                                 # Background poller entry point (CLI)

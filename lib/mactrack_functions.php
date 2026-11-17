@@ -27,7 +27,7 @@
 // @codeCoverageIgnoreStart
 include_once(__DIR__ . '/mactrack_partitions.php');
 include_once(__DIR__ . '/mactrack_partition_ops.php');
-include_once(__DIR__ . '/mactrack_partition_convert.php');
+include_once(__DIR__ . '/mactrack_partition_rebuild.php');
 include_once(__DIR__ . '/mactrack_activity.php');
 // @codeCoverageIgnoreEnd
 
@@ -3203,8 +3203,8 @@ function mactrack_db_maint_run(array &$steps, ?int $now = null): void {
 	global $database_default;
 	$now = $now ?? time();
 
-	if ((string) read_config_option('mt_partition_converting', true) !== '') {
-		cacti_log('MACTRACK: Database maintenance skipped while the port table is converted.', false, 'MACTRACK');
+	if ((string) read_config_option('mt_partition_converting', true) !== '' || mactrack_partition_rebuild_pending() !== []) {
+		cacti_log('MACTRACK: Database maintenance skipped while the port and IP tables are repartitioned.', false, 'MACTRACK');
 
 		return;
 	}
@@ -3386,12 +3386,21 @@ function mactrack_db_maint_run(array &$steps, ?int $now = null): void {
 
 	mactrack_maint_step_begin($steps, 'delete_ips');
 
-	// CURDATE() - n is integer arithmetic on YYYYMMDD (20261112 - 60 is no
-	// date at all), so the cutoff needs INTERVAL.
-	mactrack_delete_batched('DELETE FROM mac_track_ips
-		WHERE scan_date < CURDATE() - INTERVAL ? DAY
-		ORDER BY scan_date',
-		[(int) read_config_option('mt_data_retention_ip')]);
+	$ip_retention = (int) read_config_option('mt_data_retention_ip');
+
+	if (mactrack_partition_state('mac_track_ips')['layout']['state'] === 'range') {
+		// Scan-date layout: whole partitions expire, no rows are deleted.
+		$result = mactrack_partition_maintain($ip_retention, $now, 'mac_track_ips');
+
+		mactrack_debug('Dropped ' . count($result['dropped']) . ' and created ' . count($result['created']) . ' IP partitions' . ($result['reason'] !== '' ? " ({$result['reason']})" : '') . '.');
+	} else {
+		// CURDATE() - n is integer arithmetic on YYYYMMDD (20261112 - 60 is no
+		// date at all), so the cutoff needs INTERVAL.
+		mactrack_delete_batched('DELETE FROM mac_track_ips
+			WHERE scan_date < CURDATE() - INTERVAL ? DAY
+			ORDER BY scan_date',
+			[$ip_retention]);
+	}
 
 	// No OPTIMIZE: it rebuilds the whole table and blocks writes, which takes
 	// hours at tens of millions of rows, and InnoDB reuses the pages that the
@@ -3401,7 +3410,7 @@ function mactrack_db_maint_run(array &$steps, ?int $now = null): void {
 	// the port retention; nothing else ever removed them.
 	db_execute_prepared('DELETE FROM mac_track_arp
 		WHERE scan_date < CURDATE() - INTERVAL ? DAY',
-		[(int) read_config_option('mt_data_retention_ip')]);
+		[$ip_retention]);
 
 	if ($days > 0) {
 		mactrack_delete_batched('DELETE FROM mac_track_dot1x
@@ -5991,7 +6000,7 @@ function mactrack_utilities_post_actions(): array {
 		'mactrack_refresh_oui_database'               => __('Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?', 'mactrack'),
 		'mactrack_utilities_rebuild_scan_dates'       => __('Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?', 'mactrack'),
 		'mactrack_utilities_optimize_ports'           => __('Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?', 'mactrack'),
-		'mactrack_utilities_convert_ports'            => __('Run this maintenance off hours. The conversion copies the full port history and can take hours. Scheduled scans are skipped and database maintenance waits until it finishes. Allow free disk space for a second copy of the table and its indexes. The original remains readable until the replacement is verified. Continue?', 'mactrack'),
+		'mactrack_utilities_convert_ports'            => __('Run this maintenance off hours. The rebuild copies the full history of the port (MAC address) and IP address tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC and IP address searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?', 'mactrack'),
 	];
 }
 

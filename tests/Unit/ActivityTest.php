@@ -308,6 +308,16 @@ describe('state', function () {
 		expect($state['since'])->toBe(1794464000);
 	});
 
+	it('reports an interrupted partitioning rebuild from the tables it left behind', function () {
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'information_schema.TABLES', '1');
+
+		$state = mactrack_activity_state(MT_ACT_NOW);
+
+		expect($state['state'])->toBe('converting');
+		expect($state['since'])->toBeNull();
+		expect($state['text'])->toContain('Repartitioning');
+	});
+
 	it('reports a recorded step of a live process with its detail', function () {
 		mt_act_record('scanning', getmypid(), ['devices' => 40]);
 
@@ -370,6 +380,12 @@ describe('state', function () {
 		set_config_option('mt_poller_deferred', json_encode(['reason' => 'rebuild_table', 'time' => MT_ACT_NOW]));
 
 		expect(mactrack_activity_state(MT_ACT_NOW)['deferred']['reason'])->toContain('rebuild');
+	});
+
+	it('names an unfinished partitioning rebuild as the reason', function () {
+		set_config_option('mt_poller_deferred', json_encode(['reason' => 'partition_rebuild', 'time' => MT_ACT_NOW]));
+
+		expect(mactrack_activity_state(MT_ACT_NOW)['deferred']['reason'])->toContain('partitioning');
 	});
 
 	it('drops a skipped poller run older than two collection intervals', function () {

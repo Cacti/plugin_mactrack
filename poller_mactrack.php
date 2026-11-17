@@ -176,6 +176,21 @@ if (function_exists('mactrack_background_upgrade_running')) {
 	}
 }
 
+// A partitioning rebuild renames mac_track_ports and mac_track_ips aside and
+// copies them back (cli/upgrade_partitioning.php). Until it finishes the live
+// tables are incomplete, so a scan would store its results in a partial table.
+if (function_exists('mactrack_partition_rebuild_pending') && mactrack_partition_rebuild_pending() !== []) {
+	mactrack_debug('Deferring the Mactrack poller run while the port and IP tables are repartitioned');
+
+	mactrack_poller_deferred('partition_rebuild');
+
+	if (function_exists('unregister_process')) {
+		unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
+	}
+
+	exit(0);
+}
+
 // not deferring: drop the note the Process Status page shows
 mactrack_poller_deferred_clear();
 
