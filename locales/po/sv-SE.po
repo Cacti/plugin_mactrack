@@ -3602,6 +3602,10 @@ msgstr "Ange den MAC-adress eller det MAC-adressmönster som ska auktoriseras au
 msgid "Please add a reason for this entry."
 msgstr "Lägg till en anledning till denna post."
 
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr ""
+
 #, fuzzy
 #~| msgid "Change Device Port Values"
 #~ msgid "Convert Port Table"
