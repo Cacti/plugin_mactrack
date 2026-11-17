@@ -3755,6 +3755,10 @@ msgstr "Εισαγάγετε τη διεύθυνση MAC ή τη συμβολο�
 msgid "Please add a reason for this entry."
 msgstr "Προσθέστε έναν λόγο για αυτή την καταχώρηση."
 
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr ""
+
 #, fuzzy
 #~| msgid "Change Device Port Values"
 #~ msgid "Convert Port Table"
