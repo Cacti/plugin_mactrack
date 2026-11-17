@@ -108,8 +108,8 @@ switch (get_request_var('action')) {
 		mactrack_utilities_optimize_ports();
 
 		break;
-	case 'mactrack_utilities_convert_ports':
-		mactrack_utilities_convert_ports();
+	case 'mactrack_utilities_convert_partitions':
+		mactrack_utilities_convert_partitions();
 
 		break;
 	case 'mactrack_utilities_purge_scanning_funcs':
@@ -784,7 +784,7 @@ function mactrack_utilities_partition_status(): void {
 		$size = __('%s, coarser than the setting because %d partitions would exceed the limit', $size, $r['projected'], 'mactrack');
 	}
 
-	$row(__('Port Partition Size', 'mactrack'), $size);
+	$row(__('Port and IP Address Partition Size', 'mactrack'), $size);
 	$row(__('Pending Exchange', 'mactrack'), $r['pending'] !== '' ? $r['pending'] : $none);
 	$row(__('Load Path', 'mactrack'), __('PHP batches', 'mactrack'));
 	$row(__('Last Scan Note', 'mactrack'), $r['last_scan_reason'] !== '' ? $r['last_scan_reason'] : $none);
@@ -874,7 +874,7 @@ function mactrack_utilities_optimize_ports(): void {
  * @global array $config Cacti global configuration array; used to build
  *                       the script's path.
  */
-function mactrack_utilities_convert_ports(): void {
+function mactrack_utilities_convert_partitions(): void {
 	global $config;
 
 	$scheme = get_request_var('partition_scheme');
@@ -932,14 +932,16 @@ function mactrack_utilities_purge_scanning_funcs(): void {
  *
  * @param string $action Action to post.
  * @param string $label  Button label.
+ * @param bool   $cancel Whether to put a Cancel link beside the button.
  *
  * @return string
  */
-function mactrack_utilities_post_form(string $action, string $label): string {
+function mactrack_utilities_post_form(string $action, string $label, bool $cancel = false): string {
+	// The Cancel link sits inside the form so it and the submit button share a line.
 	return '<form method="post" action="mactrack_utilities.php">'
 		. '<input type="hidden" name="action" value="' . html_escape($action) . '">'
-		. ($action === 'mactrack_utilities_convert_ports' ? mactrack_utilities_conversion_fields()
-			. '<a class="ui-button ui-corner-all ui-widget" href="mactrack_utilities.php">' . html_escape(__('Cancel', 'mactrack')) . '</a> ' : '')
+		. ($action === 'mactrack_utilities_convert_partitions' ? mactrack_utilities_conversion_fields() : '')
+		. ($cancel ? '<a class="ui-button ui-corner-all ui-widget" href="mactrack_utilities.php">' . html_escape(__('Cancel', 'mactrack')) . '</a> ' : '')
 		. '<input type="submit" class="ui-button ui-corner-all ui-widget" value="' . html_escape($label) . '">'
 		. '</form>';
 }
@@ -955,7 +957,7 @@ function mactrack_utilities_post_form(string $action, string $label): string {
  * @return string
  */
 function mactrack_utilities_action_link(string $action, string $label): string {
-	if ($action === 'mactrack_utilities_convert_ports' || read_config_option('mt_maint_confirm') == 'on') {
+	if ($action === 'mactrack_utilities_convert_partitions' || read_config_option('mt_maint_confirm') == 'on') {
 		return "<a class='hyperLink' href='mactrack_utilities.php?action=" . html_escape($action) . "'>" . html_escape($label) . '</a>';
 	}
 
@@ -975,15 +977,12 @@ function mactrack_utilities_confirm(string $action): void {
 
 	top_header();
 
-	html_start_box(__('Are You Sure?', 'mactrack'), '60%', '', '3', 'center', '');
+	html_start_box(mactrack_utilities_post_titles()[$action], '60%', '', '3', 'center', '');
 	print '<tr><td class="textArea">' . html_escape($message) . '</td></tr>';
 
-	if ($action === 'mactrack_utilities_convert_ports') {
-		print '<tr><td class="textArea">' . mactrack_utilities_post_form($action, __('Continue', 'mactrack')) . '</td></tr>';
-	} else {
-		print '<tr><td class="right"><a class="ui-button ui-corner-all ui-widget" href="mactrack_utilities.php">' . html_escape(__('Cancel', 'mactrack')) . '</a> '
-			. mactrack_utilities_post_form($action, __('Continue', 'mactrack')) . '</td></tr>';
-	}
+	$class = $action === 'mactrack_utilities_convert_partitions' ? 'textArea' : 'right';
+
+	print '<tr><td class="' . $class . '">' . mactrack_utilities_post_form($action, __('Continue', 'mactrack'), true) . '</td></tr>';
 
 	html_end_box();
 
@@ -1084,7 +1083,7 @@ function mactrack_utilities(): void {
 
 	<tr class='even'>
 		<td class='textArea'>
-			<?php print mactrack_utilities_action_link('mactrack_utilities_convert_ports', __('Configure Port Partitioning', 'mactrack')); ?>
+			<?php print mactrack_utilities_action_link('mactrack_utilities_convert_partitions', __('Configure Port and IP Address Partitioning', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
 			<?php print __('Choose daily or weekly partitions, or disable partitioning, for the port (MAC address) and IP address tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC and IP address searching shows a maintenance message meanwhile.', 'mactrack'); ?>
@@ -1117,7 +1116,7 @@ function mactrack_utilities(): void {
 
 /**
  * Options shared with the rebuild CLI, submitted through Cacti's CSRF form.
- * The CLI saves the choice as the Port Partition Size setting.
+ * The CLI saves the choice as the Port and IP Address Partition Size setting.
  *
  * @return string
  */

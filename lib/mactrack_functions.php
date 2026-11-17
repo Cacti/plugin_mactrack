@@ -6075,7 +6075,26 @@ function mactrack_utilities_post_actions(): array {
 		'mactrack_refresh_oui_database'               => __('Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?', 'mactrack'),
 		'mactrack_utilities_rebuild_scan_dates'       => __('Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?', 'mactrack'),
 		'mactrack_utilities_optimize_ports'           => __('Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?', 'mactrack'),
-		'mactrack_utilities_convert_ports'            => __('Run this maintenance off hours. The rebuild copies the full history of the port (MAC address) and IP address tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC and IP address searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?', 'mactrack'),
+		'mactrack_utilities_convert_partitions'            => __('Run this maintenance off hours. The rebuild copies the full history of the port (MAC address) and IP address tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC and IP address searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?', 'mactrack'),
+	];
+}
+
+/**
+ * The heading of each Utilities action's confirmation form.
+ *
+ * @return array<string, string> Action name => confirmation heading.
+ */
+function mactrack_utilities_post_titles(): array {
+	return [
+		'mactrack_utilities_truncate_ports_table'     => __('Remove All Scan Results', 'mactrack'),
+		'mactrack_utilities_perform_db_maint'         => __('Perform Database Maintenance', 'mactrack'),
+		'mactrack_utilities_purge_scanning_funcs'     => __('Refresh Scanning Functions', 'mactrack'),
+		'mactrack_utilities_purge_aggregated_data'    => __('Remove All Aggregated Results', 'mactrack'),
+		'mactrack_utilities_recreate_aggregated_data' => __('Perform Aggregate Table Rebuild', 'mactrack'),
+		'mactrack_refresh_oui_database'               => __('Rebuild IEEE Vendor MAC/OUI Database', 'mactrack'),
+		'mactrack_utilities_rebuild_scan_dates'       => __('Rebuild Scan Dates', 'mactrack'),
+		'mactrack_utilities_optimize_ports'           => __('Optimize Port Table', 'mactrack'),
+		'mactrack_utilities_convert_partitions'            => __('Configure Port and IP Address Partitioning', 'mactrack'),
 	];
 }
 

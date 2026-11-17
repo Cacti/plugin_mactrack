@@ -899,8 +899,8 @@ function mactrack_config_settings() {
 			'array'         => $mactrack_data_retention,
 		],
 		'mt_partition_granularity' => [
-			'friendly_name' => __('Port Partition Size', 'mactrack'),
-			'description'   => __('Size of the partitions of the port and IP tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php.', 'mactrack'),
+			'friendly_name' => __('Port and IP Address Partition Size', 'mactrack'),
+			'description'   => __('Size of the partitions of the port and IP tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php.', 'mactrack'),
 			'method'        => 'drop_array',
 			'default'       => 'week',
 			'array'         => [
