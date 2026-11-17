@@ -102,7 +102,7 @@
 * feature: Restyle the interfaces and dot1x status legends as rounded, evenly-spaced solid-colour chips with theme-appropriate colours 
 * feature: Ship a dedicated per-theme stylesheet for every Cacti theme
 * feature: Show on the Process Status page what MacTrack is doing now (scan phase, maintenance step, upgrade rebuild or conversion), why the poller last skipped a run, how long each step of the last maintenance took, and the size of each MacTrack table
-* issue: Show the Cancel and Continue buttons of the Utilities confirmation side by side, head each confirmation with the name of its action (such as Rebuild IEEE Vendor MAC/OUI Database) instead of Are You Sure?, and rename Configure Port Partitioning and the Port Partition Size setting to cover the IP address table too
+* issue: Show the Cancel and Continue buttons of the Utilities confirmation side by side, head each confirmation with the name of its action (such as Rebuild IEEE Vendor MAC/OUI Database) instead of Are You Sure?, and rename Configure Port Partitioning and the Port Partition Size setting to cover the IP address table too.
 
 --- 4.8 ---
 
