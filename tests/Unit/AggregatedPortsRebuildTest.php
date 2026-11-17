@@ -18,6 +18,7 @@ final class AggregatedPortsRebuildTest extends TestCase {
 	 * @return void
 	 */
 	public static function setUpBeforeClass(): void {
+		self::loadPluginSource('setup.php');
 		self::loadPluginSource('includes/database.php');
 	}
 
@@ -310,6 +311,7 @@ final class AggregatedPortsRebuildTest extends TestCase {
 	 * @return void
 	 */
 	public function testRebuildAbortsWhenTheUniqueKeyCannotBeEstablished(): void {
+		self::stubSourceCount(0);
 		self::stubTable('mac_track_aggregated_ports', true);
 		self::stubTable('mac_track_aggregated_ports_upgrade', false);
 		self::stubLock();
@@ -437,4 +439,108 @@ final class AggregatedPortsRebuildTest extends TestCase {
 		$this->assertCount(1, self::callsMatching('DROP TABLE IF EXISTS mac_track_aggregated_ports_upgrade'));
 		$this->assertNotSame('on', read_config_option('mt_aggregated_ports_rebuilt'));
 	}
+
+	/**
+	 * @return void
+	 */
+	public function testRetryClearsOnlyTheDerivedTableBeforeReplayingAnIntactSource(): void {
+		set_config_option('mt_aggregated_ports_rebuilt', 'copying');
+		self::stubTable('mac_track_aggregated_ports_upgrade', true);
+		self::stubTable('mac_track_aggregated_ports', true);
+		self::stubLock();
+		self::stubUniqueKey('mac_track_aggregated_ports', 0);
+		mactrack_test_queue_return_for('db_fetch_assoc', 'SELECT DISTINCT date_last', [['date_last' => '2024-01-01 00:00:00']]);
+
+		$this->assertTrue(mactrack_rebuild_aggregated_ports());
+		$calls = array_column($GLOBALS['__test_db_calls'], 'sql');
+		$truncate = array_search('TRUNCATE TABLE mac_track_aggregated_ports', $calls, true);
+		$copy = array_search(self::callsMatching('INSERT INTO mac_track_aggregated_ports')[0], $calls, true);
+		$this->assertNotFalse($truncate);
+		$this->assertNotFalse($copy);
+		$this->assertLessThan($copy, $truncate);
+		$this->assertSame([], self::callsMatching('DELETE FROM'));
+		$this->assertSame([], self::callsMatching('TRANSACTION'));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testRetryStopsBeforeCopyingWhenDestinationCannotBeCleared(): void {
+		set_config_option('mt_aggregated_ports_rebuilt', 'copying');
+		self::stubTable('mac_track_aggregated_ports_upgrade', true);
+		self::stubTable('mac_track_aggregated_ports', true);
+		self::stubLock();
+		mactrack_test_queue_return_for('db_fetch_assoc', 'SELECT DISTINCT date_last', [['date_last' => '2024-01-01 00:00:00']]);
+		mactrack_test_queue_return_for('db_execute_prepared', 'TRUNCATE TABLE', false);
+
+		$this->assertFalse(mactrack_rebuild_aggregated_ports());
+		$this->assertSame([], self::callsMatching('INSERT INTO'));
+		$this->assertSame([], self::callsMatching('DROP TABLE'));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testUnmarkedLegacyTablesAreKeptForRecovery(): void {
+		self::stubTable('mac_track_aggregated_ports_upgrade', true);
+		self::stubTable('mac_track_aggregated_ports', true);
+		self::stubLock();
+		mactrack_test_queue_return_for('db_fetch_assoc', 'SELECT DISTINCT date_last', [['date_last' => '2024-01-01 00:00:00']]);
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'SELECT EXISTS(SELECT 1 FROM mac_track_aggregated_ports LIMIT 1)', '1');
+
+		$this->assertFalse(mactrack_rebuild_aggregated_ports());
+		$this->assertSame([], self::callsMatching('TRUNCATE'));
+		$this->assertSame([], self::callsMatching('INSERT INTO'));
+		$this->assertSame([], self::callsMatching('DROP TABLE'));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testUnmarkedSourceCanRestartWhenTheDestinationIsEmpty(): void {
+		self::stubTable('mac_track_aggregated_ports_upgrade', true);
+		self::stubTable('mac_track_aggregated_ports', true);
+		self::stubLock();
+		self::stubUniqueKey('mac_track_aggregated_ports', 0);
+		mactrack_test_queue_return_for('db_fetch_assoc', 'SELECT DISTINCT date_last', [['date_last' => '2024-01-01 00:00:00']]);
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'SELECT EXISTS(SELECT 1 FROM mac_track_aggregated_ports LIMIT 1)', '0');
+
+		$this->assertTrue(mactrack_rebuild_aggregated_ports());
+		$this->assertCount(1, self::callsMatching('TRUNCATE TABLE'));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testFailedRenameLeavesTheOriginalTableUntouched(): void {
+		self::stubTable('mac_track_aggregated_ports_upgrade', false);
+		self::stubTable('mac_track_aggregated_ports', true);
+		self::stubLock();
+		mactrack_test_queue_return('db_execute', false);
+
+		$this->assertFalse(mactrack_rebuild_aggregated_ports());
+		$this->assertCount(1, self::callsMatching('RENAME TABLE'));
+		$this->assertSame([], self::callsMatching('SELECT DISTINCT date_last'));
+		$this->assertSame([], self::callsMatching('TRUNCATE TABLE'));
+		$this->assertSame([], self::callsMatching('INSERT INTO'));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testFailedRestartMarkerDoesNotModifyLegacyTables(): void {
+		self::stubTable('mac_track_aggregated_ports_upgrade', true);
+		self::stubTable('mac_track_aggregated_ports', true);
+		self::stubLock();
+		mactrack_test_queue_return_for('db_fetch_assoc', 'SELECT DISTINCT date_last', [['date_last' => '2024-01-01 00:00:00']]);
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'SELECT EXISTS(SELECT 1 FROM mac_track_aggregated_ports LIMIT 1)', '0');
+		foreach (['', '', '', ''] as $value) {
+			mactrack_test_queue_return('read_config_option', $value);
+		}
+
+		$this->assertFalse(mactrack_rebuild_aggregated_ports());
+		$this->assertSame([], self::callsMatching('TRUNCATE TABLE'));
+		$this->assertSame([], self::callsMatching('INSERT INTO'));
+	}
+
 }

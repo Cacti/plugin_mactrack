@@ -16,7 +16,7 @@
 
 require_once dirname(__DIR__) . '/Support/load_function.php';
 
-foreach (['conversion_fields', 'post_form', 'action_link', 'convert_ports', 'confirm'] as $function) {
+foreach (['conversion_fields', 'post_form', 'action_link', 'convert_ports', 'confirm', 'rebuild_scan_dates', 'busy_message'] as $function) {
 	mactrack_test_load_function('mactrack_utilities.php', 'mactrack_utilities_' . $function);
 }
 mactrack_test_load_function('mactrack_utilities.php', 'mactrack_utilities');
@@ -118,4 +118,26 @@ it('warns about the maintenance window and offers a cancel link before launching
 
 	expect($html)->toContain('off hours', 'disk space', 'Scheduled scans are skipped and database maintenance waits', 'href="mactrack_utilities.php"', 'name="partition_scheme"');
 	expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'exec_background'))->toBe([]);
+});
+
+
+it('reports a failed date rebuild and releases its scan lock', function () {
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK', '1');
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'information_schema.PARTITIONS', false);
+	ob_start();
+	mactrack_utilities_rebuild_scan_dates();
+	$html = ob_get_clean();
+
+	expect($html)->toContain('Scan date rebuild failed.');
+	expect($html)->not->toContain('Scan dates rebuilt:');
+	expect(implode("\n", array_column($GLOBALS['__test_db_calls'], 'sql')))->toContain('RELEASE_LOCK');
+});
+
+it('reports an empty successful date rebuild as zero', function () {
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK', '1');
+	ob_start();
+	mactrack_utilities_rebuild_scan_dates();
+	$html = ob_get_clean();
+
+	expect($html)->toContain('Scan dates rebuilt: 0');
 });

@@ -3659,9 +3659,9 @@ function mactrack_ports_table_for(string $scan_date_filter): string {
  * index in a single statement). Only missing dates are inserted and
  * only stale ones deleted, so the list is never empty while it runs.
  *
- * @return int The number of scan dates after the rebuild.
+ * @return int|false The number of scan dates, or false on an incomplete rebuild.
  */
-function mactrack_scan_dates_rebuild(): int {
+function mactrack_scan_dates_rebuild(): int|false {
 	global $database_default;
 
 	$partitions = db_fetch_assoc_prepared('SELECT PARTITION_NAME
@@ -3670,6 +3670,10 @@ function mactrack_scan_dates_rebuild(): int {
 		AND TABLE_NAME = "mac_track_ports"
 		ORDER BY PARTITION_ORDINAL_POSITION',
 		[$database_default]);
+
+	if (!is_array($partitions)) {
+		return false;
+	}
 
 	$names = array_filter(array_column($partitions, 'PARTITION_NAME'), 'is_string');
 	$found = [];
@@ -3684,28 +3688,44 @@ function mactrack_scan_dates_rebuild(): int {
 		} elseif (preg_match('/^[A-Za-z][A-Za-z0-9_]{0,63}$/', $name)) {
 			$sql = 'SELECT DISTINCT scan_date FROM mac_track_ports PARTITION (`' . $name . '`)';
 		} else {
-			cacti_log("MACTRACK: Skipping partition '$name' while rebuilding scan dates: not a plain identifier", false, 'MACTRACK');
+			cacti_log("MACTRACK: Cannot read partition '$name' while rebuilding scan dates: not a plain identifier", false, 'MACTRACK');
 
-			continue;
+			return false;
 		}
 
-		foreach (db_fetch_assoc($sql) as $row) {
+		$rows = db_fetch_assoc($sql);
+
+		if (!is_array($rows)) {
+			return false;
+		}
+
+		foreach ($rows as $row) {
 			$found[$row['scan_date']] = true;
 		}
 	}
 
-	$existing = array_fill_keys(array_column(db_fetch_assoc('SELECT scan_date FROM mac_track_scan_dates'), 'scan_date'), true);
+	$existing = db_fetch_assoc('SELECT scan_date FROM mac_track_scan_dates');
+
+	if (!is_array($existing)) {
+		return false;
+	}
+
+	$existing = array_fill_keys(array_column($existing, 'scan_date'), true);
 
 	foreach (array_chunk(array_keys(array_diff_key($found, $existing)), 1000) as $chunk) {
-		db_execute_prepared('INSERT IGNORE INTO mac_track_scan_dates (scan_date) VALUES ' .
+		if (db_execute_prepared('INSERT IGNORE INTO mac_track_scan_dates (scan_date) VALUES ' .
 			implode(', ', array_fill(0, count($chunk), '(?)')),
-			$chunk);
+			$chunk) === false) {
+			return false;
+		}
 	}
 
 	foreach (array_chunk(array_keys(array_diff_key($existing, $found)), 1000) as $chunk) {
-		db_execute_prepared('DELETE FROM mac_track_scan_dates WHERE scan_date IN (' .
+		if (db_execute_prepared('DELETE FROM mac_track_scan_dates WHERE scan_date IN (' .
 			implode(', ', array_fill(0, count($chunk), '?')) . ')',
-			$chunk);
+			$chunk) === false) {
+			return false;
+		}
 	}
 
 	return count($found);

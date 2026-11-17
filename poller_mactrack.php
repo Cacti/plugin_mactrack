@@ -1090,6 +1090,13 @@ function collect_mactrack_data($start, $site_id = 0): void {
 
 		$loaded = mactrack_partition_load_scan($partition_plan);
 
+		if ($loaded === false) {
+			cacti_log('ERROR: Unable to transfer MacTrack scan results; scan results retained', false, 'MACTRACK');
+			mactrack_activity_end();
+
+			return;
+		}
+
 		mactrack_debug("Loaded $loaded scan rows ({$partition_plan['mode']}).");
 
 		mactrack_scan_dates_record($scan_date);
