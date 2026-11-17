@@ -3757,6 +3757,10 @@ msgstr "Моля, въведете низа за MAC адрес или Mac Addre
 msgid "Please add a reason for this entry."
 msgstr "Моля, добавете причина за това вписване."
 
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr ""
+
 #, fuzzy
 #~| msgid "Change Device Port Values"
 #~ msgid "Convert Port Table"
