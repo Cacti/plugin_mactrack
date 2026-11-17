@@ -3755,6 +3755,10 @@ msgstr "Veuillez entrer l'adresse MAC ou la chaîne de correspondance d'adresse 
 msgid "Please add a reason for this entry."
 msgstr "Veuillez ajouter une raison pour cette entrée."
 
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr ""
+
 #, fuzzy
 #~| msgid "Change Device Port Values"
 #~ msgid "Convert Port Table"
