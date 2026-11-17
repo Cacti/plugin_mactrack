@@ -3757,6 +3757,10 @@ msgstr "Lütfen otomatik olarak yetkilendirilmek için MAC Adresini veya Mac Adr
 msgid "Please add a reason for this entry."
 msgstr "Lütfen bu giriş için bir sebep ekleyin."
 
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr ""
+
 #, fuzzy
 #~| msgid "Change Device Port Values"
 #~ msgid "Convert Port Table"
