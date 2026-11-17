@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-17 11:55-0500\n"
+"POT-Creation-Date: 2026-11-17 14:15-0500\n"
 "PO-Revision-Date: 2026-11-16 19:46+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\n"
@@ -134,6 +134,10 @@ msgstr "Auktorisering misslyckades"
 #: lib/mactrack_functions.php
 msgid "Not observed in latest scan"
 msgstr "Observerades inte vid den senaste genomsökningen"
+
+#: lib/mactrack_functions.php
+msgid "Locally Admined MAC"
+msgstr ""
 
 #: lib/mactrack_functions.php
 msgid "Mactrack Device Tracking OUI Database Import Results"
