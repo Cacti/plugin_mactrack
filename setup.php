@@ -496,6 +496,9 @@ function mactrack_perform_upgrade(): bool {
 			[$info['longname'], $info['author'], $info['homepage'], $info['version'], $id]);
 	}
 
+	// the IEEE list has no record of these well known prefixes
+	mactrack_ensure_known_vendor_macs();
+
 	mactrack_retry_default_site();
 
 	return true;

@@ -410,6 +410,65 @@ final class MactrackOuiDownloadTest extends TestCase {
 	}
 
 	/**
+	 * The unregistered KVM prefix is not in any IEEE list, so a full import
+	 * that deletes the vendors it did not refresh would remove it: it is added
+	 * again after the delete, in every kind of import.
+	 *
+	 * @param string $kind full, partial or failed.
+	 *
+	 * @return void
+	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('importKinds')]
+	public function testImportAddsTheKnownVendorsAfterTheDelete(string $kind): void {
+		if ($kind === 'failed') {
+			mactrack_test_queue_return_for('db_execute', 'REPLACE INTO mac_track_oui_database', false);
+		}
+
+		ob_start();
+		import_oui_database('ui', $this->ouiFixtureOf(1000), $kind === 'partial' ? $this->ouiFixtureOf(1000) : $this->unreachablePath());
+		ob_end_clean();
+
+		$calls    = $GLOBALS['__test_db_calls'];
+		$vendor   = null;
+		$last_sql = null;
+
+		foreach ($calls as $i => $call) {
+			if ($call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'INSERT IGNORE INTO mac_track_oui_database') !== false) {
+				$vendor = $i;
+				$this->assertSame(['525400', 'Virtual/KVM Host', ''], $call['params']);
+			}
+
+			if ($call['fn'] === 'db_execute' && strpos($call['sql'], 'mac_track_oui_database') !== false) {
+				$last_sql = $i;
+			}
+		}
+
+		$this->assertNotNull($vendor, 'the import must add the known vendors');
+		$this->assertGreaterThan($last_sql, $vendor, 'the known vendors are added after the import has written and deleted');
+	}
+
+	/**
+	 * @return array<string, array{string}>
+	 */
+	public static function importKinds(): array {
+		return ['full list' => ['full'], 'partial fallback list' => ['partial'], 'failed batch' => ['failed']];
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testKnownVendorsKeepARecordTheTableAlreadyHolds(): void {
+		$this->assertSame(['525400' => 'Virtual/KVM Host'], MACTRACK_KNOWN_VENDOR_MACS);
+
+		mactrack_ensure_known_vendor_macs();
+
+		$calls = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared'));
+
+		$this->assertCount(1, $calls);
+		$this->assertStringContainsString('INSERT IGNORE INTO mac_track_oui_database', $calls[0]['sql']);
+	}
+
+	/**
 	 * @return void
 	 */
 	public function testParsesVendorRecords(): void {

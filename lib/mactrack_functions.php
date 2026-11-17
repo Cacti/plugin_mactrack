@@ -3855,6 +3855,32 @@ function mactrack_ports_load(string $table = 'mac_track_ports', int $batch = 100
 }
 
 /**
+ * Well known MAC prefixes that no vendor has registered with the IEEE, so no
+ * OUI download holds them, keyed by the prefix as the OUI table stores it.
+ * 52:54:00 is the prefix QEMU/KVM gives its virtual network cards.
+ */
+const MACTRACK_KNOWN_VENDOR_MACS = [
+	'525400' => 'Virtual/KVM Host',
+];
+
+/**
+ * Adds the well known unregistered MAC prefixes to the OUI table. A prefix
+ * the table already holds, such as one the IEEE registers later, is kept. The
+ * upgrade runs this, and so does every OUI import, because a full import
+ * deletes the vendors the IEEE list does not hold.
+ *
+ * @return void
+ */
+function mactrack_ensure_known_vendor_macs(): void {
+	foreach (MACTRACK_KNOWN_VENDOR_MACS as $vendor_mac => $vendor_name) {
+		db_execute_prepared('INSERT IGNORE INTO mac_track_oui_database
+			(vendor_mac, vendor_name, vendor_address, present)
+			VALUES (?, ?, ?, 1)',
+			[(string) $vendor_mac, $vendor_name, '']);
+	}
+}
+
+/**
  * Downloads the IEEE OUI (vendor MAC prefix) database text file and
  * imports its vendor/MAC-prefix/address records into the
  * mac_track_oui_database table (marking all existing rows absent
@@ -3989,6 +4015,9 @@ function import_oui_database($type = 'ui', $oui_file = 'https://standards-oui.ie
 
 		// set correct format
 		db_execute("UPDATE mac_track_oui_database SET vendor_mac = REPLACE(vendor_mac, ':', '')");
+
+		// the import retires vendors the IEEE list does not hold
+		mactrack_ensure_known_vendor_macs();
 
 		// report some information
 		if ($type != 'ui') {

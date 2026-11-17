@@ -60,6 +60,15 @@ it('runs the upgrade housekeeping and prune on a version drift', function () {
 	}));
 
 	expect($updates)->not->toBeEmpty();
+
+	// The unregistered KVM prefix is added to the OUI table, after the version
+	// update's housekeeping and before the upgrade returns.
+	$vendors = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'INSERT IGNORE INTO mac_track_oui_database') !== false;
+	}));
+
+	expect($vendors)->toHaveCount(1);
+	expect($vendors[0]['params'])->toBe(['525400', 'Virtual/KVM Host', '']);
 });
 
 it('reinstalls hooks and upgrades the schema when the plugin is not yet recorded', function () {
@@ -132,4 +141,9 @@ it('leaves the version unrecorded when the aggregated-ports rebuild cannot finis
 
 	expect($hooks)->toBeEmpty();
 	expect($updates)->toBeEmpty();
+
+	// An upgrade that has not finished adds no vendors; the retry does.
+	expect(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return strpos((string) $call['sql'], 'mac_track_oui_database') !== false;
+	}))->toBeEmpty();
 });
