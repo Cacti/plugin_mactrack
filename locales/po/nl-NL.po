@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-16 15:12-0500\n"
+"POT-Creation-Date: 2026-11-17 09:32-0500\n"
 "PO-Revision-Date: 2026-11-16 19:46+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Dutch <https://translate.cacti.net/projects/cacti/mactrack/nl/>\n"
@@ -75,7 +75,7 @@ msgid "About %s rows left to copy (estimate)"
 msgstr ""
 
 #: lib/mactrack_activity.php
-msgid "Converting the port table to partitions"
+msgid "Repartitioning the port and IP tables"
 msgstr ""
 
 #: lib/mactrack_activity.php
@@ -96,6 +96,10 @@ msgstr "Scansnelheid: Iedere %s"
 
 #: lib/mactrack_activity.php
 msgid "A database upgrade is running"
+msgstr ""
+
+#: lib/mactrack_activity.php
+msgid "The port and IP table partitioning has not finished"
 msgstr ""
 
 #: lib/mactrack_activity.php
@@ -484,8 +488,25 @@ msgid "Rebuild and analyze the partition containing the latest port observation,
 msgstr ""
 
 #: lib/mactrack_functions.php
-msgid "Run this maintenance off hours. The conversion copies the full port history and can take hours. Scheduled scans are skipped and database maintenance waits until it finishes. Allow free disk space for a second copy of the table and its indexes. The original remains readable until the replacement is verified. Continue?"
+msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address) and IP address tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC and IP address searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
 msgstr ""
+
+#: lib/mactrack_partition_rebuild.php
+msgid "The port and IP tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
+msgstr ""
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address and MAC address searching while its port and IP tables are repartitioned. Results are incomplete until the partitioning has finished."
+msgstr ""
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address and MAC address searching because the partitioning of its port and IP tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
+msgstr ""
+
+#: lib/mactrack_partition_rebuild.php
+#, fuzzy
+msgid "Maintenance Mode"
+msgstr "Laatste Poller Maintenance Runtime:"
 
 #: mactrack_actions.php
 #, fuzzy, php-format
@@ -1390,6 +1411,11 @@ msgstr "Opties"
 
 #: mactrack_utilities.php
 #, fuzzy
+msgid "Mactrack Database Results"
+msgstr "Resultaten van de Device Tracking Database"
+
+#: mactrack_utilities.php
+#, fuzzy
 msgid "Mactrack Process Status"
 msgstr "Processtatus apparaatvolgsysteem"
 
@@ -1591,11 +1617,6 @@ msgid "Database Disk Free:"
 msgstr ""
 
 #: mactrack_utilities.php
-#, fuzzy
-msgid "Mactrack Database Results"
-msgstr "Resultaten van de Device Tracking Database"
-
-#: mactrack_utilities.php
 #, php-format
 msgid "The following number of records have been removed from the database: %s"
 msgstr "Het volgende aantal records is uit de database verwijderd: %s"
@@ -1614,6 +1635,10 @@ msgstr "Het volgende aantal records is uit de samengevoegde tabel verwijderd: %s
 #, fuzzy
 msgid "Mactrack Scan Date Rebuild Results"
 msgstr "Resultaten van de Device Tracking Database"
+
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr ""
 
 #: mactrack_utilities.php
 #, php-format
@@ -1717,10 +1742,8 @@ msgid "Last Scan Note"
 msgstr "Laatste scandatum"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Version"
-msgid "Conversion"
-msgstr "Versie"
+msgid "Rebuild"
+msgstr ""
 
 #: mactrack_utilities.php
 #, fuzzy, php-format
@@ -1729,10 +1752,8 @@ msgid "Running since %s"
 msgstr "Lopende processen:"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Last Duration"
-msgid "Last Conversion"
-msgstr "Laatste Duur"
+msgid "Last Rebuild"
+msgstr ""
 
 #: mactrack_utilities.php
 #, php-format
@@ -1755,19 +1776,25 @@ msgid "%s: %d partitions dropped, %d created"
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "Select daily, weekly or disabled partitioning before starting the conversion."
+msgid "IP Table Layout"
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "A conversion is already running. The partition status page shows when it has finished."
+#, fuzzy
+#| msgid "Data Retention"
+msgid "IP Table Partitions"
+msgstr "Data retentie"
+
+#: mactrack_utilities.php
+msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "The port table has partitions MacTrack does not recognize, so it cannot be converted. The partition status page shows why."
+msgid "A rebuild is already running. The partition status page shows when it has finished."
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "The conversion was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another conversion is running."
+msgid "The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running."
 msgstr ""
 
 #: mactrack_utilities.php
@@ -1867,7 +1894,7 @@ msgid "Configure Port Partitioning"
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "Choose daily or weekly partitions, or disable partitioning. Converting copies the full port history in the background; scheduled scans are skipped meanwhile. You can keep the original table as a backup."
+msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address) and IP address tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC and IP address searching shows a maintenance message meanwhile."
 msgstr ""
 
 #: mactrack_utilities.php
@@ -1895,10 +1922,6 @@ msgstr "Verwijdert ALLE <strong>Aggregated</strong> (Not Scan Results) Port to M
 #| msgid "Data Retention"
 msgid "Partitioning"
 msgstr "Data retentie"
-
-#: mactrack_utilities.php
-msgid "Keep the original table as a backup"
-msgstr ""
 
 #: mactrack_vendormacs.php
 #, fuzzy
@@ -2765,7 +2788,7 @@ msgid "How long should discovered IPs details be retained in the database."
 msgstr "Hoe lang moeten de MAC-gegevens van de poort worden bewaard in de database."
 
 #: setup.php
-msgid "Size of new partitions in an already partitioned table. To convert the full history or disable partitioning, use Configure Port Partitioning in MacTrack Utilities."
+msgid "Size of the partitions of the port and IP tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
 msgstr ""
 
 #: setup.php
@@ -2815,7 +2838,7 @@ msgid "Ports to Ignore While Scanning (Regular Expression)"
 msgstr ""
 
 #: setup.php
-msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
 msgstr ""
 
 #: setup.php
@@ -3294,7 +3317,7 @@ msgstr ""
 
 #: setup.php
 #, php-format
-msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  It is applied in addition to the %s expressions."
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions."
 msgstr ""
 
 #: setup.php
@@ -3757,9 +3780,15 @@ msgstr "Voer het MAC-adres of Mac Address Match-string in om automatisch geautor
 msgid "Please add a reason for this entry."
 msgstr "Voeg een reden voor deze vermelding toe."
 
-#: mactrack_utilities.php
-msgid "Scan date rebuild failed. Check the Cacti log and retry."
-msgstr ""
+#, fuzzy
+#~| msgid "Version"
+#~ msgid "Conversion"
+#~ msgstr "Versie"
+
+#, fuzzy
+#~| msgid "Last Duration"
+#~ msgid "Last Conversion"
+#~ msgstr "Laatste Duur"
 
 #, fuzzy
 #~| msgid "Change Device Port Values"
