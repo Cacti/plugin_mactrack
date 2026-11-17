@@ -3765,6 +3765,10 @@ msgstr "कृपया स्वचालित रूप से अधिक�
 msgid "Please add a reason for this entry."
 msgstr "कृपया इस प्रविष्टि के लिए एक कारण जोड़ें।"
 
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr ""
+
 #, fuzzy
 #~| msgid "Change Device Port Values"
 #~ msgid "Convert Port Table"
