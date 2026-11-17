@@ -319,6 +319,17 @@ function mactrack_upart_main(array $argv): int {
 }
 
 /**
+ * Tells whether a MacTrack database upgrade is running or left its work
+ * table behind. The upgrade rewrites mac_track_ports rows in place, which a
+ * copy would miss.
+ *
+ * @return bool
+ */
+function mactrack_upart_upgrade_active(): bool {
+	return mactrack_background_upgrade_running() || mactrack_partition_table_exists('mac_track_aggregated_ports_upgrade');
+}
+
+/**
  * Checks both tables against the scheme and rebuilds the ones that need it.
  *
  * @param string $scheme   day, week or disabled.
@@ -338,7 +349,7 @@ function mactrack_upart_run(string $scheme, bool $explicit, int $pause = 1): int
 	}
 
 	// The upgrade rewrites mac_track_ports rows in place, which a copy would miss.
-	if (mactrack_background_upgrade_running() || mactrack_partition_table_exists('mac_track_aggregated_ports_upgrade')) {
+	if (mactrack_upart_upgrade_active()) {
 		mactrack_upart_out('FATAL: A MacTrack database upgrade is running. Run this again when it has finished.');
 
 		return 1;
@@ -485,6 +496,15 @@ function mactrack_upart_assess(string $table, string $scheme): array {
  * @return int Exit status.
  */
 function mactrack_upart_rebuild_all(array $tables, string $scheme, int $pause): int {
+	// A database upgrade may have started since the first check, and it holds
+	// no lock this script waits for; one that rewrites rows now would be
+	// missed by the copy.
+	if (mactrack_upart_upgrade_active()) {
+		mactrack_upart_out('FATAL: A MacTrack database upgrade is running. Run this again when it has finished.');
+
+		return 1;
+	}
+
 	if (in_array('mac_track_ports', $tables, true) && (string) read_config_option('mt_partition_pending', true) !== '') {
 		mactrack_upart_out('FATAL: A partition exchange is pending. Let the poller finish loading it, then run this again.');
 

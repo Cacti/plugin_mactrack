@@ -137,6 +137,12 @@ process registry for 24 hours, so two runs cannot overlap).
   the rebuild is over.
 - MAC address and IP address searching shows a maintenance-mode message, and its
   results are incomplete until the rebuild has finished.
+- Changes to the history are refused with a message until the rebuild has
+  finished, including after an interruption: removing devices and sites,
+  authorizing and revoking MAC addresses, MacAuth changes, and the Utilities that
+  remove scan results, recreate the aggregated data or rebuild the scan dates.
+  The background database upgrade waits as well, so nothing is applied to a
+  partly copied table.
 - The script prints progress at least every 30 seconds. **Process Status** shows
   that MacTrack is repartitioning.
 

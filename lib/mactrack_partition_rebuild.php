@@ -62,9 +62,13 @@ function mactrack_partition_available(array $server): bool {
 
 /**
  * Partitions a newly created, empty scan-date table into this UTC week
- * and the next, so the catch-all stays empty during normal collection.
- * Existing tables are never converted here; that is
- * cli/upgrade_partitioning.php, run by an operator.
+ * and the next (or today and the two days after it for the Daily size), so
+ * the catch-all stays empty during normal collection. The saved Port
+ * Partition Size decides: Disabled leaves the table unpartitioned and a
+ * saved size is never overwritten, because setup also recreates a missing
+ * table when it re-registers the plugin during an upgrade. Existing tables
+ * are never converted here; that is cli/upgrade_partitioning.php, run by an
+ * operator.
  *
  * @param int|null $now   Current time, for tests.
  * @param string   $table mac_track_ports or mac_track_ips.
@@ -74,6 +78,12 @@ function mactrack_partition_available(array $server): bool {
  */
 function mactrack_partition_fresh_install(?int $now = null, string $table = 'mac_track_ports'): bool {
 	mactrack_partition_assert_table($table);
+
+	$saved = (string) read_config_option('mt_partition_granularity');
+
+	if ($saved === 'disabled') {
+		return false;
+	}
 
 	try {
 		$server = mactrack_partition_server((string) db_fetch_cell_prepared('SELECT VERSION()'));
@@ -85,19 +95,89 @@ function mactrack_partition_fresh_install(?int $now = null, string $table = 'mac
 		return false;
 	}
 
+	$size   = $saved === 'day' ? 'day' : 'week';
 	$bounds = [];
-	$period = mactrack_partition_period('week', $now ?? time());
+	$period = mactrack_partition_period($size, $now ?? time());
 
-	for ($i = 0; $i < 2; $i++) {
-		$bounds[mactrack_partition_name('week', $period['start'])] = $period['bound'];
-		$period                                                    = mactrack_partition_period('week', $period['bound']);
+	for ($i = 0; $i < ($size === 'day' ? 3 : 2); $i++) {
+		$bounds[mactrack_partition_name($size, $period['start'])] = $period['bound'];
+		$period                                                   = mactrack_partition_period($size, $period['bound']);
 	}
 
 	if (!mactrack_partition_ddl('ALTER TABLE `' . $table . '` ' . mactrack_partition_create_sql($bounds))) {
 		return false;
 	}
 
-	set_config_option('mt_partition_granularity', 'week');
+	if ($saved === '') {
+		set_config_option('mt_partition_granularity', 'week');
+	}
+
+	return true;
+}
+
+/**
+ * Tells whether the history tables may be changed now: takes the partition
+ * lock, which a rebuild holds for its whole run, and refuses while a
+ * rebuild table is left behind, because the live tables are then partial and
+ * a change would be undone or lost when the copy finishes. On success the
+ * caller changes the data and calls mactrack_partition_history_end(), so the
+ * check and the change are not separated by a rebuild starting.
+ *
+ * @return bool True when the lock is held and no rebuild is unfinished.
+ */
+function mactrack_partition_history_begin(): bool {
+	if (!mactrack_partition_lock(2)) {
+		return false;
+	}
+
+	if (mactrack_partition_rebuild_pending() !== []) {
+		mactrack_partition_unlock();
+
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * Releases the lock taken by mactrack_partition_history_begin().
+ *
+ * @return void
+ */
+function mactrack_partition_history_end(): void {
+	mactrack_partition_unlock();
+}
+
+/**
+ * Says why the history cannot be changed now.
+ *
+ * @return string
+ */
+function mactrack_partition_history_message(): string {
+	return __('The port and IP tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished.', 'mactrack');
+}
+
+/**
+ * Runs a change to the history tables only when no rebuild is running or
+ * unfinished, holding the partition lock for the whole change. Raises an
+ * error message when it is refused.
+ *
+ * @param callable $change The change to make.
+ *
+ * @return bool True when the change ran.
+ */
+function mactrack_partition_history_run(callable $change): bool {
+	if (!mactrack_partition_history_begin()) {
+		raise_message('mactrack_history_busy', mactrack_partition_history_message(), MESSAGE_LEVEL_ERROR);
+
+		return false;
+	}
+
+	try {
+		$change();
+	} finally {
+		mactrack_partition_history_end();
+	}
 
 	return true;
 }

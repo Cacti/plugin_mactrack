@@ -48,10 +48,12 @@ function mactrack_lock_name(string $purpose): string {
  * Takes the named lock that serializes partition DDL between the poller,
  * maintenance and Utilities.
  *
- * @return bool True when the lock was taken within 10 seconds.
+ * @param int $wait Seconds to wait for the lock.
+ *
+ * @return bool True when the lock was taken within $wait seconds.
  */
-function mactrack_partition_lock(): bool {
-	return (string) db_fetch_cell_prepared('SELECT GET_LOCK(?, 10)', [mactrack_lock_name('partitions')]) === '1';
+function mactrack_partition_lock(int $wait = 10): bool {
+	return (string) db_fetch_cell_prepared('SELECT GET_LOCK(?, ' . max(0, $wait) . ')', [mactrack_lock_name('partitions')]) === '1';
 }
 
 /**

@@ -42,6 +42,34 @@ if (!mactrack_utilities_may_run(get_request_var('action'), $_SERVER['REQUEST_MET
 	exit;
 }
 
+// Actions that change or reconcile the history hold the partition lock, which a
+// rebuild of the port and IP tables holds for its whole run, and are refused
+// while one is running or unfinished.
+$history_locked = false;
+
+if (in_array(get_request_var('action'), [
+	'mactrack_utilities_truncate_ports_table',
+	'mactrack_utilities_rebuild_scan_dates',
+	'mactrack_utilities_purge_aggregated_data',
+	'mactrack_utilities_recreate_aggregated_data',
+], true)) {
+	if (!mactrack_partition_history_begin()) {
+		top_header();
+
+		mactrack_utilities();
+
+		html_start_box(__('Mactrack Database Results', 'mactrack'), '100%', '', '3', 'center', '');
+		print '<td>' . html_escape(mactrack_partition_history_message()) . '</td>';
+		html_end_box();
+
+		bottom_footer();
+
+		exit;
+	}
+
+	$history_locked = true;
+}
+
 switch (get_request_var('action')) {
 	case 'mactrack_utilities_truncate_ports_table':
 		mactrack_utilities_ports_clear();
@@ -138,6 +166,10 @@ switch (get_request_var('action')) {
 		bottom_footer();
 
 		break;
+}
+
+if ($history_locked) {
+	mactrack_partition_history_end();
 }
 
 /* -----------------------

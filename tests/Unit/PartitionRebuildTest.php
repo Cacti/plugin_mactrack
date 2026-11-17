@@ -654,7 +654,7 @@ describe('run', function () {
 	 * aggregate upgrade table, both assessments, then both rebuilds.
 	 */
 	function mt_ur_full_run_exists(): void {
-		mt_ur_exists([0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0]);
+		mt_ur_exists([0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0]);
 	}
 
 	it('refuses to run without partitioning support unless the tables are to be unpartitioned', function () {
@@ -813,7 +813,7 @@ describe('run', function () {
 
 	it('stops at the first table that fails and leaves it to resume', function () {
 		mt_ur_db();
-		mt_ur_exists([0, 0, 1, 0, 1, 0, 1, 0]);
+		mt_ur_exists([0, 0, 1, 0, 1, 0, 0, 1, 0]);
 		mactrack_test_queue_return_for('db_execute_prepared', 'INSERT INTO `mac_track_ports`', false);
 
 		[$rc, $out] = mt_ur_capture(fn () => mactrack_upart_run('week', false, 0));
@@ -842,7 +842,7 @@ describe('run', function () {
 
 	it('resumes an unfinished rebuild without another rename', function () {
 		mt_ur_db(['layout' => 'weekly']);
-		mt_ur_exists([0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0]);
+		mt_ur_exists([0, 1, 0, 1, 0, 1, 1, 0, 1, 0]);
 
 		[$rc, $out] = mt_ur_capture(fn () => mactrack_upart_run('week', false, 0));
 
@@ -1092,6 +1092,34 @@ describe('fresh install', function () {
 		expect(fn () => mactrack_partition_fresh_install(MT_UR_NOW, 'mac_track_devices'))->toThrow(InvalidArgumentException::class);
 	});
 
+	it('follows the saved Daily size instead of overwriting it', function () {
+		$GLOBALS['__test_config_options']['mt_partition_granularity'] = 'day';
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', '8.4.3');
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'lock_wait_timeout', '50');
+
+		expect(mactrack_partition_fresh_install(MT_UR_NOW, 'mac_track_ips'))->toBeTrue();
+		expect(mt_ur_sql()[0])->toContain('ALTER TABLE `mac_track_ips` PARTITION BY RANGE', 'PARTITION `d20261112`', 'PARTITION `d20261113`', 'PARTITION `d20261114`');
+		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe('day');
+	});
+
+	it('leaves a table unpartitioned when partitioning is disabled', function () {
+		$GLOBALS['__test_config_options']['mt_partition_granularity'] = 'disabled';
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', '8.4.3');
+
+		expect(mactrack_partition_fresh_install(MT_UR_NOW, 'mac_track_ips'))->toBeFalse();
+		expect(mt_ur_sql())->toBe([]);
+		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe('disabled');
+	});
+
+	it('records weekly only when no size was saved', function () {
+		unset($GLOBALS['__test_config_options']['mt_partition_granularity']);
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', '8.4.3');
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'lock_wait_timeout', '50');
+
+		expect(mactrack_partition_fresh_install(MT_UR_NOW))->toBeTrue();
+		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe('week');
+	});
+
 	it('leaves the table unpartitioned without partitioning or a readable version', function (string $version, string $plugin) {
 		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', $version);
 		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'PLUGIN_STATUS', $plugin);
@@ -1134,6 +1162,126 @@ describe('fresh install', function () {
 
 		expect($src)->toContain("\$ports_existed     = db_table_exists('mac_track_ports');\n\tapi_plugin_db_table_create('mactrack', 'mac_track_ports', \$data);\n\n\tif (!\$ports_existed) {");
 		expect($src)->toContain("\$ips_existed       = db_table_exists('mac_track_ips');\n\tapi_plugin_db_table_create('mactrack', 'mac_track_ips', \$data);\n\n\tif (!\$ips_existed) {");
+	});
+});
+
+describe('history changes during a rebuild', function () {
+	it('runs a change under the partition lock and lets go of it', function () {
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 2)', '1');
+		mt_ur_exists([0, 0]);
+		$ran = false;
+
+		expect(mactrack_partition_history_run(function () use (&$ran) {
+			$ran = true;
+		}))->toBeTrue();
+		expect($ran)->toBeTrue();
+		expect(count(array_filter(array_column($GLOBALS['__test_db_calls'], 'sql'), fn ($s) => strpos($s, 'RELEASE_LOCK') !== false)))->toBe(1);
+		expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'raise_message'))->toBe([]);
+	});
+
+	it('refuses while a rebuild holds the lock', function () {
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 2)', '0');
+		$ran = false;
+
+		expect(mactrack_partition_history_run(function () use (&$ran) {
+			$ran = true;
+		}))->toBeFalse();
+		expect($ran)->toBeFalse();
+
+		$message = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'raise_message'));
+
+		expect($message)->toHaveCount(1);
+		expect($message[0]['params'][0])->toContain('repartitioned', 'cli/upgrade_partitioning.php');
+	});
+
+	it('refuses and lets go of the lock while a rebuild is unfinished', function () {
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 2)', '1');
+		mt_ur_exists([0, 1]);
+
+		expect(mactrack_partition_history_begin())->toBeFalse();
+		expect(count(array_filter(array_column($GLOBALS['__test_db_calls'], 'sql'), fn ($s) => strpos($s, 'RELEASE_LOCK') !== false)))->toBe(1);
+	});
+
+	it('lets go of the lock when the change throws', function () {
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 2)', '1');
+		mt_ur_exists([0, 0]);
+
+		expect(fn () => mactrack_partition_history_run(function () {
+			throw new RuntimeException('boom');
+		}))->toThrow(RuntimeException::class);
+		expect(count(array_filter(array_column($GLOBALS['__test_db_calls'], 'sql'), fn ($s) => strpos($s, 'RELEASE_LOCK') !== false)))->toBe(1);
+	});
+
+	it('does not wait for a rebuild that holds the lock for hours', function () {
+		mactrack_partition_history_begin();
+
+		$locks = array_values(array_filter(array_column($GLOBALS['__test_db_calls'], 'sql'), fn ($s) => strpos($s, 'GET_LOCK') !== false));
+
+		expect($locks)->toBe(['SELECT GET_LOCK(?, 2)']);
+	});
+
+	it('refuses to remove devices and sites, authorize and revoke MACs, or save MAC authorizations while a rebuild is unfinished', function (string $file, string $function, array $args) {
+		mactrack_test_load_function($file, $function);
+		$_SESSION['sess_user_id'] = 1;
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 2)', '0');
+
+		$function(...$args);
+
+		expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => in_array($c['fn'], ['db_execute_prepared', 'sql_save'], true) && strpos($c['sql'], 'GET_LOCK') === false))->toBe([]);
+		expect(array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'raise_message')))->toHaveCount(1);
+	})->with([
+		'device removal'    => ['mactrack_actions.php', 'api_mactrack_device_remove', [7]],
+		'site removal'      => ['mactrack_actions.php', 'api_mactrack_site_remove', [3]],
+		'MAC removal'       => ['mactrack_macauth.php', 'api_mactrack_maca_remove', [5]],
+		'MAC authorization' => ['mactrack_view_macs.php', 'api_mactrack_authorize_mac_addresses', ['001122334455', '10.0.0.1']],
+		'MAC revoke'        => ['mactrack_view_macs.php', 'api_mactrack_revoke_mac_addresses', ['001122334455']],
+	]);
+
+	it('changes the history when no rebuild is running or unfinished', function (string $file, string $function, array $args, string $statement) {
+		mactrack_test_load_function($file, $function);
+		$_SESSION['sess_user_id'] = 1;
+		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 2)', '1');
+		mt_ur_exists([0, 0]);
+
+		$function(...$args);
+
+		expect(array_filter(array_column($GLOBALS['__test_db_calls'], 'sql'), fn ($s) => strpos(preg_replace('/\s+/', ' ', (string) $s), $statement) !== false))->not->toBe([]);
+		expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'raise_message'))->toBe([]);
+	})->with([
+		'device removal'    => ['mactrack_actions.php', 'api_mactrack_device_remove', [7], 'DELETE FROM mac_track_ports WHERE device_id = ?'],
+		'site removal'      => ['mactrack_actions.php', 'api_mactrack_site_remove', [3], 'DELETE FROM mac_track_ips WHERE site_id = ?'],
+		'MAC removal'       => ['mactrack_macauth.php', 'api_mactrack_maca_remove', [5], 'DELETE FROM mac_track_ports WHERE mac_address = ?'],
+		'MAC authorization' => ['mactrack_view_macs.php', 'api_mactrack_authorize_mac_addresses', ['001122334455', '10.0.0.1'], 'UPDATE mac_track_ports SET authorized=1'],
+		'MAC revoke'        => ['mactrack_view_macs.php', 'api_mactrack_revoke_mac_addresses', ['001122334455'], 'UPDATE mac_track_ports SET authorized=0'],
+	]);
+
+	it('guards saving a MAC authorization, the Utilities that change the history and the database upgrade', function () {
+		$root = dirname(__DIR__, 2);
+		$auth = file_get_contents($root . '/mactrack_macauth.php');
+		$util = file_get_contents($root . '/mactrack_utilities.php');
+		$upgr = file_get_contents($root . '/cli/upgrade_database.php');
+
+		expect($auth)->toContain('mactrack_partition_history_run(function () use (&$mac_id, $save, $mac_address): void {');
+		expect($util)->toContain("if (!mactrack_partition_history_begin()) {");
+
+		foreach (['mactrack_utilities_truncate_ports_table', 'mactrack_utilities_rebuild_scan_dates', 'mactrack_utilities_purge_aggregated_data', 'mactrack_utilities_recreate_aggregated_data'] as $action) {
+			expect(substr($util, (int) strpos($util, 'mactrack_partition_history_begin') - 400, 400))->toContain("'" . $action . "'");
+		}
+
+		expect($util)->toContain("if (\$history_locked) {\n\tmactrack_partition_history_end();");
+		expect($upgr)->toContain('mactrack_partition_rebuild_pending() !== []');
+		expect(strpos($upgr, 'mactrack_partition_rebuild_pending'))->toBeGreaterThan(strpos($upgr, "mactrack_lock_name('scan')"));
+		expect(strpos($upgr, 'mactrack_partition_rebuild_pending'))->toBeLessThan(strpos($upgr, 'mactrack_perform_upgrade()'));
+	});
+
+	it('rechecks for a database upgrade once the locks are held', function () {
+		mt_ur_exists([1]);
+
+		$out = mt_ur_capture(fn () => mactrack_upart_rebuild_all(['mac_track_ports'], 'week', 0));
+
+		expect($out[0])->toBe(1);
+		expect($out[1])->toContain('database upgrade is running');
+		expect(mt_ur_sql())->toBe([]);
 	});
 });
 

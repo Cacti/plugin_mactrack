@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-17 09:19-0500\n"
+"POT-Creation-Date: 2026-11-17 09:32-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -475,6 +475,10 @@ msgstr ""
 
 #: lib/mactrack_functions.php
 msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address) and IP address tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC and IP address searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
+msgstr ""
+
+#: lib/mactrack_partition_rebuild.php
+msgid "The port and IP tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
 msgstr ""
 
 #: lib/mactrack_partition_rebuild.php
@@ -1368,6 +1372,10 @@ msgid "Options"
 msgstr ""
 
 #: mactrack_utilities.php
+msgid "Mactrack Database Results"
+msgstr ""
+
+#: mactrack_utilities.php
 msgid "Mactrack Process Status"
 msgstr ""
 
@@ -1553,10 +1561,6 @@ msgstr ""
 
 #: mactrack_utilities.php
 msgid "Database Disk Free:"
-msgstr ""
-
-#: mactrack_utilities.php
-msgid "Mactrack Database Results"
 msgstr ""
 
 #: mactrack_utilities.php

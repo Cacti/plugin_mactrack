@@ -144,6 +144,20 @@ if ((string) db_fetch_cell_prepared('SELECT GET_LOCK(?, 0)', [mactrack_lock_name
 	exit(0);
 }
 
+// A partitioning rebuild that stopped leaves the live port and IP tables
+// partial and its <table>_rebuild tables holding the rest. An upgrade that
+// rewrites them now (MAC normalization, for example) would be marked complete
+// before the copy restores the rows it never saw, so wait for the rebuild.
+if (function_exists('mactrack_partition_rebuild_pending') && mactrack_partition_rebuild_pending() !== []) {
+	upgrade_debug('A MacTrack partitioning rebuild is unfinished; the upgrade will be retried');
+
+	if ($registered) {
+		unregister_process('mtupgrade', 'database', 0);
+	}
+
+	exit(0);
+}
+
 $start = microtime(true);
 
 upgrade_debug('Starting the MacTrack background database upgrade');
