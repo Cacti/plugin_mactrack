@@ -3755,6 +3755,10 @@ msgstr "자동 승인을 받으려면 MAC 주소 또는 MAC 주소 일치 문자
 msgid "Please add a reason for this entry."
 msgstr "이 항목에 대한 이유를 추가하십시오."
 
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr ""
+
 #, fuzzy
 #~| msgid "Change Device Port Values"
 #~ msgid "Convert Port Table"
