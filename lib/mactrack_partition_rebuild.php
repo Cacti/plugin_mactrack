@@ -222,6 +222,36 @@ function mactrack_partition_rebuild_notice(): void {
 }
 
 /**
+ * Remembers that the daily database maintenance came due while a rebuild was
+ * under way, so the poller runs it as soon as the rebuild is over. The poller
+ * calls this each cycle it defers for an unfinished rebuild, which also covers
+ * a window that falls inside a run that stopped and was started again.
+ *
+ * @param int|null $now Current time, for tests.
+ *
+ * @return void
+ */
+function mactrack_partition_rebuild_note_maintenance(?int $now = null): void {
+	$now    = $now ?? time();
+	$time   = (string) read_config_option('mt_maint_time');
+	$window = strtotime($time, $now);
+
+	// An unreadable time is the poller's default, 12:00am.
+	if ($window === false) {
+		$time   = '12:00am';
+		$window = strtotime($time, $now);
+	}
+
+	// The poller's schedule: today's time while the last run is older than it,
+	// otherwise tomorrow's.
+	$next = (int) read_config_option('mt_last_db_maint_time') < $window ? $window : strtotime('tomorrow ' . $time, $now);
+
+	if ($next - $now < 0 && (string) read_config_option('mt_db_maint_missed', true) !== 'on') {
+		set_config_option('mt_db_maint_missed', 'on');
+	}
+}
+
+/**
  * Returns how many days of history a table keeps. The retention settings
  * hold a number of days; older releases stored names such as 2weeks.
  *

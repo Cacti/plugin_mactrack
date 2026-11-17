@@ -1034,6 +1034,47 @@ describe('scan lock', function () {
 
 		expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared'))->toBe([]);
 		expect($GLOBALS['__test_cacti_log'][0])->toContain('skipped while the port and IP tables are repartitioned');
+		expect($GLOBALS['__test_config_options']['mt_db_maint_missed'])->toBe('on');
+	});
+
+	it('runs the maintenance that came due during a rebuild once the poller is free', function () {
+		$src = file_get_contents(dirname(__DIR__, 2) . '/poller_mactrack.php');
+
+		expect($src)->toContain("\$maint_missed = (string) read_config_option('mt_db_maint_missed', true) === 'on';");
+		expect($src)->toContain('if ($time_till_next_db_maint < 0 || $maint_missed) {');
+		expect($src)->toContain("mactrack_poller_deferred('partition_rebuild');\n\n\t// A maintenance window that passes meanwhile is run after the rebuild.\n\tmactrack_partition_rebuild_note_maintenance();");
+	});
+
+	it('notes a maintenance window that passes during a rebuild', function (string $last, bool $missed) {
+		$GLOBALS['__test_config_options']['mt_maint_time']          = '12:00am';
+		$GLOBALS['__test_config_options']['mt_last_db_maint_time'] = $last;
+
+		mactrack_partition_rebuild_note_maintenance(MT_UR_NOW);
+
+		expect(($GLOBALS['__test_config_options']['mt_db_maint_missed'] ?? '') === 'on')->toBe($missed);
+	})->with([
+		'last run before the window' => [(string) (MT_UR_NOW - 2 * 86400), true],
+		'never run'                  => ['', true],
+		'already run after it'       => [(string) MT_UR_NOW, false],
+	]);
+
+	it('falls back to the default maintenance time when the setting is unreadable', function () {
+		$GLOBALS['__test_config_options']['mt_maint_time']          = 'whenever';
+		$GLOBALS['__test_config_options']['mt_last_db_maint_time'] = (string) (MT_UR_NOW - 2 * 86400);
+
+		mactrack_partition_rebuild_note_maintenance(MT_UR_NOW);
+
+		expect($GLOBALS['__test_config_options']['mt_db_maint_missed'])->toBe('on');
+	});
+
+	it('leaves a note that was already made', function () {
+		$GLOBALS['__test_config_options']['mt_maint_time']         = '12:00am';
+		$GLOBALS['__test_config_options']['mt_last_db_maint_time'] = '';
+		$GLOBALS['__test_config_options']['mt_db_maint_missed']    = 'on';
+
+		mactrack_partition_rebuild_note_maintenance(MT_UR_NOW);
+
+		expect($GLOBALS['__test_config_options']['mt_db_maint_missed'])->toBe('on');
 	});
 });
 

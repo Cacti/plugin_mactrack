@@ -3206,7 +3206,14 @@ function mactrack_db_maint_run(array &$steps, ?int $now = null): void {
 	if ((string) read_config_option('mt_partition_converting', true) !== '' || mactrack_partition_rebuild_pending() !== []) {
 		cacti_log('MACTRACK: Database maintenance skipped while the port and IP tables are repartitioned.', false, 'MACTRACK');
 
+		// The poller runs it as soon as the rebuild is over.
+		set_config_option('mt_db_maint_missed', 'on');
+
 		return;
+	}
+
+	if ((string) read_config_option('mt_db_maint_missed', true) !== '') {
+		set_config_option('mt_db_maint_missed', '');
 	}
 
 	// remove stale records from the poller database

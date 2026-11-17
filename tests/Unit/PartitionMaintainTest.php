@@ -497,6 +497,18 @@ it('maintains the IP table by partition when it uses the scan-date layout', func
 	expect(array_filter($sql, fn ($s) => strpos($s, 'ALTER TABLE `mac_track_ips`') !== false))->not->toBe([]);
 });
 
+it('forgets a maintenance window missed during a rebuild once the maintenance runs', function () {
+	set_config_option('mt_data_retention', '7');
+	set_config_option('mt_data_retention_ip', '3');
+	set_config_option('mt_db_maint_missed', 'on');
+	mt_pm_db([]);
+
+	perform_mactrack_db_maint();
+
+	expect($GLOBALS['__test_config_options']['mt_db_maint_missed'])->toBe('');
+	expect(array_filter(array_column($GLOBALS['__test_db_calls'], 'sql'), fn ($s) => strpos($s, 'DELETE FROM mac_track_ips') !== false))->not->toBe([]);
+});
+
 it('keeps deleting IP rows by date while the IP table is not partitioned', function () {
 	set_config_option('mt_data_retention', '7');
 	set_config_option('mt_data_retention_ip', '3');

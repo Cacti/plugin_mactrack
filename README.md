@@ -55,17 +55,33 @@ Create new or enable prepared Device Types - Console -> Mactrack -> Device Types
 
 ## Port and IP history partitioning
 
-The MAC address history (`mac_track_ports`) and the IP address history
-(`mac_track_ips`) are partitioned by scan date. New installs use weekly
-partitions, starting Monday at 00:00 UTC. The **Port Partition Size** setting
-(One per Scan, Hourly, Daily, Weekly or Disabled) sets the size of the
-partitions created from now on; it never rewrites partitions that already exist.
-Retention then drops whole expired partitions instead of deleting rows.
+MacTrack keeps the MAC address history in `mac_track_ports` and the IP address
+history in `mac_track_ips`. Both tables are partitioned by scan date (MySQL 8.0+
+or MariaDB with the partition plugin), so retention drops whole expired
+partitions instead of deleting millions of rows, and a search for one scan reads
+one partition. A server without partitioning support keeps unpartitioned tables,
+which MacTrack fully supports.
 
-Changing the size, or upgrading an existing install, can leave a table that
-does not follow the setting. `cli/upgrade_partitioning.php` checks both tables
-against the scheme, tells you when there is no drift, and rebuilds the tables
-that have drifted. From the Cacti installation directory:
+### Setting it up
+
+**New installs** create both tables weekly partitioned, starting Monday at
+00:00 UTC, and the poller's daily maintenance keeps the next two days of
+partitions created ahead of collection. Nothing needs to be done.
+
+**Existing installs** keep their tables as they are until you rebuild them. Pick
+the size, then run the rebuild once:
+
+1. Open **Console > Settings > Mactrack** and set **Port Partition Size**:
+   *Weekly* (the default, fewest partitions), *Daily*, *Hourly* or *One per
+   Scan* (maintained by the poller; the rebuild script cannot build these two),
+   or *Disabled* for unpartitioned tables. It sets the size of the partitions
+   created from now on and never rewrites the ones that exist.
+2. Set the retention (**Data Retention** for MAC addresses and **Data Retention
+   IPs**). Partitions older than the retention are dropped by the daily
+   maintenance, so with weekly partitions up to one extra week of history can
+   stay.
+3. Rebuild the existing history to match, either with **MacTrack Utilities >
+   Configure Port Partitioning** or from the Cacti installation directory:
 
 ```sh
 php plugins/mactrack/cli/upgrade_partitioning.php
@@ -74,42 +90,81 @@ php plugins/mactrack/cli/upgrade_partitioning.php --partition=daily --debug
 php plugins/mactrack/cli/upgrade_partitioning.php --partition=disabled
 ```
 
-Without `--partition`, the Port Partition Size setting is the scheme. With
-`--partition=daily|weekly|disabled`, that scheme is rebuilt to and saved as the
-Port Partition Size setting. The per-scan and hourly sizes are maintained by the
-poller and are not built by this tool. **MacTrack Utilities > Configure Port
-Partitioning** starts the same command in the background, and **View Partition
-Status** shows its last result.
+Run it as the user that runs the Cacti poller, off hours (see below).
 
-A table is rebuilt when it is not partitioned, uses the earlier daily layout, has
-partitions MacTrack does not recognize, mixes sizes, keeps rows outside every
-partition, or is not the selected size. A table that already follows the scheme
-is left alone and reported. The tables are rebuilt one after the other, ports
-first, with the same steps for each:
+### Checking and changing the scheme
+
+`cli/upgrade_partitioning.php` checks both tables against the scheme and rebuilds
+only the ones that have drifted:
+
+- Without `--partition` the scheme is the **Port Partition Size** setting. This
+  is the command to run after changing the setting, after an upgrade, or from
+  time to time to make sure the tables are as they should be.
+- With `--partition=daily|weekly|disabled` that scheme is used and saved as the
+  **Port Partition Size** setting.
+- `--debug` prints every scan date copied. `--version` and `--help` print the
+  version and the usage (`-v` and `-h` still work).
+
+A table is reported as drifted, and rebuilt, when it is not partitioned, uses the
+earlier daily layout, has partitions MacTrack does not recognize, mixes sizes,
+keeps rows outside every partition, or is not the selected size. A table that
+already follows the scheme is left alone, and the script says so. **View
+Partition Status** in the Utilities shows the layout of both tables, the last
+rebuild and the last maintenance.
+
+### What a rebuild does
+
+The tables are rebuilt one after the other, the MAC address table first, with the
+same steps for each:
 
 1. The table is renamed to `<table>_rebuild`.
 2. The table is created again with the partitions for the retention period and
    the two days kept ahead of collection. History older than the retention
    period is copied into the first partition, which retention drops once it has
-   expired.
+   expired, so nothing is lost by the rebuild.
 3. Each distinct scan date is copied from the renamed table, oldest first.
 4. When every scan date is copied and the row counts match, the renamed table is
    dropped.
 
-While it runs, scheduled scans and database maintenance are paused, MAC and IP
-address searching shows a maintenance message, and the command prints progress
-at least every 30 seconds (`--debug` prints every scan date). Run it off hours:
-it needs disk space for a second copy of each table and its indexes, and a large
-history can take hours. The run is registered with Cacti's process registry for
-24 hours so two runs cannot overlap. If it stops, the renamed table and the
-partly filled new table stay as they are, the poller stays paused, and running
-the command again resumes from the last scan date copied. A pending partition
-exchange or database upgrade must finish first.
+### While it runs
 
-Daily and weekly modes use timestamp range partitions, and maintenance keeps
-two days of partitions created ahead of collection. Retention drops only whole
-expired partitions, so a weekly layout may keep up to one extra week of history.
-Disabled uses the existing unpartitioned retention path (rows are deleted).
+Run it off hours: a rebuild needs disk space for a second copy of each table and
+its indexes, and a large history can take hours (the run is registered in Cacti's
+process registry for 24 hours, so two runs cannot overlap).
+
+- Scheduled scans and the daily database maintenance are paused. If the
+  maintenance window passes meanwhile, the poller runs the maintenance as soon as
+  the rebuild is over.
+- MAC address and IP address searching shows a maintenance-mode message, and its
+  results are incomplete until the rebuild has finished.
+- The script prints progress at least every 30 seconds. **Process Status** shows
+  that MacTrack is repartitioning.
+
+If the run is stopped (Ctrl-C, a reboot, a crash), the renamed table and the partly
+filled new table stay as they are, scanning stays paused, and the maintenance
+message stays up. Run the same command again to resume from the last scan date
+copied. A pending partition exchange or a running database upgrade must finish
+first; the script says so and changes nothing.
+
+### Ongoing maintenance
+
+Nothing needs to be scheduled besides the poller. Its daily database maintenance
+drops partitions that have expired (their upper bound is older than the
+retention), creates the partitions for the next two days (a slot per day, or per
+week), and moves any rows that landed outside every partition into a recovery
+partition. Retention drops only whole expired partitions, and `Disabled` uses the
+unpartitioned retention, which deletes rows. The Utilities page can rebuild and
+analyze the newest port partition to reclaim space.
+
+### Troubleshooting
+
+- *"A scan is running"*: run the script again when the poller has finished.
+- *Maintenance message does not go away*: a `*_rebuild` table is left; run the
+  script again to resume.
+- *"The history needs more partitions than the limit"*: choose weekly, or lower
+  the retention and run the maintenance first.
+- A partitioning failure is recorded in the Cacti log (`MACTRACK`) and under
+  **View Partition Status**.
 
 ## Ignoring ports while scanning
 

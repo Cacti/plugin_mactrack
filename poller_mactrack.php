@@ -184,6 +184,9 @@ if (function_exists('mactrack_partition_rebuild_pending') && mactrack_partition_
 
 	mactrack_poller_deferred('partition_rebuild');
 
+	// A maintenance window that passes meanwhile is run after the rebuild.
+	mactrack_partition_rebuild_note_maintenance();
+
 	if (function_exists('unregister_process')) {
 		unregister_process('mactrack', 'master', $config['poller_id'], getmypid());
 	}
@@ -380,7 +383,10 @@ if ($collect_frequency == 'disabled') {
 				log_mactrack_statistics('collect');
 			}
 
-			if ($time_till_next_db_maint < 0) {
+			// A window that passed during a partitioning rebuild runs now.
+			$maint_missed = (string) read_config_option('mt_db_maint_missed', true) === 'on';
+
+			if ($time_till_next_db_maint < 0 || $maint_missed) {
 				// take time and log performance data
 				$start = microtime(true);
 
