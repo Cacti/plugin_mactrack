@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti 1\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-17 11:55-0500\n"
+"POT-Creation-Date: 2026-11-17 14:15-0500\n"
 "PO-Revision-Date: 2026-11-16 19:46+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Spanish <https://translate.cacti.net/projects/cacti/mactrack/es/>\n"
@@ -127,6 +127,10 @@ msgstr "Error de autorización"
 
 #: lib/mactrack_functions.php
 msgid "Not observed in latest scan"
+msgstr ""
+
+#: lib/mactrack_functions.php
+msgid "Locally Admined MAC"
 msgstr ""
 
 #: lib/mactrack_functions.php
