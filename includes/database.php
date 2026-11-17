@@ -910,13 +910,53 @@ function mactrack_rebuild_aggregated_ports(): bool {
 				return false;
 			}
 
-			db_execute("RENAME TABLE $live TO $source");
+			// Mark the intact source before the rename, so a crash at any later
+			// step can restart the copy without replaying additive counts.
+			set_config_option('mt_aggregated_ports_rebuilt', 'copying');
+
+			if (read_config_option('mt_aggregated_ports_rebuilt', true) !== 'copying' ||
+				!db_execute("RENAME TABLE $live TO $source")) {
+				return false;
+			}
 		}
 
 		// An index on the batching column keeps the per-scan-date lookups and
 		// copies from scanning the whole source table each pass.
 		if (!mactrack_db_key_exists($source, 'date_last')) {
 			db_execute("ALTER TABLE $source ADD INDEX `date_last` (`date_last`)");
+		}
+
+		$scan_dates = db_fetch_assoc("SELECT DISTINCT date_last FROM $source ORDER BY date_last");
+
+		if (!is_array($scan_dates) || (!cacti_sizeof($scan_dates) && (string) db_fetch_cell("SELECT COUNT(*) FROM $source") !== '0')) {
+			cacti_log("MACTRACK: Could not read the scan dates of $source; deferring the rebuild", false, 'SYSTEM');
+
+			return false;
+		}
+
+		$scan_dates = array_rekey($scan_dates, 'date_last', 'date_last');
+
+		if (cacti_sizeof($scan_dates)) {
+			// Older workers drained their source. An unmarked source beside a
+			// populated destination cannot prove which table holds all history.
+			// Keep both for recovery instead of guessing and discarding counts.
+			if (read_config_option('mt_aggregated_ports_rebuilt', true) !== 'copying') {
+				if (mactrack_db_table_exists($live) && (string) db_fetch_cell_prepared("SELECT EXISTS(SELECT 1 FROM $live LIMIT 1)") !== '0') {
+					cacti_log("MACTRACK: Interrupted legacy aggregate rebuild: preserve $live and $source for recovery; the complete source cannot be determined automatically", false, 'SYSTEM');
+
+					return false;
+				}
+
+				set_config_option('mt_aggregated_ports_rebuilt', 'copying');
+
+				if (read_config_option('mt_aggregated_ports_rebuilt', true) !== 'copying') {
+					return false;
+				}
+			}
+
+			if (mactrack_db_table_exists($live) && !db_execute_prepared("TRUNCATE TABLE $live")) {
+				return false;
+			}
 		}
 
 		// (b) Create the modified destination table and bring it to the target
@@ -942,16 +982,6 @@ function mactrack_rebuild_aggregated_ports(): bool {
 		$select_columns = "site_id, device_id, hostname, device_name, vlan_id, vlan_name,
 			REPLACE(REPLACE(mac_address, ':', ''), '-', ''), SUBSTRING(REPLACE(REPLACE(mac_address, ':', ''), '-', ''), 1, 6), ip_address, dns_hostname, port_number, port_name,
 			date_last, first_scan_date, count_rec, active_last, authorized";
-
-		$scan_dates = array_rekey(db_fetch_assoc("SELECT DISTINCT date_last FROM $source ORDER BY date_last"), 'date_last', 'date_last');
-
-		// A failed lookup also yields no dates. Never fall through to dropping
-		// a source that still holds rows that were not copied.
-		if (!cacti_sizeof($scan_dates) && (string) db_fetch_cell("SELECT COUNT(*) FROM $source") !== '0') {
-			cacti_log("MACTRACK: Could not read the scan dates of $source; deferring the rebuild", false, 'SYSTEM');
-
-			return false;
-		}
 
 		// (c) Copy each distinct scan date in turn, merging normalized
 		// duplicates. Dates are processed oldest-first, so on a merge the

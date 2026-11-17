@@ -137,11 +137,11 @@ it('rebuilds from each partition and syncs the table', function () {
 	expect($deletes[0]['params'])->toBe(['2026-10-01 10:00:00']);
 });
 
-it('skips a partition name that is not a plain identifier', function () {
+it('aborts reconciliation for a partition name that is not a plain identifier', function () {
 	mactrack_test_queue_return('db_fetch_assoc_prepared', mt_scan_dates_partition_rows(['bad`name', 'd20261111']));
 	mactrack_test_queue_return_for('db_fetch_assoc', 'PARTITION (`d20261111`)', [['scan_date' => '2026-11-11 10:00:00']]);
 
-	expect(mactrack_scan_dates_rebuild())->toBe(1);
+	expect(mactrack_scan_dates_rebuild())->toBeFalse();
 
 	expect(mt_scan_dates_sql_matching('bad`name'))->toBe([]);
 	expect(implode("\n", $GLOBALS['__test_cacti_log']))->toContain('bad`name');
@@ -260,3 +260,32 @@ it('ignores a non-numeric partition bound for the cutoff', function () {
 	expect(mt_scan_dates_sql_matching('DROP PARTITION'))->toHaveCount(1);
 	expect(mt_scan_dates_prunes())->toBe([]);
 });
+
+it('preserves every existing date when a rebuild read fails', function ($failure) {
+	mactrack_test_queue_return('db_fetch_assoc_prepared', $failure === 'metadata' ? false : mt_scan_dates_partition_rows(['d20261110', 'd20261111']));
+	mactrack_test_queue_return_for('db_fetch_assoc', 'PARTITION (`d20261110`)', [['scan_date' => '2026-11-10 10:00:00']]);
+	mactrack_test_queue_return_for('db_fetch_assoc', 'PARTITION (`d20261111`)', $failure === 'partition' ? false : []);
+	mactrack_test_queue_return_for('db_fetch_assoc', 'FROM mac_track_scan_dates', $failure === 'existing' ? false : [['scan_date' => '2026-11-11 10:00:00']]);
+
+	expect(mactrack_scan_dates_rebuild())->toBeFalse();
+	expect(mt_scan_dates_sql_matching('INSERT IGNORE'))->toBe([]);
+	expect(mt_scan_dates_sql_matching('DELETE FROM'))->toBe([]);
+})->with(['metadata', 'partition', 'existing']);
+
+it('distinguishes an empty history from a failed read', function () {
+	mactrack_test_queue_return('db_fetch_assoc_prepared', mt_scan_dates_partition_rows([null]));
+	mactrack_test_queue_return_for('db_fetch_assoc', 'FROM mac_track_scan_dates', [['scan_date' => '2026-11-11 10:00:00']]);
+
+	expect(mactrack_scan_dates_rebuild())->toBe(0);
+	expect(mt_scan_dates_sql_matching('DELETE FROM'))->toHaveCount(1);
+});
+
+it('reports failed date writes and does not delete after a failed insert', function ($failure) {
+	mactrack_test_queue_return('db_fetch_assoc_prepared', mt_scan_dates_partition_rows([null]));
+	mactrack_test_queue_return_for('db_fetch_assoc', 'FROM mac_track_ports', [['scan_date' => '2026-11-11 10:00:00']]);
+	mactrack_test_queue_return_for('db_fetch_assoc', 'FROM mac_track_scan_dates', [['scan_date' => '2026-11-10 10:00:00']]);
+	mactrack_test_queue_return_for('db_execute_prepared', $failure, false);
+
+	expect(mactrack_scan_dates_rebuild())->toBeFalse();
+	expect(mt_scan_dates_sql_matching('DELETE FROM'))->toHaveCount($failure === 'INSERT IGNORE' ? 0 : 1);
+})->with(['INSERT IGNORE', 'DELETE FROM']);

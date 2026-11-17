@@ -539,9 +539,9 @@ function mactrack_partition_exchange(string $partition, array $server): bool {
  *
  * @param array{mode?: string, partition: string|null, scan_date: string} $plan From mactrack_partition_prepare_scan().
  *
- * @return int Rows read from mac_track_temp_ports.
+ * @return int|false Rows read, or false when a load failed.
  */
-function mactrack_partition_load_scan(array $plan): int {
+function mactrack_partition_load_scan(array $plan): int|false {
 	$mode    = $plan['mode'] ?? 'direct';
 	$pending = (string) read_config_option('mt_partition_pending', true);
 	$server  = null;
@@ -584,24 +584,38 @@ function mactrack_partition_load_scan(array $plan): int {
 		$mode = 'direct';
 	}
 
+	$failed = 0;
+
 	if ($mode !== 'exchange') {
-		return mactrack_ports_load('mac_track_ports');
+		$rows = mactrack_ports_load('mac_track_ports', 1000, null, true, 'mac_track_temp_ports', $failed);
+
+		return $failed === 0 ? $rows : false;
 	}
 
-	db_execute_prepared('TRUNCATE TABLE `mac_track_ports_stage`');
+	if (db_execute_prepared('TRUNCATE TABLE `mac_track_ports_stage`') === false) {
+		return false;
+	}
 
 	// Only this scan's rows go into its partition. Rows left in the temp
 	// table with an earlier date (a device rescan, or a run that stopped
 	// before the temp table was cleared) go straight into the partitions
 	// that cover their dates, as they do without an exchange.
-	$rows = mactrack_ports_load('mac_track_ports_stage', 1000, $plan['scan_date'], true);
+	$rows = mactrack_ports_load('mac_track_ports_stage', 1000, $plan['scan_date'], true, 'mac_track_temp_ports', $failed);
+
+	// Keep the complete source in temp until every batch has been copied.
+	// An incomplete stage must never be exchanged or marked pending.
+	if ($failed !== 0) {
+		return false;
+	}
 
 	if (!mactrack_partition_exchange($plan['partition'], $server)) {
 		set_config_option('mt_partition_pending', $plan['partition']);
 		mactrack_partition_status(['pending' => $plan['partition'], 'reason' => 'exchange failed']);
 	}
 
-	return $rows + mactrack_ports_load('mac_track_ports', 1000, $plan['scan_date'], false);
+	$rows += mactrack_ports_load('mac_track_ports', 1000, $plan['scan_date'], false, 'mac_track_temp_ports', $failed);
+
+	return $failed === 0 ? $rows : false;
 }
 
 /**

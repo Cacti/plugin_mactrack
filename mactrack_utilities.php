@@ -684,7 +684,11 @@ function mactrack_utilities_rebuild_scan_dates(): void {
 			mactrack_partition_scan_end();
 		}
 
-		print '<td>' . __('Scan dates rebuilt: %d', $dates, 'mactrack') . '</td>';
+		if ($dates === false) {
+			print '<td>' . __('Scan date rebuild failed. Check the Cacti log and retry.', 'mactrack') . '</td>';
+		} else {
+			print '<td>' . __('Scan dates rebuilt: %d', $dates, 'mactrack') . '</td>';
+		}
 	}
 
 	html_end_box();

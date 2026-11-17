@@ -346,3 +346,77 @@ function mt_ls_row(int $n): array {
 		'ip_address' => "10.0.0.$n", 'port_number' => (string) $n, 'port_name' => "Gi0/$n", 'scan_date' => '2026-11-12 06:15:07', 'authorized' => 0,
 	];
 }
+
+it('reports direct load failures instead of allowing temp cleanup', function ($operation) {
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM `mac_track_temp_ports`', $operation === 'read' ? false : [mt_ls_row(1)]);
+	if ($operation === 'write') {
+		mactrack_test_queue_return_for('db_execute_prepared', 'INSERT IGNORE INTO `mac_track_ports`', false);
+	}
+
+	expect(mactrack_partition_load_scan(['mode' => 'direct', 'partition' => null, 'scan_date' => MT_LS_PLAN['scan_date']]))->toBeFalse();
+	expect(mt_ls_pos('EXCHANGE'))->toBeNull();
+})->with(['read', 'write']);
+
+it('does not exchange an incomplete stage or mark it pending', function ($operation) {
+	mt_ls_stage(['same']);
+	mactrack_test_queue_return('db_fetch_assoc_prepared', $operation === 'read' ? false : [mt_ls_row(1)]);
+	if ($operation === 'write') {
+		mactrack_test_queue_return_for('db_execute_prepared', 'INSERT IGNORE INTO `mac_track_ports_stage`', false);
+	}
+
+	expect(mactrack_partition_load_scan(MT_LS_PLAN))->toBeFalse();
+	expect(mt_ls_pos('EXCHANGE'))->toBeNull();
+	expect(read_config_option('mt_partition_pending'))->toBe('');
+})->with(['read', 'write']);
+
+it('stops when stage cleanup fails before loading a scan', function () {
+	mt_ls_stage(['same']);
+	mactrack_test_queue_return_for('db_execute_prepared', 'TRUNCATE TABLE `mac_track_ports_stage`', false);
+
+	expect(mactrack_partition_load_scan(MT_LS_PLAN))->toBeFalse();
+	expect(mt_ls_pos('INSERT IGNORE'))->toBeNull();
+	expect(mt_ls_pos('EXCHANGE'))->toBeNull();
+});
+
+it('reports failures copying older temp rows after a complete exchange', function ($operation) {
+	mt_ls_stage(['same']);
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'WHERE scan_date <> ?', $operation === 'read' ? false : [mt_ls_row(3)]);
+	if ($operation === 'write') {
+		mactrack_test_queue_return_for('db_execute_prepared', 'INSERT IGNORE INTO `mac_track_ports` ', false);
+	}
+
+	expect(mactrack_partition_load_scan(MT_LS_PLAN))->toBeFalse();
+	expect(mt_ls_pos('EXCHANGE'))->not->toBeNull();
+})->with(['read', 'write']);
+
+it('does not exchange when a later staging page cannot be read', function () {
+	mt_ls_stage(['same']);
+	mactrack_test_queue_return('db_fetch_assoc_prepared', array_map('mt_ls_row', range(1, 1000)));
+	mactrack_test_queue_return('db_fetch_assoc_prepared', false);
+
+	expect(mactrack_partition_load_scan(MT_LS_PLAN))->toBeFalse();
+	expect(mt_ls_pos('INSERT IGNORE INTO `mac_track_ports_stage`'))->not->toBeNull();
+	expect(mt_ls_pos('EXCHANGE'))->toBeNull();
+});
+
+
+it('retains temp rows and skips aggregation when the poller load fails', function () {
+	require_once dirname(__DIR__) . '/Support/load_function.php';
+	mactrack_test_load_function('poller_mactrack.php', 'collect_mactrack_data');
+	mactrack_test_load_function('poller_mactrack.php', 'mactrack_reap_unstarted_scanners');
+	mactrack_test_load(dirname(__DIR__, 2) . '/lib/mactrack_activity.php');
+	$GLOBALS['debug'] = false;
+	$GLOBALS['max_run_duration'] = 3600;
+	$GLOBALS['__test_config_options']['mt_processes'] = 1;
+	$GLOBALS['__test_config_options']['mt_dns_prime_interval'] = 300;
+	mactrack_test_queue_return_for('db_fetch_cell', "name='mt_processes'", '1');
+	mactrack_test_queue_return_for('db_fetch_cell', 'COUNT(*) FROM mac_track_processes', '0');
+	mactrack_test_queue_return_for('db_fetch_assoc', 'SELECT device_id FROM mac_track_devices', [['device_id' => 1]]);
+	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'FROM `mac_track_temp_ports`', false);
+
+	collect_mactrack_data(microtime(true));
+
+	$sql = implode("\n", array_column($GLOBALS['__test_db_calls'], 'sql'));
+	expect($sql)->not->toContain('TRUNCATE TABLE mac_track_temp_ports', 'INSERT IGNORE INTO mac_track_scan_dates', 'INSERT INTO mac_track_aggregated_ports');
+	expect(implode("\n", $GLOBALS['__test_cacti_log']))->toContain('scan results retained');
+});

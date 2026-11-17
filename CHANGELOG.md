@@ -2,6 +2,9 @@
 
 --- develop ---
 
+* issue#448: Retain failed scan loads, stop incomplete scan-date reconciliation, and restart aggregate rebuilds without replaying counts; preserve ambiguous legacy rebuild tables for recovery
+* dev: Run the issue#448 database recovery scenarios in CI and use the prepared-query adapter for their disposable schema setup and cleanup
+
 * feature#435: Leave MACs on ports matching a regular expression out of a scan, so uplink and trunk ports stay out of the database: a new Ports to Ignore While Scanning setting for all devices plus a regular expression on each site and device, matched without regard to case against the port name and alias. The filter runs where every scanner stores its results, an invalid expression is logged and skipped, and the device run message reports how many MACs were skipped
 * issue#64914: Keep MacTrack enabled when an ARP/IP, site, device, IP range, 802.1x, MAC or interface view query fails or times out; the record functions returned false from a typed array return and the resulting TypeError made Cacti disable the plugin
 * issue#64914: Join interfaces on site_id and device_id in the ARP/IP view so the query uses the primary key instead of scanning the interface table for every row

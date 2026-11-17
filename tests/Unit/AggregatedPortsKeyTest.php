@@ -278,6 +278,7 @@ final class AggregatedPortsKeyTest extends TestCase {
 	 * @return void
 	 */
 	public function testUpgradeWidensAnIntRowIdToBigint(): void {
+		mactrack_test_queue_return_for('db_fetch_cell', 'COUNT(*) FROM mac_track_aggregated_ports_upgrade', '0');
 		self::givenUpgradeFixtures();
 		self::givenKey(self::keyRows(0));
 		mactrack_test_queue_return_for('db_fetch_row_prepared', 'SHOW COLUMNS FROM mac_track_aggregated_ports LIKE ?', ['Field' => 'row_id', 'Type' => 'int(10) unsigned']);

@@ -248,6 +248,10 @@ jobs:
       run: echo -n "${{ env.CACTI }}" | sudo tee ${{ github.workspace }}/cacti/plugins/mactrack/tests/.cacti-version > /dev/null
 
     - name: Run Pest Unit Tests
+      env:
+        MACTRACK_TEST_DSN: mysql:host=127.0.0.1;port=3306;dbname=cacti
+        MACTRACK_TEST_DB_USER: root
+        MACTRACK_TEST_DB_PASSWORD: cactiroot
       run: |
         cd ${{ github.workspace }}/cacti
         "$CACTI_PEST_BIN" --configuration=plugins/mactrack/phpunit.xml \
