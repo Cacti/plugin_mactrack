@@ -44,6 +44,7 @@
 * issue#446: Keep MacTrack enabled when an ARP/IP, site, device, IP range, 802.1x, MAC or interface view query fails or times out; the record functions returned false from a typed array return and the resulting TypeError made Cacti disable the plugin
 * issue#446: Join interfaces on site_id and device_id in the ARP/IP view so the query uses the primary key instead of scanning the interface table for every row
 * issue#448: Retain failed scan loads, stop incomplete scan-date reconciliation, and restart aggregate rebuilds without replaying counts; preserve ambiguous legacy rebuild tables for recovery
+* issue#453: Open the IP Addresses report from IP Ranges with the Most Recent scan selected; the link passed scan_date=3, which only the MAC Addresses report knows (Aggregated), so the report showed no rows
 * issue: Add a tooltip to the interfaces 'Show Totals' control explaining what the totals columns show
 * issue: Align the documented PHP floor with the PHP 8.2 CI/test contract
 * issue: Call mactrack_format_mac() from the ARP export instead of a function that does not exist

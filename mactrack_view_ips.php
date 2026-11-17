@@ -300,7 +300,7 @@ function mactrack_view_ip_ranges(): void {
 				'&ip_filter_type_id=3' .
 				'&ip_filter=' . $ip_range['ip_range'] . '.' .
 				'&device_id=-1' .
-				'&scan_date=3' .
+				'&scan_date=2' .
 				'&site_id=' . $ip_range['site_id']) . '" title="' . __esc('View IP Addresses', 'mactrack') . '"><i class="mtPorts fas fa-desktop"></i></a>';
 
 			form_alternate_row('line' . $i, true);
