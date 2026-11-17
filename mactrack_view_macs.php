@@ -676,13 +676,13 @@ function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_
 				' (mtp.dns_hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtp.device_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtp.hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
-				'mtod.vendor_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				mactrack_vendor_name_sql('mtp.mac_address') . ' LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtp.vlan_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		} else {
 			$sql_where .= ($sql_where != '' ? ' AND' : 'WHERE') .
 				' (mtp.device_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtp.hostname LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
-				'mtod.vendor_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
+				mactrack_vendor_name_sql('mtp.mac_address') . ' LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ' OR ' .
 				'mtp.vlan_name LIKE ' . db_qstr('%' . get_request_var('filter') . '%') . ')';
 		}
 	}
@@ -714,7 +714,8 @@ function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_
 		}
 	}
 
-	$sql_order = get_order_string();
+	$sql_order  = get_order_string();
+	$vendor_sql = mactrack_vendor_name_sql('mtp.mac_address');
 
 	if ($apply_limits && $rows != 999999) {
 		$sql_limit = ' LIMIT ' . ($rows * (get_request_var('page') - 1)) . ',' . $rows;
@@ -727,7 +728,7 @@ function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_
 	if (get_request_var('scan_date') == 3) {
 		$query_string = "SELECT
 			row_id, site_name, device_id, device_name, hostname, mtp.mac_address,
-			vendor_name, ip_address, dns_hostname, port_number,
+			$vendor_sql AS vendor_name, ip_address, dns_hostname, port_number,
 			port_name, vlan_id, vlan_name, MAX(date_last) AS scan_date, count_rec, MAX(active_last) AS active_last, mtm.mac_id
 			FROM mac_track_aggregated_ports AS mtp
 			LEFT JOIN mac_track_sites AS mts
@@ -743,7 +744,7 @@ function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_
 	} elseif ((get_request_var('scan_date') != 2)) {
 		$query_string = "SELECT
 			site_name, device_id, device_name, hostname, mtp.mac_address,
-			vendor_name, ip_address, dns_hostname, port_number,
+			$vendor_sql AS vendor_name, ip_address, dns_hostname, port_number,
 			port_name, vlan_id, vlan_name, scan_date, mtm.mac_id
 			FROM $ports_table AS mtp
 			LEFT JOIN mac_track_sites AS mts
@@ -758,7 +759,7 @@ function mactrack_view_get_mac_records(&$sql_where, &$sql_params, $rows, $apply_
 	} else {
 		$query_string = "SELECT
 			site_name, device_id, device_name, hostname, mtp.mac_address,
-			vendor_name, ip_address, dns_hostname, port_number,
+			$vendor_sql AS vendor_name, ip_address, dns_hostname, port_number,
 			port_name, vlan_id, vlan_name, MAX(scan_date) AS scan_date, mtm.mac_id
 			FROM $ports_table AS mtp
 			LEFT JOIN mac_track_sites AS mts

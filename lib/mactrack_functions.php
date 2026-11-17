@@ -3864,6 +3864,34 @@ const MACTRACK_KNOWN_VENDOR_MACS = [
 ];
 
 /**
+ * Returns the vendor name for a MAC address that no OUI row names: any
+ * address whose first octet is 52 is locally administered, and the IEEE
+ * registers no vendor for it. 52:54:00 is named by the OUI table.
+ *
+ * @param string $mac MAC address, with or without separators.
+ *
+ * @return string The label, or an empty string when the address is not 52.
+ */
+function mactrack_locally_administered_label(string $mac): string {
+	return strncmp($mac, '52', 2) === 0 ? __('Locally Admined MAC', 'mactrack') : '';
+}
+
+/**
+ * Returns a SQL expression for the vendor name of a MAC address column:
+ * the OUI table's name, or the locally administered label for a 52 address
+ * the OUI table does not name. The views select it and filter on it, so the
+ * label shows and is searchable without storing it on each scan row.
+ *
+ * @param string $mac_column Column holding the MAC address without separators.
+ *
+ * @return string SQL expression; the query must join mac_track_oui_database AS mtod.
+ */
+function mactrack_vendor_name_sql(string $mac_column): string {
+	return 'COALESCE(mtod.vendor_name, IF(SUBSTRING(' . $mac_column . ", 1, 2) = '52', "
+		. db_qstr(mactrack_locally_administered_label('52')) . ', NULL))';
+}
+
+/**
  * Adds the well known unregistered MAC prefixes to the OUI table. A prefix
  * the table already holds, such as one the IEEE registers later, is kept. The
  * upgrade runs this, and so does every OUI import, because a full import
@@ -5441,18 +5469,21 @@ function mactrack_tabs(): void {
  * @param string $mac The MAC address (or at least its first 3 octets)
  *                    to look up.
  *
- * @return string The vendor name, or 'Unknown' if no match is found.
+ * @return string The vendor name, the locally administered label for a 52
+ *                address the OUI database does not name, or 'Unknown'.
  */
 function mactrack_get_vendor_name($mac): string {
-	$vendor_mac = substr($mac,0,8);
+	// The OUI table keys vendors by the first six hex digits, without separators.
+	$mac        = str_replace([':', '-', '.'], '', (string) $mac);
+	$vendor_mac = substr($mac, 0, 6);
 
 	$vendor_name = db_fetch_cell_prepared('SELECT vendor_name FROM mac_track_oui_database WHERE vendor_mac = ?', [$vendor_mac]);
 
 	if ($vendor_name != '') {
 		return $vendor_name;
-	} else {
-		return __('Unknown', 'mactrack');
 	}
+
+	return mactrack_locally_administered_label($mac) ?: __('Unknown', 'mactrack');
 }
 
 /**
