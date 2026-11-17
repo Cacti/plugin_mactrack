@@ -183,7 +183,10 @@ matches:
   > MacTrack, for every device.
 
 A regular expression is matched without regard to case against both the port
-name and the port alias, for example `(uplink|trunk)` or `^Po[0-9]+$`. Leave it
+name and the port alias, for example `(uplink|trunk)` or `^Po[0-9]+$`. The
+expression fields are text areas like the device's **Ports to Ignore**: put each
+expression on its own line to give several, and a port matching any line is
+ignored. Leave it
 empty to collect every port. An invalid expression is logged and skipped, so a
 typo never stops a scan. The run message of a device shows how many MACs were
 skipped, and the new settings apply to new scans only; existing history is not

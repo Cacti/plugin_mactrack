@@ -5808,7 +5808,9 @@ function mactrack_get_ignore_ports_predicate(&$params): string {
  * scan. The expression is unanchored and case-insensitive, like the
  * RLIKE match of the Ports to Ignore setting. It is test-compiled with
  * a SOH delimiter, which cannot occur in a text setting, so valid
- * patterns keep every character they were typed with.
+ * patterns keep every character they were typed with. The fields are
+ * text areas, so each line is its own expression and a port matching
+ * any line is ignored.
  *
  * @param mixed $pattern The candidate regular expression; only strings
  *                       are considered.
@@ -5821,6 +5823,12 @@ function mactrack_compile_port_regex($pattern): string {
 
 	if ($pattern === '' || strpos($pattern, "\x01") !== false) {
 		return '';
+	}
+
+	$lines = array_values(array_filter(array_map('trim', (array) preg_split('/\R/', $pattern)), fn ($line) => $line !== ''));
+
+	if (count($lines) > 1) {
+		$pattern = implode('|', array_map(fn ($line) => '(?:' . $line . ')', $lines));
 	}
 
 	$compiled = "\x01" . $pattern . "\x01i";
