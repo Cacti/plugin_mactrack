@@ -57,11 +57,12 @@ it('parameterizes site IDs and normalizes PIDs during poller process cleanup', f
 	expect($source)->toContain("intval(\$p['process_id'])");
 });
 
-it('escapes the executable and device endpoint values in the Cabletron SNMP command', function () {
+it('does not build a command line for the Cabletron port scan', function () {
 	$source = plugin_test_read_source('lib/mactrack_cabletron.php');
 
-	expect($source)->toContain("cacti_escapeshellcmd(read_config_option('path_snmpgetnext'))");
-	expect($source)->toContain('cacti_escapeshellarg($device[\'hostname\'] . \':\' . intval($device[\'snmp_port\']))');
+	expect($source)->toContain('cacti_snmp_walk($device[\'hostname\']');
+	expect($source)->not->toContain('exec(');
+	expect($source)->not->toContain('path_snmpgetnext');
 });
 
 it('uses safe RLIKE quoting and normalized numeric values for interface filters', function () {

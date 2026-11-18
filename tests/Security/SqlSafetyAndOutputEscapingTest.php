@@ -60,11 +60,12 @@ describe('SQL safety and output escaping in mactrack', function () {
 		expect($source)->toContain("intval(\$p['process_id'])");
 	});
 
-	it('escapes Cabletron SNMP command arguments', function () {
+	it('walks the Cabletron port table through the Cacti SNMP API instead of a command line', function () {
 		$source = plugin_test_read_source('lib/mactrack_cabletron.php');
 
-		expect($source)->toContain("cacti_escapeshellcmd(read_config_option('path_snmpgetnext'))");
-		expect($source)->toContain('cacti_escapeshellarg($device[\'hostname\'] . \':\' . intval($device[\'snmp_port\']))');
+		expect($source)->toContain('cacti_snmp_walk($device[\'hostname\']');
+		expect($source)->not->toContain('exec(');
+		expect($source)->not->toContain('path_snmpgetnext');
 	});
 
 	it('safely quotes the ignored-interfaces RLIKE pattern and normalizes numeric filters', function () {

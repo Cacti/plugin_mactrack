@@ -4306,7 +4306,7 @@ function mactrack_format_interface_row($stat): string {
 	ob_start();
 
 	form_selectable_cell(mactrack_interface_actions($stat['device_id'], $stat['ifIndex']), $stat['device_id']);
-	form_selectable_cell($stat['device_name'], $stat['device_id']);
+	form_selectable_ecell($stat['device_name'], $stat['device_id']);
 	form_selectable_cell(strtoupper($stat['device_type']), $stat['device_id']);
 	form_selectable_cell($stat['ifName'], $stat['device_id']);
 	form_selectable_cell($stat['ifDescr'], $stat['device_id']);
@@ -4665,7 +4665,7 @@ function mactrack_format_dot1x_row($port_result): string {
 	}
 
 	$row .= "<td class='nowrap'>" . mactrack_interface_actions($port_result['device_id'], $port_result['port_number']) . '</td>';
-	$row .= '<td><b>' . $port_result['device_name'] . '</b></td>';
+	$row .= '<td><b>' . html_escape($port_result['device_name']) . '</b></td>';
 	$row .= '<td>' . $port_result['hostname'] . '</td>';
 	$row .= '<td><b>' . $port_result['username'] . '</b></td>';
 	$row .= '<td>' . mactrack_dot1x_status_pill($port_result) . '</td>';
@@ -4727,6 +4727,27 @@ function mactrack_display_Octets($octets): string {
 	$octets = substr((string) $octets,0,5);
 
 	return $octets . ' ' . $suffix;
+}
+
+/**
+ * Prepares one value for a double-quoted CSV cell. A text value that starts
+ * with a character a spreadsheet treats as the start of a formula (= + - @,
+ * tab or carriage return) gets a leading apostrophe so it is read as text,
+ * and embedded double quotes are doubled. Numeric values are left as they
+ * are, so negative and signed numbers keep their meaning.
+ *
+ * @param mixed $value The cell value.
+ *
+ * @return string The value to place between the cell's double quotes.
+ */
+function mactrack_csv_cell($value): string {
+	$value = (string) $value;
+
+	if ($value !== '' && !is_numeric($value) && strpos("=+-@\t\r", $value[0]) !== false) {
+		$value = "'" . $value;
+	}
+
+	return str_replace('"', '""', $value);
 }
 
 /**
@@ -5332,7 +5353,7 @@ function mactrack_format_device_row($device, $actions = false): void {
 	}
 
 	form_selectable_cell(filter_value($device['device_name'], get_request_var('filter'), 'mactrack_devices.php?action=edit&device_id=' . $device['device_id']), $device['device_id']);
-	form_selectable_cell($device['site_name'], $device['device_id']);
+	form_selectable_ecell($device['site_name'], $device['device_id']);
 	form_selectable_cell(get_colored_device_status(($device['disabled'] == 'on' ? true : false), $device['snmp_status']), $device['device_id']);
 	form_selectable_cell(filter_value($device['hostname'], get_request_var('filter')), $device['device_id']);
 	form_selectable_cell(($device['device_type'] == '' ? __('Not Detected', 'mactrack') : $device['device_type']), $device['device_id']);
@@ -5572,7 +5593,7 @@ function mactrack_site_filter($page = 'mactrack_sites.php'): void {
 
 						if (get_request_var('site_id') == $site['site_id']) {
 							print ' selected';
-						} print '>' . $site['site_name'] . '</option>';
+						} print '>' . html_escape($site['site_name']) . '</option>';
 					}
 				}
 				?>

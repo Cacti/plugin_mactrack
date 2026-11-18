@@ -314,7 +314,7 @@ function form_aggregated_actions(): void {
 
 		if (isset($rows_info)) {
 			foreach ($rows_info as $row_info) {
-				$row_list .= '<li>' . __('Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]', $row_info['device_name'], $row_info['ip_address'], mactrack_format_mac($row_info['mac_address']),  $row_info['port_number'], $row_info['count_rec'], 'mactrack') . '</li>';
+				$row_list .= '<li>' . __('Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]', html_escape($row_info['device_name']), $row_info['ip_address'], mactrack_format_mac($row_info['mac_address']),  $row_info['port_number'], $row_info['count_rec'], 'mactrack') . '</li>';
 			}
 		}
 	}
@@ -555,13 +555,13 @@ function mactrack_view_export_macs(): void {
 				$scan_date = $port_result['scan_date'];
 			}
 
-			array_push($xport_array,'"' . $port_result['site_name'] . '","' .
-			$port_result['hostname'] . '","' . $port_result['device_name'] . '","' .
-			$port_result['vlan_id'] . '","' . $port_result['vlan_name'] . '","' .
-			mactrack_format_mac($port_result['mac_address']) . '","' . $port_result['vendor_name'] . '","' .
-			$port_result['ip_address'] . '","' . $port_result['dns_hostname'] . '","' .
-			$port_result['port_number'] . '","' . $port_result['port_name'] . '","' .
-			$scan_date . '"');
+			array_push($xport_array,'"' . mactrack_csv_cell($port_result['site_name']) . '","' .
+			mactrack_csv_cell($port_result['hostname']) . '","' . mactrack_csv_cell($port_result['device_name']) . '","' .
+			mactrack_csv_cell($port_result['vlan_id']) . '","' . mactrack_csv_cell($port_result['vlan_name']) . '","' .
+			mactrack_csv_cell(mactrack_format_mac($port_result['mac_address'])) . '","' . mactrack_csv_cell($port_result['vendor_name']) . '","' .
+			mactrack_csv_cell($port_result['ip_address']) . '","' . mactrack_csv_cell($port_result['dns_hostname']) . '","' .
+			mactrack_csv_cell($port_result['port_number']) . '","' . mactrack_csv_cell($port_result['port_name']) . '","' .
+			mactrack_csv_cell($scan_date) . '"');
 		}
 	}
 
@@ -970,8 +970,8 @@ function mactrack_view_macs(): void {
 
 			form_alternate_row('line' . $key, true);
 			form_selectable_cell(mactrack_interface_actions($port_result['device_id'], $port_result['port_number'], false), $key, '1%');
-			form_selectable_cell($port_result['site_name'], $key);
-			form_selectable_cell($port_result['device_name'], $key);
+			form_selectable_ecell($port_result['site_name'], $key);
+			form_selectable_ecell($port_result['device_name'], $key);
 			form_selectable_cell($port_result['hostname'], $key);
 			form_selectable_cell(filter_value($port_result['ip_address'], get_request_var('filter')), $key);
 

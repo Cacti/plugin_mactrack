@@ -45,18 +45,30 @@ switch (get_request_var('action')) {
 
 		break;
 	case 'item_movedown':
+		if (!mactrack_require_post()) {
+			break;
+		}
+
 		mactrack_snmp_item_movedown();
 
 		header('Location: mactrack_snmp.php?action=edit&id=' . get_filter_request_var('id'));
 
 		break;
 	case 'item_moveup':
+		if (!mactrack_require_post()) {
+			break;
+		}
+
 		mactrack_snmp_item_moveup();
 
 		header('Location: mactrack_snmp.php?action=edit&id=' . get_filter_request_var('id'));
 
 		break;
 	case 'item_remove':
+		if (!mactrack_require_post()) {
+			break;
+		}
+
 		mactrack_snmp_item_remove();
 
 		header('Location: mactrack_snmp.php?header=true&action=edit&id=' . get_filter_request_var('id'));
@@ -375,11 +387,13 @@ function mactrack_snmp_item_moveup(): void {
 function mactrack_snmp_item_remove(): void {
 	// ================= input validation =================
 	get_filter_request_var('item_id');
+	get_filter_request_var('id');
 	// ====================================================
 
 	db_execute_prepared('DELETE FROM mac_track_snmp_items
-		WHERE id = ?',
-		[get_request_var('item_id')]);
+		WHERE id = ?
+		AND snmp_id = ?',
+		[get_request_var('item_id'), get_request_var('id')]);
 }
 
 /**
@@ -563,10 +577,10 @@ function mactrack_snmp_edit(): void {
 				$form_data .= '<td>' . ($item['snmp_version'] == 3 ? $item['snmp_auth_protocol'] : __('N/A', 'mactrack')) . '</td>';
 				$form_data .= '<td>' . ($item['snmp_version'] == 3 ? $item['snmp_priv_protocol'] : __('N/A', 'mactrack')) . '</td>';
 				$form_data .= '<td class="right">' .
-					($i < cacti_sizeof($items) ? '<a class="remover fa fa-caret-down moveArrow" href="' . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_snmp.php?action=item_movedown&item_id=' . $item['id'] . '&id=' . $item['snmp_id']) . '"></a>' : '<span class="moveArrowNone"></span>') .
-					($i > 1 ? '<a class="remover fa fa-caret-up moveArrow" href="' . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_snmp.php?action=item_moveup&item_id=' . $item['id'] . '&id=' . $item['snmp_id']) . '"></a>' : '<span class="moveArrowNone"></span>');
+					($i < cacti_sizeof($items) ? '<a class="remover fa fa-caret-down moveArrow mactrackSnmpItemAction" href="#" data-action="item_movedown" data-item-id="' . (int) $item['id'] . '" data-snmp-id="' . (int) $item['snmp_id'] . '"></a>' : '<span class="moveArrowNone"></span>') .
+					($i > 1 ? '<a class="remover fa fa-caret-up moveArrow mactrackSnmpItemAction" href="#" data-action="item_moveup" data-item-id="' . (int) $item['id'] . '" data-snmp-id="' . (int) $item['snmp_id'] . '"></a>' : '<span class="moveArrowNone"></span>');
 
-				$form_data .= '<a class="delete deleteMarker fa fa-remove" href="' . htmlspecialchars($config['url_path'] . 'plugins/mactrack/mactrack_snmp.php?action=item_remove&item_id=' . $item['id'] . '&id=' . $item['snmp_id']) . '"></a>' . '</td></tr>';
+				$form_data .= '<a class="delete deleteMarker fa fa-remove mactrackSnmpItemAction" href="#" data-action="item_remove" data-item-id="' . (int) $item['id'] . '" data-snmp-id="' . (int) $item['snmp_id'] . '"></a>' . '</td></tr>';
 
 				print $form_data;
 

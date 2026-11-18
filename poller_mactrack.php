@@ -1238,9 +1238,9 @@ function collect_mactrack_data($start, $site_id = 0): void {
 					$message = str_replace('<IP>', $found['ip_address'], (string) $record['description']);
 					$message = str_replace('<MAC>', $found['mac_address'], $message);
 					$message = str_replace('<TICKET>', $record['ticket_number'], $message);
-					$message = str_replace('<SITENAME>', db_fetch_cell_prepared('SELECT site_name FROM mac_track_sites WHERE site_id = ?', [$found['site_id']]), $message);
+					$message = str_replace('<SITENAME>', html_escape((string) db_fetch_cell_prepared('SELECT site_name FROM mac_track_sites WHERE site_id = ?', [$found['site_id']])), $message);
 					$message = str_replace('<DEVICEIP>', $found['hostname'], $message);
-					$message = str_replace('<DEVICENAME>', $found['device_name'], $message);
+					$message = str_replace('<DEVICENAME>', html_escape((string) $found['device_name']), $message);
 					$message = str_replace('<PORTNUMBER>', $found['port_number'], $message);
 					$message = str_replace('<PORTNAME>', $found['port_name'], $message);
 
@@ -1367,8 +1367,8 @@ function mactrack_process_mac_auth_report($mac_auth_frequency, $last_macauth_tim
 		foreach ($ports as $port) {
 			// create the report
 			$message .= '<tr>';
-			$message .= '<td>' . $port['site_name'] . '</td>';
-			$message .= '<td>' . $port['device_name'] . '</td>';
+			$message .= '<td>' . html_escape($port['site_name']) . '</td>';
+			$message .= '<td>' . html_escape($port['device_name']) . '</td>';
 			$message .= '<td>' . $port['hostname'] . '</td>';
 			$message .= '<td>' . $port['ip_address'] . '</td>';
 			$message .= '<td>' . $port['mac_address'] . '</td>';

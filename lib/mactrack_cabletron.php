@@ -303,58 +303,47 @@ function get_repeater_rev4_ports($site, &$device, $lowPort, $highPort): array {
 			$device['ports_active'] = 0;
 		}
 
-		if ($device['snmp_version'] == 2) {
-			$snmp_version = '2c';
-		} else {
-			$snmp_version = $device['snmp_version'];
-		}
-
 		$port_keys          = [];
-		$return_array       = [];
 		$new_port_key_array = [];
-		$port_number        = 0;
-		$nextOID            = '.1.3.6.1.4.1.52.4.1.1.1.4.1.5.2.1.2';
-		$to                 = ceil($device['snmp_timeout'] / 1000);
+		$portOID            = '.1.3.6.1.4.1.52.4.1.1.1.4.1.5.2.1.2';
+
+		// walk the port table through the Cacti SNMP API so no command line is built
+		$walk_array = cacti_snmp_walk($device['hostname'], $snmp_readstring,
+			$portOID, $device['snmp_version'], $device['snmp_username'],
+			$device['snmp_password'], $device['snmp_auth_protocol'],
+			$device['snmp_priv_passphrase'], $device['snmp_priv_protocol'],
+			$device['snmp_context'], $device['snmp_port'], $device['snmp_timeout'],
+			$device['snmp_retries'], $device['max_oids'] ?? 10);
 
 		$i             = 0;
 		$previous_port = 0;
 
-		while (1) {
-			$exec_string = trim(cacti_escapeshellcmd(read_config_option('path_snmpgetnext')) .
-				' -c ' . cacti_escapeshellarg($snmp_readstring) .
-				' -OnUQ -v ' . cacti_escapeshellarg($snmp_version) .
-				' -r ' . intval($device['snmp_retries']) .
-				' -t ' . intval($to) . ' ' .
-				cacti_escapeshellarg($device['hostname'] . ':' . intval($device['snmp_port'])) . ' ' .
-				cacti_escapeshellarg($nextOID));
+		if (cacti_sizeof($walk_array)) {
+			foreach ($walk_array as $walk_item) {
+				$port_number = trim(strtr($walk_item['value'], ' ', ''));
 
-			exec($exec_string, $return_array, $return_code);
-
-			[$nextOID, $port_number] = explode('=', $return_array[$i]);
-
-			if ($port_number < $previous_port) {
-				break;
-			}
-
-			if (($port_number <= $highPort) && ($port_number >= $lowPort)) {
-				if (!in_array($port_number, $ignore_ports, true)) {
-					// set defaults for devices in case they don't have/support vlans
-					$new_port_key_array[$i]['vlan_id']   = 'N/A';
-					$new_port_key_array[$i]['vlan_name'] = 'N/A';
-					$new_port_key_array[$i]['port_name'] = 'N/A';
-
-					$new_port_key_array[$i]['key']         = trim(substr($nextOID,36));
-					$new_port_key_array[$i]['port_number'] = trim(strtr($port_number,' ',''));
+				if ($port_number < $previous_port) {
+					break;
 				}
 
-				$previous_port = trim(strtr($port_number,' ',''));
-			} else {
-				break;
-			}
+				if (($port_number <= $highPort) && ($port_number >= $lowPort)) {
+					if (!in_array($port_number, $ignore_ports, true)) {
+						// set defaults for devices in case they don't have/support vlans
+						$new_port_key_array[$i]['vlan_id']     = 'N/A';
+						$new_port_key_array[$i]['vlan_name']   = 'N/A';
+						$new_port_key_array[$i]['port_name']   = 'N/A';
+						$new_port_key_array[$i]['key']         = trim(mactrack_oid_suffix($walk_item['oid'], $portOID));
+						$new_port_key_array[$i]['port_number'] = $port_number;
+					}
 
-			mactrack_debug('CMD: ' . $exec_string . ', PORT: ' . $port_number);
-			$i++;
-			$port_number = '';
+					$previous_port = $port_number;
+				} else {
+					break;
+				}
+
+				mactrack_debug('OID: ' . $walk_item['oid'] . ', PORT: ' . $port_number);
+				$i++;
+			}
 		}
 
 		if (cacti_sizeof($new_port_key_array) > 0) {

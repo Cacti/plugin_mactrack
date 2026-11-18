@@ -5,11 +5,16 @@
 * security: Add a version-safe CSP nonce (`plugin_mactrack_csp_nonce()`) to every inline `<script>` tag
 * security: Escape Cabletron SNMP command arguments and normalize numeric options
 * security: Escape rescan executable and script paths before command execution
+* security: Escape site and device names in the views, option lists, edit headers and MAC authorization emails
+* security: Escape values taken from uploaded device and device type CSV files in the import results
+* security: Neutralise spreadsheet formula prefixes and double embedded quotes in CSV exports
 * security: Normalize administrative device list SQL filters before query construction
 * security: Normalize device report SQL filters before query construction
 * security: Parameterize stale-process site filtering and validate process IDs before termination
+* security: Read the Cabletron port table through the Cacti SNMP API instead of building a command line
 * security: Remove all inline JavaScript handlers like onClick, onChange
 * security: Replace MAC action request deserialization with escaped JSON payloads
+* security: Require POST for SNMP option item reorder and removal, and scope removal to its option set
 * security: Require POST for the device rescan, site scan, enable and disable actions
 * security: Restrict Net_DNS2 cache deserialization to DNS response classes
 * security: Safely quote ignored-interface regexes and normalize interface report filters

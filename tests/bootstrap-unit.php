@@ -1099,6 +1099,22 @@ if (!function_exists('form_selectable_cell')) {
 	}
 }
 
+if (!function_exists('form_selectable_ecell')) {
+	/**
+	 * Test stub standing in for Cacti core's form_selectable_ecell(). Escapes the contents, then prints them through form_selectable_cell().
+	 *
+	 * @param string $contents Cell text, escaped before output.
+	 * @param string $id Unused.
+	 * @param string $width Unused.
+	 * @param string $align Unused.
+	 * @param string $title Unused.
+	 * @return void
+	 */
+	function form_selectable_ecell($contents, $id = '', $width = '', $align = '', $title = '') {
+		form_selectable_cell(html_escape($contents), $id, $width, $align, $title);
+	}
+}
+
 if (!function_exists('cacti_version_compare')) {
 	/**
 	 * Test stub standing in for Cacti core's cacti_version_compare(). Delegates to version_compare().

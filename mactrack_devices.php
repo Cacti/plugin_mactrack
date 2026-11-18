@@ -543,24 +543,24 @@ function mactrack_device_export(): void {
 	if (cacti_sizeof($devices)) {
 		foreach ($devices as $device) {
 			array_push($xport_array,'"' .
-			$device['site_id'] . '","' . $device['site_name'] . '","' .
-			$device['device_id'] . '","' . $device['device_name'] . '","' .
-			$device['notes'] . '","' . $device['hostname'] . '","' .
-			$device['snmp_options'] . '","' .
-			$device['snmp_version'] . '","' . $device['snmp_username'] . '","' .
-			$device['snmp_auth_protocol'] . '","' .
-			$device['snmp_priv_protocol'] . '","' .
-			$device['snmp_context'] . '","' . $device['snmp_engine_id'] . '","' .
-			$device['snmp_port'] . '","' . $device['snmp_timeout'] . '","' .
-			$device['snmp_retries'] . '","' . $device['max_oids'] . '","' .
-			$device['snmp_sysName'] . '","' . $device['snmp_sysLocation'] . '","' .
-			$device['snmp_sysContact'] . '","' . $device['snmp_sysObjectID'] . '","' .
-			$device['snmp_sysDescr'] . '","' . $device['snmp_sysUptime'] . '","' .
-			$device['ignorePorts'] . '","' . $device['scan_type'] . '","' .
-			$device['disabled'] . '","' . $device['ports_total'] . '","' .
-			$device['ports_active'] . '","' . $device['ports_trunk'] . '","' .
-			$device['macs_active'] . '","' . $device['last_rundate'] . '","' .
-			$device['last_runduration'] . '"');
+			mactrack_csv_cell($device['site_id']) . '","' . mactrack_csv_cell($device['site_name']) . '","' .
+			mactrack_csv_cell($device['device_id']) . '","' . mactrack_csv_cell($device['device_name']) . '","' .
+			mactrack_csv_cell($device['notes']) . '","' . mactrack_csv_cell($device['hostname']) . '","' .
+			mactrack_csv_cell($device['snmp_options']) . '","' .
+			mactrack_csv_cell($device['snmp_version']) . '","' . mactrack_csv_cell($device['snmp_username']) . '","' .
+			mactrack_csv_cell($device['snmp_auth_protocol']) . '","' .
+			mactrack_csv_cell($device['snmp_priv_protocol']) . '","' .
+			mactrack_csv_cell($device['snmp_context']) . '","' . mactrack_csv_cell($device['snmp_engine_id']) . '","' .
+			mactrack_csv_cell($device['snmp_port']) . '","' . mactrack_csv_cell($device['snmp_timeout']) . '","' .
+			mactrack_csv_cell($device['snmp_retries']) . '","' . mactrack_csv_cell($device['max_oids']) . '","' .
+			mactrack_csv_cell($device['snmp_sysName']) . '","' . mactrack_csv_cell($device['snmp_sysLocation']) . '","' .
+			mactrack_csv_cell($device['snmp_sysContact']) . '","' . mactrack_csv_cell($device['snmp_sysObjectID']) . '","' .
+			mactrack_csv_cell($device['snmp_sysDescr']) . '","' . mactrack_csv_cell($device['snmp_sysUptime']) . '","' .
+			mactrack_csv_cell($device['ignorePorts']) . '","' . mactrack_csv_cell($device['scan_type']) . '","' .
+			mactrack_csv_cell($device['disabled']) . '","' . mactrack_csv_cell($device['ports_total']) . '","' .
+			mactrack_csv_cell($device['ports_active']) . '","' . mactrack_csv_cell($device['ports_trunk']) . '","' .
+			mactrack_csv_cell($device['macs_active']) . '","' . mactrack_csv_cell($device['last_rundate']) . '","' .
+			mactrack_csv_cell($device['last_runduration']) . '"');
 		}
 	}
 
@@ -848,9 +848,9 @@ function mactrack_device_import_processor(&$devices): array {
 				$save_order .= ')';
 
 				if ($required >= 3) {
-					array_push($return_array, __('HEADER LINE PROCESSED OK: <br>Columns found where: %s', $save_order, 'mactrack') . '<br>');
+					array_push($return_array, __('HEADER LINE PROCESSED OK: <br>Columns found where: %s', html_escape($save_order), 'mactrack') . '<br>');
 				} else {
-					array_push($return_array, __('HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s', $save_order, 'mactrack') . '<br>');
+					array_push($return_array, __('HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s', html_escape($save_order), 'mactrack') . '<br>');
 
 					break;
 				}
@@ -944,24 +944,24 @@ function mactrack_device_import_processor(&$devices): array {
 							' VALUES' . $save_value . $update_suffix;
 
 						if (db_execute($sql_execute)) {
-							array_push($return_array, __('INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s', $site_id, $device_name, $hostname, $snmp_port, 'mactrack'));
+							array_push($return_array, __('INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s', html_escape($site_id), html_escape($device_name), html_escape($hostname), html_escape($snmp_port), 'mactrack'));
 						} else {
-							array_push($return_array, __('INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s', $site_id, $device_name, $hostname, $snmp_port, 'mactrack'));
+							array_push($return_array, __('INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s', html_escape($site_id), html_escape($device_name), html_escape($hostname), html_escape($snmp_port), 'mactrack'));
 						}
 					} else {
 						// perform check to see if the row exists
 						$existing_row = db_fetch_row("SELECT * FROM mac_track_devices $sql_where");
 
 						if (cacti_sizeof($existing_row)) {
-							array_push($return_array, __('INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s', $site_id, $device_name, $hostname, $snmp_port, 'mactrack'));
+							array_push($return_array, __('INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s', html_escape($site_id), html_escape($device_name), html_escape($hostname), html_escape($snmp_port), 'mactrack'));
 						} else {
 							$sql_execute = 'INSERT INTO mac_track_devices ' . $save_order .
 								' VALUES' . $save_value;
 
 							if (db_execute($sql_execute)) {
-								array_push($return_array, __('INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s', $site_id, $device_name, $hostname, $snmp_port, 'mactrack'));
+								array_push($return_array, __('INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s', html_escape($site_id), html_escape($device_name), html_escape($hostname), html_escape($snmp_port), 'mactrack'));
 							} else {
-								array_push($return_array, __('INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s', $site_id, $device_name, $hostname, $snmp_port, 'mactrack'));
+								array_push($return_array, __('INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s', html_escape($site_id), html_escape($device_name), html_escape($hostname), html_escape($snmp_port), 'mactrack'));
 							}
 						}
 					}
@@ -1004,7 +1004,7 @@ function mactrack_device_edit(): void {
 			WHERE device_id = ?',
 			[get_request_var('device_id')]);
 
-		$header_label = __('Mactrack Devices [edit: %s]', $device['device_name'], 'mactrack');
+		$header_label = __('Mactrack Devices [edit: %s]', html_escape($device['device_name']), 'mactrack');
 	} else {
 		$device = [];
 
@@ -1357,7 +1357,7 @@ function mactrack_device_filter(): void {
 
 			if (get_request_var('site_id') == $site['site_id']) {
 				print ' selected';
-			} print '>' . $site['site_name'] . '</option>';
+			} print '>' . html_escape($site['site_name']) . '</option>';
 		}
 	}
 	?>

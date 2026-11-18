@@ -129,20 +129,20 @@ function mactrack_view_export_devices(): void {
 	if (cacti_sizeof($devices)) {
 		foreach ($devices as $device) {
 			array_push($xport_array,'"' .
-			$device['site_id'] . '","' . $device['site_name'] . '","' .
-			$device['device_id'] . '","' . $device['device_name'] . '","' .
-			$device['notes'] . '","' . $device['hostname'] . '","' .
-			$device['snmp_version'] . '","' .
-			$device['snmp_port'] . '","' . $device['snmp_timeout'] . '","' .
-			$device['snmp_retries'] . '","' . $device['max_oids'] . '","' .
-			$device['snmp_sysName'] . '","' . $device['snmp_sysLocation'] . '","' .
-			$device['snmp_sysContact'] . '","' . $device['snmp_sysObjectID'] . '","' .
-			$device['snmp_sysDescr'] . '","' . $device['snmp_sysUptime'] . '","' .
-			$device['ignorePorts'] . '","' . $device['scan_type'] . '","' .
-			$device['disabled'] . '","' . $device['ports_total'] . '","' .
-			$device['ports_active'] . '","' . $device['ports_trunk'] . '","' .
-			$device['macs_active'] . '","' . $device['last_rundate'] . '","' .
-			$device['last_runduration'] . '"');
+			mactrack_csv_cell($device['site_id']) . '","' . mactrack_csv_cell($device['site_name']) . '","' .
+			mactrack_csv_cell($device['device_id']) . '","' . mactrack_csv_cell($device['device_name']) . '","' .
+			mactrack_csv_cell($device['notes']) . '","' . mactrack_csv_cell($device['hostname']) . '","' .
+			mactrack_csv_cell($device['snmp_version']) . '","' .
+			mactrack_csv_cell($device['snmp_port']) . '","' . mactrack_csv_cell($device['snmp_timeout']) . '","' .
+			mactrack_csv_cell($device['snmp_retries']) . '","' . mactrack_csv_cell($device['max_oids']) . '","' .
+			mactrack_csv_cell($device['snmp_sysName']) . '","' . mactrack_csv_cell($device['snmp_sysLocation']) . '","' .
+			mactrack_csv_cell($device['snmp_sysContact']) . '","' . mactrack_csv_cell($device['snmp_sysObjectID']) . '","' .
+			mactrack_csv_cell($device['snmp_sysDescr']) . '","' . mactrack_csv_cell($device['snmp_sysUptime']) . '","' .
+			mactrack_csv_cell($device['ignorePorts']) . '","' . mactrack_csv_cell($device['scan_type']) . '","' .
+			mactrack_csv_cell($device['disabled']) . '","' . mactrack_csv_cell($device['ports_total']) . '","' .
+			mactrack_csv_cell($device['ports_active']) . '","' . mactrack_csv_cell($device['ports_trunk']) . '","' .
+			mactrack_csv_cell($device['macs_active']) . '","' . mactrack_csv_cell($device['last_rundate']) . '","' .
+			mactrack_csv_cell($device['last_runduration']) . '"');
 		}
 	}
 

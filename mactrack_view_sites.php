@@ -60,10 +60,10 @@ function mactrack_view_export_sites(): void {
 
 		foreach ($sites as $site) {
 			array_push($xport_array,'"' .
-				$site['site_id'] . '","' . $site['site_name'] . '","' .
-				$site['total_devices'] . '","' . $site['total_device_errors'] . '","' .
-				$site['total_macs'] . '","' . $site['total_ips'] . '","' .
-				$site['total_oper_ports'] . '","' . $site['total_user_ports'] . '"');
+				mactrack_csv_cell($site['site_id']) . '","' . mactrack_csv_cell($site['site_name']) . '","' .
+				mactrack_csv_cell($site['total_devices']) . '","' . mactrack_csv_cell($site['total_device_errors']) . '","' .
+				mactrack_csv_cell($site['total_macs']) . '","' . mactrack_csv_cell($site['total_ips']) . '","' .
+				mactrack_csv_cell($site['total_oper_ports']) . '","' . mactrack_csv_cell($site['total_user_ports']) . '"');
 		}
 	} else {
 		array_push($xport_array, '"site_name","vendor","device_name","total_devices",' .
@@ -72,11 +72,11 @@ function mactrack_view_export_sites(): void {
 
 		foreach ($sites as $site) {
 			array_push($xport_array,'"' .
-				$site['site_name'] . '","' . $site['vendor'] . '","' .
-				$site['device_name'] . '","' . $site['total_devices'] . '","' .
-				$site['sum_ips_total'] . '","' . $site['sum_ports_total'] . '","' .
-				$site['sum_ports_active'] . '","' . $site['sum_ports_trunk'] . '","' .
-				$site['sum_macs_active'] . '"');
+				mactrack_csv_cell($site['site_name']) . '","' . mactrack_csv_cell($site['vendor']) . '","' .
+				mactrack_csv_cell($site['device_name']) . '","' . mactrack_csv_cell($site['total_devices']) . '","' .
+				mactrack_csv_cell($site['sum_ips_total']) . '","' . mactrack_csv_cell($site['sum_ports_total']) . '","' .
+				mactrack_csv_cell($site['sum_ports_active']) . '","' . mactrack_csv_cell($site['sum_ports_trunk']) . '","' .
+				mactrack_csv_cell($site['sum_macs_active']) . '"');
 		}
 	}
 
