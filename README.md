@@ -75,6 +75,14 @@ Add Mactrack Site - Console -> Mactrack -> Sites
 Add/import devices - Console -> Mactrack -> Devices -> Add device or Management -> Choose host -> Import into Mactrack Database
 Create new or enable prepared Device Types - Console -> Mactrack -> Device Types
 
+## Command-line scripts
+
+| Script | Purpose |
+| --- | --- |
+| `cli/upgrade_database.php` | Runs the pending MacTrack database upgrade in the background.  Console pages normally launch it when they detect an upgrade, but it can be run by hand.  Options: `-d`, `--debug` for verbose progress; `-f`, `--force` to run even if another upgrade appears to be registered; `-v`, `--version` and `-h`, `--help` |
+| `mactrack_import_ouidb.php` | Imports the IEEE OUI database into the vendor MAC table.  Use `-f=ouifile` to import a manually downloaded file when the system cannot reach the IEEE over http; `-v`, `--version` and `-h`, `--help` are also accepted |
+| `cli/upgrade_partitioning.php` | Checks and changes the history partitioning scheme; see below |
+
 ## Port, IP and 802.1x history partitioning
 
 MacTrack keeps the MAC address history in `mac_track_ports` and the IP address
