@@ -439,21 +439,6 @@ it('drops and recovers 802.1x partitions without pruning port scan dates', funct
 	expect(json_decode($GLOBALS['__test_config_options']['mt_partition_status'], true)['maintenance_dot1x']['dropped'])->toBe(['d20261101']);
 });
 
-it('maintains partitioned 802.1x history even when retention is unlimited', function () {
-	set_config_option('mt_data_retention', '0');
-	set_config_option('mt_data_retention_ip', '3');
-	mt_pm_db([
-		['d20261112', '1794528000'],
-		['dMaxValue', 'MAXVALUE'],
-	]);
-
-	perform_mactrack_db_maint();
-
-	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
-	expect(array_filter($sql, fn ($s) => strpos($s, 'DELETE FROM mac_track_dot1x') !== false))->toBe([]);
-	expect(array_filter($sql, fn ($s) => strpos($s, 'ALTER TABLE `mac_track_dot1x`') !== false))->not->toBe([]);
-});
-
 it('uses port retention for unpartitioned 802.1x history', function (int $days) {
 	set_config_option('mt_data_retention', (string) $days);
 	set_config_option('mt_data_retention_ip', '3');
@@ -528,8 +513,8 @@ it('only maintains the tables MacTrack partitions', function () {
 	expect(fn () => mactrack_partition_maintain(7, MT_PM_NOW, 'mac_track_devices'))->toThrow(InvalidArgumentException::class);
 });
 
-it('maintains the IP table by partition when it uses the scan-date layout', function () {
-	set_config_option('mt_data_retention', '7');
+it('maintains scan-date history by partition including unlimited port retention', function (string $table, int $days) {
+	set_config_option('mt_data_retention', (string) $days);
 	set_config_option('mt_data_retention_ip', '3');
 	mt_pm_db([
 		['d20261101', '1793491201'],
@@ -540,9 +525,9 @@ it('maintains the IP table by partition when it uses the scan-date layout', func
 	perform_mactrack_db_maint();
 
 	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
-	expect(array_filter($sql, fn ($s) => strpos($s, 'DELETE FROM mac_track_ips') !== false))->toBe([]);
-	expect(array_filter($sql, fn ($s) => strpos($s, 'ALTER TABLE `mac_track_ips`') !== false))->not->toBe([]);
-});
+	expect(array_filter($sql, fn ($s) => strpos($s, 'DELETE FROM ' . $table) !== false))->toBe([]);
+	expect(array_filter($sql, fn ($s) => strpos($s, 'ALTER TABLE `' . $table . '`') !== false))->not->toBe([]);
+})->with(['mac_track_ips', 'mac_track_dot1x'])->with([0, 7]);
 
 it('forgets a maintenance window missed during a rebuild once the maintenance runs', function () {
 	set_config_option('mt_data_retention', '7');
