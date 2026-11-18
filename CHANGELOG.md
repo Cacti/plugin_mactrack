@@ -1,5 +1,7 @@
 ## ChangeLog
 
+[Version 5.0 release notes and upgrade guidance](docs/RELEASE_NOTES_5.0.md) · [Commits and contributors](docs/COMMITS_5.0.md)
+
 --- 5.0 ---
 
 * security: Add a version-safe CSP nonce (`plugin_mactrack_csp_nonce()`) to every inline `<script>` tag
