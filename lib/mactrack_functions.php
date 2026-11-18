@@ -3414,12 +3414,16 @@ function mactrack_db_maint_run(array &$steps, ?int $now = null): void {
 	// daily DELETE frees.
 
 	// The ARP translations follow the IP retention and the 802.1x sessions
-	// the port retention; nothing else ever removed them.
+	// the port retention.
 	db_execute_prepared('DELETE FROM mac_track_arp
 		WHERE scan_date < CURDATE() - INTERVAL ? DAY',
 		[$ip_retention]);
 
-	if ($days > 0) {
+	if (mactrack_partition_state('mac_track_dot1x')['layout']['state'] === 'range') {
+		$result = mactrack_partition_maintain((int) $days, $now, 'mac_track_dot1x');
+
+		mactrack_debug('Dropped ' . count($result['dropped']) . ' and created ' . count($result['created']) . ' 802.1x partitions' . ($result['reason'] !== '' ? " ({$result['reason']})" : '') . '.');
+	} elseif ($days > 0) {
 		mactrack_delete_batched('DELETE FROM mac_track_dot1x
 			WHERE scan_date < ?
 			ORDER BY scan_date',
@@ -6075,7 +6079,7 @@ function mactrack_utilities_post_actions(): array {
 		'mactrack_refresh_oui_database'               => __('Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?', 'mactrack'),
 		'mactrack_utilities_rebuild_scan_dates'       => __('Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?', 'mactrack'),
 		'mactrack_utilities_optimize_ports'           => __('Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?', 'mactrack'),
-		'mactrack_utilities_convert_partitions'            => __('Run this maintenance off hours. The rebuild copies the full history of the port (MAC address) and IP address tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC and IP address searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?', 'mactrack'),
+		'mactrack_utilities_convert_partitions'            => __('Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?', 'mactrack'),
 	];
 }
 

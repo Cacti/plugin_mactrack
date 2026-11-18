@@ -1448,6 +1448,19 @@ function mactrack_retry_default_site(): bool {
  *              false when seeding failed.
  */
 function mactrack_setup_database(bool $notify_seed_failure = false): bool {
+	// Setup also runs without lib/mactrack_functions.php.
+	include_once(__DIR__ . '/../lib/mactrack_partitions.php');
+	include_once(__DIR__ . '/../lib/mactrack_partition_ops.php');
+	include_once(__DIR__ . '/../lib/mactrack_partition_rebuild.php');
+
+	$new_history_tables = [];
+
+	foreach (MACTRACK_PARTITION_TABLES as $table) {
+		if (!db_table_exists($table)) {
+			$new_history_tables[] = $table;
+		}
+	}
+
 	$data                  = [];
 	$data['columns'][]     = ['name' => 'row_id', 'unsigned' => true, 'type' => 'bigint(20)', 'NULL' => false, 'auto_increment' => true];
 	$data['columns'][]     = ['name' => 'site_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];
@@ -1730,17 +1743,7 @@ function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 	$data['keys'][]    = ['name' => 'scan_date', 'columns' => 'scan_date'];
 	$data['type']      = 'InnoDB';
 	$data['comment']   = '';
-	$ips_existed       = db_table_exists('mac_track_ips');
 	api_plugin_db_table_create('mactrack', 'mac_track_ips', $data);
-
-	if (!$ips_existed) {
-		// Setup loads this file without lib/mactrack_functions.php.
-		include_once(__DIR__ . '/../lib/mactrack_partitions.php');
-		include_once(__DIR__ . '/../lib/mactrack_partition_ops.php');
-		include_once(__DIR__ . '/../lib/mactrack_partition_rebuild.php');
-
-		mactrack_partition_fresh_install(null, 'mac_track_ips');
-	}
 
 	$data              = [];
 	$data['columns'][] = ['name' => 'mac_address', 'type' => 'varchar(20)', 'NULL' => false, 'default' => ''];
@@ -1814,17 +1817,7 @@ function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 	$data['keys'][]    = ['name' => 'authorized', 'columns' => 'authorized'];
 	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Database for Tracking Device MACs';
-	$ports_existed     = db_table_exists('mac_track_ports');
 	api_plugin_db_table_create('mactrack', 'mac_track_ports', $data);
-
-	if (!$ports_existed) {
-		// Setup loads this file without lib/mactrack_functions.php.
-		include_once(__DIR__ . '/../lib/mactrack_partitions.php');
-		include_once(__DIR__ . '/../lib/mactrack_partition_ops.php');
-		include_once(__DIR__ . '/../lib/mactrack_partition_rebuild.php');
-
-		mactrack_partition_fresh_install();
-	}
 
 	$data              = [];
 	$data['columns'][] = ['name' => 'device_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'];
@@ -2129,6 +2122,10 @@ function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 		db_execute("INSERT INTO mac_track_device_types
 			(description, vendor, device_type, sysDescr_match, sysObjectID_match, scanning_function, ip_scanning_function, dot1x_scanning_function, serial_number_oid, lowPort, highPort, disabled)
 			VALUES ('92xx Switch-default','Cisco','1','*CAT9K_LITE_IOSXE*','','get_IOS_dot1dTpFdbEntry_ports','get_standard_arp_table','0','',0,0,'on')");
+	}
+
+	foreach ($new_history_tables as $table) {
+		mactrack_partition_fresh_install(null, $table);
 	}
 
 	// Seed only after the complete schema and built-in device types exist.

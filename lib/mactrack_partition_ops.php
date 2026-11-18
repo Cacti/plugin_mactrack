@@ -635,13 +635,13 @@ function mactrack_partition_load_scan(array $plan): int|false {
  * daily partitions, or, for per-scan partitions, daily slots named
  * aYYYYMMDD that each scan carves its partition from. Nothing is created
  * while dMaxValue holds rows: the next scan's recovery split moves those
- * first. The IP table has no scan to move them, so maintenance splits them
- * into a recovery partition itself. Other layouts are left to their own
+ * first. The IP and 802.1x tables have no scan exchange to move them, so
+ * maintenance splits them into a recovery partition itself. Other layouts are left to their own
  * maintenance.
  *
  * @param int      $days  Retention in days; below 1 drops nothing.
  * @param int|null $now   Current time, for tests.
- * @param string   $table mac_track_ports or mac_track_ips.
+ * @param string   $table History table.
  *
  * @return array{dropped: string[], created: string[], reason: string}
  */
@@ -663,7 +663,8 @@ function mactrack_partition_maintain(int $days, ?int $now = null, string $table 
 		}
 	}
 
-	mactrack_partition_status([($table === 'mac_track_ports' ? 'maintenance' : 'maintenance_ips') => $result + ['time' => time()]]);
+	$status_key = ['mac_track_ports' => 'maintenance', 'mac_track_ips' => 'maintenance_ips', 'mac_track_dot1x' => 'maintenance_dot1x'][$table];
+	mactrack_partition_status([$status_key => $result + ['time' => time()]]);
 
 	return $result;
 }
@@ -675,7 +676,7 @@ function mactrack_partition_maintain(int $days, ?int $now = null, string $table 
  * @param array{mariadb: bool, version: string}                       $server     From mactrack_partition_server().
  * @param int                                                         $days       Retention in days.
  * @param int                                                         $now        Current time.
- * @param string                                                      $table      mac_track_ports or mac_track_ips.
+ * @param string                                                      $table      History table.
  *
  * @return array{dropped: string[], created: string[], reason: string}
  */
@@ -715,7 +716,7 @@ function mactrack_partition_maintain_locked(array $partitions, array $server, in
 	// Per-scan partitions cannot be created before their scan_date is
 	// known, so daily slots are created ahead and each scan carves its
 	// partition off the front of the empty slot that covers it. The IP
-	// table only has daily and weekly partitions.
+	// and 802.1x tables only have daily and weekly partitions.
 	$ahead = $size === 'scan' || ($size === 'hour' && !$ports) ? 'day' : $size;
 
 	if (!$ports) {

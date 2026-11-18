@@ -410,6 +410,7 @@ function mactrack_view_dot1x(): void {
 	global $item_rows;
 
 	mactrack_tabs();
+	mactrack_partition_rebuild_notice();
 
 	html_start_box($title, '100%', '', '3', 'center', '');
 	mactrack_dot1x_filter();
