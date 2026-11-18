@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-17 14:15-0500\n"
+"POT-Creation-Date: 2026-11-18 18:36+0000\n"
 "PO-Revision-Date: 2026-11-16 19:39+0000\n"
 "Last-Translator: Anonymous <anonymous@cacti.net>\n"
 "Language-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\n"
@@ -76,7 +76,7 @@ msgid "About %s rows left to copy (estimate)"
 msgstr ""
 
 #: lib/mactrack_activity.php
-msgid "Repartitioning the port and IP tables"
+msgid "Repartitioning the port, IP and 802.1x tables"
 msgstr ""
 
 #: lib/mactrack_activity.php
@@ -100,7 +100,7 @@ msgid "A database upgrade is running"
 msgstr ""
 
 #: lib/mactrack_activity.php
-msgid "The port and IP table partitioning has not finished"
+msgid "The port, IP and 802.1x table partitioning has not finished"
 msgstr ""
 
 #: lib/mactrack_activity.php
@@ -507,7 +507,7 @@ msgid "Rebuild and analyze the partition containing the latest port observation,
 msgstr ""
 
 #: lib/mactrack_functions.php
-msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address) and IP address tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC and IP address searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
+msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
 msgstr ""
 
 #: lib/mactrack_functions.php mactrack_utilities.php
@@ -551,15 +551,15 @@ msgid "Configure Port and IP Address Partitioning"
 msgstr ""
 
 #: lib/mactrack_partition_rebuild.php
-msgid "The port and IP tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
+msgid "The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
 msgstr ""
 
 #: lib/mactrack_partition_rebuild.php
-msgid "MacTrack is in maintenance mode for IP address and MAC address searching while its port and IP tables are repartitioned. Results are incomplete until the partitioning has finished."
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished."
 msgstr ""
 
 #: lib/mactrack_partition_rebuild.php
-msgid "MacTrack is in maintenance mode for IP address and MAC address searching because the partitioning of its port and IP tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
 msgstr ""
 
 #: lib/mactrack_partition_rebuild.php
@@ -1888,6 +1888,15 @@ msgid "IP Table Partitions"
 msgstr "數據保留"
 
 #: mactrack_utilities.php
+msgid "802.1x Table Layout"
+msgstr ""
+
+#: mactrack_utilities.php
+#, fuzzy
+msgid "802.1x Table Partitions"
+msgstr "數據保留"
+
+#: mactrack_utilities.php
 msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
 msgstr ""
 
@@ -1966,7 +1975,7 @@ msgid "Rebuilds and analyzes only the partition containing the latest port obser
 msgstr ""
 
 #: mactrack_utilities.php
-msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address) and IP address tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC and IP address searching shows a maintenance message meanwhile."
+msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile."
 msgstr ""
 
 #: mactrack_utilities.php
@@ -2860,7 +2869,7 @@ msgid "How long should discovered IPs details be retained in the database."
 msgstr "端口MAC詳細信息應保留在數據庫中多長時間。"
 
 #: setup.php
-msgid "Size of the partitions of the port and IP tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
+msgid "Size of the partitions of the port, IP and 802.1x tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
 msgstr ""
 
 #: setup.php
