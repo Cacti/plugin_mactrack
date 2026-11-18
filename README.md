@@ -1,6 +1,6 @@
 # mactrack
 
-[Version 5.0 release notes and upgrade guidance](docs/RELEASE_NOTES_5.0.md) · [Commits and contributors](docs/COMMITS_5.0.md)
+[Version 5.0 release notes and upgrade guidance](docs/RELEASE_NOTES_5.0.md) · [Contributors and change history](docs/COMMITS_5.0.md)
 
 The MacTrack plugin is designed to scan network switches, routers and
 intelligent hubs for connected devices, and record their location either based

@@ -2,10 +2,9 @@
 
 Released November 17, 2026. [Download MacTrack 5.0](https://github.com/Cacti/plugin_mactrack/releases/tag/v5.0).
 
-MacTrack 5.0 adds a dashboard, extends partitioning to MAC and IP address
-history, and improves recovery from interrupted scans and maintenance. New
-filters help keep uplink and trunk sightings out of your results, while expanded
-status reporting shows what MacTrack is doing and why a scan was skipped.
+MacTrack 5.0 helps administrators see scan progress, exclude uplink sightings
+and manage MAC and IP history with partition-based retention. Its dashboard and
+Process Status page show current activity and skipped runs.
 
 ## Highlights
 
@@ -31,53 +30,57 @@ The release also includes security hardening across administrative actions,
 imports, exports and device collection. See the [full changelog](../CHANGELOG.md)
 for individual changes.
 
-## Before upgrading
+## Upgrade decision guide
 
-MacTrack 5.0 requires **Cacti 1.2.29 or later and PHP 8.2 or later**. Back up the
-plugin configuration and database before replacing the plugin files. Review the
-[installation and maintenance documentation](../README.md).
+| Check | What to plan |
+| --- | --- |
+| Runtime | Cacti 1.2.29+ and PHP 8.2+; check Cacti's own PHP requirements too. |
+| Storage | MySQL 8.0+ or MariaDB with partition support for partitioned history; unpartitioned tables remain supported. |
+| Existing tables | Updating files does not rebuild history. Choose a layout and run the partitioning utility when ready. |
+| Rebuild impact | Scheduled scans and maintenance pause; MAC/IP results are incomplete. Allow space for another copy of each table and its indexes. Large histories can take hours. |
+| Recovery | If a rebuild stops, rerun the same command to resume. Keep the original rebuild tables until recovery completes. |
 
-### Check partitioning on an existing installation
+![MacTrack backup, layout selection, rebuild and verification workflow](images/release-workflow-5.0.svg)
 
-Upgrading does not automatically rebuild existing history tables. To apply or
-check the scheme for both MAC and IP history:
+### Upgrade and verify
 
-1. Choose **Port and IP Address Partition Size** under **Console > Settings >
-   Mactrack**, and review the separate MAC and IP retention settings.
-2. Plan an off-hours maintenance window and allow disk space for another copy of
-   each table and its indexes. A large rebuild can take hours.
-3. Open **MacTrack Utilities > Configure Port and IP Address Partitioning**, or
-   run the following from the Cacti installation directory as the poller user:
+1. Back up the database and plugin configuration/files together. Confirm the
+   runtime requirements before replacing the plugin files in `plugins/mactrack`.
+2. Complete the plugin upgrade in Cacti's Plugin Management. Check the Cacti log
+   for upgrade errors before starting a history rebuild.
+3. For an existing installation, review **Console > Settings > Mactrack > Port
+   and IP Address Partition Size** and both retention settings. Prefer daily or
+   weekly when planning a CLI rebuild; legacy hourly/per-scan layouts have
+   different maintenance behavior described in the partitioning guide.
+4. During a maintenance window, use **MacTrack Utilities > Configure Port and IP
+   Address Partitioning**, or run this from the Cacti directory as the poller user:
 
    ```sh
    php plugins/mactrack/cli/upgrade_partitioning.php
    ```
 
-4. Check **View Partition Status** and **Process Status** after the operation.
-   The utility leaves tables that already match the chosen scheme alone.
+5. Check **View Partition Status** for both history tables and **Process Status**
+   for completion. Confirm the next scheduled scan finishes and fresh MAC/IP
+   sightings appear before closing the maintenance window.
 
-Scheduled scans and database maintenance pause during a rebuild, and MAC/IP
-search results are incomplete until it finishes. If interrupted, run the same
-command again to resume. See [partitioning and recovery](../README.md#port-and-ip-history-partitioning)
-for layout choices, retention behavior and troubleshooting.
+The utility changes only tables that do not match the selected scheme.
+[Read the partitioning and interruption-recovery guide](../README.md#port-and-ip-history-partitioning)
+for the exact layout options and progress messages.
 
-### Review changed operational behavior
+### Behavior changes to review
 
-- **MacAuth reports:** configured report frequencies are now honored. An
-  installation whose reports previously never sent may begin sending them after
-  upgrading; review the frequency and recipients.
-- **Historical MAC values:** corrected binary SNMP decoding changes previously
-  malformed address values. Old sightings may not match new scans; review affected
-  authorizations and history rather than assuming an endpoint itself changed.
-- **Device exports:** SNMP community strings and authentication/privacy secrets
-  are omitted. Imports keep existing stored credentials; new devices need their
-  credentials entered separately.
+- **MacAuth email:** configured report frequencies now take effect. Review
+  recipients and frequency if reports previously never arrived.
+- **Stored MAC values:** corrected binary SNMP decoding can change previously
+  malformed values. Review historical matches and affected authorizations.
+- **Device exports:** SNMP credentials are omitted. Imports preserve existing
+  credentials; newly imported devices need credentials entered separately.
 
-## Contributors and complete history
+If rollback is needed, restore plugin files and the database from the same
+pre-upgrade backup; do not assume an older plugin can use an upgraded schema.
 
-Thank you to the community members who developed, translated, tested and reviewed
-this release. The [commit index](COMMITS_5.0.md) links every commit between v4.8
-and v5.0 and credits the contributors associated with it. Testing and feedback
-also made the release possible, even when they did not result in an authored commit.
+## Contributors and change history
 
-[Browse the complete release comparison](https://github.com/Cacti/plugin_mactrack/compare/v4.8...v5.0).
+Thank you to the developers, translators, testers and reviewers who kept this
+plugin moving forward. See the [linked contributor credits and selected commits](COMMITS_5.0.md).
+Those links include the comparison, paginated history and original author records.

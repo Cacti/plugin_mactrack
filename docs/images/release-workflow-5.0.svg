@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="265" viewBox="0 0 1120 265" role="img" aria-labelledby="title desc">
+<title id="title">MacTrack 5.0: apply a history layout</title>
+<desc id="desc">Workflow illustration. Rebuilding pauses scheduled scans and needs space for another table copy.</desc>
+<rect width="1120" height="265" rx="16" fill="#f4f7f5"/>
+<g font-family="Arial, sans-serif" fill="#17332b">
+<text x="32" y="42" font-size="26" font-weight="700">MacTrack 5.0: apply a history layout</text>
+<text x="32" y="72" font-size="16">Workflow illustration. Rebuilding pauses scheduled scans and needs space for another table copy.</text>
+<text x="32" y="110" font-size="16" font-weight="700">Existing installations</text>
+<rect x="32" y="126" width="246" height="83" rx="9" fill="white" stroke="#51816b"/>
+<text x="48" y="159" font-size="18" font-weight="700">1. Back up</text>
+<text x="48" y="187" font-size="14">Database and plugin files</text>
+<path d="M282 168 h12 m-5 -5 l5 5 -5 5" fill="none" stroke="#376951" stroke-width="2"/>
+<rect x="302" y="126" width="246" height="83" rx="9" fill="white" stroke="#51816b"/>
+<text x="318" y="159" font-size="18" font-weight="700">2. Choose the layout</text>
+<text x="318" y="187" font-size="14">Review MAC and IP retention</text>
+<path d="M552 168 h12 m-5 -5 l5 5 -5 5" fill="none" stroke="#376951" stroke-width="2"/>
+<rect x="572" y="126" width="246" height="83" rx="9" fill="white" stroke="#51816b"/>
+<text x="588" y="159" font-size="18" font-weight="700">3. Rebuild both tables</text>
+<text x="588" y="187" font-size="14">Resume if interrupted</text>
+<path d="M822 168 h12 m-5 -5 l5 5 -5 5" fill="none" stroke="#376951" stroke-width="2"/>
+<rect x="842" y="126" width="246" height="83" rx="9" fill="white" stroke="#51816b"/>
+<text x="858" y="159" font-size="18" font-weight="700">4. Verify collection</text>
+<text x="858" y="187" font-size="14">Partition status and next scan</text>
+</g>
+</svg>
