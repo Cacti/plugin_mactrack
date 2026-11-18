@@ -17,6 +17,24 @@ be helpful in recovering lost equipment.  Through MacTrack's interface
 monitoring feature, a Network Administrator can get a very good idea of where
 utilization is, where there are errors, etc within their network.
 
+## Versions and compatibility
+
+This README describes the `develop` source branch.
+
+| Code | Plugin version | Minimum Cacti declared in `INFO` |
+| --- | --- | --- |
+| [Source branch](INFO) | 5.0 | 1.2.29 |
+| [Published v5.0](https://github.com/Cacti/plugin_mactrack/releases/tag/v5.0) | 5.0 | 1.2.29 |
+
+Use the published release’s assets and tagged documentation when installing that
+package. Branch code can include later changes, even when its version number
+matches the release. Cacti’s own PHP and database requirements also apply.
+
+Install this plugin in **`<cacti-root>/plugins/mactrack`**, using the directory
+name `mactrack` rather than `plugin_mactrack`.
+
+See [CHANGELOG.md](CHANGELOG.md) for the version history.
+
 ## Features
 
 * Scans Devices
