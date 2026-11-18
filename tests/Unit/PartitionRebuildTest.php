@@ -1166,7 +1166,7 @@ describe('fresh install', function () {
 		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe('week');
 	});
 
-	it('partitions the port and IP tables when setup creates them', function (string $created) {
+	it('partitions each history table only when setup creates it', function (string $created) {
 		mactrack_test_load(dirname(__DIR__, 2) . '/includes/database.php');
 		mactrack_test_queue_return_for('db_table_exists', $created, false);
 		mactrack_test_queue_return_for('db_fetch_cell_prepared', 'VERSION()', '10.5.29-MariaDB');
@@ -1183,11 +1183,10 @@ describe('fresh install', function () {
 		}
 	})->with(['mac_track_ports', 'mac_track_ips', 'mac_track_dot1x']);
 
-	it('partitions only the tables setup has just created', function () {
-		$src = file_get_contents(dirname(__DIR__, 2) . '/includes/database.php');
+	it('leaves existing history tables unpartitioned during setup', function () {
+		mactrack_setup_database();
 
-		expect($src)->toContain("\$ports_existed     = db_table_exists('mac_track_ports');\n\tapi_plugin_db_table_create('mactrack', 'mac_track_ports', \$data);\n\n\tif (!\$ports_existed) {");
-		expect($src)->toContain("\$ips_existed       = db_table_exists('mac_track_ips');\n\tapi_plugin_db_table_create('mactrack', 'mac_track_ips', \$data);\n\n\tif (!\$ips_existed) {");
+		expect(mt_ur_find('PARTITION BY RANGE'))->toBe([]);
 	});
 });
 
