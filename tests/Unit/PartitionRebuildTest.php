@@ -22,6 +22,7 @@
  */
 
 beforeAll(function () {
+	require_once dirname(__DIR__) . '/Support/load_function.php';
 	mactrack_test_load(dirname(__DIR__, 2) . '/lib/mactrack_functions.php');
 	mactrack_test_load(dirname(__DIR__, 2) . '/includes/database.php');
 	mactrack_test_load(dirname(__DIR__, 2) . '/setup.php');
@@ -126,6 +127,7 @@ function mt_ur_db(array $opts = []): void {
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', '_rebuild`', $old);
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'COUNT(*) FROM `mac_track_ports`', $opts['new'] ?? '2');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'COUNT(*) FROM `mac_track_ips`', $opts['new'] ?? '2');
+	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'COUNT(*) FROM `mac_track_dot1x`', $opts['new'] ?? '2');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 0)', $opts['scan_lock'] ?? '1');
 	mactrack_test_queue_return_for('db_fetch_cell_prepared', 'GET_LOCK(?, 10)', $opts['partition_lock'] ?? '1');
 	mactrack_test_queue_return_for('db_fetch_assoc_prepared', 'SELECT DISTINCT scan_date', $opts['scans'] ?? MT_UR_SCANS);
@@ -371,14 +373,14 @@ describe('assessment', function () {
 		expect(mactrack_upart_assess('mac_track_ports', 'disabled')['action'])->toBe('ok');
 	});
 
-	it('assesses both tables and says what it found', function () {
+	it('assesses all history tables and says what it found', function () {
 		mt_ur_db(['layout' => 'none']);
-		mt_ur_exists([0, 1, 0, 1]);
+		mt_ur_exists([0, 1, 0, 1, 0, 1]);
 
 		[$assessed, $out] = mt_ur_capture(fn () => mactrack_upart_assess_all('week'));
 
-		expect(array_keys($assessed))->toBe(['mac_track_ports', 'mac_track_ips']);
-		expect($out)->toContain('WARNING: mac_track_ports: not partitioned', 'WARNING: mac_track_ips: not partitioned');
+		expect(array_keys($assessed))->toBe(['mac_track_ports', 'mac_track_ips', 'mac_track_dot1x']);
+		expect($out)->toContain('WARNING: mac_track_ports: not partitioned', 'WARNING: mac_track_ips: not partitioned', 'WARNING: mac_track_dot1x: not partitioned');
 	});
 });
 
@@ -431,6 +433,19 @@ describe('rebuild', function () {
 		expect($r['partitions'])->toBe(4);
 		expect(mt_ur_sql()[0])->toBe('RENAME TABLE `mac_track_ips` TO `mac_track_ips_rebuild`');
 		expect(mt_ur_find('PARTITION BY RANGE')[0])->toContain('ALTER TABLE `mac_track_ips`', 'PARTITION `d20261112`');
+		expect($GLOBALS['__test_config_options'])->not->toHaveKey('mt_partition_pending');
+	});
+
+	it('rebuilds 802.1x history without changing port exchange state', function () {
+		mt_ur_db();
+		mt_ur_exists([0, 1, 0]);
+
+		$r = mactrack_upart_rebuild('mac_track_dot1x', 'day', null, 0, MT_UR_NOW);
+
+		expect($r['ok'])->toBeTrue();
+		expect(mt_ur_sql()[0])->toBe('RENAME TABLE `mac_track_dot1x` TO `mac_track_dot1x_rebuild`');
+		expect(mt_ur_find('PARTITION BY RANGE')[0])->toContain('ALTER TABLE `mac_track_dot1x`', 'PARTITION `d20261112`');
+		expect(mt_ur_find('INSERT INTO `mac_track_dot1x`'))->toHaveCount(2);
 		expect($GLOBALS['__test_config_options'])->not->toHaveKey('mt_partition_pending');
 	});
 
@@ -650,11 +665,10 @@ describe('rebuild', function () {
 
 describe('run', function () {
 	/**
-	 * Existence answers for a full run over two unpartitioned tables: the
-	 * aggregate upgrade table, both assessments, then both rebuilds.
+	 * Existence answers for a full run over three unpartitioned tables.
 	 */
 	function mt_ur_full_run_exists(): void {
-		mt_ur_exists([0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0]);
+		mt_ur_exists([0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0]);
 	}
 
 	it('refuses to run without partitioning support unless the tables are to be unpartitioned', function () {
@@ -758,7 +772,7 @@ describe('run', function () {
 		expect($GLOBALS['__test_config_options']['mt_partition_converting'] ?? '')->toBe('');
 	});
 
-	it('rebuilds the port table and then the IP table, with scanning paused', function () {
+	it('rebuilds all history tables in order with scanning paused', function () {
 		mt_ur_db();
 		mt_ur_full_run_exists();
 
@@ -767,22 +781,25 @@ describe('run', function () {
 		$sql   = mt_ur_sql();
 		$ports = array_search('RENAME TABLE `mac_track_ports` TO `mac_track_ports_rebuild`', $sql, true);
 		$ips   = array_search('RENAME TABLE `mac_track_ips` TO `mac_track_ips_rebuild`', $sql, true);
+		$dot1x = array_search('RENAME TABLE `mac_track_dot1x` TO `mac_track_dot1x_rebuild`', $sql, true);
 		$drops = array_keys(array_filter($sql, fn ($s) => strpos($s, 'DROP TABLE') === 0));
 
 		expect($rc)->toBe(0);
 		expect($ports)->not->toBeFalse();
 		expect($ips)->toBeGreaterThan($ports);
+		expect($dot1x)->toBeGreaterThan($ips);
 		expect($sql[$drops[0]])->toBe('DROP TABLE `mac_track_ports_rebuild`');
 		expect($drops[0])->toBeLessThan($ips);
 		expect($sql[$drops[1]])->toBe('DROP TABLE `mac_track_ips_rebuild`');
-		expect($out)->toContain('Scanning is paused', 'maintenance mode', 'Rebuilding mac_track_ports (weekly)', 'Rebuilding mac_track_ips (weekly)', 'Partitioning is complete');
+		expect($sql[$drops[2]])->toBe('DROP TABLE `mac_track_dot1x_rebuild`');
+		expect($out)->toContain('Scanning is paused', 'maintenance mode', 'Rebuilding mac_track_ports (weekly)', 'Rebuilding mac_track_ips (weekly)', 'Rebuilding mac_track_dot1x (weekly)', 'Partitioning is complete');
 		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe('week');
 		expect($GLOBALS['__test_config_options']['mt_partition_converting'])->toBe('');
 
 		$status = json_decode($GLOBALS['__test_config_options']['mt_partition_status'], true)['conversion'];
 
 		expect($status['ok'])->toBeTrue();
-		expect($status['rows'])->toBe(4);
+		expect($status['rows'])->toBe(6);
 		expect($status['reason'])->toBe('');
 
 		$locks = array_column($GLOBALS['__test_db_calls'], 'sql');
@@ -813,7 +830,7 @@ describe('run', function () {
 
 	it('stops at the first table that fails and leaves it to resume', function () {
 		mt_ur_db();
-		mt_ur_exists([0, 0, 1, 0, 1, 0, 0, 1, 0]);
+		mt_ur_full_run_exists();
 		mactrack_test_queue_return_for('db_execute_prepared', 'INSERT INTO `mac_track_ports`', false);
 
 		[$rc, $out] = mt_ur_capture(fn () => mactrack_upart_run('week', false, 0));
@@ -842,7 +859,7 @@ describe('run', function () {
 
 	it('resumes an unfinished rebuild without another rename', function () {
 		mt_ur_db(['layout' => 'weekly']);
-		mt_ur_exists([0, 1, 0, 1, 0, 1, 1, 0, 1, 0]);
+		mt_ur_exists([0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0]);
 
 		[$rc, $out] = mt_ur_capture(fn () => mactrack_upart_run('week', false, 0));
 
@@ -863,6 +880,12 @@ describe('rebuild state', function () {
 		mt_ur_exists([1, 0]);
 
 		expect(mactrack_partition_rebuild_pending())->toBe(['mac_track_ports']);
+	});
+
+	it('detects an interrupted 802.1x rebuild', function () {
+		mt_ur_exists([0, 0, 1]);
+
+		expect(mactrack_partition_rebuild_pending())->toBe(['mac_track_dot1x']);
 	});
 
 	it('asks the database instead of Cacti\'s remembered answer about tables', function () {
@@ -917,12 +940,12 @@ describe('rebuild state', function () {
 		mt_ur_exists([0, 1]);
 		[, $interrupted] = mt_ur_capture('mactrack_partition_rebuild_notice');
 
-		expect($interrupted)->toContain('maintenance mode for IP address and MAC address searching', 'did not finish', 'cli/upgrade_partitioning.php');
+		expect($interrupted)->toContain('maintenance mode for IP address, MAC address and 802.1x searching', 'did not finish', 'cli/upgrade_partitioning.php');
 
 		mactrack_test_queue_return_for('db_fetch_row_prepared', 'FROM processes', ['pid' => (string) getmypid(), 'started' => '99000', 'now' => '100000', 'timeout' => '86400']);
 		[, $running] = mt_ur_capture('mactrack_partition_rebuild_notice');
 
-		expect($running)->toContain('maintenance mode for IP address and MAC address searching', 'until the partitioning has finished');
+		expect($running)->toContain('maintenance mode for IP address, MAC address and 802.1x searching', 'until the partitioning has finished');
 	});
 
 	it('shows the notice on the IP and MAC address views', function (string $file, string $function) {
@@ -935,6 +958,7 @@ describe('rebuild state', function () {
 		['mactrack_view_arp.php', 'mactrack_view_ips'],
 		['mactrack_view_macs.php', 'mactrack_view_macs'],
 		['mactrack_view_macs.php', 'mactrack_view_aggregated_macs'],
+		['mactrack_view_dot1x.php', 'mactrack_view_dot1x'],
 	]);
 
 	it('reads the retention of each table in days', function (string $setting, string $table, string $value, int $days) {
@@ -948,6 +972,8 @@ describe('rebuild state', function () {
 		['mt_data_retention', 'mac_track_ports', '2weeks', 14],
 		['mt_data_retention', 'mac_track_ports', 'forever', 2],
 		['mt_data_retention_ip', 'mac_track_ips', '30', 30],
+		['mt_data_retention', 'mac_track_dot1x', '14', 14],
+		['mt_data_retention', 'mac_track_dot1x', '0', 0],
 	]);
 
 	it('pauses maintenance and the poller while a rebuild is unfinished', function () {
@@ -1086,7 +1112,7 @@ describe('fresh install', function () {
 		expect(mactrack_partition_fresh_install(MT_UR_NOW, $table))->toBeTrue();
 		expect(mt_ur_sql()[0])->toContain('ALTER TABLE `' . $table . '` PARTITION BY RANGE (UNIX_TIMESTAMP(scan_date))', 'PARTITION `w20261109` VALUES LESS THAN (1794787200)', 'PARTITION `w20261116` VALUES LESS THAN (1795392000)');
 		expect($GLOBALS['__test_config_options']['mt_partition_granularity'])->toBe('week');
-	})->with(['mac_track_ports', 'mac_track_ips']);
+	})->with(['mac_track_ports', 'mac_track_ips', 'mac_track_dot1x']);
 
 	it('only partitions the tables MacTrack partitions', function () {
 		expect(fn () => mactrack_partition_fresh_install(MT_UR_NOW, 'mac_track_devices'))->toThrow(InvalidArgumentException::class);
@@ -1152,10 +1178,10 @@ describe('fresh install', function () {
 
 		expect($alter)->toContain('ALTER TABLE `' . $created . '` PARTITION BY RANGE (UNIX_TIMESTAMP(scan_date)) (PARTITION `w');
 
-		foreach (array_diff(['mac_track_ports', 'mac_track_ips'], [$created]) as $existing) {
+		foreach (array_diff(['mac_track_ports', 'mac_track_ips', 'mac_track_dot1x'], [$created]) as $existing) {
 			expect($alter)->not->toContain('`' . $existing . '`');
 		}
-	})->with(['mac_track_ports', 'mac_track_ips']);
+	})->with(['mac_track_ports', 'mac_track_ips', 'mac_track_dot1x']);
 
 	it('partitions only the tables setup has just created', function () {
 		$src = file_get_contents(dirname(__DIR__, 2) . '/includes/database.php');

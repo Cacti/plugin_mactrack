@@ -23,8 +23,8 @@
 */
 
 /*
- * Shared support for the scan-date partitioning of mac_track_ports and
- * mac_track_ips. The rebuild itself lives in cli/upgrade_partitioning.php:
+ * Shared support for the scan-date partitioning of the port, IP and 802.1x
+ * history tables. The rebuild itself lives in cli/upgrade_partitioning.php:
  * it renames each table to <table>_rebuild, creates the table again with the
  * chosen layout and copies the history back one scan date at a time. These
  * helpers tell the poller, maintenance and the views whether such a rebuild
@@ -71,7 +71,7 @@ function mactrack_partition_available(array $server): bool {
  * operator.
  *
  * @param int|null $now   Current time, for tests.
- * @param string   $table mac_track_ports or mac_track_ips.
+ * @param string   $table History table.
  *
  * @return bool True when the table was partitioned; false leaves it
  *              unpartitioned, which MacTrack fully supports.
@@ -154,7 +154,7 @@ function mactrack_partition_history_end(): void {
  * @return string
  */
 function mactrack_partition_history_message(): string {
-	return __('The port and IP tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished.', 'mactrack');
+	return __('The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished.', 'mactrack');
 }
 
 /**
@@ -208,7 +208,7 @@ function mactrack_partition_current_scheme(array $layout): ?string {
 /**
  * Names the table a rebuild moves a table's original rows to.
  *
- * @param string $table mac_track_ports or mac_track_ips.
+ * @param string $table History table.
  *
  * @return string
  */
@@ -291,9 +291,9 @@ function mactrack_partition_rebuild_notice(): void {
 	}
 
 	if ($state === 'running') {
-		$message = __('MacTrack is in maintenance mode for IP address and MAC address searching while its port and IP tables are repartitioned. Results are incomplete until the partitioning has finished.', 'mactrack');
+		$message = __('MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished.', 'mactrack');
 	} else {
-		$message = __('MacTrack is in maintenance mode for IP address and MAC address searching because the partitioning of its port and IP tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it.', 'mactrack');
+		$message = __('MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it.', 'mactrack');
 	}
 
 	html_start_box(__('Maintenance Mode', 'mactrack'), '100%', '', '3', 'center', '');
@@ -335,7 +335,7 @@ function mactrack_partition_rebuild_note_maintenance(?int $now = null): void {
  * Returns how many days of history a table keeps. The retention settings
  * hold a number of days; older releases stored names such as 2weeks.
  *
- * @param string $table mac_track_ports or mac_track_ips.
+ * @param string $table History table.
  *
  * @return int Days; 0 keeps everything.
  */

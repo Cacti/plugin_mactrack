@@ -1600,7 +1600,16 @@ function mactrack_setup_database(bool $notify_seed_failure = false): bool {
 	$data['keys'][]    = ['name' => 'scan_date', 'columns' => 'scan_date'];
 	$data['type']      = 'InnoDB';
 	$data['comment']   = '';
+	$dot1x_existed     = db_table_exists('mac_track_dot1x');
 	api_plugin_db_table_create('mactrack', 'mac_track_dot1x', $data);
+
+	if (!$dot1x_existed) {
+		include_once(__DIR__ . '/../lib/mactrack_partitions.php');
+		include_once(__DIR__ . '/../lib/mactrack_partition_ops.php');
+		include_once(__DIR__ . '/../lib/mactrack_partition_rebuild.php');
+
+		mactrack_partition_fresh_install(null, 'mac_track_dot1x');
+	}
 
 	$data              = [];
 	$data['columns'][] = ['name' => 'device_id', 'unsigned' => true, 'type' => 'int(10)', 'NULL' => false, 'default' => '0'];

@@ -66,6 +66,7 @@
 * issue: Mac Addresses are not displaying correctly
 * issue: Mactrack does not shutdown properly due to incorrect use of unregister_process
 * issue: Make the MacTrack tab script repoint only the MacTrack main tab rather than whichever main tab is selected
+* issue: Partition 802.1x history on new installations and include it in partition maintenance and upgrades
 * issue: Pin the CI database image and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
 * issue: Reach PHPStan level 8 with zero errors across all first-party PHP and add native function return type declarations, using no baselines or inline suppressions
 * issue: Relocate the per-theme override stylesheets from themes/<theme>/ to css/<theme>/ alongside the base css/mactrack.css

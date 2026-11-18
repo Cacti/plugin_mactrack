@@ -266,7 +266,7 @@ function mactrack_activity_state(?int $now = null): array {
 	if ($converting !== '' || mactrack_partition_rebuild_pending() !== []) {
 		return array_merge($state, [
 			'state' => 'converting',
-			'text'  => __('Repartitioning the port and IP tables', 'mactrack'),
+			'text'  => __('Repartitioning the port, IP and 802.1x tables', 'mactrack'),
 			'since' => $converting === '' ? null : (int) $converting,
 		]);
 	}
@@ -326,7 +326,7 @@ function mactrack_activity_deferred(int $now): ?array {
 
 	$labels = [
 		'upgrade'           => __('A database upgrade is running', 'mactrack'),
-		'partition_rebuild' => __('The port and IP table partitioning has not finished', 'mactrack'),
+		'partition_rebuild' => __('The port, IP and 802.1x table partitioning has not finished', 'mactrack'),
 	];
 	$reason = $labels[$note['reason'] ?? ''] ?? __('The aggregated ports rebuild has not finished', 'mactrack');
 

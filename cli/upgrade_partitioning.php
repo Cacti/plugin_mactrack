@@ -25,9 +25,9 @@
 /*
  * cli/upgrade_partitioning.php
  *
- * Checks how mac_track_ports (MAC addresses) and mac_track_ips (IP
- * addresses) are partitioned against the selected scheme and, when they have
- * drifted from it or the scheme is being changed, rebuilds them one after the
+ * Checks how mac_track_ports (MAC addresses), mac_track_ips (IP
+ * addresses) and mac_track_dot1x are partitioned against the selected scheme
+ * and, when they have drifted from it or the scheme is changing, rebuilds them one after the
  * other:
  *
  *  1. the table is renamed to <table>_rebuild;
@@ -200,7 +200,7 @@ function display_help(): void {
 	mactrack_upart_out('');
 	mactrack_upart_out('usage: upgrade_partitioning.php [--partition=daily|weekly|disabled] [--debug] [--version] [--help]');
 	mactrack_upart_out('');
-	mactrack_upart_out('Checks how the MAC address (mac_track_ports) and IP address (mac_track_ips)');
+	mactrack_upart_out('Checks the MAC address (mac_track_ports), IP address (mac_track_ips) and 802.1x (mac_track_dot1x)');
 	mactrack_upart_out('tables are partitioned. Without --partition, the Port and IP Address Partition Size setting');
 	mactrack_upart_out('is the scheme; a table that already follows it is left alone and reported.');
 	mactrack_upart_out('A table that has drifted from the scheme, or is not partitioned as asked, is');
@@ -330,7 +330,7 @@ function mactrack_upart_upgrade_active(): bool {
 }
 
 /**
- * Checks both tables against the scheme and rebuilds the ones that need it.
+ * Checks the history tables against the scheme and rebuilds the ones that need it.
  *
  * @param string $scheme   day, week or disabled.
  * @param bool   $explicit True when --partition chose it, so it is saved as
@@ -436,7 +436,7 @@ function mactrack_upart_assess_all(string $scheme): array {
  * follows the scheme, rebuild or resume when it must be rebuilt, and missing
  * when the table does not exist.
  *
- * @param string $table  mac_track_ports or mac_track_ips.
+ * @param string $table  History table.
  * @param string $scheme day, week or disabled.
  *
  * @return array{action: string, reason: string}
@@ -515,7 +515,7 @@ function mactrack_upart_rebuild_all(array $tables, string $scheme, int $pause): 
 
 	set_config_option('mt_partition_converting', (string) $started);
 
-	mactrack_upart_out('WARNING: Scanning is paused and MAC and IP address searching is in maintenance mode until this finishes.');
+	mactrack_upart_out('WARNING: Scanning is paused and MAC, IP and 802.1x searching is in maintenance mode until this finishes.');
 	mactrack_upart_out('WARNING: Allow disk space for a second copy of each table and its indexes; this can take hours.');
 
 	$total  = ['ok' => true, 'reason' => '', 'rows' => 0, 'partitions' => 0, 'granularity' => $scheme];
@@ -629,7 +629,7 @@ function mactrack_upart_plan(array $epochs, string $scheme, int $retention_days,
  * when it already has the scheme, and the copy restarts from the newest scan
  * date it holds.
  *
- * @param string        $table    mac_track_ports or mac_track_ips.
+ * @param string        $table    History table.
  * @param string        $scheme   day, week or disabled.
  * @param callable|null $progress Called as ($table, $done, $total, $scan_date, $rows) after each scan date.
  * @param int           $pause    Seconds between DDL retries; the rename waits twice as long.

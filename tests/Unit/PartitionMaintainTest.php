@@ -423,6 +423,53 @@ it('drops expired IP partitions from the IP table without touching scan dates', 
 	expect(json_decode($GLOBALS['__test_config_options']['mt_partition_status'], true)['maintenance_ips']['dropped'])->toBe(['d20261101']);
 });
 
+it('drops and recovers 802.1x partitions without pruning port scan dates', function () {
+	mt_pm_db([
+		['d20261101', '1793491201'],
+		['d20261112', '1794528000'],
+		['dMaxValue', 'MAXVALUE'],
+	], ['stranded' => '1794600000']);
+
+	$r = mactrack_partition_maintain(7, MT_PM_NOW, 'mac_track_dot1x');
+
+	expect($r['dropped'])->toBe(['d20261101']);
+	expect($r['created'][0])->toBe('r' . gmdate('YmdHis', 1794600000));
+	expect(mt_pm_ddl()[0])->toBe(mactrack_partition_drop_sql(['d20261101'], 'mac_track_dot1x'));
+	expect(mt_pm_prunes())->toBe([]);
+	expect(json_decode($GLOBALS['__test_config_options']['mt_partition_status'], true)['maintenance_dot1x']['dropped'])->toBe(['d20261101']);
+});
+
+it('maintains partitioned 802.1x history even when retention is unlimited', function () {
+	set_config_option('mt_data_retention', '0');
+	set_config_option('mt_data_retention_ip', '3');
+	mt_pm_db([
+		['d20261112', '1794528000'],
+		['dMaxValue', 'MAXVALUE'],
+	]);
+
+	perform_mactrack_db_maint();
+
+	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
+	expect(array_filter($sql, fn ($s) => strpos($s, 'DELETE FROM mac_track_dot1x') !== false))->toBe([]);
+	expect(array_filter($sql, fn ($s) => strpos($s, 'ALTER TABLE `mac_track_dot1x`') !== false))->not->toBe([]);
+});
+
+it('uses port retention for unpartitioned 802.1x history', function (int $days) {
+	set_config_option('mt_data_retention', (string) $days);
+	set_config_option('mt_data_retention_ip', '3');
+	mt_pm_db([]);
+
+	$steps = [];
+	mactrack_db_maint_run($steps, MT_PM_NOW);
+
+	$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => strpos($c['sql'], 'DELETE FROM mac_track_dot1x') !== false));
+	expect($deletes)->toHaveCount($days > 0 ? 1 : 0);
+
+	if ($days > 0) {
+		expect($deletes[0]['params'])->toBe([date('Y-m-d H:i:s', MT_PM_NOW - $days * 86400)]);
+	}
+})->with([0, 7]);
+
 it('creates daily IP partitions ahead even when the port size is per scan', function () {
 	mt_pm_db([
 		['d20261112', '1794528000'],

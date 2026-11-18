@@ -815,6 +815,13 @@ function mactrack_utilities_partition_status(): void {
 		$row(__('IP Table Partitions', 'mactrack'), (string) count($ips['partitions']));
 	}
 
+	$dot1x = mactrack_partition_state('mac_track_dot1x')['layout'];
+	$row(__('802.1x Table Layout', 'mactrack'), trim($layouts[$dot1x['state']] . ' ' . $dot1x['reason']));
+
+	if ($dot1x['state'] === 'range') {
+		$row(__('802.1x Table Partitions', 'mactrack'), (string) count($dot1x['partitions']));
+	}
+
 	html_end_box();
 }
 
@@ -1086,7 +1093,7 @@ function mactrack_utilities(): void {
 			<?php print mactrack_utilities_action_link('mactrack_utilities_convert_partitions', __('Configure Port and IP Address Partitioning', 'mactrack')); ?>
 		</td>
 		<td class='textArea'>
-			<?php print __('Choose daily or weekly partitions, or disable partitioning, for the port (MAC address) and IP address tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC and IP address searching shows a maintenance message meanwhile.', 'mactrack'); ?>
+			<?php print __('Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile.', 'mactrack'); ?>
 		</td>
 	</tr>
 

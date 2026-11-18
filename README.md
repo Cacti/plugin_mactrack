@@ -53,10 +53,11 @@ Add Mactrack Site - Console -> Mactrack -> Sites
 Add/import devices - Console -> Mactrack -> Devices -> Add device or Management -> Choose host -> Import into Mactrack Database
 Create new or enable prepared Device Types - Console -> Mactrack -> Device Types
 
-## Port and IP history partitioning
+## Port, IP and 802.1x history partitioning
 
 MacTrack keeps the MAC address history in `mac_track_ports` and the IP address
-history in `mac_track_ips`. Both tables are partitioned by scan date (MySQL 8.0+
+history in `mac_track_ips`, and 802.1x events in `mac_track_dot1x`. These tables
+are partitioned by scan date (MySQL 8.0+
 or MariaDB with the partition plugin), so retention drops whole expired
 partitions instead of deleting millions of rows, and a search for one scan reads
 one partition. A server without partitioning support keeps unpartitioned tables,
@@ -64,7 +65,7 @@ which MacTrack fully supports.
 
 ### Setting it up
 
-**New installs** create both tables weekly partitioned, starting Monday at
+**New installs** create all three tables weekly partitioned, starting Monday at
 00:00 UTC, and the poller's daily maintenance keeps the next two days of
 partitions created ahead of collection. Nothing needs to be done.
 
@@ -76,8 +77,8 @@ the size, then run the rebuild once:
    Scan* (maintained by the poller; the rebuild script cannot build these two),
    or *Disabled* for unpartitioned tables. It sets the size of the partitions
    created from now on and never rewrites the ones that exist.
-2. Set the retention (**Data Retention** for MAC addresses and **Data Retention
-   IPs**). Partitions older than the retention are dropped by the daily
+2. Set the retention (**Data Retention** for MAC addresses and 802.1x events,
+   and **Data Retention IPs** for IP addresses). Partitions older than the retention are dropped by the daily
    maintenance, so with weekly partitions up to one extra week of history can
    stay.
 3. Rebuild the existing history to match, either with **MacTrack Utilities >
@@ -94,7 +95,7 @@ Run it as the user that runs the Cacti poller, off hours (see below).
 
 ### Checking and changing the scheme
 
-`cli/upgrade_partitioning.php` checks both tables against the scheme and rebuilds
+`cli/upgrade_partitioning.php` checks all three tables against the scheme and rebuilds
 only the ones that have drifted:
 
 - Without `--partition` the scheme is the **Port and IP Address Partition Size** setting. This
@@ -109,7 +110,7 @@ A table is reported as drifted, and rebuilt, when it is not partitioned, uses th
 earlier daily layout, has partitions MacTrack does not recognize, mixes sizes,
 keeps rows outside every partition, or is not the selected size. A table that
 already follows the scheme is left alone, and the script says so. **View
-Partition Status** in the Utilities shows the layout of both tables, the last
+Partition Status** in the Utilities shows the layout of all three tables, the last
 rebuild and the last maintenance.
 
 ### What a rebuild does
@@ -135,7 +136,7 @@ process registry for 24 hours, so two runs cannot overlap).
 - Scheduled scans and the daily database maintenance are paused. If the
   maintenance window passes meanwhile, the poller runs the maintenance as soon as
   the rebuild is over.
-- MAC address and IP address searching shows a maintenance-mode message, and its
+- MAC address, IP address and 802.1x searching shows a maintenance-mode message, and its
   results are incomplete until the rebuild has finished.
 - Changes to the history are refused with a message until the rebuild has
   finished, including after an interruption: removing devices and sites,

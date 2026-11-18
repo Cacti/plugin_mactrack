@@ -309,7 +309,7 @@ function mactrack_partition_layout(array $rows): array {
 /**
  * Tables MacTrack partitions by scan date.
  */
-const MACTRACK_PARTITION_TABLES = ['mac_track_ports', 'mac_track_ips'];
+const MACTRACK_PARTITION_TABLES = ['mac_track_ports', 'mac_track_ips', 'mac_track_dot1x'];
 
 /**
  * Throws unless a table is one MacTrack partitions by scan date. Table names
