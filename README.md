@@ -1,9 +1,5 @@
 # mactrack
 
-[All published release notes](docs/RELEASE_HISTORY.md)
-
-[Version 5.0 release notes and upgrade guidance](docs/RELEASE_NOTES_5.0.md) · [Contributors and change history](docs/COMMITS_5.0.md)
-
 The MacTrack plugin is designed to scan network switches, routers and
 intelligent hubs for connected devices, and record their location either based
 upon the portname or alias of the switch or hub.  It also attempts to discover
@@ -23,7 +19,7 @@ This README describes the `develop` source branch.
 
 | Code | Plugin version | Minimum Cacti declared in `INFO` |
 | --- | --- | --- |
-| [Source branch](INFO) | 5.0 | 1.2.29 |
+| [Source branch](https://github.com/Cacti/plugin_mactrack/blob/develop/INFO) | 5.0 | 1.2.29 |
 | [Published v5.0](https://github.com/Cacti/plugin_mactrack/releases/tag/v5.0) | 5.0 | 1.2.29 |
 
 Use the published release’s assets and tagged documentation when installing that
@@ -33,7 +29,11 @@ matches the release. Cacti’s own PHP and database requirements also apply.
 Install this plugin in **`<cacti-root>/plugins/mactrack`**, using the directory
 name `mactrack` rather than `plugin_mactrack`.
 
-See [CHANGELOG.md](CHANGELOG.md) for the version history.
+See [CHANGELOG.md](https://github.com/Cacti/plugin_mactrack/blob/develop/CHANGELOG.md) for the version history.
+
+[All published release notes](https://github.com/Cacti/plugin_mactrack/blob/develop/docs/RELEASE_HISTORY.md)
+
+[Version 5.0 release notes and upgrade guidance](https://github.com/Cacti/plugin_mactrack/blob/develop/docs/RELEASE_NOTES_5.0.md) · [Contributors and change history](https://github.com/Cacti/plugin_mactrack/blob/develop/docs/COMMITS_5.0.md)
 
 ## Features
 
