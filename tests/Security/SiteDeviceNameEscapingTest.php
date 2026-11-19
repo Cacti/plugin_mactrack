@@ -57,6 +57,11 @@ test('export rows quote every field and preserve their order', function () {
 		->toBe('"core,west","a""b","\'=1+1","-5",""');
 });
 
+test('export columns select and order fields independently of the query', function () {
+	expect(mactrack_csv_row(['internal' => 42, 'name' => 'a"b', 'site' => 'dc'], ['site', 'name']))
+		->toBe('"dc","a""b"');
+});
+
 test('each export builds its data records with the shared CSV formatter', function () {
 	$rows = 0;
 
@@ -66,7 +71,7 @@ test('each export builds its data records with the shared CSV formatter', functi
 		expect($source)->not->toMatch('/array_push\(\$xport_array,\s*\'"\'\s*\./');
 	}
 
-	expect($rows)->toBe(13);
+	expect($rows)->toBe(15);
 });
 
 test('site and device names are not printed raw in views, options or emails', function () {

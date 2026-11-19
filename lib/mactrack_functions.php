@@ -4753,7 +4753,11 @@ function mactrack_csv_cell($value): string {
 /**
  * Format ordered values as one quoted CSV record.
  */
-function mactrack_csv_row(array $fields): string {
+function mactrack_csv_row(array $fields, array $columns = []): string {
+	if ($columns) {
+		$fields = array_map(static fn ($column) => $fields[$column], $columns);
+	}
+
 	return '"' . implode('","', array_map('mactrack_csv_cell', $fields)) . '"';
 }
 

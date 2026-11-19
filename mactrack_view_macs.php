@@ -543,9 +543,11 @@ function mactrack_view_export_macs(): void {
 	$port_results = mactrack_view_get_mac_records($sql_where, $sql_params, 0, false);
 
 	$xport_array = [];
-	array_push($xport_array, '"site_name","hostname","device_name",' .
-		'"vlan_id","vlan_name","mac_address","vendor_name",' .
-		'"ip_address","dns_hostname","port_number","port_name","scan_date"');
+	$columns = [
+		'site_name', 'hostname', 'device_name', 'vlan_id', 'vlan_name', 'mac_address',
+		'vendor_name', 'ip_address', 'dns_hostname', 'port_number', 'port_name', 'scan_date',
+	];
+	$xport_array[] = mactrack_csv_row($columns);
 
 	if (cacti_sizeof($port_results)) {
 		foreach ($port_results as $port_result) {
@@ -555,13 +557,7 @@ function mactrack_view_export_macs(): void {
 				$scan_date = $port_result['scan_date'];
 			}
 
-			$xport_array[] = mactrack_csv_row([
-				$port_result['site_name'], $port_result['hostname'], $port_result['device_name'],
-				$port_result['vlan_id'], $port_result['vlan_name'],
-				mactrack_format_mac($port_result['mac_address']), $port_result['vendor_name'],
-				$port_result['ip_address'], $port_result['dns_hostname'], $port_result['port_number'],
-				$port_result['port_name'], $scan_date,
-			]);
+			$xport_array[] = mactrack_csv_row($port_result, $columns);
 		}
 	}
 

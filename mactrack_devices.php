@@ -531,29 +531,19 @@ function mactrack_device_export(): void {
 	$xport_array = [];
 	// the community string, auth password and privacy passphrase are not
 	// exported; the import matches columns by name, so it keeps the stored ones
-	array_push($xport_array, 'site_id, site_name, device_id, device_name, notes, ' .
-		'hostname, snmp_options, snmp_version, ' .
-		'snmp_username, snmp_auth_protocol, ' .
-		'snmp_priv_protocol, snmp_context, snmp_engine_id, ' .
-		'snmp_port, snmp_timeout, snmp_retries, max_oids, snmp_sysName, snmp_sysLocation, ' .
-		'snmp_sysContact, snmp_sysObjectID, snmp_sysDescr, snmp_sysUptime, ' .
-		'ignorePorts, scan_type, disabled, ports_total, ports_active, ' .
-		'ports_trunk, macs_active, last_rundate, last_runduration');
+	$columns = [
+		'site_id', 'site_name', 'device_id', 'device_name', 'notes', 'hostname', 'snmp_options',
+		'snmp_version', 'snmp_username', 'snmp_auth_protocol', 'snmp_priv_protocol',
+		'snmp_context', 'snmp_engine_id', 'snmp_port', 'snmp_timeout', 'snmp_retries',
+		'max_oids', 'snmp_sysName', 'snmp_sysLocation', 'snmp_sysContact', 'snmp_sysObjectID',
+		'snmp_sysDescr', 'snmp_sysUptime', 'ignorePorts', 'scan_type', 'disabled', 'ports_total',
+		'ports_active', 'ports_trunk', 'macs_active', 'last_rundate', 'last_runduration',
+	];
+	$xport_array[] = implode(', ', $columns);
 
 	if (cacti_sizeof($devices)) {
 		foreach ($devices as $device) {
-			$xport_array[] = mactrack_csv_row([
-				$device['site_id'], $device['site_name'], $device['device_id'], $device['device_name'],
-				$device['notes'], $device['hostname'], $device['snmp_options'], $device['snmp_version'],
-				$device['snmp_username'], $device['snmp_auth_protocol'], $device['snmp_priv_protocol'],
-				$device['snmp_context'], $device['snmp_engine_id'], $device['snmp_port'],
-				$device['snmp_timeout'], $device['snmp_retries'], $device['max_oids'],
-				$device['snmp_sysName'], $device['snmp_sysLocation'], $device['snmp_sysContact'],
-				$device['snmp_sysObjectID'], $device['snmp_sysDescr'], $device['snmp_sysUptime'],
-				$device['ignorePorts'], $device['scan_type'], $device['disabled'],
-				$device['ports_total'], $device['ports_active'], $device['ports_trunk'],
-				$device['macs_active'], $device['last_rundate'], $device['last_runduration'],
-			]);
+			$xport_array[] = mactrack_csv_row($device, $columns);
 		}
 	}
 
