@@ -104,9 +104,9 @@ function mactrack_vmacs_export(): void {
 
 	if (cacti_sizeof($vmacs)) {
 		foreach ($vmacs as $vmac) {
-			array_push($xport_array,'"' . mactrack_csv_cell(mactrack_format_mac($vmac['vendor_mac'])) . '","' .
-			mactrack_csv_cell($vmac['vendor_name']) . '","' .
-			mactrack_csv_cell($vmac['vendor_address']) . '"');
+			$xport_array[] = mactrack_csv_row([
+				mactrack_format_mac($vmac['vendor_mac']), $vmac['vendor_name'], $vmac['vendor_address'],
+			]);
 		}
 	}
 

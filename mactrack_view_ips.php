@@ -125,11 +125,11 @@ function mactrack_view_export_ip_ranges(): void {
 
 	if (is_array($ip_ranges)) {
 		foreach ($ip_ranges as $ip_range) {
-			array_push($xport_array,'"' .
-				mactrack_csv_cell($ip_range['site_id']) . '","' . mactrack_csv_cell($ip_range['site_name']) . '","' .
-				mactrack_csv_cell($ip_range['ip_range']) . '","' .
-				mactrack_csv_cell($ip_range['ips_current']) . '","' . mactrack_csv_cell($ip_range['ips_current_date']) . '","' .
-				mactrack_csv_cell($ip_range['ips_max']) . '","' . mactrack_csv_cell($ip_range['ips_max_date']) . '"');
+			$xport_array[] = mactrack_csv_row([
+				$ip_range['site_id'], $ip_range['site_name'], $ip_range['ip_range'],
+				$ip_range['ips_current'], $ip_range['ips_current_date'], $ip_range['ips_max'],
+				$ip_range['ips_max_date'],
+			]);
 		}
 	}
 

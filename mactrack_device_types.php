@@ -533,18 +533,13 @@ function mactrack_device_type_export(): void {
 
 	if (cacti_sizeof($device_types)) {
 		foreach ($device_types as $device_type) {
-			array_push($xport_array,'"' . mactrack_csv_cell($device_type['vendor']) . '","' .
-			mactrack_csv_cell($device_type['description']) . '","' .
-			mactrack_csv_cell($device_type['device_type']) . '","' .
-			mactrack_csv_cell($device_type['sysDescr_match']) . '","' .
-			mactrack_csv_cell($device_type['sysObjectID_match']) . '","' .
-			mactrack_csv_cell($device_type['scanning_function']) . '","' .
-			mactrack_csv_cell($device_type['ip_scanning_function']) . '","' .
-			mactrack_csv_cell($device_type['dot1x_scanning_function']) . '","' .
-			mactrack_csv_cell($device_type['serial_number_oid']) . '","' .
-			mactrack_csv_cell($device_type['lowPort']) . '","' .
-			mactrack_csv_cell($device_type['highPort']) . '","' .
-			mactrack_csv_cell($device_type['disabled']) . '"');
+			$xport_array[] = mactrack_csv_row([
+				$device_type['vendor'], $device_type['description'], $device_type['device_type'],
+				$device_type['sysDescr_match'], $device_type['sysObjectID_match'],
+				$device_type['scanning_function'], $device_type['ip_scanning_function'],
+				$device_type['dot1x_scanning_function'], $device_type['serial_number_oid'],
+				$device_type['lowPort'], $device_type['highPort'], $device_type['disabled'],
+			]);
 		}
 	}
 

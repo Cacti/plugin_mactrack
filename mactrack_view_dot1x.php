@@ -168,13 +168,13 @@ function mactrack_view_export_dot1x(): void {
 				$scan_date = $port_result['max_scan_date'];
 			}
 
-			array_push($xport_array,'"' . mactrack_csv_cell($port_result['site_name']) . '","' .
-			mactrack_csv_cell($port_result['hostname']) . '","' . mactrack_csv_cell($port_result['device_name']) . '","' .
-			mactrack_csv_cell($port_result['domain']) . '","' . mactrack_csv_cell($port_result['status']) . '","' .
-			mactrack_csv_cell(mactrack_format_mac($port_result['mac_address'])) . '","' . mactrack_csv_cell($port_result['ip_address']) . '","' .
-			mactrack_csv_cell($port_result['dns_hostname']) . '","' . mactrack_csv_cell($port_result['port_number']) . '","' .
-			mactrack_csv_cell($port_result['ifName']) . '","' . mactrack_csv_cell($port_result['username']) . '","' .
-			mactrack_csv_cell($scan_date) . '"');
+			$xport_array[] = mactrack_csv_row([
+				$port_result['site_name'], $port_result['hostname'], $port_result['device_name'],
+				$port_result['domain'], $port_result['status'],
+				mactrack_format_mac($port_result['mac_address']), $port_result['ip_address'],
+				$port_result['dns_hostname'], $port_result['port_number'], $port_result['ifName'],
+				$port_result['username'], $scan_date,
+			]);
 		}
 	}
 

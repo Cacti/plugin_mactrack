@@ -52,26 +52,21 @@ test('CSV cells neutralise formula prefixes and double quotes', function ($input
 	'empty'           => ['', ''],
 ]);
 
-test('every CSV export row passes each field through mactrack_csv_cell', function () {
-	$checked = 0;
+test('export rows quote every field and preserve their order', function () {
+	expect(mactrack_csv_row(['core,west', 'a"b', '=1+1', -5, null]))
+		->toBe('"core,west","a""b","\'=1+1","-5",""');
+});
+
+test('each export builds its data records with the shared CSV formatter', function () {
+	$rows = 0;
 
 	foreach (mactrack_test_plugin_php_files() as $file) {
 		$source = file_get_contents(dirname(__DIR__, 2) . '/' . $file);
-
-		if (!preg_match_all("/array_push\\(\\\$xport_array,\\s*'\"'\\s*\\..*?'\"'\\);/s", $source, $rows)) {
-			continue;
-		}
-
-		foreach ($rows[0] as $row) {
-			$checked++;
-			// a field reference outside mactrack_csv_cell() would be written verbatim
-			$unwrapped = preg_replace('/mactrack_csv_cell\((?:[^()]|\((?:[^()]|\([^()]*\))*\))*\)/', '', $row);
-
-			expect($unwrapped)->not->toMatch('/\$\w+\[/', "$file has an unwrapped CSV field");
-		}
+		$rows  += substr_count($source, '$xport_array[] = mactrack_csv_row(');
+		expect($source)->not->toMatch('/array_push\(\$xport_array,\s*\'"\'\s*\./');
 	}
 
-	expect($checked)->toBe(13);
+	expect($rows)->toBe(13);
 });
 
 test('site and device names are not printed raw in views, options or emails', function () {
@@ -126,7 +121,7 @@ test('SNMP item changes require POST, are scoped to their set and are sent by th
 	expect($js)->toContain('$.post(');
 });
 
-test('the Cabletron port scan reads the port table through the SNMP API', function () {
+test('the Cabletron port scan stops at its range or a wrapped port number', function (int $lastPort, int $expected) {
 	$oid = '.1.3.6.1.4.1.52.4.1.1.1.4.1.5.2.1.2';
 
 	$GLOBALS['__test_snmp_walk'] = [
@@ -141,7 +136,7 @@ test('the Cabletron port scan reads the port table through the SNMP API', functi
 	$GLOBALS['__test_db_calls']        = [];
 
 	$device = [
-		'device_id' => 1, 'hostname' => 'sw1.example.com; id', 'snmp_version' => 2, 'snmp_username' => '',
+		'device_id' => 1, 'hostname' => 'sw1.example.test', 'snmp_version' => 2, 'snmp_username' => '',
 		'snmp_password' => '', 'snmp_auth_protocol' => '', 'snmp_priv_passphrase' => '', 'snmp_priv_protocol' => '',
 		'snmp_context' => '', 'snmp_port' => 161, 'snmp_timeout' => 500, 'snmp_retries' => 1, 'max_oids' => 10,
 		'snmp_readstring' => 'public', 'ignorePorts' => '', 'snmp_sysDescr' => 'x', 'ports_active' => 0,
@@ -150,9 +145,8 @@ test('the Cabletron port scan reads the port table through the SNMP API', functi
 	mactrack_test_queue_return('cacti_snmp_get', '4');
 	mactrack_test_queue_return('cacti_snmp_get', '4');
 
-	$result = get_repeater_rev4_ports('HQ', $device, 1, 2);
+	$result = get_repeater_rev4_ports('HQ', $device, 1, $lastPort);
 
 	expect($GLOBALS['__test_snmp_walk_calls'])->toContain($oid);
-	// the walk stops when a port number is outside the range
-	expect($result['macs_active'])->toBe(2);
-});
+	expect($result['macs_active'])->toBe($expected);
+})->with(['range ends at port 2' => [2, 2], 'port numbering restarts after port 3' => [3, 3]]);

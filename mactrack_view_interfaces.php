@@ -325,20 +325,15 @@ function mactrack_export_records(): void {
 
 	if (cacti_sizeof($stats)) {
 		foreach ($stats as $stat) {
-			array_push($xport_array,'"' .
-				mactrack_csv_cell($stat['device_name']) . '","' . mactrack_csv_cell($stat['device_type']) . '","' .
-				mactrack_csv_cell($stat['sysUptime']) . '","' . mactrack_csv_cell($stat['ifIndex']) . '","' .
-				mactrack_csv_cell($stat['ifName']) . '","' . mactrack_csv_cell($stat['ifAlias']) . '","' .
-				mactrack_csv_cell($stat['ifDescr']) . '","' . mactrack_csv_cell($stat['ifType']) . '","' .
-				mactrack_csv_cell($stat['ifMtu']) . '","' . mactrack_csv_cell($stat['ifSpeed']) . '","' .
-				mactrack_csv_cell($stat['ifHighSpeed']) . '","' . mactrack_csv_cell($stat['ifPhysAddress']) . '","' .
-				mactrack_csv_cell($stat['ifAdminStatus']) . '","' . mactrack_csv_cell($stat['ifOperStatus']) . '","' .
-				mactrack_csv_cell($stat['ifLastChange']) . '","' . mactrack_csv_cell($stat['ifHCInOctets']) . '","' .
-				mactrack_csv_cell($stat['ifHCOutOctets']) . '","' . mactrack_csv_cell($stat['ifInDiscards']) . '","' .
-				mactrack_csv_cell($stat['ifInErrors']) . '","' . mactrack_csv_cell($stat['ifInUnknownProtos']) . '","' .
-				mactrack_csv_cell($stat['ifOutDiscards']) . '","' . mactrack_csv_cell($stat['ifOutErrors']) . '","' .
-				mactrack_csv_cell($stat['last_up_time']) . '","' . mactrack_csv_cell($stat['last_down_time']) . '","' .
-				mactrack_csv_cell($stat['stateChanges']) . '"');
+			$xport_array[] = mactrack_csv_row([
+				$stat['device_name'], $stat['device_type'], $stat['sysUptime'], $stat['ifIndex'],
+				$stat['ifName'], $stat['ifAlias'], $stat['ifDescr'], $stat['ifType'], $stat['ifMtu'],
+				$stat['ifSpeed'], $stat['ifHighSpeed'], $stat['ifPhysAddress'], $stat['ifAdminStatus'],
+				$stat['ifOperStatus'], $stat['ifLastChange'], $stat['ifHCInOctets'],
+				$stat['ifHCOutOctets'], $stat['ifInDiscards'], $stat['ifInErrors'],
+				$stat['ifInUnknownProtos'], $stat['ifOutDiscards'], $stat['ifOutErrors'],
+				$stat['last_up_time'], $stat['last_down_time'], $stat['stateChanges'],
+			]);
 		}
 	}
 

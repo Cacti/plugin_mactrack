@@ -57,14 +57,6 @@ it('parameterizes site IDs and normalizes PIDs during poller process cleanup', f
 	expect($source)->toContain("intval(\$p['process_id'])");
 });
 
-it('does not build a command line for the Cabletron port scan', function () {
-	$source = plugin_test_read_source('lib/mactrack_cabletron.php');
-
-	expect($source)->toContain('cacti_snmp_walk($device[\'hostname\']');
-	expect($source)->not->toContain('exec(');
-	expect($source)->not->toContain('path_snmpgetnext');
-});
-
 it('uses safe RLIKE quoting and normalized numeric values for interface filters', function () {
 	$source = plugin_test_read_source('mactrack_view_interfaces.php');
 

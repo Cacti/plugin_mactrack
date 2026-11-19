@@ -37,6 +37,7 @@
             <file>lib/mactrack_activity.php</file>
             <file>lib/mactrack_dns_resolution.php</file>
             <file>lib/mactrack_aruba_oscx.php</file>
+            <file>lib/mactrack_cabletron.php</file>
             <file>lib/mactrack_cisco.php</file>
             <file>lib/mactrack_enterasys_N7.php</file>
             <file>lib/mactrack_extreme.php</file>

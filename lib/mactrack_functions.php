@@ -4751,6 +4751,13 @@ function mactrack_csv_cell($value): string {
 }
 
 /**
+ * Format ordered values as one quoted CSV record.
+ */
+function mactrack_csv_row(array $fields): string {
+	return '"' . implode('","', array_map('mactrack_csv_cell', $fields)) . '"';
+}
+
+/**
  * Rejects an admin AJAX action that did not arrive as a POST.
  *
  * Cacti's csrf-magic checks the token on POST only, so a state change
