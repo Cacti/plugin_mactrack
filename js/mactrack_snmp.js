@@ -20,3 +20,21 @@
  | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
+
+/* Reorder and remove actions change data, so they are sent as POST with the CSRF token */
+$(function() {
+	$(document).on('click', '.mactrackSnmpItemAction', function(event) {
+		event.preventDefault();
+
+		var action = $(this).attr('data-action');
+		var itemId = $(this).attr('data-item-id');
+		var snmpId = $(this).attr('data-snmp-id');
+		var base   = urlPath + 'plugins/mactrack/mactrack_snmp.php';
+
+		$.post(base + '?action=' + encodeURIComponent(action) + '&item_id=' + encodeURIComponent(itemId) + '&id=' + encodeURIComponent(snmpId), { __csrf_magic: csrfMagicToken }).done(function() {
+			loadPageNoHeader(base + '?header=false&action=edit&id=' + encodeURIComponent(snmpId));
+		}).fail(function(data) {
+			getPresentHTTPError(data);
+		});
+	});
+});

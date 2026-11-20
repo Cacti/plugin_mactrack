@@ -291,13 +291,11 @@ function mactrack_site_export(): void {
 
 		if (cacti_sizeof($sites)) {
 			foreach ($sites as $site) {
-				array_push($xport_array,'"' . $site['site_name'] . '","' .
-				$site['total_devices'] . '","' .
-				$site['total_device_errors'] . '","' .
-				$site['total_macs'] . '","' .
-				$site['total_ips'] . '","' .
-				$site['total_oper_ports'] . '","' .
-				$site['total_user_ports'] . '"');
+				$xport_array[] = mactrack_csv_row([
+					$site['site_name'], $site['total_devices'], $site['total_device_errors'],
+					$site['total_macs'], $site['total_ips'], $site['total_oper_ports'],
+					$site['total_user_ports'],
+				]);
 			}
 		}
 	} else {
@@ -308,15 +306,11 @@ function mactrack_site_export(): void {
 
 		if (cacti_sizeof($sites)) {
 			foreach ($sites as $site) {
-				array_push($xport_array,'"' . $site['site_name'] . '","' .
-				$site['total_devices'] . '","' .
-				$site['vendor'] . '","' .
-				$site['device_name'] . '","' .
-				$site['sum_ips_total'] . '","' .
-				$site['sum_ports_total'] . '","' .
-				$site['sum_ports_active'] . '","' .
-				$site['sum_ports_trunk'] . '","' .
-				$site['sum_macs_active'] . '"');
+				$xport_array[] = mactrack_csv_row([
+					$site['site_name'], $site['total_devices'], $site['vendor'], $site['device_name'],
+					$site['sum_ips_total'], $site['sum_ports_total'], $site['sum_ports_active'],
+					$site['sum_ports_trunk'], $site['sum_macs_active'],
+				]);
 			}
 		}
 	}
@@ -440,7 +434,7 @@ function mactrack_site_edit(): void {
 			WHERE site_id = ?',
 			[get_request_var('site_id')]);
 
-		$header_label = __('Mactrack Site [edit: %s]', $site['site_name'], 'mactrack');
+		$header_label = __('Mactrack Site [edit: %s]', html_escape($site['site_name']), 'mactrack');
 	} else {
 		$header_label = __('Mactrack Site [new]', 'mactrack');
 	}

@@ -140,12 +140,12 @@ function mactrack_view_export_ips(): void {
 		foreach ($port_results as $port_result) {
 			$scan_date = $port_result['scan_date'];
 
-			array_push($xport_array,'"' . $port_result['site_name'] . '","' .
-			$port_result['hostname'] . '","' . $port_result['device_name'] . '","' .
-			mactrack_format_mac($port_result['mac_address']) . '","' . $port_result['vendor_name'] . '","' .
-			$port_result['ip_address'] . '","' . $port_result['dns_hostname'] . '","' .
-			$port_result['port_number'] . '","' . $port_result['ifName'] . '","' .
-			$scan_date . '"');
+			$xport_array[] = mactrack_csv_row([
+				$port_result['site_name'], $port_result['hostname'], $port_result['device_name'],
+				mactrack_format_mac($port_result['mac_address']), $port_result['vendor_name'],
+				$port_result['ip_address'], $port_result['dns_hostname'], $port_result['port_number'],
+				$port_result['ifName'], $scan_date,
+			]);
 		}
 	}
 
@@ -467,8 +467,8 @@ function mactrack_view_ips(): void {
 		foreach ($port_results as $port_result) {
 			form_alternate_row('line' . $i, true);
 
-			form_selectable_cell($port_result['site_name'], $i);
-			form_selectable_cell($port_result['device_name'], $i, '10%');
+			form_selectable_ecell($port_result['site_name'], $i);
+			form_selectable_ecell($port_result['device_name'], $i, '10%');
 			form_selectable_cell($port_result['hostname'], $i);
 			form_selectable_cell(filter_value($port_result['ip_address'], get_request_var('filter')), $i);
 

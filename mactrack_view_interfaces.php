@@ -325,20 +325,15 @@ function mactrack_export_records(): void {
 
 	if (cacti_sizeof($stats)) {
 		foreach ($stats as $stat) {
-			array_push($xport_array,'"' .
-				$stat['device_name'] . '","' . $stat['device_type'] . '","' .
-				$stat['sysUptime'] . '","' . $stat['ifIndex'] . '","' .
-				$stat['ifName'] . '","' . $stat['ifAlias'] . '","' .
-				$stat['ifDescr'] . '","' . $stat['ifType'] . '","' .
-				$stat['ifMtu'] . '","' . $stat['ifSpeed'] . '","' .
-				$stat['ifHighSpeed'] . '","' . $stat['ifPhysAddress'] . '","' .
-				$stat['ifAdminStatus'] . '","' . $stat['ifOperStatus'] . '","' .
-				$stat['ifLastChange'] . '","' . $stat['ifHCInOctets'] . '","' .
-				$stat['ifHCOutOctets'] . '","' . $stat['ifInDiscards'] . '","' .
-				$stat['ifInErrors'] . '","' . $stat['ifInUnknownProtos'] . '","' .
-				$stat['ifOutDiscards'] . '","' . $stat['ifOutErrors'] . '","' .
-				$stat['last_up_time'] . '","' . $stat['last_down_time'] . '","' .
-				$stat['stateChanges'] . '"');
+			$xport_array[] = mactrack_csv_row([
+				$stat['device_name'], $stat['device_type'], $stat['sysUptime'], $stat['ifIndex'],
+				$stat['ifName'], $stat['ifAlias'], $stat['ifDescr'], $stat['ifType'], $stat['ifMtu'],
+				$stat['ifSpeed'], $stat['ifHighSpeed'], $stat['ifPhysAddress'], $stat['ifAdminStatus'],
+				$stat['ifOperStatus'], $stat['ifLastChange'], $stat['ifHCInOctets'],
+				$stat['ifHCOutOctets'], $stat['ifInDiscards'], $stat['ifInErrors'],
+				$stat['ifInUnknownProtos'], $stat['ifOutDiscards'], $stat['ifOutErrors'],
+				$stat['last_up_time'], $stat['last_down_time'], $stat['stateChanges'],
+			]);
 		}
 	}
 

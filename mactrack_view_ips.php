@@ -125,11 +125,11 @@ function mactrack_view_export_ip_ranges(): void {
 
 	if (is_array($ip_ranges)) {
 		foreach ($ip_ranges as $ip_range) {
-			array_push($xport_array,'"' .
-				$ip_range['site_id'] . '","' . $ip_range['site_name'] . '","' .
-				$ip_range['ip_range'] . '","' .
-				$ip_range['ips_current'] . '","' . $ip_range['ips_current_date'] . '","' .
-				$ip_range['ips_max'] . '","' . $ip_range['ips_max_date'] . '"');
+			$xport_array[] = mactrack_csv_row([
+				$ip_range['site_id'], $ip_range['site_name'], $ip_range['ip_range'],
+				$ip_range['ips_current'], $ip_range['ips_current_date'], $ip_range['ips_max'],
+				$ip_range['ips_max_date'],
+			]);
 		}
 	}
 
@@ -305,7 +305,7 @@ function mactrack_view_ip_ranges(): void {
 
 			form_alternate_row('line' . $i, true);
 			form_selectable_cell($url, $i, '1%');
-			form_selectable_cell($ip_range['site_name'], $i);
+			form_selectable_ecell($ip_range['site_name'], $i);
 			form_selectable_cell($ip_range['ip_range'] . '.*', $i);
 			form_selectable_cell(number_format_i18n($ip_range['ips_current']), $i, '', 'right');
 			form_selectable_cell($ip_range['ips_current_date'], $i, '', 'right');

@@ -533,18 +533,13 @@ function mactrack_device_type_export(): void {
 
 	if (cacti_sizeof($device_types)) {
 		foreach ($device_types as $device_type) {
-			array_push($xport_array,'"' . $device_type['vendor'] . '","' .
-			$device_type['description'] . '","' .
-			$device_type['device_type'] . '","' .
-			$device_type['sysDescr_match'] . '","' .
-			$device_type['sysObjectID_match'] . '","' .
-			$device_type['scanning_function'] . '","' .
-			$device_type['ip_scanning_function'] . '","' .
-			$device_type['dot1x_scanning_function'] . '","' .
-			$device_type['serial_number_oid'] . '","' .
-			$device_type['lowPort'] . '","' .
-			$device_type['highPort'] . '","' .
-			$device_type['disabled'] . '"');
+			$xport_array[] = mactrack_csv_row([
+				$device_type['vendor'], $device_type['description'], $device_type['device_type'],
+				$device_type['sysDescr_match'], $device_type['sysObjectID_match'],
+				$device_type['scanning_function'], $device_type['ip_scanning_function'],
+				$device_type['dot1x_scanning_function'], $device_type['serial_number_oid'],
+				$device_type['lowPort'], $device_type['highPort'], $device_type['disabled'],
+			]);
 		}
 	}
 
@@ -913,9 +908,9 @@ function mactrack_device_type_import_processor(&$device_types): array {
 			$save_order .= ')';
 
 			if ($required >= 3) {
-				array_push($return_array, __('HEADER LINE PROCESSED OK:  <br>Columns found where: %s', $save_order, 'mactrack') . '<br>');
+				array_push($return_array, __('HEADER LINE PROCESSED OK:  <br>Columns found where: %s', html_escape($save_order), 'mactrack') . '<br>');
 			} else {
-				array_push($return_array, __('HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s', $save_order, 'mactrack') . '<br>');
+				array_push($return_array, __('HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s', html_escape($save_order), 'mactrack') . '<br>');
 
 				break;
 			}
@@ -1017,24 +1012,24 @@ function mactrack_device_type_import_processor(&$device_types): array {
 						' VALUES' . $save_value . $update_suffix;
 
 					if (db_execute($sql_execute)) {
-						array_push($return_array, __('INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', $vendor, $description, $device_type, $sysDescr_match, $sysObjectID_match, 'mactrack'));
+						array_push($return_array, __('INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', html_escape($vendor), html_escape($description), html_escape($device_type), html_escape($sysDescr_match), html_escape($sysObjectID_match), 'mactrack'));
 					} else {
-						array_push($return_array, __('INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', $vendor, $description, $device_type, $sysDescr_match, $sysObjectID_match, 'mactrack'));
+						array_push($return_array, __('INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', html_escape($vendor), html_escape($description), html_escape($device_type), html_escape($sysDescr_match), html_escape($sysObjectID_match), 'mactrack'));
 					}
 				} else {
 					// perform check to see if the row exists
 					$existing_row = db_fetch_row("SELECT * FROM mac_track_device_types $sql_where");
 
 					if (cacti_sizeof($existing_row)) {
-						array_push($return_array, __('INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', $vendor, $description, $device_type, $sysDescr_match, $sysObjectID_match, 'mactrack'));
+						array_push($return_array, __('INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', html_escape($vendor), html_escape($description), html_escape($device_type), html_escape($sysDescr_match), html_escape($sysObjectID_match), 'mactrack'));
 					} else {
 						$sql_execute = 'INSERT INTO mac_track_device_types ' . $save_order .
 							' VALUES' . $save_value;
 
 						if (db_execute($sql_execute)) {
-							array_push($return_array, __('INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', $vendor, $description, $device_type, $sysDescr_match, $sysObjectID_match, 'mactrack'));
+							array_push($return_array, __('INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', html_escape($vendor), html_escape($description), html_escape($device_type), html_escape($sysDescr_match), html_escape($sysObjectID_match), 'mactrack'));
 						} else {
-							array_push($return_array, __('INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', $vendor, $description, $device_type, $sysDescr_match, $sysObjectID_match, 'mactrack'));
+							array_push($return_array, __('INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s', html_escape($vendor), html_escape($description), html_escape($device_type), html_escape($sysDescr_match), html_escape($sysObjectID_match), 'mactrack'));
 						}
 					}
 				}

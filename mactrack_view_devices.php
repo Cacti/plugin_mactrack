@@ -119,30 +119,18 @@ function mactrack_view_export_devices(): void {
 	$devices = mactrack_view_get_device_records($sql_where, 0, false);
 
 	$xport_array = [];
-	array_push($xport_array, 'site_id, site_name, device_id, device_name, notes, ' .
-		'hostname, snmp_version, ' .
-		'snmp_port, snmp_timeout, snmp_retries, max_oids, snmp_sysName, snmp_sysLocation, ' .
-		'snmp_sysContact, snmp_sysObjectID, snmp_sysDescr, snmp_sysUptime, ' .
-		'ignorePorts, scan_type, disabled, ports_total, ports_active, ' .
-		'ports_trunk, macs_active, last_rundate, last_runduration');
+	$columns = [
+		'site_id', 'site_name', 'device_id', 'device_name', 'notes', 'hostname', 'snmp_version',
+		'snmp_port', 'snmp_timeout', 'snmp_retries', 'max_oids', 'snmp_sysName',
+		'snmp_sysLocation', 'snmp_sysContact', 'snmp_sysObjectID', 'snmp_sysDescr',
+		'snmp_sysUptime', 'ignorePorts', 'scan_type', 'disabled', 'ports_total', 'ports_active',
+		'ports_trunk', 'macs_active', 'last_rundate', 'last_runduration',
+	];
+	$xport_array[] = implode(', ', $columns);
 
 	if (cacti_sizeof($devices)) {
 		foreach ($devices as $device) {
-			array_push($xport_array,'"' .
-			$device['site_id'] . '","' . $device['site_name'] . '","' .
-			$device['device_id'] . '","' . $device['device_name'] . '","' .
-			$device['notes'] . '","' . $device['hostname'] . '","' .
-			$device['snmp_version'] . '","' .
-			$device['snmp_port'] . '","' . $device['snmp_timeout'] . '","' .
-			$device['snmp_retries'] . '","' . $device['max_oids'] . '","' .
-			$device['snmp_sysName'] . '","' . $device['snmp_sysLocation'] . '","' .
-			$device['snmp_sysContact'] . '","' . $device['snmp_sysObjectID'] . '","' .
-			$device['snmp_sysDescr'] . '","' . $device['snmp_sysUptime'] . '","' .
-			$device['ignorePorts'] . '","' . $device['scan_type'] . '","' .
-			$device['disabled'] . '","' . $device['ports_total'] . '","' .
-			$device['ports_active'] . '","' . $device['ports_trunk'] . '","' .
-			$device['macs_active'] . '","' . $device['last_rundate'] . '","' .
-			$device['last_runduration'] . '"');
+			$xport_array[] = mactrack_csv_row($device, $columns);
 		}
 	}
 
