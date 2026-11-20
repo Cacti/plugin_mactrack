@@ -13,6 +13,28 @@ be helpful in recovering lost equipment.  Through MacTrack's interface
 monitoring feature, a Network Administrator can get a very good idea of where
 utilization is, where there are errors, etc within their network.
 
+## Versions and compatibility
+
+This README describes the `develop` source branch.
+
+| Code | Plugin version | Minimum Cacti declared in `INFO` |
+| --- | --- | --- |
+| [Source branch](https://github.com/Cacti/plugin_mactrack/blob/develop/INFO) | 5.0 | 1.2.29 |
+| [Published v5.0](https://github.com/Cacti/plugin_mactrack/releases/tag/v5.0) | 5.0 | 1.2.29 |
+
+Use the published release’s assets and tagged documentation when installing that
+package. Branch code can include later changes, even when its version number
+matches the release. Cacti’s own PHP and database requirements also apply.
+
+Install this plugin in **`<cacti-root>/plugins/mactrack`**, using the directory
+name `mactrack` rather than `plugin_mactrack`.
+
+See [CHANGELOG.md](https://github.com/Cacti/plugin_mactrack/blob/develop/CHANGELOG.md) for the version history.
+
+[All published release notes](https://github.com/Cacti/plugin_mactrack/blob/develop/docs/RELEASE_HISTORY.md)
+
+[Version 5.0 release notes and upgrade guidance](https://github.com/Cacti/plugin_mactrack/blob/develop/docs/RELEASE_NOTES_5.0.md) · [Contributors and change history](https://github.com/Cacti/plugin_mactrack/blob/develop/docs/COMMITS_5.0.md)
+
 ## Features
 
 * Scans Devices
@@ -52,6 +74,14 @@ Configure mactrack - Console -> Settings -> Mactrack tab
 Add Mactrack Site - Console -> Mactrack -> Sites
 Add/import devices - Console -> Mactrack -> Devices -> Add device or Management -> Choose host -> Import into Mactrack Database
 Create new or enable prepared Device Types - Console -> Mactrack -> Device Types
+
+## Command-line scripts
+
+| Script | Purpose |
+| --- | --- |
+| `cli/upgrade_database.php` | Runs the pending MacTrack database upgrade in the background.  Console pages normally launch it when they detect an upgrade, but it can be run by hand.  Options: `-d`, `--debug` for verbose progress; `-f`, `--force` to run even if another upgrade appears to be registered; `-v`, `--version` and `-h`, `--help` |
+| `mactrack_import_ouidb.php` | Imports the IEEE OUI database into the vendor MAC table.  Use `-f=ouifile` to import a manually downloaded file when the system cannot reach the IEEE over http; `-v`, `--version` and `-h`, `--help` are also accepted |
+| `cli/upgrade_partitioning.php` | Checks and changes the history partitioning scheme; see below |
 
 ## Port, IP and 802.1x history partitioning
 

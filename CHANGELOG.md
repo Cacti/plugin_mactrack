@@ -1,5 +1,12 @@
 ## ChangeLog
 
+Documentation update (unreleased): Refresh README release/source compatibility,
+installation guidance and source-checked behavior.
+
+[All published release notes](https://github.com/Cacti/plugin_mactrack/blob/develop/docs/RELEASE_HISTORY.md)
+
+[Version 5.0 release notes and upgrade guidance](https://github.com/Cacti/plugin_mactrack/blob/develop/docs/RELEASE_NOTES_5.0.md) · [Contributors and change history](https://github.com/Cacti/plugin_mactrack/blob/develop/docs/COMMITS_5.0.md)
+
 --- 5.0 ---
 
 * security: Add a version-safe CSP nonce (`plugin_mactrack_csp_nonce()`) to every inline `<script>` tag
