@@ -1,0 +1,3597 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-18 18:36+0000\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Kinyarwanda\n"
+"Language: rw-RW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
+msgstr "MacTrack ntiyashoboye gutangiza Ahantu hayo mbanziriza nyuma yo kugerageza kenshi. Suzuma ikayi y'ibikorwa ya Cacti mbere yo gukomeza."
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
+msgstr "MacTrack ntiyashoboye gutangiza Ahantu hayo mbanziriza. Suzuma ikayi y'ibikorwa ya Cacti mbere yo gukomeza."
+
+#: lib/mactrack_activity.php
+msgid "Scanning devices"
+msgstr "Gusuzuma ibikoresho"
+
+#: lib/mactrack_activity.php
+msgid "Waiting for the DNS resolver"
+msgstr "Bitegereje ikemura rya DNS"
+
+#: lib/mactrack_activity.php
+msgid "Transferring and aggregating scan results"
+msgstr "Kohereza no guhuriza hamwe ibyavuye mu isuzuma"
+
+#: lib/mactrack_activity.php
+msgid "Maintaining port table partitions"
+msgstr "Kubungabunga ibice by'imbonerahamwe ya port"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired port rows"
+msgstr "Gusiba imirongo ya port yarangije igihe"
+
+#: lib/mactrack_activity.php
+msgid "Pruning scan dates"
+msgstr "Gukuraho amatariki y'isuzuma"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired IP rows"
+msgstr "Gusiba imirongo ya IP yarangije igihe"
+
+#: lib/mactrack_activity.php
+msgid "Optimizing the IP table"
+msgstr "Kunoza imbonerahamwe ya IP"
+
+#: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
+#: mactrack_view_dot1x.php
+msgid "Idle"
+msgstr "Ntibiri gukora"
+
+#: lib/mactrack_activity.php
+msgid "Upgrading: rebuilding aggregated ports"
+msgstr "Birimo kuvugururwa: kongera kubaka imiyoboro ihujwe"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "About %s rows left to copy (estimate)"
+msgstr "Hasigaye imirongo igera kuri %s yo gukoporora (ikigereranyo)"
+
+#: lib/mactrack_activity.php
+msgid "Repartitioning the port, IP and 802.1x tables"
+msgstr "Kugabanya bundi bushya imbonerahamwe z'imiyoboro, IP na 802.1x"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "%d devices in this scan"
+msgstr "ibikoresho %d muri iri suzuma"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "The process stopped during: %s"
+msgstr "Igikorwa cyahagaze mu gihe cya: %s"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "Scanning %d devices"
+msgstr "Gusuzuma ibikoresho %d"
+
+#: lib/mactrack_activity.php
+msgid "A database upgrade is running"
+msgstr "Ivugurura ry'ububiko bw'amakuru riri gukorwa"
+
+#: lib/mactrack_activity.php
+msgid "The port, IP and 802.1x table partitioning has not finished"
+msgstr "Igabanywa ry'imbonerahamwe z'umuyoboro, IP na 802.1x ntirirarangira"
+
+#: lib/mactrack_activity.php
+msgid "The aggregated ports rebuild has not finished"
+msgstr "Iyubakwa bushya ry'imiyoboro yahujwe ntirirarangira"
+
+#: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
+msgid "Running"
+msgstr "Biri gukora"
+
+#: lib/mactrack_functions.php
+msgid "No method"
+msgstr "Nta buryo"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Success"
+msgstr "Kwemeza umwirondoro byagenze neza"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Failed"
+msgstr "Kwemeza umwirondoro byanze"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Success"
+msgstr "Itangwa ry'uburenganzira ryagenze neza"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Failed"
+msgstr "Itangwa ry'uburenganzira ryanze"
+
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr "Ntibyagaragaye mu isuzuma rya vuba"
+
+#: lib/mactrack_functions.php
+msgid "Locally Admined MAC"
+msgstr "MAC iyoborwa imbere"
+
+#: lib/mactrack_functions.php
+msgid "Mactrack Device Tracking OUI Database Import Results"
+msgstr "Ibisubizo byo Kwinjiza Ububikoshingiro bwa OUI yo Gukurikirana Ibikoresho bya Mactrack"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from IEEE"
+msgstr "Kubona ububikoshingiro bwa OUI buvuye kuri IEEE"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from the IEEE"
+msgstr "Kuvana ububikoshingiro bwa OUI kuri IEEE"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE Complete"
+msgstr "Gukurura ububikoshingiro bwa OUI kuri IEEE byarangiye"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE FAILED"
+msgstr "Gukurura ububikoshingiro bwa OUI kuri IEEE BYANZE"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Entries Added/Updated in the database."
+msgstr "Hongeweho/Havuguruwe ibyinjijwe '%d' mu bubiko bw'amakuru."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Records Removed from the database."
+msgstr "Hakuweho inyandiko '%d' mu bubiko bw'amakuru."
+
+#: lib/mactrack_functions.php
+msgid "atifIndexes data collection complete"
+msgstr "Ikusanya ry'amakuru ya atifIndexes ryarangiye"
+
+#: lib/mactrack_functions.php
+msgid "atPhysAddress data collection complete"
+msgstr "Ikusanya ry'amakuru ya atPhysAddress ryarangiye"
+
+#: lib/mactrack_functions.php
+msgid "atNetAddress data collection complete"
+msgstr "Ikusanya ry'amakuru ya atNetAddress ryarangiye"
+
+#: lib/mactrack_functions.php
+msgid "atEntries assembly complete."
+msgstr "Ikusanya rya atEntries ryarangiye."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "HOST: %s, IP address information collection complete"
+msgstr "MWAKIRIZI: %s, ikusanyamakuru ku bijyanye n'aderesi ya IP rirangiye"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php
+msgid "Rescan Device"
+msgstr "Ongera usuzume Igikoresho"
+
+#: lib/mactrack_functions.php
+msgid "View Non Interface Graphs"
+msgstr "Reba ibishushanyo bitari iby'imiyoboro"
+
+#: lib/mactrack_functions.php
+msgid "No Non Interface Graphs in Cacti"
+msgstr "Nta bishushanyo bitari iby'imiyoboro muri Cacti"
+
+#: lib/mactrack_functions.php
+msgid "View Interface Graphs"
+msgstr "Reba ibishushanyo by'imiyoboro"
+
+#: lib/mactrack_functions.php
+msgid "No Interface Graphs in Cacti"
+msgstr "Nta bishushanyo by'imiyoboro muri Cacti"
+
+#: lib/mactrack_functions.php
+msgid "Since Restart"
+msgstr "Kuva byatangira bundi bushya"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Down"
+msgstr "Ntigikora"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Up"
+msgstr "Kirakora"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Unaliased"
+msgstr "Itafite irindi zina"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors"
+msgstr "Amakosa"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards"
+msgstr "Ibyatawe"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Graphless"
+msgstr "Nta gishushanyo"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Ntibizwi"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr "Byahawe uburenganzira"
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
+msgstr "Nta burenganzira ufite"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Data"
+msgstr "Amakuru"
+
+#: lib/mactrack_functions.php
+msgid "Voice"
+msgstr "Ijwi"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Rescan '%s'"
+msgstr "Ongera usuzume Igikoresho '%s'"
+
+#: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr "Isesengura rishya nta kintu ryatanze."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr "Isuzuma ryongeye ry'Igikoresho '%s' ryarangiye mu masegonda %0.2f."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site scan '%s'"
+msgstr "Isuzuma ry'Ahantu '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr "Isuzuma ry'Ahantu '%s' ryarangiye mu masegonda %0.2f."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Enable '%s'"
+msgstr "Fungura Igikoresho '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Disable '%s'"
+msgstr "Hagarika Igikoresho '%s'"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_macwatch.php
+#: mactrack_snmp.php mactrack_utilities.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
+#: setup.php
+msgid "N/A"
+msgstr "Ntibihari"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "Iminota %d"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Hours"
+msgstr "Amasaha %d"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Days"
+msgstr "Iminsi %d"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Weeks"
+msgstr "Ibyumweru %d"
+
+#: lib/mactrack_functions.php
+msgid "Not Recorded"
+msgstr "Ntibyanditswe"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
+msgstr "Imiterere: Birimo gukora, Ibikorwa: %d, Aho bigeze: %s, Igihe byamaze ubushize: %2.1f"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
+msgstr "Imiterere: Ntacyo bikora, Igihe byamaze ubushize: amasegonda %2.1f, Ibikorwa: ibikorwa %d, Ibikoresho: %d, Igihe gikurikira cyo gukora: %s"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
+msgid "Disabled"
+msgstr "Byahagaritswe"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Scanning Rate: Every %s"
+msgstr "Igipimo cy'Isuzuma: Buri %s"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "View Interfaces"
+msgstr "Reba imiyoboro"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "Not Detected"
+msgstr "Nticyabonetse"
+
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr "Ikibaho cy'ibikorwa"
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Sites"
+msgstr "Ahantu"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Devices"
+msgstr "Ibikoresho"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "Impuza"
+
+#: lib/mactrack_functions.php
+msgid "IP Ranges"
+msgstr "Intera za IP"
+
+#: lib/mactrack_functions.php setup.php
+msgid "IP Addresses"
+msgstr "Aderesi za IP"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "Aderesi za MAC"
+
+#: lib/mactrack_functions.php
+msgid "Dot1x"
+msgstr "Dot1x"
+
+#: lib/mactrack_functions.php mactrack_view_graphs.php
+msgid "Graphs"
+msgstr "Ibishushanyo"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Search"
+msgstr "Shakisha"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_devices.php mactrack_view_ips.php
+#: setup.php
+msgid "Default"
+msgstr "Mburabuzi"
+
+#: lib/mactrack_functions.php
+msgid "Show Device Details"
+msgstr "Erekana ibisobanuro birambuye by'Igikoresho"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Go"
+msgstr "Komeza"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Clear"
+msgstr "Siba"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Export"
+msgstr "Sohora"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+msgid "Site"
+msgstr "Ahantu"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_ips.php
+msgid "Any"
+msgstr "Icyo ari cyo cyose"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "SubType"
+msgstr "Ubwoko bwungirije"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgstr "Urifuza koko gusiba ibisubizo byose by'Icyambu kuri MAC kuri IP muri sisitemu?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
+msgstr "Urifuza koko gusiba ubu ibisubizo by'Icyambu kuri MAC kuri IP byarangiye?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
+msgstr "Urifuza koko gusiba burundu imikorere yo gusikana ya Mactrack ibitse mu bubiko bw'agateganyo?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Urifuza koko gusiba ibisubizo byose by'Icyambu cyahujwe na MAC na IP muri sisitemu?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Urifuza koko gusiba no kongera gukora ibisubizo byose by'Icyambu cyahujwe na MAC na IP muri sisitemu?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
+msgstr "Urifuza koko gukurura no kwinjiza ubu ububiko bw'amakuru ya IEEE Vendor MAC/OUI?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
+msgstr "Urifuza koko kongera kubaka urutonde rw'amatariki yo gusikana uhereye ku bisubizo bya Port kuri MAC kuri IP bibitse ubu?"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
+msgstr "Kubaka bundi bushya no gusesengura igice kirimo isuzuma rya port riheruka, ari cyo cyumweru cya none mu bice bya buri cyumweru. Imbonerahamwe itagabanyijwemo ibice itunganywa yose uko yakabaye. Isuzuma ryateganijwe rirasimbukwa igihe ibi birimo gukora. Komeza?"
+
+#: lib/mactrack_functions.php
+msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
+msgstr "Koresha iyi mirimo yo gusana hanze y'amasaha y'akazi. Kongera kubaka bikoporora amateka yuzuye y'imbonerahamwe z'icyambu (aderesi MAC), aderesi IP na 802.1x imwe nyuma y'indi kandi bishobora gufata amasaha. Igenzura ryateguwe rirasimbukwa, isanwa ry'ububiko bw'amakuru rirategereza, kandi gushakisha MAC, IP na 802.1x byerekana ubutumwa bw'isanwa kugeza birangiye. Sigaza umwanya uhagije kuri disiki ku buryo hajyamo kopi ya kabiri ya buri mbonerahamwe n'urutonde rw'ibiyirimo. Komeza?"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Scan Results"
+msgstr "Kuraho Ibisubizo Byose byo Gusikana"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Perform Database Maintenance"
+msgstr "Kora isana ry'ububiko bw'amakuru"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Refresh Scanning Functions"
+msgstr "Vugurura Imikorere yo Gusikana"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Aggregated Results"
+msgstr "Kuraho Ibisubizo Byose Byegeranyijwe"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Perform Aggregate Table Rebuild"
+msgstr "Kora ivugurura ry'imbonerahamwe ikomatanya"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild IEEE Vendor MAC/OUI Database"
+msgstr "Kubaka bundi bushya ububiko bw'amakuru bwa IEEE Vendor MAC/OUI"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Rebuild Scan Dates"
+msgstr "Kubaka bundi bushya amatariki y'isuzuma"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Optimize Port Table"
+msgstr "Tunganya imbonerahamwe y'ibyambu"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Configure Port and IP Address Partitioning"
+msgstr "Gena Igabanywa ry'Icyambu n'Aderesi ya IP"
+
+#: lib/mactrack_partition_rebuild.php
+msgid "The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
+msgstr "Imbonerahamwe z'umuyoboro, IP na 802.1x ziri kongera kugabanywamo ibice, cyangwa isanwa ntiryarangiye, bityo amateka yazo ntashobora guhindurwa ubu. Ongera ugerageze igihe cli/upgrade_partitioning.php irangije."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished."
+msgstr "MacTrack iri mu buryo bw'isanwa ku gushakisha aderesi ya IP, aderesi ya MAC na 802.1x mu gihe imbonerahamwe z'amateka yayo ziri kugabanywa bundi bushya. Ibisubizo ntibyuzuye kugeza igihe ugabanya birangiye."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
+msgstr "MacTrack iri mu buryo bw'isanwa ku gushakisha aderesi ya IP, aderesi ya MAC na 802.1x kuko kugabanya imbonerahamwe z'amateka yayo bitarangiye. Ibisubizo ntibyuzuye. Ongera ukoreshe cli/upgrade_partitioning.php kugira ngo ubikomeze."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "Maintenance Mode"
+msgstr "Uburyo bwo Kubungabunga"
+
+#: mactrack_actions.php
+#, php-format
+msgid "Mactrack Device: (%s) successfully updated"
+msgstr "Igikoresho cya Mactrack: (%s) cyavuguruwe neza"
+
+#: mactrack_actions.php
+msgid "Import into Mactrack Database"
+msgstr "Injiza mu Bubiko bw'Amakuru bwa Mactrack"
+
+#: mactrack_actions.php
+msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
+msgstr "Kanda 'Komeza' kugira ngo uzane Igikoresho gikurikira muri Mactrack? Nyamuneka garagaza amahitamo y'inyongera y'Igikoresho cya Mactrack nk'uko bigaragara hasi."
+
+#: mactrack_actions.php
+msgid "We will use these devices SNMP options for the Mactrack Device as well."
+msgstr "Tuzakoresha aya mahitamo ya SNMP y'ibi bikoresho no ku Gikoresho cya Mactrack."
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Router"
+msgstr "Ntibikurikizwa - Router"
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Switch/Hub"
+msgstr "Ntibikurikizwa - Switch/Hub"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Delete"
+msgstr "Siba"
+
+#: mactrack_device_types.php mactrack_snmp.php
+msgid "Duplicate"
+msgstr "Kora kopi"
+
+#: mactrack_device_types.php
+msgid "--dup--"
+msgstr "--dup--"
+
+#: mactrack_device_types.php
+msgid "You must select at least one device type."
+msgstr "Ugomba guhitamo nibura ubwoko bw'igikoresho bumwe."
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Continue"
+msgstr "Komeza"
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to delete the following Device Type(s)."
+msgstr "Kanda 'Komeza' kugira ngo usibe Ubwoko bw'Igikoresho/Ibikoresho bukurikira."
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
+msgstr "Kanda 'Komeza' kugira ngo ukore ikopi y'Ubwoko bw'Igikoresho/Ibikoresho bukurikira. Ushobora guhitamo guhindura ibisobanuro by'amoko mashya y'ibikoresho. Bitabaye ibyo, ntuhindure agaciro kari hasi maze izina ry'umwimerere rizakorwa hamwe n'inyongera nshya."
+
+#: mactrack_device_types.php
+msgid "Device Type Prefix:"
+msgstr "Imbanziriza y'Ubwoko bw'Igikoresho:"
+
+#: mactrack_device_types.php
+msgid "<description> (1)"
+msgstr "<description> (1)"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Cancel"
+msgstr "Hagarika"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Return"
+msgstr "Subira inyuma"
+
+#: mactrack_device_types.php
+msgid "New Type"
+msgstr "Ubwoko Bushya"
+
+#: mactrack_device_types.php
+msgid "Cisco"
+msgstr "Cisco"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "There were %d Device Types Added!"
+msgstr "Hongeweho ubwoko bw'Ibikoresho %d!"
+
+#: mactrack_device_types.php
+msgid "No New Device Types Found!"
+msgstr "Nta moko mashya y'ibikoresho yabonetse!"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import Results"
+msgstr "Ibisubizo byo kwinjiza"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Cacti has imported the following items:"
+msgstr "Cacti yatumije ibi bikurikira:"
+
+#: mactrack_device_types.php
+msgid "Import Mactrack Device Types"
+msgstr "Injiza Ubwoko bw'Ibikoresho bya Mactrack"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from Local File"
+msgstr "Injiza Ubwoko bw'Ibikoresho uvuye muri Dosiye yo kuri Mudasobwa"
+
+#: mactrack_device_types.php
+msgid "Please specify the location of the CSV file containing your device type information."
+msgstr "Nyamuneka garagaza aho dosiye ya CSV irimo amakuru y'ubwoko bw'ibikoresho byawe iherereye."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Overwrite Existing Data?"
+msgstr "Gusimbuza amakuru asanzwe?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
+msgstr "Ese igikorwa cyo kwinjiza amakuru kigomba kwemererwa gusimbuza amakuru asanzweho?  Menya ko ibi bitavuga gusiba umurongo wa kera, ahubwo ni ugusimbuza imirongo isubiwemo gusa."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Allow Existing Rows to be Updated?"
+msgstr "Kwemerera imirongo isanzwe kuvugururwa?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Required File Format Notes"
+msgstr "Amabwiriza y'imiterere ya dosiye isabwa"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The file must contain a header row with the following column headings."
+msgstr "Dosiye igomba kuba irimo umurongo w'umutwe ufite imitwe y'inkingi ikurikira."
+
+#: mactrack_device_types.php
+msgid " - A common name for the device.  For example Cisco 6509 Switch"
+msgstr " - Izina risanzwe ry'igikoresho. Urugero: Cisco 6509 Switch"
+
+#: mactrack_device_types.php
+msgid " - The vendor who produces this device"
+msgstr " - Uruganda rwakoreye iki gikoresho"
+
+#: mactrack_device_types.php
+msgid " - The type of device this is.  See the notes below for this integer value"
+msgstr " - Ubwoko bw'iki gikoresho. Reba ibisobanuro biri hasi ku bijyanye n'iyi mibare yuzuye"
+
+#: mactrack_device_types.php
+msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
+msgstr " - Urutonde rwihariye rw'inyuguti n'imibare ruvuye muri snmp sysDescr ruranga iki gikoresho ku buryo bwihariye"
+
+#: mactrack_device_types.php
+msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
+msgstr " - SNMP sysObjectID yihariye y'uwakoze igikoresho itandukanya iki gikoresho n'ikindi"
+
+#: mactrack_device_types.php
+msgid " - The scanning function that will be used to scan this device type"
+msgstr " - Umukoro wo gusuzuma uzakoreshwa mu gusuzuma ubu bwoko bw'igikoresho"
+
+#: mactrack_device_types.php
+msgid " - The IP scanning function that will be used to scan this device type"
+msgstr " - Umukoro wo gusuzuma IP uzakoreshwa mu gusuzuma ubu bwoko bw'igikoresho"
+
+#: mactrack_device_types.php
+msgid " - The 802.1x scanning function that will be used to scan this device type"
+msgstr " - Umukoro wo gusuzuma wa 802.1x uzakoreshwa mu gusuzuma ubu bwoko bw'igikoresho"
+
+#: mactrack_device_types.php
+msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
+msgstr " - Niba inomero iranga (Serial Number) y'ubu bwoko bw'igikoresho ishobora kuboneka hakoreshejwe ishakisha rya SNMP, ongeraho OID yayo hano"
+
+#: mactrack_device_types.php
+msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
+msgstr " - Niba umukoro wawe wo gusuzuma udashobora gutandukanya imyanya ya trunk cyangwa imyanya ihuza, iyi ni yo nomero itangirirwaho y'imyanya y'abakoresha"
+
+#: mactrack_device_types.php
+msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
+msgstr " - Kimwe na lowPort uretse ko iyi ari yo nomero yo hejuru y'umwanya w'ukoresha"
+
+#: mactrack_device_types.php
+msgid " - Disabled type is not used"
+msgstr " - Ubwoko bwahagaritswe ntibukoreshwa"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The primary key for this table is a combination of the following three fields:"
+msgstr "Urufunguzo rw'ibanze rw'iyi mbonerahamwe ni ihuriro ry'ibi bice bitatu bikurikira:"
+
+#: mactrack_device_types.php
+msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
+msgstr "Ku bw'ibyo, nugerageza kuzana ubwoko bw'ibikoresho busubiyemo, amakuru asanzweho azavugururwa hifashishijwe amakuru mashya."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid " is an integer field and must be one of the following:"
+msgstr " ni umwanya w'umubare wuzuye kandi ugomba kuba umwe muri ibi bikurikira:"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "1 - Switch/Hub"
+msgstr "1 - Switch/Hub"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "2 - Switch/Router"
+msgstr "2 - Switch/Router"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "3 - Router"
+msgstr "3 - Router"
+
+#: mactrack_device_types.php
+msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
+msgstr "Ubwoko bw'igikoresho bugenwa hagenzurwa SNMP agent yacyo hashakwa sysObjectID na sysDescription bikagereranywa n'agaciro kari mu bubiko bw'amakuru bw'ubwoko bw'ibikoresho. Guhuza kwa mbere kubonetse mu bubiko bw'amakuru ni ko gukoreshwa mu kumenya uko gisuzumwa. Kubera iyo mpamvu, ni ngombwa cyane ko uhitamo sysObjectID_match, sysDescr_match, n'umumaro wo gusuzuma byemewe ku bikoresho byawe."
+
+#: mactrack_device_types.php mactrack_devices.php setup.php
+msgid "Switch/Hub"
+msgstr "Switch/Hub"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Switch/Router"
+msgstr "Switch/Router"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Router"
+msgstr "Ruteri"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
+msgstr "UMURONGO W'UMUTWE WATUNGANYIJWE NEZA:  <br>Inkingi zabonetse ni: %s"
+
+#: mactrack_device_types.php mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
+msgstr "IKOSA MU GUTUNGANYA UMURONGO W'UMUTWE: Hari umwanya ukenewe ubura <br>Inkingi zabonetse ni: %s"
+
+#: mactrack_device_types.php
+msgid "Unknown Assume \"Switch/Hub\""
+msgstr "Bitazwi Fata nka \"Switch/Hub\""
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "KWINJIZA BYAKUNZE: Uwakoze igikoresho: %s, Ibisobanuro: %s, Ubwoko: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "KWINJIZA BYANZE: Uwakoze igikoresho: %s, Ibisobanuro: %s, Ubwoko: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "KWINJIZA BYARASIMBUTSWE, BISANZWEHO: Uwakoze igikoresho: %s, Ibisobanuro: %s, Ubwoko: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "Mactrack Device Types [edit: %s]"
+msgstr "Ubwoko bw'Ibikoresho bya Mactrack [hindura: %s]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Types [new]"
+msgstr "Ubwoko bw'Ibikoresho bya Mactrack [bushya]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Type Filters"
+msgstr "Utuyunguruzo tw'Ubwoko bw'Ibikoresho twa Mactrack"
+
+#: mactrack_device_types.php
+msgid "Device Type Description"
+msgstr "Ibisobanuro by'Ubwoko bw'Igikoresho"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Device Type"
+msgstr "Ubwoko bw'Igikoresho"
+
+#: mactrack_device_types.php
+msgid "Port Scanner"
+msgstr "Igisaka Poruti"
+
+#: mactrack_device_types.php
+msgid "IP Scanner"
+msgstr "Igisikana IP"
+
+#: mactrack_device_types.php
+msgid "Dot1x Scanner"
+msgstr "Igikoresho kigenzura Dot1x"
+
+#: mactrack_device_types.php
+msgid "sysDescription Match"
+msgstr "Guhuza na sysDescription"
+
+#: mactrack_device_types.php
+msgid "Vendor OID Match"
+msgstr "Ihura rya OID y'umucuruzi"
+
+#: mactrack_device_types.php setup.php
+msgid "Device Types"
+msgstr "Amoko y'Ibikoresho"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "No"
+msgstr "Oya"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "Yes"
+msgstr "Yego"
+
+#: mactrack_device_types.php
+msgid "No Mactrack Device Types Found"
+msgstr "Nta moko y'ibikoresho bya Mactrack yabonetse"
+
+#: mactrack_device_types.php
+msgid "Submit Query"
+msgstr "Ohereza ikibazo"
+
+#: mactrack_device_types.php
+msgid "Clear Filtered Results"
+msgstr "Hanagura Ibisubizo Byayunguruwe"
+
+#: mactrack_device_types.php
+msgid "Rescan"
+msgstr "Ongera usuzume"
+
+#: mactrack_device_types.php
+msgid "Scan Active Devices for Unknown Device Types"
+msgstr "Suzuma Ibikoresho Bikora kugira ngo umenye Ubwoko bw'Ibikoresho Butazwi"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import"
+msgstr "Injiza"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from a CSV File"
+msgstr "Injiza Ubwoko bw'Ibikoresho uvuye muri Dosiye ya CSV"
+
+#: mactrack_device_types.php
+msgid "Export Device Types to Share with Others"
+msgstr "Kohereza hanze ubwoko bw'Igikoresho kugira ngo ubusangize abandi"
+
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Vendor"
+msgstr "Umucuruzi"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php setup.php
+msgid "All"
+msgstr "Byose"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
+msgid "Type"
+msgstr "Ubwoko"
+
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Enabled"
+msgstr "Byafunguwe"
+
+#: mactrack_devices.php
+msgid "Enable"
+msgstr "Koresha"
+
+#: mactrack_devices.php mactrack_macwatch.php
+msgid "Disable"
+msgstr "Hagarika"
+
+#: mactrack_devices.php
+msgid "Change SNMP Options"
+msgstr "Hindura amahitamo ya SNMP"
+
+#: mactrack_devices.php
+msgid "Change Device Port Values"
+msgstr "Hindura agaciro k'ibyambu by'igikoresho"
+
+#: mactrack_devices.php
+msgid "Connect to Cacti Host via Hostname"
+msgstr "Huza na Mwakirizi wa Cacti ukoresheje Izina rya Mwakirizi"
+
+#: mactrack_devices.php
+msgid "Copy SNMP Settings from Cacti Host"
+msgstr "Koporora Amagenamiterere ya SNMP kuva kuri Mwakirizi wa Cacti"
+
+#: mactrack_devices.php
+msgid "You must select at least one device."
+msgstr "Ugomba guhitamo nibura igikoresho kimwe."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to enable the following devices."
+msgstr "Kanda 'Komeza' kugira ngo ufungure ibikoresho bikurikira."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to disable the following devices."
+msgstr "Kanda 'Komeza' kugira ngo uhagarike ibikoresho bikurikira."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Kanda 'Komeza' kugira ngo uhindure ibipimo bya SNMP ku bikoresho bikurikira, hitamo agasanduku kari iruhande rw'ibice ushaka kuvugurura, maze wuzuze agaciro gashya."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Kanda 'Komeza' kugira ngo uhindure ibipimo by'icyambu cyo hejuru cyangwa cyo hasi ku bikoresho bikurikira, hitamo agasanduku kari iruhande rw'ibice ushaka kuvugurura, maze wuzuze agaciro gashya."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
+msgstr "Kanda 'Komeza' kugira ngo uhuze ibikoresho bikurikira n'Igikoresho cyabyo cya Cacti. Isano izashingirwa ku mazina ya mwakirizi angana. Ibisobanuro nabyo bizavugururwa."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
+msgstr "Kanda 'Komeza' kugira ngo ukoporore Amagenamiterere ya SNMP kuva ku Gikoresho cya Cacti gihujwe uyashyire ku Gikoresho cya Mactrack. Ibikoresho byose bidahujwe bizasimbukwa mu ibanga. Inshuro zo kugerageza SNMP zizakurwa mu nshuro zo kugerageza Ping."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to delete the following Devices"
+msgstr "Kanda 'Komeza' kugira ngo usibe Ibikoresho bikurikira"
+
+#: mactrack_devices.php
+msgid "Import Mactrack Devices"
+msgstr "Injiza Ibikoresho bya Mactrack"
+
+#: mactrack_devices.php
+msgid "Import Devices from Local File"
+msgstr "Injiza Ibikoresho uvuye muri Dosiye yo kuri Mudasobwa"
+
+#: mactrack_devices.php
+msgid "Please specify the location of the CSV file containing your device information."
+msgstr "Nyamuneka garagaza aho dosiye ya CSV irimo amakuru y'ibikoresho byawe iherereye."
+
+#: mactrack_devices.php
+msgid " - The SiteID known to Mactrack for this device"
+msgstr " - Indangahantu (SiteID) izwi na Mactrack kuri iki gikoresho"
+
+#: mactrack_devices.php
+msgid " - A simple name for the device.  For example Cisco 6509 Switch"
+msgstr " - Izina ryoroshye ry'igikoresho. Urugero: Cisco 6509 Switch"
+
+#: mactrack_devices.php
+msgid " - The IP Address or DNS Name for the device"
+msgstr " - Aderesi ya IP cyangwa izina rya DNS ry'igikoresho"
+
+#: mactrack_devices.php
+msgid " - More detailed information about the device, including location, environmental conditions, etc."
+msgstr " - Amakuru arambuye ku gikoresho, harimo aho giherereye, imiterere y'ibidukikije, n'ibindi."
+
+#: mactrack_devices.php
+msgid " - A list of ports that should not be scanned for user devices"
+msgstr " - Urutonde rw'imyanya itagomba gusuzumwa hashakishwa ibikoresho by'abakoresha"
+
+#: mactrack_devices.php
+msgid " - Redundant information indicating the intended device type.  See below for valid values."
+msgstr " - Amakuru y'inyongera yerekana ubwoko bw'igikoresho bwifuzwa. Reba hasi uduciro twemewe."
+
+#: mactrack_devices.php
+msgid " - Id of a set of SNMP options"
+msgstr " - Indangamubare (ID) y'itsinda ry'amahitamo ya SNMP"
+
+#: mactrack_devices.php
+msgid " - The current snmp read string for the device"
+msgstr " - Ijambo ryo gusoma rya SNMP ririho ubu ku gikoresho"
+
+#: mactrack_devices.php
+msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
+msgstr " - Verisiyo ya SNMP wifuza gukoresha usuzuma iki gikoresho. Uduciro twemewe ni 1, 2 na 3"
+
+#: mactrack_devices.php
+msgid " - The UDP port that the snmp agent is running on"
+msgstr " - Umwanya wa UDP aho umukozi wa SNMP akorera"
+
+#: mactrack_devices.php
+msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
+msgstr " - Igihe ntarengwa mu milisegonda cyo gutegereza igisubizo cya SNMP mbere yo kongera kugerageza"
+
+#: mactrack_devices.php
+msgid " - The number of times to retry a snmp request before giving up"
+msgstr " - Umubare w'inshuro zo kongera kugerageza ubusabe bwa SNMP mbere yo kurekera aho"
+
+#: mactrack_devices.php
+msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
+msgstr " - Yagennye umubare wa za OID zishobora kuboneka mu busabe bumwe bwa SNMP Get"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP username"
+msgstr " - SNMP V3: Izina ry'ukoresha rya SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP password"
+msgstr " - SNMP V3: Ijambobanga rya SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP authentication protocol"
+msgstr " - SNMP V3: Porotokole yo kwemeza umwirondoro ya SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy passphrase"
+msgstr " - SNMP V3: Interuro y'ibanga y'ubwirinzi ya SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy protocol"
+msgstr " - SNMP V3: Porotokole y'ubwirinzi ya SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP context"
+msgstr " - SNMP V3: Imiterere y'isano (context) ya SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP engine id"
+msgstr " - SNMP V3: Indangamubare ya moteri ya SNMP"
+
+#: mactrack_devices.php
+msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
+msgstr "Ku bw'ibyo, nugerageza kuzana ibikoresho bisubiyemo, amakuru wagaragaje gusa ni yo azavugururwa."
+
+#: mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
+msgstr "UMURONGO W'UMUTWE WATUNGANYIJWE NEZA: <br>Inkingi zabonetse ni: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "KWINJIZA BYAKUNZE: Izina rya Mwakirizi: ID y'Ahantu: %s, Izina ry'Igikoresho: %s, Izina rya Mwakirizi %s, Poruti ya SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "KWINJIZA BYANZE: ID y'Ahantu: %s, Izina ry'Igikoresho: %s, Izina rya Mwakirizi %s, Poruti ya SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "KWINJIZA BYARASIMBUTSWE, BISANZWEHO: ID y'Ahantu: %s, Izina ry'Igikoresho: %s, Izina rya Mwakirizi %s, Poruti ya SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "Mactrack Devices [edit: %s]"
+msgstr "Ibikoresho bya Mactrack [hindura: %s]"
+
+#: mactrack_devices.php
+msgid "Mactrack Devices [new]"
+msgstr "Ibikoresho bya Mactrack [bishya]"
+
+#: mactrack_devices.php
+msgid "SNMP Information"
+msgstr "Amakuru ya SNMP"
+
+#: mactrack_devices.php
+msgid "System:"
+msgstr "Sisitemu:"
+
+#: mactrack_devices.php
+msgid "Uptime:"
+msgstr "Igihe imaze ikora:"
+
+#: mactrack_devices.php
+msgid "Hostname:"
+msgstr "Izina rya mwakirizi:"
+
+#: mactrack_devices.php
+msgid "ObjectID:"
+msgstr "ID y'ikintu:"
+
+#: mactrack_devices.php
+msgid "Mactrack Device Filters"
+msgstr "Utuyunguruzo tw'Ibikoresho twa Mactrack"
+
+#: mactrack_devices.php mactrack_view_devices.php setup.php
+msgid "Device Name"
+msgstr "Izina ry'igikoresho"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Site Name"
+msgstr "Izina ry'ahantu"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Status"
+msgstr "Imiterere"
+
+#: mactrack_devices.php mactrack_view_devices.php mactrack_view_interfaces.php
+#: setup.php
+msgid "Hostname"
+msgstr "Izina ku muyoboro"
+
+#: mactrack_devices.php
+msgid "Total IPs"
+msgstr "IP zose hamwe"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports"
+msgstr "Imiyoboro y'abakoresha"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports Up"
+msgstr "Imiyoboro y'abakoresha ikora"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Trunk Ports"
+msgstr "Poruti za Trunk"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Active Macs"
+msgstr "Aderesi MAC zikora"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Last Duration"
+msgstr "Igihe cya nyuma byamaze"
+
+#: mactrack_devices.php
+msgid "No Mactrack Devices"
+msgstr "Nta bikoresho bya Mactrack"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: setup.php
+msgid "None"
+msgstr "Nta na kimwe"
+
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
+msgid "Error"
+msgstr "Ikosa"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "No Cacti Link"
+msgstr "Nta Huza rya Cacti"
+
+#: mactrack_macauth.php
+msgid "You must select at least one Authorized Mac to delete."
+msgstr "Ugomba guhitamo nibura aderesi ya MAC Yemewe imwe yo gusiba."
+
+#: mactrack_macauth.php
+msgid "Click 'Continue' to delete the following Authorized Mac's?"
+msgstr "Kanda 'Komeza' kugira ngo usibe MAC zemewe zikurikira?"
+
+#: mactrack_macauth.php
+#, php-format
+msgid "Mactrack MacAuth [edit: %s]"
+msgstr "Mactrack MacAuth [hindura: %s]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth [new]"
+msgstr "Mactrack MacAuth [gishya]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth Filters"
+msgstr "Utuyunguruzo twa MacAuth twa Mactrack"
+
+#: mactrack_macauth.php mactrack_macwatch.php
+msgid "Mac Address"
+msgstr "Aderesi ya MAC"
+
+#: mactrack_macauth.php setup.php
+msgid "Reason"
+msgstr "Impamvu"
+
+#: mactrack_macauth.php
+msgid "Added/Modified"
+msgstr "Byongeweho/Byahinduwe"
+
+#: mactrack_macauth.php
+msgid "By"
+msgstr "Na"
+
+#: mactrack_macauth.php
+msgid "Authorized Mac Addresses"
+msgstr "Aderesi za MAC zahawe uburenganzira"
+
+#: mactrack_macauth.php
+msgid "No Authorized Mac Addresses Found"
+msgstr "Nta Aderesi za MAC Zemewe Zabonetse"
+
+#: mactrack_macauth.php mactrack_vendormacs.php mactrack_view_macs.php
+msgid "MAC's"
+msgstr "Aderesi za MAC"
+
+#: mactrack_macwatch.php
+msgid "Click 'Continue' to delete the following watched Mac's?"
+msgstr "Kanda 'Komeza' kugira ngo usibe MAC zikurikiranwa zikurikira?"
+
+#: mactrack_macwatch.php
+#, php-format
+msgid "Mactrack MacWatch [edit: %s]"
+msgstr "Mactrack MacWatch [hindura: %s]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch [new]"
+msgstr "Mactrack MacWatch [gishya]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch Filters"
+msgstr "Utuyunguruzo twa MacWatch twa Mactrack"
+
+#: mactrack_macwatch.php
+msgid "Watch Name"
+msgstr "Izina ry'igikurikiranwa"
+
+#: mactrack_macwatch.php setup.php
+msgid "Ticket Number"
+msgstr "Nimero ya Tike"
+
+#: mactrack_macwatch.php
+msgid "First Seen"
+msgstr "Byagaragaye bwa mbere"
+
+#: mactrack_macwatch.php
+msgid "Last Seen"
+msgstr "Igihe cya nyuma byagaragaye"
+
+#: mactrack_macwatch.php
+msgid "Watches"
+msgstr "Ibikurikiranwa"
+
+#: mactrack_macwatch.php
+msgid "No Mactrack Watched Macs Found"
+msgstr "Nta MAC zikurikiranwa za Mactrack zabonetse"
+
+#: mactrack_sites.php
+msgid "Click 'Continue' to delete the following Site(s)?"
+msgstr "Kanda 'Komeza' kugira ngo usibe Ahantu hakurikira?"
+
+#: mactrack_sites.php
+msgid "You must select at least one site."
+msgstr "Ugomba guhitamo nibura ahantu hamwe."
+
+#: mactrack_sites.php
+#, php-format
+msgid "Mactrack Site [edit: %s]"
+msgstr "Ahantu ha Mactrack [hindura: %s]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site [new]"
+msgstr "Ahantu ha Mactrack [hashya]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site Filters"
+msgstr "Utuyunguruzo tw'Ahantu twa Mactrack"
+
+#: mactrack_sites.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "Total IP's"
+msgstr "Aderesi IP zose"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "MACS Found"
+msgstr "MAC zabonetse"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Device Errors"
+msgstr "Amakosa y'Ibikoresho"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "No Mactrack Sites Found"
+msgstr "Nta hantu ha Mactrack habonetse"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Devices"
+msgstr "Ibikoresho byose"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total User Ports"
+msgstr "Poruti z'abakoresha zose"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Oper Ports"
+msgstr "Poruti zikora zose"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Trunks"
+msgstr "Trunk zose"
+
+#: mactrack_snmp.php
+msgid "You must select at least one SNMP Option."
+msgstr "Ugomba guhitamo nibura Ihitamo rya SNMP rimwe."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to delete the following SNMP Option(s)."
+msgstr "Kanda 'Komeza' kugira ngo usibe ihitamo/amahitamo ya SNMP akurikira."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
+msgstr "Kanda 'Komeza' kugira ngo ukore ikopi y'Ihitamo/Amahitamo ya SNMP akurikira. Ushobora guhitamo guhindura imiterere y'umutwe ku Mahitamo mashya ya SNMP."
+
+#: mactrack_snmp.php
+msgid "Name Format:"
+msgstr "Imiterere y'izina:"
+
+#: mactrack_snmp.php
+msgid "<name> (1)"
+msgstr "<name> (1)"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Options [edit %s]"
+msgstr "Amahitamo ya SNMP [hindura %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Options [new]"
+msgstr "Amahitamo ya SNMP [mashya]"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Option Set [edit: %s]"
+msgstr "Itsinda ry'amahitamo ya SNMP [hindura: %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Option Set [new]"
+msgstr "Itsinda ry'amahitamo ya SNMP [rishya]"
+
+#: mactrack_snmp.php setup.php
+msgid "Mactrack SNMP Options"
+msgstr "Amahitamo ya SNMP ya Mactrack"
+
+#: mactrack_snmp.php
+msgid "Item"
+msgstr "Ikintu"
+
+#: mactrack_snmp.php setup.php
+msgid "Version"
+msgstr "Verisiyo"
+
+#: mactrack_snmp.php setup.php
+msgid "Community"
+msgstr "Umuryango"
+
+#: mactrack_snmp.php setup.php
+msgid "Port"
+msgstr "Irembo"
+
+#: mactrack_snmp.php setup.php
+msgid "Timeout"
+msgstr "Igihe ntarengwa"
+
+#: mactrack_snmp.php setup.php
+msgid "Retries"
+msgstr "Inshuro zo kongera kugerageza"
+
+#: mactrack_snmp.php
+msgid "Max OIDs"
+msgstr "OID ntarengwa"
+
+#: mactrack_snmp.php mactrack_view_dot1x.php
+msgid "Username"
+msgstr "Izina ry'ukoresha"
+
+#: mactrack_snmp.php
+msgid "Auth Proto"
+msgstr "Porotokole y'iyemeza"
+
+#: mactrack_snmp.php
+msgid "Priv Proto"
+msgstr "Porotokole y'ibanga"
+
+#: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Actions"
+msgstr "Ibikorwa"
+
+#: mactrack_snmp.php
+msgid "No SNMP Items Found"
+msgstr "Nta bice bya SNMP byabonetse"
+
+#: mactrack_snmp.php
+msgid "Title of SNMP Option Set"
+msgstr "Umutwe w'Itsinda ry'Amahitamo ya SNMP"
+
+#: mactrack_snmp.php
+msgid "SNMP Settings"
+msgstr "Amagenamiterere ya SNMP"
+
+#: mactrack_snmp.php
+msgid "No SNMP Option Sets Found"
+msgstr "Nta matsinda y'amahitamo ya SNMP yabonetse"
+
+#: mactrack_snmp.php
+msgid "Options"
+msgstr "Amahitamo"
+
+#: mactrack_utilities.php
+msgid "Mactrack Database Results"
+msgstr "Ibisubizo by'Ububikoshingiro bwa Mactrack"
+
+#: mactrack_utilities.php
+msgid "Mactrack Process Status"
+msgstr "Imiterere y'Igikorwa cya Mactrack"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Refresh"
+msgstr "Vugurura"
+
+#: mactrack_utilities.php
+msgid "Current Process Status"
+msgstr "Imiterere y'igikorwa kiriho ubu"
+
+#: mactrack_utilities.php
+msgid "The Mactrack Poller is:"
+msgstr "Ikusanyamakuru rya Mactrack ni:"
+
+#: mactrack_utilities.php
+msgid "Running Processes:"
+msgstr "Ibikorwa biri gukora:"
+
+#: mactrack_utilities.php
+msgid "Last Time Poller Started:"
+msgstr "Igihe cya nyuma Ikusanyamakuru ryatangiriye:"
+
+#: mactrack_utilities.php
+msgid "Poller Frequency:"
+msgstr "Inshuro z'Ikusanyamakuru:"
+
+#: mactrack_utilities.php
+msgid "Approx. Next Runtime:"
+msgstr "Igihe gikurikira cyo gukora kigereranywa:"
+
+#: mactrack_utilities.php
+msgid "Database Maintenance Information"
+msgstr "Amakuru yo kubungabunga ububiko bw'amakuru"
+
+#: mactrack_utilities.php
+msgid "Last DB Maintenance Time:"
+msgstr "Igihe cya nyuma cyo gusana DB:"
+
+#: mactrack_utilities.php
+msgid "Next DB Maintenance Time:"
+msgstr "Igihe Gikurikira cyo Kubungabunga DB:"
+
+#: mactrack_utilities.php
+msgid "Run Time Details"
+msgstr "Ibisobanuro by'igihe cyo gukora"
+
+#: mactrack_utilities.php
+msgid "Last Poller Runtime:"
+msgstr "Igihe cy'imikorere y'Ikusanyamakuru rya nyuma:"
+
+#: mactrack_utilities.php
+msgid "Last Poller Maintenance Runtime:"
+msgstr "Igihe cy'imikorere y'isana ry'Ikusanyamakuru rya nyuma:"
+
+#: mactrack_utilities.php
+msgid "Maximum Concurrent Processes:"
+msgstr "Ibikorwa bikorera rimwe ntarengwa:"
+
+#: mactrack_utilities.php
+msgid "processes"
+msgstr "imikorere"
+
+#: mactrack_utilities.php
+msgid "Maximum Per Device Scan Time:"
+msgstr "Igihe ntarengwa cyo gusuzuma kuri buri Gikoresho:"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "minutes"
+msgstr "iminota"
+
+#: mactrack_utilities.php
+msgid "DNS Configuration Information"
+msgstr "Amakuru y'igenamiterere rya DNS"
+
+#: mactrack_utilities.php
+msgid "Reverse DNS Resolution is"
+msgstr "Isobanura rya DNS ihinduye ni"
+
+#: mactrack_utilities.php
+msgid "Primary DNS Server:"
+msgstr "Seriveri ya DNS y'ibanze:"
+
+#: mactrack_utilities.php
+msgid "Secondary DNS Server:"
+msgstr "Seriveri ya DNS ya Kabiri:"
+
+#: mactrack_utilities.php
+msgid "DNS Resolution Timeout:"
+msgstr "Igihe ntarengwa cyo gusobanura DNS:"
+
+#: mactrack_utilities.php
+msgid "milliseconds"
+msgstr "milisegonda"
+
+#: mactrack_utilities.php
+msgid "Running Process Summary"
+msgstr "Incamake y'ibikorwa biri gukora"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Not Running"
+msgstr "Igikoresho gisobanura DNS ntigikora"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Running"
+msgstr "Igikoresho gisobanura DNS kirakora"
+
+#: mactrack_utilities.php
+msgid "Date Started"
+msgstr "Itariki yatangiriyeho"
+
+#: mactrack_utilities.php
+msgid "Completed"
+msgstr "Byarangiye"
+
+#: mactrack_utilities.php
+msgid "Waiting"
+msgstr "Bitegereje"
+
+#: mactrack_utilities.php
+msgid "Other"
+msgstr "Ibindi"
+
+#: mactrack_utilities.php
+msgid "Current Activity"
+msgstr "Igikorwa kiriho ubu"
+
+#: mactrack_utilities.php
+msgid "State:"
+msgstr "Imimerere:"
+
+#: mactrack_utilities.php
+msgid "Since:"
+msgstr "Kuva:"
+
+#: mactrack_utilities.php
+msgid "Detail:"
+msgstr "Ibisobanuro birambuye:"
+
+#: mactrack_utilities.php
+msgid "Last Skipped Poller Run:"
+msgstr "Ikusanyamakuru rya nyuma ryasimbwe:"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance Steps"
+msgstr "Intambwe za nyuma z'isana"
+
+#: mactrack_utilities.php
+msgid "Seconds"
+msgstr "Amasegonda"
+
+#: mactrack_utilities.php
+msgid "Step"
+msgstr "Intambwe"
+
+#: mactrack_utilities.php
+msgid "Table Sizes"
+msgstr "Ingano z'imbonerahamwe"
+
+#: mactrack_utilities.php
+msgid "Free"
+msgstr "Bidakoreshwa"
+
+#: mactrack_utilities.php
+msgid "Index"
+msgstr "Indanganturo"
+
+#: mactrack_utilities.php
+msgid "Rows (estimate)"
+msgstr "Imirongo (ikigereranyo)"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Imbonerahamwe"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database runs on another host"
+msgstr "Bitazwi: ububiko bw'amakuru bukorera ku wundi mwakirizi"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database data directory cannot be found from this host"
+msgstr "Bitazwi: ububiko bw'amadosiye y'ububiko bw'amakuru ntibuboneka kuri uyu mwakirizi"
+
+#: mactrack_utilities.php
+msgid "Database Disk Free:"
+msgstr "Umwanya usigaye kuri disiki y'ububiko bw'amakuru:"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the database: %s"
+msgstr "Umubare ukurikira w'amakuru yanditswe wakuwe mu bubiko bw'amakuru: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s"
+msgstr "Umubare ukurikira w'amakuru yanditswe wakuwe mu mbonerahamwe yegeranyijwe: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
+msgstr "Umubare ukurikira w'amakuru yanditswe wakuwe mu mbonerahamwe yegeranyijwe: %s. Kandi amakuru yanditswe %s azongerwamo."
+
+#: mactrack_utilities.php
+msgid "Mactrack Scan Date Rebuild Results"
+msgstr "Ibisubizo byo Kongera Kubaka Itariki y'Isuzuma rya Mactrack"
+
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr "Kuvugurura itariki y'isuzuma byanze. Reba mu nyandiko y'ibikorwa ya Cacti maze wongere ugerageze."
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Scan dates rebuilt: %d"
+msgstr "Amatariki y'isuzuma yavuguruwe: %d"
+
+#: mactrack_utilities.php
+msgid "A scan or a port table conversion is running. Try again when it has finished."
+msgstr "Isesengura cyangwa ihindurwa ry'imbonerahamwe ya port riri gukorwa. Ongera ugerageze nirirangira."
+
+#: mactrack_utilities.php setup.php
+msgid "One per Scan"
+msgstr "Imwe kuri buri genzura"
+
+#: mactrack_utilities.php setup.php
+msgid "Hourly"
+msgstr "Buri saha"
+
+#: mactrack_utilities.php setup.php
+msgid "Daily"
+msgstr "Buri munsi"
+
+#: mactrack_utilities.php setup.php
+msgid "Weekly"
+msgstr "Buri cyumweru"
+
+#: mactrack_utilities.php
+msgid "Not partitioned"
+msgstr "Ntibyagabanyijwemo ibice"
+
+#: mactrack_utilities.php
+msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
+msgstr "Ibice bya buri munsi byavuye muri verisiyo ya mbere ya MacTrack. Guhindura birakenewe."
+
+#: mactrack_utilities.php
+msgid "Partitioned by scan date"
+msgstr "Byagabanyijwe mu bice hakurikijwe itariki y'igenzura"
+
+#: mactrack_utilities.php
+msgid "Unrecognized partitions. MacTrack makes no partition changes."
+msgstr "Ibyiciro by'ububiko bitamenyekanye. MacTrack nta mpinduka ikora ku byiciro by'ububiko."
+
+#: mactrack_utilities.php
+msgid "Port Table Partitions"
+msgstr "Ibice by'Imbonerahamwe ya Poruti"
+
+#: mactrack_utilities.php
+msgid "Layout"
+msgstr "Imigaragarire"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%d of at most %d"
+msgstr "%d muri bitarenga %d"
+
+#: mactrack_utilities.php
+msgid "Partitions"
+msgstr "Ibice"
+
+#: mactrack_utilities.php
+msgid "Oldest Partition"
+msgstr "Igice gishaje kurusha ibindi"
+
+#: mactrack_utilities.php
+msgid "Newest Partition"
+msgstr "Igice Gishya Cyane"
+
+#: mactrack_utilities.php
+msgid "Partitions Cover Scans Before"
+msgstr "Ibice Bireba Igenzura Rya Mbere ya"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s, coarser than the setting because %d partitions would exceed the limit"
+msgstr "%s, binini kurusha igenamiterere kuko ibice %d byarenga umubare ntarengwa"
+
+#: mactrack_utilities.php setup.php
+msgid "Port and IP Address Partition Size"
+msgstr "Ingano y'Igice cya Poruti na Aderesi ya IP"
+
+#: mactrack_utilities.php
+msgid "Pending Exchange"
+msgstr "Ihererekanya ritegereje"
+
+#: mactrack_utilities.php
+msgid "Load Path"
+msgstr "Inzira yo gupakira"
+
+#: mactrack_utilities.php
+msgid "PHP batches"
+msgstr "Ibyiciro bya PHP"
+
+#: mactrack_utilities.php
+msgid "Last Scan Note"
+msgstr "Icyitonderwa cy'igenzura rya nyuma"
+
+#: mactrack_utilities.php
+msgid "Rebuild"
+msgstr "Kubaka bundi bushya"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Running since %s"
+msgstr "Bikora kuva %s"
+
+#: mactrack_utilities.php
+msgid "Last Rebuild"
+msgstr "Iyubaka bundi bushya rya nyuma"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d rows into %d partitions"
+msgstr "%s: imirongo %d mu bice %d"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: failed. %s"
+msgstr "%s: byanze. %s"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance"
+msgstr "Isana rya nyuma"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d partitions dropped, %d created"
+msgstr "%s: ibice %d byasibwe, %d byahanzwe"
+
+#: mactrack_utilities.php
+msgid "IP Table Layout"
+msgstr "Imigaragarire y'Imbonerahamwe ya IP"
+
+#: mactrack_utilities.php
+msgid "IP Table Partitions"
+msgstr "Ibice by'Imbonerahamwe ya IP"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Layout"
+msgstr "Imiterere y'imbonerahamwe ya 802.1x"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Partitions"
+msgstr "Ibice by'imbonerahamwe ya 802.1x"
+
+#: mactrack_utilities.php
+msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
+msgstr "Hitamo igabanya rya buri munsi, rya buri cyumweru cyangwa ryahagaritswe mbere yo gutangira kongera kubaka."
+
+#: mactrack_utilities.php
+msgid "A rebuild is already running. The partition status page shows when it has finished."
+msgstr "Kuwubaka bundi bushya bisanzwe biri gukorwa. Urupapuro rw'imiterere y'igice rugaragaza igihe birangiriye."
+
+#: mactrack_utilities.php
+msgid "The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running."
+msgstr "Isanwa ryasabwe mu buryo bw'inyuma. Reba Imiterere y'Igabanyabice kugira ngo ubone ibyavuyemo; bizanga gutangira niba hari isesengura cyangwa irindi sanwa riri gukora."
+
+#: mactrack_utilities.php
+msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
+msgstr "Imikorere y'isuzuma rya Mactrack yasibwe burundu. Izongera kuremwa umaze guhindura igikoresho cyangwa ubwoko bw'igikoresho."
+
+#: mactrack_utilities.php
+msgid "Cacti Mactrack System Utilities"
+msgstr "Ibikoresho bya Sisitemu ya Cacti Mactrack"
+
+#: mactrack_utilities.php
+msgid "Process Status Information"
+msgstr "Amakuru y'imiterere y'igikorwa"
+
+#: mactrack_utilities.php setup.php
+msgid "View Mactrack Process Status"
+msgstr "Reba imiterere y'igikorwa cya Mactrack"
+
+#: mactrack_utilities.php
+msgid "This option will let you show and set process information associated with the Mactrack polling process."
+msgstr "Iri hitamo rizatuma werekana kandi ugena amakuru y'igikorwa kijyanye n'igikorwa cy'ikusanyamakuru cya Mactrack."
+
+#: mactrack_utilities.php
+msgid "Database Administration"
+msgstr "Imicungire y'ububiko bw'amakuru"
+
+#: mactrack_utilities.php
+msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
+msgstr "Isiba amahuza ya Port kuri MAC no kuri IP yarangije igihe mu bubiko bw'amakuru. Inyandiko zarangije igihe gusa, ukurikije ibyo washyizeho, ni zo zikurwaho."
+
+#: mactrack_utilities.php
+msgid "Refresh IEEE Vendor MAC/OUI Database"
+msgstr "Vugurura Ububikoshingiro bwa MAC/OUI bw'Abatanga bwa IEEE"
+
+#: mactrack_utilities.php
+msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
+msgstr "Iki gikorwa kizakurura kandi gishyireho ububiko bw'amakuru bwa OIU bugezweho buvuye ku Rubuga rwa IEEE. Buri karita ya Network Interface Card (NIC) igira Aderesi ya MAC. Aderesi ya MAC ishobora gucibwamo ibice bibiri. Igice cya mbere cy'Aderesi ya MAC kiba kirimo MAC y'Uwayikoze. MAC y'Uwayikoze igaragaza uwakoze icyo gice. Ibi bizagufasha mu kugenzura ako kanya ibikoresho bitazwi ku muyoboro wawe."
+
+#: mactrack_utilities.php
+msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
+msgstr "Isiba imikorere ya kera kandi ishobora kuba itagikora y'isuzuma rya Mactrack mu rutonde rumanuka ubona iyo uhindura ubwoko bw'Igikoresho."
+
+#: mactrack_utilities.php
+msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
+msgstr "Isiba amahuza <strong>YOSE</strong> ya Port kuri MAC no kuri IP mu bubiko bw'amakuru, aderesi za IP zose, ibyiciro bya IP, na VLANS. Iki gikoresho ni cyiza iyo ushaka gutangira bundi bushya. <strong>AKAGA: Amakuru yose yabanje arasibwa.</strong>"
+
+#: mactrack_utilities.php
+msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
+msgstr "Yubaka bundi bushya urutonde rw'amatariki y'isuzuma ivuye mu bisubizo byabitswe bya Port kuri MAC kuri IP, isoma buri gice rimwe. Isuzuma n'isana bituma urutonde ruhuza n'igihe, bityo ibi bikenerwa gusa nyuma y'uko ibisubizo byavanyweho hanze y'isana, urugero nko gusiba ibikoresho."
+
+#: mactrack_utilities.php
+msgid "View Partition Status"
+msgstr "Reba imiterere y'ibice by'ububiko"
+
+#: mactrack_utilities.php
+msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
+msgstr "Byerekana uko ibisubizo bya Port kuri MAC kuri IP bigabanyijwe mu bice, ingano y'igice ikoreshwa n'impamvu yayo, ndetse n'icyo isuzumwa n'isanwa rya nyuma ry'ububiko bw'amakuru ryakoze."
+
+#: mactrack_utilities.php
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
+msgstr "Yubaka bundi bushya kandi igasesengura gusa igice kirimo isuzuma rya port riheruka kugira ngo igarure umwanya wasibwe; mu bice bya buri cyumweru ni icyumweru cya none. Imbonerahamwe zitagabanyijwemo ibice zitunganywa zose uko zakabaye. Isuzuma ryateganijwe rirasimbukwa kugeza birangiye."
+
+#: mactrack_utilities.php
+msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile."
+msgstr "Hitamo ibice bya buri munsi cyangwa bya buri cyumweru, cyangwa uhagarike kugabanyamo ibice, ku mbonerahamwe z'icyambu (aderesi ya MAC), aderesi ya IP na 802.1x. Kongera kubaka gukoporora amateka yose mu nyuma; isaka riteganyijwe rirasimbukwa kandi gushakisha MAC, IP na 802.1x bigaragaza ubutumwa bwo gusana muri icyo gihe."
+
+#: mactrack_utilities.php
+msgid "Aggregated Table Administration"
+msgstr "Ubuyobozi bw'Imbonerahamwe Zikusanyijwe"
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
+msgstr "Isiba amahuza YOSE <strong>yakusanyijwe hamwe</strong> (atari ibisubizo by'isuzuma) ya Port kuri MAC no kuri IP mu bubiko bw'amakuru. Amakuru azongera gukusanywa ashingiye gusa ku makuru <strong>mashya gusa</strong> yasuzumwe mu ikorwa rikurikira ry'Ikusanyamakuru rya mactrack."
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
+msgstr "Isiba amahuza YOSE <strong>yakusanyijwe hamwe</strong> (atari ibisubizo by'isuzuma) ya Port kuri MAC no kuri IP mu bubiko bw'amakuru, ikongera kuyarema ishingiye ku <strong>makuru yose yasuzumwe</strong> ubu."
+
+#: mactrack_utilities.php
+msgid "Partitioning"
+msgstr "Kugabanya mu bice"
+
+#: mactrack_vendormacs.php
+msgid "Mactrack Vendor Mac Filter"
+msgstr "Akayunguruzo ka MAC y'Uruganda ka Mactrack"
+
+#: mactrack_vendormacs.php
+msgid "Vendor MAC"
+msgstr "MAC y'umucuruzi"
+
+#: mactrack_vendormacs.php
+msgid "Corporation"
+msgstr "Sosiyete"
+
+#: mactrack_vendormacs.php
+msgid "Address"
+msgstr "Aderesi"
+
+#: mactrack_vendormacs.php setup.php
+msgid "Vendor Macs"
+msgstr "MAC z'abacuruzi"
+
+#: mactrack_vendormacs.php
+msgid "No Mactrack Vendor MACS Found"
+msgstr "Nta MAC z'abacuruzi za Mactrack zabonetse"
+
+#: mactrack_view_arp.php
+msgid "Mactrack - ARP/IP View"
+msgstr "Mactrack - Irebero rya ARP/IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Name"
+msgstr "Izina rya Switch"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Hostname"
+msgstr "Izina rya Mwakirizi wa switch"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED IP Address"
+msgstr "Aderesi ya IP ya ED"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED DNS Hostname"
+msgstr "Izina rya Mwakirizi rya DNS rya ED"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED MAC Address"
+msgstr "Aderesi ya MAC ya ED"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Vendor Name"
+msgstr "Izina ry'umucuruzi"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Port Number"
+msgstr "Nomero y'icyambu"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Port Name"
+msgstr "Izina rya Poruti"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Last Scan Date"
+msgstr "Itariki y'igenzura rya nyuma"
+
+#: mactrack_view_arp.php
+msgid "ARP Cache"
+msgstr "Ububiko bw'agateganyo bwa ARP"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "You must first choose a Site, Device or other search criteria."
+msgstr "Ugomba kubanza guhitamo Ahantu, Igikoresho cyangwa ibindi bigenderwaho mu gushakisha."
+
+#: mactrack_view_arp.php
+msgid "No Mactrack IP Results Found"
+msgstr "Nta bisubizo bya IP bya Mactrack byabonetse"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_interfaces.php
+#: mactrack_view_macs.php
+msgid "Device"
+msgstr "Igikoresho"
+
+#: mactrack_view_arp.php mactrack_view_ips.php
+msgid "IP's"
+msgstr "Za IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "IP"
+msgstr "IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Show"
+msgstr "Erekana"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Most Recent"
+msgstr "Ibiheruka"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "MAC"
+msgstr "MAC"
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr "MacTrack - Ikibaho nyobozi"
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr "Ibarura ry'ibikoresho"
+
+#: mactrack_view_dashboard.php
+msgid "Device status"
+msgstr "Imiterere y'igikoresho"
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr "Umubare wose w'aderesi na poriti"
+
+#: mactrack_view_dashboard.php
+msgid "Collection settings"
+msgstr "Amagenamiterere yo gukusanya"
+
+#: mactrack_view_dashboard.php
+msgid "Scan runtimes"
+msgstr "Ibihe by'imikorere y'isuzuma"
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr "Ingano z'imbonerahamwe"
+
+#: mactrack_view_dashboard.php
+msgid "MacWatch activity"
+msgstr "Ibikorwa bya MacWatch"
+
+#: mactrack_view_dashboard.php
+msgid "Vendors"
+msgstr "Abacuruzi"
+
+#: mactrack_view_dashboard.php
+msgid "Enabled devices"
+msgstr "Ibikoresho byafunguwe"
+
+#: mactrack_view_dashboard.php
+msgid "Disabled devices"
+msgstr "Ibikoresho byahagaritswe"
+
+#: mactrack_view_dashboard.php
+msgid "Device types"
+msgstr "Amoko y'ibikoresho"
+
+#: mactrack_view_dashboard.php
+msgid "Interfaces tracked"
+msgstr "Impuza zikurikiranwa"
+
+#: mactrack_view_dashboard.php
+msgid "Active MACs"
+msgstr "Aderesi MAC zikora"
+
+#: mactrack_view_dashboard.php
+msgid "IP addresses"
+msgstr "Aderesi za IP"
+
+#: mactrack_view_dashboard.php
+msgid "Total ports"
+msgstr "Poruti zose"
+
+#: mactrack_view_dashboard.php
+msgid "Active ports"
+msgstr "Poriti zikora"
+
+#: mactrack_view_dashboard.php
+msgid "Trunk ports"
+msgstr "Poruti za trunk"
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr "Abatanga OUI bihariye"
+
+#: mactrack_view_dashboard.php
+msgid "Scanning frequency"
+msgstr "Inshuro z'isuzuma"
+
+#: mactrack_view_dashboard.php
+msgid "Concurrent processes"
+msgstr "Ibikorwa bibera rimwe"
+
+#: mactrack_view_dashboard.php
+msgid "Scanner max runtime"
+msgstr "Igihe ntarengwa cy'imikorere y'igisuzuma"
+
+#: mactrack_view_dashboard.php
+msgid "MAC retention"
+msgstr "Igihe cyo kubika MAC"
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr "iminsi"
+
+#: mactrack_view_dashboard.php
+msgid "IP retention"
+msgstr "Kubika IP"
+
+#: mactrack_view_dashboard.php
+msgid "Reverse DNS"
+msgstr "DNS ihinduye"
+
+#: mactrack_view_dashboard.php
+msgid "Most recent scan"
+msgstr "Isuzuma riheruka"
+
+#: mactrack_view_dashboard.php
+msgid "Average duration"
+msgstr "Ikigereranyo cy'igihe"
+
+#: mactrack_view_dashboard.php
+msgid "Longest duration"
+msgstr "Igihe kirekire kurusha ibindi"
+
+#: mactrack_view_dashboard.php
+msgid "Scanned in last hour"
+msgstr "Byasuzumwe mu isaha ishize"
+
+#: mactrack_view_dashboard.php
+msgid "Duration"
+msgstr "Igihe byamaze"
+
+#: mactrack_view_dashboard.php
+msgid "Last scan"
+msgstr "Igenzura rya nyuma"
+
+#: mactrack_view_dashboard.php
+msgid "Slowest devices"
+msgstr "Ibikoresho bigenda gahoro cyane"
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr "Nta gihe cy'isuzuma kirandikwa."
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr "Imirongo"
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr "Ingano"
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr "Nta mibare y'imbonerahamwe iboneka."
+
+#: mactrack_view_dashboard.php
+msgid "Watched MACs"
+msgstr "Aderesi za MAC zikurikiranwa"
+
+#: mactrack_view_dashboard.php
+msgid "Discovered"
+msgstr "Byavumbuwe"
+
+#: mactrack_view_dashboard.php
+msgid "Last match"
+msgstr "Ihura rya nyuma"
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr "Ibyanditswe mu bubikoshingiro bwa OUI"
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr "Nta makuru y'uwakoze igikoresho aboneka."
+
+#: mactrack_view_dashboard.php
+msgid "Show more"
+msgstr "Erekana byinshi"
+
+#: mactrack_view_dashboard.php
+msgid "Show less"
+msgstr "Erekana bike"
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr "Fungurira mu kadirishya k'ikiganiro"
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr "Kura ku rupapuro"
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr "Kurura kugira ngo uhindure urutonde rw'ikarita"
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr "Icyifuzo kitari cyo. Nyamuneka ongera ugerageze."
+
+#: mactrack_view_dashboard.php
+msgid "Unknown card."
+msgstr "Ikarita itazwi."
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr "Ongeraho ikarita"
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
+msgstr "Ongeraho ikarita y'imbonerahamwe…"
+
+#: mactrack_view_devices.php
+msgid "Mactrack - Device Report View"
+msgstr "Mactrack - Irebero rya Raporo y'Igikoresho"
+
+#: mactrack_view_devices.php
+msgid "Unknown Device Type"
+msgstr "Ubwoko bw'Igikoresho Butazwi"
+
+#: mactrack_view_devices.php
+msgid "Total VLAN's"
+msgstr "VLAN zose"
+
+#: mactrack_view_devices.php
+msgid "Edit Device"
+msgstr "Hindura igikoresho"
+
+#: mactrack_view_devices.php
+msgid "View Graphs"
+msgstr "Kureba Ibishushanyo"
+
+#: mactrack_view_devices.php
+msgid "Device Not Mapped to Cacti Device"
+msgstr "Igikoresho ntigihujwe n'Igikoresho cya Cacti"
+
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
+msgid "View MAC Addresses"
+msgstr "Reba aderesi za MAC"
+
+#: mactrack_view_devices.php
+msgid "No Mactrack Devices Found"
+msgstr "Nta bikoresho bya Mactrack byabonetse"
+
+#: mactrack_view_devices.php
+msgid "Device Scan Results"
+msgstr "Ibisubizo by'isuzuma ry'Igikoresho"
+
+#: mactrack_view_devices.php
+msgid "Hub/Switch"
+msgstr "Hub/Switch"
+
+#: mactrack_view_dot1x.php
+msgid "Mactrack - 802.1x View"
+msgstr "Mactrack - Irebero rya 802.1x"
+
+#: mactrack_view_dot1x.php
+msgid "Domain"
+msgstr "Indomayini"
+
+#: mactrack_view_dot1x.php
+msgid "802.1x Sessions"
+msgstr "Sesiyo za 802.1x"
+
+#: mactrack_view_dot1x.php
+msgid "No Mactrack 802.1x Sessions Found"
+msgstr "Nta bihe by'imikoranire bya Mactrack 802.1x byabonetse"
+
+#: mactrack_view_dot1x.php
+msgid "Dot1x Scan Results"
+msgstr "Ibisubizo by'igenzura rya Dot1x"
+
+#: mactrack_view_dot1x.php
+msgid "Sessions"
+msgstr "Ibihe by'ikoresha"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "All Statuses"
+msgstr "Imiterere yose"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr "Imiterere yatoranyijwe"
+
+#: mactrack_view_dot1x.php
+msgid "DATA"
+msgstr "AMAKURU"
+
+#: mactrack_view_dot1x.php
+msgid "VOICE"
+msgstr "IJWI"
+
+#: mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Portname"
+msgstr "Izina rya poruti"
+
+#: mactrack_view_graphs.php
+msgid "Mactrack - Monitored Device Graph View"
+msgstr "Mactrack - Irebero ry'Igishushanyo cy'Igikoresho Gikurikiranwa"
+
+#: mactrack_view_graphs.php
+msgid "Custom Graph List Applied - Filtering from List"
+msgstr "Urutonde rwihariye rw'Ibishushanyo rwakoreshejwe - Hayungururwa uhereye ku Rutonde"
+
+#: mactrack_view_interfaces.php
+msgid "Mactrack - Network Interfaces View"
+msgstr "Mactrack - Irebero rya Interfasi z'Urusobe"
+
+#: mactrack_view_interfaces.php
+msgid "No Mactrack Interfaces Found"
+msgstr "Nta miyoboro ya Mactrack yabonetse"
+
+#: mactrack_view_interfaces.php
+msgid "Interface Scan Results"
+msgstr "Ibisubizo by'igenzura ry'impuza"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Name"
+msgstr "Izina"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Description"
+msgstr "Ibisobanuro"
+
+#: mactrack_view_interfaces.php
+msgid "Issues"
+msgstr "Ibibazo"
+
+#: mactrack_view_interfaces.php
+msgid "Alias"
+msgstr "Irindi zina"
+
+#: mactrack_view_interfaces.php
+msgid "InBound %%%"
+msgstr "Byinjira %%%"
+
+#: mactrack_view_interfaces.php
+msgid "OutBound %%%"
+msgstr "Igisohoka %%%"
+
+#: mactrack_view_interfaces.php
+msgid "In (B/S)"
+msgstr "Byinjira (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out (B/S)"
+msgstr "Igisohoka (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Err Total"
+msgstr "Igiteranyo cy'Amakosa Yinjira"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc Total"
+msgstr "Igiteranyo cy'Ibyinjira Byajugunywe"
+
+#: mactrack_view_interfaces.php
+msgid "UProto Total"
+msgstr "Igiteranyo cya UProto"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err Total"
+msgstr "Igiteranyo cy'amakosa asohoka"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc Total"
+msgstr "Igiteranyo cy'ibyajugunywe bisohoka"
+
+#: mactrack_view_interfaces.php
+msgid "In Err (E/S)"
+msgstr "Amakosa Yinjira (E/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc (D/S)"
+msgstr "Byinjira Byajugunywe (D/S)"
+
+#: mactrack_view_interfaces.php
+msgid "UProto (UP/S)"
+msgstr "UProto (UP/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err (OE/S)"
+msgstr "Amakosa asohoka (OE/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc (OD/S)"
+msgstr "Ibyajugunywe bisohoka (OD/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Last Change"
+msgstr "Impinduka ya nyuma"
+
+#: mactrack_view_interfaces.php
+msgid "Last Scanned"
+msgstr "Igihe cya nyuma byagenzuwe"
+
+#: mactrack_view_interfaces.php
+msgid "Filters"
+msgstr "Utuyunguruzo"
+
+#: mactrack_view_interfaces.php
+msgid "All Interfaces"
+msgstr "Imihuza Yose"
+
+#: mactrack_view_interfaces.php
+msgid "All Non-Ignored Interfaces"
+msgstr "Imihuza Yose Itirengagijwe"
+
+#: mactrack_view_interfaces.php
+msgid "All Ignored Interfaces"
+msgstr "Imihuza Yose Yirengagijwe"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In/Out Utilization > %d &#37;"
+msgstr "Ikoreshwa ryo kwinjira/gusohoka riri hejuru > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In Utilization > %d &#37;"
+msgstr "Ikoreshwa ryo kwinjira riri hejuru > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High Out Utilization > %d &#37;"
+msgstr "Ikoreshwa ryo gusohoka riri hejuru > %d &#37;"
+
+#: mactrack_view_interfaces.php
+msgid "With Issues"
+msgstr "Bifite ibibazo"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces"
+msgstr "Imiyoboro Ikora"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces No Alias"
+msgstr "Imiyoboro Ikora Itagira Irindi Zina"
+
+#: mactrack_view_interfaces.php
+msgid "Errors Accumulating"
+msgstr "Amakosa ari kwiyongera"
+
+#: mactrack_view_interfaces.php
+msgid "Discards Accumulating"
+msgstr "Ibyatawe bikomeje kwiyongera"
+
+#: mactrack_view_interfaces.php
+msgid "Changed in Last Day"
+msgstr "Byahinduwe mu munsi ushize"
+
+#: mactrack_view_interfaces.php
+msgid "Bandwidth"
+msgstr "Ubunini bw'umurongo"
+
+#: mactrack_view_interfaces.php
+msgid "When checked, the Errors, Discards and Unknown Protocol columns show each interface's cumulative SNMP counter totals instead of the average per-second rate."
+msgstr "Iyo bihiswemo, inkingi z'Amakosa, Ibyajugunywe n'Amabwiriza atazwi zigaragaza igiteranyo cyose cy'imibare ya SNMP ya buri muyoboro aho kwerekana impuzandengo ku isegonda."
+
+#: mactrack_view_interfaces.php
+msgid "Show Totals"
+msgstr "Erekana igiteranyo"
+
+#: mactrack_view_ips.php
+msgid "Mactrack - Site IP Range Report View"
+msgstr "Mactrack - Irebero rya Raporo y'Intera ya IP z'Ahantu"
+
+#: mactrack_view_ips.php
+msgid "IP Range"
+msgstr "Intera ya IP"
+
+#: mactrack_view_ips.php
+msgid "Current IP Addresses"
+msgstr "Aderesi IP ziriho ubu"
+
+#: mactrack_view_ips.php
+msgid "Current Date"
+msgstr "Itariki y'uyu munsi"
+
+#: mactrack_view_ips.php
+msgid "Maximum IP Addresses"
+msgstr "Aderesi za IP ntarengwa"
+
+#: mactrack_view_ips.php
+msgid "Maximum Date"
+msgstr "Itariki ntarengwa"
+
+#: mactrack_view_ips.php
+msgid "IP Address Ranges"
+msgstr "Intera za Aderesi za IP"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "Edit Site"
+msgstr "Hindura Ahantu"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "View IP Addresses"
+msgstr "Reba aderesi za IP"
+
+#: mactrack_view_ips.php
+msgid "No Mactrack Site IP Ranges Found"
+msgstr "Nta byiciro bya IP by'ahantu bya Mactrack byabonetse"
+
+#: mactrack_view_macs.php
+msgid "Mactrack - MAC to IP Report View"
+msgstr "Mactrack - Irebero rya Raporo ya MAC kuri IP"
+
+#: mactrack_view_macs.php
+msgid "Authorize"
+msgstr "Tanga uburenganzira"
+
+#: mactrack_view_macs.php
+msgid "Revoke"
+msgstr "Kuraho"
+
+#: mactrack_view_macs.php
+msgid "None of the selected MAC Addresses were valid, so no action was taken."
+msgstr "Nta na rimwe mu maderesi ya MAC yahiswemo ryari ryemewe, bityo nta gikorwa cyakozwe."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
+msgstr "Aderesi za MAC zikurikira ntizashoboye gukurwaho uburenganzira kuko ari abanyamuryango b'Uruhushya rw'Itsinda %s"
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Authorize the following MAC Addresses."
+msgstr "Kanda 'Komeza' kugira ngo wemere Aderesi za MAC zikurikira."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Revoke the following MAC Addresses."
+msgstr "Kanda 'Komeza' kugira ngo uhagarike burundu Aderesi za MAC zikurikira."
+
+#: mactrack_view_macs.php
+msgid "You must select at least one MAC Address."
+msgstr "Ugomba guhitamo nibura Aderesi ya MAC imwe."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to change Mac Authorizations."
+msgstr "Ntabwo wemerewe guhindura uburenganzira bwa Mac."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
+msgstr "Igik.:%s IP.:%s MAC.:%s PORT.:%s Umubare.: [%s]"
+
+#: mactrack_view_macs.php
+msgid "You must select at least one Row."
+msgstr "Ugomba guhitamo nibura Umurongo umwe."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to delete rows."
+msgstr "Ntabwo wemerewe gusiba imirongo."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Delete the following rows from Aggregated table."
+msgstr "Kanda 'Komeza' kugira ngo usibe imirongo ikurikira mu mbonerahamwe ihurijwe hamwe."
+
+#: mactrack_view_macs.php
+msgid "VLAN ID"
+msgstr "ID ya VLAN"
+
+#: mactrack_view_macs.php
+msgid "VLAN Name"
+msgstr "Izina rya VLAN"
+
+#: mactrack_view_macs.php
+msgid "You must choose a Site, Device or other search criteria."
+msgstr "Ugomba guhitamo Ahantu, Igikoresho cyangwa ibindi bigenderwaho mu gushakisha."
+
+#: mactrack_view_macs.php
+msgid "No Mactrack Port Results Found"
+msgstr "Nta bisubizo by'imyanya bya Mactrack byabonetse"
+
+#: mactrack_view_macs.php
+msgid "Count"
+msgstr "Umubare"
+
+#: mactrack_view_macs.php
+msgid "Aggregated"
+msgstr "Byateranyirijwe hamwe"
+
+#: mactrack_view_sites.php
+msgid "Mactrack - Site Report View"
+msgstr "Mactrack - Irebero rya Raporo y'Ahantu"
+
+#: mactrack_view_sites.php
+msgid "Rescan Site"
+msgstr "Ongera usuzume Ahantu"
+
+#: mactrack_view_sites.php
+msgid "View Devices"
+msgstr "Reba ibikoresho"
+
+#: mactrack_view_sites.php
+msgid "View IP Ranges"
+msgstr "Reba ibyiciro bya IP"
+
+#: mactrack_view_sites.php
+msgid "Sites / Device Types"
+msgstr "Ahantu / Ubwoko bw'Ibikoresho"
+
+#: mactrack_view_sites.php
+msgid "Site Scan Results"
+msgstr "Ibisubizo by'Isuzuma ry'Ahantu"
+
+#: setup.php
+msgid "MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes."
+msgstr "MacTrack iri kuvugurura ububiko bwayo bw'amakuru mu gicucu. Ibi bishobora gufata kugera ku isaha ku mashyirwaho manini, kandi amwe mu makuru ya MacTrack ashobora kutuzura kugeza birangiye."
+
+#: setup.php
+#, php-format
+msgid "MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s"
+msgstr "MacTrack ntiyashoboye gutangiza ivugurura ry'ububiko bw'amakuru mu gicucu, reba mu ikayi y'ibikorwa ya Cacti kugira ngo ubone impamvu. Bikorere n'intoki ukoresheje umurongo w'amabwiriza: %s"
+
+#: setup.php
+msgid "Mactrack"
+msgstr "Mactrack"
+
+#: setup.php
+msgid "General Settings"
+msgstr "Igenamiterere rusange"
+
+#: setup.php
+msgid "Scanning Frequency"
+msgstr "Inshuro z'Isuzuma"
+
+#: setup.php
+msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
+msgstr "Hitamo igihe cyo gukusanya Aderesi za MAC na IP hamwe n'imibare y'imyinjiriro kuva mu bikoresho byawe by'urusobe."
+
+#: setup.php
+msgid "Concurrent Processes"
+msgstr "Ibikorwa bikorera icyarimwe"
+
+#: setup.php
+msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
+msgstr "Garagaza umubare w'ibikoresho bizakusanyirizwa amakuru icyarimwe kugeza ubwo ibikoresho byose bizaba bimaze gukusanyirizwa amakuru."
+
+#: setup.php
+msgid "Scanner Max Runtime"
+msgstr "Igihe Ntarengwa cy'Imikorere y'Igisuzuma"
+
+#: setup.php
+msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
+msgstr "Garagaza umubare w'iminota igikorwa cyo gusuzuma igikoresho kizemererwa gukora mbere y'uko sisitemu ifata ko cyarangiye. Iri genamiterere rizakosora imirimo yo gusuzuma yahagaritswe n'ikosa."
+
+#: setup.php
+msgid "Start Time for Data Collection"
+msgstr "Igihe cyo gutangira gukusanya amakuru"
+
+#: setup.php
+msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
+msgstr "Ni ryari wifuza ko ikusanya ry'amakuru rya mbere riba? Ibihe byose bizakurikiraho byo gukusanya amakuru bizashingira kuri iki gihe cyo gutangira. Urugero rwiza rwaba 12:00AM."
+
+#: setup.php
+msgid "Database Maintenance Time"
+msgstr "Igihe cyo kubungabunga ububiko bw'amakuru"
+
+#: setup.php
+msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
+msgstr "Ni ryari inyandiko zishaje z'ububiko bw'amakuru zigomba gukurwa mu bubiko? Nyamuneka menya ko nta wemerewe kwinjira mu bubiko bw'ibyambu mu gihe iki gikorwa kirimo kuba."
+
+#: setup.php
+msgid "Confirm Utilities Prompt"
+msgstr "Ikibazo cyo Kwemeza Ibikoresho by'ubufasha"
+
+#: setup.php
+msgid "When using utilities, prompt for verification"
+msgstr "Iyo ukoresha ibikoresho byunganira, saba kugenzura"
+
+#: setup.php
+msgid "Data Retention"
+msgstr "Igihe cyo Kubika Amakuru"
+
+#: setup.php
+msgid "How long should port MAC details be retained in the database."
+msgstr "Ni igihe kingana iki amakuru arambuye ya MAC z'umuyoboro agomba kubikwa mu bubiko bw'amakuru."
+
+#: setup.php
+msgid "Data Retention IPs"
+msgstr "Aderesi IP zo kubika amakuru"
+
+#: setup.php
+msgid "How long should discovered IPs details be retained in the database."
+msgstr "Ni igihe kingana iki amakuru arambuye ya IP zavumbuwe agomba kubikwa mu bubiko bw'amakuru."
+
+#: setup.php
+msgid "Size of the partitions of the port, IP and 802.1x tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
+msgstr "Ingano y'ibice by'imbonerahamwe za port, IP na 802.1x, cyangwa Byahagaritswe ku mbonerahamwe zitagabanyijwe mu bice. Kubihindura bigira ingaruka ku bice bishya gusa; kugira ngo wubake bundi bushya amateka asanzwe kugira ngo bihure, koresha Boneza Igabanya ry'Ibice bya Port na Aderesi IP mu Bikoresho bya MacTrack cyangwa utangize cli/upgrade_partitioning.php."
+
+#: setup.php
+msgid "Switch Level Ignore Ports Delimiter"
+msgstr "Akamenyetso gatandukanya imiyoboro yirengagizwa ku rwego rwa switch"
+
+#: setup.php
+msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
+msgstr "Ni ikihe kimenyetso gitandukanya Mactrack igomba gukoresha mu gusesengura umugozi wa Ignore Ports kuri buri swici."
+
+#: setup.php
+msgid "Auto Detect"
+msgstr "Gutahura mu buryo bwikora"
+
+#: setup.php
+msgid "Colon [:]"
+msgstr "Utudomo tubiri [:]"
+
+#: setup.php
+msgid "Pipe [|]"
+msgstr "Umuyoboro [|]"
+
+#: setup.php
+msgid "Space [ ]"
+msgstr "Umwanya [ ]"
+
+#: setup.php
+msgid "Mac Address Output Format"
+msgstr "Imiterere y'isohoka rya aderesi ya MAC"
+
+#: setup.php
+msgid "Format used for display."
+msgstr "Imiterere ikoreshwa mu kwerekana."
+
+#: setup.php
+msgid "Ports to Ignore"
+msgstr "Poruti zo kwirengagiza"
+
+#: setup.php
+msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
+msgstr "Tanga imvugo ngenderwaho (regular expression) ya ifNames cyangwa ifDescriptions y'ibyambu bigomba kwirengagizwa ku rutonde rw'imiyoboro. Urugero, (Vlan|Loopback|Null)."
+
+#: setup.php
+msgid "Ports to Ignore While Scanning (Regular Expression)"
+msgstr "Poruti zo kwirengagiza mu gihe cyo gusaka (Imvugo isanzwe)"
+
+#: setup.php
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
+msgstr "Si ngombwa.  Imvugo isanzwe ihuzwa, hatitawe ku nyuguti nkuru cyangwa nto, n'izina ry'icyambu n'irindi zina ry'icyambu bya buri cyambu cyagenzuwe.  Aderesi za MAC zibonetse ku cyambu gihuye ntizikusanywa, ibyo bikura ibyambu bya uplink na trunk mu bubiko bw'amakuru.  Urugero, (uplink|trunk).  Shyira buri mvugo ku murongo wayo kugira ngo utange nyinshi.  Siga harimo ubusa kugira ngo hakusanywe buri cyambu.  Ahantu n'ibikoresho bishobora kongeraho imvugo zabyo bwite.  Bitandukanye na Ibyambu byo Kwirengagiza biri haruguru, ibi bikoreshwa mu ikusanya rya MAC gusa aho kuba ku rutonde rw'imiyoboro, kandi bigira ingaruka ku igenzura rishya gusa."
+
+#: setup.php
+msgid "Bandwidth Usage Threshold"
+msgstr "Urwego ntarengwa rw'ikoreshwa ry'ubunini bw'umurongo"
+
+#: setup.php
+msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
+msgstr "Mu gihe usuzuma imibare y'imiyoboro ya murandasi, ni uruhe rwego ntarengwa rw'umuvuduko w'itumanaho wifuza kureba nk'uko bisanzwe?"
+
+#: setup.php
+#, php-format
+msgid "%d Percent"
+msgstr "%d ku ijana"
+
+#: setup.php
+msgid "DNS Settings"
+msgstr "Amagenamiterere ya DNS"
+
+#: setup.php
+msgid "Perform Reverse DNS Name Resolution"
+msgstr "Kora isesengura rihindura ry'izina rya DNS"
+
+#: setup.php
+msgid "Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
+msgstr "Ese Mactrack igomba gukora ishakisha rya DNS risubira inyuma ku maderesi ya IP ajyanye n'ibyambu. ICYITONDERWA: Niba DNS idatunganijwe neza, ibi bizatinza cyane igihe cy'isuzuma."
+
+#: setup.php
+msgid "Primary DNS IP Address"
+msgstr "Aderesi ya IP ya DNS y'ibanze"
+
+#: setup.php
+msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
+msgstr "Injiza aderesi ya IP ya DNS y'ibanze igomba gukoreshwa mu gushakisha gusubira inyuma (reverse lookups)."
+
+#: setup.php
+msgid "Secondary DNS IP Address"
+msgstr "Aderesi ya IP ya DNS ya kabiri"
+
+#: setup.php
+msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
+msgstr "Injiza aderesi ya IP ya DNS ya kabiri igomba gukoreshwa mu gushakisha gusubira inyuma (reverse lookups)."
+
+#: setup.php
+msgid "DNS Timeout"
+msgstr "Igihe ntarengwa cyo gutegereza DNS"
+
+#: setup.php
+msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
+msgstr "Nyamuneka andika igihe ntarengwa cya DNS mu masegonda make (milliseconds). Mactrack ikoresha isesengura rya DNS rishingiye kuri PHP."
+
+#: setup.php
+msgid "DNS Prime Interval"
+msgstr "Intera yo gutegura DNS"
+
+#: setup.php
+msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
+msgstr "Ni kangahe, mu masegonda, IP zisikanwa na Mactrack zikeneye guhindurwa muri aderesi za MAC kugira ngo zishakirwe DNS.  Gukoresha umubare munini igihe ufite ibikoresho ibihumbi byinshi bizongera imikorere myiza."
+
+#: setup.php
+msgid "Notification Settings"
+msgstr "Igenamiterere ry'imenyesha"
+
+#: setup.php
+msgid "Source Address"
+msgstr "Aderesi Inkomoko"
+
+#: setup.php
+msgid "The source Email address for Mactrack Emails."
+msgstr "Aderesi ya Imeyili y'inkomoko ku ma Imeyili ya Mactrack."
+
+#: setup.php
+msgid "Source Email Name"
+msgstr "Izina rya Imeyili Inkomoko"
+
+#: setup.php
+msgid "The Source Email name for Mactrack Emails."
+msgstr "Izina ry'Imeyili iturukwaho ku ma-Imeyili ya Mactrack."
+
+#: setup.php
+msgid "MACTrack Administrator"
+msgstr "Umuyobozi wa MACTrack"
+
+#: setup.php
+msgid "MacWatch Default Body"
+msgstr "Umwandiko mbanziriza wa MacWatch"
+
+#: setup.php
+msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+msgstr "Igice kinini cy'Imeyili cyateguwe mbere ku Imeyili za Mactrack MacWatch.  Igice kinini gishobora kubamo uturango twa html twose twemewe.  Kinashyigikira uturango dusimbura tuzatunganywa mu gihe cyo kohereza Imeyili.  Uturango twemewe turimo <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+
+#: setup.php
+msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
+msgstr "Aderesi ya MAC <MAC> yabonetse kuri aderesi ya IP <IP> ku nomero y'itiketi: <TICKET>.<br>Igikoresho giherereye<br>Ahantu: <SITENAME>, Igikoresho <DEVICENAME>, IP <DEVICEIP>, Umuyoboro <PORTNUMBER>, n'izina ry'umuyoboro <PORTNAME>"
+
+#: setup.php
+msgid "MacAuth Report Email Addresses"
+msgstr "Aderesi z'imeyili za raporo ya MacAuth"
+
+#: setup.php
+msgid "A comma delimited list of users to receive the MacAuth Email notifications."
+msgstr "Urutonde rutandukanyijwe n'akitso rw'abakoresha bo kwakira amamenyekanisha y'Imeyili ya MacAuth."
+
+#: setup.php
+msgid "MacAuth Report Frequency"
+msgstr "Inshuro za raporo ya MacAuth"
+
+#: setup.php
+msgid "How often will the MacAuth Reports be Emailed."
+msgstr "Ni kangahe Raporo za MacAuth zizajya zoherezwa kuri Imeyili."
+
+#: setup.php
+msgid "Mactrack ArpWatch Settings"
+msgstr "Amagenamiterere ya ArpWatch ya Mactrack"
+
+#: setup.php
+msgid "Enable ArpWatch"
+msgstr "Fungura ArpWatch"
+
+#: setup.php
+msgid "Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
+msgstr "Ese Mactrack igomba no gukoresha amakuru ya ArpWatch mu kunganira isesengura ryo guhuza Mac na IP/DNS?"
+
+#: setup.php
+msgid "ArpWatch Database Path"
+msgstr "Inzira y'Ububiko bw'amakuru bwa ArpWatch"
+
+#: setup.php
+msgid "The location of the ArpWatch Database file on the Cacti server."
+msgstr "Aho dosiye y'ububiko bw'amakuru bwa ArpWatch iherereye kuri seriveri ya Cacti."
+
+#: setup.php
+msgid "SNMP Presets"
+msgstr "Ibyagenwe mbere bya SNMP"
+
+#: setup.php
+msgid "Update Policy for SNMP Options"
+msgstr "Politiki yo kuvugurura amahitamo ya SNMP"
+
+#: setup.php
+msgid "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices."
+msgstr "Politiki yo guhuza Amahitamo ya SNMP hagati y'Ibikoresho bya Cacti n'Ibikoresho bya Mactrack."
+
+#: setup.php
+msgid "Default SNMP version for all new hosts."
+msgstr "Verisiyo mburabuzi ya SNMP ku bakirizi bose bashya."
+
+#: setup.php
+msgid "Default SNMP read community for all new hosts."
+msgstr "Itsinda mburabuzi ryo gusoma SNMP ku bakirizi bose bashya."
+
+#: setup.php
+msgid "Communities"
+msgstr "Imiryango"
+
+#: setup.php
+msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
+msgstr "Uzuza urutonde rw'imigozi yo gusoma ya SNMP ihari yo kugerageza kuri iki gikoresho. Buri mugozi wo gusoma ugomba gutandukanywa n'utudomo tubiri ':'. Iyi migozi yo gusoma izageragezwa ikurikirana niba umugozi w'ibanze wo gusoma utari wo."
+
+#: setup.php
+msgid "The UDP/TCP Port to poll the SNMP agent on."
+msgstr "Umuyoboro wa UDP/TCP wo gukusanyirizaho amakuru kuri SNMP agent."
+
+#: setup.php
+msgid "Default SNMP timeout in milli-seconds."
+msgstr "Igihe ntarengwa mburabuzi cya SNMP mu milisegonda."
+
+#: setup.php
+msgid "The number times the SNMP poller will attempt to reach the host before failing."
+msgstr "Umubare w'inshuro ikusanyamakuru rya SNMP rizagerageza kugera kuri mwakirizi mbere yo kunanirwa."
+
+#: setup.php
+msgid "snmpbulkwalk Binary Path"
+msgstr "Inzira ya porogaramu ya snmpbulkwalk"
+
+#: setup.php
+msgid "The path to your snmpbulkwalk binary."
+msgstr "Inzira igana kuri porogaramu yawe ya snmpbulkwalk."
+
+#: setup.php
+msgid "MacTrack Settings"
+msgstr "Amagenamiterere ya MacTrack"
+
+#: setup.php
+msgid "Default Tab"
+msgstr "Agashami mburabuzi"
+
+#: setup.php
+msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
+msgstr "Ni akahe gace ka MacTrack wifuza ko kaba ak'ibanze igihe cyose ugiye mu gice cya MacTrack."
+
+#: setup.php
+msgid "Mac Addresses"
+msgstr "Aderesi za MAC"
+
+#: setup.php
+msgid "dot1x Deta"
+msgstr "Ibisobanuro bya dot1x"
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Igenamiterere rya Proxy ya Interineti"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Aderesi ya Proxy ya Interineti"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Kuri serivisi z'ibanze za Cacti cyangwa imigereka (Plugins) bisaba interineti, injiza hano seriveri ya proxy n'umuryango (port) mu buryo bukurikira IP:PORT. Urugero: 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Umukoresha wa Proxy ya Interineti"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "Niba Proxy yawe ya Interineti isaba izina ry'ukoresha, ryinjize hano."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Ijambobanga rya Proxy ya Interineti"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "Niba Proxy yawe ya Interineti isaba ijambobanga, ryinjize hano."
+
+#: setup.php
+msgid "Mactrack Dashboard"
+msgstr "Imbonerahamwe ya Mactrack"
+
+#: setup.php
+msgid "Mactrack Devices"
+msgstr "Ibikoresho bya Mactrack"
+
+#: setup.php
+msgid "(Edit)"
+msgstr "(Hindura)"
+
+#: setup.php
+msgid "(Import)"
+msgstr "(Kuzana)"
+
+#: setup.php
+msgid "Mactrack Device Types"
+msgstr "Ubwoko bw'Ibikoresho bya Mactrack"
+
+#: setup.php
+msgid "Mactrack Sites"
+msgstr "Ahantu ha Mactrack"
+
+#: setup.php
+msgid "Mac Address Tracking Utility"
+msgstr "Igikoresho cyo gukurikirana aderesi ya MAC"
+
+#: setup.php
+msgid "Mac Address Authorization Utility"
+msgstr "Igikoresho cyo kwemeza aderesi ya MAC"
+
+#: setup.php
+msgid "Mactrack Vendor Macs"
+msgstr "MAC z'Inganda za Mactrack"
+
+#: setup.php
+msgid "Mactrack View Macs"
+msgstr "Mactrack Reba za MAC"
+
+#: setup.php
+msgid "Mactrack Dot1x View"
+msgstr "Mactrack Irebero rya Dot1x"
+
+#: setup.php
+msgid "Mactrack IP Address Viewer"
+msgstr "Mureba w'Aderesi ya IP wa Mactrack"
+
+#: setup.php
+msgid "Mactrack View Interfaces"
+msgstr "Mactrack Reba Interfasi"
+
+#: setup.php
+msgid "Mactrack View Sites"
+msgstr "Mactrack Reba Ahantu"
+
+#: setup.php
+msgid "Mactrack View IP Ranges"
+msgstr "Mactrack Reba Intera za IP"
+
+#: setup.php
+msgid "Mactrack View Devices"
+msgstr "Mactrack Reba Ibikoresho"
+
+#: setup.php
+msgid "Mactrack Utilities"
+msgstr "Ibyifashishwa by'Inyongera bya Mactrack"
+
+#: setup.php
+msgid "Truncate Port Results Table"
+msgstr "Gusiba ibiri mu Mbonerahamwe y'Ibyavuye kuri Poruti"
+
+#: setup.php
+msgid "Truncate Aggregated Port Results Table"
+msgstr "Gusiba ibiri mu Mbonerahamwe y'Ibyavuye kuri Poruti Byahurijwe Hamwe"
+
+#: setup.php
+msgid "Truncate and Re-create Aggregated Port Results Table"
+msgstr "Gusiba ibiri mu Mbonerahamwe y'Ibyavuye kuri Poruti Byahurijwe Hamwe no Kongera Kuyikora"
+
+#: setup.php
+msgid "Refresh/Update Vendor MAC Database from IEEE"
+msgstr "Vugurura Ububikoshingiro bwa MAC bw'Abatanga uvuye kuri IEEE"
+
+#: setup.php
+msgid "Mactrack Graph Viewer"
+msgstr "Mureba w'Igishushanyo wa Mactrack"
+
+#: setup.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "Amasegonda %d"
+
+#: setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "Umunota %d"
+
+#: setup.php
+msgid "Matches"
+msgstr "Bihura"
+
+#: setup.php
+msgid "Contains"
+msgstr "Birimo"
+
+#: setup.php
+msgid "Begins With"
+msgstr "Itangizwa Na"
+
+#: setup.php
+msgid "Does Not Contain"
+msgstr "Ntirimo"
+
+#: setup.php
+msgid "Does Not Begin With"
+msgstr "Ntitangirana na"
+
+#: setup.php
+msgid "Is Null"
+msgstr "Ni ubusa"
+
+#: setup.php
+msgid "Is Not Null"
+msgstr "Ntabwo ari ubusa"
+
+#: setup.php
+msgid "Half"
+msgstr "Igice"
+
+#: setup.php
+msgid "Full"
+msgstr "Byuzuye"
+
+#: setup.php
+msgid "Sync Cacti Device to Mactrack Device"
+msgstr "Huza Igikoresho cya Cacti n'Igikoresho cya Mactrack"
+
+#: setup.php
+msgid "Sync Mactrack Device to Cacti Device"
+msgstr "Huza Igikoresho cya Mactrack n'Igikoresho cya Cacti"
+
+#: setup.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Buri minota %d"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hour"
+msgstr "Buri isaha %d"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Buri masaha %d"
+
+#: setup.php
+msgid "Every Day"
+msgstr "Buri munsi"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "Ukwezi %d"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "Amezi %d"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "Umwaka %d"
+
+#: setup.php
+msgid "On Scan Completion"
+msgstr "Igenzura rirangiye"
+
+#: setup.php
+#, php-format
+msgid "Every %d Days"
+msgstr "Buri minsi %d"
+
+#: setup.php
+msgid "Every Week"
+msgstr "Buri cyumweru"
+
+#: setup.php
+msgid "Management"
+msgstr "Imicungire"
+
+#: setup.php
+msgid "SNMP Options"
+msgstr "Amahitamo ya SNMP"
+
+#: setup.php
+msgid "Mac Watch"
+msgstr "Igenzura rya MAC"
+
+#: setup.php
+msgid "Mactrack Tools"
+msgstr "Ibyifashishwa bya Mactrack"
+
+#: setup.php
+msgid "Mac Authorizations"
+msgstr "Uburenganzira bwa MAC"
+
+#: setup.php
+msgid "Tracking Utilities"
+msgstr "Ibikoresho byo Gukurikirana"
+
+#: setup.php
+msgid "Ports to Ignore (Regular Expression)"
+msgstr "Poruti zo kwirengagiza (Imvugo isanzwe)"
+
+#: setup.php
+#, php-format
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions."
+msgstr "Si ngombwa.  Imvugo isanzwe ihuzwa, hatitawe ku nyuguti nkuru cyangwa nto, n'izina ry'icyambu n'irindi zina ry'icyambu bya %s.  Aderesi za MAC zibonetse ku cyambu gihuye ntizikusanywa.  Urugero, '(uplink|trunk)' yirengagiza buri cyambu gifite izina cyangwa irindi zina ririmo uplink cyangwa trunk.  Shyira buri mvugo ku murongo wayo kugira ngo utange nyinshi.  Ikurikizwa hiyongereyeho imvugo za %s."
+
+#: setup.php
+msgid "every device in this site"
+msgstr "buri gikoresho muri aha hantu"
+
+#: setup.php
+msgid "this device"
+msgstr "iki gikoresho"
+
+#: setup.php
+msgid "device and global"
+msgstr "igikoresho na rusange"
+
+#: setup.php
+msgid "site and global"
+msgstr "ahantu na rusange"
+
+#: setup.php
+msgid "Device Scanning Function Options"
+msgstr "Amahitamo y'umukoro w'isuzuma ry'Igikoresho"
+
+#: setup.php
+msgid "Give this device type a meaningful description."
+msgstr "Ha ubu bwoko bw'Igikoresho ibisobanuro bisobanutse."
+
+#: setup.php
+msgid "Fill in the name for the vendor of this device type."
+msgstr "Uzuza izina ry'uwakoze ubu bwoko bw'igikoresho."
+
+#: setup.php
+msgid "Choose the type of device."
+msgstr "Hitamo ubwoko bw'igikoresho."
+
+#: setup.php
+msgid "System Description Match"
+msgstr "Guhuza umwirondoro wa sisitemu"
+
+#: setup.php
+msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
+msgstr "Tanga amakuru y'ingenzi yo gufasha Mactrack gutahura ubwoko bw'Igikoresho. Ikirango gisimbura ibindi ni ikimenyetso cya '&#42;'."
+
+#: setup.php
+msgid "Vendor SNMP Object ID Match"
+msgstr "Ihura ry'indangakintu ya SNMP y'umucuruzi"
+
+#: setup.php
+msgid "MAC Address Scanning Function"
+msgstr "Umumaro wo gusikana aderesi ya MAC"
+
+#: setup.php
+msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
+msgstr "Imikorere y'isuzuma rya Mactrack ihamagarwa kugira ngo haboneke kandi habikwe amakuru y'imyanya. Izina ry'imikorere gusa ni ryo rikenewe. Ibi bipimo bine bikurikira biratekerezwa kandi bizahora byongerwaho: 'my_function($site, &$device, $lowport, $highport)'. Nta mikorere ikenewe kuri router yuzuye."
+
+#: setup.php
+msgid "IP Address Scanning Function"
+msgstr "Umumaro wo Gusikana Aderesi za IP"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
+msgstr "Imikorere y'isuzuma rya Mactrack yihariye ku bikoresho bya Layer3 bikurikirana Aderesi za IP."
+
+#: setup.php
+msgid "802.1x Scanning Function"
+msgstr "Imikorere yo gusikana ya 802.1x"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Switches with dot1x enabled."
+msgstr "Imikorere y'isuzuma rya Mactrack yihariye kuri Switch zafunguweho dot1x."
+
+#: setup.php
+msgid "Serial Number Base OID"
+msgstr "OID Shingiro y'Umubare w'Urukurikirane"
+
+#: setup.php
+msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
+msgstr "SNMP OID ikoreshwa mu kubona nimero iranga ubwoko bw'iki gikoresho ibikwa mu mbonerahamwe y'Amakuru y'Umutungo ya Mactrack."
+
+#: setup.php
+msgid "Serial Number Collection Method"
+msgstr "Uburyo bwo Gukusanya Umubare w'Urukurikirane"
+
+#: setup.php
+msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
+msgstr "Uko inomero iranga ikusanywa kuri iyi OID.  Niba ari 'SNMP Walk', twemeza ko hari inomero ziranga nyinshi.  Niba ari 'Get', izaba imwe gusa.."
+
+#: setup.php
+msgid "SNMP Get"
+msgstr "Kubona binyuze kuri SNMP"
+
+#: setup.php
+msgid "SNMP Walk"
+msgstr "Isesengura rya SNMP (Walk)"
+
+#: setup.php
+msgid "Low User Port Number"
+msgstr "Nomero y'umuyoboro w'ukoresha yo hasi"
+
+#: setup.php
+msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
+msgstr "Tanga nimero nto y'icyambu cy'ukoresha kuri iyi switch. Siga 0 kugira ngo sisitemu ibibare."
+
+#: setup.php
+msgid "High User Port Number"
+msgstr "Nimero yo hejuru y'umuyoboro w'ukoresha"
+
+#: setup.php
+msgid "Disabled device type is not used."
+msgstr "Ubwoko bw'igikoresho bwahagaritswe ntibukoreshwa."
+
+#: setup.php
+msgid "Fill in the name of this SNMP option set."
+msgstr "Uzuza izina ry'iri tsinda ry'amahitamo ya SNMP."
+
+#: setup.php
+msgid "SNMP Version"
+msgstr "Verisiyo ya SNMP"
+
+#: setup.php
+msgid "Choose the SNMP version for this host."
+msgstr "Hitamo verisiyo ya SNMP y'iyi mudasobwa yakira."
+
+#: setup.php
+msgid "SNMP Community String"
+msgstr "Inyandiko y'itsinda rya SNMP"
+
+#: setup.php
+msgid "Fill in the SNMP read community for this device."
+msgstr "Uzuza itsinda ryo gusoma rya SNMP ry'iki gikoresho."
+
+#: setup.php
+msgid "SNMP Port"
+msgstr "Icyambu cya SNMP"
+
+#: setup.php
+msgid "SNMP Timeout"
+msgstr "Igihe ntarengwa cyo gutegereza SNMP"
+
+#: setup.php
+msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
+msgstr "Umubare ntarengwa w'amamilisegonda Cacti izategereza igisubizo cya SNMP (ntibikora hamwe n'ubufasha bwa php-snmp)."
+
+#: setup.php
+msgid "SNMP Retries"
+msgstr "Inshuro zo kongera kugerageza SNMP"
+
+#: setup.php
+msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
+msgstr "Umubare ntarengwa w'igerageza ryo kugera ku gikoresho ukoresheje inyandiko yo gusoma ya SNMP mbere yo kureka."
+
+#: setup.php
+msgid "Maximum OID's Per Get Request"
+msgstr "OID ntarengwa kuri buri busabe bwa Get"
+
+#: setup.php
+msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
+msgstr "Byagaragaje umubare w'ama-OID ashobora kuboneka mu busabe bumwe bwa SNMP Get."
+
+#: setup.php
+msgid "SNMP Username (v3)"
+msgstr "Izina ry'ukoresha SNMP (v3)"
+
+#: setup.php
+msgid "SNMP v3 username for this device."
+msgstr "Izina ry'ukoresha SNMP v3 ry'iki gikoresho."
+
+#: setup.php
+msgid "SNMP Password (v3)"
+msgstr "Ijambobanga rya SNMP (v3)"
+
+#: setup.php
+msgid "SNMP v3 password for this device."
+msgstr "Ijambobanga rya SNMP v3 ry'iki gikoresho."
+
+#: setup.php
+msgid "SNMP Auth Protocol (v3)"
+msgstr "Porotokole yo kwemeza ya SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Authorization Protocol."
+msgstr "Hitamo porotokole yo gutanga uburenganzira ya SNMPv3."
+
+#: setup.php
+msgid "SNMP Privacy Passphrase (v3)"
+msgstr "Interuro y'ibanga ya SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Passphrase."
+msgstr "Hitamo interuro y'ibanga ya SNMPv3."
+
+#: setup.php
+msgid "SNMP Privacy Protocol (v3)"
+msgstr "Porotokole y'ibanga ya SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Protocol."
+msgstr "Hitamo porotokole y'ibanga ya SNMPv3."
+
+#: setup.php
+msgid "SNMP Context (v3)"
+msgstr "Imiterere ya SNMP (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Context to use for this device."
+msgstr "Andika SNMP v3 Context yo gukoresha kuri iki gikoresho."
+
+#: setup.php
+msgid "SNMP Engine ID (v3)"
+msgstr "ID ya moteri ya SNMP (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Engine ID to use for this device."
+msgstr "Andika SNMP v3 Engine ID yo gukoresha kuri iki gikoresho."
+
+#: setup.php
+msgid "General Device Settings"
+msgstr "Amagenamiterere rusange y'Igikoresho"
+
+#: setup.php
+msgid "Give this device a meaningful name."
+msgstr "Ha iki Gikoresho izina rifite igisobanuro."
+
+#: setup.php
+msgid "Fill in the fully qualified hostname for this device."
+msgstr "Uzuza izina ryuzuye rya mwakirizi kuri iki gikoresho."
+
+#: setup.php
+msgid "Related Cacti Host"
+msgstr "Mwakirizi wa Cacti Ufitanye Isano"
+
+#: setup.php
+msgid "Given Mactrack Host is connected to this Cacti Host."
+msgstr "Mwakirizi wa Mactrack watanzwe ahujwe n'uyu Mwakirizi wa Cacti."
+
+#: setup.php
+msgid "Scan Type"
+msgstr "Ubwoko bw'Isuzuma"
+
+#: setup.php
+msgid "Choose the scan type you wish to perform on this device."
+msgstr "Hitamo ubwoko bw'isuzuma wifuza gukorera kuri iki gikoresho."
+
+#: setup.php
+msgid "Choose the site to associate with this device."
+msgstr "Hitamo ahantu ho guhuza n'iki gikoresho."
+
+#: setup.php
+msgid "Device Notes"
+msgstr "Inyandiko z'Igikoresho"
+
+#: setup.php
+msgid "This field value is useful to save general information about a specific device."
+msgstr "Agaciro k'iki gisanduku kagirira akamaro ko kubika amakuru rusange ku gikoresho runaka."
+
+#: setup.php
+msgid "Disable Device"
+msgstr "Hagarika igikoresho"
+
+#: setup.php
+msgid "Check this box to disable all checks for this host."
+msgstr "Shyira akamenyetso muri aka kazu kugira ngo uhagarike isuzuma ryose kuri iki gikoresho cyakira."
+
+#: setup.php
+msgid "Switch/Hub, Switch/Router Settings"
+msgstr "Amagenamiterere ya Switch/Hub, Switch/Router"
+
+#: setup.php
+msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
+msgstr "Tanga urutonde rw'ibyambu ku gikoresho cya switch/hub runaka aho ibisubizo bya MAC bigomba kwirengagizwa. Ibyambu nk'ibya link/trunk bidashobora gutandukanywa n'ibindi byambu by'abakoresha ni ingero. Buri nimero y'icyambu igomba gutandukanywa na colon, pipe, cyangwa umwanya ':', '|', ' '. Urugero, 'Fa0/1: Fa1/23' cyangwa 'Fa0/1 Fa1/23' byakwemerwa ku bwoko bumwe na bumwe bwa switch z'abakora ibikoresho."
+
+#: setup.php
+msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
+msgstr "Ushobora gukoresha amagenamiterere ya SNMP yihariye cyangwa ugahitamo itsinda rya SNMP. Mu buryo bwa kabiri, mactrack igerageza gushaka amagenamiterere nyayo mu itsinda rya SNMP"
+
+#: setup.php
+msgid "Read Strings"
+msgstr "Imirongo yo gusoma"
+
+#: setup.php
+msgid "<strong>DEPRECATED:</strong> SNMP community strings"
+msgstr "<strong>NTIBIKIKORESHWA:</strong> Imirongo ya SNMP community"
+
+#: setup.php
+msgid "Specific SNMP Settings"
+msgstr "Amagenamiterere Yihariye ya SNMP"
+
+#: setup.php
+msgid "Connectivity Options"
+msgstr "Amahitamo yo Guhuza"
+
+#: setup.php
+msgid "Terminal Type"
+msgstr "Ubwoko bwa Terminal"
+
+#: setup.php
+msgid "Choose the terminal type that you use to connect to this device."
+msgstr "Hitamo ubwoko bwa terminal ukoresha mu kwihuza n'iki gikoresho."
+
+#: setup.php
+msgid "Telnet"
+msgstr "Telnet"
+
+#: setup.php
+msgid "SSH"
+msgstr "SSH"
+
+#: setup.php
+msgid "HTTP"
+msgstr "HTTP"
+
+#: setup.php
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: setup.php
+msgid "User Name"
+msgstr "Izina ry'ukoresha"
+
+#: setup.php
+msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
+msgstr "Izina ry'ukoresha rigomba gukoreshwa mu buryo bwawe bwihariye bwo kwemeza umwirondoro. Ingero zirimo SSH, RSH, HTML, n'ibindi."
+
+#: setup.php
+msgid "Password"
+msgstr "Ijambobanga"
+
+#: setup.php
+msgid "The password to be used for your custom authentication."
+msgstr "Ijambobanga rizakoreshwa mu kwemeza umwirondoro wawe wihariye."
+
+#: setup.php
+msgid "Private Key Path"
+msgstr "Inzira y'urufunguzo bwite"
+
+#: setup.php
+msgid "The path to the private key used for SSH authentication."
+msgstr "Inzira igana ku rufunguzo rwihariye rukoreshwa mu kwemeza umwirondoro wa SSH."
+
+#: setup.php
+msgid "Sequence"
+msgstr "Ikurikirana"
+
+#: setup.php
+msgid "Sequence of Item."
+msgstr "Ikurikirana ry'ikintu."
+
+#: setup.php
+msgid "General Site Settings"
+msgstr "Amagenamiterere rusange y'Ahantu"
+
+#: setup.php
+msgid "Please enter a reasonable name for this site."
+msgstr "Nyamuneka andika izina ririmo ubushishozi ry'aha hantu."
+
+#: setup.php
+msgid "Primary Customer Contact"
+msgstr "Uw'ibanze wo kuvugana na we ku mukiriya"
+
+#: setup.php
+msgid "The principal customer contact name and number for this site."
+msgstr "Izina na nimero by'umukiliya w'ingenzi wo kuvugana na we kuri aka hantu."
+
+#: setup.php
+msgid "NetOps Contact"
+msgstr "Uwo kuvugana muri NetOps"
+
+#: setup.php
+msgid "Please principal network support contact name and number for this site."
+msgstr "Nyamuneka izina na nimero by'umuyobozi w'ubufasha bw'urusobe kuri aha hantu."
+
+#: setup.php
+msgid "Facilities Contact"
+msgstr "Uburyo bwo kuvugana n'abashinzwe ibikorwaremezo"
+
+#: setup.php
+msgid "Please principal facilities/security contact name and number for this site."
+msgstr "Nyamuneka izina na nimero by'umuyobozi w'ibikorwa remezo/umutekano kuri aha hantu."
+
+#: setup.php
+msgid "Site Information"
+msgstr "Amakuru y'icyicaro"
+
+#: setup.php
+msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
+msgstr "Tanga amakuru ayo ari yo yose yihariye kuri aha hantu, mu buryo bwisanzuye, agufasha kuhacunga neza."
+
+#: setup.php
+msgid "General Mac Address Tracking Settings"
+msgstr "Amagenamiterere rusange yo gukurikirana Aderesi ya MAC"
+
+#: setup.php
+msgid "MAC Address"
+msgstr "Aderesi ya MAC"
+
+#: setup.php
+msgid "Please enter the MAC Address to be watched for."
+msgstr "Nyamuneka andika Aderesi ya MAC igomba gukurikiranwa."
+
+#: setup.php
+msgid "MAC Tracking Name/Email Subject"
+msgstr "Izina ryo gukurikirana MAC/Umutwe w'imeyili"
+
+#: setup.php
+msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
+msgstr "Nyamuneka andika izina ririmo ubushishozi ry'iyi nyandiko y'Ikurikirana rya MAC. Aya makuru azagaragara ku mutwe wa Imeyili yawe"
+
+#: setup.php
+msgid "Ticket number for cross referencing with your corporate help desk system(s)."
+msgstr "Nimero ya tike yo guhuza na sisitemu z'ubufasha bw'ikigo cyawe."
+
+#: setup.php
+msgid "Notification Schedule"
+msgstr "Gahunda y'imenyesha"
+
+#: setup.php
+msgid "Choose how often an Email should be generated for this Mac Watch item."
+msgstr "Hitamo inshuro Imeyili igomba gukorwa kuri iki kintu cya Mac Watch."
+
+#: setup.php
+msgid "First Occurrence Only"
+msgstr "Inshuro ya mbere gusa"
+
+#: setup.php
+msgid "All Occurrences"
+msgstr "Inshuro Zose Byabaye"
+
+#: setup.php
+msgid "Every Hour"
+msgstr "Buri saha"
+
+#: setup.php
+msgid "Email Addresses"
+msgstr "Aderesi z'Imeyili"
+
+#: setup.php
+msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
+msgstr "Andika aderesi z'Imeyili zitandukanyijwe n'akanyamakoma n'akadomo zizamenyeshwa aho iyi aderesi ya MAC iherereye."
+
+#: setup.php
+msgid "General Mac Address Authorization Settings"
+msgstr "Amagenamiterere rusange yo kwemerera Aderesi ya MAC"
+
+#: setup.php
+msgid "MAC Address Match"
+msgstr "Ihuza rya aderesi ya MAC"
+
+#: setup.php
+msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
+msgstr "Nyamuneka andika Aderesi ya MAC cyangwa interuro ihuza na Aderesi ya MAC igomba kwemererwa mu buryo bwikora. Niba wifuza kwemerera itsinda rya Aderesi za MAC, ushobora gukoresha ikimenyetso gisimbura cya '&#37;' ahantu hose muri Aderesi ya MAC."
+
+#: setup.php
+msgid "Please add a reason for this entry."
+msgstr "Nyamuneka ongeraho impamvu y'iyi nyandiko."
+

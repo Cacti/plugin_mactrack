@@ -1,0 +1,3597 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-18 18:36+0000\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Zulu\n"
+"Language: zu-ZA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
+msgstr "I-MacTrack ayikwazanga ukuqalisa isayithi layo elizenzakalelayo ngemva kwemizamo ephindiwe. Buyekeza ilogi le-Cacti ngaphambi kokuqhubeka."
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
+msgstr "I-MacTrack ayikwazanga ukuqalisa isayithi layo elizenzakalelayo. Buyekeza ilogi le-Cacti ngaphambi kokuqhubeka."
+
+#: lib/mactrack_activity.php
+msgid "Scanning devices"
+msgstr "Iskena amadivayisi"
+
+#: lib/mactrack_activity.php
+msgid "Waiting for the DNS resolver"
+msgstr "Ilinde isixazululi se-DNS"
+
+#: lib/mactrack_activity.php
+msgid "Transferring and aggregating scan results"
+msgstr "Ukudlulisa nokuhlanganisa imiphumela yokuskena"
+
+#: lib/mactrack_activity.php
+msgid "Maintaining port table partitions"
+msgstr "Ukunakekela izihlukaniso zethebula lembobo"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired port rows"
+msgstr "Isusa imigqa ye-port ephelelwe yisikhathi"
+
+#: lib/mactrack_activity.php
+msgid "Pruning scan dates"
+msgstr "Kuthenwa izinsuku zokuskena"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired IP rows"
+msgstr "Isusa imigqa ye-IP ephelelwe yisikhathi"
+
+#: lib/mactrack_activity.php
+msgid "Optimizing the IP table"
+msgstr "Ilungiselela ithebula le-IP"
+
+#: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
+#: mactrack_view_dot1x.php
+msgid "Idle"
+msgstr "Ayisebenzi"
+
+#: lib/mactrack_activity.php
+msgid "Upgrading: rebuilding aggregated ports"
+msgstr "Kuyathuthukiswa: kwakhiwa kabusha izimbobo ezihlanganisiwe"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "About %s rows left to copy (estimate)"
+msgstr "Cishe imigqa engu-%s esele ukuze ikopisheke (isilinganiso)"
+
+#: lib/mactrack_activity.php
+msgid "Repartitioning the port, IP and 802.1x tables"
+msgstr "Ukuhlukanisa kabusha amathebula embobo, e-IP nawe-802.1x"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "%d devices in this scan"
+msgstr "Amadivayisi angu-%d kulokhu kuskena"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "The process stopped during: %s"
+msgstr "Inqubo ime ngesikhathi se: %s"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "Scanning %d devices"
+msgstr "Iskena amadivayisi angu-%d"
+
+#: lib/mactrack_activity.php
+msgid "A database upgrade is running"
+msgstr "Ukuthuthukiswa kwesizindalwazi kuyaqhubeka"
+
+#: lib/mactrack_activity.php
+msgid "The port, IP and 802.1x table partitioning has not finished"
+msgstr "Ukuhlukaniswa kwamathebula embobo, e-IP kanye ne-802.1x akukaqedi"
+
+#: lib/mactrack_activity.php
+msgid "The aggregated ports rebuild has not finished"
+msgstr "Ukwakhiwa kabusha kwezimbobo ezihlanganisiwe akukapheli"
+
+#: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
+msgid "Running"
+msgstr "Iyasebenza"
+
+#: lib/mactrack_functions.php
+msgid "No method"
+msgstr "Ayikho indlela"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Success"
+msgstr "Ukuqinisekiswa Kuphumelele"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Failed"
+msgstr "Ukuqinisekisa Kuhlulekile"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Success"
+msgstr "Ukugunyazwa Kuphumelele"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Failed"
+msgstr "Ukugunyazwa Kuhlulekile"
+
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr "Akubonakalanga kuskena kwakamuva"
+
+#: lib/mactrack_functions.php
+msgid "Locally Admined MAC"
+msgstr "I-MAC Elawulwa Endaweni"
+
+#: lib/mactrack_functions.php
+msgid "Mactrack Device Tracking OUI Database Import Results"
+msgstr "Imiphumela Yokungeniswa Kwesizindalwazi se-OUI Sokulandelela Idivayisi ye-Mactrack"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from IEEE"
+msgstr "Ithola Isizindalwazi Se-OUI kwa-IEEE"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from the IEEE"
+msgstr "Ithola Isizindalwazi Se-OUI kwa-IEEE"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE Complete"
+msgstr "Ukulandwa kwedathabheyisi ye-OUI okuvela ku-IEEE kuqediwe"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE FAILED"
+msgstr "Ukulandwa kwedathabheyisi ye-OUI okuvela ku-IEEE KUHLULEKILE"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Entries Added/Updated in the database."
+msgstr "Kube nezingeno ezingu-'%d' Ezengeziwe/Ezibuyekeziwe kusizindalwazi."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Records Removed from the database."
+msgstr "Kube namarekhodi angu-'%d' Asusiwe kusizindalwazi."
+
+#: lib/mactrack_functions.php
+msgid "atifIndexes data collection complete"
+msgstr "Ukuqoqwa kwedatha ye-atifIndexes kuphelile"
+
+#: lib/mactrack_functions.php
+msgid "atPhysAddress data collection complete"
+msgstr "Ukuqoqwa kwedatha ye-atPhysAddress kuphelile"
+
+#: lib/mactrack_functions.php
+msgid "atNetAddress data collection complete"
+msgstr "Ukuqoqwa kwedatha ye-atNetAddress kuphelile"
+
+#: lib/mactrack_functions.php
+msgid "atEntries assembly complete."
+msgstr "Ukuhlanganiswa kwe-atEntries kuphelile."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "HOST: %s, IP address information collection complete"
+msgstr "UMSINGATHI: %s, ukuqoqwa kolwazi lwekheli le-IP kuqediwe"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php
+msgid "Rescan Device"
+msgstr "Skena Kabusha Idivayisi"
+
+#: lib/mactrack_functions.php
+msgid "View Non Interface Graphs"
+msgstr "Buka Amagrafu Okungewona Ezixhumi"
+
+#: lib/mactrack_functions.php
+msgid "No Non Interface Graphs in Cacti"
+msgstr "Awekho Amagrafu Angesiwo E-Interface ku-Cacti"
+
+#: lib/mactrack_functions.php
+msgid "View Interface Graphs"
+msgstr "Buka Amagrafu Esixhumi"
+
+#: lib/mactrack_functions.php
+msgid "No Interface Graphs in Cacti"
+msgstr "Awekho Amagrafu E-Interface ku-Cacti"
+
+#: lib/mactrack_functions.php
+msgid "Since Restart"
+msgstr "Kusukela Kuqalwe Kabusha"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Down"
+msgstr "Phansi"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Up"
+msgstr "Phezulu"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Unaliased"
+msgstr "Okungena-alias"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors"
+msgstr "Amaphutha"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards"
+msgstr "Okulahliwe"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Graphless"
+msgstr "Okungenagrafu"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Akwaziwa"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr "Kugunyaziwe"
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
+msgstr "Akugunyaziwe"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Data"
+msgstr "Idatha"
+
+#: lib/mactrack_functions.php
+msgid "Voice"
+msgstr "Izwi"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Rescan '%s'"
+msgstr "Skena Kabusha Idivayisi '%s'"
+
+#: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr "Ukuskena kabusha akukhiqizanga miphumela."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr "Ukuskenwa kabusha kwedivayisi '%s' kuqedwe ngamasekhondi angu-%0.2f."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site scan '%s'"
+msgstr "Ukuskena kwesayithi '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr "Ukuskena kwesayithi '%s' kuqediwe ngemizuzwana engu-%0.2f."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Enable '%s'"
+msgstr "Nika Amandla Idivayisi '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Disable '%s'"
+msgstr "Khubaza Idivayisi '%s'"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_macwatch.php
+#: mactrack_snmp.php mactrack_utilities.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
+#: setup.php
+msgid "N/A"
+msgstr "Akutholakali"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d Imizuzu"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d Amahora"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Days"
+msgstr "Izinsuku ezingu-%d"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Weeks"
+msgstr "Amaviki angu-%d"
+
+#: lib/mactrack_functions.php
+msgid "Not Recorded"
+msgstr "Akurekhodiwe"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
+msgstr "Isimo: Kuyasebenza, Izinqubo: %d, Inqubekelaphambili: %s, Isikhathi Sokusebenza Kokugcina: %2.1f"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
+msgstr "Isimo: Akusebenzi, Isikhathi Sokusebenza Kokugcina: imizuzwana engu-%2.1f, Izinqubo: izinqubo ezingu-%d, Amadivayisi: %d, Isikhathi Sokusebenza Esilandelayo: %s"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
+msgid "Disabled"
+msgstr "Kukhutshaziwe"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Scanning Rate: Every %s"
+msgstr "Izinga Lokuskena: Njalo nge-%s"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "View Interfaces"
+msgstr "Buka Izixhumi"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "Not Detected"
+msgstr "Akutholakalanga"
+
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr "Ideshibhodi"
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Sites"
+msgstr "Amasayithi"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Devices"
+msgstr "Amadivayisi"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "Izixhumi ezibonakalayo"
+
+#: lib/mactrack_functions.php
+msgid "IP Ranges"
+msgstr "Amabanga e-IP"
+
+#: lib/mactrack_functions.php setup.php
+msgid "IP Addresses"
+msgstr "Amakheli e-IP"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "Amakheli e-MAC"
+
+#: lib/mactrack_functions.php
+msgid "Dot1x"
+msgstr "Dot1x"
+
+#: lib/mactrack_functions.php mactrack_view_graphs.php
+msgid "Graphs"
+msgstr "Amagrafu"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Search"
+msgstr "Sesha"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_devices.php mactrack_view_ips.php
+#: setup.php
+msgid "Default"
+msgstr "Okuzenzakalelayo"
+
+#: lib/mactrack_functions.php
+msgid "Show Device Details"
+msgstr "Bonisa Imininingwane Yedivayisi"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Go"
+msgstr "Hamba"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Clear"
+msgstr "Sula"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Export"
+msgstr "Khipha"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+msgid "Site"
+msgstr "Isayithi"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_ips.php
+msgid "Any"
+msgstr "Noma yikuphi"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "SubType"
+msgstr "Uhlobo Olungaphansi"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgstr "Uqinisekile ukuthi ufuna ukususa yonke imiphumela ye-Port to MAC to IP kusistimu?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
+msgstr "Uqinisekile ukuthi ufuna ukususa imiphumela ye-Port to MAC to IP ephelelwe yisikhathi manje?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
+msgstr "Uqinisekile ukuthi ufuna ukuhlanza imisebenzi yokuskena ye-Mactrack egcinwe ku-cache?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Uqinisekile ukuthi ufuna ukususa yonke imiphumela Ehlanganisiwe ye-Port to MAC to IP kusistimu?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Uqinisekile ukuthi ufuna ukususa futhi wakhe kabusha yonke imiphumela Ehlanganisiwe ye-Port to MAC to IP kusistimu?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
+msgstr "Uqinisekile ukuthi ufuna ukulanda nokungenisa isizindalwazi se-IEEE Vendor MAC/OUI manje?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
+msgstr "Uqinisekile ukuthi ufuna ukwakha kabusha uhlu lwedethi yokuskena kusuka emiphumeleni egciniwe ye-Port kuya ku-MAC kuya ku-IP manje?"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
+msgstr "Yakha kabusha futhi uhlaziye ingxenye equkethe ukubonwa kwembobo kwakamuva, okuyiviki lamanje ngezingxenyeni zamaviki onke. Ithebula elingahlukanisiwe lilungiselelwa ngokugcwele. Ukuskena okuhleliwe kuyeqiwa ngenkathi lokhu kusebenza. Qhubeka?"
+
+#: lib/mactrack_functions.php
+msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
+msgstr "Qalisa lokhu kulungiswa ngaphandle kwamahora omsebenzi. Ukwakha kabusha kukopisha wonke umlando wamathebula echweba (ikheli le-MAC), ikheli le-IP kanye ne-802.1x ngokulandelana futhi kungathatha amahora. Ukuhlola okuhleliwe kuyeqiwa, ukulungiswa kwesizindalwazi kuyalinda, futhi ukusesha kwe-MAC, i-IP kanye ne-802.1x kubonisa umlayezo wokulungiswa kuze kuphele. Vumela isikhala sediski esikhululekile sekhophi yesibili yethebula ngalinye nezinkomba zalo. Qhubeka?"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Scan Results"
+msgstr "Susa Yonke Imiphumela Yokuskena"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Perform Database Maintenance"
+msgstr "Yenza Ukulungiswa Kwesizindalwazi"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Refresh Scanning Functions"
+msgstr "Vuselela Imisebenzi Yokuskena"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Aggregated Results"
+msgstr "Susa Yonke Imiphumela Ehlanganisiwe"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Perform Aggregate Table Rebuild"
+msgstr "Yenza Ukwakha Kabusha Ithebula Elihlanganisiwe"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild IEEE Vendor MAC/OUI Database"
+msgstr "Yakha Kabusha Isizindalwazi Se-MAC/OUI Somthengisi We-IEEE"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Rebuild Scan Dates"
+msgstr "Yakha Kabusha Izinsuku Zokuskena"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Optimize Port Table"
+msgstr "Lungiselela Ithebula Lesikhumulo"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Configure Port and IP Address Partitioning"
+msgstr "Misa Ukwehlukaniswa Kwembobo Nekheli Le-IP"
+
+#: lib/mactrack_partition_rebuild.php
+msgid "The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
+msgstr "Amathebula embobo, e-IP kanye ne-802.1x ayahlukaniswa kabusha, noma ukwakha kabusha akuzange kuqede, ngakho-ke umlando wawo awukwazi ukushintshwa manje. Zama futhi uma i-cli/upgrade_partitioning.php isiqedile."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished."
+msgstr "I-MacTrack isesimweni sokulungiswa ekusesheni ikheli le-IP, ikheli le-MAC ne-802.1x ngenkathi amathebula ayo omlando ehlukaniswa kabusha. Imiphumela ayiphelele kuze kube yilapho ukuhlukaniswa sekuphelile."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
+msgstr "I-MacTrack isesimweni sokulungiswa ekusesheni ikheli le-IP, ikheli le-MAC ne-802.1x ngoba ukuhlukaniswa kwamathebula ayo omlando akuphelanga. Imiphumela ayiphelele. Phinda uqhube cli/upgrade_partitioning.php ukuze uqhubeke."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "Maintenance Mode"
+msgstr "Imodi Yokulungisa"
+
+#: mactrack_actions.php
+#, php-format
+msgid "Mactrack Device: (%s) successfully updated"
+msgstr "Idivayisi ye-Mactrack: (%s) ibuyekezwe ngempumelelo"
+
+#: mactrack_actions.php
+msgid "Import into Mactrack Database"
+msgstr "Ngenisa Kudathabheyisi ye-Mactrack"
+
+#: mactrack_actions.php
+msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
+msgstr "Chofoza u-'Qhubeka' ukuze ungenise Idivayisi elandelayo ku-Mactrack? Sicela ucacise izinketho ezengeziwe zeDivayisi ye-Mactrack njengoba kunikezwe ngezansi."
+
+#: mactrack_actions.php
+msgid "We will use these devices SNMP options for the Mactrack Device as well."
+msgstr "Sizosebenzisa lezi zinketho ze-SNMP zamadivayisi nakwidivayisi ye-Mactrack futhi."
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Router"
+msgstr "Akusebenzi - I-Router"
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Switch/Hub"
+msgstr "Akusebenzi - I-Switch/Hub"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Delete"
+msgstr "Susa"
+
+#: mactrack_device_types.php mactrack_snmp.php
+msgid "Duplicate"
+msgstr "Phinda kabili"
+
+#: mactrack_device_types.php
+msgid "--dup--"
+msgstr "--dup--"
+
+#: mactrack_device_types.php
+msgid "You must select at least one device type."
+msgstr "Kufanele ukhethe okungenani uhlobo lwedivayisi olulodwa."
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Continue"
+msgstr "Qhubeka"
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to delete the following Device Type(s)."
+msgstr "Chofoza u-'Qhubeka' ukuze ususe Izinhlobo Zedivayisi ezilandelayo."
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
+msgstr "Chofoza u-'Qhubeka' ukuze wenze ikhophi Yezinhlobo Zedivayisi ezilandelayo. Ungashintsha incazelo yezinhlobo ezintsha zamadivayisi uma uthanda. Ngaphandle kwalokho, ungashintshi inani elingezansi futhi igama langempela lizokwenziwa kabusha ngesijobelelo esisha."
+
+#: mactrack_device_types.php
+msgid "Device Type Prefix:"
+msgstr "Isiqalo Sohlobo Lwedivayisi:"
+
+#: mactrack_device_types.php
+msgid "<description> (1)"
+msgstr "<description> (1)"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Cancel"
+msgstr "Khansela"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Return"
+msgstr "Buyela"
+
+#: mactrack_device_types.php
+msgid "New Type"
+msgstr "Uhlobo Olusha"
+
+#: mactrack_device_types.php
+msgid "Cisco"
+msgstr "Cisco"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "There were %d Device Types Added!"
+msgstr "Kube Nezinhlobo Zamadivayisi ezingu-%d Ezengeziwe!"
+
+#: mactrack_device_types.php
+msgid "No New Device Types Found!"
+msgstr "Azikho Izinhlobo Ezintsha Zedivayisi Ezitholakele!"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import Results"
+msgstr "Imiphumela Yokungenisa"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Cacti has imported the following items:"
+msgstr "I-Cacti ingenise izinto ezilandelayo:"
+
+#: mactrack_device_types.php
+msgid "Import Mactrack Device Types"
+msgstr "Ngenisa Izinhlobo Zamadivayisi ze-Mactrack"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from Local File"
+msgstr "Ngenisa Izinhlobo Zamadivayisi Kusuka Efayeleni Lendawo"
+
+#: mactrack_device_types.php
+msgid "Please specify the location of the CSV file containing your device type information."
+msgstr "Sicela ucacise indawo yefayela le-CSV elinolwazi lohlobo lwedivayisi yakho."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Overwrite Existing Data?"
+msgstr "Bhala Ngaphezu Kwedatha Ekhona?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
+msgstr "Ingabe inqubo yokungenisa kufanele ivunyelwe ukubhala phezu kwedatha ekhona? Sicela wazi, lokhu akusho ukususa umugqa omdala, kodwa ukushintsha imigqa ephindaphindiwe kuphela."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Allow Existing Rows to be Updated?"
+msgstr "Vumela Imigqa Ekhona ukuthi Ibuyekezwe?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Required File Format Notes"
+msgstr "Amanothi Efomethi Yefayela Edingekayo"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The file must contain a header row with the following column headings."
+msgstr "Ifayela kufanele liqukathe umugqa wesihloko onezihloko zamakholomu ezilandelayo."
+
+#: mactrack_device_types.php
+msgid " - A common name for the device.  For example Cisco 6509 Switch"
+msgstr " - Igama elivamile ledivayisi. Isibonelo, Cisco 6509 Switch"
+
+#: mactrack_device_types.php
+msgid " - The vendor who produces this device"
+msgstr " - Umthengisi okhiqiza le divayisi"
+
+#: mactrack_device_types.php
+msgid " - The type of device this is.  See the notes below for this integer value"
+msgstr " - Uhlobo lwedivayisi okuyilo lolu. Bheka amanothi angezansi ukuze uthole leli nani eliphelele"
+
+#: mactrack_device_types.php
+msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
+msgstr " - Iqoqo lezinhlamvu eliyingqayizivele elivela ku-snmp sysDescr elikhomba ngokukhethekile le divayisi"
+
+#: mactrack_device_types.php
+msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
+msgstr " - I-snmp sysObjectID eqondene nomthengisi ehlukanisa le divayisi kwelandelayo"
+
+#: mactrack_device_types.php
+msgid " - The scanning function that will be used to scan this device type"
+msgstr " - Umsebenzi wokuskena ozosetshenziswa ukuskena lolu hlobo lwedivayisi"
+
+#: mactrack_device_types.php
+msgid " - The IP scanning function that will be used to scan this device type"
+msgstr " - Umsebenzi wokuskena we-IP ozosetshenziswa ukuskena lolu hlobo lwedivayisi"
+
+#: mactrack_device_types.php
+msgid " - The 802.1x scanning function that will be used to scan this device type"
+msgstr " - Umsebenzi wokuskena we-802.1x ozosetshenziswa ukuskena lolu hlobo lwedivayisi"
+
+#: mactrack_device_types.php
+msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
+msgstr " - Uma inombolo ye-Serial yalolu hlobo lwedivayisi ingatholakala ngombuzo we-SNMP, engeza i-OID yayo lapha"
+
+#: mactrack_device_types.php
+msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
+msgstr " - Uma umsebenzi wakho wokuskena ungenalo ikhono lokuhlukanisa amaphothi e-trunk noma amaphothi okuxhuma, leli yinamba yephothi lokuqala lamaphothi omsebenzisi"
+
+#: mactrack_device_types.php
+msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
+msgstr " - Kuyafana ne-lowPort ngaphandle kokuthi leli yinamba yephothi lomsebenzisi enenamba ephezulu"
+
+#: mactrack_device_types.php
+msgid " - Disabled type is not used"
+msgstr " - Uhlobo olukhutshaziwe alusetshenziswa"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The primary key for this table is a combination of the following three fields:"
+msgstr "Ukhiye oyinhloko waleli thebula yinhlanganisela yale mikhakha emithathu elandelayo:"
+
+#: mactrack_device_types.php
+msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
+msgstr "Ngakho-ke, uma uzama ukungenisa izinhlobo zamadivayisi eziphindwe kabili, idatha ekhona izobuyekezwa ngolwazi olusha."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid " is an integer field and must be one of the following:"
+msgstr " yinkambu yenani eliphelele futhi kufanele ibe enye yezilandelayo:"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "1 - Switch/Hub"
+msgstr "1 - I-Switch/I-Hub"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "2 - Switch/Router"
+msgstr "2 - I-Switch/I-Router"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "3 - Router"
+msgstr "3 - I-Router"
+
+#: mactrack_device_types.php
+msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
+msgstr "Uhlobo lwedivayisi lwedivayisi lunqunywa ngokuskena i-ejenti yayo ye-SNMP ukuthola i-sysObjectID ne-sysDescription bese luqhathaniswa namanani asesizindalwazini sezinhlobo zamadivayisi. Ukufana kokuqala okutholakala esizindalwazini kusetshenziswa ukuthi izoskenwa kanjani. Ngakho-ke, kubaluleke kakhulu ukuthi ukhethe i-sysObjectID_match, i-sysDescr_match, kanye nomsebenzi wokuskena ovumelekile wamadivayisi akho."
+
+#: mactrack_device_types.php mactrack_devices.php setup.php
+msgid "Switch/Hub"
+msgstr "I-Switch/Hub"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Switch/Router"
+msgstr "I-Switch/Router"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Router"
+msgstr "I-Router"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
+msgstr "UMUGQA WESIHLOKO UQHUTSHWE KAHLE:  <br>Amakholomu atholiwe yilawa: %s"
+
+#: mactrack_device_types.php mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
+msgstr "IPHUTHA LOKUQHUBA UMUGQA WESIHLOKO: Kuntuleka inkambu edingekayo <br>Amakholomu atholiwe yilawa: %s"
+
+#: mactrack_device_types.php
+msgid "Unknown Assume \"Switch/Hub\""
+msgstr "Akwaziwa Thatha ngokuthi \"Switch/Hub\""
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "UKUFAKA KUPHUMELELE: Umthengisi: %s, Incazelo: %s, Uhlobo: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "UKUFAKA KUHLULEKILE: Umthengisi: %s, Incazelo: %s, Uhlobo: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "UKUFAKA KWEQIWE, KUVELE KUKHONA: Umthengisi: %s, Incazelo: %s, Uhlobo: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "Mactrack Device Types [edit: %s]"
+msgstr "Izinhlobo Zedivayisi ye-Mactrack [hlela: %s]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Types [new]"
+msgstr "Izinhlobo Zedivayisi ye-Mactrack [okusha]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Type Filters"
+msgstr "Izihlungi Zohlobo Lwedivayisi ye-Mactrack"
+
+#: mactrack_device_types.php
+msgid "Device Type Description"
+msgstr "Incazelo Yohlobo Lwedivayisi"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Device Type"
+msgstr "Uhlobo Lwedivayisi"
+
+#: mactrack_device_types.php
+msgid "Port Scanner"
+msgstr "Iskena Samachweba"
+
+#: mactrack_device_types.php
+msgid "IP Scanner"
+msgstr "Iskena se-IP"
+
+#: mactrack_device_types.php
+msgid "Dot1x Scanner"
+msgstr "Iskena se-Dot1x"
+
+#: mactrack_device_types.php
+msgid "sysDescription Match"
+msgstr "Ukufana kwe-sysDescription"
+
+#: mactrack_device_types.php
+msgid "Vendor OID Match"
+msgstr "Ukufana kwe-OID Yomthengisi"
+
+#: mactrack_device_types.php setup.php
+msgid "Device Types"
+msgstr "Izinhlobo Zedivayisi"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "No"
+msgstr "Cha"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "Yes"
+msgstr "Yebo"
+
+#: mactrack_device_types.php
+msgid "No Mactrack Device Types Found"
+msgstr "Azikho Izinhlobo Zedivayisi Ye-Mactrack Ezitholakele"
+
+#: mactrack_device_types.php
+msgid "Submit Query"
+msgstr "Thumela Umbuzo"
+
+#: mactrack_device_types.php
+msgid "Clear Filtered Results"
+msgstr "Sula Imiphumela Ehlungiwe"
+
+#: mactrack_device_types.php
+msgid "Rescan"
+msgstr "Skena Kabusha"
+
+#: mactrack_device_types.php
+msgid "Scan Active Devices for Unknown Device Types"
+msgstr "Skena Amadivayisi Asebenzayo ukuze uthole Izinhlobo Zamadivayisi Ezingaziwa"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import"
+msgstr "Ngenisa"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from a CSV File"
+msgstr "Ngenisa Izinhlobo Zamadivayisi Kusuka Efayeleni le-CSV"
+
+#: mactrack_device_types.php
+msgid "Export Device Types to Share with Others"
+msgstr "Khipha Izinhlobo Zedivayisi Ukuze Wabelane Nabanye"
+
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Vendor"
+msgstr "Umthengisi"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php setup.php
+msgid "All"
+msgstr "Konke"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
+msgid "Type"
+msgstr "Uhlobo"
+
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Enabled"
+msgstr "Kunikwe amandla"
+
+#: mactrack_devices.php
+msgid "Enable"
+msgstr "Nika amandla"
+
+#: mactrack_devices.php mactrack_macwatch.php
+msgid "Disable"
+msgstr "Khubaza"
+
+#: mactrack_devices.php
+msgid "Change SNMP Options"
+msgstr "Shintsha Izinketho ze-SNMP"
+
+#: mactrack_devices.php
+msgid "Change Device Port Values"
+msgstr "Shintsha Amanani Embobo Yedivayisi"
+
+#: mactrack_devices.php
+msgid "Connect to Cacti Host via Hostname"
+msgstr "Xhuma Kumsingathi We-Cacti Ngegama Lomsingathi"
+
+#: mactrack_devices.php
+msgid "Copy SNMP Settings from Cacti Host"
+msgstr "Kopisha Izilungiselelo Ze-SNMP Kumsingathi We-Cacti"
+
+#: mactrack_devices.php
+msgid "You must select at least one device."
+msgstr "Kufanele ukhethe okungenani idivayisi eyodwa."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to enable the following devices."
+msgstr "Chofoza u-'Qhubeka' ukuze unike amandla amadivayisi alandelayo."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to disable the following devices."
+msgstr "Chofoza u-'Qhubeka' ukuze ukhubaze amadivayisi alandelayo."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Chofoza u-'Qhubeka' ukuze ushintshe amapharamitha e-SNMP amadivayisi alandelayo, maka ibhokisi eliseduze kwezinkambu ofuna ukuzibuyekeza, bese ugcwalisa inani elisha."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Chofoza u-'Qhubeka' ukuze ushintshe amapharamitha embobo ephezulu noma ephansi amadivayisi alandelayo, maka ibhokisi eliseduze kwezinkambu ofuna ukuzibuyekeza, bese ugcwalisa inani elisha."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
+msgstr "Chofoza u-'Qhubeka' ukuze uxhume amadivayisi alandelayo kuDivayisi yawo ye-Cacti efanele. Ubuhlobo buzokwakhiwa ngamagama omsingathi afanayo. Incazelo izobuyekezwa nayo."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
+msgstr "Chofoza u-'Qhubeka' ukuze ukopishe Izilungiselelo ze-SNMP kusukela kuDivayisi ye-Cacti exhunyiwe uye kuDivayisi ye-Mactrack. Wonke Amadivayisi angaxhunyiwe azoyekwa ngokuthula. Ukuzama kabusha kwe-SNMP kuzothathwa ekuzameni kabusha kwe-Ping."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to delete the following Devices"
+msgstr "Chofoza u-'Qhubeka' ukuze ususe Amadivayisi alandelayo"
+
+#: mactrack_devices.php
+msgid "Import Mactrack Devices"
+msgstr "Ngenisa Amadivayisi e-Mactrack"
+
+#: mactrack_devices.php
+msgid "Import Devices from Local File"
+msgstr "Ngenisa Amadivayisi Kusuka Efayeleni Lendawo"
+
+#: mactrack_devices.php
+msgid "Please specify the location of the CSV file containing your device information."
+msgstr "Sicela ucacise indawo yefayela le-CSV elinolwazi lwedivayisi yakho."
+
+#: mactrack_devices.php
+msgid " - The SiteID known to Mactrack for this device"
+msgstr " - I-SiteID eyaziwa yi-Mactrack yale divayisi"
+
+#: mactrack_devices.php
+msgid " - A simple name for the device.  For example Cisco 6509 Switch"
+msgstr " - Igama elilula ledivayisi. Isibonelo, Cisco 6509 Switch"
+
+#: mactrack_devices.php
+msgid " - The IP Address or DNS Name for the device"
+msgstr " - Ikheli le-IP noma Igama le-DNS ledivayisi"
+
+#: mactrack_devices.php
+msgid " - More detailed information about the device, including location, environmental conditions, etc."
+msgstr " - Ulwazi oluningiliziwe mayelana nedivayisi, okuhlanganisa indawo, izimo zemvelo, njll."
+
+#: mactrack_devices.php
+msgid " - A list of ports that should not be scanned for user devices"
+msgstr " - Uhlu lwamaphothi okungafanele askenelwe amadivayisi omsebenzisi"
+
+#: mactrack_devices.php
+msgid " - Redundant information indicating the intended device type.  See below for valid values."
+msgstr " - Ulwazi olwengeziwe olubonisa uhlobo lwedivayisi oluhlosiwe. Bheka ngezansi ukuze uthole amanani avumelekile."
+
+#: mactrack_devices.php
+msgid " - Id of a set of SNMP options"
+msgstr " - I-ID yeqoqo lezinketho ze-SNMP"
+
+#: mactrack_devices.php
+msgid " - The current snmp read string for the device"
+msgstr " - Uchungechunge lwamanje lokufunda lwe-snmp lwedivayisi"
+
+#: mactrack_devices.php
+msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
+msgstr " - Inguqulo ye-snmp ofisa ukuskena ngayo le divayisi. Amanani avumelekile ngu-1, 2 no-3"
+
+#: mactrack_devices.php
+msgid " - The UDP port that the snmp agent is running on"
+msgstr " - Iphothi le-UDP lapho i-ejenti ye-snmp isebenza khona"
+
+#: mactrack_devices.php
+msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
+msgstr " - Isikhathi sokuphelelwa yisikhathi ngama-millisecond sokulinda impendulo ye-snmp ngaphambi kokuzama futhi"
+
+#: mactrack_devices.php
+msgid " - The number of times to retry a snmp request before giving up"
+msgstr " - Inani lezikhathi zokuzama futhi isicelo se-snmp ngaphambi kokuyeka"
+
+#: mactrack_devices.php
+msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
+msgstr " - Inani elicacisiwe lama-OID angatholakala esicelweni esisodwa se-SNMP Get"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP username"
+msgstr " - SNMP V3: Igama lomsebenzisi le-SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP password"
+msgstr " - SNMP V3: Iphasiwedi ye-SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP authentication protocol"
+msgstr " - SNMP V3: Iphrothokholi yokuqinisekisa ye-SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy passphrase"
+msgstr " - SNMP V3: Umusho wokudlula wobumfihlo we-SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy protocol"
+msgstr " - SNMP V3: Iphrothokholi yobumfihlo ye-SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP context"
+msgstr " - SNMP V3: Umongo we-SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP engine id"
+msgstr " - SNMP V3: I-ID yenjini ye-SNMP"
+
+#: mactrack_devices.php
+msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
+msgstr "Ngakho-ke, uma uzama ukungenisa amadivayisi aphindwe kabili, kuzobuyekezwa kuphela idatha oyicacisile."
+
+#: mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
+msgstr "UMUGQA WESIHLOKO UQHUTSHWE KAHLE: <br>Amakholomu atholiwe yilawa: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "UKUFAKA KUPHUMELELE: Igama Lomsingathi: I-SiteID: %s, Igama Ledivayisi: %s, Igama Lomsingathi %s, Imbobo ye-SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "UKUFAKA KUHLULEKILE: I-SiteID: %s, Igama Ledivayisi: %s, Igama Lomsingathi %s, Imbobo ye-SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "UKUFAKA KWEQIWE, KUVELE KUKHONA: I-SiteID: %s, Igama Ledivayisi: %s, Igama Lomsingathi %s, Imbobo ye-SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "Mactrack Devices [edit: %s]"
+msgstr "Amadivayisi e-Mactrack [hlela: %s]"
+
+#: mactrack_devices.php
+msgid "Mactrack Devices [new]"
+msgstr "Amadivayisi e-Mactrack [okusha]"
+
+#: mactrack_devices.php
+msgid "SNMP Information"
+msgstr "Ulwazi lwe-SNMP"
+
+#: mactrack_devices.php
+msgid "System:"
+msgstr "Uhlelo:"
+
+#: mactrack_devices.php
+msgid "Uptime:"
+msgstr "Isikhathi sokusebenza:"
+
+#: mactrack_devices.php
+msgid "Hostname:"
+msgstr "Igama lomsingathi:"
+
+#: mactrack_devices.php
+msgid "ObjectID:"
+msgstr "I-ID yento:"
+
+#: mactrack_devices.php
+msgid "Mactrack Device Filters"
+msgstr "Izihlungi Zedivayisi ye-Mactrack"
+
+#: mactrack_devices.php mactrack_view_devices.php setup.php
+msgid "Device Name"
+msgstr "Igama Ledivayisi"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Site Name"
+msgstr "Igama Lesayithi"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Status"
+msgstr "Isimo"
+
+#: mactrack_devices.php mactrack_view_devices.php mactrack_view_interfaces.php
+#: setup.php
+msgid "Hostname"
+msgstr "Igama Lomsingathi"
+
+#: mactrack_devices.php
+msgid "Total IPs"
+msgstr "Inani Eliphelele lama-IP"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports"
+msgstr "Izimbobo Zabasebenzisi"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports Up"
+msgstr "Izimbobo Zabasebenzisi Ezisebenzayo"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Trunk Ports"
+msgstr "Amachweba E-Trunk"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Active Macs"
+msgstr "Ama-MAC Asebenzayo"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Last Duration"
+msgstr "Ubude Besikhathi Sokugcina"
+
+#: mactrack_devices.php
+msgid "No Mactrack Devices"
+msgstr "Awakho Amadivayisi E-Mactrack"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: setup.php
+msgid "None"
+msgstr "Akukho"
+
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
+msgid "Error"
+msgstr "Iphutha"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "No Cacti Link"
+msgstr "Asikho Isixhumanisi Se-Cacti"
+
+#: mactrack_macauth.php
+msgid "You must select at least one Authorized Mac to delete."
+msgstr "Kufanele ukhethe okungenani i-MAC Egunyaziwe eyodwa ozoyisusa."
+
+#: mactrack_macauth.php
+msgid "Click 'Continue' to delete the following Authorized Mac's?"
+msgstr "Chofoza u-'Qhubeka' ukuze ususe ama-MAC Agunyaziwe alandelayo?"
+
+#: mactrack_macauth.php
+#, php-format
+msgid "Mactrack MacAuth [edit: %s]"
+msgstr "I-Mactrack MacAuth [hlela: %s]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth [new]"
+msgstr "I-Mactrack MacAuth [okusha]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth Filters"
+msgstr "Izihlungi ze-MacAuth ye-Mactrack"
+
+#: mactrack_macauth.php mactrack_macwatch.php
+msgid "Mac Address"
+msgstr "Ikheli le-Mac"
+
+#: mactrack_macauth.php setup.php
+msgid "Reason"
+msgstr "Isizathu"
+
+#: mactrack_macauth.php
+msgid "Added/Modified"
+msgstr "Kwengeziwe/Kushintshiwe"
+
+#: mactrack_macauth.php
+msgid "By"
+msgstr "Ngu"
+
+#: mactrack_macauth.php
+msgid "Authorized Mac Addresses"
+msgstr "Amakheli e-MAC Agunyaziwe"
+
+#: mactrack_macauth.php
+msgid "No Authorized Mac Addresses Found"
+msgstr "Awekho Amakheli E-MAC Agunyaziwe Atholiwe"
+
+#: mactrack_macauth.php mactrack_vendormacs.php mactrack_view_macs.php
+msgid "MAC's"
+msgstr "Ama-MAC"
+
+#: mactrack_macwatch.php
+msgid "Click 'Continue' to delete the following watched Mac's?"
+msgstr "Chofoza u-'Qhubeka' ukuze ususe ama-MAC aqashiwe alandelayo?"
+
+#: mactrack_macwatch.php
+#, php-format
+msgid "Mactrack MacWatch [edit: %s]"
+msgstr "I-Mactrack MacWatch [hlela: %s]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch [new]"
+msgstr "I-Mactrack MacWatch [okusha]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch Filters"
+msgstr "Izihlungi ze-MacWatch ye-Mactrack"
+
+#: mactrack_macwatch.php
+msgid "Watch Name"
+msgstr "Igama Lokubuka"
+
+#: mactrack_macwatch.php setup.php
+msgid "Ticket Number"
+msgstr "Inombolo Yethikithi"
+
+#: mactrack_macwatch.php
+msgid "First Seen"
+msgstr "Kubonwe Okokuqala"
+
+#: mactrack_macwatch.php
+msgid "Last Seen"
+msgstr "Kubonwe Kokugcina"
+
+#: mactrack_macwatch.php
+msgid "Watches"
+msgstr "Okubukwayo"
+
+#: mactrack_macwatch.php
+msgid "No Mactrack Watched Macs Found"
+msgstr "Awekho Ama-MAC Abukiwe E-Mactrack Atholakele"
+
+#: mactrack_sites.php
+msgid "Click 'Continue' to delete the following Site(s)?"
+msgstr "Chofoza u-'Qhubeka' ukuze ususe Amasayithi alandelayo?"
+
+#: mactrack_sites.php
+msgid "You must select at least one site."
+msgstr "Kufanele ukhethe okungenani isayithi elilodwa."
+
+#: mactrack_sites.php
+#, php-format
+msgid "Mactrack Site [edit: %s]"
+msgstr "Isayithi ye-Mactrack [hlela: %s]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site [new]"
+msgstr "Isayithi ye-Mactrack [okusha]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site Filters"
+msgstr "Izihlungi Zesayithi ye-Mactrack"
+
+#: mactrack_sites.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "Total IP's"
+msgstr "Isamba Sama-IP"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "MACS Found"
+msgstr "Ama-MAC Atholiwe"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Device Errors"
+msgstr "Amaphutha Edivayisi"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "No Mactrack Sites Found"
+msgstr "Awekho Amasayithi E-Mactrack Atholakele"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Devices"
+msgstr "Isamba Samadivayisi"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total User Ports"
+msgstr "Isamba Samachweba Omsebenzisi"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Oper Ports"
+msgstr "Isamba Samachweba Asebenzayo"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Trunks"
+msgstr "Isamba Sama-Trunk"
+
+#: mactrack_snmp.php
+msgid "You must select at least one SNMP Option."
+msgstr "Kufanele ukhethe okungenani Inketho ye-SNMP eyodwa."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to delete the following SNMP Option(s)."
+msgstr "Chofoza u-'Qhubeka' ukuze ususe Inketho noma Izinketho ze-SNMP ezilandelayo."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
+msgstr "Chofoza u-'Qhubeka' ukuze wenze ikhophi Yezinketho ze-SNMP ezilandelayo. Ungashintsha ifomethi yesihloko Yezinketho ze-SNMP ezintsha uma uthanda."
+
+#: mactrack_snmp.php
+msgid "Name Format:"
+msgstr "Ifomethi Yegama:"
+
+#: mactrack_snmp.php
+msgid "<name> (1)"
+msgstr "<name> (1)"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Options [edit %s]"
+msgstr "Izinketho ze-SNMP [hlela %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Options [new]"
+msgstr "Izinketho ze-SNMP [okusha]"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Option Set [edit: %s]"
+msgstr "Iqoqo Lezinketho ze-SNMP [hlela: %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Option Set [new]"
+msgstr "Iqoqo Lezinketho ze-SNMP [okusha]"
+
+#: mactrack_snmp.php setup.php
+msgid "Mactrack SNMP Options"
+msgstr "Izinketho ze-SNMP ye-Mactrack"
+
+#: mactrack_snmp.php
+msgid "Item"
+msgstr "Into"
+
+#: mactrack_snmp.php setup.php
+msgid "Version"
+msgstr "Inguqulo"
+
+#: mactrack_snmp.php setup.php
+msgid "Community"
+msgstr "Umphakathi"
+
+#: mactrack_snmp.php setup.php
+msgid "Port"
+msgstr "Imbobo"
+
+#: mactrack_snmp.php setup.php
+msgid "Timeout"
+msgstr "Ukuphela Kwesikhathi"
+
+#: mactrack_snmp.php setup.php
+msgid "Retries"
+msgstr "Ukuzama Kabusha"
+
+#: mactrack_snmp.php
+msgid "Max OIDs"
+msgstr "Ama-OID Aphezulu"
+
+#: mactrack_snmp.php mactrack_view_dot1x.php
+msgid "Username"
+msgstr "Igama lomsebenzisi"
+
+#: mactrack_snmp.php
+msgid "Auth Proto"
+msgstr "Iphrothokholi Yokuqinisekisa"
+
+#: mactrack_snmp.php
+msgid "Priv Proto"
+msgstr "Iphrothokholi Yobumfihlo"
+
+#: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Actions"
+msgstr "Izenzo"
+
+#: mactrack_snmp.php
+msgid "No SNMP Items Found"
+msgstr "Azikho Izinto Ze-SNMP Ezitholakele"
+
+#: mactrack_snmp.php
+msgid "Title of SNMP Option Set"
+msgstr "Isihloko Sesethi Yezinketho Ze-SNMP"
+
+#: mactrack_snmp.php
+msgid "SNMP Settings"
+msgstr "Izilungiselelo ze-SNMP"
+
+#: mactrack_snmp.php
+msgid "No SNMP Option Sets Found"
+msgstr "Awekho Amasethi Enketho Ye-SNMP Atholakele"
+
+#: mactrack_snmp.php
+msgid "Options"
+msgstr "Izinketho"
+
+#: mactrack_utilities.php
+msgid "Mactrack Database Results"
+msgstr "Imiphumela Yesizindalwazi se-Mactrack"
+
+#: mactrack_utilities.php
+msgid "Mactrack Process Status"
+msgstr "Isimo Senqubo ye-Mactrack"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Refresh"
+msgstr "Vuselela"
+
+#: mactrack_utilities.php
+msgid "Current Process Status"
+msgstr "Isimo Samanje Senqubo"
+
+#: mactrack_utilities.php
+msgid "The Mactrack Poller is:"
+msgstr "I-Poller ye-Mactrack:"
+
+#: mactrack_utilities.php
+msgid "Running Processes:"
+msgstr "Izinqubo Ezisebenzayo:"
+
+#: mactrack_utilities.php
+msgid "Last Time Poller Started:"
+msgstr "Isikhathi Sokugcina I-Poller Eqale Ngaso:"
+
+#: mactrack_utilities.php
+msgid "Poller Frequency:"
+msgstr "Ukuvama kwe-Poller:"
+
+#: mactrack_utilities.php
+msgid "Approx. Next Runtime:"
+msgstr "Isikhathi Esilinganiselwe Sokusebenza Okulandelayo:"
+
+#: mactrack_utilities.php
+msgid "Database Maintenance Information"
+msgstr "Ulwazi Lokunakekelwa Kwedathabheyisi"
+
+#: mactrack_utilities.php
+msgid "Last DB Maintenance Time:"
+msgstr "Isikhathi Sokugcina Sokunakekelwa Kwe-DB:"
+
+#: mactrack_utilities.php
+msgid "Next DB Maintenance Time:"
+msgstr "Isikhathi Esilandelayo Sokulungisa I-DB:"
+
+#: mactrack_utilities.php
+msgid "Run Time Details"
+msgstr "Imininingwane Yesikhathi Sokusebenza"
+
+#: mactrack_utilities.php
+msgid "Last Poller Runtime:"
+msgstr "Isikhathi Sokusebenza Se-Poller Yokugcina:"
+
+#: mactrack_utilities.php
+msgid "Last Poller Maintenance Runtime:"
+msgstr "Isikhathi Sokusebenza Sokunakekelwa Kwe-Poller Yokugcina:"
+
+#: mactrack_utilities.php
+msgid "Maximum Concurrent Processes:"
+msgstr "Inani Eliphezulu Lezinqubo Ezisebenza Kanyekanye:"
+
+#: mactrack_utilities.php
+msgid "processes"
+msgstr "izinqubo"
+
+#: mactrack_utilities.php
+msgid "Maximum Per Device Scan Time:"
+msgstr "Isikhathi Esiphezulu Sokuskena Idivayisi Ngayinye:"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "minutes"
+msgstr "imizuzu"
+
+#: mactrack_utilities.php
+msgid "DNS Configuration Information"
+msgstr "Ulwazi Lokumiswa Kwe-DNS"
+
+#: mactrack_utilities.php
+msgid "Reverse DNS Resolution is"
+msgstr "Ukuxazululwa kwe-Reverse DNS"
+
+#: mactrack_utilities.php
+msgid "Primary DNS Server:"
+msgstr "Iseva ye-DNS Eyinhloko:"
+
+#: mactrack_utilities.php
+msgid "Secondary DNS Server:"
+msgstr "Iseva ye-DNS Yesibili:"
+
+#: mactrack_utilities.php
+msgid "DNS Resolution Timeout:"
+msgstr "Isikhathi Sokuphela Kokuxazulula I-DNS:"
+
+#: mactrack_utilities.php
+msgid "milliseconds"
+msgstr "amamilisekhondi"
+
+#: mactrack_utilities.php
+msgid "Running Process Summary"
+msgstr "Isifinyezo Sezinqubo Ezisebenzayo"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Not Running"
+msgstr "Isixazululi se-DNS Asisebenzi"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Running"
+msgstr "Isixazululi se-DNS Siyasebenza"
+
+#: mactrack_utilities.php
+msgid "Date Started"
+msgstr "Usuku Okwaqalwa Ngalo"
+
+#: mactrack_utilities.php
+msgid "Completed"
+msgstr "Kuqediwe"
+
+#: mactrack_utilities.php
+msgid "Waiting"
+msgstr "Ilindile"
+
+#: mactrack_utilities.php
+msgid "Other"
+msgstr "Okunye"
+
+#: mactrack_utilities.php
+msgid "Current Activity"
+msgstr "Umsebenzi Wamanje"
+
+#: mactrack_utilities.php
+msgid "State:"
+msgstr "Isimo:"
+
+#: mactrack_utilities.php
+msgid "Since:"
+msgstr "Kusukela:"
+
+#: mactrack_utilities.php
+msgid "Detail:"
+msgstr "Imininingwane:"
+
+#: mactrack_utilities.php
+msgid "Last Skipped Poller Run:"
+msgstr "Ukusebenza Kwe-Poller Okweqiwe Kokugcina:"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance Steps"
+msgstr "Izinyathelo Zokugcina Zokunakekelwa"
+
+#: mactrack_utilities.php
+msgid "Seconds"
+msgstr "Amasekhondi"
+
+#: mactrack_utilities.php
+msgid "Step"
+msgstr "Isinyathelo"
+
+#: mactrack_utilities.php
+msgid "Table Sizes"
+msgstr "Amasayizi Ethebula"
+
+#: mactrack_utilities.php
+msgid "Free"
+msgstr "Okukhululekile"
+
+#: mactrack_utilities.php
+msgid "Index"
+msgstr "Inkomba"
+
+#: mactrack_utilities.php
+msgid "Rows (estimate)"
+msgstr "Imigqa (isilinganiso)"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Ithebula"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database runs on another host"
+msgstr "Akwaziwa: isizindalwazi sisebenza komunye umsingathi"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database data directory cannot be found from this host"
+msgstr "Akwaziwa: uhla lwemibhalo lwedatha yesizindalwazi alutholakali kusuka kulo msingathi"
+
+#: mactrack_utilities.php
+msgid "Database Disk Free:"
+msgstr "Isikhala Esikhululekile Sediski Yedathabheyisi:"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the database: %s"
+msgstr "Inani elilandelayo lamarekhodi lisusiwe kudathabheyisi: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s"
+msgstr "Inani elilandelayo lamarekhodi lisusiwe ethebulini elihlanganisiwe: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
+msgstr "Inani elilandelayo lamarekhodi lisusiwe ethebulini elihlanganisiwe: %s. Futhi amarekhodi angu-%s azokwengezwa."
+
+#: mactrack_utilities.php
+msgid "Mactrack Scan Date Rebuild Results"
+msgstr "Imiphumela Yokwakhiwa Kabusha Kosuku Lokuskena lwe-Mactrack"
+
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr "Ukwakha kabusha idethi yokuskena kuhlulekile. Hlola ilogi ye-Cacti bese uzama futhi."
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Scan dates rebuilt: %d"
+msgstr "Izinsuku zokuskena ezakhiwe kabusha: %d"
+
+#: mactrack_utilities.php
+msgid "A scan or a port table conversion is running. Try again when it has finished."
+msgstr "Ukuhlola noma ukuguqulwa kwethebula le-port kuyaqhubeka. Zama futhi uma sekuqediwe."
+
+#: mactrack_utilities.php setup.php
+msgid "One per Scan"
+msgstr "Kunye Ngokuskena Ngakunye"
+
+#: mactrack_utilities.php setup.php
+msgid "Hourly"
+msgstr "Njalo ngehora"
+
+#: mactrack_utilities.php setup.php
+msgid "Daily"
+msgstr "Nsuku Zonke"
+
+#: mactrack_utilities.php setup.php
+msgid "Weekly"
+msgstr "Maviki Onke"
+
+#: mactrack_utilities.php
+msgid "Not partitioned"
+msgstr "Akuhlukanisiwe"
+
+#: mactrack_utilities.php
+msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
+msgstr "Izahlukaniso zansuku zonke ezivela ekukhishweni kwangaphambilini kwe-MacTrack. Kudingeka ukuguqulwa."
+
+#: mactrack_utilities.php
+msgid "Partitioned by scan date"
+msgstr "Kuhlukaniswe ngedethi yokuskena"
+
+#: mactrack_utilities.php
+msgid "Unrecognized partitions. MacTrack makes no partition changes."
+msgstr "Izingxenye ezingaqashelwa. I-MacTrack ayenzi zinguquko ezingxenyeni."
+
+#: mactrack_utilities.php
+msgid "Port Table Partitions"
+msgstr "Izingxenye Zetebula Lamachweba"
+
+#: mactrack_utilities.php
+msgid "Layout"
+msgstr "Isakhiwo"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%d of at most %d"
+msgstr "%d kokungaphezu kuka-%d"
+
+#: mactrack_utilities.php
+msgid "Partitions"
+msgstr "Izingxenye"
+
+#: mactrack_utilities.php
+msgid "Oldest Partition"
+msgstr "Isahlukaniso Esidala Kakhulu"
+
+#: mactrack_utilities.php
+msgid "Newest Partition"
+msgstr "Ingxenye Entsha Kakhulu"
+
+#: mactrack_utilities.php
+msgid "Partitions Cover Scans Before"
+msgstr "Izingxenye Zihlanganisa Ukuskena Ngaphambi"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s, coarser than the setting because %d partitions would exceed the limit"
+msgstr "%s, okubanzi kunesilungiselelo ngoba izigaba ezingu-%d zingeqa umkhawulo"
+
+#: mactrack_utilities.php setup.php
+msgid "Port and IP Address Partition Size"
+msgstr "Usayizi Wengxenye Yechweba Nekheli le-IP"
+
+#: mactrack_utilities.php
+msgid "Pending Exchange"
+msgstr "Ukushintshana Okulindile"
+
+#: mactrack_utilities.php
+msgid "Load Path"
+msgstr "Indlela Yokulayisha"
+
+#: mactrack_utilities.php
+msgid "PHP batches"
+msgstr "Amaqoqo e-PHP"
+
+#: mactrack_utilities.php
+msgid "Last Scan Note"
+msgstr "Inothi Lokuskena Kokugcina"
+
+#: mactrack_utilities.php
+msgid "Rebuild"
+msgstr "Yakha Kabusha"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Running since %s"
+msgstr "Isebenza kusukela ngo-%s"
+
+#: mactrack_utilities.php
+msgid "Last Rebuild"
+msgstr "Ukwakhiwa Kabusha Kokugcina"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d rows into %d partitions"
+msgstr "%s: imigqa engu-%d ezigabeni ezingu-%d"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: failed. %s"
+msgstr "%s: kuhlulekile. %s"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance"
+msgstr "Ukunakekelwa Kokugcina"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d partitions dropped, %d created"
+msgstr "%s: izigaba ezingu-%d zisusiwe, ezingu-%d zakhiwe"
+
+#: mactrack_utilities.php
+msgid "IP Table Layout"
+msgstr "Ukwakheka Kwethebula le-IP"
+
+#: mactrack_utilities.php
+msgid "IP Table Partitions"
+msgstr "Izahlukaniso Zethebula le-IP"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Layout"
+msgstr "Isakhiwo Sethebula le-802.1x"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Partitions"
+msgstr "Izahlukaniso Zethebula le-802.1x"
+
+#: mactrack_utilities.php
+msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
+msgstr "Khetha ukwahlukanisa kwansuku zonke, kwamasonto onke noma okukhutshaziwe ngaphambi kokuqala ukwakha kabusha."
+
+#: mactrack_utilities.php
+msgid "A rebuild is already running. The partition status page shows when it has finished."
+msgstr "Ukwakhiwa kabusha sekuyaqhubeka. Ikhasi lesimo se-partition libonisa uma sekuqediwe."
+
+#: mactrack_utilities.php
+msgid "The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running."
+msgstr "Ukwakha kabusha kucelwe ngemuva. Hlola Isimo Sokuhlukanisa ukuze uthole umphumela wako; kuzokwenqaba ukuqala uma kukhona ukuskena noma okunye ukwakha kabusha okusebenzayo."
+
+#: mactrack_utilities.php
+msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
+msgstr "Imisebenzi yokuskena ye-Mactrack isusiwe ngokuphelele. Izokwakhiwa kabusha uma usuhlela idivayisi noma uhlobo lwedivayisi."
+
+#: mactrack_utilities.php
+msgid "Cacti Mactrack System Utilities"
+msgstr "Izinsiza Zesistimu ye-Cacti Mactrack"
+
+#: mactrack_utilities.php
+msgid "Process Status Information"
+msgstr "Ulwazi Lwesimo Senqubo"
+
+#: mactrack_utilities.php setup.php
+msgid "View Mactrack Process Status"
+msgstr "Buka Isimo Senqubo Ye-Mactrack"
+
+#: mactrack_utilities.php
+msgid "This option will let you show and set process information associated with the Mactrack polling process."
+msgstr "Le nketho izokuvumela ukuthi ubonise futhi usethe imininingwane yenqubo ehlobene nenqubo yokuphola ye-Mactrack."
+
+#: mactrack_utilities.php
+msgid "Database Administration"
+msgstr "Ukuphathwa Kwedathabheyisi"
+
+#: mactrack_utilities.php
+msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
+msgstr "Isusa ukuhlobana kwe-Port ne-MAC kuya ku-IP okuphelelwe yisikhathi kusizindalwazi. Amarekhodi aphelelwe yisikhathi kuphela, ngokusekelwe kumibandela yakho, asuswayo."
+
+#: mactrack_utilities.php
+msgid "Refresh IEEE Vendor MAC/OUI Database"
+msgstr "Vuselela Isizindalwazi se-MAC/OUI Yomthengisi we-IEEE"
+
+#: mactrack_utilities.php
+msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
+msgstr "Lo msebenzi uzolanda futhi ufake isizindalwazi sakamuva se-OIU kusuka kuWebhusayithi ye-IEEE. Ikhadi ngalinye le-Network Interface Card (NIC) linekheli le-MAC. Ikheli le-MAC lingahlukaniswa libe yizingxenye ezimbili. Ingxenye yokuqala yekheli le-MAC iqukethe i-Vendor MAC. I-Vendor MAC ikhomba ukuthi ubani okhiqize leyo ngxenye. Lokhu kuzoba usizo ekuhloleni ngokushesha amadivayisi angagunyaziwe kunethiwekhi yakho."
+
+#: mactrack_utilities.php
+msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
+msgstr "Isusa imisebenzi yokuskena ye-Mactrack emidala nengase ingasasebenzi ohlwini olwehlayo olutholayo uma uhlela uhlobo lwedivayisi."
+
+#: mactrack_utilities.php
+msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
+msgstr "Isusa <strong>KONKE</strong> ukuhlobana kwe-Port ne-MAC kuya ku-IP kusizindalwazi, wonke Amakheli e-IP, Amabanga e-IP, nama-VLAN. Leli thuluzi lihle uma ufuna ukuqala kabusha. <strong>INGOZI: Yonke idatha yangaphambilini iyasuswa.</strong>"
+
+#: mactrack_utilities.php
+msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
+msgstr "Yakha kabusha uhlu lwezinsuku zokuskena kusukela emiphumeleni egciniwe ye-Port kuya ku-MAC kuya ku-IP, ifunda ingxenye ngayinye kanye. Ukuskena nokunakekela kugcina uhlu lusesikhathini, ngakho lokhu kudingeka kuphela ngemva kokuba imiphumela isusiwe ngaphandle kokunakekela, isibonelo ngokususa amadivayisi."
+
+#: mactrack_utilities.php
+msgid "View Partition Status"
+msgstr "Buka Isimo Sesahlukaniso"
+
+#: mactrack_utilities.php
+msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
+msgstr "Ibonisa ukuthi imiphumela ye-Port ukuya ku-MAC ukuya ku-IP ihlukaniswe kanjani, usayizi wokuhlukanisa osetshenziswayo nesizathu sawo, kanye nokuthi ukunakekelwa kwesizindalwazi kwakamuva kwenzani."
+
+#: mactrack_utilities.php
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
+msgstr "Yakha kabusha futhi ihlaziye kuphela ingxenye equkethe ukubonwa kwembobo kwakamuva ukuze kubuyiswe isikhala esisusiwe; ngezingxenyeni zamaviki onke lokho kuyiviki lamanje. Amathebula angahlukanisiwe alungiselelwa ngokugcwele. Ukuskena okuhleliwe kuyeqiwa kuze kube yilapho kuqedwa."
+
+#: mactrack_utilities.php
+msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile."
+msgstr "Khetha izahlukaniso zansuku zonke noma zamaviki onke, noma ukhubaze ukuhlukaniswa, kumathebula embobo (ikheli le-MAC), ikheli le-IP kanye ne-802.1x. Ukwakha kabusha kukopisha umlando ogcwele ngemuva; ukuskena okuhleliwe kuyeqiwa futhi ukusesha kwe-MAC, i-IP ne-802.1x kubonisa umlayezo wokunakekela okwamanje."
+
+#: mactrack_utilities.php
+msgid "Aggregated Table Administration"
+msgstr "Ukuphathwa Kwethebula Elihlanganisiwe"
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
+msgstr "Isusa KONKE ukuhlobana kwe-Port ne-MAC kuya ku-IP <strong>Okuhlanganisiwe</strong> (Hhayi Imiphumela Yokuskena) kusizindalwazi. Idatha izoqoqwa futhi ngokusekelwe kudatha eskeniwe <strong>entsha kuphela</strong> ekusebenzeni okulandelayo kwe-Poller ye-mactrack."
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
+msgstr "Isusa KONKE ukuhlobana kwe-Port ne-MAC kuya ku-IP <strong>Okuhlanganisiwe</strong> (Hhayi Imiphumela Yokuskena) kusizindalwazi nokudalwa kwakho kabusha ngokusekelwe ku-<strong>Yonke idatha eskeniwe</strong> manje."
+
+#: mactrack_utilities.php
+msgid "Partitioning"
+msgstr "Ukuhlukanisa ngezingxenye"
+
+#: mactrack_vendormacs.php
+msgid "Mactrack Vendor Mac Filter"
+msgstr "Isihlungi se-Mac Yomthengisi we-Mactrack"
+
+#: mactrack_vendormacs.php
+msgid "Vendor MAC"
+msgstr "I-MAC Yomthengisi"
+
+#: mactrack_vendormacs.php
+msgid "Corporation"
+msgstr "Inkampani"
+
+#: mactrack_vendormacs.php
+msgid "Address"
+msgstr "Ikheli"
+
+#: mactrack_vendormacs.php setup.php
+msgid "Vendor Macs"
+msgstr "Ama-MAC Omthengisi"
+
+#: mactrack_vendormacs.php
+msgid "No Mactrack Vendor MACS Found"
+msgstr "Awekho Ama-MAC Omthengisi E-Mactrack Atholakele"
+
+#: mactrack_view_arp.php
+msgid "Mactrack - ARP/IP View"
+msgstr "Mactrack - Ukubuka kwe-ARP/IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Name"
+msgstr "Igama le-Switch"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Hostname"
+msgstr "Igama Lomsingathi We-Switch"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED IP Address"
+msgstr "Ikheli le-IP le-ED"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED DNS Hostname"
+msgstr "Igama Lomsingathi le-ED DNS"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED MAC Address"
+msgstr "Ikheli le-MAC le-ED"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Vendor Name"
+msgstr "Igama Lomthengisi"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Port Number"
+msgstr "Inombolo yembobo"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Port Name"
+msgstr "Igama Lechweba"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Last Scan Date"
+msgstr "Idethi Yokuskena Kokugcina"
+
+#: mactrack_view_arp.php
+msgid "ARP Cache"
+msgstr "Inqolobane ye-ARP"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "You must first choose a Site, Device or other search criteria."
+msgstr "Kufanele uqale ukhethe Isayithi, Idivayisi noma enye indlela yokusesha."
+
+#: mactrack_view_arp.php
+msgid "No Mactrack IP Results Found"
+msgstr "Ayikho Imiphumela Ye-IP Ye-Mactrack Etholakele"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_interfaces.php
+#: mactrack_view_macs.php
+msgid "Device"
+msgstr "Idivayisi"
+
+#: mactrack_view_arp.php mactrack_view_ips.php
+msgid "IP's"
+msgstr "Ama-IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "IP"
+msgstr "IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Show"
+msgstr "Bonisa"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Most Recent"
+msgstr "Okwakamuva Kakhulu"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "MAC"
+msgstr "MAC"
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr "MacTrack - Ideshibhodi"
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr "Uhlu lwempahla"
+
+#: mactrack_view_dashboard.php
+msgid "Device status"
+msgstr "Isimo sedivayisi"
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr "Isamba samakheli nezimbobo"
+
+#: mactrack_view_dashboard.php
+msgid "Collection settings"
+msgstr "Izilungiselelo zokuqoqa"
+
+#: mactrack_view_dashboard.php
+msgid "Scan runtimes"
+msgstr "Izikhathi zokusebenza kokuskena"
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr "Amasayizi ethebula"
+
+#: mactrack_view_dashboard.php
+msgid "MacWatch activity"
+msgstr "Umsebenzi we-MacWatch"
+
+#: mactrack_view_dashboard.php
+msgid "Vendors"
+msgstr "Abathengisi"
+
+#: mactrack_view_dashboard.php
+msgid "Enabled devices"
+msgstr "Amadivayisi anikwe amandla"
+
+#: mactrack_view_dashboard.php
+msgid "Disabled devices"
+msgstr "Amadivayisi akhutshaziwe"
+
+#: mactrack_view_dashboard.php
+msgid "Device types"
+msgstr "Izinhlobo zedivayisi"
+
+#: mactrack_view_dashboard.php
+msgid "Interfaces tracked"
+msgstr "Izixhumi ezibonakalayo ezilandelelwe"
+
+#: mactrack_view_dashboard.php
+msgid "Active MACs"
+msgstr "Ama-MAC Asebenzayo"
+
+#: mactrack_view_dashboard.php
+msgid "IP addresses"
+msgstr "Amakheli e-IP"
+
+#: mactrack_view_dashboard.php
+msgid "Total ports"
+msgstr "Isamba samachweba"
+
+#: mactrack_view_dashboard.php
+msgid "Active ports"
+msgstr "Izimbobo ezisebenzayo"
+
+#: mactrack_view_dashboard.php
+msgid "Trunk ports"
+msgstr "Amachweba e-trunk"
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr "Abathengisi be-OUI abahlukile"
+
+#: mactrack_view_dashboard.php
+msgid "Scanning frequency"
+msgstr "Ukuvama kokuskena"
+
+#: mactrack_view_dashboard.php
+msgid "Concurrent processes"
+msgstr "Izinqubo ezisebenza kanyekanye"
+
+#: mactrack_view_dashboard.php
+msgid "Scanner max runtime"
+msgstr "Isikhathi esiphezulu sokusebenza kwesiskena"
+
+#: mactrack_view_dashboard.php
+msgid "MAC retention"
+msgstr "Ukugcinwa kwe-MAC"
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr "izinsuku"
+
+#: mactrack_view_dashboard.php
+msgid "IP retention"
+msgstr "Ukugcinwa kwe-IP"
+
+#: mactrack_view_dashboard.php
+msgid "Reverse DNS"
+msgstr "I-Reverse DNS"
+
+#: mactrack_view_dashboard.php
+msgid "Most recent scan"
+msgstr "Ukuskena kwakamuva kakhulu"
+
+#: mactrack_view_dashboard.php
+msgid "Average duration"
+msgstr "Ubude besikhathi obuyisilinganiso"
+
+#: mactrack_view_dashboard.php
+msgid "Longest duration"
+msgstr "Isikhathi eside kunazo zonke"
+
+#: mactrack_view_dashboard.php
+msgid "Scanned in last hour"
+msgstr "Iskenwe ehoreni elidlule"
+
+#: mactrack_view_dashboard.php
+msgid "Duration"
+msgstr "Ubude Besikhathi"
+
+#: mactrack_view_dashboard.php
+msgid "Last scan"
+msgstr "Ukuskena kokugcina"
+
+#: mactrack_view_dashboard.php
+msgid "Slowest devices"
+msgstr "Amadivayisi ahamba kancane kakhulu"
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr "Azikho izikhathi zokusebenza kokuskena ezirekhodiwe okwamanje."
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr "Imigqa"
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr "Usayizi"
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr "Azikho izibalo zethebula ezitholakalayo."
+
+#: mactrack_view_dashboard.php
+msgid "Watched MACs"
+msgstr "Ama-MAC Abukwayo"
+
+#: mactrack_view_dashboard.php
+msgid "Discovered"
+msgstr "Kutholakele"
+
+#: mactrack_view_dashboard.php
+msgid "Last match"
+msgstr "Okufanayo kokugcina"
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr "Okufakiwe kwedathabheyisi ye-OUI"
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr "Ayikho idatha yomthengisi etholakalayo."
+
+#: mactrack_view_dashboard.php
+msgid "Show more"
+msgstr "Bonisa okuningi"
+
+#: mactrack_view_dashboard.php
+msgid "Show less"
+msgstr "Bonisa okuncane"
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr "Vula ebhokisini lengxoxo"
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr "Susa ekhasini"
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr "Hudula ukuze uhlele kabusha ikhadi"
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr "Isicelo esingavumelekile. Sicela uzame futhi."
+
+#: mactrack_view_dashboard.php
+msgid "Unknown card."
+msgstr "Ikhadi elingaziwa."
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr "Engeza ikhadi"
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
+msgstr "Engeza ikhadi ledeshibhodi…"
+
+#: mactrack_view_devices.php
+msgid "Mactrack - Device Report View"
+msgstr "Mactrack - Ukubuka Kombiko Wedivayisi"
+
+#: mactrack_view_devices.php
+msgid "Unknown Device Type"
+msgstr "Uhlobo Lwedivayisi Olungaziwa"
+
+#: mactrack_view_devices.php
+msgid "Total VLAN's"
+msgstr "Isamba Sama-VLAN"
+
+#: mactrack_view_devices.php
+msgid "Edit Device"
+msgstr "Hlela Idivayisi"
+
+#: mactrack_view_devices.php
+msgid "View Graphs"
+msgstr "Buka Amagrafu"
+
+#: mactrack_view_devices.php
+msgid "Device Not Mapped to Cacti Device"
+msgstr "Idivayisi Ayixhunywanga Kudivayisi Ye-Cacti"
+
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
+msgid "View MAC Addresses"
+msgstr "Buka Amakheli e-MAC"
+
+#: mactrack_view_devices.php
+msgid "No Mactrack Devices Found"
+msgstr "Awakho Amadivayisi E-Mactrack Atholakele"
+
+#: mactrack_view_devices.php
+msgid "Device Scan Results"
+msgstr "Imiphumela Yokuskena Idivayisi"
+
+#: mactrack_view_devices.php
+msgid "Hub/Switch"
+msgstr "Ihabhu/Iswishi"
+
+#: mactrack_view_dot1x.php
+msgid "Mactrack - 802.1x View"
+msgstr "Mactrack - Ukubuka kwe-802.1x"
+
+#: mactrack_view_dot1x.php
+msgid "Domain"
+msgstr "Isizinda"
+
+#: mactrack_view_dot1x.php
+msgid "802.1x Sessions"
+msgstr "Amaseshini e-802.1x"
+
+#: mactrack_view_dot1x.php
+msgid "No Mactrack 802.1x Sessions Found"
+msgstr "Awekho Amaseshini E-Mactrack 802.1x Atholakele"
+
+#: mactrack_view_dot1x.php
+msgid "Dot1x Scan Results"
+msgstr "Imiphumela Yokuskena kwe-Dot1x"
+
+#: mactrack_view_dot1x.php
+msgid "Sessions"
+msgstr "Amaseshini"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "All Statuses"
+msgstr "Zonke Izimo"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr "Izimo Ezikhethiwe"
+
+#: mactrack_view_dot1x.php
+msgid "DATA"
+msgstr "IDATHA"
+
+#: mactrack_view_dot1x.php
+msgid "VOICE"
+msgstr "IZWI"
+
+#: mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Portname"
+msgstr "Igama lechweba"
+
+#: mactrack_view_graphs.php
+msgid "Mactrack - Monitored Device Graph View"
+msgstr "Mactrack - Ukubuka Kwegrafu Yedivayisi Eqashiwe"
+
+#: mactrack_view_graphs.php
+msgid "Custom Graph List Applied - Filtering from List"
+msgstr "Uhlu Lwamagrafu Olwenziwe Ngokwezifiso Lusetshenzisiwe - Kuhlungwa ohlwini"
+
+#: mactrack_view_interfaces.php
+msgid "Mactrack - Network Interfaces View"
+msgstr "Mactrack - Ukubuka Kwezixhumi Zenethiwekhi"
+
+#: mactrack_view_interfaces.php
+msgid "No Mactrack Interfaces Found"
+msgstr "Awekho Ama-Interface E-Mactrack Atholakele"
+
+#: mactrack_view_interfaces.php
+msgid "Interface Scan Results"
+msgstr "Imiphumela Yokuskena Isixhumi Esibonakalayo"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Name"
+msgstr "Igama"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Description"
+msgstr "Incazelo"
+
+#: mactrack_view_interfaces.php
+msgid "Issues"
+msgstr "Izinkinga"
+
+#: mactrack_view_interfaces.php
+msgid "Alias"
+msgstr "Igama Lesiteketiso"
+
+#: mactrack_view_interfaces.php
+msgid "InBound %%%"
+msgstr "Okungenayo %%%"
+
+#: mactrack_view_interfaces.php
+msgid "OutBound %%%"
+msgstr "Okuphumayo %%%"
+
+#: mactrack_view_interfaces.php
+msgid "In (B/S)"
+msgstr "Okungenayo (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out (B/S)"
+msgstr "Okuphumayo (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Err Total"
+msgstr "Isamba Samaphutha Angenayo"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc Total"
+msgstr "Isamba Sokulahliwe Okungenayo"
+
+#: mactrack_view_interfaces.php
+msgid "UProto Total"
+msgstr "Isamba se-UProto"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err Total"
+msgstr "Isamba Samaphutha Okuphumayo"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc Total"
+msgstr "Isamba Sokuphumayo Okulahliwe"
+
+#: mactrack_view_interfaces.php
+msgid "In Err (E/S)"
+msgstr "Amaphutha Angenayo (E/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc (D/S)"
+msgstr "Okulahliwe Okungenayo (D/S)"
+
+#: mactrack_view_interfaces.php
+msgid "UProto (UP/S)"
+msgstr "UProto (UP/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err (OE/S)"
+msgstr "Amaphutha Okuphumayo (OE/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc (OD/S)"
+msgstr "Okuphumayo Okulahliwe (OD/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Last Change"
+msgstr "Ushintsho Lokugcina"
+
+#: mactrack_view_interfaces.php
+msgid "Last Scanned"
+msgstr "Kuskenwe Kokugcina"
+
+#: mactrack_view_interfaces.php
+msgid "Filters"
+msgstr "Izihlungi"
+
+#: mactrack_view_interfaces.php
+msgid "All Interfaces"
+msgstr "Zonke Izixhumi Ezibonakalayo"
+
+#: mactrack_view_interfaces.php
+msgid "All Non-Ignored Interfaces"
+msgstr "Zonke Izixhumi Ezibonakalayo Ezingashaywa Indiva"
+
+#: mactrack_view_interfaces.php
+msgid "All Ignored Interfaces"
+msgstr "Zonke Izixhumi Ezibonakalayo Ezishaywa Indiva"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In/Out Utilization > %d &#37;"
+msgstr "Ukusetshenziswa Okuphezulu Kokungenayo/Kokuphumayo > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In Utilization > %d &#37;"
+msgstr "Ukusetshenziswa Okuphezulu Kokungenayo > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High Out Utilization > %d &#37;"
+msgstr "Ukusetshenziswa Okuphezulu Kokuphumayo > %d &#37;"
+
+#: mactrack_view_interfaces.php
+msgid "With Issues"
+msgstr "Okunezinkinga"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces"
+msgstr "Izixhumi Ezisebenzayo"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces No Alias"
+msgstr "Izixhumi Ezisebenzayo Ezingena-Alias"
+
+#: mactrack_view_interfaces.php
+msgid "Errors Accumulating"
+msgstr "Amaphutha Ayaqoqana"
+
+#: mactrack_view_interfaces.php
+msgid "Discards Accumulating"
+msgstr "Okulahliwe Kuyaqongelelana"
+
+#: mactrack_view_interfaces.php
+msgid "Changed in Last Day"
+msgstr "Kushintshwe Osukwini Oludlule"
+
+#: mactrack_view_interfaces.php
+msgid "Bandwidth"
+msgstr "Umkhawulokudonsa"
+
+#: mactrack_view_interfaces.php
+msgid "When checked, the Errors, Discards and Unknown Protocol columns show each interface's cumulative SNMP counter totals instead of the average per-second rate."
+msgstr "Uma kukhethiwe, amakholomu athi Amaphutha, Okulahlwayo kanye Nephrathokholi Engaziwa akhombisa inani eliphelele lezibali ze-SNMP zesikhulu ngasinye esikhundleni sesilinganiso esimaphakathi ngomzuzwana."
+
+#: mactrack_view_interfaces.php
+msgid "Show Totals"
+msgstr "Bonisa Amanani Aphelele"
+
+#: mactrack_view_ips.php
+msgid "Mactrack - Site IP Range Report View"
+msgstr "Mactrack - Ukubuka Kombiko Wobubanzi be-IP Yesayithi"
+
+#: mactrack_view_ips.php
+msgid "IP Range"
+msgstr "Ibanga le-IP"
+
+#: mactrack_view_ips.php
+msgid "Current IP Addresses"
+msgstr "Amakheli e-IP Amanje"
+
+#: mactrack_view_ips.php
+msgid "Current Date"
+msgstr "Usuku Lwamanje"
+
+#: mactrack_view_ips.php
+msgid "Maximum IP Addresses"
+msgstr "Inani Eliphezulu Lamakheli e-IP"
+
+#: mactrack_view_ips.php
+msgid "Maximum Date"
+msgstr "Usuku Oluphezulu"
+
+#: mactrack_view_ips.php
+msgid "IP Address Ranges"
+msgstr "Amabanga Amakheli e-IP"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "Edit Site"
+msgstr "Hlela Isayithi"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "View IP Addresses"
+msgstr "Buka Amakheli e-IP"
+
+#: mactrack_view_ips.php
+msgid "No Mactrack Site IP Ranges Found"
+msgstr "Awekho Amabanga E-IP Yesayithi Ye-Mactrack Atholakele"
+
+#: mactrack_view_macs.php
+msgid "Mactrack - MAC to IP Report View"
+msgstr "Mactrack - Ukubuka Kombiko we-MAC kuya ku-IP"
+
+#: mactrack_view_macs.php
+msgid "Authorize"
+msgstr "Gunyaza"
+
+#: mactrack_view_macs.php
+msgid "Revoke"
+msgstr "Hoxisa"
+
+#: mactrack_view_macs.php
+msgid "None of the selected MAC Addresses were valid, so no action was taken."
+msgstr "Awekho Amakheli e-MAC akhethiwe abesebenza, ngakho akukho senzo esithathiwe."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
+msgstr "Lawa Makheli e-MAC akakwazanga ukuhoxiswa ngoba angamalungu Okugunyazwa Kweqembu %s"
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Authorize the following MAC Addresses."
+msgstr "Chofoza u-'Qhubeka' ukuze ugunyaze Amakheli e-MAC alandelayo."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Revoke the following MAC Addresses."
+msgstr "Chofoza u-'Qhubeka' ukuze uhoxise Amakheli e-MAC alandelayo."
+
+#: mactrack_view_macs.php
+msgid "You must select at least one MAC Address."
+msgstr "Kufanele ukhethe okungenani Ikheli le-MAC elilodwa."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to change Mac Authorizations."
+msgstr "Awuvunyelwe ukushintsha Ukugunyazwa Kwe-Mac."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
+msgstr "Idiv.:%s I-IP.:%s I-MAC.:%s I-PORT.:%s Isibalo.: [%s]"
+
+#: mactrack_view_macs.php
+msgid "You must select at least one Row."
+msgstr "Kufanele ukhethe okungenani Umugqa owodwa."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to delete rows."
+msgstr "Awuvunyelwe ukususa imigqa."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Delete the following rows from Aggregated table."
+msgstr "Chofoza u-'Qhubeka' ukuze ususe imigqa elandelayo etafuleni Elihlanganisiwe."
+
+#: mactrack_view_macs.php
+msgid "VLAN ID"
+msgstr "I-ID ye-VLAN"
+
+#: mactrack_view_macs.php
+msgid "VLAN Name"
+msgstr "Igama le-VLAN"
+
+#: mactrack_view_macs.php
+msgid "You must choose a Site, Device or other search criteria."
+msgstr "Kufanele ukhethe Isayithi, Idivayisi noma enye indlela yokusesha."
+
+#: mactrack_view_macs.php
+msgid "No Mactrack Port Results Found"
+msgstr "Ayikho Imiphumela Yechweba Ye-Mactrack Etholakele"
+
+#: mactrack_view_macs.php
+msgid "Count"
+msgstr "Isibalo"
+
+#: mactrack_view_macs.php
+msgid "Aggregated"
+msgstr "Kuhlanganiswe"
+
+#: mactrack_view_sites.php
+msgid "Mactrack - Site Report View"
+msgstr "Mactrack - Ukubuka Kombiko Wesayithi"
+
+#: mactrack_view_sites.php
+msgid "Rescan Site"
+msgstr "Skena Kabusha Isayithi"
+
+#: mactrack_view_sites.php
+msgid "View Devices"
+msgstr "Buka Amadivayisi"
+
+#: mactrack_view_sites.php
+msgid "View IP Ranges"
+msgstr "Buka Amabanga e-IP"
+
+#: mactrack_view_sites.php
+msgid "Sites / Device Types"
+msgstr "Amasayithi / Izinhlobo Zamadivayisi"
+
+#: mactrack_view_sites.php
+msgid "Site Scan Results"
+msgstr "Imiphumela Yokuskena Kwesayithi"
+
+#: setup.php
+msgid "MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes."
+msgstr "I-MacTrack ithuthukisa idathabheyisi yayo ngemuva. Lokhu kungathatha kufika ehoreni ekufakweni okukhulu, futhi enye idatha ye-MacTrack ingase ingapheleli kuze kube yilapho kuphela."
+
+#: setup.php
+#, php-format
+msgid "MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s"
+msgstr "I-MacTrack ayikwazanga ukuqala ukuthuthukiswa kwedathabheyisi yayo ngemuva, bheka ilogi le-Cacti ukuthola isizathu. Kuqhube mathupha emugqeni wemiyalo: %s"
+
+#: setup.php
+msgid "Mactrack"
+msgstr "Mactrack"
+
+#: setup.php
+msgid "General Settings"
+msgstr "Izilungiselelo Ezivamile"
+
+#: setup.php
+msgid "Scanning Frequency"
+msgstr "Ukuvama Kokuskena"
+
+#: setup.php
+msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
+msgstr "Khetha ukuthi uzoqoqa nini Amakheli e-MAC nawe-IP kanye nezibalo ze-Interface kumadivayisi akho enethiwekhi."
+
+#: setup.php
+msgid "Concurrent Processes"
+msgstr "Izinqubo ezisebenza kanyekanye"
+
+#: setup.php
+msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
+msgstr "Cacisa ukuthi mangaki amadivayisi azohlolwa ngesikhathi esisodwa kuze kube yilapho wonke amadivayisi esehloliwe."
+
+#: setup.php
+msgid "Scanner Max Runtime"
+msgstr "Isikhathi Esiphezulu Sokusebenza Kwesiskena"
+
+#: setup.php
+msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
+msgstr "Cacisa inani lemizuzu umsebenzi wokuskena idivayisi ozovunyelwa ukuthi usebenze ngayo ngaphambi kokuba uhlelo lucabange ukuthi usuqediwe. Lesi silungiselelo sizolungisa imisebenzi yokuskena enqanyuliwe."
+
+#: setup.php
+msgid "Start Time for Data Collection"
+msgstr "Isikhathi Sokuqala Sokuqoqa Idatha"
+
+#: setup.php
+msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
+msgstr "Ungathanda ukuthi ukuqoqwa kwedatha kokuqala kwenzeke nini. Zonke izikhathi zokuqoqwa kwedatha ezizayo zizosekelwa kulesi sikhathi sokuqala. Isibonelo esihle kungaba ngu-12:00AM."
+
+#: setup.php
+msgid "Database Maintenance Time"
+msgstr "Isikhathi Sokunakekelwa Kwedathabheyisi"
+
+#: setup.php
+msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
+msgstr "Kufanele asuswe nini amarekhodi amadala edathabheyisi edathabheyisini. Sicela uqaphele ukuthi akukho ukufinyelela okuzovunyelwa kudathabheyisi yembobo ngenkathi lesi senzo senzeka."
+
+#: setup.php
+msgid "Confirm Utilities Prompt"
+msgstr "Umbuzo Wokuqinisekisa Wamathuluzi"
+
+#: setup.php
+msgid "When using utilities, prompt for verification"
+msgstr "Uma usebenzisa izinsiza, cela ukuqinisekiswa"
+
+#: setup.php
+msgid "Data Retention"
+msgstr "Ukugcinwa Kwedatha"
+
+#: setup.php
+msgid "How long should port MAC details be retained in the database."
+msgstr "Imininingwane ye-MAC yembobo kufanele igcinwe isikhathi esingakanani kusizindalwazi."
+
+#: setup.php
+msgid "Data Retention IPs"
+msgstr "Ama-IP Okugcinwa Kwedatha"
+
+#: setup.php
+msgid "How long should discovered IPs details be retained in the database."
+msgstr "Imininingwane yama-IP atholiwe kufanele igcinwe isikhathi esingakanani kusizindalwazi."
+
+#: setup.php
+msgid "Size of the partitions of the port, IP and 802.1x tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
+msgstr "Usayizi wokuhlukaniswa kwamathebula e-port, e-IP nawe-802.1x, noma Kukhutshaziwe kumathebula angahlukanisiwe. Ukukushintsha kuthinta ukuhlukaniswa okusha kuphela; ukuze wakhe kabusha umlando okhona ukuthi ufane, sebenzisa i-Configure Port and IP Address Partitioning ku-MacTrack Utilities noma uqalise i-cli/upgrade_partitioning.php."
+
+#: setup.php
+msgid "Switch Level Ignore Ports Delimiter"
+msgstr "Ihlukanisi Lezimbobo Zokuziba Ezingeni Le-Switch"
+
+#: setup.php
+msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
+msgstr "Iyiphi ihlukanisi okufanele i-Mactrack ilisebenzise lapho ihlaziya uchungechunge lwe-Ignore Ports kuswishi ngayinye."
+
+#: setup.php
+msgid "Auto Detect"
+msgstr "Thola Ngokuzenzakalelayo"
+
+#: setup.php
+msgid "Colon [:]"
+msgstr "Ikholoni [:]"
+
+#: setup.php
+msgid "Pipe [|]"
+msgstr "Iphayiphi [|]"
+
+#: setup.php
+msgid "Space [ ]"
+msgstr "Isikhala [ ]"
+
+#: setup.php
+msgid "Mac Address Output Format"
+msgstr "Ifomethi Yokuphumayo Yekheli le-Mac"
+
+#: setup.php
+msgid "Format used for display."
+msgstr "Ifomethi esetshenziselwa ukubonisa."
+
+#: setup.php
+msgid "Ports to Ignore"
+msgstr "Amachweba Okuzoshaywa indiva"
+
+#: setup.php
+msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
+msgstr "Nikeza i-regular expression yama-ifNames noma ama-ifDescriptions amachweba okufanele anganakwa ohlwini lwesixhumi. Ngokwesibonelo, (Vlan|Loopback|Null)."
+
+#: setup.php
+msgid "Ports to Ignore While Scanning (Regular Expression)"
+msgstr "Amachweba Okuzoshaywa indiva Ngenkathi Kuskenwa (Inkulumo Ejwayelekile)"
+
+#: setup.php
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
+msgstr "Ongakukhetha.  Inkulumo evamile efaniswayo, ngaphandle kokubheka usayizi wezinhlamvu, negama lesikhumulo kanye nesiteketiso sesikhumulo saso sonke isikhumulo esiskeniwe.  Amakheli e-MAC atholakala esikhumulweni esifanayo awaqoqwa, okugcina izikhumulo ze-uplink neze-trunk zingekho kusizindalwazi.  Isibonelo, (uplink|trunk).  Beka inkulumo ngayinye kulayini wayo ukuze unikeze eziningi.  Shiya kungenalutho ukuze uqoqe sonke isikhumulo.  Amasayithi namadivayisi angangeza izinkulumo zawo.  Ngokungafani ne-Ports to Ignore ngenhla, lokhu kusebenza ekuqoqweni kwe-MAC hhayi ohlwini lwesixhumi esibonakalayo, futhi kuthinta ukuskena okusha kuphela."
+
+#: setup.php
+msgid "Bandwidth Usage Threshold"
+msgstr "Umkhawulo Wokusetshenziswa Komkhawulokudonsa"
+
+#: setup.php
+msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
+msgstr "Uma ubuyekeza izibalo zezikhulu zenethiwekhi, yimuphi umkhawulo we-bandwidth ofuna ukuwubuka ngokuzenzakalelayo."
+
+#: setup.php
+#, php-format
+msgid "%d Percent"
+msgstr "%d Amaphesenti"
+
+#: setup.php
+msgid "DNS Settings"
+msgstr "Izilungiselelo ze-DNS"
+
+#: setup.php
+msgid "Perform Reverse DNS Name Resolution"
+msgstr "Yenza Ukuxazulula Igama Le-DNS Elibuyela Emuva"
+
+#: setup.php
+msgid "Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
+msgstr "Ingabe i-Mactrack kufanele yenze ukubheka kwe-DNS okuhlehlisayo kwamakheli e-IP ahlotshaniswa nezimbobo. ISEXWAYISO: Uma i-DNS ingasethwanga kahle, lokhu kuzokwenza isikhathi sokuskena sihambe kancane kakhulu."
+
+#: setup.php
+msgid "Primary DNS IP Address"
+msgstr "Ikheli le-IP le-DNS Eyinhloko"
+
+#: setup.php
+msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
+msgstr "Faka ikheli le-IP le-DNS eyinhloko elizosetshenziselwa ukubheka okuhlehlayo."
+
+#: setup.php
+msgid "Secondary DNS IP Address"
+msgstr "Ikheli le-IP le-DNS Yesibili"
+
+#: setup.php
+msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
+msgstr "Faka ikheli le-IP le-DNS yesibili elizosetshenziselwa ukubheka okuhlehlayo."
+
+#: setup.php
+msgid "DNS Timeout"
+msgstr "Ukuphela Kwesikhathi Kwe-DNS"
+
+#: setup.php
+msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
+msgstr "Sicela ufake isikhathi sokuphela kwe-DNS ngamamilisekhondi. I-Mactrack isebenzisa isixazululi se-DNS esisekelwe ku-PHP."
+
+#: setup.php
+msgid "DNS Prime Interval"
+msgstr "Isikhawu Sokuqalisa i-DNS"
+
+#: setup.php
+msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
+msgstr "Kangaki, ngamasekhondi, lapho ama-IP okuskena kwe-Mactrack kudingeka axazululwe abe ngamakheli e-MAC ukuze kuxazululwe i-DNS. Ukusebenzisa inombolo enkudlwana uma unamadivayisi ayizinkulungwane ezimbalwa kuzokwandisa ukusebenza kahle."
+
+#: setup.php
+msgid "Notification Settings"
+msgstr "Izilungiselelo Zezaziso"
+
+#: setup.php
+msgid "Source Address"
+msgstr "Ikheli Lomthombo"
+
+#: setup.php
+msgid "The source Email address for Mactrack Emails."
+msgstr "Ikheli le-imeyili elingumthombo lama-imeyili e-Mactrack."
+
+#: setup.php
+msgid "Source Email Name"
+msgstr "Igama Le-imeyili Yomthombo"
+
+#: setup.php
+msgid "The Source Email name for Mactrack Emails."
+msgstr "Igama Le-imeyili Yomthombo lama-imeyili e-Mactrack."
+
+#: setup.php
+msgid "MACTrack Administrator"
+msgstr "Umlawuli we-MACTrack"
+
+#: setup.php
+msgid "MacWatch Default Body"
+msgstr "Umzimba Ozenzakalelayo we-MacWatch"
+
+#: setup.php
+msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+msgstr "Okuhlelwe kusengaphambili komzimba we-imeyili wama-imeyili e-Mactrack MacWatch.  Umzimba ungaba nanoma imaphi amathegi e-HTML avumelekile.  Uphinde usekele amathegi okushintshanisa azokwenziwa lapho kuthunyelwa I-imeyili.  Amathegi avumelekile ahlanganisa <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+
+#: setup.php
+msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
+msgstr "Ikheli le-Mac <MAC> litholakale Ekhelini le-IP <IP> Lenombolo Yethikithi: <TICKET>.<br>Idivayisi itholakala lapha<br>Isayithi: <SITENAME>, Idivayisi <DEVICENAME>, i-IP <DEVICEIP>, Imbobo <PORTNUMBER>, kanye Negama Lembobo <PORTNAME>"
+
+#: setup.php
+msgid "MacAuth Report Email Addresses"
+msgstr "Amakheli E-imeyili Ombiko we-MacAuth"
+
+#: setup.php
+msgid "A comma delimited list of users to receive the MacAuth Email notifications."
+msgstr "Uhlu lwabasebenzisi oluhlukaniswe ngokhefana abazothola izaziso ze-imeyili ze-MacAuth."
+
+#: setup.php
+msgid "MacAuth Report Frequency"
+msgstr "Ukuvama Kombiko we-MacAuth"
+
+#: setup.php
+msgid "How often will the MacAuth Reports be Emailed."
+msgstr "Imibiko ye-MacAuth izothunyelwa kangaki nge-imeyili."
+
+#: setup.php
+msgid "Mactrack ArpWatch Settings"
+msgstr "Izilungiselelo ze-ArpWatch ye-Mactrack"
+
+#: setup.php
+msgid "Enable ArpWatch"
+msgstr "Nika amandla i-ArpWatch"
+
+#: setup.php
+msgid "Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
+msgstr "Ingabe i-Mactrack kufanele iphinde isebenzise idatha ye-ArpWatch ukwelekelela ukuxazululwa kwe-Mac kuya ku-IP/DNS?"
+
+#: setup.php
+msgid "ArpWatch Database Path"
+msgstr "Indlela Yedathabheyisi ye-ArpWatch"
+
+#: setup.php
+msgid "The location of the ArpWatch Database file on the Cacti server."
+msgstr "Indawo yefayela Ledathabheyisi le-ArpWatch kuseva ye-Cacti."
+
+#: setup.php
+msgid "SNMP Presets"
+msgstr "Okusethelwe Ngaphambilini kwe-SNMP"
+
+#: setup.php
+msgid "Update Policy for SNMP Options"
+msgstr "Inqubomgomo Yokubuyekeza Yezinketho Ze-SNMP"
+
+#: setup.php
+msgid "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices."
+msgstr "Inqubomgomo yokuvumelanisa Izinketho ze-SNMP phakathi kwamadivayisi e-Cacti namadivayisi e-Mactrack."
+
+#: setup.php
+msgid "Default SNMP version for all new hosts."
+msgstr "Inguqulo ye-SNMP ezenzakalelayo yabo bonke abasingathi abasha."
+
+#: setup.php
+msgid "Default SNMP read community for all new hosts."
+msgstr "Umphakathi wokufunda we-SNMP ozenzakalelayo wabo bonke abasingathi abasha."
+
+#: setup.php
+msgid "Communities"
+msgstr "Imiphakathi"
+
+#: setup.php
+msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
+msgstr "Gcwalisa uhlu lwamachungechunge okufunda e-SNMP atholakalayo ukuze ahlolwe kule divayisi. Uchungechunge lokufunda ngalunye kufanele luhlukaniswe ngekholoni ':'. Lawa machungechunge okufunda azohlolwa ngokulandelana uma uchungechunge lokufunda oluyinhloko lungavumelekile."
+
+#: setup.php
+msgid "The UDP/TCP Port to poll the SNMP agent on."
+msgstr "Imbobo ye-UDP/TCP okufanele ihlole i-ejenti ye-SNMP kuyo."
+
+#: setup.php
+msgid "Default SNMP timeout in milli-seconds."
+msgstr "Isikhathi sokuphela kwe-SNMP esizenzakalelayo ngamamilisekhondi."
+
+#: setup.php
+msgid "The number times the SNMP poller will attempt to reach the host before failing."
+msgstr "Inani lezikhathi i-Poller ye-SNMP ezama ngazo ukufinyelela kumsingathi ngaphambi kokwehluleka."
+
+#: setup.php
+msgid "snmpbulkwalk Binary Path"
+msgstr "Indlela ye-Binary ye-snmpbulkwalk"
+
+#: setup.php
+msgid "The path to your snmpbulkwalk binary."
+msgstr "Indlela eya ku-binary yakho ye-snmpbulkwalk."
+
+#: setup.php
+msgid "MacTrack Settings"
+msgstr "Izilungiselelo ze-MacTrack"
+
+#: setup.php
+msgid "Default Tab"
+msgstr "Ithebhu Ezenzakalelayo"
+
+#: setup.php
+msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
+msgstr "Iyiphi ithebhu ye-MacTrack ongathanda ukuthi ibe ithebhu yakho emisiwe njalo uma uya kusigaba se-MacTrack."
+
+#: setup.php
+msgid "Mac Addresses"
+msgstr "Amakheli e-Mac"
+
+#: setup.php
+msgid "dot1x Deta"
+msgstr "I-dot1x Deta"
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Izilungiselelo Ze-Proxy Ye-inthanethi"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Ikheli Le-Proxy Ye-inthanethi"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Kumasevisi ayinhloko e-Cacti noma ama-Plugin adinga ukufinyelela ku-inthanethi, faka iseva ye-proxy nembobo lapha ngefomethi elandelayo IP:PORT. Isibonelo 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Umsebenzisi We-Proxy Ye-inthanethi"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "Uma i-Proxy yakho ye-inthanethi idinga igama lomsebenzisi, lifake lapha."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Iphasiwedi Ye-Proxy Ye-inthanethi"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "Uma i-Proxy yakho ye-inthanethi idinga iphasiwedi, yifake lapha."
+
+#: setup.php
+msgid "Mactrack Dashboard"
+msgstr "Ideshibhodi ye-Mactrack"
+
+#: setup.php
+msgid "Mactrack Devices"
+msgstr "Amadivayisi e-Mactrack"
+
+#: setup.php
+msgid "(Edit)"
+msgstr "(Hlela)"
+
+#: setup.php
+msgid "(Import)"
+msgstr "(Ngenisa)"
+
+#: setup.php
+msgid "Mactrack Device Types"
+msgstr "Izinhlobo Zedivayisi ye-Mactrack"
+
+#: setup.php
+msgid "Mactrack Sites"
+msgstr "Amasayithi e-Mactrack"
+
+#: setup.php
+msgid "Mac Address Tracking Utility"
+msgstr "Ithuluzi Lokulandelela Ikheli le-Mac"
+
+#: setup.php
+msgid "Mac Address Authorization Utility"
+msgstr "Ithuluzi Lokugunyaza Ikheli le-Mac"
+
+#: setup.php
+msgid "Mactrack Vendor Macs"
+msgstr "Ama-Mac Omthengisi we-Mactrack"
+
+#: setup.php
+msgid "Mactrack View Macs"
+msgstr "Buka ama-Mac e-Mactrack"
+
+#: setup.php
+msgid "Mactrack Dot1x View"
+msgstr "Ukubuka kwe-Dot1x ye-Mactrack"
+
+#: setup.php
+msgid "Mactrack IP Address Viewer"
+msgstr "Isibuki Sekheli le-IP se-Mactrack"
+
+#: setup.php
+msgid "Mactrack View Interfaces"
+msgstr "Buka Izixhumi ze-Mactrack"
+
+#: setup.php
+msgid "Mactrack View Sites"
+msgstr "Buka Amasayithi e-Mactrack"
+
+#: setup.php
+msgid "Mactrack View IP Ranges"
+msgstr "Buka Ububanzi be-IP be-Mactrack"
+
+#: setup.php
+msgid "Mactrack View Devices"
+msgstr "Buka Amadivayisi e-Mactrack"
+
+#: setup.php
+msgid "Mactrack Utilities"
+msgstr "Izinsiza ze-Mactrack"
+
+#: setup.php
+msgid "Truncate Port Results Table"
+msgstr "Hlanza Ithebula Lemiphumela Yamachweba"
+
+#: setup.php
+msgid "Truncate Aggregated Port Results Table"
+msgstr "Hlanza Ithebula Lemiphumela Yamachweba Ehlanganisiwe"
+
+#: setup.php
+msgid "Truncate and Re-create Aggregated Port Results Table"
+msgstr "Hlanza futhi Wakhe Kabusha Ithebula Lemiphumela Yamachweba Ehlanganisiwe"
+
+#: setup.php
+msgid "Refresh/Update Vendor MAC Database from IEEE"
+msgstr "Vuselela/Buyekeza Isizindalwazi se-MAC Yomthengisi kusuka ku-IEEE"
+
+#: setup.php
+msgid "Mactrack Graph Viewer"
+msgstr "Isibuki Segrafu se-Mactrack"
+
+#: setup.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "Imizuzwana engu-%d"
+
+#: setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d Umzuzu"
+
+#: setup.php
+msgid "Matches"
+msgstr "Okufanayo"
+
+#: setup.php
+msgid "Contains"
+msgstr "Kuqukethe"
+
+#: setup.php
+msgid "Begins With"
+msgstr "Kuqala Nge-"
+
+#: setup.php
+msgid "Does Not Contain"
+msgstr "Akuqukethe"
+
+#: setup.php
+msgid "Does Not Begin With"
+msgstr "Akuqali Ngo"
+
+#: setup.php
+msgid "Is Null"
+msgstr "Kuyi-Null"
+
+#: setup.php
+msgid "Is Not Null"
+msgstr "Akuyona i-Null"
+
+#: setup.php
+msgid "Half"
+msgstr "Uhhafu"
+
+#: setup.php
+msgid "Full"
+msgstr "Okugcwele"
+
+#: setup.php
+msgid "Sync Cacti Device to Mactrack Device"
+msgstr "Vumelanisa Idivayisi ye-Cacti kuDivayisi ye-Mactrack"
+
+#: setup.php
+msgid "Sync Mactrack Device to Cacti Device"
+msgstr "Vumelanisa Idivayisi ye-Mactrack kuDivayisi ye-Cacti"
+
+#: setup.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Njalo ngemizuzu engu-%d"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hour"
+msgstr "Njalo Ngehora Elingu-%d"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Njalo ngamahora angu-%d"
+
+#: setup.php
+msgid "Every Day"
+msgstr "Nsuku Zonke"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "Inyanga engu-%d"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "Izinyanga ezingu-%d"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "Unyaka ongu-%d"
+
+#: setup.php
+msgid "On Scan Completion"
+msgstr "Uma Ukuskena Kuphelile"
+
+#: setup.php
+#, php-format
+msgid "Every %d Days"
+msgstr "Njalo Ngezinsuku Ezingu-%d"
+
+#: setup.php
+msgid "Every Week"
+msgstr "Njalo Ngeviki"
+
+#: setup.php
+msgid "Management"
+msgstr "Ukuphathwa"
+
+#: setup.php
+msgid "SNMP Options"
+msgstr "Izinketho Ze-SNMP"
+
+#: setup.php
+msgid "Mac Watch"
+msgstr "Ukubheka i-Mac"
+
+#: setup.php
+msgid "Mactrack Tools"
+msgstr "Amathuluzi e-Mactrack"
+
+#: setup.php
+msgid "Mac Authorizations"
+msgstr "Ukugunyazwa kwe-Mac"
+
+#: setup.php
+msgid "Tracking Utilities"
+msgstr "Amathuluzi Okulandelela"
+
+#: setup.php
+msgid "Ports to Ignore (Regular Expression)"
+msgstr "Amachweba Okuzoshaywa indiva (Inkulumo Ejwayelekile)"
+
+#: setup.php
+#, php-format
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions."
+msgstr "Ongakukhetha.  Inkulumo evamile efaniswayo, ngaphandle kokubheka usayizi wezinhlamvu, negama lesikhumulo kanye nesiteketiso sesikhumulo se-%s.  Amakheli e-MAC atholakala esikhumulweni esifanayo awaqoqwa.  Isibonelo, '(uplink|trunk)' ayinaki sonke isikhumulo esinegama noma isiteketiso esiqukethe i-uplink noma i-trunk.  Beka inkulumo ngayinye kulayini wayo ukuze unikeze eziningi.  Isetshenziswa ngaphezu kwezinkulumo ze-%s."
+
+#: setup.php
+msgid "every device in this site"
+msgstr "yonke idivayisi kuleli sayithi"
+
+#: setup.php
+msgid "this device"
+msgstr "le divayisi"
+
+#: setup.php
+msgid "device and global"
+msgstr "idivayisi nejikelele"
+
+#: setup.php
+msgid "site and global"
+msgstr "isayithi nejikelele"
+
+#: setup.php
+msgid "Device Scanning Function Options"
+msgstr "Izinketho Zomsebenzi Wokuskena Idivayisi"
+
+#: setup.php
+msgid "Give this device type a meaningful description."
+msgstr "Nika lolu hlobo lwedivayisi incazelo ecacile."
+
+#: setup.php
+msgid "Fill in the name for the vendor of this device type."
+msgstr "Gcwalisa igama lomthengisi walolu hlobo lwedivayisi."
+
+#: setup.php
+msgid "Choose the type of device."
+msgstr "Khetha uhlobo lwedivayisi."
+
+#: setup.php
+msgid "System Description Match"
+msgstr "Ukufaniswa Kwencazelo Yesistimu"
+
+#: setup.php
+msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
+msgstr "Nikeza ulwazi olubalulekile ukusiza i-Mactrack ithole uhlobo lwedivayisi. Uphawu lwe-wildcard wuphawu lwe-'&#42;'."
+
+#: setup.php
+msgid "Vendor SNMP Object ID Match"
+msgstr "Ukufana kwe-ID Yento ye-SNMP Yomthengisi"
+
+#: setup.php
+msgid "MAC Address Scanning Function"
+msgstr "Umsebenzi Wokuskena Ikheli le-MAC"
+
+#: setup.php
+msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
+msgstr "Umsebenzi wokuskena we-Mactrack okufanele ubizwe ukuze kutholakale futhi kugcinwe imininingwane yembobo. Igama lomsebenzi kuphela elidingekayo. Amapharamitha amane alandelayo ayacatshangwa futhi ayohlala engezwa ekugcineni: 'my_function($site, &$device, $lowport, $highport)'. Akukho msebenzi odingekayo ku-router emsulwa."
+
+#: setup.php
+msgid "IP Address Scanning Function"
+msgstr "Umsebenzi Wokuskena Ikheli le-IP"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
+msgstr "Umsebenzi wokuskena we-Mactrack oqondene ngqo namadivayisi e-Layer3 alandelela Amakheli e-IP."
+
+#: setup.php
+msgid "802.1x Scanning Function"
+msgstr "Umsebenzi Wokuskena we-802.1x"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Switches with dot1x enabled."
+msgstr "Umsebenzi wokuskena we-Mactrack oqondene ngqo nama-Switch lapho i-dot1x inikwe amandla."
+
+#: setup.php
+msgid "Serial Number Base OID"
+msgstr "I-OID Eyisisekelo Yenombolo Ye-serial"
+
+#: setup.php
+msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
+msgstr "I-SNMP OID esetshenziselwa ukuthola inombolo ye-serial yalolu hlobo lwedivayisi ezogcinwa kuthebula le-Mactrack Asset Information."
+
+#: setup.php
+msgid "Serial Number Collection Method"
+msgstr "Indlela Yokuqoqa Inombolo Ye-serial"
+
+#: setup.php
+msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
+msgstr "Iqoqwa kanjani inombolo ye-serial yale OID.  Uma kuyi-'SNMP Walk', sithatha ngokuthi kunezinombolo ze-serial eziningi.  Uma kuyi-'Get', kuzoba yinye kuphela.."
+
+#: setup.php
+msgid "SNMP Get"
+msgstr "SNMP Get"
+
+#: setup.php
+msgid "SNMP Walk"
+msgstr "Ukuhlola kwe-SNMP Walk"
+
+#: setup.php
+msgid "Low User Port Number"
+msgstr "Inombolo Yembobo Yomsebenzisi Ephansi"
+
+#: setup.php
+msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
+msgstr "Nikeza inombolo yechweba lomsebenzisi eliphansi kule-switch. Shiya u-0 ukuze uvumele uhlelo ukuthi luyibale."
+
+#: setup.php
+msgid "High User Port Number"
+msgstr "Inombolo Yembobo Yomsebenzisi Ephezulu"
+
+#: setup.php
+msgid "Disabled device type is not used."
+msgstr "Uhlobo lwedivayisi olukhutshaziwe alusetshenziswa."
+
+#: setup.php
+msgid "Fill in the name of this SNMP option set."
+msgstr "Gcwalisa igama lale sethi yezinketho ze-SNMP."
+
+#: setup.php
+msgid "SNMP Version"
+msgstr "Inguqulo ye-SNMP"
+
+#: setup.php
+msgid "Choose the SNMP version for this host."
+msgstr "Khetha inguqulo ye-SNMP yale host."
+
+#: setup.php
+msgid "SNMP Community String"
+msgstr "Uchungechunge Lomphakathi lwe-SNMP"
+
+#: setup.php
+msgid "Fill in the SNMP read community for this device."
+msgstr "Gcwalisa umphakathi wokufunda we-SNMP wale divayisi."
+
+#: setup.php
+msgid "SNMP Port"
+msgstr "Imbobo ye-SNMP"
+
+#: setup.php
+msgid "SNMP Timeout"
+msgstr "Isikhathi Sokuphela kwe-SNMP"
+
+#: setup.php
+msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
+msgstr "Inani eliphezulu lamamilisekhondi i-Cacti ezolinda ngalo impendulo ye-SNMP (akusebenzi ngokusekelwa kwe-php-snmp)."
+
+#: setup.php
+msgid "SNMP Retries"
+msgstr "Ukuzama Kabusha kwe-SNMP"
+
+#: setup.php
+msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
+msgstr "Inani eliphezulu lemizamo yokufinyelela idivayisi ngokusebenzisa uchungechunge lokufunda lwe-SNMP ngaphambi kokuyeka."
+
+#: setup.php
+msgid "Maximum OID's Per Get Request"
+msgstr "Inani Eliphezulu Lama-OID Ngesicelo Sokuthola"
+
+#: setup.php
+msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
+msgstr "Icacise inani lama-OID angatholwa esicelweni esisodwa se-SNMP Get."
+
+#: setup.php
+msgid "SNMP Username (v3)"
+msgstr "Igama Lomsebenzisi le-SNMP (v3)"
+
+#: setup.php
+msgid "SNMP v3 username for this device."
+msgstr "Igama lomsebenzisi le-SNMP v3 lale divayisi."
+
+#: setup.php
+msgid "SNMP Password (v3)"
+msgstr "Iphasiwedi ye-SNMP (v3)"
+
+#: setup.php
+msgid "SNMP v3 password for this device."
+msgstr "Iphasiwedi ye-SNMP v3 yale divayisi."
+
+#: setup.php
+msgid "SNMP Auth Protocol (v3)"
+msgstr "Iphrothokholi Yokuqinisekisa ye-SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Authorization Protocol."
+msgstr "Khetha Iphrothokholi Yokugunyaza ye-SNMPv3."
+
+#: setup.php
+msgid "SNMP Privacy Passphrase (v3)"
+msgstr "Umushwana Wokudlula Wobumfihlo we-SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Passphrase."
+msgstr "Khetha Umushwana Wokudlula Wobumfihlo we-SNMPv3."
+
+#: setup.php
+msgid "SNMP Privacy Protocol (v3)"
+msgstr "Iphrothokholi Yobumfihlo ye-SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Protocol."
+msgstr "Khetha Iphrothokholi Yobumfihlo ye-SNMPv3."
+
+#: setup.php
+msgid "SNMP Context (v3)"
+msgstr "Umongo we-SNMP (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Context to use for this device."
+msgstr "Faka Umongo we-SNMP v3 ozosetshenziselwa le divayisi."
+
+#: setup.php
+msgid "SNMP Engine ID (v3)"
+msgstr "I-ID Yenjini ye-SNMP (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Engine ID to use for this device."
+msgstr "Faka i-ID Ye-injini ye-SNMP v3 ezosetshenziselwa le divayisi."
+
+#: setup.php
+msgid "General Device Settings"
+msgstr "Izilungiselelo Ezijwayelekile Zedivayisi"
+
+#: setup.php
+msgid "Give this device a meaningful name."
+msgstr "Nika le divayisi igama elinencazelo."
+
+#: setup.php
+msgid "Fill in the fully qualified hostname for this device."
+msgstr "Gcwalisa igama lomsingathi eliqinisekisiwe ngokuphelele lale divayisi."
+
+#: setup.php
+msgid "Related Cacti Host"
+msgstr "Umsingathi we-Cacti Ohlobene"
+
+#: setup.php
+msgid "Given Mactrack Host is connected to this Cacti Host."
+msgstr "Umsingathi we-Mactrack onikeziwe uxhunywe kulo Msingathi we-Cacti."
+
+#: setup.php
+msgid "Scan Type"
+msgstr "Uhlobo Lokuskena"
+
+#: setup.php
+msgid "Choose the scan type you wish to perform on this device."
+msgstr "Khetha uhlobo lokuskena ofisa ukulwenza kule divayisi."
+
+#: setup.php
+msgid "Choose the site to associate with this device."
+msgstr "Khetha isayithi ozolihlanganisa nale divayisi."
+
+#: setup.php
+msgid "Device Notes"
+msgstr "Amanothi Edivayisi"
+
+#: setup.php
+msgid "This field value is useful to save general information about a specific device."
+msgstr "Leli nani lenkambu liwusizo ukulondoloza ulwazi olujwayelekile mayelana nedivayisi ethile."
+
+#: setup.php
+msgid "Disable Device"
+msgstr "Khubaza Idivayisi"
+
+#: setup.php
+msgid "Check this box to disable all checks for this host."
+msgstr "Maka leli bhokisi ukuze ukhubaze konke ukuhlolwa kwalo msingathi."
+
+#: setup.php
+msgid "Switch/Hub, Switch/Router Settings"
+msgstr "Izilungiselelo ze-Switch/Hub, Switch/Router"
+
+#: setup.php
+msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
+msgstr "Nikeza uhlu lwamachweba ku-switch/hub ethile okufanele imiphumela yawo ye-MAC inganakwa. Amachweba afana namachweba okuxhumanisa/e-trunk angenakuhlukaniswa namanye amachweba abasebenzisi ayizibonelo. Inombolo yechweba ngayinye kufanele ihlukaniswe ngekoloni, iphayiphi, noma isikhala ':', '|', ' '. Ngokwesibonelo, 'Fa0/1: Fa1/23' noma 'Fa0/1 Fa1/23' kungamukeleka kwezinye izinhlobo zama-switch abakhiqizi."
+
+#: setup.php
+msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
+msgstr "Ungasebenzisa izilungiselelo ezithile ze-SNMP noma ukhethe iqoqo le-SNMP. Esimeni sesibili, i-mactrack izama ukuthola izilungiselelo ezifanele eqoqweni le-SNMP"
+
+#: setup.php
+msgid "Read Strings"
+msgstr "Imicu Yokufunda"
+
+#: setup.php
+msgid "<strong>DEPRECATED:</strong> SNMP community strings"
+msgstr "<strong>AKUSASETSHENZISWA:</strong> imigqa yomphakathi we-SNMP"
+
+#: setup.php
+msgid "Specific SNMP Settings"
+msgstr "Izilungiselelo Ze-SNMP Ezithile"
+
+#: setup.php
+msgid "Connectivity Options"
+msgstr "Izinketho Zokuxhumana"
+
+#: setup.php
+msgid "Terminal Type"
+msgstr "Uhlobo Lwetheminali"
+
+#: setup.php
+msgid "Choose the terminal type that you use to connect to this device."
+msgstr "Khetha uhlobo lwetheminali olusebenzisayo ukuze uxhume kule divayisi."
+
+#: setup.php
+msgid "Telnet"
+msgstr "Telnet"
+
+#: setup.php
+msgid "SSH"
+msgstr "SSH"
+
+#: setup.php
+msgid "HTTP"
+msgstr "HTTP"
+
+#: setup.php
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: setup.php
+msgid "User Name"
+msgstr "Igama Lomsebenzisi"
+
+#: setup.php
+msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
+msgstr "Igama lomsebenzisi elizosetshenziselwa indlela yakho yangokwezifiso yokuqinisekisa ubuqotho. Izibonelo zihlanganisa i-SSH, RSH, HTML, njll."
+
+#: setup.php
+msgid "Password"
+msgstr "Iphasiwedi"
+
+#: setup.php
+msgid "The password to be used for your custom authentication."
+msgstr "Iphasiwedi ezosetshenziselwa ukuqinisekisa kwakho ngokwezifiso."
+
+#: setup.php
+msgid "Private Key Path"
+msgstr "Indlela Yokhiye Oyimfihlo"
+
+#: setup.php
+msgid "The path to the private key used for SSH authentication."
+msgstr "Indlela eya kukhiye oyimfihlo osetshenziselwa ukuqinisekisa kwe-SSH."
+
+#: setup.php
+msgid "Sequence"
+msgstr "Ukulandelana"
+
+#: setup.php
+msgid "Sequence of Item."
+msgstr "Ukulandelana Kwento."
+
+#: setup.php
+msgid "General Site Settings"
+msgstr "Izilungiselelo Ezijwayelekile Zesayithi"
+
+#: setup.php
+msgid "Please enter a reasonable name for this site."
+msgstr "Sicela ufake igama elifanele laleli sayithi."
+
+#: setup.php
+msgid "Primary Customer Contact"
+msgstr "Othintwayo Oyinhloko Wekhasimende"
+
+#: setup.php
+msgid "The principal customer contact name and number for this site."
+msgstr "Igama nenombolo yothintana naye oyinhloko wekhasimende kule sayithi."
+
+#: setup.php
+msgid "NetOps Contact"
+msgstr "Othintwayo we-NetOps"
+
+#: setup.php
+msgid "Please principal network support contact name and number for this site."
+msgstr "Sicela ufake igama nenombolo yoxhumana naye omkhulu wosekelo lwenethiwekhi laleli sayithi."
+
+#: setup.php
+msgid "Facilities Contact"
+msgstr "Othintwayo Wezinsiza"
+
+#: setup.php
+msgid "Please principal facilities/security contact name and number for this site."
+msgstr "Sicela ufake igama nenombolo yoxhumana naye omkhulu wezindawo/zokuphepha laleli sayithi."
+
+#: setup.php
+msgid "Site Information"
+msgstr "Ulwazi Lwesayithi"
+
+#: setup.php
+msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
+msgstr "Nikeza noma yiluphi ulwazi oluqondene nesayithi, ngendlela ekhululekile, olukuvumela ukuthi uphathe kangcono le ndawo."
+
+#: setup.php
+msgid "General Mac Address Tracking Settings"
+msgstr "Izilungiselelo Ezijwayelekile Zokulandelela Ikheli Le-MAC"
+
+#: setup.php
+msgid "MAC Address"
+msgstr "Ikheli le-MAC"
+
+#: setup.php
+msgid "Please enter the MAC Address to be watched for."
+msgstr "Sicela ufake Ikheli Le-MAC okufanele libhekwe."
+
+#: setup.php
+msgid "MAC Tracking Name/Email Subject"
+msgstr "Igama Lokulandelela i-MAC/Isihloko Se-imeyili"
+
+#: setup.php
+msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
+msgstr "Sicela ufake igama elifanele lalokhu okufakiwe Kokulandela I-MAC. Lolu lwazi luzoba kulayini wesihloko Se-imeyili yakho"
+
+#: setup.php
+msgid "Ticket number for cross referencing with your corporate help desk system(s)."
+msgstr "Inombolo yethikithi yokubhekisela ngezinhlelo zakho zedeski losizo lwenkampani."
+
+#: setup.php
+msgid "Notification Schedule"
+msgstr "Ishejuli yezaziso"
+
+#: setup.php
+msgid "Choose how often an Email should be generated for this Mac Watch item."
+msgstr "Khetha ukuthi I-imeyili kufanele ikhiqizwe kaningi kangakanani ngale nto ye-Mac Watch."
+
+#: setup.php
+msgid "First Occurrence Only"
+msgstr "Ukwenzeka Kokuqala Kuphela"
+
+#: setup.php
+msgid "All Occurrences"
+msgstr "Zonke Izenzakalo"
+
+#: setup.php
+msgid "Every Hour"
+msgstr "Njalo ngehora"
+
+#: setup.php
+msgid "Email Addresses"
+msgstr "Amakheli E-imeyili"
+
+#: setup.php
+msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
+msgstr "Faka amakheli e-imeyili ahlukaniswe nge-semicolon azowaziswa lapho leli kheli le-MAC likhona."
+
+#: setup.php
+msgid "General Mac Address Authorization Settings"
+msgstr "Izilungiselelo Ezijwayelekile Zokugunyaza Ikheli Le-MAC"
+
+#: setup.php
+msgid "MAC Address Match"
+msgstr "Ukufana Kwekheli le-MAC"
+
+#: setup.php
+msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
+msgstr "Sicela ufake Ikheli Le-MAC noma uchungechunge Lokufanisa Ikheli Le-MAC okufanele lugunyazwe ngokuzenzakalela. Uma ufisa ukugunyaza iqembu Lamakheli E-MAC, ungasebenzisa uhlamvu lwe-wildcard olungu-'&#37;' noma kuphi Ekhelini Le-MAC."
+
+#: setup.php
+msgid "Please add a reason for this entry."
+msgstr "Sicela wengeze isizathu salokhu okufakiwe."
+

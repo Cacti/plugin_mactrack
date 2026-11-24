@@ -1,0 +1,3597 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-18 18:36+0000\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Yoruba\n"
+"Language: yo-NG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
+msgstr "MacTrack kò lè bẹ̀rẹ̀ ibùdó Àìyípadà rẹ̀ lẹ́yìn àwọn ìgbìyànjú lẹ́ẹ̀kọ̀ọ̀kan. Ṣàyẹ̀wò àkọọ́lẹ̀ Cacti kí o tó tẹ̀síwájú."
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
+msgstr "MacTrack kò lè bẹ̀rẹ̀ ibùdó Àìyípadà rẹ̀. Ṣàyẹ̀wò àkọọ́lẹ̀ Cacti kí o tó tẹ̀síwájú."
+
+#: lib/mactrack_activity.php
+msgid "Scanning devices"
+msgstr "Ń ṣàyẹ̀wò àwọn ẹ̀rọ"
+
+#: lib/mactrack_activity.php
+msgid "Waiting for the DNS resolver"
+msgstr "Ń dúró de olùtúmọ̀ DNS"
+
+#: lib/mactrack_activity.php
+msgid "Transferring and aggregating scan results"
+msgstr "Ìgbéránṣẹ́ àti ìkójọpọ̀ àwọn èsì àyẹ̀wò"
+
+#: lib/mactrack_activity.php
+msgid "Maintaining port table partitions"
+msgstr "Ìtọ́jú àwọn ìpín tábìlì port"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired port rows"
+msgstr "Ń pa àwọn ìlà pọ́ọ̀tì tí àkókò wọn ti parí rẹ́"
+
+#: lib/mactrack_activity.php
+msgid "Pruning scan dates"
+msgstr "Ń rẹ́ àwọn déètì ìwádìí kúrò"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired IP rows"
+msgstr "Ń pa àwọn ìlà IP tí àkókò wọn ti parí rẹ́"
+
+#: lib/mactrack_activity.php
+msgid "Optimizing the IP table"
+msgstr "Ń mú tábìlì IP dára sí i"
+
+#: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
+#: mactrack_view_dot1x.php
+msgid "Idle"
+msgstr "Ní ìsinmi"
+
+#: lib/mactrack_activity.php
+msgid "Upgrading: rebuilding aggregated ports"
+msgstr "Ìgbésókè: títún àwọn pọ́ọ̀tì àkójọpọ̀ kọ́"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "About %s rows left to copy (estimate)"
+msgstr "Ó tó ìlà %s tó kù láti ṣàdàkọ (ìṣirò)"
+
+#: lib/mactrack_activity.php
+msgid "Repartitioning the port, IP and 802.1x tables"
+msgstr "Ṣíṣe àtúnpín àwọn tábìlì ibùdó àsopọ̀, IP àti 802.1x"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "%d devices in this scan"
+msgstr "Àwọn ẹ̀rọ %d nínú àyẹ̀wò yìí"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "The process stopped during: %s"
+msgstr "Ìlànà náà dúró nígbà: %s"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "Scanning %d devices"
+msgstr "Ń ṣàyẹ̀wò àwọn ẹ̀rọ %d"
+
+#: lib/mactrack_activity.php
+msgid "A database upgrade is running"
+msgstr "Ìgbésókè ibùdó dátà ń lọ lọ́wọ́"
+
+#: lib/mactrack_activity.php
+msgid "The port, IP and 802.1x table partitioning has not finished"
+msgstr "Ìpínsíwẹ́wẹ́ tábìlì ibùdó ìsopọ̀, IP àti 802.1x kò tíì parí"
+
+#: lib/mactrack_activity.php
+msgid "The aggregated ports rebuild has not finished"
+msgstr "Àtúnkọ àwọn ibùdó tí a kó jọ kò tíì parí"
+
+#: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
+msgid "Running"
+msgstr "Ń ṣiṣẹ́"
+
+#: lib/mactrack_functions.php
+msgid "No method"
+msgstr "Kò sí ọ̀nà"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Success"
+msgstr "Ìdánimọ̀ Ṣàṣeyọrí"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Failed"
+msgstr "Ìdánimọ̀ Kùnà"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Success"
+msgstr "Ìfọwọ́sí Ṣàṣeyọrí"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Failed"
+msgstr "Ìfọwọ́sí Kùnà"
+
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr "A kò ṣàkíyèsí rẹ̀ nínú àyẹ̀wò tuntun jù lọ"
+
+#: lib/mactrack_functions.php
+msgid "Locally Admined MAC"
+msgstr "MAC Tí A Ṣàkóso Ní Abẹ́lé"
+
+#: lib/mactrack_functions.php
+msgid "Mactrack Device Tracking OUI Database Import Results"
+msgstr "Àwọn Àbájáde Gbígbéwọlé Ibùdó Dátà OUI Ìtọ́pasẹ̀ Ẹ̀rọ Mactrack"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from IEEE"
+msgstr "Ń gba Àkójọpọ̀ Dátà OUI láti ọ̀dọ̀ IEEE"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from the IEEE"
+msgstr "Ń gba Àkójọpọ̀ Dátà OUI láti ọ̀dọ̀ IEEE"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE Complete"
+msgstr "Ìgbàsílẹ̀ Ibùdó Dátà OUI láti IEEE ti Parí"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE FAILED"
+msgstr "Ìgbàsílẹ̀ Ibùdó Dátà OUI láti IEEE KÙNÀ"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Entries Added/Updated in the database."
+msgstr "A ti Fi Àkọsílẹ̀ '%d' Kún un/Ṣàtúnṣe rẹ̀ nínú ibi-ìpamọ́ dátà."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Records Removed from the database."
+msgstr "A ti Yọ Àkọsílẹ̀ '%d' Kúrò nínú ibi-ìpamọ́ dátà."
+
+#: lib/mactrack_functions.php
+msgid "atifIndexes data collection complete"
+msgstr "Ìkójọpọ̀ dátà atifIndexes ti parí"
+
+#: lib/mactrack_functions.php
+msgid "atPhysAddress data collection complete"
+msgstr "Ìkójọpọ̀ dátà atPhysAddress ti parí"
+
+#: lib/mactrack_functions.php
+msgid "atNetAddress data collection complete"
+msgstr "Ìkójọpọ̀ dátà atNetAddress ti parí"
+
+#: lib/mactrack_functions.php
+msgid "atEntries assembly complete."
+msgstr "Ìkójọpọ̀ atEntries ti parí."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "HOST: %s, IP address information collection complete"
+msgstr "OLÙGBÀLEJÒ: %s, ìkójọpọ̀ àlàyé àdírẹ́sì IP ti parí"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php
+msgid "Rescan Device"
+msgstr "Tún Ẹ̀rọ Yẹ̀wò"
+
+#: lib/mactrack_functions.php
+msgid "View Non Interface Graphs"
+msgstr "Wo Àwọn Gíráàfù Tí Kì Í Ṣe Ìsopọ̀"
+
+#: lib/mactrack_functions.php
+msgid "No Non Interface Graphs in Cacti"
+msgstr "Kò sí Àwọn Gíráàfù Tí Kì Í Ṣe Ojú-ìsopọ̀ ní Cacti"
+
+#: lib/mactrack_functions.php
+msgid "View Interface Graphs"
+msgstr "Wo Àwọn Gíráàfù Ìsopọ̀"
+
+#: lib/mactrack_functions.php
+msgid "No Interface Graphs in Cacti"
+msgstr "Kò sí Àwọn Gíráàfù Ojú-ìsopọ̀ ní Cacti"
+
+#: lib/mactrack_functions.php
+msgid "Since Restart"
+msgstr "Láti ìgbà àtúnbẹ̀rẹ̀"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Down"
+msgstr "Kò Ṣiṣẹ́"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Up"
+msgstr "Ń Ṣiṣẹ́"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Unaliased"
+msgstr "Aláìlórúkọ-ìpè"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors"
+msgstr "Àwọn Àṣìṣe"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards"
+msgstr "Àwọn Ìkọ̀sílẹ̀"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Graphless"
+msgstr "Láìsí Gíráfù"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Àìmọ̀"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr "Ti Fọwọ́sí"
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
+msgstr "Aláìní àṣẹ"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Data"
+msgstr "Dátà"
+
+#: lib/mactrack_functions.php
+msgid "Voice"
+msgstr "Ohùn"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Rescan '%s'"
+msgstr "Àtúnṣàyẹ̀wò Ẹ̀rọ '%s'"
+
+#: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr "Àtúnṣàyẹ̀wò náà kò mú èsì kankan jáde."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr "Àtúnṣàyẹ̀wò ẹ̀rọ '%s' parí láàárín ìṣẹ́jú-àáyá %0.2f."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site scan '%s'"
+msgstr "Àyẹ̀wò Ibùdó '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr "Àyẹ̀wò Ibùdó '%s' parí láàárín ìṣẹ́jú-àáyá %0.2f."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Enable '%s'"
+msgstr "Mu Ẹ̀rọ Ṣiṣẹ́ '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Disable '%s'"
+msgstr "Sọ Ẹ̀rọ Di Àìṣiṣẹ́ '%s'"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_macwatch.php
+#: mactrack_snmp.php mactrack_utilities.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
+#: setup.php
+msgid "N/A"
+msgstr "Kò Sí"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "Ìṣẹ́jú %d"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Hours"
+msgstr "Wákàtí %d"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Days"
+msgstr "Ọjọ́ %d"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Weeks"
+msgstr "Ọ̀sẹ̀ %d"
+
+#: lib/mactrack_functions.php
+msgid "Not Recorded"
+msgstr "A Kò Kọ Ọ́ Sílẹ̀"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
+msgstr "Ipò: Ń ṣiṣẹ́, Àwọn Ìlànà Ìṣiṣẹ́: %d, Ìlọsíwájú: %s, Àkókò Ìṣiṣẹ́ Tó Kẹ́yìn: %2.1f"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
+msgstr "Ipò: Wà ní ìsinmi, Àkókò Ìṣiṣẹ́ Tó Kẹ́yìn: ìṣẹ́jú-àáyá %2.1f, Àwọn Ìlànà Ìṣiṣẹ́: ìlànà %d, Àwọn Ẹ̀rọ: %d, Àkókò Ìṣiṣẹ́ Tókàn: %s"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
+msgid "Disabled"
+msgstr "Àìṣiṣẹ́"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Scanning Rate: Every %s"
+msgstr "Ìwọ̀n Ìṣàyẹ̀wò: Ní gbogbo %s"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "View Interfaces"
+msgstr "Wo Àwọn Ìsopọ̀"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "Not Detected"
+msgstr "A Kò Rí I"
+
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr "Pátákó Àkóso"
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Sites"
+msgstr "Àwọn Ibùdó"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Devices"
+msgstr "Àwọn Ẹ̀rọ"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "Àwọn Ìsopọ̀"
+
+#: lib/mactrack_functions.php
+msgid "IP Ranges"
+msgstr "Àwọn Ààlà IP"
+
+#: lib/mactrack_functions.php setup.php
+msgid "IP Addresses"
+msgstr "Àwọn Àdírẹ́sì IP"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "Àwọn Àdírẹ́ẹ̀sì MAC"
+
+#: lib/mactrack_functions.php
+msgid "Dot1x"
+msgstr "Dot1x"
+
+#: lib/mactrack_functions.php mactrack_view_graphs.php
+msgid "Graphs"
+msgstr "Àwọn Gíráàfù"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Search"
+msgstr "Ṣàwárí"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_devices.php mactrack_view_ips.php
+#: setup.php
+msgid "Default"
+msgstr "Àìyípadà"
+
+#: lib/mactrack_functions.php
+msgid "Show Device Details"
+msgstr "Ṣàfihàn Àwọn Àlàyé Ẹ̀rọ"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Go"
+msgstr "Lọ"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Clear"
+msgstr "Nu Kúrò"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Export"
+msgstr "Kó Jáde"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+msgid "Site"
+msgstr "Ibùdó"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_ips.php
+msgid "Any"
+msgstr "Èyíkéyìí"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "SubType"
+msgstr "Ìsàlẹ̀ Irú"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgstr "Ṣé ó dá ọ lójú pé o fẹ́ pa gbogbo àwọn èsì Port sí MAC sí IP rẹ́ kúrò nínú ètò náà?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
+msgstr "Ṣé ó dá ọ lójú pé o fẹ́ pa àwọn èsì Port sí MAC sí IP tó ti parí rẹ́ báyìí?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
+msgstr "Ṣé o dá ọ lójú pé o fẹ́ nu àwọn iṣẹ́ àyẹ̀wò Mactrack tí a fi pamọ́ sínú káṣì kúrò?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Ṣé ó dá ọ lójú pé o fẹ́ pa gbogbo àwọn èsì Aggregated Port sí MAC sí IP rẹ́ kúrò nínú ètò náà?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Ṣé ó dá ọ lójú pé o fẹ́ pa rẹ́ kí o sì tún gbogbo àwọn èsì Aggregated Port sí MAC sí IP ṣe nínú ètò náà?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
+msgstr "Ṣé ó dá ọ lójú pé o fẹ́ ṣe ìgbàsílẹ̀ kí o sì gbé ibi ìpamọ́ dátà IEEE Vendor MAC/OUI wọlé báyìí?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
+msgstr "Ṣé o dá ọ lójú pé o fẹ́ tún àkójọ ọjọ́ àyẹ̀wò kọ́ láti inú àwọn èsì Port sí MAC sí IP tí a tọ́jú báyìí?"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
+msgstr "Tún kọ́ kí o sì ṣe àgbéyẹ̀wò ìpín tí ó ní àkíyèsí èbúté tuntun jùlọ, èyí tí í ṣe ọ̀sẹ̀ lọ́wọ́lọ́wọ́ pẹ̀lú àwọn ìpín ọ̀sọ̀ọ̀sẹ̀. A ó mú kí tábìlì tí kò ní ìpín ṣiṣẹ́ dáadáa pátápátá. A ó fò àwọn àyẹ̀wò tí a ṣètò nígbà tí èyí bá ń ṣiṣẹ́. Tẹ̀síwájú?"
+
+#: lib/mactrack_functions.php
+msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
+msgstr "Ṣe ìtọ́jú yìí ní àkókò tí a kò fi ń ṣiṣẹ́ púpọ̀. Àtúnkọ náà ń ṣe àdàkọ gbogbo ìtàn àwọn tábìlì ibùdó (àdírẹ́sì MAC), àdírẹ́sì IP àti 802.1x lọ́kọ̀ọ̀kan, ó sì lè gba ọ̀pọ̀ wákàtí. A ó fò àwọn àyẹ̀wò tí a ṣètò sílẹ̀, ìtọ́jú ibi ìpamọ́ dátà yóò dúró, àti pé wíwá MAC, IP àti 802.1x yóò fi ìránṣẹ́ ìtọ́jú hàn títí yóò fi parí. Fún ààyè sílẹ̀ lórí díísìkì fún ẹ̀dà kejì ti tábìlì kọ̀ọ̀kan àti àwọn àtọ́ka rẹ̀. Tẹ̀síwájú?"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Scan Results"
+msgstr "Yọ Gbogbo Àwọn Èsì Ìṣàyẹ̀wò Kúrò"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Perform Database Maintenance"
+msgstr "Ṣe Ìtọ́jú Ibi Ìpamọ́ Dátà"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Refresh Scanning Functions"
+msgstr "Sọ Àwọn Iṣẹ́ Ìṣàyẹ̀wò Di Ọ̀tun"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Aggregated Results"
+msgstr "Yọ Gbogbo Àwọn Èsì Tí A Kójọ Kúrò"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Perform Aggregate Table Rebuild"
+msgstr "Ṣe Àtúnkọ́ Tábìlì Àkópọ̀"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild IEEE Vendor MAC/OUI Database"
+msgstr "Tún Kọ́ Ibùdó Dátà MAC/OUI Olùtajà IEEE"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Rebuild Scan Dates"
+msgstr "Tún Kọ́ Àwọn Ọjọ́ Àyẹ̀wò"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Optimize Port Table"
+msgstr "Mú Tábìlì Èbúté Dára Sí I"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Configure Port and IP Address Partitioning"
+msgstr "Ṣètò Pípín Èbúté àti Àdírẹ́sì IP"
+
+#: lib/mactrack_partition_rebuild.php
+msgid "The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
+msgstr "A ń tún àwọn tábìlì ibùdó ìsopọ̀, IP àti 802.1x pín síwẹ́wẹ́, tàbí àtúnkọ kan kò parí, nítorí náà a kò lè yí ìtàn wọn padà báyìí. Gbìyànjú lẹ́ẹ̀kan sí i nígbà tí cli/upgrade_partitioning.php bá ti parí."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished."
+msgstr "MacTrack wà ní ipò ìtọ́jú fún wíwá àdírẹ́ẹ̀sì IP, àdírẹ́ẹ̀sì MAC àti 802.1x nígbà tí a ń tún àwọn tábìlì ìtàn rẹ̀ pín. Àwọn èsì kò pé títí tí pípín náà yóò fi parí."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
+msgstr "MacTrack wà ní ipò ìtọ́jú fún wíwá àdírẹ́ẹ̀sì IP, àdírẹ́ẹ̀sì MAC àti 802.1x nítorí pé pípín àwọn tábìlì ìtàn rẹ̀ kò parí. Àwọn èsì kò pé. Tún cli/upgrade_partitioning.php ṣiṣẹ́ láti bá a lọ."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "Maintenance Mode"
+msgstr "Ipò Ìtọ́jú"
+
+#: mactrack_actions.php
+#, php-format
+msgid "Mactrack Device: (%s) successfully updated"
+msgstr "Ẹ̀rọ Mactrack: (%s) ti di sísọdọ̀tun ní àṣeyọrí"
+
+#: mactrack_actions.php
+msgid "Import into Mactrack Database"
+msgstr "Kó Wọlé sí Ibùdó Dátà Mactrack"
+
+#: mactrack_actions.php
+msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
+msgstr "Tẹ 'Tẹ̀síwájú' láti kó Ẹ̀rọ wọ̀nyí wọlé sí Mactrack?  Jọ̀wọ́ sọ àwọn àṣàyàn Ẹ̀rọ Mactrack àfikún gẹ́gẹ́ bí a ṣe fihàn nísàlẹ̀."
+
+#: mactrack_actions.php
+msgid "We will use these devices SNMP options for the Mactrack Device as well."
+msgstr "A óò lo àwọn àṣàyàn SNMP àwọn ẹ̀rọ wọ̀nyí fún Ẹ̀rọ Mactrack náà pẹ̀lú."
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Router"
+msgstr "Kò Wúlò - Router"
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Switch/Hub"
+msgstr "Kò Wúlò - Switch/Hub"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Delete"
+msgstr "Pa rẹ́"
+
+#: mactrack_device_types.php mactrack_snmp.php
+msgid "Duplicate"
+msgstr "Ẹ̀dà"
+
+#: mactrack_device_types.php
+msgid "--dup--"
+msgstr "--dup--"
+
+#: mactrack_device_types.php
+msgid "You must select at least one device type."
+msgstr "O gbọ́dọ̀ yan ó kéré jù irú ẹ̀rọ kan."
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Continue"
+msgstr "Tẹ̀síwájú"
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to delete the following Device Type(s)."
+msgstr "Tẹ 'Tẹ̀síwájú' láti pa Irú Ẹ̀rọ wọ̀nyí rẹ́."
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
+msgstr "Tẹ 'Tẹ̀síwájú' láti ṣe àdàkọ Irú Ẹ̀rọ wọ̀nyí. O lè yí àpèjúwe padà fún àwọn irú ẹ̀rọ tuntun bí o bá fẹ́.  Bí bẹ́ẹ̀ kọ́, má ṣe yí iye tí ó wà nísàlẹ̀ padà, a ó sì ṣe àdàkọ orúkọ ìpilẹ̀ṣẹ̀ pẹ̀lú àfikún ìparí tuntun."
+
+#: mactrack_device_types.php
+msgid "Device Type Prefix:"
+msgstr "Àfòmọ́ Ìbẹ̀rẹ̀ Irú Ẹ̀rọ:"
+
+#: mactrack_device_types.php
+msgid "<description> (1)"
+msgstr "<description> (1)"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Cancel"
+msgstr "Fagilé"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Return"
+msgstr "Padà"
+
+#: mactrack_device_types.php
+msgid "New Type"
+msgstr "Irú Tuntun"
+
+#: mactrack_device_types.php
+msgid "Cisco"
+msgstr "Cisco"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "There were %d Device Types Added!"
+msgstr "A ti Fi %d Irú Àwọn Ẹ̀rọ Kún un!"
+
+#: mactrack_device_types.php
+msgid "No New Device Types Found!"
+msgstr "Kò sí Àwọn Irú Ẹ̀rọ Tuntun kankan tí a rí!"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import Results"
+msgstr "Àbájáde Ìkówọlé"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Cacti has imported the following items:"
+msgstr "Cacti ti kó àwọn ohun wọ̀nyí wọlé:"
+
+#: mactrack_device_types.php
+msgid "Import Mactrack Device Types"
+msgstr "Kó Àwọn Irú Ẹ̀rọ Mactrack Wọlé"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from Local File"
+msgstr "Kó Àwọn Irú Ẹ̀rọ Wọlé láti Fáìlì Abẹ́lé"
+
+#: mactrack_device_types.php
+msgid "Please specify the location of the CSV file containing your device type information."
+msgstr "Jọ̀wọ́ tọ́ka sí ibi tí fáìlì CSV tó ní àlàyé irú ẹ̀rọ rẹ wà."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Overwrite Existing Data?"
+msgstr "Ṣé kí a kọ lé Dátà Tí Ó Wà Tẹ́lẹ̀?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
+msgstr "Ṣé kí a gba ìlànà ìgbéwọlé láàyè láti kọ sórí dátà tí ó wà tẹ́lẹ̀?  Jọ̀wọ́ ṣàkíyèsí pé èyí kò túmọ̀ sí pípa ìlà àtijọ́ rẹ́, ó kàn máa ń rọ́pò àwọn ìlà tí ó jọra."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Allow Existing Rows to be Updated?"
+msgstr "Gba Ààyè fún Ṣíṣe Àtúnṣe Àwọn Ìlà Tí Ó Wà Tẹ́lẹ̀?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Required File Format Notes"
+msgstr "Àwọn Àkíyèsí Ọ̀nà Fáìlì Tí A Béèrè"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The file must contain a header row with the following column headings."
+msgstr "Fáìlì náà gbọ́dọ̀ ní ìlà àkọlé pẹ̀lú àwọn àkọlé òpó wọ̀nyí."
+
+#: mactrack_device_types.php
+msgid " - A common name for the device.  For example Cisco 6509 Switch"
+msgstr " - Orúkọ tí a sábà máa ń lò fún ẹ̀rọ náà. Fún àpẹẹrẹ Cisco 6509 Switch"
+
+#: mactrack_device_types.php
+msgid " - The vendor who produces this device"
+msgstr " - Olùpèsè tí ó ṣe ẹ̀rọ yìí"
+
+#: mactrack_device_types.php
+msgid " - The type of device this is.  See the notes below for this integer value"
+msgstr " - Irú ẹ̀rọ tí èyí jẹ́. Wo àwọn àkọsílẹ̀ ní ìsàlẹ̀ fún iye nọ́mbà òtútù yìí"
+
+#: mactrack_device_types.php
+msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
+msgstr " - Àkójọpọ̀ àwọn lẹ́tà àrà ọ̀tọ̀ láti inú snmp sysDescr tí ó dá ẹ̀rọ yìí mọ̀ ní pàtó"
+
+#: mactrack_device_types.php
+msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
+msgstr " - snmp sysObjectID pàtó ti olùtajà tí ó ya ẹ̀rọ yìí sọ́tọ̀ kúrò lára èyí tí ó tẹ̀lé e"
+
+#: mactrack_device_types.php
+msgid " - The scanning function that will be used to scan this device type"
+msgstr " - Iṣẹ́ ìṣàyẹ̀wò tí a óò lò láti ṣàyẹ̀wò irú ẹ̀rọ yìí"
+
+#: mactrack_device_types.php
+msgid " - The IP scanning function that will be used to scan this device type"
+msgstr " - Iṣẹ́ ìṣàyẹ̀wò IP tí a óò lò láti ṣàyẹ̀wò irú ẹ̀rọ yìí"
+
+#: mactrack_device_types.php
+msgid " - The 802.1x scanning function that will be used to scan this device type"
+msgstr " - Iṣẹ́ ìṣàyẹ̀wò 802.1x tí a óò lò láti ṣàyẹ̀wò irú ẹ̀rọ yìí"
+
+#: mactrack_device_types.php
+msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
+msgstr " - Tí a bá lè rí Nọ́mbà Ìdánimọ̀ (Serial Number) fún irú ẹ̀rọ yìí gbà nípasẹ̀ Ìbéèrè SNMP, fi OID rẹ̀ kún ibí"
+
+#: mactrack_device_types.php
+msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
+msgstr " - Tí iṣẹ́ ìṣàyẹ̀wò rẹ kò bá ní agbára láti ya àwọn ibùdó ìsopọ̀ trunk tàbí àwọn ibùdó ìsopọ̀ link sọ́tọ̀, èyí ni nọ́mbà ibùdó ìsopọ̀ ìbẹ̀rẹ̀ fún àwọn ibùdó ìsopọ̀ olùlò"
+
+#: mactrack_device_types.php
+msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
+msgstr " - Bákan náà bíi lowPort àyàfi pé èyí ni nọ́mbà ibùdó ìsopọ̀ olùlò tí ó ní nọ́mbà gíga"
+
+#: mactrack_device_types.php
+msgid " - Disabled type is not used"
+msgstr " - Irú Àìṣiṣẹ́ kò sí ní ìlò"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The primary key for this table is a combination of the following three fields:"
+msgstr "Kọ́kọ́rọ́ àkọ́kọ́ fún tábìlì yìí jẹ́ àpapọ̀ àwọn pápá mẹ́ta wọ̀nyí:"
+
+#: mactrack_device_types.php
+msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
+msgstr "Nítorí náà, tí o bá gbìyànjú láti kó àwọn irú ẹ̀rọ tí ó jọra wọlé, a ó ṣàtúnṣe dátà tó wà tẹ́lẹ̀ pẹ̀lú àlàyé tuntun."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid " is an integer field and must be one of the following:"
+msgstr " jẹ́ pápá nọ́mbà òtútù, ó sì gbọ́dọ̀ jẹ́ ọ̀kan lára àwọn ìwọ̀nyí:"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "1 - Switch/Hub"
+msgstr "1 - Súwíìṣì/Họ́ọ̀bù"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "2 - Switch/Router"
+msgstr "2 - Súwíìṣì/Ráútà"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "3 - Router"
+msgstr "3 - Ráútà"
+
+#: mactrack_device_types.php
+msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
+msgstr "Irú ẹ̀rọ ti Àwọn Ẹ̀rọ náà jẹ́ pínpinnu nípa ṣíṣe àyẹ̀wò aṣojú snmp rẹ̀ fún sysObjectID àti sysDescription àti fífi wé àwọn iye nínú ibùdó dátà àwọn irú ẹ̀rọ. Ìbámu àkọ́kọ́ tí a bá rí nínú ibùdó dátà ni a lò fún bí a ṣe lè ṣe àyẹ̀wò rẹ̀. Nítorí náà, ó ṣe pàtàkì púpọ̀ kí o yan sysObjectID_match, sysDescr_match, àti iṣẹ́ àyẹ̀wò tó tọ́ fún àwọn ẹ̀rọ rẹ."
+
+#: mactrack_device_types.php mactrack_devices.php setup.php
+msgid "Switch/Hub"
+msgstr "Swíìṣì/Họ́ọ̀bù"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Switch/Router"
+msgstr "Swíìṣì/Raútà"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Router"
+msgstr "Ráútà"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
+msgstr "ÌLÀ ÀKỌ́LẸ̀ TÍ A ṢE DÁADÁA:  <br>Àwọn òpó tí a rí ni: %s"
+
+#: mactrack_device_types.php mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
+msgstr "ÀṢÌṢE ÌṢE ÌLÀ ÀKỌ́LẸ̀: Ààyè tí a béèrè kò sí <br>Àwọn òpó tí a rí ni: %s"
+
+#: mactrack_device_types.php
+msgid "Unknown Assume \"Switch/Hub\""
+msgstr "Àìmọ̀ Gbà Pé \"Switch/Hub\""
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "ÌFIKÚN YỌRÍ SÍ RERE: Olùtajà: %s, Àpèjúwe: %s, Irú: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "ÌFIKÚN KÙNÀ: Olùtajà: %s, Àpèjúwe: %s, Irú: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "A FO ÌFIKÚN KỌJÁ, Ó WÀ TẸ́LẸ̀: Olùtajà: %s, Àpèjúwe: %s, Irú: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "Mactrack Device Types [edit: %s]"
+msgstr "Àwọn Irú Ẹ̀rọ Mactrack [ṣàtúnṣe: %s]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Types [new]"
+msgstr "Àwọn Irú Ẹ̀rọ Mactrack [tuntun]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Type Filters"
+msgstr "Àwọn Àlẹ̀mọ́ Irú Ẹ̀rọ Mactrack"
+
+#: mactrack_device_types.php
+msgid "Device Type Description"
+msgstr "Àpèjúwe Irú Ẹ̀rọ"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Device Type"
+msgstr "Irú Ẹ̀rọ"
+
+#: mactrack_device_types.php
+msgid "Port Scanner"
+msgstr "Aṣàyẹ̀wò Pọ́ọ̀tì"
+
+#: mactrack_device_types.php
+msgid "IP Scanner"
+msgstr "Olùṣàyẹ̀wò IP"
+
+#: mactrack_device_types.php
+msgid "Dot1x Scanner"
+msgstr "Olùṣàyẹ̀wò Dot1x"
+
+#: mactrack_device_types.php
+msgid "sysDescription Match"
+msgstr "Ìbámu sysDescription"
+
+#: mactrack_device_types.php
+msgid "Vendor OID Match"
+msgstr "Ìbámu OID Olùpèsè"
+
+#: mactrack_device_types.php setup.php
+msgid "Device Types"
+msgstr "Àwọn Irú Ẹ̀rọ"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "No"
+msgstr "Rárá"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "Yes"
+msgstr "Bẹ́ẹ̀ Ni"
+
+#: mactrack_device_types.php
+msgid "No Mactrack Device Types Found"
+msgstr "Kò sí Àwọn Irú Ẹ̀rọ Mactrack kankan tí a rí"
+
+#: mactrack_device_types.php
+msgid "Submit Query"
+msgstr "Fi Ìbéèrè Ránṣẹ́"
+
+#: mactrack_device_types.php
+msgid "Clear Filtered Results"
+msgstr "Nu Àwọn Èsì Tí A Lẹ̀ Mọ́"
+
+#: mactrack_device_types.php
+msgid "Rescan"
+msgstr "Tún-ṣàyẹ̀wò"
+
+#: mactrack_device_types.php
+msgid "Scan Active Devices for Unknown Device Types"
+msgstr "Ṣàyẹ̀wò Àwọn Ẹ̀rọ Tí Ó Ń Ṣiṣẹ́ fún Àwọn Irú Ẹ̀rọ Àìmọ̀"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import"
+msgstr "Kó Wọlé"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from a CSV File"
+msgstr "Kó Àwọn Irú Ẹ̀rọ Wọlé láti Fáìlì CSV"
+
+#: mactrack_device_types.php
+msgid "Export Device Types to Share with Others"
+msgstr "Kó Àwọn Irú Ẹ̀rọ Jáde Láti Pín Pẹ̀lú Àwọn Ẹlòmíràn"
+
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Vendor"
+msgstr "Olùpèsè"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php setup.php
+msgid "All"
+msgstr "Gbogbo"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
+msgid "Type"
+msgstr "Irú"
+
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Enabled"
+msgstr "Ṣiṣẹ́"
+
+#: mactrack_devices.php
+msgid "Enable"
+msgstr "Mú Ṣiṣẹ́"
+
+#: mactrack_devices.php mactrack_macwatch.php
+msgid "Disable"
+msgstr "Dá Dúró"
+
+#: mactrack_devices.php
+msgid "Change SNMP Options"
+msgstr "Yí Àwọn Àṣàyàn SNMP Padà"
+
+#: mactrack_devices.php
+msgid "Change Device Port Values"
+msgstr "Yí Àwọn Iye Pọ́ọ̀tì Ẹ̀rọ Padà"
+
+#: mactrack_devices.php
+msgid "Connect to Cacti Host via Hostname"
+msgstr "Sopọ̀ mọ́ Olùgbàlejò Cacti nípasẹ̀ Orúkọ Olùgbàlejò"
+
+#: mactrack_devices.php
+msgid "Copy SNMP Settings from Cacti Host"
+msgstr "Ṣe àdàkọ Àwọn Ètò SNMP láti Olùgbàlejò Cacti"
+
+#: mactrack_devices.php
+msgid "You must select at least one device."
+msgstr "O gbọ́dọ̀ yan ó kéré jù ẹ̀rọ kan."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to enable the following devices."
+msgstr "Tẹ 'Tẹ̀síwájú' láti mú kí àwọn ẹ̀rọ wọ̀nyí ṣiṣẹ́."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to disable the following devices."
+msgstr "Tẹ 'Tẹ̀síwájú' láti ṣe àìṣiṣẹ́ àwọn ẹ̀rọ wọ̀nyí."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Tẹ 'Tẹ̀síwájú' láti yí àwọn ààlà SNMP padà fún àwọn ẹ̀rọ wọ̀nyí, samisi àpótí tí ó wà lẹ́gbẹ̀ẹ́ àwọn pápá tí o fẹ́ ṣe àtúnṣe, kí o sì kọ iye tuntun síbẹ̀."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Tẹ 'Tẹ̀síwájú' láti yí àwọn ààlà ibùdó òkè tàbí ìsàlẹ̀ padà fún àwọn ẹ̀rọ wọ̀nyí, samisi àpótí tí ó wà lẹ́gbẹ̀ẹ́ àwọn pápá tí o fẹ́ ṣe àtúnṣe, kí o sì kọ iye tuntun síbẹ̀."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
+msgstr "Tẹ 'Tẹ̀síwájú' láti so àwọn ẹ̀rọ wọ̀nyí mọ́ Ẹ̀rọ Cacti wọn kọ̀ọ̀kan.  Ìbáṣepọ̀ náà yóò dá lórí àwọn orúkọ olùgbàlejò tí ó dọ́gba. Àpèjúwe yóò jẹ́ àtúnṣe pẹ̀lú."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
+msgstr "Tẹ 'Tẹ̀síwájú' láti da Àwọn Ètò SNMP kọ láti Ẹ̀rọ Cacti tí a so mọ́ sí Ẹ̀rọ Mactrack.  Gbogbo Àwọn Ẹ̀rọ tí a kò so mọ́ ni a ó fo ní ìdákẹ́jẹ́ẹ́. Àwọn ìgbìyànjú SNMP yóò wá láti inú àwọn ìgbìyànjú Ping."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to delete the following Devices"
+msgstr "Tẹ 'Tẹ̀síwájú' láti pa Àwọn Ẹ̀rọ wọ̀nyí rẹ́"
+
+#: mactrack_devices.php
+msgid "Import Mactrack Devices"
+msgstr "Kó Àwọn Ẹ̀rọ Mactrack Wọlé"
+
+#: mactrack_devices.php
+msgid "Import Devices from Local File"
+msgstr "Kó Àwọn Ẹ̀rọ Wọlé láti Fáìlì Abẹ́lé"
+
+#: mactrack_devices.php
+msgid "Please specify the location of the CSV file containing your device information."
+msgstr "Jọ̀wọ́ tọ́ka sí ibi tí fáìlì CSV tó ní àlàyé ẹ̀rọ rẹ wà."
+
+#: mactrack_devices.php
+msgid " - The SiteID known to Mactrack for this device"
+msgstr " - SiteID tí Mactrack mọ̀ fún ẹ̀rọ yìí"
+
+#: mactrack_devices.php
+msgid " - A simple name for the device.  For example Cisco 6509 Switch"
+msgstr " - Orúkọ ìrọ̀rùn fún ẹ̀rọ náà. Fún àpẹẹrẹ Cisco 6509 Switch"
+
+#: mactrack_devices.php
+msgid " - The IP Address or DNS Name for the device"
+msgstr " - Àdírẹ́sì IP tàbí Orúkọ DNS fún ẹ̀rọ náà"
+
+#: mactrack_devices.php
+msgid " - More detailed information about the device, including location, environmental conditions, etc."
+msgstr " - Àlàyé kíkún nípa ẹ̀rọ náà, pẹ̀lú ipò ibi tí ó wà, ipò àyíká, àti bẹ́ẹ̀ bẹ́ẹ̀ lọ."
+
+#: mactrack_devices.php
+msgid " - A list of ports that should not be scanned for user devices"
+msgstr " - Àtòjọ àwọn ibùdó ìsopọ̀ tí kò yẹ kí a ṣàyẹ̀wò fún àwọn ẹ̀rọ olùlò"
+
+#: mactrack_devices.php
+msgid " - Redundant information indicating the intended device type.  See below for valid values."
+msgstr " - Àlàyé àfikún tí ó ń tọ́ka sí irú ẹ̀rọ tí a fẹ́. Wo ìsàlẹ̀ fún àwọn iye tí ó tọ́."
+
+#: mactrack_devices.php
+msgid " - Id of a set of SNMP options"
+msgstr " - ID ti àkójọ àwọn àṣàyàn SNMP"
+
+#: mactrack_devices.php
+msgid " - The current snmp read string for the device"
+msgstr " - Okùn ìkàwé snmp lọ́wọ́lọ́wọ́ fún ẹ̀rọ náà"
+
+#: mactrack_devices.php
+msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
+msgstr " - Ẹ̀yà snmp tí o fẹ́ lò láti ṣàyẹ̀wò ẹ̀rọ yìí. Àwọn iye tí ó tọ́ ni 1, 2 àti 3"
+
+#: mactrack_devices.php
+msgid " - The UDP port that the snmp agent is running on"
+msgstr " - Ibùdó ìsopọ̀ UDP tí aṣojú snmp ń ṣiṣẹ́ lé lórí"
+
+#: mactrack_devices.php
+msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
+msgstr " - Àkókò ìdádúró ní milliseconds láti dúró de ìdáhùn snmp kí a tó tún gbìyànjú"
+
+#: mactrack_devices.php
+msgid " - The number of times to retry a snmp request before giving up"
+msgstr " - Iye ìgbà láti tún ìbéèrè snmp gbìyànjú kí a tó jáwọ́"
+
+#: mactrack_devices.php
+msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
+msgstr " - Ó sọ iye àwọn OID tí a lè gbà nínú ìbéèrè SNMP Get kan ṣoṣo"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP username"
+msgstr " - SNMP V3: orúkọ olùlò SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP password"
+msgstr " - SNMP V3: ọ̀rọ̀ aṣínà SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP authentication protocol"
+msgstr " - SNMP V3: ìlànà ìjẹ́rìísí SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy passphrase"
+msgstr " - SNMP V3: gbólóhùn ìkọ̀kọ̀ ìpamọ́ SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy protocol"
+msgstr " - SNMP V3: ìlànà ìpamọ́ SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP context"
+msgstr " - SNMP V3: àyíká SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP engine id"
+msgstr " - SNMP V3: ID ẹ́ńjìnì SNMP"
+
+#: mactrack_devices.php
+msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
+msgstr "Nítorí náà, tí o bá gbìyànjú láti kó àwọn ẹ̀rọ tí ó jọra wọlé, dátà tí o sọ pàtó nìkan ni a ó ṣàtúnṣe."
+
+#: mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
+msgstr "ÌLÀ ÀKỌ́LẸ̀ TÍ A ṢE DÁADÁA: <br>Àwọn òpó tí a rí ni: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "ÌFIKÚN YỌRÍ SÍ RERE: Orúkọ Olùgbàlejò: ID Ibùdó: %s, Orúkọ Ẹ̀rọ: %s, Orúkọ Olùgbàlejò %s, Ibùdó SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "ÌFIKÚN KÙNÀ: ID Ibùdó: %s, Orúkọ Ẹ̀rọ: %s, Orúkọ Olùgbàlejò %s, Ibùdó SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "A FO ÌFIKÚN KỌJÁ, Ó WÀ TẸ́LẸ̀: ID Ibùdó: %s, Orúkọ Ẹ̀rọ: %s, Orúkọ Olùgbàlejò %s, Ibùdó SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "Mactrack Devices [edit: %s]"
+msgstr "Àwọn Ẹ̀rọ Mactrack [ṣàtúnṣe: %s]"
+
+#: mactrack_devices.php
+msgid "Mactrack Devices [new]"
+msgstr "Àwọn Ẹ̀rọ Mactrack [tuntun]"
+
+#: mactrack_devices.php
+msgid "SNMP Information"
+msgstr "Ìfitónilétí SNMP"
+
+#: mactrack_devices.php
+msgid "System:"
+msgstr "Ètò:"
+
+#: mactrack_devices.php
+msgid "Uptime:"
+msgstr "Àkókò tí ó ti ń ṣiṣẹ́:"
+
+#: mactrack_devices.php
+msgid "Hostname:"
+msgstr "Orúkọ olùgbàlejò:"
+
+#: mactrack_devices.php
+msgid "ObjectID:"
+msgstr "ID Ohun:"
+
+#: mactrack_devices.php
+msgid "Mactrack Device Filters"
+msgstr "Àwọn Àlẹ̀mọ́ Ẹ̀rọ Mactrack"
+
+#: mactrack_devices.php mactrack_view_devices.php setup.php
+msgid "Device Name"
+msgstr "Orúkọ Ẹ̀rọ"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Site Name"
+msgstr "Orúkọ Ibi-ìṣẹ́"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Status"
+msgstr "Ipò"
+
+#: mactrack_devices.php mactrack_view_devices.php mactrack_view_interfaces.php
+#: setup.php
+msgid "Hostname"
+msgstr "Orúkọ Olùgbàlejò"
+
+#: mactrack_devices.php
+msgid "Total IPs"
+msgstr "Àpapọ̀ Àwọn IP"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports"
+msgstr "Àwọn Pọ́ọ̀tì Olùlò"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports Up"
+msgstr "Àwọn Pọ́ọ̀tì Olùlò Tó Ń Ṣiṣẹ́"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Trunk Ports"
+msgstr "Àwọn Pọ́ọ̀tì Trunk"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Active Macs"
+msgstr "Àwọn MAC Tí Ó Ń Ṣiṣẹ́"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Last Duration"
+msgstr "Àkókò Tí Ó Gbà Kẹ́yìn"
+
+#: mactrack_devices.php
+msgid "No Mactrack Devices"
+msgstr "Kò sí Àwọn Ẹ̀rọ Mactrack"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: setup.php
+msgid "None"
+msgstr "Kò Sí"
+
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
+msgid "Error"
+msgstr "Àṣìṣe"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "No Cacti Link"
+msgstr "Kò Sí Ìjápọ̀ Cacti"
+
+#: mactrack_macauth.php
+msgid "You must select at least one Authorized Mac to delete."
+msgstr "O gbọ́dọ̀ yan ó kéré jù Mac Tí A Fọwọ́ Sí kan láti pa rẹ́."
+
+#: mactrack_macauth.php
+msgid "Click 'Continue' to delete the following Authorized Mac's?"
+msgstr "Tẹ 'Tẹ̀síwájú' láti pa àwọn MAC Tí A Fọwọ́sí wọ̀nyí rẹ́?"
+
+#: mactrack_macauth.php
+#, php-format
+msgid "Mactrack MacAuth [edit: %s]"
+msgstr "Mactrack MacAuth [ṣàtúnṣe: %s]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth [new]"
+msgstr "Mactrack MacAuth [tuntun]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth Filters"
+msgstr "Àwọn Àlẹ̀mọ́ Mactrack MacAuth"
+
+#: mactrack_macauth.php mactrack_macwatch.php
+msgid "Mac Address"
+msgstr "Àdírẹ́ẹ̀sì Mac"
+
+#: mactrack_macauth.php setup.php
+msgid "Reason"
+msgstr "Ìdí"
+
+#: mactrack_macauth.php
+msgid "Added/Modified"
+msgstr "Tí a fi kún/Tí a ṣàtúnṣe"
+
+#: mactrack_macauth.php
+msgid "By"
+msgstr "Nípa"
+
+#: mactrack_macauth.php
+msgid "Authorized Mac Addresses"
+msgstr "Àwọn Àdírẹ́sì MAC Tí A Fọwọ́sí"
+
+#: mactrack_macauth.php
+msgid "No Authorized Mac Addresses Found"
+msgstr "Kò Sí Àwọn Àdírẹ́sì MAC Tí A Fọwọ́sí Tí A Rí"
+
+#: mactrack_macauth.php mactrack_vendormacs.php mactrack_view_macs.php
+msgid "MAC's"
+msgstr "Àwọn MAC"
+
+#: mactrack_macwatch.php
+msgid "Click 'Continue' to delete the following watched Mac's?"
+msgstr "Tẹ 'Tẹ̀síwájú' láti pa àwọn MAC tí a ń ṣọ́ wọ̀nyí rẹ́?"
+
+#: mactrack_macwatch.php
+#, php-format
+msgid "Mactrack MacWatch [edit: %s]"
+msgstr "Mactrack MacWatch [ṣàtúnṣe: %s]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch [new]"
+msgstr "Mactrack MacWatch [tuntun]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch Filters"
+msgstr "Àwọn Àlẹ̀mọ́ Mactrack MacWatch"
+
+#: mactrack_macwatch.php
+msgid "Watch Name"
+msgstr "Orúkọ Ìṣọ́"
+
+#: mactrack_macwatch.php setup.php
+msgid "Ticket Number"
+msgstr "Nọ́ńbà Tíkẹ́ẹ̀tì"
+
+#: mactrack_macwatch.php
+msgid "First Seen"
+msgstr "Ìgbà Àkọ́kọ́ Tí A Rí I"
+
+#: mactrack_macwatch.php
+msgid "Last Seen"
+msgstr "Ìgbà Tí A Rí I Kẹ́yìn"
+
+#: mactrack_macwatch.php
+msgid "Watches"
+msgstr "Àwọn Ìṣọ́"
+
+#: mactrack_macwatch.php
+msgid "No Mactrack Watched Macs Found"
+msgstr "Kò sí Àwọn MAC Tí À Ń Ṣọ́ ti Mactrack kankan tí a rí"
+
+#: mactrack_sites.php
+msgid "Click 'Continue' to delete the following Site(s)?"
+msgstr "Tẹ 'Tẹ̀síwájú' láti pa Ibùdó wọ̀nyí rẹ́?"
+
+#: mactrack_sites.php
+msgid "You must select at least one site."
+msgstr "O gbọ́dọ̀ yan ó kéré jù ibùdó kan."
+
+#: mactrack_sites.php
+#, php-format
+msgid "Mactrack Site [edit: %s]"
+msgstr "Ibùdó Mactrack [ṣàtúnṣe: %s]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site [new]"
+msgstr "Ibùdó Mactrack [tuntun]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site Filters"
+msgstr "Àwọn Àlẹ̀mọ́ Ibùdó Mactrack"
+
+#: mactrack_sites.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "Total IP's"
+msgstr "Àpapọ̀ Àwọn IP"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "MACS Found"
+msgstr "Àwọn MAC Tí A Rí"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Device Errors"
+msgstr "Àwọn Àṣìṣe Ẹ̀rọ"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "No Mactrack Sites Found"
+msgstr "Kò sí Àwọn Ibùdó Mactrack kankan tí a rí"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Devices"
+msgstr "Àpapọ̀ Àwọn Ẹ̀rọ"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total User Ports"
+msgstr "Àpapọ̀ Àwọn Pọ́ọ̀tì Olùlò"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Oper Ports"
+msgstr "Àpapọ̀ Àwọn Pọ́ọ̀tì Ìṣiṣẹ́"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Trunks"
+msgstr "Àpapọ̀ Àwọn Trunk"
+
+#: mactrack_snmp.php
+msgid "You must select at least one SNMP Option."
+msgstr "O gbọ́dọ̀ yan ó kéré jù Àṣàyàn SNMP kan."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to delete the following SNMP Option(s)."
+msgstr "Tẹ 'Tẹ̀síwájú' láti pa àwọn Àṣàyàn SNMP tí ó tẹ̀lé rẹ́."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
+msgstr "Tẹ 'Tẹ̀síwájú' láti ṣe àdàkọ Àṣàyàn SNMP wọ̀nyí. O lè yí ọ̀nà àkọlé padà fún àwọn Àṣàyàn SNMP tuntun bí o bá fẹ́."
+
+#: mactrack_snmp.php
+msgid "Name Format:"
+msgstr "Ìtòlẹ́sẹẹsẹ Orúkọ:"
+
+#: mactrack_snmp.php
+msgid "<name> (1)"
+msgstr "<name> (1)"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Options [edit %s]"
+msgstr "Àwọn Àṣàyàn SNMP [ṣàtúnṣe %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Options [new]"
+msgstr "Àwọn Àṣàyàn SNMP [tuntun]"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Option Set [edit: %s]"
+msgstr "Àkójọ Àṣàyàn SNMP [àtúnṣe: %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Option Set [new]"
+msgstr "Àkójọ Àṣàyàn SNMP [tuntun]"
+
+#: mactrack_snmp.php setup.php
+msgid "Mactrack SNMP Options"
+msgstr "Àwọn Àṣàyàn SNMP Mactrack"
+
+#: mactrack_snmp.php
+msgid "Item"
+msgstr "Ohun Èlò"
+
+#: mactrack_snmp.php setup.php
+msgid "Version"
+msgstr "Ẹ̀yà"
+
+#: mactrack_snmp.php setup.php
+msgid "Community"
+msgstr "Àwùjọ"
+
+#: mactrack_snmp.php setup.php
+msgid "Port"
+msgstr "Èbúté"
+
+#: mactrack_snmp.php setup.php
+msgid "Timeout"
+msgstr "Àkókò Ìparí"
+
+#: mactrack_snmp.php setup.php
+msgid "Retries"
+msgstr "Àwọn Àtúngbìyànjú"
+
+#: mactrack_snmp.php
+msgid "Max OIDs"
+msgstr "Àwọn OID Tó Pọ̀ Jù Lọ"
+
+#: mactrack_snmp.php mactrack_view_dot1x.php
+msgid "Username"
+msgstr "Orúkọ Olùlò"
+
+#: mactrack_snmp.php
+msgid "Auth Proto"
+msgstr "Ìlànà Ìdánimọ̀"
+
+#: mactrack_snmp.php
+msgid "Priv Proto"
+msgstr "Ìlànà Àṣírí"
+
+#: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Actions"
+msgstr "Àwọn Ìgbésẹ̀"
+
+#: mactrack_snmp.php
+msgid "No SNMP Items Found"
+msgstr "Kò sí Àwọn Ohun SNMP kankan tí a rí"
+
+#: mactrack_snmp.php
+msgid "Title of SNMP Option Set"
+msgstr "Àkọlé Àkójọ Àṣàyàn SNMP"
+
+#: mactrack_snmp.php
+msgid "SNMP Settings"
+msgstr "Àwọn Ètò SNMP"
+
+#: mactrack_snmp.php
+msgid "No SNMP Option Sets Found"
+msgstr "A Kò Rí Àwọn Àkójọ Àṣàyàn SNMP Kankan"
+
+#: mactrack_snmp.php
+msgid "Options"
+msgstr "Àwọn Àṣàyàn"
+
+#: mactrack_utilities.php
+msgid "Mactrack Database Results"
+msgstr "Àwọn Àbájáde Ibùdó Dátà Mactrack"
+
+#: mactrack_utilities.php
+msgid "Mactrack Process Status"
+msgstr "Ipò Ìlànà Mactrack"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Refresh"
+msgstr "Sọdọ̀tun"
+
+#: mactrack_utilities.php
+msgid "Current Process Status"
+msgstr "Ipò Ìlànà Lọ́wọ́lọ́wọ́"
+
+#: mactrack_utilities.php
+msgid "The Mactrack Poller is:"
+msgstr "Olùṣàyẹ̀wò Mactrack jẹ́:"
+
+#: mactrack_utilities.php
+msgid "Running Processes:"
+msgstr "Àwọn Ìlànà Tí Ń Ṣiṣẹ́:"
+
+#: mactrack_utilities.php
+msgid "Last Time Poller Started:"
+msgstr "Ìgbà Tí Olùṣàyẹ̀wò Bẹ̀rẹ̀ Kẹ́yìn:"
+
+#: mactrack_utilities.php
+msgid "Poller Frequency:"
+msgstr "Ìgbàgbogbo Olùṣàyẹ̀wò:"
+
+#: mactrack_utilities.php
+msgid "Approx. Next Runtime:"
+msgstr "Àkókò Ìṣiṣẹ́ Tókàn Tó Súnmọ́:"
+
+#: mactrack_utilities.php
+msgid "Database Maintenance Information"
+msgstr "Àlàyé Ìtọ́jú Dátàbẹ́ẹ̀sì"
+
+#: mactrack_utilities.php
+msgid "Last DB Maintenance Time:"
+msgstr "Àkókò Ìtọ́jú DB Tó Kẹ́yìn:"
+
+#: mactrack_utilities.php
+msgid "Next DB Maintenance Time:"
+msgstr "Àkókò Àtúnṣe DB Tókàn:"
+
+#: mactrack_utilities.php
+msgid "Run Time Details"
+msgstr "Àwọn Àlàyé Àkókò Ìṣiṣẹ́"
+
+#: mactrack_utilities.php
+msgid "Last Poller Runtime:"
+msgstr "Àkókò Ìṣiṣẹ́ Olùṣàyẹ̀wò Tó Kẹ́yìn:"
+
+#: mactrack_utilities.php
+msgid "Last Poller Maintenance Runtime:"
+msgstr "Àkókò Ìṣiṣẹ́ Ìtọ́jú Olùṣàyẹ̀wò Tó Kẹ́yìn:"
+
+#: mactrack_utilities.php
+msgid "Maximum Concurrent Processes:"
+msgstr "Àwọn Ìlànà Lẹ́ẹ̀kan Náà Tó Pọ̀ Jù Lọ:"
+
+#: mactrack_utilities.php
+msgid "processes"
+msgstr "àwọn ìlànà ìṣiṣẹ́"
+
+#: mactrack_utilities.php
+msgid "Maximum Per Device Scan Time:"
+msgstr "Àkókò Àyẹ̀wò Fún Ẹ̀rọ Kọ̀ọ̀kan Tó Pọ̀ Jù Lọ:"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "minutes"
+msgstr "ìṣẹ́jú"
+
+#: mactrack_utilities.php
+msgid "DNS Configuration Information"
+msgstr "Àlàyé Ìṣètò DNS"
+
+#: mactrack_utilities.php
+msgid "Reverse DNS Resolution is"
+msgstr "Ìtúpalẹ̀ DNS Ìdàkejì jẹ́"
+
+#: mactrack_utilities.php
+msgid "Primary DNS Server:"
+msgstr "Olùpèsè DNS Àkọ́kọ́:"
+
+#: mactrack_utilities.php
+msgid "Secondary DNS Server:"
+msgstr "Olùpèsè DNS Kejì:"
+
+#: mactrack_utilities.php
+msgid "DNS Resolution Timeout:"
+msgstr "Àkókò Ìparí Ìtúmọ̀ DNS:"
+
+#: mactrack_utilities.php
+msgid "milliseconds"
+msgstr "milisẹ́kọ́ǹdù"
+
+#: mactrack_utilities.php
+msgid "Running Process Summary"
+msgstr "Àkópọ̀ Ìlànà Tó Ń Ṣiṣẹ́"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Not Running"
+msgstr "Olùtúmọ̀ DNS Kò Ṣiṣẹ́ Lọ́wọ́"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Running"
+msgstr "Olùtúmọ̀ DNS Ń Ṣiṣẹ́"
+
+#: mactrack_utilities.php
+msgid "Date Started"
+msgstr "Ọjọ́ Tí Ó Bẹ̀rẹ̀"
+
+#: mactrack_utilities.php
+msgid "Completed"
+msgstr "Ti parí"
+
+#: mactrack_utilities.php
+msgid "Waiting"
+msgstr "Ń dúró"
+
+#: mactrack_utilities.php
+msgid "Other"
+msgstr "Òmíràn"
+
+#: mactrack_utilities.php
+msgid "Current Activity"
+msgstr "Ìṣẹ̀lẹ̀ Lọ́wọ́lọ́wọ́"
+
+#: mactrack_utilities.php
+msgid "State:"
+msgstr "Ipò:"
+
+#: mactrack_utilities.php
+msgid "Since:"
+msgstr "Láti ìgbà:"
+
+#: mactrack_utilities.php
+msgid "Detail:"
+msgstr "Àlàyé kíkún:"
+
+#: mactrack_utilities.php
+msgid "Last Skipped Poller Run:"
+msgstr "Ìṣiṣẹ́ Olùṣàyẹ̀wò Tí A Fò Kẹ́yìn:"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance Steps"
+msgstr "Àwọn Ìgbésẹ̀ Ìtọ́jú Tó Kẹ́yìn"
+
+#: mactrack_utilities.php
+msgid "Seconds"
+msgstr "Àwọn Ìṣẹ́jú-àáyá"
+
+#: mactrack_utilities.php
+msgid "Step"
+msgstr "Ìgbésẹ̀"
+
+#: mactrack_utilities.php
+msgid "Table Sizes"
+msgstr "Àwọn Ìwọ̀n Tábìlì"
+
+#: mactrack_utilities.php
+msgid "Free"
+msgstr "Òfìfo"
+
+#: mactrack_utilities.php
+msgid "Index"
+msgstr "Àtọ́ka"
+
+#: mactrack_utilities.php
+msgid "Rows (estimate)"
+msgstr "Àwọn ìlà (ìṣirò)"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Tábìlì"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database runs on another host"
+msgstr "Àìmọ̀: ibi ìpamọ́ dátà ń ṣiṣẹ́ lórí olùgbàlejò mìíràn"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database data directory cannot be found from this host"
+msgstr "Àìmọ̀: kò ṣeé rí àkójọpọ̀ dátà ibi ìpamọ́ dátà láti ọ̀dọ̀ olùgbàlejò yìí"
+
+#: mactrack_utilities.php
+msgid "Database Disk Free:"
+msgstr "Ààyè Dísìkì Dátàbẹ́ẹ̀sì Tó Ṣófo:"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the database: %s"
+msgstr "Iye àwọn àkọsílẹ̀ wọ̀nyí ni a ti yọ kúrò nínú ibi ìpamọ́ dátà: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s"
+msgstr "Iye àwọn àkọsílẹ̀ wọ̀nyí ni a ti yọ kúrò nínú tábìlì àpapọ̀: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
+msgstr "Iye àwọn àkọsílẹ̀ wọ̀nyí ni a ti yọ kúrò nínú tábìlì àpapọ̀: %s.  Àti pé a ó fi àkọsílẹ̀ %s kún un."
+
+#: mactrack_utilities.php
+msgid "Mactrack Scan Date Rebuild Results"
+msgstr "Àwọn Àbájáde Àtúnkọ Ọjọ́ Ìyẹ̀wò Mactrack"
+
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr "Àtúnkọ ọjọ́ ìṣàyẹ̀wò kùnà. Ṣàyẹ̀wò àkọsílẹ̀ Cacti kí o sì tún gbìyànjú."
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Scan dates rebuilt: %d"
+msgstr "Àwọn ọjọ́ ìṣàyẹ̀wò tí a tún kọ: %d"
+
+#: mactrack_utilities.php
+msgid "A scan or a port table conversion is running. Try again when it has finished."
+msgstr "Ìṣàyẹ̀wò tàbí ìyípadà tábìlì èbúté ń lọ lọ́wọ́. Gbìyànjú lẹ́ẹ̀kan sí i nígbà tí ó bá parí."
+
+#: mactrack_utilities.php setup.php
+msgid "One per Scan"
+msgstr "Ọ̀kan fún Ìwádìí Kọ̀ọ̀kan"
+
+#: mactrack_utilities.php setup.php
+msgid "Hourly"
+msgstr "Wákàtí Kọ̀ọ̀kan"
+
+#: mactrack_utilities.php setup.php
+msgid "Daily"
+msgstr "Ojoojúmọ́"
+
+#: mactrack_utilities.php setup.php
+msgid "Weekly"
+msgstr "Ọ̀sọ̀ọ̀sẹ̀"
+
+#: mactrack_utilities.php
+msgid "Not partitioned"
+msgstr "Kò pín sí apá"
+
+#: mactrack_utilities.php
+msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
+msgstr "Àwọn ìpín ojoojúmọ́ láti inú ìtẹ̀jáde MacTrack àtijọ́. A nílò ìyípadà."
+
+#: mactrack_utilities.php
+msgid "Partitioned by scan date"
+msgstr "Pípín nípa ọjọ́ àyẹ̀wò"
+
+#: mactrack_utilities.php
+msgid "Unrecognized partitions. MacTrack makes no partition changes."
+msgstr "Àwọn ìpín àìmọ̀. MacTrack kò ṣe àyípadà ìpín kankan."
+
+#: mactrack_utilities.php
+msgid "Port Table Partitions"
+msgstr "Àwọn Ìpín Tábìlì Pọ́ọ̀tì"
+
+#: mactrack_utilities.php
+msgid "Layout"
+msgstr "Ìṣètò ojú-ìwé"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%d of at most %d"
+msgstr "%d nínú ó pọ̀ jù %d"
+
+#: mactrack_utilities.php
+msgid "Partitions"
+msgstr "Àwọn Ìpín"
+
+#: mactrack_utilities.php
+msgid "Oldest Partition"
+msgstr "Ìpín Tí Ó Pẹ́ Jùlọ"
+
+#: mactrack_utilities.php
+msgid "Newest Partition"
+msgstr "Ìpín Tuntun Jùlọ"
+
+#: mactrack_utilities.php
+msgid "Partitions Cover Scans Before"
+msgstr "Àwọn Ìpín Bo Àwọn Àyẹ̀wò Ṣáájú"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s, coarser than the setting because %d partitions would exceed the limit"
+msgstr "%s, ó gbòòrò ju ètò lọ nítorí pé àwọn ìpín %d yóò kọjá àlà"
+
+#: mactrack_utilities.php setup.php
+msgid "Port and IP Address Partition Size"
+msgstr "Ìwọ̀n Ìpín Pọ́ọ̀tì àti Àdírẹ́sì IP"
+
+#: mactrack_utilities.php
+msgid "Pending Exchange"
+msgstr "Pàṣípààrọ̀ Tó Ń Dúró"
+
+#: mactrack_utilities.php
+msgid "Load Path"
+msgstr "Ọ̀nà Ìgbéwọlé"
+
+#: mactrack_utilities.php
+msgid "PHP batches"
+msgstr "Àwọn ìpele PHP"
+
+#: mactrack_utilities.php
+msgid "Last Scan Note"
+msgstr "Àkíyèsí Ìwádìí Tó Kẹ́yìn"
+
+#: mactrack_utilities.php
+msgid "Rebuild"
+msgstr "Tún Kọ́"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Running since %s"
+msgstr "Ń ṣiṣẹ́ láti %s"
+
+#: mactrack_utilities.php
+msgid "Last Rebuild"
+msgstr "Àtúnkọ́ Tó Kẹ́yìn"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d rows into %d partitions"
+msgstr "%s: àwọn ìlà %d sínú àwọn ìpín %d"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: failed. %s"
+msgstr "%s: kùnà. %s"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance"
+msgstr "Ìtọ́jú Tó Kẹ́yìn"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d partitions dropped, %d created"
+msgstr "%s: àwọn ìpín %d ni a pa rẹ́, %d ni a dá sílẹ̀"
+
+#: mactrack_utilities.php
+msgid "IP Table Layout"
+msgstr "Ìṣètò Tábìlì IP"
+
+#: mactrack_utilities.php
+msgid "IP Table Partitions"
+msgstr "Àwọn Ìpín Tábìlì IP"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Layout"
+msgstr "Ìṣètò Tábìlì 802.1x"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Partitions"
+msgstr "Àwọn Ìpín Tábìlì 802.1x"
+
+#: mactrack_utilities.php
+msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
+msgstr "Yan ìpín ojoojúmọ́, ọ̀sọ̀ọ̀sẹ̀ tàbí àìṣiṣẹ́ kí o tó bẹ̀rẹ̀ àtúnkọ́."
+
+#: mactrack_utilities.php
+msgid "A rebuild is already running. The partition status page shows when it has finished."
+msgstr "Àtúnkọ kan ti ń lọ lọ́wọ́ tẹ́lẹ̀. Ojú-ìwé ipò ìpín máa ń fi hàn nígbà tí ó bá parí."
+
+#: mactrack_utilities.php
+msgid "The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running."
+msgstr "A ti béèrè fún àtúnkọ náà ní abẹ́lẹ̀. Ṣàyẹ̀wò Ipò Ìpínsíwẹ́wẹ́ fún èsì rẹ̀; yóò kọ̀ láti bẹ̀rẹ̀ tí àyẹ̀wò tàbí àtúnkọ mìíràn bá ń lọ lọ́wọ́."
+
+#: mactrack_utilities.php
+msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
+msgstr "Àwọn iṣẹ́ ìyẹ̀wò Mactrack ti di pípá rẹ́.  A ó tún wọn ṣẹ̀dá ní gbàrà tí o bá ṣàtúnṣe ẹ̀rọ kan tàbí irú ẹ̀rọ kan."
+
+#: mactrack_utilities.php
+msgid "Cacti Mactrack System Utilities"
+msgstr "Àwọn Ohun-èlò Ètò Cacti Mactrack"
+
+#: mactrack_utilities.php
+msgid "Process Status Information"
+msgstr "Àlàyé Ipò Ìṣiṣẹ́"
+
+#: mactrack_utilities.php setup.php
+msgid "View Mactrack Process Status"
+msgstr "Wo Ipò Ìlànà Mactrack"
+
+#: mactrack_utilities.php
+msgid "This option will let you show and set process information associated with the Mactrack polling process."
+msgstr "Àṣàyàn yìí yóò jẹ́ kí o fi hàn kí o sì ṣètò àlàyé ìlànà tí ó ní í ṣe pẹ̀lú ìlànà ìṣàyẹ̀wò Mactrack."
+
+#: mactrack_utilities.php
+msgid "Database Administration"
+msgstr "Ìṣàkóso Dátàbẹ́ẹ̀sì"
+
+#: mactrack_utilities.php
+msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
+msgstr "Máa ń pa àwọn ìsopọ̀ Pọ́ọ̀tì sí MAC sí IP tí àkókò wọn ti parí rẹ́ kúrò nínú ibùdó ìpamọ́ dátà.  Àwọn àkọsílẹ̀ tí àkókò wọn ti parí nìkan, ní ìbámu pẹ̀lú àwọn ìlànà rẹ, ni a ó yọ kúrò."
+
+#: mactrack_utilities.php
+msgid "Refresh IEEE Vendor MAC/OUI Database"
+msgstr "Sọ Ibùdó Dátà MAC/OUI Olùtajà IEEE Di Ọ̀tun"
+
+#: mactrack_utilities.php
+msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
+msgstr "Iṣẹ́ yìí yóò ṣe ìgbàsílẹ̀ yóò sì fi ibi-ìpamọ́ dátà OIU tuntun jùlọ sórí ẹ̀rọ láti Ojú-òpó Wẹ́ẹ̀bù IEEE. Káàdì Ìsopọ̀ Nẹ́tíwọ́ọ̀kì (NIC) kọ̀ọ̀kan ní Àdírẹ́sì MAC kan. A lè pín Àdírẹ́sì MAC sí apá méjì. Apá àkọ́kọ́ ti Àdírẹ́sì MAC ní MAC Olùtajà nínú. MAC Olùtajà ń fi ẹni tó ṣe apá náà hàn. Èyí yóò wúlò fún àyẹ̀wò lẹ́sẹ̀kẹsẹ̀ fún àwọn ẹ̀rọ àìfọwọ́sí lórí nẹ́tíwọ́ọ̀kì rẹ."
+
+#: mactrack_utilities.php
+msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
+msgstr "Máa ń pa àwọn iṣẹ́ ìṣàyẹ̀wò Mactrack àtijọ́ àti èyí tí ó lè ti di àtijọ́ jù rẹ́ kúrò nínú àtòjọ sísọ̀kalẹ̀ tí o máa ń rí nígbà tí o bá ṣàtúnṣe irú ẹ̀rọ kan."
+
+#: mactrack_utilities.php
+msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
+msgstr "Máa ń pa <strong>GBOGBO</strong> ìsopọ̀ Pọ́ọ̀tì sí MAC sí IP rẹ́ kúrò nínú ibùdó ìpamọ́ dátà, gbogbo Àdírẹ́sì IP, Àwọn Àgbègbè IP, àti àwọn VLAN.  Ohun èlò yìí dára nígbà tí o bá fẹ́ bẹ̀rẹ̀ láti ìbẹ̀rẹ̀.  <strong>EWU: Gbogbo dátà tẹ́lẹ̀ yóò di píparẹ́.</strong>"
+
+#: mactrack_utilities.php
+msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
+msgstr "Ó ń tún kọ́ àtòjọ àwọn ọjọ́ àyẹ̀wò láti inú àwọn èsì Èbúté sí MAC sí IP tí a tọ́jú, ní kíkà ìpín kọ̀ọ̀kan lẹ́ẹ̀kan. Àwọn àyẹ̀wò àti ìtọ́jú ń pa àtòjọ náà mọ́ ní ìbámu pẹ̀lú ìgbà, nítorí náà a nílò èyí nìkan lẹ́yìn tí a bá ti yọ àwọn èsì kúrò níta ìtọ́jú, fún àpẹẹrẹ nípa pípa àwọn ẹ̀rọ rẹ́."
+
+#: mactrack_utilities.php
+msgid "View Partition Status"
+msgstr "Wo Ipò Ìpín"
+
+#: mactrack_utilities.php
+msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
+msgstr "Fi bí a ṣe pín àwọn èsì Èbúté sí MAC sí IP hàn, ìwọ̀n ìpín tí a ń lò àti ìdí rẹ̀, àti ohun tí ìtọ́jú ibùdó dátà tó kẹ́yìn ṣe."
+
+#: mactrack_utilities.php
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
+msgstr "Ó ń tún kọ́ kí ó sì ṣe àgbéyẹ̀wò kìkì ìpín tí ó ní àkíyèsí èbúté tuntun jùlọ láti gba ààyè tí a pa rẹ́ padà; pẹ̀lú àwọn ìpín ọ̀sọ̀ọ̀sẹ̀, ìyẹn ni ọ̀sẹ̀ lọ́wọ́lọ́wọ́. A ó mú kí àwọn tábìlì tí kò ní ìpín ṣiṣẹ́ dáadáa pátápátá. A ó fò àwọn àyẹ̀wò tí a ṣètò títí yóò fi parí."
+
+#: mactrack_utilities.php
+msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile."
+msgstr "Yan ìpínsọ́tọ̀ ojoojúmọ́ tàbí ọ̀sọ̀ọ̀sẹ̀, tàbí kí o pa ìpínsọ́tọ̀, fún àwọn tábìlì pọ́ọ̀tì (àdírẹ́ẹ̀sì MAC), àdírẹ́ẹ̀sì IP àti 802.1x. Àtúnkọ náà ń da gbogbo ìtàn kọjá ní ẹ̀yìn; a fò àwọn ìṣàyẹ̀wò tí a ṣètò sílẹ̀, àti wíwá MAC, IP àti 802.1x ń fi ìránṣẹ́ ìtọ́jú hàn lákòókò náà."
+
+#: mactrack_utilities.php
+msgid "Aggregated Table Administration"
+msgstr "Ìṣàkóso Tábìlì Àkójọpọ̀"
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
+msgstr "Máa ń pa GBOGBO àwọn ìsopọ̀ Pọ́ọ̀tì sí MAC sí IP <strong>Tí A Kó Jọ</strong> (Kì í ṣe Àwọn Èsì Ìṣàyẹ̀wò) rẹ́ kúrò nínú ibùdó ìpamọ́ dátà.  A ó tún kó dátà jọ ní ìbámu pẹ̀lú <strong>tuntun nìkan</strong> tí a ṣàyẹ̀wò nínú ìṣiṣẹ́ olùṣàyẹ̀wò mactrack tí ó tẹ̀lé e."
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
+msgstr "Máa ń pa GBOGBO àwọn ìsopọ̀ Pọ́ọ̀tì sí MAC sí IP <strong>Tí A Kó Jọ</strong> (Kì í ṣe Àwọn Èsì Ìṣàyẹ̀wò) rẹ́ kúrò nínú ibùdó ìpamọ́ dátà àti títún wọn ṣẹ̀dá ní ìbámu pẹ̀lú <strong>Gbogbo dátà tí a ṣàyẹ̀wò</strong> báyìí."
+
+#: mactrack_utilities.php
+msgid "Partitioning"
+msgstr "Ìpín-nípín"
+
+#: mactrack_vendormacs.php
+msgid "Mactrack Vendor Mac Filter"
+msgstr "Àlẹ̀mọ́ Mac Olùtajà Mactrack"
+
+#: mactrack_vendormacs.php
+msgid "Vendor MAC"
+msgstr "MAC Olùpèsè"
+
+#: mactrack_vendormacs.php
+msgid "Corporation"
+msgstr "Ilé-iṣẹ́"
+
+#: mactrack_vendormacs.php
+msgid "Address"
+msgstr "Àdírẹ́sì"
+
+#: mactrack_vendormacs.php setup.php
+msgid "Vendor Macs"
+msgstr "Àwọn MAC Olùpèsè"
+
+#: mactrack_vendormacs.php
+msgid "No Mactrack Vendor MACS Found"
+msgstr "Kò sí Àwọn MAC Olùtajà Mactrack kankan tí a rí"
+
+#: mactrack_view_arp.php
+msgid "Mactrack - ARP/IP View"
+msgstr "Mactrack - Àwòrán ARP/IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Name"
+msgstr "Orúkọ Swíìṣì"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Hostname"
+msgstr "Orúkọ Olùgbàlejò Switch"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED IP Address"
+msgstr "Àdírẹ́sì IP ED"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED DNS Hostname"
+msgstr "Orúkọ-olùgbàlejò DNS ED"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED MAC Address"
+msgstr "Àdírẹ́sì MAC ED"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Vendor Name"
+msgstr "Orúkọ Olùpèsè"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Port Number"
+msgstr "Nọ́ńbà Pọ́ọ̀tì"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Port Name"
+msgstr "Orúkọ Pọ́ọ̀tì"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Last Scan Date"
+msgstr "Ọjọ́ Ìwádìí Tó Kẹ́yìn"
+
+#: mactrack_view_arp.php
+msgid "ARP Cache"
+msgstr "Ìpamọ́ ARP"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "You must first choose a Site, Device or other search criteria."
+msgstr "O gbọ́dọ̀ kọ́kọ́ yan Ibùdó kan, Ẹ̀rọ kan tàbí àwọn ìlànà ìwádìí mìíràn."
+
+#: mactrack_view_arp.php
+msgid "No Mactrack IP Results Found"
+msgstr "Kò sí Àwọn Èsì IP Mactrack kankan tí a rí"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_interfaces.php
+#: mactrack_view_macs.php
+msgid "Device"
+msgstr "Ẹ̀rọ"
+
+#: mactrack_view_arp.php mactrack_view_ips.php
+msgid "IP's"
+msgstr "Àwọn IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "IP"
+msgstr "IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Show"
+msgstr "Fi Hàn"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Most Recent"
+msgstr "Tuntun Jùlọ"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "MAC"
+msgstr "MAC"
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr "MacTrack - Pátákó Àkóso"
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr "Àkójọpọ̀ Ohun Èlò"
+
+#: mactrack_view_dashboard.php
+msgid "Device status"
+msgstr "Ipò ẹ̀rọ"
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr "Àpapọ̀ àdírẹ́sì àti ibùdó ìsopọ̀"
+
+#: mactrack_view_dashboard.php
+msgid "Collection settings"
+msgstr "Àwọn Ètò Àkójọ"
+
+#: mactrack_view_dashboard.php
+msgid "Scan runtimes"
+msgstr "Àkókò ìṣiṣẹ́ ìṣàyẹ̀wò"
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr "Àwọn ìwọ̀n tábìlì"
+
+#: mactrack_view_dashboard.php
+msgid "MacWatch activity"
+msgstr "Ìṣiṣẹ́ MacWatch"
+
+#: mactrack_view_dashboard.php
+msgid "Vendors"
+msgstr "Àwọn Olùpèsè"
+
+#: mactrack_view_dashboard.php
+msgid "Enabled devices"
+msgstr "Àwọn ẹ̀rọ tó ń ṣiṣẹ́"
+
+#: mactrack_view_dashboard.php
+msgid "Disabled devices"
+msgstr "Àwọn ẹ̀rọ àìṣiṣẹ́"
+
+#: mactrack_view_dashboard.php
+msgid "Device types"
+msgstr "Àwọn irú ẹ̀rọ"
+
+#: mactrack_view_dashboard.php
+msgid "Interfaces tracked"
+msgstr "Àwọn ìsopọ̀ tí a tọpa"
+
+#: mactrack_view_dashboard.php
+msgid "Active MACs"
+msgstr "Àwọn MAC Tí Ó Ń Ṣiṣẹ́"
+
+#: mactrack_view_dashboard.php
+msgid "IP addresses"
+msgstr "Àwọn àdírẹ́sì IP"
+
+#: mactrack_view_dashboard.php
+msgid "Total ports"
+msgstr "Àpapọ̀ àwọn pọ́ọ̀tì"
+
+#: mactrack_view_dashboard.php
+msgid "Active ports"
+msgstr "Àwọn ibùdó ìsopọ̀ tí ó ń ṣiṣẹ́"
+
+#: mactrack_view_dashboard.php
+msgid "Trunk ports"
+msgstr "Àwọn pọ́ọ̀tì trunk"
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr "Àwọn olùtajà OUI àkànṣe"
+
+#: mactrack_view_dashboard.php
+msgid "Scanning frequency"
+msgstr "Ìgbàgbà ìṣàyẹ̀wò"
+
+#: mactrack_view_dashboard.php
+msgid "Concurrent processes"
+msgstr "Àwọn ìlànà lẹ́ẹ̀kan-náà"
+
+#: mactrack_view_dashboard.php
+msgid "Scanner max runtime"
+msgstr "Àkókò ìṣiṣẹ́ tó pọ̀ jùlọ fún olùṣàyẹ̀wò"
+
+#: mactrack_view_dashboard.php
+msgid "MAC retention"
+msgstr "Ìtọ́jú MAC"
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr "ọjọ́"
+
+#: mactrack_view_dashboard.php
+msgid "IP retention"
+msgstr "Ìtọ́jú IP"
+
+#: mactrack_view_dashboard.php
+msgid "Reverse DNS"
+msgstr "DNS Ìdàkejì"
+
+#: mactrack_view_dashboard.php
+msgid "Most recent scan"
+msgstr "Àyẹ̀wò tuntun jùlọ"
+
+#: mactrack_view_dashboard.php
+msgid "Average duration"
+msgstr "Ìpíndọ́gba ìgbà"
+
+#: mactrack_view_dashboard.php
+msgid "Longest duration"
+msgstr "Àkókò tó gùn jùlọ"
+
+#: mactrack_view_dashboard.php
+msgid "Scanned in last hour"
+msgstr "A ṣàyẹ̀wò rẹ̀ ní wákàtí tó kọjá"
+
+#: mactrack_view_dashboard.php
+msgid "Duration"
+msgstr "Àkókò Tó Gbà"
+
+#: mactrack_view_dashboard.php
+msgid "Last scan"
+msgstr "Àyẹ̀wò tó kẹ́yìn"
+
+#: mactrack_view_dashboard.php
+msgid "Slowest devices"
+msgstr "Àwọn Ẹ̀rọ tó lọ́ra jùlọ"
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr "Kò sí àwọn àkókò ìṣiṣẹ́ àyẹ̀wò tí a kọ sílẹ̀ síbẹ̀."
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr "Àwọn Ìlà"
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr "Ìwọ̀n"
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr "Kò sí àwọn ìṣirò tábìlì tí ó wà."
+
+#: mactrack_view_dashboard.php
+msgid "Watched MACs"
+msgstr "Àwọn MAC Tí A Ń Ṣọ́"
+
+#: mactrack_view_dashboard.php
+msgid "Discovered"
+msgstr "Ti ṣàwárí"
+
+#: mactrack_view_dashboard.php
+msgid "Last match"
+msgstr "Ìbámu tó kẹ́yìn"
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr "Àwọn àkọsílẹ̀ ibùdó dátà OUI"
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr "Kò sí dátà olùpèsè kankan tí ó wà."
+
+#: mactrack_view_dashboard.php
+msgid "Show more"
+msgstr "Ṣàfihàn sí i"
+
+#: mactrack_view_dashboard.php
+msgid "Show less"
+msgstr "Ṣàfihàn díẹ̀"
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr "Ṣí nínú àpótí ìfọ̀rọ̀wérọ̀"
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr "Yọ kúrò láti ojú-ewé"
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr "Fà á láti tún káàdì tò"
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr "Ìbéèrè tí kò tọ́. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i."
+
+#: mactrack_view_dashboard.php
+msgid "Unknown card."
+msgstr "Káàdì àìmọ̀."
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr "Fi káàdì kún un"
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
+msgstr "Fi káàdì pátákó ìṣàkóso kan kún un…"
+
+#: mactrack_view_devices.php
+msgid "Mactrack - Device Report View"
+msgstr "Mactrack - Àwòrán Ìròyìn Ẹ̀rọ"
+
+#: mactrack_view_devices.php
+msgid "Unknown Device Type"
+msgstr "Irú Ẹ̀rọ Àìmọ̀"
+
+#: mactrack_view_devices.php
+msgid "Total VLAN's"
+msgstr "Àpapọ̀ Àwọn VLAN"
+
+#: mactrack_view_devices.php
+msgid "Edit Device"
+msgstr "Ṣàtúnṣe Ẹ̀rọ"
+
+#: mactrack_view_devices.php
+msgid "View Graphs"
+msgstr "Wo Àwọn Gíráàfù"
+
+#: mactrack_view_devices.php
+msgid "Device Not Mapped to Cacti Device"
+msgstr "A Kò So Ẹ̀rọ Pọ̀ Mọ́ Ẹ̀rọ Cacti"
+
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
+msgid "View MAC Addresses"
+msgstr "Wo Àwọn Àdírẹ́sì MAC"
+
+#: mactrack_view_devices.php
+msgid "No Mactrack Devices Found"
+msgstr "Kò sí Àwọn Ẹ̀rọ Mactrack kankan tí a rí"
+
+#: mactrack_view_devices.php
+msgid "Device Scan Results"
+msgstr "Àwọn Èsì Ìṣàyẹ̀wò Ẹ̀rọ"
+
+#: mactrack_view_devices.php
+msgid "Hub/Switch"
+msgstr "Họ́bù/Súwíìṣì"
+
+#: mactrack_view_dot1x.php
+msgid "Mactrack - 802.1x View"
+msgstr "Mactrack - Àwòrán 802.1x"
+
+#: mactrack_view_dot1x.php
+msgid "Domain"
+msgstr "Dòméènì"
+
+#: mactrack_view_dot1x.php
+msgid "802.1x Sessions"
+msgstr "Àwọn Àkókò Ìsopọ̀ 802.1x"
+
+#: mactrack_view_dot1x.php
+msgid "No Mactrack 802.1x Sessions Found"
+msgstr "Kò sí Àwọn Ìgbà 802.1x Mactrack kankan tí a rí"
+
+#: mactrack_view_dot1x.php
+msgid "Dot1x Scan Results"
+msgstr "Àwọn Èsì Ìṣàyẹ̀wò Dot1x"
+
+#: mactrack_view_dot1x.php
+msgid "Sessions"
+msgstr "Àwọn Àkókò Ìṣiṣẹ́"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "All Statuses"
+msgstr "Gbogbo Àwọn Ipò"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr "Àwọn Ipò tí a Yàn"
+
+#: mactrack_view_dot1x.php
+msgid "DATA"
+msgstr "DÁTÀ"
+
+#: mactrack_view_dot1x.php
+msgid "VOICE"
+msgstr "OHÙN"
+
+#: mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Portname"
+msgstr "Orúkọ Pọ́ọ̀tì"
+
+#: mactrack_view_graphs.php
+msgid "Mactrack - Monitored Device Graph View"
+msgstr "Mactrack - Àwòrán Gíráfù Ẹ̀rọ Tí A Ń Ṣàbójútó"
+
+#: mactrack_view_graphs.php
+msgid "Custom Graph List Applied - Filtering from List"
+msgstr "A ti lo Àtòjọ Gíráfù Àdáni - À ń ṣàlẹ̀mọ́ láti inú Àtòjọ"
+
+#: mactrack_view_interfaces.php
+msgid "Mactrack - Network Interfaces View"
+msgstr "Mactrack - Àwòrán Àwọn Ìsopọ̀ Nẹ́tíwọ́ọ̀kì"
+
+#: mactrack_view_interfaces.php
+msgid "No Mactrack Interfaces Found"
+msgstr "Kò sí Àwọn Ojú-ìsopọ̀ Mactrack kankan tí a rí"
+
+#: mactrack_view_interfaces.php
+msgid "Interface Scan Results"
+msgstr "Èsì Àyẹ̀wò Ìsopọ̀"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Name"
+msgstr "Orúkọ"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Description"
+msgstr "Àpèjúwe"
+
+#: mactrack_view_interfaces.php
+msgid "Issues"
+msgstr "Àwọn Ìṣòro"
+
+#: mactrack_view_interfaces.php
+msgid "Alias"
+msgstr "Orúkọ Àpèlé"
+
+#: mactrack_view_interfaces.php
+msgid "InBound %%%"
+msgstr "Ìwọlé %%%"
+
+#: mactrack_view_interfaces.php
+msgid "OutBound %%%"
+msgstr "Ìjáde %%%"
+
+#: mactrack_view_interfaces.php
+msgid "In (B/S)"
+msgstr "Wọlé (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out (B/S)"
+msgstr "Ìjáde (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Err Total"
+msgstr "Àpapọ̀ Àṣìṣe Wọlé"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc Total"
+msgstr "Àpapọ̀ Ìkọ̀sílẹ̀ Wọlé"
+
+#: mactrack_view_interfaces.php
+msgid "UProto Total"
+msgstr "Àpapọ̀ UProto"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err Total"
+msgstr "Àpapọ̀ Àṣìṣe Ìjáde"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc Total"
+msgstr "Àpapọ̀ Ìsọnù Ìjáde"
+
+#: mactrack_view_interfaces.php
+msgid "In Err (E/S)"
+msgstr "Àṣìṣe Wọlé (E/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc (D/S)"
+msgstr "Ìkọ̀sílẹ̀ Wọlé (D/S)"
+
+#: mactrack_view_interfaces.php
+msgid "UProto (UP/S)"
+msgstr "UProto (UP/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err (OE/S)"
+msgstr "Àṣìṣe Ìjáde (OE/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc (OD/S)"
+msgstr "Ìsọnù Ìjáde (OD/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Last Change"
+msgstr "Àyípadà Tó Kẹ́yìn"
+
+#: mactrack_view_interfaces.php
+msgid "Last Scanned"
+msgstr "Ìwádìí Tó Kẹ́yìn"
+
+#: mactrack_view_interfaces.php
+msgid "Filters"
+msgstr "Àwọn Àlẹ̀mọ́"
+
+#: mactrack_view_interfaces.php
+msgid "All Interfaces"
+msgstr "Gbogbo Àwọn Ojú-ìsopọ̀"
+
+#: mactrack_view_interfaces.php
+msgid "All Non-Ignored Interfaces"
+msgstr "Gbogbo Àwọn Ojú-ìsopọ̀ Tí A Kò Fojú Fò"
+
+#: mactrack_view_interfaces.php
+msgid "All Ignored Interfaces"
+msgstr "Gbogbo Àwọn Ojú-ìsopọ̀ Tí A Fojú Fò"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In/Out Utilization > %d &#37;"
+msgstr "Ìlò Àbáwọlé/Àbájáde Gíga > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In Utilization > %d &#37;"
+msgstr "Ìlò Àbáwọlé Gíga > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High Out Utilization > %d &#37;"
+msgstr "Ìlò Àbájáde Gíga > %d &#37;"
+
+#: mactrack_view_interfaces.php
+msgid "With Issues"
+msgstr "Pẹ̀lú Àwọn Ìṣòro"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces"
+msgstr "Àwọn Àsopọ̀ Tí Ó Wà Lókè"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces No Alias"
+msgstr "Àwọn Àsopọ̀ Tí Ó Wà Lókè Láìsí Orúkọ-ìpè"
+
+#: mactrack_view_interfaces.php
+msgid "Errors Accumulating"
+msgstr "Àwọn Àṣìṣe Ń Kóra Jọ"
+
+#: mactrack_view_interfaces.php
+msgid "Discards Accumulating"
+msgstr "Àwọn Ìkọ̀sílẹ̀ Ń Pọ̀ Sí i"
+
+#: mactrack_view_interfaces.php
+msgid "Changed in Last Day"
+msgstr "Ti Yí Padà ní Ọjọ́ Tó Kọjá"
+
+#: mactrack_view_interfaces.php
+msgid "Bandwidth"
+msgstr "Báńdíwíìtì"
+
+#: mactrack_view_interfaces.php
+msgid "When checked, the Errors, Discards and Unknown Protocol columns show each interface's cumulative SNMP counter totals instead of the average per-second rate."
+msgstr "Nígbà tí a bá fọwọ́ sí i, àwọn ọ̀wọ̀n Àṣìṣe, Ìdànù àti Ìlànà Àìmọ̀ yóò fi àpapọ̀ oníròyìn SNMP ojú-ọ̀nà kọ̀ọ̀kan hàn dípò ìpíndọ́gba ìṣẹ́jú-àáyá kọ̀ọ̀kan."
+
+#: mactrack_view_interfaces.php
+msgid "Show Totals"
+msgstr "Ṣàfihàn Àpapọ̀"
+
+#: mactrack_view_ips.php
+msgid "Mactrack - Site IP Range Report View"
+msgstr "Mactrack - Àwòrán Ìròyìn Ààlà IP Ibùdó"
+
+#: mactrack_view_ips.php
+msgid "IP Range"
+msgstr "Ààlà IP"
+
+#: mactrack_view_ips.php
+msgid "Current IP Addresses"
+msgstr "Àwọn Àdírẹ́sì IP Lọ́wọ́lọ́wọ́"
+
+#: mactrack_view_ips.php
+msgid "Current Date"
+msgstr "Ọjọ́ Lọ́wọ́lọ́wọ́"
+
+#: mactrack_view_ips.php
+msgid "Maximum IP Addresses"
+msgstr "Àwọn Àdírẹ́sì IP Tó Pọ̀ Jù Lọ"
+
+#: mactrack_view_ips.php
+msgid "Maximum Date"
+msgstr "Ọjọ́ Tó Pọ̀ Jù Lọ"
+
+#: mactrack_view_ips.php
+msgid "IP Address Ranges"
+msgstr "Àwọn Ààlà Àdírẹ́sì IP"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "Edit Site"
+msgstr "Ṣàtúnṣe Ibùdó"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "View IP Addresses"
+msgstr "Wo Àwọn Àdírẹ́sì IP"
+
+#: mactrack_view_ips.php
+msgid "No Mactrack Site IP Ranges Found"
+msgstr "Kò sí Àwọn Ìwọ̀n IP Ibùdó Mactrack kankan tí a rí"
+
+#: mactrack_view_macs.php
+msgid "Mactrack - MAC to IP Report View"
+msgstr "Mactrack - Àwòrán Ìròyìn MAC sí IP"
+
+#: mactrack_view_macs.php
+msgid "Authorize"
+msgstr "Fọwọ́sí"
+
+#: mactrack_view_macs.php
+msgid "Revoke"
+msgstr "Gba padà"
+
+#: mactrack_view_macs.php
+msgid "None of the selected MAC Addresses were valid, so no action was taken."
+msgstr "Kò sí èyíkéyìí nínú àwọn Àdírẹ́sì MAC tí a yàn tí ó tọ́, nítorí náà a kò gbé ìgbésẹ̀ kankan."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
+msgstr "A kò lè fagilé àwọn Àdírẹ́sì MAC wọ̀nyí nítorí pé wọ́n jẹ́ ọmọ ẹgbẹ́ Àṣẹ Ẹgbẹ́ %s"
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Authorize the following MAC Addresses."
+msgstr "Tẹ 'Tẹ̀síwájú' láti Fọwọ́ sí Àwọn Àdírẹ́sì MAC wọ̀nyí."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Revoke the following MAC Addresses."
+msgstr "Tẹ 'Tẹ̀síwájú' láti fagi lé àwọn Àdírẹ́sì MAC wọ̀nyí."
+
+#: mactrack_view_macs.php
+msgid "You must select at least one MAC Address."
+msgstr "O gbọ́dọ̀ yan ó kéré jù Àdírẹ́sì MAC kan."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to change Mac Authorizations."
+msgstr "A kò gbà ọ́ láàyè láti yí Àwọn Àṣẹ Mac padà."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
+msgstr "Ẹ̀rọ.:%s IP.:%s MAC.:%s PỌ́Ọ̀TÌ.:%s Iye.: [%s]"
+
+#: mactrack_view_macs.php
+msgid "You must select at least one Row."
+msgstr "O gbọ́dọ̀ yan ó kéré jù Ìlà kan."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to delete rows."
+msgstr "A kò gbà ọ́ láàyè láti pa àwọn ìlà rẹ́."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Delete the following rows from Aggregated table."
+msgstr "Tẹ 'Tẹ̀síwájú' láti Pa àwọn ìlà wọ̀nyí rẹ́ láti inú tábìlì Àkójọpọ̀."
+
+#: mactrack_view_macs.php
+msgid "VLAN ID"
+msgstr "ID VLAN"
+
+#: mactrack_view_macs.php
+msgid "VLAN Name"
+msgstr "Orúkọ VLAN"
+
+#: mactrack_view_macs.php
+msgid "You must choose a Site, Device or other search criteria."
+msgstr "O gbọ́dọ̀ yan Ibùdó kan, Ẹ̀rọ kan tàbí àwọn ìlànà ìwádìí mìíràn."
+
+#: mactrack_view_macs.php
+msgid "No Mactrack Port Results Found"
+msgstr "Kò sí Àwọn Èsì Pọ́ọ̀tì Mactrack kankan tí a rí"
+
+#: mactrack_view_macs.php
+msgid "Count"
+msgstr "Iye"
+
+#: mactrack_view_macs.php
+msgid "Aggregated"
+msgstr "Tí a ṣàpapọ̀"
+
+#: mactrack_view_sites.php
+msgid "Mactrack - Site Report View"
+msgstr "Mactrack - Àwòrán Ìròyìn Ibùdó"
+
+#: mactrack_view_sites.php
+msgid "Rescan Site"
+msgstr "Tún Ibùdó Yẹ̀wò"
+
+#: mactrack_view_sites.php
+msgid "View Devices"
+msgstr "Wo Àwọn Ẹ̀rọ"
+
+#: mactrack_view_sites.php
+msgid "View IP Ranges"
+msgstr "Wo Àwọn Ààlà IP"
+
+#: mactrack_view_sites.php
+msgid "Sites / Device Types"
+msgstr "Àwọn Ibùdó / Àwọn Irú Ẹ̀rọ"
+
+#: mactrack_view_sites.php
+msgid "Site Scan Results"
+msgstr "Àwọn Èsì Àyẹ̀wò Ibùdó"
+
+#: setup.php
+msgid "MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes."
+msgstr "MacTrack ń gbé ibi-ìpamọ́ dátà rẹ̀ ga ní abẹ́lẹ̀. Èyí lè gba tó wákàtí kan lórí àwọn ìfisílẹ̀ ńlá, àti pé díẹ̀ nínú dátà MacTrack lè má pé títí tí yóò fi parí."
+
+#: setup.php
+#, php-format
+msgid "MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s"
+msgstr "MacTrack kò lè bẹ̀rẹ̀ ìgbéga ibi-ìpamọ́ dátà rẹ̀ ní abẹ́lẹ̀, wo àkọọ́lẹ̀ Cacti fún ìdí rẹ̀. Ṣiṣẹ́ rẹ̀ fúnra rẹ látinú ìlà àṣẹ: %s"
+
+#: setup.php
+msgid "Mactrack"
+msgstr "Mactrack"
+
+#: setup.php
+msgid "General Settings"
+msgstr "Àwọn Ètò Gbogbogbòò"
+
+#: setup.php
+msgid "Scanning Frequency"
+msgstr "Ìgbàgbà Ìṣàyẹ̀wò"
+
+#: setup.php
+msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
+msgstr "Yan ìgbà láti kó àwọn àdírẹ́sì MAC àti IP àti àwọn ìṣirò ojú-ìbáṣepọ̀ jọ láti orí àwọn ẹ̀rọ nẹ́tíwọ́ọ̀kì rẹ."
+
+#: setup.php
+msgid "Concurrent Processes"
+msgstr "Àwọn Ìlànà Alájọṣiṣẹ́"
+
+#: setup.php
+msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
+msgstr "Ṣàlàyé iye Àwọn Ẹ̀rọ tí a ó ṣàyẹ̀wò lẹ́ẹ̀kan náà títí a ó fi ṣàyẹ̀wò gbogbo Àwọn Ẹ̀rọ."
+
+#: setup.php
+msgid "Scanner Max Runtime"
+msgstr "Àkókò Ìṣiṣẹ́ Tó Pọ̀ Jùlọ fún Olùṣàyẹ̀wò"
+
+#: setup.php
+msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
+msgstr "Ṣàlàyé iye ìṣẹ́jú tí a ó gba iṣẹ́ àyẹ̀wò Ẹ̀rọ láyè láti ṣiṣẹ́ ṣáájú kí ètò náà tó rò pé ó ti parí.  Ètò yìí yóò ṣàtúnṣe fún àwọn iṣẹ́ àyẹ̀wò tí ó dáwọ́ dúró láìròtẹ́lẹ̀."
+
+#: setup.php
+msgid "Start Time for Data Collection"
+msgstr "Àkókò Ìbẹ̀rẹ̀ fún Ìkójọpọ̀ Dátà"
+
+#: setup.php
+msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
+msgstr "Ìgbà wo ni o fẹ́ kí ìkójọpọ̀ dátà àkọ́kọ́ wáyé.  Gbogbo àkókò ìkójọpọ̀ dátà ọjọ́ iwájú yóò dá lórí àkókò ìbẹ̀rẹ̀ yìí.  Àpẹẹrẹ tó dára yóò jẹ́ 12:00AM."
+
+#: setup.php
+msgid "Database Maintenance Time"
+msgstr "Àkókò Ìtọ́jú Dátàbẹ́ẹ̀sì"
+
+#: setup.php
+msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
+msgstr "Ìgbà wo ni ó yẹ kí a yọ àwọn àkọsílẹ̀ ibi-ìpamọ́ dátà àtijọ́ kúrò nínú ibi-ìpamọ́ dátà.  Jọ̀wọ́ kíyè sí i pé a kò ní gba ìwọlé láàyè sí ibi-ìpamọ́ dátà ibùdó nígbà tí ìgbésẹ̀ yìí bá ń lọ lọ́wọ́."
+
+#: setup.php
+msgid "Confirm Utilities Prompt"
+msgstr "Ìtọ́ka Ìfìdímúlẹ̀ Àwọn Irinṣẹ́"
+
+#: setup.php
+msgid "When using utilities, prompt for verification"
+msgstr "Nígbà tí o bá ń lo àwọn ohun èlò ìṣiṣẹ́, béèrè fún ìjẹ́rìísí"
+
+#: setup.php
+msgid "Data Retention"
+msgstr "Ìtọ́jú Dátà"
+
+#: setup.php
+msgid "How long should port MAC details be retained in the database."
+msgstr "Ìgbà wo ni àwọn àlàyé MAC èbúté yẹ kí ó wà ní ìpamọ́ nínú ibi ìpamọ́ dátà."
+
+#: setup.php
+msgid "Data Retention IPs"
+msgstr "Àwọn IP Ìtọ́jú Dátà"
+
+#: setup.php
+msgid "How long should discovered IPs details be retained in the database."
+msgstr "Ìgbà wo ni àwọn àlàyé IP tí a ṣàwárí yẹ kí ó wà ní ìpamọ́ nínú ibi ìpamọ́ dátà."
+
+#: setup.php
+msgid "Size of the partitions of the port, IP and 802.1x tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
+msgstr "Ìwọ̀n àwọn ìpín tábìlì èbúté, IP àti 802.1x, tàbí Àìṣiṣẹ́ fún àwọn tábìlì tí kò ní ìpín. Yíyí rẹ̀ padà yóò kan àwọn ìpín tuntun nìkan; láti tún ìtàn tó wà tẹ́lẹ̀ kọ́ kó lè bá a mu, lo Ṣètò Ìpín Èbúté àti Àdírẹ́sì IP nínú MacTrack Utilities tàbí ṣiṣẹ́ cli/upgrade_partitioning.php."
+
+#: setup.php
+msgid "Switch Level Ignore Ports Delimiter"
+msgstr "Àmì Ìpínyà Àwọn Ibùdó Àìkàsí ní Ìpele Switch"
+
+#: setup.php
+msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
+msgstr "Àmì ìpínyà wo ni Mactrack yẹ kí ó lò nígbà tí ó bá ń ṣàtúpalẹ̀ okùn Ignore Ports fún switch kọ̀ọ̀kan."
+
+#: setup.php
+msgid "Auto Detect"
+msgstr "Ṣàwárí Aládàáṣe"
+
+#: setup.php
+msgid "Colon [:]"
+msgstr "Kólọ̀nù [:]"
+
+#: setup.php
+msgid "Pipe [|]"
+msgstr "Òpó [|]"
+
+#: setup.php
+msgid "Space [ ]"
+msgstr "Àlàfo [ ]"
+
+#: setup.php
+msgid "Mac Address Output Format"
+msgstr "Ọ̀nà Ìjáde Àdírẹ́ẹ̀sì Mac"
+
+#: setup.php
+msgid "Format used for display."
+msgstr "Ìlànà tí a lò fún ìfihàn."
+
+#: setup.php
+msgid "Ports to Ignore"
+msgstr "Àwọn Pọ́ọ̀tì Láti Fojú Fò"
+
+#: setup.php
+msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
+msgstr "Pèsè gbólóhùn déédé (regular expression) ti ifNames tàbí ifDescriptions àwọn ibùdó ìsopọ̀ láti fojú fò nínú àtòjọ ààyè ìbáṣepọ̀. Fún àpẹẹrẹ, (Vlan|Loopback|Null)."
+
+#: setup.php
+msgid "Ports to Ignore While Scanning (Regular Expression)"
+msgstr "Àwọn Pọ́ọ̀tì Láti Fojú Fò Nígbà Àyẹ̀wò (Ìsọ̀rọ̀ Déédéé)"
+
+#: setup.php
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
+msgstr "Àṣàyàn.  Gbólóhùn déédéé tí a fi wé, láìka lẹ́tà ńlá tàbí kékeré sí, orúkọ èbúté àti orúkọ àpèlé èbúté ti gbogbo èbúté tí a ṣàyẹ̀wò.  A kì í gba àwọn àdírẹ́sì MAC tí a rí lórí èbúté tí ó bá a mu, èyí tí ó ń pa àwọn èbúté uplink àti trunk mọ́ kúrò nínú ibi ìpamọ́ dátà.  Fún àpẹẹrẹ, (uplink|trunk).  Fi gbólóhùn kọ̀ọ̀kan sí orí ìlà tirẹ̀ láti fún ni ní púpọ̀.  Fi sílẹ̀ ní òfo láti gba gbogbo èbúté.  Àwọn Ibùdó àti àwọn ẹ̀rọ lè fi àwọn gbólóhùn tiwọn kún un.  Yàtọ̀ sí Àwọn Èbúté láti Fojú Fò lókè, èyí kan ìkójọ MAC kì í ṣe àtòkọ ojú-ìsopọ̀, ó sì ń kan àwọn ìwádìí tuntun nìkan."
+
+#: setup.php
+msgid "Bandwidth Usage Threshold"
+msgstr "Àlà Ìlò Báńdíwíìtì"
+
+#: setup.php
+msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
+msgstr "Nígbà tí o bá ń ṣàtúnyẹ̀wò àwọn ìṣirò ojú-ọ̀nà nẹ́tíwọ́ọ̀kì, àlà ìgbàsílẹ̀ bátà wo ni o fẹ́ láti wò ní ìbẹ̀rẹ̀."
+
+#: setup.php
+#, php-format
+msgid "%d Percent"
+msgstr "Ìdá Ọgọ́rùn-ún %d"
+
+#: setup.php
+msgid "DNS Settings"
+msgstr "Àwọn Ètò DNS"
+
+#: setup.php
+msgid "Perform Reverse DNS Name Resolution"
+msgstr "Ṣe Ìtumọ̀ Orúkọ DNS Ìpadàsẹ́yìn"
+
+#: setup.php
+msgid "Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
+msgstr "Ṣé kí Mactrack ṣe ìwádìí DNS ìpadàsẹ́yìn fún àwọn àdírẹ́sì IP tí ó sopọ̀ mọ́ àwọn èbúté. ÌKÌLỌ̀: Bí a kò bá ṣètò DNS dáadáa, èyí yóò fa àkókò ìṣàyẹ̀wò lọ́ra gan-an."
+
+#: setup.php
+msgid "Primary DNS IP Address"
+msgstr "Àdírẹ́sì IP DNS Àkọ́kọ́"
+
+#: setup.php
+msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
+msgstr "Tẹ àdírẹ́sì IP DNS àkọ́kọ́ tí a ó lò fún ìwádìí ìpadàbọ̀."
+
+#: setup.php
+msgid "Secondary DNS IP Address"
+msgstr "Àdírẹ́sì IP DNS Kejì"
+
+#: setup.php
+msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
+msgstr "Tẹ àdírẹ́sì IP DNS kejì tí a ó lò fún ìwádìí ìpadàbọ̀."
+
+#: setup.php
+msgid "DNS Timeout"
+msgstr "Àkókò Ìparí DNS"
+
+#: setup.php
+msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
+msgstr "Jọ̀wọ́ tẹ àkókò ìparí DNS ní ìṣẹ́jú-àáyá ẹgbẹ̀rún (milliseconds). Mactrack ń lo olùtúmọ̀ DNS tó dá lórí PHP."
+
+#: setup.php
+msgid "DNS Prime Interval"
+msgstr "Àlàfo Ìmúra DNS"
+
+#: setup.php
+msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
+msgstr "Ìgbà mélòó, ní ìṣẹ́jú-àáyá, ni àwọn IP ìṣàyẹ̀wò Mactrack nílò láti yanjú sí àwọn àdírẹ́sì MAC fún ìyanjú DNS.  Lílo nọ́ńbà tó tóbi jù nígbà tí o bá ní ẹgbẹẹgbẹ̀rún àwọn ẹ̀rọ yóò mú iṣẹ́ pọ̀ sí i."
+
+#: setup.php
+msgid "Notification Settings"
+msgstr "Àwọn Ètò Ìfitónilétí"
+
+#: setup.php
+msgid "Source Address"
+msgstr "Àdírẹ́sì Orísun"
+
+#: setup.php
+msgid "The source Email address for Mactrack Emails."
+msgstr "Àdírẹ́sì Ímeèlì orísun fún àwọn Ímeèlì Mactrack."
+
+#: setup.php
+msgid "Source Email Name"
+msgstr "Orúkọ Ímeèlì Orísun"
+
+#: setup.php
+msgid "The Source Email name for Mactrack Emails."
+msgstr "Orúkọ Ímeèlì Orísun fún Àwọn Ímeèlì Mactrack."
+
+#: setup.php
+msgid "MACTrack Administrator"
+msgstr "Alákòóso MACTrack"
+
+#: setup.php
+msgid "MacWatch Default Body"
+msgstr "Àkóónú Àìyípadà MacWatch"
+
+#: setup.php
+msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+msgstr "Ètò tẹ́lẹ̀ fún àkóónú Ímeèlì fún Àwọn Ímeèlì Mactrack MacWatch.  Àkóónú náà lè ní àwọn àmì html èyíkéyìí tó wúlò nínú.  Ó tún ṣe àtìlẹ́yìn fún àwọn àmì ìrọ́pò tí a ó ṣiṣẹ́ lé lórí nígbà tí a bá ń fi Ímeèlì ránṣẹ́.  Àwọn àmì tó wúlò pẹ̀lú <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+
+#: setup.php
+msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
+msgstr "Àdírẹ́ẹ̀sì Mac <MAC> tí a rí ní Àdírẹ́ẹ̀sì IP <IP> fún Nọ́mbà Tíkẹ́ẹ̀tì: <TICKET>.<br>Ẹ̀rọ náà wà ní<br>Ibùdó: <SITENAME>, Ẹ̀rọ <DEVICENAME>, IP <DEVICEIP>, Pọ́ọ̀tì <PORTNUMBER>, àti Orúkọ Pọ́ọ̀tì <PORTNAME>"
+
+#: setup.php
+msgid "MacAuth Report Email Addresses"
+msgstr "Àwọn Àdírẹ́ẹ̀sì Ímeèlì Ìròyìn MacAuth"
+
+#: setup.php
+msgid "A comma delimited list of users to receive the MacAuth Email notifications."
+msgstr "Àtòjọ àwọn olùlò tí àmì idánudúró pín sí láti gba àwọn ìfitónilétí Ímeèlì MacAuth."
+
+#: setup.php
+msgid "MacAuth Report Frequency"
+msgstr "Ìgbàgbogbo Ìròyìn MacAuth"
+
+#: setup.php
+msgid "How often will the MacAuth Reports be Emailed."
+msgstr "Ìgbà mélòó ni a ó máa fi Àwọn Ìròyìn MacAuth ránṣẹ́ nípasẹ̀ Ímeèlì."
+
+#: setup.php
+msgid "Mactrack ArpWatch Settings"
+msgstr "Àwọn Ètò Mactrack ArpWatch"
+
+#: setup.php
+msgid "Enable ArpWatch"
+msgstr "Mú ArpWatch ṣiṣẹ́"
+
+#: setup.php
+msgid "Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
+msgstr "Ṣé kí Mactrack tún lo dátà ArpWatch láti ṣe àfikún sí ìtumọ̀ MAC sí IP/DNS?"
+
+#: setup.php
+msgid "ArpWatch Database Path"
+msgstr "Ọ̀nà Ibùdó Dátà ArpWatch"
+
+#: setup.php
+msgid "The location of the ArpWatch Database file on the Cacti server."
+msgstr "Ipò fáìlì Ibi Ìpamọ́ Dátà ArpWatch lórí sẹ́fà Cacti."
+
+#: setup.php
+msgid "SNMP Presets"
+msgstr "Àwọn Ètò Àtẹ́lẹ̀ SNMP"
+
+#: setup.php
+msgid "Update Policy for SNMP Options"
+msgstr "Ìlànà Ìmúdójúìwọ̀n fún Àwọn Àṣàyàn SNMP"
+
+#: setup.php
+msgid "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices."
+msgstr "Ìlànà fún ìbámu Àwọn Àṣàyàn SNMP láàárín àwọn ẹ̀rọ Cacti àti Àwọn Ẹ̀rọ Mactrack."
+
+#: setup.php
+msgid "Default SNMP version for all new hosts."
+msgstr "Ẹ̀dà SNMP àìyípadà fún gbogbo àwọn olùgbàlejò tuntun."
+
+#: setup.php
+msgid "Default SNMP read community for all new hosts."
+msgstr "Àgbègbè kíkà SNMP àìyípadà fún gbogbo àwọn olùgbàlejò tuntun."
+
+#: setup.php
+msgid "Communities"
+msgstr "Àwọn Àwùjọ"
+
+#: setup.php
+msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
+msgstr "Kọ àtòjọ àwọn okùn kíkà SNMP tí ó wà láti dán wò fún ẹ̀rọ yìí. Okùn kíkà kọ̀ọ̀kan gbọ́dọ̀ ní àmì ìdánudúró méjì ':' láàárín wọn.  A ó dán àwọn okùn kíkà wọ̀nyí wò ní tẹ̀léntẹ̀lé tí okùn kíkà àkọ́kọ́ kò bá tọ́."
+
+#: setup.php
+msgid "The UDP/TCP Port to poll the SNMP agent on."
+msgstr "Ibùdó UDP/TCP láti ṣàyẹ̀wò aṣojú SNMP lórí rẹ̀."
+
+#: setup.php
+msgid "Default SNMP timeout in milli-seconds."
+msgstr "Àkókò ìparí SNMP àìyípadà ní ìdá-ẹgbẹ̀rún ìṣẹ́jú-àáyá."
+
+#: setup.php
+msgid "The number times the SNMP poller will attempt to reach the host before failing."
+msgstr "Iye ìgbà tí olùṣàyẹ̀wò SNMP yóò gbìyànjú láti dé ọ̀dọ̀ olùgbàlejò kí ó tó kùnà."
+
+#: setup.php
+msgid "snmpbulkwalk Binary Path"
+msgstr "Ọ̀nà Bínárì snmpbulkwalk"
+
+#: setup.php
+msgid "The path to your snmpbulkwalk binary."
+msgstr "Ọ̀nà sí bínárì snmpbulkwalk rẹ."
+
+#: setup.php
+msgid "MacTrack Settings"
+msgstr "Àwọn Ètò MacTrack"
+
+#: setup.php
+msgid "Default Tab"
+msgstr "Táàbù Àìyípadà"
+
+#: setup.php
+msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
+msgstr "Táàbù MacTrack wo ni o fẹ́ kí ó jẹ́ táàbù Àkọ́kọ́ rẹ ní gbogbo ìgbà tí o bá lọ sí ìkejì MacTrack."
+
+#: setup.php
+msgid "Mac Addresses"
+msgstr "Àwọn Àdírẹ́ẹ̀sì Mac"
+
+#: setup.php
+msgid "dot1x Deta"
+msgstr "Àlàyé dot1x"
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Àwọn Ètò Proxy Íńtánẹ́ẹ̀tì"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Àdírẹ́sì Proxy Íńtánẹ́ẹ̀tì"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Fún yálà àwọn Iṣẹ́ pàtàkì Cacti tàbí àwọn Àfikún tí ó nílò ìwọlé íńtánẹ́ẹ̀tì, tẹ olupèsè proxy àti ibùdó síbí ní ìrísí yìí IP:PORT. Fún àpẹẹrẹ 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Olùlò Proxy Íńtánẹ́ẹ̀tì"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "Bí Proxy Íńtánẹ́ẹ̀tì rẹ bá nílò orúkọ olùlò, tẹ̀ ẹ́ síbí."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Ọ̀rọ̀ Aṣínà Proxy Íńtánẹ́ẹ̀tì"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "Bí Proxy Íńtánẹ́ẹ̀tì rẹ bá nílò ọ̀rọ̀ aṣínà, tẹ̀ ẹ́ síbí."
+
+#: setup.php
+msgid "Mactrack Dashboard"
+msgstr "Pátákó Ìṣàkóso Mactrack"
+
+#: setup.php
+msgid "Mactrack Devices"
+msgstr "Àwọn Ẹ̀rọ Mactrack"
+
+#: setup.php
+msgid "(Edit)"
+msgstr "(Ṣàtúnṣe)"
+
+#: setup.php
+msgid "(Import)"
+msgstr "(Kó wọlé)"
+
+#: setup.php
+msgid "Mactrack Device Types"
+msgstr "Àwọn Irú Ẹ̀rọ Mactrack"
+
+#: setup.php
+msgid "Mactrack Sites"
+msgstr "Àwọn Ibùdó Mactrack"
+
+#: setup.php
+msgid "Mac Address Tracking Utility"
+msgstr "Ohun-èlò Ìtọ́pinpin Àdírẹ́ẹ̀sì Mac"
+
+#: setup.php
+msgid "Mac Address Authorization Utility"
+msgstr "Ohun-èlò Ìfọwọ́sí Àdírẹ́ẹ̀sì Mac"
+
+#: setup.php
+msgid "Mactrack Vendor Macs"
+msgstr "Àwọn Mac Olùtajà Mactrack"
+
+#: setup.php
+msgid "Mactrack View Macs"
+msgstr "Mactrack Wo Àwọn Mac"
+
+#: setup.php
+msgid "Mactrack Dot1x View"
+msgstr "Àwòrán Mactrack Dot1x"
+
+#: setup.php
+msgid "Mactrack IP Address Viewer"
+msgstr "Olùwo Àdírẹ́sì IP Mactrack"
+
+#: setup.php
+msgid "Mactrack View Interfaces"
+msgstr "Mactrack Wo Àwọn Ìsopọ̀"
+
+#: setup.php
+msgid "Mactrack View Sites"
+msgstr "Mactrack Wo Àwọn Ibùdó"
+
+#: setup.php
+msgid "Mactrack View IP Ranges"
+msgstr "Mactrack Wo Àwọn Ààlà IP"
+
+#: setup.php
+msgid "Mactrack View Devices"
+msgstr "Mactrack Wo Àwọn Ẹ̀rọ"
+
+#: setup.php
+msgid "Mactrack Utilities"
+msgstr "Àwọn Ohun Èlò Mactrack"
+
+#: setup.php
+msgid "Truncate Port Results Table"
+msgstr "Sọ Tábìlì Àwọn Èsì Pọ́ọ̀tì di Òfo"
+
+#: setup.php
+msgid "Truncate Aggregated Port Results Table"
+msgstr "Sọ Tábìlì Àwọn Èsì Pọ́ọ̀tì Tí A Kójọpọ̀ di Òfo"
+
+#: setup.php
+msgid "Truncate and Re-create Aggregated Port Results Table"
+msgstr "Sọ Tábìlì Àwọn Èsì Pọ́ọ̀tì Tí A Kójọpọ̀ di Òfo kí o sì Tún un Dá"
+
+#: setup.php
+msgid "Refresh/Update Vendor MAC Database from IEEE"
+msgstr "Sọ Di Ọ̀tun/Ṣe Ìmúdójúìwọ̀n Ibùdó Dátà MAC Olùtajà láti IEEE"
+
+#: setup.php
+msgid "Mactrack Graph Viewer"
+msgstr "Olùwo Gíráfù Mactrack"
+
+#: setup.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "Ìṣẹ́jú-àáyá %d"
+
+#: setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "Ìṣẹ́jú %d"
+
+#: setup.php
+msgid "Matches"
+msgstr "Báramu"
+
+#: setup.php
+msgid "Contains"
+msgstr "Ní nínú"
+
+#: setup.php
+msgid "Begins With"
+msgstr "Bẹ̀rẹ̀ Pẹ̀lú"
+
+#: setup.php
+msgid "Does Not Contain"
+msgstr "Kò Ní Nínú"
+
+#: setup.php
+msgid "Does Not Begin With"
+msgstr "Kò Bẹ̀rẹ̀ Pẹ̀lú"
+
+#: setup.php
+msgid "Is Null"
+msgstr "Jẹ́ Òfo"
+
+#: setup.php
+msgid "Is Not Null"
+msgstr "Kì í ṣe Òfo"
+
+#: setup.php
+msgid "Half"
+msgstr "Ìdajì"
+
+#: setup.php
+msgid "Full"
+msgstr "Kíkún"
+
+#: setup.php
+msgid "Sync Cacti Device to Mactrack Device"
+msgstr "Mú Ẹ̀rọ Cacti bára mu pẹ̀lú Ẹ̀rọ Mactrack"
+
+#: setup.php
+msgid "Sync Mactrack Device to Cacti Device"
+msgstr "Mú Ẹ̀rọ Mactrack bára mu pẹ̀lú Ẹ̀rọ Cacti"
+
+#: setup.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Ní Gbogbo Ìṣẹ́jú %d"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hour"
+msgstr "Ní Gbogbo Wákàtí %d"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Ní Gbogbo Wákàtí %d"
+
+#: setup.php
+msgid "Every Day"
+msgstr "Lójoojúmọ́"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "Oṣù %d"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "Oṣù %d"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "Ọdún %d"
+
+#: setup.php
+msgid "On Scan Completion"
+msgstr "Nígbà Tí Ìwádìí Bá Parí"
+
+#: setup.php
+#, php-format
+msgid "Every %d Days"
+msgstr "Ní Gbogbo Ọjọ́ %d"
+
+#: setup.php
+msgid "Every Week"
+msgstr "Lọ́sọ̀ọ̀sẹ̀"
+
+#: setup.php
+msgid "Management"
+msgstr "Ìṣàkóso"
+
+#: setup.php
+msgid "SNMP Options"
+msgstr "Àwọn Àṣàyàn SNMP"
+
+#: setup.php
+msgid "Mac Watch"
+msgstr "Ìṣọ́ Mac"
+
+#: setup.php
+msgid "Mactrack Tools"
+msgstr "Àwọn Irinṣẹ́ Mactrack"
+
+#: setup.php
+msgid "Mac Authorizations"
+msgstr "Àwọn Ìfọwọ́sí Mac"
+
+#: setup.php
+msgid "Tracking Utilities"
+msgstr "Àwọn Ohun Èlò Ìtọ́pa"
+
+#: setup.php
+msgid "Ports to Ignore (Regular Expression)"
+msgstr "Àwọn Pọ́ọ̀tì Láti Fojú Fò (Ìsọ̀rọ̀ Déédéé)"
+
+#: setup.php
+#, php-format
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions."
+msgstr "Àṣàyàn.  Gbólóhùn déédéé tí a fi wé, láìka lẹ́tà ńlá tàbí kékeré sí, orúkọ èbúté àti orúkọ àpèlé èbúté ti %s.  A kì í gba àwọn àdírẹ́sì MAC tí a rí lórí èbúté tí ó bá a mu.  Fún àpẹẹrẹ, '(uplink|trunk)' ń fojú fò gbogbo èbúté tí orúkọ tàbí orúkọ àpèlé rẹ̀ bá ní uplink tàbí trunk nínú.  Fi gbólóhùn kọ̀ọ̀kan sí orí ìlà tirẹ̀ láti fún ni ní púpọ̀.  A máa ń lò ó ní àfikún sí àwọn gbólóhùn %s."
+
+#: setup.php
+msgid "every device in this site"
+msgstr "gbogbo ẹ̀rọ nínú ibùdó yìí"
+
+#: setup.php
+msgid "this device"
+msgstr "ẹ̀rọ yìí"
+
+#: setup.php
+msgid "device and global"
+msgstr "ẹ̀rọ àti gbogbogbòò"
+
+#: setup.php
+msgid "site and global"
+msgstr "ibùdó àti gbogbogbòò"
+
+#: setup.php
+msgid "Device Scanning Function Options"
+msgstr "Àwọn Àṣàyàn Iṣẹ́ Ìṣàyẹ̀wò Ẹ̀rọ"
+
+#: setup.php
+msgid "Give this device type a meaningful description."
+msgstr "Fún irú ẹ̀rọ yìí ní àpèjúwe tí ó ní ìtumọ̀."
+
+#: setup.php
+msgid "Fill in the name for the vendor of this device type."
+msgstr "Kọ orúkọ olùtajà fún irú ẹ̀rọ yìí."
+
+#: setup.php
+msgid "Choose the type of device."
+msgstr "Yan irú ẹ̀rọ."
+
+#: setup.php
+msgid "System Description Match"
+msgstr "Ìbámu Àpèjúwe Sísítẹ̀mù"
+
+#: setup.php
+msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
+msgstr "Pèsè àlàyé pàtàkì láti ran Mactrack lọ́wọ́ láti ṣàwárí irú Ẹ̀rọ náà. Àmì àfiyèsí gbogbogbòò (wildcard) ni àmì '&#42;'."
+
+#: setup.php
+msgid "Vendor SNMP Object ID Match"
+msgstr "Ìbámu Object ID SNMP Olùpèsè"
+
+#: setup.php
+msgid "MAC Address Scanning Function"
+msgstr "Iṣẹ́ Àyẹ̀wò Àdírẹ́ẹ̀sì MAC"
+
+#: setup.php
+msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
+msgstr "Iṣẹ́ ìyẹ̀wò Mactrack láti pè láti gba àti láti fipamọ́ àwọn àlàyé port.  Orúkọ iṣẹ́ náà nìkan ni a nílò.  A gba àwọn pàrámítà mẹ́rin wọ̀nyí gbọ́, a ó sì máa fi wọ́n kún un nígbà gbogbo: 'my_function($site, &$device, $lowport, $highport)'.  Kò sí iṣẹ́ tí a nílò fún router lásán."
+
+#: setup.php
+msgid "IP Address Scanning Function"
+msgstr "Iṣẹ́ Ìṣàyẹ̀wò Àdírẹ́sì IP"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
+msgstr "Iṣẹ́ ìyẹ̀wò Mactrack pàtó fún àwọn ẹ̀rọ Layer3 tí ó ń tọ́pasẹ̀ Àwọn Àdírẹ́sì IP."
+
+#: setup.php
+msgid "802.1x Scanning Function"
+msgstr "Iṣẹ́ Àyẹ̀wò 802.1x"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Switches with dot1x enabled."
+msgstr "Iṣẹ́ ìyẹ̀wò Mactrack pàtó fún àwọn Switch tí dot1x ṣiṣẹ́ lórí wọn."
+
+#: setup.php
+msgid "Serial Number Base OID"
+msgstr "OID Ìpìlẹ̀ Nọ́ńbà Ìtẹ̀léra"
+
+#: setup.php
+msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
+msgstr "SNMP OID tí a lò láti gba nọ́mbà ìtẹ̀léra irú ẹ̀rọ yìí láti fi pamọ́ sínú tábìlì Ìfitónilétí Ohun-ìní Mactrack."
+
+#: setup.php
+msgid "Serial Number Collection Method"
+msgstr "Ọ̀nà Ìkójọ Nọ́ńbà Ìtẹ̀léra"
+
+#: setup.php
+msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
+msgstr "Báwo ni a ṣe ń gba nọ́ńbà ìtẹ̀léra fún OID yìí.  Tí ó bá jẹ́ 'SNMP Walk', a máa gbà pé àwọn nọ́ńbà ìtẹ̀léra púpọ̀ ni.  Tí ó bá jẹ́ 'Get', ọ̀kan ṣoṣo ni yóò jẹ́.."
+
+#: setup.php
+msgid "SNMP Get"
+msgstr "SNMP Get"
+
+#: setup.php
+msgid "SNMP Walk"
+msgstr "Ìrìn SNMP"
+
+#: setup.php
+msgid "Low User Port Number"
+msgstr "Nọ́mbà Pọ́ọ̀tì Olùlò Tó Kéré"
+
+#: setup.php
+msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
+msgstr "Pèsè nọ́mbà ibùdó ìsopọ̀ olùlò tí ó kéré jù lórí switch yìí. Fi sí 0 láti jẹ́ kí ètò náà ṣírò rẹ̀."
+
+#: setup.php
+msgid "High User Port Number"
+msgstr "Nọ́ńbà Èbúté Olùlò Gíga"
+
+#: setup.php
+msgid "Disabled device type is not used."
+msgstr "A kò lo irú ẹ̀rọ àìṣiṣẹ́."
+
+#: setup.php
+msgid "Fill in the name of this SNMP option set."
+msgstr "Kọ orúkọ àkójọ àṣàyàn SNMP yìí."
+
+#: setup.php
+msgid "SNMP Version"
+msgstr "Ẹ̀dà SNMP"
+
+#: setup.php
+msgid "Choose the SNMP version for this host."
+msgstr "Yan ẹ̀dà SNMP fún olùgbàlejò yìí."
+
+#: setup.php
+msgid "SNMP Community String"
+msgstr "Okùn Àwùjọ SNMP"
+
+#: setup.php
+msgid "Fill in the SNMP read community for this device."
+msgstr "Kọ àwùjọ ìkàwé SNMP fún ẹ̀rọ yìí."
+
+#: setup.php
+msgid "SNMP Port"
+msgstr "Èbúté SNMP"
+
+#: setup.php
+msgid "SNMP Timeout"
+msgstr "Àkókò Ìdádúró SNMP"
+
+#: setup.php
+msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
+msgstr "Iye ìṣẹ́jú-ẹgbẹ̀rún tí ó pọ̀ jùlọ tí Cacti yóò dúró fún ìdáhùn SNMP (kò ṣiṣẹ́ pẹ̀lú àtìlẹ́yìn php-snmp)."
+
+#: setup.php
+msgid "SNMP Retries"
+msgstr "Àtúnṣe Ìgbìyànjú SNMP"
+
+#: setup.php
+msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
+msgstr "Iye ìgbìyànjú tí ó pọ̀ jùlọ láti dé ọ̀dọ̀ ẹ̀rọ kan nípasẹ̀ okùn ìkàwé SNMP kí ó tó jáwọ́."
+
+#: setup.php
+msgid "Maximum OID's Per Get Request"
+msgstr "Àwọn OID Tó Pọ̀ Jù Lọ Fún Ìbéèrè Get Kọ̀ọ̀kan"
+
+#: setup.php
+msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
+msgstr "Ṣàlàyé iye àwọn OID tí a lè gbà nínú ìbéèrè SNMP Get kanṣoṣo."
+
+#: setup.php
+msgid "SNMP Username (v3)"
+msgstr "Orúkọ Olùlò SNMP (v3)"
+
+#: setup.php
+msgid "SNMP v3 username for this device."
+msgstr "Orúkọ olùlò SNMP v3 fún ẹ̀rọ yìí."
+
+#: setup.php
+msgid "SNMP Password (v3)"
+msgstr "Ọ̀rọ̀ Aṣínà SNMP (v3)"
+
+#: setup.php
+msgid "SNMP v3 password for this device."
+msgstr "Ọ̀rọ̀ aṣínà SNMP v3 fún ẹ̀rọ yìí."
+
+#: setup.php
+msgid "SNMP Auth Protocol (v3)"
+msgstr "Ìlànà Ìfọwọ́sí SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Authorization Protocol."
+msgstr "Yan Ìlànà Àṣẹ SNMPv3."
+
+#: setup.php
+msgid "SNMP Privacy Passphrase (v3)"
+msgstr "Gbólóhùn Aṣínà Àṣírí SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Passphrase."
+msgstr "Yan Gbólóhùn Aṣínà Àṣírí SNMPv3."
+
+#: setup.php
+msgid "SNMP Privacy Protocol (v3)"
+msgstr "Ìlànà Àṣírí SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Protocol."
+msgstr "Yan Ìlànà Àṣírí SNMPv3."
+
+#: setup.php
+msgid "SNMP Context (v3)"
+msgstr "Àyíká SNMP (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Context to use for this device."
+msgstr "Tẹ Àyíká SNMP v3 láti lò fún ẹ̀rọ yìí."
+
+#: setup.php
+msgid "SNMP Engine ID (v3)"
+msgstr "ID Ẹ́ńjìnì SNMP (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Engine ID to use for this device."
+msgstr "Tẹ ID Ẹ́ńjìnì SNMP v3 láti lò fún ẹ̀rọ yìí."
+
+#: setup.php
+msgid "General Device Settings"
+msgstr "Àwọn Ètò Ẹ̀rọ Gbogbogbòò"
+
+#: setup.php
+msgid "Give this device a meaningful name."
+msgstr "Fún ẹ̀rọ yìí ní orúkọ tí ó ní ìtumọ̀."
+
+#: setup.php
+msgid "Fill in the fully qualified hostname for this device."
+msgstr "Kọ orúkọ olùgbàlejò kíkún pátápátá fún ẹ̀rọ yìí."
+
+#: setup.php
+msgid "Related Cacti Host"
+msgstr "Olùgbàlejò Cacti Tó Jọ Mọ́ Ọn"
+
+#: setup.php
+msgid "Given Mactrack Host is connected to this Cacti Host."
+msgstr "Olùgbàlejò Mactrack tí a fúnni wà ní ìsopọ̀ pẹ̀lú Olùgbàlejò Cacti yìí."
+
+#: setup.php
+msgid "Scan Type"
+msgstr "Irú Ìṣàyẹ̀wò"
+
+#: setup.php
+msgid "Choose the scan type you wish to perform on this device."
+msgstr "Yan irú ìṣàyẹ̀wò tí o fẹ́ ṣe lórí ẹ̀rọ yìí."
+
+#: setup.php
+msgid "Choose the site to associate with this device."
+msgstr "Yan ibùdó láti so mọ́ ẹ̀rọ yìí."
+
+#: setup.php
+msgid "Device Notes"
+msgstr "Àwọn Àkọsílẹ̀ Ẹ̀rọ"
+
+#: setup.php
+msgid "This field value is useful to save general information about a specific device."
+msgstr "Iye pápá yìí wúlò láti fi àlàyé gbogbogbò nípa ẹ̀rọ pàtó kan pamọ́."
+
+#: setup.php
+msgid "Disable Device"
+msgstr "Dá Ẹ̀rọ Dúró"
+
+#: setup.php
+msgid "Check this box to disable all checks for this host."
+msgstr "Ṣàmì sí àpótí yìí láti pa gbogbo àyẹ̀wò fún olùgbàlejò yìí."
+
+#: setup.php
+msgid "Switch/Hub, Switch/Router Settings"
+msgstr "Àwọn Ètò Swíìṣì/Họ́ọ̀bù, Swíìṣì/Raútà"
+
+#: setup.php
+msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
+msgstr "Pèsè àtòjọ àwọn ibùdó ìsopọ̀ lórí switch/hub kan pàtó tí ó yẹ kí a fojú fo àwọn èsì MAC wọn. Àwọn ibùdó bíi link/trunk tí a kò lè yà sọ́tọ̀ kúrò lára àwọn ibùdó olùlò mìíràn jẹ́ àpẹẹrẹ. Nọ́mbà ibùdó kọ̀ọ̀kan gbọ́dọ̀ ní àmì ìdákẹ́jẹ́ méjì, páìpù, tàbí ààyè ':', '|', ' ' láàárín wọn. Fún àpẹẹrẹ, 'Fa0/1: Fa1/23' tàbí 'Fa0/1 Fa1/23' yóò ṣeé gbà fún irú switch àwọn olùpèsè kan."
+
+#: setup.php
+msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
+msgstr "O lè lo àwọn ètò SNMP pàtó tàbí yan àkójọ SNMP. Nínú ọ̀ràn kejì, mactrack máa ń gbìyànjú láti wá àwọn ètò tó tọ́ láti inú àkójọ SNMP"
+
+#: setup.php
+msgid "Read Strings"
+msgstr "Àwọn Okùn Kíka"
+
+#: setup.php
+msgid "<strong>DEPRECATED:</strong> SNMP community strings"
+msgstr "<strong>TÓ TI PARÍ LÍLÒ:</strong> Àwọn okùn àwùjọ SNMP"
+
+#: setup.php
+msgid "Specific SNMP Settings"
+msgstr "Àwọn Ètò SNMP Pàtó"
+
+#: setup.php
+msgid "Connectivity Options"
+msgstr "Àwọn Àṣàyàn Ìsopọ̀"
+
+#: setup.php
+msgid "Terminal Type"
+msgstr "Irú Támínà"
+
+#: setup.php
+msgid "Choose the terminal type that you use to connect to this device."
+msgstr "Yan irú tẹ́mínà tí o ń lò láti sopọ̀ mọ́ ẹ̀rọ yìí."
+
+#: setup.php
+msgid "Telnet"
+msgstr "Telnet"
+
+#: setup.php
+msgid "SSH"
+msgstr "SSH"
+
+#: setup.php
+msgid "HTTP"
+msgstr "HTTP"
+
+#: setup.php
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: setup.php
+msgid "User Name"
+msgstr "Orúkọ Olùlò"
+
+#: setup.php
+msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
+msgstr "Orúkọ Olùlò tí a ó lò fún ọ̀nà ìdánimọ̀ àdáni rẹ. Àpẹẹrẹ ní SSH, RSH, HTML, àti bẹ́ẹ̀ bẹ́ẹ̀ lọ."
+
+#: setup.php
+msgid "Password"
+msgstr "Ọ̀rọ̀ Aṣínà"
+
+#: setup.php
+msgid "The password to be used for your custom authentication."
+msgstr "Ọ̀rọ̀ Aṣínà tí a óò lò fún ìjẹ́rìísí àdáni rẹ."
+
+#: setup.php
+msgid "Private Key Path"
+msgstr "Ọ̀nà Kọ́kọ́rọ́ Àdáni"
+
+#: setup.php
+msgid "The path to the private key used for SSH authentication."
+msgstr "Ọ̀nà sí kọ́kọ́rọ́ àdáni tí a lò fún ìjẹ́rìísí SSH."
+
+#: setup.php
+msgid "Sequence"
+msgstr "Ìtẹ̀léra"
+
+#: setup.php
+msgid "Sequence of Item."
+msgstr "Ìtẹ̀léra Ohun Èlò."
+
+#: setup.php
+msgid "General Site Settings"
+msgstr "Àwọn Ètò Ibùdó Gbogbogbòò"
+
+#: setup.php
+msgid "Please enter a reasonable name for this site."
+msgstr "Jọ̀wọ́ tẹ orúkọ tó yẹ fún ibùdó yìí."
+
+#: setup.php
+msgid "Primary Customer Contact"
+msgstr "Olùbásọ̀rọ̀ Oníbàárà Àkọ́kọ́"
+
+#: setup.php
+msgid "The principal customer contact name and number for this site."
+msgstr "Orúkọ àti nọ́ńbà olùbásọ̀rọ̀ oníbàárà pàtàkì fún Ibùdó yìí."
+
+#: setup.php
+msgid "NetOps Contact"
+msgstr "Olùbáṣepọ̀ NetOps"
+
+#: setup.php
+msgid "Please principal network support contact name and number for this site."
+msgstr "Jọ̀wọ́ tẹ orúkọ àti nọ́mbà olùbásọ̀rọ̀ ìrànlọ́wọ́ nẹ́tíwọ́kì pàtàkì fún ibùdó yìí."
+
+#: setup.php
+msgid "Facilities Contact"
+msgstr "Olùbásọ̀rọ̀ Àwọn Ohun Èlò"
+
+#: setup.php
+msgid "Please principal facilities/security contact name and number for this site."
+msgstr "Jọ̀wọ́ tẹ orúkọ àti nọ́mbà olùbásọ̀rọ̀ ààbò/àwọn ohun èlò pàtàkì fún ibùdó yìí."
+
+#: setup.php
+msgid "Site Information"
+msgstr "Àlàyé Ibùdó"
+
+#: setup.php
+msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
+msgstr "Pèsè èyíkéyìí àlàyé pàtó fún Ibùdó náà, ní ọ̀nà òmìnira, tí yóò jẹ́ kí o lè ṣàkóso ipò yìí dáadáa sí i."
+
+#: setup.php
+msgid "General Mac Address Tracking Settings"
+msgstr "Àwọn Ètò Ìtọ́pasẹ̀ Àdírẹ́sì MAC Gbogbogbòò"
+
+#: setup.php
+msgid "MAC Address"
+msgstr "Àdírẹ́ẹ̀sì MAC"
+
+#: setup.php
+msgid "Please enter the MAC Address to be watched for."
+msgstr "Jọ̀wọ́ tẹ Àdírẹ́sì MAC tí a ó máa ṣọ́."
+
+#: setup.php
+msgid "MAC Tracking Name/Email Subject"
+msgstr "Orúkọ Ìtọ́pinpin MAC/Kókó-ọ̀rọ̀ Ímeèlì"
+
+#: setup.php
+msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
+msgstr "Jọ̀wọ́ tẹ orúkọ tó yẹ fún àkọsílẹ̀ Ìtọ́pa MAC yìí.  Àlàyé yìí yóò wà ní ìlà àkòrí Ímeèlì rẹ"
+
+#: setup.php
+msgid "Ticket number for cross referencing with your corporate help desk system(s)."
+msgstr "Nọ́ńbà tíkẹ́ẹ̀tì fún ìtọ́kasí pẹ̀lú ètò ìrànlọ́wọ́ ilé-iṣẹ́ rẹ."
+
+#: setup.php
+msgid "Notification Schedule"
+msgstr "Ìtòlẹ́sẹẹsẹ Ìfitọ́nilétí"
+
+#: setup.php
+msgid "Choose how often an Email should be generated for this Mac Watch item."
+msgstr "Yan bí ó ṣe yẹ kí a máa ṣẹ̀dá Ímeèlì léraléra fún ohun Mac Watch yìí."
+
+#: setup.php
+msgid "First Occurrence Only"
+msgstr "Ìṣẹ̀lẹ̀ Àkọ́kọ́ Nìkan"
+
+#: setup.php
+msgid "All Occurrences"
+msgstr "Gbogbo Àwọn Ìṣẹ̀lẹ̀"
+
+#: setup.php
+msgid "Every Hour"
+msgstr "Ní Gbogbo Wákàtí"
+
+#: setup.php
+msgid "Email Addresses"
+msgstr "Àwọn Àdírẹ́sì Ímeèlì"
+
+#: setup.php
+msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
+msgstr "Tẹ àtòkọ àwọn àdírẹ́sì Ímeèlì tí a fi àmì-ìdádúró (;) ya sọ́tọ̀ tí a ó fi tó ni létí níbi tí àdírẹ́sì MAC yìí wà."
+
+#: setup.php
+msgid "General Mac Address Authorization Settings"
+msgstr "Àwọn Ètò Àṣẹ Àdírẹ́sì MAC Gbogbogbòò"
+
+#: setup.php
+msgid "MAC Address Match"
+msgstr "Ìbámu Àdírẹ́ẹ̀sì MAC"
+
+#: setup.php
+msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
+msgstr "Jọ̀wọ́ tẹ Àdírẹ́sì MAC tàbí okùn Ìbámu Àdírẹ́sì MAC tí a ó fún ní àṣẹ láìfọwọ́yí.  Bí o bá fẹ́ fún àkójọpọ̀ Àwọn Àdírẹ́sì MAC ní àṣẹ, o lè lo àmì gbogbogbò '&#37;' níbikíbi nínú Àdírẹ́sì MAC náà."
+
+#: setup.php
+msgid "Please add a reason for this entry."
+msgstr "Jọ̀wọ́ fi ìdí kún un fún àkọsílẹ̀ yìí."
+

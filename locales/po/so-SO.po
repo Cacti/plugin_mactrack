@@ -1,0 +1,3597 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-18 18:36+0000\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Somali\n"
+"Language: so-SO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
+msgstr "MacTrack ma bilaabi karin Goobteeda caadiga ah ka dib isku dayo soo noqnoqday. Dib u eeg diiwaanka Cacti ka hor intaadan sii wadin."
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
+msgstr "MacTrack ma bilaabi karin Goobteeda caadiga ah. Dib u eeg diiwaanka Cacti ka hor intaadan sii wadin."
+
+#: lib/mactrack_activity.php
+msgid "Scanning devices"
+msgstr "Waxaa la baarayaa aaladaha"
+
+#: lib/mactrack_activity.php
+msgid "Waiting for the DNS resolver"
+msgstr "Waxaa la sugayaa xalliyaha DNS"
+
+#: lib/mactrack_activity.php
+msgid "Transferring and aggregating scan results"
+msgstr "Wareejinta iyo isku-darka natiijooyinka baaritaanka"
+
+#: lib/mactrack_activity.php
+msgid "Maintaining port table partitions"
+msgstr "Dayactirka qaybaha shaxda dekedaha (port)"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired port rows"
+msgstr "Waxaa la tirtirayaa safafka port ee waqtigoodu dhacay"
+
+#: lib/mactrack_activity.php
+msgid "Pruning scan dates"
+msgstr "Nadiifinta taariikhaha baarista"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired IP rows"
+msgstr "Waxaa la tirtirayaa safafka IP ee waqtigoodu dhacay"
+
+#: lib/mactrack_activity.php
+msgid "Optimizing the IP table"
+msgstr "Hagaajinta jadwalka IP"
+
+#: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
+#: mactrack_view_dot1x.php
+msgid "Idle"
+msgstr "Heegan"
+
+#: lib/mactrack_activity.php
+msgid "Upgrading: rebuilding aggregated ports"
+msgstr "Cusbooneysiin: dib u dhisidda dekedaha la isku daray"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "About %s rows left to copy (estimate)"
+msgstr "Qiyaastii %s saf ayaa haray in la koobiyo (qiyaas)"
+
+#: lib/mactrack_activity.php
+msgid "Repartitioning the port, IP and 802.1x tables"
+msgstr "Dib-u-qaybinta shaxaha dekedda, IP iyo 802.1x"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "%d devices in this scan"
+msgstr "%d aaladaha baaritaankan"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "The process stopped during: %s"
+msgstr "Habku wuxuu istaagay intii lagu jiray: %s"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "Scanning %d devices"
+msgstr "Waxaa la baarayaa %d aaladood"
+
+#: lib/mactrack_activity.php
+msgid "A database upgrade is running"
+msgstr "Casriyeynta kaydka xogta ayaa socota"
+
+#: lib/mactrack_activity.php
+msgid "The port, IP and 802.1x table partitioning has not finished"
+msgstr "Qaybinta miisaska port-ka, IP iyo 802.1x weli ma dhammaan"
+
+#: lib/mactrack_activity.php
+msgid "The aggregated ports rebuild has not finished"
+msgstr "Dib-u-dhiska dekedaha la isu geeyay weli ma dhammaan"
+
+#: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
+msgid "Running"
+msgstr "Socda"
+
+#: lib/mactrack_functions.php
+msgid "No method"
+msgstr "Hab ma jiro"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Success"
+msgstr "Xaqiijinta way guuleysatay"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Failed"
+msgstr "Xaqiijintu Way Fashilantay"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Success"
+msgstr "Oggolaanshuhu Wuu Guuleystay"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Failed"
+msgstr "Oggolaanshuhu Wuu Fashilmay"
+
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr "Laguma arag baaristii u dambeysay"
+
+#: lib/mactrack_functions.php
+msgid "Locally Admined MAC"
+msgstr "MAC-ga Maxalli Ahaan Loo Maamulo"
+
+#: lib/mactrack_functions.php
+msgid "Mactrack Device Tracking OUI Database Import Results"
+msgstr "Natiijooyinka Soo-dejinta Kaydka Xogta OUI ee Dabagalka Qalabka Mactrack"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from IEEE"
+msgstr "Ka soo dejinaya Kaydka Xogta OUI ee IEEE"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from the IEEE"
+msgstr "Waxaa laga soo dejinayaa Kaydka Xogta OUI ee IEEE"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE Complete"
+msgstr "Soo dejinta Xog-ururinta OUI ee laga keenay IEEE waa Dhammaatay"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE FAILED"
+msgstr "Soo dejinta Xog-ururinta OUI ee laga keenay IEEE way FASHILANTAY"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Entries Added/Updated in the database."
+msgstr "Waxaa '%d' Gelis lagu daray/la cusboonaysiiyay kaydka xogta."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Records Removed from the database."
+msgstr "Waxaa '%d' Diiwaanno laga saaray kaydka xogta."
+
+#: lib/mactrack_functions.php
+msgid "atifIndexes data collection complete"
+msgstr "Ururinta xogta atifIndexes waa la dhammeeyay"
+
+#: lib/mactrack_functions.php
+msgid "atPhysAddress data collection complete"
+msgstr "Ururinta xogta atPhysAddress waa la dhammeeyay"
+
+#: lib/mactrack_functions.php
+msgid "atNetAddress data collection complete"
+msgstr "Ururinta xogta atNetAddress waa la dhammeeyay"
+
+#: lib/mactrack_functions.php
+msgid "atEntries assembly complete."
+msgstr "Isku-dubbaridka atEntries waa la dhammeeyay."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "HOST: %s, IP address information collection complete"
+msgstr "MARTIGELIYE: %s, ururinta macluumaadka ciwaanka IP waa la dhammaystiray"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php
+msgid "Rescan Device"
+msgstr "Dib u baar Qalabka"
+
+#: lib/mactrack_functions.php
+msgid "View Non Interface Graphs"
+msgstr "Eeg Jaantusyada Aan Is-dhexgalka Ahayn"
+
+#: lib/mactrack_functions.php
+msgid "No Non Interface Graphs in Cacti"
+msgstr "Ma Jiraan Jaantusyada Aan Isdhexgalka Ahayn ee Cacti"
+
+#: lib/mactrack_functions.php
+msgid "View Interface Graphs"
+msgstr "Eeg Jaantusyada Is-dhexgalka"
+
+#: lib/mactrack_functions.php
+msgid "No Interface Graphs in Cacti"
+msgstr "Ma Jiraan Jaantusyada Isdhexgalka ee Cacti"
+
+#: lib/mactrack_functions.php
+msgid "Since Restart"
+msgstr "Tan iyo Dib-u-bilaabista"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Down"
+msgstr "Ma shaqeynayo"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Up"
+msgstr "Shaqeynaya"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Unaliased"
+msgstr "Aan lahayn naanays"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors"
+msgstr "Khaladaadka"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards"
+msgstr "Tuurista"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Graphless"
+msgstr "Garaaf la'aan"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Aan la aqoon"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr "La oggolaaday"
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
+msgstr "Aan la oggolayn"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Data"
+msgstr "Xog"
+
+#: lib/mactrack_functions.php
+msgid "Voice"
+msgstr "Codka"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Rescan '%s'"
+msgstr "Dib-u-baarista Qalabka '%s'"
+
+#: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr "Dib-u-baaristu wax soo saar ah ma yeelan."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr "Dib-u-baarista qalabka '%s' waxay ku dhammaatay %0.2f ilbiriqsi."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site scan '%s'"
+msgstr "Baaritaanka goobta '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr "Baaritaanka Goobta '%s' wuxuu ku dhammaaday %0.2f ilbiriqsi."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Enable '%s'"
+msgstr "Hawlgelinta Qalabka '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Disable '%s'"
+msgstr "Joojinta Qalabka '%s'"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_macwatch.php
+#: mactrack_snmp.php mactrack_utilities.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
+#: setup.php
+msgid "N/A"
+msgstr "Ma khuseyso"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d Daqiiqo"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d Saacadood"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Days"
+msgstr "%d Maalmood"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Weeks"
+msgstr "%d Toddobaad"
+
+#: lib/mactrack_functions.php
+msgid "Not Recorded"
+msgstr "Lama Diiwaangelin"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
+msgstr "Xaaladda: Socota, Hawlaha: %d, Horumarka: %s, Waqtigii Shaqada Ugu Dambeeyay: %2.1f"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
+msgstr "Xaaladda: Sugitaan, Waqtigii Shaqada Ugu Dambeeyay: %2.1f ilbiriqsi, Hawlaha: %d hawlood, Aaladaha: %d, Waqtiga Xiga ee Shaqada: %s"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
+msgid "Disabled"
+msgstr "La joojiyay"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Scanning Rate: Every %s"
+msgstr "Heerka Baaritaanka: %s kasta"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "View Interfaces"
+msgstr "Eeg Is-dhexgallada"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "Not Detected"
+msgstr "Lama Ogaan"
+
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr "Guddiga Xogta"
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Sites"
+msgstr "Goobaha"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Devices"
+msgstr "Aaladaha"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "Isdhexgalada"
+
+#: lib/mactrack_functions.php
+msgid "IP Ranges"
+msgstr "Kala-duwanaanshaha IP-yada"
+
+#: lib/mactrack_functions.php setup.php
+msgid "IP Addresses"
+msgstr "Ciwaannada IP"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "Cinwaannada MAC"
+
+#: lib/mactrack_functions.php
+msgid "Dot1x"
+msgstr "Dot1x"
+
+#: lib/mactrack_functions.php mactrack_view_graphs.php
+msgid "Graphs"
+msgstr "Jaantusyada"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Search"
+msgstr "Raadi"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_devices.php mactrack_view_ips.php
+#: setup.php
+msgid "Default"
+msgstr "Asal ah"
+
+#: lib/mactrack_functions.php
+msgid "Show Device Details"
+msgstr "Muuji Faahfaahinta Qalabka"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Go"
+msgstr "Soco"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Clear"
+msgstr "Nadiifi"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Export"
+msgstr "Dhoofi"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+msgid "Site"
+msgstr "Goob"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_ips.php
+msgid "Any"
+msgstr "Mid kasta"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "SubType"
+msgstr "Nooc-hoosaad"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgstr "Ma hubtaa inaad rabto inaad ka tirtirto dhammaan natiijooyinka Dekedda ilaa MAC ilaa IP nidaamka?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
+msgstr "Ma hubtaa inaad rabto inaad tirtirto natiijooyinka dhacay ee Dekedda ilaa MAC ilaa IP hadda?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
+msgstr "Ma hubtaa inaad doonayso inaad nadiifiso hawlaha baaritaanka Mactrack ee kaydsan?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Ma hubtaa inaad rabto inaad ka tirtirto dhammaan natiijooyinka Isku-darka Dekedda ilaa MAC ilaa IP nidaamka?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Ma hubtaa inaad rabto inaad tirtirto oo aad dib u abuurto dhammaan natiijooyinka Isku-darka Dekedda ilaa MAC ilaa IP ee nidaamka?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
+msgstr "Ma hubtaa inaad rabto inaad soo dejiso oo aad soo geliso xogta kaydka IEEE Vendor MAC/OUI hadda?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
+msgstr "Ma hubtaa inaad doonayso inaad hadda dib u dhisto liiska taariikhda baaritaanka adigoo ka duulaya natiijooyinka Port ilaa MAC ilaa IP ee kaydsan?"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
+msgstr "Dib u dhis oo falanqee qaybta ay ku jirto kormeerka dekedda ugu dambeeya, kaas oo ah toddobaadka hadda jira ee leh qaybo toddobaadle ah. Miis aan la qaybin si buuxda ayaa loo hagaajiyaa. Baaritaannada qorshaysan waa laga boodayaa inta tani socoto. Sii wad?"
+
+#: lib/mactrack_functions.php
+msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
+msgstr "Hawshan dayactirka ah socodsii xilliga shaqada ka baxsan. Dib-u-dhisku wuxuu midba midka kale ka dambeeya nuqul ka sameeyaa taariikhda buuxda ee jadwallada dekedda (ciwaanka MAC), ciwaanka IP iyo 802.1x, waxayna qaadan kartaa saacado. Baaritaannada qorshaysan waa la dhaafaa, dayactirka xog-ururinta waa la sugaa, raadinta MAC, IP iyo 802.1x waxay muujinaysaa farriin dayactir ilaa ay ka dhammaato. U ogolow meel bannaan oo disk-ga ah nuqul labaad oo jadwal kasta iyo tusmooyinkiisa ah. Sii wad?"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Scan Results"
+msgstr "Ka saar Dhammaan Natiijooyinka Baaritaanka"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Perform Database Maintenance"
+msgstr "Samee Dayactirka Kaydka Xogta"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Refresh Scanning Functions"
+msgstr "Cusbooneysii Hawlaha Baaritaanka"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Aggregated Results"
+msgstr "Ka saar Dhammaan Natiijooyinka la Ururiyay"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Perform Aggregate Table Rebuild"
+msgstr "Samee Dib-u-dhiska Shaxda Wadarta"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild IEEE Vendor MAC/OUI Database"
+msgstr "Dib u dhis Kaydka Xogta Iibiyaha IEEE MAC/OUI"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Rebuild Scan Dates"
+msgstr "Dib u dhis Taariikhaha Baaritaanka"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Optimize Port Table"
+msgstr "Hagaaji Jadwalka Dekedaha"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Configure Port and IP Address Partitioning"
+msgstr "Qaabee Qaybinta Dekedda iyo Cinwaanka IP"
+
+#: lib/mactrack_partition_rebuild.php
+msgid "The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
+msgstr "Miisaska port-ka, IP iyo 802.1x waa la dib-u-qaybinayaa, ama dib-u-dhis ma dhammaan, sidaas darteed taariikhdooda hadda lama beddeli karo. Mar kale isku day marka cli/upgrade_partitioning.php uu dhammaado."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished."
+msgstr "MacTrack waxay ku jirtaa habka dayactirka ee raadinta cinwaanka IP, cinwaanka MAC iyo 802.1x inta miisaskeeda taariikhda dib loo qaybinayo. Natiijooyinku ma dhammaystirna ilaa qaybintu ka dhammaato."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
+msgstr "MacTrack waxay ku jirtaa habka dayactirka ee raadinta cinwaanka IP, cinwaanka MAC iyo 802.1x sababtoo ah qaybinta miisaskeeda taariikhda ma dhammaan. Natiijooyinku ma dhammaystirna. Mar kale socodsii cli/upgrade_partitioning.php si aad u sii waddo."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "Maintenance Mode"
+msgstr "Habka Dayactirka"
+
+#: mactrack_actions.php
+#, php-format
+msgid "Mactrack Device: (%s) successfully updated"
+msgstr "Qalabka Mactrack: (%s) si guul leh ayaa loo cusboonaysiiyay"
+
+#: mactrack_actions.php
+msgid "Import into Mactrack Database"
+msgstr "Ku soo deji Kaydka Xogta Mactrack"
+
+#: mactrack_actions.php
+msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
+msgstr "Guji 'Sii wad' si aad u soo dejiso Qalabka soo socda Mactrack?  Fadlan sheeg ikhtiyaarrada dheeraadka ah ee Qalabka Mactrack sida hoos ku qoran."
+
+#: mactrack_actions.php
+msgid "We will use these devices SNMP options for the Mactrack Device as well."
+msgstr "Waxaan u isticmaali doonnaa ikhtiyaarrada SNMP ee aaladahan sidoo kale Qalabka Mactrack."
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Router"
+msgstr "Ma Khuseyso - Router"
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Switch/Hub"
+msgstr "Ma Khuseyso - Switch/Hub"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Delete"
+msgstr "Tirtir"
+
+#: mactrack_device_types.php mactrack_snmp.php
+msgid "Duplicate"
+msgstr "Nuqul labaad"
+
+#: mactrack_device_types.php
+msgid "--dup--"
+msgstr "--dup--"
+
+#: mactrack_device_types.php
+msgid "You must select at least one device type."
+msgstr "Waa inaad doorataa ugu yaraan hal nooc qalab."
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Continue"
+msgstr "Sii wad"
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to delete the following Device Type(s)."
+msgstr "Guji 'Sii wad' si aad u tirtirto Nooc(yada) Qalabka ee soo socda."
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
+msgstr "Guji 'Sii wad' si aad u nuquliso Nooc(yada) Qalabka ee soo socda. Waxaad si ikhtiyaari ah u beddeli kartaa sharaxaadda noocyada qalabka cusub.  Haddii kale, ha beddelin qiimaha hoose magacii asalka ahaana waxaa lagu koobiyeeyn doonaa dabagal cusub."
+
+#: mactrack_device_types.php
+msgid "Device Type Prefix:"
+msgstr "Horgalaha Nooca Qalabka:"
+
+#: mactrack_device_types.php
+msgid "<description> (1)"
+msgstr "<description> (1)"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Cancel"
+msgstr "Jooji"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Return"
+msgstr "Ku noqo"
+
+#: mactrack_device_types.php
+msgid "New Type"
+msgstr "Nooc Cusub"
+
+#: mactrack_device_types.php
+msgid "Cisco"
+msgstr "Cisco"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "There were %d Device Types Added!"
+msgstr "Waxaa lagu daray %d Nooc oo Qalab ah!"
+
+#: mactrack_device_types.php
+msgid "No New Device Types Found!"
+msgstr "Noocyo Cusub oo Qalab ah Lama Helin!"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import Results"
+msgstr "Natiijooyinka Soo-dhoofinta"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Cacti has imported the following items:"
+msgstr "Cacti waxay soo dejisay waxyaabaha soo socda:"
+
+#: mactrack_device_types.php
+msgid "Import Mactrack Device Types"
+msgstr "Soo deji Noocyada Qalabka Mactrack"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from Local File"
+msgstr "Ka soo deji Noocyada Qalabka Faylka Gudaha"
+
+#: mactrack_device_types.php
+msgid "Please specify the location of the CSV file containing your device type information."
+msgstr "Fadlan sheeg halka uu ku yaallo faylka CSV ee ay ku jirto macluumaadka nooca qalabkaaga."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Overwrite Existing Data?"
+msgstr "Ma la dul-qoraa xogta jirta?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
+msgstr "Ma in habka soo dejinta loo oggolaado inuu dul-qoro xogta jirta?  Fadlan ogow, tani macnaheedu maaha in la tirtiro safkii hore, kaliya waxaa la beddelayaa safafka soo noqnoqda."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Allow Existing Rows to be Updated?"
+msgstr "Ma la oggolaadaa in safafka jira la cusboonaysiiyo?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Required File Format Notes"
+msgstr "Qoraallada Qaabka Faylka ee Loo Baahan Yahay"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The file must contain a header row with the following column headings."
+msgstr "Faylku waa in uu lahaadaa saf madax ah oo leh cinwaannada tiirarka soo socda."
+
+#: mactrack_device_types.php
+msgid " - A common name for the device.  For example Cisco 6509 Switch"
+msgstr " - Magac guud oo loogu talagalay qalabka. Tusaale ahaan Cisco 6509 Switch"
+
+#: mactrack_device_types.php
+msgid " - The vendor who produces this device"
+msgstr " - Shirkadda soo saarta qalabkan"
+
+#: mactrack_device_types.php
+msgid " - The type of device this is.  See the notes below for this integer value"
+msgstr " - Nooca qalabkan uu yahay. Hoos ka eeg qoraallada qiimahan tirada buuxda ah"
+
+#: mactrack_device_types.php
+msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
+msgstr " - Xarfo gaar ah oo ka yimid snmp sysDescr kuwaas oo si gaar ah u aqoonsada qalabkan"
+
+#: mactrack_device_types.php
+msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
+msgstr " - sysObjectID-ga snmp ee u gaarka ah iibiyaha kaas oo kala saara qalabkan iyo kan xiga"
+
+#: mactrack_device_types.php
+msgid " - The scanning function that will be used to scan this device type"
+msgstr " - Shaqada baaritaanka ee loo adeegsan doono baaritaanka nooca qalabkan"
+
+#: mactrack_device_types.php
+msgid " - The IP scanning function that will be used to scan this device type"
+msgstr " - Shaqada baaritaanka IP ee loo adeegsan doono baaritaanka nooca qalabkan"
+
+#: mactrack_device_types.php
+msgid " - The 802.1x scanning function that will be used to scan this device type"
+msgstr " - Shaqada baaritaanka 802.1x ee loo adeegsan doono baaritaanka nooca qalabkan"
+
+#: mactrack_device_types.php
+msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
+msgstr " - Haddii Lambarka Taxanaha ee nooca qalabkan lagu heli karo weydiin SNMP ah, halkan ku dar OID-giisa"
+
+#: mactrack_device_types.php
+msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
+msgstr " - Haddii shaqadaada baaritaanka aysan awood u lahayn inay go'doomiso dekedaha trunk ama dekedaha isku xirka, kani waa lambarka dekedda bilowga ah ee dekedaha isticmaalaha"
+
+#: mactrack_device_types.php
+msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
+msgstr " - La mid ah lowPort marka laga reebo in kani yahay lambarka sare ee dekedda isticmaalaha"
+
+#: mactrack_device_types.php
+msgid " - Disabled type is not used"
+msgstr " - Nooca la joojiyay lama isticmaalo"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The primary key for this table is a combination of the following three fields:"
+msgstr "Furaha koowaad ee miiskan waa isku-darka saddexdan goobood ee soo socda:"
+
+#: mactrack_device_types.php
+msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
+msgstr "Sidaa darteed, haddii aad isku daydo inaad soo dejiso noocyada qalabka ee laba jeer soo noqda, xogta jirta waxaa lagu cusboonaysiin doonaa macluumaadka cusub."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid " is an integer field and must be one of the following:"
+msgstr " waa goob tiro buuxda ah waana inay noqotaa mid ka mid ah kuwan soo socda:"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "1 - Switch/Hub"
+msgstr "1 - Switch/Hub"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "2 - Switch/Router"
+msgstr "2 - Switch/Router"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "3 - Router"
+msgstr "3 - Router"
+
+#: mactrack_device_types.php
+msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
+msgstr "Nooca qalabka aaladaha waxaa lagu go'aamiyaa iyadoo la baaro wakiilkiisa SNMP ee sysObjectID iyo sysDescription lana barbar dhigo qiimayaasha ku jira xog-ururinta noocyada qalabka. Ugu horreeya ee la mid noqda ee laga helo xog-ururinta ayaa loo isticmaalaa sida loo baarayo. Sidaas darteed, aad ayay muhiim u tahay inaad u doorato sysObjectID_match, sysDescr_match, iyo hawsha baaritaanka oo sax ah aaladahaaga."
+
+#: mactrack_device_types.php mactrack_devices.php setup.php
+msgid "Switch/Hub"
+msgstr "Switch/Hub"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Switch/Router"
+msgstr "Switch/Router"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Router"
+msgstr "Ruuwter"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
+msgstr "XARIQDA MADAXA SI FIICAN AYAA LOO HABEEYAY:  <br>Tiirarka la helay waxay ahaayeen: %s"
+
+#: mactrack_device_types.php mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
+msgstr "CILAD HABAYNTA XARIQDA MADAXA: Goob loo baahan yahay ayaa maqan <br>Tiirarka la helay waxay ahaayeen: %s"
+
+#: mactrack_device_types.php
+msgid "Unknown Assume \"Switch/Hub\""
+msgstr "Aan la aqoon U qaado \"Switch/Hub\""
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "GELINTA WAY GUULEYSATAY: Soo-saaraha: %s, Sharaxaadda: %s, Nooca: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "GELINTA WAY FASHILANTAY: Soo-saaraha: %s, Sharaxaadda: %s, Nooca: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "GELINTA WAA LA BOODAY, HORAY U JIRAY: Soo-saaraha: %s, Sharaxaadda: %s, Nooca: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "Mactrack Device Types [edit: %s]"
+msgstr "Noocyada Qalabka ee Mactrack [wax ka beddel: %s]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Types [new]"
+msgstr "Noocyada Qalabka ee Mactrack [cusub]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Type Filters"
+msgstr "Shaandheeyayaasha Nooca Qalabka ee Mactrack"
+
+#: mactrack_device_types.php
+msgid "Device Type Description"
+msgstr "Sharaxaadda Nooca Qalabka"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Device Type"
+msgstr "Nooca Qalabka"
+
+#: mactrack_device_types.php
+msgid "Port Scanner"
+msgstr "Baaraha Dekedaha"
+
+#: mactrack_device_types.php
+msgid "IP Scanner"
+msgstr "Baaraha IP"
+
+#: mactrack_device_types.php
+msgid "Dot1x Scanner"
+msgstr "Baaraha Dot1x"
+
+#: mactrack_device_types.php
+msgid "sysDescription Match"
+msgstr "Isku-aadka sysDescription"
+
+#: mactrack_device_types.php
+msgid "Vendor OID Match"
+msgstr "Iswaafajinta OID-ga Iibiyaha"
+
+#: mactrack_device_types.php setup.php
+msgid "Device Types"
+msgstr "Noocyada Qalabka"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "No"
+msgstr "Maya"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "Yes"
+msgstr "Haa"
+
+#: mactrack_device_types.php
+msgid "No Mactrack Device Types Found"
+msgstr "Noocyada Qalabka Mactrack Lama Helin"
+
+#: mactrack_device_types.php
+msgid "Submit Query"
+msgstr "Dir Weydiinta"
+
+#: mactrack_device_types.php
+msgid "Clear Filtered Results"
+msgstr "Nadiifi Natiijooyinka La Shaandheeyay"
+
+#: mactrack_device_types.php
+msgid "Rescan"
+msgstr "Dib u baar"
+
+#: mactrack_device_types.php
+msgid "Scan Active Devices for Unknown Device Types"
+msgstr "Baar Aaladaha Firfircoon si loo helo Noocyada Qalabka aan la Aqoon"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import"
+msgstr "Soo dhoofi"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from a CSV File"
+msgstr "Ka soo deji Noocyada Qalabka Fayl CSV ah"
+
+#: mactrack_device_types.php
+msgid "Export Device Types to Share with Others"
+msgstr "Dhoofi Noocyada Qalabka si loola Wadaago Dadka Kale"
+
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Vendor"
+msgstr "Iibiyaha"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php setup.php
+msgid "All"
+msgstr "Dhammaan"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
+msgid "Type"
+msgstr "Nooca"
+
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Enabled"
+msgstr "La hawlgeliyay"
+
+#: mactrack_devices.php
+msgid "Enable"
+msgstr "Hawl-geli"
+
+#: mactrack_devices.php mactrack_macwatch.php
+msgid "Disable"
+msgstr "Hawl-jooji"
+
+#: mactrack_devices.php
+msgid "Change SNMP Options"
+msgstr "Beddel Ikhtiyaarrada SNMP"
+
+#: mactrack_devices.php
+msgid "Change Device Port Values"
+msgstr "Beddel Qiimaha Dekedda Qalabka"
+
+#: mactrack_devices.php
+msgid "Connect to Cacti Host via Hostname"
+msgstr "Ku xidh Martigeliyaha Cacti adigoo isticmaalaya Magaca Martigeliyaha"
+
+#: mactrack_devices.php
+msgid "Copy SNMP Settings from Cacti Host"
+msgstr "Ka koobiyeey Dejinta SNMP Martigeliyaha Cacti"
+
+#: mactrack_devices.php
+msgid "You must select at least one device."
+msgstr "Waa inaad doorataa ugu yaraan hal qalab."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to enable the following devices."
+msgstr "Guji 'Sii wad' si aad u hawlgeliso aaladaha soo socda."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to disable the following devices."
+msgstr "Guji 'Sii wad' si aad u joojiso aaladaha soo socda."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Guji 'Sii wad' si aad u beddesho cabbirrada SNMP ee aaladaha soo socda, calaamadee sanduuqa ku xiga meelaha aad rabto inaad cusbooneysiiso, oo buuxi qiimaha cusub."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Guji 'Sii wad' si aad u beddesho cabbirrada dekadda sare ama hoose ee aaladaha soo socda, calaamadee sanduuqa ku xiga meelaha aad rabto inaad cusbooneysiiso, oo buuxi qiimaha cusub."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
+msgstr "Guji 'Sii wad' si aad ugu xirto aaladaha soo socda Qalabkooda Cacti ee u dhigma.  Xiriirka waxaa lagu dhisi doonaa magacyo martigeliye oo isku mid ah. Sharaxaadda sidoo kale waa la cusbooneysiin doonaa."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
+msgstr "Guji 'Sii wad' si aad uga koobiyeeyso Dejinta SNMP ee Qalabka Cacti ee ku xiran una gudbiso Qalabka Mactrack.  Dhammaan Aaladaha aan xirnayn si aamusan ayaa looga boodayaa. Isku-dayga SNMP waxaa laga qaadan doonaa isku-dayga Ping."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to delete the following Devices"
+msgstr "Guji 'Sii wad' si aad u tirtirto Aaladaha soo socda"
+
+#: mactrack_devices.php
+msgid "Import Mactrack Devices"
+msgstr "Soo deji Aaladaha Mactrack"
+
+#: mactrack_devices.php
+msgid "Import Devices from Local File"
+msgstr "Ka soo deji Aaladaha Faylka Gudaha"
+
+#: mactrack_devices.php
+msgid "Please specify the location of the CSV file containing your device information."
+msgstr "Fadlan sheeg halka uu ku yaallo faylka CSV ee ay ku jirto macluumaadka qalabkaaga."
+
+#: mactrack_devices.php
+msgid " - The SiteID known to Mactrack for this device"
+msgstr " - SiteID-ga uu Mactrack u yaqaanno qalabkan"
+
+#: mactrack_devices.php
+msgid " - A simple name for the device.  For example Cisco 6509 Switch"
+msgstr " - Magac fudud oo loogu talagalay qalabka. Tusaale ahaan Cisco 6509 Switch"
+
+#: mactrack_devices.php
+msgid " - The IP Address or DNS Name for the device"
+msgstr " - Ciwaanka IP ama Magaca DNS ee qalabka"
+
+#: mactrack_devices.php
+msgid " - More detailed information about the device, including location, environmental conditions, etc."
+msgstr " - Macluumaad faahfaahsan oo ku saabsan qalabka, oo ay ku jiraan goobta, xaaladaha deegaanka, iwm."
+
+#: mactrack_devices.php
+msgid " - A list of ports that should not be scanned for user devices"
+msgstr " - Liiska dekedaha aan laga baarin aaladaha isticmaalaha"
+
+#: mactrack_devices.php
+msgid " - Redundant information indicating the intended device type.  See below for valid values."
+msgstr " - Macluumaad dheeraad ah oo tilmaamaya nooca qalabka loogu talagalay. Hoos ka eeg qiimayaasha saxda ah."
+
+#: mactrack_devices.php
+msgid " - Id of a set of SNMP options"
+msgstr " - Aqoonsiga koox ikhtiyaarro SNMP ah"
+
+#: mactrack_devices.php
+msgid " - The current snmp read string for the device"
+msgstr " - Xadhigga akhriska snmp ee hadda ee qalabka"
+
+#: mactrack_devices.php
+msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
+msgstr " - Nooca snmp ee aad rabto inaad ku baarto qalabkan. Qiimayaasha saxda ah waa 1, 2 iyo 3"
+
+#: mactrack_devices.php
+msgid " - The UDP port that the snmp agent is running on"
+msgstr " - Dekedda UDP ee wakiilka snmp uu ku shaqeynayo"
+
+#: mactrack_devices.php
+msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
+msgstr " - Waqtiga dhammaadka oo millisekan ah oo la sugayo jawaabta snmp ka hor inta aan mar kale la isku dayin"
+
+#: mactrack_devices.php
+msgid " - The number of times to retry a snmp request before giving up"
+msgstr " - Tirada jeer ee dib loogu celinayo codsiga snmp ka hor inta aan laga quusan"
+
+#: mactrack_devices.php
+msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
+msgstr " - Waxay qeexaysaa tirada OID-yada lagu heli karo hal codsi oo SNMP Get ah"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP username"
+msgstr " - SNMP V3: Magaca isticmaalaha SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP password"
+msgstr " - SNMP V3: Erayga sirta ah ee SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP authentication protocol"
+msgstr " - SNMP V3: Hab-maamuuska xaqiijinta SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy passphrase"
+msgstr " - SNMP V3: Weedha sirta ah ee asturnaanta SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy protocol"
+msgstr " - SNMP V3: Hab-maamuuska asturnaanta SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP context"
+msgstr " - SNMP V3: Macnaha guud ee SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP engine id"
+msgstr " - SNMP V3: Aqoonsiga matoorka SNMP"
+
+#: mactrack_devices.php
+msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
+msgstr "Sidaa darteed, haddii aad isku daydo inaad soo dejiso aaladaha laba jeer soo noqda, kaliya xogta aad cayinto ayaa la cusboonaysiin doonaa."
+
+#: mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
+msgstr "XARIQDA MADAXA SI FIICAN AYAA LOO HABEEYAY: <br>Tiirarka la helay waxay ahaayeen: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "GELINTA WAY GUULEYSATAY: Magaca Martigeliyaha: Aqoonsiga Goobta: %s, Magaca Qalabka: %s, Magaca Martigeliyaha %s, Dekedda SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "GELINTA WAY FASHILANTAY: Aqoonsiga Goobta: %s, Magaca Qalabka: %s, Magaca Martigeliyaha %s, Dekedda SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "GELINTA WAA LA BOODAY, HORAY U JIRAY: Aqoonsiga Goobta: %s, Magaca Qalabka: %s, Magaca Martigeliyaha %s, Dekedda SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "Mactrack Devices [edit: %s]"
+msgstr "Aaladaha Mactrack [wax ka beddel: %s]"
+
+#: mactrack_devices.php
+msgid "Mactrack Devices [new]"
+msgstr "Aaladaha Mactrack [cusub]"
+
+#: mactrack_devices.php
+msgid "SNMP Information"
+msgstr "Macluumaadka SNMP"
+
+#: mactrack_devices.php
+msgid "System:"
+msgstr "Nidaamka:"
+
+#: mactrack_devices.php
+msgid "Uptime:"
+msgstr "Waqtiga shaqada:"
+
+#: mactrack_devices.php
+msgid "Hostname:"
+msgstr "Magaca martigeliyaha:"
+
+#: mactrack_devices.php
+msgid "ObjectID:"
+msgstr "Aqoonsiga Shayga:"
+
+#: mactrack_devices.php
+msgid "Mactrack Device Filters"
+msgstr "Shaandheeyayaasha Qalabka ee Mactrack"
+
+#: mactrack_devices.php mactrack_view_devices.php setup.php
+msgid "Device Name"
+msgstr "Magaca Aaladda"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Site Name"
+msgstr "Magaca Goobta"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Status"
+msgstr "Xaaladda"
+
+#: mactrack_devices.php mactrack_view_devices.php mactrack_view_interfaces.php
+#: setup.php
+msgid "Hostname"
+msgstr "Magaca Martigeliyaha"
+
+#: mactrack_devices.php
+msgid "Total IPs"
+msgstr "Wadarta IP-yada"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports"
+msgstr "Dekedaha Isticmaalaha"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports Up"
+msgstr "Dekedaha Isticmaalaha ee Shaqeynaya"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Trunk Ports"
+msgstr "Dekedaha Trunk"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Active Macs"
+msgstr "Mac-yada Firfircoon"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Last Duration"
+msgstr "Muddadii Ugu Dambaysay"
+
+#: mactrack_devices.php
+msgid "No Mactrack Devices"
+msgstr "Ma Jiraan Aaladaha Mactrack"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: setup.php
+msgid "None"
+msgstr "Midna"
+
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
+msgid "Error"
+msgstr "Cilad"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "No Cacti Link"
+msgstr "Ma Jiro Xiriiriye Cacti ah"
+
+#: mactrack_macauth.php
+msgid "You must select at least one Authorized Mac to delete."
+msgstr "Waa inaad doorataa ugu yaraan hal MAC la ogol yahay si loo tirtiro."
+
+#: mactrack_macauth.php
+msgid "Click 'Continue' to delete the following Authorized Mac's?"
+msgstr "Guji 'Sii wad' si aad u tirtirto Ciwaannada MAC ee La Oggolaaday ee soo socda?"
+
+#: mactrack_macauth.php
+#, php-format
+msgid "Mactrack MacAuth [edit: %s]"
+msgstr "MacAuth ee Mactrack [wax ka beddel: %s]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth [new]"
+msgstr "MacAuth ee Mactrack [cusub]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth Filters"
+msgstr "Shaandheeyayaasha MacAuth ee Mactrack"
+
+#: mactrack_macauth.php mactrack_macwatch.php
+msgid "Mac Address"
+msgstr "Cinwaanka MAC"
+
+#: mactrack_macauth.php setup.php
+msgid "Reason"
+msgstr "Sababta"
+
+#: mactrack_macauth.php
+msgid "Added/Modified"
+msgstr "La daray/Wax laga beddelay"
+
+#: mactrack_macauth.php
+msgid "By"
+msgstr "Marka loo eego"
+
+#: mactrack_macauth.php
+msgid "Authorized Mac Addresses"
+msgstr "Cinwaannada MAC ee La Oggolaaday"
+
+#: mactrack_macauth.php
+msgid "No Authorized Mac Addresses Found"
+msgstr "Wax Cinwaanno MAC ah oo La Oggol Yahay Lama Helin"
+
+#: mactrack_macauth.php mactrack_vendormacs.php mactrack_view_macs.php
+msgid "MAC's"
+msgstr "MAC-yada"
+
+#: mactrack_macwatch.php
+msgid "Click 'Continue' to delete the following watched Mac's?"
+msgstr "Guji 'Sii wad' si aad u tirtirto MAC-yada la ilaaliyo ee soo socda?"
+
+#: mactrack_macwatch.php
+#, php-format
+msgid "Mactrack MacWatch [edit: %s]"
+msgstr "MacWatch ee Mactrack [wax ka beddel: %s]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch [new]"
+msgstr "MacWatch ee Mactrack [cusub]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch Filters"
+msgstr "Shaandheeyayaasha MacWatch ee Mactrack"
+
+#: mactrack_macwatch.php
+msgid "Watch Name"
+msgstr "Magaca Ilaalinta"
+
+#: mactrack_macwatch.php setup.php
+msgid "Ticket Number"
+msgstr "Lambarka Tigidhka"
+
+#: mactrack_macwatch.php
+msgid "First Seen"
+msgstr "Markii Ugu Horreysay ee La Arkay"
+
+#: mactrack_macwatch.php
+msgid "Last Seen"
+msgstr "Markii Ugu Dambaysay ee La Arkay"
+
+#: mactrack_macwatch.php
+msgid "Watches"
+msgstr "Ilaalooyinka"
+
+#: mactrack_macwatch.php
+msgid "No Mactrack Watched Macs Found"
+msgstr "MAC-yada La Ilaaliyo ee Mactrack Lama Helin"
+
+#: mactrack_sites.php
+msgid "Click 'Continue' to delete the following Site(s)?"
+msgstr "Guji 'Sii wad' si aad u tirtirto Goob(aha) soo socda?"
+
+#: mactrack_sites.php
+msgid "You must select at least one site."
+msgstr "Waa inaad doorataa ugu yaraan hal goob."
+
+#: mactrack_sites.php
+#, php-format
+msgid "Mactrack Site [edit: %s]"
+msgstr "Goobta Mactrack [wax ka beddel: %s]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site [new]"
+msgstr "Goobta Mactrack [cusub]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site Filters"
+msgstr "Shaandheeyayaasha Goobta ee Mactrack"
+
+#: mactrack_sites.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "Total IP's"
+msgstr "Wadarta IP-yada"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "MACS Found"
+msgstr "MAC-yada La Helay"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Device Errors"
+msgstr "Khaladaadka Qalabka"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "No Mactrack Sites Found"
+msgstr "Goobaha Mactrack Lama Helin"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Devices"
+msgstr "Wadarta Aaladaha"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total User Ports"
+msgstr "Wadarta Dekedaha Isticmaalaha"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Oper Ports"
+msgstr "Wadarta Dekedaha Shaqeeya"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Trunks"
+msgstr "Wadarta Trunks-ka"
+
+#: mactrack_snmp.php
+msgid "You must select at least one SNMP Option."
+msgstr "Waa inaad doorataa ugu yaraan hal Ikhtiyaar SNMP."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to delete the following SNMP Option(s)."
+msgstr "Guji 'Sii wad' si aad u tirtirto Ikhtiyaar(ada) SNMP ee soo socda."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
+msgstr "Guji 'Sii wad' si aad u nuquliso Ikhtiyaar(rada) SNMP ee soo socda. Waxaad si ikhtiyaari ah u beddeli kartaa qaabka ciwaanka ee Ikhtiyaarrada SNMP ee cusub."
+
+#: mactrack_snmp.php
+msgid "Name Format:"
+msgstr "Qaabka Magaca:"
+
+#: mactrack_snmp.php
+msgid "<name> (1)"
+msgstr "<name> (1)"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Options [edit %s]"
+msgstr "Ikhtiyaarrada SNMP [wax ka beddel %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Options [new]"
+msgstr "Ikhtiyaarrada SNMP [cusub]"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Option Set [edit: %s]"
+msgstr "Xirmada Ikhtiyaarka SNMP [wax ka beddel: %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Option Set [new]"
+msgstr "Xirmada Ikhtiyaarka SNMP [cusub]"
+
+#: mactrack_snmp.php setup.php
+msgid "Mactrack SNMP Options"
+msgstr "Ikhtiyaarrada SNMP ee Mactrack"
+
+#: mactrack_snmp.php
+msgid "Item"
+msgstr "Shay"
+
+#: mactrack_snmp.php setup.php
+msgid "Version"
+msgstr "Nooca"
+
+#: mactrack_snmp.php setup.php
+msgid "Community"
+msgstr "Bulshada"
+
+#: mactrack_snmp.php setup.php
+msgid "Port"
+msgstr "Dekedda"
+
+#: mactrack_snmp.php setup.php
+msgid "Timeout"
+msgstr "Wakhtiga Dhammaadka"
+
+#: mactrack_snmp.php setup.php
+msgid "Retries"
+msgstr "Ku-celisyada"
+
+#: mactrack_snmp.php
+msgid "Max OIDs"
+msgstr "OID-yada Ugu Badan"
+
+#: mactrack_snmp.php mactrack_view_dot1x.php
+msgid "Username"
+msgstr "Magaca isticmaalaha"
+
+#: mactrack_snmp.php
+msgid "Auth Proto"
+msgstr "Borotokoolka Xaqiijinta"
+
+#: mactrack_snmp.php
+msgid "Priv Proto"
+msgstr "Borotokoolka Asturnaanta"
+
+#: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Actions"
+msgstr "Ficillada"
+
+#: mactrack_snmp.php
+msgid "No SNMP Items Found"
+msgstr "Shayyo SNMP Lama Helin"
+
+#: mactrack_snmp.php
+msgid "Title of SNMP Option Set"
+msgstr "Cinwaanka Xirmada Xulashooyinka SNMP"
+
+#: mactrack_snmp.php
+msgid "SNMP Settings"
+msgstr "Dejinta SNMP"
+
+#: mactrack_snmp.php
+msgid "No SNMP Option Sets Found"
+msgstr "Lama Helin Kooxo Xulasho SNMP ah"
+
+#: mactrack_snmp.php
+msgid "Options"
+msgstr "Ikhtiyaarro"
+
+#: mactrack_utilities.php
+msgid "Mactrack Database Results"
+msgstr "Natiijooyinka Kaydka Xogta ee Mactrack"
+
+#: mactrack_utilities.php
+msgid "Mactrack Process Status"
+msgstr "Xaaladda Hawsha Mactrack"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Refresh"
+msgstr "Cusboonaysii"
+
+#: mactrack_utilities.php
+msgid "Current Process Status"
+msgstr "Xaaladda Hawsha Hadda"
+
+#: mactrack_utilities.php
+msgid "The Mactrack Poller is:"
+msgstr "Xog-ururiyaha Mactrack waa:"
+
+#: mactrack_utilities.php
+msgid "Running Processes:"
+msgstr "Hawlaha Socda:"
+
+#: mactrack_utilities.php
+msgid "Last Time Poller Started:"
+msgstr "Markii Ugu Dambaysay ee Xog-uruuriyuhu Bilaabmay:"
+
+#: mactrack_utilities.php
+msgid "Poller Frequency:"
+msgstr "Inta jeer ee Xog-uruuriyaha:"
+
+#: mactrack_utilities.php
+msgid "Approx. Next Runtime:"
+msgstr "Waqti-hawleedka Xiga ee Qiyaasta ah:"
+
+#: mactrack_utilities.php
+msgid "Database Maintenance Information"
+msgstr "Macluumaadka Dayactirka Kaydka Xogta"
+
+#: mactrack_utilities.php
+msgid "Last DB Maintenance Time:"
+msgstr "Waqtigii Dayactirka DB ee Ugu Dambeeyay:"
+
+#: mactrack_utilities.php
+msgid "Next DB Maintenance Time:"
+msgstr "Waqtiga Dayactirka DB ee Xiga:"
+
+#: mactrack_utilities.php
+msgid "Run Time Details"
+msgstr "Faahfaahinta Wakhtiga Shaqada"
+
+#: mactrack_utilities.php
+msgid "Last Poller Runtime:"
+msgstr "Waqtiga Shaqada Xog-uruuriyaha ee Ugu Dambeeyay:"
+
+#: mactrack_utilities.php
+msgid "Last Poller Maintenance Runtime:"
+msgstr "Waqtiga Shaqada Dayactirka Xog-uruuriyaha ee Ugu Dambeeyay:"
+
+#: mactrack_utilities.php
+msgid "Maximum Concurrent Processes:"
+msgstr "Hababka Isku Mar Socda ee Ugu Badan:"
+
+#: mactrack_utilities.php
+msgid "processes"
+msgstr "geeddi-socodyada"
+
+#: mactrack_utilities.php
+msgid "Maximum Per Device Scan Time:"
+msgstr "Waqtiga Ugu Badan ee Baarista Qalab Kasta:"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "minutes"
+msgstr "daqiiqado"
+
+#: mactrack_utilities.php
+msgid "DNS Configuration Information"
+msgstr "Macluumaadka Habaynta DNS"
+
+#: mactrack_utilities.php
+msgid "Reverse DNS Resolution is"
+msgstr "Xallinta DNS-ka Dib-u-celinta waa"
+
+#: mactrack_utilities.php
+msgid "Primary DNS Server:"
+msgstr "Adeegaha DNS ee Koowaad:"
+
+#: mactrack_utilities.php
+msgid "Secondary DNS Server:"
+msgstr "Adeegaha DNS ee Labaad:"
+
+#: mactrack_utilities.php
+msgid "DNS Resolution Timeout:"
+msgstr "Waqtiga Dhammaadka Xallinta DNS:"
+
+#: mactrack_utilities.php
+msgid "milliseconds"
+msgstr "milliseken"
+
+#: mactrack_utilities.php
+msgid "Running Process Summary"
+msgstr "Soo koobidda Hawlaha Socda"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Not Running"
+msgstr "Xalliyaha DNS Ma Shaqaynayo"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Running"
+msgstr "Xalliyaha DNS Wuu Shaqaynayaa"
+
+#: mactrack_utilities.php
+msgid "Date Started"
+msgstr "Taariikhda La Bilaabay"
+
+#: mactrack_utilities.php
+msgid "Completed"
+msgstr "La dhammeeyay"
+
+#: mactrack_utilities.php
+msgid "Waiting"
+msgstr "Sugaya"
+
+#: mactrack_utilities.php
+msgid "Other"
+msgstr "Kale"
+
+#: mactrack_utilities.php
+msgid "Current Activity"
+msgstr "Hawlaha Hadda"
+
+#: mactrack_utilities.php
+msgid "State:"
+msgstr "Xaaladda:"
+
+#: mactrack_utilities.php
+msgid "Since:"
+msgstr "Tan iyo:"
+
+#: mactrack_utilities.php
+msgid "Detail:"
+msgstr "Faahfaahin:"
+
+#: mactrack_utilities.php
+msgid "Last Skipped Poller Run:"
+msgstr "Socodsiintii Xog-uruuriyaha ee Ugu Dambaysay ee La Dhaafay:"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance Steps"
+msgstr "Tallaabooyinkii Dayactirka ee Ugu Dambeeyay"
+
+#: mactrack_utilities.php
+msgid "Seconds"
+msgstr "Ilbiriqsiyo"
+
+#: mactrack_utilities.php
+msgid "Step"
+msgstr "Tallaabada"
+
+#: mactrack_utilities.php
+msgid "Table Sizes"
+msgstr "Cabbirrada Jadwalka"
+
+#: mactrack_utilities.php
+msgid "Free"
+msgstr "Bannaan"
+
+#: mactrack_utilities.php
+msgid "Index"
+msgstr "Tusmada"
+
+#: mactrack_utilities.php
+msgid "Rows (estimate)"
+msgstr "Safafka (qiyaas)"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Jadwal"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database runs on another host"
+msgstr "Aan la aqoon: kaydka xogtu wuxuu ku shaqeeyaa martigeliye kale"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database data directory cannot be found from this host"
+msgstr "Aan la aqoon: galka xogta ee kaydka xogta lagama heli karo martigeliyahan"
+
+#: mactrack_utilities.php
+msgid "Database Disk Free:"
+msgstr "Bannaanka Saxanka ee Kaydka Xogta:"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the database: %s"
+msgstr "Tirada soo socota ee diiwaannada waxaa laga saaray kaydka xogta: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s"
+msgstr "Tirada soo socota ee diiwaannada waxaa laga saaray shaxda la isku daray: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
+msgstr "Tirada soo socota ee diiwaannada waxaa laga saaray shaxda la isku daray: %s.  Waxaa sidoo kale lagu dari doonaa %s diiwaan."
+
+#: mactrack_utilities.php
+msgid "Mactrack Scan Date Rebuild Results"
+msgstr "Natiijooyinka Dib-u-dhiska Taariikhda Baaritaanka Mactrack"
+
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr "Dib-u-dhiska taariikhda baaritaanka wuu fashilmay. Hubi diiwaanka Cacti oo isku day mar kale."
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Scan dates rebuilt: %d"
+msgstr "Taariikhaha baaritaanka ee dib loo dhisay: %d"
+
+#: mactrack_utilities.php
+msgid "A scan or a port table conversion is running. Try again when it has finished."
+msgstr "Baaritaan ama beddelidda shaxda dekedda ayaa socota. Isku day mar kale marka ay dhammaato."
+
+#: mactrack_utilities.php setup.php
+msgid "One per Scan"
+msgstr "Hal mid Baaris kasta"
+
+#: mactrack_utilities.php setup.php
+msgid "Hourly"
+msgstr "Saacad kasta"
+
+#: mactrack_utilities.php setup.php
+msgid "Daily"
+msgstr "Maalinle"
+
+#: mactrack_utilities.php setup.php
+msgid "Weekly"
+msgstr "Toddobaadle"
+
+#: mactrack_utilities.php
+msgid "Not partitioned"
+msgstr "Lama qaybin"
+
+#: mactrack_utilities.php
+msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
+msgstr "Qaybaha maalinlaha ah ee ka yimid nooc hore oo MacTrack ah. Waxaa loo baahan yahay beddelid."
+
+#: mactrack_utilities.php
+msgid "Partitioned by scan date"
+msgstr "Waxaa lagu qaybiyay taariikhda baaritaanka"
+
+#: mactrack_utilities.php
+msgid "Unrecognized partitions. MacTrack makes no partition changes."
+msgstr "Qaybo aan la aqoonsan. MacTrack ma samaynayso wax isbeddel ah oo qaybaha ah."
+
+#: mactrack_utilities.php
+msgid "Port Table Partitions"
+msgstr "Qaybaha Jadwalka Dekedaha"
+
+#: mactrack_utilities.php
+msgid "Layout"
+msgstr "Qaabeynta"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%d of at most %d"
+msgstr "%d ka mid ah ugu badnaan %d"
+
+#: mactrack_utilities.php
+msgid "Partitions"
+msgstr "Qaybaha"
+
+#: mactrack_utilities.php
+msgid "Oldest Partition"
+msgstr "Qaybta Ugu Da'da Weyn"
+
+#: mactrack_utilities.php
+msgid "Newest Partition"
+msgstr "Qaybta Ugu Cusub"
+
+#: mactrack_utilities.php
+msgid "Partitions Cover Scans Before"
+msgstr "Qaybaha Waxay Daboolaan Baaritaannada Ka Hor"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s, coarser than the setting because %d partitions would exceed the limit"
+msgstr "%s, ka ballaaran dejinta sababtoo ah %d qaybood waxay dhaafi lahaayeen xadka"
+
+#: mactrack_utilities.php setup.php
+msgid "Port and IP Address Partition Size"
+msgstr "Cabbirka Qaybta Dekedda iyo Cinwaanka IP"
+
+#: mactrack_utilities.php
+msgid "Pending Exchange"
+msgstr "Is-weydaarsi Sugaya"
+
+#: mactrack_utilities.php
+msgid "Load Path"
+msgstr "Jidka Rarka"
+
+#: mactrack_utilities.php
+msgid "PHP batches"
+msgstr "Xirmooyinka PHP"
+
+#: mactrack_utilities.php
+msgid "Last Scan Note"
+msgstr "Xusuusta Baaritaanka Ugu Dambaysay"
+
+#: mactrack_utilities.php
+msgid "Rebuild"
+msgstr "Dib u dhis"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Running since %s"
+msgstr "Wuxuu shaqaynayaa tan iyo %s"
+
+#: mactrack_utilities.php
+msgid "Last Rebuild"
+msgstr "Dib-u-dhiskii Ugu Dambeeyay"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d rows into %d partitions"
+msgstr "%s: %d safaf oo galay %d qaybood"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: failed. %s"
+msgstr "%s: fashilmay. %s"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance"
+msgstr "Dayactirkii Ugu Dambeeyay"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d partitions dropped, %d created"
+msgstr "%s: %d qaybood la tirtiray, %d la abuuray"
+
+#: mactrack_utilities.php
+msgid "IP Table Layout"
+msgstr "Qaabeynta Jadwalka IP"
+
+#: mactrack_utilities.php
+msgid "IP Table Partitions"
+msgstr "Qaybaha Jadwalka IP"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Layout"
+msgstr "Habaynta Shaxda 802.1x"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Partitions"
+msgstr "Qaybaha Shaxda 802.1x"
+
+#: mactrack_utilities.php
+msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
+msgstr "Dooro qaybinta maalinlaha ah, toddobaadlaha ah ama la joojiyay ka hor intaadan bilaabin dib-u-dhiska."
+
+#: mactrack_utilities.php
+msgid "A rebuild is already running. The partition status page shows when it has finished."
+msgstr "Dib-u-dhis ayaa horey u socday. Bogga xaaladda qaybinta wuxuu muujinayaa marka uu dhammaado."
+
+#: mactrack_utilities.php
+msgid "The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running."
+msgstr "Dib-u-dhiska waxaa laga codsaday gadaal. Ka hubi Xaaladda Qaybinta natiijadiisa; wuxuu diidi doonaa inuu bilaabmo haddii baaris ama dib-u-dhis kale uu socdo."
+
+#: mactrack_utilities.php
+msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
+msgstr "Shaqooyinka baaritaanka Mactrack waa la nadiifiyay.  Waxaa dib loo abuuri doonaa marka aad wax ka beddesho qalab ama nooc qalab."
+
+#: mactrack_utilities.php
+msgid "Cacti Mactrack System Utilities"
+msgstr "Adeegyada Nidaamka Cacti Mactrack"
+
+#: mactrack_utilities.php
+msgid "Process Status Information"
+msgstr "Macluumaadka Xaaladda Habka"
+
+#: mactrack_utilities.php setup.php
+msgid "View Mactrack Process Status"
+msgstr "Eeg Xaaladda Habraaca Mactrack"
+
+#: mactrack_utilities.php
+msgid "This option will let you show and set process information associated with the Mactrack polling process."
+msgstr "Doorashadani waxay kuu oggolaanaysaa inaad muujiso oo dejiso macluumaadka habka la xiriira habka xog-uruurinta Mactrack."
+
+#: mactrack_utilities.php
+msgid "Database Administration"
+msgstr "Maamulka Kaydka Xogta"
+
+#: mactrack_utilities.php
+msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
+msgstr "Waxay ka tirtirtaa kaydka xogta xiriirrada Port ilaa MAC ilaa IP ee waqtigoodu dhacay.  Waxaa laga saaraa oo keliya diiwaannada waqtigoodu dhacay, iyadoo lagu saleynayo shuruudahaaga."
+
+#: mactrack_utilities.php
+msgid "Refresh IEEE Vendor MAC/OUI Database"
+msgstr "Cusbooneysii Kaydka Xogta MAC/OUI ee Soo-saaraha IEEE"
+
+#: mactrack_utilities.php
+msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
+msgstr "Shaqadani waxay soo dejin doontaa oo rakibi doontaa kaydka xogta OIU ee ugu dambeeyay ee laga helo bogga IEEE. Kaadh kasta oo isku xirka shabakadda ah (NIC) wuxuu leeyahay Cinwaan MAC ah. Cinwaanka MAC waxaa loo qaybin karaa laba qaybood. Qaybta hore ee Cinwaanka MAC waxay ka kooban tahay MAC-ga Soo-saaraha. MAC-ga Soo-saaraha wuxuu aqoonsadaa cidda samaysay qaybta. Tani waxay waxtar u yeelan doontaa baaritaanka degdegga ah ee aaladaha aan la oggolayn ee shabakaddaada ku jira."
+
+#: mactrack_utilities.php
+msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
+msgstr "Waxay ka tirtirtaa hawlaha baaritaanka Mactrack ee duugoobay oo suurtogal ah inay dhaceen liiska hoos u dhaca ee aad hesho marka aad wax ka beddelayso nooca qalabka."
+
+#: mactrack_utilities.php
+msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
+msgstr "Waxay ka tirtirtaa kaydka xogta <strong>DHAMMAAN</strong> xiriirrada Port ilaa MAC ilaa IP, dhammaan Cinwaannada IP, Kala duwanaanshaha IP, iyo VLAN-yada.  Adeeggani wuxuu ku fiican yahay marka aad rabto inaad bilowdo mar kale.  <strong>HALIS: Dhammaan xogtii hore waa la tirtiraa.</strong>"
+
+#: mactrack_utilities.php
+msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
+msgstr "Waxay dib u dhisaysaa liiska taariikhaha baaritaanka iyadoo laga soo qaadanayo natiijooyinka Deked ilaa MAC ilaa IP ee kaydsan, iyadoo qayb kasta mar la akhrinayo. Baaritaannada iyo dayactirku waxay liiska ka dhigaan mid casri ah, markaa tan waxaa loo baahan yahay oo keliya ka dib marka natiijooyinka laga saaro meel ka baxsan dayactirka, tusaale ahaan tirtiridda aaladaha."
+
+#: mactrack_utilities.php
+msgid "View Partition Status"
+msgstr "Eeg Xaaladda Qaybta"
+
+#: mactrack_utilities.php
+msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
+msgstr "Waxay muujinaysaa sida natiijooyinka Port ilaa MAC ilaa IP loo qaybiyay, cabbirka qaybta la isticmaalayo iyo sababta, iyo waxa ay qabatay dayactirkii ugu dambeeyay ee kaydka xogta."
+
+#: mactrack_utilities.php
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
+msgstr "Waxay dib u dhisaysaa oo falanqaynaysaa kaliya qaybta ay ku jirto kormeerka dekedda ugu dambeeya si dib loogu helo booska la tirtiray; qaybaha toddobaadlaha ah taasi waa toddobaadka hadda jira. Miisaska aan la qaybin si buuxda ayaa loo hagaajiyaa. Baaritaannada qorshaysan waa laga boodayaa ilaa ay dhammaato."
+
+#: mactrack_utilities.php
+msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile."
+msgstr "Dooro qaybo maalinle ah ama toddobaadle ah, ama jooji qaybinta, shaxaha dekedda (ciwaanka MAC), ciwaanka IP iyo 802.1x. Dib-u-dhisku wuxuu koobiyeeyaa taariikhda buuxda gadaasha; baaritaannada qorshaysan waa laga boodaa oo raadinta MAC, IP iyo 802.1x waxay muujisaa farriin dayactir inta lagu guda jiro."
+
+#: mactrack_utilities.php
+msgid "Aggregated Table Administration"
+msgstr "Maamulka Jadwalka La Isku Daray"
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
+msgstr "Waxay ka tirtirtaa kaydka xogta DHAMMAAN xiriirrada Port ilaa MAC ilaa IP ee <strong>La Isu Geeyay</strong> (Ma aha Natiijooyinka Baaritaanka).  Xogta waxaa mar kale lagu soo ururin doonaa iyadoo lagu saleynayo xogta <strong>cusub oo keliya</strong> ee la baaray marka xigta ee uu shaqeeyo xog-uruuriyaha mactrack."
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
+msgstr "Waxay ka tirtirtaa kaydka xogta DHAMMAAN xiriirrada Port ilaa MAC ilaa IP ee <strong>La Isu Geeyay</strong> (Ma aha Natiijooyinka Baaritaanka) waxayna dib ugu abuurtaa iyadoo lagu saleynayo <strong>Dhammaan xogta la baaray</strong> hadda."
+
+#: mactrack_utilities.php
+msgid "Partitioning"
+msgstr "Qaybinta"
+
+#: mactrack_vendormacs.php
+msgid "Mactrack Vendor Mac Filter"
+msgstr "Shaandheeyaha MAC-ga Iibiyaha ee Mactrack"
+
+#: mactrack_vendormacs.php
+msgid "Vendor MAC"
+msgstr "MAC-ga Iibiyaha"
+
+#: mactrack_vendormacs.php
+msgid "Corporation"
+msgstr "Shirkad"
+
+#: mactrack_vendormacs.php
+msgid "Address"
+msgstr "Cinwaanka"
+
+#: mactrack_vendormacs.php setup.php
+msgid "Vendor Macs"
+msgstr "MAC-yada Iibiyaha"
+
+#: mactrack_vendormacs.php
+msgid "No Mactrack Vendor MACS Found"
+msgstr "MAC-yada Iibiyaha Mactrack Lama Helin"
+
+#: mactrack_view_arp.php
+msgid "Mactrack - ARP/IP View"
+msgstr "Mactrack - Aragtida ARP/IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Name"
+msgstr "Magaca Switch-ka"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Hostname"
+msgstr "Magaca Martigeliyaha Switch-ka"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED IP Address"
+msgstr "Cinwaanka IP ee ED"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED DNS Hostname"
+msgstr "Magaca Martigeliyaha DNS ee ED"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED MAC Address"
+msgstr "Cinwaanka MAC ee ED"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Vendor Name"
+msgstr "Magaca Iibiyaha"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Port Number"
+msgstr "Lambarka Port-ka"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Port Name"
+msgstr "Magaca Dekedda"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Last Scan Date"
+msgstr "Taariikhdii Baaritaanka Ugu Dambaysay"
+
+#: mactrack_view_arp.php
+msgid "ARP Cache"
+msgstr "Kaydka ARP"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "You must first choose a Site, Device or other search criteria."
+msgstr "Waa inaad marka hore doorataa Goob, Qalab ama shuruud kale oo raadin ah."
+
+#: mactrack_view_arp.php
+msgid "No Mactrack IP Results Found"
+msgstr "Natiijooyinka IP-ga Mactrack Lama Helin"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_interfaces.php
+#: mactrack_view_macs.php
+msgid "Device"
+msgstr "Qalab"
+
+#: mactrack_view_arp.php mactrack_view_ips.php
+msgid "IP's"
+msgstr "IP-yada"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "IP"
+msgstr "IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Show"
+msgstr "Muuji"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Most Recent"
+msgstr "Ugu Dambeeyay"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "MAC"
+msgstr "MAC"
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr "MacTrack - Guddi-hagaha"
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr "Diiwaanka Agabka"
+
+#: mactrack_view_dashboard.php
+msgid "Device status"
+msgstr "Xaaladda qalabka"
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr "Wadaraha cinwaannada iyo dekedaha"
+
+#: mactrack_view_dashboard.php
+msgid "Collection settings"
+msgstr "Dejinta ururinta"
+
+#: mactrack_view_dashboard.php
+msgid "Scan runtimes"
+msgstr "Waqtiyada socodka baaritaanka"
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr "Cabbirrada jadwalka"
+
+#: mactrack_view_dashboard.php
+msgid "MacWatch activity"
+msgstr "Dhaqdhaqaaqa MacWatch"
+
+#: mactrack_view_dashboard.php
+msgid "Vendors"
+msgstr "Iibiyeyaasha"
+
+#: mactrack_view_dashboard.php
+msgid "Enabled devices"
+msgstr "Aaladaha la hawlgeliyay"
+
+#: mactrack_view_dashboard.php
+msgid "Disabled devices"
+msgstr "Aaladaha la joojiyay"
+
+#: mactrack_view_dashboard.php
+msgid "Device types"
+msgstr "Noocyada qalabka"
+
+#: mactrack_view_dashboard.php
+msgid "Interfaces tracked"
+msgstr "Isdhexgalada la dabagalay"
+
+#: mactrack_view_dashboard.php
+msgid "Active MACs"
+msgstr "MAC-yada Firfircoon"
+
+#: mactrack_view_dashboard.php
+msgid "IP addresses"
+msgstr "Ciwaannada IP"
+
+#: mactrack_view_dashboard.php
+msgid "Total ports"
+msgstr "Wadarta dekedaha"
+
+#: mactrack_view_dashboard.php
+msgid "Active ports"
+msgstr "Dekedaha firfircoon"
+
+#: mactrack_view_dashboard.php
+msgid "Trunk ports"
+msgstr "Dekedaha trunk"
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr "Iibiyeyaasha OUI ee gaarka ah"
+
+#: mactrack_view_dashboard.php
+msgid "Scanning frequency"
+msgstr "Inta jeer ee baaritaanka"
+
+#: mactrack_view_dashboard.php
+msgid "Concurrent processes"
+msgstr "Hababka isku-mar socda"
+
+#: mactrack_view_dashboard.php
+msgid "Scanner max runtime"
+msgstr "Waqtiga ugu badan ee socodka baaraha"
+
+#: mactrack_view_dashboard.php
+msgid "MAC retention"
+msgstr "Haynta MAC"
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr "maalmood"
+
+#: mactrack_view_dashboard.php
+msgid "IP retention"
+msgstr "Haynta IP"
+
+#: mactrack_view_dashboard.php
+msgid "Reverse DNS"
+msgstr "DNS-ka Dib-u-celinta"
+
+#: mactrack_view_dashboard.php
+msgid "Most recent scan"
+msgstr "Baaristii ugu dambaysay"
+
+#: mactrack_view_dashboard.php
+msgid "Average duration"
+msgstr "Celceliska muddada"
+
+#: mactrack_view_dashboard.php
+msgid "Longest duration"
+msgstr "Muddada ugu dheer"
+
+#: mactrack_view_dashboard.php
+msgid "Scanned in last hour"
+msgstr "La baaray saacaddii u dambeysay"
+
+#: mactrack_view_dashboard.php
+msgid "Duration"
+msgstr "Muddada"
+
+#: mactrack_view_dashboard.php
+msgid "Last scan"
+msgstr "Baaritaankii u dambeeyay"
+
+#: mactrack_view_dashboard.php
+msgid "Slowest devices"
+msgstr "Aaladaha ugu gaabiska badan"
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr "Weli lama diiwaangelin waqtiyada socodka baaritaanka."
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr "Safafka"
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr "Cabbirka"
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr "Wax tirakoob shax ah lama heli karo."
+
+#: mactrack_view_dashboard.php
+msgid "Watched MACs"
+msgstr "MAC-yada La Ilaaliyo"
+
+#: mactrack_view_dashboard.php
+msgid "Discovered"
+msgstr "La helay"
+
+#: mactrack_view_dashboard.php
+msgid "Last match"
+msgstr "Isku-beeggii u dambeeyay"
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr "Gelitaannada xog-ururinta OUI"
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr "Wax xog iibiyaha ah lama heli karo."
+
+#: mactrack_view_dashboard.php
+msgid "Show more"
+msgstr "Muuji wax badan"
+
+#: mactrack_view_dashboard.php
+msgid "Show less"
+msgstr "Muuji wax yar"
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr "Ku fur daaqad wada-hadal"
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr "Ka saar bogga"
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr "Jiid si aad u habayso kaarka"
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr "Codsi aan sax ahayn. Fadlan mar kale isku day."
+
+#: mactrack_view_dashboard.php
+msgid "Unknown card."
+msgstr "Kaar aan la aqoon."
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr "Ku dar kaar"
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
+msgstr "Ku dar kaarka looxa xogta…"
+
+#: mactrack_view_devices.php
+msgid "Mactrack - Device Report View"
+msgstr "Mactrack - Aragtida Warbixinta Qalabka"
+
+#: mactrack_view_devices.php
+msgid "Unknown Device Type"
+msgstr "Nooca Qalabka Aan La Aqoon"
+
+#: mactrack_view_devices.php
+msgid "Total VLAN's"
+msgstr "Wadarta VLAN-yada"
+
+#: mactrack_view_devices.php
+msgid "Edit Device"
+msgstr "Wax ka beddel Qalabka"
+
+#: mactrack_view_devices.php
+msgid "View Graphs"
+msgstr "Eeg Jaantusyada"
+
+#: mactrack_view_devices.php
+msgid "Device Not Mapped to Cacti Device"
+msgstr "Qalabka Laguma Xirin Qalabka Cacti"
+
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
+msgid "View MAC Addresses"
+msgstr "Eeg Ciwaannada MAC"
+
+#: mactrack_view_devices.php
+msgid "No Mactrack Devices Found"
+msgstr "Aaladaha Mactrack Lama Helin"
+
+#: mactrack_view_devices.php
+msgid "Device Scan Results"
+msgstr "Natiijooyinka Baaritaanka Qalabka"
+
+#: mactrack_view_devices.php
+msgid "Hub/Switch"
+msgstr "Hub/Switch"
+
+#: mactrack_view_dot1x.php
+msgid "Mactrack - 802.1x View"
+msgstr "Mactrack - Aragtida 802.1x"
+
+#: mactrack_view_dot1x.php
+msgid "Domain"
+msgstr "Domain"
+
+#: mactrack_view_dot1x.php
+msgid "802.1x Sessions"
+msgstr "Fadhiyada 802.1x"
+
+#: mactrack_view_dot1x.php
+msgid "No Mactrack 802.1x Sessions Found"
+msgstr "Kulannada Mactrack 802.1x Lama Helin"
+
+#: mactrack_view_dot1x.php
+msgid "Dot1x Scan Results"
+msgstr "Natiijooyinka Baaritaanka Dot1x"
+
+#: mactrack_view_dot1x.php
+msgid "Sessions"
+msgstr "Kalfadhiyada"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "All Statuses"
+msgstr "Dhammaan Xaaladaha"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr "Xaaladaha la Doortay"
+
+#: mactrack_view_dot1x.php
+msgid "DATA"
+msgstr "XOGTA"
+
+#: mactrack_view_dot1x.php
+msgid "VOICE"
+msgstr "CODKA"
+
+#: mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Portname"
+msgstr "Magaca dekedda"
+
+#: mactrack_view_graphs.php
+msgid "Mactrack - Monitored Device Graph View"
+msgstr "Mactrack - Aragtida Garaafka Qalabka La Kormeero"
+
+#: mactrack_view_graphs.php
+msgid "Custom Graph List Applied - Filtering from List"
+msgstr "Liiska Garaafka Gaarka ah waa la dabaqay - Waxaa laga shaandhaynayaa Liiska"
+
+#: mactrack_view_interfaces.php
+msgid "Mactrack - Network Interfaces View"
+msgstr "Mactrack - Aragtida Xiriiriyeyaasha Shabakadda"
+
+#: mactrack_view_interfaces.php
+msgid "No Mactrack Interfaces Found"
+msgstr "Isdhexgalada Mactrack Lama Helin"
+
+#: mactrack_view_interfaces.php
+msgid "Interface Scan Results"
+msgstr "Natiijooyinka Baaritaanka Isdhexgalka"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Name"
+msgstr "Magac"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Description"
+msgstr "Sharaxaadda"
+
+#: mactrack_view_interfaces.php
+msgid "Issues"
+msgstr "Dhibaatooyinka"
+
+#: mactrack_view_interfaces.php
+msgid "Alias"
+msgstr "Magac kale"
+
+#: mactrack_view_interfaces.php
+msgid "InBound %%%"
+msgstr "Soo-galaya %%%"
+
+#: mactrack_view_interfaces.php
+msgid "OutBound %%%"
+msgstr "Bixitaanka %%%"
+
+#: mactrack_view_interfaces.php
+msgid "In (B/S)"
+msgstr "Soo galaya (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out (B/S)"
+msgstr "Baxaya (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Err Total"
+msgstr "Wadarta Khaladaadka Soo Galaya"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc Total"
+msgstr "Wadarta La Tuuray ee Soo Galaya"
+
+#: mactrack_view_interfaces.php
+msgid "UProto Total"
+msgstr "Wadarta UProto"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err Total"
+msgstr "Wadarta Khaladaadka Baxa"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc Total"
+msgstr "Wadarta Tuuridda Baxda"
+
+#: mactrack_view_interfaces.php
+msgid "In Err (E/S)"
+msgstr "Khaladaadka Soo Galaya (E/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc (D/S)"
+msgstr "La Tuuray ee Soo Galaya (D/S)"
+
+#: mactrack_view_interfaces.php
+msgid "UProto (UP/S)"
+msgstr "UProto (UP/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err (OE/S)"
+msgstr "Khaladaadka Baxa (OE/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc (OD/S)"
+msgstr "Tuuridda Baxda (OD/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Last Change"
+msgstr "Isbeddelkii Ugu Dambeeyay"
+
+#: mactrack_view_interfaces.php
+msgid "Last Scanned"
+msgstr "Markii Ugu Dambaysay ee La Baaray"
+
+#: mactrack_view_interfaces.php
+msgid "Filters"
+msgstr "Shaandheeyeyaasha"
+
+#: mactrack_view_interfaces.php
+msgid "All Interfaces"
+msgstr "Dhammaan Is-dhexgalada"
+
+#: mactrack_view_interfaces.php
+msgid "All Non-Ignored Interfaces"
+msgstr "Dhammaan Is-dhexgalada Aan La Iska Indha-tirin"
+
+#: mactrack_view_interfaces.php
+msgid "All Ignored Interfaces"
+msgstr "Dhammaan Is-dhexgalada La Iska Indha-tiray"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In/Out Utilization > %d &#37;"
+msgstr "Isticmaalka Soo-galidda/Ka-bixidda Sare > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In Utilization > %d &#37;"
+msgstr "Isticmaalka Soo-galidda Sare > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High Out Utilization > %d &#37;"
+msgstr "Isticmaalka Ka-bixidda Sare > %d &#37;"
+
+#: mactrack_view_interfaces.php
+msgid "With Issues"
+msgstr "Leh Cillado"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces"
+msgstr "Is-dhexgalada Shaqeeya"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces No Alias"
+msgstr "Is-dhexgalada Shaqeeya ee Naanays La'aanta ah"
+
+#: mactrack_view_interfaces.php
+msgid "Errors Accumulating"
+msgstr "Khaladaadka oo sii badanaya"
+
+#: mactrack_view_interfaces.php
+msgid "Discards Accumulating"
+msgstr "Tuurista ayaa ururaysa"
+
+#: mactrack_view_interfaces.php
+msgid "Changed in Last Day"
+msgstr "La beddelay Maalintii Ugu Dambeysay"
+
+#: mactrack_view_interfaces.php
+msgid "Bandwidth"
+msgstr "Ballaca mawjadda"
+
+#: mactrack_view_interfaces.php
+msgid "When checked, the Errors, Discards and Unknown Protocol columns show each interface's cumulative SNMP counter totals instead of the average per-second rate."
+msgstr "Marka la calaamadeeyo, tiirarka Khaladaadka, Tuurista iyo Borotokoolka Aan La Aqoon waxay muujinayaan wadarta guud ee tiriyeyaasha SNMP ee isku xir kasta halkii ay ka muujin lahaayeen celceliska xawaaraha ilbiriqsiga."
+
+#: mactrack_view_interfaces.php
+msgid "Show Totals"
+msgstr "Muuji Wadarta"
+
+#: mactrack_view_ips.php
+msgid "Mactrack - Site IP Range Report View"
+msgstr "Mactrack - Aragtida Warbixinta Kala-duwanaanshaha IP ee Goobta"
+
+#: mactrack_view_ips.php
+msgid "IP Range"
+msgstr "Kala-duwanaanshaha IP"
+
+#: mactrack_view_ips.php
+msgid "Current IP Addresses"
+msgstr "Cinwaannada IP ee Hadda"
+
+#: mactrack_view_ips.php
+msgid "Current Date"
+msgstr "Taariikhda Hadda"
+
+#: mactrack_view_ips.php
+msgid "Maximum IP Addresses"
+msgstr "Cinwaannada IP ee Ugu Badan"
+
+#: mactrack_view_ips.php
+msgid "Maximum Date"
+msgstr "Taariikhda Ugu Badan"
+
+#: mactrack_view_ips.php
+msgid "IP Address Ranges"
+msgstr "Kala-duwanaanshaha Ciwaannada IP"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "Edit Site"
+msgstr "Wax ka beddel Goobta"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "View IP Addresses"
+msgstr "Eeg Ciwaannada IP"
+
+#: mactrack_view_ips.php
+msgid "No Mactrack Site IP Ranges Found"
+msgstr "Baaxadaha IP-ga Goobta Mactrack Lama Helin"
+
+#: mactrack_view_macs.php
+msgid "Mactrack - MAC to IP Report View"
+msgstr "Mactrack - Aragtida Warbixinta MAC ilaa IP"
+
+#: mactrack_view_macs.php
+msgid "Authorize"
+msgstr "Oggolow"
+
+#: mactrack_view_macs.php
+msgid "Revoke"
+msgstr "Ka noqo"
+
+#: mactrack_view_macs.php
+msgid "None of the selected MAC Addresses were valid, so no action was taken."
+msgstr "Midna ka mid ah Cinwaannada MAC ee la doortay ma ahayn kuwo sax ah, sidaas darteed wax tallaabo ah lama qaadin."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
+msgstr "Cinwaannada MAC ee soo socda lagama noqon karin sababtoo ah waxay xubno ka yihiin Oggolaanshaha Kooxda %s"
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Authorize the following MAC Addresses."
+msgstr "Guji 'Sii wad' si aad u Oggolaato Ciwaannada MAC ee soo socda."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Revoke the following MAC Addresses."
+msgstr "Guji 'Sii wad' si aad u buriso Ciwaannada MAC ee soo socda."
+
+#: mactrack_view_macs.php
+msgid "You must select at least one MAC Address."
+msgstr "Waa inaad doorataa ugu yaraan hal Ciwaan MAC."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to change Mac Authorizations."
+msgstr "Laguma oggola inaad beddesho Oggolaanshaha Mac."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
+msgstr "Qal.:%s IP.:%s MAC.:%s PORT.:%s Tirada.: [%s]"
+
+#: mactrack_view_macs.php
+msgid "You must select at least one Row."
+msgstr "Waa inaad doorataa ugu yaraan hal Saf."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to delete rows."
+msgstr "Laguma oggola inaad tirtirto safafka."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Delete the following rows from Aggregated table."
+msgstr "Guji 'Sii wad' si aad uga Tirtirto safafka soo socda miiska La Isku Daray."
+
+#: mactrack_view_macs.php
+msgid "VLAN ID"
+msgstr "Aqoonsiga VLAN"
+
+#: mactrack_view_macs.php
+msgid "VLAN Name"
+msgstr "Magaca VLAN"
+
+#: mactrack_view_macs.php
+msgid "You must choose a Site, Device or other search criteria."
+msgstr "Waa inaad doorataa Goob, Qalab ama shuruud kale oo raadin ah."
+
+#: mactrack_view_macs.php
+msgid "No Mactrack Port Results Found"
+msgstr "Natiijooyinka Dekedda Mactrack Lama Helin"
+
+#: mactrack_view_macs.php
+msgid "Count"
+msgstr "Tiro"
+
+#: mactrack_view_macs.php
+msgid "Aggregated"
+msgstr "La isku daray"
+
+#: mactrack_view_sites.php
+msgid "Mactrack - Site Report View"
+msgstr "Mactrack - Aragtida Warbixinta Goobta"
+
+#: mactrack_view_sites.php
+msgid "Rescan Site"
+msgstr "Dib u baar Goobta"
+
+#: mactrack_view_sites.php
+msgid "View Devices"
+msgstr "Eeg Aaladaha"
+
+#: mactrack_view_sites.php
+msgid "View IP Ranges"
+msgstr "Eeg Baaxadaha IP"
+
+#: mactrack_view_sites.php
+msgid "Sites / Device Types"
+msgstr "Goobaha / Noocyada Qalabka"
+
+#: mactrack_view_sites.php
+msgid "Site Scan Results"
+msgstr "Natiijooyinka Baaritaanka Goobta"
+
+#: setup.php
+msgid "MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes."
+msgstr "MacTrack waxay gadaal ka cusboonaysiinaysaa xogteeda kaydka. Tani waxay qaadan kartaa ilaa hal saac rakibaadaha waaweyn, waxaana dhici karta in xogta MacTrack qaarkeed aysan dhammaystirnayn ilaa ay ka dhammaato."
+
+#: setup.php
+#, php-format
+msgid "MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s"
+msgstr "MacTrack ma bilaabi karin cusboonaysiinta xogta kaydka ee gadaal ka socota, ka eeg diiwaanka Cacti sababta. Gacanta uga socodsii khadka amarka: %s"
+
+#: setup.php
+msgid "Mactrack"
+msgstr "Mactrack"
+
+#: setup.php
+msgid "General Settings"
+msgstr "Dejinta Guud"
+
+#: setup.php
+msgid "Scanning Frequency"
+msgstr "Inta Jeer ee Baaritaanka"
+
+#: setup.php
+msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
+msgstr "Dooro goorta laga soo ururinayo Ciwaannada MAC iyo IP iyo tirakoobyada isku-xirka aaladaha shabakaddaada."
+
+#: setup.php
+msgid "Concurrent Processes"
+msgstr "Hababka Isku Mar Shaqeeya"
+
+#: setup.php
+msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
+msgstr "Qeex inta aaladood ee xogta laga ururin doono isku mar ilaa dhammaan aaladaha xogta laga wada ururiyo."
+
+#: setup.php
+msgid "Scanner Max Runtime"
+msgstr "Waqtiga Ugu Badan ee Socodka Baaraha"
+
+#: setup.php
+msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
+msgstr "Qeex tirada daqiiqadaha ee shaqada baaritaanka qalabka loo oggolaan doono inay socoto ka hor inta uusan nidaamku u qaadan in la dhammaystiray. Dejintani waxay saxaysaa hawlaha baaritaanka ee si lama filaan ah u joogsaday."
+
+#: setup.php
+msgid "Start Time for Data Collection"
+msgstr "Waqtiga Bilowga Ururinta Xogta"
+
+#: setup.php
+msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
+msgstr "Goorma ayaad jeclaan lahayd in ururinta xogta ugu horreysa ay dhacdo. Dhammaan waqtiyada ururinta xogta mustaqbalka waxay ku salaysnaan doonaan waqtigan bilowga. Tusaale wanaagsan wuxuu noqon lahaa 12:00AM."
+
+#: setup.php
+msgid "Database Maintenance Time"
+msgstr "Waqtiga Dayactirka Kaydka Xogta"
+
+#: setup.php
+msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
+msgstr "Goorma ayay tahay in diiwaannada duugga ah ee kaydka xogta laga saaro kaydka xogta. Fadlan ogow in aan wax gelitaan ah loo oggolaan doonin kaydka xogta dekedda inta hawshani socoto."
+
+#: setup.php
+msgid "Confirm Utilities Prompt"
+msgstr "Xaqiiji Digniinta Adeegyada"
+
+#: setup.php
+msgid "When using utilities, prompt for verification"
+msgstr "Marka la isticmaalayo agabka, weydii xaqiijin"
+
+#: setup.php
+msgid "Data Retention"
+msgstr "Haynta Xogta"
+
+#: setup.php
+msgid "How long should port MAC details be retained in the database."
+msgstr "Muddo intee le'eg ayay tahay in faahfaahinta MAC-ga dekedda lagu hayo kaydka xogta."
+
+#: setup.php
+msgid "Data Retention IPs"
+msgstr "Ciwaannada IP-ga ee Haynta Xogta"
+
+#: setup.php
+msgid "How long should discovered IPs details be retained in the database."
+msgstr "Muddo intee le'eg ayay tahay in faahfaahinta IP-yada la helay lagu hayo kaydka xogta."
+
+#: setup.php
+msgid "Size of the partitions of the port, IP and 802.1x tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
+msgstr "Cabbirka qaybaha miisaska port, IP iyo 802.1x, ama La joojiyay si miisasku aanay u qaybsanaan. Beddelkeedu wuxuu saameeyaa qaybaha cusub oo keliya; si dib loogu dhiso taariikhda jirta si ay u waafaqdo, isticmaal Configure Port and IP Address Partitioning ee MacTrack Utilities ama socodsii cli/upgrade_partitioning.php."
+
+#: setup.php
+msgid "Switch Level Ignore Ports Delimiter"
+msgstr "Kala-soocaha Dekedaha la Iska Dhaafayo ee Heerka Switch-ka"
+
+#: setup.php
+msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
+msgstr "Astaan kala-sooc noocee ah ayay tahay in Mactrack adeegsado marka uu falanqaynayo xadhiga 'Ignore Ports' ee switch kasta."
+
+#: setup.php
+msgid "Auto Detect"
+msgstr "Ogaansho Toos ah"
+
+#: setup.php
+msgid "Colon [:]"
+msgstr "Laba-dhibcood [:]"
+
+#: setup.php
+msgid "Pipe [|]"
+msgstr "Tuubo [|]"
+
+#: setup.php
+msgid "Space [ ]"
+msgstr "Meel bannaan [ ]"
+
+#: setup.php
+msgid "Mac Address Output Format"
+msgstr "Qaabka Soo-saarka Cinwaanka MAC"
+
+#: setup.php
+msgid "Format used for display."
+msgstr "Qaabka loo isticmaalo bandhigga."
+
+#: setup.php
+msgid "Ports to Ignore"
+msgstr "Dekedaha la iska indho-tiro"
+
+#: setup.php
+msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
+msgstr "Sii tibaax joogto ah oo ah ifNames ama ifDescriptions ee dekedaha la iska indho-tirayo liiska is-dhexgalka. Tusaale ahaan, (Vlan|Loopback|Null)."
+
+#: setup.php
+msgid "Ports to Ignore While Scanning (Regular Expression)"
+msgstr "Dekedaha la iska indho-tiro inta lagu jiro baarista (Weedha Caadiga ah)"
+
+#: setup.php
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
+msgstr "Ikhtiyaari. Weedh joogto ah (regular expression) oo la waafajiyo, iyadoo aan loo eegin xarfaha waaweyn iyo kuwa yaryar, magaca dekedda iyo magaca kale ee deked kasta oo la baaray. Cinwaannada MAC ee laga helo deked u dhiganta lama ururiyo, taas oo ka ilaalisa dekedaha uplink iyo trunk keydka xogta. Tusaale ahaan, (uplink|trunk). Ku qor weedh kasta sadarkeeda gaarka ah si aad u bixiso dhowr. Bannaanka u daa si aad u ururiso deked kasta. Goobaha iyo aaladaha waxay ku dari karaan weedhahooda u gaarka ah. Si ka duwan Dekedaha la Iska Indho-tiro ee sare, tani waxay khuseysaa ururinta MAC ee ma khuseyso liiska isdhexgalka, waxayna saameysaa baarista cusub oo keliya."
+
+#: setup.php
+msgid "Bandwidth Usage Threshold"
+msgstr "Xadka Isticmaalka Ballaca Mawjadda"
+
+#: setup.php
+msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
+msgstr "Marka aad dib u eegayso tirakoobka isku xirka shabakadda, xadka xawaaraha xogta (bandwidth) ee aad rabto inaad si caadi ah u aragto."
+
+#: setup.php
+#, php-format
+msgid "%d Percent"
+msgstr "Boqolkiiba %d"
+
+#: setup.php
+msgid "DNS Settings"
+msgstr "Dejinta DNS"
+
+#: setup.php
+msgid "Perform Reverse DNS Name Resolution"
+msgstr "Samee Xallinta Magaca DNS ee Dib-u-celinta"
+
+#: setup.php
+msgid "Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
+msgstr "Ma in Mactrack sameeyo baaritaan DNS gadaal ah oo ku saabsan ciwaannada IP ee la xiriira dekedaha. DIGNIIN: Haddii DNS aan si sax ah loo dejin, tani waxay si weyn u gaabin doontaa waqtiga baaritaanka."
+
+#: setup.php
+msgid "Primary DNS IP Address"
+msgstr "Cinwaanka IP ee DNS-ka Koowaad"
+
+#: setup.php
+msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
+msgstr "Geli cinwaanka IP ee DNS-ka koowaad si loogu isticmaalo baaritaannada dib-u-noqoshada."
+
+#: setup.php
+msgid "Secondary DNS IP Address"
+msgstr "Cinwaanka IP ee DNS-ka Labaad"
+
+#: setup.php
+msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
+msgstr "Geli cinwaanka IP ee DNS-ka labaad si loogu isticmaalo baaritaannada dib-u-noqoshada."
+
+#: setup.php
+msgid "DNS Timeout"
+msgstr "Waqtiga Dhammaadka DNS"
+
+#: setup.php
+msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
+msgstr "Fadlan geli waqtiga dhammaadka DNS ee milliseken. Mactrack wuxuu isticmaalaa xalliye DNS oo ku salaysan PHP."
+
+#: setup.php
+msgid "DNS Prime Interval"
+msgstr "Muddo-xilliyeedka Diyaarinta DNS"
+
+#: setup.php
+msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
+msgstr "Intee jeer, ilbiriqsi ahaan, ayay IP-yada baaritaanka Mactrack u baahan yihiin in loo beddelo ciwaannada MAC si loo xalliyo DNS.  Isticmaalka tiro weyn marka aad haysato dhowr kun oo aalado ah waxay kordhinaysaa waxqabadka."
+
+#: setup.php
+msgid "Notification Settings"
+msgstr "Dejinta Ogeysiisyada"
+
+#: setup.php
+msgid "Source Address"
+msgstr "Ciwaanka Isha"
+
+#: setup.php
+msgid "The source Email address for Mactrack Emails."
+msgstr "Cinwaanka Iimaylka isha u ah Iimayllada Mactrack."
+
+#: setup.php
+msgid "Source Email Name"
+msgstr "Magaca Iimaylka Isha"
+
+#: setup.php
+msgid "The Source Email name for Mactrack Emails."
+msgstr "Magaca Iimaylka Isha ee Iimaylada Mactrack."
+
+#: setup.php
+msgid "MACTrack Administrator"
+msgstr "Maamulaha MACTrack"
+
+#: setup.php
+msgid "MacWatch Default Body"
+msgstr "Qoraalka Caadiga ah ee MacWatch"
+
+#: setup.php
+msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+msgstr "Qoraalka diyaarsan ee Iimaylka loogu talagalay Iimayllada Mactrack MacWatch.  Qoraalku wuxuu ka koobnaan karaa calaamadaha html kasta oo ansax ah.  Wuxuu sidoo kale taageeraa calaamadaha beddelka ee la farsamayn doono marka la dirayo Iimayl.  Calaamadaha ansaxa ah waxaa ka mid ah <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+
+#: setup.php
+msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
+msgstr "Cinwaanka MAC <MAC> waxaa laga helay Cinwaanka IP <IP> ee Lambarka Tikidhka: <TICKET>.<br>Qalabku wuxuu ku yaallaa<br>Goob: <SITENAME>, Qalab <DEVICENAME>, IP <DEVICEIP>, Deked <PORTNUMBER>, iyo Magaca Dekedda <PORTNAME>"
+
+#: setup.php
+msgid "MacAuth Report Email Addresses"
+msgstr "Cinwaannada Iimaylka Warbixinta MacAuth"
+
+#: setup.php
+msgid "A comma delimited list of users to receive the MacAuth Email notifications."
+msgstr "Liis isticmaalayaal ah oo koomo lagu kala saaray oo helaya ogeysiisyada Iimaylka ee MacAuth."
+
+#: setup.php
+msgid "MacAuth Report Frequency"
+msgstr "Inta Jeer ee Warbixinta MacAuth"
+
+#: setup.php
+msgid "How often will the MacAuth Reports be Emailed."
+msgstr "Intee jeer ayaa Warbixinnada MacAuth lagu diri doonaa Iimayl."
+
+#: setup.php
+msgid "Mactrack ArpWatch Settings"
+msgstr "Dejinta ArpWatch ee Mactrack"
+
+#: setup.php
+msgid "Enable ArpWatch"
+msgstr "Hawlgeli ArpWatch"
+
+#: setup.php
+msgid "Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
+msgstr "Ma in Mactrack sidoo kale isticmaalo xogta ArpWatch si uu u kabo xallinta MAC ku aaddan IP/DNS?"
+
+#: setup.php
+msgid "ArpWatch Database Path"
+msgstr "Dariiqadda Kaydka Xogta ArpWatch"
+
+#: setup.php
+msgid "The location of the ArpWatch Database file on the Cacti server."
+msgstr "Goobta uu ku yaallo faylka Kaydka Xogta ArpWatch ee ku jira adeegaha Cacti."
+
+#: setup.php
+msgid "SNMP Presets"
+msgstr "Dejinta Hore ee SNMP"
+
+#: setup.php
+msgid "Update Policy for SNMP Options"
+msgstr "Siyaasadda Cusbooneysiinta ee Xulashooyinka SNMP"
+
+#: setup.php
+msgid "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices."
+msgstr "Siyaasadda isku-xidhka Ikhtiyaarrada SNMP ee u dhexeeya aaladaha Cacti iyo Aaladaha Mactrack."
+
+#: setup.php
+msgid "Default SNMP version for all new hosts."
+msgstr "Nooca SNMP ee caadiga ah ee dhammaan martigeliyayaasha cusub."
+
+#: setup.php
+msgid "Default SNMP read community for all new hosts."
+msgstr "Bulshada akhriska SNMP ee caadiga ah ee dhammaan martigeliyayaasha cusub."
+
+#: setup.php
+msgid "Communities"
+msgstr "Bulshooyinka"
+
+#: setup.php
+msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
+msgstr "Buuxi liiska xargaha akhriska SNMP ee diyaarka u ah in lagu tijaabiyo qalabkan. Xarig akhris kasta waa in lagu kala saaraa labo-dhibic ':'. Xargahan akhriska waxaa loo tijaabin doonaa si isku xigta haddii xarigga akhriska koowaad uu yahay mid aan sax ahayn."
+
+#: setup.php
+msgid "The UDP/TCP Port to poll the SNMP agent on."
+msgstr "Dekedda UDP/TCP ee laga xog-uruurinayo wakiilka SNMP."
+
+#: setup.php
+msgid "Default SNMP timeout in milli-seconds."
+msgstr "Waqtiga dhammaadka SNMP ee caadiga ah oo ku cabbiran milli-ilbiriqsi."
+
+#: setup.php
+msgid "The number times the SNMP poller will attempt to reach the host before failing."
+msgstr "Tirada jeer ee Xog-uruuriyaha SNMP uu isku dayi doono inuu gaaro Martigeliyaha ka hor inta uusan guul-darraysan."
+
+#: setup.php
+msgid "snmpbulkwalk Binary Path"
+msgstr "Waddada Binary-ga snmpbulkwalk"
+
+#: setup.php
+msgid "The path to your snmpbulkwalk binary."
+msgstr "Waddada aad ku gaadho binary-gaaga snmpbulkwalk."
+
+#: setup.php
+msgid "MacTrack Settings"
+msgstr "Dejinta MacTrack"
+
+#: setup.php
+msgid "Default Tab"
+msgstr "Tabka Caadiga ah"
+
+#: setup.php
+msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
+msgstr "Tab-ka MacTrack ee aad rabto inuu noqdo Tab-kaaga Caadiga ah mar kasta oo aad aaddo qaybta MacTrack."
+
+#: setup.php
+msgid "Mac Addresses"
+msgstr "Cinwaannada MAC"
+
+#: setup.php
+msgid "dot1x Deta"
+msgstr "Faahfaahinta dot1x"
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Dejimaha Proxy-ga Internet-ka"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Cinwaanka Proxy-ga Internet-ka"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Adeegyada asaasiga ah ee Cacti ama Ku-xirayaasha u baahan helitaanka internet-ka, halkan ku geli server-ka proxy iyo port-ka qaabka soo socda IP:PORT. Tusaale ahaan 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Isticmaalaha Proxy-ga Internet-ka"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "Haddii Proxy-gaaga Internet-ka uu u baahan yahay magaca isticmaalaha, halkan geli."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Furaha Sirta ah ee Proxy-ga Internet-ka"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "Haddii Proxy-gaaga Internet-ka uu u baahan yahay fure sir ah, halkan geli."
+
+#: setup.php
+msgid "Mactrack Dashboard"
+msgstr "Guddiga Xogta ee Mactrack"
+
+#: setup.php
+msgid "Mactrack Devices"
+msgstr "Aaladaha Mactrack"
+
+#: setup.php
+msgid "(Edit)"
+msgstr "(Wax ka beddel)"
+
+#: setup.php
+msgid "(Import)"
+msgstr "(Soo deji)"
+
+#: setup.php
+msgid "Mactrack Device Types"
+msgstr "Noocyada Qalabka ee Mactrack"
+
+#: setup.php
+msgid "Mactrack Sites"
+msgstr "Goobaha Mactrack"
+
+#: setup.php
+msgid "Mac Address Tracking Utility"
+msgstr "Qalabka Dabagalka Cinwaanka MAC"
+
+#: setup.php
+msgid "Mac Address Authorization Utility"
+msgstr "Qalabka Oggolaanshaha Cinwaanka MAC"
+
+#: setup.php
+msgid "Mactrack Vendor Macs"
+msgstr "MAC-yada Iibiyaha ee Mactrack"
+
+#: setup.php
+msgid "Mactrack View Macs"
+msgstr "Mactrack Eeg MAC-yada"
+
+#: setup.php
+msgid "Mactrack Dot1x View"
+msgstr "Aragtida Dot1x ee Mactrack"
+
+#: setup.php
+msgid "Mactrack IP Address Viewer"
+msgstr "Eegaha Cinwaanka IP ee Mactrack"
+
+#: setup.php
+msgid "Mactrack View Interfaces"
+msgstr "Mactrack Eeg Xiriiriyeyaasha"
+
+#: setup.php
+msgid "Mactrack View Sites"
+msgstr "Mactrack Eeg Goobaha"
+
+#: setup.php
+msgid "Mactrack View IP Ranges"
+msgstr "Mactrack Eeg Kala-duwanaanshaha IP"
+
+#: setup.php
+msgid "Mactrack View Devices"
+msgstr "Mactrack Eeg Aaladaha"
+
+#: setup.php
+msgid "Mactrack Utilities"
+msgstr "Adeegyada Mactrack"
+
+#: setup.php
+msgid "Truncate Port Results Table"
+msgstr "Faaruqi Jadwalka Natiijooyinka Dekedaha"
+
+#: setup.php
+msgid "Truncate Aggregated Port Results Table"
+msgstr "Faaruqi Jadwalka Natiijooyinka Dekedaha La Isku Daray"
+
+#: setup.php
+msgid "Truncate and Re-create Aggregated Port Results Table"
+msgstr "Faaruqi oo Dib u Abuur Jadwalka Natiijooyinka Dekedaha La Isku Daray"
+
+#: setup.php
+msgid "Refresh/Update Vendor MAC Database from IEEE"
+msgstr "Cusbooneysii/Casriyeey Kaydka Xogta MAC ee Soo-saaraha laga helo IEEE"
+
+#: setup.php
+msgid "Mactrack Graph Viewer"
+msgstr "Eegaha Garaafka Mactrack"
+
+#: setup.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "%d Ilbiriqsi"
+
+#: setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d Daqiiqo"
+
+#: setup.php
+msgid "Matches"
+msgstr "U dhigma"
+
+#: setup.php
+msgid "Contains"
+msgstr "Waxaa ku jira"
+
+#: setup.php
+msgid "Begins With"
+msgstr "Ku Bilaabma"
+
+#: setup.php
+msgid "Does Not Contain"
+msgstr "Kuma Jiro"
+
+#: setup.php
+msgid "Does Not Begin With"
+msgstr "Kuma Bilaabmo"
+
+#: setup.php
+msgid "Is Null"
+msgstr "Waa Null"
+
+#: setup.php
+msgid "Is Not Null"
+msgstr "Ma aha Null"
+
+#: setup.php
+msgid "Half"
+msgstr "Badh"
+
+#: setup.php
+msgid "Full"
+msgstr "Dhammaystiran"
+
+#: setup.php
+msgid "Sync Cacti Device to Mactrack Device"
+msgstr "Isku-duw Qalabka Cacti ilaa Qalabka Mactrack"
+
+#: setup.php
+msgid "Sync Mactrack Device to Cacti Device"
+msgstr "Isku-duw Qalabka Mactrack ilaa Qalabka Cacti"
+
+#: setup.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "%d Daqiiqo Kasta"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hour"
+msgstr "%d Saacad kasta"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "%d Saacadood Kasta"
+
+#: setup.php
+msgid "Every Day"
+msgstr "Maalin Kasta"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "%d Bil"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "%d Bilood"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "%d Sano"
+
+#: setup.php
+msgid "On Scan Completion"
+msgstr "Marka Baaristu Dhammaato"
+
+#: setup.php
+#, php-format
+msgid "Every %d Days"
+msgstr "%d Maalmood kasta"
+
+#: setup.php
+msgid "Every Week"
+msgstr "Toddobaad Kasta"
+
+#: setup.php
+msgid "Management"
+msgstr "Maamul"
+
+#: setup.php
+msgid "SNMP Options"
+msgstr "Ikhtiyaarrada SNMP"
+
+#: setup.php
+msgid "Mac Watch"
+msgstr "Ilaalinta MAC"
+
+#: setup.php
+msgid "Mactrack Tools"
+msgstr "Qalab-hawleedka Mactrack"
+
+#: setup.php
+msgid "Mac Authorizations"
+msgstr "Oggolaanshaha MAC"
+
+#: setup.php
+msgid "Tracking Utilities"
+msgstr "Qalabka Dabagalka"
+
+#: setup.php
+msgid "Ports to Ignore (Regular Expression)"
+msgstr "Dekedaha la iska indho-tiro (Weedha Caadiga ah)"
+
+#: setup.php
+#, php-format
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions."
+msgstr "Ikhtiyaari. Weedh joogto ah (regular expression) oo la waafajiyo, iyadoo aan loo eegin xarfaha waaweyn iyo kuwa yaryar, magaca dekedda iyo magaca kale ee dekedda %s. Cinwaannada MAC ee laga helo deked u dhiganta lama ururiyo. Tusaale ahaan, '(uplink|trunk)' waxay iska indho-tirtaa deked kasta oo magaceeda ama magaceeda kale uu ku jiro uplink ama trunk. Ku qor weedh kasta sadarkeeda gaarka ah si aad u bixiso dhowr. Waxaa lagu dabaqaa iyadoo lagu darayo weedhaha %s."
+
+#: setup.php
+msgid "every device in this site"
+msgstr "qalab kasta oo ku jira goobtan"
+
+#: setup.php
+msgid "this device"
+msgstr "qalabkan"
+
+#: setup.php
+msgid "device and global"
+msgstr "qalab iyo guud"
+
+#: setup.php
+msgid "site and global"
+msgstr "goob iyo guud"
+
+#: setup.php
+msgid "Device Scanning Function Options"
+msgstr "Ikhtiyaarrada Shaqada Baaritaanka Qalabka"
+
+#: setup.php
+msgid "Give this device type a meaningful description."
+msgstr "Sii noocan qalab sharraxaad macno leh."
+
+#: setup.php
+msgid "Fill in the name for the vendor of this device type."
+msgstr "Buuxi magaca iibiyaha noocan qalabka ah."
+
+#: setup.php
+msgid "Choose the type of device."
+msgstr "Dooro nooca qalabka."
+
+#: setup.php
+msgid "System Description Match"
+msgstr "Iswaafajinta Sharaxaadda Nidaamka"
+
+#: setup.php
+msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
+msgstr "Sii macluumaad muhiim ah si aad uga caawiso Mactrack ogaanshaha nooca qalabka. Astaanta wildcard waa calaamadda '&#42;'."
+
+#: setup.php
+msgid "Vendor SNMP Object ID Match"
+msgstr "Iswaafajinta Aqoonsiga Shayga SNMP ee Iibiyaha"
+
+#: setup.php
+msgid "MAC Address Scanning Function"
+msgstr "Shaqada Baaritaanka Cinwaanka MAC"
+
+#: setup.php
+msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
+msgstr "Shaqada baaritaanka Mactrack ee la waco si loo helo loona keydiyo faahfaahinta dekedaha (port).  Magaca shaqada oo keliya ayaa loo baahan yahay.  Afarta cabbir ee soo socda waa kuwo la filayo mar walbana waa lagu dari doonaa: 'my_function($site, &$device, $lowport, $highport)'.  Looma baahna wax shaqo ah router saafi ah."
+
+#: setup.php
+msgid "IP Address Scanning Function"
+msgstr "Shaqada Baaritaanka Ciwaanka IP"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
+msgstr "Shaqada baaritaanka Mactrack ee gaarka u ah aaladaha Layer3 ee la socda Cinwaannada IP."
+
+#: setup.php
+msgid "802.1x Scanning Function"
+msgstr "Shaqada Baaritaanka 802.1x"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Switches with dot1x enabled."
+msgstr "Shaqada baaritaanka Mactrack ee gaarka u ah Switch-yada leh dot1x la hawlgeliyay."
+
+#: setup.php
+msgid "Serial Number Base OID"
+msgstr "OID-ga Aasaaska ah ee Lambarka Taxanaha"
+
+#: setup.php
+msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
+msgstr "SNMP OID loo isticmaalo in lagu helo lambarka taxanaha ah ee nooca qalabkan si loogu keydiyo shaxda Macluumaadka Hantida Mactrack."
+
+#: setup.php
+msgid "Serial Number Collection Method"
+msgstr "Habka Ururinta Lambarka Taxanaha"
+
+#: setup.php
+msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
+msgstr "Sida lambarka taxanaha ah loogu ururiyo OID-gan. Haddii ay tahay 'SNMP Walk', waxaan u qaadanaynaa lambaro taxane ah oo badan. Haddii ay tahay 'Get', wuxuu noqonayaa hal keliya.."
+
+#: setup.php
+msgid "SNMP Get"
+msgstr "SNMP Get"
+
+#: setup.php
+msgid "SNMP Walk"
+msgstr "Socodka SNMP"
+
+#: setup.php
+msgid "Low User Port Number"
+msgstr "Lambarka Dekedda Isticmaalaha Hoose"
+
+#: setup.php
+msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
+msgstr "Sii lambarka dekedda hoose ee isticmaalaha ee ku taal switch-kan. Ka tag 0 si aad nidaamka ugu oggolaato inuu xisaabiyo."
+
+#: setup.php
+msgid "High User Port Number"
+msgstr "Lambarka Marinka Isticmaalaha Sare"
+
+#: setup.php
+msgid "Disabled device type is not used."
+msgstr "Nooca qalabka la joojiyay lama isticmaalo."
+
+#: setup.php
+msgid "Fill in the name of this SNMP option set."
+msgstr "Buuxi magaca kooxdan xulashooyinka SNMP."
+
+#: setup.php
+msgid "SNMP Version"
+msgstr "Nooca SNMP"
+
+#: setup.php
+msgid "Choose the SNMP version for this host."
+msgstr "Dooro nooca SNMP ee martigeliyahan."
+
+#: setup.php
+msgid "SNMP Community String"
+msgstr "Xarigga Bulshada SNMP"
+
+#: setup.php
+msgid "Fill in the SNMP read community for this device."
+msgstr "Buuxi bulshada akhriska SNMP ee qalabkan."
+
+#: setup.php
+msgid "SNMP Port"
+msgstr "Dekedda SNMP"
+
+#: setup.php
+msgid "SNMP Timeout"
+msgstr "Waqtiga Dhammaadka SNMP"
+
+#: setup.php
+msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
+msgstr "Tirada ugu badan ee mili-ilbiriqsi ee Cacti sugi doonto jawaabta SNMP (lama shaqeeyo taageerada php-snmp)."
+
+#: setup.php
+msgid "SNMP Retries"
+msgstr "Isku-dayada SNMP"
+
+#: setup.php
+msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
+msgstr "Tirada ugu badan ee isku-dayada lagu gaarayo qalabka iyadoo loo marayo xarigga akhriska SNMP ka hor inta aan la joojin."
+
+#: setup.php
+msgid "Maximum OID's Per Get Request"
+msgstr "OID-yada Ugu Badan Codsi Helitaan Kasta"
+
+#: setup.php
+msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
+msgstr "Waxaa la qeexay tirada OID-yada laga heli karo hal codsi oo SNMP Get ah."
+
+#: setup.php
+msgid "SNMP Username (v3)"
+msgstr "Magaca Isticmaalaha SNMP (v3)"
+
+#: setup.php
+msgid "SNMP v3 username for this device."
+msgstr "Magaca isticmaalaha SNMP v3 ee qalabkan."
+
+#: setup.php
+msgid "SNMP Password (v3)"
+msgstr "Furaha Sirta SNMP (v3)"
+
+#: setup.php
+msgid "SNMP v3 password for this device."
+msgstr "Furaha sirta SNMP v3 ee qalabkan."
+
+#: setup.php
+msgid "SNMP Auth Protocol (v3)"
+msgstr "Hab-maamuuska Xaqiijinta SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Authorization Protocol."
+msgstr "Dooro Hab-maamuuska Oggolaanshaha SNMPv3."
+
+#: setup.php
+msgid "SNMP Privacy Passphrase (v3)"
+msgstr "Weedha Sirta Qarsoodiga SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Passphrase."
+msgstr "Dooro Weedha Sirta Qarsoodiga SNMPv3."
+
+#: setup.php
+msgid "SNMP Privacy Protocol (v3)"
+msgstr "Hab-maamuuska Qarsoodiga SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Protocol."
+msgstr "Dooro Hab-maamuuska Qarsoodiga SNMPv3."
+
+#: setup.php
+msgid "SNMP Context (v3)"
+msgstr "Macnaha Guud ee SNMP (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Context to use for this device."
+msgstr "Geli macnaha guud ee SNMP v3 ee loo adeegsanayo qalabkan."
+
+#: setup.php
+msgid "SNMP Engine ID (v3)"
+msgstr "Aqoonsiga Matoorka SNMP (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Engine ID to use for this device."
+msgstr "Geli Aqoonsiga Matoorka SNMP v3 ee loo adeegsanayo qalabkan."
+
+#: setup.php
+msgid "General Device Settings"
+msgstr "Dejinta Guud ee Qalabka"
+
+#: setup.php
+msgid "Give this device a meaningful name."
+msgstr "Sii qalabkan magac macno leh."
+
+#: setup.php
+msgid "Fill in the fully qualified hostname for this device."
+msgstr "Buuxi magaca martigeliyaha ee buuxa ee qalabkan."
+
+#: setup.php
+msgid "Related Cacti Host"
+msgstr "Martigeliyaha Cacti ee la xiriira"
+
+#: setup.php
+msgid "Given Mactrack Host is connected to this Cacti Host."
+msgstr "Martigeliyaha Mactrack ee la siiyay wuxuu ku xiran yahay Martigeliyahan Cacti."
+
+#: setup.php
+msgid "Scan Type"
+msgstr "Nooca Baaritaanka"
+
+#: setup.php
+msgid "Choose the scan type you wish to perform on this device."
+msgstr "Dooro nooca baaritaanka aad rabto inaad ku samayso qalabkan."
+
+#: setup.php
+msgid "Choose the site to associate with this device."
+msgstr "Dooro goobta lagu xiriirinayo qalabkan."
+
+#: setup.php
+msgid "Device Notes"
+msgstr "Qoraallada Qalabka"
+
+#: setup.php
+msgid "This field value is useful to save general information about a specific device."
+msgstr "Qiimaha goobtan wuxuu faa'iido u leeyahay in lagu keydiyo macluumaadka guud ee ku saabsan qalab gaar ah."
+
+#: setup.php
+msgid "Disable Device"
+msgstr "Dami Aaladda"
+
+#: setup.php
+msgid "Check this box to disable all checks for this host."
+msgstr "Calaamadee sanduuqan si aad u joojiso dhammaan hubinta martigeliyahan."
+
+#: setup.php
+msgid "Switch/Hub, Switch/Router Settings"
+msgstr "Dejinta Switch/Hub, Switch/Router"
+
+#: setup.php
+msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
+msgstr "Sii liiska dekedaha ku yaal switch/hub gaar ah oo natiijooyinka MAC-gooda la iska indho-tiri doono. Dekedaha sida link/trunk ports ee aan laga sooci karin dekedaha kale ee isticmaalayaasha ayaa tusaale u ah. Lambar kasta oo deked ah waa in lagu kala saaraa labo-dhibic, tuubo, ama bannaan ':', '|', ' '. Tusaale ahaan, 'Fa0/1: Fa1/23' ama 'Fa0/1 Fa1/23' waa la aqbali karaa noocyada switch-yada shirkadaha qaar."
+
+#: setup.php
+msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
+msgstr "Waxaad adeegsan kartaa Dejinta SNMP ee gaarka ah ama dooran kartaa kooxda SNMP. Xaaladda labaad, mactrack wuxuu isku dayaa inuu ka helo dejinta saxda ah kooxda SNMP"
+
+#: setup.php
+msgid "Read Strings"
+msgstr "Xargaha Akhriska"
+
+#: setup.php
+msgid "<strong>DEPRECATED:</strong> SNMP community strings"
+msgstr "<strong>LAGA GUURAY:</strong> Xadhkaha bulshada ee SNMP"
+
+#: setup.php
+msgid "Specific SNMP Settings"
+msgstr "Dejinta SNMP ee Gaarka ah"
+
+#: setup.php
+msgid "Connectivity Options"
+msgstr "Ikhtiyaarada Xidhiidhka"
+
+#: setup.php
+msgid "Terminal Type"
+msgstr "Nooca Terminaalka"
+
+#: setup.php
+msgid "Choose the terminal type that you use to connect to this device."
+msgstr "Dooro nooca terminaalka aad u isticmaasho inaad kula xiriirto qalabkan."
+
+#: setup.php
+msgid "Telnet"
+msgstr "Telnet"
+
+#: setup.php
+msgid "SSH"
+msgstr "SSH"
+
+#: setup.php
+msgid "HTTP"
+msgstr "HTTP"
+
+#: setup.php
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: setup.php
+msgid "User Name"
+msgstr "Magaca Isticmaalaha"
+
+#: setup.php
+msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
+msgstr "Magaca isticmaalaha loo adeegsan doono habkaaga gaarka ah ee xaqiijinta. Tusaalooyinka waxaa ka mid ah SSH, RSH, HTML, iwm."
+
+#: setup.php
+msgid "Password"
+msgstr "Erayga sirta ah"
+
+#: setup.php
+msgid "The password to be used for your custom authentication."
+msgstr "Erayga sirta ah ee loo isticmaalayo xaqiijintaada gaarka ah."
+
+#: setup.php
+msgid "Private Key Path"
+msgstr "Jidka Furaha Gaarka ah"
+
+#: setup.php
+msgid "The path to the private key used for SSH authentication."
+msgstr "Jidka furaha gaarka ah ee loo isticmaalo xaqiijinta SSH."
+
+#: setup.php
+msgid "Sequence"
+msgstr "Taxane"
+
+#: setup.php
+msgid "Sequence of Item."
+msgstr "Taxanaha Shayga."
+
+#: setup.php
+msgid "General Site Settings"
+msgstr "Dejinta Guud ee Goobta"
+
+#: setup.php
+msgid "Please enter a reasonable name for this site."
+msgstr "Fadlan geli magac macquul ah Goobtan."
+
+#: setup.php
+msgid "Primary Customer Contact"
+msgstr "Xiriirka Koowaad ee Macmiilka"
+
+#: setup.php
+msgid "The principal customer contact name and number for this site."
+msgstr "Magaca iyo lambarka xiriirka macaamilka ugu muhiimsan ee goobtan."
+
+#: setup.php
+msgid "NetOps Contact"
+msgstr "Xiriirka NetOps"
+
+#: setup.php
+msgid "Please principal network support contact name and number for this site."
+msgstr "Fadlan geli magaca iyo lambarka xiriirka ugu muhiimsan ee taageerada shabakadda Goobtan."
+
+#: setup.php
+msgid "Facilities Contact"
+msgstr "Xiriirka Xarumaha"
+
+#: setup.php
+msgid "Please principal facilities/security contact name and number for this site."
+msgstr "Fadlan geli magaca iyo lambarka xiriirka ugu muhiimsan ee xarumaha/amniga Goobtan."
+
+#: setup.php
+msgid "Site Information"
+msgstr "Macluumaadka Goobta"
+
+#: setup.php
+msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
+msgstr "Sii macluumaad kasta oo goobta u gaar ah, qaab xor ah, kaas oo kuu oggolaanaya inaad si wanaagsan u maamusho goobtan."
+
+#: setup.php
+msgid "General Mac Address Tracking Settings"
+msgstr "Dejinta Guud ee Dabagalka Cinwaanka MAC"
+
+#: setup.php
+msgid "MAC Address"
+msgstr "Cinwaanka MAC"
+
+#: setup.php
+msgid "Please enter the MAC Address to be watched for."
+msgstr "Fadlan geli Ciwaanka MAC ee la ilaalinayo."
+
+#: setup.php
+msgid "MAC Tracking Name/Email Subject"
+msgstr "Magaca Dabagalka MAC/Mawduuca Iimaylka"
+
+#: setup.php
+msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
+msgstr "Fadlan geli magac macquul ah gelitaankan Raadinta MAC.  Macluumaadkani wuxuu ku jiri doonaa cinwaanka Iimaylkaaga"
+
+#: setup.php
+msgid "Ticket number for cross referencing with your corporate help desk system(s)."
+msgstr "Lambarka tigidhka si loola tixraaco nidaamka/nidaamyada caawinta ee shirkaddaada."
+
+#: setup.php
+msgid "Notification Schedule"
+msgstr "Jadwalka Ogeysiiska"
+
+#: setup.php
+msgid "Choose how often an Email should be generated for this Mac Watch item."
+msgstr "Dooro inta jeer ee Iimayl la soo saari doono shaygan Mac Watch."
+
+#: setup.php
+msgid "First Occurrence Only"
+msgstr "Dhacdada Kowaad oo Keliya"
+
+#: setup.php
+msgid "All Occurrences"
+msgstr "Dhammaan Dhacdooyinka"
+
+#: setup.php
+msgid "Every Hour"
+msgstr "Saacad Kasta"
+
+#: setup.php
+msgid "Email Addresses"
+msgstr "Ciwaannada Iimaylka"
+
+#: setup.php
+msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
+msgstr "Geli cinwaannada Iimaylka oo lagu kala saaray calaamadda ; kuwaas oo la ogeysiin doono halka ciwaankan MAC uu ku yaallo."
+
+#: setup.php
+msgid "General Mac Address Authorization Settings"
+msgstr "Dejinta Guud ee Oggolaanshaha Cinwaanka MAC"
+
+#: setup.php
+msgid "MAC Address Match"
+msgstr "Iswaafajinta Cinwaanka MAC"
+
+#: setup.php
+msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
+msgstr "Fadlan geli Ciwaanka MAC ama xarafka Iswaafajinta Ciwaanka MAC si si toos ah loo oggolaado.  Haddii aad rabto inaad oggolaato koox Ciwaannada MAC ah, waxaad ku isticmaali kartaa astaanta '&#37;' meel kasta oo ka mid ah Ciwaanka MAC."
+
+#: setup.php
+msgid "Please add a reason for this entry."
+msgstr "Fadlan ku dar sababta gelitaankan."
+
