@@ -1,0 +1,3597 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-18 18:36+0000\n"
+"PO-Revision-Date: 2026-11-24 23:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Ukrainian\n"
+"Language: uk-UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
+msgstr "MacTrack не вдалося ініціалізувати типовий майданчик після повторних спроб. Перш ніж продовжити, перегляньте журнал Cacti."
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
+msgstr "MacTrack не вдалося ініціалізувати типовий майданчик. Перш ніж продовжити, перегляньте журнал Cacti."
+
+#: lib/mactrack_activity.php
+msgid "Scanning devices"
+msgstr "Сканування пристроїв"
+
+#: lib/mactrack_activity.php
+msgid "Waiting for the DNS resolver"
+msgstr "Очікування DNS-резолвера"
+
+#: lib/mactrack_activity.php
+msgid "Transferring and aggregating scan results"
+msgstr "Передавання та агрегування результатів сканування"
+
+#: lib/mactrack_activity.php
+msgid "Maintaining port table partitions"
+msgstr "Обслуговування розділів таблиці портів"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired port rows"
+msgstr "Видалення застарілих рядків портів"
+
+#: lib/mactrack_activity.php
+msgid "Pruning scan dates"
+msgstr "Очищення дат сканування"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired IP rows"
+msgstr "Видалення застарілих рядків IP"
+
+#: lib/mactrack_activity.php
+msgid "Optimizing the IP table"
+msgstr "Оптимізація таблиці IP-адрес"
+
+#: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
+#: mactrack_view_dot1x.php
+msgid "Idle"
+msgstr "Простій"
+
+#: lib/mactrack_activity.php
+msgid "Upgrading: rebuilding aggregated ports"
+msgstr "Оновлення: перебудова агрегованих портів"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "About %s rows left to copy (estimate)"
+msgstr "Залишилося скопіювати приблизно %s рядків (оцінка)"
+
+#: lib/mactrack_activity.php
+msgid "Repartitioning the port, IP and 802.1x tables"
+msgstr "Повторне секціонування таблиць портів, IP та 802.1x"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "%d devices in this scan"
+msgstr "%d пристроїв у цьому скануванні"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "The process stopped during: %s"
+msgstr "Процес зупинився на етапі: %s"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "Scanning %d devices"
+msgstr "Сканування %d пристроїв"
+
+#: lib/mactrack_activity.php
+msgid "A database upgrade is running"
+msgstr "Виконується оновлення бази даних"
+
+#: lib/mactrack_activity.php
+msgid "The port, IP and 802.1x table partitioning has not finished"
+msgstr "Секціонування таблиць портів, IP та 802.1x ще не завершено"
+
+#: lib/mactrack_activity.php
+msgid "The aggregated ports rebuild has not finished"
+msgstr "Перебудову агрегованих портів ще не завершено"
+
+#: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
+msgid "Running"
+msgstr "Працює"
+
+#: lib/mactrack_functions.php
+msgid "No method"
+msgstr "Без методу"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Success"
+msgstr "Автентифікація успішна"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Failed"
+msgstr "Помилка автентифікації"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Success"
+msgstr "Успішна авторизація"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Failed"
+msgstr "Помилка авторизації"
+
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr "Не виявлено під час останнього сканування"
+
+#: lib/mactrack_functions.php
+msgid "Locally Admined MAC"
+msgstr "Локально адміністрований MAC"
+
+#: lib/mactrack_functions.php
+msgid "Mactrack Device Tracking OUI Database Import Results"
+msgstr "Результати імпорту бази даних OUI відстеження пристроїв Mactrack"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from IEEE"
+msgstr "Отримання бази даних OUI з IEEE"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from the IEEE"
+msgstr "Отримання бази даних OUI з IEEE"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE Complete"
+msgstr "Завантаження бази даних OUI з IEEE завершено"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE FAILED"
+msgstr "НЕ ВДАЛОСЯ завантажити базу даних OUI з IEEE"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Entries Added/Updated in the database."
+msgstr "Додано/оновлено записів у базі даних: «%d»."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Records Removed from the database."
+msgstr "Видалено записів із бази даних: «%d»."
+
+#: lib/mactrack_functions.php
+msgid "atifIndexes data collection complete"
+msgstr "Збирання даних atifIndexes завершено"
+
+#: lib/mactrack_functions.php
+msgid "atPhysAddress data collection complete"
+msgstr "Збирання даних atPhysAddress завершено"
+
+#: lib/mactrack_functions.php
+msgid "atNetAddress data collection complete"
+msgstr "Збирання даних atNetAddress завершено"
+
+#: lib/mactrack_functions.php
+msgid "atEntries assembly complete."
+msgstr "Збирання atEntries завершено."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "HOST: %s, IP address information collection complete"
+msgstr "ВУЗОЛ: %s, збір відомостей про IP-адреси завершено"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php
+msgid "Rescan Device"
+msgstr "Повторно сканувати пристрій"
+
+#: lib/mactrack_functions.php
+msgid "View Non Interface Graphs"
+msgstr "Перегляд неінтерфейсних графіків"
+
+#: lib/mactrack_functions.php
+msgid "No Non Interface Graphs in Cacti"
+msgstr "Немає неінтерфейсних графіків у Cacti"
+
+#: lib/mactrack_functions.php
+msgid "View Interface Graphs"
+msgstr "Перегляд графіків інтерфейсів"
+
+#: lib/mactrack_functions.php
+msgid "No Interface Graphs in Cacti"
+msgstr "Немає графіків інтерфейсів у Cacti"
+
+#: lib/mactrack_functions.php
+msgid "Since Restart"
+msgstr "З моменту перезапуску"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Down"
+msgstr "Оффлайн"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Up"
+msgstr "Онлайн"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Unaliased"
+msgstr "Без псевдоніма"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors"
+msgstr "Помилки"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards"
+msgstr "Відкинуті пакети"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Graphless"
+msgstr "Без графіків"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Невідомо"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr "Авторизовано"
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
+msgstr "Не авторизовано"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Data"
+msgstr "Дані"
+
+#: lib/mactrack_functions.php
+msgid "Voice"
+msgstr "Голос"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Rescan '%s'"
+msgstr "Повторне сканування пристрою '%s'"
+
+#: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr "Повторне сканування не дало жодних результатів."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr "Повторне сканування пристрою '%s' завершено за %0.2f секунд."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site scan '%s'"
+msgstr "Сканування майданчика '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr "Сканування майданчика '%s' завершено за %0.2f с."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Enable '%s'"
+msgstr "Увімкнути пристрій '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Disable '%s'"
+msgstr "Вимкнути пристрій '%s'"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_macwatch.php
+#: mactrack_snmp.php mactrack_utilities.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
+#: setup.php
+msgid "N/A"
+msgstr "(відсутній)"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d хвилин"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d Годин"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Days"
+msgstr "%d днів"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Weeks"
+msgstr "%d тижнів"
+
+#: lib/mactrack_functions.php
+msgid "Not Recorded"
+msgstr "Не зафіксовано"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
+msgstr "Статус: виконується, процесів: %d, прогрес: %s, останній час виконання: %2.1f"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
+msgstr "Статус: очікування, останній час виконання: %2.1f с, процесів: %d, пристроїв: %d, наступний запуск: %s"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
+msgid "Disabled"
+msgstr "Вимкнен"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Scanning Rate: Every %s"
+msgstr "Частота сканування: кожні %s"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "View Interfaces"
+msgstr "Перегляд інтерфейсів"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "Not Detected"
+msgstr "Не виявлено"
+
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr "Інформаційна панель"
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Sites"
+msgstr "Сайти"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Devices"
+msgstr "Пристрої"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "Інтерфейси"
+
+#: lib/mactrack_functions.php
+msgid "IP Ranges"
+msgstr "Діапазони IP"
+
+#: lib/mactrack_functions.php setup.php
+msgid "IP Addresses"
+msgstr "IP-адреси"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "MAC-адреси"
+
+#: lib/mactrack_functions.php
+msgid "Dot1x"
+msgstr "Dot1x"
+
+#: lib/mactrack_functions.php mactrack_view_graphs.php
+msgid "Graphs"
+msgstr "Графіки"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Search"
+msgstr "Пошук"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_devices.php mactrack_view_ips.php
+#: setup.php
+msgid "Default"
+msgstr "За замовчуванням"
+
+#: lib/mactrack_functions.php
+msgid "Show Device Details"
+msgstr "Показати деталі пристрою"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Go"
+msgstr "Перейти"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Clear"
+msgstr "Очистити"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Export"
+msgstr "Експорт"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+msgid "Site"
+msgstr "Вузол"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_ips.php
+msgid "Any"
+msgstr "Будь-який"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "SubType"
+msgstr "Підтип"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgstr "Ви впевнені, що хочете видалити з системи всі результати відповідності Порт–MAC–IP?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
+msgstr "Ви впевнені, що хочете видалити застарілі результати відповідності Порт–MAC–IP зараз?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
+msgstr "Ви впевнені, що хочете очистити кешовані функції сканування Mactrack?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Ви впевнені, що хочете видалити з системи всі агреговані результати відповідності Порт–MAC–IP?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Ви впевнені, що хочете видалити та повторно створити в системі всі агреговані результати відповідності Порт–MAC–IP?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
+msgstr "Ви впевнені, що хочете завантажити та імпортувати базу даних виробників IEEE MAC/OUI зараз?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
+msgstr "Ви впевнені, що хочете зараз перебудувати список дат сканування зі збережених результатів відповідності Порт–MAC–IP?"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
+msgstr "Перебудувати та проаналізувати розділ, що містить останнє спостереження порту (поточний тиждень для тижневого секціонування). Несекціонована таблиця оптимізується повністю. Планові сканування пропускаються під час виконання цієї операції. Продовжити?"
+
+#: lib/mactrack_functions.php
+msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
+msgstr "Виконуйте це обслуговування в позаробочий час. Перебудова послідовно копіює повну історію таблиць портів (MAC-адрес), IP-адрес і 802.1x та може тривати годинами. Заплановане сканування пропускається, обслуговування бази даних очікує, а пошук за MAC, IP та 802.1x показує повідомлення про обслуговування до завершення процесу. Забезпечте вільне місце на диску для другої копії кожної таблиці та її індексів. Продовжити?"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Scan Results"
+msgstr "Видалити всі результати сканування"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Perform Database Maintenance"
+msgstr "Виконати обслуговування бази даних"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Refresh Scanning Functions"
+msgstr "Оновити функції сканування"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Aggregated Results"
+msgstr "Видалити всі агреговані результати"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Perform Aggregate Table Rebuild"
+msgstr "Виконати перебудову агрегованої таблиці"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild IEEE Vendor MAC/OUI Database"
+msgstr "Перебудувати базу даних виробників MAC/OUI IEEE"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Rebuild Scan Dates"
+msgstr "Перебудувати дати сканування"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Optimize Port Table"
+msgstr "Оптимізувати таблицю портів"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Configure Port and IP Address Partitioning"
+msgstr "Налаштувати розбиття портів та IP-адрес"
+
+#: lib/mactrack_partition_rebuild.php
+msgid "The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
+msgstr "Таблиці портів, IP та 802.1x зараз перерозбиваються на секції або їх перебудова не завершилася, тому їхню історію наразі змінити не можна. Спробуйте знову після завершення cli/upgrade_partitioning.php."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished."
+msgstr "MacTrack перебуває в режимі обслуговування для пошуку за IP-адресою, MAC-адресою та 802.1x, доки виконується повторне секціонування таблиць історії. До завершення секціонування результати будуть неповними."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
+msgstr "MacTrack перебуває в режимі обслуговування для пошуку за IP-адресою, MAC-адресою та 802.1x, оскільки секціонування таблиць історії не завершилося. Результати неповні. Запустіть cli/upgrade_partitioning.php повторно, щоб відновити процес."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "Maintenance Mode"
+msgstr "Режим обслуговування"
+
+#: mactrack_actions.php
+#, php-format
+msgid "Mactrack Device: (%s) successfully updated"
+msgstr "Пристрій Mactrack (%s) успішно оновлено"
+
+#: mactrack_actions.php
+msgid "Import into Mactrack Database"
+msgstr "Імпортувати до бази даних Mactrack"
+
+#: mactrack_actions.php
+msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
+msgstr "Натисніть 'Продовжити', щоб імпортувати наведений нижче пристрій до MacTrack? Укажіть додаткові параметри пристрою MacTrack нижче."
+
+#: mactrack_actions.php
+msgid "We will use these devices SNMP options for the Mactrack Device as well."
+msgstr "Ці параметри SNMP пристроїв також використовуватимуться для пристрою MacTrack."
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Router"
+msgstr "Не застосовується — Маршрутизатор"
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Switch/Hub"
+msgstr "Не застосовується — Комутатор/Концентратор"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Delete"
+msgstr "Видалити"
+
+#: mactrack_device_types.php mactrack_snmp.php
+msgid "Duplicate"
+msgstr "Дублювати"
+
+#: mactrack_device_types.php
+msgid "--dup--"
+msgstr "--dup--"
+
+#: mactrack_device_types.php
+msgid "You must select at least one device type."
+msgstr "Необхідно вибрати принаймні один тип пристрою."
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Continue"
+msgstr "Продовжити"
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to delete the following Device Type(s)."
+msgstr "Натисніть 'Продовжити', щоб видалити наведені нижче типи пристроїв."
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
+msgstr "Натисніть 'Продовжити', щоб дублювати наведені нижче типи пристроїв. За бажанням ви можете змінити опис для нових типів пристроїв. Інакше не змінюйте значення нижче, і початкову назву буде скопійовано з новим суфіксом."
+
+#: mactrack_device_types.php
+msgid "Device Type Prefix:"
+msgstr "Префікс типу пристрою:"
+
+#: mactrack_device_types.php
+msgid "<description> (1)"
+msgstr "<description> (1)"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Return"
+msgstr "Повернутися"
+
+#: mactrack_device_types.php
+msgid "New Type"
+msgstr "Новий тип"
+
+#: mactrack_device_types.php
+msgid "Cisco"
+msgstr "Cisco"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "There were %d Device Types Added!"
+msgstr "Додано типів пристроїв: %d!"
+
+#: mactrack_device_types.php
+msgid "No New Device Types Found!"
+msgstr "Нових типів пристроїв не знайдено!"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import Results"
+msgstr "Імпортувати результати"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Cacti has imported the following items:"
+msgstr "Cacti імпортував такі товари:"
+
+#: mactrack_device_types.php
+msgid "Import Mactrack Device Types"
+msgstr "Імпортувати типи пристроїв Mactrack"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from Local File"
+msgstr "Імпортувати типи пристроїв із локального файлу"
+
+#: mactrack_device_types.php
+msgid "Please specify the location of the CSV file containing your device type information."
+msgstr "Будь ласка, вкажіть розташування CSV-файлу з інформацією про типи пристроїв."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Overwrite Existing Data?"
+msgstr "Перезаписати наявні дані?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
+msgstr "Чи дозволяти процесу імпорту перезаписувати наявні дані? Зверніть увагу: це не означає видалення старих рядків, а лише заміну дублікатів рядків."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Allow Existing Rows to be Updated?"
+msgstr "Дозволити оновлення наявних рядків?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Required File Format Notes"
+msgstr "Примітки щодо необхідного формату файлу"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The file must contain a header row with the following column headings."
+msgstr "Файл повинен містити рядок заголовка з наступними заголовками стовпців."
+
+#: mactrack_device_types.php
+msgid " - A common name for the device.  For example Cisco 6509 Switch"
+msgstr " - Загальна назва пристрою. Наприклад, комутатор Cisco 6509"
+
+#: mactrack_device_types.php
+msgid " - The vendor who produces this device"
+msgstr " - Виробник цього пристрою"
+
+#: mactrack_device_types.php
+msgid " - The type of device this is.  See the notes below for this integer value"
+msgstr " - Тип цього пристрою. Примітки щодо цього цілого значення див. нижче"
+
+#: mactrack_device_types.php
+msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
+msgstr " - Унікальний набір символів зі значення SNMP sysDescr, який однозначно ідентифікує цей пристрій"
+
+#: mactrack_device_types.php
+msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
+msgstr " - Залежний від виробника SNMP sysObjectID, що відрізняє цей пристрій від інших"
+
+#: mactrack_device_types.php
+msgid " - The scanning function that will be used to scan this device type"
+msgstr " - Функція сканування, яка використовуватиметься для сканування цього типу пристрою"
+
+#: mactrack_device_types.php
+msgid " - The IP scanning function that will be used to scan this device type"
+msgstr " - Функція сканування IP, яка використовуватиметься для сканування цього типу пристрою"
+
+#: mactrack_device_types.php
+msgid " - The 802.1x scanning function that will be used to scan this device type"
+msgstr " - Функція сканування 802.1x, яка використовуватиметься для сканування цього типу пристрою"
+
+#: mactrack_device_types.php
+msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
+msgstr " - Якщо серійний номер для цього типу пристрою можна отримати за допомогою SNMP-запиту, додайте його OID тут"
+
+#: mactrack_device_types.php
+msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
+msgstr " - Якщо ваша функція сканування не може ізолювати магістральні (trunk) або з'єднувальні порти, це початковий номер порту для портів користувачів"
+
+#: mactrack_device_types.php
+msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
+msgstr " - Те саме, що й lowPort, за винятком того, що це найбільший номер порту користувача"
+
+#: mactrack_device_types.php
+msgid " - Disabled type is not used"
+msgstr " - Вимкнений тип не використовується"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The primary key for this table is a combination of the following three fields:"
+msgstr "Первинним ключем цієї таблиці є комбінація таких трьох полів:"
+
+#: mactrack_device_types.php
+msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
+msgstr "Отже, якщо ви спробуєте імпортувати дублікати типів пристроїв, наявні дані буде оновлено новою інформацією."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid " is an integer field and must be one of the following:"
+msgstr " є цілочисельним полем і має набувати одного з таких значень:"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "1 - Switch/Hub"
+msgstr "1 - Комутатор/Концентратор"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "2 - Switch/Router"
+msgstr "2 - Комутатор/Маршрутизатор"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "3 - Router"
+msgstr "3 - Маршрутизатор"
+
+#: mactrack_device_types.php
+msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
+msgstr "Тип пристрою визначається шляхом опитування його SNMP-агента щодо значень sysObjectID та sysDescription і порівняння їх зі значеннями в базі даних типів пристроїв. Перший знайдений збіг у базі даних визначає спосіб подальшого сканування пристрою. Тому дуже важливо вибрати правильні значення sysObjectID_match, sysDescr_match та функцію сканування для ваших пристроїв."
+
+#: mactrack_device_types.php mactrack_devices.php setup.php
+msgid "Switch/Hub"
+msgstr "Комутатор/Концентратор"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Switch/Router"
+msgstr "Комутатор/Маршрутизатор"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Router"
+msgstr "Маршрутизатор"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
+msgstr "РЯДОК ЗАГОЛОВКА ОБРОБЛЕНО УСПІШНО:  <br>Знайдені стовпці: %s"
+
+#: mactrack_device_types.php mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
+msgstr "ПОМИЛКА ОБРОБКИ РЯДКА ЗАГОЛОВКА: Відсутнє обов'язкове поле <br>Знайдені стовпці: %s"
+
+#: mactrack_device_types.php
+msgid "Unknown Assume \"Switch/Hub\""
+msgstr "Невідомо, вважати \"Комутатор/Хаб\""
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "УСПІШНО ВСТАВЛЕНО: Виробник: %s, Опис: %s, Тип: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "ПОМИЛКА ВСТАВЛЕННЯ: Виробник: %s, Опис: %s, Тип: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "ВСТАВЛЕННЯ ПРОПУЩЕНО, ВЖЕ ІСНУЄ: Виробник: %s, Опис: %s, Тип: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "Mactrack Device Types [edit: %s]"
+msgstr "Типи пристроїв Mactrack [редагування: %s]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Types [new]"
+msgstr "Типи пристроїв Mactrack [новий]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Type Filters"
+msgstr "Фільтри типів пристроїв Mactrack"
+
+#: mactrack_device_types.php
+msgid "Device Type Description"
+msgstr "Опис типу пристрою"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Device Type"
+msgstr "Тип пристрою"
+
+#: mactrack_device_types.php
+msgid "Port Scanner"
+msgstr "Сканер портів"
+
+#: mactrack_device_types.php
+msgid "IP Scanner"
+msgstr "Сканер IP"
+
+#: mactrack_device_types.php
+msgid "Dot1x Scanner"
+msgstr "Сканер Dot1x"
+
+#: mactrack_device_types.php
+msgid "sysDescription Match"
+msgstr "Збіг sysDescription"
+
+#: mactrack_device_types.php
+msgid "Vendor OID Match"
+msgstr "Збіг OID виробника"
+
+#: mactrack_device_types.php setup.php
+msgid "Device Types"
+msgstr "Типи пристроїв"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "No"
+msgstr "Ні"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "Yes"
+msgstr "Так"
+
+#: mactrack_device_types.php
+msgid "No Mactrack Device Types Found"
+msgstr "Типів пристроїв MacTrack не знайдено"
+
+#: mactrack_device_types.php
+msgid "Submit Query"
+msgstr "Надіслати запит"
+
+#: mactrack_device_types.php
+msgid "Clear Filtered Results"
+msgstr "Очистити відфільтровані результати"
+
+#: mactrack_device_types.php
+msgid "Rescan"
+msgstr "Повторне сканування"
+
+#: mactrack_device_types.php
+msgid "Scan Active Devices for Unknown Device Types"
+msgstr "Сканувати активні пристрої на наявність невідомих типів пристроїв"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import"
+msgstr "Імпорт"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from a CSV File"
+msgstr "Імпортувати типи пристроїв із файлу CSV"
+
+#: mactrack_device_types.php
+msgid "Export Device Types to Share with Others"
+msgstr "Експортувати типи пристроїв для обміну з іншими"
+
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Vendor"
+msgstr "Виробник"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php setup.php
+msgid "All"
+msgstr "Всі"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
+msgid "Type"
+msgstr "Тип"
+
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Enabled"
+msgstr "Увімкнено"
+
+#: mactrack_devices.php
+msgid "Enable"
+msgstr "Увімкнути"
+
+#: mactrack_devices.php mactrack_macwatch.php
+msgid "Disable"
+msgstr "Вимкнути"
+
+#: mactrack_devices.php
+msgid "Change SNMP Options"
+msgstr "Змінити параметри SNMP"
+
+#: mactrack_devices.php
+msgid "Change Device Port Values"
+msgstr "Змінити значення портів пристрою"
+
+#: mactrack_devices.php
+msgid "Connect to Cacti Host via Hostname"
+msgstr "Підключатися до вузла Cacti за іменем вузла"
+
+#: mactrack_devices.php
+msgid "Copy SNMP Settings from Cacti Host"
+msgstr "Копіювати налаштування SNMP із вузла Cacti"
+
+#: mactrack_devices.php
+msgid "You must select at least one device."
+msgstr "Необхідно вибрати принаймні один пристрій."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to enable the following devices."
+msgstr "Натисніть 'Продовжити', щоб увімкнути наведені нижче пристрої."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to disable the following devices."
+msgstr "Натисніть 'Продовжити', щоб вимкнути наведені нижче пристрої."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Натисніть 'Продовжити', щоб змінити параметри SNMP для наведених нижче пристроїв; встановіть прапорці біля полів, які потрібно оновити, та введіть нові значення."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Натисніть 'Продовжити', щоб змінити параметри верхніх або нижніх портів для наведених нижче пристроїв; встановіть прапорці біля полів, які потрібно оновити, та введіть нові значення."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
+msgstr "Натисніть 'Продовжити', щоб зв'язати наведені нижче пристрої з відповідними пристроями Cacti. Зв'язок буде встановлено за збігом імен хостів. Опис також буде оновлено."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
+msgstr "Натисніть 'Продовжити', щоб скопіювати налаштування SNMP зі зв'язаного пристрою Cacti до пристрою MacTrack. Усі незв'язані пристрої буде тихо пропущено. Кількість повторних спроб SNMP буде взято з кількості повторних спроб Ping."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to delete the following Devices"
+msgstr "Натисніть 'Продовжити', щоб видалити наведені нижче пристрої"
+
+#: mactrack_devices.php
+msgid "Import Mactrack Devices"
+msgstr "Імпортувати пристрої Mactrack"
+
+#: mactrack_devices.php
+msgid "Import Devices from Local File"
+msgstr "Імпортувати пристрої з локального файлу"
+
+#: mactrack_devices.php
+msgid "Please specify the location of the CSV file containing your device information."
+msgstr "Будь ласка, вкажіть розташування CSV-файлу з інформацією про пристрої."
+
+#: mactrack_devices.php
+msgid " - The SiteID known to Mactrack for this device"
+msgstr " - Ідентифікатор майданчика (SiteID), відомий MacTrack для цього пристрою"
+
+#: mactrack_devices.php
+msgid " - A simple name for the device.  For example Cisco 6509 Switch"
+msgstr " - Проста назва пристрою. Наприклад, комутатор Cisco 6509"
+
+#: mactrack_devices.php
+msgid " - The IP Address or DNS Name for the device"
+msgstr " - IP-адреса або DNS-ім'я пристрою"
+
+#: mactrack_devices.php
+msgid " - More detailed information about the device, including location, environmental conditions, etc."
+msgstr " - Детальніша інформація про пристрій, включаючи розташування, умови середовища тощо."
+
+#: mactrack_devices.php
+msgid " - A list of ports that should not be scanned for user devices"
+msgstr " - Список портів, які не слід сканувати на наявність пристроїв користувачів"
+
+#: mactrack_devices.php
+msgid " - Redundant information indicating the intended device type.  See below for valid values."
+msgstr " - Надлишкова інформація, що вказує призначений тип пристрою. Допустимі значення див. нижче."
+
+#: mactrack_devices.php
+msgid " - Id of a set of SNMP options"
+msgstr " - Ідентифікатор набору параметрів SNMP"
+
+#: mactrack_devices.php
+msgid " - The current snmp read string for the device"
+msgstr " - Поточний рядок читання SNMP (community) для пристрою"
+
+#: mactrack_devices.php
+msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
+msgstr " - Версія SNMP, якою ви бажаєте сканувати цей пристрій. Допустимі значення: 1, 2 та 3"
+
+#: mactrack_devices.php
+msgid " - The UDP port that the snmp agent is running on"
+msgstr " - UDP-порт, на якому працює агент SNMP"
+
+#: mactrack_devices.php
+msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
+msgstr " - Час очікування відповіді SNMP у мілісекундах перед повторною спробою"
+
+#: mactrack_devices.php
+msgid " - The number of times to retry a snmp request before giving up"
+msgstr " - Кількість повторних спроб SNMP-запиту перед припиненням"
+
+#: mactrack_devices.php
+msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
+msgstr " - Вказує кількість OID, які можна отримати за один запит SNMP Get"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP username"
+msgstr " - SNMP V3: ім'я користувача SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP password"
+msgstr " - SNMP V3: пароль SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP authentication protocol"
+msgstr " - SNMP V3: протокол автентифікації SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy passphrase"
+msgstr " - SNMP V3: парольна фраза конфіденційності SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy protocol"
+msgstr " - SNMP V3: протокол конфіденційності SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP context"
+msgstr " - SNMP V3: контекст SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP engine id"
+msgstr " - SNMP V3: ідентифікатор механізму SNMP (engine ID)"
+
+#: mactrack_devices.php
+msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
+msgstr "Отже, якщо ви спробуєте імпортувати дублікати пристроїв, буде оновлено лише вказані вами дані."
+
+#: mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
+msgstr "РЯДОК ЗАГОЛОВКА ОБРОБЛЕНО УСПІШНО: <br>Знайдені стовпці: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "УСПІШНО ВСТАВЛЕНО: Ім'я хоста: SiteID: %s, Назва пристрою: %s, Ім'я хоста %s, Порт SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "ПОМИЛКА ВСТАВЛЕННЯ: SiteID: %s, Назва пристрою: %s, Ім'я хоста %s, Порт SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "ВСТАВЛЕННЯ ПРОПУЩЕНО, ВЖЕ ІСНУЄ: SiteID: %s, Назва пристрою: %s, Ім'я хоста %s, Порт SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "Mactrack Devices [edit: %s]"
+msgstr "Пристрої Mactrack [редагування: %s]"
+
+#: mactrack_devices.php
+msgid "Mactrack Devices [new]"
+msgstr "Пристрої Mactrack [новий]"
+
+#: mactrack_devices.php
+msgid "SNMP Information"
+msgstr "Інформація SNMP"
+
+#: mactrack_devices.php
+msgid "System:"
+msgstr "система:"
+
+#: mactrack_devices.php
+msgid "Uptime:"
+msgstr "Час роботи:"
+
+#: mactrack_devices.php
+msgid "Hostname:"
+msgstr "Ім'я хосту:"
+
+#: mactrack_devices.php
+msgid "ObjectID:"
+msgstr "ObjectID:"
+
+#: mactrack_devices.php
+msgid "Mactrack Device Filters"
+msgstr "Фільтри пристроїв Mactrack"
+
+#: mactrack_devices.php mactrack_view_devices.php setup.php
+msgid "Device Name"
+msgstr "Ім'я пристрою"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Site Name"
+msgstr "Назва сайту"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Status"
+msgstr "Статус"
+
+#: mactrack_devices.php mactrack_view_devices.php mactrack_view_interfaces.php
+#: setup.php
+msgid "Hostname"
+msgstr "Ім'я хоста"
+
+#: mactrack_devices.php
+msgid "Total IPs"
+msgstr "Загальна кількість IP-адрес"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports"
+msgstr "Порти користувачів"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports Up"
+msgstr "Активні порти користувачів"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Trunk Ports"
+msgstr "Транкові порти"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Active Macs"
+msgstr "Активні MAC-адреси"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Last Duration"
+msgstr "Остання тривалість"
+
+#: mactrack_devices.php
+msgid "No Mactrack Devices"
+msgstr "Немає пристроїв MacTrack"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: setup.php
+msgid "None"
+msgstr "Немає"
+
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
+msgid "Error"
+msgstr "Помилка"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "No Cacti Link"
+msgstr "Немає посилання Cacti"
+
+#: mactrack_macauth.php
+msgid "You must select at least one Authorized Mac to delete."
+msgstr "Необхідно вибрати принаймні одну авторизовану MAC-адресу для видалення."
+
+#: mactrack_macauth.php
+msgid "Click 'Continue' to delete the following Authorized Mac's?"
+msgstr "Натисніть 'Продовжити', щоб видалити наведені нижче авторизовані MAC-адреси?"
+
+#: mactrack_macauth.php
+#, php-format
+msgid "Mactrack MacAuth [edit: %s]"
+msgstr "Mactrack MacAuth [редагування: %s]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth [new]"
+msgstr "Mactrack MacAuth [новий]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth Filters"
+msgstr "Фільтри MacAuth у Mactrack"
+
+#: mactrack_macauth.php mactrack_macwatch.php
+msgid "Mac Address"
+msgstr "MAC-адреса"
+
+#: mactrack_macauth.php setup.php
+msgid "Reason"
+msgstr "Причина"
+
+#: mactrack_macauth.php
+msgid "Added/Modified"
+msgstr "Додано/змінено"
+
+#: mactrack_macauth.php
+msgid "By"
+msgstr "За"
+
+#: mactrack_macauth.php
+msgid "Authorized Mac Addresses"
+msgstr "Авторизовані MAC-адреси"
+
+#: mactrack_macauth.php
+msgid "No Authorized Mac Addresses Found"
+msgstr "Авторизованих MAC-адрес не знайдено"
+
+#: mactrack_macauth.php mactrack_vendormacs.php mactrack_view_macs.php
+msgid "MAC's"
+msgstr "MAC-адреси"
+
+#: mactrack_macwatch.php
+msgid "Click 'Continue' to delete the following watched Mac's?"
+msgstr "Натисніть 'Продовжити', щоб видалити наведені нижче відстежувані MAC-адреси?"
+
+#: mactrack_macwatch.php
+#, php-format
+msgid "Mactrack MacWatch [edit: %s]"
+msgstr "Mactrack MacWatch [редагування: %s]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch [new]"
+msgstr "Mactrack MacWatch [новий]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch Filters"
+msgstr "Фільтри MacWatch у Mactrack"
+
+#: mactrack_macwatch.php
+msgid "Watch Name"
+msgstr "Назва спостереження"
+
+#: mactrack_macwatch.php setup.php
+msgid "Ticket Number"
+msgstr "Номер заявки"
+
+#: mactrack_macwatch.php
+msgid "First Seen"
+msgstr "Вперше виявлено"
+
+#: mactrack_macwatch.php
+msgid "Last Seen"
+msgstr "Востаннє виявлено"
+
+#: mactrack_macwatch.php
+msgid "Watches"
+msgstr "Спостереження"
+
+#: mactrack_macwatch.php
+msgid "No Mactrack Watched Macs Found"
+msgstr "Відстежуваних MAC-адрес MacTrack не знайдено"
+
+#: mactrack_sites.php
+msgid "Click 'Continue' to delete the following Site(s)?"
+msgstr "Натисніть 'Продовжити', щоб видалити наведені нижче майданчики?"
+
+#: mactrack_sites.php
+msgid "You must select at least one site."
+msgstr "Необхідно вибрати принаймні один майданчик."
+
+#: mactrack_sites.php
+#, php-format
+msgid "Mactrack Site [edit: %s]"
+msgstr "Майданчик Mactrack [редагування: %s]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site [new]"
+msgstr "Майданчик Mactrack [новий]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site Filters"
+msgstr "Фільтри майданчиків Mactrack"
+
+#: mactrack_sites.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "Total IP's"
+msgstr "Усього IP-адрес"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "MACS Found"
+msgstr "Знайдено MAC-адрес"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Device Errors"
+msgstr "Помилки пристроїв"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "No Mactrack Sites Found"
+msgstr "Сайтів MacTrack не знайдено"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Devices"
+msgstr "Усього пристроїв"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total User Ports"
+msgstr "Усього портів користувачів"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Oper Ports"
+msgstr "Усього робочих портів"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Trunks"
+msgstr "Усього транків"
+
+#: mactrack_snmp.php
+msgid "You must select at least one SNMP Option."
+msgstr "Необхідно вибрати принаймні один параметр SNMP."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to delete the following SNMP Option(s)."
+msgstr "Клацніть 'Продовжити', щоб видалити наступні опції SNMP."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
+msgstr "Натисніть 'Продовжити', щоб дублювати наведені нижче параметри SNMP. За бажанням ви можете змінити формат заголовка для нових параметрів SNMP."
+
+#: mactrack_snmp.php
+msgid "Name Format:"
+msgstr "Формат імені:"
+
+#: mactrack_snmp.php
+msgid "<name> (1)"
+msgstr "<name> (1)"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Options [edit %s]"
+msgstr "Параметри SNMP [редагування %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Options [new]"
+msgstr "Параметри SNMP [новий]"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Option Set [edit: %s]"
+msgstr "Набір параметрів SNMP [редагувати: %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Option Set [new]"
+msgstr "Набір параметрів SNMP [новий]"
+
+#: mactrack_snmp.php setup.php
+msgid "Mactrack SNMP Options"
+msgstr "Параметри SNMP Mactrack"
+
+#: mactrack_snmp.php
+msgid "Item"
+msgstr "Елемент"
+
+#: mactrack_snmp.php setup.php
+msgid "Version"
+msgstr "Версія"
+
+#: mactrack_snmp.php setup.php
+msgid "Community"
+msgstr "Спільнота"
+
+#: mactrack_snmp.php setup.php
+msgid "Port"
+msgstr "Порт"
+
+#: mactrack_snmp.php setup.php
+msgid "Timeout"
+msgstr "Час вийшов"
+
+#: mactrack_snmp.php setup.php
+msgid "Retries"
+msgstr "Повторні спроби"
+
+#: mactrack_snmp.php
+msgid "Max OIDs"
+msgstr "Макс. OID"
+
+#: mactrack_snmp.php mactrack_view_dot1x.php
+msgid "Username"
+msgstr "Ім'я користувача"
+
+#: mactrack_snmp.php
+msgid "Auth Proto"
+msgstr "Протокол автентифікації"
+
+#: mactrack_snmp.php
+msgid "Priv Proto"
+msgstr "Протокол приватності"
+
+#: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Actions"
+msgstr "Дії"
+
+#: mactrack_snmp.php
+msgid "No SNMP Items Found"
+msgstr "Елементів SNMP не знайдено"
+
+#: mactrack_snmp.php
+msgid "Title of SNMP Option Set"
+msgstr "Назва набору параметрів SNMP"
+
+#: mactrack_snmp.php
+msgid "SNMP Settings"
+msgstr "Налаштування SNMP"
+
+#: mactrack_snmp.php
+msgid "No SNMP Option Sets Found"
+msgstr "Немає наборів опцій SNMP"
+
+#: mactrack_snmp.php
+msgid "Options"
+msgstr "Параметри"
+
+#: mactrack_utilities.php
+msgid "Mactrack Database Results"
+msgstr "Результати бази даних Mactrack"
+
+#: mactrack_utilities.php
+msgid "Mactrack Process Status"
+msgstr "Стан процесу Mactrack"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Refresh"
+msgstr "Оновити"
+
+#: mactrack_utilities.php
+msgid "Current Process Status"
+msgstr "Поточний стан процесу"
+
+#: mactrack_utilities.php
+msgid "The Mactrack Poller is:"
+msgstr "Опитувач Mactrack:"
+
+#: mactrack_utilities.php
+msgid "Running Processes:"
+msgstr "Запущені процеси:"
+
+#: mactrack_utilities.php
+msgid "Last Time Poller Started:"
+msgstr "Час останнього запуску опитувача:"
+
+#: mactrack_utilities.php
+msgid "Poller Frequency:"
+msgstr "Частота опитувача:"
+
+#: mactrack_utilities.php
+msgid "Approx. Next Runtime:"
+msgstr "Орієнтовний час наступного запуску:"
+
+#: mactrack_utilities.php
+msgid "Database Maintenance Information"
+msgstr "Інформація про обслуговування бази даних"
+
+#: mactrack_utilities.php
+msgid "Last DB Maintenance Time:"
+msgstr "Час останнього обслуговування БД:"
+
+#: mactrack_utilities.php
+msgid "Next DB Maintenance Time:"
+msgstr "Час наступного обслуговування БД:"
+
+#: mactrack_utilities.php
+msgid "Run Time Details"
+msgstr "Відомості про час виконання"
+
+#: mactrack_utilities.php
+msgid "Last Poller Runtime:"
+msgstr "Тривалість останнього запуску опитувача:"
+
+#: mactrack_utilities.php
+msgid "Last Poller Maintenance Runtime:"
+msgstr "Час виконання останнього обслуговування опитувача:"
+
+#: mactrack_utilities.php
+msgid "Maximum Concurrent Processes:"
+msgstr "Максимум одночасних процесів:"
+
+#: mactrack_utilities.php
+msgid "processes"
+msgstr "процесів"
+
+#: mactrack_utilities.php
+msgid "Maximum Per Device Scan Time:"
+msgstr "Максимальний час сканування на пристрій:"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "minutes"
+msgstr "хвилин"
+
+#: mactrack_utilities.php
+msgid "DNS Configuration Information"
+msgstr "Інформація про конфігурацію DNS"
+
+#: mactrack_utilities.php
+msgid "Reverse DNS Resolution is"
+msgstr "Зворотне перетворення DNS"
+
+#: mactrack_utilities.php
+msgid "Primary DNS Server:"
+msgstr "Основний DNS-сервер:"
+
+#: mactrack_utilities.php
+msgid "Secondary DNS Server:"
+msgstr "Вторинний сервер DNS:"
+
+#: mactrack_utilities.php
+msgid "DNS Resolution Timeout:"
+msgstr "Час очікування розв'язання DNS:"
+
+#: mactrack_utilities.php
+msgid "milliseconds"
+msgstr "мілісекунд"
+
+#: mactrack_utilities.php
+msgid "Running Process Summary"
+msgstr "Зведення запущених процесів"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Not Running"
+msgstr "DNS-резолвер не запущено"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Running"
+msgstr "DNS-резолвер запущено"
+
+#: mactrack_utilities.php
+msgid "Date Started"
+msgstr "Дата запуску"
+
+#: mactrack_utilities.php
+msgid "Completed"
+msgstr "Завершено"
+
+#: mactrack_utilities.php
+msgid "Waiting"
+msgstr "Очікування"
+
+#: mactrack_utilities.php
+msgid "Other"
+msgstr "Інше"
+
+#: mactrack_utilities.php
+msgid "Current Activity"
+msgstr "Поточна активність"
+
+#: mactrack_utilities.php
+msgid "State:"
+msgstr "Стан:"
+
+#: mactrack_utilities.php
+msgid "Since:"
+msgstr "Починаючи з:"
+
+#: mactrack_utilities.php
+msgid "Detail:"
+msgstr "Деталі:"
+
+#: mactrack_utilities.php
+msgid "Last Skipped Poller Run:"
+msgstr "Останній пропущений запуск опитувача:"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance Steps"
+msgstr "Останні кроки обслуговування"
+
+#: mactrack_utilities.php
+msgid "Seconds"
+msgstr "Секунди"
+
+#: mactrack_utilities.php
+msgid "Step"
+msgstr "Крок"
+
+#: mactrack_utilities.php
+msgid "Table Sizes"
+msgstr "Розміри таблиць"
+
+#: mactrack_utilities.php
+msgid "Free"
+msgstr "Вільно"
+
+#: mactrack_utilities.php
+msgid "Index"
+msgstr "Каталог"
+
+#: mactrack_utilities.php
+msgid "Rows (estimate)"
+msgstr "Рядки (оцінка)"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Таблиця"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database runs on another host"
+msgstr "Невідомо: база даних працює на іншому хості"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database data directory cannot be found from this host"
+msgstr "Невідомо: каталог даних бази даних не знайдено з цього хоста"
+
+#: mactrack_utilities.php
+msgid "Database Disk Free:"
+msgstr "Вільне місце диска бази даних:"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the database: %s"
+msgstr "З бази даних видалено таку кількість записів: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s"
+msgstr "З агрегованої таблиці видалено таку кількість записів: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
+msgstr "З агрегованої таблиці видалено таку кількість записів: %s. Буде додано %s записів."
+
+#: mactrack_utilities.php
+msgid "Mactrack Scan Date Rebuild Results"
+msgstr "Результати перебудови дат сканування Mactrack"
+
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr "Помилка перебудови дат сканування. Перевірте журнал Cacti та повторіть спробу."
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Scan dates rebuilt: %d"
+msgstr "Перебудовано дат сканування: %d"
+
+#: mactrack_utilities.php
+msgid "A scan or a port table conversion is running. Try again when it has finished."
+msgstr "Виконується сканування або перетворення таблиці портів. Повторіть спробу після завершення."
+
+#: mactrack_utilities.php setup.php
+msgid "One per Scan"
+msgstr "Один на сканування"
+
+#: mactrack_utilities.php setup.php
+msgid "Hourly"
+msgstr "Щогодини"
+
+#: mactrack_utilities.php setup.php
+msgid "Daily"
+msgstr "Щодня"
+
+#: mactrack_utilities.php setup.php
+msgid "Weekly"
+msgstr "Щотижня"
+
+#: mactrack_utilities.php
+msgid "Not partitioned"
+msgstr "Не секціоновано"
+
+#: mactrack_utilities.php
+msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
+msgstr "Щоденні розділи з ранішої версії MacTrack. Потрібне перетворення."
+
+#: mactrack_utilities.php
+msgid "Partitioned by scan date"
+msgstr "Розділено за датою сканування"
+
+#: mactrack_utilities.php
+msgid "Unrecognized partitions. MacTrack makes no partition changes."
+msgstr "Нерозпізнані розділи. MacTrack не вносить змін до розділів."
+
+#: mactrack_utilities.php
+msgid "Port Table Partitions"
+msgstr "Розділи таблиці портів"
+
+#: mactrack_utilities.php
+msgid "Layout"
+msgstr "Макет"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%d of at most %d"
+msgstr "%d із щонайбільше %d"
+
+#: mactrack_utilities.php
+msgid "Partitions"
+msgstr "Розділи"
+
+#: mactrack_utilities.php
+msgid "Oldest Partition"
+msgstr "Найстаріший розділ"
+
+#: mactrack_utilities.php
+msgid "Newest Partition"
+msgstr "Найновіший розділ"
+
+#: mactrack_utilities.php
+msgid "Partitions Cover Scans Before"
+msgstr "Розділи охоплюють сканування до"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s, coarser than the setting because %d partitions would exceed the limit"
+msgstr "%s — грубше за налаштування, оскільки %d секцій перевищили б обмеження"
+
+#: mactrack_utilities.php setup.php
+msgid "Port and IP Address Partition Size"
+msgstr "Розмір розділу портів та IP-адрес"
+
+#: mactrack_utilities.php
+msgid "Pending Exchange"
+msgstr "Очікує обміну"
+
+#: mactrack_utilities.php
+msgid "Load Path"
+msgstr "Шлях завантаження"
+
+#: mactrack_utilities.php
+msgid "PHP batches"
+msgstr "Пакети PHP"
+
+#: mactrack_utilities.php
+msgid "Last Scan Note"
+msgstr "Примітка останнього сканування"
+
+#: mactrack_utilities.php
+msgid "Rebuild"
+msgstr "Перебудувати"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Running since %s"
+msgstr "Працює з %s"
+
+#: mactrack_utilities.php
+msgid "Last Rebuild"
+msgstr "Остання перебудова"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d rows into %d partitions"
+msgstr "%s: %d рядків у %d секціях"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: failed. %s"
+msgstr "%s: помилка. %s"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance"
+msgstr "Останнє обслуговування"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d partitions dropped, %d created"
+msgstr "%s: видалено секцій: %d, створено: %d"
+
+#: mactrack_utilities.php
+msgid "IP Table Layout"
+msgstr "Макет таблиці IP"
+
+#: mactrack_utilities.php
+msgid "IP Table Partitions"
+msgstr "Розділи таблиці IP"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Layout"
+msgstr "Макет таблиці 802.1x"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Partitions"
+msgstr "Розділи таблиці 802.1x"
+
+#: mactrack_utilities.php
+msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
+msgstr "Перед початком перебудови виберіть щоденне, щотижневе або вимкнене секціонування."
+
+#: mactrack_utilities.php
+msgid "A rebuild is already running. The partition status page shows when it has finished."
+msgstr "Перебудова вже виконується. Сторінка стану розділів покаже, коли її буде завершено."
+
+#: mactrack_utilities.php
+msgid "The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running."
+msgstr "Перебудову надіслано на виконання у фоновому режимі. Перевірте результат у розділі «Стан секцій» (Partition Status); запуск буде відхилено, якщо вже виконується сканування або інша перебудова."
+
+#: mactrack_utilities.php
+msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
+msgstr "Функції сканування MacTrack очищено. Їх буде створено повторно після редагування пристрою або типу пристрою."
+
+#: mactrack_utilities.php
+msgid "Cacti Mactrack System Utilities"
+msgstr "Системні утиліти Cacti MacTrack"
+
+#: mactrack_utilities.php
+msgid "Process Status Information"
+msgstr "Інформація про стан процесу"
+
+#: mactrack_utilities.php setup.php
+msgid "View Mactrack Process Status"
+msgstr "Перегляд стану процесу MacTrack"
+
+#: mactrack_utilities.php
+msgid "This option will let you show and set process information associated with the Mactrack polling process."
+msgstr "Цей параметр дає змогу переглядати та налаштовувати відомості про процес, пов'язані з опитуванням MacTrack."
+
+#: mactrack_utilities.php
+msgid "Database Administration"
+msgstr "Адміністрування бази даних"
+
+#: mactrack_utilities.php
+msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
+msgstr "Видаляє застарілі зв'язки портів, MAC- та IP-адрес із бази даних. Вилучаються лише ті записи, термін дії яких минув відповідно до ваших критеріїв."
+
+#: mactrack_utilities.php
+msgid "Refresh IEEE Vendor MAC/OUI Database"
+msgstr "Оновити базу даних виробників MAC/OUI IEEE"
+
+#: mactrack_utilities.php
+msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
+msgstr "Ця функція завантажить і встановить найновішу базу даних OIU з вебсайту IEEE. Кожна мережева карта (NIC) має MAC-адресу. MAC-адресу можна розділити на дві частини. Перша частина містить MAC виробника, що визначає виробника обладнання. Це допоможе виявляти несанкціоновані пристрої у вашій мережі."
+
+#: mactrack_utilities.php
+msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
+msgstr "Видаляє старі та потенційно застарілі функції сканування MacTrack зі спадного списку, який відображається під час редагування типу пристрою."
+
+#: mactrack_utilities.php
+msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
+msgstr "Видаляє <strong>УСІ</strong> зв'язки портів, MAC- та IP-адрес із бази даних, а також усі IP-адреси, діапазони IP і VLAN. Ця утиліта корисна, коли потрібно почати з нуля. <strong>НЕБЕЗПЕКА: усі попередні дані буде видалено.</strong>"
+
+#: mactrack_utilities.php
+msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
+msgstr "Перебудовує список дат сканування зі збережених результатів відповідності портів, MAC та IP, прочитуючи кожен розділ один раз. Сканування та обслуговування підтримують список в актуальному стані, тому ця дія потрібна лише після видалення результатів поза межами обслуговування, наприклад у разі видалення пристроїв."
+
+#: mactrack_utilities.php
+msgid "View Partition Status"
+msgstr "Перегляд стану розділів"
+
+#: mactrack_utilities.php
+msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
+msgstr "Показує, як секціоновано результати «Порт — MAC — IP», який розмір секції використовується і чому, а також що зробило останнє обслуговування бази даних."
+
+#: mactrack_utilities.php
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
+msgstr "Перебудовує та аналізує лише розділ, що містить останнє спостереження порту, для вивільнення місця після видалення; для тижневого секціонування це поточний тиждень. Несекціоновані таблиці оптимізуються повністю. Планові сканування пропускаються до завершення операції."
+
+#: mactrack_utilities.php
+msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile."
+msgstr "Виберіть щоденні або щотижневі секції, або вимкніть секціонування для таблиць портів (MAC-адрес), IP-адрес і 802.1x. Перебудова копіює всю історію у фоновому режимі; тим часом заплановані сканування пропускаються, а пошук за MAC, IP та 802.1x показує повідомлення про технічне обслуговування."
+
+#: mactrack_utilities.php
+msgid "Aggregated Table Administration"
+msgstr "Адміністрування агрегованої таблиці"
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
+msgstr "Видаляє УСІ <strong>агреговані</strong> (не результати сканування) зв'язки портів, MAC- та IP-адрес із бази даних. Дані знову збиратимуться лише на основі <strong>нових</strong> просканованих даних під час наступного запуску опитувача MacTrack."
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
+msgstr "Видаляє УСІ <strong>агреговані</strong> (не результати сканування) зв'язки портів, MAC- та IP-адрес із бази даних і створює їх заново на основі <strong>усіх просканованих даних</strong> зараз."
+
+#: mactrack_utilities.php
+msgid "Partitioning"
+msgstr "Розбиття на розділи"
+
+#: mactrack_vendormacs.php
+msgid "Mactrack Vendor Mac Filter"
+msgstr "Фільтр MAC виробників Mactrack"
+
+#: mactrack_vendormacs.php
+msgid "Vendor MAC"
+msgstr "MAC виробника"
+
+#: mactrack_vendormacs.php
+msgid "Corporation"
+msgstr "Корпорація"
+
+#: mactrack_vendormacs.php
+msgid "Address"
+msgstr "Адреса"
+
+#: mactrack_vendormacs.php setup.php
+msgid "Vendor Macs"
+msgstr "MAC-адреси виробника"
+
+#: mactrack_vendormacs.php
+msgid "No Mactrack Vendor MACS Found"
+msgstr "MAC-адрес виробників MacTrack не знайдено"
+
+#: mactrack_view_arp.php
+msgid "Mactrack - ARP/IP View"
+msgstr "Mactrack — Перегляд ARP/IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Name"
+msgstr "Назва комутатора"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Hostname"
+msgstr "Ім'я хоста комутатора"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED IP Address"
+msgstr "ED IP-адреса"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED DNS Hostname"
+msgstr "ED DNS-ім'я вузла"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED MAC Address"
+msgstr "ED MAC-адреса"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Vendor Name"
+msgstr "Назва виробника"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Port Number"
+msgstr "Номер порту"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Port Name"
+msgstr "Назва порту"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Last Scan Date"
+msgstr "Дата останнього сканування"
+
+#: mactrack_view_arp.php
+msgid "ARP Cache"
+msgstr "Кеш ARP"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "You must first choose a Site, Device or other search criteria."
+msgstr "Спочатку необхідно вибрати майданчик, пристрій або інші критерії пошуку."
+
+#: mactrack_view_arp.php
+msgid "No Mactrack IP Results Found"
+msgstr "IP-результатів MacTrack не знайдено"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_interfaces.php
+#: mactrack_view_macs.php
+msgid "Device"
+msgstr "Пристрій"
+
+#: mactrack_view_arp.php mactrack_view_ips.php
+msgid "IP's"
+msgstr "IP-адреси"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "IP"
+msgstr "IP адреса"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Show"
+msgstr "Показати"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Most Recent"
+msgstr "Найновіші"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "MAC"
+msgstr "MAC"
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr "MacTrack — Панель керування"
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr "Інвентаризація"
+
+#: mactrack_view_dashboard.php
+msgid "Device status"
+msgstr "Стан пристрою"
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr "Підсумки за адресами та портами"
+
+#: mactrack_view_dashboard.php
+msgid "Collection settings"
+msgstr "Налаштування збору"
+
+#: mactrack_view_dashboard.php
+msgid "Scan runtimes"
+msgstr "Тривалість сканувань"
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr "Розміри таблиць"
+
+#: mactrack_view_dashboard.php
+msgid "MacWatch activity"
+msgstr "Активність MacWatch"
+
+#: mactrack_view_dashboard.php
+msgid "Vendors"
+msgstr "Виробники"
+
+#: mactrack_view_dashboard.php
+msgid "Enabled devices"
+msgstr "Увімкнені пристрої"
+
+#: mactrack_view_dashboard.php
+msgid "Disabled devices"
+msgstr "Вимкнені пристрої"
+
+#: mactrack_view_dashboard.php
+msgid "Device types"
+msgstr "Типи пристроїв"
+
+#: mactrack_view_dashboard.php
+msgid "Interfaces tracked"
+msgstr "Відстежувані інтерфейси"
+
+#: mactrack_view_dashboard.php
+msgid "Active MACs"
+msgstr "Активні MAC-адреси"
+
+#: mactrack_view_dashboard.php
+msgid "IP addresses"
+msgstr "IP-адреси"
+
+#: mactrack_view_dashboard.php
+msgid "Total ports"
+msgstr "Усього портів"
+
+#: mactrack_view_dashboard.php
+msgid "Active ports"
+msgstr "Активні порти"
+
+#: mactrack_view_dashboard.php
+msgid "Trunk ports"
+msgstr "Транкові порти"
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr "Унікальні виробники OUI"
+
+#: mactrack_view_dashboard.php
+msgid "Scanning frequency"
+msgstr "Частота сканування"
+
+#: mactrack_view_dashboard.php
+msgid "Concurrent processes"
+msgstr "Одночасні процеси"
+
+#: mactrack_view_dashboard.php
+msgid "Scanner max runtime"
+msgstr "Максимальний час роботи сканера"
+
+#: mactrack_view_dashboard.php
+msgid "MAC retention"
+msgstr "Термін зберігання MAC"
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr "днів"
+
+#: mactrack_view_dashboard.php
+msgid "IP retention"
+msgstr "Зберігання IP"
+
+#: mactrack_view_dashboard.php
+msgid "Reverse DNS"
+msgstr "Зворотний DNS"
+
+#: mactrack_view_dashboard.php
+msgid "Most recent scan"
+msgstr "Останнє сканування"
+
+#: mactrack_view_dashboard.php
+msgid "Average duration"
+msgstr "Середня тривалість"
+
+#: mactrack_view_dashboard.php
+msgid "Longest duration"
+msgstr "Найбільша тривалість"
+
+#: mactrack_view_dashboard.php
+msgid "Scanned in last hour"
+msgstr "Проскановано за останню годину"
+
+#: mactrack_view_dashboard.php
+msgid "Duration"
+msgstr "Тривалість"
+
+#: mactrack_view_dashboard.php
+msgid "Last scan"
+msgstr "Останнє сканування"
+
+#: mactrack_view_dashboard.php
+msgid "Slowest devices"
+msgstr "Найповільніші пристрої"
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr "Час виконання сканувань ще не зафіксовано."
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr "Рядки"
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr "Розмір"
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr "Статистика таблиці недоступна."
+
+#: mactrack_view_dashboard.php
+msgid "Watched MACs"
+msgstr "Відстежувані MAC-адреси"
+
+#: mactrack_view_dashboard.php
+msgid "Discovered"
+msgstr "Виявлено"
+
+#: mactrack_view_dashboard.php
+msgid "Last match"
+msgstr "Останній збіг"
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr "Записів у базі даних OUI"
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr "Дані про виробника недоступні."
+
+#: mactrack_view_dashboard.php
+msgid "Show more"
+msgstr "Показати більше"
+
+#: mactrack_view_dashboard.php
+msgid "Show less"
+msgstr "Показати менше"
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr "Відкрити в діалоговому вікні"
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr "Видалити зі сторінки"
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr "Перетягніть для зміни порядку картки"
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr "Неприпустимий запит. Спробуйте ще раз."
+
+#: mactrack_view_dashboard.php
+msgid "Unknown card."
+msgstr "Невідома картка."
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr "Додати картку"
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
+msgstr "Додати картку дашборду…"
+
+#: mactrack_view_devices.php
+msgid "Mactrack - Device Report View"
+msgstr "Mactrack — Перегляд звіту пристроїв"
+
+#: mactrack_view_devices.php
+msgid "Unknown Device Type"
+msgstr "Невідомий тип пристрою"
+
+#: mactrack_view_devices.php
+msgid "Total VLAN's"
+msgstr "Усього VLAN"
+
+#: mactrack_view_devices.php
+msgid "Edit Device"
+msgstr "Редагувати пристрій"
+
+#: mactrack_view_devices.php
+msgid "View Graphs"
+msgstr "Переглянути графіки"
+
+#: mactrack_view_devices.php
+msgid "Device Not Mapped to Cacti Device"
+msgstr "Пристрій не зіставлено з пристроєм Cacti"
+
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
+msgid "View MAC Addresses"
+msgstr "Перегляд MAC-адрес"
+
+#: mactrack_view_devices.php
+msgid "No Mactrack Devices Found"
+msgstr "Пристроїв MacTrack не знайдено"
+
+#: mactrack_view_devices.php
+msgid "Device Scan Results"
+msgstr "Результати сканування пристрою"
+
+#: mactrack_view_devices.php
+msgid "Hub/Switch"
+msgstr "Концентратор/Комутатор"
+
+#: mactrack_view_dot1x.php
+msgid "Mactrack - 802.1x View"
+msgstr "Mactrack — Перегляд 802.1x"
+
+#: mactrack_view_dot1x.php
+msgid "Domain"
+msgstr "Домен"
+
+#: mactrack_view_dot1x.php
+msgid "802.1x Sessions"
+msgstr "Сеанси 802.1x"
+
+#: mactrack_view_dot1x.php
+msgid "No Mactrack 802.1x Sessions Found"
+msgstr "Сеансів MacTrack 802.1x не знайдено"
+
+#: mactrack_view_dot1x.php
+msgid "Dot1x Scan Results"
+msgstr "Результати сканування Dot1x"
+
+#: mactrack_view_dot1x.php
+msgid "Sessions"
+msgstr "Сесії"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "All Statuses"
+msgstr "Усі стани"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr "Вибрані статуси"
+
+#: mactrack_view_dot1x.php
+msgid "DATA"
+msgstr "ДАНІ"
+
+#: mactrack_view_dot1x.php
+msgid "VOICE"
+msgstr "ГОЛОС"
+
+#: mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Portname"
+msgstr "Назва порту"
+
+#: mactrack_view_graphs.php
+msgid "Mactrack - Monitored Device Graph View"
+msgstr "Mactrack — Перегляд графіків контрольованих пристроїв"
+
+#: mactrack_view_graphs.php
+msgid "Custom Graph List Applied - Filtering from List"
+msgstr "Застосовано власний список графіків — фільтрація зі списку"
+
+#: mactrack_view_interfaces.php
+msgid "Mactrack - Network Interfaces View"
+msgstr "Mactrack — Перегляд мережевих інтерфейсів"
+
+#: mactrack_view_interfaces.php
+msgid "No Mactrack Interfaces Found"
+msgstr "Інтерфейсів MacTrack не знайдено"
+
+#: mactrack_view_interfaces.php
+msgid "Interface Scan Results"
+msgstr "Результати сканування інтерфейсів"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Name"
+msgstr "Ім'я"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Description"
+msgstr "Опис"
+
+#: mactrack_view_interfaces.php
+msgid "Issues"
+msgstr "Випуски"
+
+#: mactrack_view_interfaces.php
+msgid "Alias"
+msgstr "Псевдонім"
+
+#: mactrack_view_interfaces.php
+msgid "InBound %%%"
+msgstr "Вхідний (%)"
+
+#: mactrack_view_interfaces.php
+msgid "OutBound %%%"
+msgstr "Вихідний %%%"
+
+#: mactrack_view_interfaces.php
+msgid "In (B/S)"
+msgstr "Вхід. (Б/с)"
+
+#: mactrack_view_interfaces.php
+msgid "Out (B/S)"
+msgstr "Вих. (Б/с)"
+
+#: mactrack_view_interfaces.php
+msgid "In Err Total"
+msgstr "Вхід. помилок всього"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc Total"
+msgstr "Вхід. відкинуто всього"
+
+#: mactrack_view_interfaces.php
+msgid "UProto Total"
+msgstr "UProto усього"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err Total"
+msgstr "Усього вих. помилок"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc Total"
+msgstr "Усього відкинуто вих."
+
+#: mactrack_view_interfaces.php
+msgid "In Err (E/S)"
+msgstr "Вхід. помилок (пом./с)"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc (D/S)"
+msgstr "Вхід. відкинуто (відк./с)"
+
+#: mactrack_view_interfaces.php
+msgid "UProto (UP/S)"
+msgstr "UProto (UP/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err (OE/S)"
+msgstr "Вих. пом. (OE/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc (OD/S)"
+msgstr "Вих. відкид. (OD/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Last Change"
+msgstr "Остання зміна"
+
+#: mactrack_view_interfaces.php
+msgid "Last Scanned"
+msgstr "Останнє сканування"
+
+#: mactrack_view_interfaces.php
+msgid "Filters"
+msgstr "Фільтри"
+
+#: mactrack_view_interfaces.php
+msgid "All Interfaces"
+msgstr "Усі інтерфейси"
+
+#: mactrack_view_interfaces.php
+msgid "All Non-Ignored Interfaces"
+msgstr "Усі неігноровані інтерфейси"
+
+#: mactrack_view_interfaces.php
+msgid "All Ignored Interfaces"
+msgstr "Усі ігноровані інтерфейси"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In/Out Utilization > %d &#37;"
+msgstr "Високе завантаження вхідного/вихідного трафіку > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In Utilization > %d &#37;"
+msgstr "Високе завантаження вхідного трафіку > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High Out Utilization > %d &#37;"
+msgstr "Високе завантаження вихідного трафіку > %d &#37;"
+
+#: mactrack_view_interfaces.php
+msgid "With Issues"
+msgstr "З проблемами"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces"
+msgstr "Активні інтерфейси"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces No Alias"
+msgstr "Активні інтерфейси без псевдоніма"
+
+#: mactrack_view_interfaces.php
+msgid "Errors Accumulating"
+msgstr "Накопичення помилок"
+
+#: mactrack_view_interfaces.php
+msgid "Discards Accumulating"
+msgstr "Накопичення відкинутих пакетів"
+
+#: mactrack_view_interfaces.php
+msgid "Changed in Last Day"
+msgstr "Змінено за останню добу"
+
+#: mactrack_view_interfaces.php
+msgid "Bandwidth"
+msgstr "Пропускна здатність"
+
+#: mactrack_view_interfaces.php
+msgid "When checked, the Errors, Discards and Unknown Protocol columns show each interface's cumulative SNMP counter totals instead of the average per-second rate."
+msgstr "Якщо позначено, стовпці помилок, відкинутих пакетів і невідомого протоколу показують сукупні підсумки лічильників SNMP для кожного інтерфейсу замість середньої частоти за секунду."
+
+#: mactrack_view_interfaces.php
+msgid "Show Totals"
+msgstr "Показати підсумки"
+
+#: mactrack_view_ips.php
+msgid "Mactrack - Site IP Range Report View"
+msgstr "Mactrack — Перегляд звіту діапазонів IP майданчиків"
+
+#: mactrack_view_ips.php
+msgid "IP Range"
+msgstr "Діапазон IP"
+
+#: mactrack_view_ips.php
+msgid "Current IP Addresses"
+msgstr "Поточні IP-адреси"
+
+#: mactrack_view_ips.php
+msgid "Current Date"
+msgstr "Поточна дата"
+
+#: mactrack_view_ips.php
+msgid "Maximum IP Addresses"
+msgstr "Максимум IP-адрес"
+
+#: mactrack_view_ips.php
+msgid "Maximum Date"
+msgstr "Максимальна дата"
+
+#: mactrack_view_ips.php
+msgid "IP Address Ranges"
+msgstr "Діапазони IP-адрес"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "Edit Site"
+msgstr "Редагувати майданчик"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "View IP Addresses"
+msgstr "Перегляд IP-адрес"
+
+#: mactrack_view_ips.php
+msgid "No Mactrack Site IP Ranges Found"
+msgstr "Діапазонів IP-адрес сайтів MacTrack не знайдено"
+
+#: mactrack_view_macs.php
+msgid "Mactrack - MAC to IP Report View"
+msgstr "Mactrack — Перегляд звіту відповідності MAC до IP"
+
+#: mactrack_view_macs.php
+msgid "Authorize"
+msgstr "Авторизувати"
+
+#: mactrack_view_macs.php
+msgid "Revoke"
+msgstr "Відкликати"
+
+#: mactrack_view_macs.php
+msgid "None of the selected MAC Addresses were valid, so no action was taken."
+msgstr "Жодна з вибраних MAC-адрес не була дійсною, тому жодних дій не виконано."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
+msgstr "Наступні MAC-адреси не вдалося відкликати, оскільки вони входять до групових авторизацій %s"
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Authorize the following MAC Addresses."
+msgstr "Натисніть 'Продовжити', щоб авторизувати наведені нижче MAC-адреси."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Revoke the following MAC Addresses."
+msgstr "Натисніть 'Продовжити', щоб відкликати наведені нижче MAC-адреси."
+
+#: mactrack_view_macs.php
+msgid "You must select at least one MAC Address."
+msgstr "Необхідно вибрати принаймні одну MAC-адресу."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to change Mac Authorizations."
+msgstr "У вас немає дозволу на зміну авторизацій MAC."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
+msgstr "Пристр.:%s IP.:%s MAC.:%s ПОРТ.:%s К-сть.: [%s]"
+
+#: mactrack_view_macs.php
+msgid "You must select at least one Row."
+msgstr "Необхідно вибрати принаймні один рядок."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to delete rows."
+msgstr "У вас немає дозволу на видалення рядків."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Delete the following rows from Aggregated table."
+msgstr "Натисніть 'Продовжити', щоб видалити наведені нижче рядки з агрегованої таблиці."
+
+#: mactrack_view_macs.php
+msgid "VLAN ID"
+msgstr "VLAN ID"
+
+#: mactrack_view_macs.php
+msgid "VLAN Name"
+msgstr "Назва VLAN"
+
+#: mactrack_view_macs.php
+msgid "You must choose a Site, Device or other search criteria."
+msgstr "Необхідно вибрати майданчик, пристрій або інші критерії пошуку."
+
+#: mactrack_view_macs.php
+msgid "No Mactrack Port Results Found"
+msgstr "Результатів портів MacTrack не знайдено"
+
+#: mactrack_view_macs.php
+msgid "Count"
+msgstr "Кількість"
+
+#: mactrack_view_macs.php
+msgid "Aggregated"
+msgstr "Агреговано"
+
+#: mactrack_view_sites.php
+msgid "Mactrack - Site Report View"
+msgstr "Mactrack — Перегляд звіту майданчиків"
+
+#: mactrack_view_sites.php
+msgid "Rescan Site"
+msgstr "Повторно сканувати майданчик"
+
+#: mactrack_view_sites.php
+msgid "View Devices"
+msgstr "Перегляд пристроїв"
+
+#: mactrack_view_sites.php
+msgid "View IP Ranges"
+msgstr "Перегляд IP-діапазонів"
+
+#: mactrack_view_sites.php
+msgid "Sites / Device Types"
+msgstr "Майданчики / Типи пристроїв"
+
+#: mactrack_view_sites.php
+msgid "Site Scan Results"
+msgstr "Результати сканування майданчика"
+
+#: setup.php
+msgid "MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes."
+msgstr "MacTrack виконує оновлення бази даних у фоновому режимі. На великих інсталяціях це може тривати до години, а до завершення процесу деякі дані MacTrack можуть бути неповними."
+
+#: setup.php
+#, php-format
+msgid "MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s"
+msgstr "MacTrack не вдалося запустити оновлення бази даних у фоновому режимі; причину див. у журналі Cacti. Запустіть його вручну з командного рядка: %s"
+
+#: setup.php
+msgid "Mactrack"
+msgstr "Mactrack"
+
+#: setup.php
+msgid "General Settings"
+msgstr "Загальні налаштування"
+
+#: setup.php
+msgid "Scanning Frequency"
+msgstr "Частота сканування"
+
+#: setup.php
+msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
+msgstr "Виберіть, коли збирати MAC- та IP-адреси, а також статистику інтерфейсів із ваших мережевих пристроїв."
+
+#: setup.php
+msgid "Concurrent Processes"
+msgstr "Паралельні процеси"
+
+#: setup.php
+msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
+msgstr "Укажіть, скільки пристроїв буде опитуватися одночасно, доки не буде опитано всі пристрої."
+
+#: setup.php
+msgid "Scanner Max Runtime"
+msgstr "Максимальний час роботи сканера"
+
+#: setup.php
+msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
+msgstr "Укажіть кількість хвилин, протягом яких функції сканування пристрою дозволено працювати, перш ніж система вважатиме її завершеною. Це налаштування виправляє аварійно завершені завдання сканування."
+
+#: setup.php
+msgid "Start Time for Data Collection"
+msgstr "Час початку збору даних"
+
+#: setup.php
+msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
+msgstr "Коли ви хочете, щоб відбувся перший збір даних. Усі наступні часи збору даних базуватимуться на цьому початковому часі. Гарним прикладом є 12:00AM."
+
+#: setup.php
+msgid "Database Maintenance Time"
+msgstr "Час обслуговування бази даних"
+
+#: setup.php
+msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
+msgstr "Коли слід видаляти старі записи з бази даних. Зверніть увагу, що під час виконання цієї дії доступ до бази даних портів буде заборонено."
+
+#: setup.php
+msgid "Confirm Utilities Prompt"
+msgstr "Запит підтвердження утиліт"
+
+#: setup.php
+msgid "When using utilities, prompt for verification"
+msgstr "Під час використання утиліт запитувати підтвердження"
+
+#: setup.php
+msgid "Data Retention"
+msgstr "Зберігання даних"
+
+#: setup.php
+msgid "How long should port MAC details be retained in the database."
+msgstr "Як довго слід зберігати відомості про MAC-адреси портів у базі даних."
+
+#: setup.php
+msgid "Data Retention IPs"
+msgstr "Зберігання даних IP-адрес"
+
+#: setup.php
+msgid "How long should discovered IPs details be retained in the database."
+msgstr "Як довго слід зберігати відомості про виявлені IP-адреси в базі даних."
+
+#: setup.php
+msgid "Size of the partitions of the port, IP and 802.1x tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
+msgstr "Розмір секцій таблиць портів, IP та 802.1x або «Вимкнено» для несекціонованих таблиць. Зміна впливає лише на нові секції; щоб перебудувати наявну історію відповідно до цього налаштування, скористайтеся пунктом «Налаштувати секціонування портів та IP-адрес» в утилітах MacTrack або запустіть cli/upgrade_partitioning.php."
+
+#: setup.php
+msgid "Switch Level Ignore Ports Delimiter"
+msgstr "Роздільник ігнорованих портів на рівні комутатора"
+
+#: setup.php
+msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
+msgstr "Який роздільник має використовувати MacTrack під час розбору рядка ігнорованих портів для кожного комутатора."
+
+#: setup.php
+msgid "Auto Detect"
+msgstr "Автовизначення"
+
+#: setup.php
+msgid "Colon [:]"
+msgstr "Двокрапка [:]"
+
+#: setup.php
+msgid "Pipe [|]"
+msgstr "Вертикальна риска [|]"
+
+#: setup.php
+msgid "Space [ ]"
+msgstr "Пробіл [ ]"
+
+#: setup.php
+msgid "Mac Address Output Format"
+msgstr "Формат виведення MAC-адрес"
+
+#: setup.php
+msgid "Format used for display."
+msgstr "Формат, що використовується для відображення."
+
+#: setup.php
+msgid "Ports to Ignore"
+msgstr "Порти для ігнорування"
+
+#: setup.php
+msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
+msgstr "Укажіть регулярний вираз для ifNames або ifDescriptions портів, які слід ігнорувати у списку інтерфейсів. Наприклад, (Vlan|Loopback|Null)."
+
+#: setup.php
+msgid "Ports to Ignore While Scanning (Regular Expression)"
+msgstr "Порти для ігнорування під час сканування (регулярний вираз)"
+
+#: setup.php
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
+msgstr "Необов'язково. Регулярний вираз, що зіставляється без урахування регістру з назвою порту та псевдонімом порту кожного просканованого порту. MAC-адреси, виявлені на відповідному порту, не збираються, що запобігає потраплянню магістральних (uplink/trunk) портів до бази даних. Наприклад, (uplink|trunk). Щоб задати кілька виразів, укажіть кожен в окремому рядку. Залиште порожнім, щоб збирати дані з усіх портів. Майданчики та пристрої можуть додавати власні вирази. На відміну від параметра «Порти для ігнорування» вище, це стосується лише збирання MAC-адрес, а не списку інтерфейсів, і впливає тільки на нові сканування."
+
+#: setup.php
+msgid "Bandwidth Usage Threshold"
+msgstr "Поріг використання пропускної здатності"
+
+#: setup.php
+msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
+msgstr "Який поріг пропускної здатності ви хочете переглядати за замовчуванням під час перегляду статистики мережевих інтерфейсів."
+
+#: setup.php
+#, php-format
+msgid "%d Percent"
+msgstr "%d відсотків"
+
+#: setup.php
+msgid "DNS Settings"
+msgstr "Налаштування DNS"
+
+#: setup.php
+msgid "Perform Reverse DNS Name Resolution"
+msgstr "Виконувати зворотне перетворення імен DNS"
+
+#: setup.php
+msgid "Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
+msgstr "Чи повинен Mactrack виконувати зворотний DNS-пошук IP-адрес, пов'язаних із портами. УВАГА: якщо DNS налаштовано неправильно, це значно сповільнить сканування."
+
+#: setup.php
+msgid "Primary DNS IP Address"
+msgstr "Основна IP-адреса DNS"
+
+#: setup.php
+msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
+msgstr "Введіть основну IP-адресу DNS для зворотного пошуку."
+
+#: setup.php
+msgid "Secondary DNS IP Address"
+msgstr "Вторинна IP-адреса DNS"
+
+#: setup.php
+msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
+msgstr "Введіть вторинну IP-адресу DNS, щоб використовувати її для зворотного пошуку."
+
+#: setup.php
+msgid "DNS Timeout"
+msgstr "Час очікування DNS"
+
+#: setup.php
+msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
+msgstr "Будь ласка, введіть час очікування DNS у мілісекундах. MacTrack використовує DNS-резолвер на базі PHP."
+
+#: setup.php
+msgid "DNS Prime Interval"
+msgstr "Інтервал попереднього заповнення DNS"
+
+#: setup.php
+msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
+msgstr "Як часто (у секундах) під час сканування MacTrack потрібно визначати IP-адреси за MAC-адресами для розпізнавання DNS. Використання більшого значення при наявності кількох тисяч пристроїв підвищить продуктивність."
+
+#: setup.php
+msgid "Notification Settings"
+msgstr "Настройки сповіщення"
+
+#: setup.php
+msgid "Source Address"
+msgstr "Адреса джерела"
+
+#: setup.php
+msgid "The source Email address for Mactrack Emails."
+msgstr "Адреса електронної пошти відправника для листів MacTrack."
+
+#: setup.php
+msgid "Source Email Name"
+msgstr "Ім'я відправника електронної пошти"
+
+#: setup.php
+msgid "The Source Email name for Mactrack Emails."
+msgstr "Ім'я відправника електронних листів для Mactrack."
+
+#: setup.php
+msgid "MACTrack Administrator"
+msgstr "Адміністратор MACTrack"
+
+#: setup.php
+msgid "MacWatch Default Body"
+msgstr "Типовий текст сповіщення MacWatch"
+
+#: setup.php
+msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+msgstr "Шаблон тіла листа для сповіщень Mactrack MacWatch. Тіло листа може містити будь-які коректні HTML-теги. Також підтримуються теги підстановки, які обробляються під час надсилання листа. Допустимі теги: <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+
+#: setup.php
+msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
+msgstr "MAC-адресу <MAC> знайдено за IP-адресою <IP> для заявки №: <TICKET>.<br>Пристрій розташовано на<br>майданчику: <SITENAME>, пристрій <DEVICENAME>, IP <DEVICEIP>, порт <PORTNUMBER>, назва порту <PORTNAME>"
+
+#: setup.php
+msgid "MacAuth Report Email Addresses"
+msgstr "Електронні адреси для звітів MacAuth"
+
+#: setup.php
+msgid "A comma delimited list of users to receive the MacAuth Email notifications."
+msgstr "Список користувачів через кому, які отримуватимуть сповіщення MacAuth електронною поштою."
+
+#: setup.php
+msgid "MacAuth Report Frequency"
+msgstr "Періодичність звітів MacAuth"
+
+#: setup.php
+msgid "How often will the MacAuth Reports be Emailed."
+msgstr "Як часто надсилатимуться звіти MacAuth електронною поштою."
+
+#: setup.php
+msgid "Mactrack ArpWatch Settings"
+msgstr "Налаштування Mactrack ArpWatch"
+
+#: setup.php
+msgid "Enable ArpWatch"
+msgstr "Увімкнути ArpWatch"
+
+#: setup.php
+msgid "Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
+msgstr "Чи повинен Mactrack також використовувати дані ArpWatch для доповнення розпізнавання MAC в IP/DNS?"
+
+#: setup.php
+msgid "ArpWatch Database Path"
+msgstr "Шлях до бази даних ArpWatch"
+
+#: setup.php
+msgid "The location of the ArpWatch Database file on the Cacti server."
+msgstr "Розташування файлу бази даних ArpWatch на сервері Cacti."
+
+#: setup.php
+msgid "SNMP Presets"
+msgstr "Попередні налаштування SNMP"
+
+#: setup.php
+msgid "Update Policy for SNMP Options"
+msgstr "Політика оновлення параметрів SNMP"
+
+#: setup.php
+msgid "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices."
+msgstr "Політика синхронізації параметрів SNMP між пристроями Cacti та пристроями MacTrack."
+
+#: setup.php
+msgid "Default SNMP version for all new hosts."
+msgstr "Типова версія SNMP для всіх нових вузлів."
+
+#: setup.php
+msgid "Default SNMP read community for all new hosts."
+msgstr "Типове SNMP-співтовариство для читання (read community) для всіх нових вузлів."
+
+#: setup.php
+msgid "Communities"
+msgstr "Спільноти"
+
+#: setup.php
+msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
+msgstr "Заповніть список доступних рядків читання SNMP для перевірки цього пристрою. Кожен рядок читання має бути розділений двокрапкою ':'. Ці рядки перевірятимуться послідовно, якщо основний рядок читання недійсний."
+
+#: setup.php
+msgid "The UDP/TCP Port to poll the SNMP agent on."
+msgstr "Порт UDP/TCP для опитування SNMP-агента."
+
+#: setup.php
+msgid "Default SNMP timeout in milli-seconds."
+msgstr "Типовий тайм-аут SNMP у мілісекундах."
+
+#: setup.php
+msgid "The number times the SNMP poller will attempt to reach the host before failing."
+msgstr "Кількість спроб, які опитувач SNMP зробить для підключення до вузла перед фіксацією помилки."
+
+#: setup.php
+msgid "snmpbulkwalk Binary Path"
+msgstr "Шлях до snmpbulkwalk"
+
+#: setup.php
+msgid "The path to your snmpbulkwalk binary."
+msgstr "Шлях до вашого двійкового файлу snmpbulkwalk."
+
+#: setup.php
+msgid "MacTrack Settings"
+msgstr "Налаштування MacTrack"
+
+#: setup.php
+msgid "Default Tab"
+msgstr "Типова вкладка"
+
+#: setup.php
+msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
+msgstr "Яку вкладку MacTrack ви хочете зробити вкладкою за замовчуванням щоразу, коли переходите до розділу MacTrack."
+
+#: setup.php
+msgid "Mac Addresses"
+msgstr "MAC-адреси"
+
+#: setup.php
+msgid "dot1x Deta"
+msgstr "Деталі dot1x"
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Налаштування інтернет-проксі"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Адреса інтернет-проксі"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Для основних сервісів Cacti або плагінів, що потребують доступу до Інтернету, введіть тут проксі-сервер і порт у такому форматі IP:ПОРТ. Наприклад, 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Користувач інтернет-проксі-сервера"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "Якщо ваш інтернет-проксі вимагає ім'я користувача, введіть його тут."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Пароль проксі-сервера в Інтернеті"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "Якщо ваш інтернет-проксі вимагає пароля, введіть його тут."
+
+#: setup.php
+msgid "Mactrack Dashboard"
+msgstr "Панель керування Mactrack"
+
+#: setup.php
+msgid "Mactrack Devices"
+msgstr "Пристрої Mactrack"
+
+#: setup.php
+msgid "(Edit)"
+msgstr "(Редагувати)"
+
+#: setup.php
+msgid "(Import)"
+msgstr "(Імпорт)"
+
+#: setup.php
+msgid "Mactrack Device Types"
+msgstr "Типи пристроїв Mactrack"
+
+#: setup.php
+msgid "Mactrack Sites"
+msgstr "Майданчики Mactrack"
+
+#: setup.php
+msgid "Mac Address Tracking Utility"
+msgstr "Утиліта відстеження MAC-адрес"
+
+#: setup.php
+msgid "Mac Address Authorization Utility"
+msgstr "Утиліта авторизації MAC-адрес"
+
+#: setup.php
+msgid "Mactrack Vendor Macs"
+msgstr "MAC-адреси виробників Mactrack"
+
+#: setup.php
+msgid "Mactrack View Macs"
+msgstr "MacTrack: перегляд MAC-адрес"
+
+#: setup.php
+msgid "Mactrack Dot1x View"
+msgstr "Перегляд Dot1x у Mactrack"
+
+#: setup.php
+msgid "Mactrack IP Address Viewer"
+msgstr "Переглядач IP-адрес Mactrack"
+
+#: setup.php
+msgid "Mactrack View Interfaces"
+msgstr "MacTrack: перегляд інтерфейсів"
+
+#: setup.php
+msgid "Mactrack View Sites"
+msgstr "MacTrack: перегляд майданчиків"
+
+#: setup.php
+msgid "Mactrack View IP Ranges"
+msgstr "MacTrack: перегляд IP-діапазонів"
+
+#: setup.php
+msgid "Mactrack View Devices"
+msgstr "Перегляд пристроїв Mactrack"
+
+#: setup.php
+msgid "Mactrack Utilities"
+msgstr "Утиліти Mactrack"
+
+#: setup.php
+msgid "Truncate Port Results Table"
+msgstr "Очистити таблицю результатів портів"
+
+#: setup.php
+msgid "Truncate Aggregated Port Results Table"
+msgstr "Очистити таблицю агрегованих результатів портів"
+
+#: setup.php
+msgid "Truncate and Re-create Aggregated Port Results Table"
+msgstr "Очистити та перестворити таблицю агрегованих результатів портів"
+
+#: setup.php
+msgid "Refresh/Update Vendor MAC Database from IEEE"
+msgstr "Оновити базу даних MAC виробників з IEEE"
+
+#: setup.php
+msgid "Mactrack Graph Viewer"
+msgstr "Переглядач графіків Mactrack"
+
+#: setup.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "%d секунд"
+
+#: setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d Хвилина"
+
+#: setup.php
+msgid "Matches"
+msgstr "Співпадає"
+
+#: setup.php
+msgid "Contains"
+msgstr "Містить"
+
+#: setup.php
+msgid "Begins With"
+msgstr "Починається з"
+
+#: setup.php
+msgid "Does Not Contain"
+msgstr "Не містить"
+
+#: setup.php
+msgid "Does Not Begin With"
+msgstr "Не починається з"
+
+#: setup.php
+msgid "Is Null"
+msgstr "Є NULL"
+
+#: setup.php
+msgid "Is Not Null"
+msgstr "Не є NULL"
+
+#: setup.php
+msgid "Half"
+msgstr "Напівдуплекс"
+
+#: setup.php
+msgid "Full"
+msgstr "Повний"
+
+#: setup.php
+msgid "Sync Cacti Device to Mactrack Device"
+msgstr "Синхронізувати пристрій Cacti з пристроєм MacTrack"
+
+#: setup.php
+msgid "Sync Mactrack Device to Cacti Device"
+msgstr "Синхронізувати пристрій MacTrack з пристроєм Cacti"
+
+#: setup.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Кожні %d хвилин"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hour"
+msgstr "Кожні %d год"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Кожні %d годин"
+
+#: setup.php
+msgid "Every Day"
+msgstr "Кожен день"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "%d Місяць"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "%d Місяців"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "%d Рік"
+
+#: setup.php
+msgid "On Scan Completion"
+msgstr "Після завершення сканування"
+
+#: setup.php
+#, php-format
+msgid "Every %d Days"
+msgstr "Кожні %d днів"
+
+#: setup.php
+msgid "Every Week"
+msgstr "Кожний тиждень"
+
+#: setup.php
+msgid "Management"
+msgstr "Управління"
+
+#: setup.php
+msgid "SNMP Options"
+msgstr "Параметри SNMP"
+
+#: setup.php
+msgid "Mac Watch"
+msgstr "Спостереження за MAC"
+
+#: setup.php
+msgid "Mactrack Tools"
+msgstr "Інструменти Mactrack"
+
+#: setup.php
+msgid "Mac Authorizations"
+msgstr "Авторизації MAC"
+
+#: setup.php
+msgid "Tracking Utilities"
+msgstr "Утиліти відстеження"
+
+#: setup.php
+msgid "Ports to Ignore (Regular Expression)"
+msgstr "Порти для ігнорування (регулярний вираз)"
+
+#: setup.php
+#, php-format
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions."
+msgstr "Необов'язково. Регулярний вираз, що зіставляється без урахування регістру з назвою порту та псевдонімом порту %s. MAC-адреси, виявлені на відповідному порту, не збираються. Наприклад, '(uplink|trunk)' ігнорує кожен порт, назва або псевдонім якого містить uplink або trunk. Щоб задати кілька виразів, укажіть кожен в окремому рядку. Застосовується на додачу до виразів %s."
+
+#: setup.php
+msgid "every device in this site"
+msgstr "кожен пристрій на цьому майданчику"
+
+#: setup.php
+msgid "this device"
+msgstr "цей пристрій"
+
+#: setup.php
+msgid "device and global"
+msgstr "пристрою та глобально"
+
+#: setup.php
+msgid "site and global"
+msgstr "сайт і глобально"
+
+#: setup.php
+msgid "Device Scanning Function Options"
+msgstr "Параметри функції сканування пристрою"
+
+#: setup.php
+msgid "Give this device type a meaningful description."
+msgstr "Задайте змістовний опис для цього типу пристрою."
+
+#: setup.php
+msgid "Fill in the name for the vendor of this device type."
+msgstr "Вкажіть назву виробника цього типу пристроїв."
+
+#: setup.php
+msgid "Choose the type of device."
+msgstr "Виберіть тип пристрою."
+
+#: setup.php
+msgid "System Description Match"
+msgstr "Відповідність опису системи"
+
+#: setup.php
+msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
+msgstr "Укажіть ключову інформацію, яка допоможе Mactrack визначити тип пристрою. Символом підстановки є знак '&#42;'."
+
+#: setup.php
+msgid "Vendor SNMP Object ID Match"
+msgstr "Збіг ідентифікатора об'єкта SNMP виробника"
+
+#: setup.php
+msgid "MAC Address Scanning Function"
+msgstr "Функція сканування MAC-адрес"
+
+#: setup.php
+msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
+msgstr "Функція сканування MacTrack, що викликається для отримання та збереження відомостей про порти. Потрібно вказати лише назву функції. Наведені чотири параметри маються на увазі й завжди додаватимуться автоматично: 'my_function($site, &$device, $lowport, $highport)'. Для звичайного маршрутизатора функція не потрібна."
+
+#: setup.php
+msgid "IP Address Scanning Function"
+msgstr "Функція сканування IP-адрес"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
+msgstr "Функція сканування MacTrack для пристроїв рівня 3 (Layer 3), які відстежують IP-адреси."
+
+#: setup.php
+msgid "802.1x Scanning Function"
+msgstr "Функція сканування 802.1x"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Switches with dot1x enabled."
+msgstr "Функція сканування MacTrack для комутаторів з увімкненим dot1x."
+
+#: setup.php
+msgid "Serial Number Base OID"
+msgstr "Базовий OID серійного номера"
+
+#: setup.php
+msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
+msgstr "SNMP OID, що використовується для отримання серійного номера пристроїв цього типу для збереження в таблиці інформації про активи Mactrack."
+
+#: setup.php
+msgid "Serial Number Collection Method"
+msgstr "Метод збору серійного номера"
+
+#: setup.php
+msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
+msgstr "Як збирається серійний номер для цього OID. Якщо «SNMP Walk», передбачається декілька серійних номерів. Якщо «Get», буде лише один."
+
+#: setup.php
+msgid "SNMP Get"
+msgstr "Отримати SNMP"
+
+#: setup.php
+msgid "SNMP Walk"
+msgstr "SNMP Walk"
+
+#: setup.php
+msgid "Low User Port Number"
+msgstr "Нижній номер порту користувача"
+
+#: setup.php
+msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
+msgstr "Укажіть початковий номер користувацького порту на цьому комутаторі. Залиште 0, щоб система визначила його автоматично."
+
+#: setup.php
+msgid "High User Port Number"
+msgstr "Верхній номер порту користувача"
+
+#: setup.php
+msgid "Disabled device type is not used."
+msgstr "Вимкнений тип пристрою не використовується."
+
+#: setup.php
+msgid "Fill in the name of this SNMP option set."
+msgstr "Вкажіть назву цього набору параметрів SNMP."
+
+#: setup.php
+msgid "SNMP Version"
+msgstr "Версія SNMP"
+
+#: setup.php
+msgid "Choose the SNMP version for this host."
+msgstr "Виберіть версію SNMP для цього хосту."
+
+#: setup.php
+msgid "SNMP Community String"
+msgstr "Рядок спільноти SNMP"
+
+#: setup.php
+msgid "Fill in the SNMP read community for this device."
+msgstr "Заповніть спільноту читання SNMP для цього пристрою."
+
+#: setup.php
+msgid "SNMP Port"
+msgstr "Порт SNMP"
+
+#: setup.php
+msgid "SNMP Timeout"
+msgstr "Час очікування SNMP"
+
+#: setup.php
+msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
+msgstr "Максимальна кількість мілісекунд, протягом якої Cacti чекатиме відповіді SNMP (не працює з підтримкою php-snmp)."
+
+#: setup.php
+msgid "SNMP Retries"
+msgstr "Повторні спроби SNMP"
+
+#: setup.php
+msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
+msgstr "Максимальна кількість спроб зв’язатися з пристроєм через рядок читання SNMP до відмови."
+
+#: setup.php
+msgid "Maximum OID's Per Get Request"
+msgstr "Максимум OID на запит Get"
+
+#: setup.php
+msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
+msgstr "Визначає кількість OID, які можна отримати в одному запиті SNMP Get."
+
+#: setup.php
+msgid "SNMP Username (v3)"
+msgstr "Ім'я користувача SNMP (v3)"
+
+#: setup.php
+msgid "SNMP v3 username for this device."
+msgstr "Ім’я користувача SNMP v3 для цього пристрою."
+
+#: setup.php
+msgid "SNMP Password (v3)"
+msgstr "Пароль SNMP (v3)"
+
+#: setup.php
+msgid "SNMP v3 password for this device."
+msgstr "Пароль SNMP v3 для цього пристрою."
+
+#: setup.php
+msgid "SNMP Auth Protocol (v3)"
+msgstr "Протокол автентифікації SNMP (версія 3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Authorization Protocol."
+msgstr "Виберіть протокол авторизації SNMPv3."
+
+#: setup.php
+msgid "SNMP Privacy Passphrase (v3)"
+msgstr "Пароль конфіденційності SNMP (версія 3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Passphrase."
+msgstr "Виберіть парольну фразу конфіденційності SNMPv3."
+
+#: setup.php
+msgid "SNMP Privacy Protocol (v3)"
+msgstr "Протокол конфіденційності SNMP (версія 3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Protocol."
+msgstr "Виберіть протокол конфіденційності SNMPv3."
+
+#: setup.php
+msgid "SNMP Context (v3)"
+msgstr "Контекст SNMP (версія 3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Context to use for this device."
+msgstr "Введіть контекст SNMP v3 для цього пристрою."
+
+#: setup.php
+msgid "SNMP Engine ID (v3)"
+msgstr "Ідентифікатор механізму SNMP (версія 3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Engine ID to use for this device."
+msgstr "Введіть ідентифікатор двигуна (Engine ID) SNMP v3 для цього пристрою."
+
+#: setup.php
+msgid "General Device Settings"
+msgstr "Загальні налаштування пристрою"
+
+#: setup.php
+msgid "Give this device a meaningful name."
+msgstr "Задайте змістовну назву для цього пристрою."
+
+#: setup.php
+msgid "Fill in the fully qualified hostname for this device."
+msgstr "Вкажіть повне доменне ім'я хоста для цього пристрою."
+
+#: setup.php
+msgid "Related Cacti Host"
+msgstr "Пов'язаний хост Cacti"
+
+#: setup.php
+msgid "Given Mactrack Host is connected to this Cacti Host."
+msgstr "Вказаний вузол MacTrack підключено до цього вузла Cacti."
+
+#: setup.php
+msgid "Scan Type"
+msgstr "Тип сканування"
+
+#: setup.php
+msgid "Choose the scan type you wish to perform on this device."
+msgstr "Виберіть тип сканування, який потрібно виконати для цього пристрою."
+
+#: setup.php
+msgid "Choose the site to associate with this device."
+msgstr "Виберіть майданчик, який потрібно пов'язати з цим пристроєм."
+
+#: setup.php
+msgid "Device Notes"
+msgstr "Примітки пристрою"
+
+#: setup.php
+msgid "This field value is useful to save general information about a specific device."
+msgstr "Значення цього поля корисне для збереження загальної інформації про конкретний пристрій."
+
+#: setup.php
+msgid "Disable Device"
+msgstr "Вимкнути пристрій"
+
+#: setup.php
+msgid "Check this box to disable all checks for this host."
+msgstr "Поставте цей прапорець, щоб вимкнути всі перевірки для цього хоста."
+
+#: setup.php
+msgid "Switch/Hub, Switch/Router Settings"
+msgstr "Налаштування комутатора/концентратора, комутатора/маршрутизатора"
+
+#: setup.php
+msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
+msgstr "Укажіть список портів певного комутатора/концентратора, результати MAC-адрес яких слід ігнорувати. Прикладом є порти на кшталт магістральних (link/trunk), які неможливо відрізнити від інших користувацьких портів. Кожен номер порту має бути розділений двокрапкою, вертикальною рискою або пробілом ':', '|', ' '. Наприклад, 'Fa0/1: Fa1/23' або 'Fa0/1 Fa1/23' буде прийнятним для деяких типів комутаторів різних виробників."
+
+#: setup.php
+msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
+msgstr "Ви можете використовувати конкретні параметри SNMP або вибрати набір SNMP. У другому випадку mactrack намагатиметься знайти правильні параметри з набору SNMP"
+
+#: setup.php
+msgid "Read Strings"
+msgstr "Рядки читання"
+
+#: setup.php
+msgid "<strong>DEPRECATED:</strong> SNMP community strings"
+msgstr "<strong>ЗАСТАРІЛО:</strong> рядки спільноти SNMP"
+
+#: setup.php
+msgid "Specific SNMP Settings"
+msgstr "Окремі налаштування SNMP"
+
+#: setup.php
+msgid "Connectivity Options"
+msgstr "Параметри підключення"
+
+#: setup.php
+msgid "Terminal Type"
+msgstr "Тип термінала"
+
+#: setup.php
+msgid "Choose the terminal type that you use to connect to this device."
+msgstr "Виберіть тип термінала, який використовується для підключення до цього пристрою."
+
+#: setup.php
+msgid "Telnet"
+msgstr "Telnet"
+
+#: setup.php
+msgid "SSH"
+msgstr "SSH"
+
+#: setup.php
+msgid "HTTP"
+msgstr "HTTP"
+
+#: setup.php
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: setup.php
+msgid "User Name"
+msgstr "Ім'я користувача"
+
+#: setup.php
+msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
+msgstr "Ім'я користувача для вашого власного методу автентифікації. Приклади: SSH, RSH, HTML тощо."
+
+#: setup.php
+msgid "Password"
+msgstr "Пароль"
+
+#: setup.php
+msgid "The password to be used for your custom authentication."
+msgstr "Пароль, який використовуватиметься для вашої спеціальної автентифікації."
+
+#: setup.php
+msgid "Private Key Path"
+msgstr "Шлях до приватного ключа"
+
+#: setup.php
+msgid "The path to the private key used for SSH authentication."
+msgstr "Шлях до закритого ключа, що використовується для автентифікації SSH."
+
+#: setup.php
+msgid "Sequence"
+msgstr "Послідовність"
+
+#: setup.php
+msgid "Sequence of Item."
+msgstr "Послідовність пункту."
+
+#: setup.php
+msgid "General Site Settings"
+msgstr "Загальні налаштування майданчика"
+
+#: setup.php
+msgid "Please enter a reasonable name for this site."
+msgstr "Будь ласка, введіть зрозумілу назву для цього майданчика."
+
+#: setup.php
+msgid "Primary Customer Contact"
+msgstr "Основний контакт клієнта"
+
+#: setup.php
+msgid "The principal customer contact name and number for this site."
+msgstr "Ім'я та номер телефону основної контактної особи клієнта для цього майданчика."
+
+#: setup.php
+msgid "NetOps Contact"
+msgstr "Контакт NetOps"
+
+#: setup.php
+msgid "Please principal network support contact name and number for this site."
+msgstr "Будь ласка, вкажіть ім'я та номер телефону основної контактної особи підтримки мережі для цього майданчика."
+
+#: setup.php
+msgid "Facilities Contact"
+msgstr "Контакт об'єкта"
+
+#: setup.php
+msgid "Please principal facilities/security contact name and number for this site."
+msgstr "Будь ласка, вкажіть ім'я та номер телефону основної контактної особи з питань обслуговування приміщень/безпеки для цього майданчика."
+
+#: setup.php
+msgid "Site Information"
+msgstr "Інформація про сайт"
+
+#: setup.php
+msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
+msgstr "Укажіть будь-яку специфічну для майданчика інформацію у довільній формі, яка допоможе краще керувати цим розташуванням."
+
+#: setup.php
+msgid "General Mac Address Tracking Settings"
+msgstr "Загальні налаштування відстеження MAC-адрес"
+
+#: setup.php
+msgid "MAC Address"
+msgstr "MAC-адреса"
+
+#: setup.php
+msgid "Please enter the MAC Address to be watched for."
+msgstr "Будь ласка, введіть MAC-адресу для відстеження."
+
+#: setup.php
+msgid "MAC Tracking Name/Email Subject"
+msgstr "Назва відстеження MAC / тема листа"
+
+#: setup.php
+msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
+msgstr "Будь ласка, введіть зрозумілу назву для цього запису відстеження MAC. Ця інформація відображатиметься в темі вашого електронного листа"
+
+#: setup.php
+msgid "Ticket number for cross referencing with your corporate help desk system(s)."
+msgstr "Номер заявки для перехресного посилання з вашою корпоративною системою служби підтримки."
+
+#: setup.php
+msgid "Notification Schedule"
+msgstr "Розклад сповіщень"
+
+#: setup.php
+msgid "Choose how often an Email should be generated for this Mac Watch item."
+msgstr "Виберіть, як часто потрібно створювати електронний лист для цього елемента Mac Watch."
+
+#: setup.php
+msgid "First Occurrence Only"
+msgstr "Лише перша поява"
+
+#: setup.php
+msgid "All Occurrences"
+msgstr "Усі випадки"
+
+#: setup.php
+msgid "Every Hour"
+msgstr "Кожну годину"
+
+#: setup.php
+msgid "Email Addresses"
+msgstr "Адреси електронної пошти"
+
+#: setup.php
+msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
+msgstr "Введіть список адрес електронної пошти, розділених крапкою з комою, на які надсилатиметься сповіщення про місцезнаходження цієї MAC-адреси."
+
+#: setup.php
+msgid "General Mac Address Authorization Settings"
+msgstr "Загальні налаштування авторизації MAC-адрес"
+
+#: setup.php
+msgid "MAC Address Match"
+msgstr "Збіг MAC-адреси"
+
+#: setup.php
+msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
+msgstr "Будь ласка, введіть MAC-адресу або шаблон відповідності MAC-адреси для автоматичної авторизації. Якщо ви хочете авторизувати групу MAC-адрес, можна використати символ підстановки '&#37;' у будь-якому місці MAC-адреси."
+
+#: setup.php
+msgid "Please add a reason for this entry."
+msgstr "Будь ласка, додайте причину для цього запису."
+
