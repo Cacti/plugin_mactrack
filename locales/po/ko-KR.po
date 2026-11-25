@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Korean <https://translate.cacti.net/projects/cacti/mactrack/ko/>\nLanguage: ko-KR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Korean <https://translate.cacti.net/projects/cacti/mactrack/ko/>\nLanguage: ko-KR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -201,7 +201,7 @@ msgstr "재시작 이후"
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
 #: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Down"
-msgstr "아래로"
+msgstr "다운"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
 #: mactrack_view_devices.php mactrack_view_interfaces.php
@@ -309,7 +309,7 @@ msgstr "%d주"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
-msgstr "녹음되지 않음"
+msgstr "기록되지 않음"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -325,7 +325,7 @@ msgstr "상태: 유휴, 마지막 실행 시간: %2.1f초, 프로세스: %d개, 
 #: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
 #: setup.php
 msgid "Disabled"
-msgstr "비활성화됨"
+msgstr "비활성화"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -622,7 +622,7 @@ msgstr "결과 가져 오기"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Cacti has imported the following items:"
-msgstr "Cacti는 다음 항목을 가져 왔습니다."
+msgstr "Cacti는 다음 항목을 가져 왔습니다.:"
 
 #: mactrack_device_types.php
 msgid "Import Mactrack Device Types"
@@ -698,7 +698,7 @@ msgstr " - 스캔 기능에 트렁크 포트 또는 링크 포트를 격리 할 
 
 #: mactrack_device_types.php
 msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
-msgstr " - 높은 번호의 사용자 포트 번호라는 점을 제외하면 lowPort와 같습니다."
+msgstr " - 높은 번호의 사용자 포트 번호라는 점을 제외하면 lowPort와 같습니다"
 
 #: mactrack_device_types.php
 msgid " - Disabled type is not used"
@@ -864,7 +864,7 @@ msgstr "다른 사용자와 공유할 장치 유형 내보내기"
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "입점업체"
+msgstr "공급업체"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -1155,7 +1155,7 @@ msgstr "삭제할 인증 된 Mac을 하나 이상 선택해야합니다."
 
 #: mactrack_macauth.php
 msgid "Click 'Continue' to delete the following Authorized Mac's?"
-msgstr "다음 인증 된 Mac을 삭제하려면 '계속'을 클릭하십시오."
+msgstr "다음 인증된 Mac을 삭제하려면 '계속'을 클릭하시겠습니까?"
 
 #: mactrack_macauth.php
 #, php-format
@@ -1200,7 +1200,7 @@ msgstr "맥의"
 
 #: mactrack_macwatch.php
 msgid "Click 'Continue' to delete the following watched Mac's?"
-msgstr "다음 'Mac'을 삭제하려면 '계속'을 클릭하십시오."
+msgstr "다음 감시 중인 Mac을 삭제하려면 '계속'을 클릭하시겠습니까?"
 
 #: mactrack_macwatch.php
 #, php-format
@@ -1241,7 +1241,7 @@ msgstr "감시 중인 Mactrack MAC을 찾을 수 없음"
 
 #: mactrack_sites.php
 msgid "Click 'Continue' to delete the following Site(s)?"
-msgstr "다음 사이트를 삭제하려면 '계속'을 클릭하십시오."
+msgstr "다음 사이트를 삭제하려면 '계속'을 클릭하시겠습니까?"
 
 #: mactrack_sites.php
 msgid "You must select at least one site."
@@ -1328,7 +1328,7 @@ msgstr "SNMP 옵션 설정 [편집 : %s]"
 
 #: mactrack_snmp.php
 msgid "SNMP Option Set [new]"
-msgstr "SNMP 옵션 세트 [new]"
+msgstr "SNMP 옵션 집합 [새로 만들기]"
 
 #: mactrack_snmp.php setup.php
 msgid "Mactrack SNMP Options"
@@ -1630,7 +1630,7 @@ msgstr "스캔당 하나"
 
 #: mactrack_utilities.php setup.php
 msgid "Hourly"
-msgstr "매시간 마다"
+msgstr "매시간"
 
 #: mactrack_utilities.php setup.php
 msgid "Daily"
@@ -2615,7 +2615,7 @@ msgstr "유틸리티를 사용할 때 확인을위한 프롬프트"
 
 #: setup.php
 msgid "Data Retention"
-msgstr "데이터 보유"
+msgstr "데이터 보존"
 
 #: setup.php
 msgid "How long should port MAC details be retained in the database."
@@ -2920,7 +2920,7 @@ msgstr "(편집)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "가져오기"
+msgstr "(가져오기)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3222,7 +3222,7 @@ msgstr "SNMP Get"
 
 #: setup.php
 msgid "SNMP Walk"
-msgstr "SNMP 워크"
+msgstr "SNMP walk"
 
 #: setup.php
 msgid "Low User Port Number"
@@ -3430,7 +3430,7 @@ msgstr "이 장치에 연결하는 데 사용하는 터미널 유형을 선택�
 
 #: setup.php
 msgid "Telnet"
-msgstr "텔넷"
+msgstr "Telnet"
 
 #: setup.php
 msgid "SSH"
@@ -3450,7 +3450,7 @@ msgstr "사용자 이름"
 
 #: setup.php
 msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
-msgstr "사용자 지정 인증 방법에 사용할 사용자 이름입니다. SSH, RSH, HTML 등의 예"
+msgstr "사용자 지정 인증 방법에 사용할 사용자 이름입니다. 예를 들어 SSH, RSH, HTML 등이 있습니다."
 
 #: setup.php
 msgid "Password"
