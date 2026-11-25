@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-18 18:36+0000\n"
-"PO-Revision-Date: 2026-11-16 19:46+0000\n"
-"Last-Translator: Anonymous <anonymous@cacti.net>\n"
-"Language-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\n"
-"Language: sv-SE\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -27,38 +15,36 @@ msgid "MacTrack could not initialize its Default site. Review the Cacti log befo
 msgstr "MacTrack kunde inte initiera sin standardplats. Granska Cacti-loggen innan du fortsätter."
 
 #: lib/mactrack_activity.php
-#, fuzzy
-#| msgid "Scanning Rate: Every %s"
 msgid "Scanning devices"
-msgstr "Skanningsfrekvens: varje %s"
+msgstr "Skannar enheter"
 
 #: lib/mactrack_activity.php
 msgid "Waiting for the DNS resolver"
-msgstr ""
+msgstr "Väntar på DNS-resolvern"
 
 #: lib/mactrack_activity.php
 msgid "Transferring and aggregating scan results"
-msgstr ""
+msgstr "Överför och aggregerar skanningsresultat"
 
 #: lib/mactrack_activity.php
 msgid "Maintaining port table partitions"
-msgstr ""
+msgstr "Underhåller porttabellens partitioner"
 
 #: lib/mactrack_activity.php
 msgid "Deleting expired port rows"
-msgstr ""
+msgstr "Tar bort utgångna portrader"
 
 #: lib/mactrack_activity.php
 msgid "Pruning scan dates"
-msgstr ""
+msgstr "Rensar skanningsdatum"
 
 #: lib/mactrack_activity.php
 msgid "Deleting expired IP rows"
-msgstr ""
+msgstr "Tar bort utgångna IP-rader"
 
 #: lib/mactrack_activity.php
 msgid "Optimizing the IP table"
-msgstr ""
+msgstr "Optimerar IP-tabellen"
 
 #: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
 #: mactrack_view_dot1x.php
@@ -67,45 +53,43 @@ msgstr "Vilande"
 
 #: lib/mactrack_activity.php
 msgid "Upgrading: rebuilding aggregated ports"
-msgstr ""
+msgstr "Uppgraderar: bygger om aggregerade portar"
 
 #: lib/mactrack_activity.php
 #, php-format
 msgid "About %s rows left to copy (estimate)"
-msgstr ""
+msgstr "Ungefär %s rader kvar att kopiera (uppskattning)"
 
 #: lib/mactrack_activity.php
 msgid "Repartitioning the port, IP and 802.1x tables"
-msgstr ""
+msgstr "Partitionerar om port-, IP- och 802.1x-tabellerna"
 
 #: lib/mactrack_activity.php
-#, fuzzy, php-format
-#| msgid "Not observed in latest scan"
+#, php-format
 msgid "%d devices in this scan"
-msgstr "Observerades inte vid den senaste genomsökningen"
+msgstr "%d enheter i denna genomsökning"
 
 #: lib/mactrack_activity.php
 #, php-format
 msgid "The process stopped during: %s"
-msgstr ""
+msgstr "Processen stoppades under: %s"
 
 #: lib/mactrack_activity.php
-#, fuzzy, php-format
-#| msgid "Scanning Rate: Every %s"
+#, php-format
 msgid "Scanning %d devices"
-msgstr "Skanningsfrekvens: varje %s"
+msgstr "Skannar %d enheter"
 
 #: lib/mactrack_activity.php
 msgid "A database upgrade is running"
-msgstr ""
+msgstr "En databasuppgradering pågår"
 
 #: lib/mactrack_activity.php
 msgid "The port, IP and 802.1x table partitioning has not finished"
-msgstr ""
+msgstr "Partitioneringen av port-, IP- och 802.1x-tabellerna har inte slutförts"
 
 #: lib/mactrack_activity.php
 msgid "The aggregated ports rebuild has not finished"
-msgstr ""
+msgstr "Ombyggnaden av aggregerade portar har inte slutförts"
 
 #: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
 msgid "Running"
@@ -137,7 +121,7 @@ msgstr "Observerades inte vid den senaste genomsökningen"
 
 #: lib/mactrack_functions.php
 msgid "Locally Admined MAC"
-msgstr ""
+msgstr "Lokalt administrerad MAC"
 
 #: lib/mactrack_functions.php
 msgid "Mactrack Device Tracking OUI Database Import Results"
@@ -291,10 +275,9 @@ msgid "Device Enable '%s'"
 msgstr "Aktivera enhet ”%s”"
 
 #: lib/mactrack_functions.php
-#, fuzzy, php-format
-#| msgid "Device Disable '%d'"
+#, php-format
 msgid "Device Disable '%s'"
-msgstr "Inaktivera enhet ”%d”"
+msgstr "Inaktivera enhet '%s'"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_macwatch.php
 #: mactrack_snmp.php mactrack_utilities.php mactrack_view_arp.php
@@ -456,14 +439,12 @@ msgid "Are you sure you want to delete all the Port to MAC to IP results from th
 msgstr "Är du säker på att du vill ta bort alla resultat som kopplar portar till MAC- och IP-adresser från systemet?"
 
 #: lib/mactrack_functions.php
-#, fuzzy
-#| msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
 msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
-msgstr "Är du säker på att du vill ta bort alla resultat som kopplar portar till MAC- och IP-adresser från systemet?"
+msgstr "Är du säker på att du vill ta bort de utgångna resultaten för port till MAC till IP nu?"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
-msgstr ""
+msgstr "Är du säker på att du vill rensa de cachade skanningsfunktionerna för MacTrack?"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
@@ -475,21 +456,19 @@ msgstr "Är du säker på att du vill ta bort och återskapa alla aggregerade re
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
-msgstr ""
+msgstr "Är du säker på att du vill ladda ned och importera IEEE Vendor MAC/OUI-databasen nu?"
 
 #: lib/mactrack_functions.php
-#, fuzzy
-#| msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
 msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
-msgstr "Är du säker på att du vill ta bort och återskapa alla aggregerade resultat som kopplar portar till MAC- och IP-adresser från systemet?"
+msgstr "Är du säker på att du vill bygga om listan över skanningsdatum från de lagrade resultaten för port till MAC till IP nu?"
 
 #: lib/mactrack_functions.php
 msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
-msgstr ""
+msgstr "Bygg om och analysera partitionen som innehåller den senaste portobservationen, vilket är innevarande vecka vid veckovis partitionering. En opartitionerad tabell optimeras i sin helhet. Schemalagda skanningar hoppas över medan detta körs. Fortsätta?"
 
 #: lib/mactrack_functions.php
 msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
-msgstr ""
+msgstr "Kör detta underhåll utanför arbetstid. Ombyggnaden kopierar hela historiken för port- (MAC-adress), IP-adress- och 802.1x-tabellerna efter varandra och kan ta flera timmar. Schemalagda skanningar hoppas över, databasunderhåll väntar och sökning efter MAC, IP och 802.1x visar ett underhållsmeddelande tills det är klart. Se till att det finns ledigt diskutrymme för en andra kopia av varje tabell och dess index. Fortsätta?"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Remove All Scan Results"
@@ -512,42 +491,36 @@ msgid "Perform Aggregate Table Rebuild"
 msgstr "Bygg om den aggregerade tabellen"
 
 #: lib/mactrack_functions.php
-#, fuzzy
-#| msgid "Refresh IEEE Vendor MAC/OUI Database"
 msgid "Rebuild IEEE Vendor MAC/OUI Database"
-msgstr "Uppdatera IEEE:s databas över tillverkares MAC-/OUI-prefix"
+msgstr "Återskapa IEEE:s databas över tillverkares MAC-/OUI-prefix"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
-#, fuzzy
-#| msgid "Last Scan Date"
 msgid "Rebuild Scan Dates"
-msgstr "Senaste skanningsdatum"
+msgstr "Återskapa skanningsdatum"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Optimize Port Table"
-msgstr ""
+msgstr "Optimera porttabell"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Configure Port and IP Address Partitioning"
-msgstr ""
+msgstr "Konfigurera partitionering för port- och IP-adresser"
 
 #: lib/mactrack_partition_rebuild.php
 msgid "The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
-msgstr ""
+msgstr "Port-, IP- och 802.1x-tabellerna håller på att ompartitioneras, eller så slutfördes inte en ombyggnad, så deras historik kan inte ändras nu. Försök igen när cli/upgrade_partitioning.php har slutförts."
 
 #: lib/mactrack_partition_rebuild.php
 msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished."
-msgstr ""
+msgstr "MacTrack är i underhållsläge för sökning efter IP-adress, MAC-adress och 802.1x medan dess historiktabeller partitioneras om. Resultaten är ofullständiga tills partitioneringen är klar."
 
 #: lib/mactrack_partition_rebuild.php
 msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
-msgstr ""
+msgstr "MacTrack är i underhållsläge för sökning efter IP-adress, MAC-adress och 802.1x eftersom partitioneringen av dess historiktabeller inte slutfördes. Resultaten är ofullständiga. Kör cli/upgrade_partitioning.php igen för att återuppta den."
 
 #: lib/mactrack_partition_rebuild.php
-#, fuzzy
-#| msgid "Last DB Maintenance Time:"
 msgid "Maintenance Mode"
-msgstr "Senaste underhållstid för databas:"
+msgstr "Underhållsläge"
 
 #: mactrack_actions.php
 #, php-format
@@ -1556,36 +1529,28 @@ msgid "Other"
 msgstr "Övrigt"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Current Date"
 msgid "Current Activity"
-msgstr "Datum för aktuellt antal"
+msgstr "Aktuell aktivitet"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Status"
 msgid "State:"
-msgstr "Status"
+msgstr "Tillstånd:"
 
 #: mactrack_utilities.php
 msgid "Since:"
-msgstr ""
+msgstr "Sedan:"
 
 #: mactrack_utilities.php
 msgid "Detail:"
-msgstr ""
+msgstr "Detalj:"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Last Poller Runtime:"
 msgid "Last Skipped Poller Run:"
-msgstr "Senaste insamlingskörningens längd:"
+msgstr "Senaste överhoppade Poller-körning:"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Last DB Maintenance Time:"
 msgid "Last Maintenance Steps"
-msgstr "Senaste underhållstid för databas:"
+msgstr "Senaste underhållssteg"
 
 #: mactrack_utilities.php
 msgid "Seconds"
@@ -1596,14 +1561,12 @@ msgid "Step"
 msgstr "Steg"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Table sizes"
 msgid "Table Sizes"
 msgstr "Tabellstorlekar"
 
 #: mactrack_utilities.php
 msgid "Free"
-msgstr ""
+msgstr "Ledigt"
 
 #: mactrack_utilities.php
 msgid "Index"
@@ -1611,7 +1574,7 @@ msgstr "Index"
 
 #: mactrack_utilities.php
 msgid "Rows (estimate)"
-msgstr ""
+msgstr "Rader (uppskattning)"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Table"
@@ -1619,15 +1582,15 @@ msgstr "Tabell"
 
 #: mactrack_utilities.php
 msgid "Unknown: the database runs on another host"
-msgstr ""
+msgstr "Okänd: databasen körs på en annan värd"
 
 #: mactrack_utilities.php
 msgid "Unknown: the database data directory cannot be found from this host"
-msgstr ""
+msgstr "Okänd: databasens datakatalog kan inte hittas från denna värd"
 
 #: mactrack_utilities.php
 msgid "Database Disk Free:"
-msgstr ""
+msgstr "Ledigt diskutrymme för databas:"
 
 #: mactrack_utilities.php
 #, php-format
@@ -1645,27 +1608,25 @@ msgid "The following number of records have been removed from the aggergated tab
 msgstr "Antal poster som har tagits bort från den aggregerade tabellen: %s. Antal poster som kommer att läggas till: %s."
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Mactrack Database Results"
 msgid "Mactrack Scan Date Rebuild Results"
-msgstr "Resultat från Mactrack-databasen"
+msgstr "Resultat från ombyggnad av Mactrack-skanningsdatum"
 
 #: mactrack_utilities.php
 msgid "Scan date rebuild failed. Check the Cacti log and retry."
-msgstr ""
+msgstr "Ombyggnad av skanningsdatum misslyckades. Kontrollera Cacti-loggen och försök igen."
 
 #: mactrack_utilities.php
 #, php-format
 msgid "Scan dates rebuilt: %d"
-msgstr ""
+msgstr "Ombyggda skanningsdatum: %d"
 
 #: mactrack_utilities.php
 msgid "A scan or a port table conversion is running. Try again when it has finished."
-msgstr ""
+msgstr "En genomsökning eller en konvertering av porttabellen pågår. Försök igen när den är klar."
 
 #: mactrack_utilities.php setup.php
 msgid "One per Scan"
-msgstr ""
+msgstr "En per skanning"
 
 #: mactrack_utilities.php setup.php
 msgid "Hourly"
@@ -1681,23 +1642,23 @@ msgstr "Veckovis"
 
 #: mactrack_utilities.php
 msgid "Not partitioned"
-msgstr ""
+msgstr "Ej partitionerad"
 
 #: mactrack_utilities.php
 msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
-msgstr ""
+msgstr "Dagliga partitioner från en tidigare MacTrack-version. Konvertering krävs."
 
 #: mactrack_utilities.php
 msgid "Partitioned by scan date"
-msgstr ""
+msgstr "Partitionerad efter skanningsdatum"
 
 #: mactrack_utilities.php
 msgid "Unrecognized partitions. MacTrack makes no partition changes."
-msgstr ""
+msgstr "Okända partitioner. MacTrack gör inga partitionsändringar."
 
 #: mactrack_utilities.php
 msgid "Port Table Partitions"
-msgstr ""
+msgstr "Porttabellens partitioner"
 
 #: mactrack_utilities.php
 msgid "Layout"
@@ -1706,7 +1667,7 @@ msgstr "Layout"
 #: mactrack_utilities.php
 #, php-format
 msgid "%d of at most %d"
-msgstr ""
+msgstr "%d av högst %d"
 
 #: mactrack_utilities.php
 msgid "Partitions"
@@ -1714,111 +1675,100 @@ msgstr "Partitioner"
 
 #: mactrack_utilities.php
 msgid "Oldest Partition"
-msgstr ""
+msgstr "Äldsta partition"
 
 #: mactrack_utilities.php
 msgid "Newest Partition"
-msgstr ""
+msgstr "Nyaste partition"
 
 #: mactrack_utilities.php
 msgid "Partitions Cover Scans Before"
-msgstr ""
+msgstr "Partitioner omfattar skanningar före"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "%s, coarser than the setting because %d partitions would exceed the limit"
-msgstr ""
+msgstr "%s, grövre än inställningen eftersom %d partitioner skulle överskrida gränsen"
 
 #: mactrack_utilities.php setup.php
 msgid "Port and IP Address Partition Size"
-msgstr ""
+msgstr "Partitionsstorlek för port och IP-adress"
 
 #: mactrack_utilities.php
 msgid "Pending Exchange"
-msgstr ""
+msgstr "Väntande utbyte"
 
 #: mactrack_utilities.php
 msgid "Load Path"
-msgstr ""
+msgstr "Inläsningssökväg"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Watches"
 msgid "PHP batches"
-msgstr "Bevakningar"
+msgstr "PHP-batchar"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Last Scan Date"
 msgid "Last Scan Note"
-msgstr "Senaste skanningsdatum"
+msgstr "Senaste skanningsanteckning"
 
 #: mactrack_utilities.php
 msgid "Rebuild"
-msgstr ""
+msgstr "Bygg om"
 
 #: mactrack_utilities.php
-#, fuzzy, php-format
-#| msgid "Running Processes:"
+#, php-format
 msgid "Running since %s"
-msgstr "Körande processer:"
+msgstr "Körs sedan %s"
 
 #: mactrack_utilities.php
 msgid "Last Rebuild"
-msgstr ""
+msgstr "Senaste ombyggnad"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "%s: %d rows into %d partitions"
-msgstr ""
+msgstr "%s: %d rader i %d partitioner"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "%s: failed. %s"
-msgstr ""
+msgstr "%s: misslyckades. %s"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Last DB Maintenance Time:"
 msgid "Last Maintenance"
-msgstr "Senaste underhållstid för databas:"
+msgstr "Senaste underhåll"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "%s: %d partitions dropped, %d created"
-msgstr ""
+msgstr "%s: %d partitioner borttagna, %d skapade"
 
 #: mactrack_utilities.php
 msgid "IP Table Layout"
-msgstr ""
+msgstr "Layout för IP-tabell"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Partitions"
 msgid "IP Table Partitions"
-msgstr "Partitioner"
+msgstr "Partitioner för IP-tabellen"
 
 #: mactrack_utilities.php
 msgid "802.1x Table Layout"
-msgstr ""
+msgstr "Tabellayout för 802.1x"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Partitions"
 msgid "802.1x Table Partitions"
-msgstr "Partitioner"
+msgstr "Partitioner för 802.1x-tabellen"
 
 #: mactrack_utilities.php
 msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
-msgstr ""
+msgstr "Välj daglig, veckovis eller inaktiverad partitionering innan ombyggnaden startas."
 
 #: mactrack_utilities.php
 msgid "A rebuild is already running. The partition status page shows when it has finished."
-msgstr ""
+msgstr "En ombyggnad pågår redan. Sidan för partitionsstatus visar när den är klar."
 
 #: mactrack_utilities.php
 msgid "The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running."
-msgstr ""
+msgstr "Ombyggnaden begärdes i bakgrunden. Kontrollera Partitionsstatus för resultatet; den kommer att vägra starta om en skanning eller en annan ombyggnad pågår."
 
 #: mactrack_utilities.php
 msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
@@ -1866,25 +1816,23 @@ msgstr "Tar bort <strong>ALLA</strong> kopplingar mellan portar, MAC-adresser oc
 
 #: mactrack_utilities.php
 msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
-msgstr ""
+msgstr "Bygger om listan över skanningsdatum från de lagrade Port-till-MAC-till-IP-resultaten och läser varje partition en gång. Skanningar och underhåll håller listan aktuell, så detta behövs bara efter att resultat har tagits bort utanför underhållet, till exempel genom att ta bort enheter."
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "View Mactrack Process Status"
 msgid "View Partition Status"
-msgstr "Visa status för Mactrack-processen"
+msgstr "Visa partitionsstatus"
 
 #: mactrack_utilities.php
 msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
-msgstr ""
+msgstr "Visar hur resultaten för port till MAC till IP partitioneras, vilken partitionsstorlek som används och varför, samt vad det senaste databasunderhållet gjorde."
 
 #: mactrack_utilities.php
 msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
-msgstr ""
+msgstr "Bygger om och analyserar endast partitionen som innehåller den senaste portobservationen för att frigöra borttaget utrymme; vid veckovis partitionering är det innevarande vecka. Opartitionerade tabeller optimeras i sin helhet. Schemalagda skanningar hoppas över tills det är klart."
 
 #: mactrack_utilities.php
 msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile."
-msgstr ""
+msgstr "Välj dagliga eller veckovisa partitioner, eller inaktivera partitionering, för tabellerna för port (MAC-adress), IP-adress och 802.1x. Ombyggnaden kopierar hela historiken i bakgrunden; schemalagda genomsökningar hoppas över och sökning på MAC, IP och 802.1x visar ett underhållsmeddelande under tiden."
 
 #: mactrack_utilities.php
 msgid "Aggregated Table Administration"
@@ -1899,10 +1847,8 @@ msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to
 msgstr "Tar bort alla <strong>aggregerade</strong> kopplingar mellan portar, MAC-adresser och IP-adresser från databasen, men inte skanningsresultaten, och återskapar dem direkt utifrån <strong>alla skanningsdata</strong>."
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Partitions"
 msgid "Partitioning"
-msgstr "Partitioner"
+msgstr "Partitionering"
 
 #: mactrack_vendormacs.php
 msgid "Mactrack Vendor Mac Filter"
@@ -2685,7 +2631,7 @@ msgstr "Hur länge ska uppgifter om upptäckta IP-adresser sparas i databasen?"
 
 #: setup.php
 msgid "Size of the partitions of the port, IP and 802.1x tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
-msgstr ""
+msgstr "Storlek på partitionerna för port-, IP- och 802.1x-tabellerna, eller Inaktiverad för opartitionerade tabeller. Ändring påverkar endast nya partitioner; för att bygga om befintlig historik så att den stämmer överens, använd Konfigurera partitionering av portar och IP-adresser i MacTrack-verktyg eller kör cli/upgrade_partitioning.php."
 
 #: setup.php
 msgid "Switch Level Ignore Ports Delimiter"
@@ -2729,11 +2675,11 @@ msgstr "Ange ett reguljärt uttryck för ifName eller ifDescription för portar 
 
 #: setup.php
 msgid "Ports to Ignore While Scanning (Regular Expression)"
-msgstr ""
+msgstr "Portar att ignorera vid skanning (reguljärt uttryck)"
 
 #: setup.php
 msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
-msgstr ""
+msgstr "Valfritt. Ett reguljärt uttryck som matchas skiftlägesokänsligt mot portnamn och portalias för varje skannad port. MAC-adresser som hittas på en matchande port samlas inte in, vilket håller uplink- och trunkportar borta från databasen. Till exempel (uplink|trunk). Ange varje uttryck på en egen rad för att ange flera. Lämna tomt för att samla in varje port. Platser och enheter kan lägga till egna uttryck. Till skillnad från Portar att ignorera ovan gäller detta MAC-insamling och inte gränssnittslistan, och det påverkar endast nya skanningar."
 
 #: setup.php
 msgid "Bandwidth Usage Threshold"
@@ -3179,32 +3125,28 @@ msgstr "Spårningsverktyg"
 
 #: setup.php
 msgid "Ports to Ignore (Regular Expression)"
-msgstr ""
+msgstr "Portar att ignorera (reguljärt uttryck)"
 
 #: setup.php
 #, php-format
 msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions."
-msgstr ""
+msgstr "Valfritt. Ett reguljärt uttryck som matchas skiftlägesokänsligt mot portnamn och portalias för %s. MAC-adresser som hittas på en matchande port samlas inte in. Till exempel ignorerar '(uplink|trunk)' varje port vars namn eller alias innehåller uplink eller trunk. Ange varje uttryck på en egen rad för att ange flera. Det tillämpas utöver uttrycken för %s."
 
 #: setup.php
-#, fuzzy
-#| msgid "Not observed in latest scan"
 msgid "every device in this site"
-msgstr "Observerades inte vid den senaste genomsökningen"
+msgstr "varje enhet på denna plats"
 
 #: setup.php
-#, fuzzy
-#| msgid "Disabled devices"
 msgid "this device"
-msgstr "Inaktiverade enheter"
+msgstr "denna enhet"
 
 #: setup.php
 msgid "device and global"
-msgstr ""
+msgstr "enhet och global"
 
 #: setup.php
 msgid "site and global"
-msgstr ""
+msgstr "plats och global"
 
 #: setup.php
 msgid "Device Scanning Function Options"
