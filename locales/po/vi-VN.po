@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Vietnamese <https://translate.cacti.net/projects/cacti/mactrack/vi/>\nLanguage: vi-VN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Vietnamese <https://translate.cacti.net/projects/cacti/mactrack/vi/>\nLanguage: vi-VN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -309,7 +309,7 @@ msgstr "%d Tuần"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
-msgstr "Không được ghi lại"
+msgstr "Chưa được ghi nhận"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -325,7 +325,7 @@ msgstr "Trạng thái: Nhàn rỗi, Thời gian chạy gần nhất: %2.1f giây
 #: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
 #: setup.php
 msgid "Disabled"
-msgstr "đã vô hiệu hóa"
+msgstr "Vô hiệu hóa"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -347,7 +347,7 @@ msgstr "Bảng tổng quan"
 #: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Sites"
-msgstr "Websites"
+msgstr "Các địa điểm"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
@@ -911,11 +911,11 @@ msgstr "Bạn phải chọn ít nhất một thiết bị."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to enable the following devices."
-msgstr "Nhấp vào 'Tiếp tục' để bật các thiết bị sau."
+msgstr "Nhấp vào &#39;Tiếp tục&#39; để bật (các) Thiết bị sau."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to disable the following devices."
-msgstr "Nhấp vào 'Tiếp tục' để tắt các thiết bị sau."
+msgstr "Nhấp vào &#39;Tiếp tục&#39; để tắt (các) Thiết bị sau."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
@@ -1360,7 +1360,7 @@ msgstr "Thử lại"
 
 #: mactrack_snmp.php
 msgid "Max OIDs"
-msgstr "OID tối đa"
+msgstr "Tối đa OIDS"
 
 #: mactrack_snmp.php mactrack_view_dot1x.php
 msgid "Username"
@@ -1422,7 +1422,7 @@ msgstr "Trình thăm dò MacTrack đang:"
 
 #: mactrack_utilities.php
 msgid "Running Processes:"
-msgstr "Quy trình đồng thời:"
+msgstr "Tiến trình đang chạy:"
 
 #: mactrack_utilities.php
 msgid "Last Time Poller Started:"
@@ -1558,7 +1558,7 @@ msgstr "Giây"
 
 #: mactrack_utilities.php
 msgid "Step"
-msgstr "StepBước"
+msgstr "Bước"
 
 #: mactrack_utilities.php
 msgid "Table Sizes"
@@ -1892,7 +1892,7 @@ msgstr "Địa chỉ IP ED"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "ED DNS Hostname"
-msgstr "Tên máy chủ ED ED"
+msgstr "Tên máy chủ DNS ED"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "ED MAC Address"
@@ -1961,7 +1961,7 @@ msgstr "Hàng tồn kho"
 
 #: mactrack_view_dashboard.php
 msgid "Device status"
-msgstr "Trạng thái thiết bị"
+msgstr "Tình trạng thiết bị"
 
 #: mactrack_view_dashboard.php
 msgid "Address and port totals"
@@ -1969,7 +1969,7 @@ msgstr "Tổng số địa chỉ và cổng"
 
 #: mactrack_view_dashboard.php
 msgid "Collection settings"
-msgstr "Cài đặt thu thập"
+msgstr "Cài đặt bộ sưu tập"
 
 #: mactrack_view_dashboard.php
 msgid "Scan runtimes"
@@ -2033,7 +2033,7 @@ msgstr "Tần suất quét"
 
 #: mactrack_view_dashboard.php
 msgid "Concurrent processes"
-msgstr "Tiến trình đồng thời"
+msgstr "Quy trình đồng thời"
 
 #: mactrack_view_dashboard.php
 msgid "Scanner max runtime"
@@ -2333,7 +2333,7 @@ msgstr "Đĩa ra (OD / S)"
 
 #: mactrack_view_interfaces.php
 msgid "Last Change"
-msgstr "Thay đổi cuối cùng"
+msgstr "Thay đổi gần nhất"
 
 #: mactrack_view_interfaces.php
 msgid "Last Scanned"
@@ -2575,7 +2575,7 @@ msgstr "Chọn thời điểm thu thập Địa chỉ MAC và IP và thống kê
 
 #: setup.php
 msgid "Concurrent Processes"
-msgstr "Tiến trình đồng thời"
+msgstr "Quy trình đồng thời"
 
 #: setup.php
 msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
@@ -2920,7 +2920,7 @@ msgstr "(Sửa)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "Nhập"
+msgstr "(Nhập)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3018,7 +3018,7 @@ msgstr "có chứa"
 
 #: setup.php
 msgid "Begins With"
-msgstr "bắt đầu là"
+msgstr "Bắt đầu bằng"
 
 #: setup.php
 msgid "Does Not Contain"
@@ -3222,7 +3222,7 @@ msgstr "Nhận SNMP"
 
 #: setup.php
 msgid "SNMP Walk"
-msgstr "Đi bộ SNMP"
+msgstr "SNMP walk"
 
 #: setup.php
 msgid "Low User Port Number"
@@ -3266,7 +3266,7 @@ msgstr "Cổng SNMP"
 
 #: setup.php
 msgid "SNMP Timeout"
-msgstr "Hết thời gian chờ"
+msgstr "Thời gian chờ SNMP"
 
 #: setup.php
 msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
