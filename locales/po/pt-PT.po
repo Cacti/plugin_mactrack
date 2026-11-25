@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Portuguese (Portugal) <https://translate.cacti.net/projects/cacti/mactrack/pt_PT/>\nLanguage: pt-PT\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Portuguese (Portugal) <https://translate.cacti.net/projects/cacti/mactrack/pt_PT/>\nLanguage: pt-PT\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -309,7 +309,7 @@ msgstr "%d Semanas"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
-msgstr "Não Gravado"
+msgstr "Não registado"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -864,7 +864,7 @@ msgstr "Exportar tipos de dispositivos para partilhar com outros"
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "Vendedor"
+msgstr "Fabricante"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -2277,7 +2277,7 @@ msgstr "Pseudónimo"
 
 #: mactrack_view_interfaces.php
 msgid "InBound %%%"
-msgstr "InBound % InBound"
+msgstr "InBound %"
 
 #: mactrack_view_interfaces.php
 msgid "OutBound %%%"
@@ -2305,7 +2305,7 @@ msgstr "UProto Total"
 
 #: mactrack_view_interfaces.php
 msgid "Out Err Total"
-msgstr "Saída Err Err Total"
+msgstr "Saída Err Total"
 
 #: mactrack_view_interfaces.php
 msgid "Out Disc Total"
@@ -2920,7 +2920,7 @@ msgstr "(Editar)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "Importar"
+msgstr "(Importar)"
 
 #: setup.php
 msgid "Mactrack Device Types"
