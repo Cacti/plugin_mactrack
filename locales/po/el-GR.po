@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Greek <https://translate.cacti.net/projects/cacti/mactrack/el/>\nLanguage: el-GR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Greek <https://translate.cacti.net/projects/cacti/mactrack/el/>\nLanguage: el-GR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -49,7 +49,7 @@ msgstr "Βελτιστοποίηση του πίνακα IP"
 #: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
 #: mactrack_view_dot1x.php
 msgid "Idle"
-msgstr "Σε αδράνεια"
+msgstr "Αδρανής"
 
 #: lib/mactrack_activity.php
 msgid "Upgrading: rebuilding aggregated ports"
@@ -309,7 +309,7 @@ msgstr "%d Εβδομάδες"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
-msgstr "Δεν έχει καταγραφεί"
+msgstr "Δεν καταγράφηκε"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -646,7 +646,7 @@ msgstr "Πρέπει να επιτραπεί στη διαδικασία εισ�
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Allow Existing Rows to be Updated?"
-msgstr "Να επιτρέπεται η ενημέρωση υφιστάμενων σειρών;"
+msgstr "Να επιτρέπεται η ενημέρωση των υφιστάμενων σειρών;"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Required File Format Notes"
@@ -864,7 +864,7 @@ msgstr "Εξαγωγή τύπων συσκευών για κοινή χρήση 
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "Προμηθευτής"
+msgstr "Κατασκευαστής"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -1328,7 +1328,7 @@ msgstr "Επιλογή επιλογών SNMP [επεξεργασία: %s]"
 
 #: mactrack_snmp.php
 msgid "SNMP Option Set [new]"
-msgstr "Επιλογή επιλογών SNMP [new]"
+msgstr "Σύνολο επιλογών SNMP [νέο]"
 
 #: mactrack_snmp.php setup.php
 msgid "Mactrack SNMP Options"
@@ -1422,7 +1422,7 @@ msgstr "Ο MacTrack Poller είναι:"
 
 #: mactrack_utilities.php
 msgid "Running Processes:"
-msgstr "Συγχρόνες διαδικασίες:"
+msgstr "Εκτελούμενες Διεργασίες:"
 
 #: mactrack_utilities.php
 msgid "Last Time Poller Started:"
@@ -1630,7 +1630,7 @@ msgstr "Ένα ανά σάρωση"
 
 #: mactrack_utilities.php setup.php
 msgid "Hourly"
-msgstr "Aνά ώρα"
+msgstr "Ωριαία"
 
 #: mactrack_utilities.php setup.php
 msgid "Daily"
@@ -2916,11 +2916,11 @@ msgstr "Συσκευές Mactrack"
 
 #: setup.php
 msgid "(Edit)"
-msgstr "(επεξεργασία)"
+msgstr "(Eπεξεργασία)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "Εισαγωγή"
+msgstr "(Εισαγωγή)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3010,7 +3010,7 @@ msgstr "%d Λεπτό"
 
 #: setup.php
 msgid "Matches"
-msgstr "Αγώνες"
+msgstr "ταιριάζει με"
 
 #: setup.php
 msgid "Contains"
@@ -3298,11 +3298,11 @@ msgstr "Όνομα χρήστη SNMP v3 για αυτήν τη συσκευή."
 
 #: setup.php
 msgid "SNMP Password (v3)"
-msgstr "Κωδικός SNMP (v3)"
+msgstr "Κωδικός πρόσβασης SNMP (v3)"
 
 #: setup.php
 msgid "SNMP v3 password for this device."
-msgstr "Κωδικός SNMP v3 για αυτήν τη συσκευή."
+msgstr "Κωδικός πρόσβασης SNMP v3 για αυτήν τη συσκευή."
 
 #: setup.php
 msgid "SNMP Auth Protocol (v3)"
@@ -3314,23 +3314,23 @@ msgstr "Επιλέξτε το Πρωτόκολλο Εξουσιοδότησης 
 
 #: setup.php
 msgid "SNMP Privacy Passphrase (v3)"
-msgstr "Φράση προστασίας απορρήτου SNMP (v3)"
+msgstr "Φράση κωδικού πρόσβασης απορρήτου SNMP (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Passphrase."
-msgstr "Επιλέξτε τη φράση απορρήτου SNMPv3."
+msgstr "Επιλέξτε τη φράση πρόσβασης απορρήτου SNMPv3."
 
 #: setup.php
 msgid "SNMP Privacy Protocol (v3)"
-msgstr "Πρωτόκολλο προστασίας ιδιωτικών δεδομένων SNMP (v3)"
+msgstr "Πρωτόκολλο απορρήτου SNMP (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Protocol."
-msgstr "Επιλέξτε το πρωτόκολλο προστασίας ιδιωτικού απορρήτου SNMPv3."
+msgstr "Επιλέξτε το πρωτόκολλο απορρήτου SNMPv3."
 
 #: setup.php
 msgid "SNMP Context (v3)"
-msgstr "Το περιβάλλον SNMP (v3)"
+msgstr "SNMP Context (v3)"
 
 #: setup.php
 msgid "Enter the SNMP v3 Context to use for this device."
@@ -3338,7 +3338,7 @@ msgstr "Εισαγάγετε το περιβάλλον SNMP v3 που θέλετ
 
 #: setup.php
 msgid "SNMP Engine ID (v3)"
-msgstr "Αναγνωριστικό μηχανής SNMP (v3)"
+msgstr "Αναγνωριστικό κινητήρα SNMP (v3)"
 
 #: setup.php
 msgid "Enter the SNMP v3 Engine ID to use for this device."
