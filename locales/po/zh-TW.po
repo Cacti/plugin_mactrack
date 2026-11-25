@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\nLanguage: zh-TW\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hant/>\nLanguage: zh-TW\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -93,7 +93,7 @@ msgstr "彙總連接埠重建尚未完成"
 
 #: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
 msgid "Running"
-msgstr "執行中"
+msgstr "運行"
 
 #: lib/mactrack_functions.php
 msgid "No method"
@@ -101,7 +101,7 @@ msgstr "無方法"
 
 #: lib/mactrack_functions.php mactrack_view_dot1x.php
 msgid "Authentication Success"
-msgstr "驗證成功"
+msgstr "認證成功"
 
 #: lib/mactrack_functions.php mactrack_view_dot1x.php
 msgid "Authentication Failed"
@@ -201,12 +201,12 @@ msgstr "自重啟以來"
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
 #: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Down"
-msgstr "離線"
+msgstr "向下"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
 #: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Up"
-msgstr "運作中"
+msgstr "向上"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
 msgid "Unaliased"
@@ -239,7 +239,7 @@ msgstr "未經授權"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Data"
-msgstr "資料"
+msgstr "數據"
 
 #: lib/mactrack_functions.php
 msgid "Voice"
@@ -305,11 +305,11 @@ msgstr "%d 天"
 #: lib/mactrack_functions.php
 #, php-format
 msgid "%d Weeks"
-msgstr "%d 週"
+msgstr "%d週"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
-msgstr "沒有記錄"
+msgstr "未記錄"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -325,7 +325,7 @@ msgstr "狀態：閒置，上次執行時間： %2.1f秒，處理程序： %d個
 #: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
 #: setup.php
 msgid "Disabled"
-msgstr "已停用"
+msgstr "停用"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -338,7 +338,7 @@ msgstr "檢視介面"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
 msgid "Not Detected"
-msgstr "未偵測到"
+msgstr "沒有檢測到"
 
 #: lib/mactrack_functions.php
 msgid "Dashboard"
@@ -347,13 +347,13 @@ msgstr "儀表板"
 #: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Sites"
-msgstr "站台"
+msgstr "網站"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
 #: mactrack_view_devices.php mactrack_view_sites.php setup.php
 msgid "Devices"
-msgstr "裝置"
+msgstr "設備"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
 msgid "Interfaces"
@@ -423,7 +423,7 @@ msgstr "匯出"
 #: mactrack_view_devices.php mactrack_view_dot1x.php
 #: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
 msgid "Site"
-msgstr "站台"
+msgstr "網站"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
 #: mactrack_view_ips.php
@@ -622,7 +622,7 @@ msgstr "匯入結果"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Cacti has imported the following items:"
-msgstr "Cacti 已匯入下列項目："
+msgstr "Cacti已導入以下物品:"
 
 #: mactrack_device_types.php
 msgid "Import Mactrack Device Types"
@@ -638,7 +638,7 @@ msgstr "請指定包含裝置類型資訊的 CSV 檔案位置。"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Overwrite Existing Data?"
-msgstr "覆寫現有資料？"
+msgstr "覆蓋現有數據？"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
@@ -646,15 +646,15 @@ msgstr "是否允許導入過程覆蓋現有數據？請注意，這並不意味
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Allow Existing Rows to be Updated?"
-msgstr "允許更新現有資料列？"
+msgstr "允許更新現有行？"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Required File Format Notes"
-msgstr "必要檔案格式說明"
+msgstr "所需的文件格式說明"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "The file must contain a header row with the following column headings."
-msgstr "檔案必須包含帶有下列欄標題的標題列。"
+msgstr "該文件必須包含帶有以下列標題的標題行。"
 
 #: mactrack_device_types.php
 msgid " - A common name for the device.  For example Cisco 6509 Switch"
@@ -864,7 +864,7 @@ msgstr "匯出裝置類型以與他人分享"
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "供應商"
+msgstr "廠商"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -879,7 +879,7 @@ msgstr "類型"
 
 #: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Enabled"
-msgstr "已啟用"
+msgstr "啟用"
 
 #: mactrack_devices.php
 msgid "Enable"
@@ -911,11 +911,11 @@ msgstr "您必須至少選擇一個裝置。"
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to enable the following devices."
-msgstr "按一下「繼續」以啟用下列裝置。"
+msgstr "單擊“繼續”以啟用以下設備。"
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to disable the following devices."
-msgstr "按一下「繼續」以停用下列裝置。"
+msgstr "單擊“繼續”以禁用以下設備。"
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
@@ -1064,7 +1064,7 @@ msgstr "MacTrack 裝置 [新增]"
 
 #: mactrack_devices.php
 msgid "SNMP Information"
-msgstr "SNMP 資訊"
+msgstr "SNMP信息"
 
 #: mactrack_devices.php
 msgid "System:"
@@ -1072,7 +1072,7 @@ msgstr "系統："
 
 #: mactrack_devices.php
 msgid "Uptime:"
-msgstr "運作時間："
+msgstr "運行時間:"
 
 #: mactrack_devices.php
 msgid "Hostname:"
@@ -1088,13 +1088,13 @@ msgstr "MacTrack 裝置篩選器"
 
 #: mactrack_devices.php mactrack_view_devices.php setup.php
 msgid "Device Name"
-msgstr "裝置名稱"
+msgstr "設備名稱"
 
 #: mactrack_devices.php mactrack_sites.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_macs.php
 #: mactrack_view_sites.php setup.php
 msgid "Site Name"
-msgstr "站台名稱"
+msgstr "網站名稱"
 
 #: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
 #: mactrack_view_dot1x.php mactrack_view_interfaces.php
@@ -1108,7 +1108,7 @@ msgstr "主機名稱"
 
 #: mactrack_devices.php
 msgid "Total IPs"
-msgstr "IP 總數"
+msgstr "總IP數"
 
 #: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
 #: mactrack_view_sites.php
@@ -1319,16 +1319,16 @@ msgstr "SNMP 選項 [編輯 %s]"
 
 #: mactrack_snmp.php
 msgid "SNMP Options [new]"
-msgstr "SNMP 選項 [新增]"
+msgstr "SNMP選項[新]"
 
 #: mactrack_snmp.php
 #, php-format
 msgid "SNMP Option Set [edit: %s]"
-msgstr "SNMP 選項集 [編輯：%s]"
+msgstr "SNMP選項集[編輯：%s]"
 
 #: mactrack_snmp.php
 msgid "SNMP Option Set [new]"
-msgstr "SNMP 選項集 [新增]"
+msgstr "SNMP選項集[新]"
 
 #: mactrack_snmp.php setup.php
 msgid "Mactrack SNMP Options"
@@ -1348,23 +1348,23 @@ msgstr "社群"
 
 #: mactrack_snmp.php setup.php
 msgid "Port"
-msgstr "連接埠"
+msgstr "端口"
 
 #: mactrack_snmp.php setup.php
 msgid "Timeout"
-msgstr "逾時"
+msgstr "已逾時"
 
 #: mactrack_snmp.php setup.php
 msgid "Retries"
-msgstr "重試次數"
+msgstr "重試"
 
 #: mactrack_snmp.php
 msgid "Max OIDs"
-msgstr "最大 OID 數量"
+msgstr "最大的OIDS"
 
 #: mactrack_snmp.php mactrack_view_dot1x.php
 msgid "Username"
-msgstr "使用者名稱"
+msgstr "用戶名"
 
 #: mactrack_snmp.php
 msgid "Auth Proto"
@@ -1394,7 +1394,7 @@ msgstr "SNMP 設定"
 
 #: mactrack_snmp.php
 msgid "No SNMP Option Sets Found"
-msgstr "找不到 SNMP 選項集"
+msgstr "找不到SNMP選項集"
 
 #: mactrack_snmp.php
 msgid "Options"
@@ -1578,7 +1578,7 @@ msgstr "資料列數 (估計)"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Table"
-msgstr "表格"
+msgstr "資料表"
 
 #: mactrack_utilities.php
 msgid "Unknown: the database runs on another host"
@@ -1904,7 +1904,7 @@ msgstr "供應商名稱"
 
 #: mactrack_view_arp.php mactrack_view_macs.php
 msgid "Port Number"
-msgstr "連接埠號"
+msgstr "連接埠"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "Port Name"
@@ -1961,7 +1961,7 @@ msgstr "在庫"
 
 #: mactrack_view_dashboard.php
 msgid "Device status"
-msgstr "裝置狀態"
+msgstr "設備狀態"
 
 #: mactrack_view_dashboard.php
 msgid "Address and port totals"
@@ -2033,7 +2033,7 @@ msgstr "掃描頻率"
 
 #: mactrack_view_dashboard.php
 msgid "Concurrent processes"
-msgstr "並行處理程序"
+msgstr "並發進程"
 
 #: mactrack_view_dashboard.php
 msgid "Scanner max runtime"
@@ -2089,11 +2089,11 @@ msgstr "尚未記錄掃描執行時間。"
 
 #: mactrack_view_dashboard.php
 msgid "Rows"
-msgstr "列數"
+msgstr "行"
 
 #: mactrack_view_dashboard.php
 msgid "Size"
-msgstr "大小"
+msgstr "尺寸"
 
 #: mactrack_view_dashboard.php
 msgid "No table statistics available."
@@ -2169,11 +2169,11 @@ msgstr "總VLAN"
 
 #: mactrack_view_devices.php
 msgid "Edit Device"
-msgstr "編輯裝置"
+msgstr "編輯設備"
 
 #: mactrack_view_devices.php
 msgid "View Graphs"
-msgstr "檢視圖表"
+msgstr "查看圖表"
 
 #: mactrack_view_devices.php
 msgid "Device Not Mapped to Cacti Device"
@@ -2229,7 +2229,7 @@ msgstr "已選取的狀態"
 
 #: mactrack_view_dot1x.php
 msgid "DATA"
-msgstr "資料"
+msgstr "數據"
 
 #: mactrack_view_dot1x.php
 msgid "VOICE"
@@ -2333,7 +2333,7 @@ msgstr "出盤（OD / S）"
 
 #: mactrack_view_interfaces.php
 msgid "Last Change"
-msgstr "最後一次變更"
+msgstr "上次變更"
 
 #: mactrack_view_interfaces.php
 msgid "Last Scanned"
@@ -2575,7 +2575,7 @@ msgstr "選擇何時從網路裝置收集 MAC 位址、IP 位址與介面統計�
 
 #: setup.php
 msgid "Concurrent Processes"
-msgstr "並行處理程序"
+msgstr "並發進程"
 
 #: setup.php
 msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
@@ -2615,7 +2615,7 @@ msgstr "使用實用程序時，提示進行驗證"
 
 #: setup.php
 msgid "Data Retention"
-msgstr "資料保留"
+msgstr "數據保留"
 
 #: setup.php
 msgid "How long should port MAC details be retained in the database."
@@ -2708,23 +2708,23 @@ msgstr "MacTrack 是否應對與連接埠關聯的 IP 位址執行反向 DNS 查
 
 #: setup.php
 msgid "Primary DNS IP Address"
-msgstr "主要 DNS IP 位址"
+msgstr "主DNS IP地址"
 
 #: setup.php
 msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
-msgstr "輸入用於反向查詢的主要 DNS IP 位址。"
+msgstr "輸入主DNS IP地址以用於反向查找。"
 
 #: setup.php
 msgid "Secondary DNS IP Address"
-msgstr "次要 DNS IP 位址"
+msgstr "輔助DNS IP地址"
 
 #: setup.php
 msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
-msgstr "輸入用於反向查詢的次要 DNS IP 位址。"
+msgstr "輸入用於反向查找的輔助DNS IP地址。"
 
 #: setup.php
 msgid "DNS Timeout"
-msgstr "DNS 逾時"
+msgstr "DNS超時"
 
 #: setup.php
 msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
@@ -2852,11 +2852,11 @@ msgstr "SNMP輪詢器在失敗之前嘗試到達主機的次數。"
 
 #: setup.php
 msgid "snmpbulkwalk Binary Path"
-msgstr "snmpbulkwalk 執行檔路徑"
+msgstr "snmpbulkwalk二進制路徑"
 
 #: setup.php
 msgid "The path to your snmpbulkwalk binary."
-msgstr "snmpbulkwalk 執行檔的路徑。"
+msgstr "你的snmpbulkwalk二進製文件的路徑。"
 
 #: setup.php
 msgid "MacTrack Settings"
@@ -2920,7 +2920,7 @@ msgstr "（編輯）"
 
 #: setup.php
 msgid "(Import)"
-msgstr "匯入"
+msgstr "(匯入)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3065,7 +3065,7 @@ msgstr "每 %d 小時"
 #: setup.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "每 %d 小時"
+msgstr "每個 %d 小時"
 
 #: setup.php
 msgid "Every Day"
@@ -3074,17 +3074,17 @@ msgstr "每天"
 #: setup.php
 #, php-format
 msgid "%d Month"
-msgstr "%d 個月"
+msgstr "%d月"
 
 #: setup.php
 #, php-format
 msgid "%d Months"
-msgstr "%d 個月"
+msgstr "%d個月"
 
 #: setup.php
 #, php-format
 msgid "%d Year"
-msgstr "%d 年"
+msgstr "%d年"
 
 #: setup.php
 msgid "On Scan Completion"
@@ -3105,7 +3105,7 @@ msgstr "管理"
 
 #: setup.php
 msgid "SNMP Options"
-msgstr "SNMP 選項"
+msgstr "SNMP選項"
 
 #: setup.php
 msgid "Mac Watch"
@@ -3166,7 +3166,7 @@ msgstr "選擇設備類型。"
 
 #: setup.php
 msgid "System Description Match"
-msgstr "系統描述比對"
+msgstr "系統描述匹配"
 
 #: setup.php
 msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
@@ -3218,7 +3218,7 @@ msgstr "如何為此OID收集序列號。如果是'SNMP Walk'，我們假設有�
 
 #: setup.php
 msgid "SNMP Get"
-msgstr "SNMP Get"
+msgstr "SNMP獲取"
 
 #: setup.php
 msgid "SNMP Walk"
@@ -3242,43 +3242,43 @@ msgstr "未使用已停用的裝置類型。"
 
 #: setup.php
 msgid "Fill in the name of this SNMP option set."
-msgstr "填寫此 SNMP 選項集的名稱。"
+msgstr "填寫此SNMP選項集的名稱。"
 
 #: setup.php
 msgid "SNMP Version"
-msgstr "SNMP 版本"
+msgstr "SNMP版本"
 
 #: setup.php
 msgid "Choose the SNMP version for this host."
-msgstr "選擇此主機的 SNMP 版本。"
+msgstr "選擇此主機的SNMP版本。"
 
 #: setup.php
 msgid "SNMP Community String"
-msgstr "SNMP 社群字串"
+msgstr "SNMP社區字符串"
 
 #: setup.php
 msgid "Fill in the SNMP read community for this device."
-msgstr "填寫此裝置的 SNMP 讀取社群字串。"
+msgstr "填寫此設備的SNMP讀取社區。"
 
 #: setup.php
 msgid "SNMP Port"
-msgstr "SNMP 連接埠"
+msgstr "SNMP端口"
 
 #: setup.php
 msgid "SNMP Timeout"
-msgstr "SNMP 逾時"
+msgstr "SNMP超時"
 
 #: setup.php
 msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
-msgstr "Cacti 等待 SNMP 回應的最大毫秒數（不適用於 php-snmp 支援）。"
+msgstr "Cacti等待SNMP響應的最大毫秒數（不支持php-snmp）。"
 
 #: setup.php
 msgid "SNMP Retries"
-msgstr "SNMP 重試次數"
+msgstr "SNMP重試"
 
 #: setup.php
 msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
-msgstr "放棄前透過 SNMP 讀取字串嘗試連線至裝置的最大次數。"
+msgstr "在放棄之前通過SNMP讀取串到達設備的最大嘗試次數。"
 
 #: setup.php
 msgid "Maximum OID's Per Get Request"
@@ -3290,47 +3290,47 @@ msgstr "指定可在單個SNMP Get請求中獲取的OID數。"
 
 #: setup.php
 msgid "SNMP Username (v3)"
-msgstr "SNMP 使用者名稱 (v3)"
+msgstr "SNMP用戶名（v3）"
 
 #: setup.php
 msgid "SNMP v3 username for this device."
-msgstr "此裝置的 SNMP v3 使用者名稱。"
+msgstr "此設備的SNMP v3用戶名。"
 
 #: setup.php
 msgid "SNMP Password (v3)"
-msgstr "SNMP 密碼 (v3)"
+msgstr "SNMP密碼（v3）"
 
 #: setup.php
 msgid "SNMP v3 password for this device."
-msgstr "此裝置的 SNMP v3 密碼。"
+msgstr "此設備的SNMP v3密碼。"
 
 #: setup.php
 msgid "SNMP Auth Protocol (v3)"
-msgstr "SNMP 驗證通訊協定 (v3)"
+msgstr "SNMP身份驗證協議（v3）"
 
 #: setup.php
 msgid "Choose the SNMPv3 Authorization Protocol."
-msgstr "選擇 SNMPv3 授權通訊協定。"
+msgstr "選擇SNMPv3授權協議。"
 
 #: setup.php
 msgid "SNMP Privacy Passphrase (v3)"
-msgstr "SNMP 隱私密語 (v3)"
+msgstr "SNMP隱私密碼（v3）"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Passphrase."
-msgstr "選擇 SNMPv3 加密密碼片語。"
+msgstr "選擇SNMPv3隱私密碼。"
 
 #: setup.php
 msgid "SNMP Privacy Protocol (v3)"
-msgstr "SNMP 隱私通訊協定 (v3)"
+msgstr "SNMP隱私協議（v3）"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Protocol."
-msgstr "選擇 SNMPv3 加密通訊協定。"
+msgstr "選擇SNMPv3隱私協議。"
 
 #: setup.php
 msgid "SNMP Context (v3)"
-msgstr "SNMP 內容 (v3)"
+msgstr "SNMP上下文（v3）"
 
 #: setup.php
 msgid "Enter the SNMP v3 Context to use for this device."
@@ -3338,7 +3338,7 @@ msgstr "輸入要用於此設備的SNMP v3上下文。"
 
 #: setup.php
 msgid "SNMP Engine ID (v3)"
-msgstr "SNMP 引擎 ID (v3)"
+msgstr "SNMP引擎ID（v3）"
 
 #: setup.php
 msgid "Enter the SNMP v3 Engine ID to use for this device."
@@ -3386,11 +3386,11 @@ msgstr "此欄位值可用於儲存特定裝置的一般資訊。"
 
 #: setup.php
 msgid "Disable Device"
-msgstr "停用裝置"
+msgstr "禁用設備"
 
 #: setup.php
 msgid "Check this box to disable all checks for this host."
-msgstr "勾選此核取方塊以停用此主機的所有檢查。"
+msgstr "選中此框可禁用此主機的所有檢查。"
 
 #: setup.php
 msgid "Switch/Hub, Switch/Router Settings"
@@ -3470,11 +3470,11 @@ msgstr "用於SSH身份驗證的私鑰的路徑。"
 
 #: setup.php
 msgid "Sequence"
-msgstr "順序"
+msgstr "序列"
 
 #: setup.php
 msgid "Sequence of Item."
-msgstr "項目的順序。"
+msgstr "項目順序。"
 
 #: setup.php
 msgid "General Site Settings"
@@ -3510,7 +3510,7 @@ msgstr "請主要設施/安全聯繫人姓名和本網站的電話號碼。"
 
 #: setup.php
 msgid "Site Information"
-msgstr "站台資訊"
+msgstr "網站信息"
 
 #: setup.php
 msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
@@ -3558,7 +3558,7 @@ msgstr "所有事件"
 
 #: setup.php
 msgid "Every Hour"
-msgstr "每小時"
+msgstr "每隔一小時"
 
 #: setup.php
 msgid "Email Addresses"
