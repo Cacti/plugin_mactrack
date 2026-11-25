@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Bulgarian <https://translate.cacti.net/projects/cacti/mactrack/bg/>\nLanguage: bg-BG\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Bulgarian <https://translate.cacti.net/projects/cacti/mactrack/bg/>\nLanguage: bg-BG\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -325,7 +325,7 @@ msgstr "Статус: неактивен, LastRuntime: %2.1f секунди, П�
 #: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
 #: setup.php
 msgid "Disabled"
-msgstr "деактивиран"
+msgstr "Изключен"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -795,7 +795,7 @@ msgstr "Описание на устройството"
 #: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
 #: mactrack_view_devices.php mactrack_view_sites.php setup.php
 msgid "Device Type"
-msgstr "Тип на устройството"
+msgstr "Тип устройство"
 
 #: mactrack_device_types.php
 msgid "Port Scanner"
@@ -1319,16 +1319,16 @@ msgstr "Опции за SNMP [редактиране на %s]"
 
 #: mactrack_snmp.php
 msgid "SNMP Options [new]"
-msgstr "Опции на SNMP [new]"
+msgstr "SNMP опции [нови]"
 
 #: mactrack_snmp.php
 #, php-format
 msgid "SNMP Option Set [edit: %s]"
-msgstr "SNMP Option Set [редактиране: %s]"
+msgstr "Набор от SNMP опции [редактиране: %s]"
 
 #: mactrack_snmp.php
 msgid "SNMP Option Set [new]"
-msgstr "Набор от опции за SNMP [new]"
+msgstr "Набор от SNMP опции [нов]"
 
 #: mactrack_snmp.php setup.php
 msgid "Mactrack SNMP Options"
@@ -1630,7 +1630,7 @@ msgstr "По един на сканиране"
 
 #: mactrack_utilities.php setup.php
 msgid "Hourly"
-msgstr "всеки час"
+msgstr "На всеки час"
 
 #: mactrack_utilities.php setup.php
 msgid "Daily"
@@ -2033,7 +2033,7 @@ msgstr "Честота на сканиране"
 
 #: mactrack_view_dashboard.php
 msgid "Concurrent processes"
-msgstr "Едновременни процеси"
+msgstr "Съвместни процеси"
 
 #: mactrack_view_dashboard.php
 msgid "Scanner max runtime"
@@ -2575,7 +2575,7 @@ msgstr "Изберете кога да се събират MAC и IP адрес�
 
 #: setup.php
 msgid "Concurrent Processes"
-msgstr "Едновременни процеси"
+msgstr "Съвместни процеси"
 
 #: setup.php
 msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
@@ -2920,7 +2920,7 @@ msgstr "(Редактирай)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "Импорт"
+msgstr "(Импортиране)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3010,7 +3010,7 @@ msgstr "%d минута"
 
 #: setup.php
 msgid "Matches"
-msgstr "Съвпадения"
+msgstr "съвпада с"
 
 #: setup.php
 msgid "Contains"
@@ -3218,7 +3218,7 @@ msgstr "Как се събира серийният номер за този OID
 
 #: setup.php
 msgid "SNMP Get"
-msgstr "Получете SNMP"
+msgstr "SNMP get"
 
 #: setup.php
 msgid "SNMP Walk"
