@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Japanese <https://translate.cacti.net/projects/cacti/mactrack/ja/>\nLanguage: ja-JP\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Japanese <https://translate.cacti.net/projects/cacti/mactrack/ja/>\nLanguage: ja-JP\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -201,7 +201,7 @@ msgstr "再起動以降"
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
 #: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Down"
-msgstr "下"
+msgstr "ダウン"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
 #: mactrack_view_devices.php mactrack_view_interfaces.php
@@ -864,7 +864,7 @@ msgstr "他のユーザーと共有するためにデバイスタイプをエク
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "販売者"
+msgstr "ベンダー"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -1319,7 +1319,7 @@ msgstr "SNMPオプション[%sを編集]"
 
 #: mactrack_snmp.php
 msgid "SNMP Options [new]"
-msgstr "SNMPオプション[new]"
+msgstr "SNMP オプション [新規]"
 
 #: mactrack_snmp.php
 #, php-format
@@ -1328,7 +1328,7 @@ msgstr "SNMPオプションセット[編集：%s]"
 
 #: mactrack_snmp.php
 msgid "SNMP Option Set [new]"
-msgstr "SNMPオプションセット[new]"
+msgstr "SNMP オプションセット [新規]"
 
 #: mactrack_snmp.php setup.php
 msgid "Mactrack SNMP Options"
@@ -1630,7 +1630,7 @@ msgstr "スキャンごとに 1 回"
 
 #: mactrack_utilities.php setup.php
 msgid "Hourly"
-msgstr "一時間ごと"
+msgstr "毎時"
 
 #: mactrack_utilities.php setup.php
 msgid "Daily"
@@ -2033,7 +2033,7 @@ msgstr "スキャン頻度"
 
 #: mactrack_view_dashboard.php
 msgid "Concurrent processes"
-msgstr "同時実行プロセス数"
+msgstr "並行プロセス"
 
 #: mactrack_view_dashboard.php
 msgid "Scanner max runtime"
@@ -2333,7 +2333,7 @@ msgstr "アウトディスク（OD / S）"
 
 #: mactrack_view_interfaces.php
 msgid "Last Change"
-msgstr "最後の変更"
+msgstr "最終変更"
 
 #: mactrack_view_interfaces.php
 msgid "Last Scanned"
@@ -2575,7 +2575,7 @@ msgstr "ネットワークデバイスからMACおよびIPアドレスとイン�
 
 #: setup.php
 msgid "Concurrent Processes"
-msgstr "同時実行プロセス数"
+msgstr "並行プロセス"
 
 #: setup.php
 msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
@@ -2920,7 +2920,7 @@ msgstr "(編集)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "インポート"
+msgstr "(インポート)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3022,7 +3022,7 @@ msgstr "始まる"
 
 #: setup.php
 msgid "Does Not Contain"
-msgstr "を含まない"
+msgstr "含まない"
 
 #: setup.php
 msgid "Does Not Begin With"
@@ -3060,12 +3060,12 @@ msgstr "%d 分ごと"
 #: setup.php
 #, php-format
 msgid "Every %d Hour"
-msgstr "%d時間ごと"
+msgstr "%d 時間ごと"
 
 #: setup.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "%d時間ごと"
+msgstr "%d 時間ごと"
 
 #: setup.php
 msgid "Every Day"
@@ -3093,7 +3093,7 @@ msgstr "スキャン完了時"
 #: setup.php
 #, php-format
 msgid "Every %d Days"
-msgstr "%d日ごと"
+msgstr "%d 日ごと"
 
 #: setup.php
 msgid "Every Week"
@@ -3222,7 +3222,7 @@ msgstr "SNMP Get"
 
 #: setup.php
 msgid "SNMP Walk"
-msgstr "SNMPウォーク"
+msgstr "SNMP walk"
 
 #: setup.php
 msgid "Low User Port Number"
