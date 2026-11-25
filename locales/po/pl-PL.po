@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Polish <https://translate.cacti.net/projects/cacti/mactrack/pl/>\nLanguage: pl-PL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Polish <https://translate.cacti.net/projects/cacti/mactrack/pl/>\nLanguage: pl-PL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -309,7 +309,7 @@ msgstr "%d tygodni"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
-msgstr "Niezarejestrowany"
+msgstr "Niezarejestrowane"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -864,7 +864,7 @@ msgstr "Eksportuj typy urządzeń, aby udostępnić je innym"
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "Sprzedawca"
+msgstr "Producent"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -1360,7 +1360,7 @@ msgstr "Powroty"
 
 #: mactrack_snmp.php
 msgid "Max OIDs"
-msgstr "Max OIDs"
+msgstr "Maks. liczba OID"
 
 #: mactrack_snmp.php mactrack_view_dot1x.php
 msgid "Username"
@@ -1474,7 +1474,7 @@ msgstr "Maksymalny czas skanowania urządzenia:"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "minutes"
-msgstr "minut"
+msgstr "Minuty"
 
 #: mactrack_utilities.php
 msgid "DNS Configuration Information"
@@ -2615,7 +2615,7 @@ msgstr "Podczas korzystania z narzędzi poproś o weryfikację"
 
 #: setup.php
 msgid "Data Retention"
-msgstr "Przechowywanie danych"
+msgstr "Retencja danych"
 
 #: setup.php
 msgid "How long should port MAC details be retained in the database."
@@ -2920,7 +2920,7 @@ msgstr "(Edytuj)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "Importuj"
+msgstr "(Import)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3001,7 +3001,7 @@ msgstr "MacTrack"
 #: setup.php
 #, php-format
 msgid "%d Seconds"
-msgstr "%d sek."
+msgstr "%d sek"
 
 #: setup.php
 #, php-format
@@ -3010,7 +3010,7 @@ msgstr "%d minuta"
 
 #: setup.php
 msgid "Matches"
-msgstr "Dopasowania"
+msgstr "Pasuje"
 
 #: setup.php
 msgid "Contains"
@@ -3079,7 +3079,7 @@ msgstr "%d miesiąc"
 #: setup.php
 #, php-format
 msgid "%d Months"
-msgstr "%d miesiące"
+msgstr "%d miesięcy"
 
 #: setup.php
 #, php-format
@@ -3218,11 +3218,11 @@ msgstr "W jaki sposób zbierany jest numer seryjny dla tego OID.  Jeśli 'SNMP W
 
 #: setup.php
 msgid "SNMP Get"
-msgstr "SNMP Pobierz"
+msgstr "SNMP get"
 
 #: setup.php
 msgid "SNMP Walk"
-msgstr "Spacer SNMP"
+msgstr "SNMP walk"
 
 #: setup.php
 msgid "Low User Port Number"
