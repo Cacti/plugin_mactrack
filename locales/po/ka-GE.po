@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: Cacti\n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-18 18:36+0000\n"
-"PO-Revision-Date: 2026-11-16 19:46+0000\n"
-"Last-Translator: Anonymous <anonymous@cacti.net>\n"
-"Language-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\n"
-"Language: ka-GE\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -540,10 +528,8 @@ msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x se
 msgstr ""
 
 #: lib/mactrack_partition_rebuild.php
-#, fuzzy
-#| msgid "Last DB Maintenance Time:"
 msgid "Maintenance Mode"
-msgstr "მონაცემთა ბაზის ბოლო რემონტის დრო:"
+msgstr "ტექმომსახურების რეჟიმი"
 
 #: mactrack_actions.php
 #, php-format
@@ -850,7 +836,7 @@ msgstr "არა"
 
 #: mactrack_device_types.php mactrack_view_macs.php
 msgid "Yes"
-msgstr "კი"
+msgstr "დიახ"
 
 #: mactrack_device_types.php
 msgid "No Mactrack Device Types Found"
@@ -1559,10 +1545,8 @@ msgid "Current Activity"
 msgstr "მიმდინარე თარიღი"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Status"
 msgid "State:"
-msgstr "სტატუსი"
+msgstr "მდგომარეობა:"
 
 #: mactrack_utilities.php
 msgid "Since:"
@@ -1579,10 +1563,8 @@ msgid "Last Skipped Poller Run:"
 msgstr "გამომთხოვის ბოლო გაშვების დრო:"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Last DB Maintenance Time:"
 msgid "Last Maintenance Steps"
-msgstr "მონაცემთა ბაზის ბოლო რემონტის დრო:"
+msgstr "ბოლო ტექმომსახურების ნაბიჯები"
 
 #: mactrack_utilities.php
 msgid "Seconds"
@@ -1757,10 +1739,9 @@ msgid "Rebuild"
 msgstr ""
 
 #: mactrack_utilities.php
-#, fuzzy, php-format
-#| msgid "Running Processes:"
+#, php-format
 msgid "Running since %s"
-msgstr "გაშვებული პროცესები:"
+msgstr "მუშაობს %s-დან"
 
 #: mactrack_utilities.php
 msgid "Last Rebuild"
@@ -1777,10 +1758,8 @@ msgid "%s: failed. %s"
 msgstr ""
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Last DB Maintenance Time:"
 msgid "Last Maintenance"
-msgstr "მონაცემთა ბაზის ბოლო რემონტის დრო:"
+msgstr "ბოლო ტექმომსახურება"
 
 #: mactrack_utilities.php
 #, php-format
@@ -2726,7 +2705,7 @@ msgstr ""
 
 #: setup.php
 msgid "Data Retention"
-msgstr "მონაცემების შენარჩუნება"
+msgstr "მონაცემების შენახვა"
 
 #: setup.php
 msgid "How long should port MAC details be retained in the database."
