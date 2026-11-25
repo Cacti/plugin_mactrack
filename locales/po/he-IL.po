@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Hebrew (Israel) <https://translate.cacti.net/projects/cacti/mactrack/he_IL/>\nLanguage: he-IL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && n % 10 == 0) ? 2 : 3));\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Hebrew (Israel) <https://translate.cacti.net/projects/cacti/mactrack/he_IL/>\nLanguage: he-IL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && n % 10 == 0) ? 2 : 3));\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -201,7 +201,7 @@ msgstr "מאז הפעלה מחדש"
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
 #: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Down"
-msgstr "למטה"
+msgstr "מושבת"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
 #: mactrack_view_devices.php mactrack_view_interfaces.php
@@ -309,7 +309,7 @@ msgstr "%d שבועות"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
-msgstr "לא מוקלט"
+msgstr "לא מתועד"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -325,7 +325,7 @@ msgstr "מצב: סרק, זמן ריצה אחרון: %2.1f שניות, תהליכ
 #: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
 #: setup.php
 msgid "Disabled"
-msgstr "מושבת"
+msgstr "לא זמין"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -597,7 +597,7 @@ msgstr "ביטול"
 #: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
 #: mactrack_view_macs.php
 msgid "Return"
-msgstr "חזור"
+msgstr "חזרה"
 
 #: mactrack_device_types.php
 msgid "New Type"
@@ -864,7 +864,7 @@ msgstr "ייצוא סוגי התקנים לשיתוף עם אחרים"
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "ספק"
+msgstr "יצרן"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -1888,15 +1888,15 @@ msgstr "החלף את שם המארח"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "ED IP Address"
-msgstr "כתובת IP IP"
+msgstr "כתובת IP של ED"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "ED DNS Hostname"
-msgstr "שם מארח מארח DNS"
+msgstr "שם מארח DNS של ED"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "ED MAC Address"
-msgstr "כתובת MAC MAC"
+msgstr "כתובת MAC של ED"
 
 #: mactrack_view_arp.php mactrack_view_macs.php
 msgid "Vendor Name"
@@ -2269,7 +2269,7 @@ msgstr "תיאור"
 
 #: mactrack_view_interfaces.php
 msgid "Issues"
-msgstr "נושאים ידועים לבחירה"
+msgstr "בעיות"
 
 #: mactrack_view_interfaces.php
 msgid "Alias"
@@ -2880,7 +2880,7 @@ msgstr "dot1x Deta"
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "הגדרות פרוקסי אינטרנט"
+msgstr "הגדרות שרת Proxy לאינטרנט"
 
 #: setup.php
 msgid "Internet Proxy Address"
@@ -2920,7 +2920,7 @@ msgstr "(עריכה)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "ייבוא"
+msgstr "(ייבוא)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3174,7 +3174,7 @@ msgstr "ספק מידע מפתח שיסייע ל-Mactrack לזהות את סוג
 
 #: setup.php
 msgid "Vendor SNMP Object ID Match"
-msgstr "מזהה מזהה אובייקט SNMP התאמה"
+msgstr "התאמת מזהה אובייקט SNMP של יצרן"
 
 #: setup.php
 msgid "MAC Address Scanning Function"
@@ -3218,11 +3218,11 @@ msgstr "איך הוא המספר הסידורי שנאסף עבור OID זה. א
 
 #: setup.php
 msgid "SNMP Get"
-msgstr "SNMP קבל"
+msgstr "קריאת SNMP get"
 
 #: setup.php
 msgid "SNMP Walk"
-msgstr "SNMP Walk"
+msgstr "סריקת SNMP walk"
 
 #: setup.php
 msgid "Low User Port Number"
@@ -3318,7 +3318,7 @@ msgstr "משפט סיסמאות של SNMP (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Passphrase."
-msgstr "בחר במשפט הסיסמה של פרטיות SNMPv3."
+msgstr "בחר את משפט הסיסמה של פרטיות SNMPv3."
 
 #: setup.php
 msgid "SNMP Privacy Protocol (v3)"
@@ -3518,7 +3518,7 @@ msgstr "ספק מידע ספציפי לאתר, בצורה חופשית, המאפ
 
 #: setup.php
 msgid "General Mac Address Tracking Settings"
-msgstr "כללי מעקב כתובת כתובת"
+msgstr "הגדרות כלליות למעקב כתובות MAC"
 
 #: setup.php
 msgid "MAC Address"
