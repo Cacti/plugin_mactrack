@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Russian <https://translate.cacti.net/projects/cacti/mactrack/ru/>\nLanguage: ru-RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Russian <https://translate.cacti.net/projects/cacti/mactrack/ru/>\nLanguage: ru-RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -305,7 +305,7 @@ msgstr "%d Дней"
 #: lib/mactrack_functions.php
 #, php-format
 msgid "%d Weeks"
-msgstr "%d Недели"
+msgstr "%d нед."
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
@@ -325,7 +325,7 @@ msgstr "Статус: ожидание, последнее время работ
 #: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
 #: setup.php
 msgid "Disabled"
-msgstr "отключено"
+msgstr "Выключен"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -864,7 +864,7 @@ msgstr "Экспорт типов устройств для обмена с др
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "Продавец"
+msgstr "Производитель"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -1398,7 +1398,7 @@ msgstr "SNMP параметры не найдены"
 
 #: mactrack_snmp.php
 msgid "Options"
-msgstr "Опции"
+msgstr "Параметры"
 
 #: mactrack_utilities.php
 msgid "Mactrack Database Results"
@@ -1474,7 +1474,7 @@ msgstr "Максимальное время сканирования одног�
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "minutes"
-msgstr "минут"
+msgstr "Минуты"
 
 #: mactrack_utilities.php
 msgid "DNS Configuration Information"
@@ -1630,7 +1630,7 @@ msgstr "По одному на сканирование"
 
 #: mactrack_utilities.php setup.php
 msgid "Hourly"
-msgstr "Каждый час"
+msgstr "Ежечасно"
 
 #: mactrack_utilities.php setup.php
 msgid "Daily"
@@ -1812,7 +1812,7 @@ msgstr "Удаляет старые и потенциально устаревш
 
 #: mactrack_utilities.php
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
-msgstr "Удаляет <strong>ALL</strong> Port to MAC to IP Association из базы данных все IP-адреса, IP-диапазоны и VLANS.  Эта утилита полезна, когда вы хотите начать все сначала.  <strong>DANGER: все предыдущие данные удалены.</strong>."
+msgstr "Удаляет из базы данных <strong>ВСЕ</strong> сопоставления порт–MAC–IP, а также все IP-адреса, диапазоны IP и VLAN.  Эта утилита полезна, если вы хотите начать всё с начала.  <strong>ОПАСНО: все предыдущие данные будут удалены.</strong>"
 
 #: mactrack_utilities.php
 msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
@@ -2045,7 +2045,7 @@ msgstr "Хранение MAC-адресов"
 
 #: mactrack_view_dashboard.php
 msgid "days"
-msgstr "дней"
+msgstr "Дни"
 
 #: mactrack_view_dashboard.php
 msgid "IP retention"
@@ -2772,7 +2772,7 @@ msgstr "Шаблон текста письма для уведомлений Mac
 
 #: setup.php
 msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
-msgstr "Mac Address <MAC> находится по IP-адресу <IP> для номера билета: <TICKET>.<br>Устройство расположено на <br>Site: <SITENAME>, устройство <DEVICENAME>, IP-адрес <DEVICEIP>, порт <PORTNUMBER> и имя порта <PORTNAME>."
+msgstr "MAC-адрес <MAC> найден по IP-адресу <IP> для номера заявки: <TICKET>.<br>Устройство расположено на<br>Площадка: <SITENAME>, устройство <DEVICENAME>, IP <DEVICEIP>, порт <PORTNUMBER> и имя порта <PORTNAME>"
 
 #: setup.php
 msgid "MacAuth Report Email Addresses"
@@ -2920,7 +2920,7 @@ msgstr "(Редактировать)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "Импорт"
+msgstr "(Импорт)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3079,7 +3079,7 @@ msgstr "%d Месяц"
 #: setup.php
 #, php-format
 msgid "%d Months"
-msgstr "%d Месяца"
+msgstr "%d мес."
 
 #: setup.php
 #, php-format
@@ -3218,7 +3218,7 @@ msgstr "Как серийный номер, собранный для этого
 
 #: setup.php
 msgid "SNMP Get"
-msgstr "SNMP Получить"
+msgstr "SNMP get"
 
 #: setup.php
 msgid "SNMP Walk"
