@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Hindi <https://translate.cacti.net/projects/cacti/mactrack/hi/>\nLanguage: hi-IN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Hindi <https://translate.cacti.net/projects/cacti/mactrack/hi/>\nLanguage: hi-IN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -309,7 +309,7 @@ msgstr "%d सप्ताह"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
-msgstr "दर्ज नहीं है"
+msgstr "दर्ज नहीं"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -795,7 +795,7 @@ msgstr "डिवाइस प्रकार विवरण"
 #: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
 #: mactrack_view_devices.php mactrack_view_sites.php setup.php
 msgid "Device Type"
-msgstr "उपकरण का प्रकार"
+msgstr "डिवाइस प्रकार"
 
 #: mactrack_device_types.php
 msgid "Port Scanner"
@@ -907,7 +907,7 @@ msgstr "Cacti होस्ट से SNMP सेटिंग्स कॉपी 
 
 #: mactrack_devices.php
 msgid "You must select at least one device."
-msgstr "आपको कम से कम एक डिवाइस का चयन करना होगा।"
+msgstr "आपको कम से कम एक डिवाइस चुनना होगा।"
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to enable the following devices."
@@ -2916,11 +2916,11 @@ msgstr "Mactrack डिवाइस"
 
 #: setup.php
 msgid "(Edit)"
-msgstr "संपादित करें"
+msgstr "(संपादित करें)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "आयात करें"
+msgstr "(आयात)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3093,7 +3093,7 @@ msgstr "स्कैन समापन पर"
 #: setup.php
 #, php-format
 msgid "Every %d Days"
-msgstr "हर %d दिन"
+msgstr "प्रत्येक %d दिन"
 
 #: setup.php
 msgid "Every Week"
@@ -3430,7 +3430,7 @@ msgstr "इस उपकरण से कनेक्ट करने के ल
 
 #: setup.php
 msgid "Telnet"
-msgstr "टेलनेट"
+msgstr "Telnet"
 
 #: setup.php
 msgid "SSH"
