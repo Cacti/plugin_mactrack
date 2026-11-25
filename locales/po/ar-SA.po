@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Arabic (Saudi Arabia) <https://translate.cacti.net/projects/cacti/mactrack/ar_SA/>\nLanguage: ar-SA\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Arabic (Saudi Arabia) <https://translate.cacti.net/projects/cacti/mactrack/ar_SA/>\nLanguage: ar-SA\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -201,7 +201,7 @@ msgstr "منذ إعادة التشغيل"
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
 #: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Down"
-msgstr "متوقف"
+msgstr "معطل"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
 #: mactrack_view_devices.php mactrack_view_interfaces.php
@@ -864,7 +864,7 @@ msgstr "تصدير أنواع الأجهزة لمشاركتها مع الآخر�
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "بائع"
+msgstr "الشركة المصنّعة"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -911,11 +911,11 @@ msgstr "يجب عليك تحديد جهاز واحد على الأقل."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to enable the following devices."
-msgstr "انقر فوق \"متابعة\" لتمكين الأجهزة التالية."
+msgstr "انقر فوق &quot;متابعة&quot; لتمكين الأجهزة (الأجهزة) التالية."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to disable the following devices."
-msgstr "انقر فوق \"متابعة\" لتعطيل الأجهزة التالية."
+msgstr "انقر فوق &quot;متابعة&quot; لتعطيل الأجهزة (الأجهزة) التالية."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
@@ -1344,7 +1344,7 @@ msgstr "الإصدار"
 
 #: mactrack_snmp.php setup.php
 msgid "Community"
-msgstr "القرية/ الحي/ البلدة"
+msgstr "المجتمع"
 
 #: mactrack_snmp.php setup.php
 msgid "Port"
@@ -1474,7 +1474,7 @@ msgstr "الحد الأقصى لكل وقت فحص الجهاز:"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "minutes"
-msgstr "دقيقة"
+msgstr "دقائق"
 
 #: mactrack_utilities.php
 msgid "DNS Configuration Information"
@@ -1570,7 +1570,7 @@ msgstr "متاح"
 
 #: mactrack_utilities.php
 msgid "Index"
-msgstr "منسب، معامل، دليل، مؤشر. سبابة"
+msgstr "الفهرس"
 
 #: mactrack_utilities.php
 msgid "Rows (estimate)"
@@ -1578,7 +1578,7 @@ msgstr "الصفوف (تقديري)"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Table"
-msgstr "جدول"
+msgstr "الجدول"
 
 #: mactrack_utilities.php
 msgid "Unknown: the database runs on another host"
@@ -2333,7 +2333,7 @@ msgstr "خارج القرص (od / s)"
 
 #: mactrack_view_interfaces.php
 msgid "Last Change"
-msgstr "اخر تغير"
+msgstr "آخر تغيير"
 
 #: mactrack_view_interfaces.php
 msgid "Last Scanned"
@@ -2920,7 +2920,7 @@ msgstr "(تعديل)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "استيراد"
+msgstr "(استيراد)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -2988,7 +2988,7 @@ msgstr "اقتطاع ثم إعادة إنشاء جدول نتائج المنفذ
 
 #: setup.php
 msgid "Refresh/Update Vendor MAC Database from IEEE"
-msgstr "تحديث / تحديث قاعدة بيانات ماك من البائع من IEEE"
+msgstr "إنعاش / تحديث قاعدة بيانات MAC للبائع من IEEE"
 
 #: setup.php
 msgid "Mactrack Graph Viewer"
@@ -3006,7 +3006,7 @@ msgstr "%d ثواني"
 #: setup.php
 #, php-format
 msgid "%d Minute"
-msgstr "دقيقة %d"
+msgstr "%d دقيقة"
 
 #: setup.php
 msgid "Matches"
@@ -3065,7 +3065,7 @@ msgstr "كل %d ساعة"
 #: setup.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "كل %d ساعة"
+msgstr "كل %d ساعات"
 
 #: setup.php
 msgid "Every Day"
@@ -3218,11 +3218,11 @@ msgstr "كيف يتم جمع الرقم التسلسلي لهذا OID. إذا ك
 
 #: setup.php
 msgid "SNMP Get"
-msgstr "SNMP الحصول على"
+msgstr "جلب SNMP (get)"
 
 #: setup.php
 msgid "SNMP Walk"
-msgstr "SNMP المشي"
+msgstr "فحص متسلسل SNMP (walk)"
 
 #: setup.php
 msgid "Low User Port Number"
@@ -3290,7 +3290,7 @@ msgstr "حدد عدد OID الذي يمكن الحصول عليه في طلب ا
 
 #: setup.php
 msgid "SNMP Username (v3)"
-msgstr "اسم مستخدم SNMP (الإصدار 3)"
+msgstr "اسم المستخدم SNMP (الإصدار 3)"
 
 #: setup.php
 msgid "SNMP v3 username for this device."
@@ -3302,7 +3302,7 @@ msgstr "كلمة مرور SNMP (الإصدار 3)"
 
 #: setup.php
 msgid "SNMP v3 password for this device."
-msgstr "SNMP v3 كلمة المرور لهذا الجهاز."
+msgstr "كلمة مرور SNMP v3 لهذا الجهاز."
 
 #: setup.php
 msgid "SNMP Auth Protocol (v3)"
@@ -3314,15 +3314,15 @@ msgstr "اختر بروتوكول تخويل SNMPv3."
 
 #: setup.php
 msgid "SNMP Privacy Passphrase (v3)"
-msgstr "عبارة مرور SNMP الخصوصية (الإصدار 3)"
+msgstr "عبارة مرور خصوصية SNMP (الإصدار 3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Passphrase."
-msgstr "اختر عبارة مرور الخصوصية SNMPv3."
+msgstr "اختر عبارة مرور خصوصية SNMPv3."
 
 #: setup.php
 msgid "SNMP Privacy Protocol (v3)"
-msgstr "بروتوكول خصوصية SNMP (الإصدار 3)"
+msgstr "بروتوكول SNMP الخصوصية (الإصدار 3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Protocol."
@@ -3338,7 +3338,7 @@ msgstr "أدخل سياق SNMP v3 لاستخدامه لهذا الجهاز."
 
 #: setup.php
 msgid "SNMP Engine ID (v3)"
-msgstr "معرف محرك SNMP (الإصدار 3)"
+msgstr "معرف مشغل SNMP (الإصدار 3)"
 
 #: setup.php
 msgid "Enter the SNMP v3 Engine ID to use for this device."
@@ -3430,7 +3430,7 @@ msgstr "اختر نوع الجهاز الطرفي الذي تستخدمه للا
 
 #: setup.php
 msgid "Telnet"
-msgstr "تلنت"
+msgstr "Telnet"
 
 #: setup.php
 msgid "SSH"
