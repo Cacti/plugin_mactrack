@@ -4,61 +4,47 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-18 18:36+0000\n"
-"PO-Revision-Date: 2026-11-16 19:46+0000\n"
-"Last-Translator: Anonymous <anonymous@cacti.net>\n"
-"Language-Team: German <https://translate.cacti.net/projects/cacti/mactrack/de/>\n"
-"Language: de-DE\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: German <https://translate.cacti.net/projects/cacti/mactrack/de/>\nLanguage: de-DE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
-msgstr ""
+msgstr "MacTrack konnte den Standardstandort auch nach wiederholten Versuchen nicht initialisieren. Prüfen Sie das Cacti-Protokoll, bevor Sie fortfahren."
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
-msgstr ""
+msgstr "MacTrack konnte den Standardstandort nicht initialisieren. Prüfen Sie das Cacti-Protokoll, bevor Sie fortfahren."
 
 #: lib/mactrack_activity.php
-#, fuzzy
-#| msgid "Scanning Rate: Every %s"
 msgid "Scanning devices"
-msgstr "Abtastrate: Alle %s"
+msgstr "Geräte werden gescannt"
 
 #: lib/mactrack_activity.php
 msgid "Waiting for the DNS resolver"
-msgstr ""
+msgstr "Warten auf den DNS-Resolver"
 
 #: lib/mactrack_activity.php
 msgid "Transferring and aggregating scan results"
-msgstr ""
+msgstr "Übertragen und Aggregieren der Scan-Ergebnisse"
 
 #: lib/mactrack_activity.php
 msgid "Maintaining port table partitions"
-msgstr ""
+msgstr "Porttabellen-Partitionen werden gewartet"
 
 #: lib/mactrack_activity.php
 msgid "Deleting expired port rows"
-msgstr ""
+msgstr "Abgelaufene Port-Zeilen werden gelöscht"
 
 #: lib/mactrack_activity.php
 msgid "Pruning scan dates"
-msgstr ""
+msgstr "Scan-Daten werden bereinigt"
 
 #: lib/mactrack_activity.php
 msgid "Deleting expired IP rows"
-msgstr ""
+msgstr "Abgelaufene IP-Zeilen werden gelöscht"
 
 #: lib/mactrack_activity.php
 msgid "Optimizing the IP table"
-msgstr ""
+msgstr "IP-Tabelle wird optimiert"
 
 #: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
 #: mactrack_view_dot1x.php
@@ -67,44 +53,43 @@ msgstr "Leerlauf"
 
 #: lib/mactrack_activity.php
 msgid "Upgrading: rebuilding aggregated ports"
-msgstr ""
+msgstr "Upgrade läuft: Aggregierte Ports werden neu erstellt"
 
 #: lib/mactrack_activity.php
 #, php-format
 msgid "About %s rows left to copy (estimate)"
-msgstr ""
+msgstr "Etwa %s Zeilen noch zu kopieren (Schätzung)"
 
 #: lib/mactrack_activity.php
 msgid "Repartitioning the port, IP and 802.1x tables"
-msgstr ""
+msgstr "Neupartitionierung der Port-, IP- und 802.1x-Tabellen"
 
 #: lib/mactrack_activity.php
 #, php-format
 msgid "%d devices in this scan"
-msgstr ""
+msgstr "%d Geräte in diesem Scan"
 
 #: lib/mactrack_activity.php
 #, php-format
 msgid "The process stopped during: %s"
-msgstr ""
+msgstr "Der Vorgang wurde angehalten während: %s"
 
 #: lib/mactrack_activity.php
-#, fuzzy, php-format
-#| msgid "Scanning Rate: Every %s"
+#, php-format
 msgid "Scanning %d devices"
-msgstr "Abtastrate: Alle %s"
+msgstr "%d Geräte werden gescannt"
 
 #: lib/mactrack_activity.php
 msgid "A database upgrade is running"
-msgstr ""
+msgstr "Ein Datenbank-Upgrade wird ausgeführt"
 
 #: lib/mactrack_activity.php
 msgid "The port, IP and 802.1x table partitioning has not finished"
-msgstr ""
+msgstr "Die Partitionierung der Port-, IP- und 802.1x-Tabellen ist noch nicht abgeschlossen"
 
 #: lib/mactrack_activity.php
 msgid "The aggregated ports rebuild has not finished"
-msgstr ""
+msgstr "Der Neuaufbau der aggregierten Ports ist noch nicht abgeschlossen"
 
 #: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
 msgid "Running"
@@ -112,7 +97,7 @@ msgstr "Läuft"
 
 #: lib/mactrack_functions.php
 msgid "No method"
-msgstr "Methode"
+msgstr "Keine Methode"
 
 #: lib/mactrack_functions.php mactrack_view_dot1x.php
 msgid "Authentication Success"
@@ -132,16 +117,15 @@ msgstr "Berechtigung fehlgeschlagen"
 
 #: lib/mactrack_functions.php
 msgid "Not observed in latest scan"
-msgstr ""
+msgstr "Im letzten Scan nicht erfasst"
 
 #: lib/mactrack_functions.php
 msgid "Locally Admined MAC"
-msgstr ""
+msgstr "Lokal verwaltete MAC"
 
 #: lib/mactrack_functions.php
-#, fuzzy
 msgid "Mactrack Device Tracking OUI Database Import Results"
-msgstr "Geräteverfolgung OUI-Datenbank-Importergebnisse"
+msgstr "MacTrack-Geräteverfolgung: OUI-Datenbank-Importergebnisse"
 
 #: lib/mactrack_functions.php
 msgid "Getting OUI Database from IEEE"
@@ -196,11 +180,11 @@ msgstr "Rescan-Gerät"
 
 #: lib/mactrack_functions.php
 msgid "View Non Interface Graphs"
-msgstr "Schnittstellen anzeigen"
+msgstr "Nicht-Schnittstellen-Diagramme anzeigen"
 
 #: lib/mactrack_functions.php
 msgid "No Non Interface Graphs in Cacti"
-msgstr "Keine Nicht-Schnittstellendiagramme in Kakteen"
+msgstr "Keine Nicht-Schnittstellen-Diagramme in Cacti"
 
 #: lib/mactrack_functions.php
 msgid "View Interface Graphs"
@@ -208,7 +192,7 @@ msgstr "Schnittstellen anzeigen"
 
 #: lib/mactrack_functions.php
 msgid "No Interface Graphs in Cacti"
-msgstr "Schnittstellen anzeigen"
+msgstr "Keine Schnittstellen-Graphen in Cacti"
 
 #: lib/mactrack_functions.php
 msgid "Since Restart"
@@ -226,23 +210,19 @@ msgstr "Hoch"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
 msgid "Unaliased"
-msgstr ""
+msgstr "Ohne Alias"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
 msgid "Errors"
 msgstr "Fehler"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-#, fuzzy
-#| msgid "Discards Present"
 msgid "Discards"
-msgstr "Vorhandene Rückwürfe"
+msgstr "Verworfene Pakete"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-#, fuzzy
-#| msgid "Graphs"
 msgid "Graphless"
-msgstr "Diagramme"
+msgstr "Ohne Diagramm"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
@@ -272,33 +252,32 @@ msgstr "Geräte-Neuscan'%s' durchführen"
 
 #: lib/mactrack_functions.php
 msgid "The rescan produced no output."
-msgstr ""
+msgstr "Der erneute Scan lieferte keine Ausgabe."
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Device '%s' rescan completed in %0.2f seconds."
-msgstr ""
+msgstr "Erneuter Scan von Gerät '%s' in %0.2f Sekunden abgeschlossen."
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Site scan '%s'"
-msgstr "Standortsuche '%s''."
+msgstr "Standortsuche '%s''"
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Site '%s' scan completed in %0.2f seconds."
-msgstr ""
+msgstr "Scan des Standorts '%s' in %0.2f Sekunden abgeschlossen."
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Device Enable '%s'"
-msgstr "Gerät aktivieren '%s''."
+msgstr "Gerät aktivieren '%s''"
 
 #: lib/mactrack_functions.php
-#, fuzzy, php-format
-#| msgid "Device Disable '%d'"
+#, php-format
 msgid "Device Disable '%s'"
-msgstr "Gerät deaktivieren '%d''."
+msgstr "Gerät „%s“ deaktivieren"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_macwatch.php
 #: mactrack_snmp.php mactrack_utilities.php mactrack_view_arp.php
@@ -335,12 +314,12 @@ msgstr "Nicht Aufgenommen"
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
-msgstr "Status: Laufend, Prozesse: %d, Fortschritt: %s, LastRuntime: %f"
+msgstr "Status: Läuft, Prozesse: %d, Fortschritt: %s, Letzte Laufzeit: %2.1f"
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
-msgstr "Status: Leerlauf, LastRuntime: %f Sekunden, Prozesse: %d Prozesse, Geräte: %d, Nächste Laufzeit: %s"
+msgstr "Status: Leerlauf, Letzte Laufzeit: %2.1f Sekunden, Prozesse: %d Prozesse, Geräte: %d, Nächste Ausführungszeit: %s"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
@@ -460,14 +439,12 @@ msgid "Are you sure you want to delete all the Port to MAC to IP results from th
 msgstr "Sind Sie sicher, dass Sie alle Ergebnisse von Port to MAC to IP aus dem System löschen möchten?"
 
 #: lib/mactrack_functions.php
-#, fuzzy
-#| msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
 msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
-msgstr "Sind Sie sicher, dass Sie alle Ergebnisse von Port to MAC to IP aus dem System löschen möchten?"
+msgstr "Sind Sie sicher, dass Sie die abgelaufenen Port-zu-MAC-zu-IP-Ergebnisse jetzt löschen möchten?"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
-msgstr ""
+msgstr "Möchten Sie die zwischengespeicherten MacTrack-Scanfunktionen wirklich bereinigen?"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
@@ -479,21 +456,19 @@ msgstr "Sind Sie sicher, dass Sie alle Ergebnisse des Systems von Aggregated Por
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
-msgstr ""
+msgstr "Möchten Sie die IEEE-Hersteller-MAC/OUI-Datenbank jetzt wirklich herunterladen und importieren?"
 
 #: lib/mactrack_functions.php
-#, fuzzy
-#| msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
 msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
-msgstr "Sind Sie sicher, dass Sie alle Ergebnisse des Systems von Aggregated Port to MAC to IP löschen und wiederherstellen möchten?"
+msgstr "Sind Sie sicher, dass Sie die Liste der Scan-Daten aus den gespeicherten Port-zu-MAC-zu-IP-Ergebnissen jetzt neu erstellen möchten?"
 
 #: lib/mactrack_functions.php
 msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
-msgstr ""
+msgstr "Die Partition mit der neuesten Port-Beobachtung neu aufbauen und analysieren (bei wöchentlichen Partitionen die aktuelle Woche). Eine nicht partitionierte Tabelle wird vollständig optimiert. Geplante Scans werden während der Ausführung übersprungen. Fortfahren?"
 
 #: lib/mactrack_functions.php
 msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
-msgstr ""
+msgstr "Führen Sie diese Wartung außerhalb der Geschäftszeiten durch. Der Neuaufbau kopiert nacheinander den gesamten Verlauf der Port- (MAC-Adresse), IP-Adress- und 802.1x-Tabellen und kann Stunden dauern. Geplante Scans werden übersprungen, die Datenbankwartung wartet und die Suche nach MAC, IP und 802.1x zeigt bis zum Abschluss eine Wartungsmeldung an. Planen Sie freien Festplattenspeicher für eine zweite Kopie jeder Tabelle und ihrer Indizes ein. Fortfahren?"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Remove All Scan Results"
@@ -516,61 +491,53 @@ msgid "Perform Aggregate Table Rebuild"
 msgstr "Neuaufbau der Aggregattabelle durchführen"
 
 #: lib/mactrack_functions.php
-#, fuzzy
-#| msgid "Refresh IEEE Vendor MAC/OUI Database"
 msgid "Rebuild IEEE Vendor MAC/OUI Database"
-msgstr "IEEE Vendor MAC/OUI Datenbank aktualisieren"
+msgstr "IEEE-Hersteller-MAC/OUI-Datenbank neu aufbauen"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
-#, fuzzy
-#| msgid "Last Scan Date"
 msgid "Rebuild Scan Dates"
-msgstr "Letztes Scan-Datum"
+msgstr "Scan-Daten neu aufbauen"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Optimize Port Table"
-msgstr ""
+msgstr "Port-Tabelle optimieren"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Configure Port and IP Address Partitioning"
-msgstr ""
+msgstr "Port- und IP-Adress-Partitionierung konfigurieren"
 
 #: lib/mactrack_partition_rebuild.php
 msgid "The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
-msgstr ""
+msgstr "Die Port-, IP- und 802.1x-Tabellen werden neu partitioniert oder eine Neuerstellung wurde nicht abgeschlossen, sodass ihr Verlauf derzeit nicht geändert werden kann. Versuchen Sie es erneut, nachdem cli/upgrade_partitioning.php abgeschlossen wurde."
 
 #: lib/mactrack_partition_rebuild.php
 msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished."
-msgstr ""
+msgstr "MacTrack befindet sich für die Suche nach IP-Adressen, MAC-Adressen und 802.1x im Wartungsmodus, während die Verlaufstabellen neu partitioniert werden. Die Ergebnisse sind unvollständig, bis die Partitionierung abgeschlossen ist."
 
 #: lib/mactrack_partition_rebuild.php
 msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
-msgstr ""
+msgstr "MacTrack befindet sich für die Suche nach IP-Adressen, MAC-Adressen und 802.1x im Wartungsmodus, da die Partitionierung der Verlaufstabellen nicht abgeschlossen wurde. Die Ergebnisse sind unvollständig. Führen Sie cli/upgrade_partitioning.php erneut aus, um den Vorgang fortzusetzen."
 
 #: lib/mactrack_partition_rebuild.php
-#, fuzzy
 msgid "Maintenance Mode"
-msgstr "Letzte Laufzeit der Poller-Wartung:"
+msgstr "Wartungsmodus"
 
 #: mactrack_actions.php
-#, fuzzy, php-format
+#, php-format
 msgid "Mactrack Device: (%s) successfully updated"
-msgstr "Geräteverfolgungsgerät: (%s) erfolgreich aktualisiert"
+msgstr "MacTrack-Gerät (%s) erfolgreich aktualisiert"
 
 #: mactrack_actions.php
-#, fuzzy
 msgid "Import into Mactrack Database"
-msgstr "Import in die Geräteverfolgungsdatenbank"
+msgstr "In MacTrack-Datenbank importieren"
 
 #: mactrack_actions.php
-#, fuzzy
 msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
-msgstr "Klicken Sie auf \"Weiter\", um das folgende Gerät in die Geräteverfolgung zu importieren?  Bitte geben Sie zusätzliche Optionen für das Device Tracking Device an, wie unten beschrieben."
+msgstr "Klicken Sie auf 'Weiter', um das folgende Gerät in MacTrack zu importieren? Bitte geben Sie unten zusätzliche MacTrack-Geräteoptionen an."
 
 #: mactrack_actions.php
-#, fuzzy
 msgid "We will use these devices SNMP options for the Mactrack Device as well."
-msgstr "Wir werden diese SNMP-Optionen auch für das Device Tracking-Gerät verwenden."
+msgstr "Diese SNMP-Optionen des Geräts werden auch für das MacTrack-Gerät verwendet."
 
 #: mactrack_device_types.php
 msgid "Not Applicable - Router"
@@ -658,9 +625,8 @@ msgid "Cacti has imported the following items:"
 msgstr "Cacti hat folgende Elemente importiert:"
 
 #: mactrack_device_types.php
-#, fuzzy
 msgid "Import Mactrack Device Types"
-msgstr "Geräteverfolgungsgerätetypen importieren"
+msgstr "MacTrack-Gerätetypen importieren"
 
 #: mactrack_device_types.php
 msgid "Import Device Types from Local File"
@@ -696,47 +662,47 @@ msgstr " - Ein gebräuchlicher Name für das Gerät.  Zum Beispiel Cisco 6509 Sw
 
 #: mactrack_device_types.php
 msgid " - The vendor who produces this device"
-msgstr " - Der Lieferant, der dieses Gerät herstellt."
+msgstr " - Der Lieferant, der dieses Gerät herstellt"
 
 #: mactrack_device_types.php
 msgid " - The type of device this is.  See the notes below for this integer value"
-msgstr " - Der Typ des Geräts, der das ist.  Siehe die folgenden Hinweise für diesen ganzzahligen Wert."
+msgstr " - Der Typ des Geräts, der das ist.  Siehe die folgenden Hinweise für diesen ganzzahligen Wert"
 
 #: mactrack_device_types.php
 msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
-msgstr " - Ein eindeutiger Zeichensatz aus dem snmp sysDescr, der dieses Gerät eindeutig identifiziert."
+msgstr " - Ein eindeutiger Zeichensatz aus dem snmp sysDescr, der dieses Gerät eindeutig identifiziert"
 
 #: mactrack_device_types.php
 msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
-msgstr " - Die herstellerspezifische snmp sysObjectID, die dieses Gerät von dem nächsten unterscheidet."
+msgstr " - Die herstellerspezifische snmp sysObjectID, die dieses Gerät von dem nächsten unterscheidet"
 
 #: mactrack_device_types.php
 msgid " - The scanning function that will be used to scan this device type"
-msgstr " - Die Scanfunktion, die zum Scannen dieses Gerätetyps verwendet wird."
+msgstr " - Die Scanfunktion, die zum Scannen dieses Gerätetyps verwendet wird"
 
 #: mactrack_device_types.php
 msgid " - The IP scanning function that will be used to scan this device type"
-msgstr " - Die IP-Scanfunktion, die zum Scannen dieses Gerätetyps verwendet wird."
+msgstr " - Die IP-Scanfunktion, die zum Scannen dieses Gerätetyps verwendet wird"
 
 #: mactrack_device_types.php
 msgid " - The 802.1x scanning function that will be used to scan this device type"
-msgstr " - Die 802.1x-Scanfunktion, die zum Scannen dieses Gerätetyps verwendet wird."
+msgstr " - Die 802.1x-Scanfunktion, die zum Scannen dieses Gerätetyps verwendet wird"
 
 #: mactrack_device_types.php
 msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
-msgstr " - Wenn die Seriennummer für diesen Gerätetyp über eine SNMP-Abfrage bezogen werden kann, fügen Sie hier ihre OID hinzu."
+msgstr " - Wenn die Seriennummer für diesen Gerätetyp über eine SNMP-Abfrage bezogen werden kann, fügen Sie hier ihre OID hinzu"
 
 #: mactrack_device_types.php
 msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
-msgstr " - Wenn Ihre Scanfunktion nicht in der Lage ist, Trunk-Ports oder Link-Ports zu isolieren, ist dies die Startportnummer für Benutzer-Ports."
+msgstr " - Wenn Ihre Scanfunktion nicht in der Lage ist, Trunk-Ports oder Link-Ports zu isolieren, ist dies die Startportnummer für Benutzer-Ports"
 
 #: mactrack_device_types.php
 msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
-msgstr " - Gleich wie der lowPort, mit der Ausnahme, dass dies die hoch nummerierte Benutzerportnummer ist."
+msgstr " - Gleich wie der lowPort, mit der Ausnahme, dass dies die hoch nummerierte Benutzerportnummer ist"
 
 #: mactrack_device_types.php
 msgid " - Disabled type is not used"
-msgstr "- Deaktivierter Typ wird nicht verwendet"
+msgstr " - Deaktivierter Typ wird nicht verwendet"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "The primary key for this table is a combination of the following three fields:"
@@ -763,9 +729,8 @@ msgid "3 - Router"
 msgstr "3 - Router"
 
 #: mactrack_device_types.php
-#, fuzzy
 msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
-msgstr "Der Gerätetyp wird bestimmt, indem der snmp-Agent nach sysObjectID und sysDescription gescannt und mit Werten in der Gerätetypendatenbank verglichen wird.  Die erste Übereinstimmung, die in der Datenbank gefunden wird, wird direktes Device Tracking verwendet, um zu erfahren, wie man sie scannt.  Daher ist es sehr wichtig, dass Sie für Ihre Geräte eine gültige sysObjectID_match, sysDescr_match und Scanfunktion auswählen."
+msgstr "Der Gerätetyp eines Geräts wird bestimmt, indem sein SNMP-Agent nach sysObjectID und sysDescription abgefragt und mit den Werten in der Gerätetyp-Datenbank verglichen wird. Der erste in der Datenbank gefundene Treffer bestimmt, wie das Gerät gescannt wird. Daher ist es sehr wichtig, dass Sie gültige Werte für sysObjectID_match, sysDescr_match und die Scan-Funktion für Ihre Geräte auswählen."
 
 #: mactrack_device_types.php mactrack_devices.php setup.php
 msgid "Switch/Hub"
@@ -793,7 +758,7 @@ msgstr "VERARBEITUNGSFEHLER IN DER KOPFZEILE: Fehlende Pflichtfelder <br>Spalten
 
 #: mactrack_device_types.php
 msgid "Unknown Assume \"Switch/Hub\""
-msgstr "Unbekannt Annahme \"Switch/Hub\"."
+msgstr "Unbekannt Annahme \"Switch/Hub\""
 
 #: mactrack_device_types.php
 #, php-format
@@ -803,7 +768,7 @@ msgstr "INSERT ERFOLGREICH: Lieferant: %s, Beschreibung: %s, Typ: %s, sysDescr: 
 #: mactrack_device_types.php
 #, php-format
 msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
-msgstr "EINFÜGEN GESCHLOSSEN: Lieferant: %s, Beschreibung: %s, Typ: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "EINFÜGEN FEHLGESCHLAGEN: Hersteller: %s, Beschreibung: %s, Typ: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php
 #, php-format
@@ -811,19 +776,17 @@ msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr
 msgstr "EINFÜGEN ÜBERSPRUNGEN, VORHANDEN: Lieferant: %s, Beschreibung: %s, Typ: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php
-#, fuzzy, php-format
+#, php-format
 msgid "Mactrack Device Types [edit: %s]"
-msgstr "Geräteverfolgung Gerätetypen[bearbeiten: %s]"
+msgstr "MacTrack-Gerätetypen [bearbeiten: %s]"
 
 #: mactrack_device_types.php
-#, fuzzy
 msgid "Mactrack Device Types [new]"
-msgstr "Geräteverfolgung Gerätetypen[neu]"
+msgstr "MacTrack-Gerätetypen [neu]"
 
 #: mactrack_device_types.php
-#, fuzzy
 msgid "Mactrack Device Type Filters"
-msgstr "Geräteverfolgung Gerätetyp Filter"
+msgstr "MacTrack-Gerätetypfilter"
 
 #: mactrack_device_types.php
 msgid "Device Type Description"
@@ -867,9 +830,8 @@ msgid "Yes"
 msgstr "Ja"
 
 #: mactrack_device_types.php
-#, fuzzy
 msgid "No Mactrack Device Types Found"
-msgstr "Keine Geräteverfolgung Gerätetypen gefunden"
+msgstr "Keine MacTrack-Gerätetypen gefunden"
 
 #: mactrack_device_types.php
 msgid "Submit Query"
@@ -897,7 +859,7 @@ msgstr "Gerätetypen aus der lokalen Datei importieren"
 
 #: mactrack_device_types.php
 msgid "Export Device Types to Share with Others"
-msgstr "Gerätetypen aus der lokalen Datei importieren"
+msgstr "Gerätetypen exportieren, um sie mit anderen zu teilen"
 
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
@@ -941,7 +903,7 @@ msgstr "Verbindung zum Cacti Host über Hostname herstellen"
 
 #: mactrack_devices.php
 msgid "Copy SNMP Settings from Cacti Host"
-msgstr "SNMP-Einstellungen vom Kakteen-Host kopieren"
+msgstr "SNMP-Einstellungen vom Cacti-Host kopieren"
 
 #: mactrack_devices.php
 msgid "You must select at least one device."
@@ -965,21 +927,19 @@ msgstr "Klicken Sie auf \"Weiter\", um die Parameter des oberen oder unteren Por
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
-msgstr "Klicken Sie auf \"Weiter\", um die folgenden Geräte mit dem jeweiligen Kakteengerät zu verbinden.  Die Beziehung wird auf gleichen Hostnamen aufgebaut. Die Beschreibung wird ebenfalls aktualisiert."
+msgstr "Klicken Sie auf „Weiter“, um die folgenden Geräte mit ihrem jeweiligen Cacti-Gerät zu verknüpfen. Die Zuordnung erfolgt über übereinstimmende Hostnamen. Die Beschreibung wird ebenfalls aktualisiert."
 
 #: mactrack_devices.php
-#, fuzzy
 msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
-msgstr "Klicken Sie auf \"Weiter\", um die SNMP-Einstellungen vom angeschlossenen Kakteengerät auf das Geräteverfolgungsgerät zu kopieren.  Alle nicht verbundenen Geräte werden stillschweigend übersprungen. SNMP-Wiederholungen werden von Ping-Wiederholungen übernommen."
+msgstr "Klicken Sie auf „Weiter“, um die SNMP-Einstellungen vom verknüpften Cacti-Gerät auf das MacTrack-Gerät zu kopieren. Alle nicht verknüpften Geräte werden stillschweigend übersprungen. SNMP-Wiederholungen werden von den Ping-Wiederholungen übernommen."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to delete the following Devices"
-msgstr "Klicken Sie auf \"Fortfahren\", um die folgenden Geräte zu löschen."
+msgstr "Klicken Sie auf \"Fortfahren\", um die folgenden Geräte zu löschen"
 
 #: mactrack_devices.php
-#, fuzzy
 msgid "Import Mactrack Devices"
-msgstr "Geräteverfolgungsgeräte importieren"
+msgstr "MacTrack-Geräte importieren"
 
 #: mactrack_devices.php
 msgid "Import Devices from Local File"
@@ -990,9 +950,8 @@ msgid "Please specify the location of the CSV file containing your device inform
 msgstr "Bitte geben Sie den Speicherort der CSV-Datei mit Ihren Geräteinformationen an."
 
 #: mactrack_devices.php
-#, fuzzy
 msgid " - The SiteID known to Mactrack for this device"
-msgstr " - Die SiteID, die dem Device Tracking für dieses Gerät bekannt ist."
+msgstr " - Die Mactrack bekannte SiteID für dieses Gerät"
 
 #: mactrack_devices.php
 msgid " - A simple name for the device.  For example Cisco 6509 Switch"
@@ -1000,7 +959,7 @@ msgstr " - Ein einfacher Name für das Gerät.  Zum Beispiel Cisco 6509 Switch"
 
 #: mactrack_devices.php
 msgid " - The IP Address or DNS Name for the device"
-msgstr " - Die IP-Adresse oder der DNS-Name für das Gerät."
+msgstr " - Die IP-Adresse oder der DNS-Name für das Gerät"
 
 #: mactrack_devices.php
 msgid " - More detailed information about the device, including location, environmental conditions, etc."
@@ -1008,7 +967,7 @@ msgstr " - Detailliertere Informationen über das Gerät, einschließlich Stando
 
 #: mactrack_devices.php
 msgid " - A list of ports that should not be scanned for user devices"
-msgstr " - Eine Liste von Ports, die nicht auf Benutzergeräte gescannt werden sollten."
+msgstr " - Eine Liste von Ports, die nicht auf Benutzergeräte gescannt werden sollten"
 
 #: mactrack_devices.php
 msgid " - Redundant information indicating the intended device type.  See below for valid values."
@@ -1028,19 +987,19 @@ msgstr " - Die snmp-Version, mit der Sie dieses Gerät scannen möchten.  Gülti
 
 #: mactrack_devices.php
 msgid " - The UDP port that the snmp agent is running on"
-msgstr " - Der UDP-Port, auf dem der snmp-Agent läuft."
+msgstr " - Der UDP-Port, auf dem der snmp-Agent läuft"
 
 #: mactrack_devices.php
 msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
-msgstr " - Der Timeout in Millisekunden, um auf eine snmp-Antwort zu warten, bevor man es erneut versucht."
+msgstr " - Der Timeout in Millisekunden, um auf eine snmp-Antwort zu warten, bevor man es erneut versucht"
 
 #: mactrack_devices.php
 msgid " - The number of times to retry a snmp request before giving up"
-msgstr " - Die Anzahl der Versuche, eine snmp-Anfrage erneut zu starten, bevor man aufgibt."
+msgstr " - Die Anzahl der Versuche, eine snmp-Anfrage erneut zu starten, bevor man aufgibt"
 
 #: mactrack_devices.php
 msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
-msgstr " - Spezifizierte die Anzahl der OID's, die in einer einzigen SNMP Get-Anfrage erhalten werden können."
+msgstr " - Spezifizierte die Anzahl der OID's, die in einer einzigen SNMP Get-Anfrage erhalten werden können"
 
 #: mactrack_devices.php
 msgid " - SNMP V3: SNMP username"
@@ -1087,7 +1046,7 @@ msgstr "EINFÜGEN ERFOLGREICH: Hostname: SiteID: %s, Gerätename: %s, Hostname %
 #: mactrack_devices.php
 #, php-format
 msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr "EINFÜGEN GESCHLOSSEN: SiteID: %s, Gerätename: %s, Hostname %s, SNMP Port: %s"
+msgstr "EINFÜGEN FEHLGESCHLAGEN: SiteID: %s, Gerätename: %s, Hostname %s, SNMP-Port: %s"
 
 #: mactrack_devices.php
 #, php-format
@@ -1095,22 +1054,21 @@ msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP 
 msgstr "EINFÜGEN ÜBERSPRUNGEN, VORHANDEN: SiteID: %s, Gerätename: %s, Hostname %s, SNMP Port: %s"
 
 #: mactrack_devices.php
-#, fuzzy, php-format
+#, php-format
 msgid "Mactrack Devices [edit: %s]"
-msgstr "Geräteverfolgungsgeräte[bearbeiten: %s]"
+msgstr "MacTrack-Geräte [bearbeiten: %s]"
 
 #: mactrack_devices.php
-#, fuzzy
 msgid "Mactrack Devices [new]"
-msgstr "Geräteverfolgungsgeräte[neu]"
+msgstr "MacTrack-Geräte [neu]"
 
 #: mactrack_devices.php
 msgid "SNMP Information"
-msgstr "SNMP Information"
+msgstr "SNMP-Informationen"
 
 #: mactrack_devices.php
 msgid "System:"
-msgstr "System"
+msgstr "System:"
 
 #: mactrack_devices.php
 msgid "Uptime:"
@@ -1125,9 +1083,8 @@ msgid "ObjectID:"
 msgstr "Objekt-ID:"
 
 #: mactrack_devices.php
-#, fuzzy
 msgid "Mactrack Device Filters"
-msgstr "Geräteverfolgung Gerätefilter"
+msgstr "MacTrack-Gerätefilter"
 
 #: mactrack_devices.php mactrack_view_devices.php setup.php
 msgid "Device Name"
@@ -1176,9 +1133,8 @@ msgid "Last Duration"
 msgstr "Letzte Dauer"
 
 #: mactrack_devices.php
-#, fuzzy
 msgid "No Mactrack Devices"
-msgstr "Keine Geräteverfolgungsgeräte"
+msgstr "Keine MacTrack-Geräte"
 
 #: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
 #: setup.php
@@ -1191,7 +1147,7 @@ msgstr "Fehler"
 
 #: mactrack_devices.php mactrack_view_devices.php
 msgid "No Cacti Link"
-msgstr "Kein Kakteen-Link"
+msgstr "Keine Cacti-Verknüpfung"
 
 #: mactrack_macauth.php
 msgid "You must select at least one Authorized Mac to delete."
@@ -1199,22 +1155,20 @@ msgstr "Sie müssen mindestens einen autorisierten Mac zum Löschen auswählen."
 
 #: mactrack_macauth.php
 msgid "Click 'Continue' to delete the following Authorized Mac's?"
-msgstr "Klicken Sie auf \"Weiter\", um die folgenden autorisierten Mac's? zu löschen."
+msgstr "Klicken Sie auf \"Weiter\", um die folgenden autorisierten MACs zu löschen?"
 
 #: mactrack_macauth.php
-#, fuzzy, php-format
+#, php-format
 msgid "Mactrack MacAuth [edit: %s]"
-msgstr "Geräteverfolgung MacAuth[Bearbeiten: %s]"
+msgstr "MacTrack-MacAuth [bearbeiten: %s]"
 
 #: mactrack_macauth.php
-#, fuzzy
 msgid "Mactrack MacAuth [new]"
-msgstr "Geräteverfolgung MacAuth[neu]"
+msgstr "MacTrack-MacAuth [neu]"
 
 #: mactrack_macauth.php
-#, fuzzy
 msgid "Mactrack MacAuth Filters"
-msgstr "Geräteverfolgung von MacAuth-Filtern"
+msgstr "MacTrack-MacAuth-Filter"
 
 #: mactrack_macauth.php mactrack_macwatch.php
 msgid "Mac Address"
@@ -1246,22 +1200,20 @@ msgstr "MAC's"
 
 #: mactrack_macwatch.php
 msgid "Click 'Continue' to delete the following watched Mac's?"
-msgstr "Klicken Sie auf \"Weiter\", um die folgenden überwachten Mac's? zu löschen."
+msgstr "Klicken Sie auf \"Weiter\", um die folgenden überwachten MACs zu löschen?"
 
 #: mactrack_macwatch.php
-#, fuzzy, php-format
+#, php-format
 msgid "Mactrack MacWatch [edit: %s]"
-msgstr "Geräteverfolgung MacWatch[Bearbeiten: %s]"
+msgstr "MacTrack-MacWatch [bearbeiten: %s]"
 
 #: mactrack_macwatch.php
-#, fuzzy
 msgid "Mactrack MacWatch [new]"
-msgstr "Geräteverfolgung MacWatch[neu]"
+msgstr "MacTrack-MacWatch [neu]"
 
 #: mactrack_macwatch.php
-#, fuzzy
 msgid "Mactrack MacWatch Filters"
-msgstr "Geräteverfolgung MacWatch-Filter"
+msgstr "MacTrack-MacWatch-Filter"
 
 #: mactrack_macwatch.php
 msgid "Watch Name"
@@ -1284,9 +1236,8 @@ msgid "Watches"
 msgstr "Uhren"
 
 #: mactrack_macwatch.php
-#, fuzzy
 msgid "No Mactrack Watched Macs Found"
-msgstr "Keine Geräteverfolgung bei überwachten Macs gefunden"
+msgstr "Keine überwachten MacTrack-MACs gefunden"
 
 #: mactrack_sites.php
 msgid "Click 'Continue' to delete the following Site(s)?"
@@ -1297,19 +1248,17 @@ msgid "You must select at least one site."
 msgstr "Sie müssen mindestens einen Standort auswählen."
 
 #: mactrack_sites.php
-#, fuzzy, php-format
+#, php-format
 msgid "Mactrack Site [edit: %s]"
-msgstr "Geräteverfolgungsseite[Bearbeiten: %s]"
+msgstr "MacTrack-Standort [bearbeiten: %s]"
 
 #: mactrack_sites.php
-#, fuzzy
 msgid "Mactrack Site [new]"
-msgstr "Geräteverfolgungsseite[neu]"
+msgstr "MacTrack-Standort [neu]"
 
 #: mactrack_sites.php
-#, fuzzy
 msgid "Mactrack Site Filters"
-msgstr "Geräteverfolgung Standortfilter"
+msgstr "MacTrack-Standortfilter"
 
 #: mactrack_sites.php mactrack_view_devices.php mactrack_view_sites.php
 msgid "Total IP's"
@@ -1324,13 +1273,12 @@ msgid "Device Errors"
 msgstr "Gerätefehler"
 
 #: mactrack_sites.php mactrack_view_sites.php
-#, fuzzy
 msgid "No Mactrack Sites Found"
-msgstr "Keine Geräteverfolgungsseiten gefunden"
+msgstr "Keine MacTrack-Standorte gefunden"
 
 #: mactrack_sites.php mactrack_view_sites.php
 msgid "Total Devices"
-msgstr "Gesamtzahl der Geräte"
+msgstr "Geräte gesamt"
 
 #: mactrack_sites.php mactrack_view_sites.php
 msgid "Total User Ports"
@@ -1338,7 +1286,7 @@ msgstr "Gesamtzahl der Benutzerports"
 
 #: mactrack_sites.php mactrack_view_sites.php
 msgid "Total Oper Ports"
-msgstr "Gesamtzahl der Opernhäfen"
+msgstr "Gesamtzahl betriebsbereiter Ports"
 
 #: mactrack_sites.php mactrack_view_sites.php
 msgid "Total Trunks"
@@ -1358,7 +1306,7 @@ msgstr "Klicken Sie auf \"Weiter\", um die folgenden SNMP-Option(en) zu duplizie
 
 #: mactrack_snmp.php
 msgid "Name Format:"
-msgstr "Format Name"
+msgstr "Format Name:"
 
 #: mactrack_snmp.php
 msgid "<name> (1)"
@@ -1383,9 +1331,8 @@ msgid "SNMP Option Set [new]"
 msgstr "SNMP Option Set[neu] einstellen"
 
 #: mactrack_snmp.php setup.php
-#, fuzzy
 msgid "Mactrack SNMP Options"
-msgstr "SNMP-Optionen für die Geräteverfolgung"
+msgstr "MacTrack-SNMP-Optionen"
 
 #: mactrack_snmp.php
 msgid "Item"
@@ -1421,7 +1368,7 @@ msgstr "Benutzername"
 
 #: mactrack_snmp.php
 msgid "Auth Proto"
-msgstr "Herbstprotokoll"
+msgstr "Auth-Protokoll"
 
 #: mactrack_snmp.php
 msgid "Priv Proto"
@@ -1454,14 +1401,12 @@ msgid "Options"
 msgstr "Optionen"
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "Mactrack Database Results"
-msgstr "Ergebnisse der Geräteverfolgung in der Datenbank"
+msgstr "MacTrack-Datenbankergebnisse"
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "Mactrack Process Status"
-msgstr "Geräteverfolgung Prozessstatus"
+msgstr "MacTrack-Prozessstatus"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Refresh"
@@ -1472,9 +1417,8 @@ msgid "Current Process Status"
 msgstr "Aktueller Prozessstatus"
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "The Mactrack Poller is:"
-msgstr "Der Device Tracking Poller ist:"
+msgstr "Der MacTrack-Poller ist:"
 
 #: mactrack_utilities.php
 msgid "Running Processes:"
@@ -1493,19 +1437,16 @@ msgid "Approx. Next Runtime:"
 msgstr "Ca. Nächste Laufzeit:"
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "Database Maintenance Information"
-msgstr "Datenbank-Wartungszeit"
+msgstr "Informationen zur Datenbankwartung"
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "Last DB Maintenance Time:"
-msgstr "Letzte Laufzeit der Poller-Wartung:"
+msgstr "Letzte DB-Wartungszeit:"
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "Next DB Maintenance Time:"
-msgstr "Ca. nächste DB-Wartung:"
+msgstr "Nächste DB-Wartungszeit:"
 
 #: mactrack_utilities.php
 msgid "Run Time Details"
@@ -1565,11 +1506,11 @@ msgstr "Zusammenfassung des laufenden Prozesses"
 
 #: mactrack_utilities.php
 msgid "The DNS Resolver is Not Running"
-msgstr "Der DNS-Resolver läuft nicht."
+msgstr "Der DNS-Resolver läuft nicht"
 
 #: mactrack_utilities.php
 msgid "The DNS Resolver is Running"
-msgstr "Der DNS-Resolver läuft."
+msgstr "Der DNS-Resolver läuft"
 
 #: mactrack_utilities.php
 msgid "Date Started"
@@ -1588,35 +1529,28 @@ msgid "Other"
 msgstr "Sonstige"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Current Date"
 msgid "Current Activity"
-msgstr "Aktuelles Datum"
+msgstr "Aktuelle Aktivität"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Status"
 msgid "State:"
-msgstr "Status"
+msgstr "Status:"
 
 #: mactrack_utilities.php
 msgid "Since:"
-msgstr ""
+msgstr "Seit:"
 
 #: mactrack_utilities.php
 msgid "Detail:"
-msgstr ""
+msgstr "Detail:"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Last Poller Runtime:"
 msgid "Last Skipped Poller Run:"
-msgstr "Letzte Poller-Laufzeit:"
+msgstr "Letzter übersprungener Poller-Lauf:"
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "Last Maintenance Steps"
-msgstr "Letzte Laufzeit der Poller-Wartung:"
+msgstr "Letzte Wartungsschritte"
 
 #: mactrack_utilities.php
 msgid "Seconds"
@@ -1627,14 +1561,12 @@ msgid "Step"
 msgstr "Schritt"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Table"
 msgid "Table Sizes"
-msgstr "Tabelle"
+msgstr "Tabellengrößen"
 
 #: mactrack_utilities.php
 msgid "Free"
-msgstr ""
+msgstr "Frei"
 
 #: mactrack_utilities.php
 msgid "Index"
@@ -1642,7 +1574,7 @@ msgstr "Index"
 
 #: mactrack_utilities.php
 msgid "Rows (estimate)"
-msgstr ""
+msgstr "Zeilen (Schätzung)"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Table"
@@ -1650,15 +1582,15 @@ msgstr "Tabelle"
 
 #: mactrack_utilities.php
 msgid "Unknown: the database runs on another host"
-msgstr ""
+msgstr "Unbekannt: Die Datenbank läuft auf einem anderen Host"
 
 #: mactrack_utilities.php
 msgid "Unknown: the database data directory cannot be found from this host"
-msgstr ""
+msgstr "Unbekannt: Das Datenverzeichnis der Datenbank kann von diesem Host aus nicht gefunden werden"
 
 #: mactrack_utilities.php
 msgid "Database Disk Free:"
-msgstr ""
+msgstr "Freier Speicherplatz der Datenbank:"
 
 #: mactrack_utilities.php
 #, php-format
@@ -1676,26 +1608,25 @@ msgid "The following number of records have been removed from the aggergated tab
 msgstr "Die folgende Anzahl von Datensätzen wurde aus der verschärften Tabelle entfernt: %s.  Und %s Datensätze werden hinzugefügt."
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "Mactrack Scan Date Rebuild Results"
-msgstr "Ergebnisse der Geräteverfolgung in der Datenbank"
+msgstr "Ergebnisse der MacTrack-Scandaten-Neuerstellung"
 
 #: mactrack_utilities.php
 msgid "Scan date rebuild failed. Check the Cacti log and retry."
-msgstr ""
+msgstr "Neuaufbau der Scandaten fehlgeschlagen. Prüfen Sie das Cacti-Protokoll und versuchen Sie es erneut."
 
 #: mactrack_utilities.php
 #, php-format
 msgid "Scan dates rebuilt: %d"
-msgstr ""
+msgstr "Neu aufgebaute Scandaten: %d"
 
 #: mactrack_utilities.php
 msgid "A scan or a port table conversion is running. Try again when it has finished."
-msgstr ""
+msgstr "Ein Scan oder eine Konvertierung der Port-Tabelle läuft gerade. Versuchen Sie es erneut, wenn der Vorgang abgeschlossen ist."
 
 #: mactrack_utilities.php setup.php
 msgid "One per Scan"
-msgstr ""
+msgstr "Eine pro Scan"
 
 #: mactrack_utilities.php setup.php
 msgid "Hourly"
@@ -1711,23 +1642,23 @@ msgstr "Wöchentlich"
 
 #: mactrack_utilities.php
 msgid "Not partitioned"
-msgstr ""
+msgstr "Nicht partitioniert"
 
 #: mactrack_utilities.php
 msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
-msgstr ""
+msgstr "Tägliche Partitionen aus einer früheren MacTrack-Version. Eine Konvertierung ist erforderlich."
 
 #: mactrack_utilities.php
 msgid "Partitioned by scan date"
-msgstr ""
+msgstr "Nach Scan-Datum partitioniert"
 
 #: mactrack_utilities.php
 msgid "Unrecognized partitions. MacTrack makes no partition changes."
-msgstr ""
+msgstr "Nicht erkannte Partitionen. MacTrack nimmt keine Partitionsänderungen vor."
 
 #: mactrack_utilities.php
 msgid "Port Table Partitions"
-msgstr ""
+msgstr "Partitionen der Port-Tabelle"
 
 #: mactrack_utilities.php
 msgid "Layout"
@@ -1736,144 +1667,128 @@ msgstr "Layout"
 #: mactrack_utilities.php
 #, php-format
 msgid "%d of at most %d"
-msgstr ""
+msgstr "%d von höchstens %d"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Data Retention"
 msgid "Partitions"
-msgstr "Datenaufbewahrung"
+msgstr "Partitionen"
 
 #: mactrack_utilities.php
 msgid "Oldest Partition"
-msgstr ""
+msgstr "Älteste Partition"
 
 #: mactrack_utilities.php
 msgid "Newest Partition"
-msgstr ""
+msgstr "Neueste Partition"
 
 #: mactrack_utilities.php
 msgid "Partitions Cover Scans Before"
-msgstr ""
+msgstr "Partitionen umfassen Scans vor"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "%s, coarser than the setting because %d partitions would exceed the limit"
-msgstr ""
+msgstr "%s, gröber als die Einstellung, da %d Partitionen das Limit überschreiten würden"
 
 #: mactrack_utilities.php setup.php
 msgid "Port and IP Address Partition Size"
-msgstr ""
+msgstr "Partitionsgröße für Ports und IP-Adressen"
 
 #: mactrack_utilities.php
 msgid "Pending Exchange"
-msgstr ""
+msgstr "Ausstehender Austausch"
 
 #: mactrack_utilities.php
 msgid "Load Path"
-msgstr ""
+msgstr "Ladepfad"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Watches"
 msgid "PHP batches"
-msgstr "Uhren"
+msgstr "PHP-Batches"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Last Scan Date"
 msgid "Last Scan Note"
-msgstr "Letztes Scan-Datum"
+msgstr "Letzter Scan-Hinweis"
 
 #: mactrack_utilities.php
 msgid "Rebuild"
-msgstr ""
+msgstr "Neu aufbauen"
 
 #: mactrack_utilities.php
-#, fuzzy, php-format
-#| msgid "Running Processes:"
+#, php-format
 msgid "Running since %s"
-msgstr "Laufende Prozesse:"
+msgstr "Läuft seit %s"
 
 #: mactrack_utilities.php
 msgid "Last Rebuild"
-msgstr ""
+msgstr "Letzte Neuerstellung"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "%s: %d rows into %d partitions"
-msgstr ""
+msgstr "%s: %d Zeilen in %d Partitionen"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "%s: failed. %s"
-msgstr ""
+msgstr "%s: fehlgeschlagen. %s"
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "Last Maintenance"
-msgstr "Letzte Laufzeit der Poller-Wartung:"
+msgstr "Letzte Wartung"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "%s: %d partitions dropped, %d created"
-msgstr ""
+msgstr "%s: %d Partitionen gelöscht, %d erstellt"
 
 #: mactrack_utilities.php
 msgid "IP Table Layout"
-msgstr ""
+msgstr "IP-Tabellenlayout"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Data Retention"
 msgid "IP Table Partitions"
-msgstr "Datenaufbewahrung"
+msgstr "IP-Tabellenpartitionen"
 
 #: mactrack_utilities.php
 msgid "802.1x Table Layout"
-msgstr ""
+msgstr "802.1x-Tabellenlayout"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Data Retention"
 msgid "802.1x Table Partitions"
-msgstr "Datenaufbewahrung"
+msgstr "802.1x-Tabellenpartitionen"
 
 #: mactrack_utilities.php
 msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
-msgstr ""
+msgstr "Wählen Sie vor dem Start des Neuaufbaus die tägliche, wöchentliche oder deaktivierte Partitionierung aus."
 
 #: mactrack_utilities.php
 msgid "A rebuild is already running. The partition status page shows when it has finished."
-msgstr ""
+msgstr "Eine Neuerstellung läuft bereits. Die Seite „Partitionsstatus“ zeigt an, wann sie abgeschlossen ist."
 
 #: mactrack_utilities.php
 msgid "The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running."
-msgstr ""
+msgstr "Die Neuerstellung wurde im Hintergrund angefordert. Prüfen Sie den Partitionsstatus für das Ergebnis; der Start wird verweigert, wenn ein Scan oder eine andere Neuerstellung ausgeführt wird."
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
-msgstr "Die Scanfunktionen der Geräteverfolgung wurden entfernt.  Sie werden wiederhergestellt, sobald Sie entweder ein Gerät oder einen Gerätetyp bearbeiten."
+msgstr "Die MacTrack-Scanfunktionen wurden bereinigt. Sie werden neu erstellt, sobald Sie ein Gerät oder einen Gerätetyp bearbeiten."
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "Cacti Mactrack System Utilities"
-msgstr "Cacti Device Tracking System Dienstprogramme"
+msgstr "Cacti MacTrack-Systemdienstprogramme"
 
 #: mactrack_utilities.php
 msgid "Process Status Information"
 msgstr "Prozess-Statusinformationen"
 
 #: mactrack_utilities.php setup.php
-#, fuzzy
 msgid "View Mactrack Process Status"
-msgstr "Anzeigen des Prozessstatus der Geräteverfolgung"
+msgstr "MacTrack-Prozessstatus anzeigen"
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "This option will let you show and set process information associated with the Mactrack polling process."
-msgstr "Mit dieser Option können Sie Prozessinformationen anzeigen und einstellen, die mit dem Abfrageprozess zur Geräteverfolgung verknüpft sind."
+msgstr "Mit dieser Option können Sie Prozessinformationen zum MacTrack-Poller-Prozess anzeigen und festlegen."
 
 #: mactrack_utilities.php
 msgid "Database Administration"
@@ -1892,34 +1807,32 @@ msgid "This function will download and install the latest OIU database from the 
 msgstr "Mit dieser Funktion wird die neueste OIU-Datenbank von der IEEE-Website heruntergeladen und installiert.  Jede Netzwerkschnittstellenkarte (NIC) hat eine MAC-Adresse.  Die MAC-Adresse kann in zwei Teile unterteilt werden.  Der erste Teil des MAC Addess enthält den Vendor MAC.  Die Vendor MAC identifiziert, wer das Teil hergestellt hat.  Dies ist hilfreich bei der Stichprobenprüfung auf fehlerhafte Geräte in Ihrem Netzwerk."
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
-msgstr "Löscht alte und potenziell veraltete Device Tracking-Scanfunktionen aus dem Dropdown-Menü, das Sie beim Bearbeiten eines Gerätetyps erhalten."
+msgstr "Löscht alte und möglicherweise veraltete MacTrack-Scanfunktionen aus der Auswahlliste, die beim Bearbeiten eines Gerätetyps angezeigt wird."
 
 #: mactrack_utilities.php
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
-msgstr "Löscht <strong>ALL</strong> Port to MAC zu IP-Zuordnungen aus der Datenbank alle IP-Adressen, IP-Bereiche und VLANS.  Dieses Dienstprogramm ist gut, wenn Sie von vorne anfangen wollen.  <stark>GEFAHR: Alle vorherigen Daten werden gelöscht.</stark>"
+msgstr "Löscht <strong>ALLE</strong> Port-zu-MAC-zu-IP-Zuordnungen aus der Datenbank sowie alle IP-Adressen, IP-Bereiche und VLANs. Dieses Hilfsprogramm ist nützlich, wenn Sie von vorne beginnen möchten. <strong>ACHTUNG: Alle bisherigen Daten werden gelöscht.</strong>"
 
 #: mactrack_utilities.php
 msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
-msgstr ""
+msgstr "Baut die Liste der Scan-Daten aus den gespeicherten Port-zu-MAC-zu-IP-Ergebnissen neu auf, wobei jede Partition einmal gelesen wird. Scans und Wartung halten die Liste aktuell, daher ist dies nur erforderlich, nachdem Ergebnisse außerhalb der Wartung entfernt wurden, beispielsweise durch das Löschen von Geräten."
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "View Partition Status"
-msgstr "Anzeigen des Prozessstatus der Geräteverfolgung"
+msgstr "Partitionsstatus anzeigen"
 
 #: mactrack_utilities.php
 msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
-msgstr ""
+msgstr "Zeigt, wie die Port-zu-MAC-zu-IP-Ergebnisse partitioniert sind, welche Partitionsgröße warum verwendet wird und was die letzte Datenbankwartung ausgeführt hat."
 
 #: mactrack_utilities.php
 msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
-msgstr ""
+msgstr "Baut nur die Partition mit der neuesten Port-Beobachtung neu auf und analysiert sie, um gelöschten Speicherplatz freizugeben; bei wöchentlichen Partitionen ist dies die aktuelle Woche. Nicht partitionierte Tabellen werden vollständig optimiert. Geplante Scans werden bis zum Abschluss übersprungen."
 
 #: mactrack_utilities.php
 msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile."
-msgstr ""
+msgstr "Wählen Sie tägliche oder wöchentliche Partitionen für die Tabellen der Ports (MAC-Adresse), IP-Adressen und 802.1X oder deaktivieren Sie die Partitionierung. Der Neuaufbau kopiert den gesamten Verlauf im Hintergrund; geplante Scans werden übersprungen und die Suche nach MAC-, IP- und 802.1X-Einträgen zeigt währenddessen eine Wartungsmeldung an."
 
 #: mactrack_utilities.php
 msgid "Aggregated Table Administration"
@@ -1927,22 +1840,19 @@ msgstr "Aggregierte Tabellenverwaltung"
 
 #: mactrack_utilities.php
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
-msgstr "Löscht ALLE <stark>Aggregated</stark> (Not Scan Results) Port to MAC to IP associations aus der Datenbank.  Die Daten werden beim nächsten mactrack Pollerlauf wieder auf Basis von <starken>nur neuen</starken> gescannten Daten erhoben."
+msgstr "Löscht ALLE <strong>aggregierten</strong> Port-zu-MAC-zu-IP-Zuordnungen (keine Scan-Ergebnisse) aus der Datenbank. Beim nächsten MacTrack-Poller-Durchlauf werden die Daten wieder ausschließlich auf Basis <strong>neuer</strong> gescannter Daten erfasst."
 
 #: mactrack_utilities.php
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
-msgstr "Löscht ALLE <stark>Aggregated</stark> (Not Scan Results) Portierung auf MAC zu IP-Zuordnungen aus der Datenbank und deren Neuerstellung basierend auf <stark>Alle gescannten Daten</stark> jetzt."
+msgstr "Löscht ALLE <strong>aggregierten</strong> Port-zu-MAC-zu-IP-Zuordnungen (keine Scan-Ergebnisse) aus der Datenbank und erstellt sie jetzt auf Basis <strong>aller gescannten Daten</strong> neu."
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Data Retention"
 msgid "Partitioning"
-msgstr "Datenaufbewahrung"
+msgstr "Partitionierung"
 
 #: mactrack_vendormacs.php
-#, fuzzy
 msgid "Mactrack Vendor Mac Filter"
-msgstr "Geräteverfolgung Hersteller Mac Filter"
+msgstr "MacTrack-Hersteller-MAC-Filter"
 
 #: mactrack_vendormacs.php
 msgid "Vendor MAC"
@@ -1961,14 +1871,12 @@ msgid "Vendor Macs"
 msgstr "Hersteller-Macs"
 
 #: mactrack_vendormacs.php
-#, fuzzy
 msgid "No Mactrack Vendor MACS Found"
-msgstr "Keine Geräteverfolgung Hersteller MACS gefunden"
+msgstr "Keine MacTrack-Hersteller-MACs gefunden"
 
 #: mactrack_view_arp.php
-#, fuzzy
 msgid "Mactrack - ARP/IP View"
-msgstr "Geräteverfolgung - ARP/IP-Ansicht"
+msgstr "MacTrack - ARP/IP-Ansicht"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "Switch Name"
@@ -2015,9 +1923,8 @@ msgid "You must first choose a Site, Device or other search criteria."
 msgstr "Sie müssen zunächst einen Standort, ein Gerät oder andere Suchkriterien auswählen."
 
 #: mactrack_view_arp.php
-#, fuzzy
 msgid "No Mactrack IP Results Found"
-msgstr "Keine Geräteverfolgung IP-Ergebnisse gefunden"
+msgstr "Keine MacTrack-IP-Ergebnisse gefunden"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_interfaces.php
 #: mactrack_view_macs.php
@@ -2046,191 +1953,139 @@ msgstr "MAC"
 
 #: mactrack_view_dashboard.php
 msgid "MacTrack - Dashboard"
-msgstr ""
+msgstr "MacTrack - Dashboard"
 
 #: mactrack_view_dashboard.php
 msgid "Inventory"
 msgstr "Inventar"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Device Notes"
 msgid "Device status"
-msgstr "Gerätehinweise"
+msgstr "Gerätestatus"
 
 #: mactrack_view_dashboard.php
 msgid "Address and port totals"
-msgstr ""
+msgstr "Adress- und Port-Summen"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Notification Settings"
 msgid "Collection settings"
-msgstr "Benachrichtigungseinstellungen"
+msgstr "Erfassungseinstellungen"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Scanner Max Runtime"
 msgid "Scan runtimes"
-msgstr "Maximale Laufzeit des Scanners"
+msgstr "Scan-Laufzeiten"
 
 #: mactrack_view_dashboard.php
 msgid "Table sizes"
-msgstr ""
+msgstr "Tabellengrößen"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "MacWatch Default Body"
 msgid "MacWatch activity"
-msgstr "MacWatch Standardkörper"
+msgstr "MacWatch-Aktivität"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Vendor"
 msgid "Vendors"
-msgstr "Verkäufer"
+msgstr "Hersteller"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Disable Device"
 msgid "Enabled devices"
-msgstr "Zielsystem deaktivieren"
+msgstr "Aktivierte Geräte"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Disable Device"
 msgid "Disabled devices"
-msgstr "Zielsystem deaktivieren"
+msgstr "Deaktivierte Geräte"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Device Types"
 msgid "Device types"
 msgstr "Gerätetypen"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Interfaces"
 msgid "Interfaces tracked"
-msgstr "Schnittstellen"
+msgstr "Überwachte Schnittstellen"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Active Macs"
 msgid "Active MACs"
-msgstr "Aktive Macs"
+msgstr "Aktive MACs"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "IP Addresses"
 msgid "IP addresses"
 msgstr "IP-Adressen"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Total Oper Ports"
 msgid "Total ports"
-msgstr "Gesamtzahl der Opernhäfen"
+msgstr "Ports gesamt"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Active Macs"
 msgid "Active ports"
-msgstr "Aktive Macs"
+msgstr "Aktive Ports"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Trunk Ports"
 msgid "Trunk ports"
 msgstr "Trunk-Ports"
 
 #: mactrack_view_dashboard.php
 msgid "Unique OUI vendors"
-msgstr ""
+msgstr "Eindeutige OUI-Hersteller"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Scanning Frequency"
 msgid "Scanning frequency"
-msgstr "Abtastfrequenz"
+msgstr "Scan-Häufigkeit"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Concurrent Processes"
 msgid "Concurrent processes"
 msgstr "Gleichzeitige Prozesse"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Scanner Max Runtime"
 msgid "Scanner max runtime"
-msgstr "Maximale Laufzeit des Scanners"
+msgstr "Maximale Scanner-Laufzeit"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Data Retention"
 msgid "MAC retention"
-msgstr "Datenaufbewahrung"
+msgstr "MAC-Aufbewahrung"
 
 #: mactrack_view_dashboard.php
 msgid "days"
 msgstr "Tage"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Data Retention"
 msgid "IP retention"
-msgstr "Datenaufbewahrung"
+msgstr "IP-Aufbewahrung"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Reverse DNS Resolution is"
 msgid "Reverse DNS"
-msgstr "Reverse DNS Auflösung ist"
+msgstr "Reverse-DNS"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Most Recent"
 msgid "Most recent scan"
-msgstr "Neueste"
+msgstr "Letzter Scan"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Last Duration"
 msgid "Average duration"
-msgstr "Letzte Dauer"
+msgstr "Durchschnittliche Dauer"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Last Duration"
 msgid "Longest duration"
-msgstr "Letzte Dauer"
+msgstr "Längste Dauer"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Changed in Last Day"
 msgid "Scanned in last hour"
-msgstr "Geändert am letzten Tag"
+msgstr "In der letzten Stunde gescannt"
 
 #: mactrack_view_dashboard.php
 msgid "Duration"
 msgstr "Dauer"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Last Scanned"
 msgid "Last scan"
-msgstr "最近 已扫描"
+msgstr "Letzter Scan"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Total Devices"
 msgid "Slowest devices"
-msgstr "Gesamtzahl der Geräte"
+msgstr "Langsamste Geräte"
 
 #: mactrack_view_dashboard.php
 msgid "No scan runtimes recorded yet."
-msgstr ""
+msgstr "Noch keine Scan-Laufzeiten aufgezeichnet."
 
 #: mactrack_view_dashboard.php
 msgid "Rows"
@@ -2242,80 +2097,67 @@ msgstr "Größe"
 
 #: mactrack_view_dashboard.php
 msgid "No table statistics available."
-msgstr ""
+msgstr "Keine Tabellenstatistiken verfügbar."
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Watches"
 msgid "Watched MACs"
-msgstr "Uhren"
+msgstr "Überwachte MAC-Adressen"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Discards Present"
 msgid "Discovered"
-msgstr "Vorhandene Rückwürfe"
+msgstr "Gefunden"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Mac Watch"
 msgid "Last match"
-msgstr "Mac Uhr"
+msgstr "Letzter Treffer"
 
 #: mactrack_view_dashboard.php
 msgid "OUI database entries"
-msgstr ""
+msgstr "Einträge der OUI-Datenbank"
 
 #: mactrack_view_dashboard.php
 msgid "No vendor data available."
-msgstr ""
+msgstr "Keine Herstellerdaten verfügbar."
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Show"
 msgid "Show more"
-msgstr "Anzeigen"
+msgstr "Mehr anzeigen"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Show Totals"
 msgid "Show less"
-msgstr "Gesamtbetrag anzeigen"
+msgstr "Weniger anzeigen"
 
 #: mactrack_view_dashboard.php
 msgid "Open in a dialog"
-msgstr ""
+msgstr "In einem Dialog öffnen"
 
 #: mactrack_view_dashboard.php
 msgid "Remove from page"
-msgstr ""
+msgstr "Von Seite entfernen"
 
 #: mactrack_view_dashboard.php
 msgid "Drag to reorder card"
-msgstr ""
+msgstr "Ziehen zum Neuanordnen der Karte"
 
 #: mactrack_view_dashboard.php
 msgid "Invalid request. Please try again."
-msgstr ""
+msgstr "Ungültige Anfrage. Bitte versuchen Sie es erneut."
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Unknown"
 msgid "Unknown card."
-msgstr "Unbekannt"
+msgstr "Unbekannte Karte."
 
 #: mactrack_view_dashboard.php
 msgid "Add card"
-msgstr ""
+msgstr "Karte hinzufügen"
 
 #: mactrack_view_dashboard.php
 msgid "Add a dashboard card…"
-msgstr ""
+msgstr "Dashboard-Karte hinzufügen…"
 
 #: mactrack_view_devices.php
-#, fuzzy
 msgid "Mactrack - Device Report View"
-msgstr "Geräteverfolgung - Geräteberichtansicht"
+msgstr "MacTrack - Gerätebericht-Ansicht"
 
 #: mactrack_view_devices.php
 msgid "Unknown Device Type"
@@ -2335,31 +2177,27 @@ msgstr "Graphen anschauen"
 
 #: mactrack_view_devices.php
 msgid "Device Not Mapped to Cacti Device"
-msgstr "Synchronisation des Trackinggeräts mit dem Kakteengerät"
+msgstr "Gerät keinem Cacti-Gerät zugeordnet"
 
 #: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
 msgid "View MAC Addresses"
 msgstr "MAC-Adressen"
 
 #: mactrack_view_devices.php
-#, fuzzy
 msgid "No Mactrack Devices Found"
-msgstr "Keine Geräteverfolgungsgeräte gefunden"
+msgstr "Keine MacTrack-Geräte gefunden"
 
 #: mactrack_view_devices.php
-#, fuzzy
-#| msgid "Site Scan Results"
 msgid "Device Scan Results"
-msgstr "Website Scan-Ergebnisse"
+msgstr "Geräte-Scanergebnisse"
 
 #: mactrack_view_devices.php
 msgid "Hub/Switch"
 msgstr "Hub/Switch"
 
 #: mactrack_view_dot1x.php
-#, fuzzy
 msgid "Mactrack - 802.1x View"
-msgstr "Geräteverfolgung - 802.1x Ansicht"
+msgstr "MacTrack - 802.1x-Ansicht"
 
 #: mactrack_view_dot1x.php
 msgid "Domain"
@@ -2370,9 +2208,8 @@ msgid "802.1x Sessions"
 msgstr "802.1x Sitzungen"
 
 #: mactrack_view_dot1x.php
-#, fuzzy
 msgid "No Mactrack 802.1x Sessions Found"
-msgstr "Keine Geräteverfolgung 802.1x Sitzungen gefunden"
+msgstr "Keine MacTrack-802.1x-Sitzungen gefunden"
 
 #: mactrack_view_dot1x.php
 msgid "Dot1x Scan Results"
@@ -2383,14 +2220,12 @@ msgid "Sessions"
 msgstr "Sitzungen"
 
 #: mactrack_view_dot1x.php mactrack_view_interfaces.php
-#, fuzzy
-#| msgid "Any Status"
 msgid "All Statuses"
 msgstr "Alle Status"
 
 #: mactrack_view_dot1x.php mactrack_view_interfaces.php
 msgid "Statuses Selected"
-msgstr ""
+msgstr "Ausgewählte Status"
 
 #: mactrack_view_dot1x.php
 msgid "DATA"
@@ -2405,27 +2240,24 @@ msgid "Portname"
 msgstr "Portname"
 
 #: mactrack_view_graphs.php
-#, fuzzy
 msgid "Mactrack - Monitored Device Graph View"
-msgstr "Geräteverfolgung - Überwachte Gerätegrafikansicht"
+msgstr "MacTrack - Grafikansicht überwachter Geräte"
 
 #: mactrack_view_graphs.php
 msgid "Custom Graph List Applied - Filtering from List"
-msgstr "Angewandte Liste benutzerdefinierter Grafiken - Filtern aus der Liste"
+msgstr "Benutzerdefinierte Grafikliste angewendet – Filterung aus Liste"
 
 #: mactrack_view_interfaces.php
-#, fuzzy
 msgid "Mactrack - Network Interfaces View"
-msgstr "Geräteverfolgung - Ansicht Netzwerkschnittstellen"
+msgstr "MacTrack - Netzwerkschnittstellen-Ansicht"
 
 #: mactrack_view_interfaces.php
-#, fuzzy
 msgid "No Mactrack Interfaces Found"
-msgstr "Keine Geräteverfolgungsschnittstellen gefunden"
+msgstr "Keine MacTrack-Schnittstellen gefunden"
 
 #: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
-msgstr "Alle Scan-Ergebnisse entfernen"
+msgstr "Schnittstellen-Scan-Ergebnisse"
 
 #: mactrack_view_interfaces.php setup.php
 msgid "Name"
@@ -2505,7 +2337,7 @@ msgstr "Letzte Änderung"
 
 #: mactrack_view_interfaces.php
 msgid "Last Scanned"
-msgstr "最近 已扫描"
+msgstr "Zuletzt gescannt"
 
 #: mactrack_view_interfaces.php
 msgid "Filters"
@@ -2540,7 +2372,7 @@ msgstr "Hohe Auslastung > %d &#37;"
 
 #: mactrack_view_interfaces.php
 msgid "With Issues"
-msgstr "Nachfolgende Einstellungen zur Leistungsabstimmung von MySQL werden Ihrem Cacti System helfen, langfristig fehlerfrei und besser zu laufen."
+msgstr "Mit Problemen"
 
 #: mactrack_view_interfaces.php
 msgid "Up Interfaces"
@@ -2568,16 +2400,15 @@ msgstr "Bandbreite"
 
 #: mactrack_view_interfaces.php
 msgid "When checked, the Errors, Discards and Unknown Protocol columns show each interface's cumulative SNMP counter totals instead of the average per-second rate."
-msgstr ""
+msgstr "Wenn aktiviert, zeigen die Spalten „Fehler“, „Verworfen“ und „Unbekanntes Protokoll“ die kumulativen SNMP-Zählerstände jeder Schnittstelle anstelle der durchschnittlichen Rate pro Sekunde."
 
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
 msgstr "Gesamtbetrag anzeigen"
 
 #: mactrack_view_ips.php
-#, fuzzy
 msgid "Mactrack - Site IP Range Report View"
-msgstr "Geräteverfolgung - Standort IP-Bereich Berichtansicht"
+msgstr "MacTrack - Standort-IP-Bereichsbericht-Ansicht"
 
 #: mactrack_view_ips.php
 msgid "IP Range"
@@ -2612,14 +2443,12 @@ msgid "View IP Addresses"
 msgstr "Aktuelle IP-Adressen"
 
 #: mactrack_view_ips.php
-#, fuzzy
 msgid "No Mactrack Site IP Ranges Found"
-msgstr "Keine Geräteverfolgung Standort IP-Bereiche gefunden"
+msgstr "Keine MacTrack-Standort-IP-Bereiche gefunden"
 
 #: mactrack_view_macs.php
-#, fuzzy
 msgid "Mactrack - MAC to IP Report View"
-msgstr "Geräteverfolgung - MAC zu IP Berichtansicht"
+msgstr "MacTrack - MAC-zu-IP-Berichtsansicht"
 
 #: mactrack_view_macs.php
 msgid "Authorize"
@@ -2631,7 +2460,7 @@ msgstr "Widerrufen"
 
 #: mactrack_view_macs.php
 msgid "None of the selected MAC Addresses were valid, so no action was taken."
-msgstr ""
+msgstr "Keine der ausgewählten MAC-Adressen war gültig, daher wurde keine Aktion ausgeführt."
 
 #: mactrack_view_macs.php
 #, php-format
@@ -2684,9 +2513,8 @@ msgid "You must choose a Site, Device or other search criteria."
 msgstr "Sie müssen einen Standort, ein Gerät oder andere Suchkriterien auswählen."
 
 #: mactrack_view_macs.php
-#, fuzzy
 msgid "No Mactrack Port Results Found"
-msgstr "Keine Ergebnisse der Geräteverfolgung am Port gefunden"
+msgstr "Keine MacTrack-Port-Ergebnisse gefunden"
 
 #: mactrack_view_macs.php
 msgid "Count"
@@ -2697,9 +2525,8 @@ msgid "Aggregated"
 msgstr "Aggregiert"
 
 #: mactrack_view_sites.php
-#, fuzzy
 msgid "Mactrack - Site Report View"
-msgstr "Geräteverfolgung - Ansicht der Standortberichte"
+msgstr "MacTrack - Standortbericht-Ansicht"
 
 #: mactrack_view_sites.php
 msgid "Rescan Site"
@@ -2723,15 +2550,14 @@ msgstr "Website Scan-Ergebnisse"
 
 #: setup.php
 msgid "MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes."
-msgstr ""
+msgstr "MacTrack führt im Hintergrund ein Datenbank-Upgrade durch. Bei großen Installationen kann dies bis zu einer Stunde dauern, und einige MacTrack-Daten können unvollständig sein, bis der Vorgang abgeschlossen ist."
 
 #: setup.php
 #, php-format
 msgid "MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s"
-msgstr ""
+msgstr "MacTrack konnte das Datenbank-Upgrade nicht im Hintergrund starten; siehe Cacti-Protokoll für den Grund. Führen Sie es manuell über die Befehlszeile aus: %s"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack"
 msgstr "MacTrack"
 
@@ -2741,7 +2567,7 @@ msgstr "Basis Einstellungen"
 
 #: setup.php
 msgid "Scanning Frequency"
-msgstr "Abtastfrequenz"
+msgstr "Scan-Häufigkeit"
 
 #: setup.php
 msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
@@ -2757,7 +2583,7 @@ msgstr "Geben Sie an, wie viele Geräte gleichzeitig abgefragt werden sollen, bi
 
 #: setup.php
 msgid "Scanner Max Runtime"
-msgstr "Maximale Laufzeit des Scanners"
+msgstr "Maximale Scanner-Laufzeit"
 
 #: setup.php
 msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
@@ -2801,20 +2627,19 @@ msgstr "Datenaufbewahrung"
 
 #: setup.php
 msgid "How long should discovered IPs details be retained in the database."
-msgstr "Wie lange sollten die MAC-Details des Ports in der Datenbank gespeichert werden?"
+msgstr "Wie lange Details zu erkannten IPs in der Datenbank aufbewahrt werden sollen."
 
 #: setup.php
 msgid "Size of the partitions of the port, IP and 802.1x tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
-msgstr ""
+msgstr "Größe der Partitionen für die Port-, IP- und 802.1x-Tabellen oder 'Deaktiviert' für nicht partitionierte Tabellen. Änderungen wirken sich nur auf neue Partitionen aus; um den bestehenden Verlauf entsprechend neu aufzubauen, verwenden Sie 'Port- und IP-Adress-Partitionierung konfigurieren' in den MacTrack-Dienstprogrammen oder führen Sie cli/upgrade_partitioning.php aus."
 
 #: setup.php
 msgid "Switch Level Ignore Ports Delimiter"
 msgstr "Switch Level Ignorieren Ports Trennzeichen"
 
 #: setup.php
-#, fuzzy
 msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
-msgstr "Welches Trennzeichen sollte Device Tracking verwenden, wenn Sie die Zeichenkette Ignore Ports für jeden Switch analysieren."
+msgstr "Welches Trennzeichen soll MacTrack beim Auswerten der Zeichenfolge für zu ignorierende Ports bei jedem Switch verwenden?"
 
 #: setup.php
 msgid "Auto Detect"
@@ -2833,13 +2658,12 @@ msgid "Space [ ]"
 msgstr "Raum [ [ ]"
 
 #: setup.php
-#, fuzzy
 msgid "Mac Address Output Format"
-msgstr "Dienstprogramm zur Autorisierung von Mac-Adressen"
+msgstr "Ausgabeformat für MAC-Adressen"
 
 #: setup.php
 msgid "Format used for display."
-msgstr ""
+msgstr "Für die Anzeige verwendetes Format."
 
 #: setup.php
 msgid "Ports to Ignore"
@@ -2851,11 +2675,11 @@ msgstr "Geben Sie einen regulären Ausdruck von ifNames oder ifDescriptions of p
 
 #: setup.php
 msgid "Ports to Ignore While Scanning (Regular Expression)"
-msgstr ""
+msgstr "Beim Scan zu ignorierende Ports (Regulärer Ausdruck)"
 
 #: setup.php
 msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
-msgstr ""
+msgstr "Optional. Ein regulärer Ausdruck, der ohne Berücksichtigung der Groß-/Kleinschreibung mit dem Portnamen und dem Port-Alias jedes gescannten Ports abgeglichen wird. Auf einem passenden Port gefundene MAC-Adressen werden nicht erfasst, wodurch Uplink- und Trunk-Ports aus der Datenbank herausgehalten werden. Beispiel: (uplink|trunk). Geben Sie jeden Ausdruck in einer eigenen Zeile an, um mehrere zu definieren. Leer lassen, um alle Ports zu erfassen. Standorte und Geräte können eigene Ausdrücke hinzufügen. Im Gegensatz zu „Zu ignorierende Ports“ oben gilt dies für die MAC-Erfassung und nicht für die Schnittstellenliste, und es wirkt sich nur auf neue Scans aus."
 
 #: setup.php
 msgid "Bandwidth Usage Threshold"
@@ -2879,9 +2703,8 @@ msgid "Perform Reverse DNS Name Resolution"
 msgstr "Reverse DNS Namensauflösung durchführen"
 
 #: setup.php
-#, fuzzy
 msgid "Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
-msgstr "Sollte Device Tracking eine Reverse-DNS-Suche der den Ports zugeordneten IP-Adressen durchführen. ACHTUNG: Wenn DNS nicht ordnungsgemäß eingerichtet ist, verlangsamt dies die Scanzeit erheblich."
+msgstr "Soll MacTrack eine Reverse-DNS-Abfrage für die den Ports zugeordneten IP-Adressen durchführen? ACHTUNG: Wenn DNS nicht ordnungsgemäß eingerichtet ist, verlangsamt dies die Scanzeit erheblich."
 
 #: setup.php
 msgid "Primary DNS IP Address"
@@ -2904,18 +2727,16 @@ msgid "DNS Timeout"
 msgstr "DNS-Timeout"
 
 #: setup.php
-#, fuzzy
 msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
-msgstr "Bitte geben Sie den DNS-Timeout in Millisekunden ein.  Device Tracking verwendet einen PHP-basierten DNS-Resolver."
+msgstr "Bitte geben Sie das DNS-Timeout in Millisekunden ein. MacTrack verwendet einen PHP-basierten DNS-Resolver."
 
 #: setup.php
 msgid "DNS Prime Interval"
 msgstr "DNS Prime Intervall"
 
 #: setup.php
-#, fuzzy
 msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
-msgstr "Wie oft, in Sekundenschnelle, müssen Device Tracking-Scans von IPs für die DNS-Auflösung in MAC-Adressen aufgelöst werden.  Die Verwendung einer größeren Anzahl von Geräten, wenn Sie mehrere tausend Geräte haben, erhöht die Leistung."
+msgstr "Wie oft (in Sekunden) sollen beim MacTrack-Scan IP-Adressen per DNS-Auflösung in MAC-Adressen aufgelöst werden. Bei mehreren tausend Geräten erhöht ein größerer Wert die Leistung."
 
 #: setup.php
 msgid "Notification Settings"
@@ -2926,18 +2747,16 @@ msgid "Source Address"
 msgstr "Quelladresse"
 
 #: setup.php
-#, fuzzy
 msgid "The source Email address for Mactrack Emails."
-msgstr "Die Quell-E-Mail-Adresse für Device Tracking-E-Mails."
+msgstr "Die Absender-E-Mail-Adresse für MacTrack-E-Mails."
 
 #: setup.php
 msgid "Source Email Name"
 msgstr "Quell-E-Mail-Name"
 
 #: setup.php
-#, fuzzy
 msgid "The Source Email name for Mactrack Emails."
-msgstr "Der Quell-E-Mail-Name für Geräteverfolgungs-E-Mails."
+msgstr "Der Absendername für MacTrack-E-Mails."
 
 #: setup.php
 msgid "MACTrack Administrator"
@@ -2948,9 +2767,8 @@ msgid "MacWatch Default Body"
 msgstr "MacWatch Standardkörper"
 
 #: setup.php
-#, fuzzy
 msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
-msgstr "Die Voreinstellung für den E-Mail-Body für die Geräteverfolgung von MacWatch-E-Mails.  Der Body kann alle gültigen html-Tags enthalten.  Es unterstützt auch Ersatz-Tags, die beim Senden einer E-Mail verarbeitet werden.  Gültige Tags sind <IP>, <MAC>, <Ticket>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+msgstr "Die E-Mail-Textvorlage für MacTrack-MacWatch-E-Mails. Der Textkörper kann beliebige gültige HTML-Tags enthalten. Außerdem werden Platzhalter-Tags unterstützt, die beim Senden einer E-Mail verarbeitet werden. Gültige Tags sind <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
 
 #: setup.php
 msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
@@ -2973,18 +2791,16 @@ msgid "How often will the MacAuth Reports be Emailed."
 msgstr "Wie oft werden die MacAuth-Berichte per E-Mail verschickt."
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack ArpWatch Settings"
-msgstr "Geräteverfolgung ArpWatch-Einstellungen"
+msgstr "MacTrack-ArpWatch-Einstellungen"
 
 #: setup.php
 msgid "Enable ArpWatch"
 msgstr "ArpWatch aktivieren"
 
 #: setup.php
-#, fuzzy
 msgid "Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
-msgstr "Soll Device Tracking auch ArpWatch-Daten verwenden, um den Mac mit IP/DNS-Auflösung zu ergänzen?"
+msgstr "Soll MacTrack auch ArpWatch-Daten verwenden, um die MAC-zu-IP/DNS-Auflösung zu ergänzen?"
 
 #: setup.php
 msgid "ArpWatch Database Path"
@@ -3003,9 +2819,8 @@ msgid "Update Policy for SNMP Options"
 msgstr "Update-Richtlinie für SNMP-Optionen"
 
 #: setup.php
-#, fuzzy
 msgid "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices."
-msgstr "Richtlinie für die Synchronisation von SNMP-Optionen zwischen Cacti-Geräten und Geräteverfolgungsgeräten."
+msgstr "Richtlinie für die Synchronisierung von SNMP-Optionen zwischen Cacti-Geräten und MacTrack-Geräten."
 
 #: setup.php
 msgid "Default SNMP version for all new hosts."
@@ -3045,7 +2860,7 @@ msgstr "Der Pfad zu Ihrem snmpbulkwalk binary."
 
 #: setup.php
 msgid "MacTrack Settings"
-msgstr "SNMP-Einstellungen"
+msgstr "MacTrack-Einstellungen"
 
 #: setup.php
 msgid "Default Tab"
@@ -3057,7 +2872,7 @@ msgstr "Welche MacTrack-Registerkarte möchten Sie jedes Mal als Standard-Regist
 
 #: setup.php
 msgid "Mac Addresses"
-msgstr "Mac-Adresse"
+msgstr "MAC-Adressen"
 
 #: setup.php
 msgid "dot1x Deta"
@@ -3092,14 +2907,12 @@ msgid "If your Internet Proxy requires a password, enter it here."
 msgstr "Wenn Ihr Internet-Proxy ein Passwort erfordert, geben Sie es hier ein."
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack Dashboard"
-msgstr "Gesamtzahl der Geräte"
+msgstr "MacTrack-Dashboard"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack Devices"
-msgstr "Gesamtzahl der Geräte"
+msgstr "MacTrack-Geräte"
 
 #: setup.php
 msgid "(Edit)"
@@ -3110,14 +2923,12 @@ msgid "(Import)"
 msgstr "Daten importieren"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack Device Types"
-msgstr "Geräteverfolgung Gerätetypen"
+msgstr "MacTrack-Gerätetypen"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack Sites"
-msgstr "SNMP-Einstellungen"
+msgstr "MacTrack-Standorte"
 
 #: setup.php
 msgid "Mac Address Tracking Utility"
@@ -3128,49 +2939,40 @@ msgid "Mac Address Authorization Utility"
 msgstr "Dienstprogramm zur Autorisierung von Mac-Adressen"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack Vendor Macs"
-msgstr "Geräteverfolgung von Macs von Anbietern"
+msgstr "MacTrack-Hersteller-MACs"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack View Macs"
-msgstr "Geräteverfolgung View Macs"
+msgstr "MacTrack - MACs anzeigen"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack Dot1x View"
-msgstr "Geräteverfolgung Dot1x Ansicht"
+msgstr "MacTrack-Dot1x-Ansicht"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack IP Address Viewer"
-msgstr "Geräteverfolgung IP-Adressbetrachter"
+msgstr "MacTrack-IP-Adressanzeige"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack View Interfaces"
-msgstr "Schnittstellen anzeigen"
+msgstr "MacTrack - Schnittstellen anzeigen"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack View Sites"
-msgstr "Geräteverfolgung Ansichtsseiten"
+msgstr "MacTrack - Standorte anzeigen"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack View IP Ranges"
-msgstr "IP-Bereiche"
+msgstr "MacTrack - IP-Bereiche anzeigen"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack View Devices"
-msgstr "Geräteverfolgung Ansichtsgeräte"
+msgstr "MacTrack - Geräte anzeigen"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack Utilities"
-msgstr "Tracking-Dienstprogramme"
+msgstr "MacTrack-Dienstprogramme"
 
 #: setup.php
 msgid "Truncate Port Results Table"
@@ -3189,9 +2991,8 @@ msgid "Refresh/Update Vendor MAC Database from IEEE"
 msgstr "Aktualisieren/Updaten der MAC-Datenbank des Herstellers aus IEEE heraus"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack Graph Viewer"
-msgstr "Geräteverfolgung Grafik-Viewer"
+msgstr "MacTrack-Grafikanzeige"
 
 #: setup.php
 msgid "MacTrack"
@@ -3244,14 +3045,12 @@ msgid "Full"
 msgstr "Voll"
 
 #: setup.php
-#, fuzzy
 msgid "Sync Cacti Device to Mactrack Device"
-msgstr "Kakteengerät mit Geräteverfolgungsgerät synchronisieren"
+msgstr "Cacti-Gerät mit MacTrack-Gerät synchronisieren"
 
 #: setup.php
-#, fuzzy
 msgid "Sync Mactrack Device to Cacti Device"
-msgstr "Synchronisation des Trackinggeräts mit dem Kakteengerät"
+msgstr "MacTrack-Gerät mit Cacti-Gerät synchronisieren"
 
 #: setup.php
 #, php-format
@@ -3298,7 +3097,7 @@ msgstr "Alle %d Tage"
 
 #: setup.php
 msgid "Every Week"
-msgstr "Wöchentlich"
+msgstr "Jede Woche"
 
 #: setup.php
 msgid "Management"
@@ -3313,9 +3112,8 @@ msgid "Mac Watch"
 msgstr "Mac Uhr"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack Tools"
-msgstr "Tracking Tools"
+msgstr "MacTrack-Werkzeuge"
 
 #: setup.php
 msgid "Mac Authorizations"
@@ -3327,30 +3125,28 @@ msgstr "Tracking-Dienstprogramme"
 
 #: setup.php
 msgid "Ports to Ignore (Regular Expression)"
-msgstr ""
+msgstr "Zu ignorierende Ports (Regulärer Ausdruck)"
 
 #: setup.php
 #, php-format
 msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions."
-msgstr ""
+msgstr "Optional. Ein regulärer Ausdruck, der ohne Berücksichtigung der Groß-/Kleinschreibung mit dem Portnamen und dem Port-Alias von %s abgeglichen wird. Auf einem passenden Port gefundene MAC-Adressen werden nicht erfasst. Beispielsweise ignoriert '(uplink|trunk)' jeden Port, dessen Name oder Alias „uplink“ oder „trunk“ enthält. Geben Sie jeden Ausdruck in einer eigenen Zeile an, um mehrere zu definieren. Er wird zusätzlich zu den %s-Ausdrücken angewendet."
 
 #: setup.php
 msgid "every device in this site"
-msgstr ""
+msgstr "jedes Gerät an diesem Standort"
 
 #: setup.php
-#, fuzzy
-#| msgid "Disable Device"
 msgid "this device"
-msgstr "Zielsystem deaktivieren"
+msgstr "dieses Gerät"
 
 #: setup.php
 msgid "device and global"
-msgstr ""
+msgstr "Gerät und global"
 
 #: setup.php
 msgid "site and global"
-msgstr ""
+msgstr "Standort und global"
 
 #: setup.php
 msgid "Device Scanning Function Options"
@@ -3373,9 +3169,8 @@ msgid "System Description Match"
 msgstr "Abgleich der Systembeschreibung"
 
 #: setup.php
-#, fuzzy
 msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
-msgstr "Geben Sie wichtige Informationen an, um die Geräteverfolgung bei der Erkennung des Gerätetyps zu unterstützen.  Das Platzhalterzeichen ist das Zeichen'%'."
+msgstr "Geben Sie wichtige Informationen an, um MacTrack bei der Erkennung des Gerätetyps zu unterstützen. Das Platzhalterzeichen ist das Zeichen '&#42;'."
 
 #: setup.php
 msgid "Vendor SNMP Object ID Match"
@@ -3386,36 +3181,32 @@ msgid "MAC Address Scanning Function"
 msgstr "MAC-Adressen-Scanningfunktion"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
-msgstr "Die Scanfunktion Device Tracking, die aufgerufen werden muss, um Portdetails zu erhalten und zu speichern.  Der Funktionsname ist alles, was benötigt wird.  Die folgenden vier Parameter werden angenommen und immer angehängt:'my_function($site, &$device, $lowport, $highport)'.  Für einen reinen Router ist keine Funktion erforderlich."
+msgstr "MacTrack-Scanfunktion, die aufgerufen wird, um Portdetails abzurufen und zu speichern. Es wird nur der Funktionsname benötigt. Die folgenden vier Parameter werden vorausgesetzt und stets angehängt: 'my_function($site, &$device, $lowport, $highport)'. Für einen reinen Router ist keine Funktion erforderlich."
 
 #: setup.php
 msgid "IP Address Scanning Function"
 msgstr "IP-Adress-Scan-Funktion"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
-msgstr "Die Scanfunktion Device Tracking ist spezifisch für Layer3-Geräte, die IP-Adressen verfolgen."
+msgstr "MacTrack-Scanfunktion speziell für Layer-3-Geräte, die IP-Adressen nachverfolgen."
 
 #: setup.php
 msgid "802.1x Scanning Function"
 msgstr "802.1x Scanfunktion"
 
 #: setup.php
-#, fuzzy
 msgid "Mactrack scanning function specific to Switches with dot1x enabled."
-msgstr "Die Scanfunktion Device Tracking ist spezifisch für Switches mit aktiviertem dot1x."
+msgstr "MacTrack-Scanfunktion speziell für Switches mit aktiviertem dot1x."
 
 #: setup.php
 msgid "Serial Number Base OID"
 msgstr "Seriennummer Basis-OID"
 
 #: setup.php
-#, fuzzy
 msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
-msgstr "Die SNMP-OID, mit der die Seriennummer dieses Gerätetyps abgerufen wurde, die in der Tabelle Device Tracking Asset Information gespeichert wird."
+msgstr "Die SNMP-OID zum Abrufen der Seriennummer dieses Gerätetyps, die in der MacTrack-Asset-Informationstabelle gespeichert wird."
 
 #: setup.php
 msgid "Serial Number Collection Method"
@@ -3567,12 +3358,11 @@ msgstr "Geben Sie den voll qualifizierten Hostnamen für dieses Gerät ein."
 
 #: setup.php
 msgid "Related Cacti Host"
-msgstr "Verwandter Kakteenwirt"
+msgstr "Verknüpfter Cacti-Host"
 
 #: setup.php
-#, fuzzy
 msgid "Given Mactrack Host is connected to this Cacti Host."
-msgstr "Given Device Tracking Host ist mit diesem Kakteen-Host verbunden."
+msgstr "Der angegebene MacTrack-Host ist mit diesem Cacti-Host verknüpft."
 
 #: setup.php
 msgid "Scan Type"
@@ -3744,7 +3534,7 @@ msgstr "MAC Tracking Name/E-Mail Betreff"
 
 #: setup.php
 msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
-msgstr "Bitte geben Sie einen passenden Namen für diesen MAC Tracking Eintrag ein.  Diese Informationen werden in der Betreffzeile Ihrer E-Mail angezeigt."
+msgstr "Bitte geben Sie einen passenden Namen für diesen MAC Tracking Eintrag ein.  Diese Informationen werden in der Betreffzeile Ihrer E-Mail angezeigt"
 
 #: setup.php
 msgid "Ticket number for cross referencing with your corporate help desk system(s)."
