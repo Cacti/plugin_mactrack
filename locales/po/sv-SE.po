@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/mactrack/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -1630,7 +1630,7 @@ msgstr "En per skanning"
 
 #: mactrack_utilities.php setup.php
 msgid "Hourly"
-msgstr "Varje timme"
+msgstr "Timvis"
 
 #: mactrack_utilities.php setup.php
 msgid "Daily"
@@ -2615,7 +2615,7 @@ msgstr "Be om bekräftelse vid användning av verktyg"
 
 #: setup.php
 msgid "Data Retention"
-msgstr "Lagringstid"
+msgstr "Lagringstid för data"
 
 #: setup.php
 msgid "How long should port MAC details be retained in the database."
@@ -2920,7 +2920,7 @@ msgstr "(Redigera)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "Importera"
+msgstr "(Importera)"
 
 #: setup.php
 msgid "Mactrack Device Types"
