@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Italian <https://translate.cacti.net/projects/cacti/mactrack/it/>\nLanguage: it-IT\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Italian <https://translate.cacti.net/projects/cacti/mactrack/it/>\nLanguage: it-IT\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -864,7 +864,7 @@ msgstr "Esporta tipi di dispositivo da condividere con altri"
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "Venditore"
+msgstr "Produttore"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -2033,7 +2033,7 @@ msgstr "Frequenza di scansione"
 
 #: mactrack_view_dashboard.php
 msgid "Concurrent processes"
-msgstr "Processi simultanei"
+msgstr "Processi concomitanti"
 
 #: mactrack_view_dashboard.php
 msgid "Scanner max runtime"
@@ -2575,7 +2575,7 @@ msgstr "Scegliere quando raccogliere indirizzi MAC e IP e statistiche di interfa
 
 #: setup.php
 msgid "Concurrent Processes"
-msgstr "Processi simultanei"
+msgstr "Processi concomitanti"
 
 #: setup.php
 msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
@@ -2615,7 +2615,7 @@ msgstr "Quando si utilizzano le utilità, richiedere la verifica"
 
 #: setup.php
 msgid "Data Retention"
-msgstr "Conservazione dei dati"
+msgstr "Conservazione dati"
 
 #: setup.php
 msgid "How long should port MAC details be retained in the database."
@@ -2692,7 +2692,7 @@ msgstr "Quando si esaminano le statistiche dell'interfaccia di rete, quale sogli
 #: setup.php
 #, php-format
 msgid "%d Percent"
-msgstr "%d Percentuale"
+msgstr "%d percento"
 
 #: setup.php
 msgid "DNS Settings"
@@ -2772,7 +2772,7 @@ msgstr "Il corpo predefinito dell'email per le email MacWatch di MacTrack. Il co
 
 #: setup.php
 msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
-msgstr "Indirizzo Mac <MAC> trovato all'indirizzo IP <IP> per il numero di biglietto: <TICKET>.<br>Il dispositivo si trova in<br>Sito: <SITENAME>, Dispositivo <DEVICENAME>, IP <DEVICEIP>, Porta <PORTNUMBER>, e Nome porta <PORTNAME>."
+msgstr "Indirizzo MAC <MAC> trovato all'indirizzo IP <IP> per il numero di ticket: <TICKET>.<br>Il dispositivo si trova in<br>Sito: <SITENAME>, Dispositivo <DEVICENAME>, IP <DEVICEIP>, Porta <PORTNUMBER> e Nome porta <PORTNAME>"
 
 #: setup.php
 msgid "MacAuth Report Email Addresses"
@@ -2888,7 +2888,7 @@ msgstr "Inserisci l'indirizzo del sito"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
-msgstr "Per i servizi principali di Cacti o i plugin che richiedono l'accesso a Internet, inserire qui il server proxy e la porta nel formato IP:PORTA.  Ad esempio 192.168.1.1:8080."
+msgstr "Per i servizi principali di Cacti o i plugin che richiedono l'accesso a Internet, inserisci qui il server proxy e la porta nel formato IP:PORTA. Ad esempio 192.168.1.1:8080."
 
 #: setup.php
 msgid "Internet Proxy User"
@@ -2920,7 +2920,7 @@ msgstr "(Modifica)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "Importa"
+msgstr "(Importa)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3060,7 +3060,7 @@ msgstr "Ogni %d minuti"
 #: setup.php
 #, php-format
 msgid "Every %d Hour"
-msgstr "Ogni %di ore"
+msgstr "Ogni %d ora"
 
 #: setup.php
 #, php-format
@@ -3222,7 +3222,7 @@ msgstr "SNMP Get"
 
 #: setup.php
 msgid "SNMP Walk"
-msgstr "Passeggiata SNMP"
+msgstr "SNMP walk"
 
 #: setup.php
 msgid "Low User Port Number"
@@ -3450,7 +3450,7 @@ msgstr "Nome utente"
 
 #: setup.php
 msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
-msgstr "Il nome utente da usare per il metodo di autenticazione personalizzato.  Esempi includono SSH, RSH, RSH, HTML, ecc."
+msgstr "Il nome utente da usare per il metodo di autenticazione personalizzato.  Esempi includono SSH, RSH, HTML, ecc."
 
 #: setup.php
 msgid "Password"
