@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: German <https://translate.cacti.net/projects/cacti/mactrack/de/>\nLanguage: de-DE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: German <https://translate.cacti.net/projects/cacti/mactrack/de/>\nLanguage: de-DE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -309,7 +309,7 @@ msgstr "%d Wochen"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
-msgstr "Nicht Aufgenommen"
+msgstr "Nicht aufgezeichnet"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -864,7 +864,7 @@ msgstr "Gerätetypen exportieren, um sie mit anderen zu teilen"
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "Verkäufer"
+msgstr "Hersteller"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -983,7 +983,7 @@ msgstr " - Die aktuelle snmp-Lese Zeichenkette für das Gerät"
 
 #: mactrack_devices.php
 msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
-msgstr " - Die snmp-Version, mit der Sie dieses Gerät scannen möchten.  Gültige Werte sind 1, 2 und 3."
+msgstr " - Die snmp-Version, mit der Sie dieses Gerät scannen möchten.  Gültige Werte sind 1, 2 und 3"
 
 #: mactrack_devices.php
 msgid " - The UDP port that the snmp agent is running on"
@@ -2772,7 +2772,7 @@ msgstr "Die E-Mail-Textvorlage für MacTrack-MacWatch-E-Mails. Der Textkörper k
 
 #: setup.php
 msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
-msgstr "Mac-Adresse <MAC> gefunden unter IP-Adresse <IP> für Ticketnummer: <TICKET>.<br> Das Gerät befindet sich unter<br>Site: <SITENAME>, Gerät <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER> und Portname <PORTNAME>."
+msgstr "Mac-Adresse <MAC> gefunden unter IP-Adresse <IP> für Ticketnummer: <TICKET>.<br>Das Gerät befindet sich unter<br>Site: <SITENAME>, Gerät <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER> und Portname <PORTNAME>"
 
 #: setup.php
 msgid "MacAuth Report Email Addresses"
@@ -2920,7 +2920,7 @@ msgstr "(Verändern)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "Daten importieren"
+msgstr "(Importieren)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3010,7 +3010,7 @@ msgstr "%d Minute"
 
 #: setup.php
 msgid "Matches"
-msgstr "Wettkämpfe"
+msgstr "stimmt überein mit"
 
 #: setup.php
 msgid "Contains"
@@ -3218,11 +3218,11 @@ msgstr "Wie wird die Seriennummer für diese OID gesammelt?  Wenn'SNMP Walk', ne
 
 #: setup.php
 msgid "SNMP Get"
-msgstr "SNMP Get"
+msgstr "SNMP-Get"
 
 #: setup.php
 msgid "SNMP Walk"
-msgstr "SNMP-Weg"
+msgstr "SNMP-Walk"
 
 #: setup.php
 msgid "Low User Port Number"
@@ -3338,7 +3338,7 @@ msgstr "Geben Sie den SNMP v3-Kontext ein, der für dieses Gerät verwendet werd
 
 #: setup.php
 msgid "SNMP Engine ID (v3)"
-msgstr "SNMP-Modul-ID (v3)"
+msgstr "SNMP-Engine-ID (v3)"
 
 #: setup.php
 msgid "Enter the SNMP v3 Engine ID to use for this device."
