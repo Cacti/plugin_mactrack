@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Dutch <https://translate.cacti.net/projects/cacti/mactrack/nl/>\nLanguage: nl-NL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Dutch <https://translate.cacti.net/projects/cacti/mactrack/nl/>\nLanguage: nl-NL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -309,7 +309,7 @@ msgstr "%d Weken"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
-msgstr "Niet opgenomen"
+msgstr "Niet vastgelegd"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -864,7 +864,7 @@ msgstr "Apparaattypen exporteren om te delen met anderen"
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "Verkoper"
+msgstr "Leverancier"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -911,11 +911,11 @@ msgstr "U moet ten minste één apparaat selecteren."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to enable the following devices."
-msgstr "Klik op 'Doorgaan' om de volgende apparaten in te schakelen."
+msgstr "Klik op 'Volgende' om de volgende appara(a)t(en) in te schakelen."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to disable the following devices."
-msgstr "Klik op 'Doorgaan' om de volgende apparaten uit te schakelen."
+msgstr "Klik op 'Volgende' om de volgende appara(a)t(en) uit te schakelen."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
@@ -1630,7 +1630,7 @@ msgstr "Eén per scan"
 
 #: mactrack_utilities.php setup.php
 msgid "Hourly"
-msgstr "Per uur"
+msgstr "Elk uur"
 
 #: mactrack_utilities.php setup.php
 msgid "Daily"
@@ -1969,7 +1969,7 @@ msgstr "Adres- en poorttotalen"
 
 #: mactrack_view_dashboard.php
 msgid "Collection settings"
-msgstr "Verzamelingsinstellingen"
+msgstr "Collectie-instellingen"
 
 #: mactrack_view_dashboard.php
 msgid "Scan runtimes"
@@ -2615,7 +2615,7 @@ msgstr "Vraag om verificatie als u hulpprogramma's gebruikt"
 
 #: setup.php
 msgid "Data Retention"
-msgstr "Data retentie"
+msgstr "Gegevensretentie"
 
 #: setup.php
 msgid "How long should port MAC details be retained in the database."
@@ -2880,11 +2880,11 @@ msgstr "dot1x Deta"
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "Instellingen internetproxy"
+msgstr "Internetproxy-instellingen"
 
 #: setup.php
 msgid "Internet Proxy Address"
-msgstr "Adres internetproxy"
+msgstr "Internetproxyadres"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
@@ -2920,7 +2920,7 @@ msgstr "(bewerken)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "Importeren"
+msgstr "(Importeren)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3010,7 +3010,7 @@ msgstr "%d Minuut"
 
 #: setup.php
 msgid "Matches"
-msgstr "Wedstrijden"
+msgstr "komt overeen"
 
 #: setup.php
 msgid "Contains"
@@ -3022,7 +3022,7 @@ msgstr "begint met"
 
 #: setup.php
 msgid "Does Not Contain"
-msgstr "Bevat geen"
+msgstr "bevat niet"
 
 #: setup.php
 msgid "Does Not Begin With"
