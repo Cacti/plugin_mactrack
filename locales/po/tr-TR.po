@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Turkish <https://translate.cacti.net/projects/cacti/mactrack/tr/>\nLanguage: tr-TR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Turkish <https://translate.cacti.net/projects/cacti/mactrack/tr/>\nLanguage: tr-TR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -694,7 +694,7 @@ msgstr " - Bu cihaz tipinin Seri Numarası bir SNMP Sorgusu ile edinilebiliyorsa
 
 #: mactrack_device_types.php
 msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
-msgstr " - Tarama işleviniz, gövde bağlantı noktalarını veya bağlantı bağlantı noktalarını izole etme yeteneğine sahip değilse, bu kullanıcı bağlantı noktalarının başlangıç bağlantı noktası numarasıdır"
+msgstr " - Tarama işleviniz, gövde bağlantı noktalarını veya bağlantı portlarını izole etme yeteneğine sahip değilse, bu kullanıcı bağlantı noktalarının başlangıç bağlantı noktası numarasıdır"
 
 #: mactrack_device_types.php
 msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
@@ -795,7 +795,7 @@ msgstr "Cihaz Tipi Açıklaması"
 #: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
 #: mactrack_view_devices.php mactrack_view_sites.php setup.php
 msgid "Device Type"
-msgstr "Cihaz tipi"
+msgstr "Cihaz Türü"
 
 #: mactrack_device_types.php
 msgid "Port Scanner"
@@ -864,7 +864,7 @@ msgstr "Başkalarıyla Paylaşmak İçin Aygıt Türlerini Dışa Aktar"
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "Satıcı"
+msgstr "Üretici"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -911,11 +911,11 @@ msgstr "En az bir cihaz seçmelisiniz."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to enable the following devices."
-msgstr "Aşağıdaki cihazları etkinleştirmek için 'Devam Et'i tıklayın."
+msgstr "Aşağıdaki Cihazları etkinleştirmek için &#39;Devam Et&#39;i tıklayın."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to disable the following devices."
-msgstr "Aşağıdaki cihazları devre dışı bırakmak için 'Devam Et'i tıklayın."
+msgstr "Aşağıdaki cihazları devre dışı bırakmak için &#39;Devam Et&#39;i tıklayın."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
@@ -1064,7 +1064,7 @@ msgstr "MacTrack Cihazları [yeni]"
 
 #: mactrack_devices.php
 msgid "SNMP Information"
-msgstr "SNMP bilgileri"
+msgstr "SNMP Bilgisi"
 
 #: mactrack_devices.php
 msgid "System:"
@@ -1360,7 +1360,7 @@ msgstr "Deneme hakkı"
 
 #: mactrack_snmp.php
 msgid "Max OIDs"
-msgstr "Maksimum OID"
+msgstr "Max OIDS"
 
 #: mactrack_snmp.php mactrack_view_dot1x.php
 msgid "Username"
@@ -2615,7 +2615,7 @@ msgstr "Yardımcı programları kullanırken, doğrulama isteyin"
 
 #: setup.php
 msgid "Data Retention"
-msgstr "Verilerin Saklanması"
+msgstr "Veri Saklama"
 
 #: setup.php
 msgid "How long should port MAC details be retained in the database."
@@ -2880,11 +2880,11 @@ msgstr "dot1x Deta"
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "İnternet Vekil Sunucu (Proxy) Ayarları"
+msgstr "İnternet Proxy Ayarları"
 
 #: setup.php
 msgid "Internet Proxy Address"
-msgstr "İnternet Vekil Sunucu (Proxy) Adresi"
+msgstr "İnternet Proxy Adresi"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
@@ -2920,7 +2920,7 @@ msgstr "(Düzenle)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "İçe Aktar"
+msgstr "(İçe Aktar)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3010,11 +3010,11 @@ msgstr "%d Dakika"
 
 #: setup.php
 msgid "Matches"
-msgstr "Karşılaşmalar"
+msgstr "Eşleşmeler"
 
 #: setup.php
 msgid "Contains"
-msgstr "İçeren"
+msgstr "şunu içeren"
 
 #: setup.php
 msgid "Begins With"
@@ -3222,7 +3222,7 @@ msgstr "SNMP Al"
 
 #: setup.php
 msgid "SNMP Walk"
-msgstr "SNMP Yürüyüşü"
+msgstr "SNMP walk"
 
 #: setup.php
 msgid "Low User Port Number"
@@ -3242,7 +3242,7 @@ msgstr "Devre dışı cihaz türü kullanılmıyor."
 
 #: setup.php
 msgid "Fill in the name of this SNMP option set."
-msgstr "Bu SNMP seçenek setinin adını girin."
+msgstr "Bu SNMP Seçenek Kümesinin adını girin."
 
 #: setup.php
 msgid "SNMP Version"
@@ -3270,7 +3270,7 @@ msgstr "SNMP Zaman Aşımı"
 
 #: setup.php
 msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
-msgstr "Cacti'nin bir SNMP yanıtı için bekleyeceği en fazla milisaniye sayısı (php-snmp desteği ile çalışmaz)."
+msgstr "Cacti'nin bir SNMP yanıtı için bekleyeceği maksimum milisaniye sayısı (php-snmp desteğiyle çalışmaz)."
 
 #: setup.php
 msgid "SNMP Retries"
