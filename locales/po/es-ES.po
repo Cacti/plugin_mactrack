@@ -1,5 +1,5 @@
 msgid ""
-msgstr "Project-Id-Version: Cacti 1\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Spanish <https://translate.cacti.net/projects/cacti/mactrack/es/>\nLanguage: es-ES\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti 1\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Spanish <https://translate.cacti.net/projects/cacti/mactrack/es/>\nLanguage: es-ES\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -906,11 +906,11 @@ msgstr "Debes seleccionar al menos un dispositivo."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to enable the following devices."
-msgstr "Haga click en 'Continuar' para habilitar los siguientes dispositivos."
+msgstr "Haga click en 'Continuar' para habilitar el/los siguiente(s) dispositivo(s)."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to disable the following devices."
-msgstr "Haga click en 'Continuar' para deshabilitar los siguientes dispositivos."
+msgstr "Haga click en 'Continuar' para deshabilitar el/los siguiente(s) dispositivo(s)."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
@@ -3006,7 +3006,7 @@ msgstr "%d Minuto"
 
 #: setup.php
 msgid "Matches"
-msgstr "Encontrados"
+msgstr "coincidencias"
 
 #: setup.php
 msgid "Contains"
@@ -3218,7 +3218,7 @@ msgstr "SNMP Get"
 
 #: setup.php
 msgid "SNMP Walk"
-msgstr "SNMP Walk"
+msgstr "Recorrido SNMP"
 
 #: setup.php
 msgid "Low User Port Number"
