@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: macktrack on cacti 1.1.34\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Chinese (Simplified Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hans/>\nLanguage: zh-CN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\nX-Poedit-SourceCharset: utf-8\n"
+msgstr "Project-Id-Version: macktrack on cacti 1.1.34\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Chinese (Simplified Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hans/>\nLanguage: zh-CN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\nX-Poedit-SourceCharset: utf-8\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -295,7 +295,7 @@ msgstr "%d分钟"
 #: lib/mactrack_functions.php
 #, php-format
 msgid "%d Hours"
-msgstr "%d 小时"
+msgstr "%d 时"
 
 #: lib/mactrack_functions.php setup.php
 #, php-format
@@ -325,7 +325,7 @@ msgstr "状态：空闲，上次运行耗时：%2.1f 秒，进程数：%d 个进
 #: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
 #: setup.php
 msgid "Disabled"
-msgstr "已禁用"
+msgstr "禁用"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -377,7 +377,7 @@ msgstr "DOT1X"
 
 #: lib/mactrack_functions.php mactrack_view_graphs.php
 msgid "Graphs"
-msgstr "图表"
+msgstr "图形"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -654,7 +654,7 @@ msgstr "必需的文件格式注释"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "The file must contain a header row with the following column headings."
-msgstr "该文件必须包含具有以下列标题的标题行."
+msgstr "该文件必须包含具有以下列标题的标题行。"
 
 #: mactrack_device_types.php
 msgid " - A common name for the device.  For example Cisco 6509 Switch"
@@ -911,11 +911,11 @@ msgstr "您必须至少选择一个设备。"
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to enable the following devices."
-msgstr "点击“继续”以启用以下设备。"
+msgstr "点击 '继续' 以启用以下设备。"
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to disable the following devices."
-msgstr "点击“继续”以禁用以下设备。"
+msgstr "点击 '继续' 以禁用以下设备。"
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
@@ -2712,7 +2712,7 @@ msgstr "主DNS的IP地址"
 
 #: setup.php
 msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
-msgstr "输入用于反向查找的主要DNS IP地址。"
+msgstr "输入用于反向查询的主DNS IP。"
 
 #: setup.php
 msgid "Secondary DNS IP Address"
@@ -2720,7 +2720,7 @@ msgstr "备用DNS IP地址"
 
 #: setup.php
 msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
-msgstr "输入辅助DNS IP地址以用于反向查找。"
+msgstr "输入备DNS IP 地址以用于反向查询。"
 
 #: setup.php
 msgid "DNS Timeout"
@@ -2856,7 +2856,7 @@ msgstr "snmpbulkwalk二进制路径"
 
 #: setup.php
 msgid "The path to your snmpbulkwalk binary."
-msgstr "snmpbulkwalk二进制文件的路径。"
+msgstr "snmpbulkwalk 路径。"
 
 #: setup.php
 msgid "MacTrack Settings"
@@ -2880,11 +2880,11 @@ msgstr "dot1x Deta"
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "Internet 代理设置"
+msgstr "互联网代理设置"
 
 #: setup.php
 msgid "Internet Proxy Address"
-msgstr "Internet 代理地址"
+msgstr "互联网代理地址"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
@@ -2920,7 +2920,7 @@ msgstr "(编辑)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "（引用）"
+msgstr "(导入)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3018,11 +3018,11 @@ msgstr "包含"
 
 #: setup.php
 msgid "Begins With"
-msgstr "开始于"
+msgstr "开头为"
 
 #: setup.php
 msgid "Does Not Contain"
-msgstr "不含"
+msgstr "不包含"
 
 #: setup.php
 msgid "Does Not Begin With"
@@ -3042,7 +3042,7 @@ msgstr "一半"
 
 #: setup.php
 msgid "Full"
-msgstr "满的"
+msgstr "完整"
 
 #: setup.php
 msgid "Sync Cacti Device to Mactrack Device"
@@ -3074,12 +3074,12 @@ msgstr "每天"
 #: setup.php
 #, php-format
 msgid "%d Month"
-msgstr "%d 月"
+msgstr "%d 个月"
 
 #: setup.php
 #, php-format
 msgid "%d Months"
-msgstr "%d 月"
+msgstr "%d 个月"
 
 #: setup.php
 #, php-format
@@ -3218,7 +3218,7 @@ msgstr "如何收集此OID的序列号。 如果'SNMP Walk'，我们假设有多
 
 #: setup.php
 msgid "SNMP Get"
-msgstr "SNMP获取"
+msgstr "SNMP get"
 
 #: setup.php
 msgid "SNMP Walk"
@@ -3242,7 +3242,7 @@ msgstr "未使用禁用的设备类型。"
 
 #: setup.php
 msgid "Fill in the name of this SNMP option set."
-msgstr "填写此SNMP选项集的名称。"
+msgstr "填写此SNMP 选项集的名称。"
 
 #: setup.php
 msgid "SNMP Version"
@@ -3250,7 +3250,7 @@ msgstr "SNMP版本"
 
 #: setup.php
 msgid "Choose the SNMP version for this host."
-msgstr "选择该主机的SNMP版本。"
+msgstr "选择该主机的SNMP 版本。"
 
 #: setup.php
 msgid "SNMP Community String"
@@ -3258,7 +3258,7 @@ msgstr "SNMP 团体字串"
 
 #: setup.php
 msgid "Fill in the SNMP read community for this device."
-msgstr "填写此设备的SNMP读取社区。"
+msgstr "请填写设备的SNMP 读取团体。"
 
 #: setup.php
 msgid "SNMP Port"
@@ -3270,7 +3270,7 @@ msgstr "SNMP超时"
 
 #: setup.php
 msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
-msgstr "最大毫秒数Cacti将等待SNMP响应（不支持php-snmp支持）。"
+msgstr "Cacti 将等待SNMP 响应的最大毫秒数 (不支持php-snmp)。"
 
 #: setup.php
 msgid "SNMP Retries"
@@ -3278,7 +3278,7 @@ msgstr "SNMP重试"
 
 #: setup.php
 msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
-msgstr "放弃之前通过SNMP读取字符串到达设备的最大尝试次数。"
+msgstr "在放弃之前通过SNMP 读取字符串连接设备的最大次数。"
 
 #: setup.php
 msgid "Maximum OID's Per Get Request"
@@ -3290,47 +3290,47 @@ msgstr "指定可以在单个SNMP Get请求中获取的OID的数量。"
 
 #: setup.php
 msgid "SNMP Username (v3)"
-msgstr "SNMP用户名（v3）"
+msgstr "SNMP 用户名 (v3)"
 
 #: setup.php
 msgid "SNMP v3 username for this device."
-msgstr "此设备的SNMP v3用户名。"
+msgstr "设备的SNMPv3 用户名。"
 
 #: setup.php
 msgid "SNMP Password (v3)"
-msgstr "SNMP密码（v3）"
+msgstr "SNMP 密码 (v3)"
 
 #: setup.php
 msgid "SNMP v3 password for this device."
-msgstr "此设备的SNMP v3密码。"
+msgstr "设备的SNMPv3 密码。"
 
 #: setup.php
 msgid "SNMP Auth Protocol (v3)"
-msgstr "SNMP身份验证协议（v3）"
+msgstr "SNMP 认证协议 (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Authorization Protocol."
-msgstr "选择SNMPv3授权协议。"
+msgstr "选择SNMPv3 的授权协议。"
 
 #: setup.php
 msgid "SNMP Privacy Passphrase (v3)"
-msgstr "SNMP隐私密码（v3）"
+msgstr "SNMP 私有密码 (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Passphrase."
-msgstr "选择SNMPv3隐私密码。"
+msgstr "选择SNMPv3 的私有密码。"
 
 #: setup.php
 msgid "SNMP Privacy Protocol (v3)"
-msgstr "SNMP隐私协议（v3）"
+msgstr "SNMP 私有协议 (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Protocol."
-msgstr "选择SNMPv3隐私协议。"
+msgstr "选择SNMPv3 的隐私协议。"
 
 #: setup.php
 msgid "SNMP Context (v3)"
-msgstr "SNMP上下文（v3）"
+msgstr "SNMP 上下文(v3)"
 
 #: setup.php
 msgid "Enter the SNMP v3 Context to use for this device."
@@ -3338,7 +3338,7 @@ msgstr "输入用于此设备的SNMP v3上下文。"
 
 #: setup.php
 msgid "SNMP Engine ID (v3)"
-msgstr "SNMP引擎ID（v3）"
+msgstr "SNMP 引擎ID (v3)"
 
 #: setup.php
 msgid "Enter the SNMP v3 Engine ID to use for this device."
@@ -3390,7 +3390,7 @@ msgstr "禁用设备"
 
 #: setup.php
 msgid "Check this box to disable all checks for this host."
-msgstr "选中此框可禁用此主机的所有检查。"
+msgstr "选中此复选框来禁用该设备的所有检查。"
 
 #: setup.php
 msgid "Switch/Hub, Switch/Router Settings"
@@ -3470,7 +3470,7 @@ msgstr "用于SSH身份验证的私钥的路径。"
 
 #: setup.php
 msgid "Sequence"
-msgstr "序列"
+msgstr "排序"
 
 #: setup.php
 msgid "Sequence of Item."
