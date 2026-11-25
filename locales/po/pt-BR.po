@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Portuguese (Brazil) <https://translate.cacti.net/projects/cacti/mactrack/pt_BR/>\nLanguage: pt-BR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Portuguese (Brazil) <https://translate.cacti.net/projects/cacti/mactrack/pt_BR/>\nLanguage: pt-BR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -309,7 +309,7 @@ msgstr "%d Semanas"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
-msgstr "Não Gravado"
+msgstr "Não registrado"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -654,7 +654,7 @@ msgstr "Notas de Formato de Arquivo Necessárias"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "The file must contain a header row with the following column headings."
-msgstr "O file deve conter uma linha de cabeçalho com os seguintes títulos de coluna."
+msgstr "O arquivo deve conter uma linha de cabeçalho com os seguintes títulos de coluna."
 
 #: mactrack_device_types.php
 msgid " - A common name for the device.  For example Cisco 6509 Switch"
@@ -864,7 +864,7 @@ msgstr "Exportar tipos de dispositivos para compartilhar com outros"
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Vendor"
-msgstr "Vendedor"
+msgstr "Fabricante"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
 #: mactrack_view_devices.php mactrack_view_dot1x.php
@@ -911,11 +911,11 @@ msgstr "Você deve selecionar pelo menos um dispositivo."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to enable the following devices."
-msgstr "Clique em 'Continuar' para ativar os seguintes dispositivos."
+msgstr "Clique em 'Continuar' para ativar o(s) seguinte(s) dispositivo(s)."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to disable the following devices."
-msgstr "Clique em 'Continuar' para desativar os seguintes dispositivos."
+msgstr "Clique em 'Continuar' para desativar o(s) seguinte(s) dispositivo(s)."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
@@ -1328,7 +1328,7 @@ msgstr "Conjunto de opções SNMP [editar: %s]"
 
 #: mactrack_snmp.php
 msgid "SNMP Option Set [new]"
-msgstr "SNMP Option Set [novo] (Opção SNMP)"
+msgstr "Conjunto de Opções SNMP [novo]"
 
 #: mactrack_snmp.php setup.php
 msgid "Mactrack SNMP Options"
@@ -1422,7 +1422,7 @@ msgstr "O Poller do MacTrack está:"
 
 #: mactrack_utilities.php
 msgid "Running Processes:"
-msgstr "Processos simultâneos:"
+msgstr "Processos em Execução:"
 
 #: mactrack_utilities.php
 msgid "Last Time Poller Started:"
@@ -1630,7 +1630,7 @@ msgstr "Um por verificação"
 
 #: mactrack_utilities.php setup.php
 msgid "Hourly"
-msgstr "Por hora"
+msgstr "De hora em hora"
 
 #: mactrack_utilities.php setup.php
 msgid "Daily"
@@ -2277,7 +2277,7 @@ msgstr "Alias"
 
 #: mactrack_view_interfaces.php
 msgid "InBound %%%"
-msgstr "InBound % InBound"
+msgstr "InBound %"
 
 #: mactrack_view_interfaces.php
 msgid "OutBound %%%"
@@ -2305,7 +2305,7 @@ msgstr "UProto Total"
 
 #: mactrack_view_interfaces.php
 msgid "Out Err Total"
-msgstr "Saída Err Err Total"
+msgstr "Saída Err Total"
 
 #: mactrack_view_interfaces.php
 msgid "Out Disc Total"
@@ -2333,7 +2333,7 @@ msgstr "Disco de saída (OD/S)"
 
 #: mactrack_view_interfaces.php
 msgid "Last Change"
-msgstr "Última modificação"
+msgstr "Última alteração"
 
 #: mactrack_view_interfaces.php
 msgid "Last Scanned"
@@ -2720,7 +2720,7 @@ msgstr "Endereço IP secundário do DNS"
 
 #: setup.php
 msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
-msgstr "Digite o endereço IP do DNS secundário a ser utilizado para consultas reversas."
+msgstr "Introduza o endereço IP secundário do DNS a utilizar para pesquisas inversas."
 
 #: setup.php
 msgid "DNS Timeout"
@@ -2880,11 +2880,11 @@ msgstr "dot1x Deta"
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "Configurações de Proxy da Internet"
+msgstr "Configurações do Proxy de Internet"
 
 #: setup.php
 msgid "Internet Proxy Address"
-msgstr "Endereço de Proxy da Internet"
+msgstr "Endereço do Proxy de Internet"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
@@ -2920,7 +2920,7 @@ msgstr "(Editar)"
 
 #: setup.php
 msgid "(Import)"
-msgstr "Importar"
+msgstr "(Importar)"
 
 #: setup.php
 msgid "Mactrack Device Types"
@@ -3010,7 +3010,7 @@ msgstr "%d Minuto"
 
 #: setup.php
 msgid "Matches"
-msgstr "Partidas"
+msgstr "resultados"
 
 #: setup.php
 msgid "Contains"
@@ -3166,7 +3166,7 @@ msgstr "Escolha o tipo de dispositivo."
 
 #: setup.php
 msgid "System Description Match"
-msgstr "Descrição do Sistema Match"
+msgstr "Correspondência da Descrição do Sistema"
 
 #: setup.php
 msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
@@ -3222,7 +3222,7 @@ msgstr "SNMP Obter"
 
 #: setup.php
 msgid "SNMP Walk"
-msgstr "Caminhada SNMP"
+msgstr "SNMP walk"
 
 #: setup.php
 msgid "Low User Port Number"
@@ -3242,7 +3242,7 @@ msgstr "O tipo de dispositivo desativado não é usado."
 
 #: setup.php
 msgid "Fill in the name of this SNMP option set."
-msgstr "Preencha o nome desse conjunto de opções SNMP."
+msgstr "Preencha o nome deste conjunto de opções SNMP."
 
 #: setup.php
 msgid "SNMP Version"
