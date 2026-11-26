@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Japanese <https://translate.cacti.net/projects/cacti/mactrack/ja/>\nLanguage: ja-JP\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Japanese <https://translate.cacti.net/projects/cacti/mactrack/ja/>\nLanguage: ja-JP\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -614,7 +614,7 @@ msgstr "%dデバイスタイプが追加されました！"
 
 #: mactrack_device_types.php
 msgid "No New Device Types Found!"
-msgstr "新しいデバイスタイプは見つかりませんでした。"
+msgstr "新しいデバイスタイプは見つかりませんでした！"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Import Results"
@@ -963,7 +963,7 @@ msgstr " - デバイスのIPアドレスまたはDNS名"
 
 #: mactrack_devices.php
 msgid " - More detailed information about the device, including location, environmental conditions, etc."
-msgstr " - 場所、環境条件などを含む、デバイスに関するより詳細な情報"
+msgstr " - 場所、環境条件などを含む、デバイスに関するより詳細な情報。"
 
 #: mactrack_devices.php
 msgid " - A list of ports that should not be scanned for user devices"
@@ -1241,7 +1241,7 @@ msgstr "MacTrack 監視対象 MAC が見つかりません"
 
 #: mactrack_sites.php
 msgid "Click 'Continue' to delete the following Site(s)?"
-msgstr "次のサイトを削除するには、[続行]をクリックしますか。"
+msgstr "次のサイトを削除するには、[続行]をクリックしますか？"
 
 #: mactrack_sites.php
 msgid "You must select at least one site."
