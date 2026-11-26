@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: French <https://translate.cacti.net/projects/cacti/mactrack/fr/>\nLanguage: fr-FR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: French <https://translate.cacti.net/projects/cacti/mactrack/fr/>\nLanguage: fr-FR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -718,7 +718,7 @@ msgstr " est un champ entier et doit être l'un des suivants :"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "1 - Switch/Hub"
-msgstr "1 - Switch/Hub"
+msgstr "1 - Commutateur/Concentrateur"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "2 - Switch/Router"
@@ -811,7 +811,7 @@ msgstr "Scanner Dot1x"
 
 #: mactrack_device_types.php
 msgid "sysDescription Match"
-msgstr "sysDescription Match"
+msgstr "Correspondance sysDescription"
 
 #: mactrack_device_types.php
 msgid "Vendor OID Match"
@@ -1108,7 +1108,7 @@ msgstr "Nom d'hôte"
 
 #: mactrack_devices.php
 msgid "Total IPs"
-msgstr "Total IPs"
+msgstr "Total des IP"
 
 #: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
 #: mactrack_view_sites.php
@@ -1368,11 +1368,11 @@ msgstr "Nom d'utilisateur"
 
 #: mactrack_snmp.php
 msgid "Auth Proto"
-msgstr "Auth Proto"
+msgstr "Protocole d'authentification"
 
 #: mactrack_snmp.php
 msgid "Priv Proto"
-msgstr "Priv Proto"
+msgstr "Protocole de confidentialité"
 
 #: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
 #: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
@@ -2165,7 +2165,7 @@ msgstr "Inconnu Type d'appareil"
 
 #: mactrack_view_devices.php
 msgid "Total VLAN's"
-msgstr "Total VLAN's"
+msgstr "Total des VLAN"
 
 #: mactrack_view_devices.php
 msgid "Edit Device"
@@ -2181,7 +2181,7 @@ msgstr "Appareil non associé à un appareil Cacti"
 
 #: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
 msgid "View MAC Addresses"
-msgstr "Adresses MAC"
+msgstr "Afficher les adresses MAC"
 
 #: mactrack_view_devices.php
 msgid "No Mactrack Devices Found"
@@ -2193,7 +2193,7 @@ msgstr "Résultats de l'analyse de l'équipement"
 
 #: mactrack_view_devices.php
 msgid "Hub/Switch"
-msgstr "Hub/Switch"
+msgstr "Concentrateur/Commutateur"
 
 #: mactrack_view_dot1x.php
 msgid "Mactrack - 802.1x View"
@@ -2301,7 +2301,7 @@ msgstr "En Disque Total"
 
 #: mactrack_view_interfaces.php
 msgid "UProto Total"
-msgstr "UProto Total"
+msgstr "Total UProto"
 
 #: mactrack_view_interfaces.php
 msgid "Out Err Total"
@@ -2325,7 +2325,7 @@ msgstr "UProto (UP/S)"
 
 #: mactrack_view_interfaces.php
 msgid "Out Err (OE/S)"
-msgstr "Out Err (OE/S)"
+msgstr "Err. sort. (OE/S)"
 
 #: mactrack_view_interfaces.php
 msgid "Out Disc (OD/S)"
@@ -2619,7 +2619,7 @@ msgstr "Conservation des données"
 
 #: setup.php
 msgid "How long should port MAC details be retained in the database."
-msgstr "Combien de temps les détails du port MAC doivent-ils être conservés dans la base de données ?"
+msgstr "Durée de conservation des détails MAC du port dans la base de données."
 
 #: setup.php
 msgid "Data Retention IPs"
@@ -2788,7 +2788,7 @@ msgstr "Fréquence du rapport MacAuth"
 
 #: setup.php
 msgid "How often will the MacAuth Reports be Emailed."
-msgstr "À quelle fréquence les rapports MacAuth seront-ils envoyés par courriel ?"
+msgstr "Fréquence d'envoi par courriel des rapports MacAuth."
 
 #: setup.php
 msgid "Mactrack ArpWatch Settings"
@@ -3314,7 +3314,7 @@ msgstr "Choisissez le protocole d'autorisation SNMPv3."
 
 #: setup.php
 msgid "SNMP Privacy Passphrase (v3)"
-msgstr "Mot de passe SNMP (v3)"
+msgstr "Phrase secrète de confidentialité SNMP (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Passphrase."
