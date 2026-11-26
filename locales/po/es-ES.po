@@ -1,5 +1,5 @@
 msgid ""
-msgstr "Project-Id-Version: Cacti 1\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Spanish <https://translate.cacti.net/projects/cacti/mactrack/es/>\nLanguage: es-ES\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti 1\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Spanish <https://translate.cacti.net/projects/cacti/mactrack/es/>\nLanguage: es-ES\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -729,17 +729,17 @@ msgstr "El tipo de dispositivo se determina sondeando su agente SNMP para obtene
 
 #: mactrack_device_types.php mactrack_devices.php setup.php
 msgid "Switch/Hub"
-msgstr "Switch/Hub"
+msgstr "Conmutador/Concentrador"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
 #: setup.php
 msgid "Switch/Router"
-msgstr "Switch/Router"
+msgstr "Conmutador/Enrutador"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
 #: setup.php
 msgid "Router"
-msgstr "Router"
+msgstr "Enrutador"
 
 #: mactrack_device_types.php
 #, php-format
@@ -1075,7 +1075,7 @@ msgstr "Nombre de equipo:"
 
 #: mactrack_devices.php
 msgid "ObjectID:"
-msgstr "ObjectID:"
+msgstr "ID de objeto:"
 
 #: mactrack_devices.php
 msgid "Mactrack Device Filters"
@@ -1212,7 +1212,7 @@ msgstr "Filtros de MacWatch de MacTrack"
 
 #: mactrack_macwatch.php
 msgid "Watch Name"
-msgstr "Watch Name"
+msgstr "Nombre de vigilancia"
 
 #: mactrack_macwatch.php setup.php
 msgid "Ticket Number"
@@ -1228,7 +1228,7 @@ msgstr "Ultimo visto"
 
 #: mactrack_macwatch.php
 msgid "Watches"
-msgstr "Watches"
+msgstr "Vigilancias"
 
 #: mactrack_macwatch.php
 msgid "No Mactrack Watched Macs Found"
@@ -1406,7 +1406,7 @@ msgstr "Estado del proceso de MacTrack"
 # Probablemente actualizar se ajuste mas.
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Refresh"
-msgstr "Actualizar"
+msgstr "Refrescar"
 
 #: mactrack_utilities.php
 msgid "Current Process Status"
@@ -2189,7 +2189,7 @@ msgstr "Resultados de escaneo de dispositivos"
 
 #: mactrack_view_devices.php
 msgid "Hub/Switch"
-msgstr "Hub/Switch"
+msgstr "Concentrador/Conmutador"
 
 #: mactrack_view_dot1x.php
 msgid "Mactrack - 802.1x View"
@@ -2289,7 +2289,7 @@ msgstr "Sal (B/S)"
 
 #: mactrack_view_interfaces.php
 msgid "In Err Total"
-msgstr "In Err Total"
+msgstr "Total errores entrada"
 
 #: mactrack_view_interfaces.php
 msgid "In Disc Total"
@@ -2301,15 +2301,15 @@ msgstr "UProto Total"
 
 #: mactrack_view_interfaces.php
 msgid "Out Err Total"
-msgstr "Out Err Total"
+msgstr "Total errores salida"
 
 #: mactrack_view_interfaces.php
 msgid "Out Disc Total"
-msgstr "Out Disc Total"
+msgstr "Total descartes salida"
 
 #: mactrack_view_interfaces.php
 msgid "In Err (E/S)"
-msgstr "In Err (E/S)"
+msgstr "Errores ent. (E/S)"
 
 #: mactrack_view_interfaces.php
 msgid "In Disc (D/S)"
@@ -2321,11 +2321,11 @@ msgstr "UProto (UP/S)"
 
 #: mactrack_view_interfaces.php
 msgid "Out Err (OE/S)"
-msgstr "Out Err (OE/S)"
+msgstr "Errores sal. (OE/S)"
 
 #: mactrack_view_interfaces.php
 msgid "Out Disc (OD/S)"
-msgstr "Out Disc (OD/S)"
+msgstr "Descartes sal. (OD/S)"
 
 #: mactrack_view_interfaces.php
 msgid "Last Change"
@@ -2647,7 +2647,7 @@ msgstr "Dos puntos [:]"
 
 #: setup.php
 msgid "Pipe [|]"
-msgstr "Pipe [|]"
+msgstr "Barra vertical [|]"
 
 #: setup.php
 msgid "Space [ ]"
@@ -2728,7 +2728,7 @@ msgstr "Introduzca el tiempo de espera DNS en milisegundos. MacTrack utiliza un 
 
 #: setup.php
 msgid "DNS Prime Interval"
-msgstr "DNS Prime Interval"
+msgstr "Intervalo de precarga DNS"
 
 #: setup.php
 msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
@@ -2864,7 +2864,7 @@ msgstr "Pestaña por defecto"
 
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
-msgstr "¿Qué pestaña de MacTrack desea que sea su pestaña predeterminada cada vez que vaya a MacTrack en segundo lugar?"
+msgstr "Pestaña de MacTrack predeterminada que se abrirá cada vez que acceda a la sección de MacTrack."
 
 #: setup.php
 msgid "Mac Addresses"
