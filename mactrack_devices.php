@@ -374,7 +374,7 @@ function form_mactrack_actions(): void {
 		} elseif (get_request_var('drp_action') == '5') { // change port settngs for multiple devices
 			print "<tr>
 				<td colspan='2' class='textArea'>
-					<p>" . __('Click \'Continue\' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value.') . "</p>
+					<p>" . __('Click \'Continue\' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value.', 'mactrack') . "</p>
 					<ul>$device_list</ul>
 				</td>
 			</tr>";

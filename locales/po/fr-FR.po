@@ -1072,7 +1072,7 @@ msgstr "Système :"
 
 #: mactrack_devices.php
 msgid "Uptime:"
-msgstr "Temps d&apos;activation & #160;:"
+msgstr "Temps d'activation :"
 
 #: mactrack_devices.php
 msgid "Hostname:"

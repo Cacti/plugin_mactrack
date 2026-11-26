@@ -1695,7 +1695,7 @@ function mactrack_config_arrays() {
 		'0'        => __('On Scan Completion', 'mactrack'),
 		'720'      => __('Every %d Hours', 12),
 		'1440'     => __('Every Day', 'mactrack'),
-		'2880'     => __('Every %d Days', 2),
+		'2880'     => __('Every %d Days', 2, 'mactrack'),
 		'10080'    => __('Every Week', 'mactrack')
 	];
 
