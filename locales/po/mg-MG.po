@@ -1,0 +1,3597 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-18 18:36+0000\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Malagasy\n"
+"Language: mg-MG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
+msgstr "Tsy nahavita nanomboka ny toerana mahazatra azy ny MacTrack taorian'ny fanandramana miverimberina. Jereo ny firaketan'i Cacti alohan'ny hanohizana."
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
+msgstr "Tsy nahavita nanomboka ny toerana mahazatra azy ny MacTrack. Jereo ny firaketan'i Cacti alohan'ny hanohizana."
+
+#: lib/mactrack_activity.php
+msgid "Scanning devices"
+msgstr "Mitily fitaovana"
+
+#: lib/mactrack_activity.php
+msgid "Waiting for the DNS resolver"
+msgstr "Miandry ny mpamaha DNS"
+
+#: lib/mactrack_activity.php
+msgid "Transferring and aggregating scan results"
+msgstr "Mamindra sy manangona ny valin'ny fitiliana"
+
+#: lib/mactrack_activity.php
+msgid "Maintaining port table partitions"
+msgstr "Fikojakojana ny fizarazarana ny latabatry ny seranana"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired port rows"
+msgstr "Mamafa ireo laharana port lany daty"
+
+#: lib/mactrack_activity.php
+msgid "Pruning scan dates"
+msgstr "Fanesorana ireo datin'ny fitiliana"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired IP rows"
+msgstr "Mamafa ireo laharana IP lany daty"
+
+#: lib/mactrack_activity.php
+msgid "Optimizing the IP table"
+msgstr "Manatsara ny tabilao IP"
+
+#: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
+#: mactrack_view_dot1x.php
+msgid "Idle"
+msgstr "Tsy miasa"
+
+#: lib/mactrack_activity.php
+msgid "Upgrading: rebuilding aggregated ports"
+msgstr "Fanavaozana: fanamboarana indray ny seranana natambatra"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "About %s rows left to copy (estimate)"
+msgstr "Manodidina ny %s andalana sisa hadika (tombanana)"
+
+#: lib/mactrack_activity.php
+msgid "Repartitioning the port, IP and 802.1x tables"
+msgstr "Fizarana indray ny tabilao seranana, IP ary 802.1x"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "%d devices in this scan"
+msgstr "Fitaovana %d amin'ity fitiliana ity"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "The process stopped during: %s"
+msgstr "Nijanona ny dingana nandritra ny: %s"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "Scanning %d devices"
+msgstr "Mitily fitaovana %d"
+
+#: lib/mactrack_activity.php
+msgid "A database upgrade is running"
+msgstr "Eo am-pandehanana ny fanavaozana ny tahiry angona"
+
+#: lib/mactrack_activity.php
+msgid "The port, IP and 802.1x table partitioning has not finished"
+msgstr "Tsy mbola vita ny fizarazarana ny tabilaon'ny seranana, IP ary 802.1x"
+
+#: lib/mactrack_activity.php
+msgid "The aggregated ports rebuild has not finished"
+msgstr "Mbola tsy vita ny fananganana indray ireo seranana natambatra"
+
+#: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
+msgid "Running"
+msgstr "Mandeha"
+
+#: lib/mactrack_functions.php
+msgid "No method"
+msgstr "Tsy misy fomba"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Success"
+msgstr "Nahomby ny fanamarinana ny maha-izy azy"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Failed"
+msgstr "Tsy nahomby ny fanamarinana"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Success"
+msgstr "Nahomby ny fanomezan-dalana"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Failed"
+msgstr "Tsy nahomby ny fanomezan-dalana"
+
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr "Tsy hita tamin'ny fitarafana farany"
+
+#: lib/mactrack_functions.php
+msgid "Locally Admined MAC"
+msgstr "MAC tantanina an-toerana"
+
+#: lib/mactrack_functions.php
+msgid "Mactrack Device Tracking OUI Database Import Results"
+msgstr "Vokatry ny fanafarana tahirin-kevitra OUI fanaraha-maso Fitaovana Mactrack"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from IEEE"
+msgstr "Maka ny angona OUI avy amin'ny IEEE"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from the IEEE"
+msgstr "Maka ny angona OUI avy amin'ny IEEE"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE Complete"
+msgstr "Vita ny fampidinana ny angon-drakitra OUI avy amin'ny IEEE"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE FAILED"
+msgstr "TSY NAHOMBY ny fampidinana ny angon-drakitra OUI avy amin'ny IEEE"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Entries Added/Updated in the database."
+msgstr "Nisy fidirana '%d' Nampiana/Nohavaozina tao amin'ny tahirin-kevitra."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Records Removed from the database."
+msgstr "Nisy Firaketana '%d' Nesorina tao amin'ny tahirin-kevitra."
+
+#: lib/mactrack_functions.php
+msgid "atifIndexes data collection complete"
+msgstr "Vita ny fanangonana angona atifIndexes"
+
+#: lib/mactrack_functions.php
+msgid "atPhysAddress data collection complete"
+msgstr "Vita ny fanangonana angona atPhysAddress"
+
+#: lib/mactrack_functions.php
+msgid "atNetAddress data collection complete"
+msgstr "Vita ny fanangonana angona atNetAddress"
+
+#: lib/mactrack_functions.php
+msgid "atEntries assembly complete."
+msgstr "Vita ny fanangonana atEntries."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "HOST: %s, IP address information collection complete"
+msgstr "MPAMPIANTRANO: %s, vita ny fanangonana ny mombamomba ny adiresy IP"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php
+msgid "Rescan Device"
+msgstr "Diniho indray ny Fitaovana"
+
+#: lib/mactrack_functions.php
+msgid "View Non Interface Graphs"
+msgstr "Jereo ny Kisary tsy ho an'ny seha-pifandraisana"
+
+#: lib/mactrack_functions.php
+msgid "No Non Interface Graphs in Cacti"
+msgstr "Tsy misy Kisary tsy fampifandraisana ao amin'ny Cacti"
+
+#: lib/mactrack_functions.php
+msgid "View Interface Graphs"
+msgstr "Jereo ny Kisary ho an'ny seha-pifandraisana"
+
+#: lib/mactrack_functions.php
+msgid "No Interface Graphs in Cacti"
+msgstr "Tsy misy Kisary fampifandraisana ao amin'ny Cacti"
+
+#: lib/mactrack_functions.php
+msgid "Since Restart"
+msgstr "Hatramin'ny nanombohana indray"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Down"
+msgstr "Tsy mandeha"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Up"
+msgstr "Mandeha"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Unaliased"
+msgstr "Tsy misy solonanarana"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors"
+msgstr "Hadisoana"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards"
+msgstr "Tsy noraisina"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Graphless"
+msgstr "Tsy misy Kisary"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Tsy fantatra"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr "Nahazo alalana"
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
+msgstr "Tsy nahazo alalana"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Data"
+msgstr "Angona"
+
+#: lib/mactrack_functions.php
+msgid "Voice"
+msgstr "Feo"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Rescan '%s'"
+msgstr "Tarafy indray ny fitaovana '%s'"
+
+#: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr "Tsy namokatra vokatra ny fitiliana indray."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr "Ny fitarafana indray ny fitaovana '%s' dia vita tao anatin'ny %0.2f segondra."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site scan '%s'"
+msgstr "Fitiliana toerana '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr "Ny fitiliana ny toerana '%s' dia vita tao anatin'ny %0.2f segondra."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Enable '%s'"
+msgstr "Ataovy mavitrika ny fitaovana '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Disable '%s'"
+msgstr "Ataovy tsy mavitrika ny fitaovana '%s'"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_macwatch.php
+#: mactrack_snmp.php mactrack_utilities.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
+#: setup.php
+msgid "N/A"
+msgstr "Tsy misy"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d minitra"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d ora"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Days"
+msgstr "%d Andro"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Weeks"
+msgstr "%d Herinandro"
+
+#: lib/mactrack_functions.php
+msgid "Not Recorded"
+msgstr "Tsy voarakitra"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
+msgstr "Sata: Mandeha, Dingana: %d, Fivoarana: %s, Fotoana fiasana farany: %2.1f"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
+msgstr "Sata: Tsy miasa, Fotoana fiasana farany: %2.1f segondra, Dingana: dingana %d, Fitaovana: %d, Fotoana fiasana manaraka: %s"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
+msgid "Disabled"
+msgstr "Tsy mavitrika"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Scanning Rate: Every %s"
+msgstr "Taham-pitiliana: Isaky ny %s"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "View Interfaces"
+msgstr "Jereo ny seha-pifandraisana"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "Not Detected"
+msgstr "Tsy hita"
+
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr "Takelaka fanaraha-maso"
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Sites"
+msgstr "Toerana"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Devices"
+msgstr "Fitaovana"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "Fifandraisana"
+
+#: lib/mactrack_functions.php
+msgid "IP Ranges"
+msgstr "Elanelana IP"
+
+#: lib/mactrack_functions.php setup.php
+msgid "IP Addresses"
+msgstr "Adiresy IP"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "Adiresy MAC"
+
+#: lib/mactrack_functions.php
+msgid "Dot1x"
+msgstr "Dot1x"
+
+#: lib/mactrack_functions.php mactrack_view_graphs.php
+msgid "Graphs"
+msgstr "Kisary"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Search"
+msgstr "Fikarohana"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_devices.php mactrack_view_ips.php
+#: setup.php
+msgid "Default"
+msgstr "Voafaritra mialoha"
+
+#: lib/mactrack_functions.php
+msgid "Show Device Details"
+msgstr "Asehoy ny antsipirian'ny fitaovana"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Go"
+msgstr "Alefa"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Clear"
+msgstr "Fafao"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Export"
+msgstr "Aondrana"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+msgid "Site"
+msgstr "Toerana"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_ips.php
+msgid "Any"
+msgstr "Na inona na inona"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "SubType"
+msgstr "Zana-karazana"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgstr "Azonao antoka ve fa tianao hofafana ao amin'ny rafitra avokoa ny valin'ny Seranana mankany amin'ny MAC mankany amin'ny IP rehetra?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
+msgstr "Azonao antoka ve fa tianao hofafana ankehitriny ny valin'ny Seranana mankany amin'ny MAC mankany amin'ny IP lany daty?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
+msgstr "Azonao antoka ve fa tianao hofafana ireo asa fitiliana Mactrack voatahiry ao anaty cache?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Azonao antoka ve fa tianao hofafana ao amin'ny rafitra avokoa ny valin'ny Seranana Natambatra mankany amin'ny MAC mankany amin'ny IP rehetra?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Azonao antoka ve fa tianao hofafana sy hoforonina indray ao amin'ny rafitra avokoa ny valin'ny Seranana Natambatra mankany amin'ny MAC mankany amin'ny IP rehetra?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
+msgstr "Azonao antoka ve fa tianao alaina sy ampidirina ankehitriny ny tahiry angona IEEE Vendor MAC/OUI?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
+msgstr "Azonao antoka ve fa tianao hamboarina indray izao ny lisitry ny datin'ny fitiliana avy amin'ireo valin'ny Port mankany amin'ny MAC mankany amin'ny IP voatahiry?"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
+msgstr "Amboary indray ary hadihadio ny fizarana mirakitra ny fandinihana seranana farany, izay ny herinandro ankehitriny miaraka amin'ny fizarana isan-kerinandro. Ny tabilao tsy voazara dia amboarina manontolo. Avela ny fitiliana voalahatra mandritra ny fandehanan'ity. Tohizo?"
+
+#: lib/mactrack_functions.php
+msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
+msgstr "Alefaso ivelan'ny ora fiasana ity fikojakojana ity. Ny fanamboarana indray dia mandika ny tantara feno an'ireo tabilao seranan-tsambo (adiresy MAC), adiresy IP ary 802.1x misesy ary mety haharitra ora maromaro. Tsy hatao ny fitiliana voalahatra, miandry ny fikojakojana ny angona, ary mampiseho hafatra fikojakojana ny fikarohana MAC, IP ary 802.1x mandra-pahavitany. Manokana toerana malalaka amin'ny kapila ho an'ny dika mitovy faharoa amin'ny tabilao tsirairay sy ny tondrony. Tohizo?"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Scan Results"
+msgstr "Esory daholo ny valin'ny fitiliana"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Perform Database Maintenance"
+msgstr "Hanao fikojakojana ny tahiry angona"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Refresh Scanning Functions"
+msgstr "Havaozy ny fiasan'ny fitiliana"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Aggregated Results"
+msgstr "Esory daholo ny valiny natambatra"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Perform Aggregate Table Rebuild"
+msgstr "Hanao fanarenana ny tabilaon'ny fitambarana"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild IEEE Vendor MAC/OUI Database"
+msgstr "Amboary indray ny tahirin-kevitra MAC/OUI an'ny mpamatsy IEEE"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Rebuild Scan Dates"
+msgstr "Amboary indray ny datin'ny fitiliana"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Optimize Port Table"
+msgstr "Hatsarao ny tabilao seranana"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Configure Port and IP Address Partitioning"
+msgstr "Rindrao ny fizarana seranana sy adiresy IP"
+
+#: lib/mactrack_partition_rebuild.php
+msgid "The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
+msgstr "Efa ao anatin'ny fanavaozana ny fizarazarana ny tabilaon'ny seranana, IP ary 802.1x, na tsy vita ny fanamboarana indray, ka tsy azo ovaina izao ny tantaran'izy ireo. Andramo indray rehefa vita ny cli/upgrade_partitioning.php."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished."
+msgstr "Ao amin'ny fomba fikojakojana ny MacTrack ho an'ny fikarohana adiresy IP, adiresy MAC ary 802.1x mandritra ny fizarana indray ny tabilao tantarany. Tsy feno ny vokatra mandra-pahavitan'ny fizarana."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
+msgstr "Ao amin'ny fomba fikojakojana ny MacTrack ho an'ny fikarohana adiresy IP, adiresy MAC ary 802.1x satria tsy vita ny fizarana ny tabilao tantarany. Tsy feno ny vokatra. Alefaso indray ny cli/upgrade_partitioning.php mba hanohizana izany."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "Maintenance Mode"
+msgstr "Fomba fikojakojana"
+
+#: mactrack_actions.php
+#, php-format
+msgid "Mactrack Device: (%s) successfully updated"
+msgstr "Voaova soa aman-tsara ny Fitaovana Mactrack: (%s)"
+
+#: mactrack_actions.php
+msgid "Import into Mactrack Database"
+msgstr "Manafatra ao amin'ny Tahirin-kevitra Mactrack"
+
+#: mactrack_actions.php
+msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
+msgstr "Tsindrio ny 'Tohizo' mba hanafatra ity Fitaovana manaraka ity ho ao amin'ny Mactrack? Azafady, farito ireo safidy fanampiny ho an'ny Fitaovana Mactrack araka izay omena eto ambany."
+
+#: mactrack_actions.php
+msgid "We will use these devices SNMP options for the Mactrack Device as well."
+msgstr "Hampiasa ireo safidy SNMP an'ireto fitaovana ireto ho an'ny Fitaovana Mactrack ihany koa izahay."
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Router"
+msgstr "Tsy mihatra - Router"
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Switch/Hub"
+msgstr "Tsy mihatra - Switch/Hub"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Delete"
+msgstr "Fafao"
+
+#: mactrack_device_types.php mactrack_snmp.php
+msgid "Duplicate"
+msgstr "Dika mitovy"
+
+#: mactrack_device_types.php
+msgid "--dup--"
+msgstr "--dup--"
+
+#: mactrack_device_types.php
+msgid "You must select at least one device type."
+msgstr "Tsy maintsy misafidy karazana fitaovana iray farafahakeliny ianao."
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Continue"
+msgstr "Tohizo"
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to delete the following Device Type(s)."
+msgstr "Tsindrio ny 'Tohizo' mba hamafa ireto Karazana Fitaovana manaraka ireto."
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
+msgstr "Tsindrio ny 'Tohizo' mba handika roa ireto Karazana Fitaovana manaraka ireto. Azonao ovaina raha tianao ny famaritana ho an'ireo karazana fitaovana vaovao. Raha tsy izany dia aza ovaina ny sanda eto ambany fa hadika miaraka amin'ny tovana vaovao ny anarana voalohany."
+
+#: mactrack_device_types.php
+msgid "Device Type Prefix:"
+msgstr "Tovon'ny karazana fitaovana:"
+
+#: mactrack_device_types.php
+msgid "<description> (1)"
+msgstr "<description> (1)"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Cancel"
+msgstr "Foano"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Return"
+msgstr "Miverina"
+
+#: mactrack_device_types.php
+msgid "New Type"
+msgstr "Karazana vaovao"
+
+#: mactrack_device_types.php
+msgid "Cisco"
+msgstr "Cisco"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "There were %d Device Types Added!"
+msgstr "Nisy Karazana Fitaovana %d nampiana!"
+
+#: mactrack_device_types.php
+msgid "No New Device Types Found!"
+msgstr "Tsy misy karazana Fitaovana vaovao hita!"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import Results"
+msgstr "Vokatry ny fanafarana"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Cacti has imported the following items:"
+msgstr "Nanafatra ireto singa manaraka ireto ny Cacti:"
+
+#: mactrack_device_types.php
+msgid "Import Mactrack Device Types"
+msgstr "Manafatra Karazana Fitaovana Mactrack"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from Local File"
+msgstr "Manafatra Karazana Fitaovana avy amin'ny Rakitra Eto An-toerana"
+
+#: mactrack_device_types.php
+msgid "Please specify the location of the CSV file containing your device type information."
+msgstr "Azafady, mariho ny toerana misy ny rakitra CSV mirakitra ny mombamomba ny karazana fitaovanao."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Overwrite Existing Data?"
+msgstr "Hosoloina ve ny angona efa misy?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
+msgstr "Tokony havela hanolo ny angona efa misy ve ny dingana fanafarana?  Mariho tsara fa tsy midika ho famafana ny andalana taloha izany, fa fanoloana ireo andalana mitovy ihany."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Allow Existing Rows to be Updated?"
+msgstr "Avela havaozina ve ireo andalana efa misy?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Required File Format Notes"
+msgstr "Fanamarihana momba ny endriky ny rakitra takiana"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The file must contain a header row with the following column headings."
+msgstr "Ny rakitra dia tsy maintsy ahitana andalana lohapejy misy ireto lohatenin'ny tsanganana manaraka ireto."
+
+#: mactrack_device_types.php
+msgid " - A common name for the device.  For example Cisco 6509 Switch"
+msgstr " - Anarana mahazatra ho an'ilay fitaovana. Ohatra: Cisco 6509 Switch"
+
+#: mactrack_device_types.php
+msgid " - The vendor who produces this device"
+msgstr " - Ny mpamokatra manamboatra ity fitaovana ity"
+
+#: mactrack_device_types.php
+msgid " - The type of device this is.  See the notes below for this integer value"
+msgstr " - Ny karazana fitaovana misy azy ity. Jereo ny fanamarihana eto ambany ho an'ity sanda isa feno ity"
+
+#: mactrack_device_types.php
+msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
+msgstr " - Andiana tarehin-tsoratra miavaka avy amin'ny snmp sysDescr izay manavaka manokana ity fitaovana ity"
+
+#: mactrack_device_types.php
+msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
+msgstr " - Ny snmp sysObjectID manokan'ny mpamokatra izay manavaka ity fitaovana ity amin'ny hafa"
+
+#: mactrack_device_types.php
+msgid " - The scanning function that will be used to scan this device type"
+msgstr " - Ny fiasan'ny fitiliana izay hampiasaina hitiliana ity karazana fitaovana ity"
+
+#: mactrack_device_types.php
+msgid " - The IP scanning function that will be used to scan this device type"
+msgstr " - Ny fiasan'ny fitiliana IP izay hampiasaina hitiliana ity karazana fitaovana ity"
+
+#: mactrack_device_types.php
+msgid " - The 802.1x scanning function that will be used to scan this device type"
+msgstr " - Ny fiasan'ny fitiliana 802.1x izay hampiasaina hitiliana ity karazana fitaovana ity"
+
+#: mactrack_device_types.php
+msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
+msgstr " - Raha azo alaina amin'ny alalan'ny fangatahana SNMP ny laharan'ny andiany (Serial Number) ho an'ity karazana fitaovana ity, dia ampidiro eto ny OID-ny"
+
+#: mactrack_device_types.php
+msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
+msgstr " - Raha tsy afaka manavaka ny seranana trunk na seranana fampifandraisana ny fiasan'ny fitiliana anao, dia ity no laharan'ny seranana fanombohana ho an'ny seranan'ny mpampiasa"
+
+#: mactrack_device_types.php
+msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
+msgstr " - Mitovy amin'ny lowPort ihany, saingy ity no laharan'ny seranan'ny mpampiasa manana laharana ambony"
+
+#: mactrack_device_types.php
+msgid " - Disabled type is not used"
+msgstr " - Ny karazana tsy mavitrika dia tsy ampiasaina"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The primary key for this table is a combination of the following three fields:"
+msgstr "Ny fanalahidy fototra ho an'ity tabilao ity dia fitambaran'ireto saha telo manaraka ireto:"
+
+#: mactrack_device_types.php
+msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
+msgstr "Noho izany, raha manandrana manafatra karazana fitaovana mitovy ianao, dia havaozina amin'ny vaovao ilay angona efa misy."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid " is an integer field and must be one of the following:"
+msgstr " dia saha isa feno ary tsy maintsy iray amin'ireto manaraka ireto:"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "1 - Switch/Hub"
+msgstr "1 - Switch/Hub"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "2 - Switch/Router"
+msgstr "2 - Switch/Router"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "3 - Router"
+msgstr "3 - Router"
+
+#: mactrack_device_types.php
+msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
+msgstr "Ny karazana fitaovan'ny Fitaovana dia faritana amin'ny alalan'ny fitarafana ny mpandraharaha SNMP-ny ho an'ny sysObjectID sy sysDescription ary fampitahana izany amin'ny sanda ao amin'ny angon-drakitry ny karazana fitaovana. Ny fitoviana voalohany hita ao amin'ny angon-drakitra no ampiasaina amin'ny fomba fitarafana azy. Noho izany dia zava-dehibe tokoa ny hisafidiananao sysObjectID_match, sysDescr_match, ary fiasa fitarafana manan-kery ho an'ny Fitaovanao."
+
+#: mactrack_device_types.php mactrack_devices.php setup.php
+msgid "Switch/Hub"
+msgstr "Switch/Hub"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Switch/Router"
+msgstr "Switch/Router"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Router"
+msgstr "Rotera"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
+msgstr "VOAKIRAKIRA TSARA NY ANDALANA LOHANY:  <br>Tsanganana hita: %s"
+
+#: mactrack_device_types.php mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
+msgstr "HADISOANA TAMIN'NY FIKIRAKIRANA NY ANDALANA LOHANY: Tsy ampy ny saha ilaina <br>Tsanganana hita: %s"
+
+#: mactrack_device_types.php
+msgid "Unknown Assume \"Switch/Hub\""
+msgstr "Tsy fantatra Heverina ho \"Switch/Hub\""
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "NAHOMBY NY FAMPIDIRANA: Mpivarotra: %s, Famaritana: %s, Karazana: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "TSY NAHOMBY NY FAMPIDIRANA: Mpivarotra: %s, Famaritana: %s, Karazana: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "NODINGANINA NY FAMPIDIRANA, EFA MISY: Mpivarotra: %s, Famaritana: %s, Karazana: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "Mactrack Device Types [edit: %s]"
+msgstr "Karazana Fitaovana Mactrack [ovaina: %s]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Types [new]"
+msgstr "Karazana Fitaovana Mactrack [vaovao]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Type Filters"
+msgstr "Sivana Karazana Fitaovana Mactrack"
+
+#: mactrack_device_types.php
+msgid "Device Type Description"
+msgstr "Famaritana ny karazana fitaovana"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Device Type"
+msgstr "Karazana fitaovana"
+
+#: mactrack_device_types.php
+msgid "Port Scanner"
+msgstr "Mpanadihady seranana"
+
+#: mactrack_device_types.php
+msgid "IP Scanner"
+msgstr "Mpitily IP"
+
+#: mactrack_device_types.php
+msgid "Dot1x Scanner"
+msgstr "Mpitily Dot1x"
+
+#: mactrack_device_types.php
+msgid "sysDescription Match"
+msgstr "Fifanarahana sysDescription"
+
+#: mactrack_device_types.php
+msgid "Vendor OID Match"
+msgstr "Fifanandrifian'ny OID mpamatsy"
+
+#: mactrack_device_types.php setup.php
+msgid "Device Types"
+msgstr "Karazana fitaovana"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "No"
+msgstr "Tsia"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "Yes"
+msgstr "Eny"
+
+#: mactrack_device_types.php
+msgid "No Mactrack Device Types Found"
+msgstr "Tsy misy karazana Fitaovana Mactrack hita"
+
+#: mactrack_device_types.php
+msgid "Submit Query"
+msgstr "Alefaso ny fangatahana"
+
+#: mactrack_device_types.php
+msgid "Clear Filtered Results"
+msgstr "Esory ny valiny voasivana"
+
+#: mactrack_device_types.php
+msgid "Rescan"
+msgstr "Tsiriho indray"
+
+#: mactrack_device_types.php
+msgid "Scan Active Devices for Unknown Device Types"
+msgstr "Tilio ny Fitaovana Mavitrika hahitana Karazana Fitaovana Tsy Fantatra"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import"
+msgstr "Manafatra"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from a CSV File"
+msgstr "Manafatra Karazana Fitaovana avy amin'ny Rakitra CSV"
+
+#: mactrack_device_types.php
+msgid "Export Device Types to Share with Others"
+msgstr "Aondrana ny karazana Fitaovana hozaraina amin'ny hafa"
+
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Vendor"
+msgstr "Mpamatsy"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php setup.php
+msgid "All"
+msgstr "Rehetra"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
+msgid "Type"
+msgstr "Karazana"
+
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Enabled"
+msgstr "Mavitrika"
+
+#: mactrack_devices.php
+msgid "Enable"
+msgstr "Alefa"
+
+#: mactrack_devices.php mactrack_macwatch.php
+msgid "Disable"
+msgstr "Ajanony"
+
+#: mactrack_devices.php
+msgid "Change SNMP Options"
+msgstr "Ovao ny safidin'ny SNMP"
+
+#: mactrack_devices.php
+msgid "Change Device Port Values"
+msgstr "Ovao ny sandan'ny seranan'ny Fitaovana"
+
+#: mactrack_devices.php
+msgid "Connect to Cacti Host via Hostname"
+msgstr "Mifandraisa amin'ny mpampiantrano Cacti amin'ny alalan'ny anaran'ny mpampiantrano"
+
+#: mactrack_devices.php
+msgid "Copy SNMP Settings from Cacti Host"
+msgstr "Adikao avy amin'ny mpampiantrano Cacti ny fandrindrana SNMP"
+
+#: mactrack_devices.php
+msgid "You must select at least one device."
+msgstr "Tsy maintsy misafidy fitaovana iray farafahakeliny ianao."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to enable the following devices."
+msgstr "Tsindrio ny 'Tohizo' mba hampavitrika ireto fitaovana manaraka ireto."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to disable the following devices."
+msgstr "Tsindrio ny 'Tohizo' mba hahatonga ireto fitaovana manaraka ireto ho tsy mavitrika."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Tsindrio ny 'Tohizo' mba hanova ny mason-tsivana SNMP ho an'ireto fitaovana manaraka ireto, mariho ny efajoro eo anilan'ny saha tianao havaozina, ary fenoy ny sanda vaovao."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Tsindrio ny 'Tohizo' mba hanova ny mason-tsivana seranana ambony na ambany ho an'ireto fitaovana manaraka ireto, mariho ny efajoro eo anilan'ny saha tianao havaozina, ary fenoy ny sanda vaovao."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
+msgstr "Tsindrio ny 'Tohizo' mba hampifandray ireto fitaovana manaraka ireto amin'ny Fitaovana Cacti mifandraika aminy. Ny fifandraisana dia haorina amin'ny anaran'ny mpampiantrano mitovy. Havaozina ihany koa ny famaritana."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
+msgstr "Tsindrio ny 'Tohizo' mba handika ny Fandrindrana SNMP avy amin'ny Fitaovana Cacti mifandray ho any amin'ny Fitaovana Mactrack. Hodiavina mangina ireo Fitaovana rehetra tsy mifandray. Ny isan'ny fanandramana indray SNMP dia halaina avy amin'ny fanandramana indray Ping."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to delete the following Devices"
+msgstr "Tsindrio ny 'Tohizo' mba hamafa ireto Fitaovana manaraka ireto"
+
+#: mactrack_devices.php
+msgid "Import Mactrack Devices"
+msgstr "Manafatra Fitaovana Mactrack"
+
+#: mactrack_devices.php
+msgid "Import Devices from Local File"
+msgstr "Manafatra Fitaovana avy amin'ny Rakitra Eto An-toerana"
+
+#: mactrack_devices.php
+msgid "Please specify the location of the CSV file containing your device information."
+msgstr "Azafady, mariho ny toerana misy ny rakitra CSV mirakitra ny mombamomba ny fitaovanao."
+
+#: mactrack_devices.php
+msgid " - The SiteID known to Mactrack for this device"
+msgstr " - Ny SiteID fantatry ny Mactrack ho an'ity fitaovana ity"
+
+#: mactrack_devices.php
+msgid " - A simple name for the device.  For example Cisco 6509 Switch"
+msgstr " - Anarana tsotra ho an'ilay fitaovana. Ohatra: Cisco 6509 Switch"
+
+#: mactrack_devices.php
+msgid " - The IP Address or DNS Name for the device"
+msgstr " - Ny adiresy IP na anarana DNS ho an'ilay fitaovana"
+
+#: mactrack_devices.php
+msgid " - More detailed information about the device, including location, environmental conditions, etc."
+msgstr " - Fampahalalana amin'ny antsipiriany kokoa momba ilay fitaovana, tafiditra ao ny toerana misy azy, ny tontolo manodidina, sns."
+
+#: mactrack_devices.php
+msgid " - A list of ports that should not be scanned for user devices"
+msgstr " - Lisitry ny seranana tsy tokony hojerena ho an'ny fitaovan'ny mpampiasa"
+
+#: mactrack_devices.php
+msgid " - Redundant information indicating the intended device type.  See below for valid values."
+msgstr " - Fampahalalana miverimberina manondro ny karazana fitaovana kasaina. Jereo eto ambany ny sanda manan-kery."
+
+#: mactrack_devices.php
+msgid " - Id of a set of SNMP options"
+msgstr " - ID an'ny andiana safidy SNMP"
+
+#: mactrack_devices.php
+msgid " - The current snmp read string for the device"
+msgstr " - Ny teny famakiana snmp ankehitriny ho an'ilay fitaovana"
+
+#: mactrack_devices.php
+msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
+msgstr " - Ny dikan-teny snmp tianao hampiasaina hitiliana ity fitaovana ity. Ny sanda manan-kery dia 1, 2 ary 3"
+
+#: mactrack_devices.php
+msgid " - The UDP port that the snmp agent is running on"
+msgstr " - Ny seranana UDP izay iasan'ny agent snmp"
+
+#: mactrack_devices.php
+msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
+msgstr " - Ny fe-potoana amin'ny milisegondra hiandrasana valiny snmp alohan'ny hanandramana indray"
+
+#: mactrack_devices.php
+msgid " - The number of times to retry a snmp request before giving up"
+msgstr " - Ny isan'ny fanandramana indray ny fangatahana snmp alohan'ny hijanonana"
+
+#: mactrack_devices.php
+msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
+msgstr " - Mamaritra ny isan'ny OID azo alaina ao anatin'ny fangatahana SNMP Get tokana"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP username"
+msgstr " - SNMP V3: Anaran'ny mpampiasa SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP password"
+msgstr " - SNMP V3: Tenimiafina SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP authentication protocol"
+msgstr " - SNMP V3: Protokolam-panamarinana SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy passphrase"
+msgstr " - SNMP V3: Fehezanteny miafina momba ny tsiambaratelo SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy protocol"
+msgstr " - SNMP V3: Protokola momba ny tsiambaratelo SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP context"
+msgstr " - SNMP V3: Konteksta SNMP"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP engine id"
+msgstr " - SNMP V3: ID-n'ny motera SNMP"
+
+#: mactrack_devices.php
+msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
+msgstr "Noho izany, raha manandrana manafatra fitaovana mitovy ianao, dia ny angona faritanao ihany no havaozina."
+
+#: mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
+msgstr "VOAKIRAKIRA TSARA NY ANDALANA LOHANY: <br>Tsanganana hita: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "NAHOMBY NY FAMPIDIRANA: Anaran'ny Mpampiantrano: ID Toerana: %s, Anaran'ny Fitaovana: %s, Anaran'ny Mpampiantrano %s, Seranana SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "TSY NAHOMBY NY FAMPIDIRANA: ID Toerana: %s, Anaran'ny Fitaovana: %s, Anaran'ny Mpampiantrano %s, Seranana SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "NODINGANINA NY FAMPIDIRANA, EFA MISY: ID Toerana: %s, Anaran'ny Fitaovana: %s, Anaran'ny Mpampiantrano %s, Seranana SNMP: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "Mactrack Devices [edit: %s]"
+msgstr "Fitaovana Mactrack [ovaina: %s]"
+
+#: mactrack_devices.php
+msgid "Mactrack Devices [new]"
+msgstr "Fitaovana Mactrack [vaovao]"
+
+#: mactrack_devices.php
+msgid "SNMP Information"
+msgstr "Fampahalalana SNMP"
+
+#: mactrack_devices.php
+msgid "System:"
+msgstr "Rafitra:"
+
+#: mactrack_devices.php
+msgid "Uptime:"
+msgstr "Fotoana niasana:"
+
+#: mactrack_devices.php
+msgid "Hostname:"
+msgstr "Anaran'ny mpampiantrano:"
+
+#: mactrack_devices.php
+msgid "ObjectID:"
+msgstr "ID zavatra:"
+
+#: mactrack_devices.php
+msgid "Mactrack Device Filters"
+msgstr "Sivana Fitaovana Mactrack"
+
+#: mactrack_devices.php mactrack_view_devices.php setup.php
+msgid "Device Name"
+msgstr "Anaran'ny fitaovana"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Site Name"
+msgstr "Anaran'ny toerana"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Status"
+msgstr "Sata"
+
+#: mactrack_devices.php mactrack_view_devices.php mactrack_view_interfaces.php
+#: setup.php
+msgid "Hostname"
+msgstr "Anaran'ny mpampiantrano"
+
+#: mactrack_devices.php
+msgid "Total IPs"
+msgstr "Fitambaran'ny IP"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports"
+msgstr "Seranan'ny mpampiasa"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports Up"
+msgstr "Seranan'ny mpampiasa mandeha"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Trunk Ports"
+msgstr "Seranana Trunk"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Active Macs"
+msgstr "MAC mavitrika"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Last Duration"
+msgstr "Faharetana farany"
+
+#: mactrack_devices.php
+msgid "No Mactrack Devices"
+msgstr "Tsy misy Fitaovana Mactrack"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: setup.php
+msgid "None"
+msgstr "Tsy misy"
+
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
+msgid "Error"
+msgstr "Hadisoana"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "No Cacti Link"
+msgstr "Tsy misy rohy Cacti"
+
+#: mactrack_macauth.php
+msgid "You must select at least one Authorized Mac to delete."
+msgstr "Tsy maintsy misafidy MAC Nahazo alalana iray farafahakeliny hofafana ianao."
+
+#: mactrack_macauth.php
+msgid "Click 'Continue' to delete the following Authorized Mac's?"
+msgstr "Tsindrio ny 'Tohizo' mba hamafa ireto MAC nahazo alalana manaraka ireto?"
+
+#: mactrack_macauth.php
+#, php-format
+msgid "Mactrack MacAuth [edit: %s]"
+msgstr "MacAuth Mactrack [ovaina: %s]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth [new]"
+msgstr "MacAuth Mactrack [vaovao]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth Filters"
+msgstr "Sivana MacAuth Mactrack"
+
+#: mactrack_macauth.php mactrack_macwatch.php
+msgid "Mac Address"
+msgstr "Adiresy Mac"
+
+#: mactrack_macauth.php setup.php
+msgid "Reason"
+msgstr "Antony"
+
+#: mactrack_macauth.php
+msgid "Added/Modified"
+msgstr "Nampiana/Novaina"
+
+#: mactrack_macauth.php
+msgid "By"
+msgstr "Araka ny"
+
+#: mactrack_macauth.php
+msgid "Authorized Mac Addresses"
+msgstr "Adiresy MAC nahazo alalana"
+
+#: mactrack_macauth.php
+msgid "No Authorized Mac Addresses Found"
+msgstr "Tsy nisy adiresy MAC nahazo alalana hita"
+
+#: mactrack_macauth.php mactrack_vendormacs.php mactrack_view_macs.php
+msgid "MAC's"
+msgstr "Ireo MAC"
+
+#: mactrack_macwatch.php
+msgid "Click 'Continue' to delete the following watched Mac's?"
+msgstr "Tsindrio ny 'Tohizo' mba hamafa ireto MAC arahi-maso manaraka ireto?"
+
+#: mactrack_macwatch.php
+#, php-format
+msgid "Mactrack MacWatch [edit: %s]"
+msgstr "MacWatch Mactrack [ovaina: %s]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch [new]"
+msgstr "MacWatch Mactrack [vaovao]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch Filters"
+msgstr "Sivana MacWatch Mactrack"
+
+#: mactrack_macwatch.php
+msgid "Watch Name"
+msgstr "Anaran'ny fanaraha-maso"
+
+#: mactrack_macwatch.php setup.php
+msgid "Ticket Number"
+msgstr "Laharan'ny tapakila"
+
+#: mactrack_macwatch.php
+msgid "First Seen"
+msgstr "Hita Voalohany"
+
+#: mactrack_macwatch.php
+msgid "Last Seen"
+msgstr "Hita farany"
+
+#: mactrack_macwatch.php
+msgid "Watches"
+msgstr "Fanaraha-maso"
+
+#: mactrack_macwatch.php
+msgid "No Mactrack Watched Macs Found"
+msgstr "Tsy misy MAC arahi-maso Mactrack hita"
+
+#: mactrack_sites.php
+msgid "Click 'Continue' to delete the following Site(s)?"
+msgstr "Tsindrio ny 'Tohizo' mba hamafa ireto Toerana manaraka ireto?"
+
+#: mactrack_sites.php
+msgid "You must select at least one site."
+msgstr "Tsy maintsy misafidy toerana iray farafahakeliny ianao."
+
+#: mactrack_sites.php
+#, php-format
+msgid "Mactrack Site [edit: %s]"
+msgstr "Toerana Mactrack [ovaina: %s]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site [new]"
+msgstr "Toerana Mactrack [vaovao]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site Filters"
+msgstr "Sivana Toerana Mactrack"
+
+#: mactrack_sites.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "Total IP's"
+msgstr "Fitambaran'ny IP"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "MACS Found"
+msgstr "MAC hita"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Device Errors"
+msgstr "Hadisoan'ny fitaovana"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "No Mactrack Sites Found"
+msgstr "Tsy misy Toerana Mactrack hita"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Devices"
+msgstr "Fitambaran'ny Fitaovana"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total User Ports"
+msgstr "Fitambaran'ny seranan'ny mpampiasa"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Oper Ports"
+msgstr "Fitambaran'ny seranana miasa"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Trunks"
+msgstr "Fitambaran'ny Trunk"
+
+#: mactrack_snmp.php
+msgid "You must select at least one SNMP Option."
+msgstr "Tsy maintsy misafidy Safidy SNMP iray farafahakeliny ianao."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to delete the following SNMP Option(s)."
+msgstr "Tsindrio ny 'Tohizo' raha hamafa ireto Safidy SNMP manaraka ireto."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
+msgstr "Tsindrio ny 'Tohizo' mba handika roa ireto Safidy SNMP manaraka ireto. Azonao ovaina raha tianao ny endriky ny lohateny ho an'ireo Safidy SNMP vaovao."
+
+#: mactrack_snmp.php
+msgid "Name Format:"
+msgstr "Endriky ny Anarana:"
+
+#: mactrack_snmp.php
+msgid "<name> (1)"
+msgstr "<name> (1)"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Options [edit %s]"
+msgstr "Safidy SNMP [ovao %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Options [new]"
+msgstr "Safidy SNMP [vaovao]"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Option Set [edit: %s]"
+msgstr "Andian-tsafidy SNMP [fanovana: %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Option Set [new]"
+msgstr "Andian-tsafidy SNMP [vaovao]"
+
+#: mactrack_snmp.php setup.php
+msgid "Mactrack SNMP Options"
+msgstr "Safidy SNMP Mactrack"
+
+#: mactrack_snmp.php
+msgid "Item"
+msgstr "Singa"
+
+#: mactrack_snmp.php setup.php
+msgid "Version"
+msgstr "Kinova"
+
+#: mactrack_snmp.php setup.php
+msgid "Community"
+msgstr "Fiarahamonina"
+
+#: mactrack_snmp.php setup.php
+msgid "Port"
+msgstr "Seranana"
+
+#: mactrack_snmp.php setup.php
+msgid "Timeout"
+msgstr "Fetr'andro"
+
+#: mactrack_snmp.php setup.php
+msgid "Retries"
+msgstr "Famerenana"
+
+#: mactrack_snmp.php
+msgid "Max OIDs"
+msgstr "OID farany ambony"
+
+#: mactrack_snmp.php mactrack_view_dot1x.php
+msgid "Username"
+msgstr "Anaran'ny mpampiasa"
+
+#: mactrack_snmp.php
+msgid "Auth Proto"
+msgstr "Protokolam-panamarinana"
+
+#: mactrack_snmp.php
+msgid "Priv Proto"
+msgstr "Protokoly tsiambaratelo"
+
+#: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Actions"
+msgstr "Hetsika"
+
+#: mactrack_snmp.php
+msgid "No SNMP Items Found"
+msgstr "Tsy misy singa SNMP hita"
+
+#: mactrack_snmp.php
+msgid "Title of SNMP Option Set"
+msgstr "Lohatenin'ny Andiam-pisafidianana SNMP"
+
+#: mactrack_snmp.php
+msgid "SNMP Settings"
+msgstr "Fandrindrana SNMP"
+
+#: mactrack_snmp.php
+msgid "No SNMP Option Sets Found"
+msgstr "Tsy misy vondrona safidy SNMP hita"
+
+#: mactrack_snmp.php
+msgid "Options"
+msgstr "Safidy"
+
+#: mactrack_utilities.php
+msgid "Mactrack Database Results"
+msgstr "Vokatry ny tahirin-kevitra Mactrack"
+
+#: mactrack_utilities.php
+msgid "Mactrack Process Status"
+msgstr "Sata fikarakarana Mactrack"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Refresh"
+msgstr "Havaozy"
+
+#: mactrack_utilities.php
+msgid "Current Process Status"
+msgstr "Sata ankehitriny an'ny dingana"
+
+#: mactrack_utilities.php
+msgid "The Mactrack Poller is:"
+msgstr "Ny Mactrack Poller dia:"
+
+#: mactrack_utilities.php
+msgid "Running Processes:"
+msgstr "Dingana mandeha:"
+
+#: mactrack_utilities.php
+msgid "Last Time Poller Started:"
+msgstr "Fotoana nanombohan'ny Poller farany:"
+
+#: mactrack_utilities.php
+msgid "Poller Frequency:"
+msgstr "Fatran'ny Poller:"
+
+#: mactrack_utilities.php
+msgid "Approx. Next Runtime:"
+msgstr "Fotoana fandehanana manaraka eo ho eo:"
+
+#: mactrack_utilities.php
+msgid "Database Maintenance Information"
+msgstr "Fampahalalana momba ny fikojakojana angon-drakitra"
+
+#: mactrack_utilities.php
+msgid "Last DB Maintenance Time:"
+msgstr "Fotoana fikojakojana DB farany:"
+
+#: mactrack_utilities.php
+msgid "Next DB Maintenance Time:"
+msgstr "Fotoana fikojakojana DB manaraka:"
+
+#: mactrack_utilities.php
+msgid "Run Time Details"
+msgstr "Antsipirian'ny fotoana fampandehanana"
+
+#: mactrack_utilities.php
+msgid "Last Poller Runtime:"
+msgstr "Faharetan'ny fiasan'ny Poller farany:"
+
+#: mactrack_utilities.php
+msgid "Last Poller Maintenance Runtime:"
+msgstr "Faharetan'ny fikojakojana Poller farany:"
+
+#: mactrack_utilities.php
+msgid "Maximum Concurrent Processes:"
+msgstr "Fizotra miaraka miasa farany ambony:"
+
+#: mactrack_utilities.php
+msgid "processes"
+msgstr "fizotra"
+
+#: mactrack_utilities.php
+msgid "Maximum Per Device Scan Time:"
+msgstr "Fotoana fitarafana farany ambony isaky ny Fitaovana:"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "minutes"
+msgstr "minitra"
+
+#: mactrack_utilities.php
+msgid "DNS Configuration Information"
+msgstr "Fampahalalana momba ny fikirakirana DNS"
+
+#: mactrack_utilities.php
+msgid "Reverse DNS Resolution is"
+msgstr "Ny famahana DNS mivadika dia"
+
+#: mactrack_utilities.php
+msgid "Primary DNS Server:"
+msgstr "Mpizara DNS voalohany:"
+
+#: mactrack_utilities.php
+msgid "Secondary DNS Server:"
+msgstr "Mpizara DNS Faharoa:"
+
+#: mactrack_utilities.php
+msgid "DNS Resolution Timeout:"
+msgstr "Fe-potoana famahana DNS:"
+
+#: mactrack_utilities.php
+msgid "milliseconds"
+msgstr "milisegondra"
+
+#: mactrack_utilities.php
+msgid "Running Process Summary"
+msgstr "Famintinana ny fizotra mandeha"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Not Running"
+msgstr "Tsy mandeha ny DNS Resolver"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Running"
+msgstr "Mandeha ny DNS Resolver"
+
+#: mactrack_utilities.php
+msgid "Date Started"
+msgstr "Daty nanombohana"
+
+#: mactrack_utilities.php
+msgid "Completed"
+msgstr "Vita"
+
+#: mactrack_utilities.php
+msgid "Waiting"
+msgstr "Miandry"
+
+#: mactrack_utilities.php
+msgid "Other"
+msgstr "Hafa"
+
+#: mactrack_utilities.php
+msgid "Current Activity"
+msgstr "Hetsika ankehitriny"
+
+#: mactrack_utilities.php
+msgid "State:"
+msgstr "Toetra:"
+
+#: mactrack_utilities.php
+msgid "Since:"
+msgstr "Hatramin'ny:"
+
+#: mactrack_utilities.php
+msgid "Detail:"
+msgstr "Antsipiriany:"
+
+#: mactrack_utilities.php
+msgid "Last Skipped Poller Run:"
+msgstr "Fandehanana Poller nodinganina farany:"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance Steps"
+msgstr "Dingana fikojakojana farany"
+
+#: mactrack_utilities.php
+msgid "Seconds"
+msgstr "Segondra"
+
+#: mactrack_utilities.php
+msgid "Step"
+msgstr "Dingana"
+
+#: mactrack_utilities.php
+msgid "Table Sizes"
+msgstr "Haben'ny tabilao"
+
+#: mactrack_utilities.php
+msgid "Free"
+msgstr "Malalaka"
+
+#: mactrack_utilities.php
+msgid "Index"
+msgstr "Tondro"
+
+#: mactrack_utilities.php
+msgid "Rows (estimate)"
+msgstr "Andalana (tombana)"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Tabilao"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database runs on another host"
+msgstr "Tsy fantatra: mandeha amin'ny Mpampiantrano hafa ny angon-drakitra"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database data directory cannot be found from this host"
+msgstr "Tsy fantatra: tsy hita avy amin'ity Mpampiantrano ity ny lahatahiry angon'ny angon-drakitra"
+
+#: mactrack_utilities.php
+msgid "Database Disk Free:"
+msgstr "Habaka malalaka amin'ny kapilan'ny angon-drakitra:"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the database: %s"
+msgstr "Ireto isan'ny firaketana manaraka ireto dia nesorina tao amin'ny angon-drakitra: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s"
+msgstr "Ireto isan'ny firaketana manaraka ireto dia nesorina tao amin'ny tabilao natambatra: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
+msgstr "Ireto isan'ny firaketana manaraka ireto dia nesorina tao amin'ny tabilao natambatra: %s. Ary firaketana %s no hampiana."
+
+#: mactrack_utilities.php
+msgid "Mactrack Scan Date Rebuild Results"
+msgstr "Vokatry ny fanamboarana indray ny daty fitiliana Mactrack"
+
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr "Tsy nahomby ny fanavaozana ny datin'ny fitiliana. Jereo ny diarin'ny Cacti ary andramo indray."
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Scan dates rebuilt: %d"
+msgstr "Datin'ny fitiliana voaorina indray: %d"
+
+#: mactrack_utilities.php
+msgid "A scan or a port table conversion is running. Try again when it has finished."
+msgstr "Eo am-pandehanana ny fitiliana na ny fanovana ny tabilao seranana. Andramo indray rehefa vita izany."
+
+#: mactrack_utilities.php setup.php
+msgid "One per Scan"
+msgstr "Iray isaky ny fitiliana"
+
+#: mactrack_utilities.php setup.php
+msgid "Hourly"
+msgstr "Isan'ora"
+
+#: mactrack_utilities.php setup.php
+msgid "Daily"
+msgstr "Isan'andro"
+
+#: mactrack_utilities.php setup.php
+msgid "Weekly"
+msgstr "Isan-kerinandro"
+
+#: mactrack_utilities.php
+msgid "Not partitioned"
+msgstr "Tsy misy fizarana"
+
+#: mactrack_utilities.php
+msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
+msgstr "Fizarana isan'andro avy amin'ny kinova MacTrack teo aloha. Ilaina ny fanovana."
+
+#: mactrack_utilities.php
+msgid "Partitioned by scan date"
+msgstr "Nozaraina araka ny datin'ny fitarafana"
+
+#: mactrack_utilities.php
+msgid "Unrecognized partitions. MacTrack makes no partition changes."
+msgstr "Fizarazarana tsy fantatra. Tsy manao fanovana fizarazarana ny MacTrack."
+
+#: mactrack_utilities.php
+msgid "Port Table Partitions"
+msgstr "Fizarana ny tabilao seranana"
+
+#: mactrack_utilities.php
+msgid "Layout"
+msgstr "Lamin'endrika"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%d of at most %d"
+msgstr "%d amin'ny fara fahabetsany %d"
+
+#: mactrack_utilities.php
+msgid "Partitions"
+msgstr "Fizarana"
+
+#: mactrack_utilities.php
+msgid "Oldest Partition"
+msgstr "Fizarana tranainy indrindra"
+
+#: mactrack_utilities.php
+msgid "Newest Partition"
+msgstr "Fizarana vaovao indrindra"
+
+#: mactrack_utilities.php
+msgid "Partitions Cover Scans Before"
+msgstr "Ireo fizarana mandrakotra ny fitarafana talohan'ny"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s, coarser than the setting because %d partitions would exceed the limit"
+msgstr "%s, lehibe kokoa ny elanelany noho ny fandrindrana satria hihoatra ny fetra ny fizarazaran-tabilao %d"
+
+#: mactrack_utilities.php setup.php
+msgid "Port and IP Address Partition Size"
+msgstr "Haben'ny fizarana seranana sy adiresy IP"
+
+#: mactrack_utilities.php
+msgid "Pending Exchange"
+msgstr "Fanakalozana miandry"
+
+#: mactrack_utilities.php
+msgid "Load Path"
+msgstr "Lalana fampidirana"
+
+#: mactrack_utilities.php
+msgid "PHP batches"
+msgstr "Andiana PHP"
+
+#: mactrack_utilities.php
+msgid "Last Scan Note"
+msgstr "Naotin'ny fitiliana farany"
+
+#: mactrack_utilities.php
+msgid "Rebuild"
+msgstr "Amboary indray"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Running since %s"
+msgstr "Mandeha hatramin'ny %s"
+
+#: mactrack_utilities.php
+msgid "Last Rebuild"
+msgstr "Fanamboarana indray farany"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d rows into %d partitions"
+msgstr "%s: andalana %d ao anatin'ny fizarazaran-tabilao %d"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: failed. %s"
+msgstr "%s: tsy nahomby. %s"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance"
+msgstr "Fikojakojana farany"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d partitions dropped, %d created"
+msgstr "%s: fizarazaran-tabilao %d voafafa, %d voaforona"
+
+#: mactrack_utilities.php
+msgid "IP Table Layout"
+msgstr "Fandrindrana tabilao IP"
+
+#: mactrack_utilities.php
+msgid "IP Table Partitions"
+msgstr "Fizarazaran'ny tabilao IP"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Layout"
+msgstr "Endriky ny tabilao 802.1x"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Partitions"
+msgstr "Fizarana tabilao 802.1x"
+
+#: mactrack_utilities.php
+msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
+msgstr "Misafidiana fizarana isan'andro, isan-kerinandro na tsy mavitrika alohan'ny hanombohana ny fanamboarana indray."
+
+#: mactrack_utilities.php
+msgid "A rebuild is already running. The partition status page shows when it has finished."
+msgstr "Efa mandeha ny fanamboarana indray. Ny pejin'ny satan'ny fizarazarana no mampiseho rehefa vita izany."
+
+#: mactrack_utilities.php
+msgid "The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running."
+msgstr "Nangatahina tany ambadika ny fanamboarana indray. Jereo ny Satan'ny Fizarazarana hahitana ny vokany; handà tsy hanomboka izany raha misy fitiliana na fanamboarana indray hafa mandeha."
+
+#: mactrack_utilities.php
+msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
+msgstr "Voafafa tanteraka ireo fiasa fitiliana Mactrack.  Hatsangana indray izy ireo raha vao manova Fitaovana na karazana Fitaovana ianao."
+
+#: mactrack_utilities.php
+msgid "Cacti Mactrack System Utilities"
+msgstr "Fitaovana Rafitra Cacti Mactrack"
+
+#: mactrack_utilities.php
+msgid "Process Status Information"
+msgstr "Fampahalalana momba ny satan'ny dingana"
+
+#: mactrack_utilities.php setup.php
+msgid "View Mactrack Process Status"
+msgstr "Jereo ny Satan'ny dingana Mactrack"
+
+#: mactrack_utilities.php
+msgid "This option will let you show and set process information associated with the Mactrack polling process."
+msgstr "Ity safidy ity dia ahafahanao maneho sy mametraka fampahalalana momba ny dingana mifandray amin'ny fizotry ny polling Mactrack."
+
+#: mactrack_utilities.php
+msgid "Database Administration"
+msgstr "Fitantanana angon-drakitra"
+
+#: mactrack_utilities.php
+msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
+msgstr "Mamafa ny fifandraisana Port amin'ny MAC sy IP lany daty ao amin'ny tahiry angona.  Ny firaketana lany daty ihany, araka ny fepetranao, no esorina."
+
+#: mactrack_utilities.php
+msgid "Refresh IEEE Vendor MAC/OUI Database"
+msgstr "Havaozy ny angon-drakitra MAC/OUI an'ny mpamatsy IEEE"
+
+#: mactrack_utilities.php
+msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
+msgstr "Ity fiasa ity dia hisintona sy hametraka ny tahirin-kevitra OIU farany indrindra avy amin'ny tranonkalan'ny IEEE. Ny Karatra Tambajotra (NIC) tsirairay dia manana Adiresy MAC. Azo zaraina roa ny Adiresy MAC. Ny ampahany voalohany amin'ny Adiresy MAC dia ahitana ny MAC Mpamatsy. Ny MAC Mpamatsy dia mamaritra hoe iza no nanamboatra ilay fitaovana. Hanampy amin'ny fijerena tampoka ny fitaovana tsy nahazoana alalana ao amin'ny tambajotranao izany."
+
+#: mactrack_utilities.php
+msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
+msgstr "Mamafa ireo asa fitarafana Mactrack taloha sy mety ho efa lany andro ao amin'ny lisitra midina azo rehefa manova karazana fitaovana ianao."
+
+#: mactrack_utilities.php
+msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
+msgstr "Mamafa ny fifandraisana Port amin'ny MAC sy IP <strong>REHETRA</strong> ao amin'ny tahiry angona, ny adiresy IP rehetra, ny elanelana IP ary ny VLAN.  Ity fitaovana ity dia tsara rehefa te hanomboka vaovao ianao.  <strong>LOZA: Voafafa daholo ny angona taloha rehetra.</strong>"
+
+#: mactrack_utilities.php
+msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
+msgstr "Manamboatra indray ny lisitry ny datin'ny fitiliana avy amin'ny vokatry ny Seranana mankany amin'ny MAC mankany amin'ny IP voatahiry, mamaky indray mandeha ny fizarana tsirairay. Ny fitiliana sy ny fikojakojana dia mitazona ny lisitra ho havaozina hatrany, ka tsy ilaina izany raha tsy efa nesorina ivelan'ny fikojakojana ny vokatra, ohatra amin'ny famafana fitaovana."
+
+#: mactrack_utilities.php
+msgid "View Partition Status"
+msgstr "Jereo ny Satan'ny fizarazarana"
+
+#: mactrack_utilities.php
+msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
+msgstr "Mampiseho ny fomba fizarazarana ny valin'ny Port mankany amin'ny MAC mankany amin'ny IP, ny haben'ny fizarana ampiasaina sy ny antony, ary izay nataon'ny fikojakojana ny angon-drakitra farany."
+
+#: mactrack_utilities.php
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
+msgstr "Manamboatra indray sy manadihady ny fizarana mirakitra ny fandinihana seranana farany ihany mba hahazoana indray ny habaka voafafa; miaraka amin'ny fizarana isan-kerinandro dia izao herinandro izao izany. Ny tabilao tsy voazara dia amboarina manontolo. Avela ny fitiliana voalahatra mandra-pahavitany."
+
+#: mactrack_utilities.php
+msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile."
+msgstr "Safidio ny fizarazaran-tabilao isan'andro na isan-kerinandro, na foano ny fizarazaran-tabilao, ho an'ny tabilaon'ny seranana (adiresy MAC), adiresy IP ary 802.1x. Ny fanorenana indray dia mandika ny tantara manontolo any ambadika; lalovana ny fitarafana voalahatra ary mampiseho hafatra fikojakojana ny fikarohana MAC, IP ary 802.1x mandritra izany."
+
+#: mactrack_utilities.php
+msgid "Aggregated Table Administration"
+msgstr "Fitantanana ny tabilao natambatra"
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
+msgstr "Mamafa ny fifandraisana Port amin'ny MAC sy IP <strong>Natambatra</strong> REHETRA (tsy ny valin'ny fitarafana) ao amin'ny tahiry angona.  Hangonina indray ny angona mifototra amin'ny angona notarafina <strong>vaovao ihany</strong> amin'ny fihodinana manaraka an'ny poller mactrack."
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
+msgstr "Mamafa ny fifandraisana Port amin'ny MAC sy IP <strong>Natambatra</strong> REHETRA (tsy ny valin'ny fitarafana) ao amin'ny tahiry angona ary mamerina mamorona azy ireo mifototra amin'ny <strong>angona rehetra notarafina</strong> izao."
+
+#: mactrack_utilities.php
+msgid "Partitioning"
+msgstr "Fizarana"
+
+#: mactrack_vendormacs.php
+msgid "Mactrack Vendor Mac Filter"
+msgstr "Sivana MAC mpamatsy Mactrack"
+
+#: mactrack_vendormacs.php
+msgid "Vendor MAC"
+msgstr "MAC-n'ny mpamatsy"
+
+#: mactrack_vendormacs.php
+msgid "Corporation"
+msgstr "Orinasa"
+
+#: mactrack_vendormacs.php
+msgid "Address"
+msgstr "Adiresy"
+
+#: mactrack_vendormacs.php setup.php
+msgid "Vendor Macs"
+msgstr "MAC-n'ny mpamatsy"
+
+#: mactrack_vendormacs.php
+msgid "No Mactrack Vendor MACS Found"
+msgstr "Tsy misy MAC mpamatsy Mactrack hita"
+
+#: mactrack_view_arp.php
+msgid "Mactrack - ARP/IP View"
+msgstr "Mactrack - Fijerena ARP/IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Name"
+msgstr "Anaran'ny Switch"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Hostname"
+msgstr "Anaran'ny Mpampiantrano Switch"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED IP Address"
+msgstr "Adiresy IP ED"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED DNS Hostname"
+msgstr "Anaran'ny mpampiantrano DNS ED"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED MAC Address"
+msgstr "Adiresy MAC ED"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Vendor Name"
+msgstr "Anaran'ny mpamatsy"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Port Number"
+msgstr "Laharan'ny seranana"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Port Name"
+msgstr "Anaran'ny seranana"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Last Scan Date"
+msgstr "Datin'ny fitiliana farany"
+
+#: mactrack_view_arp.php
+msgid "ARP Cache"
+msgstr "Cache ARP"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "You must first choose a Site, Device or other search criteria."
+msgstr "Tsy maintsy misafidy Toerana, Fitaovana na fepetra fikarohana hafa aloha ianao."
+
+#: mactrack_view_arp.php
+msgid "No Mactrack IP Results Found"
+msgstr "Tsy misy vokatra IP Mactrack hita"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_interfaces.php
+#: mactrack_view_macs.php
+msgid "Device"
+msgstr "Fitaovana"
+
+#: mactrack_view_arp.php mactrack_view_ips.php
+msgid "IP's"
+msgstr "Adiresy IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "IP"
+msgstr "IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Show"
+msgstr "Asehoy"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Most Recent"
+msgstr "Farany indrindra"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "MAC"
+msgstr "MAC"
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr "MacTrack - Solaitra fanaraha-maso"
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr "Fanisana"
+
+#: mactrack_view_dashboard.php
+msgid "Device status"
+msgstr "Satan'ny fitaovana"
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr "Fitambaran'ny adiresy sy seranana"
+
+#: mactrack_view_dashboard.php
+msgid "Collection settings"
+msgstr "Fandrindrana ny fanangonana"
+
+#: mactrack_view_dashboard.php
+msgid "Scan runtimes"
+msgstr "Faharetan'ny fitiliana"
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr "Haben'ny tabilao"
+
+#: mactrack_view_dashboard.php
+msgid "MacWatch activity"
+msgstr "Hetsika MacWatch"
+
+#: mactrack_view_dashboard.php
+msgid "Vendors"
+msgstr "Ireo mpamatsy"
+
+#: mactrack_view_dashboard.php
+msgid "Enabled devices"
+msgstr "Fitaovana mavitrika"
+
+#: mactrack_view_dashboard.php
+msgid "Disabled devices"
+msgstr "Fitaovana tsy mavitrika"
+
+#: mactrack_view_dashboard.php
+msgid "Device types"
+msgstr "Karazana fitaovana"
+
+#: mactrack_view_dashboard.php
+msgid "Interfaces tracked"
+msgstr "Fifandraisana arahina maso"
+
+#: mactrack_view_dashboard.php
+msgid "Active MACs"
+msgstr "MAC mavitrika"
+
+#: mactrack_view_dashboard.php
+msgid "IP addresses"
+msgstr "Adiresy IP"
+
+#: mactrack_view_dashboard.php
+msgid "Total ports"
+msgstr "Fitambaran'ny seranana"
+
+#: mactrack_view_dashboard.php
+msgid "Active ports"
+msgstr "Seranana mavitrika"
+
+#: mactrack_view_dashboard.php
+msgid "Trunk ports"
+msgstr "Seranana trunk"
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr "Mpamatsy OUI miavaka"
+
+#: mactrack_view_dashboard.php
+msgid "Scanning frequency"
+msgstr "Matetiky ny fitiliana"
+
+#: mactrack_view_dashboard.php
+msgid "Concurrent processes"
+msgstr "Fomba fiasa miaraka"
+
+#: mactrack_view_dashboard.php
+msgid "Scanner max runtime"
+msgstr "Faharetana farany indrindra amin'ny mpitily"
+
+#: mactrack_view_dashboard.php
+msgid "MAC retention"
+msgstr "fitazonana MAC"
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr "andro"
+
+#: mactrack_view_dashboard.php
+msgid "IP retention"
+msgstr "Fitahirizana IP"
+
+#: mactrack_view_dashboard.php
+msgid "Reverse DNS"
+msgstr "DNS mivadika"
+
+#: mactrack_view_dashboard.php
+msgid "Most recent scan"
+msgstr "Fikarohana farany indrindra"
+
+#: mactrack_view_dashboard.php
+msgid "Average duration"
+msgstr "Faharetana antonony"
+
+#: mactrack_view_dashboard.php
+msgid "Longest duration"
+msgstr "Faharetana lava indrindra"
+
+#: mactrack_view_dashboard.php
+msgid "Scanned in last hour"
+msgstr "Voatily tao anatin'ny adiny iray farany"
+
+#: mactrack_view_dashboard.php
+msgid "Duration"
+msgstr "Faharetana"
+
+#: mactrack_view_dashboard.php
+msgid "Last scan"
+msgstr "Fitiliana farany"
+
+#: mactrack_view_dashboard.php
+msgid "Slowest devices"
+msgstr "Fitaovana miadana indrindra"
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr "Tsy mbola misy fotoana fiasan'ny fitiliana voarakitra."
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr "Andalana"
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr "Habe"
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr "Tsy misy antontan'isan'ny tabilao azo ampiasaina."
+
+#: mactrack_view_dashboard.php
+msgid "Watched MACs"
+msgstr "Adiresy MAC arahi-maso"
+
+#: mactrack_view_dashboard.php
+msgid "Discovered"
+msgstr "Hita"
+
+#: mactrack_view_dashboard.php
+msgid "Last match"
+msgstr "Fifanojoana farany"
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr "Fidirana ao amin'ny angon-drakitra OUI"
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr "Tsy misy angona momba ny mpamokatra azo ampiasaina."
+
+#: mactrack_view_dashboard.php
+msgid "Show more"
+msgstr "Asehoy bebe kokoa"
+
+#: mactrack_view_dashboard.php
+msgid "Show less"
+msgstr "Asehoy kely kokoa"
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr "Sokafy ao anaty boaty fifampiresahana"
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr "Esory ao amin'ny pejy"
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr "Tariho hanovana ny filaharan'ny karatra"
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr "Fangatahana tsy manan-kery. Andramo indray azafady."
+
+#: mactrack_view_dashboard.php
+msgid "Unknown card."
+msgstr "Karatra tsy fantatra."
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr "Manampy karatra"
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
+msgstr "Manampy karatra tabilao…"
+
+#: mactrack_view_devices.php
+msgid "Mactrack - Device Report View"
+msgstr "Mactrack - Fijerena tatitry ny Fitaovana"
+
+#: mactrack_view_devices.php
+msgid "Unknown Device Type"
+msgstr "Karazana Fitaovana tsy fantatra"
+
+#: mactrack_view_devices.php
+msgid "Total VLAN's"
+msgstr "Fitambaran'ny VLAN"
+
+#: mactrack_view_devices.php
+msgid "Edit Device"
+msgstr "Ahitsio ny Fitaovana"
+
+#: mactrack_view_devices.php
+msgid "View Graphs"
+msgstr "Hijery tabilao"
+
+#: mactrack_view_devices.php
+msgid "Device Not Mapped to Cacti Device"
+msgstr "Fitaovana tsy mifandray amin'ny Fitaovana Cacti"
+
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
+msgid "View MAC Addresses"
+msgstr "Jereo ny adiresy MAC"
+
+#: mactrack_view_devices.php
+msgid "No Mactrack Devices Found"
+msgstr "Tsy misy Fitaovana Mactrack hita"
+
+#: mactrack_view_devices.php
+msgid "Device Scan Results"
+msgstr "Valin'ny fitarafana fitaovana"
+
+#: mactrack_view_devices.php
+msgid "Hub/Switch"
+msgstr "Hub/Switch"
+
+#: mactrack_view_dot1x.php
+msgid "Mactrack - 802.1x View"
+msgstr "Mactrack - Fijerena 802.1x"
+
+#: mactrack_view_dot1x.php
+msgid "Domain"
+msgstr "Sehatra"
+
+#: mactrack_view_dot1x.php
+msgid "802.1x Sessions"
+msgstr "Fifandraisana 802.1x"
+
+#: mactrack_view_dot1x.php
+msgid "No Mactrack 802.1x Sessions Found"
+msgstr "Tsy misy fotoam-pifandraisana Mactrack 802.1x hita"
+
+#: mactrack_view_dot1x.php
+msgid "Dot1x Scan Results"
+msgstr "Vokatry ny fitiliana Dot1x"
+
+#: mactrack_view_dot1x.php
+msgid "Sessions"
+msgstr "Sesiôna"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "All Statuses"
+msgstr "Sata rehetra"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr "Sata voafidy"
+
+#: mactrack_view_dot1x.php
+msgid "DATA"
+msgstr "ANGONA"
+
+#: mactrack_view_dot1x.php
+msgid "VOICE"
+msgstr "FEO"
+
+#: mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Portname"
+msgstr "Anaran-tseranana"
+
+#: mactrack_view_graphs.php
+msgid "Mactrack - Monitored Device Graph View"
+msgstr "Mactrack - Fijerena Kisarin'ny Fitaovana arahina maso"
+
+#: mactrack_view_graphs.php
+msgid "Custom Graph List Applied - Filtering from List"
+msgstr "Nampiharina ny lisitry ny Kisary namboarina - Manivana avy amin'ny lisitra"
+
+#: mactrack_view_interfaces.php
+msgid "Mactrack - Network Interfaces View"
+msgstr "Mactrack - Fijerena ireo seha-pifandraisana tambajotra"
+
+#: mactrack_view_interfaces.php
+msgid "No Mactrack Interfaces Found"
+msgstr "Tsy misy fampifandraisana Mactrack hita"
+
+#: mactrack_view_interfaces.php
+msgid "Interface Scan Results"
+msgstr "Vokatry ny fitiliana fifandraisana"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Name"
+msgstr "Anarana"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Description"
+msgstr "Famaritana"
+
+#: mactrack_view_interfaces.php
+msgid "Issues"
+msgstr "Olana"
+
+#: mactrack_view_interfaces.php
+msgid "Alias"
+msgstr "Solon'anarana"
+
+#: mactrack_view_interfaces.php
+msgid "InBound %%%"
+msgstr "Miditra %%%"
+
+#: mactrack_view_interfaces.php
+msgid "OutBound %%%"
+msgstr "Mivoaka %%%"
+
+#: mactrack_view_interfaces.php
+msgid "In (B/S)"
+msgstr "Miditra (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out (B/S)"
+msgstr "Mivoaka (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Err Total"
+msgstr "Totaly Miditra Hadisoana"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc Total"
+msgstr "Totaly Miditra Nariana"
+
+#: mactrack_view_interfaces.php
+msgid "UProto Total"
+msgstr "Fitambaran'ny UProto"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err Total"
+msgstr "Totalin'ny hadisoana mivoaka"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc Total"
+msgstr "Totaly nariana mivoaka"
+
+#: mactrack_view_interfaces.php
+msgid "In Err (E/S)"
+msgstr "Miditra Hadisoana (E/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc (D/S)"
+msgstr "Miditra Nariana (D/S)"
+
+#: mactrack_view_interfaces.php
+msgid "UProto (UP/S)"
+msgstr "UProto (UP/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err (OE/S)"
+msgstr "Hadisoana mivoaka (OE/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc (OD/S)"
+msgstr "Nariana mivoaka (OD/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Last Change"
+msgstr "Fiovana farany"
+
+#: mactrack_view_interfaces.php
+msgid "Last Scanned"
+msgstr "Notilina farany"
+
+#: mactrack_view_interfaces.php
+msgid "Filters"
+msgstr "Sivana"
+
+#: mactrack_view_interfaces.php
+msgid "All Interfaces"
+msgstr "Fifandraisana rehetra"
+
+#: mactrack_view_interfaces.php
+msgid "All Non-Ignored Interfaces"
+msgstr "Fifandraisana tsy nailika rehetra"
+
+#: mactrack_view_interfaces.php
+msgid "All Ignored Interfaces"
+msgstr "Fifandraisana nailika rehetra"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In/Out Utilization > %d &#37;"
+msgstr "Fampiasana miditra/mivoaka avo > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In Utilization > %d &#37;"
+msgstr "Fampiasana miditra avo > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High Out Utilization > %d &#37;"
+msgstr "Fampiasana mivoaka avo > %d &#37;"
+
+#: mactrack_view_interfaces.php
+msgid "With Issues"
+msgstr "Misy olana"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces"
+msgstr "Fifandraisana mandeha"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces No Alias"
+msgstr "Fifandraisana mandeha tsy misy solonanarana"
+
+#: mactrack_view_interfaces.php
+msgid "Errors Accumulating"
+msgstr "Hadisoana miangona"
+
+#: mactrack_view_interfaces.php
+msgid "Discards Accumulating"
+msgstr "Mitombo ny tsy noraisina"
+
+#: mactrack_view_interfaces.php
+msgid "Changed in Last Day"
+msgstr "Novaina tao anatin'ny iray andro farany"
+
+#: mactrack_view_interfaces.php
+msgid "Bandwidth"
+msgstr "Sakan'ny fifindran'angona"
+
+#: mactrack_view_interfaces.php
+msgid "When checked, the Errors, Discards and Unknown Protocol columns show each interface's cumulative SNMP counter totals instead of the average per-second rate."
+msgstr "Rehefa voamarika, ny tsanganana Hadisoana, Fanariana ary Protokoly tsy fantatra dia mampiseho ny totalin'ny mpanisa SNMP mitambatra ho an'ny mpampifandray tsirairay fa tsy ny salan'isa isan-tsegondra."
+
+#: mactrack_view_interfaces.php
+msgid "Show Totals"
+msgstr "Asehoy ny fitambarany"
+
+#: mactrack_view_ips.php
+msgid "Mactrack - Site IP Range Report View"
+msgstr "Mactrack - Fijerena tatitry ny elanelan'ny IP amin'ny Toerana"
+
+#: mactrack_view_ips.php
+msgid "IP Range"
+msgstr "Elanelana IP"
+
+#: mactrack_view_ips.php
+msgid "Current IP Addresses"
+msgstr "Adiresy IP ankehitriny"
+
+#: mactrack_view_ips.php
+msgid "Current Date"
+msgstr "Daty ankehitriny"
+
+#: mactrack_view_ips.php
+msgid "Maximum IP Addresses"
+msgstr "Adiresy IP farany ambony"
+
+#: mactrack_view_ips.php
+msgid "Maximum Date"
+msgstr "Daty farany ambony"
+
+#: mactrack_view_ips.php
+msgid "IP Address Ranges"
+msgstr "Elanelan'ny adiresy IP"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "Edit Site"
+msgstr "Ovao ny Toerana"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "View IP Addresses"
+msgstr "Jereo ny adiresy IP"
+
+#: mactrack_view_ips.php
+msgid "No Mactrack Site IP Ranges Found"
+msgstr "Tsy misy elanelana IP Toerana Mactrack hita"
+
+#: mactrack_view_macs.php
+msgid "Mactrack - MAC to IP Report View"
+msgstr "Mactrack - Fijerena tatitra MAC mankany amin'ny IP"
+
+#: mactrack_view_macs.php
+msgid "Authorize"
+msgstr "Omeo alalana"
+
+#: mactrack_view_macs.php
+msgid "Revoke"
+msgstr "Foano"
+
+#: mactrack_view_macs.php
+msgid "None of the selected MAC Addresses were valid, so no action was taken."
+msgstr "Tsy nisy manan-kery ny adiresy MAC voafidy, ka tsy nisy hetsika natao."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
+msgstr "Ireto adiresy MAC manaraka ireto dia tsy azo nofoanana satria mpikambana ao amin'ny Fanomezan-dalana Vondrona %s"
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Authorize the following MAC Addresses."
+msgstr "Tsindrio ny 'Tohizo' mba hanomezan-dalana ireto adiresy MAC manaraka ireto."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Revoke the following MAC Addresses."
+msgstr "Tsindrio ny 'Tohizo' mba hanafoana ireto Adiresy MAC manaraka ireto."
+
+#: mactrack_view_macs.php
+msgid "You must select at least one MAC Address."
+msgstr "Tsy maintsy misafidy Adiresy MAC iray farafahakeliny ianao."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to change Mac Authorizations."
+msgstr "Tsy mahazo alalana hanova ny Fanomezan-dalana Mac ianao."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
+msgstr "Fit.:%s IP.:%s MAC.:%s PORT.:%s Isa.: [%s]"
+
+#: mactrack_view_macs.php
+msgid "You must select at least one Row."
+msgstr "Tsy maintsy misafidy Andalana iray farafahakeliny ianao."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to delete rows."
+msgstr "Tsy mahazo alalana hamafa andalana ianao."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Delete the following rows from Aggregated table."
+msgstr "Tsindrio ny 'Tohizo' mba hamafana ireto andalana manaraka ireto avy ao amin'ny tabilao Aggregated."
+
+#: mactrack_view_macs.php
+msgid "VLAN ID"
+msgstr "ID VLAN"
+
+#: mactrack_view_macs.php
+msgid "VLAN Name"
+msgstr "Anaran'ny VLAN"
+
+#: mactrack_view_macs.php
+msgid "You must choose a Site, Device or other search criteria."
+msgstr "Tsy maintsy misafidy Toerana, Fitaovana na fepetra fikarohana hafa ianao."
+
+#: mactrack_view_macs.php
+msgid "No Mactrack Port Results Found"
+msgstr "Tsy misy vokatra seranana Mactrack hita"
+
+#: mactrack_view_macs.php
+msgid "Count"
+msgstr "Isa"
+
+#: mactrack_view_macs.php
+msgid "Aggregated"
+msgstr "Natambatra"
+
+#: mactrack_view_sites.php
+msgid "Mactrack - Site Report View"
+msgstr "Mactrack - Fijerena tatitry ny Toerana"
+
+#: mactrack_view_sites.php
+msgid "Rescan Site"
+msgstr "Diniho indray ny Toerana"
+
+#: mactrack_view_sites.php
+msgid "View Devices"
+msgstr "Jereo ny Fitaovana"
+
+#: mactrack_view_sites.php
+msgid "View IP Ranges"
+msgstr "Jereo ny elanelana IP"
+
+#: mactrack_view_sites.php
+msgid "Sites / Device Types"
+msgstr "Toerana / Karazana fitaovana"
+
+#: mactrack_view_sites.php
+msgid "Site Scan Results"
+msgstr "Valin'ny fitiliana toerana"
+
+#: setup.php
+msgid "MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes."
+msgstr "Manavao ny angon-drakiny ao ambadika ny MacTrack. Mety haharitra adiny iray izany amin'ny fametrahana lehibe, ary mety tsy ho feno ny angona sasany ao amin'ny MacTrack mandra-pahavitan'izany."
+
+#: setup.php
+#, php-format
+msgid "MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s"
+msgstr "Tsy nahavita nanomboka ny fanavaozana ny angon-drakiny tao ambadika ny MacTrack, jereo ny firaketan'i Cacti hahitana ny antony. Alefaso amin'ny tanana avy amin'ny tsipika baiko izany: %s"
+
+#: setup.php
+msgid "Mactrack"
+msgstr "Mactrack"
+
+#: setup.php
+msgid "General Settings"
+msgstr "Fikirana ankapobeny"
+
+#: setup.php
+msgid "Scanning Frequency"
+msgstr "Matetiky ny Fitiliana"
+
+#: setup.php
+msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
+msgstr "Safidio ny fotoana hanangonana ny adiresy MAC sy IP ary ny antontan'isa momba ny interface avy amin'ny Fitaovana tambajotranao."
+
+#: setup.php
+msgid "Concurrent Processes"
+msgstr "Dingana miaraka"
+
+#: setup.php
+msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
+msgstr "Farito hoe firy ny fitaovana hohadihadiana miaraka mandra-pahavitan'ny fitiliana ny fitaovana rehetra."
+
+#: setup.php
+msgid "Scanner Max Runtime"
+msgstr "Faharetana Farany Indrindra amin'ny Mpitily"
+
+#: setup.php
+msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
+msgstr "Farito ny isan'ny minitra avela handehanan'ny asan'ny fitiliana fitaovana alohan'ny hiheveran'ny rafitra fa vita izany.  Ity fandrindrana ity dia manitsy ny asa fitiliana tapaka tampoka."
+
+#: setup.php
+msgid "Start Time for Data Collection"
+msgstr "Ora fanombohana ny fanangonana angona"
+
+#: setup.php
+msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
+msgstr "Rahoviana no tianao hanaovana ny fanangonana angona voalohany. Ny fotoana fanangonana angona rehetra amin'ny hoavy dia hifototra amin'ity fotoana fanombohana ity. Ohatra tsara ny 12:00AM."
+
+#: setup.php
+msgid "Database Maintenance Time"
+msgstr "Fotoana fikojakojana angon-drakitra"
+
+#: setup.php
+msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
+msgstr "Rahoviana no tokony hesorina ao amin'ny tahiry angona ny rakitra tranainy. Mariho tsara fa tsy hisy fidirana azo atao amin'ny tahiry angonan'ny seranana mandritra ny fanatanterahana izany."
+
+#: setup.php
+msgid "Confirm Utilities Prompt"
+msgstr "Fanontaniana fanamafisana ny fitaovana fanampiny"
+
+#: setup.php
+msgid "When using utilities, prompt for verification"
+msgstr "Rehefa mampiasa fitaovana fanampiny, mangataha fanamarinana"
+
+#: setup.php
+msgid "Data Retention"
+msgstr "Fitahirizana angona"
+
+#: setup.php
+msgid "How long should port MAC details be retained in the database."
+msgstr "Mandra-pahoviana no tokony hotehirizina ao amin'ny angon-drakitra ny antsipirian'ny MAC amin'ny seranana."
+
+#: setup.php
+msgid "Data Retention IPs"
+msgstr "Adiresy IP fitehirizana angona"
+
+#: setup.php
+msgid "How long should discovered IPs details be retained in the database."
+msgstr "Mandra-pahoviana no tokony hotehirizina ao amin'ny angon-drakitra ny antsipirian'ireo IP hita."
+
+#: setup.php
+msgid "Size of the partitions of the port, IP and 802.1x tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
+msgstr "Ny haben'ny fizarazarana ho an'ny tabilao port, IP ary 802.1x, na Tsy mavitrika ho an'ny tabilao tsy misy fizarazarana. Ny fanovana azy dia miantraika amin'ny fizarana vaovao ihany; mba hanamboarana indray ny tantara efa misy hifanaraka amin'izany, ampiasao ny Configure Port and IP Address Partitioning ao amin'ny MacTrack Utilities na alefaso ny cli/upgrade_partitioning.php."
+
+#: setup.php
+msgid "Switch Level Ignore Ports Delimiter"
+msgstr "Mpanasaraka seranana tsinontsinoavina amin'ny ambaratonga Switch"
+
+#: setup.php
+msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
+msgstr "Inona ny mpanasaraka tokony hampiasain'ny Mactrack rehefa mamakafaka ny teny Ignore Ports ho an'ny switch tsirairay."
+
+#: setup.php
+msgid "Auto Detect"
+msgstr "Fitiliana ho azy"
+
+#: setup.php
+msgid "Colon [:]"
+msgstr "Teboka roa [:]"
+
+#: setup.php
+msgid "Pipe [|]"
+msgstr "Fantsona [|]"
+
+#: setup.php
+msgid "Space [ ]"
+msgstr "Elanelana [ ]"
+
+#: setup.php
+msgid "Mac Address Output Format"
+msgstr "Endrika famoahana adiresy Mac"
+
+#: setup.php
+msgid "Format used for display."
+msgstr "Endrika ampiasaina amin'ny fampisehoana."
+
+#: setup.php
+msgid "Ports to Ignore"
+msgstr "Seranana tsy raharahiana"
+
+#: setup.php
+msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
+msgstr "Omeo fomba fiteny mahazatra (regex) momba ny ifNames na ifDescriptions amin'ny seranana hodian-tsy hita ao amin'ny lisitry ny interface. Ohatra, (Vlan|Loopback|Null)."
+
+#: setup.php
+msgid "Ports to Ignore While Scanning (Regular Expression)"
+msgstr "Seranana tsy raharahiana mandritra ny fitiliana (Fomba fiteny ara-dalàna)"
+
+#: setup.php
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
+msgstr "Safidy.  Fanehoana ara-dalàna ampifanandrifina, tsy manavaka sora-baventy na kely, amin'ny anaran'ny seranana sy ny anarana solon'ny seranana notilina rehetra.  Tsy angonina ireo adiresy MAC hita eo amin'ny seranana mifanandrify, izay mitazona ny seranana uplink sy trunk ho any ivelan'ny angona.  Ohatra, (uplink|trunk).  Apetraho amin'ny andalany manokana ny fanehoana tsirairay raha hanome maromaro.  Avelao ho foana raha hanangona ny seranana rehetra.  Afaka manampy ny fanehoany manokana ny Toerana sy ny Fitaovana.  Tsy toy ny Seranana tsy raharahaina etsy ambony, ity dia mihatra amin'ny fanangonana MAC fa tsy amin'ny lisitry ny fitaovana ifandraisana, ary amin'ny fitiliana vaovao ihany no fiantraikany."
+
+#: setup.php
+msgid "Bandwidth Usage Threshold"
+msgstr "Fetra fampiasana ny sakan'ny fifindran'angona"
+
+#: setup.php
+msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
+msgstr "Rehefa mijery ny antontan'isan'ny mpampifandray tambajotra, inona ny fetran'ny sakan-tsambo tianao hojerena amin'ny fomba mahazatra."
+
+#: setup.php
+#, php-format
+msgid "%d Percent"
+msgstr "%d isan-jato"
+
+#: setup.php
+msgid "DNS Settings"
+msgstr "Fandrindrana DNS"
+
+#: setup.php
+msgid "Perform Reverse DNS Name Resolution"
+msgstr "Hanao fikarohana anarana DNS mivadika"
+
+#: setup.php
+msgid "Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
+msgstr "Tokony hanao fikarohana DNS miverina amin'ireo adiresy IP mifandray amin'ny seranana ve ny Mactrack. FAMPITANDREMANA: Raha tsy voalamina tsara ny DNS dia hampiadana be ny fotoana fitarafana izany."
+
+#: setup.php
+msgid "Primary DNS IP Address"
+msgstr "Adiresy IP DNS voalohany"
+
+#: setup.php
+msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
+msgstr "Ampidiro ny adiresy IP DNS voalohany hampiasaina amin'ny fitadiavana mifamadika."
+
+#: setup.php
+msgid "Secondary DNS IP Address"
+msgstr "Adiresy IP DNS faharoa"
+
+#: setup.php
+msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
+msgstr "Ampidiro ny adiresy IP DNS faharoa hampiasaina amin'ny fitadiavana mifamadika."
+
+#: setup.php
+msgid "DNS Timeout"
+msgstr "Fe-potoana lany DNS"
+
+#: setup.php
+msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
+msgstr "Ampidiro ao anatin'ny milisegondra ny fe-potoana fiandrasana DNS azafady. Mampiasa mpamaha DNS mifototra amin'ny PHP ny Mactrack."
+
+#: setup.php
+msgid "DNS Prime Interval"
+msgstr "Elanelam-potoana fanomanana DNS"
+
+#: setup.php
+msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
+msgstr "Impiry, ao anatin'ny segondra, no mila avadika ho adiresy MAC ny adiresy IP fitiliana Mactrack ho an'ny famahana DNS. Ny fampiasana isa lehibe kokoa rehefa manana Fitaovana an'arivony maro ianao dia hampitombo ny fahombiazana."
+
+#: setup.php
+msgid "Notification Settings"
+msgstr "Fikirana fampandrenesana"
+
+#: setup.php
+msgid "Source Address"
+msgstr "Adiresy loharano"
+
+#: setup.php
+msgid "The source Email address for Mactrack Emails."
+msgstr "Ny adiresy Mailaka loharano ho an'ny Mailaka Mactrack."
+
+#: setup.php
+msgid "Source Email Name"
+msgstr "Anaran'ny mailaka loharano"
+
+#: setup.php
+msgid "The Source Email name for Mactrack Emails."
+msgstr "Ny anaran'ny Mailaka loharano ho an'ny Mailaka Mactrack."
+
+#: setup.php
+msgid "MACTrack Administrator"
+msgstr "Mpitantana MACTrack"
+
+#: setup.php
+msgid "MacWatch Default Body"
+msgstr "Votoaty mahazatra MacWatch"
+
+#: setup.php
+msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+msgstr "Ny votoatin'ny Mailaka efa voarindra mialoha ho an'ny Mailaka Mactrack MacWatch. Afaka ahitana marika HTML manan-kery rehetra ny votoatiny. Manohana marika fanoloana izay hokarakaraina rehefa mandefa Mailaka ihany koa izy. Anisan'ny marika manan-kery ny <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+
+#: setup.php
+msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
+msgstr "Adiresy Mac <MAC> hita tao amin'ny Adiresy IP <IP> ho an'ny Laharan'ny Tapakila: <TICKET>.<br>Ny fitaovana dia hita ao amin'ny<br>Toerana: <SITENAME>, Fitaovana <DEVICENAME>, IP <DEVICEIP>, Seranana <PORTNUMBER>, ary Anaran'ny Seranana <PORTNAME>"
+
+#: setup.php
+msgid "MacAuth Report Email Addresses"
+msgstr "Adiresy mailaka ho an'ny tatitry ny MacAuth"
+
+#: setup.php
+msgid "A comma delimited list of users to receive the MacAuth Email notifications."
+msgstr "Lisitry ny mpampiasa sarahin'ny faingo handray ny fampandrenesana Mailaka MacAuth."
+
+#: setup.php
+msgid "MacAuth Report Frequency"
+msgstr "Fahatetehan'ny tatitry ny MacAuth"
+
+#: setup.php
+msgid "How often will the MacAuth Reports be Emailed."
+msgstr "Impiry no handefasana amin'ny Mailaka ireo Tatitra MacAuth."
+
+#: setup.php
+msgid "Mactrack ArpWatch Settings"
+msgstr "Fandrindrana ArpWatch Mactrack"
+
+#: setup.php
+msgid "Enable ArpWatch"
+msgstr "Alefaso ny ArpWatch"
+
+#: setup.php
+msgid "Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
+msgstr "Tokony hampiasa ny angona ArpWatch ihany koa ve ny Mactrack hanampiana ny famahana MAC ho IP/DNS?"
+
+#: setup.php
+msgid "ArpWatch Database Path"
+msgstr "Lalan'ny angon-drakitra ArpWatch"
+
+#: setup.php
+msgid "The location of the ArpWatch Database file on the Cacti server."
+msgstr "Ny toerana misy ny rakitra angon-drakitra ArpWatch ao amin'ny lohamilina Cacti."
+
+#: setup.php
+msgid "SNMP Presets"
+msgstr "Famaritana mialoha SNMP"
+
+#: setup.php
+msgid "Update Policy for SNMP Options"
+msgstr "Politikan'ny fanavaozana ho an'ny safidy SNMP"
+
+#: setup.php
+msgid "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices."
+msgstr "Fitsipika fampifanarahana ny safidy SNMP eo amin'ny Fitaovana Cacti sy ny Fitaovana Mactrack."
+
+#: setup.php
+msgid "Default SNMP version for all new hosts."
+msgstr "Kinova SNMP mahazatra ho an'ny Mpampiantrano vaovao rehetra."
+
+#: setup.php
+msgid "Default SNMP read community for all new hosts."
+msgstr "Community famakiana SNMP mahazatra ho an'ny Mpampiantrano vaovao rehetra."
+
+#: setup.php
+msgid "Communities"
+msgstr "Vondrom-piarahamonina"
+
+#: setup.php
+msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
+msgstr "Fenoy ny lisitry ny teny famakiana SNMP azo ampiasaina hitsapana ity fitaovana ity. Ny teny famakiana tsirairay dia tsy maintsy sarahina amin'ny teboka roa ':'. Hotsapaina misesy ireo teny famakiana ireo raha tsy manankery ny teny famakiana fototra."
+
+#: setup.php
+msgid "The UDP/TCP Port to poll the SNMP agent on."
+msgstr "Ny Seranana UDP/TCP hanontaniana ny mpandraharaha SNMP."
+
+#: setup.php
+msgid "Default SNMP timeout in milli-seconds."
+msgstr "Fe-potoana SNMP mahazatra amin'ny milisegondra."
+
+#: setup.php
+msgid "The number times the SNMP poller will attempt to reach the host before failing."
+msgstr "Ny isan'ny fotoana hanandraman'ny poller SNMP hahatratra ny mpampiantrano alohan'ny tsy fahombiazana."
+
+#: setup.php
+msgid "snmpbulkwalk Binary Path"
+msgstr "Lalan'ny Binera snmpbulkwalk"
+
+#: setup.php
+msgid "The path to your snmpbulkwalk binary."
+msgstr "Ny lalana mankany amin'ny binera snmpbulkwalk anao."
+
+#: setup.php
+msgid "MacTrack Settings"
+msgstr "Fandrindrana MacTrack"
+
+#: setup.php
+msgid "Default Tab"
+msgstr "Vakizoro mahazatra"
+
+#: setup.php
+msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
+msgstr "Iza amin'ny tabilao MacTrack no tianao hatao tabilao mahazatra isaky ny miditra ao amin'ny MacTrack faharoa ianao."
+
+#: setup.php
+msgid "Mac Addresses"
+msgstr "Adiresy Mac"
+
+#: setup.php
+msgid "dot1x Deta"
+msgstr "Angona dot1x"
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Fandrindrana ny proxy Internet"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Adiresin'ny proxy Internet"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Ho an'ny sampan-draharaha fototry ny Cacti na ireo Tovana izay mila fidirana amin'ny Internet, ampidiro eto ny lohamilina proxy sy ny seranana araka ity endrika ity: IP:PORT. Ohatra 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Mpampiasa ny proxy Internet"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "Raha mitaky anaran'ny mpampiasa ny proxy Internet-nao dia ampidiro eto izany."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Tenimiafin'ny proxy Internet"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "Raha mitaky tenimiafina ny proxy Internet-nao dia ampidiro eto izany."
+
+#: setup.php
+msgid "Mactrack Dashboard"
+msgstr "Tabilao fanaraha-maso Mactrack"
+
+#: setup.php
+msgid "Mactrack Devices"
+msgstr "Fitaovana Mactrack"
+
+#: setup.php
+msgid "(Edit)"
+msgstr "(Fanovana)"
+
+#: setup.php
+msgid "(Import)"
+msgstr "(Fampidirana)"
+
+#: setup.php
+msgid "Mactrack Device Types"
+msgstr "Karazana Fitaovana Mactrack"
+
+#: setup.php
+msgid "Mactrack Sites"
+msgstr "Toerana Mactrack"
+
+#: setup.php
+msgid "Mac Address Tracking Utility"
+msgstr "Fampiasa fanaraha-maso adiresy Mac"
+
+#: setup.php
+msgid "Mac Address Authorization Utility"
+msgstr "Fampiasa fanomezan-dalana adiresy Mac"
+
+#: setup.php
+msgid "Mactrack Vendor Macs"
+msgstr "MAC mpamatsy Mactrack"
+
+#: setup.php
+msgid "Mactrack View Macs"
+msgstr "Fijerena MAC Mactrack"
+
+#: setup.php
+msgid "Mactrack Dot1x View"
+msgstr "Fijerena Dot1x Mactrack"
+
+#: setup.php
+msgid "Mactrack IP Address Viewer"
+msgstr "Mpijery adiresy IP Mactrack"
+
+#: setup.php
+msgid "Mactrack View Interfaces"
+msgstr "Fijerena seha-pifandraisana Mactrack"
+
+#: setup.php
+msgid "Mactrack View Sites"
+msgstr "Fijerena Toerana Mactrack"
+
+#: setup.php
+msgid "Mactrack View IP Ranges"
+msgstr "Fijerena elanelan'ny IP Mactrack"
+
+#: setup.php
+msgid "Mactrack View Devices"
+msgstr "Fijerena Fitaovana Mactrack"
+
+#: setup.php
+msgid "Mactrack Utilities"
+msgstr "Fitaovana fanampiny Mactrack"
+
+#: setup.php
+msgid "Truncate Port Results Table"
+msgstr "Fafao ny latabatra valin'ny seranana"
+
+#: setup.php
+msgid "Truncate Aggregated Port Results Table"
+msgstr "Fafao ny latabatra valin'ny seranana natambatra"
+
+#: setup.php
+msgid "Truncate and Re-create Aggregated Port Results Table"
+msgstr "Fafao sy amboary indray ny latabatra valin'ny seranana natambatra"
+
+#: setup.php
+msgid "Refresh/Update Vendor MAC Database from IEEE"
+msgstr "Havaozy/ampifanaraho avy amin'ny IEEE ny angon-drakitra MAC an'ny mpamatsy"
+
+#: setup.php
+msgid "Mactrack Graph Viewer"
+msgstr "Mpijery Kisary Mactrack"
+
+#: setup.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "%d Segondra"
+
+#: setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d minitra"
+
+#: setup.php
+msgid "Matches"
+msgstr "Mifanaraka"
+
+#: setup.php
+msgid "Contains"
+msgstr "Ahitana"
+
+#: setup.php
+msgid "Begins With"
+msgstr "Manomboka Amin'ny"
+
+#: setup.php
+msgid "Does Not Contain"
+msgstr "Tsy ahitana"
+
+#: setup.php
+msgid "Does Not Begin With"
+msgstr "Tsy manomboka amin'ny"
+
+#: setup.php
+msgid "Is Null"
+msgstr "Dia Null"
+
+#: setup.php
+msgid "Is Not Null"
+msgstr "Tsy Null"
+
+#: setup.php
+msgid "Half"
+msgstr "Antsasany"
+
+#: setup.php
+msgid "Full"
+msgstr "Feno"
+
+#: setup.php
+msgid "Sync Cacti Device to Mactrack Device"
+msgstr "Ampifanaraho ny Fitaovana Cacti amin'ny Fitaovana Mactrack"
+
+#: setup.php
+msgid "Sync Mactrack Device to Cacti Device"
+msgstr "Ampifanaraho ny Fitaovana Mactrack amin'ny Fitaovana Cacti"
+
+#: setup.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Isaky ny %d minitra"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hour"
+msgstr "Isaky ny %d ora"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Isaky ny %d ora"
+
+#: setup.php
+msgid "Every Day"
+msgstr "Isan'andro"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "%d Volana"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "%d Volana"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "%d taona"
+
+#: setup.php
+msgid "On Scan Completion"
+msgstr "Rehefa vita ny fitiliana"
+
+#: setup.php
+#, php-format
+msgid "Every %d Days"
+msgstr "Isaky ny %d andro"
+
+#: setup.php
+msgid "Every Week"
+msgstr "Isan-kerinandro"
+
+#: setup.php
+msgid "Management"
+msgstr "Fitantanana"
+
+#: setup.php
+msgid "SNMP Options"
+msgstr "Safidy SNMP"
+
+#: setup.php
+msgid "Mac Watch"
+msgstr "Fanaraha-maso Mac"
+
+#: setup.php
+msgid "Mactrack Tools"
+msgstr "Fitaovam-piasana Mactrack"
+
+#: setup.php
+msgid "Mac Authorizations"
+msgstr "Fanomezan-dalana Mac"
+
+#: setup.php
+msgid "Tracking Utilities"
+msgstr "Fitaovana fanaraha-maso"
+
+#: setup.php
+msgid "Ports to Ignore (Regular Expression)"
+msgstr "Seranana tsy raharahiana (Fomba fiteny ara-dalàna)"
+
+#: setup.php
+#, php-format
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions."
+msgstr "Safidy.  Fanehoana ara-dalàna ampifanandrifina, tsy manavaka sora-baventy na kely, amin'ny anaran'ny seranana sy ny anarana solon'ny seranan'ny %s.  Tsy angonina ireo adiresy MAC hita eo amin'ny seranana mifanandrify.  Ohatra, ny '(uplink|trunk)' dia tsy miraharaha ny seranana rehetra misy uplink na trunk ny anarany na ny anarana solony.  Apetraho amin'ny andalany manokana ny fanehoana tsirairay raha hanome maromaro.  Ampiharina fanampin'ireo fanehoana %s izany."
+
+#: setup.php
+msgid "every device in this site"
+msgstr "ny fitaovana rehetra amin'ity toerana ity"
+
+#: setup.php
+msgid "this device"
+msgstr "ity fitaovana ity"
+
+#: setup.php
+msgid "device and global"
+msgstr "fitaovana sy ankapobeny"
+
+#: setup.php
+msgid "site and global"
+msgstr "toerana sy ankapobeny"
+
+#: setup.php
+msgid "Device Scanning Function Options"
+msgstr "Safidy asa fitarafana fitaovana"
+
+#: setup.php
+msgid "Give this device type a meaningful description."
+msgstr "Omeo famaritana mazava ity karazana Fitaovana ity."
+
+#: setup.php
+msgid "Fill in the name for the vendor of this device type."
+msgstr "Fenoy ny anaran'ny mpamatsy ity karazana fitaovana ity."
+
+#: setup.php
+msgid "Choose the type of device."
+msgstr "Safidio ny karazana Fitaovana."
+
+#: setup.php
+msgid "System Description Match"
+msgstr "Fampifanarahana ny famaritana ny rafitra"
+
+#: setup.php
+msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
+msgstr "Omeo fampahalalana fototra hanampiana ny Mactrack hamantatra ny karazana fitaovana. Ny marika jôkera dia ny marika '&#42;'."
+
+#: setup.php
+msgid "Vendor SNMP Object ID Match"
+msgstr "Fifanandrifian'ny ID zavatra SNMP mpamatsy"
+
+#: setup.php
+msgid "MAC Address Scanning Function"
+msgstr "Asa fitarafana adiresy MAC"
+
+#: setup.php
+msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
+msgstr "Fiasa fitiliana Mactrack antsoina mba hahazoana sy hitehirizana ny antsipirian'ny seranana.  Ny anaran'ny fiasa ihany no ilaina.  Ireto masontsivana efatra ireto dia raisina ho efa ao ary hatovana foana: 'my_function($site, &$device, $lowport, $highport)'.  Tsy mila fiasa ho an'ny router madio."
+
+#: setup.php
+msgid "IP Address Scanning Function"
+msgstr "Asa fitiliana adiresy IP"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
+msgstr "Fiasa fitiliana Mactrack natokana ho an'ny Fitaovana Layer3 izay manara-maso ny adiresy IP."
+
+#: setup.php
+msgid "802.1x Scanning Function"
+msgstr "Fiasan'ny fitarafana 802.1x"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Switches with dot1x enabled."
+msgstr "Fiasa fitiliana Mactrack natokana ho an'ny Switch manana dot1x mavitrika."
+
+#: setup.php
+msgid "Serial Number Base OID"
+msgstr "OID fototry ny laharana famantarana"
+
+#: setup.php
+msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
+msgstr "Ny SNMP OID ampiasaina hakana ny laharan'ny andian'ity karazana fitaovana ity mba hotehirizina ao amin'ny tabilao Fampahalalana momba ny Fananan'ny Mactrack."
+
+#: setup.php
+msgid "Serial Number Collection Method"
+msgstr "Fomba fanangonana ny laharana famantarana"
+
+#: setup.php
+msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
+msgstr "Ny fomba fanangonana ny laharana famantarana (serial number) ho an'ity OID ity.  Raha 'SNMP Walk', dia heverina ho maromaro ny laharana famantarana.  Raha 'Get', dia iray ihany izany.."
+
+#: setup.php
+msgid "SNMP Get"
+msgstr "SNMP Get"
+
+#: setup.php
+msgid "SNMP Walk"
+msgstr "Fitsidihana SNMP"
+
+#: setup.php
+msgid "Low User Port Number"
+msgstr "Laharan-tseranana ambany ho an'ny mpampiasa"
+
+#: setup.php
+msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
+msgstr "Omeo ny laharan'ny seranana ambany indrindra ho an'ny mpampiasa amin'ity switch ity. Avelao ho 0 raha tianao ny rafitra no hikajy izany."
+
+#: setup.php
+msgid "High User Port Number"
+msgstr "Laharan'ny seranan'ny mpampiasa ambony"
+
+#: setup.php
+msgid "Disabled device type is not used."
+msgstr "Tsy ampiasaina ny karazana fitaovana tsy mavitrika."
+
+#: setup.php
+msgid "Fill in the name of this SNMP option set."
+msgstr "Fenoy ny anaran'ity andiana safidy SNMP ity."
+
+#: setup.php
+msgid "SNMP Version"
+msgstr "Kinova SNMP"
+
+#: setup.php
+msgid "Choose the SNMP version for this host."
+msgstr "Safidio ny kinova SNMP ho an'ity mpampiantrano ity."
+
+#: setup.php
+msgid "SNMP Community String"
+msgstr "Tady vondrona SNMP"
+
+#: setup.php
+msgid "Fill in the SNMP read community for this device."
+msgstr "Fenoy ny vondrona famakiana SNMP ho an'ity fitaovana ity."
+
+#: setup.php
+msgid "SNMP Port"
+msgstr "Seranana SNMP"
+
+#: setup.php
+msgid "SNMP Timeout"
+msgstr "Fe-potoana fiandrasana SNMP"
+
+#: setup.php
+msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
+msgstr "Ny isan'ny milisegondra fara fahabetsany hiandrasan'ny Cacti valiny SNMP (tsy mandeha miaraka amin'ny fanohanana php-snmp)."
+
+#: setup.php
+msgid "SNMP Retries"
+msgstr "Fanandramana indray SNMP"
+
+#: setup.php
+msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
+msgstr "Ny isan'ny fanandramana fara fahabetsany hifandraisana amin'ny fitaovana amin'ny alalan'ny tady famakiana SNMP alohan'ny hijanonana."
+
+#: setup.php
+msgid "Maximum OID's Per Get Request"
+msgstr "OID farany ambony isaky ny fangatahana Get"
+
+#: setup.php
+msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
+msgstr "Mamaritra ny isan'ny OID azo alaina ao anatin'ny fangatahana SNMP Get tokana."
+
+#: setup.php
+msgid "SNMP Username (v3)"
+msgstr "Anaran'ny mpampiasa SNMP (v3)"
+
+#: setup.php
+msgid "SNMP v3 username for this device."
+msgstr "Anaran'ny mpampiasa SNMP v3 ho an'ity fitaovana ity."
+
+#: setup.php
+msgid "SNMP Password (v3)"
+msgstr "Tenimiafina SNMP (v3)"
+
+#: setup.php
+msgid "SNMP v3 password for this device."
+msgstr "Tenimiafina SNMP v3 ho an'ity fitaovana ity."
+
+#: setup.php
+msgid "SNMP Auth Protocol (v3)"
+msgstr "Prôtôkôly fanamarinana SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Authorization Protocol."
+msgstr "Safidio ny prôtôkôly fanomezan-dàlana SNMPv3."
+
+#: setup.php
+msgid "SNMP Privacy Passphrase (v3)"
+msgstr "Fehezanteny miafina tsiambaratelo SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Passphrase."
+msgstr "Safidio ny fehezanteny miafina tsiambaratelo SNMPv3."
+
+#: setup.php
+msgid "SNMP Privacy Protocol (v3)"
+msgstr "Prôtôkôly tsiambaratelo SNMP (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Protocol."
+msgstr "Safidio ny prôtôkôly tsiambaratelo SNMPv3."
+
+#: setup.php
+msgid "SNMP Context (v3)"
+msgstr "Konteksta SNMP (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Context to use for this device."
+msgstr "Ampidiro ny Tontolon-kevitra SNMP v3 hampiasaina amin'ity fitaovana ity."
+
+#: setup.php
+msgid "SNMP Engine ID (v3)"
+msgstr "Engine ID SNMP (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Engine ID to use for this device."
+msgstr "Ampidiro ny ID Motera SNMP v3 hampiasaina amin'ity fitaovana ity."
+
+#: setup.php
+msgid "General Device Settings"
+msgstr "Fandrindrana ankapobeny ny Fitaovana"
+
+#: setup.php
+msgid "Give this device a meaningful name."
+msgstr "Omeo anarana mazava ity Fitaovana ity."
+
+#: setup.php
+msgid "Fill in the fully qualified hostname for this device."
+msgstr "Fenoy ny anaran'ny mpampiantrano feno ho an'ity fitaovana ity."
+
+#: setup.php
+msgid "Related Cacti Host"
+msgstr "Mpampiantrano Cacti mifandray"
+
+#: setup.php
+msgid "Given Mactrack Host is connected to this Cacti Host."
+msgstr "Ny Mpampiantrano Mactrack nomena dia mifandray amin'ity Mpampiantrano Cacti ity."
+
+#: setup.php
+msgid "Scan Type"
+msgstr "Karazana Fitiliana"
+
+#: setup.php
+msgid "Choose the scan type you wish to perform on this device."
+msgstr "Safidio ny karazana fitiliana tianao hatao amin'ity Fitaovana ity."
+
+#: setup.php
+msgid "Choose the site to associate with this device."
+msgstr "Safidio ny Toerana hampifandraisina amin'ity Fitaovana ity."
+
+#: setup.php
+msgid "Device Notes"
+msgstr "Fanamarihana momba ny fitaovana"
+
+#: setup.php
+msgid "This field value is useful to save general information about a specific device."
+msgstr "Ity sandan'ny saha ity dia ilaina hitahirizana fampahalalana ankapobeny momba ny fitaovana manokana iray."
+
+#: setup.php
+msgid "Disable Device"
+msgstr "Atsaharo ny fitaovana"
+
+#: setup.php
+msgid "Check this box to disable all checks for this host."
+msgstr "Mariho ity boaty ity mba hanajanonana ny fitsirihana rehetra ho an'ity mpampiantrano ity."
+
+#: setup.php
+msgid "Switch/Hub, Switch/Router Settings"
+msgstr "Fandrindrana Switch/Hub, Switch/Router"
+
+#: setup.php
+msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
+msgstr "Omeo ny lisitry ny seranana amin'ny switch/hub iray manokana izay tokony hodian-tsy hita ny valiny MAC avy aminy. Ohatra amin'izany ny seranana toy ny seranana rohy/trunk izay tsy azo avahana amin'ny seranan'ny mpampiasa hafa. Ny laharan'ny seranana tsirairay dia tsy maintsy sarahina amin'ny teboka roa, tsipika mitsangana, na elanelana ':', '|', ' '. Ohatra, azo ekena ny 'Fa0/1: Fa1/23' na 'Fa0/1 Fa1/23' ho an'ny karazana switch an'ny mpanamboatra sasany."
+
+#: setup.php
+msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
+msgstr "Azonao ampiasaina ny fandrindrana SNMP manokana na misafidy andiana SNMP. Amin'ny tranga faharoa, manandrana mitady ny fandrindrana marina avy amin'ny andiana SNMP ny mactrack"
+
+#: setup.php
+msgid "Read Strings"
+msgstr "Andian-tsoratra famakiana"
+
+#: setup.php
+msgid "<strong>DEPRECATED:</strong> SNMP community strings"
+msgstr "<strong>TSY AMPIASAINA INTSONY:</strong> Tady community SNMP"
+
+#: setup.php
+msgid "Specific SNMP Settings"
+msgstr "Fandrindrana SNMP manokana"
+
+#: setup.php
+msgid "Connectivity Options"
+msgstr "Safidy fifandraisana"
+
+#: setup.php
+msgid "Terminal Type"
+msgstr "Karazana terminal"
+
+#: setup.php
+msgid "Choose the terminal type that you use to connect to this device."
+msgstr "Safidio ny karazana terminal ampiasainao hifandraisana amin'ity Fitaovana ity."
+
+#: setup.php
+msgid "Telnet"
+msgstr "Telnet"
+
+#: setup.php
+msgid "SSH"
+msgstr "SSH"
+
+#: setup.php
+msgid "HTTP"
+msgstr "HTTP"
+
+#: setup.php
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: setup.php
+msgid "User Name"
+msgstr "Anaran'ny mpampiasa"
+
+#: setup.php
+msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
+msgstr "Ny anaran'ny mpampiasa hampiasaina amin'ny fomba fanamarinana manokana ampiasainao. Ohatra amin'izany ny SSH, RSH, HTML, sns."
+
+#: setup.php
+msgid "Password"
+msgstr "Tenimiafina"
+
+#: setup.php
+msgid "The password to be used for your custom authentication."
+msgstr "Ny tenimiafina hampiasaina amin'ny fanamarinana manokana nataonao."
+
+#: setup.php
+msgid "Private Key Path"
+msgstr "Lalan'ny fanalahidy manokana"
+
+#: setup.php
+msgid "The path to the private key used for SSH authentication."
+msgstr "Ny lalana mankany amin'ny fanalahidy manokana ampiasaina amin'ny fanamarinana SSH."
+
+#: setup.php
+msgid "Sequence"
+msgstr "Filaharana"
+
+#: setup.php
+msgid "Sequence of Item."
+msgstr "Filaharan'ny singa."
+
+#: setup.php
+msgid "General Site Settings"
+msgstr "Fandrindrana ankapobeny ny Toerana"
+
+#: setup.php
+msgid "Please enter a reasonable name for this site."
+msgstr "Ampidiro anarana mety tsara ho an'ity Toerana ity azafady."
+
+#: setup.php
+msgid "Primary Customer Contact"
+msgstr "Fifandraisana voalohany amin'ny mpanjifa"
+
+#: setup.php
+msgid "The principal customer contact name and number for this site."
+msgstr "Ny anarana sy laharan'ny mpanjifa tompon'andraikitra voalohany ho an'ity toerana ity."
+
+#: setup.php
+msgid "NetOps Contact"
+msgstr "Fifandraisana NetOps"
+
+#: setup.php
+msgid "Please principal network support contact name and number for this site."
+msgstr "Ampidiro ny anarana sy laharan'ny olona ifandraisana fototra momba ny fanohanana tambajotra ho an'ity Toerana ity azafady."
+
+#: setup.php
+msgid "Facilities Contact"
+msgstr "Fifandraisana amin'ny toerana"
+
+#: setup.php
+msgid "Please principal facilities/security contact name and number for this site."
+msgstr "Ampidiro ny anarana sy laharan'ny olona ifandraisana fototra momba ny fotodrafitrasa/fiarovana ho an'ity Toerana ity azafady."
+
+#: setup.php
+msgid "Site Information"
+msgstr "Fampahalalana momba ny toerana"
+
+#: setup.php
+msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
+msgstr "Omeo izay fampahalalana manokana momba ny toerana, amin'ny endrika malalaka, izay ahafahanao mitantana tsara kokoa ity toerana ity."
+
+#: setup.php
+msgid "General Mac Address Tracking Settings"
+msgstr "Fandrindrana ankapobeny ny fanaraha-maso adiresy MAC"
+
+#: setup.php
+msgid "MAC Address"
+msgstr "Adiresy MAC"
+
+#: setup.php
+msgid "Please enter the MAC Address to be watched for."
+msgstr "Ampidiro ny Adiresy MAC harahi-maso azafady."
+
+#: setup.php
+msgid "MAC Tracking Name/Email Subject"
+msgstr "Anaran'ny fanaraha-maso MAC/Lohahevitry ny Mailaka"
+
+#: setup.php
+msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
+msgstr "Ampidiro anarana mety tsara ho an'ity fidirana Fanaraha-maso MAC ity azafady.  Ho hita eo amin'ny lohahevitr'ny Mailakao ity fampahalalana ity"
+
+#: setup.php
+msgid "Ticket number for cross referencing with your corporate help desk system(s)."
+msgstr "Laharan'ny tapakila mba hampifandraisana azy amin'ny rafitra fanampiana (help desk) ao amin'ny orinasanao."
+
+#: setup.php
+msgid "Notification Schedule"
+msgstr "Fandaharam-potoana fampandrenesana"
+
+#: setup.php
+msgid "Choose how often an Email should be generated for this Mac Watch item."
+msgstr "Safidio ny fahatetehana tokony hamoronana Mailaka ho an'ity singa Mac Watch ity."
+
+#: setup.php
+msgid "First Occurrence Only"
+msgstr "Fisehoana Voalohany Ihany"
+
+#: setup.php
+msgid "All Occurrences"
+msgstr "Fisehoana rehetra"
+
+#: setup.php
+msgid "Every Hour"
+msgstr "Isan'ora"
+
+#: setup.php
+msgid "Email Addresses"
+msgstr "Adiresy mailaka"
+
+#: setup.php
+msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
+msgstr "Ampidiro adiresy Mailaka sarahin'ny teboka-faingo izay hampandrenesina ny toerana misy ity adiresy MAC ity."
+
+#: setup.php
+msgid "General Mac Address Authorization Settings"
+msgstr "Fandrindrana ankapobeny ny fanomezan-dalana adiresy MAC"
+
+#: setup.php
+msgid "MAC Address Match"
+msgstr "Fifanitsiana adiresy MAC"
+
+#: setup.php
+msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
+msgstr "Ampidiro ny Adiresy MAC na teny fampifanandrifiana Adiresy MAC hahazo alalana ho azy azafady.  Raha te hanome alalana vondrona Adiresy MAC ianao, dia azonao ampiasaina na aiza na aiza ao amin'ny Adiresy MAC ny marika solontena '&#37;'."
+
+#: setup.php
+msgid "Please add a reason for this entry."
+msgstr "Ampidiro ny antony ho an'ity fidirana ity azafady."
+

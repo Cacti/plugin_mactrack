@@ -1,0 +1,3597 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-18 18:36+0000\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Afrikaans\n"
+"Language: af-ZA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
+msgstr "MacTrack kon nie sy Verstek-terrein na herhaalde pogings inisialiseer nie. Gaan die Cacti-log na voordat u voortgaan."
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
+msgstr "MacTrack kon nie sy Verstek-terrein inisialiseer nie. Gaan die Cacti-log na voordat u voortgaan."
+
+#: lib/mactrack_activity.php
+msgid "Scanning devices"
+msgstr "Skandeer tans toestelle"
+
+#: lib/mactrack_activity.php
+msgid "Waiting for the DNS resolver"
+msgstr "Wag vir die DNS-oplosser"
+
+#: lib/mactrack_activity.php
+msgid "Transferring and aggregating scan results"
+msgstr "Besig om skandeerresultate oor te dra en saam te voeg"
+
+#: lib/mactrack_activity.php
+msgid "Maintaining port table partitions"
+msgstr "Onderhou tans poorttabelpartisies"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired port rows"
+msgstr "Skrap tans vervalde poortrye"
+
+#: lib/mactrack_activity.php
+msgid "Pruning scan dates"
+msgstr "Snoei tans skanderingsdatums"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired IP rows"
+msgstr "Skrap tans vervalde IP-rye"
+
+#: lib/mactrack_activity.php
+msgid "Optimizing the IP table"
+msgstr "Optimaliseer tans die IP-tabel"
+
+#: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
+#: mactrack_view_dot1x.php
+msgid "Idle"
+msgstr "Ledig"
+
+#: lib/mactrack_activity.php
+msgid "Upgrading: rebuilding aggregated ports"
+msgstr "Gradeer op: herbou saamgevoegde poorte"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "About %s rows left to copy (estimate)"
+msgstr "Ongeveer %s rye oor om te kopieer (beraming)"
+
+#: lib/mactrack_activity.php
+msgid "Repartitioning the port, IP and 802.1x tables"
+msgstr "Herpartisionering van die poort-, IP- en 802.1x-tabelle"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "%d devices in this scan"
+msgstr "%d toestelle in hierdie skandering"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "The process stopped during: %s"
+msgstr "Die proses het gestop tydens: %s"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "Scanning %d devices"
+msgstr "Skandeer tans %d toestelle"
+
+#: lib/mactrack_activity.php
+msgid "A database upgrade is running"
+msgstr "'n Databasisopgradering loop tans"
+
+#: lib/mactrack_activity.php
+msgid "The port, IP and 802.1x table partitioning has not finished"
+msgstr "Die partisionering van die poort-, IP- en 802.1x-tabelle is nog nie voltooi nie"
+
+#: lib/mactrack_activity.php
+msgid "The aggregated ports rebuild has not finished"
+msgstr "Die herbou van die saamgevoegde poorte is nog nie voltooi nie"
+
+#: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
+msgid "Running"
+msgstr "Loop"
+
+#: lib/mactrack_functions.php
+msgid "No method"
+msgstr "Geen metode"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Success"
+msgstr "Stawing suksesvol"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Failed"
+msgstr "Stawing het misluk"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Success"
+msgstr "Magtiging suksesvol"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Failed"
+msgstr "Magtiging het misluk"
+
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr "Nie in jongste skandering waargeneem nie"
+
+#: lib/mactrack_functions.php
+msgid "Locally Admined MAC"
+msgstr "Plaaslik geadministreerde MAC"
+
+#: lib/mactrack_functions.php
+msgid "Mactrack Device Tracking OUI Database Import Results"
+msgstr "Mactrack-toestelnasporing OUI-databasis-invoerresultate"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from IEEE"
+msgstr "Besig om OUI-databasis vanaf IEEE op te haal"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from the IEEE"
+msgstr "Besig om OUI-databasis vanaf die IEEE op te haal"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE Complete"
+msgstr "OUI-databasis-aflaai vanaf IEEE voltooi"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE FAILED"
+msgstr "OUI-databasis-aflaai vanaf IEEE MISLUK"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Entries Added/Updated in the database."
+msgstr "Daar is '%d' Inskrywings in die databasis Bygevoeg/Bygewerk."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Records Removed from the database."
+msgstr "Daar is '%d' Rekords uit die databasis Verwyder."
+
+#: lib/mactrack_functions.php
+msgid "atifIndexes data collection complete"
+msgstr "atifIndexes-data-insameling voltooi"
+
+#: lib/mactrack_functions.php
+msgid "atPhysAddress data collection complete"
+msgstr "atPhysAddress-data-insameling voltooi"
+
+#: lib/mactrack_functions.php
+msgid "atNetAddress data collection complete"
+msgstr "atNetAddress-data-insameling voltooi"
+
+#: lib/mactrack_functions.php
+msgid "atEntries assembly complete."
+msgstr "atEntries-samestelling voltooi."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "HOST: %s, IP address information collection complete"
+msgstr "GASHEER: %s, IP-adresinligting-insameling voltooi"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php
+msgid "Rescan Device"
+msgstr "Herskandeer toestel"
+
+#: lib/mactrack_functions.php
+msgid "View Non Interface Graphs"
+msgstr "Bekyk nie-koppelvlakgrafieke"
+
+#: lib/mactrack_functions.php
+msgid "No Non Interface Graphs in Cacti"
+msgstr "Geen nie-koppelvlakgrafieke in Cacti nie"
+
+#: lib/mactrack_functions.php
+msgid "View Interface Graphs"
+msgstr "Bekyk koppelvlakgrafieke"
+
+#: lib/mactrack_functions.php
+msgid "No Interface Graphs in Cacti"
+msgstr "Geen koppelvlakgrafieke in Cacti nie"
+
+#: lib/mactrack_functions.php
+msgid "Since Restart"
+msgstr "Sedert herbegin"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Down"
+msgstr "Af"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Up"
+msgstr "Op"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Unaliased"
+msgstr "Sonder alias"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors"
+msgstr "Foute"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards"
+msgstr "Verwerpings"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Graphless"
+msgstr "Sonder grafieke"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr "Gemagtig"
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
+msgstr "Ongemagtig"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Data"
+msgstr "Data"
+
+#: lib/mactrack_functions.php
+msgid "Voice"
+msgstr "Stem"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Rescan '%s'"
+msgstr "Herskandeer toestel '%s'"
+
+#: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr "Die herskandering het geen afvoer opgelewer nie."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr "Herskandering van toestel '%s' voltooi in %0.2f sekondes."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site scan '%s'"
+msgstr "Terreinskandering '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr "Skandering van terrein '%s' voltooi in %0.2f sekondes."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Enable '%s'"
+msgstr "Aktiveer toestel '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Disable '%s'"
+msgstr "Deaktiveer toestel '%s'"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_macwatch.php
+#: mactrack_snmp.php mactrack_utilities.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
+#: setup.php
+msgid "N/A"
+msgstr "N.v.t"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d minute"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d ure"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Days"
+msgstr "%d dae"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Weeks"
+msgstr "%d weke"
+
+#: lib/mactrack_functions.php
+msgid "Not Recorded"
+msgstr "Nie aangeteken nie"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
+msgstr "Status: Loop tans, Prosesse: %d, Vordering: %s, Laaste looptyd: %2.1f"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
+msgstr "Status: Onaktief, Laaste looptyd: %2.1f sekondes, Prosesse: %d prosesse, Toestelle: %d, Volgende looptyd: %s"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
+msgid "Disabled"
+msgstr "Gedeaktiveer"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Scanning Rate: Every %s"
+msgstr "Skandeertempo: Elke %s"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "View Interfaces"
+msgstr "Bekyk koppelvlakke"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "Not Detected"
+msgstr "Nie bespeur nie"
+
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr "Kontroleskerm"
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Sites"
+msgstr "Terreine"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Devices"
+msgstr "Toestelle"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "Koppelvlakke"
+
+#: lib/mactrack_functions.php
+msgid "IP Ranges"
+msgstr "IP-reekse"
+
+#: lib/mactrack_functions.php setup.php
+msgid "IP Addresses"
+msgstr "IP-adresse"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "MAC-adresse"
+
+#: lib/mactrack_functions.php
+msgid "Dot1x"
+msgstr "Dot1x"
+
+#: lib/mactrack_functions.php mactrack_view_graphs.php
+msgid "Graphs"
+msgstr "Grafieke"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Search"
+msgstr "Soek"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_devices.php mactrack_view_ips.php
+#: setup.php
+msgid "Default"
+msgstr "Verstek"
+
+#: lib/mactrack_functions.php
+msgid "Show Device Details"
+msgstr "Wys Toestelbesonderhede"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Go"
+msgstr "Gaan"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Clear"
+msgstr "Maak skoon"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Export"
+msgstr "Voer uit"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+msgid "Site"
+msgstr "Terrein"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_ips.php
+msgid "Any"
+msgstr "Enige"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "SubType"
+msgstr "Subtipe"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgstr "Is u seker u wil al die poort-na-MAC-na-IP-resultate uit die stelsel skrap?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
+msgstr "Is u seker u wil die vervalde poort-na-MAC-na-IP-resultate nou skrap?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
+msgstr "Is jy seker jy wil die gekaste Mactrack-skandeerfunksies suiwer?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Is u seker u wil al die saamgevoegde poort-na-MAC-na-IP-resultate uit die stelsel skrap?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Is u seker u wil al die saamgevoegde poort-na-MAC-na-IP-resultate uit die stelsel skrap en herskep?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
+msgstr "Is u seker u wil die IEEE-verskaffer MAC/OUI-databasis nou aflaai en invoer?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
+msgstr "Is jy seker jy wil die skandeerdatumlys nou vanuit die gestoorde Poort-na-MAC-na-IP-resultate herbou?"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
+msgstr "Herbou en ontleed die partisie wat die jongste poortwaarneming bevat, wat die huidige week is met weeklikse partisies. 'n Ongepartisioneerde tabel word ten volle geoptimaliseer. Geskeduleerde skanderings word oorgeslaan terwyl dit loop. Gaan voort?"
+
+#: lib/mactrack_functions.php
+msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
+msgstr "Voer hierdie instandhouding buite kantoorure uit. Die herbouing kopieer die volledige geskiedenis van die poort- (MAC-adres), IP-adres- en 802.1x-tabelle een na die ander en kan ure neem. Geskeduleerde skanderings word oorgeslaan, databasisinstandhouding wag, en soektogte vir MAC, IP en 802.1x wys 'n instandhoudingsboodskap totdat dit voltooi is. Maak voorsiening vir vrye skyfspasie vir 'n tweede kopie van elke tabel en sy indekse. Gaan voort?"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Scan Results"
+msgstr "Verwyder alle skandeerresultate"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Perform Database Maintenance"
+msgstr "Voer databasisinstandhouding uit"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Refresh Scanning Functions"
+msgstr "Verfris skandeerfunksies"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Aggregated Results"
+msgstr "Verwyder alle saamgevoegde resultate"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Perform Aggregate Table Rebuild"
+msgstr "Voer herbouing van saamgestelde tabel uit"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild IEEE Vendor MAC/OUI Database"
+msgstr "Herbou IEEE-verskaffer MAC/OUI-databasis"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Rebuild Scan Dates"
+msgstr "Herbou skanderingsdatums"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Optimize Port Table"
+msgstr "Optimaliseer poorttabel"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Configure Port and IP Address Partitioning"
+msgstr "Konfigureer poort- en IP-adrespartisionering"
+
+#: lib/mactrack_partition_rebuild.php
+msgid "The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
+msgstr "Die poort-, IP- en 802.1x-tabelle word herpartisioneer, of 'n herbou is nie voltooi nie, so hul geskiedenis kan nie nou verander word nie. Probeer weer wanneer cli/upgrade_partitioning.php klaar is."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished."
+msgstr "MacTrack is in instandhoudingsmodus vir IP-adres-, MAC-adres- en 802.1x-soektogte terwyl sy geskiedenistabelle herpartisioneer word. Resultate is onvolledig totdat die partisionering voltooi is."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
+msgstr "MacTrack is in instandhoudingsmodus vir IP-adres-, MAC-adres- en 802.1x-soektogte omdat die partisionering van sy geskiedenistabelle nie voltooi het nie. Resultate is onvolledig. Voer cli/upgrade_partitioning.php weer uit om dit te hervat."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "Maintenance Mode"
+msgstr "Onderhoudmodus"
+
+#: mactrack_actions.php
+#, php-format
+msgid "Mactrack Device: (%s) successfully updated"
+msgstr "Mactrack-toestel: (%s) suksesvol bygewerk"
+
+#: mactrack_actions.php
+msgid "Import into Mactrack Database"
+msgstr "Voer in Mactrack-databasis in"
+
+#: mactrack_actions.php
+msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
+msgstr "Klik 'Gaan voort' om die volgende Toestel na Mactrack in te voer? Spesifiseer asseblief bykomende Mactrack-toestelopsies soos hieronder gegee."
+
+#: mactrack_actions.php
+msgid "We will use these devices SNMP options for the Mactrack Device as well."
+msgstr "Ons sal hierdie toestelle se SNMP-opsies ook vir die Mactrack-toestel gebruik."
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Router"
+msgstr "Nie van toepassing nie - Roeteerder"
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Switch/Hub"
+msgstr "Nie van toepassing nie - Skakelaar/Spilpunt"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Delete"
+msgstr "Skrap"
+
+#: mactrack_device_types.php mactrack_snmp.php
+msgid "Duplicate"
+msgstr "Dupliseer"
+
+#: mactrack_device_types.php
+msgid "--dup--"
+msgstr "--dup--"
+
+#: mactrack_device_types.php
+msgid "You must select at least one device type."
+msgstr "Jy moet ten minste een toesteltipe kies."
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Continue"
+msgstr "Gaan voort"
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to delete the following Device Type(s)."
+msgstr "Klik 'Gaan voort' om die volgende Toesteltipe(s) te skrap."
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
+msgstr "Klik 'Gaan voort' om die volgende Toesteltipe(s) te dupliseer. Jy kan opsioneel die beskrywing vir die nuwe toesteltipes verander. Andersins, moenie die waarde hieronder verander nie en die oorspronklike naam sal met 'n nuwe agtervoegsel gerepliseer word."
+
+#: mactrack_device_types.php
+msgid "Device Type Prefix:"
+msgstr "Toesteltipe-voorvoegsel:"
+
+#: mactrack_device_types.php
+msgid "<description> (1)"
+msgstr "<description> (1)"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Cancel"
+msgstr "Kanselleer"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Return"
+msgstr "Keer terug"
+
+#: mactrack_device_types.php
+msgid "New Type"
+msgstr "Nuwe tipe"
+
+#: mactrack_device_types.php
+msgid "Cisco"
+msgstr "Cisco"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "There were %d Device Types Added!"
+msgstr "Daar is %d Toesteltipes bygevoeg!"
+
+#: mactrack_device_types.php
+msgid "No New Device Types Found!"
+msgstr "Geen nuwe toesteltipes gevind nie!"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import Results"
+msgstr "Invoerresultate"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Cacti has imported the following items:"
+msgstr "Cacti het die volgende items ingevoer:"
+
+#: mactrack_device_types.php
+msgid "Import Mactrack Device Types"
+msgstr "Voer Mactrack-toesteltipes in"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from Local File"
+msgstr "Voer Toesteltipes vanaf Plaaslike Lêer in"
+
+#: mactrack_device_types.php
+msgid "Please specify the location of the CSV file containing your device type information."
+msgstr "Spesifiseer asseblief die ligging van die CSV-lêer wat jou toesteltipe-inligting bevat."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Overwrite Existing Data?"
+msgstr "Oorskryf bestaande data?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
+msgstr "Moet die invoerproses toegelaat word om bestaande data oor te skryf?  Let asseblief daarop dat dit nie beteken om ou rye te skrap nie, maar slegs om duplikaatrye te vervang."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Allow Existing Rows to be Updated?"
+msgstr "Laat toe dat bestaande rye bygewerk word?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Required File Format Notes"
+msgstr "Vereiste lêerformaatnotas"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The file must contain a header row with the following column headings."
+msgstr "Die lêer moet 'n opskrifry met die volgende kolomopskrifte bevat."
+
+#: mactrack_device_types.php
+msgid " - A common name for the device.  For example Cisco 6509 Switch"
+msgstr " - 'n Algemene naam vir die toestel. Byvoorbeeld Cisco 6509 Switch"
+
+#: mactrack_device_types.php
+msgid " - The vendor who produces this device"
+msgstr " - Die verskaffer wat hierdie toestel vervaardig"
+
+#: mactrack_device_types.php
+msgid " - The type of device this is.  See the notes below for this integer value"
+msgstr " - Die tipe toestel wat dit is. Sien die notas hieronder vir hierdie heelgetalwaarde"
+
+#: mactrack_device_types.php
+msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
+msgstr " - 'n Unieke stel karakters uit die snmp sysDescr wat hierdie toestel uniek identifiseer"
+
+#: mactrack_device_types.php
+msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
+msgstr " - Die verskaffer-spesifieke snmp sysObjectID wat hierdie toestel van die volgende onderskei"
+
+#: mactrack_device_types.php
+msgid " - The scanning function that will be used to scan this device type"
+msgstr " - Die skandeerfunksie wat gebruik sal word om hierdie toesteltipe te skandeer"
+
+#: mactrack_device_types.php
+msgid " - The IP scanning function that will be used to scan this device type"
+msgstr " - Die IP-skandeerfunksie wat gebruik sal word om hierdie toesteltipe te skandeer"
+
+#: mactrack_device_types.php
+msgid " - The 802.1x scanning function that will be used to scan this device type"
+msgstr " - Die 802.1x-skandeerfunksie wat gebruik sal word om hierdie toesteltipe te skandeer"
+
+#: mactrack_device_types.php
+msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
+msgstr " - Indien die reeksnommer vir hierdie toesteltipe via 'n SNMP-navraag verkry kan word, voeg die OID hier by"
+
+#: mactrack_device_types.php
+msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
+msgstr " - Indien jou skandeerfunksie nie die vermoë het om stam- of skakelpoorte te isoleer nie, is dit die beginpoortnommer vir gebruikerspoorte"
+
+#: mactrack_device_types.php
+msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
+msgstr " - Dieselfde as die lowPort behalwe dat dit die hoë genommerde gebruikerspoortnommer is"
+
+#: mactrack_device_types.php
+msgid " - Disabled type is not used"
+msgstr " - Gedeaktiveerde tipe word nie gebruik nie"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The primary key for this table is a combination of the following three fields:"
+msgstr "Die primêre sleutel vir hierdie tabel is 'n kombinasie van die volgende drie velde:"
+
+#: mactrack_device_types.php
+msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
+msgstr "Daarom, as u probeer om duplikaat-toesteltipes in te voer, sal die bestaande data met die nuwe inligting bygewerk word."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid " is an integer field and must be one of the following:"
+msgstr " is 'n heelgetalveld en moet een van die volgende wees:"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "1 - Switch/Hub"
+msgstr "1 - Skakelaar/Spilpunt"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "2 - Switch/Router"
+msgstr "2 - Skakelaar/Roeteerder"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "3 - Router"
+msgstr "3 - Roeteerder"
+
+#: mactrack_device_types.php
+msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
+msgstr "Die Toestel se toesteltipe word bepaal deur sy SNMP-agent vir die sysObjectID en sysDescription te skandeer en dit met waardes in die toesteltipedatabasis te vergelyk. Die eerste ooreenkoms wat in die databasis gevind word, word gebruik vir hoe om dit te skandeer. Daarom is dit baie belangrik dat u geldige sysObjectID_match, sysDescr_match en skanderingsfunksie vir u Toestelle kies."
+
+#: mactrack_device_types.php mactrack_devices.php setup.php
+msgid "Switch/Hub"
+msgstr "Skakelaar/Spilpunt"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Switch/Router"
+msgstr "Skakelaar/Roeteerder"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Router"
+msgstr "Roeteerder"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
+msgstr "OPSKRIFREËL SUKSESVOL VERWERK:  <br>Kolomme gevind was: %s"
+
+#: mactrack_device_types.php mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
+msgstr "OPSKRIFREËL-VERWERKINGSFOUT: Vereiste veld ontbreek <br>Kolomme gevind was: %s"
+
+#: mactrack_device_types.php
+msgid "Unknown Assume \"Switch/Hub\""
+msgstr "Onbekend, aanvaar \"Skakelaar/Spil\""
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "INVOEGING HET GESLAAG: Verskaffer: %s, Beskrywing: %s, Tipe: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "INVOEGING HET MISLUK: Verskaffer: %s, Beskrywing: %s, Tipe: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "INVOEGING OORGESLAAN, BESTAANDE: Verskaffer: %s, Beskrywing: %s, Tipe: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "Mactrack Device Types [edit: %s]"
+msgstr "Mactrack-toesteltipes [wysig: %s]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Types [new]"
+msgstr "Mactrack-toesteltipes [nuut]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Type Filters"
+msgstr "Mactrack-toesteltipefilters"
+
+#: mactrack_device_types.php
+msgid "Device Type Description"
+msgstr "Toesteltipebeskrywing"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Device Type"
+msgstr "Toesteltipe"
+
+#: mactrack_device_types.php
+msgid "Port Scanner"
+msgstr "Poortskandeerder"
+
+#: mactrack_device_types.php
+msgid "IP Scanner"
+msgstr "IP-skandeerder"
+
+#: mactrack_device_types.php
+msgid "Dot1x Scanner"
+msgstr "Dot1x-skandeerder"
+
+#: mactrack_device_types.php
+msgid "sysDescription Match"
+msgstr "sysDescription-ooreenkoms"
+
+#: mactrack_device_types.php
+msgid "Vendor OID Match"
+msgstr "Verskaffer-OID-ooreenkoms"
+
+#: mactrack_device_types.php setup.php
+msgid "Device Types"
+msgstr "Toesteltipes"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "No"
+msgstr "Nee"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "Yes"
+msgstr "Ja"
+
+#: mactrack_device_types.php
+msgid "No Mactrack Device Types Found"
+msgstr "Geen Mactrack-toesteltipes gevind nie"
+
+#: mactrack_device_types.php
+msgid "Submit Query"
+msgstr "Dien navraag in"
+
+#: mactrack_device_types.php
+msgid "Clear Filtered Results"
+msgstr "Maak gefiltreerde resultate skoon"
+
+#: mactrack_device_types.php
+msgid "Rescan"
+msgstr "Herskandeer"
+
+#: mactrack_device_types.php
+msgid "Scan Active Devices for Unknown Device Types"
+msgstr "Skandeer aktiewe toestelle vir onbekende toesteltipes"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import"
+msgstr "Voer in"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from a CSV File"
+msgstr "Voer Toesteltipes vanaf 'n CSV-lêer in"
+
+#: mactrack_device_types.php
+msgid "Export Device Types to Share with Others"
+msgstr "Voer toesteltipes uit om met ander te deel"
+
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Vendor"
+msgstr "Verskaffer"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php setup.php
+msgid "All"
+msgstr "Almal"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
+msgid "Type"
+msgstr "Tipe"
+
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Enabled"
+msgstr "Geaktiveer"
+
+#: mactrack_devices.php
+msgid "Enable"
+msgstr "Aktiveer"
+
+#: mactrack_devices.php mactrack_macwatch.php
+msgid "Disable"
+msgstr "Deaktiveer"
+
+#: mactrack_devices.php
+msgid "Change SNMP Options"
+msgstr "Verander SNMP-opsies"
+
+#: mactrack_devices.php
+msgid "Change Device Port Values"
+msgstr "Verander Toestelpoortwaardes"
+
+#: mactrack_devices.php
+msgid "Connect to Cacti Host via Hostname"
+msgstr "Verbind aan Cacti-gasheer via gasheernaam"
+
+#: mactrack_devices.php
+msgid "Copy SNMP Settings from Cacti Host"
+msgstr "Kopieer SNMP-instellings vanaf Cacti-gasheer"
+
+#: mactrack_devices.php
+msgid "You must select at least one device."
+msgstr "Jy moet ten minste een toestel kies."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to enable the following devices."
+msgstr "Klik 'Gaan voort' om die volgende toestelle te aktiveer."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to disable the following devices."
+msgstr "Klik 'Gaan voort' om die volgende toestelle te deaktiveer."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Klik 'Gaan voort' om SNMP-parameters vir die volgende toestelle te verander, merk die blokkie langs die velde wat jy wil bywerk, en vul die nuwe waarde in."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Klik 'Gaan voort' om boonste of onderste poortparameters vir die volgende toestelle te verander, merk die blokkie langs die velde wat jy wil bywerk, en vul die nuwe waarde in."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
+msgstr "Klik 'Gaan voort' om die volgende toestelle aan hul onderskeie Cacti-toestel te koppel. Die verwantskap sal op gelyke gasheername gebou word. Beskrywing sal ook bygewerk word."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
+msgstr "Klik 'Gaan voort' om SNMP-instellings vanaf gekoppelde Cacti-toestel na Mactrack-toestel te kopieer. Alle nie-gekoppelde Toestelle sal stilweg oorgeslaan word. SNMP-herprobeerslae sal vanaf Ping-herprobeerslae geneem word."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to delete the following Devices"
+msgstr "Klik 'Gaan voort' om die volgende Toestelle te skrap"
+
+#: mactrack_devices.php
+msgid "Import Mactrack Devices"
+msgstr "Voer Mactrack-toestelle in"
+
+#: mactrack_devices.php
+msgid "Import Devices from Local File"
+msgstr "Voer Toestelle vanaf Plaaslike Lêer in"
+
+#: mactrack_devices.php
+msgid "Please specify the location of the CSV file containing your device information."
+msgstr "Spesifiseer asseblief die ligging van die CSV-lêer wat jou toestelinligting bevat."
+
+#: mactrack_devices.php
+msgid " - The SiteID known to Mactrack for this device"
+msgstr " - Die SiteID wat aan Mactrack bekend is vir hierdie toestel"
+
+#: mactrack_devices.php
+msgid " - A simple name for the device.  For example Cisco 6509 Switch"
+msgstr " - 'n Eenvoudige naam vir die toestel. Byvoorbeeld Cisco 6509 Switch"
+
+#: mactrack_devices.php
+msgid " - The IP Address or DNS Name for the device"
+msgstr " - Die IP-adres of DNS-naam vir die toestel"
+
+#: mactrack_devices.php
+msgid " - More detailed information about the device, including location, environmental conditions, etc."
+msgstr " - Meer gedetailleerde inligting oor die toestel, insluitend ligging, omgewingstoestande, ens."
+
+#: mactrack_devices.php
+msgid " - A list of ports that should not be scanned for user devices"
+msgstr " - 'n Lys poorte wat nie vir gebruikerstoestelle geskandeer moet word nie"
+
+#: mactrack_devices.php
+msgid " - Redundant information indicating the intended device type.  See below for valid values."
+msgstr " - Oortollige inligting wat die beoogde toesteltipe aandui. Sien hieronder vir geldige waardes."
+
+#: mactrack_devices.php
+msgid " - Id of a set of SNMP options"
+msgstr " - ID van 'n stel SNMP-opsies"
+
+#: mactrack_devices.php
+msgid " - The current snmp read string for the device"
+msgstr " - Die huidige snmp-leesstring vir die toestel"
+
+#: mactrack_devices.php
+msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
+msgstr " - Die snmp-weergawe waarmee jy hierdie toestel wil skandeer. Geldige waardes is 1, 2 en 3"
+
+#: mactrack_devices.php
+msgid " - The UDP port that the snmp agent is running on"
+msgstr " - Die UDP-poort waarop die snmp-agent loop"
+
+#: mactrack_devices.php
+msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
+msgstr " - Die uitteltyd in millisekondes om vir 'n snmp-reaksie te wag voordat weer probeer word"
+
+#: mactrack_devices.php
+msgid " - The number of times to retry a snmp request before giving up"
+msgstr " - Die aantal kere om 'n snmp-versoek weer te probeer voordat opgegee word"
+
+#: mactrack_devices.php
+msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
+msgstr " - Spesifiseer die aantal OID's wat in 'n enkele SNMP Get-versoek verkry kan word"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP username"
+msgstr " - SNMP V3: SNMP-gebruikersnaam"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP password"
+msgstr " - SNMP V3: SNMP-wagwoord"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP authentication protocol"
+msgstr " - SNMP V3: SNMP-verifikasieprotokol"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy passphrase"
+msgstr " - SNMP V3: SNMP-privaatheidswagfrase"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy protocol"
+msgstr " - SNMP V3: SNMP-privaatheidsprotokol"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP context"
+msgstr " - SNMP V3: SNMP-konteks"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP engine id"
+msgstr " - SNMP V3: SNMP-enjin-ID"
+
+#: mactrack_devices.php
+msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
+msgstr "Daarom, as u probeer om duplikaat-toestelle in te voer, sal slegs die data wat u spesifiseer bygewerk word."
+
+#: mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
+msgstr "OPSKRIFREËL SUKSESVOL VERWERK: <br>Kolomme gevind was: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "INVOEGING HET GESLAAG: Gasheernaam: Terrein-ID: %s, Toestelnaam: %s, Gasheernaam %s, SNMP-poort: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "INVOEGING HET MISLUK: Terrein-ID: %s, Toestelnaam: %s, Gasheernaam %s, SNMP-poort: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "INVOEGING OORGESLAAN, BESTAANDE: Terrein-ID: %s, Toestelnaam: %s, Gasheernaam %s, SNMP-poort: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "Mactrack Devices [edit: %s]"
+msgstr "Mactrack-toestelle [wysig: %s]"
+
+#: mactrack_devices.php
+msgid "Mactrack Devices [new]"
+msgstr "Mactrack-toestelle [nuut]"
+
+#: mactrack_devices.php
+msgid "SNMP Information"
+msgstr "SNMP-inligting"
+
+#: mactrack_devices.php
+msgid "System:"
+msgstr "Stelsel:"
+
+#: mactrack_devices.php
+msgid "Uptime:"
+msgstr "Bedryfstyd:"
+
+#: mactrack_devices.php
+msgid "Hostname:"
+msgstr "Gasheernaam:"
+
+#: mactrack_devices.php
+msgid "ObjectID:"
+msgstr "Objek-ID:"
+
+#: mactrack_devices.php
+msgid "Mactrack Device Filters"
+msgstr "Mactrack-toestelfilters"
+
+#: mactrack_devices.php mactrack_view_devices.php setup.php
+msgid "Device Name"
+msgstr "Toestelnaam"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Site Name"
+msgstr "Terreinnaam"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Status"
+msgstr "Status"
+
+#: mactrack_devices.php mactrack_view_devices.php mactrack_view_interfaces.php
+#: setup.php
+msgid "Hostname"
+msgstr "Gasheernaam"
+
+#: mactrack_devices.php
+msgid "Total IPs"
+msgstr "Totale IP's"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports"
+msgstr "Gebruikerspoorte"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports Up"
+msgstr "Gebruikerspoorte op"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Trunk Ports"
+msgstr "Trunk-poorte"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Active Macs"
+msgstr "Aktiewe MAC's"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Last Duration"
+msgstr "Laaste tydsduur"
+
+#: mactrack_devices.php
+msgid "No Mactrack Devices"
+msgstr "Geen Mactrack-toestelle nie"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: setup.php
+msgid "None"
+msgstr "Geen"
+
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
+msgid "Error"
+msgstr "Fout"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "No Cacti Link"
+msgstr "Geen Cacti-skakel nie"
+
+#: mactrack_macauth.php
+msgid "You must select at least one Authorized Mac to delete."
+msgstr "Jy moet ten minste een Gemagtigde MAC kies om te skrap."
+
+#: mactrack_macauth.php
+msgid "Click 'Continue' to delete the following Authorized Mac's?"
+msgstr "Klik 'Gaan voort' om die volgende Gemagtigde MAC's te skrap?"
+
+#: mactrack_macauth.php
+#, php-format
+msgid "Mactrack MacAuth [edit: %s]"
+msgstr "Mactrack MacAuth [wysig: %s]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth [new]"
+msgstr "Mactrack MacAuth [nuut]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth Filters"
+msgstr "Mactrack MacAuth-filters"
+
+#: mactrack_macauth.php mactrack_macwatch.php
+msgid "Mac Address"
+msgstr "Mac-adres"
+
+#: mactrack_macauth.php setup.php
+msgid "Reason"
+msgstr "Rede"
+
+#: mactrack_macauth.php
+msgid "Added/Modified"
+msgstr "Bygevoeg/Gewysig"
+
+#: mactrack_macauth.php
+msgid "By"
+msgstr "Deur"
+
+#: mactrack_macauth.php
+msgid "Authorized Mac Addresses"
+msgstr "Gemagtigde MAC-adresse"
+
+#: mactrack_macauth.php
+msgid "No Authorized Mac Addresses Found"
+msgstr "Geen gemagtigde MAC-adresse gevind nie"
+
+#: mactrack_macauth.php mactrack_vendormacs.php mactrack_view_macs.php
+msgid "MAC's"
+msgstr "MAC's"
+
+#: mactrack_macwatch.php
+msgid "Click 'Continue' to delete the following watched Mac's?"
+msgstr "Klik 'Gaan voort' om die volgende dopgehoude MAC's te skrap?"
+
+#: mactrack_macwatch.php
+#, php-format
+msgid "Mactrack MacWatch [edit: %s]"
+msgstr "Mactrack MacWatch [wysig: %s]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch [new]"
+msgstr "Mactrack MacWatch [nuut]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch Filters"
+msgstr "Mactrack MacWatch-filters"
+
+#: mactrack_macwatch.php
+msgid "Watch Name"
+msgstr "Dophounaam"
+
+#: mactrack_macwatch.php setup.php
+msgid "Ticket Number"
+msgstr "Kaartjienommer"
+
+#: mactrack_macwatch.php
+msgid "First Seen"
+msgstr "Eers gesien"
+
+#: mactrack_macwatch.php
+msgid "Last Seen"
+msgstr "Laaste gesien"
+
+#: mactrack_macwatch.php
+msgid "Watches"
+msgstr "Dophouitems"
+
+#: mactrack_macwatch.php
+msgid "No Mactrack Watched Macs Found"
+msgstr "Geen dopgehoue Mactrack-MAC's gevind nie"
+
+#: mactrack_sites.php
+msgid "Click 'Continue' to delete the following Site(s)?"
+msgstr "Klik 'Gaan voort' om die volgende Terrein(e) te skrap?"
+
+#: mactrack_sites.php
+msgid "You must select at least one site."
+msgstr "Jy moet ten minste een terrein kies."
+
+#: mactrack_sites.php
+#, php-format
+msgid "Mactrack Site [edit: %s]"
+msgstr "Mactrack-terrein [wysig: %s]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site [new]"
+msgstr "Mactrack-terrein [nuut]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site Filters"
+msgstr "Mactrack-terreinfilters"
+
+#: mactrack_sites.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "Total IP's"
+msgstr "Totale IP's"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "MACS Found"
+msgstr "MAC's gevind"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Device Errors"
+msgstr "Toestelfoute"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "No Mactrack Sites Found"
+msgstr "Geen Mactrack-terreine gevind nie"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Devices"
+msgstr "Totale toestelle"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total User Ports"
+msgstr "Totale gebruikerspoorte"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Oper Ports"
+msgstr "Totale operasionele poorte"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Trunks"
+msgstr "Totale trunks"
+
+#: mactrack_snmp.php
+msgid "You must select at least one SNMP Option."
+msgstr "Jy moet ten minste een SNMP-opsie kies."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to delete the following SNMP Option(s)."
+msgstr "Klik 'Gaan voort' om die volgende SNMP-opsie(s) te skrap."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
+msgstr "Klik 'Gaan voort' om die volgende SNMP-opsie(s) te dupliseer. Jy kan opsioneel die titelformaat vir die nuwe SNMP-opsies verander."
+
+#: mactrack_snmp.php
+msgid "Name Format:"
+msgstr "Naamformaat:"
+
+#: mactrack_snmp.php
+msgid "<name> (1)"
+msgstr "<name> (1)"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Options [edit %s]"
+msgstr "SNMP-opsies [wysig %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Options [new]"
+msgstr "SNMP-opsies [nuut]"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Option Set [edit: %s]"
+msgstr "SNMP-opsiestel [wysig: %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Option Set [new]"
+msgstr "SNMP-opsiestel [nuut]"
+
+#: mactrack_snmp.php setup.php
+msgid "Mactrack SNMP Options"
+msgstr "Mactrack SNMP-opsies"
+
+#: mactrack_snmp.php
+msgid "Item"
+msgstr "Item"
+
+#: mactrack_snmp.php setup.php
+msgid "Version"
+msgstr "Weergawe"
+
+#: mactrack_snmp.php setup.php
+msgid "Community"
+msgstr "Gemeenskap"
+
+#: mactrack_snmp.php setup.php
+msgid "Port"
+msgstr "Poort"
+
+#: mactrack_snmp.php setup.php
+msgid "Timeout"
+msgstr "Uitteltyd"
+
+#: mactrack_snmp.php setup.php
+msgid "Retries"
+msgstr "Herpogings"
+
+#: mactrack_snmp.php
+msgid "Max OIDs"
+msgstr "Maks. OID's"
+
+#: mactrack_snmp.php mactrack_view_dot1x.php
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: mactrack_snmp.php
+msgid "Auth Proto"
+msgstr "Stawingsprotokol"
+
+#: mactrack_snmp.php
+msgid "Priv Proto"
+msgstr "Privaatheidsprotokol"
+
+#: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Actions"
+msgstr "Aksies"
+
+#: mactrack_snmp.php
+msgid "No SNMP Items Found"
+msgstr "Geen SNMP-items gevind nie"
+
+#: mactrack_snmp.php
+msgid "Title of SNMP Option Set"
+msgstr "Titel van SNMP-opsieset"
+
+#: mactrack_snmp.php
+msgid "SNMP Settings"
+msgstr "SNMP-instellings"
+
+#: mactrack_snmp.php
+msgid "No SNMP Option Sets Found"
+msgstr "Geen SNMP-opsiestelle gevind nie"
+
+#: mactrack_snmp.php
+msgid "Options"
+msgstr "Opsies"
+
+#: mactrack_utilities.php
+msgid "Mactrack Database Results"
+msgstr "Mactrack-databasisresultate"
+
+#: mactrack_utilities.php
+msgid "Mactrack Process Status"
+msgstr "Mactrack-prosesstatus"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Refresh"
+msgstr "Verfris"
+
+#: mactrack_utilities.php
+msgid "Current Process Status"
+msgstr "Huidige Prosesstatus"
+
+#: mactrack_utilities.php
+msgid "The Mactrack Poller is:"
+msgstr "Die Mactrack-poller is:"
+
+#: mactrack_utilities.php
+msgid "Running Processes:"
+msgstr "Lopende prosesse:"
+
+#: mactrack_utilities.php
+msgid "Last Time Poller Started:"
+msgstr "Laaste keer wat Poller begin het:"
+
+#: mactrack_utilities.php
+msgid "Poller Frequency:"
+msgstr "Poller-frekwensie:"
+
+#: mactrack_utilities.php
+msgid "Approx. Next Runtime:"
+msgstr "Ongev. volgende looptyd:"
+
+#: mactrack_utilities.php
+msgid "Database Maintenance Information"
+msgstr "Databasis-instandhoudingsinligting"
+
+#: mactrack_utilities.php
+msgid "Last DB Maintenance Time:"
+msgstr "Laaste DB-onderhoudstyd:"
+
+#: mactrack_utilities.php
+msgid "Next DB Maintenance Time:"
+msgstr "Volgende DB-instandhoudingstyd:"
+
+#: mactrack_utilities.php
+msgid "Run Time Details"
+msgstr "Looptydbesonderhede"
+
+#: mactrack_utilities.php
+msgid "Last Poller Runtime:"
+msgstr "Laaste Poller-looptyd:"
+
+#: mactrack_utilities.php
+msgid "Last Poller Maintenance Runtime:"
+msgstr "Laaste Poller-onderhoudslooptyd:"
+
+#: mactrack_utilities.php
+msgid "Maximum Concurrent Processes:"
+msgstr "Maksimum gelyktydige prosesse:"
+
+#: mactrack_utilities.php
+msgid "processes"
+msgstr "prosesse"
+
+#: mactrack_utilities.php
+msgid "Maximum Per Device Scan Time:"
+msgstr "Maksimum skandeertyd per toestel:"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "minutes"
+msgstr "minute"
+
+#: mactrack_utilities.php
+msgid "DNS Configuration Information"
+msgstr "DNS-konfigurasie-inligting"
+
+#: mactrack_utilities.php
+msgid "Reverse DNS Resolution is"
+msgstr "Omgekeerde DNS-omsetting is"
+
+#: mactrack_utilities.php
+msgid "Primary DNS Server:"
+msgstr "Primêre DNS-bediener:"
+
+#: mactrack_utilities.php
+msgid "Secondary DNS Server:"
+msgstr "Sekondêre DNS-bediener:"
+
+#: mactrack_utilities.php
+msgid "DNS Resolution Timeout:"
+msgstr "DNS-resolusie-uitteltyd:"
+
+#: mactrack_utilities.php
+msgid "milliseconds"
+msgstr "millisekondes"
+
+#: mactrack_utilities.php
+msgid "Running Process Summary"
+msgstr "Opsomming van lopende prosesse"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Not Running"
+msgstr "Die DNS-oplosser loop nie"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Running"
+msgstr "Die DNS-oplosser loop"
+
+#: mactrack_utilities.php
+msgid "Date Started"
+msgstr "Datum begin"
+
+#: mactrack_utilities.php
+msgid "Completed"
+msgstr "Voltooi"
+
+#: mactrack_utilities.php
+msgid "Waiting"
+msgstr "Wag"
+
+#: mactrack_utilities.php
+msgid "Other"
+msgstr "Ander"
+
+#: mactrack_utilities.php
+msgid "Current Activity"
+msgstr "Huidige Aktiwiteit"
+
+#: mactrack_utilities.php
+msgid "State:"
+msgstr "Toestand:"
+
+#: mactrack_utilities.php
+msgid "Since:"
+msgstr "Sedert:"
+
+#: mactrack_utilities.php
+msgid "Detail:"
+msgstr "Besonderhede:"
+
+#: mactrack_utilities.php
+msgid "Last Skipped Poller Run:"
+msgstr "Laaste oorgeslaande Poller-lopie:"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance Steps"
+msgstr "Laaste onderhoudstappe"
+
+#: mactrack_utilities.php
+msgid "Seconds"
+msgstr "Sekondes"
+
+#: mactrack_utilities.php
+msgid "Step"
+msgstr "Stap"
+
+#: mactrack_utilities.php
+msgid "Table Sizes"
+msgstr "Tabelgroottes"
+
+#: mactrack_utilities.php
+msgid "Free"
+msgstr "Vry"
+
+#: mactrack_utilities.php
+msgid "Index"
+msgstr "Indeks"
+
+#: mactrack_utilities.php
+msgid "Rows (estimate)"
+msgstr "Rye (beraming)"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Tabel"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database runs on another host"
+msgstr "Onbekend: die databasis loop op 'n ander gasheer"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database data directory cannot be found from this host"
+msgstr "Onbekend: die databasis se datagids kan nie vanaf hierdie gasheer gevind word nie"
+
+#: mactrack_utilities.php
+msgid "Database Disk Free:"
+msgstr "Databasis vrye skyfspasie:"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the database: %s"
+msgstr "Die volgende aantal rekords is uit die databasis verwyder: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s"
+msgstr "Die volgende aantal rekords is uit die saamgevoegde tabel verwyder: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
+msgstr "Die volgende aantal rekords is uit die saamgevoegde tabel verwyder: %s. En %s rekords sal bygevoeg word."
+
+#: mactrack_utilities.php
+msgid "Mactrack Scan Date Rebuild Results"
+msgstr "Mactrack-skandeerdatum-herbouresultate"
+
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr "Herbou van skandeerdatum het misluk. Gaan die Cacti-log na en probeer weer."
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Scan dates rebuilt: %d"
+msgstr "Skandeerdatums herbou: %d"
+
+#: mactrack_utilities.php
+msgid "A scan or a port table conversion is running. Try again when it has finished."
+msgstr "'n Skandering of 'n poorttabel-omskakeling loop tans. Probeer weer wanneer dit voltooi is."
+
+#: mactrack_utilities.php setup.php
+msgid "One per Scan"
+msgstr "Een per skandering"
+
+#: mactrack_utilities.php setup.php
+msgid "Hourly"
+msgstr "Uurliks"
+
+#: mactrack_utilities.php setup.php
+msgid "Daily"
+msgstr "Daagliks"
+
+#: mactrack_utilities.php setup.php
+msgid "Weekly"
+msgstr "Weekliks"
+
+#: mactrack_utilities.php
+msgid "Not partitioned"
+msgstr "Nie gepartisioneer nie"
+
+#: mactrack_utilities.php
+msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
+msgstr "Daaglikse partisies van 'n vroeër MacTrack-vrystelling. Omskakeling word benodig."
+
+#: mactrack_utilities.php
+msgid "Partitioned by scan date"
+msgstr "Gepartisioneer volgens skandeerdatum"
+
+#: mactrack_utilities.php
+msgid "Unrecognized partitions. MacTrack makes no partition changes."
+msgstr "Onherkende partisies. MacTrack maak geen partisiewysigings nie."
+
+#: mactrack_utilities.php
+msgid "Port Table Partitions"
+msgstr "Poorttabel-partisies"
+
+#: mactrack_utilities.php
+msgid "Layout"
+msgstr "Uitleg"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%d of at most %d"
+msgstr "%d uit hoogstens %d"
+
+#: mactrack_utilities.php
+msgid "Partitions"
+msgstr "Partisies"
+
+#: mactrack_utilities.php
+msgid "Oldest Partition"
+msgstr "Oudste partisie"
+
+#: mactrack_utilities.php
+msgid "Newest Partition"
+msgstr "Nuutste partisie"
+
+#: mactrack_utilities.php
+msgid "Partitions Cover Scans Before"
+msgstr "Partisies dek skanderings voor"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s, coarser than the setting because %d partitions would exceed the limit"
+msgstr "%s, growwer as die instelling omdat %d partisies die perk sou oorskry"
+
+#: mactrack_utilities.php setup.php
+msgid "Port and IP Address Partition Size"
+msgstr "Poort- en IP-adrespartisiegrootte"
+
+#: mactrack_utilities.php
+msgid "Pending Exchange"
+msgstr "Hangende uitruiling"
+
+#: mactrack_utilities.php
+msgid "Load Path"
+msgstr "Laaipad"
+
+#: mactrack_utilities.php
+msgid "PHP batches"
+msgstr "PHP-bundels"
+
+#: mactrack_utilities.php
+msgid "Last Scan Note"
+msgstr "Laaste skandeernota"
+
+#: mactrack_utilities.php
+msgid "Rebuild"
+msgstr "Herbou"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Running since %s"
+msgstr "Loop sedert %s"
+
+#: mactrack_utilities.php
+msgid "Last Rebuild"
+msgstr "Laaste herbou"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d rows into %d partitions"
+msgstr "%s: %d rye in %d partisies"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: failed. %s"
+msgstr "%s: misluk. %s"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance"
+msgstr "Laaste onderhoud"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d partitions dropped, %d created"
+msgstr "%s: %d partisies verwyder, %d geskep"
+
+#: mactrack_utilities.php
+msgid "IP Table Layout"
+msgstr "IP-tabeluitleg"
+
+#: mactrack_utilities.php
+msgid "IP Table Partitions"
+msgstr "IP-tabelpartisies"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Layout"
+msgstr "802.1x Tabeluitleg"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Partitions"
+msgstr "802.1x Tabelpartisies"
+
+#: mactrack_utilities.php
+msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
+msgstr "Kies daaglikse, weeklikse of gedeaktiveerde partisionering voordat die herbou begin word."
+
+#: mactrack_utilities.php
+msgid "A rebuild is already running. The partition status page shows when it has finished."
+msgstr "'n Herbouing loop reeds. Die partisiestatusbladsy wys wanneer dit voltooi is."
+
+#: mactrack_utilities.php
+msgid "The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running."
+msgstr "Die herbou is in die agtergrond aangevra. Gaan Partisie-status na vir die resultaat; dit sal weier om te begin as 'n skandering of 'n ander herbou loop."
+
+#: mactrack_utilities.php
+msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
+msgstr "Mactrack-skandeerfunksies is gesuiwer. Hulle sal herskep word sodra jy óf 'n toestel óf 'n toesteltipe wysig."
+
+#: mactrack_utilities.php
+msgid "Cacti Mactrack System Utilities"
+msgstr "Cacti Mactrack-stelselhulpmiddels"
+
+#: mactrack_utilities.php
+msgid "Process Status Information"
+msgstr "Prosesstatus-inligting"
+
+#: mactrack_utilities.php setup.php
+msgid "View Mactrack Process Status"
+msgstr "Bekyk Mactrack-prosesstatus"
+
+#: mactrack_utilities.php
+msgid "This option will let you show and set process information associated with the Mactrack polling process."
+msgstr "Hierdie opsie laat jou toe om prosesinligting wat met die Mactrack-pollerproses geassosieer word, te vertoon en te stel."
+
+#: mactrack_utilities.php
+msgid "Database Administration"
+msgstr "Databasisadministrasie"
+
+#: mactrack_utilities.php
+msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
+msgstr "Skrap vervalde poort-na-MAC-na-IP-assosiasies uit die databasis. Slegs rekords wat op grond van jou kriteria verval het, word verwyder."
+
+#: mactrack_utilities.php
+msgid "Refresh IEEE Vendor MAC/OUI Database"
+msgstr "Verfris IEEE-verskaffer-MAC/OUI-databasis"
+
+#: mactrack_utilities.php
+msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
+msgstr "Hierdie funksie sal die nuutste OIU-databasis vanaf die IEEE-webwerf aflaai en installeer. Elke Netwerkkoppelvlakkaart (NIC) het 'n MAC-adres. Die MAC-adres kan in twee dele verdeel word. Die eerste deel van die MAC-adres bevat die Verskaffer-MAC. Die Verskaffer-MAC identifiseer wie die onderdeel vervaardig het. Dit sal nuttig wees om steekproefgewys vir ongeoorloofde toestelle op u netwerk te kyk."
+
+#: mactrack_utilities.php
+msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
+msgstr "Skrap ou en moontlik verouderde Mactrack-skandeerfunksies uit die aftreklys wat jy kry wanneer jy 'n toesteltipe wysig."
+
+#: mactrack_utilities.php
+msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
+msgstr "Skrap <strong>ALLE</strong> poort-na-MAC-na-IP-assosiasies uit die databasis, alle IP-adresse, IP-reekse en VLAN's. Hierdie nutsprogram is handig wanneer jy van voor af wil begin. <strong>GEVAAR: Alle vorige data word geskrap.</strong>"
+
+#: mactrack_utilities.php
+msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
+msgstr "Herbou die lys skanderingsdatums uit die gestoorde Poort-na-MAC-na-IP-resultate deur elke partisie een keer te lees. Skanderings en instandhouding hou die lys op datum, dus is dit slegs nodig nadat resultate buite instandhouding verwyder is, byvoorbeeld deur toestelle te skrap."
+
+#: mactrack_utilities.php
+msgid "View Partition Status"
+msgstr "Bekyk partisiestatus"
+
+#: mactrack_utilities.php
+msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
+msgstr "Toon hoe die Poort-na-MAC-na-IP-resultate gepartisioneer is, die partisiegrootte wat gebruik word en hoekom, en wat die laaste databasisinstandhouding gedoen het."
+
+#: mactrack_utilities.php
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
+msgstr "Herbou en ontleed slegs die partisie wat die jongste poortwaarneming bevat om geskrapte spasie te herwin; met weeklikse partisies is dit die huidige week. Ongepartisioneerde tabelle word ten volle geoptimaliseer. Geskeduleerde skanderings word oorgeslaan totdat dit voltooi is."
+
+#: mactrack_utilities.php
+msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile."
+msgstr "Kies daaglikse of weeklikse partisies, of deaktiveer partisionering, vir die poort- (MAC-adres), IP-adres- en 802.1x-tabelle. Die herbou kopieer die volledige geskiedenis in die agtergrond; geskeduleerde skanderings word oorgeslaan en MAC-, IP- en 802.1x-soektogte wys intussen 'n instandhoudingsboodskap."
+
+#: mactrack_utilities.php
+msgid "Aggregated Table Administration"
+msgstr "Geaggregeerde tabeladministrasie"
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
+msgstr "Skrap ALLE <strong>saamgevoegde</strong> (nie skanderingsresultate nie) poort-na-MAC-na-IP-assosiasies uit die databasis. Data sal weer ingesamel word op grond van <strong>slegs nuwe</strong> geskandeerde data tydens die volgende mactrack-poller-lopie."
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
+msgstr "Skrap ALLE <strong>saamgevoegde</strong> (nie skanderingsresultate nie) poort-na-MAC-na-IP-assosiasies uit die databasis en herskep hulle nou op grond van <strong>alle geskandeerde data</strong>."
+
+#: mactrack_utilities.php
+msgid "Partitioning"
+msgstr "Partisionering"
+
+#: mactrack_vendormacs.php
+msgid "Mactrack Vendor Mac Filter"
+msgstr "Mactrack-verskaffer-MAC-filter"
+
+#: mactrack_vendormacs.php
+msgid "Vendor MAC"
+msgstr "Verskaffer-MAC"
+
+#: mactrack_vendormacs.php
+msgid "Corporation"
+msgstr "Korporasie"
+
+#: mactrack_vendormacs.php
+msgid "Address"
+msgstr "Adres"
+
+#: mactrack_vendormacs.php setup.php
+msgid "Vendor Macs"
+msgstr "Verskaffer-MAC's"
+
+#: mactrack_vendormacs.php
+msgid "No Mactrack Vendor MACS Found"
+msgstr "Geen Mactrack-verskaffer-MAC's gevind nie"
+
+#: mactrack_view_arp.php
+msgid "Mactrack - ARP/IP View"
+msgstr "Mactrack - ARP/IP-aansig"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Name"
+msgstr "Skakelaarnaam"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Hostname"
+msgstr "Skakelaar-gasheernaam"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED IP Address"
+msgstr "ED IP-adres"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED DNS Hostname"
+msgstr "ED DNS-gasheernaam"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED MAC Address"
+msgstr "ED MAC-adres"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Vendor Name"
+msgstr "Verskaffernaam"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Port Number"
+msgstr "Poortnommer"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Port Name"
+msgstr "Poortnaam"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Last Scan Date"
+msgstr "Laaste skandeerdatum"
+
+#: mactrack_view_arp.php
+msgid "ARP Cache"
+msgstr "ARP-kas"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "You must first choose a Site, Device or other search criteria."
+msgstr "Jy moet eers 'n Terrein, Toestel of ander soekkriteria kies."
+
+#: mactrack_view_arp.php
+msgid "No Mactrack IP Results Found"
+msgstr "Geen Mactrack IP-resultate gevind nie"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_interfaces.php
+#: mactrack_view_macs.php
+msgid "Device"
+msgstr "Toestel"
+
+#: mactrack_view_arp.php mactrack_view_ips.php
+msgid "IP's"
+msgstr "IP's"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "IP"
+msgstr "IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Show"
+msgstr "Wys"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Most Recent"
+msgstr "Mees onlangse"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "MAC"
+msgstr "MAC"
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr "MacTrack - Kontroleskerm"
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr "Inventaris"
+
+#: mactrack_view_dashboard.php
+msgid "Device status"
+msgstr "Toestelstatus"
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr "Adres- en poorttotale"
+
+#: mactrack_view_dashboard.php
+msgid "Collection settings"
+msgstr "Insamelingsinstellings"
+
+#: mactrack_view_dashboard.php
+msgid "Scan runtimes"
+msgstr "Skandeerlooptye"
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr "Tabelgroottes"
+
+#: mactrack_view_dashboard.php
+msgid "MacWatch activity"
+msgstr "MacWatch-aktiwiteit"
+
+#: mactrack_view_dashboard.php
+msgid "Vendors"
+msgstr "Verskaffers"
+
+#: mactrack_view_dashboard.php
+msgid "Enabled devices"
+msgstr "Geaktiveerde toestelle"
+
+#: mactrack_view_dashboard.php
+msgid "Disabled devices"
+msgstr "Gedeaktiveerde toestelle"
+
+#: mactrack_view_dashboard.php
+msgid "Device types"
+msgstr "Toesteltipes"
+
+#: mactrack_view_dashboard.php
+msgid "Interfaces tracked"
+msgstr "Koppelvlakke nagespoor"
+
+#: mactrack_view_dashboard.php
+msgid "Active MACs"
+msgstr "Aktiewe MAC's"
+
+#: mactrack_view_dashboard.php
+msgid "IP addresses"
+msgstr "IP-adresse"
+
+#: mactrack_view_dashboard.php
+msgid "Total ports"
+msgstr "Totale poorte"
+
+#: mactrack_view_dashboard.php
+msgid "Active ports"
+msgstr "Aktiewe poorte"
+
+#: mactrack_view_dashboard.php
+msgid "Trunk ports"
+msgstr "Trunk-poorte"
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr "Unieke OUI-verskaffers"
+
+#: mactrack_view_dashboard.php
+msgid "Scanning frequency"
+msgstr "Skandeerfrekwensie"
+
+#: mactrack_view_dashboard.php
+msgid "Concurrent processes"
+msgstr "Gelyktydige prosesse"
+
+#: mactrack_view_dashboard.php
+msgid "Scanner max runtime"
+msgstr "Maksimum looptyd van skandeerder"
+
+#: mactrack_view_dashboard.php
+msgid "MAC retention"
+msgstr "MAC-retensie"
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr "dae"
+
+#: mactrack_view_dashboard.php
+msgid "IP retention"
+msgstr "IP-behoud"
+
+#: mactrack_view_dashboard.php
+msgid "Reverse DNS"
+msgstr "Omgekeerde DNS"
+
+#: mactrack_view_dashboard.php
+msgid "Most recent scan"
+msgstr "Mees onlangse skandering"
+
+#: mactrack_view_dashboard.php
+msgid "Average duration"
+msgstr "Gemiddelde duur"
+
+#: mactrack_view_dashboard.php
+msgid "Longest duration"
+msgstr "Langste duur"
+
+#: mactrack_view_dashboard.php
+msgid "Scanned in last hour"
+msgstr "In die afgelope uur geskandeer"
+
+#: mactrack_view_dashboard.php
+msgid "Duration"
+msgstr "Duur"
+
+#: mactrack_view_dashboard.php
+msgid "Last scan"
+msgstr "Laaste skandering"
+
+#: mactrack_view_dashboard.php
+msgid "Slowest devices"
+msgstr "Stadigste toestelle"
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr "Nog geen skandeerlooptye aangeteken nie."
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr "Rye"
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr "Grootte"
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr "Geen tabelstatistieke beskikbaar nie."
+
+#: mactrack_view_dashboard.php
+msgid "Watched MACs"
+msgstr "Dopgehoude MAC's"
+
+#: mactrack_view_dashboard.php
+msgid "Discovered"
+msgstr "Ontdek"
+
+#: mactrack_view_dashboard.php
+msgid "Last match"
+msgstr "Laaste passing"
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr "OUI-databasisinskrywings"
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr "Geen verskafferdata beskikbaar nie."
+
+#: mactrack_view_dashboard.php
+msgid "Show more"
+msgstr "Wys meer"
+
+#: mactrack_view_dashboard.php
+msgid "Show less"
+msgstr "Wys minder"
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr "Maak in 'n dialoog oop"
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr "Verwyder vanaf bladsy"
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr "Sleep om kaart te herrangskik"
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr "Ongeldige versoek. Probeer asseblief weer."
+
+#: mactrack_view_dashboard.php
+msgid "Unknown card."
+msgstr "Onbekende kaart."
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr "Voeg kaart by"
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
+msgstr "Voeg 'n paneelbordkaart by…"
+
+#: mactrack_view_devices.php
+msgid "Mactrack - Device Report View"
+msgstr "Mactrack - Toestelverslag-aansig"
+
+#: mactrack_view_devices.php
+msgid "Unknown Device Type"
+msgstr "Onbekende toesteltipe"
+
+#: mactrack_view_devices.php
+msgid "Total VLAN's"
+msgstr "Totale VLAN's"
+
+#: mactrack_view_devices.php
+msgid "Edit Device"
+msgstr "Redigeer toestel"
+
+#: mactrack_view_devices.php
+msgid "View Graphs"
+msgstr "Bekyk grafieke"
+
+#: mactrack_view_devices.php
+msgid "Device Not Mapped to Cacti Device"
+msgstr "Toestel nie aan Cacti-toestel gekoppel nie"
+
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
+msgid "View MAC Addresses"
+msgstr "Bekyk MAC-adresse"
+
+#: mactrack_view_devices.php
+msgid "No Mactrack Devices Found"
+msgstr "Geen Mactrack-toestelle gevind nie"
+
+#: mactrack_view_devices.php
+msgid "Device Scan Results"
+msgstr "Toestelskanderingsresultate"
+
+#: mactrack_view_devices.php
+msgid "Hub/Switch"
+msgstr "Spilpunt/Skakelaar"
+
+#: mactrack_view_dot1x.php
+msgid "Mactrack - 802.1x View"
+msgstr "Mactrack - 802.1x-aansig"
+
+#: mactrack_view_dot1x.php
+msgid "Domain"
+msgstr "Domein"
+
+#: mactrack_view_dot1x.php
+msgid "802.1x Sessions"
+msgstr "802.1x Sessies"
+
+#: mactrack_view_dot1x.php
+msgid "No Mactrack 802.1x Sessions Found"
+msgstr "Geen Mactrack 802.1x-sessies gevind nie"
+
+#: mactrack_view_dot1x.php
+msgid "Dot1x Scan Results"
+msgstr "Dot1x-skandeerresultate"
+
+#: mactrack_view_dot1x.php
+msgid "Sessions"
+msgstr "Sessies"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "All Statuses"
+msgstr "Alle statusse"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr "Statusse gekies"
+
+#: mactrack_view_dot1x.php
+msgid "DATA"
+msgstr "DATA"
+
+#: mactrack_view_dot1x.php
+msgid "VOICE"
+msgstr "STEM"
+
+#: mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Portname"
+msgstr "Poortnaam"
+
+#: mactrack_view_graphs.php
+msgid "Mactrack - Monitored Device Graph View"
+msgstr "Mactrack - Gemonitorde toestelgrafiek-aansig"
+
+#: mactrack_view_graphs.php
+msgid "Custom Graph List Applied - Filtering from List"
+msgstr "Pasgemaakte Grafieklys Toegepas - Filter vanaf Lys"
+
+#: mactrack_view_interfaces.php
+msgid "Mactrack - Network Interfaces View"
+msgstr "Mactrack - Netwerkkoppelvlakke-aansig"
+
+#: mactrack_view_interfaces.php
+msgid "No Mactrack Interfaces Found"
+msgstr "Geen Mactrack-koppelvlakke gevind nie"
+
+#: mactrack_view_interfaces.php
+msgid "Interface Scan Results"
+msgstr "Koppelvlakskandeerresultate"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Name"
+msgstr "Naam"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Description"
+msgstr "Beskrywing"
+
+#: mactrack_view_interfaces.php
+msgid "Issues"
+msgstr "Probleme"
+
+#: mactrack_view_interfaces.php
+msgid "Alias"
+msgstr "Alias"
+
+#: mactrack_view_interfaces.php
+msgid "InBound %%%"
+msgstr "Inkomend %%%"
+
+#: mactrack_view_interfaces.php
+msgid "OutBound %%%"
+msgstr "Uitgaande %%%"
+
+#: mactrack_view_interfaces.php
+msgid "In (B/S)"
+msgstr "Inkomend (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out (B/S)"
+msgstr "Uit (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Err Total"
+msgstr "Inkomende Foute Totaal"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc Total"
+msgstr "Inkomende Verwerping Totaal"
+
+#: mactrack_view_interfaces.php
+msgid "UProto Total"
+msgstr "UProto-totaal"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err Total"
+msgstr "Totale uit-foute"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc Total"
+msgstr "Totale uit-verwerpings"
+
+#: mactrack_view_interfaces.php
+msgid "In Err (E/S)"
+msgstr "Inkomende Foute (E/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc (D/S)"
+msgstr "Inkomende Verwerping (D/S)"
+
+#: mactrack_view_interfaces.php
+msgid "UProto (UP/S)"
+msgstr "UProto (UP/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err (OE/S)"
+msgstr "Uit-foute (OE/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc (OD/S)"
+msgstr "Uit-verwerp (OD/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Last Change"
+msgstr "Laaste wysiging"
+
+#: mactrack_view_interfaces.php
+msgid "Last Scanned"
+msgstr "Laaste geskandeer"
+
+#: mactrack_view_interfaces.php
+msgid "Filters"
+msgstr "Filters"
+
+#: mactrack_view_interfaces.php
+msgid "All Interfaces"
+msgstr "Alle koppelvlakke"
+
+#: mactrack_view_interfaces.php
+msgid "All Non-Ignored Interfaces"
+msgstr "Alle nie-geïgnoreerde koppelvlakke"
+
+#: mactrack_view_interfaces.php
+msgid "All Ignored Interfaces"
+msgstr "Alle geïgnoreerde koppelvlakke"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In/Out Utilization > %d &#37;"
+msgstr "Hoë In-/Uitgaande Benutting > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In Utilization > %d &#37;"
+msgstr "Hoë Inkomende Benutting > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High Out Utilization > %d &#37;"
+msgstr "Hoë Uitgaande Benutting > %d &#37;"
+
+#: mactrack_view_interfaces.php
+msgid "With Issues"
+msgstr "Met probleme"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces"
+msgstr "Op-koppelvlakke"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces No Alias"
+msgstr "Op-koppelvlakke sonder alias"
+
+#: mactrack_view_interfaces.php
+msgid "Errors Accumulating"
+msgstr "Foute hoop op"
+
+#: mactrack_view_interfaces.php
+msgid "Discards Accumulating"
+msgstr "Verwerpings neem toe"
+
+#: mactrack_view_interfaces.php
+msgid "Changed in Last Day"
+msgstr "In die laaste dag verander"
+
+#: mactrack_view_interfaces.php
+msgid "Bandwidth"
+msgstr "Bandwydte"
+
+#: mactrack_view_interfaces.php
+msgid "When checked, the Errors, Discards and Unknown Protocol columns show each interface's cumulative SNMP counter totals instead of the average per-second rate."
+msgstr "Wanneer gemerk, wys die Foute-, Weggooide- en Onbekende Protokol-kolomme elke koppelvlak se kumulatiewe SNMP-tellertotale in plaas van die gemiddelde koers per sekonde."
+
+#: mactrack_view_interfaces.php
+msgid "Show Totals"
+msgstr "Wys totale"
+
+#: mactrack_view_ips.php
+msgid "Mactrack - Site IP Range Report View"
+msgstr "Mactrack - Terrein-IP-reeks-verslag-aansig"
+
+#: mactrack_view_ips.php
+msgid "IP Range"
+msgstr "IP-reeks"
+
+#: mactrack_view_ips.php
+msgid "Current IP Addresses"
+msgstr "Huidige IP-adresse"
+
+#: mactrack_view_ips.php
+msgid "Current Date"
+msgstr "Huidige Datum"
+
+#: mactrack_view_ips.php
+msgid "Maximum IP Addresses"
+msgstr "Maksimum IP-adresse"
+
+#: mactrack_view_ips.php
+msgid "Maximum Date"
+msgstr "Maksimum datum"
+
+#: mactrack_view_ips.php
+msgid "IP Address Ranges"
+msgstr "IP-adresreekse"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "Edit Site"
+msgstr "Wysig Terrein"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "View IP Addresses"
+msgstr "Bekyk IP-adresse"
+
+#: mactrack_view_ips.php
+msgid "No Mactrack Site IP Ranges Found"
+msgstr "Geen Mactrack-terrein-IP-reekse gevind nie"
+
+#: mactrack_view_macs.php
+msgid "Mactrack - MAC to IP Report View"
+msgstr "Mactrack - MAC-na-IP-verslag-aansig"
+
+#: mactrack_view_macs.php
+msgid "Authorize"
+msgstr "Magtig"
+
+#: mactrack_view_macs.php
+msgid "Revoke"
+msgstr "Herroep"
+
+#: mactrack_view_macs.php
+msgid "None of the selected MAC Addresses were valid, so no action was taken."
+msgstr "Geen van die gekose MAC-adresse was geldig nie, dus is geen aksie geneem nie."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
+msgstr "Die volgende MAC-adresse kon nie herroep word nie omdat hulle lede van Groepmagtigings %s is"
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Authorize the following MAC Addresses."
+msgstr "Klik 'Gaan voort' om die volgende MAC-adresse te magtig."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Revoke the following MAC Addresses."
+msgstr "Klik 'Gaan voort' om die volgende MAC-adresse te herroep."
+
+#: mactrack_view_macs.php
+msgid "You must select at least one MAC Address."
+msgstr "Jy moet ten minste een MAC-adres kies."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to change Mac Authorizations."
+msgstr "Jy word nie toegelaat om MAC-magtigings te verander nie."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
+msgstr "Toest.:%s IP.:%s MAC.:%s POORT.:%s Telling.: [%s]"
+
+#: mactrack_view_macs.php
+msgid "You must select at least one Row."
+msgstr "Jy moet ten minste een Ry kies."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to delete rows."
+msgstr "Jy word nie toegelaat om rye te skrap nie."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Delete the following rows from Aggregated table."
+msgstr "Klik 'Gaan voort' om die volgende rye uit die saamgevoegde tabel te skrap."
+
+#: mactrack_view_macs.php
+msgid "VLAN ID"
+msgstr "VLAN-ID"
+
+#: mactrack_view_macs.php
+msgid "VLAN Name"
+msgstr "VLAN-naam"
+
+#: mactrack_view_macs.php
+msgid "You must choose a Site, Device or other search criteria."
+msgstr "Jy moet 'n Terrein, Toestel of ander soekkriteria kies."
+
+#: mactrack_view_macs.php
+msgid "No Mactrack Port Results Found"
+msgstr "Geen Mactrack-poortresultate gevind nie"
+
+#: mactrack_view_macs.php
+msgid "Count"
+msgstr "Telling"
+
+#: mactrack_view_macs.php
+msgid "Aggregated"
+msgstr "Geaggregeer"
+
+#: mactrack_view_sites.php
+msgid "Mactrack - Site Report View"
+msgstr "Mactrack - Terreinverslag-aansig"
+
+#: mactrack_view_sites.php
+msgid "Rescan Site"
+msgstr "Herskandeer terrein"
+
+#: mactrack_view_sites.php
+msgid "View Devices"
+msgstr "Bekyk toestelle"
+
+#: mactrack_view_sites.php
+msgid "View IP Ranges"
+msgstr "Bekyk IP-reekse"
+
+#: mactrack_view_sites.php
+msgid "Sites / Device Types"
+msgstr "Terreine / Toesteltipes"
+
+#: mactrack_view_sites.php
+msgid "Site Scan Results"
+msgstr "Terreinskanderingresultate"
+
+#: setup.php
+msgid "MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes."
+msgstr "MacTrack is besig om sy databasis in die agtergrond op te gradeer. Dit kan tot 'n uur neem op groot installasies, en sommige MacTrack-data kan onvolledig wees totdat dit voltooi is."
+
+#: setup.php
+#, php-format
+msgid "MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s"
+msgstr "MacTrack kon nie sy databasisopgradering in die agtergrond begin nie; sien die Cacti-log vir die rede. Voer dit handmatig vanaf die opdragreël uit: %s"
+
+#: setup.php
+msgid "Mactrack"
+msgstr "Mactrack"
+
+#: setup.php
+msgid "General Settings"
+msgstr "Algemene instellings"
+
+#: setup.php
+msgid "Scanning Frequency"
+msgstr "Skandeerfrekwensie"
+
+#: setup.php
+msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
+msgstr "Kies wanneer MAC- en IP-adresse en koppelvlakstatistieke van jou netwerktoestelle ingesamel moet word."
+
+#: setup.php
+msgid "Concurrent Processes"
+msgstr "Gelyktydige prosesse"
+
+#: setup.php
+msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
+msgstr "Spesifiseer hoeveel toestelle gelyktydig gepol sal word totdat alle toestelle gepol is."
+
+#: setup.php
+msgid "Scanner Max Runtime"
+msgstr "Maksimum looptyd van skandeerder"
+
+#: setup.php
+msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
+msgstr "Spesifiseer die aantal minute wat 'n toestelskanderingfunksie toegelaat word om te loop voordat die stelsel aanneem dit is voltooi. Hierdie instelling sal regstel vir skanderingstake wat voortydig gestaak het."
+
+#: setup.php
+msgid "Start Time for Data Collection"
+msgstr "Begintyd vir data-insameling"
+
+#: setup.php
+msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
+msgstr "Wanneer wil jy hê moet die eerste data-insameling plaasvind.  Alle toekomstige data-insamelingstye sal op hierdie begintyd gebaseer word.  'n Goeie voorbeeld is 12:00 VM."
+
+#: setup.php
+msgid "Database Maintenance Time"
+msgstr "Databasis-instandhoudingstyd"
+
+#: setup.php
+msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
+msgstr "Wanneer moet ou databasisrekords uit die databasis verwyder word.  Neem asseblief kennis dat geen toegang tot die poortdatabasis toegelaat sal word terwyl hierdie aksie plaasvind nie."
+
+#: setup.php
+msgid "Confirm Utilities Prompt"
+msgstr "Bevestig nutsprogramme-porboodskap"
+
+#: setup.php
+msgid "When using utilities, prompt for verification"
+msgstr "Wanneer nutsmiddels gebruik word, vra vir verifikasie"
+
+#: setup.php
+msgid "Data Retention"
+msgstr "Databehoud"
+
+#: setup.php
+msgid "How long should port MAC details be retained in the database."
+msgstr "Hoe lank moet poort-MAC-besonderhede in die databasis behou word."
+
+#: setup.php
+msgid "Data Retention IPs"
+msgstr "Databewaring-IP's"
+
+#: setup.php
+msgid "How long should discovered IPs details be retained in the database."
+msgstr "Hoe lank moet besonderhede van ontdekte IP's in die databasis behou word."
+
+#: setup.php
+msgid "Size of the partitions of the port, IP and 802.1x tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
+msgstr "Grootte van die partisies van die poort-, IP- en 802.1x-tabelle, of Gedeaktiveer vir ongepartisioneerde tabelle. Wysiging hiervan raak slegs nuwe partisies; om die bestaande geskiedenis te herbou sodat dit ooreenstem, gebruik Configure Port and IP Address Partitioning in MacTrack Utilities of voer cli/upgrade_partitioning.php uit."
+
+#: setup.php
+msgid "Switch Level Ignore Ports Delimiter"
+msgstr "Skakelaarvlak-ignoreerpoorte-skeidingsteken"
+
+#: setup.php
+msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
+msgstr "Watter skeidingsteken moet Mactrack gebruik wanneer die 'Ignoreer poorte'-string vir elke skakelaar ontleed word."
+
+#: setup.php
+msgid "Auto Detect"
+msgstr "Outomatiese bespeuring"
+
+#: setup.php
+msgid "Colon [:]"
+msgstr "Dubbelpunt [:]"
+
+#: setup.php
+msgid "Pipe [|]"
+msgstr "Pyp [|]"
+
+#: setup.php
+msgid "Space [ ]"
+msgstr "Spasie [ ]"
+
+#: setup.php
+msgid "Mac Address Output Format"
+msgstr "Mac-adres-uitvoerformaat"
+
+#: setup.php
+msgid "Format used for display."
+msgstr "Formaat wat vir vertoon gebruik word."
+
+#: setup.php
+msgid "Ports to Ignore"
+msgstr "Poorte om te ignoreer"
+
+#: setup.php
+msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
+msgstr "Verskaf 'n gereelde uitdrukking van ifNames of ifDescriptions van poorte om in die koppelvlaklys te ignoreer. Byvoorbeeld, (Vlan|Loopback|Null)."
+
+#: setup.php
+msgid "Ports to Ignore While Scanning (Regular Expression)"
+msgstr "Poorte om te ignoreer tydens skandering (Reguliere uitdrukking)"
+
+#: setup.php
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
+msgstr "Opsioneel.  'n Gereelde uitdrukking wat, sonder inagneming van hoof-/kleinletters, gepas word teen die poortnaam en die poortalias van elke geskandeerde poort.  MAC-adresse wat op 'n passende poort gevind word, word nie ingesamel nie, wat uplink- en trunk-poorte uit die databasis hou.  Byvoorbeeld, (uplink|trunk).  Plaas elke uitdrukking op sy eie reël om verskeie op te gee.  Laat leeg om elke poort in te samel.  Terreine en toestelle kan hul eie uitdrukkings byvoeg.  Anders as 'Poorte om te ignoreer' hierbo, geld dit vir MAC-insameling en nie vir die koppelvlaklys nie, en dit raak slegs nuwe skanderings."
+
+#: setup.php
+msgid "Bandwidth Usage Threshold"
+msgstr "Bandwydtegebruikdrempel"
+
+#: setup.php
+msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
+msgstr "Wanneer netwerkkoppelvlakstatistieke hersien word, watter bandwydtedrempel wil jy by verstek sien."
+
+#: setup.php
+#, php-format
+msgid "%d Percent"
+msgstr "%d persent"
+
+#: setup.php
+msgid "DNS Settings"
+msgstr "DNS-instellings"
+
+#: setup.php
+msgid "Perform Reverse DNS Name Resolution"
+msgstr "Voer omgekeerde DNS-naamomsetting uit"
+
+#: setup.php
+msgid "Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
+msgstr "Moet Mactrack terugwaartse DNS-opsoek doen vir die IP-adresse wat met poorte geassosieer word. WAARSKUWING: As DNS nie behoorlik opgestel is nie, sal dit skanderingstyd aansienlik vertraag."
+
+#: setup.php
+msgid "Primary DNS IP Address"
+msgstr "Primêre DNS-IP-adres"
+
+#: setup.php
+msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
+msgstr "Voer die primêre DNS-IP-adres in om vir omgekeerde opsoekings te gebruik."
+
+#: setup.php
+msgid "Secondary DNS IP Address"
+msgstr "Sekondêre DNS-IP-adres"
+
+#: setup.php
+msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
+msgstr "Voer die sekondêre DNS-IP-adres in om vir omgekeerde opsoekings te gebruik."
+
+#: setup.php
+msgid "DNS Timeout"
+msgstr "DNS-uitteltyd"
+
+#: setup.php
+msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
+msgstr "Voer asseblief die DNS-tydlimiet in millisekondes in. Mactrack gebruik 'n PHP-gebaseerde DNS-omsetter."
+
+#: setup.php
+msgid "DNS Prime Interval"
+msgstr "DNS-voorlaai-interval"
+
+#: setup.php
+msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
+msgstr "Hoe gereeld, in sekondes, moet Mactrack-skandering-IP's na MAC-adresse opgelos word vir DNS-opsoek.  Die gebruik van 'n groter getal wanneer u etlike duisende toestelle het, sal werkverrigting verhoog."
+
+#: setup.php
+msgid "Notification Settings"
+msgstr "Kennisgewinginstellings"
+
+#: setup.php
+msgid "Source Address"
+msgstr "Bronadres"
+
+#: setup.php
+msgid "The source Email address for Mactrack Emails."
+msgstr "Die bron-e-posadres vir Mactrack-e-posse."
+
+#: setup.php
+msgid "Source Email Name"
+msgstr "Bron E-posnaam"
+
+#: setup.php
+msgid "The Source Email name for Mactrack Emails."
+msgstr "Die bron-E-posnaam vir Mactrack-E-posse."
+
+#: setup.php
+msgid "MACTrack Administrator"
+msgstr "MACTrack-administrateur"
+
+#: setup.php
+msgid "MacWatch Default Body"
+msgstr "MacWatch-verstekliggaam"
+
+#: setup.php
+msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+msgstr "Die voorafingestelde E-posliggaam vir Mactrack MacWatch-e-posse.  Die liggaam kan enige geldige HTML-merkers bevat.  Dit ondersteun ook vervangingsmerkers wat verwerk sal word wanneer 'n E-pos gestuur word.  Geldige merkers sluit in <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+
+#: setup.php
+msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
+msgstr "Mac-adres <MAC> gevind by IP-adres <IP> vir Kaartjienommer: <TICKET>.<br>Die toestel is geleë by<br>Terrein: <SITENAME>, Toestel <DEVICENAME>, IP <DEVICEIP>, Poort <PORTNUMBER>, en Poortnaam <PORTNAME>"
+
+#: setup.php
+msgid "MacAuth Report Email Addresses"
+msgstr "E-posadresse vir MacAuth-verslag"
+
+#: setup.php
+msgid "A comma delimited list of users to receive the MacAuth Email notifications."
+msgstr "'n Kommageskeide lys van gebruikers om die MacAuth-E-poskennisgewings te ontvang."
+
+#: setup.php
+msgid "MacAuth Report Frequency"
+msgstr "MacAuth-verslagfrekwensie"
+
+#: setup.php
+msgid "How often will the MacAuth Reports be Emailed."
+msgstr "Hoe gereeld sal die MacAuth-verslae ge-e-pos word."
+
+#: setup.php
+msgid "Mactrack ArpWatch Settings"
+msgstr "Mactrack ArpWatch-instellings"
+
+#: setup.php
+msgid "Enable ArpWatch"
+msgstr "Aktiveer ArpWatch"
+
+#: setup.php
+msgid "Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
+msgstr "Moet Mactrack ook ArpWatch-data gebruik om MAC-na-IP/DNS-omsetting aan te vul?"
+
+#: setup.php
+msgid "ArpWatch Database Path"
+msgstr "ArpWatch-databasispad"
+
+#: setup.php
+msgid "The location of the ArpWatch Database file on the Cacti server."
+msgstr "Die ligging van die ArpWatch-databasislêer op die Cacti-bediener."
+
+#: setup.php
+msgid "SNMP Presets"
+msgstr "SNMP-voorinstellings"
+
+#: setup.php
+msgid "Update Policy for SNMP Options"
+msgstr "Bywerkbeleid vir SNMP-opsies"
+
+#: setup.php
+msgid "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices."
+msgstr "Beleid vir die sinchronisering van SNMP-opsies tussen Cacti-toestelle en Mactrack-toestelle."
+
+#: setup.php
+msgid "Default SNMP version for all new hosts."
+msgstr "Verstek SNMP-weergawe vir alle nuwe gashere."
+
+#: setup.php
+msgid "Default SNMP read community for all new hosts."
+msgstr "Verstek SNMP-leesgemeenskap vir alle nuwe gashere."
+
+#: setup.php
+msgid "Communities"
+msgstr "Gemeenskappe"
+
+#: setup.php
+msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
+msgstr "Vul die lys beskikbare SNMP-leesstringe in om vir hierdie toestel te toets. Elke leesstring moet deur 'n dubbelpunt ':' geskei word. Hierdie leesstringe sal opeenvolgend getoets word indien die primêre leesstring ongeldig is."
+
+#: setup.php
+msgid "The UDP/TCP Port to poll the SNMP agent on."
+msgstr "Die UDP/TCP-poort waarop die SNMP-agent gepol moet word."
+
+#: setup.php
+msgid "Default SNMP timeout in milli-seconds."
+msgstr "Verstek SNMP-uitteltyd in millisekondes."
+
+#: setup.php
+msgid "The number times the SNMP poller will attempt to reach the host before failing."
+msgstr "Die aantal kere wat die SNMP-poller sal probeer om die gasheer te bereik voordat dit misluk."
+
+#: setup.php
+msgid "snmpbulkwalk Binary Path"
+msgstr "Binêre pad vir snmpbulkwalk"
+
+#: setup.php
+msgid "The path to your snmpbulkwalk binary."
+msgstr "Die pad na jou snmpbulkwalk-binêre lêer."
+
+#: setup.php
+msgid "MacTrack Settings"
+msgstr "MacTrack-instellings"
+
+#: setup.php
+msgid "Default Tab"
+msgstr "Verstekoortjie"
+
+#: setup.php
+msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
+msgstr "Watter MacTrack-oortjie wil jy as jou verstekoortjie hê elke keer as jy na die MacTrack-afdeling gaan."
+
+#: setup.php
+msgid "Mac Addresses"
+msgstr "Mac-adresse"
+
+#: setup.php
+msgid "dot1x Deta"
+msgstr "dot1x-besonderhede"
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Internet-instaanbedienerinstellings"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Internet-instaanbedieneradres"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Vir óf kern-Cacti-dienste óf inproppe wat internettoegang benodig, voer die instaanbediener en poort hier in die volgende formaat in: IP:PORT. Byvoorbeeld 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Internet-instaanbedienergebruiker"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "As u internet-instaanbediener 'n gebruikersnaam vereis, voer dit hier in."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Internet-instaanbedienerwagwoord"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "As u internet-instaanbediener 'n wagwoord vereis, voer dit hier in."
+
+#: setup.php
+msgid "Mactrack Dashboard"
+msgstr "Mactrack-kontroleskerm"
+
+#: setup.php
+msgid "Mactrack Devices"
+msgstr "Mactrack-toestelle"
+
+#: setup.php
+msgid "(Edit)"
+msgstr "(Wysig)"
+
+#: setup.php
+msgid "(Import)"
+msgstr "(Invoer)"
+
+#: setup.php
+msgid "Mactrack Device Types"
+msgstr "Mactrack-toesteltipes"
+
+#: setup.php
+msgid "Mactrack Sites"
+msgstr "Mactrack-terreine"
+
+#: setup.php
+msgid "Mac Address Tracking Utility"
+msgstr "Mac-adres-nasporingsnutsprogram"
+
+#: setup.php
+msgid "Mac Address Authorization Utility"
+msgstr "Mac-adres-magtigingsnutsprogram"
+
+#: setup.php
+msgid "Mactrack Vendor Macs"
+msgstr "Mactrack-verskaffer-MAC's"
+
+#: setup.php
+msgid "Mactrack View Macs"
+msgstr "Mactrack Bekyk MAC's"
+
+#: setup.php
+msgid "Mactrack Dot1x View"
+msgstr "Mactrack Dot1x-aansig"
+
+#: setup.php
+msgid "Mactrack IP Address Viewer"
+msgstr "Mactrack-IP-adresbekyker"
+
+#: setup.php
+msgid "Mactrack View Interfaces"
+msgstr "Mactrack Bekyk koppelvlakke"
+
+#: setup.php
+msgid "Mactrack View Sites"
+msgstr "Mactrack Bekyk terreine"
+
+#: setup.php
+msgid "Mactrack View IP Ranges"
+msgstr "Mactrack Bekyk IP-reekse"
+
+#: setup.php
+msgid "Mactrack View Devices"
+msgstr "Mactrack Bekyk toestelle"
+
+#: setup.php
+msgid "Mactrack Utilities"
+msgstr "Mactrack-nutsmiddels"
+
+#: setup.php
+msgid "Truncate Port Results Table"
+msgstr "Maak poortresultatetabel leeg"
+
+#: setup.php
+msgid "Truncate Aggregated Port Results Table"
+msgstr "Maak saamgevoegde poortresultatetabel leeg"
+
+#: setup.php
+msgid "Truncate and Re-create Aggregated Port Results Table"
+msgstr "Maak saamgevoegde poortresultatetabel leeg en skep dit weer"
+
+#: setup.php
+msgid "Refresh/Update Vendor MAC Database from IEEE"
+msgstr "Verfris/dateer verskaffer-MAC-databasis vanaf IEEE op"
+
+#: setup.php
+msgid "Mactrack Graph Viewer"
+msgstr "Mactrack-grafiekbekyker"
+
+#: setup.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "%d Sekondes"
+
+#: setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d minuut"
+
+#: setup.php
+msgid "Matches"
+msgstr "Stem ooreen"
+
+#: setup.php
+msgid "Contains"
+msgstr "Bevat"
+
+#: setup.php
+msgid "Begins With"
+msgstr "Begin met"
+
+#: setup.php
+msgid "Does Not Contain"
+msgstr "Bevat nie"
+
+#: setup.php
+msgid "Does Not Begin With"
+msgstr "Begin nie met nie"
+
+#: setup.php
+msgid "Is Null"
+msgstr "Is Null"
+
+#: setup.php
+msgid "Is Not Null"
+msgstr "Is nie Null nie"
+
+#: setup.php
+msgid "Half"
+msgstr "Half"
+
+#: setup.php
+msgid "Full"
+msgstr "Volledig"
+
+#: setup.php
+msgid "Sync Cacti Device to Mactrack Device"
+msgstr "Sinchroniseer Cacti-toestel na Mactrack-toestel"
+
+#: setup.php
+msgid "Sync Mactrack Device to Cacti Device"
+msgstr "Sinchroniseer Mactrack-toestel na Cacti-toestel"
+
+#: setup.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Elke %d minute"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hour"
+msgstr "Elke %d uur"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Elke %d ure"
+
+#: setup.php
+msgid "Every Day"
+msgstr "Elke dag"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "%d maand"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "%d maande"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "%d jaar"
+
+#: setup.php
+msgid "On Scan Completion"
+msgstr "By voltooiing van skandering"
+
+#: setup.php
+#, php-format
+msgid "Every %d Days"
+msgstr "Elke %d dae"
+
+#: setup.php
+msgid "Every Week"
+msgstr "Elke week"
+
+#: setup.php
+msgid "Management"
+msgstr "Bestuur"
+
+#: setup.php
+msgid "SNMP Options"
+msgstr "SNMP-opsies"
+
+#: setup.php
+msgid "Mac Watch"
+msgstr "Mac Watch"
+
+#: setup.php
+msgid "Mactrack Tools"
+msgstr "Mactrack-hulpmiddels"
+
+#: setup.php
+msgid "Mac Authorizations"
+msgstr "Mac-magtigings"
+
+#: setup.php
+msgid "Tracking Utilities"
+msgstr "Nasporingshulpmiddels"
+
+#: setup.php
+msgid "Ports to Ignore (Regular Expression)"
+msgstr "Poorte om te ignoreer (Reguliere uitdrukking)"
+
+#: setup.php
+#, php-format
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions."
+msgstr "Opsioneel.  'n Gereelde uitdrukking wat, sonder inagneming van hoof-/kleinletters, gepas word teen die poortnaam en die poortalias van %s.  MAC-adresse wat op 'n passende poort gevind word, word nie ingesamel nie.  Byvoorbeeld, '(uplink|trunk)' ignoreer elke poort waarvan die naam of alias uplink of trunk bevat.  Plaas elke uitdrukking op sy eie reël om verskeie op te gee.  Dit word bykomend tot die %s-uitdrukkings toegepas."
+
+#: setup.php
+msgid "every device in this site"
+msgstr "elke toestel op hierdie terrein"
+
+#: setup.php
+msgid "this device"
+msgstr "hierdie toestel"
+
+#: setup.php
+msgid "device and global"
+msgstr "toestel en globaal"
+
+#: setup.php
+msgid "site and global"
+msgstr "terrein en globaal"
+
+#: setup.php
+msgid "Device Scanning Function Options"
+msgstr "Opsies vir toestelskandeerfunksies"
+
+#: setup.php
+msgid "Give this device type a meaningful description."
+msgstr "Gee hierdie toesteltipe 'n betekenisvolle beskrywing."
+
+#: setup.php
+msgid "Fill in the name for the vendor of this device type."
+msgstr "Vul die naam van die vervaardiger van hierdie toesteltipe in."
+
+#: setup.php
+msgid "Choose the type of device."
+msgstr "Kies die tipe toestel."
+
+#: setup.php
+msgid "System Description Match"
+msgstr "Stelselbeskrywing-ooreenstemming"
+
+#: setup.php
+msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
+msgstr "Verskaf sleutelinligting om Mactrack te help om die tipe Toestel op te spoor. Die jokerkarakter is die '&#42;'-teken."
+
+#: setup.php
+msgid "Vendor SNMP Object ID Match"
+msgstr "Verskaffer-SNMP-objek-ID-ooreenkoms"
+
+#: setup.php
+msgid "MAC Address Scanning Function"
+msgstr "MAC-adres-skandeerfunksie"
+
+#: setup.php
+msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
+msgstr "Mactrack-skandeerfunksie om op te roep ten einde poortbesonderhede te verkry en te stoor. Slegs die funksienaam word vereis. Die volgende vier parameters word aanvaar en sal altyd aangeheg word: 'my_function($site, &$device, $lowport, $highport)'. Geen funksie word vir 'n suiwer roeteerder vereis nie."
+
+#: setup.php
+msgid "IP Address Scanning Function"
+msgstr "IP-adres-skanderingsfunksie"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
+msgstr "Mactrack-skandeerfunksie spesifiek vir Layer3-toestelle wat IP-adresse naspoor."
+
+#: setup.php
+msgid "802.1x Scanning Function"
+msgstr "802.1x Skandeerfunksie"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Switches with dot1x enabled."
+msgstr "Mactrack-skandeerfunksie spesifiek vir skakelaars met dot1x geaktiveer."
+
+#: setup.php
+msgid "Serial Number Base OID"
+msgstr "Reeksnommer Basis-OID"
+
+#: setup.php
+msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
+msgstr "Die SNMP OID wat gebruik word om hierdie Toesteltipe se reeksnommer te verkry wat in die Mactrack-bateinligtingtabel gestoor moet word."
+
+#: setup.php
+msgid "Serial Number Collection Method"
+msgstr "Reeksnommer-insamelingsmetode"
+
+#: setup.php
+msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
+msgstr "Hoe die reeksnommer vir hierdie OID ingesamel word. As dit 'SNMP Walk' is, neem ons aan daar is verskeie reeksnommers. As dit 'Get' is, sal dit slegs een wees."
+
+#: setup.php
+msgid "SNMP Get"
+msgstr "SNMP Get"
+
+#: setup.php
+msgid "SNMP Walk"
+msgstr "SNMP-deurloop"
+
+#: setup.php
+msgid "Low User Port Number"
+msgstr "Lae gebruikerspoortnommer"
+
+#: setup.php
+msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
+msgstr "Verskaf die laagste gebruikerspoortnommer op hierdie skakelaar. Laat 0 om die stelsel dit te laat bereken."
+
+#: setup.php
+msgid "High User Port Number"
+msgstr "Hoë Gebruikerspoortnommer"
+
+#: setup.php
+msgid "Disabled device type is not used."
+msgstr "Gedeaktiveerde toesteltipe word nie gebruik nie."
+
+#: setup.php
+msgid "Fill in the name of this SNMP option set."
+msgstr "Vul die naam van hierdie SNMP-opsiestel in."
+
+#: setup.php
+msgid "SNMP Version"
+msgstr "SNMP-weergawe"
+
+#: setup.php
+msgid "Choose the SNMP version for this host."
+msgstr "Kies die SNMP-weergawe vir hierdie gasheer."
+
+#: setup.php
+msgid "SNMP Community String"
+msgstr "SNMP-gemeenskapstring"
+
+#: setup.php
+msgid "Fill in the SNMP read community for this device."
+msgstr "Vul die SNMP-leesgemeenskap vir hierdie toestel in."
+
+#: setup.php
+msgid "SNMP Port"
+msgstr "SNMP-poort"
+
+#: setup.php
+msgid "SNMP Timeout"
+msgstr "SNMP-tyduitloop"
+
+#: setup.php
+msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
+msgstr "Die maksimum aantal millisekondes wat Cacti vir 'n SNMP-reaksie sal wag (werk nie met php-snmp-ondersteuning nie)."
+
+#: setup.php
+msgid "SNMP Retries"
+msgstr "SNMP-herpogings"
+
+#: setup.php
+msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
+msgstr "Die maksimum aantal pogings om 'n toestel via 'n SNMP-leesstring te bereik voordat daar gestaak word."
+
+#: setup.php
+msgid "Maximum OID's Per Get Request"
+msgstr "Maksimum OID's per Get-versoek"
+
+#: setup.php
+msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
+msgstr "Spesifiseer die aantal OID's wat in 'n enkele SNMP Get-versoek verkry kan word."
+
+#: setup.php
+msgid "SNMP Username (v3)"
+msgstr "SNMP-gebruikersnaam (v3)"
+
+#: setup.php
+msgid "SNMP v3 username for this device."
+msgstr "SNMP v3-gebruikersnaam vir hierdie toestel."
+
+#: setup.php
+msgid "SNMP Password (v3)"
+msgstr "SNMP-wagwoord (v3)"
+
+#: setup.php
+msgid "SNMP v3 password for this device."
+msgstr "SNMP v3-wagwoord vir hierdie toestel."
+
+#: setup.php
+msgid "SNMP Auth Protocol (v3)"
+msgstr "SNMP-verifikasieprotokol (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Authorization Protocol."
+msgstr "Kies die SNMPv3-magtigingsprotokol."
+
+#: setup.php
+msgid "SNMP Privacy Passphrase (v3)"
+msgstr "SNMP-privaatheidswagfrase (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Passphrase."
+msgstr "Kies die SNMPv3-privaatheidswagfrase."
+
+#: setup.php
+msgid "SNMP Privacy Protocol (v3)"
+msgstr "SNMP-privaatheidsprotokol (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Protocol."
+msgstr "Kies die SNMPv3-privaatheidsprotokol."
+
+#: setup.php
+msgid "SNMP Context (v3)"
+msgstr "SNMP-konteks (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Context to use for this device."
+msgstr "Voer die SNMP v3-konteks in om vir hierdie toestel te gebruik."
+
+#: setup.php
+msgid "SNMP Engine ID (v3)"
+msgstr "SNMP-enjin-ID (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Engine ID to use for this device."
+msgstr "Voer die SNMP v3-enjin-ID in om vir hierdie toestel te gebruik."
+
+#: setup.php
+msgid "General Device Settings"
+msgstr "Algemene toestelinstellings"
+
+#: setup.php
+msgid "Give this device a meaningful name."
+msgstr "Gee hierdie toestel 'n betekenisvolle naam."
+
+#: setup.php
+msgid "Fill in the fully qualified hostname for this device."
+msgstr "Vul die volledig gekwalifiseerde gasheernaam vir hierdie toestel in."
+
+#: setup.php
+msgid "Related Cacti Host"
+msgstr "Verwante Cacti-gasheer"
+
+#: setup.php
+msgid "Given Mactrack Host is connected to this Cacti Host."
+msgstr "Gegewe Mactrack-gasheer is aan hierdie Cacti-gasheer gekoppel."
+
+#: setup.php
+msgid "Scan Type"
+msgstr "Skandeertipe"
+
+#: setup.php
+msgid "Choose the scan type you wish to perform on this device."
+msgstr "Kies die skandeertipe wat jy op hierdie toestel wil uitvoer."
+
+#: setup.php
+msgid "Choose the site to associate with this device."
+msgstr "Kies die terrein wat met hierdie toestel geassosieer moet word."
+
+#: setup.php
+msgid "Device Notes"
+msgstr "Toestelnotas"
+
+#: setup.php
+msgid "This field value is useful to save general information about a specific device."
+msgstr "Hierdie veldwaarde is nuttig om algemene inligting oor 'n spesifieke toestel te stoor."
+
+#: setup.php
+msgid "Disable Device"
+msgstr "Deaktiveer toestel"
+
+#: setup.php
+msgid "Check this box to disable all checks for this host."
+msgstr "Merk hierdie blokkie om alle kontroles vir hierdie gasheer te deaktiveer."
+
+#: setup.php
+msgid "Switch/Hub, Switch/Router Settings"
+msgstr "Skakelaar/Spilpunt, Skakelaar/Roeteerder-instellings"
+
+#: setup.php
+msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
+msgstr "Verskaf 'n lys poorte op 'n spesifieke skakelaar/spilpunt waarvan die MAC-resultate geïgnoreer moet word. Poorte soos skakel-/stampoorte wat nie van ander gebruikerspoorte onderskei kan word nie, is voorbeelde hiervan. Elke poortnommer moet deur 'n dubbelpunt, pypkarakter of 'n spasie ':', '|', ' ' geskei word. Byvoorbeeld, 'Fa0/1: Fa1/23' of 'Fa0/1 Fa1/23' sal aanvaarbaar wees vir sommige vervaardigers se skakelaartipes."
+
+#: setup.php
+msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
+msgstr "Jy kan spesifieke SNMP-instellings gebruik of 'n SNMP-stel kies. In die tweede geval probeer mactrack om die korrekte instellings uit die SNMP-stel te vind"
+
+#: setup.php
+msgid "Read Strings"
+msgstr "Leesstringe"
+
+#: setup.php
+msgid "<strong>DEPRECATED:</strong> SNMP community strings"
+msgstr "<strong>VEROUDERD:</strong> SNMP-gemeenskapstringe"
+
+#: setup.php
+msgid "Specific SNMP Settings"
+msgstr "Spesifieke SNMP-instellings"
+
+#: setup.php
+msgid "Connectivity Options"
+msgstr "Verbindingsopsies"
+
+#: setup.php
+msgid "Terminal Type"
+msgstr "Terminaaltipe"
+
+#: setup.php
+msgid "Choose the terminal type that you use to connect to this device."
+msgstr "Kies die terminaaltipe wat jy gebruik om aan hierdie toestel te koppel."
+
+#: setup.php
+msgid "Telnet"
+msgstr "Telnet"
+
+#: setup.php
+msgid "SSH"
+msgstr "SSH"
+
+#: setup.php
+msgid "HTTP"
+msgstr "HTTP"
+
+#: setup.php
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: setup.php
+msgid "User Name"
+msgstr "Gebruikersnaam"
+
+#: setup.php
+msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
+msgstr "Die gebruikersnaam wat vir u pasgemaakte verifikasiemetode gebruik moet word. Voorbeelde sluit in SSH, RSH, HTML, ens."
+
+#: setup.php
+msgid "Password"
+msgstr "Wagwoord"
+
+#: setup.php
+msgid "The password to be used for your custom authentication."
+msgstr "Die wagwoord wat vir u pasgemaakte stawing gebruik moet word."
+
+#: setup.php
+msgid "Private Key Path"
+msgstr "Privaatsleutelpad"
+
+#: setup.php
+msgid "The path to the private key used for SSH authentication."
+msgstr "Die pad na die privaat sleutel wat vir SSH-stawing gebruik word."
+
+#: setup.php
+msgid "Sequence"
+msgstr "Volgorde"
+
+#: setup.php
+msgid "Sequence of Item."
+msgstr "Volgorde van item."
+
+#: setup.php
+msgid "General Site Settings"
+msgstr "Algemene terreininstellings"
+
+#: setup.php
+msgid "Please enter a reasonable name for this site."
+msgstr "Voer asseblief 'n redelike naam vir hierdie terrein in."
+
+#: setup.php
+msgid "Primary Customer Contact"
+msgstr "Primêre kliëntkontak"
+
+#: setup.php
+msgid "The principal customer contact name and number for this site."
+msgstr "Die hoofkliëntkontakpersoon se naam en nommer vir hierdie terrein."
+
+#: setup.php
+msgid "NetOps Contact"
+msgstr "NetOps-kontak"
+
+#: setup.php
+msgid "Please principal network support contact name and number for this site."
+msgstr "Verskaf asseblief die hoof- netwerkondersteuningskontaknaam en -nommer vir hierdie terrein."
+
+#: setup.php
+msgid "Facilities Contact"
+msgstr "Fasiliteitskontak"
+
+#: setup.php
+msgid "Please principal facilities/security contact name and number for this site."
+msgstr "Verskaf asseblief die hoof- fasiliteite-/sekuriteitskontaknaam en -nommer vir hierdie terrein."
+
+#: setup.php
+msgid "Site Information"
+msgstr "Terreininligting"
+
+#: setup.php
+msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
+msgstr "Verskaf enige terreinspesifieke inligting, in vrye vorm, wat jou in staat stel om hierdie ligging beter te bestuur."
+
+#: setup.php
+msgid "General Mac Address Tracking Settings"
+msgstr "Algemene MAC-adres-nasporingsinstellings"
+
+#: setup.php
+msgid "MAC Address"
+msgstr "MAC-adres"
+
+#: setup.php
+msgid "Please enter the MAC Address to be watched for."
+msgstr "Voer asseblief die MAC-adres in waarvoor dopgehou moet word."
+
+#: setup.php
+msgid "MAC Tracking Name/Email Subject"
+msgstr "MAC-nasporingsnaam/E-posonderwerp"
+
+#: setup.php
+msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
+msgstr "Voer asseblief 'n redelike naam vir hierdie MAC-nasporingsinskrywing in. Hierdie inligting sal in die onderwerpreël van u e-pos wees"
+
+#: setup.php
+msgid "Ticket number for cross referencing with your corporate help desk system(s)."
+msgstr "Kaartjienommer vir kruisverwysing met u korporatiewe hulptoonbankstelsel(s)."
+
+#: setup.php
+msgid "Notification Schedule"
+msgstr "Kennisgewingskedule"
+
+#: setup.php
+msgid "Choose how often an Email should be generated for this Mac Watch item."
+msgstr "Kies hoe gereeld 'n E-pos vir hierdie Mac Watch-item gegenereer moet word."
+
+#: setup.php
+msgid "First Occurrence Only"
+msgstr "Slegs eerste voorkoms"
+
+#: setup.php
+msgid "All Occurrences"
+msgstr "Alle voorkomste"
+
+#: setup.php
+msgid "Every Hour"
+msgstr "Elke uur"
+
+#: setup.php
+msgid "Email Addresses"
+msgstr "E-posadresse"
+
+#: setup.php
+msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
+msgstr "Voer 'n kommapuntgeskeide lys van E-posadresse in wat in kennis gestel sal word waar hierdie MAC-adres is."
+
+#: setup.php
+msgid "General Mac Address Authorization Settings"
+msgstr "Algemene MAC-adres-magtigingsinstellings"
+
+#: setup.php
+msgid "MAC Address Match"
+msgstr "MAC-adresooreenkoms"
+
+#: setup.php
+msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
+msgstr "Voer asseblief die MAC-adres of MAC-adres-ooreenstemmingstring in wat outomaties gemagtig moet word. As u 'n groep MAC-adresse wil magtig, kan u die jokersimbool '&#37;' enige plek in die MAC-adres gebruik."
+
+#: setup.php
+msgid "Please add a reason for this entry."
+msgstr "Voeg asseblief 'n rede vir hierdie inskrywing by."
+
