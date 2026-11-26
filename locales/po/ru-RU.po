@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Russian <https://translate.cacti.net/projects/cacti/mactrack/ru/>\nLanguage: ru-RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Russian <https://translate.cacti.net/projects/cacti/mactrack/ru/>\nLanguage: ru-RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -305,7 +305,7 @@ msgstr "%d Дней"
 #: lib/mactrack_functions.php
 #, php-format
 msgid "%d Weeks"
-msgstr "%d нед."
+msgstr "%d недель"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
@@ -1430,7 +1430,7 @@ msgstr "В прошлый раз, когда Поллер начинал:"
 
 #: mactrack_utilities.php
 msgid "Poller Frequency:"
-msgstr "Poller Frequency:"
+msgstr "Частота опроса:"
 
 #: mactrack_utilities.php
 msgid "Approx. Next Runtime:"
@@ -2181,7 +2181,7 @@ msgstr "Устройство не сопоставлено с устройств
 
 #: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
 msgid "View MAC Addresses"
-msgstr "MAC-адреса"
+msgstr "Просмотр MAC-адресов"
 
 #: mactrack_view_devices.php
 msgid "No Mactrack Devices Found"
@@ -2440,7 +2440,7 @@ msgstr "Редактировать Обьект"
 
 #: mactrack_view_ips.php mactrack_view_sites.php
 msgid "View IP Addresses"
-msgstr "Текущие IP-адреса"
+msgstr "Просмотр IP-адресов"
 
 #: mactrack_view_ips.php
 msgid "No Mactrack Site IP Ranges Found"
@@ -2542,7 +2542,7 @@ msgstr "Диапазоны IP-адресов"
 
 #: mactrack_view_sites.php
 msgid "Sites / Device Types"
-msgstr "Типы устройств"
+msgstr "Сайты / Типы устройств"
 
 #: mactrack_view_sites.php
 msgid "Site Scan Results"
@@ -3079,7 +3079,7 @@ msgstr "%d Месяц"
 #: setup.php
 #, php-format
 msgid "%d Months"
-msgstr "%d мес."
+msgstr "%d месяцев"
 
 #: setup.php
 #, php-format
@@ -3109,7 +3109,7 @@ msgstr "Параметры SNMP"
 
 #: setup.php
 msgid "Mac Watch"
-msgstr "Mac Watch"
+msgstr "Отслеживание MAC"
 
 #: setup.php
 msgid "Mactrack Tools"
@@ -3274,7 +3274,7 @@ msgstr "Максимальное количество миллисекунд Cac
 
 #: setup.php
 msgid "SNMP Retries"
-msgstr "SNMP Retries"
+msgstr "Повторы SNMP"
 
 #: setup.php
 msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
@@ -3494,7 +3494,7 @@ msgstr "Имя основного заказчика и номер телефо�
 
 #: setup.php
 msgid "NetOps Contact"
-msgstr "NetOps Contact"
+msgstr "Контакт NetOps"
 
 #: setup.php
 msgid "Please principal network support contact name and number for this site."
