@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: German <https://translate.cacti.net/projects/cacti/mactrack/de/>\nLanguage: de-DE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: German <https://translate.cacti.net/projects/cacti/mactrack/de/>\nLanguage: de-DE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -285,7 +285,7 @@ msgstr "Gerät „%s“ deaktivieren"
 #: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
 #: setup.php
 msgid "N/A"
-msgstr "Nicht verfügbar"
+msgstr "Nicht zutreffend"
 
 #: lib/mactrack_functions.php setup.php
 #, php-format
@@ -432,7 +432,7 @@ msgstr "Beliebig"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
 msgid "SubType"
-msgstr "SubType"
+msgstr "Untertyp"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
@@ -811,7 +811,7 @@ msgstr "Dot1x Scanner"
 
 #: mactrack_device_types.php
 msgid "sysDescription Match"
-msgstr "sysDescription Match"
+msgstr "sysDescription-Übereinstimmung"
 
 #: mactrack_device_types.php
 msgid "Vendor OID Match"
@@ -1352,7 +1352,7 @@ msgstr "Port"
 
 #: mactrack_snmp.php setup.php
 msgid "Timeout"
-msgstr "Timeout"
+msgstr "Zeitüberschreitung"
 
 #: mactrack_snmp.php setup.php
 msgid "Retries"
@@ -1372,7 +1372,7 @@ msgstr "Auth-Protokoll"
 
 #: mactrack_snmp.php
 msgid "Priv Proto"
-msgstr "Priv Proto"
+msgstr "Priv.-Protokoll"
 
 #: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
 #: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
@@ -1410,7 +1410,7 @@ msgstr "MacTrack-Prozessstatus"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Refresh"
-msgstr "Aktualisieren"
+msgstr "Neu laden"
 
 #: mactrack_utilities.php
 msgid "Current Process Status"
@@ -2201,7 +2201,7 @@ msgstr "MacTrack - 802.1x-Ansicht"
 
 #: mactrack_view_dot1x.php
 msgid "Domain"
-msgstr "Domain"
+msgstr "Domäne"
 
 #: mactrack_view_dot1x.php
 msgid "802.1x Sessions"
@@ -2237,7 +2237,7 @@ msgstr "STIMME"
 
 #: mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "Portname"
-msgstr "Portname"
+msgstr "Port-Name"
 
 #: mactrack_view_graphs.php
 msgid "Mactrack - Monitored Device Graph View"
@@ -2293,7 +2293,7 @@ msgstr "Aus (B/S)"
 
 #: mactrack_view_interfaces.php
 msgid "In Err Total"
-msgstr "In Err Total"
+msgstr "Eingangsfehler gesamt"
 
 #: mactrack_view_interfaces.php
 msgid "In Disc Total"
@@ -2305,7 +2305,7 @@ msgstr "UProto Gesamt"
 
 #: mactrack_view_interfaces.php
 msgid "Out Err Total"
-msgstr "Out Err Total"
+msgstr "Ausgangsfehler gesamt"
 
 #: mactrack_view_interfaces.php
 msgid "Out Disc Total"
@@ -2313,7 +2313,7 @@ msgstr "Out Disc Gesamtzahl"
 
 #: mactrack_view_interfaces.php
 msgid "In Err (E/S)"
-msgstr "In Err (E/S)"
+msgstr "Eingangsfehler (F/s)"
 
 #: mactrack_view_interfaces.php
 msgid "In Disc (D/S)"
@@ -2321,11 +2321,11 @@ msgstr "Auf Diskette (D/S)"
 
 #: mactrack_view_interfaces.php
 msgid "UProto (UP/S)"
-msgstr "UProto (UP/S)"
+msgstr "Unbek. Prot. (UP/s)"
 
 #: mactrack_view_interfaces.php
 msgid "Out Err (OE/S)"
-msgstr "Out Err (OE/S)"
+msgstr "Ausgangsfehler (AF/s)"
 
 #: mactrack_view_interfaces.php
 msgid "Out Disc (OD/S)"
@@ -2376,7 +2376,7 @@ msgstr "Mit Problemen"
 
 #: mactrack_view_interfaces.php
 msgid "Up Interfaces"
-msgstr "Up Interfaces"
+msgstr "Aktive Schnittstellen"
 
 #: mactrack_view_interfaces.php
 msgid "Up Interfaces No Alias"
@@ -2542,7 +2542,7 @@ msgstr "IP-Bereiche"
 
 #: mactrack_view_sites.php
 msgid "Sites / Device Types"
-msgstr "Gerätetypen"
+msgstr "Standorte / Gerätetypen"
 
 #: mactrack_view_sites.php
 msgid "Site Scan Results"
@@ -2619,7 +2619,7 @@ msgstr "Datenaufbewahrung"
 
 #: setup.php
 msgid "How long should port MAC details be retained in the database."
-msgstr "Wie lange sollten die MAC-Details des Ports in der Datenbank gespeichert werden?"
+msgstr "Legt fest, wie lange Port-MAC-Details in der Datenbank gespeichert werden."
 
 #: setup.php
 msgid "Data Retention IPs"
@@ -2639,7 +2639,7 @@ msgstr "Switch Level Ignorieren Ports Trennzeichen"
 
 #: setup.php
 msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
-msgstr "Welches Trennzeichen soll MacTrack beim Auswerten der Zeichenfolge für zu ignorierende Ports bei jedem Switch verwenden?"
+msgstr "Trennzeichen, das MacTrack beim Auswerten der Zeichenfolge für zu ignorierende Ports pro Switch verwendet."
 
 #: setup.php
 msgid "Auto Detect"
@@ -2868,7 +2868,7 @@ msgstr "Standard Tab"
 
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
-msgstr "Welche MacTrack-Registerkarte möchten Sie jedes Mal als Standard-Registerkarte verwenden, wenn Sie zur zweiten MacTrack-Registerkarte gelangen?"
+msgstr "Die MacTrack-Registerkarte, die standardmäßig verwendet werden soll."
 
 #: setup.php
 msgid "Mac Addresses"
@@ -3254,7 +3254,7 @@ msgstr "Wählen Sie die SNMP-Version für diesen Host aus."
 
 #: setup.php
 msgid "SNMP Community String"
-msgstr "SNMP Community String"
+msgstr "SNMP-Community-Zeichenkette"
 
 #: setup.php
 msgid "Fill in the SNMP read community for this device."
