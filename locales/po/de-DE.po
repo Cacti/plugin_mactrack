@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: German <https://translate.cacti.net/projects/cacti/mactrack/de/>\nLanguage: de-DE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 10:49+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: German <https://translate.cacti.net/projects/cacti/mactrack/de/>\nLanguage: de-DE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -1360,7 +1360,7 @@ msgstr "Wiederholungen"
 
 #: mactrack_snmp.php
 msgid "Max OIDs"
-msgstr "Maximale OIDs"
+msgstr "Max. OIDs"
 
 #: mactrack_snmp.php mactrack_view_dot1x.php
 msgid "Username"
@@ -2780,7 +2780,7 @@ msgstr "MacAuth Report E-Mail-Adressen"
 
 #: setup.php
 msgid "A comma delimited list of users to receive the MacAuth Email notifications."
-msgstr "Eine kommagetrennte Liste von Benutzern, die die MacAuth E-Mail-Benachrichtigungen erhalten sollen."
+msgstr "Eine kommagetrennte Liste von Benutzern, welche die MacAuth E-Mail-Benachrichtigungen erhalten sollen."
 
 #: setup.php
 msgid "MacAuth Report Frequency"
