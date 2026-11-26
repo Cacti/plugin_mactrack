@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Arabic (Saudi Arabia) <https://translate.cacti.net/projects/cacti/mactrack/ar_SA/>\nLanguage: ar-SA\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Arabic (Saudi Arabia) <https://translate.cacti.net/projects/cacti/mactrack/ar_SA/>\nLanguage: ar-SA\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -93,7 +93,7 @@ msgstr "لم تكتمل إعادة بناء المنافذ المجمعة"
 
 #: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
 msgid "Running"
-msgstr "مفتوح"
+msgstr "قيد التشغيل"
 
 #: lib/mactrack_functions.php
 msgid "No method"
@@ -201,7 +201,7 @@ msgstr "منذ إعادة التشغيل"
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
 #: mactrack_view_devices.php mactrack_view_interfaces.php
 msgid "Down"
-msgstr "معطل"
+msgstr "متوقف"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
 #: mactrack_view_devices.php mactrack_view_interfaces.php
@@ -811,7 +811,7 @@ msgstr "الماسح الضوئي Dot1x"
 
 #: mactrack_device_types.php
 msgid "sysDescription Match"
-msgstr "sysDescription Match"
+msgstr "مطابقة sysDescription"
 
 #: mactrack_device_types.php
 msgid "Vendor OID Match"
@@ -1336,7 +1336,7 @@ msgstr "خيارات SNMP لـ Mactrack"
 
 #: mactrack_snmp.php
 msgid "Item"
-msgstr "اعلان"
+msgstr "عنصر"
 
 #: mactrack_snmp.php setup.php
 msgid "Version"
@@ -1410,7 +1410,7 @@ msgstr "حالة عمليات Mactrack"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Refresh"
-msgstr "تحديث"
+msgstr "إنعاش"
 
 #: mactrack_utilities.php
 msgid "Current Process Status"
@@ -2181,7 +2181,7 @@ msgstr "الجهاز غير مرتبط بجهاز Cacti"
 
 #: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
 msgid "View MAC Addresses"
-msgstr "عناوين MAC"
+msgstr "عرض عناوين MAC"
 
 #: mactrack_view_devices.php
 msgid "No Mactrack Devices Found"
@@ -2237,7 +2237,7 @@ msgstr "صوت"
 
 #: mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "Portname"
-msgstr "Portname"
+msgstr "اسم المنفذ"
 
 #: mactrack_view_graphs.php
 msgid "Mactrack - Monitored Device Graph View"
@@ -2542,7 +2542,7 @@ msgstr "نطاقات IP"
 
 #: mactrack_view_sites.php
 msgid "Sites / Device Types"
-msgstr "أنواع الأجهزة"
+msgstr "المواقع / أنواع الأجهزة"
 
 #: mactrack_view_sites.php
 msgid "Site Scan Results"
@@ -2764,7 +2764,7 @@ msgstr "مسؤول MACTrack"
 
 #: setup.php
 msgid "MacWatch Default Body"
-msgstr "MacWatch Default Body"
+msgstr "النص الافتراضي لـ MacWatch"
 
 #: setup.php
 msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
