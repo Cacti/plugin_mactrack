@@ -911,11 +911,11 @@ msgstr "En az bir cihaz seçmelisiniz."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to enable the following devices."
-msgstr "Aşağıdaki Cihazları etkinleştirmek için &#39;Devam Et&#39;i tıklayın."
+msgstr "Aşağıdaki Cihazları etkinleştirmek için 'Devam Et'i tıklayın."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to disable the following devices."
-msgstr "Aşağıdaki cihazları devre dışı bırakmak için &#39;Devam Et&#39;i tıklayın."
+msgstr "Aşağıdaki cihazları devre dışı bırakmak için 'Devam Et'i tıklayın."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."

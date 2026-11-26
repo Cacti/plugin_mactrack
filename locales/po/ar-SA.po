@@ -911,11 +911,11 @@ msgstr "يجب عليك تحديد جهاز واحد على الأقل."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to enable the following devices."
-msgstr "انقر فوق &quot;متابعة&quot; لتمكين الأجهزة (الأجهزة) التالية."
+msgstr "انقر فوق \"متابعة\" لتمكين الأجهزة (الأجهزة) التالية."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to disable the following devices."
-msgstr "انقر فوق &quot;متابعة&quot; لتعطيل الأجهزة (الأجهزة) التالية."
+msgstr "انقر فوق \"متابعة\" لتعطيل الأجهزة (الأجهزة) التالية."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."

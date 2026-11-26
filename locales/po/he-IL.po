@@ -3006,7 +3006,7 @@ msgstr "%d שניות"
 #: setup.php
 #, php-format
 msgid "%d Minute"
-msgstr "‫%d דקה"
+msgstr "%d דקה"
 
 #: setup.php
 msgid "Matches"

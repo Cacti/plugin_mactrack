@@ -1307,11 +1307,11 @@ function mactrack_device_type_filter(): void {
 					</td>
 					<td>
 						<span class='nowrap'>
-							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active' title='<?php print __esc('Submit Query'); ?>'><?php print __esc('Go'); ?></button>
-							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Clear Filtered Results'); ?>'><?php print __esc('Clear'); ?></button>
-							<button type='button' id='scan' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Scan Active Devices for Unknown Device Types'); ?>'><?php print __esc('Rescan'); ?></button>
-							<button type='button' id='import' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Import Device Types from a CSV File'); ?>'><?php print __esc('Import'); ?></button>
-							<button type='button' id='export' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Export Device Types to Share with Others'); ?>'><?php print __esc('Export'); ?></button>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active' title='<?php print __esc('Submit Query', 'mactrack'); ?>'><?php print __esc('Go'); ?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Clear Filtered Results', 'mactrack'); ?>'><?php print __esc('Clear'); ?></button>
+							<button type='button' id='scan' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Scan Active Devices for Unknown Device Types', 'mactrack'); ?>'><?php print __esc('Rescan'); ?></button>
+							<button type='button' id='import' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Import Device Types from a CSV File', 'mactrack'); ?>'><?php print __esc('Import'); ?></button>
+							<button type='button' id='export' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Export Device Types to Share with Others', 'mactrack'); ?>'><?php print __esc('Export'); ?></button>
 						</span>
 					</td>
 					<td>
