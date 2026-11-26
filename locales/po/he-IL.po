@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Hebrew (Israel) <https://translate.cacti.net/projects/cacti/mactrack/he_IL/>\nLanguage: he-IL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && n % 10 == 0) ? 2 : 3));\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Hebrew (Israel) <https://translate.cacti.net/projects/cacti/mactrack/he_IL/>\nLanguage: he-IL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && n % 10 == 0) ? 2 : 3));\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -285,7 +285,7 @@ msgstr "השבתת התקן '%s'"
 #: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
 #: setup.php
 msgid "N/A"
-msgstr "לא זמין"
+msgstr "לא רלוונטי"
 
 #: lib/mactrack_functions.php setup.php
 #, php-format
@@ -325,7 +325,7 @@ msgstr "מצב: סרק, זמן ריצה אחרון: %2.1f שניות, תהליכ
 #: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
 #: setup.php
 msgid "Disabled"
-msgstr "לא זמין"
+msgstr "מושבת"
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -428,7 +428,7 @@ msgstr "אתר"
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
 #: mactrack_view_ips.php
 msgid "Any"
-msgstr "הכל"
+msgstr "כלשהו"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
 msgid "SubType"
@@ -2181,7 +2181,7 @@ msgstr "התקן לא ממופה להתקן Cacti"
 
 #: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
 msgid "View MAC Addresses"
-msgstr "כתובות MAC"
+msgstr "הצגת כתובות MAC"
 
 #: mactrack_view_devices.php
 msgid "No Mactrack Devices Found"
@@ -2237,7 +2237,7 @@ msgstr "VOICE"
 
 #: mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "Portname"
-msgstr "Portname"
+msgstr "שם פורט"
 
 #: mactrack_view_graphs.php
 msgid "Mactrack - Monitored Device Graph View"
@@ -2436,7 +2436,7 @@ msgstr "כתובת IP טווחים"
 
 #: mactrack_view_ips.php mactrack_view_sites.php
 msgid "Edit Site"
-msgstr "אתר"
+msgstr "עריכת אתר"
 
 #: mactrack_view_ips.php mactrack_view_sites.php
 msgid "View IP Addresses"
