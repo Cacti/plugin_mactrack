@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Italian <https://translate.cacti.net/projects/cacti/mactrack/it/>\nLanguage: it-IT\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Italian <https://translate.cacti.net/projects/cacti/mactrack/it/>\nLanguage: it-IT\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -49,7 +49,7 @@ msgstr "Ottimizzazione della tabella IP"
 #: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
 #: mactrack_view_dot1x.php
 msgid "Idle"
-msgstr "Idle"
+msgstr "Inattivo"
 
 #: lib/mactrack_activity.php
 msgid "Upgrading: rebuilding aggregated ports"
@@ -815,7 +815,7 @@ msgstr "SysDescription Match"
 
 #: mactrack_device_types.php
 msgid "Vendor OID Match"
-msgstr "Vendor OID Match"
+msgstr "Corrispondenza OID produttore"
 
 #: mactrack_device_types.php setup.php
 msgid "Device Types"
@@ -1080,7 +1080,7 @@ msgstr "Nome host:"
 
 #: mactrack_devices.php
 msgid "ObjectID:"
-msgstr "ObjectID:"
+msgstr "ID oggetto:"
 
 #: mactrack_devices.php
 msgid "Mactrack Device Filters"
@@ -1352,7 +1352,7 @@ msgstr "Porta"
 
 #: mactrack_snmp.php setup.php
 msgid "Timeout"
-msgstr "Timeout"
+msgstr "Tempo limite"
 
 #: mactrack_snmp.php setup.php
 msgid "Retries"
@@ -1360,7 +1360,7 @@ msgstr "Tentativi"
 
 #: mactrack_snmp.php
 msgid "Max OIDs"
-msgstr "Max OIDs"
+msgstr "OID max"
 
 #: mactrack_snmp.php mactrack_view_dot1x.php
 msgid "Username"
@@ -1410,7 +1410,7 @@ msgstr "Stato processi MacTrack"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Refresh"
-msgstr "Aggiorna"
+msgstr "Ricarica"
 
 #: mactrack_utilities.php
 msgid "Current Process Status"
@@ -2181,7 +2181,7 @@ msgstr "Dispositivo non mappato a un dispositivo Cacti"
 
 #: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
 msgid "View MAC Addresses"
-msgstr "Indirizzi MAC"
+msgstr "Visualizza indirizzi MAC"
 
 #: mactrack_view_devices.php
 msgid "No Mactrack Devices Found"
@@ -2643,7 +2643,7 @@ msgstr "Quale delimitatore deve utilizzare MacTrack durante l'analisi della stri
 
 #: setup.php
 msgid "Auto Detect"
-msgstr "Auto Detect"
+msgstr "Rilevamento automatico"
 
 #: setup.php
 msgid "Colon [:]"
@@ -2732,7 +2732,7 @@ msgstr "Inserire il timeout DNS in millisecondi. MacTrack utilizza un resolver D
 
 #: setup.php
 msgid "DNS Prime Interval"
-msgstr "DNS Prime Interval"
+msgstr "Intervallo di precaricamento DNS"
 
 #: setup.php
 msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
@@ -2880,7 +2880,7 @@ msgstr "dot1x Deta"
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "Impostazioni generali"
+msgstr "Impostazioni proxy Internet"
 
 #: setup.php
 msgid "Internet Proxy Address"
@@ -3410,7 +3410,7 @@ msgstr "Leggere le stringhe"
 
 #: setup.php
 msgid "<strong>DEPRECATED:</strong> SNMP community strings"
-msgstr "<strong>DEPRECATED:</strong> SNMP community strings"
+msgstr "<strong>DEPRECATO:</strong> stringhe di community SNMP"
 
 #: setup.php
 msgid "Specific SNMP Settings"
