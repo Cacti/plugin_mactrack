@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Turkish <https://translate.cacti.net/projects/cacti/mactrack/tr/>\nLanguage: tr-TR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Turkish <https://translate.cacti.net/projects/cacti/mactrack/tr/>\nLanguage: tr-TR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -285,7 +285,7 @@ msgstr "Cihaz Devre Dışı Bırakma '%s'"
 #: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
 #: setup.php
 msgid "N/A"
-msgstr "Yok"
+msgstr "Geçerli Değil"
 
 #: lib/mactrack_functions.php setup.php
 #, php-format
@@ -432,7 +432,7 @@ msgstr "Herhangi"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
 msgid "SubType"
-msgstr "SubType"
+msgstr "Alt Tür"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
@@ -2181,7 +2181,7 @@ msgstr "Cihaz Takip Cihazını Cacti Cihazına Eşitleyin"
 
 #: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
 msgid "View MAC Addresses"
-msgstr "MAC Adresleri"
+msgstr "MAC Adreslerini Görüntüle"
 
 #: mactrack_view_devices.php
 msgid "No Mactrack Devices Found"
@@ -2542,7 +2542,7 @@ msgstr "IP Aralıkları"
 
 #: mactrack_view_sites.php
 msgid "Sites / Device Types"
-msgstr "Cihaz türleri"
+msgstr "Siteler / Cihaz türleri"
 
 #: mactrack_view_sites.php
 msgid "Site Scan Results"
@@ -2619,7 +2619,7 @@ msgstr "Veri Saklama"
 
 #: setup.php
 msgid "How long should port MAC details be retained in the database."
-msgstr "Port MAC detayları veritabanında ne kadar süreyle saklanmalıdır?"
+msgstr "Port MAC ayrıntılarının veritabanında ne kadar süreyle saklanacağını belirler."
 
 #: setup.php
 msgid "Data Retention IPs"
@@ -2639,7 +2639,7 @@ msgstr "Anahtar Seviyesi Sınırları Yoksay Sınırlayıcıyı Değiştir"
 
 #: setup.php
 msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
-msgstr "MacTrack, her anahtar için Bağlantı Noktalarını Yoksay dizesini ayrıştırırken hangi sınırlayıcıyı kullanmalıdır?"
+msgstr "MacTrack'in her anahtar için Yoksayılacak Bağlantı Noktaları dizesini ayrıştırırken kullanacağı sınırlayıcıyı belirler."
 
 #: setup.php
 msgid "Auto Detect"
@@ -2687,7 +2687,7 @@ msgstr "Bant Genişliği Kullanım Eşiği"
 
 #: setup.php
 msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
-msgstr "Ağ arayüzü istatistiklerini incelerken, varsayılan olarak hangi bant genişliği eşiğini görüntülemek istiyorsunuz?"
+msgstr "Ağ arayüzü istatistikleri incelenirken varsayılan olarak görüntülenecek bant genişliği eşiğini belirler."
 
 #: setup.php
 #, php-format
@@ -2868,7 +2868,7 @@ msgstr "Varsayılan Sekme"
 
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
-msgstr "MacTrack'e her saniye gittiğinizde hangi MacTrack sekmesinin Varsayılan sekmeniz olmasını istersiniz?"
+msgstr "MacTrack bölümüne her gidişinizde varsayılan olarak açılacak MacTrack sekmesini belirler."
 
 #: setup.php
 msgid "Mac Addresses"
@@ -3018,7 +3018,7 @@ msgstr "şunu içeren"
 
 #: setup.php
 msgid "Begins With"
-msgstr "ile başlar"
+msgstr "İle Başlar"
 
 #: setup.php
 msgid "Does Not Contain"
@@ -3030,7 +3030,7 @@ msgstr "İle başlamıyor"
 
 #: setup.php
 msgid "Is Null"
-msgstr "Boş"
+msgstr "Boş (Null)"
 
 #: setup.php
 msgid "Is Not Null"
@@ -3101,7 +3101,7 @@ msgstr "Her Hafta"
 
 #: setup.php
 msgid "Management"
-msgstr "Kullanıcı Yonetimi"
+msgstr "Yönetim"
 
 #: setup.php
 msgid "SNMP Options"
