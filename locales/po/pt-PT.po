@@ -3214,7 +3214,7 @@ msgstr "Método de coleta de números de série"
 
 #: setup.php
 msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
-msgstr "Como é que o número de série recolhido para este OID.  Se 'SNMP Walk', assumimos vários números de série.  Se 'Get', será apenas um..."
+msgstr "Como é que o número de série recolhido para este OID.  Se 'SNMP Walk', assumimos vários números de série.  Se 'Get', será apenas um.."
 
 #: setup.php
 msgid "SNMP Get"
