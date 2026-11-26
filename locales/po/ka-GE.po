@@ -4,49 +4,47 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/mactrack/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
-msgstr ""
+msgstr "MacTrack-მა ვერ შეძლო ნაგულისხმევი საიტის ინიციალიზაცია განმეორებითი მცდელობების შემდეგ. გაგრძელებამდე გადახედეთ Cacti-ს ჟურნალს."
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
-msgstr ""
+msgstr "MacTrack-მა ვერ შეძლო ნაგულისხმევი საიტის ინიციალიზაცია. გაგრძელებამდე გადახედეთ Cacti-ს ჟურნალს."
 
 #: lib/mactrack_activity.php
-#, fuzzy
-#| msgid "Scanning Frequency"
 msgid "Scanning devices"
-msgstr "სკანირების სიხშირე"
+msgstr "მოწყობილობების სკანირება"
 
 #: lib/mactrack_activity.php
 msgid "Waiting for the DNS resolver"
-msgstr ""
+msgstr "DNS რეზოლვერის მოლოდინი"
 
 #: lib/mactrack_activity.php
 msgid "Transferring and aggregating scan results"
-msgstr ""
+msgstr "სკანირების შედეგების გადატანა და აგრეგირება"
 
 #: lib/mactrack_activity.php
 msgid "Maintaining port table partitions"
-msgstr ""
+msgstr "პორტების ცხრილის დანაყოფების მომსახურება"
 
 #: lib/mactrack_activity.php
 msgid "Deleting expired port rows"
-msgstr ""
+msgstr "პორტების ვადაგასული სტრიქონების წაშლა"
 
 #: lib/mactrack_activity.php
 msgid "Pruning scan dates"
-msgstr ""
+msgstr "სკანირების თარიღების გაწმენდა"
 
 #: lib/mactrack_activity.php
 msgid "Deleting expired IP rows"
-msgstr ""
+msgstr "ვადაგასული IP სტრიქონების წაშლა"
 
 #: lib/mactrack_activity.php
 msgid "Optimizing the IP table"
-msgstr ""
+msgstr "IP ცხრილის ოპტიმიზაცია"
 
 #: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
 #: mactrack_view_dot1x.php
@@ -55,43 +53,43 @@ msgstr "უქმე"
 
 #: lib/mactrack_activity.php
 msgid "Upgrading: rebuilding aggregated ports"
-msgstr ""
+msgstr "განახლება: აგრეგირებული პორტების ხელახალი აგება"
 
 #: lib/mactrack_activity.php
 #, php-format
 msgid "About %s rows left to copy (estimate)"
-msgstr ""
+msgstr "დასაკოპირებელია დაახლოებით %s სტრიქონი (შეფასებით)"
 
 #: lib/mactrack_activity.php
 msgid "Repartitioning the port, IP and 802.1x tables"
-msgstr ""
+msgstr "პორტის, IP და 802.1x ცხრილების ხელახალი დაყოფა"
 
 #: lib/mactrack_activity.php
 #, php-format
 msgid "%d devices in this scan"
-msgstr ""
+msgstr "%d მოწყობილობა ამ სკანირებაში"
 
 #: lib/mactrack_activity.php
 #, php-format
 msgid "The process stopped during: %s"
-msgstr ""
+msgstr "პროცესი შეჩერდა ეტაპზე: %s"
 
 #: lib/mactrack_activity.php
 #, php-format
 msgid "Scanning %d devices"
-msgstr ""
+msgstr "%d მოწყობილობის სკანირება"
 
 #: lib/mactrack_activity.php
 msgid "A database upgrade is running"
-msgstr ""
+msgstr "მიმდინარეობს მონაცემთა ბაზის განახლება"
 
 #: lib/mactrack_activity.php
 msgid "The port, IP and 802.1x table partitioning has not finished"
-msgstr ""
+msgstr "პორტის, IP და 802.1x ცხრილების დანაყოფებად დაყოფა არ დასრულებულა"
 
 #: lib/mactrack_activity.php
 msgid "The aggregated ports rebuild has not finished"
-msgstr ""
+msgstr "აგრეგირებული პორტების ხელახალი აგება არ დასრულებულა"
 
 #: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
 msgid "Running"
@@ -119,53 +117,53 @@ msgstr "ავტორიზაცია ჩავარდა"
 
 #: lib/mactrack_functions.php
 msgid "Not observed in latest scan"
-msgstr ""
+msgstr "ბოლო სკანირებაში არ დაფიქსირებულა"
 
 #: lib/mactrack_functions.php
 msgid "Locally Admined MAC"
-msgstr ""
+msgstr "ლოკალურად ადმინისტრირებული MAC"
 
 #: lib/mactrack_functions.php
 msgid "Mactrack Device Tracking OUI Database Import Results"
-msgstr ""
+msgstr "Mactrack მოწყობილობების თვალთვალის OUI მონაცემთა ბაზის იმპორტის შედეგები"
 
 #: lib/mactrack_functions.php
 msgid "Getting OUI Database from IEEE"
-msgstr ""
+msgstr "OUI მონაცემთა ბაზის მიღება IEEE-დან"
 
 #: lib/mactrack_functions.php
 msgid "Getting OUI Database from the IEEE"
-msgstr ""
+msgstr "OUI მონაცემთა ბაზის მიღება IEEE-დან"
 
 #: lib/mactrack_functions.php
 msgid "OUI Database Download from IEEE Complete"
-msgstr ""
+msgstr "IEEE-დან OUI მონაცემთა ბაზის ჩამოტვირთვა დასრულდა"
 
 #: lib/mactrack_functions.php
 msgid "OUI Database Download from IEEE FAILED"
-msgstr ""
+msgstr "IEEE-დან OUI მონაცემთა ბაზის ჩამოტვირთვა ვერ მოხერხდა"
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "There were '%d' Entries Added/Updated in the database."
-msgstr ""
+msgstr "მონაცემთა ბაზაში დაემატა/განახლდა '%d' ჩანაწერი."
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "There were '%d' Records Removed from the database."
-msgstr ""
+msgstr "მონაცემთა ბაზიდან წაიშალა '%d' ჩანაწერი."
 
 #: lib/mactrack_functions.php
 msgid "atifIndexes data collection complete"
-msgstr ""
+msgstr "atifIndexes მონაცემების შეგროვება დასრულდა"
 
 #: lib/mactrack_functions.php
 msgid "atPhysAddress data collection complete"
-msgstr ""
+msgstr "atPhysAddress მონაცემების შეგროვება დასრულდა"
 
 #: lib/mactrack_functions.php
 msgid "atNetAddress data collection complete"
-msgstr ""
+msgstr "atNetAddress მონაცემების შეგროვება დასრულდა"
 
 #: lib/mactrack_functions.php
 msgid "atEntries assembly complete."
@@ -174,7 +172,7 @@ msgstr "atEntries-ის აწყობა დასრულდა."
 #: lib/mactrack_functions.php
 #, php-format
 msgid "HOST: %s, IP address information collection complete"
-msgstr ""
+msgstr "HOST: %s, IP მისამართის ინფორმაციის შეგროვება დასრულდა"
 
 #: lib/mactrack_functions.php mactrack_view_devices.php
 msgid "Rescan Device"
@@ -182,11 +180,11 @@ msgstr "მოწყობილობის თავიდან სკან�
 
 #: lib/mactrack_functions.php
 msgid "View Non Interface Graphs"
-msgstr ""
+msgstr "არაინტერფეისის გრაფიკების ნახვა"
 
 #: lib/mactrack_functions.php
 msgid "No Non Interface Graphs in Cacti"
-msgstr ""
+msgstr "Cacti-ში არაინტერფეისის გრაფიკები არ არის"
 
 #: lib/mactrack_functions.php
 msgid "View Interface Graphs"
@@ -194,7 +192,7 @@ msgstr "ინტერფეისის გრაფიკების ნა�
 
 #: lib/mactrack_functions.php
 msgid "No Interface Graphs in Cacti"
-msgstr ""
+msgstr "Cacti-ში ინტერფეისის გრაფიკები არ არის"
 
 #: lib/mactrack_functions.php
 msgid "Since Restart"
@@ -212,23 +210,19 @@ msgstr "ჩართ"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
 msgid "Unaliased"
-msgstr ""
+msgstr "ალიასის გარეშე"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
 msgid "Errors"
 msgstr "შეცდომები"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-#, fuzzy
-#| msgid "Discards Present"
 msgid "Discards"
-msgstr "მოაცილებს აწმყოს"
+msgstr "გადაგდებები"
 
 #: lib/mactrack_functions.php mactrack_view_interfaces.php
-#, fuzzy
-#| msgid "Graphs"
 msgid "Graphless"
-msgstr "გრაფიკები"
+msgstr "გრაფიკების გარეშე"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
@@ -258,12 +252,12 @@ msgstr "მოწყობილობის '%s' თავიდან სკ�
 
 #: lib/mactrack_functions.php
 msgid "The rescan produced no output."
-msgstr ""
+msgstr "ხელახალმა სკანირებამ გამონატანი არ დააბრუნა."
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Device '%s' rescan completed in %0.2f seconds."
-msgstr ""
+msgstr "მოწყობილობა '%s'-ის ხელახალი სკანირება დასრულდა %0.2f წამში."
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -273,7 +267,7 @@ msgstr "'%s' საიტის სკანირება"
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Site '%s' scan completed in %0.2f seconds."
-msgstr ""
+msgstr "საიტ '%s'-ის სკანირება დასრულდა %0.2f წამში."
 
 #: lib/mactrack_functions.php
 #, php-format
@@ -281,10 +275,9 @@ msgid "Device Enable '%s'"
 msgstr "მოწყობილობის ჩართვა '%s'"
 
 #: lib/mactrack_functions.php
-#, fuzzy, php-format
-#| msgid "Device Disable '%d'"
+#, php-format
 msgid "Device Disable '%s'"
-msgstr "მოწყობილობა გამორთვა '%d'"
+msgstr "მოწყობილობის გამორთვა '%s'"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_macwatch.php
 #: mactrack_snmp.php mactrack_utilities.php mactrack_view_arp.php
@@ -316,17 +309,17 @@ msgstr "%d კვირა"
 
 #: lib/mactrack_functions.php
 msgid "Not Recorded"
-msgstr "ჩაწერილი არაა"
+msgstr "არ არის ჩაწერილი"
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
-msgstr ""
+msgstr "სტატუსი: მუშაობს, პროცესები: %d, პროგრესი: %s, ბოლო გაშვების დრო: %2.1f"
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
-msgstr ""
+msgstr "სტატუსი: მოლოდინის რეჟიმში, ბოლო გაშვების დრო: %2.1f წამი, პროცესები: %d პროცესი, მოწყობილობები: %d, შემდეგი გაშვების დრო: %s"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
@@ -337,7 +330,7 @@ msgstr "გათიშულია"
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Scanning Rate: Every %s"
-msgstr ""
+msgstr "სკანირების სიხშირე: ყოველ %s"
 
 #: lib/mactrack_functions.php mactrack_view_devices.php mactrack_view_sites.php
 msgid "View Interfaces"
@@ -443,43 +436,43 @@ msgstr "ქვეტიპი"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
-msgstr ""
+msgstr "დარწმუნებული ხართ, რომ გსურთ სისტემიდან პორტი-MAC-IP შესაბამისობის ყველა შედეგის წაშლა?"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
-msgstr ""
+msgstr "დარწმუნებული ხართ, რომ გსურთ ვადაგასული Port-MAC-IP შედეგების ახლავე წაშლა?"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
-msgstr ""
+msgstr "დარწმუნებული ხართ, რომ გსურთ კეშირებული Mactrack სკანირების ფუნქციების გასუფთავება?"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
-msgstr ""
+msgstr "დარწმუნებული ხართ, რომ გსურთ სისტემიდან პორტი-MAC-IP შესაბამისობის ყველა აგრეგირებული შედეგის წაშლა?"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
-msgstr ""
+msgstr "დარწმუნებული ხართ, რომ გსურთ სისტემიდან პორტი-MAC-IP შესაბამისობის ყველა აგრეგირებული შედეგის წაშლა და ხელახლა შექმნა?"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
-msgstr ""
+msgstr "დარწმუნებული ხართ, რომ გსურთ IEEE მომწოდებლების MAC/OUI მონაცემთა ბაზის ახლავე ჩამოტვირთვა და იმპორტი?"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
-msgstr ""
+msgstr "დარწმუნებული ხართ, რომ გსურთ შენახული Port-MAC-IP შედეგებიდან სკანირების თარიღების სიის ახლავე ხელახლა აგება?"
 
 #: lib/mactrack_functions.php
 msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
-msgstr ""
+msgstr "უახლესი პორტის დაკვირვების შემცველი დანაყოფის ხელახლა აგება და ანალიზი, რაც ყოველკვირეული დანაყოფების შემთხვევაში მიმდინარე კვირაა. დაუყოფელი ცხრილი სრულად ოპტიმიზირდება. ამ პროცესის მიმდინარეობისას დაგეგმილი სკანირებები გამოტოვებული იქნება. გავაგრძელოთ?"
 
 #: lib/mactrack_functions.php
 msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
-msgstr ""
+msgstr "გაუშვით ეს ტექნიკური მომსახურება არასამუშაო საათებში. ხელახლა აგება თანმიმდევრობით აკოპირებს პორტის (MAC მისამართი), IP მისამართისა და 802.1x ცხრილების სრულ ისტორიას და შეიძლება საათები დასჭირდეს. დასრულებამდე დაგეგმილი სკანირებები გამოტოვებული იქნება, მონაცემთა ბაზის ტექნიკური მომსახურება დაიცდის, ხოლო MAC, IP და 802.1x ძიება აჩვენებს ტექნიკური მომსახურების შეტყობინებას. გამოყავით თავისუფალი დისკის სივრცე თითოეული ცხრილისა და მისი ინდექსების მეორე ასლისთვის. გავაგრძელოთ?"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Remove All Scan Results"
-msgstr ""
+msgstr "სკანირების ყველა შედეგის წაშლა"
 
 #: lib/mactrack_functions.php mactrack_utilities.php setup.php
 msgid "Perform Database Maintenance"
@@ -491,41 +484,39 @@ msgstr "სკანირების ფუნქციების გან�
 
 #: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Remove All Aggregated Results"
-msgstr ""
+msgstr "ყველა აგრეგირებული შედეგის წაშლა"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Perform Aggregate Table Rebuild"
-msgstr ""
+msgstr "აგრეგირებული ცხრილის ხელახლა აგების შესრულება"
 
 #: lib/mactrack_functions.php
 msgid "Rebuild IEEE Vendor MAC/OUI Database"
-msgstr ""
+msgstr "IEEE მწარმოებლების MAC/OUI მონაცემთა ბაზის ხელახლა აგება"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
-#, fuzzy
-#| msgid "Last Scan Date"
 msgid "Rebuild Scan Dates"
-msgstr "ბოლო სკანირების თარიღი"
+msgstr "სკანირების თარიღების ხელახლა აგება"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Optimize Port Table"
-msgstr ""
+msgstr "პორტების ცხრილის ოპტიმიზაცია"
 
 #: lib/mactrack_functions.php mactrack_utilities.php
 msgid "Configure Port and IP Address Partitioning"
-msgstr ""
+msgstr "პორტებისა და IP მისამართების დანაყოფებად დაყოფის კონფიგურაცია"
 
 #: lib/mactrack_partition_rebuild.php
 msgid "The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
-msgstr ""
+msgstr "პორტის, IP და 802.1x ცხრილების ხელახალი დაყოფა მიმდინარეობს ან ხელახლა აგება არ დასრულებულა, ამიტომ მათი ისტორიის შეცვლა ახლა შეუძლებელია. სცადეთ ხელახლა cli/upgrade_partitioning.php-ის დასრულების შემდეგ."
 
 #: lib/mactrack_partition_rebuild.php
 msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished."
-msgstr ""
+msgstr "MacTrack ტექნიკური მომსახურების რეჟიმშია IP მისამართის, MAC მისამართისა და 802.1x ძიებისთვის, სანამ მისი ისტორიის ცხრილები ხელახლა იყოფა. დანაყოფებად დაყოფის დასრულებამდე შედეგები არასრულია."
 
 #: lib/mactrack_partition_rebuild.php
 msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
-msgstr ""
+msgstr "MacTrack ტექნიკური მომსახურების რეჟიმშია IP მისამართის, MAC მისამართისა და 802.1x ძიებისთვის, რადგან მისი ისტორიის ცხრილების დანაყოფებად დაყოფა არ დასრულებულა. შედეგები არასრულია. გასაგრძელებლად ხელახლა გაუშვით cli/upgrade_partitioning.php."
 
 #: lib/mactrack_partition_rebuild.php
 msgid "Maintenance Mode"
@@ -534,27 +525,27 @@ msgstr "ტექმომსახურების რეჟიმი"
 #: mactrack_actions.php
 #, php-format
 msgid "Mactrack Device: (%s) successfully updated"
-msgstr ""
+msgstr "Mactrack მოწყობილობა: (%s) წარმატებით განახლდა"
 
 #: mactrack_actions.php
 msgid "Import into Mactrack Database"
-msgstr ""
+msgstr "Mactrack მონაცემთა ბაზაში იმპორტი"
 
 #: mactrack_actions.php
 msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება'-ზე შემდეგი მოწყობილობის Mactrack-ში იმპორტისთვის? გთხოვთ, მიუთითოთ Mactrack მოწყობილობის დამატებითი პარამეტრები ქვემოთ მოცემული წესით."
 
 #: mactrack_actions.php
 msgid "We will use these devices SNMP options for the Mactrack Device as well."
-msgstr ""
+msgstr "ჩვენ გამოვიყენებთ ამ მოწყობილობების SNMP პარამეტრებს Mactrack მოწყობილობისთვისაც."
 
 #: mactrack_device_types.php
 msgid "Not Applicable - Router"
-msgstr ""
+msgstr "არ ეხება - მარშრუტიზატორი"
 
 #: mactrack_device_types.php
 msgid "Not Applicable - Switch/Hub"
-msgstr ""
+msgstr "არ ეხება - კომუტატორი/ჰაბი"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
 #: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
@@ -572,7 +563,7 @@ msgstr "--dup--"
 
 #: mactrack_device_types.php
 msgid "You must select at least one device type."
-msgstr ""
+msgstr "თქვენ უნდა აირჩიოთ მინიმუმ ერთი მოწყობილობის ტიპი."
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
 #: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
@@ -582,11 +573,11 @@ msgstr "გაგრძელება"
 
 #: mactrack_device_types.php
 msgid "Click 'Continue' to delete the following Device Type(s)."
-msgstr ""
+msgstr "დააწკაპუნეთ „გაგრძელება“-ს შემდეგი მოწყობილობის ტიპ(ებ)ის წასაშლელად."
 
 #: mactrack_device_types.php
 msgid "Click 'Continue' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
-msgstr ""
+msgstr "დააწკაპუნეთ „გაგრძელება“-ს შემდეგი მოწყობილობის ტიპ(ებ)ის დუბლირებისთვის. სურვილისამებრ შეგიძლიათ შეცვალოთ აღწერა ახალი მოწყობილობის ტიპებისთვის. წინააღმდეგ შემთხვევაში, არ შეცვალოთ ქვემოთ მოცემული მნიშვნელობა და ორიგინალი სახელი დაკოპირდება ახალი სუფიქსით."
 
 #: mactrack_device_types.php
 msgid "Device Type Prefix:"
@@ -619,11 +610,11 @@ msgstr "Cisco"
 #: mactrack_device_types.php
 #, php-format
 msgid "There were %d Device Types Added!"
-msgstr ""
+msgstr "დაემატა %d მოწყობილობის ტიპი!"
 
 #: mactrack_device_types.php
 msgid "No New Device Types Found!"
-msgstr ""
+msgstr "ახალი მოწყობილობის ტიპები ვერ მოიძებნა!"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Import Results"
@@ -631,7 +622,7 @@ msgstr "შემოტანის შედეგები"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Cacti has imported the following items:"
-msgstr ""
+msgstr "Cacti-მ შემოიტანა შემდეგი ელემენტები:"
 
 #: mactrack_device_types.php
 msgid "Import Mactrack Device Types"
@@ -639,11 +630,11 @@ msgstr "Mactrack-ის მოწყობილობის ტიპები�
 
 #: mactrack_device_types.php
 msgid "Import Device Types from Local File"
-msgstr ""
+msgstr "მოწყობილობის ტიპების შემოტანა ლოკალური ფაილიდან"
 
 #: mactrack_device_types.php
 msgid "Please specify the location of the CSV file containing your device type information."
-msgstr ""
+msgstr "გთხოვთ, მიუთითოთ CSV ფაილის მდებარეობა, რომელიც შეიცავს ინფორმაციას მოწყობილობის ტიპების შესახებ."
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Overwrite Existing Data?"
@@ -651,83 +642,83 @@ msgstr "გადავაწერო არსებულ მონაცე�
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
-msgstr ""
+msgstr "მიეცეს შემოტანის პროცესს არსებული მონაცემების გადაწერის უფლება? გთხოვთ გაითვალისწინოთ, ეს არ ნიშნავს ძველი მწკრივის წაშლას, არამედ მხოლოდ დუბლირებული მწკრივების ჩანაცვლებას."
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Allow Existing Rows to be Updated?"
-msgstr ""
+msgstr "დავრთოთ არსებული მწკრივების განახლების ნება?"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Required File Format Notes"
-msgstr ""
+msgstr "ფაილის სავალდებულო ფორმატის შენიშვნები"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "The file must contain a header row with the following column headings."
-msgstr ""
+msgstr "ფაილი უნდა შეიცავდეს სათაურის მწკრივს შემდეგი სვეტების სათაურებით."
 
 #: mactrack_device_types.php
 msgid " - A common name for the device.  For example Cisco 6509 Switch"
-msgstr ""
+msgstr " - მოწყობილობის საერთო სახელი. მაგალითად, Cisco 6509 Switch"
 
 #: mactrack_device_types.php
 msgid " - The vendor who produces this device"
-msgstr ""
+msgstr " - მწარმოებელი, რომელიც აწარმოებს ამ მოწყობილობას"
 
 #: mactrack_device_types.php
 msgid " - The type of device this is.  See the notes below for this integer value"
-msgstr ""
+msgstr " - მოწყობილობის ტიპი. ამ მთელი რიცხვის მნიშვნელობისთვის იხილეთ ქვემოთ მოცემული შენიშვნები"
 
 #: mactrack_device_types.php
 msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
-msgstr ""
+msgstr " - სიმბოლოების უნიკალური ნაკრები snmp sysDescr-დან, რომელიც ცალსახად განსაზღვრავს ამ მოწყობილობას"
 
 #: mactrack_device_types.php
 msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
-msgstr ""
+msgstr " - მწარმოებლის სპეციფიკური snmp sysObjectID, რომელიც განასხვავებს ამ მოწყობილობას სხვისგან"
 
 #: mactrack_device_types.php
 msgid " - The scanning function that will be used to scan this device type"
-msgstr ""
+msgstr " - სკანირების ფუნქცია, რომელიც გამოყენებული იქნება ამ მოწყობილობის ტიპის სკანირებისთვის"
 
 #: mactrack_device_types.php
 msgid " - The IP scanning function that will be used to scan this device type"
-msgstr ""
+msgstr " - IP სკანირების ფუნქცია, რომელიც გამოყენებული იქნება ამ მოწყობილობის ტიპის სკანირებისთვის"
 
 #: mactrack_device_types.php
 msgid " - The 802.1x scanning function that will be used to scan this device type"
-msgstr ""
+msgstr " - 802.1x სკანირების ფუნქცია, რომელიც გამოყენებული იქნება ამ მოწყობილობის ტიპის სკანირებისთვის"
 
 #: mactrack_device_types.php
 msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
-msgstr ""
+msgstr " - თუ ამ მოწყობილობის ტიპის სერიული ნომრის მიღება შესაძლებელია SNMP მოთხოვნით, დაამატეთ მისი OID აქ"
 
 #: mactrack_device_types.php
 msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
-msgstr ""
+msgstr " - თუ თქვენს სკანირების ფუნქციას არ შეუძლია trunk ან link პორტების იზოლირება, ეს არის მომხმარებლის პორტების საწყისი პორტის ნომერი"
 
 #: mactrack_device_types.php
 msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
-msgstr ""
+msgstr " - იგივეა, რაც lowPort, იმ განსხვავებით, რომ ეს არის მომხმარებლის პორტის მაღალი ნომერი"
 
 #: mactrack_device_types.php
 msgid " - Disabled type is not used"
-msgstr ""
+msgstr " - გამორთული ტიპი არ გამოიყენება"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "The primary key for this table is a combination of the following three fields:"
-msgstr ""
+msgstr "ამ ცხრილის პირველადი გასაღები წარმოადგენს შემდეგი სამი ველის კომბინაციას:"
 
 #: mactrack_device_types.php
 msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
-msgstr ""
+msgstr "შესაბამისად, თუ შეეცდებით მოწყობილობის დუბლირებული ტიპების შემოტანას, არსებული მონაცემები განახლდება ახალი ინფორმაციით."
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid " is an integer field and must be one of the following:"
-msgstr ""
+msgstr " არის მთელრიცხვა ველი და უნდა იყოს ერთ-ერთი შემდეგი მნიშვნელობებიდან:"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "1 - Switch/Hub"
-msgstr ""
+msgstr "1 - კომუტატორი/ჰაბი"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "2 - Switch/Router"
@@ -739,7 +730,7 @@ msgstr "3 - რაუტერი"
 
 #: mactrack_device_types.php
 msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
-msgstr ""
+msgstr "მოწყობილობის ტიპი განისაზღვრება მისი SNMP აგენტის სკანირებით sysObjectID-სა და sysDescription-ზე და მათი შედარებით მოწყობილობის ტიპების მონაცემთა ბაზაში არსებულ მნიშვნელობებთან. ბაზაში ნაპოვნი პირველივე დამთხვევა გამოიყენება სკანირების წესის განსასაზღვრად. ამიტომ ძალიან მნიშვნელოვანია, რომ თქვენი მოწყობილობებისთვის აირჩიოთ სწორი sysObjectID_match, sysDescr_match და სკანირების ფუნქცია."
 
 #: mactrack_device_types.php mactrack_devices.php setup.php
 msgid "Switch/Hub"
@@ -758,12 +749,12 @@ msgstr "რაუტერი"
 #: mactrack_device_types.php
 #, php-format
 msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
-msgstr ""
+msgstr "სათაურის ხაზი წარმატებით დამუშავდა: <br>აღმოჩენილი სვეტები: %s"
 
 #: mactrack_device_types.php mactrack_devices.php
 #, php-format
 msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
-msgstr ""
+msgstr "სათაურის ხაზის დამუშავების შეცდომა: აკლია სავალდებულო ველი <br>აღმოჩენილი სვეტები: %s"
 
 #: mactrack_device_types.php
 msgid "Unknown Assume \"Switch/Hub\""
@@ -772,22 +763,22 @@ msgstr "უცნობი ჩათვლა \"კომუტატორი\"
 #: mactrack_device_types.php
 #, php-format
 msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
-msgstr ""
+msgstr "ჩასმა წარმატებით შესრულდა: მწარმოებელი: %s, აღწერა: %s, ტიპი: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php
 #, php-format
 msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
-msgstr ""
+msgstr "ჩასმა ვერ მოხერხდა: მწარმოებელი: %s, აღწერა: %s, ტიპი: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php
 #, php-format
 msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
-msgstr ""
+msgstr "ჩასმა გამოტოვებულია, უკვე არსებობს: მწარმოებელი: %s, აღწერა: %s, ტიპი: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php
 #, php-format
 msgid "Mactrack Device Types [edit: %s]"
-msgstr ""
+msgstr "Mactrack მოწყობილობის ტიპები [რედაქტირება: %s]"
 
 #: mactrack_device_types.php
 msgid "Mactrack Device Types [new]"
@@ -799,7 +790,7 @@ msgstr "Mactrack-ის მოწყობილობის ტიპის ფ
 
 #: mactrack_device_types.php
 msgid "Device Type Description"
-msgstr ""
+msgstr "მოწყობილობის ტიპის აღწერა"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
 #: mactrack_view_devices.php mactrack_view_sites.php setup.php
@@ -840,7 +831,7 @@ msgstr "დიახ"
 
 #: mactrack_device_types.php
 msgid "No Mactrack Device Types Found"
-msgstr ""
+msgstr "Mactrack მოწყობილობის ტიპები ვერ მოიძებნა"
 
 #: mactrack_device_types.php
 msgid "Submit Query"
@@ -856,7 +847,7 @@ msgstr "თავიდან სკანირება"
 
 #: mactrack_device_types.php
 msgid "Scan Active Devices for Unknown Device Types"
-msgstr ""
+msgstr "აქტიური მოწყობილობების სკანირება უცნობი ტიპების მოსაძებნად"
 
 #: mactrack_device_types.php mactrack_devices.php
 msgid "Import"
@@ -864,11 +855,11 @@ msgstr "შემოტანა"
 
 #: mactrack_device_types.php
 msgid "Import Device Types from a CSV File"
-msgstr ""
+msgstr "მოწყობილობის ტიპების იმპორტი CSV ფაილიდან"
 
 #: mactrack_device_types.php
 msgid "Export Device Types to Share with Others"
-msgstr ""
+msgstr "მოწყობილობის ტიპების ექსპორტი სხვებთან გასაზიარებლად"
 
 #: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
@@ -904,15 +895,15 @@ msgstr "SNMP-ის პარამეტრების შეცვლა"
 
 #: mactrack_devices.php
 msgid "Change Device Port Values"
-msgstr ""
+msgstr "მოწყობილობის პორტის მნიშვნელობების შეცვლა"
 
 #: mactrack_devices.php
 msgid "Connect to Cacti Host via Hostname"
-msgstr ""
+msgstr "Cacti ჰოსტთან დაკავშირება ჰოსტის სახელით"
 
 #: mactrack_devices.php
 msgid "Copy SNMP Settings from Cacti Host"
-msgstr ""
+msgstr "SNMP პარამეტრების კოპირება Cacti ჰოსტიდან"
 
 #: mactrack_devices.php
 msgid "You must select at least one device."
@@ -920,31 +911,31 @@ msgstr "უნდა მონიშნოთ, სულ ცოტა, ერთ
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to enable the following devices."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება' შემდეგი მოწყობილობების გასააქტიურებლად."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to disable the following devices."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება' შემდეგი მოწყობილობების გასათიშად."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება' შემდეგი მოწყობილობების SNMP პარამეტრების შესაცვლელად, მონიშნეთ ველები, რომელთა განახლებაც გსურთ და შეიყვანეთ ახალი მნიშვნელობა."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება' შემდეგი მოწყობილობების ზედა ან ქვედა პორტის პარამეტრების შესაცვლელად, მონიშნეთ ველები, რომელთა განახლებაც გსურთ და შეიყვანეთ ახალი მნიშვნელობა."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება' შემდეგი მოწყობილობების შესაბამის Cacti მოწყობილობასთან დასაკავშირებლად. კავშირი დამყარდება ტოლი ჰოსტის სახელების საფუძველზე. აღწერაც განახლდება."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება'-ზე დაკავშირებული Cacti მოწყობილობიდან SNMP პარამეტრების Mactrack მოწყობილობაში დასაკოპირებლად. ყველა დაუკავშირებელი მოწყობილობა შეუმჩნევლად გამოტოვებული იქნება. SNMP განმეორებითი მცდელობები აღებული იქნება Ping-ის განმეორებითი მცდელობებიდან."
 
 #: mactrack_devices.php
 msgid "Click 'Continue' to delete the following Devices"
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება' შემდეგი მოწყობილობების წასაშლელად"
 
 #: mactrack_devices.php
 msgid "Import Mactrack Devices"
@@ -952,120 +943,120 @@ msgstr "Mactrack-ის მოწყობილობების შემო�
 
 #: mactrack_devices.php
 msgid "Import Devices from Local File"
-msgstr ""
+msgstr "მოწყობილობების იმპორტი ლოკალური ფაილიდან"
 
 #: mactrack_devices.php
 msgid "Please specify the location of the CSV file containing your device information."
-msgstr ""
+msgstr "გთხოვთ მიუთითოთ თქვენი მოწყობილობების ინფორმაციის შემცველი CSV ფაილის მდებარეობა."
 
 #: mactrack_devices.php
 msgid " - The SiteID known to Mactrack for this device"
-msgstr ""
+msgstr " - ამ მოწყობილობისთვის Mactrack-ისთვის ცნობილი SiteID"
 
 #: mactrack_devices.php
 msgid " - A simple name for the device.  For example Cisco 6509 Switch"
-msgstr ""
+msgstr " - მოწყობილობის მარტივი სახელი. მაგალითად, Cisco 6509 Switch"
 
 #: mactrack_devices.php
 msgid " - The IP Address or DNS Name for the device"
-msgstr ""
+msgstr " - მოწყობილობის IP მისამართი ან DNS სახელი"
 
 #: mactrack_devices.php
 msgid " - More detailed information about the device, including location, environmental conditions, etc."
-msgstr ""
+msgstr " - უფრო დეტალური ინფორმაცია მოწყობილობის შესახებ, მდებარეობის, გარემო პირობების და სხვა მონაცემების ჩათვლით."
 
 #: mactrack_devices.php
 msgid " - A list of ports that should not be scanned for user devices"
-msgstr ""
+msgstr " - პორტების სია, რომლებიც არ უნდა დასკანირდეს მომხმარებლის მოწყობილობებისთვის"
 
 #: mactrack_devices.php
 msgid " - Redundant information indicating the intended device type.  See below for valid values."
-msgstr ""
+msgstr " - დამატებითი ინფორმაცია, რომელიც მიუთითებს მოწყობილობის სავარაუდო ტიპს. დასაშვები მნიშვნელობები იხილეთ ქვემოთ."
 
 #: mactrack_devices.php
 msgid " - Id of a set of SNMP options"
-msgstr ""
+msgstr " - SNMP პარამეტრების ნაკრების ID"
 
 #: mactrack_devices.php
 msgid " - The current snmp read string for the device"
-msgstr ""
+msgstr " - მოწყობილობის მიმდინარე SNMP წაკითხვის სტრიქონი"
 
 #: mactrack_devices.php
 msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
-msgstr ""
+msgstr " - SNMP ვერსია, რომლითაც გსურთ ამ მოწყობილობის სკანირება. დასაშვები მნიშვნელობებია 1, 2 და 3"
 
 #: mactrack_devices.php
 msgid " - The UDP port that the snmp agent is running on"
-msgstr ""
+msgstr " - UDP პორტი, რომელზეც SNMP აგენტი მუშაობს"
 
 #: mactrack_devices.php
 msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
-msgstr ""
+msgstr " - მოლოდინის დრო მილიწამებში SNMP პასუხისთვის ხელახლა ცდამდე"
 
 #: mactrack_devices.php
 msgid " - The number of times to retry a snmp request before giving up"
-msgstr ""
+msgstr " - SNMP მოთხოვნის გამეორების მცდელობების რაოდენობა შეწყვეტამდე"
 
 #: mactrack_devices.php
 msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
-msgstr ""
+msgstr " - განსაზღვრავს OID-ების რაოდენობას, რომელთა მიღებაც შესაძლებელია ერთ SNMP Get მოთხოვნაში"
 
 #: mactrack_devices.php
 msgid " - SNMP V3: SNMP username"
-msgstr ""
+msgstr " - SNMP V3: SNMP მომხმარებლის სახელი"
 
 #: mactrack_devices.php
 msgid " - SNMP V3: SNMP password"
-msgstr ""
+msgstr " - SNMP V3: SNMP პაროლი"
 
 #: mactrack_devices.php
 msgid " - SNMP V3: SNMP authentication protocol"
-msgstr ""
+msgstr " - SNMP V3: SNMP ავთენტიფიკაციის პროტოკოლი"
 
 #: mactrack_devices.php
 msgid " - SNMP V3: SNMP privacy passphrase"
-msgstr ""
+msgstr " - SNMP V3: SNMP კონფიდენციალურობის საიდუმლო ფრაზა"
 
 #: mactrack_devices.php
 msgid " - SNMP V3: SNMP privacy protocol"
-msgstr ""
+msgstr " - SNMP V3: SNMP კონფიდენციალურობის პროტოკოლი"
 
 #: mactrack_devices.php
 msgid " - SNMP V3: SNMP context"
-msgstr ""
+msgstr " - SNMP V3: SNMP კონტექსტი"
 
 #: mactrack_devices.php
 msgid " - SNMP V3: SNMP engine id"
-msgstr ""
+msgstr " - SNMP V3: SNMP ძრავის ID"
 
 #: mactrack_devices.php
 msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
-msgstr ""
+msgstr "ამიტომ, თუ შეეცდებით დუბლიკატი მოწყობილობების იმპორტს, განახლდება მხოლოდ თქვენ მიერ მითითებული მონაცემები."
 
 #: mactrack_devices.php
 #, php-format
 msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
-msgstr ""
+msgstr "სათაურის ხაზი წარმატებით დამუშავდა: <br>აღმოჩენილი სვეტები: %s"
 
 #: mactrack_devices.php
 #, php-format
 msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr ""
+msgstr "ჩასმა წარმატებით შესრულდა: ჰოსტის სახელი: SiteID: %s, მოწყობილობის სახელი: %s, ჰოსტის სახელი %s, SNMP პორტი: %s"
 
 #: mactrack_devices.php
 #, php-format
 msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr ""
+msgstr "ჩასმა ვერ მოხერხდა: SiteID: %s, მოწყობილობის სახელი: %s, ჰოსტის სახელი %s, SNMP პორტი: %s"
 
 #: mactrack_devices.php
 #, php-format
 msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
-msgstr ""
+msgstr "ჩასმა გამოტოვებულია, უკვე არსებობს: SiteID: %s, მოწყობილობის სახელი: %s, ჰოსტის სახელი %s, SNMP პორტი: %s"
 
 #: mactrack_devices.php
 #, php-format
 msgid "Mactrack Devices [edit: %s]"
-msgstr ""
+msgstr "Mactrack მოწყობილობები [რედაქტირება: %s]"
 
 #: mactrack_devices.php
 msgid "Mactrack Devices [new]"
@@ -1127,7 +1118,7 @@ msgstr "მომხმარებლის პორტები"
 #: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
 #: mactrack_view_sites.php
 msgid "User Ports Up"
-msgstr ""
+msgstr "ჩართული სამომხმარებლო პორტები"
 
 #: mactrack_devices.php mactrack_view_devices.php
 msgid "Trunk Ports"
@@ -1160,16 +1151,16 @@ msgstr "Cacti-ის ბმულის გარეშე"
 
 #: mactrack_macauth.php
 msgid "You must select at least one Authorized Mac to delete."
-msgstr ""
+msgstr "წასაშლელად უნდა აირჩიოთ მინიმუმ ერთი ავტორიზებული MAC."
 
 #: mactrack_macauth.php
 msgid "Click 'Continue' to delete the following Authorized Mac's?"
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება' შემდეგი ავტორიზებული MAC მისამართების წასაშლელად?"
 
 #: mactrack_macauth.php
 #, php-format
 msgid "Mactrack MacAuth [edit: %s]"
-msgstr ""
+msgstr "Mactrack MacAuth [რედაქტირება: %s]"
 
 #: mactrack_macauth.php
 msgid "Mactrack MacAuth [new]"
@@ -1201,7 +1192,7 @@ msgstr "ავტორიზებული MAC მისამართებ�
 
 #: mactrack_macauth.php
 msgid "No Authorized Mac Addresses Found"
-msgstr ""
+msgstr "ავტორიზებული MAC მისამართები ვერ მოიძებნა"
 
 #: mactrack_macauth.php mactrack_vendormacs.php mactrack_view_macs.php
 msgid "MAC's"
@@ -1209,16 +1200,16 @@ msgstr "MAC-ები"
 
 #: mactrack_macwatch.php
 msgid "Click 'Continue' to delete the following watched Mac's?"
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება' შემდეგი მეთვალყურეობის ქვეშ მყოფი MAC მისამართების წასაშლელად?"
 
 #: mactrack_macwatch.php
 #, php-format
 msgid "Mactrack MacWatch [edit: %s]"
-msgstr ""
+msgstr "Mactrack MacWatch [რედაქტირება: %s]"
 
 #: mactrack_macwatch.php
 msgid "Mactrack MacWatch [new]"
-msgstr ""
+msgstr "Mactrack MacWatch [ახალი]"
 
 #: mactrack_macwatch.php
 msgid "Mactrack MacWatch Filters"
@@ -1246,20 +1237,20 @@ msgstr "საათები"
 
 #: mactrack_macwatch.php
 msgid "No Mactrack Watched Macs Found"
-msgstr ""
+msgstr "Mactrack დაკვირვებადი MAC-ები ვერ მოიძებნა"
 
 #: mactrack_sites.php
 msgid "Click 'Continue' to delete the following Site(s)?"
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება' შემდეგი საიტ(ებ)ის წასაშლელად?"
 
 #: mactrack_sites.php
 msgid "You must select at least one site."
-msgstr ""
+msgstr "უნდა აირჩიოთ მინიმუმ ერთი საიტი."
 
 #: mactrack_sites.php
 #, php-format
 msgid "Mactrack Site [edit: %s]"
-msgstr ""
+msgstr "Mactrack საიტი [რედაქტირება: %s]"
 
 #: mactrack_sites.php
 msgid "Mactrack Site [new]"
@@ -1283,7 +1274,7 @@ msgstr "მოწყობილობის შეცდომები"
 
 #: mactrack_sites.php mactrack_view_sites.php
 msgid "No Mactrack Sites Found"
-msgstr ""
+msgstr "Mactrack საიტები ვერ მოიძებნა"
 
 #: mactrack_sites.php mactrack_view_sites.php
 msgid "Total Devices"
@@ -1303,15 +1294,15 @@ msgstr "Trunk-ები სულ"
 
 #: mactrack_snmp.php
 msgid "You must select at least one SNMP Option."
-msgstr ""
+msgstr "უნდა აირჩიოთ მინიმუმ ერთი SNMP პარამეტრი."
 
 #: mactrack_snmp.php
 msgid "Click 'Continue' to delete the following SNMP Option(s)."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება' შემდეგი SNMP პარამეტრ(ებ)ის წასაშლელად."
 
 #: mactrack_snmp.php
 msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება' შემდეგი SNMP პარამეტრ(ებ)ის დუბლირებისთვის. სურვილისამებრ შეგიძლიათ შეცვალოთ სათაურის ფორმატი ახალი SNMP პარამეტრებისთვის."
 
 #: mactrack_snmp.php
 msgid "Name Format:"
@@ -1324,7 +1315,7 @@ msgstr "<სახელი> (1)"
 #: mactrack_snmp.php
 #, php-format
 msgid "SNMP Options [edit %s]"
-msgstr ""
+msgstr "SNMP პარამეტრები [რედაქტირება %s]"
 
 #: mactrack_snmp.php
 msgid "SNMP Options [new]"
@@ -1333,11 +1324,11 @@ msgstr "SNMP-ის პარამეტრები [ახალი]"
 #: mactrack_snmp.php
 #, php-format
 msgid "SNMP Option Set [edit: %s]"
-msgstr ""
+msgstr "SNMP პარამეტრების ნაკრები [რედაქტირება: %s]"
 
 #: mactrack_snmp.php
 msgid "SNMP Option Set [new]"
-msgstr ""
+msgstr "SNMP პარამეტრების ნაკრები [ახალი]"
 
 #: mactrack_snmp.php setup.php
 msgid "Mactrack SNMP Options"
@@ -1391,11 +1382,11 @@ msgstr "ქმედებები"
 
 #: mactrack_snmp.php
 msgid "No SNMP Items Found"
-msgstr ""
+msgstr "SNMP ელემენტები ვერ მოიძებნა"
 
 #: mactrack_snmp.php
 msgid "Title of SNMP Option Set"
-msgstr ""
+msgstr "SNMP პარამეტრების ნაკრების სათაური"
 
 #: mactrack_snmp.php
 msgid "SNMP Settings"
@@ -1403,7 +1394,7 @@ msgstr "SNMP-ის მორგება"
 
 #: mactrack_snmp.php
 msgid "No SNMP Option Sets Found"
-msgstr ""
+msgstr "SNMP პარამეტრების ნაკრებები ვერ მოიძებნა"
 
 #: mactrack_snmp.php
 msgid "Options"
@@ -1411,7 +1402,7 @@ msgstr "პარამეტრები"
 
 #: mactrack_utilities.php
 msgid "Mactrack Database Results"
-msgstr ""
+msgstr "Mactrack მონაცემთა ბაზის შედეგები"
 
 #: mactrack_utilities.php
 msgid "Mactrack Process Status"
@@ -1427,7 +1418,7 @@ msgstr "მიმდინარე პროცესის სტატუს�
 
 #: mactrack_utilities.php
 msgid "The Mactrack Poller is:"
-msgstr ""
+msgstr "Mactrack პოლერი არის:"
 
 #: mactrack_utilities.php
 msgid "Running Processes:"
@@ -1435,7 +1426,7 @@ msgstr "გაშვებული პროცესები:"
 
 #: mactrack_utilities.php
 msgid "Last Time Poller Started:"
-msgstr ""
+msgstr "პოლერის ბოლო გაშვების დრო:"
 
 #: mactrack_utilities.php
 msgid "Poller Frequency:"
@@ -1446,9 +1437,8 @@ msgid "Approx. Next Runtime:"
 msgstr "შემდეგი გაშვების დაახლ. დრო:"
 
 #: mactrack_utilities.php
-#, fuzzy
 msgid "Database Maintenance Information"
-msgstr "მონაცემთა ბაზის რემონტის დრო"
+msgstr "მონაცემთა ბაზის ტექნიკური მომსახურების ინფორმაცია"
 
 #: mactrack_utilities.php
 msgid "Last DB Maintenance Time:"
@@ -1468,7 +1458,7 @@ msgstr "გამომთხოვის ბოლო გაშვების 
 
 #: mactrack_utilities.php
 msgid "Last Poller Maintenance Runtime:"
-msgstr ""
+msgstr "პოლერის ტექნიკური მომსახურების ბოლო ხანგრძლივობა:"
 
 #: mactrack_utilities.php
 msgid "Maximum Concurrent Processes:"
@@ -1480,7 +1470,7 @@ msgstr "პროცესები"
 
 #: mactrack_utilities.php
 msgid "Maximum Per Device Scan Time:"
-msgstr ""
+msgstr "მოწყობილობის სკანირების მაქსიმალური დრო:"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "minutes"
@@ -1488,11 +1478,11 @@ msgstr "წუთი"
 
 #: mactrack_utilities.php
 msgid "DNS Configuration Information"
-msgstr ""
+msgstr "DNS კონფიგურაციის ინფორმაცია"
 
 #: mactrack_utilities.php
 msgid "Reverse DNS Resolution is"
-msgstr ""
+msgstr "უკუ DNS ამოხსნა არის"
 
 #: mactrack_utilities.php
 msgid "Primary DNS Server:"
@@ -1504,7 +1494,7 @@ msgstr "დამხმარე DNS სერვერი:"
 
 #: mactrack_utilities.php
 msgid "DNS Resolution Timeout:"
-msgstr ""
+msgstr "DNS ამოხსნის მოლოდინის დრო:"
 
 #: mactrack_utilities.php
 msgid "milliseconds"
@@ -1516,11 +1506,11 @@ msgstr "გაშვებული პროცესის შეჯამე�
 
 #: mactrack_utilities.php
 msgid "The DNS Resolver is Not Running"
-msgstr ""
+msgstr "DNS რეზოლვერი არ მუშაობს"
 
 #: mactrack_utilities.php
 msgid "The DNS Resolver is Running"
-msgstr ""
+msgstr "DNS რეზოლვერი მუშაობს"
 
 #: mactrack_utilities.php
 msgid "Date Started"
@@ -1539,10 +1529,8 @@ msgid "Other"
 msgstr "სხვა"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Current Date"
 msgid "Current Activity"
-msgstr "მიმდინარე თარიღი"
+msgstr "მიმდინარე აქტივობა"
 
 #: mactrack_utilities.php
 msgid "State:"
@@ -1550,17 +1538,15 @@ msgstr "მდგომარეობა:"
 
 #: mactrack_utilities.php
 msgid "Since:"
-msgstr ""
+msgstr "დაწყებული:"
 
 #: mactrack_utilities.php
 msgid "Detail:"
-msgstr ""
+msgstr "დეტალები:"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Last Poller Runtime:"
 msgid "Last Skipped Poller Run:"
-msgstr "გამომთხოვის ბოლო გაშვების დრო:"
+msgstr "გამომთხოვის ბოლო გამოტოვებული გაშვება:"
 
 #: mactrack_utilities.php
 msgid "Last Maintenance Steps"
@@ -1575,14 +1561,12 @@ msgid "Step"
 msgstr "ბიჯი"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Table"
 msgid "Table Sizes"
-msgstr "ცხრილი"
+msgstr "ცხრილების ზომები"
 
 #: mactrack_utilities.php
 msgid "Free"
-msgstr ""
+msgstr "თავისუფალი"
 
 #: mactrack_utilities.php
 msgid "Index"
@@ -1590,7 +1574,7 @@ msgstr "ინდექსი"
 
 #: mactrack_utilities.php
 msgid "Rows (estimate)"
-msgstr ""
+msgstr "სტრიქონები (შეფასებით)"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Table"
@@ -1598,53 +1582,51 @@ msgstr "ცხრილი"
 
 #: mactrack_utilities.php
 msgid "Unknown: the database runs on another host"
-msgstr ""
+msgstr "უცნობია: მონაცემთა ბაზა გაშვებულია სხვა ჰოსტზე"
 
 #: mactrack_utilities.php
 msgid "Unknown: the database data directory cannot be found from this host"
-msgstr ""
+msgstr "უცნობია: ამ ჰოსტიდან ბაზის მონაცემთა საქაღალდე ვერ მოიძებნა"
 
 #: mactrack_utilities.php
 msgid "Database Disk Free:"
-msgstr ""
+msgstr "მონაცემთა ბაზის დისკის თავისუფალი სივრცე:"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "The following number of records have been removed from the database: %s"
-msgstr ""
+msgstr "მონაცემთა ბაზიდან წაიშალა შემდეგი რაოდენობის ჩანაწერი: %s"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s"
-msgstr ""
+msgstr "აგრეგირებული ცხრილიდან წაიშალა შემდეგი რაოდენობის ჩანაწერი: %s"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
-msgstr ""
+msgstr "აგრეგირებული ცხრილიდან წაიშალა შემდეგი რაოდენობის ჩანაწერი: %s. და დაემატება %s ჩანაწერი."
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Mactrack Site Filters"
 msgid "Mactrack Scan Date Rebuild Results"
-msgstr "MacTrack-ის საიტის ფილტრები"
+msgstr "Mactrack სკანირების თარიღების ხელახალი აგების შედეგები"
 
 #: mactrack_utilities.php
 msgid "Scan date rebuild failed. Check the Cacti log and retry."
-msgstr ""
+msgstr "სკანირების თარიღების ხელახლა აგება ვერ მოხერხდა. შეამოწმეთ Cacti-ს ჟურნალი და სცადეთ ხელახლა."
 
 #: mactrack_utilities.php
 #, php-format
 msgid "Scan dates rebuilt: %d"
-msgstr ""
+msgstr "ხელახლა აგებული სკანირების თარიღები: %d"
 
 #: mactrack_utilities.php
 msgid "A scan or a port table conversion is running. Try again when it has finished."
-msgstr ""
+msgstr "მიმდინარეობს სკანირება ან პორტების ცხრილის გარდაქმნა. სცადეთ ხელახლა მისი დასრულების შემდეგ."
 
 #: mactrack_utilities.php setup.php
 msgid "One per Scan"
-msgstr ""
+msgstr "თითო სკანირებაზე ერთი"
 
 #: mactrack_utilities.php setup.php
 msgid "Hourly"
@@ -1660,23 +1642,23 @@ msgstr "კვირაში ერთხელ"
 
 #: mactrack_utilities.php
 msgid "Not partitioned"
-msgstr ""
+msgstr "დანაყოფებად დაყოფილი არ არის"
 
 #: mactrack_utilities.php
 msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
-msgstr ""
+msgstr "დღიური დანაყოფები MacTrack-ის წინა ვერსიიდან. საჭიროა გარდაქმნა."
 
 #: mactrack_utilities.php
 msgid "Partitioned by scan date"
-msgstr ""
+msgstr "დაყოფილია სკანირების თარიღის მიხედვით"
 
 #: mactrack_utilities.php
 msgid "Unrecognized partitions. MacTrack makes no partition changes."
-msgstr ""
+msgstr "ამოუცნობი დანაყოფები. MacTrack დანაყოფებში ცვლილებებს არ შეიტანს."
 
 #: mactrack_utilities.php
 msgid "Port Table Partitions"
-msgstr ""
+msgstr "პორტების ცხრილის დანაყოფები"
 
 #: mactrack_utilities.php
 msgid "Layout"
@@ -1685,58 +1667,52 @@ msgstr "განლაგება"
 #: mactrack_utilities.php
 #, php-format
 msgid "%d of at most %d"
-msgstr ""
+msgstr "%d მაქსიმუმ %d-დან"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Data Retention"
 msgid "Partitions"
-msgstr "მონაცემების შენარჩუნება"
+msgstr "დანაყოფები"
 
 #: mactrack_utilities.php
 msgid "Oldest Partition"
-msgstr ""
+msgstr "უძველესი დანაყოფი"
 
 #: mactrack_utilities.php
 msgid "Newest Partition"
-msgstr ""
+msgstr "უახლესი დანაყოფი"
 
 #: mactrack_utilities.php
 msgid "Partitions Cover Scans Before"
-msgstr ""
+msgstr "დანაყოფები მოიცავს სკანირებებს თარიღამდე"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "%s, coarser than the setting because %d partitions would exceed the limit"
-msgstr ""
+msgstr "%s, პარამეტრზე უფრო მსხვილია, რადგან %d დანაყოფი გადააჭარბებდა ლიმიტს"
 
 #: mactrack_utilities.php setup.php
 msgid "Port and IP Address Partition Size"
-msgstr ""
+msgstr "პორტებისა და IP მისამართების დანაყოფის ზომა"
 
 #: mactrack_utilities.php
 msgid "Pending Exchange"
-msgstr ""
+msgstr "მოლოდინში მყოფი გაცვლა"
 
 #: mactrack_utilities.php
 msgid "Load Path"
-msgstr ""
+msgstr "ჩატვირთვის გზა"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Watches"
 msgid "PHP batches"
-msgstr "საათები"
+msgstr "PHP პაკეტები"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Last Scan Date"
 msgid "Last Scan Note"
-msgstr "ბოლო სკანირების თარიღი"
+msgstr "ბოლო სკანირების შენიშვნა"
 
 #: mactrack_utilities.php
 msgid "Rebuild"
-msgstr ""
+msgstr "ხელახლა აგება"
 
 #: mactrack_utilities.php
 #, php-format
@@ -1745,17 +1721,17 @@ msgstr "მუშაობს %s-დან"
 
 #: mactrack_utilities.php
 msgid "Last Rebuild"
-msgstr ""
+msgstr "ბოლო ხელახლა აგება"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "%s: %d rows into %d partitions"
-msgstr ""
+msgstr "%s: %d სტრიქონი %d დანაყოფში"
 
 #: mactrack_utilities.php
 #, php-format
 msgid "%s: failed. %s"
-msgstr ""
+msgstr "%s: ვერ შესრულდა. %s"
 
 #: mactrack_utilities.php
 msgid "Last Maintenance"
@@ -1764,47 +1740,43 @@ msgstr "ბოლო ტექმომსახურება"
 #: mactrack_utilities.php
 #, php-format
 msgid "%s: %d partitions dropped, %d created"
-msgstr ""
+msgstr "%s: %d დანაყოფი წაიშალა, %d შეიქმნა"
 
 #: mactrack_utilities.php
 msgid "IP Table Layout"
-msgstr ""
+msgstr "IP ცხრილის განლაგება"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Data Retention"
 msgid "IP Table Partitions"
-msgstr "მონაცემების შენარჩუნება"
+msgstr "IP ცხრილის დანაყოფები"
 
 #: mactrack_utilities.php
 msgid "802.1x Table Layout"
-msgstr ""
+msgstr "802.1x ცხრილის განლაგება"
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Data Retention"
 msgid "802.1x Table Partitions"
-msgstr "მონაცემების შენარჩუნება"
+msgstr "802.1x ცხრილის დანაყოფები"
 
 #: mactrack_utilities.php
 msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
-msgstr ""
+msgstr "ხელახლა აგების დაწყებამდე აირჩიეთ ყოველდღიური, ყოველკვირეული ან გამორთული დანაყოფებად დაყოფა."
 
 #: mactrack_utilities.php
 msgid "A rebuild is already running. The partition status page shows when it has finished."
-msgstr ""
+msgstr "ხელახლა აგება უკვე მიმდინარეობს. დანაყოფების სტატუსის გვერდი გიჩვენებთ, როდის დასრულდება."
 
 #: mactrack_utilities.php
 msgid "The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running."
-msgstr ""
+msgstr "ხელახლა აგება მოთხოვნილია ფონურ რეჟიმში. შედეგისთვის შეამოწმეთ დანაყოფების სტატუსი; ის არ დაიწყება, თუ სკანირება ან სხვა ხელახლა აგება მიმდინარეობს."
 
 #: mactrack_utilities.php
 msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
-msgstr ""
+msgstr "Mactrack სკანირების ფუნქციები გასუფთავდა. ისინი ხელახლა შეიქმნება მოწყობილობის ან მოწყობილობის ტიპის რედაქტირებისთანავე."
 
 #: mactrack_utilities.php
 msgid "Cacti Mactrack System Utilities"
-msgstr ""
+msgstr "Cacti Mactrack სისტემური უტილიტები"
 
 #: mactrack_utilities.php
 msgid "Process Status Information"
@@ -1816,7 +1788,7 @@ msgstr "Mactrack-ის პროცესის სტატუსის ნა
 
 #: mactrack_utilities.php
 msgid "This option will let you show and set process information associated with the Mactrack polling process."
-msgstr ""
+msgstr "ეს პარამეტრი საშუალებას გაძლევთ ნახოთ და დააყენოთ Mactrack გამოკითხვის პროცესთან დაკავშირებული პროცესის ინფორმაცია."
 
 #: mactrack_utilities.php
 msgid "Database Administration"
@@ -1824,45 +1796,43 @@ msgstr "მონაცემთა ბაზის ადმინისტრ�
 
 #: mactrack_utilities.php
 msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
-msgstr ""
+msgstr "მონაცემთა ბაზიდან შლის ვადაგასულ პორტი-MAC-IP კავშირებს. წაიშლება მხოლოდ ის ჩანაწერები, რომლებსაც თქვენი კრიტერიუმების მიხედვით ვადა გაუვიდა."
 
 #: mactrack_utilities.php
 msgid "Refresh IEEE Vendor MAC/OUI Database"
-msgstr ""
+msgstr "IEEE მწარმოებლის MAC/OUI მონაცემთა ბაზის განახლება"
 
 #: mactrack_utilities.php
 msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
-msgstr ""
+msgstr "ეს ფუნქცია ჩამოტვირთავს და დააინსტალირებს უახლეს OUI მონაცემთა ბაზას IEEE ვებსაიტიდან. თითოეულ ქსელურ ბარათს (NIC) აქვს MAC მისამართი. MAC მისამართი შეიძლება გაიყოს ორ ნაწილად. MAC მისამართის პირველი ნაწილი შეიცავს მწარმოებლის MAC-ს. მწარმოებლის MAC განსაზღვრავს, ვინ დაამზადა მოწყობილობა. ეს სასარგებლო იქნება თქვენს ქსელში არასანქცირებული მოწყობილობების სწრაფი შემოწმებისთვის."
 
 #: mactrack_utilities.php
 msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
-msgstr ""
+msgstr "შლის ძველ და პოტენციურად მოძველებულ Mactrack სკანირების ფუნქციებს ჩამოსაშლელი სიიდან, რომელიც მოწყობილობის ტიპის რედაქტირებისას ჩნდება."
 
 #: mactrack_utilities.php
 msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
-msgstr ""
+msgstr "მონაცემთა ბაზიდან შლის <strong>ყველა</strong> პორტი-MAC-IP კავშირს, ყველა IP მისამართს, IP დიაპაზონს და VLAN-ს. ეს ინსტრუმენტი გამოსადეგია, როდესაც თავიდან დაწყება გსურთ. <strong>საფრთხე: ყველა წინა მონაცემი წაიშლება.</strong>"
 
 #: mactrack_utilities.php
 msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
-msgstr ""
+msgstr "ხელახლა აგებს სკანირების თარიღების სიას შენახული პორტი-MAC-IP შედეგებიდან, თითოეული დანაყოფის ერთხელ წაკითხვით. სკანირებები და ტექნიკური მომსახურება სიას განახლებულს ინახავს, ამიტომ ეს საჭიროა მხოლოდ მაშინ, თუ შედეგები ტექნიკური მომსახურების გარეშე წაიშალა, მაგალითად, მოწყობილობების წაშლით."
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "View Mactrack Process Status"
 msgid "View Partition Status"
-msgstr "Mactrack-ის პროცესის სტატუსის ნახვა"
+msgstr "დანაყოფების სტატუსის ნახვა"
 
 #: mactrack_utilities.php
 msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
-msgstr ""
+msgstr "აჩვენებს, როგორ არის დაყოფილი პორტი-MAC-IP შედეგები, გამოყენებულ დანაყოფის ზომასა და მის მიზეზს, ასევე რა შეასრულა მონაცემთა ბაზის ბოლო ტექნიკურმა მომსახურებამ."
 
 #: mactrack_utilities.php
 msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
-msgstr ""
+msgstr "ხელახლა აგებს და აანალიზებს მხოლოდ უახლესი პორტის დაკვირვების შემცველ დანაყოფს წაშლილი სივრცის დასაბრუნებლად; ყოველკვირეული დანაყოფების შემთხვევაში ეს მიმდინარე კვირაა. დაუყოფელი ცხრილები სრულად ოპტიმიზირდება. დასრულებამდე დაგეგმილი სკანირებები გამოტოვებული იქნება."
 
 #: mactrack_utilities.php
 msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile."
-msgstr ""
+msgstr "აირჩიეთ ყოველდღიური ან ყოველკვირეული დანაყოფები, ან გამორთეთ დანაყოფებად დაყოფა პორტის (MAC მისამართი), IP მისამართისა და 802.1x ცხრილებისთვის. ხელახლა აგება ფონურ რეჟიმში აკოპირებს სრულ ისტორიას; ამასობაში დაგეგმილი სკანირებები გამოტოვებულია და MAC, IP და 802.1x ძიება აჩვენებს ტექნიკური მომსახურების შეტყობინებას."
 
 #: mactrack_utilities.php
 msgid "Aggregated Table Administration"
@@ -1870,21 +1840,19 @@ msgstr "აგრეგირებული ცხრილის ადმი�
 
 #: mactrack_utilities.php
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
-msgstr ""
+msgstr "მონაცემთა ბაზიდან შლის ყველა <strong>აგრეგირებულ</strong> (და არა სკანირების შედეგების) პორტი-MAC-IP კავშირს. მონაცემები კვლავ შეგროვდება <strong>მხოლოდ ახალი</strong> დასკანირებული მონაცემების საფუძველზე mactrack პოლერის შემდეგი გაშვებისას."
 
 #: mactrack_utilities.php
 msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
-msgstr ""
+msgstr "მონაცემთა ბაზიდან შლის ყველა <strong>აგრეგირებულ</strong> (და არა სკანირების შედეგების) პორტი-MAC-IP კავშირს და ქმნის მათ ხელახლა <strong>ყველა დასკანირებული მონაცემის</strong> საფუძველზე ახლავე."
 
 #: mactrack_utilities.php
-#, fuzzy
-#| msgid "Data Retention"
 msgid "Partitioning"
-msgstr "მონაცემების შენარჩუნება"
+msgstr "დანაყოფებად დაყოფა"
 
 #: mactrack_vendormacs.php
 msgid "Mactrack Vendor Mac Filter"
-msgstr ""
+msgstr "Mactrack მწარმოებლის MAC ფილტრი"
 
 #: mactrack_vendormacs.php
 msgid "Vendor MAC"
@@ -1904,11 +1872,11 @@ msgstr "მომწოდებლის MAC-ები"
 
 #: mactrack_vendormacs.php
 msgid "No Mactrack Vendor MACS Found"
-msgstr ""
+msgstr "Mactrack მწარმოებლის MAC-ები ვერ მოიძებნა"
 
 #: mactrack_view_arp.php
 msgid "Mactrack - ARP/IP View"
-msgstr ""
+msgstr "Mactrack - ARP/IP ხედი"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "Switch Name"
@@ -1920,7 +1888,7 @@ msgstr "ჰოსტის სახელის გადართვა"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "ED IP Address"
-msgstr ""
+msgstr "ED IP მისამართი"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "ED DNS Hostname"
@@ -1928,7 +1896,7 @@ msgstr "ED DNS ჰოსტის სახელი"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "ED MAC Address"
-msgstr ""
+msgstr "ED MAC მისამართი"
 
 #: mactrack_view_arp.php mactrack_view_macs.php
 msgid "Vendor Name"
@@ -1952,11 +1920,11 @@ msgstr "ARP კეში"
 
 #: mactrack_view_arp.php mactrack_view_macs.php
 msgid "You must first choose a Site, Device or other search criteria."
-msgstr ""
+msgstr "ჯერ უნდა აირჩიოთ საიტი, მოწყობილობა ან ძიების სხვა კრიტერიუმი."
 
 #: mactrack_view_arp.php
 msgid "No Mactrack IP Results Found"
-msgstr ""
+msgstr "Mactrack IP შედეგები ვერ მოიძებნა"
 
 #: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_interfaces.php
 #: mactrack_view_macs.php
@@ -1985,7 +1953,7 @@ msgstr "MAC"
 
 #: mactrack_view_dashboard.php
 msgid "MacTrack - Dashboard"
-msgstr ""
+msgstr "MacTrack - მართვის დაფა"
 
 #: mactrack_view_dashboard.php
 msgid "Inventory"
@@ -1997,173 +1965,127 @@ msgstr "მოწყობილობის სტატუსი"
 
 #: mactrack_view_dashboard.php
 msgid "Address and port totals"
-msgstr ""
+msgstr "მისამართებისა და პორტების ჯამი"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Notification Settings"
 msgid "Collection settings"
-msgstr "გაფრთხილებების მორგება"
+msgstr "შეგროვების პარამეტრები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Scanner Max Runtime"
 msgid "Scan runtimes"
-msgstr "სკანერის გაშვების მაქს. დრო"
+msgstr "სკანირების გაშვების დროები"
 
 #: mactrack_view_dashboard.php
 msgid "Table sizes"
-msgstr ""
+msgstr "ცხრილების ზომები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "MacWatch Default Body"
 msgid "MacWatch activity"
-msgstr "MacWatch-ის ნაგულისხმევი სხეული"
+msgstr "MacWatch-ის აქტივობა"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Vendor"
 msgid "Vendors"
-msgstr "მომწოდებელი"
+msgstr "მომწოდებლები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Disable Device"
 msgid "Enabled devices"
-msgstr "მოწყობილობის გამორთვა"
+msgstr "ჩართული მოწყობილობები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Disable Device"
 msgid "Disabled devices"
-msgstr "მოწყობილობის გამორთვა"
+msgstr "გამორთული მოწყობილობები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Device Types"
 msgid "Device types"
 msgstr "მოწყობილობის ტიპები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Interfaces"
 msgid "Interfaces tracked"
-msgstr "ინტერფეისები"
+msgstr "დაკვირვებადი ინტერფეისები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Active Macs"
 msgid "Active MACs"
 msgstr "აქტიური MAC-ები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "IP Addresses"
 msgid "IP addresses"
 msgstr "IP მისამართები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Total Oper Ports"
 msgid "Total ports"
-msgstr "სულ ოპერაციული პორტები"
+msgstr "სულ პორტები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Active Macs"
 msgid "Active ports"
-msgstr "აქტიური MAC-ები"
+msgstr "აქტიური პორტები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Trunk Ports"
 msgid "Trunk ports"
 msgstr "ტრანკის პორტები"
 
 #: mactrack_view_dashboard.php
 msgid "Unique OUI vendors"
-msgstr ""
+msgstr "უნიკალური OUI მომწოდებლები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Scanning Frequency"
 msgid "Scanning frequency"
 msgstr "სკანირების სიხშირე"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Concurrent Processes"
 msgid "Concurrent processes"
 msgstr "ერთდროულად გაშვებული პროცესები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Scanner Max Runtime"
 msgid "Scanner max runtime"
 msgstr "სკანერის გაშვების მაქს. დრო"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Data Retention"
 msgid "MAC retention"
-msgstr "მონაცემების შენარჩუნება"
+msgstr "MAC-ების შენახვა"
 
 #: mactrack_view_dashboard.php
 msgid "days"
 msgstr "დღე"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Data Retention"
 msgid "IP retention"
-msgstr "მონაცემების შენარჩუნება"
+msgstr "IP-ების შენახვა"
 
 #: mactrack_view_dashboard.php
 msgid "Reverse DNS"
-msgstr ""
+msgstr "უკუ DNS"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Most Recent"
 msgid "Most recent scan"
-msgstr "უახლესი"
+msgstr "უახლესი სკანირება"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Last Duration"
 msgid "Average duration"
-msgstr "ბოლო ხანგრძლივობა"
+msgstr "საშუალო ხანგრძლივობა"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Last Duration"
 msgid "Longest duration"
-msgstr "ბოლო ხანგრძლივობა"
+msgstr "უდიდესი ხანგრძლივობა"
 
 #: mactrack_view_dashboard.php
 msgid "Scanned in last hour"
-msgstr ""
+msgstr "ბოლო საათში დასკანირებული"
 
 #: mactrack_view_dashboard.php
 msgid "Duration"
 msgstr "ხანგრძლივობა"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Last Scanned"
 msgid "Last scan"
-msgstr "ბოლოს დასკანირებული"
+msgstr "ბოლო სკანირება"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Total Devices"
 msgid "Slowest devices"
-msgstr "სულ მოწყობილობები"
+msgstr "ყველაზე ნელი მოწყობილობები"
 
 #: mactrack_view_dashboard.php
 msgid "No scan runtimes recorded yet."
-msgstr ""
+msgstr "სკანირების გაშვების დროები ჯერ არ ჩაწერილა."
 
 #: mactrack_view_dashboard.php
 msgid "Rows"
@@ -2175,59 +2097,51 @@ msgstr "ზომა"
 
 #: mactrack_view_dashboard.php
 msgid "No table statistics available."
-msgstr ""
+msgstr "ცხრილების სტატისტიკა მიუწვდომელია."
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Watches"
 msgid "Watched MACs"
-msgstr "საათები"
+msgstr "დაკვირვებადი MAC-ები"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Discards Present"
 msgid "Discovered"
-msgstr "მოაცილებს აწმყოს"
+msgstr "აღმოჩენილი"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Mac Watch"
 msgid "Last match"
-msgstr "Mac Watch"
+msgstr "ბოლო დამთხვევა"
 
 #: mactrack_view_dashboard.php
 msgid "OUI database entries"
-msgstr ""
+msgstr "OUI მონაცემთა ბაზის ჩანაწერები"
 
 #: mactrack_view_dashboard.php
 msgid "No vendor data available."
-msgstr ""
+msgstr "მომწოდებლების მონაცემები მიუწვდომელია."
 
 #: mactrack_view_dashboard.php
 msgid "Show more"
 msgstr "მეტის ჩვენება"
 
 #: mactrack_view_dashboard.php
-#, fuzzy
-#| msgid "Show Totals"
 msgid "Show less"
-msgstr "ჯამების ჩვენება"
+msgstr "ნაკლების ჩვენება"
 
 #: mactrack_view_dashboard.php
 msgid "Open in a dialog"
-msgstr ""
+msgstr "დიალოგურ ფანჯარაში გახსნა"
 
 #: mactrack_view_dashboard.php
 msgid "Remove from page"
-msgstr ""
+msgstr "გვერდიდან წაშლა"
 
 #: mactrack_view_dashboard.php
 msgid "Drag to reorder card"
-msgstr ""
+msgstr "გადაათრიეთ ბარათის თანმიმდევრობის შესაცვლელად"
 
 #: mactrack_view_dashboard.php
 msgid "Invalid request. Please try again."
-msgstr ""
+msgstr "არასწორი მოთხოვნა. გთხოვთ, სცადოთ ხელახლა."
 
 #: mactrack_view_dashboard.php
 msgid "Unknown card."
@@ -2235,15 +2149,15 @@ msgstr "უცნობი ბარათი."
 
 #: mactrack_view_dashboard.php
 msgid "Add card"
-msgstr ""
+msgstr "ბარათის დამატება"
 
 #: mactrack_view_dashboard.php
 msgid "Add a dashboard card…"
-msgstr ""
+msgstr "მართვის დაფის ბარათის დამატება…"
 
 #: mactrack_view_devices.php
 msgid "Mactrack - Device Report View"
-msgstr ""
+msgstr "Mactrack - მოწყობილობის ანგარიშის ხედი"
 
 #: mactrack_view_devices.php
 msgid "Unknown Device Type"
@@ -2263,7 +2177,7 @@ msgstr "გრაფიკების ნახვა"
 
 #: mactrack_view_devices.php
 msgid "Device Not Mapped to Cacti Device"
-msgstr ""
+msgstr "მოწყობილობა არ არის მიბმული Cacti მოწყობილობასთან"
 
 #: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
 msgid "View MAC Addresses"
@@ -2271,13 +2185,11 @@ msgstr "MAC მისამართების ნახვა"
 
 #: mactrack_view_devices.php
 msgid "No Mactrack Devices Found"
-msgstr ""
+msgstr "Mactrack მოწყობილობები ვერ მოიძებნა"
 
 #: mactrack_view_devices.php
-#, fuzzy
-#| msgid "Site Scan Results"
 msgid "Device Scan Results"
-msgstr "საიტის სკანირების შედეგები"
+msgstr "მოწყობილობის სკანირების შედეგები"
 
 #: mactrack_view_devices.php
 msgid "Hub/Switch"
@@ -2285,7 +2197,7 @@ msgstr "კომუტატორი"
 
 #: mactrack_view_dot1x.php
 msgid "Mactrack - 802.1x View"
-msgstr ""
+msgstr "Mactrack - 802.1x ხედი"
 
 #: mactrack_view_dot1x.php
 msgid "Domain"
@@ -2308,14 +2220,12 @@ msgid "Sessions"
 msgstr "სესიები"
 
 #: mactrack_view_dot1x.php mactrack_view_interfaces.php
-#, fuzzy
-#| msgid "Any Status"
 msgid "All Statuses"
-msgstr "ნებისმიერი სტატუსი"
+msgstr "ყველა სტატუსი"
 
 #: mactrack_view_dot1x.php mactrack_view_interfaces.php
 msgid "Statuses Selected"
-msgstr ""
+msgstr "არჩეული სტატუსები"
 
 #: mactrack_view_dot1x.php
 msgid "DATA"
@@ -2331,7 +2241,7 @@ msgstr "პორტის სახელი"
 
 #: mactrack_view_graphs.php
 msgid "Mactrack - Monitored Device Graph View"
-msgstr ""
+msgstr "Mactrack - მონიტორინგის ქვეშ მყოფი მოწყობილობის გრაფიკის ხედი"
 
 #: mactrack_view_graphs.php
 msgid "Custom Graph List Applied - Filtering from List"
@@ -2339,11 +2249,11 @@ msgstr "გამოყენებულია მომხმარებლ�
 
 #: mactrack_view_interfaces.php
 msgid "Mactrack - Network Interfaces View"
-msgstr ""
+msgstr "Mactrack - ქსელის ინტერფეისების ხედი"
 
 #: mactrack_view_interfaces.php
 msgid "No Mactrack Interfaces Found"
-msgstr ""
+msgstr "Mactrack ინტერფეისები ვერ მოიძებნა"
 
 #: mactrack_view_interfaces.php
 msgid "Interface Scan Results"
@@ -2403,7 +2313,7 @@ msgstr "გამომავალი დისკი სულ"
 
 #: mactrack_view_interfaces.php
 msgid "In Err (E/S)"
-msgstr ""
+msgstr "შემომავალი შეცდომები (E/S)"
 
 #: mactrack_view_interfaces.php
 msgid "In Disc (D/S)"
@@ -2448,17 +2358,17 @@ msgstr "ყველა დაიგნორებული ინტერფ�
 #: mactrack_view_interfaces.php
 #, php-format
 msgid "High In/Out Utilization > %d &#37;"
-msgstr ""
+msgstr "მაღალი შემომავალი/გამავალი დატვირთვა > %d &#37;"
 
 #: mactrack_view_interfaces.php
 #, php-format
 msgid "High In Utilization > %d &#37;"
-msgstr ""
+msgstr "მაღალი შემომავალი დატვირთვა > %d &#37;"
 
 #: mactrack_view_interfaces.php
 #, php-format
 msgid "High Out Utilization > %d &#37;"
-msgstr ""
+msgstr "მაღალი გამავალი დატვირთვა > %d &#37;"
 
 #: mactrack_view_interfaces.php
 msgid "With Issues"
@@ -2470,7 +2380,7 @@ msgstr "ჩართ. ინტერფეისები"
 
 #: mactrack_view_interfaces.php
 msgid "Up Interfaces No Alias"
-msgstr ""
+msgstr "ჩართული ინტერფეისები ფსევდონიმის გარეშე"
 
 #: mactrack_view_interfaces.php
 msgid "Errors Accumulating"
@@ -2482,7 +2392,7 @@ msgstr "მოაცილებს დაგროვებულებს"
 
 #: mactrack_view_interfaces.php
 msgid "Changed in Last Day"
-msgstr ""
+msgstr "ბოლო დღეს შეცვლილი"
 
 #: mactrack_view_interfaces.php
 msgid "Bandwidth"
@@ -2490,7 +2400,7 @@ msgstr "გამტარობა"
 
 #: mactrack_view_interfaces.php
 msgid "When checked, the Errors, Discards and Unknown Protocol columns show each interface's cumulative SNMP counter totals instead of the average per-second rate."
-msgstr ""
+msgstr "მონიშვნის შემთხვევაში, სვეტები „შეცდომები“, „გადაგდებები“ და „უცნობი პროტოკოლი“ თითოეული ინტერფეისისთვის წამში საშუალო სიხშირის ნაცვლად აჩვენებს დაგროვებითი SNMP მთვლელის ჯამურ მნიშვნელობებს."
 
 #: mactrack_view_interfaces.php
 msgid "Show Totals"
@@ -2498,7 +2408,7 @@ msgstr "ჯამების ჩვენება"
 
 #: mactrack_view_ips.php
 msgid "Mactrack - Site IP Range Report View"
-msgstr ""
+msgstr "Mactrack - საიტის IP დიაპაზონის ანგარიშის ხედი"
 
 #: mactrack_view_ips.php
 msgid "IP Range"
@@ -2534,11 +2444,11 @@ msgstr "IP მისამართების ნახვა"
 
 #: mactrack_view_ips.php
 msgid "No Mactrack Site IP Ranges Found"
-msgstr ""
+msgstr "Mactrack საიტის IP დიაპაზონები ვერ მოიძებნა"
 
 #: mactrack_view_macs.php
 msgid "Mactrack - MAC to IP Report View"
-msgstr ""
+msgstr "Mactrack - MAC-იდან IP-ზე ანგარიშის ხედი"
 
 #: mactrack_view_macs.php
 msgid "Authorize"
@@ -2550,45 +2460,45 @@ msgstr "გაბათილება"
 
 #: mactrack_view_macs.php
 msgid "None of the selected MAC Addresses were valid, so no action was taken."
-msgstr ""
+msgstr "არჩეული MAC მისამართებიდან არც ერთი არ იყო სწორი, ამიტომ მოქმედება არ შესრულებულა."
 
 #: mactrack_view_macs.php
 #, php-format
 msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
-msgstr ""
+msgstr "შემდეგი MAC მისამართების ავტორიზაციის გაუქმება ვერ მოხერხდა, რადგან ისინი ჯგუფური ავტორიზაციების წევრები არიან %s"
 
 #: mactrack_view_macs.php
 msgid "Click 'Continue' to Authorize the following MAC Addresses."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება'-ზე შემდეგი MAC მისამართების ავტორიზაციისთვის."
 
 #: mactrack_view_macs.php
 msgid "Click 'Continue' to Revoke the following MAC Addresses."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება'-ზე შემდეგი MAC მისამართების ავტორიზაციის გასაუქმებლად."
 
 #: mactrack_view_macs.php
 msgid "You must select at least one MAC Address."
-msgstr ""
+msgstr "უნდა აირჩიოთ მინიმუმ ერთი MAC მისამართი."
 
 #: mactrack_view_macs.php
 msgid "You are not permitted to change Mac Authorizations."
-msgstr ""
+msgstr "თქვენ არ გაქვთ MAC ავტორიზაციების შეცვლის უფლება."
 
 #: mactrack_view_macs.php
 #, php-format
 msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
-msgstr ""
+msgstr "მოწყ.:%s IP.:%s MAC.:%s პორტი.:%s რაოდ.: [%s]"
 
 #: mactrack_view_macs.php
 msgid "You must select at least one Row."
-msgstr ""
+msgstr "უნდა აირჩიოთ მინიმუმ ერთი სტრიქონი."
 
 #: mactrack_view_macs.php
 msgid "You are not permitted to delete rows."
-msgstr ""
+msgstr "თქვენ არ გაქვთ სტრიქონების წაშლის უფლება."
 
 #: mactrack_view_macs.php
 msgid "Click 'Continue' to Delete the following rows from Aggregated table."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება'-ზე აგრეგირებული ცხრილიდან შემდეგი სტრიქონების წასაშლელად."
 
 #: mactrack_view_macs.php
 msgid "VLAN ID"
@@ -2600,11 +2510,11 @@ msgstr "VLAN-ის სახელი"
 
 #: mactrack_view_macs.php
 msgid "You must choose a Site, Device or other search criteria."
-msgstr ""
+msgstr "უნდა აირჩიოთ საიტი, მოწყობილობა ან ძებნის სხვა კრიტერიუმი."
 
 #: mactrack_view_macs.php
 msgid "No Mactrack Port Results Found"
-msgstr ""
+msgstr "Mactrack პორტის შედეგები ვერ მოიძებნა"
 
 #: mactrack_view_macs.php
 msgid "Count"
@@ -2616,7 +2526,7 @@ msgstr "აგრეგირებული"
 
 #: mactrack_view_sites.php
 msgid "Mactrack - Site Report View"
-msgstr ""
+msgstr "Mactrack - საიტის ანგარიშის ხედი"
 
 #: mactrack_view_sites.php
 msgid "Rescan Site"
@@ -2632,7 +2542,7 @@ msgstr "IP შუალედების ნახვა"
 
 #: mactrack_view_sites.php
 msgid "Sites / Device Types"
-msgstr ""
+msgstr "საიტები / მოწყობილობის ტიპები"
 
 #: mactrack_view_sites.php
 msgid "Site Scan Results"
@@ -2640,12 +2550,12 @@ msgstr "საიტის სკანირების შედეგებ�
 
 #: setup.php
 msgid "MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes."
-msgstr ""
+msgstr "MacTrack ფონურ რეჟიმში ანახლებს მონაცემთა ბაზას. დიდ სისტემებში ამას შეიძლება ერთ საათამდე დასჭირდეს, დასრულებამდე კი MacTrack-ის ზოგიერთი მონაცემი შესაძლოა არასრული იყოს."
 
 #: setup.php
 #, php-format
 msgid "MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s"
-msgstr ""
+msgstr "MacTrack-მა ვერ შეძლო მონაცემთა ბაზის განახლების ფონურ რეჟიმში გაშვება; მიზეზის სანახავად იხილეთ Cacti-ის ჟურნალი. გაუშვით იგი ხელით ბრძანების სტრიქონიდან: %s"
 
 #: setup.php
 msgid "Mactrack"
@@ -2661,7 +2571,7 @@ msgstr "სკანირების სიხშირე"
 
 #: setup.php
 msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
-msgstr ""
+msgstr "აირჩიეთ, როდის შეგროვდეს MAC და IP მისამართები და ინტერფეისის სტატისტიკა თქვენი ქსელური მოწყობილობებიდან."
 
 #: setup.php
 msgid "Concurrent Processes"
@@ -2669,7 +2579,7 @@ msgstr "ერთდროულად გაშვებული პროც�
 
 #: setup.php
 msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
-msgstr ""
+msgstr "მიუთითეთ, რამდენი მოწყობილობა გამოიკითხება ერთდროულად, სანამ ყველა მოწყობილობა არ გამოიკითხება."
 
 #: setup.php
 msgid "Scanner Max Runtime"
@@ -2677,15 +2587,15 @@ msgstr "სკანერის გაშვების მაქს. დრ�
 
 #: setup.php
 msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
-msgstr ""
+msgstr "მიუთითეთ წუთების რაოდენობა, რომლის განმავლობაშიც მოწყობილობის სკანირების ფუნქციას მიეცემა მუშაობის უფლება, სანამ სისტემა ჩათვლის, რომ ის დასრულდა. ეს პარამეტრი გამოასწორებს ავარიულად შეწყვეტილი სკანირების დავალებებს."
 
 #: setup.php
 msgid "Start Time for Data Collection"
-msgstr ""
+msgstr "მონაცემთა შეგროვების დაწყების დრო"
 
 #: setup.php
 msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
-msgstr ""
+msgstr "როდის გსურთ მონაცემთა პირველი შეგროვების ჩატარება. მონაცემთა შეგროვების ყველა მომავალი დრო დაეფუძნება ამ დაწყების დროს. კარგი მაგალითია 12:00AM."
 
 #: setup.php
 msgid "Database Maintenance Time"
@@ -2693,7 +2603,7 @@ msgstr "მონაცემთა ბაზის რემონტის დ
 
 #: setup.php
 msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
-msgstr ""
+msgstr "როდის უნდა წაიშალოს მონაცემთა ბაზიდან ძველი ჩანაწერები. გთხოვთ გაითვალისწინოთ, რომ ამ მოქმედების მიმდინარეობისას პორტების მონაცემთა ბაზაზე წვდომა აკრძალული იქნება."
 
 #: setup.php
 msgid "Confirm Utilities Prompt"
@@ -2701,7 +2611,7 @@ msgstr "ხელსაწყოების კითხვის დადა�
 
 #: setup.php
 msgid "When using utilities, prompt for verification"
-msgstr ""
+msgstr "უტილიტების გამოყენებისას დადასტურების მოთხოვნა"
 
 #: setup.php
 msgid "Data Retention"
@@ -2709,7 +2619,7 @@ msgstr "მონაცემების შენახვა"
 
 #: setup.php
 msgid "How long should port MAC details be retained in the database."
-msgstr ""
+msgstr "რამდენ ხანს უნდა შეინახოს პორტის MAC დეტალები მონაცემთა ბაზაში."
 
 #: setup.php
 msgid "Data Retention IPs"
@@ -2717,19 +2627,19 @@ msgstr "მონაცემების შენარჩუნების I
 
 #: setup.php
 msgid "How long should discovered IPs details be retained in the database."
-msgstr ""
+msgstr "რამდენ ხანს უნდა შეინახოს აღმოჩენილი IP მისამართების დეტალები მონაცემთა ბაზაში."
 
 #: setup.php
 msgid "Size of the partitions of the port, IP and 802.1x tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
-msgstr ""
+msgstr "პორტის, IP და 802.1x ცხრილების დანაყოფების ზომა, ან გამორთული დაუყოფელი ცხრილებისთვის. მისი შეცვლა გავლენას ახდენს მხოლოდ ახალ დანაყოფებზე; არსებული ისტორიის შესაბამისად ხელახლა ასაგებად გამოიყენეთ „პორტებისა და IP მისამართების დანაყოფებად დაყოფის კონფიგურაცია“ MacTrack-ის უტილიტებში ან გაუშვით cli/upgrade_partitioning.php."
 
 #: setup.php
 msgid "Switch Level Ignore Ports Delimiter"
-msgstr ""
+msgstr "კომუტატორის დონეზე იგნორირებული პორტების გამყოფი"
 
 #: setup.php
 msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
-msgstr ""
+msgstr "რომელი გამყოფი უნდა გამოიყენოს Mactrack-მა თითოეული კომუტატორისთვის უგულებელყოფილი პორტების სტრიქონის დამუშავებისას."
 
 #: setup.php
 msgid "Auto Detect"
@@ -2753,7 +2663,7 @@ msgstr "MAC მისამართი გამოტანის ფორმ
 
 #: setup.php
 msgid "Format used for display."
-msgstr ""
+msgstr "ჩვენებისთვის გამოყენებული ფორმატი."
 
 #: setup.php
 msgid "Ports to Ignore"
@@ -2761,15 +2671,15 @@ msgstr "გამოსატოვებელი პორტები"
 
 #: setup.php
 msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
-msgstr ""
+msgstr "მიუთითეთ ინტერფეისების სიაში დასაიგნორებელი პორტების ifNames ან ifDescriptions რეგულარული გამოსახულება. მაგალითად, (Vlan|Loopback|Null)."
 
 #: setup.php
 msgid "Ports to Ignore While Scanning (Regular Expression)"
-msgstr ""
+msgstr "სკანირებისას იგნორირებადი პორტები (რეგულარული გამოსახულება)"
 
 #: setup.php
 msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
-msgstr ""
+msgstr "არასავალდებულო. რეგულარული გამოსახულება, რომელიც რეგისტრის გაუთვალისწინებლად მოწმდება ყველა სკანირებული პორტის სახელსა და ფსევდონიმზე. შესაბამის პორტზე ნაპოვნი MAC მისამართები არ გროვდება, რაც uplink და trunk პორტებს მონაცემთა ბაზის მიღმა ტოვებს. მაგალითად, (uplink|trunk). რამდენიმე გამოსახულების მისათითებლად თითოეული ჩაწერეთ ცალკე ხაზზე. დატოვეთ ცარიელი ყველა პორტის შესაგროვებლად. საიტებსა და მოწყობილობებს შეუძლიათ საკუთარი გამოსახულებების დამატება. ზემოთ მოცემული „იგნორირებადი პორტებისგან“ განსხვავებით, ეს ეხება MAC-ების შეგროვებას და არა ინტერფეისების სიას, და მოქმედებს მხოლოდ ახალ სკანირებებზე."
 
 #: setup.php
 msgid "Bandwidth Usage Threshold"
@@ -2777,7 +2687,7 @@ msgstr "გამტარობის გამოყენების ზღ�
 
 #: setup.php
 msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
-msgstr ""
+msgstr "ქსელური ინტერფეისის სტატისტიკის დათვალიერებისას, გამტარუნარიანობის რა ზღვარის ნახვა გსურთ ნაგულისხმევად."
 
 #: setup.php
 #, php-format
@@ -2790,27 +2700,27 @@ msgstr "DNS-ის პარამეტრები"
 
 #: setup.php
 msgid "Perform Reverse DNS Name Resolution"
-msgstr ""
+msgstr "უკუ DNS სახელის ამოხსნის შესრულება"
 
 #: setup.php
 msgid "Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
-msgstr ""
+msgstr "უნდა შეასრულოს თუ არა Mactrack-მა პორტებთან დაკავშირებული IP მისამართების უკუ DNS ძიება. გაფრთხილება: თუ DNS სწორად არ არის გამართული, ეს მნიშვნელოვნად შეანელებს სკანირების დროს."
 
 #: setup.php
 msgid "Primary DNS IP Address"
-msgstr ""
+msgstr "ძირითადი DNS IP მისამართი"
 
 #: setup.php
 msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
-msgstr ""
+msgstr "შეიყვანეთ ძირითადი DNS IP მისამართი უკუ ძიებისთვის გამოსაყენებლად."
 
 #: setup.php
 msgid "Secondary DNS IP Address"
-msgstr ""
+msgstr "მეორადი DNS IP მისამართი"
 
 #: setup.php
 msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
-msgstr ""
+msgstr "შეიყვანეთ მეორადი DNS IP მისამართი უკუ ძიებისთვის გამოსაყენებლად."
 
 #: setup.php
 msgid "DNS Timeout"
@@ -2818,7 +2728,7 @@ msgstr "DNS-ის ლოდინის ვადა ამოიწურა"
 
 #: setup.php
 msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
-msgstr ""
+msgstr "გთხოვთ, შეიყვანოთ DNS მოლოდინის დრო მილიწამებში. Mactrack იყენებს PHP-ზე დაფუძნებულ DNS რეზოლვერს."
 
 #: setup.php
 msgid "DNS Prime Interval"
@@ -2826,7 +2736,7 @@ msgstr "DNS-ის ძირითადი ინტერვალი"
 
 #: setup.php
 msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
-msgstr ""
+msgstr "რა სიხშირით, წამებში, უნდა მოხდეს Mactrack-ის სკანირების IP მისამართების MAC მისამართებთან დაკავშირება DNS რეზოლუციისთვის. რამდენიმე ათასი მოწყობილობის არსებობისას უფრო დიდი რიცხვის გამოყენება გაზრდის წარმადობას."
 
 #: setup.php
 msgid "Notification Settings"
@@ -2838,7 +2748,7 @@ msgstr "წყარო მისამართი"
 
 #: setup.php
 msgid "The source Email address for Mactrack Emails."
-msgstr ""
+msgstr "გამგზავნის ელფოსტის მისამართი Mactrack ელფოსტებისთვის."
 
 #: setup.php
 msgid "Source Email Name"
@@ -2846,7 +2756,7 @@ msgstr "წყარო ელფოსტის სახელი"
 
 #: setup.php
 msgid "The Source Email name for Mactrack Emails."
-msgstr ""
+msgstr "გამგზავნის ელფოსტის სახელი Mactrack ელფოსტებისთვის."
 
 #: setup.php
 msgid "MACTrack Administrator"
@@ -2858,19 +2768,19 @@ msgstr "MacWatch-ის ნაგულისხმევი სხეული"
 
 #: setup.php
 msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
-msgstr ""
+msgstr "ელფოსტის ტექსტის წინასწარ განსაზღვრული შაბლონი Mactrack MacWatch ელფოსტებისთვის. ტექსტი შეიძლება შეიცავდეს ნებისმიერ ვალიდურ html ტეგს. ის ასევე მხარს უჭერს ჩამნაცვლებელ ტეგებს, რომლებიც დამუშავდება ელფოსტის გაგზავნისას. ვალიდური ტეგებია: <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
 
 #: setup.php
 msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
-msgstr ""
+msgstr "MAC მისამართი <MAC> ნაპოვნია IP მისამართზე <IP> ბილეთის ნომრისთვის: <TICKET>.<br>მოწყობილობა მდებარეობს<br>საიტი: <SITENAME>, მოწყობილობა <DEVICENAME>, IP <DEVICEIP>, პორტი <PORTNUMBER> და პორტის სახელი <PORTNAME>"
 
 #: setup.php
 msgid "MacAuth Report Email Addresses"
-msgstr ""
+msgstr "MacAuth ანგარიშის ელფოსტის მისამართები"
 
 #: setup.php
 msgid "A comma delimited list of users to receive the MacAuth Email notifications."
-msgstr ""
+msgstr "მომხმარებლების მძიმით გამოყოფილი სია MacAuth ელფოსტის შეტყობინებების მისაღებად."
 
 #: setup.php
 msgid "MacAuth Report Frequency"
@@ -2878,7 +2788,7 @@ msgstr "MacAuth-ის ანგარიშების სიხშირე"
 
 #: setup.php
 msgid "How often will the MacAuth Reports be Emailed."
-msgstr ""
+msgstr "რამდენად ხშირად გაიგზავნება MacAuth ანგარიშები ელფოსტით."
 
 #: setup.php
 msgid "Mactrack ArpWatch Settings"
@@ -2890,7 +2800,7 @@ msgstr "ArpWatch-ის ჩართვა"
 
 #: setup.php
 msgid "Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
-msgstr ""
+msgstr "უნდა გამოიყენოს თუ არა Mactrack-მა ასევე ArpWatch-ის მონაცემები MAC-დან IP/DNS-ზე რეზოლუციის შესავსებად?"
 
 #: setup.php
 msgid "ArpWatch Database Path"
@@ -2898,7 +2808,7 @@ msgstr "ბილიკი ArpWatch-ის მონაცემთა ბაზ
 
 #: setup.php
 msgid "The location of the ArpWatch Database file on the Cacti server."
-msgstr ""
+msgstr "ArpWatch მონაცემთა ბაზის ფაილის მდებარეობა Cacti სერვერზე."
 
 #: setup.php
 msgid "SNMP Presets"
@@ -2906,19 +2816,19 @@ msgstr "SNMP-ის პრესეტები"
 
 #: setup.php
 msgid "Update Policy for SNMP Options"
-msgstr ""
+msgstr "SNMP პარამეტრების განახლების პოლიტიკა"
 
 #: setup.php
 msgid "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices."
-msgstr ""
+msgstr "Cacti მოწყობილობებსა და Mactrack მოწყობილობებს შორის SNMP პარამეტრების სინქრონიზაციის პოლიტიკა."
 
 #: setup.php
 msgid "Default SNMP version for all new hosts."
-msgstr ""
+msgstr "ნაგულისხმევი SNMP ვერსია ყველა ახალი ჰოსტისთვის."
 
 #: setup.php
 msgid "Default SNMP read community for all new hosts."
-msgstr ""
+msgstr "ნაგულისხმევი SNMP წაკითხვის community ყველა ახალი ჰოსტისთვის."
 
 #: setup.php
 msgid "Communities"
@@ -2926,19 +2836,19 @@ msgstr "საზოგადოებები"
 
 #: setup.php
 msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
-msgstr ""
+msgstr "შეავსეთ ამ მოწყობილობისთვის შესამოწმებელი ხელმისაწვდომი SNMP წაკითხვის სტრიქონების სია. თითოეული წაკითხვის სტრიქონი უნდა იყოს გამოყოფილი ორწერტილით ':'. ეს წაკითხვის სტრიქონები თანმიმდევრულად შემოწმდება, თუ ძირითადი წაკითხვის სტრიქონი არასწორია."
 
 #: setup.php
 msgid "The UDP/TCP Port to poll the SNMP agent on."
-msgstr ""
+msgstr "UDP/TCP პორტი SNMP აგენტის გამოსაკითხად."
 
 #: setup.php
 msgid "Default SNMP timeout in milli-seconds."
-msgstr ""
+msgstr "ნაგულისხმევი SNMP მოლოდინის დრო მილიწამებში."
 
 #: setup.php
 msgid "The number times the SNMP poller will attempt to reach the host before failing."
-msgstr ""
+msgstr "მცდელობების რაოდენობა, რამდენჯერაც SNMP გამომკითხველი შეეცდება ჰოსტთან დაკავშირებას შეცდომის დაფიქსირებამდე."
 
 #: setup.php
 msgid "snmpbulkwalk Binary Path"
@@ -2946,7 +2856,7 @@ msgstr "snmpbulkwalk პროგრამის ბილიკი"
 
 #: setup.php
 msgid "The path to your snmpbulkwalk binary."
-msgstr ""
+msgstr "გზა თქვენი snmpbulkwalk ბინარული ფაილისკენ."
 
 #: setup.php
 msgid "MacTrack Settings"
@@ -2958,7 +2868,7 @@ msgstr "ნაგულისხმევი ჩანართი"
 
 #: setup.php
 msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
-msgstr ""
+msgstr "MacTrack-ის რომელი ჩანართი გსურთ იყოს ნაგულისხმევი ყოველ ჯერზე, როდესაც MacTrack განყოფილებაში შედიხართ."
 
 #: setup.php
 msgid "Mac Addresses"
@@ -2978,7 +2888,7 @@ msgstr "ინტერნეტ-პროქსის მისამართ�
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
-msgstr ""
+msgstr "Cacti-ს ძირითადი სერვისებისთვის ან მოდულებისთვის, რომლებსაც ინტერნეტთან წვდომა სჭირდებათ, აქ შეიყვანეთ პროქსი სერვერი და პორტი ფორმატით IP:PORT. მაგალითად, 192.168.1.1:8080."
 
 #: setup.php
 msgid "Internet Proxy User"
@@ -2986,7 +2896,7 @@ msgstr "ინტერნეტის პროქსის მომხმა�
 
 #: setup.php
 msgid "If your Internet Proxy requires a username, enter it here."
-msgstr ""
+msgstr "თუ თქვენი ინტერნეტ პროქსი მომხმარებლის სახელს მოითხოვს, შეიყვანეთ აქ."
 
 #: setup.php
 msgid "Internet Proxy Password"
@@ -2994,13 +2904,11 @@ msgstr "ინერნეტ-პროქსის პაროლი"
 
 #: setup.php
 msgid "If your Internet Proxy requires a password, enter it here."
-msgstr ""
+msgstr "თუ თქვენი ინტერნეტ პროქსი პაროლს მოითხოვს, შეიყვანეთ აქ."
 
 #: setup.php
-#, fuzzy
-#| msgid "Mactrack Devices"
 msgid "Mactrack Dashboard"
-msgstr "Mactrack-ის მოწყობილობები"
+msgstr "Mactrack-ის მართვის დაფა"
 
 #: setup.php
 msgid "Mactrack Devices"
@@ -3024,11 +2932,11 @@ msgstr "MacTrack-ის საიტები"
 
 #: setup.php
 msgid "Mac Address Tracking Utility"
-msgstr ""
+msgstr "MAC მისამართების თვალთვალის უტილიტა"
 
 #: setup.php
 msgid "Mac Address Authorization Utility"
-msgstr ""
+msgstr "MAC მისამართების ავტორიზაციის უტილიტა"
 
 #: setup.php
 msgid "Mactrack Vendor Macs"
@@ -3040,7 +2948,7 @@ msgstr "Mactrack-ის MAC-ების ნახვა"
 
 #: setup.php
 msgid "Mactrack Dot1x View"
-msgstr ""
+msgstr "Mactrack Dot1x ხედი"
 
 #: setup.php
 msgid "Mactrack IP Address Viewer"
@@ -3068,19 +2976,19 @@ msgstr "Mactrack-ის პროგრამები"
 
 #: setup.php
 msgid "Truncate Port Results Table"
-msgstr ""
+msgstr "პორტების შედეგების ცხრილის გასუფთავება"
 
 #: setup.php
 msgid "Truncate Aggregated Port Results Table"
-msgstr ""
+msgstr "პორტების აგრეგირებული შედეგების ცხრილის გასუფთავება"
 
 #: setup.php
 msgid "Truncate and Re-create Aggregated Port Results Table"
-msgstr ""
+msgstr "პორტების აგრეგირებული შედეგების ცხრილის გასუფთავება და ხელახლა შექმნა"
 
 #: setup.php
 msgid "Refresh/Update Vendor MAC Database from IEEE"
-msgstr ""
+msgstr "მწარმოებლების MAC მონაცემთა ბაზის განახლება IEEE-დან"
 
 #: setup.php
 msgid "Mactrack Graph Viewer"
@@ -3118,7 +3026,7 @@ msgstr "არ შეიცავს"
 
 #: setup.php
 msgid "Does Not Begin With"
-msgstr ""
+msgstr "არ იწყება შემდეგით"
 
 #: setup.php
 msgid "Is Null"
@@ -3126,7 +3034,7 @@ msgstr "ნულია"
 
 #: setup.php
 msgid "Is Not Null"
-msgstr ""
+msgstr "არ არის Null"
 
 #: setup.php
 msgid "Half"
@@ -3138,11 +3046,11 @@ msgstr "მთლიანი"
 
 #: setup.php
 msgid "Sync Cacti Device to Mactrack Device"
-msgstr ""
+msgstr "Cacti მოწყობილობის სინქრონიზაცია Mactrack მოწყობილობასთან"
 
 #: setup.php
 msgid "Sync Mactrack Device to Cacti Device"
-msgstr ""
+msgstr "Mactrack მოწყობილობის სინქრონიზაცია Cacti მოწყობილობასთან"
 
 #: setup.php
 #, php-format
@@ -3180,7 +3088,7 @@ msgstr "%d წელი"
 
 #: setup.php
 msgid "On Scan Completion"
-msgstr ""
+msgstr "სკანირების დასრულებისას"
 
 #: setup.php
 #, php-format
@@ -3217,46 +3125,44 @@ msgstr "ტრეკინგის ხელსაწყოები"
 
 #: setup.php
 msgid "Ports to Ignore (Regular Expression)"
-msgstr ""
+msgstr "იგნორირებადი პორტები (რეგულარული გამოსახულება)"
 
 #: setup.php
 #, php-format
 msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions."
-msgstr ""
+msgstr "არასავალდებულო. რეგულარული გამოსახულება, რომელიც რეგისტრის გაუთვალისწინებლად მოწმდება პორტის სახელსა და ფსევდონიმზე (%s). შესაბამის პორტზე ნაპოვნი MAC მისამართები არ გროვდება. მაგალითად, '(uplink|trunk)' აიგნორებს ყველა პორტს, რომლის სახელი ან ფსევდონიმი შეიცავს uplink-ს ან trunk-ს. რამდენიმე გამოსახულების მისათითებლად თითოეული ჩაწერეთ ცალკე ხაზზე. ის გამოიყენება %s გამოსახულებებთან ერთად."
 
 #: setup.php
 msgid "every device in this site"
-msgstr ""
+msgstr "ამ საიტის ყველა მოწყობილობა"
 
 #: setup.php
-#, fuzzy
-#| msgid "Disable Device"
 msgid "this device"
-msgstr "მოწყობილობის გამორთვა"
+msgstr "ეს მოწყობილობა"
 
 #: setup.php
 msgid "device and global"
-msgstr ""
+msgstr "მოწყობილობა და გლობალური"
 
 #: setup.php
 msgid "site and global"
-msgstr ""
+msgstr "საიტი და გლობალური"
 
 #: setup.php
 msgid "Device Scanning Function Options"
-msgstr ""
+msgstr "მოწყობილობის სკანირების ფუნქციის პარამეტრები"
 
 #: setup.php
 msgid "Give this device type a meaningful description."
-msgstr ""
+msgstr "მიანიჭეთ ამ მოწყობილობის ტიპს შინაარსიანი აღწერა."
 
 #: setup.php
 msgid "Fill in the name for the vendor of this device type."
-msgstr ""
+msgstr "შეავსეთ ამ მოწყობილობის ტიპის მწარმოებლის სახელი."
 
 #: setup.php
 msgid "Choose the type of device."
-msgstr ""
+msgstr "აირჩიეთ მოწყობილობის ტიპი."
 
 #: setup.php
 msgid "System Description Match"
@@ -3264,27 +3170,27 @@ msgstr "სოსტემის აღწერის დამთხვევ�
 
 #: setup.php
 msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
-msgstr ""
+msgstr "მიუთითეთ საკვანძო ინფორმაცია, რათა Mactrack-მა შეძლოს მოწყობილობის ტიპის ამოცნობა. ჩამნაცვლებელი სიმბოლო არის '&#42;' ნიშანი."
 
 #: setup.php
 msgid "Vendor SNMP Object ID Match"
-msgstr ""
+msgstr "მწარმოებლის SNMP ობიექტის ID-ის დამთხვევა"
 
 #: setup.php
 msgid "MAC Address Scanning Function"
-msgstr ""
+msgstr "MAC მისამართის სკანირების ფუნქცია"
 
 #: setup.php
 msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
-msgstr ""
+msgstr "Mactrack სკანირების ფუნქცია, რომელიც უნდა გამოიძახოს პორტის დეტალების მისაღებად და შესანახად. საჭიროა მხოლოდ ფუნქციის სახელი. შემდეგი ოთხი პარამეტრი იგულისხმება და ყოველთვის დაემატება: 'my_function($site, &$device, $lowport, $highport)'. წმინდა მარშრუტიზატორისთვის ფუნქცია საჭირო არ არის."
 
 #: setup.php
 msgid "IP Address Scanning Function"
-msgstr ""
+msgstr "IP მისამართის სკანირების ფუნქცია"
 
 #: setup.php
 msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
-msgstr ""
+msgstr "Mactrack სკანირების ფუნქცია, სპეციფიკური Layer3 მოწყობილობებისთვის, რომლებიც თვალყურს ადევნებენ IP მისამართებს."
 
 #: setup.php
 msgid "802.1x Scanning Function"
@@ -3292,23 +3198,23 @@ msgstr "802.1x სკანირების ფუნქცია"
 
 #: setup.php
 msgid "Mactrack scanning function specific to Switches with dot1x enabled."
-msgstr ""
+msgstr "Mactrack სკანირების ფუნქცია, სპეციფიკური dot1x-ჩართული კომუტატორებისთვის."
 
 #: setup.php
 msgid "Serial Number Base OID"
-msgstr ""
+msgstr "სერიული ნომრის საბაზისო OID"
 
 #: setup.php
 msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
-msgstr ""
+msgstr "SNMP OID, რომელიც გამოიყენება ამ ტიპის მოწყობილობის სერიული ნომრის მისაღებად და Mactrack აქტივების ინფორმაციის ცხრილში შესანახად."
 
 #: setup.php
 msgid "Serial Number Collection Method"
-msgstr ""
+msgstr "სერიული ნომრის შეგროვების მეთოდი"
 
 #: setup.php
 msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
-msgstr ""
+msgstr "როგორ გროვდება სერიული ნომერი ამ OID-ისთვის. თუ არჩეულია 'SNMP Walk', ვვარაუდობთ მრავალ სერიულ ნომერს. თუ 'Get', ის მხოლოდ ერთი იქნება."
 
 #: setup.php
 msgid "SNMP Get"
@@ -3320,23 +3226,23 @@ msgstr "SNMP-ით გავლა"
 
 #: setup.php
 msgid "Low User Port Number"
-msgstr ""
+msgstr "მომხმარებლის პორტის ქვედა ნომერი"
 
 #: setup.php
 msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
-msgstr ""
+msgstr "მიუთითეთ მომხმარებლის პორტის ქვედა ნომერი ამ კომუტატორზე. დატოვეთ 0, რათა სისტემამ თავად გამოთვალოს ის."
 
 #: setup.php
 msgid "High User Port Number"
-msgstr ""
+msgstr "მომხმარებლის პორტის ზედა ნომერი"
 
 #: setup.php
 msgid "Disabled device type is not used."
-msgstr ""
+msgstr "გამორთული მოწყობილობის ტიპი არ გამოიყენება."
 
 #: setup.php
 msgid "Fill in the name of this SNMP option set."
-msgstr ""
+msgstr "შეავსეთ ამ SNMP პარამეტრების ნაკრების სახელი."
 
 #: setup.php
 msgid "SNMP Version"
@@ -3344,7 +3250,7 @@ msgstr "SNMP-ის ვერსია"
 
 #: setup.php
 msgid "Choose the SNMP version for this host."
-msgstr ""
+msgstr "აირჩიეთ SNMP ვერსია ამ ჰოსტისთვის."
 
 #: setup.php
 msgid "SNMP Community String"
@@ -3352,7 +3258,7 @@ msgstr "SNMP-ის საზოგადოების სტრიქონ�
 
 #: setup.php
 msgid "Fill in the SNMP read community for this device."
-msgstr ""
+msgstr "შეავსეთ SNMP წაკითხვის community ამ მოწყობილობისთვის."
 
 #: setup.php
 msgid "SNMP Port"
@@ -3364,7 +3270,7 @@ msgstr "SNMP-ის მოლოდინის ვადა"
 
 #: setup.php
 msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
-msgstr ""
+msgstr "მილიწამების მაქსიმალური რაოდენობა, რამდენ ხანსაც Cacti დაელოდება SNMP პასუხს (არ მუშაობს php-snmp მხარდაჭერით)."
 
 #: setup.php
 msgid "SNMP Retries"
@@ -3372,15 +3278,15 @@ msgstr "SNMP-ის თავიდან ცდები"
 
 #: setup.php
 msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
-msgstr ""
+msgstr "მოწყობილობასთან SNMP წაკითხვის სტრიქონით დაკავშირების მცდელობების მაქსიმალური რაოდენობა შეწყვეტამდე."
 
 #: setup.php
 msgid "Maximum OID's Per Get Request"
-msgstr ""
+msgstr "ერთ Get მოთხოვნაზე OID-ების მაქსიმალური რაოდენობა"
 
 #: setup.php
 msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
-msgstr ""
+msgstr "განსაზღვრავს OID-ების რაოდენობას, რომელთა მიღებაც შესაძლებელია ერთ SNMP Get მოთხოვნაში."
 
 #: setup.php
 msgid "SNMP Username (v3)"
@@ -3388,7 +3294,7 @@ msgstr "SNMP-ის მომხმარებლის სახელი (v3)
 
 #: setup.php
 msgid "SNMP v3 username for this device."
-msgstr ""
+msgstr "SNMP v3 მომხმარებლის სახელი ამ მოწყობილობისთვის."
 
 #: setup.php
 msgid "SNMP Password (v3)"
@@ -3396,31 +3302,31 @@ msgstr "SNMP პაროლი (v3)"
 
 #: setup.php
 msgid "SNMP v3 password for this device."
-msgstr ""
+msgstr "SNMP v3 პაროლი ამ მოწყობილობისთვის."
 
 #: setup.php
 msgid "SNMP Auth Protocol (v3)"
-msgstr ""
+msgstr "SNMP ავთენტიფიკაციის პროტოკოლი (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Authorization Protocol."
-msgstr ""
+msgstr "აირჩიეთ SNMPv3 ავტორიზაციის პროტოკოლი."
 
 #: setup.php
 msgid "SNMP Privacy Passphrase (v3)"
-msgstr ""
+msgstr "SNMP კონფიდენციალურობის საიდუმლო ფრაზა (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Passphrase."
-msgstr ""
+msgstr "აირჩიეთ SNMPv3 კონფიდენციალურობის საიდუმლო ფრაზა."
 
 #: setup.php
 msgid "SNMP Privacy Protocol (v3)"
-msgstr ""
+msgstr "SNMP კონფიდენციალურობის პროტოკოლი (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Protocol."
-msgstr ""
+msgstr "აირჩიეთ SNMPv3 კონფიდენციალურობის პროტოკოლი."
 
 #: setup.php
 msgid "SNMP Context (v3)"
@@ -3428,27 +3334,27 @@ msgstr "SNMP-ის კონტექსტი (v3)"
 
 #: setup.php
 msgid "Enter the SNMP v3 Context to use for this device."
-msgstr ""
+msgstr "შეიყვანეთ ამ მოწყობილობისთვის გამოსაყენებელი SNMP v3 კონტექსტი."
 
 #: setup.php
 msgid "SNMP Engine ID (v3)"
-msgstr ""
+msgstr "SNMP ძრავის ID (v3)"
 
 #: setup.php
 msgid "Enter the SNMP v3 Engine ID to use for this device."
-msgstr ""
+msgstr "შეიყვანეთ ამ მოწყობილობისთვის გამოსაყენებელი SNMP v3 ძრავის ID."
 
 #: setup.php
 msgid "General Device Settings"
-msgstr ""
+msgstr "მოწყობილობის ზოგადი პარამეტრები"
 
 #: setup.php
 msgid "Give this device a meaningful name."
-msgstr ""
+msgstr "მიანიჭეთ ამ მოწყობილობას შინაარსიანი სახელი."
 
 #: setup.php
 msgid "Fill in the fully qualified hostname for this device."
-msgstr ""
+msgstr "შეიყვანეთ ამ მოწყობილობის სრული ჰოსტის სახელი."
 
 #: setup.php
 msgid "Related Cacti Host"
@@ -3456,7 +3362,7 @@ msgstr "შესაბამისი Cacti-ის ჰოსტი"
 
 #: setup.php
 msgid "Given Mactrack Host is connected to this Cacti Host."
-msgstr ""
+msgstr "მოცემული Mactrack ჰოსტი დაკავშირებულია ამ Cacti ჰოსტთან."
 
 #: setup.php
 msgid "Scan Type"
@@ -3464,11 +3370,11 @@ msgstr "სკანირების ტიპი"
 
 #: setup.php
 msgid "Choose the scan type you wish to perform on this device."
-msgstr ""
+msgstr "აირჩიეთ სკანირების ტიპი, რომლის შესრულებაც გსურთ ამ მოწყობილობაზე."
 
 #: setup.php
 msgid "Choose the site to associate with this device."
-msgstr ""
+msgstr "აირჩიეთ საიტი, რომელიც დაუკავშირდება ამ მოწყობილობას."
 
 #: setup.php
 msgid "Device Notes"
@@ -3476,7 +3382,7 @@ msgstr "მოწყობილობის შენიშვნები"
 
 #: setup.php
 msgid "This field value is useful to save general information about a specific device."
-msgstr ""
+msgstr "ამ ველის მნიშვნელობა გამოსადეგია კონკრეტული მოწყობილობის შესახებ ზოგადი ინფორმაციის შესანახად."
 
 #: setup.php
 msgid "Disable Device"
@@ -3484,7 +3390,7 @@ msgstr "მოწყობილობის გამორთვა"
 
 #: setup.php
 msgid "Check this box to disable all checks for this host."
-msgstr ""
+msgstr "მონიშნეთ ეს უჯრა ამ ჰოსტისთვის ყველა შემოწმების გასათიშად."
 
 #: setup.php
 msgid "Switch/Hub, Switch/Router Settings"
@@ -3492,11 +3398,11 @@ msgstr "კომუტატორი/ჰაბის, კომუტატო
 
 #: setup.php
 msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
-msgstr ""
+msgstr "მიუთითეთ კონკრეტული კომუტატორის/ჰაბის იმ პორტების სია, რომელთა MAC შედეგებიც უგულებელყოფილი უნდა იყოს. მაგალითად, ისეთი link/trunk პორტები, რომელთა გარჩევა სხვა სამომხმარებლო პორტებისგან შეუძლებელია. თითოეული პორტის ნომერი გამოყოფილი უნდა იყოს ორწერტილით, ვერტიკალური ხაზით ან ჰარით ':', '|', ' '. მაგალითად, 'Fa0/1: Fa1/23' ან 'Fa0/1 Fa1/23' მისაღებია ზოგიერთი მწარმოებლის კომუტატორის ტიპისთვის."
 
 #: setup.php
 msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
-msgstr ""
+msgstr "შეგიძლიათ გამოიყენოთ კონკრეტული SNMP პარამეტრები ან აირჩიოთ SNMP ნაკრები. მეორე შემთხვევაში, mactrack შეეცდება იპოვოს სწორი პარამეტრები SNMP ნაკრებიდან"
 
 #: setup.php
 msgid "Read Strings"
@@ -3504,7 +3410,7 @@ msgstr "სტრიქონების წაკითხვა"
 
 #: setup.php
 msgid "<strong>DEPRECATED:</strong> SNMP community strings"
-msgstr ""
+msgstr "<strong>მოძველებულია:</strong> SNMP community სტრიქონები"
 
 #: setup.php
 msgid "Specific SNMP Settings"
@@ -3520,7 +3426,7 @@ msgstr "ტერმინალის ტიპი"
 
 #: setup.php
 msgid "Choose the terminal type that you use to connect to this device."
-msgstr ""
+msgstr "აირჩიეთ ტერმინალის ტიპი, რომელსაც ამ მოწყობილობასთან დასაკავშირებლად იყენებთ."
 
 #: setup.php
 msgid "Telnet"
@@ -3544,7 +3450,7 @@ msgstr "მომხმარებლის სახელი"
 
 #: setup.php
 msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
-msgstr ""
+msgstr "მომხმარებლის სახელი, რომელიც გამოიყენება თქვენი მორგებული ავთენტიფიკაციის მეთოდისთვის. მაგალითები მოიცავს SSH, RSH, HTML და ა.შ."
 
 #: setup.php
 msgid "Password"
@@ -3552,7 +3458,7 @@ msgstr "პაროლი"
 
 #: setup.php
 msgid "The password to be used for your custom authentication."
-msgstr ""
+msgstr "პაროლი, რომელიც გამოიყენება თქვენი მორგებული ავთენტიფიკაციისთვის."
 
 #: setup.php
 msgid "Private Key Path"
@@ -3560,7 +3466,7 @@ msgstr "პირადი გასაღების ბილიკი"
 
 #: setup.php
 msgid "The path to the private key used for SSH authentication."
-msgstr ""
+msgstr "SSH ავთენტიფიკაციისთვის გამოყენებული პირადი გასაღების ბილიკი."
 
 #: setup.php
 msgid "Sequence"
@@ -3576,7 +3482,7 @@ msgstr "საიტის ზოგადი პარამეტრები"
 
 #: setup.php
 msgid "Please enter a reasonable name for this site."
-msgstr ""
+msgstr "გთხოვთ, შეიყვანოთ შესაფერისი სახელი ამ საიტისთვის."
 
 #: setup.php
 msgid "Primary Customer Contact"
@@ -3584,7 +3490,7 @@ msgstr "კლიენტის ძირითადი კონტაქტ�
 
 #: setup.php
 msgid "The principal customer contact name and number for this site."
-msgstr ""
+msgstr "ამ საიტის მთავარი მომხმარებლის საკონტაქტო სახელი და ნომერი."
 
 #: setup.php
 msgid "NetOps Contact"
@@ -3592,7 +3498,7 @@ msgstr "NetOps_ის კონტაქტი"
 
 #: setup.php
 msgid "Please principal network support contact name and number for this site."
-msgstr ""
+msgstr "გთხოვთ, მიუთითოთ ამ საიტის ქსელის მხარდაჭერის მთავარი საკონტაქტო სახელი და ნომერი."
 
 #: setup.php
 msgid "Facilities Contact"
@@ -3600,7 +3506,7 @@ msgstr "ობიექტის კონტაქტი"
 
 #: setup.php
 msgid "Please principal facilities/security contact name and number for this site."
-msgstr ""
+msgstr "გთხოვთ, მიუთითოთ ამ საიტის ინფრასტრუქტურის/უსაფრთხოების მთავარი საკონტაქტო სახელი და ნომერი."
 
 #: setup.php
 msgid "Site Information"
@@ -3608,11 +3514,11 @@ msgstr "ინფორმაცია საიტის შესახებ"
 
 #: setup.php
 msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
-msgstr ""
+msgstr "მიუთითეთ საიტისთვის სპეციფიკური ნებისმიერი ინფორმაცია თავისუფალი ფორმით, რაც ამ მდებარეობის უკეთ მართვაში დაგეხმარებათ."
 
 #: setup.php
 msgid "General Mac Address Tracking Settings"
-msgstr ""
+msgstr "MAC მისამართების თვალთვალის ზოგადი პარამეტრები"
 
 #: setup.php
 msgid "MAC Address"
@@ -3620,19 +3526,19 @@ msgstr "MAC მისამართი"
 
 #: setup.php
 msgid "Please enter the MAC Address to be watched for."
-msgstr ""
+msgstr "გთხოვთ, შეიყვანოთ MAC მისამართი, რომელზეც უნდა განხორციელდეს დაკვირვება."
 
 #: setup.php
 msgid "MAC Tracking Name/Email Subject"
-msgstr ""
+msgstr "MAC თვალთვალის სახელი/ელფოსტის თემა"
 
 #: setup.php
 msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
-msgstr ""
+msgstr "გთხოვთ, შეიყვანოთ შესაფერისი სახელი MAC თვალთვალის ამ ჩანაწერისთვის. ეს ინფორმაცია იქნება თქვენი ელფოსტის თემის ველში"
 
 #: setup.php
 msgid "Ticket number for cross referencing with your corporate help desk system(s)."
-msgstr ""
+msgstr "ბილეთის ნომერი თქვენი კორპორატიული მხარდაჭერის სისტემასთან (სისტემებთან) დასაკავშირებლად."
 
 #: setup.php
 msgid "Notification Schedule"
@@ -3640,7 +3546,7 @@ msgstr "გაფრთხილებების გეგმა"
 
 #: setup.php
 msgid "Choose how often an Email should be generated for this Mac Watch item."
-msgstr ""
+msgstr "აირჩიეთ, რა სიხშირით უნდა გენერირდეს ელფოსტა Mac Watch-ის ამ ელემენტისთვის."
 
 #: setup.php
 msgid "First Occurrence Only"
@@ -3660,11 +3566,11 @@ msgstr "ელფოსტის მისამართები"
 
 #: setup.php
 msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
-msgstr ""
+msgstr "შეიყვანეთ წერტილ-მძიმით გამოყოფილი ელფოსტის მისამართები, რომლებსაც ეცნობებათ, სად იმყოფება ეს MAC მისამართი."
 
 #: setup.php
 msgid "General Mac Address Authorization Settings"
-msgstr ""
+msgstr "MAC მისამართების ავტორიზაციის ზოგადი პარამეტრები"
 
 #: setup.php
 msgid "MAC Address Match"
@@ -3672,11 +3578,11 @@ msgstr "MAC მისამართის დამთხვევა"
 
 #: setup.php
 msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
-msgstr ""
+msgstr "გთხოვთ, შეიყვანოთ MAC მისამართი ან MAC მისამართის შესატყვისი სტრიქონი ავტომატური ავტორიზაციისთვის. თუ გსურთ MAC მისამართების ჯგუფის ავტორიზაცია, შეგიძლიათ გამოიყენოთ ჩამნაცვლებელი სიმბოლო '&#37;' MAC მისამართის ნებისმიერ ადგილას."
 
 #: setup.php
 msgid "Please add a reason for this entry."
-msgstr ""
+msgstr "გთხოვთ, დაამატოთ ამ ჩანაწერის მიზეზი."
 
 #, fuzzy
 #~| msgid "Version"
