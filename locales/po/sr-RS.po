@@ -1,0 +1,3595 @@
+# Serbian translation for Cacti.
+# Copyright (C) 2004-2026 The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-18 18:36+0000\n"
+"PO-Revision-Date: 2026-11-26 18:57+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Serbian <developers@cacti.net>\n"
+"Language: sr-RS\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
+msgstr "MacTrack није успео да иницијализује своју подразумевану локацију након поновљених покушаја. Прегледајте Cacti дневник пре наставка."
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
+msgstr "MacTrack није успео да иницијализује своју подразумевану локацију. Прегледајте Cacti дневник пре наставка."
+
+#: lib/mactrack_activity.php
+msgid "Scanning devices"
+msgstr "Скенирање уређаја"
+
+#: lib/mactrack_activity.php
+msgid "Waiting for the DNS resolver"
+msgstr "Чекање на DNS разрешивач"
+
+#: lib/mactrack_activity.php
+msgid "Transferring and aggregating scan results"
+msgstr "Пренос и агрегирање резултата скенирања"
+
+#: lib/mactrack_activity.php
+msgid "Maintaining port table partitions"
+msgstr "Одржавање партиција табеле портова"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired port rows"
+msgstr "Брисање истеклих редова портова"
+
+#: lib/mactrack_activity.php
+msgid "Pruning scan dates"
+msgstr "Чишћење датума скенирања"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired IP rows"
+msgstr "Брисање истеклих IP редова"
+
+#: lib/mactrack_activity.php
+msgid "Optimizing the IP table"
+msgstr "Оптимизација IP табеле"
+
+#: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
+#: mactrack_view_dot1x.php
+msgid "Idle"
+msgstr "У мировању"
+
+#: lib/mactrack_activity.php
+msgid "Upgrading: rebuilding aggregated ports"
+msgstr "Надоградња: поновна изградња агрегираних портова"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "About %s rows left to copy (estimate)"
+msgstr "Преостало је око %s редова за копирање (процена)"
+
+#: lib/mactrack_activity.php
+msgid "Repartitioning the port, IP and 802.1x tables"
+msgstr "Поновно партиционисање табела портова, IP и 802.1x"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "%d devices in this scan"
+msgstr "%d уређаја у овом скенирању"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "The process stopped during: %s"
+msgstr "Процес се зауставио током: %s"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "Scanning %d devices"
+msgstr "Скенирање %d уређаја"
+
+#: lib/mactrack_activity.php
+msgid "A database upgrade is running"
+msgstr "Надоградња базе података је у току"
+
+#: lib/mactrack_activity.php
+msgid "The port, IP and 802.1x table partitioning has not finished"
+msgstr "Партиционисање табела портова, IP и 802.1x није завршено"
+
+#: lib/mactrack_activity.php
+msgid "The aggregated ports rebuild has not finished"
+msgstr "Поновна изградња агрегираних портова није завршена"
+
+#: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
+msgid "Running"
+msgstr "У току"
+
+#: lib/mactrack_functions.php
+msgid "No method"
+msgstr "Нема методе"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Success"
+msgstr "Успешна аутентификација"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Failed"
+msgstr "Аутентификација неуспешна"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Success"
+msgstr "Ауторизација успешна"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Failed"
+msgstr "Ауторизација неуспешна"
+
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr "Није уочено у последњем скенирању"
+
+#: lib/mactrack_functions.php
+msgid "Locally Admined MAC"
+msgstr "Локално администрирани MAC"
+
+#: lib/mactrack_functions.php
+msgid "Mactrack Device Tracking OUI Database Import Results"
+msgstr "Резултати увоза OUI базе података за праћење уређаја у Mactrack"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from IEEE"
+msgstr "Преузимање OUI базе података од IEEE"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from the IEEE"
+msgstr "Преузимање OUI базе података са IEEE"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE Complete"
+msgstr "Преузимање OUI базе података од IEEE завршено"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE FAILED"
+msgstr "Преузимање OUI базе података од IEEE НЕУСПЕШНО"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Entries Added/Updated in the database."
+msgstr "У базу података је додато/ажурирано '%d' уноса."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Records Removed from the database."
+msgstr "Из базе података је уклоњено '%d' записа."
+
+#: lib/mactrack_functions.php
+msgid "atifIndexes data collection complete"
+msgstr "Прикупљање података за atifIndexes завршено"
+
+#: lib/mactrack_functions.php
+msgid "atPhysAddress data collection complete"
+msgstr "Прикупљање података за atPhysAddress завршено"
+
+#: lib/mactrack_functions.php
+msgid "atNetAddress data collection complete"
+msgstr "Прикупљање података за atNetAddress завршено"
+
+#: lib/mactrack_functions.php
+msgid "atEntries assembly complete."
+msgstr "Састављање atEntries завршено."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "HOST: %s, IP address information collection complete"
+msgstr "ДОМАЋИН: %s, прикупљање информација о IP адреси завршено"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php
+msgid "Rescan Device"
+msgstr "Поново скенирај уређај"
+
+#: lib/mactrack_functions.php
+msgid "View Non Interface Graphs"
+msgstr "Прикажи графиконе без интерфејса"
+
+#: lib/mactrack_functions.php
+msgid "No Non Interface Graphs in Cacti"
+msgstr "Нема графикона без интерфејса у систему Cacti"
+
+#: lib/mactrack_functions.php
+msgid "View Interface Graphs"
+msgstr "Прикажи графиконе интерфејса"
+
+#: lib/mactrack_functions.php
+msgid "No Interface Graphs in Cacti"
+msgstr "Нема графикона интерфејса у Cacti"
+
+#: lib/mactrack_functions.php
+msgid "Since Restart"
+msgstr "Од поновног покретања"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Down"
+msgstr "Недоступан"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Up"
+msgstr "Доступан"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Unaliased"
+msgstr "Без алијаса"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors"
+msgstr "Грешке"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards"
+msgstr "Одбацивања"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Graphless"
+msgstr "Без графикона"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Непознато"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr "Ауторизовано"
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
+msgstr "Неауторизовано"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Data"
+msgstr "Подаци"
+
+#: lib/mactrack_functions.php
+msgid "Voice"
+msgstr "Глас"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Rescan '%s'"
+msgstr "Поновно скенирање уређаја '%s'"
+
+#: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr "Поновно скенирање није дало никакав излаз."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr "Поновно скенирање уређаја '%s' завршено је за %0.2f секунди."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site scan '%s'"
+msgstr "Скенирање локације '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr "Скенирање локације '%s' завршено је за %0.2f секунди."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Enable '%s'"
+msgstr "Омогућавање уређаја '%s'"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Disable '%s'"
+msgstr "Онемогућавање уређаја '%s'"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_macwatch.php
+#: mactrack_snmp.php mactrack_utilities.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
+#: setup.php
+msgid "N/A"
+msgstr "Н/Д"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d минута"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d сати"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Days"
+msgstr "%d дана"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Weeks"
+msgstr "%d недеља"
+
+#: lib/mactrack_functions.php
+msgid "Not Recorded"
+msgstr "Није забележено"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
+msgstr "Статус: Покренуто, Процеси: %d, Напредак: %s, Последње време извршавања: %2.1f"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
+msgstr "Статус: Мирује, Последње време извршавања: %2.1f секунди, Процеси: %d процеса, Уређаји: %d, Време следећег покретања: %s"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
+msgid "Disabled"
+msgstr "Онемогућено"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Scanning Rate: Every %s"
+msgstr "Учесталост скенирања: Сваких %s"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "View Interfaces"
+msgstr "Прикажи интерфејсе"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "Not Detected"
+msgstr "Није откривено"
+
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr "Контролна табла"
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Sites"
+msgstr "Локације"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Devices"
+msgstr "Уређаји"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "Интерфејси"
+
+#: lib/mactrack_functions.php
+msgid "IP Ranges"
+msgstr "IP опсези"
+
+#: lib/mactrack_functions.php setup.php
+msgid "IP Addresses"
+msgstr "IP адресе"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "MAC адресе"
+
+#: lib/mactrack_functions.php
+msgid "Dot1x"
+msgstr "Dot1x"
+
+#: lib/mactrack_functions.php mactrack_view_graphs.php
+msgid "Graphs"
+msgstr "Графикони"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Search"
+msgstr "Претражи"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_devices.php mactrack_view_ips.php
+#: setup.php
+msgid "Default"
+msgstr "Подразумевано"
+
+#: lib/mactrack_functions.php
+msgid "Show Device Details"
+msgstr "Прикажи детаље уређаја"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Go"
+msgstr "Иди"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Clear"
+msgstr "Очисти"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Export"
+msgstr "Извези"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+msgid "Site"
+msgstr "Локација"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_ips.php
+msgid "Any"
+msgstr "Било који"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "SubType"
+msgstr "Подтип"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgstr "Да ли сте сигурни да желите да обришете све резултате порт у MAC у IP из система?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
+msgstr "Да ли сте сигурни да желите одмах да обришете истекле резултате порт у MAC у IP?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
+msgstr "Да ли сте сигурни да желите да очистите кеширане Mactrack функције скенирања?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Да ли сте сигурни да желите да обришете све агрегиране резултате порт у MAC у IP из система?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Да ли сте сигурни да желите да обришете и поново направите све агрегиране резултате порт у MAC у IP из система?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
+msgstr "Да ли сте сигурни да желите одмах да преузмете и увезете базу података IEEE произвођача MAC/OUI?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
+msgstr "Да ли сте сигурни да желите одмах да поново изградите листу датума скенирања из сачуваних резултата порт у MAC у IP?"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
+msgstr "Поново изгради и анализирај партицију која садржи најновије запажање порта, што је текућа недеља код недељних партиција. Непартиционисана табела се оптимизује у целости. Заказана скенирања се прескачу док се ово извршава. Наставити?"
+
+#: lib/mactrack_functions.php
+msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
+msgstr "Покрените ово одржавање ван радног времена. Поновна изградња копира целу историју табела портова (MAC адреса), IP адреса и 802.1x једну за другом и може трајати сатима. Заказана скенирања се прескачу, одржавање базе података чека, а претрага MAC, IP и 802.1x приказује поруку о одржавању док се не заврши. Обезбедите слободан простор на диску за другу копију сваке табеле и њених индекса. Наставити?"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Scan Results"
+msgstr "Уклони све резултате скенирања"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Perform Database Maintenance"
+msgstr "Изврши одржавање базе података"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Refresh Scanning Functions"
+msgstr "Освежи функције скенирања"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Aggregated Results"
+msgstr "Уклони све агрегиране резултате"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Perform Aggregate Table Rebuild"
+msgstr "Изврши поновну изградњу агрегатне табеле"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild IEEE Vendor MAC/OUI Database"
+msgstr "Поново изгради базу података IEEE произвођача MAC/OUI"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Rebuild Scan Dates"
+msgstr "Поново изгради датуме скенирања"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Optimize Port Table"
+msgstr "Оптимизуј табелу портова"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Configure Port and IP Address Partitioning"
+msgstr "Конфигуриши партиционисање портова и IP адреса"
+
+#: lib/mactrack_partition_rebuild.php
+msgid "The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
+msgstr "Табеле портова, IP и 802.1x су тренутно у процесу репартиционисања или поновна изградња није завршена, па се њихова историја сада не може мењати. Покушајте поново када се cli/upgrade_partitioning.php заврши."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished."
+msgstr "MacTrack је у режиму одржавања за претрагу IP адреса, MAC адреса и 802.1x док се његове табеле историје репартиционишу. Резултати су непотпуни док се партиционисање не заврши."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
+msgstr "MacTrack је у режиму одржавања за претрагу IP адреса, MAC адреса и 802.1x јер партиционисање његових табела историје није завршено. Резултати су непотпуни. Покрените cli/upgrade_partitioning.php поново да бисте наставили."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "Maintenance Mode"
+msgstr "Режим одржавања"
+
+#: mactrack_actions.php
+#, php-format
+msgid "Mactrack Device: (%s) successfully updated"
+msgstr "Mactrack уређај: (%s) успешно ажуриран"
+
+#: mactrack_actions.php
+msgid "Import into Mactrack Database"
+msgstr "Увези у Mactrack базу података"
+
+#: mactrack_actions.php
+msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
+msgstr "Кликните на 'Настави' да бисте увезли следећи уређај у Mactrack? Наведите додатне опције за Mactrack уређај као што је дато испод."
+
+#: mactrack_actions.php
+msgid "We will use these devices SNMP options for the Mactrack Device as well."
+msgstr "Користићемо SNMP опције ових уређаја и за Mactrack уређај."
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Router"
+msgstr "Није применљиво - Рутер"
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Switch/Hub"
+msgstr "Није применљиво - Свич/Хаб"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Delete"
+msgstr "Обриши"
+
+#: mactrack_device_types.php mactrack_snmp.php
+msgid "Duplicate"
+msgstr "Дуплирај"
+
+#: mactrack_device_types.php
+msgid "--dup--"
+msgstr "--dup--"
+
+#: mactrack_device_types.php
+msgid "You must select at least one device type."
+msgstr "Морате изабрати бар један тип уређаја."
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Continue"
+msgstr "Настави"
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to delete the following Device Type(s)."
+msgstr "Кликните на 'Настави' да бисте обрисали следеће типове уређаја."
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
+msgstr "Кликните на 'Настави' да бисте дуплирали следеће типове уређаја. Опционо можете променити опис за нове типове уређаја. У супротном, немојте мењати вредност испод и оригинални назив ће бити копиран са новим суфиксом."
+
+#: mactrack_device_types.php
+msgid "Device Type Prefix:"
+msgstr "Префикс типа уређаја:"
+
+#: mactrack_device_types.php
+msgid "<description> (1)"
+msgstr "<description> (1)"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Cancel"
+msgstr "Откажи"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Return"
+msgstr "Повратак"
+
+#: mactrack_device_types.php
+msgid "New Type"
+msgstr "Нови тип"
+
+#: mactrack_device_types.php
+msgid "Cisco"
+msgstr "Cisco"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "There were %d Device Types Added!"
+msgstr "Додато је %d типова уређаја!"
+
+#: mactrack_device_types.php
+msgid "No New Device Types Found!"
+msgstr "Нису пронађени нови типови уређаја!"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import Results"
+msgstr "Резултати увоза"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Cacti has imported the following items:"
+msgstr "Cacti је увезао следеће ставке:"
+
+#: mactrack_device_types.php
+msgid "Import Mactrack Device Types"
+msgstr "Увези Mactrack типове уређаја"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from Local File"
+msgstr "Увези типове уређаја из локалне датотеке"
+
+#: mactrack_device_types.php
+msgid "Please specify the location of the CSV file containing your device type information."
+msgstr "Наведите локацију CSV датотеке која садржи податке о типовима уређаја."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Overwrite Existing Data?"
+msgstr "Преписати постојеће податке?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
+msgstr "Да ли процесу увоза треба дозволити да препише постојеће податке? Имајте у виду да ово не значи брисање старог реда, већ само замену дуплираних редова."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Allow Existing Rows to be Updated?"
+msgstr "Дозволити ажурирање постојећих редова?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Required File Format Notes"
+msgstr "Напомене о обавезном формату датотеке"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The file must contain a header row with the following column headings."
+msgstr "Датотека мора да садржи ред заглавља са следећим насловима колона."
+
+#: mactrack_device_types.php
+msgid " - A common name for the device.  For example Cisco 6509 Switch"
+msgstr " - Уобичајени назив за уређај. На пример Cisco 6509 Switch"
+
+#: mactrack_device_types.php
+msgid " - The vendor who produces this device"
+msgstr " - Произвођач који производи овај уређај"
+
+#: mactrack_device_types.php
+msgid " - The type of device this is.  See the notes below for this integer value"
+msgstr " - Тип овог уређаја. Погледајте напомене испод за ову целобројну вредност"
+
+#: mactrack_device_types.php
+msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
+msgstr " - Јединствени скуп знакова из snmp sysDescr који јединствено идентификује овај уређај"
+
+#: mactrack_device_types.php
+msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
+msgstr " - Специфични snmp sysObjectID произвођача који разликује овај уређај од другог"
+
+#: mactrack_device_types.php
+msgid " - The scanning function that will be used to scan this device type"
+msgstr " - Функција скенирања која ће се користити за скенирање овог типа уређаја"
+
+#: mactrack_device_types.php
+msgid " - The IP scanning function that will be used to scan this device type"
+msgstr " - Функција скенирања IP адреса која ће се користити за скенирање овог типа уређаја"
+
+#: mactrack_device_types.php
+msgid " - The 802.1x scanning function that will be used to scan this device type"
+msgstr " - Функција скенирања 802.1x која ће се користити за скенирање овог типа уређаја"
+
+#: mactrack_device_types.php
+msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
+msgstr " - Ако се серијски број за овај тип уређаја може добити путем SNMP упита, овде додајте његов OID"
+
+#: mactrack_device_types.php
+msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
+msgstr " - Ако ваша функција скенирања нема могућност да изолује trunk портове или link портове, ово је почетни број порта за корисничке портове"
+
+#: mactrack_device_types.php
+msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
+msgstr " - Исто као lowPort с тим што је ово највећи број корисничког порта"
+
+#: mactrack_device_types.php
+msgid " - Disabled type is not used"
+msgstr " - Онемогућени тип се не користи"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The primary key for this table is a combination of the following three fields:"
+msgstr "Примарни кључ за ову табелу је комбинација следећа три поља:"
+
+#: mactrack_device_types.php
+msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
+msgstr "Стога, ако покушате да увезете дуплиране типове уређаја, постојећи подаци ће бити ажурирани новим информацијама."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid " is an integer field and must be one of the following:"
+msgstr " је целобројно поље и мора бити једно од следећег:"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "1 - Switch/Hub"
+msgstr "1 - Свич/Хаб"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "2 - Switch/Router"
+msgstr "2 - Свич/Рутер"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "3 - Router"
+msgstr "3 - Рутер"
+
+#: mactrack_device_types.php
+msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
+msgstr "Тип уређаја се одређује скенирањем његовог SNMP агента ради добијања sysObjectID и sysDescription и њиховим поређењем са вредностима у бази података типова уређаја. Прво поклапање пронађено у бази података користи се за одређивање начина скенирања. Због тога је веома важно да изаберете исправан sysObjectID_match, sysDescr_match и функцију скенирања за своје уређаје."
+
+#: mactrack_device_types.php mactrack_devices.php setup.php
+msgid "Switch/Hub"
+msgstr "Свич/Хаб"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Switch/Router"
+msgstr "Свич/Рутер"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Router"
+msgstr "Рутер"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
+msgstr "РЕД ЗАГЛАВЉА УСПЕШНО ОБРАЂЕН: <br>Пронађене колоне су: %s"
+
+#: mactrack_device_types.php mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
+msgstr "ГРЕШКА ПРИ ОБРАДИ РЕДА ЗАГЛАВЉА: Недостаје обавезно поље <br>Пронађене колоне су: %s"
+
+#: mactrack_device_types.php
+msgid "Unknown Assume \"Switch/Hub\""
+msgstr "Непознато, претпоставља се \"Свич/Хаб\""
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "УНОС УСПЕШАН: Произвођач: %s, Опис: %s, Тип: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "УНОС НЕУСПЕШАН: Произвођач: %s, Опис: %s, Тип: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "УНОС ПРЕСКОЧЕН, ПОСТОЈИ: Произвођач: %s, Опис: %s, Тип: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "Mactrack Device Types [edit: %s]"
+msgstr "Mactrack типови уређаја [измена: %s]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Types [new]"
+msgstr "Mactrack типови уређаја [ново]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Type Filters"
+msgstr "Филтери типова Mactrack уређаја"
+
+#: mactrack_device_types.php
+msgid "Device Type Description"
+msgstr "Опис типа уређаја"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Device Type"
+msgstr "Тип уређаја"
+
+#: mactrack_device_types.php
+msgid "Port Scanner"
+msgstr "Скенер портова"
+
+#: mactrack_device_types.php
+msgid "IP Scanner"
+msgstr "IP скенер"
+
+#: mactrack_device_types.php
+msgid "Dot1x Scanner"
+msgstr "Dot1x скенер"
+
+#: mactrack_device_types.php
+msgid "sysDescription Match"
+msgstr "Поклапање за sysDescription"
+
+#: mactrack_device_types.php
+msgid "Vendor OID Match"
+msgstr "Поклапање за OID произвођача"
+
+#: mactrack_device_types.php setup.php
+msgid "Device Types"
+msgstr "Типови уређаја"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "No"
+msgstr "Не"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "Yes"
+msgstr "Да"
+
+#: mactrack_device_types.php
+msgid "No Mactrack Device Types Found"
+msgstr "Није пронађен ниједан тип Mactrack уређаја"
+
+#: mactrack_device_types.php
+msgid "Submit Query"
+msgstr "Пошаљи упит"
+
+#: mactrack_device_types.php
+msgid "Clear Filtered Results"
+msgstr "Очисти филтриране резултате"
+
+#: mactrack_device_types.php
+msgid "Rescan"
+msgstr "Поново скенирај"
+
+#: mactrack_device_types.php
+msgid "Scan Active Devices for Unknown Device Types"
+msgstr "Скенирај активне уређаје за непознате типове уређаја"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import"
+msgstr "Увези"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from a CSV File"
+msgstr "Увези типове уређаја из CSV датотеке"
+
+#: mactrack_device_types.php
+msgid "Export Device Types to Share with Others"
+msgstr "Извези типове уређаја за дељење са другима"
+
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Vendor"
+msgstr "Произвођач"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php setup.php
+msgid "All"
+msgstr "Све"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
+msgid "Type"
+msgstr "Тип"
+
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Enabled"
+msgstr "Омогућено"
+
+#: mactrack_devices.php
+msgid "Enable"
+msgstr "Омогући"
+
+#: mactrack_devices.php mactrack_macwatch.php
+msgid "Disable"
+msgstr "Онемогући"
+
+#: mactrack_devices.php
+msgid "Change SNMP Options"
+msgstr "Промени SNMP опције"
+
+#: mactrack_devices.php
+msgid "Change Device Port Values"
+msgstr "Промени вредности портова уређаја"
+
+#: mactrack_devices.php
+msgid "Connect to Cacti Host via Hostname"
+msgstr "Повежи са Cacti домаћином преко имена домаћина"
+
+#: mactrack_devices.php
+msgid "Copy SNMP Settings from Cacti Host"
+msgstr "Копирај SNMP подешавања са Cacti домаћина"
+
+#: mactrack_devices.php
+msgid "You must select at least one device."
+msgstr "Морате изабрати бар један уређај."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to enable the following devices."
+msgstr "Кликните на 'Настави' да бисте омогућили следеће уређаје."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to disable the following devices."
+msgstr "Кликните на 'Настави' да бисте онемогућили следеће уређаје."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Кликните на 'Настави' да бисте променили SNMP параметре за следеће уређаје, означите поље за потврду поред поља која желите да ажурирате и унесите нову вредност."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Кликните на 'Настави' да бисте променили горње или доње параметре портова за следеће уређаје, означите поље за потврду поред поља која желите да ажурирате и унесите нову вредност."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
+msgstr "Кликните на 'Настави' да бисте повезали следеће уређаје са њиховим одговарајућим Cacti уређајем. Веза ће бити успостављена на основу истих имена домаћина. Опис ће такође бити ажуриран."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
+msgstr "Кликните на 'Настави' да бисте копирали SNMP подешавања са повезаног Cacti уређаја на Mactrack уређај. Сви неповезани уређаји биће тихо прескочени. Број SNMP покушаја биће преузет од броја Ping покушаја."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to delete the following Devices"
+msgstr "Кликните на 'Настави' да бисте обрисали следеће уређаје"
+
+#: mactrack_devices.php
+msgid "Import Mactrack Devices"
+msgstr "Увоз Mactrack уређаја"
+
+#: mactrack_devices.php
+msgid "Import Devices from Local File"
+msgstr "Увоз уређаја из локалне датотеке"
+
+#: mactrack_devices.php
+msgid "Please specify the location of the CSV file containing your device information."
+msgstr "Наведите локацију CSV датотеке која садржи информације о вашим уређајима."
+
+#: mactrack_devices.php
+msgid " - The SiteID known to Mactrack for this device"
+msgstr " - SiteID познат систему Mactrack за овај уређај"
+
+#: mactrack_devices.php
+msgid " - A simple name for the device.  For example Cisco 6509 Switch"
+msgstr " - Једноставан назив за уређај. На пример Cisco 6509 Switch"
+
+#: mactrack_devices.php
+msgid " - The IP Address or DNS Name for the device"
+msgstr " - IP адреса или DNS назив за уређај"
+
+#: mactrack_devices.php
+msgid " - More detailed information about the device, including location, environmental conditions, etc."
+msgstr " - Детаљније информације о уређају, укључујући локацију, услове окружења итд."
+
+#: mactrack_devices.php
+msgid " - A list of ports that should not be scanned for user devices"
+msgstr " - Листа портова које не треба скенирати за корисничке уређаје"
+
+#: mactrack_devices.php
+msgid " - Redundant information indicating the intended device type.  See below for valid values."
+msgstr " - Редундантна информација која означава предвиђени тип уређаја. Погледајте испод за исправне вредности."
+
+#: mactrack_devices.php
+msgid " - Id of a set of SNMP options"
+msgstr " - ID скупа SNMP опција"
+
+#: mactrack_devices.php
+msgid " - The current snmp read string for the device"
+msgstr " - Тренутни SNMP низ за читање за уређај"
+
+#: mactrack_devices.php
+msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
+msgstr " - SNMP верзија којом желите да скенирате овај уређај. Исправне вредности су 1, 2 и 3"
+
+#: mactrack_devices.php
+msgid " - The UDP port that the snmp agent is running on"
+msgstr " - UDP порт на ком ради SNMP агент"
+
+#: mactrack_devices.php
+msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
+msgstr " - Временско ограничење у милисекундама за чекање SNMP одговора пре поновног покушаја"
+
+#: mactrack_devices.php
+msgid " - The number of times to retry a snmp request before giving up"
+msgstr " - Број поновних покушаја SNMP захтева пре одустајања"
+
+#: mactrack_devices.php
+msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
+msgstr " - Одређује број OID-ова који се могу преузети у једном SNMP Get захтеву"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP username"
+msgstr " - SNMP V3: SNMP корисничко име"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP password"
+msgstr " - SNMP V3: SNMP лозинка"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP authentication protocol"
+msgstr " - SNMP V3: SNMP протокол за проверу аутентичности"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy passphrase"
+msgstr " - SNMP V3: SNMP приступна фраза за приватност"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy protocol"
+msgstr " - SNMP V3: SNMP протокол за приватност"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP context"
+msgstr " - SNMP V3: SNMP контекст"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP engine id"
+msgstr " - SNMP V3: ID SNMP механизма"
+
+#: mactrack_devices.php
+msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
+msgstr "Због тога, ако покушате да увезете дуплиране уређаје, биће ажурирани само подаци које наведете."
+
+#: mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
+msgstr "РЕД ЗАГЛАВЉА УСПЕШНО ОБРАЂЕН: <br>Пронађене колоне су: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "УНОС УСПЕШАН: Име домаћина: SiteID: %s, Назив уређаја: %s, Име домаћина %s, SNMP порт: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "УНОС НЕУСПЕШАН: SiteID: %s, Назив уређаја: %s, Име домаћина %s, SNMP порт: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "УНОС ПРЕСКОЧЕН, ПОСТОЈИ: SiteID: %s, Назив уређаја: %s, Име домаћина %s, SNMP порт: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "Mactrack Devices [edit: %s]"
+msgstr "Mactrack уређаји [измена: %s]"
+
+#: mactrack_devices.php
+msgid "Mactrack Devices [new]"
+msgstr "Mactrack уређаји [ново]"
+
+#: mactrack_devices.php
+msgid "SNMP Information"
+msgstr "SNMP информације"
+
+#: mactrack_devices.php
+msgid "System:"
+msgstr "Систем:"
+
+#: mactrack_devices.php
+msgid "Uptime:"
+msgstr "Време рада:"
+
+#: mactrack_devices.php
+msgid "Hostname:"
+msgstr "Име домаћина:"
+
+#: mactrack_devices.php
+msgid "ObjectID:"
+msgstr "ObjectID:"
+
+#: mactrack_devices.php
+msgid "Mactrack Device Filters"
+msgstr "Филтери Mactrack уређаја"
+
+#: mactrack_devices.php mactrack_view_devices.php setup.php
+msgid "Device Name"
+msgstr "Назив уређаја"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Site Name"
+msgstr "Назив локације"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Status"
+msgstr "Статус"
+
+#: mactrack_devices.php mactrack_view_devices.php mactrack_view_interfaces.php
+#: setup.php
+msgid "Hostname"
+msgstr "Име домаћина"
+
+#: mactrack_devices.php
+msgid "Total IPs"
+msgstr "Укупно IP адреса"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports"
+msgstr "Кориснички портови"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports Up"
+msgstr "Активни кориснички портови"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Trunk Ports"
+msgstr "Транк портови"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Active Macs"
+msgstr "Активне MAC адресе"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Last Duration"
+msgstr "Последње трајање"
+
+#: mactrack_devices.php
+msgid "No Mactrack Devices"
+msgstr "Нема Mactrack уређаја"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: setup.php
+msgid "None"
+msgstr "Ниједан"
+
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
+msgid "Error"
+msgstr "Грешка"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "No Cacti Link"
+msgstr "Нема Cacti везе"
+
+#: mactrack_macauth.php
+msgid "You must select at least one Authorized Mac to delete."
+msgstr "Морате изабрати бар једну ауторизовану MAC адресу за брисање."
+
+#: mactrack_macauth.php
+msgid "Click 'Continue' to delete the following Authorized Mac's?"
+msgstr "Кликните на 'Настави' да бисте обрисали следеће ауторизоване MAC адресе?"
+
+#: mactrack_macauth.php
+#, php-format
+msgid "Mactrack MacAuth [edit: %s]"
+msgstr "Mactrack MacAuth [уреди: %s]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth [new]"
+msgstr "Mactrack MacAuth [ново]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth Filters"
+msgstr "Филтери за Mactrack MacAuth"
+
+#: mactrack_macauth.php mactrack_macwatch.php
+msgid "Mac Address"
+msgstr "MAC адреса"
+
+#: mactrack_macauth.php setup.php
+msgid "Reason"
+msgstr "Разлог"
+
+#: mactrack_macauth.php
+msgid "Added/Modified"
+msgstr "Додато/измењено"
+
+#: mactrack_macauth.php
+msgid "By"
+msgstr "Од стране"
+
+#: mactrack_macauth.php
+msgid "Authorized Mac Addresses"
+msgstr "Ауторизоване MAC адресе"
+
+#: mactrack_macauth.php
+msgid "No Authorized Mac Addresses Found"
+msgstr "Нису пронађене ауторизоване MAC адресе"
+
+#: mactrack_macauth.php mactrack_vendormacs.php mactrack_view_macs.php
+msgid "MAC's"
+msgstr "MAC адресе"
+
+#: mactrack_macwatch.php
+msgid "Click 'Continue' to delete the following watched Mac's?"
+msgstr "Кликните на 'Настави' да бисте обрисали следеће надгледане MAC адресе?"
+
+#: mactrack_macwatch.php
+#, php-format
+msgid "Mactrack MacWatch [edit: %s]"
+msgstr "Mactrack MacWatch [уреди: %s]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch [new]"
+msgstr "Mactrack MacWatch [ново]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch Filters"
+msgstr "Филтери за Mactrack MacWatch"
+
+#: mactrack_macwatch.php
+msgid "Watch Name"
+msgstr "Назив надзора"
+
+#: mactrack_macwatch.php setup.php
+msgid "Ticket Number"
+msgstr "Број тикета"
+
+#: mactrack_macwatch.php
+msgid "First Seen"
+msgstr "Први пут виђено"
+
+#: mactrack_macwatch.php
+msgid "Last Seen"
+msgstr "Последњи пут виђено"
+
+#: mactrack_macwatch.php
+msgid "Watches"
+msgstr "Надзори"
+
+#: mactrack_macwatch.php
+msgid "No Mactrack Watched Macs Found"
+msgstr "Нису пронађене надгледане Mactrack MAC адресе"
+
+#: mactrack_sites.php
+msgid "Click 'Continue' to delete the following Site(s)?"
+msgstr "Кликните на 'Настави' да бисте обрисали следеће локације?"
+
+#: mactrack_sites.php
+msgid "You must select at least one site."
+msgstr "Морате изабрати бар једну локацију."
+
+#: mactrack_sites.php
+#, php-format
+msgid "Mactrack Site [edit: %s]"
+msgstr "Mactrack локација [уреди: %s]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site [new]"
+msgstr "Mactrack локација [ново]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site Filters"
+msgstr "Филтери Mactrack локација"
+
+#: mactrack_sites.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "Total IP's"
+msgstr "Укупно IP адреса"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "MACS Found"
+msgstr "Пронађене MAC адресе"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Device Errors"
+msgstr "Грешке уређаја"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "No Mactrack Sites Found"
+msgstr "Нису пронађене Mactrack локације"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Devices"
+msgstr "Укупно уређаја"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total User Ports"
+msgstr "Укупно корисничких портова"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Oper Ports"
+msgstr "Укупно оперативних портова"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Trunks"
+msgstr "Укупно транкова"
+
+#: mactrack_snmp.php
+msgid "You must select at least one SNMP Option."
+msgstr "Морате изабрати бар једну SNMP опцију."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to delete the following SNMP Option(s)."
+msgstr "Кликните на 'Настави' да бисте обрисали следеће SNMP опције."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
+msgstr "Кликните на 'Настави' да бисте дуплирали следеће SNMP опције. Опционо можете променити формат наслова за нове SNMP опције."
+
+#: mactrack_snmp.php
+msgid "Name Format:"
+msgstr "Формат назива:"
+
+#: mactrack_snmp.php
+msgid "<name> (1)"
+msgstr "<name> (1)"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Options [edit %s]"
+msgstr "SNMP опције [уреди %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Options [new]"
+msgstr "SNMP опције [ново]"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Option Set [edit: %s]"
+msgstr "Скуп SNMP опција [уређивање: %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Option Set [new]"
+msgstr "Скуп SNMP опција [ново]"
+
+#: mactrack_snmp.php setup.php
+msgid "Mactrack SNMP Options"
+msgstr "Mactrack SNMP опције"
+
+#: mactrack_snmp.php
+msgid "Item"
+msgstr "Ставка"
+
+#: mactrack_snmp.php setup.php
+msgid "Version"
+msgstr "Верзија"
+
+#: mactrack_snmp.php setup.php
+msgid "Community"
+msgstr "Заједница"
+
+#: mactrack_snmp.php setup.php
+msgid "Port"
+msgstr "Порт"
+
+#: mactrack_snmp.php setup.php
+msgid "Timeout"
+msgstr "Истек времена"
+
+#: mactrack_snmp.php setup.php
+msgid "Retries"
+msgstr "Поновни покушаји"
+
+#: mactrack_snmp.php
+msgid "Max OIDs"
+msgstr "Максимално OID-ова"
+
+#: mactrack_snmp.php mactrack_view_dot1x.php
+msgid "Username"
+msgstr "Корисничко име"
+
+#: mactrack_snmp.php
+msgid "Auth Proto"
+msgstr "Протокол аутентификације"
+
+#: mactrack_snmp.php
+msgid "Priv Proto"
+msgstr "Протокол приватности"
+
+#: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Actions"
+msgstr "Радње"
+
+#: mactrack_snmp.php
+msgid "No SNMP Items Found"
+msgstr "Нису пронађене SNMP ставке"
+
+#: mactrack_snmp.php
+msgid "Title of SNMP Option Set"
+msgstr "Наслов скупа SNMP опција"
+
+#: mactrack_snmp.php
+msgid "SNMP Settings"
+msgstr "SNMP подешавања"
+
+#: mactrack_snmp.php
+msgid "No SNMP Option Sets Found"
+msgstr "Нису пронађени скупови SNMP опција"
+
+#: mactrack_snmp.php
+msgid "Options"
+msgstr "Опције"
+
+#: mactrack_utilities.php
+msgid "Mactrack Database Results"
+msgstr "Резултати Mactrack базе података"
+
+#: mactrack_utilities.php
+msgid "Mactrack Process Status"
+msgstr "Статус Mactrack процеса"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Refresh"
+msgstr "Освежи"
+
+#: mactrack_utilities.php
+msgid "Current Process Status"
+msgstr "Тренутни статус процеса"
+
+#: mactrack_utilities.php
+msgid "The Mactrack Poller is:"
+msgstr "Mactrack сакупљач је:"
+
+#: mactrack_utilities.php
+msgid "Running Processes:"
+msgstr "Активни процеси:"
+
+#: mactrack_utilities.php
+msgid "Last Time Poller Started:"
+msgstr "Последње покретање сакупљача:"
+
+#: mactrack_utilities.php
+msgid "Poller Frequency:"
+msgstr "Учесталост сакупљача:"
+
+#: mactrack_utilities.php
+msgid "Approx. Next Runtime:"
+msgstr "Приближно следеће покретање:"
+
+#: mactrack_utilities.php
+msgid "Database Maintenance Information"
+msgstr "Информације о одржавању базе података"
+
+#: mactrack_utilities.php
+msgid "Last DB Maintenance Time:"
+msgstr "Време последњег одржавања базе података:"
+
+#: mactrack_utilities.php
+msgid "Next DB Maintenance Time:"
+msgstr "Време следећег одржавања базе података:"
+
+#: mactrack_utilities.php
+msgid "Run Time Details"
+msgstr "Детаљи о времену извршавања"
+
+#: mactrack_utilities.php
+msgid "Last Poller Runtime:"
+msgstr "Трајање последњег извршавања сакупљача:"
+
+#: mactrack_utilities.php
+msgid "Last Poller Maintenance Runtime:"
+msgstr "Трајање последњег одржавања сакупљача:"
+
+#: mactrack_utilities.php
+msgid "Maximum Concurrent Processes:"
+msgstr "Максималан број истовремених процеса:"
+
+#: mactrack_utilities.php
+msgid "processes"
+msgstr "процеса"
+
+#: mactrack_utilities.php
+msgid "Maximum Per Device Scan Time:"
+msgstr "Максимално време скенирања по уређају:"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "minutes"
+msgstr "минута"
+
+#: mactrack_utilities.php
+msgid "DNS Configuration Information"
+msgstr "Информације о DNS конфигурацији"
+
+#: mactrack_utilities.php
+msgid "Reverse DNS Resolution is"
+msgstr "Обрнуто DNS разрешавање је"
+
+#: mactrack_utilities.php
+msgid "Primary DNS Server:"
+msgstr "Примарни DNS сервер:"
+
+#: mactrack_utilities.php
+msgid "Secondary DNS Server:"
+msgstr "Секундарни DNS сервер:"
+
+#: mactrack_utilities.php
+msgid "DNS Resolution Timeout:"
+msgstr "Временско ограничење DNS разрешавања:"
+
+#: mactrack_utilities.php
+msgid "milliseconds"
+msgstr "милисекунди"
+
+#: mactrack_utilities.php
+msgid "Running Process Summary"
+msgstr "Резиме покренутих процеса"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Not Running"
+msgstr "DNS разрешивач није покренут"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Running"
+msgstr "DNS разрешивач је покренут"
+
+#: mactrack_utilities.php
+msgid "Date Started"
+msgstr "Датум покретања"
+
+#: mactrack_utilities.php
+msgid "Completed"
+msgstr "Завршено"
+
+#: mactrack_utilities.php
+msgid "Waiting"
+msgstr "На чекању"
+
+#: mactrack_utilities.php
+msgid "Other"
+msgstr "Остало"
+
+#: mactrack_utilities.php
+msgid "Current Activity"
+msgstr "Тренутна активност"
+
+#: mactrack_utilities.php
+msgid "State:"
+msgstr "Стање:"
+
+#: mactrack_utilities.php
+msgid "Since:"
+msgstr "Од:"
+
+#: mactrack_utilities.php
+msgid "Detail:"
+msgstr "Детаљи:"
+
+#: mactrack_utilities.php
+msgid "Last Skipped Poller Run:"
+msgstr "Последње прескочено покретање сакупљача:"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance Steps"
+msgstr "Последњи кораци одржавања"
+
+#: mactrack_utilities.php
+msgid "Seconds"
+msgstr "Секунде"
+
+#: mactrack_utilities.php
+msgid "Step"
+msgstr "Корак"
+
+#: mactrack_utilities.php
+msgid "Table Sizes"
+msgstr "Величине табела"
+
+#: mactrack_utilities.php
+msgid "Free"
+msgstr "Слободно"
+
+#: mactrack_utilities.php
+msgid "Index"
+msgstr "Индекс"
+
+#: mactrack_utilities.php
+msgid "Rows (estimate)"
+msgstr "Редови (процена)"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Табела"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database runs on another host"
+msgstr "Непознато: база података ради на другом хосту"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database data directory cannot be found from this host"
+msgstr "Непознато: директоријум са подацима базе не може да се пронађе са овог хоста"
+
+#: mactrack_utilities.php
+msgid "Database Disk Free:"
+msgstr "Слободан простор на диску базе података:"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the database: %s"
+msgstr "Следећи број записа је уклоњен из базе података: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s"
+msgstr "Следећи број записа је уклоњен из агрегиране табеле: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
+msgstr "Следећи број записа је уклоњен из агрегиране табеле: %s. И биће додато %s записа."
+
+#: mactrack_utilities.php
+msgid "Mactrack Scan Date Rebuild Results"
+msgstr "Резултати поновне изградње датума Mactrack скенирања"
+
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr "Поновна изградња датума скенирања није успела. Проверите Cacti дневник и покушајте поново."
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Scan dates rebuilt: %d"
+msgstr "Поново изграђених датума скенирања: %d"
+
+#: mactrack_utilities.php
+msgid "A scan or a port table conversion is running. Try again when it has finished."
+msgstr "Скенирање или конверзија табеле портова је у току. Покушајте поново када се заврши."
+
+#: mactrack_utilities.php setup.php
+msgid "One per Scan"
+msgstr "Једна по скенирању"
+
+#: mactrack_utilities.php setup.php
+msgid "Hourly"
+msgstr "На сваки сат"
+
+#: mactrack_utilities.php setup.php
+msgid "Daily"
+msgstr "Дневно"
+
+#: mactrack_utilities.php setup.php
+msgid "Weekly"
+msgstr "Недељно"
+
+#: mactrack_utilities.php
+msgid "Not partitioned"
+msgstr "Није партиционисано"
+
+#: mactrack_utilities.php
+msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
+msgstr "Дневне партиције из раније верзије MacTrack-а. Потребна је конверзија."
+
+#: mactrack_utilities.php
+msgid "Partitioned by scan date"
+msgstr "Партиционисано по датуму скенирања"
+
+#: mactrack_utilities.php
+msgid "Unrecognized partitions. MacTrack makes no partition changes."
+msgstr "Непрепознате партиције. MacTrack не прави измене партиција."
+
+#: mactrack_utilities.php
+msgid "Port Table Partitions"
+msgstr "Партиције табеле портова"
+
+#: mactrack_utilities.php
+msgid "Layout"
+msgstr "Распоред"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%d of at most %d"
+msgstr "%d од највише %d"
+
+#: mactrack_utilities.php
+msgid "Partitions"
+msgstr "Партиције"
+
+#: mactrack_utilities.php
+msgid "Oldest Partition"
+msgstr "Најстарија партиција"
+
+#: mactrack_utilities.php
+msgid "Newest Partition"
+msgstr "Најновија партиција"
+
+#: mactrack_utilities.php
+msgid "Partitions Cover Scans Before"
+msgstr "Партиције обухватају скенирања пре"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s, coarser than the setting because %d partitions would exceed the limit"
+msgstr "%s, грубље од подешавања јер би %d партиција премашило ограничење"
+
+#: mactrack_utilities.php setup.php
+msgid "Port and IP Address Partition Size"
+msgstr "Величина партиције портова и IP адреса"
+
+#: mactrack_utilities.php
+msgid "Pending Exchange"
+msgstr "Замена на чекању"
+
+#: mactrack_utilities.php
+msgid "Load Path"
+msgstr "Путања учитавања"
+
+#: mactrack_utilities.php
+msgid "PHP batches"
+msgstr "PHP серије"
+
+#: mactrack_utilities.php
+msgid "Last Scan Note"
+msgstr "Напомена о последњем скенирању"
+
+#: mactrack_utilities.php
+msgid "Rebuild"
+msgstr "Поновна изградња"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Running since %s"
+msgstr "Ради од %s"
+
+#: mactrack_utilities.php
+msgid "Last Rebuild"
+msgstr "Последња поновна изградња"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d rows into %d partitions"
+msgstr "%s: %d редова у %d партиција"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: failed. %s"
+msgstr "%s: неуспешно. %s"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance"
+msgstr "Последње одржавање"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d partitions dropped, %d created"
+msgstr "%s: %d партиција уклоњено, %d направљено"
+
+#: mactrack_utilities.php
+msgid "IP Table Layout"
+msgstr "Распоред IP табеле"
+
+#: mactrack_utilities.php
+msgid "IP Table Partitions"
+msgstr "Партиције IP табеле"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Layout"
+msgstr "Распоред 802.1x табеле"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Partitions"
+msgstr "Партиције 802.1x табеле"
+
+#: mactrack_utilities.php
+msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
+msgstr "Изаберите дневно, недељно или онемогућено партиционисање пре покретања поновне изградње."
+
+#: mactrack_utilities.php
+msgid "A rebuild is already running. The partition status page shows when it has finished."
+msgstr "Поновна изградња је већ у току. Страница статуса партиција приказује када је завршена."
+
+#: mactrack_utilities.php
+msgid "The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running."
+msgstr "Поновна изградња је затражена у позадини. Проверите статус партиција за резултат; неће се покренути ако је скенирање или друга поновна изградња у току."
+
+#: mactrack_utilities.php
+msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
+msgstr "Функције Mactrack скенирања су обрисане. Оне ће бити поново направљене чим уредите уређај или тип уређаја."
+
+#: mactrack_utilities.php
+msgid "Cacti Mactrack System Utilities"
+msgstr "Системски алати за Cacti Mactrack"
+
+#: mactrack_utilities.php
+msgid "Process Status Information"
+msgstr "Информације о статусу процеса"
+
+#: mactrack_utilities.php setup.php
+msgid "View Mactrack Process Status"
+msgstr "Прикажи статус Mactrack процеса"
+
+#: mactrack_utilities.php
+msgid "This option will let you show and set process information associated with the Mactrack polling process."
+msgstr "Ова опција вам омогућава да прикажете и поставите информације о процесу повезане са процесом Mactrack сакупљања."
+
+#: mactrack_utilities.php
+msgid "Database Administration"
+msgstr "Администрација базе података"
+
+#: mactrack_utilities.php
+msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
+msgstr "Брише истекле везе порт-MAC-IP из базе података. Уклањају се само записи који су истекли на основу ваших критеријума."
+
+#: mactrack_utilities.php
+msgid "Refresh IEEE Vendor MAC/OUI Database"
+msgstr "Освежи IEEE базу произвођача MAC/OUI адреса"
+
+#: mactrack_utilities.php
+msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
+msgstr "Ова функција ће преузети и инсталирати најновију OUI базу података са IEEE веб-сајта. Свака мрежна картица (NIC) има MAC адресу. MAC адреса се може поделити на два дела. Први део MAC адресе садржи MAC произвођача. MAC произвођача идентификује ко је произвео део. Ово ће бити корисно при насумичној провери неауторизованих уређаја на вашој мрежи."
+
+#: mactrack_utilities.php
+msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
+msgstr "Брише старе и потенцијално застареле функције Mactrack скенирања из падајуће листе коју добијате приликом уређивања типа уређаја."
+
+#: mactrack_utilities.php
+msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
+msgstr "Брише <strong>СВЕ</strong> везе порт-MAC-IP из базе података, све IP адресе, IP опсеге и VLAN-ове. Овај алат је користан када желите да почнете изнова. <strong>ОПАСНОСТ: Сви претходни подаци биће обрисани.</strong>"
+
+#: mactrack_utilities.php
+msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
+msgstr "Поново гради листу датума скенирања из сачуваних резултата веза порт-MAC-IP, читајући сваку партицију једном. Скенирања и одржавање одржавају листу ажурном, тако да је ово потребно само након што су резултати уклоњени ван одржавања, на пример брисањем уређаја."
+
+#: mactrack_utilities.php
+msgid "View Partition Status"
+msgstr "Прикажи статус партиција"
+
+#: mactrack_utilities.php
+msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
+msgstr "Приказује како су резултати веза порт-MAC-IP партиционисани, величину партиције која се користи и зашто, као и шта је последње одржавање базе података урадило."
+
+#: mactrack_utilities.php
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
+msgstr "Поново гради и анализира само партицију која садржи најновије посматрање порта ради ослобађања обрисаног простора; код недељних партиција то је текућа недеља. Непартиционисане табеле се оптимизују у целости. Заказана скенирања се прескачу док се ово не заврши."
+
+#: mactrack_utilities.php
+msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile."
+msgstr "Изаберите дневне или недељне партиције, или онемогућите партиционисање, за табеле портова (MAC адреса), IP адреса и 802.1x. Поновна изградња копира целу историју у позадини; заказана скенирања се прескачу, а претрага MAC, IP и 802.1x у међувремену приказује поруку о одржавању."
+
+#: mactrack_utilities.php
+msgid "Aggregated Table Administration"
+msgstr "Администрација агрегиране табеле"
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
+msgstr "Брише СВЕ <strong>агрегиране</strong> (не резултате скенирања) везе порт-MAC-IP из базе података. Подаци ће се поново прикупљати на основу <strong>само нових</strong> скенираних података у следећем покретању Mactrack сакупљача."
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
+msgstr "Брише СВЕ <strong>агрегиране</strong> (не резултате скенирања) везе између порта, MAC и IP из базе података и одмах их поново креира на основу <strong>свих скенираних података</strong>."
+
+#: mactrack_utilities.php
+msgid "Partitioning"
+msgstr "Партиционисање"
+
+#: mactrack_vendormacs.php
+msgid "Mactrack Vendor Mac Filter"
+msgstr "Mactrack филтер MAC адреса произвођача"
+
+#: mactrack_vendormacs.php
+msgid "Vendor MAC"
+msgstr "MAC произвођача"
+
+#: mactrack_vendormacs.php
+msgid "Corporation"
+msgstr "Корпорација"
+
+#: mactrack_vendormacs.php
+msgid "Address"
+msgstr "Адреса"
+
+#: mactrack_vendormacs.php setup.php
+msgid "Vendor Macs"
+msgstr "MAC адресе произвођача"
+
+#: mactrack_vendormacs.php
+msgid "No Mactrack Vendor MACS Found"
+msgstr "Нису пронађене Mactrack MAC адресе произвођача"
+
+#: mactrack_view_arp.php
+msgid "Mactrack - ARP/IP View"
+msgstr "Mactrack - ARP/IP приказ"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Name"
+msgstr "Назив свича"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Hostname"
+msgstr "Име хоста свича"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED IP Address"
+msgstr "ED IP адреса"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED DNS Hostname"
+msgstr "ED DNS име хоста"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED MAC Address"
+msgstr "ED MAC адреса"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Vendor Name"
+msgstr "Назив произвођача"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Port Number"
+msgstr "Број порта"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Port Name"
+msgstr "Назив порта"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Last Scan Date"
+msgstr "Датум последњег скенирања"
+
+#: mactrack_view_arp.php
+msgid "ARP Cache"
+msgstr "ARP кеш"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "You must first choose a Site, Device or other search criteria."
+msgstr "Прво морате изабрати локацију, уређај или други критеријум претраге."
+
+#: mactrack_view_arp.php
+msgid "No Mactrack IP Results Found"
+msgstr "Нису пронађени Mactrack IP резултати"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_interfaces.php
+#: mactrack_view_macs.php
+msgid "Device"
+msgstr "Уређај"
+
+#: mactrack_view_arp.php mactrack_view_ips.php
+msgid "IP's"
+msgstr "IP адресе"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "IP"
+msgstr "IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Show"
+msgstr "Прикажи"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Most Recent"
+msgstr "Најновије"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "MAC"
+msgstr "MAC"
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr "MacTrack - Контролна табла"
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr "Инвентар"
+
+#: mactrack_view_dashboard.php
+msgid "Device status"
+msgstr "Статус уређаја"
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr "Укупно адреса и портова"
+
+#: mactrack_view_dashboard.php
+msgid "Collection settings"
+msgstr "Подешавања прикупљања"
+
+#: mactrack_view_dashboard.php
+msgid "Scan runtimes"
+msgstr "Времена трајања скенирања"
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr "Величине табела"
+
+#: mactrack_view_dashboard.php
+msgid "MacWatch activity"
+msgstr "MacWatch активност"
+
+#: mactrack_view_dashboard.php
+msgid "Vendors"
+msgstr "Произвођачи"
+
+#: mactrack_view_dashboard.php
+msgid "Enabled devices"
+msgstr "Омогућени уређаји"
+
+#: mactrack_view_dashboard.php
+msgid "Disabled devices"
+msgstr "Онемогућени уређаји"
+
+#: mactrack_view_dashboard.php
+msgid "Device types"
+msgstr "Типови уређаја"
+
+#: mactrack_view_dashboard.php
+msgid "Interfaces tracked"
+msgstr "Праћени интерфејси"
+
+#: mactrack_view_dashboard.php
+msgid "Active MACs"
+msgstr "Активне MAC адресе"
+
+#: mactrack_view_dashboard.php
+msgid "IP addresses"
+msgstr "IP адресе"
+
+#: mactrack_view_dashboard.php
+msgid "Total ports"
+msgstr "Укупно портова"
+
+#: mactrack_view_dashboard.php
+msgid "Active ports"
+msgstr "Активни портови"
+
+#: mactrack_view_dashboard.php
+msgid "Trunk ports"
+msgstr "Trunk портови"
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr "Јединствени OUI произвођачи"
+
+#: mactrack_view_dashboard.php
+msgid "Scanning frequency"
+msgstr "Учесталост скенирања"
+
+#: mactrack_view_dashboard.php
+msgid "Concurrent processes"
+msgstr "Истовремени процеси"
+
+#: mactrack_view_dashboard.php
+msgid "Scanner max runtime"
+msgstr "Максимално трајање скенера"
+
+#: mactrack_view_dashboard.php
+msgid "MAC retention"
+msgstr "Задржавање MAC адреса"
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr "дана"
+
+#: mactrack_view_dashboard.php
+msgid "IP retention"
+msgstr "Задржавање IP адреса"
+
+#: mactrack_view_dashboard.php
+msgid "Reverse DNS"
+msgstr "Обрнути DNS"
+
+#: mactrack_view_dashboard.php
+msgid "Most recent scan"
+msgstr "Најновије скенирање"
+
+#: mactrack_view_dashboard.php
+msgid "Average duration"
+msgstr "Просечно трајање"
+
+#: mactrack_view_dashboard.php
+msgid "Longest duration"
+msgstr "Најдуже трајање"
+
+#: mactrack_view_dashboard.php
+msgid "Scanned in last hour"
+msgstr "Скенирано у последњем сату"
+
+#: mactrack_view_dashboard.php
+msgid "Duration"
+msgstr "Трајање"
+
+#: mactrack_view_dashboard.php
+msgid "Last scan"
+msgstr "Последње скенирање"
+
+#: mactrack_view_dashboard.php
+msgid "Slowest devices"
+msgstr "Најспорији уређаји"
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr "Још увек нема забележених трајања скенирања."
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr "Редови"
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr "Величина"
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr "Нема доступних статистика табела."
+
+#: mactrack_view_dashboard.php
+msgid "Watched MACs"
+msgstr "Надгледане MAC адресе"
+
+#: mactrack_view_dashboard.php
+msgid "Discovered"
+msgstr "Откривено"
+
+#: mactrack_view_dashboard.php
+msgid "Last match"
+msgstr "Последње подударање"
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr "Уноси у OUI бази података"
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr "Нема доступних података о произвођачима."
+
+#: mactrack_view_dashboard.php
+msgid "Show more"
+msgstr "Прикажи више"
+
+#: mactrack_view_dashboard.php
+msgid "Show less"
+msgstr "Прикажи мање"
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr "Отвори у дијалогу"
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr "Уклони са странице"
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr "Превуците за промену редоследа картице"
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr "Неважећи захтев. Покушајте поново."
+
+#: mactrack_view_dashboard.php
+msgid "Unknown card."
+msgstr "Непозната картица."
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr "Додај картицу"
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
+msgstr "Додај картицу контролне табле…"
+
+#: mactrack_view_devices.php
+msgid "Mactrack - Device Report View"
+msgstr "Mactrack - Приказ извештаја о уређајима"
+
+#: mactrack_view_devices.php
+msgid "Unknown Device Type"
+msgstr "Непознат тип уређаја"
+
+#: mactrack_view_devices.php
+msgid "Total VLAN's"
+msgstr "Укупно VLAN мрежа"
+
+#: mactrack_view_devices.php
+msgid "Edit Device"
+msgstr "Уреди уређај"
+
+#: mactrack_view_devices.php
+msgid "View Graphs"
+msgstr "Преглед графикона"
+
+#: mactrack_view_devices.php
+msgid "Device Not Mapped to Cacti Device"
+msgstr "Уређај није мапиран на Cacti уређај"
+
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
+msgid "View MAC Addresses"
+msgstr "Прикажи MAC адресе"
+
+#: mactrack_view_devices.php
+msgid "No Mactrack Devices Found"
+msgstr "Нису пронађени Mactrack уређаји"
+
+#: mactrack_view_devices.php
+msgid "Device Scan Results"
+msgstr "Резултати скенирања уређаја"
+
+#: mactrack_view_devices.php
+msgid "Hub/Switch"
+msgstr "Хаб/свич"
+
+#: mactrack_view_dot1x.php
+msgid "Mactrack - 802.1x View"
+msgstr "Mactrack - 802.1x приказ"
+
+#: mactrack_view_dot1x.php
+msgid "Domain"
+msgstr "Домен"
+
+#: mactrack_view_dot1x.php
+msgid "802.1x Sessions"
+msgstr "802.1x сесије"
+
+#: mactrack_view_dot1x.php
+msgid "No Mactrack 802.1x Sessions Found"
+msgstr "Нису пронађене Mactrack 802.1x сесије"
+
+#: mactrack_view_dot1x.php
+msgid "Dot1x Scan Results"
+msgstr "Dot1x резултати скенирања"
+
+#: mactrack_view_dot1x.php
+msgid "Sessions"
+msgstr "Сесије"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "All Statuses"
+msgstr "Сви статуси"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr "Изабрани статуси"
+
+#: mactrack_view_dot1x.php
+msgid "DATA"
+msgstr "ПОДАЦИ"
+
+#: mactrack_view_dot1x.php
+msgid "VOICE"
+msgstr "ГЛАС"
+
+#: mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Portname"
+msgstr "Назив порта"
+
+#: mactrack_view_graphs.php
+msgid "Mactrack - Monitored Device Graph View"
+msgstr "Mactrack - Приказ графикона надгледаног уређаја"
+
+#: mactrack_view_graphs.php
+msgid "Custom Graph List Applied - Filtering from List"
+msgstr "Примењена прилагођена листа графикона - филтрирање са листе"
+
+#: mactrack_view_interfaces.php
+msgid "Mactrack - Network Interfaces View"
+msgstr "Mactrack - Приказ мрежних интерфејса"
+
+#: mactrack_view_interfaces.php
+msgid "No Mactrack Interfaces Found"
+msgstr "Нису пронађени Mactrack интерфејси"
+
+#: mactrack_view_interfaces.php
+msgid "Interface Scan Results"
+msgstr "Резултати скенирања интерфејса"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Name"
+msgstr "Назив"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Description"
+msgstr "Опис"
+
+#: mactrack_view_interfaces.php
+msgid "Issues"
+msgstr "Проблеми"
+
+#: mactrack_view_interfaces.php
+msgid "Alias"
+msgstr "Алијас"
+
+#: mactrack_view_interfaces.php
+msgid "InBound %%%"
+msgstr "Долазно %%%"
+
+#: mactrack_view_interfaces.php
+msgid "OutBound %%%"
+msgstr "Одлазно %%%"
+
+#: mactrack_view_interfaces.php
+msgid "In (B/S)"
+msgstr "Улаз (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out (B/S)"
+msgstr "Излаз (B/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Err Total"
+msgstr "Укупно улазних грешака"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc Total"
+msgstr "Укупно улазних одбацивања"
+
+#: mactrack_view_interfaces.php
+msgid "UProto Total"
+msgstr "Укупно непознатих протокола"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err Total"
+msgstr "Укупно излазних грешака"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc Total"
+msgstr "Укупно излазних одбацивања"
+
+#: mactrack_view_interfaces.php
+msgid "In Err (E/S)"
+msgstr "Улазне грешке (E/S)"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc (D/S)"
+msgstr "Улазна одбацивања (D/S)"
+
+#: mactrack_view_interfaces.php
+msgid "UProto (UP/S)"
+msgstr "Непознат протокол (UP/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err (OE/S)"
+msgstr "Излазне грешке (OE/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc (OD/S)"
+msgstr "Излазна одбацивања (OD/S)"
+
+#: mactrack_view_interfaces.php
+msgid "Last Change"
+msgstr "Последња промена"
+
+#: mactrack_view_interfaces.php
+msgid "Last Scanned"
+msgstr "Последње скенирање"
+
+#: mactrack_view_interfaces.php
+msgid "Filters"
+msgstr "Филтери"
+
+#: mactrack_view_interfaces.php
+msgid "All Interfaces"
+msgstr "Сви интерфејси"
+
+#: mactrack_view_interfaces.php
+msgid "All Non-Ignored Interfaces"
+msgstr "Сви неигнорисани интерфејси"
+
+#: mactrack_view_interfaces.php
+msgid "All Ignored Interfaces"
+msgstr "Сви игнорисани интерфејси"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In/Out Utilization > %d &#37;"
+msgstr "Висока улазна/излазна искоришћеност > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In Utilization > %d &#37;"
+msgstr "Висока улазна искоришћеност > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High Out Utilization > %d &#37;"
+msgstr "Висока излазна искоришћеност > %d &#37;"
+
+#: mactrack_view_interfaces.php
+msgid "With Issues"
+msgstr "Са проблемима"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces"
+msgstr "Активни интерфејси"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces No Alias"
+msgstr "Активни интерфејси без алијаса"
+
+#: mactrack_view_interfaces.php
+msgid "Errors Accumulating"
+msgstr "Нагомилавање грешака"
+
+#: mactrack_view_interfaces.php
+msgid "Discards Accumulating"
+msgstr "Нагомилавање одбацивања"
+
+#: mactrack_view_interfaces.php
+msgid "Changed in Last Day"
+msgstr "Промењено у последњем дану"
+
+#: mactrack_view_interfaces.php
+msgid "Bandwidth"
+msgstr "Пропусни опсег"
+
+#: mactrack_view_interfaces.php
+msgid "When checked, the Errors, Discards and Unknown Protocol columns show each interface's cumulative SNMP counter totals instead of the average per-second rate."
+msgstr "Када је означено, колоне Грешке, Одбацивања и Непознат протокол приказују кумулативне укупне вредности SNMP бројача за сваки интерфејс уместо просечне стопе по секунди."
+
+#: mactrack_view_interfaces.php
+msgid "Show Totals"
+msgstr "Прикажи укупно"
+
+#: mactrack_view_ips.php
+msgid "Mactrack - Site IP Range Report View"
+msgstr "Mactrack - Приказ извештаја о IP опсегу локације"
+
+#: mactrack_view_ips.php
+msgid "IP Range"
+msgstr "IP опсег"
+
+#: mactrack_view_ips.php
+msgid "Current IP Addresses"
+msgstr "Тренутне IP адресе"
+
+#: mactrack_view_ips.php
+msgid "Current Date"
+msgstr "Тренутни датум"
+
+#: mactrack_view_ips.php
+msgid "Maximum IP Addresses"
+msgstr "Максималан број IP адреса"
+
+#: mactrack_view_ips.php
+msgid "Maximum Date"
+msgstr "Максимални датум"
+
+#: mactrack_view_ips.php
+msgid "IP Address Ranges"
+msgstr "Опсези IP адреса"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "Edit Site"
+msgstr "Уреди локацију"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "View IP Addresses"
+msgstr "Прикажи IP адресе"
+
+#: mactrack_view_ips.php
+msgid "No Mactrack Site IP Ranges Found"
+msgstr "Нису пронађени Mactrack IP опсези локације"
+
+#: mactrack_view_macs.php
+msgid "Mactrack - MAC to IP Report View"
+msgstr "Mactrack - Приказ извештаја MAC у IP"
+
+#: mactrack_view_macs.php
+msgid "Authorize"
+msgstr "Ауторизуј"
+
+#: mactrack_view_macs.php
+msgid "Revoke"
+msgstr "Опозови"
+
+#: mactrack_view_macs.php
+msgid "None of the selected MAC Addresses were valid, so no action was taken."
+msgstr "Ниједна од изабраних MAC адреса није била важећа, па није предузета никаква радња."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
+msgstr "Следеће MAC адресе нису могле бити опозване јер су чланови групних ауторизација %s"
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Authorize the following MAC Addresses."
+msgstr "Кликните на 'Настави' да бисте ауторизовали следеће MAC адресе."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Revoke the following MAC Addresses."
+msgstr "Кликните на 'Настави' да бисте опозвали следеће MAC адресе."
+
+#: mactrack_view_macs.php
+msgid "You must select at least one MAC Address."
+msgstr "Морате изабрати бар једну MAC адресу."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to change Mac Authorizations."
+msgstr "Није вам дозвољено да мењате MAC ауторизације."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
+msgstr "Уређ.:%s IP.:%s MAC.:%s ПОРТ.:%s Број.: [%s]"
+
+#: mactrack_view_macs.php
+msgid "You must select at least one Row."
+msgstr "Морате изабрати бар један ред."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to delete rows."
+msgstr "Није вам дозвољено да бришете редове."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Delete the following rows from Aggregated table."
+msgstr "Кликните на 'Настави' да бисте обрисали следеће редове из агрегиране табеле."
+
+#: mactrack_view_macs.php
+msgid "VLAN ID"
+msgstr "VLAN ID"
+
+#: mactrack_view_macs.php
+msgid "VLAN Name"
+msgstr "Назив VLAN-а"
+
+#: mactrack_view_macs.php
+msgid "You must choose a Site, Device or other search criteria."
+msgstr "Морате изабрати локацију, уређај или други критеријум претраге."
+
+#: mactrack_view_macs.php
+msgid "No Mactrack Port Results Found"
+msgstr "Нису пронађени Mactrack резултати за портове"
+
+#: mactrack_view_macs.php
+msgid "Count"
+msgstr "Број"
+
+#: mactrack_view_macs.php
+msgid "Aggregated"
+msgstr "Агрегирано"
+
+#: mactrack_view_sites.php
+msgid "Mactrack - Site Report View"
+msgstr "Mactrack - Приказ извештаја о локацији"
+
+#: mactrack_view_sites.php
+msgid "Rescan Site"
+msgstr "Поново скенирај локацију"
+
+#: mactrack_view_sites.php
+msgid "View Devices"
+msgstr "Прикажи уређаје"
+
+#: mactrack_view_sites.php
+msgid "View IP Ranges"
+msgstr "Прикажи IP опсеге"
+
+#: mactrack_view_sites.php
+msgid "Sites / Device Types"
+msgstr "Локације / Типови уређаја"
+
+#: mactrack_view_sites.php
+msgid "Site Scan Results"
+msgstr "Резултати скенирања локације"
+
+#: setup.php
+msgid "MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes."
+msgstr "MacTrack надограђује своју базу података у позадини. Ово може потрајати до сат времена на великим инсталацијама, а неки MacTrack подаци могу бити непотпуни док се надоградња не заврши."
+
+#: setup.php
+#, php-format
+msgid "MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s"
+msgstr "MacTrack није могао да покрене надоградњу базе података у позадини, погледајте Cacti дневник за разлог. Покрените је ручно из командне линије: %s"
+
+#: setup.php
+msgid "Mactrack"
+msgstr "Mactrack"
+
+#: setup.php
+msgid "General Settings"
+msgstr "Општа подешавања"
+
+#: setup.php
+msgid "Scanning Frequency"
+msgstr "Учесталост скенирања"
+
+#: setup.php
+msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
+msgstr "Изаберите када да се прикупљају MAC и IP адресе и статистике интерфејса са ваших мрежних уређаја."
+
+#: setup.php
+msgid "Concurrent Processes"
+msgstr "Истовремени процеси"
+
+#: setup.php
+msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
+msgstr "Наведите колико уређаја ће бити анкетирано истовремено док сви уређаји не буду анкетирани."
+
+#: setup.php
+msgid "Scanner Max Runtime"
+msgstr "Максимално време извршавања скенера"
+
+#: setup.php
+msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
+msgstr "Наведите број минута колико ће функцији за скенирање уређаја бити дозвољено да ради пре него што систем претпостави да је завршена. Ово подешавање исправља прекинуте задатке скенирања."
+
+#: setup.php
+msgid "Start Time for Data Collection"
+msgstr "Време почетка прикупљања података"
+
+#: setup.php
+msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
+msgstr "Када желите да се обави прво прикупљање података. Сва будућа времена прикупљања података засниваће се на овом времену почетка. Добар пример би био 12:00AM."
+
+#: setup.php
+msgid "Database Maintenance Time"
+msgstr "Време одржавања базе података"
+
+#: setup.php
+msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
+msgstr "Када треба уклонити старе записе из базе података. Имајте на уму да приступ бази података портова неће бити дозвољен док се ова радња обавља."
+
+#: setup.php
+msgid "Confirm Utilities Prompt"
+msgstr "Упит за потврду алатки"
+
+#: setup.php
+msgid "When using utilities, prompt for verification"
+msgstr "Приликом коришћења алатки, прикажи упит за потврду"
+
+#: setup.php
+msgid "Data Retention"
+msgstr "Задржавање података"
+
+#: setup.php
+msgid "How long should port MAC details be retained in the database."
+msgstr "Колико дуго детаљи о MAC адресама портова треба да се чувају у бази података."
+
+#: setup.php
+msgid "Data Retention IPs"
+msgstr "Задржавање података о IP адресама"
+
+#: setup.php
+msgid "How long should discovered IPs details be retained in the database."
+msgstr "Колико дуго детаљи о откривеним IP адресама треба да се чувају у бази података."
+
+#: setup.php
+msgid "Size of the partitions of the port, IP and 802.1x tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
+msgstr "Величина партиција табела портова, IP адреса и 802.1x, или Онемогућено за непартиционисане табеле. Промена утиче само на нове партиције; да бисте поново изградили постојећу историју у складу са тим, користите Конфигурисање партиционисања портова и IP адреса у MacTrack алаткама или покрените cli/upgrade_partitioning.php."
+
+#: setup.php
+msgid "Switch Level Ignore Ports Delimiter"
+msgstr "Граничник за занемаривање портова на нивоу свича"
+
+#: setup.php
+msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
+msgstr "Који граничник Mactrack треба да користи приликом рашчлањивања ниске портова за занемаривање за сваки свич."
+
+#: setup.php
+msgid "Auto Detect"
+msgstr "Аутоматско откривање"
+
+#: setup.php
+msgid "Colon [:]"
+msgstr "Двотачка [:]"
+
+#: setup.php
+msgid "Pipe [|]"
+msgstr "Усправна црта [|]"
+
+#: setup.php
+msgid "Space [ ]"
+msgstr "Размак [ ]"
+
+#: setup.php
+msgid "Mac Address Output Format"
+msgstr "Излазни формат MAC адресе"
+
+#: setup.php
+msgid "Format used for display."
+msgstr "Формат који се користи за приказ."
+
+#: setup.php
+msgid "Ports to Ignore"
+msgstr "Портови за занемаривање"
+
+#: setup.php
+msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
+msgstr "Наведите регуларни израз за ifNames или ifDescriptions портова које треба занемарити на листи интерфејса. На пример, (Vlan|Loopback|Null)."
+
+#: setup.php
+msgid "Ports to Ignore While Scanning (Regular Expression)"
+msgstr "Портови за занемаривање током скенирања (регуларни израз)"
+
+#: setup.php
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
+msgstr "Опционо. Регуларни израз који се, без обзира на величину слова, упарује са називом порта и алијасом порта сваког скенираног порта. MAC адресе пронађене на подударном порту се не прикупљају, чиме се uplink и trunk портови изостављају из базе података. На пример, (uplink|trunk). Ставите сваки израз у засебан ред да бисте навели више њих. Оставите празно да бисте прикупљали сваки порт. Локације и уређаји могу додати сопствене изразе. За разлику од опције „Портови за занемаривање“ изнад, ово се односи на прикупљање MAC адреса, а не на листу интерфејса, и утиче само на нова скенирања."
+
+#: setup.php
+msgid "Bandwidth Usage Threshold"
+msgstr "Праг искоришћености пропусног опсега"
+
+#: setup.php
+msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
+msgstr "Приликом прегледа статистике мрежног интерфејса, који праг пропусног опсега желите да приказујете подразумевано."
+
+#: setup.php
+#, php-format
+msgid "%d Percent"
+msgstr "%d процената"
+
+#: setup.php
+msgid "DNS Settings"
+msgstr "DNS подешавања"
+
+#: setup.php
+msgid "Perform Reverse DNS Name Resolution"
+msgstr "Изврши обрнуто DNS разрешавање имена"
+
+#: setup.php
+msgid "Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
+msgstr "Да ли Mactrack треба да извршава обрнуту DNS претрагу IP адреса повезаних са портовима. УПОЗОРЕЊЕ: Ако DNS није правилно подешен, ово ће значајно успорити време скенирања."
+
+#: setup.php
+msgid "Primary DNS IP Address"
+msgstr "Примарна DNS IP адреса"
+
+#: setup.php
+msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
+msgstr "Унесите примарну DNS IP адресу која ће се користити за обрнуте претраге."
+
+#: setup.php
+msgid "Secondary DNS IP Address"
+msgstr "Секундарна DNS IP адреса"
+
+#: setup.php
+msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
+msgstr "Унесите секундарну DNS IP адресу која ће се користити за обрнуте претраге."
+
+#: setup.php
+msgid "DNS Timeout"
+msgstr "Временско ограничење за DNS"
+
+#: setup.php
+msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
+msgstr "Унесите временско ограничење за DNS у милисекундама. Mactrack користи DNS разрешивач заснован на језику PHP."
+
+#: setup.php
+msgid "DNS Prime Interval"
+msgstr "Интервал припреме за DNS"
+
+#: setup.php
+msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
+msgstr "Колико често, у секундама, Mactrack IP адресе за скенирање треба да се разрешавају у MAC адресе ради DNS разрешавања. Коришћење већег броја када имате неколико хиљада уређаја повећаће перформансе."
+
+#: setup.php
+msgid "Notification Settings"
+msgstr "Подешавања обавештења"
+
+#: setup.php
+msgid "Source Address"
+msgstr "Изворна адреса"
+
+#: setup.php
+msgid "The source Email address for Mactrack Emails."
+msgstr "Изворна адреса е-поште за Mactrack поруке е-поште."
+
+#: setup.php
+msgid "Source Email Name"
+msgstr "Изворно име за е-пошту"
+
+#: setup.php
+msgid "The Source Email name for Mactrack Emails."
+msgstr "Изворно име пошиљаоца за Mactrack поруке е-поште."
+
+#: setup.php
+msgid "MACTrack Administrator"
+msgstr "MACTrack администратор"
+
+#: setup.php
+msgid "MacWatch Default Body"
+msgstr "Подразумевани текст за MacWatch"
+
+#: setup.php
+msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+msgstr "Унапред подешени текст за Mactrack MacWatch поруке е-поште. Текст може садржати све важеће HTML ознаке. Такође подржава ознаке за замену које ће бити обрађене приликом слања е-поште. Важеће ознаке укључују <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+
+#: setup.php
+msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
+msgstr "MAC адреса <MAC> пронађена је на IP адреси <IP> за број тикета: <TICKET>.<br>Уређај се налази на локацији<br>Локација: <SITENAME>, уређај <DEVICENAME>, IP <DEVICEIP>, порт <PORTNUMBER> и назив порта <PORTNAME>"
+
+#: setup.php
+msgid "MacAuth Report Email Addresses"
+msgstr "Адресе е-поште за MacAuth извештај"
+
+#: setup.php
+msgid "A comma delimited list of users to receive the MacAuth Email notifications."
+msgstr "Листа корисника раздвојених зарезом који ће примати MacAuth обавештења е-поштом."
+
+#: setup.php
+msgid "MacAuth Report Frequency"
+msgstr "Учесталост MacAuth извештаја"
+
+#: setup.php
+msgid "How often will the MacAuth Reports be Emailed."
+msgstr "Колико често ће MacAuth извештаји бити слани е-поштом."
+
+#: setup.php
+msgid "Mactrack ArpWatch Settings"
+msgstr "Mactrack ArpWatch подешавања"
+
+#: setup.php
+msgid "Enable ArpWatch"
+msgstr "Омогући ArpWatch"
+
+#: setup.php
+msgid "Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
+msgstr "Да ли Mactrack такође треба да користи ArpWatch податке као допуну за разрешавање MAC у IP/DNS?"
+
+#: setup.php
+msgid "ArpWatch Database Path"
+msgstr "Путања до ArpWatch базе података"
+
+#: setup.php
+msgid "The location of the ArpWatch Database file on the Cacti server."
+msgstr "Локација датотеке ArpWatch базе података на Cacti серверу."
+
+#: setup.php
+msgid "SNMP Presets"
+msgstr "Унапред подешене SNMP вредности"
+
+#: setup.php
+msgid "Update Policy for SNMP Options"
+msgstr "Политика ажурирања за SNMP опције"
+
+#: setup.php
+msgid "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices."
+msgstr "Политика за синхронизацију SNMP опција између Cacti уређаја и Mactrack уређаја."
+
+#: setup.php
+msgid "Default SNMP version for all new hosts."
+msgstr "Подразумевана SNMP верзија за све нове хостове."
+
+#: setup.php
+msgid "Default SNMP read community for all new hosts."
+msgstr "Подразумевана SNMP заједница за читање за све нове хостове."
+
+#: setup.php
+msgid "Communities"
+msgstr "Заједнице"
+
+#: setup.php
+msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
+msgstr "Попуните листу доступних SNMP ниски за читање за тестирање за овај уређај. Свака ниска за читање мора бити раздвојена двотачком ':'. Ове ниске за читање биће тестиране редом ако примарна ниска за читање није важећа."
+
+#: setup.php
+msgid "The UDP/TCP Port to poll the SNMP agent on."
+msgstr "UDP/TCP порт на ком се анкетира SNMP агент."
+
+#: setup.php
+msgid "Default SNMP timeout in milli-seconds."
+msgstr "Подразумевано SNMP временско ограничење у милисекундама."
+
+#: setup.php
+msgid "The number times the SNMP poller will attempt to reach the host before failing."
+msgstr "Број покушаја које ће SNMP анкетар извршити да би дошао до хоста пре неуспеха."
+
+#: setup.php
+msgid "snmpbulkwalk Binary Path"
+msgstr "Путања до извршне датотеке snmpbulkwalk"
+
+#: setup.php
+msgid "The path to your snmpbulkwalk binary."
+msgstr "Путања до ваше извршне датотеке snmpbulkwalk."
+
+#: setup.php
+msgid "MacTrack Settings"
+msgstr "MacTrack подешавања"
+
+#: setup.php
+msgid "Default Tab"
+msgstr "Подразумевана картица"
+
+#: setup.php
+msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
+msgstr "Коју MacTrack картицу желите да буде ваша подразумевана картица сваки пут када отворите MacTrack одељак."
+
+#: setup.php
+msgid "Mac Addresses"
+msgstr "MAC адресе"
+
+#: setup.php
+msgid "dot1x Deta"
+msgstr "dot1x детаљи"
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Подешавања интернет проксија"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Адреса интернет проксија"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "За основне Cacti услуге или додатке који захтевају приступ интернету, овде унесите прокси сервер и порт у следећем формату IP:PORT. На пример 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Корисник интернет проксија"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "Ако ваш интернет прокси захтева корисничко име, унесите га овде."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Лозинка интернет проксија"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "Ако ваш интернет прокси захтева лозинку, унесите је овде."
+
+#: setup.php
+msgid "Mactrack Dashboard"
+msgstr "Mactrack контролна табла"
+
+#: setup.php
+msgid "Mactrack Devices"
+msgstr "Mactrack уређаји"
+
+#: setup.php
+msgid "(Edit)"
+msgstr "(Уреди)"
+
+#: setup.php
+msgid "(Import)"
+msgstr "(Увоз)"
+
+#: setup.php
+msgid "Mactrack Device Types"
+msgstr "Mactrack типови уређаја"
+
+#: setup.php
+msgid "Mactrack Sites"
+msgstr "Mactrack локације"
+
+#: setup.php
+msgid "Mac Address Tracking Utility"
+msgstr "Алатка за праћење MAC адреса"
+
+#: setup.php
+msgid "Mac Address Authorization Utility"
+msgstr "Алатка за ауторизацију MAC адреса"
+
+#: setup.php
+msgid "Mactrack Vendor Macs"
+msgstr "Mactrack MAC адресе произвођача"
+
+#: setup.php
+msgid "Mactrack View Macs"
+msgstr "Mactrack преглед MAC адреса"
+
+#: setup.php
+msgid "Mactrack Dot1x View"
+msgstr "Mactrack Dot1x преглед"
+
+#: setup.php
+msgid "Mactrack IP Address Viewer"
+msgstr "Mactrack прегледач IP адреса"
+
+#: setup.php
+msgid "Mactrack View Interfaces"
+msgstr "Mactrack преглед интерфејса"
+
+#: setup.php
+msgid "Mactrack View Sites"
+msgstr "Mactrack преглед локација"
+
+#: setup.php
+msgid "Mactrack View IP Ranges"
+msgstr "Mactrack преглед IP опсега"
+
+#: setup.php
+msgid "Mactrack View Devices"
+msgstr "Mactrack преглед уређаја"
+
+#: setup.php
+msgid "Mactrack Utilities"
+msgstr "Mactrack алатке"
+
+#: setup.php
+msgid "Truncate Port Results Table"
+msgstr "Испразни табелу резултата портова"
+
+#: setup.php
+msgid "Truncate Aggregated Port Results Table"
+msgstr "Испразни збирну табелу резултата портова"
+
+#: setup.php
+msgid "Truncate and Re-create Aggregated Port Results Table"
+msgstr "Испразни и поново направи збирну табелу резултата портова"
+
+#: setup.php
+msgid "Refresh/Update Vendor MAC Database from IEEE"
+msgstr "Освежи/ажурирај базу MAC адреса произвођача са IEEE"
+
+#: setup.php
+msgid "Mactrack Graph Viewer"
+msgstr "Mactrack прегледач графикона"
+
+#: setup.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "%d секунди"
+
+#: setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d минут"
+
+#: setup.php
+msgid "Matches"
+msgstr "Поклапа се"
+
+#: setup.php
+msgid "Contains"
+msgstr "Садржи"
+
+#: setup.php
+msgid "Begins With"
+msgstr "Почиње са"
+
+#: setup.php
+msgid "Does Not Contain"
+msgstr "Не садржи"
+
+#: setup.php
+msgid "Does Not Begin With"
+msgstr "Не почиње са"
+
+#: setup.php
+msgid "Is Null"
+msgstr "Је Null"
+
+#: setup.php
+msgid "Is Not Null"
+msgstr "Није Null"
+
+#: setup.php
+msgid "Half"
+msgstr "Половина"
+
+#: setup.php
+msgid "Full"
+msgstr "Комплетно"
+
+#: setup.php
+msgid "Sync Cacti Device to Mactrack Device"
+msgstr "Синхронизуј Cacti уређај са Mactrack уређајем"
+
+#: setup.php
+msgid "Sync Mactrack Device to Cacti Device"
+msgstr "Синхронизуј Mactrack уређај са Cacti уређајем"
+
+#: setup.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Сваких %d минута"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hour"
+msgstr "Сваких %d сати"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Сваких %d сати"
+
+#: setup.php
+msgid "Every Day"
+msgstr "Сваки дан"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "%d месец"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "%d месеци"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "%d година"
+
+#: setup.php
+msgid "On Scan Completion"
+msgstr "По завршетку скенирања"
+
+#: setup.php
+#, php-format
+msgid "Every %d Days"
+msgstr "Сваких %d дана"
+
+#: setup.php
+msgid "Every Week"
+msgstr "Сваке недеље"
+
+#: setup.php
+msgid "Management"
+msgstr "Управљање"
+
+#: setup.php
+msgid "SNMP Options"
+msgstr "SNMP опције"
+
+#: setup.php
+msgid "Mac Watch"
+msgstr "Надзор MAC адреса"
+
+#: setup.php
+msgid "Mactrack Tools"
+msgstr "Mactrack алатке"
+
+#: setup.php
+msgid "Mac Authorizations"
+msgstr "Ауторизације MAC адреса"
+
+#: setup.php
+msgid "Tracking Utilities"
+msgstr "Алатке за праћење"
+
+#: setup.php
+msgid "Ports to Ignore (Regular Expression)"
+msgstr "Портови за занемаривање (регуларни израз)"
+
+#: setup.php
+#, php-format
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions."
+msgstr "Опционо. Регуларни израз који се, без обзира на величину слова, упоређује са називом порта и алијасом порта за %s. MAC адресе пронађене на порту који се поклапа не прикупљају се. На пример, '(uplink|trunk)' занемарује сваки порт чији назив или алијас садржи uplink или trunk. Ставите сваки израз у посебан ред да бисте навели више њих. Примењује се као додатак на %s изразе."
+
+#: setup.php
+msgid "every device in this site"
+msgstr "сваки уређај на овој локацији"
+
+#: setup.php
+msgid "this device"
+msgstr "овај уређај"
+
+#: setup.php
+msgid "device and global"
+msgstr "уређај и глобалне"
+
+#: setup.php
+msgid "site and global"
+msgstr "локацију и глобалне"
+
+#: setup.php
+msgid "Device Scanning Function Options"
+msgstr "Опције функције скенирања уређаја"
+
+#: setup.php
+msgid "Give this device type a meaningful description."
+msgstr "Дајте овом типу уређаја смислен опис."
+
+#: setup.php
+msgid "Fill in the name for the vendor of this device type."
+msgstr "Унесите назив произвођача за овај тип уређаја."
+
+#: setup.php
+msgid "Choose the type of device."
+msgstr "Изаберите тип уређаја."
+
+#: setup.php
+msgid "System Description Match"
+msgstr "Подударање описа система"
+
+#: setup.php
+msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
+msgstr "Наведите кључне информације које ће помоћи Mactrack-у да препозна тип уређаја. Џокер знак је '&#42;'."
+
+#: setup.php
+msgid "Vendor SNMP Object ID Match"
+msgstr "Подударање SNMP Object ID произвођача"
+
+#: setup.php
+msgid "MAC Address Scanning Function"
+msgstr "Функција скенирања MAC адреса"
+
+#: setup.php
+msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
+msgstr "Mactrack функција скенирања која се позива ради преузимања и чувања детаља о портовима. Потребно је унети само назив функције. Следећа четири параметра се подразумевају и увек ће бити додата: 'my_function($site, &$device, $lowport, $highport)'. За чист рутер функција није потребна."
+
+#: setup.php
+msgid "IP Address Scanning Function"
+msgstr "Функција скенирања IP адреса"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
+msgstr "Mactrack функција скенирања специфична за Layer3 уређаје који прате IP адресе."
+
+#: setup.php
+msgid "802.1x Scanning Function"
+msgstr "802.1x функција скенирања"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Switches with dot1x enabled."
+msgstr "Mactrack функција скенирања специфична за свичеве са омогућеним dot1x."
+
+#: setup.php
+msgid "Serial Number Base OID"
+msgstr "Основни OID серијског броја"
+
+#: setup.php
+msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
+msgstr "SNMP OID који се користи за преузимање серијског броја овог типа уређаја ради чувања у Mactrack табели информација о имовини."
+
+#: setup.php
+msgid "Serial Number Collection Method"
+msgstr "Начин прикупљања серијског броја"
+
+#: setup.php
+msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
+msgstr "Како се прикупља серијски број за овај OID. Ако је 'SNMP Walk', претпостављамо више серијских бројева. Ако је 'Get', биће само један.."
+
+#: setup.php
+msgid "SNMP Get"
+msgstr "SNMP Get"
+
+#: setup.php
+msgid "SNMP Walk"
+msgstr "SNMP Walk"
+
+#: setup.php
+msgid "Low User Port Number"
+msgstr "Најнижи број корисничког порта"
+
+#: setup.php
+msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
+msgstr "Наведите најнижи број корисничког порта на овом свичу. Оставите 0 да би систем могао сам да га израчуна."
+
+#: setup.php
+msgid "High User Port Number"
+msgstr "Највиши број корисничког порта"
+
+#: setup.php
+msgid "Disabled device type is not used."
+msgstr "Онемогућени тип уређаја се не користи."
+
+#: setup.php
+msgid "Fill in the name of this SNMP option set."
+msgstr "Унесите назив овог скупа SNMP опција."
+
+#: setup.php
+msgid "SNMP Version"
+msgstr "SNMP верзија"
+
+#: setup.php
+msgid "Choose the SNMP version for this host."
+msgstr "Изаберите SNMP верзију за овај хост."
+
+#: setup.php
+msgid "SNMP Community String"
+msgstr "SNMP ниска заједнице"
+
+#: setup.php
+msgid "Fill in the SNMP read community for this device."
+msgstr "Унесите SNMP заједницу за читање за овај уређај."
+
+#: setup.php
+msgid "SNMP Port"
+msgstr "SNMP порт"
+
+#: setup.php
+msgid "SNMP Timeout"
+msgstr "SNMP временско ограничење"
+
+#: setup.php
+msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
+msgstr "Максималан број милисекунди колико ће Cacti чекати на SNMP одговор (не ради са php-snmp подршком)."
+
+#: setup.php
+msgid "SNMP Retries"
+msgstr "SNMP поновни покушаји"
+
+#: setup.php
+msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
+msgstr "Максималан број покушаја повезивања са уређајем путем SNMP ниске за читање пре одустајања."
+
+#: setup.php
+msgid "Maximum OID's Per Get Request"
+msgstr "Максималан број OID-ова по Get захтеву"
+
+#: setup.php
+msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
+msgstr "Одређује број OID-ова који се могу преузети у једном SNMP Get захтеву."
+
+#: setup.php
+msgid "SNMP Username (v3)"
+msgstr "SNMP корисничко име (v3)"
+
+#: setup.php
+msgid "SNMP v3 username for this device."
+msgstr "SNMP v3 корисничко име за овај уређај."
+
+#: setup.php
+msgid "SNMP Password (v3)"
+msgstr "SNMP лозинка (v3)"
+
+#: setup.php
+msgid "SNMP v3 password for this device."
+msgstr "SNMP v3 лозинка за овај уређај."
+
+#: setup.php
+msgid "SNMP Auth Protocol (v3)"
+msgstr "SNMP протокол аутентификације (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Authorization Protocol."
+msgstr "Изаберите SNMPv3 протокол ауторизације."
+
+#: setup.php
+msgid "SNMP Privacy Passphrase (v3)"
+msgstr "SNMP приступна фраза приватности (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Passphrase."
+msgstr "Изаберите SNMPv3 приступну фразу приватности."
+
+#: setup.php
+msgid "SNMP Privacy Protocol (v3)"
+msgstr "SNMP протокол приватности (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Protocol."
+msgstr "Изаберите SNMPv3 протокол приватности."
+
+#: setup.php
+msgid "SNMP Context (v3)"
+msgstr "SNMP контекст (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Context to use for this device."
+msgstr "Унесите SNMP v3 контекст који ће се користити за овај уређај."
+
+#: setup.php
+msgid "SNMP Engine ID (v3)"
+msgstr "SNMP ID механизма (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Engine ID to use for this device."
+msgstr "Унесите SNMP v3 Engine ID који ће се користити за овај уређај."
+
+#: setup.php
+msgid "General Device Settings"
+msgstr "Општа подешавања уређаја"
+
+#: setup.php
+msgid "Give this device a meaningful name."
+msgstr "Дајте овом уређају смислен назив."
+
+#: setup.php
+msgid "Fill in the fully qualified hostname for this device."
+msgstr "Унесите потпуно квалификовано име хоста за овај уређај."
+
+#: setup.php
+msgid "Related Cacti Host"
+msgstr "Повезани Cacti хост"
+
+#: setup.php
+msgid "Given Mactrack Host is connected to this Cacti Host."
+msgstr "Дати Mactrack хост је повезан са овим Cacti хостом."
+
+#: setup.php
+msgid "Scan Type"
+msgstr "Тип скенирања"
+
+#: setup.php
+msgid "Choose the scan type you wish to perform on this device."
+msgstr "Изаберите тип скенирања који желите да извршите на овом уређају."
+
+#: setup.php
+msgid "Choose the site to associate with this device."
+msgstr "Изаберите локацију коју желите да повежете са овим уређајем."
+
+#: setup.php
+msgid "Device Notes"
+msgstr "Напомене о уређају"
+
+#: setup.php
+msgid "This field value is useful to save general information about a specific device."
+msgstr "Вредност овог поља је корисна за чување општих информација о одређеном уређају."
+
+#: setup.php
+msgid "Disable Device"
+msgstr "Онемогући уређај"
+
+#: setup.php
+msgid "Check this box to disable all checks for this host."
+msgstr "Означите ово поље да бисте онемогућили све провере за овог домаћина."
+
+#: setup.php
+msgid "Switch/Hub, Switch/Router Settings"
+msgstr "Подешавања свича/хаба, свича/рутера"
+
+#: setup.php
+msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
+msgstr "Наведите списак портова на одређеном свичу/хабу чији MAC резултати треба да буду занемарени. Примери су портови као што су линк/транк портови који се не могу разликовати од осталих корисничких портова. Сваки број порта мора бити раздвојен двотачком, усправном цртом или размаком ':', '|', ' '. На пример, 'Fa0/1: Fa1/23' или 'Fa0/1 Fa1/23' би било прихватљиво за типове свичева неких произвођача."
+
+#: setup.php
+msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
+msgstr "Можете користити посебна SNMP подешавања или изабрати SNMP скуп. У другом случају, mactrack покушава да пронађе исправна подешавања из SNMP скупа"
+
+#: setup.php
+msgid "Read Strings"
+msgstr "Стрингови за читање"
+
+#: setup.php
+msgid "<strong>DEPRECATED:</strong> SNMP community strings"
+msgstr "<strong>ЗАСТАРЕЛО:</strong> SNMP стрингови заједнице"
+
+#: setup.php
+msgid "Specific SNMP Settings"
+msgstr "Посебна SNMP подешавања"
+
+#: setup.php
+msgid "Connectivity Options"
+msgstr "Опције повезивања"
+
+#: setup.php
+msgid "Terminal Type"
+msgstr "Тип терминала"
+
+#: setup.php
+msgid "Choose the terminal type that you use to connect to this device."
+msgstr "Изаберите тип терминала који користите за повезивање са овим уређајем."
+
+#: setup.php
+msgid "Telnet"
+msgstr "Telnet"
+
+#: setup.php
+msgid "SSH"
+msgstr "SSH"
+
+#: setup.php
+msgid "HTTP"
+msgstr "HTTP"
+
+#: setup.php
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: setup.php
+msgid "User Name"
+msgstr "Корисничко име"
+
+#: setup.php
+msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
+msgstr "Корисничко име које се користи за ваш прилагођени метод аутентификације. Примери укључују SSH, RSH, HTML итд."
+
+#: setup.php
+msgid "Password"
+msgstr "Лозинка"
+
+#: setup.php
+msgid "The password to be used for your custom authentication."
+msgstr "Лозинка која се користи за вашу прилагођену аутентификацију."
+
+#: setup.php
+msgid "Private Key Path"
+msgstr "Путања до приватног кључа"
+
+#: setup.php
+msgid "The path to the private key used for SSH authentication."
+msgstr "Путања до приватног кључа који се користи за SSH аутентификацију."
+
+#: setup.php
+msgid "Sequence"
+msgstr "Редослед"
+
+#: setup.php
+msgid "Sequence of Item."
+msgstr "Редослед ставке."
+
+#: setup.php
+msgid "General Site Settings"
+msgstr "Општа подешавања локације"
+
+#: setup.php
+msgid "Please enter a reasonable name for this site."
+msgstr "Унесите одговарајући назив за ову локацију."
+
+#: setup.php
+msgid "Primary Customer Contact"
+msgstr "Примарни контакт клијента"
+
+#: setup.php
+msgid "The principal customer contact name and number for this site."
+msgstr "Име и број главног контакта клијента за ову локацију."
+
+#: setup.php
+msgid "NetOps Contact"
+msgstr "NetOps контакт"
+
+#: setup.php
+msgid "Please principal network support contact name and number for this site."
+msgstr "Унесите име и број главног контакта мрежне подршке за ову локацију."
+
+#: setup.php
+msgid "Facilities Contact"
+msgstr "Контакт за објекте"
+
+#: setup.php
+msgid "Please principal facilities/security contact name and number for this site."
+msgstr "Унесите име и број главног контакта за објекте/безбедност за ову локацију."
+
+#: setup.php
+msgid "Site Information"
+msgstr "Информације о локацији"
+
+#: setup.php
+msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
+msgstr "Наведите све информације специфичне за локацију, у слободној форми, које вам омогућавају да боље управљате овом локацијом."
+
+#: setup.php
+msgid "General Mac Address Tracking Settings"
+msgstr "Општа подешавања праћења MAC адреса"
+
+#: setup.php
+msgid "MAC Address"
+msgstr "MAC адреса"
+
+#: setup.php
+msgid "Please enter the MAC Address to be watched for."
+msgstr "Унесите MAC адресу коју желите да надгледате."
+
+#: setup.php
+msgid "MAC Tracking Name/Email Subject"
+msgstr "Назив праћења MAC адресе/Наслов е-поште"
+
+#: setup.php
+msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
+msgstr "Унесите одговарајући назив за овај унос праћења MAC адресе. Ова информација ће бити у наслову ваше е-поште"
+
+#: setup.php
+msgid "Ticket number for cross referencing with your corporate help desk system(s)."
+msgstr "Број тикета за повезивање са вашим корпоративним системом(има) техничке подршке."
+
+#: setup.php
+msgid "Notification Schedule"
+msgstr "Распоред обавештења"
+
+#: setup.php
+msgid "Choose how often an Email should be generated for this Mac Watch item."
+msgstr "Изаберите колико често треба генерисати е-поруку за ову ставку праћења MAC адресе."
+
+#: setup.php
+msgid "First Occurrence Only"
+msgstr "Само прво појављивање"
+
+#: setup.php
+msgid "All Occurrences"
+msgstr "Сва појављивања"
+
+#: setup.php
+msgid "Every Hour"
+msgstr "Сваког сата"
+
+#: setup.php
+msgid "Email Addresses"
+msgstr "Адресе е-поште"
+
+#: setup.php
+msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
+msgstr "Унесите адресе е-поште раздвојене тачком и зарезом на које ће бити послато обавештење где се ова MAC адреса налази."
+
+#: setup.php
+msgid "General Mac Address Authorization Settings"
+msgstr "Општа подешавања ауторизације MAC адреса"
+
+#: setup.php
+msgid "MAC Address Match"
+msgstr "Подударање MAC адресе"
+
+#: setup.php
+msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
+msgstr "Унесите MAC адресу или ниску за подударање MAC адресе која ће бити аутоматски ауторизована. Ако желите да ауторизујете групу MAC адреса, можете користити џокер знак '&#37;' било где у MAC адреси."
+
+#: setup.php
+msgid "Please add a reason for this entry."
+msgstr "Додајте разлог за овај унос."
