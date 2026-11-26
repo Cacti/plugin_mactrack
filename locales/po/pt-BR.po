@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Portuguese (Brazil) <https://translate.cacti.net/projects/cacti/mactrack/pt_BR/>\nLanguage: pt-BR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Portuguese (Brazil) <https://translate.cacti.net/projects/cacti/mactrack/pt_BR/>\nLanguage: pt-BR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -347,7 +347,7 @@ msgstr "Dashboard"
 #: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
 #: mactrack_view_sites.php setup.php
 msgid "Sites"
-msgstr "Sites"
+msgstr "Locais"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
@@ -811,7 +811,7 @@ msgstr "Scanner Dot1x"
 
 #: mactrack_device_types.php
 msgid "sysDescription Match"
-msgstr "sysDescription Match"
+msgstr "Correspondência de sysDescription"
 
 #: mactrack_device_types.php
 msgid "Vendor OID Match"
@@ -1080,7 +1080,7 @@ msgstr "Hostname:"
 
 #: mactrack_devices.php
 msgid "ObjectID:"
-msgstr "ObjectID:"
+msgstr "ID do objeto:"
 
 #: mactrack_devices.php
 msgid "Mactrack Device Filters"
@@ -1360,7 +1360,7 @@ msgstr "Tentativas"
 
 #: mactrack_snmp.php
 msgid "Max OIDs"
-msgstr "Max OIDs"
+msgstr "Máx. de OIDs"
 
 #: mactrack_snmp.php mactrack_view_dot1x.php
 msgid "Username"
@@ -1368,7 +1368,7 @@ msgstr "Nome de usuário"
 
 #: mactrack_snmp.php
 msgid "Auth Proto"
-msgstr "Auth Proto"
+msgstr "Proto. de Autenticação"
 
 #: mactrack_snmp.php
 msgid "Priv Proto"
@@ -1410,7 +1410,7 @@ msgstr "Status do processo do MacTrack"
 
 #: mactrack_utilities.php mactrack_view_dashboard.php
 msgid "Refresh"
-msgstr "Atualizar"
+msgstr "Recarregar"
 
 #: mactrack_utilities.php
 msgid "Current Process Status"
@@ -2181,7 +2181,7 @@ msgstr "Dispositivo não mapeado para dispositivo do Cacti"
 
 #: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
 msgid "View MAC Addresses"
-msgstr "Endereços MAC"
+msgstr "Visualizar endereços MAC"
 
 #: mactrack_view_devices.php
 msgid "No Mactrack Devices Found"
@@ -2237,7 +2237,7 @@ msgstr "VOZ"
 
 #: mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "Portname"
-msgstr "Portname"
+msgstr "Nome da porta"
 
 #: mactrack_view_graphs.php
 msgid "Mactrack - Monitored Device Graph View"
@@ -2301,7 +2301,7 @@ msgstr "Em Disco Total"
 
 #: mactrack_view_interfaces.php
 msgid "UProto Total"
-msgstr "UProto Total"
+msgstr "Total de UProto"
 
 #: mactrack_view_interfaces.php
 msgid "Out Err Total"
@@ -2309,7 +2309,7 @@ msgstr "Saída Err Total"
 
 #: mactrack_view_interfaces.php
 msgid "Out Disc Total"
-msgstr "Out Disc Total"
+msgstr "Total de descartes de saída"
 
 #: mactrack_view_interfaces.php
 msgid "In Err (E/S)"
@@ -2325,7 +2325,7 @@ msgstr "UProto (UP/S)"
 
 #: mactrack_view_interfaces.php
 msgid "Out Err (OE/S)"
-msgstr "Out Err (OE/S)"
+msgstr "Erros de saída (OE/S)"
 
 #: mactrack_view_interfaces.php
 msgid "Out Disc (OD/S)"
@@ -3109,7 +3109,7 @@ msgstr "Opções SNMP"
 
 #: setup.php
 msgid "Mac Watch"
-msgstr "Mac Watch"
+msgstr "Monitoramento de Mac"
 
 #: setup.php
 msgid "Mactrack Tools"
@@ -3394,7 +3394,7 @@ msgstr "Marque esta caixa para desativar todas as verificações para esta máqu
 
 #: setup.php
 msgid "Switch/Hub, Switch/Router Settings"
-msgstr "Switch/Hub, Switch/Router Settings"
+msgstr "Configurações de Switch/Hub, Switch/Roteador"
 
 #: setup.php
 msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
