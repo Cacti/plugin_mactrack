@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Polish <https://translate.cacti.net/projects/cacti/mactrack/pl/>\nLanguage: pl-PL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Polish <https://translate.cacti.net/projects/cacti/mactrack/pl/>\nLanguage: pl-PL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -423,7 +423,7 @@ msgstr "Eksport"
 #: mactrack_view_devices.php mactrack_view_dot1x.php
 #: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
 msgid "Site"
-msgstr "Lokalizacja"
+msgstr "Obiekt"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
 #: mactrack_view_ips.php
@@ -432,7 +432,7 @@ msgstr "Dowolny"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
 msgid "SubType"
-msgstr "SubType"
+msgstr "Podtyp"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
@@ -811,7 +811,7 @@ msgstr "Skaner Dot1x"
 
 #: mactrack_device_types.php
 msgid "sysDescription Match"
-msgstr "sysDescription Match"
+msgstr "Dopasowanie sysDescription"
 
 #: mactrack_device_types.php
 msgid "Vendor OID Match"
@@ -1080,7 +1080,7 @@ msgstr "Nazwa hosta:"
 
 #: mactrack_devices.php
 msgid "ObjectID:"
-msgstr "ObjectID:"
+msgstr "ID obiektu:"
 
 #: mactrack_devices.php
 msgid "Mactrack Device Filters"
@@ -1266,7 +1266,7 @@ msgstr "Łączna wartość IP"
 
 #: mactrack_sites.php mactrack_view_sites.php
 msgid "MACS Found"
-msgstr "MACS Found"
+msgstr "Znalezione adresy MAC"
 
 #: mactrack_sites.php mactrack_view_sites.php
 msgid "Device Errors"
@@ -1352,11 +1352,11 @@ msgstr "Port"
 
 #: mactrack_snmp.php setup.php
 msgid "Timeout"
-msgstr "Upłynął limit czasu"
+msgstr "Limit czasu"
 
 #: mactrack_snmp.php setup.php
 msgid "Retries"
-msgstr "Powroty"
+msgstr "Ponowne próby"
 
 #: mactrack_snmp.php
 msgid "Max OIDs"
@@ -1368,7 +1368,7 @@ msgstr "Nazwa użytkownika"
 
 #: mactrack_snmp.php
 msgid "Auth Proto"
-msgstr "Auth Proto"
+msgstr "Protokół uwierzytelniania"
 
 #: mactrack_snmp.php
 msgid "Priv Proto"
@@ -1430,7 +1430,7 @@ msgstr "Ostatni Poller Time Started:"
 
 #: mactrack_utilities.php
 msgid "Poller Frequency:"
-msgstr "Poller Frequency:"
+msgstr "Częstotliwość odpytywania:"
 
 #: mactrack_utilities.php
 msgid "Approx. Next Runtime:"
@@ -2181,7 +2181,7 @@ msgstr "Urządzenie nieprzypisane do urządzenia Cacti"
 
 #: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
 msgid "View MAC Addresses"
-msgstr "Adresy MAC"
+msgstr "Wyświetl adresy MAC"
 
 #: mactrack_view_devices.php
 msgid "No Mactrack Devices Found"
@@ -2193,7 +2193,7 @@ msgstr "Wyniki skanowania urządzeń"
 
 #: mactrack_view_devices.php
 msgid "Hub/Switch"
-msgstr "Hub/Switch"
+msgstr "Koncentrator/Przełącznik"
 
 #: mactrack_view_dot1x.php
 msgid "Mactrack - 802.1x View"
@@ -2368,7 +2368,7 @@ msgstr "Wysokie wykorzystanie przychodzące (In) > %d &#37;"
 #: mactrack_view_interfaces.php
 #, php-format
 msgid "High Out Utilization > %d &#37;"
-msgstr "High Out Utilization > %d &#37;"
+msgstr "Wysokie wykorzystanie wychodzące > %d &#37;"
 
 #: mactrack_view_interfaces.php
 msgid "With Issues"
@@ -2542,7 +2542,7 @@ msgstr "Zakresy IP"
 
 #: mactrack_view_sites.php
 msgid "Sites / Device Types"
-msgstr "Typy urządzeń"
+msgstr "Lokalizacje / Typy urządzeń"
 
 #: mactrack_view_sites.php
 msgid "Site Scan Results"
@@ -2724,7 +2724,7 @@ msgstr "Wprowadź drugorzędny adres IP DNS, aby wykorzystać go do wyszukiwania
 
 #: setup.php
 msgid "DNS Timeout"
-msgstr "DNS Timeout"
+msgstr "Limit czasu DNS"
 
 #: setup.php
 msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
@@ -2784,7 +2784,7 @@ msgstr "Przecinek ograniczał listę użytkowników do otrzymywania powiadomień
 
 #: setup.php
 msgid "MacAuth Report Frequency"
-msgstr "MacAuth Report Frequency"
+msgstr "Częstotliwość raportów MacAuth"
 
 #: setup.php
 msgid "How often will the MacAuth Reports be Emailed."
@@ -2852,7 +2852,7 @@ msgstr "Liczba razy sondaży SNMP spróbuje dotrzeć do gospodarza przed niepowo
 
 #: setup.php
 msgid "snmpbulkwalk Binary Path"
-msgstr "snmpbulkwalk Binary Path"
+msgstr "Ścieżka do pliku binarnego snmpbulkwalk"
 
 #: setup.php
 msgid "The path to your snmpbulkwalk binary."
@@ -2880,7 +2880,7 @@ msgstr "dot1x Deta"
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "Ustawienia główne"
+msgstr "Ustawienia internetowego serwera proxy"
 
 #: setup.php
 msgid "Internet Proxy Address"
@@ -2932,11 +2932,11 @@ msgstr "Lokalizacje MacTrack"
 
 #: setup.php
 msgid "Mac Address Tracking Utility"
-msgstr "Mac Address Tracking Utility"
+msgstr "Narzędzie śledzenia adresów MAC"
 
 #: setup.php
 msgid "Mac Address Authorization Utility"
-msgstr "Mac Address Authorization Utility"
+msgstr "Narzędzie autoryzacji adresów MAC"
 
 #: setup.php
 msgid "Mactrack Vendor Macs"
@@ -3065,7 +3065,7 @@ msgstr "Każda godzina %d"
 #: setup.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "Co %d godz."
+msgstr "Co %d godzin"
 
 #: setup.php
 msgid "Every Day"
@@ -3109,7 +3109,7 @@ msgstr "Opcje SNMP"
 
 #: setup.php
 msgid "Mac Watch"
-msgstr "Mac Watch"
+msgstr "Obserwacja MAC"
 
 #: setup.php
 msgid "Mactrack Tools"
@@ -3266,7 +3266,7 @@ msgstr "Port SNMP"
 
 #: setup.php
 msgid "SNMP Timeout"
-msgstr "SNMP Timeout"
+msgstr "Limit czasu SNMP"
 
 #: setup.php
 msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
@@ -3314,7 +3314,7 @@ msgstr "Wybierz protokół autoryzacji SNMPv3."
 
 #: setup.php
 msgid "SNMP Privacy Passphrase (v3)"
-msgstr "Paszport prywatności SNMP (v3)"
+msgstr "Hasło prywatności SNMP (v3)"
 
 #: setup.php
 msgid "Choose the SNMPv3 Privacy Passphrase."
@@ -3410,7 +3410,7 @@ msgstr "Odczytywanie ciągów znaków"
 
 #: setup.php
 msgid "<strong>DEPRECATED:</strong> SNMP community strings"
-msgstr "<strong>DEPRECATED:</strong> SNMP community strings"
+msgstr "<strong>PRZESTARZAŁE:</strong> ciągi społeczności SNMP"
 
 #: setup.php
 msgid "Specific SNMP Settings"
@@ -3530,7 +3530,7 @@ msgstr "Wprowadź adres MAC, który ma być monitorowany."
 
 #: setup.php
 msgid "MAC Tracking Name/Email Subject"
-msgstr "MAC Tracking Name/Email Subject"
+msgstr "Nazwa śledzenia MAC / temat e-maila"
 
 #: setup.php
 msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
@@ -3574,7 +3574,7 @@ msgstr "Ogólne ustawienia autoryzacji adresu Mac"
 
 #: setup.php
 msgid "MAC Address Match"
-msgstr "MAC Address Match"
+msgstr "Dopasowanie adresu MAC"
 
 #: setup.php
 msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
