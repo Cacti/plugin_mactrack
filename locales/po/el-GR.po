@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Greek <https://translate.cacti.net/projects/cacti/mactrack/el/>\nLanguage: el-GR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Greek <https://translate.cacti.net/projects/cacti/mactrack/el/>\nLanguage: el-GR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -285,7 +285,7 @@ msgstr "Απενεργοποίηση συσκευής '%s'"
 #: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
 #: setup.php
 msgid "N/A"
-msgstr "Μη Διαθέσιμο"
+msgstr "Μη Εφαρμόσιμο"
 
 #: lib/mactrack_functions.php setup.php
 #, php-format
@@ -432,7 +432,7 @@ msgstr "Οποιοδήποτε"
 
 #: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
 msgid "SubType"
-msgstr "SubType"
+msgstr "Υποτύπος"
 
 #: lib/mactrack_functions.php
 msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
@@ -744,7 +744,7 @@ msgstr "Διακόπτης / δρομολογητής"
 #: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
 #: setup.php
 msgid "Router"
-msgstr "Router"
+msgstr "Δρομολογητής"
 
 #: mactrack_device_types.php
 #, php-format
@@ -799,11 +799,11 @@ msgstr "Τύπος συσκευής"
 
 #: mactrack_device_types.php
 msgid "Port Scanner"
-msgstr "Port Scanner"
+msgstr "Σαρωτής θυρών"
 
 #: mactrack_device_types.php
 msgid "IP Scanner"
-msgstr "IP Scanner"
+msgstr "Σαρωτής IP"
 
 #: mactrack_device_types.php
 msgid "Dot1x Scanner"
@@ -811,7 +811,7 @@ msgstr "Scanner Dot1x"
 
 #: mactrack_device_types.php
 msgid "sysDescription Match"
-msgstr "sysDescription Match"
+msgstr "Αντιστοίχιση sysDescription"
 
 #: mactrack_device_types.php
 msgid "Vendor OID Match"
@@ -1080,7 +1080,7 @@ msgstr "Όνομα κεντρικού υπολογιστή:"
 
 #: mactrack_devices.php
 msgid "ObjectID:"
-msgstr "ObjectID:"
+msgstr "ID αντικειμένου:"
 
 #: mactrack_devices.php
 msgid "Mactrack Device Filters"
@@ -1368,11 +1368,11 @@ msgstr "Όνομα Χρήστη"
 
 #: mactrack_snmp.php
 msgid "Auth Proto"
-msgstr "Auth Proto"
+msgstr "Πρωτ. αυθεντικοποίησης"
 
 #: mactrack_snmp.php
 msgid "Priv Proto"
-msgstr "Priv Proto"
+msgstr "Πρωτ. απορρήτου"
 
 #: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
 #: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
@@ -1916,7 +1916,7 @@ msgstr "Τελευταία ημερομηνία σάρωσης"
 
 #: mactrack_view_arp.php
 msgid "ARP Cache"
-msgstr "ARP Cache"
+msgstr "Προσωρινή μνήμη ARP"
 
 #: mactrack_view_arp.php mactrack_view_macs.php
 msgid "You must first choose a Site, Device or other search criteria."
@@ -2181,7 +2181,7 @@ msgstr "Η συσκευή δεν έχει αντιστοιχιστεί σε συ
 
 #: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
 msgid "View MAC Addresses"
-msgstr "Διευθύνσεις MAC"
+msgstr "Προβολή διευθύνσεων MAC"
 
 #: mactrack_view_devices.php
 msgid "No Mactrack Devices Found"
@@ -2237,7 +2237,7 @@ msgstr "ΦΩΝΗ"
 
 #: mactrack_view_dot1x.php mactrack_view_macs.php
 msgid "Portname"
-msgstr "Portname"
+msgstr "Όνομα θύρας"
 
 #: mactrack_view_graphs.php
 msgid "Mactrack - Monitored Device Graph View"
@@ -2376,7 +2376,7 @@ msgstr "Με θέματα"
 
 #: mactrack_view_interfaces.php
 msgid "Up Interfaces"
-msgstr "Up Interfaces"
+msgstr "Ενεργές διεπαφές"
 
 #: mactrack_view_interfaces.php
 msgid "Up Interfaces No Alias"
@@ -2534,7 +2534,7 @@ msgstr "Επανασάρωση τοποθεσίας"
 
 #: mactrack_view_sites.php
 msgid "View Devices"
-msgstr "Τύπος Συσκευής"
+msgstr "Προβολή Συσκευών"
 
 #: mactrack_view_sites.php
 msgid "View IP Ranges"
@@ -2542,7 +2542,7 @@ msgstr "IP Περιθώρια"
 
 #: mactrack_view_sites.php
 msgid "Sites / Device Types"
-msgstr "Τύποι συσκευών"
+msgstr "Τοποθεσίες / Τύποι συσκευών"
 
 #: mactrack_view_sites.php
 msgid "Site Scan Results"
@@ -2724,7 +2724,7 @@ msgstr "Εισαγάγετε τη δευτερεύουσα διεύθυνση IP
 
 #: setup.php
 msgid "DNS Timeout"
-msgstr "DNS Timeout"
+msgstr "Χρονικό όριο DNS"
 
 #: setup.php
 msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
@@ -2784,7 +2784,7 @@ msgstr "Μια λίστα χρηστών οριοθετημένη με κόμμ�
 
 #: setup.php
 msgid "MacAuth Report Frequency"
-msgstr "MacAuth Report Frequency"
+msgstr "Συχνότητα αναφοράς MacAuth"
 
 #: setup.php
 msgid "How often will the MacAuth Reports be Emailed."
@@ -3109,7 +3109,7 @@ msgstr "Επιλογές SNMP"
 
 #: setup.php
 msgid "Mac Watch"
-msgstr "Mac Watch"
+msgstr "Παρακολούθηση MAC"
 
 #: setup.php
 msgid "Mactrack Tools"
@@ -3254,7 +3254,7 @@ msgstr "Επιλέξτε την έκδοση SNMP για αυτόν τον κε�
 
 #: setup.php
 msgid "SNMP Community String"
-msgstr "SNMP Community String"
+msgstr "Συμβολοσειρά κοινότητας SNMP"
 
 #: setup.php
 msgid "Fill in the SNMP read community for this device."
@@ -3266,7 +3266,7 @@ msgstr "Θύρα SNMP"
 
 #: setup.php
 msgid "SNMP Timeout"
-msgstr "SNMP Timeout"
+msgstr "Χρονικό όριο SNMP"
 
 #: setup.php
 msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
