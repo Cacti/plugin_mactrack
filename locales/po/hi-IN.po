@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Hindi <https://translate.cacti.net/projects/cacti/mactrack/hi/>\nLanguage: hi-IN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Hindi <https://translate.cacti.net/projects/cacti/mactrack/hi/>\nLanguage: hi-IN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -314,12 +314,12 @@ msgstr "दर्ज नहीं"
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
-msgstr "स्थिति: चल रहा है, प्रक्रियाएं: %1$d, प्रगति: %2$s, पिछला रनटाइम: %3$2.1f"
+msgstr "स्थिति: चल रहा है, प्रक्रियाएं: %d, प्रगति: %s, पिछला रनटाइम: %2.1f"
 
 #: lib/mactrack_functions.php
 #, php-format
 msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
-msgstr "स्थिति: निष्क्रिय, पिछला रनटाइम: %1$2.1f सेकंड, प्रक्रियाएं: %2$d प्रक्रियाएं, डिवाइस: %3$d, अगला रन समय: %4$s"
+msgstr "स्थिति: निष्क्रिय, पिछला रनटाइम: %2.1f सेकंड, प्रक्रियाएं: %d प्रक्रियाएं, डिवाइस: %d, अगला रन समय: %s"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
@@ -402,7 +402,7 @@ msgstr "डिवाइस का विवरण दिखाएं"
 #: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
 #: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
 msgid "Go"
-msgstr "लागू करें"
+msgstr "जाएं"
 
 #: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
 #: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
@@ -768,7 +768,7 @@ msgstr "INSERT स्वीकृत: विक्रेता: %s, विवर
 #: mactrack_device_types.php
 #, php-format
 msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
-msgstr "INSERT विफल: विक्रेता: %1$s, विवरण: %2$s, प्रकार: %3$s, sysDescr: %4$s, sysObjectID: %5$s"
+msgstr "INSERT विफल: विक्रेता: %s, विवरण: %s, प्रकार: %s, sysDescr: %s, sysObjectID: %s"
 
 #: mactrack_device_types.php
 #, php-format
@@ -1080,7 +1080,7 @@ msgstr "होस्टनाम:"
 
 #: mactrack_devices.php
 msgid "ObjectID:"
-msgstr "ObjectID:"
+msgstr "ऑब्जेक्ट ID:"
 
 #: mactrack_devices.php
 msgid "Mactrack Device Filters"
@@ -2880,7 +2880,7 @@ msgstr "dot1x Deta"
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "सामान्य सेटिंग्स"
+msgstr "इंटरनेट प्रॉक्सी सेटिंग्स"
 
 #: setup.php
 msgid "Internet Proxy Address"
