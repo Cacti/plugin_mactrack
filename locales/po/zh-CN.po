@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: macktrack on cacti 1.1.34\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Chinese (Simplified Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hans/>\nLanguage: zh-CN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\nX-Poedit-SourceCharset: utf-8\n"
+msgstr "Project-Id-Version: macktrack on cacti 1.1.34\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-11-18 18:36+0000\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Chinese (Simplified Han script) <https://translate.cacti.net/projects/cacti/mactrack/zh_Hans/>\nLanguage: zh-CN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\nX-Poedit-SourceCharset: utf-8\n"
 
 #: includes/database.php
 msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
@@ -563,7 +563,7 @@ msgstr "--dup--"
 
 #: mactrack_device_types.php
 msgid "You must select at least one device type."
-msgstr "You must select at least one device type."
+msgstr "您必须至少选择一种设备类型。"
 
 #: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
 #: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
@@ -601,7 +601,7 @@ msgstr "返回"
 
 #: mactrack_device_types.php
 msgid "New Type"
-msgstr "New Type"
+msgstr "新类型"
 
 #: mactrack_device_types.php
 msgid "Cisco"
@@ -1368,11 +1368,11 @@ msgstr "用户名"
 
 #: mactrack_snmp.php
 msgid "Auth Proto"
-msgstr "Auth Proto"
+msgstr "认证协议"
 
 #: mactrack_snmp.php
 msgid "Priv Proto"
-msgstr "Priv Proto"
+msgstr "加密协议"
 
 #: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
 #: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
@@ -1605,7 +1605,7 @@ msgstr "从aggergate表中删除的记录数量如下:%s"
 #: mactrack_utilities.php
 #, php-format
 msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
-msgstr "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
+msgstr "已从汇总表中移除以下数量的记录：%s。同时将添加 %s 条记录。"
 
 #: mactrack_utilities.php
 msgid "Mactrack Scan Date Rebuild Results"
@@ -2305,11 +2305,11 @@ msgstr "UProto 总计"
 
 #: mactrack_view_interfaces.php
 msgid "Out Err Total"
-msgstr "Out Err Total"
+msgstr "输出错误总数"
 
 #: mactrack_view_interfaces.php
 msgid "Out Disc Total"
-msgstr "Out Disc Total"
+msgstr "输出丢弃总数"
 
 #: mactrack_view_interfaces.php
 msgid "In Err (E/S)"
