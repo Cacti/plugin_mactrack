@@ -1,0 +1,3596 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-18 18:36+0000\n"
+"PO-Revision-Date: 2026-11-28 02:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Latvian <https://translate.cacti.net/projects/cacti/mactrack/lv/>\n"
+"Language: lv-LV\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 0 || n % 100 >= 11 && n % 100 <= 19) ? 0 : ((n % 10 == 1 && n % 100 != 11) ? 1 : 2);\n"
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site after repeated attempts. Review the Cacti log before continuing."
+msgstr "MacTrack nevarēja inicializēt noklusējuma atrašanās vietu pēc atkārtotiem mēģinājumiem. Pirms turpināšanas pārskatiet Cacti žurnālu."
+
+#: includes/database.php
+msgid "MacTrack could not initialize its Default site. Review the Cacti log before continuing."
+msgstr "MacTrack nevarēja inicializēt noklusējuma atrašanās vietu. Pirms turpināšanas pārskatiet Cacti žurnālu."
+
+#: lib/mactrack_activity.php
+msgid "Scanning devices"
+msgstr "Ierīču skenēšana"
+
+#: lib/mactrack_activity.php
+msgid "Waiting for the DNS resolver"
+msgstr "Gaida DNS atrisinātāju"
+
+#: lib/mactrack_activity.php
+msgid "Transferring and aggregating scan results"
+msgstr "Skenēšanas rezultātu pārsūtīšana un apkopošana"
+
+#: lib/mactrack_activity.php
+msgid "Maintaining port table partitions"
+msgstr "Portu tabulas nodalījumu uzturēšana"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired port rows"
+msgstr "Novecojušu portu rindu dzēšana"
+
+#: lib/mactrack_activity.php
+msgid "Pruning scan dates"
+msgstr "Skenēšanas datumu tīrīšana"
+
+#: lib/mactrack_activity.php
+msgid "Deleting expired IP rows"
+msgstr "Novecojušu IP rindu dzēšana"
+
+#: lib/mactrack_activity.php
+msgid "Optimizing the IP table"
+msgstr "IP tabulas optimizēšana"
+
+#: lib/mactrack_activity.php lib/mactrack_functions.php mactrack_utilities.php
+#: mactrack_view_dot1x.php
+msgid "Idle"
+msgstr "Dīkstāvē"
+
+#: lib/mactrack_activity.php
+msgid "Upgrading: rebuilding aggregated ports"
+msgstr "Jaunināšana: apkopoto portu pārbūve"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "About %s rows left to copy (estimate)"
+msgstr "Atlicis kopēt aptuveni %s rindas (novērtējums)"
+
+#: lib/mactrack_activity.php
+msgid "Repartitioning the port, IP and 802.1x tables"
+msgstr "Portu, IP un 802.1x tabulu pārnodalīšana"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "%d devices in this scan"
+msgstr "%d ierīces šajā skenēšanā"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "The process stopped during: %s"
+msgstr "Process apstājās posmā: %s"
+
+#: lib/mactrack_activity.php
+#, php-format
+msgid "Scanning %d devices"
+msgstr "Skenē %d ierīces"
+
+#: lib/mactrack_activity.php
+msgid "A database upgrade is running"
+msgstr "Notiek datubāzes jaunināšana"
+
+#: lib/mactrack_activity.php
+msgid "The port, IP and 802.1x table partitioning has not finished"
+msgstr "Portu, IP un 802.1x tabulu nodalīšana nav pabeigta"
+
+#: lib/mactrack_activity.php
+msgid "The aggregated ports rebuild has not finished"
+msgstr "Apkopoto portu pārbūve nav pabeigta"
+
+#: lib/mactrack_functions.php mactrack_utilities.php mactrack_view_dot1x.php
+msgid "Running"
+msgstr "Darbojas"
+
+#: lib/mactrack_functions.php
+msgid "No method"
+msgstr "Nav metodes"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Success"
+msgstr "Autentifikācija veiksmīga"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authentication Failed"
+msgstr "Autentifikācija neizdevās"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Success"
+msgstr "Autorizācija veiksmīga"
+
+#: lib/mactrack_functions.php mactrack_view_dot1x.php
+msgid "Authorization Failed"
+msgstr "Autorizācija neizdevās"
+
+#: lib/mactrack_functions.php
+msgid "Not observed in latest scan"
+msgstr "Nav konstatēts pēdējā skenēšanā"
+
+#: lib/mactrack_functions.php
+msgid "Locally Admined MAC"
+msgstr "Lokāli administrēta MAC adrese"
+
+#: lib/mactrack_functions.php
+msgid "Mactrack Device Tracking OUI Database Import Results"
+msgstr "MacTrack ierīču izsekošanas OUI datubāzes importa rezultāti"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from IEEE"
+msgstr "OUI datubāzes iegūšana no IEEE"
+
+#: lib/mactrack_functions.php
+msgid "Getting OUI Database from the IEEE"
+msgstr "OUI datubāzes iegūšana no IEEE"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE Complete"
+msgstr "OUI datubāzes lejupielāde no IEEE pabeigta"
+
+#: lib/mactrack_functions.php
+msgid "OUI Database Download from IEEE FAILED"
+msgstr "OUI datubāzes lejupielāde no IEEE NEIZDEVĀS"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Entries Added/Updated in the database."
+msgstr "Datubāzē tika pievienoti/atjaunināti '%d' ieraksti."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "There were '%d' Records Removed from the database."
+msgstr "No datubāzes tika noņemti '%d' ieraksti."
+
+#: lib/mactrack_functions.php
+msgid "atifIndexes data collection complete"
+msgstr "atifIndexes datu vākšana pabeigta"
+
+#: lib/mactrack_functions.php
+msgid "atPhysAddress data collection complete"
+msgstr "atPhysAddress datu vākšana pabeigta"
+
+#: lib/mactrack_functions.php
+msgid "atNetAddress data collection complete"
+msgstr "atNetAddress datu vākšana pabeigta"
+
+#: lib/mactrack_functions.php
+msgid "atEntries assembly complete."
+msgstr "atEntries apkopošana pabeigta."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "HOST: %s, IP address information collection complete"
+msgstr "RESURSDATORS: %s, IP adrešu informācijas vākšana pabeigta"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php
+msgid "Rescan Device"
+msgstr "Atkārtoti skenēt ierīci"
+
+#: lib/mactrack_functions.php
+msgid "View Non Interface Graphs"
+msgstr "Skatīt ar saskarnēm nesaistītos grafikus"
+
+#: lib/mactrack_functions.php
+msgid "No Non Interface Graphs in Cacti"
+msgstr "Cacti nav ar saskarnēm nesaistītu grafiku"
+
+#: lib/mactrack_functions.php
+msgid "View Interface Graphs"
+msgstr "Skatīt saskarņu grafikus"
+
+#: lib/mactrack_functions.php
+msgid "No Interface Graphs in Cacti"
+msgstr "Cacti nav saskarņu grafiku"
+
+#: lib/mactrack_functions.php
+msgid "Since Restart"
+msgstr "Kopš pārstartēšanas"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Down"
+msgstr "Nedarbojas"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_interfaces.php
+msgid "Up"
+msgstr "Darbojas"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Unaliased"
+msgstr "Bez aizstājvārda"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Errors"
+msgstr "Kļūdas"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Discards"
+msgstr "Atmestās paketes"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php
+msgid "Graphless"
+msgstr "Bez grafika"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_view_dashboard.php mactrack_view_devices.php setup.php
+msgid "Unknown"
+msgstr "Nezināms"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "Authorized"
+msgstr "Autorizēts"
+
+#: lib/mactrack_functions.php
+msgid "Unauthorized"
+msgstr "Neautorizēts"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Data"
+msgstr "Dati"
+
+#: lib/mactrack_functions.php
+msgid "Voice"
+msgstr "Balss"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Rescan '%s'"
+msgstr "Ierīces '%s' pārskenēšana"
+
+#: lib/mactrack_functions.php
+msgid "The rescan produced no output."
+msgstr "Pārskenēšana nedeva nekādu izvadi."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device '%s' rescan completed in %0.2f seconds."
+msgstr "Ierīces '%s' pārskenēšana pabeigta %0.2f sekundēs."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site scan '%s'"
+msgstr "Atrašanās vietas '%s' skenēšana"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Site '%s' scan completed in %0.2f seconds."
+msgstr "Atrašanās vietas '%s' skenēšana pabeigta %0.2f sekundēs."
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Enable '%s'"
+msgstr "Ierīces '%s' iespējošana"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Device Disable '%s'"
+msgstr "Ierīces '%s' atspējošana"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_macwatch.php
+#: mactrack_snmp.php mactrack_utilities.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php mactrack_view_sites.php
+#: setup.php
+msgid "N/A"
+msgstr "Nav pieejams"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d minūtes"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d stundas"
+
+#: lib/mactrack_functions.php setup.php
+#, php-format
+msgid "%d Days"
+msgstr "%d dienas"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "%d Weeks"
+msgstr "%d nedēļas"
+
+#: lib/mactrack_functions.php
+msgid "Not Recorded"
+msgstr "Nav reģistrēts"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Running, Processes: %d, Progress: %s, LastRuntime: %2.1f"
+msgstr "Statuss: Darbojas, Procesi: %d, Progress: %s, Pēdējais darbības laiks: %2.1f"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Status: Idle, LastRuntime: %2.1f seconds, Processes: %d processes, Devices: %d, Next Run Time: %s"
+msgstr "Statuss: Dīkstāvē, Pēdējais darbības laiks: %2.1f sekundes, Procesi: %d procesi, Ierīces: %d, Nākamā palaišana: %s"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_utilities.php mactrack_view_dashboard.php mactrack_view_devices.php
+#: setup.php
+msgid "Disabled"
+msgstr "Atspējots"
+
+#: lib/mactrack_functions.php
+#, php-format
+msgid "Scanning Rate: Every %s"
+msgstr "Skenēšanas biežums: ik pēc %s"
+
+#: lib/mactrack_functions.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "View Interfaces"
+msgstr "Skatīt saskarnes"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "Not Detected"
+msgstr "Nav noteikts"
+
+#: lib/mactrack_functions.php
+msgid "Dashboard"
+msgstr "Informācijas panelis"
+
+#: lib/mactrack_functions.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Sites"
+msgstr "Atrašanās vietas"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_sites.php mactrack_utilities.php mactrack_view_dashboard.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Devices"
+msgstr "Ierīces"
+
+#: lib/mactrack_functions.php mactrack_view_interfaces.php setup.php
+msgid "Interfaces"
+msgstr "Saskarnes"
+
+#: lib/mactrack_functions.php
+msgid "IP Ranges"
+msgstr "IP diapazoni"
+
+#: lib/mactrack_functions.php setup.php
+msgid "IP Addresses"
+msgstr "IP adreses"
+
+#: lib/mactrack_functions.php mactrack_view_macs.php
+msgid "MAC Addresses"
+msgstr "MAC adreses"
+
+#: lib/mactrack_functions.php
+msgid "Dot1x"
+msgstr "Dot1x"
+
+#: lib/mactrack_functions.php mactrack_view_graphs.php
+msgid "Graphs"
+msgstr "Grafiki"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Search"
+msgstr "Meklēt"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_devices.php mactrack_view_ips.php
+#: setup.php
+msgid "Default"
+msgstr "Noklusējuma"
+
+#: lib/mactrack_functions.php
+msgid "Show Device Details"
+msgstr "Rādīt ierīces informāciju"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_macs.php
+msgid "Go"
+msgstr "Atlasīt"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_macauth.php mactrack_macwatch.php mactrack_snmp.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Clear"
+msgstr "Notīrīt"
+
+#: lib/mactrack_functions.php mactrack_device_types.php mactrack_devices.php
+#: mactrack_vendormacs.php mactrack_view_arp.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php mactrack_view_ips.php
+#: mactrack_view_macs.php
+msgid "Export"
+msgstr "Eksportēt"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+msgid "Site"
+msgstr "Atrašanās vieta"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_ips.php
+msgid "Any"
+msgstr "Jebkurš"
+
+#: lib/mactrack_functions.php mactrack_devices.php mactrack_view_devices.php
+msgid "SubType"
+msgstr "Apakštips"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Port to MAC to IP results from the system?"
+msgstr "Vai tiešām vēlaties dzēst visus porta-MAC-IP rezultātus no sistēmas?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete the expired Port to MAC to IP results now?"
+msgstr "Vai tiešām vēlaties tagad dzēst novecojušos porta-MAC-IP rezultātus?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to purge the cached Mactrack scanning functions?"
+msgstr "Vai tiešām vēlaties iztīrīt kešotās MacTrack skenēšanas funkcijas?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Vai tiešām vēlaties dzēst visus apkopotos porta-MAC-IP rezultātus no sistēmas?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to delete and recreate all the Aggregated Port to MAC to IP results from the system?"
+msgstr "Vai tiešām vēlaties dzēst un atkārtoti izveidot visus apkopotos porta-MAC-IP rezultātus sistēmā?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to download and import the IEEE Vendor MAC/OUI database now?"
+msgstr "Vai tiešām vēlaties tagad lejupielādēt un importēt IEEE ražotāju MAC/OUI datubāzi?"
+
+#: lib/mactrack_functions.php
+msgid "Are you sure you want to rebuild the scan date list from the stored Port to MAC to IP results now?"
+msgstr "Vai tiešām vēlaties tagad pārbūvēt skenēšanas datumu sarakstu no saglabātajiem porta-MAC-IP rezultātiem?"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild and analyze the partition containing the latest port observation, which is the current week with weekly partitions. An unpartitioned table is optimized in full. Scheduled scans are skipped while this runs. Continue?"
+msgstr "Pārbūvēt un analizēt nodalījumu, kas satur jaunāko porta novērojumu (nedēļas nodalījumu gadījumā tā ir pašreizējā nedēļa). Tabula bez nodalījumiem tiek optimizēta pilnībā. Šīs darbības laikā ieplānotās skenēšanas tiek izlaistas. Turpināt?"
+
+#: lib/mactrack_functions.php
+msgid "Run this maintenance off hours. The rebuild copies the full history of the port (MAC address), IP address and 802.1x tables one after the other and can take hours. Scheduled scans are skipped, database maintenance waits, and MAC, IP and 802.1x searching shows a maintenance message until it finishes. Allow free disk space for a second copy of each table and its indexes. Continue?"
+msgstr "Izpildiet šo uzturēšanu ārpus darba laika. Pārbūve secīgi kopē pilnu portu (MAC adrešu), IP adrešu un 802.1x tabulu vēsturi un var ilgt vairākas stundas. Līdz pabeigšanai ieplānotās skenēšanas tiek izlaistas, datubāzes uzturēšana gaida, bet MAC, IP un 802.1x meklēšanā tiek rādīts uzturēšanas paziņojums. Nodrošiniet brīvu vietu diskā katras tabulas un tās indeksu otrajai kopijai. Turpināt?"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Scan Results"
+msgstr "Noņemt visus skenēšanas rezultātus"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Perform Database Maintenance"
+msgstr "Veikt datubāzes uzturēšanu"
+
+#: lib/mactrack_functions.php mactrack_utilities.php setup.php
+msgid "Refresh Scanning Functions"
+msgstr "Atsvaidzināt skenēšanas funkcijas"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Remove All Aggregated Results"
+msgstr "Noņemt visus apkopotos rezultātus"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Perform Aggregate Table Rebuild"
+msgstr "Veikt apkopojuma tabulas pārbūvi"
+
+#: lib/mactrack_functions.php
+msgid "Rebuild IEEE Vendor MAC/OUI Database"
+msgstr "Pārbūvēt IEEE ražotāju MAC/OUI datubāzi"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Rebuild Scan Dates"
+msgstr "Pārbūvēt skenēšanas datumus"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Optimize Port Table"
+msgstr "Optimizēt portu tabulu"
+
+#: lib/mactrack_functions.php mactrack_utilities.php
+msgid "Configure Port and IP Address Partitioning"
+msgstr "Konfigurēt portu un IP adrešu nodalīšanu"
+
+#: lib/mactrack_partition_rebuild.php
+msgid "The port, IP and 802.1x tables are being repartitioned, or a rebuild did not finish, so their history cannot be changed now. Try again when cli/upgrade_partitioning.php has finished."
+msgstr "Portu, IP un 802.1x tabulas pašlaik tiek pārdalītas, vai arī pārbūve netika pabeigta, tāpēc to vēsturi šobrīd nevar mainīt. Mēģiniet vēlreiz, kad cli/upgrade_partitioning.php būs pabeidzis darbu."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching while its history tables are repartitioned. Results are incomplete until the partitioning has finished."
+msgstr "MacTrack ir uzturēšanas režīmā IP adrešu, MAC adrešu un 802.1x meklēšanai, kamēr tiek pārdalītas tā vēstures tabulas. Kamēr nodalīšana nav pabeigta, rezultāti ir nepilnīgi."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "MacTrack is in maintenance mode for IP address, MAC address and 802.1x searching because the partitioning of its history tables did not finish. Results are incomplete. Run cli/upgrade_partitioning.php again to resume it."
+msgstr "MacTrack ir uzturēšanas režīmā IP adrešu, MAC adrešu un 802.1x meklēšanai, jo tā vēstures tabulu nodalīšana netika pabeigta. Rezultāti ir nepilnīgi. Palaidiet cli/upgrade_partitioning.php vēlreiz, lai to atsāktu."
+
+#: lib/mactrack_partition_rebuild.php
+msgid "Maintenance Mode"
+msgstr "Uzturēšanas režīms"
+
+#: mactrack_actions.php
+#, php-format
+msgid "Mactrack Device: (%s) successfully updated"
+msgstr "MacTrack ierīce: (%s) veiksmīgi atjaunināta"
+
+#: mactrack_actions.php
+msgid "Import into Mactrack Database"
+msgstr "Importēt MacTrack datubāzē"
+
+#: mactrack_actions.php
+msgid "Click 'Continue' to import the following Device to Mactrack?  Please specify additional Mactrack Device options as given below."
+msgstr "Noklikšķiniet uz 'Turpināt', lai importētu šādu ierīci MacTrack. Lūdzu, norādiet papildu MacTrack ierīces opcijas zemāk."
+
+#: mactrack_actions.php
+msgid "We will use these devices SNMP options for the Mactrack Device as well."
+msgstr "Šo ierīču SNMP opcijas tiks izmantotas arī MacTrack ierīcei."
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Router"
+msgstr "Nav piemērojams - maršrutētājs"
+
+#: mactrack_device_types.php
+msgid "Not Applicable - Switch/Hub"
+msgstr "Nav piemērojams - komutators/centrmezgls"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Delete"
+msgstr "Dzēst"
+
+#: mactrack_device_types.php mactrack_snmp.php
+msgid "Duplicate"
+msgstr "Dublēt"
+
+#: mactrack_device_types.php
+msgid "--dup--"
+msgstr "--kopija--"
+
+#: mactrack_device_types.php
+msgid "You must select at least one device type."
+msgstr "Jāatlasa vismaz viens ierīces tips."
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Continue"
+msgstr "Turpināt"
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to delete the following Device Type(s)."
+msgstr "Noklikšķiniet uz 'Turpināt', lai dzēstu šādu(-us) ierīces tipu(-us)."
+
+#: mactrack_device_types.php
+msgid "Click 'Continue' to duplicate the following Device Type(s). You may optionally change the description for the new device types.  Otherwise, do not change value below and the original name will be replicated with a new suffix."
+msgstr "Noklikšķiniet uz 'Turpināt', lai dublētu šādu(-us) ierīces tipu(-us). Pēc izvēles varat mainīt jauno ierīču tipu aprakstu. Pretējā gadījumā nemainiet zemāk norādīto vērtību, un sākotnējais nosaukums tiks nokopēts ar jaunu sufiksu."
+
+#: mactrack_device_types.php
+msgid "Device Type Prefix:"
+msgstr "Ierīces tipa prefikss:"
+
+#: mactrack_device_types.php
+msgid "<description> (1)"
+msgstr "<description> (1)"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_utilities.php mactrack_view_macs.php
+msgid "Cancel"
+msgstr "Atcelt"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_macauth.php
+#: mactrack_macwatch.php mactrack_sites.php mactrack_snmp.php
+#: mactrack_view_macs.php
+msgid "Return"
+msgstr "Atgriezties"
+
+#: mactrack_device_types.php
+msgid "New Type"
+msgstr "Jauns tips"
+
+#: mactrack_device_types.php
+msgid "Cisco"
+msgstr "Cisco"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "There were %d Device Types Added!"
+msgstr "Tika pievienoti %d ierīču tipi!"
+
+#: mactrack_device_types.php
+msgid "No New Device Types Found!"
+msgstr "Jauni ierīču tipi netika atrasti!"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import Results"
+msgstr "Importēšanas rezultāti"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Cacti has imported the following items:"
+msgstr "Cacti ir importējis šādus vienumus:"
+
+#: mactrack_device_types.php
+msgid "Import Mactrack Device Types"
+msgstr "Importēt MacTrack ierīču tipus"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from Local File"
+msgstr "Importēt ierīču tipus no vietējā faila"
+
+#: mactrack_device_types.php
+msgid "Please specify the location of the CSV file containing your device type information."
+msgstr "Lūdzu, norādiet CSV faila atrašanās vietu ar informāciju par ierīču tipiem."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Overwrite Existing Data?"
+msgstr "Pārrakstīt esošos datus?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Should the import process be allowed to overwrite existing data?  Please note, this does not mean delete old row, only replace duplicate rows."
+msgstr "Vai importēšanas procesam drīkst pārrakstīt esošos datus? Lūdzu, ņemiet vērā, ka tas neizdzēš veco rindu, bet tikai aizstāj dublētās rindas."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Allow Existing Rows to be Updated?"
+msgstr "Atļaut atjaunināt esošās rindas?"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Required File Format Notes"
+msgstr "Piezīmes par nepieciešamo faila formātu"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The file must contain a header row with the following column headings."
+msgstr "Failam jāsatur galvenes rinda ar šādiem kolonnu virsrakstiem."
+
+#: mactrack_device_types.php
+msgid " - A common name for the device.  For example Cisco 6509 Switch"
+msgstr " - Vispārīgs ierīces nosaukums, piemēram, Cisco 6509 komutators"
+
+#: mactrack_device_types.php
+msgid " - The vendor who produces this device"
+msgstr " - Ražotājs, kas izgatavo šo ierīci"
+
+#: mactrack_device_types.php
+msgid " - The type of device this is.  See the notes below for this integer value"
+msgstr " - Ierīces tips. Skatiet zemāk esošās piezīmes par šo veselā skaitļa vērtību"
+
+#: mactrack_device_types.php
+msgid " - A unique set of characters from the snmp sysDescr that uniquely identify this device"
+msgstr " - Unikāla rakstzīmju virkne no SNMP sysDescr, kas viennozīmīgi identificē šo ierīci"
+
+#: mactrack_device_types.php
+msgid " - The vendor specific snmp sysObjectID that distinguishes this device from the next"
+msgstr " - Ražotājam specifiskais SNMP sysObjectID, kas atšķir šo ierīci no citām"
+
+#: mactrack_device_types.php
+msgid " - The scanning function that will be used to scan this device type"
+msgstr " - Skenēšanas funkcija, kas tiks izmantota šī ierīces tipa skenēšanai"
+
+#: mactrack_device_types.php
+msgid " - The IP scanning function that will be used to scan this device type"
+msgstr " - IP skenēšanas funkcija, kas tiks izmantota šī ierīces tipa skenēšanai"
+
+#: mactrack_device_types.php
+msgid " - The 802.1x scanning function that will be used to scan this device type"
+msgstr " - 802.1x skenēšanas funkcija, kas tiks izmantota šī ierīces tipa skenēšanai"
+
+#: mactrack_device_types.php
+msgid " - If the Serial Number for this device type can be obtained via an SNMP Query, add it's OID here"
+msgstr " - Ja šī ierīces tipa sērijas numuru var iegūt ar SNMP vaicājumu, pievienojiet tā OID šeit"
+
+#: mactrack_device_types.php
+msgid " - If your scanning function does not have the ability to isolate trunk ports or link ports, this is the starting port number for user ports"
+msgstr " - Ja skenēšanas funkcija nespēj nodalīt maģistrālos vai savienojuma portus, šis ir lietotāju portu sākuma numurs"
+
+#: mactrack_device_types.php
+msgid " - Same as the lowPort with the exception that this is the high numbered user port number"
+msgstr " - Tas pats, kas lowPort, izņemot to, ka šis ir lietotāju portu beigu numurs"
+
+#: mactrack_device_types.php
+msgid " - Disabled type is not used"
+msgstr " - Atspējots tips netiek izmantots"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "The primary key for this table is a combination of the following three fields:"
+msgstr "Šīs tabulas primārā atslēga ir šādu trīs lauku kombinācija:"
+
+#: mactrack_device_types.php
+msgid "Therefore, if you attempt to import duplicate device types, the existing data will be updated with the new information."
+msgstr "Tāpēc, ja mēģināsiet importēt dublētus ierīču tipus, esošie dati tiks atjaunināti ar jauno informāciju."
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid " is an integer field and must be one of the following:"
+msgstr " ir vesela skaitļa lauks, un tam jābūt vienai no šīm vērtībām:"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "1 - Switch/Hub"
+msgstr "1 - Komutators/centrmezgls"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "2 - Switch/Router"
+msgstr "2 - Komutators/maršrutētājs"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "3 - Router"
+msgstr "3 - Maršrutētājs"
+
+#: mactrack_device_types.php
+msgid "The devices device type is determined by scanning it's snmp agent for the sysObjectID and sysDescription and comparing it against values in the device types database.  The first match that is found in the database is used as to how to scan it.  Therefore, it is very important that you select valid sysObjectID_match, sysDescr_match, and scanning function for your devices."
+msgstr "Ierīces tips tiek noteikts, skenējot tās SNMP aģentu pēc sysObjectID un sysDescription un salīdzinot tos ar vērtībām ierīču tipu datubāzē. Pirmā datubāzē atrastā atbilstība nosaka, kā ierīce tiks skenēta. Tāpēc ir ļoti svarīgi savām ierīcēm izvēlēties derīgas sysObjectID_match, sysDescr_match vērtības un skenēšanas funkciju."
+
+#: mactrack_device_types.php mactrack_devices.php setup.php
+msgid "Switch/Hub"
+msgstr "Komutators/centrmezgls"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Switch/Router"
+msgstr "Komutators/maršrutētājs"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: setup.php
+msgid "Router"
+msgstr "Maršrutētājs"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK:  <br>Columns found where: %s"
+msgstr "GALVENES RINDA APSTRĀDĀTA VEIKSMĪGI: <br>Atrastās kolonnas: %s"
+
+#: mactrack_device_types.php mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSING ERROR: Missing required field <br>Columns found where: %s"
+msgstr "GALVENES RINDAS APSTRĀDES KĻŪDA: trūkst obligātā lauka <br>Atrastās kolonnas: %s"
+
+#: mactrack_device_types.php
+msgid "Unknown Assume \"Switch/Hub\""
+msgstr "Nezināms, pieņem \"Komutators/centrmezgls\""
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SUCCEEDED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "IEVIETOŠANA VEIKSMĪGA: Ražotājs: %s, Apraksts: %s, Tips: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT FAILED: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "IEVIETOŠANA NEIZDEVĀS: Ražotājs: %s, Apraksts: %s, Tips: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: Vendor: %s, Description: %s, Type: %s, sysDescr: %s, sysObjectID: %s"
+msgstr "IEVIETOŠANA IZLAISTA, JAU PASTĀV: Ražotājs: %s, Apraksts: %s, Tips: %s, sysDescr: %s, sysObjectID: %s"
+
+#: mactrack_device_types.php
+#, php-format
+msgid "Mactrack Device Types [edit: %s]"
+msgstr "MacTrack ierīču tipi [rediģēt: %s]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Types [new]"
+msgstr "MacTrack ierīču tipi [jauns]"
+
+#: mactrack_device_types.php
+msgid "Mactrack Device Type Filters"
+msgstr "MacTrack ierīču tipu filtri"
+
+#: mactrack_device_types.php
+msgid "Device Type Description"
+msgstr "Ierīces tipa apraksts"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_sites.php
+#: mactrack_view_devices.php mactrack_view_sites.php setup.php
+msgid "Device Type"
+msgstr "Ierīces tips"
+
+#: mactrack_device_types.php
+msgid "Port Scanner"
+msgstr "Portu skeneris"
+
+#: mactrack_device_types.php
+msgid "IP Scanner"
+msgstr "IP skeneris"
+
+#: mactrack_device_types.php
+msgid "Dot1x Scanner"
+msgstr "Dot1x skeneris"
+
+#: mactrack_device_types.php
+msgid "sysDescription Match"
+msgstr "sysDescription atbilstība"
+
+#: mactrack_device_types.php
+msgid "Vendor OID Match"
+msgstr "Ražotāja OID atbilstība"
+
+#: mactrack_device_types.php setup.php
+msgid "Device Types"
+msgstr "Ierīču tipi"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "No"
+msgstr "Nē"
+
+#: mactrack_device_types.php mactrack_view_macs.php
+msgid "Yes"
+msgstr "Jā"
+
+#: mactrack_device_types.php
+msgid "No Mactrack Device Types Found"
+msgstr "MacTrack ierīču tipi netika atrasti"
+
+#: mactrack_device_types.php
+msgid "Submit Query"
+msgstr "Iesniegt vaicājumu"
+
+#: mactrack_device_types.php
+msgid "Clear Filtered Results"
+msgstr "Notīrīt filtrētos rezultātus"
+
+#: mactrack_device_types.php
+msgid "Rescan"
+msgstr "Pārskenēt"
+
+#: mactrack_device_types.php
+msgid "Scan Active Devices for Unknown Device Types"
+msgstr "Skenēt aktīvās ierīces, lai atrastu nezināmus ierīču tipus"
+
+#: mactrack_device_types.php mactrack_devices.php
+msgid "Import"
+msgstr "Importēt"
+
+#: mactrack_device_types.php
+msgid "Import Device Types from a CSV File"
+msgstr "Importēt ierīču tipus no CSV faila"
+
+#: mactrack_device_types.php
+msgid "Export Device Types to Share with Others"
+msgstr "Eksportēt ierīču tipus koplietošanai ar citiem"
+
+#: mactrack_device_types.php mactrack_sites.php mactrack_view_dashboard.php
+#: mactrack_view_sites.php setup.php
+msgid "Vendor"
+msgstr "Ražotājs"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_macs.php setup.php
+msgid "All"
+msgstr "Visi"
+
+#: mactrack_device_types.php mactrack_devices.php mactrack_view_devices.php
+#: mactrack_view_interfaces.php
+msgid "Type"
+msgstr "Tips"
+
+#: mactrack_device_types.php mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Enabled"
+msgstr "Iespējots"
+
+#: mactrack_devices.php
+msgid "Enable"
+msgstr "Iespējot"
+
+#: mactrack_devices.php mactrack_macwatch.php
+msgid "Disable"
+msgstr "Atspējot"
+
+#: mactrack_devices.php
+msgid "Change SNMP Options"
+msgstr "Mainīt SNMP opcijas"
+
+#: mactrack_devices.php
+msgid "Change Device Port Values"
+msgstr "Mainīt ierīces portu vērtības"
+
+#: mactrack_devices.php
+msgid "Connect to Cacti Host via Hostname"
+msgstr "Savienot ar Cacti resursdatoru pēc resursdatora nosaukuma"
+
+#: mactrack_devices.php
+msgid "Copy SNMP Settings from Cacti Host"
+msgstr "Kopēt SNMP iestatījumus no Cacti resursdatora"
+
+#: mactrack_devices.php
+msgid "You must select at least one device."
+msgstr "Jāatlasa vismaz viena ierīce."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to enable the following devices."
+msgstr "Noklikšķiniet uz 'Turpināt', lai iespējotu šādas ierīces."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to disable the following devices."
+msgstr "Noklikšķiniet uz 'Turpināt', lai atspējotu šādas ierīces."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change SNMP parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Noklikšķiniet uz 'Turpināt', lai mainītu SNMP parametrus šādām ierīcēm, atzīmējiet izvēles rūtiņu pie laukiem, kurus vēlaties atjaunināt, un ievadiet jauno vērtību."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to change upper or lower port parameters for the following devices, check the box next to the fields you want to update, and fill in the new value."
+msgstr "Noklikšķiniet uz 'Turpināt', lai mainītu augšējos vai apakšējos portu parametrus šādām ierīcēm, atzīmējiet izvēles rūtiņu pie laukiem, kurus vēlaties atjaunināt, un ievadiet jauno vērtību."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to connect the following devices to their respective Cacti Device.  The relation will be built on equal hostnames. Description will be updated as well."
+msgstr "Noklikšķiniet uz 'Turpināt', lai savienotu šādas ierīces ar attiecīgo Cacti ierīci. Saistība tiks izveidota pēc vienādiem resursdatoru nosaukumiem. Tiks atjaunināts arī apraksts."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to copy SNMP Settings from connected Cacti Device to Mactrack Device.  All not connected Devices will silently be skipped. SNMP retries will be taken from Ping retries."
+msgstr "Noklikšķiniet uz 'Turpināt', lai kopētu SNMP iestatījumus no savienotās Cacti ierīces uz MacTrack ierīci. Visas nesavienotās ierīces tiks klusām izlaistas. SNMP mēģinājumu skaits tiks ņemts no Ping mēģinājumiem."
+
+#: mactrack_devices.php
+msgid "Click 'Continue' to delete the following Devices"
+msgstr "Noklikšķiniet uz 'Turpināt', lai dzēstu šādas ierīces"
+
+#: mactrack_devices.php
+msgid "Import Mactrack Devices"
+msgstr "Importēt MacTrack ierīces"
+
+#: mactrack_devices.php
+msgid "Import Devices from Local File"
+msgstr "Importēt ierīces no vietējā faila"
+
+#: mactrack_devices.php
+msgid "Please specify the location of the CSV file containing your device information."
+msgstr "Lūdzu, norādiet CSV faila atrašanās vietu ar informāciju par ierīcēm."
+
+#: mactrack_devices.php
+msgid " - The SiteID known to Mactrack for this device"
+msgstr " - Šīs ierīces SiteID, kas zināms MacTrack"
+
+#: mactrack_devices.php
+msgid " - A simple name for the device.  For example Cisco 6509 Switch"
+msgstr " - Vienkāršs ierīces nosaukums, piemēram, Cisco 6509 komutators"
+
+#: mactrack_devices.php
+msgid " - The IP Address or DNS Name for the device"
+msgstr " - Ierīces IP adrese vai DNS nosaukums"
+
+#: mactrack_devices.php
+msgid " - More detailed information about the device, including location, environmental conditions, etc."
+msgstr " - Detalizētāka informācija par ierīci, tostarp atrašanās vieta, vides apstākļi u. c."
+
+#: mactrack_devices.php
+msgid " - A list of ports that should not be scanned for user devices"
+msgstr " - Portu saraksts, kurus nevajadzētu skenēt lietotāju ierīcēm"
+
+#: mactrack_devices.php
+msgid " - Redundant information indicating the intended device type.  See below for valid values."
+msgstr " - Papildu informācija, kas norāda paredzēto ierīces tipu. Derīgās vērtības skatiet zemāk."
+
+#: mactrack_devices.php
+msgid " - Id of a set of SNMP options"
+msgstr " - SNMP opciju kopas ID"
+
+#: mactrack_devices.php
+msgid " - The current snmp read string for the device"
+msgstr " - Pašreizējā ierīces SNMP lasīšanas virkne"
+
+#: mactrack_devices.php
+msgid " - The snmp version you wish to scan this device with.  Valid values are 1, 2 and 3"
+msgstr " - SNMP versija, ar kuru vēlaties skenēt šo ierīci. Derīgās vērtības ir 1, 2 un 3"
+
+#: mactrack_devices.php
+msgid " - The UDP port that the snmp agent is running on"
+msgstr " - UDP ports, kurā darbojas SNMP aģents"
+
+#: mactrack_devices.php
+msgid " - The timeout in milliseconds to wait for an snmp response before trying again"
+msgstr " - Noildze milisekundēs, cik ilgi gaidīt SNMP atbildi pirms atkārtota mēģinājuma"
+
+#: mactrack_devices.php
+msgid " - The number of times to retry a snmp request before giving up"
+msgstr " - Mēģinājumu skaits atkārtot SNMP pieprasījumu pirms pārtraukšanas"
+
+#: mactrack_devices.php
+msgid " - Specified the number of OID's that can be obtained in a single SNMP Get request"
+msgstr " - Norāda OID skaitu, ko var iegūt vienā SNMP Get pieprasījumā"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP username"
+msgstr " - SNMP V3: SNMP lietotājvārds"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP password"
+msgstr " - SNMP V3: SNMP parole"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP authentication protocol"
+msgstr " - SNMP V3: SNMP autentifikācijas protokols"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy passphrase"
+msgstr " - SNMP V3: SNMP konfidencialitātes ieejas frāze"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP privacy protocol"
+msgstr " - SNMP V3: SNMP konfidencialitātes protokols"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP context"
+msgstr " - SNMP V3: SNMP konteksts"
+
+#: mactrack_devices.php
+msgid " - SNMP V3: SNMP engine id"
+msgstr " - SNMP V3: SNMP dzinēja ID"
+
+#: mactrack_devices.php
+msgid "Therefore, if you attempt to import duplicate devices, only the data you specify will be updated."
+msgstr "Tāpēc, ja mēģināsiet importēt dublētas ierīces, tiks atjaunināti tikai jūsu norādītie dati."
+
+#: mactrack_devices.php
+#, php-format
+msgid "HEADER LINE PROCESSED OK: <br>Columns found where: %s"
+msgstr "GALVENES RINDA APSTRĀDĀTA VEIKSMĪGI: <br>Atrastās kolonnas: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SUCCEEDED: Hostname: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "IEVIETOŠANA VEIKSMĪGA: Resursdatora nosaukums: SiteID: %s, Ierīces nosaukums: %s, Resursdatora nosaukums %s, SNMP ports: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT FAILED: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "IEVIETOŠANA NEIZDEVĀS: SiteID: %s, Ierīces nosaukums: %s, Resursdatora nosaukums %s, SNMP ports: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "INSERT SKIPPED, EXISTING: SiteID: %s, Device Name: %s, Hostname %s, SNMP Port: %s"
+msgstr "IEVIETOŠANA IZLAISTA, JAU PASTĀV: SiteID: %s, Ierīces nosaukums: %s, Resursdatora nosaukums %s, SNMP ports: %s"
+
+#: mactrack_devices.php
+#, php-format
+msgid "Mactrack Devices [edit: %s]"
+msgstr "MacTrack ierīces [rediģēt: %s]"
+
+#: mactrack_devices.php
+msgid "Mactrack Devices [new]"
+msgstr "MacTrack ierīces [jauna]"
+
+#: mactrack_devices.php
+msgid "SNMP Information"
+msgstr "SNMP informācija"
+
+#: mactrack_devices.php
+msgid "System:"
+msgstr "Sistēma:"
+
+#: mactrack_devices.php
+msgid "Uptime:"
+msgstr "Darbības laiks:"
+
+#: mactrack_devices.php
+msgid "Hostname:"
+msgstr "Resursdatora nosaukums:"
+
+#: mactrack_devices.php
+msgid "ObjectID:"
+msgstr "Objekta ID:"
+
+#: mactrack_devices.php
+msgid "Mactrack Device Filters"
+msgstr "MacTrack ierīču filtri"
+
+#: mactrack_devices.php mactrack_view_devices.php setup.php
+msgid "Device Name"
+msgstr "Ierīces nosaukums"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_arp.php
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Site Name"
+msgstr "Atrašanās vietas nosaukums"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Status"
+msgstr "Statuss"
+
+#: mactrack_devices.php mactrack_view_devices.php mactrack_view_interfaces.php
+#: setup.php
+msgid "Hostname"
+msgstr "Resursdatora nosaukums"
+
+#: mactrack_devices.php
+msgid "Total IPs"
+msgstr "Kopā IP"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports"
+msgstr "Lietotāju porti"
+
+#: mactrack_devices.php mactrack_sites.php mactrack_view_devices.php
+#: mactrack_view_sites.php
+msgid "User Ports Up"
+msgstr "Darbojošies lietotāju porti"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Trunk Ports"
+msgstr "Maģistrālie porti"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Active Macs"
+msgstr "Aktīvās MAC adreses"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "Last Duration"
+msgstr "Pēdējais ilgums"
+
+#: mactrack_devices.php
+msgid "No Mactrack Devices"
+msgstr "Nav MacTrack ierīču"
+
+#: mactrack_devices.php mactrack_utilities.php mactrack_view_devices.php
+#: setup.php
+msgid "None"
+msgstr "Nav"
+
+#: mactrack_devices.php mactrack_view_dashboard.php mactrack_view_devices.php
+msgid "Error"
+msgstr "Kļūda"
+
+#: mactrack_devices.php mactrack_view_devices.php
+msgid "No Cacti Link"
+msgstr "Nav Cacti saites"
+
+#: mactrack_macauth.php
+msgid "You must select at least one Authorized Mac to delete."
+msgstr "Jāatlasa vismaz viena autorizēta MAC adrese dzēšanai."
+
+#: mactrack_macauth.php
+msgid "Click 'Continue' to delete the following Authorized Mac's?"
+msgstr "Vai noklikšķināt uz 'Turpināt', lai dzēstu šādas autorizētās MAC adreses?"
+
+#: mactrack_macauth.php
+#, php-format
+msgid "Mactrack MacAuth [edit: %s]"
+msgstr "MacTrack MacAuth [rediģēt: %s]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth [new]"
+msgstr "MacTrack MacAuth [jauns]"
+
+#: mactrack_macauth.php
+msgid "Mactrack MacAuth Filters"
+msgstr "MacTrack MacAuth filtri"
+
+#: mactrack_macauth.php mactrack_macwatch.php
+msgid "Mac Address"
+msgstr "MAC adrese"
+
+#: mactrack_macauth.php setup.php
+msgid "Reason"
+msgstr "Iemesls"
+
+#: mactrack_macauth.php
+msgid "Added/Modified"
+msgstr "Pievienots/Mainīts"
+
+#: mactrack_macauth.php
+msgid "By"
+msgstr "Autors"
+
+#: mactrack_macauth.php
+msgid "Authorized Mac Addresses"
+msgstr "Autorizētās MAC adreses"
+
+#: mactrack_macauth.php
+msgid "No Authorized Mac Addresses Found"
+msgstr "Nav atrasta neviena autorizēta MAC adrese"
+
+#: mactrack_macauth.php mactrack_vendormacs.php mactrack_view_macs.php
+msgid "MAC's"
+msgstr "MAC adreses"
+
+#: mactrack_macwatch.php
+msgid "Click 'Continue' to delete the following watched Mac's?"
+msgstr "Noklikšķiniet uz 'Turpināt', lai dzēstu šādas uzraudzītās MAC adreses?"
+
+#: mactrack_macwatch.php
+#, php-format
+msgid "Mactrack MacWatch [edit: %s]"
+msgstr "MacTrack MacWatch [rediģēt: %s]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch [new]"
+msgstr "MacTrack MacWatch [jauns]"
+
+#: mactrack_macwatch.php
+msgid "Mactrack MacWatch Filters"
+msgstr "MacTrack MacWatch filtri"
+
+#: mactrack_macwatch.php
+msgid "Watch Name"
+msgstr "Uzraudzības nosaukums"
+
+#: mactrack_macwatch.php setup.php
+msgid "Ticket Number"
+msgstr "Pieteikuma numurs"
+
+#: mactrack_macwatch.php
+msgid "First Seen"
+msgstr "Pirmo reizi redzēts"
+
+#: mactrack_macwatch.php
+msgid "Last Seen"
+msgstr "Pēdējo reizi redzēts"
+
+#: mactrack_macwatch.php
+msgid "Watches"
+msgstr "Uzraudzības"
+
+#: mactrack_macwatch.php
+msgid "No Mactrack Watched Macs Found"
+msgstr "Nav atrasta neviena MacTrack uzraudzītā MAC adrese"
+
+#: mactrack_sites.php
+msgid "Click 'Continue' to delete the following Site(s)?"
+msgstr "Noklikšķiniet uz 'Turpināt', lai dzēstu šādu(-as) atrašanās vietu(-as)?"
+
+#: mactrack_sites.php
+msgid "You must select at least one site."
+msgstr "Jāatlasa vismaz viena atrašanās vieta."
+
+#: mactrack_sites.php
+#, php-format
+msgid "Mactrack Site [edit: %s]"
+msgstr "MacTrack atrašanās vieta [rediģēt: %s]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site [new]"
+msgstr "MacTrack atrašanās vieta [jauna]"
+
+#: mactrack_sites.php
+msgid "Mactrack Site Filters"
+msgstr "MacTrack atrašanās vietu filtri"
+
+#: mactrack_sites.php mactrack_view_devices.php mactrack_view_sites.php
+msgid "Total IP's"
+msgstr "Kopā IP adrešu"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "MACS Found"
+msgstr "Atrastās MAC adreses"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Device Errors"
+msgstr "Ierīču kļūdas"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "No Mactrack Sites Found"
+msgstr "Nav atrasta neviena MacTrack atrašanās vieta"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Devices"
+msgstr "Kopējais ierīču skaits"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total User Ports"
+msgstr "Kopā lietotāju portu"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Oper Ports"
+msgstr "Kopā darbojošos portu"
+
+#: mactrack_sites.php mactrack_view_sites.php
+msgid "Total Trunks"
+msgstr "Kopā maģistrāļu"
+
+#: mactrack_snmp.php
+msgid "You must select at least one SNMP Option."
+msgstr "Jāatlasa vismaz viena SNMP opcija."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to delete the following SNMP Option(s)."
+msgstr "Noklikšķiniet uz 'Turpināt', lai dzēstu šādu(-as) SNMP opciju(-as)."
+
+#: mactrack_snmp.php
+msgid "Click 'Continue' to duplicate the following SNMP Option(s). You can optionally change the title format for the new SNMP Options."
+msgstr "Noklikšķiniet uz 'Turpināt', lai dublētu šādu(-as) SNMP opciju(-as). Pēc izvēles varat mainīt jauno SNMP opciju nosaukuma formātu."
+
+#: mactrack_snmp.php
+msgid "Name Format:"
+msgstr "Nosaukuma formāts:"
+
+#: mactrack_snmp.php
+msgid "<name> (1)"
+msgstr "<name> (1)"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Options [edit %s]"
+msgstr "SNMP opcijas [rediģēt %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Options [new]"
+msgstr "SNMP opcijas [jaunas]"
+
+#: mactrack_snmp.php
+#, php-format
+msgid "SNMP Option Set [edit: %s]"
+msgstr "SNMP opciju kopa [rediģēt: %s]"
+
+#: mactrack_snmp.php
+msgid "SNMP Option Set [new]"
+msgstr "SNMP opciju kopa [jauna]"
+
+#: mactrack_snmp.php setup.php
+msgid "Mactrack SNMP Options"
+msgstr "MacTrack SNMP opcijas"
+
+#: mactrack_snmp.php
+msgid "Item"
+msgstr "Vienums"
+
+#: mactrack_snmp.php setup.php
+msgid "Version"
+msgstr "Versija"
+
+#: mactrack_snmp.php setup.php
+msgid "Community"
+msgstr "Kopiena"
+
+#: mactrack_snmp.php setup.php
+msgid "Port"
+msgstr "Ports"
+
+#: mactrack_snmp.php setup.php
+msgid "Timeout"
+msgstr "Noildze"
+
+#: mactrack_snmp.php setup.php
+msgid "Retries"
+msgstr "Mēģinājumi"
+
+#: mactrack_snmp.php
+msgid "Max OIDs"
+msgstr "Maks. OID skaits"
+
+#: mactrack_snmp.php mactrack_view_dot1x.php
+msgid "Username"
+msgstr "Lietotājvārds"
+
+#: mactrack_snmp.php
+msgid "Auth Proto"
+msgstr "Autent. protokols"
+
+#: mactrack_snmp.php
+msgid "Priv Proto"
+msgstr "Privāt. protokols"
+
+#: mactrack_snmp.php mactrack_view_devices.php mactrack_view_dot1x.php
+#: mactrack_view_interfaces.php mactrack_view_ips.php mactrack_view_macs.php
+#: mactrack_view_sites.php setup.php
+msgid "Actions"
+msgstr "Darbības"
+
+#: mactrack_snmp.php
+msgid "No SNMP Items Found"
+msgstr "Nav atrasts neviens SNMP vienums"
+
+#: mactrack_snmp.php
+msgid "Title of SNMP Option Set"
+msgstr "SNMP opciju kopas nosaukums"
+
+#: mactrack_snmp.php
+msgid "SNMP Settings"
+msgstr "SNMP iestatījumi"
+
+#: mactrack_snmp.php
+msgid "No SNMP Option Sets Found"
+msgstr "Nav atrasta neviena SNMP opciju kopa"
+
+#: mactrack_snmp.php
+msgid "Options"
+msgstr "Opcijas"
+
+#: mactrack_utilities.php
+msgid "Mactrack Database Results"
+msgstr "MacTrack datubāzes rezultāti"
+
+#: mactrack_utilities.php
+msgid "Mactrack Process Status"
+msgstr "MacTrack procesu statuss"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Refresh"
+msgstr "Atsvaidzināt"
+
+#: mactrack_utilities.php
+msgid "Current Process Status"
+msgstr "Pašreizējais procesu statuss"
+
+#: mactrack_utilities.php
+msgid "The Mactrack Poller is:"
+msgstr "MacTrack aptaujātājs ir:"
+
+#: mactrack_utilities.php
+msgid "Running Processes:"
+msgstr "Darbojošies procesi:"
+
+#: mactrack_utilities.php
+msgid "Last Time Poller Started:"
+msgstr "Pēdējā aptaujātāja palaišana:"
+
+#: mactrack_utilities.php
+msgid "Poller Frequency:"
+msgstr "Aptaujātāja biežums:"
+
+#: mactrack_utilities.php
+msgid "Approx. Next Runtime:"
+msgstr "Aptuvenais nākamais palaišanas laiks:"
+
+#: mactrack_utilities.php
+msgid "Database Maintenance Information"
+msgstr "Informācija par datubāzes apkopi"
+
+#: mactrack_utilities.php
+msgid "Last DB Maintenance Time:"
+msgstr "Pēdējās DB apkopes laiks:"
+
+#: mactrack_utilities.php
+msgid "Next DB Maintenance Time:"
+msgstr "Nākamās DB apkopes laiks:"
+
+#: mactrack_utilities.php
+msgid "Run Time Details"
+msgstr "Izpildes laika informācija"
+
+#: mactrack_utilities.php
+msgid "Last Poller Runtime:"
+msgstr "Pēdējais aptaujātāja izpildes laiks:"
+
+#: mactrack_utilities.php
+msgid "Last Poller Maintenance Runtime:"
+msgstr "Pēdējais aptaujātāja apkopes izpildes laiks:"
+
+#: mactrack_utilities.php
+msgid "Maximum Concurrent Processes:"
+msgstr "Maksimālais vienlaicīgo procesu skaits:"
+
+#: mactrack_utilities.php
+msgid "processes"
+msgstr "procesi"
+
+#: mactrack_utilities.php
+msgid "Maximum Per Device Scan Time:"
+msgstr "Maksimālais skenēšanas laiks vienai ierīcei:"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "minutes"
+msgstr "minūtes"
+
+#: mactrack_utilities.php
+msgid "DNS Configuration Information"
+msgstr "DNS konfigurācijas informācija"
+
+#: mactrack_utilities.php
+msgid "Reverse DNS Resolution is"
+msgstr "Reversā DNS atrisināšana ir"
+
+#: mactrack_utilities.php
+msgid "Primary DNS Server:"
+msgstr "Primārais DNS serveris:"
+
+#: mactrack_utilities.php
+msgid "Secondary DNS Server:"
+msgstr "Sekundārais DNS serveris:"
+
+#: mactrack_utilities.php
+msgid "DNS Resolution Timeout:"
+msgstr "DNS atrisināšanas noildze:"
+
+#: mactrack_utilities.php
+msgid "milliseconds"
+msgstr "milisekundes"
+
+#: mactrack_utilities.php
+msgid "Running Process Summary"
+msgstr "Darbojošos procesu kopsavilkums"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Not Running"
+msgstr "DNS atrisinātājs nedarbojas"
+
+#: mactrack_utilities.php
+msgid "The DNS Resolver is Running"
+msgstr "DNS atrisinātājs darbojas"
+
+#: mactrack_utilities.php
+msgid "Date Started"
+msgstr "Sākuma datums"
+
+#: mactrack_utilities.php
+msgid "Completed"
+msgstr "Pabeigts"
+
+#: mactrack_utilities.php
+msgid "Waiting"
+msgstr "Gaida"
+
+#: mactrack_utilities.php
+msgid "Other"
+msgstr "Cits"
+
+#: mactrack_utilities.php
+msgid "Current Activity"
+msgstr "Pašreizējā darbība"
+
+#: mactrack_utilities.php
+msgid "State:"
+msgstr "Stāvoklis:"
+
+#: mactrack_utilities.php
+msgid "Since:"
+msgstr "Kopš:"
+
+#: mactrack_utilities.php
+msgid "Detail:"
+msgstr "Detaļas:"
+
+#: mactrack_utilities.php
+msgid "Last Skipped Poller Run:"
+msgstr "Pēdējā izlaistā aptaujātāja izpilde:"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance Steps"
+msgstr "Pēdējās apkopes darbības"
+
+#: mactrack_utilities.php
+msgid "Seconds"
+msgstr "Sekundes"
+
+#: mactrack_utilities.php
+msgid "Step"
+msgstr "Solis"
+
+#: mactrack_utilities.php
+msgid "Table Sizes"
+msgstr "Tabulu izmēri"
+
+#: mactrack_utilities.php
+msgid "Free"
+msgstr "Brīvs"
+
+#: mactrack_utilities.php
+msgid "Index"
+msgstr "Indekss"
+
+#: mactrack_utilities.php
+msgid "Rows (estimate)"
+msgstr "Rindas (aptuveni)"
+
+#: mactrack_utilities.php mactrack_view_dashboard.php
+msgid "Table"
+msgstr "Tabula"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database runs on another host"
+msgstr "Nezināms: datubāze darbojas uz cita resursdatora"
+
+#: mactrack_utilities.php
+msgid "Unknown: the database data directory cannot be found from this host"
+msgstr "Nezināms: datubāzes datu direktoriju nevar atrast no šī resursdatora"
+
+#: mactrack_utilities.php
+msgid "Database Disk Free:"
+msgstr "Brīvā vieta datubāzes diskā:"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the database: %s"
+msgstr "No datubāzes tika noņemts šāds ierakstu skaits: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s"
+msgstr "No agregētās tabulas tika noņemts šāds ierakstu skaits: %s"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "The following number of records have been removed from the aggergated table: %s.  And %s records will be added."
+msgstr "No agregētās tabulas tika noņemts šāds ierakstu skaits: %s. Un tiks pievienoti %s ieraksti."
+
+#: mactrack_utilities.php
+msgid "Mactrack Scan Date Rebuild Results"
+msgstr "MacTrack skenēšanas datumu pārbūves rezultāti"
+
+#: mactrack_utilities.php
+msgid "Scan date rebuild failed. Check the Cacti log and retry."
+msgstr "Skenēšanas datumu pārbūve neizdevās. Pārbaudiet Cacti žurnālu un mēģiniet vēlreiz."
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Scan dates rebuilt: %d"
+msgstr "Pārbūvētie skenēšanas datumi: %d"
+
+#: mactrack_utilities.php
+msgid "A scan or a port table conversion is running. Try again when it has finished."
+msgstr "Notiek skenēšana vai portu tabulas konvertēšana. Mēģiniet vēlreiz pēc tās pabeigšanas."
+
+#: mactrack_utilities.php setup.php
+msgid "One per Scan"
+msgstr "Viena uz skenēšanu"
+
+#: mactrack_utilities.php setup.php
+msgid "Hourly"
+msgstr "Ikstundas"
+
+#: mactrack_utilities.php setup.php
+msgid "Daily"
+msgstr "Ikdienas"
+
+#: mactrack_utilities.php setup.php
+msgid "Weekly"
+msgstr "Iknedēļas"
+
+#: mactrack_utilities.php
+msgid "Not partitioned"
+msgstr "Nav sadalīta partīcijās"
+
+#: mactrack_utilities.php
+msgid "Daily partitions from an earlier MacTrack release. Conversion is needed."
+msgstr "Ikdienas partīcijas no agrākas MacTrack versijas. Nepieciešama konvertēšana."
+
+#: mactrack_utilities.php
+msgid "Partitioned by scan date"
+msgstr "Sadalīta partīcijās pēc skenēšanas datuma"
+
+#: mactrack_utilities.php
+msgid "Unrecognized partitions. MacTrack makes no partition changes."
+msgstr "Neatpazītas partīcijas. MacTrack neveic nekādas partīciju izmaiņas."
+
+#: mactrack_utilities.php
+msgid "Port Table Partitions"
+msgstr "Portu tabulas partīcijas"
+
+#: mactrack_utilities.php
+msgid "Layout"
+msgstr "Izkārtojums"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%d of at most %d"
+msgstr "%d no ne vairāk kā %d"
+
+#: mactrack_utilities.php
+msgid "Partitions"
+msgstr "Partīcijas"
+
+#: mactrack_utilities.php
+msgid "Oldest Partition"
+msgstr "Vecākā partīcija"
+
+#: mactrack_utilities.php
+msgid "Newest Partition"
+msgstr "Jaunākā partīcija"
+
+#: mactrack_utilities.php
+msgid "Partitions Cover Scans Before"
+msgstr "Partīcijas aptver skenēšanas pirms"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s, coarser than the setting because %d partitions would exceed the limit"
+msgstr "%s, rupjāks dalījums nekā iestatījumā, jo %d partīcijas pārsniegtu ierobežojumu"
+
+#: mactrack_utilities.php setup.php
+msgid "Port and IP Address Partition Size"
+msgstr "Portu un IP adrešu partīciju lielums"
+
+#: mactrack_utilities.php
+msgid "Pending Exchange"
+msgstr "Gaida apmaiņu"
+
+#: mactrack_utilities.php
+msgid "Load Path"
+msgstr "Ielādes ceļš"
+
+#: mactrack_utilities.php
+msgid "PHP batches"
+msgstr "PHP paketes"
+
+#: mactrack_utilities.php
+msgid "Last Scan Note"
+msgstr "Pēdējās skenēšanas piezīme"
+
+#: mactrack_utilities.php
+msgid "Rebuild"
+msgstr "Pārbūve"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "Running since %s"
+msgstr "Darbojas kopš %s"
+
+#: mactrack_utilities.php
+msgid "Last Rebuild"
+msgstr "Pēdējā pārbūve"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d rows into %d partitions"
+msgstr "%s: %d rindas %d partīcijās"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: failed. %s"
+msgstr "%s: neizdevās. %s"
+
+#: mactrack_utilities.php
+msgid "Last Maintenance"
+msgstr "Pēdējā apkope"
+
+#: mactrack_utilities.php
+#, php-format
+msgid "%s: %d partitions dropped, %d created"
+msgstr "%s: %d partīcijas dzēstas, %d izveidotas"
+
+#: mactrack_utilities.php
+msgid "IP Table Layout"
+msgstr "IP tabulas izkārtojums"
+
+#: mactrack_utilities.php
+msgid "IP Table Partitions"
+msgstr "IP tabulas partīcijas"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Layout"
+msgstr "802.1x tabulas izkārtojums"
+
+#: mactrack_utilities.php
+msgid "802.1x Table Partitions"
+msgstr "802.1x tabulas partīcijas"
+
+#: mactrack_utilities.php
+msgid "Select daily, weekly or disabled partitioning before starting the rebuild."
+msgstr "Pirms pārbūves sākšanas atlasiet ikdienas, iknedēļas vai atspējotu partīciju dalījumu."
+
+#: mactrack_utilities.php
+msgid "A rebuild is already running. The partition status page shows when it has finished."
+msgstr "Pārbūve jau darbojas. Partīciju statusa lapā būs redzams, kad tā būs pabeigta."
+
+#: mactrack_utilities.php
+msgid "The rebuild was requested in the background. Check Partition Status for its result; it will refuse to start if a scan or another rebuild is running."
+msgstr "Pārbūve tika pieprasīta fonā. Pārbaudiet rezultātu sadaļā Partīciju statuss; tā netiks sākta, ja darbojas skenēšana vai cita pārbūve."
+
+#: mactrack_utilities.php
+msgid "Mactrack scanning functions have been purged.  They will be recreated once you either edit a device or device type."
+msgstr "MacTrack skenēšanas funkcijas ir iztīrītas. Tās tiks izveidotas no jauna, tiklīdz rediģēsiet ierīci vai ierīces tipu."
+
+#: mactrack_utilities.php
+msgid "Cacti Mactrack System Utilities"
+msgstr "Cacti MacTrack sistēmas utilītas"
+
+#: mactrack_utilities.php
+msgid "Process Status Information"
+msgstr "Informācija par procesu statusu"
+
+#: mactrack_utilities.php setup.php
+msgid "View Mactrack Process Status"
+msgstr "Skatīt MacTrack procesu statusu"
+
+#: mactrack_utilities.php
+msgid "This option will let you show and set process information associated with the Mactrack polling process."
+msgstr "Šī opcija ļauj skatīt un iestatīt procesu informāciju, kas saistīta ar MacTrack aptaujas procesu."
+
+#: mactrack_utilities.php
+msgid "Database Administration"
+msgstr "Datubāzes administrēšana"
+
+#: mactrack_utilities.php
+msgid "Deletes expired Port to MAC to IP associations from the database.  Only records that have expired, based upon your criteria are removed."
+msgstr "Dzēš no datubāzes beigušos portu, MAC un IP adrešu sasaistes ierakstus. Tiek noņemti tikai tie ieraksti, kuru termiņš ir beidzies atbilstoši jūsu kritērijiem."
+
+#: mactrack_utilities.php
+msgid "Refresh IEEE Vendor MAC/OUI Database"
+msgstr "Atsvaidzināt IEEE ražotāju MAC/OUI datubāzi"
+
+#: mactrack_utilities.php
+msgid "This function will download and install the latest OIU database from the IEEE Website.  Each Network Interface Card (NIC) has a MAC Address.  The MAC Address can be broken into two parts.  The first part of the MAC Address contains the Vendor MAC.  The Vendor MAC identifies who manufactured the part.  This will be helpful in spot checking for rogue devices on your network."
+msgstr "Šī funkcija lejupielādēs un instalēs jaunāko OUI datubāzi no IEEE tīmekļa vietnes. Katrai tīkla saskarnes kartei (NIC) ir MAC adrese. MAC adresi var sadalīt divās daļās. Pirmā MAC adreses daļa satur ražotāja MAC kodu. Ražotāja MAC kods identificē ierīces ražotāju. Tas palīdz izlases veidā pārbaudīt, vai tīklā nav neatļautu ierīču."
+
+#: mactrack_utilities.php
+msgid "Deletes old and potentially stale Mactrack scanning functions from the drop-down you receive when you edit a device type."
+msgstr "Dzēš vecās un iespējami novecojušās MacTrack skenēšanas funkcijas no nolaižamā saraksta, kas tiek rādīts, rediģējot ierīces tipu."
+
+#: mactrack_utilities.php
+msgid "Deletes <strong>ALL</strong> Port to MAC to IP associations from the database all IP Addresses, IP Ranges, and VLANS.  This utility is good when you want to start over.  <strong>DANGER: All prior data is deleted.</strong>"
+msgstr "Dzēš no datubāzes <strong>VISAS</strong> portu, MAC un IP adrešu sasaistes, visas IP adreses, IP diapazonus un VLAN. Šī utilīta ir noderīga, ja vēlaties sākt no jauna. <strong>BĪSTAMI: visi iepriekšējie dati tiks dzēsti.</strong>"
+
+#: mactrack_utilities.php
+msgid "Rebuilds the list of scan dates from the stored Port to MAC to IP results, reading each partition once. Scans and maintenance keep the list current, so this is only needed after results were removed outside of maintenance, for example by deleting devices."
+msgstr "Pārbūvē skenēšanas datumu sarakstu no saglabātajiem portu, MAC un IP adrešu rezultātiem, vienu reizi nolasot katru partīciju. Skenēšanas un apkope uztur sarakstu aktuālu, tāpēc tas ir nepieciešams tikai tad, ja rezultāti tika noņemti ārpus apkopes, piemēram, dzēšot ierīces."
+
+#: mactrack_utilities.php
+msgid "View Partition Status"
+msgstr "Skatīt partīciju statusu"
+
+#: mactrack_utilities.php
+msgid "Shows how the Port to MAC to IP results are partitioned, the partition size in use and why, and what the last database maintenance did."
+msgstr "Parāda, kā ir sadalīti partīcijās portu, MAC un IP adrešu rezultāti, kāds partīciju lielums tiek izmantots un kāpēc, kā arī ko veica pēdējā datubāzes apkope."
+
+#: mactrack_utilities.php
+msgid "Rebuilds and analyzes only the partition containing the latest port observation to reclaim deleted space; with weekly partitions that is the current week. Unpartitioned tables are optimized in full. Scheduled scans are skipped until it finishes."
+msgstr "Pārbūvē un analizē tikai to partīciju, kurā atrodas jaunākais porta novērojums, lai atgūtu dzēsto vietu; iknedēļas partīcijām tā ir pašreizējā nedēļa. Tabulas bez partīcijām tiek optimizētas pilnībā. Plānotās skenēšanas tiek izlaistas, līdz tas pabeidzas."
+
+#: mactrack_utilities.php
+msgid "Choose daily or weekly partitions, or disable partitioning, for the port (MAC address), IP address and 802.1x tables. The rebuild copies the full history in the background; scheduled scans are skipped and MAC, IP and 802.1x searching shows a maintenance message meanwhile."
+msgstr "Izvēlieties ikdienas vai iknedēļas partīcijas vai atspējojiet partīciju dalījumu portu (MAC adrešu), IP adrešu un 802.1x tabulām. Pārbūve fonā kopē pilnu vēsturi; tikmēr plānotās skenēšanas tiek izlaistas un MAC, IP un 802.1x meklēšanā tiek rādīts apkopes paziņojums."
+
+#: mactrack_utilities.php
+msgid "Aggregated Table Administration"
+msgstr "Agregētās tabulas administrēšana"
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database.  Data will again be collected on the basis of <strong>only new</strong> scanned data in the next mactrack poller run."
+msgstr "Dzēš no datubāzes VISAS <strong>agregētās</strong> (nevis skenēšanas rezultātu) portu, MAC un IP adrešu sasaistes. Nākamajā MacTrack aptaujātāja izpildē dati atkal tiks apkopoti, pamatojoties <strong>tikai uz jauniem</strong> skenētajiem datiem."
+
+#: mactrack_utilities.php
+msgid "Deletes ALL <strong>Aggregated</strong> (Not Scan Results) Port to MAC to IP associations from the database and their re-creation based on <strong>All scanned data</strong> now."
+msgstr "Dzēš no datubāzes VISAS <strong>agregētās</strong> (nevis skenēšanas rezultātu) portu, MAC un IP adrešu sasaistes un nekavējoties izveido tās no jauna, pamatojoties uz <strong>visiem skenētajiem datiem</strong>."
+
+#: mactrack_utilities.php
+msgid "Partitioning"
+msgstr "Sadalīšana partīcijās"
+
+#: mactrack_vendormacs.php
+msgid "Mactrack Vendor Mac Filter"
+msgstr "MacTrack ražotāju MAC filtrs"
+
+#: mactrack_vendormacs.php
+msgid "Vendor MAC"
+msgstr "Ražotāja MAC"
+
+#: mactrack_vendormacs.php
+msgid "Corporation"
+msgstr "Uzņēmums"
+
+#: mactrack_vendormacs.php
+msgid "Address"
+msgstr "Adrese"
+
+#: mactrack_vendormacs.php setup.php
+msgid "Vendor Macs"
+msgstr "Ražotāju MAC adreses"
+
+#: mactrack_vendormacs.php
+msgid "No Mactrack Vendor MACS Found"
+msgstr "Nav atrasta neviena MacTrack ražotāja MAC adrese"
+
+#: mactrack_view_arp.php
+msgid "Mactrack - ARP/IP View"
+msgstr "MacTrack - ARP/IP skats"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Name"
+msgstr "Komutatora nosaukums"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Switch Hostname"
+msgstr "Komutatora resursdatora nosaukums"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED IP Address"
+msgstr "Gala ierīces IP adrese"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED DNS Hostname"
+msgstr "Gala ierīces DNS resursdatora nosaukums"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "ED MAC Address"
+msgstr "Gala ierīces MAC adrese"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Vendor Name"
+msgstr "Ražotāja nosaukums"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "Port Number"
+msgstr "Porta numurs"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Port Name"
+msgstr "Porta nosaukums"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Last Scan Date"
+msgstr "Pēdējās skenēšanas datums"
+
+#: mactrack_view_arp.php
+msgid "ARP Cache"
+msgstr "ARP kešatmiņa"
+
+#: mactrack_view_arp.php mactrack_view_macs.php
+msgid "You must first choose a Site, Device or other search criteria."
+msgstr "Vispirms jāizvēlas atrašanās vieta, ierīce vai citi meklēšanas kritēriji."
+
+#: mactrack_view_arp.php
+msgid "No Mactrack IP Results Found"
+msgstr "Nav atrasts neviens MacTrack IP rezultāts"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_interfaces.php
+#: mactrack_view_macs.php
+msgid "Device"
+msgstr "Ierīce"
+
+#: mactrack_view_arp.php mactrack_view_ips.php
+msgid "IP's"
+msgstr "IP adreses"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "IP"
+msgstr "IP"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Show"
+msgstr "Rādīt"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Most Recent"
+msgstr "Jaunākie"
+
+#: mactrack_view_arp.php mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "MAC"
+msgstr "MAC"
+
+#: mactrack_view_dashboard.php
+msgid "MacTrack - Dashboard"
+msgstr "MacTrack - Informācijas panelis"
+
+#: mactrack_view_dashboard.php
+msgid "Inventory"
+msgstr "Inventārs"
+
+#: mactrack_view_dashboard.php
+msgid "Device status"
+msgstr "Ierīču statuss"
+
+#: mactrack_view_dashboard.php
+msgid "Address and port totals"
+msgstr "Adrešu un portu kopskaits"
+
+#: mactrack_view_dashboard.php
+msgid "Collection settings"
+msgstr "Datu apkopošanas iestatījumi"
+
+#: mactrack_view_dashboard.php
+msgid "Scan runtimes"
+msgstr "Skenēšanas izpildes laiki"
+
+#: mactrack_view_dashboard.php
+msgid "Table sizes"
+msgstr "Tabulu izmēri"
+
+#: mactrack_view_dashboard.php
+msgid "MacWatch activity"
+msgstr "MacWatch aktivitāte"
+
+#: mactrack_view_dashboard.php
+msgid "Vendors"
+msgstr "Ražotāji"
+
+#: mactrack_view_dashboard.php
+msgid "Enabled devices"
+msgstr "Iespējotās ierīces"
+
+#: mactrack_view_dashboard.php
+msgid "Disabled devices"
+msgstr "Atspējotās ierīces"
+
+#: mactrack_view_dashboard.php
+msgid "Device types"
+msgstr "Ierīču tipi"
+
+#: mactrack_view_dashboard.php
+msgid "Interfaces tracked"
+msgstr "Izsekotās saskarnes"
+
+#: mactrack_view_dashboard.php
+msgid "Active MACs"
+msgstr "Aktīvās MAC adreses"
+
+#: mactrack_view_dashboard.php
+msgid "IP addresses"
+msgstr "IP adreses"
+
+#: mactrack_view_dashboard.php
+msgid "Total ports"
+msgstr "Kopā portu"
+
+#: mactrack_view_dashboard.php
+msgid "Active ports"
+msgstr "Aktīvie porti"
+
+#: mactrack_view_dashboard.php
+msgid "Trunk ports"
+msgstr "Maģistrālie porti"
+
+#: mactrack_view_dashboard.php
+msgid "Unique OUI vendors"
+msgstr "Unikālie OUI ražotāji"
+
+#: mactrack_view_dashboard.php
+msgid "Scanning frequency"
+msgstr "Skenēšanas biežums"
+
+#: mactrack_view_dashboard.php
+msgid "Concurrent processes"
+msgstr "Vienlaicīgie procesi"
+
+#: mactrack_view_dashboard.php
+msgid "Scanner max runtime"
+msgstr "Skenera maks. darbības laiks"
+
+#: mactrack_view_dashboard.php
+msgid "MAC retention"
+msgstr "MAC glabāšana"
+
+#: mactrack_view_dashboard.php
+msgid "days"
+msgstr "dienas"
+
+#: mactrack_view_dashboard.php
+msgid "IP retention"
+msgstr "IP glabāšana"
+
+#: mactrack_view_dashboard.php
+msgid "Reverse DNS"
+msgstr "Reversais DNS"
+
+#: mactrack_view_dashboard.php
+msgid "Most recent scan"
+msgstr "Jaunākā skenēšana"
+
+#: mactrack_view_dashboard.php
+msgid "Average duration"
+msgstr "Vidējais ilgums"
+
+#: mactrack_view_dashboard.php
+msgid "Longest duration"
+msgstr "Garākais ilgums"
+
+#: mactrack_view_dashboard.php
+msgid "Scanned in last hour"
+msgstr "Skenēts pēdējā stundā"
+
+#: mactrack_view_dashboard.php
+msgid "Duration"
+msgstr "Ilgums"
+
+#: mactrack_view_dashboard.php
+msgid "Last scan"
+msgstr "Pēdējā skenēšana"
+
+#: mactrack_view_dashboard.php
+msgid "Slowest devices"
+msgstr "Lēnākās ierīces"
+
+#: mactrack_view_dashboard.php
+msgid "No scan runtimes recorded yet."
+msgstr "Vēl nav reģistrēts neviens skenēšanas izpildes laiks."
+
+#: mactrack_view_dashboard.php
+msgid "Rows"
+msgstr "Rindas"
+
+#: mactrack_view_dashboard.php
+msgid "Size"
+msgstr "Izmērs"
+
+#: mactrack_view_dashboard.php
+msgid "No table statistics available."
+msgstr "Tabulu statistika nav pieejama."
+
+#: mactrack_view_dashboard.php
+msgid "Watched MACs"
+msgstr "Novērotās MAC adreses"
+
+#: mactrack_view_dashboard.php
+msgid "Discovered"
+msgstr "Atklāts"
+
+#: mactrack_view_dashboard.php
+msgid "Last match"
+msgstr "Pēdējā atbilstība"
+
+#: mactrack_view_dashboard.php
+msgid "OUI database entries"
+msgstr "OUI datubāzes ieraksti"
+
+#: mactrack_view_dashboard.php
+msgid "No vendor data available."
+msgstr "Ražotāju dati nav pieejami."
+
+#: mactrack_view_dashboard.php
+msgid "Show more"
+msgstr "Rādīt vairāk"
+
+#: mactrack_view_dashboard.php
+msgid "Show less"
+msgstr "Rādīt mazāk"
+
+#: mactrack_view_dashboard.php
+msgid "Open in a dialog"
+msgstr "Atvērt dialoglodziņā"
+
+#: mactrack_view_dashboard.php
+msgid "Remove from page"
+msgstr "Noņemt no lapas"
+
+#: mactrack_view_dashboard.php
+msgid "Drag to reorder card"
+msgstr "Velciet, lai mainītu kartītes secību"
+
+#: mactrack_view_dashboard.php
+msgid "Invalid request. Please try again."
+msgstr "Nederīgs pieprasījums. Lūdzu, mēģiniet vēlreiz."
+
+#: mactrack_view_dashboard.php
+msgid "Unknown card."
+msgstr "Nezināma kartīte."
+
+#: mactrack_view_dashboard.php
+msgid "Add card"
+msgstr "Pievienot kartīti"
+
+#: mactrack_view_dashboard.php
+msgid "Add a dashboard card…"
+msgstr "Pievienot informācijas paneļa kartīti…"
+
+#: mactrack_view_devices.php
+msgid "Mactrack - Device Report View"
+msgstr "Mactrack - Ierīču atskaites skats"
+
+#: mactrack_view_devices.php
+msgid "Unknown Device Type"
+msgstr "Nezināms ierīces tips"
+
+#: mactrack_view_devices.php
+msgid "Total VLAN's"
+msgstr "Kopā VLAN"
+
+#: mactrack_view_devices.php
+msgid "Edit Device"
+msgstr "Rediģēt ierīci"
+
+#: mactrack_view_devices.php
+msgid "View Graphs"
+msgstr "Skatīt grafikus"
+
+#: mactrack_view_devices.php
+msgid "Device Not Mapped to Cacti Device"
+msgstr "Ierīce nav piesaistīta Cacti ierīcei"
+
+#: mactrack_view_devices.php mactrack_view_ips.php mactrack_view_sites.php
+msgid "View MAC Addresses"
+msgstr "Skatīt MAC adreses"
+
+#: mactrack_view_devices.php
+msgid "No Mactrack Devices Found"
+msgstr "Mactrack ierīces netika atrastas"
+
+#: mactrack_view_devices.php
+msgid "Device Scan Results"
+msgstr "Ierīču skenēšanas rezultāti"
+
+#: mactrack_view_devices.php
+msgid "Hub/Switch"
+msgstr "Centrmezgls/komutators"
+
+#: mactrack_view_dot1x.php
+msgid "Mactrack - 802.1x View"
+msgstr "Mactrack - 802.1x skats"
+
+#: mactrack_view_dot1x.php
+msgid "Domain"
+msgstr "Domēns"
+
+#: mactrack_view_dot1x.php
+msgid "802.1x Sessions"
+msgstr "802.1x sesijas"
+
+#: mactrack_view_dot1x.php
+msgid "No Mactrack 802.1x Sessions Found"
+msgstr "Mactrack 802.1x sesijas netika atrastas"
+
+#: mactrack_view_dot1x.php
+msgid "Dot1x Scan Results"
+msgstr "Dot1x skenēšanas rezultāti"
+
+#: mactrack_view_dot1x.php
+msgid "Sessions"
+msgstr "Sesijas"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "All Statuses"
+msgstr "Visi statusi"
+
+#: mactrack_view_dot1x.php mactrack_view_interfaces.php
+msgid "Statuses Selected"
+msgstr "Atlasītie statusi"
+
+#: mactrack_view_dot1x.php
+msgid "DATA"
+msgstr "DATI"
+
+#: mactrack_view_dot1x.php
+msgid "VOICE"
+msgstr "BALSS"
+
+#: mactrack_view_dot1x.php mactrack_view_macs.php
+msgid "Portname"
+msgstr "Porta nosaukums"
+
+#: mactrack_view_graphs.php
+msgid "Mactrack - Monitored Device Graph View"
+msgstr "Mactrack - Pārraudzīto ierīču grafiku skats"
+
+#: mactrack_view_graphs.php
+msgid "Custom Graph List Applied - Filtering from List"
+msgstr "Piemērots pielāgots grafiku saraksts - filtrēšana no saraksta"
+
+#: mactrack_view_interfaces.php
+msgid "Mactrack - Network Interfaces View"
+msgstr "Mactrack - Tīkla saskarņu skats"
+
+#: mactrack_view_interfaces.php
+msgid "No Mactrack Interfaces Found"
+msgstr "Mactrack saskarnes netika atrastas"
+
+#: mactrack_view_interfaces.php
+msgid "Interface Scan Results"
+msgstr "Saskarņu skenēšanas rezultāti"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Name"
+msgstr "Nosaukums"
+
+#: mactrack_view_interfaces.php setup.php
+msgid "Description"
+msgstr "Apraksts"
+
+#: mactrack_view_interfaces.php
+msgid "Issues"
+msgstr "Problēmas"
+
+#: mactrack_view_interfaces.php
+msgid "Alias"
+msgstr "Aizstājvārds"
+
+#: mactrack_view_interfaces.php
+msgid "InBound %%%"
+msgstr "Ienākošā %%%"
+
+#: mactrack_view_interfaces.php
+msgid "OutBound %%%"
+msgstr "Izejošā %%%"
+
+#: mactrack_view_interfaces.php
+msgid "In (B/S)"
+msgstr "Ienāk. (B/s)"
+
+#: mactrack_view_interfaces.php
+msgid "Out (B/S)"
+msgstr "Izej. (B/s)"
+
+#: mactrack_view_interfaces.php
+msgid "In Err Total"
+msgstr "Ienāk. kļūdas kopā"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc Total"
+msgstr "Ienāk. atmestās kopā"
+
+#: mactrack_view_interfaces.php
+msgid "UProto Total"
+msgstr "Nezin. protok. kopā"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err Total"
+msgstr "Izej. kļūdas kopā"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc Total"
+msgstr "Izej. atmestās kopā"
+
+#: mactrack_view_interfaces.php
+msgid "In Err (E/S)"
+msgstr "Ienāk. kļūdas (kļ./s)"
+
+#: mactrack_view_interfaces.php
+msgid "In Disc (D/S)"
+msgstr "Ienāk. atmestās (atm./s)"
+
+#: mactrack_view_interfaces.php
+msgid "UProto (UP/S)"
+msgstr "Nezin. protok. (np/s)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Err (OE/S)"
+msgstr "Izej. kļūdas (kļ./s)"
+
+#: mactrack_view_interfaces.php
+msgid "Out Disc (OD/S)"
+msgstr "Izej. atmestās (atm./s)"
+
+#: mactrack_view_interfaces.php
+msgid "Last Change"
+msgstr "Pēdējā izmaiņa"
+
+#: mactrack_view_interfaces.php
+msgid "Last Scanned"
+msgstr "Pēdējoreiz skenēts"
+
+#: mactrack_view_interfaces.php
+msgid "Filters"
+msgstr "Filtri"
+
+#: mactrack_view_interfaces.php
+msgid "All Interfaces"
+msgstr "Visas saskarnes"
+
+#: mactrack_view_interfaces.php
+msgid "All Non-Ignored Interfaces"
+msgstr "Visas neignorētās saskarnes"
+
+#: mactrack_view_interfaces.php
+msgid "All Ignored Interfaces"
+msgstr "Visas ignorētās saskarnes"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In/Out Utilization > %d &#37;"
+msgstr "Augsta ienākošā/izejošā noslodze > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High In Utilization > %d &#37;"
+msgstr "Augsta ienākošā noslodze > %d &#37;"
+
+#: mactrack_view_interfaces.php
+#, php-format
+msgid "High Out Utilization > %d &#37;"
+msgstr "Augsta izejošā noslodze > %d &#37;"
+
+#: mactrack_view_interfaces.php
+msgid "With Issues"
+msgstr "Ar problēmām"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces"
+msgstr "Darbojošās saskarnes"
+
+#: mactrack_view_interfaces.php
+msgid "Up Interfaces No Alias"
+msgstr "Darbojošās saskarnes bez aizstājvārda"
+
+#: mactrack_view_interfaces.php
+msgid "Errors Accumulating"
+msgstr "Uzkrājas kļūdas"
+
+#: mactrack_view_interfaces.php
+msgid "Discards Accumulating"
+msgstr "Uzkrājas atmestās paketes"
+
+#: mactrack_view_interfaces.php
+msgid "Changed in Last Day"
+msgstr "Mainītas pēdējā diennaktī"
+
+#: mactrack_view_interfaces.php
+msgid "Bandwidth"
+msgstr "Joslas platums"
+
+#: mactrack_view_interfaces.php
+msgid "When checked, the Errors, Discards and Unknown Protocol columns show each interface's cumulative SNMP counter totals instead of the average per-second rate."
+msgstr "Ja atzīmēts, kļūdu, atmesto pakešu un nezināmo protokolu kolonnas rāda katras saskarnes kumulatīvo SNMP skaitītāju kopējo vērtību vidējā ātruma sekundē vietā."
+
+#: mactrack_view_interfaces.php
+msgid "Show Totals"
+msgstr "Rādīt kopvērtības"
+
+#: mactrack_view_ips.php
+msgid "Mactrack - Site IP Range Report View"
+msgstr "Mactrack - Atrašanās vietu IP diapazonu atskaites skats"
+
+#: mactrack_view_ips.php
+msgid "IP Range"
+msgstr "IP diapazons"
+
+#: mactrack_view_ips.php
+msgid "Current IP Addresses"
+msgstr "Pašreizējās IP adreses"
+
+#: mactrack_view_ips.php
+msgid "Current Date"
+msgstr "Pašreizējais datums"
+
+#: mactrack_view_ips.php
+msgid "Maximum IP Addresses"
+msgstr "Maksimālais IP adrešu skaits"
+
+#: mactrack_view_ips.php
+msgid "Maximum Date"
+msgstr "Maksimuma datums"
+
+#: mactrack_view_ips.php
+msgid "IP Address Ranges"
+msgstr "IP adrešu diapazoni"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "Edit Site"
+msgstr "Rediģēt atrašanās vietu"
+
+#: mactrack_view_ips.php mactrack_view_sites.php
+msgid "View IP Addresses"
+msgstr "Skatīt IP adreses"
+
+#: mactrack_view_ips.php
+msgid "No Mactrack Site IP Ranges Found"
+msgstr "Mactrack atrašanās vietu IP diapazoni netika atrasti"
+
+#: mactrack_view_macs.php
+msgid "Mactrack - MAC to IP Report View"
+msgstr "Mactrack - MAC uz IP atskaites skats"
+
+#: mactrack_view_macs.php
+msgid "Authorize"
+msgstr "Autorizēt"
+
+#: mactrack_view_macs.php
+msgid "Revoke"
+msgstr "Atsaukt"
+
+#: mactrack_view_macs.php
+msgid "None of the selected MAC Addresses were valid, so no action was taken."
+msgstr "Neviena no atlasītajām MAC adresēm nebija derīga, tāpēc darbība netika veikta."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "The following MAC Addresses Could not be revoked because they are members of Group Authorizations %s"
+msgstr "Šīs MAC adreses nevarēja atsaukt, jo tās pieder grupas autorizācijām %s"
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Authorize the following MAC Addresses."
+msgstr "Noklikšķiniet uz 'Turpināt', lai autorizētu šīs MAC adreses."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Revoke the following MAC Addresses."
+msgstr "Noklikšķiniet uz 'Turpināt', lai atsauktu šīs MAC adreses."
+
+#: mactrack_view_macs.php
+msgid "You must select at least one MAC Address."
+msgstr "Jāatlasa vismaz viena MAC adrese."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to change Mac Authorizations."
+msgstr "Jums nav atļaujas mainīt MAC autorizācijas."
+
+#: mactrack_view_macs.php
+#, php-format
+msgid "Dev.:%s IP.:%s MAC.:%s PORT.:%s Count.: [%s]"
+msgstr "Ier.:%s IP.:%s MAC.:%s PORTS.:%s Skaits.: [%s]"
+
+#: mactrack_view_macs.php
+msgid "You must select at least one Row."
+msgstr "Jāatlasa vismaz viena rinda."
+
+#: mactrack_view_macs.php
+msgid "You are not permitted to delete rows."
+msgstr "Jums nav atļaujas dzēst rindas."
+
+#: mactrack_view_macs.php
+msgid "Click 'Continue' to Delete the following rows from Aggregated table."
+msgstr "Noklikšķiniet uz 'Turpināt', lai dzēstu šīs rindas no apkopotās tabulas."
+
+#: mactrack_view_macs.php
+msgid "VLAN ID"
+msgstr "VLAN ID"
+
+#: mactrack_view_macs.php
+msgid "VLAN Name"
+msgstr "VLAN nosaukums"
+
+#: mactrack_view_macs.php
+msgid "You must choose a Site, Device or other search criteria."
+msgstr "Jāizvēlas atrašanās vieta, ierīce vai citi meklēšanas kritēriji."
+
+#: mactrack_view_macs.php
+msgid "No Mactrack Port Results Found"
+msgstr "Mactrack portu rezultāti netika atrasti"
+
+#: mactrack_view_macs.php
+msgid "Count"
+msgstr "Skaits"
+
+#: mactrack_view_macs.php
+msgid "Aggregated"
+msgstr "Apkopots"
+
+#: mactrack_view_sites.php
+msgid "Mactrack - Site Report View"
+msgstr "Mactrack - Atrašanās vietu atskaites skats"
+
+#: mactrack_view_sites.php
+msgid "Rescan Site"
+msgstr "Skenēt atrašanās vietu vēlreiz"
+
+#: mactrack_view_sites.php
+msgid "View Devices"
+msgstr "Skatīt ierīces"
+
+#: mactrack_view_sites.php
+msgid "View IP Ranges"
+msgstr "Skatīt IP diapazonus"
+
+#: mactrack_view_sites.php
+msgid "Sites / Device Types"
+msgstr "Atrašanās vietas / ierīču tipi"
+
+#: mactrack_view_sites.php
+msgid "Site Scan Results"
+msgstr "Atrašanās vietu skenēšanas rezultāti"
+
+#: setup.php
+msgid "MacTrack is upgrading its database in the background. This can take up to an hour on large installations, and some MacTrack data may be incomplete until it finishes."
+msgstr "MacTrack fonā jaunina savu datubāzi. Lielās instalācijās tas var aizņemt līdz pat stundai, un līdz procesa pabeigšanai daži MacTrack dati var būt nepilnīgi."
+
+#: setup.php
+#, php-format
+msgid "MacTrack could not start its database upgrade in the background, see the Cacti log for the reason. Run it manually from the command line: %s"
+msgstr "MacTrack nevarēja sākt datubāzes jaunināšanu fonā; iemeslu skatiet Cacti žurnālā. Palaidiet to manuāli no komandrindas: %s"
+
+#: setup.php
+msgid "Mactrack"
+msgstr "Mactrack"
+
+#: setup.php
+msgid "General Settings"
+msgstr "Vispārīgie iestatījumi"
+
+#: setup.php
+msgid "Scanning Frequency"
+msgstr "Skenēšanas biežums"
+
+#: setup.php
+msgid "Choose when to collect MAC and IP Addresses and Interface statistics from your network devices."
+msgstr "Izvēlieties, kad vākt MAC un IP adreses un saskarņu statistiku no tīkla ierīcēm."
+
+#: setup.php
+msgid "Concurrent Processes"
+msgstr "Vienlaicīgie procesi"
+
+#: setup.php
+msgid "Specify how many devices will be polled simultaneously until all devices have been polled."
+msgstr "Norādiet, cik ierīces tiks aptaujātas vienlaicīgi, līdz visas ierīces būs aptaujātas."
+
+#: setup.php
+msgid "Scanner Max Runtime"
+msgstr "Skenera maks. darbības laiks"
+
+#: setup.php
+msgid "Specify the number of minutes a device scanning function will be allowed to run prior to the system assuming it has been completed.  This setting will correct for abended scanning jobs."
+msgstr "Norādiet minūšu skaitu, cik ilgi ierīces skenēšanas funkcijai ir atļauts darboties, pirms sistēma pieņem, ka tā ir pabeigta. Šis iestatījums novērš priekšlaicīgi pārtrauktu skenēšanas uzdevumu problēmas."
+
+#: setup.php
+msgid "Start Time for Data Collection"
+msgstr "Datu vākšanas sākuma laiks"
+
+#: setup.php
+msgid "When would you like the first data collection to take place.  All future data collection times will be based upon this start time.  A good example would be 12:00AM."
+msgstr "Kad vēlaties, lai notiktu pirmā datu vākšana. Visi turpmākie datu vākšanas laiki tiks balstīti uz šo sākuma laiku. Labs piemērs būtu 12:00AM."
+
+#: setup.php
+msgid "Database Maintenance Time"
+msgstr "Datubāzes uzturēšanas laiks"
+
+#: setup.php
+msgid "When should old database records be removed from the database.  Please note that no access will be permitted to the port database while this action is taking place."
+msgstr "Kad no datubāzes jānoņem vecie datubāzes ieraksti. Lūdzu, ņemiet vērā, ka šīs darbības laikā piekļuve portu datubāzei nebūs atļauta."
+
+#: setup.php
+msgid "Confirm Utilities Prompt"
+msgstr "Utilītu apstiprinājuma uzvedne"
+
+#: setup.php
+msgid "When using utilities, prompt for verification"
+msgstr "Izmantojot utilītas, pieprasīt apstiprinājumu"
+
+#: setup.php
+msgid "Data Retention"
+msgstr "Datu glabāšana"
+
+#: setup.php
+msgid "How long should port MAC details be retained in the database."
+msgstr "Cik ilgi portu MAC informācija jāglabā datubāzē."
+
+#: setup.php
+msgid "Data Retention IPs"
+msgstr "IP datu glabāšana"
+
+#: setup.php
+msgid "How long should discovered IPs details be retained in the database."
+msgstr "Cik ilgi atklāto IP adrešu informācija jāglabā datubāzē."
+
+#: setup.php
+msgid "Size of the partitions of the port, IP and 802.1x tables, or Disabled for unpartitioned tables. Changing it affects new partitions only; to rebuild the existing history to match, use Configure Port and IP Address Partitioning in MacTrack Utilities or run cli/upgrade_partitioning.php."
+msgstr "Portu, IP un 802.1x tabulu nodalījumu lielums vai Atspējots nesadalītām tabulām. Šī iestatījuma maiņa ietekmē tikai jaunos nodalījumus; lai attiecīgi pārbūvētu esošo vēsturi, izmantojiet «Konfigurēt portu un IP adrešu sadalīšanu nodalījumos» sadaļā MacTrack utilītas vai palaidiet cli/upgrade_partitioning.php."
+
+#: setup.php
+msgid "Switch Level Ignore Ports Delimiter"
+msgstr "Komutatora līmeņa ignorējamo portu atdalītājs"
+
+#: setup.php
+msgid "What delimiter should Mactrack use when parsing the Ignore Ports string for each switch."
+msgstr "Kādu atdalītāju Mactrack jāizmanto, parsējot katra komutatora ignorējamo portu virkni."
+
+#: setup.php
+msgid "Auto Detect"
+msgstr "Automātiski noteikt"
+
+#: setup.php
+msgid "Colon [:]"
+msgstr "Kols [:]"
+
+#: setup.php
+msgid "Pipe [|]"
+msgstr "Vertikālā svītra [|]"
+
+#: setup.php
+msgid "Space [ ]"
+msgstr "Atstarpe [ ]"
+
+#: setup.php
+msgid "Mac Address Output Format"
+msgstr "MAC adreses izvades formāts"
+
+#: setup.php
+msgid "Format used for display."
+msgstr "Attēlošanai izmantotais formāts."
+
+#: setup.php
+msgid "Ports to Ignore"
+msgstr "Ignorējamie porti"
+
+#: setup.php
+msgid "Provide a regular expression of ifNames or ifDescriptions of ports to ignore in the interface list.  For example, (Vlan|Loopback|Null)."
+msgstr "Norādiet regulāro izteiksmi portu ifNames vai ifDescriptions vērtībām, kas jāignorē saskarņu sarakstā. Piemēram, (Vlan|Loopback|Null)."
+
+#: setup.php
+msgid "Ports to Ignore While Scanning (Regular Expression)"
+msgstr "Skenēšanas laikā ignorējamie porti (regulārā izteiksme)"
+
+#: setup.php
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of every scanned port.  MAC addresses found on a matching port are not collected, which keeps uplink and trunk ports out of the database.  For example, (uplink|trunk).  Put each expression on its own line to give several.  Leave empty to collect every port.  Sites and devices can add their own expressions.  Unlike Ports to Ignore above, this applies to MAC collection and not to the interface list, and it affects new scans only."
+msgstr "Neobligāts. Regulārā izteiksme, kas reģistrnejutīgi tiek salīdzināta ar katra skenētā porta nosaukumu un porta aizstājvārdu. Atbilstošajos portos atrastās MAC adreses netiek vāktas, tādējādi neiekļaujot datubāzē augšupsaites un maģistrālos portus. Piemēram, (uplink|trunk). Lai norādītu vairākas izteiksmes, katru rakstiet savā rindā. Atstājiet tukšu, lai vāktu visus portus. Atrašanās vietām un ierīcēm var pievienot savas izteiksmes. Atšķirībā no iepriekš minētā iestatījuma «Ignorējamie porti», šis attiecas uz MAC vākšanu, nevis uz saskarņu sarakstu, un ietekmē tikai jaunās skenēšanas."
+
+#: setup.php
+msgid "Bandwidth Usage Threshold"
+msgstr "Joslas platuma izmantošanas slieksnis"
+
+#: setup.php
+msgid "When reviewing network interface statistics, what bandwidth threshold do you want to view by default."
+msgstr "Pārskatot tīkla saskarņu statistiku, kādu joslas platuma slieksni vēlaties skatīt pēc noklusējuma."
+
+#: setup.php
+#, php-format
+msgid "%d Percent"
+msgstr "%d procenti"
+
+#: setup.php
+msgid "DNS Settings"
+msgstr "DNS iestatījumi"
+
+#: setup.php
+msgid "Perform Reverse DNS Name Resolution"
+msgstr "Veikt reverso DNS nosaukumu atrisināšanu"
+
+#: setup.php
+msgid "Should Mactrack perform reverse DNS lookup of the IP addresses associated with ports. CAUTION: If DNS is not properly setup, this will slow scan time significantly."
+msgstr "Vai Mactrack jāveic ar portiem saistīto IP adrešu reversā DNS uzmeklēšana. UZMANĪBU: ja DNS nav pareizi iestatīts, tas ievērojami palēninās skenēšanas laiku."
+
+#: setup.php
+msgid "Primary DNS IP Address"
+msgstr "Primārā DNS IP adrese"
+
+#: setup.php
+msgid "Enter the primary DNS IP Address to utilize for reverse lookups."
+msgstr "Ievadiet primāro DNS IP adresi, ko izmantot reversajai uzmeklēšanai."
+
+#: setup.php
+msgid "Secondary DNS IP Address"
+msgstr "Sekundārā DNS IP adrese"
+
+#: setup.php
+msgid "Enter the secondary DNS IP Address to utilize for reverse lookups."
+msgstr "Ievadiet sekundāro DNS IP adresi, ko izmantot reversajai uzmeklēšanai."
+
+#: setup.php
+msgid "DNS Timeout"
+msgstr "DNS noildze"
+
+#: setup.php
+msgid "Please enter the DNS timeout in milliseconds. Mactrack uses a PHP based DNS resolver."
+msgstr "Lūdzu, ievadiet DNS noildzi milisekundēs. Mactrack izmanto PHP bāzētu DNS atrisinātāju."
+
+#: setup.php
+msgid "DNS Prime Interval"
+msgstr "DNS sagatavošanas intervāls"
+
+#: setup.php
+msgid "How often, in seconds do Mactrack scanning IP's need to be resolved to MAC addresses for DNS resolution.  Using a larger number when you have several thousand devices will increase performance."
+msgstr "Cik bieži (sekundēs) Mactrack skenējamās IP adreses ir jāatrisina uz MAC adresēm DNS atrisināšanai. Lielākas vērtības izmantošana, ja jums ir vairāki tūkstoši ierīču, uzlabos veiktspēju."
+
+#: setup.php
+msgid "Notification Settings"
+msgstr "Paziņojumu iestatījumi"
+
+#: setup.php
+msgid "Source Address"
+msgstr "Nosūtītāja adrese"
+
+#: setup.php
+msgid "The source Email address for Mactrack Emails."
+msgstr "Nosūtītāja e-pasta adrese Mactrack e-pastiem."
+
+#: setup.php
+msgid "Source Email Name"
+msgstr "Nosūtītāja e-pasta nosaukums"
+
+#: setup.php
+msgid "The Source Email name for Mactrack Emails."
+msgstr "Nosūtītāja e-pasta nosaukums Mactrack e-pastiem."
+
+#: setup.php
+msgid "MACTrack Administrator"
+msgstr "MACTrack administrators"
+
+#: setup.php
+msgid "MacWatch Default Body"
+msgstr "MacWatch noklusējuma pamatteksts"
+
+#: setup.php
+msgid "The Email body preset for Mactrack MacWatch Emails.  The body can contain any valid html tags.  It also supports replacement tags that will be processed when sending an Email.  Valid tags include <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+msgstr "E-pasta ziņojuma pamatteksta sagatave Mactrack MacWatch e-pastiem. Pamatteksts var saturēt jebkurus derīgus HTML tagus. Tas atbalsta arī aizvietošanas tagus, kas tiek apstrādāti e-pasta nosūtīšanas laikā. Derīgie tagi ir <IP>, <MAC>, <TICKET>, <SITENAME>, <DEVICEIP>, <PORTNAME>, <PORTNUMBER>, <DEVICENAME>."
+
+#: setup.php
+msgid "Mac Address <MAC> found at IP Address <IP> for Ticket Number: <TICKET>.<br>The device is located at<br>Site: <SITENAME>, Device <DEVICENAME>, IP <DEVICEIP>, Port <PORTNUMBER>, and Port Name <PORTNAME>"
+msgstr "MAC adrese <MAC> atrasta pie IP adreses <IP> pieteikuma numuram: <TICKET>.<br>Ierīce atrodas<br>Atrašanās vieta: <SITENAME>, ierīce <DEVICENAME>, IP <DEVICEIP>, ports <PORTNUMBER> un porta nosaukums <PORTNAME>"
+
+#: setup.php
+msgid "MacAuth Report Email Addresses"
+msgstr "MacAuth atskaites e-pasta adreses"
+
+#: setup.php
+msgid "A comma delimited list of users to receive the MacAuth Email notifications."
+msgstr "Ar komatiem atdalīts lietotāju saraksts, kuri saņems MacAuth e-pasta paziņojumus."
+
+#: setup.php
+msgid "MacAuth Report Frequency"
+msgstr "MacAuth atskaites biežums"
+
+#: setup.php
+msgid "How often will the MacAuth Reports be Emailed."
+msgstr "Cik bieži MacAuth atskaites tiks nosūtītas pa e-pastu."
+
+#: setup.php
+msgid "Mactrack ArpWatch Settings"
+msgstr "Mactrack ArpWatch iestatījumi"
+
+#: setup.php
+msgid "Enable ArpWatch"
+msgstr "Iespējot ArpWatch"
+
+#: setup.php
+msgid "Should Mactrack also use ArpWatch data to supplement Mac to IP/DNS resolution?"
+msgstr "Vai Mactrack jāizmanto arī ArpWatch dati, lai papildinātu MAC uz IP/DNS atrisināšanu?"
+
+#: setup.php
+msgid "ArpWatch Database Path"
+msgstr "ArpWatch datubāzes ceļš"
+
+#: setup.php
+msgid "The location of the ArpWatch Database file on the Cacti server."
+msgstr "ArpWatch datubāzes faila atrašanās vieta Cacti serverī."
+
+#: setup.php
+msgid "SNMP Presets"
+msgstr "SNMP sagataves"
+
+#: setup.php
+msgid "Update Policy for SNMP Options"
+msgstr "SNMP opciju atjaunināšanas politika"
+
+#: setup.php
+msgid "Policy for synchronization of SNMP Options between Cacti devices and Mactrack Devices."
+msgstr "SNMP opciju sinhronizācijas politika starp Cacti ierīcēm un MacTrack ierīcēm."
+
+#: setup.php
+msgid "Default SNMP version for all new hosts."
+msgstr "Noklusējuma SNMP versija visiem jaunajiem resursdatoriem."
+
+#: setup.php
+msgid "Default SNMP read community for all new hosts."
+msgstr "Noklusējuma SNMP lasīšanas kopiena visiem jaunajiem resursdatoriem."
+
+#: setup.php
+msgid "Communities"
+msgstr "Kopienas"
+
+#: setup.php
+msgid "Fill in the list of available SNMP read strings to test for this device. Each read string must be separated by a colon ':'.  These read strings will be tested sequentially if the primary read string is invalid."
+msgstr "Ievadiet pieejamo SNMP lasīšanas virkņu sarakstu, ko pārbaudīt šai ierīcei. Katrai lasīšanas virknei jābūt atdalītai ar kolu ':'. Ja primārā lasīšanas virkne nav derīga, šīs lasīšanas virknes tiks pārbaudītas secīgi."
+
+#: setup.php
+msgid "The UDP/TCP Port to poll the SNMP agent on."
+msgstr "UDP/TCP ports SNMP aģenta aptaujāšanai."
+
+#: setup.php
+msgid "Default SNMP timeout in milli-seconds."
+msgstr "Noklusējuma SNMP noildze milisekundēs."
+
+#: setup.php
+msgid "The number times the SNMP poller will attempt to reach the host before failing."
+msgstr "Mēģinājumu skaits, ko SNMP aptaujātājs veiks, lai sasniegtu resursdatoru, pirms tiek reģistrēta kļūme."
+
+#: setup.php
+msgid "snmpbulkwalk Binary Path"
+msgstr "Ceļš uz snmpbulkwalk izpildfailu"
+
+#: setup.php
+msgid "The path to your snmpbulkwalk binary."
+msgstr "Ceļš uz jūsu snmpbulkwalk izpildfailu."
+
+#: setup.php
+msgid "MacTrack Settings"
+msgstr "MacTrack iestatījumi"
+
+#: setup.php
+msgid "Default Tab"
+msgstr "Noklusējuma cilne"
+
+#: setup.php
+msgid "Which MacTrack tab would you want to be your Default tab every time you goto the MacTrack second."
+msgstr "Kuru MacTrack cilni vēlaties kā noklusējuma cilni katru reizi, kad atverat MacTrack sadaļu."
+
+#: setup.php
+msgid "Mac Addresses"
+msgstr "MAC adreses"
+
+#: setup.php
+msgid "dot1x Deta"
+msgstr "dot1x dati"
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Interneta starpniekservera iestatījumi"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Interneta starpniekservera adrese"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Cacti pamatpakalpojumiem vai spraudņiem, kuriem nepieciešama piekļuve internetam, šeit ievadiet starpniekserveri un portu formātā IP:PORTS. Piemēram, 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Interneta starpniekservera lietotājs"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "Ja interneta starpniekserveris pieprasa lietotājvārdu, ievadiet to šeit."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Interneta starpniekservera parole"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "Ja interneta starpniekserveris pieprasa paroli, ievadiet to šeit."
+
+#: setup.php
+msgid "Mactrack Dashboard"
+msgstr "MacTrack informācijas panelis"
+
+#: setup.php
+msgid "Mactrack Devices"
+msgstr "MacTrack ierīces"
+
+#: setup.php
+msgid "(Edit)"
+msgstr "(Rediģēt)"
+
+#: setup.php
+msgid "(Import)"
+msgstr "(Importēt)"
+
+#: setup.php
+msgid "Mactrack Device Types"
+msgstr "MacTrack ierīču tipi"
+
+#: setup.php
+msgid "Mactrack Sites"
+msgstr "MacTrack atrašanās vietas"
+
+#: setup.php
+msgid "Mac Address Tracking Utility"
+msgstr "MAC adrešu izsekošanas rīks"
+
+#: setup.php
+msgid "Mac Address Authorization Utility"
+msgstr "MAC adrešu autorizācijas rīks"
+
+#: setup.php
+msgid "Mactrack Vendor Macs"
+msgstr "MacTrack ražotāju MAC adreses"
+
+#: setup.php
+msgid "Mactrack View Macs"
+msgstr "MacTrack skatīt MAC adreses"
+
+#: setup.php
+msgid "Mactrack Dot1x View"
+msgstr "MacTrack dot1x skats"
+
+#: setup.php
+msgid "Mactrack IP Address Viewer"
+msgstr "MacTrack IP adrešu skatītājs"
+
+#: setup.php
+msgid "Mactrack View Interfaces"
+msgstr "MacTrack skatīt saskarnes"
+
+#: setup.php
+msgid "Mactrack View Sites"
+msgstr "MacTrack skatīt atrašanās vietas"
+
+#: setup.php
+msgid "Mactrack View IP Ranges"
+msgstr "MacTrack skatīt IP diapazonus"
+
+#: setup.php
+msgid "Mactrack View Devices"
+msgstr "MacTrack skatīt ierīces"
+
+#: setup.php
+msgid "Mactrack Utilities"
+msgstr "MacTrack rīki"
+
+#: setup.php
+msgid "Truncate Port Results Table"
+msgstr "Iztukšot portu rezultātu tabulu"
+
+#: setup.php
+msgid "Truncate Aggregated Port Results Table"
+msgstr "Iztukšot apkopoto portu rezultātu tabulu"
+
+#: setup.php
+msgid "Truncate and Re-create Aggregated Port Results Table"
+msgstr "Iztukšot un atkārtoti izveidot apkopoto portu rezultātu tabulu"
+
+#: setup.php
+msgid "Refresh/Update Vendor MAC Database from IEEE"
+msgstr "Atsvaidzināt/atjaunināt ražotāju MAC datubāzi no IEEE"
+
+#: setup.php
+msgid "Mactrack Graph Viewer"
+msgstr "MacTrack grafiku skatītājs"
+
+#: setup.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "%d sekundes"
+
+#: setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d minūte"
+
+#: setup.php
+msgid "Matches"
+msgstr "Atbilst"
+
+#: setup.php
+msgid "Contains"
+msgstr "Satur"
+
+#: setup.php
+msgid "Begins With"
+msgstr "Sākas ar"
+
+#: setup.php
+msgid "Does Not Contain"
+msgstr "Nesatur"
+
+#: setup.php
+msgid "Does Not Begin With"
+msgstr "Nesākas ar"
+
+#: setup.php
+msgid "Is Null"
+msgstr "Ir NULL"
+
+#: setup.php
+msgid "Is Not Null"
+msgstr "Nav NULL"
+
+#: setup.php
+msgid "Half"
+msgstr "Pusduplekss"
+
+#: setup.php
+msgid "Full"
+msgstr "Pilnduplekss"
+
+#: setup.php
+msgid "Sync Cacti Device to Mactrack Device"
+msgstr "Sinhronizēt Cacti ierīci ar MacTrack ierīci"
+
+#: setup.php
+msgid "Sync Mactrack Device to Cacti Device"
+msgstr "Sinhronizēt MacTrack ierīci ar Cacti ierīci"
+
+#: setup.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Ik pēc %d minūtēm"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hour"
+msgstr "Ik pēc %d stundas"
+
+#: setup.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Ik pēc %d stundām"
+
+#: setup.php
+msgid "Every Day"
+msgstr "Katru dienu"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "%d mēnesis"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "%d mēneši"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "%d gads"
+
+#: setup.php
+msgid "On Scan Completion"
+msgstr "Pēc skenēšanas pabeigšanas"
+
+#: setup.php
+#, php-format
+msgid "Every %d Days"
+msgstr "Ik pēc %d dienām"
+
+#: setup.php
+msgid "Every Week"
+msgstr "Katru nedēļu"
+
+#: setup.php
+msgid "Management"
+msgstr "Pārvaldība"
+
+#: setup.php
+msgid "SNMP Options"
+msgstr "SNMP opcijas"
+
+#: setup.php
+msgid "Mac Watch"
+msgstr "MAC novērošana"
+
+#: setup.php
+msgid "Mactrack Tools"
+msgstr "MacTrack rīki"
+
+#: setup.php
+msgid "Mac Authorizations"
+msgstr "MAC autorizācijas"
+
+#: setup.php
+msgid "Tracking Utilities"
+msgstr "Izsekošanas rīki"
+
+#: setup.php
+msgid "Ports to Ignore (Regular Expression)"
+msgstr "Ignorējamie porti (regulārā izteiksme)"
+
+#: setup.php
+#, php-format
+msgid "Optional.  A regular expression matched, without regard to case, against the port name and the port alias of %s.  MAC addresses found on a matching port are not collected.  For example, '(uplink|trunk)' ignores every port whose name or alias contains uplink or trunk.  Put each expression on its own line to give several.  It is applied in addition to the %s expressions."
+msgstr "Neobligāti. Regulārā izteiksme, kas bez reģistrjutības tiek salīdzināta ar %s porta nosaukumu un porta aizstājvārdu. MAC adreses, kas atrastas atbilstošā portā, netiek vāktas. Piemēram, '(uplink|trunk)' ignorē katru portu, kura nosaukumā vai aizstājvārdā ir uplink vai trunk. Lai norādītu vairākas izteiksmes, ievadiet katru savā rindā. Tā tiek lietota papildus %s izteiksmēm."
+
+#: setup.php
+msgid "every device in this site"
+msgstr "katras šīs atrašanās vietas ierīces"
+
+#: setup.php
+msgid "this device"
+msgstr "šīs ierīces"
+
+#: setup.php
+msgid "device and global"
+msgstr "ierīces un globālajām"
+
+#: setup.php
+msgid "site and global"
+msgstr "atrašanās vietas un globālajām"
+
+#: setup.php
+msgid "Device Scanning Function Options"
+msgstr "Ierīču skenēšanas funkciju opcijas"
+
+#: setup.php
+msgid "Give this device type a meaningful description."
+msgstr "Piešķiriet šim ierīces tipam jēgpilnu aprakstu."
+
+#: setup.php
+msgid "Fill in the name for the vendor of this device type."
+msgstr "Ievadiet šī ierīces tipa ražotāja nosaukumu."
+
+#: setup.php
+msgid "Choose the type of device."
+msgstr "Izvēlieties ierīces tipu."
+
+#: setup.php
+msgid "System Description Match"
+msgstr "Sistēmas apraksta atbilstība"
+
+#: setup.php
+msgid "Provide key information to help Mactrack detect the type of device.  The wildcard character is the '&#42;' sign."
+msgstr "Norādiet galveno informāciju, lai palīdzētu MacTrack noteikt ierīces tipu. Aizstājējzīme ir '&#42;' simbols."
+
+#: setup.php
+msgid "Vendor SNMP Object ID Match"
+msgstr "Ražotāja SNMP objekta ID atbilstība"
+
+#: setup.php
+msgid "MAC Address Scanning Function"
+msgstr "MAC adrešu skenēšanas funkcija"
+
+#: setup.php
+msgid "Mactrack scanning function to call in order to obtain and store port details.  The function name is all that is required.  The following four parameters are assumed and will always be appended: 'my_function($site, &$device, $lowport, $highport)'.  There is no function required for a pure router."
+msgstr "MacTrack skenēšanas funkcija, kas jāizsauc, lai iegūtu un saglabātu porta datus. Nepieciešams tikai funkcijas nosaukums. Šādi četri parametri tiek pieņemti un vienmēr tiks pievienoti: 'my_function($site, &$device, $lowport, $highport)'. Tīram maršrutētājam funkcija nav nepieciešama."
+
+#: setup.php
+msgid "IP Address Scanning Function"
+msgstr "IP adrešu skenēšanas funkcija"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Layer3 devices that track IP Addresses."
+msgstr "MacTrack skenēšanas funkcija, kas paredzēta 3. slāņa ierīcēm, kuras izseko IP adreses."
+
+#: setup.php
+msgid "802.1x Scanning Function"
+msgstr "802.1x skenēšanas funkcija"
+
+#: setup.php
+msgid "Mactrack scanning function specific to Switches with dot1x enabled."
+msgstr "MacTrack skenēšanas funkcija, kas paredzēta komutatoriem ar iespējotu dot1x."
+
+#: setup.php
+msgid "Serial Number Base OID"
+msgstr "Sērijas numura bāzes OID"
+
+#: setup.php
+msgid "The SNMP OID used to obtain this device types serial number to be stored in the Mactrack Asset Information table."
+msgstr "SNMP OID, ko izmanto šī ierīces tipa sērijas numura iegūšanai, lai to saglabātu MacTrack aktīvu informācijas tabulā."
+
+#: setup.php
+msgid "Serial Number Collection Method"
+msgstr "Sērijas numura vākšanas metode"
+
+#: setup.php
+msgid "How is the serial number collected for this OID.  If 'SNMP Walk', we assume multiple serial numbers.  If 'Get', it will be only one.."
+msgstr "Kā tiek vākts sērijas numurs šim OID. Ja 'SNMP Walk', tiek pieņemti vairāki sērijas numuri. Ja 'Get', būs tikai viens."
+
+#: setup.php
+msgid "SNMP Get"
+msgstr "SNMP Get"
+
+#: setup.php
+msgid "SNMP Walk"
+msgstr "SNMP Walk"
+
+#: setup.php
+msgid "Low User Port Number"
+msgstr "Zemākais lietotāja porta numurs"
+
+#: setup.php
+msgid "Provide the low user port number on this switch.  Leave 0 to allow the system to calculate it."
+msgstr "Norādiet zemāko lietotāja porta numuru šajā komutatorā. Atstājiet 0, lai sistēma to aprēķinātu automātiski."
+
+#: setup.php
+msgid "High User Port Number"
+msgstr "Augstākais lietotāja porta numurs"
+
+#: setup.php
+msgid "Disabled device type is not used."
+msgstr "Atspējots ierīces tips netiek izmantots."
+
+#: setup.php
+msgid "Fill in the name of this SNMP option set."
+msgstr "Ievadiet šīs SNMP opciju kopas nosaukumu."
+
+#: setup.php
+msgid "SNMP Version"
+msgstr "SNMP versija"
+
+#: setup.php
+msgid "Choose the SNMP version for this host."
+msgstr "Izvēlieties SNMP versiju šim resursdatoram."
+
+#: setup.php
+msgid "SNMP Community String"
+msgstr "SNMP kopienas virkne"
+
+#: setup.php
+msgid "Fill in the SNMP read community for this device."
+msgstr "Ievadiet SNMP lasīšanas kopienu šai ierīcei."
+
+#: setup.php
+msgid "SNMP Port"
+msgstr "SNMP ports"
+
+#: setup.php
+msgid "SNMP Timeout"
+msgstr "SNMP noildze"
+
+#: setup.php
+msgid "The maximum number of milliseconds Cacti will wait for an SNMP response (does not work with php-snmp support)."
+msgstr "Maksimālais milisekunžu skaits, ko Cacti gaidīs SNMP atbildi (nedarbojas ar php-snmp atbalstu)."
+
+#: setup.php
+msgid "SNMP Retries"
+msgstr "SNMP mēģinājumi"
+
+#: setup.php
+msgid "The maximum number of attempts to reach a device via an SNMP readstring prior to giving up."
+msgstr "Maksimālais mēģinājumu skaits sasniegt ierīci, izmantojot SNMP lasīšanas virkni, pirms atteikšanās."
+
+#: setup.php
+msgid "Maximum OID's Per Get Request"
+msgstr "Maksimālais OID skaits vienā Get pieprasījumā"
+
+#: setup.php
+msgid "Specified the number of OID's that can be obtained in a single SNMP Get request."
+msgstr "Norāda OID skaitu, ko var iegūt vienā SNMP Get pieprasījumā."
+
+#: setup.php
+msgid "SNMP Username (v3)"
+msgstr "SNMP lietotājvārds (v3)"
+
+#: setup.php
+msgid "SNMP v3 username for this device."
+msgstr "SNMP v3 lietotājvārds šai ierīcei."
+
+#: setup.php
+msgid "SNMP Password (v3)"
+msgstr "SNMP parole (v3)"
+
+#: setup.php
+msgid "SNMP v3 password for this device."
+msgstr "SNMP v3 parole šai ierīcei."
+
+#: setup.php
+msgid "SNMP Auth Protocol (v3)"
+msgstr "SNMP autentifikācijas protokols (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Authorization Protocol."
+msgstr "Izvēlieties SNMPv3 autentifikācijas protokolu."
+
+#: setup.php
+msgid "SNMP Privacy Passphrase (v3)"
+msgstr "SNMP privātuma ieejas frāze (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Passphrase."
+msgstr "Izvēlieties SNMPv3 privātuma ieejas frāzi."
+
+#: setup.php
+msgid "SNMP Privacy Protocol (v3)"
+msgstr "SNMP privātuma protokols (v3)"
+
+#: setup.php
+msgid "Choose the SNMPv3 Privacy Protocol."
+msgstr "Izvēlieties SNMPv3 privātuma protokolu."
+
+#: setup.php
+msgid "SNMP Context (v3)"
+msgstr "SNMP konteksts (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Context to use for this device."
+msgstr "Ievadiet SNMP v3 kontekstu, ko izmantot šai ierīcei."
+
+#: setup.php
+msgid "SNMP Engine ID (v3)"
+msgstr "SNMP dzinēja ID (v3)"
+
+#: setup.php
+msgid "Enter the SNMP v3 Engine ID to use for this device."
+msgstr "Ievadiet SNMP v3 dzinēja ID, ko izmantot šai ierīcei."
+
+#: setup.php
+msgid "General Device Settings"
+msgstr "Vispārīgie ierīces iestatījumi"
+
+#: setup.php
+msgid "Give this device a meaningful name."
+msgstr "Piešķiriet šai ierīcei jēgpilnu nosaukumu."
+
+#: setup.php
+msgid "Fill in the fully qualified hostname for this device."
+msgstr "Ievadiet pilnībā kvalificētu resursdatora nosaukumu šai ierīcei."
+
+#: setup.php
+msgid "Related Cacti Host"
+msgstr "Saistītais Cacti resursdators"
+
+#: setup.php
+msgid "Given Mactrack Host is connected to this Cacti Host."
+msgstr "Norādītais MacTrack resursdators ir savienots ar šo Cacti resursdatoru."
+
+#: setup.php
+msgid "Scan Type"
+msgstr "Skenēšanas tips"
+
+#: setup.php
+msgid "Choose the scan type you wish to perform on this device."
+msgstr "Izvēlieties skenēšanas tipu, ko vēlaties veikt šai ierīcei."
+
+#: setup.php
+msgid "Choose the site to associate with this device."
+msgstr "Izvēlieties atrašanās vietu, ko saistīt ar šo ierīci."
+
+#: setup.php
+msgid "Device Notes"
+msgstr "Ierīces piezīmes"
+
+#: setup.php
+msgid "This field value is useful to save general information about a specific device."
+msgstr "Šī lauka vērtība ir noderīga vispārīgas informācijas saglabāšanai par konkrēto ierīci."
+
+#: setup.php
+msgid "Disable Device"
+msgstr "Atspējot ierīci"
+
+#: setup.php
+msgid "Check this box to disable all checks for this host."
+msgstr "Atzīmējiet šo izvēles rūtiņu, lai atspējotu visas šī resursdatora pārbaudes."
+
+#: setup.php
+msgid "Switch/Hub, Switch/Router Settings"
+msgstr "Komutatora/centrmezgla, komutatora/maršrutētāja iestatījumi"
+
+#: setup.php
+msgid "Provide a list of ports on a specific switch/hub whose MAC results should be ignored.  Ports such as link/trunk ports that can not be distinguished from other user ports are examples.  Each port number must be separated by a colon, pipe, or a space ':', '|', ' '.  For example, 'Fa0/1: Fa1/23' or 'Fa0/1 Fa1/23' would be acceptable for some manufacturers switch types."
+msgstr "Norādiet portu sarakstu konkrētā komutatorā/centrmezglā, kuru MAC rezultāti jāignorē. Piemēri ir savienojuma/maģistrāles (link/trunk) porti, kurus nevar atšķirt no citiem lietotāju portiem. Katram porta numuram jābūt atdalītam ar kolu, vertikālo svītru vai atstarpi ':', '|', ' '. Piemēram, dažu ražotāju komutatoru tipiem būtu pieņemami 'Fa0/1: Fa1/23' vai 'Fa0/1 Fa1/23'."
+
+#: setup.php
+msgid "You can use specific SNMP settings or select SNMP set. In the second case, mactrack tries to find correct settings from SNMP set"
+msgstr "Varat izmantot konkrētus SNMP iestatījumus vai izvēlēties SNMP kopu. Otrajā gadījumā MacTrack mēģina atrast pareizos iestatījumus no SNMP kopas"
+
+#: setup.php
+msgid "Read Strings"
+msgstr "Lasīšanas virknes"
+
+#: setup.php
+msgid "<strong>DEPRECATED:</strong> SNMP community strings"
+msgstr "<strong>NOVECOJIS:</strong> SNMP kopienas virknes"
+
+#: setup.php
+msgid "Specific SNMP Settings"
+msgstr "Konkrēti SNMP iestatījumi"
+
+#: setup.php
+msgid "Connectivity Options"
+msgstr "Savienojamības opcijas"
+
+#: setup.php
+msgid "Terminal Type"
+msgstr "Termināļa tips"
+
+#: setup.php
+msgid "Choose the terminal type that you use to connect to this device."
+msgstr "Izvēlieties termināļa tipu, ko izmantojat savienojumam ar šo ierīci."
+
+#: setup.php
+msgid "Telnet"
+msgstr "Telnet"
+
+#: setup.php
+msgid "SSH"
+msgstr "SSH"
+
+#: setup.php
+msgid "HTTP"
+msgstr "HTTP"
+
+#: setup.php
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: setup.php
+msgid "User Name"
+msgstr "Lietotājvārds"
+
+#: setup.php
+msgid "The user name to be used for your custom authentication method.  Examples include SSH, RSH, HTML, etc."
+msgstr "Lietotājvārds, kas tiks izmantots jūsu pielāgotajai autentifikācijas metodei. Piemēri ir SSH, RSH, HTML u. c."
+
+#: setup.php
+msgid "Password"
+msgstr "Parole"
+
+#: setup.php
+msgid "The password to be used for your custom authentication."
+msgstr "Parole, kas tiks izmantota jūsu pielāgotajai autentifikācijai."
+
+#: setup.php
+msgid "Private Key Path"
+msgstr "Privātās atslēgas ceļš"
+
+#: setup.php
+msgid "The path to the private key used for SSH authentication."
+msgstr "Ceļš uz privāto atslēgu, ko izmanto SSH autentifikācijai."
+
+#: setup.php
+msgid "Sequence"
+msgstr "Secība"
+
+#: setup.php
+msgid "Sequence of Item."
+msgstr "Vienuma secība."
+
+#: setup.php
+msgid "General Site Settings"
+msgstr "Vispārīgie atrašanās vietas iestatījumi"
+
+#: setup.php
+msgid "Please enter a reasonable name for this site."
+msgstr "Lūdzu, ievadiet saprātīgu nosaukumu šai atrašanās vietai."
+
+#: setup.php
+msgid "Primary Customer Contact"
+msgstr "Galvenā klienta kontaktpersona"
+
+#: setup.php
+msgid "The principal customer contact name and number for this site."
+msgstr "Galvenās klienta kontaktpersonas vārds un tālruņa numurs šai atrašanās vietai."
+
+#: setup.php
+msgid "NetOps Contact"
+msgstr "NetOps kontaktpersona"
+
+#: setup.php
+msgid "Please principal network support contact name and number for this site."
+msgstr "Lūdzu, ievadiet galvenās tīkla atbalsta kontaktpersonas vārdu un tālruņa numuru šai atrašanās vietai."
+
+#: setup.php
+msgid "Facilities Contact"
+msgstr "Telpu uzturēšanas kontaktpersona"
+
+#: setup.php
+msgid "Please principal facilities/security contact name and number for this site."
+msgstr "Lūdzu, ievadiet galvenās telpu uzturēšanas/drošības kontaktpersonas vārdu un tālruņa numuru šai atrašanās vietai."
+
+#: setup.php
+msgid "Site Information"
+msgstr "Atrašanās vietas informācija"
+
+#: setup.php
+msgid "Provide any site-specific information, in free form, that allows you to better manage this location."
+msgstr "Brīvā formā norādiet jebkādu atrašanās vietai specifisku informāciju, kas palīdz labāk pārvaldīt šo vietu."
+
+#: setup.php
+msgid "General Mac Address Tracking Settings"
+msgstr "Vispārīgie MAC adrešu izsekošanas iestatījumi"
+
+#: setup.php
+msgid "MAC Address"
+msgstr "MAC adrese"
+
+#: setup.php
+msgid "Please enter the MAC Address to be watched for."
+msgstr "Lūdzu, ievadiet MAC adresi, kas jānovēro."
+
+#: setup.php
+msgid "MAC Tracking Name/Email Subject"
+msgstr "MAC izsekošanas nosaukums / e-pasta tēma"
+
+#: setup.php
+msgid "Please enter a reasonable name for this MAC Tracking entry.  This information will be in the subject line of your Email"
+msgstr "Lūdzu, ievadiet saprātīgu nosaukumu šim MAC izsekošanas ierakstam. Šī informācija tiks iekļauta jūsu e-pasta tēmas rindā"
+
+#: setup.php
+msgid "Ticket number for cross referencing with your corporate help desk system(s)."
+msgstr "Pieteikuma numurs savstarpējām atsaucēm ar jūsu uzņēmuma palīdzības dienesta sistēmu(-ām)."
+
+#: setup.php
+msgid "Notification Schedule"
+msgstr "Paziņojumu grafiks"
+
+#: setup.php
+msgid "Choose how often an Email should be generated for this Mac Watch item."
+msgstr "Izvēlieties, cik bieži jāsūta e-pasts šim MAC novērošanas vienumam."
+
+#: setup.php
+msgid "First Occurrence Only"
+msgstr "Tikai pirmajā reizē"
+
+#: setup.php
+msgid "All Occurrences"
+msgstr "Visās reizēs"
+
+#: setup.php
+msgid "Every Hour"
+msgstr "Katru stundu"
+
+#: setup.php
+msgid "Email Addresses"
+msgstr "E-pasta adreses"
+
+#: setup.php
+msgid "Enter a semicolon separated of Email addresses that will be notified where this MAC address is."
+msgstr "Ievadiet ar semikolu atdalītu e-pasta adrešu sarakstu, kurām paziņot, kad tiek atrasta šī MAC adrese."
+
+#: setup.php
+msgid "General Mac Address Authorization Settings"
+msgstr "Vispārīgie MAC adrešu autorizācijas iestatījumi"
+
+#: setup.php
+msgid "MAC Address Match"
+msgstr "MAC adreses atbilstība"
+
+#: setup.php
+msgid "Please enter the MAC Address or Mac Address Match string to be automatically authorized.  If you wish to authorize a group of MAC Addresses, you can use the wildcard character of '&#37;' anywhere in the MAC Address."
+msgstr "Lūdzu, ievadiet MAC adresi vai MAC adreses atbilstības virkni automātiskai autorizācijai. Ja vēlaties autorizēt MAC adrešu grupu, jebkurā MAC adreses vietā varat izmantot aizstājējzīmi '&#37;'."
+
+#: setup.php
+msgid "Please add a reason for this entry."
+msgstr "Lūdzu, pievienojiet šī ieraksta pamatojumu."
